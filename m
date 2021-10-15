@@ -2,164 +2,101 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 45EF5C433EF
-	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 04:07:57 +0000 (UTC)
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com
- [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web12.5106.1634270876607958761
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 12016C433F5
+	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 04:55:41 +0000 (UTC)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com
+ [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.web10.5438.1634273739828564688
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Oct 2021 21:07:56 -0700
+ Thu, 14 Oct 2021 21:55:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=OuI/Fs7I;
- spf=pass (domain: gmail.com, ip: 209.85.214.177,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id s1so3774900plg.12
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=kugXPkIA;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id
+ oa12-20020a17090b1bcc00b0019f715462a8so6422992pjb.3
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Oct 2021 21:07:56 -0700 (PDT)
+ Thu, 14 Oct 2021 21:55:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :references:from:organization:in-reply-to:content-transfer-encoding;
-        bh=mgcMsdponc5UmmrqBWsgSnWP/Dl6HlCtvm3e6zTsK8A=;
-        b=OuI/Fs7IVuJeHubzVkTBK/UEh7/nEJQDtlavZw2uA4zxnqCzAcZzT/J4aRuANbwluF
-         ePoC4nRtH/QvTXZJWBtxlGtzNpF75azqvqRSGM0KUjydSdxtDsyZSAzl3AO7zizr3Xl/
-         0C52pAg3dVRC9/TWCyOOj38YHG5naphBALABnwUaUtrGMeslcceDp283FJ64XhbwSNmW
-         We2actO0XvdD3q3JBAgMBy6eLvuD9ZCXxk6FZu+QHN+C97SbGw+KPtjlYWA5A8cVdaLt
-         Wd7fsMAuwyBPwec0rz7CZ5Kn1OkJVBQwIxOhRHL3PVkC843Gkc+lEaHfqU4iYWqOsBRf
-         upnA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=TSPsDeu+0BYyUNCUKgUmBksfJBqDguE+AMDLamELhxs=;
+        b=kugXPkIASPH48AFJTyiz9bv2nqqnJGdHmgI9zg1dQdd7NyYJllqxB4RkAqtvRtqbFE
+         czu5WZJfcUYrcK/LKsb69OoTCjFkfqmnLbrziv+Au7dD2TAGPTFMX4Tzw3yZUGsaCs4N
+         tDb92C3bZ9wSIH0Amz1bpyKMMzbah63arCMlTApxgTy0L+DJOFFQcGXlMkCm5n06/aLQ
+         QieSpCiGy7ODgglG33iRd1zZ408M/AlWaMOHt3OQn0d7e8UPuEyYKtMquaZSs6ghtDvg
+         Fel6Y1iPQBlf0OsmYzK4lFfRNFc9ls/hLtc3X91UwHlu+SZ+g61cedJo772N8HrIEkYo
+         60cA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:references:from:organization:in-reply-to
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=mgcMsdponc5UmmrqBWsgSnWP/Dl6HlCtvm3e6zTsK8A=;
-        b=CNUa+kHj2cGUi5enqV0W1Yc7RTMRT2PkL9gxyV5hKGWiE3U/yUgVA6QiDBqipYTSJ1
-         qp8rDctwwWAhZH4W0XdHVY0x6DcnKD+vjqLV4dcugDXliCAYKI7Ndhv3AqjHjvEw8t91
-         Z7CwtB2/ZW+jDZBpHBg9950WuUqWRed/yIuYKDvB2IaWqVZ4X0YJhtO+BSVVi0dQ9KKU
-         y7eMjNRYNZHJYMffkatwH+NwXWbrpqmH8zHQ8ifyDA/NXXKXF6KrqKGz7hkCt9a2dDLr
-         Yzm0vO7JCWDCIj9xRthus55RGqgs/G6+Bfd0LzvSZW8liz8diZ1RRLqlGuvl9Ni4wJEX
-         RFYQ==
-X-Gm-Message-State: AOAM533JSLeYTcywrV67sRbo3dCo5bYQmuT6kMVySq2ix1Hz7KIo6QJ5
-	PGlORK6gs4dnIr1te+zt5jM=
+        bh=TSPsDeu+0BYyUNCUKgUmBksfJBqDguE+AMDLamELhxs=;
+        b=jORrGpW/CQraX6ogdnqoc0fxzvYY+D/rzF5aW3bkBJLmJVrwRRfNEcVKn/Ca2XdvNS
+         QrNj17LGSMmBsFw2gQ4kMxNXudMbvDyv3FaoMT+ZQLdj8uNvVeZk6Khz6iOaJTVGboyf
+         ECbMNcDLVBJQlnZ/Swmb35QOIJfzP5oBBijXc6xba7SKu1aTmtYTb94yFe7cmoUt+l0f
+         9HV563/SD/t8kaT5YL8rrYIQNlgfAZFoIgwa2pm2az0lQ0DlcFljo4KV1H8JIpL9+qIi
+         1He1e+zwlmcYpWWFmPvzEfBOhbYsbeKnhRqgq1VNsZ6/VKu42NaHsMzgz6Cjm6Gn982n
+         yF2g==
+X-Gm-Message-State: AOAM533RItrncK6XR53Gs6byPx0jyfkRhxmXJnpm0R+VTC/eVaOI4Ld7
+	YrccK09rZqx5SE0y/AFMvC/31+1AwzawAw==
 X-Google-Smtp-Source: 
- ABdhPJwueT9RDMdaD9odtNaSwGl1ArjfvHAnJhBtyz6mMccAozsJzPBjsNtmz6DAY6RDlUDmINB04A==
-X-Received: by 2002:a17:90b:4b85:: with SMTP id
- lr5mr10926024pjb.66.1634270875655;
-        Thu, 14 Oct 2021 21:07:55 -0700 (PDT)
-Received: from ?IPV6:2601:646:9200:a0f0:605f:eda0:f2c4:9c0?
- ([2601:646:9200:a0f0:605f:eda0:f2c4:9c0])
+ ABdhPJwY+JeTGIBZhn3TBxfeIDF1iiLLVFAfvwVa16JZhZyivUa2/uavBkoYqfF7EARfyhHZVFS+OQ==
+X-Received: by 2002:a17:90a:9404:: with SMTP id
+ r4mr11032383pjo.240.1634273738790;
+        Thu, 14 Oct 2021 21:55:38 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::3fd8])
         by smtp.gmail.com with ESMTPSA id
- a11sm3600301pgj.75.2021.10.14.21.07.54
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 14 Oct 2021 21:07:55 -0700 (PDT)
-Message-ID: <7d8b4a07-1900-d2ca-f21e-c914c5f88ad6@gmail.com>
-Date: Thu, 14 Oct 2021 21:07:54 -0700
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.2.0
-Subject: Re: [oe] [meta-oe][PATCH] protobuf-c: update to 1.4.0
-Content-Language: en-US
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>,
- openembedded-devel@lists.openembedded.org
-References: <20211014221419.3705787-1-open.source@oleksandr-kravchuk.com>
+ y75sm3935021pfb.57.2021.10.14.21.55.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 14 Oct 2021 21:55:38 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-In-Reply-To: <20211014221419.3705787-1-open.source@oleksandr-kravchuk.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-perl][PATCH] libcrypt-openssl-rsa-perl: Upgrade to 0.32
+Date: Thu, 14 Oct 2021 21:55:35 -0700
+Message-Id: <20211015045535.2718772-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.33.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 04:07:57 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 04:55:41 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93318
+ https://lists.openembedded.org/g/openembedded-devel/message/93319
 
+0.32 changes
+    - Prefix internal bn2sv function so it doesn't collide with Net::SSLeay
+    - Ensure that verify() leaves openssl error stack clean on failure
+    - Fixed broken SEE ALSO links.
+    - prevent outer $SIG{__DIE__} handler from being called during optional require.
+    - omit done_testing since it does not work for older perl versions
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...nssl-rsa-perl_0.31.bb => libcrypt-openssl-rsa-perl_0.32.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-perl/recipes-perl/libcrypt/{libcrypt-openssl-rsa-perl_0.31.bb => libcrypt-openssl-rsa-perl_0.32.bb} (86%)
 
-On 10/14/21 3:14 PM, Oleksandr Kravchuk wrote:
-> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-> ---
->   .../0001-avoid-race-condition.patch           | 36 -------------------
->   ...rotobuf-c_1.3.3.bb => protobuf-c_1.4.0.bb} |  7 ++--
->   2 files changed, 2 insertions(+), 41 deletions(-)
->   delete mode 100644 meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
->   rename meta-oe/recipes-devtools/protobuf/{protobuf-c_1.3.3.bb => protobuf-c_1.4.0.bb} (87%)
-> 
-> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
-> deleted file mode 100644
-> index 4fc7703d8..000000000
-> --- a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
-> +++ /dev/null
+diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.31.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.32.bb
+similarity index 86%
+rename from meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.31.bb
+rename to meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.32.bb
+index 9a42b52cb6..48c04531ec 100644
+--- a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.31.bb
++++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.32.bb
+@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a67ceecc5d9a91a5a0d003ba50c26346"
+ 
+ SRC_URI = "http://www.cpan.org/modules/by-module/Crypt/Crypt-OpenSSL-RSA-${PV}.tar.gz "
+ 
+-SRC_URI[md5sum] = "d33681e19d2094df7c26bc7a4509265e"
+-SRC_URI[sha256sum] = "4173403ad4cf76732192099f833fbfbf3cd8104e0246b3844187ae384d2c5436"
++SRC_URI[sha256sum] = "adc74f0ae125c77f65d5dd32abb9c3429300a79543bf263494f333f9c0b62a61"
+ 
+ DEPENDS += "libcrypt-openssl-guess-perl-native openssl"
+ 
+-- 
+2.33.1
 
-why is this patch dropped ?
-
-> @@ -1,36 +0,0 @@
-> -From 216e31260b618ec73862f9f5336597f391444dac Mon Sep 17 00:00:00 2001
-> -From: Chen Qi <Qi.Chen@windriver.com>
-> -Date: Sun, 29 Sep 2019 17:20:42 +0800
-> -Subject: [PATCH] avoid race condition
-> -
-> -It's possible that the cxx-generate-packed-data.cc is compiled
-> -while the t/test-full.pb.h is being generated. This will result
-> -the following error.
-> -
-> -  DEBUG:	./t/test-full.pb.h:4:0: error: unterminated #ifndef
-> -  ./t/test-full.pb.h:4:0: error: unterminated #ifndef
-> -
-> -Add a dependency to avoid such problem.
-> -
-> -Upstream-Status: Pending
-> -
-> -Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-> ----
-> - Makefile.am | 1 +
-> - 1 file changed, 1 insertion(+)
-> -
-> -diff --git a/Makefile.am b/Makefile.am
-> -index b0cb065..1608ae0 100644
-> ---- a/Makefile.am
-> -+++ b/Makefile.am
-> -@@ -156,6 +156,7 @@ noinst_PROGRAMS += \
-> - t_generated_code2_cxx_generate_packed_data_SOURCES = \
-> - 	t/generated-code2/cxx-generate-packed-data.cc \
-> - 	t/test-full.pb.cc
-> -+t/generated-code2/cxx-generate-packed-data.cc: t/test-full.pb.h
-> - $(t_generated_code2_cxx_generate_packed_data_OBJECTS): t/test-full.pb.h
-> - t_generated_code2_cxx_generate_packed_data_CXXFLAGS = \
-> - 	$(AM_CXXFLAGS) \
-> ---
-> -2.17.1
-> -
-> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.3.bb b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
-> similarity index 87%
-> rename from meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.3.bb
-> rename to meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
-> index 1a0bf535c..cc037d393 100644
-> --- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.3.bb
-> +++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
-> @@ -12,11 +12,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cb901168715f4782a2b06c3ddaefa558"
->   
->   DEPENDS = "protobuf-native protobuf"
->   
-> -SRCREV = "f20a3fa131c275a0e795d99a28f94b4dbbb5af26"
-> -
-> -SRC_URI = "git://github.com/protobuf-c/protobuf-c.git \
-> -           file://0001-avoid-race-condition.patch \
-> -          "
-> +SRC_URI = "git://github.com/protobuf-c/protobuf-c.git"
-> +SRCREV = "f224ab2eeb648a818eb20687d7150a285442c907"
->   
->   S = "${WORKDIR}/git"
->   
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#93306): https://lists.openembedded.org/g/openembedded-devel/message/93306
-> Mute This Topic: https://lists.openembedded.org/mt/86326318/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
 
