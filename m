@@ -2,102 +2,164 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 029EFC433F5
-	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 01:27:00 +0000 (UTC)
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
- [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web08.3798.1634261219176075316
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 45EF5C433EF
+	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 04:07:57 +0000 (UTC)
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com
+ [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web12.5106.1634270876607958761
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Oct 2021 18:26:59 -0700
+ Thu, 14 Oct 2021 21:07:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=p03XwcYK;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id
- pf6-20020a17090b1d8600b0019fa884ab85so8212442pjb.5
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=OuI/Fs7I;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id s1so3774900plg.12
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Oct 2021 18:26:59 -0700 (PDT)
+ Thu, 14 Oct 2021 21:07:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=6CfCYY8tQ2pmZFsVxV2Cdb9QQ9G/h5gitR3XR2Pc6KE=;
-        b=p03XwcYKp44kJ4iMAz/4ZVmCJ64IABMDsaS2GV71xW3iaKHugRSBHkVYXWsQGwDKnl
-         4GyG3qAA9Q+72GNf17jQkW+93HMudUKXICCto7AtRY4mUTaeghN0wB3MONm23UfybaUM
-         u3Fhyu7z3aUI3eWHCHGxT/KERXBtBeIjdUz1yTSgLLvFc1vXf0rYYHSYQETZiWfoDGhm
-         bUH/fCbhS6HPeaU3wRuauD6BiLKxNHzoE7cdJGhvFtbrIisT1b6e0iEuYl6uonbRQaFI
-         m9pm6S7g+I/kmEsReun7S8tbPsOpAnTppekzi6GwecJwjXPGtVaa9OrJ5+SZ59/SQkPk
-         nTvw==
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :references:from:organization:in-reply-to:content-transfer-encoding;
+        bh=mgcMsdponc5UmmrqBWsgSnWP/Dl6HlCtvm3e6zTsK8A=;
+        b=OuI/Fs7IVuJeHubzVkTBK/UEh7/nEJQDtlavZw2uA4zxnqCzAcZzT/J4aRuANbwluF
+         ePoC4nRtH/QvTXZJWBtxlGtzNpF75azqvqRSGM0KUjydSdxtDsyZSAzl3AO7zizr3Xl/
+         0C52pAg3dVRC9/TWCyOOj38YHG5naphBALABnwUaUtrGMeslcceDp283FJ64XhbwSNmW
+         We2actO0XvdD3q3JBAgMBy6eLvuD9ZCXxk6FZu+QHN+C97SbGw+KPtjlYWA5A8cVdaLt
+         Wd7fsMAuwyBPwec0rz7CZ5Kn1OkJVBQwIxOhRHL3PVkC843Gkc+lEaHfqU4iYWqOsBRf
+         upnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:references:from:organization:in-reply-to
          :content-transfer-encoding;
-        bh=6CfCYY8tQ2pmZFsVxV2Cdb9QQ9G/h5gitR3XR2Pc6KE=;
-        b=Z0TrSbIqW+Ps3/nglIq4w1ELd7aA07EVGfXfubJK3JN0PAGA0vNeZ/UKb03r2iniK6
-         uPMk2jModt/iNTsmIjqdq+6XDXPsGzRwuzUfyJht5D5Lrvly9qibxxYdVBvPzZ6IT/zd
-         vYLGASNWMtRKPoJozLNgzy1qSWt9tY10uuyuNuY2lQg8wkzCpuL9Ki2ua/+7/iofk5Mj
-         S1Y1DWP/uGoJDiR+Szy14k29tiI4yYIKjKrg0fXANApnoskq2V0vUuPx5ruM6z7NU7zG
-         CBaY2HydOVwl189uyuJj4BUX6W3lLTlrcZrlw8sRCYhzTP4BV7Ca/nQz60kxHrrlCdE1
-         n5LA==
-X-Gm-Message-State: AOAM532HybGBo4z42snEYweaeCbPKA1DJox2hXBNfTs21BQA2AdX0+ik
-	slFgM39n3fno1t88PVfa1FV4dGoY0tlDHw==
+        bh=mgcMsdponc5UmmrqBWsgSnWP/Dl6HlCtvm3e6zTsK8A=;
+        b=CNUa+kHj2cGUi5enqV0W1Yc7RTMRT2PkL9gxyV5hKGWiE3U/yUgVA6QiDBqipYTSJ1
+         qp8rDctwwWAhZH4W0XdHVY0x6DcnKD+vjqLV4dcugDXliCAYKI7Ndhv3AqjHjvEw8t91
+         Z7CwtB2/ZW+jDZBpHBg9950WuUqWRed/yIuYKDvB2IaWqVZ4X0YJhtO+BSVVi0dQ9KKU
+         y7eMjNRYNZHJYMffkatwH+NwXWbrpqmH8zHQ8ifyDA/NXXKXF6KrqKGz7hkCt9a2dDLr
+         Yzm0vO7JCWDCIj9xRthus55RGqgs/G6+Bfd0LzvSZW8liz8diZ1RRLqlGuvl9Ni4wJEX
+         RFYQ==
+X-Gm-Message-State: AOAM533JSLeYTcywrV67sRbo3dCo5bYQmuT6kMVySq2ix1Hz7KIo6QJ5
+	PGlORK6gs4dnIr1te+zt5jM=
 X-Google-Smtp-Source: 
- ABdhPJyDk1Lv68tXgZRIdM1BjseBJvZOvlBO39fatKqsWAI7cZGtBpTOEyTXjhtD2bBcQY2K3v7BTQ==
-X-Received: by 2002:a17:90a:6289:: with SMTP id
- d9mr24853789pjj.110.1634261218354;
-        Thu, 14 Oct 2021 18:26:58 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::3fd8])
+ ABdhPJwueT9RDMdaD9odtNaSwGl1ArjfvHAnJhBtyz6mMccAozsJzPBjsNtmz6DAY6RDlUDmINB04A==
+X-Received: by 2002:a17:90b:4b85:: with SMTP id
+ lr5mr10926024pjb.66.1634270875655;
+        Thu, 14 Oct 2021 21:07:55 -0700 (PDT)
+Received: from ?IPV6:2601:646:9200:a0f0:605f:eda0:f2c4:9c0?
+ ([2601:646:9200:a0f0:605f:eda0:f2c4:9c0])
         by smtp.gmail.com with ESMTPSA id
- b10sm3862759pfl.200.2021.10.14.18.26.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 14 Oct 2021 18:26:57 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] pcimem: Add riscv64 into COMPATIBLE_HOST
-Date: Thu, 14 Oct 2021 18:26:55 -0700
-Message-Id: <20211015012655.165757-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.33.1
+ a11sm3600301pgj.75.2021.10.14.21.07.54
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 14 Oct 2021 21:07:55 -0700 (PDT)
+Message-ID: <7d8b4a07-1900-d2ca-f21e-c914c5f88ad6@gmail.com>
+Date: Thu, 14 Oct 2021 21:07:54 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.2.0
+Subject: Re: [oe] [meta-oe][PATCH] protobuf-c: update to 1.4.0
+Content-Language: en-US
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20211014221419.3705787-1-open.source@oleksandr-kravchuk.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+In-Reply-To: <20211014221419.3705787-1-open.source@oleksandr-kravchuk.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 01:26:59 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 04:07:57 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93317
+ https://lists.openembedded.org/g/openembedded-devel/message/93318
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 1 +
- meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb              | 2 +-
- 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index eb53fdaff9..52536ddbe3 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -306,6 +306,7 @@ RDEPENDS:packagegroup-meta-oe-devtools ="\
- "
- RDEPENDS:packagegroup-meta-oe-devtools:append:x86 = " cpuid msr-tools pahole pmtools"
- RDEPENDS:packagegroup-meta-oe-devtools:append:x86-64 = " cpuid msr-tools pahole pcimem pmtools"
-+RDEPENDS:packagegroup-meta-oe-devtools:append:riscv64 = " pcimem"
- RDEPENDS:packagegroup-meta-oe-devtools:append:arm = " pcimem"
- RDEPENDS:packagegroup-meta-oe-devtools:append:aarch64 = " pahole pcimem"
- RDEPENDS:packagegroup-meta-oe-devtools:append:libc-musl = " musl-nscd"
-diff --git a/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb b/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
-index 107d5a8b72..42f5513284 100644
---- a/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
-+++ b/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
-@@ -5,7 +5,7 @@ SECTION = "devel"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
--COMPATIBLE_HOST = "(x86_64|aarch64|arm)"
-+COMPATIBLE_HOST = "(x86_64|aarch64|arm|riscv64)"
- 
- SRCREV = "09724edb1783a98da2b7ae53c5aaa87493aabc9b"
- SRC_URI = "git://github.com/billfarrow/pcimem.git "
--- 
-2.33.1
 
+On 10/14/21 3:14 PM, Oleksandr Kravchuk wrote:
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> ---
+>   .../0001-avoid-race-condition.patch           | 36 -------------------
+>   ...rotobuf-c_1.3.3.bb => protobuf-c_1.4.0.bb} |  7 ++--
+>   2 files changed, 2 insertions(+), 41 deletions(-)
+>   delete mode 100644 meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
+>   rename meta-oe/recipes-devtools/protobuf/{protobuf-c_1.3.3.bb => protobuf-c_1.4.0.bb} (87%)
+> 
+> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
+> deleted file mode 100644
+> index 4fc7703d8..000000000
+> --- a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
+> +++ /dev/null
+
+why is this patch dropped ?
+
+> @@ -1,36 +0,0 @@
+> -From 216e31260b618ec73862f9f5336597f391444dac Mon Sep 17 00:00:00 2001
+> -From: Chen Qi <Qi.Chen@windriver.com>
+> -Date: Sun, 29 Sep 2019 17:20:42 +0800
+> -Subject: [PATCH] avoid race condition
+> -
+> -It's possible that the cxx-generate-packed-data.cc is compiled
+> -while the t/test-full.pb.h is being generated. This will result
+> -the following error.
+> -
+> -  DEBUG:	./t/test-full.pb.h:4:0: error: unterminated #ifndef
+> -  ./t/test-full.pb.h:4:0: error: unterminated #ifndef
+> -
+> -Add a dependency to avoid such problem.
+> -
+> -Upstream-Status: Pending
+> -
+> -Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+> ----
+> - Makefile.am | 1 +
+> - 1 file changed, 1 insertion(+)
+> -
+> -diff --git a/Makefile.am b/Makefile.am
+> -index b0cb065..1608ae0 100644
+> ---- a/Makefile.am
+> -+++ b/Makefile.am
+> -@@ -156,6 +156,7 @@ noinst_PROGRAMS += \
+> - t_generated_code2_cxx_generate_packed_data_SOURCES = \
+> - 	t/generated-code2/cxx-generate-packed-data.cc \
+> - 	t/test-full.pb.cc
+> -+t/generated-code2/cxx-generate-packed-data.cc: t/test-full.pb.h
+> - $(t_generated_code2_cxx_generate_packed_data_OBJECTS): t/test-full.pb.h
+> - t_generated_code2_cxx_generate_packed_data_CXXFLAGS = \
+> - 	$(AM_CXXFLAGS) \
+> ---
+> -2.17.1
+> -
+> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.3.bb b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
+> similarity index 87%
+> rename from meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.3.bb
+> rename to meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
+> index 1a0bf535c..cc037d393 100644
+> --- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.3.bb
+> +++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
+> @@ -12,11 +12,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cb901168715f4782a2b06c3ddaefa558"
+>   
+>   DEPENDS = "protobuf-native protobuf"
+>   
+> -SRCREV = "f20a3fa131c275a0e795d99a28f94b4dbbb5af26"
+> -
+> -SRC_URI = "git://github.com/protobuf-c/protobuf-c.git \
+> -           file://0001-avoid-race-condition.patch \
+> -          "
+> +SRC_URI = "git://github.com/protobuf-c/protobuf-c.git"
+> +SRCREV = "f224ab2eeb648a818eb20687d7150a285442c907"
+>   
+>   S = "${WORKDIR}/git"
+>   
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#93306): https://lists.openembedded.org/g/openembedded-devel/message/93306
+> Mute This Topic: https://lists.openembedded.org/mt/86326318/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
