@@ -2,62 +2,62 @@ Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CDB28C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD00EC433F5
 	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 23:01:52 +0000 (UTC)
-Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com
- [209.85.167.43])
- by mx.groups.io with SMTP id smtpd.web09.4328.1634338907635319573
+Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com
+ [209.85.167.44])
+ by mx.groups.io with SMTP id smtpd.web11.4344.1634338909590384468
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Oct 2021 16:01:48 -0700
+ Fri, 15 Oct 2021 16:01:49 -0700
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=MEF/EK3A;
+ header.s=20210112 header.b=RXerA+LW;
  spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.167.43, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f43.google.com with SMTP id x27so48058031lfu.5
+ ip: 209.85.167.44, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f44.google.com with SMTP id u21so44600448lff.8
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Oct 2021 16:01:47 -0700 (PDT)
+ Fri, 15 Oct 2021 16:01:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=s7XL9rF5GdA/dpOV3fqHe4F8SY638NUjMleU19msxLI=;
-        b=MEF/EK3AycYCcQ0Ou1BsPG085rHF8y7xZV/u2GiE5e6CKSn3kFDWFqAiAeuRUduLBq
-         Wf+yULlyoa3rQ5sHQAh7AlooddPjYIoDhxNqavBsKcR59ICrLWURDh3Ac/Xplg/BMqBy
-         whkX9vWbT0OnfMHkhPV+kp9im2EZJGBHBJQS0Hjcg9Y6s57zyCKfEMBW/b0XV+vLG9Fh
-         KE4BuxHioRi+R7bua1RVIwZ0+QqO5tG8wN3KARJNlma+dB5A5nvcnPvHCPE7LxwZT6qs
-         yU6fs7G+p880O4bRwImycGOa5renRD0WkTuAiEXVC7Cook69Vvtdufjv4sim7SpHoFRG
-         YDjg==
+        bh=OhBlYf+CMFPJZSOQ48KwAm2tgLED3TxFH9BKmY/xNVI=;
+        b=RXerA+LWUjYH9mxGp6Y/u6fpb3WLo+26xnwN/u+ASdznhwYxRbs8G7SMs2xcKvqqxE
+         ZOANL3ZFzz5LPiK7FVHaz8wautBH4LElqo9HKtQ2uOCCha4yFKfKvacILNVbcuEbaQ5J
+         qmsle9jKtXS1xbFPQ6x9xF6I4BTBRnXBoaf1PcC0QRjwpyio2XUVpTO8C2XvFwtw6gzG
+         Odqih5cRBRR5x8vmR59pxKar2lGYEYuV3Ui+RiXe0LezDKRFTzQLd0QyCEv3f6vYib87
+         NAkGHY6VvQdTSNdMLhMA4GVh8BWs0elt087AwGnCxA9NXKAR4rJcWggbhn5DOTZutTd0
+         Bvkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=s7XL9rF5GdA/dpOV3fqHe4F8SY638NUjMleU19msxLI=;
-        b=16ClwEGvHSnHHm5vecdjmPFov9pelaePcP4DStSVKcBghzUF/t4ygNorIw6SmCTy3V
-         ZSBFejOtaIpHOp2ezee4BTejSmp5PBZWEhK68977O/S30OLWO28gontmIRgp77MU17M+
-         2Gz5kmtzUwYoP12Kfr+pAQbMjpfGULd6z3eekpn9padB2eWWe/4ZlL5tBTKGUBsab/VI
-         +CGsyGnojAtJ3yyZCbwI0wxKYWHZXMrnIHdvlvu0aff68ALLH2JDMDYqSBo3lJyMwZy3
-         o+8V9e512c6XD+JB3jozrw8E6k4gXiSg0KxknY3yJZOCF77DC4jQ2YIQ0XOk/tsdD+6l
-         dOig==
-X-Gm-Message-State: AOAM530dc1XkOalQc+52kTb/Y0/X5zWSVhHPidsGKl1ezTmeKrUPO4CR
-	/h1wBlNIA9Xj5uMzLZBL3ycHar0iT1t+XuzU
+        bh=OhBlYf+CMFPJZSOQ48KwAm2tgLED3TxFH9BKmY/xNVI=;
+        b=B9zUHND/Sn/ax5DvDOZs1Duzgdhw6s1tZ9wK6iEZGAbS9M/FE99tsCB5YIdmj+K/WO
+         frHdZXW7+H3QWcBAr+bZbSAEg8bYA/tRQ5jgTgmDwX/e2UUcCXz7LPF4m4DWde+A0Lit
+         c1BazmhjTG5S3UGhPk4XslEDbwsq2dpCfPpfiN3llDOgFGRKLFNMnQ69Hi1ncNv99Rbw
+         5RJZsEUpgBNuHYkV77KCkqFhPvjJMXCs84Z17fb/q2dr9YGNiPOiEjMYZRqC5VOR8tqR
+         B0oOjXORGGLKdUOVjQ0LnwDsG2ZvdNTtBDzVYY+ai0fnQyVwukW0M7EwSye6B9IaUt6k
+         N9AQ==
+X-Gm-Message-State: AOAM531BC1sVNu21x/RKYgfeIZW9HXroAWX3jWxKkahdBj9V1ZPNujm6
+	AQyggW6nJ22Jl4vbU2jl3+h3rIS5QQrIqUzg
 X-Google-Smtp-Source: 
- ABdhPJwnKloBa/RhRlUoedzcIvbaVp0WjTBMCsION0gz/ib0ld9wq1tOtxErLjPGjWIrTzYFof0l/g==
-X-Received: by 2002:a05:6512:952:: with SMTP id
- u18mr13975666lft.516.1634338905177;
-        Fri, 15 Oct 2021 16:01:45 -0700 (PDT)
+ ABdhPJy0rYieoLvNh2VE+HVsFONkpicfCUDCB1kzk4ez09c89CYDErj7iSlSfi2k4fXe9XjrhDy3aQ==
+X-Received: by 2002:a05:651c:1549:: with SMTP id
+ y9mr16325917ljp.105.1634338907287;
+        Fri, 15 Oct 2021 16:01:47 -0700 (PDT)
 Received: from localhost.localdomain
  (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
         by smtp.gmail.com with ESMTPSA id
- r3sm658931lfc.114.2021.10.15.16.01.44
+ b25sm654997lfi.151.2021.10.15.16.01.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 15 Oct 2021 16:01:44 -0700 (PDT)
+        Fri, 15 Oct 2021 16:01:46 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python][PATCH] python3-flask-user: update to 1.31.1
-Date: Sat, 16 Oct 2021 01:01:42 +0200
-Message-Id: <20211015230142.4165370-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-python][PATCH] python3-eventlet: update to 0.32.0
+Date: Sat, 16 Oct 2021 01:01:45 +0200
+Message-Id: <20211015230145.4165427-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -66,35 +66,30 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 23:01:52 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93375
-
-License-Update: license file cleanup.
+ https://lists.openembedded.org/g/openembedded-devel/message/93376
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- ...n3-flask-user_0.6.19.bb => python3-flask-user_1.0.2.2.bb} | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-flask-user_0.6.19.bb => python3-flask-user_1.0.2.2.bb} (68%)
+ .../{python3-eventlet_0.30.2.bb => python3-eventlet_0.32.0.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-eventlet_0.30.2.bb => python3-eventlet_0.32.0.bb} (67%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb b/meta-python/recipes-devtools/python/python3-flask-user_1.0.2.2.bb
-similarity index 68%
-rename from meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
-rename to meta-python/recipes-devtools/python/python3-flask-user_1.0.2.2.bb
-index fbacf2e99..d050d66dc 100644
---- a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask-user_1.0.2.2.bb
-@@ -4,10 +4,9 @@ Confirm email, Login, Change username, Change password, Forgot Password \
- and more."
- HOMEPAGE = " https://github.com/lingthio/Flask-User"
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=97de97cd9d6e23c88129d884588ce71a"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5aabce758ead32427c145173bc555403"
+diff --git a/meta-python/recipes-devtools/python/python3-eventlet_0.30.2.bb b/meta-python/recipes-devtools/python/python3-eventlet_0.32.0.bb
+similarity index 67%
+rename from meta-python/recipes-devtools/python/python3-eventlet_0.30.2.bb
+rename to meta-python/recipes-devtools/python/python3-eventlet_0.32.0.bb
+index 80869a259..3848150e4 100644
+--- a/meta-python/recipes-devtools/python/python3-eventlet_0.30.2.bb
++++ b/meta-python/recipes-devtools/python/python3-eventlet_0.32.0.bb
+@@ -4,8 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=56472ad6de4caf50e05332a34b66e778"
  
--SRC_URI[md5sum] = "f7965e66ca139c8436896da07e66c21f"
--SRC_URI[sha256sum] = "601abcc0343dfbae0c56273d98362d5cdc266ac84d20b3f65a212e4a2c83b302"
-+SRC_URI[sha256sum] = "c9785febc2fc7ca15c69cfff1c8dabc2788f25043b54a33f73a6c2a9daf7fbe4"
+-SRC_URI[md5sum] = "ebf5794e3f7a9f1778fb4f2a58eb7614"
+-SRC_URI[sha256sum] = "1811b122d9a45eb5bafba092d36911bca825f835cb648a862bbf984030acff9d"
++SRC_URI[sha256sum] = "2f0bb8ed0dc0ab21d683975d5d8ab3c054d588ce61def9faf7a465ee363e839b"
  
- PYPI_PACKAGE = "Flask-User"
+ inherit pypi setuptools3
  
 -- 
 2.25.1
