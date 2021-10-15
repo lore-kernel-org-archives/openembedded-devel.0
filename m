@@ -1,103 +1,84 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
+Return-Path: <marex@denx.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C049CC433EF
-	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 19:15:57 +0000 (UTC)
-Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com
- [209.85.167.44])
- by mx.groups.io with SMTP id smtpd.web11.1740.1634325356711683769
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DC7CDC433EF
+	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 19:21:04 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by mx.groups.io with SMTP id smtpd.web09.1771.1634325661963042346
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Oct 2021 12:15:57 -0700
+ Fri, 15 Oct 2021 12:21:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=oPTin+Zl;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.167.44, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f44.google.com with SMTP id x192so10775682lff.12
-        for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Oct 2021 12:15:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=MBODrO8t0jBBBcpPTogOumWJmJVXu+YEUEh+u8r3OxE=;
-        b=oPTin+Zlf7ytzeW3U0LkaKwozJhvFyQDR8l9RYrQ+CpO+wVGlI5vhKcrv5fGDKCroE
-         Sc7A5WRME14uC0sbSNiRwQPYEZVQWwUYKE/M46qsis05pAjNoWESPohyvhA7qTxnvLZZ
-         X+4w0I878GWJvnKZk9RSHk2giHqAP89F7HozNr232A0fRCVqULZhTi4PEpPbz3peSGi4
-         kH1IWqT5+1MjfJZggDMK4fNEFa+o4qbh+kBz1aNXtbBxV0pL4tQVyGLdknNvtVrfqHCD
-         04ChtFv/W6EwltNy/tMydserEtlzuN9kGemeYnDQW9+vGwBR0gnmgQpleK2ok/PWNExC
-         AQ1A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=MBODrO8t0jBBBcpPTogOumWJmJVXu+YEUEh+u8r3OxE=;
-        b=QhwfHQu3aSUqyiRXdfycTtAijz7ABncODJ83fS7X3MydWNzj4803qwJHdXG6Alc9RV
-         ALPdJ63lXz4iEGOTr1M+QlW2OXr4pNnsYKVsrJxE12P0T0FOEZLuKWin3vnQ7C826xZ0
-         n7NcYqs1I4BDtt3Ls+NXRv6wKPhNl/vn7LvdZF47o/Q96qNw12XglRXtPiUYS/kBAsAm
-         yWO4t+/60nr4UXdMxZEwUv8Vi+8MxMX4x3GmGlvKH7cZL8JXgGfPZPlsrFp2fKTQqnel
-         fbqummYZxN/a7E03C2hp5CtwTl4vRMqQYa+eM8EE1Egq2UdpH8SdojLAgeBy7tlo8Lmw
-         jHAA==
-X-Gm-Message-State: AOAM532Iq8XsDE6EdcUgTgCSkHf5i/l7Uw2PUVdSbBWPmuJvEBX+oJUw
-	o0WUeVq9ybq93IHoaR4wBZkFFKiuoKu0EBS/
-X-Google-Smtp-Source: 
- ABdhPJxcF3HZgQaIubXqoF5q6Wv4+Zb14Fy+9aySuCcM/YMZ0UA0ISL+XKzmjHnlJSWy1FMnGlWCIQ==
-X-Received: by 2002:a2e:b0ce:: with SMTP id
- g14mr14844630ljl.116.1634325354110;
-        Fri, 15 Oct 2021 12:15:54 -0700 (PDT)
-Received: from localhost.localdomain
- (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
-        by smtp.gmail.com with ESMTPSA id
- z18sm598071lfb.201.2021.10.15.12.15.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 15 Oct 2021 12:15:53 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+ dkim=fail reason="body hash did not verify" header.i=@denx.de
+ header.s=phobos-20191101 header.b=G7wrDU/C;
+ spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
+Received: from tr.lan (ip-89-176-112-137.net.upcbroadband.cz [89.176.112.137])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marex@denx.de)
+	by phobos.denx.de (Postfix) with ESMTPSA id BCEE88362D;
+	Fri, 15 Oct 2021 21:20:58 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1634325659;
+	bh=QdC+3o8h8R1s5CRbFS0COqV+W70kpBIw9KZk9Fb7tUg=;
+	h=From:To:Cc:Subject:Date:From;
+	b=G7wrDU/CYlzfwCTHT4cwbnYtzmtG6w2VyRjzqwLT6oH2bcIwi9T1EEoZ3ZCROKNSi
+	 a23ONO1z/s+mJlJIwciEu6cGaBozZaur0PjKX+Ok2ED0yQFmdErxS1ldQHgnFQGjjE
+	 4ISQMlb/kd/HH5lIIEj09K2L65hERx4l4m9nhXxx9WpstSt9bGtB8tTjHsSP7ktMYO
+	 4l3CPC6cetV3vFlq1uz3MqULXW8jRulQwh39pvoPJ0FOGq0vxwPL7HzQlkO1hq/Vld
+	 KG4dorTDe3PG3ZFgQ63aAZezYFuQriQg7aJgyEx8/uT6vju4Md3BXnysbQvadYZXoA
+	 C1Knp/0V4brEg==
+From: Marek Vasut <marex@denx.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-oe][PATCH] libcdio-paranoia: update to 10.2+2.0.1
-Date: Fri, 15 Oct 2021 21:15:52 +0200
-Message-Id: <20211015191552.897837-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Martin.Jansa@gmail.com,
+	Marek Vasut <marex@denx.de>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH v2] apitrace: Conditionally enable X11 support
+Date: Fri, 15 Oct 2021 21:20:53 +0200
+Message-Id: <20211015192053.48812-1-marex@denx.de>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Virus-Scanned: clamav-milter 0.103.2 at phobos.denx.de
+X-Virus-Status: Clean
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 19:15:57 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 19:21:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93332
+ https://lists.openembedded.org/g/openembedded-devel/message/93333
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+In case DISTRO_FEATURES contain both x11 and opengl, enable X11 support
+in apitrace, because all the requirements are satisfied.
+
+Signed-off-by: Marek Vasut <marex@denx.de>
+Cc: Khem Raj <raj.khem@gmail.com>
 ---
- ...paranoia_10.2+0.93+1.bb => libcdio-paranoia_10.2+2.0.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-multimedia/libcdio/{libcdio-paranoia_10.2+0.93+1.bb => libcdio-paranoia_10.2+2.0.1.bb} (81%)
+V2: Switch to PACKAGECONFIG and make x11 support configurable that way
+---
+ meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-multimedia/libcdio/libcdio-paranoia_10.2+0.93+1.bb b/meta-oe/recipes-multimedia/libcdio/libcdio-paranoia_10.2+2.0.1.bb
-similarity index 81%
-rename from meta-oe/recipes-multimedia/libcdio/libcdio-paranoia_10.2+0.93+1.bb
-rename to meta-oe/recipes-multimedia/libcdio/libcdio-paranoia_10.2+2.0.1.bb
-index d6b898c18..441defea4 100644
---- a/meta-oe/recipes-multimedia/libcdio/libcdio-paranoia_10.2+0.93+1.bb
-+++ b/meta-oe/recipes-multimedia/libcdio/libcdio-paranoia_10.2+2.0.1.bb
-@@ -1,13 +1,13 @@
- SUMMARY = "library to read digital audio CDs with error correction"
- HOMEPAGE = "http://www.gnu.org/software/libcdio/"
-+BUGTRUCKER = "https://github.com/rocky/libcdio-paranoia/issues/"
- SECTION = "libs"
- LICENSE = "GPLv3+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- DEPENDS = "libcdio"
- 
- SRC_URI = "${GNU_MIRROR}/libcdio/${BP}.tar.bz2"
--SRC_URI[md5sum] = "0255aa50e660db7f2c39658b9c565814"
--SRC_URI[sha256sum] = "ec1d9b1d5a28cc042f2cb33a7cc0a2b5ce5525f102bc4c15db1fac322559a493"
-+SRC_URI[sha256sum] = "33b1cf305ccfbfd03b43936975615000ce538b119989c4bec469577570b60e8a"
- 
- inherit autotools pkgconfig
- 
--- 
-2.25.1
+diff --git a/meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb b/meta-oe=
+/recipes-devtools/apitrace/apitrace_10.0.bb
+index 57ec1f8e0..eb8e0318e 100644
+--- a/meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb
++++ b/meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb
+@@ -16,9 +16,11 @@ DEPENDS +=3D "zlib libpng python3-native"
+=20
+ inherit cmake
+=20
++PACKAGECONFIG ??=3D " ${@bb.utils.contains('DISTRO_FEATURES', 'x11 openg=
+l', 'x11', '', d)} "
++PACKAGECONFIG[x11] =3D "-DENABLE_X11=3DON,-DENABLE_X11=3DOFF,libx11"
++
+ EXTRA_OECMAKE +=3D "\
+     -DENABLE_GUI=3DOFF \
+-    -DENABLE_X11=3DOFF \
+     -DENABLE_STATIC_LIBGCC=3DOFF \
+     -DENABLE_STATIC_LIBSTDCXX=3DOFF \
+     -DPython3_ROOT_DIR=3D/usr/bin/python3-native \
+--=20
+2.33.0
 
 
