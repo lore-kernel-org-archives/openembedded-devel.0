@@ -1,84 +1,272 @@
-Return-Path: <marex@denx.de>
+Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DC7CDC433EF
-	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 19:21:04 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by mx.groups.io with SMTP id smtpd.web09.1771.1634325661963042346
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8FBCC433EF
+	for <webhook@archiver.kernel.org>; Fri, 15 Oct 2021 22:55:35 +0000 (UTC)
+Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com
+ [209.85.167.44])
+ by mx.groups.io with SMTP id smtpd.web08.4279.1634338534529976823
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Oct 2021 12:21:03 -0700
+ Fri, 15 Oct 2021 15:55:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@denx.de
- header.s=phobos-20191101 header.b=G7wrDU/C;
- spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
-Received: from tr.lan (ip-89-176-112-137.net.upcbroadband.cz [89.176.112.137])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marex@denx.de)
-	by phobos.denx.de (Postfix) with ESMTPSA id BCEE88362D;
-	Fri, 15 Oct 2021 21:20:58 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1634325659;
-	bh=QdC+3o8h8R1s5CRbFS0COqV+W70kpBIw9KZk9Fb7tUg=;
-	h=From:To:Cc:Subject:Date:From;
-	b=G7wrDU/CYlzfwCTHT4cwbnYtzmtG6w2VyRjzqwLT6oH2bcIwi9T1EEoZ3ZCROKNSi
-	 a23ONO1z/s+mJlJIwciEu6cGaBozZaur0PjKX+Ok2ED0yQFmdErxS1ldQHgnFQGjjE
-	 4ISQMlb/kd/HH5lIIEj09K2L65hERx4l4m9nhXxx9WpstSt9bGtB8tTjHsSP7ktMYO
-	 4l3CPC6cetV3vFlq1uz3MqULXW8jRulQwh39pvoPJ0FOGq0vxwPL7HzQlkO1hq/Vld
-	 KG4dorTDe3PG3ZFgQ63aAZezYFuQriQg7aJgyEx8/uT6vju4Md3BXnysbQvadYZXoA
-	 C1Knp/0V4brEg==
-From: Marek Vasut <marex@denx.de>
+ dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
+ header.s=20210112 header.b=Uf6nFMR+;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
+ ip: 209.85.167.44, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f44.google.com with SMTP id j21so48211251lfe.0
+        for <openembedded-devel@lists.openembedded.org>;
+ Fri, 15 Oct 2021 15:55:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=UNMoGn8cksAiQAkQM54s0hn2EaMWOk6vjOs1aFkQ9oQ=;
+        b=Uf6nFMR+o6smUQeQeOk0S6MnZ5tKMXHwFTXOFjHDugzEQ3uzOamN877oIdZAoz3lIE
+         Ujqo+xOXZtm2zevBy1C2EeMo/NjVBHzWE2OOgPTu5hmsgb1LKyKTFJ7AtjFR3Y9ZWUf2
+         9cMGC8XrNRc6SgKppFvjbwGwpbfveXAbJ2uXQYaaE1/zULsMVct9w3hBtvzV8RhqJeob
+         tdobzBbh4L5H9sbD4I45yUNCqkMn7Q7PVYsPPaFPrR2FLL0fAjcKLSfnTso5UEa0MKrK
+         TBuBXVnlKJ/ZeKhtBKupKLqfhIZfz/g6fwGM1ifTgaTDAl1rY7vSJlmcZJlbCxG6h+jP
+         nAGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=UNMoGn8cksAiQAkQM54s0hn2EaMWOk6vjOs1aFkQ9oQ=;
+        b=4wO86WbG8FToPE9Jpx7IaQqIa9LxKSHSUOFzk+f/bloKKCKKWr6P27uFQIbnntYc2M
+         r8o/R4XOIIyasKTCDEhhGqZSWITaPvPGBvfm6h0ne1qA4CwEXX1TEyJsBKCnp7xa5lVp
+         6R6qi8yI9IUs6UTaM4C4Vjm6fFE1gdHWITB8GY/BsR+bAX6TdIbEd6lh9RU/jJVjQNuP
+         05V5vXYjJ6hwWfJi/3okGc27/ndnfSZTfy1Dzlm6YefppalMQiiVbZwReD+uvYyrctlD
+         +hlgEQGDY1T/CagO7+WmChwGEA+9TKQxv63w4hRi42NUNPjNPkn7b5ay0cWZcrBwqMcR
+         JoYg==
+X-Gm-Message-State: AOAM530rdt/aPs8DtgdMz+74qLH/HRx4ePVRGaHqurpmoDxX0QHcxKnf
+	2AUXvUlZFDeqMIGWknPtkModAZ8awbWHJumg
+X-Google-Smtp-Source: 
+ ABdhPJzp2x9LG2DVC2FlxEQ6TxJGeA4AF8LLp7hlAWMVuj0swQODp+bT0Qikq6DcxqbpxSsbXsz+Ew==
+X-Received: by 2002:a19:7616:: with SMTP id
+ c22mr13638847lff.450.1634338532094;
+        Fri, 15 Oct 2021 15:55:32 -0700 (PDT)
+Received: from localhost.localdomain
+ (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
+        by smtp.gmail.com with ESMTPSA id
+ l17sm653660lfj.78.2021.10.15.15.55.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 15 Oct 2021 15:55:31 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin.Jansa@gmail.com,
-	Marek Vasut <marex@denx.de>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH v2] apitrace: Conditionally enable X11 support
-Date: Fri, 15 Oct 2021 21:20:53 +0200
-Message-Id: <20211015192053.48812-1-marex@denx.de>
-X-Mailer: git-send-email 2.33.0
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-python][PATCH] python3-pykickstart: update to 3.34
+Date: Sat, 16 Oct 2021 00:55:27 +0200
+Message-Id: <20211015225527.4161507-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Virus-Scanned: clamav-milter 0.103.2 at phobos.denx.de
-X-Virus-Status: Clean
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 19:21:04 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 15 Oct 2021 22:55:35 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93333
+ https://lists.openembedded.org/g/openembedded-devel/message/93334
 
-In case DISTRO_FEATURES contain both x11 and opengl, enable X11 support
-in apitrace, because all the requirements are satisfied.
-
-Signed-off-by: Marek Vasut <marex@denx.de>
-Cc: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
-V2: Switch to PACKAGECONFIG and make x11 support configurable that way
----
- meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ ...support-authentication-for-kickstart.patch | 27 +++++++++----------
+ ...retry-to-invoke-request-with-timeout.patch | 19 ++++++-------
+ ...rt_3.32.bb => python3-pykickstart_3.34.bb} |  2 +-
+ 3 files changed, 21 insertions(+), 27 deletions(-)
+ rename meta-python/recipes-extended/python-pykickstart/{python3-pykickstart_3.32.bb => python3-pykickstart_3.34.bb} (94%)
 
-diff --git a/meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb b/meta-oe=
-/recipes-devtools/apitrace/apitrace_10.0.bb
-index 57ec1f8e0..eb8e0318e 100644
---- a/meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb
-+++ b/meta-oe/recipes-devtools/apitrace/apitrace_10.0.bb
-@@ -16,9 +16,11 @@ DEPENDS +=3D "zlib libpng python3-native"
-=20
- inherit cmake
-=20
-+PACKAGECONFIG ??=3D " ${@bb.utils.contains('DISTRO_FEATURES', 'x11 openg=
-l', 'x11', '', d)} "
-+PACKAGECONFIG[x11] =3D "-DENABLE_X11=3DON,-DENABLE_X11=3DOFF,libx11"
+diff --git a/meta-python/recipes-extended/python-pykickstart/files/0001-support-authentication-for-kickstart.patch b/meta-python/recipes-extended/python-pykickstart/files/0001-support-authentication-for-kickstart.patch
+index 0e64ce420..5f95d74bf 100644
+--- a/meta-python/recipes-extended/python-pykickstart/files/0001-support-authentication-for-kickstart.patch
++++ b/meta-python/recipes-extended/python-pykickstart/files/0001-support-authentication-for-kickstart.patch
+@@ -1,7 +1,7 @@
+-From f05f5fc363e2510f6943532f3e14a6423f6a2cf1 Mon Sep 17 00:00:00 2001
++From 3540ddcc7448dc784b65c74424c8a25132cb8534 Mon Sep 17 00:00:00 2001
+ From: Hongxu Jia <hongxu.jia@windriver.com>
+ Date: Tue, 31 Jul 2018 17:24:47 +0800
+-Subject: [PATCH 1/4] support authentication for kickstart
++Subject: [PATCH] support authentication for kickstart
+ 
+ While download kickstart file from web server,
+ we support basic/digest authentication.
+@@ -12,6 +12,7 @@ which the invoker could parse this specific error.
+ Upstream-Status: inappropriate [oe specific]
+ 
+ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 +
- EXTRA_OECMAKE +=3D "\
-     -DENABLE_GUI=3DOFF \
--    -DENABLE_X11=3DOFF \
-     -DENABLE_STATIC_LIBGCC=3DOFF \
-     -DENABLE_STATIC_LIBSTDCXX=3DOFF \
-     -DPython3_ROOT_DIR=3D/usr/bin/python3-native \
---=20
-2.33.0
+ ---
+  pykickstart/errors.py | 17 +++++++++++++++++
+  pykickstart/load.py   | 34 ++++++++++++++++++++++++++++------
+@@ -19,7 +20,7 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+  3 files changed, 47 insertions(+), 8 deletions(-)
+ 
+ diff --git a/pykickstart/errors.py b/pykickstart/errors.py
+-index bf08ac5..aada7aa 100644
++index 8294f59a..3d20bf82 100644
+ --- a/pykickstart/errors.py
+ +++ b/pykickstart/errors.py
+ @@ -32,6 +32,9 @@ This module exports several exception classes:
+@@ -51,10 +52,10 @@ index bf08ac5..aada7aa 100644
+ +    def __str__(self):
+ +        return self.value
+ diff --git a/pykickstart/load.py b/pykickstart/load.py
+-index fb935f2..41a2e9e 100644
++index 30e2fcfa..b984876d 100644
+ --- a/pykickstart/load.py
+ +++ b/pykickstart/load.py
+-@@ -18,10 +18,13 @@
++@@ -18,9 +18,12 @@
+  # with the express permission of Red Hat, Inc.
+  #
+  import requests
+@@ -62,14 +63,13 @@ index fb935f2..41a2e9e 100644
+ +from requests.auth import HTTPBasicAuth
+ +
+  import shutil
+- import six
+  
+ -from pykickstart.errors import KickstartError
+ +from pykickstart.errors import KickstartError, KickstartAuthError
+  from pykickstart.i18n import _
+  from requests.exceptions import SSLError, RequestException
+  
+-@@ -29,7 +32,7 @@ _is_url = lambda location: '://' in location  # RFC 3986
++@@ -28,7 +31,7 @@ _is_url = lambda location: '://' in location  # RFC 3986
+  
+  SSL_VERIFY = True
+  
+@@ -78,7 +78,7 @@ index fb935f2..41a2e9e 100644
+      '''Load a destination URL or file into a string.
+      Type of input is inferred automatically.
+  
+-@@ -40,7 +43,7 @@ def load_to_str(location):
++@@ -39,7 +42,7 @@ def load_to_str(location):
+      Raises: KickstartError on error reading'''
+  
+      if _is_url(location):
+@@ -87,7 +87,7 @@ index fb935f2..41a2e9e 100644
+      else:
+          return _load_file(location)
+  
+-@@ -70,11 +73,30 @@ def load_to_file(location, destination):
++@@ -69,11 +72,30 @@ def load_to_file(location, destination):
+          _copy_file(location, destination)
+          return destination
+  
+@@ -122,10 +122,10 @@ index fb935f2..41a2e9e 100644
+          raise KickstartError(_('Error securely accessing URL "%s"') % location + ': {e}'.format(e=str(e)))
+      except RequestException as e:
+ diff --git a/pykickstart/parser.py b/pykickstart/parser.py
+-index d8880eb..22d14cb 100644
++index b23e54f1..e10f06b5 100644
+ --- a/pykickstart/parser.py
+ +++ b/pykickstart/parser.py
+-@@ -801,7 +801,7 @@ class KickstartParser(object):
++@@ -796,7 +796,7 @@ class KickstartParser(object):
+          i = PutBackIterator(s.splitlines(True) + [""])
+          self._stateMachine(i)
+  
+@@ -134,7 +134,7 @@ index d8880eb..22d14cb 100644
+          """Process a kickstart file, given by the filename f."""
+          if reset:
+              self._reset()
+-@@ -822,7 +822,7 @@ class KickstartParser(object):
++@@ -817,7 +817,7 @@ class KickstartParser(object):
+          self.currentdir[self._includeDepth] = cd
+  
+          try:
+@@ -143,6 +143,3 @@ index d8880eb..22d14cb 100644
+          except KickstartError as e:
+              raise KickstartError(_("Unable to open input kickstart file: %s") % str(e), lineno=0)
+  
+--- 
+-2.7.4
+-
+diff --git a/meta-python/recipes-extended/python-pykickstart/files/0004-load.py-retry-to-invoke-request-with-timeout.patch b/meta-python/recipes-extended/python-pykickstart/files/0004-load.py-retry-to-invoke-request-with-timeout.patch
+index 6ed15ab09..bf5a19723 100644
+--- a/meta-python/recipes-extended/python-pykickstart/files/0004-load.py-retry-to-invoke-request-with-timeout.patch
++++ b/meta-python/recipes-extended/python-pykickstart/files/0004-load.py-retry-to-invoke-request-with-timeout.patch
+@@ -1,7 +1,7 @@
+-From ffe06c6dd812b604d6482e4353d5564fad78bc90 Mon Sep 17 00:00:00 2001
++From 737e9a7c11233183f48ce6c83d38b504c8ffed12 Mon Sep 17 00:00:00 2001
+ From: Hongxu Jia <hongxu.jia@windriver.com>
+ Date: Mon, 30 Jul 2018 15:52:21 +0800
+-Subject: [PATCH 4/4] load.py: retry to invoke request with timeout
++Subject: [PATCH] load.py: retry to invoke request with timeout
+ 
+ While networkless, use request to fetch kickstart file from
+ network, it failed and wait 300s to break, we should retry
+@@ -11,23 +11,23 @@ network is up, the fetch works.
+ Upstream-Status: inappropriate [oe specific]
+ 
+ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++
+ ---
+  pykickstart/load.py | 31 +++++++++++++++++++++++++++++++
+  1 file changed, 31 insertions(+)
+ 
+ diff --git a/pykickstart/load.py b/pykickstart/load.py
+-index ad3bad1..a5cbbc5 100644
++index f75fe5d3..a8f3ed1d 100644
+ --- a/pykickstart/load.py
+ +++ b/pykickstart/load.py
+-@@ -21,6 +21,7 @@ import requests
++@@ -21,12 +21,16 @@ import requests
+  from requests.auth import HTTPDigestAuth
+  from requests.auth import HTTPBasicAuth
+  
+ +import time
+  import shutil
+- import six
+  
+-@@ -28,6 +29,9 @@ from pykickstart.errors import KickstartError, KickstartAuthError
++ from pykickstart.errors import KickstartError, KickstartAuthError
+  from pykickstart.i18n import _
+  from requests.exceptions import SSLError, RequestException
+  
+@@ -37,7 +37,7 @@ index ad3bad1..a5cbbc5 100644
+  _is_url = lambda location: '://' in location  # RFC 3986
+  
+  SSL_VERIFY = False
+-@@ -73,6 +77,29 @@ def load_to_file(location, destination):
++@@ -72,6 +76,29 @@ def load_to_file(location, destination):
+          _copy_file(location, destination)
+          return destination
+  
+@@ -67,7 +67,7 @@ index ad3bad1..a5cbbc5 100644
+  def _get_auth(location, user=None, passwd=None):
+  
+      auth = None
+-@@ -94,6 +121,10 @@ def _get_auth(location, user=None, passwd=None):
++@@ -93,6 +120,10 @@ def _get_auth(location, user=None, passwd=None):
+  
+  def _load_url(location, user=None, passwd=None):
+      '''Load a location (URL or filename) and return contents as string'''
+@@ -78,6 +78,3 @@ index ad3bad1..a5cbbc5 100644
+      auth = _get_auth(location, user=user, passwd=passwd)
+      try:
+          request = requests.get(location, verify=SSL_VERIFY, auth=auth)
+--- 
+-2.7.4
+-
+diff --git a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.32.bb b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.34.bb
+similarity index 94%
+rename from meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.32.bb
+rename to meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.34.bb
+index 829ada4f8..65fc88e77 100644
+--- a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.32.bb
++++ b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.34.bb
+@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/rhinstaller/pykickstart.git;protocol=https;branch=ma
+            file://0003-comment-out-sections-shutdown-and-environment-in-gen.patch \
+            file://0004-load.py-retry-to-invoke-request-with-timeout.patch \
+            "
+-SRCREV = "c56a5fbdd4079b187b21787f072ccc83dc09c28c"
++SRCREV = "bfd836cfdd8439d984595aca015811ed5c6be733"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "r(?P<pver>\d+(\.\d+)+(-\d+)*)"
+ 
+-- 
+2.25.1
 
 
