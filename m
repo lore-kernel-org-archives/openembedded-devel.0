@@ -2,97 +2,108 @@ Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 32294C433F5
-	for <webhook@archiver.kernel.org>; Sat, 16 Oct 2021 12:44:50 +0000 (UTC)
-Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com
- [209.85.167.46])
- by mx.groups.io with SMTP id smtpd.web11.10228.1634388288807694851
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8875EC433F5
+	for <webhook@archiver.kernel.org>; Sat, 16 Oct 2021 13:33:34 +0000 (UTC)
+Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com
+ [209.85.167.44])
+ by mx.groups.io with SMTP id smtpd.web11.10686.1634391212575827037
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 16 Oct 2021 05:44:49 -0700
+ Sat, 16 Oct 2021 06:33:33 -0700
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=1YN5KQMk;
+ header.s=20210112 header.b=vYZ9qFi9;
  spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.167.46, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f46.google.com with SMTP id x27so53744770lfa.9
+ ip: 209.85.167.44, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f44.google.com with SMTP id x27so54183721lfa.9
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 16 Oct 2021 05:44:48 -0700 (PDT)
+ Sat, 16 Oct 2021 06:33:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=qNzQ0tJ3slUP5ZptHHV6TViTwVGhazs3KUzb8Ji5XCY=;
-        b=1YN5KQMkl/mGKT5YDxdgD0T60LnjAokKfjLpq85cxlQUonN0b7fQnUtiD+/uqOKJUZ
-         y2ECtQZaXwLjBdJG27rMVnYI/O6KMyd6q3H5nSAsTCBIGUh/kKL2Rb2Ky6vOi4Ek4pam
-         nBJcBW3VZB17/ZmVIXJ0xLjZMkoCsvJOJkdd+p9vSeE4yYFsQBuYG0Uex2hK7gCarK3X
-         1rVPV1LLJmw5jtuV/Hf+CurxF3bu4YdKEOxUI1nVVT3NHXdZqn+jEqxCYkUhorqvNOcl
-         t7htLTOrmQ5QnCBp6O5ccLZawzZ3h48uuAHzBq99+MdUOREnMQ1cbveZdmf2eDpJkeVc
-         Cxkw==
+        bh=rQ4z44JhrqCflUfCU3jODU6vuiIjTizVSNcFSe2EKUw=;
+        b=vYZ9qFi95pcoTwqNTe+QqSTsLMWZh+UcEYaPRIXB4X47F7UNyzHQWq/6jq1605ymcV
+         xp7DiypNb8ky17h/jXJ71DslVkoIunMldjs3UqhzYBLkwBSqWWp1YGoTEeNueUwc8ZgA
+         UKeuZDzeM1qFN8evR2FQnzuSdJNR9FDdkqMbQwkXqQTEkyi3U9mk1bd51HYp0NAfmuH5
+         x2rIEBKXAZm7TKRxljmUF297nv/IB22pkTw9ZUDUQN8YiWCxIxeY4cPSpLlI4zdtNVts
+         yus4tRwDi6cfN9bmJNU5b2ff/GeVMmMcEnucndgnFf71/6hJ/ZFiWGFIpeTcIwqYhZGd
+         Sqnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=qNzQ0tJ3slUP5ZptHHV6TViTwVGhazs3KUzb8Ji5XCY=;
-        b=5zgtQb0mdZ4WuTFK7WOby6vm8OlgQ/DyUKfOpsu7sq//a18kxpfsdTXGaso7WmJ6nH
-         WDLEpf9dNGS2fr0k80TgUWVLAsOS3AemGwnk+1aXMUNi7WQKmB7coIlOZhB6Yw3Np36H
-         X2Wecc9PbSI4GG7nURpelduQZCdeM4uKMf4wDNCXoxbtVtp5ZIa040qu9FI6yEdnphqz
-         3kNISe6QBQwFxARKsctIB5ZRkqwERqSxe6IsNbCyl0m79QoKtlf5tCT0G81rI5tFBmUu
-         6vF6cZxrWiqraqt39NnsouYfwJj/0hlnkxwjgmj0l3nonXDxanx6Bsx7Hcgm5N5WLTw3
-         ChUg==
-X-Gm-Message-State: AOAM5304gS/HRQJjjJy5T1k/AFt+qyxBw+WYvLf3TrB2GSVtijFV1Fd4
-	7rnHl7ux8mGw5AJXABYGqJBybY/cH7RgVlyV
+        bh=rQ4z44JhrqCflUfCU3jODU6vuiIjTizVSNcFSe2EKUw=;
+        b=yetZxNH5fGsjePlubc83FIU4AL9OoUGSqWr/RBbEtwN0oYP00nPjEFFkI7AoJGUCNE
+         Ow23QYFyM4MmJP/Pc0jTeyyuL0zqLGBpO+Tu5CQFkAJ7ucR8fhjqCMdIV4DOS+jgEJ3h
+         Fo7oFN4P/+CO9t6Kc7E8FGDHterxy0gOr3tuW+GVdw1ObDEEkGZgOZamfhaKWr5C2O3W
+         Ahf93U7LTJMed/MbgmZTlU4iWVJgM1OcNHbWHzTsQRCUxaXAK9PmKp1XWYbhPTG0a5zg
+         8H2o2cqADjOz6y4vIbgT6KMkA2UaJUOUFQr+IwuxyQHmL9M5ijq1OHpVmtoEZYS5Imjv
+         js+g==
+X-Gm-Message-State: AOAM532dxoR+UJhIri+V7snR9OtBsvPPYRu+h+yBdJp7MghCTEceTPtx
+	GX9KnSc4UHlfW+QLPcenlCoKO0UzKp7wBnc/
 X-Google-Smtp-Source: 
- ABdhPJwmGEVUNY2M6nHJH5kjUGC532PIAI6GW4CqZXRC0AB93p4v0slN0Cwdf65DAzAVFKW7TRLYRw==
-X-Received: by 2002:a05:6512:3763:: with SMTP id
- z3mr17719771lft.601.1634388286104;
-        Sat, 16 Oct 2021 05:44:46 -0700 (PDT)
+ ABdhPJy+Ka8ENN7p+Ta/E54eGgvxaN+BZeO+cYJOAWr3DDDZkDBd4CpRQg91MjdmUeK3gYYXxEUqwg==
+X-Received: by 2002:a05:6512:1155:: with SMTP id
+ m21mr17398540lfg.471.1634391210289;
+        Sat, 16 Oct 2021 06:33:30 -0700 (PDT)
 Received: from localhost.localdomain
  (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
         by smtp.gmail.com with ESMTPSA id
- r3sm841467lfc.114.2021.10.16.05.44.45
+ t20sm913482lft.240.2021.10.16.06.33.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 16 Oct 2021 05:44:45 -0700 (PDT)
+        Sat, 16 Oct 2021 06:33:29 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH v2][meta-python] python3-pyatspi: update to 2.38.1
-Date: Sat, 16 Oct 2021 14:43:37 +0200
-Message-Id: <20211016124337.3734255-1-open.source@oleksandr-kravchuk.com>
+Subject: [PATCH v2][meta-python] python3-pyroute2: update to 0.6.5
+Date: Sat, 16 Oct 2021 15:33:27 +0200
+Message-Id: <20211016133327.3781109-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 16 Oct 2021 12:44:50 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 16 Oct 2021 13:33:34 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93401
+ https://lists.openembedded.org/g/openembedded-devel/message/93402
+
+Tests are, unfortunately, not anymore supplied with pypi package.
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../{python3-pyatspi_2.34.0.bb => python3-pyatspi_2.38.1.bb} | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pyatspi_2.34.0.bb => python3-pyatspi_2.38.1.bb} (92%)
+ ...hon3-pyroute2_0.5.19.bb => python3-pyroute2_0.6.5.bb} | 9 ++-------
+ 1 file changed, 2 insertions(+), 7 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pyroute2_0.5.19.bb => python3-pyroute2_0.6.5.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyatspi_2.34.0.bb b/meta-python/recipes-devtools/python/python3-pyatspi_2.38.1.bb
-similarity index 92%
-rename from meta-python/recipes-devtools/python/python3-pyatspi_2.34.0.bb
-rename to meta-python/recipes-devtools/python/python3-pyatspi_2.38.1.bb
-index 1368b923d..8ae9ac996 100644
---- a/meta-python/recipes-devtools/python/python3-pyatspi_2.34.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyatspi_2.38.1.bb
-@@ -7,8 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=db29218e6ba3794c56df7d4987dc7e4d \
-                     file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe"
- DEPENDS = "python3-dbus-native glib-2.0 dbus-glib libxml2 atk gtk+ python3-pygobject"
+diff --git a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb b/meta-python/recipes-devtools/python/python3-pyroute2_0.6.5.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb
+rename to meta-python/recipes-devtools/python/python3-pyroute2_0.6.5.bb
+index a85b0929d..d69439352 100644
+--- a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb
++++ b/meta-python/recipes-devtools/python/python3-pyroute2_0.6.5.bb
+@@ -3,9 +3,9 @@ LICENSE = "GPLv2 & Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://LICENSE.Apache.v2;md5=34281e312165f843a2b7d1f114fe65ce"
  
--SRC_URI = "git://github.com/GNOME/pyatspi2.git;protocol=https;branch=mainline"
--SRCREV = "cc99d68db66174f4499b9b325bc788393b972edd"
-+SRC_URI = "git://github.com/GNOME/pyatspi2.git;protocol=https;branch=master"
-+SRCREV = "6d5f47ee8e8a36140b52bf52fe954a131a0aa5dd"
-+
- S = "${WORKDIR}/git" 
+-SRC_URI[sha256sum] = "45460d12ed2a5caf272a357a3360b36d1e346f17afe1425b66fc21d70f462b29"
++SRC_URI[sha256sum] = "d0995c8aeb96c0e4eed4d62e97c9d795000a1a33b747d6dc54326665857cf11c"
  
- # Same restriction as gtk+
+-inherit setuptools3 pypi ptest
++inherit setuptools3 pypi
+ 
+ RDEPENDS:${PN} += " \
+     ${PYTHON_PN}-ctypes \
+@@ -29,8 +29,3 @@ RDEPENDS:${PN}-ptest += " \
+ 	${PYTHON_PN}-pytest \
+ 	${PYTHON_PN}-fcntl \
+ "
+-
+-do_install_ptest() {
+-	install -d ${D}${PTEST_PATH}/tests
+-	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+-}
 -- 
 2.25.1
 
