@@ -2,110 +2,104 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DA4BEC433EF
-	for <webhook@archiver.kernel.org>; Sat, 16 Oct 2021 12:32:22 +0000 (UTC)
-Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com
- [209.85.219.41])
- by mx.groups.io with SMTP id smtpd.web11.10125.1634387541813756969
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5D0EC433EF
+	for <webhook@archiver.kernel.org>; Sat, 16 Oct 2021 12:33:48 +0000 (UTC)
+Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com
+ [209.85.160.182])
+ by mx.groups.io with SMTP id smtpd.web10.9984.1634387627545280670
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 16 Oct 2021 05:32:22 -0700
+ Sat, 16 Oct 2021 05:33:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=mdOWH4OO;
- spf=pass (domain: gmail.com, ip: 209.85.219.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f41.google.com with SMTP id a16so7434131qvm.2
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=YMtPP1hw;
+ spf=pass (domain: gmail.com, ip: 209.85.160.182,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f182.google.com with SMTP id w2so11304937qtn.0
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 16 Oct 2021 05:32:21 -0700 (PDT)
+ Sat, 16 Oct 2021 05:33:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=vhUhJj+v3ALR5ZC332baS8dLMeEmAQTMJIwxzBLd/i8=;
-        b=mdOWH4OOA0KE8UHX6fePo/9jS8CHVuQbpOxbWLisEd4xXaCZwnhiZFCSBnqkLrw9UT
-         SCtcNn2yUQYBlMZfYVcMnuuEIye/WBFdt+zpegZzBOnyWq9UJkXDb43iBB4s/LtQiUtF
-         HDvbd0bvv1lP9U/Xxn+DTtOsJ55ONnl6bhxrDaonUEEZVjWw5YZk5PCiTjy3iuvOtOMt
-         lvilFkUw6O9xs+WxgshJbaxo7KBMoHjlGZ0y7WOJVPnktdc7leZ8cW3MOEan+pjaci2n
-         pIrXbECnsPuzFS4fv5+Ma0cavPVHy62jmMDJp13nJN90yx7oHHlZEMkcv/tg+i0sQXyh
-         jpFg==
+        bh=BpmDwD4rDygVTKfCR+gUWtRqR6NNZms6K434kBDZ7yE=;
+        b=YMtPP1hw3323/YfAbjAFNvHKm3Oc/f4ZAm5Mm3zQjphXTbQcxqanlCqqVhRKNVT57+
+         sEBsId8G3fAEjDM3gHvA0ayQk0u2am54HKwLutCeVd9MhVfem/IqPSyRxT/NpYwDpJkE
+         uQDYsX+03BMlbIlqii/o6JC3MWVYaAJ941EFvcLYC/LmxCoGzOfifJknX55uV2M7TNsP
+         5TMPsZfWRi1tu3Ek1Tvgr6MptpUmmxkwBD72y89PSYd0S3F9wzSQd3ukcfmzWCjR0r4V
+         k+dp2Ji+hUsnK7mI+ndmyKVFZWFhPWRUKQ837IOqi5vr2AaCD7Ycwvh6rXgrsD8ncEtz
+         k+4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=vhUhJj+v3ALR5ZC332baS8dLMeEmAQTMJIwxzBLd/i8=;
-        b=Q/GQ5nHVQoC4kTcHk/GwHlmhIm6Armpr7r+B4j2D4H3k83acPH+vSMxCiYtqRdwRXw
-         F15ytGij94gos65hbRkmn2CfFAl1vviYplScUIiY9YvpQTTF02FHuBXiv+2GjSGC6ZGk
-         NcWzH+flo+zD0zXSpsHIUgmmhXtU0kZ2/RefUlP3AXy2xnG/yDE/2kAijmPG2i5u3LiK
-         iMNy5DgK1qvGVBRzaLDfGryJFrp1wJBDY4OOZu7UPpYeneI/uELiR3JigkcL36ysLFYG
-         uUnVHKOFl6boOVLncGQ2/jw+LEPl+tTHlupcar4GhGY0WseNdpNVoLOZxFekCfSNMXMK
-         cORQ==
-X-Gm-Message-State: AOAM533inp2ceSeWwNQeupMtSAcFOGzF6isq9TLgVQGDmfMv/THg3siH
-	TDd7x4DVD1XaJ50fTsyvlkt2j6fk6SzORsd5OmJQ+hWiUkob7w==
+        bh=BpmDwD4rDygVTKfCR+gUWtRqR6NNZms6K434kBDZ7yE=;
+        b=pReB1vIrmvl/+yBiFb30vB81lgIBISN3qD8Ntu/7sFp4GAdTMmOax3157fiwwjqGRq
+         i7LM6BdZ5FF7KippaSN/mOpKmI+9FiuD1TPfIvW3VB8rxQkk7h/qGgrfnsvDnUnum4QW
+         ZCNFLpzettuE8+Jao87SE5XfIaOvyB/oCEHZ8kq9ok/lX8q9RELJZyTzdTCZ9YE3B00i
+         kmlW/Esjm8ta2TGtL6QkWVfVpSsPezSP4NE2+XqMlrmocBPNfrJ901vMqfPHs56QGCkn
+         z3ok3EI28X6deGxzRULpQa9O8WaIfr0BA7hbcZOpGzV4tiRVV1rQfzbqlgefYaD/jHfn
+         aiqw==
+X-Gm-Message-State: AOAM5301XKxrveLJDLamR58FXBVs5n2azZKXRN0mvN8Trd8GWOcuUFsf
+	I0JQQq1KETcFbUGPQHF3kmuJmltnoglS8O4Y3E7OTlRtTMAQBw==
 X-Google-Smtp-Source: 
- ABdhPJxSpRy2pbpOZ0lRKkZ/64v+pJ5B1HhH0TLc2w+mn/mM7Ueu0CekRf8fOgGZApCll9B4c6CEHfYIFlCDhcoeKtI=
-X-Received: by 2002:a05:6214:188:: with SMTP id
- q8mr16544563qvr.5.1634387540862;
- Sat, 16 Oct 2021 05:32:20 -0700 (PDT)
+ ABdhPJxaGygxqcsIhD8/+BBi8YQyik98Gqn7vYUTbcPPXVJ3cPUMmuIXEOkh1etgPJK3G9MNIGd3Rv/bqIDnjDnMC0k=
+X-Received: by 2002:a05:622a:1114:: with SMTP id
+ e20mr16089592qty.225.1634387626543;
+ Sat, 16 Oct 2021 05:33:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20211015230142.4165370-1-open.source@oleksandr-kravchuk.com>
-In-Reply-To: <20211015230142.4165370-1-open.source@oleksandr-kravchuk.com>
+References: <20211015225621.4162756-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20211015225621.4162756-1-open.source@oleksandr-kravchuk.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 16 Oct 2021 05:31:54 -0700
+Date: Sat, 16 Oct 2021 05:33:20 -0700
 Message-ID: 
- <CAMKF1sp9g4tz_W523iudrYT4+gCTyjLzTH14paK+MEhM_q2Asw@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-flask-user: update to 1.31.1
+ <CAMKF1sq+W11Qs68xWHnHWbo+t_mqJPeXNrBvWnWNYsq2gRixNQ@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-pyatspi: update to 2.38.1
 To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 16 Oct 2021 12:32:22 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 16 Oct 2021 12:33:48 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93396
+ https://lists.openembedded.org/g/openembedded-devel/message/93397
 
-Hi Oleksandr
+this fails to fetch
 
-This fails to compiler see
-https://errors.yoctoproject.org/Errors/Details/612599/
+https://errors.yoctoproject.org/Errors/Details/612598/
 
-On Fri, Oct 15, 2021 at 4:01 PM Oleksandr Kravchuk
+On Fri, Oct 15, 2021 at 3:56 PM Oleksandr Kravchuk
 <open.source@oleksandr-kravchuk.com> wrote:
->
-> License-Update: license file cleanup.
 >
 > Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 > ---
->  ...n3-flask-user_0.6.19.bb => python3-flask-user_1.0.2.2.bb} | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
->  rename meta-python/recipes-devtools/python/{python3-flask-user_0.6.19.bb => python3-flask-user_1.0.2.2.bb} (68%)
+>  .../{python3-pyatspi_2.34.0.bb => python3-pyatspi_2.38.1.bb}    | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-python/recipes-devtools/python/{python3-pyatspi_2.34.0.bb => python3-pyatspi_2.38.1.bb} (94%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb b/meta-python/recipes-devtools/python/python3-flask-user_1.0.2.2.bb
-> similarity index 68%
-> rename from meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
-> rename to meta-python/recipes-devtools/python/python3-flask-user_1.0.2.2.bb
-> index fbacf2e99..d050d66dc 100644
-> --- a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
-> +++ b/meta-python/recipes-devtools/python/python3-flask-user_1.0.2.2.bb
-> @@ -4,10 +4,9 @@ Confirm email, Login, Change username, Change password, Forgot Password \
->  and more."
->  HOMEPAGE = " https://github.com/lingthio/Flask-User"
->  LICENSE = "BSD-2-Clause"
-> -LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=97de97cd9d6e23c88129d884588ce71a"
-> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5aabce758ead32427c145173bc555403"
+> diff --git a/meta-python/recipes-devtools/python/python3-pyatspi_2.34.0.bb b/meta-python/recipes-devtools/python/python3-pyatspi_2.38.1.bb
+> similarity index 94%
+> rename from meta-python/recipes-devtools/python/python3-pyatspi_2.34.0.bb
+> rename to meta-python/recipes-devtools/python/python3-pyatspi_2.38.1.bb
+> index 1368b923d..bfccd73ac 100644
+> --- a/meta-python/recipes-devtools/python/python3-pyatspi_2.34.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pyatspi_2.38.1.bb
+> @@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=db29218e6ba3794c56df7d4987dc7e4d \
+>  DEPENDS = "python3-dbus-native glib-2.0 dbus-glib libxml2 atk gtk+ python3-pygobject"
 >
-> -SRC_URI[md5sum] = "f7965e66ca139c8436896da07e66c21f"
-> -SRC_URI[sha256sum] = "601abcc0343dfbae0c56273d98362d5cdc266ac84d20b3f65a212e4a2c83b302"
-> +SRC_URI[sha256sum] = "c9785febc2fc7ca15c69cfff1c8dabc2788f25043b54a33f73a6c2a9daf7fbe4"
+>  SRC_URI = "git://github.com/GNOME/pyatspi2.git;protocol=https;branch=mainline"
+> -SRCREV = "cc99d68db66174f4499b9b325bc788393b972edd"
+> +SRCREV = "6d5f47ee8e8a36140b52bf52fe954a131a0aa5dd"
+>  S = "${WORKDIR}/git"
 >
->  PYPI_PACKAGE = "Flask-User"
->
+>  # Same restriction as gtk+
 > --
 > 2.25.1
 >
 >
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#93375): https://lists.openembedded.org/g/openembedded-devel/message/93375
-> Mute This Topic: https://lists.openembedded.org/mt/86361801/1997914
+> View/Reply Online (#93356): https://lists.openembedded.org/g/openembedded-devel/message/93356
+> Mute This Topic: https://lists.openembedded.org/mt/86361671/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
