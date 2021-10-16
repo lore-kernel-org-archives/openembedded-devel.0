@@ -1,103 +1,113 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6959EC433F5
-	for <webhook@archiver.kernel.org>; Sat, 16 Oct 2021 12:28:56 +0000 (UTC)
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com
- [209.85.167.50])
- by mx.groups.io with SMTP id smtpd.web10.9946.1634387335096854890
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DA4BEC433EF
+	for <webhook@archiver.kernel.org>; Sat, 16 Oct 2021 12:32:22 +0000 (UTC)
+Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com
+ [209.85.219.41])
+ by mx.groups.io with SMTP id smtpd.web11.10125.1634387541813756969
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 16 Oct 2021 05:28:55 -0700
+ Sat, 16 Oct 2021 05:32:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=bqgwdZCb;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.167.50, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f50.google.com with SMTP id y15so54046904lfk.7
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=mdOWH4OO;
+ spf=pass (domain: gmail.com, ip: 209.85.219.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f41.google.com with SMTP id a16so7434131qvm.2
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 16 Oct 2021 05:28:54 -0700 (PDT)
+ Sat, 16 Oct 2021 05:32:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Wp7y/thwwr2mr0x+ofewk4kH6Ddmedke+lp+NFzfxIw=;
-        b=bqgwdZCbAhEl+zX/IzRW4sDx2i+WPqFFwSZAVX0tR+e8q5Qd85o4zy35+K5SHiUPz3
-         UD99zaBeWsvpkHEWicAXDfWUeOACYfZ/afU2EvwCiv5gi6+4X9MoGLvWMOYCqlNr/v00
-         G0TyVS7W/d2vwS4Zht79Vhsnga0kjhiciWtMlMdG/OSgjYLfaeh4XRjtncJjQH5jX/IV
-         hjq4m4BVSMhCAhr9LntN9KlFltz+tD5Pc+XaOWIGf8rqSFYvL62CTJmT2jRtcuj5pQoS
-         euolQTUHpSvU2OAgDjUN307ewGF2v9KrSUdC/1RZSsvjyjm4FRgdFiQORZKwqq23hiIW
-         zVFA==
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=vhUhJj+v3ALR5ZC332baS8dLMeEmAQTMJIwxzBLd/i8=;
+        b=mdOWH4OOA0KE8UHX6fePo/9jS8CHVuQbpOxbWLisEd4xXaCZwnhiZFCSBnqkLrw9UT
+         SCtcNn2yUQYBlMZfYVcMnuuEIye/WBFdt+zpegZzBOnyWq9UJkXDb43iBB4s/LtQiUtF
+         HDvbd0bvv1lP9U/Xxn+DTtOsJ55ONnl6bhxrDaonUEEZVjWw5YZk5PCiTjy3iuvOtOMt
+         lvilFkUw6O9xs+WxgshJbaxo7KBMoHjlGZ0y7WOJVPnktdc7leZ8cW3MOEan+pjaci2n
+         pIrXbECnsPuzFS4fv5+Ma0cavPVHy62jmMDJp13nJN90yx7oHHlZEMkcv/tg+i0sQXyh
+         jpFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Wp7y/thwwr2mr0x+ofewk4kH6Ddmedke+lp+NFzfxIw=;
-        b=Ec5TQnKEhxkYutBF3Ik3ZN+jceFCazkEBNpncGAtFLhC6cp4uaU+7rzMe0UccP6mod
-         Tt+/UOz1J/+XRPQ4FVNePmglZj72HivmEX8kx3UC5Pw6TgTYbNYu4dLYZYLMBNVJJ0Jf
-         yhkQe+G53PH2/rBJfqVV8h9Ug/bhPft3mP331vQlOAwfdwxGDq4idyfpdSWrGlZnTnoR
-         1BZP8RnYSMGVrgKZQ3mdhg3tmK3MgGxRogZQfHBJsOzW52+/Fr1mTnhXThqL9XTb95Hr
-         BKcqeVAsV25nztUe7FnfUwyujbw13ncdwxc+eK4DKFOdje7pmCj3svIJ1mcqzPbFiuXz
-         0nEw==
-X-Gm-Message-State: AOAM530YX8l9CRIUIWtWJZqEkHmua7fNu+/9BRB/mrlyxNsmeNH/Ghue
-	xqt/fAIh8KIwyTbD0y0jRl1Cfzkp0CfmrjIs
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=vhUhJj+v3ALR5ZC332baS8dLMeEmAQTMJIwxzBLd/i8=;
+        b=Q/GQ5nHVQoC4kTcHk/GwHlmhIm6Armpr7r+B4j2D4H3k83acPH+vSMxCiYtqRdwRXw
+         F15ytGij94gos65hbRkmn2CfFAl1vviYplScUIiY9YvpQTTF02FHuBXiv+2GjSGC6ZGk
+         NcWzH+flo+zD0zXSpsHIUgmmhXtU0kZ2/RefUlP3AXy2xnG/yDE/2kAijmPG2i5u3LiK
+         iMNy5DgK1qvGVBRzaLDfGryJFrp1wJBDY4OOZu7UPpYeneI/uELiR3JigkcL36ysLFYG
+         uUnVHKOFl6boOVLncGQ2/jw+LEPl+tTHlupcar4GhGY0WseNdpNVoLOZxFekCfSNMXMK
+         cORQ==
+X-Gm-Message-State: AOAM533inp2ceSeWwNQeupMtSAcFOGzF6isq9TLgVQGDmfMv/THg3siH
+	TDd7x4DVD1XaJ50fTsyvlkt2j6fk6SzORsd5OmJQ+hWiUkob7w==
 X-Google-Smtp-Source: 
- ABdhPJyaN+A79Hzm5MbvBBSJKvDUFVYz4ltgU7xwtu9g11fBOnh2O2ApuZI17BbxJd1AMFx2Dunikg==
-X-Received: by 2002:a05:6512:159d:: with SMTP id
- bp29mr16963765lfb.509.1634387333096;
-        Sat, 16 Oct 2021 05:28:53 -0700 (PDT)
-Received: from localhost.localdomain ([78.82.34.122])
-        by smtp.gmail.com with ESMTPSA id
- l27sm834032lfk.53.2021.10.16.05.28.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 16 Oct 2021 05:28:52 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-networking] nng: update to 1.4.0
-Date: Sat, 16 Oct 2021 14:28:44 +0200
-Message-Id: <20211016122844.3564915-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+ ABdhPJxSpRy2pbpOZ0lRKkZ/64v+pJ5B1HhH0TLc2w+mn/mM7Ueu0CekRf8fOgGZApCll9B4c6CEHfYIFlCDhcoeKtI=
+X-Received: by 2002:a05:6214:188:: with SMTP id
+ q8mr16544563qvr.5.1634387540862;
+ Sat, 16 Oct 2021 05:32:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20211015230142.4165370-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20211015230142.4165370-1-open.source@oleksandr-kravchuk.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 16 Oct 2021 05:31:54 -0700
+Message-ID: 
+ <CAMKF1sp9g4tz_W523iudrYT4+gCTyjLzTH14paK+MEhM_q2Asw@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-flask-user: update to 1.31.1
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 16 Oct 2021 12:28:56 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 16 Oct 2021 12:32:22 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93395
+ https://lists.openembedded.org/g/openembedded-devel/message/93396
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- .../nanomsg/{nng_1.4.0.bb => nng_1.5.2.bb}                  | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
- rename meta-networking/recipes-connectivity/nanomsg/{nng_1.4.0.bb => nng_1.5.2.bb} (93%)
+Hi Oleksandr
 
-diff --git a/meta-networking/recipes-connectivity/nanomsg/nng_1.4.0.bb b/meta-networking/recipes-connectivity/nanomsg/nng_1.5.2.bb
-similarity index 93%
-rename from meta-networking/recipes-connectivity/nanomsg/nng_1.4.0.bb
-rename to meta-networking/recipes-connectivity/nanomsg/nng_1.5.2.bb
-index 49e201564..1ffd8918a 100644
---- a/meta-networking/recipes-connectivity/nanomsg/nng_1.4.0.bb
-+++ b/meta-networking/recipes-connectivity/nanomsg/nng_1.5.2.bb
-@@ -1,14 +1,12 @@
- SUMMARY = "nanomsg-next-generation -- light-weight brokerless messaging"
- DESCRIPTION = "NNG, like its predecessors nanomsg (and to some extent ZeroMQ), is a lightweight, broker-less library, offering a simple API to solve common recurring messaging problems, such as publish/subscribe, RPC-style request/reply, or service discovery."
- HOMEPAGE = "https://github.com/nanomsg/nng"
-+SECTION = "libs/networking"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a41e579bb4326c21c774f8e51e41d8a3"
- 
--SECTION = "libs/networking"
--
--SRCREV = "d020adda8f0348d094790618703b8341a26007a3"
--
- SRC_URI = "git://github.com/nanomsg/nng.git"
-+SRCREV = "169221da8d53b2ca4fda76f894bee8505887a7c6"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.25.1
+This fails to compiler see
+https://errors.yoctoproject.org/Errors/Details/612599/
 
+On Fri, Oct 15, 2021 at 4:01 PM Oleksandr Kravchuk
+<open.source@oleksandr-kravchuk.com> wrote:
+>
+> License-Update: license file cleanup.
+>
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> ---
+>  ...n3-flask-user_0.6.19.bb => python3-flask-user_1.0.2.2.bb} | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python3-flask-user_0.6.19.bb => python3-flask-user_1.0.2.2.bb} (68%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb b/meta-python/recipes-devtools/python/python3-flask-user_1.0.2.2.bb
+> similarity index 68%
+> rename from meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
+> rename to meta-python/recipes-devtools/python/python3-flask-user_1.0.2.2.bb
+> index fbacf2e99..d050d66dc 100644
+> --- a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
+> +++ b/meta-python/recipes-devtools/python/python3-flask-user_1.0.2.2.bb
+> @@ -4,10 +4,9 @@ Confirm email, Login, Change username, Change password, Forgot Password \
+>  and more."
+>  HOMEPAGE = " https://github.com/lingthio/Flask-User"
+>  LICENSE = "BSD-2-Clause"
+> -LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=97de97cd9d6e23c88129d884588ce71a"
+> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5aabce758ead32427c145173bc555403"
+>
+> -SRC_URI[md5sum] = "f7965e66ca139c8436896da07e66c21f"
+> -SRC_URI[sha256sum] = "601abcc0343dfbae0c56273d98362d5cdc266ac84d20b3f65a212e4a2c83b302"
+> +SRC_URI[sha256sum] = "c9785febc2fc7ca15c69cfff1c8dabc2788f25043b54a33f73a6c2a9daf7fbe4"
+>
+>  PYPI_PACKAGE = "Flask-User"
+>
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#93375): https://lists.openembedded.org/g/openembedded-devel/message/93375
+> Mute This Topic: https://lists.openembedded.org/mt/86361801/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
