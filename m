@@ -1,107 +1,99 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E459BC433F5
-	for <webhook@archiver.kernel.org>; Sat, 16 Oct 2021 12:37:37 +0000 (UTC)
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
- [209.85.160.175])
- by mx.groups.io with SMTP id smtpd.web12.10333.1634387857285489655
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 32294C433F5
+	for <webhook@archiver.kernel.org>; Sat, 16 Oct 2021 12:44:50 +0000 (UTC)
+Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com
+ [209.85.167.46])
+ by mx.groups.io with SMTP id smtpd.web11.10228.1634388288807694851
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 16 Oct 2021 05:37:37 -0700
+ Sat, 16 Oct 2021 05:44:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=XMXvVYc4;
- spf=pass (domain: gmail.com, ip: 209.85.160.175,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f175.google.com with SMTP id t16so11245437qto.5
+ dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
+ header.s=20210112 header.b=1YN5KQMk;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
+ ip: 209.85.167.46, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f46.google.com with SMTP id x27so53744770lfa.9
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 16 Oct 2021 05:37:37 -0700 (PDT)
+ Sat, 16 Oct 2021 05:44:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=BRP6k8hbzW83hrV6cXz2iAjNsC1dC403nb+W/j+QGAM=;
-        b=XMXvVYc4osQbxnR4c2s+SC5d/KGXsoGGrhi4I0Qglj8ruzDWZQqWXcMQYFLVCfIsav
-         dcZEDH289/sxVdmy8gMqE2sD7zM0pOWH9sOCqilEay+JSX/51aPyp5YBzfZ0eH6Lza9T
-         Wn4h0P9L5WWlTgJWa/s8Ej2xTFNDqDLmnVkZvTz0cjiqyvK2MSgmNqylpPT64qUYr6eU
-         AL0n44+5QRoHI9eLPwowu4fK06Ml2rUf4N2/aqSGmtQwIZd2z2+hsAu3KHM04aUuoFoD
-         kBYJxJgMuAetQHXryMCXuKlFX/1sQbyXDVGQOyNbUFmFnfeVaEL1aIP5YOYqMvCn87s2
-         d5Mw==
+        d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=qNzQ0tJ3slUP5ZptHHV6TViTwVGhazs3KUzb8Ji5XCY=;
+        b=1YN5KQMkl/mGKT5YDxdgD0T60LnjAokKfjLpq85cxlQUonN0b7fQnUtiD+/uqOKJUZ
+         y2ECtQZaXwLjBdJG27rMVnYI/O6KMyd6q3H5nSAsTCBIGUh/kKL2Rb2Ky6vOi4Ek4pam
+         nBJcBW3VZB17/ZmVIXJ0xLjZMkoCsvJOJkdd+p9vSeE4yYFsQBuYG0Uex2hK7gCarK3X
+         1rVPV1LLJmw5jtuV/Hf+CurxF3bu4YdKEOxUI1nVVT3NHXdZqn+jEqxCYkUhorqvNOcl
+         t7htLTOrmQ5QnCBp6O5ccLZawzZ3h48uuAHzBq99+MdUOREnMQ1cbveZdmf2eDpJkeVc
+         Cxkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=BRP6k8hbzW83hrV6cXz2iAjNsC1dC403nb+W/j+QGAM=;
-        b=59wMOuvm+1BxZ0Kr6C6uJ+2NrMRn97kOQf9vsQfZdXODoPyqcBvdhbJE6I0pehW7Vf
-         eb3G5azkGWCcZrCbYIXSQOVdfq6hBsmlMob+alhu9RePgnvnlzeMs2HnoEpALI7Mjj5B
-         6op5FRDmFB40Wz4Yh/I6EhcyQYgChhvDyZX505XWqTjfLKmcyNjYbMcFnbAy//7EJvuj
-         WKqFO7RFGzAmD+fJE9JCKZ9h0x6TS7OD81+zQ0sT1d4zNmNPjq/Nhh/v0FxMOKdLPZCm
-         H8bqsUPT1UNbEAjmOQjfkX3iEeLQyko90gL5ki+rL9oY0B0OFasTpIzEAQr+bOdiyfxU
-         rMiA==
-X-Gm-Message-State: AOAM530vdADHxJUz1MzZhXGMMRapUysLSkohAMjtD+WWejP+Yzwcs8DP
-	/6dYyPMFXcBia+6Wx2bcLsaN3aoPlwm8qC4v9Q21TsyBR1SuMw==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=qNzQ0tJ3slUP5ZptHHV6TViTwVGhazs3KUzb8Ji5XCY=;
+        b=5zgtQb0mdZ4WuTFK7WOby6vm8OlgQ/DyUKfOpsu7sq//a18kxpfsdTXGaso7WmJ6nH
+         WDLEpf9dNGS2fr0k80TgUWVLAsOS3AemGwnk+1aXMUNi7WQKmB7coIlOZhB6Yw3Np36H
+         X2Wecc9PbSI4GG7nURpelduQZCdeM4uKMf4wDNCXoxbtVtp5ZIa040qu9FI6yEdnphqz
+         3kNISe6QBQwFxARKsctIB5ZRkqwERqSxe6IsNbCyl0m79QoKtlf5tCT0G81rI5tFBmUu
+         6vF6cZxrWiqraqt39NnsouYfwJj/0hlnkxwjgmj0l3nonXDxanx6Bsx7Hcgm5N5WLTw3
+         ChUg==
+X-Gm-Message-State: AOAM5304gS/HRQJjjJy5T1k/AFt+qyxBw+WYvLf3TrB2GSVtijFV1Fd4
+	7rnHl7ux8mGw5AJXABYGqJBybY/cH7RgVlyV
 X-Google-Smtp-Source: 
- ABdhPJw2vDdoC3T81FaI7eWNr64vN69dcHRqk6hpO3ZwijMLZ55kH03ckyXU48D4rEZAJso7/3nqHd9FWqxZwYBDYdM=
-X-Received: by 2002:a05:622a:13cc:: with SMTP id
- p12mr19896963qtk.227.1634387856441;
- Sat, 16 Oct 2021 05:37:36 -0700 (PDT)
+ ABdhPJwmGEVUNY2M6nHJH5kjUGC532PIAI6GW4CqZXRC0AB93p4v0slN0Cwdf65DAzAVFKW7TRLYRw==
+X-Received: by 2002:a05:6512:3763:: with SMTP id
+ z3mr17719771lft.601.1634388286104;
+        Sat, 16 Oct 2021 05:44:46 -0700 (PDT)
+Received: from localhost.localdomain
+ (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
+        by smtp.gmail.com with ESMTPSA id
+ r3sm841467lfc.114.2021.10.16.05.44.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 16 Oct 2021 05:44:45 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH v2][meta-python] python3-pyatspi: update to 2.38.1
+Date: Sat, 16 Oct 2021 14:43:37 +0200
+Message-Id: <20211016124337.3734255-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20211015225609.4162418-1-open.source@oleksandr-kravchuk.com>
-In-Reply-To: <20211015225609.4162418-1-open.source@oleksandr-kravchuk.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 16 Oct 2021 05:37:10 -0700
-Message-ID: 
- <CAMKF1sru31ebKboZX0FfbAj36GF2A1+sqK9nPz9skYfGKfMTVA@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-pyroute2: update to 0.6.5
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 16 Oct 2021 12:37:37 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 16 Oct 2021 12:44:50 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93400
+ https://lists.openembedded.org/g/openembedded-devel/message/93401
 
-fails to build ptest see
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ .../{python3-pyatspi_2.34.0.bb => python3-pyatspi_2.38.1.bb} | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pyatspi_2.34.0.bb => python3-pyatspi_2.38.1.bb} (92%)
 
-https://errors.yoctoproject.org/Errors/Details/612589/
+diff --git a/meta-python/recipes-devtools/python/python3-pyatspi_2.34.0.bb b/meta-python/recipes-devtools/python/python3-pyatspi_2.38.1.bb
+similarity index 92%
+rename from meta-python/recipes-devtools/python/python3-pyatspi_2.34.0.bb
+rename to meta-python/recipes-devtools/python/python3-pyatspi_2.38.1.bb
+index 1368b923d..8ae9ac996 100644
+--- a/meta-python/recipes-devtools/python/python3-pyatspi_2.34.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pyatspi_2.38.1.bb
+@@ -7,8 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=db29218e6ba3794c56df7d4987dc7e4d \
+                     file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe"
+ DEPENDS = "python3-dbus-native glib-2.0 dbus-glib libxml2 atk gtk+ python3-pygobject"
+ 
+-SRC_URI = "git://github.com/GNOME/pyatspi2.git;protocol=https;branch=mainline"
+-SRCREV = "cc99d68db66174f4499b9b325bc788393b972edd"
++SRC_URI = "git://github.com/GNOME/pyatspi2.git;protocol=https;branch=master"
++SRCREV = "6d5f47ee8e8a36140b52bf52fe954a131a0aa5dd"
++
+ S = "${WORKDIR}/git" 
+ 
+ # Same restriction as gtk+
+-- 
+2.25.1
 
-On Fri, Oct 15, 2021 at 3:56 PM Oleksandr Kravchuk
-<open.source@oleksandr-kravchuk.com> wrote:
->
-> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-> ---
->  .../{python3-pyroute2_0.5.19.bb => python3-pyroute2_0.6.5.bb}   | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-python/recipes-devtools/python/{python3-pyroute2_0.5.19.bb => python3-pyroute2_0.6.5.bb} (90%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb b/meta-python/recipes-devtools/python/python3-pyroute2_0.6.5.bb
-> similarity index 90%
-> rename from meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb
-> rename to meta-python/recipes-devtools/python/python3-pyroute2_0.6.5.bb
-> index a85b0929d..83cf8b41b 100644
-> --- a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pyroute2_0.6.5.bb
-> @@ -3,7 +3,7 @@ LICENSE = "GPLv2 & Apache-2.0"
->  LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
->                      file://LICENSE.Apache.v2;md5=34281e312165f843a2b7d1f114fe65ce"
->
-> -SRC_URI[sha256sum] = "45460d12ed2a5caf272a357a3360b36d1e346f17afe1425b66fc21d70f462b29"
-> +SRC_URI[sha256sum] = "d0995c8aeb96c0e4eed4d62e97c9d795000a1a33b747d6dc54326665857cf11c"
->
->  inherit setuptools3 pypi ptest
->
-> --
-> 2.25.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#93350): https://lists.openembedded.org/g/openembedded-devel/message/93350
-> Mute This Topic: https://lists.openembedded.org/mt/86361664/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
 
