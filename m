@@ -1,90 +1,93 @@
-Return-Path: <peter.kjellerstedt@axis.com>
+Return-Path: <JPEWhacker@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6498C433F5
-	for <webhook@archiver.kernel.org>; Sun, 17 Oct 2021 10:51:52 +0000 (UTC)
-Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
- by mx.groups.io with SMTP id smtpd.web08.21739.1634467910971054758
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B28FC433F5
+	for <webhook@archiver.kernel.org>; Sun, 17 Oct 2021 18:05:07 +0000 (UTC)
+Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com
+ [209.85.210.45])
+ by mx.groups.io with SMTP id smtpd.web10.25719.1634493906513951209
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Oct 2021 03:51:51 -0700
+ Sun, 17 Oct 2021 11:05:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=axis-central1 header.b=Lf4/YOBw;
- spf=pass (domain: axis.com, ip: 195.60.68.17,
- mailfrom: peter.kjellerstedt@axis.com)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=U20fbEYd;
+ spf=pass (domain: gmail.com, ip: 209.85.210.45,
+ mailfrom: jpewhacker@gmail.com)
+Received: by mail-ot1-f45.google.com with SMTP id
+ l10-20020a056830154a00b00552b74d629aso988900otp.5
+        for <openembedded-devel@lists.openembedded.org>;
+ Sun, 17 Oct 2021 11:05:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; q=dns/txt; s=axis-central1; t=1634467911;
-  x=1666003911;
-  h=from:to:subject:date:message-id:references:in-reply-to:
-   content-transfer-encoding:mime-version;
-  bh=CSxUIVM87+eT6vtyyJGsACCkarbqDPjS70ibjqaGPKs=;
-  b=Lf4/YOBwM0UukRkkBtaHg/2sPhwZJZYRx4YLseOekYWGuR+ir/+QXBH7
-   CJUy6GCXJx613pSiLti7lekEyN9CB7SdDaymvjg1n6ZA7KdOeioDGSmdc
-   Ua0r9PRhqVrVIC/QIlWVAI4j9ac7Si1UAt/Ia4sQID0lcyx/EIJeJfarK
-   IETfB9azA6srZ2UA9tJBJyayBvJOG2hhBPgcJkipEv4So6Bj/whbmvp3G
-   TcQo9HTxUqOP3Zc5QO//4V9cCDAgw4hTT6fMBqLv1uMULB0ytdZRFx/T6
-   3eHi5yyQwVwHktFBDL+B+/zmdevZATtchhJMJ4f5//pW9oUmtrZl4zvZk
-   Q==;
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: Khem Raj <raj.khem@gmail.com>, "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] [meta-oe][PATCH 1/3] protobuf-c: Do not use gold linker
-Thread-Topic: [oe] [meta-oe][PATCH 1/3] protobuf-c: Do not use gold linker
-Thread-Index: AQHXwq5IIlpd1bf050aaVaOAX5n2yavXBFVA
-Date: Sun, 17 Oct 2021 10:51:47 +0000
-Message-ID: <1ea36ba81f0d4fe0b43d36b415ee6255@axis.com>
-References: <20211016165223.1271496-1-raj.khem@gmail.com>
-In-Reply-To: <20211016165223.1271496-1-raj.khem@gmail.com>
-Accept-Language: en-US, sv-SE
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.0.5.60]
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=o0Tar/6pFn2lnX1lopREZzOb/wWICS0OH+yf9L0A40A=;
+        b=U20fbEYd1LPYwr/Qh/ZZLdpfEaMkQPPTTx7rhOEVusM++06NniwQUmEvArpVK0uymw
+         BgUS/u8qflBBTswEuzOVrddtdWNMh4qryqERB2HXDV8cNWouD1UGEFN5ioHvY06cY41h
+         GTCRHxEQ2RqZjMYCkqAg9/NPPzMIcigB4kAsjktpxM241jPLFkZX1JDuZGgiYRVjrF15
+         H4fQE/HPSKts5EpexDj8glVCKIj84rx0xjxVNgyTzpDrJp5PNHb1eeljB4+Xxw2+qipa
+         J9prR0VCU/FLAdoCrEVvhlFwto1zkoDtnqq1uDm0Ca9YxxSRGUY+47Jawif1GfQQad5+
+         jg5w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=o0Tar/6pFn2lnX1lopREZzOb/wWICS0OH+yf9L0A40A=;
+        b=jtuC4NFbLFas0YAdKXlzD0rwwoWQBqwWTkghms8PmC2akEM78Tf/juKLDhuncKfHtu
+         xTvhOhgzmcr7jbxFYGYu4Pfl/Onw/KYl0MTFLyzgtwwnCp6dAabOPOMELhcqjt0MjB4k
+         fW94aiCsVeEjv90wPXzP0yunOuSBAJSYIioofAi3XKDORYQg53TZTTOKqOul/3vGjtG6
+         xdG12lRNMINqJj8Zj6RoemrJzbTAjE+Ccr6IxlgMsggkFWN3fBPT1+qi4VepLwE8dTOz
+         U9AIKuY9yKaGkO8QL81bGFPyHWygCqe4WcTSbxn1tZSEglpUR1ewfZQUf47L5n73ev4H
+         s/9w==
+X-Gm-Message-State: AOAM5301DC9xVQTJRk05eGCc4llfQINothJIMf6kltkFrCDDHiA+1zcX
+	dMv14kJas3eAREiGcVoC0cC+2XHZPuM=
+X-Google-Smtp-Source: 
+ ABdhPJymVbDjI2PKodhvTimsZ3gaGNUxg06VShclcLUlSzRaSmdWEZmdGGZ6ArHO7xdLsoBsT/+R4A==
+X-Received: by 2002:a9d:4118:: with SMTP id o24mr18496031ote.47.1634493905646;
+        Sun, 17 Oct 2021 11:05:05 -0700 (PDT)
+Received: from localhost.localdomain ([2605:a601:ac3d:c100:e3e8:d9:3a56:e27d])
+        by smtp.gmail.com with ESMTPSA id
+ d10sm2136312ooj.24.2021.10.17.11.05.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 17 Oct 2021 11:05:05 -0700 (PDT)
+From: Joshua Watt <jpewhacker@gmail.com>
+X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Joshua Watt <JPEWhacker@gmail.com>
+Subject: [oe][meta-oe][PATCH] colord-native: Inherit pkgconfig
+Date: Sun, 17 Oct 2021 13:05:03 -0500
+Message-Id: <20211017180503.3375574-1-JPEWhacker@gmail.com>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 17 Oct 2021 10:51:52 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 17 Oct 2021 18:05:07 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93406
+ https://lists.openembedded.org/g/openembedded-devel/message/93408
 
-> -----Original Message-----
-> From: openembedded-devel@lists.openembedded.org <openembedded-
-> devel@lists.openembedded.org> On Behalf Of Khem Raj
-> Sent: den 16 oktober 2021 18:52
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Khem Raj <raj.khem@gmail.com>
-> Subject: [oe] [meta-oe][PATCH 1/3] protobuf-c: Do not use gold linker
+pkgconfig.bbclass is now required for pkg-config to be present
 
-Add a motivation as to why this is needed.
+Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
+---
+ meta-oe/recipes-support/colord/colord-native.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-//Peter
-
->=20
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb | 2 ++
->  1 file changed, 2 insertions(+)
->=20
-> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb b/meta=
--
-> oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
-> index cc037d3934..b5ab0a171c 100644
-> --- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
-> +++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
-> @@ -19,6 +19,8 @@ S =3D "${WORKDIR}/git"
->=20
->  inherit autotools pkgconfig
->=20
-> +LDFLAGS +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -
-> fuse-ld=3Dbfd ', '', d)}"
-> +
->  # After several fix attempts there is still a race between generating
->  # t.test-full.pb.h and compiling cxx_generate_packed_data.c despite
->  # BUILT_SOURCES and explicit dependencies.
-> --
-> 2.33.1
+diff --git a/meta-oe/recipes-support/colord/colord-native.bb b/meta-oe/recipes-support/colord/colord-native.bb
+index 65fa0f44b..64dd94a9e 100644
+--- a/meta-oe/recipes-support/colord/colord-native.bb
++++ b/meta-oe/recipes-support/colord/colord-native.bb
+@@ -2,7 +2,7 @@ require ${BPN}.inc
+ 
+ FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}-native:"
+ 
+-inherit meson native
++inherit meson pkgconfig native
+ 
+ DEPENDS += " \
+     meson-native \
+-- 
+2.33.0
 
 
