@@ -1,210 +1,130 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53533C433F5
-	for <webhook@archiver.kernel.org>; Sun, 17 Oct 2021 21:22:22 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com
- [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web10.27893.1634505740796867112
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 429F1C433F5
+	for <webhook@archiver.kernel.org>; Sun, 17 Oct 2021 21:23:32 +0000 (UTC)
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com
+ [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web09.28001.1634505811442484335
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Oct 2021 14:22:21 -0700
+ Sun, 17 Oct 2021 14:23:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=puXpoSr0;
- spf=pass (domain: gmail.com, ip: 209.85.128.48,
- mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id
- 63-20020a1c0042000000b0030d60716239so8476693wma.4
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=cqrickw1;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id
+ g13-20020a17090a3c8d00b00196286963b9so13093869pjc.3
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Oct 2021 14:22:20 -0700 (PDT)
+ Sun, 17 Oct 2021 14:23:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
+        h=message-id:date:mime-version:user-agent:content-language:to
+         :references:from:organization:subject:in-reply-to
          :content-transfer-encoding;
-        bh=0UfLHoXpIbEt8HFop2KldqeWfFX90QlLbo32VHvdeGw=;
-        b=puXpoSr0ewvI1G8EkulOhdt8nxtjbHB/6rs8HLCi6AZGe7FPNy0GPlApmrNAQ24kND
-         LzXK9IXnVIiUMYMubIn0+chdfndi9gnyuPwqEImKP3VYa4Fs8IXCvvT6SypaxEuXG2hy
-         aj7LuVzg5w3PjnjwJErtvwZMD8ondXUQaXwqnA9nnE4UBZXRWmRlbDLO1V7cfozXUv6P
-         y0rTxISkLlf2KyNDdKGEaOHmsTuTB+vrM79RomMdXFB0kaRe3yxtqJ6QCJ++u0VEWqO3
-         o9Vc1GP6m7OeK8em/funCeKhQBwwGfG9VGa/P61O1ULhNpm1W5GV0NDEk8CoyOYmwryS
-         sPWQ==
+        bh=WiWTXH/TSqM9XLTiPj5AKRnxaMOjIiiGlQ4U80PRuhg=;
+        b=cqrickw1fIoPfWezbTpecUkHFmkjY4rf+zW6DOeelcOuf7juc1xB5AUjI2+vacjMaJ
+         FSLKtpZcOgLjIJPPuSwxY+/l7fobejiHmnPR4S/MGhIqnSyp4smqQzR3h0uUq5j/FeHF
+         QtBaosYrrGhiJR2zzY+VX4lR4102r8AKcmzA5Ngk7MDzFaumjVw4NfPwSniCOx7jwGEa
+         LO47j28i1qMbKW+0krfoI6HH+tyTk5PlQG9pd2XHDPldghjNgpupDIchR16cfdTIPA1f
+         8MZ3g1clZQM/qnaKRZakdEk/iZDBeZ+V+m/7ozLA6Jqiuck+3xbLi3xW68oQQDapBsHE
+         +n+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=0UfLHoXpIbEt8HFop2KldqeWfFX90QlLbo32VHvdeGw=;
-        b=KWsPcPQfDZRN/oySGspMKKoMeQAAsZo+TLQ2O8j2Oj0cYvgVeQqDi2iyj0sOZlMYSh
-         sS5pCEh5vSF3SnNM+9L+ZAxO6ZfTWoeUPRANIFKnScws2v4KR7f+MsEXgHuR81/TR5YG
-         eQFUgUPmqWJw1oEi8o17E1awdiYNwMLFAOO2q+hH38efudjDOr2HISf4D5NhD+Q6TLk2
-         AMf3ZgFNHfiFIPAhGCeXgIfowQ+RgAMv03IfDqQdbH8pEDa9g5c3P00MCh6wdN8iG326
-         c7fD2VJnDh7YM0HnqK+VPQlnC9p4EwOewitLPtaDMef5ohBmVeuDbs/RKxVJg7uwxYZN
-         OdGg==
-X-Gm-Message-State: AOAM5307hUtSjt+kyFMQeKizT+iyVJsCD+2svI5dnOEmMYMQJkTg5u93
-	Yt27hwoulPeilT80PfxICIFoRpaRj94=
+        h=x-gm-message-state:message-id:date:mime-version:user-agent
+         :content-language:to:references:from:organization:subject
+         :in-reply-to:content-transfer-encoding;
+        bh=WiWTXH/TSqM9XLTiPj5AKRnxaMOjIiiGlQ4U80PRuhg=;
+        b=r15RpdcGCxtFUjKKZuZkXbjEsKfWKTujr3RBlliesIBuTzIN0eMepU+4TjEwThZNNq
+         XMqr/tLbgUbgZS/KYL5cNxAcoxVxqcKsNAZdP66ARNSEtCDhZl8wTjCSfZFaiQpJ+ZvR
+         5N6Q31YhgC6VVdLheX3ygFIvhLiiPPuT0G6UhYscKcvp7dapniTObrCOobFVZ739jOC0
+         v5JdhVFLyfe+YfWWMJno00CZm0wGanbZ14Qx1ftklvPKfnfJAqdiKeI1/+FXxERLQWKH
+         S5hDrgEvdh6IxnLuPjgo3FpnCYYGNHS+oBMz0VDs9E7kN0wh8YQllL+S2wjkrvnO7uk2
+         3hIQ==
+X-Gm-Message-State: AOAM532e08oOChz1j/kgbyToY+FPm8pw1S1N6z/o7MYByNjFTs/Yx+3w
+	ZJkQUl9+Bfuie+WbBiUiDxg=
 X-Google-Smtp-Source: 
- ABdhPJxVQCDY2abBZh3uDs987w+ZracQJ/eBJ6FBQuwnWa2c1Js/L1UKs3dE2sVKLBDTmDCfihWGcA==
-X-Received: by 2002:a1c:3b86:: with SMTP id
- i128mr40607579wma.132.1634505739250;
-        Sun, 17 Oct 2021 14:22:19 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+ ABdhPJy3k4i5jUWxP1de5FWBB2XaDA2wjES22yQbanaTTVer2CfNGxoNvOQH0zlNAxavsD7mPb8l+Q==
+X-Received: by 2002:a17:902:d488:b0:13f:165e:f491 with SMTP id
+ c8-20020a170902d48800b0013f165ef491mr23776110plg.12.1634505810855;
+        Sun, 17 Oct 2021 14:23:30 -0700 (PDT)
+Received: from ?IPV6:2601:646:9200:a0f0:9d56:a24c:bb34:792d?
+ ([2601:646:9200:a0f0:9d56:a24c:bb34:792d])
         by smtp.gmail.com with ESMTPSA id
- l16sm10996704wmj.33.2021.10.17.14.22.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 Oct 2021 14:22:18 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-python2][PATCH] python-cryptography: fix build with openssl-3
-Date: Sun, 17 Oct 2021 23:22:15 +0200
-Message-Id: <20211017212215.1852270-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.32.0
+ d18sm10587227pgk.24.2021.10.17.14.23.30
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 17 Oct 2021 14:23:30 -0700 (PDT)
+Message-ID: <0d71ee5f-5302-297b-2e65-87072d96a213@gmail.com>
+Date: Sun, 17 Oct 2021 14:23:29 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.2.0
+Content-Language: en-US
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
+ "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>
+References: <20211016165223.1271496-1-raj.khem@gmail.com>
+ <1ea36ba81f0d4fe0b43d36b415ee6255@axis.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Subject: Re: [oe] [meta-oe][PATCH 1/3] protobuf-c: Do not use gold linker
+In-Reply-To: <1ea36ba81f0d4fe0b43d36b415ee6255@axis.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 17 Oct 2021 21:22:22 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 17 Oct 2021 21:23:32 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93409
+ https://lists.openembedded.org/g/openembedded-devel/message/93410
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- ...me-more-constants-we-don-t-need-5361.patch | 25 +++++++++++++
- ...or-we-don-t-use-in-cryptography-or-p.patch | 32 +++++++++++++++++
- ...erties-for-all-openssl-versions-5589.patch | 36 +++++++++++++++++++
- .../python/python-cryptography_2.8.bb         |  3 ++
- 4 files changed, 96 insertions(+)
- create mode 100644 recipes-devtools/python/python-cryptography/0001-remove-some-more-constants-we-don-t-need-5361.patch
- create mode 100644 recipes-devtools/python/python-cryptography/0002-remove-every-error-we-don-t-use-in-cryptography-or-p.patch
- create mode 100644 recipes-devtools/python/python-cryptography/0003-define-OAEP-properties-for-all-openssl-versions-5589.patch
 
-diff --git a/recipes-devtools/python/python-cryptography/0001-remove-some-more-constants-we-don-t-need-5361.patch b/recipes-devtools/python/python-cryptography/0001-remove-some-more-constants-we-don-t-need-5361.patch
-new file mode 100644
-index 0000000..ef5a597
---- /dev/null
-+++ b/recipes-devtools/python/python-cryptography/0001-remove-some-more-constants-we-don-t-need-5361.patch
-@@ -0,0 +1,25 @@
-+From 513720d786816eb66296f8701b1377afc9e151f4 Mon Sep 17 00:00:00 2001
-+From: Paul Kehrer <paul.l.kehrer@gmail.com>
-+Date: Thu, 30 Jul 2020 09:44:31 -0500
-+Subject: [PATCH] remove some more constants we don't need (#5361)
-+
-+these are gone in 3.0 anyway and were removed in that draft PR
-+---
-+ src/_cffi_src/openssl/crypto.py | 4 ----
-+ 1 file changed, 4 deletions(-)
-+
-+diff --git a/src/_cffi_src/openssl/crypto.py b/src/_cffi_src/openssl/crypto.py
-+index d8835442..1a6dbbcd 100644
-+--- a/src/_cffi_src/openssl/crypto.py
-++++ b/src/_cffi_src/openssl/crypto.py
-+@@ -23,10 +23,6 @@ static const int OPENSSL_CFLAGS;
-+ static const int OPENSSL_BUILT_ON;
-+ static const int OPENSSL_PLATFORM;
-+ static const int OPENSSL_DIR;
-+-static const int CRYPTO_MEM_CHECK_ON;
-+-static const int CRYPTO_MEM_CHECK_OFF;
-+-static const int CRYPTO_MEM_CHECK_ENABLE;
-+-static const int CRYPTO_MEM_CHECK_DISABLE;
-+ """
-+ 
-+ FUNCTIONS = """
-diff --git a/recipes-devtools/python/python-cryptography/0002-remove-every-error-we-don-t-use-in-cryptography-or-p.patch b/recipes-devtools/python/python-cryptography/0002-remove-every-error-we-don-t-use-in-cryptography-or-p.patch
-new file mode 100644
-index 0000000..e7b4e20
---- /dev/null
-+++ b/recipes-devtools/python/python-cryptography/0002-remove-every-error-we-don-t-use-in-cryptography-or-p.patch
-@@ -0,0 +1,32 @@
-+From 9e5b84a9c0acc5f1e503495fd615439d82085188 Mon Sep 17 00:00:00 2001
-+From: Paul Kehrer <paul.l.kehrer@gmail.com>
-+Date: Mon, 27 Jul 2020 06:31:41 -0500
-+Subject: [PATCH] remove every error we don't use in cryptography or pyopenssl
-+ (#5355)
-+
-+* remove every error we don't use in cryptography or pyopenssl
-+
-+sorry external consumers, carrying things we don't use and don't have
-+downstream tests for has become too much of a burden
-+
-+* re-add a constant we need for tests for now
-+
-+* pyopenssl needs these three
-+
-+MJ: remove only EVP_R_KEYGEN_FAILURE to fix build with openssl-3
-+---
-+ src/_cffi_src/openssl/err.py | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/src/_cffi_src/openssl/err.py b/src/_cffi_src/openssl/err.py
-+index d4033f5a..f573bdf3 100644
-+--- a/src/_cffi_src/openssl/err.py
-++++ b/src/_cffi_src/openssl/err.py
-+@@ -66,7 +66,6 @@ static const int EVP_R_DIFFERENT_KEY_TYPES;
-+ static const int EVP_R_INITIALIZATION_ERROR;
-+ static const int EVP_R_INPUT_NOT_INITIALIZED;
-+ static const int EVP_R_INVALID_KEY_LENGTH;
-+-static const int EVP_R_KEYGEN_FAILURE;
-+ static const int EVP_R_MISSING_PARAMETERS;
-+ static const int EVP_R_NO_CIPHER_SET;
-+ static const int EVP_R_NO_DIGEST_SET;
-diff --git a/recipes-devtools/python/python-cryptography/0003-define-OAEP-properties-for-all-openssl-versions-5589.patch b/recipes-devtools/python/python-cryptography/0003-define-OAEP-properties-for-all-openssl-versions-5589.patch
-new file mode 100644
-index 0000000..eafec49
---- /dev/null
-+++ b/recipes-devtools/python/python-cryptography/0003-define-OAEP-properties-for-all-openssl-versions-5589.patch
-@@ -0,0 +1,36 @@
-+From 5df5945d7b613ffef80f50c3febac86358c93cc3 Mon Sep 17 00:00:00 2001
-+From: Paul Kehrer <paul.l.kehrer@gmail.com>
-+Date: Thu, 26 Nov 2020 11:52:47 -0600
-+Subject: [PATCH] define OAEP properties for all openssl versions (#5589)
-+
-+In 3.0 these aren't macros so we can't test this way. All our supported
-+OpenSSLs have these bindings now and LibreSSL does not.
-+---
-+ src/_cffi_src/openssl/rsa.py | 10 +++-------
-+ 1 file changed, 3 insertions(+), 7 deletions(-)
-+
-+diff --git a/src/_cffi_src/openssl/rsa.py b/src/_cffi_src/openssl/rsa.py
-+index 216e633a..e2fbc422 100644
-+--- a/src/_cffi_src/openssl/rsa.py
-++++ b/src/_cffi_src/openssl/rsa.py
-+@@ -60,17 +60,13 @@ int EVP_PKEY_CTX_set_rsa_oaep_md(EVP_PKEY_CTX *, EVP_MD *);
-+ CUSTOMIZATIONS = """
-+ static const long Cryptography_HAS_PSS_PADDING = 1;
-+ 
-+-#if defined(EVP_PKEY_CTX_set_rsa_oaep_md)
-++#if !CRYPTOGRAPHY_IS_LIBRESSL
-+ static const long Cryptography_HAS_RSA_OAEP_MD = 1;
-+-#else
-+-static const long Cryptography_HAS_RSA_OAEP_MD = 0;
-+-int (*EVP_PKEY_CTX_set_rsa_oaep_md)(EVP_PKEY_CTX *, EVP_MD *) = NULL;
-+-#endif
-+-
-+-#if defined(EVP_PKEY_CTX_set0_rsa_oaep_label)
-+ static const long Cryptography_HAS_RSA_OAEP_LABEL = 1;
-+ #else
-++static const long Cryptography_HAS_RSA_OAEP_MD = 0;
-+ static const long Cryptography_HAS_RSA_OAEP_LABEL = 0;
-++int (*EVP_PKEY_CTX_set_rsa_oaep_md)(EVP_PKEY_CTX *, EVP_MD *) = NULL;
-+ int (*EVP_PKEY_CTX_set0_rsa_oaep_label)(EVP_PKEY_CTX *, unsigned char *,
-+                                         int) = NULL;
-+ #endif
-diff --git a/recipes-devtools/python/python-cryptography_2.8.bb b/recipes-devtools/python/python-cryptography_2.8.bb
-index d56e85f..40d5e69 100644
---- a/recipes-devtools/python/python-cryptography_2.8.bb
-+++ b/recipes-devtools/python/python-cryptography_2.8.bb
-@@ -65,6 +65,9 @@ FILES:${PN}-dbg += " \
- "
- 
- SRC_URI += " \
-+    file://0001-remove-some-more-constants-we-don-t-need-5361.patch \
-+    file://0002-remove-every-error-we-don-t-use-in-cryptography-or-p.patch \
-+    file://0003-define-OAEP-properties-for-all-openssl-versions-5589.patch \
-     file://run-ptest \
- "
- 
--- 
-2.32.0
 
+On 10/17/21 3:51 AM, Peter Kjellerstedt wrote:
+>> -----Original Message-----
+>> From: openembedded-devel@lists.openembedded.org <openembedded-
+>> devel@lists.openembedded.org> On Behalf Of Khem Raj
+>> Sent: den 16 oktober 2021 18:52
+>> To: openembedded-devel@lists.openembedded.org
+>> Cc: Khem Raj <raj.khem@gmail.com>
+>> Subject: [oe] [meta-oe][PATCH 1/3] protobuf-c: Do not use gold linker
+> 
+> Add a motivation as to why this is needed.
+> 
+
+yeah, I should have added that gold linker ends up with symbols being 
+exported with weak attribute while libprotobuf.map lists these symbols 
+as global and exported. Gold linker ignores any mapping directive inside 
+extern 'C' blocks, it could be a bug in linker [1]
+
+also see gentoo bug [2]
+
+[1] https://sourceware.org/bugzilla/show_bug.cgi?id=24527
+[2] https://bugs.gentoo.org/683892
+
+> //Peter
+> 
+>>
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ---
+>>   meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb | 2 ++
+>>   1 file changed, 2 insertions(+)
+>>
+>> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb b/meta-
+>> oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
+>> index cc037d3934..b5ab0a171c 100644
+>> --- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
+>> +++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
+>> @@ -19,6 +19,8 @@ S = "${WORKDIR}/git"
+>>
+>>   inherit autotools pkgconfig
+>>
+>> +LDFLAGS += "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -
+>> fuse-ld=bfd ', '', d)}"
+>> +
+>>   # After several fix attempts there is still a race between generating
+>>   # t.test-full.pb.h and compiling cxx_generate_packed_data.c despite
+>>   # BUILT_SOURCES and explicit dependencies.
+>> --
+>> 2.33.1
+> 
 
