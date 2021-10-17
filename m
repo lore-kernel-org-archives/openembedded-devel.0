@@ -2,150 +2,133 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B30CC433F5
-	for <webhook@archiver.kernel.org>; Sun, 17 Oct 2021 21:32:32 +0000 (UTC)
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com
- [209.85.215.177])
- by mx.groups.io with SMTP id smtpd.web12.28321.1634506348612742860
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 938B8C433F5
+	for <webhook@archiver.kernel.org>; Sun, 17 Oct 2021 23:12:27 +0000 (UTC)
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com
+ [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.web08.29549.1634512346436167054
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Oct 2021 14:32:28 -0700
+ Sun, 17 Oct 2021 16:12:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=MYi5Qr32;
- spf=pass (domain: gmail.com, ip: 209.85.215.177,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=gp67+Hei;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f177.google.com with SMTP id 66so13982740pgc.9
+Received: by mail-pf1-f173.google.com with SMTP id 187so13256036pfc.10
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Oct 2021 14:32:28 -0700 (PDT)
+ Sun, 17 Oct 2021 16:12:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=GAOBlImchJU3gOM4R6DOyrdyhOjtOaFSCVYMdXA+TyI=;
-        b=MYi5Qr32whtQbzFO7idfBwnUUmPuasNQOjZ4OpgJZb9oUUxuusKezhE1jZ+igCf5UL
-         mzcAYPaGaFVKetGMqESodwpfZfAg4pP+GluxeUOKsKMKsR6gdNEv78FrwHwjLtrmmLrI
-         4RwlXtECuCehlNhQ79EPHf32UJgouRqDDCMjsuzUsMXJf1jm8HPeax/jxCi5qbefNNUs
-         O1nmApufLFz3Dpqipz0DEzZ9dGeyPY2w133RKrmTkwpnNnW0Ih8OeuXAnT8MTV1OD5+7
-         Uq9uo7X/9b64wQiHxBDnMcgZEOAhWIWphANsgMcotMvqkW+GD7mdYB9nU3of+6e60sui
-         ozxQ==
+        bh=Fco4ZSQ0LHuowrJSkfItossyjtFmliRS1aGz9/UBW7k=;
+        b=gp67+HeihqK9pYwxpdyOULP6aeAFkUmeJx1AZh/nga/2iNvvHr3AzDCS37I7IXkkjh
+         DgLhFQI20QUIkYcqn2IvcAqaWuUJkYhU/lSkqyklx30iiK8/t5RwISv+akCR1spZe44F
+         kSPfXri7NfbkiGDTpawrTvFLiA9pq1oiLA/JQD3P0iW//2jzpBreBP1xAy2wPRAeP6S2
+         9pOye2xVB+QwJEGgbkS6kssK/B9xX1qOopH1S88GrUGA28MKSJpkrkq9b/C9S9/ovGSa
+         eJZTqI+Dk4BEh75IvALbWUmoO7TA94yBbj4I80SUXBB+ylL4QVSuZEXhIonZZxGkXz1J
+         ffYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=GAOBlImchJU3gOM4R6DOyrdyhOjtOaFSCVYMdXA+TyI=;
-        b=UMgOA12GzdvsdZMmEgN55SFlQq/GYNChUoSP+fKhCTXeuyBZYQtDkCcaAG9PkrDlcD
-         aVlP0m8BpUrE5buN8sNlLa7E2O8JbP/cImLKOd6sTSu9gTBP6Zqc4Nt7IYjmWkvBOFIq
-         98jxzaV3pb0ewG/TOJQpsYTrB2zYdWL7IFN4asW8PXGooOgm8hdnQmwJoDakp7IBh1rH
-         1n9dptRDjdGSFI3SikLKq0cHoVE4l3gRF/PaTX1yp2b8ks+MidPtI8iJcEfw8h3dXi5e
-         03L57MT7PiGs6c1CJBLB4h37bMN2mSCRMtGdlPXd4eqaTQh8ArrvnhHiiJdjjwrUnnlc
-         yB+g==
-X-Gm-Message-State: AOAM531TkCg9OIHcjT01f8+jNQVjPZyxbZz8Py+yBYniGI1ymOpxo7ey
-	itO5Df9BDQjJuiDu9Fy1opvv+GwdO1Vd9A==
+        bh=Fco4ZSQ0LHuowrJSkfItossyjtFmliRS1aGz9/UBW7k=;
+        b=2KCBvG02Xtb8a+JY87E/e5YO43k9NlxRBw3BSr4qO1XbYIQZnn9xXmmm5t1qE/6xbc
+         uQdm24uMQVGHqUpJahBAs4CIxssB1LP4D2Cfl4x8pUud/vqCjQmkRzS6Vsx/EtjoAj5v
+         1qJQbO4Cfct/XSzjhcSTqdZmquKfjl1XqJ21MJqIltEAtTR+FR4+JPVF71eYE6KFpt6D
+         ZW9KFdEtzPcespshDGnSzF4lOm88DJCUaQz3MVtwNjYx2lLJLejaF3AW2/+QbE9mlPhr
+         NsDY3a2JuQYYWb+PNl3vwbhRbKYN2LQcc8k8ouKG/rwR5r+bNUawfT/8hsEWyP+q7jMw
+         s8dQ==
+X-Gm-Message-State: AOAM533P7olAdLmD1HX/HEK7CFQrDytpkvvmXZen48hrIqekCBfpCTRj
+	ya8dBN0OhZIJ07ZJ5RAOaZFmtjqvqw1xoQ==
 X-Google-Smtp-Source: 
- ABdhPJyACK/VnLfeWnzxx7pB45B7lyWncqyt6ZcmyvrVvXysIyn8IKgtO7w+F+lx+O2wTD8h7C4swA==
-X-Received: by 2002:a62:7506:0:b0:44c:efe8:4167 with SMTP id
- q6-20020a627506000000b0044cefe84167mr24996421pfc.59.1634506347799;
-        Sun, 17 Oct 2021 14:32:27 -0700 (PDT)
+ ABdhPJzIfwxv+jtUZfqy1SQVwzcZnUFkTeqHtto7+Pqxc3KRi8gPJw1kMLeXZ8/oVygfrlm0fiTNTA==
+X-Received: by 2002:a05:6a00:1255:b0:44c:dd49:b39a with SMTP id
+ u21-20020a056a00125500b0044cdd49b39amr25495117pfi.66.1634512345712;
+        Sun, 17 Oct 2021 16:12:25 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::3fd8])
         by smtp.gmail.com with ESMTPSA id
- t11sm11421325pfj.173.2021.10.17.14.32.27
+ mi8sm11651857pjb.20.2021.10.17.16.12.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 Oct 2021 14:32:27 -0700 (PDT)
+        Sun, 17 Oct 2021 16:12:25 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH v2] nodejs: Upgrade to 14.18.1
-Date: Sun, 17 Oct 2021 14:32:24 -0700
-Message-Id: <20211017213224.2127995-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] iwd: Fix  build with musl
+Date: Sun, 17 Oct 2021 16:12:22 -0700
+Message-Id: <20211017231222.2249477-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.33.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 17 Oct 2021 21:32:32 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 17 Oct 2021 23:12:27 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93411
-
-License-Update: Reflect new location of gtest sources
-                remove node-inspect from license
-		update Acorn to v8.4.1
-
-Use internal openssl until nodejs is fixed to work with openssl3
+ https://lists.openembedded.org/g/openembedded-devel/message/93414
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-v2: Fix openssl and c-ares errors
+ ...6_addr-instead-of-__in6_u.__u6_addr8.patch | 38 +++++++++++++++++++
+ meta-oe/recipes-connectivity/iwd/iwd_1.18.bb  |  1 +
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/iwd/iwd/0001-netconfig-Use-s6_addr-instead-of-__in6_u.__u6_addr8.patch
 
- .../{nodejs_14.17.1.bb => nodejs_14.18.1.bb}       | 14 +++++---------
- 1 file changed, 5 insertions(+), 9 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_14.17.1.bb => nodejs_14.18.1.bb} (94%)
-
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_14.17.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_14.18.1.bb
-similarity index 94%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_14.17.1.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_14.18.1.bb
-index d468f2518e..76ff980997 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_14.17.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_14.18.1.bb
-@@ -1,10 +1,11 @@
- DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
- HOMEPAGE = "http://nodejs.org"
- LICENSE = "MIT & BSD & Artistic-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=a1016f9b7979cfe6fc3466a9bba60b1e"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=6768abdfc4dae4fde59d6b4df96930f3"
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd/0001-netconfig-Use-s6_addr-instead-of-__in6_u.__u6_addr8.patch b/meta-oe/recipes-connectivity/iwd/iwd/0001-netconfig-Use-s6_addr-instead-of-__in6_u.__u6_addr8.patch
+new file mode 100644
+index 0000000000..a9f2393532
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/iwd/iwd/0001-netconfig-Use-s6_addr-instead-of-__in6_u.__u6_addr8.patch
+@@ -0,0 +1,38 @@
++From 36c74f974eba6f276ed4dd04c2077e6f23ebec37 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sun, 17 Oct 2021 16:09:03 -0700
++Subject: [PATCH] netconfig: Use s6_addr instead of __in6_u.__u6_addr8
++
++Building fails with:
++
++../iwd-1.18/src/netconfig.c: In function 'netconfig_ipv6_to_string':
++../iwd-1.18/src/netconfig.c:188:25: error: 'struct in6_addr' has no member named '__in6_u'; did you mean '__in6_union'?
++  188 |         memcpy(in6_addr.__in6_u.__u6_addr8, addr, 16);
++      |                         ^~~~~~~
++      |                         __in6_union
++
++Can be fixed by changing &this_ip.__in6_u.__u6_addr8[0] with &this_ip.s6_addr[0].
++For references: in6_addr is declared in /usr/include/linux/in6.h
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/netconfig.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/netconfig.c b/src/netconfig.c
++index c748630..ab51c3d 100644
++--- a/src/netconfig.c
+++++ b/src/netconfig.c
++@@ -185,7 +185,7 @@ static inline char *netconfig_ipv6_to_string(const uint8_t *addr)
++ 	struct in6_addr in6_addr;
++ 	char *addr_str = l_malloc(INET6_ADDRSTRLEN);
++ 
++-	memcpy(in6_addr.__in6_u.__u6_addr8, addr, 16);
+++	memcpy(in6_addr.s6_addr, addr, 16);
++ 
++ 	if (L_WARN_ON(unlikely(!inet_ntop(AF_INET6, &in6_addr, addr_str,
++ 						INET6_ADDRSTRLEN)))) {
++-- 
++2.33.1
++
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.18.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.18.bb
+index 8d58a7a84b..4136de84fa 100644
+--- a/meta-oe/recipes-connectivity/iwd/iwd_1.18.bb
++++ b/meta-oe/recipes-connectivity/iwd/iwd_1.18.bb
+@@ -7,6 +7,7 @@ DEPENDS = "ell"
  
- DEPENDS = "openssl"
- DEPENDS:append:class-target = " qemu-native"
-+DEPENDS:append:class-native = " c-ares-native"
+ SRC_URI = "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar.xz \
+            file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-for-e.patch \
++           file://0001-netconfig-Use-s6_addr-instead-of-__in6_u.__u6_addr8.patch \
+           "
+ SRC_URI[sha256sum] = "0225ab81579f027e0fcbf255517f432fcf355d14f3645c36813c71a441dfab55"
  
- inherit pkgconfig python3native qemu
- 
-@@ -33,7 +34,7 @@ SRC_URI:append:toolchain-clang:x86 = " \
- SRC_URI:append:toolchain-clang:powerpc64le = " \
-            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
-            "
--SRC_URI[sha256sum] = "ddf1d2d56ddf35ecd98c5ea5ddcd690b245899f289559b4330c921255f5a247f"
-+SRC_URI[sha256sum] = "3fa1d71adddfab2f5e3e41874b4eddbdf92b65cade4a43922fb1e437afcf89ed"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
-@@ -58,7 +59,7 @@ ARCHFLAGS:arm = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '-
- GYP_DEFINES:append:mipsel = " mips_arch_variant='r1' "
- ARCHFLAGS ?= ""
- 
--PACKAGECONFIG ??= "ares brotli icu zlib"
-+PACKAGECONFIG ??= "brotli icu zlib"
- 
- PACKAGECONFIG[ares] = "--shared-cares,,c-ares"
- PACKAGECONFIG[brotli] = "--shared-brotli,,brotli"
-@@ -87,7 +88,6 @@ python do_unpack() {
- 
-     bb.build.exec_func('base_do_unpack', d)
- 
--    shutil.rmtree(d.getVar('S') + '/deps/openssl', True)
-     if 'ares' in d.getVar('PACKAGECONFIG'):
-         shutil.rmtree(d.getVar('S') + '/deps/cares', True)
-     if 'brotli' in d.getVar('PACKAGECONFIG'):
-@@ -129,10 +129,6 @@ python do_create_v8_qemu_wrapper () {
- do_create_v8_qemu_wrapper[dirs] = "${B}"
- addtask create_v8_qemu_wrapper after do_configure before do_compile
- 
--# Keep until openssl 3.x compatibility is fixed
--CXXFLAGS += "-fpermissive"
--BUILD_CXXFLAGS += "-fpermissive"
--
- LDFLAGS:append:x86 = " -latomic"
- 
- # Node is way too cool to use proper autotools, so we install two wrappers to forcefully inject proper arch cflags to workaround gypi
-@@ -140,7 +136,7 @@ do_configure () {
-     export LD="${CXX}"
-     GYP_DEFINES="${GYP_DEFINES}" export GYP_DEFINES
-     # $TARGET_ARCH settings don't match --dest-cpu settings
--    python3 configure.py --prefix=${prefix} --cross-compiling --shared-openssl \
-+    python3 configure.py --prefix=${prefix} --cross-compiling \
-                --without-dtrace \
-                --without-etw \
-                --dest-cpu="${@map_nodejs_arch(d.getVar('TARGET_ARCH'), d)}" \
 -- 
 2.33.1
 
