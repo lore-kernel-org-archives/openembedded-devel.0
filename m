@@ -1,112 +1,102 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 859B8C433EF
-	for <webhook@archiver.kernel.org>; Mon, 18 Oct 2021 15:18:06 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
- [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web11.37810.1634570285416405842
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00BF6C433EF
+	for <webhook@archiver.kernel.org>; Mon, 18 Oct 2021 15:46:58 +0000 (UTC)
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com
+ [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.web10.38210.1634572017157926520
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Oct 2021 08:18:05 -0700
+ Mon, 18 Oct 2021 08:46:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=p111xx5u;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: ticotimo@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id om14so12439480pjb.5
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ZM9DbelN;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id b14so1750783plg.2
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Oct 2021 08:18:05 -0700 (PDT)
+ Mon, 18 Oct 2021 08:46:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=TEka3NOX9iNJSpuE3GI3mZ9j+aiKjLoMobT1PYSN8WE=;
-        b=p111xx5uH9TGE+tEOYXSoKkHyHw8b/LYo06mQkUyeGGP9u3u92Cz4pk9u1f2E4mSaf
-         duZFJJxlMneOFCuQa9oZq6uyjjBqItSUY6XkFJX8yjfCHlIn5RYI5c2ugwkLck4yZJf5
-         GqCrv6IJAJE1+Op27iDGZhry2loRlcQM+Q97NFYBS4JN/rbkJJq6NvHXSaV/T1haBYn3
-         n/hFRSe4yCfrYLpP7iGy/KxdujEZTlwhl1J1fXjKZXzvIVfNIq/Lp2a2PjsulAv5O8Pc
-         YjZXS/VvEvYeZGbsybtK88+jcs+FyMXvvSXmhyhXMjJgH/2xaqp0uEBAI6DO4pvSwwbZ
-         g4yA==
+        bh=nM3m4rvyIalVepbCrjBTp8AdOOl1XbOZeNKm1KCkbJo=;
+        b=ZM9DbelNyrhAviv1tMH4Iv56IadTXLYrgdceb5qHnOJTPQIKX2MADolF7LanAV0iyW
+         RqEq9mqNEjl0LWdJvo/ODuHIYnjJJJufpgo9vzMXf0iqmSJrgIGa7jxx5CxhgVizQfN5
+         5+kbZGfRnqFGWBRM48ZZ+GUuGFGwc210sGvJ4NPX/icYqlIcR3qWTb4dH++4TqYaDPdM
+         NNof8eBdR5rHlm0P2boIAi15v+GJrqjn+rs3bneInbn1jasfGpnzKF+Ql9OabtIspSvp
+         OpszxOCyoZPHqj7GWloWFlHVRLOLYlN80v+kosNNLXnpfhcBlxODt44Wll9flMxPGDfm
+         jxJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=TEka3NOX9iNJSpuE3GI3mZ9j+aiKjLoMobT1PYSN8WE=;
-        b=sHaZu4LVBg5Jq7VGaEnnoLlSrQsL1+i3ZNql6p2iDYAotxQsjzO9F6PaQjveigpGve
-         0a9RicnKpUSHoKS3jYpjcgpEuLeKgM/UwdVEyc2yNyIr9A1g/w7jQkPHk5GHNgfYOv8c
-         zUiavtzCpYhNPkIfZolnhnEr8C0pbGSACFcb/tGEvrmn+DT4U4XBAIrbwlX3+bwCC47y
-         99ejW/cOlJwezqB1ddxjWn0mXcyVDRQY+YX9JvJsfLVfucxunz7idK0a2mJr7cpL23Fw
-         2Z//CcYXohc+0R+L+Kbph5nCav/h4QKjCtcC8CigfYshnhs1ByxPg3dicOLS9hhU1C94
-         79tw==
-X-Gm-Message-State: AOAM530bhx/RivNegzPzj17zB3+0l4xZK6UrkFyV5+fAMPAplKs5Ovbs
-	8i8G5Q7CwcwH/v508srEWB2hnOli1kM=
+        bh=nM3m4rvyIalVepbCrjBTp8AdOOl1XbOZeNKm1KCkbJo=;
+        b=FuPfj4+EuDeP8M/45RLnaSbJ+0jgm0oJgRkUBkA6XWw3zkUFQ9N7D0THi7CkoaUGtf
+         D4o/MuhIqmMqutpatYYfsmSqZuJwPmFigUEQK0TEp7PXz76yxmCQ54wZbOiApULK7Uey
+         QIjcKJR16iiQQ/0nfvHTAvhAxVi9TUlKL3vdl5z09lSx57SvrZ6SKm5FkA7VckYI87eo
+         yi0e8QKa6HoY8W+ouGCvci2vHzBtDNa9Ea8zO+d1ILi65Dmx6qPEKoDe/T5EdPwiXa4t
+         TDU/iQtFTBranqnsU9ayWtCfIQZ2gFyb/ozhhbd4sYjYxFuy9wGto3tSwpOxEad2lZ6v
+         C2iQ==
+X-Gm-Message-State: AOAM533zTQzvN+BRc/GS0XkBjuJyfZR5cxxGbXv7sNDxwl+ek87OXvkE
+	sl0EGE/guHSnufzK8b42jjFL5Ryz3KLaUQ==
 X-Google-Smtp-Source: 
- ABdhPJx3GvHSCjaAwyyZsPxf9FjJkc8Vnlf/dAzVMbcVEU6IzjSFXD4MIMZViwhASZJnxdCKBKrKlg==
-X-Received: by 2002:a17:90b:4c4c:: with SMTP id
- np12mr33909619pjb.205.1634570284566;
-        Mon, 18 Oct 2021 08:18:04 -0700 (PDT)
-Received: from nereus.local ([2601:1c0:6000:1830:ffc7:e2cb:a2b6:d240])
+ ABdhPJxITDqYl181cE+jpb6kBa08mSq3U32IBTOBaCw52TzrepRpu/TKxKvLUTda46cmYEM/sbdcYA==
+X-Received: by 2002:a17:90a:8a0a:: with SMTP id
+ w10mr26209713pjn.60.1634572016250;
+        Mon, 18 Oct 2021 08:46:56 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::3fd8])
         by smtp.gmail.com with ESMTPSA id
- z1sm6211257pfh.150.2021.10.18.08.18.04
+ j126sm13936208pfd.113.2021.10.18.08.46.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 Oct 2021 08:18:04 -0700 (PDT)
-From: Tim Orling <ticotimo@gmail.com>
+        Mon, 18 Oct 2021 08:46:55 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Tim Orling <ticotimo@gmail.com>
-Subject: [meta-gnome][PATCH] libgweather: upgrade 3.36.2 -> 40.0
-Date: Mon, 18 Oct 2021 08:18:01 -0700
-Message-Id: <20211018151801.2314154-1-ticotimo@gmail.com>
-X-Mailer: git-send-email 2.30.2
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] xorgxrdp: Add to exclusion list for now
+Date: Mon, 18 Oct 2021 08:46:53 -0700
+Message-Id: <20211018154653.1503521-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.33.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Oct 2021 15:18:06 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Oct 2021 15:46:57 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93427
+ https://lists.openembedded.org/g/openembedded-devel/message/93428
 
-Upstream changed version schemes.
+it needs xrdp which needs to be ported to openssl 3+
 
-Sort DEPENDS, add python3-pygobject-native
-
-For changes, see:
-https://gitlab.gnome.org/GNOME/libgweather/-/blob/main/NEWS
-
-Signed-off-by: Tim Orling <ticotimo@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../{libgweather_3.36.2.bb => libgweather_40.0.bb}          | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-gnome/recipes-gnome/libgweather/{libgweather_3.36.2.bb => libgweather_40.0.bb} (79%)
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 1 -
+ meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb        | 2 ++
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/libgweather/libgweather_3.36.2.bb b/meta-gnome/recipes-gnome/libgweather/libgweather_40.0.bb
-similarity index 79%
-rename from meta-gnome/recipes-gnome/libgweather/libgweather_3.36.2.bb
-rename to meta-gnome/recipes-gnome/libgweather/libgweather_40.0.bb
-index 69fe9552f0..1d9daac1f0 100644
---- a/meta-gnome/recipes-gnome/libgweather/libgweather_3.36.2.bb
-+++ b/meta-gnome/recipes-gnome/libgweather/libgweather_40.0.bb
-@@ -7,8 +7,7 @@ GNOMEBASEBUILDCLASS = "meson"
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 188677f5f5..3bc1e459f7 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -908,7 +908,6 @@ RDEPENDS:packagegroup-meta-oe-support ="\
+     nano \
+     xdg-user-dirs \
+     xmlsec1 \
+-    ${@bb.utils.contains("DISTRO_FEATURES", "x11 pam", "xorgxrdp", "", d)} \
+     usb-modeswitch-data \
+     usb-modeswitch \
+     liburing \
+diff --git a/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
+index fd22defb24..25dbe1379c 100644
+--- a/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
++++ b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
+@@ -21,3 +21,5 @@ S = "${WORKDIR}/git"
+ FILES:${PN} += "${libdir}/xorg/modules/*"
  
- inherit gnomebase gsettings gobject-introspection gettext gtk-doc vala features_check upstream-version-is-even
- 
--SRC_URI[archive.md5sum] = "ff399cf89e97a3e574ae05db5617b96b"
--SRC_URI[archive.sha256sum] = "ee1201a8fc25c14e940d3b26db49a34947c8aebf67dee01ee67fbcb06ecb37a0"
-+SRC_URI[archive.sha256sum] = "ca4e8f2a4baaa9fc6d75d8856adb57056ef1cd6e55c775ba878ae141b6276ee6"
- 
- # gobject-introspection is mandatory and cannot be configured
- REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
-@@ -17,8 +16,9 @@ UNKNOWN_CONFIGURE_WHITELIST:append = " introspection"
- GTKDOC_MESON_OPTION = "gtk_doc"
- 
- DEPENDS = " \
-+    geocode-glib \
-     gtk+3 \
-     json-glib \
-     libsoup-2.4 \
--    geocode-glib \
-+    python3-pygobject-native \
- "
+ INSANE_SKIP:${PN} += "xorg-driver-abi"
++
++PNBLACKLIST[xorgxrdp] ?= "Depends on xrdp which needs porting to openssl 3.x"
 -- 
-2.30.2
+2.33.1
 
 
