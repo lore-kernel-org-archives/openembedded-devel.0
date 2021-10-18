@@ -1,172 +1,360 @@
-Return-Path: <trevor.gamblin@windriver.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FA28C433F5
-	for <webhook@archiver.kernel.org>; Mon, 18 Oct 2021 16:35:34 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com
- [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.38914.1634574933079873866
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A054C433F5
+	for <webhook@archiver.kernel.org>; Mon, 18 Oct 2021 16:52:04 +0000 (UTC)
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com
+ [209.85.210.181])
+ by mx.groups.io with SMTP id smtpd.web09.39149.1634575923414715187
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Oct 2021 09:35:33 -0700
+ Mon, 18 Oct 2021 09:52:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=dS0LXX4T;
- spf=pass (domain: windriver.com, ip: 205.220.178.238,
- mailfrom: prvs=592552de1e=trevor.gamblin@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 19ICl1Jf006036
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Oct 2021 16:35:32 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
- h=from : to :
- subject : date : message-id : content-transfer-encoding : content-type :
- mime-version; s=PPS06212021;
- bh=jkaaG3yl+RdpmdBBugNiHtykcWobZ0Ub7VXePLQSjb4=;
- b=dS0LXX4Tun+ZFHTgFwF0oeql1BL97GlCODQmeyhHsoAx6cb6hNDnRMu5c0APklE/BE1b
- B1qxMI6jZQEC4UUW632vGWOy6z1W6xoSN/KPDf1L2SIu0eACZ3ox7neXUiyooS3YFtlS
- nNoirG04lX2fkcy3Gfn/VYdjuS8U9fBQMC5JXcBrccgReCJq+9y63O7BIYG89P4TpTCA
- PZQSrEM4ebgKcig3G9wrN0+njC9NVmmSd+5kTv1nILsz78xHdVe/JbZFQADobk5MQzvc
- fkn+JnEgWvlty+mGvtIjTrBYfZ1RjJZx2uYCAUi7LPyzOMJv1i6L7u2dDsdZNyr7/+fb EQ==
-Received: from nam12-dm6-obe.outbound.protection.outlook.com
- (mail-dm6nam12lp2170.outbound.protection.outlook.com [104.47.59.170])
-	by mx0a-0064b401.pphosted.com with ESMTP id 3bs6hhgab0-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Oct 2021 16:35:31 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Yy4ym1XWS60x2Fz0WtaeT17zV9+dgsE/VcLv2MTGEM6ZDgyl0Ukhb+0GJeuWXGiUEjepSM+6CTCP+ZlLQJDnTgNklJGuOdB+XniEyoH/qoWBztxHeRacvgWMYa0nnSwIS23kgKYC7XIPu3qv/MaEn6JlSzuZV/22Naqwt5sCGtZKE31J2xaqZklaZThi6ujZKfNHF0oZbrHaUGNgFF3aB0dQPqAivvTvI0WP4O7O/zQexhYtyoTnaBnx2TR9SZd5K8oXEF/Qj13CqrLBhaSrvlYCGBkUnrrCN3ba6Smk19VkLU8DnwQAaWoKHyyiLPp3VZpkjPTs32+RCXo0FuP3vw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jkaaG3yl+RdpmdBBugNiHtykcWobZ0Ub7VXePLQSjb4=;
- b=XnOOS1J60ZA2N+haIO0Y95v6xBze16rGhchomn9SQSs9j5zuzi20KhzXh6EK0XuxJ4j3o8I8jPhSLmnu2waBMbwSgvs0OqeAxMg5oH1eU0mCBs/ZGwi/zU2/TE+4o40v2xgLvEQsqn32aw+NzQ2oxJgDGs8vmsScOfc1vic0ecPcSiF+6fdF1iuaHh/GCKTDI2j0Zl5ZfWZJPGhK7+mGpPb6KIO42jyjP/TT9WlPaHo2VOOokTkgn/AZ6pT2JuGf63pEzzXyRybjls3px9zWd4tDJ1uiFedmNpFjbMifpkCUoixf5lUbGQIHN/QF8rhcVdK0GchV0UcEFGful6J6Eg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
- header.d=none;lists.openembedded.org; dmarc=none action=none
- header.from=windriver.com;
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by SJ0PR11MB5868.namprd11.prod.outlook.com (2603:10b6:a03:42b::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4608.18; Mon, 18 Oct
- 2021 16:35:30 +0000
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::ccb2:28ab:f000:8440]) by BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::ccb2:28ab:f000:8440%3]) with mapi id 15.20.4608.018; Mon, 18 Oct 2021
- 16:35:30 +0000
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=bvbyc29Q;
+ spf=pass (domain: gmail.com, ip: 209.85.210.181,
+ mailfrom: ticotimo@gmail.com)
+Received: by mail-pf1-f181.google.com with SMTP id k26so15180794pfi.5
+        for <openembedded-devel@lists.openembedded.org>;
+ Mon, 18 Oct 2021 09:52:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=XdGSnN+V9VExkbvePKkNHPobR7cjR29jTighvrgj0BQ=;
+        b=bvbyc29Q6mPhlJ+v4CmnZzzf8TGHb9eK1D/RBeVwitQnexQw1jYd9ifN7Ka8UofKu5
+         JbnLoaBwo6DRdIYdLfC3K/NLc/qRXIzfQqb3PKPq+8LLuesdJON+xHo6/FjcBbkFlrpa
+         fh5xPNsSJ/6Uw7ybLmHpHKIqEj3oZRrBfgKSGJkCLaa4CnIjE43QtIRjEXob9OKmeTY1
+         I/jAd4RQxOG91bAWjnYoMTT3CtvB+rJDcDlUnDU910T7E3jadiEpPyhzfwacMyweYaCG
+         cV7WA4ybvNpQwUk2WKwnaBG6/hogK80Vz2bgnWApLHS+/2AFaTHBbvnlbdjCewJU0+r8
+         /F1Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=XdGSnN+V9VExkbvePKkNHPobR7cjR29jTighvrgj0BQ=;
+        b=Ds3wWo/CnRUrC6PWzU+a3kM6Ws+steauWOCDKjNY9XtZ8seSxXDoL56dS+UieoKAIu
+         XvitY0RZ4asde6YXjYl06wEuy8X/RCs5EyUW29hR1Vd/FqObJjQpQ2aUeMWSe5tZEOEr
+         JdGfMrIs2JHEtnKG7dKCMZ+6oxIuT2uTJq4DUNSslKalM7JeF5nKdjZ1FAtwSSr+6xbS
+         GWFsyJsJnzFFsr+bQ6nHJ/1MPzImIC8LbAHgn5zCVg3BkzJYwe1pFlXCeIOw5WNpuj0A
+         K6R8mm8/ZZGWZbXIvwAfZt2HBR+mQmVapsRyNT47lNoBDZRPkG0GE9DHIzEsouHQ4fVH
+         oXFw==
+X-Gm-Message-State: AOAM531nkj7VI0UjZRJBZ5i3DyLaLPnQ3WQkOZGS4+OyPP1qXv08klM3
+	FCPJegLjCWiQUsBENs8c74KiFkEC1NQ=
+X-Google-Smtp-Source: 
+ ABdhPJwOG2WihUuvkLgjsmyLY6/A2aX6zhBDosDc7ECngcx8TbIM1kPRXOGRODFL8m+LS3sFS+Jscw==
+X-Received: by 2002:a63:7456:: with SMTP id
+ e22mr24738998pgn.324.1634575922489;
+        Mon, 18 Oct 2021 09:52:02 -0700 (PDT)
+Received: from nereus.local ([2601:1c0:6000:1830:ffc7:e2cb:a2b6:d240])
+        by smtp.gmail.com with ESMTPSA id
+ c140sm13588419pfc.31.2021.10.18.09.52.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 18 Oct 2021 09:52:02 -0700 (PDT)
+From: Tim Orling <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH] python3-pyinotify: Add fcntl,
- logging to RDEPENDS
-Date: Mon, 18 Oct 2021 12:35:12 -0400
-Message-Id: <20211018163512.134466-1-trevor.gamblin@windriver.com>
-X-Mailer: git-send-email 2.31.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: YTXPR0101CA0017.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b00::30) To BY5PR11MB3909.namprd11.prod.outlook.com
- (2603:10b6:a03:191::13)
+Cc: Tim Orling <ticotimo@gmail.com>
+Subject: [meta-gnome][PATCH] gnome-calendar: upgrade 3.38.1 -> 41.0
+Date: Mon, 18 Oct 2021 09:51:55 -0700
+Message-Id: <20211018165155.2378572-1-ticotimo@gmail.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Received: from yow-tgamblin-lx3.corp.ad.wrs.com
- (2607:fea8:c29d:d7c0:fa88:8bc5:c0d2:27cc) by
- YTXPR0101CA0017.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b00::30) with Microsoft
- SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4608.15 via Frontend
- Transport; Mon, 18 Oct 2021 16:35:29 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: fb381685-ac10-4ccf-9588-08d992554c40
-X-MS-TrafficTypeDiagnostic: SJ0PR11MB5868:
-X-Microsoft-Antispam-PRVS: 
-	<SJ0PR11MB5868E7776F4725508845B7EC9FBC9@SJ0PR11MB5868.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1824;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	8Pym296aDJdOJHYJ3211eG2tWuGDYJSVi951S4zCnPG5ktMynXuNDLjUQn/+u8LOutzwnOJcmLWpsqmY0K/zuYJgbfKAegAr7nw81b1ZOQ7htDHOonsa7pGBYxHFNYsJCH8obhTyN7lgiUq6t4GMosKN7DorOUID7ztZ09ihQyW0zWhRGx9RvI/k2X3SDcqYfsJA05QvljI2irld/rhjFHwhRzj4wLH6fXCALJQMm4Ip28YHfRLgtvPHfmJY3gA1bo7X+eXwERkgN/7PIcYXVrDGi7gwlVr0KKzr/17RyH55oa0NVyLHRB9hl3E4dPSSrQ6xW7NDiMKSbAHYmkZH7A0vzgD/pHMQGL4BAB2sG2bK6sgSdsX9rI09wGJ82h7a+I7PzY03vAogqmd4Q+qa69i3TyyiOkha40VmQu5QsKZaJTMGkuqr1hZEjMki0TUgCkvQ0MBKZw1UbC8S0zLmxKrmENfVe33GS3xybaVku6jCBZ0pffzweDrKpPcGpt3XAqOtoYIrO+29DCsizxtGQFeHAf5DLONNqRqVaabEq1aFVO5pvKOvGnjIg9KI2lSDMu01E3hHRpAkp46GUVLDVQ0X1YNAKb9FUvs8rE+QZVUaW74S3lm7Gg1pbLQNxtSsedEzB6GNYbg2yorpKmmNlA==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(4744005)(66556008)(6506007)(1076003)(36756003)(6486002)(44832011)(52116002)(2906002)(2616005)(86362001)(6512007)(6916009)(508600001)(38100700002)(8676002)(6666004)(8936002)(186003)(66476007)(316002)(5660300002)(66946007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?8v1GVP1egKxnZJJqi2A75r2vEKmJkjRTwY92jg5WFkDcGzIG8Do98vixNws6?=
- =?us-ascii?Q?6hHlpnAA6PRlqUBA8bVBpEDrql21UjW+DBCrE8Bnu511/aPVS49a3hK9vA31?=
- =?us-ascii?Q?fJm0wnUR5R7AAkbM9964Shi9KQa6euTRPyg/YdikoLZkoUxQVfECWkfo+A+1?=
- =?us-ascii?Q?sftgdIaO5sQix23u1uI56vevGFkzfb214qFdHofFN2HAHQFWdqdVEEaACoAK?=
- =?us-ascii?Q?aD8ekWogBPLz8WEZXCCEKyLYLnnX1/nrt/dgluyHb6EEhAI65EM83dCCWAjH?=
- =?us-ascii?Q?sGnLDUghFMcs2YCU3ziwgDxMxBKPVsOrRqZcg+yH23XSaDCYYt6uAwGbmacW?=
- =?us-ascii?Q?2BwEDk9LeUjZ5ToIZXU85SEPwFJXeIMiF6yGTOhMtQa2/dLveIQ9A2YY27/+?=
- =?us-ascii?Q?+l4ApZTzpURTY+dd99FB0qQPu9PCDTKRFCyPTnnvPyEl9ARce73ec3+gE+cq?=
- =?us-ascii?Q?rP+xnCFty4pwUWtcTHOgi0Z5NxAoWvuVgLfRgUImGD8Q90tfhtCQ0aVvPPPV?=
- =?us-ascii?Q?wUtToKZO6jz6cTU/82wnM30A8Ify4pOPfvAP5LrHXy9s4vRCbOvAa2iNkYCb?=
- =?us-ascii?Q?xPm6fIlFGIQoXYI22s9aPTsWPShcRgEQxKSLZpy2DkW8XjlwtqCqnDnT3j5x?=
- =?us-ascii?Q?x35HXbjcSBLnvRZ4+5gfxDb+hrQK7ji2dmQcY4ghYPJi+jm7KxOq0ji0AMNr?=
- =?us-ascii?Q?kPlVtrBg8/J0bJPtl7ZaJOwa+9VzcRJG/MQ8+pXE3SXJV5yLcsdbsS5RQOBx?=
- =?us-ascii?Q?b3sNcpE5uTMqGZstqIpC7WmU9+QTKqtm1Bfu/pVTxgwfzuB/w+eyxMe3xVMd?=
- =?us-ascii?Q?2p4zawaBiYIjX5ypcq4oRm1JuHgEW2WDDo9qmMeQsZ8yAtBHdAwc6g4a2eSZ?=
- =?us-ascii?Q?caj/d/BQMYYtUX92qyln1SGCaxurZ9f/7laxxxRvV859KgydMSQcUdkN5QNI?=
- =?us-ascii?Q?KoCOCC/+vU2qOENoBZmsPex/7bqLc6/M4Tt7tYOfHuEiExZOXJMe9F0UhFLS?=
- =?us-ascii?Q?KGu3M9wfu/ylP2mRCxURLpyOcyXZj3reD12nDN/WzukUFYG1CpxEy47ntrMw?=
- =?us-ascii?Q?3Dj7hz0LNhHqqlML2TK2B+TFiRK+30WVcZMFtdz4ekwJn0yQQZEQuMf/ftAV?=
- =?us-ascii?Q?zxvUqJru3rSRPuYcwwl5PYpjuq/RwYRz8FxnZ/lEvQ75FlIzhF2Gn3KKZD37?=
- =?us-ascii?Q?ITmfRNJs5a8MBoCIu2T5WhZoIRsX224T3EfjrR394xwIMENdkIhmivNdHpq8?=
- =?us-ascii?Q?aP8ZNrGff///khOsOzR3wCMRR9z+tzHZB4yjfMOmt/GgXhanD1VrBZqGNVOo?=
- =?us-ascii?Q?WKp+ZzeDbpa2/v/8wz7tldm9fGbqg4coUvL81rw+M21oYt4GnuEgKwvPxtJR?=
- =?us-ascii?Q?terdDpmnRoSXXCSpiI2rnML0HgzH?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- fb381685-ac10-4ccf-9588-08d992554c40
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Oct 2021 16:35:30.0921
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 
- qNgQcwIo5dmZmfeVgXgFCfbYIOe8UzmSXvoyffVs5ubQELH2KTioP/A0B/ESYkLn6LMnbW5sLqBzcO591LcjQV35qL3sAtp1Xj8/3ZNURXQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB5868
-X-Proofpoint-ORIG-GUID: bMlM3WNhv8TZ5WTyU-9ZdlYFxktkP06A
-X-Proofpoint-GUID: bMlM3WNhv8TZ5WTyU-9ZdlYFxktkP06A
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.0.607.475
- definitions=2021-10-18_07,2021-10-18_01,2020-04-07_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 spamscore=0
- clxscore=1015 impostorscore=0 mlxlogscore=999 adultscore=0
- lowpriorityscore=0 phishscore=0 priorityscore=1501 bulkscore=0
- malwarescore=0 mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2109230001 definitions=main-2110180096
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Oct 2021 16:35:34 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Oct 2021 16:52:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93432
+ https://lists.openembedded.org/g/openembedded-devel/message/93434
 
-"import pyinotify" throws an error for these modules if they are not
-included.
+Upstream changed version scheme.
 
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+Drop libhandy patch merged upstream.
+
+inherit  mime-xdg, fixes:
+QA Issue: package contains desktop file with key 'MimeType' but does not inhert mime-xdg
+
+For changes, see:
+https://download.gnome.org/sources/gnome-calendar/41/gnome-calendar-41.0.news
+
+Signed-off-by: Tim Orling <ticotimo@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-pyinotify_0.9.6.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ ...61b6ce8f0f8053e1609decbdbdc164ec8448.patch | 242 ------------------
+ ...endar_3.38.1.bb => gnome-calendar_41.0.bb} |   5 +-
+ 2 files changed, 2 insertions(+), 245 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/gnome-calendar/files/8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch
+ rename meta-gnome/recipes-gnome/gnome-calendar/{gnome-calendar_3.38.1.bb => gnome-calendar_41.0.bb} (74%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyinotify_0.9.6.bb b/meta-python/recipes-devtools/python/python3-pyinotify_0.9.6.bb
-index 8c6550a2b..8dd5e1580 100644
---- a/meta-python/recipes-devtools/python/python3-pyinotify_0.9.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyinotify_0.9.6.bb
-@@ -4,7 +4,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ab173cade7965b411528464589a08382"
+diff --git a/meta-gnome/recipes-gnome/gnome-calendar/files/8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch b/meta-gnome/recipes-gnome/gnome-calendar/files/8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch
+deleted file mode 100644
+index eabf61aa5f..0000000000
+--- a/meta-gnome/recipes-gnome/gnome-calendar/files/8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch
++++ /dev/null
+@@ -1,242 +0,0 @@
+-From 8be361b6ce8f0f8053e1609decbdbdc164ec8448 Mon Sep 17 00:00:00 2001
+-From: Evangelos Ribeiro Tzaras <devrtz@fortysixandtwo.eu>
+-Date: Sat, 5 Sep 2020 02:06:34 +0200
+-Subject: [PATCH] project: Switch to libhandy-1
+-
+-This commit updates the dependencies for libhandy to the tagged 1.0
+-release and changes the code to accomodate the changes from
+-libhandy-0 to libhandy-1.
+-
+-Notable changes:
+-edit-dialog: HdyDialog has been dropped in [1]
+-alarm-row: action child type in HdyActionRow has been removed.
+-
+-[1] https://gitlab.gnome.org/GNOME/libhandy/-/merge_requests/434
+-Upstream-Status: Backport
+-Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
+----
+- build-aux/flatpak/org.gnome.Calendar.json |  4 ++--
+- meson.build                               |  2 +-
+- src/gui/gcal-alarm-row.c                  |  2 +-
+- src/gui/gcal-alarm-row.ui                 |  2 +-
+- src/gui/gcal-application.c                |  4 ++++
+- src/gui/gcal-edit-dialog.c                |  4 ++--
+- src/gui/gcal-edit-dialog.h                |  3 +--
+- src/gui/gcal-edit-dialog.ui               | 20 ++++++++++----------
+- 8 files changed, 22 insertions(+), 19 deletions(-)
+-
+-diff --git a/build-aux/flatpak/org.gnome.Calendar.json b/build-aux/flatpak/org.gnome.Calendar.json
+-index 18893ad6..0772ca8d 100644
+---- a/build-aux/flatpak/org.gnome.Calendar.json
+-+++ b/build-aux/flatpak/org.gnome.Calendar.json
+-@@ -174,8 +174,8 @@
+-             "sources" : [
+-                 {
+-                     "type" : "git",
+--                    "url" : "https://source.puri.sm/Librem5/libhandy.git",
+--                    "branch" : "libhandy-0-0"
+-+                    "url" : "https://gitlab.gnome.org/GNOME/libhandy.git",
+-+                    "tag" : "1.0.0"
+-                 }
+-             ]
+-         },
+-diff --git a/meson.build b/meson.build
+-index 2a546252..b81b95c9 100644
+---- a/meson.build
+-+++ b/meson.build
+-@@ -165,7 +165,7 @@ libedataserver_dep = dependency('libedataserver-1.2', version: '>= 3.17.1')
+- libecal_dep = dependency('libecal-2.0', version: '>= 3.33.2')
+- libsoup_dep = dependency('libsoup-2.4')
+- libdazzle_dep = dependency('libdazzle-1.0', version: '>= 3.33.1')
+--libhandy_dep = dependency('libhandy-0.0', version: '>= 0.0.9')
+-+libhandy_dep = dependency('libhandy-1', version: '>= 1.0.0')
+- glib_dep = dependency('glib-2.0', version: '>= 2.58.0')
+- gtk_dep = dependency('gtk+-3.0', version: '>= 3.22.20')
+- gio_dep = dependency('gio-2.0', version: '>= 2.58.0')
+-diff --git a/src/gui/gcal-alarm-row.c b/src/gui/gcal-alarm-row.c
+-index 1f95426c..1ada82f4 100644
+---- a/src/gui/gcal-alarm-row.c
+-+++ b/src/gui/gcal-alarm-row.c
+-@@ -214,7 +214,7 @@ setup_alarm (GcalAlarmRow *self)
+-   duration = e_cal_component_alarm_trigger_get_duration (trigger);
+-   formatted_duration = format_alarm_duration (duration);
+- 
+--  hdy_action_row_set_title (HDY_ACTION_ROW (self), formatted_duration);
+-+  hdy_preferences_row_set_title (HDY_PREFERENCES_ROW (self), formatted_duration);
+- 
+-   action = e_cal_component_alarm_get_action (self->alarm);
+-   gtk_toggle_button_set_active (self->volume_button, action == E_CAL_COMPONENT_ALARM_AUDIO);
+-diff --git a/src/gui/gcal-alarm-row.ui b/src/gui/gcal-alarm-row.ui
+-index 7d416c4c..bca8af50 100644
+---- a/src/gui/gcal-alarm-row.ui
+-+++ b/src/gui/gcal-alarm-row.ui
+-@@ -3,7 +3,7 @@
+-   <template class="GcalAlarmRow" parent="HdyActionRow">
+-     <property name="visible">True</property>
+-     <property name="can_focus">False</property>
+--    <child type="action">
+-+    <child>
+-       <object class="GtkBox">
+-         <property name="visible">True</property>
+-         <property name="can_focus">False</property>
+-diff --git a/src/gui/gcal-application.c b/src/gui/gcal-application.c
+-index b9d46cec..591b95c8 100644
+---- a/src/gui/gcal-application.c
+-+++ b/src/gui/gcal-application.c
+-@@ -34,6 +34,7 @@
+- #include <glib-object.h>
+- #include <gio/gio.h>
+- #include <glib/gi18n.h>
+-+#include <handy.h>
+- 
+- struct _GcalApplication
+- {
+-@@ -446,6 +447,9 @@ gcal_application_startup (GApplication *app)
+-   if ((g_application_get_flags (app) & G_APPLICATION_IS_SERVICE) != 0)
+-     g_application_set_inactivity_timeout (app, 3 * 60 * 1000);
+- 
+-+  /*  initialize libhandy */
+-+  hdy_init();
+-+
+-   GCAL_EXIT;
+- }
+- 
+-diff --git a/src/gui/gcal-edit-dialog.c b/src/gui/gcal-edit-dialog.c
+-index ae2b6714..5494a700 100644
+---- a/src/gui/gcal-edit-dialog.c
+-+++ b/src/gui/gcal-edit-dialog.c
+-@@ -47,7 +47,7 @@
+- 
+- struct _GcalEditDialog
+- {
+--  HdyDialog         parent;
+-+  GtkDialog         parent;
+- 
+-   gboolean          writable;
+- 
+-@@ -133,7 +133,7 @@ static void          on_location_entry_changed_cb                (GtkEntry
+- static void          on_add_alarm_button_clicked_cb              (GtkWidget          *button,
+-                                                                   GcalEditDialog     *self);
+- 
+--G_DEFINE_TYPE (GcalEditDialog, gcal_edit_dialog, HDY_TYPE_DIALOG)
+-+G_DEFINE_TYPE (GcalEditDialog, gcal_edit_dialog, GTK_TYPE_DIALOG)
+- 
+- enum
+- {
+-diff --git a/src/gui/gcal-edit-dialog.h b/src/gui/gcal-edit-dialog.h
+-index e4f44ec5..a557916b 100644
+---- a/src/gui/gcal-edit-dialog.h
+-+++ b/src/gui/gcal-edit-dialog.h
+-@@ -22,7 +22,6 @@
+- #include "gcal-event.h"
+- #include "gcal-manager.h"
+- 
+--#include <handy.h>
+- 
+- G_BEGIN_DECLS
+- 
+-@@ -32,7 +31,7 @@ G_BEGIN_DECLS
+- 
+- #define GCAL_TYPE_EDIT_DIALOG                (gcal_edit_dialog_get_type ())
+- 
+--G_DECLARE_FINAL_TYPE (GcalEditDialog, gcal_edit_dialog, GCAL, EDIT_DIALOG, HdyDialog);
+-+G_DECLARE_FINAL_TYPE (GcalEditDialog, gcal_edit_dialog, GCAL, EDIT_DIALOG, GtkDialog);
+- 
+- GtkWidget*           gcal_edit_dialog_new                     (void);
+- 
+-diff --git a/src/gui/gcal-edit-dialog.ui b/src/gui/gcal-edit-dialog.ui
+-index a36d8ae6..c28c22bb 100644
+---- a/src/gui/gcal-edit-dialog.ui
+-+++ b/src/gui/gcal-edit-dialog.ui
+-@@ -1,6 +1,6 @@
+- <?xml version="1.0" encoding="UTF-8"?>
+- <interface>
+--  <template class="GcalEditDialog" parent="HdyDialog">
+-+  <template class="GcalEditDialog" parent="GtkDialog">
+-     <property name="can_focus">False</property>
+-     <property name="resizable">False</property>
+-     <property name="modal">True</property>
+-@@ -156,7 +156,7 @@
+-                         <property name="title" translatable="yes">Title</property>
+-                         <property name="activatable-widget">summary_entry</property>
+- 
+--                        <child type="action">
+-+                        <child>
+-                           <object class="GtkEntry" id="summary_entry">
+-                             <property name="visible">True</property>
+-                             <property name="valign">center</property>
+-@@ -177,7 +177,7 @@
+-                         <property name="title" translatable="yes">Location</property>
+-                         <property name="activatable-widget">location_entry</property>
+- 
+--                        <child type="action">
+-+                        <child>
+-                           <object class="GtkEntry" id="location_entry">
+-                             <property name="visible">True</property>
+-                             <property name="valign">center</property>
+-@@ -226,7 +226,7 @@
+-                         <property name="title" translatable="yes">All Day</property>
+-                         <property name="activatable-widget">all_day_switch</property>
+- 
+--                        <child type="action">
+-+                        <child>
+-                           <object class="GtkSwitch" id="all_day_switch">
+-                             <property name="visible">True</property>
+-                             <property name="can_focus">True</property>
+-@@ -246,7 +246,7 @@
+-                         <property name="visible">True</property>
+-                         <property name="title" translatable="yes">Starts</property>
+- 
+--                        <child type="action">
+-+                        <child>
+-                           <object class="GtkLabel" id="event_start_label">
+-                             <property name="visible">True</property>
+-                             <property name="can_focus">False</property>
+-@@ -294,7 +294,7 @@
+-                         <property name="visible">True</property>
+-                         <property name="title" translatable="yes">Ends</property>
+- 
+--                        <child type="action">
+-+                        <child>
+-                           <object class="GtkLabel" id="event_end_label">
+-                             <property name="visible">True</property>
+-                             <property name="can_focus">False</property>
+-@@ -343,7 +343,7 @@
+-                         <property name="title" translatable="yes">Repeat</property>
+-                         <property name="activatable-widget">repeat_combo</property>
+- 
+--                        <child type="action">
+-+                        <child>
+-                           <object class="GtkComboBoxText" id="repeat_combo">
+-                             <property name="visible">True</property>
+-                             <property name="can_focus">False</property>
+-@@ -372,7 +372,7 @@
+-                         <property name="title" translatable="yes">End Repeat</property>
+-                         <property name="activatable-widget">repeat_combo</property>
+- 
+--                        <child type="action">
+-+                        <child>
+-                           <object class="GtkComboBoxText" id="repeat_duration_combo">
+-                             <property name="visible">True</property>
+-                             <property name="can_focus">False</property>
+-@@ -397,7 +397,7 @@
+-                         <property name="title" translatable="yes">Number of Occurrences</property>
+-                         <property name="activatable-widget">number_of_occurrences_spin</property>
+- 
+--                        <child type="action">
+-+                        <child>
+-                           <object class = "GtkSpinButton" id="number_of_occurrences_spin">
+-                             <property name="input_purpose">number</property>
+-                             <property name="input-hints">no-emoji</property>
+-@@ -415,7 +415,7 @@
+-                         <property name="title" translatable="yes">End Repeat Date</property>
+-                         <property name="activatable-widget">until_date_selector</property>
+- 
+--                        <child type="action">
+-+                        <child>
+-                           <object class = "GcalDateSelector" id="until_date_selector">
+-                             <property name="valign">center</property>
+-                           </object>
+--- 
+-GitLab
+-
+diff --git a/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.38.1.bb b/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_41.0.bb
+similarity index 74%
+rename from meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.38.1.bb
+rename to meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_41.0.bb
+index e703ec6406..4b9b14a480 100644
+--- a/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_3.38.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_41.0.bb
+@@ -18,12 +18,11 @@ DEPENDS = " \
  
- RDEPENDS:${PN} += "\
-     ${PYTHON_PN}-ctypes \
-+    ${PYTHON_PN}-fcntl \
-     ${PYTHON_PN}-io \
-+    ${PYTHON_PN}-logging \
-     ${PYTHON_PN}-misc \
-     ${PYTHON_PN}-shell \
-     ${PYTHON_PN}-smtpd \
+ GNOMEBASEBUILDCLASS = "meson"
+ 
+-inherit gnomebase gsettings gtk-icon-cache gettext features_check upstream-version-is-even
++inherit gnomebase gsettings gtk-icon-cache gettext features_check upstream-version-is-even mime-xdg
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+-SRC_URI += "file://8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch"
+-SRC_URI[archive.sha256sum] = "7280880a082d631624d02a102dd547ceb59498da368311f3e49a06cff897f512"
++SRC_URI[archive.sha256sum] = "73ac923c6618bd0957d6b7c012a00a47bff67ee934249358817433772ceb193f"
+ 
+ FILES:${PN} += " \
+     ${datadir}/gnome-shell \
 -- 
-2.31.1
+2.30.2
 
 
