@@ -2,89 +2,122 @@ Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F912C433F5
-	for <webhook@archiver.kernel.org>; Mon, 18 Oct 2021 15:15:54 +0000 (UTC)
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com
- [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.web10.37747.1634570153175314479
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7BF36C433F5
+	for <webhook@archiver.kernel.org>; Mon, 18 Oct 2021 15:16:53 +0000 (UTC)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com
+ [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.web11.37791.1634570212505389789
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Oct 2021 08:15:53 -0700
+ Mon, 18 Oct 2021 08:16:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Mg7zBvsp;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: ticotimo@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id
- oa12-20020a17090b1bcc00b0019f715462a8so208901pjb.3
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=OiZkJn96;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: ticotimo@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id
+ g13-20020a17090a3c8d00b00196286963b9so14697085pjc.3
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Oct 2021 08:15:53 -0700 (PDT)
+ Mon, 18 Oct 2021 08:16:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=CvEr5PsrtzAulr0DaxlrrwsyjRqNk5vUsh2/3WCGCgs=;
-        b=Mg7zBvsp7nWZApQKpJqqUEVkpK6yxppiX5KS/fi4Hju9LDD5cISngevM4+RPLERJPW
-         JN/9kTBO+KoOArBZFoObNUdE/qCOqNUACweh5J3l9GPcO54ATZXD+iEOXNrzTHqGSF97
-         1LRN8FK3t+XEkA5HS9dB2bleBjxPNFxpoanQGCX3165Dl46Aua9AJrM76uIqfm7ezu4e
-         pExoW00LzoaORvRZY0AlCvb0v381v1DyypFk9tCVH/k9fcuOjgqIU0Y95adtrF4FiKam
-         4yMM2q97d/zwy0iP0xpZJ8C6gYXBco7UQ5vzwXT5MMvN52IY8qmlBNH16Th8u16nQ9/r
-         WqVw==
+        bh=LD13iUQol1Tiu40N/D99TTqkkPd/1jfAhuSSRHcOA/A=;
+        b=OiZkJn962Vakq8JsNqGCmo4aXDtBRIO3FFIh9/dpS52lRRYut/3Dvwi+40lWwIz91j
+         8IaHfrKxNSHGgM85GuzlPaMrmA2aADt/cPeKmf1wLRV5XZKSlheo62FTxqMY97aTT1Hu
+         IY+hYJ3OZ9m2VTxiJqzs2pq/GSs6vZVlZi0+456LtZW7n0+fwku4HKKwLhco9p+5BKxv
+         CACA+lZcf0HYFnVC0hAlJkNAwYMAwRTRfMaNDhL45pIlCHR7fss4j7HKVwD9dypPhF/r
+         ZVXrWJ9nCFJz44CDCB8uChgMjCLMSNL+W9T6HszldpSdodOL5qCW/pY8yqP7upPEs0Ap
+         ayqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=CvEr5PsrtzAulr0DaxlrrwsyjRqNk5vUsh2/3WCGCgs=;
-        b=IrFxLlicEEY9HtFELWiAsko8yYQPlq7pur8Mb/bEAFIpraqqHk68J1BRd4FXY7KZ66
-         fj2T8lyfCZB+sHoz/VVjjaiPXV+/9QdInZ/p4bgyT0Oq1n5fY5VqWCr0DToF2jVscqR0
-         eRo3jcK8A1AFbt53+rkYrZlw4VOzL9cUyu0VB+Rz0OgY9YnVYwH1QF3aN56QefoLsovH
-         vbwq5AD3D1QUHeuJwG27AeopNBEThkM1++12BXGyhzgR+EX7uokC89OhWhZ5dt5484x1
-         oC81Rv0Q/lIQx0F+Xly/HZ0+fBQ2dDmhmVisLSQN9UtcGywqJKJMBcTUpOOqpl5iFq9o
-         GTqw==
-X-Gm-Message-State: AOAM533xWgeVxBKWAxZQC2DkaDXNtNuQe7V/hFh8rsahtJ9hkOTzE479
-	XJlr1lY6pGgGM3mMou7y6RNwxGDqByU=
+        bh=LD13iUQol1Tiu40N/D99TTqkkPd/1jfAhuSSRHcOA/A=;
+        b=vQBUafBTcRJLQ9RzreTZfP2CMZslumDCfnMsLR0QbPDscNALoHj+kalq93wqvh43pk
+         V80G2l9u2Cia/uk6gSUcP2mYL4R4OpyugS6ZsSYQ6WzblruZUMRhdgOiRl0SpBSIm+F7
+         LSPdeCZfiYVrrv3b3onG0jGoIkASx2eS+eynzt/h84ak3vzRTS7s0GPG701gKO1s/g/2
+         MOGYdnr6LOu2BfAzn4OBKUUL1msFUX+cRwoRIZJrW6fol8OBV3ZFCjshxligNf0CSsL/
+         tFCiUuPpszoppgv55zcYkz86U8YpL15N/DuKaLdZzeO5XqFNHblkUYTlWnajgPxHGvhZ
+         WdXA==
+X-Gm-Message-State: AOAM533Hh4Ss7Vepq9jFGzgIAP29oP6aRhL7xsT/uiFYVChDmhbf1hDb
+	w3ny4u3a5YY8qv2OzPZcuHUHukL54Yc=
 X-Google-Smtp-Source: 
- ABdhPJzTZywPHzCZmnyhWjkKUHLkcACcXRFsm2oCJPWUtT3XLjyiz/7hO5+iSUeEeSV7J5rXn98qJg==
-X-Received: by 2002:a17:902:ec83:b0:13f:551b:526d with SMTP id
- x3-20020a170902ec8300b0013f551b526dmr27366410plg.27.1634570152251;
-        Mon, 18 Oct 2021 08:15:52 -0700 (PDT)
+ ABdhPJxom5UVc2VLSYZKc2THSTN7Cp4UqvhnaVEUoh/pKrLoa3bE68NY7o2cUULbZp+lG4lk/Z1cDw==
+X-Received: by 2002:a17:90b:3749:: with SMTP id
+ ne9mr48805901pjb.192.1634570211725;
+        Mon, 18 Oct 2021 08:16:51 -0700 (PDT)
 Received: from nereus.local ([2601:1c0:6000:1830:ffc7:e2cb:a2b6:d240])
         by smtp.gmail.com with ESMTPSA id
- x7sm19798756pjg.5.2021.10.18.08.15.51
+ p17sm19743307pju.34.2021.10.18.08.16.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 Oct 2021 08:15:51 -0700 (PDT)
+        Mon, 18 Oct 2021 08:16:51 -0700 (PDT)
 From: Tim Orling <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Tim Orling <ticotimo@gmail.com>
-Subject: [meta-oe][PATCH] colord: inherit pkgconfig
-Date: Mon, 18 Oct 2021 08:15:39 -0700
-Message-Id: <20211018151539.2313513-1-ticotimo@gmail.com>
+Subject: [meta-gnome][PATCH] gnome-screenshot: add recipe for 40.0
+Date: Mon, 18 Oct 2021 08:16:46 -0700
+Message-Id: <20211018151646.2313779-1-ticotimo@gmail.com>
 X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Oct 2021 15:15:54 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Oct 2021 15:16:53 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93425
+ https://lists.openembedded.org/g/openembedded-devel/message/93426
 
-meson can't find gio-2.0 without pkg-config
+GNOME Screenshot is a small utility that takes a screenshot of the whole
+desktop; the currently focused window; or an area of the screen.
+
+Also add to packagegroup-gnome-apps
 
 Signed-off-by: Tim Orling <ticotimo@gmail.com>
 ---
- meta-oe/recipes-support/colord/colord.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../gnome-screenshot/gnome-screenshot_40.0.bb | 22 +++++++++++++++++++
+ .../packagegroups/packagegroup-gnome-apps.bb  |  1 +
+ 2 files changed, 23 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-screenshot/gnome-screenshot_40.0.bb
 
-diff --git a/meta-oe/recipes-support/colord/colord.bb b/meta-oe/recipes-support/colord/colord.bb
-index 66dc4a5802..563a0ee00a 100644
---- a/meta-oe/recipes-support/colord/colord.bb
-+++ b/meta-oe/recipes-support/colord/colord.bb
-@@ -1,6 +1,6 @@
- require ${BPN}.inc
- 
--inherit meson gobject-introspection gsettings gettext bash-completion systemd features_check useradd
-+inherit meson gobject-introspection gsettings gettext bash-completion systemd features_check useradd pkgconfig
- 
- # polkit and gobject-introspection are mandatory and cannot be configured
- REQUIRED_DISTRO_FEATURES = "polkit gobject-introspection-data"
+diff --git a/meta-gnome/recipes-gnome/gnome-screenshot/gnome-screenshot_40.0.bb b/meta-gnome/recipes-gnome/gnome-screenshot/gnome-screenshot_40.0.bb
+new file mode 100644
+index 0000000000..72272f993c
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-screenshot/gnome-screenshot_40.0.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "GNOME Screenshot"
++DESCRIPTION = "GNOME Screenshot is a small utility that takes a screenshot \
++of the whole desktop, the currently focused window, or an area of the screen."
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
++
++SECTION = "x11/gnome"
++
++GNOMEBASEBUILDCLASS = "meson"
++
++inherit features_check gnomebase gettext upstream-version-is-even pkgconfig
++
++SRC_URI[archive.sha256sum] = "368ca95a39e39dc2406c849e8c4205e3f574acdd874c30741873455e3d21a5e2"
++
++DEPENDS += "glib-2.0 glib-2.0-native gtk+3 libhandy xext"
++
++REQUIRED_DISTRO_FEATURES = "x11"
++
++FILES:${PN} += " \
++    ${datadir}/dbus-1 \
++    ${datadir}/metainfo \
++"
+diff --git a/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb b/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
+index d47d847a59..d003e23b8d 100644
+--- a/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
++++ b/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
+@@ -16,6 +16,7 @@ RDEPENDS:${PN} = " \
+     gnome-calendar \
+     gnome-font-viewer \
+     gnome-photos \
++    gnome-screenshot \
+     gnome-terminal \
+     gthumb \
+     libwnck3 \
 -- 
 2.30.2
 
