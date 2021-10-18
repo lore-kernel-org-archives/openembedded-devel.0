@@ -1,134 +1,179 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 439AAC433FE
-	for <webhook@archiver.kernel.org>; Mon, 18 Oct 2021 15:53:30 +0000 (UTC)
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
- [209.85.210.169])
- by mx.groups.io with SMTP id smtpd.web09.38348.1634572409243594375
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94F15C433FE
+	for <webhook@archiver.kernel.org>; Mon, 18 Oct 2021 16:24:29 +0000 (UTC)
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com
+ [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web09.38781.1634574268746958559
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Oct 2021 08:53:29 -0700
+ Mon, 18 Oct 2021 09:24:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=YpcQfWpM;
- spf=pass (domain: gmail.com, ip: 209.85.210.169,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f169.google.com with SMTP id q19so15043029pfl.4
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=fpPQafHA;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: ticotimo@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id
+ qe4-20020a17090b4f8400b0019f663cfcd1so14873029pjb.1
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Oct 2021 08:53:29 -0700 (PDT)
+ Mon, 18 Oct 2021 09:24:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:organization:in-reply-to
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=CjhSJ7PgwGxl6Ctimgq/RMTcESuQzfgP7tAZvrMGPB0=;
-        b=YpcQfWpMyU/WL6lFzXfWZYHPe21ZBLH+z5QY5r/QGNFBq/OgFRW+kDZT+nupWxuY7G
-         2m23kg8MKtjJttvztNpjxK5HViKbE1oCDslcry29n/1V9ActwLBghrhjJn7pWx9WogQY
-         BaBZMyWuiTVU/NpMgO8f4XCLPe2RpStzn8ftPRPJj54oQOrLoBeQ/74+s/WeWrGnElCT
-         sMlIMYvLahE2wOIxmaP3DoBSNnJ8QneLsp09sY/AOX9oPSvAH9o1yNrn+XyDW9GFVj3s
-         6BFJN5SxRUgTMUO1PjNUsY4Sg6y0MRlo9HGhL6X/uIUCeRE+XmQz2loKshDh46GkQwmL
-         LyoQ==
+        bh=L8T1L8msj3nj79/hhxNDP3EYXFfxnkzi4+6cs2RNP9Q=;
+        b=fpPQafHAOC6NUzmPrt7XgXKAXsuaLFXRnuzalumibUedbSXxMKd8+R13DSQX2Eklrg
+         quMAcQm8wJdevDcE6z03p3HYv+EVOIRaS+UYmvLetmCwtgIyZhGxjQXlRXFOA2IeC9dQ
+         rlEDwwa8a7nmvnlCNN1eoP6+GEeqJE35c2gU6EfL14m5TJgu2Jis9NVJaGSuCcEE7y7B
+         ktwVDv3AyYDzACSA2QKqQXVoXP49oa1RFnP8Jkz54dfYEiuAV00wp8NIpCeEVo06aclP
+         3XT47yFDyUQGMNX4pq0/kz9gcHtgU6LsM96/k8h/8GxNkSw87TwZohBJW4LBcFYh/OK6
+         tqJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:organization:in-reply-to
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=CjhSJ7PgwGxl6Ctimgq/RMTcESuQzfgP7tAZvrMGPB0=;
-        b=tA5OZQa+hUxaVtID8H80ukYe69bGVF30G+a8aH056SAdVK7Z720Ii4MVkCnNOBThT2
-         LOm3pm2MY0KK7Lk1Znp9d8kV1Bp2lG4rQOMQscTo3K4l+g/jKV7LysiF5+pAhJ0+WYje
-         UB4pfjVEiC/rMMiJ4mhnjfereJhiGrWNcp26Tu1UiYFZDAcO3dXNk7XoosgFpY2BJc4N
-         Kn18glLjTf4cvJGlBWBYQ1xzf9M0MSD6WJUw8Bv0gHPhTpiiKVVREH8Npcon9Elj3Maf
-         7AUa5o3KkOlYi8u0J47xWWLzTOr0zmB9Avq4tabu3zlYrTYOp1Ix7xU37L3ysQWCifrP
-         YK3w==
-X-Gm-Message-State: AOAM532h/vJw5h8oEtB+vGXk7D5E8bMzxe3ALWcWmmcZyP6V3zjd4Pib
-	A8bhUygEdoP1wNxhk42x6UI=
+        bh=L8T1L8msj3nj79/hhxNDP3EYXFfxnkzi4+6cs2RNP9Q=;
+        b=097gCfP3W3x4DVJjakvnstgS9L8/y8c04D36QOEm7Y716Q+rm9ZKY8ScWcNf8CC3eb
+         0BZYB04mDJa2SDYXBs4Wwy7N/kFhAeKvXbXnxA+buMum6REBUg0unTOuAub1r/xMJxm3
+         4N+FepeMKvaJLR3KDmMOc76c0d4vsFSBqRMb1vFpOWu/lA3BB7TzGdWzsh/MbFAtb3ya
+         qygjkFcUJTuth14bYq6kg48a6kJ+VKQS+v16BW+BbK/XJO0m2w8WBcGtmQYt4uDmCrHH
+         vd8b9eh09cFaDZZ4evkOsLbZMRYtHKFXml574A5Nbim0lADn+VFbnDmePFD53VebVGy/
+         tF9Q==
+X-Gm-Message-State: AOAM533FXBswhXkAl8M00BvjwD5KwcR/XyFDMI0kTLXNND+2+PobZIkQ
+	mmawE6I23bg0K6V9WIX0+Ppm8DoCazo=
 X-Google-Smtp-Source: 
- ABdhPJzOX4mO2ZnNLblZFizsfrOYC6MKgfg+LzF4NHL0YV+QloUGWw6YDj8dn5TNg4sciwvo0jYDWg==
-X-Received: by 2002:a05:6a00:a23:b0:43d:e856:a3d4 with SMTP id
- p35-20020a056a000a2300b0043de856a3d4mr29842590pfh.17.1634572408644;
-        Mon, 18 Oct 2021 08:53:28 -0700 (PDT)
-Received: from ?IPV6:2601:646:9200:a0f0:9d56:a24c:bb34:792d?
- ([2601:646:9200:a0f0:9d56:a24c:bb34:792d])
+ ABdhPJzfxBkr3PjYnAxdhAOk51O/nqmQYxq7U9dZPEOwh75MCPjxU+12bgJ31hXora95ErjTHMRFPQ==
+X-Received: by 2002:a17:90b:4f87:: with SMTP id
+ qe7mr38104072pjb.29.1634574267916;
+        Mon, 18 Oct 2021 09:24:27 -0700 (PDT)
+Received: from nereus.local ([2601:1c0:6000:1830:ffc7:e2cb:a2b6:d240])
         by smtp.gmail.com with ESMTPSA id
- u16sm4674007pfi.73.2021.10.18.08.53.27
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 18 Oct 2021 08:53:28 -0700 (PDT)
-Message-ID: <1bfddba8-01e0-1bc7-c6d7-2a1f1ec65f7a@gmail.com>
-Date: Mon, 18 Oct 2021 08:53:26 -0700
+ e6sm13605830pfm.212.2021.10.18.09.24.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 18 Oct 2021 09:24:27 -0700 (PDT)
+From: Tim Orling <ticotimo@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Tim Orling <ticotimo@gmail.com>
+Subject: [meta-gnome][PATCH] gfbgraph: patch to build with latest rest
+Date: Mon, 18 Oct 2021 09:24:15 -0700
+Message-Id: <20211018162415.2340550-1-ticotimo@gmail.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.2.0
-Subject: Re: [oe] [meta-networking][PATCH] bluepy_git.bb: Added recipe for
- BluePy - Python interface to Bluetooth LE on Linux
-Content-Language: en-US
-To: Marco Cavallini <koansoftware@gmail.com>,
- openembedded-devel@lists.openembedded.org
-Cc: Marco Cavallini <m.cavallini@koansoftware.com>
-References: <20211018142247.32594-1-koansoftware@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-In-Reply-To: <20211018142247.32594-1-koansoftware@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Oct 2021 15:53:30 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Oct 2021 16:24:29 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93430
+ https://lists.openembedded.org/g/openembedded-devel/message/93431
 
+librest 0.8.1 declares rest-1.0 and was released four years ago.
 
+Also inherit pkgconfig so that dependencies can be found by pkg-config
 
-On 10/18/21 7:22 AM, Marco Cavallini wrote:
-> From: Marco Cavallini <m.cavallini@koansoftware.com>
-> 
-> Signed-off-by: Marco Cavallini <koansoftware@gmail.com>
-> ---
->   .../recipes-connectivity/bluepy/bluepy_git.bb    | 16 ++++++++++++++++
->   1 file changed, 16 insertions(+)
->   create mode 100644 meta-networking/recipes-connectivity/bluepy/bluepy_git.bb
-> 
-> diff --git a/meta-networking/recipes-connectivity/bluepy/bluepy_git.bb b/meta-networking/recipes-connectivity/bluepy/bluepy_git.bb
-> new file mode 100644
-> index 000000000..651a75254
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/bluepy/bluepy_git.bb
-> @@ -0,0 +1,16 @@
-> +DESCRIPTION = "Python interface to Bluetooth LE on Linux"
-> +HOMEPAGE = "https://github.com/IanHarvey/bluepy"
-> +SECTION = "devel/python"
-> +
-> +DEPENDS = "${PYTHON_PN} glib-2.0"
-> +RDEPENDS_${PN} = "bluez5"
-> +
-> +LICENSE = "GPLv2"
+References:
+https://gitlab.gnome.org/GNOME/libgfbgraph/-/merge_requests/6
 
-It also has pubic domain licensed code as I see in 
-https://github.com/IanHarvey/bluepy/blob/master/LICENSE.txt so perhaps 
-PD would also need to be added here.
+Signed-off-by: Tim Orling <ticotimo@gmail.com>
+---
+ ...-Update-rest-requirement-to-rest-1.0.patch | 72 +++++++++++++++++++
+ .../recipes-gnome/gfbgraph/gfbgraph_0.2.4.bb  |  3 +-
+ 2 files changed, 74 insertions(+), 1 deletion(-)
+ create mode 100644 meta-gnome/recipes-gnome/gfbgraph/gfbgraph/0001-Update-rest-requirement-to-rest-1.0.patch
 
-> +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
-> +
-> +inherit setuptools3
-> +
-> +SRC_URI = "git://github.com/IanHarvey/bluepy.git;protocol=https;rev=7ad565231a97c304c0eff45f2649cd005e69db09"
-> +S = "${WORKDIR}/git"
-> +
-> +TARGET_CC_ARCH += "${LDFLAGS}"
+diff --git a/meta-gnome/recipes-gnome/gfbgraph/gfbgraph/0001-Update-rest-requirement-to-rest-1.0.patch b/meta-gnome/recipes-gnome/gfbgraph/gfbgraph/0001-Update-rest-requirement-to-rest-1.0.patch
+new file mode 100644
+index 0000000000..c24a9e569f
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gfbgraph/gfbgraph/0001-Update-rest-requirement-to-rest-1.0.patch
+@@ -0,0 +1,72 @@
++From d058e6eb6c9ebf5f4fff89ec0ac93323fc64c1ba Mon Sep 17 00:00:00 2001
++From: Tim Orling <ticotimo@gmail.com>
++Date: Mon, 18 Oct 2021 08:42:35 -0700
++Subject: [PATCH] Update rest requirement to rest-1.0
++
++librest 0.8.1 declares rest-1.0 and was released four years ago.
++
++https://gitlab.gnome.org/GNOME/librest/-/commit/2971b3b92701f70fc368ad64bd25cefaea043f87
++
++Upstream-Status: Submitted
++[https://gitlab.gnome.org/GNOME/libgfbgraph/-/merge_requests/6]
++
++Signed-off-by: Tim Orling <ticotimo@gmail.com>
++
++---
++ .dir-locals.el       | 2 +-
++ configure.ac         | 2 +-
++ gfbgraph/Makefile.am | 2 +-
++ libgfbgraph.pc.in    | 2 +-
++ 4 files changed, 4 insertions(+), 4 deletions(-)
++
++diff --git a/.dir-locals.el b/.dir-locals.el
++index 77abbf0..d39cdf2 100644
++--- a/.dir-locals.el
+++++ b/.dir-locals.el
++@@ -3,7 +3,7 @@
++                                "/usr/include/json-glib-1.0"
++                                "/usr/include/goa-1.0"
++                                "/usr/lib64/goa-1.0/include"
++-                               "/usr/include/rest-0.7"
+++                               "/usr/include/rest-1.0"
++                                "/usr/include/dbus-1.0"
++                                "/usr/lib64/dbus-1.0/include"
++                                "/usr/include/gio-unix-2.0/"
++diff --git a/configure.ac b/configure.ac
++index fd1231f..9b49f3f 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -40,7 +40,7 @@ AM_CONDITIONAL([ENABLE_GTK_DOC], false)
++ 
++ GOBJECT_INTROSPECTION_CHECK([1.30.0])
++ 
++-PKG_CHECK_MODULES(LIBGFBGRAPH, [glib-2.0 gio-2.0 gobject-2.0 rest-0.7 json-glib-1.0])
+++PKG_CHECK_MODULES(LIBGFBGRAPH, [glib-2.0 gio-2.0 gobject-2.0 rest-1.0 json-glib-1.0])
++ 
++ PKG_CHECK_MODULES(SOUP, [libsoup-2.4])
++ SOUP_UNSTABLE_CPPFLAGS=-DLIBSOUP_USE_UNSTABLE_REQUEST_API
++diff --git a/gfbgraph/Makefile.am b/gfbgraph/Makefile.am
++index d07b90d..b993ab7 100644
++--- a/gfbgraph/Makefile.am
+++++ b/gfbgraph/Makefile.am
++@@ -60,7 +60,7 @@ GFBGraph_@API_MAJOR@_@API_MINOR@_gir_INCLUDES = \
++ 	GLib-2.0 	\
++ 	Gio-2.0		\
++ 	GObject-2.0	\
++-	Rest-0.7	\
+++	Rest-1.0	\
++ 	Json-1.0	\
++ 	Soup-2.4
++ 
++diff --git a/libgfbgraph.pc.in b/libgfbgraph.pc.in
++index f87073e..d4f4e3a 100644
++--- a/libgfbgraph.pc.in
+++++ b/libgfbgraph.pc.in
++@@ -9,6 +9,6 @@ apiversion=@API_VERSION@
++ Name: libgfbgraph
++ Description: GObject library for Facebook Graph API
++ Version: @VERSION@
++-Requires: gio-2.0 glib-2.0 goa-1.0 json-glib-1.0 libsoup-2.4 rest-0.7
+++Requires: gio-2.0 glib-2.0 goa-1.0 json-glib-1.0 libsoup-2.4 rest-1.0
++ Libs: -L${libdir} -lgfbgraph-${apiversion}
++ Cflags: -I${includedir}/gfbgraph-@API_VERSION@
+diff --git a/meta-gnome/recipes-gnome/gfbgraph/gfbgraph_0.2.4.bb b/meta-gnome/recipes-gnome/gfbgraph/gfbgraph_0.2.4.bb
+index 1c5d90f6c7..23b3bf63a5 100644
+--- a/meta-gnome/recipes-gnome/gfbgraph/gfbgraph_0.2.4.bb
++++ b/meta-gnome/recipes-gnome/gfbgraph/gfbgraph_0.2.4.bb
+@@ -10,8 +10,9 @@ DEPENDS = " \
+     gnome-online-accounts \
+ "
+ 
+-inherit gnomebase gtk-doc gobject-introspection
++inherit gnomebase gtk-doc gobject-introspection pkgconfig
+ 
++SRC_URI += " file://0001-Update-rest-requirement-to-rest-1.0.patch"
+ SRC_URI[archive.md5sum] = "c38af63e49f8fe8baad99537956b69ba"
+ SRC_URI[archive.sha256sum] = "6065391f35e7335588cc6b0cc4c1abbce7341488573a654551264cb9793b9379"
+ 
+-- 
+2.30.2
 
-do we know why this is needed ?
-is it ignoring LDFLAGS ?
-
-> \ No newline at end of file
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#93424): https://lists.openembedded.org/g/openembedded-devel/message/93424
-> Mute This Topic: https://lists.openembedded.org/mt/86415050/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
 
