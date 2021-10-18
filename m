@@ -1,97 +1,451 @@
-Return-Path: <matthias.schiffer@ew.tq-group.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F183C433EF
-	for <webhook@archiver.kernel.org>; Mon, 18 Oct 2021 08:25:25 +0000 (UTC)
-Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
- by mx.groups.io with SMTP id smtpd.web09.33428.1634545523599190291
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73974C433F5
+	for <webhook@archiver.kernel.org>; Mon, 18 Oct 2021 09:02:13 +0000 (UTC)
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com
+ [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web11.33714.1634547732216762625
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Oct 2021 01:25:24 -0700
+ Mon, 18 Oct 2021 02:02:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@tq-group.com header.s=key1
- header.b=VaecnSig;
- spf=pass (domain: ew.tq-group.com, ip: 93.104.207.81,
- mailfrom: matthias.schiffer@ew.tq-group.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
-  t=1634545523; x=1666081523;
-  h=from:to:cc:subject:date:message-id;
-  bh=39Wv16ngRB62ShVC2Ayek1akUinusnItujcOlbXl0nE=;
-  b=VaecnSigG9m9o+M/213K+Q4g0jkYoBLp6yahOu6Hdck9Q3jUHp3/j7qn
-   WGqgf4IpqIa2BOSeBJ9rZjhl2yujQrNc7JTXLs4eEaqeWid7remhuD+ez
-   HUjm8QB3LE6rML0jDI2y8e075vOv1O778SwnRMEbGQHBDQIj4R54J1gbR
-   bguAbqrTikKS2yvZiEPp4BtFTEKXdBqm6lqsP9yQpHiw8k4CNG9Sj1jx5
-   fMEx6rKPgDa7iVMM6PU1bD/8DFyu9rCD1Yl1FozUuNYtlDm3TELBz8Cvk
-   Il3tB4bUWmxa31gC1QcyLtjHOsV2AZq1Ra8T89Ah+ZBXatmCzW4Zrqxp+
-   Q==;
-X-IronPort-AV: E=Sophos;i="5.85,381,1624312800";
-   d="scan'208";a="20098973"
-Received: from unknown (HELO tq-pgp-pr1.tq-net.de) ([192.168.6.15])
-  by mx1-pgp.tq-group.com with ESMTP; 18 Oct 2021 10:25:17 +0200
-Received: from mx1.tq-group.com ([192.168.6.7])
-  by tq-pgp-pr1.tq-net.de (PGP Universal service);
-  Mon, 18 Oct 2021 10:25:17 +0200
-X-PGP-Universal: processed;
-	by tq-pgp-pr1.tq-net.de on Mon, 18 Oct 2021 10:25:17 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
-  t=1634545517; x=1666081517;
-  h=from:to:cc:subject:date:message-id;
-  bh=39Wv16ngRB62ShVC2Ayek1akUinusnItujcOlbXl0nE=;
-  b=LjyoZ7suc0ZVoY2cRn8SBPhfWDEW7z0I9KKGcBxYfZxc8OBrAczDyteg
-   00CxXXas0NUFX6WPLT1YyUTJ6GEMYJQVHxD1LUOn30XXFTzm3XwOs5BY8
-   W4YM+21GSyilSCiwSKSLPsnTiKnDKhJgYJIwr1Lz/JhCFF7wZceHADWPx
-   vxs0fo8Nryqsvel0YnrVM+S+YEaLCE98zwQU9erGkIHIIYV2zSUWgrH1C
-   459CrVralHQm76gOMyu/uvQdwMQqjW1hB4j5y393vyckrTdHtBDuhJRGj
-   BgKfJXU7TeY3W4xi5bMjWNDL6iPYFQjZ/ygOIMC3vXYQPPW2m84UbbCv1
-   w==;
-X-IronPort-AV: E=Sophos;i="5.85,381,1624312800";
-   d="scan'208";a="20098972"
-Received: from vtuxmail01.tq-net.de ([10.115.0.20])
-  by mx1.tq-group.com with ESMTP; 18 Oct 2021 10:25:17 +0200
-Received: from schifferm-ubuntu4.tq-net.de (schifferm-ubuntu4.tq-net.de
- [10.121.48.12])
-	by vtuxmail01.tq-net.de (Postfix) with ESMTPA id 730E1280065;
-	Mon, 18 Oct 2021 10:25:17 +0200 (CEST)
-From: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-Subject: [meta-oe][PATCH] byacc: switch to official HTTPS mirror
-Date: Mon, 18 Oct 2021 10:24:07 +0200
-Message-Id: <20211018082407.22125-1-matthias.schiffer@ew.tq-group.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Nu0X4fXp;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
+ mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1634547729; i=@fujitsu.com;
+	bh=Gxvsie4ZrMrKm7s/iAfA3xIFVKXWNkAt7t5yKW5VARA=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=Nu0X4fXpkl7hUIaNDke/RmRINYpkUmLcMdTExsG+y0OCVdyKjj0vyIujo5MA8zIH0
+	 S3zLCufh2LxLRldTrkfcqbL79BCXX75s88GN1A0OZbjLBSFNLekgHAw2k61XGbkGtD
+	 42ldJk7baZxtBPk9DJRAUkTJiNOpLZFt8DNPVmM8u32g9qsW3VoORhNdVdDwm+0Xr5
+	 CsdcmI2TXoMbwA0WL3Q10QaZbAApKBriUs9fZzfNfPbcpBHsHNkhWppBQdH/Lc4Hp3
+	 QPurqQj8pLx2W2daXDG+9S64Y0TwIk5VMDcDK6F/mtthljul5y4Zc8e7GTEtiFKGe4
+	 +wQzA3vW4LEzQ==
+Received: from [100.113.1.182] (using TLSv1.2 with cipher
+ DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-a.eu-central-1.aws.symcld.net id D9/3E-29929-1183D616;
+ Mon, 18 Oct 2021 09:02:09 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrHIsWRWlGSWpSXmKPExsViZ8ORqCtokZt
+  osO88o8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnHkwSuWgvNZFb8mfGVpYLwe2cXIxSEk8IRR
+  4veGPkYI5wKTxIcv15khnBOMEvc6XgFlODnYBNQkpt+6wQpiiwjoSyydvYcZxGYWUJF48buHH
+  cQWFrCV+LZyLQuIzSKgKnH5zh+wXl4BZ4kluzeA1UsIKEhMefieGSIuKHFy5hMWiDkSEgdfvI
+  CqUZSYfbmZBcKukJg1q40JwlaTuHpuE/MERv5ZSNpnIWlfwMi0itEyqSgzPaMkNzEzR9fQwED
+  X0NBYF0gaG+glVukm6qWW6ian5pUUJQJl9RLLi/WKK3OTc1L08lJLNjECgzKlkKFpB+O7Vx/0
+  DjFKcjApifL2K+UmCvEl5adUZiQWZ8QXleakFh9ilOHgUJLgnWIClBMsSk1PrUjLzAFGCExag
+  oNHSYT3BUiat7ggMbc4Mx0idYoxlmPn6cWLmDnerF0CJN+CybZ7d4FkO5icueDgamaOWWDyfv
+  shIPkARAqx5OXnpUqJ8+qaAQ0VABmaUZoHtxKWDC4xykoJ8zIyMDAI8RSkFuVmlqDKv2IU52B
+  UEuZdAjKFJzOvBO6yV0BHMwEdfdU5B+TokkSElFQDk7Td7QIp3pXMiQXP97ifvrRMLihtZjz3
+  W57+a1Zv2c6mBxq37AqJvJOtlvdvzrpcOY+PjAI/Dr0p+/zr2IvoXxxtXVyftYqsnkycKTYtN
+  Zft0IfNzI92qxzdynvubJNxGPeWX/Mi00SE1NfEmsqaXzDU5L4nLnBxSk+E3Y05agHutXeVT1
+  V90vrWtMqnwkrTWCZexklp3Qmt63+MGlJ7Lod/n/N1wR1Zme0yJeL7b/SZCRVuFNe6mrb29+N
+  bn5deiY5O91om8X516aUsE7GfMtnVUw4ZWlxJ1l9pKSLFzN8bprV3pdfLF6t+VAb+UbkxVXj5
+  ZffzDPKffz1U7eKS+qOs/uFyuEZcVfiSzZaPlViKMxINtZiLihMBBZGkDYEDAAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-21.tower-232.messagelabs.com!1634547727!2786138!1
+X-Originating-IP: [62.60.8.97]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.4; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 4685 invoked from network); 18 Oct 2021 09:02:08 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-21.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 18 Oct 2021 09:02:08 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id AAE5210024C
+	for <openembedded-devel@lists.openembedded.org>;
+ Mon, 18 Oct 2021 10:02:07 +0100 (BST)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 9BD9B100225
+	for <openembedded-devel@lists.openembedded.org>;
+ Mon, 18 Oct 2021 10:02:07 +0100 (BST)
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.23; Mon, 18 Oct 2021 10:01:56 +0100
+From: Wang Mingyu <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] php: upgrade 7.4.21 -> 8.0.11
+Date: Mon, 18 Oct 2021 17:01:43 +0800
+Message-ID: <1634547703-128525-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Oct 2021 08:25:25 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Oct 2021 09:02:13 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93418
+ https://lists.openembedded.org/g/openembedded-devel/message/93419
 
-FTP does not always work in corporate networks. Switch to the HTTPS URL
-mentioned on the tool's homepage. The same URL is also used by FreeBSD [1].
+23 Sep 2021, PHP 8.0.11
+- Core:
+  . Fixed bug #81302 (Stream position after stream filter removed). (cmb)
+  . Fixed bug #81346 (Non-seekable streams don't update position after write).
+    (cmb)
+  . Fixed bug #73122 (Integer Overflow when concatenating strings). (cmb)
+-GD:
+  . Fixed bug #53580 (During resize gdImageCopyResampled cause colors change).
+    (cmb)
+- Opcache:
+  . Fixed bug #81353 (segfault with preloading and statically bound closure).
+    (Nikita)
+- Shmop:
+  . Fixed bug #81407 (shmop_open won't attach and causes php to crash). (cmb)
+- Standard:
+  . Fixed bug #71542 (disk_total_space does not work with relative paths). (cmb)
+  . Fixed bug #81400 (Unterminated string in dns_get_record() results). (cmb)
+- SysVMsg:
+  . Fixed bug #78819 (Heap Overflow in msg_send). (cmb)
+- XML:
+  . Fixed bug #81351 (xml_parse may fail, but has no error code). (cmb, Nikita)
+- Zip:
+  . Fixed bug #80833 (ZipArchive::getStream doesn't use setPassword). (Remi)
+  . Fixed bug #81420 (ZipArchive::extractTo extracts outside of destination).
+    (cmb)
 
-[1] https://cgit.freebsd.org/ports/tree/devel/byacc/Makefile?id=b128c1dbf3e8fbada5f753631041bf93ac51bf4d
-
-Signed-off-by: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-oe/recipes-extended/byacc/byacc.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...001-opcache-config.m4-enable-opcache.patch | 113 +++++++++++++++---
+ .../{70_mod_php7.conf => 70_mod_php8.conf}    |   0
+ .../php/php/debian-php-fixheader.patch        |   6 +-
+ meta-oe/recipes-devtools/php/php/iconv.patch  |  26 +---
+ .../php/php/xfail_two_bug_tests.patch         |  32 +++--
+ .../php/{php_7.4.21.bb => php_8.0.11.bb}      |   3 +-
+ 6 files changed, 129 insertions(+), 51 deletions(-)
+ rename meta-oe/recipes-devtools/php/php/{70_mod_php7.conf => 70_mod_php8.conf} (100%)
+ rename meta-oe/recipes-devtools/php/{php_7.4.21.bb => php_8.0.11.bb} (98%)
 
-diff --git a/meta-oe/recipes-extended/byacc/byacc.inc b/meta-oe/recipes-extended/byacc/byacc.inc
-index cffa7f5dc..a3d9bfdb7 100644
---- a/meta-oe/recipes-extended/byacc/byacc.inc
-+++ b/meta-oe/recipes-extended/byacc/byacc.inc
-@@ -6,7 +6,7 @@ programming language."
- SECTION = "devel"
- LICENSE = "PD"
+diff --git a/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch b/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch
+index 1f3e683a0f..4278b1c61f 100644
+--- a/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch
++++ b/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch
+@@ -1,6 +1,6 @@
+-From a74b42098aededd296ec6a3cd4cf5a17e59d6f29 Mon Sep 17 00:00:00 2001
+-From: Claude Bing <cbing@cybernetics.com>
+-Date: Fri, 8 May 2020 10:15:32 -0400
++From c42c7a1498aa9aeebc39d2c84e059d35cf51797a Mon Sep 17 00:00:00 2001
++From: Lei Maohui <leimaohui@fujitsu.com>
++Date: Tue, 12 Oct 2021 06:17:29 +0000
+ Subject: [PATCH] opcache/config.m4: enable opcache
  
--SRC_URI = "ftp://ftp.invisible-island.net/byacc/byacc-${PV}.tgz \
-+SRC_URI = "https://invisible-mirror.net/archives/byacc/byacc-${PV}.tgz \
-            file://byacc-open.patch \
-            file://0001-byacc-do-not-reorder-CC-and-CFLAGS.patch"
+ We can't use AC_TRY_RUN to run programs in a cross compile environment.
+@@ -13,20 +13,85 @@ Upstream-Status: Inappropriate [Configuration]
  
+ Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+ 
+-update patch to version 7.4.4
+-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+-
+ fix issue linking with librt
+ Signed-off-by: Claude Bing <cbing@cybernetics.com>
++
++update patch to version 8.0.10
++Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
++---
+ ---
+- ext/opcache/config.m4 | 195 +-----------------------------------------
+- 1 file changed, 4 insertions(+), 191 deletions(-)
++ ext/opcache/config.m4 | 257 ++----------------------------------------
++ 1 file changed, 10 insertions(+), 247 deletions(-)
+ 
+ diff --git a/ext/opcache/config.m4 b/ext/opcache/config.m4
+-index 6c40cafc1c..6569aa9e1c 100644
++index 5492fd92..ba55e9c4 100644
+ --- a/ext/opcache/config.m4
+ +++ b/ext/opcache/config.m4
+-@@ -23,201 +23,14 @@ if test "$PHP_OPCACHE" != "no"; then
++@@ -43,260 +43,27 @@ if test "$PHP_OPCACHE" != "no"; then
++     ZEND_JIT_SRC="jit/zend_jit.c jit/zend_jit_vm_helpers.c"
++ 
++     dnl Find out which ABI we are using.
++-    AC_RUN_IFELSE([AC_LANG_SOURCE([[
++-      int main(void) {
++-        return sizeof(void*) == 4;
++-      }
++-    ]])],[
++-      ac_cv_32bit_build=no
++-    ],[
++-      ac_cv_32bit_build=yes
++-    ],[
++-      ac_cv_32bit_build=no
+++    PHP_CHECK_LIBRARY(opagent, op_write_native_code,
+++    [
+++      AC_DEFINE(HAVE_OPROFILE,1,[ ])
+++      PHP_ADD_INCLUDE($OPAGENT_DIR/include)
+++      PHP_ADD_LIBRARY_WITH_PATH(opagent, $OPAGENT_DIR/$PHP_LIBDIR/oprofile, OPCACHE_SHARED_LIBADD)
+++      PHP_SUBST(OPCACHE_SHARED_LIBADD)
++     ])
++-
++-    if test "$ac_cv_32bit_build" = "no"; then
++-      case $host_alias in
++-        *x86_64-*-darwin*)
++-          DASM_FLAGS="-D X64APPLE=1 -D X64=1"
++-        ;;
++-        *x86_64*)
++-          DASM_FLAGS="-D X64=1"
++-        ;;
++-      esac
++-    fi
++-
++-    if test "$PHP_THREAD_SAFETY" = "yes"; then
++-      DASM_FLAGS="$DASM_FLAGS -D ZTS=1"
++-    fi
++-
++-    PHP_SUBST(DASM_FLAGS)
++-
++-    AC_MSG_CHECKING(for opagent in default path)
++-    for i in /usr/local /usr; do
++-      if test -r $i/include/opagent.h; then
++-        OPAGENT_DIR=$i
++-        AC_MSG_RESULT(found in $i)
++-        break
++-      fi
++-    done
++-    if test -z "$OPAGENT_DIR"; then
++-      AC_MSG_RESULT(not found)
++-    else
++-      PHP_CHECK_LIBRARY(opagent, op_write_native_code,
++-      [
++-        AC_DEFINE(HAVE_OPROFILE,1,[ ])
++-        PHP_ADD_INCLUDE($OPAGENT_DIR/include)
++-        PHP_ADD_LIBRARY_WITH_PATH(opagent, $OPAGENT_DIR/$PHP_LIBDIR/oprofile, OPCACHE_SHARED_LIBADD)
++-        PHP_SUBST(OPCACHE_SHARED_LIBADD)
++-      ],[
++-        AC_MSG_RESULT(not found)
++-      ],[
++-        -L$OPAGENT_DIR/$PHP_LIBDIR/oprofile
++-      ])
++-    fi
++-
++   fi
++ 
+    AC_CHECK_FUNCS([mprotect])
+  
+    AC_MSG_CHECKING(for sysvipc shared memory support)
+@@ -96,8 +161,8 @@ index 6c40cafc1c..6569aa9e1c 100644
+ -}
+ -]])],[dnl
+ -    AC_DEFINE(HAVE_SHM_IPC, 1, [Define if you have SysV IPC SHM support])
+--    msg=yes],[msg=no],[msg=no])
+--  AC_MSG_RESULT([$msg])
++-    have_shm_ipc=yes],[have_shm_ipc=no],[have_shm_ipc=no])
++-  AC_MSG_RESULT([$have_shm_ipc])
+ +  AC_DEFINE(HAVE_SHM_IPC, 1, [Define if you have SysV IPC SHM support])
+  
+    AC_MSG_CHECKING(for mmap() using MAP_ANON shared memory support)
+@@ -116,8 +181,7 @@ index 6c40cafc1c..6569aa9e1c 100644
+ -#ifndef MAP_FAILED
+ -# define MAP_FAILED ((void*)-1)
+ -#endif
+-+  AC_DEFINE(HAVE_SHM_MMAP_ANON, 1, [Define if you have mmap(MAP_ANON) SHM support])
+- 
++-
+ -int main() {
+ -  pid_t pid;
+ -  int status;
+@@ -150,10 +214,11 @@ index 6c40cafc1c..6569aa9e1c 100644
+ -}
+ -]])],[dnl
+ -    AC_DEFINE(HAVE_SHM_MMAP_ANON, 1, [Define if you have mmap(MAP_ANON) SHM support])
+--    msg=yes],[msg=no],[msg=no])
+--  AC_MSG_RESULT([$msg])
+--
+--  PHP_CHECK_FUNC_LIB(shm_open, rt)
++-    have_shm_mmap_anon=yes],[have_shm_mmap_anon=no],[have_shm_mmap_anon=no])
++-  AC_MSG_RESULT([$have_shm_mmap_anon])
+++  AC_DEFINE(HAVE_SHM_MMAP_ANON, 1, [Define if you have mmap(MAP_ANON) SHM support])
++ 
++   PHP_CHECK_FUNC_LIB(shm_open, rt, root)
+    AC_MSG_CHECKING(for mmap() using shm_open() shared memory support)
+ -  AC_RUN_IFELSE([AC_LANG_SOURCE([[
+ -#include <sys/types.h>
+@@ -221,6 +286,7 @@ index 6c40cafc1c..6569aa9e1c 100644
+ -]])],[dnl
+ -    AC_DEFINE(HAVE_SHM_MMAP_POSIX, 1, [Define if you have POSIX mmap() SHM support])
+ -    AC_MSG_RESULT([yes])
++-    have_shm_mmap_posix=yes
+ -    PHP_CHECK_LIBRARY(rt, shm_unlink, [PHP_ADD_LIBRARY(rt,1,OPCACHE_SHARED_LIBADD)])
+ -  ],[
+ -    AC_MSG_RESULT([no])
+@@ -232,6 +298,17 @@ index 6c40cafc1c..6569aa9e1c 100644
+  
+    PHP_NEW_EXTENSION(opcache,
+  	ZendAccelerator.c \
++@@ -339,10 +106,6 @@ int main() {
++   PHP_ADD_BUILD_DIR([$ext_builddir/Optimizer], 1)
++   PHP_ADD_EXTENSION_DEP(opcache, pcre)
++ 
++-  if test "$have_shm_ipc" != "yes" && test "$have_shm_mmap_posix" != "yes" && test "$have_shm_mmap_anon" != "yes"; then
++-    AC_MSG_ERROR([No supported shared memory caching support was found when configuring opcache. Check config.log for any errors or missing dependencies.])
++-  fi
++-
++   if test "$PHP_OPCACHE_JIT" = "yes"; then
++     PHP_ADD_BUILD_DIR([$ext_builddir/jit], 1)
++     PHP_ADD_MAKEFILE_FRAGMENT($ext_srcdir/jit/Makefile.frag)
+ -- 
+ 2.17.1
+ 
+diff --git a/meta-oe/recipes-devtools/php/php/70_mod_php7.conf b/meta-oe/recipes-devtools/php/php/70_mod_php8.conf
+similarity index 100%
+rename from meta-oe/recipes-devtools/php/php/70_mod_php7.conf
+rename to meta-oe/recipes-devtools/php/php/70_mod_php8.conf
+diff --git a/meta-oe/recipes-devtools/php/php/debian-php-fixheader.patch b/meta-oe/recipes-devtools/php/php/debian-php-fixheader.patch
+index a4804d1849..ed578d5e99 100644
+--- a/meta-oe/recipes-devtools/php/php/debian-php-fixheader.patch
++++ b/meta-oe/recipes-devtools/php/php/debian-php-fixheader.patch
+@@ -18,9 +18,9 @@ diff --git a/configure.ac b/configure.ac
+ index 2a474ba36d..6d22a21630 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -1323,7 +1323,7 @@ PHP_BUILD_DATE=`date -u +%Y-%m-%d`
+- fi
+- AC_DEFINE_UNQUOTED(PHP_BUILD_DATE,"$PHP_BUILD_DATE",[PHP build date])
++@@ -1288,7 +1288,7 @@ PHP_BUILD_DATE=`date -u +%Y-%m-%d`
++ EXTRA_LDFLAGS="$EXTRA_LDFLAGS $PHP_LDFLAGS"
++ EXTRA_LDFLAGS_PROGRAM="$EXTRA_LDFLAGS_PROGRAM $PHP_LDFLAGS"
+  
+ -UNAME=`uname -a | xargs`
+ +UNAME=`uname | xargs`
+diff --git a/meta-oe/recipes-devtools/php/php/iconv.patch b/meta-oe/recipes-devtools/php/php/iconv.patch
+index 9ec8a89b57..9b2d85951c 100644
+--- a/meta-oe/recipes-devtools/php/php/iconv.patch
++++ b/meta-oe/recipes-devtools/php/php/iconv.patch
+@@ -5,16 +5,15 @@ Subject: [PATCH] From 17cc5645f3acf943a5a06465d09d0ebcfea987bd Mon Sep 17
+ update patch to version 7.4.4
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ ---
+- build/php.m4        | 3 ++-
+- ext/iconv/config.m4 | 2 +-
+- 2 files changed, 3 insertions(+), 2 deletions(-)
++ build/php.m4 | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
+ 
+ diff --git a/build/php.m4 b/build/php.m4
+-index 7392876..5c45d13 100644
++index 93551d9c..dba50825 100644
+ --- a/build/php.m4
+ +++ b/build/php.m4
+-@@ -1950,7 +1950,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
+-   echo > ext/iconv/php_iconv_supports_errno.h
++@@ -1919,7 +1919,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
++   unset ICONV_DIR
+  
+    dnl Check libc first if no path is provided in --with-iconv.
+ -  if test "$PHP_ICONV" = "yes"; then
+@@ -23,19 +22,6 @@ index 7392876..5c45d13 100644
+      dnl Reset LIBS temporarily as it may have already been included -liconv in.
+      LIBS_save="$LIBS"
+      LIBS=
+-diff --git a/ext/iconv/config.m4 b/ext/iconv/config.m4
+-index fe9b47a..b6b632f 100644
+---- a/ext/iconv/config.m4
+-+++ b/ext/iconv/config.m4
+-@@ -14,7 +14,7 @@ if test "$PHP_ICONV" != "no"; then
+- 
+-   if test "$iconv_avail" != "no"; then
+-     if test -z "$ICONV_DIR"; then
+--      for i in /usr/local /usr; do
+-+      for i in $PHP_ICONV /usr/local /usr; do
+-         if test -f "$i/include/iconv.h" || test -f "$i/include/giconv.h"; then
+-           PHP_ICONV_PREFIX="$i"
+-           break
+ -- 
+-2.7.4
++2.25.1
+ 
+diff --git a/meta-oe/recipes-devtools/php/php/xfail_two_bug_tests.patch b/meta-oe/recipes-devtools/php/php/xfail_two_bug_tests.patch
+index 21057439c9..5c4fab3e55 100644
+--- a/meta-oe/recipes-devtools/php/php/xfail_two_bug_tests.patch
++++ b/meta-oe/recipes-devtools/php/php/xfail_two_bug_tests.patch
+@@ -1,4 +1,7 @@
+-php-ptest: xfail two tests
++From 2b860634886d353fe34a5236642074a6f3106d3d Mon Sep 17 00:00:00 2001
++From: Lei Maohui <leimaohui@fujitsu.com>
++Date: Tue, 12 Oct 2021 02:11:10 +0000
++Subject: [PATCH] php-ptest: xfail two tests
+ 
+ If and when these tests are modified to expect the correct output, they will
+ succeed and generate warnings in the test summary.  This patch can then be removed.
+@@ -9,26 +12,37 @@ Upstream-Status: Pending
+ 
+ Signed-off-By: Joe Slater <joe.slater@windriver.com>
+ 
++update patch to version 8.0.10
++Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
++---
++ tests/basic/bug71273.phpt      | 2 ++
++ tests/run-test/bug75042-3.phpt | 2 ++
++ 2 files changed, 4 insertions(+)
+ 
++diff --git a/tests/basic/bug71273.phpt b/tests/basic/bug71273.phpt
++index 7634d432..50451d7b 100644
+ --- a/tests/basic/bug71273.phpt
+ +++ b/tests/basic/bug71273.phpt
+-@@ -16,6 +16,8 @@ Bug #71273 A wrong ext directory setup i
+- 	var_dump(preg_match(",.+a[\\/].+[\\/]w.php_kartoffelbrei.dll.+,s", $out));
++@@ -9,5 +9,7 @@ Bug #71273 A wrong ext directory setup in php.ini leads to crash
++ 
++     var_dump(preg_match(",.+a[\\/].+[\\/]w.php_kartoffelbrei.dll.+,s", $out));
+  ?>
+- ==DONE==
+ +--XFAIL--
+ +Output is int(0), not int(1)
+  --EXPECT--
+  int(1)
+- ==DONE==
++diff --git a/tests/run-test/bug75042-3.phpt b/tests/run-test/bug75042-3.phpt
++index 5a30143b..1ca1055a 100644
+ --- a/tests/run-test/bug75042-3.phpt
+ +++ b/tests/run-test/bug75042-3.phpt
+-@@ -8,5 +8,8 @@ display_errors=1
+- nonexistentsharedmodule
++@@ -9,5 +9,7 @@ nonexistentsharedmodule
+  --FILE--
+  <?php
+-+?>
++ ?>
+ +--XFAIL--
+ +No warning message printed.
+  --EXPECTF--
+- PHP Warning:  PHP Startup: Unable to load dynamic library '%snonexistentsharedmodule.%s' %A
++ Warning: PHP Startup: Unable to load dynamic library '%snonexistentsharedmodule.%s' %A
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-devtools/php/php_7.4.21.bb b/meta-oe/recipes-devtools/php/php_8.0.11.bb
+similarity index 98%
+rename from meta-oe/recipes-devtools/php/php_7.4.21.bb
+rename to meta-oe/recipes-devtools/php/php_8.0.11.bb
+index 916010a6ff..a8a2699cdb 100644
+--- a/meta-oe/recipes-devtools/php/php_7.4.21.bb
++++ b/meta-oe/recipes-devtools/php/php_8.0.11.bb
+@@ -33,7 +33,7 @@ SRC_URI:append:class-target = " \
+           "
+ 
+ S = "${WORKDIR}/php-${PV}"
+-SRC_URI[sha256sum] = "36ec6102e757e2c2b7742057a700bbff77c76fa0ccbe9c860398c3d24e32822a"
++SRC_URI[sha256sum] = "70ed874285e4010c1e2e8937bfb56b13b9ed1b3789dcaf274b793b00c1f4403a"
+ 
+ 
+ inherit autotools pkgconfig python3native gettext
+@@ -52,6 +52,7 @@ COMMON_EXTRA_OECONF = "--enable-sockets \
+                        --disable-rpath \
+                        --with-pic \
+                        --libdir=${PHP_LIBDIR} \
++                       --disable-opcache-jit \
+ "
+ EXTRA_OECONF = "--enable-mbstring \
+                 --enable-fpm \
 -- 
-2.17.1
+2.25.1
 
 
