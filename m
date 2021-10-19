@@ -2,114 +2,136 @@ Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E464FC433EF
-	for <webhook@archiver.kernel.org>; Tue, 19 Oct 2021 05:13:36 +0000 (UTC)
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com
- [195.245.230.2])
- by mx.groups.io with SMTP id smtpd.web08.5658.1634620415566151645
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 06150C433EF
+	for <webhook@archiver.kernel.org>; Tue, 19 Oct 2021 05:13:45 +0000 (UTC)
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com
+ [85.158.142.114])
+ by mx.groups.io with SMTP id smtpd.web10.5736.1634620423397374380
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Oct 2021 22:13:36 -0700
+ Mon, 18 Oct 2021 22:13:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=qq4gSpvL;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.2,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=AwJsEPb4;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.114,
  mailfrom: zhengrq.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1634620413; i=@fujitsu.com;
-	bh=Rv+qUm2d1eccCQUAL/meyGpjSqUBjM74zw46SgFbft8=;
+	s=170520fj; t=1634620421; i=@fujitsu.com;
+	bh=vzDA0tiBF/iPrUZd91ZBHjPGHHYLw2xbK83yWckRsYo=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=qq4gSpvLNj6dl5eL5PmFnfJsCGuE2jMM598wFMC/p5xaVi3lCNzztOUd+Hp/P5UBx
-	 vKIe2PGA8jj3Ys6DB0+OLxe2HHVlc5tBCDNIuwVKe0B6YNSGKU/t4kqK8AOyOcElyj
-	 tr7KrTjIXvTUfXzZljbNfE6TdMuYt2kqOqQNPZrDib/6FNc5l6u4D50fLlySQ6xdYJ
-	 PwUp+addXXaMUkVi0IEJQo0EnH8KyvNmTl+rqNhQGAUHZGrJ3aUuDAMAx0szX+ujX7
-	 JNyu3xsh3B/HW1BVA61ePaA6WCnlxUQs1WhQ2sNGWp+AjfYuN1PEoETKTM5PMiWdQe
-	 kqpudV9G/9/9Q==
-Received: from [100.112.195.206] (using TLSv1.2 with cipher
+	b=AwJsEPb4J0rAXp7fySeUocAhOvSedd7MoxtK1An+hk569rUfChPRkaIABHlvNPOqR
+	 ozLbbU9LvJSAcUOdkCxvfDziVAm/+o5ViDZN9NKxowz7SIX7AxAu+JSb+kr00kZ6kw
+	 7iV5/uKkCX0h06ljaXY7Bp/I3QeFMaDvynawKUpLrDrCGaVLxHyzMMk11O/VYKRNew
+	 IxjmPQDFvxp2r6t2VuiWUVXdGWNI1DrAFbrpMUpwyI4qkGunqoTp9paZ4ZpVKSOPaa
+	 rSE4FK/GxS6zUUfetaqa9O/whwyZ6JBHxef+N8PsawUP4/q4/6t4Nl7wJioE+GMOiM
+	 vgt5zLqpreORQ==
+Received: from [100.113.5.110] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-west-1.aws.symcld.net id 2B/21-16630-DF35E616;
- Tue, 19 Oct 2021 05:13:33 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrMIsWRWlGSWpSXmKPExsViZ8MxSfdvcF6
-  iwbMVrBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bj9Y+YCjq5K47+6GJrYJzF1cXIySEk8IRR
-  ouFUURcjF5B9gUni9u4rTBDOHkaJV3snsYFUsQnoSpx7vJYdxBYR0JdYOnsPM4gtLOAmsXnOY
-  bA4i4CqRPfzTSwgNq+Au8TeyXMYQWwJAQWJKQ/fM0PEBSVOznwCVsMsICFx8MULoDgHUI2ixO
-  zp8hDlFRKvD19ihrDVJK6e28Q8gZFvFpLuWUi6FzAyrWK0SCrKTM8oyU3MzNE1NDDQNTQ00jW
-  0BGITE73EKt1EvdRS3fLU4hJdQ73E8mK94src5JwUvbzUkk2MwLBLKTgwYQfj/tcf9A4xSnIw
-  KYnyXnTNSxTiS8pPqcxILM6ILyrNSS0+xCjDwaEkwRsbAJQTLEpNT61Iy8wBxgBMWoKDR0mE9
-  78/UJq3uCAxtzgzHSJ1ilFRSpxXJAgoIQCSyCjNg2uDxd0lRlkpYV5GBgYGIZ6C1KLczBJU+V
-  eM4hyMSsK8OSBTeDLzSuCmvwJazAS0+KpzDsjikkSElFQDU+uy567mGxbWdCs7rTmS3rNBUzy
-  9X++Jes7rSz/nJh9e/n21fPq1nd8+MFZsimk1Mz12a94+nmn6Phfutvux/8pO+n/rriCX7Cq+
-  p2+05865WqG9g7PLqq7x043KwyZ3NrcwfEyY80+BXZU/4MwRq+iVoXzXHF4dYNfQLvjIYiSu2
-  Log4dxN/32fTviqOsyaUXE4d0b1xKQr25Uv7tTtsj1gonri1+RTUsEM9Uf5bboEvOb/Nou1OC
-  9yQ7dkxbWFi45fur7MQ9njm/Hst+EvfrhndXzjM9Ddwn62U1PaNuuC5spnuTfXqUm5dn3P1DW
-  QX77P6amy1kUD+1772fzyXwNTWk2SuaO7TnFO55KKU2Ipzkg01GIuKk4EABJqldo2AwAA
+	by server-3.bemta.az-b.eu-central-1.aws.symcld.net id 44/2E-07495-5045E616;
+ Tue, 19 Oct 2021 05:13:41 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeJIrShJLcpLzFFi42Kxs+EI1WUJyUs
+  06LqsZXHx8FJmB0aPcxtXMAYwRrFm5iXlVySwZix/dIi9oFW0YkbTWpYGxvtCXYxcHEICs5kk
+  Dk8/ywTh7GGUaFt+kLGLkZODTUBX4tzjtewgtoiAvsTS2XuYQWxhAXeJSxM3soHYLAKqEoceb
+  2MBsXmB4l1t3WBxCQEFiSkP3zNDxAUlTs58AlbDLCAhcfDFC6A4B1CNosTs6fIQ5RUSrw9fYp
+  7AyDMLSccsJB0LGJlWMVomFWWmZ5TkJmbm6BoaGOgaGhrrmugaGhvoJVbpJumlluomp+aVFCU
+  CZfUSy4v1iitzk3NS9PJSSzYxAgMppZClaQfj71cf9A4xSnIwKYnyXnTNSxTiS8pPqcxILM6I
+  LyrNSS0+xCjDwaEkwRsbAJQTLEpNT61Iy8wBBjVMWoKDR0mE978/UJq3uCAxtzgzHSJ1ilFRS
+  pxXJAgoIQCSyCjNg2uDRdIlRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSsK8OSBTeDLzSuCmvw
+  JazAS0+KpzDsjikkSElFQDU8/fhpC4m+yRMlqir/Kua5/o8t5iL2Zbvr8t8eK+xr/9L27smHl
+  g9w4RI421NSHSlvEvz9c/LZcQsedmFOhiCfpkt9kwYPqvVA+2gKnHhAT+uqoJpfFfErnBlWwZ
+  8uegrw6/2YbAAzfVZt5a234g7J1GcOiEp7qiC1ruZl2be8jjnVLwz/VLChl5Y39sS2U4nv3+h
+  IRXmcHONTPcpwskCQZU3sz9cOvEzC33brLs7zO6euT3nJ2Wc2ojPfKCNYrmiy5iO2Wdf9GssC
+  vmVlpiaN2y/t2rH4g9c/r4yNTUnePo6Tqpj25v9r3qr9PQXbLll/UpNmWT1lB/tZ0u9p0+wW4
+  zNihffJYpF693fFqJEktxRqKhFnNRcSIArJ+1UB8DAAA=
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-4.tower-265.messagelabs.com!1634620412!2379298!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-22.tower-238.messagelabs.com!1634620420!374081!1
+X-Originating-IP: [62.60.8.85]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 7045 invoked from network); 19 Oct 2021 05:13:33 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-4.tower-265.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 19 Oct 2021 05:13:33 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id A493E100464
+Received: (qmail 19894 invoked from network); 19 Oct 2021 05:13:40 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-22.tower-238.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 19 Oct 2021 05:13:40 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 19J5DefO019545
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Oct 2021 06:13:32 +0100 (BST)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 97F3D100445
-	for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Oct 2021 06:13:32 +0100 (BST)
+ Tue, 19 Oct 2021 06:13:40 +0100
 Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.23; Tue, 19 Oct 2021 06:13:11 +0100
+ (TLS) id 15.0.1497.23; Tue, 19 Oct 2021 06:13:39 +0100
 From: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-perl] [PATCH] libencode-perl: upgrade 3.12 -> 3.16
-Date: Tue, 19 Oct 2021 22:13:05 +0800
-Message-ID: <1634652785-3542-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] nlohmann-json: upgrade 3.10.2 -> 3.10.4
+Date: Tue, 19 Oct 2021 22:13:19 +0800
+Message-ID: <1634652799-3581-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.35]
 X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 19 Oct 2021 05:13:36 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 19 Oct 2021 05:13:45 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93458
+ https://lists.openembedded.org/g/openembedded-devel/message/93459
 
-Revision: 3.16
- Makefile.PL
-  Pulled: Only add -Werror=declaration-after-statement for 5.035004 and earlier
-  https://github.com/dankogai/p5-encode/pull/162/filehttps://github.com/dankogai/p5-encode/pull/162
+Note you can support this project via GitHub sponsors or PayPal.
+
+Bug Fixes
+Fix regression bug introduced in release 3.10.0 which broke compilation
+for types with an explicit default constructor with default arguments.
+#3077 #3079
+Fix regression bug introduced in release 3.10.0 which treated the
+return values of std::find and std::remove as pointers which could
+break compilation. #3081 #3082
+Fix converting std::filesystem::path to JSON. Before release 3.10.3,
+such a conversion would trigger a stack overflow. Release 3.10.3 then
+further broke compilation on Windows. #3070 #3073
+
+Deprecated functions
+Passing iterator pairs or pointer/length pairs to parsing functions
+(basic_json::parse, basic_json::accept, basic_json::sax_parse,
+basic_json::from_cbor, basic_json::from_msgpack, basic_json::from_ubjson,
+basic_json::from_bson) via initializer lists is deprecated. Instead,
+pass two iterators; for instance, call basic_json::from_cbor(ptr, ptr+len)
+instead of basic_json::from_cbor({ptr, len}).
+
+The following functions have been deprecated in earlier versions and
+will be removed in the next major version (i.e., 4.0.0):
+
+Function iterator_wrapper are deprecated.
+Please use the member function items() instead.
+Functions friend std::istream& operator<<(basic_json&, std::istream&)
+and friend std::ostream& operator>>(const basic_json&, std::ostream&)
+are deprecated. Please use friend std::istream& operator>>(std::istream&,
+basic_json&) and friend operator<<(std::ostream&, const basic_json&) instead.
+All deprecations are annotated with HEDLEY_DEPRECATED_FOR to report
+which function to use instead.
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../{libencode-perl_3.12.bb => libencode-perl_3.16.bb}          | 2 +-
+ .../{nlohmann-json_3.10.2.bb => nlohmann-json_3.10.4.bb}        | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libencode/{libencode-perl_3.12.bb => libencode-perl_3.16.bb} (97%)
+ rename meta-oe/recipes-devtools/nlohmann-json/{nlohmann-json_3.10.2.bb => nlohmann-json_3.10.4.bb} (92%)
 
-diff --git a/meta-perl/recipes-perl/libencode/libencode-perl_3.12.bb b/meta-perl/recipes-perl/libencode/libencode-perl_3.16.bb
-similarity index 97%
-rename from meta-perl/recipes-perl/libencode/libencode-perl_3.12.bb
-rename to meta-perl/recipes-perl/libencode/libencode-perl_3.16.bb
-index 90ae623f79..2286ee5249 100644
---- a/meta-perl/recipes-perl/libencode/libencode-perl_3.12.bb
-+++ b/meta-perl/recipes-perl/libencode/libencode-perl_3.16.bb
-@@ -15,7 +15,7 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
- LIC_FILES_CHKSUM = "file://META.json;beginline=8;endline=10;md5=b12e3be1e17a7e99ca4f429ff32c28b5"
+diff --git a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.10.2.bb b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.10.4.bb
+similarity index 92%
+rename from meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.10.2.bb
+rename to meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.10.4.bb
+index d2015771ac..fff32372a4 100644
+--- a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.10.2.bb
++++ b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.10.4.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=441793d25a658d58d79a1f87516a6ad1"
+ SRC_URI = "git://github.com/nlohmann/json.git;nobranch=1 \
+            "
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/DANKOGAI/Encode-${PV}.tar.gz"
--SRC_URI[sha256sum] = "38da5b7f74bc402075f5994557b5f1426636291efea0f39fcdf4b1366b0756fd"
-+SRC_URI[sha256sum] = "e5e91d98a97de70dccecc2a25d049a0b5f5f12228c618680020d73043355294c"
+-SRCREV = "626e7d61e44dee32887126c8f437dd077dec09cf"
++SRCREV = "fec56a1a16c6e1c1b1f4e116a20e79398282626c"
  
- UPSTREAM_CHECK_REGEX = "Encode\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
+ S = "${WORKDIR}/git"
  
 -- 
 2.25.1
