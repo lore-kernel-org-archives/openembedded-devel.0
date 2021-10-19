@@ -1,579 +1,181 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <yi.zhao@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D52BDC433FE
-	for <webhook@archiver.kernel.org>; Tue, 19 Oct 2021 04:41:45 +0000 (UTC)
-Received: from mail-io1-f45.google.com (mail-io1-f45.google.com
- [209.85.166.45])
- by mx.groups.io with SMTP id smtpd.web10.5507.1634618504352971287
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 247EDC433F5
+	for <webhook@archiver.kernel.org>; Tue, 19 Oct 2021 04:50:07 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com
+ [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.5401.1634619006184437334
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Oct 2021 21:41:44 -0700
+ Mon, 18 Oct 2021 21:50:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=SEycHo9N;
- spf=pass (domain: gmail.com, ip: 209.85.166.45, mailfrom: ticotimo@gmail.com)
-Received: by mail-io1-f45.google.com with SMTP id d125so18894411iof.5
-        for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Oct 2021 21:41:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=fF2/O6OTgKQd7EiMREeiXMvBGQbKvdkHxr6nglwjqZ4=;
-        b=SEycHo9NpmgKqbkBinsmlV6ZLQGDy6yfnWykqYU4cq9l8ifT9uNEBeOdDjb8m664xk
-         TxfRfGGlQ9U8XsBHSyyAvIwshdIVyn0wijNMMtxeqhMXUrCCu/B4ieeR/s0yCburZ30U
-         tfjNiJOdJYFXpJKI02Wo1VpjVdZGVz/qIE9PhKhLa/LS3PlgEEh54p4OBrIF2KFkWXmU
-         Dj1Q0TeV1ZjnZBck32AHGB0S2khuBRFnNDSg9vGrEMMX9Lejsd8pDrVqAQd9QN4P5PDH
-         lypvBo9/JizY28sp+FeKPQmgMJCbhBlotf380fs+Em6unmWu1bS5u/HXWZlLBdxhA0uN
-         T01A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=fF2/O6OTgKQd7EiMREeiXMvBGQbKvdkHxr6nglwjqZ4=;
-        b=cYjgmSJ+OsXRQBKEFBJWFSz7PNxPOUwuo6DwFO3duNWOjRq3eGbk8e9lTUP2rO9jS6
-         PWOwMlpEQZ+R6w/xuKmJyXl2hiCIL0cG3gEV02buuY82P1KW4A6wvgINT4XAkR3rP9+k
-         b3UFjzwafBT+j31pFjpqtMhiy4Gmz1D30qjYRHdpXCp0VFBvoA21B8NG4p1a3giyW05E
-         wwvN0tlXm/kmQc9fG8vefvQZa1I7eF+H3h9ckEhTuIuYttmbWalsqv+5C4ptqckZT1rQ
-         kH/sbaoFPv3+Rvq1+S/kP4s8SxDIxxADuf8th8iV2awoq6kN6wKC2ZDkHI3j4xqvMHx0
-         uTcQ==
-X-Gm-Message-State: AOAM530Mwe/TpCZnwbtz9DYh2dokfeAtoMriOUKe71sfJ+d9b9YiJa8V
-	/pkbm9Y4qL58VFYfcxvZMtUAIsdb7WMUUR0D7io=
-X-Google-Smtp-Source: 
- ABdhPJyFdyd3arbOSWndd5mW3D3JAixxY2jnoYxIwCI/9Ns0Uz8N8L5M6edTM7E+7lZJL1VbyZksNnbENyEObuXEOpY=
-X-Received: by 2002:a05:6602:1651:: with SMTP id
- y17mr17382601iow.114.1634618503506;
- Mon, 18 Oct 2021 21:41:43 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=hQpWcw7c;
+ spf=pass (domain: windriver.com, ip: 205.220.178.238,
+ mailfrom: prvs=592622e463=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 19J4hhvV012515
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 19 Oct 2021 04:50:05 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+ h=from : to :
+ subject : date : message-id : content-transfer-encoding : content-type :
+ mime-version; s=PPS06212021;
+ bh=xCN4eRhXSH2xYlAC3KlgNHA5i6HA2CuaA8YxzBMMsrw=;
+ b=hQpWcw7cMphJLFgYAZXF1BgmLr6dp/vMpXML3FoWbx7i9sYENzOEmto1Bro9QEKh5pcf
+ XsteZalkL40QtsL1N+Jq/zzod275ArKYDwyxz8byZwKGlUU1bvoLdNdJY0MQo16MyTkI
+ JWHGIj8p+F850ZadX9Kqy09mG5zAwAojhLhh6C3m05OsDu8LR55YunL7wHkbmQyPnyJ+
+ w6Q49HPBl6EwdMk20QKlqtU18vpT54FPK9RGgsK7vfaN0IZdohFufN9lpsaI1LQdpWuw
+ /0Q2LF9jzr5GNGEcHu3GLc1Xbo4IovGOlU2BoYZAqsWL1Z7I/hWfR9YIwM8FLU2OMGdm FA==
+Received: from nam10-mw2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10lp2104.outbound.protection.outlook.com [104.47.55.104])
+	by mx0a-0064b401.pphosted.com with ESMTP id 3bs9apgn0a-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 19 Oct 2021 04:50:05 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=fVm9/+2CSWL/mhS0eFYODesr+kfHFi44+Zdsa97szpMhs/RDt0S6br8G5x2H4tQw8CD/NDsQA+uRstNAiev7z8ACytkA6j/UgqT+ecrhpVmVJRH1rv1pL/CM/nG1KC/uVESjmlUEXGkolLFTK7b6/qPesLPDNqsLsTIhzzyMirzwxqYj1yzt0NHiZ91CqfmGrjO3yOk8uqLC61tAyG/fZEmF649nYKz4fwRnj3jNFL2haAzOsHewqp2JLhPp72KVfDI46oAbvfoHHfvSfbsRT2vA/WssfeXGnzW/vbPf8S8t1G2qvxyb07AHgZjAjRPrTb5CRd971SmLXh4tiT/Msg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xCN4eRhXSH2xYlAC3KlgNHA5i6HA2CuaA8YxzBMMsrw=;
+ b=LW4cPQtoJGFTwCGb4vAGryFmOQyVNslEJNodaoOTTuQtjnhpQzew1rLzD/5luYjgq1Iz5cEPdrU1Z2TneTTSJKkHpDijG41PyWRgfor5b1GYkegriLGSO+FzplPsx+dwAALs77WV2dTOK1y5Grm/JYR2ZzYJshHe3st8RQhIO+xffhn4KSUYV8DH2CJtGgWpWYrZLQvHViARzsKgmaO3KJ3RW2dGRYhexZKm9QhrPsw6cthUC30JSdYqfzutqO+fUDdTZ+lcksJ5e5e3oxuVs9vF1pWhZ6xavix4QR9l1erpaVOyF22yB0QmbyteskRVCvGENqMeA+CZSPAlmxHdRg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
+ by MWHPR11MB1373.namprd11.prod.outlook.com (2603:10b6:300:25::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4608.18; Tue, 19 Oct
+ 2021 04:50:03 +0000
+Received: from CO1PR11MB4867.namprd11.prod.outlook.com
+ ([fe80::455e:9cfb:d106:4480]) by CO1PR11MB4867.namprd11.prod.outlook.com
+ ([fe80::455e:9cfb:d106:4480%9]) with mapi id 15.20.4608.018; Tue, 19 Oct 2021
+ 04:50:03 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH] strongswan: upgrade 5.9.3 -> 5.9.4
+Date: Tue, 19 Oct 2021 12:49:51 +0800
+Message-Id: <20211019044951.53250-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.25.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: HK2P15301CA0006.APCP153.PROD.OUTLOOK.COM
+ (2603:1096:202:1::16) To CO1PR11MB4867.namprd11.prod.outlook.com
+ (2603:10b6:303:9a::13)
 MIME-Version: 1.0
-References: <16AF2CA329793B3C.24927@lists.openembedded.org>
- <CANx9H-DD_XYqMosG1zY0G5e4m1JDQGdBs0qeH4Dhn_=m=p8Yxg@mail.gmail.com>
- <b3369c48-065c-03ab-100a-da594d72f722@gmail.com>
-In-Reply-To: <b3369c48-065c-03ab-100a-da594d72f722@gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Mon, 18 Oct 2021 21:41:32 -0700
-Message-ID: 
- <CANx9H-Aq34_yh6HTAPBMmocrQ6nX6gVjLEndiUc13Ve81DjSCg@mail.gmail.com>
-Subject: Re: [oe] [meta-gnome][PATCH] gfbgraph: patch to build with latest
- rest
-To: Khem Raj <raj.khem@gmail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="0000000000003eac8805cead47d6"
+Received: from pek-yzhao1-d1.wrs.com (60.247.85.82) by
+ HK2P15301CA0006.APCP153.PROD.OUTLOOK.COM (2603:1096:202:1::16) with Microsoft
+ SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4649.1 via Frontend
+ Transport; Tue, 19 Oct 2021 04:50:02 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: c1fd39fc-1c2c-47fe-575e-08d992bbe9e6
+X-MS-TrafficTypeDiagnostic: MWHPR11MB1373:
+X-Microsoft-Antispam-PRVS: 
+	<MWHPR11MB1373B069CA9D070F399660A2F9BD9@MWHPR11MB1373.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:4125;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	lWG8+hEzYf7Fq3JZwZPgfP7bJCCYgCHubOmNl7wDgwdzhyATGNLVgEsaX2+npBxfxLQcRgnE/IDKUn7z6DCvKYVIYTlo5miov8pynVdSjFh+Sx8nl2z0MkTSvqwtOd1RKz1vild0Pfe+Bi1blmGzrFmZt+39zolpk8dztsMpRd3LWVgdANlFIOqTj5J+wrOXsPvl4qjKXJiLulVIiAWKjTPJBuLzOoIg25XiwLEnga8u/OTuD726Be7X3uvNuFAaj+13LWs/gQvUnwG3OYudh0tz6b94BWRfa1zBJZLojeRriznQFQxG/uKZZWCBdZRq0OQ+sc0WcKosq6Y+7/ecScQyzXkOTYVAOg9ESZmX4wFOR2UWCaeOSiVXLtIBlcU2c/T4BPvS6SlcgzF/SG8tx6YXL1ApP5zr+VXgWeuGfV947Kt982W3UzbjcXNE7fIrXdHUTEajPbNsXeEivwOP3nRJuHYkSpxBdHEl3L/pReuFnw64uF+Cp8WNFyhsCRC6PVkUZz9p9RCQB6HPuifTLK37lPcpf0RmhVF21ai/9GnQFdPIJCWXVOIDKkGr8JwAbQRnSX/8MIIdN0Xi3MZHySnHsxSHjrgHXMrjISk81XYr/Zxz8urpmdVymO6rwIvZFEWr9m8SyW6LPYDAo41O1HKAXLNH7sE5RGFlfc5ZE6fktaanIVCGV1Vjx+7nL7CZIej8KeHtNDiLT2ZVO9lbx7CRcHIquwy98I/Jr3rCleEo2djV3piErve2n0MHetNy5mJ/gWgZp2JA6B8pheNP1T+2yef7IVWS2jJywYQY6As=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(6916009)(6512007)(38350700002)(956004)(66946007)(36756003)(83380400001)(2906002)(26005)(5660300002)(44832011)(316002)(8936002)(52116002)(508600001)(86362001)(6486002)(186003)(2616005)(38100700002)(1076003)(6666004)(8676002)(6506007)(66476007)(66556008);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?G0yQzU+hnK15NeUD2flBZ/UPRfUYxvP8t3WPd487SshLoh7mgc14OebzQaT4?=
+ =?us-ascii?Q?RSf5psMA0cejNtbhCpQwvqpbhlMx09N78l576knK1rynjHKwLqFr4JMdhvao?=
+ =?us-ascii?Q?kLmODo0DrKLGkkl5Cgdsrb4NyBxx+1GiH9rK9gIxsyf1+ABZpH/r+wVLPw7D?=
+ =?us-ascii?Q?o86KGc+CoJolL7QzsBNLR4ZsOpAh17WDxfEty50uvtOu2mtTdzipmsx/wBf1?=
+ =?us-ascii?Q?FD/ts4gwlXNDigxNPwQqe0lvnaUth+UjSPVsJSN+iT5bEICVBQU0pbsnSsHd?=
+ =?us-ascii?Q?Xak88E+Zl1KLcnrfXmd2gUuKpdDzZffW8Koimum9jiz++PYWAyHNHblwDKKf?=
+ =?us-ascii?Q?fA+U0bm/Ix9HuJ753GtKAY2vS23QCOX6tfDAyYv9va8lXj41bfnx89bKU09F?=
+ =?us-ascii?Q?vf2ITn/1RBdu6PPgQ3+5NEpMee7NrceSeXejH9BNLH/k+bsq/6l6avpDSrgA?=
+ =?us-ascii?Q?J296V8VF6zjC0xTjunqi44k1t/tWwpiNEOPd39p5IdXluJNfext3qkHC4pCw?=
+ =?us-ascii?Q?IJgMKB4jDJ+a/OlIfG/NWwjKBK9317CMa3cS4fm1UnPtsGKrziPUlIq627bl?=
+ =?us-ascii?Q?ia5yIIYi1CH8DoPk1Yo9iBzLMKlHpYAgkhSH+VCES11J7hAsOzMbm/oDdYdA?=
+ =?us-ascii?Q?Drp+l+hCx0z3PkzM4N9TD4yFA2gnmkBGBn5bS1V5LzA4m7GY5H28dPj7WXB2?=
+ =?us-ascii?Q?ZulMPCvFnprt4hwfO2RfU7PO23JdpRdorrV9/LfMLGWrJjqT6jQVFSy5sPZW?=
+ =?us-ascii?Q?DxHajN0pmweAljtQ0odD3npKklN+f4TuLr1lKUUQ8QeGtDGJAvgUNMj/2e9r?=
+ =?us-ascii?Q?2LhVljWMvaBhfRPr1AI5FMvfhDbVwvGL9iyMJnlZGYh+X/1sCJhfR4RVFHIQ?=
+ =?us-ascii?Q?v/Iuh3DKFn4Tj5Ed0KN3ZZQdsgMM7Z4sAcwLwChmpa9m5CCaGbWn/GbiO8+q?=
+ =?us-ascii?Q?qJB/75+rS4rLWR37RJOCdpeAUboIujcy6FiwcUdJq4EHxodraaQuKEVkdEFr?=
+ =?us-ascii?Q?r00rLk/jYL61RnGS5b212/tOKLwmKoF62JauKV8TmSbvpI8hqFKu7KG3mfhg?=
+ =?us-ascii?Q?h4M0O2Fw/a5TfscNmFULqJod45IEmlBYwsmQdRmB/7xRp1fzoMbpdsaNxkDV?=
+ =?us-ascii?Q?pryl/dJqA/WP9sDmi9im+wSsAsrymugFRnJnkxSBMbRKetAGtzK2oOw7fba5?=
+ =?us-ascii?Q?W9eFC0NYcf0HSxaeC6WMEOOG1zIrSKIrb9kh+dx2kycVNmW75u6F+OoNeXA1?=
+ =?us-ascii?Q?EYOiIRrIy0onobQFt2CRw00O/7ydxM0S5YuBxaudNLUssHQAeJpVOHXyAZvb?=
+ =?us-ascii?Q?axATE4WixXokNLkQRXfmkAQD?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ c1fd39fc-1c2c-47fe-575e-08d992bbe9e6
+X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Oct 2021 04:50:03.2094
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 
+ 05AsRCR6eCrfOtL+3bhUQo3ADl67aV5DNXJ+KV7ia8qqprcRXvd6A6Wn93PyIvCnJk6ujX9y/2/Cn7a8ePvnUQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR11MB1373
+X-Proofpoint-GUID: VvdEyB0C_U8iRCjTCtaCeXnGFcFpP0p7
+X-Proofpoint-ORIG-GUID: VvdEyB0C_U8iRCjTCtaCeXnGFcFpP0p7
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.0.607.475
+ definitions=2021-10-18_07,2021-10-18_01,2020-04-07_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 malwarescore=0
+ phishscore=0 spamscore=0 mlxscore=0 priorityscore=1501 clxscore=1015
+ impostorscore=0 bulkscore=0 mlxlogscore=540 suspectscore=0
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2109230001 definitions=main-2110190027
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 19 Oct 2021 04:41:45 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 19 Oct 2021 04:50:07 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93454
+ https://lists.openembedded.org/g/openembedded-devel/message/93455
 
---0000000000003eac8805cead47d6
-Content-Type: text/plain; charset="UTF-8"
+Add openssl PACKAGECONFIG back as the openssl 3.0 compatibility issue
+has been fixed.
 
-On Mon, Oct 18, 2021 at 9:06 PM Khem Raj <raj.khem@gmail.com> wrote:
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../strongswan/{strongswan_5.9.3.bb => strongswan_5.9.4.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/strongswan/{strongswan_5.9.3.bb => strongswan_5.9.4.bb} (97%)
 
->
->
-> On 10/18/21 10:59, Tim Orling wrote:
-> >
-> >
-> > On Mon, Oct 18, 2021 at 9:24 AM Tim Orling via lists.openembedded.org
-> > <http://lists.openembedded.org>
-> > <ticotimo=gmail.com@lists.openembedded.org
-> > <mailto:gmail.com@lists.openembedded.org>> wrote:
-> >
-> >     librest 0.8.1 declares rest-1.0 and was released four years ago.
-> >
-> >
-> > This turns out to be incorrect, the rest-1.0 declaration is in the
-> > master branch, which we picked up with
-> > https://lists.openembedded.org/g/openembedded-devel/message/93412
-> > <https://lists.openembedded.org/g/openembedded-devel/message/93412
->
-> yeah I was a bit torn on it since there is no 0.9 release for librest
-> which is ABI breaking release but then to support libsoup3 that is what
-> is needed and also the webkitgtk 2.34 upgrade has API change  from 4.0
-> to 4.1, so all sort of pieces moving around.
->
+diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.9.3.bb b/meta-networking/recipes-support/strongswan/strongswan_5.9.4.bb
+similarity index 97%
+rename from meta-networking/recipes-support/strongswan/strongswan_5.9.3.bb
+rename to meta-networking/recipes-support/strongswan/strongswan_5.9.4.bb
+index e76636af0..cbc263d30 100644
+--- a/meta-networking/recipes-support/strongswan/strongswan_5.9.3.bb
++++ b/meta-networking/recipes-support/strongswan/strongswan_5.9.4.bb
+@@ -12,7 +12,7 @@ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+            file://0001-memory.h-Include-stdint.h-for-uintptr_t.patch \
+            "
+ 
+-SRC_URI[sha256sum] = "9325ab56a0a4e97e379401e1d942ce3e0d8b6372291350ab2caae0755862c6f7"
++SRC_URI[sha256sum] = "45fdf1a4c2af086d8ff5b76fd7b21d3b6f0890f365f83bf4c9a75dda26887518"
+ 
+ UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
+ 
+@@ -23,7 +23,7 @@ EXTRA_OECONF = " \
+ 
+ EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
+ 
+-PACKAGECONFIG ?= "curl gmp sqlite3 swanctl \
++PACKAGECONFIG ?= "curl gmp openssl sqlite3 swanctl \
+         ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-charon', 'charon', d)} \
+ "
+ PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,,${PN}-plugin-aesni"
+-- 
+2.25.1
 
-It was the right thing to do. The GNOME ecosystem is a bit in flux and
-frustrating right now. I was merely fessing up to making invalid implicit
-statements about upstream gfbgraph.
-
-
-> >
-> >
-> >     Also inherit pkgconfig so that dependencies can be found by
-> pkg-config
-> >
-> >     References:
-> >     https://gitlab.gnome.org/GNOME/libgfbgraph/-/merge_requests/6
-> >     <https://gitlab.gnome.org/GNOME/libgfbgraph/-/merge_requests/6>
-> >
-> >     Signed-off-by: Tim Orling <ticotimo@gmail.com
-> >     <mailto:ticotimo@gmail.com>>
-> >     ---
-> >       ...-Update-rest-requirement-to-rest-1.0.patch | 72
-> +++++++++++++++++++
-> >       .../recipes-gnome/gfbgraph/gfbgraph_0.2.4.bb
-> >     <http://gfbgraph_0.2.4.bb>  |  3 +-
-> >       2 files changed, 74 insertions(+), 1 deletion(-)
-> >       create mode 100644
-> >
->  meta-gnome/recipes-gnome/gfbgraph/gfbgraph/0001-Update-rest-requirement-to-rest-1.0.patch
-> >
-> >     diff --git
-> >
->  a/meta-gnome/recipes-gnome/gfbgraph/gfbgraph/0001-Update-rest-requirement-to-rest-1.0.patch
-> >
->  b/meta-gnome/recipes-gnome/gfbgraph/gfbgraph/0001-Update-rest-requirement-to-rest-1.0.patch
-> >     new file mode 100644
-> >     index 0000000000..c24a9e569f
-> >     --- /dev/null
-> >     +++
-> >
->  b/meta-gnome/recipes-gnome/gfbgraph/gfbgraph/0001-Update-rest-requirement-to-rest-1.0.patch
-> >     @@ -0,0 +1,72 @@
-> >     +From d058e6eb6c9ebf5f4fff89ec0ac93323fc64c1ba Mon Sep 17 00:00:00
-> 2001
-> >     +From: Tim Orling <ticotimo@gmail.com <mailto:ticotimo@gmail.com>>
-> >     +Date: Mon, 18 Oct 2021 08:42:35 -0700
-> >     +Subject: [PATCH] Update rest requirement to rest-1.0
-> >     +
-> >     +librest 0.8.1 declares rest-1.0 and was released four years ago.
-> >     +
-> >     +
-> https://gitlab.gnome.org/GNOME/librest/-/commit/2971b3b92701f70fc368ad64bd25cefaea043f87
-> >     <
-> https://gitlab.gnome.org/GNOME/librest/-/commit/2971b3b92701f70fc368ad64bd25cefaea043f87
-> >
-> >     +
-> >     +Upstream-Status: Submitted
-> >     +[https://gitlab.gnome.org/GNOME/libgfbgraph/-/merge_requests/6
-> >     <https://gitlab.gnome.org/GNOME/libgfbgraph/-/merge_requests/6>]
-> >     +
-> >     +Signed-off-by: Tim Orling <ticotimo@gmail.com
-> >     <mailto:ticotimo@gmail.com>>
-> >     +
-> >     +---
-> >     + .dir-locals.el       | 2 +-
-> >     + configure.ac <http://configure.ac>         | 2 +-
-> >     + gfbgraph/Makefile.am | 2 +-
-> >     + libgfbgraph.pc.in <http://libgfbgraph.pc.in>    | 2 +-
-> >     + 4 files changed, 4 insertions(+), 4 deletions(-)
-> >     +
-> >     +diff --git a/.dir-locals.el b/.dir-locals.el
-> >     +index 77abbf0..d39cdf2 100644
-> >     +--- a/.dir-locals.el
-> >     ++++ b/.dir-locals.el
-> >     +@@ -3,7 +3,7 @@
-> >     +                                "/usr/include/json-glib-1.0"
-> >     +                                "/usr/include/goa-1.0"
-> >     +                                "/usr/lib64/goa-1.0/include"
-> >     +-                               "/usr/include/rest-0.7"
-> >     ++                               "/usr/include/rest-1.0"
-> >     +                                "/usr/include/dbus-1.0"
-> >     +                                "/usr/lib64/dbus-1.0/include"
-> >     +                                "/usr/include/gio-unix-2.0/"
-> >     +diff --git a/configure.ac <http://configure.ac> b/configure.ac
-> >     <http://configure.ac>
-> >     +index fd1231f..9b49f3f 100644
-> >     +--- a/configure.ac <http://configure.ac>
-> >     ++++ b/configure.ac <http://configure.ac>
-> >     +@@ -40,7 +40,7 @@ AM_CONDITIONAL([ENABLE_GTK_DOC], false)
-> >     +
-> >     + GOBJECT_INTROSPECTION_CHECK([1.30.0])
-> >     +
-> >     +-PKG_CHECK_MODULES(LIBGFBGRAPH, [glib-2.0 gio-2.0 gobject-2.0
-> >     rest-0.7 json-glib-1.0])
-> >     ++PKG_CHECK_MODULES(LIBGFBGRAPH, [glib-2.0 gio-2.0 gobject-2.0
-> >     rest-1.0 json-glib-1.0])
-> >     +
-> >     + PKG_CHECK_MODULES(SOUP, [libsoup-2.4])
-> >     + SOUP_UNSTABLE_CPPFLAGS=-DLIBSOUP_USE_UNSTABLE_REQUEST_API
-> >     +diff --git a/gfbgraph/Makefile.am b/gfbgraph/Makefile.am
-> >     +index d07b90d..b993ab7 100644
-> >     +--- a/gfbgraph/Makefile.am
-> >     ++++ b/gfbgraph/Makefile.am
-> >     +@@ -60,7 +60,7 @@ GFBGraph_@API_MAJOR@_@API_MINOR@_gir_INCLUDES = \
-> >     +       GLib-2.0        \
-> >     +       Gio-2.0         \
-> >     +       GObject-2.0     \
-> >     +-      Rest-0.7        \
-> >     ++      Rest-1.0        \
-> >     +       Json-1.0        \
-> >     +       Soup-2.4
-> >     +
-> >     +diff --git a/libgfbgraph.pc.in <http://libgfbgraph.pc.in>
-> >     b/libgfbgraph.pc.in <http://libgfbgraph.pc.in>
-> >     +index f87073e..d4f4e3a 100644
-> >     +--- a/libgfbgraph.pc.in <http://libgfbgraph.pc.in>
-> >     ++++ b/libgfbgraph.pc.in <http://libgfbgraph.pc.in>
-> >     +@@ -9,6 +9,6 @@ apiversion=@API_VERSION@
-> >     + Name: libgfbgraph
-> >     + Description: GObject library for Facebook Graph API
-> >     + Version: @VERSION@
-> >     +-Requires: gio-2.0 glib-2.0 goa-1.0 json-glib-1.0 libsoup-2.4
-> rest-0.7
-> >     ++Requires: gio-2.0 glib-2.0 goa-1.0 json-glib-1.0 libsoup-2.4
-> rest-1.0
-> >     + Libs: -L${libdir} -lgfbgraph-${apiversion}
-> >     + Cflags: -I${includedir}/gfbgraph-@API_VERSION@
-> >     diff --git a/meta-gnome/recipes-gnome/gfbgraph/gfbgraph_0.2.4.bb
-> >     <http://gfbgraph_0.2.4.bb>
-> >     b/meta-gnome/recipes-gnome/gfbgraph/gfbgraph_0.2.4.bb
-> >     <http://gfbgraph_0.2.4.bb>
-> >     index 1c5d90f6c7..23b3bf63a5 100644
-> >     --- a/meta-gnome/recipes-gnome/gfbgraph/gfbgraph_0.2.4.bb
-> >     <http://gfbgraph_0.2.4.bb>
-> >     +++ b/meta-gnome/recipes-gnome/gfbgraph/gfbgraph_0.2.4.bb
-> >     <http://gfbgraph_0.2.4.bb>
-> >     @@ -10,8 +10,9 @@ DEPENDS = " \
-> >           gnome-online-accounts \
-> >       "
-> >
-> >     -inherit gnomebase gtk-doc gobject-introspection
-> >     +inherit gnomebase gtk-doc gobject-introspection pkgconfig
-> >
-> >     +SRC_URI += " file://0001-Update-rest-requirement-to-rest-1.0.patch"
-> >       SRC_URI[archive.md5sum] = "c38af63e49f8fe8baad99537956b69ba"
-> >       SRC_URI[archive.sha256sum] =
-> >     "6065391f35e7335588cc6b0cc4c1abbce7341488573a654551264cb9793b9379"
-> >
-> >     --
-> >     2.30.2
-> >
-> >
-> >
-> >
-> >
-> >
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#93441):
-> https://lists.openembedded.org/g/openembedded-devel/message/93441
-> > Mute This Topic: https://lists.openembedded.org/mt/86418475/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> >
->
-
---0000000000003eac8805cead47d6
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Mon, Oct 18, 2021 at 9:06 PM Khem Raj &lt;<a href=3D"mai=
-lto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt; wrote:<br></div><blockqu=
-ote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc s=
-olid;padding-left:1ex"><br>
-<br>
-On 10/18/21 10:59, Tim Orling wrote:<br>
-&gt; <br>
-&gt; <br>
-&gt; On Mon, Oct 18, 2021 at 9:24 AM Tim Orling via <a href=3D"http://lists=
-.openembedded.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.=
-org</a> <br>
-&gt; &lt;<a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" targe=
-t=3D"_blank">http://lists.openembedded.org</a>&gt; <br>
-&gt; &lt;ticotimo=3D<a href=3D"mailto:gmail.com@lists.openembedded.org" tar=
-get=3D"_blank">gmail.com@lists.openembedded.org</a> <br>
-&gt; &lt;mailto:<a href=3D"mailto:gmail.com@lists.openembedded.org" target=
-=3D"_blank">gmail.com@lists.openembedded.org</a>&gt;&gt; wrote:<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0librest 0.8.1 declares rest-1.0 and was released fo=
-ur years ago.<br>
-&gt; <br>
-&gt; <br>
-&gt; This turns out to be incorrect, the rest-1.0 declaration is in the <br=
->
-&gt; master branch, which we picked up with<br>
-&gt; <a href=3D"https://lists.openembedded.org/g/openembedded-devel/message=
-/93412" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/message/93412</a> <br>
-&gt; &lt;<a href=3D"https://lists.openembedded.org/g/openembedded-devel/mes=
-sage/93412" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded=
-.org/g/openembedded-devel/message/93412</a><br>
-<br>
-yeah I was a bit torn on it since there is no 0.9 release for librest <br>
-which is ABI breaking release but then to support libsoup3 that is what <br=
->
-is needed and also the webkitgtk 2.34 upgrade has API change=C2=A0 from 4.0=
- <br>
-to 4.1, so all sort of pieces moving around.<br>
-</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">It was the right=
- thing to do. The GNOME ecosystem is a bit in flux and frustrating right no=
-w. I was merely fessing up to making invalid implicit statements about upst=
-ream gfbgraph.</div><div dir=3D"auto"><br></div><blockquote class=3D"gmail_=
-quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1=
-ex"><br>
-&gt;<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0Also inherit pkgconfig so that dependencies can be =
-found by pkg-config<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0References:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"https://gitlab.gnome.org/GNOME/libgfbgra=
-ph/-/merge_requests/6" rel=3D"noreferrer" target=3D"_blank">https://gitlab.=
-gnome.org/GNOME/libgfbgraph/-/merge_requests/6</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"https://gitlab.gnome.org/GNOME/libgf=
-bgraph/-/merge_requests/6" rel=3D"noreferrer" target=3D"_blank">https://git=
-lab.gnome.org/GNOME/libgfbgraph/-/merge_requests/6</a>&gt;<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0Signed-off-by: Tim Orling &lt;<a href=3D"mailto:tic=
-otimo@gmail.com" target=3D"_blank">ticotimo@gmail.com</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;mailto:<a href=3D"mailto:ticotimo@gmail.com" ta=
-rget=3D"_blank">ticotimo@gmail.com</a>&gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0---<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0...-Update-rest-requirement-to-rest-1.0.patc=
-h | 72 +++++++++++++++++++<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0.../recipes-gnome/gfbgraph/<a href=3D"http:/=
-/gfbgraph_0.2.4.bb" rel=3D"noreferrer" target=3D"_blank">gfbgraph_0.2.4.bb<=
-/a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"http://gfbgraph_0.2.4.bb" rel=3D"nor=
-eferrer" target=3D"_blank">http://gfbgraph_0.2.4.bb</a>&gt;=C2=A0 |=C2=A0 3=
- +-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A02 files changed, 74 insertions(+), 1 deletio=
-n(-)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0create mode 100644<br>
-&gt;=C2=A0 =C2=A0 =C2=A0meta-gnome/recipes-gnome/gfbgraph/gfbgraph/0001-Upd=
-ate-rest-requirement-to-rest-1.0.patch<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0diff --git<br>
-&gt;=C2=A0 =C2=A0 =C2=A0a/meta-gnome/recipes-gnome/gfbgraph/gfbgraph/0001-U=
-pdate-rest-requirement-to-rest-1.0.patch<br>
-&gt;=C2=A0 =C2=A0 =C2=A0b/meta-gnome/recipes-gnome/gfbgraph/gfbgraph/0001-U=
-pdate-rest-requirement-to-rest-1.0.patch<br>
-&gt;=C2=A0 =C2=A0 =C2=A0new file mode 100644<br>
-&gt;=C2=A0 =C2=A0 =C2=A0index 0000000000..c24a9e569f<br>
-&gt;=C2=A0 =C2=A0 =C2=A0--- /dev/null<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+++<br>
-&gt;=C2=A0 =C2=A0 =C2=A0b/meta-gnome/recipes-gnome/gfbgraph/gfbgraph/0001-U=
-pdate-rest-requirement-to-rest-1.0.patch<br>
-&gt;=C2=A0 =C2=A0 =C2=A0@@ -0,0 +1,72 @@<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+From d058e6eb6c9ebf5f4fff89ec0ac93323fc64c1ba Mon =
-Sep 17 00:00:00 2001<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+From: Tim Orling &lt;<a href=3D"mailto:ticotimo@gm=
-ail.com" target=3D"_blank">ticotimo@gmail.com</a> &lt;mailto:<a href=3D"mai=
-lto:ticotimo@gmail.com" target=3D"_blank">ticotimo@gmail.com</a>&gt;&gt;<br=
->
-&gt;=C2=A0 =C2=A0 =C2=A0+Date: Mon, 18 Oct 2021 08:42:35 -0700<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+Subject: [PATCH] Update rest requirement to rest-1=
-.0<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+librest 0.8.1 declares rest-1.0 and was released f=
-our years ago.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<a href=3D"https://gitlab.gnome.org/GNOME/librest/=
--/commit/2971b3b92701f70fc368ad64bd25cefaea043f87" rel=3D"noreferrer" targe=
-t=3D"_blank">https://gitlab.gnome.org/GNOME/librest/-/commit/2971b3b92701f7=
-0fc368ad64bd25cefaea043f87</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"https://gitlab.gnome.org/GNOME/libre=
-st/-/commit/2971b3b92701f70fc368ad64bd25cefaea043f87" rel=3D"noreferrer" ta=
-rget=3D"_blank">https://gitlab.gnome.org/GNOME/librest/-/commit/2971b3b9270=
-1f70fc368ad64bd25cefaea043f87</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+Upstream-Status: Submitted<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+[<a href=3D"https://gitlab.gnome.org/GNOME/libgfbg=
-raph/-/merge_requests/6" rel=3D"noreferrer" target=3D"_blank">https://gitla=
-b.gnome.org/GNOME/libgfbgraph/-/merge_requests/6</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"https://gitlab.gnome.org/GNOME/libgf=
-bgraph/-/merge_requests/6" rel=3D"noreferrer" target=3D"_blank">https://git=
-lab.gnome.org/GNOME/libgfbgraph/-/merge_requests/6</a>&gt;]<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+Signed-off-by: Tim Orling &lt;<a href=3D"mailto:ti=
-cotimo@gmail.com" target=3D"_blank">ticotimo@gmail.com</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;mailto:<a href=3D"mailto:ticotimo@gmail.com" ta=
-rget=3D"_blank">ticotimo@gmail.com</a>&gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+---<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ .dir-locals.el=C2=A0 =C2=A0 =C2=A0 =C2=A0| 2 +-<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0+ <a href=3D"http://configure.ac" rel=3D"noreferrer=
-" target=3D"_blank">configure.ac</a> &lt;<a href=3D"http://configure.ac" re=
-l=3D"noreferrer" target=3D"_blank">http://configure.ac</a>&gt;=C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0| 2 +-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ gfbgraph/Makefile.am | 2 +-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ <a href=3D"http://libgfbgraph.pc.in" rel=3D"noref=
-errer" target=3D"_blank">libgfbgraph.pc.in</a> &lt;<a href=3D"http://libgfb=
-graph.pc.in" rel=3D"noreferrer" target=3D"_blank">http://libgfbgraph.pc.in<=
-/a>&gt;=C2=A0 =C2=A0 | 2 +-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ 4 files changed, 4 insertions(+), 4 deletions(-)<=
-br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+diff --git a/.dir-locals.el b/.dir-locals.el<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+index 77abbf0..d39cdf2 100644<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+--- a/.dir-locals.el<br>
-&gt;=C2=A0 =C2=A0 =C2=A0++++ b/.dir-locals.el<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+@@ -3,7 +3,7 @@<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;/usr/i=
-nclude/json-glib-1.0&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;/usr/i=
-nclude/goa-1.0&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;/usr/l=
-ib64/goa-1.0/include&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;/usr/in=
-clude/rest-0.7&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;/usr/in=
-clude/rest-1.0&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;/usr/i=
-nclude/dbus-1.0&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;/usr/l=
-ib64/dbus-1.0/include&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;/usr/i=
-nclude/gio-unix-2.0/&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+diff --git a/<a href=3D"http://configure.ac" rel=
-=3D"noreferrer" target=3D"_blank">configure.ac</a> &lt;<a href=3D"http://co=
-nfigure.ac" rel=3D"noreferrer" target=3D"_blank">http://configure.ac</a>&gt=
-; b/<a href=3D"http://configure.ac" rel=3D"noreferrer" target=3D"_blank">co=
-nfigure.ac</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"http://configure.ac" rel=3D"noreferr=
-er" target=3D"_blank">http://configure.ac</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+index fd1231f..9b49f3f 100644<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+--- a/<a href=3D"http://configure.ac" rel=3D"noref=
-errer" target=3D"_blank">configure.ac</a> &lt;<a href=3D"http://configure.a=
-c" rel=3D"noreferrer" target=3D"_blank">http://configure.ac</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0++++ b/<a href=3D"http://configure.ac" rel=3D"noref=
-errer" target=3D"_blank">configure.ac</a> &lt;<a href=3D"http://configure.a=
-c" rel=3D"noreferrer" target=3D"_blank">http://configure.ac</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+@@ -40,7 +40,7 @@ AM_CONDITIONAL([ENABLE_GTK_DOC],=
- false)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ GOBJECT_INTROSPECTION_CHECK([1.30.0])<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+-PKG_CHECK_MODULES(LIBGFBGRAPH, [glib-2.0 gio-2.0 =
-gobject-2.0<br>
-&gt;=C2=A0 =C2=A0 =C2=A0rest-0.7 json-glib-1.0])<br>
-&gt;=C2=A0 =C2=A0 =C2=A0++PKG_CHECK_MODULES(LIBGFBGRAPH, [glib-2.0 gio-2.0 =
-gobject-2.0<br>
-&gt;=C2=A0 =C2=A0 =C2=A0rest-1.0 json-glib-1.0])<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ PKG_CHECK_MODULES(SOUP, [libsoup-2.4])<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ SOUP_UNSTABLE_CPPFLAGS=3D-DLIBSOUP_USE_UNSTABLE_R=
-EQUEST_API<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+diff --git a/gfbgraph/Makefile.am b/gfbgraph/Makef=
-ile.am<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+index d07b90d..b993ab7 100644<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+--- a/gfbgraph/Makefile.am<br>
-&gt;=C2=A0 =C2=A0 =C2=A0++++ b/gfbgraph/Makefile.am<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+@@ -60,7 +60,7 @@ GFBGraph_@API_MAJOR@_@API_MINOR@=
-_gir_INCLUDES =3D \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0GLib-2.0=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0Gio-2.0=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0\<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0GObject-2.0=C2=A0 =C2=
-=A0 =C2=A0\<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+-=C2=A0 =C2=A0 =C2=A0 Rest-0.7=C2=A0 =C2=A0 =C2=A0=
- =C2=A0 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0++=C2=A0 =C2=A0 =C2=A0 Rest-1.0=C2=A0 =C2=A0 =C2=A0=
- =C2=A0 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0Json-1.0=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0Soup-2.4<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+diff --git a/<a href=3D"http://libgfbgraph.pc.in" =
-rel=3D"noreferrer" target=3D"_blank">libgfbgraph.pc.in</a> &lt;<a href=3D"h=
-ttp://libgfbgraph.pc.in" rel=3D"noreferrer" target=3D"_blank">http://libgfb=
-graph.pc.in</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0b/<a href=3D"http://libgfbgraph.pc.in" rel=3D"noref=
-errer" target=3D"_blank">libgfbgraph.pc.in</a> &lt;<a href=3D"http://libgfb=
-graph.pc.in" rel=3D"noreferrer" target=3D"_blank">http://libgfbgraph.pc.in<=
-/a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+index f87073e..d4f4e3a 100644<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+--- a/<a href=3D"http://libgfbgraph.pc.in" rel=3D"=
-noreferrer" target=3D"_blank">libgfbgraph.pc.in</a> &lt;<a href=3D"http://l=
-ibgfbgraph.pc.in" rel=3D"noreferrer" target=3D"_blank">http://libgfbgraph.p=
-c.in</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0++++ b/<a href=3D"http://libgfbgraph.pc.in" rel=3D"=
-noreferrer" target=3D"_blank">libgfbgraph.pc.in</a> &lt;<a href=3D"http://l=
-ibgfbgraph.pc.in" rel=3D"noreferrer" target=3D"_blank">http://libgfbgraph.p=
-c.in</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+@@ -9,6 +9,6 @@ apiversion=3D@API_VERSION@<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ Name: libgfbgraph<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ Description: GObject library for Facebook Graph A=
-PI<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ Version: @VERSION@<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+-Requires: gio-2.0 glib-2.0 goa-1.0 json-glib-1.0 =
-libsoup-2.4 rest-0.7<br>
-&gt;=C2=A0 =C2=A0 =C2=A0++Requires: gio-2.0 glib-2.0 goa-1.0 json-glib-1.0 =
-libsoup-2.4 rest-1.0<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ Libs: -L${libdir} -lgfbgraph-${apiversion}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ Cflags: -I${includedir}/gfbgraph-@API_VERSION@<br=
->
-&gt;=C2=A0 =C2=A0 =C2=A0diff --git a/meta-gnome/recipes-gnome/gfbgraph/<a h=
-ref=3D"http://gfbgraph_0.2.4.bb" rel=3D"noreferrer" target=3D"_blank">gfbgr=
-aph_0.2.4.bb</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"http://gfbgraph_0.2.4.bb" rel=3D"nor=
-eferrer" target=3D"_blank">http://gfbgraph_0.2.4.bb</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0b/meta-gnome/recipes-gnome/gfbgraph/<a href=3D"http=
-://gfbgraph_0.2.4.bb" rel=3D"noreferrer" target=3D"_blank">gfbgraph_0.2.4.b=
-b</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"http://gfbgraph_0.2.4.bb" rel=3D"nor=
-eferrer" target=3D"_blank">http://gfbgraph_0.2.4.bb</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0index 1c5d90f6c7..23b3bf63a5 100644<br>
-&gt;=C2=A0 =C2=A0 =C2=A0--- a/meta-gnome/recipes-gnome/gfbgraph/<a href=3D"=
-http://gfbgraph_0.2.4.bb" rel=3D"noreferrer" target=3D"_blank">gfbgraph_0.2=
-.4.bb</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"http://gfbgraph_0.2.4.bb" rel=3D"nor=
-eferrer" target=3D"_blank">http://gfbgraph_0.2.4.bb</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+++ b/meta-gnome/recipes-gnome/gfbgraph/<a href=3D"=
-http://gfbgraph_0.2.4.bb" rel=3D"noreferrer" target=3D"_blank">gfbgraph_0.2=
-.4.bb</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"http://gfbgraph_0.2.4.bb" rel=3D"nor=
-eferrer" target=3D"_blank">http://gfbgraph_0.2.4.bb</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0@@ -10,8 +10,9 @@ DEPENDS =3D &quot; \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0gnome-online-accounts \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0-inherit gnomebase gtk-doc gobject-introspection<br=
->
-&gt;=C2=A0 =C2=A0 =C2=A0+inherit gnomebase gtk-doc gobject-introspection pk=
-gconfig<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0+SRC_URI +=3D &quot; file://0001-Update-rest-requir=
-ement-to-rest-1.0.patch&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0SRC_URI[archive.md5sum] =3D &quot;c38af63e49=
-f8fe8baad99537956b69ba&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0SRC_URI[archive.sha256sum] =3D<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&quot;6065391f35e7335588cc6b0cc4c1abbce7341488573a6=
-54551264cb9793b9379&quot;<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0-- <br>
-&gt;=C2=A0 =C2=A0 =C2=A02.30.2<br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; Links: You receive all messages sent to this group.<br>
-&gt; View/Reply Online (#93441): <a href=3D"https://lists.openembedded.org/=
-g/openembedded-devel/message/93441" rel=3D"noreferrer" target=3D"_blank">ht=
-tps://lists.openembedded.org/g/openembedded-devel/message/93441</a><br>
-&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/86418475=
-/1997914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.o=
-rg/mt/86418475/1997914</a><br>
-&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
-bedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.o=
-rg</a><br>
-&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
-devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedde=
-d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com"=
- target=3D"_blank">raj.khem@gmail.com</a>]<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; <br>
-</blockquote></div></div>
-
---0000000000003eac8805cead47d6--
 
