@@ -1,99 +1,118 @@
-Return-Path: <esben@geanix.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 449D9C433EF
-	for <webhook@archiver.kernel.org>; Wed, 20 Oct 2021 11:21:03 +0000 (UTC)
-Received: from first.geanix.com (first.geanix.com [116.203.34.67])
- by mx.groups.io with SMTP id smtpd.web08.6672.1634728860477115558
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41418C433EF
+	for <webhook@archiver.kernel.org>; Wed, 20 Oct 2021 11:45:49 +0000 (UTC)
+Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
+ [209.85.160.172])
+ by mx.groups.io with SMTP id smtpd.web08.6874.1634730348252553844
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Oct 2021 04:21:02 -0700
+ Wed, 20 Oct 2021 04:45:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@geanix.com
- header.s=first header.b=BFJUsYX6;
- spf=pass (domain: geanix.com, ip: 116.203.34.67, mailfrom: esben@geanix.com)
-Received: from localhost (87-49-146-144-mobile.dk.customer.tdc.net
- [87.49.146.144])
-	by first.geanix.com (Postfix) with ESMTPSA id A149CC7F2C;
-	Wed, 20 Oct 2021 11:20:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=geanix.com; s=first;
-	t=1634728856; bh=WCqwmyp4RLPMVxx+VsM5NYL3CpaHmeTaqityntM66So=;
-	h=From:To:Cc:Subject:Date;
-	b=BFJUsYX6ioBP3yXF52pQ17oEJAuM+K9EOnJtyQf3Hh7FS1tZyQiXw+FNAjnd9zyvK
-	 fmMxB7PZSMOH7PtHdJCaRM3mQrFmrPszguPsGuaVtTX2MdzRhDxlYTWIvXaLAHfglt
-	 MmF0SY7PTeRYpCUlQ2fpPwhZXSdG7SMGouKT/TX3Vtsy3Pvt9tRKeB29xWMAjJuRpH
-	 WhwOblYctTGzV1G7l5DlSu5P5JW6oOBtXN0e9PBZn5z/I5HHqQKMraHTTTi9KPRG3J
-	 h6GS+lucYaGQcnZTLatvkAj215WJRzVLv+1QYThl+uCOFYsJ8AwV8bB8QUvWh3ykC+
-	 YNTygGLMotDng==
-From: Esben Haabendal <esben@geanix.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: heinold@inf.fu-berlin.de,
-	mario@ossystems.com.br,
-	maxin.john@intel.com,
-	otavio@ossystems.com.br,
-	Esben Haabendal <esben.haabendal@huawei.com>
-Subject: [meta-java] [PATCH v2] openjdk-7: fix recipe parsing for "other"
- architectures
-Date: Wed, 20 Oct 2021 13:20:55 +0200
-Message-Id: 
- <b099be176884f080fa998fabdc7114f2bba9cc5d.1634728692.git.esben.haabendal@huawei.com>
-X-Mailer: git-send-email 2.33.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=U98kgT0I;
+ spf=pass (domain: gmail.com, ip: 209.85.160.172,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f172.google.com with SMTP id t16so2703685qto.5
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 20 Oct 2021 04:45:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=2O5fFjxhK5qViKWegKzYDFnnLzz1Choiwi2BIUQ7vKg=;
+        b=U98kgT0IQlPuQ1KV0PWxndZhzDzPX20bD6oCD1fzTFOcjgL4zvBiwzTxodGqzFCnMG
+         rd9YJgdbyOhBdk526KVzNhyWzXAVGRWmP6xwLyNxkRhzbATEYpu0UHNF2ZeRZF549ICV
+         StphbRfI4347kR73U0VMjoPBZPGDsVqnychPITemzju7LlXpjYsK780TJqM4caw2zl8C
+         zO0D4sjubPc2vfwSXsYoeI87s1JmFI2dTCwqQvUPJ9JOmEDRpTT1R+fFpCCl6yt0AuDA
+         zhtWShqtkCl82D8b2thLp5Ej8UIBo4hI9gKgN1c7rHaf1ku8SWqfJ06zBuHvr8tYNKSg
+         0T1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=2O5fFjxhK5qViKWegKzYDFnnLzz1Choiwi2BIUQ7vKg=;
+        b=RcQFYbkOlqK3kk/JtGIXx+/ajgrHF2MeJ7JSAwt8jLj2yjALAfVVrfxBPZSqOZYLPt
+         QqxVTs1ipsHBLBVmTS4Oltg5jE5FY5ndA5JT3SPOuiD/LlJgkAKb1xueOMJnMGE5UORH
+         mW2qt8UqKX2A2owxtQEMnArsxekO91XnZd1Ovb3hG78pDAyZNIGqIyVlZSWRPOwxSBo9
+         QSp2UrZFTqm7RBjHGzVSQOTjN8J8IcRMEG1BLxUFkRk+BvVeUSibhm9AhN8cMuCYRdqS
+         ugMs7CUOd0XSuwjWV8XyBbHRLmlD6YD75fpzYY6EM2NXf5y07hvg9ddzNTh4BzvPH13P
+         RqyQ==
+X-Gm-Message-State: AOAM532IKVC4TYXrRyfHJXUaqehEZW6FFj6zJmW+DfFDhjN3y1yF2wBA
+	R2xvvTuZtuL5rsQ6wPkh1v1fa67CV+TzINva4y0=
+X-Google-Smtp-Source: 
+ ABdhPJxjFA9sEkQhtKFZsP0rremR+rV81hg+QWBCP0haYf/Ww5GyMn8YukaUioWZoS7/fvzkpQOVWTECLTKNPdNZQR0=
+X-Received: by 2002:a05:622a:190e:: with SMTP id
+ w14mr6538990qtc.112.1634730347198;
+ Wed, 20 Oct 2021 04:45:47 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+References: <20211019131925.21725-1-koansoftware@gmail.com>
+In-Reply-To: <20211019131925.21725-1-koansoftware@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 20 Oct 2021 04:45:21 -0700
+Message-ID: 
+ <CAMKF1sqso8ZijOMFVoEYWZG70W1rAK9ih3AthPOvjV3_A+q-sg@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH v2] bluepy_git.bb: Added recipe for
+ BluePy Python interface to Bluetooth LE on Linux (v2)
+To: Marco Cavallini <koansoftware@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Marco Cavallini <m.cavallini@koansoftware.com>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Oct 2021 11:21:03 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Oct 2021 11:45:49 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93479
+ https://lists.openembedded.org/g/openembedded-devel/message/93480
 
-From: Esben Haabendal <esben.haabendal@huawei.com>
+fails during install now on musl/x86 arm/glibc
 
-Using meta-java in configurations where TARGET architecture is something
-different than the most mainstream archictures (intel, arm, powerpc, mips=
-),
-bitbake errors out with something like the following:
+https://errors.yoctoproject.org/Errors/Details/613446/
+https://errors.yoctoproject.org/Errors/Details/613456/
 
-    ERROR: ExpansionError during parsing /home/user/poky/meta-java/recipe=
-s-core/openjdk/openjdk-7_99b00-2.6.5.bb
-    Traceback (most recent call last):
-      File "Var <LLVM_CONFIGURE_ARCH>", line 1, in <module>
-      File "/home/user/poky/meta-java/classes/openjdk-build-helper.bbclas=
-s", line 86, in openjdk_build_helper_get_llvm_configure_arch(d=3D<bb.data=
-_smart.DataSmart object at 0x7fc729388940>):
-             else:
-        >        if 'shark' in d.getVar('PACKAGECONFIG').split():
-                     bb.warn("%s does not support %s in Shark builds yet"=
- % (d.getVar('PN'), arch) );
-    bb.data_smart.ExpansionError: Failure expanding variable LLVM_CONFIGU=
-RE_ARCH, expression was ${@openjdk_build_helper_get_llvm_configure_arch(d=
-)} which triggered exception AttributeError: 'NoneType' object has no att=
-ribute 'split'
-
-It should be safe to set PACKAGECONFIG default value to empty string, so =
-we
-can always safely expand it.
-
-Signed-off-by: Esben Haabendal <esben.haabendal@huawei.com>
----
- recipes-core/openjdk/openjdk-7-common.inc | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/recipes-core/openjdk/openjdk-7-common.inc b/recipes-core/ope=
-njdk/openjdk-7-common.inc
-index 0435233148b0..7f46a0932204 100644
---- a/recipes-core/openjdk/openjdk-7-common.inc
-+++ b/recipes-core/openjdk/openjdk-7-common.inc
-@@ -97,6 +97,7 @@ export CACAO_CONFIGURE_ARGS =3D " \
-=20
- JAVA_HOME[unexport] =3D "1"
-=20
-+PACKAGECONFIG ??=3D ""
- PACKAGECONFIG[kerberos] =3D "--enable-system-kerberos,--disable-system-k=
-erberos,krb5"
-=20
- EXTRA_OECONF =3D " \
---=20
-2.33.0
-
+On Tue, Oct 19, 2021 at 6:19 AM Marco Cavallini <koansoftware@gmail.com> wrote:
+>
+> From: Marco Cavallini <m.cavallini@koansoftware.com>
+>
+> Signed-off-by: Marco Cavallini <koansoftware@gmail.com>
+> ---
+>  .../recipes-connectivity/bluepy/bluepy_git.bb   | 17 +++++++++++++++++
+>  1 file changed, 17 insertions(+)
+>  create mode 100644 meta-networking/recipes-connectivity/bluepy/bluepy_git.bb
+>
+> diff --git a/meta-networking/recipes-connectivity/bluepy/bluepy_git.bb b/meta-networking/recipes-connectivity/bluepy/bluepy_git.bb
+> new file mode 100644
+> index 000000000..03b1562b6
+> --- /dev/null
+> +++ b/meta-networking/recipes-connectivity/bluepy/bluepy_git.bb
+> @@ -0,0 +1,17 @@
+> +DESCRIPTION = "Python interface to Bluetooth LE on Linux"
+> +HOMEPAGE = "https://github.com/IanHarvey/bluepy"
+> +SECTION = "devel/python"
+> +
+> +DEPENDS = "${PYTHON_PN} glib-2.0"
+> +RDEPENDS_${PN} = "bluez5"
+> +
+> +LICENSE = "GPLv2 & PD"
+> +LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+> +LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/PD;md5=b3597d12946881e13cb3b548d1173851"
+> +
+> +inherit setuptools3 pkgconfig
+> +
+> +SRC_URI = "git://github.com/IanHarvey/bluepy.git;protocol=https;rev=7ad565231a97c304c0eff45f2649cd005e69db09"
+> +S = "${WORKDIR}/git"
+> +
+> +TARGET_CC_ARCH += "${LDFLAGS}"
+> --
+> 2.17.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#93464): https://lists.openembedded.org/g/openembedded-devel/message/93464
+> Mute This Topic: https://lists.openembedded.org/mt/86439385/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
