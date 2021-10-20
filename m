@@ -1,100 +1,103 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88C3DC433F5
-	for <webhook@archiver.kernel.org>; Wed, 20 Oct 2021 17:28:23 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
- [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.web12.512.1634750902230528953
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8151AC433F5
+	for <webhook@archiver.kernel.org>; Wed, 20 Oct 2021 17:30:44 +0000 (UTC)
+Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com
+ [209.85.222.169])
+ by mx.groups.io with SMTP id smtpd.web12.552.1634751043617644367
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Oct 2021 10:28:22 -0700
+ Wed, 20 Oct 2021 10:30:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=czQviUOU;
- spf=pass (domain: gmail.com, ip: 209.85.221.48,
- mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id e3so48149711wrc.11
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Wy2CDjYO;
+ spf=pass (domain: gmail.com, ip: 209.85.222.169,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f169.google.com with SMTP id j12so3836588qkk.5
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Oct 2021 10:28:21 -0700 (PDT)
+ Wed, 20 Oct 2021 10:30:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=EuAeiaWs494YNRFO2+fgF8hwUyNu1kBKqIorh+g+X/A=;
-        b=czQviUOUfAjrEwC/KOu0sJSuUUxfjfr8c8bbQP6XfRK60zFQcAf0P/a1OHvmHnMyUr
-         +n9w21ip51V5B0MERxyrnncIfHv5Ooj2Yk5YoHGSSnvtpSnfzQETtYDjqxmPYfztQf+T
-         YQ9CiUJJb99S0JYwx/OU43fJbr0uqAAw2E7VIkRvOh6JthwlBDDcUrPEQcZAvvelR+QA
-         2nIA6RHKnSU1oOrgQuYRCsyIKCXTcTuXHXhbb286OgmwqfaZAThcAvwqG3QC1L4tq0uH
-         NFxIcwQqHP1mdd/CFHGYPF7xhcjjWmoyYxbHUO7nqHBqXKwz/WGBtp89xNMqQQ3GJme4
-         +dpQ==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=f9U9KYBuHA9xbcmM3kO0yEfSCENgSYYQUWgG5+Cp6/Q=;
+        b=Wy2CDjYOsSY8LZ1CNfcMw5fYdv/EocVQLnNA4+GnTvBijlBJ4T6lFfQY2YnTJvz0yh
+         srOkvf5Ti0VhJgKT+Cx2EAW+3Lwo//gjy2ACl3Go15a6RoKkfXmka6Yacx7VpXCCLL7L
+         /+lfAElY1pyyV4Hrq7ugMgBqF0cGle5ybSzPY8LoKvx0H14uad4h0RC8xJ5k7Ob7pv+A
+         eFvzifC6QsmsGsfrcrMzlEOSpO0e5L3LnMlCrrw017skchpMGJfwF5pcXYqaswDrfWIT
+         3GLALiHKFfi9qOrWbxsxxNiD6WMkutgVSDY7MUBk+H2QOHGn7qBYsGDZpWHLnnvpXNk1
+         9i1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=EuAeiaWs494YNRFO2+fgF8hwUyNu1kBKqIorh+g+X/A=;
-        b=RFi9wXIIVCbTEnWWAzI1pvhqlTqe3JGTejaOKkOenSO+ZSJ8LqQ3eXFiLdmLdMHWom
-         isEaDNpSDP/jdOu0+xT1SR1pSuB4vIhyp/ilrasD9idi5ulb9rpDLyCPHH5oul27l65w
-         0tWKX+iLziw417Xjo359h7kSYH/JlMW69fLaIe6BmkY3nRlZIuNnsGGmkBsL4AkWi9F3
-         cQmrrb2ca3GYI3d07Nn/B9KvMD3aS8yIOb7un2nAL4aEY0q2IqBuje+xsVzLp4ylVm00
-         Bb65a2cJhVw+pzJipf2ZGxNE5GWpjQyy+tLpbnLsLHtklengwyRoWX7+ZyGYcrJEiT2U
-         u4cw==
-X-Gm-Message-State: AOAM53249nVJ1jsaZtOgNO+ojylW3ZbDdB+kjWuUu080ff2EByKQS2ae
-	jFD26IVdoxXamnw75KnEI9vidy5XXfU=
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=f9U9KYBuHA9xbcmM3kO0yEfSCENgSYYQUWgG5+Cp6/Q=;
+        b=eiycSymOsfRKVjfaIBGxqNaWYxbX/BTfxBHBGWz9sDnaALeGqy3hcmiUATTefEMbHQ
+         UYBFZoV0r9ogGkIAmMAKmT1pKcX2bsTmxgL3PGgbf9ZsqcypzdQj2dgn6/FiwXq6ty2a
+         mr5dhUNlucxIKxaUc7SEKrGjXpu2z8AMjY75LJGHUXrUGmYrnAKGuzH8Y4jNz3hr7NPV
+         5Q6ywp0kqhBtLbNgtoxzf6HcXgGlD5RH/0FMOTOaikyRL9RWD8mQUpUhYGaTZq8qokPw
+         JC1jL6xr/TpK7Io9rit3HzxZUuwGisJEtQiNXRPmDYXcfGAkDixYi53iNp1SswIasBje
+         M07w==
+X-Gm-Message-State: AOAM531WC2HCVeu11Dgvu0nssL2xW5GHt84tT3fA/bJZ3Y2p7YiZEbGf
+	2aVuHd3jKjiYwhUAH/VOvyuNAcJcukl6OHVxfbI=
 X-Google-Smtp-Source: 
- ABdhPJxDwZfi2lWZiGuEv1u4lYJ96LKG/cBx/tzYDSlaWjaVM8uXTYJzUsCgnMs4PkFi05SXNbspgA==
-X-Received: by 2002:adf:a40f:: with SMTP id d15mr668474wra.41.1634750900525;
-        Wed, 20 Oct 2021 10:28:20 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id
- j1sm3429536wrb.56.2021.10.20.10.28.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 Oct 2021 10:28:20 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] luaposix: depend on target libxcrypt instead of
- native
-Date: Wed, 20 Oct 2021 19:28:17 +0200
-Message-Id: <20211020172817.576780-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.32.0
+ ABdhPJz+Co84Jo/+elMIdnPehMTqGDi4h5OiQXmVjF/bSZW6fMhrR8f/G4BcdqDnFFMdPcFkQ0RwwwaDRBcgAQcG5gA=
+X-Received: by 2002:ae9:de07:: with SMTP id s7mr374318qkf.47.1634751042701;
+ Wed, 20 Oct 2021 10:30:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20211011184140.653609-1-alex@linutronix.de>
+ <20211011184140.653609-23-alex@linutronix.de>
+ <CA+chaQeHXgVqBmjRBFNsZGYoz076q4MHwEfMPCzbmO-ScUgsSQ@mail.gmail.com>
+In-Reply-To: 
+ <CA+chaQeHXgVqBmjRBFNsZGYoz076q4MHwEfMPCzbmO-ScUgsSQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 20 Oct 2021 10:30:16 -0700
+Message-ID: 
+ <CAMKF1spoVQEQB9CAs+g0_n6pYx4gJ0kPjuiLTEM6-XMhpqKwNQ@mail.gmail.com>
+Subject: Re: [oe] [PATCH 23/24] luaposix: update 33.4.0 -> 35.1
+To: Martin Jansa <Martin.Jansa@gmail.com>
+Cc: Alexander Kanavin <alex.kanavin@gmail.com>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Alexander Kanavin <alex@linutronix.de>,
+ Haseeb Ashraf <Haseeb_Ashraf@mentor.com>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Oct 2021 17:28:23 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Oct 2021 17:30:44 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93496
+ https://lists.openembedded.org/g/openembedded-devel/message/93497
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-devtools/luaposix/luaposix_35.1.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Wed, Oct 20, 2021 at 9:47 AM Martin Jansa <Martin.Jansa@gmail.com> wrote:
+>
+> On Mon, Oct 11, 2021 at 8:42 PM Alexander Kanavin <alex.kanavin@gmail.com> wrote:
+>>
+>> Drop autotools/makefile patch and change the build system to luke,
+>> as upstream uses that now.
+>
+>
+> Any idea why it fails?
+>
+> luaposix/35.1-r0/git$ build-aux/luke
+> luke: fatal: required symbol 'crypt' not found in any of libc, libcrypt
+>
+> I already have a fix from Khem:
+> https://git.openembedded.org/meta-openembedded/commit/?id=60d4e95b4ba3c42e70e321af4c30b5767bcf564b
+>
+> but it doesn't seem enough.
 
-diff --git a/meta-oe/recipes-devtools/luaposix/luaposix_35.1.bb b/meta-oe/recipes-devtools/luaposix/luaposix_35.1.bb
-index 444b63ed77..0e5cd09e0f 100644
---- a/meta-oe/recipes-devtools/luaposix/luaposix_35.1.bb
-+++ b/meta-oe/recipes-devtools/luaposix/luaposix_35.1.bb
-@@ -3,7 +3,7 @@ LICENSE = "MIT"
- HOMEPAGE = "https://github.com/luaposix/luaposix"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f81069e00c0cad249f20efe958276db1"
- 
--DEPENDS += "lua-native lua libxcrypt-native"
-+DEPENDS += "lua-native lua libxcrypt"
- 
- SRC_URI = "git://github.com/luaposix/luaposix.git;branch=release-v${PV} \
- "
-@@ -16,7 +16,7 @@ B = "${S}"
- inherit pkgconfig
- 
- do_compile() {
--  ${S}/build-aux/luke
-+    ${S}/build-aux/luke
- }
- 
- do_install() {
--- 
-2.32.0
+yes, its on list of failures still. I can see it happen when building
+for qemuarm, luke is a native tool and its perhaps mixing libcrypt
+coming from libc or libxcrrypt on some hosts.
+and cant find it reliably.
 
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#93483): https://lists.openembedded.org/g/openembedded-devel/message/93483
+> Mute This Topic: https://lists.openembedded.org/mt/86244775/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
