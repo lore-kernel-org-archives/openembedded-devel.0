@@ -1,170 +1,112 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A4C43C433EF
-	for <webhook@archiver.kernel.org>; Wed, 20 Oct 2021 14:11:05 +0000 (UTC)
-Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com
- [209.85.222.176])
- by mx.groups.io with SMTP id smtpd.web11.8555.1634739064373077593
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 43C31C433EF
+	for <webhook@archiver.kernel.org>; Wed, 20 Oct 2021 16:47:22 +0000 (UTC)
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com
+ [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web10.568.1634748441346796779
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Oct 2021 07:11:04 -0700
+ Wed, 20 Oct 2021 09:47:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=IRYMdWCm;
- spf=pass (domain: gmail.com, ip: 209.85.222.176,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f176.google.com with SMTP id b15so3178509qkl.10
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Xh6AFmqQ;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54,
+ mailfrom: martin.jansa@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id
+ u6-20020a17090a3fc600b001a00250584aso924272pjm.4
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Oct 2021 07:11:04 -0700 (PDT)
+ Wed, 20 Oct 2021 09:47:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=MCOgxf+idZbMzFOjAJ13y2er6nIbNzdpanQPN/RuX+4=;
-        b=IRYMdWCmfh2tVSN2mckL29UbhptHL+HRwdVcMkXpK0xzITxBSWklfKMfx2joVcnDVW
-         VOS3lQiiX9L0jxlwZICly2EHHgU2UONqUJOO0TbA+lciI2aAO9AZzYyebwV7BGAgWVYK
-         nYJfMZ0gJn5EWle/LxUpBzm4z309SJ0fDMZo8WognGS2TTAzH/579wcfGo1lYxDzQjq+
-         gS/iqwlCYLLmvQ+Lx4S+1qd1hm8wcdwmBxODl5TJf7p3KwS1dnlX9nFpaKx3Xi4XwVaq
-         xjiB2f6zsG68NhP/MGf7Q9eWJjCzP6hp6IUdhoDeBHDtOgAQeZDhmghDcTanqU45QxEh
-         +yqg==
+        bh=1C3vhxMGpaYBUCwNVH0jcc4ZHjn5FbFNrg/lMreZAwA=;
+        b=Xh6AFmqQiz3C1HOJt4EtCVxJTjdOzqQuxyCNnPj5/oJEew8IoNGPBRjMrchBVt4s/9
+         eG3hA/QIyW6CsfRZEcs8Z9eeGzQmVe8AsFpGvtAxARNEddHVrPyITgSivrXQW06x3yiQ
+         pk7pAEoKDTfCGjyJch6yu5QY4NRwyyctvI9K6T11v4WIRKyNdGu3SIrhqgEv7ykxgGVn
+         fLbqplIhrV3F79l3UpGi8ZVGyq9w9NTZhsDEvIH90gRPNyU5MEDYdhbPeSStwBk3+oez
+         cs9Tmh2D6AreCyyacrvgvlppF3bhnIrFLzl5LIEvsvcUUMLz6SrNk8MafVlw6YoUJ7wT
+         eaDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=MCOgxf+idZbMzFOjAJ13y2er6nIbNzdpanQPN/RuX+4=;
-        b=vX1+wE0/AsU7yqzzhOyWjneiL0OL5dlOfL6AjIcRmMWFpa/kZPqi4thtyXrk/k2Reg
-         z5HR4j/OBXBxyadjansH0ArgzcVYak6RRJ7Bt14ZHmhjE+ospamS43l80b4s574r4Sem
-         V+6ydrHiDrNhc0J+P6Q/JZfGUf5se9z+V020xmVIycmaKfB2gs9tnReEzuuPcSPkCWRC
-         CkUbMePAc9VgJTvurUO87my5gAFMpMEnWpGh9QmnGBIbvQMSZahI0w2D4r6UqW7V/3vA
-         fsbRmX0Vi59W+rHlkyZJjqUFLQHSSII+SGsZt0ZjLYweZoW08zMVNnHKZksYUosDBeav
-         fBbg==
-X-Gm-Message-State: AOAM531+ufahjuANj9VmmfwBcNiKpz04CwduEr9oAd3asfYokrHkOWZp
-	sBmWQZUESGadyf1CDRSKzqUPIyCtXCPF2cL821g=
+        bh=1C3vhxMGpaYBUCwNVH0jcc4ZHjn5FbFNrg/lMreZAwA=;
+        b=WaGlx0uDevlAgf/kNgpXKo/JiPoEvp5wtSxvMn7ElFwRNINHXV0IkbnhMfGEE4eQA9
+         hJStNijaFVRj+DCRPmqoDkfRx0sN9TyATVzrEcxAdsNIh5xt/0L3ep51sdzGuVkWzbOI
+         vU1mBz9XIWakpTXcslAhN55rreTzLU+2OXb/fBwkbOG1Yylr4D751fpkxXG0pZWs3+IC
+         Mx+alezaIBju7q3ZVVhBm9F6zXWAgOs3R/ar8mq9ampc9X3EKroCQzcNrqOdUJucctto
+         7dT195Kud/s3A50dnmOhenXZn6EODdO1mPJR5NaNWzISQkB9HJSo94QSUfiOVl4pQF49
+         HE7g==
+X-Gm-Message-State: AOAM530avesOnqaSOlBjwHBPN6sSvtSpYJlFc4S6TwPfA/sHveOhmJfl
+	5KlUcMgDFyyRD81e9yAYbqRpFpLgiGjjSugLTQA=
 X-Google-Smtp-Source: 
- ABdhPJy8+DLBKtzCVpFV8Go8bcIhjtOPC6i9Ju1Cb+1yQ/iW7jkr+NXIBdFVHaxsu6GW4Fo7xlw32nyADaG+UgZdd/k=
-X-Received: by 2002:ae9:dc84:: with SMTP id q126mr266475qkf.128.1634739063412;
- Wed, 20 Oct 2021 07:11:03 -0700 (PDT)
+ ABdhPJz88l9aAzpbloyhnhRLDTOo3p7PkSGuVFyGj8xZVHbQkPwsFh1joMk9CHjABnpKgkvGTkdNyW1+3+XuuNE7Cls=
+X-Received: by 2002:a17:90b:3e8d:: with SMTP id
+ rj13mr50079pjb.183.1634748440889;
+ Wed, 20 Oct 2021 09:47:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20211019131925.21725-1-koansoftware@gmail.com>
- <CAMKF1sqso8ZijOMFVoEYWZG70W1rAK9ih3AthPOvjV3_A+q-sg@mail.gmail.com>
- <41085dec-5948-b1c1-56ea-b10004e07939@gmail.com>
-In-Reply-To: <41085dec-5948-b1c1-56ea-b10004e07939@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 20 Oct 2021 07:10:52 -0700
+References: <20211011184140.653609-1-alex@linutronix.de>
+ <20211011184140.653609-23-alex@linutronix.de>
+In-Reply-To: <20211011184140.653609-23-alex@linutronix.de>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 20 Oct 2021 18:47:10 +0200
 Message-ID: 
- <CAMKF1soX6d8g6fyxB4NNhfmEECfbqE0+r2Xixn_Yxi2PmNQGuA@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH v2] bluepy_git.bb: Added recipe for
- BluePy Python interface to Bluetooth LE on Linux (v2)
-To: koansoftware@gmail.com
-Cc: Marco Cavallini <m.cavallini@koansoftware.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="0000000000002cdd4805cec959e4"
+ <CA+chaQeHXgVqBmjRBFNsZGYoz076q4MHwEfMPCzbmO-ScUgsSQ@mail.gmail.com>
+Subject: Re: [oe] [PATCH 23/24] luaposix: update 33.4.0 -> 35.1
+To: Alexander Kanavin <alex.kanavin@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Alexander Kanavin <alex@linutronix.de>,
+ Haseeb Ashraf <Haseeb_Ashraf@mentor.com>
+Content-Type: multipart/alternative; boundary="0000000000001dcb1505cecb886f"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Oct 2021 14:11:05 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Oct 2021 16:47:22 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93482
+ https://lists.openembedded.org/g/openembedded-devel/message/93483
 
---0000000000002cdd4805cec959e4
+--0000000000001dcb1505cecb886f
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 20, 2021 at 5:07 AM Marco <koansoftware@gmail.com> wrote:
+On Mon, Oct 11, 2021 at 8:42 PM Alexander Kanavin <alex.kanavin@gmail.com>
+wrote:
 
-> On 20/10/21 13:45, Khem Raj wrote:
-> > fails during install now on musl/x86 arm/glibc
-> >
-> > https://errors.yoctoproject.org/Errors/Details/613446/
-> > https://errors.yoctoproject.org/Errors/Details/613456/
-> >
->
-> Hi Khem,
-> I diligently followed the instructions on the site
-> https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
->
-> To correct the errors you reported to me previously, I installed the
-> 'master' version of Poky + Openembedded and recompiled everything
-> without errors and I re-sent the v2 patch.
->
-> At this point I no longer know what the requirements are for submitting
-> a patch.
-> Do you need to pass any series of tests?
-> Which one?
-> How do I reproduce them locally?
-
-
-We have few Jenkins nodes where world builds are run and it takes quite a
-bit for those to finish
-
-I also have a Comcast internal node and one
-
-Then we do have a job at yocto auto builder too and it=E2=80=99s failing on=
- some of
-them but not all
-
-Eg it=E2=80=99s also failing on yocto ab which builds for qemux86-64/glibc
-
-
-
->
-> Thank you
-> --
-> Marco
+> Drop autotools/makefile patch and change the build system to luke,
+> as upstream uses that now.
 >
 
---0000000000002cdd4805cec959e4
+Any idea why it fails?
+
+luaposix/35.1-r0/git$ build-aux/luke
+luke: fatal: required symbol 'crypt' not found in any of libc, libcrypt
+
+I already have a fix from Khem:
+https://git.openembedded.org/meta-openembedded/commit/?id=60d4e95b4ba3c42e70e321af4c30b5767bcf564b
+
+but it doesn't seem enough.
+
+--0000000000001dcb1505cecb886f
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Wed, Oct 20, 2021 at 5:07 AM Marco &lt;<a href=3D"mailto=
-:koansoftware@gmail.com">koansoftware@gmail.com</a>&gt; wrote:<br></div><bl=
+<div dir=3D"ltr"><div dir=3D"ltr">On Mon, Oct 11, 2021 at 8:42 PM Alexander=
+ Kanavin &lt;<a href=3D"mailto:alex.kanavin@gmail.com" target=3D"_blank">al=
+ex.kanavin@gmail.com</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><bl=
 ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
-t-width:1px;border-left-style:solid;padding-left:1ex;border-left-color:rgb(=
-204,204,204)">On 20/10/21 13:45, Khem Raj wrote:<br>
-&gt; fails during install now on musl/x86 arm/glibc<br>
-&gt; <br>
-&gt; <a href=3D"https://errors.yoctoproject.org/Errors/Details/613446/" rel=
-=3D"noreferrer" target=3D"_blank">https://errors.yoctoproject.org/Errors/De=
-tails/613446/</a><br>
-&gt; <a href=3D"https://errors.yoctoproject.org/Errors/Details/613456/" rel=
-=3D"noreferrer" target=3D"_blank">https://errors.yoctoproject.org/Errors/De=
-tails/613456/</a><br>
-&gt; <br>
-<br>
-Hi Khem,<br>
-I diligently followed the instructions on the site<br>
-<a href=3D"https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenE=
-mbedded" rel=3D"noreferrer" target=3D"_blank">https://www.openembedded.org/=
-wiki/How_to_submit_a_patch_to_OpenEmbedded</a><br>
-<br>
-To correct the errors you reported to me previously, I installed the <br>
-&#39;master&#39; version of Poky + Openembedded and recompiled everything <=
-br>
-without errors and I re-sent the v2 patch.<br>
-<br>
-At this point I no longer know what the requirements are for submitting <br=
->
-a patch.<br>
-Do you need to pass any series of tests?<br>
-Which one?<br>
-How do I reproduce them locally?</blockquote><div dir=3D"auto"><br></div><d=
-iv dir=3D"auto">We have few Jenkins nodes where world builds are run and it=
- takes quite a bit for those to finish</div><div dir=3D"auto"><br></div><di=
-v dir=3D"auto">I also have a Comcast internal node and one=C2=A0</div><div =
-dir=3D"auto"><br></div><div dir=3D"auto">Then we do have a job at yocto aut=
-o builder too and it=E2=80=99s failing on some of them but not all=C2=A0</d=
-iv><div dir=3D"auto"><br></div><div dir=3D"auto">Eg it=E2=80=99s also faili=
-ng on yocto ab which builds for qemux86-64/glibc=C2=A0</div><div dir=3D"aut=
-o"><br></div><div dir=3D"auto"><br></div><blockquote class=3D"gmail_quote" =
-style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:s=
-olid;padding-left:1ex;border-left-color:rgb(204,204,204)" dir=3D"auto"><br>
-<br>
-Thank you<br>
---<br>
-Marco<br>
-</blockquote></div></div>
+t:1px solid rgb(204,204,204);padding-left:1ex">Drop autotools/makefile patc=
+h and change the build system to luke,<br>
+as upstream uses that now.<br></blockquote><div><br></div><div>Any idea why=
+ it fails?</div><div><br></div><div>luaposix/35.1-r0/git$ build-aux/luke</d=
+iv>luke: fatal: required symbol &#39;crypt&#39; not found in any of libc, l=
+ibcrypt</div><div class=3D"gmail_quote"><br></div><div class=3D"gmail_quote=
+">I already have a fix from Khem:</div><div class=3D"gmail_quote"><a href=
+=3D"https://git.openembedded.org/meta-openembedded/commit/?id=3D60d4e95b4ba=
+3c42e70e321af4c30b5767bcf564b" target=3D"_blank">https://git.openembedded.o=
+rg/meta-openembedded/commit/?id=3D60d4e95b4ba3c42e70e321af4c30b5767bcf564b<=
+/a><br></div><div class=3D"gmail_quote"><br></div><div class=3D"gmail_quote=
+">but it doesn&#39;t seem enough.</div></div>
 
---0000000000002cdd4805cec959e4--
+--0000000000001dcb1505cecb886f--
 
