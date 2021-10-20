@@ -2,157 +2,99 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88FB3C433F5
-	for <webhook@archiver.kernel.org>; Wed, 20 Oct 2021 17:27:18 +0000 (UTC)
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com
- [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web10.486.1634750838012264157
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 88C3DC433F5
+	for <webhook@archiver.kernel.org>; Wed, 20 Oct 2021 17:28:23 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
+ [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.web12.512.1634750902230528953
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Oct 2021 10:27:18 -0700
+ Wed, 20 Oct 2021 10:28:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=miwKcVxC;
- spf=pass (domain: gmail.com, ip: 209.85.216.53,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=czQviUOU;
+ spf=pass (domain: gmail.com, ip: 209.85.221.48,
  mailfrom: martin.jansa@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id ls18so2956337pjb.3
+Received: by mail-wr1-f48.google.com with SMTP id e3so48149711wrc.11
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Oct 2021 10:27:17 -0700 (PDT)
+ Wed, 20 Oct 2021 10:28:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=4uajNMRr696VTQ4xPLyurfoXVDbrxQ9G8EOC3gMPKLI=;
-        b=miwKcVxCMNxUGN7lILflmgHAX/W58O2oUxwgWT40L0/3voPUi9m9IV9Nso8LlVqoRM
-         774N8aOKvMFIPuvyGMoA59pJERO4l821ivV5zXrRf4CaHRuf8vzIWbrAgn35td5fW0Ea
-         GGZgpmr/z0bcEFjvxZWqdhLGMj5pmmOaRKwNZFKSfvf3aJiTmRsQcFh3cY8G+wmnlBUv
-         89KOSaRjY9VzcQx3mIS11GYtzbjPehBr8qVScRUVFQTh8RUkOVHVuGbeMJJuQuSdyfN8
-         0PZYZBLeNU/+GRRIwpIrth/bzG9HpEd7ADJm2GC2ws+jlNT/LhSPxvF0NSt0F/28m+ji
-         RB2g==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=EuAeiaWs494YNRFO2+fgF8hwUyNu1kBKqIorh+g+X/A=;
+        b=czQviUOUfAjrEwC/KOu0sJSuUUxfjfr8c8bbQP6XfRK60zFQcAf0P/a1OHvmHnMyUr
+         +n9w21ip51V5B0MERxyrnncIfHv5Ooj2Yk5YoHGSSnvtpSnfzQETtYDjqxmPYfztQf+T
+         YQ9CiUJJb99S0JYwx/OU43fJbr0uqAAw2E7VIkRvOh6JthwlBDDcUrPEQcZAvvelR+QA
+         2nIA6RHKnSU1oOrgQuYRCsyIKCXTcTuXHXhbb286OgmwqfaZAThcAvwqG3QC1L4tq0uH
+         NFxIcwQqHP1mdd/CFHGYPF7xhcjjWmoyYxbHUO7nqHBqXKwz/WGBtp89xNMqQQ3GJme4
+         +dpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=4uajNMRr696VTQ4xPLyurfoXVDbrxQ9G8EOC3gMPKLI=;
-        b=tXFaFjBvPLY/M791mBf1VQmWVDZbc2/SRffC0HjQobEQmdGHCSJIlvmP6LGp214GlO
-         V/0ogX8iKGUTnerpo+xBwv3imBt/m0c1r24nDPmQiqXhzmoXAOoX9ZDDsdMfmyYNScsw
-         h2nIE/RbjVz3fi4TjHQOLXN/8jvg7SknIGfE3vpMy5fNgVZPva+OzSmP8tngZg8r5Ezk
-         nciaCIQF84nY66fszGnHZ+A4tVhF2MfEIwY8kQjm7b5fgAN8Us/q/3/B3lMmG7zillTt
-         ddc8iS1arHQViD4ixZQ1xDnbT+izpWhVJGsisd44Mm/P/XiuJ5gUPN5ZabNyXSke1MO/
-         j9jA==
-X-Gm-Message-State: AOAM531+LiP0+I0ZrP5aKGYcqN4gMvDEzhIUbRqiu/8+kIJLyQVvb4zd
-	sEgopwmNpMZbVaMvGbKMQZPULfzsjAYH8gX2Hc4=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=EuAeiaWs494YNRFO2+fgF8hwUyNu1kBKqIorh+g+X/A=;
+        b=RFi9wXIIVCbTEnWWAzI1pvhqlTqe3JGTejaOKkOenSO+ZSJ8LqQ3eXFiLdmLdMHWom
+         isEaDNpSDP/jdOu0+xT1SR1pSuB4vIhyp/ilrasD9idi5ulb9rpDLyCPHH5oul27l65w
+         0tWKX+iLziw417Xjo359h7kSYH/JlMW69fLaIe6BmkY3nRlZIuNnsGGmkBsL4AkWi9F3
+         cQmrrb2ca3GYI3d07Nn/B9KvMD3aS8yIOb7un2nAL4aEY0q2IqBuje+xsVzLp4ylVm00
+         Bb65a2cJhVw+pzJipf2ZGxNE5GWpjQyy+tLpbnLsLHtklengwyRoWX7+ZyGYcrJEiT2U
+         u4cw==
+X-Gm-Message-State: AOAM53249nVJ1jsaZtOgNO+ojylW3ZbDdB+kjWuUu080ff2EByKQS2ae
+	jFD26IVdoxXamnw75KnEI9vidy5XXfU=
 X-Google-Smtp-Source: 
- ABdhPJw14hfcsP1FdZBk3AegVMl/iogjKK6LlA5s+kunrT5NC64z6F9YY9FQzYJw23U8/eoKEbXg3B4+gDwdDfRY69U=
-X-Received: by 2002:a17:902:6808:b0:13e:a85b:52bd with SMTP id
- h8-20020a170902680800b0013ea85b52bdmr319969plk.76.1634750837511; Wed, 20 Oct
- 2021 10:27:17 -0700 (PDT)
-MIME-Version: 1.0
-References: <20211011184140.653609-1-alex@linutronix.de>
- <20211011184140.653609-23-alex@linutronix.de>
- <CA+chaQeHXgVqBmjRBFNsZGYoz076q4MHwEfMPCzbmO-ScUgsSQ@mail.gmail.com>
- <CANNYZj9pqNFjkP+WpdQ+KdF2KECO=rF4qQz_YphKx97HZeYvGA@mail.gmail.com>
-In-Reply-To: 
- <CANNYZj9pqNFjkP+WpdQ+KdF2KECO=rF4qQz_YphKx97HZeYvGA@mail.gmail.com>
+ ABdhPJxDwZfi2lWZiGuEv1u4lYJ96LKG/cBx/tzYDSlaWjaVM8uXTYJzUsCgnMs4PkFi05SXNbspgA==
+X-Received: by 2002:adf:a40f:: with SMTP id d15mr668474wra.41.1634750900525;
+        Wed, 20 Oct 2021 10:28:20 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id
+ j1sm3429536wrb.56.2021.10.20.10.28.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 20 Oct 2021 10:28:20 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 20 Oct 2021 19:27:06 +0200
-Message-ID: 
- <CA+chaQeCjFzS2JPL5BDdbgq-LAMgw8dD7uxgGFz_can5ekWcVQ@mail.gmail.com>
-Subject: Re: [oe] [PATCH 23/24] luaposix: update 33.4.0 -> 35.1
-To: Alexander Kanavin <alex.kanavin@gmail.com>
-Cc: Khem Raj <raj.khem@gmail.com>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000f7574a05cecc16b4"
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH] luaposix: depend on target libxcrypt instead of
+ native
+Date: Wed, 20 Oct 2021 19:28:17 +0200
+Message-Id: <20211020172817.576780-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.32.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Oct 2021 17:27:18 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Oct 2021 17:28:23 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93495
+ https://lists.openembedded.org/g/openembedded-devel/message/93496
 
---000000000000f7574a05cecc16b4
-Content-Type: text/plain; charset="UTF-8"
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-devtools/luaposix/luaposix_35.1.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Thanks, target libxcrypt worked here.
+diff --git a/meta-oe/recipes-devtools/luaposix/luaposix_35.1.bb b/meta-oe/recipes-devtools/luaposix/luaposix_35.1.bb
+index 444b63ed77..0e5cd09e0f 100644
+--- a/meta-oe/recipes-devtools/luaposix/luaposix_35.1.bb
++++ b/meta-oe/recipes-devtools/luaposix/luaposix_35.1.bb
+@@ -3,7 +3,7 @@ LICENSE = "MIT"
+ HOMEPAGE = "https://github.com/luaposix/luaposix"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f81069e00c0cad249f20efe958276db1"
+ 
+-DEPENDS += "lua-native lua libxcrypt-native"
++DEPENDS += "lua-native lua libxcrypt"
+ 
+ SRC_URI = "git://github.com/luaposix/luaposix.git;branch=release-v${PV} \
+ "
+@@ -16,7 +16,7 @@ B = "${S}"
+ inherit pkgconfig
+ 
+ do_compile() {
+-  ${S}/build-aux/luke
++    ${S}/build-aux/luke
+ }
+ 
+ do_install() {
+-- 
+2.32.0
 
-On Wed, Oct 20, 2021 at 7:14 PM Alexander Kanavin <alex.kanavin@gmail.com>
-wrote:
-
-> That should be libxcrypt, not libxcrypt-native.
->
-> For some reason Khem replaced my update patch with his, and somehow it
-> does not have libscrypt:
->
-> http://git.openembedded.org/meta-openembedded/log/meta-oe/recipes-devtools/luaposix/luaposix_35.1.bb
->
-> What happened, why was my patch not taken?
->
-> Alex
->
->
->
->
->
-> On Wed, 20 Oct 2021 at 18:47, Martin Jansa <martin.jansa@gmail.com> wrote:
->
->> On Mon, Oct 11, 2021 at 8:42 PM Alexander Kanavin <alex.kanavin@gmail.com>
->> wrote:
->>
->>> Drop autotools/makefile patch and change the build system to luke,
->>> as upstream uses that now.
->>>
->>
->> Any idea why it fails?
->>
->> luaposix/35.1-r0/git$ build-aux/luke
->> luke: fatal: required symbol 'crypt' not found in any of libc, libcrypt
->>
->> I already have a fix from Khem:
->>
->> https://git.openembedded.org/meta-openembedded/commit/?id=60d4e95b4ba3c42e70e321af4c30b5767bcf564b
->>
->> but it doesn't seem enough.
->>
->
-
---000000000000f7574a05cecc16b4
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Thanks, target libxcrypt worked here.</div><br><div class=
-=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Oct 20, 2021=
- at 7:14 PM Alexander Kanavin &lt;<a href=3D"mailto:alex.kanavin@gmail.com"=
->alex.kanavin@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_=
-quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,=
-204);padding-left:1ex"><div dir=3D"ltr"><div>That should be libxcrypt, not =
-libxcrypt-native.</div><div><br></div><div>For some reason Khem replaced my=
- update patch with his, and somehow it does not have libscrypt:</div><div><=
-a href=3D"http://git.openembedded.org/meta-openembedded/log/meta-oe/recipes=
--devtools/luaposix/luaposix_35.1.bb" target=3D"_blank">http://git.openembed=
-ded.org/meta-openembedded/log/meta-oe/recipes-devtools/luaposix/luaposix_35=
-.1.bb</a></div><div><br></div><div>What happened, why was my patch not take=
-n?<br></div><div><br></div><div>Alex<br></div><div><br></div><div><br></div=
-><div><br></div><div><br></div></div><br><div class=3D"gmail_quote"><div di=
-r=3D"ltr" class=3D"gmail_attr">On Wed, 20 Oct 2021 at 18:47, Martin Jansa &=
-lt;<a href=3D"mailto:martin.jansa@gmail.com" target=3D"_blank">martin.jansa=
-@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex"><div dir=3D"ltr"><div dir=3D"ltr">On Mon, Oct 11, 2021 at 8:42 P=
-M Alexander Kanavin &lt;<a href=3D"mailto:alex.kanavin@gmail.com" target=3D=
-"_blank">alex.kanavin@gmail.com</a>&gt; wrote:<br></div><div class=3D"gmail=
-_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex=
-;border-left:1px solid rgb(204,204,204);padding-left:1ex">Drop autotools/ma=
-kefile patch and change the build system to luke,<br>
-as upstream uses that now.<br></blockquote><div><br></div><div>Any idea why=
- it fails?</div><div><br></div><div>luaposix/35.1-r0/git$ build-aux/luke</d=
-iv>luke: fatal: required symbol &#39;crypt&#39; not found in any of libc, l=
-ibcrypt</div><div class=3D"gmail_quote"><br></div><div class=3D"gmail_quote=
-">I already have a fix from Khem:</div><div class=3D"gmail_quote"><a href=
-=3D"https://git.openembedded.org/meta-openembedded/commit/?id=3D60d4e95b4ba=
-3c42e70e321af4c30b5767bcf564b" target=3D"_blank">https://git.openembedded.o=
-rg/meta-openembedded/commit/?id=3D60d4e95b4ba3c42e70e321af4c30b5767bcf564b<=
-/a><br></div><div class=3D"gmail_quote"><br></div><div class=3D"gmail_quote=
-">but it doesn&#39;t seem enough.</div></div>
-</blockquote></div>
-</blockquote></div>
-
---000000000000f7574a05cecc16b4--
 
