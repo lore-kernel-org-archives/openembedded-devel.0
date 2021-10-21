@@ -1,114 +1,150 @@
-Return-Path: <zhengrq.fnst@fujitsu.com>
+Return-Path: <uvv.mail@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BDD1DC433EF
-	for <webhook@archiver.kernel.org>; Thu, 21 Oct 2021 09:19:21 +0000 (UTC)
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com
- [85.158.142.4])
- by mx.groups.io with SMTP id smtpd.web12.6819.1634807960847568508
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83AECC433F5
+	for <webhook@archiver.kernel.org>; Thu, 21 Oct 2021 19:19:04 +0000 (UTC)
+Received: from mail-lj1-f175.google.com (mail-lj1-f175.google.com
+ [209.85.208.175])
+ by mx.groups.io with SMTP id smtpd.web08.2650.1634843943322757660
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Oct 2021 02:19:21 -0700
+ Thu, 21 Oct 2021 12:19:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=AaPERLmv;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.4,
- mailfrom: zhengrq.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1634807958; i=@fujitsu.com;
-	bh=XKmOMIixmalyxKp/JShRMLBjtgYKnYhZia+xDmqmz2E=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=AaPERLmvxfJRsU8pR9HUxMa9tKC4Y5AAZoCM9ObWQMoWOsqzO5pxM5bGFZadIIEGv
-	 lALzSiSXjgFWAec8r5N6w3L161MoDcRmqWXGYf0u7/nmL8KRFGeFSvyQ67fy0vTnqt
-	 Ii3xdBcIZDY/Z8LcginU9UztAAektHgWZw2KhVw7946Dp1mkh7W3iWjoVmRcsSe7yQ
-	 e2EFemPtGkx+YH3kyrWErhlFnq4RFgPAii5JQSZjsCDhUWRkNlYBHKPgXYATfKTKHG
-	 ER068K/aCF2a/dsB0EKndhtn5RCmPIbShdMFkLz1V+DQimZq7TURINfnFecY2h8NUE
-	 zf9j01GIplsBg==
-Received: from [100.113.3.109] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-a.eu-central-1.aws.symcld.net id A2/37-09980-69031716;
- Thu, 21 Oct 2021 09:19:18 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrCIsWRWlGSWpSXmKPExsViZ8MxSXeaQWG
-  iQc8EYYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPHsYdMBfM4K15t38PUwHiKo4uRi0NI4Amj
-  xLLu2WxdjJxAzgUmid0z0iESexgl/uzZywKSYBPQlTj3eC07iC0ioC+xdPYeZhBbWCBA4syyO
-  WBxFgFViTVbzzGB2LwCHhI/7t5nBLElBBQkpjx8zwwRF5Q4OfMJ2ExmAQmJgy9eAMU5gGoUJW
-  ZPl4cor5B4ffgSM4StJnH13CbmCYx8s5B0z0LSvYCRaRWjZVJRZnpGSW5iZo6uoYGBrqGhsa6
-  hrpGBuV5ilW6iXmqpbnJqXklRIlBWL7G8WK+4Mjc5J0UvL7VkEyMw8FIKGc/vYJz65oPeIUZJ
-  DiYlUV6dXwWJQnxJ+SmVGYnFGfFFpTmpxYcYZTg4lCR4d6oXJgoJFqWmp1akZeYAowAmLcHBo
-  yTCO0kPKM1bXJCYW5yZDpE6xagoJc6rCIwdIQGQREZpHlwbLPIuMcpKCfMyMjAwCPEUpBblZp
-  agyr9iFOdgVBLm7dIFmsKTmVcCN/0V0GImoMUFFgUgi0sSEVJSDUxbeEu0/sZeflFeeNl4/aq
-  /J84yawS0Wym9WJj1aG/v9b8Pun32Fn9bsdnjgqDC5Ln8Pnfs5/u7BLq+Mvb5Vl8kmub1VHry
-  vpTy+CpzllK9WWbNyV/E+Kc9O3hB9uWTD4W+m1+dLCoO4LbWVIlcu+eJUPqb75LXY3VzBJYen
-  qXFePCbbEtQz93D1hvvGQU3rDs143evkP7i1CrxONsbT+aLRmzntrlTcI+5/0l//K+Pm7jO8Z
-  /uOKV0dH+q0U2v1kju7hOdN19MYd555VPf3kMfec48DHfgcU8IX7KwO1R7f67zyd/fzSe0pEe
-  ZNU5f//9aVFn8j9Vxhdudbgd3fmFoYHxv5hF4VWMbSw3LlwdKLMUZiYZazEXFiQBeZo3jNwMA
-  AA==
-X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-20.tower-232.messagelabs.com!1634807957!3179431!1
-X-Originating-IP: [62.60.8.146]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.4; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 24241 invoked from network); 21 Oct 2021 09:19:18 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-20.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 21 Oct 2021 09:19:18 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id B71A610046B
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Oct 2021 10:19:17 +0100 (BST)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id A8DE4100458
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Oct 2021 10:19:17 +0100 (BST)
-Received: from localhost.localdomain (10.167.225.35) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.24; Thu, 21 Oct 2021 10:19:03 +0100
-From: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-sqlalchemy: upgrade 1.4.23 ->
- 1.4.26
-Date: Fri, 22 Oct 2021 02:18:06 +0800
-Message-ID: <1634840286-44159-1-git-send-email-zhengrq.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=O022TZuG;
+ spf=pass (domain: gmail.com, ip: 209.85.208.175,
+ mailfrom: uvv.mail@gmail.com)
+Received: by mail-lj1-f175.google.com with SMTP id l5so382997lja.13;
+        Thu, 21 Oct 2021 12:19:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :references:cc:from:in-reply-to;
+        bh=ec/7LV7rI2THg9hattXg93FyllsEIEELgjQOMXshTn0=;
+        b=O022TZuGaU5wsn8iyu/Baiqz1ViHKb8Xjij3ui3MRX3KLz1t5law1Z4Q0AVFRrtPy8
+         T3PKTa5tNk/TBcHYwxIMQM83xc2NpU2MknZ6ebfvT/DGEq3pvGM79/h1/n2zBt06V50B
+         kDZ6YTpiDwRFmSkUdBbbASSl2O1aa7ln9zReAfsEEvrSLffz/FlL6FZtTT4ptWZsvOnA
+         uiXv/WhUKcLK+mNU6P9WFEFxyTcDMyqeHJs1g4EIXQpH+ykpGpd2qa7QbahZ9egPh2To
+         w6XkQgvWFPYlP57r73MFoSFsIyiqj5IZU4pPj3aSq7oufyK4iqlkfqMf6IjVvIiQ8upS
+         nQmg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:references:cc:from:in-reply-to;
+        bh=ec/7LV7rI2THg9hattXg93FyllsEIEELgjQOMXshTn0=;
+        b=BxLVwsSFqa6WdOsXgxsxvMqA3rIPkMacr/LDu+ndioFj3+cCjgVcJSI2xiQ0hDCNHm
+         S5QFy/hkQZH6SY/nW78stgOcqhd3pety3GJqov8/cD5IKq8ig0MzfpeSohf0bHP4A1dp
+         mn/f6NqxsO6mGlAZeYWOcRNJBY0mkbG6ExuIo0kKAzW+W6fusz96vnlT/B1u21zTiRaZ
+         gr9Cu/jZidyuNucJWBTx3Z8V15WomE1DYyIoGBFaGq59zCT6bWGmeqxFTNstC3NC05MY
+         TJQw09lZocyfELbtpG6uAycVaMaZ4D4J2/c2TVWwsO0DW5GelzzmzcXIr3L5ksxR3vH8
+         p2Yg==
+X-Gm-Message-State: AOAM532L4fg+gfMD4w1u3aCXLfH72L5of+G9wwXKgRkYogzGD5il1I+O
+	J1t+cZ+RRlAawAnUV+boXj8PHRWa36anKA==
+X-Google-Smtp-Source: 
+ ABdhPJzFlHUC3jXmCtIoVw8UL7X3VLgZrg9M5Cdu6n+6ZO4RiBOKGwfrl5vyObFmC4rnlOfjYpAJcw==
+X-Received: by 2002:a2e:5c8:: with SMTP id 191mr8108549ljf.107.1634843940726;
+        Thu, 21 Oct 2021 12:19:00 -0700 (PDT)
+Received: from [10.133.221.89] ([185.253.97.12])
+        by smtp.gmail.com with ESMTPSA id
+ w16sm532424lfl.189.2021.10.21.12.18.59
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 21 Oct 2021 12:19:00 -0700 (PDT)
+Content-Type: multipart/alternative;
+ boundary="------------8B1LW0UXoSDp3WM5ovsfkvZa"
+Message-ID: <743957ea-092b-b8d8-27a2-b183619b507d@gmail.com>
+Date: Thu, 21 Oct 2021 21:18:58 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.2.0
+Subject: Re: [OE-core] [meta-java] why openjdk-8-native is need to build
+ openjdk-8 ?
+Content-Language: en-US
+To: openembedded-core@lists.openembedded.org
+References: 
+ <CAE84iWU4=MKr2VK5aK2bZrY_q2xaaX-fVsD=7Z7p6F8NhawrDQ@mail.gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+From: Vyacheslav Yurkov <uvv.mail@gmail.com>
+In-Reply-To: 
+ <CAE84iWU4=MKr2VK5aK2bZrY_q2xaaX-fVsD=7Z7p6F8NhawrDQ@mail.gmail.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 21 Oct 2021 09:19:21 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 21 Oct 2021 19:19:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93519
+ https://lists.openembedded.org/g/openembedded-devel/message/93523
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
----
- ...ython3-sqlalchemy_1.4.23.bb => python3-sqlalchemy_1.4.26.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-sqlalchemy_1.4.23.bb => python3-sqlalchemy_1.4.26.bb} (87%)
+This is a multi-part message in MIME format.
+--------------8B1LW0UXoSDp3WM5ovsfkvZa
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.23.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.26.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.23.bb
-rename to meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.26.bb
-index 4bfaf656d..e00015629 100644
---- a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.23.bb
-+++ b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.4.26.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.sqlalchemy.org/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3359ed561ac16aaa25b6c6eff84df595"
- 
--SRC_URI[sha256sum] = "76ff246881f528089bf19385131b966197bb494653990396d2ce138e2a447583"
-+SRC_URI[sha256sum] = "6bc7f9d7d90ef55e8c6db1308a8619cd8f40e24a34f759119b95e7284dca351a"
- 
- PYPI_PACKAGE = "SQLAlchemy"
- inherit pypi setuptools3
--- 
-2.25.1
+I believe this should be sent to openembedded-devel@lists.openembedded.org
+
+Vyacheslav
+
+On 21.10.2021 12:11, Akira Shibakawa wrote:
+> Hi.
+> I have a question about openjdk-8 recipe.
+>
+> openjdk-8 seems to be built using openjdk-8-native as boot JDK.
+> And the openjdk-8-native seems to be built using icedtea7 as boot JDK.
+>
+> Why openjdk-8-native is need to build openjdk-8 ?
+> Isn't it simpler to build openjdk-8 using icedtea7 as boot JDK?
+>
+> regards
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#157279):https://lists.openembedded.org/g/openembedded-core/message/157279
+> Mute This Topic:https://lists.openembedded.org/mt/86486039/4455192
+> Group Owner:openembedded-core+owner@lists.openembedded.org
+> Unsubscribe:https://lists.openembedded.org/g/openembedded-core/unsub  [uvv.mail@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
+--------------8B1LW0UXoSDp3WM5ovsfkvZa
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <div class="moz-cite-prefix">I believe this should be sent to
+      <a class="moz-txt-link-abbreviated" href="mailto:openembedded-devel@lists.openembedded.org">openembedded-devel@lists.openembedded.org</a><br>
+      <br>
+      Vyacheslav<br>
+      <br>
+      On 21.10.2021 12:11, Akira Shibakawa wrote:<br>
+    </div>
+    <blockquote type="cite"
+cite="mid:CAE84iWU4=MKr2VK5aK2bZrY_q2xaaX-fVsD=7Z7p6F8NhawrDQ@mail.gmail.com">
+      <pre class="moz-quote-pre" wrap="">Hi.
+I have a question about openjdk-8 recipe.
+
+openjdk-8 seems to be built using openjdk-8-native as boot JDK.
+And the openjdk-8-native seems to be built using icedtea7 as boot JDK.
+
+Why openjdk-8-native is need to build openjdk-8 ?
+Isn't it simpler to build openjdk-8 using icedtea7 as boot JDK?
+
+regards
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">
+-=-=-=-=-=-=-=-=-=-=-=-
+Links: You receive all messages sent to this group.
+View/Reply Online (#157279): <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/g/openembedded-core/message/157279">https://lists.openembedded.org/g/openembedded-core/message/157279</a>
+Mute This Topic: <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/mt/86486039/4455192">https://lists.openembedded.org/mt/86486039/4455192</a>
+Group Owner: <a class="moz-txt-link-abbreviated" href="mailto:openembedded-core+owner@lists.openembedded.org">openembedded-core+owner@lists.openembedded.org</a>
+Unsubscribe: <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/g/openembedded-core/unsub">https://lists.openembedded.org/g/openembedded-core/unsub</a> [<a class="moz-txt-link-abbreviated" href="mailto:uvv.mail@gmail.com">uvv.mail@gmail.com</a>]
+-=-=-=-=-=-=-=-=-=-=-=-
+
+</pre>
+    </blockquote>
+  </body>
+</html>
+--------------8B1LW0UXoSDp3WM5ovsfkvZa--
 
 
