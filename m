@@ -2,93 +2,93 @@ Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C60CC433F5
-	for <webhook@archiver.kernel.org>; Sat, 23 Oct 2021 20:36:31 +0000 (UTC)
-Received: from mail-lj1-f179.google.com (mail-lj1-f179.google.com
- [209.85.208.179])
- by mx.groups.io with SMTP id smtpd.web11.11113.1635021381024944614
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 722E1C4332F
+	for <webhook@archiver.kernel.org>; Sat, 23 Oct 2021 20:36:32 +0000 (UTC)
+Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com
+ [209.85.167.41])
+ by mx.groups.io with SMTP id smtpd.web12.11207.1635021390903231774
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 23 Oct 2021 13:36:21 -0700
+ Sat, 23 Oct 2021 13:36:31 -0700
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=YsMSIvSY;
+ header.s=20210112 header.b=wJiQNqrL;
  spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.208.179, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f179.google.com with SMTP id o11so8536059ljg.10
+ ip: 209.85.167.41, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f41.google.com with SMTP id x192so1368520lff.12
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 23 Oct 2021 13:36:20 -0700 (PDT)
+ Sat, 23 Oct 2021 13:36:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=4QleT72ZRLe77MRyOim9LRoYShOsvU53KnLhTkuxi+w=;
-        b=YsMSIvSY3P4cKHk2ZSVQmbKf386hz3Z0U6Xh9RqoMZDabiEKqoOkJ4WqsfYZj3DlUb
-         W8U1Y3If8oxwMpqzp39xTWgu5AUcMfRkUI+GXZjyNnvIvqw9utuRy+Nlo5b2uWtokZbc
-         jEhDRlBVAP30ubMc2HRURf4fvw620y+FWkpCeRgEr7zLml7dixXDV0wrTMaq+bGjUdtb
-         +jbyp0gopVM6aXwhiazP7N45M7CoV6NgbJ+KHoV/ubxbfDpOuDRxIScYDC9aeXh6PP42
-         eJMcocZpDYkO0BYgZ9bEoU06ZlviZR+u7DuI4ZmniQZ6FjepSs7f9SK26E2sSs9Tmn2+
-         Nd3g==
+        bh=ZGtvuYf9Tk3pIYeRkpnLdTFfEodhXDWCd5u6a+C5vM8=;
+        b=wJiQNqrL2fTM8+H1C4si8F6cUyCd4dCtQGXZBXtp/j4sPxpJgmNN9I5Kha/mO4hdCk
+         v5zSnC6Gs79tFZBgD1m/iVOVIFLlPqJQZlvpM5nZcFgJpWWFaLZ66K1N/rfeBakgdoSD
+         tN9zDiOMSndicM1Gfouv4rcbfXEo44vDjFET0gxZFN+VrRrPw7NEZAADTXTEeEZ6kzY0
+         1U6t1jPYly+nOOgLbGHwBSzF+oEwL4HetsfmsbnNWu9MZVGbKD5FhKk3WrC5IZDhwlhg
+         mldyWwkUGUgC8rfdZyjzCBLMJksTeAa9HP+HkOkZCWZ0u9yxBshVTgUDFZBq/ezQWvI0
+         scMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=4QleT72ZRLe77MRyOim9LRoYShOsvU53KnLhTkuxi+w=;
-        b=h+JV81NaDt3DNHqQXL2PXnXBJL8m/Iv3U0KNRml/+ZOWGfNtJLU+XPI8h3IUbUcTCf
-         UheXsxFUPY+8I6DVbvp13LYcuuycnaIks9njEtLKLxhJ84fHBrkFnW2v3pj4VmElhgXA
-         WFbbjS/5MsfjQxcuBymoMntl0e6hf7lpK5fHEgw9VE+t3EqA8bPeSfvvyr2Lt4m/YC6L
-         Ge1CzPK2A7SP6z/P4z4gzqODCIkzIfH3Ra4YJDXJv0u9quMxPMImwMg5c33RK9+1bADg
-         23GwSRTuU5DL6ZXt3MaI8xvkHziCW2Ab52oeMXwb4ep6A4fcnMucRiHO/XDO2hR7hTPq
-         14fQ==
-X-Gm-Message-State: AOAM531G+qW6PE7AETwBG8G3BfWEBhaOizHYivlb83wL+6sTPKgrMNnT
-	B0t9AvXpCm0UVEXPeS1LfYGGr2rSoKygMSaM
+        bh=ZGtvuYf9Tk3pIYeRkpnLdTFfEodhXDWCd5u6a+C5vM8=;
+        b=te8HwurbBnPrItWoHHO1nVsnW4mt9yJe/BWt46/NF7ym3af2+2etRPoEYPgZFlteim
+         RrJV257/3mnveMjo1+1fvB96UXM/ZXcDAAREYi+OWaCw1BoOEJwpM8uW2b+m7dExogSw
+         S9Vwzx2izUgZ5+AxuKXr0HExlUtc9zQlVKLFIAz6ZKwYLs/y+9wWJSzPCWHfFPTctCaA
+         8ZNxhcVj/yQOVuC9jj7n6hgN0EO9FKjXuwMOvdmlIK7XkkR7gPuco0YvY7GQ+tyEmD6X
+         BznxUmeGSertIx30MH1h90vvmjp+EcH7E9JuRGYUv61h/ipf+Zkhahu+xbqHchbMUuOl
+         lpmw==
+X-Gm-Message-State: AOAM53399+xDkEWZSjbk1KhhBIYPSa7io18YUUCt4hFaZT0d1yYZhoEw
+	HGF3MTfdyhEIcM76o9GfhJvZWwr4KydUr3cC
 X-Google-Smtp-Source: 
- ABdhPJwW6udGdvOiQYNNcH+Qlozk462lQWMPzzPCIp3PX2f4SIy/j+RqQvEPtfHWkYtwd7M9Ip6OqQ==
-X-Received: by 2002:a2e:a4a9:: with SMTP id g9mr8002903ljm.245.1635021379106;
-        Sat, 23 Oct 2021 13:36:19 -0700 (PDT)
+ ABdhPJzAcj/QB1hOMwweMV+CntjlWkjWUBzqskHil/K31tAyREMYtjmx/D2jatusLjhx9tZwJxfZOg==
+X-Received: by 2002:a05:6512:694:: with SMTP id
+ t20mr7729462lfe.168.1635021388869;
+        Sat, 23 Oct 2021 13:36:28 -0700 (PDT)
 Received: from localhost.localdomain
  (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
-        by smtp.gmail.com with ESMTPSA id
- b15sm1131479lfb.255.2021.10.23.13.36.18
+        by smtp.gmail.com with ESMTPSA id u1sm549958lfs.21.2021.10.23.13.36.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 23 Oct 2021 13:36:18 -0700 (PDT)
+        Sat, 23 Oct 2021 13:36:28 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-python] python3-stevedore: update to 3.5.0
-Date: Sat, 23 Oct 2021 22:36:17 +0200
-Message-Id: <20211023203617.1656746-1-open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-python] python3-pybind11-json: update to 0.2.11
+Date: Sat, 23 Oct 2021 22:36:26 +0200
+Message-Id: <20211023203626.1657023-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 23 Oct 2021 20:36:31 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 23 Oct 2021 20:36:32 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93548
+ https://lists.openembedded.org/g/openembedded-devel/message/93550
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../{python3-stevedore_3.4.0.bb => python3-stevedore_3.5.0.bb}  | 2 +-
+ ...3-pybind11-json_0.2.6.bb => python3-pybind11-json_0.2.11.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-stevedore_3.4.0.bb => python3-stevedore_3.5.0.bb} (80%)
+ rename meta-python/recipes-devtools/python/{python3-pybind11-json_0.2.6.bb => python3-pybind11-json_0.2.11.bb} (84%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-stevedore_3.4.0.bb b/meta-python/recipes-devtools/python/python3-stevedore_3.5.0.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-stevedore_3.4.0.bb
-rename to meta-python/recipes-devtools/python/python3-stevedore_3.5.0.bb
-index e2f43048e..8d345e66e 100644
---- a/meta-python/recipes-devtools/python/python3-stevedore_3.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-stevedore_3.5.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://docs.openstack.org/stevedore/latest/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.6.bb b/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.11.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-pybind11-json_0.2.6.bb
+rename to meta-python/recipes-devtools/python/python3-pybind11-json_0.2.11.bb
+index c56c70ad3..838447120 100644
+--- a/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.6.bb
++++ b/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.11.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Using nlohmann::json with pybind11"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0e25ff0ec476d06d366439e1120cce98"
  
--SRC_URI[sha256sum] = "59b58edb7f57b11897f150475e7bc0c39c5381f0b8e3fa9f5c20ce6c89ec4aa1"
-+SRC_URI[sha256sum] = "f40253887d8712eaa2bb0ea3830374416736dc8ec0e22f5a65092c1174c44335"
+-SRCREV = "d1d00888bc0eb7c50dde6cff1a5eb4586e620b65"
++SRCREV = "0fbbe3bbb27bd07a5ec7d71cbb1f17eaf4d37702"
+ SRC_URI = "git://github.com/pybind/pybind11_json"
  
- DEPENDS += "${PYTHON_PN}-pbr-native"
- 
+ DEPENDS += "nlohmann-json python3-pybind11"
 -- 
 2.25.1
 
