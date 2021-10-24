@@ -2,29 +2,29 @@ Return-Path: <rpjday@crashcourse.ca>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06AEEC433F5
-	for <webhook@archiver.kernel.org>; Sun, 24 Oct 2021 18:24:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D9EDCC433EF
+	for <webhook@archiver.kernel.org>; Sun, 24 Oct 2021 19:10:55 +0000 (UTC)
 Received: from cpanel8.indieserve.net (cpanel8.indieserve.net [199.212.143.3])
- by mx.groups.io with SMTP id smtpd.web11.21843.1635099887244036049
+ by mx.groups.io with SMTP id smtpd.web12.22454.1635102654049834536
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 24 Oct 2021 11:24:48 -0700
+ Sun, 24 Oct 2021 12:10:54 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=pass (domain: crashcourse.ca, ip: 199.212.143.3, mailfrom: rpjday@crashcourse.ca)
-Received: from [::1] (port=43856 helo=cpanel8.indieserve.net)
+Received: from [::1] (port=48076 helo=cpanel8.indieserve.net)
 	by cpanel8.indieserve.net with esmtpsa  (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.94.2)
 	(envelope-from <rpjday@crashcourse.ca>)
-	id 1meiAm-0006cO-OO; Sun, 24 Oct 2021 14:24:45 -0400
+	id 1meitQ-0005mv-47
+	for openembedded-devel@lists.openembedded.org;
+ Sun, 24 Oct 2021 15:10:52 -0400
 Received: from [19.12.93.167] ([19.12.93.167]) by crashcourse.ca (Horde
- Framework) with HTTPS; Sun, 24 Oct 2021 14:24:44 -0400
-Date: Sun, 24 Oct 2021 14:24:44 -0400
-Message-ID: <20211024142444.Horde.8lesjcQ1_WyLx_gIURGNjhW@crashcourse.ca>
+ Framework) with HTTPS; Sun, 24 Oct 2021 15:10:51 -0400
+Date: Sun, 24 Oct 2021 15:10:51 -0400
+Message-ID: <20211024151051.Horde.tMYuf-oR0Ly0t9EJstyJ3EW@crashcourse.ca>
 From: rpjday@crashcourse.ca
-To: Khem Raj <raj.khem@gmail.com>
-Cc: OpenEmbedded Development mailing list
- <openembedded-devel@lists.openembedded.org>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [oe] should "ntp-dev" package have header files in it, or not?
 References: <20eeedea-efe-555c-acd2-2f89fd879d2@crashcourse.ca>
  <CAMKF1sq45WMvPcdx527KWTYkUkxa+yS+T+4aES3nvrS6JvDJBQ@mail.gmail.com>
@@ -49,9 +49,9 @@ X-Source-Dir:
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 24 Oct 2021 18:24:48 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 24 Oct 2021 19:10:55 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93556
+ https://lists.openembedded.org/g/openembedded-devel/message/93557
 
 
 Quoting Khem Raj <raj.khem@gmail.com>:
@@ -75,12 +75,19 @@ Quoting Khem Raj <raj.khem@gmail.com>:
 >> files? am i overlooking something?
 >
 > While the header seems to be meant for public consumption, the build
-> explicitly does not export it, so perhaps thats not expected to be
-> used this way anymore.
+> explicitly does
+> not export it, so perhaps thats not expected to be used this way anymore.
 
-   That's what I first suspected, but that seems sort of odd. Does
-that mean no one is expected to now develop against ntp? Or what
-*does* it mean? I guess checking the Git log is the next step.
+   i popped over to https://github.com/ntp-project/ntp to see if the README
+would clarify anything, and the docs say of the include/ directory:
+
+"Directory containing include header files used by most programs
+in the distribution."
+
+   "in the distribution." so does that mean that nothing external
+is expected to use them? still unsure as to what to tell other
+developers as to whether they are entitled to include any of
+those headers, no matter how they do it.
 
 rday
 
