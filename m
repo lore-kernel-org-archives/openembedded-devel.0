@@ -2,73 +2,74 @@ Return-Path: <salman.isd@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D6866C433FE
-	for <webhook@archiver.kernel.org>; Mon, 25 Oct 2021 11:45:48 +0000 (UTC)
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com
- [209.85.208.41])
- by mx.groups.io with SMTP id smtpd.web12.30967.1635162347798425799
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AF85DC433EF
+	for <webhook@archiver.kernel.org>; Mon, 25 Oct 2021 11:45:50 +0000 (UTC)
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com
+ [209.85.208.50])
+ by mx.groups.io with SMTP id smtpd.web12.30968.1635162349521565797
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Oct 2021 04:45:48 -0700
+ Mon, 25 Oct 2021 04:45:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=JGGYDhHm;
- spf=pass (domain: gmail.com, ip: 209.85.208.41,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=QT1vsYPl;
+ spf=pass (domain: gmail.com, ip: 209.85.208.50,
  mailfrom: salman.isd@gmail.com)
-Received: by mail-ed1-f41.google.com with SMTP id n1so15344581edd.0
+Received: by mail-ed1-f50.google.com with SMTP id g10so17369630edj.1
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Oct 2021 04:45:47 -0700 (PDT)
+ Mon, 25 Oct 2021 04:45:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:subject:date:message-id:mime-version
+        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=WIhwkGMcSAQ83pmhLqQdFQwtJUHoqnPEHAU/69LA5xU=;
-        b=JGGYDhHmw2lQ4YidZ4JGpfM7b/tQLzxDzxBCSKRP5/nBMkgPVhs4aQY5PFe6c5kQ1n
-         1jWE+fRs8+9lHX1Rbu1SFjfaSJYwE5zisv5ocPMNTFml60D+aZjfp9Uh3jpq3SN5tuDr
-         HrK4/caPRmaCJPieSoIHCJ3Wy1KW2max5maRKvNoV8QyyVzzsAKIrfkln+I4GWW/BT2t
-         ZDLDFYVKMawidL0L2HUSFRGrmU3c5EEoLpjp2YZPYKZFNpvGr8bqeJDeiJtdcPmeDlii
-         YB/G8n1ryxhiLEKGVTd9wT2krCSEXZRl8ernMcC3fQ69T9J6lnLa1XGO+YerHMW9QWKZ
-         Uwiw==
+        bh=1sN4X9nV9yWRag+lam/2aD0h3Y/sFb0SIE+r62QSBl0=;
+        b=QT1vsYPlB0m3JGb5PrWmOUSU8MWgBfIAsnd/eTGbk06OV+OleWJ2o9ebhwUVkD4bOW
+         nxPxDsKNKybznsF2QnN9K+qgwuqaSaYnbNHZNS+1g4r9bYAw98CWZ8qdGmspOaw34HBo
+         2svhcXxTFHEsTrSJAwxB28kaD7MKFtLcKaRljprx0zlmHo0w1Z4mGqeBHNSa28BVT+Gc
+         TWKJ+vUJUPY1H7qLzgtKAZmmurA41fXbIsqmrRLWEPh4fEFrA95pTeITg6JqTL1sthKZ
+         2gtnZuZ83mrixT50mpEMiQWz9aDI9beqiw/qY9kSxEGDIS8VkN4eMb5+5Mb0AN5iXsgE
+         W5gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=WIhwkGMcSAQ83pmhLqQdFQwtJUHoqnPEHAU/69LA5xU=;
-        b=R2TXiwsPx5Au09DEqAruXpvf9XuIQCS+76ZNLVLUjLZMyv5ZfbdQ3Y7Oj4NVAL0ZHH
-         +Ciz1RsWAUxYfF3Ie5CD0sxxlZtDlA1+rSeBmbHYVmvESfEYtt9zfg5sFhxhok1r9D5e
-         m0BBj1Z3eueYNXMvrwc8eJqzYyuogR+aX8toe4MPvLrB48xYFHO02Xo8B/GtTaJQzA3B
-         HRvWDBA4Pj5ezHhWUkpV1BLf4Qw6eRV9wgetxYBDfdspmCfpvP6RWWRxmTgbwRHYvuSP
-         aJKlhZPkGxcYoYoL2sWsVVd6yLLbJuIZEtL2RSpD39maMu9Uz9w3DtpunmQwGfOgGzsA
-         0jkg==
-X-Gm-Message-State: AOAM530HkyH6kXaniZPMxttVfQ2LRwTBCWDJdU1H0696A6V2epkMMI5I
-	2I74cCSiEFBkXA5Ls1ZJa6lx5QK6tHU=
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=1sN4X9nV9yWRag+lam/2aD0h3Y/sFb0SIE+r62QSBl0=;
+        b=dG4lsgNGP12RnxiLH/nobsMWLSpVxH+Rj7pLSkLF3p7GCGD7f8vBJcbuf8zHVvaA2L
+         SthiuVklJAbxbTaQsqNXaTv+H0HIZs/eW/Kv4klMUh16VB2Lh6eqtBo9kqhxoaDUTdG7
+         ppnnurB1XQJMVX9RycZskwOmOA/9mgaEHutju7t7yFRk9xOsYgDr3CFZIFj2dsS8x2aC
+         cgrOk3vGTFFTG3OqI78eD2cpG7Y6lQJgXTeiWI6D3w9cuLOqpdUKsJVNh2WmHRiT0z3c
+         BNsi7S2XqBch/XXoqSbqRdB5fZz6q5uYdGwJZYX8wVKuSJ6i2YkpY3fF5iYj6fGWrAvZ
+         32rw==
+X-Gm-Message-State: AOAM532uvLDmwx0CdFpDMNnyNijqEz6xtZr0VIHpHIAaa+Dc6xFgXIUY
+	7VOyuXL0iRbRzpFP88/DLGx/ApCTUPQ=
 X-Google-Smtp-Source: 
- ABdhPJxEZXwoQnQkvDM1L+dWQcf3d6U/43NaZAKPzgVEaSeyBqv2E8KtkOYZcrUJ1Z99ZFj5+wJkaw==
-X-Received: by 2002:a05:6402:5189:: with SMTP id
- q9mr25486467edd.94.1635162345562;
-        Mon, 25 Oct 2021 04:45:45 -0700 (PDT)
+ ABdhPJw/RF2xtxzb+MrRz/tsgUxa2bI1V79OzaQY7gG1QJTTlPa7ODkzGqtuM+DKBlV4lXgzWboeFw==
+X-Received: by 2002:a05:6402:3587:: with SMTP id
+ y7mr25754450edc.182.1635162347221;
+        Mon, 25 Oct 2021 04:45:47 -0700 (PDT)
 Received: from salman-VirtualBox.home044weidmueller.com
  (ip-37-201-145-145.hsi13.unitymediagroup.de. [37.201.145.145])
         by smtp.gmail.com with ESMTPSA id
- v15sm8727929edi.89.2021.10.25.04.45.45
+ v15sm8727929edi.89.2021.10.25.04.45.46
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 25 Oct 2021 04:45:45 -0700 (PDT)
+        Mon, 25 Oct 2021 04:45:46 -0700 (PDT)
 From: Salman Ahmed <salman.isd@gmail.com>
 X-Google-Original-From: Salman Ahmed <salman.ahmed@weidmueller.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe] [PATCH 0/1] openldap: upgrade 2.4.58 -> 2.5.8
-Date: Mon, 25 Oct 2021 13:45:41 +0200
-Message-Id: <cover.1635161379.git.salman.ahmed@weidmueller.com>
+Subject: [meta-oe] [PATCH 1/1] openldap: upgrade 2.4.58 -> 2.5.8
+Date: Mon, 25 Oct 2021 13:45:42 +0200
+Message-Id: 
+ <a99a2b3f7cda5a89601d4bc0b08080c2e49ade97.1635161379.git.salman.ahmed@weidmueller.com>
 X-Mailer: git-send-email 2.32.0
+In-Reply-To: <cover.1635161379.git.salman.ahmed@weidmueller.com>
+References: <cover.1635161379.git.salman.ahmed@weidmueller.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Oct 2021 11:45:48 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Oct 2021 11:45:50 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93561
-
- openldap: upgrade 2.4.58 -> 2.5.8
+ https://lists.openembedded.org/g/openembedded-devel/message/93562
 
 - dropped retired backends (bdb, hdb, shell)
 - back-monitor is now built as part of slapd
@@ -76,18 +77,8 @@ X-Groupsio-URL:
 - dropped patches for functionalities which don't
   exist anymore
 
-The following changes since commit 763769eb446acf8377bc2d84c76cd7fffd904f84:
-
-  vboxguestdrivers: Fix build failure due to the last update. (2021-10-22 16:31:41 -0700)
-
-are available in the Git repository at:
-
-  git://github.com/salmanisd/meta-openembedded upgrade-openldap
-  https://github.com/salmanisd/meta-openembedded/tree/upgrade-openldap
-
-Salman Ahmed (1):
-  openldap: upgrade 2.4.58 -> 2.5.8
-
+Signed-off-by: Salman Ahmed <salman.ahmed@weidmueller.com>
+---
  .../openldap/openldap/install-strip.patch     |  2 +-
  .../openldap-2.4.28-gnutls-gcrypt.patch       | 10 ++-
  .../openldap/openldap-CVE-2015-3276.patch     | 58 ----------------
@@ -101,6 +92,368 @@ Salman Ahmed (1):
  delete mode 100644 meta-oe/recipes-support/openldap/openldap/thread_stub.patch
  rename meta-oe/recipes-support/openldap/{openldap_2.4.58.bb => openldap_2.5.8.bb} (82%)
 
+diff --git a/meta-oe/recipes-support/openldap/openldap/install-strip.patch b/meta-oe/recipes-support/openldap/openldap/install-strip.patch
+index b59db3939..b757aabb0 100644
+--- a/meta-oe/recipes-support/openldap/openldap/install-strip.patch
++++ b/meta-oe/recipes-support/openldap/openldap/install-strip.patch
+@@ -6,7 +6,7 @@ Upstream-Status: Pending
+ 
+ --- a/build/top.mk
+ +++ b/build/top.mk
+-@@ -121,7 +121,7 @@ LTCOMPILE_MOD = $(LIBTOOL) $(LTONLY_MOD)
++@@ -125,7 +125,7 @@ LTCOMPILE_MOD = $(LIBTOOL) $(LTONLY_MOD) --mode=compile \
+  LTLINK_MOD = $(LIBTOOL) $(LTONLY_MOD) --mode=link \
+  	$(CC) $(LT_CFLAGS) $(LDFLAGS) $(LTFLAGS_MOD)
+  
+diff --git a/meta-oe/recipes-support/openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch b/meta-oe/recipes-support/openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch
+index 91bcc0435..f551861a3 100644
+--- a/meta-oe/recipes-support/openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch
++++ b/meta-oe/recipes-support/openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch
+@@ -2,13 +2,11 @@ From http://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/net-nds/openldap/fi
+ 
+ Upstream-status: Pending
+ 
+---
+-
+---- a/configure.in
+-+++ b/configure.in
+-@@ -1227,7 +1227,7 @@ if test $ol_link_tls = no ; then
+- 				ol_with_tls=gnutls
++--- a/configure.ac
+++++ b/configure.ac
++@@ -1263,7 +1263,7 @@ if test $ol_link_tls = no ; then
+  				ol_link_tls=yes
++ 				WITH_TLS_TYPE=gnutls
+  
+ -				TLS_LIBS="-lgnutls"
+ +				TLS_LIBS="-lgnutls -lgcrypt"
+diff --git a/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch b/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch
+deleted file mode 100644
+index ab5c4de66..000000000
+--- a/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch
++++ /dev/null
+@@ -1,58 +0,0 @@
+-openldap CVE-2015-3276
+-
+-the patch comes from:
+-https://bugzilla.redhat.com/show_bug.cgi?id=1238322
+-https://bugzilla.redhat.com/attachment.cgi?id=1055640
+-
+-The nss_parse_ciphers function in libraries/libldap/tls_m.c in
+-OpenLDAP does not properly parse OpenSSL-style multi-keyword mode
+-cipher strings, which might cause a weaker than intended cipher to
+-be used and allow remote attackers to have unspecified impact via
+-unknown vectors.
+-
+-Upstream-Status: Pending
+-
+-CVE: CVE-2015-3276
+-
+-Signed-off-by: Li Wang <li.wang@windriver.com>
+----
+- libraries/libldap/tls_m.c |   27 ++++++++++++++++-----------
+- 1 file changed, 16 insertions(+), 11 deletions(-)
+-
+---- a/libraries/libldap/tls_m.c
+-+++ b/libraries/libldap/tls_m.c
+-@@ -620,18 +620,23 @@ nss_parse_ciphers(const char *cipherstr,
+- 			 */
+- 			if (mask || strength || protocol) {
+- 				for (i=0; i<ciphernum; i++) {
+--					if (((ciphers_def[i].attr & mask) ||
+--						 (ciphers_def[i].strength & strength) ||
+--						 (ciphers_def[i].version & protocol)) &&
+--						(cipher_list[i] != -1)) {
+--						/* Enable the NULL ciphers only if explicity
+--						 * requested */
+--						if (ciphers_def[i].attr & SSL_eNULL) {
+--							if (mask & SSL_eNULL)
+--								cipher_list[i] = action;
+--						} else
+-+					/* if more than one mask is provided
+-+					 * then AND logic applies (to match openssl)
+-+					 */
+-+					if ( cipher_list[i] == -1) )
+-+						continue;
+-+					if ( mask && ! (ciphers_def[i].attr & mask) )
+-+						continue;
+-+					if ( strength && ! (ciphers_def[i].strength & strength) )
+-+						continue;
+-+					if ( protocol && ! (ciphers_def[i].version & protocol) )
+-+						continue;
+-+					/* Enable the NULL ciphers only if explicity requested */
+-+					if (ciphers_def[i].attr & SSL_eNULL) {
+-+						if (mask & SSL_eNULL)
+- 							cipher_list[i] = action;
+--					}
+-+					} else
+-+						cipher_list[i] = action;
+- 				}
+- 			} else {
+- 				for (i=0; i<ciphernum; i++) {
+diff --git a/meta-oe/recipes-support/openldap/openldap/openldap-m4-pthread.patch b/meta-oe/recipes-support/openldap/openldap/openldap-m4-pthread.patch
+deleted file mode 100644
+index 4d1fda96e..000000000
+--- a/meta-oe/recipes-support/openldap/openldap/openldap-m4-pthread.patch
++++ /dev/null
+@@ -1,22 +0,0 @@
+-Upstream-Status: Pending
+-
+---- a/build/openldap.m4
+-+++ b/build/openldap.m4
+-@@ -651,7 +651,7 @@ AC_DEFUN([OL_PTHREAD_TEST_FUNCTION],[[
+- ]])
+- 
+- AC_DEFUN([OL_PTHREAD_TEST_PROGRAM],
+--AC_LANG_SOURCE([OL_PTHREAD_TEST_INCLUDES
+-+[AC_LANG_SOURCE([[OL_PTHREAD_TEST_INCLUDES
+- 
+- int main(argc, argv)
+- 	int argc;
+-@@ -659,7 +659,7 @@ int main(argc, argv)
+- {
+- OL_PTHREAD_TEST_FUNCTION
+- }
+--]))
+-+]])])
+- dnl --------------------------------------------------------------------
+- AC_DEFUN([OL_PTHREAD_TRY], [# Pthread try link: $1 ($2)
+- if test "$ol_link_threads" = no ; then
+diff --git a/meta-oe/recipes-support/openldap/openldap/thread_stub.patch b/meta-oe/recipes-support/openldap/openldap/thread_stub.patch
+deleted file mode 100644
+index 540ba4a63..000000000
+--- a/meta-oe/recipes-support/openldap/openldap/thread_stub.patch
++++ /dev/null
+@@ -1,20 +0,0 @@
+-openldap: set pointer
+-
+-When the function ldap_pvt_thread_pool_getkey() succeeds, it
+-must set the value of *data since the caller may try to use it.
+-
+-Upstream-Status: pending
+-
+-Signed-off-by: Joe Slater <jslater@windriver.com>
+-
+-
+---- a/libraries/libldap_r/thr_stub.c
+-+++ b/libraries/libldap_r/thr_stub.c
+-@@ -217,6 +217,7 @@ ldap_pvt_thread_pool_unidle ( ldap_pvt_t
+- int ldap_pvt_thread_pool_getkey (
+- 	void *ctx, void *key, void **data, ldap_pvt_thread_pool_keyfree_t **kfree )
+- {
+-+	if (data) *data = NULL;  /* avoid problems with uninitialized *data */
+- 	return(0);
+- }
+- 
+diff --git a/meta-oe/recipes-support/openldap/openldap/use-urandom.patch b/meta-oe/recipes-support/openldap/openldap/use-urandom.patch
+index 96a03369a..6783b5175 100644
+--- a/meta-oe/recipes-support/openldap/openldap/use-urandom.patch
++++ b/meta-oe/recipes-support/openldap/openldap/use-urandom.patch
+@@ -8,20 +8,17 @@ Upstream-Status: pending
+ 
+ Signed-off-by: Joe Slater <jslater@windriver.com>
+ 
+-
+---- a/configure.in
+-+++ b/configure.in
+-@@ -2153,8 +2153,8 @@ fi
++--- a/configure.ac
+++++ b/configure.ac
++@@ -2117,6 +2117,7 @@ AC_SUBST(systemdsystemunitdir)
+  
+  dnl ----------------------------------------------------------------
+  dnl Check for entropy sources
+ +dev=no
+  if test $cross_compiling != yes && test "$ac_cv_mingw32" != yes ; then
+--	dev=no
++ 	dev=no
+  	if test -r /dev/urandom ; then
+- 		dev="/dev/urandom";
+- 	elif test -r /idev/urandom ; then
+-@@ -2167,9 +2167,11 @@ if test $cross_compiling != yes && test
++@@ -2131,9 +2132,11 @@ if test $cross_compiling != yes && test "$ac_cv_mingw32" != yes ; then
+  		dev="/idev/random";
+  	fi
+  
+@@ -29,7 +26,7 @@ Signed-off-by: Joe Slater <jslater@windriver.com>
+ -		AC_DEFINE_UNQUOTED(URANDOM_DEVICE,"$dev",[set to urandom device])
+ -	fi
+ +elif test $cross_compiling == yes ; then
+-+	dev="/dev/urandom";
+++       dev="/dev/urandom";
+ +fi
+ +if test $dev != no ; then
+ +	AC_DEFINE_UNQUOTED(URANDOM_DEVICE,"$dev",[set to urandom device])
+diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.58.bb b/meta-oe/recipes-support/openldap/openldap_2.5.8.bb
+similarity index 82%
+rename from meta-oe/recipes-support/openldap/openldap_2.4.58.bb
+rename to meta-oe/recipes-support/openldap/openldap_2.5.8.bb
+index f9dc58a4c..ca005de70 100644
+--- a/meta-oe/recipes-support/openldap/openldap_2.4.58.bb
++++ b/meta-oe/recipes-support/openldap/openldap_2.5.8.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "http://www.OpenLDAP.org/license.html"
+ # basically BSD.  opensource.org does not record this license
+ # at present (so it is apparently not OSI certified).
+ LICENSE = "OpenLDAP"
+-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=b6dea6c170362fc46381fe3690c722cb \
++LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=5cc6ef74da4ad25d707c4f5903d64975 \
+                     file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972 \
+                     "
+ SECTION = "libs"
+@@ -15,18 +15,15 @@ SECTION = "libs"
+ LDAP_VER = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
+ 
+ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/${BP}.tgz \
+-    file://openldap-m4-pthread.patch \
+     file://openldap-2.4.28-gnutls-gcrypt.patch \
+     file://use-urandom.patch \
+     file://initscript \
+     file://slapd.service \
+-    file://thread_stub.patch \
+-    file://openldap-CVE-2015-3276.patch \
+     file://remove-user-host-pwd-from-version.patch \
+ "
+ 
+-SRC_URI[md5sum] = "c203d735ba69976e5b28dc39006f29b5"
+-SRC_URI[sha256sum] = "57b59254be15d0bf6a9ab3d514c1c05777b02123291533134a87c94468f8f47b"
++SRC_URI[md5sum] = "86e3ffce4adfc57cbb76ac0ff48b2614"
++SRC_URI[sha256sum] = "366ea1c3b24202de4481978b632128c0cfe4148d4ae13cabf93a1f38c56472dc"
+ 
+ DEPENDS = "util-linux groff-native"
+ 
+@@ -35,7 +32,7 @@ DEPENDS = "util-linux groff-native"
+ # environments
+ SRC_URI += "file://install-strip.patch"
+ 
+-inherit autotools-brokensep update-rc.d systemd
++inherit autotools-brokensep update-rc.d systemd pkgconfig
+ 
+ # CV SETTINGS
+ # Required to work round AC_FUNC_MEMCMP which gets the wrong answer
+@@ -50,8 +47,8 @@ EXTRA_OECONF += "--with-yielding-select=yes"
+ # Shared libraries are nice...
+ EXTRA_OECONF += "--enable-dynamic"
+ 
+-PACKAGECONFIG ??= "gnutls modules \
+-                   mdb ldap meta monitor null passwd shell proxycache dnssrv \
++PACKAGECONFIG ??= "asyncmeta gnutls modules \
++                   mdb ldap meta null passwd proxycache dnssrv \
+                    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} \
+ "
+ #--with-tls              with TLS/SSL support auto|openssl|gnutls [auto]
+@@ -72,25 +69,20 @@ EXTRA_OECONF += "--enable-crypt"
+ # The backend must be set by the configuration.  This controls the
+ # required database.
+ #
+-# Backends="bdb dnssrv hdb ldap mdb meta monitor ndb null passwd perl relay shell sock sql"
++# Backends="asyncmeta dnssrv ldap mdb meta ndb null passwd perl relay sock sql wt"
+ #
+ # Note that multiple backends can be built.  The ldbm backend requires a
+-# build-time choice of database API.  The bdb backend forces this to be
+-# DB4.  To use the gdbm (or other) API the Berkely database module must
+-# be removed from the build.
++# build-time choice of database API. To use the gdbm (or other) API the 
++# Berkely database module must be removed from the build.
+ md = "${libexecdir}/openldap"
+ #
+-#--enable-bdb          enable Berkeley DB backend no|yes|mod yes
+-# The Berkely DB is the standard choice.  This version of OpenLDAP requires
+-# the version 4 implementation or better.
+-PACKAGECONFIG[bdb] = "--enable-bdb=yes,--enable-bdb=no,db"
++
++#--enable-asyncmeta    enable asyncmeta backend no|yes|mod no
++PACKAGECONFIG[asyncmeta] = "--enable-asyncmeta=mod,--enable-asyncmeta=no"
+ 
+ #--enable-dnssrv       enable dnssrv backend no|yes|mod no
+ PACKAGECONFIG[dnssrv] = "--enable-dnssrv=mod,--enable-dnssrv=no"
+ 
+-#--enable-hdb          enable Hierarchical DB backend no|yes|mod no
+-PACKAGECONFIG[hdb] = "--enable-hdb=yes,--enable-hdb=no,db"
+-
+ #--enable-ldap         enable ldap backend no|yes|mod no
+ PACKAGECONFIG[ldap] = "--enable-ldap=mod,--enable-ldap=no,"
+ 
+@@ -100,9 +92,6 @@ PACKAGECONFIG[mdb] = "--enable-mdb=yes,--enable-mdb=no,"
+ #--enable-meta         enable metadirectory backend no|yes|mod no
+ PACKAGECONFIG[meta] = "--enable-meta=mod,--enable-meta=no,"
+ 
+-#--enable-monitor      enable monitor backend no|yes|mod yes
+-PACKAGECONFIG[monitor] = "--enable-monitor=mod,--enable-monitor=no,"
+-
+ #--enable-ndb          enable MySQL NDB Cluster backend no|yes|mod [no]
+ PACKAGECONFIG[ndb] = "--enable-ndb=mod,--enable-ndb=no,"
+ 
+@@ -121,10 +110,6 @@ PACKAGECONFIG[perl] = "--enable-perl=mod,--enable-perl=no,perl"
+ #--enable-relay        enable relay backend no|yes|mod [yes]
+ PACKAGECONFIG[relay] = "--enable-relay=mod,--enable-relay=no,"
+ 
+-#--enable-shell        enable shell backend no|yes|mod no
+-# configure: WARNING: Use of --without-threads is recommended with back-shell
+-PACKAGECONFIG[shell] = "--enable-shell=mod --without-threads,--enable-shell=no,"
+-
+ #--enable-sock         enable sock backend no|yes|mod [no]
+ PACKAGECONFIG[sock] = "--enable-sock=mod,--enable-sock=no,"
+ 
+@@ -133,6 +118,10 @@ PACKAGECONFIG[sock] = "--enable-sock=mod,--enable-sock=no,"
+ # sqlite.h (which may be compatible but hasn't been tried.)
+ PACKAGECONFIG[sql] = "--enable-sql=mod,--enable-sql=no,sqlite3"
+ 
++#--enable-wt           enable wt backend no|yes|mod no
++# back-wt is marked currently as experimental
++PACKAGECONFIG[wt] = "--enable-wt=mod,--enable-wt=no"
++
+ #--enable-dyngroup     Dynamic Group overlay no|yes|mod no
+ #  This is a demo, Proxy Cache defines init_module which conflicts with the
+ #  same symbol in dyngroup
+@@ -176,7 +165,7 @@ FILES:${PN}-slapd = "${sysconfdir}/init.d ${libexecdir}/slapd ${sbindir} ${local
+     ${sysconfdir}/openldap/DB_CONFIG.example ${systemd_unitdir}/system/*"
+ FILES:${PN}-slurpd = "${libexecdir}/slurpd ${localstatedir}/openldap-slurp"
+ FILES:${PN}-bin = "${bindir}"
+-FILES:${PN}-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la ${libexecdir}/openldap/*.a ${libexecdir}/openldap/*.la ${libexecdir}/openldap/*.so"
++FILES:${PN}-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la ${libexecdir}/openldap/*.a ${libexecdir}/openldap/*.la ${libexecdir}/openldap/*.so ${libdir}/pkgconfig/*.pc"
+ FILES:${PN}-dbg += "${libexecdir}/openldap/.debug"
+ 
+ do_install:append() {
+@@ -210,8 +199,6 @@ do_install:append() {
+         -i ${D}${sysconfdir}/openldap/slapd.conf
+ 
+     mkdir -p ${D}${localstatedir}/${BPN}/data
+-
+-
+ }
+ 
+ INITSCRIPT_PACKAGES = "${PN}-slapd"
+@@ -220,21 +207,18 @@ INITSCRIPT_PARAMS:${PN}-slapd = "defaults"
+ SYSTEMD_SERVICE:${PN}-slapd = "hostapd.service"
+ SYSTEMD_AUTO_ENABLE:${PN}-slapd ?= "disable"
+ 
+-
+ PACKAGES_DYNAMIC += "^${PN}-backends.* ^${PN}-backend-.*"
+ 
+ # The modules require their .so to be dynamicaly loaded
+-INSANE_SKIP:${PN}-backend-dnssrv  += "dev-so"
+-INSANE_SKIP:${PN}-backend-ldap    += "dev-so"
+-INSANE_SKIP:${PN}-backend-meta    += "dev-so"
+-INSANE_SKIP:${PN}-backend-mdb     += "dev-so"
+-INSANE_SKIP:${PN}-backend-monitor += "dev-so"
+-INSANE_SKIP:${PN}-backend-null    += "dev-so"
+-INSANE_SKIP:${PN}-backend-passwd  += "dev-so"
+-INSANE_SKIP:${PN}-backend-shell   += "dev-so"
+-
+-
+-python populate_packages:prepend () {
++INSANE_SKIP:${PN}-backend-asyncmeta  += "dev-so"
++INSANE_SKIP:${PN}-backend-dnssrv     += "dev-so"
++INSANE_SKIP:${PN}-backend-ldap       += "dev-so"
++INSANE_SKIP:${PN}-backend-meta       += "dev-so"
++INSANE_SKIP:${PN}-backend-mdb        += "dev-so"
++INSANE_SKIP:${PN}-backend-null       += "dev-so"
++INSANE_SKIP:${PN}-backend-passwd     += "dev-so"
++
++python populate_packages_prepend () {
+     backend_dir    = d.expand('${libexecdir}/openldap')
+     do_split_packages(d, backend_dir, 'back_([a-z]*)\.so$', 'openldap-backend-%s', 'OpenLDAP %s backend', prepend=True, extra_depends='', allow_links=True)
+     do_split_packages(d, backend_dir, 'back_([a-z]*)\-.*\.so\..*$', 'openldap-backend-%s', 'OpenLDAP %s backend', extra_depends='', allow_links=True)
 -- 
 2.32.0
 
