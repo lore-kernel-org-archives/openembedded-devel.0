@@ -1,92 +1,107 @@
-Return-Path: <rpjday@crashcourse.ca>
+Return-Path: <salman.isd@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B691EC433F5
-	for <webhook@archiver.kernel.org>; Mon, 25 Oct 2021 10:51:04 +0000 (UTC)
-Received: from cpanel8.indieserve.net (cpanel8.indieserve.net [199.212.143.3])
- by mx.groups.io with SMTP id smtpd.web10.30364.1635159063450340180
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D6866C433FE
+	for <webhook@archiver.kernel.org>; Mon, 25 Oct 2021 11:45:48 +0000 (UTC)
+Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com
+ [209.85.208.41])
+ by mx.groups.io with SMTP id smtpd.web12.30967.1635162347798425799
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Oct 2021 03:51:03 -0700
+ Mon, 25 Oct 2021 04:45:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=pass (domain: crashcourse.ca, ip: 199.212.143.3, mailfrom: rpjday@crashcourse.ca)
-Received: from cpeac202e043973-cmac202e043970.sdns.net.rogers.com
- ([174.114.107.13]:38908 helo=fedora)
-	by cpanel8.indieserve.net with esmtpsa  (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94.2)
-	(envelope-from <rpjday@crashcourse.ca>)
-	id 1mexZG-0008ET-4v; Mon, 25 Oct 2021 06:51:01 -0400
-Date: Mon, 25 Oct 2021 06:50:58 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-To: Khem Raj <raj.khem@gmail.com>
-cc: OpenEmbedded Development mailing list
- <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] should "ntp-dev" package have header files in it, or not?
-In-Reply-To: 
- <CAMKF1sq45WMvPcdx527KWTYkUkxa+yS+T+4aES3nvrS6JvDJBQ@mail.gmail.com>
-Message-ID: <946de090-374f-85a0-bd52-eab9b3d54e7a@crashcourse.ca>
-References: <20eeedea-efe-555c-acd2-2f89fd879d2@crashcourse.ca>
- <CAMKF1sq45WMvPcdx527KWTYkUkxa+yS+T+4aES3nvrS6JvDJBQ@mail.gmail.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=JGGYDhHm;
+ spf=pass (domain: gmail.com, ip: 209.85.208.41,
+ mailfrom: salman.isd@gmail.com)
+Received: by mail-ed1-f41.google.com with SMTP id n1so15344581edd.0
+        for <openembedded-devel@lists.openembedded.org>;
+ Mon, 25 Oct 2021 04:45:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=WIhwkGMcSAQ83pmhLqQdFQwtJUHoqnPEHAU/69LA5xU=;
+        b=JGGYDhHmw2lQ4YidZ4JGpfM7b/tQLzxDzxBCSKRP5/nBMkgPVhs4aQY5PFe6c5kQ1n
+         1jWE+fRs8+9lHX1Rbu1SFjfaSJYwE5zisv5ocPMNTFml60D+aZjfp9Uh3jpq3SN5tuDr
+         HrK4/caPRmaCJPieSoIHCJ3Wy1KW2max5maRKvNoV8QyyVzzsAKIrfkln+I4GWW/BT2t
+         ZDLDFYVKMawidL0L2HUSFRGrmU3c5EEoLpjp2YZPYKZFNpvGr8bqeJDeiJtdcPmeDlii
+         YB/G8n1ryxhiLEKGVTd9wT2krCSEXZRl8ernMcC3fQ69T9J6lnLa1XGO+YerHMW9QWKZ
+         Uwiw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=WIhwkGMcSAQ83pmhLqQdFQwtJUHoqnPEHAU/69LA5xU=;
+        b=R2TXiwsPx5Au09DEqAruXpvf9XuIQCS+76ZNLVLUjLZMyv5ZfbdQ3Y7Oj4NVAL0ZHH
+         +Ciz1RsWAUxYfF3Ie5CD0sxxlZtDlA1+rSeBmbHYVmvESfEYtt9zfg5sFhxhok1r9D5e
+         m0BBj1Z3eueYNXMvrwc8eJqzYyuogR+aX8toe4MPvLrB48xYFHO02Xo8B/GtTaJQzA3B
+         HRvWDBA4Pj5ezHhWUkpV1BLf4Qw6eRV9wgetxYBDfdspmCfpvP6RWWRxmTgbwRHYvuSP
+         aJKlhZPkGxcYoYoL2sWsVVd6yLLbJuIZEtL2RSpD39maMu9Uz9w3DtpunmQwGfOgGzsA
+         0jkg==
+X-Gm-Message-State: AOAM530HkyH6kXaniZPMxttVfQ2LRwTBCWDJdU1H0696A6V2epkMMI5I
+	2I74cCSiEFBkXA5Ls1ZJa6lx5QK6tHU=
+X-Google-Smtp-Source: 
+ ABdhPJxEZXwoQnQkvDM1L+dWQcf3d6U/43NaZAKPzgVEaSeyBqv2E8KtkOYZcrUJ1Z99ZFj5+wJkaw==
+X-Received: by 2002:a05:6402:5189:: with SMTP id
+ q9mr25486467edd.94.1635162345562;
+        Mon, 25 Oct 2021 04:45:45 -0700 (PDT)
+Received: from salman-VirtualBox.home044weidmueller.com
+ (ip-37-201-145-145.hsi13.unitymediagroup.de. [37.201.145.145])
+        by smtp.gmail.com with ESMTPSA id
+ v15sm8727929edi.89.2021.10.25.04.45.45
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 25 Oct 2021 04:45:45 -0700 (PDT)
+From: Salman Ahmed <salman.isd@gmail.com>
+X-Google-Original-From: Salman Ahmed <salman.ahmed@weidmueller.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe] [PATCH 0/1] openldap: upgrade 2.4.58 -> 2.5.8
+Date: Mon, 25 Oct 2021 13:45:41 +0200
+Message-Id: <cover.1635161379.git.salman.ahmed@weidmueller.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cpanel8.indieserve.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Get-Message-Sender-Via: cpanel8.indieserve.net: authenticated_id:
- rpjday+crashcourse.ca/only user confirmed/virtual account not confirmed
-X-Authenticated-Sender: cpanel8.indieserve.net: rpjday@crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Oct 2021 10:51:04 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Oct 2021 11:45:48 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93560
+ https://lists.openembedded.org/g/openembedded-devel/message/93561
 
-On Sun, 24 Oct 2021, Khem Raj wrote:
+ openldap: upgrade 2.4.58 -> 2.5.8
 
-> On Sun, Oct 24, 2021 at 5:51 AM Robert P. J. Day <rpjday@crashcourse.ca> wrote:
-> >
-> >
-> >   colleague recently asked me how to get access to one or more header
-> > files associated with "ntp", so he could:
-> >
-> >   #include <ntp.h>
-> >
-> > from some other code. casually, i suggested the standard way was to
-> > add ntp to his recipe's DEPENDS, but that didn't do it, so i built ntp
-> > in my own aarch64 project, then took a look under packages-split to
-> > see what got packaged in ntp-dev, and was puzzled to see it was
-> > absolutely empty.
-> >
-> >   is this deliberate? are other recipes not entitled to ntp's header
-> > files? am i overlooking something?
->
-> While the header seems to be meant for public consumption, the build
-> explicitly does not export it, so perhaps thats not expected to be
-> used this way anymore.
+- dropped retired backends (bdb, hdb, shell)
+- back-monitor is now built as part of slapd
+- added asyncmeta and wt backends
+- dropped patches for functionalities which don't
+  exist anymore
 
-  just to tie this back to a question i once asked on (i believe) the
-YP mailing list, this wind river build is using ntpsec instead of
-regular ntp, but it would appear this would still have the same
-problem -- while the ntpsec source contains an "include" directory
-with lots of ntp-related header files, if one comes up with an ntpsec
-recipe, nothing would be solved if it also does not install those
-headers into ntpsec-dev.
+The following changes since commit 763769eb446acf8377bc2d84c76cd7fffd904f84:
 
-  so, simple question: does anyone have a bitbake recipe for current
-ntpsec? it's "waf" based, so it might be a bit trickier, but if there
-is such a recipe, unless it installs its header files into ntpsec-dev,
-then it doesn't really solve the problem, does it?
+  vboxguestdrivers: Fix build failure due to the last update. (2021-10-22 16:31:41 -0700)
 
-  thoughts?
+are available in the Git repository at:
 
-rday
+  git://github.com/salmanisd/meta-openembedded upgrade-openldap
+  https://github.com/salmanisd/meta-openembedded/tree/upgrade-openldap
+
+Salman Ahmed (1):
+  openldap: upgrade 2.4.58 -> 2.5.8
+
+ .../openldap/openldap/install-strip.patch     |  2 +-
+ .../openldap-2.4.28-gnutls-gcrypt.patch       | 10 ++-
+ .../openldap/openldap-CVE-2015-3276.patch     | 58 ----------------
+ .../openldap/openldap-m4-pthread.patch        | 22 ------
+ .../openldap/openldap/thread_stub.patch       | 20 ------
+ .../openldap/openldap/use-urandom.patch       | 15 ++--
+ .../{openldap_2.4.58.bb => openldap_2.5.8.bb} | 68 +++++++------------
+ 7 files changed, 37 insertions(+), 158 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch
+ delete mode 100644 meta-oe/recipes-support/openldap/openldap/openldap-m4-pthread.patch
+ delete mode 100644 meta-oe/recipes-support/openldap/openldap/thread_stub.patch
+ rename meta-oe/recipes-support/openldap/{openldap_2.4.58.bb => openldap_2.5.8.bb} (82%)
+
+-- 
+2.32.0
+
 
