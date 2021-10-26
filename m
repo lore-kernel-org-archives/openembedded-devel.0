@@ -2,138 +2,108 @@ Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DA37AC433F5
-	for <webhook@archiver.kernel.org>; Tue, 26 Oct 2021 01:17:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D7650C433F5
+	for <webhook@archiver.kernel.org>; Tue, 26 Oct 2021 01:18:34 +0000 (UTC)
 Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com
- [195.245.230.1])
- by mx.groups.io with SMTP id smtpd.web10.6191.1635211069030303472
+ [195.245.230.4])
+ by mx.groups.io with SMTP id smtpd.web11.6336.1635211109227981585
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Oct 2021 18:17:49 -0700
+ Mon, 25 Oct 2021 18:18:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=fzG0uXhn;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.1,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=lWAmCWhz;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.4,
  mailfrom: zhengrq.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1635211067; i=@fujitsu.com;
-	bh=z5bBTHz9W4TfYkhB/yZSi92duorzpj5qVjLO+gsPup4=;
+	s=170520fj; t=1635211095; i=@fujitsu.com;
+	bh=iRYT6sgOTiQsAq4LCkihSh625Nf6kQD+G0LU+0pgB6w=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=fzG0uXhnnRHf0GHXWoI6G21IXtVZYJtNGzKKJQRAz2fiOhm3N6/pl07ExnDdbsl2L
-	 W5TJyezBCL0JjcxlXxRxrMSiSTEnWBUtB0bvVF1GtiVcigmbtI04JOfmnQYfma4wXr
-	 LZqKri8MmzjDsy0gVVBQ0fJucXtydQrKfco9nZVrMpJ9gzRKegMKOPA96XFKA6HpFJ
-	 KBGpiiUq8j92ZBeTnoDBinQyKK1bGuDNcwbOmffK4z63Ugg02sFfMtEv2+tRpmRSxL
-	 y5l5dvB0lEn0JFvV0bFcNTWl7LXiDvT6jATjwk9c0bTYoUtbRxW/1/QPY+7HNIFDaE
-	 FLe+DyOdu8GYg==
-Received: from [100.112.192.69] (using TLSv1.2 with cipher
+	b=lWAmCWhzq4CeuYo86geom08XMJr94yrwQF5QXnXx9Jw8MiQ7n+f0XmwIyFxa+PUtU
+	 tahYqM6TKGm5TYfu0++u6NWjJZQ8/n8ynEDBPEmC33xYmOKHsAo4fs4U7VkN5pS0F2
+	 lKu/JjKJypdZvghatkC8m9Pj8QEJt5izicmVkE5E64jrnRJ2k2Bxm7LmkOCZ2inn70
+	 QuRoRVw9HhWXWCfZOWTqlhMx9hZ0M1NdtVVuvrGk69OdExijQj0rec4nRY8+PshF+l
+	 ixDhnWazTtqP8nyNNRNxFJh2ibev/wGB+Dg5UzAIrbS4qjy2wdCg+hHWmLribPo0ZW
+	 pL6ow+b53IXqw==
+Received: from [100.112.195.149] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-a.eu-west-1.aws.symcld.net id 5D/65-23860-A3757716;
- Tue, 26 Oct 2021 01:17:46 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupkkeJIrShJLcpLzFFi42Kxs+EI1bUKL08
-  0mPBcxuLi4aXMDowe5zauYAxgjGLNzEvKr0hgzXh97DZrQZdQxZKZL5kbGFsFuhi5OIQEZjNJ
-  PHt3jbWLkRPI2cMo8X6iOojNJqArce7xWnYQW0RAX2Lp7D3MILawgK/E/44vYHEWAVWJo7O/M
-  oLYvAIeEle697KA2BICChJTHr5nhogLSpyc+QQsziwgIXHwxQugOAdQjaLE7OnyEOUVEq8PX2
-  KewMgzC0nHLCQdCxiZVjGaJxVlpmeU5CZm5ugaGhjoGhoa6RpaGumamOglVukm6qWW6panFpf
-  oGuollhfrFVfmJuek6OWllmxiBIZQSsEBnR2MP1990DvEKMnBpCTKu/xsWaIQX1J+SmVGYnFG
-  fFFpTmrxIUYZDg4lCV6usPJEIcGi1PTUirTMHGA4w6QlOHiURHg3hwCleYsLEnOLM9MhUqcYF
-  aXEef1A+gRAEhmleXBtsBi6xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmYNwRkCk9mXgnc9F
-  dAi5mAFvvploAsLklESEk1MM1e3T7T645z2QflBv515t3LDG39NW9qbexzWCW+Y1XdpBKu/a5
-  hGbEhtzQ7PFkPzF/cfPu+zp4lfZm/msULOB55GH/fFKmwY5n37eqged8PsXDbzSmblxC4pFzy
-  1O425rn7P2da/uw4ySd+YcqHIp5e2/v817ZyS1qunl45S5D/U/PMu7cPaN2wUcp/urphk5j8g
-  f3cH0zMW5LvGk+S4r5YL8xQc3+e5/dra5ymsIRMYawpitTLmRv0jjdR7Xb+dVa3HUoHGOx0dR
-  faRgnY8SeJn2MSe/J8/vq3iyWzOg9PLOtMi9y8gidR0OWK04Pq83Nb3BafnivH9XrBt09Va96
-  U/b643q2xqTiAf80MZSWW4oxEQy3mouJEAF6xcGwcAwAA
+	by server-4.bemta.az-a.eu-west-1.aws.symcld.net id 27/05-30013-75757716;
+ Tue, 26 Oct 2021 01:18:15 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrCIsWRWlGSWpSXmKPExsViZ8ORqBseXp5
+  osPsSi8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvHw/xTmgtccFfOeXmJsYHzN3sXIxSEk8IRR
+  Yvm9T1DOBSaJidNnsEI4exgl/p9dy9LFyMnBJqArce7xWnYQW0RAX2Lp7D3MILawgLXEll3rw
+  eIsAqoScxY9YQSxeQU8JG6tvsgGYksIKEhMefieGSIuKHFy5hOwmcwCEhIHX7wAinMA1ShKzJ
+  4uD1FeIfH68CVmCFtN4uq5TcwTGPlmIemehaR7ASPTKkaLpKLM9IyS3MTMHF1DAwNdQ0MjXUN
+  LIDYy00us0k3USy3VLU8tLtE11EssL9YrrsxNzknRy0st2cQIDLyUggN1OxgfvP6gd4hRkoNJ
+  SZR3+dmyRCG+pPyUyozE4oz4otKc1OJDjDIcHEoSvFxh5YlCgkWp6akVaZk5wCiASUtw8CiJ8
+  G4OAUrzFhck5hZnpkOkTjEqSonz+oH0CYAkMkrz4NpgkXeJUVZKmJeRgYFBiKcgtSg3swRV/h
+  WjOAejkjBvCMgUnsy8Erjpr4AWMwEt9tMtAVlckoiQkmpg8lnOoGp4/92zqezeR0UFrRi3d3m
+  0p3Ud0b55ZrvpVbOIab7W9YsED9Q1buL1klvtbbBx/emuHKezv/b3vZy1Vut58ZOLcaGeByTN
+  SgIFHq5fc/heuHXMM4nuBb6Ss9bm/7nfMudQ2sFUh638Dd/kpxd+dtH5IVY3OzQ+82hSVO7y1
+  gnzjvxUvBhbPeW+Psd/5vOHN3zo4ij/Zhf56L/LnQzD4k23tJ1WTpzfWl0rndL7ZpPnzOpmge
+  wTbnymfEk3f4q8kbS+rMRjp2gVpxXT80l4UvusfB570wVr7xRY+NeddN5cuWyHUq+7ybqGkMl
+  zG5gvxe6SaNB7P5P31NY7mwR/uR2S33RB7nx7+fbrSizFGYmGWsxFxYkAR3QwGDcDAAA=
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-7.tower-267.messagelabs.com!1635211066!1105240!1
-X-Originating-IP: [62.60.8.85]
+X-Msg-Ref: server-6.tower-267.messagelabs.com!1635211094!1313675!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 24746 invoked from network); 26 Oct 2021 01:17:46 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-7.tower-267.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 26 Oct 2021 01:17:46 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 19Q1HeFJ004191
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+Received: (qmail 22575 invoked from network); 26 Oct 2021 01:18:15 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-6.tower-267.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 26 Oct 2021 01:18:15 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id A0ECD100231
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Oct 2021 02:17:46 +0100
+ Tue, 26 Oct 2021 02:18:14 +0100 (BST)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 9193D10022F
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 26 Oct 2021 02:18:14 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.24; Tue, 26 Oct 2021 02:17:39 +0100
+ (TLS) id 15.0.1497.24; Tue, 26 Oct 2021 02:17:53 +0100
 From: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH] [oe] [meta-networking] [PATCH] atftp: upgrade 0.7.4 -> 0.7.5
-Date: Tue, 26 Oct 2021 09:17:31 +0800
-Message-ID: <1635211051-45911-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] links: upgrade 2.22 -> 2.25
+Date: Tue, 26 Oct 2021 09:17:46 +0800
+Message-ID: <1635211066-45948-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.35]
 X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Oct 2021 01:17:50 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Oct 2021 01:18:34 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93580
-
-atftp-0.7.5
-===========
-README: update contributors list
-text files: mark/convert all textfiles to UTF-8
-fix some compiler warnings
-fix buffer overflow in atftpd (CVE-2021-41054)
-insert typos.patch
-insert atftp-0.7-ack_heuristic.patch
-insert atftp-0.7-server_receive_race.patch
-insert patch atftp-0.7-sorcerers_apprentice.patch
-test.sh: check for root no longer necessary
-
-Merge commits from https://github.com/srett/atftp
-=================================================
-tftpd.c: Only drop privs if requested or running as root + check for failure
-fix invalid read of 1 byte in tftp_send_request.
-Check return value of fseek(), abort if != 0
-options.c: Proper fix for the read-past-end-of-array
-configure.ac: Add -std=gnu89 if gcc/clang is detected
-tftpd.c: Fix memleak if thread spawning fails
-atftp: Check return value of fgets, buffer might be uninitialized on NULL
-Fix check for argz support (HAVE_ARGZ -> HAVE_ARGZ_H)
-
-replace LICENSE with current version
-
-License-Update:
-1. Address changed
-2. "the GNU Library General Public License" changed to
-   "the GNU Lesser General Public License"
-3. Format of LICENSE changed
+ https://lists.openembedded.org/g/openembedded-devel/message/93581
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../recipes-daemons/atftp/{atftp_0.7.4.bb => atftp_0.7.5.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-daemons/atftp/{atftp_0.7.4.bb => atftp_0.7.5.bb} (91%)
+ meta-oe/recipes-support/links/{links_2.22.bb => links_2.25.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-support/links/{links_2.22.bb => links_2.25.bb} (64%)
 
-diff --git a/meta-networking/recipes-daemons/atftp/atftp_0.7.4.bb b/meta-networking/recipes-daemons/atftp/atftp_0.7.5.bb
-similarity index 91%
-rename from meta-networking/recipes-daemons/atftp/atftp_0.7.4.bb
-rename to meta-networking/recipes-daemons/atftp/atftp_0.7.5.bb
-index 7661e9c48e..de283df837 100644
---- a/meta-networking/recipes-daemons/atftp/atftp_0.7.4.bb
-+++ b/meta-networking/recipes-daemons/atftp/atftp_0.7.5.bb
-@@ -2,9 +2,9 @@ SUMMARY = "Advanced TFTP server and client"
- SECTION = "net"
- HOMEPAGE = "http://packages.debian.org/atftp"
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=94d55d512a9ba36caa9b7df079bae19f"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=f65159f73e603f89d6867d43191900e5"
- 
--SRCREV = "e56e8845f1070e89a4a6e509396b681688d03793"
-+SRCREV = "00921e75728e3681b051c2e48c59e36c6cfa2e97"
- 
- SRC_URI = "git://git.code.sf.net/p/atftp/code \
-            file://atftpd.init \
+diff --git a/meta-oe/recipes-support/links/links_2.22.bb b/meta-oe/recipes-support/links/links_2.25.bb
+similarity index 64%
+rename from meta-oe/recipes-support/links/links_2.22.bb
+rename to meta-oe/recipes-support/links/links_2.25.bb
+index f2b4a6a80d..1986358b21 100644
+--- a/meta-oe/recipes-support/links/links_2.22.bb
++++ b/meta-oe/recipes-support/links/links_2.25.bb
+@@ -8,5 +8,4 @@ EXTRA_OECONF = "--enable-graphics \
+                 --without-libtiff --without-svgalib --with-fb \
+                 --without-directfb --without-pmshell --without-atheos \
+                 --without-x"
+-SRC_URI[sha256sum] = "0364986b3a7f1e8e3171bea362b53f71e1dd3360a8842d66fdc65580ebc2084d"
+-SRC_URI[icon.sha256sum] = "eddcd8b8c8698aa621d1a453943892d77b72ed492e0d14e0dbac5c6a57e52f47"
++SRC_URI[sha256sum] = "2dd78508698e8279ef4f09a3a2a21e9595040113402da6c553974414fb49dd2c"
 -- 
 2.25.1
 
