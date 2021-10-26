@@ -2,59 +2,61 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 977ABC433EF
-	for <webhook@archiver.kernel.org>; Tue, 26 Oct 2021 15:03:57 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
- [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.web10.13559.1635260636816958986
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 982A6C433F5
+	for <webhook@archiver.kernel.org>; Tue, 26 Oct 2021 15:03:59 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
+ [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.web10.13561.1635260638368165132
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Oct 2021 08:03:57 -0700
+ Tue, 26 Oct 2021 08:03:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=fC6hq4Lt;
- spf=pass (domain: gmail.com, ip: 209.85.128.43,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=GlU4nRhc;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53,
  mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id m42so14431325wms.2
+Received: by mail-wm1-f53.google.com with SMTP id
+ 83-20020a1c0456000000b0032cb02544aaso2495298wme.5
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Oct 2021 08:03:56 -0700 (PDT)
+ Tue, 26 Oct 2021 08:03:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=RqZsXNeK4lobkw4GJnjgwE7zXv2c6iqNLWwbHJRmRho=;
-        b=fC6hq4LtYLnw4skeKKydfjetBcWVmD7OuTHoCcMhPP1dXYiK818VzXu/FCdkMDgX7Z
-         beYw39oL1nLsqb4SU4powgGvBL/ogxcIsiebUXnJcEQ6ntUm4LA2PHDvUB0BxIDNaMX4
-         odxLVKQZuDPSZ7jLmnULJenqTLn2Ueu1nf5jl/BrfVP0UGlqMllQio/VhdLZxQsO7wAn
-         JFscFWqHYnct5X5ewwhv6nWskkMe87gPgMYsatMoEqVSxycbvtahlI6aGsjCa/4DepTD
-         VnOQt5Mw2GIJIHkPk2m1rCW+0NExdEJ1l1gV2OZ4YX8owbce+np8z77BXT//FegoAKas
-         Gb9g==
+        bh=Slj2zJOngMUG6GUDtsNPXoxPwywvwxDPuMFVFLaWG8o=;
+        b=GlU4nRhcrLeEhPtZqPLbsqQobaqN2RwNyT5AMHMM5Zo9XhPDzssnGc/zBOaOLm5k4r
+         eF/eP+D0Ud5iDYRYC+KHKVuZORGRJPpzpsuyf4kzAGnROGDWG2yQGwlRQLS7mJskhG0a
+         KsQNMwfI8/d/goH67+gY6JevsYebXJiKt7thU7IjDBe9KLyM4drEjqjVgbkjoJElYLgv
+         3OubM/mR1xBuxL1kUV/yYDbKi6CFa3w/ooP45+CHeef2VsA4gymPyksmSXqyEnEAMhtV
+         em/4WTf3HPQMvdETa1sbn46dkYNjiPM//OgfqEwxynnGEqHxsXLEla1dHa5nsxlseOvg
+         11/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=RqZsXNeK4lobkw4GJnjgwE7zXv2c6iqNLWwbHJRmRho=;
-        b=ax/yS5hYdeeECp+0H3NHWzmosWuO8zU7dygNgbxTZRkZvZtHIaJm4H4grpOe6CMOAf
-         D7BfCXx5CMCitrSRpm8yF2Mog6cMa2MCnFon2VtuDd202LcPUbppR0pRjQ9zKVYUGTf+
-         ewBrtUHw0bt9nPCy/Ua8l8YxzbvShi8nD5njssiZlQarIBOqSqGK8uVBw/mqlnTAneb/
-         jvCTxyGklw/egYskM4TDH8IRvcVWQP+VTEc2+MbHDUD5btWp90rqtMPN/GoH+W/SfauM
-         f/6b5ev/uKwfmz0HYOsCwJGLo+pGTnofSOrxtm9BEX/BsNWZyDe46dZsC3xnNXejthuI
-         Zkaw==
-X-Gm-Message-State: AOAM530yJKJcCcMH5cRkI3dSaInQzNKgLTmXARwOzxMVD2uWql7eKd8I
-	kIi7sVY076BgFC88iV1hynxjIWJBvYU=
+        bh=Slj2zJOngMUG6GUDtsNPXoxPwywvwxDPuMFVFLaWG8o=;
+        b=2JX44LE1s1LzTKUKi18jmucPOlk41J8VfJkTf6uCdVHzG71kcijdq0Lb3wAJMx8Gu3
+         0J49LoeoIVFDkAFShToQ0DXljIHa3BG3J/mCljLZfvOM+hbPCCcSicvXmHU/MzsuLVoX
+         gs9g8m9lOj794Osv/p/QbSB/ajlLVJayvAbxR6vRR6IzzhyBkSyu98wywhIKXg62hIzx
+         QPj06M96+/xkaMN1F3n3CHFRkUe7mkt3Lme05v7fOUJPIanIFPjRN8zsv4dLSUCWAPak
+         JYDRzKDvtQS0Ah03e0eGjtxZ8+FJOajJdAkPeUbqiz19nkGjYiaar6UELk4ZYnO0DR+T
+         3l/Q==
+X-Gm-Message-State: AOAM532XsMYTQ5HENGfNbuux8UQZ+8YDdl/+aQtmXpsJRXuS4NZWZnBq
+	6b7CpUpDhW9kuz18Z6H4v6gMbG74pWs=
 X-Google-Smtp-Source: 
- ABdhPJy6hGXWd2xxKVSoq5ZbMOV5NqLBVEmTOCmmle0BpKCqVZUrrCqXE6cQ0KYPIU5Vs5ehNivupA==
-X-Received: by 2002:a1c:1941:: with SMTP id 62mr27371034wmz.131.1635260635482;
-        Tue, 26 Oct 2021 08:03:55 -0700 (PDT)
+ ABdhPJxPWrS28r1kOVk73BDAcrgqukNpyHC+D5FSr+oT+wcP25MA44gdyqDt9KvMZH6mfN4x40d5Og==
+X-Received: by 2002:a1c:f402:: with SMTP id z2mr59531330wma.53.1635260636749;
+        Tue, 26 Oct 2021 08:03:56 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id l2sm952002wmc.3.2021.10.26.08.03.54
+        by smtp.gmail.com with ESMTPSA id k8sm857531wms.41.2021.10.26.08.03.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 26 Oct 2021 08:03:54 -0700 (PDT)
+        Tue, 26 Oct 2021 08:03:56 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-python2][PATCH 2/3] python-systemd: inherit pkgconfig
-Date: Tue, 26 Oct 2021 17:03:49 +0200
-Message-Id: <20211026150350.1290780-2-Martin.Jansa@gmail.com>
+Subject: [meta-python2][PATCH 3/3] python-m2crypto, python-pywbem,
+ openlmi-tools: blacklist due to openssl-3
+Date: Tue, 26 Oct 2021 17:03:50 +0200
+Message-Id: <20211026150350.1290780-3-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20211026150350.1290780-1-Martin.Jansa@gmail.com>
 References: <20211026150350.1290780-1-Martin.Jansa@gmail.com>
@@ -63,47 +65,61 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Oct 2021 15:03:57 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Oct 2021 15:03:59 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93600
+ https://lists.openembedded.org/g/openembedded-devel/message/93601
 
-* otherwise fails when searching for libsystemd-journal:
-  http://errors.yoctoproject.org/Errors/Details/614895/
+* python-m2crypto fails to build with openssl-3.0:
 
-DEBUG: Executing shell function do_configure
-Traceback (most recent call last):
-  File "setup.py", line 55, in <module>
-    **lib('libsystemd', 'libsystemd-journal', **defines))
-  File "setup.py", line 40, in lib
-    status, result = pkgconfig(name, **kw)
-  File "setup.py", line 18, in pkgconfig
-    status, result = call(pkgconf, '--libs', '--cflags', package)
-  File "setup.py", line 8, in call
-    universal_newlines=True)
-  File "TOPDIR/tmp-glibc/work/core2-64-oe-linux/python-systemd/234-r0/recipe-sysroot-native/usr/lib/python2.7/subprocess.py", line 394, in __init__
-    errread, errwrite)
-  File "TOPDIR/tmp-glibc/work/core2-64-oe-linux/python-systemd/234-r0/recipe-sysroot-native/usr/lib/python2.7/subprocess.py", line 1047, in _execute_child
-    raise child_exception
-OSError: [Errno 2] No such file or directory
+http://errors.yoctoproject.org/Errors/Details/614896/
+SWIG/_m2crypto_wrap.c: In function 'init_m2crypto':
+SWIG/_m2crypto_wrap.c:32981:102: error: 'RSA_SSLV23_PADDING' undeclared (first use in this function); did you mean 'RSA_NO_PADDING'?
+32981 |   SWIG_Python_SetConstant(d, d == md ? public_interface : NULL, "sslv23_padding",SWIG_From_int((int)(RSA_SSLV23_PADDING)));
+      |                                                                                                      ^~~~~~~~~~~~~~~~~~
+      |                                                                                                      RSA_NO_PADDING
+
+* python-pywbem, openlmi-tools depend on python-m2crypto
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-devtools/python/python-systemd_234.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ conf/distro/include/python2-target-recipes-blacklist.inc | 4 ++--
+ recipes-devtools/python/python-m2crypto_0.30.1.bb        | 3 ++-
+ recipes-extended/pywbem/python-pywbem_0.15.0.bb          | 2 +-
+ 3 files changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-devtools/python/python-systemd_234.bb b/recipes-devtools/python/python-systemd_234.bb
-index 907ea99..fd657ed 100644
---- a/recipes-devtools/python/python-systemd_234.bb
-+++ b/recipes-devtools/python/python-systemd_234.bb
-@@ -8,7 +8,7 @@ DEPENDS += "systemd (<=234)"
- RDEPENDS:${PN} += "systemd ${PYTHON_PN}-syslog ${PYTHON_PN}-logging"
- REQUIRED_DISTRO_FEATURES = "systemd"
+diff --git a/conf/distro/include/python2-target-recipes-blacklist.inc b/conf/distro/include/python2-target-recipes-blacklist.inc
+index 71833dd..9480297 100644
+--- a/conf/distro/include/python2-target-recipes-blacklist.inc
++++ b/conf/distro/include/python2-target-recipes-blacklist.inc
+@@ -8,5 +8,5 @@ RDEPENDS:packagegroup-meta-oe-dbs-python2:remove = "${@bb.utils.contains('I_SWEA
+ PNBLACKLIST[lio-utils] ?= "${@bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', '', 'python2 is out of support for long time, read https://www.python.org/doc/sunset-python-2/ https://python3statement.org/ and if you really have to temporarily use this, then set I_SWEAR_TO_MIGRATE_TO_PYTHON3 to "yes"', d)}"
+ RDEPENDS:packagegroup-meta-oe-support-python2:remove = "${@bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', '', 'lio-utils', d)}"
+ # meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
+-PNBLACKLIST[openlmi-tools] ?= "${@bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', '', 'python2 is out of support for long time, read https://www.python.org/doc/sunset-python-2/ https://python3statement.org/ and if you really have to temporarily use this, then set I_SWEAR_TO_MIGRATE_TO_PYTHON3 to "yes"', d)}"
+-RDEPENDS:packagegroup-meta-oe-extended-python2:remove = "${@bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', '', 'openlmi-tools', d)}"
++PNBLACKLIST[openlmi-tools] ?= "${@bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', 'depends on python-m2crypto which fails to build with openssl-3', 'python2 is out of support for long time, read https://www.python.org/doc/sunset-python-2/ https://python3statement.org/ and if you really have to temporarily use this, then set I_SWEAR_TO_MIGRATE_TO_PYTHON3 to "yes"', d)}"
++RDEPENDS:packagegroup-meta-oe-extended-python2:remove = "openlmi-tools"
+diff --git a/recipes-devtools/python/python-m2crypto_0.30.1.bb b/recipes-devtools/python/python-m2crypto_0.30.1.bb
+index 6bd6170..5c595f8 100644
+--- a/recipes-devtools/python/python-m2crypto_0.30.1.bb
++++ b/recipes-devtools/python/python-m2crypto_0.30.1.bb
+@@ -63,4 +63,5 @@ do_configure:prepend() {
  
--inherit pypi features_check setuptools
-+inherit pypi features_check setuptools pkgconfig
+ BBCLASSEXTEND = "native"
  
- SRC_URI[md5sum] = "5071ea5bcb976186e92a3f5e75df221d"
- SRC_URI[sha256sum] = "fd0e44bf70eadae45aadc292cb0a7eb5b0b6372cd1b391228047d33895db83e7"
+-PNBLACKLIST[python-m2crypto] ?= "${@bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', '', 'python2 is out of support for long time, read https://www.python.org/doc/sunset-python-2/ https://python3statement.org/ and if you really have to temporarily use this, then set I_SWEAR_TO_MIGRATE_TO_PYTHON3 to "yes"', d)}"
++PNBLACKLIST[python-m2crypto] ?= "${@bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', 'Not compatible with openssl-3, http://errors.yoctoproject.org/Errors/Details/614896/ SWIG/_m2crypto_wrap.c:32981:102: error: RSA_SSLV23_PADDING undeclared (first use in this function); did you mean RSA_NO_PADDING?', 'python2 is out of support for long time, read https://www.python.org/doc/sunset-python-2/ https://python3statement.org/ and if you really have to temporarily use this, then set I_SWEAR_TO_MIGRATE_TO_PYTHON3 to "yes"', d)}"
++PNBLACKLIST[python-m2crypto-native] ?= "${@bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', 'Not compatible with openssl-3, http://errors.yoctoproject.org/Errors/Details/614896/ SWIG/_m2crypto_wrap.c:32981:102: error: RSA_SSLV23_PADDING undeclared (first use in this function); did you mean RSA_NO_PADDING?', 'python2 is out of support for long time, read https://www.python.org/doc/sunset-python-2/ https://python3statement.org/ and if you really have to temporarily use this, then set I_SWEAR_TO_MIGRATE_TO_PYTHON3 to "yes"', d)}"
+diff --git a/recipes-extended/pywbem/python-pywbem_0.15.0.bb b/recipes-extended/pywbem/python-pywbem_0.15.0.bb
+index 6661ac5..6604452 100644
+--- a/recipes-extended/pywbem/python-pywbem_0.15.0.bb
++++ b/recipes-extended/pywbem/python-pywbem_0.15.0.bb
+@@ -67,4 +67,4 @@ ALTERNATIVE_PRIORITY = "30"
+ 
+ BBCLASSEXTEND = "native"
+ 
+-PNBLACKLIST[python-pywbem] ?= "${@bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', '', 'python2 is out of support for long time, read https://www.python.org/doc/sunset-python-2/ https://python3statement.org/ and if you really have to temporarily use this, then set I_SWEAR_TO_MIGRATE_TO_PYTHON3 to "yes"', d)}"
++PNBLACKLIST[python-pywbem] ?= "${@bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', 'depends on python-m2crypto which fails to build with openssl-3', 'python2 is out of support for long time, read https://www.python.org/doc/sunset-python-2/ https://python3statement.org/ and if you really have to temporarily use this, then set I_SWEAR_TO_MIGRATE_TO_PYTHON3 to "yes"', d)}"
 -- 
 2.32.0
 
