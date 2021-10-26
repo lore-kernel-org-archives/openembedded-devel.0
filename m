@@ -1,105 +1,292 @@
-Return-Path: <jsbronder@cold-front.org>
+Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C279EC433EF
-	for <webhook@archiver.kernel.org>; Tue, 26 Oct 2021 18:51:32 +0000 (UTC)
-Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com
- [66.111.4.27])
- by mx.groups.io with SMTP id smtpd.web08.915.1635274291860160601
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B18AEC433EF
+	for <webhook@archiver.kernel.org>; Tue, 26 Oct 2021 18:52:02 +0000 (UTC)
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com
+ [209.85.167.48])
+ by mx.groups.io with SMTP id smtpd.web11.890.1635274320939868169
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Oct 2021 11:51:32 -0700
+ Tue, 26 Oct 2021 11:52:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@cold-front.org header.s=mesmtp header.b=ItXK3szn;
- spf=pass (domain: cold-front.org, ip: 66.111.4.27,
- mailfrom: jsbronder@cold-front.org)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
-	by mailout.nyi.internal (Postfix) with ESMTP id 144725C024D;
-	Tue, 26 Oct 2021 14:51:29 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
-  by compute1.internal (MEProxy); Tue, 26 Oct 2021 14:51:29 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
-	 h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding; s=mesmtp; bh=duU2fLNhcLlDWXzXL9DP4xF
-	oVyKdX7Tky84UGXFBjq4=; b=ItXK3sznt0nmM224ofFirn0axm97076VEzJ7P7G
-	1pQrvUob6Ufwrn6zOzEkaQ9J9W1VpfkLkpmdbSwuMqYBdFf4ffFiLSlAKXRcQwDT
-	knJSSz/n7LZv0it5T/ftjtIuebJl7czc2zFsUDd24CRJeUPocLU7+reoKtBTa6f0
-	XtwM=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-transfer-encoding:date:from
-	:message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=duU2fLNhcLlDWXzXL
-	9DP4xFoVyKdX7Tky84UGXFBjq4=; b=YReWJjb+ABsroIWkpB/VMyCiZZ5DlIW44
-	9ZtVv0pz47Vbk+WomyGeYzSLjFQVXS+Z9beb8n02S7jvG8Xb2KOFt/2N0iuk39RS
-	pipjUxKXuj1Rqypx6l65zVFXO5F9QqeRXOKe4n2TTodEc9X6PIX4ZXWl/NhC77WD
-	7vEbN5l/yIUpjKQ9GjHQwQGdGS2yfamLzw9lKKhwlN+vvnwzQaHmTmCKxG+pnUx8
-	ZaihjLIBjhW6i+tV0gku3HyTeTg4RrnYKSHEXyxgTRVTngz3y+6XxLzPbLJwcO0g
-	FEk1Y79LT8HEhY8nFvS6neiMM5xWwS8oL6wMSekYHWRZ62Lem59Rw==
-X-ME-Sender: <xms:ME54YTJ4lo8HJtj43RvXyCdApi4A6UBDpU53HvkGs76Dd5Jviregug>
-    <xme:ME54YXI1HMVKsFovHjC-IjBoOym3MCQpIU-1BUvOPmTNbBRsw0LJZvA5rxAoxAEi_
-    HVF_jSVc46VnBC2bw>
-X-ME-Received: 
- <xmr:ME54YbuFf11NF3x4r7rPO3e0kpBcKeqWrwc1nB8kfj8a_ujJeYeVpmIxLw>
-X-ME-Proxy-Cause: 
- gggruggvucftvghtrhhoucdtuddrgedvtddrvdefkedgheegucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucenucfjughrpefhvffufffkofgggfestdekredtre
-    dttdenucfhrhhomheplfhushhtihhnuceurhhonhguvghruceojhhssghrohhnuggvrhes
-    tgholhguqdhfrhhonhhtrdhorhhgqeenucggtffrrghtthgvrhhnpeettdeghffhtdeivd
-    fhkeeiffekleehteetgfeiuefhueffffehveevuefhieegtdenucffohhmrghinhepghhi
-    thhhuhgsrdgtohhmnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
-    hfrhhomhepjhhssghrohhnuggvrhestgholhguqdhfrhhonhhtrdhorhhg
-X-ME-Proxy: <xmx:ME54YcZeuRh097tyVUct6qRaVkyzfao6PNuMQqgILX8XWvQMkdM9Jg>
-    <xmx:ME54YaYC32CmOLU-oqtXS5lw6DQkdyO8oB-uN7pg2xMv-pgf5f5vZQ>
-    <xmx:ME54YQDhQ4Emt9Os3IagyeRGCoKpJianMl8radtYYEtxpKn27QZN6w>
-    <xmx:MU54YTB_0-J_gxxxqoFVUjh7YaNbhLcSsqjW-imLcKEqIo8APeHGtQ>
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 26 Oct 2021 14:51:28 -0400 (EDT)
-From: Justin Bronder <jsbronder@cold-front.org>
+ dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
+ header.s=20210112 header.b=xDyK69JZ;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
+ ip: 209.85.167.48, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f48.google.com with SMTP id j2so889267lfg.3
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 26 Oct 2021 11:52:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Zb+bwhqlg/gyOHurPsADCSdpJfbs22cJO14tawdnuRw=;
+        b=xDyK69JZMY87/EpMgkZI2dV1R0ZzbXtrfat4OdJUhfFKGqkx9LEoOHp51U5AiMRb8P
+         w/2fFIOV9ZG4BbPOsUijNcYBhNoJoRSKxGS1J4VIwIkz3o41/q+BpbFncMul1zI2mpjP
+         /zDcu6UWDKbzl597ak7347z6dIxmvu2Jt/33+NQvu1OPOSuLcn4zSIXx9x1N7o57vfbv
+         eWc56FihQFJi7o+icula4c+WIwYhpPxKZ0zRWENWcD9wAENlWGtcuzOKdwi1QL+SXdFQ
+         MNdwdGm//Y9zWQP9NGAmQYIegL+ajZNukE9HEZEN2wLQNnsb99shBGHSqp6Zr6eW3mZc
+         EDAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Zb+bwhqlg/gyOHurPsADCSdpJfbs22cJO14tawdnuRw=;
+        b=fnHB0OAufx+zfsa+jMBxbG9tS6azHbZ2X9lyr3LX7jjPnxvBRU+lPBYO5IUhm7nevS
+         ssO6emf4BvOYAXNMi9kCPv7cMfEx9/67tPSvlgQTJOeJtCDavselcEe4wcdscCArBsHg
+         muGZ9kEPz+bBwFL15KemeTbZXKG68q4s6jLdJY2FvhzUUYa4BgGgSucAQ+EtYhSbmGR8
+         ku1IFYtVWRvALarhkLNzFH1DOVke24QzmeYLRYTa4zif2UD2X4RAqt9+/u9ezhpeI7Nz
+         P2cN3UbJSg0H5nqonlqNMhyqPIMyPE6D3sc8kz1nwgAgXjSzOiyyOCb1Hvhrclmzh55r
+         N8HQ==
+X-Gm-Message-State: AOAM532oI6oEsG8w4dJCATxubpnZBuSDoMhAlcVyHb+Bo2SAcnNqhlZX
+	J6Kzp6LLSiycpRsGuacnZdsNn33dM0XPT23D
+X-Google-Smtp-Source: 
+ ABdhPJwxjGjmU4iAjqt2Bsc7zrAWaMjz+7VxC55VxIqeXF8aEi6INfB+0BzG7xN60EbMNARQ0RS8rg==
+X-Received: by 2002:ac2:4c49:: with SMTP id o9mr25987691lfk.482.1635274318857;
+        Tue, 26 Oct 2021 11:51:58 -0700 (PDT)
+Received: from localhost.localdomain
+ (c-7a22524e.023-160-67626725.bbcust.telenor.se. [78.82.34.122])
+        by smtp.gmail.com with ESMTPSA id
+ a36sm188324ljq.123.2021.10.26.11.51.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 26 Oct 2021 11:51:58 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Justin Bronder <jsbronder@cold-front.org>
-Subject: [meta-python][PATCH] python3-pyflakes: fix LICENSE,
- HOMEPAGE and RDEPENDS
-Date: Tue, 26 Oct 2021 14:51:13 -0400
-Message-Id: <20211026185113.32573-1-jsbronder@cold-front.org>
-X-Mailer: git-send-email 2.33.0
+Cc: peter@berginkonsult.se,
+	Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-oe][PATCH v2] hiredis: update to 1.0.2
+Date: Tue, 26 Oct 2021 20:51:56 +0200
+Message-Id: <20211026185156.1059395-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Oct 2021 18:51:32 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Oct 2021 18:52:02 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93610
+ https://lists.openembedded.org/g/openembedded-devel/message/93611
 
-Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../recipes-devtools/python/python3-pyflakes_2.4.0.bb    | 9 ++-------
- 1 file changed, 2 insertions(+), 7 deletions(-)
+ ...0001-CMake-configuration-for-hiredis.patch | 117 ------------------
+ ...001-Makefile-remove-hardcoding-of-CC.patch |  28 -----
+ .../hiredis/hiredis_0.14.0.bb                 |  24 ----
+ .../recipes-extended/hiredis/hiredis_1.0.2.bb |  13 ++
+ 4 files changed, 13 insertions(+), 169 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/hiredis/files/0001-CMake-configuration-for-hiredis.patch
+ delete mode 100644 meta-oe/recipes-extended/hiredis/files/0001-Makefile-remove-hardcoding-of-CC.patch
+ delete mode 100644 meta-oe/recipes-extended/hiredis/hiredis_0.14.0.bb
+ create mode 100644 meta-oe/recipes-extended/hiredis/hiredis_1.0.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyflakes_2.4.0.bb b/meta-python/recipes-devtools/python/python3-pyflakes_2.4.0.bb
-index 641bb2667..827ff0b29 100644
---- a/meta-python/recipes-devtools/python/python3-pyflakes_2.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyflakes_2.4.0.bb
-@@ -1,15 +1,10 @@
- SUMMARY = "passive checker of Python programs"
--HOMEPAGE = "https://github.com/dreamhost/cliff"
--LICENSE = "Apache-2.0"
-+HOMEPAGE = "https://github.com/PyCQA/pyflakes"
-+LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=690c2d09203dc9e07c4083fc45ea981f"
- 
- SRC_URI[sha256sum] = "05a85c2872edf37a4ed30b0cce2f6093e1d0581f8c19d7393122da7e25b2b24c"
- 
- inherit pypi setuptools3
- 
--RDEPENDS:${PN} += " \
--    ${PYTHON_PN}-prettytable \
--    ${PYTHON_PN}-cmd2 \
--    ${PYTHON_PN}-pyparsing"
+diff --git a/meta-oe/recipes-extended/hiredis/files/0001-CMake-configuration-for-hiredis.patch b/meta-oe/recipes-extended/hiredis/files/0001-CMake-configuration-for-hiredis.patch
+deleted file mode 100644
+index 139d13f4c..000000000
+--- a/meta-oe/recipes-extended/hiredis/files/0001-CMake-configuration-for-hiredis.patch
++++ /dev/null
+@@ -1,117 +0,0 @@
+-From 2dc0c7e4a3fa7ecc92ee5e22f1d8ee48c2b333a8 Mon Sep 17 00:00:00 2001
+-From: Thomas Lee <debian@tomlee.co>
+-Date: Sun, 4 Nov 2018 22:59:09 +0000
+-Subject: [PATCH] CMake configuration for hiredis
 -
- BBCLASSEXTEND = "native nativesdk"
+-Last-Update: 2018-09-26
+-
+-Upstream-Status: Backport [Ubuntu 20.04]
+----
+- HiredisConfig.cmake.in        |  5 +++++
+- HiredisConfigVersion.cmake.in | 22 ++++++++++++++++++++++
+- Makefile                      | 17 ++++++++++++++++-
+- 3 files changed, 43 insertions(+), 1 deletion(-)
+- create mode 100644 HiredisConfig.cmake.in
+- create mode 100644 HiredisConfigVersion.cmake.in
+-
+-diff --git a/HiredisConfig.cmake.in b/HiredisConfig.cmake.in
+-new file mode 100644
+-index 0000000..2cce290
+---- /dev/null
+-+++ b/HiredisConfig.cmake.in
+-@@ -0,0 +1,5 @@
+-+find_path(HIREDIS_INCLUDE_DIRS hiredis/hiredis.h HINTS "/usr/include")
+-+find_library(HIREDIS_LIB_HIREDIS NAMES hiredis HINTS "/usr/lib")
+-+
+-+set(HIREDIS_LIBRARIES ${HIREDIS_LIB_HIREDIS})
+-+
+-diff --git a/HiredisConfigVersion.cmake.in b/HiredisConfigVersion.cmake.in
+-new file mode 100644
+-index 0000000..584144a
+---- /dev/null
+-+++ b/HiredisConfigVersion.cmake.in
+-@@ -0,0 +1,22 @@
+-+set(PACKAGE_VERSION "@HIREDIS_VERSION@")
+-+
+-+string(REPLACE "." ";" HIREDIS_VERSION_COMPONENTS ${PACKAGE_VERSION})
+-+string(REPLACE "." ";" REQUESTED_VERSION_COMPONENTS ${PACKAGE_FIND_VERSION})
+-+
+-+list(GET HIREDIS_VERSION_COMPONENTS 0 HIREDIS_VERSION_MAJOR)
+-+list(GET HIREDIS_VERSION_COMPONENTS 1 HIREDIS_VERSION_MINOR)
+-+
+-+list(GET REQUESTED_VERSION_COMPONENTS 0 REQUESTED_VERSION_MAJOR)
+-+list(GET REQUESTED_VERSION_COMPONENTS 1 REQUESTED_VERSION_MINOR)
+-+
+-+if(("${HIREDIS_VERSION_MAJOR}" EQUAL "${REQUESTED_VERSION_MAJOR}") AND
+-+    (("${HIREDIS_VERSION_MINOR}" EQUAL "${REQUESTED_VERSION_MINOR}") OR
+-+     ("${HIREDIS_VERSION_MINOR}" GREATER "${REQUESTED_VERSION_MINOR}")))
+-+    set(PACKAGE_VERSION_COMPATIBLE TRUE)
+-+    if("${PACKAGE_VERSION}" VERSION_EQUAL "${PACKAGE_FIND_VERSION}")
+-+        set(PACKAGE_VERSION_EXACT TRUE)
+-+    endif()
+-+else()
+-+    set(PACKAGE_VERSION_COMPATIBLE FALSE)
+-+endif()
+-+
+-diff --git a/Makefile b/Makefile
+-index 339727f..43704cd 100644
+---- a/Makefile
+-+++ b/Makefile
+-@@ -8,6 +8,8 @@ EXAMPLES=hiredis-example hiredis-example-libevent hiredis-example-libev hiredis-
+- TESTS=hiredis-test
+- LIBNAME=libhiredis
+- PKGCONFNAME=hiredis.pc
+-+CMAKECONFNAME=HiredisConfig.cmake
+-+CMAKEVERSNAME=HiredisConfigVersion.cmake
+- 
+- HIREDIS_MAJOR=$(shell grep HIREDIS_MAJOR hiredis.h | awk '{print $$3}')
+- HIREDIS_MINOR=$(shell grep HIREDIS_MINOR hiredis.h | awk '{print $$3}')
+-@@ -19,9 +21,11 @@ PREFIX?=/usr/local
+- INCLUDE_PATH?=include/hiredis
+- LIBRARY_PATH?=lib
+- PKGCONF_PATH?=pkgconfig
+-+CMAKE_PATH?=cmake/Hiredis
+- INSTALL_INCLUDE_PATH= $(DESTDIR)$(PREFIX)/$(INCLUDE_PATH)
+- INSTALL_LIBRARY_PATH= $(DESTDIR)$(PREFIX)/$(LIBRARY_PATH)
+- INSTALL_PKGCONF_PATH= $(INSTALL_LIBRARY_PATH)/$(PKGCONF_PATH)
+-+INSTALL_CMAKE_PATH= $(INSTALL_LIBRARY_PATH)/$(CMAKE_PATH)
+- 
+- # redis-server configuration used for testing
+- REDIS_PORT=56379
+-@@ -150,6 +154,7 @@ check: hiredis-test
+- 
+- clean:
+- 	rm -rf $(DYLIBNAME) $(STLIBNAME) $(TESTS) $(PKGCONFNAME) examples/hiredis-example* *.o *.gcda *.gcno *.gcov
+-+	rm -f $(CMAKECONFNAME) $(CMAKEVERSNAME)
+- 
+- dep:
+- 	$(CC) -MM *.c
+-@@ -169,7 +174,14 @@ $(PKGCONFNAME): hiredis.h
+- 	@echo Libs: -L\$${libdir} -lhiredis >> $@
+- 	@echo Cflags: -I\$${includedir} -D_FILE_OFFSET_BITS=64 >> $@
+- 
+--install: $(DYLIBNAME) $(STLIBNAME) $(PKGCONFNAME)
+-+$(CMAKECONFNAME): $(CMAKECONFNAME).in
+-+	cp $(CMAKECONFNAME).in $(CMAKECONFNAME)
+-+
+-+$(CMAKEVERSNAME): $(CMAKEVERSNAME).in
+-+	sed -e "s,@HIREDIS_VERSION@,$(HIREDIS_MAJOR).$(HIREDIS_MINOR).$(HIREDIS_PATCH),g" \
+-+		$(CMAKEVERSNAME).in >$(CMAKEVERSNAME)
+-+
+-+install: $(DYLIBNAME) $(STLIBNAME) $(PKGCONFNAME) $(CMAKECONFNAME) $(CMAKEVERSNAME)
+- 	mkdir -p $(INSTALL_INCLUDE_PATH) $(INSTALL_INCLUDE_PATH)/adapters $(INSTALL_LIBRARY_PATH)
+- 	$(INSTALL) hiredis.h async.h read.h sds.h $(INSTALL_INCLUDE_PATH)
+- 	$(INSTALL) adapters/*.h $(INSTALL_INCLUDE_PATH)/adapters
+-@@ -178,6 +190,9 @@ install: $(DYLIBNAME) $(STLIBNAME) $(PKGCONFNAME)
+- 	$(INSTALL) $(STLIBNAME) $(INSTALL_LIBRARY_PATH)
+- 	mkdir -p $(INSTALL_PKGCONF_PATH)
+- 	$(INSTALL) $(PKGCONFNAME) $(INSTALL_PKGCONF_PATH)
+-+	mkdir -p $(INSTALL_CMAKE_PATH)
+-+	$(INSTALL) $(CMAKECONFNAME) $(INSTALL_CMAKE_PATH)
+-+	$(INSTALL) $(CMAKEVERSNAME) $(INSTALL_CMAKE_PATH)
+- 
+- 32bit:
+- 	@echo ""
+--- 
+-2.27.0
+-
+diff --git a/meta-oe/recipes-extended/hiredis/files/0001-Makefile-remove-hardcoding-of-CC.patch b/meta-oe/recipes-extended/hiredis/files/0001-Makefile-remove-hardcoding-of-CC.patch
+deleted file mode 100644
+index 1af5d26ac..000000000
+--- a/meta-oe/recipes-extended/hiredis/files/0001-Makefile-remove-hardcoding-of-CC.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-From d13b918a3ff8b0ebfd1e7b18b198b4b45841d720 Mon Sep 17 00:00:00 2001
+-From: Andrea Galbusera <gizero@gmail.com>
+-Date: Fri, 31 Jul 2015 16:42:08 +0200
+-Subject: [PATCH] Makefile: remove hardcoding of CC
+-
+-* upgrade previous patch to avoid wiping CFLAGS. This fixes build on arm
+-platforms which previously caused and issue due to -fPIC being lost
+-
+-Signed-off-by: Andrea Galbusera <gizero@gmail.com>
+----
+- Makefile | 5 -----
+- 1 file changed, 5 deletions(-)
+-
+---- a/Makefile
+-+++ b/Makefile
+-@@ -35,12 +35,6 @@ define REDIS_TEST_CONFIG
+- endef
+- export REDIS_TEST_CONFIG
+- 
+--# Fallback to gcc when $CC is not in $PATH.
+--CC:=$(shell sh -c 'type $${CC%% *} >/dev/null 2>/dev/null && echo $(CC) || echo gcc')
+--CXX:=$(shell sh -c 'type $${CXX%% *} >/dev/null 2>/dev/null && echo $(CXX) || echo g++')
+--OPTIMIZATION?=-O3
+--WARNINGS=-Wall -W -Wstrict-prototypes -Wwrite-strings
+--DEBUG_FLAGS?= -g -ggdb
+- REAL_CFLAGS=$(OPTIMIZATION) -fPIC $(CFLAGS) $(WARNINGS) $(DEBUG_FLAGS)
+- REAL_LDFLAGS=$(LDFLAGS)
+- 
+diff --git a/meta-oe/recipes-extended/hiredis/hiredis_0.14.0.bb b/meta-oe/recipes-extended/hiredis/hiredis_0.14.0.bb
+deleted file mode 100644
+index ed8185919..000000000
+--- a/meta-oe/recipes-extended/hiredis/hiredis_0.14.0.bb
++++ /dev/null
+@@ -1,24 +0,0 @@
+-DESCRIPTION = "Minimalistic C client library for Redis"
+-HOMEPAGE = "http://github.com/redis/hiredis"
+-LICENSE = "BSD-3-Clause"
+-SECTION = "libs"
+-DEPENDS = "redis"
+-
+-LIC_FILES_CHKSUM = "file://COPYING;md5=d84d659a35c666d23233e54503aaea51"
+-SRCREV = "685030652cd98c5414ce554ff5b356dfe8437870"
+-SRC_URI = "git://github.com/redis/hiredis;protocol=git \
+-           file://0001-Makefile-remove-hardcoding-of-CC.patch \
+-           file://0001-CMake-configuration-for-hiredis.patch"
+-
+-S = "${WORKDIR}/git"
+-
+-inherit autotools-brokensep pkgconfig
+-
+-EXTRA_OEMAKE = "PREFIX=${prefix} LIBRARY_PATH=${baselib}"
+-
+-# By default INSTALL variable in Makefile is equal to 'cp -a', which preserves
+-# ownership and causes host-user-contamination QA issue.
+-# And PREFIX defaults to /usr/local.
+-do_install:prepend() {
+-  export INSTALL='cp -r'
+-}
+diff --git a/meta-oe/recipes-extended/hiredis/hiredis_1.0.2.bb b/meta-oe/recipes-extended/hiredis/hiredis_1.0.2.bb
+new file mode 100644
+index 000000000..93bda3372
+--- /dev/null
++++ b/meta-oe/recipes-extended/hiredis/hiredis_1.0.2.bb
+@@ -0,0 +1,13 @@
++DESCRIPTION = "Minimalistic C client library for Redis"
++HOMEPAGE = "http://github.com/redis/hiredis"
++SECTION = "libs"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d84d659a35c666d23233e54503aaea51"
++DEPENDS = "redis"
++
++SRC_URI = "git://github.com/redis/hiredis;protocol=git"
++SRCREV = "b731283245f3183af527237166261ad0768ba7d4"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
 -- 
-2.33.0
+2.25.1
 
 
