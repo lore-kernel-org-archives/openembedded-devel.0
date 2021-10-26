@@ -1,122 +1,74 @@
-Return-Path: <mingli.yu@windriver.com>
+Return-Path: <Anders.Montonen@iki.fi>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A53D0C433EF
-	for <webhook@archiver.kernel.org>; Tue, 26 Oct 2021 08:00:13 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web09.8993.1635235212585002714
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D858C433F5
+	for <webhook@archiver.kernel.org>; Tue, 26 Oct 2021 11:11:42 +0000 (UTC)
+Received: from mail.kapsi.fi (mail.kapsi.fi [91.232.154.25])
+ by mx.groups.io with SMTP id smtpd.web08.10690.1635246700157519824
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Oct 2021 01:00:12 -0700
+ Tue, 26 Oct 2021 04:11:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=fail (domain: windriver.com, ip: 147.11.3.146, mailfrom: mingli.yu@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 19Q7xtBm022278
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
-	Tue, 26 Oct 2021 00:59:56 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 19Q7xkFJ021130
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 26 Oct 2021 00:59:55 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Tue, 26 Oct 2021 00:59:50 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Tue, 26 Oct 2021 00:59:49 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <akuster808@gmail.com>
-Subject: [meta-oe][hardknott][PATCH 4/7] jemalloc: add ptest support
-Date: Tue, 26 Oct 2021 15:58:34 +0800
-Message-ID: <20211026075837.39670-4-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20211026075837.39670-1-mingli.yu@windriver.com>
+ dkim=pass header.i=@kapsi.fi header.s=20161220 header.b=SnF4FL2/;
+ spf=pass (domain: kapsi.fi, ip: 91.232.154.25, mailfrom: antime@kapsi.fi)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=kapsi.fi;
+	 s=20161220; h=To:References:Message-Id:Content-Transfer-Encoding:Cc:Date:
+	In-Reply-To:From:Subject:Mime-Version:Content-Type:Sender:Reply-To:Content-ID
+	:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:
+	Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe
+	:List-Post:List-Owner:List-Archive;
+	bh=LPekumtCOgjT9Fkb/Ff9RHsyWE5Pf434o6UO6fPWrUs=; b=SnF4FL2/abfXu57xQFuBR+Ry4b
+	YQausEEB8iS9iqPka02aTCG7K2B+0frk0C73doCeLu/SyehI0D/HgW8XGXpnG9iS1DXl2tyaRcFTo
+	5vm8Y4Zb30wkUCjIdykkQkyQ3GqiORc4gmWyoV/x61ca+zty+DKZ/W6Lv/A/nnrDCh7WvR+SNjrdW
+	z70CV0lbqttwfxqHd+Z1GteHH1SOr3cwXiASusghODItMMDFQfK4PueMnQOJRsHh8tz3dN2Qq+ln8
+	PfO0YlJSzBPOLwsA7VA5FrD+9ZRd58CBbsmMhxNHIHG+1CVtaIbXiXZ0drBTvChl4AC3JX/ZzRPv1
+	GJaErX5A==;
+Received: from 89-27-44-133.bb.dnainternet.fi ([89.27.44.133]
+ helo=[192.168.1.137])
+	by mail.kapsi.fi with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.89)
+	(envelope-from <Anders.Montonen@iki.fi>)
+	id 1mfKMi-00087D-0E; Tue, 26 Oct 2021 14:11:36 +0300
+Content-Type: text/plain;
+	charset=utf-8
+Mime-Version: 1.0 (Mac OS X Mail 12.4 \(3445.104.21\))
+Subject: Re: [oe] [meta-oe][hardknott][PATCH 7/7] jemalloc: set precise BSD
+ license
+From: Anders Montonen <Anders.Montonen@iki.fi>
+In-Reply-To: <20211026075837.39670-7-mingli.yu@windriver.com>
+Date: Tue, 26 Oct 2021 14:11:34 +0300
+Cc: openembedded-devel@lists.openembedded.org,
+ Armpit <akuster808@gmail.com>
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <D32FD6BC-0E02-401B-BFE8-645C0DC16F5C@iki.fi>
 References: <20211026075837.39670-1-mingli.yu@windriver.com>
-MIME-Version: 1.0
-Content-Type: text/plain
+ <20211026075837.39670-7-mingli.yu@windriver.com>
+To: "Yu, Mingli" <mingli.yu@windriver.com>
+X-Mailer: Apple Mail (2.3445.104.21)
+X-SA-Exim-Connect-IP: 89.27.44.133
+X-SA-Exim-Mail-From: Anders.Montonen@iki.fi
+X-SA-Exim-Scanned: No (on mail.kapsi.fi); SAEximRunCond expanded to false
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Oct 2021 08:00:13 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Oct 2021 11:11:42 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93592
+ https://lists.openembedded.org/g/openembedded-devel/message/93593
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Hi,
 
-Add ptest support.
+> On 26 Oct 2021, at 10:58, Yu, Mingli <mingli.yu@windriver.com> wrote:
+>=20
+> From: Armin Kuster <akuster808@gmail.com>
+>=20
+> "BSD" is ambiguous, use the precise licenses BSD-3-Clause
+...
+>=20
+> -LICENSE =3D "BSD"
+> +LICENSE =3D "BSD-2-Clause=E2=80=9D
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../recipes-devtools/jemalloc/files/run-ptest | 19 +++++++++++++++++++
- .../jemalloc/jemalloc_5.2.1.bb                | 17 ++++++++++++++++-
- 2 files changed, 35 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/jemalloc/files/run-ptest
+I realize this is a backport, but the commit message doesn=E2=80=99t =
+match the change. Should the license be BSD-2-Clause, or BSD-3-Clause?
 
-diff --git a/meta-oe/recipes-devtools/jemalloc/files/run-ptest b/meta-oe/recipes-devtools/jemalloc/files/run-ptest
-new file mode 100644
-index 000000000..ea9d80cbb
---- /dev/null
-+++ b/meta-oe/recipes-devtools/jemalloc/files/run-ptest
-@@ -0,0 +1,19 @@
-+#!/bin/sh
-+
-+saved_dir=$PWD
-+for dir in tests/* ; do
-+	cd $dir
-+	for atest in * ; do
-+		if [ \( -x $atest \) -a \( -f $atest \) ] ; then
-+			./$atest > ${atest}.stdout 2> ${atest}.stderr
-+			if [ $? = 0 ] ; then
-+				echo "PASS: $dir $atest"
-+				rm ${atest}.stdout ${atest}.stderr
-+			else
-+				echo "FAIL: ${dir}/${atest}"
-+			fi
-+		fi
-+	done
-+	cd $saved_dir
-+done
-+
-diff --git a/meta-oe/recipes-devtools/jemalloc/jemalloc_5.2.1.bb b/meta-oe/recipes-devtools/jemalloc/jemalloc_5.2.1.bb
-index b191f729a..b5d53bb11 100644
---- a/meta-oe/recipes-devtools/jemalloc/jemalloc_5.2.1.bb
-+++ b/meta-oe/recipes-devtools/jemalloc/jemalloc_5.2.1.bb
-@@ -15,14 +15,29 @@ LIC_FILES_CHKSUM = "file://README;md5=6900e4a158982e4c4715bf16aa54fa10"
- 
- SRC_URI = "git://github.com/jemalloc/jemalloc.git \
-            file://0001-Makefile.in-make-sure-doc-generated-before-install.patch \
-+           file://run-ptest \
- "
- 
- SRCREV = "ea6b3e973b477b8061e0076bb257dbd7f3faa756"
- 
- S = "${WORKDIR}/git"
- 
--inherit autotools
-+inherit autotools ptest
- 
- EXTRA_AUTORECONF += "--exclude=autoheader"
- 
- EXTRA_OECONF:append:libc-musl = " --with-jemalloc-prefix=je_"
-+
-+do_compile_ptest() {
-+	oe_runmake tests
-+}
-+
-+do_install_ptest() {
-+	install -d ${D}${PTEST_PATH}/tests
-+	subdirs="test/unit test/integration test/stress "
-+	for tooltest in ${subdirs}
-+	do
-+		cp -r ${B}/${tooltest} ${D}${PTEST_PATH}/tests
-+	done
-+	find ${D}${PTEST_PATH}/tests \( -name "*.d" -o -name "*.o" \) -exec rm -f {} \;
-+}
--- 
-2.17.1
-
+-a=
 
