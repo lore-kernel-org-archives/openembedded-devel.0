@@ -1,99 +1,119 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <rpjday@crashcourse.ca>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 578E1C433EF
-	for <webhook@archiver.kernel.org>; Wed, 27 Oct 2021 14:03:35 +0000 (UTC)
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.11919.1635343414231372900
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 61169C433EF
+	for <webhook@archiver.kernel.org>; Wed, 27 Oct 2021 15:55:23 +0000 (UTC)
+Received: from cpanel8.indieserve.net (cpanel8.indieserve.net [199.212.143.3])
+ by mx.groups.io with SMTP id smtpd.web11.13779.1635350121845719585
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Oct 2021 07:03:35 -0700
+ Wed, 27 Oct 2021 08:55:22 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
- for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
- (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=47174 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.93)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mfjWV-0001SJ-QU; Wed, 27 Oct 2021 17:03:28 +0300
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH] python3-prettytable: Upgrade 2.1.0 -> 2.2.1
-Date: Wed, 27 Oct 2021 17:03:20 +0300
-Message-Id: <20211027140320.13183-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-X-OutGoing-Spam-Status: No, score=-0.5
+ spf=pass (domain: crashcourse.ca, ip: 199.212.143.3, mailfrom: rpjday@crashcourse.ca)
+Received: from cpeac202e043973-cmac202e043970.sdns.net.rogers.com
+ ([174.114.107.13]:34070 helo=fedora)
+	by cpanel8.indieserve.net with esmtpsa  (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.94.2)
+	(envelope-from <rpjday@crashcourse.ca>)
+	id 1mflGq-0007YN-Kg; Wed, 27 Oct 2021 11:55:19 -0400
+Date: Wed, 27 Oct 2021 11:55:15 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+To: Alex Kiernan <alex.kiernan@gmail.com>
+cc: Khem Raj <raj.khem@gmail.com>,
+    OpenEmbedded Development mailing list
+ <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] should "ntp-dev" package have header files in it, or not?
+In-Reply-To: 
+ <CAO5Uq5RUCUkBEEf6faBhBc_LGnyic=oqr_U+c_mJSXubOtALwA@mail.gmail.com>
+Message-ID: <34e4b19f-e186-76dd-ac4-68b940b4a4a1@crashcourse.ca>
+References: <20eeedea-efe-555c-acd2-2f89fd879d2@crashcourse.ca>
+ <CAMKF1sq45WMvPcdx527KWTYkUkxa+yS+T+4aES3nvrS6JvDJBQ@mail.gmail.com>
+ <946de090-374f-85a0-bd52-eab9b3d54e7a@crashcourse.ca>
+ <CAO5Uq5Tv+yfED2u7ygvCX1tBcKpnAgpVaiAPGg10uYnXBfEdsw@mail.gmail.com>
+ <d4e0285f-3053-e1a0-146-bf54410cb2a@crashcourse.ca>
+ <CAO5Uq5RUCUkBEEf6faBhBc_LGnyic=oqr_U+c_mJSXubOtALwA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 X-AntiAbuse: This header was added to track abuse,
  please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Primary Hostname - cpanel8.indieserve.net
 X-AntiAbuse: Original Domain - lists.openembedded.org
 X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id:
- leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Get-Message-Sender-Via: cpanel8.indieserve.net: authenticated_id:
+ rpjday+crashcourse.ca/only user confirmed/virtual account not confirmed
+X-Authenticated-Sender: cpanel8.indieserve.net: rpjday@crashcourse.ca
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Oct 2021 14:03:35 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 Oct 2021 15:55:23 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93631
+ https://lists.openembedded.org/g/openembedded-devel/message/93632
 
-Upgrade to release 2.2.1:
+On Tue, 26 Oct 2021, Alex Kiernan wrote:
 
-- Add support for Python 3.10
-- Update issue templates
-- Add support for positional junction characters and add
-  "double_border" table style
-- Access properties instead of protected fields in _get_options()
-- Use declarative metadata and support PyPy3
-- Add auto index column
-- Refactor for readability and avoid merge conflicts
-- Remove exclamation marks from exceptions
-- Consider US G0 Character Set ANSI-escape code as 0-width
-  (like colors)
+> On Mon, Oct 25, 2021 at 4:11 PM Robert P. J. Day <rpjday@crashcourse.ca> wrote:
+> >
+> > On Mon, 25 Oct 2021, Alex Kiernan wrote:
+> >
+> > > On Mon, Oct 25, 2021 at 11:51 AM Robert P. J. Day <rpjday@crashcourse.ca> wrote:
+> > > >
+> > > > On Sun, 24 Oct 2021, Khem Raj wrote:
+> > > >
+> > > > > On Sun, Oct 24, 2021 at 5:51 AM Robert P. J. Day <rpjday@crashcourse.ca> wrote:
+> > > > > >
+> > > > > >
+> > > > > >   colleague recently asked me how to get access to one or more header
+> > > > > > files associated with "ntp", so he could:
+> > > > > >
+> > > > > >   #include <ntp.h>
+> > > > > >
+> > > > > > from some other code. casually, i suggested the standard way was to
+> > > > > > add ntp to his recipe's DEPENDS, but that didn't do it, so i built ntp
+> > > > > > in my own aarch64 project, then took a look under packages-split to
+> > > > > > see what got packaged in ntp-dev, and was puzzled to see it was
+> > > > > > absolutely empty.
+> > > > > >
+> > > > > >   is this deliberate? are other recipes not entitled to ntp's header
+> > > > > > files? am i overlooking something?
+> > > > >
+> > > > > While the header seems to be meant for public consumption, the build
+> > > > > explicitly does not export it, so perhaps thats not expected to be
+> > > > > used this way anymore.
+> > > >
+> > > >   just to tie this back to a question i once asked on (i believe) the
+> > > > YP mailing list, this wind river build is using ntpsec instead of
+> > > > regular ntp, but it would appear this would still have the same
+> > > > problem -- while the ntpsec source contains an "include" directory
+> > > > with lots of ntp-related header files, if one comes up with an ntpsec
+> > > > recipe, nothing would be solved if it also does not install those
+> > > > headers into ntpsec-dev.
+> > > >
+> > > >   so, simple question: does anyone have a bitbake recipe for current
+> > > > ntpsec?
+> > >
+> > > I do, it's unfinished as I realised part way through that the python
+> > > dependency meant it wasn't going to fit for my use case, but the
+> > > basics of the build are there.
+> >
+> >   so is there a link for this?
+> >
+>
+> Have a look at this:
+>
+> https://github.com/akiernan/meta-openembedded/commit/b1464c4b8dcab4a9dfaebbb7116b1c8462a198c4
+>
+> Seems like it works for me. Will send a patch if it looks good.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- ...on3-prettytable_2.1.0.bb => python3-prettytable_2.2.1.bb} | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-prettytable_2.1.0.bb => python3-prettytable_2.2.1.bb} (84%)
+  well, it builds for my poky/aarch64/core-image-base build, so all
+that's let is to decide how to populate ntpsec-dev with those header
+files (simple), and why they're not part of nptsec-dev in the first
+place.
 
-diff --git a/meta-python/recipes-devtools/python/python3-prettytable_2.1.0.bb b/meta-python/recipes-devtools/python/python3-prettytable_2.2.1.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-prettytable_2.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-prettytable_2.2.1.bb
-index 58a48e9e0..b9050cc1b 100644
---- a/meta-python/recipes-devtools/python/python3-prettytable_2.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-prettytable_2.2.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://code.google.com/p/prettytable"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c9a6829fcd174d9535b46211917c7671"
- 
--SRC_URI[sha256sum] = "5882ed9092b391bb8f6e91f59bcdbd748924ff556bb7c634089d5519be87baa0"
-+SRC_URI[sha256sum] = "6d465005573a5c058d4ca343449a5b28c21252b86afcdfa168cdc6a440f0b24c"
- 
- do_install:append() {
-     perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "*.txt" -o -name "PKG-INFO"`
-@@ -28,6 +28,9 @@ RDEPENDS:${PN} += " \
- 	${PYTHON_PN}-math \
- 	${PYTHON_PN}-html \
- 	${PYTHON_PN}-wcwidth \
-+	${PYTHON_PN}-json \
-+	${PYTHON_PN}-compression \
-+	${PYTHON_PN}-importlib-metadata \
- "
- 
- RDEPENDS:${PN}-ptest += " \
--- 
-2.17.1
-
+rday
 
