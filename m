@@ -2,10 +2,10 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1FCBC433F5
-	for <webhook@archiver.kernel.org>; Wed, 27 Oct 2021 10:34:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B548DC4332F
+	for <webhook@archiver.kernel.org>; Wed, 27 Oct 2021 10:34:10 +0000 (UTC)
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.9759.1635330848557310776
+ by mx.groups.io with SMTP id smtpd.web10.9917.1635330849053196444
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 27 Oct 2021 03:34:09 -0700
 Authentication-Results: mx.groups.io;
@@ -19,14 +19,13 @@ Received: from [78.130.197.211] (port=52436 helo=localhost.localdomain)
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mfgFu-0005gm-TS; Wed, 27 Oct 2021 13:34:05 +0300
+	id 1mfgFx-0005gm-G3; Wed, 27 Oct 2021 13:34:05 +0300
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-prompt-toolkit: Upgrade 3.0.19 ->
- 3.0.21
-Date: Wed, 27 Oct 2021 13:33:57 +0300
-Message-Id: <20211027103358.31062-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-traitlets: Upgrade 5.1.0 -> 5.1.1
+Date: Wed, 27 Oct 2021 13:33:58 +0300
+Message-Id: <20211027103358.31062-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20211027103358.31062-1-leon.anavi@konsulko.com>
 References: <20211027103358.31062-1-leon.anavi@konsulko.com>
@@ -46,47 +45,36 @@ X-Source-Dir:
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Oct 2021 10:34:09 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 Oct 2021 10:34:10 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93627
+ https://lists.openembedded.org/g/openembedded-devel/message/93628
 
-Upgrade to release 3.0.21:
+Upgrade to release 5.1.1:
 
-- Improved mouse support:
-  * Support for click-drag, which is useful for selecting text.
-  * Detect mouse movements when no button is pressed.
-- Support for Python 3.10.
+- Fixes compatibility issues with Python 3.10 (rc2).
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ompt-toolkit_3.0.19.bb => python3-prompt-toolkit_3.0.21.bb} | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_3.0.19.bb => python3-prompt-toolkit_3.0.21.bb} (84%)
+ .../{python3-traitlets_5.1.0.bb => python3-traitlets_5.1.1.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-traitlets_5.1.0.bb => python3-traitlets_5.1.1.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.19.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.21.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.19.bb
-rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.21.bb
-index 5d809055b..e0d379d03 100644
---- a/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.19.bb
-+++ b/meta-python/recipes-devtools/python/python3-prompt-toolkit_3.0.21.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://python-prompt-toolkit.readthedocs.io/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f"
+diff --git a/meta-python/recipes-devtools/python/python3-traitlets_5.1.0.bb b/meta-python/recipes-devtools/python/python3-traitlets_5.1.1.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-traitlets_5.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-traitlets_5.1.1.bb
+index 120604a8b..bfed02d6f 100644
+--- a/meta-python/recipes-devtools/python/python3-traitlets_5.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-traitlets_5.1.1.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.md;md5=eec4de4d599518742e54e75954e33b46"
  
--SRC_URI[sha256sum] = "08360ee3a3148bdb5163621709ee322ec34fc4375099afa4bbf751e9b7b7fa4f"
-+SRC_URI[sha256sum] = "27f13ff4e4850fe8f860b77414c7880f67c6158076a7b099062cc8570f1562e5"
+ PYPI_PACKAGE = "traitlets"
  
- inherit pypi setuptools3
+-SRC_URI[sha256sum] = "bd382d7ea181fbbcce157c133db9a829ce06edffe097bcf3ab945b435452b46d"
++SRC_URI[sha256sum] = "059f456c5a7c1c82b98c2e8c799f39c9b8128f6d0d46941ee118daace9eb70c7"
  
-@@ -19,6 +19,7 @@ RDEPENDS:${PN} += " \
-     ${PYTHON_PN}-shell \
-     ${PYTHON_PN}-image \
-     ${PYTHON_PN}-asyncio \
-+    ${PYTHON_PN}-xml \
- "
- 
- BBCLASSEXTEND = "native nativesdk"
+ RDEPENDS:${PN} = "\
+     ${PYTHON_PN}-ipython-genutils \
 -- 
 2.17.1
 
