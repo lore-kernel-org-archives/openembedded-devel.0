@@ -1,119 +1,122 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AAF6C433F5
-	for <webhook@archiver.kernel.org>; Sat, 30 Oct 2021 11:16:13 +0000 (UTC)
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
- [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web08.17981.1635592571834775551
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D3B0C433EF
+	for <webhook@archiver.kernel.org>; Sat, 30 Oct 2021 18:06:22 +0000 (UTC)
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
+ [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.web12.21619.1635617180882972237
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Oct 2021 04:16:11 -0700
+ Sat, 30 Oct 2021 11:06:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=SROg5zjz;
- spf=pass (domain: gmail.com, ip: 209.85.216.42,
- mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id
- ls14-20020a17090b350e00b001a00e2251c8so9176086pjb.4
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=YffCiULc;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f170.google.com with SMTP id 127so12411630pfu.1
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Oct 2021 04:16:11 -0700 (PDT)
+ Sat, 30 Oct 2021 11:06:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=XnanN53ZjYa263uGbbDoMVO2p5epdyWU8C8X36n6epk=;
-        b=SROg5zjz92LFbq+/igkI+n99rSTLKBHg4gpOugWxm7vlqBMixCMDmBtOOqULRiLrdq
-         XdgcvV/kL6Az3AhXEyX29RyfsZXcCanyJ/DQF7Lh/sT8zWGjfXOjrb0lG20M+1Sg+Pq+
-         IkKIC5qDkhUWslOrLDLRsgSzg1c7DrruuJzE4QOimqET2kbXBlH4AAecc76Zx3LemVmI
-         zWYZjtmNl3d7fYhriSRaTiQdnVBxNlKWJOKk4EfRjSFCoZ/nCFTryNpYe+4J/3d3PA0N
-         oP0Mf/8gqas0+CeQup+pC3OVNge5lCizuWa73nH3Wx4v6uGgU+I0Pnaghk0BiHIczmDj
-         jvug==
+        bh=9I2ax8V7AOMQ8qmKwiN7JubcaqCSLprRs/ODom3F7rY=;
+        b=YffCiULcQDnFNy/EC/xGyzQUDkkegh+t0msJhXK7rPa/x1y++p6POp8Pzm3ScLhNNt
+         l506/qNKBWArg+G+N7Wsgrkv1VZX3zqwAKuGigadvuK/qdxCG1Vd3byW2njL29sYyyPe
+         XjXn2nSV+OYfDH2Mjt2M2k9Y1576y57/uBUaF9VGejHrJxjSHl101WN7blJW9/pXSz2F
+         eYMGY6nVsGjEjhFNoaVMEYAf0DuYzhMHbU4OtEKDSy3iwBcwHMLTxFWjsT9iGdAKETrj
+         qQ2yTxpT+QsciDSQXahhbnD3KuugU43hozXT2eKtel7+0q2uUYtJc2XUOEidJIjDj4Zs
+         xQXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=XnanN53ZjYa263uGbbDoMVO2p5epdyWU8C8X36n6epk=;
-        b=FdyLRUTd254ECLsk4LC2TPhXh/Rjm6aARJi79ZfoTAFn1OQRpjFBUkAUdXltkJkeuL
-         4dm1sQxN9sDJaNz2S/6C2jSxpIpU/8iTXBO7BQFEp7qMMzeqa6k9HPY/BHHmK1yQa8tG
-         5BGbEjM38ibFpFf/OhO/wVBTqPDo7Tvg5Hmy7vUxgfBJACNFctveTE9cAhboXNUaMYth
-         xYJ+jJD8gc0aqSSF03t5lCF+R94ZWfvnJApL7/xZ4kEH7SXAZINlLNbpkmaf8LWLVVHj
-         2Ic4UmGjcFSzdcLQ4BTMpBtNvra28DVbHNgzgzsp/rXXzBJe8jr2IoAOfXUHO5CH1CXn
-         IrWA==
-X-Gm-Message-State: AOAM531JwBDjAn6bBhSoVAk94w+tHnwZEdoPifg97QOdLRRG4SEI/XQ7
-	zs8uxR3Vkkw6UJgqLvXzyzGepIyK568=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=9I2ax8V7AOMQ8qmKwiN7JubcaqCSLprRs/ODom3F7rY=;
+        b=YaWdNxxAwGi5MxaNbxKzDf5UUW/65khmk+trAUTK/wPOKT8z6YvQpOowwu8G8ApLhM
+         5gryDooWixORd5Ze7omK0CVJtPWmhrt5ZVZAEuZtfrCUSS/sB31m0R7FdeAgx39ZbUr0
+         3AMb/SW0UJxEaa1oYwiZVLtsA0/ZYm5zGnweWpKhmtxI7frmMkkj22p786URaBgLqwWp
+         V4CSHQqOfdiq1gkcpBYO2aYGwlckoDkYydDZvzygUhj9Sceg3znT3vzcLksCX4StAZIq
+         Iw1tZVF4c5vCojPuJYPceDgdlgeOgth24CeRoMV9DaxISVcWlOaLC0/MTuEPJ4DYGapV
+         jl0Q==
+X-Gm-Message-State: AOAM531YE5ZqBpfDJ3YE1tOcIO2//qaaz6KcWB5CqAU31rNvYoJJH39V
+	8a9MnnVJm99hr5JdwvcZE3qeZf/a0fs=
 X-Google-Smtp-Source: 
- ABdhPJwqb/VnpNO9HauWiTilQLh3QFBPecxaFZHXWLvDrgQovto4h3bW8oU3aibgitT+BZGb7O+99A==
-X-Received: by 2002:a17:902:e405:b0:141:b2fa:b00 with SMTP id
- m5-20020a170902e40500b00141b2fa0b00mr7354821ple.22.1635592571183;
-        Sat, 30 Oct 2021 04:16:11 -0700 (PDT)
-Received: from keaua.hsd1.ca.comcast.net
- ([2601:202:4180:a5c0:7535:c5d2:16af:d4db])
-        by smtp.gmail.com with ESMTPSA id
- w12sm13880162pjq.2.2021.10.30.04.16.10
-        for <openembedded-devel@lists.openembedded.org>
+ ABdhPJy2Ww4i8EhgtHNM1Vpz+0AdG6N9f5JFqjaT31+xL8bhimln1ENgIyHwcLRhl/Lg18tJ+x67wA==
+X-Received: by 2002:a65:6215:: with SMTP id d21mr14031537pgv.62.1635617180114;
+        Sat, 30 Oct 2021 11:06:20 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::f94a])
+        by smtp.gmail.com with ESMTPSA id y6sm217346pfa.70.2021.10.30.11.06.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 30 Oct 2021 04:16:10 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
+        Sat, 30 Oct 2021 11:06:19 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [honister 14/14] Apache: Several CVE fixes
-Date: Sat, 30 Oct 2021 04:15:51 -0700
-Message-Id: 
- <e886fc0cbac89998f675b70679d0cce6bcebfb7f.1635592420.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1635592420.git.akuster808@gmail.com>
-References: <cover.1635592420.git.akuster808@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/8] bitwise: Fix build with latest ncurses 6.3+
+Date: Sat, 30 Oct 2021 11:06:11 -0700
+Message-Id: <20211030180618.2200698-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.33.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 30 Oct 2021 11:16:13 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 30 Oct 2021 18:06:22 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93671
+ https://lists.openembedded.org/g/openembedded-devel/message/93672
 
-From: Armin Kuster <akuster@mvista.com>
-
-Source: Apache.org
-MR: 113457, 113453
-Type: Security Fix
-Disposition: Backport from apache.org 2.4.51
-ChangeID: 9d7b58f49487baff99bf8f101e53217425a2b81f
-Description:
-
-Bug fix only update. LTS version
-https://httpd.apache.org/security/vulnerabilities_24.html
-
-Fixes CVEs:
-CVE-2021-42013
-CVE-2021-41524
-CVE-2021-41773
-
-Signed-off-by: Armin Kuster <akuster@mvista.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit c59ce3299e8ed52a520a95f0bc0d0996b1cc37df)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../apache2/{apache2_2.4.49.bb => apache2_2.4.51.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.49.bb => apache2_2.4.51.bb} (99%)
+ .../recipes-extended/bitwise/bitwise_0.42.bb  |  1 +
+ ...ormat-security-errors-with-mvwprintw.patch | 27 +++++++++++++++++++
+ 2 files changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/bitwise/files/0001-Fix-Werror-format-security-errors-with-mvwprintw.patch
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.49.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.51.bb
-similarity index 99%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.49.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.51.bb
-index e5d1879578..4b36c50d55 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.49.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.51.bb
-@@ -26,7 +26,7 @@ SRC_URI:append:class-target = " \
+diff --git a/meta-oe/recipes-extended/bitwise/bitwise_0.42.bb b/meta-oe/recipes-extended/bitwise/bitwise_0.42.bb
+index 04d4ca6e40..ebf4b3c5e6 100644
+--- a/meta-oe/recipes-extended/bitwise/bitwise_0.42.bb
++++ b/meta-oe/recipes-extended/bitwise/bitwise_0.42.bb
+@@ -12,6 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
+ 
+ SRC_URI = "https://github.com/mellowcandle/bitwise/releases/download/v${PV}/bitwise-v${PV}.tar.gz \
+            file://0001-makefile.am-Fix-build-when-build-dir-is-not-same-as-.patch \
++           file://0001-Fix-Werror-format-security-errors-with-mvwprintw.patch \
             "
+ SRC_URI[sha256sum] = "d3d43cef47bf8f49e85f7ed381c3eaf1df921ca51805e0962f1a97a517e1d1d2"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
--SRC_URI[sha256sum] = "65b965d6890ea90d9706595e4b7b9365b5060bec8ea723449480b4769974133b"
-+SRC_URI[sha256sum] = "20e01d81fecf077690a4439e3969a9b22a09a8d43c525356e863407741b838f4"
- 
- S = "${WORKDIR}/httpd-${PV}"
- 
+diff --git a/meta-oe/recipes-extended/bitwise/files/0001-Fix-Werror-format-security-errors-with-mvwprintw.patch b/meta-oe/recipes-extended/bitwise/files/0001-Fix-Werror-format-security-errors-with-mvwprintw.patch
+new file mode 100644
+index 0000000000..ebcb0dd5ee
+--- /dev/null
++++ b/meta-oe/recipes-extended/bitwise/files/0001-Fix-Werror-format-security-errors-with-mvwprintw.patch
+@@ -0,0 +1,27 @@
++From 53237c103b06f58ad9c2ce3914fcc7fe73629f11 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 30 Oct 2021 01:11:33 -0700
++Subject: [PATCH] Fix -Werror=format-security errors with mvwprintw()
++
++Here a non-constant is used as a format string which
++compiler complains about. Fix by using "%s" as format.
++
++Upstream-Status: Submitted [https://github.com/mellowcandle/bitwise/pull/49]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/interactive.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/interactive.c b/src/interactive.c
++index cce418a..2c0b152 100644
++--- a/src/interactive.c
+++++ b/src/interactive.c
++@@ -114,7 +114,7 @@ void update_history_win(void)
++ 				break;
++ 			}
++ 
++-		mvwprintw(history_win, j, 2, history[history_pos - i].line);
+++		mvwprintw(history_win, j, 2, "%s", history[history_pos - i].line);
++ 	}
++ 
++ 	if (g_has_color)
 -- 
-2.25.1
+2.33.1
 
 
