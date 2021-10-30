@@ -2,62 +2,63 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 509C9C433FE
-	for <webhook@archiver.kernel.org>; Sat, 30 Oct 2021 11:16:12 +0000 (UTC)
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
- [209.85.215.176])
- by mx.groups.io with SMTP id smtpd.web09.17853.1635592571231827892
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AAF6C433F5
+	for <webhook@archiver.kernel.org>; Sat, 30 Oct 2021 11:16:13 +0000 (UTC)
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
+ [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.web08.17981.1635592571834775551
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 30 Oct 2021 04:16:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=NmKxbwIG;
- spf=pass (domain: gmail.com, ip: 209.85.215.176,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=SROg5zjz;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f176.google.com with SMTP id g184so12401449pgc.6
+Received: by mail-pj1-f42.google.com with SMTP id
+ ls14-20020a17090b350e00b001a00e2251c8so9176086pjb.4
         for <openembedded-devel@lists.openembedded.org>;
  Sat, 30 Oct 2021 04:16:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=MkV6hslx9gDI7+5vS7NmJol8Q7oM/8dKloT0O9jXvQY=;
-        b=NmKxbwIGvbIjYrjlQWkj+MYf2kpC/d81CagfVQJaZwGHP7KwhtD0k4LsWkQFI02dHg
-         +K12KugCACWbgG64hI7tlFJuboZtkb98HlP9rfIn6oCnUhuYPIZUUc59sTanqMR0rF35
-         5Li8qZV3A2fAFxXaxrVxU+kjJIqnWpBPR//Araf+bjjsAwf91ZTv+S+EPpz/Znx2bZCR
-         7QQ7yHrsP5ORoonHrXLQ1QK+Q1hFctQFdjtbqNO6Xbq5W//qPq0CM09m2NZMr3mg25b0
-         wl1vfarS+KiwZ4s6qsC2TTJbCWnpIec9dTDwjKfRIZbn8UP2FU13sQCnjfh9zf2in6/n
-         SMXw==
+        bh=XnanN53ZjYa263uGbbDoMVO2p5epdyWU8C8X36n6epk=;
+        b=SROg5zjz92LFbq+/igkI+n99rSTLKBHg4gpOugWxm7vlqBMixCMDmBtOOqULRiLrdq
+         XdgcvV/kL6Az3AhXEyX29RyfsZXcCanyJ/DQF7Lh/sT8zWGjfXOjrb0lG20M+1Sg+Pq+
+         IkKIC5qDkhUWslOrLDLRsgSzg1c7DrruuJzE4QOimqET2kbXBlH4AAecc76Zx3LemVmI
+         zWYZjtmNl3d7fYhriSRaTiQdnVBxNlKWJOKk4EfRjSFCoZ/nCFTryNpYe+4J/3d3PA0N
+         oP0Mf/8gqas0+CeQup+pC3OVNge5lCizuWa73nH3Wx4v6uGgU+I0Pnaghk0BiHIczmDj
+         jvug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=MkV6hslx9gDI7+5vS7NmJol8Q7oM/8dKloT0O9jXvQY=;
-        b=k8ZjNhtki6VPNRrmwPCfoWxjidXNJ3e/2WwGy4zVwCbIe1iITlPG0zSFxmGqSB0dOd
-         e5PQ3xI0O/48pMlay/1gIJCpJYq/qoeWCZBHQvzblBMiPB7sCXlg7G8b8brCCBto9EZy
-         H3EaG1ZShkCFZz8kcVVb9LsQlB6hdLi9wS2nIacbZiu9+XyqgI7RSNjF1ybYQrZUPeHs
-         w6fSrDXfnwyJ7j791EZSgY4D21mFlqfPTfebBcIF0gWGhlaIf0B/CIZUfPoIZ77DHS8t
-         7O595QZJd/+wrv+iFZLDnB6Iso7/Sz1ERCmRjAiMkWGDuFZrws961nF6e47nhaYREpG/
-         KIBA==
-X-Gm-Message-State: AOAM531QAl8azx4VCGOWbEGRvfLVVEQ4YuRm9atcKNWzY5cDEWBfiUUs
-	gaZZ7liiqHaoCIQ6pZq5aiQhpYQeG44=
+        bh=XnanN53ZjYa263uGbbDoMVO2p5epdyWU8C8X36n6epk=;
+        b=FdyLRUTd254ECLsk4LC2TPhXh/Rjm6aARJi79ZfoTAFn1OQRpjFBUkAUdXltkJkeuL
+         4dm1sQxN9sDJaNz2S/6C2jSxpIpU/8iTXBO7BQFEp7qMMzeqa6k9HPY/BHHmK1yQa8tG
+         5BGbEjM38ibFpFf/OhO/wVBTqPDo7Tvg5Hmy7vUxgfBJACNFctveTE9cAhboXNUaMYth
+         xYJ+jJD8gc0aqSSF03t5lCF+R94ZWfvnJApL7/xZ4kEH7SXAZINlLNbpkmaf8LWLVVHj
+         2Ic4UmGjcFSzdcLQ4BTMpBtNvra28DVbHNgzgzsp/rXXzBJe8jr2IoAOfXUHO5CH1CXn
+         IrWA==
+X-Gm-Message-State: AOAM531JwBDjAn6bBhSoVAk94w+tHnwZEdoPifg97QOdLRRG4SEI/XQ7
+	zs8uxR3Vkkw6UJgqLvXzyzGepIyK568=
 X-Google-Smtp-Source: 
- ABdhPJw/XklBF+MlOQj927OfM5XTcp/M3HMAL4hsgwy6lLegb/8+Vjec45WfXIPB2Zxq8Zvg6CwIvA==
-X-Received: by 2002:a05:6a00:24c3:b0:47f:837e:a6fd with SMTP id
- d3-20020a056a0024c300b0047f837ea6fdmr7156430pfv.71.1635592570488;
-        Sat, 30 Oct 2021 04:16:10 -0700 (PDT)
+ ABdhPJwqb/VnpNO9HauWiTilQLh3QFBPecxaFZHXWLvDrgQovto4h3bW8oU3aibgitT+BZGb7O+99A==
+X-Received: by 2002:a17:902:e405:b0:141:b2fa:b00 with SMTP id
+ m5-20020a170902e40500b00141b2fa0b00mr7354821ple.22.1635592571183;
+        Sat, 30 Oct 2021 04:16:11 -0700 (PDT)
 Received: from keaua.hsd1.ca.comcast.net
  ([2601:202:4180:a5c0:7535:c5d2:16af:d4db])
         by smtp.gmail.com with ESMTPSA id
- w12sm13880162pjq.2.2021.10.30.04.16.09
+ w12sm13880162pjq.2.2021.10.30.04.16.10
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sat, 30 Oct 2021 04:16:10 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [honister 13/14] strongswan: upgrade 5.9.3 -> 5.9.4
-Date: Sat, 30 Oct 2021 04:15:50 -0700
+Subject: [honister 14/14] Apache: Several CVE fixes
+Date: Sat, 30 Oct 2021 04:15:51 -0700
 Message-Id: 
- <74d9770221861f1253493adc77b5e1f21cf39564.1635592420.git.akuster808@gmail.com>
+ <e886fc0cbac89998f675b70679d0cce6bcebfb7f.1635592420.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1635592420.git.akuster808@gmail.com>
 References: <cover.1635592420.git.akuster808@gmail.com>
@@ -66,40 +67,51 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 30 Oct 2021 11:16:12 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 30 Oct 2021 11:16:13 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93670
+ https://lists.openembedded.org/g/openembedded-devel/message/93671
 
-From: Yi Zhao <yi.zhao@windriver.com>
+From: Armin Kuster <akuster@mvista.com>
 
-Add openssl PACKAGECONFIG back as the openssl 3.0 compatibility issue
-has been fixed.
+Source: Apache.org
+MR: 113457, 113453
+Type: Security Fix
+Disposition: Backport from apache.org 2.4.51
+ChangeID: 9d7b58f49487baff99bf8f101e53217425a2b81f
+Description:
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Bug fix only update. LTS version
+https://httpd.apache.org/security/vulnerabilities_24.html
+
+Fixes CVEs:
+CVE-2021-42013
+CVE-2021-41524
+CVE-2021-41773
+
+Signed-off-by: Armin Kuster <akuster@mvista.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit cb08584d8c9e8e1fd9436d3e9466bcb088086de5)
-[Includes: CVE-2021-41990 and CVE-2021-41991]
+(cherry picked from commit c59ce3299e8ed52a520a95f0bc0d0996b1cc37df)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../strongswan/{strongswan_5.9.3.bb => strongswan_5.9.4.bb}     | 2 +-
+ .../apache2/{apache2_2.4.49.bb => apache2_2.4.51.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/strongswan/{strongswan_5.9.3.bb => strongswan_5.9.4.bb} (98%)
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.49.bb => apache2_2.4.51.bb} (99%)
 
-diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.9.3.bb b/meta-networking/recipes-support/strongswan/strongswan_5.9.4.bb
-similarity index 98%
-rename from meta-networking/recipes-support/strongswan/strongswan_5.9.3.bb
-rename to meta-networking/recipes-support/strongswan/strongswan_5.9.4.bb
-index ad104e44ed..cbc263d301 100644
---- a/meta-networking/recipes-support/strongswan/strongswan_5.9.3.bb
-+++ b/meta-networking/recipes-support/strongswan/strongswan_5.9.4.bb
-@@ -12,7 +12,7 @@ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
-            file://0001-memory.h-Include-stdint.h-for-uintptr_t.patch \
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.49.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.51.bb
+similarity index 99%
+rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.49.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.51.bb
+index e5d1879578..4b36c50d55 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.49.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.51.bb
+@@ -26,7 +26,7 @@ SRC_URI:append:class-target = " \
             "
  
--SRC_URI[sha256sum] = "9325ab56a0a4e97e379401e1d942ce3e0d8b6372291350ab2caae0755862c6f7"
-+SRC_URI[sha256sum] = "45fdf1a4c2af086d8ff5b76fd7b21d3b6f0890f365f83bf4c9a75dda26887518"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
+-SRC_URI[sha256sum] = "65b965d6890ea90d9706595e4b7b9365b5060bec8ea723449480b4769974133b"
++SRC_URI[sha256sum] = "20e01d81fecf077690a4439e3969a9b22a09a8d43c525356e863407741b838f4"
  
- UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
+ S = "${WORKDIR}/httpd-${PV}"
  
 -- 
 2.25.1
