@@ -2,115 +2,111 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F19F2C433F5
-	for <webhook@archiver.kernel.org>; Mon,  1 Nov 2021 11:23:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1746C433EF
+	for <webhook@archiver.kernel.org>; Mon,  1 Nov 2021 11:23:25 +0000 (UTC)
 Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com
- [195.245.230.67])
- by mx.groups.io with SMTP id smtpd.web10.42642.1635765801803891221
+ [195.245.230.1])
+ by mx.groups.io with SMTP id smtpd.web08.42953.1635765805025091978
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Nov 2021 04:23:22 -0700
+ Mon, 01 Nov 2021 04:23:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=C8/BFXrn;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.67,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=k8AIXokp;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.1,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1635765799; i=@fujitsu.com;
-	bh=WPJsCxHjqwfLw89LFHAP2M5P34sEpf8Zzj0qSSUHYFg=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=C8/BFXrnavF49gxnUA9DMO6SBTGDN6U9W1PG4K49zZzcL+ORH6cuccerKyX7A5xoB
-	 aqX8F+cdx5ANiENGSl8FeVnQwSZqLqIC1CgW8j8LGEQr/QcC6Br+wFNB8HXVowH9km
-	 UibDZIdwrQEfCr1mdLNDiKw+wBOSFkldS+K2mpUnyTZAFp1dACz4giyB7CfNXtd0Wa
-	 gkM0JHRsIcP2kWSUxlWK3RtIzCzDbFoMIVZLhDepO7gfxWb58FuhhJnFUzRSxOTmka
-	 Tviq3Avr3lsAcAFHAisfdNiCLJ20n5xW5FImHXZVffLnzIXm/2+QMKExFoPSNDjlFp
-	 6cJk87hn2osHA==
-Received: from [100.112.196.248] (using TLSv1.2 with cipher
+	s=170520fj; t=1635765803; i=@fujitsu.com;
+	bh=KhofMP7OYxJBEAhiJaUro9de460FeImM/bOOij3AxpM=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=k8AIXokpdYdgCmEcUfakylMEOP9ymQ2SeJ1DMxqxg27ZGkPRxNzU9gsV6vknRV7fE
+	 kk5AFASLdws8+W62t+uNvcu1+zLMLzzemxlDPgGrJe/guIdab3tgbAgLYR6tttpPAV
+	 1f4GPFpsQZPVmTLt6e1diTxQkIjcs4XJFhgX8UqHbl1wO48SJDhPCF7RgLCgeHoDxV
+	 GcjYHekm9qJaxLj18xeQh/fJgI6nndzv85ETbw/MD+ok2pmQxFzSNcwqn32tAUwP5/
+	 CjiHykiAoWKRsk88OP+LnvNRVrs+Cv82OO+rLJvxm4axdUpyXXDsokJhep9Ppdnbuy
+	 3Se2Nm3CuJ+IA==
+Received: from [100.112.192.69] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-b.eu-west-1.aws.symcld.net id CA/B0-09147-72ECF716;
- Mon, 01 Nov 2021 11:23:19 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrKIsWRWlGSWpSXmKPExsViZ8MxSVftXH2
-  iweIXlhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0brpm7Wgt0cFTN3hTQwXmPvYuTkEBJ4wihx
-  YWM6hH2RSWL2dpkuRi4g+wSjxN8fB5hAEmwCahLTb91gBbFFBPQlls7ewwxiMwuoSLz43QM2S
-  FjATmLfp3NgcRag+JEnp8DqeQWcJJ60LAOrkRBQkJjy8D1YDaeAs8Spu3eB4hxAy5wkLvRqQ5
-  QLSpyc+YQFYryExMEXL5ghWhUlZl9uZoGwKyVWre6DiqtJXD23iXkCo+AsJO2zkLQvYGRaxWi
-  RVJSZnlGSm5iZo2toYKBraGika2hprmtkYqmXWKWbpJdaqlueWlyia6iXWF6sV1yZm5yTopeX
-  WrKJERi6KQVHf+5gfPj6g94hRkkOJiVR3qil9YlCfEn5KZUZicUZ8UWlOanFhxhlODiUJHhTz
-  gDlBItS01Mr0jJzgHEEk5bg4FES4V1+EijNW1yQmFucmQ6ROsWoKCXOewWkTwAkkVGaB9cGi9
-  1LjLJSwryMDAwMQjwFqUW5mSWo8q8YxTkYlYR5mc8CTeHJzCuBm/4KaDET0OJ9YjUgi0sSEVJ
-  SDUwGaYynpvVcf8T2bz33+4crPOolxQ/wzBeK6am2ao+L0LI8vX7ryzP2M278NRNML75p371B
-  Zd8h/ic53P35zcJv2FzZn9+xvLh+eVjjnvD7N5ZJzV537ZCfSM9XtZCVJSWy+f6fu4vmfu9VE
-  p716XRL2c616/8UZnuaPU4yX50UdMn59UfxkgyLdY8fr/M97LuOm0Xc+LfPFf28rs1bxPfs61
-  Hmr9816fihsOON6cn+TmGpPfEhPidmZBeceufCziXPdnDrFWtp466pZhc2Lt/Amfk0fMnpS0G
-  GLl/3WJ8I5OV7LvhikZXm9n2/nm2Zwrbvj57Jh8mnC3km1Boud7hwP+D6g7zTLR/2amlvK+xV
-  YinOSDTUYi4qTgQAWcTtQFgDAAA=
+	by server-1.bemta.az-a.eu-west-1.aws.symcld.net id B3/9E-02128-B2ECF716;
+ Mon, 01 Nov 2021 11:23:23 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprBIsWRWlGSWpSXmKPExsViZ8MRoqt1rj7
+  RYMJTG4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeN4zzrmgk1cFSuPtjE2MF7g7GLk4hAS2Mwk
+  8eHYKmYI5wSjxJ9J81i6GDk52ATUJKbfusEKYosI6Essnb2HGcRmFlCRePG7hx3EFhYIllh8/
+  yhYDQtQfN/ah2A2r4CTxNYff8FsCQEFiSkP3zNDxAUlTs58wgIxR0Li4IsXzBA1ihKzLzezQN
+  iVEqtW9zFPYOSdhaRlFpKWBYxMqxgtkooy0zNKchMzc3QNDQx0DQ2NdA0tTXWNDE31Eqt0E/V
+  SS3XLU4tLdA31EsuL9Yorc5NzUvTyUks2MQIDLKXg8PUdjLdef9A7xCjJwaQkyhu1tD5RiC8p
+  P6UyI7E4I76oNCe1+BCjDAeHkgRvyhmgnGBRanpqRVpmDjDYYdISHDxKIrzLTwKleYsLEnOLM
+  9MhUqcYFaXEea+A9AmAJDJK8+DaYBF2iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5IwL/NZoC
+  k8mXklcNNfAS1mAlq8T6wGZHFJIkJKqoFpvkLnleW1z7LbV7cvN2ixWaRybv2sdsFbyVpB4s9
+  Lvv/bOp33x/Wlbi5p9tJPj/XtlIlauzDu7AuhWdbOnD/rppZs69Oy0mnqXn6sO/ZJTYaWp6EI
+  GwNraMO/7kzvR9yNW+IUf/L0Fj0WlucOqopYZfxq8QK7Nv0GiQ2Ki94X7wkILXBaurJUtW1Ck
+  dLePUu541vWr4tRbEu/d9fz2ZeGY/Gc8ZM02NJqrQW9fuheS6i4tj6IxWSa1EbnIzqak/l7pA
+  smdLxe5+X8zb9hlVSGt+gzh50tXFnaKrsM19xguHVeZ+ckrSADh5/vew79zFbwUDA5Uc4x5UX
+  77wblOGaHr0/8dssU/1CenOQqqcRSnJFoqMVcVJwIAKLc1YQrAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-19.tower-287.messagelabs.com!1635765798!3437324!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-14.tower-265.messagelabs.com!1635765802!249785!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 15103 invoked from network); 1 Nov 2021 11:23:18 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-19.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 1 Nov 2021 11:23:18 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 7CFF8100468
-	for <openembedded-devel@lists.openembedded.org>;
- Mon,  1 Nov 2021 11:23:18 +0000 (GMT)
-Received: from R01UKEXCASM224.r01.fujitsu.local (unknown [10.182.185.122])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 70F2410044F
-	for <openembedded-devel@lists.openembedded.org>;
- Mon,  1 Nov 2021 11:23:18 +0000 (GMT)
+Received: (qmail 32705 invoked from network); 1 Nov 2021 11:23:22 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-14.tower-265.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 1 Nov 2021 11:23:22 -0000
+Received: from R01UKEXCASM224.r01.fujitsu.local (ex2k13_224.fs.fujitsu.com
+ [10.182.185.122])
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1A1BNMQv009968
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 1 Nov 2021 11:23:22 GMT
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM224.r01.fujitsu.local (10.182.185.122) with Microsoft SMTP Server
- (TLS) id 15.0.1497.24; Mon, 1 Nov 2021 11:22:57 +0000
+ (TLS) id 15.0.1497.24; Mon, 1 Nov 2021 11:23:21 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] grpc: upgrade 1.41.0 -> 1.41.1
-Date: Mon, 1 Nov 2021 19:22:27 +0800
-Message-ID: <1635765747-37718-4-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-perl] [PATCH] libcrypt-openssl-guess-perl: upgrade 0.13 ->
+ 0.14
+Date: Mon, 1 Nov 2021 19:23:01 +0800
+Message-ID: <1635765782-37775-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1635765747-37718-1-git-send-email-wangmy@fujitsu.com>
-References: <1635765747-37718-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
 X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
  R01UKEXCASM224.r01.fujitsu.local (10.182.185.122)
-X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 01 Nov 2021 11:23:22 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 01 Nov 2021 11:23:25 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93698
+ https://lists.openembedded.org/g/openembedded-devel/message/93699
+
+0.14 2021-10-28T15:35:02Z
+
+macOS: check dylib exists in library paths (PR#11)
+backport from Net::SSLeay 1.91_01 (PR#10)
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-devtools/grpc/{grpc_1.41.0.bb => grpc_1.41.1.bb}    | 2 +-
+ ...l-guess-perl_0.13.bb => libcrypt-openssl-guess-perl_0.14.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/grpc/{grpc_1.41.0.bb => grpc_1.41.1.bb} (98%)
+ rename meta-perl/recipes-perl/libcrypt/{libcrypt-openssl-guess-perl_0.13.bb => libcrypt-openssl-guess-perl_0.14.bb} (90%)
 
-diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.41.0.bb b/meta-oe/recipes-devtools/grpc/grpc_1.41.1.bb
-similarity index 98%
-rename from meta-oe/recipes-devtools/grpc/grpc_1.41.0.bb
-rename to meta-oe/recipes-devtools/grpc/grpc_1.41.1.bb
-index f961c533e0..8a9e762734 100644
---- a/meta-oe/recipes-devtools/grpc/grpc_1.41.0.bb
-+++ b/meta-oe/recipes-devtools/grpc/grpc_1.41.1.bb
-@@ -20,7 +20,7 @@ RDEPENDS:${PN}-dev:class_native += "${PN}-compiler"
- # RDEPENDS:${PN}-dev += "${PN}-compiler"
+diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.13.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.14.bb
+similarity index 90%
+rename from meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.13.bb
+rename to meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.14.bb
+index 7bce621bc4..1bf5b207c1 100644
+--- a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.13.bb
++++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.14.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ea914cc2718e8d53bd7744d96e66c03c"
  
- S = "${WORKDIR}/git"
--SRCREV_grpc = "fc662b7964384b701af5bd3ce6994d2180080eb4"
-+SRCREV_grpc = "635693ce624f3b3a89e5a764f0664958ef08b2b9"
- BRANCH = "v1.41.x"
- SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
-            file://0001-cmake-revert-db88fb0ee826e73323e06ac6166ac038ee71f6a.patch \
+ SRC_URI = "http://www.cpan.org/modules/by-module/Crypt/Crypt-OpenSSL-Guess-${PV}.tar.gz "
+ 
+-SRC_URI[sha256sum] = "87c1dd7f0f80fcd3d1396bce9fd9962e7791e748dc0584802f8d10cc9585e743"
++SRC_URI[sha256sum] = "e4331977e1512a3ba51d7fa2d642d3e79d479dc23483246ebfaaef80ea8573df"
+ 
+ DEPENDS += "openssl"
+ 
 -- 
 2.25.1
 
