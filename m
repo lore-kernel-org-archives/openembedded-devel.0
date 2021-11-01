@@ -1,113 +1,75 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <schnitzeltony@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AE95C433EF
-	for <webhook@archiver.kernel.org>; Mon,  1 Nov 2021 16:47:37 +0000 (UTC)
-Received: from mail-il1-f176.google.com (mail-il1-f176.google.com
- [209.85.166.176])
- by mx.groups.io with SMTP id smtpd.web08.47249.1635785256803037999
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DAE20C433EF
+	for <webhook@archiver.kernel.org>; Mon,  1 Nov 2021 17:47:48 +0000 (UTC)
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
+ [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web08.48221.1635788868033333837
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Nov 2021 09:47:36 -0700
+ Mon, 01 Nov 2021 10:47:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=fbYfvnSy;
- spf=pass (domain: gmail.com, ip: 209.85.166.176,
- mailfrom: alex.kiernan@gmail.com)
-Received: by mail-il1-f176.google.com with SMTP id i12so12909521ila.12
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=bZ2sLcfv;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43,
+ mailfrom: schnitzeltony@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id
+ q2-20020a17090a2e0200b001a0fd4efd49so386246pjd.1
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Nov 2021 09:47:36 -0700 (PDT)
+ Mon, 01 Nov 2021 10:47:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=f5Br/o3dXVuh4dDl8iH0nbYVkcODI+TDRgbO2LxuvvY=;
-        b=fbYfvnSyS2iKjRakVBhLQcUC0HfvBVxDbt2bkFuiZIPe0qk3Oh9za4XUDNICVIotUm
-         vs4rS74JXRCX7Ou90XvP05wgfu7jVXLZ8R5mFS/WANxpH0opXSD/4KPTTwA1TlxJVkoZ
-         FrxEMInwoKDdZ/AtLwyyCAgE3uJRbusNc5P6G73P5PJyNMxjjW8tgdxotOUWPArsUItM
-         1BcGNaM8M9/d1Epw8otUQtKopgkLHNjSsTTVFbwf1SccpYJV7IutisECNsUUxc5veL22
-         r8iz8ni3Xy03HmmEHu++bHDBxZ8drktfDiigb5j9KNDtdYOQ15W4aVxFQiHi9PHIZMa/
-         Qvvw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=P6W/sHew1EPU3BZYpiOn/z/J5pGOyEsef89MlpRwKtY=;
+        b=bZ2sLcfva7ixTRjOOHmm6NI/3icGyQk7fWqbOMn6g0yOFztHwcN4XbVL4cBsptitGF
+         PA0v8q2r60hzt6gqh23ZFa7a1SeJG2dgYneUIR9Ir0xXWm60YsJmPEp2s33w+BQXeLrD
+         DfuA+tmOMAgvOhLSUUlu2yQ9ezDhEBmiWva8jAdjOw4zhBNEm+JrOYPMFl8MPmRjljvd
+         +0boIOCAi0Q2e+uOCGlvuse/Bo9cv1yrFJCohZNU8u1wXlud6YoRuFvhRMYkmpg1F9Ty
+         D1z+7D8ZXBxX93qNdJK21UbX87qfpcTAezFmcPdSUvLd9wwQB1XSxueoE/xhZM/SpBDj
+         HZUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=f5Br/o3dXVuh4dDl8iH0nbYVkcODI+TDRgbO2LxuvvY=;
-        b=ibPNJ8yRlJBERWHhZsRRyg7eidR8giqYqGrNpiFk+vlMX5XvvlJx7yQ2/NMd5QMU7L
-         3r6CiZUIj2/hGmZVTa692BhpuTmFteK9mu4NVP7rOHiDYijWLsoX/OBgKByfhfiHGd+P
-         oTi9qbYULDbBdi5fGarnkJ4voBmt6zlGjNsfWr/oeCVJ29tXjYJNd9r9s8dryf9ZA/dT
-         91L1J/cGm2m250Ykj75DDM5Rpi6NNp417gCdh8wQihNbhECrwdsTvyFFqyGI8K8C/UTB
-         yRE5AZjYwbsH/qIZ8T1FxvBwgifYsS0g1ptO9Q8mRh+psz9bst1CGRdUiBOvs3hKQhl1
-         f7Uw==
-X-Gm-Message-State: AOAM533bXokxFJmvDcuUdY8Wx12EUho0RkmCC2qhVQcwXxYmd+eHtnoJ
-	MCe3X4MDRPUW+hkuRX2I0TXUfmW0I5cgOw+cnmB3qUmZabE=
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=P6W/sHew1EPU3BZYpiOn/z/J5pGOyEsef89MlpRwKtY=;
+        b=TmKa9OtxXil+qP7eJ4vI3oMfGDns2C81HsOa+nsQUV4lFP9IgPNYsPlhcKypGyhtzd
+         bcP0vNgfNVtCtGa/lC9WfXe/5b0cbmTkv2XUazN6O+W3HoZQZ2UwSDtmyCUJsccG3rLz
+         Vgd4w2sJldVAmbqlbJZRnnbLiNR8pOOMNVkZvdlxDYmZW+5M4/whBKDhtwM/+QVYSi8V
+         KpuyqJDZQWC1/l1+oPTZ9TiX5kxmy4q0VJgEdac7vKJZTzqjZsdIZbuSFspNO09Fa9WE
+         /ah9pcV/sNJLQELVC825kB+VyqjVKymL6Xu4kZTZpilm3BYQ856PAOmtDrWziB53ku0s
+         Zkng==
+X-Gm-Message-State: AOAM532jSqcAOpD8XVyzUBHCekBtG5k8QKBqFdyZpaBMDzFcy1E2wZgf
+	2It+zdRXnUZjujUPGhUZqwMqqQhVg71IRY0/7eI=
 X-Google-Smtp-Source: 
- ABdhPJzeAZ8aFQRlpjyMJgbmGReLpo38tIMpjqI4CEC5gucV5ulNb5uqXiWLREJ/txjovE/JPh+Sce15uB68oLNQrXk=
-X-Received: by 2002:a05:6e02:174d:: with SMTP id
- y13mr20891435ill.251.1635785255524;
- Mon, 01 Nov 2021 09:47:35 -0700 (PDT)
+ ABdhPJzo5vXrHHdHxMNuERjZB58g3dbGQCJzqU2zFAhpupCm3oOAVmHjMwsZs6bN9xI2InGhB6BS8HeN346HJuhE2fo=
+X-Received: by 2002:a17:90b:4c0d:: with SMTP id
+ na13mr419301pjb.232.1635788867555;
+ Mon, 01 Nov 2021 10:47:47 -0700 (PDT)
 MIME-Version: 1.0
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Mon, 1 Nov 2021 16:47:24 +0000
+References: <20211101114934.3646836-1-schnitzeltony@gmail.com>
+ <CAMKF1spFaSR8DdV3rQRtUD3MOa5kbSWpUxdaHPUEY3DovoeAHw@mail.gmail.com>
+In-Reply-To: 
+ <CAMKF1spFaSR8DdV3rQRtUD3MOa5kbSWpUxdaHPUEY3DovoeAHw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 1 Nov 2021 18:47:35 +0100
 Message-ID: 
- <CAO5Uq5RHsGws0ki_C-sC9zZHu3xWtxjZf4-Fu5JEa_MEavu2qQ@mail.gmail.com>
-Subject: pseudo dying with path mismatch
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+ <CALbNGRRUfLkNX2kJV4Qam7XMCMGNLerpvNCJ8Q9j9HfEp96Gng@mail.gmail.com>
+Subject: Re: [oe] [meta-gnome++][PATCH 00/31] De-rotten meta-gnome
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 01 Nov 2021 16:47:37 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 01 Nov 2021 17:47:48 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93748
+ https://lists.openembedded.org/g/openembedded-devel/message/93749
 
-I've seen this twice now, same recipe both times, so I assume it's
-something its doing which is upsetting pseudo. I suspect both times I
-swapped to/from systemd/init as INIT_MANAGER (w/o clearing down
-anything):
+On Mon, Nov 1, 2021 at 2:43 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> seeing these when polkit is not in distro features, is there a way out ?
+Was my bad - did send a fix
 
-ERROR: mdns-1310.40.42-r0 do_install:
-ExecutionError('/home/alexk/poky/build/tmp/work/cortexa57-poky-linux/mdns/1310.40.42-r0/temp/run.do_install.9540',
-134, None, None)
-ERROR: Logfile of failure stored in:
-/home/alexk/poky/build/tmp/work/cortexa57-poky-linux/mdns/1310.40.42-r0/temp/log.do_install.9540
-Log data follows:
-| DEBUG: Executing python function extend_recipe_sysroot
-| NOTE: Direct dependencies are
-['virtual:native:/home/alexk/poky/meta/recipes-devtools/pseudo/pseudo_git.bb:do_populate_sysroot',
-'/home/alexk/poky/meta/recipes-devtools/gcc/gcc-runtime_11.2.bb:do_populate_sysroot',
-'/home/alexk/poky/meta/recipes-devtools/quilt/quilt-native_0.66.bb:do_populate_sysroot',
-'/home/alexk/poky/meta/recipes-core/glibc/glibc_2.34.bb:do_populate_sysroot',
-'/home/alexk/poky/meta/recipes-devtools/gcc/gcc-cross_11.2.bb:do_populate_sysroot',
-'virtual:native:/home/alexk/poky/meta/recipes-devtools/patch/patch_2.7.6.bb:do_populate_sysroot']
-| NOTE: Installed into sysroot: []
-| NOTE: Skipping as already exists in sysroot: ['pseudo-native',
-'gcc-runtime', 'quilt-native', 'glibc', 'gcc-cross-aarch64',
-'patch-native', 'libgcc', 'linux-libc-headers', 'gmp-native',
-'gnu-config-native', 'mpfr-native', 'texinfo-dummy-native',
-'xz-native', 'flex-native', 'libmpc-native', 'binutils-cross-aarch64',
-'libtool-native', 'zlib-native', 'attr-native',
-'gettext-minimal-native', 'm4-native']
-| DEBUG: Python function extend_recipe_sysroot finished
-| DEBUG: Executing shell function do_install
-| abort()ing pseudo client by server request. See
-https://wiki.yoctoproject.org/wiki/Pseudo_Abort for more details on
-this.
-| Check logfile:
-/home/alexk/poky/build/tmp/work/cortexa57-poky-linux/mdns/1310.40.42-r0/pseudo//pseudo.log
-| Aborted
-| WARNING: exit code 134 from a shell command.
-ERROR: Task (/home/alexk/poky/meta-openembedded/meta-networking/recipes-protocols/mdns/mdns_1310.40.42.bb:do_install)
-failed with exit code '1'
-Pseudo log:
-Setup complete, sending SIGUSR1 to pid 9541.
-path mismatch [3 links]: ino 2824102 db
-'/home/alexk/poky/build/tmp/work/cortexa57-poky-linux/mdns/1310.40.42-r0/package/usr/src/debug/mdns/1310.40.42-r0/mDNSResponder-1310.40.42/mDNSShared/dns_sd.h'
-req '/home/alexk/poky/build/tmp/work/cortexa57-poky-linux/mdns/1310.40.42-r0/mDNSResponder-1310.40.42/mDNSShared/dns_sd.h'.
-
-Nothing exotic in the build, just oe-core and meta-openembedded in the
-layers and both at the head of master.
-
-Any pointers on what I should dig to help debug, or is it if you
-change INIT_MANAGER you need to delete tmp.
-
--- 
-Alex Kiernan
+Andreas
 
