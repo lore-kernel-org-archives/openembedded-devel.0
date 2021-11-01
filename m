@@ -1,62 +1,1873 @@
-Return-Path: <peter.kjellerstedt@axis.com>
+Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1459CC433F5
-	for <webhook@archiver.kernel.org>; Sun, 31 Oct 2021 22:53:09 +0000 (UTC)
-Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
- by mx.groups.io with SMTP id smtpd.web09.37123.1635720779979415544
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A2BBC433EF
+	for <webhook@archiver.kernel.org>; Mon,  1 Nov 2021 00:41:06 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com
+ [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.37811.1635727265277943811
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 Oct 2021 15:53:00 -0700
+ Sun, 31 Oct 2021 17:41:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=axis-central1 header.b=UtSqekQa;
- spf=pass (domain: axis.com, ip: 195.60.68.17,
- mailfrom: peter.kjellerstedt@axis.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; q=dns/txt; s=axis-central1; t=1635720780;
-  x=1667256780;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=f5VLCzpsUGzDNoAG7pi10MXARvaIierB6jdr8RLJEIQ=;
-  b=UtSqekQapC6QjHlahApk0pyOAgxCkPQg5rvIGSFjSB0/nXNb2puDHgFO
-   sSmBrtucUZzQoKbKjQ2yoga1KtmMEuBKwwKqo90Idbyko58/8KqnFt7Ab
-   7jEU1GRcjj/TZjCUTppp7zco5JR36TudHxd1Zx8PHwAqFT8U+Bgyq/NPV
-   CPcVo6CpbThJCXj4vgACo8ZGDuml+vS66jTIfKUbZzf3d7WGYu2+tpowZ
-   RTXD8gI5NwOayaZIpV/Mw96uCGBUQwcNcPvrVbqOuYLO0xrNUf7Fm3w9U
-   1pPKom1wqoushfLMI7nRBWmh+WhmnM+GVheQyCIb0Zhb2hBVEGe4jLvTQ
-   Q==;
-From: Peter Kjellerstedt <pkj@axis.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] libssh: Support building for native and nativesdk
-Date: Sun, 31 Oct 2021 23:52:53 +0100
-Message-ID: <20211031225253.7146-1-pkj@axis.com>
-X-Mailer: git-send-email 2.21.3
+ dkim=fail reason="body hash did not verify" header.i=@windriver.com
+ header.s=pps06212021 header.b=PIFId+j5;
+ spf=pass (domain: windriver.com, ip: 205.220.178.238,
+ mailfrom: prvs=6939539404=changqing.li@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id
+ 1A10chTB031411
+	for <openembedded-devel@lists.openembedded.org>; Mon, 1 Nov 2021 00:41:04 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+ h=subject : to :
+ references : from : message-id : date : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=PPS06212021;
+ bh=+1tQl4fBYgTT0g55hR6a8qcWMBuQDHulJJWKhyzGA34=;
+ b=PIFId+j5G8vEu9uU91/Nw4o/4LSROXnGUw3PvSuKYFw4pQOQRvmKtZfejpKfr7CxyfXE
+ pTNgLd56XMvdsuflTyOIVbdApfxYtKstHq8TQLldcHgZeTJdJ2iwG9ZuTOHPnuJMRyOa
+ soQuYAQnT/lI9jz8yDKT7OjadxDyi0Ac+mu0lw6J+Z84fay9DCw6fVbcke4sthHvZGsv
+ Wucmnw9iGp9GIr0z3EdbuYk19hK67Dfv4RqS1rmOTUylYb2UOS2meFBsHHOXYtMQZ/Hy
+ ZCFyK8x9cAeL7voMBLGBlHBlXxRGp59Iepd/n7elEjzuzjIg/bZOyWVaYvCDTY989LFe yA==
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3c12mm13mg-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+ Mon, 01 Nov 2021 00:41:01 +0000
+Received: from m0250811.ppops.net (m0250811.ppops.net [127.0.0.1])
+	by pps.reinject (8.16.1.2/8.16.1.2) with ESMTP id 1A10f02O003008
+	for <openembedded-devel@lists.openembedded.org>; Mon, 1 Nov 2021 00:41:00 GMT
+Received: from nam02-dm3-obe.outbound.protection.outlook.com
+ (mail-dm3nam07lp2042.outbound.protection.outlook.com [104.47.56.42])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3c12mm13me-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 01 Nov 2021 00:40:59 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=XO7litJlHzOIsSvQ4Ptw+njweYquKUXaxYIp2xk4drnjrzl8ySKyiqa4uqsaZwOYfr7wiKuEf+Dm+cega5sOqWqyOBCvKEZv6clUAlyuwDrjpuJdFvTGKsFStGlza8ShyIfDGA8TgvXdkaXis7gtPblSSlvH5UbnF5KTLieKwsTRPyV+htynYwAV+1z2o2Q5UHv4m3v0U9e5g/Suo5kQMeOYLrrIQ+p0CIkA32YnHZ9MVsIYtywAd4qsUID4gGeJ7hwT4FOyFZajKSK5g6BC2+UFQvQJrD9nxNGplMPRkzR8eyqKX4PJMy08solkfYngcv1t4sAnnp1zSZuAfZ5CFg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=+1tQl4fBYgTT0g55hR6a8qcWMBuQDHulJJWKhyzGA34=;
+ b=ClgfE2odPgVdshmx0rCSJPkyMXmRsjd3Uabw3izyeDs86JZGBtSHlY1BCar+E4kVfDbe0rRfrodXSzCpt7MaXWhAbGhd/5pinEeN94TetqudN/HjjM7044QQK4YPa/Ra6NHrCRep0HqnzI+3w/J6GKD4dCZ16HSzkZmLsdfw9NqCh+OgB2rNMKyi1nWL++lCZnMZ3cgWDmu5AttZiM1ipPZ2QPcLIpAkIzjS2AWAV3jZ92H515PyGchvwauPekNkzoXeJOaidkkdSX6Mm8XU2RiW4hdQ/qjwcfz1tHdkQAPWNg0w17zYtoIlTKwVhX75/Ox80YwncTwsFkA13lbraQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+ header.d=none;lists.openembedded.org; dmarc=none action=none
+ header.from=windriver.com;
+Received: from SN6PR11MB2557.namprd11.prod.outlook.com (2603:10b6:805:56::33)
+ by SN6PR11MB2720.namprd11.prod.outlook.com (2603:10b6:805:56::27) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4649.15; Mon, 1 Nov
+ 2021 00:40:54 +0000
+Received: from SN6PR11MB2557.namprd11.prod.outlook.com
+ ([fe80::a544:19b6:196b:f339]) by SN6PR11MB2557.namprd11.prod.outlook.com
+ ([fe80::a544:19b6:196b:f339%5]) with mapi id 15.20.4649.019; Mon, 1 Nov 2021
+ 00:40:54 +0000
+Subject: Re: [oe] [hardknott][meta-oe][PATCH] redis: fix sereval CVEs
+To: akuster808 <akuster808@gmail.com>,
+        openembedded-devel@lists.openembedded.org
+References: <20211029012221.43588-1-changqing.li@windriver.com>
+ <61fb6c0f-4497-70c7-a04c-f20aaeee21a7@gmail.com>
+From: Changqing Li <changqing.li@windriver.com>
+Message-ID: <2320e96d-f60d-386d-3257-165c2f88551a@windriver.com>
+Date: Mon, 1 Nov 2021 08:40:45 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+In-Reply-To: <61fb6c0f-4497-70c7-a04c-f20aaeee21a7@gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+X-ClientProxiedBy: HK2PR04CA0057.apcprd04.prod.outlook.com
+ (2603:1096:202:14::25) To SN6PR11MB2557.namprd11.prod.outlook.com
+ (2603:10b6:805:56::33)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Received: from [128.224.162.189] (60.247.85.82) by
+ HK2PR04CA0057.apcprd04.prod.outlook.com (2603:1096:202:14::25) with Microsoft
+ SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4649.14 via Frontend
+ Transport; Mon, 1 Nov 2021 00:40:53 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: bee070eb-205d-4727-1495-08d99cd042e3
+X-MS-TrafficTypeDiagnostic: SN6PR11MB2720:
+X-Microsoft-Antispam-PRVS: 
+	<SN6PR11MB2720DB06FEDFB345028111B0828A9@SN6PR11MB2720.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:83;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	9y+d8pHNW0r9NUdsPpEogOzV5gyX9tsYIE1EWQPs4Gbvl8QtteEj0mSr3yNgTaZxpQ0uHdtEVLiwKJNmH3a0mQBU8rDgw/3pZSmTiWSrFAp6KxiBVtGw1SCidOr7o85fpgdsg/d7Gq6bEK9R9fxh9nL5qxU49LxhbtCo15tW5cFKFaIY6LrrsSsQHhQO8LK3yUxcwDtVdajqHFcDXyh8eIJ8TAbUriVj2gPxDAKCfuw36d2up+8yN+YB5p2JyddD8UDnXnJSmCku496RaFgILdG6TKjlO91cS7Rg29clpTPJMNuafEKT4GFOzQbjBBCJZkyOTynCZWY5nEnYpaXu8xZwUaEizI3y8KAmif2fj4b67kPb5vgFMWigtJzeQsVi2m9AHRbPI092Vzoi93NpvSVK84nyrM7kP6NKjYztNPdTBlSa28xMT8iXIWPA3x5J8A/ZiOXWU8BXfLnXkhSL95aY//iZY17dAgBIj/jqL5I5Uv1PtOolSneyUAkgzZ+obhOfP7iNcQC5jW6XsnHU/QHJPZZBmOBYb5R3TkMsNZAaUBm/uvUrhwgkHTFvQxaArBJZyISqW9iyD+d6ooFTrGETvhyhFEf5qlrWXYSN5yD/V4IWM7KJv0mDSOBVJNyCBrao2050el3bEl1RGiaoqyV/YvUDFCOfeDzAZFQBD2Zr6lkJs4Fvx1t2CwDs75+ghnIEZoJvJbOQ1IsOWdDo2XC22+ypJzbfc3abuQhVrHJuqazW/ng/+6sQyBiQxDLBy6WaVe8CIouM5zfzFNn+Gp3//6gajfmPUr/1J3d3SOwhrxVMOLJSJoKbARHrYyD6JIwR/I5IPci5PcqRuqrE2bifRM2yNEO8jEPAtz4LUJjb9Wk9I8ixQdMo8TF7Ttl/RtMZuzGSR9geOho4Yr3cZBWUXyZxtO8iwsMZ4FMO+hMpUeFuzUMs7Qq+vSTSmyNG
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN6PR11MB2557.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(8936002)(31696002)(36756003)(52116002)(6666004)(966005)(5660300002)(53546011)(44832011)(508600001)(186003)(86362001)(8676002)(30864003)(83380400001)(38350700002)(38100700002)(66476007)(66556008)(66946007)(2616005)(31686004)(956004)(26005)(2906002)(16576012)(316002)(6486002)(6706004)(548664002)(78286007)(45980500001)(43740500002)(559001)(579004);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?TFhhN2VEU3RrWk5xd3B1VHgvM21NOWlZN25nRjdRa0NkNlVvUFBBcFc4N2JM?=
+ =?utf-8?B?T0RRUWNzVHZqeFRKR0JKUXE0RnFtT2Q4UWtpdnBwbHExaXY1cEJZODQ1YmVR?=
+ =?utf-8?B?YzAySEMyYU85RGlISDYwZnJpR1FxZS9iL0Z2c0szcWovZEg5enMzSERJcW00?=
+ =?utf-8?B?cnBweDdtZTlnNzl5bHlleDE3UnB5b2RYR3dITWtja1pPcEJiNDdjTStlcWlM?=
+ =?utf-8?B?RHROdzJaTHRnUHVNU2ZMejFpRzJFRUhPOVdkNEM1MElMZm8zYVZGNll5eGxv?=
+ =?utf-8?B?ZlV4YXdTUVRicjBORk12bWlIQ1dyWW5nWFJLc1hrNzBkZnBLRTNTUWRUYU1z?=
+ =?utf-8?B?UzI4cmpuK3NJQ3NRU2MvN2FJa3NVSmt4UXJkSXl5dG9TQkMyODFNZHBJaUpJ?=
+ =?utf-8?B?RUw4VXRlQzFsRytnaXgzN01DUWoxb1hwYVk5NDNCUDJnYWFEdkM0M2xsMDdu?=
+ =?utf-8?B?TjFzNVU2cUdEc2c1dUlXOE1mUkV0Zkx6aEtFOFVaaFFMU2NtT2VXOGpVcWVU?=
+ =?utf-8?B?TE1pK2JSNm1scWNtMFhzeVY1ZnRUM2cwVGp1c3JOZVJqT1UvOFlWSDdRMFRE?=
+ =?utf-8?B?b2Iwd0d3WHEzbTdTcWhNQ01VVHhFaWZzSEtLMkJYaFZNbWdPN1J2QmRIcGx5?=
+ =?utf-8?B?Z0d4TmxTS29EQi8zLy9rUGNpUHFaalYyZ1kyVUR5T2Nqa3JUd1gyMjZMRWwz?=
+ =?utf-8?B?QWszVWIrU2xaTy9hWVlJUzBEa0dQSFVKbU1IVWVKVm5GVEpxM2V3L2V3SlNG?=
+ =?utf-8?B?S0svb1ZkMUU3SDFPakh1YmtUK2oybFlRdmdsbVd6NmxXcmZFajAzRTZxZ2dn?=
+ =?utf-8?B?VDRCcUxDaUZwODRZL2lSSk5jTzY5ejBUUUV4bHUyV3Bva1J0T0dldVBrcFBs?=
+ =?utf-8?B?Um45Zld1TXQ0VlZML2RJWHpnb1ZLMDdWTTdZazhSeHE5c2YwT0p2eE1rVGlU?=
+ =?utf-8?B?V1ZCRW1JUzRoNkdQaldOQks4ZnhrR0NsQzdJQ2F3NHpYOXVISlNRUVZHV21U?=
+ =?utf-8?B?N1psb2lhcWFIeElSVHF1a2lSTWV1NXZSc3ltbzNkSCszNU1YbmE4TE8rR3Jh?=
+ =?utf-8?B?UWorK2tmdnppWDlLU0RvOHlLY3R4ZnZVZktaMXBjNkFIMDdXV1paS1ptMXFa?=
+ =?utf-8?B?bW5PNzZSQVNBVnVLUi94T3ZjUmxITmdWekx2WjVRdlQ2ajNsR1RxTjZRZkJ3?=
+ =?utf-8?B?cVQwYVZmL3BvVUJJT0c4dXF4Q3F6WTZqWDhaelV5ck1qL285dWpMMnNSTzBO?=
+ =?utf-8?B?enJCMGk5SzZrRU5uOE9TaWFQV1UybnZEbVlKTFJxTVhPc0hZZUZCTVBMK3Ro?=
+ =?utf-8?B?c3NRR2xPNll5czZvWDNxRE9lMnU5bHR3UFVPWFN3ejR5YW9WdXR4ZllYRVpy?=
+ =?utf-8?B?SFYvdm1JcEp1VjR6T2FBc0wrOHVuYmc1VmxYOGVFYnNIT0J5T2VVOXBHWnht?=
+ =?utf-8?B?SGhidXpzNHU2TmJIRTl2RVNHelZhU1Y1UU5USzdwRzQ0ZVRVQUQ3T0xHOEFG?=
+ =?utf-8?B?ZUF5SWcvczF3YWkzOC9NTlF1UlRadVBBbFE3L3BGS0hCbDJCVi9SalJrM0RW?=
+ =?utf-8?B?c1ZkZGFpVU9aOVF1bVVScGZPNHZFdUxzcXJnb0EvTkV1eVdqSG5DRnZnRUpJ?=
+ =?utf-8?B?K2w0bXplYmgvK2M0YWkvNnY2Ym5LV1hiK1JzazVUaU9hbFNUZnAvZDEzcHFW?=
+ =?utf-8?B?bi9XU0c1NEZNb01xK0dvakxEbnA0U3cyUEl2ak85b0RSYzBTOFlZSjczenNW?=
+ =?utf-8?B?MTdGM0tObWRxd28veWpVTkhVSjRUMkNPNStsZkQwZ0F5VTBGNHRNT092UE05?=
+ =?utf-8?B?OEpjRXdVYVZ1MURSSk81aE5zUzF3UDhWajdjYWNBOFNTQ2F4MmdYOUpjS1FL?=
+ =?utf-8?B?bFRpUkZhdjNnVWxzQnZCMDFSYjFtWFNHdXkwazlFenFETGMvaGJhSXhyemNm?=
+ =?utf-8?B?UXM5UTd4eWJUVURnc0hoOUsxTzk3YW9MaDA3Z05KT2pMWlJpWno4b1E2WXFV?=
+ =?utf-8?B?RTRVaS9LS2VuU290em5CWUhKQzV5MnZCUUxJSkw0elVzVWJsbG04b3k0Q0px?=
+ =?utf-8?B?dWNLY2lhdFJIVTZBWWtaNHVIMWlncy94SW00bW0yQTRsSVYyRnZwZzZoTFFI?=
+ =?utf-8?B?L0I2endQdk1ReWpVellWUTI2VUJFam54aFpwLzlndFdQQjV3RWVqN0IzNnVa?=
+ =?utf-8?B?SytDVXZ5R2Zab1hMcUxVU0NPUzNVaERaZEdxRXRGMXI0SjJ4WWpSb1EwcFph?=
+ =?utf-8?B?UXBRWWFQTWtTYlB0U29kQ3B2OHBnPT0=?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ bee070eb-205d-4727-1495-08d99cd042e3
+X-MS-Exchange-CrossTenant-AuthSource: SN6PR11MB2557.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Nov 2021 00:40:54.4271
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 
+ YRenlCeyCsUHaGmW2QqCc8eJHzP4Gx/JKPqxKzfAv2xU1NsMpkJQ6RM/72eWpv1+OXLVwKOxf5Um+QSxvYXDhV2F5v96ardFKWwEwjLM0is=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR11MB2720
+X-Proofpoint-GUID: FIHrHD0GcvVS5tf6OpmPtSI9PA1-cC-4
+X-Proofpoint-ORIG-GUID: KCfSWiLSiSbR4LZ_ru5kNe9J6XZVrLjZ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.0.607.475
+ definitions=2021-10-31_08,2021-10-29_03,2020-04-07_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501
+ suspectscore=0 impostorscore=0 lowpriorityscore=0 malwarescore=0
+ mlxlogscore=999 bulkscore=0 adultscore=0 phishscore=0 mlxscore=0
+ spamscore=0 clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2110150000 definitions=main-2111010002
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by
+ mx0a-0064b401.pphosted.com id 1A10chTB031411
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 31 Oct 2021 22:53:09 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 01 Nov 2021 00:41:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93684
+ https://lists.openembedded.org/g/openembedded-devel/message/93685
 
-Since libssh is now a dependency of cryptsetup, it needs to be buildable
-for the same cases as cryptsetup.
 
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
----
- meta-oe/recipes-support/libssh/libssh_0.8.9.bb | 2 ++
- 1 file changed, 2 insertions(+)
+On 10/30/21 4:12 AM, akuster808 wrote:
+> [Please note: This e-mail is from an EXTERNAL e-mail address]
+>
+> Hello Changqing,
+>
+> On 10/28/21 6:22 PM, Changqing Li wrote:
+>> From: Changqing Li <changqing.li@windriver.com>
+>>
+>> Fixes CVEs:
+>> CVE-2021-32626
+>> CVE-2021-32627
+>> CVE-2021-32628
+>> CVE-2021-32675
+>> CVE-2021-32687
+>> CVE-2021-32762
+>> CVE-2021-41099
+>>
+>> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> Thanks for these fixes. Just a note regarding this package. This versio=
+n
+> is a bug fix only release so updating this to a later 6.2.x may be an
+> option going forward.
+>
+> regards,
+> Armin
 
-diff --git a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-index cbda8b7be..8f9e61da7 100644
---- a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-+++ b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-@@ -33,3 +33,5 @@ do_configure:prepend () {
- }
- 
- TOOLCHAIN = "gcc"
-+
-+BBCLASSEXTEND = "native nativesdk"
+OK=EF=BC=8CI can send a upgrade patch later.
+
+Regards
+
+Changqing
+
+>
+>> ---
+>>   .../redis/redis/CVE-2021-32626.patch          | 148 +++
+>>   .../redis/CVE-2021-32627-CVE-2021-32628.patch | 873 ++++++++++++++++=
+++
+>>   .../redis/redis/CVE-2021-32675.patch          | 129 +++
+>>   .../redis/redis/CVE-2021-32687.patch          |  67 ++
+>>   .../redis/redis/CVE-2021-32762.patch          |  68 ++
+>>   .../redis/redis/CVE-2021-41099.patch          |  47 +
+>>   meta-oe/recipes-extended/redis/redis_6.2.2.bb |   6 +
+>>   7 files changed, 1338 insertions(+)
+>>   create mode 100644 meta-oe/recipes-extended/redis/redis/CVE-2021-326=
+26.patch
+>>   create mode 100644 meta-oe/recipes-extended/redis/redis/CVE-2021-326=
+27-CVE-2021-32628.patch
+>>   create mode 100644 meta-oe/recipes-extended/redis/redis/CVE-2021-326=
+75.patch
+>>   create mode 100644 meta-oe/recipes-extended/redis/redis/CVE-2021-326=
+87.patch
+>>   create mode 100644 meta-oe/recipes-extended/redis/redis/CVE-2021-327=
+62.patch
+>>   create mode 100644 meta-oe/recipes-extended/redis/redis/CVE-2021-410=
+99.patch
+>>
+>> diff --git a/meta-oe/recipes-extended/redis/redis/CVE-2021-32626.patch=
+ b/meta-oe/recipes-extended/redis/redis/CVE-2021-32626.patch
+>> new file mode 100644
+>> index 000000000..0cfc12b3d
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/redis/redis/CVE-2021-32626.patch
+>> @@ -0,0 +1,148 @@
+>> +From 6ce827254484fd850240549c98c74bca77980cc0 Mon Sep 17 00:00:00 200=
+1
+>> +From: "meir@redislabs.com" <meir@redislabs.com>
+>> +Date: Sun, 13 Jun 2021 14:27:18 +0300
+>> +Subject: [PATCH] Fix invalid memory write on lua stack overflow
+>> + {CVE-2021-32626}
+>> +MIME-Version: 1.0
+>> +Content-Type: text/plain; charset=3DUTF-8
+>> +Content-Transfer-Encoding: 8bit
+>> +
+>> +When LUA call our C code, by default, the LUA stack has room for 20
+>> +elements. In most cases, this is more than enough but sometimes it's =
+not
+>> +and the caller must verify the LUA stack size before he pushes elemen=
+ts.
+>> +
+>> +On 3 places in the code, there was no verification of the LUA stack s=
+ize.
+>> +On specific inputs this missing verification could have lead to inval=
+id
+>> +memory write:
+>> +1. On 'luaReplyToRedisReply', one might return a nested reply that wi=
+ll
+>> +   explode the LUA stack.
+>> +2. On 'redisProtocolToLuaType', the Redis reply might be deep enough
+>> +   to explode the LUA stack (notice that currently there is no such
+>> +   command in Redis that returns such a nested reply, but modules mig=
+ht
+>> +   do it)
+>> +3. On 'ldbRedis', one might give a command with enough arguments to
+>> +   explode the LUA stack (all the arguments will be pushed to the LUA
+>> +   stack)
+>> +
+>> +This commit is solving all those 3 issues by calling 'lua_checkstack'=
+ and
+>> +verify that there is enough room in the LUA stack to push elements. I=
+n
+>> +case 'lua_checkstack' returns an error (there is not enough room in t=
+he
+>> +LUA stack and it's not possible to increase the stack), we will do th=
+e
+>> +following:
+>> +1. On 'luaReplyToRedisReply', we will return an error to the user.
+>> +2. On 'redisProtocolToLuaType' we will exit with panic (we assume thi=
+s
+>> +   scenario is rare because it can only happen with a module).
+>> +3. On 'ldbRedis', we return an error.
+>> +
+>> +CVE: CVE-2021-32626
+>> +Upstream-Status: Backport[https://github.com/redis/redis/commit/666ed=
+7facf4524bf6d19b11b20faa2cf93fdf591]
+>> +
+>> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>> +---
+>> + src/scripting.c | 41 +++++++++++++++++++++++++++++++++++++++++
+>> + 1 file changed, 41 insertions(+)
+>> +
+>> +diff --git a/src/scripting.c b/src/scripting.c
+>> +index 299e608..81c88fb 100644
+>> +--- a/src/scripting.c
+>> ++++ b/src/scripting.c
+>> +@@ -128,6 +128,16 @@ void sha1hex(char *digest, char *script, size_t =
+len) {
+>> +  */
+>> +
+>> + char *redisProtocolToLuaType(lua_State *lua, char* reply) {
+>> ++
+>> ++    if (!lua_checkstack(lua, 5)) {
+>> ++        /*
+>> ++         * Increase the Lua stack if needed, to make sure there is e=
+nough room
+>> ++         * to push 5 elements to the stack. On failure, exit with pa=
+nic.
+>> ++         * Notice that we need, in the worst case, 5 elements becaus=
+e redisProtocolToLuaType_Aggregate
+>> ++         * might push 5 elements to the Lua stack.*/
+>> ++        serverPanic("lua stack limit reach when parsing redis.call r=
+eply");
+>> ++    }
+>> ++
+>> +     char *p =3D reply;
+>> +
+>> +     switch(*p) {
+>> +@@ -220,6 +230,11 @@ char *redisProtocolToLuaType_Aggregate(lua_State=
+ *lua, char *reply, int atype) {
+>> +             if (atype =3D=3D '%') {
+>> +                 p =3D redisProtocolToLuaType(lua,p);
+>> +             } else {
+>> ++                if (!lua_checkstack(lua, 1)) {
+>> ++                    /* Notice that here we need to check the stack a=
+gain because the recursive
+>> ++                     * call to redisProtocolToLuaType might have use=
+ the room allocated in the stack */
+>> ++                    serverPanic("lua stack limit reach when parsing =
+redis.call reply");
+>> ++                }
+>> +                 lua_pushboolean(lua,1);
+>> +             }
+>> +             lua_settable(lua,-3);
+>> +@@ -339,6 +354,17 @@ void luaSortArray(lua_State *lua) {
+>> + /* Reply to client 'c' converting the top element in the Lua stack t=
+o a
+>> +  * Redis reply. As a side effect the element is consumed from the st=
+ack.  */
+>> + void luaReplyToRedisReply(client *c, lua_State *lua) {
+>> ++
+>> ++    if (!lua_checkstack(lua, 4)) {
+>> ++        /* Increase the Lua stack if needed to make sure there is en=
+ough room
+>> ++         * to push 4 elements to the stack. On failure, return error.
+>> ++         * Notice that we need, in the worst case, 4 elements becaus=
+e returning a map might
+>> ++         * require push 4 elements to the Lua stack.*/
+>> ++        addReplyErrorFormat(c, "reached lua stack limit");
+>> ++        lua_pop(lua,1); // pop the element from the stack
+>> ++        return;
+>> ++    }
+>> ++
+>> +     int t =3D lua_type(lua,-1);
+>> +
+>> +     switch(t) {
+>> +@@ -362,6 +388,7 @@ void luaReplyToRedisReply(client *c, lua_State *l=
+ua) {
+>> +          * field. */
+>> +
+>> +         /* Handle error reply. */
+>> ++        // we took care of the stack size on function start
+>> +         lua_pushstring(lua,"err");
+>> +         lua_gettable(lua,-2);
+>> +         t =3D lua_type(lua,-1);
+>> +@@ -404,6 +431,7 @@ void luaReplyToRedisReply(client *c, lua_State *l=
+ua) {
+>> +         if (t =3D=3D LUA_TTABLE) {
+>> +             int maplen =3D 0;
+>> +             void *replylen =3D addReplyDeferredLen(c);
+>> ++            /* we took care of the stack size on function start */
+>> +             lua_pushnil(lua); /* Use nil to start iteration. */
+>> +             while (lua_next(lua,-2)) {
+>> +                 /* Stack now: table, key, value */
+>> +@@ -426,6 +454,7 @@ void luaReplyToRedisReply(client *c, lua_State *l=
+ua) {
+>> +         if (t =3D=3D LUA_TTABLE) {
+>> +             int setlen =3D 0;
+>> +             void *replylen =3D addReplyDeferredLen(c);
+>> ++            /* we took care of the stack size on function start */
+>> +             lua_pushnil(lua); /* Use nil to start iteration. */
+>> +             while (lua_next(lua,-2)) {
+>> +                 /* Stack now: table, key, true */
+>> +@@ -445,6 +474,7 @@ void luaReplyToRedisReply(client *c, lua_State *l=
+ua) {
+>> +         void *replylen =3D addReplyDeferredLen(c);
+>> +         int j =3D 1, mbulklen =3D 0;
+>> +         while(1) {
+>> ++            /* we took care of the stack size on function start */
+>> +             lua_pushnumber(lua,j++);
+>> +             lua_gettable(lua,-2);
+>> +             t =3D lua_type(lua,-1);
+>> +@@ -2546,6 +2576,17 @@ void ldbEval(lua_State *lua, sds *argv, int ar=
+gc) {
+>> + void ldbRedis(lua_State *lua, sds *argv, int argc) {
+>> +     int j, saved_rc =3D server.lua_replicate_commands;
+>> +
+>> ++    if (!lua_checkstack(lua, argc + 1)) {
+>> ++        /* Increase the Lua stack if needed to make sure there is en=
+ough room
+>> ++         * to push 'argc + 1' elements to the stack. On failure, ret=
+urn error.
+>> ++         * Notice that we need, in worst case, 'argc + 1' elements b=
+ecause we push all the arguments
+>> ++         * given by the user (without the first argument) and we als=
+o push the 'redis' global table and
+>> ++         * 'redis.call' function so:
+>> ++         * (1 (redis table)) + (1 (redis.call function)) + (argc - 1=
+ (all arguments without the first)) =3D argc + 1*/
+>> ++        ldbLogRedisReply("max lua stack reached");
+>> ++        return;
+>> ++    }
+>> ++
+>> +     lua_getglobal(lua,"redis");
+>> +     lua_pushstring(lua,"call");
+>> +     lua_gettable(lua,-2);       /* Stack: redis, redis.call */
+>> +--
+>> +2.17.1
+>> +
+>> diff --git a/meta-oe/recipes-extended/redis/redis/CVE-2021-32627-CVE-2=
+021-32628.patch b/meta-oe/recipes-extended/redis/redis/CVE-2021-32627-CVE=
+-2021-32628.patch
+>> new file mode 100644
+>> index 000000000..3c60a3e67
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/redis/redis/CVE-2021-32627-CVE-2021-326=
+28.patch
+>> @@ -0,0 +1,873 @@
+>> +From 2775a3526e3e8bb040e72995231632c801977395 Mon Sep 17 00:00:00 200=
+1
+>> +From: Oran Agra <oran@redislabs.com>
+>> +Date: Thu, 3 Jun 2021 12:10:02 +0300
+>> +Subject: [PATCH] Fix ziplist and listpack overflows and truncations
+>> + (CVE-2021-32627, CVE-2021-32628)
+>> +
+>> +- fix possible heap corruption in ziplist and listpack resulting by t=
+rying to
+>> +  allocate more than the maximum size of 4GB.
+>> +- prevent ziplist (hash and zset) from reaching size of above 1GB, wi=
+ll be
+>> +  converted to HT encoding, that's not a useful size.
+>> +- prevent listpack (stream) from reaching size of above 1GB.
+>> +- XADD will start a new listpack if the new record may cause the prev=
+ious
+>> +  listpack to grow over 1GB.
+>> +- XADD will respond with an error if a single stream record is over 1=
+GB
+>> +- List type (ziplist in quicklist) was truncating strings that were o=
+ver 4GB,
+>> +  now it'll respond with an error.
+>> +
+>> +CVE: CVE-2021-32627,CVE-2021-32628
+>> +Upstream-Status: Backport[https://github.com/redis/redis/commit/f6a40=
+570fa63d5afdd596c78083d754081d80ae3]
+>> +
+>> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>> +
+>> +---
+>> + src/geo.c                 |   5 +-
+>> + src/listpack.c            |   2 +-
+>> + src/module.c              |   6 +-
+>> + src/quicklist.c           |  16 +++-
+>> + src/rdb.c                 |  45 +++++++----
+>> + src/server.h              |   2 +-
+>> + src/t_hash.c              |  13 +++-
+>> + src/t_list.c              |  29 +++++++
+>> + src/t_stream.c            |  48 +++++++++---
+>> + src/t_zset.c              |  62 +++++++++------
+>> + src/ziplist.c             |  17 ++++-
+>> + src/ziplist.h             |   1 +
+>> + tests/unit/violations.tcl | 156 ++++++++++++++++++++++++++++++++++++=
+++
+>> + 13 files changed, 341 insertions(+), 61 deletions(-)
+>> + create mode 100644 tests/unit/violations.tcl
+>> +
+>> +diff --git a/src/geo.c b/src/geo.c
+>> +index 7c75738a2..893f78a7e 100644
+>> +--- a/src/geo.c
+>> ++++ b/src/geo.c
+>> +@@ -770,7 +770,7 @@ void georadiusGeneric(client *c, int srcKeyIndex,=
+ int flags) {
+>> +         robj *zobj;
+>> +         zset *zs;
+>> +         int i;
+>> +-        size_t maxelelen =3D 0;
+>> ++        size_t maxelelen =3D 0, totelelen =3D 0;
+>> +
+>> +         if (returned_items) {
+>> +             zobj =3D createZsetObject();
+>> +@@ -785,13 +785,14 @@ void georadiusGeneric(client *c, int srcKeyInde=
+x, int flags) {
+>> +             size_t elelen =3D sdslen(gp->member);
+>> +
+>> +             if (maxelelen < elelen) maxelelen =3D elelen;
+>> ++            totelelen +=3D elelen;
+>> +             znode =3D zslInsert(zs->zsl,score,gp->member);
+>> +             serverAssert(dictAdd(zs->dict,gp->member,&znode->score) =
+=3D=3D DICT_OK);
+>> +             gp->member =3D NULL;
+>> +         }
+>> +
+>> +         if (returned_items) {
+>> +-            zsetConvertToZiplistIfNeeded(zobj,maxelelen);
+>> ++            zsetConvertToZiplistIfNeeded(zobj,maxelelen,totelelen);
+>> +             setKey(c,c->db,storekey,zobj);
+>> +             decrRefCount(zobj);
+>> +             notifyKeyspaceEvent(NOTIFY_ZSET,flags & GEOSEARCH ? "geo=
+searchstore" : "georadiusstore",storekey,
+>> +diff --git a/src/listpack.c b/src/listpack.c
+>> +index ee256bad3..27622d4a5 100644
+>> +--- a/src/listpack.c
+>> ++++ b/src/listpack.c
+>> +@@ -313,7 +313,7 @@ int lpEncodeGetType(unsigned char *ele, uint32_t =
+size, unsigned char *intenc, ui
+>> +     } else {
+>> +         if (size < 64) *enclen =3D 1+size;
+>> +         else if (size < 4096) *enclen =3D 2+size;
+>> +-        else *enclen =3D 5+size;
+>> ++        else *enclen =3D 5+(uint64_t)size;
+>> +         return LP_ENCODING_STRING;
+>> +     }
+>> + }
+>> +diff --git a/src/module.c b/src/module.c
+>> +index bf6580a60..adca9dc9c 100644
+>> +--- a/src/module.c
+>> ++++ b/src/module.c
+>> +@@ -3319,6 +3319,7 @@ int RM_HashGet(RedisModuleKey *key, int flags, =
+...) {
+>> +  * - EDOM if the given ID was 0-0 or not greater than all other IDs =
+in the
+>> +  *   stream (only if the AUTOID flag is unset)
+>> +  * - EFBIG if the stream has reached the last possible ID
+>> ++ * - ERANGE if the elements are too large to be stored.
+>> +  */
+>> + int RM_StreamAdd(RedisModuleKey *key, int flags, RedisModuleStreamID=
+ *id, RedisModuleString **argv, long numfields) {
+>> +     /* Validate args */
+>> +@@ -3362,8 +3363,9 @@ int RM_StreamAdd(RedisModuleKey *key, int flags=
+, RedisModuleStreamID *id, RedisM
+>> +         use_id_ptr =3D &use_id;
+>> +     }
+>> +     if (streamAppendItem(s, argv, numfields, &added_id, use_id_ptr) =
+=3D=3D C_ERR) {
+>> +-        /* ID not greater than all existing IDs in the stream */
+>> +-        errno =3D EDOM;
+>> ++        /* Either the ID not greater than all existing IDs in the st=
+ream, or
+>> ++         * the elements are too large to be stored. either way, errn=
+o is already
+>> ++         * set by streamAppendItem. */
+>> +         return REDISMODULE_ERR;
+>> +     }
+>> +     /* Postponed signalKeyAsReady(). Done implicitly by moduleCreate=
+EmptyKey()
+>> +diff --git a/src/quicklist.c b/src/quicklist.c
+>> +index 5a1e41dcc..a9f8b43b1 100644
+>> +--- a/src/quicklist.c
+>> ++++ b/src/quicklist.c
+>> +@@ -45,11 +45,16 @@
+>> + #define REDIS_STATIC static
+>> + #endif
+>> +
+>> +-/* Optimization levels for size-based filling */
+>> ++/* Optimization levels for size-based filling.
+>> ++ * Note that the largest possible limit is 16k, so even if each reco=
+rd takes
+>> ++ * just one byte, it still won't overflow the 16 bit count field. */
+>> + static const size_t optimization_level[] =3D {4096, 8192, 16384, 327=
+68, 65536};
+>> +
+>> + /* Maximum size in bytes of any multi-element ziplist.
+>> +- * Larger values will live in their own isolated ziplists. */
+>> ++ * Larger values will live in their own isolated ziplists.
+>> ++ * This is used only if we're limited by record count. when we're li=
+mited by
+>> ++ * size, the maximum limit is bigger, but still safe.
+>> ++ * 8k is a recommended / default size limit */
+>> + #define SIZE_SAFETY_LIMIT 8192
+>> +
+>> + /* Minimum ziplist size in bytes for attempting compression. */
+>> +@@ -444,6 +449,8 @@ REDIS_STATIC int _quicklistNodeAllowInsert(const =
+quicklistNode *node,
+>> +     unsigned int new_sz =3D node->sz + sz + ziplist_overhead;
+>> +     if (likely(_quicklistNodeSizeMeetsOptimizationRequirement(new_sz=
+, fill)))
+>> +         return 1;
+>> ++    /* when we return 1 above we know that the limit is a size limit=
+ (which is
+>> ++     * safe, see comments next to optimization_level and SIZE_SAFETY=
+_LIMIT) */
+>> +     else if (!sizeMeetsSafetyLimit(new_sz))
+>> +         return 0;
+>> +     else if ((int)node->count < fill)
+>> +@@ -463,6 +470,8 @@ REDIS_STATIC int _quicklistNodeAllowMerge(const q=
+uicklistNode *a,
+>> +     unsigned int merge_sz =3D a->sz + b->sz - 11;
+>> +     if (likely(_quicklistNodeSizeMeetsOptimizationRequirement(merge_=
+sz, fill)))
+>> +         return 1;
+>> ++    /* when we return 1 above we know that the limit is a size limit=
+ (which is
+>> ++     * safe, see comments next to optimization_level and SIZE_SAFETY=
+_LIMIT) */
+>> +     else if (!sizeMeetsSafetyLimit(merge_sz))
+>> +         return 0;
+>> +     else if ((int)(a->count + b->count) <=3D fill)
+>> +@@ -482,6 +491,7 @@ REDIS_STATIC int _quicklistNodeAllowMerge(const q=
+uicklistNode *a,
+>> +  * Returns 1 if new head created. */
+>> + int quicklistPushHead(quicklist *quicklist, void *value, size_t sz) =
+{
+>> +     quicklistNode *orig_head =3D quicklist->head;
+>> ++    assert(sz < UINT32_MAX); /* TODO: add support for quicklist node=
+s that are sds encoded (not zipped) */
+>> +     if (likely(
+>> +             _quicklistNodeAllowInsert(quicklist->head, quicklist->fi=
+ll, sz))) {
+>> +         quicklist->head->zl =3D
+>> +@@ -505,6 +515,7 @@ int quicklistPushHead(quicklist *quicklist, void =
+*value, size_t sz) {
+>> +  * Returns 1 if new tail created. */
+>> + int quicklistPushTail(quicklist *quicklist, void *value, size_t sz) =
+{
+>> +     quicklistNode *orig_tail =3D quicklist->tail;
+>> ++    assert(sz < UINT32_MAX); /* TODO: add support for quicklist node=
+s that are sds encoded (not zipped) */
+>> +     if (likely(
+>> +             _quicklistNodeAllowInsert(quicklist->tail, quicklist->fi=
+ll, sz))) {
+>> +         quicklist->tail->zl =3D
+>> +@@ -847,6 +858,7 @@ REDIS_STATIC void _quicklistInsert(quicklist *qui=
+cklist, quicklistEntry *entry,
+>> +     int fill =3D quicklist->fill;
+>> +     quicklistNode *node =3D entry->node;
+>> +     quicklistNode *new_node =3D NULL;
+>> ++    assert(sz < UINT32_MAX); /* TODO: add support for quicklist node=
+s that are sds encoded (not zipped) */
+>> +
+>> +     if (!node) {
+>> +         /* we have no reference node, so let's create only node in t=
+he list */
+>> +diff --git a/src/rdb.c b/src/rdb.c
+>> +index 53f67a72e..5456c1d80 100644
+>> +--- a/src/rdb.c
+>> ++++ b/src/rdb.c
+>> +@@ -1625,7 +1625,7 @@ robj *rdbLoadObject(int rdbtype, rio *rdb, sds =
+key) {
+>> +     } else if (rdbtype =3D=3D RDB_TYPE_ZSET_2 || rdbtype =3D=3D RDB_=
+TYPE_ZSET) {
+>> +         /* Read list/set value. */
+>> +         uint64_t zsetlen;
+>> +-        size_t maxelelen =3D 0;
+>> ++        size_t maxelelen =3D 0, totelelen =3D 0;
+>> +         zset *zs;
+>> +
+>> +         if ((zsetlen =3D rdbLoadLen(rdb,NULL)) =3D=3D RDB_LENERR) re=
+turn NULL;
+>> +@@ -1665,6 +1665,7 @@ robj *rdbLoadObject(int rdbtype, rio *rdb, sds =
+key) {
+>> +
+>> +             /* Don't care about integer-encoded strings. */
+>> +             if (sdslen(sdsele) > maxelelen) maxelelen =3D sdslen(sds=
+ele);
+>> ++            totelelen +=3D sdslen(sdsele);
+>> +
+>> +             znode =3D zslInsert(zs->zsl,score,sdsele);
+>> +             if (dictAdd(zs->dict,sdsele,&znode->score) !=3D DICT_OK)=
+ {
+>> +@@ -1677,8 +1678,11 @@ robj *rdbLoadObject(int rdbtype, rio *rdb, sds=
+ key) {
+>> +
+>> +         /* Convert *after* loading, since sorted sets are not stored=
+ ordered. */
+>> +         if (zsetLength(o) <=3D server.zset_max_ziplist_entries &&
+>> +-            maxelelen <=3D server.zset_max_ziplist_value)
+>> +-                zsetConvert(o,OBJ_ENCODING_ZIPLIST);
+>> ++            maxelelen <=3D server.zset_max_ziplist_value &&
+>> ++            ziplistSafeToAdd(NULL, totelelen))
+>> ++        {
+>> ++            zsetConvert(o,OBJ_ENCODING_ZIPLIST);
+>> ++        }
+>> +     } else if (rdbtype =3D=3D RDB_TYPE_HASH) {
+>> +         uint64_t len;
+>> +         int ret;
+>> +@@ -1731,21 +1735,30 @@ robj *rdbLoadObject(int rdbtype, rio *rdb, sd=
+s key) {
+>> +                 }
+>> +             }
+>> +
+>> +-            /* Add pair to ziplist */
+>> +-            o->ptr =3D ziplistPush(o->ptr, (unsigned char*)field,
+>> +-                    sdslen(field), ZIPLIST_TAIL);
+>> +-            o->ptr =3D ziplistPush(o->ptr, (unsigned char*)value,
+>> +-                    sdslen(value), ZIPLIST_TAIL);
+>> +-
+>> +             /* Convert to hash table if size threshold is exceeded *=
+/
+>> +             if (sdslen(field) > server.hash_max_ziplist_value ||
+>> +-                sdslen(value) > server.hash_max_ziplist_value)
+>> ++                sdslen(value) > server.hash_max_ziplist_value ||
+>> ++                !ziplistSafeToAdd(o->ptr, sdslen(field)+sdslen(value=
+)))
+>> +             {
+>> +-                sdsfree(field);
+>> +-                sdsfree(value);
+>> +                 hashTypeConvert(o, OBJ_ENCODING_HT);
+>> ++                ret =3D dictAdd((dict*)o->ptr, field, value);
+>> ++                if (ret =3D=3D DICT_ERR) {
+>> ++                    rdbReportCorruptRDB("Duplicate hash fields detec=
+ted");
+>> ++                    if (dupSearchDict) dictRelease(dupSearchDict);
+>> ++                    sdsfree(value);
+>> ++                    sdsfree(field);
+>> ++                    decrRefCount(o);
+>> ++                    return NULL;
+>> ++                }
+>> +                 break;
+>> +             }
+>> ++
+>> ++            /* Add pair to ziplist */
+>> ++            o->ptr =3D ziplistPush(o->ptr, (unsigned char*)field,
+>> ++                    sdslen(field), ZIPLIST_TAIL);
+>> ++            o->ptr =3D ziplistPush(o->ptr, (unsigned char*)value,
+>> ++                    sdslen(value), ZIPLIST_TAIL);
+>> ++
+>> +             sdsfree(field);
+>> +             sdsfree(value);
+>> +         }
+>> +@@ -1858,12 +1871,11 @@ robj *rdbLoadObject(int rdbtype, rio *rdb, sd=
+s key) {
+>> +                     while ((zi =3D zipmapNext(zi, &fstr, &flen, &vst=
+r, &vlen)) !=3D NULL) {
+>> +                         if (flen > maxlen) maxlen =3D flen;
+>> +                         if (vlen > maxlen) maxlen =3D vlen;
+>> +-                        zl =3D ziplistPush(zl, fstr, flen, ZIPLIST_T=
+AIL);
+>> +-                        zl =3D ziplistPush(zl, vstr, vlen, ZIPLIST_T=
+AIL);
+>> +
+>> +                         /* search for duplicate records */
+>> +                         sds field =3D sdstrynewlen(fstr, flen);
+>> +-                        if (!field || dictAdd(dupSearchDict, field, =
+NULL) !=3D DICT_OK) {
+>> ++                        if (!field || dictAdd(dupSearchDict, field, =
+NULL) !=3D DICT_OK ||
+>> ++                            !ziplistSafeToAdd(zl, (size_t)flen + vle=
+n)) {
+>> +                             rdbReportCorruptRDB("Hash zipmap with du=
+p elements, or big length (%u)", flen);
+>> +                             dictRelease(dupSearchDict);
+>> +                             sdsfree(field);
+>> +@@ -1872,6 +1884,9 @@ robj *rdbLoadObject(int rdbtype, rio *rdb, sds =
+key) {
+>> +                             decrRefCount(o);
+>> +                             return NULL;
+>> +                         }
+>> ++
+>> ++                        zl =3D ziplistPush(zl, fstr, flen, ZIPLIST_T=
+AIL);
+>> ++                        zl =3D ziplistPush(zl, vstr, vlen, ZIPLIST_T=
+AIL);
+>> +                     }
+>> +
+>> +                     dictRelease(dupSearchDict);
+>> +diff --git a/src/server.h b/src/server.h
+>> +index d9fef9552..07b34c743 100644
+>> +--- a/src/server.h
+>> ++++ b/src/server.h
+>> +@@ -2173,7 +2173,7 @@ unsigned char *zzlFirstInRange(unsigned char *z=
+l, zrangespec *range);
+>> + unsigned char *zzlLastInRange(unsigned char *zl, zrangespec *range);
+>> + unsigned long zsetLength(const robj *zobj);
+>> + void zsetConvert(robj *zobj, int encoding);
+>> +-void zsetConvertToZiplistIfNeeded(robj *zobj, size_t maxelelen);
+>> ++void zsetConvertToZiplistIfNeeded(robj *zobj, size_t maxelelen, size=
+_t totelelen);
+>> + int zsetScore(robj *zobj, sds member, double *score);
+>> + unsigned long zslGetRank(zskiplist *zsl, double score, sds o);
+>> + int zsetAdd(robj *zobj, double score, sds ele, int in_flags, int *ou=
+t_flags, double *newscore);
+>> +diff --git a/src/t_hash.c b/src/t_hash.c
+>> +index ea0606fb0..2720fdbc7 100644
+>> +--- a/src/t_hash.c
+>> ++++ b/src/t_hash.c
+>> +@@ -39,17 +39,22 @@
+>> +  * as their string length can be queried in constant time. */
+>> + void hashTypeTryConversion(robj *o, robj **argv, int start, int end)=
+ {
+>> +     int i;
+>> ++    size_t sum =3D 0;
+>> +
+>> +     if (o->encoding !=3D OBJ_ENCODING_ZIPLIST) return;
+>> +
+>> +     for (i =3D start; i <=3D end; i++) {
+>> +-        if (sdsEncodedObject(argv[i]) &&
+>> +-            sdslen(argv[i]->ptr) > server.hash_max_ziplist_value)
+>> +-        {
+>> ++        if (!sdsEncodedObject(argv[i]))
+>> ++            continue;
+>> ++        size_t len =3D sdslen(argv[i]->ptr);
+>> ++        if (len > server.hash_max_ziplist_value) {
+>> +             hashTypeConvert(o, OBJ_ENCODING_HT);
+>> +-            break;
+>> ++            return;
+>> +         }
+>> ++        sum +=3D len;
+>> +     }
+>> ++    if (!ziplistSafeToAdd(o->ptr, sum))
+>> ++        hashTypeConvert(o, OBJ_ENCODING_HT);
+>> + }
+>> +
+>> + /* Get the value from a ziplist encoded hash, identified by field.
+>> +diff --git a/src/t_list.c b/src/t_list.c
+>> +index f8ca27458..66c9e3c9d 100644
+>> +--- a/src/t_list.c
+>> ++++ b/src/t_list.c
+>> +@@ -29,6 +29,8 @@
+>> +
+>> + #include "server.h"
+>> +
+>> ++#define LIST_MAX_ITEM_SIZE ((1ull<<32)-1024)
+>> ++
+>> + /*------------------------------------------------------------------=
+-----------
+>> +  * List API
+>> +  *------------------------------------------------------------------=
+----------*/
+>> +@@ -224,6 +226,13 @@ robj *listTypeDup(robj *o) {
+>> + void pushGenericCommand(client *c, int where, int xx) {
+>> +     int j;
+>> +
+>> ++    for (j =3D 2; j < c->argc; j++) {
+>> ++        if (sdslen(c->argv[j]->ptr) > LIST_MAX_ITEM_SIZE) {
+>> ++            addReplyError(c, "Element too large");
+>> ++            return;
+>> ++        }
+>> ++    }
+>> ++
+>> +     robj *lobj =3D lookupKeyWrite(c->db, c->argv[1]);
+>> +     if (checkType(c,lobj,OBJ_LIST)) return;
+>> +     if (!lobj) {
+>> +@@ -287,6 +296,11 @@ void linsertCommand(client *c) {
+>> +         return;
+>> +     }
+>> +
+>> ++    if (sdslen(c->argv[4]->ptr) > LIST_MAX_ITEM_SIZE) {
+>> ++        addReplyError(c, "Element too large");
+>> ++        return;
+>> ++    }
+>> ++
+>> +     if ((subject =3D lookupKeyWriteOrReply(c,c->argv[1],shared.czero=
+)) =3D=3D NULL ||
+>> +         checkType(c,subject,OBJ_LIST)) return;
+>> +
+>> +@@ -354,6 +368,11 @@ void lsetCommand(client *c) {
+>> +     long index;
+>> +     robj *value =3D c->argv[3];
+>> +
+>> ++    if (sdslen(value->ptr) > LIST_MAX_ITEM_SIZE) {
+>> ++        addReplyError(c, "Element too large");
+>> ++        return;
+>> ++    }
+>> ++
+>> +     if ((getLongFromObjectOrReply(c, c->argv[2], &index, NULL) !=3D =
+C_OK))
+>> +         return;
+>> +
+>> +@@ -576,6 +595,11 @@ void lposCommand(client *c) {
+>> +     int direction =3D LIST_TAIL;
+>> +     long rank =3D 1, count =3D -1, maxlen =3D 0; /* Count -1: option=
+ not given. */
+>> +
+>> ++    if (sdslen(ele->ptr) > LIST_MAX_ITEM_SIZE) {
+>> ++        addReplyError(c, "Element too large");
+>> ++        return;
+>> ++    }
+>> ++
+>> +     /* Parse the optional arguments. */
+>> +     for (int j =3D 3; j < c->argc; j++) {
+>> +         char *opt =3D c->argv[j]->ptr;
+>> +@@ -671,6 +695,11 @@ void lremCommand(client *c) {
+>> +     long toremove;
+>> +     long removed =3D 0;
+>> +
+>> ++    if (sdslen(obj->ptr) > LIST_MAX_ITEM_SIZE) {
+>> ++        addReplyError(c, "Element too large");
+>> ++        return;
+>> ++    }
+>> ++
+>> +     if ((getLongFromObjectOrReply(c, c->argv[2], &toremove, NULL) !=3D=
+ C_OK))
+>> +         return;
+>> +
+>> +diff --git a/src/t_stream.c b/src/t_stream.c
+>> +index 2c30faa06..574195ee3 100644
+>> +--- a/src/t_stream.c
+>> ++++ b/src/t_stream.c
+>> +@@ -47,6 +47,12 @@
+>> +  * setting stream_node_max_bytes to a huge number. */
+>> + #define STREAM_LISTPACK_MAX_PRE_ALLOCATE 4096
+>> +
+>> ++/* Don't let listpacks grow too big, even if the user config allows =
+it.
+>> ++ * doing so can lead to an overflow (trying to store more than 32bit=
+ length
+>> ++ * into the listpack header), or actually an assertion since lpInser=
+t
+>> ++ * will return NULL. */
+>> ++#define STREAM_LISTPACK_MAX_SIZE (1<<30)
+>> ++
+>> + void streamFreeCG(streamCG *cg);
+>> + void streamFreeNACK(streamNACK *na);
+>> + size_t streamReplyWithRangeFromConsumerPEL(client *c, stream *s, str=
+eamID *start, streamID *end, size_t count, streamConsumer *consumer);
+>> +@@ -433,8 +439,11 @@ void streamGetEdgeID(stream *s, int first, strea=
+mID *edge_id)
+>> +  *
+>> +  * The function returns C_OK if the item was added, this is always t=
+rue
+>> +  * if the ID was generated by the function. However the function may=
+ return
+>> +- * C_ERR if an ID was given via 'use_id', but adding it failed since=
+ the
+>> +- * current top ID is greater or equal. */
+>> ++ * C_ERR in several cases:
+>> ++ * 1. If an ID was given via 'use_id', but adding it failed since th=
+e
+>> ++ *    current top ID is greater or equal. errno will be set to EDOM.
+>> ++ * 2. If a size of a single element or the sum of the elements is to=
+o big to
+>> ++ *    be stored into the stream. errno will be set to ERANGE. */
+>> + int streamAppendItem(stream *s, robj **argv, int64_t numfields, stre=
+amID *added_id, streamID *use_id) {
+>> +
+>> +     /* Generate the new entry ID. */
+>> +@@ -448,7 +457,23 @@ int streamAppendItem(stream *s, robj **argv, int=
+64_t numfields, streamID *added_
+>> +      * or return an error. Automatically generated IDs might
+>> +      * overflow (and wrap-around) when incrementing the sequence
+>> +        part. */
+>> +-    if (streamCompareID(&id,&s->last_id) <=3D 0) return C_ERR;
+>> ++    if (streamCompareID(&id,&s->last_id) <=3D 0) {
+>> ++        errno =3D EDOM;
+>> ++        return C_ERR;
+>> ++    }
+>> ++
+>> ++    /* Avoid overflow when trying to add an element to the stream (l=
+istpack
+>> ++     * can only host up to 32bit length sttrings, and also a total l=
+istpack size
+>> ++     * can't be bigger than 32bit length. */
+>> ++    size_t totelelen =3D 0;
+>> ++    for (int64_t i =3D 0; i < numfields*2; i++) {
+>> ++        sds ele =3D argv[i]->ptr;
+>> ++        totelelen +=3D sdslen(ele);
+>> ++    }
+>> ++    if (totelelen > STREAM_LISTPACK_MAX_SIZE) {
+>> ++        errno =3D ERANGE;
+>> ++        return C_ERR;
+>> ++    }
+>> +
+>> +     /* Add the new entry. */
+>> +     raxIterator ri;
+>> +@@ -507,9 +532,10 @@ int streamAppendItem(stream *s, robj **argv, int=
+64_t numfields, streamID *added_
+>> +      * if we need to switch to the next one. 'lp' will be set to NUL=
+L if
+>> +      * the current node is full. */
+>> +     if (lp !=3D NULL) {
+>> +-        if (server.stream_node_max_bytes &&
+>> +-            lp_bytes >=3D server.stream_node_max_bytes)
+>> +-        {
+>> ++        size_t node_max_bytes =3D server.stream_node_max_bytes;
+>> ++        if (node_max_bytes =3D=3D 0 || node_max_bytes > STREAM_LISTP=
+ACK_MAX_SIZE)
+>> ++            node_max_bytes =3D STREAM_LISTPACK_MAX_SIZE;
+>> ++        if (lp_bytes + totelelen >=3D node_max_bytes) {
+>> +             lp =3D NULL;
+>> +         } else if (server.stream_node_max_entries) {
+>> +             unsigned char *lp_ele =3D lpFirst(lp);
+>> +@@ -1796,11 +1822,13 @@ void xaddCommand(client *c) {
+>> +     /* Append using the low level function and return the ID. */
+>> +     streamID id;
+>> +     if (streamAppendItem(s,c->argv+field_pos,(c->argc-field_pos)/2,
+>> +-        &id, parsed_args.id_given ? &parsed_args.id : NULL)
+>> +-        =3D=3D C_ERR)
+>> ++        &id, parsed_args.id_given ? &parsed_args.id : NULL) =3D=3D C=
+_ERR)
+>> +     {
+>> +-        addReplyError(c,"The ID specified in XADD is equal or smalle=
+r than the "
+>> +-                        "target stream top item");
+>> ++        if (errno =3D=3D EDOM)
+>> ++            addReplyError(c,"The ID specified in XADD is equal or sm=
+aller than "
+>> ++                            "the target stream top item");
+>> ++        else
+>> ++            addReplyError(c,"Elements are too large to be stored");
+>> +         return;
+>> +     }
+>> +     addReplyStreamID(c,&id);
+>> +diff --git a/src/t_zset.c b/src/t_zset.c
+>> +index 3b9ebd2bd..2abc1b49b 100644
+>> +--- a/src/t_zset.c
+>> ++++ b/src/t_zset.c
+>> +@@ -1242,15 +1242,18 @@ void zsetConvert(robj *zobj, int encoding) {
+>> + }
+>> +
+>> + /* Convert the sorted set object into a ziplist if it is not already=
+ a ziplist
+>> +- * and if the number of elements and the maximum element size is wit=
+hin the
+>> +- * expected ranges. */
+>> +-void zsetConvertToZiplistIfNeeded(robj *zobj, size_t maxelelen) {
+>> ++ * and if the number of elements and the maximum element size and to=
+tal elements size
+>> ++ * are within the expected ranges. */
+>> ++void zsetConvertToZiplistIfNeeded(robj *zobj, size_t maxelelen, size=
+_t totelelen) {
+>> +     if (zobj->encoding =3D=3D OBJ_ENCODING_ZIPLIST) return;
+>> +     zset *zset =3D zobj->ptr;
+>> +
+>> +     if (zset->zsl->length <=3D server.zset_max_ziplist_entries &&
+>> +-        maxelelen <=3D server.zset_max_ziplist_value)
+>> +-            zsetConvert(zobj,OBJ_ENCODING_ZIPLIST);
+>> ++        maxelelen <=3D server.zset_max_ziplist_value &&
+>> ++        ziplistSafeToAdd(NULL, totelelen))
+>> ++    {
+>> ++        zsetConvert(zobj,OBJ_ENCODING_ZIPLIST);
+>> ++    }
+>> + }
+>> +
+>> + /* Return (by reference) the score of the specified member of the so=
+rted set
+>> +@@ -1370,20 +1373,28 @@ int zsetAdd(robj *zobj, double score, sds ele=
+, int in_flags, int *out_flags, dou
+>> +             }
+>> +             return 1;
+>> +         } else if (!xx) {
+>> +-            /* Optimize: check if the element is too large or the li=
+st
+>> ++            /* check if the element is too large or the list
+>> +              * becomes too long *before* executing zzlInsert. */
+>> +-            zobj->ptr =3D zzlInsert(zobj->ptr,ele,score);
+>> +-            if (zzlLength(zobj->ptr) > server.zset_max_ziplist_entri=
+es ||
+>> +-                sdslen(ele) > server.zset_max_ziplist_value)
+>> ++            if (zzlLength(zobj->ptr)+1 > server.zset_max_ziplist_ent=
+ries ||
+>> ++                sdslen(ele) > server.zset_max_ziplist_value ||
+>> ++                !ziplistSafeToAdd(zobj->ptr, sdslen(ele)))
+>> ++            {
+>> +                 zsetConvert(zobj,OBJ_ENCODING_SKIPLIST);
+>> +-            if (newscore) *newscore =3D score;
+>> +-            *out_flags |=3D ZADD_OUT_ADDED;
+>> +-            return 1;
+>> ++            } else {
+>> ++                zobj->ptr =3D zzlInsert(zobj->ptr,ele,score);
+>> ++                if (newscore) *newscore =3D score;
+>> ++                *out_flags |=3D ZADD_OUT_ADDED;
+>> ++                return 1;
+>> ++            }
+>> +         } else {
+>> +             *out_flags |=3D ZADD_OUT_NOP;
+>> +             return 1;
+>> +         }
+>> +-    } else if (zobj->encoding =3D=3D OBJ_ENCODING_SKIPLIST) {
+>> ++    }
+>> ++
+>> ++    /* Note that the above block handling ziplist would have either =
+returned or
+>> ++     * converted the key to skiplist. */
+>> ++    if (zobj->encoding =3D=3D OBJ_ENCODING_SKIPLIST) {
+>> +         zset *zs =3D zobj->ptr;
+>> +         zskiplistNode *znode;
+>> +         dictEntry *de;
+>> +@@ -2361,7 +2372,7 @@ inline static void zunionInterAggregate(double =
+*target, double val, int aggregat
+>> +     }
+>> + }
+>> +
+>> +-static int zsetDictGetMaxElementLength(dict *d) {
+>> ++static size_t zsetDictGetMaxElementLength(dict *d, size_t *totallen)=
+ {
+>> +     dictIterator *di;
+>> +     dictEntry *de;
+>> +     size_t maxelelen =3D 0;
+>> +@@ -2371,6 +2382,8 @@ static int zsetDictGetMaxElementLength(dict *d)=
+ {
+>> +     while((de =3D dictNext(di)) !=3D NULL) {
+>> +         sds ele =3D dictGetKey(de);
+>> +         if (sdslen(ele) > maxelelen) maxelelen =3D sdslen(ele);
+>> ++        if (totallen)
+>> ++            (*totallen) +=3D sdslen(ele);
+>> +     }
+>> +
+>> +     dictReleaseIterator(di);
+>> +@@ -2378,7 +2391,7 @@ static int zsetDictGetMaxElementLength(dict *d)=
+ {
+>> +     return maxelelen;
+>> + }
+>> +
+>> +-static void zdiffAlgorithm1(zsetopsrc *src, long setnum, zset *dstzs=
+et, size_t *maxelelen) {
+>> ++static void zdiffAlgorithm1(zsetopsrc *src, long setnum, zset *dstzs=
+et, size_t *maxelelen, size_t *totelelen) {
+>> +     /* DIFF Algorithm 1:
+>> +      *
+>> +      * We perform the diff by iterating all the elements of the firs=
+t set,
+>> +@@ -2426,13 +2439,14 @@ static void zdiffAlgorithm1(zsetopsrc *src, l=
+ong setnum, zset *dstzset, size_t *
+>> +             znode =3D zslInsert(dstzset->zsl,zval.score,tmp);
+>> +             dictAdd(dstzset->dict,tmp,&znode->score);
+>> +             if (sdslen(tmp) > *maxelelen) *maxelelen =3D sdslen(tmp)=
+;
+>> ++            (*totelelen) +=3D sdslen(tmp);
+>> +         }
+>> +     }
+>> +     zuiClearIterator(&src[0]);
+>> + }
+>> +
+>> +
+>> +-static void zdiffAlgorithm2(zsetopsrc *src, long setnum, zset *dstzs=
+et, size_t *maxelelen) {
+>> ++static void zdiffAlgorithm2(zsetopsrc *src, long setnum, zset *dstzs=
+et, size_t *maxelelen, size_t *totelelen) {
+>> +     /* DIFF Algorithm 2:
+>> +      *
+>> +      * Add all the elements of the first set to the auxiliary set.
+>> +@@ -2486,7 +2500,7 @@ static void zdiffAlgorithm2(zsetopsrc *src, lon=
+g setnum, zset *dstzset, size_t *
+>> +
+>> +     /* Using this algorithm, we can't calculate the max element as w=
+e go,
+>> +      * we have to iterate through all elements to find the max one a=
+fter. */
+>> +-    *maxelelen =3D zsetDictGetMaxElementLength(dstzset->dict);
+>> ++    *maxelelen =3D zsetDictGetMaxElementLength(dstzset->dict, totele=
+len);
+>> + }
+>> +
+>> + static int zsetChooseDiffAlgorithm(zsetopsrc *src, long setnum) {
+>> +@@ -2523,14 +2537,14 @@ static int zsetChooseDiffAlgorithm(zsetopsrc =
+*src, long setnum) {
+>> +     return (algo_one_work <=3D algo_two_work) ? 1 : 2;
+>> + }
+>> +
+>> +-static void zdiff(zsetopsrc *src, long setnum, zset *dstzset, size_t=
+ *maxelelen) {
+>> ++static void zdiff(zsetopsrc *src, long setnum, zset *dstzset, size_t=
+ *maxelelen, size_t *totelelen) {
+>> +     /* Skip everything if the smallest input is empty. */
+>> +     if (zuiLength(&src[0]) > 0) {
+>> +         int diff_algo =3D zsetChooseDiffAlgorithm(src, setnum);
+>> +         if (diff_algo =3D=3D 1) {
+>> +-            zdiffAlgorithm1(src, setnum, dstzset, maxelelen);
+>> ++            zdiffAlgorithm1(src, setnum, dstzset, maxelelen, totelel=
+en);
+>> +         } else if (diff_algo =3D=3D 2) {
+>> +-            zdiffAlgorithm2(src, setnum, dstzset, maxelelen);
+>> ++            zdiffAlgorithm2(src, setnum, dstzset, maxelelen, totelel=
+en);
+>> +         } else if (diff_algo !=3D 0) {
+>> +             serverPanic("Unknown algorithm");
+>> +         }
+>> +@@ -2565,7 +2579,7 @@ void zunionInterDiffGenericCommand(client *c, r=
+obj *dstkey, int numkeysIndex, in
+>> +     zsetopsrc *src;
+>> +     zsetopval zval;
+>> +     sds tmp;
+>> +-    size_t maxelelen =3D 0;
+>> ++    size_t maxelelen =3D 0, totelelen =3D 0;
+>> +     robj *dstobj;
+>> +     zset *dstzset;
+>> +     zskiplistNode *znode;
+>> +@@ -2701,6 +2715,7 @@ void zunionInterDiffGenericCommand(client *c, r=
+obj *dstkey, int numkeysIndex, in
+>> +                     tmp =3D zuiNewSdsFromValue(&zval);
+>> +                     znode =3D zslInsert(dstzset->zsl,score,tmp);
+>> +                     dictAdd(dstzset->dict,tmp,&znode->score);
+>> ++                    totelelen +=3D sdslen(tmp);
+>> +                     if (sdslen(tmp) > maxelelen) maxelelen =3D sdsle=
+n(tmp);
+>> +                 }
+>> +             }
+>> +@@ -2737,6 +2752,7 @@ void zunionInterDiffGenericCommand(client *c, r=
+obj *dstkey, int numkeysIndex, in
+>> +                     /* Remember the longest single element encounter=
+ed,
+>> +                      * to understand if it's possible to convert to =
+ziplist
+>> +                      * at the end. */
+>> ++                     totelelen +=3D sdslen(tmp);
+>> +                      if (sdslen(tmp) > maxelelen) maxelelen =3D sdsl=
+en(tmp);
+>> +                     /* Update the element with its initial score. */
+>> +                     dictSetKey(accumulator, de, tmp);
+>> +@@ -2771,14 +2787,14 @@ void zunionInterDiffGenericCommand(client *c,=
+ robj *dstkey, int numkeysIndex, in
+>> +         dictReleaseIterator(di);
+>> +         dictRelease(accumulator);
+>> +     } else if (op =3D=3D SET_OP_DIFF) {
+>> +-        zdiff(src, setnum, dstzset, &maxelelen);
+>> ++        zdiff(src, setnum, dstzset, &maxelelen, &totelelen);
+>> +     } else {
+>> +         serverPanic("Unknown operator");
+>> +     }
+>> +
+>> +     if (dstkey) {
+>> +         if (dstzset->zsl->length) {
+>> +-            zsetConvertToZiplistIfNeeded(dstobj, maxelelen);
+>> ++            zsetConvertToZiplistIfNeeded(dstobj, maxelelen, totelele=
+n);
+>> +             setKey(c, c->db, dstkey, dstobj);
+>> +             addReplyLongLong(c, zsetLength(dstobj));
+>> +             notifyKeyspaceEvent(NOTIFY_ZSET,
+>> +diff --git a/src/ziplist.c b/src/ziplist.c
+>> +index aae86c1f2..fdc1bb9e1 100644
+>> +--- a/src/ziplist.c
+>> ++++ b/src/ziplist.c
+>> +@@ -267,6 +267,17 @@
+>> +         ZIPLIST_LENGTH(zl) =3D intrev16ifbe(intrev16ifbe(ZIPLIST_LEN=
+GTH(zl))+incr); \
+>> + }
+>> +
+>> ++/* Don't let ziplists grow over 1GB in any case, don't wanna risk ov=
+erflow in
+>> ++ * zlbytes*/
+>> ++#define ZIPLIST_MAX_SAFETY_SIZE (1<<30)
+>> ++int ziplistSafeToAdd(unsigned char* zl, size_t add) {
+>> ++    size_t len =3D zl? ziplistBlobLen(zl): 0;
+>> ++    if (len + add > ZIPLIST_MAX_SAFETY_SIZE)
+>> ++        return 0;
+>> ++    return 1;
+>> ++}
+>> ++
+>> ++
+>> + /* We use this function to receive information about a ziplist entry.
+>> +  * Note that this is not how the data is actually encoded, is just w=
+hat we
+>> +  * get filled by a function in order to operate more easily. */
+>> +@@ -709,7 +720,8 @@ unsigned char *ziplistNew(void) {
+>> + }
+>> +
+>> + /* Resize the ziplist. */
+>> +-unsigned char *ziplistResize(unsigned char *zl, unsigned int len) {
+>> ++unsigned char *ziplistResize(unsigned char *zl, size_t len) {
+>> ++    assert(len < UINT32_MAX);
+>> +     zl =3D zrealloc(zl,len);
+>> +     ZIPLIST_BYTES(zl) =3D intrev32ifbe(len);
+>> +     zl[len-1] =3D ZIP_END;
+>> +@@ -1070,6 +1082,9 @@ unsigned char *ziplistMerge(unsigned char **fir=
+st, unsigned char **second) {
+>> +     /* Combined zl length should be limited within UINT16_MAX */
+>> +     zllength =3D zllength < UINT16_MAX ? zllength : UINT16_MAX;
+>> +
+>> ++    /* larger values can't be stored into ZIPLIST_BYTES */
+>> ++    assert(zlbytes < UINT32_MAX);
+>> ++
+>> +     /* Save offset positions before we start ripping memory apart. *=
+/
+>> +     size_t first_offset =3D intrev32ifbe(ZIPLIST_TAIL_OFFSET(*first)=
+);
+>> +     size_t second_offset =3D intrev32ifbe(ZIPLIST_TAIL_OFFSET(*secon=
+d));
+>> +diff --git a/src/ziplist.h b/src/ziplist.h
+>> +index 9e7997ad8..569e1259d 100644
+>> +--- a/src/ziplist.h
+>> ++++ b/src/ziplist.h
+>> +@@ -65,6 +65,7 @@ int ziplistValidateIntegrity(unsigned char *zl, siz=
+e_t size, int deep,
+>> + void ziplistRandomPair(unsigned char *zl, unsigned long total_count,=
+ ziplistEntry *key, ziplistEntry *val);
+>> + void ziplistRandomPairs(unsigned char *zl, unsigned int count, zipli=
+stEntry *keys, ziplistEntry *vals);
+>> + unsigned int ziplistRandomPairsUnique(unsigned char *zl, unsigned in=
+t count, ziplistEntry *keys, ziplistEntry *vals);
+>> ++int ziplistSafeToAdd(unsigned char* zl, size_t add);
+>> +
+>> + #ifdef REDIS_TEST
+>> + int ziplistTest(int argc, char *argv[], int accurate);
+>> +diff --git a/tests/unit/violations.tcl b/tests/unit/violations.tcl
+>> +new file mode 100644
+>> +index 000000000..1d3140c52
+>> +--- /dev/null
+>> ++++ b/tests/unit/violations.tcl
+>> +@@ -0,0 +1,156 @@
+>> ++# These tests consume massive amounts of memory, and are not
+>> ++# suitable to be executed as part of the normal test suite
+>> ++set ::str500 [string repeat x 500000000] ;# 500mb
+>> ++
+>> ++# Utility function to write big argument into redis client connectio=
+n
+>> ++proc write_big_bulk {size} {
+>> ++    r write "\$$size\r\n"
+>> ++    while {$size >=3D 500000000} {
+>> ++        r write $::str500
+>> ++        incr size -500000000
+>> ++    }
+>> ++    if {$size > 0} {
+>> ++        r write [string repeat x $size]
+>> ++    }
+>> ++    r write "\r\n"
+>> ++}
+>> ++
+>> ++# One XADD with one huge 5GB field
+>> ++# Expected to fail resulting in an empty stream
+>> ++start_server [list overrides [list save ""] ] {
+>> ++    test {XADD one huge field} {
+>> ++        r config set proto-max-bulk-len 10000000000 ;#10gb
+>> ++        r config set client-query-buffer-limit 10000000000 ;#10gb
+>> ++        r write "*5\r\n\$4\r\nXADD\r\n\$2\r\nS1\r\n\$1\r\n*\r\n"
+>> ++        r write "\$1\r\nA\r\n"
+>> ++        write_big_bulk 5000000000 ;#5gb
+>> ++        r flush
+>> ++        catch {r read} err
+>> ++        assert_match {*too large*} $err
+>> ++        r xlen S1
+>> ++    } {0}
+>> ++}
+>> ++
+>> ++# One XADD with one huge (exactly nearly) 4GB field
+>> ++# This uncovers the overflow in lpEncodeGetType
+>> ++# Expected to fail resulting in an empty stream
+>> ++start_server [list overrides [list save ""] ] {
+>> ++    test {XADD one huge field - 1} {
+>> ++        r config set proto-max-bulk-len 10000000000 ;#10gb
+>> ++        r config set client-query-buffer-limit 10000000000 ;#10gb
+>> ++        r write "*5\r\n\$4\r\nXADD\r\n\$2\r\nS1\r\n\$1\r\n*\r\n"
+>> ++        r write "\$1\r\nA\r\n"
+>> ++        write_big_bulk 4294967295 ;#4gb-1
+>> ++        r flush
+>> ++        catch {r read} err
+>> ++        assert_match {*too large*} $err
+>> ++        r xlen S1
+>> ++    } {0}
+>> ++}
+>> ++
+>> ++# Gradually add big stream fields using repeated XADD calls
+>> ++start_server [list overrides [list save ""] ] {
+>> ++    test {several XADD big fields} {
+>> ++        r config set stream-node-max-bytes 0
+>> ++        for {set j 0} {$j<10} {incr j} {
+>> ++            r xadd stream * 1 $::str500 2 $::str500
+>> ++        }
+>> ++        r ping
+>> ++        r xlen stream
+>> ++    } {10}
+>> ++}
+>> ++
+>> ++# Add over 4GB to a single stream listpack (one XADD command)
+>> ++# Expected to fail resulting in an empty stream
+>> ++start_server [list overrides [list save ""] ] {
+>> ++    test {single XADD big fields} {
+>> ++        r write "*23\r\n\$4\r\nXADD\r\n\$1\r\nS\r\n\$1\r\n*\r\n"
+>> ++        for {set j 0} {$j<10} {incr j} {
+>> ++            r write "\$1\r\n$j\r\n"
+>> ++            write_big_bulk 500000000 ;#500mb
+>> ++        }
+>> ++        r flush
+>> ++        catch {r read} err
+>> ++        assert_match {*too large*} $err
+>> ++        r xlen S
+>> ++    } {0}
+>> ++}
+>> ++
+>> ++# Gradually add big hash fields using repeated HSET calls
+>> ++# This reproduces the overflow in the call to ziplistResize
+>> ++# Object will be converted to hashtable encoding
+>> ++start_server [list overrides [list save ""] ] {
+>> ++    r config set hash-max-ziplist-value 1000000000 ;#1gb
+>> ++    test {hash with many big fields} {
+>> ++        for {set j 0} {$j<10} {incr j} {
+>> ++            r hset h $j $::str500
+>> ++        }
+>> ++        r object encoding h
+>> ++    } {hashtable}
+>> ++}
+>> ++
+>> ++# Add over 4GB to a single hash field (one HSET command)
+>> ++# Object will be converted to hashtable encoding
+>> ++start_server [list overrides [list save ""] ] {
+>> ++    test {hash with one huge field} {
+>> ++        catch {r config set hash-max-ziplist-value 10000000000} ;#10=
+gb
+>> ++        r config set proto-max-bulk-len 10000000000 ;#10gb
+>> ++        r config set client-query-buffer-limit 10000000000 ;#10gb
+>> ++        r write "*4\r\n\$4\r\nHSET\r\n\$2\r\nH1\r\n"
+>> ++        r write "\$1\r\nA\r\n"
+>> ++        write_big_bulk 5000000000 ;#5gb
+>> ++        r flush
+>> ++        r read
+>> ++        r object encoding H1
+>> ++    } {hashtable}
+>> ++}
+>> ++
+>> ++# Add over 4GB to a single list member (one LPUSH command)
+>> ++# Currently unsupported, and expected to fail rather than being trun=
+cated
+>> ++# Expected to fail resulting in a non-existing list
+>> ++start_server [list overrides [list save ""] ] {
+>> ++    test {list with one huge field} {
+>> ++        r config set proto-max-bulk-len 10000000000 ;#10gb
+>> ++        r config set client-query-buffer-limit 10000000000 ;#10gb
+>> ++        r write "*3\r\n\$5\r\nLPUSH\r\n\$2\r\nL1\r\n"
+>> ++        write_big_bulk 5000000000 ;#5gb
+>> ++        r flush
+>> ++        catch {r read} err
+>> ++        assert_match {*too large*} $err
+>> ++        r exists L1
+>> ++    } {0}
+>> ++}
+>> ++
+>> ++# SORT which attempts to store an element larger than 4GB into a lis=
+t.
+>> ++# Currently unsupported and results in an assertion instead of trunc=
+ation
+>> ++start_server [list overrides [list save ""] ] {
+>> ++    test {SORT adds huge field to list} {
+>> ++        r config set proto-max-bulk-len 10000000000 ;#10gb
+>> ++        r config set client-query-buffer-limit 10000000000 ;#10gb
+>> ++        r write "*3\r\n\$3\r\nSET\r\n\$2\r\nS1\r\n"
+>> ++        write_big_bulk 5000000000 ;#5gb
+>> ++        r flush
+>> ++        r read
+>> ++        assert_equal [r strlen S1] 5000000000
+>> ++        r set S2 asdf
+>> ++        r sadd myset 1 2
+>> ++        r mset D1 1 D2 2
+>> ++        catch {r sort myset by D* get S* store mylist}
+>> ++        assert_equal [count_log_message 0 "crashed by signal"] 0
+>> ++        assert_equal [count_log_message 0 "ASSERTION FAILED"] 1
+>> ++    }
+>> ++}
+>> ++
+>> ++# SORT which stores an integer encoded element into a list.
+>> ++# Just for coverage, no news here.
+>> ++start_server [list overrides [list save ""] ] {
+>> ++    test {SORT adds integer field to list} {
+>> ++        r set S1 asdf
+>> ++        r set S2 123 ;# integer encoded
+>> ++        assert_encoding "int" S2
+>> ++        r sadd myset 1 2
+>> ++        r mset D1 1 D2 2
+>> ++        r sort myset by D* get S* store mylist
+>> ++        r llen mylist
+>> ++    } {2}
+>> ++}
+>> +--
+>> +2.17.1
+>> +
+>> diff --git a/meta-oe/recipes-extended/redis/redis/CVE-2021-32675.patch=
+ b/meta-oe/recipes-extended/redis/redis/CVE-2021-32675.patch
+>> new file mode 100644
+>> index 000000000..ab691612a
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/redis/redis/CVE-2021-32675.patch
+>> @@ -0,0 +1,129 @@
+>> +From a71a65e9ed75b347c33bc882b38f4f1006fcba39 Mon Sep 17 00:00:00 200=
+1
+>> +From: Oran Agra <oran@redislabs.com>
+>> +Date: Wed, 9 Jun 2021 17:31:39 +0300
+>> +Subject: [PATCH] Prevent unauthenticated client from easily consuming=
+ lots of
+>> + memory (CVE-2021-32675)
+>> +
+>> +This change sets a low limit for multibulk and bulk length in the
+>> +protocol for unauthenticated connections, so that they can't easily
+>> +cause redis to allocate massive amounts of memory by sending just a f=
+ew
+>> +characters on the network.
+>> +The new limits are 10 arguments of 16kb each (instead of 1m of 512mb)
+>> +
+>> +CVE: CVE-2021-32675
+>> +Upstream-Status: Backport[https://github.com/redis/redis/commit/5674b=
+0057ff2903d43eaff802017eddf37c360f8]
+>> +
+>> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>> +---
+>> + src/networking.c    | 17 +++++++++++++++++
+>> + src/server.c        | 11 +++--------
+>> + src/server.h        |  1 +
+>> + tests/unit/auth.tcl | 16 ++++++++++++++++
+>> + 4 files changed, 37 insertions(+), 8 deletions(-)
+>> +
+>> +diff --git a/src/networking.c b/src/networking.c
+>> +index 2355a37..8e891c6 100644
+>> +--- a/src/networking.c
+>> ++++ b/src/networking.c
+>> +@@ -107,6 +107,15 @@ static void clientSetDefaultAuth(client *c) {
+>> +                        !(c->user->flags & USER_FLAG_DISABLED);
+>> + }
+>> +
+>> ++int authRequired(client *c) {
+>> ++    /* Check if the user is authenticated. This check is skipped in =
+case
+>> ++     * the default user is flagged as "nopass" and is active. */
+>> ++    int auth_required =3D (!(DefaultUser->flags & USER_FLAG_NOPASS) =
+||
+>> ++                          (DefaultUser->flags & USER_FLAG_DISABLED))=
+ &&
+>> ++                        !c->authenticated;
+>> ++    return auth_required;
+>> ++}
+>> ++
+>> + client *createClient(connection *conn) {
+>> +     client *c =3D zmalloc(sizeof(client));
+>> +
+>> +@@ -1855,6 +1864,10 @@ int processMultibulkBuffer(client *c) {
+>> +             addReplyError(c,"Protocol error: invalid multibulk lengt=
+h");
+>> +             setProtocolError("invalid mbulk count",c);
+>> +             return C_ERR;
+>> ++        } else if (ll > 10 && authRequired(c)) {
+>> ++            addReplyError(c, "Protocol error: unauthenticated multib=
+ulk length");
+>> ++            setProtocolError("unauth mbulk count", c);
+>> ++            return C_ERR;
+>> +         }
+>> +
+>> +         c->qb_pos =3D (newline-c->querybuf)+2;
+>> +@@ -1902,6 +1915,10 @@ int processMultibulkBuffer(client *c) {
+>> +                 addReplyError(c,"Protocol error: invalid bulk length=
+");
+>> +                 setProtocolError("invalid bulk length",c);
+>> +                 return C_ERR;
+>> ++            } else if (ll > 16384 && authRequired(c)) {
+>> ++                addReplyError(c, "Protocol error: unauthenticated bu=
+lk length");
+>> ++                setProtocolError("unauth bulk length", c);
+>> ++                return C_ERR;
+>> +             }
+>> +
+>> +             c->qb_pos =3D newline-c->querybuf+2;
+>> +diff --git a/src/server.c b/src/server.c
+>> +index 9932606..f65ad22 100644
+>> +--- a/src/server.c
+>> ++++ b/src/server.c
+>> +@@ -3996,14 +3996,9 @@ int processCommand(client *c) {
+>> +     int is_may_replicate_command =3D (c->cmd->flags & (CMD_WRITE | C=
+MD_MAY_REPLICATE)) ||
+>> +                                    (c->cmd->proc =3D=3D execCommand =
+&& (c->mstate.cmd_flags & (CMD_WRITE | CMD_MAY_REPLICATE)));
+>> +
+>> +-    /* Check if the user is authenticated. This check is skipped in =
+case
+>> +-     * the default user is flagged as "nopass" and is active. */
+>> +-    int auth_required =3D (!(DefaultUser->flags & USER_FLAG_NOPASS) =
+||
+>> +-                          (DefaultUser->flags & USER_FLAG_DISABLED))=
+ &&
+>> +-                        !c->authenticated;
+>> +-    if (auth_required) {
+>> +-        /* AUTH and HELLO and no auth modules are valid even in
+>> +-         * non-authenticated state. */
+>> ++    if (authRequired(c)) {
+>> ++        /* AUTH and HELLO and no auth commands are valid even in
+>> ++         * non-authenticated state. */
+>> +         if (!(c->cmd->flags & CMD_NO_AUTH)) {
+>> +             rejectCommand(c,shared.noautherr);
+>> +             return C_OK;
+>> +diff --git a/src/server.h b/src/server.h
+>> +index e256ce0..a3dfe60 100644
+>> +--- a/src/server.h
+>> ++++ b/src/server.h
+>> +@@ -1894,6 +1894,7 @@ void protectClient(client *c);
+>> + void unprotectClient(client *c);
+>> + void initThreadedIO(void);
+>> + client *lookupClientByID(uint64_t id);
+>> ++int authRequired(client *c);
+>> +
+>> + #ifdef __GNUC__
+>> + void addReplyErrorFormat(client *c, const char *fmt, ...)
+>> +diff --git a/tests/unit/auth.tcl b/tests/unit/auth.tcl
+>> +index b63cf01..5997707 100644
+>> +--- a/tests/unit/auth.tcl
+>> ++++ b/tests/unit/auth.tcl
+>> +@@ -24,6 +24,22 @@ start_server {tags {"auth"} overrides {requirepass=
+ foobar}} {
+>> +         r set foo 100
+>> +         r incr foo
+>> +     } {101}
+>> ++
+>> ++    test {For unauthenticated clients multibulk and bulk length are =
+limited} {
+>> ++        set rr [redis [srv "host"] [srv "port"] 0 $::tls]
+>> ++        $rr write "*100\r\n"
+>> ++        $rr flush
+>> ++        catch {[$rr read]} e
+>> ++        assert_match {*unauthenticated multibulk length*} $e
+>> ++        $rr close
+>> ++
+>> ++        set rr [redis [srv "host"] [srv "port"] 0 $::tls]
+>> ++        $rr write "*1\r\n\$100000000\r\n"
+>> ++        $rr flush
+>> ++        catch {[$rr read]} e
+>> ++        assert_match {*unauthenticated bulk length*} $e
+>> ++        $rr close
+>> ++    }
+>> + }
+>> +
+>> + start_server {tags {"auth_binary_password"}} {
+>> +--
+>> +2.17.1
+>> +
+>> diff --git a/meta-oe/recipes-extended/redis/redis/CVE-2021-32687.patch=
+ b/meta-oe/recipes-extended/redis/redis/CVE-2021-32687.patch
+>> new file mode 100644
+>> index 000000000..fe04e67f3
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/redis/redis/CVE-2021-32687.patch
+>> @@ -0,0 +1,67 @@
+>> +From a40ee258accdaf56c23950a6371307ca1aa69f06 Mon Sep 17 00:00:00 200=
+1
+>> +From: Oran Agra <oran@redislabs.com>
+>> +Date: Sun, 26 Sep 2021 15:42:17 +0300
+>> +Subject: [PATCH] Fix Integer overflow issue with intsets (CVE-2021-32=
+687)
+>> +
+>> +The vulnerability involves changing the default set-max-intset-entrie=
+s
+>> +configuration parameter to a very large value and constructing specia=
+lly
+>> +crafted commands to manipulate sets
+>> +
+>> +CVE: CVE-2021-32687
+>> +Upstream-Status: Backport[https://github.com/redis/redis/commit/a30d3=
+67a71b7017581cf1ca104242a3c644dec0f]
+>> +
+>> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>> +---
+>> + src/intset.c | 3 ++-
+>> + src/rdb.c    | 4 +++-
+>> + src/t_set.c  | 5 ++++-
+>> + 3 files changed, 9 insertions(+), 3 deletions(-)
+>> +
+>> +diff --git a/src/intset.c b/src/intset.c
+>> +index 9ba1389..e366851 100644
+>> +--- a/src/intset.c
+>> ++++ b/src/intset.c
+>> +@@ -104,7 +104,8 @@ intset *intsetNew(void) {
+>> +
+>> + /* Resize the intset */
+>> + static intset *intsetResize(intset *is, uint32_t len) {
+>> +-    uint32_t size =3D len*intrev32ifbe(is->encoding);
+>> ++    uint64_t size =3D (uint64_t)len*intrev32ifbe(is->encoding);
+>> ++    assert(size <=3D SIZE_MAX - sizeof(intset));
+>> +     is =3D zrealloc(is,sizeof(intset)+size);
+>> +     return is;
+>> + }
+>> +diff --git a/src/rdb.c b/src/rdb.c
+>> +index 6f2f516..37b1e0b 100644
+>> +--- a/src/rdb.c
+>> ++++ b/src/rdb.c
+>> +@@ -1562,7 +1562,9 @@ robj *rdbLoadObject(int rdbtype, rio *rdb, sds =
+key) {
+>> +         if ((len =3D rdbLoadLen(rdb,NULL)) =3D=3D RDB_LENERR) return=
+ NULL;
+>> +
+>> +         /* Use a regular set when there are too many entries. */
+>> +-        if (len > server.set_max_intset_entries) {
+>> ++        size_t max_entries =3D server.set_max_intset_entries;
+>> ++        if (max_entries >=3D 1<<30) max_entries =3D 1<<30;
+>> ++        if (len > max_entries) {
+>> +             o =3D createSetObject();
+>> +             /* It's faster to expand the dict to the right size asap=
+ in order
+>> +              * to avoid rehashing */
+>> +diff --git a/src/t_set.c b/src/t_set.c
+>> +index b655b71..d50a05a 100644
+>> +--- a/src/t_set.c
+>> ++++ b/src/t_set.c
+>> +@@ -66,7 +66,10 @@ int setTypeAdd(robj *subject, sds value) {
+>> +             if (success) {
+>> +                 /* Convert to regular set when the intset contains
+>> +                  * too many entries. */
+>> +-                if (intsetLen(subject->ptr) > server.set_max_intset_=
+entries)
+>> ++                size_t max_entries =3D server.set_max_intset_entries=
+;
+>> ++                /* limit to 1G entries due to intset internals. */
+>> ++                if (max_entries >=3D 1<<30) max_entries =3D 1<<30;
+>> ++                if (intsetLen(subject->ptr) > max_entries)
+>> +                     setTypeConvert(subject,OBJ_ENCODING_HT);
+>> +                 return 1;
+>> +             }
+>> +--
+>> +2.17.1
+>> +
+>> diff --git a/meta-oe/recipes-extended/redis/redis/CVE-2021-32762.patch=
+ b/meta-oe/recipes-extended/redis/redis/CVE-2021-32762.patch
+>> new file mode 100644
+>> index 000000000..ec6e2fbd5
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/redis/redis/CVE-2021-32762.patch
+>> @@ -0,0 +1,68 @@
+>> +From 4b1de5438ad9ef2236c379f2f78feb9f1fd9796e Mon Sep 17 00:00:00 200=
+1
+>> +From: Oran Agra <oran@redislabs.com>
+>> +Date: Mon, 4 Oct 2021 12:10:17 +0300
+>> +Subject: [PATCH] Fix redis-cli / redis-sential overflow on some platf=
+orms
+>> + (CVE-2021-32762) (#9587)
+>> +
+>> +The redis-cli command line tool and redis-sentinel service may be vul=
+nerable
+>> +to integer overflow when parsing specially crafted large multi-bulk n=
+etwork
+>> +replies. This is a result of a vulnerability in the underlying hiredi=
+s
+>> +library which does not perform an overflow check before calling the c=
+alloc()
+>> +heap allocation function.
+>> +
+>> +This issue only impacts systems with heap allocators that do not perf=
+orm their
+>> +own overflow checks. Most modern systems do and are therefore not lik=
+ely to
+>> +be affected. Furthermore, by default redis-sentinel uses the jemalloc=
+ allocator
+>> +which is also not vulnerable.
+>> +
+>> +Co-authored-by: Yossi Gottlieb <yossigo@gmail.com>
+>> +
+>> +CVE: CVE-2021-32762
+>> +Upstream-Status: Backport[https://github.com/redis/redis/commit/02153=
+24a66af949be39b34be2d55143232c1cb71]
+>> +
+>> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>> +---
+>> + deps/hiredis/hiredis.c |  1 +
+>> + deps/hiredis/test.c    | 14 ++++++++++++++
+>> + 2 files changed, 15 insertions(+)
+>> +
+>> +diff --git a/deps/hiredis/hiredis.c b/deps/hiredis/hiredis.c
+>> +index 51f22a6..990f619 100644
+>> +--- a/deps/hiredis/hiredis.c
+>> ++++ b/deps/hiredis/hiredis.c
+>> +@@ -174,6 +174,7 @@ static void *createArrayObject(const redisReadTas=
+k *task, size_t elements) {
+>> +         return NULL;
+>> +
+>> +     if (elements > 0) {
+>> ++        if (SIZE_MAX / sizeof(redisReply*) < elements) return NULL; =
+ /* Don't overflow */
+>> +         r->element =3D hi_calloc(elements,sizeof(redisReply*));
+>> +         if (r->element =3D=3D NULL) {
+>> +             freeReplyObject(r);
+>> +diff --git a/deps/hiredis/test.c b/deps/hiredis/test.c
+>> +index 8295367..bdff74e 100644
+>> +--- a/deps/hiredis/test.c
+>> ++++ b/deps/hiredis/test.c
+>> +@@ -498,6 +498,20 @@ static void test_reply_reader(void) {
+>> +     freeReplyObject(reply);
+>> +     redisReaderFree(reader);
+>> +
+>> ++    test("Multi-bulk never overflows regardless of maxelements: ");
+>> ++    size_t bad_mbulk_len =3D (SIZE_MAX / sizeof(void *)) + 3;
+>> ++    char bad_mbulk_reply[100];
+>> ++    snprintf(bad_mbulk_reply, sizeof(bad_mbulk_reply), "*%llu\r\n+as=
+df\r\n",
+>> ++        (unsigned long long) bad_mbulk_len);
+>> ++
+>> ++    reader =3D redisReaderCreate();
+>> ++    reader->maxelements =3D 0;    /* Don't rely on default limit */
+>> ++    redisReaderFeed(reader, bad_mbulk_reply, strlen(bad_mbulk_reply)=
+);
+>> ++    ret =3D redisReaderGetReply(reader,&reply);
+>> ++    test_cond(ret =3D=3D REDIS_ERR && strcasecmp(reader->errstr, "Ou=
+t of memory") =3D=3D 0);
+>> ++    freeReplyObject(reply);
+>> ++    redisReaderFree(reader);
+>> ++
+>> + #if LLONG_MAX > SIZE_MAX
+>> +     test("Set error when array > SIZE_MAX: ");
+>> +     reader =3D redisReaderCreate();
+>> +--
+>> +2.17.1
+>> +
+>> diff --git a/meta-oe/recipes-extended/redis/redis/CVE-2021-41099.patch=
+ b/meta-oe/recipes-extended/redis/redis/CVE-2021-41099.patch
+>> new file mode 100644
+>> index 000000000..ce0e112ae
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/redis/redis/CVE-2021-41099.patch
+>> @@ -0,0 +1,47 @@
+>> +From fd25ce2108994b7781269143bdfb3403faa2f1d1 Mon Sep 17 00:00:00 200=
+1
+>> +From: YiyuanGUO <yguoaz@gmail.com>
+>> +Date: Wed, 29 Sep 2021 10:20:35 +0300
+>> +Subject: [PATCH] Fix integer overflow in _sdsMakeRoomFor (CVE-2021-41=
+099)
+>> +
+>> +CVE: CVE-2021-41099
+>> +Upstream-Status: Backport[https://github.com/redis/redis/commit/c6ad8=
+76774f3cc11e32681ea02a2eead00f2c521]
+>> +
+>> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>> +---
+>> + src/sds.c | 6 +++---
+>> + 1 file changed, 3 insertions(+), 3 deletions(-)
+>> +
+>> +diff --git a/src/sds.c b/src/sds.c
+>> +index 2ec3aa7..5eadae5 100644
+>> +--- a/src/sds.c
+>> ++++ b/src/sds.c
+>> +@@ -233,7 +233,7 @@ void sdsclear(sds s) {
+>> + sds sdsMakeRoomFor(sds s, size_t addlen) {
+>> +     void *sh, *newsh;
+>> +     size_t avail =3D sdsavail(s);
+>> +-    size_t len, newlen;
+>> ++    size_t len, newlen, reqlen;
+>> +     char type, oldtype =3D s[-1] & SDS_TYPE_MASK;
+>> +     int hdrlen;
+>> +     size_t usable;
+>> +@@ -243,7 +243,7 @@ sds sdsMakeRoomFor(sds s, size_t addlen) {
+>> +
+>> +     len =3D sdslen(s);
+>> +     sh =3D (char*)s-sdsHdrSize(oldtype);
+>> +-    newlen =3D (len+addlen);
+>> ++    reqlen =3D newlen =3D (len+addlen);
+>> +     assert(newlen > len);   /* Catch size_t overflow */
+>> +     if (newlen < SDS_MAX_PREALLOC)
+>> +         newlen *=3D 2;
+>> +@@ -258,7 +258,7 @@ sds sdsMakeRoomFor(sds s, size_t addlen) {
+>> +     if (type =3D=3D SDS_TYPE_5) type =3D SDS_TYPE_8;
+>> +
+>> +     hdrlen =3D sdsHdrSize(type);
+>> +-    assert(hdrlen + newlen + 1 > len);  /* Catch size_t overflow */
+>> ++    assert(hdrlen + newlen + 1 > reqlen);  /* Catch size_t overflow =
+*/
+>> +     if (oldtype=3D=3Dtype) {
+>> +         newsh =3D s_realloc_usable(sh, hdrlen+newlen+1, &usable);
+>> +         if (newsh =3D=3D NULL) return NULL;
+>> +--
+>> +2.17.1
+>> +
+>> diff --git a/meta-oe/recipes-extended/redis/redis_6.2.2.bb b/meta-oe/r=
+ecipes-extended/redis/redis_6.2.2.bb
+>> index ad675e9e0..4317c1060 100644
+>> --- a/meta-oe/recipes-extended/redis/redis_6.2.2.bb
+>> +++ b/meta-oe/recipes-extended/redis/redis_6.2.2.bb
+>> @@ -20,6 +20,12 @@ SRC_URI =3D "http://download.redis.io/releases/${BP=
+}.tar.gz \
+>>              file://fix-CVE-2021-29478.patch \
+>>              file://fix-CVE-2021-32625.patch \
+>>              file://CVE-2021-32761.patch \
+>> +           file://CVE-2021-41099.patch \
+>> +           file://CVE-2021-32762.patch \
+>> +           file://CVE-2021-32687.patch \
+>> +           file://CVE-2021-32675.patch \
+>> +           file://CVE-2021-32627-CVE-2021-32628.patch \
+>> +           file://CVE-2021-32626.patch \
+>>              "
+>>   SRC_URI[sha256sum] =3D "7a260bb74860f1b88c3d5942bf8ba60ca59f121c6dce=
+42d3017bed6add0b9535"
+>>
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#93641): https://lists.openembedded.org/g/openembed=
+ded-devel/message/93641
+>> Mute This Topic: https://lists.openembedded.org/mt/86667416/3616698
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub=
+ [akuster808@gmail.com]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
 
