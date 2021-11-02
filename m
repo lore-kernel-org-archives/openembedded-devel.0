@@ -2,36 +2,35 @@ Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9AD7EC433F5
-	for <webhook@archiver.kernel.org>; Tue,  2 Nov 2021 18:51:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D5C7C433EF
+	for <webhook@archiver.kernel.org>; Tue,  2 Nov 2021 18:51:52 +0000 (UTC)
 Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
- by mx.groups.io with SMTP id smtpd.web11.2223.1635879109028395642
+ by mx.groups.io with SMTP id smtpd.web09.2348.1635879111333277362
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 02 Nov 2021 11:51:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@axis.com
- header.s=axis-central1 header.b=n81KWg9v;
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=AtNJUDEP;
  spf=pass (domain: axis.com, ip: 195.60.68.18,
  mailfrom: peter.kjellerstedt@axis.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; q=dns/txt; s=axis-central1; t=1635879110;
-  x=1667415110;
+  d=axis.com; q=dns/txt; s=axis-central1; t=1635879112;
+  x=1667415112;
   h=from:to:subject:date:message-id:in-reply-to:references:
    mime-version:content-transfer-encoding;
-  bh=c4C20kSwU6GQbILId/aVHtqfaYH0BwN3KNl8zx7/ivI=;
-  b=n81KWg9vM2PY8D1ZFfFEKlJ35giMsATVYzAhud59EGwGrYOp/5oV91KT
-   8HGHbIi00/6/0UoYJ8nZDvUlVg0qS+YQa2G7vl5fVkLbPJnuxAyJVqTXT
-   7o+0vnAFOOfrXeoRnd2aGvaEdp1vKR2+aIgyCcspkdXPBNg4jMxkap4dL
-   hisjzvn2/fBvkUshwcJvghw6/eiiknH4bS+HrI/nLbf3ym7YHSkGDjJjS
-   dNRxyU/IT78vc5cnQgkHD1ey1XZZRXuGWJEQK/UDC5ra4wE/pSmIQdLm/
-   u1HtqU+ZdONJpPDRcsTZjj/AnClSpQ38gVE3eVczpxZNBVLZLA3sI6LPI
-   A==;
+  bh=fLmOitqbEv9UwXCfmPDbY0Ln7Ht/hBCkgfDDXDkF4Nk=;
+  b=AtNJUDEPLINfCAm9TGRkONA6I1DlPiZXKo1hG/iZ4yjTJ96pngSWaQnZ
+   pn+ppYXvwREGuP0oYFQchVD3ThW+n2hYb2zkMV9EuLoVD7+RerA6CFXcJ
+   NrJfwLSkVPv6Qty3/d7KevB4zo66gYweJ/UX98gObz4jieNAq6ODBLbED
+   MhNdoZ+EmpF0j1I+rzsi/NRDgQXkkR8HU3GjM+shoVZwkblqSvA2no3/e
+   rsVbQhv1YhyZ3rlUGaIkwzNhqfFGCSpRLTMEtTZuRebc5bo9rmy/2xqDl
+   HzXJ9Hrj23yo2N5I3xKcTkxCoeueqLRGi8D7i0/eDc86U61jzZPA66cdr
+   Q==;
 From: Peter Kjellerstedt <pkj@axis.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe,meta-networking][PATCH 3/8] collectd: Do not install
- /var/log
-Date: Tue, 2 Nov 2021 19:51:39 +0100
-Message-ID: <20211102185144.13556-3-pkj@axis.com>
+Subject: [meta-oe,meta-networking][PATCH 4/8] atop: Do not install the
+ /var/log/atop directory
+Date: Tue, 2 Nov 2021 19:51:40 +0100
+Message-ID: <20211102185144.13556-4-pkj@axis.com>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20211102185144.13556-1-pkj@axis.com>
 References: <20211102185144.13556-1-pkj@axis.com>
@@ -41,30 +40,34 @@ Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Nov 2021 18:51:51 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 Nov 2021 18:51:52 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93787
+ https://lists.openembedded.org/g/openembedded-devel/message/93790
 
-Previously it installed an empty /var/log without anything in it.
+/var/log is normally a link to /var/volatile/log and /var/volatile is a
+tmpfs mount. So anything created in /var/log will not be available when
+the tmpfs is mounted.
+
+/var/log/atop will be created in runtime.
 
 Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
- meta-oe/recipes-extended/collectd/collectd_5.12.0.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/atop/atop_2.4.0.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/collectd/collectd_5.12.0.bb b/meta-oe/recipes-extended/collectd/collectd_5.12.0.bb
-index b443afdb1..1c613b097 100644
---- a/meta-oe/recipes-extended/collectd/collectd_5.12.0.bb
-+++ b/meta-oe/recipes-extended/collectd/collectd_5.12.0.bb
-@@ -70,8 +70,8 @@ do_install:append() {
-     # Fix configuration file to allow collectd to start up
-     sed -i 's!^#FQDNLookup[ \t]*true!FQDNLookup   false!g' ${D}${sysconfdir}/collectd.conf
+diff --git a/meta-oe/recipes-support/atop/atop_2.4.0.bb b/meta-oe/recipes-support/atop/atop_2.4.0.bb
+index c91d86610..819303c57 100644
+--- a/meta-oe/recipes-support/atop/atop_2.4.0.bb
++++ b/meta-oe/recipes-support/atop/atop_2.4.0.bb
+@@ -42,6 +42,10 @@ do_install() {
+         rm -f ${D}${sysconfdir}/init.d/atopacct
+     fi
  
--    rmdir "${D}${localstatedir}/run"
--    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
-+    rmdir ${D}${localstatedir}/run ${D}${localstatedir}/log
++    # /var/log/atop will be created in runtime
++    rm -rf ${D}${localstatedir}/log
 +    rmdir --ignore-fail-on-non-empty ${D}${localstatedir}
- 
-     # Install systemd unit files
-     install -d ${D}${systemd_unitdir}/system
++
+     # remove atopacct related files
+     rm -rf ${D}${sbindir} ${D}${mandir}/man8
+ }
 
