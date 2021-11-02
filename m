@@ -1,172 +1,161 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E199C433F5
-	for <webhook@archiver.kernel.org>; Tue,  2 Nov 2021 20:20:53 +0000 (UTC)
-Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com
- [209.85.160.173])
- by mx.groups.io with SMTP id smtpd.web12.876.1635884452118086201
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76C7EC433EF
+	for <webhook@archiver.kernel.org>; Tue,  2 Nov 2021 22:35:10 +0000 (UTC)
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+ by mx.groups.io with SMTP id smtpd.web08.2630.1635892508462586113
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Nov 2021 13:20:52 -0700
+ Tue, 02 Nov 2021 15:35:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=f9XAR5da;
- spf=pass (domain: gmail.com, ip: 209.85.160.173,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f173.google.com with SMTP id h4so380233qth.5
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Nov 2021 13:20:51 -0700 (PDT)
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=GVviTNL5;
+ spf=pass (domain: axis.com, ip: 195.60.68.18,
+ mailfrom: peter.kjellerstedt@axis.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=kauood34IKD3eP2RMgNS4RuWCH6tFvCDSpze3B30lNE=;
-        b=f9XAR5daiBcfqlmWF2Ngm/CWYJkCn+tx2T0EsoioRdlsJ784CnIejyETp1U4R1jT5B
-         Wzx0gmSrxbgLKfpOTytzIxBR4soU/pV+nU+lwMLvNRcrCMUuw3QasqniqbM3Bk9Hv/eW
-         gTh9SR90bQUChF26aEhOq5IQU6kZ4YFpMvxI77DFPSbVwM71HXqACeuERHE2ku7zRKn2
-         LbnDyHp38nA4K1WCSknAyokaUxSAvMBxIOFOBcNMU0hjKMacuIHoW/0p+Zq6a6XFtd7b
-         Tmqq0j8bI/9AIeQqz7kWHVDLF5txH+kSoMByXZVAU9H3yJTzTqoHetuFe1oe1bs9IcOF
-         iSqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=kauood34IKD3eP2RMgNS4RuWCH6tFvCDSpze3B30lNE=;
-        b=5Ko8sVadL6bp0/Y1QpX2qod04XY3leB5KYRXCwk1CaKMCNP5cWw2DMRF+2/+to3+A6
-         pHna6hB6jq4POpFWEAVeennYdt9BTKkW/6mLDBIROZNfigN2G38o/OuqGmxeJKbfRKch
-         qkRAgwlaIR+iVFWvacog5GWAnMFCK7RHsdeqcpMzvkTH7Oa8GYHB7SVUsT5aLMKSIrVs
-         NEFPGTYSOXgRAqpyfXiurG81AXKwO8n6D1zctd1u9nOtKCYXoeTTj1UIymPuD7qMxEjs
-         XfsubxABR2qG/HNbqH8YePkXJ7bxrxqAk+/RAR7DVDmDqmBRxMc5EHXXovdxWWFsyEP0
-         MiUQ==
-X-Gm-Message-State: AOAM532sDP7b6ADwK2R5XN0IdSTonq4puF309qCcT0D6rbIAs1Uhk6DC
-	LyWM/gB5eLI2dow+TwDNHYBT/GdJ8txlqqM4Buw=
-X-Google-Smtp-Source: 
- ABdhPJxxR9uv7WRhn3hiIJZ7zQB+wd1ifmOo8kqymoZE+g5tia1YkCaeYLHtGEkQQPR8LzFJu7nBrr46wWUxbaDx+V0=
-X-Received: by 2002:ac8:4e93:: with SMTP id 19mr11795325qtp.116.1635884450963;
- Tue, 02 Nov 2021 13:20:50 -0700 (PDT)
-MIME-Version: 1.0
+  d=axis.com; q=dns/txt; s=axis-central1; t=1635892509;
+  x=1667428509;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=jh2UPT0hAHHE4tiYD+Eb5LS3fuOHJx9pseMdPTSXV0w=;
+  b=GVviTNL5sg25Kpxtf+NFWL6Jf+vPsC8H0MnhGDC7RUOVLKl0jpxzrEzZ
+   q8wBmDtcOJhgpmGXiWcU/8uxr2rP6LPPPRfr0Pk0wNuKXSrr/18OgCZ1i
+   Z62cb62cujIpRPS4nmfBWjLjUaa6QThQTajthi87CuKzwMf8UbhWyOyen
+   Gzy3imcNV0b3wTY35oy0kyplqlmLvjJ3H7UfVqwigWrXt4k0olPkux5d3
+   tO/j4lt/FtSLjtC6Um5S2ERZdg67QpF98D92PSpNFWxMMQfwScDmNJ5gq
+   gJRjefJlAusixthc5AAv24HRvAaWcBSDb1/oGGWJL/IUPQ7AhEzLylA3I
+   g==;
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Khem Raj <raj.khem@gmail.com>
+CC: akuster808 <akuster808@gmail.com>, "OE Development
+ (openembedded-devel@lists.openembedded.org)"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] Is it time to remove opensaf?
+Thread-Topic: [oe] Is it time to remove opensaf?
+Thread-Index: AdfQBVT48u0Gx35rTT+0sp2HRYUaXwAE94UAAALLvYD///SaAP//5kvA
+Date: Tue, 2 Nov 2021 22:35:05 +0000
+Message-ID: <4c2002915cfc4851b799333839d5682a@axis.com>
 References: <432b09f9a07b493fb9191eec798aa07a@axis.com>
  <083fee51-9dd8-c9d3-7f27-90f41e8d261e@gmail.com>
  <c904695823484f2fb1ce9df4e14d0f6e@axis.com>
-In-Reply-To: <c904695823484f2fb1ce9df4e14d0f6e@axis.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 2 Nov 2021 13:20:24 -0700
-Message-ID: 
  <CAMKF1sqjFtq5jTNLHDVg6uNcj-uLm0uEGwxFNLW4PqciaUq+Hw@mail.gmail.com>
-Subject: Re: [oe] Is it time to remove opensaf?
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Cc: akuster808 <akuster808@gmail.com>,
-	"OE Development (openembedded-devel@lists.openembedded.org)"
- <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: 
+ <CAMKF1sqjFtq5jTNLHDVg6uNcj-uLm0uEGwxFNLW4PqciaUq+Hw@mail.gmail.com>
+Accept-Language: en-US, sv-SE
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.0.5.60]
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Nov 2021 20:20:53 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 Nov 2021 22:35:10 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93793
+ https://lists.openembedded.org/g/openembedded-devel/message/93794
 
-On Tue, Nov 2, 2021 at 1:11 PM Peter Kjellerstedt
-<peter.kjellerstedt@axis.com> wrote:
->
-> > -----Original Message-----
-> > From: akuster808 <akuster808@gmail.com>
-> > Sent: den 2 november 2021 20:41
-> > To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>; OE Development
-> > (openembedded-devel@lists.openembedded.org) <openembedded-
-> > devel@lists.openembedded.org>
-> > Subject: Re: [oe] Is it time to remove opensaf?
-> >
-> > Peter,
-> >
-> > On 11/2/21 9:33 AM, Peter Kjellerstedt wrote:
-> > > I am currently working on patches for OE-Core to report QA warnings
-> > > in case some directories that are expected to be empty have some
-> > > files installed into them. As part of the review process, Khem
-> > > reported failures for some recipes in OpenEmbedded due to this,
-> > > opensaf being one of them.
-> > >
-> > > Now I have tried to build and run opensaf in a QEMU image, but I
-> > > cannot get it to work. The sysvinit initscript relies on
-> > > /lib/lsb/init-functions, which AFAICT has not existed since lsb
-> > > was removed from OE-Core two years ago, and opensaf has never
-> > > depended on lsb in the first place. As for systemd, the service
-> > > file uses the same sysvinit scripts so it has the same problem.
-> > > And in addition, the script is in /etc/init.d, which
-> > > systemd.bbclass removes unless both sysvinit and systemd are
-> > > enabled in DISTRO_FEATURES.
-> > >
-> > > And in addition to this, if I just try to start the opensafd binary
-> > > it seg faults immediately.
-> > >
-> > > So all in all, even if opensaf has been updated regularly, it
-> > > doesn't seem like anyone is actually using it. Which brings me to
-> > > my actual question: should I just send a patch to remove it?
-> > >
-> > > Alternatively I can fix the creation of the /var/log/opensaf
-> > > directory, which was the error Khem saw with my patch for OE-Core
-> > > applied, but it seems like wasted work in case no one is actually
-> > > using the recipe...
-> >
-> > Thanks for the analysis. Does the current mechanism to blacklist a
-> > recipe help possible finding users of this recipe?  Is your concern
-> > carrying this in the next LTS as well?
->
-> I guess adding a PNBLACKLIST for it would work too (I have never used
-> it, so I did not think off it). My concern was mainly that I had to
-> spend time on fixing the recipe to support that /var/volatile is now
-> checked for being empty, for a recipe that apparently is broken. So
-> if a PNBLACKLIST helps the next person that does changes to the system
-> from having to care about the broken opensaf recipe, then that is fine
-> with me. ;)
-
-Generally, I would refrain from excluding recipes via PNBLACKLIST if they can be
-brought to support whatever improvements we are doing in Core or other
-dependencies
-thats the price of accepting recipes into a layer in the first place.
-If its broken such that
-it can not be fixed then we should perhaps exclude it.
-
-It was added via below commit, so perhaps Bian could be much better suited to
-say if it is still in use or not.
-
- commit e18830c2b4323487f9afa5205f13579903c7f9d4
-  Author: Bian Naimeng <biannm@cn.fujitsu.com>
-  Date:   Wed Dec 31 16:22:06 2014 +0800
-
-      opensaf: add recipe
-
-      OpenSAF is an open source implementation of the SAF AIS specification
-
-      Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-      Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-      Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-
-
->
-> In the end I did send a patch that changes the opensaf recipe to create
-> /var/log/opensaf in runtime, by copying the solution for one of the
-> other recipes I was fixing. So I am in the clear for my change to
-> OE-Core. But opensaf is still as broken as before when it comes to
-> actually starting the service...
-
-
-Thanks for fixing the bunch of recipes for this,. Really helpful.
-
->
-> > -armin
-> > >
-> > > //Peter
->
-> //Peter
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#93792): https://lists.openembedded.org/g/openembedded-devel/message/93792
-> Mute This Topic: https://lists.openembedded.org/mt/86770394/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWxA
+bGlzdHMub3BlbmVtYmVkZGVkLm9yZyA8b3BlbmVtYmVkZGVkLQ0KPiBkZXZlbEBsaXN0cy5vcGVu
+ZW1iZWRkZWQub3JnPiBPbiBCZWhhbGYgT2YgS2hlbSBSYWoNCj4gU2VudDogZGVuIDIgbm92ZW1i
+ZXIgMjAyMSAyMToyMA0KPiBUbzogUGV0ZXIgS2plbGxlcnN0ZWR0IDxwZXRlci5ramVsbGVyc3Rl
+ZHRAYXhpcy5jb20+DQo+IENjOiBha3VzdGVyODA4IDxha3VzdGVyODA4QGdtYWlsLmNvbT47IE9F
+IERldmVsb3BtZW50IChvcGVuZW1iZWRkZWQtDQo+IGRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5v
+cmcpIDxvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4NCj4gU3ViamVj
+dDogUmU6IFtvZV0gSXMgaXQgdGltZSB0byByZW1vdmUgb3BlbnNhZj8NCj4gDQo+IE9uIFR1ZSwg
+Tm92IDIsIDIwMjEgYXQgMToxMSBQTSBQZXRlciBLamVsbGVyc3RlZHQNCj4gPHBldGVyLmtqZWxs
+ZXJzdGVkdEBheGlzLmNvbT4gd3JvdGU6DQo+ID4NCj4gPiA+IC0tLS0tT3JpZ2luYWwgTWVzc2Fn
+ZS0tLS0tDQo+ID4gPiBGcm9tOiBha3VzdGVyODA4IDxha3VzdGVyODA4QGdtYWlsLmNvbT4NCj4g
+PiA+IFNlbnQ6IGRlbiAyIG5vdmVtYmVyIDIwMjEgMjA6NDENCj4gPiA+IFRvOiBQZXRlciBLamVs
+bGVyc3RlZHQgPHBldGVyLmtqZWxsZXJzdGVkdEBheGlzLmNvbT47IE9FIERldmVsb3BtZW50DQo+
+ID4gPiAob3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcpIDxvcGVuZW1i
+ZWRkZWQtDQo+ID4gPiBkZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPg0KPiA+ID4gU3ViamVj
+dDogUmU6IFtvZV0gSXMgaXQgdGltZSB0byByZW1vdmUgb3BlbnNhZj8NCj4gPiA+DQo+ID4gPiBQ
+ZXRlciwNCj4gPiA+DQo+ID4gPiBPbiAxMS8yLzIxIDk6MzMgQU0sIFBldGVyIEtqZWxsZXJzdGVk
+dCB3cm90ZToNCj4gPiA+ID4gSSBhbSBjdXJyZW50bHkgd29ya2luZyBvbiBwYXRjaGVzIGZvciBP
+RS1Db3JlIHRvIHJlcG9ydCBRQSB3YXJuaW5ncw0KPiA+ID4gPiBpbiBjYXNlIHNvbWUgZGlyZWN0
+b3JpZXMgdGhhdCBhcmUgZXhwZWN0ZWQgdG8gYmUgZW1wdHkgaGF2ZSBzb21lDQo+ID4gPiA+IGZp
+bGVzIGluc3RhbGxlZCBpbnRvIHRoZW0uIEFzIHBhcnQgb2YgdGhlIHJldmlldyBwcm9jZXNzLCBL
+aGVtDQo+ID4gPiA+IHJlcG9ydGVkIGZhaWx1cmVzIGZvciBzb21lIHJlY2lwZXMgaW4gT3BlbkVt
+YmVkZGVkIGR1ZSB0byB0aGlzLA0KPiA+ID4gPiBvcGVuc2FmIGJlaW5nIG9uZSBvZiB0aGVtLg0K
+PiA+ID4gPg0KPiA+ID4gPiBOb3cgSSBoYXZlIHRyaWVkIHRvIGJ1aWxkIGFuZCBydW4gb3BlbnNh
+ZiBpbiBhIFFFTVUgaW1hZ2UsIGJ1dCBJDQo+ID4gPiA+IGNhbm5vdCBnZXQgaXQgdG8gd29yay4g
+VGhlIHN5c3Zpbml0IGluaXRzY3JpcHQgcmVsaWVzIG9uDQo+ID4gPiA+IC9saWIvbHNiL2luaXQt
+ZnVuY3Rpb25zLCB3aGljaCBBRkFJQ1QgaGFzIG5vdCBleGlzdGVkIHNpbmNlIGxzYg0KPiA+ID4g
+PiB3YXMgcmVtb3ZlZCBmcm9tIE9FLUNvcmUgdHdvIHllYXJzIGFnbywgYW5kIG9wZW5zYWYgaGFz
+IG5ldmVyDQo+ID4gPiA+IGRlcGVuZGVkIG9uIGxzYiBpbiB0aGUgZmlyc3QgcGxhY2UuIEFzIGZv
+ciBzeXN0ZW1kLCB0aGUgc2VydmljZQ0KPiA+ID4gPiBmaWxlIHVzZXMgdGhlIHNhbWUgc3lzdmlu
+aXQgc2NyaXB0cyBzbyBpdCBoYXMgdGhlIHNhbWUgcHJvYmxlbS4NCj4gPiA+ID4gQW5kIGluIGFk
+ZGl0aW9uLCB0aGUgc2NyaXB0IGlzIGluIC9ldGMvaW5pdC5kLCB3aGljaA0KPiA+ID4gPiBzeXN0
+ZW1kLmJiY2xhc3MgcmVtb3ZlcyB1bmxlc3MgYm90aCBzeXN2aW5pdCBhbmQgc3lzdGVtZCBhcmUN
+Cj4gPiA+ID4gZW5hYmxlZCBpbiBESVNUUk9fRkVBVFVSRVMuDQo+ID4gPiA+DQo+ID4gPiA+IEFu
+ZCBpbiBhZGRpdGlvbiB0byB0aGlzLCBpZiBJIGp1c3QgdHJ5IHRvIHN0YXJ0IHRoZSBvcGVuc2Fm
+ZCBiaW5hcnkNCj4gPiA+ID4gaXQgc2VnIGZhdWx0cyBpbW1lZGlhdGVseS4NCj4gPiA+ID4NCj4g
+PiA+ID4gU28gYWxsIGluIGFsbCwgZXZlbiBpZiBvcGVuc2FmIGhhcyBiZWVuIHVwZGF0ZWQgcmVn
+dWxhcmx5LCBpdA0KPiA+ID4gPiBkb2Vzbid0IHNlZW0gbGlrZSBhbnlvbmUgaXMgYWN0dWFsbHkg
+dXNpbmcgaXQuIFdoaWNoIGJyaW5ncyBtZSB0bw0KPiA+ID4gPiBteSBhY3R1YWwgcXVlc3Rpb246
+IHNob3VsZCBJIGp1c3Qgc2VuZCBhIHBhdGNoIHRvIHJlbW92ZSBpdD8NCj4gPiA+ID4NCj4gPiA+
+ID4gQWx0ZXJuYXRpdmVseSBJIGNhbiBmaXggdGhlIGNyZWF0aW9uIG9mIHRoZSAvdmFyL2xvZy9v
+cGVuc2FmDQo+ID4gPiA+IGRpcmVjdG9yeSwgd2hpY2ggd2FzIHRoZSBlcnJvciBLaGVtIHNhdyB3
+aXRoIG15IHBhdGNoIGZvciBPRS1Db3JlDQo+ID4gPiA+IGFwcGxpZWQsIGJ1dCBpdCBzZWVtcyBs
+aWtlIHdhc3RlZCB3b3JrIGluIGNhc2Ugbm8gb25lIGlzIGFjdHVhbGx5DQo+ID4gPiA+IHVzaW5n
+IHRoZSByZWNpcGUuLi4NCj4gPiA+DQo+ID4gPiBUaGFua3MgZm9yIHRoZSBhbmFseXNpcy4gRG9l
+cyB0aGUgY3VycmVudCBtZWNoYW5pc20gdG8gYmxhY2tsaXN0IGENCj4gPiA+IHJlY2lwZSBoZWxw
+IHBvc3NpYmxlIGZpbmRpbmcgdXNlcnMgb2YgdGhpcyByZWNpcGU/ICBJcyB5b3VyIGNvbmNlcm4N
+Cj4gPiA+IGNhcnJ5aW5nIHRoaXMgaW4gdGhlIG5leHQgTFRTIGFzIHdlbGw/DQo+ID4NCj4gPiBJ
+IGd1ZXNzIGFkZGluZyBhIFBOQkxBQ0tMSVNUIGZvciBpdCB3b3VsZCB3b3JrIHRvbyAoSSBoYXZl
+IG5ldmVyIHVzZWQNCj4gPiBpdCwgc28gSSBkaWQgbm90IHRoaW5rIG9mZiBpdCkuIE15IGNvbmNl
+cm4gd2FzIG1haW5seSB0aGF0IEkgaGFkIHRvDQo+ID4gc3BlbmQgdGltZSBvbiBmaXhpbmcgdGhl
+IHJlY2lwZSB0byBzdXBwb3J0IHRoYXQgL3Zhci92b2xhdGlsZSBpcyBub3cNCj4gPiBjaGVja2Vk
+IGZvciBiZWluZyBlbXB0eSwgZm9yIGEgcmVjaXBlIHRoYXQgYXBwYXJlbnRseSBpcyBicm9rZW4u
+IFNvDQo+ID4gaWYgYSBQTkJMQUNLTElTVCBoZWxwcyB0aGUgbmV4dCBwZXJzb24gdGhhdCBkb2Vz
+IGNoYW5nZXMgdG8gdGhlIHN5c3RlbQ0KPiA+IGZyb20gaGF2aW5nIHRvIGNhcmUgYWJvdXQgdGhl
+IGJyb2tlbiBvcGVuc2FmIHJlY2lwZSwgdGhlbiB0aGF0IGlzIGZpbmUNCj4gPiB3aXRoIG1lLiA7
+KQ0KPiANCj4gR2VuZXJhbGx5LCBJIHdvdWxkIHJlZnJhaW4gZnJvbSBleGNsdWRpbmcgcmVjaXBl
+cyB2aWEgUE5CTEFDS0xJU1QgaWYgdGhleQ0KPiBjYW4gYmUgYnJvdWdodCB0byBzdXBwb3J0IHdo
+YXRldmVyIGltcHJvdmVtZW50cyB3ZSBhcmUgZG9pbmcgaW4gQ29yZSBvciANCj4gb3RoZXIgZGVw
+ZW5kZW5jaWVzIHRoYXRzIHRoZSBwcmljZSBvZiBhY2NlcHRpbmcgcmVjaXBlcyBpbnRvIGEgbGF5
+ZXIgaW4gDQo+IHRoZSBmaXJzdCBwbGFjZS4gSWYgaXRzIGJyb2tlbiBzdWNoIHRoYXQgaXQgY2Fu
+IG5vdCBiZSBmaXhlZCB0aGVuIHdlIA0KPiBzaG91bGQgcGVyaGFwcyBleGNsdWRlIGl0Lg0KDQpJ
+IHRvb2sgYSB0dXJuIGRvd24gbWVtb3J5IGxhbmUgYW5kIGNoZWNrZWQgdGhyb3VnaCB0aGUgZ2l0
+IGxvZyBmb3IgdGhlIA0Kb3BlbnNhZiByZWNpcGUuIEl0IHNlZW1zIHRoZSBwcm9ibGVtIHdpdGgg
+dGhlIHNlcnZpY2UgZmlsZSBmb3Igc3lzdGVtZCANCnJlbHlpbmcgb24gZmlsZXMgaW4gL2V0Yy9p
+bml0LmQgd2FzIGRpc2NvdmVyZWQgYW5kIGhhY2tlZCBhcm91bmQgaW4gDQpBcHJpbCAyMDE2IGFu
+ZCB0aGVuIGxhdGVyIGJyb2tlbiBhZ2FpbiBpbiBOb3ZlbWJlciAyMDE2IGJlY2F1c2UgdGhlIA0K
+cHJldmlvdXMgaGFjayB3YXMgbWlzdW5kZXJzdG9vZC4uLiBUaGlzIEkgY2FuIHNvbHZlIHByb3Bl
+cmx5LCBhbmQgSSANCndpbGwgc2VuZCBhIHBhdGNoIGZvciBpdCAoYmFzZWQgb24gdG9wIG9mIHRo
+ZSBzZXJpZXMgSSBzZW50IGVhcmxpZXIpIA0Kc28gdGhhdCB0aGVyZSBpcyBhdCBsZWFzdCBvbmUg
+bGVzcyBwcm9ibGVtLg0KDQpVbmZvcnR1bmF0ZWx5IHRoYXQgd2lsbCBub3Qgc29sdmUgdGhlIHBy
+b2JsZW0gdGhhdCB0aGUgaW50c2NyaXB0IHJlbGllcyANCm9uIC9saWIvbHNiL2luaXQtZnVuY3Rp
+b25zLCB3aGljaCBoYXMgbm90IGV4aXN0ZWQgc2luY2UgdGhlIGxzYiByZWNpcGUgDQp3YXMgcmVt
+b3ZlZCBmcm9tIE9FLUNvcmUgdHdvIHllYXJzIGFnbyAodGhvdWdoIHRoZSBvcGVuc2FmIHJlY2lw
+ZSBoYXMgDQpuZXZlciBkZXBlbmRlZCBvbiB0aGUgbHNiIHJlY2lwZSBldmVuIHRob3VnaCBpdCBz
+aG91bGQgaGF2ZSkuDQoNCkkgY291bGQgd3JpdGUgYSBjb21tZW50IGluIHRoZSBjb21taXQgbWVz
+c2FnZSBpZiB5b3Ugd2FudCwgc3RhdGluZyB0aGF0IA0KbXkgZml4IGZvciB0aGUgZmlsZSBpbiAv
+ZXRjL2luaXQuZCB3aWxsIG5vdCBhY3R1YWxseSBtYWtlIHRoZSBzZXJ2aWNlIA0KZmlsZSB3b3Jr
+IHNvIHRoYXQgdGhlcmUgaXMgYXQgbGVhc3Qgc29tZSB0cmFjayBvZiB0aGlzIGluZm9ybWF0aW9u
+IGZvciANCnRoZSBuZXh0IHBlcnNvbiB0aGF0IGNvbWVzIGxvb2tpbmcgYXQgdGhlIHJlY2lwZS4N
+Cg0KPiBJdCB3YXMgYWRkZWQgdmlhIGJlbG93IGNvbW1pdCwgc28gcGVyaGFwcyBCaWFuIGNvdWxk
+IGJlIG11Y2ggYmV0dGVyIHN1aXRlZCB0bw0KPiBzYXkgaWYgaXQgaXMgc3RpbGwgaW4gdXNlIG9y
+IG5vdC4NCj4gDQo+ICBjb21taXQgZTE4ODMwYzJiNDMyMzQ4N2Y5YWZhNTIwNWYxMzU3OTkwM2M3
+ZjlkNA0KPiAgIEF1dGhvcjogQmlhbiBOYWltZW5nIDxiaWFubm1AY24uZnVqaXRzdS5jb20+DQo+
+ICAgRGF0ZTogICBXZWQgRGVjIDMxIDE2OjIyOjA2IDIwMTQgKzA4MDANCj4gDQo+ICAgICAgIG9w
+ZW5zYWY6IGFkZCByZWNpcGUNCj4gDQo+ICAgICAgIE9wZW5TQUYgaXMgYW4gb3BlbiBzb3VyY2Ug
+aW1wbGVtZW50YXRpb24gb2YgdGhlIFNBRiBBSVMgc3BlY2lmaWNhdGlvbg0KPiANCj4gICAgICAg
+U2lnbmVkLW9mZi1ieTogQmlhbiBOYWltZW5nIDxiaWFubm1AY24uZnVqaXRzdS5jb20+DQo+ICAg
+ICAgIFNpZ25lZC1vZmYtYnk6IE1hcnRpbiBKYW5zYSA8TWFydGluLkphbnNhQGdtYWlsLmNvbT4N
+Cj4gICAgICAgU2lnbmVkLW9mZi1ieTogSm9lIE1hY0RvbmFsZCA8am9lX21hY2RvbmFsZEBtZW50
+b3IuY29tPg0KDQpCaWFuIGhhc24ndCBiZWVuIGFjdGl2ZSBpbiB0aGUgY29tbXVuaXR5IGZvciBv
+dmVyIHNpeCB5ZWFycywgc28gdGhhdCBpcyANCnByb2JhYmx5IGhvcGluZyBmb3IgbXVjaC4NCg0K
+PiA+IEluIHRoZSBlbmQgSSBkaWQgc2VuZCBhIHBhdGNoIHRoYXQgY2hhbmdlcyB0aGUgb3BlbnNh
+ZiByZWNpcGUgdG8gY3JlYXRlDQo+ID4gL3Zhci9sb2cvb3BlbnNhZiBpbiBydW50aW1lLCBieSBj
+b3B5aW5nIHRoZSBzb2x1dGlvbiBmb3Igb25lIG9mIHRoZQ0KPiA+IG90aGVyIHJlY2lwZXMgSSB3
+YXMgZml4aW5nLiBTbyBJIGFtIGluIHRoZSBjbGVhciBmb3IgbXkgY2hhbmdlIHRvDQo+ID4gT0Ut
+Q29yZS4gQnV0IG9wZW5zYWYgaXMgc3RpbGwgYXMgYnJva2VuIGFzIGJlZm9yZSB3aGVuIGl0IGNv
+bWVzIHRvDQo+ID4gYWN0dWFsbHkgc3RhcnRpbmcgdGhlIHNlcnZpY2UuLi4NCj4gDQo+IFRoYW5r
+cyBmb3IgZml4aW5nIHRoZSBidW5jaCBvZiByZWNpcGVzIGZvciB0aGlzLC4gUmVhbGx5IGhlbHBm
+dWwuDQoNCldlbGwsIGl0IHdhcyBteSBjaGFuZ2UgdG8gT0UtQ29yZSB0aGF0IGJyb2tlIHRoZW0s
+IHNvIG9mIGNvdXJzZSBJIHdpbGwgDQpmaXggdGhlbS4NCg0KPiA+ID4gLWFybWluDQo+ID4gPiA+
+DQo+ID4gPiA+IC8vUGV0ZXINCj4gPg0KPiA+IC8vUGV0ZXINCg0KLy9QZXRlcg0KDQo=
 
