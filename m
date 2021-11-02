@@ -1,161 +1,420 @@
-Return-Path: <peter.kjellerstedt@axis.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 76C7EC433EF
-	for <webhook@archiver.kernel.org>; Tue,  2 Nov 2021 22:35:10 +0000 (UTC)
-Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
- by mx.groups.io with SMTP id smtpd.web08.2630.1635892508462586113
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 48982C433EF
+	for <webhook@archiver.kernel.org>; Tue,  2 Nov 2021 23:55:43 +0000 (UTC)
+Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com
+ [209.85.219.51])
+ by mx.groups.io with SMTP id smtpd.web11.725.1635897342587136850
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Nov 2021 15:35:09 -0700
+ Tue, 02 Nov 2021 16:55:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=axis-central1 header.b=GVviTNL5;
- spf=pass (domain: axis.com, ip: 195.60.68.18,
- mailfrom: peter.kjellerstedt@axis.com)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=LILTMovw;
+ spf=pass (domain: gmail.com, ip: 209.85.219.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f51.google.com with SMTP id v2so760797qve.11
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 02 Nov 2021 16:55:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; q=dns/txt; s=axis-central1; t=1635892509;
-  x=1667428509;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=jh2UPT0hAHHE4tiYD+Eb5LS3fuOHJx9pseMdPTSXV0w=;
-  b=GVviTNL5sg25Kpxtf+NFWL6Jf+vPsC8H0MnhGDC7RUOVLKl0jpxzrEzZ
-   q8wBmDtcOJhgpmGXiWcU/8uxr2rP6LPPPRfr0Pk0wNuKXSrr/18OgCZ1i
-   Z62cb62cujIpRPS4nmfBWjLjUaa6QThQTajthi87CuKzwMf8UbhWyOyen
-   Gzy3imcNV0b3wTY35oy0kyplqlmLvjJ3H7UfVqwigWrXt4k0olPkux5d3
-   tO/j4lt/FtSLjtC6Um5S2ERZdg67QpF98D92PSpNFWxMMQfwScDmNJ5gq
-   gJRjefJlAusixthc5AAv24HRvAaWcBSDb1/oGGWJL/IUPQ7AhEzLylA3I
-   g==;
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: Khem Raj <raj.khem@gmail.com>
-CC: akuster808 <akuster808@gmail.com>, "OE Development
- (openembedded-devel@lists.openembedded.org)"
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] Is it time to remove opensaf?
-Thread-Topic: [oe] Is it time to remove opensaf?
-Thread-Index: AdfQBVT48u0Gx35rTT+0sp2HRYUaXwAE94UAAALLvYD///SaAP//5kvA
-Date: Tue, 2 Nov 2021 22:35:05 +0000
-Message-ID: <4c2002915cfc4851b799333839d5682a@axis.com>
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=gtOK3WLFIL9v+3IZjI94oEVpnFzrs4qUYiuSY6juSq0=;
+        b=LILTMovwxUffpLsTNl8S4mE5+mlrNhceocPBqBBcYVBo3DEM/v8gf+95qJbnZVlX6v
+         TniTMZScGJAQazPes32LBOIMJ//L9hhDN9fxdU6Ed7I9teCcVCOBp2EIe4xGXYSy+6Ra
+         PL3gZdLulN517tx7290E7E7KVB/10s/r+KJzMg9ezbVTqBDUpwi/DGqYDt8mgx0gjUC1
+         htMOSiLC46MuwW7OPvDx/XUXC+BucYJBFPadHw7mC0+m69hQhuwl8mWiA5FIH4eU6uk6
+         fNlsrn8QNCVFLxtsOr+yDHca4yY8Q3Nx3uUKMQYgFIuROLf0rUWIvapJvi8T4TVHT/MP
+         qu/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=gtOK3WLFIL9v+3IZjI94oEVpnFzrs4qUYiuSY6juSq0=;
+        b=PJJtIFgAL5SZ9K+bM1ERKzk9HZ9sDsy9KwVzSGRC08nem8oXnpcZ75HKMjL/P1vvj7
+         Y9e2svZyltwK3Tl0VEHBatnRq2dPbNXeQdBth/jrejS1WwZZqFthF84FZDLvNLZFoOx9
+         +NTqx+CY2b5stEQbG37x+l6jwIA+TLsz0Gb/bvn9Mfk8Uat/9iTJ2nC3QrGdmcAleAQg
+         aXi/TPdTXwDk5IZ+HMyWUH7SeuQ/Jf/SV9n1+PJB6SqPm5ab85HylwNZ0zNX13hL32QE
+         v5Gnx73aNyXkl7jcRomnL+SllffAMuZv0gDel+6sgVijxKCU+QPPDxz7nt8z26yfd1ab
+         iDRQ==
+X-Gm-Message-State: AOAM531wks0KN3PU7OnZKl9t00aOg1WOaXmSIVDIgzrI/pcdqCb39nHR
+	eIttWw4leNA9n5la2Svg0EgFyTwpZtloMH4o4kM=
+X-Google-Smtp-Source: 
+ ABdhPJxe9ExqXIt6d73U+ky9ODcTCmXXQnLefQAm8fI+I8rdnHDUKPokUesbt85OPbJ0DZnc5tNWAVJ2hoyCKoeF1Ac=
+X-Received: by 2002:ac8:45d2:: with SMTP id e18mr3575109qto.112.1635897341386;
+ Tue, 02 Nov 2021 16:55:41 -0700 (PDT)
+MIME-Version: 1.0
 References: <432b09f9a07b493fb9191eec798aa07a@axis.com>
  <083fee51-9dd8-c9d3-7f27-90f41e8d261e@gmail.com>
  <c904695823484f2fb1ce9df4e14d0f6e@axis.com>
  <CAMKF1sqjFtq5jTNLHDVg6uNcj-uLm0uEGwxFNLW4PqciaUq+Hw@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1sqjFtq5jTNLHDVg6uNcj-uLm0uEGwxFNLW4PqciaUq+Hw@mail.gmail.com>
-Accept-Language: en-US, sv-SE
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.0.5.60]
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-MIME-Version: 1.0
+ <4c2002915cfc4851b799333839d5682a@axis.com>
+In-Reply-To: <4c2002915cfc4851b799333839d5682a@axis.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 2 Nov 2021 16:55:30 -0700
+Message-ID: 
+ <CAMKF1sq__5dv0RTA34SaGAnrJ2dtmfgQM847RmXktDCOeStzfg@mail.gmail.com>
+Subject: Re: [oe] Is it time to remove opensaf?
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Cc: "OE Development (openembedded-devel@lists.openembedded.org)"
+ <openembedded-devel@lists.openembedded.org>,
+	akuster808 <akuster808@gmail.com>
+Content-Type: multipart/alternative; boundary="000000000000ec230c05cfd707e1"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Nov 2021 22:35:10 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 Nov 2021 23:55:43 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93794
+ https://lists.openembedded.org/g/openembedded-devel/message/93796
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWxA
-bGlzdHMub3BlbmVtYmVkZGVkLm9yZyA8b3BlbmVtYmVkZGVkLQ0KPiBkZXZlbEBsaXN0cy5vcGVu
-ZW1iZWRkZWQub3JnPiBPbiBCZWhhbGYgT2YgS2hlbSBSYWoNCj4gU2VudDogZGVuIDIgbm92ZW1i
-ZXIgMjAyMSAyMToyMA0KPiBUbzogUGV0ZXIgS2plbGxlcnN0ZWR0IDxwZXRlci5ramVsbGVyc3Rl
-ZHRAYXhpcy5jb20+DQo+IENjOiBha3VzdGVyODA4IDxha3VzdGVyODA4QGdtYWlsLmNvbT47IE9F
-IERldmVsb3BtZW50IChvcGVuZW1iZWRkZWQtDQo+IGRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5v
-cmcpIDxvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4NCj4gU3ViamVj
-dDogUmU6IFtvZV0gSXMgaXQgdGltZSB0byByZW1vdmUgb3BlbnNhZj8NCj4gDQo+IE9uIFR1ZSwg
-Tm92IDIsIDIwMjEgYXQgMToxMSBQTSBQZXRlciBLamVsbGVyc3RlZHQNCj4gPHBldGVyLmtqZWxs
-ZXJzdGVkdEBheGlzLmNvbT4gd3JvdGU6DQo+ID4NCj4gPiA+IC0tLS0tT3JpZ2luYWwgTWVzc2Fn
-ZS0tLS0tDQo+ID4gPiBGcm9tOiBha3VzdGVyODA4IDxha3VzdGVyODA4QGdtYWlsLmNvbT4NCj4g
-PiA+IFNlbnQ6IGRlbiAyIG5vdmVtYmVyIDIwMjEgMjA6NDENCj4gPiA+IFRvOiBQZXRlciBLamVs
-bGVyc3RlZHQgPHBldGVyLmtqZWxsZXJzdGVkdEBheGlzLmNvbT47IE9FIERldmVsb3BtZW50DQo+
-ID4gPiAob3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcpIDxvcGVuZW1i
-ZWRkZWQtDQo+ID4gPiBkZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPg0KPiA+ID4gU3ViamVj
-dDogUmU6IFtvZV0gSXMgaXQgdGltZSB0byByZW1vdmUgb3BlbnNhZj8NCj4gPiA+DQo+ID4gPiBQ
-ZXRlciwNCj4gPiA+DQo+ID4gPiBPbiAxMS8yLzIxIDk6MzMgQU0sIFBldGVyIEtqZWxsZXJzdGVk
-dCB3cm90ZToNCj4gPiA+ID4gSSBhbSBjdXJyZW50bHkgd29ya2luZyBvbiBwYXRjaGVzIGZvciBP
-RS1Db3JlIHRvIHJlcG9ydCBRQSB3YXJuaW5ncw0KPiA+ID4gPiBpbiBjYXNlIHNvbWUgZGlyZWN0
-b3JpZXMgdGhhdCBhcmUgZXhwZWN0ZWQgdG8gYmUgZW1wdHkgaGF2ZSBzb21lDQo+ID4gPiA+IGZp
-bGVzIGluc3RhbGxlZCBpbnRvIHRoZW0uIEFzIHBhcnQgb2YgdGhlIHJldmlldyBwcm9jZXNzLCBL
-aGVtDQo+ID4gPiA+IHJlcG9ydGVkIGZhaWx1cmVzIGZvciBzb21lIHJlY2lwZXMgaW4gT3BlbkVt
-YmVkZGVkIGR1ZSB0byB0aGlzLA0KPiA+ID4gPiBvcGVuc2FmIGJlaW5nIG9uZSBvZiB0aGVtLg0K
-PiA+ID4gPg0KPiA+ID4gPiBOb3cgSSBoYXZlIHRyaWVkIHRvIGJ1aWxkIGFuZCBydW4gb3BlbnNh
-ZiBpbiBhIFFFTVUgaW1hZ2UsIGJ1dCBJDQo+ID4gPiA+IGNhbm5vdCBnZXQgaXQgdG8gd29yay4g
-VGhlIHN5c3Zpbml0IGluaXRzY3JpcHQgcmVsaWVzIG9uDQo+ID4gPiA+IC9saWIvbHNiL2luaXQt
-ZnVuY3Rpb25zLCB3aGljaCBBRkFJQ1QgaGFzIG5vdCBleGlzdGVkIHNpbmNlIGxzYg0KPiA+ID4g
-PiB3YXMgcmVtb3ZlZCBmcm9tIE9FLUNvcmUgdHdvIHllYXJzIGFnbywgYW5kIG9wZW5zYWYgaGFz
-IG5ldmVyDQo+ID4gPiA+IGRlcGVuZGVkIG9uIGxzYiBpbiB0aGUgZmlyc3QgcGxhY2UuIEFzIGZv
-ciBzeXN0ZW1kLCB0aGUgc2VydmljZQ0KPiA+ID4gPiBmaWxlIHVzZXMgdGhlIHNhbWUgc3lzdmlu
-aXQgc2NyaXB0cyBzbyBpdCBoYXMgdGhlIHNhbWUgcHJvYmxlbS4NCj4gPiA+ID4gQW5kIGluIGFk
-ZGl0aW9uLCB0aGUgc2NyaXB0IGlzIGluIC9ldGMvaW5pdC5kLCB3aGljaA0KPiA+ID4gPiBzeXN0
-ZW1kLmJiY2xhc3MgcmVtb3ZlcyB1bmxlc3MgYm90aCBzeXN2aW5pdCBhbmQgc3lzdGVtZCBhcmUN
-Cj4gPiA+ID4gZW5hYmxlZCBpbiBESVNUUk9fRkVBVFVSRVMuDQo+ID4gPiA+DQo+ID4gPiA+IEFu
-ZCBpbiBhZGRpdGlvbiB0byB0aGlzLCBpZiBJIGp1c3QgdHJ5IHRvIHN0YXJ0IHRoZSBvcGVuc2Fm
-ZCBiaW5hcnkNCj4gPiA+ID4gaXQgc2VnIGZhdWx0cyBpbW1lZGlhdGVseS4NCj4gPiA+ID4NCj4g
-PiA+ID4gU28gYWxsIGluIGFsbCwgZXZlbiBpZiBvcGVuc2FmIGhhcyBiZWVuIHVwZGF0ZWQgcmVn
-dWxhcmx5LCBpdA0KPiA+ID4gPiBkb2Vzbid0IHNlZW0gbGlrZSBhbnlvbmUgaXMgYWN0dWFsbHkg
-dXNpbmcgaXQuIFdoaWNoIGJyaW5ncyBtZSB0bw0KPiA+ID4gPiBteSBhY3R1YWwgcXVlc3Rpb246
-IHNob3VsZCBJIGp1c3Qgc2VuZCBhIHBhdGNoIHRvIHJlbW92ZSBpdD8NCj4gPiA+ID4NCj4gPiA+
-ID4gQWx0ZXJuYXRpdmVseSBJIGNhbiBmaXggdGhlIGNyZWF0aW9uIG9mIHRoZSAvdmFyL2xvZy9v
-cGVuc2FmDQo+ID4gPiA+IGRpcmVjdG9yeSwgd2hpY2ggd2FzIHRoZSBlcnJvciBLaGVtIHNhdyB3
-aXRoIG15IHBhdGNoIGZvciBPRS1Db3JlDQo+ID4gPiA+IGFwcGxpZWQsIGJ1dCBpdCBzZWVtcyBs
-aWtlIHdhc3RlZCB3b3JrIGluIGNhc2Ugbm8gb25lIGlzIGFjdHVhbGx5DQo+ID4gPiA+IHVzaW5n
-IHRoZSByZWNpcGUuLi4NCj4gPiA+DQo+ID4gPiBUaGFua3MgZm9yIHRoZSBhbmFseXNpcy4gRG9l
-cyB0aGUgY3VycmVudCBtZWNoYW5pc20gdG8gYmxhY2tsaXN0IGENCj4gPiA+IHJlY2lwZSBoZWxw
-IHBvc3NpYmxlIGZpbmRpbmcgdXNlcnMgb2YgdGhpcyByZWNpcGU/ICBJcyB5b3VyIGNvbmNlcm4N
-Cj4gPiA+IGNhcnJ5aW5nIHRoaXMgaW4gdGhlIG5leHQgTFRTIGFzIHdlbGw/DQo+ID4NCj4gPiBJ
-IGd1ZXNzIGFkZGluZyBhIFBOQkxBQ0tMSVNUIGZvciBpdCB3b3VsZCB3b3JrIHRvbyAoSSBoYXZl
-IG5ldmVyIHVzZWQNCj4gPiBpdCwgc28gSSBkaWQgbm90IHRoaW5rIG9mZiBpdCkuIE15IGNvbmNl
-cm4gd2FzIG1haW5seSB0aGF0IEkgaGFkIHRvDQo+ID4gc3BlbmQgdGltZSBvbiBmaXhpbmcgdGhl
-IHJlY2lwZSB0byBzdXBwb3J0IHRoYXQgL3Zhci92b2xhdGlsZSBpcyBub3cNCj4gPiBjaGVja2Vk
-IGZvciBiZWluZyBlbXB0eSwgZm9yIGEgcmVjaXBlIHRoYXQgYXBwYXJlbnRseSBpcyBicm9rZW4u
-IFNvDQo+ID4gaWYgYSBQTkJMQUNLTElTVCBoZWxwcyB0aGUgbmV4dCBwZXJzb24gdGhhdCBkb2Vz
-IGNoYW5nZXMgdG8gdGhlIHN5c3RlbQ0KPiA+IGZyb20gaGF2aW5nIHRvIGNhcmUgYWJvdXQgdGhl
-IGJyb2tlbiBvcGVuc2FmIHJlY2lwZSwgdGhlbiB0aGF0IGlzIGZpbmUNCj4gPiB3aXRoIG1lLiA7
-KQ0KPiANCj4gR2VuZXJhbGx5LCBJIHdvdWxkIHJlZnJhaW4gZnJvbSBleGNsdWRpbmcgcmVjaXBl
-cyB2aWEgUE5CTEFDS0xJU1QgaWYgdGhleQ0KPiBjYW4gYmUgYnJvdWdodCB0byBzdXBwb3J0IHdo
-YXRldmVyIGltcHJvdmVtZW50cyB3ZSBhcmUgZG9pbmcgaW4gQ29yZSBvciANCj4gb3RoZXIgZGVw
-ZW5kZW5jaWVzIHRoYXRzIHRoZSBwcmljZSBvZiBhY2NlcHRpbmcgcmVjaXBlcyBpbnRvIGEgbGF5
-ZXIgaW4gDQo+IHRoZSBmaXJzdCBwbGFjZS4gSWYgaXRzIGJyb2tlbiBzdWNoIHRoYXQgaXQgY2Fu
-IG5vdCBiZSBmaXhlZCB0aGVuIHdlIA0KPiBzaG91bGQgcGVyaGFwcyBleGNsdWRlIGl0Lg0KDQpJ
-IHRvb2sgYSB0dXJuIGRvd24gbWVtb3J5IGxhbmUgYW5kIGNoZWNrZWQgdGhyb3VnaCB0aGUgZ2l0
-IGxvZyBmb3IgdGhlIA0Kb3BlbnNhZiByZWNpcGUuIEl0IHNlZW1zIHRoZSBwcm9ibGVtIHdpdGgg
-dGhlIHNlcnZpY2UgZmlsZSBmb3Igc3lzdGVtZCANCnJlbHlpbmcgb24gZmlsZXMgaW4gL2V0Yy9p
-bml0LmQgd2FzIGRpc2NvdmVyZWQgYW5kIGhhY2tlZCBhcm91bmQgaW4gDQpBcHJpbCAyMDE2IGFu
-ZCB0aGVuIGxhdGVyIGJyb2tlbiBhZ2FpbiBpbiBOb3ZlbWJlciAyMDE2IGJlY2F1c2UgdGhlIA0K
-cHJldmlvdXMgaGFjayB3YXMgbWlzdW5kZXJzdG9vZC4uLiBUaGlzIEkgY2FuIHNvbHZlIHByb3Bl
-cmx5LCBhbmQgSSANCndpbGwgc2VuZCBhIHBhdGNoIGZvciBpdCAoYmFzZWQgb24gdG9wIG9mIHRo
-ZSBzZXJpZXMgSSBzZW50IGVhcmxpZXIpIA0Kc28gdGhhdCB0aGVyZSBpcyBhdCBsZWFzdCBvbmUg
-bGVzcyBwcm9ibGVtLg0KDQpVbmZvcnR1bmF0ZWx5IHRoYXQgd2lsbCBub3Qgc29sdmUgdGhlIHBy
-b2JsZW0gdGhhdCB0aGUgaW50c2NyaXB0IHJlbGllcyANCm9uIC9saWIvbHNiL2luaXQtZnVuY3Rp
-b25zLCB3aGljaCBoYXMgbm90IGV4aXN0ZWQgc2luY2UgdGhlIGxzYiByZWNpcGUgDQp3YXMgcmVt
-b3ZlZCBmcm9tIE9FLUNvcmUgdHdvIHllYXJzIGFnbyAodGhvdWdoIHRoZSBvcGVuc2FmIHJlY2lw
-ZSBoYXMgDQpuZXZlciBkZXBlbmRlZCBvbiB0aGUgbHNiIHJlY2lwZSBldmVuIHRob3VnaCBpdCBz
-aG91bGQgaGF2ZSkuDQoNCkkgY291bGQgd3JpdGUgYSBjb21tZW50IGluIHRoZSBjb21taXQgbWVz
-c2FnZSBpZiB5b3Ugd2FudCwgc3RhdGluZyB0aGF0IA0KbXkgZml4IGZvciB0aGUgZmlsZSBpbiAv
-ZXRjL2luaXQuZCB3aWxsIG5vdCBhY3R1YWxseSBtYWtlIHRoZSBzZXJ2aWNlIA0KZmlsZSB3b3Jr
-IHNvIHRoYXQgdGhlcmUgaXMgYXQgbGVhc3Qgc29tZSB0cmFjayBvZiB0aGlzIGluZm9ybWF0aW9u
-IGZvciANCnRoZSBuZXh0IHBlcnNvbiB0aGF0IGNvbWVzIGxvb2tpbmcgYXQgdGhlIHJlY2lwZS4N
-Cg0KPiBJdCB3YXMgYWRkZWQgdmlhIGJlbG93IGNvbW1pdCwgc28gcGVyaGFwcyBCaWFuIGNvdWxk
-IGJlIG11Y2ggYmV0dGVyIHN1aXRlZCB0bw0KPiBzYXkgaWYgaXQgaXMgc3RpbGwgaW4gdXNlIG9y
-IG5vdC4NCj4gDQo+ICBjb21taXQgZTE4ODMwYzJiNDMyMzQ4N2Y5YWZhNTIwNWYxMzU3OTkwM2M3
-ZjlkNA0KPiAgIEF1dGhvcjogQmlhbiBOYWltZW5nIDxiaWFubm1AY24uZnVqaXRzdS5jb20+DQo+
-ICAgRGF0ZTogICBXZWQgRGVjIDMxIDE2OjIyOjA2IDIwMTQgKzA4MDANCj4gDQo+ICAgICAgIG9w
-ZW5zYWY6IGFkZCByZWNpcGUNCj4gDQo+ICAgICAgIE9wZW5TQUYgaXMgYW4gb3BlbiBzb3VyY2Ug
-aW1wbGVtZW50YXRpb24gb2YgdGhlIFNBRiBBSVMgc3BlY2lmaWNhdGlvbg0KPiANCj4gICAgICAg
-U2lnbmVkLW9mZi1ieTogQmlhbiBOYWltZW5nIDxiaWFubm1AY24uZnVqaXRzdS5jb20+DQo+ICAg
-ICAgIFNpZ25lZC1vZmYtYnk6IE1hcnRpbiBKYW5zYSA8TWFydGluLkphbnNhQGdtYWlsLmNvbT4N
-Cj4gICAgICAgU2lnbmVkLW9mZi1ieTogSm9lIE1hY0RvbmFsZCA8am9lX21hY2RvbmFsZEBtZW50
-b3IuY29tPg0KDQpCaWFuIGhhc24ndCBiZWVuIGFjdGl2ZSBpbiB0aGUgY29tbXVuaXR5IGZvciBv
-dmVyIHNpeCB5ZWFycywgc28gdGhhdCBpcyANCnByb2JhYmx5IGhvcGluZyBmb3IgbXVjaC4NCg0K
-PiA+IEluIHRoZSBlbmQgSSBkaWQgc2VuZCBhIHBhdGNoIHRoYXQgY2hhbmdlcyB0aGUgb3BlbnNh
-ZiByZWNpcGUgdG8gY3JlYXRlDQo+ID4gL3Zhci9sb2cvb3BlbnNhZiBpbiBydW50aW1lLCBieSBj
-b3B5aW5nIHRoZSBzb2x1dGlvbiBmb3Igb25lIG9mIHRoZQ0KPiA+IG90aGVyIHJlY2lwZXMgSSB3
-YXMgZml4aW5nLiBTbyBJIGFtIGluIHRoZSBjbGVhciBmb3IgbXkgY2hhbmdlIHRvDQo+ID4gT0Ut
-Q29yZS4gQnV0IG9wZW5zYWYgaXMgc3RpbGwgYXMgYnJva2VuIGFzIGJlZm9yZSB3aGVuIGl0IGNv
-bWVzIHRvDQo+ID4gYWN0dWFsbHkgc3RhcnRpbmcgdGhlIHNlcnZpY2UuLi4NCj4gDQo+IFRoYW5r
-cyBmb3IgZml4aW5nIHRoZSBidW5jaCBvZiByZWNpcGVzIGZvciB0aGlzLC4gUmVhbGx5IGhlbHBm
-dWwuDQoNCldlbGwsIGl0IHdhcyBteSBjaGFuZ2UgdG8gT0UtQ29yZSB0aGF0IGJyb2tlIHRoZW0s
-IHNvIG9mIGNvdXJzZSBJIHdpbGwgDQpmaXggdGhlbS4NCg0KPiA+ID4gLWFybWluDQo+ID4gPiA+
-DQo+ID4gPiA+IC8vUGV0ZXINCj4gPg0KPiA+IC8vUGV0ZXINCg0KLy9QZXRlcg0KDQo=
+--000000000000ec230c05cfd707e1
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Nov 2, 2021 at 3:35 PM Peter Kjellerstedt <
+peter.kjellerstedt@axis.com> wrote:
+
+> > -----Original Message-----
+> > From: openembedded-devel@lists.openembedded.org <openembedded-
+> > devel@lists.openembedded.org> On Behalf Of Khem Raj
+> > Sent: den 2 november 2021 21:20
+> > To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+> > Cc: akuster808 <akuster808@gmail.com>; OE Development (openembedded-
+> > devel@lists.openembedded.org) <openembedded-devel@lists.openembedded.or=
+g
+> >
+> > Subject: Re: [oe] Is it time to remove opensaf?
+> >
+> > On Tue, Nov 2, 2021 at 1:11 PM Peter Kjellerstedt
+> > <peter.kjellerstedt@axis.com> wrote:
+> > >
+> > > > -----Original Message-----
+> > > > From: akuster808 <akuster808@gmail.com>
+> > > > Sent: den 2 november 2021 20:41
+> > > > To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>; OE Developmen=
+t
+> > > > (openembedded-devel@lists.openembedded.org) <openembedded-
+> > > > devel@lists.openembedded.org>
+> > > > Subject: Re: [oe] Is it time to remove opensaf?
+> > > >
+> > > > Peter,
+> > > >
+> > > > On 11/2/21 9:33 AM, Peter Kjellerstedt wrote:
+> > > > > I am currently working on patches for OE-Core to report QA warnin=
+gs
+> > > > > in case some directories that are expected to be empty have some
+> > > > > files installed into them. As part of the review process, Khem
+> > > > > reported failures for some recipes in OpenEmbedded due to this,
+> > > > > opensaf being one of them.
+> > > > >
+> > > > > Now I have tried to build and run opensaf in a QEMU image, but I
+> > > > > cannot get it to work. The sysvinit initscript relies on
+> > > > > /lib/lsb/init-functions, which AFAICT has not existed since lsb
+> > > > > was removed from OE-Core two years ago, and opensaf has never
+> > > > > depended on lsb in the first place. As for systemd, the service
+> > > > > file uses the same sysvinit scripts so it has the same problem.
+> > > > > And in addition, the script is in /etc/init.d, which
+> > > > > systemd.bbclass removes unless both sysvinit and systemd are
+> > > > > enabled in DISTRO_FEATURES.
+> > > > >
+> > > > > And in addition to this, if I just try to start the opensafd bina=
+ry
+> > > > > it seg faults immediately.
+> > > > >
+> > > > > So all in all, even if opensaf has been updated regularly, it
+> > > > > doesn't seem like anyone is actually using it. Which brings me to
+> > > > > my actual question: should I just send a patch to remove it?
+> > > > >
+> > > > > Alternatively I can fix the creation of the /var/log/opensaf
+> > > > > directory, which was the error Khem saw with my patch for OE-Core
+> > > > > applied, but it seems like wasted work in case no one is actually
+> > > > > using the recipe...
+> > > >
+> > > > Thanks for the analysis. Does the current mechanism to blacklist a
+> > > > recipe help possible finding users of this recipe?  Is your concern
+> > > > carrying this in the next LTS as well?
+> > >
+> > > I guess adding a PNBLACKLIST for it would work too (I have never used
+> > > it, so I did not think off it). My concern was mainly that I had to
+> > > spend time on fixing the recipe to support that /var/volatile is now
+> > > checked for being empty, for a recipe that apparently is broken. So
+> > > if a PNBLACKLIST helps the next person that does changes to the syste=
+m
+> > > from having to care about the broken opensaf recipe, then that is fin=
+e
+> > > with me. ;)
+> >
+> > Generally, I would refrain from excluding recipes via PNBLACKLIST if th=
+ey
+> > can be brought to support whatever improvements we are doing in Core or
+> > other dependencies thats the price of accepting recipes into a layer in
+> > the first place. If its broken such that it can not be fixed then we
+> > should perhaps exclude it.
+>
+> I took a turn down memory lane and checked through the git log for the
+> opensaf recipe. It seems the problem with the service file for systemd
+> relying on files in /etc/init.d was discovered and hacked around in
+> April 2016 and then later broken again in November 2016 because the
+> previous hack was misunderstood... This I can solve properly, and I
+> will send a patch for it (based on top of the series I sent earlier)
+> so that there is at least one less problem.
+>
+> Unfortunately that will not solve the problem that the intscript relies
+> on /lib/lsb/init-functions, which has not existed since the lsb recipe
+> was removed from OE-Core two years ago (though the opensaf recipe has
+> never depended on the lsb recipe even though it should have).
+>
+> I could write a comment in the commit message if you want, stating that
+> my fix for the file in /etc/init.d will not actually make the service
+> file work so that there is at least some track of this information for
+> the next person that comes looking at the recipe.
+
+
+Absolutely that=E2=80=99s fine
+
+>
+>
+> > It was added via below commit, so perhaps Bian could be much better
+> suited to
+> > say if it is still in use or not.
+> >
+> >  commit e18830c2b4323487f9afa5205f13579903c7f9d4
+> >   Author: Bian Naimeng <biannm@cn.fujitsu.com>
+> >   Date:   Wed Dec 31 16:22:06 2014 +0800
+> >
+> >       opensaf: add recipe
+> >
+> >       OpenSAF is an open source implementation of the SAF AIS
+> specification
+> >
+> >       Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+> >       Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> >       Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+>
+> Bian hasn't been active in the community for over six years, so that is
+> probably hoping for much.
+>
+> > > In the end I did send a patch that changes the opensaf recipe to crea=
+te
+> > > /var/log/opensaf in runtime, by copying the solution for one of the
+> > > other recipes I was fixing. So I am in the clear for my change to
+> > > OE-Core. But opensaf is still as broken as before when it comes to
+> > > actually starting the service...
+> >
+> > Thanks for fixing the bunch of recipes for this,. Really helpful.
+>
+> Well, it was my change to OE-Core that broke them, so of course I will
+> fix them.
+>
+> > > > -armin
+> > > > >
+> > > > > //Peter
+> > >
+> > > //Peter
+>
+> //Peter
+>
+>
+
+--000000000000ec230c05cfd707e1
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Tue, Nov 2, 2021 at 3:35 PM Peter Kjellerstedt &lt;<a hr=
+ef=3D"mailto:peter.kjellerstedt@axis.com">peter.kjellerstedt@axis.com</a>&g=
+t; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 =
+.8ex;border-left:1px #ccc solid;padding-left:1ex">&gt; -----Original Messag=
+e-----<br>
+&gt; From: <a href=3D"mailto:openembedded-devel@lists.openembedded.org" tar=
+get=3D"_blank">openembedded-devel@lists.openembedded.org</a> &lt;openembedd=
+ed-<br>
+&gt; <a href=3D"mailto:devel@lists.openembedded.org" target=3D"_blank">deve=
+l@lists.openembedded.org</a>&gt; On Behalf Of Khem Raj<br>
+&gt; Sent: den 2 november 2021 21:20<br>
+&gt; To: Peter Kjellerstedt &lt;<a href=3D"mailto:peter.kjellerstedt@axis.c=
+om" target=3D"_blank">peter.kjellerstedt@axis.com</a>&gt;<br>
+&gt; Cc: akuster808 &lt;<a href=3D"mailto:akuster808@gmail.com" target=3D"_=
+blank">akuster808@gmail.com</a>&gt;; OE Development (openembedded-<br>
+&gt; <a href=3D"mailto:devel@lists.openembedded.org" target=3D"_blank">deve=
+l@lists.openembedded.org</a>) &lt;<a href=3D"mailto:openembedded-devel@list=
+s.openembedded.org" target=3D"_blank">openembedded-devel@lists.openembedded=
+.org</a>&gt;<br>
+&gt; Subject: Re: [oe] Is it time to remove opensaf?<br>
+&gt; <br>
+&gt; On Tue, Nov 2, 2021 at 1:11 PM Peter Kjellerstedt<br>
+&gt; &lt;<a href=3D"mailto:peter.kjellerstedt@axis.com" target=3D"_blank">p=
+eter.kjellerstedt@axis.com</a>&gt; wrote:<br>
+&gt; &gt;<br>
+&gt; &gt; &gt; -----Original Message-----<br>
+&gt; &gt; &gt; From: akuster808 &lt;<a href=3D"mailto:akuster808@gmail.com"=
+ target=3D"_blank">akuster808@gmail.com</a>&gt;<br>
+&gt; &gt; &gt; Sent: den 2 november 2021 20:41<br>
+&gt; &gt; &gt; To: Peter Kjellerstedt &lt;<a href=3D"mailto:peter.kjellerst=
+edt@axis.com" target=3D"_blank">peter.kjellerstedt@axis.com</a>&gt;; OE Dev=
+elopment<br>
+&gt; &gt; &gt; (<a href=3D"mailto:openembedded-devel@lists.openembedded.org=
+" target=3D"_blank">openembedded-devel@lists.openembedded.org</a>) &lt;open=
+embedded-<br>
+&gt; &gt; &gt; <a href=3D"mailto:devel@lists.openembedded.org" target=3D"_b=
+lank">devel@lists.openembedded.org</a>&gt;<br>
+&gt; &gt; &gt; Subject: Re: [oe] Is it time to remove opensaf?<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; Peter,<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; On 11/2/21 9:33 AM, Peter Kjellerstedt wrote:<br>
+&gt; &gt; &gt; &gt; I am currently working on patches for OE-Core to report=
+ QA warnings<br>
+&gt; &gt; &gt; &gt; in case some directories that are expected to be empty =
+have some<br>
+&gt; &gt; &gt; &gt; files installed into them. As part of the review proces=
+s, Khem<br>
+&gt; &gt; &gt; &gt; reported failures for some recipes in OpenEmbedded due =
+to this,<br>
+&gt; &gt; &gt; &gt; opensaf being one of them.<br>
+&gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; Now I have tried to build and run opensaf in a QEMU ima=
+ge, but I<br>
+&gt; &gt; &gt; &gt; cannot get it to work. The sysvinit initscript relies o=
+n<br>
+&gt; &gt; &gt; &gt; /lib/lsb/init-functions, which AFAICT has not existed s=
+ince lsb<br>
+&gt; &gt; &gt; &gt; was removed from OE-Core two years ago, and opensaf has=
+ never<br>
+&gt; &gt; &gt; &gt; depended on lsb in the first place. As for systemd, the=
+ service<br>
+&gt; &gt; &gt; &gt; file uses the same sysvinit scripts so it has the same =
+problem.<br>
+&gt; &gt; &gt; &gt; And in addition, the script is in /etc/init.d, which<br=
+>
+&gt; &gt; &gt; &gt; systemd.bbclass removes unless both sysvinit and system=
+d are<br>
+&gt; &gt; &gt; &gt; enabled in DISTRO_FEATURES.<br>
+&gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; And in addition to this, if I just try to start the ope=
+nsafd binary<br>
+&gt; &gt; &gt; &gt; it seg faults immediately.<br>
+&gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; So all in all, even if opensaf has been updated regular=
+ly, it<br>
+&gt; &gt; &gt; &gt; doesn&#39;t seem like anyone is actually using it. Whic=
+h brings me to<br>
+&gt; &gt; &gt; &gt; my actual question: should I just send a patch to remov=
+e it?<br>
+&gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; Alternatively I can fix the creation of the /var/log/op=
+ensaf<br>
+&gt; &gt; &gt; &gt; directory, which was the error Khem saw with my patch f=
+or OE-Core<br>
+&gt; &gt; &gt; &gt; applied, but it seems like wasted work in case no one i=
+s actually<br>
+&gt; &gt; &gt; &gt; using the recipe...<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; Thanks for the analysis. Does the current mechanism to black=
+list a<br>
+&gt; &gt; &gt; recipe help possible finding users of this recipe?=C2=A0 Is =
+your concern<br>
+&gt; &gt; &gt; carrying this in the next LTS as well?<br>
+&gt; &gt;<br>
+&gt; &gt; I guess adding a PNBLACKLIST for it would work too (I have never =
+used<br>
+&gt; &gt; it, so I did not think off it). My concern was mainly that I had =
+to<br>
+&gt; &gt; spend time on fixing the recipe to support that /var/volatile is =
+now<br>
+&gt; &gt; checked for being empty, for a recipe that apparently is broken. =
+So<br>
+&gt; &gt; if a PNBLACKLIST helps the next person that does changes to the s=
+ystem<br>
+&gt; &gt; from having to care about the broken opensaf recipe, then that is=
+ fine<br>
+&gt; &gt; with me. ;)<br>
+&gt; <br>
+&gt; Generally, I would refrain from excluding recipes via PNBLACKLIST if t=
+hey<br>
+&gt; can be brought to support whatever improvements we are doing in Core o=
+r <br>
+&gt; other dependencies thats the price of accepting recipes into a layer i=
+n <br>
+&gt; the first place. If its broken such that it can not be fixed then we <=
+br>
+&gt; should perhaps exclude it.<br>
+<br>
+I took a turn down memory lane and checked through the git log for the <br>
+opensaf recipe. It seems the problem with the service file for systemd <br>
+relying on files in /etc/init.d was discovered and hacked around in <br>
+April 2016 and then later broken again in November 2016 because the <br>
+previous hack was misunderstood... This I can solve properly, and I <br>
+will send a patch for it (based on top of the series I sent earlier) <br>
+so that there is at least one less problem.<br>
+<br>
+Unfortunately that will not solve the problem that the intscript relies <br=
+>
+on /lib/lsb/init-functions, which has not existed since the lsb recipe <br>
+was removed from OE-Core two years ago (though the opensaf recipe has <br>
+never depended on the lsb recipe even though it should have).<br>
+<br>
+I could write a comment in the commit message if you want, stating that <br=
+>
+my fix for the file in /etc/init.d will not actually make the service <br>
+file work so that there is at least some track of this information for <br>
+the next person that comes looking at the recipe.</blockquote><div dir=3D"a=
+uto"><br></div><div dir=3D"auto">Absolutely that=E2=80=99s fine=C2=A0</div>=
+<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
+x #ccc solid;padding-left:1ex" dir=3D"auto"><br>
+<br>
+&gt; It was added via below commit, so perhaps Bian could be much better su=
+ited to<br>
+&gt; say if it is still in use or not.<br>
+&gt; <br>
+&gt;=C2=A0 commit e18830c2b4323487f9afa5205f13579903c7f9d4<br>
+&gt;=C2=A0 =C2=A0Author: Bian Naimeng &lt;<a href=3D"mailto:biannm@cn.fujit=
+su.com" target=3D"_blank">biannm@cn.fujitsu.com</a>&gt;<br>
+&gt;=C2=A0 =C2=A0Date:=C2=A0 =C2=A0Wed Dec 31 16:22:06 2014 +0800<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0opensaf: add recipe<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0OpenSAF is an open source implementation of =
+the SAF AIS specification<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0Signed-off-by: Bian Naimeng &lt;<a href=3D"m=
+ailto:biannm@cn.fujitsu.com" target=3D"_blank">biannm@cn.fujitsu.com</a>&gt=
+;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0Signed-off-by: Martin Jansa &lt;<a href=3D"m=
+ailto:Martin.Jansa@gmail.com" target=3D"_blank">Martin.Jansa@gmail.com</a>&=
+gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0Signed-off-by: Joe MacDonald &lt;<a href=3D"=
+mailto:joe_macdonald@mentor.com" target=3D"_blank">joe_macdonald@mentor.com=
+</a>&gt;<br>
+<br>
+Bian hasn&#39;t been active in the community for over six years, so that is=
+ <br>
+probably hoping for much.<br>
+<br>
+&gt; &gt; In the end I did send a patch that changes the opensaf recipe to =
+create<br>
+&gt; &gt; /var/log/opensaf in runtime, by copying the solution for one of t=
+he<br>
+&gt; &gt; other recipes I was fixing. So I am in the clear for my change to=
+<br>
+&gt; &gt; OE-Core. But opensaf is still as broken as before when it comes t=
+o<br>
+&gt; &gt; actually starting the service...<br>
+&gt; <br>
+&gt; Thanks for fixing the bunch of recipes for this,. Really helpful.<br>
+<br>
+Well, it was my change to OE-Core that broke them, so of course I will <br>
+fix them.<br>
+<br>
+&gt; &gt; &gt; -armin<br>
+&gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; //Peter<br>
+&gt; &gt;<br>
+&gt; &gt; //Peter<br>
+<br>
+//Peter<br>
+<br>
+</blockquote></div></div>
+
+--000000000000ec230c05cfd707e1--
 
