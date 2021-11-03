@@ -1,85 +1,95 @@
-Return-Path: <douglas.royds@taitradio.com>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C87BFC433F5
-	for <webhook@archiver.kernel.org>; Wed,  3 Nov 2021 01:52:22 +0000 (UTC)
-Received: from smtp0.taitradio.net (smtp0.taitradio.net [202.37.96.22])
- by mx.groups.io with SMTP id smtpd.web12.2042.1635904341492110889
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 93583C433EF
+	for <webhook@archiver.kernel.org>; Wed,  3 Nov 2021 08:38:19 +0000 (UTC)
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com
+ [209.85.208.46])
+ by mx.groups.io with SMTP id smtpd.web12.4846.1635928693206103702
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Nov 2021 18:52:21 -0700
+ Wed, 03 Nov 2021 01:38:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=pass (domain: taitradio.com, ip: 202.37.96.22, mailfrom: douglas.royds@taitradio.com)
-Received: from acheron.taitradio.net (unknown [172.16.169.141])
-	by smtp0.taitradio.net (Postfix) with ESMTP id A440AE04E3;
-	Wed,  3 Nov 2021 14:52:20 +1300 (NZDT)
-From: Douglas Royds <douglas.royds@taitradio.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=LYGg5yYa;
+ spf=pass (domain: gmail.com, ip: 209.85.208.46,
+ mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f46.google.com with SMTP id f4so6302765edx.12
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 03 Nov 2021 01:38:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=BUaOTK/Y6SI+nbNeJsTuHtbPInNpcRnJhJF+gI09XnY=;
+        b=LYGg5yYa0beks0oUP9DVqfsOhVSiidQ3pxcmbSG6p7aY7GcfrOCf3srF6pafNb/QCD
+         PhxZnuY3xihxuPPDCmJXAhc738BwfGlMsfzHlpHFnsqmOjZCKaGXaRcMf4FMoc/8yw5C
+         hTEu7OnJPqrvD29iyDPXqUQd0+R3RJ05l2iytsgpr3VsaqioI9HVnU+e0e6y4XZWT9z1
+         Vu1OK0qGip0PCg5jUOhVQ2uXhjQ2zK/cejWOftMIPwtNhbTNwznCi+yqx+c7rNECTrfd
+         SWgxnJqMiaQ4Vc2d14kqcUUyKxOETExMVXRDV9lqGwdutIu7+vn0qtRLFIdZnhfZS6Xz
+         ez+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=BUaOTK/Y6SI+nbNeJsTuHtbPInNpcRnJhJF+gI09XnY=;
+        b=tCT4UOLlP98VJNLmST+0+0s0H0Q79v8zvzvPz9hy9R8wP6VpfcDRwFIS9qimnni/V5
+         BLEXsgGv+dY19oTYpZnTHMD3HDgPZDD85nH+kLFlKdiyCLw2yCCEvNbrFLHDI3gVarSY
+         w/+mOY/KQIPhSWOqECQ5qBEeFCH71EbIDE7CYnUUbd4/QbblrrRswfbP+UVdaJ2h5P4x
+         CyQK7a7eEUT9kZC6vIZAYXXTywGgA5hhZBqz6+ojsd3eNLaCofsPiY1yc9yTQVVdN+aV
+         y3xNgNUezKa2DHhNxO3pOMwghI4+9bTBwHONveSSY5VQG35/UVKa3TnaN8vKi0jjF8O2
+         dmgQ==
+X-Gm-Message-State: AOAM533H1O9+hOIF7Xovs2LztQWGBslN0FGAGTJq/bzRPAYGolIpgbex
+	mVBmH8VZacuz2lxa53ZuM5Nx/8VfJAw=
+X-Google-Smtp-Source: 
+ ABdhPJyntMYKqR0SKcrEf6mAZLxs85OHpzAoBUFrXhA21YDEOcBn4UUMrk/JHGHox/U8Wv7vGW3tFg==
+X-Received: by 2002:a17:906:58c9:: with SMTP id
+ e9mr12458932ejs.181.1635928691464;
+        Wed, 03 Nov 2021 01:38:11 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id
+ ga1sm761550ejc.100.2021.11.03.01.38.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 03 Nov 2021 01:38:10 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Douglas Royds <douglas.royds@taitradio.com>
-Subject: [meta-virtualization][PATCH] runtime-spec: master branch renamed as
- main
-Date: Wed,  3 Nov 2021 14:52:01 +1300
-Message-Id: <20211103015201.572934-2-douglas.royds@taitradio.com>
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH] python3-prctl: add protocol=https in SRC_URI
+Date: Wed,  3 Nov 2021 09:38:08 +0100
+Message-Id: <20211103083808.237835-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.32.0
-In-Reply-To: <20211103015201.572934-1-douglas.royds@taitradio.com>
-References: <20211103015201.572934-1-douglas.royds@taitradio.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 03 Nov 2021 01:52:22 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Nov 2021 08:38:19 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93798
+ https://lists.openembedded.org/g/openembedded-devel/message/93799
 
-Signed-off-by: Douglas Royds <douglas.royds@taitradio.com>
+* the missing space before \ defeats
+  openembedded-core/scripts/contrib/convert-srcuri.py
+  adjusting this automatically.
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-containers/crun/crun_git.bb                         | 2 +-
- recipes-containers/oci-runtime-spec/oci-runtime-spec_git.bb | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-containers/crun/crun_git.bb b/recipes-containers/cru=
-n/crun_git.bb
-index 68f7f43..7155494 100644
---- a/recipes-containers/crun/crun_git.bb
-+++ b/recipes-containers/crun/crun_git.bb
-@@ -12,7 +12,7 @@ SRCREV_yajl =3D "f344d21280c3e4094919fd318bc5ce75da91fc=
-06"
- SRCREV_FORMAT =3D "crun_rspec"
- SRC_URI =3D "git://github.com/containers/crun.git;branch=3Dmain;name=3Dc=
-run;protocol=3Dhttps \
-            git://github.com/containers/libocispec.git;branch=3Dmain;name=
-=3Dlibocispec;destsuffix=3Dgit/libocispec;protocol=3Dhttps \
--           git://github.com/opencontainers/runtime-spec.git;branch=3Dmas=
-ter;name=3Drspec;destsuffix=3Dgit/libocispec/runtime-spec;protocol=3Dhttp=
-s \
-+           git://github.com/opencontainers/runtime-spec.git;branch=3Dmai=
-n;name=3Drspec;destsuffix=3Dgit/libocispec/runtime-spec;protocol=3Dhttps =
-\
-            git://github.com/opencontainers/image-spec.git;branch=3Dmain;=
-name=3Dispec;destsuffix=3Dgit/libocispec/image-spec;protocol=3Dhttps \
-            git://github.com/containers/yajl.git;branch=3Dmain;name=3Dyaj=
-l;destsuffix=3Dgit/libocispec/yajl;protocol=3Dhttps \
-           "
-diff --git a/recipes-containers/oci-runtime-spec/oci-runtime-spec_git.bb =
-b/recipes-containers/oci-runtime-spec/oci-runtime-spec_git.bb
-index d30868c..5560827 100644
---- a/recipes-containers/oci-runtime-spec/oci-runtime-spec_git.bb
-+++ b/recipes-containers/oci-runtime-spec/oci-runtime-spec_git.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =3D "file://src/${PKG_NAME}/LICENSE;md5=3D=
-b355a61a394a504dacde901c9
- SRCNAME =3D "runtime-spec"
-=20
- PKG_NAME =3D "github.com/opencontainers/${SRCNAME}"
--SRC_URI =3D "git://${PKG_NAME}.git;destsuffix=3Dgit/src/${PKG_NAME};bran=
-ch=3Dmaster"
-+SRC_URI =3D "git://${PKG_NAME}.git;destsuffix=3Dgit/src/${PKG_NAME};bran=
-ch=3Dmain"
-=20
- SRCREV =3D "ab23082b188344f6fbb63a441ea00ffc2852d06d"
- PV =3D "v1.0.2+git${SRCPV}"
---=20
+diff --git a/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
+index b87a470b40..4686fb620c 100644
+--- a/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
++++ b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
+@@ -13,7 +13,7 @@ B = "${S}"
+ SRCREV = "5e12e398eb5c4e30d7b29b02458c76d2cc780700"
+ PV = "1.8.1+git${SRCPV}"
+ 
+-SRC_URI = "git://github.com/seveas/python-prctl;branch=main\
++SRC_URI = "git://github.com/seveas/python-prctl;branch=main;protocol=https \
+            file://0001-support-cross-complication.patch \
+ "
+ inherit setuptools3 python3native
+-- 
 2.32.0
 
 
