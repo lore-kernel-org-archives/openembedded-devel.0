@@ -1,82 +1,90 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1FCAC433EF
-	for <webhook@archiver.kernel.org>; Wed,  3 Nov 2021 12:12:07 +0000 (UTC)
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web12.6536.1635941526658661715
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A445BC433F5
+	for <webhook@archiver.kernel.org>; Wed,  3 Nov 2021 13:23:01 +0000 (UTC)
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com
+ [209.85.210.172])
+ by mx.groups.io with SMTP id smtpd.web11.7422.1635945781190042844
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Nov 2021 05:12:07 -0700
+ Wed, 03 Nov 2021 06:23:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
- for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
- (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=42766 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.93)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1miF7a-0005MY-3D; Wed, 03 Nov 2021 14:12:03 +0200
-From: Leon Anavi <leon.anavi@konsulko.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=IMvGREgg;
+ spf=pass (domain: gmail.com, ip: 209.85.210.172,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f172.google.com with SMTP id g11so2306225pfv.7
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 03 Nov 2021 06:23:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=yM/yhfOECz8wuvQMlUhQ2+aPMQHa+vBxkqb2fPpPQTk=;
+        b=IMvGREggjIlBztkgsALcdFUp/pLPMO4lyYbRlkMJ81/T67mfqtlIirGo3FQnIEWmLw
+         MMOiDGNxf20s4ofXRPE/DgTn1eTgoDDvD1Of7DqGMVxu/68P4psl+DKgE6RVGUYbeHcb
+         +ihQ2sjyHArrcLQz6w7nhYFl89zs9IHOLq1DBzjynMXmO+cum+lSLBl7hCvE6ujblQl+
+         0nSFk9zt+zGBfDMPWCyZVmutwd4ypF/Xg1a+GNxiJwu0WFDtFTK36AcZWNzNOx/eFbb+
+         2jXvxfMVOPrbfdjqG27Ii0TwzTJWd1n28MNnW5osilxAgpCCEnzrWQ2JwfvT7qkAtPOf
+         2Hfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=yM/yhfOECz8wuvQMlUhQ2+aPMQHa+vBxkqb2fPpPQTk=;
+        b=mevAOFwC4+E3pWv12gEb3L14NT7fEEoLHGjF77tagnDaccFRXlDrM24JFhmM6/g07Y
+         mFmktqU/vX3GEEC6pW+eoBDI9TDY0B/3BTcVezevCKy1QyAvPtNSsB37Y4gfvkm7YucV
+         yCULcHxnzx++Hwf9d2Kc+JoZLeRsYBNRYtfNF090k/cxjlPHFENl+L8+xIQmaY7xufLO
+         mB5dUUboEm3yHE82lQlLWdOIgO4rJSA/+ou0jO+aX33W708FwcllJLVY3hF6XzF8y5YO
+         Lgy9Nw8Lu4H+psqOFewCqMqYMKq8o2MF1GoN2yYZ11azJbTHgh4mZOz+llWRdTiAEObE
+         VFag==
+X-Gm-Message-State: AOAM531M/Pzs0RSpZdun5Qq8jlbaqb3O+UqatspOBWnT3YIGFeaDpxy3
+	/CS4qtJJThm9fb1degb0SvXC8U+Vj/M=
+X-Google-Smtp-Source: 
+ ABdhPJxQjIl04uIacC6VxsreicYCLhgnyL9FtyATOPqVNAHM/Ny7fKt0sQgou8wBOEcDbbKf2eWxLg==
+X-Received: by 2002:a63:b64e:: with SMTP id v14mr33317405pgt.56.1635945780340;
+        Wed, 03 Nov 2021 06:23:00 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::f94a])
+        by smtp.gmail.com with ESMTPSA id
+ s3sm2064539pjk.41.2021.11.03.06.22.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 03 Nov 2021 06:22:59 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-aenum: Upgrade 3.1.0 -> 3.1.2
-Date: Wed,  3 Nov 2021 14:11:50 +0200
-Message-Id: <20211103121150.28596-5-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20211103121150.28596-1-leon.anavi@konsulko.com>
-References: <20211103121150.28596-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id:
- leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-prctl: Use https protocol for git
+ fetcher
+Date: Wed,  3 Nov 2021 06:22:57 -0700
+Message-Id: <20211103132257.2215319-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.33.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 03 Nov 2021 12:12:07 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Nov 2021 13:23:01 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93806
+ https://lists.openembedded.org/g/openembedded-devel/message/93807
 
-Upgrade to release 3.1.2:
-
-- fix extend_enum()
-- tests: move enum setting from body to header
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../python/{python3-aenum_3.1.0.bb => python3-aenum_3.1.2.bb}   | 2 +-
+ meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-aenum_3.1.0.bb => python3-aenum_3.1.2.bb} (74%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-aenum_3.1.0.bb b/meta-python/recipes-devtools/python/python3-aenum_3.1.2.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python3-aenum_3.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-aenum_3.1.2.bb
-index 999fd5a3d1..ce58c5ef49 100644
---- a/meta-python/recipes-devtools/python/python3-aenum_3.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-aenum_3.1.2.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/aenum/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://aenum/LICENSE;md5=c6a85477543f8b8591b9c1f82abebbe9"
+diff --git a/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
+index b87a470b40..8426e48113 100644
+--- a/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
++++ b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
+@@ -13,7 +13,7 @@ B = "${S}"
+ SRCREV = "5e12e398eb5c4e30d7b29b02458c76d2cc780700"
+ PV = "1.8.1+git${SRCPV}"
  
--SRC_URI[sha256sum] = "87f0e9ef4f828578ab06af30e4d7944043bf4ecd3f4b7bd1cbe37e2173cde94a"
-+SRC_URI[sha256sum] = "806dd4791298e19daff2cdfe7be3ae6d931d0d03097973f802b3ea55066f62dd"
- 
- inherit pypi setuptools3
- 
+-SRC_URI = "git://github.com/seveas/python-prctl;branch=main\
++SRC_URI = "git://github.com/seveas/python-prctl;protocol=https;branch=main \
+            file://0001-support-cross-complication.patch \
+ "
+ inherit setuptools3 python3native
 -- 
-2.17.1
+2.33.1
 
 
