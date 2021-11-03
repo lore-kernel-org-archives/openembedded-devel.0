@@ -1,95 +1,85 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93583C433EF
-	for <webhook@archiver.kernel.org>; Wed,  3 Nov 2021 08:38:19 +0000 (UTC)
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com
- [209.85.208.46])
- by mx.groups.io with SMTP id smtpd.web12.4846.1635928693206103702
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D2B98C433F5
+	for <webhook@archiver.kernel.org>; Wed,  3 Nov 2021 09:14:06 +0000 (UTC)
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+ by mx.groups.io with SMTP id smtpd.web12.5060.1635930845483529580
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Nov 2021 01:38:13 -0700
+ Wed, 03 Nov 2021 02:14:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=LYGg5yYa;
- spf=pass (domain: gmail.com, ip: 209.85.208.46,
- mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f46.google.com with SMTP id f4so6302765edx.12
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Nov 2021 01:38:12 -0700 (PDT)
+ dkim=fail reason="signature has expired" header.i=@axis.com
+ header.s=axis-central1 header.b=I4UJ4/kd;
+ spf=pass (domain: axis.com, ip: 195.60.68.18,
+ mailfrom: peter.kjellerstedt@axis.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=BUaOTK/Y6SI+nbNeJsTuHtbPInNpcRnJhJF+gI09XnY=;
-        b=LYGg5yYa0beks0oUP9DVqfsOhVSiidQ3pxcmbSG6p7aY7GcfrOCf3srF6pafNb/QCD
-         PhxZnuY3xihxuPPDCmJXAhc738BwfGlMsfzHlpHFnsqmOjZCKaGXaRcMf4FMoc/8yw5C
-         hTEu7OnJPqrvD29iyDPXqUQd0+R3RJ05l2iytsgpr3VsaqioI9HVnU+e0e6y4XZWT9z1
-         Vu1OK0qGip0PCg5jUOhVQ2uXhjQ2zK/cejWOftMIPwtNhbTNwznCi+yqx+c7rNECTrfd
-         SWgxnJqMiaQ4Vc2d14kqcUUyKxOETExMVXRDV9lqGwdutIu7+vn0qtRLFIdZnhfZS6Xz
-         ez+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=BUaOTK/Y6SI+nbNeJsTuHtbPInNpcRnJhJF+gI09XnY=;
-        b=tCT4UOLlP98VJNLmST+0+0s0H0Q79v8zvzvPz9hy9R8wP6VpfcDRwFIS9qimnni/V5
-         BLEXsgGv+dY19oTYpZnTHMD3HDgPZDD85nH+kLFlKdiyCLw2yCCEvNbrFLHDI3gVarSY
-         w/+mOY/KQIPhSWOqECQ5qBEeFCH71EbIDE7CYnUUbd4/QbblrrRswfbP+UVdaJ2h5P4x
-         CyQK7a7eEUT9kZC6vIZAYXXTywGgA5hhZBqz6+ojsd3eNLaCofsPiY1yc9yTQVVdN+aV
-         y3xNgNUezKa2DHhNxO3pOMwghI4+9bTBwHONveSSY5VQG35/UVKa3TnaN8vKi0jjF8O2
-         dmgQ==
-X-Gm-Message-State: AOAM533H1O9+hOIF7Xovs2LztQWGBslN0FGAGTJq/bzRPAYGolIpgbex
-	mVBmH8VZacuz2lxa53ZuM5Nx/8VfJAw=
-X-Google-Smtp-Source: 
- ABdhPJyntMYKqR0SKcrEf6mAZLxs85OHpzAoBUFrXhA21YDEOcBn4UUMrk/JHGHox/U8Wv7vGW3tFg==
-X-Received: by 2002:a17:906:58c9:: with SMTP id
- e9mr12458932ejs.181.1635928691464;
-        Wed, 03 Nov 2021 01:38:11 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id
- ga1sm761550ejc.100.2021.11.03.01.38.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 Nov 2021 01:38:10 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] python3-prctl: add protocol=https in SRC_URI
-Date: Wed,  3 Nov 2021 09:38:08 +0100
-Message-Id: <20211103083808.237835-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.32.0
+  d=axis.com; q=dns/txt; s=axis-central1; t=1635930845;
+  x=1667466845;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=E35oODVGcHDuftM2usMMR4GMqlbpKbF8lKV3heDw8aA=;
+  b=I4UJ4/kd4bcJp0GbyNrm5QrhZu6cYsqMy3/7DKeeHER+NP0XdSd6pgxU
+   n16u2CC9Vnqurp3KA3ZSMbB8RfVMj20KihlnYZQ4yyKKRYYB8F8kVdHvj
+   K3e6+/6SGCeOhbZj2cCzm1NWa3IWpgyQJK7eUARKGE2AYXv24y74SF1Ck
+   j/tTKYILPKLesowx5mjGY81+KIZsK7dAwLK2OyweMNfv3rke2AbWZZNtQ
+   pZxGfslUUq27hQs6SxizXeQ70iIloegvPa1Eyz3VyN0KgWTP5tDHJ7308
+   F/TP3yTh0trpbkrTW+caoAe2sbS/334Ms1O9aNuJKJm7AldsqZ53vFyrp
+   A==;
+From: Peter Kjellerstedt <pkj@axis.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-networking][PATCH] opensaf: Make sure a file needed by
+ opensafd.service is not removed
+Date: Wed, 3 Nov 2021 10:14:00 +0100
+Message-ID: <20211103091400.29239-1-pkj@axis.com>
+X-Mailer: git-send-email 2.21.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 03 Nov 2021 08:38:19 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Nov 2021 09:14:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93799
+ https://lists.openembedded.org/g/openembedded-devel/message/93800
 
-* the missing space before \ defeats
-  openembedded-core/scripts/contrib/convert-srcuri.py
-  adjusting this automatically.
+Rename /etc/init.d/opensafd to /usr/lib/opensaf/opensafd-init as it is
+needed by opensafd.service, but /etc/init.d is removed by
+systemd.bbclass if sysvinit is not in DISTRO_FEATURES.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Note that this will not actually make the initscript and service file
+work since they depend on /lib/lsb/init-functions, which does not exist
+since the lsb recipe was removed from OE-Core.
+
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
- meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
-index b87a470b40..4686fb620c 100644
---- a/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
-@@ -13,7 +13,7 @@ B = "${S}"
- SRCREV = "5e12e398eb5c4e30d7b29b02458c76d2cc780700"
- PV = "1.8.1+git${SRCPV}"
+This should apply on master-next.
+
+ .../recipes-daemons/opensaf/opensaf_5.21.09.bb       | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.21.09.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.21.09.bb
+index 1aacae9a6..c24fccf04 100644
+--- a/meta-networking/recipes-daemons/opensaf/opensaf_5.21.09.bb
++++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.21.09.bb
+@@ -60,10 +60,14 @@ do_install:append() {
+     rmdir "${D}${localstatedir}/log"
+     rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
+     rmdir --ignore-fail-on-non-empty "${D}${datadir}/java"
+-    if [ ! -d "${D}${sysconfdir}/init.d" ]; then
+-        install -d ${D}${sysconfdir}/init.d
+-        install -m 0755 ${B}/osaf/services/infrastructure/nid/scripts/opensafd ${D}${sysconfdir}/init.d/
+-    fi
++
++    # Rename /etc/init.d/opensafd to /usr/lib/opensaf/opensafd-init as it is
++    # needed by opensafd.service, but /etc/init.d is removed by systemd.bbclass
++    # if sysvinit is not in DISTRO_FEATURES.
++    mv ${D}${sysconfdir}/init.d/opensafd ${D}${libdir}/${BPN}/opensafd-init
++    ln -srf ${D}${libdir}/${BPN}/opensafd-init ${D}${sysconfdir}/init.d/opensafd
++    [ ! -f ${D}${systemd_system_unitdir}/opensafd.service ] ||
++        sed -ri -e "s|/etc/init.d/opensafd|${libdir}/${BPN}/opensafd-init|" ${D}${systemd_system_unitdir}/opensafd.service
  
--SRC_URI = "git://github.com/seveas/python-prctl;branch=main\
-+SRC_URI = "git://github.com/seveas/python-prctl;branch=main;protocol=https \
-            file://0001-support-cross-complication.patch \
- "
- inherit setuptools3 python3native
--- 
-2.32.0
-
+     # Create /var/log/opensaf/saflog in runtime.
+     if [ "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}" ]; then
 
