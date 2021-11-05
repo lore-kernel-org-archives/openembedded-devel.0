@@ -1,364 +1,191 @@
-Return-Path: <ross@burtonini.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A6A4C433FE
-	for <webhook@archiver.kernel.org>; Fri,  5 Nov 2021 19:40:57 +0000 (UTC)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web11.10594.1636141255943885725
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DC12C433F5
+	for <webhook@archiver.kernel.org>; Fri,  5 Nov 2021 20:24:37 +0000 (UTC)
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
+ [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.web08.11161.1636143875904002781
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Nov 2021 12:40:56 -0700
+ Fri, 05 Nov 2021 13:24:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1C8A81FB
-	for <openembedded-devel@lists.openembedded.org>;
- Fri,  5 Nov 2021 12:40:55 -0700 (PDT)
-Received: from oss-tx204.lab.cambridge.arm.com
- (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9EF2B3F99C
-	for <openembedded-devel@lists.openembedded.org>;
- Fri,  5 Nov 2021 12:40:54 -0700 (PDT)
-From: Ross Burton <ross.burton@arm.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=X8xJ+4cs;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id
+ y14-20020a17090a2b4e00b001a5824f4918so4120222pjc.4
+        for <openembedded-devel@lists.openembedded.org>;
+ Fri, 05 Nov 2021 13:24:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=V84LEDd4gQWEdc/HbNQJlD8JxJjB3OOcc3sYunMJTHQ=;
+        b=X8xJ+4csXl5qBUZN4BiTtnL7Y34BLum3ctF5PDzhpG71XBWusCRGxmrJq02U5/wHSl
+         UJR24y/QwZCbckQc8Yr92F8GOgYMDqXBYAn88Oap37cFw+srXHFQXqLzFbv4d2XpipUL
+         2VJj2wi7r9xQTZsjd3TNa6VbsEKAQRL1dE/KwuTkpAvsd33+8KwetAUfg5cXh9ZuTNcp
+         dTq3h0dPVlIqVEyAw2Ymhl6Av9j60fv1B2XjtyriK79mpozck68jP3GhmSsMg6tYCXic
+         jz5Ao+5j5ThQSbeht2zPvSBlutYyIZLXK8miGwGskuLDiowVZEJPI80KwpjnVHws5it6
+         /JlA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=V84LEDd4gQWEdc/HbNQJlD8JxJjB3OOcc3sYunMJTHQ=;
+        b=6B3s6DdqkUzQd5NJLxPJtKANuFo0Vn09EzZ5FdeHClga5NR75DdA6Og2/dmK0XTodD
+         //Sq/Oz3KOFCDe0gS4rSHDSGje0WNxiBWCXQPUupi4S+aqooEng7sJNeTOg6/PsJ4a9n
+         sk2pJLUl8DcDN1p20jCWiexlIP/o0nJ902BFHe5onZsZo18i8DnGbZiJ0NoZzE56MhPu
+         XTXBBRza3UUC4oey9W/dpnJDJE6Tm/k8JJ4q60HWisWIidh4mcCfO+cefPnpy+hrbjec
+         hIWnzpSbIjhP0VKneSGCWDW8K+L3CilcRHreMtUoPvUvf1DQ1a/uCKe+X0ncVzUvnGEe
+         gtvg==
+X-Gm-Message-State: AOAM531R/5tzxg9n0jaQcfZbnHbflRXBipe9LXa/v/to/k9ALivZBJaT
+	Mja+R4QXDTGFtaf1lEk6SWnuC5r1UT4=
+X-Google-Smtp-Source: 
+ ABdhPJyadcJypCcWlbJcfpiyR7Je+BbnM91hIRMq0EEr87GM1AbkofWXxhxOHoyorE7K2fL4/QnlFA==
+X-Received: by 2002:a17:90a:e506:: with SMTP id
+ t6mr30811998pjy.9.1636143874781;
+        Fri, 05 Nov 2021 13:24:34 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::f94a])
+        by smtp.gmail.com with ESMTPSA id
+ d15sm8839870pfu.12.2021.11.05.13.24.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 05 Nov 2021 13:24:34 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH v2] fwupd: add new recipe
-Date: Fri,  5 Nov 2021 19:40:52 +0000
-Message-Id: <20211105194052.2934833-1-ross.burton@arm.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>
+Subject: [meta-networking][PATCH] mctp: Fix build with 5.15+ kernel headers
+Date: Fri,  5 Nov 2021 13:24:32 -0700
+Message-Id: <20211105202432.1769846-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.33.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 05 Nov 2021 19:40:57 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 05 Nov 2021 20:24:37 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93849
+ https://lists.openembedded.org/g/openembedded-devel/message/93850
 
-Signed-off-by: Ross Burton <ross.burton@arm.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Bruce Ashfield <bruce.ashfield@gmail.com>
 ---
- meta-oe/recipes-bsp/fwupd/fwupd/no-bash.patch | 141 ++++++++++++++++++
- meta-oe/recipes-bsp/fwupd/fwupd/run-ptest     |   6 +
- meta-oe/recipes-bsp/fwupd/fwupd_1.7.1.bb      | 101 +++++++++++++
- 3 files changed, 248 insertions(+)
- create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd/no-bash.patch
- create mode 100755 meta-oe/recipes-bsp/fwupd/fwupd/run-ptest
- create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd_1.7.1.bb
+ .../0001-build-Adjust-for-kernel-mctp.h.patch | 84 +++++++++++++++++++
+ .../recipes-support/mctp/mctp_git.bb          |  8 +-
+ 2 files changed, 90 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-support/mctp/mctp/0001-build-Adjust-for-kernel-mctp.h.patch
 
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd/no-bash.patch b/meta-oe/reci=
-pes-bsp/fwupd/fwupd/no-bash.patch
+diff --git a/meta-networking/recipes-support/mctp/mctp/0001-build-Adjust-for-kernel-mctp.h.patch b/meta-networking/recipes-support/mctp/mctp/0001-build-Adjust-for-kernel-mctp.h.patch
 new file mode 100644
-index 0000000000..e0f83c4b6c
+index 0000000000..83bf197703
 --- /dev/null
-+++ b/meta-oe/recipes-bsp/fwupd/fwupd/no-bash.patch
-@@ -0,0 +1,141 @@
-+Upstream-Status: Backport [a346c582cc0f34ac6c7c11251919c84553424efb]
-+Signed-off-by: Ross Burton <ross.burton@arm.com>
++++ b/meta-networking/recipes-support/mctp/mctp/0001-build-Adjust-for-kernel-mctp.h.patch
+@@ -0,0 +1,84 @@
++From 653eccc918ef993186c312694c288b2a5b39248e Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 5 Nov 2021 13:14:55 -0700
++Subject: [PATCH] build: Adjust for kernel mctp.h
 +
-+diff --git a/data/installed-tests/fwupd.sh b/data/installed-tests/fwupd.=
-sh
-+index 5b1f5d22..eaa5ec7f 100755
-+--- a/data/installed-tests/fwupd.sh
-++++ b/data/installed-tests/fwupd.sh
-+@@ -1,4 +1,4 @@
-+-#!/bin/bash
-++#!/bin/sh
-+=20
-+ exec 2>&1
-+ dirname=3D`dirname $0`
-+@@ -7,7 +7,7 @@ run_test()
-+ {
-+         if [ -f $dirname/$1 ]; then
-+                 $dirname/$1
-+-                rc=3D$?; if [[ $rc !=3D 0 ]]; then exit $rc; fi
-++                rc=3D$?; if [ $rc !=3D 0 ]; then exit $rc; fi
-+         fi
-+ }
-+=20
-+diff --git a/data/installed-tests/fwupdmgr.sh b/data/installed-tests/fwu=
-pdmgr.sh
-+index e3f7ee31..3d65395e 100755
-+--- a/data/installed-tests/fwupdmgr.sh
-++++ b/data/installed-tests/fwupdmgr.sh
-+@@ -1,4 +1,4 @@
-+-#!/bin/bash
-++#!/bin/sh
-+=20
-+ exec 2>&1
-+ device=3D08d460be0f1f9f128413f816022a6439e0078018
-+@@ -13,47 +13,47 @@ error()
-+ # ---
-+ echo "Getting the list of remotes..."
-+ fwupdmgr get-remotes
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Enabling fwupd-tests remote..."
-+ fwupdmgr enable-remote fwupd-tests
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Update the device hash database..."
-+ fwupdmgr verify-update $device
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Getting devices (should be one)..."
-+ fwupdmgr get-devices --no-unreported-check
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Testing the verification of firmware..."
-+ fwupdmgr verify $device
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Getting updates (should be one)..."
-+ fwupdmgr --no-unreported-check --no-metadata-check get-updates
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Installing test firmware..."
-+ fwupdmgr update $device -y
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Getting updates (should be none)..."
-+ fwupdmgr --no-unreported-check --no-metadata-check get-updates
-+-rc=3D$?; if [[ $rc !=3D 2 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 2 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Testing the verification of firmware (again)..."
-+ fwupdmgr verify $device
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ if [ -z "$CI_NETWORK" ]; then
-+         echo "Skipping remaining tests due to CI_NETWORK not being set"
-+@@ -63,27 +63,27 @@ fi
-+ # ---
-+ echo "Downgrading to older release (requires network access)"
-+ fwupdmgr downgrade $device -y
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Downgrading to older release (should be none)"
-+ fwupdmgr downgrade $device
-+-rc=3D$?; if [[ $rc !=3D 2 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 2 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Updating all devices to latest release (requires network access)"
-+ fwupdmgr --no-unreported-check --no-metadata-check --no-reboot-check up=
-date -y
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Getting updates (should be none)..."
-+ fwupdmgr --no-unreported-check --no-metadata-check get-updates
-+-rc=3D$?; if [[ $rc !=3D 2 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 2 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Refreshing from the LVFS (requires network access)..."
-+ fwupdmgr refresh
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # success!
-+ exit 0
-+diff --git a/plugins/uefi-capsule/fwupd.grub.conf.in b/plugins/uefi-caps=
-ule/fwupd.grub.conf.in
-+index 92bd49a1..9c3a22f2 100755
-+--- a/plugins/uefi-capsule/fwupd.grub.conf.in
-++++ b/plugins/uefi-capsule/fwupd.grub.conf.in
-+@@ -1,4 +1,4 @@
-+-#! /bin/bash
-++#! /bin/sh
-+ # SPDX-License-Identifier: LGPL-2.1+
-+ set -e
-+=20
-+@@ -8,7 +8,7 @@ set -e
-+=20
-+ if [ -f @localstatedir@/lib/fwupd/uefi_capsule.conf ] &&
-+    ls /sys/firmware/efi/efivars/fwupd-*-0abba7dc-e516-4167-bbf5-4d9d1c7=
-39416 1>/dev/null 2>&1; then
-+-      source @localstatedir@/lib/fwupd/uefi_capsule.conf
-++      . @localstatedir@/lib/fwupd/uefi_capsule.conf
-+       if [ "${EFI_PATH}" !=3D "" ] && [ "${ESP}" !=3D "" ]; then
-+       echo "Adding Linux Firmware Updater entry" >&2
-+ cat << EOF
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd/run-ptest b/meta-oe/recipes-=
-bsp/fwupd/fwupd/run-ptest
-new file mode 100755
-index 0000000000..dbc0fc32a2
---- /dev/null
-+++ b/meta-oe/recipes-bsp/fwupd/fwupd/run-ptest
-@@ -0,0 +1,6 @@
-+#! /bin/sh
++Starting 5.15 kernel has mctp.h as well and provides some of the
++defintions, therefore move the ones we need to provide in this header
++outside the conditional check so its always provided regardless of
++header coming from kernel or not.
 +
-+# Don't run all of the fwupd tests, as fwupd/fwupdmgr.test needs a custo=
-m
-+# /etc/fwupd/daemon.conf with DisabledPlugins unset.
++Include linux/if_link.h so it can pre-define IFLA_MCTP_UNSPEC and other
++defines and there is a check for conditionally providing them here but
++kernel does not have such a check, so if linux/if_link.h is included
++after this header then we end up with duplicate defines
 +
-+gnome-desktop-testing-runner fwupd/fwupd.test
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.7.1.bb b/meta-oe/recipes-b=
-sp/fwupd/fwupd_1.7.1.bb
-new file mode 100644
-index 0000000000..697e6b9414
---- /dev/null
-+++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.7.1.bb
-@@ -0,0 +1,101 @@
-+SUMMARY =3D "A simple daemon to allow session software to update firmwar=
-e"
-+LICENSE =3D "LGPL-2.1+"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
-16c"
++linux/if_link.h:1267:2: error: redefinition of enumerator 'IFLA_MCTP_UNSPEC'
++        IFLA_MCTP_UNSPEC,
++        ^
++../git/src/mctp.h:74:2: note: previous definition is here
++        IFLA_MCTP_UNSPEC,
++        ^
 +
-+DEPENDS =3D "glib-2.0 libxmlb json-glib sqlite3 libjcat gcab vala-native=
-"
++Upstream-Status: Submitted [https://github.com/CodeConstruct/mctp/pull/2]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/mctp.h | 21 +++++++++++----------
++ 1 file changed, 11 insertions(+), 10 deletions(-)
 +
-+SRC_URI =3D "https://github.com/${BPN}/${BPN}/releases/download/1.7.1/${=
-BP}.tar.xz \
-+           file://run-ptest \
-+           file://no-bash.patch"
-+SRC_URI[sha256sum] =3D "ae56ceb44b786f21f54d133ac70bc5d9cb8cd4bda0167339=
-c669a228da67fa3c"
++diff --git a/src/mctp.h b/src/mctp.h
++index 4f73def..e602168 100644
++--- a/src/mctp.h
+++++ b/src/mctp.h
++@@ -19,6 +19,7 @@
++ #if HAVE_LINUX_MCTP_H
++ #include <linux/mctp.h>
++ #endif
+++#include <linux/if_link.h>
++ 
++ #ifndef AF_MCTP
++ #define AF_MCTP 45
++@@ -33,10 +34,6 @@
++ 
++ #ifndef MCTP_NET_ANY
++ 
++-#ifndef MAX_ADDR_LEN
++-#define MAX_ADDR_LEN 32
++-#endif
++-
++ typedef uint8_t			mctp_eid_t;
++ 
++ struct mctp_addr {
++@@ -53,6 +50,16 @@ struct sockaddr_mctp {
++ 	uint8_t			__smctp_pad1;
++ };
++ 
+++#define MCTP_NET_ANY 0
+++#define MCTP_ADDR_ANY 0xff
+++#define MCTP_TAG_OWNER 0x08
+++
+++#endif /* MCTP_NET_ANY */
+++
+++#ifndef MAX_ADDR_LEN
+++#define MAX_ADDR_LEN 32
+++#endif
+++
++ struct sockaddr_mctp_ext {
++ 	struct sockaddr_mctp	smctp_base;
++ 	int			smctp_ifindex;
++@@ -61,12 +68,6 @@ struct sockaddr_mctp_ext {
++ 	unsigned char		smctp_haddr[MAX_ADDR_LEN];
++ };
++ 
++-#define MCTP_NET_ANY 0
++-#define MCTP_ADDR_ANY 0xff
++-#define MCTP_TAG_OWNER 0x08
++-
++-#endif /* MCTP_NET_ANY */
++-
++ #ifndef IFLA_MCTP_MAX
++ 
++ /* From if_link.h */
++-- 
++2.33.1
 +
-+UPSTREAM_CHECK_URI =3D "https://github.com/${BPN}/${BPN}/releases"
+diff --git a/meta-networking/recipes-support/mctp/mctp_git.bb b/meta-networking/recipes-support/mctp/mctp_git.bb
+index ebfa84d893..50d84d204d 100644
+--- a/meta-networking/recipes-support/mctp/mctp_git.bb
++++ b/meta-networking/recipes-support/mctp/mctp_git.bb
+@@ -5,9 +5,13 @@ LICENSE = "GPLv2"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=4cc91856b08b094b4f406a29dc61db21"
+ 
+-SRCREV = "a8658290b7914f67146a982671b09f2270ba1654"
++PV = "0.1+git${SRCPV}"
+ 
+-SRC_URI = "git://github.com/CodeConstruct/mctp;branch=main;protocol=https"
++SRCREV = "072bafe725c50329f99cf9d3b2624e8799e8163a"
 +
-+# Machine-specific as we examine MACHINE_FEATURES to decide whether to b=
-uild the UEFI plugins
-+PACKAGE_ARCH =3D "${MACHINE_ARCH}"
-+
-+inherit meson vala gobject-introspection systemd bash-completion pkgconf=
-ig gi-docgen ptest manpages
-+
-+GIDOCGEN_MESON_OPTION =3D 'docs'
-+GIDOCGEN_MESON_ENABLE_FLAG =3D 'docgen'
-+GIDOCGEN_MESON_DISABLE_FLAG =3D 'none'
-+
-+PACKAGECONFIG ??=3D "gnutls gudev gusb curl \
-+                   ${@bb.utils.filter('DISTRO_FEATURES', 'polkit systemd=
-', d)} \
-+                   ${@bb.utils.contains('MACHINE_FEATURES', 'efi', 'plug=
-in_uefi_capsule plugin_uefi_pk', '', d)} \
-+                   ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests plu=
-gin_dummy', '', d)} \
-+                   plugin_altos \
-+                   plugin_amt \
-+                   plugin_emmc \
-+                   plugin_fastboot \
-+                   plugin_flashrom \
-+                   plugin_intel_spi \
-+                   plugin_logitech_bulkcontroller \
-+                   plugin_modem_manager \
-+                   plugin_msr \
-+                   plugin_nvme \
-+                   plugin_parade_lspcon \
-+                   plugin_platform_integrity \
-+                   plugin_realtek_mst \
-+                   plugin_redfish \
-+                   plugin_synaptics_mst \
-+                   plugin_synaptics_rmi \
-+                   plugin_thunderbolt"
-+
-+PACKAGECONFIG[bluez] =3D "-Dbluez=3Dtrue,-Dbluez=3Dfalse"
-+PACKAGECONFIG[consolekit] =3D "-Dconsolekit=3Dtrue,-Dconsolekit=3Dfalse,=
-consolekit"
-+PACKAGECONFIG[curl] =3D "-Dcurl=3Dtrue,-Dcurl=3Dfalse,curl"
-+PACKAGECONFIG[firmware-packager] =3D "-Dfirmware-packager=3Dtrue,-Dfirmw=
-are-packager=3Dfalse"
-+PACKAGECONFIG[gnutls] =3D "-Dgnutls=3Dtrue,-Dgnutls=3Dfalse,gnutls"
-+PACKAGECONFIG[gudev] =3D "-Dgudev=3Dtrue,-Dgudev=3Dfalse,libgudev"
-+PACKAGECONFIG[gusb] =3D "-Dgusb=3Dtrue,-Dgusb=3Dfalse,libgusb"
-+PACKAGECONFIG[libarchive] =3D "-Dlibarchive=3Dtrue,-Dlibarchive=3Dfalse,=
-libarchive"
-+PACKAGECONFIG[lzma] =3D "-Dlzma=3Dtrue,-Dlzma=3Dfalse,xz"
-+PACKAGECONFIG[manpages] =3D "-Dman=3Dtrue,-Dman=3Dfalse"
-+PACKAGECONFIG[polkit] =3D "-Dpolkit=3Dtrue,-Dpolkit=3Dfalse,polkit"
-+PACKAGECONFIG[systemd] =3D "-Dsystemd=3Dtrue,-Dsystemd=3Dfalse,systemd"
-+PACKAGECONFIG[tests] =3D "-Dtests=3Dtrue,-Dtests=3Dfalse,gcab-native"
-+
-+# TODO plugins-all meta-option that expands to all plugin_*?
-+PACKAGECONFIG[plugin_altos] =3D "-Dplugin_altos=3Dtrue,-Dplugin_altos=3D=
-false,elfutils"
-+PACKAGECONFIG[plugin_amt] =3D "-Dplugin_amt=3Dtrue,-Dplugin_amt=3Dfalse"
-+PACKAGECONFIG[plugin_dell] =3D "-Dplugin_dell=3Dtrue,-Dplugin_dell=3Dfal=
-se,libsmbios"
-+PACKAGECONFIG[plugin_dummy] =3D "-Dplugin_dummy=3Dtrue,-Dplugin_dummy=3D=
-false"
-+PACKAGECONFIG[plugin_emmc] =3D "-Dplugin_emmc=3Dtrue,-Dplugin_emmc=3Dfal=
-se"
-+PACKAGECONFIG[plugin_fastboot] =3D "-Dplugin_fastboot=3Dtrue,-Dplugin_fa=
-stboot=3Dfalse"
-+PACKAGECONFIG[plugin_flashrom] =3D "-Dplugin_flashrom=3Dtrue,-Dplugin_fl=
-ashrom=3Dfalse,flashrom"
-+PACKAGECONFIG[plugin_intel_spi] =3D "-Dplugin_intel_spi=3Dtrue,-Dplugin_=
-intel_spi=3Dfalse"
-+PACKAGECONFIG[plugin_logitech_bulkcontroller] =3D "-Dplugin_logitech_bul=
-kcontroller=3Dtrue,-Dplugin_logitech_bulkcontroller=3Dfalse,protobuf-c-na=
-tive protobuf-c"
-+PACKAGECONFIG[plugin_modem_manager] =3D "-Dplugin_modem_manager=3Dtrue,-=
-Dplugin_modem_manager=3Dfalse,libqmi modemmanager"
-+PACKAGECONFIG[plugin_msr] =3D "-Dplugin_msr=3Dtrue,-Dplugin_msr=3Dfalse,=
-cpuid"
-+PACKAGECONFIG[plugin_nvme] =3D "-Dplugin_nvme=3Dtrue,-Dplugin_nvme=3Dfal=
-se"
-+PACKAGECONFIG[plugin_parade_lspcon] =3D "-Dplugin_parade_lspcon=3Dtrue,-=
-Dplugin_parade_lspcon=3Dfalse"
-+PACKAGECONFIG[plugin_platform_integrity] =3D "-Dplugin_platform_integrit=
-y=3Dtrue,-Dplugin_platform_integrity=3Dfalse"
-+PACKAGECONFIG[plugin_realtek_mst] =3D "-Dplugin_realtek_mst=3Dtrue,-Dplu=
-gin_realtek_mst=3Dfalse"
-+PACKAGECONFIG[plugin_redfish] =3D "-Dplugin_redfish=3Dtrue,-Dplugin_redf=
-ish=3Dfalse"
-+PACKAGECONFIG[plugin_synaptics_mst] =3D "-Dplugin_synaptics_mst=3Dtrue,-=
-Dplugin_synaptics_mst=3Dfalse"
-+PACKAGECONFIG[plugin_synaptics_rmi] =3D "-Dplugin_synaptics_rmi=3Dtrue,-=
-Dplugin_synaptics_rmi=3Dfalse"
-+PACKAGECONFIG[plugin_thunderbolt] =3D "-Dplugin_thunderbolt=3Dtrue,-Dplu=
-gin_thunderbolt=3Dfalse"
-+PACKAGECONFIG[plugin_tpm] =3D "-Dplugin_tpm=3Dtrue,-Dplugin_tpm=3Dfalse,=
-tpm2-tss"
-+# Turn off the capsule splash as it needs G-I at buildtime, which isn't =
-currently supported
-+PACKAGECONFIG[plugin_uefi_capsule] =3D "-Dplugin_uefi_capsule=3Dtrue -Dp=
-lugin_uefi_capsule_splash=3Dfalse,-Dplugin_uefi_capsule=3Dfalse,efivar fw=
-upd-efi"
-+PACKAGECONFIG[plugin_uefi_pk] =3D "-Dplugin_uefi_pk=3Dtrue,-Dplugin_uefi=
-_pk=3Dfalse"
-+
-+# Always disable these plugins on non-x86 platforms as they don't compil=
-e
-+DISABLE_NON_X86 =3D "plugin_msr plugin_intel_spi"
-+DISABLE_NON_X86:x86 =3D ""
-+DISABLE_NON_X86:x86-64 =3D ""
-+PACKAGECONFIG:remove =3D "${DISABLE_NON_X86}"
-+
-+FILES:${PN} +=3D "${libdir}/fwupd-plugins-* \
-+                ${systemd_unitdir} \
-+                ${datadir}/fish \
-+                ${datadir}/metainfo \
-+                ${datadir}/icons \
-+                ${datadir}/dbus-1 \
-+                ${datadir}/polkit-1 \
-+                ${nonarch_libdir}/modules-load.d"
-+
-+FILES:${PN}-ptest +=3D "${libexecdir}/installed-tests/ \
-+                      ${datadir}/installed-tests/"
-+RDEPENDS:${PN}-ptest +=3D "gnome-desktop-testing"
---=20
-2.25.1
++SRC_URI = "git://github.com/CodeConstruct/mctp;branch=main;protocol=https \
++           file://0001-build-Adjust-for-kernel-mctp.h.patch \
++          "
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.33.1
 
 
