@@ -1,364 +1,129 @@
-Return-Path: <ross@burtonini.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C204C433EF
-	for <webhook@archiver.kernel.org>; Fri,  5 Nov 2021 16:51:18 +0000 (UTC)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web10.8261.1636131076890430225
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B610BC433F5
+	for <webhook@archiver.kernel.org>; Fri,  5 Nov 2021 18:17:24 +0000 (UTC)
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com
+ [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web08.9502.1636136243337869354
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Nov 2021 09:51:17 -0700
+ Fri, 05 Nov 2021 11:17:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 997432F
-	for <openembedded-devel@lists.openembedded.org>;
- Fri,  5 Nov 2021 09:51:15 -0700 (PDT)
-Received: from oss-tx204.lab.cambridge.arm.com
- (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 28EED3F7F5
-	for <openembedded-devel@lists.openembedded.org>;
- Fri,  5 Nov 2021 09:51:15 -0700 (PDT)
-From: Ross Burton <ross.burton@arm.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=A7kyDTns;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id s136so9036541pgs.4
+        for <openembedded-devel@lists.openembedded.org>;
+ Fri, 05 Nov 2021 11:17:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=pAs24K7faY9+quj5XDUGSEOvR4rCSRSA0qD27Khen0s=;
+        b=A7kyDTnspOYKQgJm0FoEStsWpoM45YJeKO8/rSLOAeO8pVGRUZRsrKcZVxfePlL/ep
+         KZiTfcRva50i+W9HlI3sCQNHOpvoNgXvDvH75C8wSFZxTlj+DrL1wpXpScJz0MIuHMGx
+         VyLFQeDiv7ktHb82mxu+KdVjYr56pU8HHaBbM2l3t9q/K320DWj7PPRAEY8hj3aiGsu8
+         t3f1b+4HRn7LZEuiOuTm2hCdxUyMXM1BYnJJZo3QegYu3FqTGo9s8NaCBwjpj5+iZ7do
+         Fc/Wdk8ljWsqKtzMBVtO7h5j3cPqYY1symkrBxNuU1TZhgNDLEjfbh3FUCYUBjbIr5fl
+         LzDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=pAs24K7faY9+quj5XDUGSEOvR4rCSRSA0qD27Khen0s=;
+        b=Bu6GynOWn21+PJU9mk4y8Fu8WMMVZHQsuA6vph04OpzL3HFtr7U3XRpqbE4+uPE6ql
+         7BkfhuMJd3iEDTWsDHr2PH1oJjrexx2d3yM0PXQxr82Uc1/WMDsKZiVQYdXbNjlbenRv
+         K1ar/T/Sw+wXFwxh2x5sMwDzs1wWJccjGopgEtWbsSm8G2UGkPwnsuyOgKz4z5oAqubs
+         kYSc1Er2GLYdoKdg2fIp64EcY7ay8d+cSp33kLhSLHxUloUikydJH0ahH6y2GldCL3DQ
+         Nysnfuz5isQDOE/If36/e+aRlaps/PooVLsU9/91eEcXTgOwM1WZJl8J+6uRjDHaH5f5
+         WHFQ==
+X-Gm-Message-State: AOAM533gw4i1ptYsmDqODFbGFYvssQ5Nil7C19yjdZGL4mgXVV3xlqel
+	R055km2v0xzkzqk77Y0FuQJFhL3yEGc=
+X-Google-Smtp-Source: 
+ ABdhPJxJN5HkO6o8BXYC0BXE8h0s28dPtd1lX4McAhRl18y0pkBHmU76w7qjUDjXoDs61omkIR6m3Q==
+X-Received: by 2002:a63:fc47:: with SMTP id r7mr1653057pgk.149.1636136242447;
+        Fri, 05 Nov 2021 11:17:22 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::f94a])
+        by smtp.gmail.com with ESMTPSA id
+ b7sm8211219pfm.28.2021.11.05.11.17.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 05 Nov 2021 11:17:22 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] fwupd: add new recipe
-Date: Fri,  5 Nov 2021 16:51:06 +0000
-Message-Id: <20211105165106.3763152-1-ross.burton@arm.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>
+Subject: [meta-oe][PATCH] sdbus-c++-libsystemd: Fix build with kernel 5.15+
+Date: Fri,  5 Nov 2021 11:17:20 -0700
+Message-Id: <20211105181720.1744827-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.33.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 05 Nov 2021 16:51:18 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 05 Nov 2021 18:17:24 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93846
+ https://lists.openembedded.org/g/openembedded-devel/message/93847
 
-Signed-off-by: Ross Burton <ross.burton@arm.com>
+Backport a patch from upstream systemd
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Bruce Ashfield <bruce.ashfield@gmail.com>
 ---
- meta-oe/recipes-bsp/fwupd/fwupd/no-bash.patch | 141 ++++++++++++++++++
- meta-oe/recipes-bsp/fwupd/fwupd/run-ptest     |   6 +
- meta-oe/recipes-bsp/fwupd/fwupd_1.7.1.bb      | 101 +++++++++++++
- 3 files changed, 248 insertions(+)
- create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd/no-bash.patch
- create mode 100755 meta-oe/recipes-bsp/fwupd/fwupd/run-ptest
- create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd_1.7.1.bb
+ ...-linux-Sync-if_arp.h-with-Linux-5.14.patch | 29 +++++++++++++++++++
+ .../sdbus-c++/sdbus-c++-libsystemd_243.bb     |  1 +
+ 2 files changed, 30 insertions(+)
+ create mode 100644 meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd-243/0001-basic-linux-Sync-if_arp.h-with-Linux-5.14.patch
 
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd/no-bash.patch b/meta-oe/reci=
-pes-bsp/fwupd/fwupd/no-bash.patch
+diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd-243/0001-basic-linux-Sync-if_arp.h-with-Linux-5.14.patch b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd-243/0001-basic-linux-Sync-if_arp.h-with-Linux-5.14.patch
 new file mode 100644
-index 0000000000..e0f83c4b6c
+index 0000000000..a251e3e6c2
 --- /dev/null
-+++ b/meta-oe/recipes-bsp/fwupd/fwupd/no-bash.patch
-@@ -0,0 +1,141 @@
-+Upstream-Status: Backport [a346c582cc0f34ac6c7c11251919c84553424efb]
-+Signed-off-by: Ross Burton <ross.burton@arm.com>
++++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd-243/0001-basic-linux-Sync-if_arp.h-with-Linux-5.14.patch
+@@ -0,0 +1,29 @@
++From 4411a9a3ebff98b6fcf5967c75faa458d219df96 Mon Sep 17 00:00:00 2001
++From: Chris Packham <chris.packham@alliedtelesis.co.nz>
++Date: Fri, 10 Sep 2021 09:51:36 +1200
++Subject: [PATCH] basic/linux: Sync if_arp.h with Linux 5.14
 +
-+diff --git a/data/installed-tests/fwupd.sh b/data/installed-tests/fwupd.=
-sh
-+index 5b1f5d22..eaa5ec7f 100755
-+--- a/data/installed-tests/fwupd.sh
-++++ b/data/installed-tests/fwupd.sh
-+@@ -1,4 +1,4 @@
-+-#!/bin/bash
-++#!/bin/sh
-+=20
-+ exec 2>&1
-+ dirname=3D`dirname $0`
-+@@ -7,7 +7,7 @@ run_test()
-+ {
-+         if [ -f $dirname/$1 ]; then
-+                 $dirname/$1
-+-                rc=3D$?; if [[ $rc !=3D 0 ]]; then exit $rc; fi
-++                rc=3D$?; if [ $rc !=3D 0 ]; then exit $rc; fi
-+         fi
-+ }
-+=20
-+diff --git a/data/installed-tests/fwupdmgr.sh b/data/installed-tests/fwu=
-pdmgr.sh
-+index e3f7ee31..3d65395e 100755
-+--- a/data/installed-tests/fwupdmgr.sh
-++++ b/data/installed-tests/fwupdmgr.sh
-+@@ -1,4 +1,4 @@
-+-#!/bin/bash
-++#!/bin/sh
-+=20
-+ exec 2>&1
-+ device=3D08d460be0f1f9f128413f816022a6439e0078018
-+@@ -13,47 +13,47 @@ error()
-+ # ---
-+ echo "Getting the list of remotes..."
-+ fwupdmgr get-remotes
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Enabling fwupd-tests remote..."
-+ fwupdmgr enable-remote fwupd-tests
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Update the device hash database..."
-+ fwupdmgr verify-update $device
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Getting devices (should be one)..."
-+ fwupdmgr get-devices --no-unreported-check
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Testing the verification of firmware..."
-+ fwupdmgr verify $device
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Getting updates (should be one)..."
-+ fwupdmgr --no-unreported-check --no-metadata-check get-updates
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Installing test firmware..."
-+ fwupdmgr update $device -y
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Getting updates (should be none)..."
-+ fwupdmgr --no-unreported-check --no-metadata-check get-updates
-+-rc=3D$?; if [[ $rc !=3D 2 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 2 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Testing the verification of firmware (again)..."
-+ fwupdmgr verify $device
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ if [ -z "$CI_NETWORK" ]; then
-+         echo "Skipping remaining tests due to CI_NETWORK not being set"
-+@@ -63,27 +63,27 @@ fi
-+ # ---
-+ echo "Downgrading to older release (requires network access)"
-+ fwupdmgr downgrade $device -y
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Downgrading to older release (should be none)"
-+ fwupdmgr downgrade $device
-+-rc=3D$?; if [[ $rc !=3D 2 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 2 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Updating all devices to latest release (requires network access)"
-+ fwupdmgr --no-unreported-check --no-metadata-check --no-reboot-check up=
-date -y
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Getting updates (should be none)..."
-+ fwupdmgr --no-unreported-check --no-metadata-check get-updates
-+-rc=3D$?; if [[ $rc !=3D 2 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 2 ]; then error $rc; fi
-+=20
-+ # ---
-+ echo "Refreshing from the LVFS (requires network access)..."
-+ fwupdmgr refresh
-+-rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
-++rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
-+=20
-+ # success!
-+ exit 0
-+diff --git a/plugins/uefi-capsule/fwupd.grub.conf.in b/plugins/uefi-caps=
-ule/fwupd.grub.conf.in
-+index 92bd49a1..9c3a22f2 100755
-+--- a/plugins/uefi-capsule/fwupd.grub.conf.in
-++++ b/plugins/uefi-capsule/fwupd.grub.conf.in
-+@@ -1,4 +1,4 @@
-+-#! /bin/bash
-++#! /bin/sh
-+ # SPDX-License-Identifier: LGPL-2.1+
-+ set -e
-+=20
-+@@ -8,7 +8,7 @@ set -e
-+=20
-+ if [ -f @localstatedir@/lib/fwupd/uefi_capsule.conf ] &&
-+    ls /sys/firmware/efi/efivars/fwupd-*-0abba7dc-e516-4167-bbf5-4d9d1c7=
-39416 1>/dev/null 2>&1; then
-+-      source @localstatedir@/lib/fwupd/uefi_capsule.conf
-++      . @localstatedir@/lib/fwupd/uefi_capsule.conf
-+       if [ "${EFI_PATH}" !=3D "" ] && [ "${ESP}" !=3D "" ]; then
-+       echo "Adding Linux Firmware Updater entry" >&2
-+ cat << EOF
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd/run-ptest b/meta-oe/recipes-=
-bsp/fwupd/fwupd/run-ptest
-new file mode 100755
-index 0000000000..dbc0fc32a2
---- /dev/null
-+++ b/meta-oe/recipes-bsp/fwupd/fwupd/run-ptest
-@@ -0,0 +1,6 @@
-+#! /bin/sh
++ARPHRD_MCTP was added in 5.14. Sync if_arp.h to pick up the definition
 +
-+# Don't run all of the fwupd tests, as fwupd/fwupdmgr.test needs a custo=
-m
-+# /etc/fwupd/daemon.conf with DisabledPlugins unset.
++Fixes #20694
++Upstream-Status: Backport [https://github.com/cpackham-atlnz/systemd/commit/67cd626399b0d02882ee00716c8bd31ba764c862]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/basic/linux/if_arp.h | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+gnome-desktop-testing-runner fwupd/fwupd.test
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.7.1.bb b/meta-oe/recipes-b=
-sp/fwupd/fwupd_1.7.1.bb
-new file mode 100644
-index 0000000000..f034b847a3
---- /dev/null
-+++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.7.1.bb
-@@ -0,0 +1,101 @@
-+SUMMARY =3D "A simple daemon to allow session software to update firmwar=
-e"
-+LICENSE =3D "LGPL-2.1+"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
-16c"
++diff --git a/src/basic/linux/if_arp.h b/src/basic/linux/if_arp.h
++index c3cc5a9e5e..4783af9fe5 100644
++--- a/src/basic/linux/if_arp.h
+++++ b/src/basic/linux/if_arp.h
++@@ -54,6 +54,7 @@
++ #define ARPHRD_X25	271		/* CCITT X.25			*/
++ #define ARPHRD_HWX25	272		/* Boards with X.25 in firmware	*/
++ #define ARPHRD_CAN	280		/* Controller Area Network      */
+++#define ARPHRD_MCTP	290
++ #define ARPHRD_PPP	512
++ #define ARPHRD_CISCO	513		/* Cisco HDLC	 		*/
++ #define ARPHRD_HDLC	ARPHRD_CISCO
++-- 
++2.33.1
 +
-+DEPENDS =3D "glib-2.0 libxmlb json-glib sqlite3 libjcat gcab vala-native=
-"
-+
-+SRC_URI =3D "https://github.com/${BPN}/${BPN}/releases/download/1.7.1/${=
-BP}.tar.xz \
-+           file://run-ptest \
-+           file://no-bash.patch"
-+SRC_URI[sha256sum] =3D "ae56ceb44b786f21f54d133ac70bc5d9cb8cd4bda0167339=
-c669a228da67fa3c"
-+
-+UPSTREAM_CHECK_URI =3D "https://github.com/${BPN}/${BPN}/releases"
-+
-+# Machine-specific as we examine MACHINE_FEATURES to decide whether to b=
-uild the UEFI plugins
-+PACKAGE_ARCH =3D "${MACHINE_ARCH}"
-+
-+inherit meson vala gobject-introspection systemd bash-completion pkgconf=
-ig gi-docgen ptest manpages
-+
-+GIDOCGEN_MESON_OPTION =3D 'docs'
-+GIDOCGEN_MESON_ENABLE_FLAG =3D 'docgen'
-+GIDOCGEN_MESON_DISABLE_FLAG =3D 'none'
-+
-+PACKAGECONFIG ??=3D "gnutls gudev gusb curl \
-+                   ${@bb.utils.filter('DISTRO_FEATURES', 'polkit systemd=
-', d)} \
-+                   ${@bb.utils.contains('MACHINE_FEATURES', 'efi', 'plug=
-in_uefi_capsule plugin_uefi_pk', '', d)} \
-+                   ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests plu=
-gin_dummy', '', d)} \
-+                   plugin_altos \
-+                   plugin_amt \
-+                   plugin_emmc \
-+                   plugin_fastboot \
-+                   plugin_flashrom \
-+                   plugin_intel_spi \
-+                   plugin_logitech_bulkcontroller \
-+                   plugin_modem_manager \
-+                   plugin_msr \
-+                   plugin_nvme \
-+                   plugin_parade_lspcon \
-+                   plugin_platform_integrity \
-+                   plugin_realtek_mst \
-+                   plugin_redfish \
-+                   plugin_synaptics_mst \
-+                   plugin_synaptics_rmi \
-+                   plugin_thunderbolt"
-+
-+PACKAGECONFIG[bluez] =3D "-Dbluez=3Dtrue,-Dbluez=3Dfalse"
-+PACKAGECONFIG[consolekit] =3D "-Dconsolekit=3Dtrue,-Dconsolekit=3Dfalse,=
-consolekit"
-+PACKAGECONFIG[curl] =3D "-Dcurl=3Dtrue,-Dcurl=3Dfalse,curl"
-+PACKAGECONFIG[firmware-packager] =3D "-Dfirmware-packager=3Dtrue,-Dfirmw=
-are-packager=3Dfalse"
-+PACKAGECONFIG[gnutls] =3D "-Dgnutls=3Dtrue,-Dgnutls=3Dfalse,gnutls"
-+PACKAGECONFIG[gudev] =3D "-Dgudev=3Dtrue,-Dgudev=3Dfalse,libgudev"
-+PACKAGECONFIG[gusb] =3D "-Dgusb=3Dtrue,-Dgusb=3Dfalse,libgusb"
-+PACKAGECONFIG[libarchive] =3D "-Dlibarchive=3Dtrue,-Dlibarchive=3Dfalse,=
-libarchive"
-+PACKAGECONFIG[lzma] =3D "-Dlzma=3Dtrue,-Dlzma=3Dfalse,xz"
-+PACKAGECONFIG[manpages] =3D "-Dman=3Dtrue,-Dman=3Dfalse"
-+PACKAGECONFIG[polkit] =3D "-Dpolkit=3Dtrue,-Dpolkit=3Dfalse,polkit"
-+PACKAGECONFIG[systemd] =3D "-Dsystemd=3Dtrue,-Dsystemd=3Dfalse,systemd"
-+PACKAGECONFIG[tests] =3D "-Dtests=3Dtrue,-Dtests=3Dfalse,gcab-native"
-+
-+# TODO plugins-all meta-option that expands to all plugin_*?
-+PACKAGECONFIG[plugin_altos] =3D "-Dplugin_altos=3Dtrue,-Dplugin_altos=3D=
-false,elfutils"
-+PACKAGECONFIG[plugin_amt] =3D "-Dplugin_amt=3Dtrue,-Dplugin_amt=3Dfalse"
-+PACKAGECONFIG[plugin_dell] =3D "-Dplugin_dell=3Dtrue,-Dplugin_dell=3Dfal=
-se,libsmbios"
-+PACKAGECONFIG[plugin_dummy] =3D "-Dplugin_dummy=3Dtrue,-Dplugin_dummy=3D=
-false"
-+PACKAGECONFIG[plugin_emmc] =3D "-Dplugin_emmc=3Dtrue,-Dplugin_emmc=3Dfal=
-se"
-+PACKAGECONFIG[plugin_fastboot] =3D "-Dplugin_fastboot=3Dtrue,-Dplugin_fa=
-stboot=3Dfalse"
-+PACKAGECONFIG[plugin_flashrom] =3D "-Dplugin_flashrom=3Dtrue,-Dplugin_fl=
-ashrom=3Dfalse,flashrom"
-+PACKAGECONFIG[plugin_intel_spi] =3D "-Dplugin_intel_spi=3Dtrue,-Dplugin_=
-intel_spi=3Dfalse"
-+PACKAGECONFIG[plugin_logitech_bulkcontroller] =3D "-Dplugin_logitech_bul=
-kcontroller=3Dtrue,-Dplugin_logitech_bulkcontroller=3Dfalse,protobuf-c-na=
-tive protobuf-c"
-+PACKAGECONFIG[plugin_modem_manager] =3D "-Dplugin_modem_manager=3Dtrue,-=
-Dplugin_modem_manager=3Dfalse,libqmi modemmanager"
-+PACKAGECONFIG[plugin_msr] =3D "-Dplugin_msr=3Dtrue,-Dplugin_msr=3Dfalse,=
-cpuid"
-+PACKAGECONFIG[plugin_nvme] =3D "-Dplugin_nvme=3Dtrue,-Dplugin_nvme=3Dfal=
-se"
-+PACKAGECONFIG[plugin_parade_lspcon] =3D "-Dplugin_parade_lspcon=3Dtrue,-=
-Dplugin_parade_lspcon=3Dfalse"
-+PACKAGECONFIG[plugin_platform_integrity] =3D "-Dplugin_platform_integrit=
-y=3Dtrue,-Dplugin_platform_integrity=3Dfalse"
-+PACKAGECONFIG[plugin_realtek_mst] =3D "-Dplugin_realtek_mst=3Dtrue,-Dplu=
-gin_realtek_mst=3Dfalse"
-+PACKAGECONFIG[plugin_redfish] =3D "-Dplugin_redfish=3Dtrue,-Dplugin_redf=
-ish=3Dfalse"
-+PACKAGECONFIG[plugin_synaptics_mst] =3D "-Dplugin_synaptics_mst=3Dtrue,-=
-Dplugin_synaptics_mst=3Dfalse"
-+PACKAGECONFIG[plugin_synaptics_rmi] =3D "-Dplugin_synaptics_rmi=3Dtrue,-=
-Dplugin_synaptics_rmi=3Dfalse"
-+PACKAGECONFIG[plugin_thunderbolt] =3D "-Dplugin_thunderbolt=3Dtrue,-Dplu=
-gin_thunderbolt=3Dfalse"
-+PACKAGECONFIG[plugin_tpm] =3D "-Dplugin_tpm=3Dtrue,-Dplugin_tpm=3Dfalse,=
-tpm2-tss"
-+# Turn off the capsule splash as it needs G-I at buildtime, which isn't =
-currently supported
-+PACKAGECONFIG[plugin_uefi_capsule] =3D "-Dplugin_uefi_capsule=3Dtrue -Dp=
-lugin_uefi_capsule_splash=3Dfalse,-Dplugin_uefi_capsule=3Dfalse,efivar fw=
-upd-efi"
-+PACKAGECONFIG[plugin_uefi_pk] =3D "-Dplugin_uefi_pk=3Dtrue,-Dplugin_uefi=
-_pk=3Dfalse"
-+
-+# Always disable these plugins on non-x86 platforms as they don't compil=
-e
-+DISABLE_NON_X86 =3D "plugin_msr plugin_intel_spi"
-+DISABLE_NON_X86:x86 =3D ""
-+DISABLE_NON_X86:x86-64 =3D ""
-+PACKAGECONFIG:remove:aarch64 =3D "${DISABLE_NON_X86}"
-+
-+FILES:${PN} +=3D "${libdir}/fwupd-plugins-* \
-+                ${systemd_unitdir} \
-+                ${datadir}/fish \
-+                ${datadir}/metainfo \
-+                ${datadir}/icons \
-+                ${datadir}/dbus-1 \
-+                ${datadir}/polkit-1 \
-+                ${nonarch_libdir}/modules-load.d"
-+
-+FILES:${PN}-ptest +=3D "${libexecdir}/installed-tests/ \
-+                      ${datadir}/installed-tests/"
-+RDEPENDS:${PN}-ptest +=3D "gnome-desktop-testing"
---=20
-2.25.1
+diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_243.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_243.bb
+index a81b57526d..d50681d77b 100644
+--- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_243.bb
++++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_243.bb
+@@ -15,6 +15,7 @@ SRCBRANCH = "v243-stable"
+ SRC_URI = "git://github.com/systemd/systemd-stable.git;protocol=https;branch=${SRCBRANCH} \
+            file://static-libsystemd-pkgconfig.patch \
+            file://7c5fd25119a495009ea62f79e5daec34cc464628.patch \
++           file://0001-basic-linux-Sync-if_arp.h-with-Linux-5.14.patch \
+            "
+ 
+ # patches needed by musl
+-- 
+2.33.1
 
 
