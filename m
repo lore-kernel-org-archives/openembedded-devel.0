@@ -1,100 +1,65 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <ross@burtonini.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 22928C433F5
-	for <webhook@archiver.kernel.org>; Fri,  5 Nov 2021 13:16:11 +0000 (UTC)
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com
- [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.web09.5285.1636118169860825197
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FCE1C433F5
+	for <webhook@archiver.kernel.org>; Fri,  5 Nov 2021 14:33:45 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by mx.groups.io with SMTP id smtpd.web09.6363.1636122824423283092
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Nov 2021 06:16:09 -0700
+ Fri, 05 Nov 2021 07:33:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=QqED5oj8;
- spf=pass (domain: gmail.com, ip: 209.85.214.174,
- mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id s24so11126563plp.0
-        for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Nov 2021 06:16:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=L9dpXRunL6kExB1wxPsMGlQMRu1H+zY3HPi2jckR35c=;
-        b=QqED5oj8rbs0vq7izAdOdCJz2FgwCGe3Mz8OEsklC4T01AzMHJorfq/AOHp6IYbMa/
-         oRoLaeDRGMPs1NyBzmH85RZIdh1s+kdCH1XbTf1V3/xZjQOpg/gabN0KxKEkE2ix1rdp
-         tSlLLvPAmxULahJeIk8kdAMArJPHvfPt/ve5gses5TNECWL8EsfSOOm33hG9prlRJkN1
-         7HDIHBUBubSWbPSWKmcfSVpgCIGy4qt8cUxEeIjFoVN2dkWp08AUVlMEEPaAXuqn+UMe
-         TQunmA/ZrxiiP6kpG+9XojC+PYzMZxNZ8ZVvqAaB54sCQjoaBQEtpyEI1XO2BnttSy6r
-         qx8Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=L9dpXRunL6kExB1wxPsMGlQMRu1H+zY3HPi2jckR35c=;
-        b=imUUjZr3CWNAWLztLcNnH4zGtfv3rXb3zbUEGJHOigpCSpAUvvIm086CYZa3odvUuH
-         LxlMk5jgJ/E0fzq4MKGrt/sazhBAND3xwJdjtO9AHw8/WmGjapObOEw7CmwAKRz3XgdN
-         6zn2kMaF8C2Qtn7zCLmFQHS5IBFSXb2RM6jt7A7v72fhpA7+HcPC14eaPx9wcWln686o
-         Y2wcGjQzQZXg6E9vAnBCwTXmKQg6Jhr7i+xOFBEixVDDhUqV7q3J6rTeHGUH4kTluaO0
-         ZaqwxAUZZv1AR6xWSaPzyrVkfQc31BbxsJ7amHApSJe7U0tivr19rlLruyhUGkU1WxBr
-         AsKg==
-X-Gm-Message-State: AOAM5336A3ZIbiXKJVJJDuSLPwRi1OfpqrGVtjhtdkTC4hnvOb+FAHMW
-	jBBdXfRZXECECpUvP0DBYg6G3vACXUQ=
-X-Google-Smtp-Source: 
- ABdhPJzSrj91Wr8oCvAhJUOBOqsuyea4Q2Tt4CFSsfejoaD8A3MVlJxwAT+0tdmC5BNuThoUQr8RUw==
-X-Received: by 2002:a17:90a:7e82:: with SMTP id
- j2mr30209249pjl.165.1636118169071;
-        Fri, 05 Nov 2021 06:16:09 -0700 (PDT)
-Received: from keaua.hsd1.ca.comcast.net
- ([2601:202:4180:a5c0:1036:3e93:cc4e:1fe7])
-        by smtp.gmail.com with ESMTPSA id
- c85sm7899124pfc.146.2021.11.05.06.16.08
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 05 Nov 2021 06:16:08 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
+ dkim=missing;
+ spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E5CB02F
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri,  5 Nov 2021 07:33:42 -0700 (PDT)
+Received: from oss-tx204.lab.cambridge.arm.com
+ (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 43D223F7F5
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri,  5 Nov 2021 07:33:42 -0700 (PDT)
+From: Ross Burton <ross.burton@arm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [dunfell 08/10] drdb-utils: Define SRCREV_FORMAT
-Date: Fri,  5 Nov 2021 06:15:55 -0700
-Message-Id: 
- <4b8f554f4d19b96700ac76f3174b6f7de90573fb.1636118048.git.akuster808@gmail.com>
+Subject: [PATCH] modemmanager: remove intltool-native DEPENDS
+Date: Fri,  5 Nov 2021 14:33:38 +0000
+Message-Id: <20211105143338.3561229-1-ross.burton@arm.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1636118048.git.akuster808@gmail.com>
-References: <cover.1636118048.git.akuster808@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 05 Nov 2021 13:16:11 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 05 Nov 2021 14:33:45 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93840
+ https://lists.openembedded.org/g/openembedded-devel/message/93843
 
-From: Andreas Weger <weger@hs-mittweida.de>
+The use of intltool was removed in the 1.8.0 release, back in 2018.
 
-Since it uses multiple fetch URIs make it explicit to define SRCREV_FORMAT
-
-Signed-off-by: Andreas Weger <weger@hs-mittweida.de>
-
-Change-Id: Id1d0a1062d09f690123b2a1c06137ae5c04d7b20
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- meta-networking/recipes-support/drbd/drbd-utils_9.12.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../recipes-connectivity/modemmanager/modemmanager_1.16.8.bb    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.12.0.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.12.0.bb
-index 5dabdd51d0..2609362994 100644
---- a/meta-networking/recipes-support/drbd/drbd-utils_9.12.0.bb
-+++ b/meta-networking/recipes-support/drbd/drbd-utils_9.12.0.bb
-@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils \
- # v9.12.0
- SRCREV_drbd-utils = "91629a4cce49ca0d4f917fe0bffa25cfe8db3052"
- SRCREV_drbd-headers = "233006b4d26cf319638be0ef6d16ec7dee287b66"
-+SRCREV_FORMAT = "drbd-utils_drbd-headers"
- 
- S = "${WORKDIR}/git"
- 
--- 
+diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.16.=
+8.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.16.8.bb
+index a97c94e5c3..5aaa55c7af 100644
+--- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.16.8.bb
++++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.16.8.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM =3D " \
+=20
+ inherit gnomebase gettext systemd vala gobject-introspection bash-comple=
+tion
+=20
+-DEPENDS =3D "glib-2.0 libgudev intltool-native libxslt-native"
++DEPENDS =3D "glib-2.0 libgudev libxslt-native"
+=20
+ SRC_URI =3D "http://www.freedesktop.org/software/ModemManager/ModemManag=
+er-${PV}.tar.xz"
+ SRC_URI[sha256sum] =3D "21fdfaf94171261ad9d99771894f5ade4bc39ef3d1ff1d42=
+1054d14713e97880"
+--=20
 2.25.1
 
 
