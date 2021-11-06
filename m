@@ -2,63 +2,62 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 96EFDC433EF
-	for <webhook@archiver.kernel.org>; Sat,  6 Nov 2021 18:17:54 +0000 (UTC)
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com
- [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.web10.22164.1636222673426540692
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A555FC433F5
+	for <webhook@archiver.kernel.org>; Sat,  6 Nov 2021 18:17:56 +0000 (UTC)
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
+ [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.web11.22204.1636222675993149590
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Nov 2021 11:17:53 -0700
+ Sat, 06 Nov 2021 11:17:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=WDgBaxvG;
- spf=pass (domain: gmail.com, ip: 209.85.214.181,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=EcoprPUx;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id f8so13030346plo.12
+Received: by mail-pf1-f180.google.com with SMTP id g19so5985508pfb.8
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Nov 2021 11:17:53 -0700 (PDT)
+ Sat, 06 Nov 2021 11:17:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=f51HeSM540M1QIDhwKNnJUqw05wzi37SIcyUWWiS/5o=;
-        b=WDgBaxvGHM3TknL52g4IjrwqgM9ZsNrprRy0ZU75Hsukn0SPWh68aBwSi57mQiAZNi
-         +tNKRGDp2NjJMfWxF6+3CGI8JNrAyQwKEWpkoQvdm/u4269S3pYpJ3EjcZQd0BfqCMrM
-         sZp7ny8AK0HvToUOBwCpcxxNZZ9XOj0pDTbJARVW351HwA2z+uwJZji0kQuiWM/bkRD4
-         gFTAdhf8qZkwd9IOyt3vU70rNu+1nVD5K3Cc5PMEazeOzUqddSXn6Wnex15CM1J19W6N
-         HqAEHOWqvDdbq/ayMnwpGIxvcGK0F71e8PjPfIJT31mgExe79anBMsPKTukrj5v3JcRR
-         gaSQ==
+        bh=8ma35NZCybT0XTS55PXBoG4dwQWmwe6abPdKxzTdTT8=;
+        b=EcoprPUxuEKpzUXdKczKd3ZL2bIN7Y+Mv0v9EJNzcRLlbsy8IiTGSb+iDhlicGpxEh
+         avXpPhDcEj5o1sNzZcCG5Izw9CffUpthGE0SNgo8qfchol7qxO2Abdukxd53ak75y4/C
+         frkc8u/jkjdrc43pIWeOOfQLUouLjHw3lsuBCG/3e/ZCWDXunNxZxynhBFrZo4GXqLUW
+         xSyYmBO//t3MH0lXBSKOogKNQoLqB3qVC5iWiIRi5DmIlTjh0v9ZQ7JiGgBDpagHQgOP
+         inup+w81hn4ykSLv2JQq0cCgqeMpEDzp/8T4jDwY1SGlqN11pSW3Kzy1xmuIOFqUOU4h
+         fWCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=f51HeSM540M1QIDhwKNnJUqw05wzi37SIcyUWWiS/5o=;
-        b=bMBWc4Zd97r2LjaHpbT5Rs9KmANGKhSNAs2rSgnO2G7altpeD7xA5uKKy3hGC7ewmp
-         e7oBOl6ieZGC5/6Jw2rs9IJEQJl2jXyQ2MWZE6E+VUAt6/VSqUUvzSJ8euuJCbCeHp2n
-         SDkPqG8P2OKV3q4eoYM4zYKUnuDfNnEITY7GRmU4xVP8OUtGw92eb+DwtbUEsVREvZOI
-         0+l7RA0CqaYRHH1Cp1GWq526oI1ipUeNeBi1uXjKBeEkfDuTabfzSbt2CJdVxIXDEDzT
-         /iZhWiux0796CUNA9UCxP5fHonn2wbRQB5GE9DLq0PYJOwQQpZ6BWr0f/SYRl8BiEcxZ
-         uGhg==
-X-Gm-Message-State: AOAM530DCalcr5kA+lxkLGjMEBO3HhbCMaer622pYAx/6GTMH2jXpWZm
-	EpjjgxHMv0FncfFEsrEAwd+jXmV+tfM=
+        bh=8ma35NZCybT0XTS55PXBoG4dwQWmwe6abPdKxzTdTT8=;
+        b=8O6WdXRIByExNXQLCD1j0IN60uSOkYRu2iBv94GbZArl2gaeBKbNZWeFblH1Us2mmj
+         zRsUi2n6LDCiNZt7Xe7nF5TWMIu60g4D03v9tpsnZhW/mWCJrVd1yA6c8SmdmuYEEBey
+         cfaX2LsV1NuzaLHC49AxAX31d3bbE7LgYINJxLgFL6J+iHXG8npAZUrE93vI+hm+lToG
+         R+LjeLwqqcodf2wtq+pTZ3m/3fGjaZ65y1VdNDSYwn4crDjF1J4YBYM77nJDyRZ7hxVU
+         CjXuZd3zYkfUPkyV7KYMod5jmKB9YFHHMnq1fMGBHqpOUoxL9fGoZym+wzWl6g//Vxkp
+         iUFg==
+X-Gm-Message-State: AOAM531lSlujImTKXAzC4zzXXEEH+RYVjoBOQykA10lTNlLe+rNXc9jF
+	oFmE/c4o1kVhe3g263HaB9s8lGCymFg=
 X-Google-Smtp-Source: 
- ABdhPJza65WKgUP21yW7NPGdRqFCUOwpCmUgwQyW/vIbUI8qKfCfG6zLM44R1n89Spvllhuu/2l8hw==
-X-Received: by 2002:a17:90b:4a92:: with SMTP id
- lp18mr18610719pjb.55.1636222672777;
-        Sat, 06 Nov 2021 11:17:52 -0700 (PDT)
+ ABdhPJzUrQbTfLICnPFWAryjvn6jupuM+kraDcbtuXI5ArRyjO/4DS67Y8m0e6DC6Sa+tJ3EisSdBQ==
+X-Received: by 2002:a63:da0a:: with SMTP id
+ c10mr50996178pgh.333.1636222675318;
+        Sat, 06 Nov 2021 11:17:55 -0700 (PDT)
 Received: from keaua.hsd1.ca.comcast.net
  ([2601:202:4180:a5c0:68d9:b431:d568:20cb])
         by smtp.gmail.com with ESMTPSA id
- p23sm12186820pjg.55.2021.11.06.11.17.52
+ p23sm12186820pjg.55.2021.11.06.11.17.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 06 Nov 2021 11:17:52 -0700 (PDT)
+        Sat, 06 Nov 2021 11:17:55 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yi Zhao <yi.zhao@windriver.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][honister][PATCH 2/4] libssh: use https instead of git in
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][honister][PATCH 4/4] python3-kivy: Use branch parameter in
  SRC_URI
-Date: Sat,  6 Nov 2021 11:17:48 -0700
-Message-Id: <20211106181750.869596-2-akuster808@gmail.com>
+Date: Sat,  6 Nov 2021 11:17:50 -0700
+Message-Id: <20211106181750.869596-4-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211106181750.869596-1-akuster808@gmail.com>
 References: <20211106181750.869596-1-akuster808@gmail.com>
@@ -67,41 +66,32 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 06 Nov 2021 18:17:54 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 06 Nov 2021 18:17:56 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93857
+ https://lists.openembedded.org/g/openembedded-devel/message/93858
 
-From: Yi Zhao <yi.zhao@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-Set protocol to https as the git protocol doesn't work for this repo:
-
-$ git clone git://git.libssh.org/projects/libssh.git
-Cloning into 'libssh'...
-fatal: unable to connect to git.libssh.org:
-git.libssh.org[0: 78.46.21.5]: errno=Connection timed out
-git.libssh.org[1: 2a01:4f8:201:2294::2]: errno=Network is unreachable
-
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 2f9851fffbc0a8ba10f9c9d7e4e5d5cee7825697)
+(cherry picked from commit 671f9d7b2d06d3bfa4b3c7d34da9473b05bcf5f4)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/libssh/libssh_0.8.9.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-kivy_2.0.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-index cbda8b7be3..67d3d226fe 100644
---- a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-+++ b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=dabb4958b830e5df11d2b0ed8ea255a0"
+diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.0.0.bb b/meta-python/recipes-devtools/python/python3-kivy_2.0.0.bb
+index bd72beb5d0..7cb8cae9e0 100644
+--- a/meta-python/recipes-devtools/python/python3-kivy_2.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-kivy_2.0.0.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f0c851d60495c7e27225a819e179208a"
+ inherit setuptools3 pkgconfig features_check
  
- DEPENDS = "zlib openssl"
+ SRC_URI = "\
+-    git://github.com/kivy/kivy.git;protocol=https;\
++    git://github.com/kivy/kivy.git;protocol=https;branch=master \
+ "
  
--SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=stable-0.8"
-+SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.8"
- SRCREV = "04685a74df9ce1db1bc116a83a0da78b4f4fa1f8"
- 
- S = "${WORKDIR}/git"
+ # Kivy's setup files only look for GLES libraries for Android, iOS, RPi,
 -- 
 2.25.1
 
