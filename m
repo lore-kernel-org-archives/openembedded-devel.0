@@ -1,76 +1,121 @@
-Return-Path: <marex@denx.de>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C1255C433F5
-	for <webhook@archiver.kernel.org>; Sat,  6 Nov 2021 12:58:47 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by mx.groups.io with SMTP id smtpd.web11.18687.1636203525624762411
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EA96C433EF
+	for <webhook@archiver.kernel.org>; Sat,  6 Nov 2021 15:42:36 +0000 (UTC)
+Received: from smtp2.emailarray.com (smtp2.emailarray.com [69.28.212.198])
+ by mx.groups.io with SMTP id smtpd.web11.20425.1636213355164463497
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Nov 2021 05:58:47 -0700
+ Sat, 06 Nov 2021 08:42:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@denx.de
- header.s=phobos-20191101 header.b=sLoK/L/f;
- spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
-Received: from tr.lan (ip-89-176-112-137.net.upcbroadband.cz [89.176.112.137])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marex@denx.de)
-	by phobos.denx.de (Postfix) with ESMTPSA id 9F44F83305;
-	Sat,  6 Nov 2021 13:58:42 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1636203522;
-	bh=HXR52I+OKA8/UfBdVzNN2/O7vM+uieU7av4VF58ANco=;
-	h=From:To:Cc:Subject:Date:From;
-	b=sLoK/L/f8U6UKkJCHMOrq+wcISugIsH8F2zr30r2MRFWSFQZS0VCpYvQ5e3hcOv5s
-	 yQ4AubylxUVa6+a8IwmCzlWl2GDdmYarTfzgEQMzYRYXQsv7CpEACeE57O4VaGjbzr
-	 AQ1a2HLReD5T4UvWKTmNN6jARq/nlZOCjbxWB9E57DKPgMpSEwfCEZfeiG6V9sA183
-	 k8nSM2oGEXxzQvfvik1/v+BnsznhMFHh2tRjOswBEv3TjwJ0Q6I7balfsJeMdjkGGo
-	 f8ot6ZVVjiWNwzNr+HCY+39lvLl0RqfUttS0bLeX/EGL1tzyQ1yJO1O/EZkP4UCgrv
-	 PyZBgqiWswSEA==
-From: Marek Vasut <marex@denx.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: raj.khem@gmail.com,
-	Marek Vasut <marex@denx.de>
-Subject: [meta-oe][PATCH] libsdl2-ttf: Remove incorrect x11 from
- REQUIRED_DISTRO_FEATURES
-Date: Sat,  6 Nov 2021 13:58:29 +0100
-Message-Id: <20211106125829.13189-1-marex@denx.de>
-X-Mailer: git-send-email 2.33.0
+ dkim=missing;
+ spf=pass (domain: balister.org, ip: 69.28.212.198, mailfrom: philip@balister.org)
+Received: (qmail 3881 invoked by uid 89); 6 Nov 2021 15:42:31 -0000
+Received: from unknown (HELO ?10.8.0.6?)
+ (cGhpbGlwQG9wZW5zZHIuY29tQDczLjI1MS4xMC4xNDM=) (POLARISLOCAL)  
+  by smtp2.emailarray.com with SMTP; 6 Nov 2021 15:42:31 -0000
+Message-ID: <b857de72-1bfa-a15a-b48a-119f8ef1a620@balister.org>
+Date: Sat, 6 Nov 2021 11:42:30 -0400
 MIME-Version: 1.0
-X-Virus-Scanned: clamav-milter 0.103.2 at phobos.denx.de
-X-Virus-Status: Clean
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [oe] Depending on other package's features.
+Content-Language: en-US
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
+ "maxims@google.com" <maxims@google.com>,
+ openembedded-devel <openembedded-devel@lists.openembedded.org>
+References: 
+ <CAFR_W8rkzPWCN9BnHXjZTcu58sBYfGOsOAT-rUyUKB1_k59X4w@mail.gmail.com>
+ <654beb1c1d7d449e8d6f85e427b8f2eb@axis.com>
+From: Philip Balister <philip@balister.org>
+In-Reply-To: <654beb1c1d7d449e8d6f85e427b8f2eb@axis.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 06 Nov 2021 12:58:47 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 06 Nov 2021 15:42:36 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93853
+ https://lists.openembedded.org/g/openembedded-devel/message/93855
 
-The SDL2 TTF library does not depend on X11, only on GL, remove the
-X11 requirement.
+Or even openembedded-architecture
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
- meta-oe/recipes-graphics/libsdl/libsdl2-ttf_2.0.15.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-ttf_2.0.15.bb b/meta=
--oe/recipes-graphics/libsdl/libsdl2-ttf_2.0.15.bb
-index 5787e988d..0fd9916e9 100644
---- a/meta-oe/recipes-graphics/libsdl/libsdl2-ttf_2.0.15.bb
-+++ b/meta-oe/recipes-graphics/libsdl/libsdl2-ttf_2.0.15.bb
-@@ -16,7 +16,7 @@ S =3D "${WORKDIR}/SDL2_ttf-${PV}"
- inherit autotools pkgconfig features_check
-=20
- # links to libGL.so
--REQUIRED_DISTRO_FEATURES +=3D "x11 opengl"
-+REQUIRED_DISTRO_FEATURES +=3D "opengl"
-=20
- do_configure:prepend() {
-     # Removing these files fixes a libtool version mismatch.
---=20
-2.33.0
-
+On 11/5/21 12:33, Peter Kjellerstedt wrote:
+>> -----Original Message-----
+>> From: openembedded-devel@lists.openembedded.org <openembedded-
+>> devel@lists.openembedded.org> On Behalf Of Maxim Sloyko via
+>> lists.openembedded.org
+>> Sent: den 4 november 2021 22:46
+>> To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+>> Subject: [oe] Depending on other package's features.
+> 
+> This type of questions belong on the
+> openembedded-core@lists.openembedded.org mailing list.
+> 
+>>
+>> Hi all,
+>>
+>> The recipe that I'm working on for our system (let's call it A) has a
+>> dependency on a certain feature being enabled in another package (B).
+>> So, in B, we have:
+>>
+>> PACKAGECONFIG[nice-feature] = "..."
+>>
+>> and my recipe (or rather, the tool built by the recipe), needs that
+>> feature to be enabled to work properly. What's worse, is that this is
+>> a runtime dependency, so if somebody just forgets to enable that
+>> feature, the image will build fine, but the tool won't work. I would
+>> like this to be a build time failure.
+>>
+>> My plan is to change recipe A, so that if the "nice-feature" is
+>> enabled, the package will PROVIDE one more thing:
+>>
+>> PROVIDES += "${PN}-nice-feature"
+>>
+>> and in my recipe B, I'll declare this as a dependency:
+>>
+>> RDEPENDS:${PN} += "package-a-nice-feature".
+> 
+> PROVIDES is for build time provides of recipes. You cannot mix it
+> with RDEPENDS:${PN} which is for runtime dependencies for packages.
+> 
+>> Now I'm thinking, wouldn't it be great if package A could specify
+>> extra PROVIDES when the feature is configured? This would be similar
+>> to the way it's done for package's R?DEPENDS:
+>>
+>>       PACKAGECONFIG ??= "f1 f2 f3 ..."
+>>       PACKAGECONFIG[f1] = "\
+>>                            --with-f1, \
+>>                            --without-f1, \
+>>                            build-deps-for-f1, \
+>>                            runtime-deps-for-f1, \
+>>                            runtime-recommends-for-f1, \
+>>                            packageconfig-conflicts-for-f1 \
+>>                            provides-for-f1 \
+>>                            "
+>>
+>> The last line would be a change that I propose. It looks like it would
+>> be relatively easy to implement this in base.bbclass
+>>
+>> What do you think? Will this be useful? Did I miss an existing way to do
+>> this?
+>>
+>> Thanks,
+>>
+>> --
+>> -MS
+> 
+> //Peter
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#93845): https://lists.openembedded.org/g/openembedded-devel/message/93845
+> Mute This Topic: https://lists.openembedded.org/mt/86827516/384425
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [philip@balister.org]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
