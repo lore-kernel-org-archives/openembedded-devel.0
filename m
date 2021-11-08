@@ -2,12 +2,12 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BD6BBC4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C0117C433F5
 	for <webhook@archiver.kernel.org>; Mon,  8 Nov 2021 10:42:46 +0000 (UTC)
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.43304.1636368165518468228
+ by mx.groups.io with SMTP id smtpd.web12.43062.1636368165969819299
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Nov 2021 02:42:45 -0800
+ Mon, 08 Nov 2021 02:42:46 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=permerror,
@@ -19,17 +19,17 @@ Received: from [78.130.197.211] (port=36832 helo=localhost.localdomain)
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mk26p-0005f5-Kc; Mon, 08 Nov 2021 12:42:40 +0200
+	id 1mk26r-0005f5-M6; Mon, 08 Nov 2021 12:42:42 +0200
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/5] python3-pytz-deprecation-shim: Add recipe
-Date: Mon,  8 Nov 2021 12:42:33 +0200
-Message-Id: <20211108104235.24727-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-soupsieve: Upgrade 2.2.1 -> 2.3
+Date: Mon,  8 Nov 2021 12:42:35 +0200
+Message-Id: <20211108104235.24727-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20211108104235.24727-1-leon.anavi@konsulko.com>
 References: <20211108104235.24727-1-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-1.0
+X-OutGoing-Spam-Status: No, score=-0.5
 X-AntiAbuse: This header was added to track abuse,
  please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -47,41 +47,59 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 08 Nov 2021 10:42:46 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93872
+ https://lists.openembedded.org/g/openembedded-devel/message/93873
 
-Add release 0.1.0.post0:
+Upgrade to release 2.3:
 
-- Fixes the project_urls metadata to point to the correct bug
-  tracker and documentation.
+- Officially support Python 3.10.
+- Add static typing.
+- :has(), :is(), and :where() now use use a forgiving selector
+  list. While not as forgiving as CSS might be, it will forgive
+  such things as empty sets and empty slots due to multiple
+  consecutive commas, leading commas, or trailing commas.
+  Essentially, these pseudo-classes will match all non-empty
+  selectors and ignore empty ones. As the scraping environment
+  is different than a browser environment, it was chosen not to
+  aggressively forgive bad syntax and invalid features to ensure
+  the user is alerted that their program may not perform as
+  expected.
+- Add support to output a pretty print format of a compiled
+  SelectorList for debug purposes.
+- Some small corner cases discovered with static typing.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python3-pytz-deprecation-shim_0.1.0.post0.bb | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pytz-deprecation-shim_0.1.0.post0.bb
+ ...{python3-soupsieve_2.2.1.bb => python3-soupsieve_2.3.bb} | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-soupsieve_2.2.1.bb => python3-soupsieve_2.3.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pytz-deprecation-shim_0.1.0.post0.bb b/meta-python/recipes-devtools/python/python3-pytz-deprecation-shim_0.1.0.post0.bb
-new file mode 100644
-index 0000000000..76487c830f
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pytz-deprecation-shim_0.1.0.post0.bb
-@@ -0,0 +1,16 @@
-+SUMMARY = "Shims to help you safely remove pytz"
-+HOMEPAGE = "https://github.com/pganssle/pytz-deprecation-shim"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=fca9fd5c15a28eb874ba38577a585d48"
+diff --git a/meta-python/recipes-devtools/python/python3-soupsieve_2.2.1.bb b/meta-python/recipes-devtools/python/python3-soupsieve_2.3.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-soupsieve_2.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-soupsieve_2.3.bb
+index a656af6246..3e0e6f0ee1 100644
+--- a/meta-python/recipes-devtools/python/python3-soupsieve_2.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-soupsieve_2.3.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/facelessuser/soupsieve"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=33c3a77def9b3ad83e01c65bdcc1af67"
+ 
+-SRC_URI[sha256sum] = "052774848f448cf19c7e959adf5566904d525f33a3f8b6ba6f6f8f26ec7de0cc"
++SRC_URI[sha256sum] = "e4860f889dfa88774c07da0b276b70c073b6470fa1a4a8350800bb7bce3dcc76"
+ 
+ inherit pypi setuptools3 ptest
+ 
+@@ -12,6 +12,10 @@ SRC_URI += " \
+         file://run-ptest \
+ "
+ 
++RDEPENDS:${PN} += "\
++        ${PYTHON_PN}-beautifulsoup4 \
++"
 +
-+SRC_URI[sha256sum] = "af097bae1b616dde5c5744441e2ddc69e74dfdcb0c263129610d85b87445a59d"
-+
-+PYPI_PACKAGE = "pytz_deprecation_shim"
-+PYPI_SRC_URI = "https://files.pythonhosted.org/packages/94/f0/909f94fea74759654390a3e1a9e4e185b6cd9aa810e533e3586f39da3097/${PYPI_PACKAGE}-${PV}.tar.gz"
-+
-+inherit pypi setuptools3
-+
-+do_compile:prepend() {
-+	echo "from setuptools import setup" > ${S}/setup.py
-+	echo "setup()" >> ${S}/setup.py
-+}
+ RDEPENDS:${PN}-ptest += " \
+         ${PYTHON_PN}-pytest \
+         ${PYTHON_PN}-beautifulsoup4 \
 -- 
 2.17.1
 
