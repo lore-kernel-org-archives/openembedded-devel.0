@@ -1,150 +1,94 @@
-Return-Path: <ross@burtonini.com>
+Return-Path: <alexanderhaas.expleo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 74FD0C433F5
-	for <webhook@archiver.kernel.org>; Mon,  8 Nov 2021 16:59:35 +0000 (UTC)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web08.1108.1636390774182633129
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB877C433F5
+	for <webhook@archiver.kernel.org>; Tue,  9 Nov 2021 10:28:02 +0000 (UTC)
+Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com
+ [209.85.208.68])
+ by mx.groups.io with SMTP id smtpd.web08.10403.1636453682086773253
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Nov 2021 08:59:34 -0800
+ Tue, 09 Nov 2021 02:28:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A0593101E
-	for <openembedded-devel@lists.openembedded.org>;
- Mon,  8 Nov 2021 08:59:32 -0800 (PST)
-Received: from oss-tx204.lab.cambridge.arm.com
- (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4AEF83F800
-	for <openembedded-devel@lists.openembedded.org>;
- Mon,  8 Nov 2021 08:59:32 -0800 (PST)
-From: Ross Burton <ross.burton@arm.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=AdMK8076;
+ spf=pass (domain: gmail.com, ip: 209.85.208.68,
+ mailfrom: alexanderhaas.expleo@gmail.com)
+Received: by mail-ed1-f68.google.com with SMTP id g14so74024424edz.2
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 09 Nov 2021 02:28:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=JL+KcjK2XTGXODvCLf75gyRCmP4Tp1wQEjP7GdgsXss=;
+        b=AdMK8076v8g9rfvmb0F0H2o5/mIbZmz7gfFKOGwUcNfgEBIF9NSh9kRZtjAyLja7gB
+         Qp+LsCAwEGRf/7h2nJwm8kWexrhPehFaxvHb0kPIn+yamPUsvtmbKcnFEkcceSDCgegE
+         X5nF9LgOPSdZabz3WhdcrJpy/sfLHKSyoCBo+SQlQE3hp4KPWl50gg4j5NTMNZ1Q/YSN
+         9TAmk1L4WCvEVA52dkKKn+7BNnX5zi9mnOJqUBg9jKRJxtI84i0buvxNWeMzG8j5AhHN
+         x6tHZ64XuK1Q2Ywt6O4jcvTUOP9+Hi7zquZE7icEPb6lrxjCnxBGw5uYCUBys65Jp1P4
+         4OYg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=JL+KcjK2XTGXODvCLf75gyRCmP4Tp1wQEjP7GdgsXss=;
+        b=dLo4Y6bALTHLRy9fvXiZoqkxzox/BfmQPlgsHEqNKY9LQGGvTTqbZN3c96cSgjad2O
+         hQrEbN7xsDNgCWNwCDwu0SZdB56ItqPZ1bjo3Ax9z6PelipIKR0BRGOG0YmkubAWReix
+         xIN1gnDyfuDJFheKIDgJVE7Yx85/6oI996VosEq32o8K2VlGuZWyoc3C8plAN7m+Rk2V
+         MBoLw8vpM+J3D5Y6S8n80aRs95G8n0BJBdQkzKaVeClRF/MxkfJtBLvrtqlamPwV7wGt
+         QP/r9HX8FM/4RFdUvgQ8LDZj91elkgehtM6kqxgqEOPpDtMzEJbGd8ctW3+WG+6uvksz
+         9k5Q==
+X-Gm-Message-State: AOAM530nnaKev9fe9jtzPYPIdTzOctejpAI6n89LzLI4N4ayBUsvQPWb
+	oD2XH9AXlamSk/4VAs/NHBKn4bAGy1K+HQ==
+X-Google-Smtp-Source: 
+ ABdhPJzm04M8yHomGrM+C6Fnm97uZVd43c2soNHz2pvoPpGexHQbRI9D7EIBmmhUyXGp+RC2635xJg==
+X-Received: by 2002:a05:6402:254f:: with SMTP id
+ l15mr8456385edb.296.1636453680345;
+        Tue, 09 Nov 2021 02:28:00 -0800 (PST)
+Received: from alex-rrp.fritz.box
+ (dslb-084-063-170-065.084.063.pools.vodafone-ip.de. [84.63.170.65])
+        by smtp.gmail.com with ESMTPSA id
+ q8sm5014634edd.26.2021.11.09.02.27.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 09 Nov 2021 02:27:59 -0800 (PST)
+From: Alexander Haas <alexanderhaas.expleo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] python3-cryptography: backport patches to make this work
- against OpenSSL 3
-Date: Mon,  8 Nov 2021 16:59:30 +0000
-Message-Id: <20211108165930.3616227-1-ross.burton@arm.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Alexander Haas <alexanderhaas.expleo@gmail.com>
+Subject: [meta-python][dunfell][PATCH] python3-fasteners: fix RDEPENDS
+Date: Tue,  9 Nov 2021 11:27:57 +0100
+Message-Id: <20211109102757.16992-1-alexanderhaas.expleo@gmail.com>
+X-Mailer: git-send-email 2.33.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 08 Nov 2021 16:59:35 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 Nov 2021 10:28:02 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93879
+ https://lists.openembedded.org/g/openembedded-devel/message/93880
 
-Backport just enough changes that python3-cryptography doesn't crash on
-startup when linked against OpenSSL 3.
+this fixes the parsing error for python3-fasteners_0.16.3 that resulted
+from a colon after RDEPENDS
 
-This is very much not complete, and the upgrade to the latest version of
-python3-crytography has to happen soon.
-
-Signed-off-by: Ross Burton <ross.burton@arm.com>
+Signed-off-by: Alexander Haas <alexanderhaas.expleo@gmail.com>
 ---
- .../python3-cryptography/openssl3.patch       | 62 +++++++++++++++++++
- .../python/python3-cryptography_3.3.2.bb      |  1 +
- 2 files changed, 63 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-cryptogra=
-phy/openssl3.patch
+ meta-python/recipes-devtools/python/python3-fasteners_0.16.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cryptography/ope=
-nssl3.patch b/meta-python/recipes-devtools/python/python3-cryptography/op=
-enssl3.patch
-new file mode 100644
-index 0000000000..25baa42cc9
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-cryptography/openssl3.p=
-atch
-@@ -0,0 +1,62 @@
-+Encourage our old python3-cryptography to at least start to work with Op=
-enSSL 3.
-+
-+- Backport one patch to err.py to remove a symbol which has been removed=
- in
-+  OpenSSL 3, and isn't used in python3-cryptography.
-+  (50ec692749b7e2e62685b443f5e629627b03987e)
-+
-+- Backport the detection of OpenSSL 3 and don't link to FIPS_mode/FIPS_m=
-ode_set
-+  (parts of f08a7de651f9e6475c8c0a67d2a61ed8b669ddf6)
-+
-+This is *not* a complete backport of the 3.0 support, but is enough that=
- packages
-+such as imgtool can import python3-cryptography and operate until the up=
-grade is
-+ready.
-+
-+Upstream-Status: Inappropriate
-+Signed-off-by: Ross Burton <ross.burton@arm.com>
-+
-+diff --git a/src/_cffi_src/openssl/cryptography.py b/src/_cffi_src/opens=
-sl/cryptography.py
-+index f24bee5a..920a86de 100644
-+--- a/src/_cffi_src/openssl/cryptography.py
-++++ b/src/_cffi_src/openssl/cryptography.py
-+@@ -35,6 +35,8 @@ INCLUDES =3D """
-+=20
-+ #define CRYPTOGRAPHY_OPENSSL_110F_OR_GREATER \
-+     (OPENSSL_VERSION_NUMBER >=3D 0x1010006f && !CRYPTOGRAPHY_IS_LIBRESS=
-L)
-++#define CRYPTOGRAPHY_OPENSSL_300_OR_GREATER \
-++    (OPENSSL_VERSION_NUMBER >=3D 0x30000000 && !CRYPTOGRAPHY_IS_LIBRESS=
-L)
-+=20
-+ #define CRYPTOGRAPHY_OPENSSL_LESS_THAN_110J \
-+     (OPENSSL_VERSION_NUMBER < 0x101000af || CRYPTOGRAPHY_IS_LIBRESSL)
-+@@ -54,6 +56,7 @@ INCLUDES =3D """
-+=20
-+ TYPES =3D """
-+ static const int CRYPTOGRAPHY_OPENSSL_110F_OR_GREATER;
-++static const int CRYPTOGRAPHY_OPENSSL_300_OR_GREATER;
-+=20
-+ static const int CRYPTOGRAPHY_OPENSSL_LESS_THAN_111;
-+ static const int CRYPTOGRAPHY_OPENSSL_LESS_THAN_111B;
-+diff --git a/src/_cffi_src/openssl/err.py b/src/_cffi_src/openssl/err.py
-+index 0dd74146..42bab4d9 100644
-+--- a/src/_cffi_src/openssl/err.py
-++++ b/src/_cffi_src/openssl/err.py
-+@@ -40,7 +40,6 @@ void ERR_clear_error(void);
-+ void ERR_put_error(int, int, int, const char *, int);
-+=20
-+ int ERR_GET_LIB(unsigned long);
-+-int ERR_GET_FUNC(unsigned long);
-+ int ERR_GET_REASON(unsigned long);
-+=20
-+ """
-+diff --git a/src/_cffi_src/openssl/fips.py b/src/_cffi_src/openssl/fips.=
-py
-+index c92bca49..38bfa231 100644
-+--- a/src/_cffi_src/openssl/fips.py
-++++ b/src/_cffi_src/openssl/fips.py
-+@@ -18,7 +18,7 @@ int FIPS_mode(void);
-+ """
-+=20
-+ CUSTOMIZATIONS =3D """
-+-#if CRYPTOGRAPHY_IS_LIBRESSL
-++#if CRYPTOGRAPHY_IS_LIBRESSL || CRYPTOGRAPHY_OPENSSL_300_OR_GREATER
-+ static const long Cryptography_HAS_FIPS =3D 0;
-+ int (*FIPS_mode_set)(int) =3D NULL;
-+ int (*FIPS_mode)(void) =3D NULL;
-diff --git a/meta-python/recipes-devtools/python/python3-cryptography_3.3=
-.2.bb b/meta-python/recipes-devtools/python/python3-cryptography_3.3.2.bb
-index baec105a3e..8808b81625 100644
---- a/meta-python/recipes-devtools/python/python3-cryptography_3.3.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-cryptography_3.3.2.bb
-@@ -11,6 +11,7 @@ SRC_URI[sha256sum] =3D "5a60d3780149e13b7a6ff7ad6526b38=
-846354d11a15e21068e57073e29
- SRC_URI +=3D " \
-     file://run-ptest \
-     file://h-test.patch \
-+    file://openssl3.patch \
- "
-=20
+diff --git a/meta-python/recipes-devtools/python/python3-fasteners_0.16.3.bb b/meta-python/recipes-devtools/python/python3-fasteners_0.16.3.bb
+index 1ba2c6f20..7ebaa4590 100644
+--- a/meta-python/recipes-devtools/python/python3-fasteners_0.16.3.bb
++++ b/meta-python/recipes-devtools/python/python3-fasteners_0.16.3.bb
+@@ -8,7 +8,7 @@ SRC_URI[sha256sum] = "b1ab4e5adfbc28681ce44b3024421c4f567e705cc3963c732bf1cba334
+ 
  inherit pypi setuptools3
---=20
-2.25.1
+ 
+-RDEPENDS:${PN} += "\
++RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-logging \
+     ${PYTHON_PN}-fcntl \
+ "
+-- 
+2.33.1
 
 
