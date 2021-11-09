@@ -1,173 +1,369 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <ross@burtonini.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2D65C433EF
-	for <webhook@archiver.kernel.org>; Tue,  9 Nov 2021 15:45:12 +0000 (UTC)
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com
- [195.245.230.3])
- by mx.groups.io with SMTP id smtpd.web09.13827.1636472711667980322
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6182FC433F5
+	for <webhook@archiver.kernel.org>; Tue,  9 Nov 2021 16:48:02 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
+ [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.web11.14673.1636476481345667070
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Nov 2021 07:45:12 -0800
+ Tue, 09 Nov 2021 08:48:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=XpcVaUFN;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.3,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1636472709; i=@fujitsu.com;
-	bh=gqVM80GyipRkMP6ArZPh59aM0oex/98PHGz8xAJTrpY=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=XpcVaUFNTqudGbVbE3AEW61aat6V60IABX3XKe7vEVcJnT4diljhR3J0rQBLTyx38
-	 esnHOX4XcDlGPZZByDsBVCTImX9+PYExve5ChHaiwZrxebJmDImKPjlbsHwbzlm5RN
-	 ckJrutG1r0DjaSfy1x+NAFz75/+yijMYe66YxjkPBNCUwv4tDME4MtgGVOL6OsN2xb
-	 Pso7qz36eFuvkWght1jxR7Sm8//lSmFeNasF29ywj9hv1alDQDkUQf/wNZCW5Y7uie
-	 U/HEjc1hR6eSGb2c6McjySRaTYmO88OmXp7OysctwzxoDprcP2eMdn2RMkpMortfU0
-	 6QuWw3YTF6tkg==
-Received: from [100.112.195.206] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-a.eu-west-1.aws.symcld.net id 87/4C-05531-5879A816;
- Tue, 09 Nov 2021 15:45:09 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrPIsWRWlGSWpSXmKPExsViZ8ORqNs6vSv
-  RYNpGTouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWP182eMBSelK37fvMPawPhPvIuRi0NI4Amj
-  xOoFc1kgnAtMEls3fgFyOIGc44wSR2fzgdhsAmoS02/dYAWxRQT0JZbO3sMMYjMLqEi8+N3DD
-  mILC1hKnFz9Acjm4GABir/56QUS5hVwkrhy7AsTiC0hoCAx5eF7Zoi4oMTJmU9YIMZISBx88Y
-  IZokZRYvblZhYIu0Ji1qw2qF41iavnNjFPYOSfhaR9FpL2BYxMqxgtkooy0zNKchMzc3QNDQx
-  0DQ2NdA0tgdjYVC+xSjdRL7VUtzy1uETXUC+xvFivuDI3OSdFLy+1ZBMjMBxTCg6072B89PqD
-  3iFGSQ4mJVHef11diUJ8SfkplRmJxRnxRaU5qcWHGGU4OJQkeFdNBcoJFqWmp1akZeYAYwMmL
-  cHBoyTCe3kKUJq3uCAxtzgzHSJ1ilFRSpzXGKRPACSRUZoH1waLx0uMslLCvIwMDAxCPAWpRb
-  mZJajyrxjFORiVhHmlQKbwZOaVwE1/BbSYCWjxwS/tIItLEhFSUg1MjW8XXn2/2X1a3OYZgX/
-  /Wjw4ObW6N/5eUrJn46Np37R7Dh+QjPOYucbpZOtHebbyq3oiieeCGKYk1a37onZ0Sm7iAl6v
-  redPxPD83vpE6pBypIDFDfHlVz75XWwK9e64n6sdXBEo+yL9SO1sjhbGjNfTp7uo75zje1v7o
-  qjGX6Urhkc5ykybj05cLqK9bFpHxn0J5teJRm1fBDepWr3K7tlSX6N++ft0tu7NNWqNv5m3NB
-  YzXdzKJVis8c2srk+E476llfjNXW9fBsnNOv7aYsUv1o1Pzd+JLflTPI1LQGG693XfZ/aH2jQ
-  aNSwUzs574rl32v0puzq2txu6dJ3pbNt57Pur4791djJXsgYyKbEUZyQaajEXFScCAE96JINC
-  AwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-17.tower-265.messagelabs.com!1636472708!14960!1
-X-Originating-IP: [62.60.8.97]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.5; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 4140 invoked from network); 9 Nov 2021 15:45:09 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-17.tower-265.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 9 Nov 2021 15:45:09 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id A9E9C100241
-	for <openembedded-devel@lists.openembedded.org>;
- Tue,  9 Nov 2021 15:45:08 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 9EC01100237
-	for <openembedded-devel@lists.openembedded.org>;
- Tue,  9 Nov 2021 15:45:08 +0000 (GMT)
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.24; Tue, 9 Nov 2021 15:45:02 +0000
-From: Wang Mingyu <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] iwd: upgrade 1.18 -> 1.19
-Date: Tue, 9 Nov 2021 23:44:52 +0800
-Message-ID: <1636472692-61319-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@burtonini-com.20210112.gappssmtp.com header.s=20210112
+ header.b=HKytAfyd;
+ spf=pass (domain: burtonini.com, ip: 209.85.221.42,
+ mailfrom: ross@burtonini.com)
+Received: by mail-wr1-f42.google.com with SMTP id t30so34086851wra.10
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 09 Nov 2021 08:48:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=burtonini-com.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=NzdWkTQJ51IZ1uPHKfMiIxt9WEBgdLg/pac3va4KKkU=;
+        b=HKytAfydTHOQA1HG9i8onFEH895v8fGsY/JRGNdbCThHq5RTWDAuIt9cxT3bZ99ZtZ
+         30fvhnVLEOyWQPPezu/i6X7I1N13yYiDZ8LrZHUJ4YDutCfTXM3/RYC5yKfud/Vij+Sy
+         l9WZFrQ4Pd5xI+9ANi4rGODfBd6HjOdy6AOc9bHIimBoiZRmsal3dfplDe10UF5ju0e7
+         mhAd+F7OdcjE/7sF03q5MLNpLLTmbWGS+cMCP7/nrLT/d97qfqaRshdS7S1mee3vzZjn
+         EMczygy1igUqmrwfKmAWDNezaOspZ7hHtgmJimZwRMeEEV5efvUgBZ3Y0kc4IpGXPbxx
+         XLDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=NzdWkTQJ51IZ1uPHKfMiIxt9WEBgdLg/pac3va4KKkU=;
+        b=HXdbOiAjEajUXKaKm+KvTuyMyv9bAyJA9kluTPdYpZS4EKxvge34Hws106Dg0rUVO1
+         rKAHLbwgaU8ZEhql/IN0MhBEP9EdgD+L6E7z2PHICElDiXDaH5yb84pA00mBiE44t8Z5
+         OIgv2RXzwMc1YB4BCflDyW3pMHQLjDEIhqmFMLJq11mK9zFqN53lKKJho3hLKZnWNM4e
+         2tBwCD5+6YsHFWnQKZ5rMFlW5YjxdljJjPseCfy3mMaNWMrcvuuhazJiqOSXv1eohDuC
+         7GRARXPuLRIxvmRzy7ApT2g86cVVwPFxlWF9dVEcKjknmg3oL73uWUTEKt2XzBpIPCvz
+         yIOQ==
+X-Gm-Message-State: AOAM530b6SLVB0KNiEKrmPZqaqiD3JnGFwu1wPhRym0gCFW3NZAo8rUQ
+	N06rx1XLm+MyAet7nKCYcANz0ANj1bcXoR673Dbzdw==
+X-Google-Smtp-Source: 
+ ABdhPJw2hICXPICH8POAfgCwm4uL/zQsQfQ/CGSgjkr+NbWlp4vOGnftFj/BtAk5RpoGUWgY9GL9uoTo1tNhlov+ibo=
+X-Received: by 2002:a5d:6843:: with SMTP id o3mr10874128wrw.174.1636476479262;
+ Tue, 09 Nov 2021 08:47:59 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+References: <20211108104858.3243314-1-ross.burton@arm.com>
+ <CAMKF1sq-qn7d=kdL_EJwJb7s2K9KnKeE7Qd1fXUZ8KFoNuna8A@mail.gmail.com>
+In-Reply-To: 
+ <CAMKF1sq-qn7d=kdL_EJwJb7s2K9KnKeE7Qd1fXUZ8KFoNuna8A@mail.gmail.com>
+From: Ross Burton <ross@burtonini.com>
+Date: Tue, 9 Nov 2021 16:47:48 +0000
+Message-ID: 
+ <CAAnfSTuunP-m5-PFU-_xaHgh7P6wB17S3E51zM7vFkC+wfr6Kw@mail.gmail.com>
+Subject: Re: [oe] [PATCH v3] fwupd: add new recipe
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 Nov 2021 15:45:12 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 Nov 2021 16:48:02 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93886
+ https://lists.openembedded.org/g/openembedded-devel/message/93887
 
-0001-netconfig-Use-s6_addr-instead-of-__in6_u.__u6_addr8.patch
-removed since it is included in 1.19
+<shakes fist at musl>
 
-ver 1.19:
-  Fix issue with handling OCV if offloading is supported.
-  Fix issue with handling SA Query on channel switch event.
-  Fix issue with starting FT-over-DS actions after roaming.
-  Add support for OWE transition networks.
-  Add support for extended key IDs.
+v4 incoming once a build test has passed.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- ...6_addr-instead-of-__in6_u.__u6_addr8.patch | 38 -------------------
- .../iwd/{iwd_1.18.bb => iwd_1.19.bb}          |  5 +--
- 2 files changed, 2 insertions(+), 41 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/iwd/iwd/0001-netconfig-Use-s6_addr-instead-of-__in6_u.__u6_addr8.patch
- rename meta-oe/recipes-connectivity/iwd/{iwd_1.18.bb => iwd_1.19.bb} (89%)
+Ross
 
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd/0001-netconfig-Use-s6_addr-instead-of-__in6_u.__u6_addr8.patch b/meta-oe/recipes-connectivity/iwd/iwd/0001-netconfig-Use-s6_addr-instead-of-__in6_u.__u6_addr8.patch
-deleted file mode 100644
-index a9f2393532..0000000000
---- a/meta-oe/recipes-connectivity/iwd/iwd/0001-netconfig-Use-s6_addr-instead-of-__in6_u.__u6_addr8.patch
-+++ /dev/null
-@@ -1,38 +0,0 @@
--From 36c74f974eba6f276ed4dd04c2077e6f23ebec37 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sun, 17 Oct 2021 16:09:03 -0700
--Subject: [PATCH] netconfig: Use s6_addr instead of __in6_u.__u6_addr8
--
--Building fails with:
--
--../iwd-1.18/src/netconfig.c: In function 'netconfig_ipv6_to_string':
--../iwd-1.18/src/netconfig.c:188:25: error: 'struct in6_addr' has no member named '__in6_u'; did you mean '__in6_union'?
--  188 |         memcpy(in6_addr.__in6_u.__u6_addr8, addr, 16);
--      |                         ^~~~~~~
--      |                         __in6_union
--
--Can be fixed by changing &this_ip.__in6_u.__u6_addr8[0] with &this_ip.s6_addr[0].
--For references: in6_addr is declared in /usr/include/linux/in6.h
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/netconfig.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/src/netconfig.c b/src/netconfig.c
--index c748630..ab51c3d 100644
----- a/src/netconfig.c
--+++ b/src/netconfig.c
--@@ -185,7 +185,7 @@ static inline char *netconfig_ipv6_to_string(const uint8_t *addr)
-- 	struct in6_addr in6_addr;
-- 	char *addr_str = l_malloc(INET6_ADDRSTRLEN);
-- 
---	memcpy(in6_addr.__in6_u.__u6_addr8, addr, 16);
--+	memcpy(in6_addr.s6_addr, addr, 16);
-- 
-- 	if (L_WARN_ON(unlikely(!inet_ntop(AF_INET6, &in6_addr, addr_str,
-- 						INET6_ADDRSTRLEN)))) {
---- 
--2.33.1
--
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.18.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.19.bb
-similarity index 89%
-rename from meta-oe/recipes-connectivity/iwd/iwd_1.18.bb
-rename to meta-oe/recipes-connectivity/iwd/iwd_1.19.bb
-index 4136de84fa..219dffe09b 100644
---- a/meta-oe/recipes-connectivity/iwd/iwd_1.18.bb
-+++ b/meta-oe/recipes-connectivity/iwd/iwd_1.19.bb
-@@ -7,9 +7,8 @@ DEPENDS = "ell"
- 
- SRC_URI = "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar.xz \
-            file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-for-e.patch \
--           file://0001-netconfig-Use-s6_addr-instead-of-__in6_u.__u6_addr8.patch \
--          "
--SRC_URI[sha256sum] = "0225ab81579f027e0fcbf255517f432fcf355d14f3645c36813c71a441dfab55"
-+           "
-+SRC_URI[sha256sum] = "dd65a8795f6127fb1b9e29f2092686b0590a0d3738c2b90c792ccd320deaf966"
- 
- inherit autotools manpages pkgconfig python3native systemd
- 
--- 
-2.25.1
-
+On Tue, 9 Nov 2021 at 14:55, Khem Raj <raj.khem@gmail.com> wrote:
+>
+> This still fails on musl/aarch64 see
+> https://errors.yoctoproject.org/Errors/Details/616736/
+>
+> On Mon, Nov 8, 2021 at 2:49 AM Ross Burton <ross@burtonini.com> wrote:
+> >
+> > Signed-off-by: Ross Burton <ross.burton@arm.com>
+> > ---
+> >  meta-oe/recipes-bsp/fwupd/fwupd/no-bash.patch | 141 ++++++++++++++++++
+> >  meta-oe/recipes-bsp/fwupd/fwupd/run-ptest     |   6 +
+> >  meta-oe/recipes-bsp/fwupd/fwupd_1.7.1.bb      | 101 +++++++++++++
+> >  3 files changed, 248 insertions(+)
+> >  create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd/no-bash.patch
+> >  create mode 100755 meta-oe/recipes-bsp/fwupd/fwupd/run-ptest
+> >  create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd_1.7.1.bb
+> >
+> > diff --git a/meta-oe/recipes-bsp/fwupd/fwupd/no-bash.patch b/meta-oe/recipes-bsp/fwupd/fwupd/no-bash.patch
+> > new file mode 100644
+> > index 0000000000..e0f83c4b6c
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-bsp/fwupd/fwupd/no-bash.patch
+> > @@ -0,0 +1,141 @@
+> > +Upstream-Status: Backport [a346c582cc0f34ac6c7c11251919c84553424efb]
+> > +Signed-off-by: Ross Burton <ross.burton@arm.com>
+> > +
+> > +diff --git a/data/installed-tests/fwupd.sh b/data/installed-tests/fwupd.sh
+> > +index 5b1f5d22..eaa5ec7f 100755
+> > +--- a/data/installed-tests/fwupd.sh
+> > ++++ b/data/installed-tests/fwupd.sh
+> > +@@ -1,4 +1,4 @@
+> > +-#!/bin/bash
+> > ++#!/bin/sh
+> > +
+> > + exec 2>&1
+> > + dirname=`dirname $0`
+> > +@@ -7,7 +7,7 @@ run_test()
+> > + {
+> > +         if [ -f $dirname/$1 ]; then
+> > +                 $dirname/$1
+> > +-                rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
+> > ++                rc=$?; if [ $rc != 0 ]; then exit $rc; fi
+> > +         fi
+> > + }
+> > +
+> > +diff --git a/data/installed-tests/fwupdmgr.sh b/data/installed-tests/fwupdmgr.sh
+> > +index e3f7ee31..3d65395e 100755
+> > +--- a/data/installed-tests/fwupdmgr.sh
+> > ++++ b/data/installed-tests/fwupdmgr.sh
+> > +@@ -1,4 +1,4 @@
+> > +-#!/bin/bash
+> > ++#!/bin/sh
+> > +
+> > + exec 2>&1
+> > + device=08d460be0f1f9f128413f816022a6439e0078018
+> > +@@ -13,47 +13,47 @@ error()
+> > + # ---
+> > + echo "Getting the list of remotes..."
+> > + fwupdmgr get-remotes
+> > +-rc=$?; if [[ $rc != 0 ]]; then error $rc; fi
+> > ++rc=$?; if [ $rc != 0 ]; then error $rc; fi
+> > +
+> > + # ---
+> > + echo "Enabling fwupd-tests remote..."
+> > + fwupdmgr enable-remote fwupd-tests
+> > +-rc=$?; if [[ $rc != 0 ]]; then error $rc; fi
+> > ++rc=$?; if [ $rc != 0 ]; then error $rc; fi
+> > +
+> > + # ---
+> > + echo "Update the device hash database..."
+> > + fwupdmgr verify-update $device
+> > +-rc=$?; if [[ $rc != 0 ]]; then error $rc; fi
+> > ++rc=$?; if [ $rc != 0 ]; then error $rc; fi
+> > +
+> > + # ---
+> > + echo "Getting devices (should be one)..."
+> > + fwupdmgr get-devices --no-unreported-check
+> > +-rc=$?; if [[ $rc != 0 ]]; then error $rc; fi
+> > ++rc=$?; if [ $rc != 0 ]; then error $rc; fi
+> > +
+> > + # ---
+> > + echo "Testing the verification of firmware..."
+> > + fwupdmgr verify $device
+> > +-rc=$?; if [[ $rc != 0 ]]; then error $rc; fi
+> > ++rc=$?; if [ $rc != 0 ]; then error $rc; fi
+> > +
+> > + # ---
+> > + echo "Getting updates (should be one)..."
+> > + fwupdmgr --no-unreported-check --no-metadata-check get-updates
+> > +-rc=$?; if [[ $rc != 0 ]]; then error $rc; fi
+> > ++rc=$?; if [ $rc != 0 ]; then error $rc; fi
+> > +
+> > + # ---
+> > + echo "Installing test firmware..."
+> > + fwupdmgr update $device -y
+> > +-rc=$?; if [[ $rc != 0 ]]; then error $rc; fi
+> > ++rc=$?; if [ $rc != 0 ]; then error $rc; fi
+> > +
+> > + # ---
+> > + echo "Getting updates (should be none)..."
+> > + fwupdmgr --no-unreported-check --no-metadata-check get-updates
+> > +-rc=$?; if [[ $rc != 2 ]]; then error $rc; fi
+> > ++rc=$?; if [ $rc != 2 ]; then error $rc; fi
+> > +
+> > + # ---
+> > + echo "Testing the verification of firmware (again)..."
+> > + fwupdmgr verify $device
+> > +-rc=$?; if [[ $rc != 0 ]]; then error $rc; fi
+> > ++rc=$?; if [ $rc != 0 ]; then error $rc; fi
+> > +
+> > + if [ -z "$CI_NETWORK" ]; then
+> > +         echo "Skipping remaining tests due to CI_NETWORK not being set"
+> > +@@ -63,27 +63,27 @@ fi
+> > + # ---
+> > + echo "Downgrading to older release (requires network access)"
+> > + fwupdmgr downgrade $device -y
+> > +-rc=$?; if [[ $rc != 0 ]]; then error $rc; fi
+> > ++rc=$?; if [ $rc != 0 ]; then error $rc; fi
+> > +
+> > + # ---
+> > + echo "Downgrading to older release (should be none)"
+> > + fwupdmgr downgrade $device
+> > +-rc=$?; if [[ $rc != 2 ]]; then error $rc; fi
+> > ++rc=$?; if [ $rc != 2 ]; then error $rc; fi
+> > +
+> > + # ---
+> > + echo "Updating all devices to latest release (requires network access)"
+> > + fwupdmgr --no-unreported-check --no-metadata-check --no-reboot-check update -y
+> > +-rc=$?; if [[ $rc != 0 ]]; then error $rc; fi
+> > ++rc=$?; if [ $rc != 0 ]; then error $rc; fi
+> > +
+> > + # ---
+> > + echo "Getting updates (should be none)..."
+> > + fwupdmgr --no-unreported-check --no-metadata-check get-updates
+> > +-rc=$?; if [[ $rc != 2 ]]; then error $rc; fi
+> > ++rc=$?; if [ $rc != 2 ]; then error $rc; fi
+> > +
+> > + # ---
+> > + echo "Refreshing from the LVFS (requires network access)..."
+> > + fwupdmgr refresh
+> > +-rc=$?; if [[ $rc != 0 ]]; then error $rc; fi
+> > ++rc=$?; if [ $rc != 0 ]; then error $rc; fi
+> > +
+> > + # success!
+> > + exit 0
+> > +diff --git a/plugins/uefi-capsule/fwupd.grub.conf.in b/plugins/uefi-capsule/fwupd.grub.conf.in
+> > +index 92bd49a1..9c3a22f2 100755
+> > +--- a/plugins/uefi-capsule/fwupd.grub.conf.in
+> > ++++ b/plugins/uefi-capsule/fwupd.grub.conf.in
+> > +@@ -1,4 +1,4 @@
+> > +-#! /bin/bash
+> > ++#! /bin/sh
+> > + # SPDX-License-Identifier: LGPL-2.1+
+> > + set -e
+> > +
+> > +@@ -8,7 +8,7 @@ set -e
+> > +
+> > + if [ -f @localstatedir@/lib/fwupd/uefi_capsule.conf ] &&
+> > +    ls /sys/firmware/efi/efivars/fwupd-*-0abba7dc-e516-4167-bbf5-4d9d1c739416 1>/dev/null 2>&1; then
+> > +-      source @localstatedir@/lib/fwupd/uefi_capsule.conf
+> > ++      . @localstatedir@/lib/fwupd/uefi_capsule.conf
+> > +       if [ "${EFI_PATH}" != "" ] && [ "${ESP}" != "" ]; then
+> > +       echo "Adding Linux Firmware Updater entry" >&2
+> > + cat << EOF
+> > diff --git a/meta-oe/recipes-bsp/fwupd/fwupd/run-ptest b/meta-oe/recipes-bsp/fwupd/fwupd/run-ptest
+> > new file mode 100755
+> > index 0000000000..dbc0fc32a2
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-bsp/fwupd/fwupd/run-ptest
+> > @@ -0,0 +1,6 @@
+> > +#! /bin/sh
+> > +
+> > +# Don't run all of the fwupd tests, as fwupd/fwupdmgr.test needs a custom
+> > +# /etc/fwupd/daemon.conf with DisabledPlugins unset.
+> > +
+> > +gnome-desktop-testing-runner fwupd/fwupd.test
+> > diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.7.1.bb b/meta-oe/recipes-bsp/fwupd/fwupd_1.7.1.bb
+> > new file mode 100644
+> > index 0000000000..2147ea0bd9
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.7.1.bb
+> > @@ -0,0 +1,101 @@
+> > +SUMMARY = "A simple daemon to allow session software to update firmware"
+> > +LICENSE = "LGPL-2.1+"
+> > +LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+> > +
+> > +DEPENDS = "glib-2.0 libxmlb json-glib sqlite3 libjcat gcab vala-native"
+> > +
+> > +SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/1.7.1/${BP}.tar.xz \
+> > +           file://run-ptest \
+> > +           file://no-bash.patch"
+> > +SRC_URI[sha256sum] = "ae56ceb44b786f21f54d133ac70bc5d9cb8cd4bda0167339c669a228da67fa3c"
+> > +
+> > +UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
+> > +
+> > +# Machine-specific as we examine MACHINE_FEATURES to decide whether to build the UEFI plugins
+> > +PACKAGE_ARCH = "${MACHINE_ARCH}"
+> > +
+> > +inherit meson vala gobject-introspection systemd bash-completion pkgconfig gi-docgen ptest manpages
+> > +
+> > +GIDOCGEN_MESON_OPTION = 'docs'
+> > +GIDOCGEN_MESON_ENABLE_FLAG = 'docgen'
+> > +GIDOCGEN_MESON_DISABLE_FLAG = 'none'
+> > +
+> > +PACKAGECONFIG ??= "curl gnutls gudev gusb lzma \
+> > +                   ${@bb.utils.filter('DISTRO_FEATURES', 'polkit systemd', d)} \
+> > +                   ${@bb.utils.contains('MACHINE_FEATURES', 'efi', 'plugin_uefi_capsule plugin_uefi_pk', '', d)} \
+> > +                   ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests plugin_dummy', '', d)} \
+> > +                   plugin_altos \
+> > +                   plugin_amt \
+> > +                   plugin_emmc \
+> > +                   plugin_fastboot \
+> > +                   plugin_flashrom \
+> > +                   plugin_intel_spi \
+> > +                   plugin_logitech_bulkcontroller \
+> > +                   plugin_modem_manager \
+> > +                   plugin_msr \
+> > +                   plugin_nvme \
+> > +                   plugin_parade_lspcon \
+> > +                   plugin_platform_integrity \
+> > +                   plugin_realtek_mst \
+> > +                   plugin_redfish \
+> > +                   plugin_synaptics_mst \
+> > +                   plugin_synaptics_rmi \
+> > +                   plugin_thunderbolt"
+> > +
+> > +PACKAGECONFIG[bluez] = "-Dbluez=true,-Dbluez=false"
+> > +PACKAGECONFIG[consolekit] = "-Dconsolekit=true,-Dconsolekit=false,consolekit"
+> > +PACKAGECONFIG[curl] = "-Dcurl=true,-Dcurl=false,curl"
+> > +PACKAGECONFIG[firmware-packager] = "-Dfirmware-packager=true,-Dfirmware-packager=false"
+> > +PACKAGECONFIG[gnutls] = "-Dgnutls=true,-Dgnutls=false,gnutls"
+> > +PACKAGECONFIG[gudev] = "-Dgudev=true,-Dgudev=false,libgudev"
+> > +PACKAGECONFIG[gusb] = "-Dgusb=true,-Dgusb=false,libgusb"
+> > +PACKAGECONFIG[libarchive] = "-Dlibarchive=true,-Dlibarchive=false,libarchive"
+> > +PACKAGECONFIG[lzma] = "-Dlzma=true,-Dlzma=false,xz"
+> > +PACKAGECONFIG[manpages] = "-Dman=true,-Dman=false"
+> > +PACKAGECONFIG[polkit] = "-Dpolkit=true,-Dpolkit=false,polkit"
+> > +PACKAGECONFIG[systemd] = "-Dsystemd=true,-Dsystemd=false,systemd"
+> > +PACKAGECONFIG[tests] = "-Dtests=true,-Dtests=false,gcab-native"
+> > +
+> > +# TODO plugins-all meta-option that expands to all plugin_*?
+> > +PACKAGECONFIG[plugin_altos] = "-Dplugin_altos=true,-Dplugin_altos=false,elfutils"
+> > +PACKAGECONFIG[plugin_amt] = "-Dplugin_amt=true,-Dplugin_amt=false"
+> > +PACKAGECONFIG[plugin_dell] = "-Dplugin_dell=true,-Dplugin_dell=false,libsmbios"
+> > +PACKAGECONFIG[plugin_dummy] = "-Dplugin_dummy=true,-Dplugin_dummy=false"
+> > +PACKAGECONFIG[plugin_emmc] = "-Dplugin_emmc=true,-Dplugin_emmc=false"
+> > +PACKAGECONFIG[plugin_fastboot] = "-Dplugin_fastboot=true,-Dplugin_fastboot=false"
+> > +PACKAGECONFIG[plugin_flashrom] = "-Dplugin_flashrom=true,-Dplugin_flashrom=false,flashrom"
+> > +PACKAGECONFIG[plugin_intel_spi] = "-Dplugin_intel_spi=true,-Dplugin_intel_spi=false"
+> > +PACKAGECONFIG[plugin_logitech_bulkcontroller] = "-Dplugin_logitech_bulkcontroller=true,-Dplugin_logitech_bulkcontroller=false,protobuf-c-native protobuf-c"
+> > +PACKAGECONFIG[plugin_modem_manager] = "-Dplugin_modem_manager=true,-Dplugin_modem_manager=false,libqmi modemmanager"
+> > +PACKAGECONFIG[plugin_msr] = "-Dplugin_msr=true,-Dplugin_msr=false,cpuid"
+> > +PACKAGECONFIG[plugin_nvme] = "-Dplugin_nvme=true,-Dplugin_nvme=false"
+> > +PACKAGECONFIG[plugin_parade_lspcon] = "-Dplugin_parade_lspcon=true,-Dplugin_parade_lspcon=false"
+> > +PACKAGECONFIG[plugin_platform_integrity] = "-Dplugin_platform_integrity=true,-Dplugin_platform_integrity=false"
+> > +PACKAGECONFIG[plugin_realtek_mst] = "-Dplugin_realtek_mst=true,-Dplugin_realtek_mst=false"
+> > +PACKAGECONFIG[plugin_redfish] = "-Dplugin_redfish=true,-Dplugin_redfish=false"
+> > +PACKAGECONFIG[plugin_synaptics_mst] = "-Dplugin_synaptics_mst=true,-Dplugin_synaptics_mst=false"
+> > +PACKAGECONFIG[plugin_synaptics_rmi] = "-Dplugin_synaptics_rmi=true,-Dplugin_synaptics_rmi=false"
+> > +PACKAGECONFIG[plugin_thunderbolt] = "-Dplugin_thunderbolt=true,-Dplugin_thunderbolt=false"
+> > +PACKAGECONFIG[plugin_tpm] = "-Dplugin_tpm=true,-Dplugin_tpm=false,tpm2-tss"
+> > +# Turn off the capsule splash as it needs G-I at buildtime, which isn't currently supported
+> > +PACKAGECONFIG[plugin_uefi_capsule] = "-Dplugin_uefi_capsule=true -Dplugin_uefi_capsule_splash=false,-Dplugin_uefi_capsule=false,efivar fwupd-efi"
+> > +PACKAGECONFIG[plugin_uefi_pk] = "-Dplugin_uefi_pk=true,-Dplugin_uefi_pk=false"
+> > +
+> > +# Always disable these plugins on non-x86 platforms as they don't compile
+> > +DISABLE_NON_X86 = "plugin_msr plugin_intel_spi"
+> > +DISABLE_NON_X86:x86 = ""
+> > +DISABLE_NON_X86:x86-64 = ""
+> > +PACKAGECONFIG:remove = "${DISABLE_NON_X86}"
+> > +
+> > +FILES:${PN} += "${libdir}/fwupd-plugins-* \
+> > +                ${systemd_unitdir} \
+> > +                ${datadir}/fish \
+> > +                ${datadir}/metainfo \
+> > +                ${datadir}/icons \
+> > +                ${datadir}/dbus-1 \
+> > +                ${datadir}/polkit-1 \
+> > +                ${nonarch_libdir}/modules-load.d"
+> > +
+> > +FILES:${PN}-ptest += "${libexecdir}/installed-tests/ \
+> > +                      ${datadir}/installed-tests/"
+> > +RDEPENDS:${PN}-ptest += "gnome-desktop-testing"
+> > --
+> > 2.25.1
+> >
+> >
+> > -=-=-=-=-=-=-=-=-=-=-=-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#93875): https://lists.openembedded.org/g/openembedded-devel/message/93875
+> > Mute This Topic: https://lists.openembedded.org/mt/86902821/1997914
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> > -=-=-=-=-=-=-=-=-=-=-=-
+> >
 
