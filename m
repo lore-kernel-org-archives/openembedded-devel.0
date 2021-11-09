@@ -2,76 +2,76 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3EA91C433EF
-	for <webhook@archiver.kernel.org>; Tue,  9 Nov 2021 15:09:28 +0000 (UTC)
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com
- [85.158.142.116])
- by mx.groups.io with SMTP id smtpd.web12.13354.1636470567309720964
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2D65C433EF
+	for <webhook@archiver.kernel.org>; Tue,  9 Nov 2021 15:45:12 +0000 (UTC)
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com
+ [195.245.230.3])
+ by mx.groups.io with SMTP id smtpd.web09.13827.1636472711667980322
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Nov 2021 07:09:27 -0800
+ Tue, 09 Nov 2021 07:45:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=dIugL/Of;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.116,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=XpcVaUFN;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.3,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1636470565; i=@fujitsu.com;
-	bh=dbnGqOjmNJV+Ogpe813iTBKOSXDK5BWQ1bonO+HfBpA=;
+	s=170520fj; t=1636472709; i=@fujitsu.com;
+	bh=gqVM80GyipRkMP6ArZPh59aM0oex/98PHGz8xAJTrpY=;
 	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=dIugL/OffYMedEOu9AummBf51uktncv7vggXpXIFng9tjX9QCfi3RbTjd8eR2SKjO
-	 f4PI/UCXArEbrcRsbHT1sUM7h3+ThaUI1kVkjATDxN08sCm6SWcVw9w43IpxpE7bF9
-	 BkpAAA++7SBq/ZRay69uEmNEW8QyUu+cwxPVkde7JaY1+W1uIMT9ABrjsqTmkBWPFT
-	 ctOcakSqfumSnnl0kx8U5j3QXKc9Q/qgl4mNmGtglIjXPzcCIinHQ5xg9hsRjrXpjG
-	 m4Yzv3rUlbs5n7+APe6eGyJCsWMATKrPfOQyV6pfzlBGNnsK3UP6rlU6yJ/06gq76g
-	 2x0Ovg/UGa+Cw==
-Received: from [100.113.4.50] (using TLSv1.2 with cipher
+	b=XpcVaUFNTqudGbVbE3AEW61aat6V60IABX3XKe7vEVcJnT4diljhR3J0rQBLTyx38
+	 esnHOX4XcDlGPZZByDsBVCTImX9+PYExve5ChHaiwZrxebJmDImKPjlbsHwbzlm5RN
+	 ckJrutG1r0DjaSfy1x+NAFz75/+yijMYe66YxjkPBNCUwv4tDME4MtgGVOL6OsN2xb
+	 Pso7qz36eFuvkWght1jxR7Sm8//lSmFeNasF29ywj9hv1alDQDkUQf/wNZCW5Y7uie
+	 U/HEjc1hR6eSGb2c6McjySRaTYmO88OmXp7OysctwzxoDprcP2eMdn2RMkpMortfU0
+	 6QuWw3YTF6tkg==
+Received: from [100.112.195.206] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-5.bemta.az-b.eu-central-1.aws.symcld.net id 98/01-25178-52F8A816;
- Tue, 09 Nov 2021 15:09:25 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrEIsWRWlGSWpSXmKPExsViZ8MxSVelvyv
-  RYPIiPYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPx5YvsBUv4K9bencXcwHiIt4uRi0NI4Amj
-  xLS931ggnAtMEreW3GeCcI4zSjSdnQHkcHKwCahJTL91gxXEFhHQl1g6ew8ziM0soCLx4ncPO
-  4gtLOAt8WDmJbA4C1C8acZ0sF5eASeJHTtvM4LYEgIKElMevmeGiAtKnJz5hAVijoTEwRcvmC
-  FqFCVmX25mgbArJGbNamOCsNUkrp7bxDyBkX8WkvZZSNoXMDKtYrRMKspMzyjJTczM0TU0MNA
-  1NDTWNdc1MjbUS6zSTdJLLdVNTs0rKUoEyuollhfrFVfmJuek6OWllmxiBAZlSiH78x2Mq958
-  0DvEKMnBpCTK+6+rK1GILyk/pTIjsTgjvqg0J7X4EKMMB4eSBO8WkJxgUWp6akVaZg4wQmDSE
-  hw8SiK8Yh1Aad7igsTc4sx0iNQpRkUpcd7+eqCEAEgiozQPrg0WlZcYZaWEeRkZGBiEeApSi3
-  IzS1DlXzGKczAqCfMm9QJN4cnMK4Gb/gpoMRPQ4oNf2kEWlyQipKQamCZzrupJULnEfOzCdse
-  YHvfeiOcHN//ZYH973uqKU2md2gtEk9aaLvkS0xrlYO95+cXXgrYdYWorbYSm6THeir+yny+v
-  bdZr1smLEkNPSG2+dTrxhel8yz6XdRWBVm09zfP9j4sUT180a3HBv9XbwxbNFPwjIjjj7+VJ6
-  89IzjGbejpKrEaYwW7GFMGnOVcd5QqPPI5UUi87MO3xnC3PGWY7LV+yPc1Oc1vkmRabmoNPzV
-  aoyV9jTZis+X157roDJ5N9Ni8ur1ZO2rDuZefNPKY7PjGzJHP+L1vxNWhxhRl/3sm1fIs5Szd
-  GXNoh/Uvq4bSKRXnWfRlfo5RCNO23S0VN2Moy24k1Yvuxxo/danuUWIozEg21mIuKEwEwWNd4
-  RQMAAA==
+	by server-3.bemta.az-a.eu-west-1.aws.symcld.net id 87/4C-05531-5879A816;
+ Tue, 09 Nov 2021 15:45:09 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrPIsWRWlGSWpSXmKPExsViZ8ORqNs6vSv
+  RYNpGTouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWP182eMBSelK37fvMPawPhPvIuRi0NI4Amj
+  xOoFc1kgnAtMEls3fgFyOIGc44wSR2fzgdhsAmoS02/dYAWxRQT0JZbO3sMMYjMLqEi8+N3DD
+  mILC1hKnFz9Acjm4GABir/56QUS5hVwkrhy7AsTiC0hoCAx5eF7Zoi4oMTJmU9YIMZISBx88Y
+  IZokZRYvblZhYIu0Ji1qw2qF41iavnNjFPYOSfhaR9FpL2BYxMqxgtkooy0zNKchMzc3QNDQx
+  0DQ2NdA0tgdjYVC+xSjdRL7VUtzy1uETXUC+xvFivuDI3OSdFLy+1ZBMjMBxTCg6072B89PqD
+  3iFGSQ4mJVHef11diUJ8SfkplRmJxRnxRaU5qcWHGGU4OJQkeFdNBcoJFqWmp1akZeYAYwMmL
+  cHBoyTCe3kKUJq3uCAxtzgzHSJ1ilFRSpzXGKRPACSRUZoH1waLx0uMslLCvIwMDAxCPAWpRb
+  mZJajyrxjFORiVhHmlQKbwZOaVwE1/BbSYCWjxwS/tIItLEhFSUg1MjW8XXn2/2X1a3OYZgX/
+  /Wjw4ObW6N/5eUrJn46Np37R7Dh+QjPOYucbpZOtHebbyq3oiieeCGKYk1a37onZ0Sm7iAl6v
+  redPxPD83vpE6pBypIDFDfHlVz75XWwK9e64n6sdXBEo+yL9SO1sjhbGjNfTp7uo75zje1v7o
+  qjGX6Urhkc5ykybj05cLqK9bFpHxn0J5teJRm1fBDepWr3K7tlSX6N++ft0tu7NNWqNv5m3NB
+  YzXdzKJVis8c2srk+E476llfjNXW9fBsnNOv7aYsUv1o1Pzd+JLflTPI1LQGG693XfZ/aH2jQ
+  aNSwUzs574rl32v0puzq2txu6dJ3pbNt57Pur4791djJXsgYyKbEUZyQaajEXFScCAE96JINC
+  AwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-3.tower-245.messagelabs.com!1636470564!11431!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-17.tower-265.messagelabs.com!1636472708!14960!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.5; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 25549 invoked from network); 9 Nov 2021 15:09:24 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-3.tower-245.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 9 Nov 2021 15:09:24 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 339B810046C
+Received: (qmail 4140 invoked from network); 9 Nov 2021 15:45:09 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-17.tower-265.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 9 Nov 2021 15:45:09 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id A9E9C100241
 	for <openembedded-devel@lists.openembedded.org>;
- Tue,  9 Nov 2021 15:09:24 +0000 (GMT)
+ Tue,  9 Nov 2021 15:45:08 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 26B4E100440
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 9EC01100237
 	for <openembedded-devel@lists.openembedded.org>;
- Tue,  9 Nov 2021 15:09:24 +0000 (GMT)
+ Tue,  9 Nov 2021 15:45:08 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.24; Tue, 9 Nov 2021 15:09:01 +0000
+ (TLS) id 15.0.1497.24; Tue, 9 Nov 2021 15:45:02 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] fetchmail: upgrade 6.4.21 -> 6.4.23
-Date: Tue, 9 Nov 2021 23:08:51 +0800
-Message-ID: <1636470531-61193-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] iwd: upgrade 1.18 -> 1.19
+Date: Tue, 9 Nov 2021 23:44:52 +0800
+Message-ID: <1636472692-61319-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -82,50 +82,90 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 Nov 2021 15:09:28 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 Nov 2021 15:45:12 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93885
+ https://lists.openembedded.org/g/openembedded-devel/message/93886
 
-fetchmail-6.4.23 (released 2021-10-31, 30206 LoC):
+0001-netconfig-Use-s6_addr-instead-of-__in6_u.__u6_addr8.patch
+removed since it is included in 1.19
 
- For common ssh-based IMAP PREAUTH setups (i. e. those that use a plugin
- - no matter its contents - and that set auth ssh), change the STARTTLS
- error message to suggest sslproto '' instead.
- This is a commonly reported issue after the CVE-2021-39272 fix in 6.4.22.
- Fixes Redhat Bugzilla 2008160. Fixes GitLab #39.
-
-License-Update:
- Add "SSL library considerations" to COPYING.
- Format of COPYING changed.
+ver 1.19:
+  Fix issue with handling OCV if offloading is supported.
+  Fix issue with handling SA Query on channel switch event.
+  Fix issue with starting FT-over-DS actions after roaming.
+  Add support for OWE transition networks.
+  Add support for extended key IDs.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../fetchmail/{fetchmail_6.4.21.bb => fetchmail_6.4.23.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/fetchmail/{fetchmail_6.4.21.bb => fetchmail_6.4.23.bb} (83%)
+ ...6_addr-instead-of-__in6_u.__u6_addr8.patch | 38 -------------------
+ .../iwd/{iwd_1.18.bb => iwd_1.19.bb}          |  5 +--
+ 2 files changed, 2 insertions(+), 41 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/iwd/iwd/0001-netconfig-Use-s6_addr-instead-of-__in6_u.__u6_addr8.patch
+ rename meta-oe/recipes-connectivity/iwd/{iwd_1.18.bb => iwd_1.19.bb} (89%)
 
-diff --git a/meta-networking/recipes-support/fetchmail/fetchmail_6.4.21.bb b/meta-networking/recipes-support/fetchmail/fetchmail_6.4.23.bb
-similarity index 83%
-rename from meta-networking/recipes-support/fetchmail/fetchmail_6.4.21.bb
-rename to meta-networking/recipes-support/fetchmail/fetchmail_6.4.23.bb
-index 892e02844d..9599837644 100644
---- a/meta-networking/recipes-support/fetchmail/fetchmail_6.4.21.bb
-+++ b/meta-networking/recipes-support/fetchmail/fetchmail_6.4.23.bb
-@@ -6,13 +6,13 @@ connections). It supports every remote-mail protocol now in use on the Internet:
- RPOP, APOP, KPOP, all flavors of IMAP, ETRN, and ODMR. It can even support IPv6 and IPSEC."
- SECTION = "mail"
- LICENSE = "GPLv2 & MIT"
--LIC_FILES_CHKSUM = "file://COPYING;md5=ad73c6bd421c137fbf18cf8b92474186"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=c3a05d9b9d3784c824c9b92a648e1353"
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd/0001-netconfig-Use-s6_addr-instead-of-__in6_u.__u6_addr8.patch b/meta-oe/recipes-connectivity/iwd/iwd/0001-netconfig-Use-s6_addr-instead-of-__in6_u.__u6_addr8.patch
+deleted file mode 100644
+index a9f2393532..0000000000
+--- a/meta-oe/recipes-connectivity/iwd/iwd/0001-netconfig-Use-s6_addr-instead-of-__in6_u.__u6_addr8.patch
++++ /dev/null
+@@ -1,38 +0,0 @@
+-From 36c74f974eba6f276ed4dd04c2077e6f23ebec37 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sun, 17 Oct 2021 16:09:03 -0700
+-Subject: [PATCH] netconfig: Use s6_addr instead of __in6_u.__u6_addr8
+-
+-Building fails with:
+-
+-../iwd-1.18/src/netconfig.c: In function 'netconfig_ipv6_to_string':
+-../iwd-1.18/src/netconfig.c:188:25: error: 'struct in6_addr' has no member named '__in6_u'; did you mean '__in6_union'?
+-  188 |         memcpy(in6_addr.__in6_u.__u6_addr8, addr, 16);
+-      |                         ^~~~~~~
+-      |                         __in6_union
+-
+-Can be fixed by changing &this_ip.__in6_u.__u6_addr8[0] with &this_ip.s6_addr[0].
+-For references: in6_addr is declared in /usr/include/linux/in6.h
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/netconfig.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/netconfig.c b/src/netconfig.c
+-index c748630..ab51c3d 100644
+---- a/src/netconfig.c
+-+++ b/src/netconfig.c
+-@@ -185,7 +185,7 @@ static inline char *netconfig_ipv6_to_string(const uint8_t *addr)
+- 	struct in6_addr in6_addr;
+- 	char *addr_str = l_malloc(INET6_ADDRSTRLEN);
+- 
+--	memcpy(in6_addr.__in6_u.__u6_addr8, addr, 16);
+-+	memcpy(in6_addr.s6_addr, addr, 16);
+- 
+- 	if (L_WARN_ON(unlikely(!inet_ntop(AF_INET6, &in6_addr, addr_str,
+- 						INET6_ADDRSTRLEN)))) {
+--- 
+-2.33.1
+-
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.18.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.19.bb
+similarity index 89%
+rename from meta-oe/recipes-connectivity/iwd/iwd_1.18.bb
+rename to meta-oe/recipes-connectivity/iwd/iwd_1.19.bb
+index 4136de84fa..219dffe09b 100644
+--- a/meta-oe/recipes-connectivity/iwd/iwd_1.18.bb
++++ b/meta-oe/recipes-connectivity/iwd/iwd_1.19.bb
+@@ -7,9 +7,8 @@ DEPENDS = "ell"
  
- DEPENDS = "openssl"
+ SRC_URI = "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar.xz \
+            file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-for-e.patch \
+-           file://0001-netconfig-Use-s6_addr-instead-of-__in6_u.__u6_addr8.patch \
+-          "
+-SRC_URI[sha256sum] = "0225ab81579f027e0fcbf255517f432fcf355d14f3645c36813c71a441dfab55"
++           "
++SRC_URI[sha256sum] = "dd65a8795f6127fb1b9e29f2092686b0590a0d3738c2b90c792ccd320deaf966"
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz \
-            "
--SRC_URI[sha256sum] = "6a459c1cafd7a1daa5cd137140da60c18c84b5699cd8e7249a79c33342c99d1d"
-+SRC_URI[sha256sum] = "5f7a5e13731431134a2ca535bbced7adc666d3aeb93169a0830945d91f492300"
- 
- inherit autotools gettext pkgconfig python3-dir python3native
+ inherit autotools manpages pkgconfig python3native systemd
  
 -- 
 2.25.1
