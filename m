@@ -1,113 +1,78 @@
-Return-Path: <marek.belisko@gmail.com>
+Return-Path: <ovidiu.panait@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 05E8DC433F5
-	for <webhook@archiver.kernel.org>; Tue,  9 Nov 2021 10:51:49 +0000 (UTC)
-Received: from mail-yb1-f175.google.com (mail-yb1-f175.google.com
- [209.85.219.175])
- by mx.groups.io with SMTP id smtpd.web11.10396.1636455108196950351
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E230FC433F5
+	for <webhook@archiver.kernel.org>; Tue,  9 Nov 2021 14:35:59 +0000 (UTC)
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web11.12751.1636468558834777826
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Nov 2021 02:51:48 -0800
+ Tue, 09 Nov 2021 06:35:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=clxH7qUT;
- spf=pass (domain: gmail.com, ip: 209.85.219.175,
- mailfrom: marek.belisko@gmail.com)
-Received: by mail-yb1-f175.google.com with SMTP id u60so35994838ybi.9
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Nov 2021 02:51:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=Th1xSSLYa+y97U1+ILwZUPwrUKl84HNma5d0cBRJvXY=;
-        b=clxH7qUTDoppkMoSI2FUUZ7V2iiQRD77LvAODQrs2/f4jt+YbMm7tIUkrhKTKeSkGX
-         TQKue3om09Ndj9eQkWtHd0TQ+krmLpkUUjDzffKtW8f+dksikHpslcLQGOnuTA8cJ0UG
-         3wAVlHg890kna9YoVAtbGuVIlE+ATI1Pqh8FvltcOAIf80FOo8QgRMDTuKVJrwKIAiim
-         zGG0VRH6YkULhBgYCakHHT842Pyk7HDL2HOaHdxkCt76OR7pDXVcrsZUK+9PO3fcDwu+
-         d9etTb5XU7tS9Sw+ZGUKDMcecbnIMWnsGn9/4zbX22by7GqQh0hHUsSiF68FNhg9bPLD
-         AHjQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=Th1xSSLYa+y97U1+ILwZUPwrUKl84HNma5d0cBRJvXY=;
-        b=LRq8b7kaMOeTdrUqvNt8Ie+bi7/xZMcsH1jaW10QORkn8xXWv0D+wVDbTKKlIkuFvm
-         zYEs7j09D0/1yMVDAQlebP5G+GcYrH+yTxCSeUbm0oz9sRAVGB9sHX/Dd62xat22nq+5
-         bJazveLkvgKm0tPkJwMPIhFIOLhhslJfAqPFyq5jKFcFHyL9gqAZyIHaHQfYPS4mkdIO
-         etrZZhMmjhcHAD0a+pYPO/55gu2geY7wptQO6RpRR3/xK3CEeC41xy5bo36WFBG9k+p3
-         OThfCJqn/+5SEdS+iqYLUfNuFff+HDm5uNASQHEM1C1lej4YWg7A64uQY4fyhhtVHbgv
-         Q7qg==
-X-Gm-Message-State: AOAM531h/vKDMGT5aVx+ayQESM84w7J3YPHFaauxtp4MYWUsMLPvQyxO
-	UA36RaYwUtzGJZuh7nWmRCvZE7QdWDUzy9lpsrw=
-X-Google-Smtp-Source: 
- ABdhPJwk4+2YAxs0l7kfObs8N1Vcuvv8GpdmLrqB27qQg8/My8CP9cRgw0fxctf7wfj1TMVPhiN9O01/8hZH7a1DI5U=
-X-Received: by 2002:a25:f827:: with SMTP id u39mr7140637ybd.511.1636455107306;
- Tue, 09 Nov 2021 02:51:47 -0800 (PST)
+ dkim=missing;
+ spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: ovidiu.panait@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 1A9EZurI032720
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 9 Nov 2021 06:35:57 -0800
+Received: from otp-linux03.wrs.com (128.224.125.155) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Tue, 9 Nov 2021 06:35:55 -0800
+From: Ovidiu Panait <ovidiu.panait@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] syslog-ng: adjust control socket location
+Date: Tue, 9 Nov 2021 16:35:30 +0200
+Message-ID: <20211109143530.1526383-1-ovidiu.panait@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20211109102757.16992-1-alexanderhaas.expleo@gmail.com>
-In-Reply-To: <20211109102757.16992-1-alexanderhaas.expleo@gmail.com>
-From: Belisko Marek <marek.belisko@gmail.com>
-Date: Tue, 9 Nov 2021 11:51:36 +0100
-Message-ID: 
- <CAAfyv36e+dKcAc0ZgZewh1z1dFb1hAr2v=jA=Xm+GZizXCBMeQ@mail.gmail.com>
-Subject: Re: [oe] [meta-python][dunfell][PATCH] python3-fasteners: fix
- RDEPENDS
-To: Alexander Haas <alexanderhaas.expleo@gmail.com>
-Cc: OpenEmbedded Development mailing list
- <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [128.224.125.155]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 Nov 2021 10:51:49 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 Nov 2021 14:35:59 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93882
+ https://lists.openembedded.org/g/openembedded-devel/message/93883
 
-Hi Alexander,
+Commit [1] changed the pidfile dir to /var/run/syslog-ng. This also changed
+the location where the control socket is searched for, causing the following
+error with systemd:
 
-On Tue, Nov 9, 2021 at 11:28 AM Alexander Haas
-<alexanderhaas.expleo@gmail.com> wrote:
->
-> this fixes the parsing error for python3-fasteners_0.16.3 that resulted
-> from a colon after RDEPENDS
-Please see this thread from yesterday:
-https://lists.openembedded.org/g/openembedded-core/topic/broken_dunfell/86902854?p=,,,20,0,0,0::recentpostdate/sticky,,,20,2,0,86902854,previd=1636453802825824235,nextid=1636376307838664951&previd=1636453802825824235&nextid=1636376307838664951
+root@qemux86-64:~# syslog-ng-ctl config
+Error connecting control socket, socket='/var/run/syslog-ng/syslog-ng.ctl',
+error='No such file or directory'
 
-Long story short your poky is not up to date with I assume dunfell poky release
->
-> Signed-off-by: Alexander Haas <alexanderhaas.expleo@gmail.com>
-> ---
->  meta-python/recipes-devtools/python/python3-fasteners_0.16.3.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-fasteners_0.16.3.bb b/meta-python/recipes-devtools/python/python3-fasteners_0.16.3.bb
-> index 1ba2c6f20..7ebaa4590 100644
-> --- a/meta-python/recipes-devtools/python/python3-fasteners_0.16.3.bb
-> +++ b/meta-python/recipes-devtools/python/python3-fasteners_0.16.3.bb
-> @@ -8,7 +8,7 @@ SRC_URI[sha256sum] = "b1ab4e5adfbc28681ce44b3024421c4f567e705cc3963c732bf1cba334
->
->  inherit pypi setuptools3
->
-> -RDEPENDS:${PN} += "\
-> +RDEPENDS_${PN} += "\
->      ${PYTHON_PN}-logging \
->      ${PYTHON_PN}-fcntl \
->  "
-> --
-> 2.33.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#93880): https://lists.openembedded.org/g/openembedded-devel/message/93880
-> Mute This Topic: https://lists.openembedded.org/mt/86928245/900721
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [marek.belisko@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Update the systemd service file to point to the new location.
 
-BR,
+[1] 00d1d63e4f7f ("syslog-ng: provide correct PID directory location to
+                   restart/stop syslog-ng daemon")
 
-marek
+Signed-off-by: lmorales <luisalejandro.moralespena@windriver.com>
+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+---
+ .../files/syslog-ng.service-the-syslog-ng-service.patch         | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
+index 0e1d09492..733480030 100644
+--- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
++++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
+@@ -38,7 +38,7 @@ index 0ccc2b9..7f08c0e 100644
+ -CONTROL_FILE=/var/run/syslog-ng.ctl
+ -PID_FILE=/var/run/syslog-ng.pid
+ +PERSIST_FILE=@LOCALSTATEDIR@/lib/syslog-ng/syslog-ng.persist
+-+CONTROL_FILE=@LOCALSTATEDIR@/lib/syslog-ng/syslog-ng.ctl
+++CONTROL_FILE=@LOCALSTATEDIR@/run/syslog-ng/syslog-ng.ctl
+ +PID_FILE=@LOCALSTATEDIR@/run/syslog-ng.pid
+  OTHER_OPTIONS="--enable-core"
+ -- 
+-- 
+2.25.1
+
 
