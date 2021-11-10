@@ -1,99 +1,145 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 24EE4C433EF
-	for <webhook@archiver.kernel.org>; Wed, 10 Nov 2021 05:47:35 +0000 (UTC)
-Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com
- [209.85.216.46])
- by mx.groups.io with SMTP id smtpd.web12.8167.1636523254631210265
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B59C0C433EF
+	for <webhook@archiver.kernel.org>; Wed, 10 Nov 2021 15:06:48 +0000 (UTC)
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com
+ [209.85.214.182])
+ by mx.groups.io with SMTP id smtpd.web08.13004.1636556807373462088
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Nov 2021 21:47:34 -0800
+ Wed, 10 Nov 2021 07:06:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=I9YwbhFH;
- spf=pass (domain: gmail.com, ip: 209.85.216.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f46.google.com with SMTP id
- p18-20020a17090ad31200b001a78bb52876so689964pju.3
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=VakEw63r;
+ spf=pass (domain: gmail.com, ip: 209.85.214.182,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f182.google.com with SMTP id b13so3303531plg.2
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Nov 2021 21:47:34 -0800 (PST)
+ Wed, 10 Nov 2021 07:06:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=WyUJiRkLDdGmJf3gWraAdB6VFvsKqF7iRTVQbMHJhv4=;
-        b=I9YwbhFHIEHmIBHw5GlqfSsQSlnGnGjgb7ZvzEghB3i77BKCq3ak9d4LUM9JEj7yYc
-         veJLK1rs5zQpjSuTonG6m+3LZjf2x9vb/lkamXkYXc3R1YMSWD8mtI7SbeOvTLbNvibG
-         V4ZuTKPi4snq3GrOJgA92VHFt++Dio88pQdr/oQD287+yvzZlQces8uM7+n2tmoVs61f
-         xfQ5x4tP2OQ4ShsyNkJNvQCM43e4FXUXi7UvBTYQfk8OVTRAjzocBGi5yaymxMyIXVG0
-         g8/9czF/sTiG+FCsjT4nU9i/XpizCfqhJGLYk/9u249qCaUbaRjtTWBP0zcCOMOP9HFf
-         98qg==
+        bh=bXTaZmX7k/gEuZWFvkRxMC8woiQSv/3b2vKoMHrHqj4=;
+        b=VakEw63roAxSWhHvrb4qhxu3LN5pgHjmMQDNlx0BpZ7TqMCRZcQDiOOzoH1qf72qIc
+         GuyWhWBIoFE2nIPD3qtCYhiNvc8F7wWiH0tlhPk6fxEOQurEN48S8PffivwcCuSr/yZn
+         sUbxX2JqDVy+t2O2v2YXZMh4B1QX4c+f12hbtrdOaLnpRaw8e+nz7j8JB+h5F+4PY2m1
+         aREWGuCGZ84yh2hJNeZAQbKw6UubA2UTKf0B0QzM4UtR1WMuBNaw5RF2BqnMiKyRRknJ
+         ESdzNiX+plbt4eIJ1awWvdzD/PGwnS+2QvuWyPTymn+s1O+hZSpnrpGzk0dD6ekgcixm
+         D6aA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=WyUJiRkLDdGmJf3gWraAdB6VFvsKqF7iRTVQbMHJhv4=;
-        b=rihZbf+l30j+e3PHOZMNafsfPDmbdpFyCns5ZXOn1tU6VcwveTwpeildpAg0vgkilV
-         Uu8j0wtFWjpiF00hWtaPTId3RmKy70INzmLzcMg1JGte+eL6OaKrLbnoAy6jAudeTZ1H
-         V+jYlvhP+QhDBuOBIJR/VnzurBdSi5yzRW1fezYwlMmR9xkp5+ehEo9sv5MeV8E9JXDc
-         QH84wj+a0r2mitqEkUjlVDnhDmr+y4kuPd2rJa60QyGKv4WRDcLko6Okrpa7CkUzVqVn
-         QCcoGFfxD6KplyNqgv8HsAULPTk8HxM78qnTZFQ1j95RSwRc/j8WkWxy+NTm5X/K/fxt
-         8INg==
-X-Gm-Message-State: AOAM531Fcda34qg9Nnl6nh3XyBAyaj5AxTJvsfx8rkPnpXFU54zwDfhM
-	BAp+MqNyyxI6QUbtbknLeyWT25a/HbY=
+        bh=bXTaZmX7k/gEuZWFvkRxMC8woiQSv/3b2vKoMHrHqj4=;
+        b=gcXPlnOqTX3Q5a9ocJC8kZ8PJ42VzRs3B5d7V8a4DrZrK9Ro5aX47WF+bKmA4SJDNW
+         BRskEeNMO9exxBX/TDoWe60/farCBNKmZNXLAxDegikWffXTP+0tEuvGoQH8Fj8CWuXA
+         s4pCvAGuAypqVtwSOCzpad+tbPmKkoDSLNjUwrVzW39X8U877LFWK4z0iUoiAGoZtEAl
+         2v4cRxRWeGb3zcfKIWHgXyVwN8f08dS1xfU8rLwON33iOaDNIiGRTcxg4yhMqzKYfuHe
+         aOIAs46xbBlxVnKgoAx4cGswIW+U0ciOlfXrPId7uUoi62I3FMjULGo010uKJyg6J6IK
+         qilQ==
+X-Gm-Message-State: AOAM531kmukfd/fUOhuIqGmqYM8Th0H10AATHSqdjnl6QgaJ5l+MT/k7
+	JhqYBqadB0IFwzleLDGqojE5h9oCO18=
 X-Google-Smtp-Source: 
- ABdhPJznqZFVzz4U78/3AQEdjURMVgeLw6OPy/K800dPTWez+1UL9ZZtqmEhBAYVLiGpGJYxZWLoVw==
-X-Received: by 2002:a17:90b:4a47:: with SMTP id
- lb7mr13997464pjb.243.1636523253734;
-        Tue, 09 Nov 2021 21:47:33 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::7905])
-        by smtp.gmail.com with ESMTPSA id
- x18sm8085529pfh.210.2021.11.09.21.47.33
+ ABdhPJzlPD8c5u14WtUb1ZoIJyO0fqiv530MEI8ifgnv/UrHsVfjA08Z70Ehol5Pp6bj2P3er2CkZw==
+X-Received: by 2002:a17:902:8690:b0:13f:ffd6:6c63 with SMTP id
+ g16-20020a170902869000b0013fffd66c63mr16223476plo.23.1636556806475;
+        Wed, 10 Nov 2021 07:06:46 -0800 (PST)
+Received: from keaua.hsd1.ca.comcast.net
+ ([2601:202:4180:a5c0:19ee:1da0:daa0:d5b4])
+        by smtp.gmail.com with ESMTPSA id i2sm27065pfe.70.2021.11.10.07.06.45
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 Nov 2021 21:47:33 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+        Wed, 10 Nov 2021 07:06:45 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] protobuf-c: Export native protoc
-Date: Tue,  9 Nov 2021 21:47:30 -0800
-Message-Id: <20211110054730.2339361-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.33.1
+Subject: [meta-oe][honister][v4][PATCH] recipes: remove tabs and spaces in
+ SRC_URI
+Date: Wed, 10 Nov 2021 07:06:44 -0800
+Message-Id: <20211110150644.57813-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 10 Nov 2021 05:47:35 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 10 Nov 2021 15:06:48 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93902
+ https://lists.openembedded.org/g/openembedded-devel/message/93904
 
-configure detects protoc based on some pkgconfig logic which confuses
-cross compilation and ends up choosing /usr/bin/protoc causing build
-failures when host system has version mismatched protoc installed, it
-works ok as long as compatible protoc is installed
+Missed tabs and spaces in the SRC_URI during
+'Update SRC_URI branch and protocols' translation.
 
-Fixes
-./protobuf-c/protobuf-c.pb.h:17:2: error: This file was generated by an older version of protoc which is
- ^
+[V2]
+Fix typo in imagemagick, change "gitk" to "git"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+[v3]
+Give a typo, fix a typo
+
+[V4]
+Give a commit summary (it was there in v2), but now there is only:
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb         | 2 +-
+ meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb | 2 +-
+ meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb                 | 2 +-
+ meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb     | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
-index 3932805248..b3423ba84d 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.0.bb
-@@ -19,6 +19,8 @@ S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+index 6ba58829e3..37d5d81238 100644
+--- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
++++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=df52c6edb7adc22e533b2bacc3bd3915"
+ PV = "20210324.2+git${SRCPV}"
+ SRCREV = "278e0a071885a22dcd2fd1b5576cc44757299343"
+ BRANCH = "lts_2021_03_24"
+-SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH}        ;protocol=https \
++SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH};protocol=https \
+            file://0001-absl-always-use-asm-sgidefs.h.patch             \
+            file://0002-Remove-maes-option-from-cross-compilation.patch \
+            file://abseil-ppc-fixes.patch \
+diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+index cbc7a9a5eb..2c9e45fce7 100644
+--- a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
++++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+@@ -3,7 +3,7 @@ LICENSE = "GPLv2"
  
- inherit autotools pkgconfig
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
-+export PROTOC = "${STAGING_BINDIR_NATIVE}/protoc"
-+
- # After several fix attempts there is still a race between generating
- # t.test-full.pb.h and compiling cxx_generate_packed_data.c despite
- # BUILT_SOURCES and explicit dependencies.
+-SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git;branch=master ;protocol=https"
++SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git;branch=master;protocol=https"
+ SRCREV = "b0d80b7129f1d84cc563a4098d869e7420bcf4bc"
+ PV = "1.3"
+ 
+diff --git a/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb b/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
+index 688c63d14a..84f6c3ce24 100644
+--- a/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
++++ b/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ COMPATIBLE_HOST = "(x86_64|aarch64|arm)"
+ 
+ SRCREV = "09724edb1783a98da2b7ae53c5aaa87493aabc9b"
+-SRC_URI = "git://github.com/billfarrow/pcimem.git ;branch=master;protocol=https"
++SRC_URI = "git://github.com/billfarrow/pcimem.git;branch=master;protocol=https"
+ 
+ S = "${WORKDIR}/git"
+ 
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+index 1b41732ecd..bb111a1c9b 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+@@ -11,7 +11,7 @@ DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
+ 
+ BASE_PV := "${PV}"
+ PV .= "_25"
+-SRC_URI = "git://github.com/ImageMagick/ImageMagick.git ;branch=master;protocol=https"
++SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=master;protocol=https"
+ SRCREV = "8b4e00829eb84d4e7b4da11acf1f98f1e8166e5b"
+ 
+ S = "${WORKDIR}/git"
 -- 
-2.33.1
+2.25.1
 
 
