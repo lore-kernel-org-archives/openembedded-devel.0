@@ -1,97 +1,131 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <rfried.dev@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B1A9C433F5
-	for <webhook@archiver.kernel.org>; Thu, 11 Nov 2021 16:03:30 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com
- [209.85.208.51])
- by mx.groups.io with SMTP id smtpd.web11.1562.1636646608966941436
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C599CC433EF
+	for <webhook@archiver.kernel.org>; Thu, 11 Nov 2021 23:46:57 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
+ [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.web10.8014.1636674416570978565
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Nov 2021 08:03:29 -0800
+ Thu, 11 Nov 2021 15:46:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=jLSVY3tL;
- spf=pass (domain: gmail.com, ip: 209.85.208.51,
- mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f51.google.com with SMTP id b15so25859278edd.7
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=AR3nqXLc;
+ spf=pass (domain: gmail.com, ip: 209.85.221.42,
+ mailfrom: rfried.dev@gmail.com)
+Received: by mail-wr1-f42.google.com with SMTP id b12so12498413wrh.4
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Nov 2021 08:03:28 -0800 (PST)
+ Thu, 11 Nov 2021 15:46:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=HCilP3yHqtDL7Gw56zoZI95WNpRQ8rccyDytE4MSckQ=;
-        b=jLSVY3tLkNEPzt5RmqG+7/GMLFsqQlM7M6m+/c5aowbCACFEULQZBxvJIxu2ZqybKi
-         LgmteVj1R8z4dGTTegvn5rgqjtEh5EJr7fbH1Oeup43b0rPSMUo/UJX/d5s1EC1by2Sa
-         x5iJ2YbDAoafaWoLvqu7IkB6/2Ja/SSBWSps/iFukCu7rbQxCneKtK7eLDShjLybAJo5
-         +TRlHEReTfABLTYe4W84zeluLk8CmL/BMELGFugYHP6mKbMOjRICAGWQFYr1fRyCtIFQ
-         ZXQ54tEYX5rWtF0AP8nOZbrQRwkv+gVjYHBeywHALpE2c+z8sTBzQUAkNu5ggbMeNoUM
-         Vsiw==
+        bh=8II0Yqlgw90iGfnulG1IEmeH3dDU+u0yns/8vCpAIRQ=;
+        b=AR3nqXLctYXi7UlyUOLWJexiiWX7wuptn+d4E0I5sgd/eY+/eTuE/gPlQF6DlF2HTF
+         ykq1DJNRYyUATkTuaxf8zrr9ZtudCBU2rkm1JCSu0XmKt7lNM3V9OzKsl9gngXDtY0bX
+         ixaidVZ7WCuq8YG3Cv+kMbgyjM9a4pmg5ShxxtBl0WyAWYmj5ulNKTrkT71nt/zgELsi
+         3I9JyMp/h591+4wxFiIw4+NmdICDum/NlDUcxH/uPVhjpqabtxcYNr9HN0QpoZk+lAdI
+         dnC6n+IYiFhqkhXFUTtt/eixYtaFTp5+6x4bawWF2k1IabfbY/USJMUyBUK6SDdqoX08
+         38Zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=HCilP3yHqtDL7Gw56zoZI95WNpRQ8rccyDytE4MSckQ=;
-        b=SdQ3QI6x8HdLZwXvBJddYwjUh8KcQ1njjKnn3yCGuVcOQCrJ3S7VlCc/Q9XcMGnQ0A
-         k6yNnYvfO7oRQ52i3gSNyxyFPC9NnB1yUH/jHu25sltJL1nLFpCccVYI++ZKgOC/+noM
-         0mbw7OJtn1ULIhSzIXhNdRuHzco6hZyikf6LxhCHQq5aRQxQn38FZ9M4vPx9e0amuf2/
-         sZXYvz12+zdYG/hoODutwmicaiufl6jS7YqPH0Y5Aoxi2CWvFhg+l4I6FlxF5Ug4/lLr
-         KQUc6q05nxHnmDb4RnA10YCbp/IL/7RKLpR5IvZZPIj5UOZnnJLvnOXp9WZuHbpsgGJe
-         G1mQ==
-X-Gm-Message-State: AOAM531z2mcjFQxIzMIH9f3HaKs2xmZsf4PcWV0MsHxgb/ggnQC/2jjV
-	EIaixeRsf8sJmRuNAHxoEdsElGBRz70=
+        bh=8II0Yqlgw90iGfnulG1IEmeH3dDU+u0yns/8vCpAIRQ=;
+        b=vM8WtBQ0+TOiAXqDgVRYhAoCG3t846vZKZa2J4RgiMty+A/9zMLn8a2JAQwdCfy4EW
+         VV7FKm80Y2phgs/100t3umIfvWw+rA2ncKgEBf31W8BptWLx0S+VStkpTaDrF+e6bNQF
+         QX9tlGi4aNoYYpYT9s0FZQzlInYqgqwYc0XYASQwOTGcSbqJMjMx3PeWDfZsLgvhBX7T
+         nCalvAUYf0OMJac3eEFRKXSnZJk1cSBBO0qcxKDKJIxOgx5uvEenLrsjFOUkWxTfaVSF
+         s5/glHNYLDJroWJvZvEwv+rErzjw2lcevl7ZY1gZZHO/bpfbpNFXmudslDN+LEeUaoCC
+         Verw==
+X-Gm-Message-State: AOAM532Mo36XD3FYnk7YwXzClC7sg1SObn+mMzjdoVY7047ArmM7bidr
+	9bZWCji5N0+OgagOYgy/AaUE53rwoOHrLA==
 X-Google-Smtp-Source: 
- ABdhPJyrX8KP2LNYAKpU64tkNbzVZitijO+cctdZ8WKECzVpirJVR47ifZ48O3N+ovykX+4Q1oUiZg==
-X-Received: by 2002:a17:906:a392:: with SMTP id
- k18mr11037198ejz.99.1636646607043;
-        Thu, 11 Nov 2021 08:03:27 -0800 (PST)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+ ABdhPJw1A3LhO8CItNAfyvep+gV4+lwD0d8XjH3p5dZDqEdPCxhiLCpIPTSEkvSULKrdJeDeoUmVew==
+X-Received: by 2002:a5d:6510:: with SMTP id x16mr13370338wru.2.1636674414261;
+        Thu, 11 Nov 2021 15:46:54 -0800 (PST)
+Received: from localhost.localdomain (bzq-84-111-132-196.cablep.bezeqint.net.
+ [84.111.132.196])
         by smtp.gmail.com with ESMTPSA id
- o5sm1998253edc.25.2021.11.11.08.03.26
+ o4sm12694652wmq.31.2021.11.11.15.46.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 Nov 2021 08:03:26 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+        Thu, 11 Nov 2021 15:46:53 -0800 (PST)
+From: Ramon Fried <rfried.dev@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] libgusb: add PACKAGECONFIG for vapi and keep it
- enabled only when introspection is
-Date: Thu, 11 Nov 2021 17:03:23 +0100
-Message-Id: <20211111160323.45859-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.32.0
+Cc: Ramon Fried <rfried.dev@gmail.com>
+Subject: [meta-oe][PATCH] bitwise: Upgrade 0.42 -> 0.43
+Date: Fri, 12 Nov 2021 01:46:37 +0200
+Message-Id: <20211111234637.526046-1-rfried.dev@gmail.com>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 11 Nov 2021 16:03:30 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 11 Nov 2021 23:46:57 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93909
+ https://lists.openembedded.org/g/openembedded-devel/message/93910
 
-* vapi depends on introspection being enabled and libgusb build was failing
-  without introspection with:
-  | ../git/gusb/meson.build:182:6: ERROR: Unknown variable "libgusb_girtarget".
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Ramon Fried <rfried.dev@gmail.com>
 ---
- meta-oe/recipes-support/libgusb/libgusb_0.3.8.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../{bitwise_0.42.bb => bitwise_0.43.bb}      |  3 +--
+ ...ormat-security-errors-with-mvwprintw.patch | 27 -------------------
+ 2 files changed, 1 insertion(+), 29 deletions(-)
+ rename meta-oe/recipes-extended/bitwise/{bitwise_0.42.bb => bitwise_0.43.bb} (82%)
+ delete mode 100644 meta-oe/recipes-extended/bitwise/files/0001-Fix-Werror-format-security-errors-with-mvwprintw.patch
 
-diff --git a/meta-oe/recipes-support/libgusb/libgusb_0.3.8.bb b/meta-oe/recipes-support/libgusb/libgusb_0.3.8.bb
-index 7020ced72c..51e7349043 100644
---- a/meta-oe/recipes-support/libgusb/libgusb_0.3.8.bb
-+++ b/meta-oe/recipes-support/libgusb/libgusb_0.3.8.bb
-@@ -6,6 +6,9 @@ DEPENDS = "glib-2.0 libusb"
+diff --git a/meta-oe/recipes-extended/bitwise/bitwise_0.42.bb b/meta-oe/recipes-extended/bitwise/bitwise_0.43.bb
+similarity index 82%
+rename from meta-oe/recipes-extended/bitwise/bitwise_0.42.bb
+rename to meta-oe/recipes-extended/bitwise/bitwise_0.43.bb
+index ebf4b3c5e..f473ccaf5 100644
+--- a/meta-oe/recipes-extended/bitwise/bitwise_0.42.bb
++++ b/meta-oe/recipes-extended/bitwise/bitwise_0.43.bb
+@@ -12,9 +12,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
  
- inherit meson gobject-introspection gtk-doc gettext vala
+ SRC_URI = "https://github.com/mellowcandle/bitwise/releases/download/v${PV}/bitwise-v${PV}.tar.gz \
+            file://0001-makefile.am-Fix-build-when-build-dir-is-not-same-as-.patch \
+-           file://0001-Fix-Werror-format-security-errors-with-mvwprintw.patch \
+            "
+-SRC_URI[sha256sum] = "d3d43cef47bf8f49e85f7ed381c3eaf1df921ca51805e0962f1a97a517e1d1d2"
++SRC_URI[sha256sum] = "f524f794188a10defc4df673d8cf0b3739f93e58e93aff0cdb8a99fbdcca2ffb"
  
-+PACKAGECONFIG ??= "${@bb.utils.contains('GI_DATA_ENABLED', 'True', 'vapi', '', d)}"
-+PACKAGECONFIG[vapi] = "-Dvapi=true,-Dvapi=false"
-+
- SRC_URI = "git://github.com/hughsie/libgusb.git;branch=main;protocol=https"
- SRCREV = "db9edbd8b45662d551194a0985173732f8f557a5"
- S = "${WORKDIR}/git"
+ UPSTREAM_CHECK_URI = "https://github.com/mellowcandle/bitwise/releases"
+ 
+diff --git a/meta-oe/recipes-extended/bitwise/files/0001-Fix-Werror-format-security-errors-with-mvwprintw.patch b/meta-oe/recipes-extended/bitwise/files/0001-Fix-Werror-format-security-errors-with-mvwprintw.patch
+deleted file mode 100644
+index ebcb0dd5e..000000000
+--- a/meta-oe/recipes-extended/bitwise/files/0001-Fix-Werror-format-security-errors-with-mvwprintw.patch
++++ /dev/null
+@@ -1,27 +0,0 @@
+-From 53237c103b06f58ad9c2ce3914fcc7fe73629f11 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 30 Oct 2021 01:11:33 -0700
+-Subject: [PATCH] Fix -Werror=format-security errors with mvwprintw()
+-
+-Here a non-constant is used as a format string which
+-compiler complains about. Fix by using "%s" as format.
+-
+-Upstream-Status: Submitted [https://github.com/mellowcandle/bitwise/pull/49]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/interactive.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/interactive.c b/src/interactive.c
+-index cce418a..2c0b152 100644
+---- a/src/interactive.c
+-+++ b/src/interactive.c
+-@@ -114,7 +114,7 @@ void update_history_win(void)
+- 				break;
+- 			}
+- 
+--		mvwprintw(history_win, j, 2, history[history_pos - i].line);
+-+		mvwprintw(history_win, j, 2, "%s", history[history_pos - i].line);
+- 	}
+- 
+- 	if (g_has_color)
 -- 
-2.32.0
+2.33.0
 
 
