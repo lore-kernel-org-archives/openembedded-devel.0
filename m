@@ -1,255 +1,128 @@
-Return-Path: <ranjitsinhrathod1991@gmail.com>
+Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F735C433EF
-	for <webhook@archiver.kernel.org>; Fri, 12 Nov 2021 05:33:14 +0000 (UTC)
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
- [209.85.215.176])
- by mx.groups.io with SMTP id smtpd.web12.11485.1636695193657029100
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F2A4C433F5
+	for <webhook@archiver.kernel.org>; Fri, 12 Nov 2021 07:29:26 +0000 (UTC)
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web12.12515.1636702164912312978
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Nov 2021 21:33:13 -0800
+ Thu, 11 Nov 2021 23:29:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=GYG+sj3k;
- spf=pass (domain: gmail.com, ip: 209.85.215.176,
- mailfrom: ranjitsinhrathod1991@gmail.com)
-Received: by mail-pg1-f176.google.com with SMTP id n23so7094732pgh.8
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Nov 2021 21:33:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id;
-        bh=1CHphO9RjhWzIQ5QA2JVW8intoJUqsxHfty6n2doX2M=;
-        b=GYG+sj3kajal3epA7rHMrU3dGzVGbvSnu+KQ0BupEat4/fEa/oozPkBsO4o7XaSKyQ
-         R3+FuGyQAySvaQEXKBNxBt3f50B+/zMgrLHxHllcqSlksiyq5IY2OTBbBk6RdM/m51Lu
-         j9NBCdSl5QRIYDFL62NW+BQ6oAXI3/C/DHC7NQF7clqyUypPYnrO09xYuM8dQDahB+/Z
-         VxX00ix+ux6yhlwBFUKZex3TCZw05ijC54rM/AvQMgqjPd+Sdy6btRa55nuwI4PoIuw1
-         31tJrDCJbX5rUnwr14AwbbYWq1UBmQCRRadhUN6dmsVGXZLWtAw7YTr9K30leaPBjXyx
-         Kp7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=1CHphO9RjhWzIQ5QA2JVW8intoJUqsxHfty6n2doX2M=;
-        b=z5aSJZvaVuJ1TpnPAnKp8hBYCnhjaB3K7VkQVKU3/VAQ3sHJcVOZP46aw6hQz38p39
-         ZZZkyOhTq9X/eDzQepFzJBGLTe6FfwIS4o2zQUE+9A//R9UKdUunpitjExI3EdjDDX6L
-         jfL1nmzfmqPnPxeJ6DGj7G6O9CL6tUWfJWyjXB2415VyHIu7YrgdWVvEiEmAATv2HYPw
-         Goy3gg1t25VqaodcYhotGWyBIMo15ZRws2rsWyiqZ+dRB1G5wqB1PeyujxLfMsQMlK8F
-         s6uNSF5obbujFcXMD+VJ446K5tsWlcOJC4iQZZ6bK4O1w+z5Mn+KI9BOpPDzzvF83DHS
-         OoHA==
-X-Gm-Message-State: AOAM530vjSSN89kAPIeX5FgLlSi/o8ABH9ELR+qC/M5JG0b7OEo9bu+w
-	O0Od8pnP74vO4+9+CemRko+h+Q53/egPYw==
-X-Google-Smtp-Source: 
- ABdhPJwA63a1++lebevZHqVF2OcBQvIfzIGZsS1yCGQun+8Orf4bwqlT8lMFIoKz+Efd81yW5ZQmyg==
-X-Received: by 2002:a05:6a00:1348:b0:481:179c:ce9b with SMTP id
- k8-20020a056a00134800b00481179cce9bmr11637390pfu.27.1636695192836;
-        Thu, 11 Nov 2021 21:33:12 -0800 (PST)
-Received: from localhost.localdomain ([103.238.107.155])
-        by smtp.gmail.com with ESMTPSA id
- u6sm4899974pfg.157.2021.11.11.21.33.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 Nov 2021 21:33:12 -0800 (PST)
-From: Ranjitsinh Rathod <ranjitsinhrathod1991@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
-Subject: [meta-oe][dunfell][PATCH] nss: Fix CVE-2020-12403
-Date: Fri, 12 Nov 2021 11:02:36 +0530
-Message-Id: <20211112053236.17530-1-ranjitsinhrathod1991@gmail.com>
+ dkim=missing;
+ spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: changqing.li@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 1AC7TMUF006572
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 11 Nov 2021 23:29:23 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Thu, 11 Nov 2021 23:29:22 -0800
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Thu, 11 Nov 2021 23:29:21 -0800
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH 1/2] mozjs-78: fix do_configure failure
+Date: Fri, 12 Nov 2021 15:27:24 +0800
+Message-ID: <20211112072725.36086-1-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 12 Nov 2021 05:33:14 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 12 Nov 2021 07:29:26 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93912
+ https://lists.openembedded.org/g/openembedded-devel/message/93914
 
-From: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
+From: Changqing Li <changqing.li@windriver.com>
 
-Add patch for CVE-2020-12403
+do_configure fails occasionally with following error:
+| File "/firefox-91.1.0/build/moz.configure/util.configure", line 239, in try_invoke_compiler
+| os.remove(path)
+| FileNotFoundError: [Errno 2] No such file or directory: '/tmp/conftest.jr1qrcw3.cpp'
 
-Link:
-https://github.com/nss-dev/nss/commit/9ff9d3925d31ab265a965ab1d16d76c496ddb5c8
-https://github.com/nss-dev/nss/commit/06b2b1c50bd4eaa7f65d858e5e3f44f678cb3c45
+change the temp file's prefix to avoid it is deleted by others
 
-Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
-Signed-off-by: Ranjitsinh Rathod <ranjitsinhrathod1991@gmail.com>
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- .../nss/nss/CVE-2020-12403_1.patch            | 65 +++++++++++++++
- .../nss/nss/CVE-2020-12403_2.patch            | 80 +++++++++++++++++++
- meta-oe/recipes-support/nss/nss_3.51.1.bb     |  2 +
- 3 files changed, 147 insertions(+)
- create mode 100644 meta-oe/recipes-support/nss/nss/CVE-2020-12403_1.patch
- create mode 100644 meta-oe/recipes-support/nss/nss/CVE-2020-12403_2.patch
+ ...ix-one-occasionally-reproduced-confi.patch | 50 +++++++++++++++++++
+ .../mozjs/mozjs-78_78.15.0.bb                 |  1 +
+ 2 files changed, 51 insertions(+)
+ create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs-78/0001-util.configure-fix-one-occasionally-reproduced-confi.patch
 
-diff --git a/meta-oe/recipes-support/nss/nss/CVE-2020-12403_1.patch b/meta-oe/recipes-support/nss/nss/CVE-2020-12403_1.patch
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs-78/0001-util.configure-fix-one-occasionally-reproduced-confi.patch b/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs-78/0001-util.configure-fix-one-occasionally-reproduced-confi.patch
 new file mode 100644
-index 0000000000..a229a2d20f
+index 000000000..e943cf1ba
 --- /dev/null
-+++ b/meta-oe/recipes-support/nss/nss/CVE-2020-12403_1.patch
-@@ -0,0 +1,65 @@
-+From 9ff9d3925d31ab265a965ab1d16d76c496ddb5c8 Mon Sep 17 00:00:00 2001
-+From: Benjamin Beurdouche <bbeurdouche@mozilla.com>
-+Date: Sat, 18 Jul 2020 00:13:38 +0000
-+Subject: [PATCH] Bug 1636771 - Fix incorrect call to Chacha20Poly1305 by
-+ PKCS11. r=jcj,kjacobs,rrelyea
++++ b/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs-78/0001-util.configure-fix-one-occasionally-reproduced-confi.patch
+@@ -0,0 +1,50 @@
++From 430fd956b91c6208f166753578234c2f5db6352f Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Thu, 11 Nov 2021 21:17:38 +0800
++Subject: [PATCH] util.configure: fix one occasionally reproduced configure 
++ failure
 +
-+Differential Revision: https://phabricator.services.mozilla.com/D74801
++error:
++| checking whether the C++ compiler supports -Wno-range-loop-analysis...
++| DEBUG: Creating /tmp/conftest.jr1qrcw3.cpp with content:
++| DEBUG: | int
++| DEBUG: | main(void)
++| DEBUG: | {
++| DEBUG: |
++| DEBUG: | ;
++| DEBUG: | return 0;
++| DEBUG: | }
++| DEBUG: Executing: aarch64-wrs-linux-g++ -mcpu=cortex-a53 -march=armv8-a+crc -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/mozjs/91.1.0-r0/recipe-sysroot /tmp/conftest.jr1qrcw3.cpp -Werror -Wrange-loop-analysis -c
++| DEBUG: The command returned non-zero exit status 1.
++| DEBUG: Its error output was:
++...
++| File "/mozjs/91.1.0-r0/firefox-91.1.0/build/moz.configure/util.configure", line 239, in try_invoke_compiler
++| os.remove(path)
++| FileNotFoundError: [Errno 2] No such file or directory: '/tmp/conftest.jr1qrcw3.cpp'
 +
-+--HG--
-+extra : moz-landing-system : lando
++It should be another process that deleted this file by using
++"rm -rf conftest*" inappropriately
++
++Upstream-Status: Submitted [https://bugzilla.mozilla.org/show_bug.cgi?id=1740667]
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
 +---
-+ nss/gtests/pk11_gtest/pk11_chacha20poly1305_unittest.cc | 11 +++++++++--
-+ nss/lib/freebl/chacha20poly1305.c                       |  2 +-
-+ 2 files changed, 10 insertions(+), 3 deletions(-)
++ build/moz.configure/util.configure | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+CVE: CVE-2020-12403
-+Upstream-Status: Backport [https://github.com/nss-dev/nss/commit/9ff9d3925d31ab265a965ab1d16d76c496ddb5c8]
-+Comment: Refreshed path for whole patchset
-+Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
-+
-+diff --git a/nss/gtests/pk11_gtest/pk11_chacha20poly1305_unittest.cc b/nss/gtests/pk11_gtest/pk11_chacha20poly1305_unittest.cc
-+index 41f9da71d6..3ea17678d9 100644
-+--- a/nss/gtests/pk11_gtest/pk11_chacha20poly1305_unittest.cc
-++++ b/nss/gtests/pk11_gtest/pk11_chacha20poly1305_unittest.cc
-+@@ -45,7 +45,7 @@ class Pkcs11ChaCha20Poly1305Test
-+     SECItem params = {siBuffer, reinterpret_cast<unsigned char*>(&aead_params),
-+                       sizeof(aead_params)};
++diff --git a/build/moz.configure/util.configure b/build/moz.configure/util.configure
++index 7ee1a498ad..511e257ad9 100644
++--- a/build/moz.configure/util.configure
+++++ b/build/moz.configure/util.configure
++@@ -217,7 +217,7 @@ def try_invoke_compiler(compiler, language, source, flags=None, onerror=None):
++         'C++': '.cpp',
++     }[language]
 + 
-+-    // Encrypt with bad parameters.
-++    // Encrypt with bad parameters (TagLen is too long).
-+     unsigned int encrypted_len = 0;
-+     std::vector<uint8_t> encrypted(data_len + aead_params.ulTagLen);
-+     aead_params.ulTagLen = 158072;
-+@@ -54,9 +54,16 @@ class Pkcs11ChaCha20Poly1305Test
-+                      &encrypted_len, encrypted.size(), data, data_len);
-+     EXPECT_EQ(SECFailure, rv);
-+     EXPECT_EQ(0U, encrypted_len);
-+-    aead_params.ulTagLen = 16;
-++
-++    // Encrypt with bad parameters (TagLen is too short).
-++    aead_params.ulTagLen = 2;
-++    rv = PK11_Encrypt(key.get(), kMech, &params, encrypted.data(),
-++                      &encrypted_len, encrypted.size(), data, data_len);
-++    EXPECT_EQ(SECFailure, rv);
-++    EXPECT_EQ(0U, encrypted_len);
++-    fd, path = mkstemp(prefix='conftest.', suffix=suffix, text=True)
+++    fd, path = mkstemp(prefix='try_invoke_compiler_conftest.', suffix=suffix, text=True)
++     try:
++         source = source.encode('ascii', 'replace')
 + 
-+     // Encrypt.
-++    aead_params.ulTagLen = 16;
-+     rv = PK11_Encrypt(key.get(), kMech, &params, encrypted.data(),
-+                       &encrypted_len, encrypted.size(), data, data_len);
-+ 
-+diff --git a/nss/lib/freebl/chacha20poly1305.c b/nss/lib/freebl/chacha20poly1305.c
-+index 970c6436da..5c294a9eaf 100644
-+--- a/nss/lib/freebl/chacha20poly1305.c
-++++ b/nss/lib/freebl/chacha20poly1305.c
-+@@ -81,7 +81,7 @@ ChaCha20Poly1305_InitContext(ChaCha20Poly1305Context *ctx,
-+         PORT_SetError(SEC_ERROR_BAD_KEY);
-+         return SECFailure;
-+     }
-+-    if (tagLen == 0 || tagLen > 16) {
-++    if (tagLen != 16) {
-+         PORT_SetError(SEC_ERROR_INPUT_LEN);
-+         return SECFailure;
-+     }
++-- 
++2.17.1
 +
-diff --git a/meta-oe/recipes-support/nss/nss/CVE-2020-12403_2.patch b/meta-oe/recipes-support/nss/nss/CVE-2020-12403_2.patch
-new file mode 100644
-index 0000000000..7b093d0cda
---- /dev/null
-+++ b/meta-oe/recipes-support/nss/nss/CVE-2020-12403_2.patch
-@@ -0,0 +1,80 @@
-+From 06b2b1c50bd4eaa7f65d858e5e3f44f678cb3c45 Mon Sep 17 00:00:00 2001
-+From: Benjamin Beurdouche <bbeurdouche@mozilla.com>
-+Date: Sat, 18 Jul 2020 00:13:14 +0000
-+Subject: [PATCH] Bug 1636771 - Disable PKCS11 incremental mode for ChaCha20.
-+ r=kjacobs,rrelyea
-+
-+Depends on D74801
-+
-+Differential Revision: https://phabricator.services.mozilla.com/D83994
-+
-+--HG--
-+extra : moz-landing-system : lando
-+---
-+ nss/gtests/pk11_gtest/pk11_cipherop_unittest.cc | 49 +++++++++++++++++++++
-+ nss/lib/softoken/pkcs11c.c                      |  1 +
-+ 2 files changed, 50 insertions(+)
-+
-+CVE: CVE-2020-12403
-+Upstream-Status: Backport [https://github.com/nss-dev/nss/commit/06b2b1c50bd4eaa7f65d858e5e3f44f678cb3c45]
-+Comment: Refreshed path for whole patchset and removed change for pkcs11c.c
-+Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
-+
-+diff --git a/nss/gtests/pk11_gtest/pk11_cipherop_unittest.cc b/nss/gtests/pk11_gtest/pk11_cipherop_unittest.cc
-+index 38982fd885..700750cc90 100644
-+--- a/nss/gtests/pk11_gtest/pk11_cipherop_unittest.cc
-++++ b/nss/gtests/pk11_gtest/pk11_cipherop_unittest.cc
-+@@ -77,4 +77,53 @@ TEST(Pkcs11CipherOp, SingleCtxMultipleUnalignedCipherOps) {
-+   NSS_ShutdownContext(globalctx);
-+ }
-+ 
-++TEST(Pkcs11CipherOp, SingleCtxMultipleUnalignedCipherOpsChaCha20) {
-++  PK11SlotInfo* slot;
-++  PK11SymKey* key;
-++  PK11Context* ctx;
-++
-++  NSSInitContext* globalctx =
-++      NSS_InitContext("", "", "", "", NULL,
-++                      NSS_INIT_READONLY | NSS_INIT_NOCERTDB | NSS_INIT_NOMODDB |
-++                          NSS_INIT_FORCEOPEN | NSS_INIT_NOROOTINIT);
-++
-++  const CK_MECHANISM_TYPE cipher = CKM_NSS_CHACHA20_CTR;
-++
-++  slot = PK11_GetInternalSlot();
-++  ASSERT_TRUE(slot);
-++
-++  // Use arbitrary bytes for the ChaCha20 key and IV
-++  uint8_t key_bytes[32];
-++  for (size_t i = 0; i < 32; i++) {
-++    key_bytes[i] = i;
-++  }
-++  SECItem keyItem = {siBuffer, key_bytes, 32};
-++
-++  uint8_t iv_bytes[16];
-++  for (size_t i = 0; i < 16; i++) {
-++    key_bytes[i] = i;
-++  }
-++  SECItem ivItem = {siBuffer, iv_bytes, 16};
-++
-++  SECItem* param = PK11_ParamFromIV(cipher, &ivItem);
-++
-++  key = PK11_ImportSymKey(slot, cipher, PK11_OriginUnwrap, CKA_ENCRYPT,
-++                          &keyItem, NULL);
-++  ctx = PK11_CreateContextBySymKey(cipher, CKA_ENCRYPT, key, param);
-++  ASSERT_TRUE(key);
-++  ASSERT_TRUE(ctx);
-++
-++  uint8_t outbuf[128];
-++  // This is supposed to fail for Chacha20. This is because the underlying
-++  // PK11_CipherOp operation is calling the C_EncryptUpdate function for
-++  // which multi-part is disabled for ChaCha20 in counter mode.
-++  ASSERT_EQ(GetBytes(ctx, outbuf, 7), SECFailure);
-++
-++  PK11_FreeSymKey(key);
-++  PK11_FreeSlot(slot);
-++  SECITEM_FreeItem(param, PR_TRUE);
-++  PK11_DestroyContext(ctx, PR_TRUE);
-++  NSS_ShutdownContext(globalctx);
-++}
-++
-+ }  // namespace nss_test
-diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-index ac046ed0fe..14f670c32a 100644
---- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
-@@ -37,6 +37,8 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
-            file://0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch \
-            file://CVE-2020-12401.patch \
-            file://CVE-2020-6829_12400.patch \
-+           file://CVE-2020-12403_1.patch \
-+           file://CVE-2020-12403_2.patch \
-            "
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs-78_78.15.0.bb b/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs-78_78.15.0.bb
+index 61c586115..c8fe8bbfa 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs-78_78.15.0.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-extended/mozjs/mozjs-78_78.15.0.bb
+@@ -17,6 +17,7 @@ SRC_URI = " \
+     file://0010-riscv-Set-march-correctly.patch \
+     file://0011-replace-include-by-code-to-fix-arm-build.patch \
+     file://0012-Add-SharedArrayRawBufferRefs-to-public-API.patch \
++    file://0001-util.configure-fix-one-occasionally-reproduced-confi.patch \
+ "
  
- SRC_URI[md5sum] = "6acaf1ddff69306ae30a908881c6f233"
+ SRC_URI[sha256sum] = "a4438d84d95171a6d4fea9c9f02c2edbf0475a9c614d968ebe2eedc25a672151"
 -- 
 2.17.1
 
