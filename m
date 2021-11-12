@@ -1,486 +1,256 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ranjitsinhrathod1991@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41D72C433EF
-	for <webhook@archiver.kernel.org>; Fri, 12 Nov 2021 02:02:51 +0000 (UTC)
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com
- [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.web11.9655.1636682570230146685
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F735C433EF
+	for <webhook@archiver.kernel.org>; Fri, 12 Nov 2021 05:33:14 +0000 (UTC)
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
+ [209.85.215.176])
+ by mx.groups.io with SMTP id smtpd.web12.11485.1636695193657029100
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Nov 2021 18:02:50 -0800
+ Thu, 11 Nov 2021 21:33:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=dOT0wTiP;
- spf=pass (domain: gmail.com, ip: 209.85.210.181,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id r130so7191183pfc.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=GYG+sj3k;
+ spf=pass (domain: gmail.com, ip: 209.85.215.176,
+ mailfrom: ranjitsinhrathod1991@gmail.com)
+Received: by mail-pg1-f176.google.com with SMTP id n23so7094732pgh.8
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Nov 2021 18:02:50 -0800 (PST)
+ Thu, 11 Nov 2021 21:33:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=m5l5HoJgZ5aG6LNEstI0NS/dAy+hbk5pVnnL5AbhBaM=;
-        b=dOT0wTiPaOINFWLsYRHFp0T8jhkijXrIKIsLs5ChCLIcGghd6Ku5C7CEQ9V2dxiWMG
-         7pQmOb5cOtiAfIjBeYMqv2nHqAmPnGwWYopWbw5LP85+87pnblV9Q80vAplDNDuCyWvD
-         EQJdBZNhOK6l5ppENJoI5HX1crJvWRXRUsOV3BbAELux2v8VCee+tCg+ENXC6Ew6Ud+f
-         p4VluxJMhLj8zrdk9i2O/MGow1p7oWW1dDPd/+3SAmgQW4Xpbj5rG1nH1Jvdx2OgJcaZ
-         5nje9ZXCzLZxjdOjQoa3v7IWf8C+8juq1/wWxzUutg7s5hRY684NULbQq7wbZrWSKCAv
-         eP0A==
+        h=from:to:cc:subject:date:message-id;
+        bh=1CHphO9RjhWzIQ5QA2JVW8intoJUqsxHfty6n2doX2M=;
+        b=GYG+sj3kajal3epA7rHMrU3dGzVGbvSnu+KQ0BupEat4/fEa/oozPkBsO4o7XaSKyQ
+         R3+FuGyQAySvaQEXKBNxBt3f50B+/zMgrLHxHllcqSlksiyq5IY2OTBbBk6RdM/m51Lu
+         j9NBCdSl5QRIYDFL62NW+BQ6oAXI3/C/DHC7NQF7clqyUypPYnrO09xYuM8dQDahB+/Z
+         VxX00ix+ux6yhlwBFUKZex3TCZw05ijC54rM/AvQMgqjPd+Sdy6btRa55nuwI4PoIuw1
+         31tJrDCJbX5rUnwr14AwbbYWq1UBmQCRRadhUN6dmsVGXZLWtAw7YTr9K30leaPBjXyx
+         Kp7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=m5l5HoJgZ5aG6LNEstI0NS/dAy+hbk5pVnnL5AbhBaM=;
-        b=iiU4Rb4mRGRu40u/IvfS3U2Q9DmuuizWRD9KRB0SRtSwsh1NLuPQgVYY1UkGwoppQY
-         K2PxD75jq+DTg22O+otsOuF+kVCtyeLF5wslYuC2O/W7xfmQge8+vl4E7EgYS5HzamyK
-         XLt2e2hR+9eKyJsarldcW0uI+WTHUt/kE7RSe8Om00Ah91KwvP+1zsndbLLGkPNNT2+K
-         9GD7iW8ykgZzLrieSp2AnYFMqa/ZH5DfwQ7HxgtlLVdUH5++YTVPTj/mzi+0xnFirDVc
-         hVQNG/0RnXDbJfKYPgffxUiyoslN8O+bE4u26rhcYcT2Lw0B2gyE+7QQEbYYgMm5Hnvw
-         TpmQ==
-X-Gm-Message-State: AOAM53026k1oE2XtFrlzoEVSMjuRb6yppAatouaIDpbCIyrKWjdNkG1R
-	AsTXbH17PHg5E1Llbqm20NgOqtLM3Uc=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=1CHphO9RjhWzIQ5QA2JVW8intoJUqsxHfty6n2doX2M=;
+        b=z5aSJZvaVuJ1TpnPAnKp8hBYCnhjaB3K7VkQVKU3/VAQ3sHJcVOZP46aw6hQz38p39
+         ZZZkyOhTq9X/eDzQepFzJBGLTe6FfwIS4o2zQUE+9A//R9UKdUunpitjExI3EdjDDX6L
+         jfL1nmzfmqPnPxeJ6DGj7G6O9CL6tUWfJWyjXB2415VyHIu7YrgdWVvEiEmAATv2HYPw
+         Goy3gg1t25VqaodcYhotGWyBIMo15ZRws2rsWyiqZ+dRB1G5wqB1PeyujxLfMsQMlK8F
+         s6uNSF5obbujFcXMD+VJ446K5tsWlcOJC4iQZZ6bK4O1w+z5Mn+KI9BOpPDzzvF83DHS
+         OoHA==
+X-Gm-Message-State: AOAM530vjSSN89kAPIeX5FgLlSi/o8ABH9ELR+qC/M5JG0b7OEo9bu+w
+	O0Od8pnP74vO4+9+CemRko+h+Q53/egPYw==
 X-Google-Smtp-Source: 
- ABdhPJzid09uJK6RrHupgzlT23RTWsjwvPdTjb5U2fWdNpBcd+TLiPPBabrutzuM0W27wPxzzrUTgQ==
-X-Received: by 2002:a62:3287:0:b0:439:bfec:8374 with SMTP id
- y129-20020a623287000000b00439bfec8374mr10547684pfy.15.1636682569319;
-        Thu, 11 Nov 2021 18:02:49 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::7905])
+ ABdhPJwA63a1++lebevZHqVF2OcBQvIfzIGZsS1yCGQun+8Orf4bwqlT8lMFIoKz+Efd81yW5ZQmyg==
+X-Received: by 2002:a05:6a00:1348:b0:481:179c:ce9b with SMTP id
+ k8-20020a056a00134800b00481179cce9bmr11637390pfu.27.1636695192836;
+        Thu, 11 Nov 2021 21:33:12 -0800 (PST)
+Received: from localhost.localdomain ([103.238.107.155])
         by smtp.gmail.com with ESMTPSA id
- mr2sm3349323pjb.25.2021.11.11.18.02.48
+ u6sm4899974pfg.157.2021.11.11.21.33.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 Nov 2021 18:02:48 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+        Thu, 11 Nov 2021 21:33:12 -0800 (PST)
+From: Ranjitsinh Rathod <ranjitsinhrathod1991@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] xf86-video-ati: Upgrade to 19.1.0
-Date: Thu, 11 Nov 2021 18:02:47 -0800
-Message-Id: <20211112020247.1319169-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.33.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
+Subject: [meta-oe][dunfell][PATCH] nss: Fix CVE-2020-12403
+Date: Fri, 12 Nov 2021 11:02:36 +0530
+Message-Id: <20211112053236.17530-1-ranjitsinhrathod1991@gmail.com>
+X-Mailer: git-send-email 2.17.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 12 Nov 2021 02:02:51 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 12 Nov 2021 05:33:14 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93911
+ https://lists.openembedded.org/g/openembedded-devel/message/93912
 
-Backport a patch to fix build issue [1]
-Disabling glamor causing [2] so enable it
+From: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
 
-[1] https://bugs.gentoo.org/737170
-[2] https://gitlab.freedesktop.org/xorg/driver/xf86-video-ati/-/issues/186
+Add patch for CVE-2020-12403
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Link:
+https://github.com/nss-dev/nss/commit/9ff9d3925d31ab265a965ab1d16d76c496ddb5c8
+https://github.com/nss-dev/nss/commit/06b2b1c50bd4eaa7f65d858e5e3f44f678cb3c45
+
+Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
+Signed-off-by: Ranjitsinh Rathod <ranjitsinhrathod1991@gmail.com>
 ---
- ...terminology-to-use-primary-secondary.patch | 369 ++++++++++++++++++
- ...ati_19.0.1.bb => xf86-video-ati_19.1.0.bb} |  10 +-
- 2 files changed, 374 insertions(+), 5 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-ati/0001-ati-cleanup-terminology-to-use-primary-secondary.patch
- rename meta-oe/recipes-graphics/xorg-driver/{xf86-video-ati_19.0.1.bb => xf86-video-ati_19.1.0.bb} (65%)
+ .../nss/nss/CVE-2020-12403_1.patch            | 65 +++++++++++++++
+ .../nss/nss/CVE-2020-12403_2.patch            | 80 +++++++++++++++++++
+ meta-oe/recipes-support/nss/nss_3.51.1.bb     |  2 +
+ 3 files changed, 147 insertions(+)
+ create mode 100644 meta-oe/recipes-support/nss/nss/CVE-2020-12403_1.patch
+ create mode 100644 meta-oe/recipes-support/nss/nss/CVE-2020-12403_2.patch
 
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati/0001-ati-cleanup-terminology-to-use-primary-secondary.patch b/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati/0001-ati-cleanup-terminology-to-use-primary-secondary.patch
+diff --git a/meta-oe/recipes-support/nss/nss/CVE-2020-12403_1.patch b/meta-oe/recipes-support/nss/nss/CVE-2020-12403_1.patch
 new file mode 100644
-index 0000000000..cda2c2f146
+index 0000000000..a229a2d20f
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati/0001-ati-cleanup-terminology-to-use-primary-secondary.patch
-@@ -0,0 +1,369 @@
-+From 6e035c007876ffe972a497681dd3debdc806e979 Mon Sep 17 00:00:00 2001
-+From: Dave Airlie <airlied@redhat.com>
-+Date: Mon, 13 Jul 2020 09:11:28 +1000
-+Subject: [PATCH] ati: cleanup terminology to use primary/secondary
++++ b/meta-oe/recipes-support/nss/nss/CVE-2020-12403_1.patch
+@@ -0,0 +1,65 @@
++From 9ff9d3925d31ab265a965ab1d16d76c496ddb5c8 Mon Sep 17 00:00:00 2001
++From: Benjamin Beurdouche <bbeurdouche@mozilla.com>
++Date: Sat, 18 Jul 2020 00:13:38 +0000
++Subject: [PATCH] Bug 1636771 - Fix incorrect call to Chacha20Poly1305 by
++ PKCS11. r=jcj,kjacobs,rrelyea
 +
-+The X server changed some API/ABIs here.
++Differential Revision: https://phabricator.services.mozilla.com/D74801
 +
-+Based on amdgpu patch by Michel
++--HG--
++extra : moz-landing-system : lando
 +---
-+Upstream-Status: Backport [https://gitlab.freedesktop.org/xorg/driver/xf86-video-ati/-/commit/8da3e4561ef82bb78c9a17b8cd8bf139b9cfd680.patch]
-+man/radeon.man        |  2 +-
-+ src/compat-api.h      |  6 ++++
-+ src/drmmode_display.c |  4 +--
-+ src/evergreen_state.h |  2 +-
-+ src/r600_state.h      |  2 +-
-+ src/radeon.h          | 10 +++---
-+ src/radeon_exa.c      |  2 +-
-+ src/radeon_glamor.c   |  2 +-
-+ src/radeon_kms.c      | 74 +++++++++++++++++++++----------------------
-+ 9 files changed, 55 insertions(+), 49 deletions(-)
++ nss/gtests/pk11_gtest/pk11_chacha20poly1305_unittest.cc | 11 +++++++++--
++ nss/lib/freebl/chacha20poly1305.c                       |  2 +-
++ 2 files changed, 10 insertions(+), 3 deletions(-)
 +
-+diff --git a/man/radeon.man b/man/radeon.man
-+index dcebf53..247dcdb 100644
-+--- a/man/radeon.man
-++++ b/man/radeon.man
-+@@ -290,7 +290,7 @@ on. If this option is set, the default value of the property is 'on' or 'off'
-+ accordingly. If this option isn't set, the default value of the property is
-+ .B auto,
-+ which means that TearFree is on for rotated outputs, outputs with RandR
-+-transforms applied and for RandR 1.4 slave outputs, otherwise off.
-++transforms applied and for RandR 1.4 secondary outputs, otherwise off.
-+ .TP
-+ .BI "Option \*qAccelMethod\*q \*q" "string" \*q
-+ Chooses between available acceleration architectures.  Valid values are
-+diff --git a/src/compat-api.h b/src/compat-api.h
-+index f4e7524..def6d3e 100644
-+--- a/src/compat-api.h
-++++ b/src/compat-api.h
-+@@ -34,4 +34,10 @@
-+ #define BLOCKHANDLER_ARGS pScreen, pTimeout, pReadmask
-+ #endif
++CVE: CVE-2020-12403
++Upstream-Status: Backport [https://github.com/nss-dev/nss/commit/9ff9d3925d31ab265a965ab1d16d76c496ddb5c8]
++Comment: Refreshed path for whole patchset
++Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
++
++diff --git a/nss/gtests/pk11_gtest/pk11_chacha20poly1305_unittest.cc b/nss/gtests/pk11_gtest/pk11_chacha20poly1305_unittest.cc
++index 41f9da71d6..3ea17678d9 100644
++--- a/nss/gtests/pk11_gtest/pk11_chacha20poly1305_unittest.cc
+++++ b/nss/gtests/pk11_gtest/pk11_chacha20poly1305_unittest.cc
++@@ -45,7 +45,7 @@ class Pkcs11ChaCha20Poly1305Test
++     SECItem params = {siBuffer, reinterpret_cast<unsigned char*>(&aead_params),
++                       sizeof(aead_params)};
 + 
-++#if ABI_VIDEODRV_VERSION < SET_ABI_VERSION(25, 2)
-++#define current_primary current_master
-++#define primary_pixmap master_pixmap
-++#define secondary_dst slave_dst
-++#endif
++-    // Encrypt with bad parameters.
+++    // Encrypt with bad parameters (TagLen is too long).
++     unsigned int encrypted_len = 0;
++     std::vector<uint8_t> encrypted(data_len + aead_params.ulTagLen);
++     aead_params.ulTagLen = 158072;
++@@ -54,9 +54,16 @@ class Pkcs11ChaCha20Poly1305Test
++                      &encrypted_len, encrypted.size(), data, data_len);
++     EXPECT_EQ(SECFailure, rv);
++     EXPECT_EQ(0U, encrypted_len);
++-    aead_params.ulTagLen = 16;
 ++
-+ #endif
-+diff --git a/src/drmmode_display.c b/src/drmmode_display.c
-+index 0e9e247..3dec91e 100644
-+--- a/src/drmmode_display.c
-++++ b/src/drmmode_display.c
-+@@ -720,7 +720,7 @@ drmmode_crtc_prime_scanout_update(xf86CrtcPtr crtc, DisplayModePtr mode,
-+ 		xorg_list_for_each_entry(dirty, &screen->pixmap_dirty_list,
-+ 					 ent) {
-+ 			if (radeon_dirty_src_equals(dirty, drmmode_crtc->prime_scanout_pixmap)) {
-+-				dirty->slave_dst =
-++				dirty->secondary_dst =
-+ 					drmmode_crtc->scanout[scanout_id].pixmap;
-+ 				break;
-+ 			}
-+@@ -1356,7 +1356,7 @@ drmmode_set_scanout_pixmap(xf86CrtcPtr crtc, PixmapPtr ppix)
+++    // Encrypt with bad parameters (TagLen is too short).
+++    aead_params.ulTagLen = 2;
+++    rv = PK11_Encrypt(key.get(), kMech, &params, encrypted.data(),
+++                      &encrypted_len, encrypted.size(), data, data_len);
+++    EXPECT_EQ(SECFailure, rv);
+++    EXPECT_EQ(0U, encrypted_len);
 + 
-+ 	xorg_list_for_each_entry(dirty, &screen->pixmap_dirty_list, ent) {
-+ 		if (radeon_dirty_src_equals(dirty, drmmode_crtc->prime_scanout_pixmap)) {
-+-			PixmapStopDirtyTracking(dirty->src, dirty->slave_dst);
-++			PixmapStopDirtyTracking(dirty->src, dirty->secondary_dst);
-+ 			break;
-+ 		}
-+ 	}
-+diff --git a/src/evergreen_state.h b/src/evergreen_state.h
-+index 7e54e1c..34ba87b 100644
-+--- a/src/evergreen_state.h
-++++ b/src/evergreen_state.h
-+@@ -350,7 +350,7 @@ extern void *RADEONEXACreatePixmap2(ScreenPtr pScreen, int width, int height,
-+ 				    int *new_pitch);
-+ extern void RADEONEXADestroyPixmap(ScreenPtr pScreen, void *driverPriv);
-+ extern Bool RADEONEXAPixmapIsOffscreen(PixmapPtr pPix);
-+-extern Bool RADEONEXASharePixmapBacking(PixmapPtr ppix, ScreenPtr slave, void **handle_p);
-++extern Bool RADEONEXASharePixmapBacking(PixmapPtr ppix, ScreenPtr secondary, void **handle_p);
-+ extern Bool RADEONEXASetSharedPixmapBacking(PixmapPtr ppix, void *handle);
++     // Encrypt.
+++    aead_params.ulTagLen = 16;
++     rv = PK11_Encrypt(key.get(), kMech, &params, encrypted.data(),
++                       &encrypted_len, encrypted.size(), data, data_len);
 + 
-+ #endif
-+diff --git a/src/r600_state.h b/src/r600_state.h
-+index 3434599..567c3ca 100644
-+--- a/src/r600_state.h
-++++ b/src/r600_state.h
-+@@ -321,6 +321,6 @@ extern void *RADEONEXACreatePixmap2(ScreenPtr pScreen, int width, int height,
-+ 				    int *new_pitch);
-+ extern void RADEONEXADestroyPixmap(ScreenPtr pScreen, void *driverPriv);
-+ extern Bool RADEONEXAPixmapIsOffscreen(PixmapPtr pPix);
-+-extern Bool RADEONEXASharePixmapBacking(PixmapPtr ppix, ScreenPtr slave, void **handle_p);
-++extern Bool RADEONEXASharePixmapBacking(PixmapPtr ppix, ScreenPtr secondary, void **handle_p);
-+ extern Bool RADEONEXASetSharedPixmapBacking(PixmapPtr ppix, void *handle);
-+ #endif
-+diff --git a/src/radeon.h b/src/radeon.h
-+index 2c91346..85fd021 100644
-+--- a/src/radeon.h
-++++ b/src/radeon.h
-+@@ -182,18 +182,18 @@ typedef enum {
-+ 
-+ 
-+ static inline ScreenPtr
-+-radeon_master_screen(ScreenPtr screen)
-++radeon_primary_screen(ScreenPtr screen)
-+ {
-+-    if (screen->current_master)
-+-	return screen->current_master;
-++    if (screen->current_primary)
-++	return screen->current_primary;
-+ 
-+     return screen;
-+ }
-+ 
-+ static inline ScreenPtr
-+-radeon_dirty_master(PixmapDirtyUpdatePtr dirty)
-++radeon_dirty_primary(PixmapDirtyUpdatePtr dirty)
-+ {
-+-    return radeon_master_screen(dirty->slave_dst->drawable.pScreen);
-++    return radeon_primary_screen(dirty->secondary_dst->drawable.pScreen);
-+ }
-+ 
-+ static inline DrawablePtr
-+diff --git a/src/radeon_exa.c b/src/radeon_exa.c
-+index 268155e..320ff99 100644
-+--- a/src/radeon_exa.c
-++++ b/src/radeon_exa.c
-+@@ -282,7 +282,7 @@ void RADEONEXADestroyPixmap(ScreenPtr pScreen, void *driverPriv)
-+     free(driverPriv);
-+ }
-+ 
-+-Bool RADEONEXASharePixmapBacking(PixmapPtr ppix, ScreenPtr slave, void **fd_handle)
-++Bool RADEONEXASharePixmapBacking(PixmapPtr ppix, ScreenPtr seconndary, void **fd_handle)
-+ {
-+     struct radeon_exa_pixmap_priv *driver_priv = exaGetPixmapDriverPrivate(ppix);
-+ 
-+diff --git a/src/radeon_glamor.c b/src/radeon_glamor.c
-+index f109838..ccf9994 100644
-+--- a/src/radeon_glamor.c
-++++ b/src/radeon_glamor.c
-+@@ -366,7 +366,7 @@ radeon_glamor_set_pixmap_bo(DrawablePtr drawable, PixmapPtr pixmap)
-+ 
-+ 
-+ static Bool
-+-radeon_glamor_share_pixmap_backing(PixmapPtr pixmap, ScreenPtr slave,
-++radeon_glamor_share_pixmap_backing(PixmapPtr pixmap, ScreenPtr secondary,
-+ 				   void **handle_p)
-+ {
-+ 	ScreenPtr screen = pixmap->drawable.pScreen;
-+diff --git a/src/radeon_kms.c b/src/radeon_kms.c
-+index b3db7c4..62962d6 100644
-+--- a/src/radeon_kms.c
-++++ b/src/radeon_kms.c
-+@@ -559,8 +559,8 @@ dirty_region(PixmapDirtyUpdatePtr dirty)
-+ 	if (dirty->rotation != RR_Rotate_0) {
-+ 		dstregion = transform_region(damageregion,
-+ 					     &dirty->f_inverse,
-+-					     dirty->slave_dst->drawable.width,
-+-					     dirty->slave_dst->drawable.height);
-++					     dirty->secondary_dst->drawable.width,
-++					     dirty->secondary_dst->drawable.height);
-+ 	} else
-+ #endif
-+ 	{
-+@@ -568,7 +568,7 @@ dirty_region(PixmapDirtyUpdatePtr dirty)
-+ 
-+ 	    dstregion = RegionDuplicate(damageregion);
-+ 	    RegionTranslate(dstregion, -dirty->x, -dirty->y);
-+-	    PixmapRegionInit(&pixregion, dirty->slave_dst);
-++	    PixmapRegionInit(&pixregion, dirty->secondary_dst);
-+ 	    RegionIntersect(dstregion, dstregion, &pixregion);
-+ 	    RegionUninit(&pixregion);
-+ 	}
-+@@ -585,8 +585,8 @@ redisplay_dirty(PixmapDirtyUpdatePtr dirty, RegionPtr region)
-+ 	if (RegionNil(region))
-+ 		goto out;
-+ 
-+-	if (dirty->slave_dst->master_pixmap)
-+-	    DamageRegionAppend(&dirty->slave_dst->drawable, region);
-++	if (dirty->secondary_dst->primary_pixmap)
-++	    DamageRegionAppend(&dirty->secondary_dst->drawable, region);
-+ 
-+ #ifdef HAS_DIRTYTRACKING_ROTATION
-+ 	PixmapSyncDirtyHelper(dirty);
-+@@ -595,8 +595,8 @@ redisplay_dirty(PixmapDirtyUpdatePtr dirty, RegionPtr region)
-+ #endif
-+ 
-+ 	radeon_cs_flush_indirect(src_scrn);
-+-	if (dirty->slave_dst->master_pixmap)
-+-	    DamageRegionProcessPending(&dirty->slave_dst->drawable);
-++	if (dirty->secondary_dst->primary_pixmap)
-++	    DamageRegionProcessPending(&dirty->secondary_dst->drawable);
-+ 
-+ out:
-+ 	DamageEmpty(dirty->damage);
-+@@ -613,12 +613,12 @@ radeon_prime_scanout_update_abort(xf86CrtcPtr crtc, void *event_data)
-+ void
-+ radeon_sync_shared_pixmap(PixmapDirtyUpdatePtr dirty)
-+ {
-+-    ScreenPtr master_screen = radeon_dirty_master(dirty);
-++    ScreenPtr primary_screen = radeon_dirty_primary(dirty);
-+     PixmapDirtyUpdatePtr ent;
-+     RegionPtr region;
-+ 
-+-    xorg_list_for_each_entry(ent, &master_screen->pixmap_dirty_list, ent) {
-+-	if (!radeon_dirty_src_equals(dirty, ent->slave_dst))
-++    xorg_list_for_each_entry(ent, &primary_screen->pixmap_dirty_list, ent) {
-++	if (!radeon_dirty_src_equals(dirty, ent->secondary_dst))
-+ 	    continue;
-+ 
-+ 	region = dirty_region(ent);
-+@@ -631,45 +631,45 @@ radeon_sync_shared_pixmap(PixmapDirtyUpdatePtr dirty)
-+ #if HAS_SYNC_SHARED_PIXMAP
-+ 
-+ static Bool
-+-master_has_sync_shared_pixmap(ScrnInfoPtr scrn, PixmapDirtyUpdatePtr dirty)
-++primary_has_sync_shared_pixmap(ScrnInfoPtr scrn, PixmapDirtyUpdatePtr dirty)
-+ {
-+-    ScreenPtr master_screen = radeon_dirty_master(dirty);
-++    ScreenPtr primary_screen = radeon_dirty_primary(dirty);
-+ 
-+-    return !!master_screen->SyncSharedPixmap;
-++    return !!primary_screen->SyncSharedPixmap;
-+ }
-+ 
-+ static Bool
-+-slave_has_sync_shared_pixmap(ScrnInfoPtr scrn, PixmapDirtyUpdatePtr dirty)
-++secondary_has_sync_shared_pixmap(ScrnInfoPtr scrn, PixmapDirtyUpdatePtr dirty)
-+ {
-+-    ScreenPtr slave_screen = dirty->slave_dst->drawable.pScreen;
-++    ScreenPtr secondary_screen = dirty->secondary_dst->drawable.pScreen;
-+ 
-+-    return !!slave_screen->SyncSharedPixmap;
-++    return !!secondary_screen->SyncSharedPixmap;
-+ }
-+ 
-+ static void
-+ call_sync_shared_pixmap(PixmapDirtyUpdatePtr dirty)
-+ {
-+-    ScreenPtr master_screen = radeon_dirty_master(dirty);
-++    ScreenPtr primary_screen = radeon_dirty_primary(dirty);
-+ 
-+-    master_screen->SyncSharedPixmap(dirty);
-++    primary_screen->SyncSharedPixmap(dirty);
-+ }
-+ 
-+ #else /* !HAS_SYNC_SHARED_PIXMAP */
-+ 
-+ static Bool
-+-master_has_sync_shared_pixmap(ScrnInfoPtr scrn, PixmapDirtyUpdatePtr dirty)
-++primary_has_sync_shared_pixmap(ScrnInfoPtr scrn, PixmapDirtyUpdatePtr dirty)
-+ {
-+-    ScrnInfoPtr master_scrn = xf86ScreenToScrn(radeon_dirty_master(dirty));
-++    ScrnInfoPtr primary_scrn = xf86ScreenToScrn(radeon_dirty_primary(dirty));
-+ 
-+-    return master_scrn->driverName == scrn->driverName;
-++    return primary_scrn->driverName == scrn->driverName;
-+ }
-+ 
-+ static Bool
-+-slave_has_sync_shared_pixmap(ScrnInfoPtr scrn, PixmapDirtyUpdatePtr dirty)
-++secondary_has_sync_shared_pixmap(ScrnInfoPtr scrn, PixmapDirtyUpdatePtr dirty)
-+ {
-+-    ScrnInfoPtr slave_scrn = xf86ScreenToScrn(dirty->slave_dst->drawable.pScreen);
-++    ScrnInfoPtr secondary_scrn = xf86ScreenToScrn(dirty->secondary_dst->drawable.pScreen);
-+ 
-+-    return slave_scrn->driverName == scrn->driverName;
-++    return secondary_scrn->driverName == scrn->driverName;
-+ }
-+ 
-+ static void
-+@@ -684,12 +684,12 @@ call_sync_shared_pixmap(PixmapDirtyUpdatePtr dirty)
-+ static xf86CrtcPtr
-+ radeon_prime_dirty_to_crtc(PixmapDirtyUpdatePtr dirty)
-+ {
-+-    ScreenPtr screen = dirty->slave_dst->drawable.pScreen;
-++    ScreenPtr screen = dirty->secondary_dst->drawable.pScreen;
-+     ScrnInfoPtr scrn = xf86ScreenToScrn(screen);
-+     xf86CrtcConfigPtr xf86_config = XF86_CRTC_CONFIG_PTR(scrn);
-+     int c;
-+ 
-+-    /* Find the CRTC which is scanning out from this slave pixmap */
-++    /* Find the CRTC which is scanning out from this secondary pixmap */
-+     for (c = 0; c < xf86_config->num_crtc; c++) {
-+ 	xf86CrtcPtr xf86_crtc = xf86_config->crtc[c];
-+ 	drmmode_crtc_private_ptr drmmode_crtc = xf86_crtc->driver_private;
-+@@ -714,7 +714,7 @@ radeon_prime_scanout_do_update(xf86CrtcPtr crtc, unsigned scanout_id)
-+ 	if (radeon_dirty_src_equals(dirty, drmmode_crtc->prime_scanout_pixmap)) {
-+ 	    RegionPtr region;
-+ 
-+-	    if (master_has_sync_shared_pixmap(scrn, dirty))
-++	    if (primary_has_sync_shared_pixmap(scrn, dirty))
-+ 		call_sync_shared_pixmap(dirty);
-+ 
-+ 	    region = dirty_region(dirty);
-+@@ -727,7 +727,7 @@ radeon_prime_scanout_do_update(xf86CrtcPtr crtc, unsigned scanout_id)
-+ 		radeon_cs_flush_indirect(scrn);
-+ 		RegionCopy(&drmmode_crtc->scanout_last_region, region);
-+ 		RegionTranslate(region, -crtc->x, -crtc->y);
-+-		dirty->slave_dst = drmmode_crtc->scanout[scanout_id].pixmap;
-++		dirty->secondary_dst = drmmode_crtc->scanout[scanout_id].pixmap;
-+ 	    }
-+ 
-+ 	    redisplay_dirty(dirty, region);
-+@@ -754,7 +754,7 @@ radeon_prime_scanout_update_handler(xf86CrtcPtr crtc, uint32_t frame, uint64_t u
-+ static void
-+ radeon_prime_scanout_update(PixmapDirtyUpdatePtr dirty)
-+ {
-+-    ScreenPtr screen = dirty->slave_dst->drawable.pScreen;
-++    ScreenPtr screen = dirty->secondary_dst->drawable.pScreen;
-+     ScrnInfoPtr scrn = xf86ScreenToScrn(screen);
-+     RADEONEntPtr pRADEONEnt = RADEONEntPriv(scrn);
-+     xf86CrtcPtr xf86_crtc = radeon_prime_dirty_to_crtc(dirty);
-+@@ -818,7 +818,7 @@ radeon_prime_scanout_update(PixmapDirtyUpdatePtr dirty)
-+ static void
-+ radeon_prime_scanout_flip(PixmapDirtyUpdatePtr ent)
-+ {
-+-    ScreenPtr screen = ent->slave_dst->drawable.pScreen;
-++    ScreenPtr screen = ent->secondary_dst->drawable.pScreen;
-+     ScrnInfoPtr scrn = xf86ScreenToScrn(screen);
-+     RADEONEntPtr pRADEONEnt = RADEONEntPriv(scrn);
-+     xf86CrtcPtr crtc = radeon_prime_dirty_to_crtc(ent);
-+@@ -893,11 +893,11 @@ radeon_dirty_update(ScrnInfoPtr scrn)
-+ 		if (screen->isGPU) {
-+ 			PixmapDirtyUpdatePtr region_ent = ent;
-+ 
-+-			if (master_has_sync_shared_pixmap(scrn, ent)) {
-+-				ScreenPtr master_screen = radeon_dirty_master(ent);
-++			if (primary_has_sync_shared_pixmap(scrn, ent)) {
-++				ScreenPtr primary_screen = radeon_dirty_primary(ent);
-+ 
-+-				xorg_list_for_each_entry(region_ent, &master_screen->pixmap_dirty_list, ent) {
-+-					if (radeon_dirty_src_equals(ent, region_ent->slave_dst))
-++				xorg_list_for_each_entry(region_ent, &primary_screen->pixmap_dirty_list, ent) {
-++					if (radeon_dirty_src_equals(ent, region_ent->secondary_dst))
-+ 						break;
-+ 				}
-+ 			}
-+@@ -921,7 +921,7 @@ radeon_dirty_update(ScrnInfoPtr scrn)
-+ 
-+ 			RegionDestroy(region);
-+ 		} else {
-+-			if (slave_has_sync_shared_pixmap(scrn, ent))
-++			if (secondary_has_sync_shared_pixmap(scrn, ent))
-+ 				continue;
-+ 
-+ 			region = dirty_region(ent);
-+@@ -1216,7 +1216,7 @@ static void RADEONBlockHandler_KMS(BLOCKHANDLER_ARGS_DECL)
-+     (*pScreen->BlockHandler) (BLOCKHANDLER_ARGS);
-+     pScreen->BlockHandler = RADEONBlockHandler_KMS;
-+ 
-+-    if (!xf86ScreenToScrn(radeon_master_screen(pScreen))->vtSema)
-++    if (!xf86ScreenToScrn(radeon_primary_screen(pScreen))->vtSema)
-+ 	return;
-+ 
-+     if (!pScreen->isGPU)
-+@@ -2584,7 +2584,7 @@ CARD32 cleanup_black_fb(OsTimerPtr timer, CARD32 now, pointer data)
-+     xf86CrtcConfigPtr xf86_config = XF86_CRTC_CONFIG_PTR(scrn);
-+     int c;
-+ 
-+-    if (xf86ScreenToScrn(radeon_master_screen(screen))->vtSema)
-++    if (xf86ScreenToScrn(radeon_primary_screen(screen))->vtSema)
-+ 	return 0;
-+ 
-+     /* Unreference the all-black FB created by RADEONLeaveVT_KMS. After
-+-- 
-+2.33.1
++diff --git a/nss/lib/freebl/chacha20poly1305.c b/nss/lib/freebl/chacha20poly1305.c
++index 970c6436da..5c294a9eaf 100644
++--- a/nss/lib/freebl/chacha20poly1305.c
+++++ b/nss/lib/freebl/chacha20poly1305.c
++@@ -81,7 +81,7 @@ ChaCha20Poly1305_InitContext(ChaCha20Poly1305Context *ctx,
++         PORT_SetError(SEC_ERROR_BAD_KEY);
++         return SECFailure;
++     }
++-    if (tagLen == 0 || tagLen > 16) {
+++    if (tagLen != 16) {
++         PORT_SetError(SEC_ERROR_INPUT_LEN);
++         return SECFailure;
++     }
 +
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_19.0.1.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_19.1.0.bb
-similarity index 65%
-rename from meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_19.0.1.bb
-rename to meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_19.1.0.bb
-index 3ba28d9a83..c8ce77ab88 100644
---- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_19.0.1.bb
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_19.1.0.bb
-@@ -12,12 +12,12 @@ DEPENDS += "virtual/libx11 libxvmc drm \
- inherit features_check
- REQUIRED_DISTRO_FEATURES += "opengl"
+diff --git a/meta-oe/recipes-support/nss/nss/CVE-2020-12403_2.patch b/meta-oe/recipes-support/nss/nss/CVE-2020-12403_2.patch
+new file mode 100644
+index 0000000000..7b093d0cda
+--- /dev/null
++++ b/meta-oe/recipes-support/nss/nss/CVE-2020-12403_2.patch
+@@ -0,0 +1,80 @@
++From 06b2b1c50bd4eaa7f65d858e5e3f44f678cb3c45 Mon Sep 17 00:00:00 2001
++From: Benjamin Beurdouche <bbeurdouche@mozilla.com>
++Date: Sat, 18 Jul 2020 00:13:14 +0000
++Subject: [PATCH] Bug 1636771 - Disable PKCS11 incremental mode for ChaCha20.
++ r=kjacobs,rrelyea
++
++Depends on D74801
++
++Differential Revision: https://phabricator.services.mozilla.com/D83994
++
++--HG--
++extra : moz-landing-system : lando
++---
++ nss/gtests/pk11_gtest/pk11_cipherop_unittest.cc | 49 +++++++++++++++++++++
++ nss/lib/softoken/pkcs11c.c                      |  1 +
++ 2 files changed, 50 insertions(+)
++
++CVE: CVE-2020-12403
++Upstream-Status: Backport [https://github.com/nss-dev/nss/commit/06b2b1c50bd4eaa7f65d858e5e3f44f678cb3c45]
++Comment: Refreshed path for whole patchset and removed change for pkcs11c.c
++Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
++
++diff --git a/nss/gtests/pk11_gtest/pk11_cipherop_unittest.cc b/nss/gtests/pk11_gtest/pk11_cipherop_unittest.cc
++index 38982fd885..700750cc90 100644
++--- a/nss/gtests/pk11_gtest/pk11_cipherop_unittest.cc
+++++ b/nss/gtests/pk11_gtest/pk11_cipherop_unittest.cc
++@@ -77,4 +77,53 @@ TEST(Pkcs11CipherOp, SingleCtxMultipleUnalignedCipherOps) {
++   NSS_ShutdownContext(globalctx);
++ }
++ 
+++TEST(Pkcs11CipherOp, SingleCtxMultipleUnalignedCipherOpsChaCha20) {
+++  PK11SlotInfo* slot;
+++  PK11SymKey* key;
+++  PK11Context* ctx;
+++
+++  NSSInitContext* globalctx =
+++      NSS_InitContext("", "", "", "", NULL,
+++                      NSS_INIT_READONLY | NSS_INIT_NOCERTDB | NSS_INIT_NOMODDB |
+++                          NSS_INIT_FORCEOPEN | NSS_INIT_NOROOTINIT);
+++
+++  const CK_MECHANISM_TYPE cipher = CKM_NSS_CHACHA20_CTR;
+++
+++  slot = PK11_GetInternalSlot();
+++  ASSERT_TRUE(slot);
+++
+++  // Use arbitrary bytes for the ChaCha20 key and IV
+++  uint8_t key_bytes[32];
+++  for (size_t i = 0; i < 32; i++) {
+++    key_bytes[i] = i;
+++  }
+++  SECItem keyItem = {siBuffer, key_bytes, 32};
+++
+++  uint8_t iv_bytes[16];
+++  for (size_t i = 0; i < 16; i++) {
+++    key_bytes[i] = i;
+++  }
+++  SECItem ivItem = {siBuffer, iv_bytes, 16};
+++
+++  SECItem* param = PK11_ParamFromIV(cipher, &ivItem);
+++
+++  key = PK11_ImportSymKey(slot, cipher, PK11_OriginUnwrap, CKA_ENCRYPT,
+++                          &keyItem, NULL);
+++  ctx = PK11_CreateContextBySymKey(cipher, CKA_ENCRYPT, key, param);
+++  ASSERT_TRUE(key);
+++  ASSERT_TRUE(ctx);
+++
+++  uint8_t outbuf[128];
+++  // This is supposed to fail for Chacha20. This is because the underlying
+++  // PK11_CipherOp operation is calling the C_EncryptUpdate function for
+++  // which multi-part is disabled for ChaCha20 in counter mode.
+++  ASSERT_EQ(GetBytes(ctx, outbuf, 7), SECFailure);
+++
+++  PK11_FreeSymKey(key);
+++  PK11_FreeSlot(slot);
+++  SECITEM_FreeItem(param, PR_TRUE);
+++  PK11_DestroyContext(ctx, PR_TRUE);
+++  NSS_ShutdownContext(globalctx);
+++}
+++
++ }  // namespace nss_test
+diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+index ac046ed0fe..14f670c32a 100644
+--- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
++++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+@@ -37,6 +37,8 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
+            file://0001-Bug-1631576-Force-a-fixed-length-for-DSA-exponentiat.patch \
+            file://CVE-2020-12401.patch \
+            file://CVE-2020-6829_12400.patch \
++           file://CVE-2020-12403_1.patch \
++           file://CVE-2020-12403_2.patch \
+            "
  
--SRC_URI += "file://0001-Fix-link-failure-with-gcc-10.patch"
-+SRC_URI += "file://0001-Fix-link-failure-with-gcc-10.patch \
-+            file://0001-ati-cleanup-terminology-to-use-primary-secondary.patch \
-+           "
-+SRC_URI[sha256sum] = "659f5a1629eea5f5334d9b39b18e6807a63aa1efa33c1236d9cc53acbb223c49"
- 
--SRC_URI[md5sum] = "47eccf71823206ade9629cba69de7ef6"
--SRC_URI[sha256sum] = "5cb6015d8664546ad1311bc9c363d7bc41ebf60e7046ceb44dd38e5b707961b0"
--
--EXTRA_OECONF += "--disable-glamor"
-+#EXTRA_OECONF += "--disable-glamor"
- 
- RDEPENDS:${PN} += "xserver-xorg-module-exa"
- RRECOMMENDS:${PN} += "linux-firmware-radeon"
+ SRC_URI[md5sum] = "6acaf1ddff69306ae30a908881c6f233"
 -- 
-2.33.1
+2.17.1
 
 
