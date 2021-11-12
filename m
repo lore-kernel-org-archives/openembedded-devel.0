@@ -1,148 +1,70 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <ross@burtonini.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B4444C433F5
-	for <webhook@archiver.kernel.org>; Fri, 12 Nov 2021 08:59:59 +0000 (UTC)
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.13387.1636707598145635207
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AB39CC433FE
+	for <webhook@archiver.kernel.org>; Fri, 12 Nov 2021 17:16:59 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by mx.groups.io with SMTP id smtpd.web09.64.1636737418840737516
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Nov 2021 00:59:58 -0800
+ Fri, 12 Nov 2021 09:16:59 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
- for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
- (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from lan.nucleusys.com ([92.247.61.126]:51144
- helo=lootbox.konsulko.bg)
-	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.93)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mlSPX-0002pO-0f; Fri, 12 Nov 2021 10:59:53 +0200
-From: Leon Anavi <leon.anavi@konsulko.com>
+ spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 067E1101E
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri, 12 Nov 2021 09:16:58 -0800 (PST)
+Received: from oss-tx204.lab.cambridge.arm.com
+ (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A26553F718
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri, 12 Nov 2021 09:16:57 -0800 (PST)
+From: Ross Burton <ross.burton@arm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>,
-	Alexander Kanavin <alex@linutronix.de>
-Subject: [meta-python][PATCH] python3-yappi: Upgrade 1.3.2 -> 1.3.3
-Date: Fri, 12 Nov 2021 10:59:47 +0200
-Message-Id: <20211112085947.8401-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.20.1
+Subject: [PATCH] libxmlb: put binary into separate package
+Date: Fri, 12 Nov 2021 17:16:55 +0000
+Message-Id: <20211112171655.1104612-1-ross.burton@arm.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id:
- leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 12 Nov 2021 08:59:59 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 12 Nov 2021 17:16:59 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93916
+ https://lists.openembedded.org/g/openembedded-devel/message/93917
 
-Upgrade to release 1.3.3:
+xb-tool is for debugging purposes only and isn't needed in normal use.
+Inherit lib_package so the binary isn't installed by default.
 
-- Fix 3.10 support
-- Fix wrong sorting key when tavg is selected
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- .../python/python3-yappi/python310.patch      | 51 -------------------
- ...-yappi_1.3.2.bb => python3-yappi_1.3.3.bb} |  3 +-
- 2 files changed, 1 insertion(+), 53 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-yappi/python310.patch
- rename meta-python/recipes-devtools/python/{python3-yappi_1.3.2.bb => python3-yappi_1.3.3.bb} (86%)
+ meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.3.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-yappi/python310.patch b/meta-python/recipes-devtools/python/python3-yappi/python310.patch
-deleted file mode 100644
-index 6dd58ae96..000000000
---- a/meta-python/recipes-devtools/python/python3-yappi/python310.patch
-+++ /dev/null
-@@ -1,51 +0,0 @@
--From d40bc0e8230dd35e05222f5761e3d7f7a75fd46e Mon Sep 17 00:00:00 2001
--From: Alexander Shadchin <shadchin@yandex-team.ru>
--Date: Tue, 1 Jun 2021 02:31:12 +0300
--Subject: [PATCH] Adapt to Python 3.10 beta 1
--
--Upstream-Status: Backport
--Signed-off-by: Alexander Kanavin <alex@linutronix.de>
-----
-- yappi/_yappi.c | 12 ++++++++++++
-- 1 file changed, 12 insertions(+)
--
--diff --git a/yappi/_yappi.c b/yappi/_yappi.c
--index 1721280..343130d 100644
----- a/yappi/_yappi.c
--+++ b/yappi/_yappi.c
--@@ -1258,7 +1258,11 @@ _resume_greenlet_ctx(_ctx *ctx)
-- static _ctx *
-- _bootstrap_thread(PyThreadState *ts)
-- {
--+#if PY_VERSION_HEX < 0x030a00b1
--     ts->use_tracing = 1;
--+#else
--+    ts->cframe->use_tracing = 1;
--+#endif
--     ts->c_profilefunc = _yapp_callback;
--     return NULL;
-- }
--@@ -1289,7 +1293,11 @@ _profile_thread(PyThreadState *ts)
--         ctx = (_ctx *)it->val;
--     }
--     
--+#if PY_VERSION_HEX < 0x030a00b1
--     ts->use_tracing = 1;
--+#else
--+    ts->cframe->use_tracing = 1;
--+#endif
--     ts->c_profilefunc = _yapp_callback;
--     ctx->id = ctx_id;
--     ctx->tid = ts->thread_id;
--@@ -1306,7 +1314,11 @@ _profile_thread(PyThreadState *ts)
-- static _ctx*
-- _unprofile_thread(PyThreadState *ts)
-- {
--+#if PY_VERSION_HEX < 0x030a00b1
--     ts->use_tracing = 0;
--+#else
--+    ts->cframe->use_tracing = 0;
--+#endif
--     ts->c_profilefunc = NULL;
-- 
--     return NULL; //dummy return for enum_threads() func. prototype
-diff --git a/meta-python/recipes-devtools/python/python3-yappi_1.3.2.bb b/meta-python/recipes-devtools/python/python3-yappi_1.3.3.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-yappi_1.3.2.bb
-rename to meta-python/recipes-devtools/python/python3-yappi_1.3.3.bb
-index 7cfc84e75..45a5f058a 100644
---- a/meta-python/recipes-devtools/python/python3-yappi_1.3.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-yappi_1.3.3.bb
-@@ -4,12 +4,11 @@ HOMEPAGE = "https://github.com/sumerc/yappi"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=71c208c9a4fd864385eb69ad4caa3bee"
- 
--SRC_URI[sha256sum] = "a51d3e6e5563cc74b5bb82ed6e7bd44a9c1a7eae3d97e4d52e9465edb3a8da8d"
-+SRC_URI[sha256sum] = "855890cd9a90d833dd2df632d648de8ccd0a4c3131f1edc8abd004db0625b5e8"
- 
- SRC_URI += " \
-     file://run-ptest \
-     file://0001-Fix-imports-for-ptests.patch \
--    file://python310.patch \
- "
- 
- inherit pypi setuptools3 ptest
--- 
-2.20.1
+diff --git a/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.3.bb b/meta-oe/rec=
+ipes-gnome/libxmlb/libxmlb_0.3.3.bb
+index 7feb209e0d..9b3a343b88 100644
+--- a/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.3.bb
++++ b/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.3.bb
+@@ -8,7 +8,7 @@ SRC_URI =3D "git://github.com/hughsie/libxmlb.git;branch=3D=
+main;protocol=3Dhttps \
+ SRCREV =3D "5108556a17bb1c2863c2ca5df088143ea65474a3"
+ S =3D "${WORKDIR}/git"
+=20
+-inherit gobject-introspection gtk-doc meson ptest-gnome
++inherit gobject-introspection gtk-doc meson ptest-gnome lib_package
+=20
+ PACKAGECONFIG ??=3D "\
+     ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
+@@ -16,3 +16,5 @@ PACKAGECONFIG ??=3D "\
+ PACKAGECONFIG[tests] =3D "-Dtests=3Dtrue,-Dtests=3Dfalse"
+=20
+ GTKDOC_MESON_OPTION =3D "gtkdoc"
++
++FILES:${PN}-bin +=3D "${libexecdir}/*"
+--=20
+2.25.1
 
 
