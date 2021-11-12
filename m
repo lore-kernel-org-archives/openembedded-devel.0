@@ -2,12 +2,12 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 25F60C43219
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E8F5AC433FE
 	for <webhook@archiver.kernel.org>; Fri, 12 Nov 2021 19:05:59 +0000 (UTC)
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.231.1636743958108453554
+ by mx.groups.io with SMTP id smtpd.web10.206.1636743959098386963
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Nov 2021 11:05:58 -0800
+ Fri, 12 Nov 2021 11:05:59 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=permerror,
@@ -20,13 +20,13 @@ Received: from lan.nucleusys.com ([92.247.61.126]:53236
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mlbrz-0006tw-Vb; Fri, 12 Nov 2021 21:05:52 +0200
+	id 1mlbs1-0006tw-O5; Fri, 12 Nov 2021 21:05:54 +0200
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/6] python3-zeroconf: Upgrade 0.36.9 -> 0.36.12
-Date: Fri, 12 Nov 2021 21:05:43 +0200
-Message-Id: <20211112190547.4560-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/6] python3-elementpath: Upgrade 2.3.2 -> 2.4.0
+Date: Fri, 12 Nov 2021 21:05:45 +0200
+Message-Id: <20211112190547.4560-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20211112190547.4560-1-leon.anavi@konsulko.com>
 References: <20211112190547.4560-1-leon.anavi@konsulko.com>
@@ -50,37 +50,37 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 12 Nov 2021 19:05:59 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93919
+ https://lists.openembedded.org/g/openembedded-devel/message/93921
 
-Upgrade to release 0.36.12:
+Upgrade to release 2.4.0:
 
-- Prevent service lookups from deadlocking if time abruptly moves
-  backwards
-- scope_id is now stripped from IPv6 addresses if given
-- Optimized decoding labels from incoming packets
+- Fix type annotations and going strict on parsers and other
+  public classes
+- Add XPathConstructor token class (subclass of XPathFunction)
+- Last release for Python 3.6
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-zeroconf_0.36.9.bb => python3-zeroconf_0.36.12.bb} | 2 +-
+ ...ython3-elementpath_2.3.2.bb => python3-elementpath_2.4.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-zeroconf_0.36.9.bb => python3-zeroconf_0.36.12.bb} (79%)
+ rename meta-python/recipes-devtools/python/{python3-elementpath_2.3.2.bb => python3-elementpath_2.4.0.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-zeroconf_0.36.9.bb b/meta-python/recipes-devtools/python/python3-zeroconf_0.36.12.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-zeroconf_0.36.9.bb
-rename to meta-python/recipes-devtools/python/python3-zeroconf_0.36.12.bb
-index 8258ddd51..24af70eee 100644
---- a/meta-python/recipes-devtools/python/python3-zeroconf_0.36.9.bb
-+++ b/meta-python/recipes-devtools/python/python3-zeroconf_0.36.12.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/jstasiak/python-zeroconf"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3bb705b228ea4a14ea2728215b780d80"
+diff --git a/meta-python/recipes-devtools/python/python3-elementpath_2.3.2.bb b/meta-python/recipes-devtools/python/python3-elementpath_2.4.0.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-elementpath_2.3.2.bb
+rename to meta-python/recipes-devtools/python/python3-elementpath_2.4.0.bb
+index 4c94d9378..ed55077e3 100644
+--- a/meta-python/recipes-devtools/python/python3-elementpath_2.3.2.bb
++++ b/meta-python/recipes-devtools/python/python3-elementpath_2.4.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/elementpath"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5dbb7fb7d72da3921202dd7b995d3ecf"
  
--SRC_URI[sha256sum] = "023ebc58b765537edcb0395367b732e5271e2659760b1d5c6119aaacaeb7b390"
-+SRC_URI[sha256sum] = "1f1994f550abfeda10a9d5924c7e5b463213ea5ca87198da751c74995f59e780"
+-SRC_URI[sha256sum] = "392f32a5efdf15c14f3f56ef8422364f8b0a74a12f51a66d9c903c172fe3594b"
++SRC_URI[sha256sum] = "5b6801b3be94d48d213beb7b8ebad96addb35c95fc6a9c062c80e033b4a32fe8"
  
+ PYPI_PACKAGE = "elementpath"
  inherit pypi setuptools3
- 
 -- 
 2.20.1
 
