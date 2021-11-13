@@ -2,60 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 25580C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 274E3C4332F
 	for <webhook@archiver.kernel.org>; Sat, 13 Nov 2021 17:46:15 +0000 (UTC)
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
- [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.web09.400.1636825574640689212
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com
+ [209.85.214.174])
+ by mx.groups.io with SMTP id smtpd.web09.398.1636825574012308864
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 13 Nov 2021 09:46:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=lYLDxGjr;
- spf=pass (domain: gmail.com, ip: 209.85.210.174,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=LXfZxAVM;
+ spf=pass (domain: gmail.com, ip: 209.85.214.174,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id g19so11231438pfb.8
+Received: by mail-pl1-f174.google.com with SMTP id u17so10971798plg.9
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Nov 2021 09:46:14 -0800 (PST)
+ Sat, 13 Nov 2021 09:46:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=tS9p0dsUTW+ioplCTeX1Zyqqmn77ALljeCznV16Qvco=;
-        b=lYLDxGjrJOzmZvewonMcsZmsJH8zXZDSe3WeVfP4FZynoAG/Xk30tDt8htbAfaAuTL
-         6aif1zwXv2+A9IgPC82CmPd5/G211jHT7WgDjCYodLtHsfLTDyKKyTSu4CJwBYYXdwdL
-         D5WnArL9OMdy/rHRN7p4ttz6U/RjMvGypcFK9FgdDk+XtVV/P0aP/n5pCRIfkOtATuCr
-         2unl+fTINfLyzVshmFwL6v0TiEnY0tpw2hEZI93hTClhgbRTn4fTpNtigXkq81nHgEk8
-         1bQ2V5XP3rDG0oO0MuvAtOmWzDZvTPx1XpcovisIBoX90iYuke9ezjZF4Cmq88NanIEx
-         R7yg==
+        bh=oiReUdeZNlazUFI4oBVhdLpbV7O/zm1YJWCgpcdbGsY=;
+        b=LXfZxAVMZI0fgZyP/cMW+6PgJkndu+BfgXI3GbgYjraqyGv1vCrL+x4yfKxD5vpHRY
+         6WdAu9L0mNHXhsjcohfhueqz1cnwqY8FzwXMSR5f/GovfzlKpN3mvRq3vsON53Febh50
+         1iolkaHvoc99MaffAYhm55C8Mo8slqFrLMx5yApI0GCdhp6CJ9545y8lX9qybqd9o1+8
+         QcP66lnQD1EmjTdrZSfSdQk0EZ9Lp8oBNSFOX577U3INfIS+9wmmvaTb9i/xktbUHt6w
+         IfyzY6hLx5JlonFlO4m09YyCn/GJzdUGXGzkJaKQAueAFPq1O/JLvhAAxRZu+lR2XTKn
+         syXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=tS9p0dsUTW+ioplCTeX1Zyqqmn77ALljeCznV16Qvco=;
-        b=YMkVfdWjJZYa7Bl6AtxB37CJ5f+bWauBm+fqUEnsTEBYcPhdeRmEvP7DSqHH/kqlna
-         gAB0nrKs5V8Z8nyrr17W0dok2+BmigydsPOe9DO0TlY50qT1CpjHeqVXMGB6nD0wb7qa
-         TudRxspbk4zzpZmNMeodx9Qrqnq/SFqx5ZSmaoA0f/c1RFGKlmSvvmig3c+cqLXomaA0
-         xTYUtLB76vwMfbfGuYt384SiJkis19aryU6xqZJ9gljx4UxRDPjs+Lk5cqs8RlAK/T7r
-         PZqBCRJwhwDjDp95K127cZtWqVj8Mt4FsjaLdgGf3p5QtJTIXTEld6tVaZGuKizlz5hw
-         Z2iw==
-X-Gm-Message-State: AOAM531y58u96tmh+2FqdwOTQCxicLiknw1EImocUxifjt8A4JARPPCX
-	2RINZKcGHCy/Gb5et/Rcl2UcHcVQnHE=
+        bh=oiReUdeZNlazUFI4oBVhdLpbV7O/zm1YJWCgpcdbGsY=;
+        b=B0ZZN4vfqx4V06rc3KBVa0hzvhAbqebTGxiji5JcYniIrp1t5I5ynsm7LrJPyXH7wN
+         OMuLcAYBlhKamrr7othpNuqbp8xDZgzz8KBt9UVf+HK3OyLcY9CO9nX9PKuI5h0OCKSu
+         iZlFapHRCn3wt8isMw0a3lFtU4Tw2bQnlOSKSyxFq62hoV49RS/g+surqGOv8cAtUCoW
+         xBTvQlfWXQCIEoiHRm6Ud9ZGHb1EZNvgWA04fDDLhm+QbsM0X9JpyfyeG5OxP6HSDwa3
+         CY/fPmrduveagH2XWenZdk3csCKDw9xfDlW4kpxdn0ZD/DQwOpdDAfsQ/9+DyelpL7tI
+         eE7g==
+X-Gm-Message-State: AOAM533XSk0vEwtPQkX4b3iKsel8gONIvcXQoJ1bXOcWhXLWl4IDEhbS
+	TKJaq2Cmt4thSObPI+QjtEBP/mWgd+s=
 X-Google-Smtp-Source: 
- ABdhPJwDsNJY0luyPqR/9iUJkpkMI81dgKeDrjFbCDg4FTiwseaMxJ78GuB2ora2+Irq1YKb3UK5rw==
-X-Received: by 2002:a65:6803:: with SMTP id l3mr14766089pgt.376.1636825574043;
-        Sat, 13 Nov 2021 09:46:14 -0800 (PST)
+ ABdhPJyvg7A1vqvlmEWQF8clUOKQy2UDdc3W6ph1gfkOQ7H7VFAOvywZ0O9PhsKZLNd4mqPpswFGWQ==
+X-Received: by 2002:a17:90a:7ac8:: with SMTP id
+ b8mr47557274pjl.206.1636825573408;
+        Sat, 13 Nov 2021 09:46:13 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::7905])
         by smtp.gmail.com with ESMTPSA id
- d13sm10649107pfu.196.2021.11.13.09.46.13
+ d13sm10649107pfu.196.2021.11.13.09.46.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sat, 13 Nov 2021 09:46:13 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH 8/9] gedit: introspection is not valid meson
- option
-Date: Sat, 13 Nov 2021 09:46:05 -0800
-Message-Id: <20211113174606.2044137-8-raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH 7/9] tracker-miners: introspection is not valid
+ meson option
+Date: Sat, 13 Nov 2021 09:46:04 -0800
+Message-Id: <20211113174606.2044137-7-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211113174606.2044137-1-raj.khem@gmail.com>
 References: <20211113174606.2044137-1-raj.khem@gmail.com>
@@ -66,29 +67,29 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 13 Nov 2021 17:46:15 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93937
+ https://lists.openembedded.org/g/openembedded-devel/message/93936
 
 meson 0.60+ errors out on unknown options and -Dintrospection
 is not a valid option
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-gnome/recipes-gnome/gedit/gedit_40.1.bb | 2 +-
+ meta-gnome/recipes-gnome/tracker/tracker-miners_3.1.1.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/gedit/gedit_40.1.bb b/meta-gnome/recipes-gnome/gedit/gedit_40.1.bb
-index 035f5d1a83..5a9c499764 100644
---- a/meta-gnome/recipes-gnome/gedit/gedit_40.1.bb
-+++ b/meta-gnome/recipes-gnome/gedit/gedit_40.1.bb
-@@ -27,7 +27,7 @@ SRC_URI[archive.sha256sum] = "55e394a82cb65678b1ab49526cf5bd43f00d8fba21476a4849
+diff --git a/meta-gnome/recipes-gnome/tracker/tracker-miners_3.1.1.bb b/meta-gnome/recipes-gnome/tracker/tracker-miners_3.1.1.bb
+index c2de723ac9..78d4b6203d 100644
+--- a/meta-gnome/recipes-gnome/tracker/tracker-miners_3.1.1.bb
++++ b/meta-gnome/recipes-gnome/tracker/tracker-miners_3.1.1.bb
+@@ -20,7 +20,7 @@ SRC_URI += "file://0001-meson.build-Just-warn-if-we-build-without-libseccomp.pat
  
  # gobject-introspection is mandatory and cannot be configured
  REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 -UNKNOWN_CONFIGURE_WHITELIST:append = " introspection"
 +GIR_MESON_OPTION = ""
  
- GTKDOC_MESON_OPTION = "gtk_doc"
- 
+ PACKAGECONFIG ??= " \
+     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "ffmpeg", "", d)} \
 -- 
 2.33.1
 
