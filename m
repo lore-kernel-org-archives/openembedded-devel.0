@@ -2,59 +2,60 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 21591C433FE
-	for <webhook@archiver.kernel.org>; Sat, 13 Nov 2021 17:46:14 +0000 (UTC)
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
- [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.web08.400.1636825573098967456
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25580C433F5
+	for <webhook@archiver.kernel.org>; Sat, 13 Nov 2021 17:46:15 +0000 (UTC)
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
+ [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web09.400.1636825574640689212
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Nov 2021 09:46:13 -0800
+ Sat, 13 Nov 2021 09:46:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=BSH5cT2D;
- spf=pass (domain: gmail.com, ip: 209.85.215.171,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=lYLDxGjr;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id 188so10796188pgb.7
+Received: by mail-pf1-f174.google.com with SMTP id g19so11231438pfb.8
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Nov 2021 09:46:13 -0800 (PST)
+ Sat, 13 Nov 2021 09:46:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=EdBqhEvgffXvaZdBspbc/wKypaLvJysvRvlkf1t4O3g=;
-        b=BSH5cT2D5Ih3VrhIj7YsnyY57gY/t2oQ7FPWeVKOu9itvDdJSI1qwHS18d3iBiUgKo
-         TMmrDtViwRGwI224YedDRX8YzB4sKyGqIGFDur+mI6NaqZkb5WAeuhlWTUOY//pChlSJ
-         3tbyPp6K7eH6FcrhEOVABNz7G7Qik4mrSNh/5Yckhvz4QZ/VAv5qcxF+oQirSvqsu2jz
-         nAgRxC64qNoiBifzbJ7Jf2TUnd62vdsBvE5NoKEd7F/bwa7We9dBYRPLRj4Ke+QRdpwt
-         IbtGZi73STFH/+z7Jy8iCmxv66tcyePbKx9qBJ1uJgg+aAmTEwp/wmkemHkyoi2PV1o8
-         6agQ==
+        bh=tS9p0dsUTW+ioplCTeX1Zyqqmn77ALljeCznV16Qvco=;
+        b=lYLDxGjrJOzmZvewonMcsZmsJH8zXZDSe3WeVfP4FZynoAG/Xk30tDt8htbAfaAuTL
+         6aif1zwXv2+A9IgPC82CmPd5/G211jHT7WgDjCYodLtHsfLTDyKKyTSu4CJwBYYXdwdL
+         D5WnArL9OMdy/rHRN7p4ttz6U/RjMvGypcFK9FgdDk+XtVV/P0aP/n5pCRIfkOtATuCr
+         2unl+fTINfLyzVshmFwL6v0TiEnY0tpw2hEZI93hTClhgbRTn4fTpNtigXkq81nHgEk8
+         1bQ2V5XP3rDG0oO0MuvAtOmWzDZvTPx1XpcovisIBoX90iYuke9ezjZF4Cmq88NanIEx
+         R7yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=EdBqhEvgffXvaZdBspbc/wKypaLvJysvRvlkf1t4O3g=;
-        b=KIKxs95l2WfPLLM1vlA/IfDGFJ1cwV2kWnbTp7rfdZlXHNZWOpnwGInilp7Amgh+BO
-         riIiVFChtfFr7Lp6Dw5chnABhhPw+cfO6ChYsW0ioSrnhzoX/ZThwEphXkpTmSz5yFlE
-         BLQBv3qX8XBbILMvruPDq3Tgk10azt3bZvuGeGxBPlrjw2nam1gvW4uOTDR3tH/7IQld
-         p2JFk1hgu6g2Eya/sdQWpBNZn6/Ec9An7uy1mrmbDiIy/NgWXtnz4xbIjP5MeEJKhoa2
-         MXRvclJcGIL8B5BNXNqEFFBvvz8MFdq7ywXBtOvnfi1f6HRuF2U0l56AYmfg+/2Qy27w
-         iqJg==
-X-Gm-Message-State: AOAM5320BrBu6OHa40CORbMadAEMzrEc7b0SODE8Mv4NiQPtPp4hbXkv
-	vJTytPVYtitr/v9m0B44hXlrDBi800c=
+        bh=tS9p0dsUTW+ioplCTeX1Zyqqmn77ALljeCznV16Qvco=;
+        b=YMkVfdWjJZYa7Bl6AtxB37CJ5f+bWauBm+fqUEnsTEBYcPhdeRmEvP7DSqHH/kqlna
+         gAB0nrKs5V8Z8nyrr17W0dok2+BmigydsPOe9DO0TlY50qT1CpjHeqVXMGB6nD0wb7qa
+         TudRxspbk4zzpZmNMeodx9Qrqnq/SFqx5ZSmaoA0f/c1RFGKlmSvvmig3c+cqLXomaA0
+         xTYUtLB76vwMfbfGuYt384SiJkis19aryU6xqZJ9gljx4UxRDPjs+Lk5cqs8RlAK/T7r
+         PZqBCRJwhwDjDp95K127cZtWqVj8Mt4FsjaLdgGf3p5QtJTIXTEld6tVaZGuKizlz5hw
+         Z2iw==
+X-Gm-Message-State: AOAM531y58u96tmh+2FqdwOTQCxicLiknw1EImocUxifjt8A4JARPPCX
+	2RINZKcGHCy/Gb5et/Rcl2UcHcVQnHE=
 X-Google-Smtp-Source: 
- ABdhPJxc5cVlC/XEYxNiC7QpViK88JfF/c4SnuMMTGFZg8qrIMzOSKsvF2P4NE5cK50VKPPALMkQoA==
-X-Received: by 2002:a65:6388:: with SMTP id h8mr13262861pgv.94.1636825572499;
-        Sat, 13 Nov 2021 09:46:12 -0800 (PST)
+ ABdhPJwDsNJY0luyPqR/9iUJkpkMI81dgKeDrjFbCDg4FTiwseaMxJ78GuB2ora2+Irq1YKb3UK5rw==
+X-Received: by 2002:a65:6803:: with SMTP id l3mr14766089pgt.376.1636825574043;
+        Sat, 13 Nov 2021 09:46:14 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::7905])
         by smtp.gmail.com with ESMTPSA id
- d13sm10649107pfu.196.2021.11.13.09.46.11
+ d13sm10649107pfu.196.2021.11.13.09.46.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 13 Nov 2021 09:46:11 -0800 (PST)
+        Sat, 13 Nov 2021 09:46:13 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH 6/9] gjs: introspection is not valid meson option
-Date: Sat, 13 Nov 2021 09:46:03 -0800
-Message-Id: <20211113174606.2044137-6-raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH 8/9] gedit: introspection is not valid meson
+ option
+Date: Sat, 13 Nov 2021 09:46:05 -0800
+Message-Id: <20211113174606.2044137-8-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211113174606.2044137-1-raj.khem@gmail.com>
 References: <20211113174606.2044137-1-raj.khem@gmail.com>
@@ -63,31 +64,31 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 13 Nov 2021 17:46:14 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 13 Nov 2021 17:46:15 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93935
+ https://lists.openembedded.org/g/openembedded-devel/message/93937
 
 meson 0.60+ errors out on unknown options and -Dintrospection
 is not a valid option
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-gnome/recipes-gnome/gjs/gjs_1.70.0.bb | 2 +-
+ meta-gnome/recipes-gnome/gedit/gedit_40.1.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.70.0.bb b/meta-gnome/recipes-gnome/gjs/gjs_1.70.0.bb
-index 92f14e0846..f6878d1f22 100644
---- a/meta-gnome/recipes-gnome/gjs/gjs_1.70.0.bb
-+++ b/meta-gnome/recipes-gnome/gjs/gjs_1.70.0.bb
-@@ -16,7 +16,7 @@ SRC_URI += " \
+diff --git a/meta-gnome/recipes-gnome/gedit/gedit_40.1.bb b/meta-gnome/recipes-gnome/gedit/gedit_40.1.bb
+index 035f5d1a83..5a9c499764 100644
+--- a/meta-gnome/recipes-gnome/gedit/gedit_40.1.bb
++++ b/meta-gnome/recipes-gnome/gedit/gedit_40.1.bb
+@@ -27,7 +27,7 @@ SRC_URI[archive.sha256sum] = "55e394a82cb65678b1ab49526cf5bd43f00d8fba21476a4849
  
  # gobject-introspection is mandatory and cannot be configured
  REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 -UNKNOWN_CONFIGURE_WHITELIST:append = " introspection"
 +GIR_MESON_OPTION = ""
  
- EXTRA_OEMESON = " \
-     -Dinstalled_tests=false \
+ GTKDOC_MESON_OPTION = "gtk_doc"
+ 
 -- 
 2.33.1
 
