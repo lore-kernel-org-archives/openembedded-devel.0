@@ -1,189 +1,104 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AF4E5C433EF
-	for <webhook@archiver.kernel.org>; Sun, 14 Nov 2021 01:50:50 +0000 (UTC)
-Received: from mail-io1-f41.google.com (mail-io1-f41.google.com
- [209.85.166.41])
- by mx.groups.io with SMTP id smtpd.web10.4765.1636854648928534408
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AB8CAC433F5
+	for <webhook@archiver.kernel.org>; Sun, 14 Nov 2021 09:25:59 +0000 (UTC)
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
+ [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.web08.7521.1636881958049129521
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Nov 2021 17:50:49 -0800
+ Sun, 14 Nov 2021 01:25:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=NbowQamP;
- spf=pass (domain: gmail.com, ip: 209.85.166.41, mailfrom: ticotimo@gmail.com)
-Received: by mail-io1-f41.google.com with SMTP id r8so16261057iog.7
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=k5d5WDbb;
+ spf=pass (domain: gmail.com, ip: 209.85.221.41,
+ mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f41.google.com with SMTP id b12so24186944wrh.4
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Nov 2021 17:50:48 -0800 (PST)
+ Sun, 14 Nov 2021 01:25:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=oFABIkQwGmYaVmGC8vFWdoTRf9kDyCBW5SEPr9wPnzM=;
-        b=NbowQamP+iJo4LNgFaR1XSppymZ9EGj2xtuPDC1SRrmA6WdI0+5YpEu7YX60Y7LWhS
-         OlOAyKmbUzEAidbwDNNkcP557z9D3VTPLvD0zcMhpZA+VpbYgXR8divufxoTKeytTAkS
-         NGnF1iA5eONVKwKD8u74cP4N4W31ivTv3erFMei3kbgbysiilnLNF72iAB7aWnulN4cf
-         iwNPHyC3AFKzPPVJAmfD5AOeiVd0UU+d2bi+sjYYpNGtdJi0UI0shshbuaM28fDLhYLZ
-         MBfbBvO3m8ToSQv9PfJiZwqG2zyAPZrv18AhWQYJBIC/1uHiS/6hI+DO76EKdWJhn2TW
-         bZXw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=IxEtrliTHhZmxRfSYG4krE4X75zvx85kz2uutf5V8Dg=;
+        b=k5d5WDbbNPVy8aRqbibp8Xep7vaAh13UaOyn5/9HM1wowKi0vdw46TVRIzwU3iJ4Vy
+         Fh9wZ200zJ8OpNhrJLKZL2YSFkSNBIaPRIlUvD6D9zpnvwXUgdoopDH6mdIhpTiQ5ypj
+         pwnIlE/+3FpVr0RdEnKSKJd9hm0m4YXDoClcYTll6vjzzslWZwwcB8H1Ml+TR9CSuz9A
+         Lu/+U1eGlAO8uHtsQn03lppGF13g4nsh/MgPatjws2AQhmGFacmt0JheEZSodxDzWjoi
+         1pw1I2pDnCIgdQX5UR7mU/FbPoqTRdrgFlTjZMw9gc5ldZb40iHa/EVLWgy3+f4L0S6R
+         uTlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=oFABIkQwGmYaVmGC8vFWdoTRf9kDyCBW5SEPr9wPnzM=;
-        b=WkuNq6j91XiEWQ8ftynkrGwqgu2FzNXx5JvCUGlaWa78Rm2OL2mDZsnh6k3igW8xGO
-         jrU3OJrDsxfZtYnq/nEjr0SGyYwkwffiqqvAfp8Q6oIxADlHKXWHnUlu6QdsCGkuCsP1
-         4JnrL3yEsB3XesUzeNrNvoNG7TOc/E8ib8bvaOhZG/YDlXUJw2shSsMsRPyrD5tsky0x
-         uAH8SasMwSiuoJOZ8QVA7etoGq72s2LBdcXt6ZVf0xJK2U0xcYdF7tldvqDvUwotWToa
-         nBGGDd43AOJJ6rZCXr6vQSlavWxtmXDyISgx/8QMVLxzfQmrzBiDl8x9HLaAy9YmXqnD
-         Nzjw==
-X-Gm-Message-State: AOAM530+LSXB6Ah+M5UNZc7p40K24dOFeIuYxmuDYxPho1RV7MSylI/Z
-	0iV1osRjoS2H6TFj/HzbAmRRhkuAaw4guvZUUwo=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=IxEtrliTHhZmxRfSYG4krE4X75zvx85kz2uutf5V8Dg=;
+        b=knkQ/hmmPArDdTcXi5+Nvucciic+NtgxhBGz+8U1TEEY29sVVE2OhvU8wrerOBOiXw
+         xD+W7kvJq3LzmgTyUCjyclV1c3XQdIZtU5pH2sZWIY1kOQU4n85e3jBNoTfAUzUlbXYR
+         mItdxMMWpIfAHaVO544TAG5ZTId1vVJ62/Kc42bhWAc1ph+/b0cvDorJtxXDlxKbxmqT
+         RmEq1EOz5NGhaHBc4C1HO06fWM9NBq1IrOlLGY4MbTtSZBWWHWuVot8ieVdF/iDwHx7z
+         T7E5pFAACwBHxtaiSzu0aQ5t/kZabdTc4PUjoTtN26nsFfIMh1y34ImSGmBlKLIvXNOY
+         z+Ow==
+X-Gm-Message-State: AOAM530w5rhkkVQH4NDa3epCzCMRZTiY+0dr+RA7lKv5vPQF10AdaTlP
+	MTJ7xpiVLp9OmnwiGQTmbXQv11Lton4=
 X-Google-Smtp-Source: 
- ABdhPJzAVlbhx92LB7wTFV3YHli55IcmydXySMgIDwl+RDPVUNYhsytVaYpj5nBIs+IGc2T4/lPFLidF0KJDJnsv4Jo=
-X-Received: by 2002:a05:6602:2e81:: with SMTP id
- m1mr16468063iow.55.1636854648202;
- Sat, 13 Nov 2021 17:50:48 -0800 (PST)
+ ABdhPJzItMUy7aCBssGd/7g5+GYj4oy6WiMD2kkc6GtmFXMBzG3bJypI9TcT01M131VJLybTM01ihw==
+X-Received: by 2002:a5d:508d:: with SMTP id a13mr35475862wrt.41.1636881956479;
+        Sun, 14 Nov 2021 01:25:56 -0800 (PST)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id
+ t8sm12907409wmq.32.2021.11.14.01.25.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 14 Nov 2021 01:25:55 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: lumag <dbaryshkov@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>,
+	Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [dunfell][PATCH] lmsensors: do not depend on lmsensors-isatools on
+ non-x86
+Date: Sun, 14 Nov 2021 10:25:45 +0100
+Message-Id: <20211114092545.7677-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-References: <20211113174606.2044137-1-raj.khem@gmail.com>
- <20211113174606.2044137-3-raj.khem@gmail.com>
-In-Reply-To: <20211113174606.2044137-3-raj.khem@gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Sat, 13 Nov 2021 17:50:37 -0800
-Message-ID: 
- <CANx9H-D_H-tUv32JaVYDqp0==O1DNCpqABoAirvhqHT3JBhhxA@mail.gmail.com>
-Subject: Re: [oe] [meta-multimedia][PATCH 3/9] libmediaart: introspection is
- not valid meson option
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000dae7e605d0b5eb1e"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 14 Nov 2021 01:50:50 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 14 Nov 2021 09:25:59 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93941
+ https://lists.openembedded.org/g/openembedded-devel/message/93942
 
---000000000000dae7e605d0b5eb1e
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: lumag <dbaryshkov@gmail.com>
 
-On Sat, Nov 13, 2021 at 9:46 AM Khem Raj <raj.khem@gmail.com> wrote:
+lmsensors will build isadump and isaset only on x86 architecture.
+Depending on this package breaks lmsensors on all non-x86 machines. Fix
+this by enabling ${PN}-isatools dependency only on x86.
 
-> meson 0.60+ errors out on unknown options and -Dintrospection
-> is not a valid option
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->
-Acked-by: Tim Orling <ticotimo@gmail.com>
-
-Thank you for this series. I wasn=E2=80=99t sure what the proper solution w=
-as.
-
+Signed-off-by: Dmitry Baryshkov <dbaryshkov@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
->  .../recipes-support/libmediaart/libmediaart-2.0_1.9.5.bb        | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-multimedia/recipes-support/libmediaart/
-> libmediaart-2.0_1.9.5.bb b/meta-multimedia/recipes-support/libmediaart/
-> libmediaart-2.0_1.9.5.bb
-> index 31fe43bfa7..ffedb2625e 100644
-> --- a/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.5.b=
-b
-> +++ b/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.5.b=
-b
-> @@ -18,6 +18,6 @@ S =3D "${WORKDIR}/libmediaart-${PV}"
->
->  # gobject-introspection is mandatory and cannot be configured
->  REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
-> -UNKNOWN_CONFIGURE_WHITELIST =3D "introspection"
-> +GIR_MESON_OPTION =3D ""
->
->  EXTRA_OEMESON =3D "-Dimage_library=3Dgdk-pixbuf"
-> --
-> 2.33.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#93932):
-> https://lists.openembedded.org/g/openembedded-devel/message/93932
-> Mute This Topic: https://lists.openembedded.org/mt/87032482/924729
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> ticotimo@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
 
---000000000000dae7e605d0b5eb1e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+cherry-picked from gatesgarth 428d4e6885
 
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Sat, Nov 13, 2021 at 9:46 AM Khem Raj &lt;<a href=3D"mai=
-lto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt; wrote:<br></div><blockqu=
-ote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc s=
-olid;padding-left:1ex">meson 0.60+ errors out on unknown options and -Dintr=
-ospection<br>
-is not a valid option<br>
-<br>
-Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D=
-"_blank">raj.khem@gmail.com</a>&gt;<br>
-</blockquote><div dir=3D"auto">Acked-by: Tim Orling &lt;<a href=3D"mailto:t=
-icotimo@gmail.com">ticotimo@gmail.com</a>&gt;</div><div dir=3D"auto"><br></=
-div><div dir=3D"auto">Thank you for this series. I wasn=E2=80=99t sure what=
- the proper solution=C2=A0was.</div><div dir=3D"auto"><br></div><blockquote=
- class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc soli=
-d;padding-left:1ex" dir=3D"auto">---<br>
-=C2=A0.../recipes-support/libmediaart/<a href=3D"http://libmediaart-2.0_1.9=
-.5.bb" rel=3D"noreferrer" target=3D"_blank">libmediaart-2.0_1.9.5.bb</a>=C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 | 2 +-<br>
-=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-<br>
-diff --git a/meta-multimedia/recipes-support/libmediaart/<a href=3D"http://=
-libmediaart-2.0_1.9.5.bb" rel=3D"noreferrer" target=3D"_blank">libmediaart-=
-2.0_1.9.5.bb</a> b/meta-multimedia/recipes-support/libmediaart/<a href=3D"h=
-ttp://libmediaart-2.0_1.9.5.bb" rel=3D"noreferrer" target=3D"_blank">libmed=
-iaart-2.0_1.9.5.bb</a><br>
-index 31fe43bfa7..ffedb2625e 100644<br>
---- a/meta-multimedia/recipes-support/libmediaart/<a href=3D"http://libmedi=
-aart-2.0_1.9.5.bb" rel=3D"noreferrer" target=3D"_blank">libmediaart-2.0_1.9=
-.5.bb</a><br>
-+++ b/meta-multimedia/recipes-support/libmediaart/<a href=3D"http://libmedi=
-aart-2.0_1.9.5.bb" rel=3D"noreferrer" target=3D"_blank">libmediaart-2.0_1.9=
-.5.bb</a><br>
-@@ -18,6 +18,6 @@ S =3D &quot;${WORKDIR}/libmediaart-${PV}&quot;<br>
-<br>
-=C2=A0# gobject-introspection is mandatory and cannot be configured<br>
-=C2=A0REQUIRED_DISTRO_FEATURES =3D &quot;gobject-introspection-data&quot;<b=
-r>
--UNKNOWN_CONFIGURE_WHITELIST =3D &quot;introspection&quot;<br>
-+GIR_MESON_OPTION =3D &quot;&quot;<br>
-<br>
-=C2=A0EXTRA_OEMESON =3D &quot;-Dimage_library=3Dgdk-pixbuf&quot;<br>
--- <br>
-2.33.1<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#93932): <a href=3D"https://lists.openembedded.org/g/ope=
-nembedded-devel/message/93932" rel=3D"noreferrer" target=3D"_blank">https:/=
-/lists.openembedded.org/g/openembedded-devel/message/93932</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/87032482/9247=
-29" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt/=
-87032482/924729</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
-et=3D"_blank">ticotimo@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
+ meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
---000000000000dae7e605d0b5eb1e--
+diff --git a/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb b/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
+index 890db55bcc..9c561e9f47 100644
+--- a/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
++++ b/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
+@@ -95,7 +95,7 @@ RDEPENDS_${PN} += " \
+     ${PN}-sensorsdetect \
+     ${PN}-sensorsconfconvert \
+     ${PN}-pwmconfig \
+-    ${PN}-isatools \
++    ${@bb.utils.contains('MACHINE_FEATURES', 'x86', '${PN}-isatools', '', d)} \
+ "
+ 
+ # libsensors packages
+-- 
+2.32.0
+
 
