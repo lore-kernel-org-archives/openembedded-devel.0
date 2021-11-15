@@ -2,10 +2,10 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F14AC433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A7F0C433F5
 	for <webhook@archiver.kernel.org>; Mon, 15 Nov 2021 18:57:03 +0000 (UTC)
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web09.849.1637002622634783874
+ by mx.groups.io with SMTP id smtpd.web08.912.1637002622633593453
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 15 Nov 2021 10:57:03 -0800
 Authentication-Results: mx.groups.io;
@@ -20,13 +20,13 @@ Received: from lan.nucleusys.com ([92.247.61.126]:55720
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mmhA1-0006Dg-3T; Mon, 15 Nov 2021 20:56:58 +0200
+	id 1mmhA0-0006Dg-CU; Mon, 15 Nov 2021 20:56:57 +0200
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-aiosignal: Add recipe
-Date: Mon, 15 Nov 2021 20:56:51 +0200
-Message-Id: <20211115185652.27542-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-frozenlist: Add recipe
+Date: Mon, 15 Nov 2021 20:56:50 +0200
+Message-Id: <20211115185652.27542-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20211115185652.27542-1-leon.anavi@konsulko.com>
 References: <20211115185652.27542-1-leon.anavi@konsulko.com>
@@ -50,37 +50,40 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 15 Nov 2021 18:57:03 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93956
+ https://lists.openembedded.org/g/openembedded-devel/message/93955
 
-A list of registered asynchronous callbacks. Version 1.2.0:
+A list-like structure which implements
+collections.abc.MutableSequence, and which can be made immutable.
+Version 1.2.0:
 
+- FrozenList now supports being used as a generic type as per PEP
+  585, e.g. frozen_int_list: FrozenList[int] (requires Python 3.9
+  or newer)
 - Added support for Python 3.10
-- Mark aiosignal as Python3-only package
+- Started shipping platform-specific wheels with the musl tag
+  targeting typical Alpine Linux runtimes
+- Started shipping platform-specific arm64 wheels for Apple Silicon
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python3-aiosignal_1.2.0.bb                | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-aiosignal_1.2.0.bb
+ .../recipes-devtools/python/python3-frozenlist_1.2.0.bb   | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-frozenlist_1.2.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiosignal_1.2.0.bb b/meta-python/recipes-devtools/python/python3-aiosignal_1.2.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-frozenlist_1.2.0.bb b/meta-python/recipes-devtools/python/python3-frozenlist_1.2.0.bb
 new file mode 100644
-index 000000000..601ac8f45
+index 000000000..b56e2e5e6
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiosignal_1.2.0.bb
-@@ -0,0 +1,12 @@
-+SUMMARY = "A list of registered asynchronous callbacks"
-+HOMEPAGE = "https://github.com/aio-libs/aiosignal"
++++ b/meta-python/recipes-devtools/python/python3-frozenlist_1.2.0.bb
+@@ -0,0 +1,8 @@
++SUMMARY = "A list-like structure which implements collections.abc.MutableSequence, and which can be made immutable."
++HOMEPAGE = "https://github.com/aio-libs/frozenlist"
 +LICENSE = "Apache-2.0"
 +LIC_FILES_CHKSUM = "file://LICENSE;md5=cf056e8e7a0a5477451af18b7b5aa98c"
 +
-+SRC_URI[sha256sum] = "78ed67db6c7b7ced4f98e495e572106d5c432a93e1ddd1bf475e1dc05f5b7df2"
++SRC_URI[sha256sum] = "68201be60ac56aff972dc18085800b6ee07973c49103a8aba669dee3d71079de"
 +
 +inherit pypi setuptools3
-+
-+RDEPENDS:${PN} = "\
-+	${PYTHON_PN}-frozenlist \
-+"
 -- 
 2.20.1
 
