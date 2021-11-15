@@ -2,12 +2,12 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 34C5CC433F5
-	for <webhook@archiver.kernel.org>; Mon, 15 Nov 2021 13:10:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F8DDC433FE
+	for <webhook@archiver.kernel.org>; Mon, 15 Nov 2021 13:10:35 +0000 (UTC)
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web10.21882.1636981833250833084
+ by mx.groups.io with SMTP id smtpd.web12.22053.1636981833669715252
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Nov 2021 05:10:33 -0800
+ Mon, 15 Nov 2021 05:10:34 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=permerror,
@@ -20,14 +20,16 @@ Received: from lan.nucleusys.com ([92.247.61.126]:55526
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mmbkg-0005eR-DZ; Mon, 15 Nov 2021 15:10:27 +0200
+	id 1mmbkj-0005eR-AO; Mon, 15 Nov 2021 15:10:29 +0200
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-aenum: Upgrade 3.1.3 -> 3.1.5
-Date: Mon, 15 Nov 2021 15:10:19 +0200
-Message-Id: <20211115131023.1575-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-bandit: Uprade 1.7.0 -> 1.7.1
+Date: Mon, 15 Nov 2021 15:10:21 +0200
+Message-Id: <20211115131023.1575-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20211115131023.1575-1-leon.anavi@konsulko.com>
+References: <20211115131023.1575-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-OutGoing-Spam-Status: No, score=-0.5
@@ -46,42 +48,40 @@ X-Source-Dir:
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 Nov 2021 13:10:34 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Nov 2021 13:10:35 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93946
+ https://lists.openembedded.org/g/openembedded-devel/message/93947
 
-Upgrade to release 3.1.5:
+Upgrade to release 1.7.1:
 
-- fix extend_enum()
-- tests: move enum setting from body to header
+- Fix broken reported URL link for B107
+- fix reading initial values from .bandit
+- Always use a Loader in yaml.load
+- PEP-518 support: configure bandit via pyproject.toml
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-aenum_3.1.3.bb => python3-aenum_3.1.5.bb}      | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-aenum_3.1.3.bb => python3-aenum_3.1.5.bb} (65%)
+ .../{python3-bandit_1.7.0.bb => python3-bandit_1.7.1.bb}       | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-bandit_1.7.0.bb => python3-bandit_1.7.1.bb} (74%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-aenum_3.1.3.bb b/meta-python/recipes-devtools/python/python3-aenum_3.1.5.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-aenum_3.1.3.bb
-rename to meta-python/recipes-devtools/python/python3-aenum_3.1.5.bb
-index ad7d36319..4da70b86d 100644
---- a/meta-python/recipes-devtools/python/python3-aenum_3.1.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-aenum_3.1.5.bb
-@@ -3,8 +3,12 @@ HOMEPAGE = "https://pypi.org/project/aenum/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://aenum/LICENSE;md5=c6a85477543f8b8591b9c1f82abebbe9"
+diff --git a/meta-python/recipes-devtools/python/python3-bandit_1.7.0.bb b/meta-python/recipes-devtools/python/python3-bandit_1.7.1.bb
+similarity index 74%
+rename from meta-python/recipes-devtools/python/python3-bandit_1.7.0.bb
+rename to meta-python/recipes-devtools/python/python3-bandit_1.7.1.bb
+index 18989c6d8..ad6df1be4 100644
+--- a/meta-python/recipes-devtools/python/python3-bandit_1.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-bandit_1.7.1.bb
+@@ -2,8 +2,7 @@ SUMMARY = "Security oriented static analyser for python code."
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
  
--SRC_URI[sha256sum] = "1d494e4d3b3e3e95389aee420203d945776d2430ee9a3d4f162e267b3a7ec3a6"
-+SRC_URI[sha256sum] = "2ebad8590b6a0183c0d9893523b458edce987ae4533339c5ac185cfac32daf1a"
+-SRC_URI[md5sum] = "24965f102dc62129d3fafe4fe596a3b8"
+-SRC_URI[sha256sum] = "8a4c7415254d75df8ff3c3b15cfe9042ecee628a1e40b44c15a98890fbfc2608"
++SRC_URI[sha256sum] = "a81b00b5436e6880fa8ad6799bc830e02032047713cbb143a12939ac67eb756c"
  
- inherit pypi setuptools3
+ DEPENDS = "python3-pbr-native python3-git python3-pbr python3-pyyaml python3-six python3-stevedore"
  
-+RDEPENDS:${PN} += "\
-+	${PYTHON_PN}-pprint \
-+"
-+
- BBCLASSEXTEND = "native nativesdk"
 -- 
 2.20.1
 
