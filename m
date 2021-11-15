@@ -2,12 +2,12 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 12026C43219
-	for <webhook@archiver.kernel.org>; Mon, 15 Nov 2021 13:10:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DD17C433EF
+	for <webhook@archiver.kernel.org>; Mon, 15 Nov 2021 13:10:35 +0000 (UTC)
 Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.21815.1636981834907001521
+ by mx.groups.io with SMTP id smtpd.web12.22054.1636981834083212603
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Nov 2021 05:10:35 -0800
+ Mon, 15 Nov 2021 05:10:34 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=permerror,
@@ -20,13 +20,13 @@ Received: from lan.nucleusys.com ([92.247.61.126]:55526
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.93)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mmbkk-0005eR-C5; Mon, 15 Nov 2021 15:10:31 +0200
+	id 1mmbkh-0005eR-F5; Mon, 15 Nov 2021 15:10:29 +0200
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-soupsieve: Upgrade 2.3 -> 2.3.1
-Date: Mon, 15 Nov 2021 15:10:23 +0200
-Message-Id: <20211115131023.1575-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-zeroconf: Upgrade 0.36.12 -> 0.36.13
+Date: Mon, 15 Nov 2021 15:10:20 +0200
+Message-Id: <20211115131023.1575-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20211115131023.1575-1-leon.anavi@konsulko.com>
 References: <20211115131023.1575-1-leon.anavi@konsulko.com>
@@ -48,36 +48,36 @@ X-Source-Dir:
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 Nov 2021 13:10:36 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Nov 2021 13:10:35 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93950
+ https://lists.openembedded.org/g/openembedded-devel/message/93948
 
-Upgrade to release 2.3.1:
+Upgrade to release 0.36.13:
 
-- FIX: Ensure attribute selectors match tags that have new lines
-  characters in attributes.
+- Unavailable interfaces are now skipped during socket bind
+- Downgraded incoming corrupt packet logging to debug
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-soupsieve_2.3.bb => python3-soupsieve_2.3.1.bb}    | 2 +-
+ ...{python3-zeroconf_0.36.12.bb => python3-zeroconf_0.36.13.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-soupsieve_2.3.bb => python3-soupsieve_2.3.1.bb} (87%)
+ rename meta-python/recipes-devtools/python/{python3-zeroconf_0.36.12.bb => python3-zeroconf_0.36.13.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-soupsieve_2.3.bb b/meta-python/recipes-devtools/python/python3-soupsieve_2.3.1.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-soupsieve_2.3.bb
-rename to meta-python/recipes-devtools/python/python3-soupsieve_2.3.1.bb
-index 3e0e6f0ee..f4cf93dab 100644
---- a/meta-python/recipes-devtools/python/python3-soupsieve_2.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-soupsieve_2.3.1.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/facelessuser/soupsieve"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=33c3a77def9b3ad83e01c65bdcc1af67"
+diff --git a/meta-python/recipes-devtools/python/python3-zeroconf_0.36.12.bb b/meta-python/recipes-devtools/python/python3-zeroconf_0.36.13.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-zeroconf_0.36.12.bb
+rename to meta-python/recipes-devtools/python/python3-zeroconf_0.36.13.bb
+index 24af70eee..ccab7fe4c 100644
+--- a/meta-python/recipes-devtools/python/python3-zeroconf_0.36.12.bb
++++ b/meta-python/recipes-devtools/python/python3-zeroconf_0.36.13.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/jstasiak/python-zeroconf"
+ LICENSE = "LGPL-2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=3bb705b228ea4a14ea2728215b780d80"
  
--SRC_URI[sha256sum] = "e4860f889dfa88774c07da0b276b70c073b6470fa1a4a8350800bb7bce3dcc76"
-+SRC_URI[sha256sum] = "b8d49b1cd4f037c7082a9683dfa1801aa2597fb11c3a1155b7a5b94829b4f1f9"
+-SRC_URI[sha256sum] = "1f1994f550abfeda10a9d5924c7e5b463213ea5ca87198da751c74995f59e780"
++SRC_URI[sha256sum] = "196fa1bd6e166f0333e3e9fff076f9991bf2719c4788287eaec577c241ef96bf"
  
- inherit pypi setuptools3 ptest
+ inherit pypi setuptools3
  
 -- 
 2.20.1
