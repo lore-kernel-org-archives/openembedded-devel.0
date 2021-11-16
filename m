@@ -1,103 +1,98 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <jdmason@kudzu.us>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 67CEAC433EF
-	for <webhook@archiver.kernel.org>; Tue, 16 Nov 2021 16:19:08 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
- [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web09.170.1637079547468692079
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 86A5BC433FE
+	for <webhook@archiver.kernel.org>; Tue, 16 Nov 2021 22:11:25 +0000 (UTC)
+Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com
+ [209.85.222.180])
+ by mx.groups.io with SMTP id smtpd.web10.407.1637100684503317534
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Nov 2021 08:19:07 -0800
+ Tue, 16 Nov 2021 14:11:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=LDKR146J;
- spf=pass (domain: gmail.com, ip: 209.85.216.43,
- mailfrom: martin.jansa@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id
- nh10-20020a17090b364a00b001a69adad5ebso3349408pjb.2
+ dkim=pass header.i=@kudzu-us.20210112.gappssmtp.com header.s=20210112
+ header.b=d1cFQ8ii;
+ spf=none, err=permanent DNS error (domain: kudzu.us, ip: 209.85.222.180,
+ mailfrom: jdmason@kudzu.us)
+Received: by mail-qk1-f180.google.com with SMTP id d2so429339qki.12
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Nov 2021 08:19:07 -0800 (PST)
+ Tue, 16 Nov 2021 14:11:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=OeuJNp8bQ7J4OBE/K5UhVxijuvVkJWMupTHuELJpRKw=;
-        b=LDKR146J0bB83JgkHZyLm1BdNPltQSJvDKAsk0AbocD9Y+ecy4UCwcqJ4hCK0Ird31
-         9ydIyTkKD4wxG04xZAC4eKJTXacJiI4byPuokzz5RidkcGnuRMH6r+0pVR7Eq43mXXp+
-         TqXHB9og3dntlYNCWI6d/RHOZJErSlHH/EuJl0iH1E62/Aqd5a3jvrqIZHGZTgD5iLX9
-         htjZvHngsDyY5Dz+DCh6w2TYEAdW2OEVprmvvsGAdXTHDOLsQF3BL4Es5EoVUG7TDBm7
-         zN0R8lPPnHWZkFQhzUnn3e3sw5d1yzUlaJsrezCPRammRIo+kgVhD0DUGnFzETjELXKw
-         uQVQ==
+        d=kudzu-us.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=8TGkc6aDs3fdk6xhFRjImxPguNRmLAR/FtjtXdV+A3Q=;
+        b=d1cFQ8iiJFV22dLFELKaYVBM2drx6X9qZiV8/yzN0QVd2Npcw9Fu1tAqX/wqQx308H
+         b4UTTwKa3AWK8zWZbSWORLnqJBqLPXmBrFRBg85OWIvXOLsgo+bCgbwLYqcjT89IFneJ
+         ZYPaTxJpvB8llduOm/FguTAvgGFi+T3TijU/L2Qdn3PFABbHU83zS1wuj4eNGuF+zaSQ
+         bOsX49fxLMe/ijaTqeo3NGyBxPwHdYlCK5952D+ifwc/g+ZVF+PlpL97PlXc7+BKTjpX
+         ngwkFIbp0Ed1QKGGWbiHMXkfxpunPU7PT90DTRqlKFxhIsgqT1nI5MlLfyuj2ZInyHYK
+         lIYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=OeuJNp8bQ7J4OBE/K5UhVxijuvVkJWMupTHuELJpRKw=;
-        b=bUJ8ocNOePGhIwf+8o2M7INHDAXZDa0eRsYiW2zAgHkwTBgSWFYayyhbATvH4W8Mv/
-         wJyJU7y9untk0QAwXWSysa9o40btTPgs7EpbqlboGD4Bneo8OlzPKJnRDXefGyQTRR3a
-         qBz+Ke07gE+JVKvTwDWyZvb86BCsIGWou07BuHay4H6fggLGwzNqqLw5UCps9n7HZOR5
-         QOYz3DeeXun5xedmlvdNliIP3qQFVPIca7kgVF53DjwiXmScz6SIWd0DHyA169aPG9bS
-         65rMF59PM1JGZXh6ldV7NJepXgfmuYbhTOxU1nvpb/KqTFfZb2nqZF7v9cWj8+NJbEqV
-         W6Uw==
-X-Gm-Message-State: AOAM532frQZsDg80mjEsG/ukMzUXslq8J163QyX7MyQ9dFpQG6LTwGxf
-	c456mfjmAVW1osBZBpqPY8EO2/jdXfpxE1MB2TQ=
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=8TGkc6aDs3fdk6xhFRjImxPguNRmLAR/FtjtXdV+A3Q=;
+        b=JsqxyG1yeLIEbaMMSn8s4aSf36KD5cN4GOBsnzqAp9oqlIzBVqn/exAvSohJY9+5tC
+         hUjhycfKynoGfBaJBhYHUxL7Fp/OoNI3Q6FrVVUQ2NHC+qDMyPEDv/Y2r0pYvNa6FW0y
+         UUEAFwJWZP6jZVdlceXfhwKZXuL0IWRqWeJHLFYe1vGlCYw0K9AOqWFz7Q0TsVCvXWtC
+         k1alYmLtt6v56UjqSB85No66BWrzUM2OnCIL4nB6rdoAO+aLY+RxUgPshnboXP+BzYy6
+         GoRUUewx3fnnX20MUhpVd5EviHMFS+pYR/ChtxetfffzVf0mqC158JNKSxnDwODxr0oz
+         Thzg==
+X-Gm-Message-State: AOAM530e8iTEwP1gXgv7gDOsYwMX79XrRw8XsaWpNYYhgCl0bGK+wqaf
+	AGgeatvTGfaYa1xkTp4b5dt2XYInE5AAcT5uasTxCjxJ4nVmBA==
 X-Google-Smtp-Source: 
- ABdhPJxWrDMDY3l+A1D82fJbUej+LKgOu7XZRSN1v0Ulrod5zUzKolnSHHSUcd+aNZac2fHhyBmwIjvVEZBueSyhVGI=
-X-Received: by 2002:a17:90a:dc15:: with SMTP id
- i21mr161023pjv.183.1637079546646;
- Tue, 16 Nov 2021 08:19:06 -0800 (PST)
+ ABdhPJyK31tcLs7DiH8XLpAdKORE/AgmgSgO2am0qeiaSD2W2EExfuF/QuelfM+SmhFUYFJKTyh1keIIph/xG/zL7MM=
+X-Received: by 2002:a37:6254:: with SMTP id w81mr9064152qkb.391.1637100683348;
+ Tue, 16 Nov 2021 14:11:23 -0800 (PST)
 MIME-Version: 1.0
-References: <1636501331-62287-1-git-send-email-wangmy@fujitsu.com>
- <1636501331-62287-2-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1636501331-62287-2-git-send-email-wangmy@fujitsu.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 16 Nov 2021 17:18:55 +0100
+From: Jon Mason <jdmason@kudzu.us>
+Date: Tue, 16 Nov 2021 17:11:12 -0500
 Message-ID: 
- <CA+chaQdSXg64n+yVLT6xfOP0=r6oeVXOy7UhAiPtoXqhQDY1Cg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH] jsoncpp: upgrade 1.9.4 -> 1.9.5
-To: wangmy <wangmy@fujitsu.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000d8de9705d0ea48df"
+ <CAPoiz9yohGUzG-UA0BHQw_BS+eme4CFqYm17Oduo84GCS0X5zg@mail.gmail.com>
+Subject: OpenEmbedded Developer Virtual Meeting (OEDVM) December 2021
+To: "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>,
+	openembedded-architecture <openembedded-architecture@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Nov 2021 16:19:08 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Nov 2021 22:11:25 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93983
+ https://lists.openembedded.org/g/openembedded-devel/message/93984
 
---000000000000d8de9705d0ea48df
-Content-Type: text/plain; charset="UTF-8"
+There will be an OpenEmbedded Developer Virtual Meeting (OEDVM) held
+on Friday, 03 December 2021.  This will be the day after the Yocto
+Project=C2=AE Summit 2021.11 concludes.  The scheduled time will match the
+YP Summit's start at 12 UTC/7AM Eastern, and run until 20 UTC/3PM (or
+earlier if we run out of topics, but then will most likely turn into a
+happy hour).
 
-On Wed, Nov 10, 2021 at 12:42 AM wangmy <wangmy@fujitsu.com> wrote:
+The event has been added to the OE Calendar
+https://www.openembedded.org/wiki/Calendar
 
-> Bug fixes:
->  Minor bug-fixes (including for cmake)
->  Support for Bazel
->  Dropped compile-time deprecation warnings
->
 
-FYI: In case someone has some prebuilt binaries linking against libjsoncpp,
-then these "minor" changes also bumped the soversion in:
-https://github.com/open-source-parsers/jsoncpp/commit/c4904b2c0d461f84fba88a760161212651e4f536
+We have added some topics that should be interesting to the larger audience=
+ at:
+https://www.openembedded.org/wiki/OEDVM_Nov_2021
 
---000000000000d8de9705d0ea48df
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+We are looking for "moderators" for the currently listed topics.  This
+entails helping to get the discussion started by presenting 1-5 slides
+on the topic and problems currently being experienced.
 
-<div dir=3D"ltr"><div dir=3D"ltr">On Wed, Nov 10, 2021 at 12:42 AM wangmy &=
-lt;<a href=3D"mailto:wangmy@fujitsu.com">wangmy@fujitsu.com</a>&gt; wrote:<=
-br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex">Bug fixes:<br>
-=C2=A0Minor bug-fixes (including for cmake)<br>
-=C2=A0Support for Bazel<br>
-=C2=A0Dropped compile-time deprecation warnings<br></blockquote><div><br></=
-div><div>FYI: In case someone has some prebuilt binaries linking against li=
-bjsoncpp, then these &quot;minor&quot; changes also bumped the soversion in=
-:</div><div><a href=3D"https://github.com/open-source-parsers/jsoncpp/commi=
-t/c4904b2c0d461f84fba88a760161212651e4f536">https://github.com/open-source-=
-parsers/jsoncpp/commit/c4904b2c0d461f84fba88a760161212651e4f536</a>=C2=A0</=
-div></div></div>
+If you do not see something listed you would like to discuss, please
+add it and put yourself as the "moderator" (and a rough time estimate
+for discussion).
 
---000000000000d8de9705d0ea48df--
+As always, if you are not an OpenEmbedded Member (but are interested
+in joining), please attend OEDVM and you can be voted in.
+
+If there are any questions, please feel free to email me and/or the
+entire OE board (board@openembedded.org).
+
+Thanks,
+Jon
 
