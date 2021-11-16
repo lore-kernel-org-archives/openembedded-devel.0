@@ -2,94 +2,102 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0DB7EC433FE
-	for <webhook@archiver.kernel.org>; Tue, 16 Nov 2021 15:21:30 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
- [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.web09.458.1637076088950994666
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 67CEAC433EF
+	for <webhook@archiver.kernel.org>; Tue, 16 Nov 2021 16:19:08 +0000 (UTC)
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
+ [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web09.170.1637079547468692079
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Nov 2021 07:21:29 -0800
+ Tue, 16 Nov 2021 08:19:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=bqyUdHPZ;
- spf=pass (domain: gmail.com, ip: 209.85.221.51,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=LDKR146J;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43,
  mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id u1so38301199wru.13
+Received: by mail-pj1-f43.google.com with SMTP id
+ nh10-20020a17090b364a00b001a69adad5ebso3349408pjb.2
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Nov 2021 07:21:28 -0800 (PST)
+ Tue, 16 Nov 2021 08:19:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ORj+1a2+BuQZ/ZNKTIs/rRJpHVO2e0F8jnfwWNXtMmQ=;
-        b=bqyUdHPZt2+PluIwV/cmLuxABjYUE/mUPtpAdQem+IXvDqQ7F8GMYYoHBN9ss85Amt
-         qqcIJoDLEXQUQ6nX3/U/IiNUGPAOphfl1nR7GCBW6LF13A/ZjR4vVQdrDU56bgOid9tZ
-         QQMqeXh/BVkgXF+2PqyoPw/3wofDLdQVZ/dA8/2zjR1GQ4zJrzmwBiXA89aoJ76F+noo
-         A7DkCIzP1xy2rQViiFVL3MjDk9xOpCMFfp8wtFvwalVAzl4HR9tt7BZGOfoWMhxKSyqb
-         OnvUUU239sZi/Hl76dTtCERoZhVVdp8dzIXYWMw7S71X2BVGivsqvGD8uo1hzbQFzyZx
-         moGA==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=OeuJNp8bQ7J4OBE/K5UhVxijuvVkJWMupTHuELJpRKw=;
+        b=LDKR146J0bB83JgkHZyLm1BdNPltQSJvDKAsk0AbocD9Y+ecy4UCwcqJ4hCK0Ird31
+         9ydIyTkKD4wxG04xZAC4eKJTXacJiI4byPuokzz5RidkcGnuRMH6r+0pVR7Eq43mXXp+
+         TqXHB9og3dntlYNCWI6d/RHOZJErSlHH/EuJl0iH1E62/Aqd5a3jvrqIZHGZTgD5iLX9
+         htjZvHngsDyY5Dz+DCh6w2TYEAdW2OEVprmvvsGAdXTHDOLsQF3BL4Es5EoVUG7TDBm7
+         zN0R8lPPnHWZkFQhzUnn3e3sw5d1yzUlaJsrezCPRammRIo+kgVhD0DUGnFzETjELXKw
+         uQVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ORj+1a2+BuQZ/ZNKTIs/rRJpHVO2e0F8jnfwWNXtMmQ=;
-        b=Fgt001Y6g8DyI8pEgFdK5uYuBPbbxeW/XzgZTq/wUsIggXzkDw4APFLpsCuwVi2+A6
-         dtXkKtdSSjoiUuiBLdjIfohVqgXdg7RbykZoaYCCoUf+Xj6e/QFx/KV9GeFVi1LsQV4U
-         vooVqOrVSWLwFzpZplEHa/zZWCY5SimcJQAYbHMQaSsrnY9l/fNxVTdsrlstENtWYAzl
-         sAUp5CnIQu45bxDB1ZvzhJ/lk0fLXjFECcu8mVLKIEqIzjbxM78OaMlnoFTMKTbb57iK
-         Y2sNd32VxgvzaGiwrImlHRBUVZZtxwPhi9aHip6mKi0wuJ3GLfNflPQIhPP9pQRJDSXV
-         Y7kQ==
-X-Gm-Message-State: AOAM531tJwjWnUxTZ5vUnhYrYhvyVAPpJLBxex1pASPLqADqNrTcK/BS
-	0nN63bN/6qbMOZh1QITUchBat10et2c=
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=OeuJNp8bQ7J4OBE/K5UhVxijuvVkJWMupTHuELJpRKw=;
+        b=bUJ8ocNOePGhIwf+8o2M7INHDAXZDa0eRsYiW2zAgHkwTBgSWFYayyhbATvH4W8Mv/
+         wJyJU7y9untk0QAwXWSysa9o40btTPgs7EpbqlboGD4Bneo8OlzPKJnRDXefGyQTRR3a
+         qBz+Ke07gE+JVKvTwDWyZvb86BCsIGWou07BuHay4H6fggLGwzNqqLw5UCps9n7HZOR5
+         QOYz3DeeXun5xedmlvdNliIP3qQFVPIca7kgVF53DjwiXmScz6SIWd0DHyA169aPG9bS
+         65rMF59PM1JGZXh6ldV7NJepXgfmuYbhTOxU1nvpb/KqTFfZb2nqZF7v9cWj8+NJbEqV
+         W6Uw==
+X-Gm-Message-State: AOAM532frQZsDg80mjEsG/ukMzUXslq8J163QyX7MyQ9dFpQG6LTwGxf
+	c456mfjmAVW1osBZBpqPY8EO2/jdXfpxE1MB2TQ=
 X-Google-Smtp-Source: 
- ABdhPJw8LyJh33+Ozi0BITMhaZbgQQnVT8Wpu0m2BT72ECTHeCmd13O9IosgIEQkTA0pVyRL1w4wDg==
-X-Received: by 2002:a5d:42cc:: with SMTP id
- t12mr10200160wrr.129.1637076087343;
-        Tue, 16 Nov 2021 07:21:27 -0800 (PST)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id
- c11sm4036330wmq.27.2021.11.16.07.21.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 16 Nov 2021 07:21:26 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-python2][PATCH] python-pygobject: introspection is not valid
- meson option
-Date: Tue, 16 Nov 2021 16:21:24 +0100
-Message-Id: <20211116152124.1036680-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.32.0
+ ABdhPJxWrDMDY3l+A1D82fJbUej+LKgOu7XZRSN1v0Ulrod5zUzKolnSHHSUcd+aNZac2fHhyBmwIjvVEZBueSyhVGI=
+X-Received: by 2002:a17:90a:dc15:: with SMTP id
+ i21mr161023pjv.183.1637079546646;
+ Tue, 16 Nov 2021 08:19:06 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <1636501331-62287-1-git-send-email-wangmy@fujitsu.com>
+ <1636501331-62287-2-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1636501331-62287-2-git-send-email-wangmy@fujitsu.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 16 Nov 2021 17:18:55 +0100
+Message-ID: 
+ <CA+chaQdSXg64n+yVLT6xfOP0=r6oeVXOy7UhAiPtoXqhQDY1Cg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] jsoncpp: upgrade 1.9.4 -> 1.9.5
+To: wangmy <wangmy@fujitsu.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000d8de9705d0ea48df"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Nov 2021 15:21:30 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Nov 2021 16:19:08 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93982
+ https://lists.openembedded.org/g/openembedded-devel/message/93983
 
-meson 0.60+ errors out on unknown options and -Dintrospection
-is not a valid option
+--000000000000d8de9705d0ea48df
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-devtools/python/python-pygobject_3.34.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Wed, Nov 10, 2021 at 12:42 AM wangmy <wangmy@fujitsu.com> wrote:
 
-diff --git a/recipes-devtools/python/python-pygobject_3.34.0.bb b/recipes-devtools/python/python-pygobject_3.34.0.bb
-index 2e9cacd..ac0caf2 100644
---- a/recipes-devtools/python/python-pygobject_3.34.0.bb
-+++ b/recipes-devtools/python/python-pygobject_3.34.0.bb
-@@ -20,7 +20,7 @@ SRC_URI[sha256sum] = "87e2c9aa785f352ef111dcc5f63df9b85cf6e05e52ff04f803ffbebdac
- 
- S = "${WORKDIR}/${SRCNAME}-${PV}"
- 
--UNKNOWN_CONFIGURE_WHITELIST = "introspection"
-+GIR_MESON_OPTION = ""
- 
- EXTRA_OEMESON:append = " -Dpython=python2"
- 
--- 
-2.32.0
+> Bug fixes:
+>  Minor bug-fixes (including for cmake)
+>  Support for Bazel
+>  Dropped compile-time deprecation warnings
+>
 
+FYI: In case someone has some prebuilt binaries linking against libjsoncpp,
+then these "minor" changes also bumped the soversion in:
+https://github.com/open-source-parsers/jsoncpp/commit/c4904b2c0d461f84fba88a760161212651e4f536
+
+--000000000000d8de9705d0ea48df
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">On Wed, Nov 10, 2021 at 12:42 AM wangmy &=
+lt;<a href=3D"mailto:wangmy@fujitsu.com">wangmy@fujitsu.com</a>&gt; wrote:<=
+br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">Bug fixes:<br>
+=C2=A0Minor bug-fixes (including for cmake)<br>
+=C2=A0Support for Bazel<br>
+=C2=A0Dropped compile-time deprecation warnings<br></blockquote><div><br></=
+div><div>FYI: In case someone has some prebuilt binaries linking against li=
+bjsoncpp, then these &quot;minor&quot; changes also bumped the soversion in=
+:</div><div><a href=3D"https://github.com/open-source-parsers/jsoncpp/commi=
+t/c4904b2c0d461f84fba88a760161212651e4f536">https://github.com/open-source-=
+parsers/jsoncpp/commit/c4904b2c0d461f84fba88a760161212651e4f536</a>=C2=A0</=
+div></div></div>
+
+--000000000000d8de9705d0ea48df--
 
