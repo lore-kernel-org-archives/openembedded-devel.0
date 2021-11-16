@@ -1,110 +1,95 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87C71C433F5
-	for <webhook@archiver.kernel.org>; Tue, 16 Nov 2021 13:35:54 +0000 (UTC)
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com
- [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.web11.9916.1637069754240541369
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0DB7EC433FE
+	for <webhook@archiver.kernel.org>; Tue, 16 Nov 2021 15:21:30 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
+ [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.web09.458.1637076088950994666
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Nov 2021 05:35:54 -0800
+ Tue, 16 Nov 2021 07:21:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=J2mwXi8n;
- spf=pass (domain: gmail.com, ip: 209.85.216.45,
- mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id iq11so15787456pjb.3
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=bqyUdHPZ;
+ spf=pass (domain: gmail.com, ip: 209.85.221.51,
+ mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f51.google.com with SMTP id u1so38301199wru.13
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Nov 2021 05:35:54 -0800 (PST)
+ Tue, 16 Nov 2021 07:21:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=3mbZdWdr5JC7SPgjlOEiZfN5Cx8KErQVuYW98qr2QZI=;
-        b=J2mwXi8nEbjBf+kBQfBD9/pnjV/OKONwOEYb6MeeCk2mcinyQAVowsCNj8SBENB4F7
-         ab0SIhoFG7xtAuI1034W+mK+KCyaWeTL7RvAFpk6l4wCokU2xE/C6R1GZuv/kJRWRRhz
-         PxYFc4+31sbijc99LFWfrpX/+PU+YyTF6LAoIsNlZHx+VBxPamhuvP1KkMTcOHnHGt05
-         gJaZBT3uosgYqoPXc3Rrmq/GtL+20lXZmR88EK7eQpFvYOsRtdyVXhDSY2YUn62eyB3h
-         elAw450fFQrrEsj/Q0L8KipfmCy0n8BM35RbJLj00B2WbUE+8qZwu+XLfc1WhNddajYt
-         T7Rg==
+        bh=ORj+1a2+BuQZ/ZNKTIs/rRJpHVO2e0F8jnfwWNXtMmQ=;
+        b=bqyUdHPZt2+PluIwV/cmLuxABjYUE/mUPtpAdQem+IXvDqQ7F8GMYYoHBN9ss85Amt
+         qqcIJoDLEXQUQ6nX3/U/IiNUGPAOphfl1nR7GCBW6LF13A/ZjR4vVQdrDU56bgOid9tZ
+         QQMqeXh/BVkgXF+2PqyoPw/3wofDLdQVZ/dA8/2zjR1GQ4zJrzmwBiXA89aoJ76F+noo
+         A7DkCIzP1xy2rQViiFVL3MjDk9xOpCMFfp8wtFvwalVAzl4HR9tt7BZGOfoWMhxKSyqb
+         OnvUUU239sZi/Hl76dTtCERoZhVVdp8dzIXYWMw7S71X2BVGivsqvGD8uo1hzbQFzyZx
+         moGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=3mbZdWdr5JC7SPgjlOEiZfN5Cx8KErQVuYW98qr2QZI=;
-        b=RNaU0myhe1qDVoJcff8clyauDv9kCJgNZKei2CO/pZ2OGut7UKvBvzdJ+YHR0jwruZ
-         jOea7Cgciz8BIBH6m2Ry4BywKrKCabuykjVLcxgvB1Zmfe0ccI6nrQGU9wR706bxLkqK
-         9SkreOxTT+uNbs3tPV9g8bMVYWq4YKXBSCjEkj8eYujJmuFFTbBNBnY0IQrEY5TlaYGa
-         BKT2rGZ9l5pEWnoM+SYXvurqLmE183plX0qHrW17ejt4ldDGcioZyUbBblGPU58egd0m
-         zTyu3BMFVLHNGC1RIqb2jn181yrR0IpkznYuvculoAdYqQ5yZQWOURhwl+L6PutBu/Dt
-         80Cg==
-X-Gm-Message-State: AOAM533RmmhfdrS+cGiJR2NOroMZZs6vZX67dkgVEySjgVFQ5bBM1US4
-	TmWSbWvToPwmdOxf7TS7IaIJu9sV4oI=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ORj+1a2+BuQZ/ZNKTIs/rRJpHVO2e0F8jnfwWNXtMmQ=;
+        b=Fgt001Y6g8DyI8pEgFdK5uYuBPbbxeW/XzgZTq/wUsIggXzkDw4APFLpsCuwVi2+A6
+         dtXkKtdSSjoiUuiBLdjIfohVqgXdg7RbykZoaYCCoUf+Xj6e/QFx/KV9GeFVi1LsQV4U
+         vooVqOrVSWLwFzpZplEHa/zZWCY5SimcJQAYbHMQaSsrnY9l/fNxVTdsrlstENtWYAzl
+         sAUp5CnIQu45bxDB1ZvzhJ/lk0fLXjFECcu8mVLKIEqIzjbxM78OaMlnoFTMKTbb57iK
+         Y2sNd32VxgvzaGiwrImlHRBUVZZtxwPhi9aHip6mKi0wuJ3GLfNflPQIhPP9pQRJDSXV
+         Y7kQ==
+X-Gm-Message-State: AOAM531tJwjWnUxTZ5vUnhYrYhvyVAPpJLBxex1pASPLqADqNrTcK/BS
+	0nN63bN/6qbMOZh1QITUchBat10et2c=
 X-Google-Smtp-Source: 
- ABdhPJwj07MXuR6f6C1qkxWrzMOtSKxIJ9Gcl6bXDvz13Ay28VNwI3JcXkmT69vkOtYSvKeplOpAfA==
-X-Received: by 2002:a17:90a:e297:: with SMTP id
- d23mr8754875pjz.131.1637069753585;
-        Tue, 16 Nov 2021 05:35:53 -0800 (PST)
-Received: from keaua.hsd1.ca.comcast.net
- ([2601:202:4180:a5c0:e37e:104:3064:cd47])
+ ABdhPJw8LyJh33+Ozi0BITMhaZbgQQnVT8Wpu0m2BT72ECTHeCmd13O9IosgIEQkTA0pVyRL1w4wDg==
+X-Received: by 2002:a5d:42cc:: with SMTP id
+ t12mr10200160wrr.129.1637076087343;
+        Tue, 16 Nov 2021 07:21:27 -0800 (PST)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
         by smtp.gmail.com with ESMTPSA id
- f15sm21617277pfe.171.2021.11.16.05.35.53
-        for <openembedded-devel@lists.openembedded.org>
+ c11sm4036330wmq.27.2021.11.16.07.21.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 16 Nov 2021 05:35:53 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
+        Tue, 16 Nov 2021 07:21:26 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 3/3] Use old override syntax
-Date: Tue, 16 Nov 2021 05:35:47 -0800
-Message-Id: 
- <93befa6cf5599979ebe14ded6e1829963faa367c.1637069650.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1637069650.git.akuster808@gmail.com>
-References: <cover.1637069650.git.akuster808@gmail.com>
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-python2][PATCH] python-pygobject: introspection is not valid
+ meson option
+Date: Tue, 16 Nov 2021 16:21:24 +0100
+Message-Id: <20211116152124.1036680-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Nov 2021 13:35:54 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Nov 2021 15:21:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93980
+ https://lists.openembedded.org/g/openembedded-devel/message/93982
 
-From: Otto Esko <otto.esko@gmail.com>
+meson 0.60+ errors out on unknown options and -Dintrospection
+is not a valid option
 
-- can-utils and dstat recipes were using the colon override syntax
-  introduced in honister
-- revert back to underline override notation
-
-Signed-off-by: Otto Esko <otto.esko@gmail.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-extended/socketcan/can-utils_git.bb | 2 +-
- meta-oe/recipes-support/dstat/dstat_0.7.4.bb        | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ recipes-devtools/python/python-pygobject_3.34.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/socketcan/can-utils_git.bb b/meta-oe/recipes-extended/socketcan/can-utils_git.bb
-index 95086ad211..06c3182dba 100644
---- a/meta-oe/recipes-extended/socketcan/can-utils_git.bb
-+++ b/meta-oe/recipes-extended/socketcan/can-utils_git.bb
-@@ -48,5 +48,5 @@ ALTERNATIVE_LINK_NAME[cansequence] = "${bindir}/cansequence"
+diff --git a/recipes-devtools/python/python-pygobject_3.34.0.bb b/recipes-devtools/python/python-pygobject_3.34.0.bb
+index 2e9cacd..ac0caf2 100644
+--- a/recipes-devtools/python/python-pygobject_3.34.0.bb
++++ b/recipes-devtools/python/python-pygobject_3.34.0.bb
+@@ -20,7 +20,7 @@ SRC_URI[sha256sum] = "87e2c9aa785f352ef111dcc5f63df9b85cf6e05e52ff04f803ffbebdac
  
- # busybox ip fails to configure can interfaces, so we need iproute2 to do so.
- # See details in http://www.armadeus.com/wiki/index.php?title=CAN_bus_Linux_driver.
--RRECOMMENDS:${PN} += "iproute2"
-+RRECOMMENDS_${PN} += "iproute2"
+ S = "${WORKDIR}/${SRCNAME}-${PV}"
  
-diff --git a/meta-oe/recipes-support/dstat/dstat_0.7.4.bb b/meta-oe/recipes-support/dstat/dstat_0.7.4.bb
-index bc73f639bd..18c3cdf82c 100644
---- a/meta-oe/recipes-support/dstat/dstat_0.7.4.bb
-+++ b/meta-oe/recipes-support/dstat/dstat_0.7.4.bb
-@@ -21,4 +21,4 @@ do_install() {
-     oe_runmake 'DESTDIR=${D}' install
- }
+-UNKNOWN_CONFIGURE_WHITELIST = "introspection"
++GIR_MESON_OPTION = ""
  
--RDEPENDS:${PN} += "python3-core python3-misc python3-resource python3-shell python3-six python3-unixadmin"
-+RDEPENDS_${PN} += "python3-core python3-misc python3-resource python3-shell python3-six python3-unixadmin"
+ EXTRA_OEMESON:append = " -Dpython=python2"
+ 
 -- 
-2.25.1
+2.32.0
 
 
