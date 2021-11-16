@@ -2,118 +2,111 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F1A55C433EF
-	for <webhook@archiver.kernel.org>; Tue, 16 Nov 2021 01:54:48 +0000 (UTC)
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com
- [195.245.230.5])
- by mx.groups.io with SMTP id smtpd.web09.4232.1637027687749069161
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 082C7C433EF
+	for <webhook@archiver.kernel.org>; Tue, 16 Nov 2021 03:36:18 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.3])
+ by mx.groups.io with SMTP id smtpd.web10.5223.1637033777275862715
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Nov 2021 17:54:48 -0800
+ Mon, 15 Nov 2021 19:36:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=BJPZgX+k;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.5,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=e1WW7Jfh;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1637027685; i=@fujitsu.com;
-	bh=7e7IYMvltfcbnmcNcU/90JysKa2WNUXrw0zJAWdzJK4=;
+	s=170520fj; t=1637033775; i=@fujitsu.com;
+	bh=sjO1uIJ7y3bZlA70fS5wexagUizZ8RURrlg/rRdX+T0=;
 	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=BJPZgX+kgFcpms0NJhf8SyOjWLAhYouzPmjgcuYCDT/byu1FTvnyFmjsvPgVsGihf
-	 +PIS7cfL2MFbi2mNg/XNd4Gj4l/T970pENiMlJQvx/MayaHerwMVYjflebXeSzkgrz
-	 W8Gz1Sh3u/bhIihEhwx6o14mnWB/+eVU88TSJzgCOE+kmnlV1mLbcJUCjJES1PfmQe
-	 rFekzp3R8Xj757ZxiBfvdzOh/MCaGtulCNNAxgGo4pDy85ed8uv+iS/1hrBIs/Lif1
-	 8iNgrbNfaXPeoAjIe5VM6/u4IJS+1E1LM8UMxA3OgKbBOxwntJncdP/7/w4tZbupZc
-	 XLAmnccBND73Q==
-Received: from [100.112.195.167] (using TLSv1.2 with cipher
+	b=e1WW7JfhYvbqVQtQGzXrrZk4qVVuD1m9XsYDiYl8Kq70lDPDpvyAcyiUEcHF3oAf5
+	 CFvI+/xo0yT+W4VZmvLRDpbgEmHVBNzCYPdOFXLLei1hM/MKjEgAdAKW+0FWXdUY3D
+	 GynGbiNPHxIn49VAo80MvLXkaoMDbdH+wZ1G5rkXOQrJhx07gzhMa5aXL5UEF8XLur
+	 JnvbBWeYMk2Er6SOIfj08/ukAquNwtQ0awdvj9rDxUjTskJXsCuRkpdnadTbr4zRHG
+	 +BXzDij/rsW43s0aY048UpIvITHjCS30Zro8MmbclngeTxzK5hVIrWQx0ur6prwLjI
+	 9klnQVX49uyNg==
+Received: from [100.115.36.91] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-5.bemta.az-a.eu-west-1.aws.symcld.net id 1C/82-11077-46F03916;
- Tue, 16 Nov 2021 01:54:44 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrMIsWRWlGSWpSXmKPExsViZ8ORqJvMPzn
-  R4NYyC4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePcgyXsBZt5KpafOs/ewDiZu4uRi0NI4Amj
-  xPsLXxghnAtMEpvPTmWCcE4wSsxdf4qli5GTg01ATWL6rRusILaIgL7E0tl7mEFsZgEViRe/e
-  9hBbGGBYolN7x+A1bAIqEp8vz+bCcTmFXCS2PR7M1i9hICCxJSH75kh4oISJ2c+YYGYIyFx8M
-  ULqBpFidmXm1kg7AqJWbPamCBsNYmr5zYxT2Dkn4WkfRaS9gWMTKsYLZKKMtMzSnITM3N0DQ0
-  MdA0NjXQNLU11jQxN9RKrdBP1Ukt1y1OLS3QN9RLLi/WKK3OTc1L08lJLNjECQzKl4PD1HYy3
-  Xn/QO8QoycGkJMobt2hSohBfUn5KZUZicUZ8UWlOavEhRhkODiUJXk/OyYlCgkWp6akVaZk5w
-  PiASUtw8CiJ8AbxAaV5iwsSc4sz0yFSpxiNOd79XLyImWPVgemrmIVY8vLzUqXEedlASgVASj
-  NK8+AGweL2EqOslDAvIwMDgxBPQWpRbmYJqvwrRnEORiVhXjmQKTyZeSVw+14BncIEdIr9vX6
-  QU0oSEVJSDUzR76NPBOZsuNSQemDG1iibuvmflt/dVjlZRT1X7UWyyfcDpdUhDIdChJfe9HLi
-  XX5tisSkihA1g7ser2K33784K1qfZYHGnOgOSf9zB2+pLHtq+dHy95fDd9Z5SX+M/9WoHNmp1
-  3xQw9gheHvFwcKzbwMPfwiSv7v63KPp8VHnpl/mP6nQ15eipCJ0tm6/3pwuGf4Z3d8D5/saPJ
-  w0M1ql7Hn8Hav59i26Ge+sbeap5Ms9eMT7K4TDourqy3eTi/VPzuMTuPbRpLS1w1PBtPzS/hY
-  tdp7ndRJN026kzi2YPcmYL8/cY7n1yrpbl1K75FdVOfif9znt/EEkaL/uV6a4lya9gYXtcjNk
-  v4Td01BiKc5INNRiLipOBAB8ze3OVgMAAA==
+	by server-3.bemta.az-a.eu-west-2.aws.ess.symcld.net id D8/ED-01854-E2723916;
+ Tue, 16 Nov 2021 03:36:14 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprFIsWRWlGSWpSXmKPExsViZ8MxRVdPfXK
+  iQc8PaYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeNU81mmghlcFdtuvmRsYJzH2cXIxSEkMJNJ
+  YkrDbuYuRk4g5wSjxOJVISA2m4CaxPRbN1hBbBEBfYmls/eA1TALqEi8+N3DDmILC3hKvN1zH
+  izOIqAq8fj0UbB6XgEnicW7L7OA2BICChJTHr5nhogLSpyc+YQFYo6ExMEXL5ghahQlZl9uhq
+  qvkJg1q41pAiPvLCQts5C0LGBkWsVonVSUmZ5RkpuYmaNraGCga2hoqmtspGtkYKiXWKWbqJd
+  aqlueWlyia6SXWF6sl1pcrFdcmZuck6KXl1qyiREYZCnFCid3MP6+9E3vEKMkB5OSKG/cokmJ
+  QnxJ+SmVGYnFGfFFpTmpxYcYZTg4lCR4H6lMThQSLEpNT61Iy8wBBjxMWoKDR0mEV04RKM1bX
+  JCYW5yZDpE6xagoJc77WAQoIQCSyCjNg2uDRdklRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSs
+  K881WBpvBk5pXATX8FtJgJaLH9vX6QxSWJCCmpBqZ4zSLGTRcvfD5c8Xp7voZhVsHVGE/zh5m
+  5LK6uLA1e/SHLV0g8/jL7QvCjGn2b1Nw2731fxc/uWDNri//mc0cWGBgfvlWTsmHHSleGhnbe
+  hg83Grckbag8fn4yq9VCOZawZAt3w6Un11jWP9BT/Vu1x37bndxN32fkJl11WRx88XLf1idaw
+  gv3d/Eamdz5/jzt5d9Ji3rjVxy+ySn/Mn7jgjkXvnq8X352imXRRIVTpd9lFthv8vqh0c4rpF
+  mYdmmxW4es8YqHu3pZD3O7nmErUGo4HRh8kP+z6M2MqMM3hcITjrttXMCduE/Y2CzI7qqQ/vq
+  bDvp7/8zNadnl8qPiRKxFhPy3GN+lQVffzRRVYinOSDTUYi4qTgQAgCxAFy0DAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-4.tower-271.messagelabs.com!1637027683!54092!1
-X-Originating-IP: [62.60.8.97]
+X-Msg-Ref: server-5.tower-565.messagelabs.com!1637033774!66429!1
+X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.5; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 11064 invoked from network); 16 Nov 2021 01:54:43 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-4.tower-271.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 16 Nov 2021 01:54:43 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 79F97100229
+Received: (qmail 24696 invoked from network); 16 Nov 2021 03:36:14 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-5.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 16 Nov 2021 03:36:14 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1AG3a6iP025393
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Nov 2021 01:54:43 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 6EC70100228
-	for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Nov 2021 01:54:43 +0000 (GMT)
+ Tue, 16 Nov 2021 03:36:14 GMT
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.24; Tue, 16 Nov 2021 01:54:21 +0000
+ (TLS) id 15.0.1497.24; Tue, 16 Nov 2021 03:36:04 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] openvpn: Change the default cipher to
- AES-256-GCM for server configurations
-Date: Tue, 16 Nov 2021 09:54:04 +0800
-Message-ID: <1637027644-80438-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-absl: upgrade 0.15.0 -> 1.0.0
+Date: Tue, 16 Nov 2021 11:35:53 +0800
+Message-ID: <1637033756-81253-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
 X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Nov 2021 01:54:48 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Nov 2021 03:36:18 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93962
+ https://lists.openembedded.org/g/openembedded-devel/message/93963
 
-This change makes the server use AES-256-GCM instead of BF-CBC as the default
-cipher for the VPN tunnel.  To avoid breaking existing running configurations
-defaulting to BF-CBC, the Negotiable Crypto Parameters (NCP) list contains
-the BF-CBC in addition to AES-CBC.  This makes it possible to migrate
-existing older client configurations one-by-one to use at least AES-CBC unless
-the client is updated to v2.4 (which defaults to upgrade to AES-GCM automatically)
-
-Upstream-Status: Backport [https://src.fedoraproject.org/rpms/openvpn/blob/rawhide/f/0001-Change-the-default-cipher-to-AES-256-GCM-for-server-.patch]
+Changed
+absl-py no longer supports Python 2.7, 3.4, 3.5. All versions have reached
+end-of-life for more than a year now.
+New releases will be tagged as vX.Y.Z instead of pypi-vX.Y.Z in the git
+repo going forward.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-support/openvpn/openvpn/openvpn@.service            | 2 +-
+ .../python/{python3-absl_0.15.0.bb => python3-absl_1.0.0.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-absl_0.15.0.bb => python3-absl_1.0.0.bb} (76%)
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn/openvpn@.service b/meta-networking/recipes-support/openvpn/openvpn/openvpn@.service
-index 358dcb791a..01dd2e8c25 100644
---- a/meta-networking/recipes-support/openvpn/openvpn/openvpn@.service
-+++ b/meta-networking/recipes-support/openvpn/openvpn/openvpn@.service
-@@ -6,7 +6,7 @@ After=syslog.target network.target
- PrivateTmp=true
- Type=forking
- PIDFile=/var/run/openvpn/%i.pid
--ExecStart=/usr/sbin/openvpn --daemon --writepid /var/run/openvpn/%i.pid --cd /etc/openvpn/ --config %i.conf
-+ExecStart=/usr/sbin/openvpn --daemon --writepid /var/run/openvpn/%i.pid --cd /etc/openvpn/ --cipher AES-256-GCM --data-ciphers AES-256-GCM:AES-128-GCM:AES-256-CBC:AES-128-CBC:BF-CBC --config %i.conf
+diff --git a/meta-python/recipes-devtools/python/python3-absl_0.15.0.bb b/meta-python/recipes-devtools/python/python3-absl_1.0.0.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-absl_0.15.0.bb
+rename to meta-python/recipes-devtools/python/python3-absl_1.0.0.bb
+index f25201dc3f..736e6a9444 100644
+--- a/meta-python/recipes-devtools/python/python3-absl_0.15.0.bb
++++ b/meta-python/recipes-devtools/python/python3-absl_1.0.0.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
- [Install]
- WantedBy=multi-user.target
+-SRC_URI[sha256sum] = "72d782fbeafba66ba3e525d46bccac949b9a174dbf66233e50ece09ee688dc81"
++SRC_URI[sha256sum] = "ac511215c01ee9ae47b19716599e8ccfa746f2e18de72bdf641b79b22afa27ea"
+ 
+ PYPI_PACKAGE = "absl-py"
+ 
 -- 
 2.25.1
 
