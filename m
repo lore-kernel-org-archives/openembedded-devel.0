@@ -1,98 +1,88 @@
-Return-Path: <jdmason@kudzu.us>
+Return-Path: <jacob.kroon@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86A5BC433FE
-	for <webhook@archiver.kernel.org>; Tue, 16 Nov 2021 22:11:25 +0000 (UTC)
-Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com
- [209.85.222.180])
- by mx.groups.io with SMTP id smtpd.web10.407.1637100684503317534
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 34351C433EF
+	for <webhook@archiver.kernel.org>; Wed, 17 Nov 2021 07:10:31 +0000 (UTC)
+Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com
+ [209.85.167.52])
+ by mx.groups.io with SMTP id smtpd.web12.3912.1637133029780926016
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Nov 2021 14:11:24 -0800
+ Tue, 16 Nov 2021 23:10:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kudzu-us.20210112.gappssmtp.com header.s=20210112
- header.b=d1cFQ8ii;
- spf=none, err=permanent DNS error (domain: kudzu.us, ip: 209.85.222.180,
- mailfrom: jdmason@kudzu.us)
-Received: by mail-qk1-f180.google.com with SMTP id d2so429339qki.12
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=iPh9jfcU;
+ spf=pass (domain: gmail.com, ip: 209.85.167.52,
+ mailfrom: jacob.kroon@gmail.com)
+Received: by mail-lf1-f52.google.com with SMTP id b1so4561391lfs.13
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Nov 2021 14:11:24 -0800 (PST)
+ Tue, 16 Nov 2021 23:10:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=kudzu-us.20210112.gappssmtp.com; s=20210112;
-        h=mime-version:from:date:message-id:subject:to
+        d=gmail.com; s=20210112;
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=8TGkc6aDs3fdk6xhFRjImxPguNRmLAR/FtjtXdV+A3Q=;
-        b=d1cFQ8iiJFV22dLFELKaYVBM2drx6X9qZiV8/yzN0QVd2Npcw9Fu1tAqX/wqQx308H
-         b4UTTwKa3AWK8zWZbSWORLnqJBqLPXmBrFRBg85OWIvXOLsgo+bCgbwLYqcjT89IFneJ
-         ZYPaTxJpvB8llduOm/FguTAvgGFi+T3TijU/L2Qdn3PFABbHU83zS1wuj4eNGuF+zaSQ
-         bOsX49fxLMe/ijaTqeo3NGyBxPwHdYlCK5952D+ifwc/g+ZVF+PlpL97PlXc7+BKTjpX
-         ngwkFIbp0Ed1QKGGWbiHMXkfxpunPU7PT90DTRqlKFxhIsgqT1nI5MlLfyuj2ZInyHYK
-         lIYw==
+        bh=7g/0QOfog9B6o6Bd/5ORHEgPX7K33tCIK0Q1a1FneoA=;
+        b=iPh9jfcU513AjMPXZVO/lHkFFDfqsSLgNc15yj5G7gTcpZ6oxih/QpDAZTj9l1dGvK
+         G5ryeR+NwR56sdrX5G2MSU/PP3kP/BIWhJ41mdB25s68Isq5xDriYiWCwyiWqqm+H2ao
+         LDUVbuO5lM5RxR40whZN/TnOyWk3mk1N3xXFwc+nuHYv5rcLCFn/424aU0LxlFddzfNf
+         XDRc57POfFbPPjpb7pwn0DVFo6ge6rz2HMOKVhydof7gYcPk26V/8YgBbZl9AGLBvu+l
+         UyJVYbt9usxbXd8eh2Gyd1lCqGZwer2f1nsJTMRV92pBZXPwBKW5fGbLJfRmSg7ryips
+         Ijpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=8TGkc6aDs3fdk6xhFRjImxPguNRmLAR/FtjtXdV+A3Q=;
-        b=JsqxyG1yeLIEbaMMSn8s4aSf36KD5cN4GOBsnzqAp9oqlIzBVqn/exAvSohJY9+5tC
-         hUjhycfKynoGfBaJBhYHUxL7Fp/OoNI3Q6FrVVUQ2NHC+qDMyPEDv/Y2r0pYvNa6FW0y
-         UUEAFwJWZP6jZVdlceXfhwKZXuL0IWRqWeJHLFYe1vGlCYw0K9AOqWFz7Q0TsVCvXWtC
-         k1alYmLtt6v56UjqSB85No66BWrzUM2OnCIL4nB6rdoAO+aLY+RxUgPshnboXP+BzYy6
-         GoRUUewx3fnnX20MUhpVd5EviHMFS+pYR/ChtxetfffzVf0mqC158JNKSxnDwODxr0oz
-         Thzg==
-X-Gm-Message-State: AOAM530e8iTEwP1gXgv7gDOsYwMX79XrRw8XsaWpNYYhgCl0bGK+wqaf
-	AGgeatvTGfaYa1xkTp4b5dt2XYInE5AAcT5uasTxCjxJ4nVmBA==
+        bh=7g/0QOfog9B6o6Bd/5ORHEgPX7K33tCIK0Q1a1FneoA=;
+        b=y/VP4FRZwaE82RbSeL1TClbN8qTSTTR54viRS+5x2AzJHse361gPsxCHErp4qWCY45
+         1O2DfOIF14e2CjFylJPbUE5uWchOxvv+5y8zHADc/0laMUdSiJM6gL6NNXk+Ox1rQlag
+         wla5KRe3KzeZiP4Z3c/Vp8y2DRksTBwP+N9AJLcSCLsxye0okTurBixUEaD8KQmWbIeo
+         g1ZgTy8LwuKcnbyi8QVJL3F5ofUgwgMDOSPAM/91bVYpYSlPGj0pNjqLfbL4iR4vaGlB
+         DDekzDDMDIWFkgs+Ey6wDf7BURSxSRdm1CN7QrnKxeq2/viCNnNtCV+bKKZPQ6Z+vr2V
+         k/oQ==
+X-Gm-Message-State: AOAM532vSWMolS372iJV2pLcerivFAIxgezXOE7/jUVKzU31/ZgM5DXe
+	EU421JCweH3saGIeD79gJK/5DAtr+pG/Ow==
 X-Google-Smtp-Source: 
- ABdhPJyK31tcLs7DiH8XLpAdKORE/AgmgSgO2am0qeiaSD2W2EExfuF/QuelfM+SmhFUYFJKTyh1keIIph/xG/zL7MM=
-X-Received: by 2002:a37:6254:: with SMTP id w81mr9064152qkb.391.1637100683348;
- Tue, 16 Nov 2021 14:11:23 -0800 (PST)
+ ABdhPJwcr8tOO/SzeA34Kx1zCgRRwtl7MFBVZJ+/PQBzY7uMn8Y/ZbuDVFlBYTyhVc/n1sNwjptkpA==
+X-Received: by 2002:a05:6512:36c6:: with SMTP id
+ e6mr13447190lfs.169.1637133027283;
+        Tue, 16 Nov 2021 23:10:27 -0800 (PST)
+Received: from localhost.localdomain (37-247-29-68.customers.ownit.se.
+ [37.247.29.68])
+        by smtp.gmail.com with ESMTPSA id
+ bq3sm2025322lfb.173.2021.11.16.23.10.26
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 16 Nov 2021 23:10:26 -0800 (PST)
+From: Jacob Kroon <jacob.kroon@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-java][PATCH 1/2] jamvm: Set git branch
+Date: Wed, 17 Nov 2021 08:09:57 +0100
+Message-Id: <20211117070958.64782-1-jacob.kroon@gmail.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-From: Jon Mason <jdmason@kudzu.us>
-Date: Tue, 16 Nov 2021 17:11:12 -0500
-Message-ID: 
- <CAPoiz9yohGUzG-UA0BHQw_BS+eme4CFqYm17Oduo84GCS0X5zg@mail.gmail.com>
-Subject: OpenEmbedded Developer Virtual Meeting (OEDVM) December 2021
-To: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>,
-	openembedded-architecture <openembedded-architecture@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Nov 2021 22:11:25 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Nov 2021 07:10:31 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93984
+ https://lists.openembedded.org/g/openembedded-devel/message/93986
 
-There will be an OpenEmbedded Developer Virtual Meeting (OEDVM) held
-on Friday, 03 December 2021.  This will be the day after the Yocto
-Project=C2=AE Summit 2021.11 concludes.  The scheduled time will match the
-YP Summit's start at 12 UTC/7AM Eastern, and run until 20 UTC/3PM (or
-earlier if we run out of topics, but then will most likely turn into a
-happy hour).
+Signed-off-by: Jacob Kroon <jacob.kroon@gmail.com>
+---
+ recipes-core/jamvm/jamvm_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-The event has been added to the OE Calendar
-https://www.openembedded.org/wiki/Calendar
-
-
-We have added some topics that should be interesting to the larger audience=
- at:
-https://www.openembedded.org/wiki/OEDVM_Nov_2021
-
-We are looking for "moderators" for the currently listed topics.  This
-entails helping to get the discussion started by presenting 1-5 slides
-on the topic and problems currently being experienced.
-
-If you do not see something listed you would like to discuss, please
-add it and put yourself as the "moderator" (and a rough time estimate
-for discussion).
-
-As always, if you are not an OpenEmbedded Member (but are interested
-in joining), please attend OEDVM and you can be voted in.
-
-If there are any questions, please feel free to email me and/or the
-entire OE board (board@openembedded.org).
-
-Thanks,
-Jon
+diff --git a/recipes-core/jamvm/jamvm_git.bb b/recipes-core/jamvm/jamvm_git.bb
+index 3c9d47b..34861ac 100644
+--- a/recipes-core/jamvm/jamvm_git.bb
++++ b/recipes-core/jamvm/jamvm_git.bb
+@@ -6,7 +6,7 @@ require jamvm.inc
+ SRCREV = "6cef41d859fbc9ce7868a97cb2cb5dd2b10b9103"
+ PV = "2.0.0-devel+git${SRCPV}"
+ 
+-SRC_URI = "git://git.code.sf.net/p/jamvm/code;protocol=git \
++SRC_URI = "git://git.code.sf.net/p/jamvm/code;protocol=git;branch=master \
+            file://jamvm-jni_h-noinst.patch \
+            file://libffi.patch \
+            file://jamvm-minmax-heap.patch \
 
