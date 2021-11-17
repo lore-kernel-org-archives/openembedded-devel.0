@@ -1,85 +1,97 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <matthias@extraklein.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 69CBDC433FE
-	for <webhook@archiver.kernel.org>; Wed, 17 Nov 2021 11:35:37 +0000 (UTC)
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web08.5961.1637148934773347827
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4017C433F5
+	for <webhook@archiver.kernel.org>; Wed, 17 Nov 2021 15:15:20 +0000 (UTC)
+Received: from relay.yourmailgateway.de (relay.yourmailgateway.de
+ [194.59.204.23])
+ by mx.groups.io with SMTP id smtpd.web08.8407.1637162116361933758
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Nov 2021 03:35:35 -0800
+ Wed, 17 Nov 2021 07:15:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
- for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
- (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from lan.nucleusys.com ([92.247.61.126]:57950
- helo=lootbox.konsulko.bg)
-	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.93)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1mnJDt-0006bJ-KW; Wed, 17 Nov 2021 13:35:30 +0200
-From: Leon Anavi <leon.anavi@konsulko.com>
+ dkim=fail reason="body hash did not verify" header.i=@extraklein.de
+ header.s=key2 header.b=CN3grpn6;
+ spf=pass (domain: extraklein.de, ip: 194.59.204.23,
+ mailfrom: matthias@extraklein.de)
+Received: from relay02-mors.netcup.net (localhost [127.0.0.1])
+	by relay02-mors.netcup.net (Postfix) with ESMTPS id 4HvRLn0bFsz41WQ
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 17 Nov 2021 16:15:13 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=extraklein.de;
+	s=key2; t=1637162113;
+	bh=kR/w+hy45QOjnXg4aSXQ6P7EKIMzW4Ll4iA1PWfKlLI=;
+	h=From:To:Cc:Subject:Date:From;
+	b=CN3grpn6h2lWp0zLuYcGUxmB59pRB83QWspRa1l94kirChq93/MoHbMlRF7iHFkuA
+	 wJ5NRRGHzbmQsZcOSOYTcPlnSKMOA4WCl/I8jQeceNsLK8FLtSd/9mitCCKOQLmJqK
+	 C06XZdTVm7La6BFBbgxYT/jPmd6+homnHrM/4lx4ATXe90SOwRn/huvPIbg4M/xjDE
+	 gK76g3qD2YSmpNeciiJ5ZzyQKWQ5IpFJfqiegJo5R+eITucc0flLzntX3dSujwcAww
+	 gpWNuawilMZVPdy5OzA1sqmxKd9rcvw6VhrVW8qK6AK3uPTBAF3xHUgQs2GKEKeLW7
+	 J+yXv+diugo4g==
+Received: from policy01-mors.netcup.net (unknown [46.38.225.35])
+	by relay02-mors.netcup.net (Postfix) with ESMTPS id 4HvRLn0D5Kz7tpt
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 17 Nov 2021 16:15:13 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at policy01-mors.netcup.net
+Received: from mx2fa3.netcup.net (unknown [10.243.12.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by policy01-mors.netcup.net (Postfix) with ESMTPS id 4HvRLl583wz8shs
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 17 Nov 2021 16:15:11 +0100 (CET)
+Received: from localhost (ip-88-152-245-240.hsi03.unitymediagroup.de
+ [88.152.245.240])
+	by mx2fa3.netcup.net (Postfix) with ESMTPSA id C2A6C14028D;
+	Wed, 17 Nov 2021 16:15:10 +0100 (CET)
+Authentication-Results: mx2fa3;
+        spf=pass (sender IP is 88.152.245.240)
+ smtp.mailfrom=matthias@extraklein.de smtp.helo=localhost
+Received-SPF: pass (mx2fa3: connection is authenticated)
+From: Matthias Klein <matthias@extraklein.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-imageio: Upgrade 2.10.3 -> 2.10.5
-Date: Wed, 17 Nov 2021 13:35:25 +0200
-Message-Id: <20211117113526.22305-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20211117113526.22305-1-leon.anavi@konsulko.com>
-References: <20211117113526.22305-1-leon.anavi@konsulko.com>
+Cc: Matthias Klein <matthias@extraklein.de>
+Subject: [meta-oe][PATCH] paho-mqtt-c: upgrade 1.3.8 -> 1.3.9
+Date: Wed, 17 Nov 2021 16:15:08 +0100
+Message-Id: <20211117151508.1340-1-matthias@extraklein.de>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id:
- leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+X-PPP-Message-ID: <163716211100.26091.14745020767890484703@mx2fa3.netcup.net>
+X-PPP-Vhost: extraklein.de
+X-NC-CID: fJ/KJdL+9wdrMRIqah4iWWyrp2zwrMKUO/8cnQ3VqchdTrvm2Ok=
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 Nov 2021 11:35:37 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Nov 2021 15:15:20 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93996
+ https://lists.openembedded.org/g/openembedded-devel/message/93998
 
-Upgrade to release 2.10.5:
-
-- Resolve regression on imageJ TIFF hyperstacks
-- Consistently handle file opening/closing
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Matthias Klein <matthias@extraklein.de>
 ---
- .../{python3-imageio_2.10.3.bb => python3-imageio_2.10.5.bb}    | 2 +-
+ .../paho-mqtt-c/{paho-mqtt-c_1.3.8.bb =3D> paho-mqtt-c_1.3.9.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-imageio_2.10.3.bb => python3-imageio_2.10.5.bb} (81%)
+ rename meta-oe/recipes-connectivity/paho-mqtt-c/{paho-mqtt-c_1.3.8.bb =3D=
+> paho-mqtt-c_1.3.9.bb} (95%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-imageio_2.10.3.bb b/meta-python/recipes-devtools/python/python3-imageio_2.10.5.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-imageio_2.10.3.bb
-rename to meta-python/recipes-devtools/python/python3-imageio_2.10.5.bb
-index 16d815131..a724cfd83 100644
---- a/meta-python/recipes-devtools/python/python3-imageio_2.10.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-imageio_2.10.5.bb
-@@ -6,7 +6,7 @@ LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=7b9bbbb543b6af3e6b53f9b7fb68f71d"
- 
- 
--SRC_URI[sha256sum] = "469c59fe71c81cdc41c84f842d62dd2739a08fac8cb85f5a518a92a6227e2ed6"
-+SRC_URI[sha256sum] = "f3f6e9a73d62f12348f098364219f4fc64462760bc07abfe16d14db0e4974845"
- 
- inherit pypi setuptools3
- 
--- 
-2.20.1
+diff --git a/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.8.b=
+b b/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.9.bb
+similarity index 95%
+rename from meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.8.bb
+rename to meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.9.bb
+index cce9f1d1b..a8541f0d0 100644
+--- a/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.8.bb
++++ b/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.9.bb
+@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM =3D " \
+=20
+ SRC_URI =3D "git://github.com/eclipse/paho.mqtt.c;protocol=3Dhttp;branch=
+=3Dmaster;protocol=3Dhttps"
+=20
+-SRCREV =3D "317fb008e1541838d1c29076d2bc5c3e4b6c4f53"
++SRCREV =3D "3b7ae6348bc917d42c04efa962e4868c09bbde9f"
+=20
+ DEPENDS =3D "openssl"
+=20
+--=20
+2.30.2
 
 
