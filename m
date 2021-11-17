@@ -1,69 +1,93 @@
-Return-Path: <sean@geanix.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ED3F2C433EF
-	for <webhook@archiver.kernel.org>; Wed, 17 Nov 2021 09:56:21 +0000 (UTC)
-Received: from first.geanix.com (first.geanix.com [116.203.34.67])
- by mx.groups.io with SMTP id smtpd.web11.5135.1637142980577714085
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D085C433EF
+	for <webhook@archiver.kernel.org>; Wed, 17 Nov 2021 11:35:36 +0000 (UTC)
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web08.5962.1637148935023972872
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Nov 2021 01:56:21 -0800
+ Wed, 17 Nov 2021 03:35:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@geanix.com
- header.s=first header.b=aOpBn0Yv;
- spf=pass (domain: geanix.com, ip: 116.203.34.67, mailfrom: sean@geanix.com)
-Received: from zen.. (unknown [185.17.218.86])
-	by first.geanix.com (Postfix) with ESMTPSA id BBCA5E1CF6;
-	Wed, 17 Nov 2021 09:56:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=geanix.com; s=first;
-	t=1637142977; bh=n3tJU37O0pW4szyP+/YRG6v1x0LWecxzNgn1v8NI4/E=;
-	h=From:To:Cc:Subject:Date;
-	b=aOpBn0YvFgScPdnzOPRVYkmJbambKgF0TptLQFyNo90nbKnuRDXtWdh/d9Hk26039
-	 K0BBwrT3zp/BKuc3ckf1HWWKgjyAhzX1xblGWk6BiioHglj4yWUb5/LYS36XcOvwsi
-	 jn1IxwunIhcGTJflK/GzDmkZ+ug6J1XIktL3bZopwO9EA6ipQH0gylGB2vZ3foIG19
-	 eaTa968Q7k/t5AAtxl4pPIjXcK1qXiFd4QJxG60/UGWz1/DDW568JcaVPTs/rIZf/C
-	 xDMCnLcThijgQaNbwlQIMTnTzbtMuNNcsvzdkZxUBG2fNjEvhLzLSKXrfIfvADGw/h
-	 R5lkSGPlVA1cw==
-From: Sean Nyekjaer <sean@geanix.com>
+ dkim=missing;
+ spf=permerror,
+ err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
+ for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
+ (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from lan.nucleusys.com ([92.247.61.126]:57950
+ helo=lootbox.konsulko.bg)
+	by voyager.icnhost.net with esmtpsa  (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.93)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1mnJDt-0006bJ-3v; Wed, 17 Nov 2021 13:35:29 +0200
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: martin.jansa@gmail.com,
-	Sean Nyekjaer <sean.nyekjaer.ext@siemensgamesa.com>
-Subject: [meta-oe][PATCH v2] msgpack-cpp: fix msgpack-cpp is a header only
- library
-Date: Wed, 17 Nov 2021 10:56:13 +0100
-Message-Id: <20211117095613.1900569-1-sean@geanix.com>
-X-Mailer: git-send-email 2.33.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-eventlet: Upgrade 0.32.0 -> 0.33.0
+Date: Wed, 17 Nov 2021 13:35:24 +0200
+Message-Id: <20211117113526.22305-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id:
+ leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 Nov 2021 09:56:21 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Nov 2021 11:35:36 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93995
+ https://lists.openembedded.org/g/openembedded-devel/message/93997
 
-From: Sean Nyekjaer <sean.nyekjaer.ext@siemensgamesa.com>
+Upgrade to release 0.33.0:
 
-${PN} is empty so don't let the -dev package RDEPEND on it
+- green.thread: unlocked Lock().release() should raise exception,
+  returned True
+- wsgi: Don't break HTTP framing during 100-continue handling
+- greendns: Create a DNS resolver lazily rather than on import
+- ssl: GreenSSLContext minimum_version and maximum_version setters
 
-Signed-off-by: Sean Nyekjaer <sean.nyekjaer.ext@siemensgamesa.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-devtools/msgpack/msgpack-cpp_4.0.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ ...on3-eventlet_0.32.0.bb => python3-eventlet_0.33.0.bb} | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-eventlet_0.32.0.bb => python3-eventlet_0.33.0.bb} (53%)
 
-diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-cpp_4.0.2.bb b/meta=
--oe/recipes-devtools/msgpack/msgpack-cpp_4.0.2.bb
-index ef066753d..25b199f57 100644
---- a/meta-oe/recipes-devtools/msgpack/msgpack-cpp_4.0.2.bb
-+++ b/meta-oe/recipes-devtools/msgpack/msgpack-cpp_4.0.2.bb
-@@ -19,4 +19,6 @@ S =3D "${WORKDIR}/git"
-=20
- inherit cmake pkgconfig
-=20
-+RDEPENDS:${PN}-dev =3D ""
-+
- BBCLASSEXTEND +=3D "native nativesdk"
---=20
-2.33.0
+diff --git a/meta-python/recipes-devtools/python/python3-eventlet_0.32.0.bb b/meta-python/recipes-devtools/python/python3-eventlet_0.33.0.bb
+similarity index 53%
+rename from meta-python/recipes-devtools/python/python3-eventlet_0.32.0.bb
+rename to meta-python/recipes-devtools/python/python3-eventlet_0.33.0.bb
+index 3848150e4..6a4449cf5 100644
+--- a/meta-python/recipes-devtools/python/python3-eventlet_0.32.0.bb
++++ b/meta-python/recipes-devtools/python/python3-eventlet_0.33.0.bb
+@@ -4,8 +4,13 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=56472ad6de4caf50e05332a34b66e778"
+ 
+-SRC_URI[sha256sum] = "2f0bb8ed0dc0ab21d683975d5d8ab3c054d588ce61def9faf7a465ee363e839b"
++SRC_URI[sha256sum] = "80144f489c1bb273a51b6f96ff9785a382d2866b9bab1f5bd748385019f4141f"
+ 
+ inherit pypi setuptools3
+ 
+-RDEPENDS:${PN} += "${PYTHON_PN}-dnspython"
++RDEPENDS:${PN} += " \
++	${PYTHON_PN}-dnspython \
++	${PYTHON_PN}-six \
++	${PYTHON_PN}-distutils \
++	${PYTHON_PN}-greenlet \
++"
+-- 
+2.20.1
 
 
