@@ -2,56 +2,55 @@ Return-Path: <richard.leitner@skidata.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 850B1C433EF
-	for <webhook@archiver.kernel.org>; Wed, 17 Nov 2021 15:58:01 +0000 (UTC)
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (EUR04-HE1-obe.outbound.protection.outlook.com [40.107.7.99])
- by mx.groups.io with SMTP id smtpd.web12.9007.1637164678610512192
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9224EC433F5
+	for <webhook@archiver.kernel.org>; Wed, 17 Nov 2021 15:59:03 +0000 (UTC)
+Received: from EUR01-VE1-obe.outbound.protection.outlook.com
+ (EUR01-VE1-obe.outbound.protection.outlook.com [40.107.14.123])
+ by mx.groups.io with SMTP id smtpd.web10.9034.1637164741106550540
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Nov 2021 07:58:00 -0800
+ Wed, 17 Nov 2021 07:59:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@skidata.com header.s=selector1 header.b=UtdNlMD5;
- spf=pass (domain: skidata.com, ip: 40.107.7.99,
+ dkim=pass header.i=@skidata.com header.s=selector1 header.b=w30NJzxf;
+ spf=pass (domain: skidata.com, ip: 40.107.14.123,
  mailfrom: richard.leitner@skidata.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OyVEXKkLiuYScUNaTBRxukD33ziQasYgFXqweyIhqcLM92J6s0R3ml6LBW+7UxJMRzBB3qqRfeHDW26hbcbBpkvTpyVbQ0zffUnNEBZtdJIJn/eeW2AIT/BZA8iHHzNOhE2HwYQ1AFa38GI4pzKMoJQg1RIXaMW0ehdDgfd5Sxl4PEO4uhz+cFmxCw2GePsFWStrZtpXsVRBQjQN8Zw3BWggpUvc5toHqAbwtFOykkhonztgB/XiqISFspwp4ZIDkWoG32XQiAHO/DZMPh9nh5RJ72zMiEdKUjnV3uGC/8fj/2ZCl+qLUcyMZC9zPRkf1lK5Sha9UADVav2zizJPCA==
+ b=BzBweunkwkRPJ2Cv+zYRelCNhKidA+6b8lnrSp26qS+cBIJl+L+qs8EdRYGH/HyOpd6xN1EvowxFmSChfNH8clMReMb9LeL0GekCZwGqBpxHMp2WhkcucI6kVL/NdxKe9MA9JiSpS8p0+w3nLR0WEauzIpnX0FSn6ERH8JRN7zKva1bzQ3tcZStwZbyaW56Fam8X4whIT4+Wc5cZmcEcPWZMM0i9GjfwPw/mTUb4cQ6UuC12g6eZZaIpkFLJNkKuao4pOSdxU6BLofjbr5oVnQ8gZTBypcRubiVEDY5u2I0tne20Cl4pYbxlBP+ya2AnlS78/BC3QEQT4dGd5Dducg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PKvIeAcQ2h7ydhTjUoyN6Yual9PocNyU7yVWr2ctkU0=;
- b=oBsHj98SWcbz4anQBaQfzrPsoVLY6KwipYucubc7exyoW1etwXwIlDl0uiHI0gbbwz7BKNaWCRRdJI531OIsDzq9PX+CLyT5zUfa/ao+/ByRSvkaeVjdIXFJCMBYX1YSoUHRyAQBfODl5dmGkl9ebjHpIJPvhm1vfruM4H8uDpUV688oKq6Dz1nqOCY4CchNXyrpfXpMqQHEPVdBSIKdj2EiAyG0o9HoM+1KDrdHK9YP4JOEyfzOdBZpfHEkvlNhIcjOj70xuqEgcUGZW4U+fuFT/KdVyDurYQheEu+dm4JqFOiLMgGatiFaO8/U1C+yVOf/vxO7ak4Gd4p4HYUiYg==
+ bh=DBeUS1dPv0IKPKf6PZUXfiNvrjD3B7e6ndN5byB6Huw=;
+ b=LbPARxCVlpblI7Sz/0LDT50hKRN0r288eoz3kwcHlYj2FacuJHNY7vMAznRGNGgjoobj3tbUASA7p4P2Tprn7EaVlx2GJI1iv7V/+iof/WGYCYG0GFMTqrtNlcH8wX2/HSA1gkq8cLldtqKd4M/5RznWOmd1Zhe0sUR6Gkdw5CFixMm1PGK/MtJCaMK9b3ab6jGNCAXCiJ4mPwrPeOqHzqQA8bgee2yuHYGFglUG6C8GRNPUdWVRHfaqgijsb5zV93x5FbtOQV2fr7SmO3mEGTT9+SmbLffE7FUTtqb8BBf7WZDk8lrtLaL/Tb0kkaNyVXnGsrlYWxzSHaHZ9z9cKQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=skidata.com; dmarc=pass action=none header.from=skidata.com;
  dkim=pass header.d=skidata.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=skidata.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PKvIeAcQ2h7ydhTjUoyN6Yual9PocNyU7yVWr2ctkU0=;
- b=UtdNlMD5tJc0s4Sc3R8R3wdpsXtw8KOKcetqaz/0j/TR/2GIGBLOvvFFAjv+a1EFy0QKUHjeLuNpmlx/+5uXTEMDEKNzcahM6+WfSn0P/CXX1n0uGrhi5MMypRQUd/au5ckTToyPY4tAT7mb5o1LTaqpCtaxOhnz958LP/dN4IX26xz/MXB2Tg+2TAQ4ciHVM++ThmJ274XoZ+pmLRGhTYCFjjSIun3zRxzbrT/EHg5DVWFkS8rVwpUPt+T/dQ9wO0erdvHYP1CsGLTS+ENPFHFVKn5hE8Zj9T0ieiIWI1hlJZkZ3KizpVjmB/pYNlliT8ROfFhm9mZw4Pb3ro8O6A==
+ bh=DBeUS1dPv0IKPKf6PZUXfiNvrjD3B7e6ndN5byB6Huw=;
+ b=w30NJzxfnzUwvybT5MfDnuaK/wHgFPqOe9Hd0hpUdkLp0hBMvb67BTDpC41jaxCf99/RwmIoBYrJApPqaCWPCo+R5ZxJb3AYV4oUpxrXX63crC63Si314aWcVURqQxd9kUEWPYSZZJVUCGQQCbQHHavMQcRrica0LLA+Oug/09c38faD3lsMieq6kb2p9KJ0BaKLUg4dZSp9nKq0cHmgVobZ4foSyWTcayZTrF8jUhlhPesu3NVEbRbogeS6GjokRi03uT8wh+8T3ROcpSQifqJZyyNFsS+pD11dUwGFwsasttAiwLPL3Mg1uojLUeosZaf+nlJA7q7BUcL7LLbAhw==
 Received: from VE1PR05MB7376.eurprd05.prod.outlook.com (2603:10a6:800:1b3::19)
- by VI1PR05MB3152.eurprd05.prod.outlook.com (2603:10a6:802:1b::17) with
+ by VI1PR0502MB3982.eurprd05.prod.outlook.com (2603:10a6:803:24::23) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4690.26; Wed, 17 Nov
- 2021 15:57:55 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4690.16; Wed, 17 Nov
+ 2021 15:58:58 +0000
 Received: from VE1PR05MB7376.eurprd05.prod.outlook.com
  ([fe80::21d9:e4fb:d0ff:8596]) by VE1PR05MB7376.eurprd05.prod.outlook.com
  ([fe80::21d9:e4fb:d0ff:8596%4]) with mapi id 15.20.4690.027; Wed, 17 Nov 2021
- 15:57:55 +0000
+ 15:58:58 +0000
 From: Richard Leitner - SKIDATA <Richard.Leitner@skidata.com>
-To: "geoffhp@gmail.com" <geoffhp@gmail.com>
+To: "akash.hadke@kpit.com" <akash.hadke@kpit.com>
 CC: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-java] Request to pull honister branch and override
- syntax commits from master-next to master branch
-Thread-Topic: [oe] [meta-java] Request to pull honister branch and override
- syntax commits from master-next to master branch
-Thread-Index: AQHX2d0Uq9f1rN6s80OQGJfiPm/JlqwH5AqA
-Date: Wed, 17 Nov 2021 15:57:55 +0000
-Message-ID: <YZUmg2oqYa/btYrE@ltleri2>
-References: <16AE031C14A64EBB.21980@lists.openembedded.org>
- <CAHNuFG+QkyytMAp+9LGLtoBmFX3ztug2od6OBqCcwvR_=T5nUg@mail.gmail.com>
-In-Reply-To: 
- <CAHNuFG+QkyytMAp+9LGLtoBmFX3ztug2od6OBqCcwvR_=T5nUg@mail.gmail.com>
+Subject: Re: [oe] [meta-java][dunfell][PATCH v2] xerces-j: Whitelisted
+ CVE-2018-2799
+Thread-Topic: [oe] [meta-java][dunfell][PATCH v2] xerces-j: Whitelisted
+ CVE-2018-2799
+Thread-Index: AQHX2JXgoR/acC7jqkWK9OgxuPj/Y6wH5uKA
+Date: Wed, 17 Nov 2021 15:58:57 +0000
+Message-ID: <YZUmwTszmK7mnFoa@ltleri2>
+References: <20210811113227.31942-1-jainsaloni0918@gmail.com>
+ <21195.1636811626386711470@lists.openembedded.org>
+In-Reply-To: <21195.1636811626386711470@lists.openembedded.org>
 Accept-Language: en-AT, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -59,80 +58,80 @@ X-MS-TNEF-Correlator:
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=skidata.com;
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: ab52d5fa-a7d8-4b6f-2058-08d9a9e30515
-x-ms-traffictypediagnostic: VI1PR05MB3152:
+x-ms-office365-filtering-correlation-id: 63377405-32e0-40ce-b154-08d9a9e32a33
+x-ms-traffictypediagnostic: VI1PR0502MB3982:
 x-microsoft-antispam-prvs: 
- <VI1PR05MB3152616444CB100A2B8773B9F09A9@VI1PR05MB3152.eurprd05.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:9508;
+ <VI1PR0502MB398254360CF2B9B21AC43217F09A9@VI1PR0502MB3982.eurprd05.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:6790;
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- 4WA0s7cwpuwyeR3ATC/zOCps3NPArdr/KXHaQ8Qgd6EKYKk1a5JNE5YYGB5XKWAbc/Xyy9wVojOzt/zAVbf0Z5C8DEFqkOKE3aMLz/0ROd3mCijWmtU4m9nalaonaSPtPTZ7AuEuPEYdqbRcz+7DYDFD3cEFiDpNYfezGJVHn1iaf6RltmGfW8pJfX09dT7VpoGb5BCWz1q63A+rLuRrg9yeEyNza2t0XxD93N6TgyWkftyckCRlRxsl6BdIEZUA/tXN9K0dUOKG2G0glkdYfDvn4MAAmB6ltYwvFu7V4JkJrjLm8es2lxIBVuGDCJooKDWLn5hLf2I3VD5YoXuziFtHcbEe9TX5W70R21jZdLJjSnqZbQg8dZGXr07q1ZRwkTrls3/EYWEXIu++jWKdarFC1fJcIsC18DyveTxOgx2aCPK+lbsJ8zvabAo2CLMd91yeBzj8ZOIxnRArnrf9b2kB+U2W9msN/+H3juFpXhPduoOBlg9W008u+i0EP7wZAns+uGiOmjz+7uKRBo5l2UwaQqKctxAllgpo03PoCJqBG+4bOjyDpQ7aMXrnSnbWS+m8+aWhY8k/cpu3n1cSFhpxhycDa9+CXA7uqPMxjtHVGoHjXF/f5T4ztHZAxviMiIC22yYlJ3ZgxxQZUODJDBydrKrfL0VlBbEBZRHLHYANfQ2XDRBuCLJqhNMyWKtLkzrDjHytnnQZNw/mprfejg==
+ pe0/Xz7dlGmjvBeznmplpYPRggB4fkxMEyZlUcx7/I8GjrXKoNKnRXtGXEdNJvHdEA8/hKf9ugmWlNKYFaAVc8jQXs3n406GFZlql/69rFPvUvzpWUTPIs7/Q8H4kPeKPNrNv3NwCtVj9qga1yAS1mNjVCl9KEQ8+7QgeTI4fHCPkaNClmb4GOagSS976tbTZopaCKwG4ufLno1g3UZ8F/KiZpi+afXRfjYE2j5He6a/AGJw5vC+iYB6KVTaPNsm9uUc6bfBubDIINUVGZrOCzeltNLN4weYfv3pI9cf+ZzE2iS+47iQ9AQdurZ5XtgmtYbeGxTfZO2ar551e4+rcfCsOG++ujeL64x1288sb+z7Qc16P9nMXZUqF6X/JAG0XzexgOMzAlNXBHrW0Wy+hP4DZyioVGNJXbBWWd+d8TvweLkHZgIGedKouqdgS703Ros2vqctcb3bTpmLmdv6kZ7eMQeJuFfx9PMVhGSqDvtZ4JY+zCgwLMhRxEiUEAjMqCnx+XAp5gT561DSkAQ39lsWBehx5mZWvd5kHmfW10+tBpOlLoQ+aS/vboPkRAWXg4leaY6EV0mAO3dvSJPZj1nqzA7ME4oCV77pEStaMKYeiCx9M/LNid+e6Cwd+B8eYn/kmFFhV5vA4qgPhFWMoDKRuTUQ8zasobQ8ZtXHtGhJRmXHtk0DO93qUcQkY1+PYjJW5iudFIPthf0Rng7/6A==
 x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR05MB7376.eurprd05.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(7916004)(366004)(64756008)(66556008)(316002)(6506007)(66476007)(4744005)(66946007)(122000001)(66446008)(2906002)(6512007)(26005)(5660300002)(4326008)(76116006)(91956017)(6916009)(38100700002)(53546011)(8676002)(86362001)(8936002)(83380400001)(33716001)(508600001)(71200400001)(6486002)(38070700005)(186003)(9686003);DIR:OUT;SFP:1102;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR05MB7376.eurprd05.prod.outlook.com;PTR:;CAT:NONE;SFS:(7916004)(4636009)(366004)(33716001)(2906002)(26005)(6916009)(86362001)(316002)(6506007)(558084003)(508600001)(83380400001)(4326008)(6512007)(9686003)(66476007)(8676002)(8936002)(71200400001)(122000001)(6486002)(66446008)(66946007)(91956017)(76116006)(38070700005)(38100700002)(64756008)(66556008)(186003)(5660300002);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0: 
- =?us-ascii?Q?AT4w7E2SHzaz0EYywSe5KEuxaAbxS+P3MCl5P7Pq5p8flleJ51R5GSsbV47U?=
- =?us-ascii?Q?YFNROJRcKG0m0GuExJqvzBRHOtS1ncyluM5aAg4T5PpS2IUELVmwBlJxL9qy?=
- =?us-ascii?Q?zO+i0Js9gl2RwhCVRj/xF8WW3RiqSJvhbExnecL+EYQDj+vE1UVNaoKW4EN/?=
- =?us-ascii?Q?06txXCCVg8q6UsEONS3Cdwragi211X1Y64AAxZ+e+rCf/iIAqdhwpfTlbnoS?=
- =?us-ascii?Q?fDL7+fMnPHq4e+PF2/9ih/fkiurBmLJhahZEjh0R67qjrVqBHT2mLFQQLssH?=
- =?us-ascii?Q?3MGGetBmLTgd23tp8dLDsCqfUC3XqN+LRfewxeM2UZc0O8RKGbq9NXxcrDi5?=
- =?us-ascii?Q?uEMy7Fohhk8pG1mMOfb/mxMqpckMQdBPSxEIlvzsLM7B8TjH/Wm2rovSCCEM?=
- =?us-ascii?Q?wIEdjE3lfQC3l80cwksC3QmIKYXtVJ6PZeHnk2NEtZpqywzCjlb6PSzFiIPn?=
- =?us-ascii?Q?QeTl2tUvC3/Y/+iX2ARtuZ1RcTSu9W50i7mIIdjHiY/Ngll2rvN5s82EwzvE?=
- =?us-ascii?Q?6S/QUfPtoP3uqYth+Jq1eiRhM1lhOANVz5+0KENlG1E2QoKwQBL52qeXl6fB?=
- =?us-ascii?Q?o/QvlkFWFQ3Pam36Qutw35qCfVv61jQ8iB5DGwEnVh9i0XuzrGq4FhDSjoCH?=
- =?us-ascii?Q?KgLzA+dfJ9hNTgSN/J1oTV+pKQY49pln+9IgTImfP1ht8I5Nmw8ruo+LzH4Z?=
- =?us-ascii?Q?bghdmOE7ZgSi7GDsNe0EW9ncuOD+ffJksBAmnPPoH2G4bUB6XkH1O3NwjUVr?=
- =?us-ascii?Q?4kixKZZFMGbfYMwhjFy2rbB/UqTdExsAeVmZirdREKziJtNmrgwM7729bZbJ?=
- =?us-ascii?Q?8uk/3mfQUZhNYadj7wvYon2VKpsrb7N1VO+SJmJ8wWIRrrpekJqX1XqeMF7E?=
- =?us-ascii?Q?BcC/2UUtEBoeEBA52qu2e+OiooF+UhBMmcvOlXrdAt7cyta/9RP0DQ6xKN7K?=
- =?us-ascii?Q?vrkGCZD3VepT717vxXqp2uGeIUi+VWFQsDgKZSOEaAncT/JYdNFlBlAY46bT?=
- =?us-ascii?Q?tnNTH0yjdfdJse2A+S4PXecDoYD+k2cSx25Kz7WqFQLgYHsG+3eCe3V8bhpi?=
- =?us-ascii?Q?kHlA0u7evlkMmyoNAs9009BtpvoHetm7bPqTTy4/KDyaL3WuQCcwXmVdP59y?=
- =?us-ascii?Q?hqey69ouFhyrwGXH+vLzd3LA7dTf+RYlHwFYQDZCaqAubpel4njwxMHRqFN8?=
- =?us-ascii?Q?73Tn3meCdoyqaNqJuVxiW59vinAzzskEak4jjAD8Z9tz4yKke5ioWPIyBHrp?=
- =?us-ascii?Q?Vn7JAaPggaxDWeQdiKm59fW3+q1JsJnBankBv1RScCGrWybm7MNoLClqmJaO?=
- =?us-ascii?Q?An1Bvzg8Ae90dTvXpTXeN5eNT5lSi3Nk08u3ZWHd4GN+fanE2mnP+RxnYNlz?=
- =?us-ascii?Q?SZi55XgxsSGvoh4uQhn24WDxqrCRvzCacU9Ncr7Y6u15Qr9xALCd7ivhjSQ0?=
- =?us-ascii?Q?RY7nZ1KGyH+Ed5NQj2ZY83YouyxP5LdWXamY04Qk6EitH7Pt/vZCyQpOxuDy?=
- =?us-ascii?Q?PawHL75qa/XS0/IJugK600Waf8QYTEFISpdVNCznuDWQeed38otGvUzwQBVw?=
- =?us-ascii?Q?9/QCB259BDUzSfYEGKGWGMV6CqFh/ZqRTmkxuPBdFdvh1Vi0tbpYdMRDdsQz?=
- =?us-ascii?Q?ewxWIEzDD+ii8+pWwoWdR9WN2ueRxJLFwGb63V0DL7Ztc/NfcDQ+zlzHCeZG?=
- =?us-ascii?Q?bpUlUZ5mK12bi2H8ah0Xu5RVPXA=3D?=
+ =?us-ascii?Q?nxDxaZwuahYvdTmM3/F1J/dY/rzI/lvn4mztEXoboY8ARxr9iji7asz+qgrh?=
+ =?us-ascii?Q?AiL6a3inwAe6XsmJyAQFUjaCcAD1QtZdVoC87H2e70+n57Y7EvsaZMaYBqvI?=
+ =?us-ascii?Q?oiIpA8oz6BQAbRY6NerOlLMB7XRGSvQfSuOwypPH6NpUdPA5WLHyYPfNWRGw?=
+ =?us-ascii?Q?ybFP6crL1eCw1O6cK3btY33zD2i/VN8uKIGRthuybLnqdzaOFP+QDjfdHW3Q?=
+ =?us-ascii?Q?9DKkUw6572/1DlWXyJ7ktlTHHm46FQQtW62TTCc3RRvbBkTpb8yDVsZiPhFp?=
+ =?us-ascii?Q?+Palww4TGXymoJbOLGLkXM9IKZgogDg7BJmBvYQBwfHt4N1mEtwc9O+feYx2?=
+ =?us-ascii?Q?d2Iyoyw6EYy8+9kOTaJQ108t8mY5xkR+feRQsyUcNpC/3Ug5ZFLNlHL0TDWf?=
+ =?us-ascii?Q?kwtb5bCQq1QeUxJfLmVu2i+6UzMG0aUB6/MwlfAvJggA0hSSw7TgPWC2+Io8?=
+ =?us-ascii?Q?TUxByaQ8LlcsEaFxU6CxDd2y+zVjhHMyzv8lW1mJYRu8TZB8JjoNDLUMvDgv?=
+ =?us-ascii?Q?0MiBuT0IOGRj5b2MYRlwiq5eU0Ej2mmyYXj//IBa5tvoRrsYAkh6In3AfwkO?=
+ =?us-ascii?Q?cDwJ6buT/57aE2EGxJZEYrPoudqzRE9IscdOawzTdnM5vfTMmCkdepDB98Qo?=
+ =?us-ascii?Q?/GblR2AJjEFEuDx/xnuh+BSx8ljT2KfHvCWKBFK/HJnqIDr7RJ0WGh4QZ5UO?=
+ =?us-ascii?Q?dZJHqMnvElWSd4M/HvfDBeqvM6uToizBUcoJwoXZHG2g49WW9cqQbVaThCoI?=
+ =?us-ascii?Q?OnNgJ/VxA3uJ0UrApD5PC1vI8oxzrYP+K3lWhf3dLvU39H0mUP2fiqQoyBy4?=
+ =?us-ascii?Q?4jUt8ji37U3sxjqk4lgL27WbRz6cO5hFTjnK7weU+B4TNl1bLNhoIUnbVBvZ?=
+ =?us-ascii?Q?Yxh+jixFlM7A4uX3UrHhiC4cQ8HphbimVICgMs2N7D6I0A2B7MWgogcH+wOc?=
+ =?us-ascii?Q?l6toQCuHQKoCeuFzoBZ/4PM4I8bJmqv3JkRid/LDsQLjVE3qWHMDfh01Vhuq?=
+ =?us-ascii?Q?xX1syXa40LlkTb5KjoZLTPJQQo3GbdeQFcR2Bnry+XIA5CavoHtW3iEO6Wb1?=
+ =?us-ascii?Q?+eLgqpRZSq4jr3oxewwd7YEh1lLDFAM9JtfXLdBGqMOA1kWJmHvEZH1Nfiy5?=
+ =?us-ascii?Q?rG4VevJmGAAHv3dIGyXzXkbEFxPaKZFCypeXwYPzJhrhDMYjRwiXUWiYEBBs?=
+ =?us-ascii?Q?ajcFaRxjWX1KlW4IBf0oXe+7ofHm4si3grAcvtQjidd+JjXbqNJkiIPr9gIZ?=
+ =?us-ascii?Q?gJThltLIr4Zn8vBKbnMo8njAVXbmmM930Zet9LjJdVZyeWnV+lO0E50tZ3AJ?=
+ =?us-ascii?Q?P7r2Hi4eE2TEqX9PPCIRvWKEG04zTQ8i2a9tRvtdHqgW4u99fj0GLWxv/6sW?=
+ =?us-ascii?Q?JgJ4kIlC3czvxxX5/dP1o+WvrsuI4IWMDq9Qszt7lM+KrR6Kh3PgN6Ch0xT7?=
+ =?us-ascii?Q?QmU8zplsTBG4mT0Lm0rhrRgEpqOYqVsi0tXKt+rLA9YOCwpgDvS00TthALRZ?=
+ =?us-ascii?Q?rEt1tCxC+thXDCfvaSgFu8wzgfQ656pVk941a+cP3CuYVq+nDSHUAcx0NYsB?=
+ =?us-ascii?Q?irhpKmTmktlfrPSb1FntN5sZBfrGq7e91580bFGVIi2KxNPLMVNkbHLpW65Z?=
+ =?us-ascii?Q?Nj/ubydCmX2fflp3mt09+Ngiu4k4JTMr77uIh7uCCczk+TO9V4nNJYKKNPGN?=
+ =?us-ascii?Q?Z9l6sRMOma/9+/eEzpxkZDhrro0=3D?=
 Content-Type: text/plain; charset="us-ascii"
-Content-ID: <5B47025A48498345A4CE57E755B5376A@eurprd05.prod.outlook.com>
+Content-ID: <89292992E085C44BA9AFF24C83BA5826@eurprd05.prod.outlook.com>
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: skidata.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: VE1PR05MB7376.eurprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-Network-Message-Id: 
- ab52d5fa-a7d8-4b6f-2058-08d9a9e30515
-X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Nov 2021 15:57:55.6362
+ 63377405-32e0-40ce-b154-08d9a9e32a33
+X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Nov 2021 15:58:57.9162
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: e5733095-4425-4f08-b6ba-487b9a46a425
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
 X-MS-Exchange-CrossTenant-userprincipalname: 
- WJ6yzBTV9hRfO+kgSkAAGWj4THxABzAnqRY9qoovzX1qWqTVYRDNq/tCgvzqR9ZWUYEyO+AyT2osGqQDNPf0OQUF9JtSQCSCa2ZTxvBfvRw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB3152
+ +Ksd/uqgCBqfwrQu8h8HJq6Z/yMJqP4zIKeqUQtCN6p8DtZ+42iAdve82ayvsRsc1qFseoysLIcuCM8SModjHl6q25bid1TiXrPF6cs/qFw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0502MB3982
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 Nov 2021 15:58:01 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Nov 2021 15:59:03 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/93999
+ https://lists.openembedded.org/g/openembedded-devel/message/94000
 
-Hi Geoff,
+Hi Akash,
 
-On Sun, Nov 14, 2021 at 08:55:41PM -0800, Geoff Parker via lists.openembedd=
-ed.org wrote:
-> I made this request a month ago, still no change to the master branch
-> so that builds can be made using  meta-java with honister or master
-> openembedded layers.
+On Sat, Nov 13, 2021 at 05:53:46AM -0800, akash hadke via lists.openembedde=
+d.org wrote:
+> Hi,
+>=20
+> Is there any update on this? Is it going to integrate into dunfell?
 
 Thanks for the reminder.
 It seems my CI script missed the final push.
@@ -141,22 +140,5 @@ I'm sorry!
 
 Everything should be up2date now.
 
-regards;rl
-
->=20
-> On Thu, Oct 14, 2021 at 2:32 PM Geoff Parker via
-> lists.openembedded.org <geoffhp=3Dgmail.com@lists.openembedded.org>
-> wrote:
-> >
-> > Request that these commits that have been in meta-next for a while get
-> > merged into master of meta-java  so that builds using meta-java can be
-> > built with master or honister core layers.
-> >
-> > 147677c layer.conf: Update to new honister release name
-> > a1eb2b9 all: manual fixes for new override syntax
-> > b71a986 all: run convert-overrides (0.9.3) script to convert to new
-> > override format
-> >
-> >=20
-> >=
+regards;rl=
 
