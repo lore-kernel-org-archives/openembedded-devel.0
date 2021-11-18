@@ -1,257 +1,104 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C340FC433F5
-	for <webhook@archiver.kernel.org>; Thu, 18 Nov 2021 11:32:24 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
- [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.web10.381.1637235144162834138
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E84FC433F5
+	for <webhook@archiver.kernel.org>; Thu, 18 Nov 2021 12:37:41 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg
+ [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web10.940.1637239058397736509
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Nov 2021 03:32:24 -0800
+ Thu, 18 Nov 2021 04:37:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Rm22RxH8;
- spf=pass (domain: gmail.com, ip: 209.85.128.45,
- mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id o29so4991626wms.2
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Nov 2021 03:32:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=WWjbINCndyDTrWG4L2vuBpp0rLA1d9UplVcN4ocNCx0=;
-        b=Rm22RxH8NEAHRftGQJel9FLHh4gkR0NPfy7oRJh5HEim2EUeIw+8i0VOXRM5bouTy0
-         4bgaNnJ3ogpQJqaQptX0IryYDOdcxqoyhJIGrP896GRctT0pqz3nyMEjsFftOlH2HdHu
-         XemKjKnBPfjV24T6/HK28D48rbcGsWqfgtI3Hi+TZDaBUWGPUSwg30/qAuZ1He0Ux6eQ
-         oyLTDuQbifIVNrKb18oaPz6u7YV89oQK1G+DfctOzzC+gB0I7uniaeydg8n4q7n9EexU
-         V4Pc1mtFTTdKhpHKgjQ/qZIIyPqZdEkJNX0zMR6OXjaB74CvLhJkIuD7nLPvxj3FntWA
-         bzLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=WWjbINCndyDTrWG4L2vuBpp0rLA1d9UplVcN4ocNCx0=;
-        b=3BmIvob8429zcjvToTknmVSqMoneZMW8HwShm5QQdIClUDl5HtRS/LWZE5VM6Vb4v2
-         dTzq3UiqhMLrkehm26wiN5cm3KRb4HC2Cu5LhxwKQKyk9Y1ak9bK7kD0rQXVqkqpuwES
-         76sJT5QWvl8pu9bXs7wFwjB6ox+cC5gBa5SxzYl0N+1fSLGcCmsxBkJcQzpORnQm492D
-         /D/rCV4uZ9E/e4zwOtCZp1GRRXstkMaOqokOBgwjCGabqgrm0lKnc5qWHF6VPTiKr3lr
-         rvxJk1ODtOrf3WtloyYRoR+WKICdtb8kR41AywyjsrhKnWbJQYIX+y+gCuLxR2qHqDS3
-         QtGg==
-X-Gm-Message-State: AOAM530yOvF8PC8VNHp5T1TP+WgsWnmDF9+2qimxgjFcZ1Nj/k01sZDQ
-	60hA6im5F3kM8QZf7cM01gAF+4SDRgE=
-X-Google-Smtp-Source: 
- ABdhPJzfXDx8AbD/GlLJjDkNwitp6qRahpXDD4ko9pcss7vSUkCQBp4AcWhn3lVHgK9xOgdKJ6MgQw==
-X-Received: by 2002:a7b:c764:: with SMTP id x4mr9281125wmk.78.1637235142660;
-        Thu, 18 Nov 2021 03:32:22 -0800 (PST)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id
- ay21sm8891594wmb.7.2021.11.18.03.32.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 18 Nov 2021 03:32:22 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+ dkim=pass header.i=@anavi.org header.s=default header.b=OYLa+nj0;
+ spf=permerror,
+ err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
+ for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
+ (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=GAjCiBPIzNEAROVU3pzNxO6n2FYaaCu/K0NNkVrlitY=; b=OYLa+nj0xcRxk+MAS0uAugYvLS
+	IK9nt+gPK+DXPBX2TVmXr8/4+GyIWYw9bnmIEbCVdNmMSI7gtx4jAwrPIDO4421F2THxYFkeHpVI8
+	QMiO6jpxxA0BM0HCbmwF46DFE86/VCQpNMT4Mesr3r8CEZdRwaGxXkxdWw2lrpWmGNrIURGLVJZ9j
+	D78w8v5iHRcwInZY4M/5PYv2p7iw57LB2+sIULq9byTq+LjqLdqZuaijNPPV7NTIK+DQ5Jwylcnlm
+	oMjGwHmlWmgt37lZ39QnZl1BVy8TJz1RDl2vZtb0s1voQyefce7SaV1vaFNxHTt0D5z44ZwQZCN5I
+	xRSswSuw==;
+Received: from lan.nucleusys.com ([92.247.61.126]:60154
+ helo=lootbox.konsulko.bg)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.94.2)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1mnenO-0007sV-U6; Thu, 18 Nov 2021 14:37:35 +0200
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [dunfell][PATCH] sdbus-c++: don't fetch googletest during
- do_configure
-Date: Thu, 18 Nov 2021 12:32:19 +0100
-Message-Id: <20211118113219.15145-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.32.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-deprecated: Upgrade 1.2.12 -> 1.2.13
+Date: Thu, 18 Nov 2021 14:37:25 +0200
+Message-Id: <20211118123727.45056-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
+ leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Nov 2021 11:32:24 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Nov 2021 12:37:41 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94022
+ https://lists.openembedded.org/g/openembedded-devel/message/94023
 
-* with PTEST_ENABLED it enables with-tests PACKAGECONFIG which
-  instead of using system googletest gmock, tries to fetch googletest
-  from github and fails because branch was recently renamed from master to main
+Upgrade to release 1.2.13:
 
-| -- Found PkgConfig: /OE/tmp-glibc/work/qemux86-oe-linux/sdbus-c++/0.8.3-r0/recipe-sysroot-native/usr/bin/pkg-config (found version "0.29.2")
-| -- Checking for module 'libsystemd>=236'
-| --   Found libsystemd, version 249
-| -- Building with tests
-| Fetching googletest...
-| [1/9] Creating directories for 'googletest-populate'
-| [1/9] Performing download step (git clone) for 'googletest-populate'
-| Cloning into 'googletest-src'...
-| fatal: invalid reference: master
-| CMake Error at googletest-subbuild/googletest-populate-prefix/tmp/googletest-populate-gitclone.cmake:40 (message):
-|   Failed to checkout tag: 'master'
-|
-|
-| FAILED: googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-download
-| cd /OE/tmp-glibc/work/qemux86-oe-linux/sdbus-c++/0.8.3-r0/build/_deps && /OE/tmp-glibc/work/qemux86-oe-linux/sdbus-c++/0.8.3-r0/recipe-sysroot-native/usr/bin/cmake -P /OE/tmp-glibc/work/qemux86-oe-linux/sdbus-c++/0.8.3-r0/build/_deps/googletest-subbuild/googletest-populate-prefix/tmp/googletest-populate-gitclone.cmake && /OE/tmp-glibc/work/qemux86-oe-linux/sdbus-c++/0.8.3-r0/recipe-sysroot-native/usr/bin/cmake -E touch /OE/tmp-glibc/work/qemux86-oe-linux/sdbus-c++/0.8.3-r0/build/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-download
-| ninja: build stopped: subcommand failed.
-|
-| CMake Error at /OE/tmp-glibc/work/qemux86-oe-linux/sdbus-c++/0.8.3-r0/recipe-sysroot-native/usr/share/cmake-3.19/Modules/FetchContent.cmake:989 (message):
-|   Build step for googletest failed: 1
-| Call Stack (most recent call first):
-|   /OE/tmp-glibc/work/qemux86-oe-linux/sdbus-c++/0.8.3-r0/recipe-sysroot-native/usr/share/cmake-3.19/Modules/FetchContent.cmake:1118:EVAL:2 (__FetchContent_directPopulate)
-|   /OE/tmp-glibc/work/qemux86-oe-linux/sdbus-c++/0.8.3-r0/recipe-sysroot-native/usr/share/cmake-3.19/Modules/FetchContent.cmake:1118 (cmake_language)
-|   tests/CMakeLists.txt:17 (FetchContent_Populate)
-|
-|
-| -- Configuring incomplete, errors occurred!
+- Change the signature of the :func:~deprecated.sphinx.deprecated
+  decorator to reflect the valid use cases.
+- Fix versionadded and versionchanged decorators: do not return a
+  decorator factory, but a Wrapt adapter.
+- Fix configuration for AppVeyor: simplify the test scripts and
+  set the version format to match the current version.
+- Change configuration for Tox: run unit tests on Wrapt
 
-* unfortunately this backported patch fixes the fetching failure, because
-  it uses release-${GOOGLETEST_VERSION} tag instead of now non-existent
-  master branch, but is not enough to prevent fetching from github during
-  do_configure:
-
-  -- Building with tests
-  -- Could NOT find GTest (missing: GTest_DIR)
-  -- Checking for module 'gmock>=1.10.0'
-  --   No package 'gmock' found
-  Fetching googletest...
-
-  we also need to add googletest dependency to with-tests PACKAGECONFIG was fixed in meta-oe/master with the upgrade to 1.0.0:
-  https://github.com/openembedded/meta-openembedded/commit/b26b66e5da92718b4e99a57fbfaaef9e751c3cfe#diff-48a847e7323703994fd2ce0fcb731ff860fa955a77cdfe39d71a9cc84a042c06L15
-
-  then it's ok and not fetching:
-
-  -- Building with tests
-  -- Looking for pthread.h
-  -- Looking for pthread.h - found
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...d-googletest-in-the-system-before-do.patch | 96 +++++++++++++++++++
- .../recipes-core/sdbus-c++/sdbus-c++_0.8.1.bb |  9 +-
- 2 files changed, 102 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-core/sdbus-c++/sdbus-c++-0.8.1/0001-Try-to-first-find-googletest-in-the-system-before-do.patch
+ ...n3-deprecated_1.2.12.bb => python3-deprecated_1.2.13.bb} | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-deprecated_1.2.12.bb => python3-deprecated_1.2.13.bb} (69%)
 
-diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-0.8.1/0001-Try-to-first-find-googletest-in-the-system-before-do.patch b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-0.8.1/0001-Try-to-first-find-googletest-in-the-system-before-do.patch
-new file mode 100644
-index 0000000000..89cb593e60
---- /dev/null
-+++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-0.8.1/0001-Try-to-first-find-googletest-in-the-system-before-do.patch
-@@ -0,0 +1,96 @@
-+From b073e1c2b9a8138da83300f598b9a56fc9762b4b Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Stanislav=20Angelovi=C4=8D?= <angelovic.s@gmail.com>
-+Date: Mon, 16 Nov 2020 17:05:36 +0100
-+Subject: [PATCH] Try to first find googletest in the system before downloading
-+ it (#125)
-+
-+Upstream-Status: Backport [d6fdaca]
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+
-+---
-+ tests/CMakeLists.txt | 62 ++++++++++++++++++++++++++++----------------
-+ 1 file changed, 40 insertions(+), 22 deletions(-)
-+
-+diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
-+index 97f7c1a..7ecc327 100644
-+--- a/tests/CMakeLists.txt
-++++ b/tests/CMakeLists.txt
-+@@ -2,26 +2,44 @@
-+ # DOWNLOAD AND BUILD OF GOOGLETEST
-+ #-------------------------------
-+ 
-+-include(FetchContent)
-+-
-+-message("Fetching googletest...")
-+-FetchContent_Declare(googletest
-+-                     GIT_REPOSITORY https://github.com/google/googletest.git
-+-                     GIT_TAG        master
-+-                     GIT_SHALLOW    1
-+-                     UPDATE_COMMAND "")
-+-
-+-#FetchContent_MakeAvailable(googletest) # Not available in CMake 3.13 :-( Let's do it manually:
-+-FetchContent_GetProperties(googletest)
-+-if(NOT googletest_POPULATED)
-+-    FetchContent_Populate(googletest)
-+-    set(gtest_force_shared_crt ON CACHE INTERNAL "" FORCE)
-+-    set(BUILD_GMOCK ON CACHE INTERNAL "" FORCE)
-+-    set(INSTALL_GTEST OFF CACHE INTERNAL "" FORCE)
-+-    set(BUILD_SHARED_LIBS_BAK ${BUILD_SHARED_LIBS})
-+-    set(BUILD_SHARED_LIBS OFF)
-+-    add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
-+-    set(BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS_BAK})
-++set(GOOGLETEST_VERSION 1.10.0 CACHE STRING "Version of gmock to use")
-++set(GOOGLETEST_GIT_REPO "https://github.com/google/googletest.git" CACHE STRING "A git repo to clone and build googletest from if gmock is not found in the system")
-++
-++find_package(GTest ${GOOGLETEST_VERSION} CONFIG)
-++if (NOT TARGET GTest::gmock)
-++    # Try pkg-config if GTest was not found through CMake config
-++    find_package(PkgConfig)
-++    if (PkgConfig_FOUND)
-++        pkg_check_modules(GMock IMPORTED_TARGET GLOBAL gmock>=${GOOGLETEST_VERSION})
-++        if(TARGET PkgConfig::GMock)
-++            add_library(GTest::gmock ALIAS PkgConfig::GMock)
-++        endif()
-++    endif()
-++    # GTest was not found in the system, build it on our own
-++    if (NOT TARGET GTest::gmock)
-++        include(FetchContent)
-++
-++        message("Fetching googletest...")
-++        FetchContent_Declare(googletest
-++                            GIT_REPOSITORY ${GOOGLETEST_GIT_REPO}
-++                            GIT_TAG        release-${GOOGLETEST_VERSION}
-++                            GIT_SHALLOW    1
-++                            UPDATE_COMMAND "")
-++
-++        #FetchContent_MakeAvailable(googletest) # Not available in CMake 3.13 :-( Let's do it manually:
-++        FetchContent_GetProperties(googletest)
-++        if(NOT googletest_POPULATED)
-++            FetchContent_Populate(googletest)
-++            set(gtest_force_shared_crt ON CACHE INTERNAL "" FORCE)
-++            set(BUILD_GMOCK ON CACHE INTERNAL "" FORCE)
-++            set(INSTALL_GTEST OFF CACHE INTERNAL "" FORCE)
-++            set(BUILD_SHARED_LIBS_BAK ${BUILD_SHARED_LIBS})
-++            set(BUILD_SHARED_LIBS OFF)
-++            add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
-++            set(BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS_BAK})
-++            add_library(GTest::gmock ALIAS gmock)
-++        endif()
-++    endif()
-+ endif()
-+ 
-+ #-------------------------------
-+@@ -87,11 +105,11 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-+ 
-+ add_executable(sdbus-c++-unit-tests ${UNITTESTS_SRCS})
-+ target_compile_definitions(sdbus-c++-unit-tests PRIVATE LIBSYSTEMD_VERSION=${LIBSYSTEMD_VERSION})
-+-target_link_libraries(sdbus-c++-unit-tests sdbus-c++-objlib gmock gmock_main)
-++target_link_libraries(sdbus-c++-unit-tests sdbus-c++-objlib GTest::gmock)
-+ 
-+ add_executable(sdbus-c++-integration-tests ${INTEGRATIONTESTS_SRCS})
-+ target_compile_definitions(sdbus-c++-integration-tests PRIVATE LIBSYSTEMD_VERSION=${LIBSYSTEMD_VERSION})
-+-target_link_libraries(sdbus-c++-integration-tests sdbus-c++ gmock gmock_main)
-++target_link_libraries(sdbus-c++-integration-tests sdbus-c++ GTest::gmock)
-+ 
-+ # Manual performance and stress tests
-+ option(ENABLE_PERF_TESTS "Build and install manual performance tests (default OFF)" OFF)
-diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.8.1.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.8.1.bb
-index c4d63fd272..a94fb8deff 100644
---- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.8.1.bb
-+++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.8.1.bb
-@@ -12,13 +12,16 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'with-exte
-                    ${@bb.utils.contains('PTEST_ENABLED', '1', 'with-tests', '', d)}"
- PACKAGECONFIG[with-builtin-libsystemd] = ",,sdbus-c++-libsystemd,libcap"
- PACKAGECONFIG[with-external-libsystemd] = ",,systemd,libsystemd"
--PACKAGECONFIG[with-tests] = "-DBUILD_TESTS=ON -DTESTS_INSTALL_PATH=${libdir}/${BPN}/tests,-DBUILD_TESTS=OFF"
-+PACKAGECONFIG[with-tests] = "-DBUILD_TESTS=ON -DTESTS_INSTALL_PATH=${libdir}/${BPN}/tests,-DBUILD_TESTS=OFF,googletest gmock"
+diff --git a/meta-python/recipes-devtools/python/python3-deprecated_1.2.12.bb b/meta-python/recipes-devtools/python/python3-deprecated_1.2.13.bb
+similarity index 69%
+rename from meta-python/recipes-devtools/python/python3-deprecated_1.2.12.bb
+rename to meta-python/recipes-devtools/python/python3-deprecated_1.2.13.bb
+index 4651a8ae3..6ea47f429 100644
+--- a/meta-python/recipes-devtools/python/python3-deprecated_1.2.12.bb
++++ b/meta-python/recipes-devtools/python/python3-deprecated_1.2.13.bb
+@@ -4,6 +4,10 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=44288e26f4896bdab14072d4fa35ff01"
  
- DEPENDS += "expat"
+ PYPI_PACKAGE = "Deprecated"
+-SRC_URI[sha256sum] = "6d2de2de7931a968874481ef30208fd4e08da39177d61d3d4ebdf4366e7dbca1"
++SRC_URI[sha256sum] = "43ac5335da90c31c24ba028af536a91d41d53f9e6901ddb021bcc572ce44e38d"
  
- SRCREV = "3a4f343fb924650e7639660efa5f143961162044"
--SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master"
--SRC_URI += "file://run-ptest"
+ inherit pypi setuptools3
 +
-+SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master \
-+    file://0001-Try-to-first-find-googletest-in-the-system-before-do.patch \
-+    file://run-ptest \
++RDEPENDS:${PN} += " \
++	${PYTHON_PN}-wrapt \
 +"
- 
- EXTRA_OECMAKE = "-DBUILD_CODE_GEN=ON \
-                  -DBUILD_DOC=ON \
 -- 
-2.32.0
+2.20.1
 
 
