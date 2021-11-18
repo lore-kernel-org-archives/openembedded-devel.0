@@ -1,113 +1,91 @@
-Return-Path: <matthias@extraklein.de>
+Return-Path: <jacob.kroon@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 42281C433EF
-	for <webhook@archiver.kernel.org>; Thu, 18 Nov 2021 08:25:46 +0000 (UTC)
-Received: from relay.yourmailgateway.de (relay.yourmailgateway.de
- [188.68.63.97])
- by mx.groups.io with SMTP id smtpd.web09.3023.1637223941980097846
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA4FDC433EF
+	for <webhook@archiver.kernel.org>; Thu, 18 Nov 2021 08:41:26 +0000 (UTC)
+Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com
+ [209.85.167.44])
+ by mx.groups.io with SMTP id smtpd.web12.3209.1637224885187408605
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Nov 2021 00:25:45 -0800
+ Thu, 18 Nov 2021 00:41:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@extraklein.de
- header.s=key2 header.b=OBf5UcJN;
- spf=pass (domain: extraklein.de, ip: 188.68.63.97,
- mailfrom: matthias@extraklein.de)
-Received: from mors-relay-2501.netcup.net (localhost [127.0.0.1])
-	by mors-relay-2501.netcup.net (Postfix) with ESMTPS id 4HvtCl11wqz4yWt
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Nov 2021 09:25:39 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=extraklein.de;
-	s=key2; t=1637223939;
-	bh=21YFTsGfPg61397bRSjb0Vn+iSdgWES1aUFtLH3RH5s=;
-	h=From:To:Cc:Subject:Date:From;
-	b=OBf5UcJNcK+4gZco1izyQLsgtK+eAih8NKYq/dD8/sbnSnFTMdTeuSUX+Z2TwpF/H
-	 PVF4PIRZboVU1ARduv/jLgbxe/hzOWU6fy0/va/PgiDYdgEDIFyGBuWC+t5eTHPYnx
-	 HApYYIfQ90E5rVBupKSOldchxsJ+3lTbadK2Bq3k6uBRuBNK2qIyXLJRoMR4DHxEPs
-	 AiA8rmSNy5xTgIThPmeu0uAEQFl9ySu7GDWoRTGISqPmF2sqjp7x1PRjDeU0ET79Ve
-	 rZpwRwjcG9/YNRnlOrWh34qi7DEKqXHcXuP+iJBwT6PbV74W4ARWQ+M37gY7Xp42Ii
-	 uPV7njqDlKaMQ==
-Received: from policy01-mors.netcup.net (unknown [46.38.225.35])
-	by mors-relay-2501.netcup.net (Postfix) with ESMTPS id 4HvtCl0dCTz4yML
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Nov 2021 09:25:39 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at policy01-mors.netcup.net
-Received: from mx2fa3.netcup.net (unknown [10.243.12.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by policy01-mors.netcup.net (Postfix) with ESMTPS id 4HvtCj5tq8z8tGF
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Nov 2021 09:25:37 +0100 (CET)
-Received: from localhost (ip-88-152-245-240.hsi03.unitymediagroup.de
- [88.152.245.240])
-	by mx2fa3.netcup.net (Postfix) with ESMTPSA id F2B0714039F;
-	Thu, 18 Nov 2021 09:25:36 +0100 (CET)
-Authentication-Results: mx2fa3;
-        spf=pass (sender IP is 88.152.245.240)
- smtp.mailfrom=matthias@extraklein.de smtp.helo=localhost
-Received-SPF: pass (mx2fa3: connection is authenticated)
-From: Matthias Klein <matthias@extraklein.de>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=izVDcydj;
+ spf=pass (domain: gmail.com, ip: 209.85.167.44,
+ mailfrom: jacob.kroon@gmail.com)
+Received: by mail-lf1-f44.google.com with SMTP id bu18so22523901lfb.0
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 18 Nov 2021 00:41:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=LrqaPbwwwowqXp2ojgyX3fuJGIE99hwRZkL14DGa12Y=;
+        b=izVDcydjIZqjYRKoxZZEnAJpHQ8f8pcgDK87Aa4Dhz8FkoeGUpPhS7NfVSc1WzNtqV
+         9wQPIxgVYvTXCg7/5jamdZeWy9zpWc1MFEGlyylEm/chh6MtQIbw0B4X1MLkplz0qlzK
+         LI1KLoZ8FZlH8ToaMQEpffDdpg3xxbD8mQyNF1XlnpztC0bqhCDuyeGP8P5JVDmPczbW
+         lwd0X27x6AWBM4+PFc87MNCRM8P1k+764XfsLfo9okPSk91vT9KXSOdZwXUqSnB2wSA1
+         QsTF/O5fxlmn/G88FRU/IOcO+OT/tpJFLylJ01pclrnZF+ulGN6namRrPycqjKpDXVOs
+         W25w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=LrqaPbwwwowqXp2ojgyX3fuJGIE99hwRZkL14DGa12Y=;
+        b=LxplnvVhS66SzMUOUEYFyEO//OybQXvdBLx6ryvYOAqT5PNfROiptsTO7Q83yb7hZl
+         3M/Sr14bSvfqj0k8cBgbjBWAFgwLosk3BIXC73xXmWtH5Z4gVywollXlo3lEKYBUDaOB
+         Uk4HNYK97J6cScJaoXDw6NisxhEVFvUHfqXcDKRQG+DEFtIolsw8urTtw/mxe0zgdRaf
+         Au4Gvz3tz0V4eVwPpiKZ8+PSGdRHfQbg9F72NNyiU0FSdJWKofqdwAKr1AjGzTIZfvDJ
+         VG5nPXY80UhKFqiLn+ZjTwfZdOMy4abSFyAgzJHX0BiAoYNpI9cTUKDwNf3JJThzlSUt
+         vUXA==
+X-Gm-Message-State: AOAM530nKrcDq15rPsAsUVmN9kkHd6qY+qcn/OaByn+f2yrDgBXoM4bh
+	9KPfD094Bo222WO50tlqZOLE4uG+p8Ofjg==
+X-Google-Smtp-Source: 
+ ABdhPJz0CXta9k7+o3oh+7I6QWGcKeSodfkgQTF7PxfoLmNXa/rVkvBwtwzZCzsMK2XWCQoR+cJF0A==
+X-Received: by 2002:a2e:9903:: with SMTP id v3mr14879216lji.143.1637224883285;
+        Thu, 18 Nov 2021 00:41:23 -0800 (PST)
+Received: from localhost.localdomain (37-247-29-68.customers.ownit.se.
+ [37.247.29.68])
+        by smtp.gmail.com with ESMTPSA id
+ o15sm232648lfk.175.2021.11.18.00.41.22
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 18 Nov 2021 00:41:22 -0800 (PST)
+From: Jacob Kroon <jacob.kroon@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Matthias Klein <matthias@extraklein.de>
-Subject: [meta-oe][PATCH] paho-mqtt-cpp: new package
-Date: Thu, 18 Nov 2021 09:25:34 +0100
-Message-Id: <20211118082534.1338-1-matthias@extraklein.de>
-X-Mailer: git-send-email 2.30.2
+Subject: [meta-java][PATCH] jdepend: Set protocol=https and branch=master
+Date: Thu, 18 Nov 2021 09:41:07 +0100
+Message-Id: <20211118084107.1039286-1-jacob.kroon@gmail.com>
+X-Mailer: git-send-email 2.33.1
 MIME-Version: 1.0
-X-PPP-Message-ID: <163722393719.21468.1814108317814343392@mx2fa3.netcup.net>
-X-PPP-Vhost: extraklein.de
-X-NC-CID: CwxIXu1Q7NLKv2/f+UEAcSRcECUzh3cxuSZ4wIQNPtH8FK+EbWc=
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Nov 2021 08:25:46 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Nov 2021 08:41:26 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94018
+ https://lists.openembedded.org/g/openembedded-devel/message/94019
 
-Signed-off-by: Matthias Klein <matthias@extraklein.de>
+Fixes:
+WARNING: jdepend-native-2.9.1-r0 do_fetch: URL: git://github.com/clarkware/jdepend uses git protocol which is no longer supported by github. Please change to ;protocol=https in the url.
+WARNING: jdepend-native-2.9.1-r0 do_fetch: URL: git://github.com/clarkware/jdepend does not set any branch parameter. The future default branch used by tools and repositories is uncertain and we will therefore soon require this is set in all git urls.
+
+Signed-off-by: Jacob Kroon <jacob.kroon@gmail.com>
 ---
- .../paho-mqtt-cpp/paho-mqtt-cpp_1.2.0.bb      | 24 +++++++++++++++++++
- 1 file changed, 24 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/paho-mqtt-cpp/paho-mqtt-=
-cpp_1.2.0.bb
+ recipes-core/jdepend/jdepend_2.9.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/paho-mqtt-cpp/paho-mqtt-cpp_1.2=
-.0.bb b/meta-oe/recipes-connectivity/paho-mqtt-cpp/paho-mqtt-cpp_1.2.0.bb
-new file mode 100644
-index 000000000..b5a6ac29c
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/paho-mqtt-cpp/paho-mqtt-cpp_1.2.0.bb
-@@ -0,0 +1,24 @@
-+SUMMARY =3D "Paho MQTT - C++ libraries for the MQTT and MQTT-SN protocol=
-s"
-+DESCRIPTION =3D "Client implementation of open and standard messaging pr=
-otocols for Machine-to-Machine (M2M) and Internet of Things (IoT)."
-+HOMEPAGE =3D "http://www.eclipse.org/paho/"
-+SECTION =3D "console/network"
-+LICENSE =3D "EPL-1.0 | EDL-1.0"
-+
-+LIC_FILES_CHKSUM =3D " \
-+    file://edl-v10;md5=3D3adfcc70f5aeb7a44f3f9b495aa1fbf3 \
-+    file://epl-v10;md5=3D659c8e92a40b6df1d9e3dccf5ae45a08 \
-+    file://notice.html;md5=3Da00d6f9ab542be7babc2d8b80d5d2a4c \
-+    file://about.html;md5=3Ddcde438d73cf42393da9d40fabc0c9bc \
-+"
-+
-+SRC_URI =3D "git://github.com/eclipse/paho.mqtt.cpp;protocol=3Dhttp;bran=
-ch=3Dmaster;protocol=3Dhttps"
-+
-+SRCREV =3D "33921c8b68b351828650c36816e7ecf936764379"
-+
-+DEPENDS =3D "openssl paho-mqtt-c"
-+
-+S =3D "${WORKDIR}/git"
-+
-+inherit cmake
-+
-+EXTRA_OECMAKE +=3D "-DPAHO_WITH_SSL=3DON"
---=20
-2.30.2
-
+diff --git a/recipes-core/jdepend/jdepend_2.9.1.bb b/recipes-core/jdepend/jdepend_2.9.1.bb
+index 7c6cc8c..deae6a8 100644
+--- a/recipes-core/jdepend/jdepend_2.9.1.bb
++++ b/recipes-core/jdepend/jdepend_2.9.1.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f5777d32a7709d558c2877d4a6616230"
+ 
+ HOMEPAGE = "https://github.com/clarkware/jdepend"
+ 
+-SRC_URI = "git://github.com/clarkware/jdepend"
++SRC_URI = "git://github.com/clarkware/jdepend;protocol=https;branch=master"
+ SRCREV = "57980590313a5dbde236a3eb2c8958e9e53e6a10"
+ S = "${WORKDIR}/git"
+ 
 
