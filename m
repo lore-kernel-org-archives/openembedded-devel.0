@@ -2,77 +2,70 @@ Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E366BC433F5
-	for <webhook@archiver.kernel.org>; Thu, 18 Nov 2021 11:31:59 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
- [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.web10.376.1637235119037765801
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C146FC433EF
+	for <webhook@archiver.kernel.org>; Thu, 18 Nov 2021 11:32:12 +0000 (UTC)
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
+ [209.85.221.49])
+ by mx.groups.io with SMTP id smtpd.web12.359.1637235131586331487
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Nov 2021 03:31:59 -0800
+ Thu, 18 Nov 2021 03:32:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=bPtSd9xs;
- spf=pass (domain: gmail.com, ip: 209.85.128.45,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=C9BYxdzN;
+ spf=pass (domain: gmail.com, ip: 209.85.221.49,
  mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id y196so4981555wmc.3
+Received: by mail-wr1-f49.google.com with SMTP id a9so10892645wrr.8
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Nov 2021 03:31:58 -0800 (PST)
+ Thu, 18 Nov 2021 03:32:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=zuAafSSNY+qqM5rMHPq9LOCJ/ExsoWoFjSETWj2b59k=;
-        b=bPtSd9xsXtIvbOtIiHxz0EYkvG+GTBpCjkyfTZboftLvCBEX1Kx1PdoHad2Ua+RnY1
-         fJ4jKoCDdzDmPuEZH/AO+7YRQc/CUfqF9IEbQ5nC3eB+FK+UGmy9p/pzJhdeIaWjVsnx
-         4YrEuXNERadqH4W58ZdR64mcD0mfURw3Ym/EA7d7IcCO+KGDy4zKyfAtrX9Qy73vwrGN
-         dlyxC5hL0OtEX/wW/erPDMPlQpxHJ36029gGtHFAfVPjDo12FhbH6orH5PbngnAupNKC
-         e84UzLV2HWcZLoAckPRnYMiHydAEqJsB8cipU3Z7/FKiC8N3sOq4UKSEcgkT6RxW9dDC
-         1xYg==
+        bh=rCKfANWZyw0gvTg7Lso2/Ki7km+T2sYle7+p3NDodxM=;
+        b=C9BYxdzN6WmXWR1yLZs1eYgojC1rAqU9aqZZdlQkn1QnnN7cq2o5eHJtkYSu7qiOr6
+         CRgqNh28RvYtWkZup4S21LW9M4c+ZvugTQOhrFt6uCQaPTUljC84iGCYfZwT3hsqYC7f
+         ALtK9asOBWJa8QjQwWG1CF9p03IZUXppROSStYq8bsajmWpeZH7u8olg/hWqMd2fGtPd
+         B3Q3A+tVLovzLxn+Kqf2kYG2osApCvrSyQWgj99K8QrPGqX5d+jGv/pQuuEJ23TxfAEr
+         Hnvv7cXzwLopyi3bcvdky7IxDt9qosllaQAE32Ks/mahnyke3QFKYgAuc9xM2EUgPYhh
+         m+3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=zuAafSSNY+qqM5rMHPq9LOCJ/ExsoWoFjSETWj2b59k=;
-        b=FSUDwsw8B1g26o6SP6ZutT98tAaoXlb+VumNriGj99fhLmz7VRVLyCsfTFg5mSbJoP
-         cQ8SJSAe9pAK8Aq4C5yOI6ziyNe3Ptz9WVxk83HmAfm+OeH4Z/YzpN5HYjuKdxwjQMto
-         gsQFIK9g6JI3WvIG8tvTC+84ASgFyBXyokkzMFDdkdk0TH0o2hxXtz4Rh062S+rrGKCQ
-         M4h+Q72NB5YNzYvbO37V08cKo+FL1EzzX4lExwa1V+F+zx1g8u83hKy85JK5KZWGcEbe
-         cawDO0wuH3jEgWgzvWcC01Gz+0bgxddZuxg5+2Kd9aN7+gHowwO1z9bGflKI4vGqIvvD
-         MG9g==
-X-Gm-Message-State: AOAM530WkUpTXQY5ES5ApyM3+x3e2XsKyyoD7DJPD7xjnPyNnrq8u93o
-	CaUaqpS4QwL5Ouvex1OUrHHzAbTzkpY=
+        bh=rCKfANWZyw0gvTg7Lso2/Ki7km+T2sYle7+p3NDodxM=;
+        b=Q7qss6XYpaRT2SiCKv9M5naykd5dcWncOhgdp+eRrfeRVW94xz4JMKX8GZslURUQaK
+         e7mEHL23RFCkMpsbLxqrh/q8FkXbYvXSSpQSfbDe1d4mugv3FTNNPJrUEpAzuWGev7Vh
+         HgqZbpiamx6oyJyHc+VM1GI8gQGQR+YyJXpFTEZfIpYWFkANE8mL9Eg6JWLFRXjpZaal
+         hx+DCvDNh0YjuuhBQIXUxjH6KvqLounPpHAGS/DRnnpPulyrqU+SItMv0xahsTzjd2xt
+         72F4OR4liSMi2ZwN6kiTRxZGeQkh8iyYKgFmA6HTxIFAxXgWkD9+NYHvXZ0MbGeR8oaJ
+         mkbg==
+X-Gm-Message-State: AOAM5311kPbd2gHtUwHBqYfHAy+NZUA+47No9b8lmUTgn5HgQEdqDtw1
+	Qf52Q4umzFyvzsyZ7jZb+5yuEIMNdtk=
 X-Google-Smtp-Source: 
- ABdhPJyrfhbxO4zA9JYIM7ne5unM0rfTCvf9rxOo1/yfyijh2nvV0QmtrlZaWp8DgWA2OOvuOPTE0A==
-X-Received: by 2002:a1c:1c1:: with SMTP id 184mr9113478wmb.1.1637235117384;
-        Thu, 18 Nov 2021 03:31:57 -0800 (PST)
+ ABdhPJzXXLsDlTBi4vwzqEis7jHSX5D4i1NadQw9Qi1cTX04g5qQE+W2kgwptmwOPI33FCb7Hvz5tQ==
+X-Received: by 2002:adf:e747:: with SMTP id c7mr30546425wrn.38.1637235129804;
+        Thu, 18 Nov 2021 03:32:09 -0800 (PST)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
         by smtp.gmail.com with ESMTPSA id
- g19sm4857662wmg.12.2021.11.18.03.31.56
+ 21sm2674076wmj.18.2021.11.18.03.32.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 18 Nov 2021 03:31:56 -0800 (PST)
+        Thu, 18 Nov 2021 03:32:09 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [honister][PATCH] sdbus-c++: don't fetch googletest during
+Subject: [hardknott][PATCH] sdbus-c++: don't fetch googletest during
  do_configure
-Date: Thu, 18 Nov 2021 12:31:46 +0100
-Message-Id: <20211118113146.14928-1-Martin.Jansa@gmail.com>
+Date: Thu, 18 Nov 2021 12:32:07 +0100
+Message-Id: <20211118113207.15032-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Nov 2021 11:31:59 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Nov 2021 11:32:12 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94020
-
-* replace the solution from:
-  https://github.com/openembedded/meta-openembedded/commit/6c74740048a6a8413e10b4f29164a38d85020877
-  with the one from upstream (branch name would need to be changed in
-  git://github.com/google/googletest.git;protocol=https;branch=master;name=gtest;destsuffix=git/tests/googletest-src
-  anyway and better to use the upstream fix in all branches - dunfell, gatesgarth, hardknott need
-  a similar fix now when master branch is gone)
+ https://lists.openembedded.org/g/openembedded-devel/message/94021
 
 * with PTEST_ENABLED it enables with-tests PACKAGECONFIG which
   instead of using system googletest gmock, tries to fetch googletest
@@ -129,7 +122,7 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
  ...d-googletest-in-the-system-before-do.patch | 96 +++++++++++++++++++
  .../recipes-core/sdbus-c++/sdbus-c++_0.8.3.bb |  9 +-
- 2 files changed, 99 insertions(+), 6 deletions(-)
+ 2 files changed, 102 insertions(+), 3 deletions(-)
  create mode 100644 meta-oe/recipes-core/sdbus-c++/sdbus-c++-0.8.3/0001-Try-to-first-find-googletest-in-the-system-before-do.patch
 
 diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-0.8.3/0001-Try-to-first-find-googletest-in-the-system-before-do.patch b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-0.8.3/0001-Try-to-first-find-googletest-in-the-system-before-do.patch
@@ -235,10 +228,10 @@ index 0000000000..89cb593e60
 + # Manual performance and stress tests
 + option(ENABLE_PERF_TESTS "Build and install manual performance tests (default OFF)" OFF)
 diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.8.3.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.8.3.bb
-index 12eae5c7d5..35183e8962 100644
+index 98829765c2..a8bf43c874 100644
 --- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.8.3.bb
 +++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.8.3.bb
-@@ -12,19 +12,16 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'with-exte
+@@ -12,13 +12,16 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'with-exte
                     ${@bb.utils.contains('PTEST_ENABLED', '1', 'with-tests', '', d)}"
  PACKAGECONFIG[with-builtin-libsystemd] = ",,sdbus-c++-libsystemd,libcap"
  PACKAGECONFIG[with-external-libsystemd] = ",,systemd,libsystemd"
@@ -248,16 +241,13 @@ index 12eae5c7d5..35183e8962 100644
  DEPENDS += "expat"
  
  SRCREV = "6e8e5aadb674cccea5bdd55141db5dad887fbacd"
--SRCREV_gtest = "a3460d1aeeaa43fdf137a6adefef10ba0b59fe4b"
--SRCREV_FORMAT = "default_gtest"
- 
- SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master \
--           git://github.com/google/googletest.git;protocol=https;branch=master;name=gtest;destsuffix=git/tests/googletest-src \
--           file://0001-Do-not-download-gtest-automatically.patch \
+-SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master"
+-SRC_URI += "file://run-ptest"
++
++SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master \
 +    file://0001-Try-to-first-find-googletest-in-the-system-before-do.patch \
 +    file://run-ptest \
- "
--SRC_URI += "file://run-ptest"
++"
  
  EXTRA_OECMAKE = "-DBUILD_CODE_GEN=ON \
                   -DBUILD_DOC=ON \
