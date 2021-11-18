@@ -2,91 +2,95 @@ Return-Path: <JPEWhacker@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6ADBEC433F5
-	for <webhook@archiver.kernel.org>; Thu, 18 Nov 2021 02:41:32 +0000 (UTC)
-Received: from mail-oo1-f44.google.com (mail-oo1-f44.google.com
- [209.85.161.44])
- by mx.groups.io with SMTP id smtpd.web08.94.1637203291571391385
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51D7DC433EF
+	for <webhook@archiver.kernel.org>; Thu, 18 Nov 2021 02:50:00 +0000 (UTC)
+Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com
+ [209.85.167.172])
+ by mx.groups.io with SMTP id smtpd.web09.105.1637203798964655998
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Nov 2021 18:41:31 -0800
+ Wed, 17 Nov 2021 18:49:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=W40BiruN;
- spf=pass (domain: gmail.com, ip: 209.85.161.44,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=eizxrFhS;
+ spf=pass (domain: gmail.com, ip: 209.85.167.172,
  mailfrom: jpewhacker@gmail.com)
-Received: by mail-oo1-f44.google.com with SMTP id
- x1-20020a4aea01000000b002c296d82604so1841048ood.9
+Received: by mail-oi1-f172.google.com with SMTP id n66so10915534oia.9
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Nov 2021 18:41:31 -0800 (PST)
+ Wed, 17 Nov 2021 18:49:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=WPJEtW2lfpiIwEH3TVFGQ3X8c1AUQMy9QdofpcwzNCw=;
-        b=W40BiruNVX1lD5onXAK+rws9VQsXhum4RG7+hA/lCJ/G9Mb7Md8bdBNjhTdRaUaL3x
-         KYI8y3k3oQ71Vcd17MHnc7JacjetyBzhArSssrNC5sQInr6868JV0oGaIousgnwJhlex
-         YUYv5RNpXOxZPjZZk25DPa+JKMUNLDxQdlch6W9fDDDPtOiowoA/gdR04dIyfLXGTtgm
-         K3XKHnP4dIeW9TRagRHY9kOaYLdJrSdEr2Dcr93DS3878Bc8i28SmNjqm9/e5LiYQAom
-         hY0upWuOSmk9iuZConex8NFoaC01y22DyZ+A+hiAWDZu9Fs4ykwtlRlDfSY+sVaqdhox
-         vI0A==
+        bh=HhBSVRz5T3XESMwOo+/zESXWL7zdYDyH7gua2w+iWRc=;
+        b=eizxrFhS1anU2I3daG+yg2wlk5qZshtctj4EasSSnfA0l0J9oFiWM/aRU+Etr1eW+L
+         6jXpKermpEo8nwvWq6UsEUR87Vl/7bLAO6aUnIVlhrpu+WpSbXE1YMqHrE2z8RFqen9e
+         rZG2GF5c896BWsQXWTBBf13UL5WCEypF05JJpgLgALfqL5yg5Zvj/A9B60G605Zvw+HI
+         ABlqblzGGbCvCa8KbutoFRWf/pMJHls2KLXOoreiaUDJOQVhTi7V2y7D658RGxAg9jTi
+         92GAGzMDdp1Gm+B37kDvNN6J77/TqADa1cKIJPgDdtjvUxBJTf8frUy1BCcnKk4HtnRr
+         qaiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=WPJEtW2lfpiIwEH3TVFGQ3X8c1AUQMy9QdofpcwzNCw=;
-        b=joNkgutOWg6C9x7wBvyEPtK7yPBn3Z2M+yEM7bGlprnkPPDqJnheXXKdjFkuw6ImtN
-         lIhPdtNqNR6aPMQPuLS/urmviZmxzxR9ObHOMpzveedpmeWfjNUDsfsAsim8oCI+NnyU
-         BO/nqnV5Fw7lXhFq0GihIRrwPLq3iOUjKpxDe/qrcoFz+J9fIhd+RtdO0d2kgWyT4elx
-         lulhlH6C7aeOZvX6Ikqx3yb8fxWVf1kDi3KZJSrIOP7mgSSG4PnVnY/yGkAoNbne+jaz
-         kpRp6JpDXTCKjliJJNSZuBYMSBh4hve3E2WoCrIKes8XiUEinF6gljJyZKEXIRVbYeOf
-         ZWIg==
-X-Gm-Message-State: AOAM533oJdDFSPTBH+V+Kr9yJ4k0g/czwyFN90t3KxpOX2qffg8/m3Nx
-	dOLEcim/bqMNmjTSddpq2pO8ylREoaU=
+        bh=HhBSVRz5T3XESMwOo+/zESXWL7zdYDyH7gua2w+iWRc=;
+        b=CNwz0hSmQwIvK7Jxc9To+GBErLzdMnEfxRoaUELCSVT4SFDaX0SYaNe/28V0HQD+kT
+         MgPUT4RnUlp+awRB+hztCrTvCHd60ulomXiSFyfS+N88sGuEzIKyAN3soAf6hI2zawNg
+         CJZ3HOYfjGG33/B9fdwR8HkZOoBgok++4jx6sKEx3sJrne7tbSES4EUQSGCwp3RaHtjy
+         8gep3VJ3xSg4DcQIUPxsI9dCE8wwCuvd37THZ2aqL2ZMHh+GWSeINscQRX56+R6fBX5/
+         hOaTsq89H8I2xLaGFHwU2PZHf6RK/LhbRcPfdSCKiDHWYME53InOk96NVNMyeunVSDap
+         kYkw==
+X-Gm-Message-State: AOAM5316B1O0Zr2/M8wczK/8DOinmjmnUq8JhFLTgxNtQ9CxZZSnPqCz
+	ifLfCxYB/GoZMge9MhSjt4/kuMGPt7o=
 X-Google-Smtp-Source: 
- ABdhPJx/bpVJ6K98kK5Gcv/k0lHoOJAFgUzKjLa5zl1DWYwRYg51d2pb+xthYj3+4KImiwiowt4s4w==
-X-Received: by 2002:a4a:3511:: with SMTP id l17mr11241240ooa.74.1637203290651;
-        Wed, 17 Nov 2021 18:41:30 -0800 (PST)
+ ABdhPJwaUA3/y+D9ApSUidlZxUCJ4sqxHArfhvWNk5iQZwb9iTr62b3200/0VyZRVZnKpBWQrFkJ1w==
+X-Received: by 2002:a54:4390:: with SMTP id u16mr4550206oiv.109.1637203797972;
+        Wed, 17 Nov 2021 18:49:57 -0800 (PST)
 Received: from localhost.localdomain ([2605:a601:ac3d:c100:e3e8:d9:3a56:e27d])
-        by smtp.gmail.com with ESMTPSA id
- r11sm377331oth.48.2021.11.17.18.41.30
+        by smtp.gmail.com with ESMTPSA id y9sm283898oon.8.2021.11.17.18.49.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 17 Nov 2021 18:41:30 -0800 (PST)
+        Wed, 17 Nov 2021 18:49:57 -0800 (PST)
 From: Joshua Watt <jpewhacker@gmail.com>
 X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Joshua Watt <JPEWhacker@gmail.com>
-Subject: [oe][meta-oe][PATCH] gdm: introspection is not valid meson option
-Date: Wed, 17 Nov 2021 20:41:28 -0600
-Message-Id: <20211118024128.477249-1-JPEWhacker@gmail.com>
+Subject: [oe][meta-oe][PATCH] gnome-settings-daemon: introspection is not
+ valid meson option
+Date: Wed, 17 Nov 2021 20:49:53 -0600
+Message-Id: <20211118024953.477989-1-JPEWhacker@gmail.com>
 X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Nov 2021 02:41:32 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Nov 2021 02:50:00 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94013
+ https://lists.openembedded.org/g/openembedded-devel/message/94014
 
 meson 0.60+ errors out on unknown options and -Dintrospection
 is not a valid option
 
 Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
 ---
- meta-gnome/recipes-gnome/gdm/gdm_41.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../gnome-settings-daemon/gnome-settings-daemon_41.0.bb        | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gdm/gdm_41.0.bb b/meta-gnome/recipes-gnome/gdm/gdm_41.0.bb
-index a485c0c9c..ac57b5bf2 100644
---- a/meta-gnome/recipes-gnome/gdm/gdm_41.0.bb
-+++ b/meta-gnome/recipes-gnome/gdm/gdm_41.0.bb
-@@ -11,6 +11,7 @@ DEPENDS = " \
- "
+diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_41.0.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_41.0.bb
+index 976aa6222..82504a406 100644
+--- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_41.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_41.0.bb
+@@ -23,11 +23,10 @@ DEPENDS = " \
  
- REQUIRED_DISTRO_FEATURES = "x11 systemd pam polkit gobject-introspection-data"
+ # all these are mandatory
+ REQUIRED_DISTRO_FEATURES = "x11 polkit pulseaudio systemd gobject-introspection-data"
 +GIR_MESON_OPTION = ""
  
- GNOMEBASEBUILDCLASS = "meson"
+ SRC_URI[archive.sha256sum] = "e6ca6361fbd1deab2de1a1e390d4f14167cf47b1c547dbb8b65a5d89e9663884"
  
+-UNKNOWN_CONFIGURE_WHITELIST = "introspection"
+-
+ PACKAGECONFIG ??= " \
+     cups nm \
+     alsa gudev \
 -- 
 2.33.0
 
