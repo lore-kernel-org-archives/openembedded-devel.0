@@ -1,101 +1,71 @@
-Return-Path: <JPEWhacker@gmail.com>
+Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F6A5C433EF
-	for <webhook@archiver.kernel.org>; Thu, 18 Nov 2021 21:34:26 +0000 (UTC)
-Received: from mail-ot1-f50.google.com (mail-ot1-f50.google.com
- [209.85.210.50])
- by mx.groups.io with SMTP id smtpd.web12.618.1637271265129506573
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BFDDEC433EF
+	for <webhook@archiver.kernel.org>; Fri, 19 Nov 2021 03:58:46 +0000 (UTC)
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web09.4084.1637294325366363253
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Nov 2021 13:34:25 -0800
+ Thu, 18 Nov 2021 19:58:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=RaX7drGy;
- spf=pass (domain: gmail.com, ip: 209.85.210.50,
- mailfrom: jpewhacker@gmail.com)
-Received: by mail-ot1-f50.google.com with SMTP id
- b5-20020a9d60c5000000b0055c6349ff22so13310329otk.13
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Nov 2021 13:34:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=eOzb+yo8y2oF89eTlMv60p5uCa2et+wb3njAVhLhz1Y=;
-        b=RaX7drGySJxTs81dGWUugeh67pxQxG4nRLqm4F91IAvGSbCQu6DsZKPAN+JCNTuCya
-         jtBteSdgBfVRCsUFiRQmn9YqYaAtefY/YfKEX4vJYFBb07IuMXaZHno7tzsTijF/t7+O
-         mhD6CxJt+5rk3rF70zFhgnPp62BTyYSzqTt8gSO6pn0MvFGYGwR2D2JITIeMDT9XrCE1
-         qb0mZvh7mvJaQIt79PevV8/5Lvb0yL+uNXIRkgQfTZrJW9BwoLfrgRpl5OlfXqFVgteh
-         QrNGGED5Hy7CcuYKYuCyzXmwaTJi/v6d7nt0TuM9PE3tCwsdWQ0E9RA8vfL3dVICbbsl
-         u7ZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=eOzb+yo8y2oF89eTlMv60p5uCa2et+wb3njAVhLhz1Y=;
-        b=5CBZYEERmX5NeYy7TtatquxYkb9LKblG06jAHNrfxMvNm1A1iq3insq7fI9cAIYnox
-         Lg1AgY2JfuHm/1llzgJklrW0xGuqZgz3y0gWBa9WgfYuDp6Z9O2p56AwwiN7aVj3WrUW
-         5vxgJJWGs9pxFskfDTy+VtmNE8gUTonOe297IgNQC6ViUaLllz5JKpn+yfg/9XE2xSkC
-         d2Gkg/V3Mkb9Ztj2vmZddrcoEnps+B1ZPm0T5RP1+vz0WpW0GGaWgIgJR+bNEF+oI413
-         Dz6BZUdf7X5r/7HnuMXUTjPyTjiT84ahdTpnKDaZNqiiDz9YkgoL19JzOuy2LQ3g9zw3
-         mu4Q==
-X-Gm-Message-State: AOAM530IlazJEEnO8f2bLR7nAvHQ8lZ9R+BRaCnDf2K3vaELfFyUyQSJ
-	HhpsSqvLea7zK+4djKf/G9ymC+7RV08=
-X-Google-Smtp-Source: 
- ABdhPJy5j+IkWHxX3KGgOJwwaQEtItDzwJHEh4Ig5AqnnAb06bU29gLHoxIFMrjby0IPNPMp6wvUwQ==
-X-Received: by 2002:a9d:5604:: with SMTP id e4mr311680oti.249.1637271264288;
-        Thu, 18 Nov 2021 13:34:24 -0800 (PST)
-Received: from localhost.localdomain ([2605:a601:ac3d:c100:e3e8:d9:3a56:e27d])
-        by smtp.gmail.com with ESMTPSA id
- w29sm227096ooe.25.2021.11.18.13.34.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 18 Nov 2021 13:34:23 -0800 (PST)
-From: Joshua Watt <jpewhacker@gmail.com>
-X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Joshua Watt <JPEWhacker@gmail.com>
-Subject: [oe][meta-oe][PATCH] gnome-control-center: Fixup polkit directory
- permissions
-Date: Thu, 18 Nov 2021 15:34:21 -0600
-Message-Id: <20211118213421.896534-1-JPEWhacker@gmail.com>
-X-Mailer: git-send-email 2.33.0
+ dkim=missing;
+ spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: changqing.li@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 1AJ3wimi000777
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 18 Nov 2021 19:58:44 -0800
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Thu, 18 Nov 2021 19:58:44 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.15; Thu, 18 Nov 2021 19:58:43 -0800
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Thu, 18 Nov 2021 19:58:43 -0800
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] php: correct module name and library name
+Date: Fri, 19 Nov 2021 11:56:27 +0800
+Message-ID: <20211119035627.20514-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Nov 2021 21:34:26 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 Nov 2021 03:58:46 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94055
+ https://lists.openembedded.org/g/openembedded-devel/message/94056
 
-Fixes up the permissions of the polkit directory to match other recipes,
-otherwise they conflict at package install time
+From: Changqing Li <changqing.li@windriver.com>
 
-Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
+wrong name make service apache2 start failed with failure:
+httpd: Syntax error on line 511 of /etc/apache2/httpd.conf: Syntax error on line 1 of /etc/apache2/modules.d/70_mod_php8.conf: Cannot load /usr/libexec/apache2/modules/libphp7.so into server: /usr/libexec/apache2/modules/libphp7.so: cannot open shared object file: No such file or directory
+
+httpd: Syntax error on line 511 of /etc/apache2/httpd.conf: Syntax error on line 1 of /etc/apache2/modules.d/70_mod_php8.conf: Can't locate API module structure `php7_module' in file /usr/libexec/apache2/modules/libphp.so: /usr/libexec/apache2/modules/libphp.so: undefined symbol: php7_module
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- .../gnome-control-center/gnome-control-center_41.1.bb     | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ meta-oe/recipes-devtools/php/php/70_mod_php8.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_41.1.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_41.1.bb
-index 80d49d95b..79fa20e41 100644
---- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_41.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_41.1.bb
-@@ -44,6 +44,14 @@ EXTRA_OEMESON = " \
-     -Dcheese=false \
- "
+diff --git a/meta-oe/recipes-devtools/php/php/70_mod_php8.conf b/meta-oe/recipes-devtools/php/php/70_mod_php8.conf
+index 5a9dc91c6..58ce408aa 100644
+--- a/meta-oe/recipes-devtools/php/php/70_mod_php8.conf
++++ b/meta-oe/recipes-devtools/php/php/70_mod_php8.conf
+@@ -1,4 +1,4 @@
+-LoadModule php7_module lib/apache2/modules/libphp7.so
++LoadModule php_module lib/apache2/modules/libphp.so
  
-+do_install:append() {
-+	# If polkit is setup fixup permissions and ownership
-+    if [ -d ${D}${datadir}/polkit-1/rules.d ]; then
-+        chmod 700 ${D}${datadir}/polkit-1/rules.d
-+        chown polkitd:root ${D}${datadir}/polkit-1/rules.d
-+    fi
-+}
-+
- FILES:${PN} += " \
-     ${datadir}/dbus-1 \
-     ${datadir}/gnome-shell \
+ <FilesMatch "\.ph(p[2-8]?|tml)$">
+ 	SetHandler application/x-httpd-php
 -- 
-2.33.0
+2.17.1
 
 
