@@ -1,99 +1,160 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <marex@denx.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 614B1C433F5
-	for <webhook@archiver.kernel.org>; Sat, 20 Nov 2021 14:51:50 +0000 (UTC)
-Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com
- [209.85.222.169])
- by mx.groups.io with SMTP id smtpd.web11.8658.1637419907162729012
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A3472C433EF
+	for <webhook@archiver.kernel.org>; Sat, 20 Nov 2021 15:44:25 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by mx.groups.io with SMTP id smtpd.web11.9242.1637423062907802396
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 20 Nov 2021 06:51:47 -0800
+ Sat, 20 Nov 2021 07:44:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=XQrL/DnS;
- spf=pass (domain: gmail.com, ip: 209.85.222.169,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f169.google.com with SMTP id de30so13344472qkb.0
-        for <openembedded-devel@lists.openembedded.org>;
- Sat, 20 Nov 2021 06:51:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=T1EUWJRcNpIgsOUmdBjqlr8KO74vvRBKCpZqNuBbs04=;
-        b=XQrL/DnSmuAacA8Qcxl4SfcXAJfGlC75fS4cJAcgbYvozO+yzp58gDCTUWoosnspBS
-         qQxftGaudyUTL88kaBievLfpT5m6BFTttYkSAT3g0AvHj2oH/jOitiIXEWNv42m+7A3r
-         OWqmUYjLa9qMrdmJnYloUT4ZPtvjUVIcK8GjPGk+W5EIBEgibEzLEs8oq5lQystGbkv2
-         05ygvet5r5yYfjllXKF+0Fluc79f4DGWWbYilc2RmK/l0oy2UyePbgBICTvJ3Nw60wK5
-         fP73w/lYt9A6TikGuxt2BVv4HiCocDKxEagF1sV9Lz0/e5Vm7W2Ib5YxiFNLCalB7BWr
-         Ey6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=T1EUWJRcNpIgsOUmdBjqlr8KO74vvRBKCpZqNuBbs04=;
-        b=kF2TGXx7Cwl6u6KM1hwkZ+LBXQURmFwj50tKNh6DL3JW8utzZCudZkneWbC2GcWDk+
-         TB4qCkeyBYhUX/kFzBm7KyxasXdc3Z/HUroYDUq4Vhg0uvxxooQgld9cgSoXhTOdPFFm
-         9zEoXf20mz/0kIghdin88O3B2UbuAe5NIrrSCdAlSoaAmtI+k/grZTiwjSoZME+hMx8q
-         xuTMltpSW6x+FgSKYBdY6eDIcuetoMoocnoXoC4JE8+mXUlqSOSFmW765qkgamWkD3Tn
-         tG9kzbTyzc3Jhfgqyxws3Ma57JTlPTWWaEh9ziEqefQYyQpOyKVAGBa8THCq2tY7wz45
-         UTuw==
-X-Gm-Message-State: AOAM530oY2DaeKk6veW3ZDBoWl5sCnzoUjVLFdkr7MWMOh/GrUh/tU2z
-	ACZP0qgOfqIjUCzVQZvU4WUVwq6Alg0qdiGFy6E=
-X-Google-Smtp-Source: 
- ABdhPJyoAhJqfh/mPHsW/1PbR4QRsoxxj4EGzHh50xqc8kdTxv0FUuQoybbuNJ4G/7JzBD6KtIcUBUkdnBbj5muwfEk=
-X-Received: by 2002:a05:620a:4f6:: with SMTP id
- b22mr34742758qkh.98.1637419906249;
- Sat, 20 Nov 2021 06:51:46 -0800 (PST)
+ dkim=fail reason="body hash did not verify" header.i=@denx.de
+ header.s=phobos-20191101 header.b=ZN1w6aeR;
+ spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
+Received: from tr.lan (ip-89-176-112-137.net.upcbroadband.cz [89.176.112.137])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marex@denx.de)
+	by phobos.denx.de (Postfix) with ESMTPSA id 52A7C812BB;
+	Sat, 20 Nov 2021 16:44:17 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1637423057;
+	bh=mNsQ8X+ELOLVNJ6rzXJwhgHEpU+UayeSghpp3Icx1rU=;
+	h=From:To:Cc:Subject:Date:From;
+	b=ZN1w6aeRvUusW8hp0ZKdi1PrYMH7DFuxZGI7STUSAYYmdgdCVqOBHbyFrUf9VJ/b3
+	 cVcomTXnC1prSdK8hn5bl8llhYuh9NT+nBWb1cZVn1HvJYWjpUd/MBHyT6x/HBrOnp
+	 VtmrtkdVwkqerG/QRJ87N4PdI7CZCxRLff27LJV5P+SkP6M3t2Z93V161OFXPm5egG
+	 ng+f6TngM2XV5Xblt3SavzQkZ5Ce+fUym8GqGZJRunqoGMbaBvPOswR5+OGtiyKDTV
+	 qIzms8Tpnx8qruzb5kN1WWst8vXv/33oiv+n7AThdf8rUHMz8/MPUuR4ZyWf/qx9yF
+	 ZMGDBRykes+5Q==
+From: Marek Vasut <marex@denx.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: cazfi74@gmail.com,
+	hs@denx.de,
+	Marek Vasut <marex@denx.de>
+Subject: [meta-games][PATCH v3] neverball: Add neverball
+Date: Sat, 20 Nov 2021 16:44:01 +0100
+Message-Id: <20211120154401.10390-1-marex@denx.de>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
-References: <20211119220833.133927-1-marex@denx.de>
- <7fca4b13-199a-ff2a-4680-370cb8a48a01@gmail.com>
- <CAF6bG8f9xb2qn8sDkAtz_6xKxGKwFkudFFUZTQJoUaa8qPa=og@mail.gmail.com>
-In-Reply-To: 
- <CAF6bG8f9xb2qn8sDkAtz_6xKxGKwFkudFFUZTQJoUaa8qPa=og@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 20 Nov 2021 06:51:20 -0800
-Message-ID: 
- <CAMKF1spTKLnNQR738+hOPNwP3LESfcfXfeNkCGrbZYCkxEaw0Q@mail.gmail.com>
-Subject: Re: [oe] [meta-games][PATCH v2] neverball: Add neverball
-To: Marko Lindqvist <cazfi74@gmail.com>
-Cc: Marek Vasut <marex@denx.de>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
- Heiko Schocher <hs@denx.de>
-Content-Type: text/plain; charset="UTF-8"
+X-Virus-Scanned: clamav-milter 0.103.2 at phobos.denx.de
+X-Virus-Status: Clean
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 20 Nov 2021 14:51:50 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 20 Nov 2021 15:44:25 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94076
+ https://lists.openembedded.org/g/openembedded-devel/message/94077
 
-On Fri, Nov 19, 2021 at 10:42 PM Marko Lindqvist <cazfi74@gmail.com> wrote:
->
-> On Sat, 20 Nov 2021 at 03:12, Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > On 11/19/21 2:08 PM, Marek Vasut wrote:
-> > > This is an interactive game with a rolling ball, useful for
-> > > testing whether point sprites work correctly in GPU drivers.
-> > >
-> > > The user should install both neverball neverball-data packages.
-> > >
-> > > Signed-off-by: Marek Vasut <marex@denx.de>
-> > > ---
-> > > V2: Use cp -R --no-dereference --preserve=mode,links
-> > > ---
-> > >   recipes-games/neverball/neverball-data_git.bb | 16 ++++++++++++
-> > >   recipes-games/neverball/neverball.inc         | 26 +++++++++++++++++++
-> > >   recipes-games/neverball/neverball_git.bb      | 16 ++++++++++++
-> >
-> > hmm, these recipes should belong to a layer, perhaps meta-oe or
-> > meta-multimedia
->
->  I think this was meant for meta-games: https://github.com/cazfi/meta-games
+This is an interactive game with a rolling ball, useful for
+testing whether point sprites work correctly in GPU drivers.
 
-thanks, I missed that, I read meta-gnome :)
+The user should install both neverball neverball-data packages.
 
->
->
->  - ML
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+V2: Use cp -R --no-dereference --preserve=3Dmode,links
+V3: - Add the missing branch name to fix bitbake warning.
+    - Update SRCREV to latest
+---
+ recipes-games/neverball/neverball-data_git.bb | 16 ++++++++++++
+ recipes-games/neverball/neverball.inc         | 26 +++++++++++++++++++
+ recipes-games/neverball/neverball_git.bb      | 16 ++++++++++++
+ 3 files changed, 58 insertions(+)
+ create mode 100644 recipes-games/neverball/neverball-data_git.bb
+ create mode 100644 recipes-games/neverball/neverball.inc
+ create mode 100644 recipes-games/neverball/neverball_git.bb
+
+diff --git a/recipes-games/neverball/neverball-data_git.bb b/recipes-game=
+s/neverball/neverball-data_git.bb
+new file mode 100644
+index 0000000..b520f58
+--- /dev/null
++++ b/recipes-games/neverball/neverball-data_git.bb
+@@ -0,0 +1,16 @@
++require neverball.inc
++
++inherit allarch
++
++DEPENDS:append =3D " jpeg-native libpng-native libsdl2-native"
++
++do_compile() {
++	oe_runmake CC=3D"${BUILD_CC}" CFLAGS=3D"${BUILD_CFLAGS} -I${STAGING_INC=
+DIR_NATIVE}/SDL2/" LDFLAGS=3D"${BUILD_LDFLAGS} -lpng" mapc sols
++}
++
++do_install() {
++	install -d -m 755 ${D}${datadir}/neverball
++	cp -R --no-dereference --preserve=3Dmode,links ${B}/data ${D}${datadir}=
+/neverball/
++}
++
++FILES:${PN}:append =3D " ${datadir}/neverball"
+diff --git a/recipes-games/neverball/neverball.inc b/recipes-games/neverb=
+all/neverball.inc
+new file mode 100644
+index 0000000..504622c
+--- /dev/null
++++ b/recipes-games/neverball/neverball.inc
+@@ -0,0 +1,26 @@
++SUMMARY =3D "Tilt the floor to roll a ball through an obstacle course be=
+fore time runs out. Neverball is part puzzle game, part action game, and =
+entirely a test of skill."
++SECTION =3D "graphics"
++HOMEPAGE =3D "https://neverball.org/"
++
++LICENSE =3D "GPLv2+"
++LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3D200ddba3b50e856bfb681a2b13=
+dfb523"
++
++SRC_URI =3D "git://github.com/Neverball/neverball.git;branch=3Dmaster;pr=
+otocol=3Dhttps"
++SRCREV =3D "b1617ed0db2c908ff1b96d6a252a85881f0574c0"
++PV =3D "1.6.0+git${SRCPV}"
++
++S =3D "${WORKDIR}/git"
++
++inherit pkgconfig
++
++EXTRA_OEMAKE:append =3D " \
++	ENABLE_FETCH=3D0 \
++	ENABLE_OPENGLES=3D1 \
++	DATADIR=3D/usr/share/neverball/data \
++	LOCALEDIR=3D/usr/share/neverball/locale \
++	"
++
++do_configure:append() {
++	sed -i "s@sdl2-config@pkg-config sdl2@" ${S}/Makefile
++	sed -i "s@libpng-config@pkg-config libpng@" ${S}/Makefile
++}
+diff --git a/recipes-games/neverball/neverball_git.bb b/recipes-games/nev=
+erball/neverball_git.bb
+new file mode 100644
+index 0000000..5e2c358
+--- /dev/null
++++ b/recipes-games/neverball/neverball_git.bb
+@@ -0,0 +1,16 @@
++require neverball.inc
++
++DEPENDS:append =3D " gettext-native virtual/libgles1 virtual/libintl lib=
+vorbis jpeg libpng libsdl2 libsdl2-ttf"
++
++do_compile() {
++	oe_runmake neverball neverputt locales desktops
++}
++
++do_install() {
++	install -d -m 755 ${D}${bindir}
++	install -m 755 ${B}/neverball ${D}/${bindir}/
++	install -m 755 ${B}/neverputt ${D}/${bindir}/
++
++	install -d -m 755 ${D}${datadir}/neverball
++	cp -R --no-dereference --preserve=3Dmode,links ${B}/locale ${D}${datadi=
+r}/neverball/
++}
+--=20
+2.33.0
+
 
