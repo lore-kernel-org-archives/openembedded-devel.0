@@ -1,160 +1,43 @@
-Return-Path: <marex@denx.de>
+Return-Path: <ranjitsinhrathod1991@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A3472C433EF
-	for <webhook@archiver.kernel.org>; Sat, 20 Nov 2021 15:44:25 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by mx.groups.io with SMTP id smtpd.web11.9242.1637423062907802396
- for <openembedded-devel@lists.openembedded.org>;
- Sat, 20 Nov 2021 07:44:24 -0800
-Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@denx.de
- header.s=phobos-20191101 header.b=ZN1w6aeR;
- spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
-Received: from tr.lan (ip-89-176-112-137.net.upcbroadband.cz [89.176.112.137])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marex@denx.de)
-	by phobos.denx.de (Postfix) with ESMTPSA id 52A7C812BB;
-	Sat, 20 Nov 2021 16:44:17 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1637423057;
-	bh=mNsQ8X+ELOLVNJ6rzXJwhgHEpU+UayeSghpp3Icx1rU=;
-	h=From:To:Cc:Subject:Date:From;
-	b=ZN1w6aeRvUusW8hp0ZKdi1PrYMH7DFuxZGI7STUSAYYmdgdCVqOBHbyFrUf9VJ/b3
-	 cVcomTXnC1prSdK8hn5bl8llhYuh9NT+nBWb1cZVn1HvJYWjpUd/MBHyT6x/HBrOnp
-	 VtmrtkdVwkqerG/QRJ87N4PdI7CZCxRLff27LJV5P+SkP6M3t2Z93V161OFXPm5egG
-	 ng+f6TngM2XV5Xblt3SavzQkZ5Ce+fUym8GqGZJRunqoGMbaBvPOswR5+OGtiyKDTV
-	 qIzms8Tpnx8qruzb5kN1WWst8vXv/33oiv+n7AThdf8rUHMz8/MPUuR4ZyWf/qx9yF
-	 ZMGDBRykes+5Q==
-From: Marek Vasut <marex@denx.de>
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CDE8FC433EF
+	for <webhook@archiver.kernel.org>; Sun, 21 Nov 2021 06:59:37 +0000 (UTC)
+Subject: Re: [meta-oe][dunfell][PATCH] nss: Fix CVE-2020-12403
 To: openembedded-devel@lists.openembedded.org
-Cc: cazfi74@gmail.com,
-	hs@denx.de,
-	Marek Vasut <marex@denx.de>
-Subject: [meta-games][PATCH v3] neverball: Add neverball
-Date: Sat, 20 Nov 2021 16:44:01 +0100
-Message-Id: <20211120154401.10390-1-marex@denx.de>
-X-Mailer: git-send-email 2.33.0
+From: "Ranjitsinh Rathod" <ranjitsinhrathod1991@gmail.com>
+X-Originating-Location: Ahmedabad, Gujarat, IN (103.81.93.168)
+X-Originating-Platform: Android Phone Chrome 96
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-X-Virus-Scanned: clamav-milter 0.103.2 at phobos.denx.de
-X-Virus-Status: Clean
-Content-Transfer-Encoding: quoted-printable
+Date: Sat, 20 Nov 2021 22:59:37 -0800
+References: <20211112053236.17530-1-ranjitsinhrathod1991@gmail.com>
+In-Reply-To: <20211112053236.17530-1-ranjitsinhrathod1991@gmail.com>
+Message-ID: <29012.1637477977357454402@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="orDmU0B4QFYLMCDMJ0hr"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 20 Nov 2021 15:44:25 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 21 Nov 2021 06:59:37 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94077
+ https://lists.openembedded.org/g/openembedded-devel/message/94087
 
-This is an interactive game with a rolling ball, useful for
-testing whether point sprites work correctly in GPU drivers.
+--orDmU0B4QFYLMCDMJ0hr
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-The user should install both neverball neverball-data packages.
+Can someone confirm if this goes to dunfell or not?
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-V2: Use cp -R --no-dereference --preserve=3Dmode,links
-V3: - Add the missing branch name to fix bitbake warning.
-    - Update SRCREV to latest
----
- recipes-games/neverball/neverball-data_git.bb | 16 ++++++++++++
- recipes-games/neverball/neverball.inc         | 26 +++++++++++++++++++
- recipes-games/neverball/neverball_git.bb      | 16 ++++++++++++
- 3 files changed, 58 insertions(+)
- create mode 100644 recipes-games/neverball/neverball-data_git.bb
- create mode 100644 recipes-games/neverball/neverball.inc
- create mode 100644 recipes-games/neverball/neverball_git.bb
+Thanks,
+Ranjitsinh Rathod
 
-diff --git a/recipes-games/neverball/neverball-data_git.bb b/recipes-game=
-s/neverball/neverball-data_git.bb
-new file mode 100644
-index 0000000..b520f58
---- /dev/null
-+++ b/recipes-games/neverball/neverball-data_git.bb
-@@ -0,0 +1,16 @@
-+require neverball.inc
-+
-+inherit allarch
-+
-+DEPENDS:append =3D " jpeg-native libpng-native libsdl2-native"
-+
-+do_compile() {
-+	oe_runmake CC=3D"${BUILD_CC}" CFLAGS=3D"${BUILD_CFLAGS} -I${STAGING_INC=
-DIR_NATIVE}/SDL2/" LDFLAGS=3D"${BUILD_LDFLAGS} -lpng" mapc sols
-+}
-+
-+do_install() {
-+	install -d -m 755 ${D}${datadir}/neverball
-+	cp -R --no-dereference --preserve=3Dmode,links ${B}/data ${D}${datadir}=
-/neverball/
-+}
-+
-+FILES:${PN}:append =3D " ${datadir}/neverball"
-diff --git a/recipes-games/neverball/neverball.inc b/recipes-games/neverb=
-all/neverball.inc
-new file mode 100644
-index 0000000..504622c
---- /dev/null
-+++ b/recipes-games/neverball/neverball.inc
-@@ -0,0 +1,26 @@
-+SUMMARY =3D "Tilt the floor to roll a ball through an obstacle course be=
-fore time runs out. Neverball is part puzzle game, part action game, and =
-entirely a test of skill."
-+SECTION =3D "graphics"
-+HOMEPAGE =3D "https://neverball.org/"
-+
-+LICENSE =3D "GPLv2+"
-+LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3D200ddba3b50e856bfb681a2b13=
-dfb523"
-+
-+SRC_URI =3D "git://github.com/Neverball/neverball.git;branch=3Dmaster;pr=
-otocol=3Dhttps"
-+SRCREV =3D "b1617ed0db2c908ff1b96d6a252a85881f0574c0"
-+PV =3D "1.6.0+git${SRCPV}"
-+
-+S =3D "${WORKDIR}/git"
-+
-+inherit pkgconfig
-+
-+EXTRA_OEMAKE:append =3D " \
-+	ENABLE_FETCH=3D0 \
-+	ENABLE_OPENGLES=3D1 \
-+	DATADIR=3D/usr/share/neverball/data \
-+	LOCALEDIR=3D/usr/share/neverball/locale \
-+	"
-+
-+do_configure:append() {
-+	sed -i "s@sdl2-config@pkg-config sdl2@" ${S}/Makefile
-+	sed -i "s@libpng-config@pkg-config libpng@" ${S}/Makefile
-+}
-diff --git a/recipes-games/neverball/neverball_git.bb b/recipes-games/nev=
-erball/neverball_git.bb
-new file mode 100644
-index 0000000..5e2c358
---- /dev/null
-+++ b/recipes-games/neverball/neverball_git.bb
-@@ -0,0 +1,16 @@
-+require neverball.inc
-+
-+DEPENDS:append =3D " gettext-native virtual/libgles1 virtual/libintl lib=
-vorbis jpeg libpng libsdl2 libsdl2-ttf"
-+
-+do_compile() {
-+	oe_runmake neverball neverputt locales desktops
-+}
-+
-+do_install() {
-+	install -d -m 755 ${D}${bindir}
-+	install -m 755 ${B}/neverball ${D}/${bindir}/
-+	install -m 755 ${B}/neverputt ${D}/${bindir}/
-+
-+	install -d -m 755 ${D}${datadir}/neverball
-+	cp -R --no-dereference --preserve=3Dmode,links ${B}/locale ${D}${datadi=
-r}/neverball/
-+}
---=20
-2.33.0
+--orDmU0B4QFYLMCDMJ0hr
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
+Can someone confirm if this goes to dunfell or not?<br /><br />Thanks,<br /=
+>Ranjitsinh Rathod
+
+--orDmU0B4QFYLMCDMJ0hr--
 
