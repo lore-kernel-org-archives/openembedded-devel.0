@@ -1,100 +1,98 @@
-Return-Path: <ceggers@arri.de>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A5910C433F5
-	for <webhook@archiver.kernel.org>; Mon, 22 Nov 2021 10:12:47 +0000 (UTC)
-Received: from mailout03.rmx.de (mailout03.rmx.de [94.199.88.101])
- by mx.groups.io with SMTP id smtpd.web12.4769.1637575961885570527
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E75FC433F5
+	for <webhook@archiver.kernel.org>; Mon, 22 Nov 2021 10:32:37 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg
+ [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web10.4836.1637577154325665632
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Nov 2021 02:12:44 -0800
+ Mon, 22 Nov 2021 02:32:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=pass (domain: arri.de, ip: 94.199.88.101, mailfrom: ceggers@arri.de)
-Received: from kdin01.retarus.com (kdin01.dmz1.retloc [172.19.17.48])
-	(using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout03.rmx.de (Postfix) with ESMTPS id 4HyNPL6KGgzllmD
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Nov 2021 11:12:38 +0100 (CET)
-Received: from mta.arri.de (unknown [217.111.95.66])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by kdin01.retarus.com (Postfix) with ESMTPS id 4HyNPL3gMHz30hM
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Nov 2021 11:12:38 +0100 (CET)
-Received: from localhost.localdomain (192.168.54.242) by mta.arri.de
- (192.168.100.104) with Microsoft SMTP Server (TLS) id 14.3.498.0; Mon, 22 Nov
- 2021 11:12:37 +0100
-From: Christian Eggers <ceggers@arri.de>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Christian Eggers <ceggers@arri.de>
-Subject: [meta-python][PATCH] python3-gcovr: add recipe
-Date: Mon, 22 Nov 2021 11:12:04 +0100
-Message-ID: <20211122101204.10405-1-ceggers@arri.de>
-X-Mailer: git-send-email 2.31.1
+ dkim=pass header.i=@anavi.org header.s=default header.b=fC2KzUUa;
+ spf=permerror,
+ err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
+ for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
+ (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=TTVDcYYXohGmoPHpWsjj0WhK3Ccx8tzUmG3VFl3f4Nc=; b=fC2KzUUaVS9Td7rXSZ8CMYGPys
+	YrKoHV4kQSBx3EuZkzHE6DydapRWOlT/xvd4pKwMKLEpCf3hq7ZIKSfG81iAhSxFvkyjpGaiphjUt
+	tC4uXBlGVs1UVxO/PA9kwX0GcgWBySBZKrKZwDKpXgq4PckUK807LIswUYUs2A9/G3zzwWJQYb5Sp
+	G6xK8UodG0J1BQrvkkhcvZ7btmMCsDrvZrqNJCmD2kOrZZ7RVefyo9PLz8mmzYk3ApId3rlkxfJDy
+	ukT4CVx+ofDAje/xqIGmK4YymBpoGx1EaJC0IcjdsqATHnH6RseZOm/GLDT+1YtgU2UeUjKitLndW
+	sImDBdKg==;
+Received: from lan.nucleusys.com ([92.247.61.126]:36490
+ helo=lootbox.konsulko.bg)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.94.2)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1mp4ks-0004JH-KS; Mon, 22 Nov 2021 12:32:33 +0200
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/3] python3-marshmallow: Upgrade 3.14.0 ->
+ 3.14.1
+Date: Mon, 22 Nov 2021 12:32:21 +0200
+Message-Id: <20211122103222.31758-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20211122103222.31758-1-leon.anavi@konsulko.com>
+References: <20211122103222.31758-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [192.168.54.242]
-X-RMX-ID: 20211122-111238-WSgBhRphdKsR-0@out01.hq
-X-RMX-SOURCE: 217.111.95.66
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
+ leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 22 Nov 2021 10:12:47 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 22 Nov 2021 10:32:37 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94090
+ https://lists.openembedded.org/g/openembedded-devel/message/94092
 
-Self description from the website: Gcovr provides a utility for managing
-the use of the GNU gcov utility and generating summarized code coverage
-results. This command is inspired by the Python coverage.py package,
-which provides a similar utility for Python.
+Upgrade to release 3.14.1:
 
-Signed-off-by: Christian Eggers <ceggers@arri.de>
+- Fix publishing type hints per PEP-561
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python3-gcovr_5.0.bb | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-gcovr_5.0=
-.bb
+ ...hon3-marshmallow_3.14.0.bb => python3-marshmallow_3.14.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-marshmallow_3.14.0.bb => python3-marshmallow_3.14.1.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-gcovr_5.0.bb b/m=
-eta-python/recipes-devtools/python/python3-gcovr_5.0.bb
-new file mode 100644
-index 000000000000..330831a0b3d9
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-gcovr_5.0.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION =3D "generate GCC code coverage reports"
-+HOMEPAGE =3D "https://gcovr.com"
-+SECTION =3D "devel/python"
-+LICENSE =3D "BSD-3-Clause"
-+LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D08208c66520e8d69d53674831=
-86d94ed"
-+
-+SRC_URI =3D "git://github.com/gcovr/gcovr.git;branch=3Dmaster;protocol=3D=
-https"
-+SRCREV =3D "2b50284e8a6792b4ddcba14e2050c5c05f15deb6"
-+
-+S =3D "${WORKDIR}/git"
-+
-+inherit setuptools3
-+
-+RDEPENDS:${PN} +=3D "${PYTHON_PN}-jinja2 ${PYTHON_PN}-lxml ${PYTHON_PN}-=
-setuptools ${PYTHON_PN}-pygments"
-+
-+BBCLASSEXTEND =3D "native nativesdk"
---=20
-Christian Eggers
-Embedded software developer
-
-Arnold & Richter Cine Technik GmbH & Co. Betriebs KG
-Sitz: Muenchen - Registergericht: Amtsgericht Muenchen - Handelsregistern=
-ummer: HRA 57918
-Persoenlich haftender Gesellschafter: Arnold & Richter Cine Technik GmbH
-Sitz: Muenchen - Registergericht: Amtsgericht Muenchen - Handelsregistern=
-ummer: HRB 54477
-Geschaeftsfuehrer: Dr. Michael Neuhaeuser; Stephan Schenk; Walter Traunin=
-ger; Markus Zeiler
+diff --git a/meta-python/recipes-devtools/python/python3-marshmallow_3.14.0.bb b/meta-python/recipes-devtools/python/python3-marshmallow_3.14.1.bb
+similarity index 92%
+rename from meta-python/recipes-devtools/python/python3-marshmallow_3.14.0.bb
+rename to meta-python/recipes-devtools/python/python3-marshmallow_3.14.1.bb
+index 9a1e9e426..ddfe4b99c 100644
+--- a/meta-python/recipes-devtools/python/python3-marshmallow_3.14.0.bb
++++ b/meta-python/recipes-devtools/python/python3-marshmallow_3.14.1.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "\
+ 
+ SRC_URI = "git://github.com/marshmallow-code/marshmallow.git;protocol=https;branch=dev"
+ 
+-SRCREV = "df4f8119111362180838d66cd7364812fa9df81d"
++SRCREV = "41afdefd93afd1b95f48f45fd284ff8add3e91b7"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.20.1
 
 
