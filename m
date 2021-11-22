@@ -2,73 +2,72 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B15FC433EF
-	for <webhook@archiver.kernel.org>; Mon, 22 Nov 2021 15:05:00 +0000 (UTC)
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com
- [195.245.230.68])
- by mx.groups.io with SMTP id smtpd.web09.7503.1637593499535118956
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D89BC433EF
+	for <webhook@archiver.kernel.org>; Mon, 22 Nov 2021 15:05:08 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.1])
+ by mx.groups.io with SMTP id smtpd.web09.7508.1637593506847723510
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Nov 2021 07:04:59 -0800
+ Mon, 22 Nov 2021 07:05:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=PTDYkbwE;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.68,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=uq/goq7Q;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1637593497; i=@fujitsu.com;
-	bh=EGngwmHZPXA++dkbfgaMvhNpUhyWFFfet4x+ZKENOLc=;
+	s=170520fj; t=1637593504; i=@fujitsu.com;
+	bh=zSqekZEVdlT2DcWZVJcB0cg0kNBGO3AT+xspzgXHi50=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=PTDYkbwEKd6pHt0eFhVQb57H3MzS/ebkezrH1tVvM+54PytHGxeIiA8mlH/kpu2yr
-	 0DNGW3hVxbEhWxSJJBEETJW+eSQIGgjXbrzNuWLlLg7aJSxPPgkpRFEcayPkVrGjOr
-	 3p8Iohl9O78txujp8E+pOFTwSpO3JVha6puN6pGoV3FBqFvFW7ofq/AYICebjjRYSA
-	 bwmLWGLeDGksS+JmyOglp94d/kJbujSdXbfQ3c+9Iqf33cCRNtX1NtyT1nXwU/hU35
-	 0AkVR2nmywo8pTFFtYCLnCzv+9ASeMjgCKty0dKxSDzbEaMzjkXKn1et1NGL431T3E
-	 EfsbdnE5OuN4g==
-Received: from [100.112.197.207] (using TLSv1.2 with cipher
+	b=uq/goq7Q2wLfvRezRqLjExiiLN5+SSUsuS18w7acu2pkRCEK4fCDVqaL5RyX5d/iq
+	 GffP9AhgpwyetlHrQAPcRlEGpP1YTFthFFqTTo3E+xB9iqPCfipeFMZ/dCZR6n3mBI
+	 ZRAoliIQYYN8Vq/Sw51b0eI0wu3Q/EGu30s311fKDsZUQdixpS8boiEqYW67q3iDYn
+	 NMviTrgz1Su9eia7NM6v42wMgJ2Qw7kXOPBfniyTSDeSVs1/nbQL3q1G9U5R6TQXwX
+	 YHVLn5FmVoHYzJhibc5ZxCj/FFjmMwOqp0WqZrgQHmV2KAqQDd65WF1+MvhwL5Ew0x
+	 nxiXxMgdiXsPQ==
+Received: from [100.115.36.91] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-b.eu-west-1.aws.symcld.net id 36/5F-08711-891BB916;
- Mon, 22 Nov 2021 15:04:56 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrNIsWRWlGSWpSXmKPExsViZ8MRojtj4+x
-  Eg7dn1C0uHl7K7MDocW7jCsYAxijWzLyk/IoE1ozj9/YyFZzhrnh0+CJ7A+M5ri5GLg4hgZlM
-  Eu3X+pkhnBOMEj/fr2DvYuTkYBNQk5h+6wYriC0ioC+xdPYeZhCbWUBF4sXvHrAaYQF/iZPrp
-  4DZLAKqEgcmLwar4RVwkljy+TMTiC0hoCAx5eF7sDingLPEoTP3wOJCQDXLXyyFqheUODnzCQ
-  vEfAmJgy9eMEP0KkrMvtzMAmFXSMya1cY0gZF/FpKWWUhaFjAyrWI0TyrKTM8oyU3MzNE1NDD
-  QNTQ00jW0tNA1NtBLrNJN0kst1S1PLS7RNdRLLC/WK67MTc5J0ctLLdnECAzHlIJjcjsYe998
-  0DvEKMnBpCTKazR7dqIQX1J+SmVGYnFGfFFpTmrxIUYZDg4lCd7H64BygkWp6akVaZk5wNiAS
-  Utw8CiJ8DqApHmLCxJzizPTIVKnGHU5rqxasohZiCUvPy9VSpz34AagIgGQoozSPLgRsDi9xC
-  grJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmYdxXIFJ7MvBK4Ta+AjmACOuL08ekgR5QkIqSkGpg
-  Uo2IX9fN4PlrQcXbJly8u8eHC2XWVn11K+SzSZn65cqgtX2+D5V2F5dp35fflTuTjk3d/F86+
-  cEL7M2/d+Y3OMVtXH7xfOE/oxH/lc+KXk0/80At4Ka+9IYA7SFfiF/9mhraeTT5uPu/8zJRTD
-  Rp6XixgEBeqEng4RXapg4/mv9zrhllv/riV9d865HPW/cRLzh0zr93M4F23O2N5pJWV4o+I6J
-  +mcdslZTfwmE1t55/vwzvL+uenxyqHn28SWrLjiW3vybvrl020fbYoPa+Of67Jaon/6Xe0Esu
-  Xp6zcPMWDqUxZ5+lPjn7OqzNDfB5UcB2YcWmv3YmZka2Rt0WOhAQE/F3Tf+TGi9vXqoSVWIoz
-  Eg21mIuKEwFE6T9fTgMAAA==
+	by server-1.bemta.az-a.eu-west-2.aws.ess.symcld.net id FD/F3-17169-0A1BB916;
+ Mon, 22 Nov 2021 15:05:04 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrEIsWRWlGSWpSXmKPExsViZ8MRqrtg4+x
+  Eg5+f2SwuHl7K7MDocW7jCsYAxijWzLyk/IoE1oz/r3ezFEzhqJj+7hNrA+MG9i5GLg4hgZlM
+  EitOnWHrYuQEck4wSpx5xgpiswmoSUy/dQPMFhHQl1g6ew8ziM0soCLx4ncPO4gtLOAoMeNyN
+  yOIzSKgKrFx9jkwm1fASWLiyXtg9RICChJTHr4HszkFnCUOnbnHBLHLSWL5i6XMEPWCEidnPm
+  GBmC8hcfDFC6heRYnZl5tZIOwKiVmz2pgmMPLPQtIyC0nLAkamVYzWSUWZ6RkluYmZObqGBga
+  6hoamusamuoYmhnqJVbqJeqmluuWpxSW6RnqJ5cV6qcXFesWVuck5KXp5qSWbGIFBmVKs3LuD
+  sffyN71DjJIcTEqivEazZycK8SXlp1RmJBZnxBeV5qQWH2KU4eBQkuB9vA4oJ1iUmp5akZaZA
+  4wQmLQEB4+SCK8DSJq3uCAxtzgzHSJ1ilFRSpz34AaghABIIqM0D64NFpWXGGWlhHkZGRgYhH
+  gKUotyM0tQ5V8xinMwKgnzrgKZwpOZVwI3/RXQYiagxaePTwdZXJKIkJJqYHJovjBJxW7x9er
+  eyHomb475Xq9rpyWu3hFsPFnAbYZkuMqXjCTtuuUXXiyPUrTt2rxYLWbWsZDopK6MDUzh93au
+  tKgXrN1h8bI89p6qhOf7uldRHxIZOhunSX3pOzD12qulhuf6SxcxGLfuupzLM/+bQ79fu7RQZ
+  DVbUl8RJ9upyBct1n1Lkyw3ztoy7/9hQ8nDN38rJtSFm12/c/ose0dyyZUHV//VCF1+LC4/ye
+  2GOLuSPs+cvx/3bpskd8Lbd6E27+T3xf8vqnLevse7ckNOYEjc0SRTmztSm47XS/uknDkqXlm
+  4rUGbY+lu/SQj+8Wr3XdPaZNjn7xa0GrLtHnPn91jvP8ky3QjHyergBJLcUaioRZzUXEiAEpb
+  PQxFAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-16.tower-287.messagelabs.com!1637593496!432325!1
-X-Originating-IP: [62.60.8.84]
+X-Msg-Ref: server-14.tower-548.messagelabs.com!1637593503!429091!1
+X-Originating-IP: [62.60.8.85]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.5; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 8507 invoked from network); 22 Nov 2021 15:04:56 -0000
-Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-16.tower-287.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 22 Nov 2021 15:04:56 -0000
+Received: (qmail 5396 invoked from network); 22 Nov 2021 15:05:04 -0000
+Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
+  by server-14.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 22 Nov 2021 15:05:04 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1AMF4up6003720
+	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1AMF4vcT015479
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Nov 2021 15:04:56 GMT
+ Mon, 22 Nov 2021 15:05:03 GMT
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Mon, 22 Nov 2021 15:04:54 +0000
+ (TLS) id 15.0.1497.26; Mon, 22 Nov 2021 15:05:00 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] thin-provisioning-tools: upgrade 0.8.5 ->
- 0.9.0
-Date: Mon, 22 Nov 2021 23:04:19 +0800
-Message-ID: <1637593460-99443-2-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] xmlsec1: upgrade 1.2.32 -> 1.2.33
+Date: Mon, 22 Nov 2021 23:04:20 +0800
+Message-ID: <1637593460-99443-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1637593460-99443-1-git-send-email-wangmy@fujitsu.com>
 References: <1637593460-99443-1-git-send-email-wangmy@fujitsu.com>
@@ -80,39 +79,31 @@ X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 22 Nov 2021 15:05:00 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 22 Nov 2021 15:05:08 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94101
-
-Changelog is as follows:
-======
-- New support tools: thin_metadata_{pack,unpack}.
-- thin_check can now check metadata snapshots.
-- some metadata space map bug fixes.
-- thin_check --auto-repair
-- Stop thin_dump --repair/thin_repair ignoring under populated nodes.
+ https://lists.openembedded.org/g/openembedded-devel/message/94102
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...isioning-tools_0.8.5.bb => thin-provisioning-tools_0.9.0.bb} | 2 +-
+ .../xmlsec1/{xmlsec1_1.2.32.bb => xmlsec1_1.2.33.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/thin-provisioning-tools/{thin-provisioning-tools_0.8.5.bb => thin-provisioning-tools_0.9.0.bb} (92%)
+ rename meta-oe/recipes-support/xmlsec1/{xmlsec1_1.2.32.bb => xmlsec1_1.2.33.bb} (96%)
 
-diff --git a/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.8.5.bb b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.9.0.bb
-similarity index 92%
-rename from meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.8.5.bb
-rename to meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.9.0.bb
-index 5bcbea4600..0588e9be7b 100644
---- a/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.8.5.bb
-+++ b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.9.0.bb
-@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/jthornber/thin-provisioning-tools;branch=main;protoc
-            file://use-sh-on-path.patch \
- "
+diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.32.bb b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.33.bb
+similarity index 96%
+rename from meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.32.bb
+rename to meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.33.bb
+index 15da5aa6cb..1ca0f79f0b 100644
+--- a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.32.bb
++++ b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.33.bb
+@@ -22,7 +22,7 @@ SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
+     file://ensure-search-path-non-host.patch \
+     "
  
--SRCREV = "5e5409f48b5403d2c6dffd9919b35ad77d6fb7b4"
-+SRCREV = "d6d93c3157631b242a13a81d30f75453e576c55a"
+-SRC_URI[sha256sum] = "e383702853236004e5b08e424b8afe9b53fe9f31aaa7a5382f39d9533eb7c043"
++SRC_URI[sha256sum] = "26041d35a20a245ed5a2fb9ee075f10825664d274220cb5190340fa87a4d0931"
  
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ inherit autotools-brokensep ptest pkgconfig
  
 -- 
 2.25.1
