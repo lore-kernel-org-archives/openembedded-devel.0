@@ -1,111 +1,125 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D89BC433EF
-	for <webhook@archiver.kernel.org>; Mon, 22 Nov 2021 15:05:08 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.1])
- by mx.groups.io with SMTP id smtpd.web09.7508.1637593506847723510
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 16D4DC433EF
+	for <webhook@archiver.kernel.org>; Mon, 22 Nov 2021 17:59:29 +0000 (UTC)
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com
+ [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.web10.1357.1637603967669018314
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Nov 2021 07:05:07 -0800
+ Mon, 22 Nov 2021 09:59:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=uq/goq7Q;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1637593504; i=@fujitsu.com;
-	bh=zSqekZEVdlT2DcWZVJcB0cg0kNBGO3AT+xspzgXHi50=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=uq/goq7Q2wLfvRezRqLjExiiLN5+SSUsuS18w7acu2pkRCEK4fCDVqaL5RyX5d/iq
-	 GffP9AhgpwyetlHrQAPcRlEGpP1YTFthFFqTTo3E+xB9iqPCfipeFMZ/dCZR6n3mBI
-	 ZRAoliIQYYN8Vq/Sw51b0eI0wu3Q/EGu30s311fKDsZUQdixpS8boiEqYW67q3iDYn
-	 NMviTrgz1Su9eia7NM6v42wMgJ2Qw7kXOPBfniyTSDeSVs1/nbQL3q1G9U5R6TQXwX
-	 YHVLn5FmVoHYzJhibc5ZxCj/FFjmMwOqp0WqZrgQHmV2KAqQDd65WF1+MvhwL5Ew0x
-	 nxiXxMgdiXsPQ==
-Received: from [100.115.36.91] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-a.eu-west-2.aws.ess.symcld.net id FD/F3-17169-0A1BB916;
- Mon, 22 Nov 2021 15:05:04 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrEIsWRWlGSWpSXmKPExsViZ8MRqrtg4+x
-  Eg5+f2SwuHl7K7MDocW7jCsYAxijWzLyk/IoE1oz/r3ezFEzhqJj+7hNrA+MG9i5GLg4hgZlM
-  EitOnWHrYuQEck4wSpx5xgpiswmoSUy/dQPMFhHQl1g6ew8ziM0soCLx4ncPO4gtLOAoMeNyN
-  yOIzSKgKrFx9jkwm1fASWLiyXtg9RICChJTHr4HszkFnCUOnbnHBLHLSWL5i6XMEPWCEidnPm
-  GBmC8hcfDFC6heRYnZl5tZIOwKiVmz2pgmMPLPQtIyC0nLAkamVYzWSUWZ6RkluYmZObqGBga
-  6hoamusamuoYmhnqJVbqJeqmluuWpxSW6RnqJ5cV6qcXFesWVuck5KXp5qSWbGIFBmVKs3LuD
-  sffyN71DjJIcTEqivEazZycK8SXlp1RmJBZnxBeV5qQWH2KU4eBQkuB9vA4oJ1iUmp5akZaZA
-  4wQmLQEB4+SCK8DSJq3uCAxtzgzHSJ1ilFRSpz34AaghABIIqM0D64NFpWXGGWlhHkZGRgYhH
-  gKUotyM0tQ5V8xinMwKgnzrgKZwpOZVwI3/RXQYiagxaePTwdZXJKIkJJqYHJovjBJxW7x9er
-  eyHomb475Xq9rpyWu3hFsPFnAbYZkuMqXjCTtuuUXXiyPUrTt2rxYLWbWsZDopK6MDUzh93au
-  tKgXrN1h8bI89p6qhOf7uldRHxIZOhunSX3pOzD12qulhuf6SxcxGLfuupzLM/+bQ79fu7RQZ
-  DVbUl8RJ9upyBct1n1Lkyw3ztoy7/9hQ8nDN38rJtSFm12/c/ose0dyyZUHV//VCF1+LC4/ye
-  2GOLuSPs+cvx/3bpskd8Lbd6E27+T3xf8vqnLevse7ckNOYEjc0SRTmztSm47XS/uknDkqXlm
-  4rUGbY+lu/SQj+8Wr3XdPaZNjn7xa0GrLtHnPn91jvP8ky3QjHyergBJLcUaioRZzUXEiAEpb
-  PQxFAwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-14.tower-548.messagelabs.com!1637593503!429091!1
-X-Originating-IP: [62.60.8.85]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.5; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 5396 invoked from network); 22 Nov 2021 15:05:04 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-  by server-14.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 22 Nov 2021 15:05:04 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1AMF4vcT015479
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Nov 2021 15:05:03 GMT
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Mon, 22 Nov 2021 15:05:00 +0000
-From: Wang Mingyu <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] xmlsec1: upgrade 1.2.32 -> 1.2.33
-Date: Mon, 22 Nov 2021 23:04:20 +0800
-Message-ID: <1637593460-99443-3-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1637593460-99443-1-git-send-email-wangmy@fujitsu.com>
-References: <1637593460-99443-1-git-send-email-wangmy@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Dia7rqBu;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id np3so14455140pjb.4
+        for <openembedded-devel@lists.openembedded.org>;
+ Mon, 22 Nov 2021 09:59:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :references:from:organization:in-reply-to:content-transfer-encoding;
+        bh=tH6j3/8w8mw7dLnM8CG7ZVzjDJFPMMLnhmB7xAi+FY8=;
+        b=Dia7rqBuf026XW8pf/FqKrO60pF+1Gdq33GZyXhX0/qsodse6hp+vz1LY4sJt3EeLc
+         g5xgluFQovJLFr2sXD4V+2nMH1lYGEPY98TUJpP4ikRSXRwd+hymuFvYUq2vRJvGlYUZ
+         MT/0f/qhFB8o4hCP7Z6cZVWpne/hcmsxVtGOqp6HmccPcEyJ3MzFndWj2byVeoPCC2UB
+         q69izlxyQUF1kvjPUltRfXtJMhmwBLr4hz4lfzB63ruvaUJRvf89UE/2E2Z2FAX5fH7r
+         9kZDEkheNoYaFsV9yvKhQmqblplxMmXrw98VHLWMOwPjZqxzdQ3a2e3gK2YCiyZNNaqO
+         BbeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:references:from:organization:in-reply-to
+         :content-transfer-encoding;
+        bh=tH6j3/8w8mw7dLnM8CG7ZVzjDJFPMMLnhmB7xAi+FY8=;
+        b=v5Z3psEqM3hU0FU/6dhdBGd/5+qPdaJQTnukxmSvI5UaxjhmT7XLVSnr3/x2zIEccU
+         SEptAjbG382Fl7C1mRtk5jLtXJ0tC+IH0G0wJ/55QyeBDVw6QF9th62DTl/tYO6V1Q2L
+         XPi6psepomj2OJUhJ5xOAgi8TQcPNj233rN/VzSF4TOu8mmx6en84fzu+Nwvsm3Gui+V
+         qHMRt2I7fchyPETPKcLYMWJozZ0/yGjYRbxuo6ngisWPCHb6J6Dqy15ZqFnvbTHfda07
+         DAVN01mIwejxBC6+WKjej1I7Ux2cEs16kQfZsoATKKMBvCID+VxX+f0cDO0sKvo1GmeW
+         dP8Q==
+X-Gm-Message-State: AOAM531lf2cXko12IGDbQr/sztWupzdeb0d1qW96uLInjMQjd5J+ytPJ
+	hA3lfZ/QzjgpeN71Ldvi6LkhNAxr5xDW5g==
+X-Google-Smtp-Source: 
+ ABdhPJxcktEDF4JAB9Tzl2oAhbRJ4AfN9sGzXgPb0VNgg+1BTjoGR8VADyx7CFFw209TFSiuu8YClw==
+X-Received: by 2002:a17:90b:384d:: with SMTP id
+ nl13mr35055179pjb.80.1637603967119;
+        Mon, 22 Nov 2021 09:59:27 -0800 (PST)
+Received: from ?IPV6:2601:646:9200:a0f0:59:1c3f:bc2f:7ce1?
+ ([2601:646:9200:a0f0:59:1c3f:bc2f:7ce1])
+        by smtp.gmail.com with ESMTPSA id
+ q13sm10489401pfj.26.2021.11.22.09.59.26
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 22 Nov 2021 09:59:26 -0800 (PST)
+Message-ID: <5340cb30-03e1-cd78-2827-c70784757118@gmail.com>
+Date: Mon, 22 Nov 2021 09:59:25 -0800
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.3.2
+Subject: Re: [oe] [meta-networking] [PATCH] libnetfilter-log: upgrade 1.0.1 ->
+ 1.0.2
+Content-Language: en-US
+To: wangmy <wangmy@fujitsu.com>, openembedded-devel@lists.openembedded.org
+References: <1637593387-99348-1-git-send-email-wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+In-Reply-To: <1637593387-99348-1-git-send-email-wangmy@fujitsu.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 22 Nov 2021 15:05:08 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 22 Nov 2021 17:59:29 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94102
+ https://lists.openembedded.org/g/openembedded-devel/message/94103
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- .../xmlsec1/{xmlsec1_1.2.32.bb => xmlsec1_1.2.33.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/xmlsec1/{xmlsec1_1.2.32.bb => xmlsec1_1.2.33.bb} (96%)
 
-diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.32.bb b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.33.bb
-similarity index 96%
-rename from meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.32.bb
-rename to meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.33.bb
-index 15da5aa6cb..1ca0f79f0b 100644
---- a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.32.bb
-+++ b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.33.bb
-@@ -22,7 +22,7 @@ SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
-     file://ensure-search-path-non-host.patch \
-     "
- 
--SRC_URI[sha256sum] = "e383702853236004e5b08e424b8afe9b53fe9f31aaa7a5382f39d9533eb7c043"
-+SRC_URI[sha256sum] = "26041d35a20a245ed5a2fb9ee075f10825664d274220cb5190340fa87a4d0931"
- 
- inherit autotools-brokensep ptest pkgconfig
- 
--- 
-2.25.1
 
+On 11/22/21 7:03 AM, wangmy wrote:
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>   .../{libnetfilter-log_1.0.1.bb => libnetfilter-log_1.0.2.bb}  | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
+>   rename meta-networking/recipes-filter/libnetfilter/{libnetfilter-log_1.0.1.bb => libnetfilter-log_1.0.2.bb} (88%)
+> 
+> diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.1.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.2.bb
+> similarity index 88%
+> rename from meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.1.bb
+> rename to meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.2.bb
+> index 994825cb7e..654448a328 100644
+> --- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.1.bb
+> +++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.2.bb
+> @@ -5,7 +5,7 @@ SECTION = "libs"
+>   LICENSE = "GPLv2+"
+>   LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+>   DEPENDS = "libnfnetlink libmnl"
+> -SRCREV = "ba196a97e810746e5660fe3f57c87c0ed0f2b324"
+> +SRCREV = "b0e4be94c0b8f68d4e912402b93a130063c34e17"
+>   PV .= "+git${SRCPV}"
+
+remove the above append to PV.
+
+>   
+>   SRC_URI = "git://git.netfilter.org/libnetfilter_log;branch=master"
+> @@ -13,3 +13,5 @@ SRC_URI = "git://git.netfilter.org/libnetfilter_log;branch=master"
+>   S = "${WORKDIR}/git"
+>   
+>   inherit autotools pkgconfig
+> +
+> +PV = "1.0.2"
+
+this is not needed
+
+
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#94096): https://lists.openembedded.org/g/openembedded-devel/message/94096
+> Mute This Topic: https://lists.openembedded.org/mt/87236685/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
