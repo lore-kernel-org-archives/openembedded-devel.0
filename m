@@ -2,76 +2,76 @@ Return-Path: <xuhuan.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9ACA4C433EF
-	for <webhook@archiver.kernel.org>; Tue, 23 Nov 2021 06:04:46 +0000 (UTC)
-Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com
- [85.158.142.114])
- by mx.groups.io with SMTP id smtpd.web10.7834.1637647485476926933
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D02DC433EF
+	for <webhook@archiver.kernel.org>; Tue, 23 Nov 2021 07:52:03 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.4])
+ by mx.groups.io with SMTP id smtpd.web09.8553.1637653921579217411
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Nov 2021 22:04:46 -0800
+ Mon, 22 Nov 2021 23:52:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=LYk5PAZ0;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.114,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=h5Zx7kXT;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
  mailfrom: xuhuan.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1637647482; i=@fujitsu.com;
-	bh=Gz4dvLSxwSaKyBC/Qjj13e2JgodXXPIEYice+n/N2Hw=;
+	s=170520fj; t=1637653919; i=@fujitsu.com;
+	bh=kSS/QN+smHvRERs0wIjxmnR6SiKV/rL3Ti/OT5OLeDE=;
 	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=LYk5PAZ061ZBa62HbjmZAfR4qFsFjun/taHoqcI6DsT88MSxm8Pj4TlK7S5CEElKG
-	 qlekB5QqXaEF+TOLeB+VHN+kX7fsafrKyDvBbKTSFzMkVloZnvelAhcgidYBnrdKR8
-	 y4RM+5RoIxC8vSUATjGmajTQz1yZgKhQMCJpR21IndzdM4amQFT9i1Nehoc5iWdIYK
-	 ns3V9ilcbpnGGAlm78RkUeOj5jduq/bWfCPm754AhkjouU/b2reiaDLATaZlhPuVsn
-	 s6ZlYugDx7EmvwWGPuN8P5R6z82c9ssXck2Bqzp9EQ3zNburowMNc7W9ObpkisoSst
-	 H4beakq7XD+fA==
-Received: from [100.113.5.97] (using TLSv1.2 with cipher
+	b=h5Zx7kXTK/ZBPfZob1vF1HWgjTTPnrUSR1jCDXZbOyEwA/1ANd9MxQacab2aZF1Fm
+	 O9uI7MwCWnfwUirI0KhCh489yw7EbMegU0oLYvzm3uMA0YlWLKqlWjNuqRPRCEvIy9
+	 ZzkwzjgNFHaR6CuFOhVD1PJnbgnPhZKoyjnJX5LYMLm9keoRLioNhm8qcUNLSnyfLC
+	 mASjv3CTWD3yzuxJ4Z4eGo/CyYB7QKmEF5KntvA9OuDV/cCggNxhSLTWBRZalapNrE
+	 SPPb42Kdjiu+l4xbkRuselj4Gcwjj03iH/JivQVHuhoX2WjFF0g6vovfTiALeRjQod
+	 Zg/1VsC+BRb4w==
+Received: from [100.115.36.91] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-b.eu-central-1.aws.symcld.net id 05/D5-30139-A748C916;
- Tue, 23 Nov 2021 06:04:42 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrAIsWRWlGSWpSXmKPExsViZ8ORqFvVMif
-  RYP19PouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWN2F1/Bcu6KrYs3sDQwruHqYuTiEBJ4wihx
-  88MkZgjnApPEjY5fLF2MnEDOSUaJ/oY0EJtNQF3i8c3XjCC2iIC+xNLZe5hBbGYBVYnui2vYQ
-  WxhAT+JD7uXgfWyAMUv3PrJCmLzCrhJdG2YBRaXEFCQmPLwPTNEXFDi5MwnLBBzJCQOvnjBDF
-  GjJHFixUcmCLtC4vXhS1BxNYmr5zYxT2Dkn4WkfRaS9gWMTKsYLZOKMtMzSnITM3N0DQ0MdA0
-  NjXXNdQ2NDPUSq3ST9FJLdZNT80qKEoGyeonlxXrFlbnJOSl6eaklmxiBAZlSyF65g3Htmw96
-  hxglOZiURHmTAuYkCvEl5adUZiQWZ8QXleakFh9ilOHgUJLgvVkKlBMsSk1PrUjLzAFGB0xag
-  oNHSYS3qBkozVtckJhbnJkOkTrFqCglztsCkhAASWSU5sG1wSLyEqOslDAvIwMDgxBPQWpRbm
-  YJqvwrRnEORiVh3laQKTyZeSVw018BLWYCWty7ZzbI4pJEhJRUA1OtX71C5srljGdVNaYrVCy
-  Zss7re17vnpOHeg5zdtp0illwHlt0YMH/MpHj89v+yrCI/w3Sy2BY9P5iwd3Yh+45U48ZtaVv
-  jlfTTare75bzXH6V+OWI8qffjJ+HVorPuOyX96kyYWVRQdk7yzhp3qcnU4v/FaZlPFjmUyv/Z
-  deFmSnsgr9Pcq6ePLOVzzFgclh3uOaqnsitO9iPzBbmeWLVmSdZbVUVEp60Wubl72/SirX6vl
-  pKV1yyHl88c8Wy4UjvleTH29/X5vmf/5VwcvLZ3cVH7j+4J7RM1Pj7xkcK+SZbm2zuvzr06Pj
-  Jhwv3rmPfsp3TK2bhry8ZzPXsLLKvfT73sn4+2db8codY5h0lluKMREMt5qLiRADCK8D2QwMA
-  AA==
+	by server-4.bemta.az-a.eu-west-2.aws.ess.symcld.net id D6/37-02703-F9D9C916;
+ Tue, 23 Nov 2021 07:51:59 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrEIsWRWlGSWpSXmKPExsViZ8MxSXfe3Dm
+  JBgceWlhcPLyU2YHR49zGFYwBjFGsmXlJ+RUJrBkTJtxhLTguUPFz0U3mBsYTfF2MnBxCAk8Y
+  JWbfTOhi5AKyLzBJLHiwnR3COcko8fvjRUaQKjYBdYnHN1+D2SIC+hJLZ+9hBrGZBVQlui+uY
+  QexhQV8JB6dfQ9Uw8HBAhQ/1GkEEuYVcJN4sWkVG4gtIaAgMeXhe2aIuKDEyZlPWCDGSEgcfP
+  GCGaJGSeLEio9MEHaFxOvDl6DiahJXz21insDIPwtJ+ywk7QsYmVYxWicVZaZnlOQmZuboGho
+  Y6BoamuoaW+oaWprqJVbpJuqlluqWpxaX6BrpJZYX66UWF+sVV+Ym56To5aWWbGIEBmVKsfrh
+  HYxvLn3TO8QoycGkJMqbFDAnUYgvKT+lMiOxOCO+qDQntfgQowwHh5IEr+hsoJxgUWp6akVaZ
+  g4wQmDSEhw8SiK80+YApXmLCxJzizPTIVKnGBWlxHmFpgElBEASGaV5cG2wqLzEKCslzMvIwM
+  AgxFOQWpSbWYIq/4pRnINRSZj3Nch4nsy8Erjpr4AWMwEt7t0zG2RxSSJCSqqBKdQmJmZayt3
+  ymbnOdtwzDebfiPc4cmC7gWNom4TMhfm9c+vqvKr8rM/bdEkqcoqITL1ye9dbTe2y5bsuH+HR
+  P6H7O2vlAaG9044f2dj//4mUkO0+i7ez7/TsypRz6MgPmbzrUe6rGanVLxIt1lQE7Z14wZ15b
+  clb0ZIL7rP0f4cefTtDIdz2pRznhZVr1O1mrv3ym42Xk1U5ZN+S370/lPdWXH5Z9zGmjPGuBa
+  e05M4NE/037fh75RTn8ZNcWnny6z7W927wcJa1/rd8X/M7/3dnZu7s/MllJ1O8XGnZB6dL+Uw
+  JDelFD+6fnX08X3GJTgan5XLeBUG33AQX6vTVT6vMv7S/9mRJ+89Gz//7A5VYijMSDbWYi4oT
+  Aez7zlBFAwAA
 X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-16.tower-248.messagelabs.com!1637647481!259355!1
-X-Originating-IP: [62.60.8.97]
+X-Msg-Ref: server-7.tower-571.messagelabs.com!1637653918!649225!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.5; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 23736 invoked from network); 23 Nov 2021 06:04:42 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-16.tower-248.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 23 Nov 2021 06:04:42 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id B39C7100237
+Received: (qmail 12816 invoked from network); 23 Nov 2021 07:51:58 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-7.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 23 Nov 2021 07:51:58 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 7B41610046F
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Nov 2021 06:04:41 +0000 (GMT)
+ Tue, 23 Nov 2021 07:51:58 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id A840C10022C
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 6C6FB100463
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Nov 2021 06:04:41 +0000 (GMT)
+ Tue, 23 Nov 2021 07:51:58 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.131) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Tue, 23 Nov 2021 06:04:31 +0000
+ (TLS) id 15.0.1497.26; Tue, 23 Nov 2021 07:51:45 +0000
 From: XU Huan <xuhuan.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-xlsxwriter: upgrade 3.0.1 -> 3.0.2
-Date: Tue, 23 Nov 2021 14:04:23 +0800
-Message-ID: <1637647463-2502-1-git-send-email-xuhuan.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-websockets: upgrade 10.0 -> 10.1
+Date: Tue, 23 Nov 2021 15:51:36 +0800
+Message-ID: <1637653896-2629-1-git-send-email-xuhuan.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -82,42 +82,67 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 Nov 2021 06:04:46 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 Nov 2021 07:52:03 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94105
+ https://lists.openembedded.org/g/openembedded-devel/message/94106
 
 From: Xu Huan <xuhuan.fnst@fujitsu.com>
 
+New features
+Added a tutorial.
+
+Made the second parameter of connection handlers optional. It will be 
+deprecated in the next major release. The request path is available in
+ the path attribute of the first argument.
+
+If you implemented the connection handler of a server as:
+
+async def handler(request, path):
+    ...
+You should replace it by:
+
+async def handler(request):
+    path = request.path  # if handler() uses the path argument
+    ...
+Added python -m websockets --version.
+
+Improvements
+Added wheels for Python 3.10, PyPy 3.7, and for more platforms.
+
+Reverted optimization of default compression settings for clients, mainly 
+to avoid triggering bugs in poorly implemented servers like AWS API Gateway.
+
+Mirrored the entire Server API in WebSocketServer.
+
+Improved performance for large messages on ARM processors.
+
+Documented how to auto-reload on code changes in development.
+
+Bug fixes
+Avoided half-closing TCP connections that are already closed.
+
 Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
 ---
- ...ython3-xlsxwriter_3.0.1.bb => python3-xlsxwriter_3.0.2.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-xlsxwriter_3.0.1.bb => python3-xlsxwriter_3.0.2.bb} (67%)
+ .../{python3-websockets_10.0.bb => python3-websockets_10.1.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-websockets_10.0.bb => python3-websockets_10.1.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.1.bb b/meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.2.bb
-similarity index 67%
-rename from meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.2.bb
-index aeb27cef42..04f25532a6 100644
---- a/meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-xlsxwriter_3.0.2.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Python 2 and 3 compatibility library"
- HOMEPAGE = "https://xlsxwriter.readthedocs.io"
- SECTION = "devel/python"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4e95e368cd6cb090815046688e92d11e"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e5c795ec8cf90514a6d844b1d3cc3224"
+diff --git a/meta-python/recipes-devtools/python/python3-websockets_10.0.bb b/meta-python/recipes-devtools/python/python3-websockets_10.1.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-websockets_10.0.bb
+rename to meta-python/recipes-devtools/python/python3-websockets_10.1.bb
+index 004d3beb17..6dd29a9ff6 100644
+--- a/meta-python/recipes-devtools/python/python3-websockets_10.0.bb
++++ b/meta-python/recipes-devtools/python/python3-websockets_10.1.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=78c2cc91e172ca96d6f8e4a76c739ec6"
  
  inherit pypi setuptools3
  
-@@ -16,6 +16,6 @@ RDEPENDS:${PN} += " \
- 	python3-io \
- "
- 
--SRC_URI[sha256sum] = "3f39bf581c55f3ad1438bc170d7f4c4649cee8b6b7a80d21f79508118eeea52a"
-+SRC_URI[sha256sum] = "53005f03e8eb58f061ebf41d5767c7495ee0772c2396fe26b7e0ca22fa9c2570"
+-SRC_URI[sha256sum] = "c4fc9a1d242317892590abe5b61a9127f1a61740477bfb121743f290b8054002"
++SRC_URI[sha256sum] = "181d2b25de5a437b36aefedaf006ecb6fa3aa1328ec0236cdde15f32f9d3ff6d"
  
  BBCLASSEXTEND = "native nativesdk"
+ 
 -- 
 2.25.1
 
