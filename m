@@ -1,129 +1,93 @@
-Return-Path: <xuhuan.fnst@fujitsu.com>
+Return-Path: <geoffhp@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9777C433F5
-	for <webhook@archiver.kernel.org>; Wed, 24 Nov 2021 05:51:57 +0000 (UTC)
-Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com
- [195.245.230.66])
- by mx.groups.io with SMTP id smtpd.web12.2600.1637733116081907474
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31226C433EF
+	for <webhook@archiver.kernel.org>; Wed, 24 Nov 2021 06:03:53 +0000 (UTC)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com
+ [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.web12.2680.1637733832491257771
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Nov 2021 21:51:56 -0800
+ Tue, 23 Nov 2021 22:03:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=RmxQOtyn;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.66,
- mailfrom: xuhuan.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1637733114; i=@fujitsu.com;
-	bh=QBjmhVzvWwTjJMHTrZe6ipwT+5a4XfByIn9hYKxm5rE=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=RmxQOtynEkY+HEwdfZpBF6unTpNVkByCz/6V+Gezp1o4Njs3902EU5xn/sSdPhQJN
-	 xSSKM0pK8rUZIyw4MLVf5TJxH/dwUCSwr7BRTFi9u6hRamlttpNZz6HmxSVXnUtjqG
-	 a2ypg7Ui/onhQcdA8LZewL2L8pdQQnG3nmNjepqep8w/1tEgostrgjXlxLZPIjxL6d
-	 4xZ1VcE+I/xt22GjBfvkDtcHX7GHEVBuE6DaBhe5LwqNOgeRJicugyMSidzlWjpdb3
-	 rjM4WG1FKhvKh/ZTR62nzkpYZcXv4t4ex0dx9smmiDxP1l7PYSZp3LyWeQndxPw2HF
-	 oFlHEj28HRihg==
-Received: from [100.112.198.127] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-b.eu-west-1.aws.symcld.net id EC/D1-17294-9F2DD916;
- Wed, 24 Nov 2021 05:51:53 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrLIsWRWlGSWpSXmKPExsViZ8ORqPvz0tx
-  Eg7aPQhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bP+R9ZCzr5KpYcvczUwHiJp4uRi0NI4Amj
-  xMcrrcwQzgUmiZsbLkA5Jxkl1r++BuRwcrAJqEs8vvmaEcQWEdCXWDp7D1icWUBVovviGnYQW
-  1jAR+JEWyNYDQtQfNfSd0wgNq+Au8T/iVvYQGwJAQWJKQ/fM0PEBSVOznzCAjFHQuLgixfMED
-  VKEidWfGSCsCskXh++BBVXk7h6bhPzBEb+WUjaZyFpX8DItIrRIqkoMz2jJDcxM0fX0MBA19D
-  QSNfQ0kLXyNBUL7FKN0kvtVS3PLW4RNdQL7G8WK+4Mjc5J0UvL7VkEyMwJFMKjl3fwXj19Qe9
-  Q4ySHExKorzVW+cmCvEl5adUZiQWZ8QXleakFh9ilOHgUJLgXXkBKCdYlJqeWpGWmQOMD5i0B
-  AePkgivJzBGhHiLCxJzizPTIVKnGHU5mict384sxJKXn5cqJc6bfBGoSACkKKM0D24ELFYvMc
-  pKCfMyMjAwCPEUpBblZpagyr9iFOdgVBLmDQBZxZOZVwK36RXQEUxAR/TumQ1yREkiQkqqgel
-  wZrr01p/fjF80iRvlPn74Y8ulGubbfxgUGf+VGOgc3Wdw/dn8+fNmVoftlz2ldDL6n7Cw6f9+
-  VeYCRi2Fpmnvdj3t8ohsa1PnCbOafON+LJfE1r0vv5mH5nR/7j/ctmlpasYsua/vEzUmZ81pT
-  hPujI+YfiNvn9OPPY+0BBnE+jJyp6vofhD7dtSF973kMoVtS9mO/i80Zbrr2jst3WvhzrQHh/
-  NKkgwiNvUW1UkxPGRWN21tex4sKfxdsctjmRzHpICtD9xS70/4/fPoqUDz2quBfDbKyxx5tkS
-  83HS+WVxgVteOG8/avM1DN2mfNOCrvWTWuT/g61KOmRNKmlI2SlW91t9a8iyi9K+xkRJLcUai
-  oRZzUXEiAD7e/QRQAwAA
-X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-2.tower-291.messagelabs.com!1637733113!476462!1
-X-Originating-IP: [62.60.8.97]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.5; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 3844 invoked from network); 24 Nov 2021 05:51:53 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-2.tower-291.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 24 Nov 2021 05:51:53 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id CA967100236
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Nov 2021 05:51:52 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id BF1AD100230
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Nov 2021 05:51:52 +0000 (GMT)
-Received: from localhost.localdomain.localdomain (10.167.225.131) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Wed, 24 Nov 2021 05:51:31 +0000
-From: XU Huan <xuhuan.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-socketio: upgrade 5.4.1 -> 5.5.0
-Date: Wed, 24 Nov 2021 13:51:25 +0800
-Message-ID: <1637733085-16356-1-git-send-email-xuhuan.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ZSF4gvu7;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: geoffhp@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id v23so1598509pjr.5
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 23 Nov 2021 22:03:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=AvGv4MY3aZ9wBcQ0ZfH4Zu9mLRhBQNdWxgyNebGDYdc=;
+        b=ZSF4gvu7FCx5QJLqfgrUfCi+MMwjN6hJyFjjMdp2P0ufkLmMYIZfurpe/ZsUURy6Un
+         x+pOvWb05vofFk5CYAgk0XKGkJ1Bx+WD3T8b019V4LWGaGv2CGFNqs0EDxwI4WcwHqoj
+         LAOiJyHVJmZVsebYPjSYu4pH6ly7fQJXt86VRNGQGpuJd4GC5u8dS3kBxaqjCqDJAJjq
+         MHuClo6Mz8JOvzSrTiZU+EzSDFB9jiBXa8TBRAPrO7GVsDc/z4eVM2ILwF13TP5J7xVJ
+         D9lQ0yf5PQsSXzfDb9g+Fptnyki2qvXZ+zS3MgPMCZqkPcncWCZcMKSS/yToaSLLGLqc
+         kqPw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=AvGv4MY3aZ9wBcQ0ZfH4Zu9mLRhBQNdWxgyNebGDYdc=;
+        b=VA6oN/pP5/kyROwqISAm7tTMOnh2eGM+U6eZz9ExO5nx8eG0hhQzCJcHT/vkzWzx4c
+         5zggKPRu1WCHcfx+QM+A5ThyAD12s/0JkXnqpQMlpqzz6y4AEcItd0ahyt9yEFFk8Ch7
+         DHpVkkmZa+Z1iocfwmZvdITrJS47uVcKCZkPp5w5CVd2Wqt4ZqMvUHm1wDX8q3vvQOoj
+         aSzCXf1TxRFy2kYIZ/nMfpycfofgq2tqSXWFvi8/dBYT9BUzYJ6KYaZuxmQ6HfLdGemX
+         MK+OCSg7jlxIOwEQZt/4siCGTMnx5X88vIysC1QjYO93hfzrT/yhuaS1RzUmbrVPIB3S
+         p6DA==
+X-Gm-Message-State: AOAM531EEwLQ7RpLAlv1hm+wLp9X88RaYZ3qCKfXcy0p5+FoyrzWKrwe
+	9pwIESKjKT822Akq9ZkMr4/A+jgAhyf+Yu5K1OeqIqzz3Hw=
+X-Google-Smtp-Source: 
+ ABdhPJwn4HypXwVQFpXj37ULsqv8l0+mCNI70Nn2etZ7NBKFoH8EapMTlBjJp6gsDsTQ3QcAnCVxQyd2Cq0GqDq0oqk=
+X-Received: by 2002:a17:90b:19c8:: with SMTP id
+ nm8mr11939069pjb.163.1637733831668;
+ Tue, 23 Nov 2021 22:03:51 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.131]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+From: Geoff Parker <geoffhp@gmail.com>
+Date: Tue, 23 Nov 2021 22:03:40 -0800
+Message-ID: 
+ <CAHNuFGJOfXjEXhAGeAYOHCfhQ86c7C-rmfg+eat9KXvEXEWAXw@mail.gmail.com>
+Subject: [meta-java] ant-native_1.8.1.bb recipe fails do_compile on release
+ branches (hardknott, honister, master ...)
+To: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Nov 2021 05:51:57 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Nov 2021 06:03:53 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94111
+ https://lists.openembedded.org/g/openembedded-devel/message/94112
 
-From: Xu Huan <xuhuan.fnst@fujitsu.com>
+Building the ant-native fails on the master/hardknott, honister...)
+branches. I get this error which cascades into other errors on
+do_compile.
 
-Option to disable the SIGINT handler in the client
-Do not invoke reserved events on a catch-all handler
-Use correct binary packet types in the msgpack packet encoder
-Add missing call() method to namespace classes
-Add missing to argument to namespace emit() and send() methods
-Configure Redis pubsub to skip subscription message
-Migrate async Redis client manager to aioredis 2
-Update Python supported versions in docs
-Document how to get the connection state in the client
-Improved documentation of start_background_task() function
-Improved documentation of call() method
-Fixed intermittent test failures
+17. ERROR in src/main/org/apache/tools/ant/types/optional/image/DrawOperation.java
+(at line 20)
+import javax.media.jai.PlanarImage;
+       ^^^^^^^^^^^
+The import javax.media cannot be resolved
+----------
+18. ERROR in src/main/org/apache/tools/ant/types/optional/image/DrawOperation.java
+(at line 38)
+PlanarImage executeDrawOperation();
+^^^^^^^^^^^
+PlanarImage cannot be resolved to a type
+....
 
-Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
----
- .../{python3-socketio_5.4.1.bb => python3-socketio_5.5.0.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-socketio_5.4.1.bb => python3-socketio_5.5.0.bb} (89%)
+These other classes cannot be imported:
 
-diff --git a/meta-python/recipes-devtools/python/python3-socketio_5.4.1.bb b/meta-python/recipes-devtools/python/python3-socketio_5.5.0.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-socketio_5.4.1.bb
-rename to meta-python/recipes-devtools/python/python3-socketio_5.5.0.bb
-index bf8ce4c7bf..425dadc4f1 100644
---- a/meta-python/recipes-devtools/python/python3-socketio_5.4.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-socketio_5.5.0.bb
-@@ -9,7 +9,7 @@ inherit pypi setuptools3
- 
- PYPI_PACKAGE = "python-socketio"
- 
--SRC_URI[sha256sum] = "ef4e273ddfebb421144a228cbab1e7e27ffe8d372514fa561e57d590ea6627b0"
-+SRC_URI[sha256sum] = "ce972ea1b82aa1811fa10d30cf0d5c251b9a1558c3d66829b6fe70854bcccf0b"
- 
- PACKAGECONFIG ?= "asyncio_client client"
- PACKAGECONFIG[asyncio_client] = ",,,${PYTHON_PN}-aiohttp ${PYTHON_PN}-websockets"
--- 
-2.25.1
+The import javax.media cannot be resolved
+The import netrexx cannot be resolved
+The import junit cannot be resolved
+The import com.sun cannot be resolved
+The import javax.media cannot be resolved
 
+Git bissect on meta-java points to 'b71a986 all: run convert-overrides
+(0.9.3) script to convert to new override format'
+when this recipe broke. However, comparing master HEAD to the previous
+good commit ( 984f25b ),
+
+So it seems to be something with the overlay syntax changes, but I'm not seeing
+any obvious reason why the CLASSPATH would change.
 
