@@ -1,378 +1,129 @@
-Return-Path: <ross@burtonini.com>
+Return-Path: <xuhuan.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 783C3C433F5
-	for <webhook@archiver.kernel.org>; Tue, 23 Nov 2021 17:35:04 +0000 (UTC)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web09.14706.1637688903712486395
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A9777C433F5
+	for <webhook@archiver.kernel.org>; Wed, 24 Nov 2021 05:51:57 +0000 (UTC)
+Received: from mail1.bemta25.messagelabs.com (mail1.bemta25.messagelabs.com
+ [195.245.230.66])
+ by mx.groups.io with SMTP id smtpd.web12.2600.1637733116081907474
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Nov 2021 09:35:03 -0800
+ Tue, 23 Nov 2021 21:51:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5EC431FB
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=RmxQOtyn;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.66,
+ mailfrom: xuhuan.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1637733114; i=@fujitsu.com;
+	bh=QBjmhVzvWwTjJMHTrZe6ipwT+5a4XfByIn9hYKxm5rE=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=RmxQOtynEkY+HEwdfZpBF6unTpNVkByCz/6V+Gezp1o4Njs3902EU5xn/sSdPhQJN
+	 xSSKM0pK8rUZIyw4MLVf5TJxH/dwUCSwr7BRTFi9u6hRamlttpNZz6HmxSVXnUtjqG
+	 a2ypg7Ui/onhQcdA8LZewL2L8pdQQnG3nmNjepqep8w/1tEgostrgjXlxLZPIjxL6d
+	 4xZ1VcE+I/xt22GjBfvkDtcHX7GHEVBuE6DaBhe5LwqNOgeRJicugyMSidzlWjpdb3
+	 rjM4WG1FKhvKh/ZTR62nzkpYZcXv4t4ex0dx9smmiDxP1l7PYSZp3LyWeQndxPw2HF
+	 oFlHEj28HRihg==
+Received: from [100.112.198.127] (using TLSv1.2 with cipher
+ DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-b.eu-west-1.aws.symcld.net id EC/D1-17294-9F2DD916;
+ Wed, 24 Nov 2021 05:51:53 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrLIsWRWlGSWpSXmKPExsViZ8ORqPvz0tx
+  Eg7aPQhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bP+R9ZCzr5KpYcvczUwHiJp4uRi0NI4Amj
+  xMcrrcwQzgUmiZsbLkA5Jxkl1r++BuRwcrAJqEs8vvmaEcQWEdCXWDp7D1icWUBVovviGnYQW
+  1jAR+JEWyNYDQtQfNfSd0wgNq+Au8T/iVvYQGwJAQWJKQ/fM0PEBSVOznzCAjFHQuLgixfMED
+  VKEidWfGSCsCskXh++BBVXk7h6bhPzBEb+WUjaZyFpX8DItIrRIqkoMz2jJDcxM0fX0MBA19D
+  QSNfQ0kLXyNBUL7FKN0kvtVS3PLW4RNdQL7G8WK+4Mjc5J0UvL7VkEyMwJFMKjl3fwXj19Qe9
+  Q4ySHExKorzVW+cmCvEl5adUZiQWZ8QXleakFh9ilOHgUJLgXXkBKCdYlJqeWpGWmQOMD5i0B
+  AePkgivJzBGhHiLCxJzizPTIVKnGHU5mict384sxJKXn5cqJc6bfBGoSACkKKM0D24ELFYvMc
+  pKCfMyMjAwCPEUpBblZpagyr9iFOdgVBLmDQBZxZOZVwK36RXQEUxAR/TumQ1yREkiQkqqgel
+  wZrr01p/fjF80iRvlPn74Y8ulGubbfxgUGf+VGOgc3Wdw/dn8+fNmVoftlz2ldDL6n7Cw6f9+
+  VeYCRi2Fpmnvdj3t8ohsa1PnCbOafON+LJfE1r0vv5mH5nR/7j/ctmlpasYsua/vEzUmZ81pT
+  hPujI+YfiNvn9OPPY+0BBnE+jJyp6vofhD7dtSF973kMoVtS9mO/i80Zbrr2jst3WvhzrQHh/
+  NKkgwiNvUW1UkxPGRWN21tex4sKfxdsctjmRzHpICtD9xS70/4/fPoqUDz2quBfDbKyxx5tkS
+  83HS+WVxgVteOG8/avM1DN2mfNOCrvWTWuT/g61KOmRNKmlI2SlW91t9a8iyi9K+xkRJLcUai
+  oRZzUXEiAD7e/QRQAwAA
+X-Env-Sender: xuhuan.fnst@fujitsu.com
+X-Msg-Ref: server-2.tower-291.messagelabs.com!1637733113!476462!1
+X-Originating-IP: [62.60.8.97]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.5; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 3844 invoked from network); 24 Nov 2021 05:51:53 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-2.tower-291.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 24 Nov 2021 05:51:53 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id CA967100236
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Nov 2021 09:35:03 -0800 (PST)
-Received: from oss-tx204.lab.cambridge.arm.com
- (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E1D983F5A1
+ Wed, 24 Nov 2021 05:51:52 +0000 (GMT)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id BF1AD100230
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Nov 2021 09:35:02 -0800 (PST)
-From: Ross Burton <ross.burton@arm.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH v2] fwupd: upgrade to 1.7.2
-Date: Tue, 23 Nov 2021 17:34:57 +0000
-Message-Id: <20211123173457.2717857-1-ross.burton@arm.com>
-X-Mailer: git-send-email 2.25.1
+ Wed, 24 Nov 2021 05:51:52 +0000 (GMT)
+Received: from localhost.localdomain.localdomain (10.167.225.131) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.26; Wed, 24 Nov 2021 05:51:31 +0000
+From: XU Huan <xuhuan.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Xu Huan <xuhuan.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-socketio: upgrade 5.4.1 -> 5.5.0
+Date: Wed, 24 Nov 2021 13:51:25 +0800
+Message-ID: <1637733085-16356-1-git-send-email-xuhuan.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.131]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 Nov 2021 17:35:04 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Nov 2021 05:51:57 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94110
+ https://lists.openembedded.org/g/openembedded-devel/message/94111
 
-PACKAGECONFIG changes:
-- Rename bluez to bluetooth
-- Remove plugin_altos as the plugin was removed upstream
-- Move lzma to intel-spi as that's the only user so far
-- Disable AMT and Thunderbolt on non-x86
-- Add offline option and enable it in systemd builds
-- Add disabled options for compat-cli, fish-completion, and metainfo.
+From: Xu Huan <xuhuan.fnst@fujitsu.com>
 
-Also drop upstreamed patches.
+Option to disable the SIGINT handler in the client
+Do not invoke reserved events on a catch-all handler
+Use correct binary packet types in the msgpack packet encoder
+Add missing call() method to namespace classes
+Add missing to argument to namespace emit() and send() methods
+Configure Redis pubsub to skip subscription message
+Migrate async Redis client manager to aioredis 2
+Update Python supported versions in docs
+Document how to get the connection state in the client
+Improved documentation of start_background_task() function
+Improved documentation of call() method
+Fixed intermittent test failures
 
-Signed-off-by: Ross Burton <ross.burton@arm.com>
+Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
 ---
- meta-oe/recipes-bsp/fwupd/fwupd/io.patch      |  36 -----
- meta-oe/recipes-bsp/fwupd/fwupd/no-bash.patch | 141 ------------------
- .../fwupd/{fwupd_1.7.1.bb =3D> fwupd_1.7.2.bb}  |  28 ++--
- 3 files changed, 14 insertions(+), 191 deletions(-)
- delete mode 100644 meta-oe/recipes-bsp/fwupd/fwupd/io.patch
- delete mode 100644 meta-oe/recipes-bsp/fwupd/fwupd/no-bash.patch
- rename meta-oe/recipes-bsp/fwupd/{fwupd_1.7.1.bb =3D> fwupd_1.7.2.bb} (8=
-3%)
+ .../{python3-socketio_5.4.1.bb => python3-socketio_5.5.0.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-socketio_5.4.1.bb => python3-socketio_5.5.0.bb} (89%)
 
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd/io.patch b/meta-oe/recipes-b=
-sp/fwupd/fwupd/io.patch
-deleted file mode 100644
-index 7cef88507b..0000000000
---- a/meta-oe/recipes-bsp/fwupd/fwupd/io.patch
-+++ /dev/null
-@@ -1,36 +0,0 @@
--Upstream-Status: Submitted [https://github.com/fwupd/fwupd/pull/3970]
--Signed-off-by: Ross Burton <ross.burton@arm.com>
--
--From c3711712d0603f14beef64b0ef0b2fd03c0442e0 Mon Sep 17 00:00:00 2001
--From: Ross Burton <ross.burton@arm.com>
--Date: Tue, 9 Nov 2021 16:26:45 +0000
--Subject: [PATCH] build: check that outb is present in io.h
--
--The flashrom plugin can use inb/outb to do a CMOS reset. The build gates
--this on whether io.h exists (since bc43ad) as with glibc if io.h exists,
--inb/outb are defined. However on musl, io.h always exists but it may not
--define inb/outb.
--
--Thus, fwupd builds with musl on non-x86 platforms will fail to link. Fix
--this by checking for both io.h and that outb() is defined.
--
--Signed-off-by: Ross Burton <ross.burton@arm.com>
-----
-- meson.build | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/meson.build b/meson.build
--index dabfc1ce..4c548cf9 100644
----- a/meson.build
--+++ b/meson.build
--@@ -308,7 +308,7 @@ endif
-- if cc.has_header('sys/socket.h')
--   conf.set('HAVE_SOCKET_H', '1')
-- endif
---if cc.has_header('sys/io.h')
--+if cc.has_header('sys/io.h') and cc.has_function('outb', prefix: '#incl=
-ude <sys/io.h>')
--   conf.set('HAVE_IO_H', '1')
-- endif
-- if cc.has_header('linux/ethtool.h')
----
--2.25.1
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd/no-bash.patch b/meta-oe/reci=
-pes-bsp/fwupd/fwupd/no-bash.patch
-deleted file mode 100644
-index e0f83c4b6c..0000000000
---- a/meta-oe/recipes-bsp/fwupd/fwupd/no-bash.patch
-+++ /dev/null
-@@ -1,141 +0,0 @@
--Upstream-Status: Backport [a346c582cc0f34ac6c7c11251919c84553424efb]
--Signed-off-by: Ross Burton <ross.burton@arm.com>
--
--diff --git a/data/installed-tests/fwupd.sh b/data/installed-tests/fwupd.=
-sh
--index 5b1f5d22..eaa5ec7f 100755
----- a/data/installed-tests/fwupd.sh
--+++ b/data/installed-tests/fwupd.sh
--@@ -1,4 +1,4 @@
---#!/bin/bash
--+#!/bin/sh
--=20
-- exec 2>&1
-- dirname=3D`dirname $0`
--@@ -7,7 +7,7 @@ run_test()
-- {
--         if [ -f $dirname/$1 ]; then
--                 $dirname/$1
---                rc=3D$?; if [[ $rc !=3D 0 ]]; then exit $rc; fi
--+                rc=3D$?; if [ $rc !=3D 0 ]; then exit $rc; fi
--         fi
-- }
--=20
--diff --git a/data/installed-tests/fwupdmgr.sh b/data/installed-tests/fwu=
-pdmgr.sh
--index e3f7ee31..3d65395e 100755
----- a/data/installed-tests/fwupdmgr.sh
--+++ b/data/installed-tests/fwupdmgr.sh
--@@ -1,4 +1,4 @@
---#!/bin/bash
--+#!/bin/sh
--=20
-- exec 2>&1
-- device=3D08d460be0f1f9f128413f816022a6439e0078018
--@@ -13,47 +13,47 @@ error()
-- # ---
-- echo "Getting the list of remotes..."
-- fwupdmgr get-remotes
---rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
--+rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
--=20
-- # ---
-- echo "Enabling fwupd-tests remote..."
-- fwupdmgr enable-remote fwupd-tests
---rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
--+rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
--=20
-- # ---
-- echo "Update the device hash database..."
-- fwupdmgr verify-update $device
---rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
--+rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
--=20
-- # ---
-- echo "Getting devices (should be one)..."
-- fwupdmgr get-devices --no-unreported-check
---rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
--+rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
--=20
-- # ---
-- echo "Testing the verification of firmware..."
-- fwupdmgr verify $device
---rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
--+rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
--=20
-- # ---
-- echo "Getting updates (should be one)..."
-- fwupdmgr --no-unreported-check --no-metadata-check get-updates
---rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
--+rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
--=20
-- # ---
-- echo "Installing test firmware..."
-- fwupdmgr update $device -y
---rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
--+rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
--=20
-- # ---
-- echo "Getting updates (should be none)..."
-- fwupdmgr --no-unreported-check --no-metadata-check get-updates
---rc=3D$?; if [[ $rc !=3D 2 ]]; then error $rc; fi
--+rc=3D$?; if [ $rc !=3D 2 ]; then error $rc; fi
--=20
-- # ---
-- echo "Testing the verification of firmware (again)..."
-- fwupdmgr verify $device
---rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
--+rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
--=20
-- if [ -z "$CI_NETWORK" ]; then
--         echo "Skipping remaining tests due to CI_NETWORK not being set"
--@@ -63,27 +63,27 @@ fi
-- # ---
-- echo "Downgrading to older release (requires network access)"
-- fwupdmgr downgrade $device -y
---rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
--+rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
--=20
-- # ---
-- echo "Downgrading to older release (should be none)"
-- fwupdmgr downgrade $device
---rc=3D$?; if [[ $rc !=3D 2 ]]; then error $rc; fi
--+rc=3D$?; if [ $rc !=3D 2 ]; then error $rc; fi
--=20
-- # ---
-- echo "Updating all devices to latest release (requires network access)"
-- fwupdmgr --no-unreported-check --no-metadata-check --no-reboot-check up=
-date -y
---rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
--+rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
--=20
-- # ---
-- echo "Getting updates (should be none)..."
-- fwupdmgr --no-unreported-check --no-metadata-check get-updates
---rc=3D$?; if [[ $rc !=3D 2 ]]; then error $rc; fi
--+rc=3D$?; if [ $rc !=3D 2 ]; then error $rc; fi
--=20
-- # ---
-- echo "Refreshing from the LVFS (requires network access)..."
-- fwupdmgr refresh
---rc=3D$?; if [[ $rc !=3D 0 ]]; then error $rc; fi
--+rc=3D$?; if [ $rc !=3D 0 ]; then error $rc; fi
--=20
-- # success!
-- exit 0
--diff --git a/plugins/uefi-capsule/fwupd.grub.conf.in b/plugins/uefi-caps=
-ule/fwupd.grub.conf.in
--index 92bd49a1..9c3a22f2 100755
----- a/plugins/uefi-capsule/fwupd.grub.conf.in
--+++ b/plugins/uefi-capsule/fwupd.grub.conf.in
--@@ -1,4 +1,4 @@
---#! /bin/bash
--+#! /bin/sh
-- # SPDX-License-Identifier: LGPL-2.1+
-- set -e
--=20
--@@ -8,7 +8,7 @@ set -e
--=20
-- if [ -f @localstatedir@/lib/fwupd/uefi_capsule.conf ] &&
--    ls /sys/firmware/efi/efivars/fwupd-*-0abba7dc-e516-4167-bbf5-4d9d1c7=
-39416 1>/dev/null 2>&1; then
---      source @localstatedir@/lib/fwupd/uefi_capsule.conf
--+      . @localstatedir@/lib/fwupd/uefi_capsule.conf
--       if [ "${EFI_PATH}" !=3D "" ] && [ "${ESP}" !=3D "" ]; then
--       echo "Adding Linux Firmware Updater entry" >&2
-- cat << EOF
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.7.1.bb b/meta-oe/recipes-b=
-sp/fwupd/fwupd_1.7.2.bb
-similarity index 83%
-rename from meta-oe/recipes-bsp/fwupd/fwupd_1.7.1.bb
-rename to meta-oe/recipes-bsp/fwupd/fwupd_1.7.2.bb
-index 5827c39e9f..81f74f46db 100644
---- a/meta-oe/recipes-bsp/fwupd/fwupd_1.7.1.bb
-+++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.7.2.bb
-@@ -4,11 +4,9 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd2=
-55951079008b364516c"
-=20
- DEPENDS =3D "glib-2.0 libxmlb json-glib sqlite3 libjcat gcab vala-native=
-"
-=20
--SRC_URI =3D "https://github.com/${BPN}/${BPN}/releases/download/1.7.1/${=
-BP}.tar.xz \
--           file://run-ptest \
--           file://no-bash.patch \
--           file://io.patch"
--SRC_URI[sha256sum] =3D "ae56ceb44b786f21f54d133ac70bc5d9cb8cd4bda0167339=
-c669a228da67fa3c"
-+SRC_URI =3D "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${=
-BP}.tar.xz \
-+           file://run-ptest"
-+SRC_URI[sha256sum] =3D "8632df69c3bafc59387cdcb517c3ce31a597a09026e44f59=
-07d8384671b9f834"
-=20
- UPSTREAM_CHECK_URI =3D "https://github.com/${BPN}/${BPN}/releases"
-=20
-@@ -21,11 +19,11 @@ GIDOCGEN_MESON_OPTION =3D 'docs'
- GIDOCGEN_MESON_ENABLE_FLAG =3D 'docgen'
- GIDOCGEN_MESON_DISABLE_FLAG =3D 'none'
-=20
--PACKAGECONFIG ??=3D "curl gnutls gudev gusb lzma \
--                   ${@bb.utils.filter('DISTRO_FEATURES', 'polkit systemd=
-', d)} \
-+PACKAGECONFIG ??=3D "curl gnutls gudev gusb \
-+                   ${@bb.utils.filter('DISTRO_FEATURES', 'bluetooth polk=
-it', d)} \
-+                   ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 's=
-ystemd offline', '', d)} \
-                    ${@bb.utils.contains('MACHINE_FEATURES', 'efi', 'plug=
-in_uefi_capsule plugin_uefi_pk', '', d)} \
-                    ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests plu=
-gin_dummy', '', d)} \
--                   plugin_altos \
-                    plugin_amt \
-                    plugin_emmc \
-                    plugin_fastboot \
-@@ -43,29 +41,31 @@ PACKAGECONFIG ??=3D "curl gnutls gudev gusb lzma \
-                    plugin_synaptics_rmi \
-                    plugin_thunderbolt"
-=20
--PACKAGECONFIG[bluez] =3D "-Dbluez=3Dtrue,-Dbluez=3Dfalse"
-+PACKAGECONFIG[bluetooth] =3D "-Dbluez=3Dtrue,-Dbluez=3Dfalse"
-+PACKAGECONFIG[compat-cli] =3D "-Dcompat_cli=3Dtrue,-Dcompat_cli=3Dfalse"
- PACKAGECONFIG[consolekit] =3D "-Dconsolekit=3Dtrue,-Dconsolekit=3Dfalse,=
-consolekit"
- PACKAGECONFIG[curl] =3D "-Dcurl=3Dtrue,-Dcurl=3Dfalse,curl"
- PACKAGECONFIG[firmware-packager] =3D "-Dfirmware-packager=3Dtrue,-Dfirmw=
-are-packager=3Dfalse"
-+PACKAGECONFIG[fish-completion] =3D "-Dfish_completion=3Dtrue,-Dfish_comp=
-letion=3Dfalse"
- PACKAGECONFIG[gnutls] =3D "-Dgnutls=3Dtrue,-Dgnutls=3Dfalse,gnutls"
- PACKAGECONFIG[gudev] =3D "-Dgudev=3Dtrue,-Dgudev=3Dfalse,libgudev"
- PACKAGECONFIG[gusb] =3D "-Dgusb=3Dtrue,-Dgusb=3Dfalse,libgusb"
- PACKAGECONFIG[libarchive] =3D "-Dlibarchive=3Dtrue,-Dlibarchive=3Dfalse,=
-libarchive"
--PACKAGECONFIG[lzma] =3D "-Dlzma=3Dtrue,-Dlzma=3Dfalse,xz"
- PACKAGECONFIG[manpages] =3D "-Dman=3Dtrue,-Dman=3Dfalse"
-+PACKAGECONFIG[metainfo] =3D "-Dmetainfo=3Dtrue,-Dmetainfo=3Dfalse"
-+PACKAGECONFIG[offline] =3D "-Doffline=3Dtrue,-Doffline=3Dfalse"
- PACKAGECONFIG[polkit] =3D "-Dpolkit=3Dtrue,-Dpolkit=3Dfalse,polkit"
- PACKAGECONFIG[systemd] =3D "-Dsystemd=3Dtrue,-Dsystemd=3Dfalse,systemd"
- PACKAGECONFIG[tests] =3D "-Dtests=3Dtrue,-Dtests=3Dfalse,gcab-native"
-=20
- # TODO plugins-all meta-option that expands to all plugin_*?
--PACKAGECONFIG[plugin_altos] =3D "-Dplugin_altos=3Dtrue,-Dplugin_altos=3D=
-false,elfutils"
- PACKAGECONFIG[plugin_amt] =3D "-Dplugin_amt=3Dtrue,-Dplugin_amt=3Dfalse"
- PACKAGECONFIG[plugin_dell] =3D "-Dplugin_dell=3Dtrue,-Dplugin_dell=3Dfal=
-se,libsmbios"
- PACKAGECONFIG[plugin_dummy] =3D "-Dplugin_dummy=3Dtrue,-Dplugin_dummy=3D=
-false"
- PACKAGECONFIG[plugin_emmc] =3D "-Dplugin_emmc=3Dtrue,-Dplugin_emmc=3Dfal=
-se"
- PACKAGECONFIG[plugin_fastboot] =3D "-Dplugin_fastboot=3Dtrue,-Dplugin_fa=
-stboot=3Dfalse"
- PACKAGECONFIG[plugin_flashrom] =3D "-Dplugin_flashrom=3Dtrue,-Dplugin_fl=
-ashrom=3Dfalse,flashrom"
--PACKAGECONFIG[plugin_intel_spi] =3D "-Dplugin_intel_spi=3Dtrue,-Dplugin_=
-intel_spi=3Dfalse"
-+PACKAGECONFIG[plugin_intel_spi] =3D "-Dplugin_intel_spi=3Dtrue -Dlzma=3D=
-true,-Dplugin_intel_spi=3Dfalse -Dlzma=3Dfalse,lzma"
- PACKAGECONFIG[plugin_logitech_bulkcontroller] =3D "-Dplugin_logitech_bul=
-kcontroller=3Dtrue,-Dplugin_logitech_bulkcontroller=3Dfalse,protobuf-c-na=
-tive protobuf-c"
- PACKAGECONFIG[plugin_modem_manager] =3D "-Dplugin_modem_manager=3Dtrue,-=
-Dplugin_modem_manager=3Dfalse,libqmi modemmanager"
- PACKAGECONFIG[plugin_msr] =3D "-Dplugin_msr=3Dtrue,-Dplugin_msr=3Dfalse,=
-cpuid"
-@@ -82,8 +82,8 @@ PACKAGECONFIG[plugin_tpm] =3D "-Dplugin_tpm=3Dtrue,-Dpl=
-ugin_tpm=3Dfalse,tpm2-tss"
- PACKAGECONFIG[plugin_uefi_capsule] =3D "-Dplugin_uefi_capsule=3Dtrue -Dp=
-lugin_uefi_capsule_splash=3Dfalse,-Dplugin_uefi_capsule=3Dfalse,efivar fw=
-upd-efi"
- PACKAGECONFIG[plugin_uefi_pk] =3D "-Dplugin_uefi_pk=3Dtrue,-Dplugin_uefi=
-_pk=3Dfalse"
-=20
--# Always disable these plugins on non-x86 platforms as they don't compil=
-e
--DISABLE_NON_X86 =3D "plugin_msr plugin_intel_spi"
-+# Always disable these plugins on non-x86 platforms as they don't compil=
-e or are useless
-+DISABLE_NON_X86 =3D "plugin_amt plugin_intel_spi plugin_msr plugin_thund=
-erbolt"
- DISABLE_NON_X86:x86 =3D ""
- DISABLE_NON_X86:x86-64 =3D ""
- PACKAGECONFIG:remove =3D "${DISABLE_NON_X86}"
---=20
+diff --git a/meta-python/recipes-devtools/python/python3-socketio_5.4.1.bb b/meta-python/recipes-devtools/python/python3-socketio_5.5.0.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-socketio_5.4.1.bb
+rename to meta-python/recipes-devtools/python/python3-socketio_5.5.0.bb
+index bf8ce4c7bf..425dadc4f1 100644
+--- a/meta-python/recipes-devtools/python/python3-socketio_5.4.1.bb
++++ b/meta-python/recipes-devtools/python/python3-socketio_5.5.0.bb
+@@ -9,7 +9,7 @@ inherit pypi setuptools3
+ 
+ PYPI_PACKAGE = "python-socketio"
+ 
+-SRC_URI[sha256sum] = "ef4e273ddfebb421144a228cbab1e7e27ffe8d372514fa561e57d590ea6627b0"
++SRC_URI[sha256sum] = "ce972ea1b82aa1811fa10d30cf0d5c251b9a1558c3d66829b6fe70854bcccf0b"
+ 
+ PACKAGECONFIG ?= "asyncio_client client"
+ PACKAGECONFIG[asyncio_client] = ",,,${PYTHON_PN}-aiohttp ${PYTHON_PN}-websockets"
+-- 
 2.25.1
 
 
