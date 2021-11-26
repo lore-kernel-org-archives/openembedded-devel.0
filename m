@@ -1,338 +1,467 @@
-Return-Path: <yi.zhao@windriver.com>
+Return-Path: <bruce.ashfield@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 83263C433EF
-	for <webhook@archiver.kernel.org>; Fri, 26 Nov 2021 05:37:46 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com
- [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.20759.1637905065088412104
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D041C433F5
+	for <webhook@archiver.kernel.org>; Fri, 26 Nov 2021 17:54:44 +0000 (UTC)
+Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com
+ [209.85.222.178])
+ by mx.groups.io with SMTP id smtpd.web12.26859.1637949282919743933
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Nov 2021 21:37:46 -0800
+ Fri, 26 Nov 2021 09:54:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@windriver.com
- header.s=pps06212021 header.b=bwUEypLK;
- spf=pass (domain: windriver.com, ip: 205.220.166.238,
- mailfrom: prvs=69641bd5a6=yi.zhao@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id
- 1AQ5aMIh011817
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Nov 2021 21:37:44 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
- h=subject : to :
- references : from : message-id : date : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=PPS06212021;
- bh=VABEBWMVlk3gHkXctTkKJdv5dci7zGjvgJfwdUL7phg=;
- b=bwUEypLKu55ZOeZL73fIYScrNp9TgVScKqS4K1EHjr+oSIr+bHTHvfSas/u7R5FUS8so
- oLUf1AQOlRLCWAnZOCFxkXMW5XSwMqWPcXhOkq9UWldeHVgndy52A+szH2lutZ02Ixcs
- gjvQEHV1xQKzXsRWhaECHHl9j7R2tCCxDqK4kiWX1Wj2fvwiICiTAvafEx2o52mNUyom
- Tr7vE4/4fwX5176klmMPnYSZ6ayiahKxiyfwNuEXfB0i9PP00o33tPR6rsWLXoD4ybTu
- k9no68SlJVA29pLYSP7aEsB1fJABLkkreBVZo1mEXVUpgfM5C5gOxE5Yz2UrZwjPBVR5 /A==
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3chn251hbm-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Nov 2021 21:37:44 -0800
-Received: from m0250809.ppops.net (m0250809.ppops.net [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 1AQ5bhan012737
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Nov 2021 21:37:43 -0800
-Received: from nam10-mw2-obe.outbound.protection.outlook.com
- (mail-mw2nam10lp2101.outbound.protection.outlook.com [104.47.55.101])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3chn251hbj-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 25 Nov 2021 21:37:43 -0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Op0vl5/wf5PzX8+QZ63GZU2m4ceqpW74hato6TVbzIPoEdQwZvayNa2wmHuT9wnHFJcdfqFwmJIX+gCGOeQ56qm144+NhHX06hQiKlmj5vjSBVXx3qHnMbxyhrVefaJP6fgxZrn9gDoSSD6PggC555SQnGjnEH3QZMlS1iff3++r2f3Cm1U5OQnUJ73+1ZXh/6gPqDadcIIoPqH1WUJxqcbV6f/5yYK9jWRnf4MyQH0VBID3WFzuhIP2GraLzEGbMvpBar/eSGLjCvQ8tG5TNOeZ5J62fSjnj9XUEFVpdnW7S/M0cxpfRakv5LOnr5PFzxfRXfX06d9wydG64AWtsw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VABEBWMVlk3gHkXctTkKJdv5dci7zGjvgJfwdUL7phg=;
- b=U4462cqJRUDn1NPCXesJPQVeQlbOZdMPfz9yUzdGHrmEnU5+cXI3c+1FOd/enebREmh6nIsn1ZwZdLpC/TgyLrrgFqVePgKF6op8BklH69YjxAs+fIwSgBj6rHGiGUlBJ8XsArQWqaJoYZuSEWh5LrJCceU4m7gEqWy1tBPkajZf0K78ttJMmhro4+3U2xuWWKrU8rmL6urwAIDPsyRZNc11QsXc5PYA/WWEnEdtPO3t3YN1kxgO5ngjgsnACMApKMwol9Si19WfyiUGpA0mYWUn6g09tYHRpAvGppkKLh02sRm9prsDqUuE+o5jwO999+jWbS/aZN0SoABdFY6+LQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
- by MWHPR11MB1488.namprd11.prod.outlook.com (2603:10b6:301:c::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4713.20; Fri, 26 Nov
- 2021 05:37:41 +0000
-Received: from CO1PR11MB4867.namprd11.prod.outlook.com
- ([fe80::455e:9cfb:d106:4480]) by CO1PR11MB4867.namprd11.prod.outlook.com
- ([fe80::455e:9cfb:d106:4480%9]) with mapi id 15.20.4713.022; Fri, 26 Nov 2021
- 05:37:41 +0000
-Subject: Re: [oe] [meta-networking][PATCH 1/7] libtalloc: fix pyext_PATTERN
- for cross compilation
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-References: <20211125024450.143364-1-yi.zhao@windriver.com>
- <d13450e5-802a-70e7-cdab-bc6aefffc08d@gmail.com>
-From: Yi Zhao <yi.zhao@windriver.com>
-Message-ID: <d5ad76e7-1d15-93c7-5403-ee0f04ac9b11@windriver.com>
-Date: Fri, 26 Nov 2021 13:37:32 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
-In-Reply-To: <d13450e5-802a-70e7-cdab-bc6aefffc08d@gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-X-ClientProxiedBy: BL0PR1501CA0005.namprd15.prod.outlook.com
- (2603:10b6:207:17::18) To CO1PR11MB4867.namprd11.prod.outlook.com
- (2603:10b6:303:9a::13)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Wemu7eIT;
+ spf=pass (domain: gmail.com, ip: 209.85.222.178,
+ mailfrom: bruce.ashfield@gmail.com)
+Received: by mail-qk1-f178.google.com with SMTP id p4so15542270qkm.7
+        for <openembedded-devel@lists.openembedded.org>;
+ Fri, 26 Nov 2021 09:54:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=gTjtp87xmeqUj15VecIirgDVwNMblONgGV+J/dPj0ts=;
+        b=Wemu7eITP1TG5HnW8aticW+CssVtQ40QKIL3NOnFrNga3u6DnBrM65TvrqPn9K44sO
+         dsysdhkl6u7o8vGNn4de4sojex8qWz2lS1MF2dfqutaN7Lm4lI6J5TPgZEFKKG6ERj9N
+         79CG8JmnJXQ7BKNrKO008xvBPsb2andBxkD4uxnBhRXCcq9kEmnheAspKe+VsGreYpjr
+         6O3V3zce3A+waP3KqwCQRJkHdaO7As/fe8QyvdW2PMFzvMW0iSB2GHS6Iqw9j16P4GRc
+         En5VhLm8Zjm2jO4IlRx/ENKuWF7KmmnnLvx6EJHVR4FZwA1Bt0d2aQezORDacFrKw+1N
+         xFrA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=gTjtp87xmeqUj15VecIirgDVwNMblONgGV+J/dPj0ts=;
+        b=NsQrTyoAHMQTnh8pKxUI/4qvo85qeLOKfp+fB7a37PkPeqEG1K+5P3wYGxqE8Knzuy
+         f72al5P6qBmNqM9tWMIok12pN38UdajrqAsFzHyidsIdqPF/uJCMWOBHCT6sDoR6zY0M
+         sh3wQtA2SPC49/VTtEtOGluxhkczcMchy5hERs4ddzbu6ANYqoC8vLGKekzFpeyzEw48
+         ZKurbvlZoi+Hwt1bR5/2z51ucm7xg36MAfYJl2eECIgjAC8lpwgCYDY/3SQ7p9f/uy3H
+         cCv+jEKDaP0DghhpQjm9HHNeqhYJUNipn1dK2c+hqx6B5o5KExNxmdsZ2iPYsqZPqen2
+         uI4A==
+X-Gm-Message-State: AOAM532u2X35hThkW8NYyKQ2U6CkCsuDDtdZdCOq/rwPwaPgVcLuv2tk
+	MYWG/IGpfQSR/h2/mpsWNDxX8kNkkA7miQ==
+X-Google-Smtp-Source: 
+ ABdhPJzM84K9svTxS6/B5d6hXc2I10qTespDwjAVMVMrUtzpZkNLONta8QE73GhvWDI/cwnKrKSd/g==
+X-Received: by 2002:a05:620a:248a:: with SMTP id
+ i10mr14674415qkn.554.1637949281602;
+        Fri, 26 Nov 2021 09:54:41 -0800 (PST)
+Received: from build.lan
+ (cpe04d4c4975b80-cmf4c11490699b.cpe.net.cable.rogers.com. [174.112.63.222])
+        by smtp.gmail.com with ESMTPSA id
+ w10sm3663566qtj.37.2021.11.26.09.54.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 26 Nov 2021 09:54:41 -0800 (PST)
+From: bruce.ashfield@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Cc: TicoTimo@gmail.com,
+	trevor.gamblin@windriver.com,
+	raj.khem@gmail.com
+Subject: [PATCH][oe][meta-python] python: remove recipes imported to oe-core
+Date: Fri, 26 Nov 2021 12:54:39 -0500
+Message-Id: <20211126175439.11956-1-bruce.ashfield@gmail.com>
+X-Mailer: git-send-email 2.19.1
 MIME-Version: 1.0
-Received: from [128.224.162.174] (60.247.85.82) by
- BL0PR1501CA0005.namprd15.prod.outlook.com (2603:10b6:207:17::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4734.22 via Frontend
- Transport; Fri, 26 Nov 2021 05:37:40 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a8ecae46-5008-4940-107e-08d9b09edd35
-X-MS-TrafficTypeDiagnostic: MWHPR11MB1488:
-X-Microsoft-Antispam-PRVS: 
-	<MWHPR11MB1488DC10C8085630D259EA38F9639@MWHPR11MB1488.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:494;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	ePHXgQqp3rRyxSoPo7mHnabhv5DFlxq33HFaBIEr6FYOSAevtnBQQbPxe2zqfEets8Wn/R5SZc3U02jcToFYF8Lzf5kAFZETBarXFb97SEgp8I4jAmkKbRpAUDRqcSbfai4bm6cvnBz896xxrwYpNMjGUyoy0oPjS3nKhbSEH6wEHOMgcSJFH6k7MebuFLCRhAvBOkPmyO9DCv70Bzrrapwr76fPEn3UnzQteBwYJnNOj2k6/J5Ghs+CuKeMT2kCsA2fbGe33PLx/anM724bgM509A/u5BWphlpqLnEDnQDlZsanhATco0+ffH1Hzh+2YWXuczK/nkJpx3RJdgA9coHbYnhDN0vjl7pmOpfXpuweyAe9PyR7FMAaVb1gSSFa2UbNs55EJKsJIxH2xlIuEbxieEy5czbegu1sTLJvMSgKRb1a1FuwSB6fglns5tESjXqKq9j87UTtq8omQUuHgCyRLZJtUxO/4+BjxI5hH+4eJU5FTR6WGwbs04OGj/Rg6keJ0/lFZsqGeTuKZSlIiDvazRkR7K5T/GNeobVoKlQuBq4jJ5BPHWV+KbCGaqBR+3+t85OeaqJa4x8U6i1Zg4qAwnWd1LQI9ErkPJ9j5Tm5ylD8PfioMLS/y744dFq4e3PH4/qq3tgyMl1wvmDB77HNDRlEST64w5NQuE0xy/MXrEv2V9bwN5T3TgeXmWjfDxjs2PlUw0T8nbzQuJ8EkeVn0CVYrIG9BUOIK8ad+LTV0BNxhvXzXQq0aaknr0yxnHX6mqHifGvuDbU1dCAQo4IH3smBP3LD99qreGbsdsLT46wF33Y+qfeuL+0fs0N7x97BOL1KnMFZBfMuvm2aoysYfA7NTsG7ZE9uGONHkGRRasHmnnr+FB+xlignIBTuT8JwS69NHd86uZXho3soe99S1Fh98+7VaZlAcF/bGHI=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(5660300002)(66556008)(66476007)(2906002)(53546011)(31686004)(66946007)(6486002)(2616005)(83380400001)(36756003)(38350700002)(38100700002)(956004)(26005)(44832011)(6666004)(508600001)(8936002)(6706004)(966005)(86362001)(186003)(52116002)(316002)(31696002)(16576012)(8676002)(78286007)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?L2NxbGhoWXJqSUtPeFR1L0JpSE00ckVJbzZvNDdhY0wxcUNVTUlFVktFYWpr?=
- =?utf-8?B?R3k4U2IvSGszV0V3NkZHdkdLNGNwZTZvRzE3cXlWS2tuVTAyODZVWnBaVjZ2?=
- =?utf-8?B?NG53MGlnL296ZFk4NXArTVdnaURIeEMzMTRFb1V0dEswNktseFhhL3psTVhC?=
- =?utf-8?B?Yjc0a25kbEQ1NThoOXJNS1AxcnpoL2xvaFFoSlNCS1Y1K1kxbEhIS0srcUN6?=
- =?utf-8?B?ZmpqMUlQYlNMVG5IVWV0dDR2TzFjV1U3QS9qS2RRVmljYVlTSVgrQ2NhTlBr?=
- =?utf-8?B?dnA1Mm5Ocm5pc1IzeS9jSWJTQWFEcmhYeG5XQXFaN3p5Qk9xbmJPYjBFcHpE?=
- =?utf-8?B?ZFVHeUJyejJQb2JZUUFhaVB6N0hZUGtlKzU4eHBpeURYTmN2NFVsdVZnM0lW?=
- =?utf-8?B?cHkvV2djVGwwanFCaGJWd20vR2RMSFJzSnNZbCtaK00ybEVjRjdGeEdBZFBB?=
- =?utf-8?B?RHl1KyszUW9GelhOZzRFZzQvbHhmQ05aNzhNR2RaZmJqV3FEVGs3a2kwU0NY?=
- =?utf-8?B?blkrcFYzdFRhKzJzR29RRWxLV2dYUUxkUTAwRHF4WVdMNlZmNjJiQzB3d1VF?=
- =?utf-8?B?dTArcUQ5c0dHRldwcUN1aWNnODdtN25QMXpIKzJmOTZHMlIydFdWdHhKck53?=
- =?utf-8?B?MGF2VzFmSVJwYWdiR1U2UDd5MSsvbHpTZUhCeHgvSGhncEhCTHJyc1lUOXZV?=
- =?utf-8?B?L1UrbEpuZ2JDWkIxRWxVeVpqUk04ZGV1cGpwd0FzQlV0RjgxZzNRZ0c0VzFq?=
- =?utf-8?B?SVRXbUUwbFJ6VzlSQ0lia0tDRzk0emZtSEtvYmFNb1dCbDR2WjlVakQrSWFO?=
- =?utf-8?B?MitaK0hSalc2N2l1V0VHM2lEY2RkUlJvdm55WXJ6eVlleStYcWZJcFE2UTlo?=
- =?utf-8?B?Y251YzFJWWI2YTNpWTJHQWRUY2JPRDFIMmtHL2R5ZTg5YVE5QXN1amlBUmpR?=
- =?utf-8?B?bGJvWEpQMTRQMTR0cm9HT05mejRybGt3RVVqSmdIUUlscDJ2NHc5elp2cko2?=
- =?utf-8?B?MDRoYjJFNWNkNWlaT2UvRkk4RVAvZE1OSUJmZHVQQUxSZGZ4REl4T08zYm90?=
- =?utf-8?B?ZEJRNlpzalBCTUczYWROSWdWNk93ZTFFSHEvV2tlMzN2SUtXSFk2bENBVGIw?=
- =?utf-8?B?b09RY2hucFhKbmlmZjFQUXhjdVFDNExjR21sakhPSnMwOEpqRkczeXg1a3BP?=
- =?utf-8?B?bkkxemVVU0RnZVRmSVMxRjlwKzgySHR3SG0wV0xsNTdGVVpTSnJHL21iZTFR?=
- =?utf-8?B?K21nei95QUZab0xna3Y4ano2RHpVRnV5anl6RGp6NDMzbnkwMUF3MGJQTUZx?=
- =?utf-8?B?K2kyTGxidTVKSkR3WEVQdHZIbkhVOU83VllvVVZkUUhlMlFqaFhXeE50NUc5?=
- =?utf-8?B?LzNnNThHK0ZDWVdXa3BiYW5MN083dHFyQkdlR1JjbHVaU083aVNwa2pxQXky?=
- =?utf-8?B?RTJIMUhUOWh5WVRSNmlVRUFRb25mTDBSWjhpMUk1SHdRVlUvNWh3Ny9nVFcv?=
- =?utf-8?B?aUttdDlkc0hZZmVpekpKTTFNTmVsK2RMVjJBaHl5Q0kvd2NNT3Jqb2p3elJ3?=
- =?utf-8?B?ZGZlOWhZMi9NZFVaaEFmVXdNYUxwQ05NOTZzMzYweTNxR25vb01GL3ZTVmk4?=
- =?utf-8?B?TjVFOVRxWTZSSE9DTTFJR21YZWRZckdrcUROd1pzZW55d3JYZktyUzgxYkhv?=
- =?utf-8?B?QWc5UHlLY0htcjd1am0vOUhKMVIrQlRLdDlBa29MSnRTbVUyamxYMDhRVkNP?=
- =?utf-8?B?UXhGK0FjV0MvcnJUb3NydXhkV2daWVFma1k2NlJWTE83RThkMzlITHhZcUQ3?=
- =?utf-8?B?SExWbk1mOXhWK1B3ZnJudll1d3RZRFZEQnNUMG81VElqMEZOMEFYMUtKdDVr?=
- =?utf-8?B?TDg2Zis0b1ZZUHA2bHhXcEN3akhoQkRJeEdDTVFZYkhwMVJpNjdRUk9QbDJx?=
- =?utf-8?B?eFZhNmd3bTFSaWNEMWZKWmxRd05Sa0lrakxVYzM0SlRzeU9WRHczNUJvZjdK?=
- =?utf-8?B?WU9pUkUwL0wrUHJVRk1ySkEyYm5sWkdpS3l5RS9aK1FMN1dPdlY2R3JQUHB6?=
- =?utf-8?B?TzdTdXpCV3ZrNkxuMjY0NkdyMTBKdzZ6MnIzNXpYVld5a3hCTGF3VDlrRUhN?=
- =?utf-8?B?T1kyWGJ3U1pUd2RtR09vbnNFTzhYYUxLQlJYTit5TzdYME1sbFF0SDdqR05X?=
- =?utf-8?Q?YFrrqRQqWMkjsq9O+ksv0/E=3D?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- a8ecae46-5008-4940-107e-08d9b09edd35
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2021 05:37:41.4340
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 
- GCPpG/QRCZUWoCc8iHLFtBONQvTZguiiVkTli06ZX++AAyru9sJilhGLWUv1zapW/AID2l68oEOFtimC0Jg+uA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR11MB1488
-X-Proofpoint-GUID: q7A2EqrVFPZ30RVN5g7su3As9xr8kVFo
-X-Proofpoint-ORIG-GUID: gKDWlDlU85lPuPYFfSs1481z1ra7zGAO
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.0.607.475
- definitions=2021-11-26_01,2021-11-25_02,2020-04-07_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0
- phishscore=0 mlxlogscore=999 clxscore=1015 suspectscore=0 adultscore=0
- impostorscore=0 malwarescore=0 bulkscore=0 spamscore=0 mlxscore=0
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2110150000 definitions=main-2111260030
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by
- mx0a-0064b401.pphosted.com id 1AQ5aMIh011817
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 26 Nov 2021 05:37:46 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 26 Nov 2021 17:54:44 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94126
+ https://lists.openembedded.org/g/openembedded-devel/message/94127
 
+From: Bruce Ashfield <bruce.ashfield@gmail.com>
 
-On 11/26/21 1:30 AM, Khem Raj wrote:
->
->
-> On 11/24/21 6:44 PM, Yi Zhao wrote:
->> The pyext_PATTERN will add native arch as suffix when cross compiling.
->> For example, on qemuarm64, it is expanded to:
->> pyext_PATTERN =3D'%s.cpython-310-x86_64-linux-gnu.so'
->> which will result in the incorrect library name.
->>
->> root@qemuarm64:~# find /usr/lib -name \*talloc\*
->> /usr/lib/pkgconfig/talloc.pc
->> /usr/lib/pkgconfig/pytalloc-util.cpython-310-x86_64-linux-gnu.pc
->> /usr/lib/libpytalloc-util.cpython-310-x86-64-linux-gnu.so.2.3.3
->> /usr/lib/libtalloc.so.2
->> /usr/lib/libpytalloc-util.cpython-310-x86-64-linux-gnu.so.2
->> /usr/lib/libpytalloc-util.cpython-310-x86-64-linux-gnu.so
->> /usr/lib/libtalloc.so
->> /usr/lib/libtalloc.so.2.3.3
->> /usr/lib/python3.10/site-packages/talloc.cpython-310-x86_64-linux-gnu.=
-so
->>
->> Set pyext_PATTERN to '%s.so' to remove the suffix.
->> After the patch:
->> root@qemuarm64:~# find /usr/lib -name \*talloc\*
->> /usr/lib/pkgconfig/talloc.pc
->> /usr/lib/pkgconfig/pytalloc-util.pc
->> /usr/lib/libpytalloc-util.so.2.3.3
->> /usr/lib/libtalloc.so.2
->> /usr/lib/libpytalloc-util.so.2
->> /usr/lib/libpytalloc-util.so
->> /usr/lib/libtalloc.so
->> /usr/lib/libtalloc.so.2.3.3
->> /usr/lib/python3.10/site-packages/talloc.so
->>
->
-> does it work well in multilib environment too ?
+To support device tree schema validation in kernels v5.16+, we've
+imported dt-schema + dependencies to core. So we can safely drop
+them from meta-python.
 
+Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
+---
+ ...e-pytest-runner-to-test_requirements.patch | 32 -------------
+ .../python/python3-idna_3.3.bb                | 19 --------
+ .../python/python3-jsonpointer/run-ptest      |  3 --
+ .../python/python3-jsonpointer_2.2.bb         | 26 ----------
+ .../python/python3-jsonschema_3.2.0.bb        | 48 -------------------
+ .../python/python3-pyrsistent_0.18.0.bb       | 14 ------
+ .../python/python3-rfc3339-validator_0.1.4.bb | 20 --------
+ .../python/python3-rfc3986-validator_0.1.1.bb | 23 ---------
+ .../python/python3-rfc3987_1.3.8.bb           | 10 ----
+ .../python/python3-ruamel-yaml_0.17.16.bb     | 23 ---------
+ .../python/python3-strict-rfc3339_0.7.bb      | 10 ----
+ .../python/python3-vcversioner_2.16.0.0.bb    | 12 -----
+ .../python/python3-webcolors/run-ptest        |  3 --
+ .../python/python3-webcolors_1.11.1.bb        | 27 -----------
+ 14 files changed, 270 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-rfc3986-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch
+ delete mode 100644 meta-python/recipes-devtools/python/python3-idna_3.3.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-jsonpointer/run-ptest
+ delete mode 100644 meta-python/recipes-devtools/python/python3-jsonpointer_2.2.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-jsonschema_3.2.0.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pyrsistent_0.18.0.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.4.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-rfc3986-validator_0.1.1.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-rfc3987_1.3.8.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.16.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-strict-rfc3339_0.7.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-vcversioner_2.16.0.0.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-webcolors/run-ptest
+ delete mode 100644 meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb
 
-Yes. It does.
+diff --git a/meta-python/recipes-devtools/python/python-rfc3986-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch b/meta-python/recipes-devtools/python/python-rfc3986-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch
+deleted file mode 100644
+index 8a646874e..000000000
+--- a/meta-python/recipes-devtools/python/python-rfc3986-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From 3531ff73631a0d59234eb4713e7b3a7f5ea57bbb Mon Sep 17 00:00:00 2001
+-From: Nicola Lunghi <nicola.lunghi@jci.com>
+-Date: Thu, 14 Nov 2019 12:17:51 +0000
+-Subject: [PATCH] setup.py: move pytest-runner to test_requirements
+-
+-This fixes an issue with yocto build.
+-pytest-runner is only needed when running tests.
+-
+-Upstream-Status: Pending
+----
+- setup.py | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/setup.py b/setup.py
+-index 53ebea7..ebb0de2 100644
+---- a/setup.py
+-+++ b/setup.py
+-@@ -10,9 +10,9 @@ with open('README.md') as readme_file:
+- 
+- requirements = []
+- 
+--setup_requirements = ['pytest-runner', ]
+-+setup_requirements = []
+- 
+--test_requirements = ['pytest>=3', ]
+-+test_requirements = ['pytest>=3', 'pytest-runner']
+- 
+- setup(
+-     author="Nicolas Aimetti",
+--- 
+-2.20.1
+-
+diff --git a/meta-python/recipes-devtools/python/python3-idna_3.3.bb b/meta-python/recipes-devtools/python/python3-idna_3.3.bb
+deleted file mode 100644
+index a0e6b79a5..000000000
+--- a/meta-python/recipes-devtools/python/python3-idna_3.3.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-SUMMARY = "Internationalised Domain Names in Applications"
+-HOMEPAGE = "https://github.com/kjd/idna"
+-LICENSE = "BSD-3-Clause & Python-2.0 & Unicode"
+-LIC_FILES_CHKSUM = "file://LICENSE.md;md5=239668a7c6066d9e0c5382e9c8c6c0e1"
+-
+-SRC_URI[sha256sum] = "9d643ff0a55b762d5cdb124b8eaa99c66322e2157b69160bc32796e824360e6d"
+-
+-inherit pypi setuptools3
+-
+-# Remove bundled egg-info
+-do_compile:prepend() {
+-    rm -rf ${S}/idna.egg-info
+-}
+-
+-RDEPENDS:${PN}:class-target = "\
+-    ${PYTHON_PN}-codecs \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-jsonpointer/run-ptest b/meta-python/recipes-devtools/python/python3-jsonpointer/run-ptest
+deleted file mode 100644
+index 51e609f4b..000000000
+--- a/meta-python/recipes-devtools/python/python3-jsonpointer/run-ptest
++++ /dev/null
+@@ -1,3 +0,0 @@
+-#!/bin/sh
+-
+-python3 tests.py
+diff --git a/meta-python/recipes-devtools/python/python3-jsonpointer_2.2.bb b/meta-python/recipes-devtools/python/python3-jsonpointer_2.2.bb
+deleted file mode 100644
+index 225fde755..000000000
+--- a/meta-python/recipes-devtools/python/python3-jsonpointer_2.2.bb
++++ /dev/null
+@@ -1,26 +0,0 @@
+-SUMMARY = "Resolve JSON Pointers in Python"
+-HOMEPAGE = "https://github.com/stefankoegl/python-json-pointer"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=32b15c843b7a329130f4e266a281ebb3"
+-
+-inherit pypi ptest setuptools3
+-
+-SRC_URI[sha256sum] = "f09f8deecaaa5aea65b5eb4f67ca4e54e1a61f7a11c75085e360fe6feb6a48bf"
+-
+-RDEPENDS:${PN} += " \
+-    ${PYTHON_PN}-json \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
+-
+-SRC_URI += " \
+-	file://run-ptest \
+-"
+-
+-RDEPENDS:${PN}-ptest += " \
+-	${PYTHON_PN}-pytest \
+-"
+-
+-do_install_ptest() {
+-	cp -f ${S}/tests.py ${D}${PTEST_PATH}/
+-}
+diff --git a/meta-python/recipes-devtools/python/python3-jsonschema_3.2.0.bb b/meta-python/recipes-devtools/python/python3-jsonschema_3.2.0.bb
+deleted file mode 100644
+index c7efe33a8..000000000
+--- a/meta-python/recipes-devtools/python/python3-jsonschema_3.2.0.bb
++++ /dev/null
+@@ -1,48 +0,0 @@
+-SUMMARY = "An implementation of JSON Schema validation for Python"
+-HOMEPAGE = "https://github.com/Julian/jsonschema"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=7a60a81c146ec25599a3e1dabb8610a8 \
+-                    file://json/LICENSE;md5=9d4de43111d33570c8fe49b4cb0e01af"
+-DEPENDS += "${PYTHON_PN}-vcversioner-native ${PYTHON_PN}-setuptools-scm-native"
+-
+-SRC_URI[md5sum] = "f1a0b5011f05a02a8dee1070cd10a26d"
+-SRC_URI[sha256sum] = "c8a85b28d377cc7737e46e2d9f2b4f44ee3c0e1deac6bf46ddefc7187d30797a"
+-
+-inherit pypi setuptools3
+-
+-PACKAGECONFIG ??= "format"
+-PACKAGECONFIG[format] = ",,,\
+-    ${PYTHON_PN}-idna \
+-    ${PYTHON_PN}-jsonpointer \
+-    ${PYTHON_PN}-webcolors \
+-    ${PYTHON_PN}-rfc3987 \
+-    ${PYTHON_PN}-strict-rfc3339 \
+-"
+-PACKAGECONFIG[nongpl] = ",,,\
+-    ${PYTHON_PN}-idna \
+-    ${PYTHON_PN}-jsonpointer \
+-    ${PYTHON_PN}-webcolors \
+-    ${PYTHON_PN}-rfc3986-validator \
+-    ${PYTHON_PN}-rfc3339-validator \
+-"
+-
+-RDEPENDS:${PN} += " \
+-    ${PYTHON_PN}-attrs \
+-    ${PYTHON_PN}-core \
+-    ${PYTHON_PN}-datetime \
+-    ${PYTHON_PN}-importlib-metadata \
+-    ${PYTHON_PN}-io \
+-    ${PYTHON_PN}-json \
+-    ${PYTHON_PN}-netclient \
+-    ${PYTHON_PN}-numbers \
+-    ${PYTHON_PN}-pkgutil \
+-    ${PYTHON_PN}-pprint \
+-    ${PYTHON_PN}-pyrsistent \
+-    ${PYTHON_PN}-shell \
+-    ${PYTHON_PN}-six \
+-    ${PYTHON_PN}-unittest \
+-    ${PYTHON_PN}-setuptools-scm \
+-    ${PYTHON_PN}-zipp \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-pyrsistent_0.18.0.bb b/meta-python/recipes-devtools/python/python3-pyrsistent_0.18.0.bb
+deleted file mode 100644
+index 0b4d2564f..000000000
+--- a/meta-python/recipes-devtools/python/python3-pyrsistent_0.18.0.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-SUMMARY = "Persistent/Immutable/Functional data structures for Python"
+-HOMEPAGE = "https://github.com/tobgu/pyrsistent"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.mit;md5=a4b94c2b800b582a8d3925a9939cbf44"
+-
+-SRC_URI[sha256sum] = "773c781216f8c2900b42a7b638d5b517bb134ae1acbebe4d1e8f1f41ea60eb4b"
+-
+-inherit pypi setuptools3
+-
+-RDEPENDS:${PN} += " \
+-    ${PYTHON_PN}-numbers \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.4.bb b/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.4.bb
+deleted file mode 100644
+index 7f1bbaf97..000000000
+--- a/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.4.bb
++++ /dev/null
+@@ -1,20 +0,0 @@
+-SUMMARY = "A pure python RFC3339 validator"
+-HOMEPAGE = "https://github.com/naimetti/rfc3339-validator"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=a21b13b5a996f08f7e0b088aa38ce9c6"
+-
+-FILESEXTRAPATHS:prepend := "${THISDIR}/python-rfc3339-validator:"
+-
+-SRC_URI[sha256sum] = "138a2abdf93304ad60530167e51d2dfb9549521a836871b88d7f4695d0022f6b"
+-
+-PYPI_PACKAGE = "rfc3339_validator"
+-
+-inherit pypi setuptools3
+-
+-RDEPENDS:${PN} += "\
+-    ${PYTHON_PN}-core \
+-    ${PYTHON_PN}-datetime \
+-    ${PYTHON_PN}-six \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-rfc3986-validator_0.1.1.bb b/meta-python/recipes-devtools/python/python3-rfc3986-validator_0.1.1.bb
+deleted file mode 100644
+index 68b3db1f4..000000000
+--- a/meta-python/recipes-devtools/python/python3-rfc3986-validator_0.1.1.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-SUMMARY = "Pure python rfc3986 validator"
+-HOMEPAGE = "https://github.com/naimetti/rfc3986-validator"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=a21b13b5a996f08f7e0b088aa38ce9c6"
+-
+-FILESEXTRAPATHS:prepend := "${THISDIR}/python-rfc3986-validator:"
+-
+-SRC_URI[md5sum] = "47f7657b790aaf6011a1ab3d86c6be95"
+-SRC_URI[sha256sum] = "3d44bde7921b3b9ec3ae4e3adca370438eccebc676456449b145d533b240d055"
+-
+-PYPI_PACKAGE = "rfc3986_validator"
+-
+-inherit pypi setuptools3
+-
+-SRC_URI:append = " \
+-    file://0001-setup.py-move-pytest-runner-to-test_requirements.patch \
+-"
+-
+-RDEPENDS:${PN} += "\
+-    python3-core \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-rfc3987_1.3.8.bb b/meta-python/recipes-devtools/python/python3-rfc3987_1.3.8.bb
+deleted file mode 100644
+index 80e2aa5bc..000000000
+--- a/meta-python/recipes-devtools/python/python3-rfc3987_1.3.8.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-SUMMARY = "Parsing and validation of URIs (RFC 3986) and IRIs (RFC 3987)"
+-LICENSE = "GPLv3+"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=9;md5=2b723edf67b2f3088bc5e339b1ceda2d"
+-
+-SRC_URI[md5sum] = "b6c4028acdc788a9ba697e1c1d6b896c"
+-SRC_URI[sha256sum] = "d3c4d257a560d544e9826b38bc81db676890c79ab9d7ac92b39c7a253d5ca733"
+-
+-inherit pypi setuptools3
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.16.bb b/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.16.bb
+deleted file mode 100644
+index e64f19600..000000000
+--- a/meta-python/recipes-devtools/python/python3-ruamel-yaml_0.17.16.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-SUMMARY = "YAML parser/emitter that supports roundtrip preservation of comments, seq/map flow style, and map key order."
+-AUTHOR = "Anthon van der Neut"
+-
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=fa0a51dfb461e2f803969e0f3fa71dfe"
+-
+-PYPI_PACKAGE = "ruamel.yaml"
+-
+-inherit pypi setuptools3
+-
+-SRC_URI[sha256sum] = "1a771fc92d3823682b7f0893ad56cb5a5c87c48e62b5399d6f42c8759a583b33"
+-
+-RDEPENDS:${PN} += "\
+-    ${PYTHON_PN}-shell \
+-    ${PYTHON_PN}-datetime \
+-    ${PYTHON_PN}-netclient \
+-"
+-
+-do_install:prepend() {
+-    export RUAMEL_NO_PIP_INSTALL_CHECK=1
+-}
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-strict-rfc3339_0.7.bb b/meta-python/recipes-devtools/python/python3-strict-rfc3339_0.7.bb
+deleted file mode 100644
+index 52ae9ebe9..000000000
+--- a/meta-python/recipes-devtools/python/python3-strict-rfc3339_0.7.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-SUMMARY = "Strict, simple, lightweight RFC3339 function.s"
+-LICENSE = "GPLv3"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=8f0e2cd40e05189ec81232da84bd6e1a"
+-
+-SRC_URI[md5sum] = "4d9b635b4df885bc37bc1189d66c9abc"
+-SRC_URI[sha256sum] = "5cad17bedfc3af57b399db0fed32771f18fc54bbd917e85546088607ac5e1277"
+-
+-inherit pypi setuptools3
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-vcversioner_2.16.0.0.bb b/meta-python/recipes-devtools/python/python3-vcversioner_2.16.0.0.bb
+deleted file mode 100644
+index 149078c51..000000000
+--- a/meta-python/recipes-devtools/python/python3-vcversioner_2.16.0.0.bb
++++ /dev/null
+@@ -1,12 +0,0 @@
+-SUMMARY = "Python vcversioner, automagically update the project's version"
+-HOMEPAGE = "https://github.com/habnabit/vcversioner"
+-
+-LICENSE = "ISC"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=827a7a91a8d20d3c666b665cd96db8e3"
+-
+-SRC_URI[md5sum] = "aab6ef5e0cf8614a1b1140ed5b7f107d"
+-SRC_URI[sha256sum] = "dae60c17a479781f44a4010701833f1829140b1eeccd258762a74974aa06e19b"
+-
+-inherit pypi setuptools3
+-
+-BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python3-webcolors/run-ptest b/meta-python/recipes-devtools/python/python3-webcolors/run-ptest
+deleted file mode 100644
+index 3385d6893..000000000
+--- a/meta-python/recipes-devtools/python/python3-webcolors/run-ptest
++++ /dev/null
+@@ -1,3 +0,0 @@
+-#!/bin/sh
+-
+-pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
+diff --git a/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb b/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb
+deleted file mode 100644
+index 2ec036ef3..000000000
+--- a/meta-python/recipes-devtools/python/python3-webcolors_1.11.1.bb
++++ /dev/null
+@@ -1,27 +0,0 @@
+-SUMMARY = "Simple Python module for working with HTML/CSS color definitions."
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=25b90379a52351261c51272e7923d240"
+-
+-SRC_URI[md5sum] = "54d28a7c80b3e4d974ec2fee86768be9"
+-SRC_URI[sha256sum] = "76f360636957d1c976db7466bc71dcb713bb95ac8911944dffc55c01cb516de6"
+-
+-inherit pypi setuptools3 ptest
+-
+-RDEPENDS:${PN}:class-target = "\
+-    ${PYTHON_PN}-stringold \
+-"
+-
+-SRC_URI += " \
+-    file://run-ptest \
+-"
+-
+-RDEPENDS:${PN}-ptest += " \
+-    ${PYTHON_PN}-pytest \
+-"
+-
+-do_install_ptest() {
+-    install -d ${D}${PTEST_PATH}/tests
+-    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+-}
+-
+-BBCLASSEXTEND = "native nativesdk"
+-- 
+2.19.1
 
-
-//YI
-
-
->
->> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
->> ---
->> =C2=A0 ...-pyext_PATTERN-for-cross-compilation.patch | 57 ++++++++++++=
-+++++++
->> =C2=A0 .../libtalloc/libtalloc_2.3.3.bb=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 1 +
->> =C2=A0 2 files changed, 58 insertions(+)
->> =C2=A0 create mode 100644=20
->> meta-networking/recipes-support/libtalloc/libtalloc/0001-Fix-pyext_PAT=
-TERN-for-cross-compilation.patch
->>
->> diff --git=20
->> a/meta-networking/recipes-support/libtalloc/libtalloc/0001-Fix-pyext_P=
-ATTERN-for-cross-compilation.patch=20
->> b/meta-networking/recipes-support/libtalloc/libtalloc/0001-Fix-pyext_P=
-ATTERN-for-cross-compilation.patch=20
->>
->> new file mode 100644
->> index 000000000..47ee4bb24
->> --- /dev/null
->> +++=20
->> b/meta-networking/recipes-support/libtalloc/libtalloc/0001-Fix-pyext_P=
-ATTERN-for-cross-compilation.patch
->> @@ -0,0 +1,57 @@
->> +From b5eaeb7ed4e75012d2715f995e15a13850064f61 Mon Sep 17 00:00:00 200=
-1
->> +From: Yi Zhao <yi.zhao@windriver.com>
->> +Date: Wed, 24 Nov 2021 13:33:35 +0800
->> +Subject: [PATCH] Fix pyext_PATTERN for cross compilation
->> +
->> +The pyext_PATTERN will add native arch as suffix when cross compiling.
->> +For example, on qemuarm64, it is expanded to:
->> +pyext_PATTERN =3D'%s.cpython-310-x86_64-linux-gnu.so'
->> +which will result in the incorrect library name.
->> +
->> +root@qemuarm64:~# find /usr/lib -name \*talloc\*
->> +/usr/lib/pkgconfig/talloc.pc
->> +/usr/lib/pkgconfig/pytalloc-util.cpython-310-x86_64-linux-gnu.pc
->> +/usr/lib/libpytalloc-util.cpython-310-x86-64-linux-gnu.so.2.3.3
->> +/usr/lib/libtalloc.so.2
->> +/usr/lib/libpytalloc-util.cpython-310-x86-64-linux-gnu.so.2
->> +/usr/lib/libpytalloc-util.cpython-310-x86-64-linux-gnu.so
->> +/usr/lib/libtalloc.so
->> +/usr/lib/libtalloc.so.2.3.3
->> +/usr/lib/python3.10/site-packages/talloc.cpython-310-x86_64-linux-gnu=
-.so=20
->>
->> +
->> +Set pyext_PATTERN to '%s.so' to remove the suffix.
->> +After the patch:
->> +root@qemuarm64:~# find /usr/lib -name \*talloc\*
->> +/usr/lib/pkgconfig/talloc.pc
->> +/usr/lib/pkgconfig/pytalloc-util.pc
->> +/usr/lib/libpytalloc-util.so.2.3.3
->> +/usr/lib/libtalloc.so.2
->> +/usr/lib/libpytalloc-util.so.2
->> +/usr/lib/libpytalloc-util.so
->> +/usr/lib/libtalloc.so
->> +/usr/lib/libtalloc.so.2.3.3
->> +/usr/lib/python3.10/site-packages/talloc.so
->> +
->> +Upstream-Status: Inappropriate [embedded specific]
->> +
->> +Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
->> +---
->> + third_party/waf/waflib/Tools/python.py | 2 +-
->> + 1 file changed, 1 insertion(+), 1 deletion(-)
->> +
->> +diff --git a/third_party/waf/waflib/Tools/python.py=20
->> b/third_party/waf/waflib/Tools/python.py
->> +index b1c8dd0..24faa31 100644
->> +--- a/third_party/waf/waflib/Tools/python.py
->> ++++ b/third_party/waf/waflib/Tools/python.py
->> +@@ -328,7 +328,7 @@ def check_python_headers(conf, features=3D'pyembe=
-d=20
->> pyext'):
->> +=C2=A0=C2=A0=C2=A0=C2=A0 x =3D 'MACOSX_DEPLOYMENT_TARGET'
->> +=C2=A0=C2=A0=C2=A0=C2=A0 if dct[x]:
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 env[x] =3D conf.envi=
-ron[x] =3D dct[x]
->> +-=C2=A0=C2=A0=C2=A0 env.pyext_PATTERN =3D '%s' + dct['SO'] # not a mi=
-stake
->> ++=C2=A0=C2=A0=C2=A0 env.pyext_PATTERN =3D '%s.so'
->> +
->> +
->> +=C2=A0=C2=A0=C2=A0=C2=A0 # Try to get pythonX.Y-config
->> +--
->> +2.17.1
->> +
->> diff --git=20
->> a/meta-networking/recipes-support/libtalloc/libtalloc_2.3.3.bb=20
->> b/meta-networking/recipes-support/libtalloc/libtalloc_2.3.3.bb
->> index e6e2066a5..9b207609f 100644
->> --- a/meta-networking/recipes-support/libtalloc/libtalloc_2.3.3.bb
->> +++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.3.3.bb
->> @@ -9,6 +9,7 @@ LIC_FILES_CHKSUM =3D=20
->> "file://talloc.h;beginline=3D3;endline=3D27;md5=3Da301712782cad6dd6
->> =C2=A0 =C2=A0 SRC_URI =3D "https://www.samba.org/ftp/talloc/talloc-${P=
-V}.tar.gz \
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
- file://options-2.2.0.patch \
->> + file://0001-Fix-pyext_PATTERN-for-cross-compilation.patch \
->> =C2=A0 "
->> =C2=A0 SRC_URI[sha256sum] =3D=20
->> "6be95b2368bd0af1c4cd7a88146eb6ceea18e46c3ffc9330bf6262b40d1d8aaa"
->>
->>
->>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#94116):=20
->> https://lists.openembedded.org/g/openembedded-devel/message/94116
->> Mute This Topic: https://lists.openembedded.org/mt/87295464/1997914
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe:=20
->> https://lists.openembedded.org/g/openembedded-devel/unsub=20
->> [raj.khem@gmail.com]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
 
