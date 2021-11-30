@@ -2,153 +2,95 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 05B36C433F5
-	for <webhook@archiver.kernel.org>; Tue, 30 Nov 2021 02:26:01 +0000 (UTC)
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com
- [209.85.214.182])
- by mx.groups.io with SMTP id smtpd.web10.71342.1638239160404503652
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7045BC433F5
+	for <webhook@archiver.kernel.org>; Tue, 30 Nov 2021 02:38:05 +0000 (UTC)
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com
+ [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.web10.71476.1638239885070664644
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Nov 2021 18:26:00 -0800
+ Mon, 29 Nov 2021 18:38:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=W8hijXKe;
- spf=pass (domain: gmail.com, ip: 209.85.214.182,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f182.google.com with SMTP id k4so13692625plx.8
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=j9c+QuLV;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id
+ n15-20020a17090a160f00b001a75089daa3so17124534pja.1
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Nov 2021 18:26:00 -0800 (PST)
+ Mon, 29 Nov 2021 18:38:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3H336W5eASwrmrInoRU4Qm2dYgD5HM5gAoOP86iMYyc=;
-        b=W8hijXKeoBeRcLnGnAClg0Qb60ITUTpIdXlVY+FxfkMY+SEB9zk5V7WcjyMrQvddAg
-         50EqgZovHMugFU1RO8Hs+1XjhVL67+t0DjJbi/1zg0hn+2Dvw9no3Qz2LL0+DBLf2ovK
-         PFqrFGprVA7YXad6sK3XjYQPQYteo057PKzKVY2baCDu9MQtx2zKSBVpuD6i7xpvK+Bm
-         QIlh2Ubb5B/90p9x+iaG0ervEfQ5rXdduiOR7cP4bGzM5+jQX9dtgNEXXQg6A1V/HdL6
-         WsQZGkXnF4ah+H6aqsrAP19jHUdHY7iA6X/ZKp5yHKU9Lz7kAlh4Nxj5n93Y+NGgdt30
-         dMpw==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=w/zbYQUknZnWO0m82oNnoSS8sJu96CwRGQY5iMiLpL8=;
+        b=j9c+QuLV4Ac5PaNXZn7XuqoAZrQUa+l4YZyssj3ykeHIo75MkOF3UEQirsce66LceV
+         YNoV3TMTxcFfjNqH0npY7HqkhkK+/WVAtZHsjqf17PLdD9YHWH7ETPP38E2l5VTqOmhL
+         ZzyclO3iXAWjLV4WoiSdzN1fAoo7YBsdaWU/kYBjnbu2AVWP+9OQSxYAvMjBUnfDsy+L
+         WUn3PTYk/wtoFO8wwTaEEOj4Ycp8EgDf++8D/cw7A+mlG3CVU+e6UCtadSMapqeFoCuI
+         vo8uRT7ZP+aaTwn+JpIw3sovybPwpga5EudW+bf/Vd4k9EnUUzILm5gni2R4kLt+Oe3g
+         gr0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3H336W5eASwrmrInoRU4Qm2dYgD5HM5gAoOP86iMYyc=;
-        b=20Yc/Zt+oYjwxPVkNp2OVnqKasdA73WZZ9GLOd3BejNIFMfOlYHrR2xHEqAg4oVn17
-         5QueMzaEpi99mVsN4a/kLy+3MnyR7NAXVn3LJRRGYwYHUOU/NBTQ9UK18S82MMuUNKWn
-         WccgJ42IH4vqDSI9V1te11GmPPpkJAP9C2h6k39dCRi/vg1tEtE33Ia5K0R1eMjh8WHx
-         Kpf9tkpMA7IX8Y4niMpBh7hqtP6NYDZMVo3rDzIFC8E69r87xS4WnzGuFx7A4keKnm5N
-         ZycMEcidDtBJRsKZmQ6cmnXgpB97/jwCMNBJNtEg9qu0lASoj3tgRrn4PSsMhY/4Z8aq
-         QhQg==
-X-Gm-Message-State: AOAM531Tv7LLlrE86LiXmoYUIrM/gSy9bDrVCHaQ+8hN4DlRsMx2l/e4
-	uRKkuWu2ov2q4zXIyihmnexhpkQh534zSg==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=w/zbYQUknZnWO0m82oNnoSS8sJu96CwRGQY5iMiLpL8=;
+        b=oToPQUepJwSi8q6Vc2m4H6WJuKPUviKld9OtQYIDEGf53Z9S8KtYfQ24fYLj+eKtYR
+         enWF/MaoVtr6HMoI92Ix5CAwfaMKIDYzdcNUrzZRS+6yX01DT7swPQJavKtLMIqIuYF6
+         cgGpCrbtW8AwyUVoZ700SmJ1E1rV+0yF2N1d7D3zBnKDMznPK72RziFjI2v+ESIrx5uX
+         mJwr9a9ZbO3dZLp23oRx8JsfRnXJRWv+k9ezJsaJmUh5Yp+iZnMOrYeTb4fTdY5B/SGz
+         LMqwF2D/wxvYMLuSRPtk0gbZI9ino4DZnuG14n3CYX0RTsiOyP2GQO6CghgPaRKt+4cc
+         Md5g==
+X-Gm-Message-State: AOAM530beo4w7wNZY03Y0qbjHRKjVFF4+xnfXAwECEQKCGK5zcsCkAZl
+	izWfbpfoH4lWaGJ8mN/o7oWk5/N2ZmL97Q==
 X-Google-Smtp-Source: 
- ABdhPJx3cdsMZrYJMhAxp50FbX0aDVW2fMrMii6epvj1fLjYtlBma+dNjibxPdSj9d/5KAs8HnYkjA==
-X-Received: by 2002:a17:90a:e506:: with SMTP id
- t6mr2350435pjy.9.1638239159459;
-        Mon, 29 Nov 2021 18:25:59 -0800 (PST)
+ ABdhPJxfW7m7fdgodkfjAY+mCkSiMo1UTJSJ8rd//lVMEdIis+1urUQ7OGnYqRn3NKGKp0kEXtu49A==
+X-Received: by 2002:a17:902:7d96:b0:142:87dc:7dd3 with SMTP id
+ a22-20020a1709027d9600b0014287dc7dd3mr63117358plm.11.1638239884401;
+        Mon, 29 Nov 2021 18:38:04 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ce68])
         by smtp.gmail.com with ESMTPSA id
- q5sm20304529pfu.66.2021.11.29.18.25.58
+ t8sm15009760pfj.26.2021.11.29.18.38.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Nov 2021 18:25:59 -0800 (PST)
+        Mon, 29 Nov 2021 18:38:04 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] influxdb: Upgrade to 1.8.10
-Date: Mon, 29 Nov 2021 18:25:56 -0800
-Message-Id: <20211130022556.2903431-1-raj.khem@gmail.com>
+Subject: [meta-xfce][PATCH 2/2] packagegroup-xfce-base: Mark TUNE_PKGARCH
+ specific
+Date: Mon, 29 Nov 2021 18:38:00 -0800
+Message-Id: <20211130023800.2910556-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20211130023800.2910556-1-raj.khem@gmail.com>
+References: <20211130023800.2910556-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 30 Nov 2021 02:26:01 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 30 Nov 2021 02:38:05 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94143
+ https://lists.openembedded.org/g/openembedded-devel/message/94145
 
-Changes are here [1]
-
-License-Update: Updated copyright info [2]
-
-Fix sh interpreter path
-
-[1] https://dl.influxdata.com/platform/nightlies/1.8/CHANGELOG.md
-[2] https://github.com/influxdata/influxdb/commit/809ac4f0d5280a2391ed1af84e2a331d37525913#diff-c693279643b8cd5d248172d9c22cb7cf4ed163a3c98c8a3f69c2717edd3eacb7
+librsvg is direct dependency which gets debian renamed so this does
+not qualify to be allarch
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...se-env-to-deduce-sh-interpreter-path.patch | 23 +++++++++++++++++++
- ...{influxdb_1.7.10.bb => influxdb_1.8.10.bb} |  9 ++++----
- 2 files changed, 28 insertions(+), 4 deletions(-)
- create mode 100644 meta-oe/recipes-dbs/influxdb/influxdb/0001-ci-Use-env-to-deduce-sh-interpreter-path.patch
- rename meta-oe/recipes-dbs/influxdb/{influxdb_1.7.10.bb => influxdb_1.8.10.bb} (83%)
+ meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-dbs/influxdb/influxdb/0001-ci-Use-env-to-deduce-sh-interpreter-path.patch b/meta-oe/recipes-dbs/influxdb/influxdb/0001-ci-Use-env-to-deduce-sh-interpreter-path.patch
-new file mode 100644
-index 0000000000..4c4d65a5c0
---- /dev/null
-+++ b/meta-oe/recipes-dbs/influxdb/influxdb/0001-ci-Use-env-to-deduce-sh-interpreter-path.patch
-@@ -0,0 +1,23 @@
-+From be6c7051c1ca5daf84066e0c8411c507eb168362 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 29 Nov 2021 18:16:18 -0800
-+Subject: [PATCH] ci: Use env to deduce sh interpreter path
+diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
+index 9545ad1a81..c56af6f382 100644
+--- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
++++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
+@@ -2,6 +2,9 @@ SUMMARY = "All packages required for a base installation of XFCE"
+ SECTION = "x11/wm"
+ PR = "r5"
+ 
++# librsvg-gtk gets debian renamed to librsvg-2-gtk
++PACKAGE_ARCH = "${TUNE_PKGARCH}"
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ scripts/ci/run_perftest.sh | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/scripts/ci/run_perftest.sh b/scripts/ci/run_perftest.sh
-+index e86ed1c9b0..53f65f34c4 100755
-+--- a/scripts/ci/run_perftest.sh
-++++ b/scripts/ci/run_perftest.sh
-+@@ -1,4 +1,4 @@
-+-#!/usr/bin/sh -ex
-++#!/usr/bin/env sh -ex
-+ 
-+ # Install Telegraf
-+ wget -qO- https://repos.influxdata.com/influxdb.key | apt-key add -
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/recipes-dbs/influxdb/influxdb_1.7.10.bb b/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
-similarity index 83%
-rename from meta-oe/recipes-dbs/influxdb/influxdb_1.7.10.bb
-rename to meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
-index fa360b8d1d..1f206807cf 100644
---- a/meta-oe/recipes-dbs/influxdb/influxdb_1.7.10.bb
-+++ b/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "InfluxDB is a time series database designed to handle high write
- HOMEPAGE = "https://www.influxdata.com/products/influxdb-overview/"
+ inherit packagegroup features_check
  
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=ba8146ad9cc2a128209983265136e06a"
-+LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=f39a8d10930fb37bd59adabb3b9d0bd6"
- 
- FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
- 
-@@ -17,16 +17,17 @@ GO_INSTALL = "\
- "
- 
- SRC_URI = "\
--    git://${GO_IMPORT};protocol=https;branch=1.7;destsuffix=${BPN}-${PV}/src/${GO_IMPORT} \
-+    git://${GO_IMPORT};protocol=https;branch=1.8;destsuffix=${BPN}-${PV}/src/${GO_IMPORT} \
-+    file://0001-ci-Use-env-to-deduce-sh-interpreter-path.patch;patchdir=src/${GO_IMPORT} \
-     file://influxdb \
-     file://influxdb.conf \
- "
- 
- SRC_URI:append:mipsarch = " file://0001-patch-term-module-for-mips-ispeed-ospeed-termios-abs.patch;patchdir=src/${GO_IMPORT}"
- 
--SRCREV = "c958f436b2e538a88a7815aad721c7774a0b8f63"
-+SRCREV = "688e697c51fd5353725da078555adbeff0363d01"
- 
--inherit go-mod systemd update-rc.d useradd
-+inherit go-mod pkgconfig systemd update-rc.d useradd
- 
- USERADD_PACKAGES = "${PN}"
- USERADD_PARAM:${PN} = "--system -d /var/lib/influxdb -m -s /bin/nologin influxdb"
+ REQUIRED_DISTRO_FEATURES = "x11"
 -- 
 2.34.1
 
