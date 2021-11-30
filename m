@@ -2,161 +2,154 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D0D0C433EF
-	for <webhook@archiver.kernel.org>; Mon, 29 Nov 2021 18:58:44 +0000 (UTC)
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
- [209.85.160.172])
- by mx.groups.io with SMTP id smtpd.web09.65709.1638212322853142529
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 05B36C433F5
+	for <webhook@archiver.kernel.org>; Tue, 30 Nov 2021 02:26:01 +0000 (UTC)
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com
+ [209.85.214.182])
+ by mx.groups.io with SMTP id smtpd.web10.71342.1638239160404503652
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Nov 2021 10:58:43 -0800
+ Mon, 29 Nov 2021 18:26:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ejbMqfsE;
- spf=pass (domain: gmail.com, ip: 209.85.160.172,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=W8hijXKe;
+ spf=pass (domain: gmail.com, ip: 209.85.214.182,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f172.google.com with SMTP id z9so17623771qtj.9
+Received: by mail-pl1-f182.google.com with SMTP id k4so13692625plx.8
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Nov 2021 10:58:42 -0800 (PST)
+ Mon, 29 Nov 2021 18:26:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=waepRBuMAOnRjMvMKMN9WqZdekY8219A8fyWGQ5vdoU=;
-        b=ejbMqfsEOsJqn+A6cZSAL9AYrcnzgidaoiyayk124qiXfc92cDt3l0fNFl0cPMlG8V
-         CzUYwr6Z/4bVHhNL8KTQ4DzDF9ybflUC8jlk7om31/eHwDEpp6QIe6vCcT8aIjAC2H76
-         Z26u+hiwD1h+QiduhK6mOYwVYA33A1OSKDDmcTiqAMHovkuw7SogPY6lKzqHL0U69UYv
-         jXLJnhFrxs96Bv0yKVFw/MS/iaxP8arWBOV7uJT9hytFPmt6raFApxsOdY7X+N+Bj7qq
-         K6VLAeJ5FmcN3I75KlKB4sGziyyi6Q2RnATvDx384VT6gHvRQo/DpGHjPZLaxWYPSZLM
-         xOzw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=3H336W5eASwrmrInoRU4Qm2dYgD5HM5gAoOP86iMYyc=;
+        b=W8hijXKeoBeRcLnGnAClg0Qb60ITUTpIdXlVY+FxfkMY+SEB9zk5V7WcjyMrQvddAg
+         50EqgZovHMugFU1RO8Hs+1XjhVL67+t0DjJbi/1zg0hn+2Dvw9no3Qz2LL0+DBLf2ovK
+         PFqrFGprVA7YXad6sK3XjYQPQYteo057PKzKVY2baCDu9MQtx2zKSBVpuD6i7xpvK+Bm
+         QIlh2Ubb5B/90p9x+iaG0ervEfQ5rXdduiOR7cP4bGzM5+jQX9dtgNEXXQg6A1V/HdL6
+         WsQZGkXnF4ah+H6aqsrAP19jHUdHY7iA6X/ZKp5yHKU9Lz7kAlh4Nxj5n93Y+NGgdt30
+         dMpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=waepRBuMAOnRjMvMKMN9WqZdekY8219A8fyWGQ5vdoU=;
-        b=6YA+wAyRpfTxasqOYjeyedXsvRPesBgEvkiHtNNbOYEZzu9znzn3W5+sWiS0izaAYX
-         BTE6s7h1U+F8wyZx8VK97J96nxRQnVW02eLlfxyhh6dRXve/uqJQmXWVR6MDD31vD+To
-         vVXr+knFDx1vonJ+m2Fb8ap5182Bs4GU9B++3VaQk2QbnSNYAvdVTsauG5i1EC4o9HcG
-         HXB7OWOf/0AnLf47Dv8TaKZ0B43qAccEkSVyGlYPcb0f31GuYJNebKrApytmYn97R+Ky
-         BjcBU86v1miaNwI1ug30Nu2YcA/nMJsVpNK2tzKXLrzfit4YkorBGiDkqzI2YB1NWXQA
-         ts2Q==
-X-Gm-Message-State: AOAM533bnkPaTKcAXRGnsSmVHFcPArV5bxibzgVq4ckXHKMSDkG69RrV
-	T+stTZNBca3QrDcBaWZOwHuOzqY2tRF5QVktDyv41V/rUMvQkw==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=3H336W5eASwrmrInoRU4Qm2dYgD5HM5gAoOP86iMYyc=;
+        b=20Yc/Zt+oYjwxPVkNp2OVnqKasdA73WZZ9GLOd3BejNIFMfOlYHrR2xHEqAg4oVn17
+         5QueMzaEpi99mVsN4a/kLy+3MnyR7NAXVn3LJRRGYwYHUOU/NBTQ9UK18S82MMuUNKWn
+         WccgJ42IH4vqDSI9V1te11GmPPpkJAP9C2h6k39dCRi/vg1tEtE33Ia5K0R1eMjh8WHx
+         Kpf9tkpMA7IX8Y4niMpBh7hqtP6NYDZMVo3rDzIFC8E69r87xS4WnzGuFx7A4keKnm5N
+         ZycMEcidDtBJRsKZmQ6cmnXgpB97/jwCMNBJNtEg9qu0lASoj3tgRrn4PSsMhY/4Z8aq
+         QhQg==
+X-Gm-Message-State: AOAM531Tv7LLlrE86LiXmoYUIrM/gSy9bDrVCHaQ+8hN4DlRsMx2l/e4
+	uRKkuWu2ov2q4zXIyihmnexhpkQh534zSg==
 X-Google-Smtp-Source: 
- ABdhPJw+yW737Jd0HFDd2dde5ajltPHTwXpjRV3Y0DrpQ+Hs/BSKnkddauPHQK+NDsjX25PhcxOvE9MVT9ooFgN7nW0=
-X-Received: by 2002:aed:30a3:: with SMTP id 32mr36534428qtf.660.1638212321868;
- Mon, 29 Nov 2021 10:58:41 -0800 (PST)
-MIME-Version: 1.0
-References: 
- <CAHMaQtB6aySwe6DjrGmAZXj9c8i1v6MSCX-Hfe7k3pvxW3RJtg@mail.gmail.com>
- <2076fc48-04ee-b7db-65d1-062c5438477f@gmail.com>
- <CAHMaQtBrRoXryLp3oZjuh5jWv8oJ5VButa2VUj3H3-2yHrVLrw@mail.gmail.com>
-In-Reply-To: 
- <CAHMaQtBrRoXryLp3oZjuh5jWv8oJ5VButa2VUj3H3-2yHrVLrw@mail.gmail.com>
+ ABdhPJx3cdsMZrYJMhAxp50FbX0aDVW2fMrMii6epvj1fLjYtlBma+dNjibxPdSj9d/5KAs8HnYkjA==
+X-Received: by 2002:a17:90a:e506:: with SMTP id
+ t6mr2350435pjy.9.1638239159459;
+        Mon, 29 Nov 2021 18:25:59 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ce68])
+        by smtp.gmail.com with ESMTPSA id
+ q5sm20304529pfu.66.2021.11.29.18.25.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 29 Nov 2021 18:25:59 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 29 Nov 2021 10:58:15 -0800
-Message-ID: 
- <CAMKF1so+i7gQgMJqjCam=LAWwHJKKi2a+aObko=Ljrd4m5xyzw@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-coloredlogs: Added nativesdk
- python3-docutils: Added nativesdk and native python3-humanfriendly: Added
- nativesdk
-To: Windel Bouwman <windel.bouwman@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] influxdb: Upgrade to 1.8.10
+Date: Mon, 29 Nov 2021 18:25:56 -0800
+Message-Id: <20211130022556.2903431-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 29 Nov 2021 18:58:44 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 30 Nov 2021 02:26:01 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94142
+ https://lists.openembedded.org/g/openembedded-devel/message/94143
 
-On Mon, Nov 29, 2021 at 9:35 AM Windel Bouwman <windel.bouwman@gmail.com> wrote:
->
-> This patch is for the hardknott branch. I'm sorry I did not tag it as such.
->
+Changes are here [1]
 
-python3-coloredlogs was still needed in master so I took that part,
-I think you should look into master and do relevant backports instead
-of writing specific patch
+License-Update: Updated copyright info [2]
 
-> On Mon, Nov 29, 2021 at 6:06 PM Khem Raj <raj.khem@gmail.com> wrote:
->>
->> which branch are you proposing this patch for ?
->> it seems to be not applicable to master and if its meant for release
->> branches then tag it with appropriate release branch name in subject line.
->>
->> On 11/29/21 12:42 AM, Windel Bouwman wrote:
->> > These changes are needed in order to build colcon as an SDK package.
->> >
->> > Signed-off-by: Windel Bouwman <windel.bouwman@gmail.com
->> > <mailto:windel.bouwman@gmail.com>>
->> > ---
->> >   meta-python/recipes-devtools/python/python3-coloredlogs_15.0.bb
->> > <http://python3-coloredlogs_15.0.bb> | 2 +-
->> >   meta-python/recipes-devtools/python/python3-docutils_0.17.bb
->> > <http://python3-docutils_0.17.bb>    | 2 ++
->> >   .../recipes-devtools/python/python3-humanfriendly_9.1.bb
->> > <http://python3-humanfriendly_9.1.bb>        | 2 +-
->> >   3 files changed, 4 insertions(+), 2 deletions(-)
->> >
->> > diff --git
->> > a/meta-python/recipes-devtools/python/python3-coloredlogs_15.0.bb
->> > <http://python3-coloredlogs_15.0.bb>
->> > b/meta-python/recipes-devtools/python/python3-coloredlogs_15.0.bb
->> > <http://python3-coloredlogs_15.0.bb>
->> > index daeda6b2e..da4f7a574 100644
->> > --- a/meta-python/recipes-devtools/python/python3-coloredlogs_15.0.bb
->> > <http://python3-coloredlogs_15.0.bb>
->> > +++ b/meta-python/recipes-devtools/python/python3-coloredlogs_15.0.bb
->> > <http://python3-coloredlogs_15.0.bb>
->> > @@ -20,4 +20,4 @@ RDEPENDS_${PN} += "\
->> >       ${PYTHON_PN}-humanfriendly \
->> >   "
->> >
->> > -BBCLASSEXTEND = "native"
->> > +BBCLASSEXTEND = "native nativesdk"
->> > diff --git
->> > a/meta-python/recipes-devtools/python/python3-docutils_0.17.bb
->> > <http://python3-docutils_0.17.bb>
->> > b/meta-python/recipes-devtools/python/python3-docutils_0.17.bb
->> > <http://python3-docutils_0.17.bb>
->> > index 8605e93b5..f8cd205fa 100644
->> > --- a/meta-python/recipes-devtools/python/python3-docutils_0.17.bb
->> > <http://python3-docutils_0.17.bb>
->> > +++ b/meta-python/recipes-devtools/python/python3-docutils_0.17.bb
->> > <http://python3-docutils_0.17.bb>
->> > @@ -7,3 +7,5 @@ LIC_FILES_CHKSUM =
->> > "file://COPYING.txt;md5=836a1950177996968a49ff477a4a61c4"
->> >   SRC_URI[sha256sum] =
->> > "e2ffeea817964356ba4470efba7c2f42b6b0de0b04e66378507e3e2504bbff4c"
->> >
->> >   inherit pypi setuptools3
->> > +
->> > +BBCLASSEXTEND = "native nativesdk"
->> > diff --git
->> > a/meta-python/recipes-devtools/python/python3-humanfriendly_9.1.bb
->> > <http://python3-humanfriendly_9.1.bb>
->> > b/meta-python/recipes-devtools/python/python3-humanfriendly_9.1.bb
->> > <http://python3-humanfriendly_9.1.bb>
->> > index fb6a7e3b6..a5f2031b2 100644
->> > --- a/meta-python/recipes-devtools/python/python3-humanfriendly_9.1.bb
->> > <http://python3-humanfriendly_9.1.bb>
->> > +++ b/meta-python/recipes-devtools/python/python3-humanfriendly_9.1.bb
->> > <http://python3-humanfriendly_9.1.bb>
->> > @@ -21,4 +21,4 @@ RDEPENDS_${PN}_class-target += " \
->> >       ${PYTHON_PN}-stringold \
->> >   "
->> >
->> > -BBCLASSEXTEND = "native"
->> > +BBCLASSEXTEND = "native nativesdk"
->> > --
->> > 2.25.1
->> >
->> >
->> > -=-=-=-=-=-=-=-=-=-=-=-
->> > Links: You receive all messages sent to this group.
->> > View/Reply Online (#94133): https://lists.openembedded.org/g/openembedded-devel/message/94133
->> > Mute This Topic: https://lists.openembedded.org/mt/87373885/1997914
->> > Group Owner: openembedded-devel+owner@lists.openembedded.org
->> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
->> > -=-=-=-=-=-=-=-=-=-=-=-
->> >
+Fix sh interpreter path
+
+[1] https://dl.influxdata.com/platform/nightlies/1.8/CHANGELOG.md
+[2] https://github.com/influxdata/influxdb/commit/809ac4f0d5280a2391ed1af84e2a331d37525913#diff-c693279643b8cd5d248172d9c22cb7cf4ed163a3c98c8a3f69c2717edd3eacb7
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...se-env-to-deduce-sh-interpreter-path.patch | 23 +++++++++++++++++++
+ ...{influxdb_1.7.10.bb => influxdb_1.8.10.bb} |  9 ++++----
+ 2 files changed, 28 insertions(+), 4 deletions(-)
+ create mode 100644 meta-oe/recipes-dbs/influxdb/influxdb/0001-ci-Use-env-to-deduce-sh-interpreter-path.patch
+ rename meta-oe/recipes-dbs/influxdb/{influxdb_1.7.10.bb => influxdb_1.8.10.bb} (83%)
+
+diff --git a/meta-oe/recipes-dbs/influxdb/influxdb/0001-ci-Use-env-to-deduce-sh-interpreter-path.patch b/meta-oe/recipes-dbs/influxdb/influxdb/0001-ci-Use-env-to-deduce-sh-interpreter-path.patch
+new file mode 100644
+index 0000000000..4c4d65a5c0
+--- /dev/null
++++ b/meta-oe/recipes-dbs/influxdb/influxdb/0001-ci-Use-env-to-deduce-sh-interpreter-path.patch
+@@ -0,0 +1,23 @@
++From be6c7051c1ca5daf84066e0c8411c507eb168362 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 29 Nov 2021 18:16:18 -0800
++Subject: [PATCH] ci: Use env to deduce sh interpreter path
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ scripts/ci/run_perftest.sh | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/scripts/ci/run_perftest.sh b/scripts/ci/run_perftest.sh
++index e86ed1c9b0..53f65f34c4 100755
++--- a/scripts/ci/run_perftest.sh
+++++ b/scripts/ci/run_perftest.sh
++@@ -1,4 +1,4 @@
++-#!/usr/bin/sh -ex
+++#!/usr/bin/env sh -ex
++ 
++ # Install Telegraf
++ wget -qO- https://repos.influxdata.com/influxdb.key | apt-key add -
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-dbs/influxdb/influxdb_1.7.10.bb b/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
+similarity index 83%
+rename from meta-oe/recipes-dbs/influxdb/influxdb_1.7.10.bb
+rename to meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
+index fa360b8d1d..1f206807cf 100644
+--- a/meta-oe/recipes-dbs/influxdb/influxdb_1.7.10.bb
++++ b/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "InfluxDB is a time series database designed to handle high write
+ HOMEPAGE = "https://www.influxdata.com/products/influxdb-overview/"
+ 
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=ba8146ad9cc2a128209983265136e06a"
++LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=f39a8d10930fb37bd59adabb3b9d0bd6"
+ 
+ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+ 
+@@ -17,16 +17,17 @@ GO_INSTALL = "\
+ "
+ 
+ SRC_URI = "\
+-    git://${GO_IMPORT};protocol=https;branch=1.7;destsuffix=${BPN}-${PV}/src/${GO_IMPORT} \
++    git://${GO_IMPORT};protocol=https;branch=1.8;destsuffix=${BPN}-${PV}/src/${GO_IMPORT} \
++    file://0001-ci-Use-env-to-deduce-sh-interpreter-path.patch;patchdir=src/${GO_IMPORT} \
+     file://influxdb \
+     file://influxdb.conf \
+ "
+ 
+ SRC_URI:append:mipsarch = " file://0001-patch-term-module-for-mips-ispeed-ospeed-termios-abs.patch;patchdir=src/${GO_IMPORT}"
+ 
+-SRCREV = "c958f436b2e538a88a7815aad721c7774a0b8f63"
++SRCREV = "688e697c51fd5353725da078555adbeff0363d01"
+ 
+-inherit go-mod systemd update-rc.d useradd
++inherit go-mod pkgconfig systemd update-rc.d useradd
+ 
+ USERADD_PACKAGES = "${PN}"
+ USERADD_PARAM:${PN} = "--system -d /var/lib/influxdb -m -s /bin/nologin influxdb"
+-- 
+2.34.1
+
 
