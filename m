@@ -1,134 +1,111 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 16A35C433EF
-	for <webhook@archiver.kernel.org>; Tue, 30 Nov 2021 02:53:27 +0000 (UTC)
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com
- [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.web11.70928.1638240806501376146
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19364C433EF
+	for <webhook@archiver.kernel.org>; Tue, 30 Nov 2021 04:02:05 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.1])
+ by mx.groups.io with SMTP id smtpd.web12.71875.1638244923299281306
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Nov 2021 18:53:26 -0800
+ Mon, 29 Nov 2021 20:02:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=e8oZ23xa;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id
- o6-20020a17090a0a0600b001a64b9a11aeso15875916pjo.3
-        for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Nov 2021 18:53:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=O5ftu0htTAkUIx5PlHNFRnUWEWf/uzJT3D5dDpZ4On0=;
-        b=e8oZ23xavadP+UJUI72SCwcs86SMTeUSijDY2rF1R8qYaGZinj5kJmrtndYMv+/L5O
-         XYyj1IKSANg2yXjMY8TUblGVJ5F7wwf3zPOgFE/kK8HVG/9jwqkuJGfu9Wf+0xKJDFmn
-         ItpIqRWWs1yPK7oMjvKZTHfpa/Ss9QHdpr1LZg0UfMFQZIvVKjGbyaGlim+EuCWqF1Dq
-         kEOF13IYiOL74TgxgCRP1vQBmt5oRRC66rUEsnQUBSRFYOjUyh4Z5bcV5hfJ4fyzWAz0
-         tR/8GPuBOsPz5jn9aHdoEH+FOTz1km21jJxhf2k2R1VCPn8+2g2CZPQmKUAaOULFuAFZ
-         CKvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=O5ftu0htTAkUIx5PlHNFRnUWEWf/uzJT3D5dDpZ4On0=;
-        b=H0QQ5WDV1bo3P3yGg233eF54iF9uD1shVWu02Raxt6KKYQAGgjoWj/RunymxdvTBm5
-         5KTi4BMomyePDzYQDea0S12ppHgs09+qCnJHq65cOObgf/aTfEStW62QrZWJkP7er2R5
-         6PEZQkQHG/kpS7NKdo1wQQp+TIrYqEoKpuzNiMBgfsJ3WzBSJfLSF6R5wa0aRcNf1Crj
-         OpatyiY9Fah0NNyUY1qWHKdeWqmDDkSb2Yn9Pzl+g7vEOCx6bDIHHwSrHz7SL0ACuE5P
-         Wyqp9Y6nzVzzXJfB1xxOfk55WGYO2VCsJULhUNLpgoXubJuM78K0XQOTEX/oZwXbVhBx
-         ApSQ==
-X-Gm-Message-State: AOAM533w7rPmh1NAzhx2wvaEj1fvwr2wTa3OA2ngk9ClwzDfw155MP3P
-	+Y1Lu6Lhuh5sUFXRfe2E4GSFfjW+Wt+kTg==
-X-Google-Smtp-Source: 
- ABdhPJzzQMza1mRBehzDjAzbpE6sAnuT5vbcN/0JSpY6HCAIBs9RjyOX4XJFupNq8WDAnoBiFlL8vQ==
-X-Received: by 2002:a17:90b:1e49:: with SMTP id
- pi9mr2595048pjb.232.1638240805687;
-        Mon, 29 Nov 2021 18:53:25 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ce68])
-        by smtp.gmail.com with ESMTPSA id
- bt2sm597069pjb.57.2021.11.29.18.53.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Nov 2021 18:53:25 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH v2] influxdb: Upgrade to 1.8.10
-Date: Mon, 29 Nov 2021 18:53:23 -0800
-Message-Id: <20211130025323.3019868-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=YzU0RvbX;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
+ mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1638244921; i=@fujitsu.com;
+	bh=JAM6ov78gwPZz8ChPXQMa+RNbkBFXEzUCYEdYLboD2Y=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=YzU0RvbXWDTwIAWSOrCEhqkWICkNeMpywhxxpI9uVu5IONApDDUBGUiVTQUC8/DED
+	 zh7VN0fV6G8FdWfB92dEA1QFdY4CeqPNoe43+cVeeT0QIu4bptIaf7JEvWfsrQDULI
+	 YaaSb1XVSbYLgVgVToSQb/mdYJ0aC6DKXr9l7lHH8T3tekv4xVy0QY10K1Klrw6Jas
+	 eQC/N/qD3gsUbdeNru1bJzQHFSWli4oLW8rydqh5dMjka4Ek/+FyK1F28pyD1Jxfux
+	 iHAGLeTE2Ebo8t2GL9RMwf+IlORjeMO3RgHIsR7+s4W/1zqv0djXUtBKbJOW2LWA41
+	 4Woqi6ZVmeEvQ==
+Received: from [100.115.32.166] (using TLSv1.2 with cipher
+ DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-a.eu-west-2.aws.ess.symcld.net id BD/AC-17169-932A5A16;
+ Tue, 30 Nov 2021 04:02:01 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrAIsWRWlGSWpSXmKPExsViZ8MxSddi0dJ
+  Eg6P7LS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oy211PZC56zVWyYuJqpgXExWxcjF4eQwBNG
+  iR2PfzNCOBeYJHbeaGCHcE4wSiw5d4Oli5GTg01ATWL6rRusILaIgL7E0tl7mEFsZgEViRe/e
+  9hBbGGBQIk5U04zgtgsAqoSR97uZOpi5ODgFXCW+LDLAyQsIaAgMeXhe7BWXgFBiZMzn7BAjJ
+  GQOPjiBTNEjaLE7MvNLBB2hcSsWW1MELaaxNVzm5gnMPLPQtI+C0n7AkamVYxWSUWZ6RkluYm
+  ZObqGBga6hoamusaWuoYmeolVuol6qaW65anFJbpGeonlxXqpxcV6xZW5yTkpenmpJZsYgUGZ
+  UqzOt4Ox6/I3vUOMkhxMSqK8DHOWJgrxJeWnVGYkFmfEF5XmpBYfYpTh4FCS4F2xACgnWJSan
+  lqRlpkDjBCYtAQHj5II79NZQGne4oLE3OLMdIjUKUZ7jjdrlyxi5mi7dxdIzlxwcDUzx/32Q6
+  uZhVjy8vNSpcR5p4FMFQBpyyjNgxsKi+hLjLJSwryMDAwMQjwFqUW5mSWo8q8YxTkYlYR5PRY
+  CTeHJzCuB2/0K6CwmoLPeLl0MclZJIkJKqoGJdaa0Q2rfR/1NbOGzShbKmicdYJkTNTerdnNt
+  kD+PcFK9r0uOdTDf5UDfzE/Mxca/C1ViZ+zyZLatOfjuw2dOn6kOX1Pezj30sfxjssoxsX0OZ
+  uazhMQWGL84ElM5PXcRg4pJ7oYbT3vC6+U4NI6vZzlZftmnKeT9g8Ncjf6z1vnG2Swz51r1Ka
+  XHV9axJ5Rtprld0Hezq1GfOdtl/eofXLv58wbD2p/KHT9YambNXBrw/qWJ0/uEGWF8Wv3nFac
+  8yNPrjv90bH2jgEflQe5t7Pp9KU0SRxbf3FnPeaTr/lSJ2htiPGyubR+ex4YILFrzY/5P+9xJ
+  7XWH0+f3vHNYtLoqqFjyouFqBd0vbEosxRmJhlrMRcWJACihGRtjAwAA
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-13.tower-571.messagelabs.com!1638244920!460372!1
+X-Originating-IP: [62.60.8.146]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.5; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 14209 invoked from network); 30 Nov 2021 04:02:00 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-13.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 30 Nov 2021 04:02:00 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id C4EF61B2E96
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 30 Nov 2021 04:02:00 +0000 (GMT)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id B811C1B2E95
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 30 Nov 2021 04:02:00 +0000 (GMT)
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.26; Tue, 30 Nov 2021 04:01:38 +0000
+From: Wang Mingyu <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] dnf-plugin-tui: Fix a bug with newer version
+ rpm.
+Date: Tue, 30 Nov 2021 12:01:28 +0800
+Message-ID: <1638244888-120811-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 30 Nov 2021 02:53:27 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 30 Nov 2021 04:02:05 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94146
+ https://lists.openembedded.org/g/openembedded-devel/message/94147
 
-Changes are here [1]
-
-License-Update: Updated copyright info [2]
-
-Fix sh interpreter path
-
-[1] https://dl.influxdata.com/platform/nightlies/1.8/CHANGELOG.md
-[2] https://github.com/influxdata/influxdb/commit/809ac4f0d5280a2391ed1af84e2a331d37525913#diff-c693279643b8cd5d248172d9c22cb7cf4ed163a3c98c8a3f69c2717edd3eacb7
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
-v2: Use sed'ing instead of patching since packaging still catches
-    files under .pc dir created by quilt
+ meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- .../influxdb/{influxdb_1.7.10.bb => influxdb_1.8.10.bb}  | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-dbs/influxdb/{influxdb_1.7.10.bb => influxdb_1.8.10.bb} (84%)
-
-diff --git a/meta-oe/recipes-dbs/influxdb/influxdb_1.7.10.bb b/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
-similarity index 84%
-rename from meta-oe/recipes-dbs/influxdb/influxdb_1.7.10.bb
-rename to meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
-index fa360b8d1d..55c2c41eef 100644
---- a/meta-oe/recipes-dbs/influxdb/influxdb_1.7.10.bb
-+++ b/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "InfluxDB is a time series database designed to handle high write
- HOMEPAGE = "https://www.influxdata.com/products/influxdb-overview/"
+diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+index 2c9e45fce7..d2b1a4ab55 100644
+--- a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
++++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=ba8146ad9cc2a128209983265136e06a"
-+LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=f39a8d10930fb37bd59adabb3b9d0bd6"
+ SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git;branch=master;protocol=https"
+-SRCREV = "b0d80b7129f1d84cc563a4098d869e7420bcf4bc"
++SRCREV = "4b49165051bfdd136986855dd98aa9238eefdf78"
+ PV = "1.3"
  
- FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
- 
-@@ -17,16 +17,16 @@ GO_INSTALL = "\
- "
- 
- SRC_URI = "\
--    git://${GO_IMPORT};protocol=https;branch=1.7;destsuffix=${BPN}-${PV}/src/${GO_IMPORT} \
-+    git://${GO_IMPORT};protocol=https;branch=1.8;destsuffix=${BPN}-${PV}/src/${GO_IMPORT} \
-     file://influxdb \
-     file://influxdb.conf \
- "
- 
- SRC_URI:append:mipsarch = " file://0001-patch-term-module-for-mips-ispeed-ospeed-termios-abs.patch;patchdir=src/${GO_IMPORT}"
- 
--SRCREV = "c958f436b2e538a88a7815aad721c7774a0b8f63"
-+SRCREV = "688e697c51fd5353725da078555adbeff0363d01"
- 
--inherit go-mod systemd update-rc.d useradd
-+inherit go-mod pkgconfig systemd update-rc.d useradd
- 
- USERADD_PACKAGES = "${PN}"
- USERADD_PARAM:${PN} = "--system -d /var/lib/influxdb -m -s /bin/nologin influxdb"
-@@ -35,6 +35,7 @@ do_install:prepend() {
-     rm ${B}/src/${GO_IMPORT}/build.py
-     rm ${B}/src/${GO_IMPORT}/build.sh
-     rm ${B}/src/${GO_IMPORT}/Dockerfile*
-+    sed -i -e "s#usr/bin/sh#bin/sh#g" ${B}/src/${GO_IMPORT}/scripts/ci/run_perftest.sh
- }
- 
- do_install:append() {
+ SRC_URI:append:class-target = " file://oe-remote.repo.sample"
 -- 
-2.34.1
+2.25.1
 
 
