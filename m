@@ -1,136 +1,98 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <costamagna.gianfranco@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B799C433F5
-	for <webhook@archiver.kernel.org>; Wed,  1 Dec 2021 01:54:44 +0000 (UTC)
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
- [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.web08.86219.1638323683327769923
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BC483C433F5
+	for <webhook@archiver.kernel.org>; Wed,  1 Dec 2021 10:37:48 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
+ [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.web09.90509.1638355068002161793
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Nov 2021 17:54:43 -0800
+ Wed, 01 Dec 2021 02:37:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=eqzz+117;
- spf=pass (domain: gmail.com, ip: 209.85.215.169,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id 200so21866184pga.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=JoXX5XCk;
+ spf=pass (domain: gmail.com, ip: 209.85.221.42,
+ mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-wr1-f42.google.com with SMTP id c4so51133858wrd.9
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Nov 2021 17:54:43 -0800 (PST)
+ Wed, 01 Dec 2021 02:37:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=0+XtFm4frZ+V5lzrV4kzntM98B44dZtJi3Yc7zTaneg=;
-        b=eqzz+117PZ/27vIsaliLW3qCQ/Gv2dOHCb9rlinh5ONrNKp9tlT0+JYiuno+4NWj6G
-         j3f7Qn5dkG12BzlQXbqd5jVHmhWFPeNYCbtRwecxm3In/XU1sSmjyJaYWNcMB5b4pgTh
-         iGVJjt7Txxq06qVgTXuGZwxVJqDyxJzluvqEEvNQSD27UDwRBXK9Okt9MdUPsObSlANN
-         GGuc5pMRv0f3dDLaF4BSMf2KEaRAzKdvr+xDjS1gp4yMzwkZbX1de64016pKI+vtkAwh
-         AKS2wHgI4UUk2tSrHJHP/JvpBwt+GWGWhZjYENIdEQNw7sGhgC3o0ShmNfMe4+Yw5N3/
-         XvHA==
+        bh=x/hVGJIQTXoYAv997pzlxVIUZzLFKH17pfL1O62nAg0=;
+        b=JoXX5XCkQhFterrSTtMpl4R6XpoLAJXpIvCcvUQVxuwFW7rIelHFpmCaSJdrl3VDY0
+         nXpFrBhAQi5XYczg1H92/FT7hly2wuv/XHFQ29DSg1EVyy/1DRpwTlP/XuLHGzotlsAn
+         6D27mvl/73Rk+967xn8KqUL/OXo3I8AwCehrTjy14sQZO/aNqyirj/DAUFLWb4VUfCOk
+         kq1HpC66TEhuDXNweFpjiFy6dldnx/tioT97w7wRZd2HVKythhlFRaewArUCLpcH70Tl
+         GkxohPx/t0zboPPzPNwo203l/P8lxSE3qnUjm1opWwh296y30Z3U3E0tNS2in703UM8Q
+         TVmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=0+XtFm4frZ+V5lzrV4kzntM98B44dZtJi3Yc7zTaneg=;
-        b=T7AnCYH/6OC1gj0rOB5829OM6EFlWR7qKxECaLJ9Sfgy/0+dbrj96iOSpwxgOV/Clb
-         TkR0uj1Uk8YPxrAg96lP8gbW5+WklLg8yKXVJc/bgj8rz/3uVs7jtyLjdkv0pY/+dmQt
-         2FEHm7H31l24s+7ADa/GnMTaYQMo1iDkBX4vQpeqllFMpbvAV1GnFqGshz4KxD0DHbOS
-         G2ELsnUQu2v8T1LTTRgbFygESARA757PGweHFqS+pyTBRr1RD6ib/tqbZ2Xrpc+sMczQ
-         uJbvdW0pz0VcbSOXaT4yPnqSzuAvvO5i7AXBni4RrbjzbcAzGAYFF2waLtqr1cauBMQO
-         nM2Q==
-X-Gm-Message-State: AOAM531rGU67Sv8/lrbnAjVfLPReRO6IXUHTM+51s1vyWvyNPT57HoMs
-	YFJmU729Sx92mnQJ9FBn/ZoZEo51UCTCiw==
+        bh=x/hVGJIQTXoYAv997pzlxVIUZzLFKH17pfL1O62nAg0=;
+        b=zksWVgXG5mdJq/UpxgDmF38oHCSz8Aysr//owsNoONCFMVSS3Ntt8AXa+OMlxK3aUh
+         hMcAriClOBPUkUF/PXrfkORt5C00KKXUmCyo4RJR5CfWHqiozrQJP9WPBZlfUx30M7Fx
+         67m5YpLguu61+Kb2onlJUoFlwbkmIsFSv9ke7MKFg0U+s0xQ5pecRw1cORR34k3mIjUt
+         M59tJKm+GAuLOWpK60X/YaWOFtSRyN8hgrF8yf6KbB82b3S5Pvw0nv1dAIlw1DQp76tc
+         2GUdELAIxXzjYjCmIvfbS96oXVzZ/yqJsb8EWYDnPJtLjxUTOdGsyFSnGmMsM/xNiOql
+         RG9w==
+X-Gm-Message-State: AOAM531isG8Mn3PZ/QNDebOv9zVnsSSdEmUpsPLc8bzXDuq29VVJlxL1
+	fzBLkR8QExLqiS0PdEDzaJTt5J1M1c76fw==
 X-Google-Smtp-Source: 
- ABdhPJwPY0e7Iu2IHML2zu9MTJJCWqIGbmLcnoYn+qygwa0eskU10Eof5dbqKnepwr8NuvbraSq8/Q==
-X-Received: by 2002:a05:6a00:99e:b0:49f:f9e2:c116 with SMTP id
- u30-20020a056a00099e00b0049ff9e2c116mr2804208pfg.83.1638323682524;
-        Tue, 30 Nov 2021 17:54:42 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ce68])
-        by smtp.gmail.com with ESMTPSA id
- h2sm23119633pfc.190.2021.11.30.17.54.41
+ ABdhPJzHbVlk86tHbbmH7mEyVw4iLn9KjSDyn5HJZndGw4A5lX98sWZMWbOsmujqli3eoQyn1r68fw==
+X-Received: by 2002:adf:e8d1:: with SMTP id k17mr5522572wrn.465.1638355066106;
+        Wed, 01 Dec 2021 02:37:46 -0800 (PST)
+Received: from Unimatrix08-Focal.lan (93-50-192-18.ip153.fastwebnet.it.
+ [93.50.192.18])
+        by smtp.gmail.com with ESMTPSA id m1sm584666wme.39.2021.12.01.02.37.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Nov 2021 17:54:42 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+        Wed, 01 Dec 2021 02:37:45 -0800 (PST)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] influxdb: Fix build with Go 1.17 on x86_64
-Date: Tue, 30 Nov 2021 17:54:40 -0800
-Message-Id: <20211201015440.760589-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	Gianfranco Costamagna <locutusofborg@debian.org>
+Subject: [meta-oe][PATCH] vboxguestdrivers: upgrade 6.1.28 -> 6.1.30
+Date: Wed,  1 Dec 2021 11:37:44 +0100
+Message-Id: <20211201103744.71732-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 01 Dec 2021 01:54:44 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 01 Dec 2021 10:37:48 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94161
+ https://lists.openembedded.org/g/openembedded-devel/message/94162
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 ---
- ...1.2-xxhash-to-fix-build-with-go-1.17.patch | 39 +++++++++++++++++++
- .../recipes-dbs/influxdb/influxdb_1.8.10.bb   |  1 +
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/influxdb/influxdb/0001-Use-v2.1.2-xxhash-to-fix-build-with-go-1.17.patch
+ ...{vboxguestdrivers_6.1.28.bb => vboxguestdrivers_6.1.30.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_6.1.28.bb => vboxguestdrivers_6.1.30.bb} (95%)
 
-diff --git a/meta-oe/recipes-dbs/influxdb/influxdb/0001-Use-v2.1.2-xxhash-to-fix-build-with-go-1.17.patch b/meta-oe/recipes-dbs/influxdb/influxdb/0001-Use-v2.1.2-xxhash-to-fix-build-with-go-1.17.patch
-new file mode 100644
-index 0000000000..e31c7be1ec
---- /dev/null
-+++ b/meta-oe/recipes-dbs/influxdb/influxdb/0001-Use-v2.1.2-xxhash-to-fix-build-with-go-1.17.patch
-@@ -0,0 +1,39 @@
-+From 4ca405e9763fd0ba747ef00edd30648b66992fbb Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 30 Nov 2021 15:14:39 -0800
-+Subject: [PATCH] Use v2.1.2 xxhash to fix build with go 1.17
-+
-+Fixes
-+| # github.com/cespare/xxhash
-+| asm: xxhash_amd64.s:120: when dynamic linking, R15 is clobbered by a global variable access and is used here: 000
-+92 (/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux/influxdb/1.8.10-r0/build/pkg/mod/github.com/cespare/xxhash@
-+v1.1.0/xxhash_amd64.s:120)        ADDQ    R15, AX
-+| asm: assembly failed
-+
-+Upstream-Status: Backport [https://github.com/cespare/xxhash/commit/e7a6b52374f7e2abfb8abb27249d53a1997b09a7]
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ go.mod | 3 ++-
-+ go.sum | 2 ++
-+ 2 files changed, 4 insertions(+), 1 deletion(-)
-+
-+--- a/go.mod
-++++ b/go.mod
-+@@ -55,3 +55,5 @@ require (
-+ 	gonum.org/v1/gonum v0.6.0 // indirect
-+ 	google.golang.org/grpc v1.26.0
-+ )
-++
-++replace github.com/cespare/xxhash => github.com/kraj/xxhash v1.1.1-0.20211201014032-8254a11eab56
-+--- a/go.sum
-++++ b/go.sum
-+@@ -188,6 +188,8 @@ github.com/kr/pretty v0.1.0/go.mod h1:dA
-+ github.com/kr/pty v1.1.1/go.mod h1:pFQYn66WHrOpPYNljwOMqo10TkYh1fy3cYio2l3bCsQ=
-+ github.com/kr/text v0.1.0 h1:45sCR5RtlFHMR4UwH9sdQ5TC8v0qDQCHnXt+kaKSTVE=
-+ github.com/kr/text v0.1.0/go.mod h1:4Jbv+DJW3UT/LiOwJeYQe1efqtUx/iVham/4vfdArNI=
-++github.com/kraj/xxhash v1.1.1-0.20211201014032-8254a11eab56 h1:hCQ0jTkNInQ7PpNeGlSV9s+QMi6nUyyMuz37Bg3TduE=
-++github.com/kraj/xxhash v1.1.1-0.20211201014032-8254a11eab56/go.mod h1:XrSqR1VqqWfGrhpAt58auRo0WTKS1nRRg3ghfAqPWnc=
-+ github.com/lib/pq v1.0.0 h1:X5PMW56eZitiTeO7tKzZxFCSpbFZJtkMMooicw2us9A=
-+ github.com/lib/pq v1.0.0/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
-+ github.com/mattn/go-colorable v0.0.9 h1:UVL0vNpWh04HeJXV0KLcaT7r06gOH2l4OW6ddYRUIY4=
-diff --git a/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb b/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
-index 55c2c41eef..4736839c69 100644
---- a/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
-+++ b/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
-@@ -18,6 +18,7 @@ GO_INSTALL = "\
- 
- SRC_URI = "\
-     git://${GO_IMPORT};protocol=https;branch=1.8;destsuffix=${BPN}-${PV}/src/${GO_IMPORT} \
-+    file://0001-Use-v2.1.2-xxhash-to-fix-build-with-go-1.17.patch;patchdir=src/${GO_IMPORT} \
-     file://influxdb \
-     file://influxdb.conf \
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.28.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.30.bb
+similarity index 95%
+rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.28.bb
+rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.30.bb
+index 014fe30bb..9bbc9b427 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.28.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.30.bb
+@@ -16,8 +16,8 @@ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2
+     file://0001-utils-fix-build-against-5.15-libc-headers-headers.patch \
  "
+ 
+-SRC_URI[md5sum] = "c6efae8dc115b90c6124e13126794c4f"
+-SRC_URI[sha256sum] = "8d34993d8e9c0cf35e7bd44dd26c8c757f17a3b7d5a64052f945d00fd798ebfe"
++SRC_URI[md5sum] = "2e408e56e92cf778eb8722dbbcb5c357"
++SRC_URI[sha256sum] = "3c60a29375549ffc148aaebe859be91b27c19d6fa2deefde1373c4f6da8f18ef"
+ 
+ S ?= "${WORKDIR}/vbox_module"
+ S:task-patch = "${WORKDIR}/${VBOX_NAME}"
 -- 
-2.34.1
+2.25.1
 
 
