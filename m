@@ -1,118 +1,119 @@
-Return-Path: <xuhuan.fnst@fujitsu.com>
+Return-Path: <jpuhlman@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EA1D2C433F5
-	for <webhook@archiver.kernel.org>; Thu,  2 Dec 2021 03:42:15 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.2])
- by mx.groups.io with SMTP id smtpd.web08.3754.1638416534635692330
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C77DDC433EF
+	for <webhook@archiver.kernel.org>; Thu,  2 Dec 2021 04:31:53 +0000 (UTC)
+Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com
+ [209.85.222.181])
+ by mx.groups.io with SMTP id smtpd.web11.4235.1638419511340603614
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Dec 2021 19:42:15 -0800
+ Wed, 01 Dec 2021 20:31:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=wgbtaQdH;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.2,
- mailfrom: xuhuan.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1638416532; i=@fujitsu.com;
-	bh=OdSHxvExaYBgk/pqkkYwT1XQluSAV9Mfi0qYwrxeUqg=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=wgbtaQdHGUMrFXQtcyMbxwNZJiMarnjRSdBcS7JwyJhKpRa3Di8+XJovkSVRNim5Y
-	 zP3HPEVqV+RktDQ9D/ps0ZgvbiLdbxWVdrqSvdWOnJai8eh6+fnh9H4OKpsM40gL51
-	 xLd8qNLvZgtugTi3VlI31IKdatfO/v9IBwXcI8oSmACuae9k09X32X4Av0K/4CSicZ
-	 YGg8xGLsTSNt1w2ic5ATYR6NFl+9xJHPO/qyL0SS0jidRK8SLWcBI6tnZ0zANQsMAv
-	 mC8sDEJihul1G7cr5F/B8mUHNWL5EnyVBKpwp2MjxeE+QY05q91kLL/QTiprhOR4Mu
-	 pCA3Y9TvPnyAw==
-Received: from [100.115.39.55] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-west-2.aws.ess.symcld.net id 3B/3B-16121-49048A16;
- Thu, 02 Dec 2021 03:42:12 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8MxSXeKw4p
-  Eg82/WC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oy7l4+xF/zmrPi9Zxl7A+Mszi5GLg4hgSeM
-  Ek//TWaHcC4wSZxed5URwjnBKLFlz2ogh5ODTUBd4vHN12C2iIC+xNLZe5hBbGYBVYnui2uAu
-  jk4hAW8JBavLwMJswioSHw8swashFfATeLuw2tMILaEgILElIfvoeKCEidnPmGBGCMhcfDFC2
-  aIGiWJEys+QtVXSLw+fAkqriZx9dwm5gmM/LOQtM9C0r6AkWkVo3VSUWZ6RkluYmaOrqGBga6
-  hoamusZGukYGhXmKVbqJeaqlueWpxia6RXmJ5sV5qcbFecWVuck6KXl5qySZGYFimFCuc3MH4
-  +9I3vUOMkhxMSqK8r1hWJArxJeWnVGYkFmfEF5XmpBYfYpTh4FCS4J1oC5QTLEpNT61Iy8wBx
-  ghMWoKDR0mEtw0kzVtckJhbnJkOkTrFqCglzhtnAZQQAElklObBtcHi8hKjrJQwLyMDA4MQT0
-  FqUW5mCar8K0ZxDkYlYd619kBTeDLzSuCmvwJazAS0+PCs5SCLSxIRUlINTL668c4dW6/59O7
-  b2ct2yvn9rC6vdD+jm1qdvyOuf8mub3ZV275dzuOUQ2Pn0SXvilRPfvO488ZxaaBb2w5pd7bG
-  HekRAeUX9F7dX9T1KGeh/i/xO6+uLxW/9L/dau3nE38kl2naS2cYf+/Qq9ez6r1/bmLrWdl74
-  VmaMq9bTpjMXzmtxV/jm+2lyZsU1xWVGiWu+/nObpp1Ko/hxh9mXbFzjpkyXD+0Sttq52WNY0
-  Z23e7hAu6bnKeLtbc62+4tneNdJtS89mHNIql33J0fp0769S/OW/bPjiqNJ1PltNUrA9epr6n
-  Ved2VX/163+PmuUf+xX/kWtnikGum51+usTXKKUSd81f1oZYJyxeVK7EUZyQaajEXFScCABLH
-  fUJGAwAA
-X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-2.tower-571.messagelabs.com!1638416531!96047!1
-X-Originating-IP: [62.60.8.146]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.7; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 27912 invoked from network); 2 Dec 2021 03:42:12 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-2.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 2 Dec 2021 03:42:12 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 74D2B100344
-	for <openembedded-devel@lists.openembedded.org>;
- Thu,  2 Dec 2021 03:42:13 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 6890E1000FE
-	for <openembedded-devel@lists.openembedded.org>;
- Thu,  2 Dec 2021 03:42:13 +0000 (GMT)
-Received: from localhost.localdomain.localdomain (10.167.225.131) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Thu, 2 Dec 2021 03:41:58 +0000
-From: XU Huan <xuhuan.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-pymongo: upgrade 3.12.0 -> 4.0
-Date: Thu, 2 Dec 2021 11:41:37 +0800
-Message-ID: <1638416497-5910-1-git-send-email-xuhuan.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@mvista.com header.s=google header.b=gUC0lO6U;
+ spf=pass (domain: mvista.com, ip: 209.85.222.181,
+ mailfrom: jpuhlman@mvista.com)
+Received: by mail-qk1-f181.google.com with SMTP id p4so33469757qkm.7
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 01 Dec 2021 20:31:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google;
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :references:from:in-reply-to:content-transfer-encoding;
+        bh=y92H4Ik+6gXo3d96KQ5iUbG4JezXYFWiC91W/CpCDVU=;
+        b=gUC0lO6UP371FNckejFTdWiFxuqwrj8610qaR71F1dmS3ut+ygGhoYEEsRMymzW6NQ
+         nCIiimHYcCkOkBGnM2OzqNfa9/dIKGNNc6ySjI6Sr4hFUpBPh/cdyRJqkqulYGkeov8c
+         q18NQYkPd/WctwOqybymFPeObprcIZiHAjlNI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:references:from:in-reply-to
+         :content-transfer-encoding;
+        bh=y92H4Ik+6gXo3d96KQ5iUbG4JezXYFWiC91W/CpCDVU=;
+        b=nreslwbgS5t6bloL2BqDITU4169TytPYYs2oJpa6zviwxmFxMHwFShAugR27Gg5MM6
+         gUDhpIsain5+nx7cZU0XRUgNLoicINxO/rr4SWIKHAZXqFzaJJIC4WTQ7KTsiBum4IHE
+         +hNArvlkMcwS9z3pZN+2R5yXFzUBiYHWpRBaxOgpdZkLDYpb3UyhXQNHYcH8IQwfEKBs
+         tZam2XCKZZrgi76rlK2rnQP4bi1UBSEq09tyYT4PWFAV5DYreD1rQLB7e+kI5LVHVu4r
+         ZHFe3WEjEhwzJxaUhjwzGRqXMJDhH9dTQsQFh9AKAx2FrT4XDOL2AZT/5LByOD3S2cyj
+         KfIQ==
+X-Gm-Message-State: AOAM530u06xH7guKnFbBoaHTOPih7dPIHKnkyyr1u98fFuNvDxAi78vD
+	e4bw/5ZXiW/+KXFbO/Kkqz595A==
+X-Google-Smtp-Source: 
+ ABdhPJwAa6qALcva+nsKcDqAQ6kwS5OW2VQ8/rnWA4o2hjuoaC1ZHpyZio2pisUlrRgqCwyG2v3Lng==
+X-Received: by 2002:a05:620a:1991:: with SMTP id
+ bm17mr10437870qkb.459.1638419510440;
+        Wed, 01 Dec 2021 20:31:50 -0800 (PST)
+Received: from [192.168.1.23] (99-14-97-149.lightspeed.frokca.sbcglobal.net.
+ [99.14.97.149])
+        by smtp.gmail.com with ESMTPSA id
+ m15sm926162qkp.76.2021.12.01.20.31.49
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 01 Dec 2021 20:31:50 -0800 (PST)
+Message-ID: <afc2524e-418c-5731-f055-76a2f200c018@mvista.com>
+Date: Wed, 1 Dec 2021 20:31:50 -0800
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.131]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.3.2
+Subject: Re: [oe] [meta-networking][hardknott][gatesgarth][PATCH] ifenslave:
+ Add branch=main
+Content-Language: en-US
+To: akuster808 <akuster808@gmail.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20211130193715.32154-1-jpuhlman@mvista.com>
+ <888231dc-1302-2dc6-aada-51c5b6132824@gmail.com>
+From: Jeremy Puhlman <jpuhlman@mvista.com>
+In-Reply-To: <888231dc-1302-2dc6-aada-51c5b6132824@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Dec 2021 03:42:15 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Dec 2021 04:31:53 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94169
+ https://lists.openembedded.org/g/openembedded-devel/message/94170
 
-From: Xu Huan <xuhuan.fnst@fujitsu.com>
 
-See changelog: https://github.com/mongodb/mongo-python-driver/blob/master/doc/changelog.rst
 
-Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
----
- .../{python3-pymongo_3.12.0.bb => python3-pymongo_4.0.bb}       | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pymongo_3.12.0.bb => python3-pymongo_4.0.bb} (91%)
+On 11/30/2021 2:34 PM, akuster808 wrote:
+>
+> On 11/30/21 11:37 AM, Jeremy Puhlman wrote:
+>> master branch has been removed upstream
+>>
+>> Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
+> thanks. I have a fix already staging in stable hardknott testing.
+If you mean:
+https://git.openembedded.org/meta-openembedded-contrib/commit/?h=stable/hardknott-nut&id=7fbb2767186a4db729efe4f440cc9a992f2ab183
 
-diff --git a/meta-python/recipes-devtools/python/python3-pymongo_3.12.0.bb b/meta-python/recipes-devtools/python/python3-pymongo_4.0.bb
-similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-pymongo_3.12.0.bb
-rename to meta-python/recipes-devtools/python/python3-pymongo_4.0.bb
-index 17975ff5d3..ea057c1804 100644
---- a/meta-python/recipes-devtools/python/python3-pymongo_3.12.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymongo_4.0.bb
-@@ -8,7 +8,7 @@ HOMEPAGE = "http://github.com/mongodb/mongo-python-driver"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
- 
--SRC_URI[sha256sum] = "b88d1742159bc93a078733f9789f563cef26f5e370eba810476a71aa98e5fbc2"
-+SRC_URI[sha256sum] = "6d158eadba3aaab276a3b188b7f467ab0384b68c1d31cfa87335e52addd9dcb6"
- 
- inherit pypi setuptools3
- 
--- 
-2.25.1
+That adds branch=master, which does not exist in the repository anymore, 
+which is why I sent the patch in the first place.
+>
+> -armin
+>
+>> ---
+>>   meta-networking/recipes-support/ifenslave/ifenslave_2.11.bb | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/meta-networking/recipes-support/ifenslave/ifenslave_2.11.bb b/meta-networking/recipes-support/ifenslave/ifenslave_2.11.bb
+>> index 0db9e8a0a..5e547a462 100644
+>> --- a/meta-networking/recipes-support/ifenslave/ifenslave_2.11.bb
+>> +++ b/meta-networking/recipes-support/ifenslave/ifenslave_2.11.bb
+>> @@ -9,7 +9,7 @@ inherit manpages
+>>   MAN_PKG = "${PN}"
+>>   
+>>   SRCREV = "c26e9310f552e69d0d44eb48746e02c9ae4b4f6f"
+>> -SRC_URI = "git://salsa.debian.org/debian/ifenslave.git;protocol=https"
+>> +SRC_URI = "git://salsa.debian.org/debian/ifenslave.git;protocol=https;branch=main"
+>>   
+>>   S = "${WORKDIR}/git"
+>>   
+>>
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#94150): https://lists.openembedded.org/g/openembedded-devel/message/94150
+>> Mute This Topic: https://lists.openembedded.org/mt/87411068/3616698
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>>
 
 
