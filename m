@@ -2,44 +2,52 @@ Return-Path: <hongxu.jia@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78874C433F5
-	for <webhook@archiver.kernel.org>; Thu,  2 Dec 2021 02:06:40 +0000 (UTC)
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web12.2989.1638410799273517302
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F9FFC433EF
+	for <webhook@archiver.kernel.org>; Thu,  2 Dec 2021 02:22:50 +0000 (UTC)
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
+ by mx.groups.io with SMTP id smtpd.web10.3034.1638411769074976043
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Dec 2021 18:06:39 -0800
+ Wed, 01 Dec 2021 18:22:49 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing;
- spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: hongxu.jia@windriver.com)
+ spf=fail (domain: windriver.com, ip: 147.11.3.146, mailfrom: hongxu.jia@windriver.com)
+Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 1B22Megg002543
+	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
+	Wed, 1 Dec 2021 18:22:41 -0800
 Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
  [147.11.82.252])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 1B226a3S003501
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 1B22MexX014879
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 1 Dec 2021 18:06:36 -0800
+	Wed, 1 Dec 2021 18:22:40 -0800 (PST)
 Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Wed, 1 Dec 2021 18:06:35 -0800
+ 15.1.2242.12; Wed, 1 Dec 2021 18:22:39 -0800
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Wed, 1 Dec 2021 18:06:34 -0800
+ 15.1.2242.12 via Frontend Transport; Wed, 1 Dec 2021 18:22:38 -0800
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <raj.khem@gmail.com>
 CC: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] ostree: add nativesdk support
-Date: Thu, 2 Dec 2021 10:06:33 +0800
-Message-ID: <20211202020633.859679-1-hongxu.jia@windriver.com>
+Subject: [PATCH V2] ostree: add nativesdk support
+Date: Thu, 2 Dec 2021 10:22:38 +0800
+Message-ID: <20211202022238.894987-1-hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.27.0
+In-Reply-To: <16BCCDF11B06D3C9.5898@lists.openembedded.org>
+References: <16BCCDF11B06D3C9.5898@lists.openembedded.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Dec 2021 02:06:40 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Dec 2021 02:22:50 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94166
+ https://lists.openembedded.org/g/openembedded-devel/message/94167
 
+# Changed in V2: s/$OECORE_NATIVE_SYSROOT/\$OECORE_NATIVE_SYSROOT/ for
+# ostree wrapper of nativesdk
 Refer the impment of native, use the same PACKAGECONFIG, EXTRA_OECONF
 and similar create_wrapper for ostree
 
@@ -49,7 +57,7 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
  1 file changed, 17 insertions(+), 1 deletion(-)
 
 diff --git a/meta-oe/recipes-extended/ostree/ostree_2021.6.bb b/meta-oe/recipes-extended/ostree/ostree_2021.6.bb
-index 8f37a7f86..188d934cf 100644
+index 8f37a7f86..a80207689 100644
 --- a/meta-oe/recipes-extended/ostree/ostree_2021.6.bb
 +++ b/meta-oe/recipes-extended/ostree/ostree_2021.6.bb
 @@ -52,6 +52,13 @@ PACKAGECONFIG:class-native ??= " \
@@ -83,7 +91,7 @@ index 8f37a7f86..188d934cf 100644
  }
  
 +do_install:append:class-nativesdk() {
-+    create_wrapper ${D}${bindir}/ostree OSTREE_GRUB2_EXEC="$OECORE_NATIVE_SYSROOT/usr/lib/ostree/ostree-grub-generator"
++    create_wrapper ${D}${bindir}/ostree OSTREE_GRUB2_EXEC="\$OECORE_NATIVE_SYSROOT/usr/lib/ostree/ostree-grub-generator"
 +}
 +
  PACKAGE_BEFORE_PN = " \
