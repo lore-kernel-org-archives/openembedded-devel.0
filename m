@@ -2,105 +2,132 @@ Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D2A5C433F5
-	for <webhook@archiver.kernel.org>; Thu,  2 Dec 2021 05:04:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31D27C433F5
+	for <webhook@archiver.kernel.org>; Thu,  2 Dec 2021 05:06:09 +0000 (UTC)
 Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.1])
- by mx.groups.io with SMTP id smtpd.web12.4602.1638421450587700525
+ [195.245.230.2])
+ by mx.groups.io with SMTP id smtpd.web11.4464.1638421567272936590
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Dec 2021 21:04:11 -0800
+ Wed, 01 Dec 2021 21:06:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=VUVtzpG6;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.1,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=VnUnG6a0;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.2,
  mailfrom: zhengrq.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1638421448; i=@fujitsu.com;
-	bh=QtEa5m69yDBJLgzMroJrrWg0/O8Bzidt4sGDwKKbZCU=;
+	s=170520fj; t=1638421565; i=@fujitsu.com;
+	bh=oQnWR/FnIWjBFD9VjsxgMfWV7Hw/WtMmCmuB+P5nNcM=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=VUVtzpG6PD/TCcvVK/KP8bsLBXcnzheKOqy+xUBRpkPJFIWKzq9dVQL6xPIlFFxIB
-	 FfGAD/MgL71rrsyCR6B4ZagD1OyUCTqavub0iKfEyNoq9TqrYp46bk4w+8ysT2stpm
-	 wQFwcRQyRWJG6OyQBYokdpwfcQJwHVrfqPbnfd+FlQ+oCa4TMokpSAv71wE106Q5Am
-	 wz6HljT7KTv5RvzU3+avBnDKngsgAIHQT9zkK4JmvK0waMc/bzWwuvO2ygceTOOCHH
-	 Pz+BSgRTeIxNp0CZMSsqwpBkWuPdKHB5E9OhlIgmjuJAPt9g/w5KC7tCjYwBZwPt5l
-	 n8M5CXHY2S9mg==
+	b=VnUnG6a0G9lVhLcCFHfI2Yyk8vCxIXagwmB7oRtjFo5gteMwApVUThpLoQ3/lRDpH
+	 lio03TKdpCOas/FqYZ1rr9K9kzG5s7UtrtccS7enKJ5kt9F9ZqVEmXOVc3rT2PoYlQ
+	 jxIT4YZDof3S+x7H4e31dhFfBDkensazOeoDXW7hrHgvDH34+Bkj96hVBtk/qtJ6Bm
+	 SGLaE856r4t8wAVnlRzddoccnk0CjY327FQorbAVM5TPxeM5uCOToonn9kUq5nbPkE
+	 vH0ne7btj3jx3giAAab4oWgsGqLLTBh1bAI0cu4HlD0dHbjypCFHVsjFesFF9lYOOb
+	 jL1tuI/a7WVTg==
 Received: from [100.115.2.64] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-a.eu-west-1.aws.ess.symcld.net id 3B/4E-12056-8C358A16;
- Thu, 02 Dec 2021 05:04:08 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuplkeJIrShJLcpLzFFi42Kxs+GYons8eEW
-  iQfN/a4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeP0znVMBVc4K86sfc7SwPido4uRi0NIYAaT
-  xMuDr5ghnN2MEu2rzzF2MXJysAnoSpx7vJYdxBYR0JdYOnsPM4gtLOAt0f9xJhOIzSKgIvFzz
-  gewOK+Au8Ss989ZQGwJAQWJKQ/fQ8UFJU7OfAIWZxaQkDj44gVQnAOoRlFi9nR5iPIKideHLz
-  FPYOSZhaRjFpKOBYxMqxitkooy0zNKchMzc3QNDQx0DQ1NdU11jYyN9RKrdBP1Ukt1y1OLS3Q
-  N9RLLi/VSi4v1iitzk3NS9PJSSzYxAkMppZj15Q7G6X0/9Q4xSnIwKYnyOgWsSBTiS8pPqcxI
-  LM6ILyrNSS0+xCjDwaEkwfswECgnWJSanlqRlpkDDGuYtAQHj5II7+MgoDRvcUFibnFmOkTqF
-  KOilDjvVpCEAEgiozQPrg0WS5cYZaWEeRkZGBiEeApSi3IzS1DlXzGKczAqCfOWg0zhycwrgZ
-  v+CmgxE9Diw7OWgywuSURISTUwJed2eHJpeVcfKn2mL7+1wVAoWrJQ/up7z0aGz0L51jXei4X
-  EHnW+S3HZumZPi6Tis5X/9aZ0pn0KPc9u13tCO9VDbpbvTlkNeTHl+1O5JqukdVkz//BKONh9
-  +azMxn+R/H6zv0RuzFi2c/HaLpsy8W9FCcXc9sw6T43v/uL5eVznZvDGGcZ8U7ROcTmLFqX8a
-  Ml4M/tL+tSn35nXnHp2u9xlreutdytinuocaju1JPqkudTv1tITGiLhU2WWWTn4XjQp8NYttY
-  vYWRX24kmYG4uqiaJPqs45T7e4WVnK+n3aFRs891qe0WD6bu2ut8K2tFe9eGH4saMPLc86rJ4
-  k91+HZ0ZofFPRe02+/0osxRmJhlrMRcWJADUnb8wgAwAA
+	by server-2.bemta.az-a.eu-west-1.aws.ess.symcld.net id A8/07-14731-D3458A16;
+ Thu, 02 Dec 2021 05:06:05 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrAIsWRWlGSWpSXmKPExsViZ8ORqGsbsiL
+  RoHMLk8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvFoWzNrwXKxijeTX7M0MD4S7mLk4hASeMIo
+  sb19NSOEc4FJounhMnYIZzejROf5OUAZTg42AV2Jc4/XsoPYIgL6Ektn72EGsYUFvCReTrkFZ
+  HNwsAioSFy/6wdi8gq4S8x+FQJSISGgIDHl4Xuwal4BQYmTM5+wgNjMAhISB1+8AOuUEFCUmD
+  1dHqK8QuL14UvMELaaxNVzm5gnMPLNQtI9C0n3AkamVYxWSUWZ6RkluYmZObqGBga6hoamuqa
+  6RsbGeolVuol6qaW65anFJbqGeonlxXqpxcV6xZW5yTkpenmpJZsYgYGXUsz6cgfj9L6feocY
+  JTmYlER5nQJWJArxJeWnVGYkFmfEF5XmpBYfYpTh4FCS4H0YCJQTLEpNT61Iy8wBRgFMWoKDR
+  0mE93EQUJq3uCAxtzgzHSJ1ilGXo3nS8u3MQix5+XmpUuK8W0GKBECKMkrz4EbAIvISo6yUMC
+  8jAwODEE9BalFuZgmq/CtGcQ5GJWHecpApPJl5JXCbXgEdwQR0xOFZy0GOKElESEk1MEmuuNP
+  RfVtgZ9sr78L8ze45vZv/lGSduTfrrYj9e+tIppSesOwPWwyu3PcP/pV8rrznw6aW179stt+f
+  Nq+q9cDnP2HfZx5IuXY059X9XR8WrefNnsDe2/794L04vszrN/J+vfuivD/2hHPOuyL+7lOLL
+  n1JuCj2NJJLci9b9blJ1484XHyR+CWzyuvVzCK3M4u2H9TOWSFT7cDBUqzd3x3JHlZcfP2gmN
+  QZgfZ/UwSVFyapszUc5HPkrbY6YGEafPaXgdbVVh3ue5Yvlqeq3DDjDpGJWTHVv+q6XVCO2UF
+  zyb9RcX21k3Mc5ofE/csvFdHYutvu1OTGyZ/qQiJuH90j+Pmb2ISQ0zw3mnMC1iqxFGckGmox
+  FxUnAgA4kmqCQwMAAA==
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-3.tower-587.messagelabs.com!1638421447!79740!1
-X-Originating-IP: [62.60.8.148]
+X-Msg-Ref: server-3.tower-587.messagelabs.com!1638421564!79853!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 7555 invoked from network); 2 Dec 2021 05:04:07 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+Received: (qmail 11729 invoked from network); 2 Dec 2021 05:06:05 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
   by server-3.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 2 Dec 2021 05:04:07 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1B2542aa030826
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 2 Dec 2021 05:04:07 GMT
+ encrypted SMTP; 2 Dec 2021 05:06:05 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 894BF1009EF
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu,  2 Dec 2021 05:06:04 +0000 (GMT)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 7E63210024D
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu,  2 Dec 2021 05:06:04 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Thu, 2 Dec 2021 05:04:00 +0000
+ (TLS) id 15.0.1497.26; Thu, 2 Dec 2021 05:05:47 +0000
 From: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] python3-typeguard: upgrade 2.13.0 -> 2.13.2
-Date: Thu, 2 Dec 2021 13:03:48 +0800
-Message-ID: <1638421428-2478-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] vboxguestdrivers: upgrade 6.1.28 -> 6.1.30
+Date: Thu, 2 Dec 2021 13:05:37 +0800
+Message-ID: <1638421537-2534-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.35]
 X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Dec 2021 05:04:12 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Dec 2021 05:06:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94171
+ https://lists.openembedded.org/g/openembedded-devel/message/94172
 
-Fixed typing_extensions being imported unconditionally on Python < 3.9
+Changelog:
+VMM: Fixed 6.1.28 regression preventing VMs starting when using Hyper-V mode on Windows 10
+GUI: Fixed inability to complete First Run wizard after browsing for an external image
+GUI: Fixed crash on macOS Big Sur while browsing for an external image from First Run wizard
+GUI: Fixed bug on Windows with inability to save taken screenshot under a folder with native name (bug #15561)
+GUI: Fixed bug on X11 with drag and drop initiated on single mouse click in VM storage settings
+GUI: Fixed settings check on machines not supporting hardware virtualization
+GUI: Non critical media related errors should not cause modal pop-up error messages
+Host-only networking: Fixed crash parsing /etc/vbox/networks.conf
+DVD: Fixed drive lock handling across VM reset
+VBoxHeadless: Fixed crash when running on macOS Monterey (bug #20636)
+VBoxManage: Fixed incorrect help text for "hostonlyif"
+vboximg-mount: Error message if no image is specified
+macOS host: fix multiple bugs specific to macOS Monterey in installer and startup of kernel extensions
+macOS host: show message indicating the unsupported CPU on M1 based Macs and abort installation
+Linux host: For all distribution specific packages (deb/rpm format) fix the packaging so that the feature for unattended installation of guest OSes works
+Linux host and guest: Introduced initial support for kernel 5.16
+Shared Clipboard: Improved communication between guest and host when guest has no clipboard data to report
+Linux Guest Additions: Allow running only one VBoxDRMClient instance (bug #19373)
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- ...{python3-typeguard_2.13.0.bb => python3-typeguard_2.13.2.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-typeguard_2.13.0.bb => python3-typeguard_2.13.2.bb} (87%)
+ .../{vboxguestdrivers_6.1.28.bb => vboxguestdrivers_6.1.30.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_6.1.28.bb => vboxguestdrivers_6.1.30.bb} (95%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-typeguard_2.13.0.bb b/meta-python/recipes-devtools/python/python3-typeguard_2.13.2.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-typeguard_2.13.0.bb
-rename to meta-python/recipes-devtools/python/python3-typeguard_2.13.2.bb
-index 564f98e3f2..b7ae4a32c4 100644
---- a/meta-python/recipes-devtools/python/python3-typeguard_2.13.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-typeguard_2.13.2.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/typeguard/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f0e423eea5c91e7aa21bdb70184b3e53"
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.28.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.30.bb
+similarity index 95%
+rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.28.bb
+rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.30.bb
+index 014fe30bbc..099d82ae42 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.28.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.30.bb
+@@ -16,8 +16,7 @@ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2
+     file://0001-utils-fix-build-against-5.15-libc-headers-headers.patch \
+ "
  
--SRC_URI[sha256sum] = "04e38f92eb59410c9375d3be23df65e0a7643f2e8bcbd421423d808d2f9e99df"
-+SRC_URI[sha256sum] = "7e50071590ab997509aa0977609eb5cf9d73d84c1f416cb4fab78b77a9d15326"
+-SRC_URI[md5sum] = "c6efae8dc115b90c6124e13126794c4f"
+-SRC_URI[sha256sum] = "8d34993d8e9c0cf35e7bd44dd26c8c757f17a3b7d5a64052f945d00fd798ebfe"
++SRC_URI[sha256sum] = "3c60a29375549ffc148aaebe859be91b27c19d6fa2deefde1373c4f6da8f18ef"
  
- inherit pypi setuptools3 ptest
- 
+ S ?= "${WORKDIR}/vbox_module"
+ S:task-patch = "${WORKDIR}/${VBOX_NAME}"
 -- 
 2.25.1
 
