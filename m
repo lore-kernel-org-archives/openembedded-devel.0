@@ -1,109 +1,116 @@
-Return-Path: <hongxu.jia@windriver.com>
+Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F9FFC433EF
-	for <webhook@archiver.kernel.org>; Thu,  2 Dec 2021 02:22:50 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web10.3034.1638411769074976043
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 06028C433F5
+	for <webhook@archiver.kernel.org>; Thu,  2 Dec 2021 02:41:43 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.2])
+ by mx.groups.io with SMTP id smtpd.web08.3236.1638412901256637677
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Dec 2021 18:22:49 -0800
+ Wed, 01 Dec 2021 18:41:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=fail (domain: windriver.com, ip: 147.11.3.146, mailfrom: hongxu.jia@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 1B22Megg002543
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
-	Wed, 1 Dec 2021 18:22:41 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 1B22MexX014879
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 1 Dec 2021 18:22:40 -0800 (PST)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Wed, 1 Dec 2021 18:22:39 -0800
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Wed, 1 Dec 2021 18:22:38 -0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-CC: <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH V2] ostree: add nativesdk support
-Date: Thu, 2 Dec 2021 10:22:38 +0800
-Message-ID: <20211202022238.894987-1-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <16BCCDF11B06D3C9.5898@lists.openembedded.org>
-References: <16BCCDF11B06D3C9.5898@lists.openembedded.org>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=uwyCUI6E;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.2,
+ mailfrom: zhengrq.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1638412898; i=@fujitsu.com;
+	bh=x1ff0bspkcrtJ07nf65vtxxcwY7nL0C5soPWEGWjUag=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=uwyCUI6ECRmVmiAArw1mJ4fNHdPOQ4dT55Wm1YCFplgJrCvLReMWN+k1ILoIwGLGS
+	 8ghnIRyTS9K3DL4wNz/U1Bw4/QTUPLncNKIWwVOVT0ym0bysOypIWDnqXve+TtJOxe
+	 4D3sXpB0gkqmW+s6dudtGltzP61438OR3iEopARY7sBWo5mp/TvhlromxWIxcBqd6w
+	 sX4D4k5iAKvUzxe/Av9tYuGH9qr86y10+ryzwrvIShRC0XExNc7zVlBA4FVH64+Y91
+	 7QXur97jg4tGlkpcYN9RXEpmHiiNNwpQno54RCZErQ5vIxoUviwM9G3bZaekTdedsd
+	 s0wE8HTqqXQYg==
+Received: from [100.115.2.64] (using TLSv1.2 with cipher
+ DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-a.eu-west-1.aws.ess.symcld.net id 76/A2-14731-26238A16;
+ Thu, 02 Dec 2021 02:41:38 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuplkeJIrShJLcpLzFFi42Kxs+GYoptktCL
+  RoGcBq8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmtFz5QxrQQNPxa8XJ9kbGD9ydTFycQgJzGCS
+  WHd7BzuEs5tR4uesFcxdjJwcbAK6Eucer2UHsUUE9CWWzt4DFhcW8JC4euQomM0ioCLROmEKE
+  4jNK+Am8Wp9OyOILSGgIDHl4XtmiLigxMmZT1hAbGYBCYmDL14AxTmAahQlZk+XhyivkHh9+B
+  LzBEaeWUg6ZiHpWMDItIrRKqkoMz2jJDcxM0fX0MBA19DQVNdQ18jAWC+xSjdRL7VUtzy1uET
+  XUC+xvFgvtbhYr7gyNzknRS8vtWQTIzCUUooZT+9g3NT3U+8QoyQHk5Io7yuWFYlCfEn5KZUZ
+  icUZ8UWlOanFhxhlODiUJHiLdYFygkWp6akVaZk5wLCGSUtw8CiJ8H7SA0rzFhck5hZnpkOkT
+  jEqSonznjAASgiAJDJK8+DaYLF0iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5IwrwbIFJ7MvB
+  K46a+AFjMBLT48aznI4pJEhJRUA9OGSX9ZeSfun3iB565M58PSzzlqK11CJMKfH5j4en7Q1Vk
+  lCzdv8dQ0j7qWYSYl/GJqwZv773cXHl307bja2XyOxBSOaZXHwlxXtu18GR0cVNFq8v3h1Lq6
+  HVb5/HG3brYqbipWL6l++UokfkvrJOmsy//VfQrvXuSs+Ls5xmZ5u9iO2IAna48/fHrbPtZvm
+  5D6QZ70pOIP+qVh15fq9U/4FvVjt5PYeoGNaX3FF3cdtI69XnPFrmN/juuRjxw97J0q8VfWaj
+  SdTzRe2Cxxu2Ais6HpO4Ui/7OBzJuLIufEvpA/u/T8PJe/33P9wjmDr5kenZuUYXL08V+Wj2e
+  vbZ9nFTNbgk/d7kP144mPo7qVWIozEg21mIuKEwEVPRqEIAMAAA==
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-6.tower-591.messagelabs.com!1638412897!179207!1
+X-Originating-IP: [62.60.8.148]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.7; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 8995 invoked from network); 2 Dec 2021 02:41:38 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-6.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 2 Dec 2021 02:41:38 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1B22fVTE025212
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 2 Dec 2021 02:41:37 GMT
+Received: from localhost.localdomain (10.167.225.35) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.26; Thu, 2 Dec 2021 02:41:29 +0000
+From: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-python][PATCH] python3-rdflib: upgrade 6.0.0 -> 6.0.2
+Date: Thu, 2 Dec 2021 10:41:19 +0800
+Message-ID: <1638412879-336-1-git-send-email-zhengrq.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Dec 2021 02:22:50 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Dec 2021 02:41:42 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94167
+ https://lists.openembedded.org/g/openembedded-devel/message/94168
 
-# Changed in V2: s/$OECORE_NATIVE_SYSROOT/\$OECORE_NATIVE_SYSROOT/ for
-# ostree wrapper of nativesdk
-Refer the impment of native, use the same PACKAGECONFIG, EXTRA_OECONF
-and similar create_wrapper for ostree
+changlog:
+====================================================
+rename arg LOVE to ns in rdfpipe
+Remove Tox reference to Python 3.6
+Add Brick DefinedNamespace
+Use setName on TokenConverter to set the name property
+Add test for adding JSON-LD to guess_format()
+Fix mypy type errors and add mypy to .drone.yml
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../recipes-extended/ostree/ostree_2021.6.bb   | 18 +++++++++++++++++-
- 1 file changed, 17 insertions(+), 1 deletion(-)
+ .../{python3-rdflib_6.0.0.bb => python3-rdflib_6.0.2.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-rdflib_6.0.0.bb => python3-rdflib_6.0.2.bb} (65%)
 
-diff --git a/meta-oe/recipes-extended/ostree/ostree_2021.6.bb b/meta-oe/recipes-extended/ostree/ostree_2021.6.bb
-index 8f37a7f86..a80207689 100644
---- a/meta-oe/recipes-extended/ostree/ostree_2021.6.bb
-+++ b/meta-oe/recipes-extended/ostree/ostree_2021.6.bb
-@@ -52,6 +52,13 @@ PACKAGECONFIG:class-native ??= " \
-     soup \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-rdflib_6.0.0.bb b/meta-python/recipes-devtools/python/python3-rdflib_6.0.2.bb
+similarity index 65%
+rename from meta-python/recipes-devtools/python/python3-rdflib_6.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-rdflib_6.0.2.bb
+index 589e6638bf..49e6d33ab4 100644
+--- a/meta-python/recipes-devtools/python/python3-rdflib_6.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-rdflib_6.0.2.bb
+@@ -1,8 +1,8 @@
+ SUMMARY = "RDFLib is a pure Python package for working with RDF"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=89aa9a14f80a6ac70e1d5da763a309ed"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b6cde159c801514e0e45a40cf0a9d3d9"
  
-+PACKAGECONFIG:class-nativesdk ??= " \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
-+    builtin-grub2-mkconfig \
-+    gpgme \
-+    soup \
-+"
-+
- PACKAGECONFIG[avahi] = "--with-avahi, --without-avahi, avahi"
- PACKAGECONFIG[builtin-grub2-mkconfig] = "--with-builtin-grub2-mkconfig, --without-builtin-grub2-mkconfig"
- PACKAGECONFIG[curl] = "--with-curl, --without-curl, curl"
-@@ -89,6 +96,11 @@ EXTRA_OECONF:class-native = " \
-     --disable-otmpfile \
- "
+-SRC_URI[sha256sum] = "7ce4d757eb26f4dd43205ec340d8c097f29e5adfe45d6ea20238c731dc679879"
++SRC_URI[sha256sum] = "6136ae056001474ee2aff5fc5b956e62a11c3a9c66bb0f3d9c0aaa5fbb56854e"
  
-+EXTRA_OECONF:class-nativesdk = " \
-+    --enable-wrpseudo-compat \
-+    --disable-otmpfile \
-+"
-+
- # Path to ${prefix}/lib/ostree/ostree-grub-generator is hardcoded on the
- # do_configure stage so we do depend on it
- SYSROOT_DIR = "${STAGING_DIR_TARGET}"
-@@ -106,6 +118,10 @@ do_install:append:class-native() {
-     create_wrapper ${D}${bindir}/ostree OSTREE_GRUB2_EXEC="${STAGING_LIBDIR_NATIVE}/ostree/ostree-grub-generator"
- }
+ inherit pypi setuptools3
  
-+do_install:append:class-nativesdk() {
-+    create_wrapper ${D}${bindir}/ostree OSTREE_GRUB2_EXEC="\$OECORE_NATIVE_SYSROOT/usr/lib/ostree/ostree-grub-generator"
-+}
-+
- PACKAGE_BEFORE_PN = " \
-     ${PN}-dracut \
-     ${PN}-grub \
-@@ -186,4 +202,4 @@ RRECOMMENDS:${PN} += "kernel-module-overlay"
- SYSTEMD_SERVICE:${PN} = "ostree-remount.service ostree-finalize-staged.path"
- SYSTEMD_SERVICE:${PN}-switchroot = "ostree-prepare-root.service"
- 
--BBCLASSEXTEND = "native"
-+BBCLASSEXTEND = "native nativesdk"
 -- 
-2.27.0
+2.25.1
 
 
