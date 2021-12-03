@@ -2,121 +2,107 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D073C433F5
-	for <webhook@archiver.kernel.org>; Fri,  3 Dec 2021 06:37:20 +0000 (UTC)
-Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com
- [209.85.160.169])
- by mx.groups.io with SMTP id smtpd.web10.8616.1638513438985043957
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A4D0C433F5
+	for <webhook@archiver.kernel.org>; Fri,  3 Dec 2021 06:42:21 +0000 (UTC)
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com
+ [209.85.214.170])
+ by mx.groups.io with SMTP id smtpd.web11.8602.1638513740242534876
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Dec 2021 22:37:19 -0800
+ Thu, 02 Dec 2021 22:42:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=BtVn1F5l;
- spf=pass (domain: gmail.com, ip: 209.85.160.169,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=am7Xz3dj;
+ spf=pass (domain: gmail.com, ip: 209.85.214.170,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f169.google.com with SMTP id v22so2307162qtx.8
+Received: by mail-pl1-f170.google.com with SMTP id b11so1407525pld.12
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Dec 2021 22:37:18 -0800 (PST)
+ Thu, 02 Dec 2021 22:42:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=r2swtzup+UF+bAO9Ss9hW26qY63hCdvucTFJAoV2iug=;
-        b=BtVn1F5lIDrEuflkuX+ZyCRWXOBErxrgv20sp94Q/yYTjV5X20Xg7z7WXVDqacahX6
-         xvFnbkRe9eob7hptqNKohlnfWXlk3LGDUe2+iv6QrJDmkOdXT0VIHGvqr0TgR0bh8EPM
-         3Lou/LsnsGmnkCVvUbHs0GKxBcpEIRk2wPTqMC0+wvnDknyPO86heIaokAy2690DVdK7
-         bQcaHnj+uMtp+321HBzFMCFnHsdGMpZcRduzBEJxUdh/M718YDcrMIFbZvc3QOpPZtPt
-         Y4xR7iV43sVrvU/Gq6N+9dN3m+UOCUz8zuWkRQIflGSe/GSbVh2IMnx908Y9vmQIuZ03
-         fF9Q==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=nm+p2Sr8vqBhBwU1bhT4FLspmipG3Aih0LyiB6UkrGA=;
+        b=am7Xz3djSYK+YS37T7sKEpsFmSP2Or5ncCm1vSRYzIxqYL+eN5iMo7PXVPnciCOfdE
+         KgjQat1nhRDFTD+4ohWaou6K1IC+AwYBEzfBrFx3KYVJvC+Vk55ws2eQ873cUh19S4/t
+         G79YKoWpkopyztpQP3fOxQ/WjtpLGHsvUthIg9P4ifFpnz+Rv6c4XiY4fgIs4UDqby0r
+         NpbEQbC9mFnzoG5JMr5avmvyX894aaRWkymbQ4snrDY/Q4siRC/7DnuwOjlRlr3UQWs4
+         hQacdievmASpdEE5DJHDXO7gq65Y1bhqjIIF61lZILRlHOFPrNSf2x8W3DW+gMNhauKf
+         CRZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=r2swtzup+UF+bAO9Ss9hW26qY63hCdvucTFJAoV2iug=;
-        b=Z4sUKgmgWRguUYcMe93jIIsXsHXgnuRKa/ZYxq8wgogZ3haaOJ0/awuD1Xmig8YK0n
-         TDRxrOfSTr7Fm1F524JGzfHs3n8oy40REuPe7euc671rwjx/7f6MrIqNIgzldHF7YsJ/
-         HfonjxR/Ehne165fQ5ro58FtJRBhU4Xnxdf4gxLbNAExKxwYEN1dlapXZoiBh33+WWnU
-         a+W2GXrcvl0bfdfHNs7TmLzC92G0ozqWHyZETHyIxyWEDAWuDnrGqWJ8j+YMRGwehXeG
-         y0q5XpVWEI9ziQCI4NP2WSfL4Me4D2twnUMVgfs2Kj9vvC96OLjItFAUIlyBmCcY5PNZ
-         WAnA==
-X-Gm-Message-State: AOAM531dgRJjdRJAkp8y/VCLLgD75ltV+9qQHooeMKvbN0S6QNiVLRTu
-	2gwMDkppA1hRECyCqRkLa2KAahxcI3aoyVJ92UI=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=nm+p2Sr8vqBhBwU1bhT4FLspmipG3Aih0LyiB6UkrGA=;
+        b=N7GxsbspcGjngmuPIOYNgHQUYV2jNPSJgWF7zOjFIohnm99PYvotWvXPDDtI4J6Ams
+         0J+1akZT6+m4qw7Ar+9omXF9zXK8E4v3goLauKqfEzCxQJsZY6bPnbT6nK90UYnd02dW
+         Aj8D6posFLCytEjFwWzVVjSZB5wZAy2cSJCYy3ZuDOCHf2Miduu8zw+0y6PNlBzbsNzb
+         sqM1m9RagQNCXC+NXUSIMnSkYE9+3IAGZ8fDfElVbd9+b8qB15LsLp9NMDiMp4OlEycV
+         CGqoNoTQvy7n+MbEI/VJ4KUnDu57OmD/faXdVTcQEXrY88F0tHiMnOHiSWCBODqSJMmM
+         mdNw==
+X-Gm-Message-State: AOAM532FaQlZgRn821F1IaJw2JvrZo2UVMelPX1iFvzsUQtD8uUyrvTT
+	qp8nwYvgvIvqSBV10BULn8dvmEDoJYSxWQ==
 X-Google-Smtp-Source: 
- ABdhPJwsqNf80/FQoiZlbS9yeDkJDpKBW+2ekcxb2Dd/bubtM0zLrd49gYJrzIL+xa31WWwdQLmO0pudNuF4/JhgDEc=
-X-Received: by 2002:aed:30a3:: with SMTP id 32mr18345477qtf.660.1638513437995;
- Thu, 02 Dec 2021 22:37:17 -0800 (PST)
-MIME-Version: 1.0
-References: <1638508918-22365-1-git-send-email-xuhuan.fnst@fujitsu.com>
-In-Reply-To: <1638508918-22365-1-git-send-email-xuhuan.fnst@fujitsu.com>
+ ABdhPJxTEiETPb55UHC4H0/fEaIJx+5Azm4ZPwPQx3bRZa6FkRVG7egY7blm53ftd4KlORkSS8UB3A==
+X-Received: by 2002:a17:90b:2245:: with SMTP id
+ hk5mr11951296pjb.6.1638513739491;
+        Thu, 02 Dec 2021 22:42:19 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ce68])
+        by smtp.gmail.com with ESMTPSA id
+ n11sm1300956pgp.15.2021.12.02.22.42.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 02 Dec 2021 22:42:19 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 2 Dec 2021 22:36:52 -0800
-Message-ID: 
- <CAMKF1soL5JnT2xx8e8cLwZJ2bKfCgd+aCthBWpPCQ5AJHMKsRg@mail.gmail.com>
-Subject: Re: [oe] [meta-python] [PATCH] python3-pycparser: upgrade 2.20 ->
- 2.21
-To: "xuhuan.fnst@fujitsu.com" <xuhuan.fnst@fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [layers][PATCH 1/3] meta-networking,meta-python: Fix README for yocto
+ check layer
+Date: Thu,  2 Dec 2021 22:42:14 -0800
+Message-Id: <20211203064216.2609394-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Dec 2021 06:37:20 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Dec 2021 06:42:21 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94191
+ https://lists.openembedded.org/g/openembedded-devel/message/94192
 
-On Thu, Dec 2, 2021 at 9:22 PM xuhuan.fnst@fujitsu.com
-<xuhuan.fnst@fujitsu.com> wrote:
->
-> From: Xu Huan <xuhuan.fnst@fujitsu.com>
->
-> changelog:
-> =================================================================
->   - Much improved support for C11 (multiple PRs)
->   - Support for parehthesized compount statements
->   - Support for modern Python versions (3.9 and 3.10)
->   - Fix support for structs with nested enums
->   - Multiple small bug fixes
->
-> Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
-> ---
->  ...{python3-pycparser_2.20.bb => python3-pycparser_2.21.bb} | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->  rename meta-python/recipes-devtools/python/{python3-pycparser_2.20.bb => python3-pycparser_2.21.bb} (64%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-pycparser_2.20.bb b/meta-python/recipes-devtools/python/python3-pycparser_2.21.bb
-> similarity index 64%
-> rename from meta-python/recipes-devtools/python/python3-pycparser_2.20.bb
-> rename to meta-python/recipes-devtools/python/python3-pycparser_2.21.bb
-> index fde868a701..3b8a9cd206 100644
-> --- a/meta-python/recipes-devtools/python/python3-pycparser_2.20.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pycparser_2.21.bb
-> @@ -1,10 +1,10 @@
->  SUMMARY = "Parser of the C language, written in pure Python"
->  HOMEPAGE = "https://github.com/eliben/pycparser"
->  LICENSE = "BSD-3-Clause"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=86f1cedb4e6410a88ce8e30b91079169"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=2c28cdeabcb88f5843d934381b4b4fea"
+This ensures that Maintainer entries are as expected
 
-why did this checksum change ? can you add that to commit msg via
-"License-Update" tag ?
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-networking/README | 3 +++
+ meta-python/README     | 2 +-
+ 2 files changed, 4 insertions(+), 1 deletion(-)
 
->
-> -SRC_URI[md5sum] = "b8f88de737db8c346ee8d31c07c7a25a"
-> -SRC_URI[sha256sum] = "2d475327684562c3a96cc71adf7dc8c4f0565175cf86b6d7a404ff4c771f15f0"
-> +SRC_URI[md5sum] = "48f7d743bf018f7bb2ffc5fb976d1492"
-> +SRC_URI[sha256sum] = "e644fdec12f7872f86c58ff790da456218b10f863970249516d60a5eaca77206"
->
->  inherit pypi setuptools3
->
-> --
-> 2.25.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#94190): https://lists.openembedded.org/g/openembedded-devel/message/94190
-> Mute This Topic: https://lists.openembedded.org/mt/87471515/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-networking/README b/meta-networking/README
+index 1aea8a6613..34e11a96dd 100644
+--- a/meta-networking/README
++++ b/meta-networking/README
+@@ -32,6 +32,9 @@ branch: master
+ 
+ Maintenance
+ -----------
++Layer maintainers: Khem Raj <raj.khem@gmail.com>
++                   Armin Kuster <akuster808@gmail.com> (recipes-netkit)
++
+ 
+ Please see the MAINTAINERS file for information on contacting the
+ maintainers of this layer, as well as instructions for submitting patches. 
+diff --git a/meta-python/README b/meta-python/README
+index 194bac39c7..8b62ad32b3 100644
+--- a/meta-python/README
++++ b/meta-python/README
+@@ -41,7 +41,7 @@ git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-pr
+ Maintenance
+ -------------------------
+ 
+-Layer Maintainers:
++Layer maintainers:
+         Tim "moto-timo" Orling <TicoTimo@gmail.com>
+         Derek Straka <derek@asterius.io>
+         Trevor Gamblin <trevor.gamblin@windriver.com>
+-- 
+2.34.1
+
 
