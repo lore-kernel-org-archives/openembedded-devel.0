@@ -1,102 +1,81 @@
-Return-Path: <jdmason@kudzu.us>
+Return-Path: <hongxu.jia@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 22D65C433FE
-	for <webhook@archiver.kernel.org>; Thu,  2 Dec 2021 19:45:31 +0000 (UTC)
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
- [209.85.160.175])
- by mx.groups.io with SMTP id smtpd.web09.1962.1638474330494913821
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C8E9C433F5
+	for <webhook@archiver.kernel.org>; Fri,  3 Dec 2021 03:21:09 +0000 (UTC)
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
+ by mx.groups.io with SMTP id smtpd.web08.7305.1638501668515678154
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Dec 2021 11:45:30 -0800
+ Thu, 02 Dec 2021 19:21:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kudzu-us.20210112.gappssmtp.com header.s=20210112
- header.b=7oL3UoGK;
- spf=none, err=permanent DNS error (domain: kudzu.us, ip: 209.85.160.175,
- mailfrom: jdmason@kudzu.us)
-Received: by mail-qt1-f175.google.com with SMTP id o17so948219qtk.1
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Dec 2021 11:45:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=kudzu-us.20210112.gappssmtp.com; s=20210112;
-        h=mime-version:from:date:message-id:subject:to:cc;
-        bh=UDcWZQomfMl4PEakTfxN5dV0ZkZuIuv2VOX7Ci9XyDE=;
-        b=7oL3UoGKmWQfpN2rsZ2skDvK5a7UVi6mGte4u2Q4jIS56oeM/bAbhR3sETmGUQmL06
-         L9cGnN8YHnNA7jAI2fe1FhjMUcJozn6l8sJiidMryxzTszPSMES/2dk77Bbl90wR9g6j
-         CG94BTQWGlVsKC0POzDpQK+IFVQVe/Afnu6aX9nsR8LSc4AABWlppJPY2KwmjK3Oo6cn
-         fSHE09UGY6P6sdqskfCDb6nfEgV30OHo5u/ljUzNb5HZA5eQhUbAYM8JbJ+9tDWOK8fp
-         HbWLzNRMC9jSO7ezLtyaxSyRHVa12zirg01PgTYov96MjsJ6pytAOI6ZT4/EcNWuA7rq
-         BfJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
-        bh=UDcWZQomfMl4PEakTfxN5dV0ZkZuIuv2VOX7Ci9XyDE=;
-        b=DxYAqeevQaP4cJ3JLNY/RueLu4hGj600g4x8VpljsEIH+N59QuttDAK+HnsXya/faQ
-         kkRUEz7BSGGOSKoWQK2wJytwD3B4NUQ3AdhNwns0kPNMlzDUjlS4qpNHJtfPpLkWKQNW
-         Pzgy0lZlbUbuGkAfp5lKFwOSXUfm03LfRcNqDJjI6KjC4DuQa/Jb5bNo6xs9Llhe8897
-         Wms2T4oWpJgBhbi5ng1TzGOGKk2KG7pZ4zOj9mv0v1b/BeSNSWR66j4SJ6Rl/Y3kFBLA
-         2chSWRMDFUoKQC7JB4yUlwp/ej9s32Q04D3V8BCUk3QhTPaVkjo3Ub+/sVl602m5rMBK
-         wuaQ==
-X-Gm-Message-State: AOAM533W5BNMKkgWajKHoPjDSpZZI4g5B4bDT2dCzc/RF/MxeEr0ugnf
-	C8cwbCj+Bo376XaGgGm/uVaLd7bNt4g+GwW7i+nTgtae0KJ2jA==
-X-Google-Smtp-Source: 
- ABdhPJxz69VxTRFHx5CDeCRFbUKAv0qh4bZ5Ii+jTMvOuKmDRF9o8jyGWx7E9f6yiY+NUaWBUlZaiD/LIM5aICaGq7U=
-X-Received: by 2002:a05:622a:612:: with SMTP id
- z18mr15977110qta.616.1638474329502;
- Thu, 02 Dec 2021 11:45:29 -0800 (PST)
+ dkim=missing;
+ spf=fail (domain: windriver.com, ip: 147.11.3.146, mailfrom: hongxu.jia@windriver.com)
+Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 1B33L6RG018578
+	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
+	Thu, 2 Dec 2021 19:21:06 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 1B33L5mQ008793
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 2 Dec 2021 19:21:06 -0800 (PST)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Thu, 2 Dec 2021 19:21:05 -0800
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Thu, 2 Dec 2021 19:21:04 -0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+CC: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] ostree: workaround compile error with option gcc
+ option -Og
+Date: Fri, 3 Dec 2021 11:21:04 +0800
+Message-ID: <20211203032104.4184784-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-From: Jon Mason <jdmason@kudzu.us>
-Date: Thu, 2 Dec 2021 14:45:18 -0500
-Message-ID: 
- <CAPoiz9yavPvGx6ehWgxxyMyu75FGZOWM0f4SKgScE9LscweSnA@mail.gmail.com>
-Subject: OpenEmbedded Developer Virtual Meeting (OEDVM) - Tomorrow
-To: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>,
-	openembedded-architecture <openembedded-architecture@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	openembedded-members@lists.openembedded.org
-Cc: board <board@openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Dec 2021 19:45:31 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Dec 2021 03:21:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94187
+ https://lists.openembedded.org/g/openembedded-devel/message/94188
 
-Reminder
+While DEBUG_BUILD = "1" in local.conf, `-Og' is added to cfalgs by Yocto,
+it broke ostree build with `-Werror=aggregate-return' (the
+-Werror=aggregate-return is added by ostree configure.ac)
 
-There will be an OpenEmbedded Developer Virtual Meeting (OEDVM) held
-tomorrow (Friday, 03 December 2021)
+So remove -Og and use -O2 as workaround
 
-The scheduled time will match the YP Summit's start at 12 UTC/7AM
-Eastern, and run until 20 UTC/3PM (or earlier if we run out of topics,
-but then will most likely turn into a happy hour).
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ meta-oe/recipes-extended/ostree/ostree_2021.6.bb | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-We will be using Automotive Grade Linux's Zoom (and many thanks to AGL
-for this!)
-https://zoom.us/j/99151508871
+diff --git a/meta-oe/recipes-extended/ostree/ostree_2021.6.bb b/meta-oe/recipes-extended/ostree/ostree_2021.6.bb
+index 9e0f7bc7c..d2d5dc0aa 100644
+--- a/meta-oe/recipes-extended/ostree/ostree_2021.6.bb
++++ b/meta-oe/recipes-extended/ostree/ostree_2021.6.bb
+@@ -29,6 +29,14 @@ S = "${WORKDIR}/git"
+ 
+ inherit autotools bash-completion gobject-introspection gtk-doc manpages pkgconfig ptest-gnome systemd
+ 
++# Workaround compile failure:
++# |../git/src/libotutil/zbase32.c:37:1: error: function returns an aggregate [-Werror=aggregate-return]
++# so remove -Og and use -O2 as workaround
++DEBUG_OPTIMIZATION:remove = "-Og"
++DEBUG_OPTIMIZATION:append = " -O2"
++BUILD_OPTIMIZATION:remove = "-Og"
++BUILD_OPTIMIZATION:append = " -O2"
++
+ # Package configuration - match ostree defaults, but without rofiles-fuse
+ # otherwise we introduce a dependendency on meta-filesystems
+ PACKAGECONFIG ??= " \
+-- 
+2.27.0
 
-There current topics of discussion are listed at:
-https://www.openembedded.org/wiki/OEDVM_Nov_2021
-
-There will be no given order, but priority will be given to topics
-with moderators. If you want to add something to the list, please do
-so as soon as possible.
-
-If there is a topic you would like to comment on but have difficulties
-at given times, please comment on Libera IRC at #oe (or respond to
-this email if you are lacking IRC access).  No promises given but we
-will do our best to accommodate.
-
-Please forward this email to anyone who might be interested.
-
-As always, if you are not an OpenEmbedded Member (but are interested
-in joining), please attend OEDVM and you can be voted in.
-
-If there are any questions, please feel free to email me and/or the
-entire OE board (board@openembedded.org).
-
-Thanks,
-Jon
 
