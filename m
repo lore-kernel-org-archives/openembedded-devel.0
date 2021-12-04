@@ -1,80 +1,130 @@
-Return-Path: <ubely@ilbers.de>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BA5FDC433EF
-	for <webhook@archiver.kernel.org>; Sat,  4 Dec 2021 06:33:22 +0000 (UTC)
-Received: from shymkent.ilbers.de (shymkent.ilbers.de [85.214.156.166])
- by mx.groups.io with SMTP id smtpd.web11.22138.1638599600803430407
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1EBC5C433F5
+	for <webhook@archiver.kernel.org>; Sat,  4 Dec 2021 22:30:59 +0000 (UTC)
+Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
+ by mx.groups.io with SMTP id smtpd.web11.30810.1638657057763310380
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Dec 2021 22:33:21 -0800
+ Sat, 04 Dec 2021 14:30:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=pass (domain: ilbers.de, ip: 85.214.156.166, mailfrom: ubely@ilbers.de)
-Received: from baighyz.m.ilbers.de
- (host-80-81-17-52.static.customer.m-online.net [80.81.17.52])
-	(authenticated bits=0)
-	by shymkent.ilbers.de (8.15.2/8.15.2/Debian-8) with ESMTPSA id 1B46XGbs023668
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
- Sat, 4 Dec 2021 07:33:17 +0100
-From: Uladzimir Bely <ubely@ilbers.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 0/1] [meta-oe] buildstats: avoiding disk usage warnings in
- Isar
-Date: Sat,  4 Dec 2021 07:33:15 +0100
-Message-Id: <20211204063316.12502-1-ubely@ilbers.de>
-X-Mailer: git-send-email 2.20.1
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=mSP1R98n;
+ spf=pass (domain: axis.com, ip: 195.60.68.17,
+ mailfrom: peter.kjellerstedt@axis.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=axis.com; q=dns/txt; s=axis-central1; t=1638657058;
+  x=1670193058;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=1hOcGpOT5W+JKxFEuxrl8c754t18/qqywcJwUcVuI/E=;
+  b=mSP1R98nCG7ZfiTktVZlczRjkvHJ5Pr87TubDQnMeiRe7d9c2YZF/5og
+   K6je+WZLLlfkHeCiBi8EDEhlJjgT6gmrvizPrgNsMDq7xA5U0iTWctNIg
+   yFSQJ6LazRuSiu6vG45NAd2VcCf+4go2wLhnqkJ6BU1guigac/bb+vuWu
+   ez/73utClQwvnF9WxmQVIxwAYmu/Licje7wQVr2lTUs/aWd1/RILq39Xl
+   k3Roz7f5AoxqJmIyBgvx7MgzRi/YM1F0j4fiXPwMm6zAk0XOugpG6Xf7U
+   yFCvp0IMuOuEfmDUueo7Lst8QHzRrNn9DIaGwpOz4bAwtze6bPWOw/68M
+   Q==;
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Uladzimir Bely <ubely@ilbers.de>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] [PATCH 1/1] buildstats: disk usage outside bbclass
+Thread-Topic: [oe] [PATCH 1/1] buildstats: disk usage outside bbclass
+Thread-Index: AQHX6NjeUA5J3fZJTEiL97Wx8GBREawi52og
+Date: Sat, 4 Dec 2021 22:30:54 +0000
+Message-ID: <19165fe6ef2547aaa5b8085227153ec2@axis.com>
+References: <20211204063316.12502-1-ubely@ilbers.de>
+ <20211204063316.12502-2-ubely@ilbers.de>
+In-Reply-To: <20211204063316.12502-2-ubely@ilbers.de>
+Accept-Language: en-US, sv-SE
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.0.5.60]
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 04 Dec 2021 06:33:22 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 04 Dec 2021 22:30:59 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94207
+ https://lists.openembedded.org/g/openembedded-devel/message/94209
 
-Recently we've borrowed buildstats functionality to Isar (https://github.com/
-ilbers/isar/). Everything works well, but there is a problem with a large 
-number of warnings in the console.
+> -----Original Message-----
+> From: openembedded-devel@lists.openembedded.org <openembedded-
+> devel@lists.openembedded.org> On Behalf Of Uladzimir Bely
+> Sent: den 4 december 2021 07:33
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [PATCH 1/1] buildstats: disk usage outside bbclass
+>=20
+> This allows to use a custom disk stats command
+> without modifying buildstats.bbclass.
+> ---
+>  meta/classes/buildstats-utils.bbclass | 4 ++++
+>  meta/classes/buildstats.bbclass       | 5 +++--
+>  2 files changed, 7 insertions(+), 2 deletions(-)
+>  create mode 100644 meta/classes/buildstats-utils.bbclass
+>=20
+> diff --git a/meta/classes/buildstats-utils.bbclass
+> b/meta/classes/buildstats-utils.bbclass
+> new file mode 100644
+> index 00000000..712674d0
+> --- /dev/null
+> +++ b/meta/classes/buildstats-utils.bbclass
+> @@ -0,0 +1,4 @@
+> +def buildstats_disk_usage(path):
+> +    import subprocess
+> +    return subprocess.check_output(["du", "-shx", path],
+> +                   stderr=3Dsubprocess.STDOUT).decode('utf-8')
+> diff --git a/meta/classes/buildstats.bbclass b/meta/classes/buildstats.bb=
+class
+> index 0de60520..1cade568 100644
+> --- a/meta/classes/buildstats.bbclass
+> +++ b/meta/classes/buildstats.bbclass
+> @@ -8,6 +8,8 @@ BUILDSTATS_BASE =3D "${TMPDIR}/buildstats/"
+>  #
+>=20
+> #########################################################################=
+#######
+>=20
+> +inherit buildstats-utils
+> +
+>  def get_buildprocess_cputime(pid):
+>      with open("/proc/%d/stat" % pid, "r") as f:
+>          fields =3D f.readline().rstrip().split()
+> @@ -244,8 +246,7 @@ python run_buildstats () {
+>                  rootfs =3D d.getVar('IMAGE_ROOTFS')
+>                  if os.path.isdir(rootfs):
+>                      try:
+> -                        rootfs_size =3D subprocess.check_output(["du", "=
+-sh", rootfs],
+> -                                stderr=3Dsubprocess.STDOUT).decode('utf-=
+8')
+> +                        rootfs_size =3D buildstats_disk_usage(rootfs)
 
-The problems comes from run_buildstats() function (bb.build.TaskSucceeded 
-handler). Here, rootfs_size is calculated by executing "du -sh" on the 
-directory.
+A simpler solution is to introduce a bitbake variable for the "du -sh"=20
+command. Then you can just override it with your command as you please.=20
+I.e., add:
 
-In case of Isar, this directory may: 1) be created by root, so some 
-directories are not available for the user; 2) have ./proc and ./dev mounted. 
-So "du" produces a big amount of "Permissions denied" warnings.
+BUILDSTATS_DISK_USAGE ??=3D "du -sh"
 
-The easiest solution in our case is using "sudo du -shx" instead. This 
-solution works, bus it requires forking buildstats.bbclass, so our copy will 
-differ from OE's one. That's what we want to avoid.
+after BUILDSTATS_BASE at the top of the file and change the above to:
 
-I'm looking for a proper way to make some changes in openembedded-core 
-upstream that will continue using "du -sh" (or "du -shx") in OE/Yocto/etc, but 
-will allow to use "sudo du -shx" in Isar.
+                        rootfs_size =3D subprocess.check_output(
+                            d.getVar('BUILDSTATS_DISK_USAGE').split() + [ro=
+otfs],
+                            stderr=3Dsubprocess.STDOUT).decode('utf-8')
 
-Current idea is to put "du -sh" functionality to some small separate file (.py 
-or .bbclass) so it could be called from buidstats.bbclass via some abstract 
-method. Isar could just use its own implementation.
+>                          f.write("Uncompressed Rootfs size: %s" % rootfs_=
+size)
+>                      except subprocess.CalledProcessError as err:
+>                          bb.warn("Failed to get rootfs size: %s" % err.ou=
+tput.decode('utf-8'))
+> --
+> 2.20.1
 
-But I'm not sure that it would be a good option for OE-core, because it 
-doesn't bring any essential improvements for it.
-
-Probably, someone could hint some other way to deal with the issue that 
-doesn't require changes in files borrowed from OE?
-
-The following patch is an example how it could look like.
-
-Uladzimir Bely (1):
-  buildstats: disk usage outside bbclass
-
- meta/classes/buildstats-utils.bbclass | 4 ++++
- meta/classes/buildstats.bbclass       | 5 +++--
- 2 files changed, 7 insertions(+), 2 deletions(-)
- create mode 100644 meta/classes/buildstats-utils.bbclass
-
--- 
-2.20.1
+//Peter
 
 
