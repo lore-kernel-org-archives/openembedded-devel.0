@@ -1,130 +1,105 @@
-Return-Path: <peter.kjellerstedt@axis.com>
+Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1EBC5C433F5
-	for <webhook@archiver.kernel.org>; Sat,  4 Dec 2021 22:30:59 +0000 (UTC)
-Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
- by mx.groups.io with SMTP id smtpd.web11.30810.1638657057763310380
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E6AF4C433F5
+	for <webhook@archiver.kernel.org>; Sun,  5 Dec 2021 20:05:55 +0000 (UTC)
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com
+ [209.85.167.48])
+ by mx.groups.io with SMTP id smtpd.web09.41866.1638734754502976350
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Dec 2021 14:30:58 -0800
+ Sun, 05 Dec 2021 12:05:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=axis-central1 header.b=mSP1R98n;
- spf=pass (domain: axis.com, ip: 195.60.68.17,
- mailfrom: peter.kjellerstedt@axis.com)
+ dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
+ header.s=20210112 header.b=C0JX6VaB;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
+ ip: 209.85.167.48, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f48.google.com with SMTP id b1so20147941lfs.13
+        for <openembedded-devel@lists.openembedded.org>;
+ Sun, 05 Dec 2021 12:05:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; q=dns/txt; s=axis-central1; t=1638657058;
-  x=1670193058;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=1hOcGpOT5W+JKxFEuxrl8c754t18/qqywcJwUcVuI/E=;
-  b=mSP1R98nCG7ZfiTktVZlczRjkvHJ5Pr87TubDQnMeiRe7d9c2YZF/5og
-   K6je+WZLLlfkHeCiBi8EDEhlJjgT6gmrvizPrgNsMDq7xA5U0iTWctNIg
-   yFSQJ6LazRuSiu6vG45NAd2VcCf+4go2wLhnqkJ6BU1guigac/bb+vuWu
-   ez/73utClQwvnF9WxmQVIxwAYmu/Licje7wQVr2lTUs/aWd1/RILq39Xl
-   k3Roz7f5AoxqJmIyBgvx7MgzRi/YM1F0j4fiXPwMm6zAk0XOugpG6Xf7U
-   yFCvp0IMuOuEfmDUueo7Lst8QHzRrNn9DIaGwpOz4bAwtze6bPWOw/68M
-   Q==;
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: Uladzimir Bely <ubely@ilbers.de>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] [PATCH 1/1] buildstats: disk usage outside bbclass
-Thread-Topic: [oe] [PATCH 1/1] buildstats: disk usage outside bbclass
-Thread-Index: AQHX6NjeUA5J3fZJTEiL97Wx8GBREawi52og
-Date: Sat, 4 Dec 2021 22:30:54 +0000
-Message-ID: <19165fe6ef2547aaa5b8085227153ec2@axis.com>
-References: <20211204063316.12502-1-ubely@ilbers.de>
- <20211204063316.12502-2-ubely@ilbers.de>
-In-Reply-To: <20211204063316.12502-2-ubely@ilbers.de>
-Accept-Language: en-US, sv-SE
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.0.5.60]
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+        d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=pX7YhnlQ5KcqCs3GtufxxjVpb0JVl3ygwC2jLiFMKjw=;
+        b=C0JX6VaBadHAT8QRDu+N9tNK+NVAiwIQV8rzPUOzecgHdwrVv4h1lDqhyCniSy2eVr
+         PJF3OW3kukKyJyiD4lGKq1CcWpsl+Yt97Ox4VElZdioXWWRH1Fl6IaEimu1HZZu6tSyV
+         46OcRvtxAJmVu2a85n6eVY3gUu7plGc5KmExPxtIRZCW6oX2uV6avOkeetLXQnPCQo2H
+         6S1IXfc82actfX6gkdJvFOeUROodIdRFuBnAh/p6D+Us3LWF3xyfIEBs8N0GfTEzD4Gz
+         T223I+hHl9VlDUbBiUMAcX/GWYjoZ2YV2poGYBLp62BpQRTBy9IlpGnsB7aqNYKk/uks
+         69Qw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=pX7YhnlQ5KcqCs3GtufxxjVpb0JVl3ygwC2jLiFMKjw=;
+        b=KusM5U5JHdRnUmsjhVH/xH6mX7auJ4yyLvSXg5trY/0Q3Tx22FHoJDy6q+U15jgAPM
+         WzBf376uUrjdbPslNhGESz6LPHQbvDa0qOiDgxrQt8XhJ7JKMq9egmCsy2PR7FS3CxsK
+         CU2HBLYUsxM/mmmdYunsT5aVRN12bZ4BKYg5du5cEcKtIEwbEOi/ExxID1l9nGzwAbYx
+         ObRbpSdjePSuhHgpZ1/BQQToxQDD/x8LR1dhuhlE3JdTH1aubNFKo9j5S4q5dYl6e0nh
+         rwbB9fLVZCsXYYf0QpYTt/emxmCMzeq4AW8znjSU9ebIHtpDaV9wd2iyPyOUrzV3g64k
+         BlDA==
+X-Gm-Message-State: AOAM532L+v90RH4y6sZQvzseEOTjEbW1Jks1ZvW0c+gFlefQ/n2/dpZp
+	qc5pIF7+LqKnK+o4glJCmoSjVbgMXmZXT/Lt
+X-Google-Smtp-Source: 
+ ABdhPJzcp+PK+jljKIXIRfkXwx811LaCcn5ivPGUfqSrD3wUyiZVdMT1Yd9SySA6pqhlP/D16FgFtA==
+X-Received: by 2002:a05:6512:10cb:: with SMTP id
+ k11mr31016685lfg.534.1638734751973;
+        Sun, 05 Dec 2021 12:05:51 -0800 (PST)
+Received: from localhost.localdomain
+ (c-7918524e.023-160-67626725.bbcust.telenor.se. [78.82.24.121])
+        by smtp.gmail.com with ESMTPSA id
+ b26sm1155361lff.148.2021.12.05.12.05.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 05 Dec 2021 12:05:51 -0800 (PST)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-oe][PATCH] fb-test: fix SRC_URI
+Date: Sun,  5 Dec 2021 21:05:31 +0100
+Message-Id: <20211205200531.172123-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 04 Dec 2021 22:30:59 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 05 Dec 2021 20:05:55 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94209
+ https://lists.openembedded.org/g/openembedded-devel/message/94211
 
-> -----Original Message-----
-> From: openembedded-devel@lists.openembedded.org <openembedded-
-> devel@lists.openembedded.org> On Behalf Of Uladzimir Bely
-> Sent: den 4 december 2021 07:33
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] [PATCH 1/1] buildstats: disk usage outside bbclass
->=20
-> This allows to use a custom disk stats command
-> without modifying buildstats.bbclass.
-> ---
->  meta/classes/buildstats-utils.bbclass | 4 ++++
->  meta/classes/buildstats.bbclass       | 5 +++--
->  2 files changed, 7 insertions(+), 2 deletions(-)
->  create mode 100644 meta/classes/buildstats-utils.bbclass
->=20
-> diff --git a/meta/classes/buildstats-utils.bbclass
-> b/meta/classes/buildstats-utils.bbclass
-> new file mode 100644
-> index 00000000..712674d0
-> --- /dev/null
-> +++ b/meta/classes/buildstats-utils.bbclass
-> @@ -0,0 +1,4 @@
-> +def buildstats_disk_usage(path):
-> +    import subprocess
-> +    return subprocess.check_output(["du", "-shx", path],
-> +                   stderr=3Dsubprocess.STDOUT).decode('utf-8')
-> diff --git a/meta/classes/buildstats.bbclass b/meta/classes/buildstats.bb=
-class
-> index 0de60520..1cade568 100644
-> --- a/meta/classes/buildstats.bbclass
-> +++ b/meta/classes/buildstats.bbclass
-> @@ -8,6 +8,8 @@ BUILDSTATS_BASE =3D "${TMPDIR}/buildstats/"
->  #
->=20
-> #########################################################################=
-#######
->=20
-> +inherit buildstats-utils
-> +
->  def get_buildprocess_cputime(pid):
->      with open("/proc/%d/stat" % pid, "r") as f:
->          fields =3D f.readline().rstrip().split()
-> @@ -244,8 +246,7 @@ python run_buildstats () {
->                  rootfs =3D d.getVar('IMAGE_ROOTFS')
->                  if os.path.isdir(rootfs):
->                      try:
-> -                        rootfs_size =3D subprocess.check_output(["du", "=
--sh", rootfs],
-> -                                stderr=3Dsubprocess.STDOUT).decode('utf-=
-8')
-> +                        rootfs_size =3D buildstats_disk_usage(rootfs)
+Original repo doesn't exist any more. Even though I couldn't find any
+new official repo, this is the only one on github that contains used
+commit hash.
 
-A simpler solution is to introduce a bitbake variable for the "du -sh"=20
-command. Then you can just override it with your command as you please.=20
-I.e., add:
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ .../recipes-test/fbtest/{fb-test_git.bb => fb-test_1.1.0.bb}  | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+ rename meta-oe/recipes-test/fbtest/{fb-test_git.bb => fb-test_1.1.0.bb} (82%)
 
-BUILDSTATS_DISK_USAGE ??=3D "du -sh"
-
-after BUILDSTATS_BASE at the top of the file and change the above to:
-
-                        rootfs_size =3D subprocess.check_output(
-                            d.getVar('BUILDSTATS_DISK_USAGE').split() + [ro=
-otfs],
-                            stderr=3Dsubprocess.STDOUT).decode('utf-8')
-
->                          f.write("Uncompressed Rootfs size: %s" % rootfs_=
-size)
->                      except subprocess.CalledProcessError as err:
->                          bb.warn("Failed to get rootfs size: %s" % err.ou=
-tput.decode('utf-8'))
-> --
-> 2.20.1
-
-//Peter
+diff --git a/meta-oe/recipes-test/fbtest/fb-test_git.bb b/meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb
+similarity index 82%
+rename from meta-oe/recipes-test/fbtest/fb-test_git.bb
+rename to meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb
+index 299213572..14ab41b14 100644
+--- a/meta-oe/recipes-test/fbtest/fb-test_git.bb
++++ b/meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb
+@@ -1,12 +1,10 @@
+ SUMMARY = "Test suite for Linux framebuffer"
+ 
+-PV = "1.1.0"
+-
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
+ 
+ SRCREV = "063ec650960c2d79ac51f5c5f026cb05343a33e2"
+-SRC_URI = "git://github.com/prpplague/fb-test-app.git;branch=master;protocol=https"
++SRC_URI = "git://github.com//ponty/fb-test-app.git;branch=master;protocol=https"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.25.1
 
 
