@@ -1,141 +1,123 @@
-Return-Path: <ubely@ilbers.de>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DBAAC433EF
-	for <webhook@archiver.kernel.org>; Mon,  6 Dec 2021 11:27:05 +0000 (UTC)
-Received: from shymkent.ilbers.de (shymkent.ilbers.de [85.214.156.166])
- by mx.groups.io with SMTP id smtpd.web10.50251.1638790023860450763
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1DE82C433F5
+	for <webhook@archiver.kernel.org>; Mon,  6 Dec 2021 15:20:58 +0000 (UTC)
+Received: from mail1.bemta26.messagelabs.com (mail1.bemta26.messagelabs.com
+ [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web11.52917.1638804056565134981
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Dec 2021 03:27:04 -0800
+ Mon, 06 Dec 2021 07:20:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=pass (domain: ilbers.de, ip: 85.214.156.166, mailfrom: ubely@ilbers.de)
-Received: from hp.localnet (host-80-81-17-52.static.customer.m-online.net
- [80.81.17.52])
-	(authenticated bits=0)
-	by shymkent.ilbers.de (8.15.2/8.15.2/Debian-8) with ESMTPSA id 1B6BQqAl000786
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Mon, 6 Dec 2021 12:26:53 +0100
-From: Uladzimir Bely <ubely@ilbers.de>
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Cc: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [PATCH 1/1] buildstats: disk usage outside bbclass
-Date: Mon, 06 Dec 2021 14:26:10 +0300
-Message-ID: <2043562.9o76ZdvQCi@hp>
-In-Reply-To: <19165fe6ef2547aaa5b8085227153ec2@axis.com>
-References: <20211204063316.12502-1-ubely@ilbers.de>
- <20211204063316.12502-2-ubely@ilbers.de>
- <19165fe6ef2547aaa5b8085227153ec2@axis.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=EZJVW/z1;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
+ mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1638804054; i=@fujitsu.com;
+	bh=ABtI8+/q6FkfDrO1K8OCibMqfGVGBNGtI5ONqgzicyU=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=EZJVW/z1OqrlDRN9K9Q8LBBixEmVWQpzW2HPNSqrMgMRMHEYVwcJCJmKJVQ+Dn/W/
+	 hDHXg7e2pZtyEtwn+P0VuQqhTk86V4zOkd6pM9JNNifFAmy72YyqHl6oKKSRqf5XzZ
+	 025fpu181sSq/F9ZvADRwbC12DMWj/Kxq8ypAzrhOvQZOzK5yf0SU0DiRBQAf3ymHs
+	 XB2IZLv7ccc9HvQ4lGKHehLXXpEteWAUvsXgQFoSblLvKB1vl2dOEkMMuGby/YvNMT
+	 9UkpQHhSybP3gfoFtIabCkGSgBM9WM0WIisPyoJGMRI/L3LLHA2+yF7wRCqkPFlmVc
+	 N+wUgQcsSFljg==
+Received: from [100.113.1.109] (using TLSv1.2 with cipher
+ DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-a.eu-central-1.aws.symcld.net id A2/38-29929-65A2EA16;
+ Mon, 06 Dec 2021 15:20:54 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrPIsWRWlGSWpSXmKPExsViZ8MxSTdMa12
+  iwdVZvBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8a5v/eYCj5xVJz+mt/A2MPRxcjJISTwhFHi
+  8FfXLkYuIPsCk8SVxztYIZzjjBLLVixgAaliE1CTmH7rBiuILSKgL7F09h5mEJtZQEXixe8ed
+  hBbWMBSovPgdSYQmwUo/rPpMBuIzSvgKLHz+2WwuISAgsSUh++ZIeKCEidnPmGBmCMhcfDFC2
+  aIGkWJ2ZebWSDsColZs9qgetUkrp7bxDyBkX8WkvZZSNoXMDKtYrRIKspMzyjJTczM0TU0MNA
+  1NDTWNdQ1NdRLrNJN1Est1U1OzSspSgRK6iWWF+sVV+Ym56To5aWWbGIEhmNKIaPxDsaDrz/o
+  HWKU5GBSEuX1EFuXKMSXlJ9SmZFYnBFfVJqTWnyIUYaDQ0mCt1EDKCdYlJqeWpGWmQOMDZi0B
+  AePkgjvQU2gNG9xQWJucWY6ROoUo6KUOG8zSEIAJJFRmgfXBovHS4yyUsK8jAwMDEI8BalFuZ
+  klqPKvGMU5GJWEeWeDTOHJzCuBm/4KaDET0OKY/tUgi0sSEVJSDUwsx2NXJJwK/Sf123L+HXZ
+  nhf2LVLo8/W9Fn3iktNh5keHBuqv/+dsfGG567DgnUbu9IC6Zv3UPZ975RiHttMs+Upvl5+V7
+  cEz+OyF55jQFRu79tmpWpgyVs7Zzd734sDa8gnPhmjRW9nNbeoozg/+vn+cxl32LvxHPLAbRq
+  ct5jmhn39uUtfPSK7u+8D+LBHWL5pUae28KKXIrqPE59P5A4bsUJ7kIi30cfD1qJc5vl14w7A
+  1Yq1d0+J1h6Gf1HZO/yAVMNU1nYhENEr90a/72c/2REjNs3x1xSFlWnOq49bjZ5PzrjUsO63y
+  YOuWP03yN4k/vnqqJl91mvxbYMOED09pL/vOle7IsSycnNSixFGckGmoxFxUnAgDaJwjdQgMA
+  AA==
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-14.tower-232.messagelabs.com!1638804053!360119!1
+X-Originating-IP: [62.60.8.146]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.5; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 18787 invoked from network); 6 Dec 2021 15:20:54 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-14.tower-232.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 6 Dec 2021 15:20:54 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id B8275100456
+	for <openembedded-devel@lists.openembedded.org>;
+ Mon,  6 Dec 2021 15:20:53 +0000 (GMT)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 970B2100455
+	for <openembedded-devel@lists.openembedded.org>;
+ Mon,  6 Dec 2021 15:20:53 +0000 (GMT)
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.26; Mon, 6 Dec 2021 15:20:49 +0000
+From: Wang Mingyu <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] gsl: upgrade 2.7 -> 2.7.1
+Date: Mon, 6 Dec 2021 23:20:37 +0800
+Message-ID: <1638804037-8145-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Dec 2021 11:27:05 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Dec 2021 15:20:58 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94216
+ https://lists.openembedded.org/g/openembedded-devel/message/94217
 
-In mail from =D0=B2=D0=BE=D1=81=D0=BA=D1=80=D0=B5=D1=81=D0=B5=D0=BD=D1=8C=
-=D0=B5, 5 =D0=B4=D0=B5=D0=BA=D0=B0=D0=B1=D1=80=D1=8F 2021 =D0=B3. 01:30:54 =
-+03 user Peter=20
-Kjellerstedt wrote:
-> > -----Original Message-----
-> > From: openembedded-devel@lists.openembedded.org <openembedded-
-> > devel@lists.openembedded.org> On Behalf Of Uladzimir Bely
-> > Sent: den 4 december 2021 07:33
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: [oe] [PATCH 1/1] buildstats: disk usage outside bbclass
-> >=20
-> > This allows to use a custom disk stats command
-> > without modifying buildstats.bbclass.
-> > ---
-> >=20
-> >  meta/classes/buildstats-utils.bbclass | 4 ++++
-> >  meta/classes/buildstats.bbclass       | 5 +++--
-> >  2 files changed, 7 insertions(+), 2 deletions(-)
-> >  create mode 100644 meta/classes/buildstats-utils.bbclass
-> >=20
-> > diff --git a/meta/classes/buildstats-utils.bbclass
-> > b/meta/classes/buildstats-utils.bbclass
-> > new file mode 100644
-> > index 00000000..712674d0
-> > --- /dev/null
-> > +++ b/meta/classes/buildstats-utils.bbclass
-> > @@ -0,0 +1,4 @@
-> > +def buildstats_disk_usage(path):
-> > +    import subprocess
-> > +    return subprocess.check_output(["du", "-shx", path],
-> > +                   stderr=3Dsubprocess.STDOUT).decode('utf-8')
-> > diff --git a/meta/classes/buildstats.bbclass
-> > b/meta/classes/buildstats.bbclass index 0de60520..1cade568 100644
-> > --- a/meta/classes/buildstats.bbclass
-> > +++ b/meta/classes/buildstats.bbclass
-> > @@ -8,6 +8,8 @@ BUILDSTATS_BASE =3D "${TMPDIR}/buildstats/"
-> >=20
-> >  #
-> >=20
-> > #######################################################################=
-###
-> > ######
-> >=20
-> > +inherit buildstats-utils
-> > +
-> >=20
-> >  def get_buildprocess_cputime(pid):
-> >      with open("/proc/%d/stat" % pid, "r") as f:
-> >          fields =3D f.readline().rstrip().split()
-> >=20
-> > @@ -244,8 +246,7 @@ python run_buildstats () {
-> >=20
-> >                  rootfs =3D d.getVar('IMAGE_ROOTFS')
-> >                 =20
-> >                  if os.path.isdir(rootfs):
-> >                      try:
-> > -                        rootfs_size =3D subprocess.check_output(["du",
-> > "-sh", rootfs], -                              =20
-> > stderr=3Dsubprocess.STDOUT).decode('utf-8') +                      =20
-> > rootfs_size =3D buildstats_disk_usage(rootfs)
-> A simpler solution is to introduce a bitbake variable for the "du -sh"
-> command. Then you can just override it with your command as you please.
-> I.e., add:
->=20
-> BUILDSTATS_DISK_USAGE ??=3D "du -sh"
->=20
-> after BUILDSTATS_BASE at the top of the file and change the above to:
->=20
->                         rootfs_size =3D subprocess.check_output(
->                             d.getVar('BUILDSTATS_DISK_USAGE').split() +
-> [rootfs], stderr=3Dsubprocess.STDOUT).decode('utf-8')
-> >                          f.write("Uncompressed Rootfs size: %s" %
-> >                          rootfs_size)
-> >                     =20
-> >                      except subprocess.CalledProcessError as err:
-> >                          bb.warn("Failed to get rootfs size: %s" %
-> >                          err.output.decode('utf-8'))
-> >=20
-> > --
-> > 2.20.1
->=20
-> //Peter
+Changes:
+  update libtool version numbers
 
-Thanks, the idea of using a variable is really simpler.
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ meta-oe/recipes-support/gsl/gsl_2.7.1.bb | 4 ++++
+ meta-oe/recipes-support/gsl/gsl_2.7.bb   | 4 ----
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+ create mode 100644 meta-oe/recipes-support/gsl/gsl_2.7.1.bb
+ delete mode 100644 meta-oe/recipes-support/gsl/gsl_2.7.bb
 
-I've prepared a corresponding patch for a maillist:
-https://lists.openembedded.org/g/openembedded-devel/message/94215
-I hope, it's good enough to be applied to oe-core upstream soon.
-
-=2D-=20
-Uladzimir Bely
-Promwad Ltd.
-External service provider of ilbers GmbH
-Maria-Merian-Str. 8
-85521 Ottobrunn, Germany
-+49 (89) 122 67 24-0
-Commercial register Munich, HRB 214197
-General Manager: Baurzhan Ismagulov
-
+diff --git a/meta-oe/recipes-support/gsl/gsl_2.7.1.bb b/meta-oe/recipes-support/gsl/gsl_2.7.1.bb
+new file mode 100644
+index 0000000000..a4dc1437e2
+--- /dev/null
++++ b/meta-oe/recipes-support/gsl/gsl_2.7.1.bb
+@@ -0,0 +1,4 @@
++include gsl.inc
++
++SRC_URI = "${GNU_MIRROR}/gsl/gsl-${PV}.tar.gz"
++SRC_URI[sha256sum] = "dcb0fbd43048832b757ff9942691a8dd70026d5da0ff85601e52687f6deeb34b"
+diff --git a/meta-oe/recipes-support/gsl/gsl_2.7.bb b/meta-oe/recipes-support/gsl/gsl_2.7.bb
+deleted file mode 100644
+index d40eebb4ca..0000000000
+--- a/meta-oe/recipes-support/gsl/gsl_2.7.bb
++++ /dev/null
+@@ -1,4 +0,0 @@
+-include gsl.inc
+-
+-SRC_URI = "${GNU_MIRROR}/gsl/gsl-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "efbbf3785da0e53038be7907500628b466152dbc3c173a87de1b5eba2e23602b"
+-- 
+2.25.1
 
 
