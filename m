@@ -1,102 +1,97 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jdmason@kudzu.us>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CD49DC433F5
-	for <webhook@archiver.kernel.org>; Mon,  6 Dec 2021 18:15:26 +0000 (UTC)
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com
- [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web11.55605.1638814525992651092
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4242C433F5
+	for <webhook@archiver.kernel.org>; Tue,  7 Dec 2021 01:01:32 +0000 (UTC)
+Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com
+ [209.85.222.175])
+ by mx.groups.io with SMTP id smtpd.web10.61015.1638838891724051721
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Dec 2021 10:15:26 -0800
+ Mon, 06 Dec 2021 17:01:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=aAYjkgW9;
- spf=pass (domain: gmail.com, ip: 209.85.214.177,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id y8so7624522plg.1
+ dkim=pass header.i=@kudzu-us.20210112.gappssmtp.com header.s=20210112
+ header.b=YU56b7pd;
+ spf=none, err=permanent DNS error (domain: kudzu.us, ip: 209.85.222.175,
+ mailfrom: jdmason@kudzu.us)
+Received: by mail-qk1-f175.google.com with SMTP id 132so13054272qkj.11
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Dec 2021 10:15:25 -0800 (PST)
+ Mon, 06 Dec 2021 17:01:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=+M4kFKkiHlA3THi+LLMXS332x5zdahpJC8iyiC5KteQ=;
-        b=aAYjkgW92b3YRa07T7WUVolOKLzhG9mCQA4vXFVuxSlAqIgh7LiCmyGS05CGBpOXLy
-         gOYHhZFHUXXHjS6gp/9B2XKl/M2Lx5NPKYxEuGr+1RQ4wWZVV1HNUNh0BDLOU0mZyFxE
-         yulO0YbRFhGKO5aKSoPwrpEjSpgFLZKleQ32tKp222VL4y2zGEGiriTFpkDC9K3a0l34
-         XJYygp8szut154h65QE73+5r5II7jPf5UKPqBJv7cOt2V/sb+PflPEV1XaMwDiJS+y6n
-         XCY67WlCAWAyMVNhW0Iy3jC5sJ4r79VY7VwLUAMWzqBJ9zWigczsRCV9fpfgyQdohssH
-         1zfg==
+        d=kudzu-us.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=AWyXIP1f4fnIPmsuJ1WoTtPg0cN6nJR9DhEYRPY506w=;
+        b=YU56b7pdjHKE3o1wov9YnSySvrYS9yKHjkkHsdAYjsJhWgYOA+7ecFO/4FsXBPmqQR
+         HGL1cfP0PTq3VBEbuuvEMJbGaHbQy3squ1PMyXHeIvjjGGz39ZUuRDd1HHu7CtHO0bib
+         AFEVKfLLhnyfZffUaok/KHOeM6S7NlQGtOA4gofz8JLGd0AZD/rmfTADtLwpW+LlMoui
+         eHPNGUnedhT+dRsMjIxGIPVhPH/Ks8dSDayCL7p4I/yBQm7npXCITkwdHVsYPX2WusZ+
+         vlnE1x8pBmuPacOUuwYOaeOVaAaKgPtDlsrgZLJX2qwALTT0+1CqZ2R8GMA3Epq7OfEw
+         slEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=+M4kFKkiHlA3THi+LLMXS332x5zdahpJC8iyiC5KteQ=;
-        b=TyB0c4JGpjjWaK0OHf13pAfBlKzOrROjTp2U3inI+hwEKNUE16XKv5I1L7ex5jY0Mb
-         /7KsiTZpNDhRYWh0aIWgBUCd2h47imBxekA/h7oOXlYRY9qMgq8aejYLUR+MxsJWu1ZP
-         cVECclHpxkiUvV5alE4wjdQKwz01UIhvkGNTsS0o9N+T+0Vz77D+bHN4VqhkKK5t/hK7
-         gun5JV4abRDTnvzrJN3d9URB3i1kOXVAYs1Mrv+yutowgZI9+1hhdJM8Tnxg5/qWOw2L
-         d71E4auVjE4gcy/yDe4sS2m9MiIJMc+o0lzWslQsSDQEKFkOVWVONfiAjtEW6/ywihg0
-         Jbqg==
-X-Gm-Message-State: AOAM531Dy1OzSHgtQLV3j0YfKmPxypNjWrQlOAb2oRhdpnPP0aCvmlvg
-	8+NROOTcMdVZQVlgsFRWsnVdu9Dp8kea/Q==
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=AWyXIP1f4fnIPmsuJ1WoTtPg0cN6nJR9DhEYRPY506w=;
+        b=aYjaigjwEBiWqt/PB9KBMFOuA5r45Lug+pCavdlao7QMOIyxScXJwJliVcy0dROAyT
+         pC93QIVhfwpjE0yRbYNlAYyUeE67qEF8MQQ4M9ll8/AL6YyiU/5cm0zHoLskcPNibNfG
+         w0lsBb3+OENFEM1vAwmkrEnG8Mo745b6pJ8fhTrpVEFrA6/dTNrPCQDlQjVSwfkvi1qY
+         vfedrbD6LymGcN2DbycZ9Exlh5qw2G3so3lU4wTNXECVqjPki04q4t+Dt3E0oCCZFGvL
+         x3n3dwsTyYEHl0CkVxAXTIIEh/eiU+2X4X6cF/drkCcv1PQrxbisJ0w4UJwf6neL7QSM
+         EZbQ==
+X-Gm-Message-State: AOAM533fhGmcb3bujosIk+/ZXeGUqFtWingbTAOE52fsqDdZuBpp0QCI
+	YPeyy7bXENjc8I8IN7W73A+nvA3RBTRF7NuyiWS8J1SkPGtxTQ==
 X-Google-Smtp-Source: 
- ABdhPJw0fr/veJxCCfU7P3BPWm2vRfWFCA1nv8ZijaWemqox0ubTC5orjGIlJr0mtGBMqWtrlSQqhg==
-X-Received: by 2002:a17:90a:c986:: with SMTP id
- w6mr158324pjt.27.1638814525101;
-        Mon, 06 Dec 2021 10:15:25 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ce68])
-        by smtp.gmail.com with ESMTPSA id
- j1sm13715528pfu.47.2021.12.06.10.15.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Dec 2021 10:15:24 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-perl][PATCH] libunix-statgrab: Use compiler driver for linking
- as well
-Date: Mon,  6 Dec 2021 10:15:22 -0800
-Message-Id: <20211206181522.4161973-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ ABdhPJyaUUshKHLzsiPOOmHKe4wP+Xa8uwdy986tcd8cihgLLhU8ZUk4WwDCW6CnS/sU2eQpfUTT0bkLzOIVtfwBG9E=
+X-Received: by 2002:a05:620a:4622:: with SMTP id
+ br34mr37816049qkb.504.1638838890715;
+ Mon, 06 Dec 2021 17:01:30 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Jon Mason <jdmason@kudzu.us>
+Date: Mon, 6 Dec 2021 20:01:20 -0500
+Message-ID: 
+ <CAPoiz9zni1rhmpFP+YOeseYyaT7BJGE_oZjYbDicWiYo5x0_eA@mail.gmail.com>
+Subject: Help with Inclusive Language in OpenEmbedded/Yocto Project
+To: yocto@lists.yoctoproject.org,
+	Patches and discussions about the oe-core layer
+ <openembedded-core@lists.openembedded.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Dec 2021 18:15:26 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Dec 2021 01:01:32 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94218
+ https://lists.openembedded.org/g/openembedded-devel/message/94219
 
-the build system tries to deduce the compiler and its friends and fails
-because OE passes LDFLAGS assuming that linker will be invoked via
-compiler driver ( gcc or clang ) therefore prefixes linker options with
--Wl, but libunix-statgrab build system enquires LD variable for linker
-and uses LDFLAGS with it, which causes linker to fail since ld does not
-recognise -Wl, etc. Therefore using CCLD for linker is right choice here
+This email is a follow-up from the session held on Friday at the
+OpenEmbedded Developer's Virtual Meeting (see
+https://www.openembedded.org/wiki/OEDVM_Nov_2021)
 
-Fixes
-Checking for cc... i686-yoe-linux-ld: unrecognized option '-Wl,-O1'
-i686-yoe-linux-ld: use the --help option for usage information
+The session was not recorded, but the slides can be found at
+https://docs.google.com/presentation/d/146ueVVTMeA8JI43wqv5kFmdYEygqqmfGH0z1VRL2bDA/edit?usp=sharing
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb | 2 ++
- 1 file changed, 2 insertions(+)
+The outcome from the discussion was that inclusive language changes
+are something that we want to accomplish in the kirkstone release
+timeframe (with an exception for the "master" branch name, which will
+be handled at a future date).
 
-diff --git a/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb b/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
-index 7af7f92fb9..c2b6d4abf8 100644
---- a/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
-+++ b/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
-@@ -33,6 +33,8 @@ SRC_URI[sha256sum] = "16a29f7acaeec081bf0e7303ba5ee24fda1d21a1104669b837745f3ea6
- 
- S = "${WORKDIR}/Unix-Statgrab-${PV}"
- 
-+export LD = "${CCLD}"
-+
- inherit cpan pkgconfig ptest-perl
- 
- BBCLASSEXTEND = "native"
--- 
-2.34.1
+There has already been a pass at collecting the needed changes at
+https://wiki.yoctoproject.org/wiki/Inclusive_language
 
+This is not as simple as a find/replace of offending words.  There is
+a desire for backward compatibility or to provide some kind of "you
+want X, which is now Y" (which complicates things).
+
+The intention of this email is to see who is interested in helping
+out.  Once we know how many people are available and what time frames,
+we can plan out a roadmap.  So, please email me (or respond to this
+thread publicly) and I'll add you to the list.  There will then be a
+follow-up zoom call in the next week or so to plan out the roadmap.
+
+We will document the roadmap and everything else on the YP wiki page above.
+
+Questions and comments are welcome, but not interested in debating the
+necessity or timeframe of this task.  It has already been decided.
+
+Thanks,
+Jon
 
