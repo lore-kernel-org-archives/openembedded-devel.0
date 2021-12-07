@@ -1,564 +1,117 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <xuhuan.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 71BA7C433EF
-	for <webhook@archiver.kernel.org>; Tue,  7 Dec 2021 06:18:57 +0000 (UTC)
-Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com
- [209.85.160.169])
- by mx.groups.io with SMTP id smtpd.web09.63580.1638857931092016259
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A7327C433F5
+	for <webhook@archiver.kernel.org>; Tue,  7 Dec 2021 06:48:40 +0000 (UTC)
+Received: from mail1.bemta34.sdw.messagelabs.com
+ (mail1.bemta34.sdw.messagelabs.com [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web11.63940.1638859718584825209
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Dec 2021 22:18:51 -0800
+ Mon, 06 Dec 2021 22:48:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=jY+/7cYM;
- spf=pass (domain: gmail.com, ip: 209.85.160.169,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f169.google.com with SMTP id n15so13405184qta.0
-        for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Dec 2021 22:18:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=ZIeRE/h/Uabw+7VswUHoRwbZ/znCyq1FcZja+M+A0FE=;
-        b=jY+/7cYMxQfSO8IxzSC68b8jkxCztNA35yeP1qyUuPX3wA0gE/ZNiPgieAQsWFnQkK
-         BxBMjR2hh0/C/ymlcCos1HvxfMJOGH04V3+8LgjPjj2rQp9OeWgPz4p1PUiywOFiRBJB
-         kDyDWApvryttpZDoUbfG2EHRq3GH0xphxBjUkqmxp7Qk2wCvjVY4Mig6WIHqgbCWr+KV
-         ZH1U83ShJgEOkF8iOYYsZOfmchGiIJJk2CLjTVoYWLuqDAX+YjvWxmv1CSTfw31+pZJf
-         i9qCembsV8d4G22wCjpebL+RlfKhghmZNPBKPd8MQMM+B/XJV7/SZ1jsgsHU0DlGiONT
-         umGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=ZIeRE/h/Uabw+7VswUHoRwbZ/znCyq1FcZja+M+A0FE=;
-        b=iUHjhpABC+MswqZCvodGp8QyRTtIzWxMkN01cVq9FlG+CEAPLpmHtbUODQ1D3hOVCz
-         tPEg9WEo7Qjp7vSEBW7IJkKOWjG1lgh8eJzVRbQUu+tD+WzxkJKFZPgq/trgluh+3tQx
-         e2drbyy1hedZR8emr6csmwMwWKCTfCZHkbp97gM8V+aw0/629E23Qly6QYxs3pMR8jL/
-         2Qj5apfnkL2NLUihRBht7CNoqAFx8Fz8YtWezTMBY22P4L2+QEJfa0qN2gx/n9lUza9s
-         h+z0hEN274Coe8wjEFk6NklkZHTwId4wjm6nH/Yg9mC0bmyKuVKpskLzJn9MjtDWyfcU
-         Rjkg==
-X-Gm-Message-State: AOAM533eTJSYJQSvj7Wp6DXu82DfQCFnafDK4PYlMAEr1OTVdIDlr0/k
-	LxGgFGSHsJtWl70YOxv1plt2BPFR0+N+z35kZcs=
-X-Google-Smtp-Source: 
- ABdhPJwDMaegtwpko9Qvloktfq0E0T97m0JmgPTIx/+b7vEXBRIwZ+GEKskm8VhyGYOMHIHhmpRpq65goxcLDqnYlyk=
-X-Received: by 2002:a05:622a:1386:: with SMTP id
- o6mr45916929qtk.64.1638857929748;
- Mon, 06 Dec 2021 22:18:49 -0800 (PST)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Qo4a+JEz;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2,
+ mailfrom: xuhuan.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1638859714; i=@fujitsu.com;
+	bh=vDWlMzPNRq5BMQ6VVR1SzH1wiDBo1CrvZKzCiBZy5Cs=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=Qo4a+JEzAJTxe4NZLH+XO7yeuvpUIROli0t0FCFL59HUBDG2/TyieJ1XM3aQMktyJ
+	 Pb58NV47vNe29cy7epf0OQQ2JgrdtJ+eSlBcx4ZbgiiX9V38W7H9GM4VjxEIihCV2x
+	 CHzn8s30BGE4qdCsR17GiErskkL7q6brxw3QWbvQyvnZ0db1ToPP1/6jXaNUaGi2LY
+	 uJ7t713DYfaVYSJ+dqKMyZ4a7xvwxN1WCJSDKRsmsYZxeULYvsgpyhkQrSqI3I2Qs5
+	 HmWVZtuBvQbjNg/vSsDlOycQoe03OB0251dAVp4f8nLwN+TU6ivjqBu+B+uPgBhmB1
+	 5sC+3CvTCl3+w==
+Received: from [100.115.34.229] (using TLSv1.2 with cipher
+ DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-2.bemta.az-a.eu-west-2.aws.ess.symcld.net id 5F/D2-32601-2C30FA16;
+ Tue, 07 Dec 2021 06:48:34 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8ORqHuIeX2
+  iwe4jjBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8a5eTPYC9ZwVjScmsLcwHiVo4uRi0NI4Amj
+  xNNX81ggnAtMEhP+r2KEcE4wSvxuW8rcxcjJwSagLvH45mtGEFtEQF9i6ew9YHFmAVWJ7otr2
+  EFsYQF/ic/Tb7GC2CwCKhKf9j5i62Lk4OAVcJfoOBcIEpYQUJCY8vA9WCuvgKDEyZlPWCDGSE
+  gcfPGCGaJGSeLEio9MEHaFxOvDl6DiahJXz21insDIPwtJ+ywk7QsYmVYxWicVZaZnlOQmZub
+  oGhoY6BoamuoaG+kaGRjqJVbpJuqlluqWpxaX6BrpJZYX66UWF+sVV+Ym56To5aWWbGIEhmVK
+  scLJHYy/L33TO8QoycGkJMobMW9dohBfUn5KZUZicUZ8UWlOavEhRhkODiUJXp//QDnBotT01
+  Iq0zBxgjMCkJTh4lER4LzKsTxTiLS5IzC3OTIdInWJUlBLnXcsElBAASWSU5sG1weLyEqOslD
+  AvIwMDgxBPQWpRbmYJqvwrRnEORiVh3nkgU3gy80rgpr8CWswEtDimfzXI4pJEhJRUA1NSUuY
+  5/wm3o7yXp0s28Lwq8g47Yb/t3ofM0pZV59XvcdkaRm2/w/lF/tAb2cYYkdQvzuKaPVIaouus
+  Z7Y4V8xRj95edkRRfRcHn+ax5Td3L5so6jbl2fpLW3e/t9r77w6zsPfFhT4v9jLmG2eJiCp71
+  nbx1u5SldmxbbvRNna7g5ujrYysbj/r2ppyfhJj5Yeue6WiP2Wu77/s6xDk+W7j5iW5c5e7um
+  0uOZ5/dZbUnN7vEb5xYben2O6LLXRks5d1OhSQ9taNaV3Wmg5lw33rHgvu2/71vNK9x+1v3nz
+  52m05f+Y66UvhrgLLonMFzwSvEX2ardfx2qjstsf3k6/qFLa8Td/1wTJm7daFm/qUWIozEg21
+  mIuKEwHaPaT9RgMAAA==
+X-Env-Sender: xuhuan.fnst@fujitsu.com
+X-Msg-Ref: server-3.tower-571.messagelabs.com!1638859713!85295!1
+X-Originating-IP: [62.60.8.97]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.7; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 4596 invoked from network); 7 Dec 2021 06:48:34 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-3.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 7 Dec 2021 06:48:34 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 9F916100242
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue,  7 Dec 2021 06:48:33 +0000 (GMT)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 9355D100234
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue,  7 Dec 2021 06:48:33 +0000 (GMT)
+Received: from localhost.localdomain.localdomain (10.167.225.131) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.26; Tue, 7 Dec 2021 06:48:12 +0000
+From: XU Huan <xuhuan.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Xu Huan <xuhuan.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-bitstruct: upgrade 8.11.1 ->
+ 8.12.1
+Date: Tue, 7 Dec 2021 14:47:42 +0800
+Message-ID: <1638859662-19143-1-git-send-email-xuhuan.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <317faab0-ca26-0d98-a3c9-97bd320cc381@gmail.com>
-In-Reply-To: <317faab0-ca26-0d98-a3c9-97bd320cc381@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 6 Dec 2021 22:18:22 -0800
-Message-ID: 
- <CAMKF1spsMGNNAGK65Qwsy=cTTe8XQYhkHEPz0TQV+eMaaqq+bg@mail.gmail.com>
-Subject: Re: hardknott merge request: Dec 6th
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.131]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Dec 2021 06:18:57 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Dec 2021 06:48:40 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94222
+ https://lists.openembedded.org/g/openembedded-devel/message/94224
 
-merged thanks.
+From: Xu Huan <xuhuan.fnst@fujitsu.com>
 
-On Mon, Dec 6, 2021 at 10:15 PM akuster808 <akuster808@gmail.com> wrote:
->
-> The following changes since commit 0b0ab6a2d227f22374268d29fcb8e4f9dab537=
-4b:
->
->   android-tools: Define SRCREV_FORMAT (2021-11-02 05:57:09 -0700)
->
-> are available in the Git repository at:
->
->   https://git.openembedded.org/meta-openembedded hardknott-next
->
-> for you to fetch changes up to f72a73b42fa740130b388ba8555cdbefdee8d37d:
->
->   ifenslave: Add branch=3Dmain (2021-12-05 11:32:16 -0800)
->
-> ----------------------------------------------------------------
-> Armin Kuster (1):
->       recipes: Update SRC_URI branch and protocols
->
-> Changqing Li (1):
->       postgresql: fix CVE-2021-23214,CVE-2021-23222
->
-> Jeremy Puhlman (1):
->       ifenslave: Add branch=3Dmain
->
-> Khem Raj (1):
->       sdbus-c++-libsystemd: Avoid hard dependency on rsync
->
-> Martin Jansa (1):
->       sdbus-c++: don't fetch googletest during do_configure
->
-> Otto Esko (1):
->       Use old override syntax
->
-> Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi (1):
->       c-ares: Use branch=3Dmain and protocol=3Dhttps in SRC_URI
->
->  .../recipes-filesystems/logfsprogs/logfsprogs_git.bb            |   2 +-
->  meta-filesystems/recipes-filesystems/owfs/owfs_3.2p3.bb         |   2 +-
->  .../recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.1.bb          |   2 +-
->  .../recipes-filesystems/unionfs-fuse/unionfs-fuse_2.1.bb        |   2 +-
->  meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.14.0.bb  |   2 +-
->  meta-filesystems/recipes-utils/fatcat/fatcat_1.1.0.bb           |   2 +-
->  meta-filesystems/recipes-utils/fatresize/fatresize_1.0.2.bb     |   2 +-
->  meta-filesystems/recipes-utils/ufs-utils/ufs-utils_1.9.bb       |   2 +-
->  meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb   |   2 +-
->  meta-gnome/recipes-support/ibus/ibus.inc                        |   2 +-
->  meta-gnome/recipes-support/keybinder/keybinder_3.0.bb           |   2 +-
->  meta-gnome/recipes-support/libstemmer/libstemmer_git.bb         |   2 +-
->  meta-gnome/recipes-support/libwacom/libwacom_0.33.bb            |   2 +-
->  meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb           |   2 +-
->  meta-initramfs/recipes-devtools/dracut/dracut_git.bb            |   2 +-
->  meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb           |   2 +-
->  meta-initramfs/recipes-devtools/grubby/grubby_git.bb            |   2 +-
->  meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb    |   2 +-
->  meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb    |   2 +-
->  meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.0.bb  |   2 +-
->  meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb          |   2 +-
->  meta-multimedia/recipes-multimedia/aom/aom_3.0.0.bb             |   2 +-
->  meta-multimedia/recipes-multimedia/dca/dcadec_0.2.0.bb          |   2 +-
->  .../recipes-multimedia/dleyna/dleyna-connector-dbus_0.3.0.bb    |   2 +-
->  meta-multimedia/recipes-multimedia/dleyna/dleyna-core_0.6.0.bb  |   2 +-
->  .../recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb          |   2 +-
->  .../recipes-multimedia/dleyna/dleyna-server_0.6.0.bb            |   2 +-
->  meta-multimedia/recipes-multimedia/fdk-aac/fdk-aac_2.0.1.bb     |   2 +-
->  meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc    |   2 +-
->  meta-multimedia/recipes-multimedia/gerbera/gerbera_1.7.0.bb     |   2 +-
->  .../recipes-multimedia/gstreamer-1.0/gst-shark_git.bb           |   2 +-
->  meta-multimedia/recipes-multimedia/libcamera/libcamera.bb       |   2 +-
->  meta-multimedia/recipes-multimedia/libdvbcsa/libdvbcsa_1.1.0.bb |   2 +-
->  meta-multimedia/recipes-multimedia/libsquish/libsquish_git.bb   |   2 +-
->  meta-multimedia/recipes-multimedia/libuvc/libuvc.bb             |   2 +-
->  meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb       |   2 +-
->  .../recipes-multimedia/musicbrainz/libmusicbrainz_git.bb        |   2 +-
->  meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.19.bb |   2 +-
->  meta-multimedia/recipes-multimedia/musicpd/mpc_0.33.bb          |   2 +-
->  meta-multimedia/recipes-multimedia/musicpd/mpd_0.22.6.bb        |   2 +-
->  meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.45.bb        |   2 +-
->  meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb    |   2 +-
->  meta-multimedia/recipes-multimedia/openal/openal-soft_1.20.1.bb |   2 +-
->  meta-multimedia/recipes-multimedia/pipewire/pipewire-0.2_git.bb |   2 +-
->  meta-multimedia/recipes-multimedia/rtmpdump/rtmpdump_2.4.bb     |   2 +-
->  meta-multimedia/recipes-multimedia/tinyalsa/tinyalsa.bb         |   2 +-
->  meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb    |   2 +-
->  meta-multimedia/recipes-support/crossguid/crossguid_0.2.2.bb    |   2 +-
->  .../recipes-support/gst-instruments/gst-instruments_git.bb      |   2 +-
->  meta-multimedia/recipes-support/libsrtp/libsrtp_2.3.0.bb        |   2 +-
->  meta-multimedia/recipes-support/srt/srt_1.4.2.bb                |   2 +-
->  .../recipes-connectivity/cannelloni/cannelloni_1.0.0.bb         |   2 +-
->  meta-networking/recipes-connectivity/civetweb/civetweb_git.bb   |   2 +-
->  meta-networking/recipes-connectivity/dibbler/dibbler_git.bb     |   2 +-
->  .../recipes-connectivity/freeradius/freeradius_3.0.21.bb        |   2 +-
->  meta-networking/recipes-connectivity/libdnet/libdnet_1.14.bb    |   2 +-
->  .../recipes-connectivity/libiec61850/libiec61850_1.4.2.1.bb     |   2 +-
->  meta-networking/recipes-connectivity/nanomsg/nanomsg_1.1.5.bb   |   2 +-
->  meta-networking/recipes-connectivity/nanomsg/nng_1.2.5.bb       |   2 +-
->  meta-networking/recipes-connectivity/nanomsg/nngpp_git.bb       |   2 +-
->  meta-networking/recipes-connectivity/netplan/netplan_0.101.bb   |   2 +-
->  .../recipes-connectivity/openconnect/openconnect_8.10.bb        |   2 +-
->  meta-networking/recipes-connectivity/relayd/relayd_git.bb       |   2 +-
->  meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb         |   2 +-
->  meta-networking/recipes-connectivity/wolfssl/wolfssl_4.7.1.bb   |   2 +-
->  meta-networking/recipes-daemons/atftp/atftp_0.7.4.bb            |   2 +-
->  meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb |   2 +-
->  .../iscsi-initiator-utils/iscsi-initiator-utils_2.1.4.bb        |   2 +-
->  meta-networking/recipes-daemons/vblade/vblade_25.bb             |   2 +-
->  .../arno-iptables-firewall/arno-iptables-firewall_2.1.1.bb      |   2 +-
->  .../recipes-filter/libnetfilter/libnetfilter-log_1.0.1.bb       |   2 +-
->  .../recipes-filter/libnetfilter/libnetfilter-queue_1.0.3.bb     |   2 +-
->  meta-networking/recipes-filter/libnftnl/libnftnl_1.1.9.bb       |   2 +-
->  meta-networking/recipes-irc/znc/znc_1.8.2.bb                    |   4 +-
->  .../recipes-kernel/wireguard/wireguard-module_1.0.20210219.bb   |   2 +-
->  .../recipes-kernel/wireguard/wireguard-tools_1.0.20210315.bb    |   2 +-
->  meta-networking/recipes-protocols/babeld/babeld_1.9.2.bb        |   2 +-
->  meta-networking/recipes-protocols/openflow/openflow.inc         |   2 +-
->  meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.14.bb       |   2 +-
->  meta-networking/recipes-support/arptables/arptables_git.bb      |   2 +-
->  meta-networking/recipes-support/cifs/cifs-utils_6.13.bb         |   2 +-
->  meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb          |   2 +-
->  meta-networking/recipes-support/drbd/drbd-utils_9.13.1.bb       |   4 +-
->  meta-networking/recipes-support/ettercap/ettercap_0.8.3.1.bb    |   2 +-
->  meta-networking/recipes-support/geoip/geoip-perl_1.51.bb        |   2 +-
->  meta-networking/recipes-support/geoip/geoip_1.6.12.bb           |   2 +-
->  meta-networking/recipes-support/ifenslave/ifenslave_2.11.bb     |   2 +-
->  meta-networking/recipes-support/ipcalc/ipcalc_0.2.3.bb          |   2 +-
->  .../recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb         |   2 +-
->  .../recipes-support/lowpan-tools/lowpan-tools_git.bb            |   2 +-
->  meta-networking/recipes-support/mtr/mtr_0.94.bb                 |   2 +-
->  meta-networking/recipes-support/nbdkit/nbdkit_1.25.6.bb         |   2 +-
->  meta-networking/recipes-support/ndisc6/ndisc6_git.bb            |   2 +-
->  meta-networking/recipes-support/netcf/netcf_0.2.8.bb            |   2 +-
->  meta-networking/recipes-support/netperf/netperf_git.bb          |   2 +-
->  meta-networking/recipes-support/nis/yp-tools_4.2.3.bb           |   2 +-
->  meta-networking/recipes-support/ntimed/ntimed_git.bb            |   2 +-
->  meta-networking/recipes-support/ntopng/ndpi_3.4.bb              |   2 +-
->  meta-networking/recipes-support/ntopng/ntopng_4.2.bb            |   2 +-
->  meta-networking/recipes-support/open-isns/open-isns_0.101.bb    |   2 +-
->  .../recipes-support/open-vm-tools/open-vm-tools_11.2.5.bb       |   2 +-
->  meta-networking/recipes-support/phytool/phytool.bb              |   2 +-
->  meta-networking/recipes-support/rdma-core/rdma-core_33.0.bb     |   2 +-
->  meta-networking/recipes-support/smcroute/smcroute_2.4.4.bb      |   2 +-
->  meta-networking/recipes-support/spice/spice-protocol_git.bb     |   2 +-
->  meta-networking/recipes-support/spice/spice_git.bb              |   4 +-
->  meta-networking/recipes-support/spice/usbredir_0.9.0.bb         |   2 +-
->  meta-networking/recipes-support/unbound/unbound_1.12.0.bb       |   2 +-
->  meta-networking/recipes-support/wpan-tools/wpan-tools_0.9.bb    |   2 +-
->  .../recipes-benchmark/speedtest-cli/speedtest-cli_2.1.2.bb      |   2 +-
->  .../dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_1.2.bb   |   2 +-
->  .../meta-python/recipes-dbs/mongodb/mongodb_git.bb              |   2 +-
->  .../meta-python/recipes-devtools/nanopb/nanopb_0.4.5.bb         |   2 +-
->  .../meta-python/recipes-extended/lcdproc/lcdproc_git.bb         |   2 +-
->  .../networking-layer/recipes-devtools/valijson/valijson_0.3.bb  |   2 +-
->  .../perl-layer/recipes-support/rasdaemon/rasdaemon_0.6.6.bb     |   2 +-
->  meta-oe/recipes-benchmark/cpuburn/cpuburn-arm_git.bb            |   2 +-
->  meta-oe/recipes-benchmark/fio/fio_3.26.bb                       |   2 +-
->  meta-oe/recipes-benchmark/glmark2/glmark2_git.bb                |   2 +-
->  meta-oe/recipes-benchmark/iperf3/iperf3_3.9.bb                  |   2 +-
->  meta-oe/recipes-benchmark/libc-bench/libc-bench_git.bb          |   2 +-
->  meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb      |   2 +-
->  meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.9.bb  |   2 +-
->  meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb      |   2 +-
->  meta-oe/recipes-bsp/con2fbmap/con2fbmap_git.bb                  |   2 +-
->  meta-oe/recipes-bsp/cpufrequtils/cpufrequtils_008.bb            |   2 +-
->  meta-oe/recipes-bsp/edac-utils/edac-utils_git.bb                |   2 +-
->  meta-oe/recipes-bsp/firmwared/firmwared_git.bb                  |   2 +-
->  meta-oe/recipes-bsp/ledmon/ledmon_git.bb                        |   2 +-
->  meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb               |   2 +-
->  meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.13.bb                   |   2 +-
->  meta-oe/recipes-connectivity/gattlib/gattlib_git.bb             |   2 +-
->  meta-oe/recipes-connectivity/iwd/iwd_1.12.bb                    |   2 +-
->  .../libimobiledevice/libimobiledevice_1.3.0.bb                  |   2 +-
->  meta-oe/recipes-connectivity/libndp/libndp_1.7.bb               |   2 +-
->  meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb       |   2 +-
->  meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.8.bb   |   2 +-
->  meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.11.0.bb    |   2 +-
->  meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb           |   2 +-
->  meta-oe/recipes-connectivity/transmission/transmission_git.bb   |   2 +-
->  meta-oe/recipes-connectivity/usbmuxd/usbmuxd_1.1.1.bb           |   2 +-
->  .../recipes-connectivity/wifi-test-suite/wifi-test-suite_git.bb |   2 +-
->  meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb               |   2 +-
->  meta-oe/recipes-core/dbus-cxx/dbus-cxx_0.12.bb                  |   2 +-
->  meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb              |   2 +-
->  meta-oe/recipes-core/emlog/emlog.inc                            |   2 +-
->  meta-oe/recipes-core/glfw/glfw_3.3.bb                           |   2 +-
->  meta-oe/recipes-core/libnfc/libnfc_git.bb                       |   2 +-
->  meta-oe/recipes-core/mdbus2/mdbus2_git.bb                       |   2 +-
->  meta-oe/recipes-core/musl-rpmatch/musl-rpmatch_git.bb           |   2 +-
->  meta-oe/recipes-core/ndctl/ndctl_v69.bb                         |   2 +-
->  meta-oe/recipes-core/opencl/ocl-icd_2.3.0.bb                    |   2 +-
->  meta-oe/recipes-core/opencl/opencl-clhpp_git.bb                 |   2 +-
->  meta-oe/recipes-core/opencl/opencl-headers_git.bb               |   2 +-
->  meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb            |   2 +-
->  meta-oe/recipes-core/safec/safec_3.5.1.bb                       |   2 +-
->  ...1-Try-to-first-find-googletest-in-the-system-before-do.patch |  96
-> ++++++++++++++++++++
->  .../7c5fd25119a495009ea62f79e5daec34cc464628.patch              |  53
-> +++++++++++
->  meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_243.bb      |   7 +-
->  meta-oe/recipes-core/sdbus-c++/sdbus-c++_0.8.3.bb               |   9 +-
->  meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.3.bb     |   2 +-
->  meta-oe/recipes-crypto/libkcapi/libkcapi_1.2.1.bb               |   2 +-
->  meta-oe/recipes-crypto/pkcs11-helper/pkcs11-helper_1.27.bb      |   2 +-
->  meta-oe/recipes-dbs/leveldb/leveldb_1.22.bb                     |   2 +-
->  meta-oe/recipes-dbs/postgresql/files/CVE-2021-23214.patch       | 116
-> ++++++++++++++++++++++++
->  meta-oe/recipes-dbs/postgresql/files/CVE-2021-23222.patch       | 131
-> ++++++++++++++++++++++++++++
->  meta-oe/recipes-dbs/postgresql/postgresql_13.4.bb               |   2 +
->  meta-oe/recipes-dbs/rocksdb/rocksdb_6.15.5.bb                   |   2 +-
->  meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb           |   2 +-
->  meta-oe/recipes-devtools/apitrace/apitrace_9.0.bb               |   2 +-
->  meta-oe/recipes-devtools/boost-url/boost-url_git.bb             |   2 +-
->  meta-oe/recipes-devtools/bootchart/bootchart_git.bb             |   2 +-
->  meta-oe/recipes-devtools/breakpad/breakpad_git.bb               |   8 +-
->  meta-oe/recipes-devtools/capnproto/capnproto_0.8.0.bb           |   2 +-
->  meta-oe/recipes-devtools/cjson/cjson_1.7.15.bb                  |   2 +-
->  meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb   |   2 +-
->  meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb   |   2 +-
->  meta-oe/recipes-devtools/exprtk/exprtk_git.bb                   |   2 +-
->  meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.12.0.bb      |   2 +-
->  meta-oe/recipes-devtools/guider/guider_3.9.8.bb                 |   2 +-
->  meta-oe/recipes-devtools/heaptrack/heaptrack_1.2.0.bb           |   2 +-
->  .../json-schema-validator/json-schema-validator_2.1.0.bb        |   2 +-
->  meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.4.bb               |   2 +-
->  meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.3.0.bb               |   2 +-
->  meta-oe/recipes-devtools/lapack/lapack_3.9.0.bb                 |   2 +-
->  meta-oe/recipes-devtools/libsombok3/libsombok3_2.4.0.bb         |   2 +-
->  meta-oe/recipes-devtools/libubox/libubox_git.bb                 |   2 +-
->  meta-oe/recipes-devtools/ltrace/ltrace_git.bb                   |   2 +-
->  meta-oe/recipes-devtools/luaposix/luaposix_33.4.0.bb            |   2 +-
->  meta-oe/recipes-devtools/msgpack/msgpack-c_3.2.1.bb             |   2 +-
->  meta-oe/recipes-devtools/musl/musl-nscd_git.bb                  |   2 +-
->  meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb     |   2 +-
->  meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.9.1.bb   |   2 +-
->  meta-oe/recipes-devtools/openocd/openocd_git.bb                 |   8 +-
->  meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb                   |   2 +-
->  meta-oe/recipes-devtools/perl/ipc-run_20200505.0.bb             |   2 +-
->  meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.050.bb        |   2 +-
->  meta-oe/recipes-devtools/perl/libjson-perl_4.03000.bb           |   2 +-
->  meta-oe/recipes-devtools/ply/ply_git.bb                         |   2 +-
->  meta-oe/recipes-devtools/pmtools/pmtools_git.bb                 |   2 +-
->  meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.3.bb           |   2 +-
->  meta-oe/recipes-devtools/protobuf/protobuf_3.15.2.bb            |   2 +-
->  meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb             |   2 +-
->  meta-oe/recipes-devtools/serialcheck/serialcheck_1.0.0.bb       |   2 +-
->  meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.5.bb           |   2 +-
->  .../squashfs-tools-ng/squashfs-tools-ng_1.0.2.bb                |   2 +-
->  meta-oe/recipes-devtools/suitesparse/suitesparse_5.8.1.bb       |   2 +-
->  meta-oe/recipes-devtools/uftrace/uftrace_0.9.4.bb               |   2 +-
->  meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.54.02.bb           |   2 +-
->  meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb                    |   2 +-
->  meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb                     |   2 +-
->  meta-oe/recipes-devtools/yasm/yasm_git.bb                       |   2 +-
->  meta-oe/recipes-extended/beep/beep_1.4.9.bb                     |   2 +-
->  meta-oe/recipes-extended/brotli/brotli_1.0.9.bb                 |   2 +-
->  meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.1.bb   |   2 +-
->  meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.7.bb        |   2 +-
->  meta-oe/recipes-extended/docopt.cpp/docopt.cpp_git.bb           |   2 +-
->  meta-oe/recipes-extended/dumb-init/dumb-init_1.2.5.bb           |   2 +-
->  meta-oe/recipes-extended/figlet/figlet_git.bb                   |   2 +-
->  meta-oe/recipes-extended/haveged/haveged_1.9.14.bb              |   2 +-
->  meta-oe/recipes-extended/hexedit/hexedit_1.5.bb                 |   2 +-
->  meta-oe/recipes-extended/hiredis/hiredis_0.14.0.bb              |   2 +-
->  meta-oe/recipes-extended/iotop/iotop_0.6.bb                     |   2 +-
->  meta-oe/recipes-extended/isomd5sum/isomd5sum_1.2.3.bb           |   2 +-
->  meta-oe/recipes-extended/jpnevulator/jpnevulator_git.bb         |   2 +-
->  meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb       |   2 +-
->  meta-oe/recipes-extended/libbacktrace/libbacktrace_git.bb       |   2 +-
->  meta-oe/recipes-extended/libblockdev/libblockdev_2.25.bb        |   2 +-
->  meta-oe/recipes-extended/libcec/libcec_6.0.2.bb                 |   2 +-
->  meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb |   2 +-
->  meta-oe/recipes-extended/libimobiledevice/libplist_2.2.0.bb     |   2 +-
->  meta-oe/recipes-extended/libimobiledevice/libusbmuxd_2.0.2.bb   |   2 +-
->  meta-oe/recipes-extended/libleak/libleak_git.bb                 |   2 +-
->  meta-oe/recipes-extended/liblightmodbus/liblightmodbus_2.0.2.bb |   2 +-
->  meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb       |   2 +-
->  meta-oe/recipes-extended/libqb/libqb_1.0.5.bb                   |   2 +-
->  meta-oe/recipes-extended/libreport/libreport_2.10.0.bb          |   2 +-
->  meta-oe/recipes-extended/libuio/libuio_0.2.1.bb                 |   2 +-
->  meta-oe/recipes-extended/md5deep/md5deep_git.bb                 |   2 +-
->  meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.7.0.bb         |   2 +-
->  meta-oe/recipes-extended/mraa/mraa_git.bb                       |   2 +-
->  meta-oe/recipes-extended/openwsman/openwsman_2.6.11.bb          |   2 +-
->  meta-oe/recipes-extended/ostree/ostree_2021.1.bb                |   2 +-
->  meta-oe/recipes-extended/p8platform/p8platform_git.bb           |   2 +-
->  meta-oe/recipes-extended/pam/pam-plugin-ccreds_11.bb            |   2 +-
->  meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.bb           |   2 +-
->  meta-oe/recipes-extended/pmdk/pmdk_1.9.bb                       |   2 +-
->  meta-oe/recipes-extended/properties-cpp/properties-cpp_git.bb   |   2 +-
->  .../recipes-extended/redis-plus-plus/redis-plus-plus_1.2.2.bb   |   2 +-
->  meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb               |   2 +-
->  meta-oe/recipes-extended/rsyslog/libfastjson_0.99.9.bb          |   2 +-
->  meta-oe/recipes-extended/sanlock/sanlock_3.8.3.bb               |   2 +-
->  meta-oe/recipes-extended/sedutil/sedutil_git.bb                 |   2 +-
->  meta-oe/recipes-extended/socketcan/can-isotp_git.bb             |   2 +-
->  meta-oe/recipes-extended/socketcan/can-utils_git.bb             |   4 +-
->  meta-oe/recipes-extended/socketcan/canutils_4.0.6.bb            |   2 +-
->  meta-oe/recipes-extended/socketcan/libsocketcan_0.0.12.bb       |   2 +-
->  meta-oe/recipes-extended/sysdig/sysdig_git.bb                   |   2 +-
->  meta-oe/recipes-extended/tipcutils/tipcutils_git.bb             |   2 +-
->  meta-oe/recipes-extended/tmate/tmate_2.4.0.bb                   |   2 +-
->  meta-oe/recipes-extended/triggerhappy/triggerhappy_git.bb       |   2 +-
->  meta-oe/recipes-extended/upm/upm_git.bb                         |   2 +-
->  meta-oe/recipes-extended/wipe/wipe_0.24.bb                      |   2 +-
->  meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb             |   2 +-
->  meta-oe/recipes-extended/zlog/zlog_1.2.15.bb                    |   2 +-
->  meta-oe/recipes-gnome/libjcat/libjcat_0.1.6.bb                  |   2 +-
->  meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.0.bb                  |   2 +-
->  meta-oe/recipes-gnome/pyxdg/pyxdg_0.26.bb                       |   2 +-
->  meta-oe/recipes-graphics/dietsplash/dietsplash_git.bb           |   2 +-
->  meta-oe/recipes-graphics/dnfdragora/dnfdragora_git.bb           |   2 +-
->  meta-oe/recipes-graphics/fbgrab/fbgrab_1.5.bb                   |   2 +-
->  meta-oe/recipes-graphics/fontforge/fontforge_20190801.bb        |   2 +-
->  meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb                     |   2 +-
->  meta-oe/recipes-graphics/glm/glm_0.9.9.8.bb                     |   2 +-
->  meta-oe/recipes-graphics/imlib2/imlib2_git.bb                   |   2 +-
->  meta-oe/recipes-graphics/jasper/jasper_2.0.26.bb                |   2 +-
->  meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.13.bb    |   2 +-
->  meta-oe/recipes-graphics/libyui/libyui-ncurses_4.1.1.bb         |   2 +-
->  meta-oe/recipes-graphics/libyui/libyui_4.1.1.bb                 |   2 +-
->  meta-oe/recipes-graphics/openbox/obconf_git.bb                  |   2 +-
->  meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb             |   2 +-
->  .../parallel-deqp-runner/parallel-deqp-runner_git.bb            |   2 +-
->  meta-oe/recipes-graphics/qrencode/qrencode_4.1.1.bb             |   2 +-
->  meta-oe/recipes-graphics/renderdoc/renderdoc_1.7.bb             |   2 +-
->  meta-oe/recipes-graphics/spir/spirv-shader-generator_git.bb     |   2 +-
->  meta-oe/recipes-graphics/tesseract/tesseract-lang_4.1.0.bb      |   2 +-
->  meta-oe/recipes-graphics/tesseract/tesseract_4.1.1.bb           |   2 +-
->  meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb            |   2 +-
->  meta-oe/recipes-graphics/ttf-fonts/ttf-droid_git.bb             |   2 +-
->  meta-oe/recipes-graphics/ttf-fonts/ttf-lohit_2.bb               |   2 +-
->  meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_20190815.bb   |   2 +-
->  .../recipes-graphics/unclutter-xfixes/unclutter-xfixes_1.5.bb   |   2 +-
->  meta-oe/recipes-graphics/vdpau/libvdpau_1.4.bb                  |   2 +-
->  meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc              |   6 +-
->  meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb                |   2 +-
->  meta-oe/recipes-graphics/xorg-driver/xf86-video-armsoc_1.4.1.bb |   2 +-
->  meta-oe/recipes-graphics/yad/yad_6.0.bb                         |   2 +-
->  meta-oe/recipes-kernel/agent-proxy/agent-proxy_1.97.bb          |   2 +-
->  .../broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p2.bb |   2 +-
->  meta-oe/recipes-kernel/crash/crash_7.3.0.bb                     |   2 +-
->  meta-oe/recipes-kernel/kpatch/kpatch.inc                        |   2 +-
->  meta-oe/recipes-kernel/libbpf/libbpf_0.3.bb                     |   2 +-
->  meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.8.bb       |   2 +-
->  meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb   |   2 +-
->  meta-oe/recipes-kernel/pm-graph/pm-graph_5.5.bb                 |   2 +-
->  meta-oe/recipes-multimedia/jack/a2jmidid_9.bb                   |   2 +-
->  meta-oe/recipes-multimedia/jack/jack_1.19.17.bb                 |   2 +-
->  meta-oe/recipes-multimedia/libass/libass_0.14.0.bb              |   2 +-
->  meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb                |   2 +-
->  meta-oe/recipes-multimedia/v4l2apps/yavta_git.bb                |   2 +-
->  meta-oe/recipes-multimedia/webm/libvpx_1.8.2.bb                 |   2 +-
->  .../recipes-support/ace-cloud-editor/ace-cloud-editor_git.bb    |   2 +-
->  meta-oe/recipes-support/avro/avro-c_1.9.2.bb                    |   2 +-
->  meta-oe/recipes-support/bdwgc/bdwgc_8.0.4.bb                    |   2 +-
->  meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb                 |   2 +-
->  meta-oe/recipes-support/c-periphery/c-periphery_2.3.1.bb        |   2 +-
->  meta-oe/recipes-support/ceres-solver/ceres-solver_2.0.0.bb      |   2 +-
->  meta-oe/recipes-support/cli11/cli11_1.9.1.bb                    |   2 +-
->  meta-oe/recipes-support/cmark/cmark_git.bb                      |   2 +-
->  meta-oe/recipes-support/consolation/consolation_0.0.8.bb        |   2 +-
->  meta-oe/recipes-support/daemonize/daemonize_git.bb              |   2 +-
->  meta-oe/recipes-support/digitemp/digitemp_3.7.2.bb              |   2 +-
->  meta-oe/recipes-support/dstat/dstat_0.7.4.bb                    |   4 +-
->  meta-oe/recipes-support/epeg/epeg_git.bb                        |   2 +-
->  meta-oe/recipes-support/fmt/fmt_7.1.3.bb                        |   2 +-
->  meta-oe/recipes-support/freerdp/freerdp_2.3.0.bb                |   2 +-
->  meta-oe/recipes-support/function2/function2_4.1.0.bb            |   2 +-
->  meta-oe/recipes-support/gd/gd_2.3.3.bb                          |   2 +-
->  meta-oe/recipes-support/gflags/gflags_2.2.2.bb                  |   2 +-
->  meta-oe/recipes-support/glog/glog_0.4.0.bb                      |   2 +-
->  meta-oe/recipes-support/gnulib/gnulib_2018-03-07.03.bb          |   2 +-
->  meta-oe/recipes-support/gperftools/gperftools_2.9.1.bb          |   2 +-
->  meta-oe/recipes-support/gpm/gpm_git.bb                          |   2 +-
->  meta-oe/recipes-support/hidapi/hidapi_git.bb                    |   2 +-
->  meta-oe/recipes-support/htop/htop_3.0.5.bb                      |   2 +-
->  meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb       |   2 +-
->  meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb              |   2 +-
->  meta-oe/recipes-support/hwdata/hwdata_git.bb                    |   2 +-
->  meta-oe/recipes-support/iksemel/iksemel_1.5.bb                  |   2 +-
->  meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb       |   2 +-
->  meta-oe/recipes-support/inih/libinih_git.bb                     |   2 +-
->  meta-oe/recipes-support/iniparser/iniparser_4.1.bb              |   2 +-
->  meta-oe/recipes-support/inotify-tools/inotify-tools_git.bb      |   2 +-
->  meta-oe/recipes-support/libatasmart/libatasmart_0.19.bb         |   2 +-
->  meta-oe/recipes-support/libbytesize/libbytesize_2.4.bb          |   2 +-
->  meta-oe/recipes-support/libcereal/libcereal_1.3.0.bb            |   2 +-
->  meta-oe/recipes-support/libcppkafka/libcppkafka_git.bb          |   2 +-
->  meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb    |   2 +-
->  meta-oe/recipes-support/libfann/libfann_git.bb                  |   2 +-
->  meta-oe/recipes-support/libgusb/libgusb_0.3.5.bb                |   2 +-
->  meta-oe/recipes-support/libharu/libharu_2.3.0.bb                |   2 +-
->  meta-oe/recipes-support/libiio/libiio_git.bb                    |   2 +-
->  meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb          |   2 +-
->  meta-oe/recipes-support/libmxml/libmxml_3.1.bb                  |   2 +-
->  meta-oe/recipes-support/libp11/libp11_0.4.11.bb                 |   2 +-
->  meta-oe/recipes-support/librdkafka/librdkafka_1.6.1.bb          |   2 +-
->  meta-oe/recipes-support/librsync/librsync_2.3.2.bb              |   2 +-
->  meta-oe/recipes-support/libsoc/libsoc_0.8.2.bb                  |   2 +-
->  meta-oe/recipes-support/libteam/libteam_1.31.bb                 |   2 +-
->  meta-oe/recipes-support/libtinyxml2/libtinyxml2_8.0.0.bb        |   2 +-
->  meta-oe/recipes-support/libusb/libusb-compat_0.1.7.bb           |   2 +-
->  meta-oe/recipes-support/libusbg/libusbg_git.bb                  |   2 +-
->  meta-oe/recipes-support/libusbgx/libusbgx_git.bb                |   2 +-
->  meta-oe/recipes-support/libutempter/libutempter.bb              |   2 +-
->  meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb              |   2 +-
->  meta-oe/recipes-support/mcelog/mce-inject_git.bb                |   2 +-
->  meta-oe/recipes-support/mcelog/mce-test_git.bb                  |   2 +-
->  meta-oe/recipes-support/mcelog/mcelog_175.bb                    |   2 +-
->  meta-oe/recipes-support/mg/mg_20210314.bb                       |   2 +-
->  .../recipes-support/multipath-tools/multipath-tools_0.8.4.bb    |   2 +-
->  meta-oe/recipes-support/ne10/ne10_1.2.1.bb                      |   2 +-
->  meta-oe/recipes-support/opencl/clinfo_2.2.18.04.06.bb           |   2 +-
->  meta-oe/recipes-support/opencv/ade_0.1.1f.bb                    |   2 +-
->  meta-oe/recipes-support/opencv/opencv_4.5.2.bb                  |  14 +-=
--
->  meta-oe/recipes-support/opensc/opensc_0.21.0.bb                 |   2 +-
->  meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.5.7.bb          |   2 +-
->  meta-oe/recipes-support/picocom/picocom_git.bb                  |   2 +-
->  meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb         |   2 +-
->  meta-oe/recipes-support/pidgin/icyque_git.bb                    |   2 +-
->  meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb           |   2 +-
->  meta-oe/recipes-support/poco/poco_1.10.1.bb                     |   2 +-
->  meta-oe/recipes-support/pps-tools/pps-tools_1.0.2.bb            |   2 +-
->  meta-oe/recipes-support/re2/re2_2020.11.01.bb                   |   2 +-
->  meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb              |   2 +-
->  meta-oe/recipes-support/sass/libsass_git.bb                     |   2 +-
->  meta-oe/recipes-support/sass/sassc_git.bb                       |   2 +-
->  meta-oe/recipes-support/satyr/satyr_0.37.bb                     |   2 +-
->  meta-oe/recipes-support/serial-utils/pty-forward-native.bb      |   2 +-
->  meta-oe/recipes-support/serial-utils/serial-forward_git.bb      |   2 +-
->  meta-oe/recipes-support/span-lite/span-lite_0.8.1.bb            |   2 +-
->  meta-oe/recipes-support/spdlog/spdlog_1.8.2.bb                  |   2 +-
->  meta-oe/recipes-support/spitools/spitools_git.bb                |   2 +-
->  .../thin-provisioning-tools/thin-provisioning-tools_0.8.5.bb    |   2 +-
->  meta-oe/recipes-support/toscoterm/toscoterm_git.bb              |   2 +-
->  meta-oe/recipes-support/udisks/udisks2_2.9.2.bb                 |   2 +-
->  meta-oe/recipes-support/uhubctl/uhubctl_2.3.0.bb                |   2 +-
->  meta-oe/recipes-support/uthash/uthash_2.3.0.bb                  |   2 +-
->  meta-oe/recipes-support/utouch/utouch-evemu_git.bb              |   2 +-
->  meta-oe/recipes-support/utouch/utouch-frame_git.bb              |   2 +-
->  meta-oe/recipes-support/utouch/utouch-mtview_git.bb             |   2 +-
->  meta-oe/recipes-support/websocketpp/websocketpp_0.8.2.bb        |   2 +-
->  meta-oe/recipes-support/xdelta/xdelta3_3.1.0.bb                 |   2 +-
->  meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb             |   2 +-
->  meta-oe/recipes-support/xrdp/xrdp_0.9.15.bb                     |   2 +-
->  meta-oe/recipes-support/yaml-cpp/yaml-cpp_0.6.3.bb              |   2 +-
->  meta-oe/recipes-support/zbar/zbar_git.bb                        |   2 +-
->  meta-oe/recipes-support/zchunk/zchunk_1.1.9.bb                  |   2 +-
->  meta-oe/recipes-test/bats/bats_1.3.0.bb                         |   2 +-
->  meta-oe/recipes-test/catch2/catch2_2.13.4.bb                    |   2 +-
->  meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb                     |   2 +-
->  meta-oe/recipes-test/evtest/evtest_1.34.bb                      |   2 +-
->  meta-oe/recipes-test/fbtest/fb-test_git.bb                      |   2 +-
->  meta-oe/recipes-test/googletest/googletest_git.bb               |   2 +-
->  meta-perl/recipes-perl/po4a/po4a_0.49.bb                        |   2 +-
->  .../recipes-connectivity/python-txws/python3-txws_0.9.1.bb      |   2 +-
->  meta-python/recipes-devtools/gyp/gyp_git.bb                     |   2 +-
->  meta-python/recipes-devtools/python/python3-astor_0.8.1.bb      |   2 +-
->  meta-python/recipes-devtools/python/python3-cvxopt_1.2.6.bb     |   2 +-
->  meta-python/recipes-devtools/python/python3-dbussy_1.3.bb       |   2 +-
->  meta-python/recipes-devtools/python/python3-dt-schema_git.bb    |   2 +-
->  .../recipes-devtools/python/python3-feedformatter_0.4.bb        |   2 +-
->  .../recipes-devtools/python/python3-keras-applications_1.0.8.bb |   2 +-
->  meta-python/recipes-devtools/python/python3-monotonic_1.6.bb    |   2 +-
->  meta-python/recipes-devtools/python/python3-ntplib_0.3.4.bb     |   2 +-
->  meta-python/recipes-devtools/python/python3-pillow_8.2.0.bb     |   2 +-
->  .../recipes-devtools/python/python3-pybind11-json_0.2.6.bb      |   2 +-
->  meta-python/recipes-devtools/python/python3-pybind11_2.6.2.bb   |   2 +-
->  .../recipes-devtools/python/python3-pydbus-manager_git.bb       |   2 +-
->  meta-python/recipes-devtools/python/python3-xlrd_2.0.1.bb       |   2 +-
->  .../recipes-extended/python-blivet/python3-blivet_3.1.4.bb      |   2 +-
->  .../recipes-extended/python-blivet/python3-blivetgui_2.1.10.bb  |   2 +-
->  meta-python/recipes-extended/python-cson/python3-cson_git.bb    |   2 +-
->  meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb |   2 +-
->  meta-webserver/recipes-httpd/cherokee/cherokee_git.bb           |   2 +-
->  meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb          |   2 +-
->  meta-webserver/recipes-support/fcgi/fcgi_git.bb                 |   2 +-
->  meta-webserver/recipes-webadmin/netdata/netdata_git.bb          |   2 +-
->  meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb               |   2 +-
->  meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb           |   2 +-
->  .../xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb       |   2 +-
->  .../closebutton/xfce4-closebutton-plugin_git.bb                 |   2 +-
->  441 files changed, 861 insertions(+), 459 deletions(-)
->  create mode 100644
-> meta-oe/recipes-core/sdbus-c++/sdbus-c++-0.8.3/0001-Try-to-first-find-goo=
-gletest-in-the-system-before-do.patch
->  create mode 100644
-> meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd-243/7c5fd25119a495009=
-ea62f79e5daec34cc464628.patch
->  create mode 100644
-> meta-oe/recipes-dbs/postgresql/files/CVE-2021-23214.patch
->  create mode 100644
-> meta-oe/recipes-dbs/postgresql/files/CVE-2021-23222.patch
->
+Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
+---
+ ...{python3-bitstruct_8.11.1.bb => python3-bitstruct_8.12.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-bitstruct_8.11.1.bb => python3-bitstruct_8.12.1.bb} (79%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-bitstruct_8.11.1.bb b/meta-python/recipes-devtools/python/python3-bitstruct_8.12.1.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-bitstruct_8.11.1.bb
+rename to meta-python/recipes-devtools/python/python3-bitstruct_8.12.1.bb
+index 49b31971a6..f53f84f83e 100644
+--- a/meta-python/recipes-devtools/python/python3-bitstruct_8.11.1.bb
++++ b/meta-python/recipes-devtools/python/python3-bitstruct_8.12.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/eerimoq/bitstruct"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd"
+ 
+-SRC_URI[sha256sum] = "4e7b8769c0f09fee403d0a5f637f8b575b191a79a92e140811aa109ce7461f0c"
++SRC_URI[sha256sum] = "45b2b932ce6681f5c6ce8cba39abdd423b579b0568c76fa48b1e09c88368ede7"
+ 
+ PYPI_PACKAGE = "bitstruct"
+ 
+-- 
+2.25.1
+
 
