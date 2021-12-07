@@ -1,117 +1,206 @@
-Return-Path: <xuhuan.fnst@fujitsu.com>
+Return-Path: <hongxu.jia@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7327C433F5
-	for <webhook@archiver.kernel.org>; Tue,  7 Dec 2021 06:48:40 +0000 (UTC)
-Received: from mail1.bemta34.sdw.messagelabs.com
- (mail1.bemta34.sdw.messagelabs.com [195.245.231.2])
- by mx.groups.io with SMTP id smtpd.web11.63940.1638859718584825209
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BF7BC433EF
+	for <webhook@archiver.kernel.org>; Tue,  7 Dec 2021 08:02:23 +0000 (UTC)
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
+ by mx.groups.io with SMTP id smtpd.web12.64216.1638864142417722222
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Dec 2021 22:48:39 -0800
+ Tue, 07 Dec 2021 00:02:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Qo4a+JEz;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.2,
- mailfrom: xuhuan.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1638859714; i=@fujitsu.com;
-	bh=vDWlMzPNRq5BMQ6VVR1SzH1wiDBo1CrvZKzCiBZy5Cs=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=Qo4a+JEzAJTxe4NZLH+XO7yeuvpUIROli0t0FCFL59HUBDG2/TyieJ1XM3aQMktyJ
-	 Pb58NV47vNe29cy7epf0OQQ2JgrdtJ+eSlBcx4ZbgiiX9V38W7H9GM4VjxEIihCV2x
-	 CHzn8s30BGE4qdCsR17GiErskkL7q6brxw3QWbvQyvnZ0db1ToPP1/6jXaNUaGi2LY
-	 uJ7t713DYfaVYSJ+dqKMyZ4a7xvwxN1WCJSDKRsmsYZxeULYvsgpyhkQrSqI3I2Qs5
-	 HmWVZtuBvQbjNg/vSsDlOycQoe03OB0251dAVp4f8nLwN+TU6ivjqBu+B+uPgBhmB1
-	 5sC+3CvTCl3+w==
-Received: from [100.115.34.229] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-west-2.aws.ess.symcld.net id 5F/D2-32601-2C30FA16;
- Tue, 07 Dec 2021 06:48:34 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8ORqHuIeX2
-  iwe4jjBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8a5eTPYC9ZwVjScmsLcwHiVo4uRi0NI4Amj
-  xNNX81ggnAtMEhP+r2KEcE4wSvxuW8rcxcjJwSagLvH45mtGEFtEQF9i6ew9YHFmAVWJ7otr2
-  EFsYQF/ic/Tb7GC2CwCKhKf9j5i62Lk4OAVcJfoOBcIEpYQUJCY8vA9WCuvgKDEyZlPWCDGSE
-  gcfPGCGaJGSeLEio9MEHaFxOvDl6DiahJXz21insDIPwtJ+ywk7QsYmVYxWicVZaZnlOQmZub
-  oGhoY6BoamuoaG+kaGRjqJVbpJuqlluqWpxaX6BrpJZYX66UWF+sVV+Ym56To5aWWbGIEhmVK
-  scLJHYy/L33TO8QoycGkJMobMW9dohBfUn5KZUZicUZ8UWlOavEhRhkODiUJXp//QDnBotT01
-  Iq0zBxgjMCkJTh4lER4LzKsTxTiLS5IzC3OTIdInWJUlBLnXcsElBAASWSU5sG1weLyEqOslD
-  AvIwMDgxBPQWpRbmYJqvwrRnEORiVh3nkgU3gy80rgpr8CWswEtDimfzXI4pJEhJRUA1NSUuY
-  5/wm3o7yXp0s28Lwq8g47Yb/t3ofM0pZV59XvcdkaRm2/w/lF/tAb2cYYkdQvzuKaPVIaouus
-  Z7Y4V8xRj95edkRRfRcHn+ax5Td3L5so6jbl2fpLW3e/t9r77w6zsPfFhT4v9jLmG2eJiCp71
-  nbx1u5SldmxbbvRNna7g5ujrYysbj/r2ppyfhJj5Yeue6WiP2Wu77/s6xDk+W7j5iW5c5e7um
-  0uOZ5/dZbUnN7vEb5xYben2O6LLXRks5d1OhSQ9taNaV3Wmg5lw33rHgvu2/71vNK9x+1v3nz
-  52m05f+Y66UvhrgLLonMFzwSvEX2ardfx2qjstsf3k6/qFLa8Td/1wTJm7daFm/qUWIozEg21
-  mIuKEwHaPaT9RgMAAA==
-X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-3.tower-571.messagelabs.com!1638859713!85295!1
-X-Originating-IP: [62.60.8.97]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.7; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 4596 invoked from network); 7 Dec 2021 06:48:34 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-3.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 7 Dec 2021 06:48:34 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 9F916100242
-	for <openembedded-devel@lists.openembedded.org>;
- Tue,  7 Dec 2021 06:48:33 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 9355D100234
-	for <openembedded-devel@lists.openembedded.org>;
- Tue,  7 Dec 2021 06:48:33 +0000 (GMT)
-Received: from localhost.localdomain.localdomain (10.167.225.131) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Tue, 7 Dec 2021 06:48:12 +0000
-From: XU Huan <xuhuan.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-bitstruct: upgrade 8.11.1 ->
- 8.12.1
-Date: Tue, 7 Dec 2021 14:47:42 +0800
-Message-ID: <1638859662-19143-1-git-send-email-xuhuan.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=missing;
+ spf=fail (domain: windriver.com, ip: 147.11.3.146, mailfrom: hongxu.jia@windriver.com)
+Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 1B782I6l016359
+	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
+	Tue, 7 Dec 2021 00:02:18 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 1B782D2r021875
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 7 Dec 2021 00:02:18 -0800 (PST)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Tue, 7 Dec 2021 00:02:12 -0800
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Tue, 7 Dec 2021 00:02:11 -0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+CC: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] libblockdev: Do not include duplicate entries in
+ bd_lvm_lvs output
+Date: Tue, 7 Dec 2021 16:02:11 +0800
+Message-ID: <20211207080211.2818509-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Originating-IP: [10.167.225.131]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Dec 2021 06:48:40 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Dec 2021 08:02:23 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94224
+ https://lists.openembedded.org/g/openembedded-devel/message/94225
 
-From: Xu Huan <xuhuan.fnst@fujitsu.com>
+We use "-o segtypes" for the "lvs" command which means multisegment
+LVs will be twice in the output. [1]
+...
+$ lvs --noheadings --nosuffix --nameprefixes --unquoted --units=b -a -o
+vg_name,lv_name,lv_uuid,lv_size,lv_attr,segtype,origin,pool_lv,data_lv,metadata_lv,role,move_pv,data_percent,metadata_percent,copy_percent,lv_tags
 
-Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
+OUTPUT:
+|LVM2_VG_NAME=rootvg LVM2_LV_NAME=RCSMW-ARM_CXP2020233_2_R20A154
+LVM2_LV_UUID=TgjM5V-jhXX-tPTf-gPMa-c3w6-QEjo-7qkmVg
+LVM2_LV_SIZE=71303168 LVM2_LV_ATTR=wi-ao--- LVM2_SEGTYPE=linear
+LVM2_ORIGIN= LVM2_POOL_LV= LVM2_DATA_LV= LVM2_METADATA_LV=
+LVM2_LV_ROLE=public LVM2_MOVE_PV= LVM2_DATA_PERCENT=
+LVM2_METADATA_PERCENT= LVM2_COPY_PERCENT= LVM2_LV_TAGS=
+
+|LVM2_VG_NAME=rootvg LVM2_LV_NAME=RCSMW-ARM_CXP2020233_2_R20A154
+LVM2_LV_UUID=TgjM5V-jhXX-tPTf-gPMa-c3w6-QEjo-7qkmVg
+LVM2_LV_SIZE=71303168 LVM2_LV_ATTR=wi-ao--- LVM2_SEGTYPE=linear
+LVM2_ORIGIN= LVM2_POOL_LV= LVM2_DATA_LV= LVM2_METADATA_LV=
+LVM2_LV_ROLE=public LVM2_MOVE_PV= LVM2_DATA_PERCENT=
+LVM2_METADATA_PERCENT= LVM2_COPY_PERCENT= LVM2_LV_TAGS=
+...
+
+See [2]
+
+[1] https://github.com/storaged-project/libblockdev/pull/671
+[2] https://github.com/storaged-project/libblockdev/issues/667
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- ...{python3-bitstruct_8.11.1.bb => python3-bitstruct_8.12.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-bitstruct_8.11.1.bb => python3-bitstruct_8.12.1.bb} (79%)
+ ...de-duplicate-entries-in-bd_lvm_lvs-o.patch | 100 ++++++++++++++++++
+ .../libblockdev/libblockdev_2.26.bb           |   4 +-
+ 2 files changed, 103 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/libblockdev/files/0001-lvm-Do-not-include-duplicate-entries-in-bd_lvm_lvs-o.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitstruct_8.11.1.bb b/meta-python/recipes-devtools/python/python3-bitstruct_8.12.1.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-bitstruct_8.11.1.bb
-rename to meta-python/recipes-devtools/python/python3-bitstruct_8.12.1.bb
-index 49b31971a6..f53f84f83e 100644
---- a/meta-python/recipes-devtools/python/python3-bitstruct_8.11.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-bitstruct_8.12.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/eerimoq/bitstruct"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd"
+diff --git a/meta-oe/recipes-extended/libblockdev/files/0001-lvm-Do-not-include-duplicate-entries-in-bd_lvm_lvs-o.patch b/meta-oe/recipes-extended/libblockdev/files/0001-lvm-Do-not-include-duplicate-entries-in-bd_lvm_lvs-o.patch
+new file mode 100644
+index 000000000..03208a9bb
+--- /dev/null
++++ b/meta-oe/recipes-extended/libblockdev/files/0001-lvm-Do-not-include-duplicate-entries-in-bd_lvm_lvs-o.patch
+@@ -0,0 +1,100 @@
++From d10fb2c0ee60c97f4dfeab4506a347c26cb389df Mon Sep 17 00:00:00 2001
++From: Vojtech Trefny <vtrefny@redhat.com>
++Date: Tue, 7 Dec 2021 15:50:45 +0800
++Subject: [PATCH] lvm: Do not include duplicate entries in bd_lvm_lvs output
++
++We use "-o segtypes" for the "lvs" command which means multisegment
++LVs will be twice in the output.
++
++Signed-off-by: Vojtech Trefny <vtrefny@redhat.com>
++
++Upstream-Status: Backport [https://github.com/storaged-project/libblockdev/pull/671]
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ src/plugins/lvm.c | 17 +++++++++++++++--
++ tests/lvm_test.py | 41 +++++++++++++++++++++++++++++++++++++++++
++ 2 files changed, 56 insertions(+), 2 deletions(-)
++
++diff --git a/src/plugins/lvm.c b/src/plugins/lvm.c
++index 2be1dbd..acd5b84 100644
++--- a/src/plugins/lvm.c
+++++ b/src/plugins/lvm.c
++@@ -1810,8 +1810,21 @@ BDLVMLVdata** bd_lvm_lvs (const gchar *vg_name, GError **error) {
++         if (table && (num_items == 15)) {
++             /* valid line, try to parse and record it */
++             lvdata = get_lv_data_from_table (table, TRUE);
++-            if (lvdata)
++-                g_ptr_array_add (lvs, lvdata);
+++            if (lvdata) {
+++                /* ignore duplicate entries in lvs output, these are caused by multi segments LVs */
+++                for (gsize i = 0; i < lvs->len; i++) {
+++                    if (g_strcmp0 (((BDLVMLVdata *) g_ptr_array_index (lvs, i))->lv_name, lvdata->lv_name) == 0) {
+++                        g_warning("Duplicate LV entry for '%s' found in lvs output",
+++                                  lvdata->lv_name);
+++                        bd_lvm_lvdata_free (lvdata);
+++                        lvdata = NULL;
+++                        break;
+++                    }
+++                }
+++
+++                if (lvdata)
+++                    g_ptr_array_add (lvs, lvdata);
+++            }
++         } else
++             if (table)
++                 g_hash_table_destroy (table);
++diff --git a/tests/lvm_test.py b/tests/lvm_test.py
++index eb94c91..ab0de21 100644
++--- a/tests/lvm_test.py
+++++ b/tests/lvm_test.py
++@@ -915,6 +915,47 @@ class LvmTestLVs(LvmPVVGLVTestCase):
++         lvs = BlockDev.lvm_lvs("testVG")
++         self.assertEqual(len(lvs), 1)
++ 
+++class LvmTestLVsMultiSegment(LvmPVVGLVTestCase):
+++    def _clean_up(self):
+++        try:
+++            BlockDev.lvm_lvremove("testVG", "testLV2", True, None)
+++        except:
+++            pass
+++
+++        LvmPVVGLVTestCase._clean_up(self)
+++
+++    def test_lvs(self):
+++        """Verify that it's possible to gather info about LVs"""
+++
+++        succ = BlockDev.lvm_pvcreate(self.loop_dev, 0, 0, None)
+++        self.assertTrue(succ)
+++
+++        succ = BlockDev.lvm_vgcreate("testVG", [self.loop_dev], 0, None)
+++        self.assertTrue(succ)
+++
+++        succ = BlockDev.lvm_lvcreate("testVG", "testLV", 10 * 1024**2)
+++        self.assertTrue(succ)
+++
+++        lvs = BlockDev.lvm_lvs("testVG")
+++        self.assertEqual(len(lvs), 1)
+++        self.assertListEqual([lv.lv_name for lv in lvs], ["testLV"])
+++
+++        # add second LV
+++        succ = BlockDev.lvm_lvcreate("testVG", "testLV2", 10 * 1024**2)
+++        self.assertTrue(succ)
+++
+++        lvs = BlockDev.lvm_lvs("testVG")
+++        self.assertEqual(len(lvs), 2)
+++        self.assertListEqual([lv.lv_name for lv in lvs], ["testLV", "testLV2"])
+++
+++        # by resizing the first LV we will create two segments
+++        succ = BlockDev.lvm_lvresize("testVG", "testLV", 20 * 1024**2, None)
+++        self.assertTrue(succ)
+++
+++        lvs = BlockDev.lvm_lvs("testVG")
+++        self.assertEqual(len(lvs), 2)
+++        self.assertListEqual([lv.lv_name for lv in lvs], ["testLV", "testLV2"])
+++
++ class LvmPVVGthpoolTestCase(LvmPVVGTestCase):
++     def _clean_up(self):
++         try:
++-- 
++2.27.0
++
+diff --git a/meta-oe/recipes-extended/libblockdev/libblockdev_2.26.bb b/meta-oe/recipes-extended/libblockdev/libblockdev_2.26.bb
+index c884b1133..b9c3bbb40 100644
+--- a/meta-oe/recipes-extended/libblockdev/libblockdev_2.26.bb
++++ b/meta-oe/recipes-extended/libblockdev/libblockdev_2.26.bb
+@@ -10,7 +10,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
  
--SRC_URI[sha256sum] = "4e7b8769c0f09fee403d0a5f637f8b575b191a79a92e140811aa109ce7461f0c"
-+SRC_URI[sha256sum] = "45b2b932ce6681f5c6ce8cba39abdd423b579b0568c76fa48b1e09c88368ede7"
+ inherit autotools gobject-introspection pkgconfig
  
- PYPI_PACKAGE = "bitstruct"
+-SRC_URI = "git://github.com/storaged-project/libblockdev;branch=2.x-branch;protocol=https"
++SRC_URI = "git://github.com/storaged-project/libblockdev;branch=2.x-branch;protocol=https \
++           file://0001-lvm-Do-not-include-duplicate-entries-in-bd_lvm_lvs-o.patch \
++"
+ SRCREV = "47ff12242c89e36a33259d18b7068b26c3bb1c64"
+ S = "${WORKDIR}/git"
  
 -- 
-2.25.1
+2.27.0
 
 
