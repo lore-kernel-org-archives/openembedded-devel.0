@@ -1,359 +1,146 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <kweihmann@outlook.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E948C433F5
-	for <webhook@archiver.kernel.org>; Tue,  7 Dec 2021 16:38:49 +0000 (UTC)
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
- [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.web10.387.1638895128913779194
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 72873C433F5
+	for <webhook@archiver.kernel.org>; Tue,  7 Dec 2021 17:16:14 +0000 (UTC)
+Received: from EUR03-AM5-obe.outbound.protection.outlook.com
+ (EUR03-AM5-obe.outbound.protection.outlook.com [40.92.70.18])
+ by mx.groups.io with SMTP id smtpd.web12.46.1638897373641996251
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Dec 2021 08:38:49 -0800
+ Tue, 07 Dec 2021 09:16:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ErREZYnU;
- spf=pass (domain: gmail.com, ip: 209.85.210.170,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id u80so14036310pfc.9
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Dec 2021 08:38:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=nfVyGpGaABiM0vqDlDysO0+FHQHOQa6OYbU8a7n6x2Q=;
-        b=ErREZYnUAswv0+lvSVjcrKAJoYDKYU+lcyuVsfCa9bFQqAt7E7DOtSwGoFFgPYv/do
-         G2m6WwmskW7sAImIYvKVFfeuXXpkzhnK/0yza6/knK8d9ZuiX9kXrCQ4pFsjNp3nCIgN
-         CZBDLpFk9Pdijww5t2WdHsmUIfcoIQKOi6Zmb1Yj/Ler7JpteJ6ojh5K9exQLtNnV2Jv
-         gSiNBJeEeNcQUm2t1/6RQ6QjsDCKW5G8j0vnVvM5r89cqxqqzUvxo54y3AlVeZIW6JaK
-         9M7VmzUR+pa3ZPFhdaza66BN/2pnVUFJ7JQ34hJk4tpnXbrEVb29iwaEHcTOunvoYJMD
-         qUww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=nfVyGpGaABiM0vqDlDysO0+FHQHOQa6OYbU8a7n6x2Q=;
-        b=DvGFiPnHf3Kgzu2K9pReYDWgwIqj85udMbRQxsMIQfjoCMORIY12OYJiIsyCSTul82
-         +T40WKk67VXL+7xzFd+osFkKxp54LZpw58Pv+NJPeIUJXpCxa4PNXOrvdhPZJwSIYvZu
-         m9gLk1pI0GMyGcyqhGSTdhocXVABKsmqn+9sWMrNdBpyHTD6TK1/s3GMCuNAfSXSwyFp
-         6SaQkMPzZ7GA3/KYy2TN5pnupsmcxMM0M9lMULYi2FJ6Oga9elE66DE28y3iq4D6PMle
-         lT9vxH6zjtbqqbtvyhhdsv5WQ3Swh9x0FEOxJ5D1US6HiXRa0z05kgezcHQi28voGBeR
-         2DgA==
-X-Gm-Message-State: AOAM53290Sr0e6GQyuSL5XcQjsksY28hgtoKZ0Ctjd1SDLgl5aQvSJsS
-	tgll+AGueM/e5pXMJ0mSrxDpnyvT4IKtSA==
-X-Google-Smtp-Source: 
- ABdhPJyRf6lkIC76pWnLN0oMwDnJVTicFjYlhdET7MrRs0z1r/mdLkT2GUnhlgyrkiR9XM2/pFGBWQ==
-X-Received: by 2002:a63:914a:: with SMTP id
- l71mr24946804pge.224.1638895127984;
-        Tue, 07 Dec 2021 08:38:47 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ce68])
-        by smtp.gmail.com with ESMTPSA id
- y11sm150391pfg.204.2021.12.07.08.38.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Dec 2021 08:38:47 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] tbb: Upgrade to 2021.4.0
-Date: Tue,  7 Dec 2021 08:38:45 -0800
-Message-Id: <20211207163845.2026814-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@outlook.com header.s=selector1 header.b=hgmr1NDp;
+ spf=pass (domain: outlook.com, ip: 40.92.70.18,
+ mailfrom: kweihmann@outlook.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=krsOGiSOuOgMohWqu36I7OOijoJwewAfUSy6wo5m4Afss8o1lwCRoemlrSEcthNEhMztSOX6O6mOGE1iXjFc/DZ7HyulgBSFiLtCocd+IGxO9N7Y7ynDc6ZkZEqPsMs8vBLmZqET2SM3n9Nm+eq686OB0bxsFnkxMaMUn4FQCIjden62zB0Dg3wbTLRXK707cOUWHAbnlDVQtnWlfmZSeSgv6lJWlYxX3jIc/0FxOLfqFsCz5Sv44zHDqRG670/NdNuyycp/knfAbDas/wWnXZW4Zfyms+9mV2VsV+kq3Uqz+BMIsPYIewlNJastCleKozxXyDdqYE0rHfFV89Sj5Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=SUWkWtCiskdKagspF3LzNyrXqfAO7UEGwvHJnWTKq1Q=;
+ b=KJbCHtOQsexdN3dSYlU28DpP0c+l4mWMncCOmwNe34KvxjOEprn+92iwsBvFWgWRCLr/b37ey2NdU1/SryYd40qkzc/h4iZT4+hRRpIA3zRcyxLzCEdaHnK7PnCAub6bq6aACwvrMiXD9PYsI3asCkAOHTi6RICPGN/fzNzWKNXvzm2FJz7FT6iyvz5oxmK4K6ya7SNv8TyoGh3Trr45rERq5zA0Wx0/PeMlVld0blIhZmsINRgFdMLsiNLB4g0bHh9h/FE4xIaSQ+jBSnu+hgWryo0swpXr7w46W6pxceC8t4RH7VNqlZsfHW3A2W9wSTJ5kA9RMFnG3NonTzDuHA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SUWkWtCiskdKagspF3LzNyrXqfAO7UEGwvHJnWTKq1Q=;
+ b=hgmr1NDpqgmiV3j391/gW6xbJCLqayISp8TlX2bDKJ2NwF7gzj4RASERPxMsun+FdxqLcXlGKMuxrct5FYMqdSCKyMWLL1XGKr0RZoSV1EB2iyBUsGmEG53ck/x2piMzJ3RvNlqJDs+zhL0rr1qf34gsWtPWVqgTAxjtfnR2tDgD6lAC3AlPtQfR8IEDYoCE17h+I2xrrMi09rYjRYK86J3MxoQGLKT/BOnqt85VcQI67imV7rYXoBZKhxJ00muZ6b7BTKAv2qbTeIko1usxFDbx8taAYBmgvkLgsN/RcGl3S05emsJm1EAo9n8LMM2LMgtjm/U0yKPdM2uN1/ln8A==
+Received: from AM9PR09MB4642.eurprd09.prod.outlook.com (2603:10a6:20b:284::24)
+ by AM0PR09MB2595.eurprd09.prod.outlook.com (2603:10a6:208:e0::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4755.11; Tue, 7 Dec
+ 2021 17:16:11 +0000
+Received: from AM9PR09MB4642.eurprd09.prod.outlook.com
+ ([fe80::782f:9964:348b:b2fa]) by AM9PR09MB4642.eurprd09.prod.outlook.com
+ ([fe80::782f:9964:348b:b2fa%9]) with mapi id 15.20.4778.011; Tue, 7 Dec 2021
+ 17:16:11 +0000
+Subject: Re: [oe] [meta-oe][PATCH] freerdp: Use DEPENDS:append
+To: Marek Vasut <marex@denx.de>, Alexander Kanavin <alex.kanavin@gmail.com>
+Cc: Martin Jansa <martin.jansa@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+ Khem Raj <raj.khem@gmail.com>
+References: <20211207113954.8959-1-marex@denx.de>
+ <CA+chaQdiPbPXXOdw7PBfivuvw-fXZYeBAvDQM2NGL7h_Gr0ULQ@mail.gmail.com>
+ <4a4bd8ca-9fae-c03a-acf1-d25fc44a84dd@denx.de>
+ <CANNYZj-w7xB2r-FvXKbj88CNO5ibxnF1MfmN2z+p-j+_-HNLvg@mail.gmail.com>
+ <d2604e80-3f82-d955-f0d0-620bea1ecbb0@denx.de>
+ <CANNYZj95pzj8Q85BfbFim=h+rvPW86-Wm=Bqh=+j+JKBmWnf3g@mail.gmail.com>
+ <c7ee5abb-cdd5-4286-3c2a-a0533a003af6@denx.de>
+From: Konrad Weihmann <kweihmann@outlook.com>
+Message-ID: 
+ <AM9PR09MB4642DBE011BE6DC32FD856EAA86E9@AM9PR09MB4642.eurprd09.prod.outlook.com>
+Date: Tue, 7 Dec 2021 18:16:10 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
+In-Reply-To: <c7ee5abb-cdd5-4286-3c2a-a0533a003af6@denx.de>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-TMN: [AsSRrGs2D92ccRd4/8dwgZc55yGu2/iwSZs9QlnKWL2DlgnA6QhFo1nIikZ0fw3S]
+X-ClientProxiedBy: AM0PR01CA0123.eurprd01.prod.exchangelabs.com
+ (2603:10a6:208:168::28) To AM9PR09MB4642.eurprd09.prod.outlook.com
+ (2603:10a6:20b:284::24)
+X-Microsoft-Original-Message-ID: 
+ <f4209a28-e5ec-79c5-2265-82cdfd8b88b0@outlook.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: aef63359-f8a2-4366-788e-08d9b9a54411
+X-MS-TrafficTypeDiagnostic: AM0PR09MB2595:EE_
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	NQ7TialU5SRVvGbvTWsxYvQXbSrRuGF41LA42KDVXPzYIjKpw25P4fp1+bZYvnqVhr9RW7Exk0pIX6eMAT0KSSHpiWxyuPePb8teDrygk3l4Di/NnXnEcfDY62rScSfvVnIdXgrxjsT4Tr6j04vH/C047VuFZ7ILGxWCRZdLgF82ajt0rXObN5LPZiFZBai9pIwfBJfPm2DyauEVMlrIfXD/nJZ7x6o+f+U18d0zY/MJ9bepeE8q1+97D1vrgzGe2uVlKxmM+Jcg49g3WURUuPcx1AA2yeI1fss0p7uKCTI78U0BT06jhvZNXy8CpkkpNlPltv+0Hrw/zEQuNDQ/bO2ekIyzx0fTECUPIqQJmGT8jzn3AufcADIYCsaCuwY1W4vzIxpCwhZ8JMegPtv+NuW3mYeUyPaAcx6Le/Rx7KvFNwvkdE9HR2DTeppvthSzgXhLiHxHuTR7uUfHfvArxEpB/3/jnvOpLlI+AUewORjKHvf/EFrYY2JkZ5gRHgtybsYToW9YpJKyU5k4IoO3YscafVtiJTvpGEh3yMubuw2M7v2HSthcVLMB7QC6D2beK2Wpc1sGCUFiHoq1oNDKXlgG2zjJq7AR3JHE6h7Zli/s2XUAtPlJPK9wXdV4YQO4
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?Vld5TTZWTUVXQ0VTMDJyZGxiUU9SbUYyelhMNVp0UlF2U1JURkl4cFFKN3lo?=
+ =?utf-8?B?U0ZHTHZZeEwrM0RmYkRMdWwxckJkK1FZT0h3aVpwajFqU2g4c0c1SmZBQXVa?=
+ =?utf-8?B?My9TZTQwa1pTRU1WSFJNdVo0R3hPODFpWTd2RFpVSWtPNnIrR2JxZ1Bkc0U1?=
+ =?utf-8?B?eUdIelZVM1hvZHRrMmlWQUFpQTVpTUZaUEhDN2Z3b3lRSC9Sa3Y4MzRxQVdZ?=
+ =?utf-8?B?RGN1cTBPVnB3azBMd0FnbTFsRUNiQTRQSlFOb2NaYmFqd3k2b2t4Y3N5ZWRz?=
+ =?utf-8?B?MDZ4VHJSaE9xalJmdGNUaTU0OWlLcDd0cUVlNUVZRUxiR2FWeVlZeWFaWjRC?=
+ =?utf-8?B?TnhqZE9PdCtyN0tlL0loWmRiQzhDOCtWSFlmdUJkK2hCbEkvSVNPUDJWbVp5?=
+ =?utf-8?B?MVdudTRBRnhKUXhNR1I0c3lPekFCRVUyam5kOEg5WkpCNGg3QzMvMFlXQ2w1?=
+ =?utf-8?B?c1ZsREsvSmV2OE5EblI5ZmRyYmhWTVNaaC9mODRYOUlsQVU5c1hFVUc2cUlG?=
+ =?utf-8?B?bDhHbTY1ck1waDBqY0NocEoxWmozbXhKWmN2UXBqU2ltM1V4cWFJcjMzemQ0?=
+ =?utf-8?B?ZmpmSmlIUmcvNzJtZGIvOVhpOWNBZWxqdjczdzNiSlRzL2s1QWJvSnV4U2R5?=
+ =?utf-8?B?NnRZWW14QTMrZkZqOEg3VEhYTGhaVUZjbHBNWEpXSndyRGw2S0tPM1hDZk43?=
+ =?utf-8?B?bXRnN3lsQWRTN3JiZWlZcGkvZlN0UzlteVpCSnVxN0x2SEJkYWltVmx2S2NC?=
+ =?utf-8?B?VVNmd21XSkhNNjkzUkRjSVpDYW01ZUwramVDOGhXOFNlKzI1MHBKY3d5djVl?=
+ =?utf-8?B?ZUdqNVhiTTA1eERYSUdOQVp1Qzk5eUIxbkEzaHZyQmppNXFMcG9hK1RpR3hL?=
+ =?utf-8?B?bFFNaW96dDV2aTlGYWFCVGN4VkRYODNOQVoxSWxIWDg0UFB1cU5uQ09YUWVL?=
+ =?utf-8?B?aFVIRnJudXlSdUk1NWZMTXVoZ2hmbFFBWnJpaTZJRXl6RHZqbCs3QU5yUmx1?=
+ =?utf-8?B?TmQ4S2lOVDBzL1VTNWR6by9PRU1wM0RWMGFvMlFBWDBTbTNFb1JFNG5VRDRm?=
+ =?utf-8?B?S0FrU0FOUG5IT3BBR3laTGc1WWdBc2RXZnREbGlBRmlkWUQvaWJCS3cySTBv?=
+ =?utf-8?B?b0JHaHZBTmNZcDdaL2pRbUNsL2Y2MDZaT2MvTE5kZ0VGdnBpYmtUbWRUM2VX?=
+ =?utf-8?B?WjFwTU8wSkVPT1VDN1YweDdVNWE3UzNOSUNXeVJtRXJ3L25nSXZWN09GcDRh?=
+ =?utf-8?B?c1AwRmlDUmVNaE5sRDNiNHV0ajI3T25EeDlIVVY2RkswMEg5cU5EakEwWEs1?=
+ =?utf-8?B?K0Y5T0JiRjZUVGRINnNEMmlPUnpjMk0zWmFPY3REK0IrUGQyMER6L2huT1Nh?=
+ =?utf-8?B?WE80Unl6YmdneUE9PQ==?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ aef63359-f8a2-4366-788e-08d9b9a54411
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR09MB4642.eurprd09.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Dec 2021 17:16:11.5342
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 
+	00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR09MB2595
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Dec 2021 16:38:49 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Dec 2021 17:16:14 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94240
+ https://lists.openembedded.org/g/openembedded-devel/message/94241
 
-Drop upstreamed patches
-Drop 0001-set_my_tls_end_of_input-Use-an-arbitrary-but-valid-p.patch
-which is fixed differently
-Forward port rest of them
+I added something to the oe-arch ML [1] - please let's discuss the issue 
+and all of the implications there
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...akeLists.txt-exclude-riscv64-riscv32.patch | 21 +++------
- ...1-Disable-use-of-_tpause-instruction.patch |  9 +---
- .../tbb/tbb/0001-arena-Remove-dead-code.patch | 40 ----------------
- ...nfo-is-glibc-specific-API-mark-it-so.patch |  9 +---
- ...f_input-Use-an-arbitrary-but-valid-p.patch | 37 ---------------
- .../GLIBC-PREREQ-is-not-defined-on-musl.patch | 46 -------------------
- .../tbb/{tbb_2021.2.0.bb => tbb_2021.4.0.bb}  |  5 +-
- 7 files changed, 12 insertions(+), 155 deletions(-)
- delete mode 100644 meta-oe/recipes-support/tbb/tbb/0001-arena-Remove-dead-code.patch
- delete mode 100644 meta-oe/recipes-support/tbb/tbb/0001-set_my_tls_end_of_input-Use-an-arbitrary-but-valid-p.patch
- delete mode 100644 meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-musl.patch
- rename meta-oe/recipes-support/tbb/{tbb_2021.2.0.bb => tbb_2021.4.0.bb} (89%)
+[1] https://lists.openembedded.org/g/openembedded-architecture/message/1372
 
-diff --git a/meta-oe/recipes-support/tbb/tbb/0001-CMakeLists.txt-exclude-riscv64-riscv32.patch b/meta-oe/recipes-support/tbb/tbb/0001-CMakeLists.txt-exclude-riscv64-riscv32.patch
-index ff6154808c..b34762710d 100644
---- a/meta-oe/recipes-support/tbb/tbb/0001-CMakeLists.txt-exclude-riscv64-riscv32.patch
-+++ b/meta-oe/recipes-support/tbb/tbb/0001-CMakeLists.txt-exclude-riscv64-riscv32.patch
-@@ -11,32 +11,25 @@ Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
-  src/tbbmalloc/CMakeLists.txt | 2 +-
-  2 files changed, 2 insertions(+), 2 deletions(-)
- 
--diff --git a/src/tbb/CMakeLists.txt b/src/tbb/CMakeLists.txt
--index a6edb6ad..4f261813 100644
- --- a/src/tbb/CMakeLists.txt
- +++ b/src/tbb/CMakeLists.txt
--@@ -55,7 +55,7 @@ target_compile_definitions(tbb
--                            PRIVATE
--                            __TBB_BUILD)
-+@@ -58,7 +58,7 @@ target_compile_definitions(tbb
-+                            $<$<NOT:$<BOOL:${BUILD_SHARED_LIBS}>>:__TBB_DYNAMIC_LOAD_ENABLED=0>
-+                            $<$<NOT:$<BOOL:${BUILD_SHARED_LIBS}>>:__TBB_SOURCE_DIRECTLY_INCLUDED=1>)
-  
- -if (NOT ("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "(armv7-a|aarch64|mips|arm64)" OR
- +if (NOT ("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "(armv7-a|aarch64|mips|arm64|riscv64|riscv32)" OR
-           "${CMAKE_OSX_ARCHITECTURES}" MATCHES "arm64" OR
-           WINDOWS_STORE OR
-           TBB_WINDOWS_DRIVER))
--diff --git a/src/tbbmalloc/CMakeLists.txt b/src/tbbmalloc/CMakeLists.txt
--index de7ca7ea..31e854fe 100644
- --- a/src/tbbmalloc/CMakeLists.txt
- +++ b/src/tbbmalloc/CMakeLists.txt
--@@ -28,7 +28,7 @@ target_compile_definitions(tbbmalloc
--                            PRIVATE
--                            __TBBMALLOC_BUILD)
-+@@ -30,7 +30,7 @@ target_compile_definitions(tbbmalloc
-+                            $<$<NOT:$<BOOL:${BUILD_SHARED_LIBS}>>:__TBB_DYNAMIC_LOAD_ENABLED=0>
-+                            $<$<NOT:$<BOOL:${BUILD_SHARED_LIBS}>>:__TBB_SOURCE_DIRECTLY_INCLUDED=1>)
-  
- -if (NOT ("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "(armv7-a|aarch64|mips|arm64)" OR
- +if (NOT ("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "(armv7-a|aarch64|mips|arm64|riscv64|riscv32)" OR
-           "${CMAKE_OSX_ARCHITECTURES}" MATCHES "arm64" OR
-           WINDOWS_STORE OR
--          TBB_WINDOWS_DRIVER))
---- 
--2.17.1
--
-+          TBB_WINDOWS_DRIVER OR
-diff --git a/meta-oe/recipes-support/tbb/tbb/0001-Disable-use-of-_tpause-instruction.patch b/meta-oe/recipes-support/tbb/tbb/0001-Disable-use-of-_tpause-instruction.patch
-index 7a4cc3e4e3..78051d7eef 100644
---- a/meta-oe/recipes-support/tbb/tbb/0001-Disable-use-of-_tpause-instruction.patch
-+++ b/meta-oe/recipes-support/tbb/tbb/0001-Disable-use-of-_tpause-instruction.patch
-@@ -16,19 +16,14 @@ Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
-  src/tbb/scheduler_common.h | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
--diff --git a/src/tbb/scheduler_common.h b/src/tbb/scheduler_common.h
--index ee13dbf9..49052001 100644
- --- a/src/tbb/scheduler_common.h
- +++ b/src/tbb/scheduler_common.h
--@@ -219,7 +219,7 @@ inline void prolonged_pause_impl() {
-+@@ -220,7 +220,7 @@ inline void prolonged_pause_impl() {
-  #endif
-  
-  inline void prolonged_pause() {
---#if __TBB_WAITPKG_INTRINSICS_PRESENT && (_WIN32 || _WIN64 || __linux__) && (__TBB_x86_32 || __TBB_x86_64)
-+-#if __TBB_WAITPKG_INTRINSICS_PRESENT && (_WIN32 || _WIN64 || __unix__) && (__TBB_x86_32 || __TBB_x86_64)
- +#if 0
-      if (governor::wait_package_enabled()) {
-          std::uint64_t time_stamp = machine_time_stamp();
-          // _tpause function directs the processor to enter an implementation-dependent optimized state
---- 
--2.29.0
--
-diff --git a/meta-oe/recipes-support/tbb/tbb/0001-arena-Remove-dead-code.patch b/meta-oe/recipes-support/tbb/tbb/0001-arena-Remove-dead-code.patch
-deleted file mode 100644
-index 8a603ffe30..0000000000
---- a/meta-oe/recipes-support/tbb/tbb/0001-arena-Remove-dead-code.patch
-+++ /dev/null
-@@ -1,40 +0,0 @@
--From b94a1e3d6b5c733ba24cfa0d35450d8659d48289 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 4 Jun 2021 13:07:28 -0700
--Subject: [PATCH] arena: Remove dead code
--
--Fixes clang warning
--arena.cpp:226:19: error: variable 'drained' set b
--ut not used [-Werror,-Wunused-but-set-variable]
--|     std::intptr_t drained = 0;
--|                   ^
--
--Upstream-Status: Submitted [https://github.com/oneapi-src/oneTBB/pull/429]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/tbb/arena.cpp | 3 +--
-- 1 file changed, 1 insertion(+), 2 deletions(-)
--
--diff --git a/src/tbb/arena.cpp b/src/tbb/arena.cpp
--index 4a9c0f8a..c8ed4999 100644
----- a/src/tbb/arena.cpp
--+++ b/src/tbb/arena.cpp
--@@ -232,14 +232,13 @@ void arena::free_arena () {
--     __TBB_ASSERT( !my_global_concurrency_mode, NULL );
-- #endif
--     poison_value( my_guard );
---    std::intptr_t drained = 0;
--     for ( unsigned i = 0; i < my_num_slots; ++i ) {
--         // __TBB_ASSERT( !my_slots[i].my_scheduler, "arena slot is not empty" );
--         // TODO: understand the assertion and modify
--         // __TBB_ASSERT( my_slots[i].task_pool == EmptyTaskPool, NULL );
--         __TBB_ASSERT( my_slots[i].head == my_slots[i].tail, NULL ); // TODO: replace by is_quiescent_local_task_pool_empty
--         my_slots[i].free_task_pool();
---        drained += mailbox(i).drain();
--+        mailbox(i).drain();
--         my_slots[i].my_default_task_dispatcher->~task_dispatcher();
--     }
--     __TBB_ASSERT(my_fifo_task_stream.empty(), "Not all enqueued tasks were executed");
---- 
--2.31.1
--
-diff --git a/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-API-mark-it-so.patch b/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-API-mark-it-so.patch
-index 49325447e8..9af37ebc64 100644
---- a/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-API-mark-it-so.patch
-+++ b/meta-oe/recipes-support/tbb/tbb/0001-mallinfo-is-glibc-specific-API-mark-it-so.patch
-@@ -13,11 +13,9 @@ Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
-  src/tbbmalloc_proxy/proxy.cpp | 2 ++
-  1 file changed, 2 insertions(+)
- 
--diff --git a/src/tbbmalloc_proxy/proxy.cpp b/src/tbbmalloc_proxy/proxy.cpp
--index f9942bf1..fe0dad89 100644
- --- a/src/tbbmalloc_proxy/proxy.cpp
- +++ b/src/tbbmalloc_proxy/proxy.cpp
--@@ -253,6 +253,7 @@ int mallopt(int /*param*/, int /*value*/) __THROW
-+@@ -260,6 +260,7 @@ int mallopt(int /*param*/, int /*value*/
-      return 1;
-  }
-  
-@@ -25,7 +23,7 @@ index f9942bf1..fe0dad89 100644
-  struct mallinfo mallinfo() __THROW
-  {
-      struct mallinfo m;
--@@ -260,6 +261,7 @@ struct mallinfo mallinfo() __THROW
-+@@ -267,6 +268,7 @@ struct mallinfo mallinfo() __THROW
-  
-      return m;
-  }
-@@ -33,6 +31,3 @@ index f9942bf1..fe0dad89 100644
-  
-  #if __ANDROID__
-  // Android doesn't have malloc_usable_size, provide it to be compatible
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-support/tbb/tbb/0001-set_my_tls_end_of_input-Use-an-arbitrary-but-valid-p.patch b/meta-oe/recipes-support/tbb/tbb/0001-set_my_tls_end_of_input-Use-an-arbitrary-but-valid-p.patch
-deleted file mode 100644
-index caa68e64c5..0000000000
---- a/meta-oe/recipes-support/tbb/tbb/0001-set_my_tls_end_of_input-Use-an-arbitrary-but-valid-p.patch
-+++ /dev/null
-@@ -1,37 +0,0 @@
--From a996fd451bbd7be93cff5f466bff7282ae972fe1 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 11 May 2021 10:52:51 -0700
--Subject: [PATCH] set_my_tls_end_of_input: Use an arbitrary but valid pointer
-- as value
--
--Pass a valid pointer to pthread_setspecific to avoid GCC 11 warning.
--Fixes
--
--src/tbb/tls.h:44:46: error: 'int pthread_setspecific(pthread_key_t, const void*)' expecting 1 byte in a region of size 0 [-Werror=stringop-overread]
--|    44 |     void set( T value ) { pthread_setspecific(my_key, (void*)value); }
--|       |                           ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~
--| compilation terminated due to -Wfatal-errors.
--
--Upstream-Status: Submitted [https://github.com/oneapi-src/oneTBB/pull/394]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/tbb/parallel_pipeline.cpp | 3 ++-
-- 1 file changed, 2 insertions(+), 1 deletion(-)
--
--diff --git a/src/tbb/parallel_pipeline.cpp b/src/tbb/parallel_pipeline.cpp
--index b7655c6b..ca518b5b 100644
----- a/src/tbb/parallel_pipeline.cpp
--+++ b/src/tbb/parallel_pipeline.cpp
--@@ -243,7 +243,8 @@ public:
--         return end_of_input_tls.get() != 0;
--     }
--     void set_my_tls_end_of_input() {
---        end_of_input_tls.set(1);
--+	// Use an arbitrary but valid pointer as value.
--+        end_of_input_tls.set(array_size);
--     }
-- };
-- 
---- 
--2.31.1
--
-diff --git a/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-musl.patch b/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-musl.patch
-deleted file mode 100644
-index fb10684cde..0000000000
---- a/meta-oe/recipes-support/tbb/tbb/GLIBC-PREREQ-is-not-defined-on-musl.patch
-+++ /dev/null
-@@ -1,46 +0,0 @@
--From 5cac8b5fffa4ebf5f0090456c9e0cbf43827242a Mon Sep 17 00:00:00 2001
--From: Naveen Saini <naveen.kumar.saini@intel.com>
--Date: Wed, 7 Apr 2021 11:32:52 +0800
--Subject: [PATCH] src/tbbmalloc/proxy.cpp: __GLIBC_PREREQ is not defined on 
-- musl
--
--Do not call __GLIBC_PREREQ if it is not defined otherwise build will
--fail on musl
--
--Signed-off-by: Fabrice Fontaine <fontaine.fabrice@gmail.com>
--
--Upstream-Status: Submitted [https://github.com/oneapi-src/oneTBB/pull/203]
--
--Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
--Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
-----
-- src/tbbmalloc_proxy/proxy.cpp | 6 ++++--
-- 1 file changed, 4 insertions(+), 2 deletions(-)
--
--diff --git a/src/tbbmalloc_proxy/proxy.cpp b/src/tbbmalloc_proxy/proxy.cpp
--index fe0dad89..93e68049 100644
----- a/src/tbbmalloc_proxy/proxy.cpp
--+++ b/src/tbbmalloc_proxy/proxy.cpp
--@@ -24,7 +24,8 @@
-- // of aligned_alloc as required by new C++ standard, this makes it hard to
-- // redefine aligned_alloc here. However, running on systems with new libc
-- // version, it still needs it to be redefined, thus tricking system headers
---#if defined(__GLIBC_PREREQ) && !__GLIBC_PREREQ(2, 16) && _GLIBCXX_HAVE_ALIGNED_ALLOC
--+#if defined(__GLIBC_PREREQ)
--+#if !__GLIBC_PREREQ(2, 16) && _GLIBCXX_HAVE_ALIGNED_ALLOC
-- // tell <cstdlib> that there is no aligned_alloc
-- #undef _GLIBCXX_HAVE_ALIGNED_ALLOC
-- // trick <stdlib.h> to define another symbol instead
--@@ -32,7 +33,8 @@
-- // Fix the state and undefine the trick
-- #include <cstdlib>
-- #undef aligned_alloc
---#endif // defined(__GLIBC_PREREQ)&&!__GLIBC_PREREQ(2, 16)&&_GLIBCXX_HAVE_ALIGNED_ALLOC
--+#endif // defined(__GLIBC_PREREQ)
--+#endif // !__GLIBC_PREREQ(2, 16)&&_GLIBCXX_HAVE_ALIGNED_ALLOC
-- #endif // __linux__ && !__ANDROID__
-- 
-- #include "proxy.h"
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb b/meta-oe/recipes-support/tbb/tbb_2021.4.0.bb
-similarity index 89%
-rename from meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
-rename to meta-oe/recipes-support/tbb/tbb_2021.4.0.bb
-index c726bef3b5..5396e1735a 100644
---- a/meta-oe/recipes-support/tbb/tbb_2021.2.0.bb
-+++ b/meta-oe/recipes-support/tbb/tbb_2021.4.0.bb
-@@ -12,14 +12,11 @@ DEPENDS:append:libc-musl = " libucontext"
- PE = "1"
- 
- BRANCH = "onetbb_2021"
--SRCREV = "2dba2072869a189b9fdab3ffa431d3ea49059a19"
-+SRCREV = "4e021eafc03519cb1081ed775c9502cae72f8d8d"
- SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
-             file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
--            file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
-             file://0001-CMakeLists.txt-exclude-riscv64-riscv32.patch \
-             file://0001-Disable-use-of-_tpause-instruction.patch \
--            file://0001-set_my_tls_end_of_input-Use-an-arbitrary-but-valid-p.patch \
--            file://0001-arena-Remove-dead-code.patch \
- "
- 
- S = "${WORKDIR}/git"
--- 
-2.34.1
-
+On 07.12.21 14:35, Marek Vasut wrote:
+> On 12/7/21 14:33, Alexander Kanavin wrote:
+>> On Tue, 7 Dec 2021 at 14:27, Marek Vasut <marex@denx.de> wrote:
+>>
+>>>>> And as far as I can tell, bitbake can stick something into DEPENDS
+>>>>> before it parses this recipe, so the :append is valid.
+>>>>>
+>>>>> Furthermore, git grep through oe-core already indicates a few recipes
+>>>>> which use DEPENDS:append.
+>>>
+>>> I believe the warning is valid, see above ?
+>>>
+>>
+>> The linter is an obsessive pedant, and is not actually always right, 
+>> that's
+>> why I want its author to comment :)
+>> 'DEPENDS = ... ' is used throughout all layers, and doesn't seem to cause
+>> much grief, so why fix it here specifically, is there an actual issue?
+> 
+> I believe it would be a good idea to start fixing it all over the place. 
+> So yes, let's wait for Konrad.
 
