@@ -1,142 +1,108 @@
-Return-Path: <kweihmann@outlook.com>
+Return-Path: <scott.murray@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA86EC433EF
-	for <webhook@archiver.kernel.org>; Wed,  8 Dec 2021 09:36:22 +0000 (UTC)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (EUR05-VI1-obe.outbound.protection.outlook.com [40.92.90.62])
- by mx.groups.io with SMTP id smtpd.web12.10000.1638956180942002495
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B5F4DC433FE
+	for <webhook@archiver.kernel.org>; Wed,  8 Dec 2021 16:15:11 +0000 (UTC)
+Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com
+ [209.85.160.173])
+ by mx.groups.io with SMTP id smtpd.web08.15215.1638980110871393656
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Dec 2021 01:36:22 -0800
+ Wed, 08 Dec 2021 08:15:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@outlook.com header.s=selector1 header.b=JxdA8JJR;
- spf=pass (domain: outlook.com, ip: 40.92.90.62,
- mailfrom: kweihmann@outlook.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ax0+KBRBhfkKUtr1GCvE8iu1RSZN7MkgGRrCC2C7PuSrqBo+MB3UhIpxJzj/THU8MMbQGxjZAi+bXBuDzoSatfyYgIhK5wTxXlu/GuwuyXv+1V2FNIfeJv1JnNUG/jOPNhVCEIHwa7bfagpCe7tXrSOPBt7z/Ui7Wzw81nvf8AyolGjgauEDXvO32O8WkeYvudec17A36BepiEl3jWsx2/qroARQa2wqc5UrwggzzBNUd46vsvnrSy9ZWnhSpp1hE16TnxBo17VBn1WU4GPRlJ4ryBOwFLPNBaIr5wn2EKoLnOM6dMP6F0F8kkMpLXb247A2KxPttA5W9RkOpkWAdQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PN+6qADBRsXOmj3a2aUWrC+Q9OAkT11hskk2b6d0g0Y=;
- b=F480BECMipxspVquobUIKM/3EnRcSHwnYVJqMcEBacqszbgSZIiG5PAISuSRfGSJIYPUq2oQ5wqf8M3HAjuBMv/DtS67PPY8jSJ77Qw+PVm8FTdSSvWRf6RXWEG5eg06uKQCU0x9rRjE6pgHC5IQrpKooABUrObRRJB0FKvUyKShgFEHC/iA2ByWTNMgx+l3kxfdROQjS9qsXseIapkrRKbsGlZ0xWdQXxxE07s4Q6Omm8dPenaB6c1Hj31+q8hqjIlE1wPbN0ReFAuymru2pMioEGpu51MBXELADs76KxVHBQSgzEXJur2QCOTVMQ2qP8j3JQcwz99Njq92pFsG7g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PN+6qADBRsXOmj3a2aUWrC+Q9OAkT11hskk2b6d0g0Y=;
- b=JxdA8JJRwxG+gDJv9PEP3lONYCBxjG15Gb0ixNHYlF2KbRq5GLk//dJE5tNWXiWP8TlQhf1yf0C/eKeSDKhTwKNsnwjg63161bITw3Dg6MXIzGSHEQD/PyNJOWoOqBdVnhOBCcevpdAmsJl5RdX1tSW5sCcXn9N8hs6F1d7wNVUViDEPgiGjyf5SaIWQxC6vbTtJBe+qMiH62+dwQpU4VCrJvkoUojE7cuxgYHmWacR/bzinhmNS9vIlNDfltmwmVXyii44N878p5COn3I+8h2bdM4Bf1Kxf9E0qYRYzW3csj8+Q2k+J9hbgyBOUW2N4eF/MuzvQMtkFMKcJ6Jmrsg==
-Received: from AM9PR09MB4642.eurprd09.prod.outlook.com (2603:10a6:20b:284::24)
- by AM0PR09MB3891.eurprd09.prod.outlook.com (2603:10a6:208:19c::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4778.12; Wed, 8 Dec
- 2021 09:36:17 +0000
-Received: from AM9PR09MB4642.eurprd09.prod.outlook.com
- ([fe80::782f:9964:348b:b2fa]) by AM9PR09MB4642.eurprd09.prod.outlook.com
- ([fe80::782f:9964:348b:b2fa%9]) with mapi id 15.20.4778.013; Wed, 8 Dec 2021
- 09:36:17 +0000
-Subject: Re: [oe] [meta-oe][PATCH] freerdp: Use DEPENDS:append
-To: Marek Vasut <marex@denx.de>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-References: <20211207113954.8959-1-marex@denx.de>
- <CA+chaQdiPbPXXOdw7PBfivuvw-fXZYeBAvDQM2NGL7h_Gr0ULQ@mail.gmail.com>
- <4a4bd8ca-9fae-c03a-acf1-d25fc44a84dd@denx.de>
- <CANNYZj-w7xB2r-FvXKbj88CNO5ibxnF1MfmN2z+p-j+_-HNLvg@mail.gmail.com>
- <d2604e80-3f82-d955-f0d0-620bea1ecbb0@denx.de>
- <CANNYZj95pzj8Q85BfbFim=h+rvPW86-Wm=Bqh=+j+JKBmWnf3g@mail.gmail.com>
- <c7ee5abb-cdd5-4286-3c2a-a0533a003af6@denx.de>
-From: Konrad Weihmann <kweihmann@outlook.com>
-Message-ID: 
- <AM9PR09MB464246BBC0427BA3BCD348B1A86F9@AM9PR09MB4642.eurprd09.prod.outlook.com>
-Date: Wed, 8 Dec 2021 10:36:16 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
-In-Reply-To: <c7ee5abb-cdd5-4286-3c2a-a0533a003af6@denx.de>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-TMN: [ezKwkjslnV0J0AinN022UEP1iR1TQixWAoO1ogSC+TSdeR6n03MoMFpb3ds0VQsS]
-X-ClientProxiedBy: AM0PR10CA0008.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:208:17c::18) To AM9PR09MB4642.eurprd09.prod.outlook.com
- (2603:10a6:20b:284::24)
-X-Microsoft-Original-Message-ID: 
- <f720db91-0528-2f32-aaf4-a9abba769d1b@outlook.com>
+ dkim=pass header.i=@konsulko.com header.s=google header.b=K7J5nJAk;
+ spf=pass (domain: konsulko.com, ip: 209.85.160.173,
+ mailfrom: scott.murray@konsulko.com)
+Received: by mail-qt1-f173.google.com with SMTP id p19so2594794qtw.12
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 08 Dec 2021 08:15:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google;
+        h=date:from:to:cc:subject:in-reply-to:message-id:references
+         :mime-version;
+        bh=qs7SC8x4Me/MsQrj6OyG6d+Idvg+rTgdrfefDemF29A=;
+        b=K7J5nJAkS1qKtdAW+mk/OKMbcQYs1iQTQy2hF3G4gP8K/ueFh8OCvPCP1HV2r5mfl/
+         ISbaUIxQGX6WK2tiq14FQ6yjKEIjMNRrRYhjQ+NryEb7fZw9owKEISV1YIr7ewMyNrWb
+         5W3jdACIsWWbA7VjbKnePwEbhH4nSKuvy+Vg4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:in-reply-to:message-id
+         :references:mime-version;
+        bh=qs7SC8x4Me/MsQrj6OyG6d+Idvg+rTgdrfefDemF29A=;
+        b=M8rPYlwPWitclg8GLVrhfIl/3KtsRN+MtWAXQk2Wq0G9126zI+oLJy9m8T5nA98hcN
+         Hye+W5WvDkTwjxzioci2uF2s3cqaFNNjOYm/kFD3d4WS4U/8Qly5HtTrDmZJO85+7Ht6
+         tjW+knrgFe1/Mh/QEgUbhwkZRibsAJ2YmCYj/VNuOPlMyakjbiTdCLMW3Y0E1qoa/mwZ
+         ecwxb8zElchP49wQFdLzFV9+r0gsKP+5nks0OwaKLanA03Mw1qPmxNqyHnYnBOU3HHbz
+         g5h5e2q8xPBkYGeQX0DBUnirgFpHlMObPHNJGKIhYc/R9gpOIpvN1sfAERmNOEhmKjWr
+         14Hg==
+X-Gm-Message-State: AOAM533Sh9H4xuxfIWW9o3+RpUM6POt5hHfMHpp8Zp6Wasor8/V48Aee
+	KpgYGjRFWHCZvpwR8LarIL2hgQ==
+X-Google-Smtp-Source: 
+ ABdhPJyjoN1FKJkl09SQ2xrKbcgjdaAdQlZMng5hm2M4XPMhCYF2l7DXNxdGAQJIo+Z9aYP+Z9NN8w==
+X-Received: by 2002:ac8:594e:: with SMTP id 14mr9036946qtz.105.1638980109890;
+        Wed, 08 Dec 2021 08:15:09 -0800 (PST)
+Received: from godzilla (192-0-174-222.cpe.teksavvy.com. [192.0.174.222])
+        by smtp.gmail.com with ESMTPSA id
+ p10sm1933123qtw.97.2021.12.08.08.15.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 08 Dec 2021 08:15:09 -0800 (PST)
+Date: Wed, 8 Dec 2021 11:15:08 -0500 (EST)
+From: Scott Murray <scott.murray@konsulko.com>
+To: Jon Mason <jdmason@kudzu.us>
+cc: yocto@lists.yoctoproject.org,
+    Patches and discussions about the oe-core layer
+ <openembedded-core@lists.openembedded.org>,
+    OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] Help with Inclusive Language in OpenEmbedded/Yocto
+ Project
+In-Reply-To: 
+ <CAPoiz9zni1rhmpFP+YOeseYyaT7BJGE_oZjYbDicWiYo5x0_eA@mail.gmail.com>
+Message-ID: <aba5a7a-ebf-4372-41aa-525ea27d97f8@spiteful.org>
+References: 
+ <CAPoiz9zni1rhmpFP+YOeseYyaT7BJGE_oZjYbDicWiYo5x0_eA@mail.gmail.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: f4514bd6-f105-4361-c405-08d9ba2e2f5f
-X-MS-TrafficTypeDiagnostic: AM0PR09MB3891:EE_
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	EOuhqGtyl8aHG1w0s5FgH9IRrHrPTdmxpbBGDmHHUp3/Azc8kTaGS2mAvBd8Zm1Mtt6MkghPY5Ubr1iDZcwS+W0C7+rYimLabKT2L9raT1kpUFF+Z6r6gwmlWpFfohCblevlkbouVgu/tafd0u+YC+FqV4404OoHHUPnrDFlFmNYIcHhZyHxfrmzVD60tVyxQANwz4puE+Ie+j6R8XTHlgqCEflCkc4JUCaKfPBdG/BH2QCJUcPsqKSOyJUdB6L03kfDH9Aw6nGRM/mC21GSQxo83x5Ppf7GvpYOwzSHU8Fue/NGrShgBnnHZTCaTRwnHuxLWmxfm2cnuYL24BuYlSZH+4hGs5f2Exy1h16U7sOdVuigxCfI4MrmJvY/FCTAOiEnFGLJneNIsU6lf2VE8JCS2WF0AoI8m6vZShW8kULOtJPYOBIKvnPXjukQZek7KpwhJFyaXmoLU2SlDuE1hspKQRtszUarncw5RoYUBsbZSAzsc99ogNJq4PpNBkUYkmtxcp+gSE1ID+qx+r+gtH9xb7o6CHgYfbwEvGCDcIAVD8NlCVb93pFBXQCXXe3S1PjellAFZC3MtDUOQ4kb4Q==
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?T0VsQkduQWZCUDJndndQejZxMGNsblJWelpXUW1iOSt5bFhWZHpxY0ZYaGdQ?=
- =?utf-8?B?RWw2L2hqNjJBajBoRlZmMEh0VjVnODB1Y3o5OUwwRnNCb0FKeWNkRk01UXVs?=
- =?utf-8?B?cUlhcks0R2hDc2pHbUs1ckJ5cDYwbGRXSkNndHNvN1d0SEdMZEZzMEp3Z25C?=
- =?utf-8?B?dmhzSTZKQ1FFOVdsTG5UM0RwVUoydkhFbkNLYk15WWJHMTJMc3d3cHg0dzNX?=
- =?utf-8?B?TGxGRTc4dlh0N3lmVzIrSldEQmE1TUhDcEJxckpnYTFIV0gwUkszZGtlNTRM?=
- =?utf-8?B?Y2wvTlZuR0NBMDlRdGdzaTlFODRSTmZqNmI3Q3JwWUlvK1d4ZTVwaFNQYm81?=
- =?utf-8?B?MzE0VGZLK3duM2hNYjBlRGp5T3hOTlhwZlFISjZEdk9oSUp3RFcyL0hjS2lI?=
- =?utf-8?B?WDNNb3J0bnpaZ2MwN2NnMXBGTFMwSHlWYWQyZnpPdmpPcDFBbUNFL0x5eFVV?=
- =?utf-8?B?KytTU3M2ejhGbVNkeDNjbFZuQkpnSmZzd2t6QkN0RlU2OEJIckcyUVdJNzky?=
- =?utf-8?B?Tm1iMGtQN3dGdHdXOWw4aFhFbTRiZjZZY1hZcVpMYWJUaUV1ZUNaWGUrTG9J?=
- =?utf-8?B?UU1mZFFMSTltRWxHZmZNSGxLZHBPZCsxSlBJZkZaWk03Sm1IUEFQNGFRNHB1?=
- =?utf-8?B?VUpGeFlSRkFHb09kWlh4bGt6MFdJTFJXYlNaSzJTU1paak4wUndpWGJYOXN4?=
- =?utf-8?B?dER3YXZjb0dXK25lNjl0TlA1SnJoUFE0OWtyNEdPRjVGQlRabWxIc0FLT2xx?=
- =?utf-8?B?WUpoUjhEaHBLWHZZTzJvMHdjMm14M2tNR3lEemZXMUpMOHpVemlWQlhtNU4r?=
- =?utf-8?B?dm10Y2RrQXFLSHg2VEN1a2xsZjg3c0hLR0owSHlGRHNUQUM2WUVRQm1PYmxP?=
- =?utf-8?B?RlZBUmErdks5b1daMXNYVWM5RGE2NjJOdkYySlp6LzJOeStXR2ZHMkt4bWdH?=
- =?utf-8?B?UjhIY2dWbXZ4blVNRlhzWTVCa0RoYUtYajR6U3JlcHc2dlhnRFlDbXVJL0Nz?=
- =?utf-8?B?MnhtSVB1TFgxdW5pZkZHR1BaY1B6ZXJSUUNZMDNtY1p4MVE2UHRDcnJzVjJ1?=
- =?utf-8?B?c3RoQ0N1ZVF6L09aTjNOV1I5RWZERjFjb3JKaG5iVlRRS2JWelRBQUZ3Wkor?=
- =?utf-8?B?QVRObjNrTkl2aDBYTFo3S1cyem4xREIzZjIra21lb0pFMmlyZ042ZHhPOWZk?=
- =?utf-8?B?bXJYQjhaREgvQXMwbEtVbkFWck5JcXpqaFMxSXh3YnBkVE92UHJycHVqenB1?=
- =?utf-8?B?NVBwY3l6YWlsZFVlSnFpejlGLzlXVW9HdVl4cUNEa29wMlpacmllWjJBbHZu?=
- =?utf-8?B?SmR2NEk2cGNFSlU5QlhsNDJkV2NJd1A5S05hUnRxTG9zSjhZKzVRQU9tRkdS?=
- =?utf-8?B?RGsrUWZoYzhBMVE9PQ==?=
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- f4514bd6-f105-4361-c405-08d9ba2e2f5f
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR09MB4642.eurprd09.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Dec 2021 09:36:17.8671
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 
-	00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR09MB3891
+Content-Type: text/plain; charset=US-ASCII
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Dec 2021 09:36:22 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Dec 2021 16:15:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94250
+ https://lists.openembedded.org/g/openembedded-devel/message/94251
 
-After it seems like we reached an agreement on the oe-arch ML, I just 
-released a new version of the linter that doesn't mark this issue anymore.
+On Mon, 6 Dec 2021, Jon Mason wrote:
 
-On 07.12.21 14:35, Marek Vasut wrote:
-> On 12/7/21 14:33, Alexander Kanavin wrote:
->> On Tue, 7 Dec 2021 at 14:27, Marek Vasut <marex@denx.de> wrote:
->>
->>>>> And as far as I can tell, bitbake can stick something into DEPENDS
->>>>> before it parses this recipe, so the :append is valid.
->>>>>
->>>>> Furthermore, git grep through oe-core already indicates a few recipes
->>>>> which use DEPENDS:append.
->>>
->>> I believe the warning is valid, see above ?
->>>
->>
->> The linter is an obsessive pedant, and is not actually always right, 
->> that's
->> why I want its author to comment :)
->> 'DEPENDS = ... ' is used throughout all layers, and doesn't seem to cause
->> much grief, so why fix it here specifically, is there an actual issue?
-> 
-> I believe it would be a good idea to start fixing it all over the place. 
-> So yes, let's wait for Konrad.
+> This email is a follow-up from the session held on Friday at the
+> OpenEmbedded Developer's Virtual Meeting (see
+> https://www.openembedded.org/wiki/OEDVM_Nov_2021)
+>
+> The session was not recorded, but the slides can be found at
+> https://docs.google.com/presentation/d/146ueVVTMeA8JI43wqv5kFmdYEygqqmfGH0z1VRL2bDA/edit?usp=sharing
+>
+> The outcome from the discussion was that inclusive language changes
+> are something that we want to accomplish in the kirkstone release
+> timeframe (with an exception for the "master" branch name, which will
+> be handled at a future date).
+>
+> There has already been a pass at collecting the needed changes at
+> https://wiki.yoctoproject.org/wiki/Inclusive_language
+>
+> This is not as simple as a find/replace of offending words.  There is
+> a desire for backward compatibility or to provide some kind of "you
+> want X, which is now Y" (which complicates things).
+>
+> The intention of this email is to see who is interested in helping
+> out.  Once we know how many people are available and what time frames,
+> we can plan out a roadmap.  So, please email me (or respond to this
+> thread publicly) and I'll add you to the list.  There will then be a
+> follow-up zoom call in the next week or so to plan out the roadmap.
+>
+> We will document the roadmap and everything else on the YP wiki page above.
+>
+> Questions and comments are welcome, but not interested in debating the
+> necessity or timeframe of this task.  It has already been decided.
+
+I am also interested in helping move this forward, please count me in.
+
+Scott
+
 
