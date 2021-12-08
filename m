@@ -1,108 +1,123 @@
-Return-Path: <scott.murray@konsulko.com>
+Return-Path: <patrick@stwcx.xyz>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B5F4DC433FE
-	for <webhook@archiver.kernel.org>; Wed,  8 Dec 2021 16:15:11 +0000 (UTC)
-Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com
- [209.85.160.173])
- by mx.groups.io with SMTP id smtpd.web08.15215.1638980110871393656
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 251A3C433EF
+	for <webhook@archiver.kernel.org>; Wed,  8 Dec 2021 17:15:52 +0000 (UTC)
+Received: from new2-smtp.messagingengine.com (new2-smtp.messagingengine.com
+ [66.111.4.224])
+ by mx.groups.io with SMTP id smtpd.web11.16376.1638983750846943776
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Dec 2021 08:15:11 -0800
+ Wed, 08 Dec 2021 09:15:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=K7J5nJAk;
- spf=pass (domain: konsulko.com, ip: 209.85.160.173,
- mailfrom: scott.murray@konsulko.com)
-Received: by mail-qt1-f173.google.com with SMTP id p19so2594794qtw.12
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Dec 2021 08:15:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google;
-        h=date:from:to:cc:subject:in-reply-to:message-id:references
-         :mime-version;
-        bh=qs7SC8x4Me/MsQrj6OyG6d+Idvg+rTgdrfefDemF29A=;
-        b=K7J5nJAkS1qKtdAW+mk/OKMbcQYs1iQTQy2hF3G4gP8K/ueFh8OCvPCP1HV2r5mfl/
-         ISbaUIxQGX6WK2tiq14FQ6yjKEIjMNRrRYhjQ+NryEb7fZw9owKEISV1YIr7ewMyNrWb
-         5W3jdACIsWWbA7VjbKnePwEbhH4nSKuvy+Vg4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:in-reply-to:message-id
-         :references:mime-version;
-        bh=qs7SC8x4Me/MsQrj6OyG6d+Idvg+rTgdrfefDemF29A=;
-        b=M8rPYlwPWitclg8GLVrhfIl/3KtsRN+MtWAXQk2Wq0G9126zI+oLJy9m8T5nA98hcN
-         Hye+W5WvDkTwjxzioci2uF2s3cqaFNNjOYm/kFD3d4WS4U/8Qly5HtTrDmZJO85+7Ht6
-         tjW+knrgFe1/Mh/QEgUbhwkZRibsAJ2YmCYj/VNuOPlMyakjbiTdCLMW3Y0E1qoa/mwZ
-         ecwxb8zElchP49wQFdLzFV9+r0gsKP+5nks0OwaKLanA03Mw1qPmxNqyHnYnBOU3HHbz
-         g5h5e2q8xPBkYGeQX0DBUnirgFpHlMObPHNJGKIhYc/R9gpOIpvN1sfAERmNOEhmKjWr
-         14Hg==
-X-Gm-Message-State: AOAM533Sh9H4xuxfIWW9o3+RpUM6POt5hHfMHpp8Zp6Wasor8/V48Aee
-	KpgYGjRFWHCZvpwR8LarIL2hgQ==
-X-Google-Smtp-Source: 
- ABdhPJyjoN1FKJkl09SQ2xrKbcgjdaAdQlZMng5hm2M4XPMhCYF2l7DXNxdGAQJIo+Z9aYP+Z9NN8w==
-X-Received: by 2002:ac8:594e:: with SMTP id 14mr9036946qtz.105.1638980109890;
-        Wed, 08 Dec 2021 08:15:09 -0800 (PST)
-Received: from godzilla (192-0-174-222.cpe.teksavvy.com. [192.0.174.222])
-        by smtp.gmail.com with ESMTPSA id
- p10sm1933123qtw.97.2021.12.08.08.15.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Dec 2021 08:15:09 -0800 (PST)
-Date: Wed, 8 Dec 2021 11:15:08 -0500 (EST)
-From: Scott Murray <scott.murray@konsulko.com>
-To: Jon Mason <jdmason@kudzu.us>
-cc: yocto@lists.yoctoproject.org,
-    Patches and discussions about the oe-core layer
- <openembedded-core@lists.openembedded.org>,
-    OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] Help with Inclusive Language in OpenEmbedded/Yocto
- Project
-In-Reply-To: 
- <CAPoiz9zni1rhmpFP+YOeseYyaT7BJGE_oZjYbDicWiYo5x0_eA@mail.gmail.com>
-Message-ID: <aba5a7a-ebf-4372-41aa-525ea27d97f8@spiteful.org>
-References: 
- <CAPoiz9zni1rhmpFP+YOeseYyaT7BJGE_oZjYbDicWiYo5x0_eA@mail.gmail.com>
+ dkim=pass header.i=@stwcx.xyz header.s=fm3 header.b=jtICZIia;
+ spf=pass (domain: stwcx.xyz, ip: 66.111.4.224, mailfrom: patrick@stwcx.xyz)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+	by mailnew.nyi.internal (Postfix) with ESMTP id 5EF135803DB;
+	Wed,  8 Dec 2021 12:15:49 -0500 (EST)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute1.internal (MEProxy); Wed, 08 Dec 2021 12:15:49 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stwcx.xyz; h=
+	from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding; s=fm3; bh=3taK6/2RKW52RElSAfirO+Rb13
+	JdAayat6LPYjBU+Mw=; b=jtICZIiabislqRhWy8VFV8wo5Gfj3hthWjKXSlYDAs
+	AJ0EL/ID2D6wv57XMFYwbKXIxSfRK6TB47vA0AtO/bcG0eAjbi3W/HmLMCryAeqa
+	8RlkFu8rHxEvCl2n4azwwxpYIZo/i+qUavN5ZlrGwndepNWBQGWHGXlshFnm0By+
+	1vATklZIT8juDvmjh1dZRrusS+LDcCyVUqbRnv9YsGbWapcl6cfmPZ2Hh9/JWYNp
+	uIGyOb0/+xm8dOpBUYxoIOCDrHBBOcsPt1x3+GFwAt1T+Cc5v2jhz4MiSUY88nnX
+	Er88W/l2Be/ExlLH/irw84B4duGSU4VPC4hG+mL10XBA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:content-transfer-encoding:date:from
+	:message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=3taK6/2RKW52RElSA
+	firO+Rb13JdAayat6LPYjBU+Mw=; b=k4RAxl72V/+ILK/naPgTM+5sH4jRpAk/M
+	NCIZK+tXWYh80NSzEtf8Ev8R5gQeSL69zYHN8hDzt7kuEEkByaG3bPb9frxUYHqI
+	IHLKhTxHF/yzCg96y5KsovXoDAC3DNKe8kNuPDiGHMGHmg4z8Iafdvxj5WV0WGm6
+	VHNU+OPW8LAlnNXsGrvWn5+P12osVDZaSXIjfwfyaVnZqy7rQhiVv4o3vSIc9Zut
+	iG4Xc2jfi+KbZDSFcsiRALBWD5Xr30FMJPHX0bML4XmBswzrMqsEXv7g5dMT1A8r
+	Y3Mch6GqET+oQE8kjOdrshxDkzkZFZxLr+T/7NAqB3TqpmGrRhAtQ==
+X-ME-Sender: <xms:ReiwYUrM-k6Y1H5gYOM6eyZnVDLRXL3ugR2rU412SZtIq6zSrGPFgg>
+    <xme:ReiwYaqTgbyB2KYoUowsYrIG4UdwUACKT8neJSBzVCdBdNJvuNZ1jHeSbvrYSI0qr
+    CSE8RUNwkSYNSZ8CKA>
+X-ME-Received: 
+ <xmr:ReiwYZPz7jETM27jJ0LfkkzTv0EnYwuqk4cQSfkvVlYuTyhM-Q4kEXMV33RA7e2IpICgY-jvDc-alYcGGxAqbCbzY48Hoqr5oyEXwg>
+X-ME-Proxy-Cause: 
+ gggruggvucftvghtrhhoucdtuddrgedvuddrjeekgdeljecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecufghrlhcuvffnffculddvfedmnegovehorghsthgrlh
+    dqhfeguddvqddtvdculdduhedtmdenucfjughrpefhvffufffkofgggfestdekredtredt
+    tdenucfhrhhomheprfgrthhrihgtkhcuhghilhhlihgrmhhsuceophgrthhrihgtkhessh
+    htfigtgidrgiihiieqnecuggftrfgrthhtvghrnheptddvheekkeejtdekveelgfejueei
+    fefgffehiefgjefgteevkeegveduvedttdefnecuffhomhgrihhnpehishhotghpphdroh
+    hrghdpghhithhhuhgsrdgtohhmnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghm
+    pehmrghilhhfrhhomhepphgrthhrihgtkhesshhtfigtgidrgiihii
+X-ME-Proxy: <xmx:ReiwYb4z-zviwAq2oQ-SNhZtEWqA36sA125nUOb3rGMjgu82DGnYTg>
+    <xmx:ReiwYT6A3e2jTuDDbafQf_ktKHgkMdhSbZ8L7Avya318DaB-CAeBSA>
+    <xmx:ReiwYbjqlcYcFprLo_mLpo0iS-6pIfNhk8f2VJPCkWQTWN4WmsPjCw>
+    <xmx:ReiwYQjQoYKJlWYOv97NMut28vTwxkzRH_woUnD8ApW9_gXQhp-lwg>
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 8 Dec 2021 12:15:48 -0500 (EST)
+From: Patrick Williams <patrick@stwcx.xyz>
+To: openembedded-devel@lists.openembedded.org
+Cc: Patrick Williams <patrick@stwcx.xyz>
+Subject: [meta-oe][PATCH] unifex: add recipe
+Date: Wed,  8 Dec 2021 11:15:43 -0600
+Message-Id: <20211208171543.1234000-1-patrick@stwcx.xyz>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Dec 2021 16:15:11 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Dec 2021 17:15:52 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94251
+ https://lists.openembedded.org/g/openembedded-devel/message/94252
 
-On Mon, 6 Dec 2021, Jon Mason wrote:
+libunifex is a library for enabling C++ "Unified Executors" in C++20,
+based on current standards work being proposed for C++23 (P2300)[1].
+This library provides C++20 support for async and co-routines.
 
-> This email is a follow-up from the session held on Friday at the
-> OpenEmbedded Developer's Virtual Meeting (see
-> https://www.openembedded.org/wiki/OEDVM_Nov_2021)
->
-> The session was not recorded, but the slides can be found at
-> https://docs.google.com/presentation/d/146ueVVTMeA8JI43wqv5kFmdYEygqqmfGH0z1VRL2bDA/edit?usp=sharing
->
-> The outcome from the discussion was that inclusive language changes
-> are something that we want to accomplish in the kirkstone release
-> timeframe (with an exception for the "master" branch name, which will
-> be handled at a future date).
->
-> There has already been a pass at collecting the needed changes at
-> https://wiki.yoctoproject.org/wiki/Inclusive_language
->
-> This is not as simple as a find/replace of offending words.  There is
-> a desire for backward compatibility or to provide some kind of "you
-> want X, which is now Y" (which complicates things).
->
-> The intention of this email is to see who is interested in helping
-> out.  Once we know how many people are available and what time frames,
-> we can plan out a roadmap.  So, please email me (or respond to this
-> thread publicly) and I'll add you to the list.  There will then be a
-> follow-up zoom call in the next week or so to plan out the roadmap.
->
-> We will document the roadmap and everything else on the YP wiki page above.
->
-> Questions and comments are welcome, but not interested in debating the
-> necessity or timeframe of this task.  It has already been decided.
+1. https://isocpp.org/files/papers/P2300R3.html
 
-I am also interested in helping move this forward, please count me in.
+Signed-off-by: Patrick Williams <patrick@stwcx.xyz>
+---
+ meta-oe/recipes-devtools/unifex/unifex_git.bb | 26 +++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/unifex/unifex_git.bb
 
-Scott
+diff --git a/meta-oe/recipes-devtools/unifex/unifex_git.bb b/meta-oe/recipes-devtools/unifex/unifex_git.bb
+new file mode 100644
+index 000000000..09b8c2254
+--- /dev/null
++++ b/meta-oe/recipes-devtools/unifex/unifex_git.bb
+@@ -0,0 +1,26 @@
++DESCRIPTION = "C++ Unified Executors library"
++HOMEPAGE = "https://github.com/facebookexperimental/libunifex"
++SECTION = "libs"
++LICENSE = "Apache-2.0-with-LLVM-exception"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5b86506074cb3cdc493b4f96b73b2909"
++
++SRC_URI = "git://github.com/facebookexperimental/libunifex.git;branch=main"
++SRCREV = "9df21c58d34ce8a1cd3b15c3a7347495e29417a0"
++
++S = "${WORKDIR}/git"
++
++inherit cmake pkgconfig
++
++DEPENDS = ""
++
++BBCLASSEXTEND = "native nativesdk"
++
++PACKAGECONFIG ??= "liburing"
++PACKAGECONFIG[liburing] = ",,liburing"
++
++EXTRA_OECMAKE += " \
++    -DBUILD_SHARED_LIBS=ON \
++    -DBUILD_TESTING=OFF \
++    -DCMAKE_CXX_STANDARD=20 \
++    -DUNIFEX_BUILD_EXAMPLES=OFF \
++    "
+-- 
+2.32.0
 
 
