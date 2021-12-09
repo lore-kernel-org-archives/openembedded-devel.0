@@ -2,193 +2,112 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D17E7C433F5
-	for <webhook@archiver.kernel.org>; Thu,  9 Dec 2021 15:57:47 +0000 (UTC)
-Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com
- [209.85.160.174])
- by mx.groups.io with SMTP id smtpd.web10.13361.1639065466982081359
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF9D0C433EF
+	for <webhook@archiver.kernel.org>; Thu,  9 Dec 2021 15:58:58 +0000 (UTC)
+Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
+ [209.85.160.172])
+ by mx.groups.io with SMTP id smtpd.web10.13376.1639065538315752379
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Dec 2021 07:57:47 -0800
+ Thu, 09 Dec 2021 07:58:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=CbMAsuXH;
- spf=pass (domain: gmail.com, ip: 209.85.160.174,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=mgdlIe+J;
+ spf=pass (domain: gmail.com, ip: 209.85.160.172,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f174.google.com with SMTP id t34so5707314qtc.7
+Received: by mail-qt1-f172.google.com with SMTP id a2so5675777qtx.11
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Dec 2021 07:57:46 -0800 (PST)
+ Thu, 09 Dec 2021 07:58:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=S/h4Q7HbDbu/2PM05gQzT5m3sJDTOifOcXFx5b/BVkw=;
-        b=CbMAsuXHm5DH/zYbJnwWqQdpabezDeiJyzuGYOouUo1LahvzCTBhbS0WOpMGBURPuk
-         JXYPimT0cfxlrxSkR/hnnD2mUgYbfhB6A/jS4WjkzCdFwhDIIJ/wk6T4Qt7mneON1Zc/
-         P9LisjmcCPqz9nA70+09eIyqEJS4siqu1sBsXg5kXgYqNQJU4mcVjnSRjqc5iQqoQt9D
-         mwPerga2f3c1FsA7xkyKN81ZIAjKtwggHB4QfLFQ0rgaQf9sXfI/m3Z0GUJl7usYrx4L
-         HzmlSNK+v9nEuPi6aUTJOUPrf8pwDiYJPIHGoDu9jAkjrnRc3nvyMVSDVKWY3CJOPWn7
-         WO5g==
+        bh=XBTdQnO9UzTJaWe8LOuGrawrTgEc3d07+YSDjkbU8W8=;
+        b=mgdlIe+J8xkG1gpbFx0fxaqajKatZVLxjKvjciJivnMseRaqk4t4v3CedODeAt7rzg
+         n8ZPCAwgr3OG8r1o/OXd/TDFUekXUPJEAgqRQtLOCqH/suC20FVK7cQipXhBn52/8Av4
+         ATPtulRgoPIEMYNlPleAqPwAOaYnPprLf8zHtJp16C662chWfqbT3hx+6WyfDyLoiT+k
+         LJNpdpfcGfWtABpGtLCZzSV9EsHnD4m0WBK9g3oRmkqtET7Y7LpTvdDhv59eZVZWFgDc
+         K+XWQsEz06zTI34jc6empXD1QGaF9NZtw+OImXdcFnVu3qqqOTqxER/Ox7BN/4edYniV
+         Ffzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=S/h4Q7HbDbu/2PM05gQzT5m3sJDTOifOcXFx5b/BVkw=;
-        b=NOT0NI6MeqzDC7dq/pVyTej0Tcat8VLpdjH0uI7aEOojqMPjTx5k9MnAToUEJasUuh
-         gLAF3R6tEbmPFkrhp4mBWuueugtxfIM+87YAAVYPJsFpHJqL4CjSp6xALccevVS1S++8
-         gNRrU188nFOZygqvkCZgvPChK8ldSMZxmEstZwn1ao2FKrnkFSuhbLJ2GOE0CIV9vpti
-         mrUJPjfhiQuxPUQ1exWln5vMbRxTMZgczFFo4WMOFKnJSday5TccoNBo7rjpY3vSg9OY
-         M3zv64FHgX0THbnyBmlFnLUp4kg3GsdRAAZsZ1Ex95HgI8/S+r8zXkkKxFmZpAuEclOz
-         daQQ==
-X-Gm-Message-State: AOAM5312+X60xfq6Am2Pl+DCoFnJptCk501qxvrfmF0pH1E+pqUvgbaa
-	VU8Abp6i1HfBCGLZeff8OAW3RtUiEu/6jjge/j0=
+        bh=XBTdQnO9UzTJaWe8LOuGrawrTgEc3d07+YSDjkbU8W8=;
+        b=PGzqFgzk0Mz5FDTjlArpfzLAVFdvB2reMDM2iOJGpnjWfzH68G5WNRh3KgJnLIIInV
+         s1HlSFqS8cL0Li7Evz4D0aK1o5kmYnZipw0qyemLnhwf/x+nREIkoyNuOEX0HxLYkSus
+         mYq4Jqf8UBoyyKKJPnVlKcO91QVC7csvHRfa/ByajCmiZJSVLoMJLvEmhiBtBVujbBrZ
+         KvqA3kaXy6a090O4WLfhwD4LoUugXzaPuPf4i9AcEGAPodnD6VE5wJfI9T4TiiDf5Lrv
+         7dN15LcrkzyJKhoLHTl1p51nZTSIW8YKW+xdvaUl7lB3ejxtKjglGbnx27a4/Znvzcr7
+         heqA==
+X-Gm-Message-State: AOAM531+HmQWMfrbEKqtRAB7f8wDKycS8fWCJOfF4A7NkWQcy686DaH6
+	axefoG3okFYfnfRMbcRec8mPmIgwrsSehucm2RY=
 X-Google-Smtp-Source: 
- ABdhPJysTWm2QOUMCaKwCSBL6s7jAz87lPG9WEkfG5jELEqJ8cr7NxAnGx0OQyV07x7Y/Q8A3wXL8urG+tyXPHGO/nQ=
-X-Received: by 2002:a05:622a:1386:: with SMTP id
- o6mr18848470qtk.64.1639065465923;
- Thu, 09 Dec 2021 07:57:45 -0800 (PST)
+ ABdhPJyJJtyzVMqdv6Q6EQ9MzVi4WWZ4rM+pFta/F+fjl9V9HoMOL5fAb21WeFBALcdJsTOCcUaHoXizW6AS6Pibzx8=
+X-Received: by 2002:ac8:7f4d:: with SMTP id
+ g13mr18705524qtk.215.1639065537412;
+ Thu, 09 Dec 2021 07:58:57 -0800 (PST)
 MIME-Version: 1.0
-References: <20211209095614.173901-1-yi.zhao@windriver.com>
-In-Reply-To: <20211209095614.173901-1-yi.zhao@windriver.com>
+References: <20211209150014.2294075-1-andrei@gherzan.com>
+In-Reply-To: <20211209150014.2294075-1-andrei@gherzan.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 9 Dec 2021 07:57:19 -0800
+Date: Thu, 9 Dec 2021 07:58:31 -0800
 Message-ID: 
- <CAMKF1soZg8WykcHXVz2jMS-xvA=GCrcXWy9AthNB0WHbLrVyFA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] openldap: fix strip issue with new patch
-To: Yi Zhao <yi.zhao@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+ <CAMKF1srkS7nJaG==67-f5o=P4s58xMutoPSSqHHK6TOotKD4hw@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-pymetno: Introduce recipe on
+ 0.7.0
+To: Andrei Gherzan <andrei@gherzan.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Andrei Gherzan <andrei.gherzan@huawei.com>
 Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Dec 2021 15:57:47 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Dec 2021 15:58:58 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94262
+ https://lists.openembedded.org/g/openembedded-devel/message/94263
 
-On Thu, Dec 9, 2021 at 1:56 AM Yi Zhao <yi.zhao@windriver.com> wrote:
+On Thu, Dec 9, 2021 at 7:00 AM Andrei Gherzan <andrei@gherzan.com> wrote:
 >
-> The patch install-strip.patch tries to fix the [already-stripped] QA
-> error with an outdated install-sh script which causes a parallel
-> installation failure:
+> From: Andrei Gherzan <andrei.gherzan@huawei.com>
 >
->   ../../build/shtool mkdir -p TOPDIR/tmp-glibc/work/core2-32-wrs-linux/openldap/2.5.9-r0/image/usr/lib
->   STRIPPROG="" ../../i686-wrs-linux-libtool --mode=install ../../contrib/ldapc++/install-sh -c  -m 644 liblber.la TOPDIR/tmp-glibc/work/core2-32-wrs-linux/openldap/2.5.9-r0/image/usr/lib
->   mkdir: cannot create directory 'TOPDIR/tmp-glibc/work/core2-32-wrs-linux/openldap/2.5.9-r0/image/usr/lib': File exists
->
-> With the new version of openldap, we can fix the strip issue by
-> unsetting STRIP_OPTS.
->
-> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+> Signed-off-by: Andrei Gherzan <andrei.gherzan@huawei.com>
 > ---
->  .../0001-build-top.mk-unset-STRIP_OPTS.patch  | 38 +++++++++++++++++++
->  .../openldap/openldap/install-strip.patch     | 17 ---------
->  .../openldap/openldap_2.5.9.bb                |  6 +--
->  3 files changed, 39 insertions(+), 22 deletions(-)
->  create mode 100644 meta-oe/recipes-support/openldap/openldap/0001-build-top.mk-unset-STRIP_OPTS.patch
->  delete mode 100644 meta-oe/recipes-support/openldap/openldap/install-strip.patch
+>  .../python/python3-pymetno_0.7.0.bb              | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-pymetno_0.7.0.bb
 >
-> diff --git a/meta-oe/recipes-support/openldap/openldap/0001-build-top.mk-unset-STRIP_OPTS.patch b/meta-oe/recipes-support/openldap/openldap/0001-build-top.mk-unset-STRIP_OPTS.patch
+> diff --git a/meta-python/recipes-devtools/python/python3-pymetno_0.7.0.bb b/meta-python/recipes-devtools/python/python3-pymetno_0.7.0.bb
 > new file mode 100644
-> index 000000000..9d25f2c59
+> index 000000000..453f66afd
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/openldap/openldap/0001-build-top.mk-unset-STRIP_OPTS.patch
-> @@ -0,0 +1,38 @@
-> +From 321839cbd1d57f12d3d6695254d2003473d8dd1a Mon Sep 17 00:00:00 2001
-> +From: Yi Zhao <yi.zhao@windriver.com>
-> +Date: Wed, 8 Dec 2021 16:58:55 +0800
-> +Subject: [PATCH] build/top.mk: unset STRIP_OPTS
+> +++ b/meta-python/recipes-devtools/python/python3-pymetno_0.7.0.bb
+> @@ -0,0 +1,16 @@
+> +SUMMARY = "Python library to talk to the met.no api"
+> +HOMEPAGE = "https://github.com/Danielhiversen/pyMetno"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=5d503272f52c35147ec960cb56a03bf4"
 > +
-> +Unset STRIP_OPTS to disable strip to fix QA errors:
+> +SRC_URI = "git://github.com/Danielhiversen/pyMetno.git;protocol=https;branch=master"
+> +SRCREV = "15f1e887aaaba3bf243cc8f88eb761e0ad85c355"
+> +S = "${WORKDIR}/git"
 > +
-> +ERROR: openldap-2.5.9-r0 do_package: QA Issue: File
-> +'/usr/bin/ldapcompare' from openldap was already stripped, this will
-> +prevent future debugging! [already-stripped]
+> +inherit setuptools3
 > +
-> +ERROR: openldap-2.5.9-r0 do_package: QA Issue: File
-> +'/usr/bin/ldapdelete' from openldap was already stripped, this will
-> +prevent future debugging! [already-stripped]
-> +
-> +Upstream-Status: Inappropriate [embedded specific]
-> +
-> +Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> +---
-> + build/top.mk | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/build/top.mk b/build/top.mk
-> +index 38ce146..6e9fe1f 100644
-> +--- a/build/top.mk
-> ++++ b/build/top.mk
-> +@@ -60,7 +60,7 @@ INSTALL_PROGRAM = $(INSTALL)
-> + INSTALL_DATA = $(INSTALL) -m 644
-> + INSTALL_SCRIPT = $(INSTALL)
-> +
-> +-STRIP_OPTS = -s
-> ++STRIP_OPTS =
+> +RDEPENDS_${PN} = "\
 
-You can make it STRIP_OPTS ?= -s perhaps that can be submitted upstream
-if thats accepted then we can pass STRIP_OPTS = "" from bitbake environment
-in recipe and eliminate this patch.
+This should use the new override separator ':' instead of '_'
 
-> +
-> + LINT = lint
-> + 5LINT = 5lint
-> +--
-> +2.17.1
-> +
-> diff --git a/meta-oe/recipes-support/openldap/openldap/install-strip.patch b/meta-oe/recipes-support/openldap/openldap/install-strip.patch
-> deleted file mode 100644
-> index fb7ad8f59..000000000
-> --- a/meta-oe/recipes-support/openldap/openldap/install-strip.patch
-> +++ /dev/null
-> @@ -1,17 +0,0 @@
-> -# This patch ensures that the install operations which strip
-> -# programs and libraries (LTINSTALL) work in a cross build
-> -# environment.
-> -
-> -Upstream-Status: Inappropriate [embedded specific]
-> -
-> ---- a/build/top.mk
-> -+++ b/build/top.mk
-> -@@ -125,7 +125,7 @@ LTCOMPILE_MOD = $(LIBTOOL) $(LTONLY_MOD) --mode=compile \
-> - LTLINK_MOD = $(LIBTOOL) $(LTONLY_MOD) --mode=link \
-> -       $(CC) $(LT_CFLAGS) $(LDFLAGS) $(LTFLAGS_MOD)
-> -
-> --LTINSTALL = $(LIBTOOL) --mode=install $(INSTALL)
-> -+LTINSTALL = STRIPPROG="" $(LIBTOOL) --mode=install $(top_srcdir)/contrib/ldapc++/install-sh -c
-> - LTFINISH = $(LIBTOOL) --mode=finish
-> -
-> - # Misc UNIX commands used in build environment
-> diff --git a/meta-oe/recipes-support/openldap/openldap_2.5.9.bb b/meta-oe/recipes-support/openldap/openldap_2.5.9.bb
-> index d95d6912e..c008c7b4b 100644
-> --- a/meta-oe/recipes-support/openldap/openldap_2.5.9.bb
-> +++ b/meta-oe/recipes-support/openldap/openldap_2.5.9.bb
-> @@ -21,6 +21,7 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
->      file://slapd.service \
->      file://remove-user-host-pwd-from-version.patch \
->      file://0001-ldif-filter-fix-parallel-build-failure.patch \
-> +    file://0001-build-top.mk-unset-STRIP_OPTS.patch \
->  "
->
->  SRC_URI[md5sum] = "237fc2d881c27f8dd5d9f396e2865c11"
-> @@ -28,11 +29,6 @@ SRC_URI[sha256sum] = "c08e12f4ca5803d5d9f9948c70ad3491282cda3c17ec8b655dcbcb2364
->
->  DEPENDS = "util-linux groff-native"
->
-> -# The original top.mk used INSTALL, not INSTALL_STRIP_PROGRAM when
-> -# installing .so and executables, this fails in cross compilation
-> -# environments
-> -SRC_URI += "file://install-strip.patch"
-> -
->  inherit autotools-brokensep update-rc.d systemd pkgconfig
->
->  # CV SETTINGS
+> +       ${PYTHON_PN}-aiohttp (>=3.6.1) \
+> +       ${PYTHON_PN}-async-timeout (>=3.0.1) \
+> +       ${PYTHON_PN}-pytz (>=2019.3) \
+> +"
 > --
 > 2.25.1
 >
 >
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#94259): https://lists.openembedded.org/g/openembedded-devel/message/94259
-> Mute This Topic: https://lists.openembedded.org/mt/87609121/1997914
+> View/Reply Online (#94261): https://lists.openembedded.org/g/openembedded-devel/message/94261
+> Mute This Topic: https://lists.openembedded.org/mt/87613192/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
