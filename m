@@ -2,84 +2,98 @@ Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 556B8C433EF
-	for <webhook@archiver.kernel.org>; Fri, 10 Dec 2021 06:25:56 +0000 (UTC)
-Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com
- [209.85.167.46])
- by mx.groups.io with SMTP id smtpd.web09.3823.1639117554554610316
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 86985C433EF
+	for <webhook@archiver.kernel.org>; Fri, 10 Dec 2021 06:31:48 +0000 (UTC)
+Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com
+ [209.85.208.181])
+ by mx.groups.io with SMTP id smtpd.web09.3863.1639117907123566721
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Dec 2021 22:25:55 -0800
+ Thu, 09 Dec 2021 22:31:47 -0800
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=jRVk8ATx;
+ header.s=20210112 header.b=GWjYcddL;
  spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.167.46, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f46.google.com with SMTP id u3so16279178lfl.2
+ ip: 209.85.208.181, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f181.google.com with SMTP id i63so12344587lji.3
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Dec 2021 22:25:54 -0800 (PST)
+ Thu, 09 Dec 2021 22:31:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=xgAHi0IzCiCXcXbG7gNNdT0sHLZeohZ22Gw05xrGk10=;
-        b=jRVk8ATxSZE5zdYoJoysEugohMrF1MAaBLtfnuuTWld63FTnQ7XyCLJt428EjTUKXJ
-         Cs0UqLt/SnX/ZPjeTkn8opaB9x11+vA/daF0hCKtRUmW4pgvSfFHdW61g5VFK3joWM/T
-         yVKmcB3hAj+/NvxkoKN4Tt6pARdlIs6sz3s5RQa/jkfsX5k4S/NTNDZNgU101rQkl1cv
-         hEcigzNYhjC3mNJDuakhCYjWqz+6aPwG3eu226zTuI3L+I/u9q47qxDacuI66yql1NKr
-         K8bN4SVNjHhl+R9ouGX6w+fm8ZISdhKnlo+s/lNk25gGmvixExR7U7RTN+qVf+Yto1mQ
-         i9jw==
+        bh=HnDUUVQkjfLkZRDV2ccNtbNdPoUgSTGV2J17NoE/XsA=;
+        b=GWjYcddLVj+FX3l+JCWj0LPGUJqA87zrUmJJ0f1hgxFmmPMxm8wYrXEhQRe276hnoZ
+         mjH4dUjnczUIRgrpkpXsGErH0m9Unb8PIpyvCckjbmMCp30iRE3PuU/ntR4t0Q18TWAq
+         86u+5ga7jfygDuq7lELS7gCprO6BqyJ27GYGARalb4fcK7L6Gk+si0uiGqgXUMsxHIdJ
+         0ts027OKBUHcj+QatZvQ9fvV7bHDLDzaBTHREIbeaEKu+Uh7nXljFjBId2rF9lD3YrcS
+         inlhhKBZ27XaVgUQP7qKALMda3LLcSy+Q9ze9JGN0TCek+sI9UvHktdKyYso4lS1YGPa
+         3D8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=xgAHi0IzCiCXcXbG7gNNdT0sHLZeohZ22Gw05xrGk10=;
-        b=uUyuVOdVlg8gPUfBQujzIooepXVqVLDTDE+IHeYKEy5AxJkMyefguqfcOiZQuavX1B
-         +g/UFeILk8ym8GihIAArwnsDuBONTUO89CLGWrPiWEaywYWkzAb7y7gkTXPeZh3Zh8WD
-         2D9NhWGdtX9TZJw0nm5uxlXSfuvAhzBbz8xBuAKOiHFfsGwOtVEmgMgWwdq7aa0bmQu8
-         tdyA9S/GtGyVW1Xl7YgRf5XwjfhdfOcC+ALtyeE5TcMj7To0zgR4J97WYmKguL4Wh3wr
-         wjUPoMIsCVJRjK5oden0JVbCzVVtHBYXLTinualRKH47Xyu+pzTZgAGWdHcVJ47qzGFN
-         awtA==
-X-Gm-Message-State: AOAM533E3WXV0G+lrrsuJM19VkxpkPXp1hErMp9zsu+M6Mwxc9gVeYNd
-	R02R1R/8G292dKp4wbmIg8ef59HrmSdGf8B1
+        bh=HnDUUVQkjfLkZRDV2ccNtbNdPoUgSTGV2J17NoE/XsA=;
+        b=PlfPYnmcmNtP5mNTEuuihOTt+DpXSo1KwxFvQyh/cL7NLmt7Ss+ChsVDDvjcF+Wt+m
+         v2jueq2eLHwMWD3HgaFALF/fiXrIso3v47pY3i+I7uZ88mzm7MXaFNYlMe+pqTabfwaa
+         YbxjreGaNNso9zXbom1U4Fr/hpHJI9EJi0mHOogyAuPzbzKEPJBiNBzyeYaGyRdO93ok
+         GkDeCFmnhqr3aH6ApBHstbnlB1D+oBkKOvH1h99C2ksO8PY4yRk0Gul17aDL5XpbH29O
+         raS0xWC3skT9WK3OcLJXC3N/V7hsPLcIc5gsdYBUzbObMt7sfsr8D2MJLnNXn4M0Jdgq
+         mfZQ==
+X-Gm-Message-State: AOAM531ayaLCGLSFKCw6KDXNLrSY9TwoJWO7EikIi8aF56/civr9XHLL
+	qTYEo7lWxenq838vwUZtMt+0x5pF5IbVPdaP
 X-Google-Smtp-Source: 
- ABdhPJzNZHjRAMSQ4ykMH2XGQXSV7o6S1NcImoKaI9R3KwXW/diVvPlH1TABhclvFSu0eNm1hg0Qqg==
-X-Received: by 2002:ac2:5966:: with SMTP id h6mr6878244lfp.358.1639117551699;
-        Thu, 09 Dec 2021 22:25:51 -0800 (PST)
+ ABdhPJyi/Ohku9kpBkdDr8S/SAVDLC2faG8C+ht3xS78K52G/thJq3sO5JszTMFilvexXStAVmLAbA==
+X-Received: by 2002:a2e:864d:: with SMTP id i13mr10796378ljj.58.1639117904793;
+        Thu, 09 Dec 2021 22:31:44 -0800 (PST)
 Received: from localhost.localdomain
  (c-7918524e.023-160-67626725.bbcust.telenor.se. [78.82.24.121])
         by smtp.gmail.com with ESMTPSA id
- p17sm211469ljm.138.2021.12.09.22.25.50
+ s15sm211345lfp.252.2021.12.09.22.31.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Dec 2021 22:25:51 -0800 (PST)
+        Thu, 09 Dec 2021 22:31:44 -0800 (PST)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: patrick.areny@notiloplus.com,
-	Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-networking][PATCH] bmon: fix PV
-Date: Fri, 10 Dec 2021 07:25:45 +0100
-Message-Id: <20211210062545.1397481-1-open.source@oleksandr-kravchuk.com>
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-oe][PATCH] iwd: update to 1.20
+Date: Fri, 10 Dec 2021 07:31:42 +0100
+Message-Id: <20211210063142.1519406-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 Dec 2021 06:25:56 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 Dec 2021 06:31:48 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94269
+ https://lists.openembedded.org/g/openembedded-devel/message/94270
 
-The commit hash is pointing out to the tag v4.0, not 2.1.0.
+Changelog:
+- Fix issue with handling Hotspot 2.0 requirements.
+- Add support for evict_nocarrier setting during roaming.
+- Add support for experimental NetworkConfigurationAgent API.
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../recipes-support/bmon/{bmon_2.1.0.bb => bmon_4.0.bb}           | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename meta-networking/recipes-support/bmon/{bmon_2.1.0.bb => bmon_4.0.bb} (100%)
+ meta-oe/recipes-connectivity/iwd/{iwd_1.19.bb => iwd_1.20.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-connectivity/iwd/{iwd_1.19.bb => iwd_1.20.bb} (94%)
 
-diff --git a/meta-networking/recipes-support/bmon/bmon_2.1.0.bb b/meta-networking/recipes-support/bmon/bmon_4.0.bb
-similarity index 100%
-rename from meta-networking/recipes-support/bmon/bmon_2.1.0.bb
-rename to meta-networking/recipes-support/bmon/bmon_4.0.bb
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.19.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.20.bb
+similarity index 94%
+rename from meta-oe/recipes-connectivity/iwd/iwd_1.19.bb
+rename to meta-oe/recipes-connectivity/iwd/iwd_1.20.bb
+index 219dffe09..c8f5bb12b 100644
+--- a/meta-oe/recipes-connectivity/iwd/iwd_1.19.bb
++++ b/meta-oe/recipes-connectivity/iwd/iwd_1.20.bb
+@@ -8,7 +8,7 @@ DEPENDS = "ell"
+ SRC_URI = "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar.xz \
+            file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-for-e.patch \
+            "
+-SRC_URI[sha256sum] = "dd65a8795f6127fb1b9e29f2092686b0590a0d3738c2b90c792ccd320deaf966"
++SRC_URI[sha256sum] = "7d51e2ccabe7c500e44061ac725dbd4f6b0fb518b5e3de1681063d0f15d3050f"
+ 
+ inherit autotools manpages pkgconfig python3native systemd
+ 
 -- 
 2.25.1
 
