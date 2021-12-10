@@ -1,238 +1,176 @@
-Return-Path: <sakib.sajal@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D09BC433F5
-	for <webhook@archiver.kernel.org>; Fri, 10 Dec 2021 17:33:06 +0000 (UTC)
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web09.10286.1639157585332793981
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DE3EC433EF
+	for <webhook@archiver.kernel.org>; Fri, 10 Dec 2021 17:36:07 +0000 (UTC)
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
+ [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.web08.10533.1639157766936197014
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Dec 2021 09:33:05 -0800
+ Fri, 10 Dec 2021 09:36:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: sakib.sajal@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 1BAHX4Et012137
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Dec 2021 09:33:05 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Fri, 10 Dec 2021 09:33:04 -0800
-Received: from yow-lpggp3.wrs.com (128.224.137.13) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Fri, 10 Dec 2021 09:33:04 -0800
-From: Sakib Sajal <sakib.sajal@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-perl][PATCH 1/1] io-compress-lzma-perl: add recipe for version
- 2.096
-Date: Fri, 10 Dec 2021 12:33:03 -0500
-Message-ID: <20211210173303.20066-2-sakib.sajal@windriver.com>
-X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20211210173303.20066-1-sakib.sajal@windriver.com>
-References: <20211210173303.20066-1-sakib.sajal@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=O789t6F8;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f42.google.com with SMTP id
+ p18-20020a17090ad31200b001a78bb52876so9926035pju.3
+        for <openembedded-devel@lists.openembedded.org>;
+ Fri, 10 Dec 2021 09:36:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=hGLCECVruGZ5uXWyN1OpWn5utkmkiwuSsKVIoCvljuw=;
+        b=O789t6F8G9ymz5z9xYtnE9v02wnK2JE11JyFnPYx6YAUz71ndDgdHID7abDGw50YgN
+         4AeLuBrF/l5ug6WC9a70sNt+Um1Gv0fdhLHelT0sSnY6bLWMueKtvb+pc0IvrHLwzwd4
+         RggGc/wCm+L2/guOI7dhe1vJsCY18K4vHtawuEmCCkodIuzmouXTrpHXMJ8dprQ3yGU0
+         Ir/NhAnSRrxGdcaeUVvdStsQrKp7lPkrntY718uEc7QJtmolETtqxDgy6NeXVNPYonSO
+         pS76B9M2kw/obs/i/bMVoSl9uAT2LyzbrOf38gP/GH5Q/qMyX8KN3lAxEiLVW5SaDse3
+         bHYA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=hGLCECVruGZ5uXWyN1OpWn5utkmkiwuSsKVIoCvljuw=;
+        b=MHzifAj8l/OPCY3hOxTIuzzQsfoJXEWSt70anKnaz77MoBz+IWGEY2YO2mQI2yMGN4
+         rPcC+c3I0shPsGQl85DM3SkPWz2CCzSutwFTY9pV8HcVi7HUVQLfZnO8Q/utjEwmsnO1
+         6Ur3ps45byr4Ww3pxlB0He1MBhXd6u91lB0q9VBcSItX7iTqvxD+RWacSjgqGBkGctbc
+         g64FdCZ0I/ALg6FYDVqRS/KPgh16QTf9JBZM5smb4+lrgeRfTOuQZTYXBoDgFrGSRu0E
+         VefjxP38rhyklW9f4fyIJeeD4x5Mgma6i8OgwwZP1/QzWhRuviKl3kdmSyuinGY7MPGX
+         ETVA==
+X-Gm-Message-State: AOAM533tvZJSKHQz/CDjZIw32KAt3VAV22hL9LotWlYzpt0dms0jIYnQ
+	PrVz+K72prO+0uxzklyJWtYok35Tk8ioPg==
+X-Google-Smtp-Source: 
+ ABdhPJxZtQf3xe+54qqk8rKVAjwzCIMvdPGVhHuXbkiLAV4HOU73+u4Z68zR+nAMBywZv2F3vIuC+g==
+X-Received: by 2002:a17:90a:c58f:: with SMTP id
+ l15mr25207017pjt.168.1639157766057;
+        Fri, 10 Dec 2021 09:36:06 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ce68])
+        by smtp.gmail.com with ESMTPSA id
+ s21sm4013474pfk.3.2021.12.10.09.36.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 10 Dec 2021 09:36:05 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH] gjs: Fix build failures with meson 0.60.2
+Date: Fri, 10 Dec 2021 09:36:03 -0800
+Message-Id: <20211210173603.2826515-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 Dec 2021 17:33:06 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 Dec 2021 17:36:07 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94277
+ https://lists.openembedded.org/g/openembedded-devel/message/94279
 
-Add recipe for io-compress-lzma-perl and all the dependencies.
-
-Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../libio/compress-raw-bzip2-perl_2.096.bb    | 32 +++++++++++++++++++
- .../libio/compress-raw-lzma-perl_2.096.bb     | 32 +++++++++++++++++++
- .../libio/compress-raw-zlib-perl_2.096.bb     | 31 ++++++++++++++++++
- .../libio/io-compress-lzma-perl_2.096.bb      | 24 ++++++++++++++
- .../libio/io-compress-perl_2.096.bb           | 24 ++++++++++++++
- 5 files changed, 143 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libio/compress-raw-bzip2-perl_2.096.bb
- create mode 100644 meta-perl/recipes-perl/libio/compress-raw-lzma-perl_2.096.bb
- create mode 100644 meta-perl/recipes-perl/libio/compress-raw-zlib-perl_2.096.bb
- create mode 100644 meta-perl/recipes-perl/libio/io-compress-lzma-perl_2.096.bb
- create mode 100644 meta-perl/recipes-perl/libio/io-compress-perl_2.096.bb
+ ...r-install-via-list-to-pacify-meson-0.patch | 79 +++++++++++++++++++
+ meta-gnome/recipes-gnome/gjs/gjs_1.70.0.bb    |  1 +
+ 2 files changed, 80 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gjs/gjs/0001-build-disable-gir-install-via-list-to-pacify-meson-0.patch
 
-diff --git a/meta-perl/recipes-perl/libio/compress-raw-bzip2-perl_2.096.bb b/meta-perl/recipes-perl/libio/compress-raw-bzip2-perl_2.096.bb
+diff --git a/meta-gnome/recipes-gnome/gjs/gjs/0001-build-disable-gir-install-via-list-to-pacify-meson-0.patch b/meta-gnome/recipes-gnome/gjs/gjs/0001-build-disable-gir-install-via-list-to-pacify-meson-0.patch
 new file mode 100644
-index 000000000..272f7c5f3
+index 0000000000..cf85c4e70c
 --- /dev/null
-+++ b/meta-perl/recipes-perl/libio/compress-raw-bzip2-perl_2.096.bb
-@@ -0,0 +1,32 @@
-+DESCRIPTION = ""Compress::Raw::Bzip2" provides an interface to the in-memory \
-+compression/uncompression functions from the bzip2 compression library."
++++ b/meta-gnome/recipes-gnome/gjs/gjs/0001-build-disable-gir-install-via-list-to-pacify-meson-0.patch
+@@ -0,0 +1,79 @@
++From 4c8c84941146715d9c7077e8c5625490332d8bc5 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 10 Dec 2021 09:32:17 -0800
++Subject: [PATCH] build: disable gir install via list to pacify meson >= 0.60.2
 +
-+SECTION = "libs"
-+LICENSE = "Artisticv1 | GPLv1+"
++Fixes
++../gjs-1.70.0/meson.build:564:0: ERROR: "install_dir" must be specified when installing a target
 +
-+MAINTAINER=	"Poky <poky@yoctoproject.org>"
-+HOMEPAGE=	"https://metacpan.org/release/Compress-Raw-Bzip2"
++see meson bug
++https://github.com/mesonbuild/meson/issues/9472
 +
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
-+file://${COMMON_LICENSE_DIR}/GPL-1.0-only;md5=e9e36a9de734199567a4d769498f743d"
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ installed-tests/js/libgjstesttools/meson.build | 2 +-
++ installed-tests/js/meson.build                 | 6 +++---
++ meson.build                                    | 2 +-
++ 3 files changed, 5 insertions(+), 5 deletions(-)
 +
-+SRC_URI = "https://cpan.metacpan.org/authors/id/P/PM/PMQS/Compress-Raw-Bzip2-2.096.tar.gz"
++diff --git a/installed-tests/js/libgjstesttools/meson.build b/installed-tests/js/libgjstesttools/meson.build
++index 2e57483..3ca4d7e 100644
++--- a/installed-tests/js/libgjstesttools/meson.build
+++++ b/installed-tests/js/libgjstesttools/meson.build
++@@ -14,7 +14,7 @@ gjstest_tools_gir = gnome.generate_gir(libgjstesttools,
++     includes: ['GObject-2.0', 'Gio-2.0'], sources: gjstest_tools_sources,
++     namespace: 'GjsTestTools', nsversion: '1.0',
++     symbol_prefix: 'gjs_test_tools_', extra_args: '--warn-error',
++-    install: get_option('installed_tests'), install_dir_gir: false,
+++    install: get_option('installed_tests'), install_dir_gir: [false],
++     install_dir_typelib: installed_tests_execdir)
++ gjstest_tools_typelib = gjstest_tools_gir[1]
++ libgjstesttools_dep = declare_dependency(
++diff --git a/installed-tests/js/meson.build b/installed-tests/js/meson.build
++index b42f3b2..1085e2f 100644
++--- a/installed-tests/js/meson.build
+++++ b/installed-tests/js/meson.build
++@@ -74,7 +74,7 @@ regress_gir = gnome.generate_gir(libregress, includes: regress_gir_includes,
++     sources: regress_sources, namespace: 'Regress', nsversion: '1.0',
++     identifier_prefix: 'Regress', symbol_prefix: 'regress_',
++     extra_args: ['--warn-all', '--warn-error'] + regress_gir_c_args,
++-    install: get_option('installed_tests'), install_dir_gir: false,
+++    install: get_option('installed_tests'), install_dir_gir: [false],
++     install_dir_typelib: installed_tests_execdir)
++ regress_typelib = regress_gir[1]
++ 
++@@ -91,7 +91,7 @@ if not skip_warnlib
++     warnlib_gir = gnome.generate_gir(libwarnlib, includes: ['Gio-2.0'],
++         sources: warnlib_sources, namespace: 'WarnLib', nsversion: '1.0',
++         symbol_prefix: 'warnlib_', header: 'warnlib.h',
++-        install: get_option('installed_tests'), install_dir_gir: false,
+++        install: get_option('installed_tests'), install_dir_gir: [false],
++         install_dir_typelib: installed_tests_execdir)
++     warnlib_typelib = warnlib_gir[1]
++ endif
++@@ -105,7 +105,7 @@ gimarshallingtests_gir = gnome.generate_gir(libgimarshallingtests,
++     includes: ['Gio-2.0'], sources: gimarshallingtests_sources,
++     namespace: 'GIMarshallingTests', nsversion: '1.0',
++     symbol_prefix: 'gi_marshalling_tests_', extra_args: '--warn-error',
++-    install: get_option('installed_tests'), install_dir_gir: false,
+++    install: get_option('installed_tests'), install_dir_gir: [false],
++     install_dir_typelib: installed_tests_execdir)
++ gimarshallingtests_typelib = gimarshallingtests_gir[1]
++ 
++diff --git a/meson.build b/meson.build
++index 192b1b5..076656d 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -565,7 +565,7 @@ gjs_private_gir = gnome.generate_gir(libgjs,
++     includes: ['GObject-2.0', 'Gio-2.0'], sources: libgjs_private_sources,
++     namespace: 'GjsPrivate', nsversion: '1.0', identifier_prefix: 'Gjs',
++     symbol_prefix: 'gjs_', extra_args: '--warn-error', install: true,
++-    install_dir_gir: false, install_dir_typelib: pkglibdir / 'girepository-1.0')
+++    install_dir_gir: [false], install_dir_typelib: pkglibdir / 'girepository-1.0')
++ gjs_private_typelib = gjs_private_gir[1]
++ 
++ ### Build gjs-console interpreter ##############################################
++-- 
++2.34.1
 +
-+SRC_URI[md5sum] = "4fdb7ea5071e4b774c52c37331386355"
-+SRC_URI[sha256sum] = "a564e7634eca7740c5487d01effe1461e9e51b8909e69b3d8f5be98997958cbe"
-+
-+DEPENDS += "bzip2"
-+
-+S = "${WORKDIR}/Compress-Raw-Bzip2-${PV}"
-+
-+inherit cpan
-+
-+export BUILD_BZIP2="0"
-+export BZIP2_INCLUDE="-I${STAGING_DIR_HOST}${includedir}"
-+
-+do_compile() {
-+	export LIBC="$(find ${STAGING_DIR_TARGET}/${base_libdir}/ -name 'libc-*.so')"
-+	cpan_do_compile
-+}
-+
-+BBCLASSEXTEND = "native"
-diff --git a/meta-perl/recipes-perl/libio/compress-raw-lzma-perl_2.096.bb b/meta-perl/recipes-perl/libio/compress-raw-lzma-perl_2.096.bb
-new file mode 100644
-index 000000000..38655892a
---- /dev/null
-+++ b/meta-perl/recipes-perl/libio/compress-raw-lzma-perl_2.096.bb
-@@ -0,0 +1,32 @@
-+DESCRIPTION = ""Compress::Raw::Lzma" provides an interface to the in-memory \
-+compression/uncompression functions from the lzma compression library."
-+
-+SECTION = "libs"
-+LICENSE = "Artisticv1 | GPLv1+"
-+
-+MAINTAINER=	"Poky <poky@yoctoproject.org>"
-+HOMEPAGE=	"https://metacpan.org/release/Compress-Raw-Lzma"
-+
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
-+file://${COMMON_LICENSE_DIR}/GPL-1.0-only;md5=e9e36a9de734199567a4d769498f743d"
-+
-+SRC_URI = "https://cpan.metacpan.org/authors/id/P/PM/PMQS/Compress-Raw-Lzma-2.096.tar.gz"
-+
-+SRC_URI[md5sum] = "b5079bb43712fcd1e74b80777fa376ed"
-+SRC_URI[sha256sum] = "f3afb267b1303b0f125976e9e4a70c6a4a205e35e7c99b408911f5e5c6578217"
-+
-+DEPENDS += "xz"
-+
-+S = "${WORKDIR}/Compress-Raw-Lzma-${PV}"
-+
-+inherit cpan
-+
-+export LIBLZMA_INCLUDE="-I${STAGING_DIR_HOST}${includedir}"
-+export LIBLZMA_LIB="-I${STAGING_DIR_HOST}${libdir}"
-+
-+do_compile() {
-+	export LIBC="$(find ${STAGING_DIR_TARGET}/${base_libdir}/ -name 'libc-*.so')"
-+	cpan_do_compile
-+}
-+
-+BBCLASSEXTEND = "native"
-diff --git a/meta-perl/recipes-perl/libio/compress-raw-zlib-perl_2.096.bb b/meta-perl/recipes-perl/libio/compress-raw-zlib-perl_2.096.bb
-new file mode 100644
-index 000000000..8b2ab1459
---- /dev/null
-+++ b/meta-perl/recipes-perl/libio/compress-raw-zlib-perl_2.096.bb
-@@ -0,0 +1,31 @@
-+DESCRIPTION = "The *Compress::Raw::Zlib* module provides a Perl interface to the *zlib* \
-+compression library (see "AUTHOR" for details about where to get *zlib*)."
-+
-+SECTION = "libs"
-+LICENSE = "Artisticv1 | GPLv1+"
-+
-+MAINTAINER=	"Poky <poky@yoctoproject.org>"
-+HOMEPAGE=	"https://metacpan.org/release/Compress-Raw-Zlib"
-+
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
-+file://${COMMON_LICENSE_DIR}/GPL-1.0-only;md5=e9e36a9de734199567a4d769498f743d"
-+
-+SRC_URI = "https://cpan.metacpan.org/authors/id/P/PM/PMQS/Compress-Raw-Zlib-2.096.tar.gz"
-+
-+SRC_URI[md5sum] = "4144ecdd901231553447998cf8035e4a"
-+SRC_URI[sha256sum] = "cd4cba20c159a7748b8bc91278524a7da70573d9531fde62298609a5f1c65912"
-+
-+DEPENDS += "zlib"
-+
-+S = "${WORKDIR}/Compress-Raw-Zlib-${PV}"
-+
-+inherit cpan
-+
-+export BUILD_ZLIB="0"
-+
-+do_compile() {
-+	export LIBC="$(find ${STAGING_DIR_TARGET}/${base_libdir}/ -name 'libc-*.so')"
-+	cpan_do_compile
-+}
-+
-+BBCLASSEXTEND = "native"
-diff --git a/meta-perl/recipes-perl/libio/io-compress-lzma-perl_2.096.bb b/meta-perl/recipes-perl/libio/io-compress-lzma-perl_2.096.bb
-new file mode 100644
-index 000000000..a5c773551
---- /dev/null
-+++ b/meta-perl/recipes-perl/libio/io-compress-lzma-perl_2.096.bb
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "This module provides a Perl interface that allows writing lzma compressed \
-+data to files or buffer."
-+
-+SECTION = "libs"
-+LICENSE = "Artisticv1 | GPLv1+"
-+
-+MAINTAINER=	"Poky <poky@yoctoproject.org>"
-+HOMEPAGE=	"https://metacpan.org/release/IO-Compress-Lzma"
-+
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
-+file://${COMMON_LICENSE_DIR}/GPL-1.0-only;md5=e9e36a9de734199567a4d769498f743d"
-+
-+SRC_URI = "https://cpan.metacpan.org/authors/id/P/PM/PMQS/IO-Compress-Lzma-2.096.tar.gz"
-+
-+SRC_URI[md5sum] = "6c1b70740605b8073e4fbb5ba1e7bbdb"
-+SRC_URI[sha256sum] = "2f29125f19bb41d29c4b5a2467e3560b7bce5d428176a046b7c8a51609dce6e8"
-+RDEPENDS:${PN} += "compress-raw-lzma-perl"
-+RDEPENDS:${PN} += "io-compress-perl"
-+
-+S = "${WORKDIR}/IO-Compress-Lzma-${PV}"
-+
-+inherit cpan allarch
-+
-+BBCLASSEXTEND = "native"
-diff --git a/meta-perl/recipes-perl/libio/io-compress-perl_2.096.bb b/meta-perl/recipes-perl/libio/io-compress-perl_2.096.bb
-new file mode 100644
-index 000000000..01580db03
---- /dev/null
-+++ b/meta-perl/recipes-perl/libio/io-compress-perl_2.096.bb
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "This module is not intended for direct use in application code. Its sole \
-+purpose is to be sub-classed by IO::Compress modules."
-+
-+SECTION = "libs"
-+LICENSE = "Artisticv1 | GPLv1+"
-+
-+MAINTAINER=	"Poky <poky@yoctoproject.org>"
-+HOMEPAGE=	"https://metacpan.org/release/IO-Compress"
-+
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
-+file://${COMMON_LICENSE_DIR}/GPL-1.0-only;md5=e9e36a9de734199567a4d769498f743d"
-+
-+SRC_URI = "https://cpan.metacpan.org/authors/id/P/PM/PMQS/IO-Compress-2.096.tar.gz"
-+
-+SRC_URI[md5sum] = "18ad197cad5ca87bc3a7d2538998e017"
-+SRC_URI[sha256sum] = "9d219fd5df4b490b5d2f847921e3cb1c3392758fa0bae9b05a8992b3620ba572"
-+RDEPENDS:${PN} += "compress-raw-bzip2-perl"
-+RDEPENDS:${PN} += "compress-raw-zlib-perl"
-+
-+S = "${WORKDIR}/IO-Compress-${PV}"
-+
-+inherit cpan allarch
-+
-+BBCLASSEXTEND = "native"
+diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.70.0.bb b/meta-gnome/recipes-gnome/gjs/gjs_1.70.0.bb
+index af4d7f6cac..e0d9821239 100644
+--- a/meta-gnome/recipes-gnome/gjs/gjs_1.70.0.bb
++++ b/meta-gnome/recipes-gnome/gjs/gjs_1.70.0.bb
+@@ -12,6 +12,7 @@ SRC_URI[archive.sha256sum] = "4b0629341a318a02374e113ab97f9a9f3325423269fc1e0b04
+ SRC_URI += " \
+     file://0001-Support-cross-builds-a-bit-better.patch \
+     file://0002-meson.build-Do-not-add-dir-installed-tests-when-inst.patch \
++    file://0001-build-disable-gir-install-via-list-to-pacify-meson-0.patch \
+ "
+ 
+ # gobject-introspection is mandatory and cannot be configured
 -- 
-2.33.0
+2.34.1
 
 
