@@ -2,34 +2,39 @@ Return-Path: <sakib.sajal@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 35636C433F5
-	for <webhook@archiver.kernel.org>; Fri, 10 Dec 2021 17:28:49 +0000 (UTC)
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web10.10414.1639157327912521349
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 384C4C4332F
+	for <webhook@archiver.kernel.org>; Fri, 10 Dec 2021 17:28:51 +0000 (UTC)
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
+ by mx.groups.io with SMTP id smtpd.web10.10416.1639157329891193606
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Dec 2021 09:28:48 -0800
+ Fri, 10 Dec 2021 09:28:50 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing;
- spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: sakib.sajal@windriver.com)
+ spf=fail (domain: windriver.com, ip: 147.11.3.146, mailfrom: sakib.sajal@windriver.com)
+Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 1BAHSlsP024736
+	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri, 10 Dec 2021 09:28:48 -0800
 Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
  [147.11.82.252])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 1BAHSker011944
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 1BAHSl1X024140
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Dec 2021 09:28:46 -0800
+ Fri, 10 Dec 2021 09:28:47 -0800 (PST)
 Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Fri, 10 Dec 2021 09:28:46 -0800
+ 15.1.2242.12; Fri, 10 Dec 2021 09:28:47 -0800
 Received: from yow-lpggp3.wrs.com (128.224.137.13) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Fri, 10 Dec 2021 09:28:45 -0800
+ 15.1.2242.12 via Frontend Transport; Fri, 10 Dec 2021 09:28:47 -0800
 From: Sakib Sajal <sakib.sajal@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
 Subject: [meta-perl][PATCH] io-compress-lzma-perl: add recipe for version
  2.096
-Date: Fri, 10 Dec 2021 12:28:45 -0500
-Message-ID: <20211210172845.19496-1-sakib.sajal@windriver.com>
+Date: Fri, 10 Dec 2021 12:28:46 -0500
+Message-ID: <20211210172846.19510-1-sakib.sajal@windriver.com>
 X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -37,9 +42,9 @@ Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 Dec 2021 17:28:49 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 Dec 2021 17:28:51 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94273
+ https://lists.openembedded.org/g/openembedded-devel/message/94274
 
 Add recipe for io-compress-lzma-perl and all the dependencies.
 
