@@ -2,132 +2,113 @@ Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A503CC433EF
-	for <webhook@archiver.kernel.org>; Sat, 11 Dec 2021 19:33:27 +0000 (UTC)
-Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com
- [209.85.208.178])
- by mx.groups.io with SMTP id smtpd.web12.25764.1639251206377892772
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E50B3C433F5
+	for <webhook@archiver.kernel.org>; Sat, 11 Dec 2021 19:39:07 +0000 (UTC)
+Received: from mail-lj1-f182.google.com (mail-lj1-f182.google.com
+ [209.85.208.182])
+ by mx.groups.io with SMTP id smtpd.web10.25788.1639251546901326691
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Dec 2021 11:33:26 -0800
+ Sat, 11 Dec 2021 11:39:07 -0800
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=WjRag1Ye;
+ header.s=20210112 header.b=Wy+IWpNy;
  spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.208.178, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f178.google.com with SMTP id bn20so18265872ljb.8
+ ip: 209.85.208.182, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f182.google.com with SMTP id u22so18244797lju.7
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Dec 2021 11:33:26 -0800 (PST)
+ Sat, 11 Dec 2021 11:39:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=hCmvoV0+tXLlUFStIyiPc9S5QrQyc46crDGkG8VdC2I=;
-        b=WjRag1YeN53QM4Sch5m24cB64OXZvp/0k52tzVBeKKymU0PdZPs0P7JRtq5a6hLven
-         b3Os7kU7s7FeKzulRrhIiK6p46CvexMNzHfNmfRVPFm1FC64j5DW9L3yXaGOx7xj0Uge
-         hj/OiKh2W3p46d8ORyQjjp91bsbicUXFCdjyjviDZhp3VyMkhRC/VIJDTOmwN+4Je9dh
-         xR11brbTlsSNY2AZl83MVJdwZhZrJWhb7KiEyedsJ7jiT0XQlBDRbqPKGTg6qrSHhwyb
-         qo1ynX88a8lzvJmWsLpzT2svqYSMgkk89PXoDH3wTEjmHuPgIu8ZL0CIxy1tptsqvlzG
-         5a3w==
+        bh=lfXaLvnbmKKFI7EzW+6iSivjP7DC6rjlPPsLLQQp7LM=;
+        b=Wy+IWpNysJs69jfj75WL/VuBf6PSjlPyvnHSpgFjBMLUKg3SepvSjlICOX1HzwSuxV
+         AIi91r+5Q/zfofZjBpciCjKzi9x/Q5J0xybQ0H0aiNuDTyGdhoKslsMVi9e0/g6dAn4N
+         ProAMRqb0yTtJsQuP7Wkpk/oiqLQGQtBOnCnCp3bDLpn9mcXFiT2y8gWKKj/gn3dLPqX
+         0Y8xrGfOnMVuGWYZudnmmt2Ok8RJF9VaiXk8nVZfnA/6jUvkAkS47cScdcBj7mM8hY33
+         madE+GwHgJacqkFOY2FNI88JfMIuDvRjz0OiJgmkpjqD9REgWA3j3LmkskUtdqBckoBj
+         w48w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=hCmvoV0+tXLlUFStIyiPc9S5QrQyc46crDGkG8VdC2I=;
-        b=DsOGtbyF2JGHFwJvKFuOycDVeCT1Cw6azH8fCMCce+lXjstp2G8NwjNs5ZZJi8afHp
-         3W/68Si/hHJSZ+cB1hcB0gCV/+BF0UnZLaxjLEU+6LgWnfnpovfEGGb0iIBRO15HJaz2
-         nBdQhtAS8x8E7hPRjD+nLnMszrXEM7E0JnLhcoO6mIQOMyejHlxQuniZY/L8nUH/wkKZ
-         1ic2UU3a31hTVdvCoOn9lwAzHVUlh/o4JuQD0s0AUGOvxtTt56iOnUaC2dAB/UA/B9rY
-         +Eovkd3+PLHqkiO8eUiCZJKM/e8WF80NuLePEWagg+Jhj/MaxAfexjWfxfYr+TpeEKIl
-         s9sQ==
-X-Gm-Message-State: AOAM531SZM8h0iUql/zN++LwScVW5i6W3hdVzTLrAlY90JDqEQWvXBkd
-	q4ZU3CDaRsfJDGcFeg41WIkYQDt925il61Pl
+        bh=lfXaLvnbmKKFI7EzW+6iSivjP7DC6rjlPPsLLQQp7LM=;
+        b=aYXfM++gX9NNK+hLIiUNnplt+1qeeqizdzMBJGi/BDO3nkuDLX6xVgAgGE6Ooiz1yp
+         GMxommlKkVAABZwc2JEqdEsQJoBLP6Jgh7ajMSYcwCjI0psrvYrlZeRBFT5b1gqSoE6T
+         pRvnIaVG41zON311/EJX2WE9WvDhrgQz2xJ0ktWVVSQOMz8ZeF/dB1Y0ZN2WFMuC8oP8
+         omy/viiPGmj60UUG2sT7OHm4zpm7kkXt1t2mbPdLuyPoZqjA4CM9E2XO3+KkXvg8H+lX
+         65o5R86Wqm44L+ZShiteu2ozzW7IrHp8CACCCG7GJRYr5v9Jp3kIo73D8iAMF9RnPuV1
+         0row==
+X-Gm-Message-State: AOAM53136272AVeF0ako8W7RinYs93TNcaED1W+RuKB/JFeKoXHZaU5Q
+	e7j1kmfIQWhBP9Zka19e1yse/w45iHxOuQic
 X-Google-Smtp-Source: 
- ABdhPJyWsACY7Nks72zSroHBr0nQq5nlyI0yWiC5AR3622LdLBAorK9YgDgMm1uJdSN06A4bSa2t3w==
-X-Received: by 2002:a2e:8719:: with SMTP id
- m25mr19602449lji.145.1639251204182;
-        Sat, 11 Dec 2021 11:33:24 -0800 (PST)
+ ABdhPJz8fwUVsiXUj+n5PYe3tpuuHGBQE8KX+FWh9bd/gQ0hpwMuoiZ1NEs5Xk5c6yjBMwFhSAhC/Q==
+X-Received: by 2002:a2e:bf1e:: with SMTP id
+ c30mr13085519ljr.408.1639251544641;
+        Sat, 11 Dec 2021 11:39:04 -0800 (PST)
 Received: from localhost.localdomain
  (c-7918524e.023-160-67626725.bbcust.telenor.se. [78.82.24.121])
         by smtp.gmail.com with ESMTPSA id
- q14sm738004lfo.143.2021.12.11.11.33.23
+ q1sm738853lfo.255.2021.12.11.11.39.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 11 Dec 2021 11:33:23 -0800 (PST)
+        Sat, 11 Dec 2021 11:39:04 -0800 (PST)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python][PATCH] python3-matplotlib: update to 3.5.1
-Date: Sat, 11 Dec 2021 20:33:20 +0100
-Message-Id: <20211211193320.2576886-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-python][PATCH] python3-ldap: update to 3.4.0
+Date: Sat, 11 Dec 2021 20:39:02 +0100
+Message-Id: <20211211193902.2578276-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Dec 2021 19:33:27 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Dec 2021 19:39:07 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94297
+ https://lists.openembedded.org/g/openembedded-devel/message/94298
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- ...b_3.4.1.bb => python3-matplotlib_3.5.1.bb} | 26 ++++++++++---------
- 1 file changed, 14 insertions(+), 12 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-matplotlib_3.4.1.bb => python3-matplotlib_3.5.1.bb} (69%)
+ ...{python3-ldap_3.3.1.bb => python3-ldap_3.4.0.bb} | 13 +++++--------
+ 1 file changed, 5 insertions(+), 8 deletions(-)
+ rename meta-networking/recipes-devtools/python/{python3-ldap_3.3.1.bb => python3-ldap_3.4.0.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.4.1.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb
-similarity index 69%
-rename from meta-python/recipes-devtools/python/python3-matplotlib_3.4.1.bb
-rename to meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb
-index 9e933f5c4..f9eb79ff1 100644
---- a/meta-python/recipes-devtools/python/python3-matplotlib_3.4.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb
-@@ -7,19 +7,21 @@ HOMEPAGE = "https://github.com/matplotlib/matplotlib"
- SECTION = "devel/python"
- LICENSE = "PSF"
- LIC_FILES_CHKSUM = "\
--    file://setup.py;beginline=282;endline=282;md5=20e7ab4d2b2b1395a0e4ab800181eb96 \
-+    file://setup.py;beginline=296;endline=296;md5=20e7ab4d2b2b1395a0e4ab800181eb96 \
-     file://LICENSE/LICENSE;md5=afec61498aa5f0c45936687da9a53d74 \
- "
+diff --git a/meta-networking/recipes-devtools/python/python3-ldap_3.3.1.bb b/meta-networking/recipes-devtools/python/python3-ldap_3.4.0.bb
+similarity index 81%
+rename from meta-networking/recipes-devtools/python/python3-ldap_3.3.1.bb
+rename to meta-networking/recipes-devtools/python/python3-ldap_3.4.0.bb
+index cd745ee3e..42f113d5f 100644
+--- a/meta-networking/recipes-devtools/python/python3-ldap_3.3.1.bb
++++ b/meta-networking/recipes-devtools/python/python3-ldap_3.4.0.bb
+@@ -1,22 +1,19 @@
+-#
+-# Copyright (C) 2012 Wind River Systems, Inc.
+-#
+ SUMMARY = "Provides a wrapper in Python to LDAP"
+ DESCRIPTION = "This module provides access to the LDAP \
+ (Lightweight Directory Access Protocol) through Python operations \
+ instead of C API. The module mainly acts as a wrapper for the \
+ OpenLDAP 2.x libraries. Errors will appear as exceptions."
+-
+-LICENSE = "PSF"
+ HOMEPAGE = "http://www.python-ldap.org/"
++LICENSE = "PSF"
++LIC_FILES_CHKSUM = "file://LICENCE;md5=36ce9d726d0321b73c1521704d07db1b"
 +
- DEPENDS = "\
-     freetype \
-     libpng \
--    python3-numpy-native \
--    python3-dateutil-native \
--    python3-pytz-native \
--    python3-certifi-native \
-+    ${PYTHON_PN}-numpy-native \
-+    ${PYTHON_PN}-pip-native \
-+    ${PYTHON_PN}-dateutil-native \
-+    ${PYTHON_PN}-pytz-native \
-+    ${PYTHON_PN}-certifi-native \
- "
+ DEPENDS = "python3 openldap cyrus-sasl"
  
--SRC_URI[sha256sum] = "84d4c4f650f356678a5d658a43ca21a41fca13f9b8b00169c0b76e6a6a948908"
-+SRC_URI[sha256sum] = "b2e9810e09c3a47b73ce9cab5a72243a1258f61e7900969097a817232246ce1c"
+ PYPI_PACKAGE = "python-ldap"
++
+ inherit pypi setuptools3
  
- inherit pypi setuptools3 pkgconfig
+-LIC_FILES_CHKSUM = "file://LICENCE;md5=36ce9d726d0321b73c1521704d07db1b"
+-SRC_URI[md5sum] = "7608579722c491e42f5f63b3f88a95fb"
+-SRC_URI[sha256sum] = "4711cacf013e298754abd70058ccc995758177fb425f1c2d30e71adfc1d00aa5"
++SRC_URI[sha256sum] = "60464c8fc25e71e0fd40449a24eae482dcd0fb7fcf823e7de627a6525b3e0d12"
  
-@@ -30,12 +32,12 @@ LDFLAGS:remove:toolchain-clang:mips = "-fuse-ld=lld"
- RDEPENDS:${PN} = "\
-     freetype \
-     libpng \
--    python3-numpy \
--    python3-pyparsing \
--    python3-cycler \
--    python3-dateutil \
--    python3-kiwisolver \
--    python3-pytz \
-+    ${PYTHON_PN}-numpy \
-+    ${PYTHON_PN}-pyparsing \
-+    ${PYTHON_PN}-cycler \
-+    ${PYTHON_PN}-dateutil \
-+    ${PYTHON_PN}-kiwisolver \
-+    ${PYTHON_PN}-pytz \
- "
- 
- ENABLELTO:toolchain-clang:riscv64 = "echo enable_lto = False >> ${S}/setup.cfg"
+ do_configure:prepend() {
+     sed -i -e 's:^library_dirs =.*::' \
 -- 
 2.25.1
 
