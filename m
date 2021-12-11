@@ -2,93 +2,103 @@ Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E985C433F5
-	for <webhook@archiver.kernel.org>; Sat, 11 Dec 2021 18:58:29 +0000 (UTC)
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com
- [209.85.167.50])
- by mx.groups.io with SMTP id smtpd.web08.25377.1639249108296231953
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2079FC433F5
+	for <webhook@archiver.kernel.org>; Sat, 11 Dec 2021 18:58:35 +0000 (UTC)
+Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com
+ [209.85.167.46])
+ by mx.groups.io with SMTP id smtpd.web08.25379.1639249113614883947
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Dec 2021 10:58:28 -0800
+ Sat, 11 Dec 2021 10:58:34 -0800
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=lKEHKzUz;
+ header.s=20210112 header.b=icNewtAA;
  spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.167.50, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f50.google.com with SMTP id k37so23860778lfv.3
+ ip: 209.85.167.46, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f46.google.com with SMTP id m6so11976310lfu.1
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Dec 2021 10:58:28 -0800 (PST)
+ Sat, 11 Dec 2021 10:58:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=WP7nVzvn+Tbjtxu3n0D+pAPtmXW3UQydAYikpW8bo4Q=;
-        b=lKEHKzUzbXDRhFDVDmnWrVGo7yVrWBbkhxdzt5PmwJdUVXk6/WLeLkWZn9fJOGhZoV
-         VQ+ws7fmUM7AcHqfejWqW0jD+ipFw7CWWdPFc6LTYupCqasDHo9IAKQIFZuDrSTY0s+t
-         EtpR5NAok+2qE9zZrep0SG+kRzqNO+x74iQMV1vGhk/USzVpC5vsCaMK2snDY35DUamA
-         pRtn3m++KX1xI59TyKcl5HjHyK/8fRMXKUJhRF71wgFyHGe9Q476TzIMZ+itZO5hEAAI
-         adpY5MMejPQeF2bSgq9Pr6xR4Q2GAanQjVE05OLqbuYevdY8lOcy7/jYWE0HwKFECAXr
-         u+Sw==
+        bh=oYvHkf4KMuLXGI4pU3ntrRulVfWFnGBF4FKrc0MK/aw=;
+        b=icNewtAAzNd3w5X9xsZo4wmHwsscXuGAEALM1nEyPFjhqgilWOwoMVQEFv7q/FEdzu
+         pI6+N67OjgGm5RxxfeV+nCanxvSTauWDqbagta6SXE+a9w0NxKgjsSHNHheUCfcqgKbX
+         SV7xpvEOxwkxsoeu81GxU3Ty1kEKn2QfWaq8XrUJh+B093/KfOfWFY/9lWAqt2ehcfMJ
+         4PQO6PnMF3AoaIxOtkGc/d4FWi6DtaxIDoRRE5Za8s7nt97ARX3ZRSKdJ49lCGiKhE0A
+         ygHdBCes/Wc0uZq3yXrNdWjje9dqzv4J647vsDa+Lpvr1BbK6wL0i9tdsm/CSexa8WiA
+         AqDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=WP7nVzvn+Tbjtxu3n0D+pAPtmXW3UQydAYikpW8bo4Q=;
-        b=FfJDYhuFXavZoZ/R2wAUlMiJnCjWB6HDWpQJO26qkHhe+vDjtJ7QniJJrbEe9FprrW
-         ZVj5JtAzmuq7CMSEFJNSUqn4zZ+bEwmUW3sKQZPvZKGdLAqMoUTTnECdvgV6bMRd2nEd
-         CroiB+KO3rhgaB1NXjn0hzkTBbvOMTNgXSjaIUiPiwwH3qV6QCYWR6syx7Z6ikydmy+o
-         H1U6Xi1mdZwAQulZc6kOIzuNjeCMSKdF9g39wXLw/YtQR+cZNIDX6JAfKR1T4FS3mmAm
-         xvcsSya9mMxzrYJYKOH0ZX7vFSqNADy+75kmehDcZZvpRy4OiV/5yOrVoZT4vDOoXSgq
-         7OGg==
-X-Gm-Message-State: AOAM530C7PdxIeM71mLBqKSTVABEZ1DyAp0PqpGK6CrabDnumBd7uiLl
-	q9zaEf2rhBih+1v5TZ0XkuXh1N9ccUzHGOSX
+        bh=oYvHkf4KMuLXGI4pU3ntrRulVfWFnGBF4FKrc0MK/aw=;
+        b=C5PQ0HOFi6VS4odge5RV7hCaOEdBY24BX9JNQyRW/wPogy4zgbGTCLEzpdYU+r6EQW
+         FcgcPVR2k+liGQ8TtKJ4lUs2d2SP9l1RwxXgEkuBdpohiqfxOxXGJRzI8zbqfImPBsAE
+         xcKg/sSC8dvvB5cChcVBo0wH/d2rFj85dxwl+K1/gSx/9o1i9NdVSBUOpBOg3pTxCy20
+         0qRz4fbmYW0nvE1F7eWO7mtxUndo323MYrQ619BbgVp3eWaYWHM0Va55eaN1LtZHp5mS
+         N97xI7YpbC6Rr4xZ6O9T08fkWM5cQv7wx83cTQgTYbc1IQiF4tztZDhGUfib4zDfBrZo
+         UfqQ==
+X-Gm-Message-State: AOAM530Ph2EzqD/YfZBLdrKY9atQ8VmGiHjMP9Ib3Wqf2UVyQKTTgZta
+	+G386Adw1miY9i+PmteyfMEO4CbzxYuBXqho
 X-Google-Smtp-Source: 
- ABdhPJylAtIEPYVNmDvisAFcgIWvMXEyvjuof1Tshouc1dLm3QBdwtGTY0douZCJPhxKskG5tOoqaw==
-X-Received: by 2002:ac2:4c0b:: with SMTP id
- t11mr19790986lfq.520.1639249106367;
-        Sat, 11 Dec 2021 10:58:26 -0800 (PST)
+ ABdhPJzly7branqJIFrfqzuVT63g9NbxgbW8w7NSwSX3hip3XdZu2dWl6+ml6OGptv3aBV0GsE1azw==
+X-Received: by 2002:a05:6512:2809:: with SMTP id
+ cf9mr19053861lfb.429.1639249111707;
+        Sat, 11 Dec 2021 10:58:31 -0800 (PST)
 Received: from localhost.localdomain
  (c-7918524e.023-160-67626725.bbcust.telenor.se. [78.82.24.121])
-        by smtp.gmail.com with ESMTPSA id q6sm731910lfr.76.2021.12.11.10.58.25
+        by smtp.gmail.com with ESMTPSA id
+ l11sm731407lfe.22.2021.12.11.10.58.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 11 Dec 2021 10:58:26 -0800 (PST)
+        Sat, 11 Dec 2021 10:58:31 -0800 (PST)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python][PATCH] python3-graphviz: update to 0.19
-Date: Sat, 11 Dec 2021 19:58:24 +0100
-Message-Id: <20211211185824.2546382-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-python][PATCH] python3-diskcache: update to 5.3.0
+Date: Sat, 11 Dec 2021 19:58:29 +0100
+Message-Id: <20211211185829.2546544-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Dec 2021 18:58:29 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Dec 2021 18:58:35 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94293
+ https://lists.openembedded.org/g/openembedded-devel/message/94294
+
+License-Update: copyright years updated.
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../{python3-graphviz_0.18.bb => python3-graphviz_0.19.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-graphviz_0.18.bb => python3-graphviz_0.19.bb} (79%)
+ ...python3-diskcache_5.2.1.bb => python3-diskcache_5.3.0.bb} | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-diskcache_5.2.1.bb => python3-diskcache_5.3.0.bb} (57%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-graphviz_0.18.bb b/meta-python/recipes-devtools/python/python3-graphviz_0.19.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-graphviz_0.18.bb
-rename to meta-python/recipes-devtools/python/python3-graphviz_0.19.bb
-index 200292d66..593cdb4e5 100644
---- a/meta-python/recipes-devtools/python/python3-graphviz_0.18.bb
-+++ b/meta-python/recipes-devtools/python/python3-graphviz_0.19.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://graphviz.readthedocs.io/en/stable/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=87cd8818b7e63c6a9c580034e80d7521"
+diff --git a/meta-python/recipes-devtools/python/python3-diskcache_5.2.1.bb b/meta-python/recipes-devtools/python/python3-diskcache_5.3.0.bb
+similarity index 57%
+rename from meta-python/recipes-devtools/python/python3-diskcache_5.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-diskcache_5.3.0.bb
+index 4a028d769..55829bd1e 100644
+--- a/meta-python/recipes-devtools/python/python3-diskcache_5.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-diskcache_5.3.0.bb
+@@ -1,13 +1,12 @@
+ DESCRIPTION = "Disk Cache -- Disk and file backed persistent cache."
+ HOMEPAGE = "http://www.grantjenks.com/docs/diskcache/"
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=a3e7dd5bc8f0053fee7c5fe9692b932d"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=c60ef82f0f40155453f6d5f2c94b6e8e"
  
--SRC_URI[sha256sum] = "0f04e5f939d3a839b524283d590e941892c56e75e60e0f5238c431264f490022"
-+SRC_URI[sha256sum] = "b42554a1c47f24a9473b7f4e380d17b228586a067c97ea69d5354d6074be8dfd"
+-SRC_URI[sha256sum] = "1805acd5868ac10ad547208951a1190a0ab7bbff4e70f9a07cde4dbdfaa69f64"
++SRC_URI[sha256sum] = "3f1fa30b29fdff26cfddcb3ee7d61376903f82c769ea2907a2b82a5bfb8abbe2"
+ 
+ PYPI_PACKAGE = "diskcache"
  
  inherit pypi setuptools3
  
+ CLEANBROKEN = "1"
+-
 -- 
 2.25.1
 
