@@ -2,104 +2,132 @@ Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 92B7DC433F5
-	for <webhook@archiver.kernel.org>; Sat, 11 Dec 2021 19:07:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A503CC433EF
+	for <webhook@archiver.kernel.org>; Sat, 11 Dec 2021 19:33:27 +0000 (UTC)
 Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com
  [209.85.208.178])
- by mx.groups.io with SMTP id smtpd.web08.25503.1639249654976178254
+ by mx.groups.io with SMTP id smtpd.web12.25764.1639251206377892772
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Dec 2021 11:07:35 -0800
+ Sat, 11 Dec 2021 11:33:26 -0800
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=vjXanTKT;
+ header.s=20210112 header.b=WjRag1Ye;
  spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
  ip: 209.85.208.178, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f178.google.com with SMTP id b19so16405589ljr.12
+Received: by mail-lj1-f178.google.com with SMTP id bn20so18265872ljb.8
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Dec 2021 11:07:34 -0800 (PST)
+ Sat, 11 Dec 2021 11:33:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=HZZH3BNHsQoPJyn51AGywTY3VxZuyvnnStR7H6f8hus=;
-        b=vjXanTKT3R3Zarmnqzj+FtBq5GS4wtbk7Fc9v8nllFKHQheVlDDreiCHoVzux/CrTc
-         6XSUrSKnOvitLTlI6rYdnRMvrvwqPKgESBUkMDUFYN2kumBINSpsOIbTxxUo/jA7b683
-         +t49sej6QyXxR3LfE1j4yFfaZra5RJsOQiVfMXY6Qu6hTN/BXByne6UuLXlNGqorobgd
-         0Gvg51k9QrSyHdLCK8kVUrSXtS7AH+1OKUem5unVGZiGUtY6BQizoCYrF+MHO4HFTtAz
-         6AqCWRdDG/8icNw1K/Y2Cthrisf2WF1dqUBtdKh1BEzrorMQTP4AV1UNjSkR9TAnZkG7
-         B+5A==
+        bh=hCmvoV0+tXLlUFStIyiPc9S5QrQyc46crDGkG8VdC2I=;
+        b=WjRag1YeN53QM4Sch5m24cB64OXZvp/0k52tzVBeKKymU0PdZPs0P7JRtq5a6hLven
+         b3Os7kU7s7FeKzulRrhIiK6p46CvexMNzHfNmfRVPFm1FC64j5DW9L3yXaGOx7xj0Uge
+         hj/OiKh2W3p46d8ORyQjjp91bsbicUXFCdjyjviDZhp3VyMkhRC/VIJDTOmwN+4Je9dh
+         xR11brbTlsSNY2AZl83MVJdwZhZrJWhb7KiEyedsJ7jiT0XQlBDRbqPKGTg6qrSHhwyb
+         qo1ynX88a8lzvJmWsLpzT2svqYSMgkk89PXoDH3wTEjmHuPgIu8ZL0CIxy1tptsqvlzG
+         5a3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=HZZH3BNHsQoPJyn51AGywTY3VxZuyvnnStR7H6f8hus=;
-        b=grOMcLVO4aI0PGyBhEN1uauLqYWHX2y+GxMv0sCu7d5/p31Dz2EK0UoqNOEZUUKOsJ
-         OA81Un+1XJ61fFgZSggRs9kHCRYgf3w+Q2GpwbP+7tm/28wvTWwESBl9FAoSxOmgGj2E
-         vFrHeZRHfev661NoXEVPV8Gtlu3JtiZcE+a7l7wfr1HLHCURP5uT+1v4wdybL5sj/Ll1
-         kuEW6uxBOQORNOFzQsyRkzy3Nheqo1/z9kcElG9eCAElznk7IFKxyTMAJP5TUT7P+F4f
-         7ps0un+Fwt7KkxxnE0ChJoerrJm6Es9Kvl1gEKerYX+Okx8nTZ/Z0IWJJQKZelR/HUmV
-         auQQ==
-X-Gm-Message-State: AOAM532KJrJzBkq17RteStq8apZVqv428+Bv6887boNJcQoMkXR9Vmtg
-	AQNfeEUm6Z3o3MwEfkbrgOCp57CD7tFDBRln
+        bh=hCmvoV0+tXLlUFStIyiPc9S5QrQyc46crDGkG8VdC2I=;
+        b=DsOGtbyF2JGHFwJvKFuOycDVeCT1Cw6azH8fCMCce+lXjstp2G8NwjNs5ZZJi8afHp
+         3W/68Si/hHJSZ+cB1hcB0gCV/+BF0UnZLaxjLEU+6LgWnfnpovfEGGb0iIBRO15HJaz2
+         nBdQhtAS8x8E7hPRjD+nLnMszrXEM7E0JnLhcoO6mIQOMyejHlxQuniZY/L8nUH/wkKZ
+         1ic2UU3a31hTVdvCoOn9lwAzHVUlh/o4JuQD0s0AUGOvxtTt56iOnUaC2dAB/UA/B9rY
+         +Eovkd3+PLHqkiO8eUiCZJKM/e8WF80NuLePEWagg+Jhj/MaxAfexjWfxfYr+TpeEKIl
+         s9sQ==
+X-Gm-Message-State: AOAM531SZM8h0iUql/zN++LwScVW5i6W3hdVzTLrAlY90JDqEQWvXBkd
+	q4ZU3CDaRsfJDGcFeg41WIkYQDt925il61Pl
 X-Google-Smtp-Source: 
- ABdhPJwOZTqkDbrqWxQ3k7vvJU7stc8cVq5iGeasxxfijJv5qBcgIGTh0kQteTjcq+9Cf7WgtJbWHQ==
-X-Received: by 2002:a2e:5712:: with SMTP id
- l18mr18970975ljb.268.1639249652772;
-        Sat, 11 Dec 2021 11:07:32 -0800 (PST)
+ ABdhPJyWsACY7Nks72zSroHBr0nQq5nlyI0yWiC5AR3622LdLBAorK9YgDgMm1uJdSN06A4bSa2t3w==
+X-Received: by 2002:a2e:8719:: with SMTP id
+ m25mr19602449lji.145.1639251204182;
+        Sat, 11 Dec 2021 11:33:24 -0800 (PST)
 Received: from localhost.localdomain
  (c-7918524e.023-160-67626725.bbcust.telenor.se. [78.82.24.121])
         by smtp.gmail.com with ESMTPSA id
- b5sm731919lff.278.2021.12.11.11.07.32
+ q14sm738004lfo.143.2021.12.11.11.33.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 11 Dec 2021 11:07:32 -0800 (PST)
+        Sat, 11 Dec 2021 11:33:23 -0800 (PST)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python][PATCH] python3-wtforms: update to 3.0.0
-Date: Sat, 11 Dec 2021 20:07:29 +0100
-Message-Id: <20211211190729.2552895-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-python][PATCH] python3-matplotlib: update to 3.5.1
+Date: Sat, 11 Dec 2021 20:33:20 +0100
+Message-Id: <20211211193320.2576886-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Dec 2021 19:07:36 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Dec 2021 19:33:27 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94296
+ https://lists.openembedded.org/g/openembedded-devel/message/94297
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../{python3-wtforms_2.3.3.bb => python3-wtforms_3.0.0.bb} | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-wtforms_2.3.3.bb => python3-wtforms_3.0.0.bb} (75%)
+ ...b_3.4.1.bb => python3-matplotlib_3.5.1.bb} | 26 ++++++++++---------
+ 1 file changed, 14 insertions(+), 12 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-matplotlib_3.4.1.bb => python3-matplotlib_3.5.1.bb} (69%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-wtforms_2.3.3.bb b/meta-python/recipes-devtools/python/python3-wtforms_3.0.0.bb
-similarity index 75%
-rename from meta-python/recipes-devtools/python/python3-wtforms_2.3.3.bb
-rename to meta-python/recipes-devtools/python/python3-wtforms_3.0.0.bb
-index 6a9e46440..b63be8203 100644
---- a/meta-python/recipes-devtools/python/python3-wtforms_2.3.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-wtforms_3.0.0.bb
-@@ -4,13 +4,16 @@ SECTION = "devel/python"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=53dbfa56f61b90215a9f8f0d527c043d"
- 
--SRC_URI[md5sum] = "2b6ea167a71c6becf20f0934417fd06c"
--SRC_URI[sha256sum] = "81195de0ac94fbc8368abbaf9197b88c4f3ffd6c2719b5bf5fc9da744f3d829c"
-+SRC_URI[sha256sum] = "4abfbaa1d529a1d0ac927d44af8dbb9833afd910e56448a103f1893b0b176886"
- 
- PYPI_PACKAGE = "WTForms"
- 
- inherit pypi setuptools3
- 
-+DEPENDS += "\
-+    ${PYTHON_PN}-pip-native \
-+    "
+diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.4.1.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb
+similarity index 69%
+rename from meta-python/recipes-devtools/python/python3-matplotlib_3.4.1.bb
+rename to meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb
+index 9e933f5c4..f9eb79ff1 100644
+--- a/meta-python/recipes-devtools/python/python3-matplotlib_3.4.1.bb
++++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb
+@@ -7,19 +7,21 @@ HOMEPAGE = "https://github.com/matplotlib/matplotlib"
+ SECTION = "devel/python"
+ LICENSE = "PSF"
+ LIC_FILES_CHKSUM = "\
+-    file://setup.py;beginline=282;endline=282;md5=20e7ab4d2b2b1395a0e4ab800181eb96 \
++    file://setup.py;beginline=296;endline=296;md5=20e7ab4d2b2b1395a0e4ab800181eb96 \
+     file://LICENSE/LICENSE;md5=afec61498aa5f0c45936687da9a53d74 \
+ "
 +
- RDEPENDS:${PN} += "\
-     ${PYTHON_PN}-netserver \
-     ${PYTHON_PN}-numbers \
+ DEPENDS = "\
+     freetype \
+     libpng \
+-    python3-numpy-native \
+-    python3-dateutil-native \
+-    python3-pytz-native \
+-    python3-certifi-native \
++    ${PYTHON_PN}-numpy-native \
++    ${PYTHON_PN}-pip-native \
++    ${PYTHON_PN}-dateutil-native \
++    ${PYTHON_PN}-pytz-native \
++    ${PYTHON_PN}-certifi-native \
+ "
+ 
+-SRC_URI[sha256sum] = "84d4c4f650f356678a5d658a43ca21a41fca13f9b8b00169c0b76e6a6a948908"
++SRC_URI[sha256sum] = "b2e9810e09c3a47b73ce9cab5a72243a1258f61e7900969097a817232246ce1c"
+ 
+ inherit pypi setuptools3 pkgconfig
+ 
+@@ -30,12 +32,12 @@ LDFLAGS:remove:toolchain-clang:mips = "-fuse-ld=lld"
+ RDEPENDS:${PN} = "\
+     freetype \
+     libpng \
+-    python3-numpy \
+-    python3-pyparsing \
+-    python3-cycler \
+-    python3-dateutil \
+-    python3-kiwisolver \
+-    python3-pytz \
++    ${PYTHON_PN}-numpy \
++    ${PYTHON_PN}-pyparsing \
++    ${PYTHON_PN}-cycler \
++    ${PYTHON_PN}-dateutil \
++    ${PYTHON_PN}-kiwisolver \
++    ${PYTHON_PN}-pytz \
+ "
+ 
+ ENABLELTO:toolchain-clang:riscv64 = "echo enable_lto = False >> ${S}/setup.cfg"
 -- 
 2.25.1
 
