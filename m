@@ -2,130 +2,91 @@ Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A59B5C433EF
-	for <webhook@archiver.kernel.org>; Sun, 12 Dec 2021 17:44:24 +0000 (UTC)
-Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com
- [209.85.208.174])
- by mx.groups.io with SMTP id smtpd.web12.788.1639331043934478153
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B449CC433F5
+	for <webhook@archiver.kernel.org>; Sun, 12 Dec 2021 17:44:27 +0000 (UTC)
+Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com
+ [209.85.167.42])
+ by mx.groups.io with SMTP id smtpd.web09.794.1639331065834731953
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Dec 2021 09:44:04 -0800
+ Sun, 12 Dec 2021 09:44:26 -0800
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=K0asgpyx;
+ header.s=20210112 header.b=4BsmAi1x;
  spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.208.174, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f174.google.com with SMTP id p8so20716412ljo.5
+ ip: 209.85.167.42, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f42.google.com with SMTP id k37so27039123lfv.3
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Dec 2021 09:44:03 -0800 (PST)
+ Sun, 12 Dec 2021 09:44:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=EvlA+7AwJ/90T6GyDdpcMlsc+K0irp6dlLEaLKjlxT4=;
-        b=K0asgpyxoTUWLx++Mu6s4rDGWpSkCRc4JiL86P83HgmOut61HJ6Ly6r3yB8T4K2T5i
-         feWVcJ12V/PKENgZ9fX8mYkekZ7jVK8yMghy8iWN9vVaaYj7kwsItJbgtsA66Fk6vOTV
-         AwN0qjZC2jSVY/dguxntnA5KEeKxRO89a+V3MRu8vffa2DKAnLbhAk2NfhmyZViLG/H8
-         ouNFy1BM/ogrlrxJCD6Kf34nI1kXz14iTJqBzALUWxigA1gyo4NWUjN/NKTzd9PBZG0p
-         Wq8x2lekKm5Uld4f0Sj+M+yMZQFyn775gX1sX9VulPqYB/rpGpJ6N4ixYyaBv7TMTIWz
-         UhJQ==
+        bh=l+V1wmePtRgrZlECxK4RWSr0+unbLYb0ebSXKj0kA/0=;
+        b=4BsmAi1xE6mlZ+iDG6MPzvoHEG33oXDqkUBdOrL/O8L2gbeuDcQBmFFyEkuQYNRIgb
+         APLNBn1gC1ZWIxPcu4miU/tAJoZFu/tUk3YAG2PSb1p4Nj4URxMFp+jrB+kzjmZI8Ae4
+         c5j0EAl3GnUBUfmyP8wo97dl+SzMhrPICHiDBi3oTC9Vv3brMCW6bMMw73Heqo8/lGKD
+         AE411qLEeQxyjM5BiPI1/im1DnmfwflTlkbugNvyq400bURBXOhAwUuu9D86dyArSxDr
+         xuBZ4BGckBODJiShDX97D3/D+21bEFT5vhbHJtYxOUhn1E2zDhq/C1RV5Q364b2vijhf
+         HdVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=EvlA+7AwJ/90T6GyDdpcMlsc+K0irp6dlLEaLKjlxT4=;
-        b=BFfu+q1PdLwRSa+1fNUabSk1nmNft1cy5qsNhgelLQkz5kgqZfqYanQfXndMumv4bW
-         oVRBhrDT5YsJ5fJdzBYQjXCLJU9OkTYCaqYMaTFyj93wKRdE+Mzs8O76yaLhl3msCKtF
-         Azi25Ykad7l40tslnWqfvpyk4/SqyepK6pkbTdNmopX+CKIfjGkjaEyH3xwHcW9FoBmk
-         0UmWfrsD+vqIThYJCmOgaDezp/2qwO7FXljeDbgKKTYEAe4DRXGCJolYIeFIrNMYm1uF
-         k9k1bM+8X5bKceTsuKYRIiVxVNiVj3aLHaNzJ9hfvV9nUhvF7EUuPnDW2bGSs3icG2VZ
-         x0CQ==
-X-Gm-Message-State: AOAM532v9w8kelmQSARQDR0oPlFPIP6iD2tpBjoQZzIsMMElBo1aB6yL
-	1Xfcdz10yWEzXSFNrouw/0Ihg/sLwNBXZSsw
+        bh=l+V1wmePtRgrZlECxK4RWSr0+unbLYb0ebSXKj0kA/0=;
+        b=InFXC9YezAVMMkwmhPf6O/ekKHO5rTcD9/Y0Kd8yvaToZjgc62S4meNtf9Wq6n4F6D
+         u410fUX8NZa/Mk7b5ZCC4BaYLLXN6ZYdnbDpwTqaGFh9bUtUIB76tIdTOXWtXEQwLR+n
+         2sJjxEj0BAmVvRT4Olk+bNDqdnDdJJ4lg4BUL0jIqRPUTCgSlRmTPb5hrs4hvkoyMyEB
+         q3QHvzqEICjKzerxjFqXDQkVmXTUh3ZQLvMA1bHIVC03nDtiwdqfF61Q0x2+o8toHvyE
+         2QZD3Tfxsx1Yd/vjdA+pxTlNE4pKxau+/iHvyxu10MIOKYaHO8sAesJmoYfeIW2AHB2n
+         DDyw==
+X-Gm-Message-State: AOAM53153hVd9ofEAFnCpV/B/JobyjbhGH3hDrIYweAbgXZVVawq4IAu
+	EKyszofe+81pOnhvqLG1ZB0nc9+GLd88wmKQ
 X-Google-Smtp-Source: 
- ABdhPJx7gMGAv7xcrWeTIfnfqIlaBUCrQakctzVx2qYSFVzDgpmqVUuu5qIB3cEK5dZw4H/niD1exA==
-X-Received: by 2002:a2e:3c13:: with SMTP id
- j19mr24603494lja.311.1639331041331;
-        Sun, 12 Dec 2021 09:44:01 -0800 (PST)
+ ABdhPJyDeBHz0LjkXlo1k42DNVJuGfJy8n7qtm/oN5n+TQh5/NccsNKmi8vrvb5yY52DPb6en3Nybw==
+X-Received: by 2002:ac2:4353:: with SMTP id
+ o19mr23264044lfl.670.1639331063605;
+        Sun, 12 Dec 2021 09:44:23 -0800 (PST)
 Received: from localhost.localdomain
  (c-7918524e.023-160-67626725.bbcust.telenor.se. [78.82.24.121])
         by smtp.gmail.com with ESMTPSA id
- r5sm1106259ljd.84.2021.12.12.09.44.00
+ k8sm1110178lfv.179.2021.12.12.09.44.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Dec 2021 09:44:00 -0800 (PST)
+        Sun, 12 Dec 2021 09:44:23 -0800 (PST)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-gnome][PATCH] libwacom: update to 1.12
-Date: Sun, 12 Dec 2021 18:43:58 +0100
-Message-Id: <20211212174358.3328150-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-gnome][PATCH] gparted: add UPSTREAM_CHECK_URI
+Date: Sun, 12 Dec 2021 18:44:09 +0100
+Message-Id: <20211212174409.3328311-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 12 Dec 2021 17:44:24 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 12 Dec 2021 17:44:27 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94304
+ https://lists.openembedded.org/g/openembedded-devel/message/94305
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../recipes-support/libwacom/libwacom_0.33.bb | 14 -----------
- .../recipes-support/libwacom/libwacom_1.12.bb | 24 +++++++++++++++++++
- 2 files changed, 24 insertions(+), 14 deletions(-)
- delete mode 100644 meta-gnome/recipes-support/libwacom/libwacom_0.33.bb
- create mode 100644 meta-gnome/recipes-support/libwacom/libwacom_1.12.bb
+ meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-gnome/recipes-support/libwacom/libwacom_0.33.bb b/meta-gnome/recipes-support/libwacom/libwacom_0.33.bb
-deleted file mode 100644
-index 5db78b7cf..000000000
---- a/meta-gnome/recipes-support/libwacom/libwacom_0.33.bb
-+++ /dev/null
-@@ -1,14 +0,0 @@
--SUMMARY = "A tablet description library"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://COPYING;md5=40a21fffb367c82f39fd91a3b137c36e"
--
--DEPENDS = " \
--    libxml2-native \
--    libgudev \
--"
--
--inherit autotools pkgconfig
--
--SRC_URI = "git://github.com/linuxwacom/libwacom.git;branch=master;protocol=https"
--SRCREV = "87cc710e21a6220e267dd08936bbec2932aa3658"
--S = "${WORKDIR}/git"
-diff --git a/meta-gnome/recipes-support/libwacom/libwacom_1.12.bb b/meta-gnome/recipes-support/libwacom/libwacom_1.12.bb
-new file mode 100644
-index 000000000..d35bbaacb
---- /dev/null
-+++ b/meta-gnome/recipes-support/libwacom/libwacom_1.12.bb
-@@ -0,0 +1,24 @@
-+SUMMARY = "A tablet description library"
-+DESCRIPTION = "libwacom is a library to identify Wacom tablets and their model-specific features. \
-+               It provides easy access to information such as 'is this a built-in on-screen tablet\', \
-+               'what is the size of this model', etc."
-+HOMEPAGE = "https://github.com/linuxwacom/libwacom"
-+BUGTRACKER = "https://github.com/linuxwacom/libwacom/issues"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=40a21fffb367c82f39fd91a3b137c36e"
+diff --git a/meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb b/meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb
+index 2ed7d22d0..1c8dd6968 100644
+--- a/meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb
++++ b/meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb
+@@ -13,6 +13,9 @@ SRC_URI = " \
+ "
+ SRC_URI[sha256sum] = "5eee2e6d74b15ef96b13b3a2310c868ed2298e03341021e7d12a5a98a1d1e109"
+ 
++UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/gparted/files/gparted/"
++UPSTREAM_CHECK_REGEX = "gparted-(?P<pver>\d+\.(\d+)+(\.\d+)+)"
 +
-+SRC_URI = "git://github.com/linuxwacom/libwacom.git;branch=master;protocol=https"
-+SRCREV = "942628be9faffa96ae1068833eccb00a1bfe4578"
-+
-+DEPENDS = " \
-+    libxml2-native \
-+    libgudev \
-+"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit meson pkgconfig
-+
-+EXTRA_OEMESON = " \
-+    -Dtests=disabled \
-+"
+ DEPENDS += " \
+     glib-2.0-native \
+     yelp-tools-native \
 -- 
 2.25.1
 
