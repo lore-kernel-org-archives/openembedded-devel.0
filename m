@@ -1,95 +1,120 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
+Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CBF52C433EF
-	for <webhook@archiver.kernel.org>; Sat, 11 Dec 2021 20:04:10 +0000 (UTC)
-Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com
- [209.85.208.181])
- by mx.groups.io with SMTP id smtpd.web09.25986.1639253049427179217
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EF19AC433F5
+	for <webhook@archiver.kernel.org>; Sun, 12 Dec 2021 17:08:02 +0000 (UTC)
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com
+ [209.85.208.47])
+ by mx.groups.io with SMTP id smtpd.web10.293.1639328882317667624
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Dec 2021 12:04:09 -0800
+ Sun, 12 Dec 2021 09:08:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=FqslA0bQ;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.208.181, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f181.google.com with SMTP id bn20so18330952ljb.8
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=awce+TGX;
+ spf=pass (domain: gmail.com, ip: 209.85.208.47,
+ mailfrom: jan.vermaete@gmail.com)
+Received: by mail-ed1-f47.google.com with SMTP id g14so44283623edb.8
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Dec 2021 12:04:09 -0800 (PST)
+ Sun, 12 Dec 2021 09:08:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
+        d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=XptjOffw96xD0ljkqbIinRW6jB45mPvcppqpkgJzRfk=;
-        b=FqslA0bQUqmVAWBkkgH6zRhhyQM9jXbla0st090BsUui0CzrM8YlRWnphkKmCWtzVj
-         ACyXsPQIbh9VRggRvGrXoC0uCzj7JIt6aM3zfvQSoPIqZkG7P62C5UIbv/mETa9CaHes
-         rRDbT2d5ASGD2dq4H9siPTr8zNGIB/Tf6pVoQNkAAW1T7IsZfgZPnI2UBsEi714Vo4wd
-         m/5qLj1qgYTLF/0mXMqfcTKUFqgHL7oO9Zd8hUV3F9+dOYktXxu4mz5ddaxQMfs8saMl
-         KWRG3JIqdKXNgM0hkWcEUIgORCLZ6DN1sixXJlykHLErQcQKAXP8CJoH6XhkLVxGjYhn
-         2roQ==
+        bh=5GlslLkryAdbs3P3SKNjmEMpRM4w++AZDmh+AZwYDZs=;
+        b=awce+TGX3+krc+CYFaJy0RPrrU24yQB1qFbgH7rK1GPwogdtbA38dDYMCG43Hc5LOd
+         gI4YZJm2kZl05C7Wxgd29uZcmliq2Jnh3L5KCOxdlrnZ/am/qNFmbGjLDEOhmMrvvP1m
+         b7mmSTkjSV8+RPnEAiKuYC9FOPlr0oB2mkUCpq2ze32DGbLumZ6/8ba8T8vQnRa5qfpD
+         DaM2EDu6u+ud2JCaCLx3OYojRJUc+a8MZUt0mryL8xtrjfs9Xu7O9lQ3DKeVNxtwqASX
+         0eUEtUtOuLxGvwSuRsUvrpjqXr4eclbEF3P6W60LGodxrZ8rrgjqKQegQDKIFfdCplPF
+         aDQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=XptjOffw96xD0ljkqbIinRW6jB45mPvcppqpkgJzRfk=;
-        b=V0FuZfp/oU3DJs7onQess2uTPHRppskzsgg0Emf8Ei4xjGTd2jzWyzQdAjjubl1AGL
-         71Tq1HC8i+Bnaco7oigZLTBubQyGukt/ljXBR/IMIYW94izAIGdmN2EKy0EdgGt+brNK
-         TtnMryygbeWDhwD+vDsuELExjpGXHo6ZPM9nhjy6Bq4vbKMaVJGQaUI1w6b3c+oV2yAp
-         GAxf90jBqnI8kv5c2oXwyb3GeH0K/cLbU1Etzaz5xH9HJ4mlS1U4XJsQe9sL+Zo0NwaL
-         +s22i3ToElOPgfVlxvTS/TOdWRT261cknB7D9lZiejnBxj7YvXfpTcNVbGwYrpztRiLU
-         6lAw==
-X-Gm-Message-State: AOAM532noxKu/jWox7Qgz3hoeEqv/lwCA1Nh/0wRbKw/j4WWfNhBhpnz
-	BSb1RxYY872KmbZjzCMonqciXvzdMDlanZYZ
+        bh=5GlslLkryAdbs3P3SKNjmEMpRM4w++AZDmh+AZwYDZs=;
+        b=jIcrL7ZIghgcJkfZW3BFPqb0+YjfM4FMhig8kzZLVT60QTR1kqRQtA80bgpwc1fP1m
+         zpYj+JSYgLRx5AMMaE19V0zMvTqgUr+2/uizLixE7kwNm5TBlW3y+i4dnwWuULVKOxWs
+         zRhWGub4F0JqEVP18qNVzoEfqZ4F9d5G0LTzfFOtfdMGwmBzFFST2wJph7KcNTVgIDCc
+         9IGLow1GelU4gEgjPHr1SSEmP9Bz48cid8+840IpNR0xL9VPOarxvxeM9hAKSx8+DWdV
+         7v/2KVh1f4+y/pZadeUc/a0N7FPM0Iz/iGEO0lgzWpJQTa409++MI16dmDxdPFAxs1jl
+         eB9A==
+X-Gm-Message-State: AOAM533Hufl937GyaBm8popy6zaerGkzQOdXXR8S2jjGk7WIGrvUjWd+
+	JGVUUe0kbn9BkX2xbp6iiHspF8hFz4c=
 X-Google-Smtp-Source: 
- ABdhPJxP5kUJAZ+n5pviZ0lxSKnYcv1Qn5Jwb52hql2Bp8HUfjm3TfoZeIcON/jna0DJWOGFVP1v+g==
-X-Received: by 2002:a2e:920a:: with SMTP id
- k10mr20078344ljg.234.1639253047351;
-        Sat, 11 Dec 2021 12:04:07 -0800 (PST)
-Received: from localhost.localdomain
- (c-7918524e.023-160-67626725.bbcust.telenor.se. [78.82.24.121])
-        by smtp.gmail.com with ESMTPSA id
- x17sm756008ljp.95.2021.12.11.12.04.06
+ ABdhPJyVZPWXFdR+AJY3TFwJSzClik3v48SJpllLSxYXhX75Y3wW5Q83XUtg+YOqSFh7fscj3utuMA==
+X-Received: by 2002:a05:6402:5158:: with SMTP id
+ n24mr56734809edd.230.1639328880546;
+        Sun, 12 Dec 2021 09:08:00 -0800 (PST)
+Received: from localhost.localdomain (78-20-160-86.access.telenet.be.
+ [78.20.160.86])
+        by smtp.googlemail.com with ESMTPSA id
+ t20sm4939869edv.81.2021.12.12.09.07.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 11 Dec 2021 12:04:07 -0800 (PST)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+        Sun, 12 Dec 2021 09:07:59 -0800 (PST)
+From: Jan Vermaete <jan.vermaete@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python][PATCH] python3-astroid: update to 2.9.0
-Date: Sat, 11 Dec 2021 21:04:05 +0100
-Message-Id: <20211211200405.2612442-1-open.source@oleksandr-kravchuk.com>
+Cc: Jan Vermaete <jan.vermaete@gmail.com>
+Subject: [meta-webserver][PATCH] netdata: from 1.22.1 to 1.32.0
+Date: Sun, 12 Dec 2021 18:07:40 +0100
+Message-Id: <20211212170740.3085705-1-jan.vermaete@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Dec 2021 20:04:10 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 12 Dec 2021 17:08:02 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94302
+ https://lists.openembedded.org/g/openembedded-devel/message/94303
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+* Added openssl so it can compile with default configuration.
+
+* ebpf I had to disable.  It seems to have issues with cross-compiling.
+And the libbpf isn't available at all platforms.
+
+Tested on raspberrypy4-64
+
+Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
 ---
- .../{python3-astroid_2.8.5.bb => python3-astroid_2.9.0.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-astroid_2.8.5.bb => python3-astroid_2.9.0.bb} (89%)
+ .../netdata/{netdata_1.22.1.bb => netdata_1.32.0.bb}       | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+ rename meta-webserver/recipes-webadmin/netdata/{netdata_1.22.1.bb => netdata_1.32.0.bb} (91%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-astroid_2.8.5.bb b/meta-python/recipes-devtools/python/python3-astroid_2.9.0.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-astroid_2.8.5.bb
-rename to meta-python/recipes-devtools/python/python3-astroid_2.9.0.bb
-index f8f050cab..fee8acb1f 100644
---- a/meta-python/recipes-devtools/python/python3-astroid_2.8.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-astroid_2.9.0.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
+diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_1.22.1.bb b/meta-webserver/recipes-webadmin/netdata/netdata_1.32.0.bb
+similarity index 91%
+rename from meta-webserver/recipes-webadmin/netdata/netdata_1.22.1.bb
+rename to meta-webserver/recipes-webadmin/netdata/netdata_1.32.0.bb
+index fb643be61..d06eb8762 100644
+--- a/meta-webserver/recipes-webadmin/netdata/netdata_1.22.1.bb
++++ b/meta-webserver/recipes-webadmin/netdata/netdata_1.32.0.bb
+@@ -6,7 +6,7 @@ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
  
--SRC_URI[sha256sum] = "11f7356737b624c42e21e71fe85eea6875cb94c03c82ac76bd535a0ff10b0f25"
-+SRC_URI[sha256sum] = "5939cf55de24b92bda00345d4d0659d01b3c7dafb5055165c330bc7c568ba273"
+ SRC_URI = "https://github.com/netdata/netdata/releases/download/v${PV}/netdata-v${PV}.tar.gz"
+-SRC_URI[sha256sum] = "f169c8615a6823448c2f1923c87c286d798132ea29d26f366e96d26e0aec3697"
++SRC_URI[sha256sum] = "5e066d322f88013cea78eb9bb42bca64599278b9db8d46593777e4258743fefd"
  
- inherit pypi setuptools3
+ # default netdata.conf for netdata configuration
+ SRC_URI += "file://netdata.conf"
+@@ -18,7 +18,7 @@ UPSTREAM_CHECK_URI = "https://github.com/netdata/netdata/releases"
  
+ S = "${WORKDIR}/netdata-v${PV}"
+ 
+-DEPENDS += "zlib util-linux libuv"
++DEPENDS += "libuv openssl util-linux zlib "
+ 
+ inherit pkgconfig autotools-brokensep useradd systemd
+ 
+@@ -36,6 +36,9 @@ SYSTEMD_AUTO_ENABLE:${PN} = "enable"
+ USERADD_PACKAGES = "${PN}"
+ USERADD_PARAM:${PN} = "--system --no-create-home --home-dir ${localstatedir}/run/netdata --user-group netdata"
+ 
++# ebpf doesn't compile (or detect) the cross compilation well
++EXTRA_OECONF += "--disable-ebpf"
++
+ do_install:append() {
+     #set S UID for plugins
+     chmod 4755 ${D}${libexecdir}/netdata/plugins.d/apps.plugin
 -- 
 2.25.1
 
