@@ -2,80 +2,77 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BD9DBC433F5
-	for <webhook@archiver.kernel.org>; Mon, 13 Dec 2021 13:18:00 +0000 (UTC)
-Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web08.10791.1639401479471022806
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6543C433F5
+	for <webhook@archiver.kernel.org>; Mon, 13 Dec 2021 13:18:06 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.1])
+ by mx.groups.io with SMTP id smtpd.web11.10813.1639401485948723739
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Dec 2021 05:17:59 -0800
+ Mon, 13 Dec 2021 05:18:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=V/fu46sP;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=sqxUH048;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1639401477; i=@fujitsu.com;
-	bh=/sofD73lHkPQHR9JNd7P41KppBtwq4BosLKT5xjGWc0=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=V/fu46sPztHneDpLM4NlTQPNHJVeMRwd05F2IaN7zx2Myqwocr1b6S99i+SsuLoSB
-	 HTzPgIjcW7DRCNex1pz/3UZGpw3BVjWU5+RYY6F4d1qy/ylGOwL6uFDLs5oO6BQo3h
-	 pY8Eqcp+1VkUl3XkctupehntiKcqs0ARM/uQ7keoBE8Kqrr+PE2NdHBpz/B/Z8DXTq
-	 MFJx5M24+UEO4825cZnnI4kUAVzfg9VfTPdcNYTTOCiKRaKtY9hTI+IT05SMI548q8
-	 3tFJBRxZ7eNcwbGizM8LECrTvLVphidvLOwSQJPXU3HzfsjrBSu9iEKjZ1mjLsEFdw
-	 up4WvsGzJUHMw==
-Received: from [100.115.71.165] (using TLSv1.2 with cipher
+	s=170520fj; t=1639401478; i=@fujitsu.com;
+	bh=kgUDJaw2Oginj+oEOglJPMVycGF47+XyTEupgjLgXns=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=sqxUH0486prvgKnFwKD97DWCs/Kv+Ez6hZ7PmH0OVbAsDmySVWPDqO1wIHLELMj6U
+	 1AEAbG9xSoquq+RJSU+GCsj59a3t/8h4d2m8vdmAY3bQ+RYQm0DxlSEs1pvsiszGgs
+	 Rpf4FuEZ+FhC+JIat1urnP4LAOdqcFTGGAbxhy7LDV9JmACPeBGmZIAfmn3ikzPxWJ
+	 E5IiUm+g39Zwy2NNGrGccDxuKh+Z9xoNoL4a03Vcmflw05t/7RKMC+z6RMhkoQyIt1
+	 ZuIDBOQUG86KLAYt53+ICMlImYLXo5zTJza9vjYxRxxUj4KBwztF/833I+MNuLMpr7
+	 ic7h/JK0kLiSA==
+Received: from [100.115.34.181] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-a.eu-central-1.aws.ess.symcld.net id
- CB/CE-11258-50847B16; Mon, 13 Dec 2021 13:17:57 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrHIsWRWlGSWpSXmKPExsViZ8ORqMvqsT3
-  RYNo/OYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPr1VdsBV3cFU+PtjE2MM7m6mLk4hASeMIo
-  MXfbHeYuRk4g5wKTxOvVJhCJE4wSPb/3gyXYBNQkpt+6wQpiiwjoSyydvQcsziygIvHidw87i
-  C0s4CPR8v81WJxFQFXixLVuFhCbV8BJYmrXVbBeCQEFiSkP34PVcAo4S7xddYQJYrGTRMesO2
-  wQ9YISJ2c+YYGYLyFx8MULZoheRYnZl5tZIOwKiVmz2pggbDWJq+c2MU9gFJyFpH0WkvYFjEy
-  rGO2SijLTM0pyEzNzdA0NDHQNDU11zSx0DU2M9RKrdBP1Ukt1k1PzSooSgdJ6ieXFeqnFxXrF
-  lbnJOSl6eaklmxiBwZxS7NK/g/F+30+9Q4ySHExKorzBrNsThfiS8lMqMxKLM+KLSnNSiw8xy
-  nBwKEnw/jYHygkWpaanVqRl5gAjCyYtwcGjJMLb7QiU5i0uSMwtzkyHSJ1iVJQS553lBpQQAE
-  lklObBtcGi+RKjrJQwLyMDA4MQT0FqUW5mCar8K0ZxDkYlYd5kkPE8mXklcNNfAS1mAlrMWLk
-  ZZHFJIkJKqoFpzZtzTJs2290seMC6UH6Jce/e3Acmims7WIN23XpwNUSnX3Zv9+b+8sdpf5PX
-  LLdg1jYteZJw8ErMbkextVt2lu55fmvvklfb19Z8UjUzinz30t1ouamX/ttpms3iLiccWw76d
-  SxJVU2RnX9a8vjblLh1qqtXfez+UMtanShRwqDLXJt5vaTXbMqz/pddcxuCf+w3Tfs+92fPfq
-  EP6w98eNIqHm4g9EGfI7r3p3u0/vFqxnjm3/UidreOhIdPcQl848niy3nqvf5NmW9f56cZhTX
-  eUwleuXJXcRCXuNC8NdwTcpwPC3/26BXpuO55z+aMpuHLy6X92fHCd3MYtS7un/3H7nrFqZA5
-  wqd0jfWVWIozEg21mIuKEwERpNFQYQMAAA==
+	by server-1.bemta.az-a.eu-west-2.aws.ess.symcld.net id 31/2C-28974-60847B16;
+ Mon, 13 Dec 2021 13:17:58 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrPIsWRWlGSWpSXmKPExsViZ8ORqMvqsT3
+  RYEWHrMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmtG2q4m94AR3xfOXHYwNjMe5uhi5OIQEnjBK
+  PHq+igXCucAksbDjNyuEc4JRYt7tN8xdjJwcbAJqEtNv3WAFsUUE9CWWzt4DFmcWUJF48buHH
+  cQWFvCVeLfrMVCcg4NFQFViwmk3kDCvgJPEsaPPGUFsCQEFiSkP3zNDxAUlTs58wgIxRkLi4I
+  sXzBA1ihKzLzezQNgVErNmtTFB2GoSV89tYp7AyD8LSfssJO0LGJlWMVonFWWmZ5TkJmbm6Bo
+  aGOgaGprqGlsAmZZ6iVW6iXqppbrlqcUlukZ6ieXFeqnFxXrFlbnJOSl6eaklmxiBYZlSrJa7
+  g3HKyp96hxglOZiURHmDWbcnCvEl5adUZiQWZ8QXleakFh9ilOHgUJLg/W0OlBMsSk1PrUjLz
+  AHGCExagoNHSYS32xEozVtckJhbnJkOkTrFqMux6sD0VcxCLHn5ealS4ryz3ICKBECKMkrz4E
+  bA4vUSo6yUMC8jAwODEE9BalFuZgmq/CtGcQ5GJWHeZJBVPJl5JXCbXgEdwQR0BGPlZpAjShI
+  RUlINTL2vH05jdl/kNI9R3Nly3ZX7FakFCs05iRKd3GvsL/pkuOwUfWFec+Ov0IPPSaw3VQ/o
+  xpmHXQ9MfrOcO7B1345HBz1S1/h5fl162MEpPK7lAxubjXDNMm0Xk8Lgxa9S5kkwy0kHXOhzC
+  nLZ2XRddPmn8+mKz5pWGE68qeFbncf76O3T3rO/J9x31HPP5nzroO21msOXqyxNq/QJd6hJtf
+  fn7zfD/+px3BNy5FQyKixoyeBXfaXVIXxllpudxyaH55tZ9y6dG7x7WZbw3kesCTU1p69yyTV
+  q2m3MUKln3DRF6o/L8/LsUNMDd9S+PBb7omQecViw9utn5WdqAf89V2eeWp9jzr7t2PZyg6lK
+  LMUZiYZazEXFiQCOmuhyUgMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-13.tower-532.messagelabs.com!1639401477!16326!1
+X-Msg-Ref: server-15.tower-548.messagelabs.com!1639401477!27080!1
 X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 27926 invoked from network); 13 Dec 2021 13:17:57 -0000
+Received: (qmail 28523 invoked from network); 13 Dec 2021 13:17:57 -0000
 Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-13.tower-532.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-15.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 13 Dec 2021 13:17:57 -0000
 Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id F1CC810024B
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id EE632100242
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 13 Dec 2021 13:17:56 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id E3F5210023C
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id E20E8100239
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 13 Dec 2021 13:17:56 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Mon, 13 Dec 2021 13:17:37 +0000
+ (TLS) id 15.0.1497.26; Mon, 13 Dec 2021 13:17:34 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-scrypt: upgrade 0.8.18 -> 0.8.19
-Date: Mon, 13 Dec 2021 21:17:26 +0800
-Message-ID: <1639401446-27788-2-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-diskcache: upgrade 5.2.1 -> 5.3.0
+Date: Mon, 13 Dec 2021 21:17:25 +0800
+Message-ID: <1639401446-27788-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1639401446-27788-1-git-send-email-wangmy@fujitsu.com>
-References: <1639401446-27788-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -85,38 +82,43 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Dec 2021 13:18:00 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Dec 2021 13:18:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94328
+ https://lists.openembedded.org/g/openembedded-devel/message/94329
 
-License-Update: year update to 2021.
+License-Update: year updated to 2022.
+
+Changelog:
+==========
+* Add support for Python 3.10
+* Update copyright to 2022
+* Bump version to 5.3.0
+* Add Python 3.10 to the README
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-scrypt_0.8.18.bb => python3-scrypt_0.8.19.bb}    | 4 ++--
+ ...{python3-diskcache_5.2.1.bb => python3-diskcache_5.3.0.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-scrypt_0.8.18.bb => python3-scrypt_0.8.19.bb} (76%)
+ rename meta-python/recipes-devtools/python/{python3-diskcache_5.2.1.bb => python3-diskcache_5.3.0.bb} (57%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-scrypt_0.8.18.bb b/meta-python/recipes-devtools/python/python3-scrypt_0.8.19.bb
-similarity index 76%
-rename from meta-python/recipes-devtools/python/python3-scrypt_0.8.18.bb
-rename to meta-python/recipes-devtools/python/python3-scrypt_0.8.19.bb
-index 691742d6d..f0a9e1615 100644
---- a/meta-python/recipes-devtools/python/python3-scrypt_0.8.18.bb
-+++ b/meta-python/recipes-devtools/python/python3-scrypt_0.8.19.bb
-@@ -1,11 +1,11 @@
- DESCRIPTION = "Bindings for the scrypt key derivation function library"
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=2ddf47d0ff1849bce3257ccbc1fd275c"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=05b5ac2824a7ae7489193b0f6a6f2cd1"
- HOMEPAGE="https://github.com/holgern/py-scrypt"
+diff --git a/meta-python/recipes-devtools/python/python3-diskcache_5.2.1.bb b/meta-python/recipes-devtools/python/python3-diskcache_5.3.0.bb
+similarity index 57%
+rename from meta-python/recipes-devtools/python/python3-diskcache_5.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-diskcache_5.3.0.bb
+index 4a028d7694..85e2807634 100644
+--- a/meta-python/recipes-devtools/python/python3-diskcache_5.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-diskcache_5.3.0.bb
+@@ -1,9 +1,9 @@
+ DESCRIPTION = "Disk Cache -- Disk and file backed persistent cache."
+ HOMEPAGE = "http://www.grantjenks.com/docs/diskcache/"
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=a3e7dd5bc8f0053fee7c5fe9692b932d"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=c60ef82f0f40155453f6d5f2c94b6e8e"
  
- SRC_URI += "file://0001-py-scrypt-remove-the-hard-coded-include-paths.patch"
+-SRC_URI[sha256sum] = "1805acd5868ac10ad547208951a1190a0ab7bbff4e70f9a07cde4dbdfaa69f64"
++SRC_URI[sha256sum] = "3f1fa30b29fdff26cfddcb3ee7d61376903f82c769ea2907a2b82a5bfb8abbe2"
  
--SRC_URI[sha256sum] = "bcf04257af12e6d52974d177a7b08e314b66f350a73f9b6f7b232d69a6a1e041"
-+SRC_URI[sha256sum] = "ad143035ae0cf5e97c4b399f4e4686adf442c5f0f06f9f198a0cc6c091335fb7"
- 
- inherit pypi ptest setuptools3 dos2unix
+ PYPI_PACKAGE = "diskcache"
  
 -- 
 2.25.1
