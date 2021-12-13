@@ -1,94 +1,130 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jacob.kroon@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A128CC433EF
-	for <webhook@archiver.kernel.org>; Mon, 13 Dec 2021 05:43:29 +0000 (UTC)
-Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com
- [209.85.215.172])
- by mx.groups.io with SMTP id smtpd.web11.7726.1639374208640118773
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F9A3C433EF
+	for <webhook@archiver.kernel.org>; Mon, 13 Dec 2021 08:43:14 +0000 (UTC)
+Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com
+ [209.85.208.180])
+ by mx.groups.io with SMTP id smtpd.web10.8784.1639384992415690084
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Dec 2021 21:43:28 -0800
+ Mon, 13 Dec 2021 00:43:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=fA/Qgwmm;
- spf=pass (domain: gmail.com, ip: 209.85.215.172,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f172.google.com with SMTP id y9so432962pgj.5
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=OU6sEyob;
+ spf=pass (domain: gmail.com, ip: 209.85.208.180,
+ mailfrom: jacob.kroon@gmail.com)
+Received: by mail-lj1-f180.google.com with SMTP id 207so22565420ljf.10
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Dec 2021 21:43:28 -0800 (PST)
+ Mon, 13 Dec 2021 00:43:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Km+ykec9SP7lzdqHbg8cik3PBmvcj2HWk+7b5hUXgho=;
-        b=fA/QgwmmMOXcxibrGJWpCe4wF45rV7Muuil0lSFOykQSq2zAq53m0WD0dcYEx/6h3Z
-         JPC/dxaXuSV/8xA/HiJwXIazrGXs+CMFPssPdYYbGZ78WXbI3T8uev+U57XhJBzu4K/P
-         IJheCEDb6T+WwdEUvgxJu3h9XZWlLydvSHiHg0zWSQZxpn/oKwJ0BG0n8NOhTqIf56DK
-         iQolbZKUv1OsONxFOoRZM44QFC8eI+FpchpUug4JYBONZxXlKlx667qHB5DG6a1CnamV
-         pIvWNPcjwScnDFRbGrtffKMZB8HUIa7OUtwtuoW7ZSZER/Il2zeJlhndzYl5AWoiW2iC
-         JaOg==
+        h=message-id:date:mime-version:user-agent:subject:content-language
+         :from:to:references:in-reply-to:content-transfer-encoding;
+        bh=t6wdHzcsJhKHnUJHmBavJ+/h5/uGW6k5GTK8qm8I5uU=;
+        b=OU6sEyobkWqWiiWDp0FAT5nq0/4FTgRgmnE+RhA8Jtr7rwfT1HbUrtjWIXwIMBFWK/
+         BoPNOf/R+dELsMXsUofpDcAznECdTSMKQIdl6qoN2LOrTdLH9LtdCTSeoSYU7mXDP0cc
+         0wkzgpcJmq4CfyWFHTAUXiihcnZJStKUcTgFDPbwz8z9FVwrXF9GL3gPtIIh3Baj+Fhj
+         Ejd4EIx0c9j4qbxsXFW0sQW+VrTNn2qtIremlQI59J7vSi1rVTV2JajkPFt6wMFs1I/T
+         8WQFn2pIVK4hJfbeDjIbWbUoclJwrh4BPbzESHGMwjhkcM5YWH3dTj1tInfbUHSo8rbu
+         Et/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:from:to:references:in-reply-to
          :content-transfer-encoding;
-        bh=Km+ykec9SP7lzdqHbg8cik3PBmvcj2HWk+7b5hUXgho=;
-        b=rpMzrvFf8KE8U2wpTVIE1ZU317iIWuJT/NzFGSmsmGUZn803mCcnK//cr0nVIUgNpo
-         cQIXpzhriPKb+Q9i6QEhM61xt7vNqEOxTreLsL3ssoRt0PnEDLXflHtwwPkil3qZfdVK
-         UctNBHUmMTKVBMMxwShwsdIBYN3qz7u4NeDv57uM7XCjF9grNDzMBtOH1YKEBikl2m5u
-         nzpGxU3n6q+TZqI11wn+g2wGjx1AByBRRvy2bURwR6ZzOhXBBmBzYBUFfPtCo03c6XlM
-         l0ZOfcX+Sz73OuixtueIRzYKqthair7aY+ujvfCsiFhdFI5N72XgG10t48DRXwhyDFmN
-         lRZA==
-X-Gm-Message-State: AOAM533qNsAkP5jxfO71F4n1SIKciDeMUZ4e0y2NxhPA0tgigVMoHdcx
-	kqto+l6yQIvodfLVxuzAxSFGBWFxJkva3A==
+        bh=t6wdHzcsJhKHnUJHmBavJ+/h5/uGW6k5GTK8qm8I5uU=;
+        b=0WCbvp/2+2D0Tg2cEwdFtQFSaBwZXRa4j0lI6HGPIPPtpzhoT7SfiD9N9FbaccdNMP
+         1uy19dMpbcT1qnR1xCreqexhwo3mlhT8kwsByINmRR0levZ6nNKvSAIHhJbrmoKfjzpT
+         AtNJyozkLEI/CPHCK4ve37IZzaVkavD5i0zIhNPa1N0P9sg3521iOWWJHXYK1oeOVAES
+         U+0dRfIxTyyaNm2dNZ1Hckewkdy+PYH3oJQ/lodSTaL2BuV+m8Dr4WNNgU8QzBu5Mve7
+         MhRxBZeek1M7zXwcGL+h8MVVaqavnQzamJZFsc2LSTiTva/tuh+sdQAAM0UED2q+ClsP
+         a6hQ==
+X-Gm-Message-State: AOAM532SqU5q/FDHNu46960QCikqUQ/YnxJre7dFPHD0V59+8YAdKrsB
+	J5yttxn4PnvNQFQLjIB3dggFs0yAlHrc7A==
 X-Google-Smtp-Source: 
- ABdhPJy+ShU6ItK26trglCMRu/zO0hjuIcIHlLjbSZfzESLQFi04cikhhQhtsToA7xVdzfmEKr4HEw==
-X-Received: by 2002:a63:751a:: with SMTP id
- q26mr46640703pgc.529.1639374207941;
-        Sun, 12 Dec 2021 21:43:27 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ce68])
+ ABdhPJzsfNH+iS0rQcnfu8ugvZ9vsBs2u/ocPY++nQ4qxxMUDKscPFautKAW0CkZp3Whi83y1U+EHA==
+X-Received: by 2002:a2e:a7ce:: with SMTP id
+ x14mr28160823ljp.390.1639384990254;
+        Mon, 13 Dec 2021 00:43:10 -0800 (PST)
+Received: from [192.168.10.175] (37-247-29-68.customers.ownit.se.
+ [37.247.29.68])
         by smtp.gmail.com with ESMTPSA id
- g1sm10101207pfu.73.2021.12.12.21.43.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Dec 2021 21:43:27 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Joshua Watt <JPEWhacker@gmail.com>
-Subject: [meta-gnome][PATCH] yelp: Add option to support webkit2gtk-4-0
-Date: Sun, 12 Dec 2021 21:43:24 -0800
-Message-Id: <20211213054324.1794930-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ h7sm1334127lfu.253.2021.12.13.00.43.08
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 13 Dec 2021 00:43:09 -0800 (PST)
+Message-ID: <a7d63d9b-3d21-8507-b58d-49ac80d5d37e@gmail.com>
+Date: Mon, 13 Dec 2021 09:43:08 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.3.0
+Subject: Re: [meta-oe][PATCH] Revert "ccid: Fix floating runtime dependency on
+ flex"
+Content-Language: en-US
+From: Jacob Kroon <jacob.kroon@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+References: <20211206090820.1009099-1-jacob.kroon@gmail.com>
+In-Reply-To: <20211206090820.1009099-1-jacob.kroon@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Dec 2021 05:43:29 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Dec 2021 08:43:14 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94311
+ https://lists.openembedded.org/g/openembedded-devel/message/94312
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Joshua Watt <JPEWhacker@gmail.com>
----
- meta-gnome/recipes-gnome/yelp/yelp_41.1.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+On 12/6/21 10:08, Jacob Kroon wrote:
+> With the switch to recipe-specific sysroots this patch is no longer
+> needed. Tested building with and without the patch and the resulting
+> binaries are identical.
+> 
+> This reverts commit 960314be5d854212ee65604a68a92a3616b2a544.
+> 
+> Signed-off-by: Jacob Kroon <jacob.kroon@gmail.com>
+> ---
+>  .../ccid/ccid/no-dep-on-libfl.patch            | 18 ------------------
+>  meta-oe/recipes-support/ccid/ccid_1.4.33.bb    |  1 -
+>  2 files changed, 19 deletions(-)
+>  delete mode 100644 meta-oe/recipes-support/ccid/ccid/no-dep-on-libfl.patch
+> 
+> diff --git a/meta-oe/recipes-support/ccid/ccid/no-dep-on-libfl.patch b/meta-oe/recipes-support/ccid/ccid/no-dep-on-libfl.patch
+> deleted file mode 100644
+> index 477cc31ad..000000000
+> --- a/meta-oe/recipes-support/ccid/ccid/no-dep-on-libfl.patch
+> +++ /dev/null
+> @@ -1,18 +0,0 @@
+> -No need to link with libfl.
+> -
+> -Upstream-Status: Pending
+> -Signed-off-by: Jacob Kroon <jacob.kroon@mikrodidakt.se>
+> -
+> -Index: ccid-1.4.8/src/Makefile.am
+> -===================================================================
+> ---- ccid-1.4.8.orig/src/Makefile.am
+> -+++ ccid-1.4.8/src/Makefile.am
+> -@@ -53,7 +53,7 @@ PROVIDED_BY_PCSC = debug.c
+> - endif
+> - 
+> - libccid_la_SOURCES = $(COMMON) $(USB) $(TOKEN_PARSER) $(PROVIDED_BY_PCSC) $(T1)
+> --libccid_la_LIBADD = $(LEXLIB) $(LIBUSB_LIBS) $(PTHREAD_LIBS)
+> -+libccid_la_LIBADD = $(LIBUSB_LIBS) $(PTHREAD_LIBS)
+> - libccid_la_CFLAGS = $(PCSC_CFLAGS) $(LIBUSB_CFLAGS) $(PTHREAD_CFLAGS) \
+> - 	$(SYMBOL_VISIBILITY) -D$(CCID_VERSION) -DSIMCLIST_NO_DUMPRESTORE
+> - libccid_la_LDFLAGS = -avoid-version
+> diff --git a/meta-oe/recipes-support/ccid/ccid_1.4.33.bb b/meta-oe/recipes-support/ccid/ccid_1.4.33.bb
+> index 4b1c42173..e3cb7cef1 100644
+> --- a/meta-oe/recipes-support/ccid/ccid_1.4.33.bb
+> +++ b/meta-oe/recipes-support/ccid/ccid_1.4.33.bb
+> @@ -7,7 +7,6 @@ DEPENDS = "virtual/libusb0 pcsc-lite"
+>  RDEPENDS:${PN} = "pcsc-lite"
+>  
+>  SRC_URI = "https://ccid.apdu.fr/files/ccid-${PV}.tar.bz2 \
+> -    file://no-dep-on-libfl.patch \
+>      file://0001-Add-build-rule-for-README.patch \
+>  "
+>  
+> 
 
-diff --git a/meta-gnome/recipes-gnome/yelp/yelp_41.1.bb b/meta-gnome/recipes-gnome/yelp/yelp_41.1.bb
-index 980b9a1ae5..36ea0e0ad1 100644
---- a/meta-gnome/recipes-gnome/yelp/yelp_41.1.bb
-+++ b/meta-gnome/recipes-gnome/yelp/yelp_41.1.bb
-@@ -21,6 +21,10 @@ DEPENDS += " \
-     webkitgtk \
-     yelp-xsl \
- "
-+PACKAGECONFIG ?= ""
-+
-+# Enable if soup3 is enabled in webkit recipe
-+PACKAGECONFIG[soup3] = ",--with-webkit2gtk-4-0,"
- 
- do_configure:prepend() {
-     export ITSTOOL=${STAGING_BINDIR_NATIVE}/itstool
--- 
-2.34.1
-
+ping
 
