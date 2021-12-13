@@ -1,87 +1,91 @@
-Return-Path: <JPEWhacker@gmail.com>
+Return-Path: <jpuhlman@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 924A7C433F5
-	for <webhook@archiver.kernel.org>; Mon, 13 Dec 2021 19:56:25 +0000 (UTC)
-Received: from mail-ot1-f50.google.com (mail-ot1-f50.google.com
- [209.85.210.50])
- by mx.groups.io with SMTP id smtpd.web12.16521.1639425384883869969
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41B41C433EF
+	for <webhook@archiver.kernel.org>; Mon, 13 Dec 2021 23:34:34 +0000 (UTC)
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com
+ [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.web11.18938.1639438473170099903
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Dec 2021 11:56:25 -0800
+ Mon, 13 Dec 2021 15:34:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=hPJGIC2z;
- spf=pass (domain: gmail.com, ip: 209.85.210.50,
- mailfrom: jpewhacker@gmail.com)
-Received: by mail-ot1-f50.google.com with SMTP id
- x43-20020a056830246b00b00570d09d34ebso18655723otr.2
+ dkim=pass header.i=@mvista.com header.s=google header.b=dLEYkNW7;
+ spf=pass (domain: mvista.com, ip: 209.85.216.48,
+ mailfrom: jpuhlman@mvista.com)
+Received: by mail-pj1-f48.google.com with SMTP id
+ gf14-20020a17090ac7ce00b001a7a2a0b5c3so15784337pjb.5
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Dec 2021 11:56:24 -0800 (PST)
+ Mon, 13 Dec 2021 15:34:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
+        d=mvista.com; s=google;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=umuLlJQGLw8o/Ve17P5zVqtHQ9hi5XwoXylsdMszDa4=;
-        b=hPJGIC2z2i05teLgeadti1e99tQqQkPlc+8PL/NSRMc2Q7IDOVf8XDPjd+XhCLWdqY
-         UyQ4pa5xScNds9DoE4fbLeX0yRsVhiqB+9wu6nsC59QbMxS8im5miFybfwDpoGY8jAON
-         m1hiXIWpOV/tMXY7MBb6GAeIf9eeOFGsOHbr1Gw+OCpsKs02WEwznvagOKBHNrzK81Qj
-         dF2abFZZH0yHxb0wFmMwliE1FTRb0ERvwYYxTSQGxgricQm525tn55kmRLK9XYF697ZP
-         5jXNqMrT5c/TIZWn+FUPzrWJgIDpwpQDTZ7b1Vn7aZA2UNZ/clKEQ05Id/Ab0wXnHy2G
-         K1dw==
+        bh=1r7MASyBvhxIQlpdeaEhPhl959UnsDPQuznQ1ZgVqNs=;
+        b=dLEYkNW7DGxDSWLNb50qLy4YNP2Zhv/Ryn1I7WjUG/snKrNg8FEUbBl5zMjEBxQVEx
+         GTkayMrGbb0S/l6ndWOvYBgPyr/4acuLEay1FfMu1ojFIL8dKi8LVb7QYP/nAOBlLa0k
+         1wo6M9nLKueQ08ID1diEJgWUoMb5IPtR0aAkw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=umuLlJQGLw8o/Ve17P5zVqtHQ9hi5XwoXylsdMszDa4=;
-        b=QpM67oDyRpVvu9YoqRfsb4pnkJmAiu28kx4Q7X0wuBTmy78grgcLQe80baxpfSUgJC
-         8OU1ucLDT4wC5kHLXhXDTIx0Ao+unyIjTmX9y71FR/vrkRA/Puzy6ojo4BhafeCkdhcP
-         13+/jpQMQU4cCZzTd7GK8LaOioyr4ASB/gxyeC1PliYPzejHesuu9zICnFgb0Rq6XKmT
-         HJiaeYWzqL+J+sRIT+XRMV6TWl8R0B+Yo0crarECaCXMomeP4KWHDGhwcqNZBL483ra+
-         5uUiMxit3Qy9wymZEtdym9IjOLSNoqoBiB6C9bBftJroeBaWWxL+lxTtH5JhZCMMqbAw
-         PM3g==
-X-Gm-Message-State: AOAM533zzfU+k6VBiLYePKiW1dwXirP7GCYNRt0XTfTgWtwKZrK5LWoG
-	wlEQ/Yt2mWtgHk69oicqz6e/viFgWrg=
+        bh=1r7MASyBvhxIQlpdeaEhPhl959UnsDPQuznQ1ZgVqNs=;
+        b=vmP0lKeCEtN+sxoeJLbP6YP36iGuTVuJzltnADmQTFBHIZsD+Q1Y/riRbeUG+4Per8
+         Gs3MvJ7EW9k0M8T62xld3X/N3lvucNkrZPmeGzApT2mbI19LzgDHF4Hu8KAoHMOYU+mH
+         z+vYNYMZbeGtMOUIt7HpQVjRdus2Pym5e1U+Ii5EoofufN27TrTALKxdIgT6ZEcmFekN
+         QeYLLmGENKxjz5j4GGFOWtnKeoRa5FPcGGu4OsE74gjmzhAfns0+vAy72yUuR/zgaMAa
+         Gd9AHl/cLTgY6qMkoxRkYR9Mx7sb4yHP7Maza3qn6VfpPsG9/Y/1FqHsRK7RhhqT2JwK
+         hqDQ==
+X-Gm-Message-State: AOAM5319JR9P9sbqpp4SEv4DCVjfISnQapP2rRJtq3RI8PzggHw2biJS
+	Rz2g2eLXGKFAQhqYIOSxWPwgWfFYKS0RrQ==
 X-Google-Smtp-Source: 
- ABdhPJxJs/gSNGII6KPpU3/55Bm/SrxNj4SRT1nyyL6ILdls/YnL2ZzMD9j4R4clFAHVnYCtuR3qJw==
-X-Received: by 2002:a9d:7210:: with SMTP id u16mr578463otj.160.1639425383998;
-        Mon, 13 Dec 2021 11:56:23 -0800 (PST)
-Received: from localhost.localdomain ([2605:a601:ac3d:c100:e3e8:d9:3a56:e27d])
+ ABdhPJweH8xW3g+mQ9Eab6JLG3ljVfw8AHP6WSr3+I3yWgdOocAbVtAdh+56b8Fg8JTETJoH2VvXgA==
+X-Received: by 2002:a17:90b:1c07:: with SMTP id
+ oc7mr1425643pjb.127.1639438472481;
+        Mon, 13 Dec 2021 15:34:32 -0800 (PST)
+Received: from black.maotig.mine.nu
+ (99-14-97-149.lightspeed.frokca.sbcglobal.net. [99.14.97.149])
         by smtp.gmail.com with ESMTPSA id
- ay40sm2809879oib.1.2021.12.13.11.56.23
+ b18sm13777211pfl.121.2021.12.13.15.34.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 13 Dec 2021 11:56:23 -0800 (PST)
-From: Joshua Watt <jpewhacker@gmail.com>
-X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
+        Mon, 13 Dec 2021 15:34:31 -0800 (PST)
+Received: by black.maotig.mine.nu (sSMTP sendmail emulation);
+ Mon, 13 Dec 2021 18:34:29 -0500
+From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Joshua Watt <JPEWhacker@gmail.com>
-Subject: [oe][meta-oe][PATCH] graphene: Move from meta-gnome -> meta-oe
-Date: Mon, 13 Dec 2021 13:56:20 -0600
-Message-Id: <20211213195620.3718954-1-JPEWhacker@gmail.com>
-X-Mailer: git-send-email 2.33.0
+Cc: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
+Subject: [meta-oe][dunfell][PATCH] c-ares: switch from master to main
+Date: Mon, 13 Dec 2021 18:34:28 -0500
+Message-Id: <20211213233428.3448-1-jpuhlman@mvista.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Dec 2021 19:56:25 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Dec 2021 23:34:34 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94345
+ https://lists.openembedded.org/g/openembedded-devel/message/94346
 
-This library is not specific to GNOME and has no GNOME specific
-functionality. Move it to meta-oe so that users can pull it in without
-meta-gnome.
-
-Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
+Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
 ---
- .../recipes-graphics}/graphene/graphene_1.10.6.bb                 | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename {meta-gnome/recipes-gnome => meta-oe/recipes-graphics}/graphene/graphene_1.10.6.bb (100%)
+ meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/graphene/graphene_1.10.6.bb b/meta-oe/recipes-graphics/graphene/graphene_1.10.6.bb
-similarity index 100%
-rename from meta-gnome/recipes-gnome/graphene/graphene_1.10.6.bb
-rename to meta-oe/recipes-graphics/graphene/graphene_1.10.6.bb
+diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb b/meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb
+index 2388047e5..b77604797 100644
+--- a/meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb
++++ b/meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=fb997454c8d62aa6a47f07a8cd48b006"
+ PV = "1.16.0+gitr${SRCPV}"
+ 
+ SRC_URI = "\
+-    git://github.com/c-ares/c-ares.git;branch=master;protocol=https \
++    git://github.com/c-ares/c-ares.git;branch=main;protocol=https \
+     file://cmake-install-libcares.pc.patch \
+     file://0001-fix-configure-error-mv-libcares.pc.cmakein-to-libcar.patch \
+     file://ares_expand_name-should-escape-more-characters.patch \
 -- 
-2.33.0
+2.20.1
 
 
