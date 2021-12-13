@@ -2,150 +2,107 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D57CDC433FE
-	for <webhook@archiver.kernel.org>; Mon, 13 Dec 2021 14:45:57 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.65])
- by mx.groups.io with SMTP id smtpd.web10.11890.1639406755980322106
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A7217C433EF
+	for <webhook@archiver.kernel.org>; Mon, 13 Dec 2021 14:46:10 +0000 (UTC)
+Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
+ [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web09.11987.1639406768884470973
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Dec 2021 06:45:56 -0800
+ Mon, 13 Dec 2021 06:46:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=xXnvGCQp;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.65,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Iibq3WI8;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1639406753; i=@fujitsu.com;
-	bh=dOn5+TtygrBAi08PuRTMrsf6GYGbdfSMmKs1tuLDby4=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=xXnvGCQp1pKOxki1Gm9McBUEPvyc6mWNlsGeNZCJnpRgEFFI+UhP+2y3FfRPT5Mdx
-	 93moximBknFhTAfw3dKr64xYvgQfKC5jKt1nZslnba/Pp24pzch5xib9MqxatqshAy
-	 rhMHUcdB/6shXDNgEmV0r4TBAmYleqL+9qlcjPWNCR6SGUw2Is/fox5pAGXs4ldWY3
-	 hxVfK9TZ+LFXG5wZ/g4cP6lZtaofOCbBtFrxpmIHu1SMw4yKRND9xErNUgeiqfu6bi
-	 GY4nak3dDRemGcKQDErBsWDGdTG2SMj4dLVkjmLkWAB4firN3pO1DaRVJIZX4m5dka
-	 xrachA9NvltYQ==
-Received: from [100.115.1.47] (using TLSv1.2 with cipher
+	s=170520fj; t=1639406767; i=@fujitsu.com;
+	bh=RVkXEKyfYlK4k4CpdRedf64fBckYO0Wqj9LZentz+rA=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=Iibq3WI8lM5TjfvpuUgXEfdrQ3NunZ3Ataj6wEYBpjHElhRwiA3Jffm2R15QJKy+8
+	 TQh0Uzqti9fUvGolfhFohnYZG7r1mEFrFaIRs/VARlQhCNfjfr22qL2rLubxDhv75m
+	 RAnqXyeRTbJuoBRcamJI9yr+f6y4MnXb4NkVesRuUEvWdK+dfWKeyfJBdPrx8d5GnT
+	 DDC3/qNGXQL6fEO4AqI7Wf2Q8Pg431Lu2Y07fr7GwiAME6jdcpOqgra3fo1JYX+Ysv
+	 YVdiVVCndaR9M2RuTWSqTp5EQ4iSO2wjtz8/wk6GeY9eWBCGBEjN7iWHGlm2/hkDef
+	 4jcoyRsBUZJzw==
+Received: from [100.115.71.165] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-a.eu-west-1.aws.ess.symcld.net id B4/F5-13695-1AC57B16;
- Mon, 13 Dec 2021 14:45:53 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8MxSXdhzPZ
-  Eg/mNnBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bXyi+sBcuFK+Y3r2VvYOwW7GLk4hASeMIo
-  cXleJwuEc4FJ4tj2N0wQzglGiRkLZgA5nBxsAmoS02/dYAWxRQT0JZbO3sMMYjMLqEi8+N3DD
-  mILC3hK9F7bwwhiswioSsxctZYNxOYVcJJobF4FVi8hoCAx5eF7Zoi4oMTJmU9YIOZISBx88Q
-  KqRlFi9uVmFgi7QmLWrDYmCFtN4uq5TcwTGPlnIWmfhaR9ASPTKkarpKLM9IyS3MTMHF1DAwN
-  dQ0NTXWNdQ0tLvcQq3US91FLd8tTiEl1DvcTyYr3U4mK94src5JwUvbzUkk2MwLBMKWY+voNx
-  St9PvUOMkhxMSqK8wazbE4X4kvJTKjMSizPii0pzUosPMcpwcChJ8J4JB8oJFqWmp1akZeYAY
-  wQmLcHBoyTC+yESKM1bXJCYW5yZDpE6xagoJc7rHQ2UEABJZJTmwbXB4vISo6yUMC8jAwODEE
-  9BalFuZgmq/CtGcQ5GJWHe/1FAU3gy80rgpr8CWswEtJixcjPI4pJEhJRUA5OjS4u6XdSeqBy
-  171Glru2RVbordsioJNrpiNZxKAm8PqLhcv+xyJVDtvfZFlzK98iLUE9SZu5rqlx+T+5330Td
-  cxe9f6hbGtQordgbbvDeI2HBHuuZ18x5CneudbJVLfJ/+GC32PLDy/8tOr9qCVtfff+kYo66M
-  y/s1hgwpK7evS79Zdchb4kOLufzjwoN1N9Zv3gi9kHoKIvpvGUOz9u6VB5flz7mxM8yb3rCzM
-  BJno5nXutqf8q96Gnx3ut8ztGJx24zTtG6rKpffkbxaL9m4p8lfwSql3lUnZr/9XbR5Kl3V70
-  wk2p4+MjCY7/zUms108ea/Ku3LJzbp29jKHDpUtnHs0a1m0UUzkmq9iixFGckGmoxFxUnAgAj
-  pFe8RgMAAA==
+	by server-1.bemta.az-a.eu-central-1.aws.ess.symcld.net id
+ 62/D6-11258-FAC57B16; Mon, 13 Dec 2021 14:46:07 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8MRorsuZnu
+  iweJ7WhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aZbWeYCho5Kg6dO8bewLiIvYuRi0NIYCaT
+  xLrXj1ggnBOMEmtOdjJ3MXJysAmoSUy/dYMVxBYR0JdYOnsPWJxZQEXixe8eoG4ODmEBe4npS
+  2pAwiwCqhLT3zaBhXkFnCQaJiWBhCUEFCSmPHwP1skp4CzxbU0HmC0EVDL32lRGEJtXQFDi5M
+  wnLBDTJSQOvnjBDNGrKDH7cjMLhF0hMWtWG9MERv5ZSFpmIWlZwMi0itE2qSgzPaMkNzEzR9f
+  QwEDX0NBU18xS19xEL7FKN1EvtVQ3OTWvpCgRKKuXWF6sl1pcrFdcmZuck6KXl1qyiREYlinF
+  rl47GI/0/dQ7xCjJwaQkyhvMuj1RiC8pP6UyI7E4I76oNCe1+BCjDAeHkgTvmXCgnGBRanpqR
+  VpmDjBGYNISHDxKIrwfIoHSvMUFibnFmekQqVOMilLivN7RQAkBkERGaR5cGywuLzHKSgnzMj
+  IwMAjxFKQW5WaWoMq/YhTnYFQS5v0fBTSFJzOvBG76K6DFTECLGSs3gywuSURISTUwdSxRmrh
+  d9cOf05+ZTnjKX3gt8vz/zfLl065trbfdyHND83tmS4/qwVO317TNMlbNWqnBrS28rfKc5oU8
+  uTsLU0Otww/t+GEnK5/UEtIYLCD8kTNeVp/3y44lX+tr0577Jl20i76QZix2YR3HCtngGcIsr
+  jnTGKuedaz/UnjyRmFfTsrRmzzVZqymkV+OXq7dXRK0UpaDuzt1qoD67vWlyd6uWzpPx3kq3D
+  EwqZrd+rb4klXs/ovLG7rOrJZ8UCdhJvTrV0PUikSj9bu87bYtUpseWXYuPkmhdi9n0NN/vtM
+  der8JRi98/pPN4s2iBVs+7Y16d8ZiR8Xh7ypR60tSd9TdVXluySd4Wf/sOf9rSizFGYmGWsxF
+  xYkAMjcDN0YDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-5.tower-587.messagelabs.com!1639406752!15666!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-20.tower-532.messagelabs.com!1639406766!8521!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 29116 invoked from network); 13 Dec 2021 14:45:53 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-5.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 13 Dec 2021 14:45:53 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id A69AE100451
+Received: (qmail 18393 invoked from network); 13 Dec 2021 14:46:06 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-20.tower-532.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 13 Dec 2021 14:46:06 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1BDEk0ol030423
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Dec 2021 14:45:52 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 9882610033A
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Dec 2021 14:45:52 +0000 (GMT)
+ Mon, 13 Dec 2021 14:46:06 GMT
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Mon, 13 Dec 2021 14:45:44 +0000
+ (TLS) id 15.0.1497.26; Mon, 13 Dec 2021 14:46:02 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] snort: upgrade 2.9.18.1 -> 2.9.19
-Date: Mon, 13 Dec 2021 22:45:31 +0800
-Message-ID: <1639406733-28016-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libgusb: upgrade 0.3.8 -> 0.3.9
+Date: Mon, 13 Dec 2021 22:45:33 +0800
+Message-ID: <1639406733-28016-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1639406733-28016-1-git-send-email-wangmy@fujitsu.com>
+References: <1639406733-28016-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
 X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Dec 2021 14:45:57 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Dec 2021 14:46:10 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94330
-
-changelog:
-=========
-
-* src/snort.c :
-  Fixed an issue where verdict will be applied onto next session when timeout
-  occurs in some scenarios.
-
-* rc/file-process/file_service.c :
-  Removed an excessively flooding log.
-
-* src/dynamic-preprocessors/modbus/modbus_decode.c :
-  Fixed possible integer overflow.
-
-* src/fpcreate.c :
-  Added fix to GCC compiled snort to use AC-BNFA-Q search-method when Intel-cpm
-  is enabled.
-
-* src/generators.h
-  src/preprocessors/Stream6/snort_stream_tcp.c :
-  Added fix to not to drop packets when window size is 0 by TCP normalizer
-  and Added new alert with GID 129 and SID 21 when such packets are seen.
-
-* src/dynamic-preprocessors/appid/detector_plugins/detector_imap.c
-  src/dynamic-preprocessors/appid/detector_plugins/detector_pop3.c :
-  Added support for Appid to detect login success and failure for IMAP and POP3
-  protocols.
-
-* src/dynamic-preprocessors/reputation/reputation_config.c
-  src/dynamic-preprocessors/reputation/spp_reputation.c
-  src/dynamic-preprocessors/reputation/spp_reputation.h
-  src/pkt_tracer.c
-  src/snort.c
-  src/util.c :
-  Fixed terminology to be bias-free in log/error messages.
-
-* src/snort.c :
-  Fixed a potential race condition.
+ https://lists.openembedded.org/g/openembedded-devel/message/94331
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../snort/{snort_2.9.18.1.bb => snort_2.9.19.bb}                | 2 +-
+ .../libgusb/{libgusb_0.3.8.bb => libgusb_0.3.9.bb}              | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/snort/{snort_2.9.18.1.bb => snort_2.9.19.bb} (97%)
+ rename meta-oe/recipes-support/libgusb/{libgusb_0.3.8.bb => libgusb_0.3.9.bb} (89%)
 
-diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.18.1.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.19.bb
-similarity index 97%
-rename from meta-networking/recipes-connectivity/snort/snort_2.9.18.1.bb
-rename to meta-networking/recipes-connectivity/snort/snort_2.9.19.bb
-index 1e2495406e..9c479d2200 100644
---- a/meta-networking/recipes-connectivity/snort/snort_2.9.18.1.bb
-+++ b/meta-networking/recipes-connectivity/snort/snort_2.9.19.bb
-@@ -14,7 +14,7 @@ SRC_URI = "https://www.snort.org/downloads/archive/snort/${BP}.tar.gz \
-     file://disable-run-test-program-while-cross-compiling.patch \
-     file://configure.in-disable-tirpc-checking-for-fedora.patch \
- "
--SRC_URI[sha256sum] = "da8af0f1b2e4f247d970c6a3c0e83fb6dcd5c84faa21aea49f306f269e8e28aa"
-+SRC_URI[sha256sum] = "b12fc6db72afb58987a2bf1954b8f45bde02047c235513c7663857b9506369c7"
+diff --git a/meta-oe/recipes-support/libgusb/libgusb_0.3.8.bb b/meta-oe/recipes-support/libgusb/libgusb_0.3.9.bb
+similarity index 89%
+rename from meta-oe/recipes-support/libgusb/libgusb_0.3.8.bb
+rename to meta-oe/recipes-support/libgusb/libgusb_0.3.9.bb
+index 51e7349043..3fdb2b7d3d 100644
+--- a/meta-oe/recipes-support/libgusb/libgusb_0.3.8.bb
++++ b/meta-oe/recipes-support/libgusb/libgusb_0.3.9.bb
+@@ -10,5 +10,5 @@ PACKAGECONFIG ??= "${@bb.utils.contains('GI_DATA_ENABLED', 'True', 'vapi', '', d
+ PACKAGECONFIG[vapi] = "-Dvapi=true,-Dvapi=false"
  
- UPSTREAM_CHECK_URI = "https://www.snort.org/downloads"
- UPSTREAM_CHECK_REGEX = "snort-(?P<pver>\d+(\.\d+)+)\.tar"
+ SRC_URI = "git://github.com/hughsie/libgusb.git;branch=main;protocol=https"
+-SRCREV = "db9edbd8b45662d551194a0985173732f8f557a5"
++SRCREV = "582f33178a986e74543de8ced087865009f8fef0"
+ S = "${WORKDIR}/git"
 -- 
 2.25.1
 
