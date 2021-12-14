@@ -1,96 +1,112 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
+Return-Path: <hughsient@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1890FC433F5
-	for <webhook@archiver.kernel.org>; Tue, 14 Dec 2021 13:52:37 +0000 (UTC)
-Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com
- [209.85.208.171])
- by mx.groups.io with SMTP id smtpd.web10.25842.1639489955739278828
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DC26C433EF
+	for <webhook@archiver.kernel.org>; Tue, 14 Dec 2021 14:41:18 +0000 (UTC)
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com
+ [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.web10.26463.1639492877109683080
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Dec 2021 05:52:36 -0800
+ Tue, 14 Dec 2021 06:41:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=Mq9uGZ67;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.208.171, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f171.google.com with SMTP id m12so28414585ljj.6
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=HAExpGQf;
+ spf=pass (domain: gmail.com, ip: 209.85.221.52,
+ mailfrom: hughsient@gmail.com)
+Received: by mail-wr1-f52.google.com with SMTP id t18so32697218wrg.11
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Dec 2021 05:52:35 -0800 (PST)
+ Tue, 14 Dec 2021 06:41:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
+        d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=5GR8woKADn5PpmYrV+eN0kr77s2Uze9QbgB/je3K2XM=;
-        b=Mq9uGZ67z2yufQuC2yGG3y0XPHIyh5eIqBYiRCn48mo6h3tWZjhr9D8yl97q4a5LK+
-         kJAXOYoBHTEUHDperJ8HQ/DpcJ3I+V0f2TJqvd2vC2sB2CdbHBhlXm2Qcd8VTmBzxyuZ
-         gFlsUCOsTkPqnm//n4iy8PZrzIK8XUBgc2r1oOU1/WUo0GFZ+bi9PzbmzlOQJ6jwXLGD
-         5zVLnhEFLPP2KX9F3bkOMBvGNqJgF5yFYCuZrknLAeeQ0S1pytMXan18shxxW+eUPUSj
-         7lv5rAMKDnrab7evYWI6NHw53GHPJFq4feT0w6jD3RkFJLFEGlTjQzZuhpLLVj1NotcF
-         fliQ==
+        bh=Aj09GmDZrFx3sn82fnQm2A11ThhDR8mWdgvJ+lLfFdg=;
+        b=HAExpGQfy+7KzH8JUj9A2FEpG4LYOaJpmjmsOr4xqLV/K6Pt0zRpuaPWJcvoyMNMgL
+         0wkyAWGDPrIz0UEf8k6Jxmy8bkZDDUw5KLQ04fKtfWRoxks0tmiQJSgRHhiHbFOR5cq1
+         e4Mg6Er32PCsepWPRHPrAK4j8OFMZjsXolEDcmfl++G64PBx4Cb5ExiTSFiZ6FQvjWAw
+         mS7szmdD+QCjqwCZ2m03JpjdIIlkhPrGF8wglwqRtXeiCz7Qs/I44ulVCDSlpoU5947b
+         4jJzeWbKb18ydMXbBEOOBuNbstvyjLNweCLoHsFeHuRxjbY1lQ0tGuJhsOH4wDPzdg7h
+         Svpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=5GR8woKADn5PpmYrV+eN0kr77s2Uze9QbgB/je3K2XM=;
-        b=xzCBrmEIkyUlxqsyAVRLuc84WdEu8h7kLlMy3WkzOOkNltBYryXRrv3TL/n4Gq+JHu
-         fJQwMGpNHzG3K4G7wiwB7NYun2+AsUItJK9y2qAmIyJg37xEUSTeW3xrhYbjqkiPl/Ac
-         PgG50mjcD2yDIKxGxp5XkBDprbYgdxN6vMcFFOOTnJ498Zq8A54GS87FHsbePy8Skehy
-         YqUg874ZTqRyvi5sqQxjPY0ltwaxcjCXBRM6fcSB9caScVSgPI72cUOo8NZc/VJWSPkq
-         Axx9E54lwjg2nqoMzK49qyz4iCyqfHUBWjDxvwgdnVLpgkOo1e4sjd9gPenxmucc6NB8
-         pCHg==
-X-Gm-Message-State: AOAM533YMaxA2vwiqgLFaj+nDZZucQ61eMFIOWyBYkBx2fB/zJ0zxpb6
-	d3eRrCzDw26UFIJWdN2fMIxER9lf2afpuWir
+        bh=Aj09GmDZrFx3sn82fnQm2A11ThhDR8mWdgvJ+lLfFdg=;
+        b=7oQJ2c8/w66wT+2DrCxVR1gDEakmHjvanPbIYqY0J3LNyPAaMieLXsi1BouIov3E/a
+         sy4adTMdP6JkWXl8B+/grWjNDp2Oe2DOkRUHgoD1Byz6DMYAxCl6ikbdumJSncV4xfLt
+         wvUJs92iro2CFfuYryStpf6FRHVNWUjDq1V3+SmoBYJsHEmFBSFeT2ps9+2/P3kk40am
+         V0inF+aw+2VkXc6mWGUnCoP3vNO8U9awJoRikC3thJU5QnWVMhH7gcg/XwZPo5UdclDU
+         Ex+QssGXAGZjQ8IRtl3P30u8dUXrDzoHpdVVW4vxPEhikUOYZcHcgHRYarrpm3qlM5po
+         LI2A==
+X-Gm-Message-State: AOAM530NrztEQkNFcoBltAse+HG+OpHNd7m8PDhie9mHkPCygSwcFZHy
+	YOTx6+F3QJCsEQDUNJTue4pFJJNZY+c=
 X-Google-Smtp-Source: 
- ABdhPJzovCWyFbT7gFL33eTxSLaJKXuqQlYbvMue8ZUdhsjSIBOh8wa0qJU5zp/a+jn7/ofwCJ6dIg==
-X-Received: by 2002:a05:651c:50c:: with SMTP id
- o12mr5164564ljp.88.1639489953046;
-        Tue, 14 Dec 2021 05:52:33 -0800 (PST)
-Received: from localhost.localdomain
- (c-7918524e.023-160-67626725.bbcust.telenor.se. [78.82.24.121])
+ ABdhPJyvjcA+icllM22As4ek1N43Q3JOpq04qg25R9MrGeS+N4NO81ujawV0fw0pax2EVEQRma2p2w==
+X-Received: by 2002:a5d:4343:: with SMTP id u3mr6438698wrr.450.1639492875466;
+        Tue, 14 Dec 2021 06:41:15 -0800 (PST)
+Received: from fedora.Hitronhub.home ([62.31.71.236])
         by smtp.gmail.com with ESMTPSA id
- c15sm1869579lfb.40.2021.12.14.05.52.32
+ f19sm2831657wmq.34.2021.12.14.06.41.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Dec 2021 05:52:32 -0800 (PST)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+        Tue, 14 Dec 2021 06:41:14 -0800 (PST)
+From: Richard Hughes <hughsient@gmail.com>
+X-Google-Original-From: Richard Hughes <richard@hughsie.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python][PATCH] python3-twitter: update 4.4.0
-Date: Tue, 14 Dec 2021 14:52:30 +0100
-Message-Id: <20211214135230.1181395-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Richard Hughes <richard@hughsie.com>
+Subject: [PATCH 1/4] libjcat: Update to 0.1.9
+Date: Tue, 14 Dec 2021 14:41:03 +0000
+Message-Id: <20211214144106.2492080-1-richard@hughsie.com>
+X-Mailer: git-send-email 2.33.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 14 Dec 2021 13:52:37 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 14 Dec 2021 14:41:18 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94354
+ https://lists.openembedded.org/g/openembedded-devel/message/94355
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+New Features:
+ - Set which backends are supported in the pkgconfig file
+ - Use -Dcli=false to reduce the install size
+
+Bugfixes:
+ - Return an error if we try to self-sign no bytes of data
+ - Show a more accurate output when not all engines are enabled
+
+Also, inherit lib_package so the binary isn't installed by default.
+
+Signed-off-by: Richard Hughes <richard@hughsie.com>
 ---
- .../{python3-twitter_4.1.0.bb => python3-twitter_4.4.0.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-twitter_4.1.0.bb => python3-twitter_4.4.0.bb} (80%)
+ .../libjcat/{libjcat_0.1.8.bb => libjcat_0.1.9.bb}          | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-gnome/libjcat/{libjcat_0.1.8.bb => libjcat_0.1.9.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-twitter_4.1.0.bb b/meta-python/recipes-devtools/python/python3-twitter_4.4.0.bb
+diff --git a/meta-oe/recipes-gnome/libjcat/libjcat_0.1.8.bb b/meta-oe/recipes-gnome/libjcat/libjcat_0.1.9.bb
 similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-twitter_4.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-twitter_4.4.0.bb
-index ac1dab8d8..2305e89af 100644
---- a/meta-python/recipes-devtools/python/python3-twitter_4.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-twitter_4.4.0.bb
-@@ -4,7 +4,7 @@ DESCRIPTION = "Python module to support twitter API"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
+rename from meta-oe/recipes-gnome/libjcat/libjcat_0.1.8.bb
+rename to meta-oe/recipes-gnome/libjcat/libjcat_0.1.9.bb
+index 87767ac2a..b0871c6a4 100644
+--- a/meta-oe/recipes-gnome/libjcat/libjcat_0.1.8.bb
++++ b/meta-oe/recipes-gnome/libjcat/libjcat_0.1.9.bb
+@@ -8,13 +8,13 @@ DEPENDS = "\
+ "
  
--SRC_URI[sha256sum] = "88e2938de5ac7043c9ba8b8358996fbc5806059d63c96269d22527a40ca7d511"
-+SRC_URI[sha256sum] = "8d4b4520271b796fa7efc4c5d5ef3228af4d79f6a4d3ace3900b2778ed8f6f1c"
+ SRC_URI = "\
+-    git://github.com/hughsie/libjcat.git;branch=master;protocol=https \
++    git://github.com/hughsie/libjcat.git;branch=main;protocol=https \
+     file://run-ptest \
+ "
+-SRCREV = "356cd2faf2d2197156b0dae7984482cf781d64db"
++SRCREV = "d4833949f8f1997b83f35a03127b9e12c104a7c8"
+ S = "${WORKDIR}/git"
  
- PYPI_PACKAGE = "tweepy"
+-inherit gobject-introspection gtk-doc meson ptest-gnome vala
++inherit gobject-introspection gtk-doc meson ptest-gnome vala lib_package
  
+ PACKAGECONFIG ??= "\
+     gpg \
 -- 
-2.25.1
+2.33.1
 
 
