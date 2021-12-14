@@ -2,94 +2,121 @@ Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17EA8C433F5
-	for <webhook@archiver.kernel.org>; Tue, 14 Dec 2021 13:25:29 +0000 (UTC)
-Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com
- [209.85.167.52])
- by mx.groups.io with SMTP id smtpd.web11.25504.1639488327417749656
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 623B9C433FE
+	for <webhook@archiver.kernel.org>; Tue, 14 Dec 2021 13:34:58 +0000 (UTC)
+Received: from mail-lj1-f176.google.com (mail-lj1-f176.google.com
+ [209.85.208.176])
+ by mx.groups.io with SMTP id smtpd.web12.25932.1639488897335130350
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Dec 2021 05:25:28 -0800
+ Tue, 14 Dec 2021 05:34:58 -0800
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=FMP29mM9;
+ header.s=20210112 header.b=TV8DXfLb;
  spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.167.52, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f52.google.com with SMTP id m6so25008824lfu.1
+ ip: 209.85.208.176, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f176.google.com with SMTP id a37so27242168ljq.13
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Dec 2021 05:25:26 -0800 (PST)
+ Tue, 14 Dec 2021 05:34:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=xWeZCyXhIM5GT5LC8wiMlTAoQm8MiJXuBJX0GEKsKJ0=;
-        b=FMP29mM9Bj/3STcXLZ5xp4R3Af7487kWSNHqwe40XCkuwhBnO+Hpys3AVpTXHhCKaf
-         oTkeccsiNXt7j8SbFh2l+/EhKkML5wgoZLiIku1elcfaM9Om8KL3orVJqM0QojKHDCRN
-         ZNbD62nrPJDoNIk7YCQ8ZoC5HwwG6vYrzU1ngq6yTCLccfmayqZaoo9Z3up0tsGkr2TP
-         3EkzeKAa1+OnhqJIEINXwvZREzTC9QudAlBs98mBkwrh9A1oDF5JDFX3AaohJ+6gty8i
-         8o72FRcZFrFRaSFy4XzE6tbFU2RzVr7+d7VfgFswwjmb2+yAs8mdjFDTnRd28RHfWm6t
-         +QsQ==
+        bh=jxav9Han3Fvzia2AEiTs39JO1LKi6z0SG9AQYcBo7f8=;
+        b=TV8DXfLbXTPhuxJEs8PdpOMRte3LWuojR7iaEGEVmO+85ebImMfbOc2w24WXZRfK0W
+         XEBE/ho41JiQj8TVJTCVR+xW54LlaSuWsuJxmTAACGNNBXAmPfrhMRMk1vM5HoOLsJW+
+         WH+DlsQKYpNQGSeLU4iBg5qpFXtCaMmykOP9flP3R3H2hcG8A42vv5yI10w7PtLfKPbB
+         Srs3SAtDKCp6NV6/tkYP6xraMIiuKQ7pOgGQRWjZ18wu51KGX+LHFg09D4iMmkEkUl4A
+         A/r54JhgmCFx/NsQLuKt2IE0TUfduIK08jk6QADo4D1oqIruwGb6Idc33Ye1qaa+WhPy
+         B7WQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=xWeZCyXhIM5GT5LC8wiMlTAoQm8MiJXuBJX0GEKsKJ0=;
-        b=YfHFFcPvKFw7V8c4jC5ZFVV5msmnJqds/607Wx+l0AQftdijaoiP1APS+/J+cEZOe4
-         DowNl1jrR12/6/yI4onNZsw3gfscnRK37tRe3ycsWhhSggmIJ7ghZQoSwsAdVeH6xeRq
-         5L94bCWosBVFNh46lVT3NtXcnfcRvj0Lv7FI8bBuj7P5OKUwzDcfBAycRw+7zjRpeEgP
-         6GtUvLxY7i/CIgt56y1sD9w0hSO0J6mVD6LODiSh5qfywEQyS9gz5N1rsxUYDMb/E9YP
-         kbUgqJT8IWIV8aGwNcoyTkMP9vNjDmLnXO1Jn9+3HMtvrg7nxLr9X4GkMLd2U+XHf6QL
-         VrOg==
-X-Gm-Message-State: AOAM532BFcFcyiiVCU9ylGvV5+LzZu26JOLGIgPaTDrnWQYPH5nA3/RQ
-	QTtWO3uy2/7HGXZBv/f5UNI7FTA5LRBOs2h/
+        bh=jxav9Han3Fvzia2AEiTs39JO1LKi6z0SG9AQYcBo7f8=;
+        b=Nj/UtgiAEDzJ0kHdzVIuyp4zwaRSf2YLNYVZdNtJDkbXZufJVf/yv46f7HjvRFBVOZ
+         d8KwsxdiK7MThyxcN8RMBcyHlzQw2yzJ/LSrhiRzlNvSaF4lyKE5m/IOj6Wfr3CMmmVt
+         4PyF22KVSnhrX0ObDTyilwL/D4Utmr23BZJvBi6eTRDyKlZ9UrUEfK5l0iX5hwvHEKQR
+         6bUFxzzvgFYH2Ea09K0omr+9grK8VEZKlGruCDt9iUngcjshlOE1qPnFq0ZiyWA1Who0
+         GXyq1Zom3eMTljEp7NhGMMcrGNiMQ+bXhAcSD1+VyWSd8f20G6Mkxp3EMX973QMAs6rg
+         femA==
+X-Gm-Message-State: AOAM530Yz1JYKJhk7938/H2rWUHkqClpaLETl76GkgHbKa0rE/sXoFfm
+	dvAVLd1jGRjA/cdMl+3IH8+OvJnt6uw8LlXR
 X-Google-Smtp-Source: 
- ABdhPJwk3DYMsebGyec3ZTTiqZC+h7oykuNJVsIMgsl8ptYOtEKwlfyYJDRoin5jDVupF2heaGrUuQ==
-X-Received: by 2002:a05:6512:3682:: with SMTP id
- d2mr4864067lfs.442.1639488324922;
-        Tue, 14 Dec 2021 05:25:24 -0800 (PST)
+ ABdhPJxfpjTdrI8g9zHwxAA+MMq2fW9H810kiPd5UJuEdzLWi/8l7PAQ93sLyy1hjMV7vvxyEKQbIw==
+X-Received: by 2002:a2e:9196:: with SMTP id f22mr4819767ljg.444.1639488894726;
+        Tue, 14 Dec 2021 05:34:54 -0800 (PST)
 Received: from localhost.localdomain
  (c-7918524e.023-160-67626725.bbcust.telenor.se. [78.82.24.121])
         by smtp.gmail.com with ESMTPSA id
- d4sm1824427lfa.294.2021.12.14.05.25.24
+ bp22sm1825613lfb.93.2021.12.14.05.34.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Dec 2021 05:25:24 -0800 (PST)
+        Tue, 14 Dec 2021 05:34:54 -0800 (PST)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python][PATCH] python3-lxml: update to 4.7.1
-Date: Tue, 14 Dec 2021 14:25:20 +0100
-Message-Id: <20211214132520.1095414-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-python][PATCH] python3-icu: update to 2.8
+Date: Tue, 14 Dec 2021 14:34:52 +0100
+Message-Id: <20211214133452.1175163-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 14 Dec 2021 13:25:29 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 14 Dec 2021 13:34:58 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94350
+ https://lists.openembedded.org/g/openembedded-devel/message/94351
+
+License-Update: there is LICENSE file.
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../python/{python3-lxml_4.6.3.bb => python3-lxml_4.7.1.bb}     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-lxml_4.6.3.bb => python3-lxml_4.7.1.bb} (95%)
+ .../recipes-devtools/python/python3-icu_2.7.2.bb  | 13 -------------
+ .../recipes-devtools/python/python3-icu_2.8.bb    | 15 +++++++++++++++
+ 2 files changed, 15 insertions(+), 13 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-icu_2.7.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-icu_2.8.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-lxml_4.6.3.bb b/meta-python/recipes-devtools/python/python3-lxml_4.7.1.bb
-similarity index 95%
-rename from meta-python/recipes-devtools/python/python3-lxml_4.6.3.bb
-rename to meta-python/recipes-devtools/python/python3-lxml_4.7.1.bb
-index d5594847f..cb33fcc3c 100644
---- a/meta-python/recipes-devtools/python/python3-lxml_4.6.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-lxml_4.7.1.bb
-@@ -18,7 +18,7 @@ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=e4c045ebad958ead4b48008f70838403 \
- 
- DEPENDS += "libxml2 libxslt"
- 
--SRC_URI[sha256sum] = "39b78571b3b30645ac77b95f7c69d1bffc4cf8c3b157c435a34da72e78c82468"
-+SRC_URI[sha256sum] = "a1613838aa6b89af4ba10a0f3a972836128801ed008078f8c1244e65958f1b24"
- 
- inherit pkgconfig pypi setuptools3
- 
+diff --git a/meta-python/recipes-devtools/python/python3-icu_2.7.2.bb b/meta-python/recipes-devtools/python/python3-icu_2.7.2.bb
+deleted file mode 100644
+index 2433a8c9d..000000000
+--- a/meta-python/recipes-devtools/python/python3-icu_2.7.2.bb
++++ /dev/null
+@@ -1,13 +0,0 @@
+-SUMMARY = "Python extension wrapping the ICU C++ API"
+-SECTION = "devel/python"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://setup.py;beginline=244;endline=252;md5=3e00c41c6d04310707992b93307a224f"
+-
+-DEPENDS += "icu"
+-
+-PYPI_PACKAGE = "PyICU"
+-SRC_URI[sha256sum] = "1382869b22d91cc99274f9b525fa7d9199b44d9007ff0036a09747839a01e9dc"
+-
+-SRC_URI += "file://0001-Fix-host-contamination-of-include-files.patch"
+-
+-inherit pkgconfig pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-icu_2.8.bb b/meta-python/recipes-devtools/python/python3-icu_2.8.bb
+new file mode 100644
+index 000000000..f3dd7a4f5
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-icu_2.8.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "Python extension wrapping the ICU C++ API"
++HOMEPAGE = "https://gitlab.pyicu.org/main/pyicu"
++BUGTRACKER = "https://gitlab.pyicu.org/main/pyicu/-/issues"
++SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=c7c4bfd81a21e3b6368bdcced992bf59"
++
++DEPENDS += "icu"
++
++PYPI_PACKAGE = "PyICU"
++SRC_URI[sha256sum] = "3d80de47045a8163db5aebc947c42b4d429eeea4f0c32af4f40b33981fa872b9"
++
++SRC_URI += "file://0001-Fix-host-contamination-of-include-files.patch"
++
++inherit pkgconfig pypi setuptools3
 -- 
 2.25.1
 
