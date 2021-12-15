@@ -2,76 +2,76 @@ Return-Path: <xuhuan.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A79DC433EF
-	for <webhook@archiver.kernel.org>; Wed, 15 Dec 2021 09:49:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B69C4C433F5
+	for <webhook@archiver.kernel.org>; Wed, 15 Dec 2021 09:50:56 +0000 (UTC)
 Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.2])
- by mx.groups.io with SMTP id smtpd.web10.38442.1639561777752072405
+ [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web12.38684.1639561855566288563
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Dec 2021 01:49:38 -0800
+ Wed, 15 Dec 2021 01:50:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=tPuRbjLU;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.2,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=EOf+aCQP;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
  mailfrom: xuhuan.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1639561775; i=@fujitsu.com;
-	bh=1nZKL3gBlywtdty4reNz4uChL4wkf8+KXK9nyWf8JWo=;
+	s=170520fj; t=1639561852; i=@fujitsu.com;
+	bh=h7jz1uF2wxymVEZOh51vq2BdQ2Qu0NZLP2unC1laRNU=;
 	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=tPuRbjLUTFKeIjx46aRUF4xhXPl1rw23gGoLZ5zuj5dta0PeyXYZWsf0Vl7Jw+Vf0
-	 pOU1yT/sWSgBz3VmyPpBNTmTqSDhXCf2nIKq9uSkMRc2FZGUT70coLcK8mHrBUr/pz
-	 El/kO6AlGD7jIztWBh2137UmRPwU0V/4qCwjQk6pM/OlpKBFv8SUi+aZHTnx7gQKGj
-	 /EhZNW8QQ2Q/msnjwvq31/pwvjYblq6TcSWzL40SMFOMUY+FvS58EDrvTWDNIFC6IN
-	 JOnybSUclfXi9Etw5WcHx33+/Dmfc4AL+YGm3+rMqcqk4hSBMLSjxClYHWqMLFEcEs
-	 rP+X4e78HMb3w==
+	b=EOf+aCQPQbVMEExdfipzNGuNtpD34Pcuib2um3G5Jmq4U9IQ55ynB+uGeNzXFUlte
+	 66xVa/xGTfoRksTz29C+VyIZ9NtZ405cDaTDhlqh9BtKMGfm+MxY0MkDek7eq53lm1
+	 lMPl3OnFmKxUKNZXPnU7NLo90ZWdWBNsOfDrexpzMqte7nHd4Ae8BdAjboq0NJbBvy
+	 Xa6/+xacg/vtTdChBC9BOq8RPfE30NWW/W8FJpwQ/pHBm2qENMDqWuuVzM3mcN/W4c
+	 QKu1Uiphn2UQzZuhWRCXQ21RX/+h8KNV32Ii8BSdQQisxZT4d7z8Rr1QwNgC8nv3/6
+	 KPJ/TIawOl2rw==
 Received: from [100.115.68.153] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-central-1.aws.ess.symcld.net id
- BC/3F-24146-F2AB9B16; Wed, 15 Dec 2021 09:49:35 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrOIsWRWlGSWpSXmKPExsViZ8MxSVdv185
-  Eg7/nDSwuHl7K7MDocW7jCsYAxijWzLyk/IoE1ownc2axF9zjqdj9dhl7A+N57i5GLg4hgSeM
-  EsentzBDOBeYJPoOHmOCcE4ySvybM4e9i5GTg01AXeLxzdeMILaIgL7E0tl7mEFsZgFVie6La
-  8BqhAV8JF5tXApmswDFz1+5xwJi8wq4Szze9gksLiGgIDHl4XtmiLigxMmZT1gg5khIHHzxgh
-  miRknixIqPTBB2hcTrw5eg4moSV89tYp7AyD8LSfssJO0LGJlWMdolFWWmZ5TkJmbm6BoaGOg
-  aGprqmhvqGloa6CVW6SbqpZbqJqfmlRQlAqX1EsuL9VKLi/WKK3OTc1L08lJLNjECwzOl2H3f
-  DsYXfT/1DjFKcjApifLmbdqZKMSXlJ9SmZFYnBFfVJqTWnyIUYaDQ0mCl2MnUE6wKDU9tSItM
-  wcYKzBpCQ4eJRHet9uB0rzFBYm5xZnpEKlTjIpS4rxXdwAlBEASGaV5cG2w+LzEKCslzMvIwM
-  AgxFOQWpSbWYIq/4pRnINRSZj3DcgUnsy8Erjpr4AWMwEtPpa7HWRxSSJCSqqBaceDqs8aQUz
-  idtz1+RzOBnN3sUuLXUx/v2Hfak4Wz2sdHzNM0+eUs+Xf6iuuv/VE21Fm26EdlgxrbhdZfEjY
-  sNORc5/25d6D7RwuC9rDr072kXq1MUfSyqXQ0uRy06H8W/uXXHpSlsSnX71CrTtVeZaT06Gnn
-  89uLopgYeu7O1XqQLvk5P8yp2srOctENl0MZt+8Mn1rwgqO8HtfZlke6bk23bvYS+u4+UP+il
-  1a/xM+8zefu5+ZcMtJjL/t7JPFbUKFmTuStqw4+8LH2ur/4qMiPWdFTtXkm22Kf7H6VHTo2om
-  ngmsmT6prPDKLM+G4poBZv+lh8e9HrZ7VWdnrVRjxmWn6HDtrcVC6O9NMiaU4I9FQi7moOBEA
-  VrFNqEoDAAA=
+	by server-1.bemta.az-a.eu-central-1.aws.ess.symcld.net id
+ 86/6D-31213-C7AB9B16; Wed, 15 Dec 2021 09:50:52 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8MxSbdm185
+  EgynXZSwuHl7K7MDocW7jCsYAxijWzLyk/IoE1ozXu3pYCybwVCz/OoG5gXEydxcjJ4eQwBNG
+  ictvJLoYuYDsC0wSS45OYINInGSUOLY4HMRmE1CXeHzzNSOILSKgL7F09h5mEJtZQFWi++Ia9
+  i5GDg5hAR+JL/czQMIsQOFnrc/ASngF3CW2dn8HGykhoCAx5eF7qLigxMmZT1ggxkhIHHzxgh
+  miRknixIqPTBB2hcTrw5eg4moSV89tYp7AyD8LSfssJO0LGJlWMdomFWWmZ5TkJmbm6BoaGOg
+  aGprqmlnqmpvoJVbpJuqlluomp+aVFCUCZfUSy4v1UouL9Yorc5NzUvTyUks2MQLDMqXY1WsH
+  45G+n3qHGCU5mJREefM27UwU4kvKT6nMSCzOiC8qzUktPsQow8GhJMHLsRMoJ1iUmp5akZaZA
+  4wRmLQEB4+SCO/b7UBp3uKCxNzizHSI1ClGRSlx3qs7gBICIImM0jy4NlhcXmKUlRLmZWRgYB
+  DiKUgtys0sQZV/xSjOwagkzPsGZApPZl4J3PRXQIuZgBYfy90OsrgkESEl1cAUNUti57TAqbo
+  OC1w+Rj38c8XiX/aBh9KOeydd9v6s1vqpt7SsMU+4YW3PXwbtKxeqV2T629/fsdT2tIxCyeoJ
+  /xZxHa6s35I7uXPTnGu3zeYUyffKlqt9br5lxMhxJOnsUs263pTKHyvTD4ru3/Hi9XMt/nq9N
+  +5thZLXrjN//9prenvJOlWWb1EX362K/Rgk76Jab3s15f2d41V7dNRTH16L7FjCfqi9/vhOvZ
+  0rKkvXvA8NaX3Ws2fiSzl25sjtwmckvB/vW1y8MZRn8WHLt1aqqVmRZpdEFLM1SrX+R1/cEur
+  msEZn4suNvKa7FN8KPTumx5J06Wba1GqjW22+5x8KRx3OdlrFrpG1ViNOiaU4I9FQi7moOBEA
+  GWXHLUYDAAA=
 X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-7.tower-532.messagelabs.com!1639561774!17879!1
+X-Msg-Ref: server-15.tower-532.messagelabs.com!1639561852!11924!1
 X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 24626 invoked from network); 15 Dec 2021 09:49:34 -0000
+Received: (qmail 12900 invoked from network); 15 Dec 2021 09:50:52 -0000
 Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-7.tower-532.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 15 Dec 2021 09:49:34 -0000
+  by server-15.tower-532.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 15 Dec 2021 09:50:52 -0000
 Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 416D110044D
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id ED4F1100455
 	for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Dec 2021 09:49:34 +0000 (GMT)
+ Wed, 15 Dec 2021 09:50:51 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 2FC73100352
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id DE00610044D
 	for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Dec 2021 09:49:34 +0000 (GMT)
+ Wed, 15 Dec 2021 09:50:51 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.131) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Wed, 15 Dec 2021 09:49:12 +0000
+ (TLS) id 15.0.1497.26; Wed, 15 Dec 2021 09:50:43 +0000
 From: XU Huan <xuhuan.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-django: upgrade 2.2.24 -> 2.2.25
-Date: Wed, 15 Dec 2021 17:48:27 +0800
-Message-ID: <1639561707-12180-1-git-send-email-xuhuan.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-graphviz: upgrade 0.19 -> 0.19.1
+Date: Wed, 15 Dec 2021 17:49:59 +0800
+Message-ID: <1639561799-12241-1-git-send-email-xuhuan.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -82,46 +82,43 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Dec 2021 09:49:38 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Dec 2021 09:50:56 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94366
+ https://lists.openembedded.org/g/openembedded-devel/message/94367
 
 From: Xu Huan <xuhuan.fnst@fujitsu.com>
 
 changelog:
-================================================================================
-
-Django 2.2.25 fixes a security issue with severity "low" in 2.2.24.
-
-CVE-2021-44420: Potential bypass of an upstream access control based on URL paths
-=================================================================================
-
-HTTP requests for URLs with trailing newlines could bypass an upstream access
-control based on URL paths.
+=================================================================
+-Fix undecoded CalledProcessError.stdout and .stderr when .pipe()
+call with an encoding different from self.encoding fails.
+-Fix missing project root conftest.py in source distribution.
+-Extend examples/graphviz-escapes.ipynb.
+-Improve test coverage.
+-Increase build scripts verbosity.
 
 Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
 ---
- .../{python3-django_2.2.24.bb => python3-django_2.2.25.bb}     | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-django_2.2.24.bb => python3-django_2.2.25.bb} (60%)
+ .../{python3-graphviz_0.19.bb => python3-graphviz_0.19.1.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-graphviz_0.19.bb => python3-graphviz_0.19.1.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.24.bb b/meta-python/recipes-devtools/python/python3-django_2.2.25.bb
-similarity index 60%
-rename from meta-python/recipes-devtools/python/python3-django_2.2.24.bb
-rename to meta-python/recipes-devtools/python/python3-django_2.2.25.bb
-index 982362bdd1..86d21fed06 100644
---- a/meta-python/recipes-devtools/python/python3-django_2.2.24.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_2.2.25.bb
-@@ -5,8 +5,7 @@ UPSTREAM_CHECK_REGEX = "/${PYPI_PACKAGE}/(?P<pver>(2\.2\.\d*)+)/"
+diff --git a/meta-python/recipes-devtools/python/python3-graphviz_0.19.bb b/meta-python/recipes-devtools/python/python3-graphviz_0.19.1.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-graphviz_0.19.bb
+rename to meta-python/recipes-devtools/python/python3-graphviz_0.19.1.bb
+index 593cdb4e53..f1246b4b21 100644
+--- a/meta-python/recipes-devtools/python/python3-graphviz_0.19.bb
++++ b/meta-python/recipes-devtools/python/python3-graphviz_0.19.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://graphviz.readthedocs.io/en/stable/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=87cd8818b7e63c6a9c580034e80d7521"
  
- inherit setuptools3
+-SRC_URI[sha256sum] = "b42554a1c47f24a9473b7f4e380d17b228586a067c97ea69d5354d6074be8dfd"
++SRC_URI[sha256sum] = "09ed0cde452d015fe77c4845a210eb642f28d245f5bc250d4b97808cb8f49078"
  
--SRC_URI[md5sum] = "ebf3bbb7716a7b11029e860475b9a122"
--SRC_URI[sha256sum] = "3339ff0e03dee13045aef6ae7b523edff75b6d726adf7a7a48f53d5a501f7db7"
-+SRC_URI[sha256sum] = "b1e65eaf371347d4b13eb7e061b09786c973061de95390c327c85c1e2aa2349c"
+ inherit pypi setuptools3
  
- RDEPENDS:${PN} += "\
-     ${PYTHON_PN}-sqlparse \
 -- 
 2.25.1
 
