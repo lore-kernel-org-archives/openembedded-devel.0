@@ -1,243 +1,116 @@
-Return-Path: <mingli.yu@windriver.com>
+Return-Path: <xuhuan.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EBEC2C433EF
-	for <webhook@archiver.kernel.org>; Wed, 15 Dec 2021 07:38:30 +0000 (UTC)
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web12.37805.1639553909614744105
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B73D7C433EF
+	for <webhook@archiver.kernel.org>; Wed, 15 Dec 2021 09:48:52 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.1])
+ by mx.groups.io with SMTP id smtpd.web10.38438.1639561731108056877
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Dec 2021 23:38:29 -0800
+ Wed, 15 Dec 2021 01:48:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 192.103.53.11,
- mailfrom: mingli.yu@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 1BF7cQpW017163
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 14 Dec 2021 23:38:27 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Tue, 14 Dec 2021 23:38:26 -0800
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Tue, 14 Dec 2021 23:38:25 -0800
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <akuster808@gmail.com>
-Subject: [meta-oe][hardknott][PATCH] libteam: switch to python3
-Date: Wed, 15 Dec 2021 15:38:25 +0800
-Message-ID: <20211215073825.19651-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=F/Il+9SV;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.1,
+ mailfrom: xuhuan.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1639561729; i=@fujitsu.com;
+	bh=LAutl4R7L9hg63NAe1c3c2CrBwnjU//khsFFoAj3mu0=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=F/Il+9SVvDDizjkxB/mFw1HIzO+RN7GnABbdO216E3Fjpx5Z2CyU+244CCcogFm/R
+	 8IRxpOv2wly/5TQRiXeEmpy0BD7OMPFWMeL6Bv1BtOe1TyWNNt01xeHTTBTV04RwJ4
+	 46BzF046fdHt7X14GOepNMNHaZ7qI8bRudBJIDYw3Zr5lXHSMx5EJdAYDvCQ0nIpfF
+	 w2XV4QDWab9ZZet+Mc1eMm/2l8yLu7Z6sv7Xy160b7j4L3gDdnODjIGdDL9UtpQlCg
+	 1J1ZjtIJKUUqltdA/pXdGt+EEgRl8uy0/3rlbslYzXf2PfwjYXuQPezFCForaVCY5E
+	 MoxmqUDIbY5lw==
+Received: from [100.115.3.179] (using TLSv1.2 with cipher
+ DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-a.eu-west-1.aws.ess.symcld.net id 14/8A-14524-10AB9B16;
+ Wed, 15 Dec 2021 09:48:49 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrEIsWRWlGSWpSXmKPExsViZ8ORqMuwa2e
+  iQd9kHYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeP3+scsBb85Kl7Nn8PYwLiIo4uRi0NI4Amj
+  xJozDSwQzgUmiY0dt1khnJOMEmfPfWDqYuTkYBNQl3h88zUjiC0ioC+xdPYeZhCbWUBVovviG
+  nYQW1jAQ+LPzkYwmwUofnfRJaBeDg5eAXeJ3v2aIGEJAQWJKQ/fg7XyCghKnJz5hAVijITEwR
+  cvmCFqlCROrPjIBGFXSLw+fAkqriZx9dwm5gmM/LOQtM9C0r6AkWkVo1VSUWZ6RkluYmaOrqG
+  Bga6hoamuga6RoaleYpVuol5qqW55anGJrqFeYnmxXmpxsV5xZW5yTopeXmrJJkZgUKYUM1zf
+  wTix76feIUZJDiYlUd68TTsThfiS8lMqMxKLM+KLSnNSiw8xynBwKEnwcuwEygkWpaanVqRl5
+  gAjBCYtwcGjJML7djtQmre4IDG3ODMdInWKUVFKnPfqDqCEAEgiozQPrg0WlZcYZaWEeRkZGB
+  iEeApSi3IzS1DlXzGKczAqCfO+AZnCk5lXAjf9FdBiJqDFx3K3gywuSURISTUwCctbWgQ93iq
+  28dmfS90d9U4qHM6i7w7/XLVvS/a8x9FeIs75uUo+kz++C34VoCBvl1zLsMHPKFttbcW5f9H6
+  uotNqut6i5kyj2lV/t5fr+9reNRvVqzctkOLlD+KL1dZO00zR36GNbdrYpxBnWpOzNI7AWUsi
+  5doXvqUWLtT4VzbY7MlYtOYvrKY1bmGR3Y6T7ZdeZdbX/DbpT9X/9rlrtHXtuYKfXHYYFFTgN
+  NJF4G/rK+uzjZr4dqsN4f/CnfAstORbNqHrnf0vS7Vbcx0dVEMssu34lilHDrF7NXmtJebdz3
+  TON7uefn2Jq6LT3sL43hcGY4Z70twd97+QTo1fxrPku+t6pdLdvc3zFBiKc5INNRiLipOBABY
+  IwxsRQMAAA==
+X-Env-Sender: xuhuan.fnst@fujitsu.com
+X-Msg-Ref: server-11.tower-587.messagelabs.com!1639561728!11010!1
+X-Originating-IP: [62.60.8.97]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.7; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 27359 invoked from network); 15 Dec 2021 09:48:48 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-11.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 15 Dec 2021 09:48:48 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 2FC431009EC
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 15 Dec 2021 09:48:48 +0000 (GMT)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 2268E100243
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 15 Dec 2021 09:48:48 +0000 (GMT)
+Received: from localhost.localdomain.localdomain (10.167.225.131) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.26; Wed, 15 Dec 2021 09:48:33 +0000
+From: XU Huan <xuhuan.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Xu Huan <xuhuan.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-gnupg: upgrade 0.4.7 ->0.4.8
+Date: Wed, 15 Dec 2021 17:47:46 +0800
+Message-ID: <1639561666-12124-1-git-send-email-xuhuan.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
+X-Originating-IP: [10.167.225.131]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Dec 2021 07:38:30 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Dec 2021 09:48:52 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94364
+ https://lists.openembedded.org/g/openembedded-devel/message/94365
 
-From: Mingli Yu <mingli.yu@windriver.com>
+From: Xu Huan <xuhuan.fnst@fujitsu.com>
 
-The original fix for team_basic_test.py only change the interpreter
-to python3, but still some error as below:
- # ./run-ptest
- File "/usr/lib64/libteam/ptest/./team_basic_test.py", line 35
- print "Usage: team_basic_test.py [OPTION...]"
- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?
-
- # ./run-ptest
- RUN #1
- # "ip link add testteamx type team"
- # "teamnl testteamx getoption mode"
- # "ip link del testteamx"
- # "modprobe -r team_mode_loadbalance team_mode_roundrobin team_mode_activebackup team_mode_broadcast team"
- Traceback (most recent call last):
-  File "/usr/lib64/libteam/ptest/./team_basic_test.py", line 206, in <module>
-    main()
-  File "/usr/lib64/libteam/ptest/./team_basic_test.py", line 203, in main
-    btest.run()
-  File "/usr/lib64/libteam/ptest/./team_basic_test.py", line 180, in run
-    self._run_one_loop(i + 1)
-  File "/usr/lib64/libteam/ptest/./team_basic_test.py", line 173, in _run_one_loop
-    self._run_one_mode(mode_name)
-  File "/usr/lib64/libteam/ptest/./team_basic_test.py", line 101, in _run_one_mode
-    cmd_exec("teamnl %s getoption mode" % team_name, "*NOMODE*")
-  File "/usr/lib64/libteam/ptest/./team_basic_test.py", line 80, in cmd_exec
-    raise CmdExecUnexpectedOutputException(output, expected_output)
- __main__.CmdExecUnexpectedOutputException: Command execution output unexpected: "b'*NOMODE*'" != "*NOMODE*"
-
- So rework team_basic_test.py to fix the above issue.
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
 ---
- ...team_basic_test.py-switch-to-python3.patch | 101 ++++++++++++++++++
- ...asic_test.py-use-python3-interpreter.patch |  28 -----
- .../recipes-support/libteam/libteam_1.31.bb   |   2 +-
- 3 files changed, 102 insertions(+), 29 deletions(-)
- create mode 100644 meta-oe/recipes-support/libteam/libteam/0001-team_basic_test.py-switch-to-python3.patch
- delete mode 100644 meta-oe/recipes-support/libteam/libteam/0001-team_basic_test.py-use-python3-interpreter.patch
+ .../python/{python3-gnupg_0.4.7.bb => python3-gnupg_0.4.8.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-gnupg_0.4.7.bb => python3-gnupg_0.4.8.bb} (77%)
 
-diff --git a/meta-oe/recipes-support/libteam/libteam/0001-team_basic_test.py-switch-to-python3.patch b/meta-oe/recipes-support/libteam/libteam/0001-team_basic_test.py-switch-to-python3.patch
-new file mode 100644
-index 000000000..69276aba9
---- /dev/null
-+++ b/meta-oe/recipes-support/libteam/libteam/0001-team_basic_test.py-switch-to-python3.patch
-@@ -0,0 +1,101 @@
-+From 06050e79655f0fa7d9daeda1fbd3a9a2c7736841 Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Thu, 2 Dec 2021 15:08:25 +0800
-+Subject: [PATCH] team_basic_test.py: switch to python3
-+
-+Switch the script team_basic_test.py to python3
-+
-+Upstream-Status: Submitted [https://github.com/jpirko/libteam/pull/63]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ scripts/team_basic_test.py | 28 ++++++++++++++--------------
-+ 1 file changed, 14 insertions(+), 14 deletions(-)
-+
-+diff --git a/scripts/team_basic_test.py b/scripts/team_basic_test.py
-+index faabd18..0b64af2 100755
-+--- a/scripts/team_basic_test.py
-++++ b/scripts/team_basic_test.py
-+@@ -1,4 +1,4 @@
-+-#! /usr/bin/env python
-++#! /usr/bin/env python3
-+ """
-+ Basic test.
-+ 
-+@@ -32,11 +32,11 @@ def usage():
-+     """
-+     Print usage of this app
-+     """
-+-    print "Usage: team_basic_test.py [OPTION...]"
-+-    print ""
-+-    print "  -h, --help                         print this message"
-+-    print "  -c, --loop-count=NUMBER            number of loops (default 1)"
-+-    print "  -p, --port=NETDEV                  port device (can be defined multiple times)"
-++    print("Usage: team_basic_test.py [OPTION...]")
-++    print("")
-++    print("  -h, --help                         print this message")
-++    print("  -c, --loop-count=NUMBER            number of loops (default 1)")
-++    print("  -p, --port=NETDEV                  port device (can be defined multiple times)")
-+     sys.exit()
-+ 
-+ class CmdExecFailedException(Exception):
-+@@ -55,15 +55,15 @@ class CmdExecUnexpectedOutputException(Exception):
-+         return "Command execution output unexpected: \"%s\" != \"%s\"" % (self.__output, self.__expected_output)
-+ 
-+ def print_output(out_type, string):
-+-    print("%s:\n"
-++    print(("%s:\n"
-+           "----------------------------\n"
-+           "%s"
-+-          "----------------------------" % (out_type, string))
-++          "----------------------------" % (out_type, string)))
-+ 
-+ def cmd_exec(cmd, expected_output=None, cleaner=False):
-+     cmd = cmd.rstrip(" ")
-+     if not cleaner:
-+-        print("# \"%s\"" % cmd)
-++        print(("# \"%s\"" % cmd))
-+     subp = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE,
-+                             stderr=subprocess.PIPE)
-+     (data_stdout, data_stderr) = subp.communicate()
-+@@ -74,7 +74,7 @@ def cmd_exec(cmd, expected_output=None, cleaner=False):
-+         if data_stderr:
-+             print_output("Stderr", data_stderr)
-+         raise CmdExecFailedException(subp.returncode)
-+-    output = data_stdout.rstrip()
-++    output = (data_stdout.rstrip()).decode()
-+     if expected_output:
-+         if output != expected_output:
-+             raise CmdExecUnexpectedOutputException(output, expected_output)
-+@@ -166,7 +166,7 @@ TEAM_PORT_CONFIG='{"prio": 10}'
-+             os.removedirs("/tmp/team_test/")
-+ 
-+     def _run_one_loop(self, run_nr):
-+-        print "RUN #%d" % (run_nr)
-++        print("RUN #%d" % (run_nr))
-+         self._created_teams = []
-+         try:
-+             for mode_name in self._team_modes:
-+@@ -176,7 +176,7 @@ TEAM_PORT_CONFIG='{"prio": 10}'
-+             cmd_exec("modprobe -r team_mode_loadbalance team_mode_roundrobin team_mode_activebackup team_mode_broadcast team");
-+ 
-+     def run(self):
-+-        for i in xrange(self._loop_count):
-++        for i in range(self._loop_count):
-+             self._run_one_loop(i + 1)
-+ 
-+ def main():
-+@@ -186,8 +186,8 @@ def main():
-+             "hc:p:",
-+             ["help", "loop-count=", "port="]
-+         )
-+-    except getopt.GetoptError, err:
-+-        print str(err)
-++    except getopt.GetoptError as err:
-++        print(str(err))
-+         usage()
-+ 
-+     btest = TeamBasicTest()
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-support/libteam/libteam/0001-team_basic_test.py-use-python3-interpreter.patch b/meta-oe/recipes-support/libteam/libteam/0001-team_basic_test.py-use-python3-interpreter.patch
-deleted file mode 100644
-index e27e4f329..000000000
---- a/meta-oe/recipes-support/libteam/libteam/0001-team_basic_test.py-use-python3-interpreter.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From 571c141b434dff13494c6a3afe621f63a8e610e9 Mon Sep 17 00:00:00 2001
--From: Andrey Zhizhikin <andrey.z@gmail.com>
--Date: Mon, 27 Jan 2020 14:29:34 +0000
--Subject: [PATCH] team_basic_test.py: use python3 interpreter
--
--Use python3 since python2 is EOL and has been removed from several
--distributions.
--
--Upstream-Status: Pending
--
--Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
-----
-- scripts/team_basic_test.py | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/scripts/team_basic_test.py b/scripts/team_basic_test.py
--index b05be9e..ad980e8 100755
----- a/scripts/team_basic_test.py
--+++ b/scripts/team_basic_test.py
--@@ -1,4 +1,4 @@
---#! /usr/bin/env python
--+#! /usr/bin/env python3
-- """
-- Basic test.
-- 
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-support/libteam/libteam_1.31.bb b/meta-oe/recipes-support/libteam/libteam_1.31.bb
-index eb59c1e3e..764eb6fb7 100644
---- a/meta-oe/recipes-support/libteam/libteam_1.31.bb
-+++ b/meta-oe/recipes-support/libteam/libteam_1.31.bb
-@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/jpirko/libteam;branch=master;protocol=https \
-            file://0001-include-sys-select.h-for-fd_set-definition.patch \
-            file://0002-teamd-Re-adjust-include-header-order.patch \
-            file://0001-team_basic_test.py-disable-RedHat-specific-test.patch \
--           file://0001-team_basic_test.py-use-python3-interpreter.patch \
-+           file://0001-team_basic_test.py-switch-to-python3.patch \
-            file://run-ptest \
-            "
- SRCREV = "3ee12c6d569977cf1cd30d0da77807a07aa77158"
+diff --git a/meta-python/recipes-devtools/python/python3-gnupg_0.4.7.bb b/meta-python/recipes-devtools/python/python3-gnupg_0.4.8.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-gnupg_0.4.7.bb
+rename to meta-python/recipes-devtools/python/python3-gnupg_0.4.8.bb
+index 83ee57926e..b42225b620 100644
+--- a/meta-python/recipes-devtools/python/python3-gnupg_0.4.7.bb
++++ b/meta-python/recipes-devtools/python/python3-gnupg_0.4.8.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b0b7ac63b60085b23fa9f7e1951daa1d"
+ 
+ PYPI_PACKAGE = "python-gnupg"
+-SRC_URI[sha256sum] = "2061f56b1942c29b92727bf9aecbd3cea3893acc9cccbdc7eb4604285efe4ac7"
++SRC_URI[sha256sum] = "b64de1ae5cedf872b437201a566fa2c62ce0c95ea2e30177eb53aee1258507d7"
+ 
+ inherit pypi setuptools3
+ 
 -- 
-2.17.1
+2.25.1
 
 
