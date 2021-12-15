@@ -1,125 +1,274 @@
-Return-Path: <xuhuan.fnst@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B69C4C433F5
-	for <webhook@archiver.kernel.org>; Wed, 15 Dec 2021 09:50:56 +0000 (UTC)
-Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web12.38684.1639561855566288563
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BB90C433FE
+	for <webhook@archiver.kernel.org>; Thu, 16 Dec 2021 01:44:01 +0000 (UTC)
+Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com
+ [209.85.222.176])
+ by mx.groups.io with SMTP id smtpd.web10.1874.1639591552353948701
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Dec 2021 01:50:56 -0800
+ Wed, 15 Dec 2021 10:05:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=EOf+aCQP;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
- mailfrom: xuhuan.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1639561852; i=@fujitsu.com;
-	bh=h7jz1uF2wxymVEZOh51vq2BdQ2Qu0NZLP2unC1laRNU=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=EOf+aCQPQbVMEExdfipzNGuNtpD34Pcuib2um3G5Jmq4U9IQ55ynB+uGeNzXFUlte
-	 66xVa/xGTfoRksTz29C+VyIZ9NtZ405cDaTDhlqh9BtKMGfm+MxY0MkDek7eq53lm1
-	 lMPl3OnFmKxUKNZXPnU7NLo90ZWdWBNsOfDrexpzMqte7nHd4Ae8BdAjboq0NJbBvy
-	 Xa6/+xacg/vtTdChBC9BOq8RPfE30NWW/W8FJpwQ/pHBm2qENMDqWuuVzM3mcN/W4c
-	 QKu1Uiphn2UQzZuhWRCXQ21RX/+h8KNV32Ii8BSdQQisxZT4d7z8Rr1QwNgC8nv3/6
-	 KPJ/TIawOl2rw==
-Received: from [100.115.68.153] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-a.eu-central-1.aws.ess.symcld.net id
- 86/6D-31213-C7AB9B16; Wed, 15 Dec 2021 09:50:52 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8MxSbdm185
-  EgynXZSwuHl7K7MDocW7jCsYAxijWzLyk/IoE1ozXu3pYCybwVCz/OoG5gXEydxcjJ4eQwBNG
-  ictvJLoYuYDsC0wSS45OYINInGSUOLY4HMRmE1CXeHzzNSOILSKgL7F09h5mEJtZQFWi++Ia9
-  i5GDg5hAR+JL/czQMIsQOFnrc/ASngF3CW2dn8HGykhoCAx5eF7qLigxMmZT1ggxkhIHHzxgh
-  miRknixIqPTBB2hcTrw5eg4moSV89tYp7AyD8LSfssJO0LGJlWMdomFWWmZ5TkJmbm6BoaGOg
-  aGprqmlnqmpvoJVbpJuqlluomp+aVFCUCZfUSy4v1UouL9Yorc5NzUvTyUks2MQLDMqXY1WsH
-  45G+n3qHGCU5mJREefM27UwU4kvKT6nMSCzOiC8qzUktPsQow8GhJMHLsRMoJ1iUmp5akZaZA
-  4wRmLQEB4+SCO/b7UBp3uKCxNzizHSI1ClGRSlx3qs7gBICIImM0jy4NlhcXmKUlRLmZWRgYB
-  DiKUgtys0sQZV/xSjOwagkzPsGZApPZl4J3PRXQIuZgBYfy90OsrgkESEl1cAUNUti57TAqbo
-  OC1w+Rj38c8XiX/aBh9KOeydd9v6s1vqpt7SsMU+4YW3PXwbtKxeqV2T629/fsdT2tIxCyeoJ
-  /xZxHa6s35I7uXPTnGu3zeYUyffKlqt9br5lxMhxJOnsUs263pTKHyvTD4ru3/Hi9XMt/nq9N
-  +5thZLXrjN//9prenvJOlWWb1EX362K/Rgk76Jab3s15f2d41V7dNRTH16L7FjCfqi9/vhOvZ
-  0rKkvXvA8NaX3Ws2fiSzl25sjtwmckvB/vW1y8MZRn8WHLt1aqqVmRZpdEFLM1SrX+R1/cEur
-  msEZn4suNvKa7FN8KPTumx5J06Wba1GqjW22+5x8KRx3OdlrFrpG1ViNOiaU4I9FQi7moOBEA
-  GWXHLUYDAAA=
-X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-15.tower-532.messagelabs.com!1639561852!11924!1
-X-Originating-IP: [62.60.8.146]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.7; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 12900 invoked from network); 15 Dec 2021 09:50:52 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-15.tower-532.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 15 Dec 2021 09:50:52 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id ED4F1100455
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Dec 2021 09:50:51 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id DE00610044D
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Dec 2021 09:50:51 +0000 (GMT)
-Received: from localhost.localdomain.localdomain (10.167.225.131) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Wed, 15 Dec 2021 09:50:43 +0000
-From: XU Huan <xuhuan.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-graphviz: upgrade 0.19 -> 0.19.1
-Date: Wed, 15 Dec 2021 17:49:59 +0800
-Message-ID: <1639561799-12241-1-git-send-email-xuhuan.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=OLe4Y6St;
+ spf=pass (domain: gmail.com, ip: 209.85.222.176,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f176.google.com with SMTP id a11so20850687qkh.13
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 15 Dec 2021 10:05:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=CN6r3ZEN3MrxrfEu+70f1RQgn1ofQMuCtSBEgXcm7XE=;
+        b=OLe4Y6StUA6G6EaLd8vMMJuO+GPqO5nalwosAavMvc6l8e3sKMtmP2iRuV6STU5fPN
+         w1jzzE6gg2S1h7zUlSMCOQb3DvB6P1GhzCsnTcU+r+m7bo9g0nwSZqR4wKMKdyJd+q6L
+         aJff5fge0Jl4bNNOqTq3WfFiDAnFto+9ZQhBo7VAAO2dNClBhEfkB11oaXAyFN2O67rz
+         8Nmh9OdH27B5DwiXtgv8XncMixg5nvCkBdGy39hpZYKmngNIP2WuczDV3rtxiK2Mjmti
+         sjb1/6WUsAq+7Y3JCrJTTK1Iw3SV+5ZwBmDF6LICJzAn7w/4FFVRaQ6EWk0IbSFihgdp
+         PdZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=CN6r3ZEN3MrxrfEu+70f1RQgn1ofQMuCtSBEgXcm7XE=;
+        b=bRI0yrf4IPYrQSehjDxYD4ClnkfXhBqOEQvtl/pwgs/Ebzhtvrgz/NBEbqwp7DQJvl
+         rEb91EtgevCgmBmskDpFWBwcdlchhErnfXOgho2N1ocFIZkdorbcu/RXx3ZtZykAdP7h
+         CDGAWzLY1i5zL/0ib0jhmFsEuNshn6Kx0B2zkI45v4xvq2wkzPo+FIVS9ScKz0xkhCWS
+         tDYZOd+Vg8LPDy0xeSx0jazh9SbNLo2cPj/RTq0TAL05/xRsLFupQlJ2EAcbLonbmRd/
+         nGvbya0XDh0wn9QF+RNmRUQVs2KW9xr16Ufwm+p0re/MpbFL06SlAMZu+wlkzn0lv4RI
+         XpRQ==
+X-Gm-Message-State: AOAM5335crZvDV6SKat5PF2BIhrb8Nqpx4HrKiYPba4i7ZIVfc8eMEKi
+	RZGNYSL4jogQrtBXNcpOZLEv+GdfK1HpuzY3N3s=
+X-Google-Smtp-Source: 
+ ABdhPJxIIpgF3T0wTWbsf9xeQxTQlUl3NgeyBk3q19MY5GN7V1Hc19jyQ5/JeNcowfhU6IPwyR9dlYquTjrVQ6EvrlE=
+X-Received: by 2002:a37:9d8b:: with SMTP id
+ g133mr9481313qke.180.1639591551250;
+ Wed, 15 Dec 2021 10:05:51 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.131]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+References: <20211215072835.1371-1-mingli.yu@windriver.com>
+In-Reply-To: <20211215072835.1371-1-mingli.yu@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 15 Dec 2021 10:05:25 -0800
+Message-ID: 
+ <CAMKF1srh301NbKARXz6SPYJccoy-kMzwFJXo7mi65snXEydskA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] php: Upgrade to 8.1.0
+To: "Yu, Mingli" <mingli.yu@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Dec 2021 09:50:56 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Dec 2021 01:44:01 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94367
+ https://lists.openembedded.org/g/openembedded-devel/message/94368
 
-From: Xu Huan <xuhuan.fnst@fujitsu.com>
+Fails on x86_64
 
-changelog:
-=================================================================
--Fix undecoded CalledProcessError.stdout and .stderr when .pipe()
-call with an encoding different from self.encoding fails.
--Fix missing project root conftest.py in source distribution.
--Extend examples/graphviz-escapes.ipynb.
--Improve test coverage.
--Increase build scripts verbosity.
+| /home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/php/8.1.0-r0/php-8.1.0/qemuwrapper:
+line 2: 21613 Segmentation fault      (core dumped) PSEUDO_UNLOAD=1
+qemu-x86_64 -r 3.2.0 -cpu core2duo -L
+/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/php/8.1.0-r0/recipe-sysroot
+-E LD_LIBRARY_PATH=/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/php/8.1.0-r0/recipe-sysroot/usr/lib:/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-linux/php/8.1.0-r0/recipe-sysroot/lib
+"$@"
+| make: *** [Makefile:383: ext/opcache/jit/zend_jit_x86.c] Error 139
 
-Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
----
- .../{python3-graphviz_0.19.bb => python3-graphviz_0.19.1.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-graphviz_0.19.bb => python3-graphviz_0.19.1.bb} (79%)
+see
+https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1797
 
-diff --git a/meta-python/recipes-devtools/python/python3-graphviz_0.19.bb b/meta-python/recipes-devtools/python/python3-graphviz_0.19.1.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-graphviz_0.19.bb
-rename to meta-python/recipes-devtools/python/python3-graphviz_0.19.1.bb
-index 593cdb4e53..f1246b4b21 100644
---- a/meta-python/recipes-devtools/python/python3-graphviz_0.19.bb
-+++ b/meta-python/recipes-devtools/python/python3-graphviz_0.19.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://graphviz.readthedocs.io/en/stable/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=87cd8818b7e63c6a9c580034e80d7521"
- 
--SRC_URI[sha256sum] = "b42554a1c47f24a9473b7f4e380d17b228586a067c97ea69d5354d6074be8dfd"
-+SRC_URI[sha256sum] = "09ed0cde452d015fe77c4845a210eb642f28d245f5bc250d4b97808cb8f49078"
- 
- inherit pypi setuptools3
- 
--- 
-2.25.1
-
+On Tue, Dec 14, 2021 at 11:28 PM Yu, Mingli <mingli.yu@windriver.com> wrote:
+>
+> From: Mingli Yu <mingli.yu@windriver.com>
+>
+> Rebase 2 patches to new version and enable openssl PACKAGECONFIG
+> as OpenSSL 3.0 is now supported in the new version [1].
+>
+> [1] https://github.com/php/php-src/commit/7b34db0659dda933b1146a0ff249f25acca1d669
+>
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> ---
+>  ...ext-opcache-config.m4-enable-opcache.patch | 50 +++++++++++--------
+>  .../0011-use-qemuwrapper-for-minilua.patch    | 33 +++++++++---
+>  .../php/{php_8.0.12.bb => php_8.1.0.bb}       |  4 +-
+>  3 files changed, 57 insertions(+), 30 deletions(-)
+>  rename meta-oe/recipes-devtools/php/{php_8.0.12.bb => php_8.1.0.bb} (98%)
+>
+> diff --git a/meta-oe/recipes-devtools/php/php/0001-ext-opcache-config.m4-enable-opcache.patch b/meta-oe/recipes-devtools/php/php/0001-ext-opcache-config.m4-enable-opcache.patch
+> index 44534cc06..a967d6412 100644
+> --- a/meta-oe/recipes-devtools/php/php/0001-ext-opcache-config.m4-enable-opcache.patch
+> +++ b/meta-oe/recipes-devtools/php/php/0001-ext-opcache-config.m4-enable-opcache.patch
+> @@ -1,6 +1,6 @@
+> -From 8cabcf1043953a0fe48107204a2212609b8e6516 Mon Sep 17 00:00:00 2001
+> -From: Claude Bing <cbing@cybernetics.com>
+> -Date: Tue, 9 Nov 2021 12:59:15 -0500
+> +From ca9b419f2c146061f73ee045cb0a069c18b40cd0 Mon Sep 17 00:00:00 2001
+> +From: Mingli Yu <mingli.yu@windriver.com>
+> +Date: Wed, 15 Dec 2021 14:00:08 +0800
+>  Subject: [PATCH 01/11] ext/opcache/config.m4: enable opcache
+>
+>  We can't use AC_TRY_RUN to run programs in a cross compile
+> @@ -17,15 +17,18 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>  update patch to version 8.0.12
+>  fix issue linking with librt
+>  Signed-off-by: Claude Bing <cbing@cybernetics.com>
+> +
+> +update patch to version 8.1.0
+> +Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+>  ---
+> - ext/opcache/config.m4 | 197 ++----------------------------------------
+> - 1 file changed, 8 insertions(+), 189 deletions(-)
+> + ext/opcache/config.m4 | 204 ++----------------------------------------
+> + 1 file changed, 8 insertions(+), 196 deletions(-)
+>
+>  diff --git a/ext/opcache/config.m4 b/ext/opcache/config.m4
+> -index 5492fd920c..95158ccfd9 100644
+> +index 2a83fa2..9471b5d 100644
+>  --- a/ext/opcache/config.m4
+>  +++ b/ext/opcache/config.m4
+> -@@ -101,202 +101,21 @@ if test "$PHP_OPCACHE" != "no"; then
+> +@@ -108,209 +108,21 @@ if test "$PHP_OPCACHE" != "no"; then
+>     AC_CHECK_FUNCS([mprotect])
+>
+>     AC_MSG_CHECKING(for sysvipc shared memory support)
+> @@ -93,9 +96,10 @@ index 5492fd920c..95158ccfd9 100644
+>  -  }
+>  -  return 0;
+>  -}
+> --]])],[dnl
+> +-]])],[have_shm_ipc=yes],[have_shm_ipc=no],[have_shm_ipc=no])
+> +-  if test "$have_shm_ipc" = "yes"; then
+>  -    AC_DEFINE(HAVE_SHM_IPC, 1, [Define if you have SysV IPC SHM support])
+> --    have_shm_ipc=yes],[have_shm_ipc=no],[have_shm_ipc=no])
+> +-  fi
+>  +  AC_DEFINE(HAVE_SHM_IPC, 1, [Define if you have SysV IPC SHM support])
+>  +  have_shm_ipc=yes
+>     AC_MSG_RESULT([$have_shm_ipc])
+> @@ -147,9 +151,19 @@ index 5492fd920c..95158ccfd9 100644
+>  -  }
+>  -  return 0;
+>  -}
+> --]])],[dnl
+> +-]])],[have_shm_mmap_anon=yes],[have_shm_mmap_anon=no],[
+> +-  case $host_alias in
+> +-    *linux*)
+> +-      have_shm_mmap_anon=yes
+> +-      ;;
+> +-    *)
+> +-      have_shm_mmap_anon=no
+> +-      ;;
+> +-  esac
+> +-])
+> +-  if test "$have_shm_mmap_anon" = "yes"; then
+>  -    AC_DEFINE(HAVE_SHM_MMAP_ANON, 1, [Define if you have mmap(MAP_ANON) SHM support])
+> --    have_shm_mmap_anon=yes],[have_shm_mmap_anon=no],[have_shm_mmap_anon=no])
+> +-  fi
+>  +  AC_DEFINE(HAVE_SHM_MMAP_ANON, 1, [Define if you have mmap(MAP_ANON) SHM support])
+>  +  have_shm_mmap_anon=yes
+>     AC_MSG_RESULT([$have_shm_mmap_anon])
+> @@ -219,16 +233,12 @@ index 5492fd920c..95158ccfd9 100644
+>  -  }
+>  -  return 0;
+>  -}
+> --]])],[dnl
+> +-]])],[have_shm_mmap_posix=yes],[have_shm_mmap_posix=no],[have_shm_mmap_posix=no])
+> +-  if test "$have_shm_mmap_posix" = "yes"; then
+>  -    AC_DEFINE(HAVE_SHM_MMAP_POSIX, 1, [Define if you have POSIX mmap() SHM support])
+> --    AC_MSG_RESULT([yes])
+> --    have_shm_mmap_posix=yes
+>  -    PHP_CHECK_LIBRARY(rt, shm_unlink, [PHP_ADD_LIBRARY(rt,1,OPCACHE_SHARED_LIBADD)])
+> --  ],[
+> --    AC_MSG_RESULT([no])
+> --  ],[
+> --    AC_MSG_RESULT([no])
+> --  ])
+> +-  fi
+> +-  AC_MSG_RESULT([$have_shm_mmap_posix])
+>  +  AC_DEFINE(HAVE_SHM_MMAP_POSIX, 1, [Define if you have POSIX mmap() SHM support])
+>  +  AC_MSG_RESULT([yes])
+>  +  have_shm_mmap_posix=yes
+> @@ -237,5 +247,5 @@ index 5492fd920c..95158ccfd9 100644
+>     PHP_NEW_EXTENSION(opcache,
+>         ZendAccelerator.c \
+>  --
+> -2.25.1
+> +2.17.1
+>
+> diff --git a/meta-oe/recipes-devtools/php/php/0011-use-qemuwrapper-for-minilua.patch b/meta-oe/recipes-devtools/php/php/0011-use-qemuwrapper-for-minilua.patch
+> index 892a0460c..52d5c6696 100644
+> --- a/meta-oe/recipes-devtools/php/php/0011-use-qemuwrapper-for-minilua.patch
+> +++ b/meta-oe/recipes-devtools/php/php/0011-use-qemuwrapper-for-minilua.patch
+> @@ -1,11 +1,28 @@
+> ---- a/ext/opcache/jit/Makefile.frag    2021-10-19 06:34:32.000000000 -0400
+> -+++ b/ext/opcache/jit/Makefile.frag    2021-11-15 15:10:41.437289836 -0500
+> -@@ -3,7 +3,7 @@ $(builddir)/minilua: $(srcdir)/jit/dynas
+> -       $(CC) $(srcdir)/jit/dynasm/minilua.c -lm -o $@
+> +From 0f7b9264c5130b3ca0a20d326fb13ca8fc0a9969 Mon Sep 17 00:00:00 2001
+> +From: Mingli Yu <mingli.yu@windriver.com>
+> +Date: Wed, 15 Dec 2021 14:43:45 +0800
+> +Subject: [PATCH] use qemuwrapper for minilua
+> +
+> +update to 8.1.0
+> +
+> +Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> +---
+> + ext/opcache/jit/Makefile.frag | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/ext/opcache/jit/Makefile.frag b/ext/opcache/jit/Makefile.frag
+> +index 98c5cda..fb0e6f0 100644
+> +--- a/ext/opcache/jit/Makefile.frag
+> ++++ b/ext/opcache/jit/Makefile.frag
+> +@@ -3,7 +3,7 @@ $(builddir)/minilua: $(srcdir)/jit/dynasm/minilua.c
+> +       $(BUILD_CC) $(srcdir)/jit/dynasm/minilua.c -lm -o $@
+>
+> - $(builddir)/jit/zend_jit_x86.c: $(srcdir)/jit/zend_jit_x86.dasc $(srcdir)/jit/dynasm/*.lua $(builddir)/minilua
+> --      $(builddir)/minilua $(srcdir)/jit/dynasm/dynasm.lua  $(DASM_FLAGS) -o $@ $(srcdir)/jit/zend_jit_x86.dasc
+> -+      $(top_srcdir)/qemuwrapper $(builddir)/minilua $(srcdir)/jit/dynasm/dynasm.lua  $(DASM_FLAGS) -o $@ $(srcdir)/jit/zend_jit_x86.dasc
+> + $(builddir)/jit/zend_jit_$(DASM_ARCH).c: $(srcdir)/jit/zend_jit_$(DASM_ARCH).dasc $(srcdir)/jit/dynasm/*.lua $(builddir)/minilua
+> +-      $(builddir)/minilua $(srcdir)/jit/dynasm/dynasm.lua  $(DASM_FLAGS) -o $@ $(srcdir)/jit/zend_jit_$(DASM_ARCH).dasc
+> ++      $(top_srcdir)/qemuwrapper $(builddir)/minilua $(srcdir)/jit/dynasm/dynasm.lua  $(DASM_FLAGS) -o $@ $(srcdir)/jit/zend_jit_$(DASM_ARCH).dasc
+>
+>   $(builddir)/jit/zend_jit.lo: \
+> -       $(builddir)/jit/zend_jit_x86.c \
+> +       $(builddir)/jit/zend_jit_$(DASM_ARCH).c \
+> +--
+> +2.17.1
+> +
+> diff --git a/meta-oe/recipes-devtools/php/php_8.0.12.bb b/meta-oe/recipes-devtools/php/php_8.1.0.bb
+> similarity index 98%
+> rename from meta-oe/recipes-devtools/php/php_8.0.12.bb
+> rename to meta-oe/recipes-devtools/php/php_8.1.0.bb
+> index 38771948f..29e124acf 100644
+> --- a/meta-oe/recipes-devtools/php/php_8.0.12.bb
+> +++ b/meta-oe/recipes-devtools/php/php_8.1.0.bb
+> @@ -33,7 +33,7 @@ SRC_URI:append:class-target = " \
+>            "
+>
+>  S = "${WORKDIR}/php-${PV}"
+> -SRC_URI[sha256sum] = "b4886db1df322dc8fb128d8b34ae7e94f6fc682ecb29ff4f5a591d4de9feadbf"
+> +SRC_URI[sha256sum] = "0725ed2baea125496a898455d501a77460218b2a0cfad773fa9322f491b82b61"
+>
+>
+>  inherit autotools pkgconfig python3native gettext qemu
+> @@ -77,7 +77,7 @@ EXTRA_OECONF:class-native = " \
+>                  ${COMMON_EXTRA_OECONF} \
+>  "
+>
+> -PACKAGECONFIG ??= "mysql sqlite3 imap opcache \
+> +PACKAGECONFIG ??= "mysql sqlite3 imap opcache openssl \
+>                     ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 pam', d)} \
+>  "
+>  PACKAGECONFIG:class-native = ""
+> --
+> 2.17.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#94363): https://lists.openembedded.org/g/openembedded-devel/message/94363
+> Mute This Topic: https://lists.openembedded.org/mt/87739886/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
