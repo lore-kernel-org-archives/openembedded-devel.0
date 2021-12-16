@@ -2,62 +2,62 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0DCFBC433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0DD2AC4332F
 	for <webhook@archiver.kernel.org>; Thu, 16 Dec 2021 15:23:40 +0000 (UTC)
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com
- [209.85.216.50])
- by mx.groups.io with SMTP id smtpd.web10.11866.1639668218839042511
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com
+ [209.85.214.175])
+ by mx.groups.io with SMTP id smtpd.web08.11881.1639668219527853815
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Dec 2021 07:23:38 -0800
+ Thu, 16 Dec 2021 07:23:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=AyBwffeK;
- spf=pass (domain: gmail.com, ip: 209.85.216.50,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Ba2HOcvA;
+ spf=pass (domain: gmail.com, ip: 209.85.214.175,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f50.google.com with SMTP id gj24so6878944pjb.0
+Received: by mail-pl1-f175.google.com with SMTP id c6so841869plg.3
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Dec 2021 07:23:38 -0800 (PST)
+ Thu, 16 Dec 2021 07:23:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=NkeO23PO+OFq0jZ9TKIB2jJJ04WSxIOxyoQpD2741JQ=;
-        b=AyBwffeKCGFosoN69hLJYughpTzKucRUpwY06PyHY8Y1uvg8WHz64uLKhYDktXcuu1
-         4lTtsuCS+kuBxIMZhQ5fl1w5EhXV1E7eQGw9hz6mAsobjiTo89oro7S4SoDTuWnbwu3d
-         mWfwQEbSvcTPsIQiFCGaLEihBd6AjjiNOYpu01wtCdWq7aKlthB0+rY/nV8Yxn/fVYmF
-         Vbv26UPYn2FKzVE3JK9SqGPGwEnif8ANJI2pVgmQ/wbgZDb333v90KonJROQVrZYNFU5
-         42pUt0y/s15dGKVRVftzM0q9NguKUahdYpwnSS7C1gzeFw2c7MFAQyQWG0hWrYIEZ9vs
-         UNOQ==
+        bh=4jq7p5GDh+EOA3VfsqRY8n36HNiVZi7z9NPOPZUY23E=;
+        b=Ba2HOcvAGDlI8r9do4es5jXECm2DbOnhqb12P6LDsJrErUnXKPA/C7ZZ/3e6IyyHt0
+         YPl3ss5zJ1DdPuC+kXF0quqlQWrMxPgurAdoaxvXAbd35mgQ3W47e/4OZvLOri8FXiGD
+         i8O/0CgGBbbpU43h7vLXb2vWQG3lY9hK+Na5zzOsos65k0KHJQBJeLYxDafl/EHrvlvP
+         vuol1ZdQCoW3tDDs3g/u37Qp++Q4wqcSGXrCZ7nswyN6reQRMznuytegcruybWOVm5V8
+         VK0RDTkPjiszJv3uhWTn1QMNT1O7HWAWJ4Wd9NmVhZ8NQdmqzt5LzGBBvEx4GmmWmzLS
+         EoeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=NkeO23PO+OFq0jZ9TKIB2jJJ04WSxIOxyoQpD2741JQ=;
-        b=WUxtg9aKnfcAUAxyMap96JMoNW1iuMrNxW2KK3rq0ryo2oOV9J7cZYNZLbOcnrd13p
-         MV0LbMkcFTN6ILbybChhmhJqyOrJIotWFmJk2ZZJv4qmAhC2HJqkcneQqcGM04M+XK5a
-         mPHyob6/R4G3J06HYmzMv6DsmMyJ1T7iPFA00JriWSVXA3vUp3xJoFupH9pjR/IZArDE
-         ps/8ZVVURhbvftIpBrgkWUwG5oZ70bvZyTJvpWu1pwRHjoSsASxGlhOGblqEyMHIbjlI
-         nFh8f7pHN4dRaJFQ7WvXs/vHNDFbvd6rtjoIpgejBwUKO8oPdZA85pCYA/6o+o2DdFor
-         Kmig==
-X-Gm-Message-State: AOAM530EP85CFPJC2bFGHyxncsmDYsI35cQndI/jh0fawtepcpPEXUOi
-	O4b9ujclx8TqfUWfcnTyWnftNeFK8BQ=
+        bh=4jq7p5GDh+EOA3VfsqRY8n36HNiVZi7z9NPOPZUY23E=;
+        b=RqNFpbsrWDnRs1OSkdaNbVPqXRk8WoRe4kKj7hEI7jonHPceibBC62p5CTMM6uNhGb
+         3pMUKCJSmfUel/TE/zJ5SY5GyOA6JIixsguSjVO/PC3ivvQhnJrcU3Ws9OMqLcLGJorM
+         TR9mEquV9gKXN2qqSNr3AfRMkPTgXHRDAmbS6fxxtP8QcHG7NE8yXa76izaTu4Os19hy
+         0eSmzHasuYTQGVhjHLXdGB/O6gF77oNA9AiWtEnJL/Wk47Tf2gevdErxaYTZpeyhUCIA
+         cf6W1Jze6t0zhInP9j9T8tpRPkziN8h/ozSGSw9Wz1WP9ney9/UcovREBTkbIhkfAfVz
+         RMjg==
+X-Gm-Message-State: AOAM531ryhEFIr0Vz8rUmlMHwXHwH1ONkbZj0Nx7HNCp+L7dCqMZ0Kv1
+	PCnsKSzgAxKkrUi0E2/KdlOBNqn+d+s=
 X-Google-Smtp-Source: 
- ABdhPJxW2p9OECkIjPKLRRKXKdbkx1Z4eepHGf9siyzyHiz6gOb+yByDDsotsmiTQm7pu3ltRNP44A==
-X-Received: by 2002:a17:902:d64c:b0:148:b8ab:ceee with SMTP id
- y12-20020a170902d64c00b00148b8abceeemr5476613plh.111.1639668218205;
+ ABdhPJzSykyJWfRl+cadBefSGzFKR7FKPeeT7MSvbmEEHCxypivIjDprkAjuYQTsCSJF5KvZh8x8RQ==
+X-Received: by 2002:a17:902:db12:b0:142:3ac:7ec3 with SMTP id
+ m18-20020a170902db1200b0014203ac7ec3mr17160516plx.2.1639668218834;
         Thu, 16 Dec 2021 07:23:38 -0800 (PST)
 Received: from keaua.hsd1.ca.comcast.net
  ([2601:202:4180:a5c0:7d7:ca51:b150:8ee7])
         by smtp.gmail.com with ESMTPSA id
- k15sm6795703pff.215.2021.12.16.07.23.37
+ k15sm6795703pff.215.2021.12.16.07.23.38
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Dec 2021 07:23:37 -0800 (PST)
+        Thu, 16 Dec 2021 07:23:38 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [honister 13/18] python3-gevent: update license
-Date: Thu, 16 Dec 2021 07:23:18 -0800
+Subject: [honister 14/18] python3-lxml: set precise BSD license
+Date: Thu, 16 Dec 2021 07:23:19 -0800
 Message-Id: 
- <46026cd6ec5f8cac58e846e7e46d0635e4a52f06.1639668121.git.akuster808@gmail.com>
+ <f9707f700ec6b7f2128ceebf3b9ffec844b4a15e.1639668121.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1639668121.git.akuster808@gmail.com>
 References: <cover.1639668121.git.akuster808@gmail.com>
@@ -68,39 +68,39 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 16 Dec 2021 15:23:40 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94398
+ https://lists.openembedded.org/g/openembedded-devel/message/94399
 
 From: Ross Burton <ross@burtonini.com>
 
-gevent is MIT, and it embeds copies of Python which is Python-2.0.
+"BSD" is ambiguous, use the precise license BSD-3-Clause.
+
+Also update the HOMEPAGE.
 
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-(cherry picked from commit 91b516cc80ea9f46cdf94bd4ce6a168c240b5c58)
+(cherry picked from commit 45e5b27db6f34cefeb4d66197161fbfa9ebd476a)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-devtools/python/python3-gevent_21.8.0.bb       | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+ meta-python/recipes-devtools/python/python3-lxml_4.6.3.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-gevent_21.8.0.bb b/meta-python/recipes-devtools/python/python3-gevent_21.8.0.bb
-index 8fb6e18504..7bdf126dea 100644
---- a/meta-python/recipes-devtools/python/python3-gevent_21.8.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-gevent_21.8.0.bb
-@@ -2,11 +2,8 @@ SUMMARY = "A coroutine-based Python networking library"
- DESCRIPTION = "gevent is a coroutine-based Python networking library that uses greenlet to provide \
- a high-level synchronous API on top of the libevent event loop."
- HOMEPAGE = "http://www.gevent.org"
--LICENSE = "MIT & Python-2.0 & BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=4de99aac27b470c29c6c309e0c279b65 \
--                    file://NOTICE;md5=18108df3583462cafd457f024b9b09b5 \
--                    file://deps/libev/LICENSE;md5=d6ad416afd040c90698edcdf1cbee347 \
--                    "
-+LICENSE = "MIT & Python-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4de99aac27b470c29c6c309e0c279b65"
- DEPENDS += "${PYTHON_PN}-greenlet libev c-ares"
- 
- RDEPENDS:${PN} = "${PYTHON_PN}-greenlet \
+diff --git a/meta-python/recipes-devtools/python/python3-lxml_4.6.3.bb b/meta-python/recipes-devtools/python/python3-lxml_4.6.3.bb
+index 669c2eaeeb..d5594847f4 100644
+--- a/meta-python/recipes-devtools/python/python3-lxml_4.6.3.bb
++++ b/meta-python/recipes-devtools/python/python3-lxml_4.6.3.bb
+@@ -4,9 +4,9 @@ libxslt libraries. It provides safe and convenient access to these \
+ libraries using the ElementTree API. It extends the ElementTree API \
+ significantly to offer support for XPath, RelaxNG, XML Schema, XSLT, \
+ C14N and much more."
+-HOMEPAGE = "http://codespeak.net/lxml"
++HOMEPAGE = "https://lxml.de/"
+ SECTION = "devel/python"
+-LICENSE = "BSD & GPLv2 & MIT & PSF"
++LICENSE = "BSD-3-Clause & GPLv2 & MIT & PSF"
+ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=e4c045ebad958ead4b48008f70838403 \
+                     file://doc/licenses/elementtree.txt;md5=eb34d036a6e3d56314ee49a6852ac891 \
+                     file://doc/licenses/BSD.txt;md5=700a1fc17f4797d4f2d34970c8ee694b \
 -- 
 2.25.1
 
