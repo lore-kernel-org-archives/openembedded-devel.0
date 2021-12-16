@@ -1,101 +1,161 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C077C433F5
-	for <webhook@archiver.kernel.org>; Thu, 16 Dec 2021 15:23:43 +0000 (UTC)
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com
- [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.web08.11883.1639668221873437432
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C9FFC433F5
+	for <webhook@archiver.kernel.org>; Thu, 16 Dec 2021 16:35:18 +0000 (UTC)
+Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com
+ [209.85.222.180])
+ by mx.groups.io with SMTP id smtpd.web12.12758.1639672517716330551
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Dec 2021 07:23:41 -0800
+ Thu, 16 Dec 2021 08:35:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=JR/0FTKd;
- spf=pass (domain: gmail.com, ip: 209.85.215.180,
- mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f180.google.com with SMTP id 200so14505682pgg.3
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=UYG65IE0;
+ spf=pass (domain: gmail.com, ip: 209.85.222.180,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f180.google.com with SMTP id de30so23862944qkb.0
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Dec 2021 07:23:41 -0800 (PST)
+ Thu, 16 Dec 2021 08:35:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=aFkuZabvlEsDsIXTUfGfjtwDjnVdkeKYJ9ChXm/MXDo=;
-        b=JR/0FTKdoqFybfbr8YvIv1OJJqzuC0TFpX0G+XH5h4J4WeLV1924VDX7df6woTFQkK
-         nOXAJpz3CHsba0k0Hz77RUI7wKlOmsCgBGYjxHfARlMcfBgrq9ohHZnu4YHO/H2+hiBu
-         coBRkZsb0wVDBMQbygi0o+tfmRCNZpyDtY2jMMU2osyZDz9TJAAYT52bWBoNZwDQ/hUV
-         k6/Ci111A5GstBInCDn4EtWYY3gLO882MbA71xFLRH0jgI+hBhdW7QJKypycEarTkaRg
-         lQY76nALR/579M7t7vt1nOyjDtTR8LDt/RVGL4ZJJ5zok04iJEhC8/pqjx52FC9U+hnA
-         6aEA==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=4+EnyrjJwXa+MbDaqYZJislOZ+ZsftEvjOCOwquYApc=;
+        b=UYG65IE0cSDDoqVo30oxqZoghQWjnZ3GUZFBsbxkKb2lWAIsgTFO2oryN+bnSzpjQk
+         r8WSoQdJMRrcvCI6oqNMYB3MQNDnLk1JT5gMzSdQ1rQ4ay1EtbO3Hb6iQg6c2QiqNSPW
+         YgDh5vqo0tzhU+fJ9eQ5avuRVf5LjWynuZrr8V/X5VDztVngLnGmAOgcsR5hzRb2UhGS
+         Le9D2F1tDIOffNHOT6e0ytCask4WzuNMlyvTyfi+GZPRJYx6DJDGf9HIY9wrXZs6we15
+         M2NHxuaxk/VJ6I8IkP91sK+XVlJN8ZxfWq+Tk2PiP3MfBlYesRJ1qPqUeMHInjJwJmAV
+         itBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=aFkuZabvlEsDsIXTUfGfjtwDjnVdkeKYJ9ChXm/MXDo=;
-        b=rTMJ8xTuZKQ+Ijpexan9qLj92CwyUZnHeRvLV6QxWUN7T8R34/zwRTjegV3mCmDs6A
-         SLgFnAlCt8B48pZPZjz/tiWkutlGRhfsPYxlyPed+wPErqcDn5RGy3hsNUEVdarQMgxq
-         N94mlaF41a/kcFbDu1xZ9dEowqOl8p2c1gvsRIGuC9Y32E2qV2ksnhkyA8YcUiNVv9ui
-         awblEZBIxRFrcMUJw2ScNFUvnrKlDSD5PPq1UIQzYZmlC8lT0wNVZJGo6ImMosfwW24k
-         q62nB6ydsLjQdpUb/2iDx8FaH93gA2XqXXMcGid84jFoVNHU8zSsxg65lugkL7bC6Wlh
-         YlaQ==
-X-Gm-Message-State: AOAM531Ic7xQ6HrHXXXDwIy0sFBbMRi3mn2O4iqpi6NWDeKZ4y5QVy8K
-	Lx/HkZNOoU98A5+arL17v6yKnQf28lg=
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=4+EnyrjJwXa+MbDaqYZJislOZ+ZsftEvjOCOwquYApc=;
+        b=TJTStYWhMnkFdHtW5jbmIiCvxjx6qbgp3/ASK5dsuuKoK1qAkXU0qIGzm7kqIEHUZe
+         G2pLaJ5Gs31Vd4dXrGBZh64XLTiW9/cNHskxJ7igDTGYQggCgkhC+0MaRDGaBI7X6zmY
+         Z7WYErdCeYcQDKVFwgenyWiVIiTPy6a04fxdFK5h9hSKRNeJGI/Tv0ryaHwe7nKQq9uB
+         f36GELn/qiOsC7HsOPr4+2cmOl9nRDXoITvuYxC18oqiAbSqLfdUIE78KF0oPZ1EvQYg
+         EgMacf48QHVUyQgc55kcctXlwPC+8iBlmktsep/GD9QDoUNMRVFxgzwvJT/iRKteOqaM
+         vTZQ==
+X-Gm-Message-State: AOAM5332WemQr2fykb9oh1y2EuJ0bX+a7wTtk6SNNPRn2cMs3wtwsLyP
+	eFHWTA6Ct49Q0NVhiV2n9GMKlXPdpvzM+pIXqq8=
 X-Google-Smtp-Source: 
- ABdhPJxUFuSXp6dYyPdaQzDje3SNFo4FuCp3joQrLmZ1Fmmr0LCHzBh2/TOYtN2iHve1HXZqeXTp6g==
-X-Received: by 2002:a63:1422:: with SMTP id
- u34mr12580628pgl.135.1639668221243;
-        Thu, 16 Dec 2021 07:23:41 -0800 (PST)
-Received: from keaua.hsd1.ca.comcast.net
- ([2601:202:4180:a5c0:7d7:ca51:b150:8ee7])
-        by smtp.gmail.com with ESMTPSA id
- k15sm6795703pff.215.2021.12.16.07.23.40
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Dec 2021 07:23:40 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [honister 17/18] python3-pyzmq: set precise BSD license
-Date: Thu, 16 Dec 2021 07:23:22 -0800
-Message-Id: 
- <1a8108873029a3787dbcc42bcad3c7ada11eaa52.1639668121.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1639668121.git.akuster808@gmail.com>
-References: <cover.1639668121.git.akuster808@gmail.com>
+ ABdhPJy4BMTyGYOUQ1ln+dVJc9FzAFXjgev4fRcQjZpp3VnWdyVlJTbapQHpWZ3VlYf5nTOFHGhZkd7YUm0Oy8/H7D8=
+X-Received: by 2002:a37:747:: with SMTP id 68mr12620039qkh.227.1639672516675;
+ Thu, 16 Dec 2021 08:35:16 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20211215191550.1964457-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20211215191550.1964457-1-open.source@oleksandr-kravchuk.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 16 Dec 2021 08:34:49 -0800
+Message-ID: 
+ <CAMKF1sqi=oVih2nJJchBPAx6=W8pZqNRagVYE5qDdHqkPVH3ZQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] libkcapi: update to 1.3.1
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Dec 2021 15:23:43 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Dec 2021 16:35:18 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94402
+ https://lists.openembedded.org/g/openembedded-devel/message/94404
 
-From: Ross Burton <ross@burtonini.com>
+it fails to build on musl/aarch64 see
+https://errors.yoctoproject.org/Errors/Details/619382/
 
-"BSD" is ambiguous, use the precise license BSD-3-Clause.
-
-Signed-off-by: Ross Burton <ross.burton@arm.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-(cherry picked from commit 57647ea0d6b87a02bf812192ae39f2d81644b744)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb b/meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb
-index 3c91eee16f..87605c2b3e 100644
---- a/meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Pyzmq provides Zero message queue access for the Python language"
- HOMEPAGE = "http://zeromq.org/bindings:python"
--LICENSE = "BSD & LGPL-3.0"
-+LICENSE = "BSD-3-Clause & LGPL-3.0"
- LIC_FILES_CHKSUM = "file://COPYING.BSD;md5=11c65680f637c3df7f58bbc8d133e96e \
-                     file://COPYING.LESSER;md5=12c592fa0bcfff3fb0977b066e9cb69e"
- DEPENDS = "zeromq"
--- 
-2.25.1
-
+On Wed, Dec 15, 2021 at 11:15 AM Oleksandr Kravchuk
+<open.source@oleksandr-kravchuk.com> wrote:
+>
+> Dropped upstreamed patch.
+>
+> License-Update: copyright years updated.
+>
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> ---
+>  ...f-__NR_io_getevents-when-not-defined.patch | 36 -------------------
+>  .../{libkcapi_1.2.1.bb => libkcapi_1.3.1.bb}  |  8 ++---
+>  2 files changed, 3 insertions(+), 41 deletions(-)
+>  delete mode 100644 meta-oe/recipes-crypto/libkcapi/libkcapi/0001-Disable-use-of-__NR_io_getevents-when-not-defined.patch
+>  rename meta-oe/recipes-crypto/libkcapi/{libkcapi_1.2.1.bb => libkcapi_1.3.1.bb} (81%)
+>
+> diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-Disable-use-of-__NR_io_getevents-when-not-defined.patch b/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-Disable-use-of-__NR_io_getevents-when-not-defined.patch
+> deleted file mode 100644
+> index 9d9f63e34..000000000
+> --- a/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-Disable-use-of-__NR_io_getevents-when-not-defined.patch
+> +++ /dev/null
+> @@ -1,36 +0,0 @@
+> -From 771dd6aa45dd0bbbb7d7c7a7b116e1b5666fbd7a Mon Sep 17 00:00:00 2001
+> -From: Khem Raj <raj.khem@gmail.com>
+> -Date: Sun, 15 Nov 2020 18:05:48 -0800
+> -Subject: [PATCH] Disable use of __NR_io_getevents when not defined
+> -
+> -Architectures like riscv32 do not define this syscall, therefore return
+> -ENOSYS on such architectures
+> -
+> -Upstream-Status: Submitted [https://github.com/smuellerDD/libkcapi/pull/100]
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ----
+> - lib/internal.h | 12 ++++++++++++
+> - 1 file changed, 12 insertions(+)
+> -
+> ---- a/lib/internal.h
+> -+++ b/lib/internal.h
+> -@@ -325,10 +325,17 @@ static inline int io_submit(aio_context_
+> -     return syscall(__NR_io_submit, ctx, n, iocb);
+> - }
+> -
+> --static inline int io_getevents(aio_context_t ctx, long min, long max,
+> --            struct io_event *events, struct timespec *timeout)
+> -+static inline int io_getevents(__attribute__((unused)) aio_context_t ctx,
+> -+            __attribute__((unused)) long min,
+> -+            __attribute__((unused)) long max,
+> -+            __attribute__((unused)) struct io_event *events,
+> -+            __attribute__((unused)) struct timespec *timeout)
+> - {
+> -+#ifdef __NR_io_getevents
+> -     return syscall(__NR_io_getevents, ctx, min, max, events, timeout);
+> -+#else
+> -+    return -ENOSYS;
+> -+#endif
+> - }
+> -
+> - /************************************************************
+> diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi_1.2.1.bb b/meta-oe/recipes-crypto/libkcapi/libkcapi_1.3.1.bb
+> similarity index 81%
+> rename from meta-oe/recipes-crypto/libkcapi/libkcapi_1.2.1.bb
+> rename to meta-oe/recipes-crypto/libkcapi/libkcapi_1.3.1.bb
+> index cc71903a8..f10d68470 100644
+> --- a/meta-oe/recipes-crypto/libkcapi/libkcapi_1.2.1.bb
+> +++ b/meta-oe/recipes-crypto/libkcapi/libkcapi_1.3.1.bb
+> @@ -1,13 +1,11 @@
+>  SUMMARY = "Linux Kernel Crypto API User Space Interface Library"
+>  HOMEPAGE = "http://www.chronox.de/libkcapi.html"
+>  LICENSE = "BSD-3-Clause | GPL-2.0"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=c78be93ed8d1637f2a3f4a83ff9d5f54"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=80c467906eb826339c7f09e61808ed23"
+>
+>  S = "${WORKDIR}/git"
+> -SRCREV = "d41284525ec8960e9a828979cfe269012b7df8db"
+> -SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https \
+> -           file://0001-Disable-use-of-__NR_io_getevents-when-not-defined.patch \
+> -           "
+> +SRCREV = "2936ecd060c299157ac880650ba2c9fd94d27bb1"
+> +SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https"
+>
+>  inherit autotools
+>
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#94373): https://lists.openembedded.org/g/openembedded-devel/message/94373
+> Mute This Topic: https://lists.openembedded.org/mt/87751272/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
