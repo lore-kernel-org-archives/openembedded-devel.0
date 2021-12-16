@@ -2,62 +2,61 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0AE0EC433FE
-	for <webhook@archiver.kernel.org>; Thu, 16 Dec 2021 15:23:42 +0000 (UTC)
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com
- [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web09.11852.1639668221159086462
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0EE8CC4332F
+	for <webhook@archiver.kernel.org>; Thu, 16 Dec 2021 15:23:43 +0000 (UTC)
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com
+ [209.85.215.178])
+ by mx.groups.io with SMTP id smtpd.web10.11867.1639668222692151152
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Dec 2021 07:23:41 -0800
+ Thu, 16 Dec 2021 07:23:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=lMPwcM9M;
- spf=pass (domain: gmail.com, ip: 209.85.216.52,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=n+nADNs0;
+ spf=pass (domain: gmail.com, ip: 209.85.215.178,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id mj19so5892836pjb.3
+Received: by mail-pg1-f178.google.com with SMTP id 133so23331270pgc.12
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Dec 2021 07:23:41 -0800 (PST)
+ Thu, 16 Dec 2021 07:23:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=5lMQwvMaVi6o9sak7dW383O3PYj+I3wSR5fTAZ6LMU4=;
-        b=lMPwcM9M4tUCmDmHzJnurIGZ+MRn4Pg9jOfhq4T4DlIZNpCgcuKf8NGBTXxGjeTuhn
-         uDPANMWNk2ZB4jYJA0CxQL55amT4VkVgAJ/0iaml3+YeUylnvjY3fwlb3OagjAX4m05h
-         IhJgbK3AIwdEMjdDZz5zUbfaAYzyYlA3SwrOh1rNjL7vkolu10kwUrTONzri0HwNHIiD
-         9hrm1RCBjsr34VJXTop9NCi5k7c2Hyj8b+/oMHSPur7jse0ZwnPxzC8hZVddcIk2uAw2
-         5vU1zHtYamsuhAAMAxAfvwzJNRBbKhWew25MVhHyInxCo1qmx4+Pbvrbn2woXT7A9uMK
-         kLWA==
+        bh=TIXzjCG3VBU9XSk6a0PJq4xdDm07NXh/2UkXe3XtjUs=;
+        b=n+nADNs03UwHMj/xhwO4JMpjgSvDf1SoJ5zaLNjFsaGGYPtebkSjNuOAoOPvJp9t5Q
+         xjW7pv+hAIFGGtZMSogMMa69gFjWCTw5mFBd3tDtE+ncCGgCJMtm02AyNM0clMjQ7mHn
+         osXl0dB+7UMC7CcpyylAyNAFD97iIv0m5JEn3waniKwAqTz2TZyQLrFIhzK6vxBPTcXv
+         JaqDDrgNsh4xNoQnW038VdjDVuKUzjjVUb0f1LyE3TE3zR4Wnit3Q70/sto4eYFTACz8
+         EsukEWvb0hYtH28KH04lcICQO9aQVECG5QffRP6RWI0g8Fgk6O0lFw/ilThQtMX8may1
+         p1PA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=5lMQwvMaVi6o9sak7dW383O3PYj+I3wSR5fTAZ6LMU4=;
-        b=BSp0JkBm3qrwIG1ylktHySEcDfCEXMQF4NV4a7BO1nAzTnVhnInOkFAWCr8pQhD4n0
-         hDngOXggC1WyAbNF8cFBEXV8hmVY0shI2rk/0ZzepAosDzbNyDCmpVlMQbITdVzZhMsd
-         c3/pf6mTbuJOH1CRxDwqpx5SncFrFss2jNOxSRfJRFmyT/7Yfeb4YjVjATQ35m8Yvey0
-         vIr5bbzixG93j88Fe+vgORyE7bpykHgGqTsSXY0W8PG0iB96tZQPVR+H1P5vuy1kIYUm
-         O8vkYR2O3YCyaZvfzSdDXBRvVDwUN0k///G2E5We+2dL0Al54Gm4xxsGI6jjdpgzP9QU
-         BeOA==
-X-Gm-Message-State: AOAM531eoRuoHFUMpHz3pCuhOkqOx7etapCCTktc88EbgS6ggulJzD0M
-	qf2A43tpZrl7v2Nni2kMiPoaLqxljOY=
+        bh=TIXzjCG3VBU9XSk6a0PJq4xdDm07NXh/2UkXe3XtjUs=;
+        b=zq9K+NhqJPmarUp9VgREbeI5gjeLOpwAaZJFRqesGPoKIYJxFl7r0LacZWSwzUjQrl
+         pbZjcTrZNrH/MExhrwaKfRGEP2smPzi18hZMfM1YButki62mk2rfOlkLY7N3pmDd24Zf
+         5mkoDMO4ROkZa2kDxIqmjXqQaYeYJaMxm0hXV+rRrCjDK4PNvnVJ0tSe6WDARmDwx1vH
+         fhotDwyJNTRxpc/pA0diT0GSQJNQgAkOwXyIfOZm1JJDWW/JoLx6T7kd6Z161xuRxiSO
+         v6NOUNYQxuxVqXm8GaQWiKgWqyhdk5YVx4GZB/QXkpr4vQRhdYEJ9fCW0zCM2K/HUOYA
+         aTXw==
+X-Gm-Message-State: AOAM532TVvHAc/x/+n0NJWH6t5uON+fVwkwLtE4fTJ9cVjX0ygQ2NoZF
+	/78jouW8ILQc8ZZRVvWC66Scm5fRjIY=
 X-Google-Smtp-Source: 
- ABdhPJwgcmm2tqZrTUlUhmskCl50BUelYHW7iZtUNT26QvGAZ1fEnzjE8Cd2Ypxad01hCCo8Xq+SKw==
-X-Received: by 2002:a17:902:c412:b0:141:f710:2a94 with SMTP id
- k18-20020a170902c41200b00141f7102a94mr16748508plk.1.1639668220557;
-        Thu, 16 Dec 2021 07:23:40 -0800 (PST)
+ ABdhPJz3wllyZEYqUIuR6f5aXJUO9uj8OHUeW2yWKxAf2qSc/rviNj6UdjJwf/wCFhAXclJvW4lapA==
+X-Received: by 2002:a65:50c6:: with SMTP id s6mr12890782pgp.352.1639668222063;
+        Thu, 16 Dec 2021 07:23:42 -0800 (PST)
 Received: from keaua.hsd1.ca.comcast.net
  ([2601:202:4180:a5c0:7d7:ca51:b150:8ee7])
         by smtp.gmail.com with ESMTPSA id
- k15sm6795703pff.215.2021.12.16.07.23.39
+ k15sm6795703pff.215.2021.12.16.07.23.41
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Dec 2021 07:23:40 -0800 (PST)
+        Thu, 16 Dec 2021 07:23:41 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [honister 16/18] python3-posix-ipc: remove spurious dependencies
-Date: Thu, 16 Dec 2021 07:23:21 -0800
+Subject: [honister 18/18] fb-test: fix SRC_URI
+Date: Thu, 16 Dec 2021 07:23:23 -0800
 Message-Id: 
- <8b5bfb2e008ec58a1d9354e6c16c20f0fce0b13b.1639668121.git.akuster808@gmail.com>
+ <a12eff7e3f6aa1d4150b0724d4b7939622aa598f.1639668121.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1639668121.git.akuster808@gmail.com>
 References: <cover.1639668121.git.akuster808@gmail.com>
@@ -66,42 +65,46 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Dec 2021 15:23:42 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Dec 2021 15:23:43 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94401
+ https://lists.openembedded.org/g/openembedded-devel/message/94403
 
-From: Ross Burton <ross@burtonini.com>
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 
-pip isn't needed to build, and adding the empty string to RDEPENDS is
-most certainly meaningless.
+Original repo doesn't exist any more. Even though I couldn't find any
+new official repo, this is the only one on github that contains used
+commit hash.
 
-Signed-off-by: Ross Burton <ross.burton@arm.com>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-(cherry picked from commit 57ae325941d3a71eaeeca107ecef69d664a3f710)
+(cherry picked from commit c57e4d5faa3d1c4b23173a4f26b2cd1aff846b34)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-devtools/python/python3-posix-ipc_1.0.5.bb | 10 ----------
- 1 file changed, 10 deletions(-)
+ .../recipes-test/fbtest/{fb-test_git.bb => fb-test_1.1.0.bb}  | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+ rename meta-oe/recipes-test/fbtest/{fb-test_git.bb => fb-test_1.1.0.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-posix-ipc_1.0.5.bb b/meta-python/recipes-devtools/python/python3-posix-ipc_1.0.5.bb
-index c46881cd47..d66ef0e3c4 100644
---- a/meta-python/recipes-devtools/python/python3-posix-ipc_1.0.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-posix-ipc_1.0.5.bb
-@@ -13,13 +13,3 @@ SRC_URI[md5sum] = "8c9443859492ecf3aae9182aa6b5c78c"
- SRC_URI[sha256sum] = "6cddb1ce2cf4aae383f2a0079c26c69bee257fe2720f372201ef047f8ceb8b97"
+diff --git a/meta-oe/recipes-test/fbtest/fb-test_git.bb b/meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb
+similarity index 82%
+rename from meta-oe/recipes-test/fbtest/fb-test_git.bb
+rename to meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb
+index 2992135726..14ab41b144 100644
+--- a/meta-oe/recipes-test/fbtest/fb-test_git.bb
++++ b/meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb
+@@ -1,12 +1,10 @@
+ SUMMARY = "Test suite for Linux framebuffer"
  
- inherit setuptools3 pypi
+-PV = "1.1.0"
 -
--# DEPENDS_default: python-pip
--
--DEPENDS += " \
--        ${PYTHON_PN}-pip \
--        "
--
--# RDEPENDS:default:
--RDEPENDS:${PN} += " \
--        "
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
+ 
+ SRCREV = "063ec650960c2d79ac51f5c5f026cb05343a33e2"
+-SRC_URI = "git://github.com/prpplague/fb-test-app.git;branch=master;protocol=https"
++SRC_URI = "git://github.com//ponty/fb-test-app.git;branch=master;protocol=https"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.25.1
 
