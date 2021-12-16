@@ -2,61 +2,62 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0EE8CC4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C077C433F5
 	for <webhook@archiver.kernel.org>; Thu, 16 Dec 2021 15:23:43 +0000 (UTC)
-Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com
- [209.85.215.178])
- by mx.groups.io with SMTP id smtpd.web10.11867.1639668222692151152
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com
+ [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.web08.11883.1639668221873437432
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Dec 2021 07:23:42 -0800
+ Thu, 16 Dec 2021 07:23:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=n+nADNs0;
- spf=pass (domain: gmail.com, ip: 209.85.215.178,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=JR/0FTKd;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f178.google.com with SMTP id 133so23331270pgc.12
+Received: by mail-pg1-f180.google.com with SMTP id 200so14505682pgg.3
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Dec 2021 07:23:42 -0800 (PST)
+ Thu, 16 Dec 2021 07:23:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=TIXzjCG3VBU9XSk6a0PJq4xdDm07NXh/2UkXe3XtjUs=;
-        b=n+nADNs03UwHMj/xhwO4JMpjgSvDf1SoJ5zaLNjFsaGGYPtebkSjNuOAoOPvJp9t5Q
-         xjW7pv+hAIFGGtZMSogMMa69gFjWCTw5mFBd3tDtE+ncCGgCJMtm02AyNM0clMjQ7mHn
-         osXl0dB+7UMC7CcpyylAyNAFD97iIv0m5JEn3waniKwAqTz2TZyQLrFIhzK6vxBPTcXv
-         JaqDDrgNsh4xNoQnW038VdjDVuKUzjjVUb0f1LyE3TE3zR4Wnit3Q70/sto4eYFTACz8
-         EsukEWvb0hYtH28KH04lcICQO9aQVECG5QffRP6RWI0g8Fgk6O0lFw/ilThQtMX8may1
-         p1PA==
+        bh=aFkuZabvlEsDsIXTUfGfjtwDjnVdkeKYJ9ChXm/MXDo=;
+        b=JR/0FTKdoqFybfbr8YvIv1OJJqzuC0TFpX0G+XH5h4J4WeLV1924VDX7df6woTFQkK
+         nOXAJpz3CHsba0k0Hz77RUI7wKlOmsCgBGYjxHfARlMcfBgrq9ohHZnu4YHO/H2+hiBu
+         coBRkZsb0wVDBMQbygi0o+tfmRCNZpyDtY2jMMU2osyZDz9TJAAYT52bWBoNZwDQ/hUV
+         k6/Ci111A5GstBInCDn4EtWYY3gLO882MbA71xFLRH0jgI+hBhdW7QJKypycEarTkaRg
+         lQY76nALR/579M7t7vt1nOyjDtTR8LDt/RVGL4ZJJ5zok04iJEhC8/pqjx52FC9U+hnA
+         6aEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=TIXzjCG3VBU9XSk6a0PJq4xdDm07NXh/2UkXe3XtjUs=;
-        b=zq9K+NhqJPmarUp9VgREbeI5gjeLOpwAaZJFRqesGPoKIYJxFl7r0LacZWSwzUjQrl
-         pbZjcTrZNrH/MExhrwaKfRGEP2smPzi18hZMfM1YButki62mk2rfOlkLY7N3pmDd24Zf
-         5mkoDMO4ROkZa2kDxIqmjXqQaYeYJaMxm0hXV+rRrCjDK4PNvnVJ0tSe6WDARmDwx1vH
-         fhotDwyJNTRxpc/pA0diT0GSQJNQgAkOwXyIfOZm1JJDWW/JoLx6T7kd6Z161xuRxiSO
-         v6NOUNYQxuxVqXm8GaQWiKgWqyhdk5YVx4GZB/QXkpr4vQRhdYEJ9fCW0zCM2K/HUOYA
-         aTXw==
-X-Gm-Message-State: AOAM532TVvHAc/x/+n0NJWH6t5uON+fVwkwLtE4fTJ9cVjX0ygQ2NoZF
-	/78jouW8ILQc8ZZRVvWC66Scm5fRjIY=
+        bh=aFkuZabvlEsDsIXTUfGfjtwDjnVdkeKYJ9ChXm/MXDo=;
+        b=rTMJ8xTuZKQ+Ijpexan9qLj92CwyUZnHeRvLV6QxWUN7T8R34/zwRTjegV3mCmDs6A
+         SLgFnAlCt8B48pZPZjz/tiWkutlGRhfsPYxlyPed+wPErqcDn5RGy3hsNUEVdarQMgxq
+         N94mlaF41a/kcFbDu1xZ9dEowqOl8p2c1gvsRIGuC9Y32E2qV2ksnhkyA8YcUiNVv9ui
+         awblEZBIxRFrcMUJw2ScNFUvnrKlDSD5PPq1UIQzYZmlC8lT0wNVZJGo6ImMosfwW24k
+         q62nB6ydsLjQdpUb/2iDx8FaH93gA2XqXXMcGid84jFoVNHU8zSsxg65lugkL7bC6Wlh
+         YlaQ==
+X-Gm-Message-State: AOAM531Ic7xQ6HrHXXXDwIy0sFBbMRi3mn2O4iqpi6NWDeKZ4y5QVy8K
+	Lx/HkZNOoU98A5+arL17v6yKnQf28lg=
 X-Google-Smtp-Source: 
- ABdhPJz3wllyZEYqUIuR6f5aXJUO9uj8OHUeW2yWKxAf2qSc/rviNj6UdjJwf/wCFhAXclJvW4lapA==
-X-Received: by 2002:a65:50c6:: with SMTP id s6mr12890782pgp.352.1639668222063;
-        Thu, 16 Dec 2021 07:23:42 -0800 (PST)
+ ABdhPJxUFuSXp6dYyPdaQzDje3SNFo4FuCp3joQrLmZ1Fmmr0LCHzBh2/TOYtN2iHve1HXZqeXTp6g==
+X-Received: by 2002:a63:1422:: with SMTP id
+ u34mr12580628pgl.135.1639668221243;
+        Thu, 16 Dec 2021 07:23:41 -0800 (PST)
 Received: from keaua.hsd1.ca.comcast.net
  ([2601:202:4180:a5c0:7d7:ca51:b150:8ee7])
         by smtp.gmail.com with ESMTPSA id
- k15sm6795703pff.215.2021.12.16.07.23.41
+ k15sm6795703pff.215.2021.12.16.07.23.40
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Dec 2021 07:23:41 -0800 (PST)
+        Thu, 16 Dec 2021 07:23:40 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [honister 18/18] fb-test: fix SRC_URI
-Date: Thu, 16 Dec 2021 07:23:23 -0800
+Subject: [honister 17/18] python3-pyzmq: set precise BSD license
+Date: Thu, 16 Dec 2021 07:23:22 -0800
 Message-Id: 
- <a12eff7e3f6aa1d4150b0724d4b7939622aa598f.1639668121.git.akuster808@gmail.com>
+ <1a8108873029a3787dbcc42bcad3c7ada11eaa52.1639668121.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1639668121.git.akuster808@gmail.com>
 References: <cover.1639668121.git.akuster808@gmail.com>
@@ -67,44 +68,33 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 16 Dec 2021 15:23:43 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94403
+ https://lists.openembedded.org/g/openembedded-devel/message/94402
 
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+From: Ross Burton <ross@burtonini.com>
 
-Original repo doesn't exist any more. Even though I couldn't find any
-new official repo, this is the only one on github that contains used
-commit hash.
+"BSD" is ambiguous, use the precise license BSD-3-Clause.
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Signed-off-by: Ross Burton <ross.burton@arm.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit c57e4d5faa3d1c4b23173a4f26b2cd1aff846b34)
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+(cherry picked from commit 57647ea0d6b87a02bf812192ae39f2d81644b744)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-test/fbtest/{fb-test_git.bb => fb-test_1.1.0.bb}  | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
- rename meta-oe/recipes-test/fbtest/{fb-test_git.bb => fb-test_1.1.0.bb} (82%)
+ meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-test/fbtest/fb-test_git.bb b/meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb
-similarity index 82%
-rename from meta-oe/recipes-test/fbtest/fb-test_git.bb
-rename to meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb
-index 2992135726..14ab41b144 100644
---- a/meta-oe/recipes-test/fbtest/fb-test_git.bb
-+++ b/meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb
-@@ -1,12 +1,10 @@
- SUMMARY = "Test suite for Linux framebuffer"
- 
--PV = "1.1.0"
--
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
- 
- SRCREV = "063ec650960c2d79ac51f5c5f026cb05343a33e2"
--SRC_URI = "git://github.com/prpplague/fb-test-app.git;branch=master;protocol=https"
-+SRC_URI = "git://github.com//ponty/fb-test-app.git;branch=master;protocol=https"
- 
- S = "${WORKDIR}/git"
- 
+diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb b/meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb
+index 3c91eee16f..87605c2b3e 100644
+--- a/meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Pyzmq provides Zero message queue access for the Python language"
+ HOMEPAGE = "http://zeromq.org/bindings:python"
+-LICENSE = "BSD & LGPL-3.0"
++LICENSE = "BSD-3-Clause & LGPL-3.0"
+ LIC_FILES_CHKSUM = "file://COPYING.BSD;md5=11c65680f637c3df7f58bbc8d133e96e \
+                     file://COPYING.LESSER;md5=12c592fa0bcfff3fb0977b066e9cb69e"
+ DEPENDS = "zeromq"
 -- 
 2.25.1
 
