@@ -1,163 +1,380 @@
-Return-Path: <jk@codeconstruct.com.au>
+Return-Path: <sanakazisk19@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A6C97C4332F
-	for <webhook@archiver.kernel.org>; Thu, 16 Dec 2021 08:32:20 +0000 (UTC)
-Received: from codeconstruct.com.au (codeconstruct.com.au [203.29.241.158])
- by mx.groups.io with SMTP id smtpd.web08.7633.1639643539229117009
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 29B75C433F5
+	for <webhook@archiver.kernel.org>; Thu, 16 Dec 2021 10:53:47 +0000 (UTC)
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
+ [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web12.9164.1639652026738029296
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Dec 2021 00:32:19 -0800
+ Thu, 16 Dec 2021 02:53:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: codeconstruct.com.au,
- ip: 203.29.241.158, mailfrom: jk@codeconstruct.com.au)
-Received: by codeconstruct.com.au (Postfix, from userid 10000)
-	id 61DD02022C; Thu, 16 Dec 2021 16:32:15 +0800 (AWST)
-From: Jeremy Kerr <jk@codeconstruct.com.au>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=hfi8k3l2;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174,
+ mailfrom: sanakazisk19@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id 8so23319285pfo.4
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 16 Dec 2021 02:53:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id;
+        bh=EPm7J0uLvbj+1JFxegob2IudO0IaEk2cw/93OXJaXjg=;
+        b=hfi8k3l20FB2GmDrOS5RZCrNNxBWAeCW8Z2d+P3M5UaiKre4jMLIlyjxFAz666uLE5
+         3Y3B4kNOPBeHezeWHbuwcq2jfiM+b1kWMXFa80dq2ig0hDjvABYyqJqqFRgady0I/bTZ
+         G+U1Ybbiy39cSxZ6EGalDTNaT821VI7532AHdVuHw3SW9G4J+39b//OzJEM30tuurGDP
+         4vwmCZwZPiA3UCNt7ONsvbQ7+kc23NHjcaX/zEQZTSRd+W4fPMbMJVlR1Tl6kqVWcqpX
+         CHLMwXSANgsfZJ2OguarjqDVzdNiktAsNvPBH1O93qCdb75wAyyhMqfIo1UY3mSpGy6F
+         HmLw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=EPm7J0uLvbj+1JFxegob2IudO0IaEk2cw/93OXJaXjg=;
+        b=SWxdPENzFCSbY5UuLm7PQu0OxZVmFbi9ZPJPZqI3DaoJnKLSl7ZRBc+qTkVofZmGZN
+         wCvohh0op8f4g/fAese6386ZNX9xjRwmwhSz5YRD5AaoTGi+U5+3zwljhPk0BB+b1+ns
+         3Srva1IfSeVyXtlKBjL3BTrqmCrCMv1key3Xq8cetx9pdcQU0grliPOs1EO4YHPC44wC
+         8PKMrcd9D52RzgtO6YbDXw+0Bc6n0rhD2m/7IVghoJFIBVrj7QjO7K/iSxuzg8AfrS9T
+         lxSi1/V+ZZIV0hqFykHWLpoAUAJoF2lrRLTWcMDIZ2XM/F+ww0IW9Y4J39pAuqZHL3Fn
+         v8XA==
+X-Gm-Message-State: AOAM530BIqwcoEqBEAidvfPqmOhAzPBLdtCDcbVFNFX8wE2/sZ0C6CkF
+	TgF/OYeqAmqsYgIiXpb6XVbFgycD1LsvpA==
+X-Google-Smtp-Source: 
+ ABdhPJx2END8BTlf816G9WFafwCJvGeDSJpkOv7zPrtuQOgHUzS/L9RDMf4JO+QQmtsxU8xBqsur5Q==
+X-Received: by 2002:a63:5624:: with SMTP id
+ k36mr11661881pgb.503.1639652025814;
+        Thu, 16 Dec 2021 02:53:45 -0800 (PST)
+Received: from localhost.localdomain
+ ([2401:4900:502b:4528:91e:3aef:bc51:b045])
+        by smtp.gmail.com with ESMTPSA id
+ i1sm5068335pgs.50.2021.12.16.02.53.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 16 Dec 2021 02:53:45 -0800 (PST)
+From: Sana Kazi <sanakazisk19@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH 1/2] mctp: upgrade to 18e45b42
-Date: Thu, 16 Dec 2021 16:31:14 +0800
-Message-Id: <20211216083115.417282-1-jk@codeconstruct.com.au>
-X-Mailer: git-send-email 2.33.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Cc: Sana Kazi <sanakazisk19@gmail.com>
+Subject: [oe][meta-oe][dunfell][PATCH] nss: Fix CVE-2021-43527
+Date: Thu, 16 Dec 2021 16:23:03 +0530
+Message-Id: <20211216105303.14467-1-sanakazisk19@gmail.com>
+X-Mailer: git-send-email 2.17.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Dec 2021 08:32:20 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Dec 2021 10:53:47 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94383
+ https://lists.openembedded.org/g/openembedded-devel/message/94384
 
-We now have better handling of local stack configuration at runtime, and
-the 5.15 kernel header change has been integrated.
+Add patch to fix CVE-2021-43527 which causes heap overflow in nss.
 
-Signed-off-by: Jeremy Kerr <jk@codeconstruct.com.au>
+Signed-off-by: Sana Kazi <Sana.Kazi@kpit.com>
+Signed-off-by: Sana Kazi <sanakazisk19@gmail.com>
 ---
- .../0001-build-Adjust-for-kernel-mctp.h.patch | 84 -------------------
- .../recipes-support/mctp/mctp_git.bb          |  6 +-
- 2 files changed, 2 insertions(+), 88 deletions(-)
- delete mode 100644 meta-networking/recipes-support/mctp/mctp/0001-build-=
-Adjust-for-kernel-mctp.h.patch
+ .../nss/nss/CVE-2021-43527.patch              | 283 ++++++++++++++++++
+ meta-oe/recipes-support/nss/nss_3.51.1.bb     |   1 +
+ 2 files changed, 284 insertions(+)
+ create mode 100644 meta-oe/recipes-support/nss/nss/CVE-2021-43527.patch
 
-diff --git a/meta-networking/recipes-support/mctp/mctp/0001-build-Adjust-=
-for-kernel-mctp.h.patch b/meta-networking/recipes-support/mctp/mctp/0001-=
-build-Adjust-for-kernel-mctp.h.patch
-deleted file mode 100644
-index 83bf19770..000000000
---- a/meta-networking/recipes-support/mctp/mctp/0001-build-Adjust-for-ker=
-nel-mctp.h.patch
-+++ /dev/null
-@@ -1,84 +0,0 @@
--From 653eccc918ef993186c312694c288b2a5b39248e Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 5 Nov 2021 13:14:55 -0700
--Subject: [PATCH] build: Adjust for kernel mctp.h
--
--Starting 5.15 kernel has mctp.h as well and provides some of the
--defintions, therefore move the ones we need to provide in this header
--outside the conditional check so its always provided regardless of
--header coming from kernel or not.
--
--Include linux/if_link.h so it can pre-define IFLA_MCTP_UNSPEC and other
--defines and there is a check for conditionally providing them here but
--kernel does not have such a check, so if linux/if_link.h is included
--after this header then we end up with duplicate defines
--
--linux/if_link.h:1267:2: error: redefinition of enumerator 'IFLA_MCTP_UNS=
-PEC'
--        IFLA_MCTP_UNSPEC,
--        ^
--../git/src/mctp.h:74:2: note: previous definition is here
--        IFLA_MCTP_UNSPEC,
--        ^
--
--Upstream-Status: Submitted [https://github.com/CodeConstruct/mctp/pull/2=
-]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/mctp.h | 21 +++++++++++----------
-- 1 file changed, 11 insertions(+), 10 deletions(-)
--
--diff --git a/src/mctp.h b/src/mctp.h
--index 4f73def..e602168 100644
----- a/src/mctp.h
--+++ b/src/mctp.h
--@@ -19,6 +19,7 @@
-- #if HAVE_LINUX_MCTP_H
-- #include <linux/mctp.h>
-- #endif
--+#include <linux/if_link.h>
--=20
-- #ifndef AF_MCTP
-- #define AF_MCTP 45
--@@ -33,10 +34,6 @@
--=20
-- #ifndef MCTP_NET_ANY
--=20
---#ifndef MAX_ADDR_LEN
---#define MAX_ADDR_LEN 32
---#endif
---
-- typedef uint8_t			mctp_eid_t;
--=20
-- struct mctp_addr {
--@@ -53,6 +50,16 @@ struct sockaddr_mctp {
-- 	uint8_t			__smctp_pad1;
-- };
--=20
--+#define MCTP_NET_ANY 0
--+#define MCTP_ADDR_ANY 0xff
--+#define MCTP_TAG_OWNER 0x08
--+
--+#endif /* MCTP_NET_ANY */
--+
--+#ifndef MAX_ADDR_LEN
--+#define MAX_ADDR_LEN 32
--+#endif
--+
-- struct sockaddr_mctp_ext {
-- 	struct sockaddr_mctp	smctp_base;
-- 	int			smctp_ifindex;
--@@ -61,12 +68,6 @@ struct sockaddr_mctp_ext {
-- 	unsigned char		smctp_haddr[MAX_ADDR_LEN];
-- };
--=20
---#define MCTP_NET_ANY 0
---#define MCTP_ADDR_ANY 0xff
---#define MCTP_TAG_OWNER 0x08
---
---#endif /* MCTP_NET_ANY */
---
-- #ifndef IFLA_MCTP_MAX
--=20
-- /* From if_link.h */
----=20
--2.33.1
--
-diff --git a/meta-networking/recipes-support/mctp/mctp_git.bb b/meta-netw=
-orking/recipes-support/mctp/mctp_git.bb
-index 50d84d204..6cc5b1480 100644
---- a/meta-networking/recipes-support/mctp/mctp_git.bb
-+++ b/meta-networking/recipes-support/mctp/mctp_git.bb
-@@ -7,11 +7,9 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4cc91856b08b0=
-94b4f406a29dc61db21"
-=20
- PV =3D "0.1+git${SRCPV}"
-=20
--SRCREV =3D "072bafe725c50329f99cf9d3b2624e8799e8163a"
-+SRCREV =3D "18e45b42e672a652c067cbf66098df9022103f23"
-=20
--SRC_URI =3D "git://github.com/CodeConstruct/mctp;branch=3Dmain;protocol=3D=
-https \
--           file://0001-build-Adjust-for-kernel-mctp.h.patch \
--          "
-+SRC_URI =3D "git://github.com/CodeConstruct/mctp;branch=3Dmain;protocol=3D=
-https"
-=20
- S =3D "${WORKDIR}/git"
-=20
---=20
-2.33.0
+diff --git a/meta-oe/recipes-support/nss/nss/CVE-2021-43527.patch b/meta-oe/recipes-support/nss/nss/CVE-2021-43527.patch
+new file mode 100644
+index 000000000..cf3ea63ca
+--- /dev/null
++++ b/meta-oe/recipes-support/nss/nss/CVE-2021-43527.patch
+@@ -0,0 +1,283 @@
++Description: fix heap overflow when verifying DSA/RSA-PSS DER-encoded signatures
++Origin: Provided by Mozilla
++
++CVE: CVE-2021-43527
++Upstream-Status: Backport [http://archive.ubuntu.com/ubuntu/pool/main/n/nss/nss_3.35-2ubuntu2.13.debian.tar.xz]
++Comment: Refreshed hunk 1 and 6 due to fuzz
++Signed-off-by: Sana Kazi <Sana.Kazi@kpit.com>
++
++--- a/nss/lib/cryptohi/secvfy.c
+++++ b/nss/lib/cryptohi/secvfy.c
++@@ -164,6 +164,37 @@
++         PR_FALSE /*XXX: unsafeAllowMissingParameters*/);
++ }
++ 
+++static unsigned int
+++checkedSignatureLen(const SECKEYPublicKey *pubk)
+++{
+++    unsigned int sigLen = SECKEY_SignatureLen(pubk);
+++    if (sigLen == 0) {
+++        /* Error set by SECKEY_SignatureLen */
+++        return sigLen;
+++    }
+++    unsigned int maxSigLen;
+++    switch (pubk->keyType) {
+++        case rsaKey:
+++        case rsaPssKey:
+++            maxSigLen = (RSA_MAX_MODULUS_BITS + 7) / 8;
+++            break;
+++        case dsaKey:
+++            maxSigLen = DSA_MAX_SIGNATURE_LEN;
+++            break;
+++        case ecKey:
+++            maxSigLen = 2 * MAX_ECKEY_LEN;
+++            break;
+++        default:
+++            PORT_SetError(SEC_ERROR_UNSUPPORTED_KEYALG);
+++            return 0;
+++    }
+++    if (sigLen > maxSigLen) {
+++        PORT_SetError(SEC_ERROR_INVALID_KEY);
+++        return 0;
+++    }
+++    return sigLen;
+++}
+++
++ /*
++  * decode the ECDSA or DSA signature from it's DER wrapping.
++  * The unwrapped/raw signature is placed in the buffer pointed
++@@ -174,38 +205,38 @@ decodeECorDSASignature(SECOidTag algid,
++                        unsigned int len)
++ {
++     SECItem *dsasig = NULL; /* also used for ECDSA */
++-    SECStatus rv = SECSuccess;
++ 
++-    if ((algid != SEC_OID_ANSIX9_DSA_SIGNATURE) &&
++-        (algid != SEC_OID_ANSIX962_EC_PUBLIC_KEY)) {
++-        if (sig->len != len) {
++-            PORT_SetError(SEC_ERROR_BAD_DER);
++-            return SECFailure;
+++    /* Safety: Ensure algId is as expected and that signature size is within maxmimums */
+++    if (algid == SEC_OID_ANSIX9_DSA_SIGNATURE) {
+++        if (len > DSA_MAX_SIGNATURE_LEN) {
+++            goto loser;
++         }
++-
++-        PORT_Memcpy(dsig, sig->data, sig->len);
++-        return SECSuccess;
++-    }
++-
++-    if (algid == SEC_OID_ANSIX962_EC_PUBLIC_KEY) {
+++    } else if (algid == SEC_OID_ANSIX962_EC_PUBLIC_KEY) {
++         if (len > MAX_ECKEY_LEN * 2) {
++-            PORT_SetError(SEC_ERROR_BAD_DER);
++-            return SECFailure;
+++            goto loser;
++         }
++-    }
++-    dsasig = DSAU_DecodeDerSigToLen((SECItem *)sig, len);
++-
++-    if ((dsasig == NULL) || (dsasig->len != len)) {
++-        rv = SECFailure;
++     } else {
++-        PORT_Memcpy(dsig, dsasig->data, dsasig->len);
+++        goto loser;
++     }
++ 
++-    if (dsasig != NULL)
+++    /* Decode and pad to length */
+++    dsasig = DSAU_DecodeDerSigToLen((SECItem *)sig, len);
+++    if (dsasig == NULL) {
+++        goto loser;
+++    }
+++    if (dsasig->len != len) {
++         SECITEM_FreeItem(dsasig, PR_TRUE);
++-    if (rv == SECFailure)
++-        PORT_SetError(SEC_ERROR_BAD_DER);
++-    return rv;
+++        goto loser;
+++    }
+++
+++    PORT_Memcpy(dsig, dsasig->data, len);
+++    SECITEM_FreeItem(dsasig, PR_TRUE);
+++
+++    return SECSuccess;
+++
+++loser:
+++    PORT_SetError(SEC_ERROR_BAD_DER);
+++    return SECFailure;
++ }
++ 
++ const SEC_ASN1Template hashParameterTemplate[] =
++@@ -231,7 +262,7 @@ SECStatus
++ sec_DecodeSigAlg(const SECKEYPublicKey *key, SECOidTag sigAlg,
++                  const SECItem *param, SECOidTag *encalg, SECOidTag *hashalg)
++ {
++-    int len;
+++    unsigned int len;
++     PLArenaPool *arena;
++     SECStatus rv;
++     SECItem oid;
++@@ -458,48 +489,52 @@ vfy_CreateContext(const SECKEYPublicKey
++     cx->pkcs1RSADigestInfo = NULL;
++     rv = SECSuccess;
++     if (sig) {
++-        switch (type) {
++-            case rsaKey:
++-                rv = recoverPKCS1DigestInfo(hashAlg, &cx->hashAlg,
++-                                            &cx->pkcs1RSADigestInfo,
++-                                            &cx->pkcs1RSADigestInfoLen,
++-                                            cx->key,
++-                                            sig, wincx);
++-                break;
++-            case rsaPssKey:
++-                sigLen = SECKEY_SignatureLen(key);
++-                if (sigLen == 0) {
++-                    /* error set by SECKEY_SignatureLen */
++-                    rv = SECFailure;
+++        rv = SECFailure;
+++        if (type == rsaKey) {
+++            rv = recoverPKCS1DigestInfo(hashAlg, &cx->hashAlg,
+++                                        &cx->pkcs1RSADigestInfo,
+++                                        &cx->pkcs1RSADigestInfoLen,
+++                                        cx->key,
+++                                        sig, wincx);
+++        } else {
+++            sigLen = checkedSignatureLen(key);
+++            /* Check signature length is within limits */
+++            if (sigLen == 0) {
+++                /* error set by checkedSignatureLen */
+++                rv = SECFailure;
+++                goto loser;
+++            }
+++            if (sigLen > sizeof(cx->u)) {
+++                PORT_SetError(SEC_ERROR_BAD_SIGNATURE);
+++                rv = SECFailure;
+++                goto loser;
+++            }
+++            switch (type) {
+++                case rsaPssKey:
+++                    if (sig->len != sigLen) {
+++                        PORT_SetError(SEC_ERROR_BAD_SIGNATURE);
+++                        rv = SECFailure;
+++                        goto loser;
+++                    }
+++                    PORT_Memcpy(cx->u.buffer, sig->data, sigLen);
+++                    rv = SECSuccess;
++                     break;
++-                }
++-                if (sig->len != sigLen) {
++-                    PORT_SetError(SEC_ERROR_BAD_SIGNATURE);
++-                    rv = SECFailure;
+++                case ecKey:
+++                case dsaKey:
+++                    /* decodeECorDSASignature will check sigLen == sig->len after padding */
+++                    rv = decodeECorDSASignature(encAlg, sig, cx->u.buffer, sigLen);
++                     break;
++-                }
++-                PORT_Memcpy(cx->u.buffer, sig->data, sigLen);
++-                break;
++-            case dsaKey:
++-            case ecKey:
++-                sigLen = SECKEY_SignatureLen(key);
++-                if (sigLen == 0) {
++-                    /* error set by SECKEY_SignatureLen */
+++                default:
+++                    /* Unreachable */
++                     rv = SECFailure;
++-                    break;
++-                }
++-                rv = decodeECorDSASignature(encAlg, sig, cx->u.buffer, sigLen);
++-                break;
++-            default:
++-                rv = SECFailure;
++-                PORT_SetError(SEC_ERROR_UNSUPPORTED_KEYALG);
++-                break;
+++                    goto loser;
+++            }
+++        }
+++        if (rv != SECSuccess) {
+++            goto loser;
++         }
++     }
++ 
++-    if (rv)
++-        goto loser;
++-
++     /* check hash alg again, RSA may have changed it.*/
++     if (HASH_GetHashTypeByOidTag(cx->hashAlg) == HASH_AlgNULL) {
++         /* error set by HASH_GetHashTypeByOidTag */
++@@ -634,11 +669,16 @@ VFY_EndWithSignature(VFYContext *cx, SEC
++     switch (cx->key->keyType) {
++         case ecKey:
++         case dsaKey:
++-            dsasig.data = cx->u.buffer;
++-            dsasig.len = SECKEY_SignatureLen(cx->key);
+++            dsasig.len = checkedSignatureLen(cx->key);
++             if (dsasig.len == 0) {
++                 return SECFailure;
++             }
+++            if (dsasig.len > sizeof(cx->u)) {
+++                PORT_SetError(SEC_ERROR_BAD_SIGNATURE);
+++                return SECFailure;
+++            }
+++            dsasig.data = cx->u.buffer;
+++
++             if (sig) {
++                 rv = decodeECorDSASignature(cx->encAlg, sig, dsasig.data,
++                                             dsasig.len);
++@@ -667,8 +698,13 @@
++                 }
++ 
++                 rsasig.data = cx->u.buffer;
++-                rsasig.len = SECKEY_SignatureLen(cx->key);
+++                rsasig.len = checkedSignatureLen(cx->key);		
++                 if (rsasig.len == 0) {
+++                    /* Error set by checkedSignatureLen */
+++                    return SECFailure;
+++                }
+++                if (rsasig.len > sizeof(cx->u)) {
+++                    PORT_SetError(SEC_ERROR_BAD_SIGNATURE);			
++                     return SECFailure;
++                 }
++                 if (sig) {
++@@ -743,7 +788,6 @@ vfy_VerifyDigest(const SECItem *digest,
++     SECStatus rv;
++     VFYContext *cx;
++     SECItem dsasig; /* also used for ECDSA */
++-
++     rv = SECFailure;
++ 
++     cx = vfy_CreateContext(key, sig, encAlg, hashAlg, NULL, wincx);
++@@ -751,19 +795,25 @@ vfy_VerifyDigest(const SECItem *digest,
++         switch (key->keyType) {
++             case rsaKey:
++                 rv = verifyPKCS1DigestInfo(cx, digest);
+++                /* Error (if any) set by verifyPKCS1DigestInfo */
++                 break;
++-            case dsaKey:
++             case ecKey:
+++            case dsaKey:
++                 dsasig.data = cx->u.buffer;
++-                dsasig.len = SECKEY_SignatureLen(cx->key);
+++                dsasig.len = checkedSignatureLen(cx->key);
++                 if (dsasig.len == 0) {
+++                    /* Error set by checkedSignatureLen */
+++                    rv = SECFailure;
++                     break;
++                 }
++-                if (PK11_Verify(cx->key, &dsasig, (SECItem *)digest, cx->wincx) !=
++-                    SECSuccess) {
+++                if (dsasig.len > sizeof(cx->u)) {
+++                    PORT_SetError(SEC_ERROR_BAD_SIGNATURE);
+++                    rv = SECFailure;
+++                    break;
+++                }
+++                rv = PK11_Verify(cx->key, &dsasig, (SECItem *)digest, cx->wincx);
+++                if (rv != SECSuccess) {
++                     PORT_SetError(SEC_ERROR_BAD_SIGNATURE);
++-                } else {
++-                    rv = SECSuccess;
++                 }
++                 break;
++             default:
+diff --git a/meta-oe/recipes-support/nss/nss_3.51.1.bb b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+index 14f670c32..f03473b1a 100644
+--- a/meta-oe/recipes-support/nss/nss_3.51.1.bb
++++ b/meta-oe/recipes-support/nss/nss_3.51.1.bb
+@@ -39,6 +39,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
+            file://CVE-2020-6829_12400.patch \
+            file://CVE-2020-12403_1.patch \
+            file://CVE-2020-12403_2.patch \
++           file://CVE-2021-43527.patch \
+            "
+ 
+ SRC_URI[md5sum] = "6acaf1ddff69306ae30a908881c6f233"
+-- 
+2.17.1
 
 
