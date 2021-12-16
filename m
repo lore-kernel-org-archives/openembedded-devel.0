@@ -2,62 +2,63 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0DD2AC4332F
-	for <webhook@archiver.kernel.org>; Thu, 16 Dec 2021 15:23:40 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com
- [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web08.11881.1639668219527853815
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A6B6C433EF
+	for <webhook@archiver.kernel.org>; Thu, 16 Dec 2021 15:23:41 +0000 (UTC)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com
+ [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.web08.11882.1639668220381422069
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Dec 2021 07:23:39 -0800
+ Thu, 16 Dec 2021 07:23:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Ba2HOcvA;
- spf=pass (domain: gmail.com, ip: 209.85.214.175,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=GrhGzB2V;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id c6so841869plg.3
+Received: by mail-pj1-f44.google.com with SMTP id
+ z9-20020a17090a7b8900b001b13558eadaso1213977pjc.4
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Dec 2021 07:23:39 -0800 (PST)
+ Thu, 16 Dec 2021 07:23:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=4jq7p5GDh+EOA3VfsqRY8n36HNiVZi7z9NPOPZUY23E=;
-        b=Ba2HOcvAGDlI8r9do4es5jXECm2DbOnhqb12P6LDsJrErUnXKPA/C7ZZ/3e6IyyHt0
-         YPl3ss5zJ1DdPuC+kXF0quqlQWrMxPgurAdoaxvXAbd35mgQ3W47e/4OZvLOri8FXiGD
-         i8O/0CgGBbbpU43h7vLXb2vWQG3lY9hK+Na5zzOsos65k0KHJQBJeLYxDafl/EHrvlvP
-         vuol1ZdQCoW3tDDs3g/u37Qp++Q4wqcSGXrCZ7nswyN6reQRMznuytegcruybWOVm5V8
-         VK0RDTkPjiszJv3uhWTn1QMNT1O7HWAWJ4Wd9NmVhZ8NQdmqzt5LzGBBvEx4GmmWmzLS
-         EoeA==
+        bh=dibHPr2t8BYo2ElJ0Zo4lJ2Qfe7tyb2n/cIrdPZk9Rg=;
+        b=GrhGzB2V/QZ+hA7rCQYFzGAXKUOkk4D1x1uJrPladahY6hdi9G33KCV4CER6wjHL7A
+         3kiJKWRW/6+HttAIBK/MTY7X3jIyyMFL2OA9RptOZL2Yva4HnW9aaTunp1+hfZ4+ONGT
+         wnzl/rnYwD7A1b2xxo7kuC5m7DhMEKPeb1HaAEgOGjtnlTKUm0uy8x/N/DEIENgX/b9+
+         D9wHTZnw4hDF0EmXDB3XTHBKLURsvO0asll1EIgRj5MRoQTmrhv4J/NYg9/WSdw35BDm
+         Rq5cv6MOL2376vSu4Naq+bzNH+aMmQvcd43RB8rHhVjT0MaSIibJf334UkeNdCgpY3je
+         10Dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=4jq7p5GDh+EOA3VfsqRY8n36HNiVZi7z9NPOPZUY23E=;
-        b=RqNFpbsrWDnRs1OSkdaNbVPqXRk8WoRe4kKj7hEI7jonHPceibBC62p5CTMM6uNhGb
-         3pMUKCJSmfUel/TE/zJ5SY5GyOA6JIixsguSjVO/PC3ivvQhnJrcU3Ws9OMqLcLGJorM
-         TR9mEquV9gKXN2qqSNr3AfRMkPTgXHRDAmbS6fxxtP8QcHG7NE8yXa76izaTu4Os19hy
-         0eSmzHasuYTQGVhjHLXdGB/O6gF77oNA9AiWtEnJL/Wk47Tf2gevdErxaYTZpeyhUCIA
-         cf6W1Jze6t0zhInP9j9T8tpRPkziN8h/ozSGSw9Wz1WP9ney9/UcovREBTkbIhkfAfVz
-         RMjg==
-X-Gm-Message-State: AOAM531ryhEFIr0Vz8rUmlMHwXHwH1ONkbZj0Nx7HNCp+L7dCqMZ0Kv1
-	PCnsKSzgAxKkrUi0E2/KdlOBNqn+d+s=
+        bh=dibHPr2t8BYo2ElJ0Zo4lJ2Qfe7tyb2n/cIrdPZk9Rg=;
+        b=PxVZkUqun4f89RR6kVcjYKenBq46DLVaDbuuyx5Ps5RCNOowZMg0cXh4J4W2LoUSJq
+         DhusLvlPO7u7lmXIrqSEiqn0s1bQiiM4SvSD7luTW2koIFzdjxLbfoim8MHLX9uuTuDT
+         sFNW4FXc3ZS/RwVsgPlMTKuw3YYXJUUlYsxBqLBUmbP5hxK8e2kd59lev/BK/DzY2AEL
+         VAUHq/DIE3hjXOEttBnwAtPkfFb6WLZl+UMtfqe+wVB0lpZpQvsMR5LfZO2zB5YTW8N6
+         uwsdDO1RGSzOVu+8tfiDoDfN0907tmUi28cPlWCWo9Cakxx9J61oEmuw3/r6j9O+FFWY
+         bM/w==
+X-Gm-Message-State: AOAM5336KNIgofL+Z0GnDSkzm3WvRSrJyHG6IAy02+xZXu40froGQF7J
+	wZPpdKvBWNuUtafoRwNMkeAP3Nojxkg=
 X-Google-Smtp-Source: 
- ABdhPJzSykyJWfRl+cadBefSGzFKR7FKPeeT7MSvbmEEHCxypivIjDprkAjuYQTsCSJF5KvZh8x8RQ==
-X-Received: by 2002:a17:902:db12:b0:142:3ac:7ec3 with SMTP id
- m18-20020a170902db1200b0014203ac7ec3mr17160516plx.2.1639668218834;
-        Thu, 16 Dec 2021 07:23:38 -0800 (PST)
+ ABdhPJxge/ut+6QOf6JdR4Rw0AWdLQMW4FT28+Y/+0sLT5TmnfcNzwZCyIqKXckuPcqmO4IvWykCYg==
+X-Received: by 2002:a17:903:230d:b0:141:e3ce:2738 with SMTP id
+ d13-20020a170903230d00b00141e3ce2738mr16612706plh.57.1639668219759;
+        Thu, 16 Dec 2021 07:23:39 -0800 (PST)
 Received: from keaua.hsd1.ca.comcast.net
  ([2601:202:4180:a5c0:7d7:ca51:b150:8ee7])
         by smtp.gmail.com with ESMTPSA id
- k15sm6795703pff.215.2021.12.16.07.23.38
+ k15sm6795703pff.215.2021.12.16.07.23.39
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Dec 2021 07:23:38 -0800 (PST)
+        Thu, 16 Dec 2021 07:23:39 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [honister 14/18] python3-lxml: set precise BSD license
-Date: Thu, 16 Dec 2021 07:23:19 -0800
+Subject: [honister 15/18] python3-posix-ipc: set precise BSD license
+Date: Thu, 16 Dec 2021 07:23:20 -0800
 Message-Id: 
- <f9707f700ec6b7f2128ceebf3b9ffec844b4a15e.1639668121.git.akuster808@gmail.com>
+ <2def8912aabde1433175e414ef18ef1a50eb02aa.1639668121.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1639668121.git.akuster808@gmail.com>
 References: <cover.1639668121.git.akuster808@gmail.com>
@@ -66,41 +67,36 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Dec 2021 15:23:40 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Dec 2021 15:23:41 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94399
+ https://lists.openembedded.org/g/openembedded-devel/message/94400
 
 From: Ross Burton <ross@burtonini.com>
 
 "BSD" is ambiguous, use the precise license BSD-3-Clause.
 
-Also update the HOMEPAGE.
-
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-(cherry picked from commit 45e5b27db6f34cefeb4d66197161fbfa9ebd476a)
+(cherry picked from commit 4b526f42ed8db2c45bdfa7d1ba0a37e444676e1f)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-lxml_4.6.3.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-python/recipes-devtools/python/python3-posix-ipc_1.0.5.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-lxml_4.6.3.bb b/meta-python/recipes-devtools/python/python3-lxml_4.6.3.bb
-index 669c2eaeeb..d5594847f4 100644
---- a/meta-python/recipes-devtools/python/python3-lxml_4.6.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-lxml_4.6.3.bb
-@@ -4,9 +4,9 @@ libxslt libraries. It provides safe and convenient access to these \
- libraries using the ElementTree API. It extends the ElementTree API \
- significantly to offer support for XPath, RelaxNG, XML Schema, XSLT, \
- C14N and much more."
--HOMEPAGE = "http://codespeak.net/lxml"
-+HOMEPAGE = "https://lxml.de/"
+diff --git a/meta-python/recipes-devtools/python/python3-posix-ipc_1.0.5.bb b/meta-python/recipes-devtools/python/python3-posix-ipc_1.0.5.bb
+index 2377bd5258..c46881cd47 100644
+--- a/meta-python/recipes-devtools/python/python3-posix-ipc_1.0.5.bb
++++ b/meta-python/recipes-devtools/python/python3-posix-ipc_1.0.5.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "POSIX IPC primitives (semaphores, shared memory and message queues) for Python"
+ HOMEPAGE = "http://semanchuk.com/philip/posix_ipc/"
  SECTION = "devel/python"
--LICENSE = "BSD & GPLv2 & MIT & PSF"
-+LICENSE = "BSD-3-Clause & GPLv2 & MIT & PSF"
- LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=e4c045ebad958ead4b48008f70838403 \
-                     file://doc/licenses/elementtree.txt;md5=eb34d036a6e3d56314ee49a6852ac891 \
-                     file://doc/licenses/BSD.txt;md5=700a1fc17f4797d4f2d34970c8ee694b \
+-LICENSE = "BSD"
++LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=dc089fb2f37e90799a54c19a20c9880f"
+ 
+ PYPI_PACKAGE = "posix_ipc"
 -- 
 2.25.1
 
