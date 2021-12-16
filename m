@@ -2,62 +2,63 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F455C43217
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E526C4332F
 	for <webhook@archiver.kernel.org>; Thu, 16 Dec 2021 15:23:37 +0000 (UTC)
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
- [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.web11.11754.1639668216142939077
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com
+ [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web11.11755.1639668216766355849
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 16 Dec 2021 07:23:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=fw3aAQ15;
- spf=pass (domain: gmail.com, ip: 209.85.215.171,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=h5JeisM/;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id d11so14684646pgl.1
+Received: by mail-pj1-f54.google.com with SMTP id
+ a11-20020a17090a854b00b001b11aae38d6so3555729pjw.2
         for <openembedded-devel@lists.openembedded.org>;
  Thu, 16 Dec 2021 07:23:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=XqFKIvSuNM7fnnBjhurqxjlsHZpHnJH/FVCpg3KQrfc=;
-        b=fw3aAQ15vwtUW3hLjZpNggEA+JFbfWLJE6uYXmFasApX5kxQLpw8m9Ma/zh/CaJ1kf
-         vWZ2vaceHqRixtt+flFY9uP+JKkhakemmqfDVsZA5JMsoB8MqcpYroZLpdxucCe9TFdz
-         f4i8da8EJvuCD1JgkU2zbcpaijDaRXDUoQLMMFAQ9Z6jgsI7unA+TvpgkQoPPjryePdR
-         c//hqDlnaYJ2XibqeJpPGMzLlkBPHZMzBufeZPMRbsQ9/eoxkb64GN/KHQmDmV/NunYk
-         JoBEmyHVq/1ntMDdX8B/dk58HFqbk+XhOI98DLAhnoY/LxnK/27GolL1dvCHfRvTOdqf
-         4PkQ==
+        bh=VuHs06E+YS/kl54O7w4Nkso4129ZQgKZQvFoLabGXfQ=;
+        b=h5JeisM/cte5EI+xYapqGxpAngiqJtD64XZ3iK6/jZ8AvxG2PZMC8/1o5x60UNVA3U
+         y7yPsFYBhgI7EZZle2H+sX7Bl3V9Q8mwQyvClzBqn/Ik2B4alW8CBG4Tmf6KIAyZQZjN
+         wUKWo2TzMCUqxGKG70hoLgyE7yg8mM7C1FK8be6F0KWn+NKdr+iMRnTtH61LaY+UC/Po
+         egwI0SwK2O6hBdeHs14NpVHQpsQ6k6Q0OBde3YVuU4CjVlwhrw/b3PvA+pRSljqDtCKp
+         7913YDhAIM3o2e7p9eqm1WI0Fsl7V4ZeA3Lpa20kz9jkxePrMjthZyW8mXGJc6XCMDbo
+         OTCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=XqFKIvSuNM7fnnBjhurqxjlsHZpHnJH/FVCpg3KQrfc=;
-        b=z42ozbcaqr+L6ZiB6W1mTsSh+3i2UulDCirK4+Hfip3b/5/o/6S9aucOj+k00EdM78
-         U5+xRA5hhiUNiAJhFD4CYylS20KroDvLj0/GJrHDSjgWrHPkW/cA3/SwsyFiMSU72bTu
-         L3Y1zgneU2t1CsvKDhueNTpMkfi5s+i16fLxnmIimCEA8RDWhI0T9+q5iP13mCFjRh1M
-         43or1xzG03lu//NRR9QDgeJYuRMQOxp3xc7DOj0xG2VAhIrWrB4LkW471AIlel/KUIfv
-         Lc4LQUiQOSoWU3c1sX1MsnHXh2z18n9ahMswQsjYAM6JEpQ4ZCUnEF19KG6swntsrPLO
-         7UtA==
-X-Gm-Message-State: AOAM531KxIznMKnXJOwj/Zzk52D85TR2a7c5S75TiSyxO3NW11V7N+uv
-	O+MoQpw7EMlpGEaH8gqconIcSIsGymQ=
+        bh=VuHs06E+YS/kl54O7w4Nkso4129ZQgKZQvFoLabGXfQ=;
+        b=eRMGj0n8zP+JXogzXENC6S7VzLcsMv36rmsBTUG4MI/VWtlzp6QSKIWV80JDPRFzM4
+         GZaemv/TJx7vB7FHjELjU1P1HpPMkEdX0FqtfqqoyWpRmBZX8NO7Xl9QQOjBTpiM3meL
+         9XDvxMM2XAgIsk7wCDYMADJcU5fVDu5XZF4JoUccmm28baWAmD1gQINjxUEgI48zxR9j
+         eIHsXagNeUcCKuF2cqaJVRfYXjkm/r8dMeyRiZw7/EkEMgpWhud5zku/F0aNme2/QcKx
+         gZGrkhfz8Ch0NaKs8Shr7+hFwbKRV5f+p+WRuLJ1eDAG+Z0Mphhw2C3ybaVdX030oXKI
+         okcQ==
+X-Gm-Message-State: AOAM532bltmCJJJOJooDKghVePq6fRGnUn1c7epa7GUwndIFpsJw8cU8
+	ZDN7osrQm6BSKXIO7jH3ct2/1PPxsH4=
 X-Google-Smtp-Source: 
- ABdhPJzlnZa/6Q/QC2n3mURK/BXWcKOCzzy2kgEArlbqTsYGGW65alB3kzKZe2WqZXWs6DoXL5qwcg==
-X-Received: by 2002:aa7:9af4:0:b0:4a4:cd7f:2732 with SMTP id
- y20-20020aa79af4000000b004a4cd7f2732mr14699468pfp.60.1639668215527;
-        Thu, 16 Dec 2021 07:23:35 -0800 (PST)
+ ABdhPJwFjvmADhKMi3wow+57+Z2M/cFO1iHisxZRrKtRTQfMNQlUAqwDJa6GwCbUANZu2yDHNH+WMw==
+X-Received: by 2002:a17:903:230c:b0:148:a7a1:e697 with SMTP id
+ d12-20020a170903230c00b00148a7a1e697mr8842529plh.154.1639668216149;
+        Thu, 16 Dec 2021 07:23:36 -0800 (PST)
 Received: from keaua.hsd1.ca.comcast.net
  ([2601:202:4180:a5c0:7d7:ca51:b150:8ee7])
         by smtp.gmail.com with ESMTPSA id
- k15sm6795703pff.215.2021.12.16.07.23.34
+ k15sm6795703pff.215.2021.12.16.07.23.35
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Thu, 16 Dec 2021 07:23:35 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [honister 10/18] python3-cryptography: set precise BSD license
-Date: Thu, 16 Dec 2021 07:23:15 -0800
+Subject: [honister 11/18] python3-crypto-vectors: set precise BSD license
+Date: Thu, 16 Dec 2021 07:23:16 -0800
 Message-Id: 
- <85bd2259782464ff89c2ae9de8f0fe82a77b2587.1639668121.git.akuster808@gmail.com>
+ <a9a50f06e1e03d7696254696caab420e154d0888.1639668121.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1639668121.git.akuster808@gmail.com>
 References: <cover.1639668121.git.akuster808@gmail.com>
@@ -68,7 +69,7 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 16 Dec 2021 15:23:37 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94395
+ https://lists.openembedded.org/g/openembedded-devel/message/94396
 
 From: Ross Burton <ross@burtonini.com>
 
@@ -77,28 +78,28 @@ From: Ross Burton <ross@burtonini.com>
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-(cherry picked from commit 378dbb135b4ce6f44cf647e8aa08f01497c160cb)
+(cherry picked from commit cf172e66fe8f0ba6f676beb1eae6efb7c00d8b1a)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-devtools/python/python3-cryptography_3.3.2.bb   | 6 ++++--
+ .../python/python3-cryptography-vectors_3.4.8.bb            | 6 ++++--
  1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cryptography_3.3.2.bb b/meta-python/recipes-devtools/python/python3-cryptography_3.3.2.bb
-index baec105a3e..6c70284564 100644
---- a/meta-python/recipes-devtools/python/python3-cryptography_3.3.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-cryptography_3.3.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.8.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.8.bb
+index 2fb48f3cf7..25ff63b5eb 100644
+--- a/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.8.bb
++++ b/meta-python/recipes-devtools/python/python3-cryptography-vectors_3.4.8.bb
 @@ -1,8 +1,10 @@
- SUMMARY = "Provides cryptographic recipes and primitives to python developers"
+ SUMMARY = "Test vectors for the cryptography package."
  HOMEPAGE = "https://cryptography.io/"
  SECTION = "devel/python"
 -LICENSE = "Apache-2.0 | BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=bf405a8056a6647e7d077b0e7bc36aba"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
 +LICENSE = "Apache-2.0 | BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=bf405a8056a6647e7d077b0e7bc36aba \
++LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4 \
 +                    file://LICENSE.APACHE;md5=4e168cce331e5c827d4c2b68a6200e1b \
 +                    file://LICENSE.BSD;md5=5ae30ba4123bc4f2fa49aa0b0dce887b"
  
- LDSHARED += "-pthread"
+ SRC_URI[sha256sum] = "4c84410257993d3de058b44b777a49e1da2ae35ebea2970a360c7e3aa0f580f2"
  
 -- 
 2.25.1
