@@ -1,115 +1,185 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AE36FC433EF
-	for <webhook@archiver.kernel.org>; Fri, 17 Dec 2021 02:24:03 +0000 (UTC)
-Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.113])
- by mx.groups.io with SMTP id smtpd.web08.1373.1639707842785231957
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DBF07C433EF
+	for <webhook@archiver.kernel.org>; Fri, 17 Dec 2021 02:28:24 +0000 (UTC)
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com
+ [209.85.160.174])
+ by mx.groups.io with SMTP id smtpd.web12.1455.1639708104123116780
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Dec 2021 18:24:03 -0800
+ Thu, 16 Dec 2021 18:28:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=t+LFF/q8;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.113,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1639707840; i=@fujitsu.com;
-	bh=jkSO0AQlObm+dbvFJHOPxMqQ2ViklURUxUuyREXR84k=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=t+LFF/q8u5kyCHenKokkkz7GupMXDOPkIKTTeHsEnBubp8QYXlKiwgksC4MWwjPmC
-	 XCWN2CG9J3vj9TDm8r1ni6sQ0MFZdRGxwZE820lZkPGS19eWivXfnI4JKv1dxL5OwI
-	 PXTyUikkLQYcAKtYZyv5AMO1DCyCUJZrknUyDSIclZhTfuwUnCAFMiNVQDUJD6F6w0
-	 8V763Kbe77/fpGEp3GBoWrL+dgf/FOl+Tybi9tl4+VMDBr2MD/EbKHWXNiupKFqf58
-	 UpV6ylf9Qv0PdhGLtzpLfbw/aNM0dnYuer4VrruK5rfHv0/ESdcMAR7CpXhCcnO0LI
-	 ZfbO7wyYhc0uQ==
-Received: from [100.115.68.153] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-a.eu-central-1.aws.ess.symcld.net id
- 93/2D-07141-0C4FBB16; Fri, 17 Dec 2021 02:24:00 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrGIsWRWlGSWpSXmKPExsViZ8ORqHvgy+5
-  Eg/tvuC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oxtu++wFHxnr3iyfQ9bA+Ms9i5GLg4hgSeM
-  Env6u9i6GDmBnAtMEr1PCiESJxglpnxbxASSYBNQk5h+6wYriC0ioC+xdPYeZhCbWUBF4sXvH
-  nYQW1ggWOLs72NgNouAqsTPQyvAangFnCTOvJ0LFpcQUJCY8vA9VFxQ4uTMJywQcyQkDr54wQ
-  xRoygx+3IzC4RdITFrVhsThK0mcfXcJuYJjPyzkLTPQtK+gJFpFaNdUlFmekZJbmJmjq6hgYG
-  uoaGprpmZrqGpqV5ilW6iXmqpbnJqXklRIlBaL7G8WC+1uFivuDI3OSdFLy+1ZBMjMDhTip1m
-  72Dc0fdT7xCjJAeTkihv/IXdiUJ8SfkplRmJxRnxRaU5qcWHGGU4OJQkeKs/AeUEi1LTUyvSM
-  nOAkQKTluDgURLhZQdJ8xYXJOYWZ6ZDpE4xKkqJ8x77DJQQAElklObBtcGi8xKjrJQwLyMDA4
-  MQT0FqUW5mCar8K0ZxDkYlYd4PION5MvNK4Ka/AlrMBLQ4PAlscUkiQkqqgWmHl2a98qWdAVb
-  fcgtck/Y31nraeTTUv1L4PSP8lr+U556Hdg8Xd/9+07VYR7d2e1u2qX1D86WXibsStp6UfTXf
-  XPFL0/zbsaZ6/M36oTxCeclHnzdzTrTY+sPrwg+O1i8vo1OMec1CRQ3nseSq5m/pOFvVzx//t
-  n61xZLC45v32DHdv7QwIW9pUJfyBJ2nkhaflHQdhH5u3mfP5ckQeDGu8nqNwm/Fm5Oj+tdeuf
-  7+kPSCEB33xcV64rrfvy4rWydhfKe1OHP1D5cct/WzRE98unb103z3aeu/Ra057vBz9QPHxdP
-  NG0Uj2DMeiESymK9ub5M/LDsj4dS9c2a35i2etjpcwe3ZlljVDbcXGSuxFGckGmoxFxUnAgD7
-  zJhZSQMAAA==
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-22.tower-528.messagelabs.com!1639707839!16146!1
-X-Originating-IP: [62.60.8.97]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.7; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 25148 invoked from network); 17 Dec 2021 02:24:00 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-22.tower-528.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 17 Dec 2021 02:24:00 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id BA2D51009E5
-	for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Dec 2021 02:23:59 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id AF14910024D
-	for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Dec 2021 02:23:59 +0000 (GMT)
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Fri, 17 Dec 2021 02:23:39 +0000
-From: Wang Mingyu <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH v2] dnf-plugin-tui: Fix bug when generating CSV
- file
-Date: Fri, 17 Dec 2021 10:23:31 +0800
-Message-ID: <1639707811-38104-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Nxmjfdf8;
+ spf=pass (domain: gmail.com, ip: 209.85.160.174,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f174.google.com with SMTP id p19so1201911qtw.12
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 16 Dec 2021 18:28:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=SuQPeN1EBrA24yX61yOHQHsa1qYflqJrVV4dPF21Ugo=;
+        b=Nxmjfdf8tZ+tQJviLzeG2fmsiaIBlRFqRQ4xAhgdYKU9byKxHxpAqe86LeZ92AczbH
+         igH5TF0npyOdoxqb3GWiAE1+t6/W4MLpyaL+n0cvjaH8km+3EzdeAoAkoBvUUTTX/NBu
+         aWdYZU/4rWFLD52wgoHjNMfjQqvypE/PDLH5c7xw3kkTgLfobYpLT6DicI5SV/iem4JD
+         rXDDDmD48Kmyw/mxdNEA1Rqa45/hU0/qR929CoXzF9Z6qXXBSh9iBPtAX6R7Yzax5Sb/
+         Pk1sa1IaxeU9fp1FKYRQaWXs2igA99B2JqYx7QGVc0wWGH1eDTbfOgFryYktSu/bz5Xb
+         YR5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=SuQPeN1EBrA24yX61yOHQHsa1qYflqJrVV4dPF21Ugo=;
+        b=tx7t801tZ4jaOuPbAW+P6IsZ7HtMMGQ2daMU1A09YpSiE0HfUnaeR8PvVVwMfIFFS7
+         Kk5Ni84LZfWhbGAUIy8S8SIODA6oNMTmLhNAqe99uPTt8Hw0iX1QVKahb+txZ7vrR40i
+         jnI8KqmOgrkIm/+gI6nEFpWyims3fpc75lS8llk5JULD4VsVdGv68Jbp3ioqhlSaC0N0
+         ZtGdotfgw09UAfkpaswSmDL7HEo4hMFlX/rH5ReChM8+IMR7ubtneyl10HLBB5kJPI6G
+         l3q7G0U9e0T4e2ZihESMJYz0t9L190NOqml8i2IlNvPauSMcmcmFdI8fMzvxYTMwiY/p
+         ogmw==
+X-Gm-Message-State: AOAM5327yCHdvz/XGjPn3u6BlIsT0SVIPZoO16aaKGkHEhr/BO+PGlQ2
+	tAyGhQxQjlbTg8Cek5nJUnCdJUaMnJd2/FZWl6DxqXp8
+X-Google-Smtp-Source: 
+ ABdhPJzJ1v/qeAJ1B++rvZad2MUAoHx5q5JSX+jV2GbAV+n+DGHW2gxI8DhUOHbw12rdUdUzeNalwugGvbKRjVScFxM=
+X-Received: by 2002:ac8:518e:: with SMTP id c14mr707671qtn.665.1639708103103;
+ Thu, 16 Dec 2021 18:28:23 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+References: <20211216083115.417282-1-jk@codeconstruct.com.au>
+ <20211216083115.417282-2-jk@codeconstruct.com.au>
+ <CAMKF1srWwXbEGLwptNaFWChuFiKfeXNbPwqeKh8uk2DP5FoCkw@mail.gmail.com>
+ <52d6b46ca28b6048f274499846e45daccb8d4ec1.camel@codeconstruct.com.au>
+In-Reply-To: 
+ <52d6b46ca28b6048f274499846e45daccb8d4ec1.camel@codeconstruct.com.au>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 16 Dec 2021 18:28:12 -0800
+Message-ID: 
+ <CAMKF1sp9Uq-6vkvGNVcbh6Wk-cL0P91gLzUJY3=0qQV8jsnW9w@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH 2/2] mctp: install dbus service
+ configuration
+To: Jeremy Kerr <jk@codeconstruct.com.au>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="0000000000000557f405d34e4b60"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Dec 2021 02:24:03 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Dec 2021 02:28:24 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94415
+ https://lists.openembedded.org/g/openembedded-devel/message/94416
 
-If the rpm lacks dependencies, an exception will be thrown and exit
-when generating the CSV file.
-Modify utils.py to catch and handle exception.
+--0000000000000557f405d34e4b60
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Thu, Dec 16, 2021 at 5:57 PM Jeremy Kerr <jk@codeconstruct.com.au> wrote:
 
-diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-index d2b1a4ab5..e0f52ea62 100644
---- a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-+++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git;branch=master;protocol=https"
--SRCREV = "4b49165051bfdd136986855dd98aa9238eefdf78"
-+SRCREV = "3ccf87915ceb70eac055a07eb80bc9105e916620"
- PV = "1.3"
- 
- SRC_URI:append:class-target = " file://oe-remote.repo.sample"
--- 
-2.25.1
+> Hi Khem,
+>
+> > > +FILES:${PN} += " \
+> > > +        ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', \
+> > > +                '${datadir}/dbus-1/system.d/mctpd.conf', '', d)} \
+> > > +"
+> > > +
+> >
+> > this should go below do_install and other functions.
+>
+> OK, can do! I'll send a v2 shortly.
+>
+> > You can run ./contrib/oe-stylize.py also to get some help on
+> > formatting
+>
+> Hm, that seems to make a bit of a mess of the recipe - it moves a bunch
+> of variable declarations to within the do_install:append() block.
+>
+> I'm no expert on the full syntax, but something like this might fix it:
+>
+> diff --git a/contrib/oe-stylize.py b/contrib/oe-stylize.py
+> index e1ba1b321..eac096a80 100755
+> --- a/contrib/oe-stylize.py
+> +++ b/contrib/oe-stylize.py
+> @@ -211,7 +211,7 @@ OE_vars = [
+>  ]
+>
+>  varRegexp = r'^([a-zA-Z_0-9${}-]*)([ \t]*)([+.:]?=[+.]?)([ \t]*)([^\t]+)'
+> -routineRegexp = r'^([a-zA-Z0-9_ ${}-]+?)\('
+> +routineRegexp = r'^([a-zA-Z0-9_ ${}:-]+?)\('
+>
+>  # Variables seen in the processed .bb
+>  seen_vars = {}
+>
+>
+> - I can send that as a proper patch if that's the correct approach.
+>
 
+This seems fine we have new override operator and stylize script needs
+adjusting
+
+
+> Cheers,
+>
+>
+> Jeremy
+>
+
+--0000000000000557f405d34e4b60
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Thu, Dec 16, 2021 at 5:57 PM Jeremy Kerr &lt;<a href=3D"=
+mailto:jk@codeconstruct.com.au">jk@codeconstruct.com.au</a>&gt; wrote:<br><=
+/div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bo=
+rder-left-width:1px;border-left-style:solid;padding-left:1ex;border-left-co=
+lor:rgb(204,204,204)">Hi Khem,<br>
+<br>
+&gt; &gt; +FILES:${PN} +=3D &quot; \<br>
+&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ${@bb.utils.contains(=
+&#39;DISTRO_FEATURES&#39;, &#39;systemd&#39;, \<br>
+&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 &#39;${datadir}/dbus-1/system.d/mctpd.conf&#39;=
+, &#39;&#39;, d)} \<br>
+&gt; &gt; +&quot;<br>
+&gt; &gt; +<br>
+&gt; <br>
+&gt; this should go below do_install and other functions.<br>
+<br>
+OK, can do! I&#39;ll send a v2 shortly.<br>
+<br>
+&gt; You can run ./contrib/oe-stylize.py also to get some help on<br>
+&gt; formatting<br>
+<br>
+Hm, that seems to make a bit of a mess of the recipe - it moves a bunch<br>
+of variable declarations to within the do_install:append() block.<br>
+<br>
+I&#39;m no expert on the full syntax, but something like this might fix it:=
+<br>
+<br>
+diff --git a/contrib/oe-stylize.py b/contrib/oe-stylize.py<br>
+index e1ba1b321..eac096a80 100755<br>
+--- a/contrib/oe-stylize.py<br>
++++ b/contrib/oe-stylize.py<br>
+@@ -211,7 +211,7 @@ OE_vars =3D [<br>
+=C2=A0]<br>
+<br>
+=C2=A0varRegexp =3D r&#39;^([a-zA-Z_0-9${}-]*)([ \t]*)([+.:]?=3D[+.]?)([ \t=
+]*)([^\t]+)&#39;<br>
+-routineRegexp =3D r&#39;^([a-zA-Z0-9_ ${}-]+?)\(&#39;<br>
++routineRegexp =3D r&#39;^([a-zA-Z0-9_ ${}:-]+?)\(&#39;<br>
+<br>
+=C2=A0# Variables seen in the processed .bb<br>
+=C2=A0seen_vars =3D {}<br>
+<br>
+<br>
+- I can send that as a proper patch if that&#39;s the correct approach.<br>
+</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">This seems fine =
+we have new override operator and stylize script needs adjusting=C2=A0</div=
+><div dir=3D"auto"><br></div><blockquote class=3D"gmail_quote" style=3D"mar=
+gin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;padding=
+-left:1ex;border-left-color:rgb(204,204,204)"><br>
+Cheers,<br>
+<br>
+<br>
+Jeremy<br>
+</blockquote></div></div>
+
+--0000000000000557f405d34e4b60--
 
