@@ -1,185 +1,171 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jk@codeconstruct.com.au>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DBF07C433EF
-	for <webhook@archiver.kernel.org>; Fri, 17 Dec 2021 02:28:24 +0000 (UTC)
-Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com
- [209.85.160.174])
- by mx.groups.io with SMTP id smtpd.web12.1455.1639708104123116780
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B9CDFC433F5
+	for <webhook@archiver.kernel.org>; Fri, 17 Dec 2021 02:28:51 +0000 (UTC)
+Received: from codeconstruct.com.au (codeconstruct.com.au [203.29.241.158])
+ by mx.groups.io with SMTP id smtpd.web11.1458.1639708130442442915
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Dec 2021 18:28:24 -0800
+ Thu, 16 Dec 2021 18:28:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Nxmjfdf8;
- spf=pass (domain: gmail.com, ip: 209.85.160.174,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f174.google.com with SMTP id p19so1201911qtw.12
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Dec 2021 18:28:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=SuQPeN1EBrA24yX61yOHQHsa1qYflqJrVV4dPF21Ugo=;
-        b=Nxmjfdf8tZ+tQJviLzeG2fmsiaIBlRFqRQ4xAhgdYKU9byKxHxpAqe86LeZ92AczbH
-         igH5TF0npyOdoxqb3GWiAE1+t6/W4MLpyaL+n0cvjaH8km+3EzdeAoAkoBvUUTTX/NBu
-         aWdYZU/4rWFLD52wgoHjNMfjQqvypE/PDLH5c7xw3kkTgLfobYpLT6DicI5SV/iem4JD
-         rXDDDmD48Kmyw/mxdNEA1Rqa45/hU0/qR929CoXzF9Z6qXXBSh9iBPtAX6R7Yzax5Sb/
-         Pk1sa1IaxeU9fp1FKYRQaWXs2igA99B2JqYx7QGVc0wWGH1eDTbfOgFryYktSu/bz5Xb
-         YR5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=SuQPeN1EBrA24yX61yOHQHsa1qYflqJrVV4dPF21Ugo=;
-        b=tx7t801tZ4jaOuPbAW+P6IsZ7HtMMGQ2daMU1A09YpSiE0HfUnaeR8PvVVwMfIFFS7
-         Kk5Ni84LZfWhbGAUIy8S8SIODA6oNMTmLhNAqe99uPTt8Hw0iX1QVKahb+txZ7vrR40i
-         jnI8KqmOgrkIm/+gI6nEFpWyims3fpc75lS8llk5JULD4VsVdGv68Jbp3ioqhlSaC0N0
-         ZtGdotfgw09UAfkpaswSmDL7HEo4hMFlX/rH5ReChM8+IMR7ubtneyl10HLBB5kJPI6G
-         l3q7G0U9e0T4e2ZihESMJYz0t9L190NOqml8i2IlNvPauSMcmcmFdI8fMzvxYTMwiY/p
-         ogmw==
-X-Gm-Message-State: AOAM5327yCHdvz/XGjPn3u6BlIsT0SVIPZoO16aaKGkHEhr/BO+PGlQ2
-	tAyGhQxQjlbTg8Cek5nJUnCdJUaMnJd2/FZWl6DxqXp8
-X-Google-Smtp-Source: 
- ABdhPJzJ1v/qeAJ1B++rvZad2MUAoHx5q5JSX+jV2GbAV+n+DGHW2gxI8DhUOHbw12rdUdUzeNalwugGvbKRjVScFxM=
-X-Received: by 2002:ac8:518e:: with SMTP id c14mr707671qtn.665.1639708103103;
- Thu, 16 Dec 2021 18:28:23 -0800 (PST)
+ dkim=missing;
+ spf=none, err=permanent DNS error (domain: codeconstruct.com.au,
+ ip: 203.29.241.158, mailfrom: jk@codeconstruct.com.au)
+Received: by codeconstruct.com.au (Postfix, from userid 10000)
+	id 8E13B2022C; Fri, 17 Dec 2021 10:28:48 +0800 (AWST)
+From: Jeremy Kerr <jk@codeconstruct.com.au>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH v2 1/2] mctp: upgrade to v1.0
+Date: Fri, 17 Dec 2021 10:28:09 +0800
+Message-Id: 
+ <cce00d3bd3f4f35b181b678181a7e769e010e8b9.1639707922.git.jk@codeconstruct.com.au>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
-References: <20211216083115.417282-1-jk@codeconstruct.com.au>
- <20211216083115.417282-2-jk@codeconstruct.com.au>
- <CAMKF1srWwXbEGLwptNaFWChuFiKfeXNbPwqeKh8uk2DP5FoCkw@mail.gmail.com>
- <52d6b46ca28b6048f274499846e45daccb8d4ec1.camel@codeconstruct.com.au>
-In-Reply-To: 
- <52d6b46ca28b6048f274499846e45daccb8d4ec1.camel@codeconstruct.com.au>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 16 Dec 2021 18:28:12 -0800
-Message-ID: 
- <CAMKF1sp9Uq-6vkvGNVcbh6Wk-cL0P91gLzUJY3=0qQV8jsnW9w@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH 2/2] mctp: install dbus service
- configuration
-To: Jeremy Kerr <jk@codeconstruct.com.au>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="0000000000000557f405d34e4b60"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Dec 2021 02:28:24 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Dec 2021 02:28:51 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94416
+ https://lists.openembedded.org/g/openembedded-devel/message/94417
 
---0000000000000557f405d34e4b60
-Content-Type: text/plain; charset="UTF-8"
+We have a tag for 1.0, now: better handling of local stack configuration
+at runtime, and the 5.15 kernel header change has been integrated.
 
-On Thu, Dec 16, 2021 at 5:57 PM Jeremy Kerr <jk@codeconstruct.com.au> wrote:
+Signed-off-by: Jeremy Kerr <jk@codeconstruct.com.au>
 
-> Hi Khem,
->
-> > > +FILES:${PN} += " \
-> > > +        ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', \
-> > > +                '${datadir}/dbus-1/system.d/mctpd.conf', '', d)} \
-> > > +"
-> > > +
-> >
-> > this should go below do_install and other functions.
->
-> OK, can do! I'll send a v2 shortly.
->
-> > You can run ./contrib/oe-stylize.py also to get some help on
-> > formatting
->
-> Hm, that seems to make a bit of a mess of the recipe - it moves a bunch
-> of variable declarations to within the do_install:append() block.
->
-> I'm no expert on the full syntax, but something like this might fix it:
->
-> diff --git a/contrib/oe-stylize.py b/contrib/oe-stylize.py
-> index e1ba1b321..eac096a80 100755
-> --- a/contrib/oe-stylize.py
-> +++ b/contrib/oe-stylize.py
-> @@ -211,7 +211,7 @@ OE_vars = [
->  ]
->
->  varRegexp = r'^([a-zA-Z_0-9${}-]*)([ \t]*)([+.:]?=[+.]?)([ \t]*)([^\t]+)'
-> -routineRegexp = r'^([a-zA-Z0-9_ ${}-]+?)\('
-> +routineRegexp = r'^([a-zA-Z0-9_ ${}:-]+?)\('
->
->  # Variables seen in the processed .bb
->  seen_vars = {}
->
->
-> - I can send that as a proper patch if that's the correct approach.
->
+---
+v2:
+ - use 1.0 tag
+---
+ .../0001-build-Adjust-for-kernel-mctp.h.patch | 84 -------------------
+ .../recipes-support/mctp/mctp_git.bb          |  8 +-
+ 2 files changed, 3 insertions(+), 89 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/mctp/mctp/0001-build-=
+Adjust-for-kernel-mctp.h.patch
 
-This seems fine we have new override operator and stylize script needs
-adjusting
+diff --git a/meta-networking/recipes-support/mctp/mctp/0001-build-Adjust-=
+for-kernel-mctp.h.patch b/meta-networking/recipes-support/mctp/mctp/0001-=
+build-Adjust-for-kernel-mctp.h.patch
+deleted file mode 100644
+index 83bf19770..000000000
+--- a/meta-networking/recipes-support/mctp/mctp/0001-build-Adjust-for-ker=
+nel-mctp.h.patch
++++ /dev/null
+@@ -1,84 +0,0 @@
+-From 653eccc918ef993186c312694c288b2a5b39248e Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 5 Nov 2021 13:14:55 -0700
+-Subject: [PATCH] build: Adjust for kernel mctp.h
+-
+-Starting 5.15 kernel has mctp.h as well and provides some of the
+-defintions, therefore move the ones we need to provide in this header
+-outside the conditional check so its always provided regardless of
+-header coming from kernel or not.
+-
+-Include linux/if_link.h so it can pre-define IFLA_MCTP_UNSPEC and other
+-defines and there is a check for conditionally providing them here but
+-kernel does not have such a check, so if linux/if_link.h is included
+-after this header then we end up with duplicate defines
+-
+-linux/if_link.h:1267:2: error: redefinition of enumerator 'IFLA_MCTP_UNS=
+PEC'
+-        IFLA_MCTP_UNSPEC,
+-        ^
+-../git/src/mctp.h:74:2: note: previous definition is here
+-        IFLA_MCTP_UNSPEC,
+-        ^
+-
+-Upstream-Status: Submitted [https://github.com/CodeConstruct/mctp/pull/2=
+]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/mctp.h | 21 +++++++++++----------
+- 1 file changed, 11 insertions(+), 10 deletions(-)
+-
+-diff --git a/src/mctp.h b/src/mctp.h
+-index 4f73def..e602168 100644
+---- a/src/mctp.h
+-+++ b/src/mctp.h
+-@@ -19,6 +19,7 @@
+- #if HAVE_LINUX_MCTP_H
+- #include <linux/mctp.h>
+- #endif
+-+#include <linux/if_link.h>
+-=20
+- #ifndef AF_MCTP
+- #define AF_MCTP 45
+-@@ -33,10 +34,6 @@
+-=20
+- #ifndef MCTP_NET_ANY
+-=20
+--#ifndef MAX_ADDR_LEN
+--#define MAX_ADDR_LEN 32
+--#endif
+--
+- typedef uint8_t			mctp_eid_t;
+-=20
+- struct mctp_addr {
+-@@ -53,6 +50,16 @@ struct sockaddr_mctp {
+- 	uint8_t			__smctp_pad1;
+- };
+-=20
+-+#define MCTP_NET_ANY 0
+-+#define MCTP_ADDR_ANY 0xff
+-+#define MCTP_TAG_OWNER 0x08
+-+
+-+#endif /* MCTP_NET_ANY */
+-+
+-+#ifndef MAX_ADDR_LEN
+-+#define MAX_ADDR_LEN 32
+-+#endif
+-+
+- struct sockaddr_mctp_ext {
+- 	struct sockaddr_mctp	smctp_base;
+- 	int			smctp_ifindex;
+-@@ -61,12 +68,6 @@ struct sockaddr_mctp_ext {
+- 	unsigned char		smctp_haddr[MAX_ADDR_LEN];
+- };
+-=20
+--#define MCTP_NET_ANY 0
+--#define MCTP_ADDR_ANY 0xff
+--#define MCTP_TAG_OWNER 0x08
+--
+--#endif /* MCTP_NET_ANY */
+--
+- #ifndef IFLA_MCTP_MAX
+-=20
+- /* From if_link.h */
+---=20
+-2.33.1
+-
+diff --git a/meta-networking/recipes-support/mctp/mctp_git.bb b/meta-netw=
+orking/recipes-support/mctp/mctp_git.bb
+index 50d84d204..eabc6fa16 100644
+--- a/meta-networking/recipes-support/mctp/mctp_git.bb
++++ b/meta-networking/recipes-support/mctp/mctp_git.bb
+@@ -5,13 +5,11 @@ LICENSE =3D "GPLv2"
+=20
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4cc91856b08b094b4f406a29dc61d=
+b21"
+=20
+-PV =3D "0.1+git${SRCPV}"
++PV =3D "1.0+git${SRCPV}"
+=20
+-SRCREV =3D "072bafe725c50329f99cf9d3b2624e8799e8163a"
++SRCREV =3D "669740432af525c19a6a41cec777406fbbc24836"
+=20
+-SRC_URI =3D "git://github.com/CodeConstruct/mctp;branch=3Dmain;protocol=3D=
+https \
+-           file://0001-build-Adjust-for-kernel-mctp.h.patch \
+-          "
++SRC_URI =3D "git://github.com/CodeConstruct/mctp;branch=3Dmain;protocol=3D=
+https"
+=20
+ S =3D "${WORKDIR}/git"
+=20
+--=20
+2.33.0
 
-
-> Cheers,
->
->
-> Jeremy
->
-
---0000000000000557f405d34e4b60
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Thu, Dec 16, 2021 at 5:57 PM Jeremy Kerr &lt;<a href=3D"=
-mailto:jk@codeconstruct.com.au">jk@codeconstruct.com.au</a>&gt; wrote:<br><=
-/div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bo=
-rder-left-width:1px;border-left-style:solid;padding-left:1ex;border-left-co=
-lor:rgb(204,204,204)">Hi Khem,<br>
-<br>
-&gt; &gt; +FILES:${PN} +=3D &quot; \<br>
-&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ${@bb.utils.contains(=
-&#39;DISTRO_FEATURES&#39;, &#39;systemd&#39;, \<br>
-&gt; &gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 &#39;${datadir}/dbus-1/system.d/mctpd.conf&#39;=
-, &#39;&#39;, d)} \<br>
-&gt; &gt; +&quot;<br>
-&gt; &gt; +<br>
-&gt; <br>
-&gt; this should go below do_install and other functions.<br>
-<br>
-OK, can do! I&#39;ll send a v2 shortly.<br>
-<br>
-&gt; You can run ./contrib/oe-stylize.py also to get some help on<br>
-&gt; formatting<br>
-<br>
-Hm, that seems to make a bit of a mess of the recipe - it moves a bunch<br>
-of variable declarations to within the do_install:append() block.<br>
-<br>
-I&#39;m no expert on the full syntax, but something like this might fix it:=
-<br>
-<br>
-diff --git a/contrib/oe-stylize.py b/contrib/oe-stylize.py<br>
-index e1ba1b321..eac096a80 100755<br>
---- a/contrib/oe-stylize.py<br>
-+++ b/contrib/oe-stylize.py<br>
-@@ -211,7 +211,7 @@ OE_vars =3D [<br>
-=C2=A0]<br>
-<br>
-=C2=A0varRegexp =3D r&#39;^([a-zA-Z_0-9${}-]*)([ \t]*)([+.:]?=3D[+.]?)([ \t=
-]*)([^\t]+)&#39;<br>
--routineRegexp =3D r&#39;^([a-zA-Z0-9_ ${}-]+?)\(&#39;<br>
-+routineRegexp =3D r&#39;^([a-zA-Z0-9_ ${}:-]+?)\(&#39;<br>
-<br>
-=C2=A0# Variables seen in the processed .bb<br>
-=C2=A0seen_vars =3D {}<br>
-<br>
-<br>
-- I can send that as a proper patch if that&#39;s the correct approach.<br>
-</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">This seems fine =
-we have new override operator and stylize script needs adjusting=C2=A0</div=
-><div dir=3D"auto"><br></div><blockquote class=3D"gmail_quote" style=3D"mar=
-gin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;padding=
--left:1ex;border-left-color:rgb(204,204,204)"><br>
-Cheers,<br>
-<br>
-<br>
-Jeremy<br>
-</blockquote></div></div>
-
---0000000000000557f405d34e4b60--
 
