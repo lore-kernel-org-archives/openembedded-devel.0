@@ -2,77 +2,80 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CF4DC433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D5B3C4332F
 	for <webhook@archiver.kernel.org>; Mon, 20 Dec 2021 15:02:48 +0000 (UTC)
-Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web08.6184.1640012567103589715
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.65])
+ by mx.groups.io with SMTP id smtpd.web10.6261.1640012566767446202
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 20 Dec 2021 07:02:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=U8hJCi12;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=IjK5Rxxh;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.65,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1640012564; i=@fujitsu.com;
-	bh=fMv58X7ypm8GieeeHcKJEaFV6jBbT50gD4h+s2fCfJQ=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=U8hJCi12Z0HxnvMhJHWIK+hX1TPdF5q0QveVaxXeMk77JVB8tCi+QSBelLI2PqO+e
-	 yzeC2P5djIB2Ea2aF6BLrLVy0PxgzTFKJppwkec7XWt8JsIaCLrWno3RVmhK69ixip
-	 VS25ymg1tSko1TtIqXoaeKrsCB3+zNYmCXsCeNDV/ae7gr9xoywuW8nkMKRc9uFqlp
-	 RLKrDBEhibS9P+sWPGjSgM6xxo3BvQKUkuC0ZoAIpMyJdI26FNye0cP0+OoE1oXUzg
-	 OfL1j8bAzliKt+c5CwLJ4XXeid+7KGXkzO0FNfrbYGgu5XNs+QiEqZ1KHkKjsdF5JE
-	 Cngd4dvZRj65w==
-Received: from [100.115.69.209] (using TLSv1.2 with cipher
+	bh=jujKyKg5rAizR49K58PrjmYtG3I2nUrz0518j26vOF4=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=IjK5Rxxh2MGpHwLNiGd+mP+wpDgqrgwUpM/tbu0yosa0MYpkGZcWCogpOKSLl3ecw
+	 qaBnKbE+FekLg4FAJ/17QuG2dHkz41zBxilkw0pKlp9x71M09ZMyOhUy/2YLevC90F
+	 YtKPxDl3UMTtV9FyvA0fxMiH1cttTWsq0Y49z1cniPtypfMvb6QlwJ1skjNNzATvJL
+	 f3m/nRQwXcGQC4+QvXCKmR71nCF5lriVfF0j1QVGSWMq5uJnlfRnQoS/6shjwpur2m
+	 BqE1ZQ6fxXV9//IJlXf9FmNlTzwj03t9fM3O1pBe3qa9sICY0Irf8lPc9yXh7Blzeh
+	 hqxa2cbM0ltDA==
+Received: from [100.115.6.23] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-a.eu-central-1.aws.ess.symcld.net id
- 68/51-31213-41B90C16; Mon, 20 Dec 2021 15:02:44 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrGIsWRWlGSWpSXmKPExsViZ8MxSVd49oF
-  EgxWXzS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1ozuf9PYC25yVqza+pCxgfEjRxcjF4eQwBNG
-  ifd7ZrF2MXICOReYJF4s14JInGCUuPTvJDtIgk1ATWL6rRtgRSIC+hJLZ+9hBrGZBVQkXvzuA
-  asRFnCX2PLoAhuIzSKgKrFq6UEwm1fAUWL5pMVgtoSAgsSUh++ZIeKCEidnPmGBmCMhcfDFC2
-  aIGkWJ2ZebWSDsColZs9qYIGw1iavnNjFPYOSfhaR9FpL2BYxMqxjtkooy0zNKchMzc3QNDQx
-  0DQ1Ndc1MdQ0tjPQSq3QT9VJLdZNT80qKEoHSeonlxXqpxcV6xZW5yTkpenmpJZsYgcGZUuy4
-  bQfjqb6feocYJTmYlER5+X0PJArxJeWnVGYkFmfEF5XmpBYfYpTh4FCS4P05AygnWJSanlqRl
-  pkDjBSYtAQHj5IIbxNImre4IDG3ODMdInWKUVFKnDduFlBCACSRUZoH1waLzkuMslLCvIwMDA
-  xCPAWpRbmZJajyrxjFORiVhHnTQabwZOaVwE1/BbSYCWixUvh+kMUliQgpqQYmO/X3EgYXDn2
-  xVP16eKvUk3OLS3f5nVx96CEzW9WHRRHv1OvzkzfX9zxr8Ws+cXZdTELFY3Xeb2dP7KpS5yr4
-  UbT1W1TOsuk7rrwrVEp5tEbQrLYt51r56fU3NgXP4XvN+zsxmruw4f7Kt+v2Wh/h7iz++NJ9m
-  dXJn81HJ+91WMPw5fyeHLkPdpV9DJ+vn8tWyry75t68lzcm7vvBEm//aqu42KviCxUL2IK1d7
-  jlGS0/tYujVvJ/PFN10BTf+sWfz249vTyQa2nuBIGrSzfM/f8wU93IkKvl8akdRSLxLBpPe/P
-  07BTZ6/trDWZOTFw46V++kfXjmvakcEnjgishzClLmedqLnVM2ph8eXNDrRJLcUaioRZzUXEi
-  AE21H4ZJAwAA
+	by server-3.bemta.az-a.eu-west-1.aws.ess.symcld.net id 0E/64-13695-41B90C16;
+ Mon, 20 Dec 2021 15:02:44 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrBIsWRWlGSWpSXmKPExsViZ8MxSVd49oF
+  EgyPLjS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1owF+4wKznFWfPlxkaWB8QpHFyMXh5DAE0aJ
+  R0cfsUE4F5gk/u/eCuWcYJS48nY9YxcjJwebgJrE9Fs3WEFsEQF9iaWz9zCD2MwCKhIvfvewg
+  9jCAtYS7bsfg9WwCKhKzJi2BqyGV8BR4uWSN2A1EgIKElMevgeLcwo4SXydthhoPgfQMkeJt4
+  +LIcoFJU7OfMICMV5C4uCLF8wQrYoSsy83s0DYFRKzZrUxQdhqElfPbWKewCg4C0n7LCTtCxi
+  ZVjFaJhVlpmeU5CZm5ugaGhjoGhqa6proWhrrJVbpJuqlluqWpxaX6BrqJZYX66UWF+sVV+Ym
+  56To5aWWbGIEBnBKMUvsDsatfT/1DjFKcjApifLy+x5IFOJLyk+pzEgszogvKs1JLT7EKMPBo
+  STB+3MGUE6wKDU9tSItMwcYTTBpCQ4eJRHeJpA0b3FBYm5xZjpE6hSjopQ4b9wsoIQASCKjNA
+  +uDRbBlxhlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ86aDTOHJzCuBm/4KaDET0GKl8P0gi0s
+  SEVJSDUxF85sbmV2NXEwiW+0OW8lJVgQIFvRMubfhk/aUd+L+kq9uaf+75mS9sEjGo3Ud57Pf
+  Vxhu3no+R+nuGYN4h59fO9/sC6/f8+Bf2hmnhyVPg35NOndfkiMp/IiVeHfzxKMbf3191Oinz
+  tla+1tYMJnBJOOiq3HSKx4P7oLgbJ/FAUlP72SvOr//f9srm48KyX8/OgXanrX107BqXpc14U
+  1IjmzSjw3qva9ZuTcUn3y+aYeWjn/mrKUZ9XYP3iR/2BraVbW9aKF+Qmf8Ru/K0EvJ7Z0/Pil
+  Zm4lr37D+9snv9+LFcvO09jbeXFX1SqXpqejXx9XfnzJxKxdIBr7L77GXNprbwbF7CuvZkDLn
+  OUosxRmJhlrMRcWJAJmVGPRbAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-31.tower-528.messagelabs.com!1640012563!5340!1
+X-Msg-Ref: server-13.tower-591.messagelabs.com!1640012563!5719!1
 X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 945 invoked from network); 20 Dec 2021 15:02:43 -0000
+Received: (qmail 22108 invoked from network); 20 Dec 2021 15:02:43 -0000
 Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-31.tower-528.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-13.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 20 Dec 2021 15:02:43 -0000
 Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 61235100353
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 63E0C100459
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 20 Dec 2021 15:02:43 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 5411A1000FC
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 5737B1000FF
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 20 Dec 2021 15:02:43 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Mon, 20 Dec 2021 15:02:29 +0000
+ (TLS) id 15.0.1497.26; Mon, 20 Dec 2021 15:02:34 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] redis-plus-plus: upgrade 1.3.2 -> 1.3.3
-Date: Mon, 20 Dec 2021 23:02:20 +0800
-Message-ID: <1640012542-3632-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] satyr: upgrade 0.38 -> 0.39
+Date: Mon, 20 Dec 2021 23:02:21 +0800
+Message-ID: <1640012542-3632-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1640012542-3632-1-git-send-email-wangmy@fujitsu.com>
+References: <1640012542-3632-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -84,36 +87,36 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 20 Dec 2021 15:02:48 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94449
+ https://lists.openembedded.org/g/openembedded-devel/message/94448
 
 Changelog:
 =========
-Fix async interface related bugs
-Fix example and test problems
-Fix Windows compilation problem
+Use g_malloc() and g_free() instead of malloc()/free() in many instances
+Fix call to a deprecated in Python tests
+Add test case for sr_rpm_package_cmp()
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{redis-plus-plus_1.3.2.bb => redis-plus-plus_1.3.3.bb}      | 2 +-
+ meta-oe/recipes-support/satyr/{satyr_0.38.bb => satyr_0.39.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/redis-plus-plus/{redis-plus-plus_1.3.2.bb => redis-plus-plus_1.3.3.bb} (90%)
+ rename meta-oe/recipes-support/satyr/{satyr_0.38.bb => satyr_0.39.bb} (94%)
 
-diff --git a/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.2.bb b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.3.bb
-similarity index 90%
-rename from meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.2.bb
-rename to meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.3.bb
-index 5c4c0aaff..c135105f9 100644
---- a/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.2.bb
-+++ b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.3.bb
-@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
- 
- SRC_URI = "git://github.com/sewenew/redis-plus-plus;branch=master;protocol=https"
--SRCREV = "e29c63db54653a660d7a0f556f670b7a6fce0a78"
-+SRCREV = "389ffdf9e72035ea2096b03cda7f4a6809ae6363"
- 
+diff --git a/meta-oe/recipes-support/satyr/satyr_0.38.bb b/meta-oe/recipes-support/satyr/satyr_0.39.bb
+similarity index 94%
+rename from meta-oe/recipes-support/satyr/satyr_0.38.bb
+rename to meta-oe/recipes-support/satyr/satyr_0.39.bb
+index 4cfa977c8..732a1440e 100644
+--- a/meta-oe/recipes-support/satyr/satyr_0.38.bb
++++ b/meta-oe/recipes-support/satyr/satyr_0.39.bb
+@@ -10,7 +10,7 @@ inherit autotools-brokensep python3native pkgconfig
+ SRC_URI = "git://github.com/abrt/satyr.git;branch=master;protocol=https \
+            file://0002-fix-compile-failure-against-musl-C-library.patch \
+ "
+-SRCREV = "ad0030f071b7ce7eb748eca3c31cb381038e2b21"
++SRCREV = "f8a0dbfe7fcc6e44f03d66ca5c81363aea318380"
  S = "${WORKDIR}/git"
  
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 -- 
 2.25.1
 
