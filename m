@@ -2,50 +2,49 @@ Return-Path: <mingli.yu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 59492C433EF
-	for <webhook@archiver.kernel.org>; Tue, 21 Dec 2021 10:52:19 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web12.4410.1640083938857169874
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DD47C433EF
+	for <webhook@archiver.kernel.org>; Tue, 21 Dec 2021 10:53:57 +0000 (UTC)
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web08.4341.1640084029775116897
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Dec 2021 02:52:18 -0800
+ Tue, 21 Dec 2021 02:53:49 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=permerror,
  err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.3.146,
+ domain name (domain: windriver.com, ip: 192.103.53.11,
  mailfrom: mingli.yu@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 1BLAqHex001325
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Dec 2021 02:52:17 -0800
 Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
  [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 1BLAqGJW020631
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 1BLArmLu025677
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Dec 2021 02:52:17 -0800 (PST)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ Tue, 21 Dec 2021 02:53:48 -0800
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Tue, 21 Dec 2021 02:52:16 -0800
+ 15.1.2242.12; Tue, 21 Dec 2021 02:53:48 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.20; Tue, 21 Dec 2021 02:53:48 -0800
 Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Tue, 21 Dec 2021 02:52:15 -0800
+ 15.1.2242.12 via Frontend Transport; Tue, 21 Dec 2021 02:53:47 -0800
 From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH v2] php: Upgrade to 8.1.0
-Date: Tue, 21 Dec 2021 18:52:15 +0800
-Message-ID: <20211221105215.48359-1-mingli.yu@windriver.com>
+Subject: [meta-oe][PATCH v3] php: Upgrade to 8.1.0
+Date: Tue, 21 Dec 2021 18:53:46 +0800
+Message-ID: <20211221105346.48520-1-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 Dec 2021 10:52:19 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Dec 2021 10:53:57 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94464
+ https://lists.openembedded.org/g/openembedded-devel/message/94465
 
 From: Mingli Yu <mingli.yu@windriver.com>
 
@@ -53,8 +52,6 @@ Rebase one patch to new version and enable openssl PACKAGECONFIG
 as OpenSSL 3.0 is now supported in the new version now [1] and
 remove one patch [2] as the related support for cross-compile env
 is already added in 8.1.0 [3].
-
-Remove
 
 [1] https://github.com/php/php-src/commit/7b34db0659dda933b1146a0ff249f25acca1d669
 [2] https://git.openembedded.org/meta-openembedded/commit/?id=265bab83c9acbfa97117103dd5c35bbd8a9814d6
