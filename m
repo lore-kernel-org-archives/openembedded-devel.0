@@ -1,142 +1,150 @@
-Return-Path: <claus.stovgaard@gmail.com>
+Return-Path: <xuhuan.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C3603C433FE
-	for <webhook@archiver.kernel.org>; Mon, 20 Dec 2021 21:37:34 +0000 (UTC)
-Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com
- [209.85.167.48])
- by mx.groups.io with SMTP id smtpd.web08.2848.1640036243954941076
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 086D6C433EF
+	for <webhook@archiver.kernel.org>; Tue, 21 Dec 2021 03:23:53 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.3])
+ by mx.groups.io with SMTP id smtpd.web08.1710.1640057032269401538
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Dec 2021 13:37:24 -0800
+ Mon, 20 Dec 2021 19:23:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=WAEiuq40;
- spf=pass (domain: gmail.com, ip: 209.85.167.48,
- mailfrom: claus.stovgaard@gmail.com)
-Received: by mail-lf1-f48.google.com with SMTP id x21so16477814lfa.5
-        for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Dec 2021 13:37:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=message-id:subject:from:to:date:user-agent:mime-version
-         :content-transfer-encoding;
-        bh=4vw//MM3oqRdU9rE6Kk9dqi0Qud2ddal+SaG5Es/Cxs=;
-        b=WAEiuq40AOaNrDgAl/0nCSDIGrFABLDWXuZIlkKRi2oIu3Z5Jtj7tsp6bIGbG3T1q5
-         zUQOoZRqfW6e+NwX0DM1ITMAtVUK6H5AaLqgoEURIX8BU3x95i++tP3qyzeCX6DI9p7s
-         0+SsOEqTDm5FCzMVuZA76Tm7rmzPHC+W+q4F1V4PmjOTQEx9na3MWRKinaai1EGcBwPK
-         unhQZ9PSXuffvcf+fv/biy83WraY+4YvhtIdli0sWyhQn/JUWwZcNOCB/OL0ueaq70bV
-         VNfJ9IDZX0OioYqySl/33y3C7XePYVXaPihJjlYTZZS/zVpUSkV9YR53zdE5rvvTACpZ
-         Y9pA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:subject:from:to:date:user-agent
-         :mime-version:content-transfer-encoding;
-        bh=4vw//MM3oqRdU9rE6Kk9dqi0Qud2ddal+SaG5Es/Cxs=;
-        b=B7u6+wuLXMfOT/PuoNT5SgEbRWN1Zvy79OFehvaGBkSsllg8O1Fh33uMzWQAwSK/1y
-         iHptVLPqN9TwqjAaLvbfe+GGSVq/hni2U4YxCxTqb7MC60CXGyJmQvhj0o4b9MgTxLyd
-         0tpyST18zCac3aC33PHo1Qc9VTxBzNOSTkC8yRb27yXTQUCv5c498ulUqknchbZmdQm5
-         RfzDMwwcDA7zhZx8+toewaqZ4brZKdovuIkgYMWIQ3pIktHYsqxyOO1ZtwA5ynQRd6mM
-         j5oac5IwiBj5MWalm1rA8oJoEwBzFnS20VSszRnuNkLOf5tyxTx5oUQkOOHOENWO+tQU
-         WIAg==
-X-Gm-Message-State: AOAM532nlZ3MedO5XXCcUJ/1wMampHHDdBMZjsf9dg02zzZG0QYSomCN
-	qiA1sWHfGdB2OYT95HRy91U=
-X-Google-Smtp-Source: 
- ABdhPJygay0dWHh/gXoArqkJ3acoN9iWKyy9Wn6wc5SBhw0y94cmTLa4Qzg6/X1lpf42aY7EDaRWKQ==
-X-Received: by 2002:a05:6512:12c5:: with SMTP id
- p5mr83326lfg.354.1640036242175;
-        Mon, 20 Dec 2021 13:37:22 -0800 (PST)
-Received: from [192.168.1.70] (2-108-107-206-static.dk.customer.tdc.net.
- [2.108.107.206])
-        by smtp.gmail.com with ESMTPSA id
- u4sm2201179lff.17.2021.12.20.13.37.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Dec 2021 13:37:21 -0800 (PST)
-Message-ID: <c27eabd5b0c9c7606367152cc3dc8e3ac7e1dc8e.camel@gmail.com>
-Subject: [meta-oe]
-From: Claus Stovgaard <claus.stovgaard@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>, OpenEmbedded Devel List
-	 <openembedded-devel@lists.openembedded.org>
-Date: Mon, 20 Dec 2021 22:37:21 +0100
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.40.4 
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Kf7Sndmh;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
+ mailfrom: xuhuan.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1640057030; i=@fujitsu.com;
+	bh=MoP2td0h2QXErBm7uJFPZchze88ILT1CpG6d/hcNUMM=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=Kf7SndmhjfP1Dm0sUw7hhhcNDlH8jNPib94az1E7VQaD3lnLs/5QS5EEg7W3CC5eB
+	 hK1IwrXP0iUv/El8etD5PrkIb7Du5gevBxEGHpLskl4DnCElXHwYF2Hkco53Sa362/
+	 AFDRniIsKsniLVjLy6BKRtV/19jjWC7T3KcfNh2CwNiSKipjHyjMU2gp3ARtkkdX5X
+	 LAn4UVfx0i7Ae8TS8OHjcvFUGFYx5c1RDJx9HgHTJUz32QP97bDtEVQcnQikDXQOIE
+	 y54hMPqN3leLp1zAMeDiho9czwXAc5iKsWSaeY1IzfEgNtWwR9pVBpfttk1UyhImKl
+	 JqXtWmtz25kTw==
+Received: from [100.115.32.74] (using TLSv1.2 with cipher
+ DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta.az-a.eu-west-2.aws.ess.symcld.net id 0E/A8-09428-5C841C16;
+ Tue, 21 Dec 2021 03:23:49 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrFIsWRWlGSWpSXmKPExsViZ8MxSfeox8F
+  EgwmHZS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oxZW+6yFVwVqpjYbd/AuEKgi5GLQ0jgCaPE
+  uvvTmbsYOYGcC0wSqxbGQyROMkoc2HMLLMEmoC7x+OZrRhBbREBfYunsPWBxZgFVie6La9hBb
+  GEBH4k1Zy+wgdgsQPGePZ/B6nkF3CROftwMZksIKEhMefgerJdTwF3i/vu9LBCL3SSmzp/ODl
+  EvKHFy5hMWiPkSEgdfvGCG6FWSOLHiIxOEXSHx+vAlqLiaxNVzm5gnMArOQtI+C0n7AkamVYz
+  WSUWZ6RkluYmZObqGBga6hoamusaWukaGxnqJVbqJeqmluuWpxSW6RnqJ5cV6qcXFesWVuck5
+  KXp5qSWbGIFBnFKsfnUH4+ZVP/UOMUpyMCmJ8u69dSBRiC8pP6UyI7E4I76oNCe1+BCjDAeHk
+  gSvHDAuhASLUtNTK9Iyc4ARBZOW4OBREuFVBknzFhck5hZnpkOkTjEqSonzOoMkBEASGaV5cG
+  2wKL7EKCslzMvIwMAgxFOQWpSbWYIq/4pRnINRSZjXF2QKT2ZeCdz0V0CLmYAWK4XvB1lckoi
+  QkmpgWvrjeKp8aerrkBmRD9fs49gVw9+713KCxYc/Sx6KWW5Z0qz79HlHCW/KuYOKN57W3v/4
+  seCJ+OrfE+eq8m1USW56ZWJz/VNXprcy/7EVrb+nCET+/Cvf5bVK89ub1UuZ4wMEBOK3vE1Qn
+  X298bpE0X3XNOfqnCu7yh85G+9+uO+l+W2jp/p+54SZ31571P7/vAPfarU38tJvj/F6rZUxLD
+  khIPQ4bdr7KpGfkScuFvb9fCyQ0vrrRbTlgYO79trq72ufW+Jc9kllwsaanm0puXILBd8s+P5
+  NIP5e1cnHh9Jv6J+ZduTw9ECVuYzneJjT7uo3lF9LPxmYpJXZ53nvo3rcysuv3qh6RNjuOLuP
+  56gSS3FGoqEWc1FxIgDJPnX9XQMAAA==
+X-Env-Sender: xuhuan.fnst@fujitsu.com
+X-Msg-Ref: server-22.tower-565.messagelabs.com!1640057029!44976!1
+X-Originating-IP: [62.60.8.146]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.7; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 26915 invoked from network); 21 Dec 2021 03:23:49 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-22.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 21 Dec 2021 03:23:49 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 1E2A710034F
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 21 Dec 2021 03:23:49 +0000 (GMT)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 118A110033A
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 21 Dec 2021 03:23:49 +0000 (GMT)
+Received: from localhost.localdomain.localdomain (10.167.225.131) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.26; Tue, 21 Dec 2021 03:23:39 +0000
+From: XU Huan <xuhuan.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Xu Huan <xuhuan.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-grpcio: upgrade 1.41.1 -> 1.43.0
+Date: Tue, 21 Dec 2021 11:22:31 +0800
+Message-ID: <1640056951-1301-2-git-send-email-xuhuan.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1640056951-1301-1-git-send-email-xuhuan.fnst@fujitsu.com>
+References: <1640056951-1301-1-git-send-email-xuhuan.fnst@fujitsu.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.131]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Dec 2021 21:37:34 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Dec 2021 03:23:53 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94456
+ https://lists.openembedded.org/g/openembedded-devel/message/94457
 
-Hi Khem
+From: Xu Huan <xuhuan.fnst@fujitsu.com>
 
-Have 3 commits, I think will be a good match for meta-oe
+License-Update:Add BSD-3-Clause License
 
-usbip-tools is the userspace tool from the kernel for controlling
-USB/IP.
-I started with what Chuck Kamas had done 
-https://lists.yoctoproject.org/g/yocto/topic/86249103?p=,,,20,0,0,0::recentpostdate/sticky,,,20,0,0,86249103
-But ended up rewriting all the logic inside the recipe, to make it much
-simpler. A very nice utility.
+changlog:
+================================================================
 
-Gutenprint - I wrote about that earlier - and thanks for your reply.
-I updated to new style of override, but kept the native part in its own
-recipe - as the purpose for the native part is only to generate a
-header, used by the cross compilation part.
+Core:
+This release contains refinements, improvements, and bug fixes, 
+with highlights listed below.
+Remove redundant work serializer usage in c-ares windows code. (#28016)
+Support RDS updates on the server. (#27851)
+Use WorkSerializer in XdsClient to propagate updates in a synchronized
+manner. (#27975)
+Support Custom Post-handshake Verification in TlsCredentials. (#25631)
+Reintroduce the EventEngine default factory. (#27920)
+Assert Android API >= v21. (#27943)
+Add support for abstract unix domain sockets. (#27906)
 
-pycups - is for controlling cups from python. Among others also used by
-system-config-printer.
-https://github.com/OpenPrinting/system-config-printer
-A recipe for this is also on the way - it is just not completely ready
-for review yet.
+Python:
+[Aio] Validate the input type for set_trailing_metadata and abort. (#27958)
 
-Looking forward to feedback on this.
+Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
+---
+ .../{python3-grpcio_1.41.1.bb => python3-grpcio_1.43.0.bb}  | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-grpcio_1.41.1.bb => python3-grpcio_1.43.0.bb} (86%)
 
-Do you prefer to include patch text in the request-pull?
-
-Regards
-Claus Stovgaard
-
-
-The following changes since commit
-de83f98070eeba02f465fe739d9418dd60f749da:
-
-  python3-graphviz: upgrade 0.19 -> 0.19.1 (2021-12-16 08:14:04 -0800)
-
-are available in the Git repository at:
-
-  https://github.com/frosteyes/meta-openembedded.git 
-
-for you to fetch changes up to
-2bbf94fc34942ed0665ce8af6e9e4f2850fa4889:
-
-  Add pycups - python bindings for CUPS (2021-12-20 21:59:10 +0100)
-
-----------------------------------------------------------------
-Claus Stovgaard (3):
-      Added usbip-tools for kernel USB/IP
-      Add gutenprint to meta-oe
-      Add pycups - python bindings for CUPS
-
- meta-oe/recipes-devtools/python/python3-pycups_2.0.1.bb      | 19
-+++++++++++++++++++
- meta-oe/recipes-kernel/usbip-tools/usbip-tools.bb            | 69
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- meta-oe/recipes-printing/gutenprint/gutenprint-native_git.bb | 43
-+++++++++++++++++++++++++++++++++++++++++++
- meta-oe/recipes-printing/gutenprint/gutenprint.inc           | 23
-+++++++++++++++++++++++
- meta-oe/recipes-printing/gutenprint/gutenprint_git.bb        | 47
-+++++++++++++++++++++++++++++++++++++++++++++++
- 5 files changed, 201 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/python/python3-
-pycups_2.0.1.bb
- create mode 100644 meta-oe/recipes-kernel/usbip-tools/usbip-tools.bb
- create mode 100644 meta-oe/recipes-printing/gutenprint/gutenprint-
-native_git.bb
- create mode 100644 meta-oe/recipes-printing/gutenprint/gutenprint.inc
- create mode 100644 meta-oe/recipes-
-printing/gutenprint/gutenprint_git.bb
-
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.41.1.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.43.0.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-grpcio_1.41.1.bb
+rename to meta-python/recipes-devtools/python/python3-grpcio_1.43.0.bb
+index a882f6e031..6d76967bee 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio_1.41.1.bb
++++ b/meta-python/recipes-devtools/python/python3-grpcio_1.43.0.bb
+@@ -1,8 +1,8 @@
+ DESCRIPTION = "Google gRPC"
+ HOMEPAGE = "http://www.grpc.io/"
+ SECTION = "devel/python"
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
++LICENSE = "Apache-2.0 & BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=6e4cf218112648d22420a84281b68b88"
+ 
+ DEPENDS += "${PYTHON_PN}-protobuf"
+ 
+@@ -12,7 +12,7 @@ SRC_URI:append:class-target = " file://ppc-boringssl-support.patch \
+                                 file://mips_bigendian.patch \
+                                 file://0001-absl-always-use-asm-sgidefs.h.patch \
+ "
+-SRC_URI[sha256sum] = "9b751271b029432a526a4970dc9b70d93eb6f0963b6a841b574f780b72651969"
++SRC_URI[sha256sum] = "735d9a437c262ab039d02defddcb9f8f545d7009ae61c0114e19dda3843febe5"
+ 
+ RDEPENDS:${PN} = "${PYTHON_PN}-protobuf \
+                   ${PYTHON_PN}-setuptools \
+-- 
+2.25.1
 
 
