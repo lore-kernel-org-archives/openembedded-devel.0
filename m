@@ -1,122 +1,218 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D5B3C4332F
-	for <webhook@archiver.kernel.org>; Mon, 20 Dec 2021 15:02:48 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.65])
- by mx.groups.io with SMTP id smtpd.web10.6261.1640012566767446202
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 891D6C433F5
+	for <webhook@archiver.kernel.org>; Mon, 20 Dec 2021 15:06:26 +0000 (UTC)
+Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
+ [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web09.6406.1640012785005379781
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Dec 2021 07:02:47 -0800
+ Mon, 20 Dec 2021 07:06:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=IjK5Rxxh;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.65,
- mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=MiCoqfBn;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112,
+ mailfrom: zhengrq.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1640012564; i=@fujitsu.com;
-	bh=jujKyKg5rAizR49K58PrjmYtG3I2nUrz0518j26vOF4=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=IjK5Rxxh2MGpHwLNiGd+mP+wpDgqrgwUpM/tbu0yosa0MYpkGZcWCogpOKSLl3ecw
-	 qaBnKbE+FekLg4FAJ/17QuG2dHkz41zBxilkw0pKlp9x71M09ZMyOhUy/2YLevC90F
-	 YtKPxDl3UMTtV9FyvA0fxMiH1cttTWsq0Y49z1cniPtypfMvb6QlwJ1skjNNzATvJL
-	 f3m/nRQwXcGQC4+QvXCKmR71nCF5lriVfF0j1QVGSWMq5uJnlfRnQoS/6shjwpur2m
-	 BqE1ZQ6fxXV9//IJlXf9FmNlTzwj03t9fM3O1pBe3qa9sICY0Irf8lPc9yXh7Blzeh
-	 hqxa2cbM0ltDA==
-Received: from [100.115.6.23] (using TLSv1.2 with cipher
+	s=170520fj; t=1640012782; i=@fujitsu.com;
+	bh=CIjRokJqZRZnut9+pe1mP5TNo883NfgYLUF97CZoNN8=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=MiCoqfBnVk9XNouqsQqHF1Lf3H5DBKfp0p/lyPkeZYt+DNhBVEYMGTDAxPhJgCTDA
+	 CURgvv/4Ti2vNbn0KfUF8B8IJMYBgXXi2yVgmZ0BRt3f4FzsVa4mkHKL0PcUYT9VPN
+	 OU8++/e1XBkJmU7rlSOz390uaV/kuW3ymMFh8jZysJddCV3o8JpUbhYz7O6nYJBS6s
+	 OhiK59La14vqyaWk/lEwx3HWYExHkTbUAAtfKN7SxVysF+bvrBVZUvszI9mOqOOF1y
+	 SybWhaZ7Wg9JTB0yLmtY8+NYaBJVnMX/Okj8wHRjXDItg9n6iLvuoPVJiFosbjLIfK
+	 8K1tbo0b6MQhQ==
+Received: from [100.115.68.153] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-a.eu-west-1.aws.ess.symcld.net id 0E/64-13695-41B90C16;
- Mon, 20 Dec 2021 15:02:44 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrBIsWRWlGSWpSXmKPExsViZ8MxSVd49oF
-  EgyPLjS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1owF+4wKznFWfPlxkaWB8QpHFyMXh5DAE0aJ
-  R0cfsUE4F5gk/u/eCuWcYJS48nY9YxcjJwebgJrE9Fs3WEFsEQF9iaWz9zCD2MwCKhIvfvewg
-  9jCAtYS7bsfg9WwCKhKzJi2BqyGV8BR4uWSN2A1EgIKElMevgeLcwo4SXydthhoPgfQMkeJt4
-  +LIcoFJU7OfMICMV5C4uCLF8wQrYoSsy83s0DYFRKzZrUxQdhqElfPbWKewCg4C0n7LCTtCxi
-  ZVjFaJhVlpmeU5CZm5ugaGhjoGhqa6proWhrrJVbpJuqlluqWpxaX6BrqJZYX66UWF+sVV+Ym
-  56To5aWWbGIEBnBKMUvsDsatfT/1DjFKcjApifLy+x5IFOJLyk+pzEgszogvKs1JLT7EKMPBo
-  STB+3MGUE6wKDU9tSItMwcYTTBpCQ4eJRHeJpA0b3FBYm5xZjpE6hSjopQ4b9wsoIQASCKjNA
-  +uDRbBlxhlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ86aDTOHJzCuBm/4KaDET0GKl8P0gi0s
-  SEVJSDUxF85sbmV2NXEwiW+0OW8lJVgQIFvRMubfhk/aUd+L+kq9uaf+75mS9sEjGo3Ud57Pf
-  Vxhu3no+R+nuGYN4h59fO9/sC6/f8+Bf2hmnhyVPg35NOndfkiMp/IiVeHfzxKMbf3191Oinz
-  tla+1tYMJnBJOOiq3HSKx4P7oLgbJ/FAUlP72SvOr//f9srm48KyX8/OgXanrX107BqXpc14U
-  1IjmzSjw3qva9ZuTcUn3y+aYeWjn/mrKUZ9XYP3iR/2BraVbW9aKF+Qmf8Ru/K0EvJ7Z0/Pil
-  Zm4lr37D+9snv9+LFcvO09jbeXFX1SqXpqejXx9XfnzJxKxdIBr7L77GXNprbwbF7CuvZkDLn
-  OUosxRmJhlrMRcWJAJmVGPRbAwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-13.tower-591.messagelabs.com!1640012563!5719!1
-X-Originating-IP: [62.60.8.146]
+	by server-3.bemta.az-a.eu-central-1.aws.ess.symcld.net id
+ ED/09-06990-EEB90C16; Mon, 20 Dec 2021 15:06:22 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrFIsWRWlGSWpSXmKPExsViZ8ORqPtu9oF
+  Eg+WNYhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aWR22sBQtUKy6fnsvYwHhHvouRi0NI4Amj
+  xJsTh1ggnAtMEtt7DkI5exgllsx8wNrFyMnBJqArce7xWnYQW0RAX2Lp7D3MILawgJPE7K6HY
+  DaLgKrEmgMrwGxeAQ+Jdydvs4HYEgIKElMevoeKC0qcnPmEBcRmFpCQOPjiBVCcA6hGUWL2dH
+  mI8gqJ14cvMUPYahJXz21insDINwtJ9ywk3QsYmVYx2iUVZaZnlOQmZuboGhoY6BoamuqaG+o
+  aWhroJVbpJuqlluomp+aVFCUCpfUSy4v1UouL9Yorc5NzUvTyUks2MQKDMKXYfd8Oxhd9P/UO
+  MUpyMCmJ8vL7HkgU4kvKT6nMSCzOiC8qzUktPsQow8GhJMH7cwZQTrAoNT21Ii0zBxgRMGkJD
+  h4lEd4mkDRvcUFibnFmOkTqFKOilDivNzCOhARAEhmleXBtsCi8xCgrJczLyMDAIMRTkFqUm1
+  mCKv+KUZyDUUmYN30W0BSezLwSuOmvgBYzAS1WCt8PsrgkESEl1cCU/MLQ2yskJVhC3/LlFMY
+  90kvz6k7nSx9mnyyzP8Q26tYaDWYerRdzfs7++dP8obT1PVnnCpXY+PUVrdn/buq9cQ1fq9Zw
+  dYqO6qGTwVmTMhf83m9w8YR7u6tWyQyDykLXtV9uPojcHhhTlPXOMtq2xz9LcE7VQp1JnicXM
+  IvfjhP12uTcxuy5xHbXfR2r+XZ8wkm3Oo/4TDqnfTxi1RvWjqPn+KbFR7rP4OIu2lY8JWXih3
+  98bnKNZ0RyJ4cH35GZWHLWKEL65/lp1xr1dj58b+56W03km1tueEyT+cfpW6yeVYaWbK6fcHM
+  3f8tXTd6mh5d0ruh5CPb1ZKzK2vG8eX2LGtOGxff7hITau5VYijMSDbWYi4oTAT1DjEk9AwAA
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-17.tower-532.messagelabs.com!1640012782!42714!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 22108 invoked from network); 20 Dec 2021 15:02:43 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-13.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 20 Dec 2021 15:02:43 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 63E0C100459
+Received: (qmail 9197 invoked from network); 20 Dec 2021 15:06:22 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-17.tower-532.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 20 Dec 2021 15:06:22 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id CCEBE10024B
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Dec 2021 15:02:43 +0000 (GMT)
+ Mon, 20 Dec 2021 15:06:21 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 5737B1000FF
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id C1450100239
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Dec 2021 15:02:43 +0000 (GMT)
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ Mon, 20 Dec 2021 15:06:21 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Mon, 20 Dec 2021 15:02:34 +0000
-From: Wang Mingyu <wangmy@fujitsu.com>
+ (TLS) id 15.0.1497.26; Mon, 20 Dec 2021 15:06:15 +0000
+From: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] satyr: upgrade 0.38 -> 0.39
-Date: Mon, 20 Dec 2021 23:02:21 +0800
-Message-ID: <1640012542-3632-2-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] chrony: upgrade 4.1 -> 4.2
+Date: Tue, 21 Dec 2021 08:06:03 +0800
+Message-ID: <1640045163-88086-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1640012542-3632-1-git-send-email-wangmy@fujitsu.com>
-References: <1640012542-3632-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Dec 2021 15:02:48 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Dec 2021 15:06:26 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94448
+ https://lists.openembedded.org/g/openembedded-devel/message/94450
+
+refresh arm_eabi.patch
 
 Changelog:
-=========
-Use g_malloc() and g_free() instead of malloc()/free() in many instances
-Fix call to a deprecated in Python tests
-Add test case for sr_rpm_package_cmp()
+==========
+Enhancements
+-Add support for NTPv4 extension field improving synchronisation stability and
+resolution of root delay and dispersion (experimental)
+-Add support for NTP over PTP (experimental)
+-Add support for AES-CMAC and hash functions in GnuTLS
+-Improve server interleaved mode to be more reliable and support multiple clients behind NAT
+-Update seccomp filter
+-Add statistics about interleaved mode to serverstats report
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Bug fixes
+-Fix RTC support with 64-bit time_t on 32-bit Linux
+-Fix seccomp filter to work correctly with bind*device directives
+-Suppress kernel adjustments of system clock (dosynctodr) on illumos
+
+Other changes
+-Switch Solaris support to illumos
+
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- meta-oe/recipes-support/satyr/{satyr_0.38.bb => satyr_0.39.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/satyr/{satyr_0.38.bb => satyr_0.39.bb} (94%)
+ .../chrony/chrony/arm_eabi.patch              | 30 +++++++++++--------
+ .../chrony/{chrony_4.1.bb => chrony_4.2.bb}   |  2 +-
+ 2 files changed, 19 insertions(+), 13 deletions(-)
+ rename meta-networking/recipes-support/chrony/{chrony_4.1.bb => chrony_4.2.bb} (98%)
 
-diff --git a/meta-oe/recipes-support/satyr/satyr_0.38.bb b/meta-oe/recipes-support/satyr/satyr_0.39.bb
-similarity index 94%
-rename from meta-oe/recipes-support/satyr/satyr_0.38.bb
-rename to meta-oe/recipes-support/satyr/satyr_0.39.bb
-index 4cfa977c8..732a1440e 100644
---- a/meta-oe/recipes-support/satyr/satyr_0.38.bb
-+++ b/meta-oe/recipes-support/satyr/satyr_0.39.bb
-@@ -10,7 +10,7 @@ inherit autotools-brokensep python3native pkgconfig
- SRC_URI = "git://github.com/abrt/satyr.git;branch=master;protocol=https \
-            file://0002-fix-compile-failure-against-musl-C-library.patch \
- "
--SRCREV = "ad0030f071b7ce7eb748eca3c31cb381038e2b21"
-+SRCREV = "f8a0dbfe7fcc6e44f03d66ca5c81363aea318380"
- S = "${WORKDIR}/git"
+diff --git a/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch b/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
+index 837cb6d72..4a2769b84 100644
+--- a/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
++++ b/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
+@@ -23,19 +23,22 @@ Subject: [PATCH] chrony: fix build failure for arma9
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+     Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+- sys_linux.c | 20 ++++++++++++++------
+- 1 file changed, 14 insertions(+), 6 deletions(-)
++ sys_linux.c | 15 +++++++++------
++ 1 file changed, 9 insertions(+), 6 deletions(-)
+ 
++diff --git a/sys_linux.c b/sys_linux.c
++index 9cab2ef..8104b8f 100644
+ --- a/sys_linux.c
+ +++ b/sys_linux.c
+-@@ -499,14 +499,12 @@ SYS_Linux_EnableSystemCallFilter(int lev
++@@ -484,7 +484,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
+  #endif
+      SCMP_SYS(gettimeofday),
+      SCMP_SYS(settimeofday),
+ -    SCMP_SYS(time),
+-
++ 
+      /* Process */
+      SCMP_SYS(clone),
++@@ -494,7 +493,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
+      SCMP_SYS(exit),
+      SCMP_SYS(exit_group),
+      SCMP_SYS(getpid),
+@@ -43,7 +46,7 @@ Subject: [PATCH] chrony: fix build failure for arma9
+      SCMP_SYS(getuid),
+      SCMP_SYS(getuid32),
+      SCMP_SYS(rt_sigaction),
+-@@ -520,7 +518,6 @@ SYS_Linux_EnableSystemCallFilter(int lev
++@@ -508,7 +506,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
+      /* Memory */
+      SCMP_SYS(brk),
+      SCMP_SYS(madvise),
+@@ -51,28 +54,28 @@ Subject: [PATCH] chrony: fix build failure for arma9
+      SCMP_SYS(mmap2),
+      SCMP_SYS(mprotect),
+      SCMP_SYS(mremap),
+-@@ -580,8 +577,6 @@ SYS_Linux_EnableSystemCallFilter(int lev
++@@ -568,8 +565,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
+      SCMP_SYS(sendmsg),
+      SCMP_SYS(sendto),
+      SCMP_SYS(shutdown),
+ -    /* TODO: check socketcall arguments */
+ -    SCMP_SYS(socketcall),
+-
++ 
+      /* General I/O */
+      SCMP_SYS(_newselect),
+-@@ -604,7 +599,6 @@ SYS_Linux_EnableSystemCallFilter(int lev
++@@ -593,7 +588,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
+  #ifdef __NR_futex_time64
+      SCMP_SYS(futex_time64),
+  #endif
+ -    SCMP_SYS(select),
+      SCMP_SYS(set_robust_list),
+      SCMP_SYS(write),
+-
+-@@ -612,6 +606,15 @@ SYS_Linux_EnableSystemCallFilter(int lev
++ 
++@@ -601,6 +595,15 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
+      SCMP_SYS(getrandom),
+      SCMP_SYS(sysinfo),
+      SCMP_SYS(uname),
+-+    /* not always available */
+++   /* not always available */
+ +#if ! defined(__ARM_EABI__)
+ +    SCMP_SYS(time),
+ +    SCMP_SYS(getrlimit),
+@@ -82,5 +85,8 @@ Subject: [PATCH] chrony: fix build failure for arma9
+ +    SCMP_SYS(socketcall),
+ +#endif
+    };
+-
++ 
+    const int denied_any[] = {
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-support/chrony/chrony_4.1.bb b/meta-networking/recipes-support/chrony/chrony_4.2.bb
+similarity index 98%
+rename from meta-networking/recipes-support/chrony/chrony_4.1.bb
+rename to meta-networking/recipes-support/chrony/chrony_4.2.bb
+index 117451db2..609aaab88 100644
+--- a/meta-networking/recipes-support/chrony/chrony_4.1.bb
++++ b/meta-networking/recipes-support/chrony/chrony_4.2.bb
+@@ -39,7 +39,7 @@ SRC_URI = "https://download.tuxfamily.org/chrony/chrony-${PV}.tar.gz \
+ SRC_URI:append:libc-musl = " \
+     file://0001-Fix-compilation-with-musl.patch \
+ "
+-SRC_URI[sha256sum] = "ed76f2d3f9347ac6221a91ad4bd553dd0565ac188cd7490d0801d08f7171164c"
++SRC_URI[sha256sum] = "273f9fd15c328ed6f3a5f6ba6baec35a421a34a73bb725605329b1712048db9a"
+ 
+ DEPENDS = "pps-tools"
+ 
 -- 
 2.25.1
 
