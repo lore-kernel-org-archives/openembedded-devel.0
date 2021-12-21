@@ -1,253 +1,265 @@
-Return-Path: <mingli.yu@windriver.com>
+Return-Path: <ernst.sjostrand@lists.verisure.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DD47C433EF
-	for <webhook@archiver.kernel.org>; Tue, 21 Dec 2021 10:53:57 +0000 (UTC)
-Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
- by mx.groups.io with SMTP id smtpd.web08.4341.1640084029775116897
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B07ABC433F5
+	for <webhook@archiver.kernel.org>; Tue, 21 Dec 2021 13:09:35 +0000 (UTC)
+Received: from mx08-00271601.pphosted.com (mx08-00271601.pphosted.com
+ [185.132.182.208])
+ by mx.groups.io with SMTP id smtpd.web10.5389.1640092173802939569
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Dec 2021 02:53:49 -0800
+ Tue, 21 Dec 2021 05:09:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 192.103.53.11,
- mailfrom: mingli.yu@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 1BLArmLu025677
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+ dkim=pass header.i=@verisure.com header.s=pp16032020 header.b=StXOmo0/;
+ spf=none, err=permanent DNS error (domain: lists.verisure.com,
+ ip: 185.132.182.208, mailfrom: ernst.sjostrand@lists.verisure.com)
+Received: from pps.filterd (m0107398.ppops.net [127.0.0.1])
+	by mx08-00271601.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id
+ 1BLCXu3r029102
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Dec 2021 02:53:48 -0800
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Tue, 21 Dec 2021 02:53:48 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.20; Tue, 21 Dec 2021 02:53:48 -0800
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Tue, 21 Dec 2021 02:53:47 -0800
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH v3] php: Upgrade to 8.1.0
-Date: Tue, 21 Dec 2021 18:53:46 +0800
-Message-ID: <20211221105346.48520-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ Tue, 21 Dec 2021 14:09:31 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=verisure.com;
+ h=from : to : subject
+ : date : message-id : content-type : content-id :
+ content-transfer-encoding : mime-version; s=pp16032020;
+ bh=yYbcp/UeZ4i9xAHbAuzVMiha1BHai60v4sBgNjuK+d8=;
+ b=StXOmo0/pT/zl6V3kDR0/XNdA4RD0IdYQ+YN5ogiG90hP1Pke2jALPK5Fatlv1vgVCik
+ I3EygXtWn8iyUzVpKhmDbjoyRzUCzK4MDFdspQKer8nxdbSxfoZWBNXry63tOEd5T0WZ
+ yflQY8OjEELpmKYOG9/imeC6RkcVIG7tIfyNhQQ5bcDKuRhX45pBUkLDPjzv66qw+xCs
+ Qmtap+ZMK210Hdlt/ZLU/3pauTlOR/aK3N15O1L0BgtjZuOswH0kWHyChXnUomS7CKZQ
+ RdWyit2r1pudZ4b6rvS1JblYw+9cU3/EOpZ3SOrWVDThaW+4N2Otine9XtBLba8pDtFa Bw==
+Received: from eur01-ve1-obe.outbound.protection.outlook.com
+ (mail-ve1eur01lp2053.outbound.protection.outlook.com [104.47.1.53])
+	by mx08-00271601.pphosted.com (PPS) with ESMTPS id 3d39wvkh05-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 21 Dec 2021 14:09:31 +0100
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=d/MlPfqEgRs1zMgnPYCWEWI7C7GDh3FgDm1Ue60TujZXeSqss5XZXIRhWp0S+WFBJvdmCkbMMwPgxAdcETL/sT8OelfxL+2jj5WOXh/fpzef6TBX9wR6wV5JEka/VewZVuXqf9HXgTxM7G0MXa2VN53VRHYEBIP/TWb996YIs8fENiKNK0QP729CMvB0AQDekuv4qd9yu9Vm2TUSb63uv3ysr5U1+YDWHRMDGO4yiqXJJ4QZPdB4DXLHpUVyKxW2S8yI3XksCWlR6S2JvN0R0UOsVL8vMk/DT1xkC++OcYyprudo35hIrxHOJDVmmNoQBSGi7mVVXPvBzx/UxwF2hA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=yYbcp/UeZ4i9xAHbAuzVMiha1BHai60v4sBgNjuK+d8=;
+ b=MO5IN+noLQLmcjFZ3oVy+24n1SIhEqvWpKoqlY6GRwipflblA9BkMV/jZPmR5IGpx48xPhHzD7fQxsy4j9pkK8JMB5Ezgti550pIsZolHW7kfnJviLy2Jli97K0uZHnJR+Vyd7a+Dp1cXpCyK2noKZxAESQ1VIk/bGF+oh4J6m9zx5r3i27Ox/4VWdbRVP8WXZlaGtAjmgEwp8vw1rC/ZhArbqLBylSDcyT5VNd6EZE+DmkYiFO03xGpkOoBj04sjt6OLidBHe49TGbUYVLixzwfket8hncIbVCD8Agib7834IStrryQbp/Ze1gV6Ibg36OcC8FgKtyE0OIeG4Zrow==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=lists.verisure.com; dmarc=pass action=none
+ header.from=lists.verisure.com; dkim=pass header.d=lists.verisure.com;
+ arc=none
+Received: from AM9PR10MB5132.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:43b::18)
+ by AS4PR10MB5393.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:4bb::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4801.15; Tue, 21 Dec
+ 2021 13:09:30 +0000
+Received: from AM9PR10MB5132.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::66:11c9:5d2a:e49c]) by AM9PR10MB5132.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::66:11c9:5d2a:e49c%4]) with mapi id 15.20.4801.020; Tue, 21 Dec 2021
+ 13:09:30 +0000
+From: =?utf-8?B?RXJuc3QgU2rDtnN0cmFuZA==?=
+	<ernst.sjostrand@lists.verisure.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][dunfell][PATCH] libmicrohttpd: Add patch to fix
+ CVE-2021-3466
+Thread-Topic: [meta-oe][dunfell][PATCH] libmicrohttpd: Add patch to fix
+ CVE-2021-3466
+Thread-Index: AQHX9mv9iGfI04M+IE6rtCzq+QJukQ==
+Date: Tue, 21 Dec 2021 13:09:30 +0000
+Message-ID: 
+ <4880577cbd16ccf732daf804bb720373c3a4de05.camel@lists.verisure.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: f33c933c-4a7c-4209-3b0c-08d9c4831fd7
+x-ms-traffictypediagnostic: AS4PR10MB5393:EE_
+x-microsoft-antispam-prvs: 
+ <AS4PR10MB539353841890AC9BA99FA55CCB7C9@AS4PR10MB5393.EURPRD10.PROD.OUTLOOK.COM>
+x-ms-oob-tlc-oobclassifiers: OLM:37;
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ +9BVGnDQ+KwzpgapTnbtxtxeloqdTirosm4CQ3WpWsA7VCPOa7X0212fIpkMhs0jTjTHxlqa7EANRUGVYmYuIyu0WVPBUXwqkR6ymZ+QTooQwwVzBIBcOpjb0Xxl9lCA0mRMj4so2JJvOZb16IETNbhHEpTk3t9SqItBKrr4tU57Yiv4OjyMw9/X2Y0yZn4Fg99nP7tRbAvbBxRo6zE7z85Q+lZcchqCWHLBYJs3qvkuZyNEHERaqpi3a/2Q+Vu5aIoWAXRDm611nQc9Gd3BpzD9vNERFuB5E9Ggs7vuNNkyZEn/3qAAkHdGwza+3WX+MdtxH1jrOEGBgpyCEs699jBuEwv1S4v5AjnAlakdSPMPBH4NHTb0ejoZECCKr4T/ka6POarMnOQwIGdXY6y9LchXVU9R8iREhOWbl7lsiPFzp2UBJ01/8OAoXTGVqRUTPGK3RaJHy756he8hoFEIg5nFlWAAxCLtye7qOdqckrHWHPnW4XEqpiwqsnfX5ng3AUPWHgC2bvKEsujqJ2CFUHL6ieARa9Xz7NCD/YTatSFpOGmw47RlN2QEX0LSX52U3f9VIZE6tV5GgHsKjNc79gOoPnY+tumQ28gIM/GIAJxPVi0t6XkkR2coGnfQ/vevzFyFuBIqyc7T7BXD7h9ijYrm/SJeTcI5dozhrYuBFT1ycaLm57/11HRgaqM67MCPU59iN93FT/J8yu28SKrQUA==
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR10MB5132.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(366004)(8936002)(508600001)(6916009)(6512007)(85202003)(86362001)(8676002)(186003)(2616005)(83380400001)(85182001)(38070700005)(66446008)(6486002)(66574015)(38100700002)(2906002)(66946007)(26005)(316002)(64756008)(66556008)(66476007)(122000001)(71200400001)(6506007)(76116006)(91956017)(5660300002);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?VDVweFRGYkQyT3laeVA5S3pERzczMXVGMVZxQnFpNnFkOUE4cVUvc1QxSzho?=
+ =?utf-8?B?cm1ZcjFMMGkwVnYrOXhiUWx5dGdqank2ZTMvTG03cGZ5WWQwWnRNNVpTdVNj?=
+ =?utf-8?B?UktwNU1qbzcwZ0pXV01udHY1ZDFXN08rd3owcWVld3labERPODQ3cStZbVZX?=
+ =?utf-8?B?NUViblprQUhyTGJYdmRuZi9BVVpiT3NVSVlXS1NpemxTWU40TWlBdG5oNlBF?=
+ =?utf-8?B?VjVJS2ZDUyt2SGFvVWJiMWEwcEhoTDM3ejZSRGQ1WkRjaWVHQjJNaEt5QTBJ?=
+ =?utf-8?B?RmRqVW01azFyVXpqTVprVU9SOU4wd09jNWhqclp5N2JNUC8xa1JiTDFFVVNY?=
+ =?utf-8?B?QzRxNmFvV2V0NmFRZE9NQWhkMHhlSzFxamFVeHN4QnJ4Q2xCckZQSW43NUdG?=
+ =?utf-8?B?L2EzczF3RDNjTDNyNndveUtJOFR5VVFGZTFpTVh0UEZCZFpkRUt1eHJiNlRv?=
+ =?utf-8?B?Z3htVzZoZW9NQjlVcmRTdkgwV3RzZ1N5STlzRXVQL1VpUzgrRFNoNU5LenJt?=
+ =?utf-8?B?c240TnVSWG0rZkg3bzV5d1VOdUphS3V3b0VwamVWc2hNT1pHMkNtby92eEZJ?=
+ =?utf-8?B?SkcyQmVCM0NRMW01amFMSzNmR0RlNm5KYnFaeVdTdmlvSU4xMVgzSGNQVVg2?=
+ =?utf-8?B?NE9uSUcvUGxEc3gwejZicExRcXVCb3dwY3QxdXZGRGRJenczUXFJWGp0bWNB?=
+ =?utf-8?B?YXZlU0xKd2JvSFR4M0t2SGV0ZGhJOHJSam9lVXBXZmlVRTNlbE5IUlBVK1JV?=
+ =?utf-8?B?VFNYRFJ6SmJVR0trQ21IeFlZQWkxWGZzYmpId0QxZW41cVJTUzllcXhuSGVx?=
+ =?utf-8?B?c25uRTJxakFOR0FaMWpMOUpNMVBpMU1ZUWF6akFGOGZ0TDFwR0FSbjJmQWVt?=
+ =?utf-8?B?emxwbDJNSW5QM2U0aSt5aTJtRTJrUWxGTW5sVndTdGRRN2lrT1ErcktEWERL?=
+ =?utf-8?B?YzlqNHVMUHVTUzdXeXlqd3ZWWjdOdzJoTGZXM1dMSjB0ZlYzMitKRnJTdkE4?=
+ =?utf-8?B?YnRQYkZBMXl2UC9NSWhLeW9XS1BETGpoTTMvSmtIZUpDTmJpRTh1TnEwZ2VL?=
+ =?utf-8?B?RThWQjZoaEVkdy9vWi9PWUpFanJkZjI0YWRBU2laZDQwVFVRZVhxd2x2WmZX?=
+ =?utf-8?B?NUlmakp0WVl4OE9ZMDAraDIvN0dnWHlsTnNQU01waER2eVBZRWNGN2tuYzl1?=
+ =?utf-8?B?SVZPSXNuNnBSODdoMjd6Z3hvejZZOHB3enRXQVBlUm1TL3BHbzZkMmdFaHhS?=
+ =?utf-8?B?NXJFUU9mNnhQYnpxVHpDM291dUdNd1J0OVlZaGVjQnpMVGlJc3JpSnhId1RW?=
+ =?utf-8?B?a2xFaUwyWWVOcVhiVEdNS3YwOCtnQ0xDRkdpQVlZdmdVYzhNNTB4QkhXSEIv?=
+ =?utf-8?B?cldsdk82L3U3QWpqZGg4VzRBWlRaMEhTa1VaOGJwNHFlUnpCYUxnbnhsdGRM?=
+ =?utf-8?B?RFpXSVlyUy9nRjIzd2h0WmdGQVpOL3QrZUkwS0xmbHpoRU1KZkFUU2xSR3N0?=
+ =?utf-8?B?RDE0WHZjZXZ4cTNUZjN5ZVVTRjFNRmF2dGx5OTZ6SytWMWNSSXRnaWl6VE5i?=
+ =?utf-8?B?Mlh4RGxPK3ltUXpzdFk2VWgraVNxbUE4Y3pHQko5YzQ5RTZablQ3a05yMEhI?=
+ =?utf-8?B?bm5pRktHcTgrcU1pUUx3azUzOXlTcm9zOXgvQmtVQVNkNnkyMGNEV3dzbzJE?=
+ =?utf-8?B?emFCd2h3Smd4bXVxejBvTWhsblBOaGsrak9NWndScHpwaVZTdXZoZnlUR1BJ?=
+ =?utf-8?B?c0N3MXJCbFZ4OWxoMXpNSnYzbXl5SzlJYjkwTjBielZVS1RXN25FNE1KR3M5?=
+ =?utf-8?B?MEVWRXZBWkxMK0lNWkFNREFGTmxWVE9uekg4YUJndFp2NmpMRXpoTXdlRjNO?=
+ =?utf-8?B?TVVnVUIreWtvZ1BON0tOL0VNNUwxcEUwbGo4dndGYWpnc2hDdHFEZm9obmVO?=
+ =?utf-8?B?SUFiREFMQ0FBTC8yMUpuK1NoOVZjUnZGQ3lUNWczekcycVNLU3EwMDUxeUd3?=
+ =?utf-8?B?anVlakFxSFVZNFF6aEJhaUcwbncxcTJ0aGdzTXhnNzgyakJBdEcrVHlkcHRS?=
+ =?utf-8?B?MmFxTFZIZjAxbzJpRWtDRk1qL0pqRnRpNGFTK0Fja1UyU3RybCt5Z0RwR2Qz?=
+ =?utf-8?B?YXBmbVc0NldRamxWRGhXRFBwMDRDcUxTYXgxY0tjcjdWVFkrR2xWejV6eTFY?=
+ =?utf-8?B?bk1sd3dXK1djWFlIc20xSzVPZTJUUDVxcmFFK2hUc3dHMGtzemkvYzlETGtX?=
+ =?utf-8?Q?hvmcbU+xL0BMGbRTmp3XyL6DSagulGbnmkXUyV3qC0=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <66626C62D7567F43B727627FB5A3ACC0@EURPRD10.PROD.OUTLOOK.COM>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain
+X-OriginatorOrg: lists.verisure.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR10MB5132.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ f33c933c-4a7c-4209-3b0c-08d9c4831fd7
+X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Dec 2021 13:09:30.3126
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3055fa7f-a944-4927-801e-a62b63119e43
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 
+ NJ0JyLYdpkSOh6EK4j9b3hCi5yBgY4qQKpeXYhtBk1B6bvr95z2y6Hh4mgLKAWOCXQulNPtbRT5ik+uvhZHctUbDXp3DGlsfJHfvi8oxySk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR10MB5393
+X-Proofpoint-GUID: 2ZxEI2Nl9EfInyyyQWS_akntzn56voQF
+X-Proofpoint-ORIG-GUID: 2ZxEI2Nl9EfInyyyQWS_akntzn56voQF
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.11.62.513
+ definitions=2021-12-21_04,2021-12-21_01,2021-12-02_01
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 Dec 2021 10:53:57 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Dec 2021 13:09:35 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94465
+ https://lists.openembedded.org/g/openembedded-devel/message/94466
 
-From: Mingli Yu <mingli.yu@windriver.com>
-
-Rebase one patch to new version and enable openssl PACKAGECONFIG
-as OpenSSL 3.0 is now supported in the new version now [1] and
-remove one patch [2] as the related support for cross-compile env
-is already added in 8.1.0 [3].
-
-[1] https://github.com/php/php-src/commit/7b34db0659dda933b1146a0ff249f25acca1d669
-[2] https://git.openembedded.org/meta-openembedded/commit/?id=265bab83c9acbfa97117103dd5c35bbd8a9814d6
-[3] https://github.com/php/php-src/commit/f1ad9199eff32dd805bb5b155002bdb6ca69bf01
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- ...ext-opcache-config.m4-enable-opcache.patch | 50 +++++++++++--------
- .../0011-use-qemuwrapper-for-minilua.patch    | 11 ----
- .../php/{php_8.0.12.bb => php_8.1.0.bb}       | 20 ++------
- 3 files changed, 34 insertions(+), 47 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/php/php/0011-use-qemuwrapper-for-minilua.patch
- rename meta-oe/recipes-devtools/php/{php_8.0.12.bb => php_8.1.0.bb} (94%)
-
-diff --git a/meta-oe/recipes-devtools/php/php/0001-ext-opcache-config.m4-enable-opcache.patch b/meta-oe/recipes-devtools/php/php/0001-ext-opcache-config.m4-enable-opcache.patch
-index 44534cc06..a967d6412 100644
---- a/meta-oe/recipes-devtools/php/php/0001-ext-opcache-config.m4-enable-opcache.patch
-+++ b/meta-oe/recipes-devtools/php/php/0001-ext-opcache-config.m4-enable-opcache.patch
-@@ -1,6 +1,6 @@
--From 8cabcf1043953a0fe48107204a2212609b8e6516 Mon Sep 17 00:00:00 2001
--From: Claude Bing <cbing@cybernetics.com>
--Date: Tue, 9 Nov 2021 12:59:15 -0500
-+From ca9b419f2c146061f73ee045cb0a069c18b40cd0 Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Wed, 15 Dec 2021 14:00:08 +0800
- Subject: [PATCH 01/11] ext/opcache/config.m4: enable opcache
- 
- We can't use AC_TRY_RUN to run programs in a cross compile
-@@ -17,15 +17,18 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
- update patch to version 8.0.12
- fix issue linking with librt
- Signed-off-by: Claude Bing <cbing@cybernetics.com>
-+
-+update patch to version 8.1.0
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
- ---
-- ext/opcache/config.m4 | 197 ++----------------------------------------
-- 1 file changed, 8 insertions(+), 189 deletions(-)
-+ ext/opcache/config.m4 | 204 ++----------------------------------------
-+ 1 file changed, 8 insertions(+), 196 deletions(-)
- 
- diff --git a/ext/opcache/config.m4 b/ext/opcache/config.m4
--index 5492fd920c..95158ccfd9 100644
-+index 2a83fa2..9471b5d 100644
- --- a/ext/opcache/config.m4
- +++ b/ext/opcache/config.m4
--@@ -101,202 +101,21 @@ if test "$PHP_OPCACHE" != "no"; then
-+@@ -108,209 +108,21 @@ if test "$PHP_OPCACHE" != "no"; then
-    AC_CHECK_FUNCS([mprotect])
-  
-    AC_MSG_CHECKING(for sysvipc shared memory support)
-@@ -93,9 +96,10 @@ index 5492fd920c..95158ccfd9 100644
- -  }
- -  return 0;
- -}
---]])],[dnl
-+-]])],[have_shm_ipc=yes],[have_shm_ipc=no],[have_shm_ipc=no])
-+-  if test "$have_shm_ipc" = "yes"; then
- -    AC_DEFINE(HAVE_SHM_IPC, 1, [Define if you have SysV IPC SHM support])
---    have_shm_ipc=yes],[have_shm_ipc=no],[have_shm_ipc=no])
-+-  fi
- +  AC_DEFINE(HAVE_SHM_IPC, 1, [Define if you have SysV IPC SHM support])
- +  have_shm_ipc=yes
-    AC_MSG_RESULT([$have_shm_ipc])
-@@ -147,9 +151,19 @@ index 5492fd920c..95158ccfd9 100644
- -  }
- -  return 0;
- -}
---]])],[dnl
-+-]])],[have_shm_mmap_anon=yes],[have_shm_mmap_anon=no],[
-+-  case $host_alias in
-+-    *linux*)
-+-      have_shm_mmap_anon=yes
-+-      ;;
-+-    *)
-+-      have_shm_mmap_anon=no
-+-      ;;
-+-  esac
-+-])
-+-  if test "$have_shm_mmap_anon" = "yes"; then
- -    AC_DEFINE(HAVE_SHM_MMAP_ANON, 1, [Define if you have mmap(MAP_ANON) SHM support])
---    have_shm_mmap_anon=yes],[have_shm_mmap_anon=no],[have_shm_mmap_anon=no])
-+-  fi
- +  AC_DEFINE(HAVE_SHM_MMAP_ANON, 1, [Define if you have mmap(MAP_ANON) SHM support])
- +  have_shm_mmap_anon=yes
-    AC_MSG_RESULT([$have_shm_mmap_anon])
-@@ -219,16 +233,12 @@ index 5492fd920c..95158ccfd9 100644
- -  }
- -  return 0;
- -}
---]])],[dnl
-+-]])],[have_shm_mmap_posix=yes],[have_shm_mmap_posix=no],[have_shm_mmap_posix=no])
-+-  if test "$have_shm_mmap_posix" = "yes"; then
- -    AC_DEFINE(HAVE_SHM_MMAP_POSIX, 1, [Define if you have POSIX mmap() SHM support])
---    AC_MSG_RESULT([yes])
---    have_shm_mmap_posix=yes
- -    PHP_CHECK_LIBRARY(rt, shm_unlink, [PHP_ADD_LIBRARY(rt,1,OPCACHE_SHARED_LIBADD)])
---  ],[
---    AC_MSG_RESULT([no])
---  ],[
---    AC_MSG_RESULT([no])
---  ])
-+-  fi
-+-  AC_MSG_RESULT([$have_shm_mmap_posix])
- +  AC_DEFINE(HAVE_SHM_MMAP_POSIX, 1, [Define if you have POSIX mmap() SHM support])
- +  AC_MSG_RESULT([yes])
- +  have_shm_mmap_posix=yes
-@@ -237,5 +247,5 @@ index 5492fd920c..95158ccfd9 100644
-    PHP_NEW_EXTENSION(opcache,
-  	ZendAccelerator.c \
- -- 
--2.25.1
-+2.17.1
- 
-diff --git a/meta-oe/recipes-devtools/php/php/0011-use-qemuwrapper-for-minilua.patch b/meta-oe/recipes-devtools/php/php/0011-use-qemuwrapper-for-minilua.patch
-deleted file mode 100644
-index 892a0460c..000000000
---- a/meta-oe/recipes-devtools/php/php/0011-use-qemuwrapper-for-minilua.patch
-+++ /dev/null
-@@ -1,11 +0,0 @@
----- a/ext/opcache/jit/Makefile.frag	2021-10-19 06:34:32.000000000 -0400
--+++ b/ext/opcache/jit/Makefile.frag	2021-11-15 15:10:41.437289836 -0500
--@@ -3,7 +3,7 @@ $(builddir)/minilua: $(srcdir)/jit/dynas
-- 	$(CC) $(srcdir)/jit/dynasm/minilua.c -lm -o $@
-- 
-- $(builddir)/jit/zend_jit_x86.c: $(srcdir)/jit/zend_jit_x86.dasc $(srcdir)/jit/dynasm/*.lua $(builddir)/minilua
---	$(builddir)/minilua $(srcdir)/jit/dynasm/dynasm.lua  $(DASM_FLAGS) -o $@ $(srcdir)/jit/zend_jit_x86.dasc
--+	$(top_srcdir)/qemuwrapper $(builddir)/minilua $(srcdir)/jit/dynasm/dynasm.lua  $(DASM_FLAGS) -o $@ $(srcdir)/jit/zend_jit_x86.dasc
-- 
-- $(builddir)/jit/zend_jit.lo: \
-- 	$(builddir)/jit/zend_jit_x86.c \
-diff --git a/meta-oe/recipes-devtools/php/php_8.0.12.bb b/meta-oe/recipes-devtools/php/php_8.1.0.bb
-similarity index 94%
-rename from meta-oe/recipes-devtools/php/php_8.0.12.bb
-rename to meta-oe/recipes-devtools/php/php_8.1.0.bb
-index 38771948f..593eb3955 100644
---- a/meta-oe/recipes-devtools/php/php_8.0.12.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.1.0.bb
-@@ -6,7 +6,7 @@ LICENSE = "PHP-3.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=99532e0f6620bc9bca34f12fadaee33c"
- 
- BBCLASSEXTEND = "native"
--DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native qemu-native"
-+DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native"
- DEPENDS:class-native = "zlib-native libxml2-native"
- 
- PHP_MAJOR_VERSION = "${@d.getVar('PV').split('.')[0]}"
-@@ -25,7 +25,6 @@ SRC_URI:append:class-target = " \
-             file://0006-ext-phar-Makefile.frag-Fix-phar-packaging.patch \
-             file://0007-sapi-cli-config.m4-fix-build-directory.patch \
-             file://0008-ext-imap-config.m4-fix-include-paths.patch \
--            file://0011-use-qemuwrapper-for-minilua.patch \
-             file://php-fpm.conf \
-             file://php-fpm-apache.conf \
-             file://70_mod_php${PHP_MAJOR_VERSION}.conf \
-@@ -33,10 +32,10 @@ SRC_URI:append:class-target = " \
-           "
- 
- S = "${WORKDIR}/php-${PV}"
--SRC_URI[sha256sum] = "b4886db1df322dc8fb128d8b34ae7e94f6fc682ecb29ff4f5a591d4de9feadbf"
-+SRC_URI[sha256sum] = "0725ed2baea125496a898455d501a77460218b2a0cfad773fa9322f491b82b61"
- 
- 
--inherit autotools pkgconfig python3native gettext qemu
-+inherit autotools pkgconfig python3native gettext
- 
- # phpize is not scanned for absolute paths by default (but php-config is).
- #
-@@ -77,7 +76,7 @@ EXTRA_OECONF:class-native = " \
-                 ${COMMON_EXTRA_OECONF} \
- "
- 
--PACKAGECONFIG ??= "mysql sqlite3 imap opcache \
-+PACKAGECONFIG ??= "mysql sqlite3 imap opcache openssl \
-                    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 pam', d)} \
- "
- PACKAGECONFIG:class-native = ""
-@@ -128,17 +127,6 @@ do_configure:prepend () {
-     find ${S} -name config.m4 | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_SBINDIR_NATIVE}/httpd!'
- }
- 
--do_configure:prepend:class-target () {
--    # Write out a qemu wrapper that will be used by the makefile
--    # so that it can run minilua through that.
--    qemu_binary="${@qemu_wrapper_cmdline(d, d.getVar('STAGING_DIR_HOST'), [d.expand('${STAGING_DIR_HOST}${libdir}'),d.expand('${STAGING_DIR_HOST}${base_libdir}')])}"
--    cat > ${S}/qemuwrapper << EOF
--#!/bin/sh
--$qemu_binary "\$@"
--EOF
--    chmod +x ${S}/qemuwrapper
--}
--
- do_configure:append() {
-     # No, libtool, we really don't want rpath set...
-     sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
--- 
-2.17.1
-
+RXh0cmFjdCBwYXRjaCBmcm9tIHRoZSAwLjkuNzEgcmVsZWFzZSBjb21taXQuDQoNClNpZ25lZC1v
+ZmYtYnk6IEVybnN0IFNqw7ZzdHJhbmQgPGVybnN0LnNqb3N0cmFuZEB2ZXJpc3VyZS5jb20+DQot
+LS0NCiAuLi4vbGlibWljcm9odHRwZC9DVkUtMjAyMS0zNDY2LnBhdGNoICAgICAgICAgfCAxNTIg
+KysrKysrKysrKysrKysrKysrDQogLi4uL2xpYm1pY3JvaHR0cGQvbGlibWljcm9odHRwZF8wLjku
+NzAuYmIgICAgIHwgICAzICstDQogMiBmaWxlcyBjaGFuZ2VkLCAxNTQgaW5zZXJ0aW9ucygrKSwg
+MSBkZWxldGlvbigtKQ0KIGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL3JlY2lwZXMtc3VwcG9y
+dC9saWJtaWNyb2h0dHBkL2xpYm1pY3JvaHR0cGQvQ1ZFLTIwMjEtMzQ2Ni5wYXRjaA0KDQpkaWZm
+IC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlibWljcm9odHRwZC9saWJtaWNyb2h0
+dHBkL0NWRS0yMDIxLTM0NjYucGF0Y2ggYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJtaWNy
+b2h0dHBkL2xpYm1pY3JvaHR0cGQvQ1ZFLTIwMjEtMzQ2Ni5wYXRjaA0KbmV3IGZpbGUgbW9kZSAx
+MDA2NDQNCmluZGV4IDAwMDAwMDAwMC4uOGMzNmMyMjYzDQotLS0gL2Rldi9udWxsDQorKysgYi9t
+ZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJtaWNyb2h0dHBkL2xpYm1pY3JvaHR0cGQvQ1ZFLTIw
+MjEtMzQ2Ni5wYXRjaA0KQEAgLTAsMCArMSwxNTIgQEANCitGcm9tIDg2ZDlhNjFiZTYzOTUyMjA3
+MTRiMWE1MGQ1MTQ0ZTY1NjY4OTYxZjYgTW9uIFNlcCAxNyAwMDowMDowMCAyMDAxDQorRnJvbTog
+PT9VVEYtOD9xP0VybnN0PTIwU2o9QzM9QjZzdHJhbmQ/PSA8ZXJuc3Quc2pvc3RyYW5kQHZlcmlz
+dXJlLmNvbT4NCitEYXRlOiBUdWUsIDIxIERlYyAyMDIxIDExOjA1OjIyICswMDAwDQorU3ViamVj
+dDogW1BBVENIXSBGaXggYnVmZmVyIG92ZXJmbG93IGluIHVybCBwYXJzZXIgYW5kIGFkZCB0ZXN0
+DQorDQorRml4ZXMgQ1ZFLTIwMjEtMzQ2Ng0KKy0tLQ0KKyBzcmMvbWljcm9odHRwZC9wb3N0cHJv
+Y2Vzc29yLmMgICAgICB8IDE4ICsrKysrKy0tDQorIHNyYy9taWNyb2h0dHBkL3Rlc3RfcG9zdHBy
+b2Nlc3Nvci5jIHwgNjYgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysNCisgMiBmaWxlcyBj
+aGFuZ2VkLCA4MCBpbnNlcnRpb25zKCspLCA0IGRlbGV0aW9ucygtKQ0KKw0KK2RpZmYgLS1naXQg
+YS9zcmMvbWljcm9odHRwZC9wb3N0cHJvY2Vzc29yLmMgYi9zcmMvbWljcm9odHRwZC9wb3N0cHJv
+Y2Vzc29yLmMNCitpbmRleCBiN2Y2YjEwLi5lYmQxNjg2IDEwMDY0NA0KKy0tLSBhL3NyYy9taWNy
+b2h0dHBkL3Bvc3Rwcm9jZXNzb3IuYw0KKysrKyBiL3NyYy9taWNyb2h0dHBkL3Bvc3Rwcm9jZXNz
+b3IuYw0KK0BAIC0xMzcsOCArMTM3LDcgQEAgc3RydWN0IE1IRF9Qb3N0UHJvY2Vzc29yDQorICAg
+dm9pZCAqY2xzOw0KKyANCisgICAvKioNCistICAgKiBFbmNvZGluZyBhcyBnaXZlbiBieSB0aGUg
+aGVhZGVycyBvZiB0aGUNCistICAgKiBjb25uZWN0aW9uLg0KKysgICAqIEVuY29kaW5nIGFzIGdp
+dmVuIGJ5IHRoZSBoZWFkZXJzIG9mIHRoZSBjb25uZWN0aW9uLg0KKyAgICAqLw0KKyAgIGNvbnN0
+IGNoYXIgKmVuY29kaW5nOw0KKyANCitAQCAtNTg2LDcgKzU4NSw3IEBAIHBvc3RfcHJvY2Vzc191
+cmxlbmNvZGVkIChzdHJ1Y3QgTUhEX1Bvc3RQcm9jZXNzb3IgKnBwLA0KKyAgICAgICBwcC0+c3Rh
+dGUgPSBQUF9FcnJvcjsNCisgICAgICAgYnJlYWs7DQorICAgICBjYXNlIFBQX0NhbGxiYWNrOg0K
+Ky0gICAgICBpZiAoIChwcC0+YnVmZmVyX3BvcyArIChlbmRfa2V5IC0gc3RhcnRfa2V5KSA+DQor
+KyAgICAgIGlmICggKHBwLT5idWZmZXJfcG9zICsgKGVuZF9rZXkgLSBzdGFydF9rZXkpID49DQor
+ICAgICAgICAgICAgIHBwLT5idWZmZXJfc2l6ZSkgfHwNCisgICAgICAgICAgICAocHAtPmJ1ZmZl
+cl9wb3MgKyAoZW5kX2tleSAtIHN0YXJ0X2tleSkgPA0KKyAgICAgICAgICAgICBwcC0+YnVmZmVy
+X3BvcykgKQ0KK0BAIC02MzYsNiArNjM1LDExIEBAIHBvc3RfcHJvY2Vzc191cmxlbmNvZGVkIChz
+dHJ1Y3QgTUhEX1Bvc3RQcm9jZXNzb3IgKnBwLA0KKyAgIHsNCisgICAgIGlmIChOVUxMID09IGVu
+ZF9rZXkpIA0KKyAgICAgICBlbmRfa2V5ID0gJnBvc3RfZGF0YVtwb2ZmXTsNCisrICAgIGlmIChw
+cC0+YnVmZmVyX3BvcyArIChlbmRfa2V5IC0gc3RhcnRfa2V5KSA+PSBwcC0+YnVmZmVyX3NpemUp
+DQorKyAgICB7DQorKyAgICAgIHBwLT5zdGF0ZSA9IFBQX0Vycm9yOw0KKysgICAgICByZXR1cm4g
+TUhEX05POw0KKysgICAgfQ0KKyAgICAgbWVtY3B5ICgma2J1ZltwcC0+YnVmZmVyX3Bvc10sDQor
+ICAgICAgICAgICAgIHN0YXJ0X2tleSwNCisgICAgICAgICAgICAgZW5kX2tleSAtIHN0YXJ0X2tl
+eSk7DQorQEAgLTY2Myw2ICs2NjcsMTEgQEAgcG9zdF9wcm9jZXNzX3VybGVuY29kZWQgKHN0cnVj
+dCBNSERfUG9zdFByb2Nlc3NvciAqcHAsDQorICAgICAgICAgICAgICAgICAgICBsYXN0X2VzY2Fw
+ZSk7DQorICAgICBwcC0+bXVzdF9pa3ZpID0gZmFsc2U7DQorICAgfQ0KKysgIGlmIChQUF9FcnJv
+ciA9PSBwcC0+c3RhdGUpDQorKyAgew0KKysgICAgLyogU3RhdGUgaW4gZXJyb3IsIHJldHVybmlu
+ZyBmYWlsdXJlICovDQorKyAgICByZXR1cm4gTUhEX05POw0KKysgIH0NCisgICByZXR1cm4gTUhE
+X1lFUzsNCisgfQ0KKyANCitAQCAtMTQyNCw3ICsxNDMzLDggQEAgTUhEX2Rlc3Ryb3lfcG9zdF9w
+cm9jZXNzb3IgKHN0cnVjdCBNSERfUG9zdFByb2Nlc3NvciAqcHApDQorICAgICAgdGhlIHBvc3Qt
+cHJvY2Vzc2luZyBtYXkgaGF2ZSBiZWVuIGludGVycnVwdGVkDQorICAgICAgYXQgYW55IHN0YWdl
+ICovDQorICAgaWYgKCAocHAtPnhidWZfcG9zID4gMCkgfHwNCistICAgICAgIChwcC0+c3RhdGUg
+IT0gUFBfRG9uZSkgKQ0KKysgICAgICAgKCAocHAtPnN0YXRlICE9IFBQX0RvbmUpICYmDQorKyAg
+ICAgICAgIChwcC0+c3RhdGUgIT0gUFBfSW5pdCkgKSApDQorICAgICByZXQgPSBNSERfTk87DQor
+ICAgZWxzZQ0KKyAgICAgcmV0ID0gTUhEX1lFUzsNCitkaWZmIC0tZ2l0IGEvc3JjL21pY3JvaHR0
+cGQvdGVzdF9wb3N0cHJvY2Vzc29yLmMgYi9zcmMvbWljcm9odHRwZC90ZXN0X3Bvc3Rwcm9jZXNz
+b3IuYw0KK2luZGV4IDJjMzc1NjUuLmNiYTQ4NmQgMTAwNjQ0DQorLS0tIGEvc3JjL21pY3JvaHR0
+cGQvdGVzdF9wb3N0cHJvY2Vzc29yLmMNCisrKysgYi9zcmMvbWljcm9odHRwZC90ZXN0X3Bvc3Rw
+cm9jZXNzb3IuYw0KK0BAIC00NTEsNiArNDUxLDcxIEBAIHRlc3RfZW1wdHlfdmFsdWUgKHZvaWQp
+DQorIH0NCisgDQorIA0KKytzdGF0aWMgZW51bSBNSERfUmVzdWx0DQorK3ZhbHVlX2NoZWNrZXIy
+ICh2b2lkICpjbHMsDQorKyAgICAgICAgICAgICAgICBlbnVtIE1IRF9WYWx1ZUtpbmQga2luZCwN
+CisrICAgICAgICAgICAgICAgIGNvbnN0IGNoYXIgKmtleSwNCisrICAgICAgICAgICAgICAgIGNv
+bnN0IGNoYXIgKmZpbGVuYW1lLA0KKysgICAgICAgICAgICAgICAgY29uc3QgY2hhciAqY29udGVu
+dF90eXBlLA0KKysgICAgICAgICAgICAgICAgY29uc3QgY2hhciAqdHJhbnNmZXJfZW5jb2Rpbmcs
+DQorKyAgICAgICAgICAgICAgICBjb25zdCBjaGFyICpkYXRhLA0KKysgICAgICAgICAgICAgICAg
+dWludDY0X3Qgb2ZmLA0KKysgICAgICAgICAgICAgICAgc2l6ZV90IHNpemUpDQorK3sNCisrICBy
+ZXR1cm4gTUhEX1lFUzsNCisrfQ0KKysNCisrDQorK3N0YXRpYyBpbnQNCisrdGVzdF9vdmVyZmxv
+dyAoKQ0KKyt7DQorKyAgc3RydWN0IE1IRF9Db25uZWN0aW9uIGNvbm5lY3Rpb247DQorKyAgc3Ry
+dWN0IE1IRF9IVFRQX0hlYWRlciBoZWFkZXI7DQorKyAgc3RydWN0IE1IRF9Qb3N0UHJvY2Vzc29y
+ICpwcDsNCisrICBzaXplX3QgaTsNCisrICBzaXplX3QgajsNCisrICBzaXplX3QgZGVsdGE7DQor
+KyAgY2hhciAqYnVmOw0KKysNCisrICBtZW1zZXQgKCZjb25uZWN0aW9uLCAwLCBzaXplb2YgKHN0
+cnVjdCBNSERfQ29ubmVjdGlvbikpOw0KKysgIG1lbXNldCAoJmhlYWRlciwgMCwgc2l6ZW9mIChz
+dHJ1Y3QgTUhEX0hUVFBfSGVhZGVyKSk7DQorKyAgY29ubmVjdGlvbi5oZWFkZXJzX3JlY2VpdmVk
+ID0gJmhlYWRlcjsNCisrICBoZWFkZXIuaGVhZGVyID0gTUhEX0hUVFBfSEVBREVSX0NPTlRFTlRf
+VFlQRTsNCisrICBoZWFkZXIudmFsdWUgPSBNSERfSFRUUF9QT1NUX0VOQ09ESU5HX0ZPUk1fVVJM
+RU5DT0RFRDsNCisrICBoZWFkZXIuaGVhZGVyX3NpemUgPSBzdHJsZW4gKGhlYWRlci5oZWFkZXIp
+Ow0KKysgIGhlYWRlci52YWx1ZV9zaXplID0gc3RybGVuIChoZWFkZXIudmFsdWUpOw0KKysgIGhl
+YWRlci5raW5kID0gTUhEX0hFQURFUl9LSU5EOw0KKysgIGZvciAoaSA9IDEyODsgaSA8IDEwMjQg
+KiAxMDI0OyBpICs9IDEwMjQpDQorKyAgew0KKysgICAgcHAgPSBNSERfY3JlYXRlX3Bvc3RfcHJv
+Y2Vzc29yICgmY29ubmVjdGlvbiwNCisrICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgMTAyNCwNCisrICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJnZhbHVlX2No
+ZWNrZXIyLA0KKysgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBOVUxMKTsNCisr
+ICAgIGJ1ZiA9IG1hbGxvYyAoaSk7DQorKyAgICBpZiAoTlVMTCA9PSBidWYpDQorKyAgICAgIHJl
+dHVybiAxOw0KKysgICAgbWVtc2V0IChidWYsICdBJywgaSk7DQorKyAgICBidWZbaSAvIDJdID0g
+Jz0nOw0KKysgICAgZGVsdGEgPSAxICsgKE1IRF9yYW5kb21fICgpICUgKGkgLSAxKSk7DQorKyAg
+ICBqID0gMDsNCisrICAgIHdoaWxlIChqIDwgaSkNCisrICAgIHsNCisrICAgICAgaWYgKGogKyBk
+ZWx0YSA+IGkpDQorKyAgICAgICAgZGVsdGEgPSBpIC0gajsNCisrICAgICAgaWYgKE1IRF9OTyA9
+PQ0KKysgICAgICAgICAgTUhEX3Bvc3RfcHJvY2VzcyAocHAsDQorKyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAmYnVmW2pdLA0KKysgICAgICAgICAgICAgICAgICAgICAgICAgICAgZGVsdGEp
+KQ0KKysgICAgICAgIGJyZWFrOw0KKysgICAgICBqICs9IGRlbHRhOw0KKysgICAgfQ0KKysgICAg
+ZnJlZSAoYnVmKTsNCisrICAgIE1IRF9kZXN0cm95X3Bvc3RfcHJvY2Vzc29yIChwcCk7DQorKyAg
+fQ0KKysgIHJldHVybiAwOw0KKyt9DQorKw0KKysNCisgaW50DQorIG1haW4gKGludCBhcmdjLCBj
+aGFyICpjb25zdCAqYXJndikNCisgew0KK0BAIC00NjMsNiArNTI4LDcgQEAgbWFpbiAoaW50IGFy
+Z2MsIGNoYXIgKmNvbnN0ICphcmd2KQ0KKyAgIGVycm9yQ291bnQgKz0gdGVzdF9tdWx0aXBhcnQg
+KCk7DQorICAgZXJyb3JDb3VudCArPSB0ZXN0X25lc3RlZF9tdWx0aXBhcnQgKCk7DQorICAgZXJy
+b3JDb3VudCArPSB0ZXN0X2VtcHR5X3ZhbHVlICgpOw0KKysgIGVycm9yQ291bnQgKz0gdGVzdF9v
+dmVyZmxvdyAoKTsNCisgICBpZiAoZXJyb3JDb3VudCAhPSAwKQ0KKyAgICAgZnByaW50ZiAoc3Rk
+ZXJyLCAiRXJyb3IgKGNvZGU6ICV1KVxuIiwgZXJyb3JDb3VudCk7DQorICAgcmV0dXJuIGVycm9y
+Q291bnQgIT0gMDsgICAgICAgLyogMCA9PSBwYXNzICovDQpkaWZmIC0tZ2l0IGEvbWV0YS1vZS9y
+ZWNpcGVzLXN1cHBvcnQvbGlibWljcm9odHRwZC9saWJtaWNyb2h0dHBkXzAuOS43MC5iYiBiL21l
+dGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpYm1pY3JvaHR0cGQvbGlibWljcm9odHRwZF8wLjkuNzAu
+YmINCmluZGV4IDk0OTc2ZDJlOS4uOWQ1ZTg1ZTFhIDEwMDY0NA0KLS0tIGEvbWV0YS1vZS9yZWNp
+cGVzLXN1cHBvcnQvbGlibWljcm9odHRwZC9saWJtaWNyb2h0dHBkXzAuOS43MC5iYg0KKysrIGIv
+bWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlibWljcm9odHRwZC9saWJtaWNyb2h0dHBkXzAuOS43
+MC5iYg0KQEAgLTcsNyArNyw4IEBAIFNFQ1RJT04gPSAibmV0Ig0KIERFUEVORFMgPSAiZmlsZSIN
+CiANCiBTUkNfVVJJID0gIiR7R05VX01JUlJPUn0vbGlibWljcm9odHRwZC8ke0JQTn0tJHtQVn0u
+dGFyLmd6IFwNCi0iDQorICAgICAgICAgICBmaWxlOi8vQ1ZFLTIwMjEtMzQ2Ni5wYXRjaCBcDQor
+ICAgICAgICAgICAiDQogU1JDX1VSSVttZDVzdW1dID0gImRjZDYwNDVlY2I0ZWExOGMxMjBhZmVk
+Y2NiZDFkYTc0Ig0KIFNSQ19VUklbc2hhMjU2c3VtXSA9ICI5MGQwYTNkMzk2Zjk2ZjliYzQxZWIw
+ZjdlODE4Nzc5NjA0OTI4NWZhYmVmODI2MDRhY2Q0ODc5NTkwOTc3MzA3Ig0KIA0KLS0gDQoyLjM0
+LjANCg0K
 
