@@ -1,97 +1,150 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
+Return-Path: <paul@pbarker.dev>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E034C433EF
-	for <webhook@archiver.kernel.org>; Wed, 22 Dec 2021 14:51:33 +0000 (UTC)
-Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com
- [209.85.208.169])
- by mx.groups.io with SMTP id smtpd.web09.20096.1640184691391231751
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EFC4BC433F5
+	for <webhook@archiver.kernel.org>; Wed, 22 Dec 2021 15:28:30 +0000 (UTC)
+Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
+ [66.111.4.29])
+ by mx.groups.io with SMTP id smtpd.web09.20591.1640186908714001668
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Dec 2021 06:51:32 -0800
+ Wed, 22 Dec 2021 07:28:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=4o+1Z5cm;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.208.169, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f169.google.com with SMTP id p8so4199563ljo.5
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Dec 2021 06:51:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=SFr2GWzRjjpwEtQf1MCsIdEyvRlKLMXZ2jJx3N9zVrU=;
-        b=4o+1Z5cmafEGJ+0baTX577euiPMIZgQFpOt1onXWqxjj/cuTQXWalITMrJnUTSQXho
-         PrDx6o3YUYrmLstUR2cethaS7GMR8zFDdUuVkBArmE6USj1wXnzIPSGlTvdLJyCLB+dz
-         3Vj9Fws/pY4PEQqHW2TbjpMucCeFJSk3cOxP26EJ1YWvednirBkDhiro+kkd6CXAbfZ+
-         Mv86+phCaXJxJbqTDxlgWw3lCP783hQhkoUiXzELoouBnRlu2jIIlnBe2XcnH4chuhK7
-         KUSpcSGLW/3Be9PXIFBT62gj+iqwcoU4lNnDxHSCauKjRM+qNE7XKR/V7MmYb16E1A6G
-         AtMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=SFr2GWzRjjpwEtQf1MCsIdEyvRlKLMXZ2jJx3N9zVrU=;
-        b=KVXjRtm/KKem85DclyvOlIGQR1N/OB02E63DI3iKSgs8jbKejalQYJNP7wHI0Q2UE/
-         E7TRHlKbGaT3jwOK77lj2ISnZcQXK3fl1lUZkFGJEHiVvpM9QY047ipTwdVPLr/UUOac
-         XQRzgSlKIu21ivGFFekibqpGlxRQ6+EMETNNZnf4ApjXNhC4YDSf+hywB9wRVHh1xRCc
-         /g6TecCMp5KRE/KN8riLyUJx3dj/8F8UmeJg74WNFjd4ko5AdWUTgjZSM3P8CgONhe5L
-         BBGQGFVnWzdMrB+Xa+roCdm0xtZ6VC3xydZBrm6BteSZ6waWpGJFhVO0y9h+h/uv0jeC
-         s3SA==
-X-Gm-Message-State: AOAM532MCHjs9Gpri6y5AEG4Zl9iv2WauR3Z8ZelTejQ3ZM718C6VTWp
-	Gz2RDNmxLyXcEyANKy9KTmjePMkjStbxoIvM
-X-Google-Smtp-Source: 
- ABdhPJw/Bi3hfUgHNUKm4/Hy1KJhCqy8I/m7uSodjRHuc70xMBRmpkL11PwP2mgWS5OynlzLEEA5WQ==
-X-Received: by 2002:a2e:990:: with SMTP id 138mr2238374ljj.507.1640184688806;
-        Wed, 22 Dec 2021 06:51:28 -0800 (PST)
-Received: from localhost.localdomain
- (c-7918524e.023-160-67626725.bbcust.telenor.se. [78.82.24.121])
-        by smtp.gmail.com with ESMTPSA id
- k5sm235099lfj.112.2021.12.22.06.51.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Dec 2021 06:51:28 -0800 (PST)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-networking][PATCH] xl2tpd: update to 1.3.16
-Date: Wed, 22 Dec 2021 15:51:25 +0100
-Message-Id: <20211222145125.2482096-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@pbarker.dev header.s=fm2 header.b=VA8jHFr7;
+ spf=pass (domain: pbarker.dev, ip: 66.111.4.29, mailfrom: paul@pbarker.dev)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+	by mailout.nyi.internal (Postfix) with ESMTP id DC0C65C018D;
+	Wed, 22 Dec 2021 10:28:27 -0500 (EST)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute3.internal (MEProxy); Wed, 22 Dec 2021 10:28:27 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pbarker.dev; h=
+	message-id:date:mime-version:subject:references:to:from
+	:in-reply-to:content-type:content-transfer-encoding; s=fm2; bh=8
+	L6NsWrzHHVUyFwM173E5dIYM/H81f/eT+3avrTs1cA=; b=VA8jHFr7SVpgrDD25
+	ekuMKEsh1J3rBIePCl1BIAYIGo1Ghuas1VaBIM2hNixFyBNiyAEBuz3+A1hfGTsU
+	bLMqTAoGEVFE35xHP5ZnLEEse2tD/UuzQakja9CRwiRVJKqDRdTi9SA6puuRKYDj
+	2kWcuvEJq9pyWFlNAxQ4zDa4Lipjdhqe36s0xnTEltlv+QfA/cRsU1v1LYfh/QCU
+	A826RjuFUuW5/TJI4+iEdnfSimNWVBVpUdcgnt3RcNG0i0dg1tx8IFLfNdFOTYD6
+	a0l/TfQrpHmGC1IzkWpGAtkbryo7qWoH9JgXbdgjJEkaUj/KWfu5YGBlZmgE10We
+	XwhFg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=content-transfer-encoding:content-type
+	:date:from:in-reply-to:message-id:mime-version:references
+	:subject:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm1; bh=8L6NsWrzHHVUyFwM173E5dIYM/H81f/eT+3avrTs1
+	cA=; b=oF8VHbNx3RsT/cqCcHsjZ+snu7/nidKZRqI2g2z2uikbysQ+OMknCoojh
+	CmWu1y7GxC4s1hovtlrfcXbAslCHq0PGeOkLVJ8QG1QHCLBZNrJJ+pmwa5drGn3a
+	O9QexXPpYXH/lAoFSCCBKBUBBrzLJ/yN6WLj8xXI0inG+ZZHbLWbEqi9gioH3jWt
+	X6YlvSDcAzNuXvk+Y9ZLc/AEtXLbaLQb5FZ29CQhYmTxAWOHZ7zuTEHw5CyG/KiP
+	O6R1dWSrWyV/yzqjqgBsNgVXvdBg1R1ffAd+2l2XTxwcoE8GuIvGxU3W3Z/ahw0l
+	VJWLaS34PfvP7PZvjugUM0ZR6lIEQ==
+X-ME-Sender: <xms:G0TDYXIPLhikj_65WSBTKt0p8_3aTbmBLVvXyMi6oJhM690_EliJvg>
+    <xme:G0TDYbIbiw40fPauA3kXoU33Wq4u4PbKYVLEd5WWkWXnWbusSO3AJktKYp7CGjSHV
+    Z5QqKPEYP5hXxV1NYA>
+X-ME-Received: 
+ <xmr:G0TDYfsOlQc42IbsSXZbX6j51dz7wgIFf_0Pp4pxNs0Ep9GXnHm8zIk0CDH0gdjFNY-qGIcsJLRu0XupT460FESWk7grioRzXZNp84FdQ0b2-mFk2N8>
+X-ME-Proxy-Cause: 
+ gggruggvucftvghtrhhoucdtuddrgedvuddruddtiedgieelucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhepkfffgggfufhfvffhjggtgfesthejredttdefjeenucfhrhhomheprfgruhhl
+    uceurghrkhgvrhcuoehprghulhesphgsrghrkhgvrhdruggvvheqnecuggftrfgrthhtvg
+    hrnhepieffgeeivefhfeegtdeljeekieegfeffleehvdekfeetteehgeefgffhgeeiieej
+    necuffhomhgrihhnpehgihhtlhgrsgdrtghomhdpfhhoshguvghmrdhorhhgnecuvehluh
+    hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepphgruhhlsehpsggr
+    rhhkvghrrdguvghv
+X-ME-Proxy: <xmx:G0TDYQZPNOSBHaxFEGIh1cwQjpFilA_BDLsnv4BmKdGv--0ynAIBGg>
+    <xmx:G0TDYebNEHMr8Csw4iC_6ihJKWjiDnsgr7Eq2a3bKstSaAJC4JCipA>
+    <xmx:G0TDYUDrEtyhyhgip4pYKdEhrPVGQ_NvDXyq7Jco_NKUrChqoZKWaA>
+    <xmx:G0TDYXDwGMZ5pJVeZlqDd9hT_jRkcwW62TQcjZl10Adq9sgmCr0crg>
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 22 Dec 2021 10:28:26 -0500 (EST)
+Message-ID: <4ec5d14d-577b-dc3c-54ca-b02035d72620@pbarker.dev>
+Date: Wed, 22 Dec 2021 15:28:24 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.4.0
+Subject: Fwd: [FOSDEM standholders] FOSDEM 2022 stands - an update
+References: <20211220155821.GD27931@alpha.arachsys.com>
+To: Patches and discussions about the oe-core layer
+ <openembedded-core@lists.openembedded.org>,
+ openembedded-devel@lists.openembedded.org
+From: Paul Barker <paul@pbarker.dev>
+In-Reply-To: <20211220155821.GD27931@alpha.arachsys.com>
+X-Forwarded-Message-Id: <20211220155821.GD27931@alpha.arachsys.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 22 Dec 2021 14:51:33 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 22 Dec 2021 15:28:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94484
+ https://lists.openembedded.org/g/openembedded-devel/message/94485
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- .../xl2tpd/{xl2tpd_1.3.14.bb => xl2tpd_1.3.16.bb}             | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
- rename meta-networking/recipes-protocols/xl2tpd/{xl2tpd_1.3.14.bb => xl2tpd_1.3.16.bb} (91%)
+Hi all,
 
-diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.14.bb b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.16.bb
-similarity index 91%
-rename from meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.14.bb
-rename to meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.16.bb
-index 21f97eba2..d96a28eac 100644
---- a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.14.bb
-+++ b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.16.bb
-@@ -9,7 +9,9 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- SRC_URI = "git://github.com/xelerance/xl2tpd.git;branch=master;protocol=https"
--SRCREV = "ba619c79c4790c78c033df0abde4a9a5de744a08"
-+SRCREV = "1ef2a025981223c1e16fc833bef226c86ff8c295"
-+
-+UPSTREAM_CHECK_URI = "https://github.com/xelerance/xl2tpd/releases"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.25.1
+I'm unable to take the lead on organising a virtual stand for 
+OpenEmbedded at FOSDEM 2022. I'm forwarding this mail to the lists to 
+see if anyone else would like to take over - you'll need to review how 
+the virtual stands work, update the website content as detailed below 
+and be around during FOSDEM 2022 to "run" the stand.
 
+At least one commit to the website content needs to be made before the 
+end of the year to confirm that OpenEmbedded will have a stand. The 
+repositories we used last year were:
+
+   * https://gitlab.com/openembedded/community/fosdem-stand-content
+
+   * https://gitlab.com/openembedded/community/fosdem-stand-static
+
+I can grant permissions on those repositories to whoever needs them. I 
+also recommend we email stands@fosdem.org to let them know who will be 
+running the stand this year so that the standholders mailing list can be 
+updated.
+
+Thanks,
+Paul
+
+
+-------- Forwarded Message --------
+Subject: [FOSDEM standholders] FOSDEM 2022 stands - an update
+Date: Mon, 20 Dec 2021 15:58:21 +0000
+From: Alasdair G Kergon <agk@fosdem.org>
+To: standholders@lists.fosdem.org
+
+We've decided to streamline the process for the 2022 event by reusing the
+system and data that is already in place.
+
+The 2021 stands website has been archived into archive.fosdem.org.
+
+stands.fosdem.org is now available to use again in 2022 and the direct
+links there from fosdem.org have been removed for now.  The front
+page hasn't yet been updated.
+
+If you had a stand at FOSDEM 2021, and wish to have one at FOSDEM 2022,
+then all you need to do is to start updating your static content the
+same way as you did last year.
+
+If you don't want a stand, please send an email to stands@fosdem.org and
+we will remove it.  We will also remove stands that haven't had at
+least one change made by 31st December.
+
+PLEASE MAKE AT LEAST ONE COMMIT BEFORE 31ST DECEMBER.
+
+If you need metadata updating that you can't change yourself, either
+send pull requests againt the main repository or email stands@fosdem.org.
+
+The system for videos/events is not ready yet and this won't be set up
+until the final list of stands is confirmed.
+
+New stands will be by invitation only and limited in number because of
+the amount of manual administration involved.  If you think there's a
+deserving case for an invitation, contact stands@fosdem.org.
+
+Alasdair
+
+_______________________________________________
+standholders mailing list
+standholders@lists.fosdem.org
+https://lists.fosdem.org/listinfo/standholders
 
