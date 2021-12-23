@@ -1,150 +1,332 @@
-Return-Path: <paul@pbarker.dev>
+Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EFC4BC433F5
-	for <webhook@archiver.kernel.org>; Wed, 22 Dec 2021 15:28:30 +0000 (UTC)
-Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
- [66.111.4.29])
- by mx.groups.io with SMTP id smtpd.web09.20591.1640186908714001668
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 75029C433EF
+	for <webhook@archiver.kernel.org>; Thu, 23 Dec 2021 05:42:28 +0000 (UTC)
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web11.29538.1640238147441552801
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Dec 2021 07:28:29 -0800
+ Wed, 22 Dec 2021 21:42:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@pbarker.dev header.s=fm2 header.b=VA8jHFr7;
- spf=pass (domain: pbarker.dev, ip: 66.111.4.29, mailfrom: paul@pbarker.dev)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
-	by mailout.nyi.internal (Postfix) with ESMTP id DC0C65C018D;
-	Wed, 22 Dec 2021 10:28:27 -0500 (EST)
-Received: from mailfrontend1 ([10.202.2.162])
-  by compute3.internal (MEProxy); Wed, 22 Dec 2021 10:28:27 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pbarker.dev; h=
-	message-id:date:mime-version:subject:references:to:from
-	:in-reply-to:content-type:content-transfer-encoding; s=fm2; bh=8
-	L6NsWrzHHVUyFwM173E5dIYM/H81f/eT+3avrTs1cA=; b=VA8jHFr7SVpgrDD25
-	ekuMKEsh1J3rBIePCl1BIAYIGo1Ghuas1VaBIM2hNixFyBNiyAEBuz3+A1hfGTsU
-	bLMqTAoGEVFE35xHP5ZnLEEse2tD/UuzQakja9CRwiRVJKqDRdTi9SA6puuRKYDj
-	2kWcuvEJq9pyWFlNAxQ4zDa4Lipjdhqe36s0xnTEltlv+QfA/cRsU1v1LYfh/QCU
-	A826RjuFUuW5/TJI4+iEdnfSimNWVBVpUdcgnt3RcNG0i0dg1tx8IFLfNdFOTYD6
-	a0l/TfQrpHmGC1IzkWpGAtkbryo7qWoH9JgXbdgjJEkaUj/KWfu5YGBlZmgE10We
-	XwhFg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=content-transfer-encoding:content-type
-	:date:from:in-reply-to:message-id:mime-version:references
-	:subject:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm1; bh=8L6NsWrzHHVUyFwM173E5dIYM/H81f/eT+3avrTs1
-	cA=; b=oF8VHbNx3RsT/cqCcHsjZ+snu7/nidKZRqI2g2z2uikbysQ+OMknCoojh
-	CmWu1y7GxC4s1hovtlrfcXbAslCHq0PGeOkLVJ8QG1QHCLBZNrJJ+pmwa5drGn3a
-	O9QexXPpYXH/lAoFSCCBKBUBBrzLJ/yN6WLj8xXI0inG+ZZHbLWbEqi9gioH3jWt
-	X6YlvSDcAzNuXvk+Y9ZLc/AEtXLbaLQb5FZ29CQhYmTxAWOHZ7zuTEHw5CyG/KiP
-	O6R1dWSrWyV/yzqjqgBsNgVXvdBg1R1ffAd+2l2XTxwcoE8GuIvGxU3W3Z/ahw0l
-	VJWLaS34PfvP7PZvjugUM0ZR6lIEQ==
-X-ME-Sender: <xms:G0TDYXIPLhikj_65WSBTKt0p8_3aTbmBLVvXyMi6oJhM690_EliJvg>
-    <xme:G0TDYbIbiw40fPauA3kXoU33Wq4u4PbKYVLEd5WWkWXnWbusSO3AJktKYp7CGjSHV
-    Z5QqKPEYP5hXxV1NYA>
-X-ME-Received: 
- <xmr:G0TDYfsOlQc42IbsSXZbX6j51dz7wgIFf_0Pp4pxNs0Ep9GXnHm8zIk0CDH0gdjFNY-qGIcsJLRu0XupT460FESWk7grioRzXZNp84FdQ0b2-mFk2N8>
-X-ME-Proxy-Cause: 
- gggruggvucftvghtrhhoucdtuddrgedvuddruddtiedgieelucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhepkfffgggfufhfvffhjggtgfesthejredttdefjeenucfhrhhomheprfgruhhl
-    uceurghrkhgvrhcuoehprghulhesphgsrghrkhgvrhdruggvvheqnecuggftrfgrthhtvg
-    hrnhepieffgeeivefhfeegtdeljeekieegfeffleehvdekfeetteehgeefgffhgeeiieej
-    necuffhomhgrihhnpehgihhtlhgrsgdrtghomhdpfhhoshguvghmrdhorhhgnecuvehluh
-    hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepphgruhhlsehpsggr
-    rhhkvghrrdguvghv
-X-ME-Proxy: <xmx:G0TDYQZPNOSBHaxFEGIh1cwQjpFilA_BDLsnv4BmKdGv--0ynAIBGg>
-    <xmx:G0TDYebNEHMr8Csw4iC_6ihJKWjiDnsgr7Eq2a3bKstSaAJC4JCipA>
-    <xmx:G0TDYUDrEtyhyhgip4pYKdEhrPVGQ_NvDXyq7Jco_NKUrChqoZKWaA>
-    <xmx:G0TDYXDwGMZ5pJVeZlqDd9hT_jRkcwW62TQcjZl10Adq9sgmCr0crg>
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 22 Dec 2021 10:28:26 -0500 (EST)
-Message-ID: <4ec5d14d-577b-dc3c-54ca-b02035d72620@pbarker.dev>
-Date: Wed, 22 Dec 2021 15:28:24 +0000
+ dkim=missing;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
+ domain name (domain: windriver.com, ip: 192.103.53.11,
+ mailfrom: changqing.li@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 1BN5gPmd028420
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 22 Dec 2021 21:42:25 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Wed, 22 Dec 2021 21:42:25 -0800
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Wed, 22 Dec 2021 21:42:24 -0800
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] postgresql: fix CVE-2021-23214,CVE-2021-23222
+Date: Thu, 23 Dec 2021 13:42:23 +0800
+Message-ID: <20211223054223.15964-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.4.0
-Subject: Fwd: [FOSDEM standholders] FOSDEM 2022 stands - an update
-References: <20211220155821.GD27931@alpha.arachsys.com>
-To: Patches and discussions about the oe-core layer
- <openembedded-core@lists.openembedded.org>,
- openembedded-devel@lists.openembedded.org
-From: Paul Barker <paul@pbarker.dev>
-In-Reply-To: <20211220155821.GD27931@alpha.arachsys.com>
-X-Forwarded-Message-Id: <20211220155821.GD27931@alpha.arachsys.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 22 Dec 2021 15:28:30 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 23 Dec 2021 05:42:28 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94485
+ https://lists.openembedded.org/g/openembedded-devel/message/94487
 
-Hi all,
+From: Changqing Li <changqing.li@windriver.com>
 
-I'm unable to take the lead on organising a virtual stand for 
-OpenEmbedded at FOSDEM 2022. I'm forwarding this mail to the lists to 
-see if anyone else would like to take over - you'll need to review how 
-the virtual stands work, update the website content as detailed below 
-and be around during FOSDEM 2022 to "run" the stand.
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../postgresql/files/CVE-2021-23214.patch     | 116 ++++++++++++++++
+ .../postgresql/files/CVE-2021-23222.patch     | 131 ++++++++++++++++++
+ .../recipes-dbs/postgresql/postgresql_13.4.bb |   2 +
+ 3 files changed, 249 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2021-23214.patch
+ create mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2021-23222.patch
 
-At least one commit to the website content needs to be made before the 
-end of the year to confirm that OpenEmbedded will have a stand. The 
-repositories we used last year were:
+diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2021-23214.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2021-23214.patch
+new file mode 100644
+index 000000000..58bf81062
+--- /dev/null
++++ b/meta-oe/recipes-dbs/postgresql/files/CVE-2021-23214.patch
+@@ -0,0 +1,116 @@
++From 24c2b9e42edb6d2f4ef2cead3b0aa1d6196adfce Mon Sep 17 00:00:00 2001
++From: Tom Lane <tgl@sss.pgh.pa.us>
++Date: Mon, 8 Nov 2021 11:01:43 -0500
++Subject: [PATCH 2/2] Reject extraneous data after SSL or GSS encryption
++ handshake.
++
++The server collects up to a bufferload of data whenever it reads data
++from the client socket.  When SSL or GSS encryption is requested
++during startup, any additional data received with the initial
++request message remained in the buffer, and would be treated as
++already-decrypted data once the encryption handshake completed.
++Thus, a man-in-the-middle with the ability to inject data into the 
++TCP connection could stuff some cleartext data into the start of
++a supposedly encryption-protected database session.
++
++This could be abused to send faked SQL commands to the server,
++although that would only work if the server did not demand any 
++authentication data.  (However, a server relying on SSL certificate
++authentication might well not do so.)
++
++To fix, throw a protocol-violation error if the internal buffer
++is not empty after the encryption handshake.
++
++Our thanks to Jacob Champion for reporting this problem.
++
++Security: CVE-2021-23214
++
++Upstream-Status: Backport[https://github.com/postgres/postgres/commit/28e24125541545483093819efae9bca603441951]
++CVE: CVE-2021-23214
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++
++---
++ src/backend/libpq/pqcomm.c          | 11 +++++++++++
++ src/backend/postmaster/postmaster.c | 23 ++++++++++++++++++++++-
++ src/include/libpq/libpq.h           |  1 +
++ 3 files changed, 34 insertions(+), 1 deletion(-)
++
++diff --git a/src/backend/libpq/pqcomm.c b/src/backend/libpq/pqcomm.c
++index ee2cd86..4dd1c02 100644
++--- a/src/backend/libpq/pqcomm.c
+++++ b/src/backend/libpq/pqcomm.c
++@@ -1183,6 +1183,17 @@ pq_getstring(StringInfo s)
++ 	}
++ }
++ 
+++/* -------------------------------
+++ *             pq_buffer_has_data              - is any buffered data available to read?
+++ *
+++ * This will *not* attempt to read more data.
+++ * --------------------------------
+++ */
+++bool
+++pq_buffer_has_data(void)
+++{
+++	return (PqRecvPointer < PqRecvLength);
+++}
++ 
++ /* --------------------------------
++  *		pq_startmsgread - begin reading a message from the client.
++diff --git a/src/backend/postmaster/postmaster.c b/src/backend/postmaster/postmaster.c
++index 5775fc0..1fcc3f8 100644
++--- a/src/backend/postmaster/postmaster.c
+++++ b/src/backend/postmaster/postmaster.c
++@@ -2049,6 +2049,17 @@ retry1:
++ 			return STATUS_ERROR;
++ #endif
++ 
+++		/*
+++		* At this point we should have no data already buffered.  If we do,
+++		* it was received before we performed the SSL handshake, so it wasn't
+++		* encrypted and indeed may have been injected by a man-in-the-middle.
+++		* We report this case to the client.
+++		*/
+++		if (pq_buffer_has_data())
+++			ereport(FATAL,
+++				(errcode(ERRCODE_PROTOCOL_VIOLATION),
+++				errmsg("received unencrypted data after SSL request"),
+++				errdetail("This could be either a client-software bug or evidence of an attempted man-in-the-middle attack.")));
++ 		/*
++ 		 * regular startup packet, cancel, etc packet should follow, but not
++ 		 * another SSL negotiation request, and a GSS request should only
++@@ -2080,7 +2091,17 @@ retry1:
++ 		if (GSSok == 'G' && secure_open_gssapi(port) == -1)
++ 			return STATUS_ERROR;
++ #endif
++-
+++		/*
+++		* At this point we should have no data already buffered.  If we do,
+++		* it was received before we performed the GSS handshake, so it wasn't
+++		* encrypted and indeed may have been injected by a man-in-the-middle.
+++		* We report this case to the client.
+++		*/
+++		if (pq_buffer_has_data())
+++			ereport(FATAL,
+++				(errcode(ERRCODE_PROTOCOL_VIOLATION),
+++				errmsg("received unencrypted data after GSSAPI encryption request"),
+++				errdetail("This could be either a client-software bug or evidence of an attempted man-in-the-middle attack.")));
++ 		/*
++ 		 * regular startup packet, cancel, etc packet should follow, but not
++ 		 * another GSS negotiation request, and an SSL request should only
++diff --git a/src/include/libpq/libpq.h b/src/include/libpq/libpq.h
++index b115247..9969692 100644
++--- a/src/include/libpq/libpq.h
+++++ b/src/include/libpq/libpq.h
++@@ -73,6 +73,7 @@ extern int	pq_getbyte(void);
++ extern int	pq_peekbyte(void);
++ extern int	pq_getbyte_if_available(unsigned char *c);
++ extern int	pq_putbytes(const char *s, size_t len);
+++extern bool pq_buffer_has_data(void);
++ 
++ /*
++  * prototypes for functions in be-secure.c
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2021-23222.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2021-23222.patch
+new file mode 100644
+index 000000000..42b78539b
+--- /dev/null
++++ b/meta-oe/recipes-dbs/postgresql/files/CVE-2021-23222.patch
+@@ -0,0 +1,131 @@
++From 79125ead2a6a234086844bb42f06d49603fe6ca0 Mon Sep 17 00:00:00 2001
++From: Tom Lane <tgl@sss.pgh.pa.us>
++Date: Mon, 8 Nov 2021 11:14:56 -0500
++Subject: [PATCH 1/2] libpq: reject extraneous data after SSL or GSS encryption
++ handshake.
++
++libpq collects up to a bufferload of data whenever it reads data from
++the socket.  When SSL or GSS encryption is requested during startup,
++any additional data received with the server's yes-or-no reply
++remained in the buffer, and would be treated as already-decrypted data
++once the encryption handshake completed.  Thus, a man-in-the-middle
++with the ability to inject data into the TCP connection could stuff
++some cleartext data into the start of a supposedly encryption-protected
++database session.
++
++This could probably be abused to inject faked responses to the
++client's first few queries, although other details of libpq's behavior
++make that harder than it sounds.  A different line of attack is to
++exfiltrate the client's password, or other sensitive data that might
++be sent early in the session.  That has been shown to be possible with
++a server vulnerable to CVE-2021-23214.
++
++To fix, throw a protocol-violation error if the internal buffer
++is not empty after the encryption handshake.
++
++Our thanks to Jacob Champion for reporting this problem.
++
++Security: CVE-2021-23222
++
++Upstream-Status: Backport[https://github.com/postgres/postgres/commit/160c0258802d10b0600d7671b1bbea55d8e17d45]
++CVE: CVE-2021-23222
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ doc/src/sgml/protocol.sgml        | 28 ++++++++++++++++++++++++++++
++ src/interfaces/libpq/fe-connect.c | 26 ++++++++++++++++++++++++++
++ 2 files changed, 54 insertions(+)
++
++diff --git a/doc/src/sgml/protocol.sgml b/doc/src/sgml/protocol.sgml
++index e26619e1b5..b692648fca 100644
++--- a/doc/src/sgml/protocol.sgml
+++++ b/doc/src/sgml/protocol.sgml
++@@ -1471,6 +1471,20 @@ SELCT 1/0;<!-- this typo is intentional -->
++     and proceed without requesting <acronym>SSL</acronym>.
++    </para>
++ 
+++   <para>
+++    When <acronym>SSL</acronym> encryption can be performed, the server
+++    is expected to send only the single <literal>S</literal> byte and then
+++    wait for the frontend to initiate an <acronym>SSL</acronym> handshake.
+++    If additional bytes are available to read at this point, it likely
+++    means that a man-in-the-middle is attempting to perform a
+++    buffer-stuffing attack
+++    (<ulink url="https://www.postgresql.org/support/security/CVE-2021-23222/">CVE-2021-23222</ulink>).
+++    Frontends should be coded either to read exactly one byte from the
+++    socket before turning the socket over to their SSL library, or to
+++    treat it as a protocol violation if they find they have read additional
+++    bytes.
+++   </para>
+++
++    <para>
++     An initial SSLRequest can also be used in a connection that is being
++     opened to send a CancelRequest message.
++@@ -1532,6 +1546,20 @@ SELCT 1/0;<!-- this typo is intentional -->
++     encryption.
++    </para>
++ 
+++   <para>
+++    When <acronym>GSSAPI</acronym> encryption can be performed, the server
+++    is expected to send only the single <literal>G</literal> byte and then
+++    wait for the frontend to initiate a <acronym>GSSAPI</acronym> handshake.
+++    If additional bytes are available to read at this point, it likely
+++    means that a man-in-the-middle is attempting to perform a
+++    buffer-stuffing attack
+++    (<ulink url="https://www.postgresql.org/support/security/CVE-2021-23222/">CVE-2021-23222</ulink>).
+++    Frontends should be coded either to read exactly one byte from the
+++    socket before turning the socket over to their GSSAPI library, or to
+++    treat it as a protocol violation if they find they have read additional
+++    bytes.
+++   </para>
+++
++    <para>
++     An initial GSSENCRequest can also be used in a connection that is being
++     opened to send a CancelRequest message.
++diff --git a/src/interfaces/libpq/fe-connect.c b/src/interfaces/libpq/fe-connect.c
++index f80f4e98d8..57aee95183 100644
++--- a/src/interfaces/libpq/fe-connect.c
+++++ b/src/interfaces/libpq/fe-connect.c
++@@ -3076,6 +3076,19 @@ keep_going:						/* We will come back to here until there is
++ 				pollres = pqsecure_open_client(conn);
++ 				if (pollres == PGRES_POLLING_OK)
++ 				{
+++					/*
+++					 * At this point we should have no data already buffered.
+++					 * If we do, it was received before we performed the SSL
+++					 * handshake, so it wasn't encrypted and indeed may have
+++					 * been injected by a man-in-the-middle.
+++					 */
+++					if (conn->inCursor != conn->inEnd)
+++					{
+++						appendPQExpBufferStr(&conn->errorMessage,
+++											 libpq_gettext("received unencrypted data after SSL response\n"));
+++						goto error_return;
+++					}
+++
++ 					/* SSL handshake done, ready to send startup packet */
++ 					conn->status = CONNECTION_MADE;
++ 					return PGRES_POLLING_WRITING;
++@@ -3175,6 +3188,19 @@ keep_going:						/* We will come back to here until there is
++ 				pollres = pqsecure_open_gss(conn);
++ 				if (pollres == PGRES_POLLING_OK)
++ 				{
+++					/*
+++					 * At this point we should have no data already buffered.
+++					 * If we do, it was received before we performed the GSS
+++					 * handshake, so it wasn't encrypted and indeed may have
+++					 * been injected by a man-in-the-middle.
+++					 */
+++					if (conn->inCursor != conn->inEnd)
+++					{
+++						appendPQExpBufferStr(&conn->errorMessage,
+++											 libpq_gettext("received unencrypted data after GSSAPI encryption response\n"));
+++						goto error_return;
+++					}
+++
++ 					/* All set for startup packet */
++ 					conn->status = CONNECTION_MADE;
++ 					return PGRES_POLLING_WRITING;
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_13.4.bb b/meta-oe/recipes-dbs/postgresql/postgresql_13.4.bb
+index f63d23dbe..2ed0fa49b 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_13.4.bb
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_13.4.bb
+@@ -7,6 +7,8 @@ SRC_URI += "\
+    file://0001-Add-support-for-RISC-V.patch \
+    file://0001-Improve-reproducibility.patch \
+    file://0001-configure.in-bypass-autoconf-2.69-version-check.patch \
++   file://CVE-2021-23214.patch \
++   file://CVE-2021-23222.patch \
+ "
+ 
+ SRC_URI[sha256sum] = "ea93e10390245f1ce461a54eb5f99a48d8cabd3a08ce4d652ec2169a357bc0cd"
+-- 
+2.17.1
 
-   * https://gitlab.com/openembedded/community/fosdem-stand-content
-
-   * https://gitlab.com/openembedded/community/fosdem-stand-static
-
-I can grant permissions on those repositories to whoever needs them. I 
-also recommend we email stands@fosdem.org to let them know who will be 
-running the stand this year so that the standholders mailing list can be 
-updated.
-
-Thanks,
-Paul
-
-
--------- Forwarded Message --------
-Subject: [FOSDEM standholders] FOSDEM 2022 stands - an update
-Date: Mon, 20 Dec 2021 15:58:21 +0000
-From: Alasdair G Kergon <agk@fosdem.org>
-To: standholders@lists.fosdem.org
-
-We've decided to streamline the process for the 2022 event by reusing the
-system and data that is already in place.
-
-The 2021 stands website has been archived into archive.fosdem.org.
-
-stands.fosdem.org is now available to use again in 2022 and the direct
-links there from fosdem.org have been removed for now.  The front
-page hasn't yet been updated.
-
-If you had a stand at FOSDEM 2021, and wish to have one at FOSDEM 2022,
-then all you need to do is to start updating your static content the
-same way as you did last year.
-
-If you don't want a stand, please send an email to stands@fosdem.org and
-we will remove it.  We will also remove stands that haven't had at
-least one change made by 31st December.
-
-PLEASE MAKE AT LEAST ONE COMMIT BEFORE 31ST DECEMBER.
-
-If you need metadata updating that you can't change yourself, either
-send pull requests againt the main repository or email stands@fosdem.org.
-
-The system for videos/events is not ready yet and this won't be set up
-until the final list of stands is confirmed.
-
-New stands will be by invitation only and limited in number because of
-the amount of manual administration involved.  If you think there's a
-deserving case for an invitation, contact stands@fosdem.org.
-
-Alasdair
-
-_______________________________________________
-standholders mailing list
-standholders@lists.fosdem.org
-https://lists.fosdem.org/listinfo/standholders
 
