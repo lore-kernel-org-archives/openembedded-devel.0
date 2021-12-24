@@ -1,112 +1,98 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <jpuhlman@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 76804C433EF
-	for <webhook@archiver.kernel.org>; Thu, 23 Dec 2021 18:51:51 +0000 (UTC)
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com
- [209.85.208.43])
- by mx.groups.io with SMTP id smtpd.web09.36828.1640285510079370861
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5868CC433EF
+	for <webhook@archiver.kernel.org>; Fri, 24 Dec 2021 03:44:34 +0000 (UTC)
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com
+ [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web10.41892.1640317473667388207
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Dec 2021 10:51:50 -0800
+ Thu, 23 Dec 2021 19:44:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=YFw/u5vd;
- spf=pass (domain: gmail.com, ip: 209.85.208.43,
- mailfrom: jan.vermaete@gmail.com)
-Received: by mail-ed1-f43.google.com with SMTP id bm14so24852163edb.5
+ dkim=pass header.i=@mvista.com header.s=google header.b=flJhLydt;
+ spf=pass (domain: mvista.com, ip: 209.85.214.177,
+ mailfrom: jpuhlman@mvista.com)
+Received: by mail-pl1-f177.google.com with SMTP id w24so5754171ply.12
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Dec 2021 10:51:49 -0800 (PST)
+ Thu, 23 Dec 2021 19:44:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
+        d=mvista.com; s=google;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=LUlWRS+NARhFrPAQHHgcLndRM4vCE/JvfL+cbBJieGA=;
-        b=YFw/u5vdIkX0hMrZqs7hKEa1c+F7i2yRj8HUynjqUxBwvH4Ib6dnfgie6psBvBskGw
-         Vjn/CXhoCYIUAVr5Ei5xIOfFiS78PIrYZudAzW/+bGFLkzdhBKU+MrCq73IiqXIYbnRk
-         tCO7g9FiQOxKpedA6e8hQo54Uz16d9J/iQRkPhaZIDwsPM1UoYjsFspJniT9LB9M0oRu
-         efq+rnsryKkqDe+sRhRaMpbYsALS+OvhdywnYXk/jO9cQAUgAWTDkvt41wJw96hTgQpV
-         Kz7AhOD/oKYs8fTvSU2YChU0x0Zed69d1cyn056skysO5+PDOSMxxzp1InX1yN2f797I
-         Xv4g==
+        bh=09I3cbh1A8AF6queaLaCoF8hXynjYSQhKOdsRy7WlV4=;
+        b=flJhLydtyJ3cuRNG1ysm1MyZ7SrvTHbgI8BzzT1H3h2cBIcDBct8CC+0DR5P6lrjbn
+         rgZAYLhcH6JSP5LyGKse1v+25JPdluFdEDBNNj2pICl+mH38BGc742MquIwB8Id2vy1L
+         S69c6rXltC5mqAXoRlICMfRJCoVbN7GRpjXoI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=LUlWRS+NARhFrPAQHHgcLndRM4vCE/JvfL+cbBJieGA=;
-        b=vucmvHYR6nUaVEnR+L9OKeCKrz1T1bpTwqMPBYha3ncdlyFgXuWfvIw5rWUllSVZOF
-         k/rluPjL0GsEFB4M9tcu/b4FXmOCra19MEh3eykQ1F4PJ5s0vJ0liyXlHdw9mBWR1it6
-         yXQ/1aLjGZnKlxK7GkKldBBdkqOx0eWd7XPnZMFdh3NEfxKZEiYZtNvUzlcsASrTbIaW
-         uKg9PtHhtxtZQd5fjT+KEAJdDw0x3P0he5qvfGN+uDdceouR8quPGbQYgX8Qhm6R3j3C
-         kMtQ9L2ne7CDeIWmDpUuTg4zu6CK5t/cGYrIxIVtnL1P/66OJF3K4OZ5X1doQxdAyTy1
-         fbUg==
-X-Gm-Message-State: AOAM531vYpreqvzNN84DpzzPeMGZMrdexhTbgjpl7VAwUEw29t0O/9KT
-	a/u1JlBT2B/IUFPqM7oN3rNfI5V21PE=
+        bh=09I3cbh1A8AF6queaLaCoF8hXynjYSQhKOdsRy7WlV4=;
+        b=UtvhC4kjdDIYt5zMdnmaQhy1iQl2AgDXNmaUU7D4fVPXWaWb+wrgoeOZgFJYbzTO+i
+         zcjVS6FX9rDan1NllEXaHtyWV5F0g22aSmzY0XjtJlObwYpj+nZTL1miE/gGtDY9WLVQ
+         8s8r+g4/Ab61BWv9z0yYBhC2Ez1XRFwV98SDvsUYHMYEBU10/0ulesF3ZWBEs3IeDcmF
+         l0yXGPSPvGXsE5FDYqVolCfkyKNiRG9KWK+my28Y7RdWp8GibjM4CpiCDbf948qxVanp
+         vugx91J/QNGQPTmY58BhX2LCQO1EeO2nZxYgccUnr9MlInQ8FpolLtYiO/r+ksz5726H
+         3reQ==
+X-Gm-Message-State: AOAM530Ui4GK1cd61HHVlFTZr6YU6+cEXL92PHqE6meTSQeLZmDwxvkU
+	0qBQPpyMQZgVW3Dz12yX69DdIIK5S3o1gQ==
 X-Google-Smtp-Source: 
- ABdhPJy2hvnZJEoRBXfn8l4F50MAnEw0aX+K1WZFGh08eiqxmVbcuVLXJkRrX+WjWdovUTXmY3JLLg==
-X-Received: by 2002:a17:907:6095:: with SMTP id
- ht21mr2841489ejc.67.1640285508285;
-        Thu, 23 Dec 2021 10:51:48 -0800 (PST)
-Received: from localhost.localdomain (78-20-160-86.access.telenet.be.
- [78.20.160.86])
-        by smtp.googlemail.com with ESMTPSA id
- a14sm2257367edt.95.2021.12.23.10.51.47
+ ABdhPJw8XtR8avTSKjI9vPCTNw7c2/KWHXRbdu5f0vVCvOnKh25n1KhmKotG9a4bRPR0Jlg+pbh1Fg==
+X-Received: by 2002:a17:902:bc82:b0:148:eb68:f6dd with SMTP id
+ bb2-20020a170902bc8200b00148eb68f6ddmr4819693plb.98.1640317472548;
+        Thu, 23 Dec 2021 19:44:32 -0800 (PST)
+Received: from blue (99-14-97-149.lightspeed.frokca.sbcglobal.net.
+ [99.14.97.149])
+        by smtp.gmail.com with ESMTPSA id
+ oa9sm7133937pjb.31.2021.12.23.19.44.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Dec 2021 10:51:47 -0800 (PST)
-From: Jan Vermaete <jan.vermaete@gmail.com>
+        Thu, 23 Dec 2021 19:44:32 -0800 (PST)
+Received: by blue (sSMTP sendmail emulation); Thu, 23 Dec 2021 19:44:29 -0800
+From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-webserver][PATCH] netdata: fix for commit
- 8554624cc7f84e6b63b2ea4b94ee5fd2821021ca
-Date: Thu, 23 Dec 2021 19:51:32 +0100
-Message-Id: <20211223185132.52980-1-jan.vermaete@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Cc: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
+Subject: [meta-multimedia][PATCH] cdrkit: Allow PN to be empty.
+Date: Thu, 23 Dec 2021 19:44:25 -0800
+Message-Id: <20211224034425.336596-1-jpuhlman@mvista.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 23 Dec 2021 18:51:51 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 24 Dec 2021 03:44:34 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94488
+ https://lists.openembedded.org/g/openembedded-devel/message/94489
 
-The previous commit was using a PACKAGECONFIG to enable or disable
-the sending of anonymous data to Google Analytics.
-This was giving QA issues.
+If you add -dev packages to an image, as in an
+sdk, ${PN}-dev is pulled in, which depends on ${PN}
+which no longer exists in the new package layout.
 
-Now the variable 'NETDATA_ANONYMOUS' is used to enable or disable
-the opt-out.
+Error:
+ Problem: conflicting requests
+  - nothing provides cdrkit = 1.1.11-r0.1 needed by cdrkit-dev-1.1.11-r0.1.corei7_64
+(try to add '--skip-broken' to skip uninstallable packages)
 
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
 ---
- meta-webserver/recipes-webadmin/netdata/netdata_1.32.1.bb | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
+ meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_1.32.1.bb b/meta-webserver/recipes-webadmin/netdata/netdata_1.32.1.bb
-index 6824dd725..dbce1c432 100644
---- a/meta-webserver/recipes-webadmin/netdata/netdata_1.32.1.bb
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata_1.32.1.bb
-@@ -20,9 +20,8 @@ UPSTREAM_CHECK_URI = "https://github.com/netdata/netdata/releases"
+diff --git a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb b/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
+index c89204062..2e295388d 100644
+--- a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
++++ b/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
+@@ -25,6 +25,8 @@ RDEPENDS:dirsplit = "perl"
  
- S = "${WORKDIR}/${BPN}-v${PV}"
+ PACKAGES =+ "dirsplit genisoimage icedax wodim"
  
--PACKAGECONFIG ??= "\
--    anonymous \
--"
-+# Stop sending anonymous statistics to Google Analytics
-+NETDATA_ANONYMOUS ??= "enabled"
- 
- inherit pkgconfig autotools-brokensep useradd systemd
- 
-@@ -62,8 +61,7 @@ do_install:append() {
-     sed -i -e 's,@@libdir,${libexecdir},g' ${D}${sysconfdir}/netdata/netdata.conf
-     sed -i -e 's,@@datadir,${datadir},g' ${D}${sysconfdir}/netdata/netdata.conf
- 
--    # Stop sending anonymous statistics to Google Analytics
--    if ${@bb.utils.contains('PACKAGECONFIG', 'anonymous', 'true', 'false', d)}; then
-+    if [ "${NETDATA_ANONYMOUS}" = "enabled" ]; then
-         touch ${D}${sysconfdir}/netdata/.opt-out-from-anonymous-statistics
-     fi
- 
++ALLOW_EMPTY:${PN} = "1"
++
+ FILES:dirsplit = " \
+     ${bindir}/dirsplit \
+ "
 -- 
-2.25.1
+2.31.1
 
 
