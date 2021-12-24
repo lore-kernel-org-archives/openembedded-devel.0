@@ -2,113 +2,91 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AF61EC433EF
-	for <webhook@archiver.kernel.org>; Fri, 24 Dec 2021 05:39:41 +0000 (UTC)
-Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com
- [209.85.222.178])
- by mx.groups.io with SMTP id smtpd.web12.42642.1640324380410793627
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AECC9C433EF
+	for <webhook@archiver.kernel.org>; Fri, 24 Dec 2021 07:05:05 +0000 (UTC)
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com
+ [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.web10.43056.1640329504585376040
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Dec 2021 21:39:40 -0800
+ Thu, 23 Dec 2021 23:05:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=iYaat2g5;
- spf=pass (domain: gmail.com, ip: 209.85.222.178,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=g78FOUlQ;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f178.google.com with SMTP id i130so6515899qke.3
+Received: by mail-pg1-f180.google.com with SMTP id s1so5447410pga.5
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Dec 2021 21:39:40 -0800 (PST)
+ Thu, 23 Dec 2021 23:05:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=wQms1LwFo6y8wH90SpIKe8Dv2Ig7/ooeAo0QHZau00s=;
-        b=iYaat2g5TTWbtLwSdKLYvRF6CXMvZ2GeO9x/5+NmSXcsOzAdPEuveZBmeOQN+KbFwn
-         IOL10Z+yYh3kPNZjfU2WwP1UO89K88DrkMiaGzdMdv1PvICh3qhuQ/k5D5N8rddiOWDx
-         kaL6aFMVxrvT/a0RxFDTiZ9r6Y0Yn9Zc9qJsnon6sN2aczGP/WB/x5aXdmfESeEVEnrK
-         1a81vTOxuE6cbOdCa8qlDo87smxYBuTDNk+ixK4rBEBf5T43wrMmcy+I1CoqN8FvgB7r
-         Jpg3F1tUUUYy8l1sInE38Q0Rfny8a4lMnwfAqtB50hkQofH7jOnm2tVB+EuLCWrHf7g4
-         eKQg==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=PXro5vslH6Qrb5x/qCEQhg9PKqTN1qHgLWIEgU4PM6Y=;
+        b=g78FOUlQtuNAKx/EQtcem+9CNxUKpBqbl59iLCef04xUrBCOCj+uXQmcw02m51t7JM
+         y74OGabRT7Qcid8M9vLWGpZmjwj4wS8OLdF5P6Dylx0N/Y2Fr1U+QFpUa4CLxntQBycq
+         HUgcdXe4FffDdC6LfDmYmAmJEV4vMkp592uKB2sMNrIzDqCuuslTHi1TqLIlmRvne4PJ
+         krxc/Lsc5/4/PmdxqXtUEuCrWSixIi04Y/ImrlY+RMWxsc2kaqeBtuU2wXBqvn/R+xrK
+         uGXLp1LcELlInPxCtRSMencEh6Uw245jzF8fV+aBFjQpxzWJcgYCdROoAKpHs6kI9f3v
+         m3KQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=wQms1LwFo6y8wH90SpIKe8Dv2Ig7/ooeAo0QHZau00s=;
-        b=TeG4zZ3YrJPTjSg46lGh4G20tFGe0179XAfmuQ1Z7SdGmEHACs1L1BUBzguUucrveE
-         u/5Q+AB4ve90880r5XUf4jVcPwAJz/hz0xccZ6BCEovz06SI7leuGXnap/3JSYP58rFh
-         6rqV0tzc1M3+8poSBeJU90vtyZ6+BlvWDg4+AO9l/eyTHLzqkkN4P1PfhwJaWPz+eXk3
-         1NXAsR2ROrTqFbs4+0nxeJ2C8eRkE72Ti2Wm00tvyoPANpz3YXcv17+JYqL9ufimsZoO
-         Zq9T1AGC4xD2aeDOBrlsjPSw1uCTPhUyiQp0vlIOcFDvfpF+MonCTME/VNeftw3fsLJl
-         ez5g==
-X-Gm-Message-State: AOAM531pyc9CrxJPDeAwLSgcGDiWso/uIlrBsvpEDAnmf6MxEAklaOuD
-	EBpCmWjmOrld0KKESlXCRFYEbzXU1xS2Ee0vwqAUezhBf6TiGQ==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=PXro5vslH6Qrb5x/qCEQhg9PKqTN1qHgLWIEgU4PM6Y=;
+        b=cW5RCBQ4ulGWi2GKe/+QFCz9ObdMZVXgt/beYgZ2waJgnn8TumnILg6DnHuwkPoWn9
+         zxITftxpyZokftbIQKdd0xis2X6Va636dNCcxVq7dXS+iGsaSQiDRxvzwZ7DohUWI7Vs
+         OA0dnfhmeVbHtiJ4XkqUi0mrXaUAXIFwrZVRjV1dGBQ36uGubFbY3CLgIpbzPV3wZN8X
+         r8T4Hjzn8Mi2kguljah5p75WRAR05E2ZZHjN3uqREAlW4JxAmtZIaOphpkenAwirRaHm
+         9QKMzyrBe0jWvV3mAPwGZMFMEY7+vwYhcggm/AouCCQdMBDS5Qo+ytyaDNaEobPVeXx/
+         koRg==
+X-Gm-Message-State: AOAM531hvDZ+sG9C4G2jDquOHLiFh5JfFYDC5tzcNePNyzV0S1EaNfSu
+	d6LTuyVarg02yfxXf0gaaPbeH8M22OX9lQ==
 X-Google-Smtp-Source: 
- ABdhPJyjlIQ7/sfSJmFcp2bQsZB03WmXE+P6QdYGX3a9vMVoNK3kUPwoKgyjAN+5el7wsU80qabhWbFHGTW199WL+Cw=
-X-Received: by 2002:a05:620a:11b8:: with SMTP id
- c24mr884436qkk.227.1640324379366;
- Thu, 23 Dec 2021 21:39:39 -0800 (PST)
-MIME-Version: 1.0
-References: <20211224034425.336596-1-jpuhlman@mvista.com>
-In-Reply-To: <20211224034425.336596-1-jpuhlman@mvista.com>
+ ABdhPJycAp4OxxErd4NeXEQNeW7ITvC4riSMKupoaRFNeaBIHG+7Dn+nm//g2J01V1h7DrU6Wxz3+g==
+X-Received: by 2002:a05:6a00:1a48:b0:4ba:c29a:b4af with SMTP id
+ h8-20020a056a001a4800b004bac29ab4afmr5636608pfv.54.1640329503933;
+        Thu, 23 Dec 2021 23:05:03 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::2b9d])
+        by smtp.gmail.com with ESMTPSA id
+ u8sm8319157pfi.147.2021.12.23.23.05.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 23 Dec 2021 23:05:03 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 23 Dec 2021 21:39:13 -0800
-Message-ID: 
- <CAMKF1sqpRPqdfdK+mK-tEB03vtN1SOEnO9np2BfhY1hq5u6MzA@mail.gmail.com>
-Subject: Re: [oe] [meta-multimedia][PATCH] cdrkit: Allow PN to be empty.
-To: Jeremy Puhlman <jpuhlman@mvista.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH] tvheadend: Disable dvbscan
+Date: Thu, 23 Dec 2021 23:05:00 -0800
+Message-Id: <20211224070500.2642405-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 24 Dec 2021 05:39:41 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 24 Dec 2021 07:05:05 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94490
+ https://lists.openembedded.org/g/openembedded-devel/message/94491
 
-On Thu, Dec 23, 2021 at 7:44 PM Jeremy Puhlman <jpuhlman@mvista.com> wrote:
->
-> If you add -dev packages to an image, as in an
-> sdk, ${PN}-dev is pulled in, which depends on ${PN}
-> which no longer exists in the new package layout.
->
-> Error:
->  Problem: conflicting requests
->   - nothing provides cdrkit = 1.1.11-r0.1 needed by cdrkit-dev-1.1.11-r0.1.corei7_64
-> (try to add '--skip-broken' to skip uninstallable packages)
->
-> Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
-> ---
->  meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb b/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
-> index c89204062..2e295388d 100644
-> --- a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
-> +++ b/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
-> @@ -25,6 +25,8 @@ RDEPENDS:dirsplit = "perl"
->
->  PACKAGES =+ "dirsplit genisoimage icedax wodim"
->
-> +ALLOW_EMPTY:${PN} = "1"
-> +
+dvbscan is fetching sources during configure, disable this for now,
+if this feature is needed then adding it to SRC_URI would be needed
 
-i think adding something like
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-RDEPENDS:${PN}-dev = ""
+diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+index c97c20f3fc..193055893c 100644
+--- a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
++++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+@@ -23,6 +23,7 @@ EXTRA_OECONF += "--arch=${TARGET_ARCH} \
+                  --disable-ffmpeg_static \
+                  --disable-libav \
+                  --python=python3 \
++                 --disable-dvbscan \
+                  "
+ 
+ CLEANBROKEN = "1"
+-- 
+2.34.1
 
-might be preferred here.
-
->  FILES:dirsplit = " \
->      ${bindir}/dirsplit \
->  "
-> --
-> 2.31.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#94489): https://lists.openembedded.org/g/openembedded-devel/message/94489
-> Mute This Topic: https://lists.openembedded.org/mt/87931432/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
 
