@@ -2,113 +2,119 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CC4F5C433F5
-	for <webhook@archiver.kernel.org>; Mon, 27 Dec 2021 23:11:58 +0000 (UTC)
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
- [209.85.160.175])
- by mx.groups.io with SMTP id smtpd.web11.32356.1640646717515203569
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B9C93C433EF
+	for <webhook@archiver.kernel.org>; Mon, 27 Dec 2021 23:12:38 +0000 (UTC)
+Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com
+ [209.85.160.173])
+ by mx.groups.io with SMTP id smtpd.web12.32337.1640646757840849544
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Dec 2021 15:11:57 -0800
+ Mon, 27 Dec 2021 15:12:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Y8nFVBPR;
- spf=pass (domain: gmail.com, ip: 209.85.160.175,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=YBND9/Vo;
+ spf=pass (domain: gmail.com, ip: 209.85.160.173,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f175.google.com with SMTP id q14so14709026qtx.10
+Received: by mail-qt1-f173.google.com with SMTP id p19so14701509qtw.12
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Dec 2021 15:11:57 -0800 (PST)
+ Mon, 27 Dec 2021 15:12:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=jCwHkzyiNhiR7BN2QNf7jdkgGTQzAuVNN3HF9x/saOU=;
-        b=Y8nFVBPRDkjMYLD7LLCFYe14O9nxr+rMtJHnN2Llv35njJWR0+TeojsxGRZ8Av69JU
-         QWqSB3i+X7iK7pklg486gLf5936P57H4LEOIy6gY0Z2ZooFMKmQD7D9b4vf2ZTElz3xB
-         VYbXCAuEed9Xv5wGsXvHA6xaTTAhpO8b0OtMR5TVxXKMs5znDQjSs9vkCVPeonjyCyCC
-         JtbcAgwQ8Sp5CFkUHLl5/e0qah5Bn29YDGpiZcNM/0gFbFjWdwR2Obed4oDNbURyb6Ot
-         ma1A+bpzzUjRQwDT8S3/CQDy1Q+BNDdGb67JIp6R01C/lfF/xowfXoaAhG7ACBRS5Mz9
-         BLNg==
+         :cc:content-transfer-encoding;
+        bh=spKIio6DP+B0+HUij7HVER+QQU2G32VYpm751vJ9CDo=;
+        b=YBND9/Voaj4+8BEctFCzVwDxlD5KWdmTnJQMgRJ9/07zmxPtKbDHiqigwlk0XQ1xYm
+         EjKO+4AIZurL6SL3d13yXn3U5yEDqTsN7Vs6TEg9j8WLaA7xfx1qZ15uVxSTSeUG9r7Q
+         p1ldhEQKA6K7xcd5W/F6mz0SHemVgTADXPwOWUi05YHNBFol+jo36EGGHLBG443IFl7X
+         uG+JP7+r+PKDFx9OFPLX51zPTrOmoJgT3Uh08La4LVMBUmaxzqZCFJ314CVXBGKbQbxL
+         K2+p9w/KJpiJUTZKMhkIbTYqA8E3aBytb9TTjX3CLGZqunbbSKlTF2l1xICuCfvekL1h
+         Dzmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=jCwHkzyiNhiR7BN2QNf7jdkgGTQzAuVNN3HF9x/saOU=;
-        b=g/p2GS85Xdyki3lv3OfPhpTP4dEm9majUsChwzZluJMNV81g3mfsbSVVQ/xzpxXpLy
-         gUATIxQ9z+Qj8bukdkL/98xjsw7NPYTafspCu6Xm4ZFq2G7H7OKEp/Dg2FmsU82UCcDs
-         v+7Lr+QkHVAfGKf3dDyhHpoJ4uRsY23V8niFb7yFQvVsQCsVGnZs9tvwZA3C1vKkLk+p
-         t4mhCh6a5Y1NO1rlgVVN4yFm/v2tOmYklpdntK+dvLHqGjo2bXCGotuIq0B9sxvNhBP0
-         946X6GnS5TfWQjMHIXdL1/SVTftAZGmNzt117vLuA1VhjS4Qfj4GYqwAY37Xrgdpz3ST
-         b8Fg==
-X-Gm-Message-State: AOAM532N6tECPRdYEMHoQaYmkteAF/p8KSaOh701ucx+WfNk6tTTmKr1
-	z62vWjP4uWpWo6G8hNVpO7FjPwaIdyW/vziGLJw=
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=spKIio6DP+B0+HUij7HVER+QQU2G32VYpm751vJ9CDo=;
+        b=d4twwJzdVxo0TMEhwihnXdormX5Zdio7aehViEOh0FmJwz8wzoHVbjX51qeVwZo4ND
+         g0NEoy4LCiPudXT6pWiUEWKvHuoaurCbfr1D1rcDfe/VjVGTqLfWUx3h5fh7k51n7AuN
+         VxkeA6KWySAZztfNWxn7NZOtbT9dhJqLHDIrEz9Wd/10F6ER4PfnXHpKUpUIhplpuANe
+         QJmVbgnxsrWY5DNA8RSa8MfxKuboJ5JzRZsIKLRxQYCNSSeTuBbmjAAowj6KvjodxAiA
+         9HUtYbY/eKFFxyXaHJKCYfnhErQ4q7R3tvTrjSLqA+k1YyMAVMIaYYlKi/teYaOaJZF5
+         qMFg==
+X-Gm-Message-State: AOAM532xhw8zRbi/w53lHEV23WzGpDM1nL2r2sHgyIZKtYBeA07Ig97U
+	tmKCsBhy3hpIqWnIE41N1m5s+vHP6+kkyTnrh7aoKLG3Dc8=
 X-Google-Smtp-Source: 
- ABdhPJzKzyihbvn3jjglVo6MpoIxBESUll8dSux16jZLseMdEfER1/A2w9E61IEBRYUMCwbhmgMamGK4A536hxM4XFY=
-X-Received: by 2002:a05:622a:1386:: with SMTP id
- o6mr16676251qtk.64.1640646716561;
- Mon, 27 Dec 2021 15:11:56 -0800 (PST)
+ ABdhPJwdFiWV3PfHf8L9/ilN89TIjYtdT0efPWs9EE3VEdlST9eJVgG//PDYZeopimlMSoBh8n2l+CJMsjOhjvG7IB4=
+X-Received: by 2002:a05:622a:346:: with SMTP id
+ r6mr16583875qtw.185.1640646756932;
+ Mon, 27 Dec 2021 15:12:36 -0800 (PST)
 MIME-Version: 1.0
-References: <bf5e2809-fb5c-dc05-9ca6-7548ff9c724a@gmail.com>
-In-Reply-To: <bf5e2809-fb5c-dc05-9ca6-7548ff9c724a@gmail.com>
+References: <bb1d3ba0-8f41-b86c-5a15-2391d91bad2d@gmail.com>
+In-Reply-To: <bb1d3ba0-8f41-b86c-5a15-2391d91bad2d@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 27 Dec 2021 15:11:30 -0800
+Date: Mon, 27 Dec 2021 15:12:11 -0800
 Message-ID: 
- <CAMKF1srkBWbqYgaHw_u9Pw3YCAYMq2eHs-M_3gWNhxHg_kuX5g@mail.gmail.com>
-Subject: Re: hardknott-next merge request : Dec 27th
+ <CAMKF1sqzzO9fB_d7ova9YGSiqRoYSvBg2yxi-oo_zULEgsCEpg@mail.gmail.com>
+Subject: Re: dunfell merge request: Dec 27th
 To: akuster808 <akuster808@gmail.com>
 Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Dec 2021 23:11:58 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Dec 2021 23:12:38 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94525
+ https://lists.openembedded.org/g/openembedded-devel/message/94526
 
-merged thanks.
+merged thanks
 
-On Mon, Dec 27, 2021 at 2:48 PM akuster808 <akuster808@gmail.com> wrote:
+On Mon, Dec 27, 2021 at 2:56 PM akuster808 <akuster808@gmail.com> wrote:
 >
-> The following changes since commit f72a73b42fa740130b388ba8555cdbefdee8d37d:
+> The following changes since commit 69f94af4d91215e7d4e225bab54bf3bcfee42f=
+1c:
 >
->   ifenslave: Add branch=main (2021-12-05 11:32:16 -0800)
+>   brotli: add patch to fix CVE-2020-8927 (2021-12-03 12:28:09 -0800)
 >
 > are available in the Git repository at:
 >
->   https://git.openembedded.org/meta-openembedded hardknott-next
+>   https://git.openembedded.org/meta-openembedded dunfell-next
 >
-> for you to fetch changes up to 475ff6954c7c78ea0b2bf6741c46973b1756d3c1:
+> for you to fetch changes up to 95969f0f5f4264644a5dbfb6d4fb66e2ac3a2cde:
 >
->   nss: fix CVE-2021-43527 (2021-12-27 14:44:57 -0800)
+>   dovecot: refresh patches (2021-12-27 13:23:37 -0800)
 >
 > ----------------------------------------------------------------
-> Changqing Li (2):
->       syslog-ng: adjust control socket location
->       redis: add back missing patch
+> Armin kuster (1):
+>       dovecot: refresh patches
 >
-> Mingli Yu (1):
->       libteam: switch to python3
+> Ernst Sj=C3=B6strand (1):
+>       libmicrohttpd: Add patch to fix CVE-2021-3466
 >
-> Peter Kjellerstedt (1):
->       googletest: Switch branch from master to main
+> Jeremy Puhlman (1):
+>       c-ares: switch from master to main
 >
-> Sakib Sajal (1):
->       nss: fix CVE-2021-43527
+> Robert Joslyn (1):
+>       postgresql: Update to 12.9
 >
->  meta-oe/recipes-extended/redis/redis_6.2.6.bb                   |   4 +
->  .../libteam/0001-team_basic_test.py-switch-to-python3.patch     | 101
-> ++++++++++
->  .../0001-team_basic_test.py-use-python3-interpreter.patch       |  28 ---
->  meta-oe/recipes-support/libteam/libteam_1.31.bb                 |   2 +-
->  ...1-Bug-1737470-Ensure-DER-encoded-signatures-are-within.patch | 297
+> sana kazi (1):
+>       nss: Fix CVE-2021-43527
+>
+>  ...1-configure.ac-convert-AC_TRY_RUN-to-AC_TRY_LINK-state.patch |  19 +-
+>  .../dovecot/dovecot/0001-doveadm-Fix-parallel-build.patch       |  13 +-
+>  ...4-lib-mail-message-parser-Optimize-appending-new-part-.patch |   8 +-
+>  .../postgresql/files/0001-Add-support-for-RISC-V.patch          |   6 +-
+>  .../postgresql/{postgresql_12.7.bb =3D> postgresql_12.9.bb}       |   2 =
++-
+>  meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb                 |   2 +-
+>  .../libmicrohttpd/libmicrohttpd/CVE-2021-3466.patch             | 158
+> ++++++++++++++++
+>  meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.70.bb   |   3 +-
+>  meta-oe/recipes-support/nss/nss/CVE-2021-43527.patch            | 283
 > ++++++++++++++++++++++++++++
->  meta-oe/recipes-support/nss/nss_3.64.bb                         |   1 +
->  .../files/syslog-ng.service-the-syslog-ng-service.patch         |   2 +-
->  meta-oe/recipes-test/googletest/googletest_git.bb               |   2 +-
->  8 files changed, 406 insertions(+), 31 deletions(-)
+>  meta-oe/recipes-support/nss/nss_3.51.1.bb                       |   1 +
+>  10 files changed, 467 insertions(+), 28 deletions(-)
+>  rename meta-oe/recipes-dbs/postgresql/{postgresql_12.7.bb =3D>
+> postgresql_12.9.bb} (73%)
 >  create mode 100644
-> meta-oe/recipes-support/libteam/libteam/0001-team_basic_test.py-switch-to-python3.patch
->  delete mode 100644
-> meta-oe/recipes-support/libteam/libteam/0001-team_basic_test.py-use-python3-interpreter.patch
->  create mode 100644
-> meta-oe/recipes-support/nss/nss/0001-Bug-1737470-Ensure-DER-encoded-signatures-are-within.patch
+> meta-oe/recipes-support/libmicrohttpd/libmicrohttpd/CVE-2021-3466.patch
+>  create mode 100644 meta-oe/recipes-support/nss/nss/CVE-2021-43527.patch
 >
 
