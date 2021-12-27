@@ -1,113 +1,125 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF062C433F5
-	for <webhook@archiver.kernel.org>; Mon, 27 Dec 2021 09:09:47 +0000 (UTC)
-Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.113])
- by mx.groups.io with SMTP id smtpd.web12.24553.1640596186141102637
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7343BC433EF
+	for <webhook@archiver.kernel.org>; Mon, 27 Dec 2021 14:19:39 +0000 (UTC)
+Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com
+ [195.245.230.82])
+ by mx.groups.io with SMTP id smtpd.web09.26633.1640614778565697793
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Dec 2021 01:09:46 -0800
+ Mon, 27 Dec 2021 06:19:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=vKKpCt4n;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.113,
- mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=a/egtGx/;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.82,
+ mailfrom: zhengrq.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1640596183; i=@fujitsu.com;
-	bh=okj4VnPCi0wViY36rA5tGbwXPFB5rqA6JmDBN8KjigQ=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=vKKpCt4nvUHIHQy7B9NGJ0MuJDId/82WjmeKJpdmXc+8GViOK9E6ntPgsvxFjfm0j
-	 IyImuv+yQTdgCfe+7ShxiHF+LR1Y+X0PvZPW+4nm0PnGa3SU2x2/3sw7UtsOyy0v3g
-	 VzHq5sVoMa4wkQtJqUN946KOexWslcsnumcg3FV6ma4s/MD7/JA+oyuu8IfzFDamHR
-	 5qltJ9gFi/3j9OZTPA3zMU/DXSKfk8dSfp8W95DG0SWdJgXBVoCMfmHLpbExD31lV7
-	 Bggk3VhmbUj/Xmx3x2XS2Df38Y/JdfljW5epfeKp4bC7r+ShNQ6DfGr+H4Ol9JJDUc
-	 iSnL2SsuZM2tQ==
-Received: from [100.115.70.228] (using TLSv1.2 with cipher
+	s=170520fj; t=1640614776; i=@fujitsu.com;
+	bh=Qh//pvxWiyeysK9Nbb4+vA4MstxUY1onc+gqTXFMpjg=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=a/egtGx/CdAx0nyA9RGxlqhBeVFZuOz+GgwfyWFQWIByAhIj0eHZ0CechiqvL/fQz
+	 jwrdDAxs4u5H0uRVFJkywA6F9FsTELN5UJ1nHNllDSaMAJx1kNzamu8pPfVdcLsptu
+	 hNmbHy67aZqqwLXv+QF3OmrxzrEx4ULHSvd9A8DgqyYHoAMsX9Rpe3q52l/c/q7TiG
+	 0V+FFIbQg1V/kv/X50TJCvTmD/nWDgyDnW7kfLVmCvgxIULQXyDpFVwQTTZYB2nDVK
+	 BDvs+ZDfWyiIQ4WdXvVikjWUISMnqbeQDu0/17cqvowgGO4FuTqp4VG6QOAjt86lV9
+	 QVqxJg+ku0Q4w==
+Received: from [100.115.4.164] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-a.eu-central-1.aws.ess.symcld.net id
- EA/AA-07141-7D289C16; Mon, 27 Dec 2021 09:09:43 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrOIsWRWlGSWpSXmKPExsViZ8ORqHu96WS
-  iwd9uYYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPGgz1MBY84Kh79XMjUwNjF0cXIxSEk8IRR
-  4trT/+wQzgUmiVfHV7BCOCcYJR692c/WxcjJwSagJjH91g1WEFtEQF9i6ew9zCA2s4CKxIvfP
-  ewgtrCAr8TdI6eZQGwWAVWJE08Ogtm8Ak4SZ3pXMYLYEgIKElMevmeGiAtKnJz5hAVijoTEwR
-  cvmCFqFCVmX25mgbArJGbNamOCsNUkrp7bxDyBkX8WkvZZSNoXMDKtYrRLKspMzyjJTczM0TU
-  0MNA1NDTVNTPXNTQz00us0k3USy3VTU7NKylKBErrJZYX66UWF+sVV+Ym56To5aWWbGIEhmdK
-  sfOyHYzv+n7qHWKU5GBSEuWNTj2ZKMSXlJ9SmZFYnBFfVJqTWnyIUYaDQ0mC90cjUE6wKDU9t
-  SItMwcYKzBpCQ4eJRHe/yBp3uKCxNzizHSI1ClGRSlx3i0gCQGQREZpHlwbLD4vMcpKCfMyMj
-  AwCPEUpBblZpagyr9iFOdgVBLm9QFGuxBPZl4J3PRXQIuZgBbPdDgOsrgkESEl1cBk+nhh8fO
-  br7Yu/lrRu7f1VYtQTK72nfpq8d1e+szhUy7tuJS7TXRNYG/Zf7sU1v3r+17Gn91jv2J+r3oh
-  Y4PK/kg+mTm//dLdur89fuiQ5PW/NP7gKZaGyKN1f165ai5Y2ZznG515Z5bGnNyiCe579JsZC
-  2ri5C/F/FTnu+SRZbYzRHRaUhfXZKlVwk38ya56O3xO5Hiq//YvWcduWBvPeOpvx9TJAqdKs6
-  c+ju7kflI50+it+GvvxMXn7hjsdllz3k76wOP2TYsu3Lt/aaHYqXUvgnYaWDdME5TfuGNahw3
-  rq+KjrlslV+88/HZBVN2zXNcvRrNe//fetIU558/6yF0Rdbc2KBau0WBptnVQYinOSDTUYi4q
-  TgQAY8bJFUoDAAA=
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-17.tower-532.messagelabs.com!1640596183!204661!1
+	by server-4.bemta.az-a.eu-west-1.aws.ess.symcld.net id 59/FC-30341-87BC9C16;
+ Mon, 27 Dec 2021 14:19:36 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrIIsWRWlGSWpSXmKPExsViZ8ORqFtx+mS
+  iwf9TPBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0ZDz022guc8FZOn9TA2MB7h7mLk4hASeMIo
+  8efpNHYI5wKTxIIl95ghnD2MEqv7lrJ1MXJysAnoSpx7vJYdxBYR0JdYOnsPM4gtLOAs0TP7P
+  JjNIqAq8fTVOkYQm1fAXaJ9/3qwuISAgsSUh++ZIeKCEidnPmEBsZkFJCQOvngBFOcAqlGUmD
+  1dHqK8QuL14UtQrWoSV89tYp7AyDcLSfcsJN0LGJlWMVomFWWmZ5TkJmbm6BoaGOgaGprqGuq
+  aWuolVukm6qWW6panFpfoGuollhfrpRYX6xVX5ibnpOjlpZZsYgSGXkoxo/UOxo6+n3qHGCU5
+  mJREeb9POJkoxJeUn1KZkVicEV9UmpNafIhRhoNDSYI3+BRQTrAoNT21Ii0zBxgHMGkJDh4lE
+  V4ZkDRvcUFibnFmOkTqFKMux5dVSxYxC7Hk5eelSonz/joJVCQAUpRRmgc3AhaTlxhlpYR5GR
+  kYGIR4ClKLcjNLUOVfMYpzMCoJ8/4BmcKTmVcCt+kV0BFMQEfMdDgOckRJIkJKqoGp5d9rJdO
+  r3jKC+eEH12Ub3W4tvTPjQI/yr8SPMdEXF3AJnvvWzRG3Y1WlZ3Oax45pc4Manrx9lF7iEcM6
+  SzFod9iXkHrzhF7lRv5Ig+VXPzHwlF+1VT7l+E85fNe++e11an0dlk1vlK//crbStTDVm6l09
+  0PbzcNPp6w3v9iS+rdk0V+3/v3y7tt/Wayd8clqW8kqx6PMJa8iNAQZ8+JWfzl72X+2U0Gp0s
+  5QxozrM54/5ZQ+7tI4VYmz54jY/AsFKXV2exM/9MR8mJDY0/xDVkiyXz5kV36YEOPxyccXN2W
+  d+br3Wue1jN99z2ecLijvUeP8dodjktYxkbTTnSs+y9Uxd7cFcDObV37fW63EUpyRaKjFXFSc
+  CAANwP/zRAMAAA==
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-11.tower-585.messagelabs.com!1640614775!308634!1
 X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 13073 invoked from network); 27 Dec 2021 09:09:43 -0000
+Received: (qmail 13391 invoked from network); 27 Dec 2021 14:19:36 -0000
 Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-17.tower-532.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 27 Dec 2021 09:09:43 -0000
+  by server-11.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 27 Dec 2021 14:19:36 -0000
 Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id C78301001A3
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id A954E1001A3
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Dec 2021 09:09:42 +0000 (GMT)
+ Mon, 27 Dec 2021 14:19:35 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id BAA4C100188
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 96875100190
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Dec 2021 09:09:42 +0000 (GMT)
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ Mon, 27 Dec 2021 14:19:35 +0000 (GMT)
+Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Mon, 27 Dec 2021 09:09:24 +0000
-From: Wang Mingyu <wangmy@fujitsu.com>
+ (TLS) id 15.0.1497.26; Mon, 27 Dec 2021 14:19:30 +0000
+From: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-ipython: upgrade 7.28.0 -> 7.30.1
-Date: Mon, 27 Dec 2021 17:09:15 +0800
-Message-ID: <1640596155-22239-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] byacc: upgrade 20210808 -> 20211224
+Date: Tue, 28 Dec 2021 07:19:23 +0800
+Message-ID: <1640647163-3637-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Dec 2021 09:09:47 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Dec 2021 14:19:39 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94506
+ https://lists.openembedded.org/g/openembedded-devel/message/94507
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+License-Update: directory of file changed from "debian" to "package/debian"
+
+Changelog:
+==========
+ * package/debian/rules: fixes from Debian package for lintian warnings
+ * package/debian/control: updates for Debian standard
+ * VERSION, package/byacc.spec, package/debian/changelog,
+   package/mingw-byacc.spec, package/pkgsrc/Makefile: bump
+ * package/debian/docs, package/debian/copyright, package/debian/control:
+   errata from Debian package
+ * config.sub: alias aarch64le to aarch64
+
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../{python3-ipython_7.28.0.bb => python3-ipython_7.30.1.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-ipython_7.28.0.bb => python3-ipython_7.30.1.bb} (89%)
+ .../byacc/{byacc_20210808.bb => byacc_20211224.bb}            | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-extended/byacc/{byacc_20210808.bb => byacc_20211224.bb} (65%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ipython_7.28.0.bb b/meta-python/recipes-devtools/python/python3-ipython_7.30.1.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-ipython_7.28.0.bb
-rename to meta-python/recipes-devtools/python/python3-ipython_7.30.1.bb
-index c5d05a8da..6b829811f 100644
---- a/meta-python/recipes-devtools/python/python3-ipython_7.28.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-ipython_7.30.1.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
+diff --git a/meta-oe/recipes-extended/byacc/byacc_20210808.bb b/meta-oe/recipes-extended/byacc/byacc_20211224.bb
+similarity index 65%
+rename from meta-oe/recipes-extended/byacc/byacc_20210808.bb
+rename to meta-oe/recipes-extended/byacc/byacc_20211224.bb
+index eeed39f63..85e507271 100644
+--- a/meta-oe/recipes-extended/byacc/byacc_20210808.bb
++++ b/meta-oe/recipes-extended/byacc/byacc_20211224.bb
+@@ -4,7 +4,7 @@
+ # Setting to PD as this is what the upstream has it as.
  
- PYPI_PACKAGE = "ipython"
+ LICENSE = "PD"
+-LIC_FILES_CHKSUM = "file://package/debian/copyright;md5=80ce98c6ab91cc4a93a9d2cfb7c14463"
++LIC_FILES_CHKSUM = "file://package/debian/copyright;md5=e13dd32663e3159031608d536530a080"
+ require byacc.inc
  
--SRC_URI[sha256sum] = "2097be5c814d1b974aea57673176a924c4c8c9583890e7a5f082f547b9975b11"
-+SRC_URI[sha256sum] = "cb6aef731bf708a7727ab6cde8df87f0281b1427d41e65d62d4b68934fa54e97"
- 
- RDEPENDS:${PN} = "\
-     ${PYTHON_PN}-setuptools \
+-SRC_URI[sha256sum] = "f158529be9d0594263c7f11a87616a49ea23e55ac63691252a2304fbbc7d3a83"
++SRC_URI[sha256sum] = "7bc42867a095df2189618b64497016298818e88e513fca792cb5adc9a68ebfb8"
 -- 
 2.25.1
 
