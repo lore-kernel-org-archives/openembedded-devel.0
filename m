@@ -1,184 +1,143 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44210C433EF
-	for <webhook@archiver.kernel.org>; Mon, 27 Dec 2021 21:44:45 +0000 (UTC)
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com
- [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.web09.31494.1640641484495891480
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D69CC433F5
+	for <webhook@archiver.kernel.org>; Mon, 27 Dec 2021 22:17:39 +0000 (UTC)
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com
+ [209.85.210.181])
+ by mx.groups.io with SMTP id smtpd.web10.31788.1640643458245515906
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Dec 2021 13:44:44 -0800
+ Mon, 27 Dec 2021 14:17:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=fgC9rXmH;
- spf=pass (domain: gmail.com, ip: 209.85.215.180,
- mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f180.google.com with SMTP id 8so14401747pgc.10
-        for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Dec 2021 13:44:44 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=FhH+youa;
+ spf=pass (domain: gmail.com, ip: 209.85.210.181,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f181.google.com with SMTP id 205so14666475pfu.0;
+        Mon, 27 Dec 2021 14:17:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :cc:references:from:organization:in-reply-to
          :content-transfer-encoding;
-        bh=Q5tMaeHb1/aRaUy4P3yrb3+57ITvErHowzRGhK9I5DM=;
-        b=fgC9rXmHRMbxjxgIg48BJfnCOHtE20eublEiH/GvEWr08C/fEEfG8Bt3ga2t6s3f9s
-         cLh1yM+sdzDVfQ3Ob5i4wrZEBA2gCmniuvuLEcoTwlEChYghwlkWg0JlXk4P2NDjjvO2
-         rTi11tK0UpYIfAt4zjCwTIzm9XLl/BzRHO1JJ40jI5TK5PsKhxINyauOL8eb/llVze38
-         QZDUOv5HIhg+jLakqEaSD9LFbb+W2uZeDKHpbyFxvNJoGlUNYbPifQ8yvN4NJnZ9CIpF
-         FH4oa46UXOIK4ggA3jDC9zCKiH5Xb9YWPjIba/31n2mB45DZapzupjsecyUbr8KdJYy1
-         PYfA==
+        bh=xvWK37ThRwhKgZP15MjGXCdobR+8/YnJQgHC2ccywOs=;
+        b=FhH+youaOkketyeqQ1+efTYSwNDPOv2y0ICDtFhsY2KX0WXyL4GTuuONE+G2MOOORT
+         f51jRmVpUfEtiNpz8KjUc2niNw9EIAg8MfX9pv+uP2uBzajNW4mXAo19TQJXfWB0HSO0
+         xeImsKhxN71kMpSYNRXAiK0wsEOJzT4K1awI0yZhhhxqEGA1dlwnjsCTL5srV+OwZFPa
+         fYgphtgFWYUe2cyG6gEA1o6BXVXhHwpwhqz0UEYb4Ae6HNeg8oRa93zlkVTLSL61i8jG
+         MCG6xFiitMD3hl+gkVP6aKJkEKnzEizIDzZ8jA7vcat1YorJIVqWhlli8MC6Sspl+ijj
+         GP3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:cc:references:from:organization:in-reply-to
          :content-transfer-encoding;
-        bh=Q5tMaeHb1/aRaUy4P3yrb3+57ITvErHowzRGhK9I5DM=;
-        b=QCahMqPt9wfSnLnNb4994/CanYaQHYZ+aJhOLNs9soYbEjtFRI7BXuaa56goHP2sVE
-         e8OwQ5qv2MNDxzBWaCZp3Sj2B3shj1G/wCkblH85HhSXg9GsoT1tFPkaaCY2wJWmONaU
-         U2nqZruDfVILetZfOIjzTrBKax7XQtKIyFEnOMe5IUo8DpKmfxQUn4dOtzIQFJ/47Et4
-         x1XcHPTv6eDw0N7NGeitu01GpxDjORa8e1hwL0dMZSV7tMwhDwJcoGgLu+CU+uhF3joO
-         lAGVz7unh4Z7Zb6HNBFBOL6aklnHilwbxObSoRtx5EAYls0Kf3w1l9MCbfuotG0CJJbE
-         UU2w==
-X-Gm-Message-State: AOAM533FF27CaOzmrQ+In4prYS7Vp4GoNQ72YWFHYEdul7bAlUvtgSLJ
-	VVYzFO4qroyglj50rGVLVB1jK/INfOU=
+        bh=xvWK37ThRwhKgZP15MjGXCdobR+8/YnJQgHC2ccywOs=;
+        b=wdjpEaAzhZrFZqzUvbQoXt4pTDAGppQv/6+ELcAWTqCPG3x5hgLiqDT8JTb7/uqcpv
+         aBRw+UhC0PpDnv5qG70/55JfMmULXSQHZ/0Ewo9EGzZHzBhSFe31s45NdwwxbDCn7EIp
+         tY4rXFrVinxcEnoQ64JSPh3Te6K1ujl/UItxLQQ6t+Dtm9W1UURjtEib5B4o+dXIvrwV
+         TORARn8eetxQV3Sjp81d3MV4/rkM+4Qrk6W79uDsIXpo9BFXtMqZhlQItBT3XhDa/qrE
+         +Cgfmh6nwFsEi0JOzuPcLHXH1yMTY7wuBtdFXFoWXNDEo2jR11yU/F5XgU64DIRXjyab
+         u9nw==
+X-Gm-Message-State: AOAM533rBv4BrNGaWZNqY7GCpPOMGxIGqBnxmtQl+5OXi5byTxWogGpx
+	qVP8Ia7WHBOAIGg3TnTHC88=
 X-Google-Smtp-Source: 
- ABdhPJxlM+uD96/e+tJDMCgF+uJTI3DbtZbUVYbMD1rwHeEWlgf4MOVEOPC9t5zqWV23fmvSZdzJ5g==
-X-Received: by 2002:a63:3307:: with SMTP id z7mr16967292pgz.498.1640641483694;
-        Mon, 27 Dec 2021 13:44:43 -0800 (PST)
-Received: from keaua.caveonetworks.com
- ([2601:202:4180:a5c0:67e3:bc71:b585:c820])
+ ABdhPJyho0nca2ifsJ+ePwshaNNAgzDEqXGbJ/cJIWZZGnsgbF4fbFZXw9DXVv8VIJ45clJR1ttpfA==
+X-Received: by 2002:a05:6a00:8cc:b0:4a8:262:49e1 with SMTP id
+ s12-20020a056a0008cc00b004a8026249e1mr19288534pfu.28.1640643457719;
+        Mon, 27 Dec 2021 14:17:37 -0800 (PST)
+Received: from ?IPV6:2601:646:9200:a0f0:ad5a:f567:6a13:2bdd?
+ ([2601:646:9200:a0f0:ad5a:f567:6a13:2bdd])
         by smtp.gmail.com with ESMTPSA id
- l2sm15804903pfu.13.2021.12.27.13.44.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Dec 2021 13:44:43 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Armin kuster <akuster808@gamil.com>
-Subject: [meta-networking][dunfell][PATCH] dovecot: refresh patches
-Date: Mon, 27 Dec 2021 13:44:42 -0800
-Message-Id: <20211227214442.482946-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ 93sm18224856pjo.26.2021.12.27.14.17.36
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 27 Dec 2021 14:17:37 -0800 (PST)
+Message-ID: <64ee8951-4d4c-2262-9628-0bd19c8bef78@gmail.com>
+Date: Mon, 27 Dec 2021 14:17:35 -0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.4.1
+Subject: Re: [oe] [meta-networking][v2][PATCH 1/4] strongswan: provide
+ PACKAGECONFIG for cureve25519
+Content-Language: en-US
+To: Armin Kuster <akuster808@gmail.com>,
+ openembedded-devel@lists.openembedded.org
+Cc: "Armin Kuster via lists.openembedded.org"
+ <akuster808=gmail.com@lists.openembedded.org>
+References: <20211227203811.481782-1-akuster808@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+In-Reply-To: <20211227203811.481782-1-akuster808@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Dec 2021 21:44:45 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Dec 2021 22:17:39 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94521
+ https://lists.openembedded.org/g/openembedded-devel/message/94522
 
-From: Armin kuster <akuster808@gamil.com>
+author is
 
-Signed-off-by: Armin kuster <akuster808@gamil.com>
----
- ...vert-AC_TRY_RUN-to-AC_TRY_LINK-state.patch | 19 ++++++++-----------
- .../0001-doveadm-Fix-parallel-build.patch     | 13 +++++--------
- ...-parser-Optimize-appending-new-part-.patch |  8 +++++---
- 3 files changed, 18 insertions(+), 22 deletions(-)
+Author: Armin Kuster via lists.openembedded.org 
+<akuster808=gmail.com@lists.op
+   enembedded.org>
 
-diff --git a/meta-networking/recipes-support/dovecot/dovecot/0001-configure.ac-convert-AC_TRY_RUN-to-AC_TRY_LINK-state.patch b/meta-networking/recipes-support/dovecot/dovecot/0001-configure.ac-convert-AC_TRY_RUN-to-AC_TRY_LINK-state.patch
-index f86235076e..3f87714dcc 100644
---- a/meta-networking/recipes-support/dovecot/dovecot/0001-configure.ac-convert-AC_TRY_RUN-to-AC_TRY_LINK-state.patch
-+++ b/meta-networking/recipes-support/dovecot/dovecot/0001-configure.ac-convert-AC_TRY_RUN-to-AC_TRY_LINK-state.patch
-@@ -13,11 +13,11 @@ Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-  configure.ac | 15 +++++----------
-  1 file changed, 5 insertions(+), 10 deletions(-)
- 
--diff --git a/configure.ac b/configure.ac
--index 3b32614..94ec002 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -519,13 +519,10 @@ have_ioloop=no
-+Index: dovecot-2.2.36.4/configure.ac
-+===================================================================
-+--- dovecot-2.2.36.4.orig/configure.ac
-++++ dovecot-2.2.36.4/configure.ac
-+@@ -490,13 +490,10 @@ have_ioloop=no
-  
-  if test "$ioloop" = "best" || test "$ioloop" = "epoll"; then
-    AC_CACHE_CHECK([whether we can use epoll],i_cv_epoll_works,[
-@@ -34,7 +34,7 @@ index 3b32614..94ec002 100644
-      ], [
-        i_cv_epoll_works=yes
-      ], [
--@@ -653,7 +650,7 @@ fi
-+@@ -596,7 +593,7 @@ fi
-  dnl * Old glibcs have broken posix_fallocate(). Make sure not to use it.
-  dnl * It may also be broken in AIX.
-  AC_CACHE_CHECK([whether posix_fallocate() works],i_cv_posix_fallocate_works,[
-@@ -43,7 +43,7 @@ index 3b32614..94ec002 100644
-      #define _XOPEN_SOURCE 600
-      #include <stdio.h>
-      #include <stdlib.h>
--@@ -662,7 +659,7 @@ AC_CACHE_CHECK([whether posix_fallocate() works],i_cv_posix_fallocate_works,[
-+@@ -605,7 +602,7 @@ AC_CACHE_CHECK([whether posix_fallocate(
-      #if defined(__GLIBC__) && (__GLIBC__ < 2 || __GLIBC_MINOR__ < 7)
-        possibly broken posix_fallocate
-      #endif
-@@ -52,7 +52,7 @@ index 3b32614..94ec002 100644
-        int fd = creat("conftest.temp", 0600);
-        int ret;
-        if (fd == -1) {
--@@ -671,8 +668,6 @@ AC_CACHE_CHECK([whether posix_fallocate() works],i_cv_posix_fallocate_works,[
-+@@ -614,8 +611,6 @@ AC_CACHE_CHECK([whether posix_fallocate(
-        }
-        ret = posix_fallocate(fd, 1024, 1024) < 0 ? 1 : 0;
-        unlink("conftest.temp");
-@@ -61,6 +61,3 @@ index 3b32614..94ec002 100644
-    ], [
-      i_cv_posix_fallocate_works=yes
-    ], [
---- 
--1.8.4.2
--
-diff --git a/meta-networking/recipes-support/dovecot/dovecot/0001-doveadm-Fix-parallel-build.patch b/meta-networking/recipes-support/dovecot/dovecot/0001-doveadm-Fix-parallel-build.patch
-index 65ae9bf910..3170ae8658 100644
---- a/meta-networking/recipes-support/dovecot/dovecot/0001-doveadm-Fix-parallel-build.patch
-+++ b/meta-networking/recipes-support/dovecot/dovecot/0001-doveadm-Fix-parallel-build.patch
-@@ -18,11 +18,11 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  src/doveadm/Makefile.am | 4 ++--
-  1 file changed, 2 insertions(+), 2 deletions(-)
- 
--diff --git a/src/doveadm/Makefile.am b/src/doveadm/Makefile.am
--index c644646..6ae9144 100644
----- a/src/doveadm/Makefile.am
--+++ b/src/doveadm/Makefile.am
--@@ -180,8 +180,8 @@ test_libs = \
-+Index: dovecot-2.2.36.4/src/doveadm/Makefile.am
-+===================================================================
-+--- dovecot-2.2.36.4.orig/src/doveadm/Makefile.am
-++++ dovecot-2.2.36.4/src/doveadm/Makefile.am
-+@@ -182,8 +182,8 @@ test_libs = \
-  	../lib/liblib.la
-  test_deps = $(noinst_LTLIBRARIES) $(test_libs)
-  
-@@ -33,6 +33,3 @@ index c644646..6ae9144 100644
-  test_doveadm_util_DEPENDENCIES = $(test_deps)
-  
-  check: check-am check-test
---- 
--2.14.2
--
-diff --git a/meta-networking/recipes-support/dovecot/dovecot/0004-lib-mail-message-parser-Optimize-appending-new-part-.patch b/meta-networking/recipes-support/dovecot/dovecot/0004-lib-mail-message-parser-Optimize-appending-new-part-.patch
-index c35bf883e6..ba6667fa99 100644
---- a/meta-networking/recipes-support/dovecot/dovecot/0004-lib-mail-message-parser-Optimize-appending-new-part-.patch
-+++ b/meta-networking/recipes-support/dovecot/dovecot/0004-lib-mail-message-parser-Optimize-appending-new-part-.patch
-@@ -14,10 +14,12 @@ CVE: CVE-2020-12100
- Upstream-Status: Backport [http://archive.ubuntu.com/ubuntu/pool/main/d/dovecot/dovecot_2.2.33.2-1ubuntu4.7.debian.tar.xz]
- Comment: No change in any hunk
- 
----- a/src/lib-mail/message-parser.c
--+++ b/src/lib-mail/message-parser.c
-+Index: dovecot-2.2.36.4/src/lib-mail/message-parser.c
-+===================================================================
-+--- dovecot-2.2.36.4.orig/src/lib-mail/message-parser.c
-++++ dovecot-2.2.36.4/src/lib-mail/message-parser.c
- @@ -1,7 +1,7 @@
-- /* Copyright (c) 2002-2017 Dovecot authors, see the included COPYING file */
-+ /* Copyright (c) 2002-2018 Dovecot authors, see the included COPYING file */
-  
-  #include "lib.h"
- -#include "buffer.h"
--- 
-2.25.1
+Perhaps something is wrong with your email agent.
 
+On 12/27/21 12:38 PM, Armin Kuster wrote:
+> From: "Armin Kuster via lists.openembedded.org" <akuster808=gmail.com@lists.openembedded.org>
+> 
+> Not everyone wants this to be installed by default. Enable to remove
+> cureve25519 is someone wants to.
+> 
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> 
+> ---
+> v2]
+> Fix typo
+> ---
+>   .../recipes-support/strongswan/strongswan_5.9.4.bb            | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.9.4.bb b/meta-networking/recipes-support/strongswan/strongswan_5.9.4.bb
+> index 45500df01..124b5a799 100644
+> --- a/meta-networking/recipes-support/strongswan/strongswan_5.9.4.bb
+> +++ b/meta-networking/recipes-support/strongswan/strongswan_5.9.4.bb
+> @@ -23,7 +23,7 @@ EXTRA_OECONF = " \
+>   
+>   EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
+>   
+> -PACKAGECONFIG ?= "curl gmp openssl sqlite3 swanctl \
+> +PACKAGECONFIG ?= "curl gmp openssl sqlite3 swanctl curve25519\
+>           ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-charon', 'charon', d)} \
+>   "
+>   PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,,${PN}-plugin-aesni"
+> @@ -41,6 +41,7 @@ PACKAGECONFIG[soup] = "--enable-soup,--disable-soup,libsoup-2.4,${PN}-plugin-sou
+>   PACKAGECONFIG[sqlite3] = "--enable-sqlite,--disable-sqlite,sqlite3,${PN}-plugin-sqlite"
+>   PACKAGECONFIG[stroke] = "--enable-stroke,--disable-stroke,,${PN}-plugin-stroke"
+>   PACKAGECONFIG[swanctl] = "--enable-swanctl,--disable-swanctl,,libgcc"
+> +PACKAGECONFIG[curve25519] = "--enable-curve25519,--disable-curve25519,, ${PN}-plugin-curve25519"
+>   
+>   # requires swanctl
+>   PACKAGECONFIG[systemd-charon] = "--enable-systemd,--disable-systemd,systemd,"
+> @@ -130,7 +131,6 @@ RDEPENDS:${PN} += "\
+>       ${PN}-plugin-x509 \
+>       ${PN}-plugin-xauth-generic \
+>       ${PN}-plugin-xcbc \
+> -    ${PN}-plugin-curve25519 \
+>       "
+>   
+>   RPROVIDES:${PN} += "${PN}-systemd"
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#94517): https://lists.openembedded.org/g/openembedded-devel/message/94517
+> Mute This Topic: https://lists.openembedded.org/mt/87984771/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
