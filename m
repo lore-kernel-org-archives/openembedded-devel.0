@@ -2,77 +2,78 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17A98C433F5
-	for <webhook@archiver.kernel.org>; Mon, 27 Dec 2021 14:34:17 +0000 (UTC)
-Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web12.26710.1640615655818974765
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BBFDC433F5
+	for <webhook@archiver.kernel.org>; Mon, 27 Dec 2021 14:34:23 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.3])
+ by mx.groups.io with SMTP id smtpd.web08.26910.1640615662058298164
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Dec 2021 06:34:16 -0800
+ Mon, 27 Dec 2021 06:34:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=h//FdY4H;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=h9W+ziWT;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1640615654; i=@fujitsu.com;
-	bh=IrsDIGtt4z/YZcav+G+sERX+chC6Ix77QviS+5F2c1M=;
+	bh=+Rh5KlIMKBq1IXvbFsxtX991ssVNpE/XpgupXZe7pXk=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=h//FdY4Hoo45NoJYwCJhlSIebzl4A8wH5hkowEaMccVbmIW655tMS3nqFRNtihlx9
-	 1vpFjt499hIPvIUQ8aywnBgIa81GptrvyO3YKr2lZuJZGBN/vCBWK76q+Hic6uzCuG
-	 zbE6WPwtkwXCPYk4vYrVUlsIkmpwfQuZqSKGZCM849rYGCHCY06IVYUyYnIfDogFu8
-	 eJ2+d/lDuxwAX+i7q5q0zozphfk2IuZn1J7D902HCs1w5mvcSfPdaidHukEOOmGLFY
-	 LkdGgqztadBJLX9gKhQ7481wjkmdSnSBxfmHp+iNkMaMEA7chvTpKpLZL/Ae7kK4GN
-	 ss/idMfO3HSqQ==
-Received: from [100.115.70.228] (using TLSv1.2 with cipher
+	b=h9W+ziWTu0vrcs42Thxiln1zsvK7bkkuoVEHyA6rBC8dlSVXeADrYSrUO/k0+xcrc
+	 9KtUu6nnDU4XhhK7IVG8SLn46fIjKgNmO2uxet6fB5v7Olk98++Y3j5soJrcLi8GS6
+	 TUjOY+yOKJ8gGbGKysnpFEId/sgfPvt6rKuXOvC2+PHJc4kK4iuWksL08ue/S5Ajo1
+	 7wkI14nQWo6JFRy/kbTkO8hwGYsE+UEWhHzk/p+0DUwmpdpkAqA4lznHcd+2yBS/ic
+	 P+B5X9oFiWmJ7gkBEY0fNeNRI+cyEWF3ShXpITnMyra6P6uHEohn1LK7pD+uZsILs7
+	 tnZq9G4IuP7mg==
+Received: from [100.115.35.72] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-a.eu-central-1.aws.ess.symcld.net id
- 78/EB-31213-6EEC9C16; Mon, 27 Dec 2021 14:34:14 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrLIsWRWlGSWpSXmKPExsViZ8ORqPv03Ml
-  EgwdHdCwuHl7K7MDocW7jCsYAxijWzLyk/IoE1owNn1YwF8zlqjiz/QxjA+MOzi5GTg4hgSeM
-  Eq2rZLsYuYDsC0wSv6ZsY4ZwTjBKfN/xgwmkik1ATWL6rRusILaIgL7E0tl7mEFsZgEViRe/e
-  9hBbGEBP4kZk9+B1bMIqEpsfNsMFucVcJJoOdYLFpcQUJCY8vA9WC+ngLNEw6E9QHEOoGVOEh
-  MvO0OUC0qcnPmEBWK8hMTBFy+YIVoVJWZfbmaBsCskZs1qgxqpJnH13CbmCYyCs5C0z0LSvoC
-  RaRWjXVJRZnpGSW5iZo6uoYGBrqGhqa6Zma6hpaFeYpVuol5qqW5yal5JUSJQWi+xvFgvtbhY
-  r7gyNzknRS8vtWQTIzCUU4qd9u9gfNr3U+8QoyQHk5Io7/cJJxOF+JLyUyozEosz4otKc1KLD
-  zHKcHAoSfCuPwuUEyxKTU+tSMvMAcYVTFqCg0dJhPcOSJq3uCAxtzgzHSJ1ilFRSpz3IEhCAC
-  SRUZoH1waL5UuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHmbQKbwZOaVwE1/BbSYCWjxTIf
-  jIItLEhFSUg1MdkcDe4LX3uD5GWj9ItonJs0i9P+ZiLVlXMt59kyNbr6id6bnQpSG0uypN6VX
-  7Qy9YP/+1cPgmY/XBLt2/9OZHK+0NNJjVbtZgYdTxg6pHbP7mDoqmvJMFboK5ohenB+VELrQ9
-  oCb6+NwNSe1oFfzNTezx2XaBe07dDvqTsOhyvX3tfteH/C6/pwhPczro31Vr4bFGYEpoT/Sbe
-  1ivXff87lQ2v4n9OaqJZ2XVU4KmayVeR9hyfzn+pHUmBkvSmTTrYOjsz1t1feEvZwd8kJt94o
-  VB3Wt3Re6y+yIOOOq4dbaphxYtzqu/emt2DOHmRctfbFhRqPTvr3dcwWvXFAQNf/uczj8t6sF
-  S8KTPUJKLMUZiYZazEXFiQD/uwlvYAMAAA==
+	by server-3.bemta.az-a.eu-west-2.aws.ess.symcld.net id 62/9E-09428-5EEC9C16;
+ Mon, 27 Dec 2021 14:34:13 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrNIsWRWlGSWpSXmKPExsViZ8ORqPv03Ml
+  Eg1e/VC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oy2e5+YCr5zVuxsm8vUwPiHo4uRi0NI4Amj
+  xK3jq5kgnAtMEusOt7BBOCcYJfa+PMvexcjJwSagJjH91g1WEFtEQF9i6ew9zCA2s4CKxIvfP
+  WA1wgL+Es9uHmACsVkEVCUWrZrEBmLzCjhJLHt2GKxGQkBBYsrD92C9nALOEg2H9gDVcwAtc5
+  KYeNkZolxQ4uTMJywQ4yUkDr54wQzRqigx+3IzC4RdITFrVhsThK0mcfXcJuYJjIKzkLTPQtK
+  +gJFpFaN1UlFmekZJbmJmjq6hgYGuoaGprrGRrqGRmV5ilW6iXmqpbnlqcYmukV5iebFeanGx
+  XnFlbnJOil5easkmRmAYpxQr1O1gvLbyp94hRkkOJiVR3u8TTiYK8SXlp1RmJBZnxBeV5qQWH
+  2KU4eBQkuBdfxYoJ1iUmp5akZaZA4wpmLQEB4+SCO8dkDRvcUFibnFmOkTqFKOilDjvQZCEAE
+  giozQPrg0Wx5cYZaWEeRkZGBiEeApSi3IzS1DlXzGKczAqCfM2gUzhycwrgZv+CmgxE9DimQ7
+  HQRaXJCKkpBqYWDq/rXW5I/fsqvWOrgWv3+5mKhFaP/HShqxMS8NisX0h6UWWe/cam5dm7ytY
+  fFdH/dWzqffDBXsSyi8+WXHnvd43hV/vHxs4zu6RDSz7dP4fU+6S3Cl3pk+YuvL9Oo0Fu32a3
+  aMDvpkm8l2sOv5SPnnZB8MXJpWzP55mrd/yYr6//o4yg7B3VT+SjcW+PnDfty9t660f9tVd53
+  +kZaVpfJmmWRY6+0SIpvaGdeuWXb+02GZD6mSNW1ERukolK7W/G7R5FDLEbyh6UD4nQrT04dP
+  b/Ufu5PM+3/XF46uW4CyVh7dr3jns6nvrq/ptru9fiUvpc2MKHPMeTBbtPzVhXl/Tqpv+L1eu
+  UOWcF7ahbaYSS3FGoqEWc1FxIgACqXj0XgMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-20.tower-528.messagelabs.com!1640615653!227388!1
+X-Msg-Ref: server-16.tower-565.messagelabs.com!1640615653!230002!1
 X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 10670 invoked from network); 27 Dec 2021 14:34:13 -0000
+Received: (qmail 25963 invoked from network); 27 Dec 2021 14:34:13 -0000
 Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-20.tower-528.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-16.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 27 Dec 2021 14:34:13 -0000
 Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 3FCAB1001A3
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 3FFCF1001A4
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 27 Dec 2021 14:34:13 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 32917100183
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 33B7110018B
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 27 Dec 2021 14:34:13 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Mon, 27 Dec 2021 14:33:52 +0000
+ (TLS) id 15.0.1497.26; Mon, 27 Dec 2021 14:33:56 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-perl] [PATCH] libfile-slurper-perl: upgrade 0.012 -> 0.013
-Date: Mon, 27 Dec 2021 22:33:23 +0800
-Message-ID: <1640615604-22927-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-perl] [PATCH] libio-socket-ssl-perl: upgrade 2.072 ->
+ 2.073
+Date: Mon, 27 Dec 2021 22:33:24 +0800
+Message-ID: <1640615604-22927-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1640615604-22927-1-git-send-email-wangmy@fujitsu.com>
 References: <1640615604-22927-1-git-send-email-wangmy@fujitsu.com>
@@ -85,37 +86,37 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Dec 2021 14:34:17 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Dec 2021 14:34:23 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94511
+ https://lists.openembedded.org/g/openembedded-devel/message/94512
 
 Changelog:
 =========
-Always split on newlines in read_lines
+fix behavior and tests for openssl 3.0.1
+fix #110 - prevent internal error warning in some cases
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ile-slurper-perl_0.012.bb => libfile-slurper-perl_0.013.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libfile/{libfile-slurper-perl_0.012.bb => libfile-slurper-perl_0.013.bb} (88%)
+ ...-socket-ssl-perl_2.072.bb => libio-socket-ssl-perl_2.073.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-perl/recipes-perl/libio/{libio-socket-ssl-perl_2.072.bb => libio-socket-ssl-perl_2.073.bb} (94%)
 
-diff --git a/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.012.bb b/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.013.bb
-similarity index 88%
-rename from meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.012.bb
-rename to meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.013.bb
-index 4a2cb73e8..c7e5c56b6 100644
---- a/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.012.bb
-+++ b/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.013.bb
-@@ -13,8 +13,7 @@ file://${COMMON_LICENSE_DIR}/GPL-1.0-or-later;md5=30c0b8a5048cc2f4be5ff15ef0d8cf
+diff --git a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.072.bb b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.073.bb
+similarity index 94%
+rename from meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.072.bb
+rename to meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.073.bb
+index d49b2cd5e..ef7fd08bf 100644
+--- a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.072.bb
++++ b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.073.bb
+@@ -22,7 +22,7 @@ RDEPENDS:${PN} += "\
+ SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz \
+            file://run-ptest \
+           "
+-SRC_URI[sha256sum] = "b5bee81db3905a9069340a450a48e1e1b32dec4ede0064f5703bafb9a707b89d"
++SRC_URI[sha256sum] = "b2c0b34df97cb1aa816221cee2454a1efd89b86ccbda810389a30e0d08cf57c8"
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/File-Slurper-${PV}.tar.gz"
+ S = "${WORKDIR}/IO-Socket-SSL-${PV}"
  
--SRC_URI[md5sum] = "5742c63096392dfee50b8db314bcca18"
--SRC_URI[sha256sum] = "4efb2ea416b110a1bda6f8133549cc6ea3676402e3caf7529fce0313250aa578"
-+SRC_URI[sha256sum] = "e2f6a4029a6a242d50054044f1fb86770b9b5cc4daeb1a967f91ffb42716a8c5"
- RDEPENDS:${PN} = " \
-     perl-module-carp \
-     perl-module-encode \
 -- 
 2.25.1
 
