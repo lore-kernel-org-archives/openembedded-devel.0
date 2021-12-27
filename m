@@ -2,179 +2,178 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19434C433EF
-	for <webhook@archiver.kernel.org>; Mon, 27 Dec 2021 14:33:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 050B7C433F5
+	for <webhook@archiver.kernel.org>; Mon, 27 Dec 2021 14:33:55 +0000 (UTC)
 Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
  [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web12.26699.1640615618136804523
+ by mx.groups.io with SMTP id smtpd.web08.26906.1640615633678725229
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Dec 2021 06:33:38 -0800
+ Mon, 27 Dec 2021 06:33:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=CP6Hf7Gf;
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=VEouiKbr;
  spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1640615616; i=@fujitsu.com;
-	bh=hLDh9sTpyCPVsS9Q7bADiBdKA3qK7sG4iW/90b0hAgc=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=CP6Hf7GfNPPXZZEVJ3NCazkZqzyGRWW7SFsBhTE+12+SbGEh1gKCSfOka1twuCHJs
-	 6kJxbjKhFpJKBeSwNDM8KFTmAWVR5d8ydwSlGQOheqfhusPRE8OLRTfquwsVfZUVoV
-	 /NSFlr79MTxc5BMZ+CsR+9loQRie5toGnEeu5UbjhulseyEiPTY0C0xwgJTuKy5oU3
-	 pAtYjwCu7pcWhHdpmC/XMLiHj4tUvnwJJ0XrX5UZFX1Gli2pheqrl0DdDFkv28G1Nl
-	 VgLryg6AbXmdTzsw/rDU54npy123Mlz/BQ/EZhpH1SE6bZbFbzUkd7th7IzVQeKAQB
-	 Zegp9D9GMBIZQ==
+	s=170520fj; t=1640615632; i=@fujitsu.com;
+	bh=8ngkBrWugK8h/HXf+phHwFoJObrWWrYxwfQzQxlla9A=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=VEouiKbr5qTnZmJBInLakEIkhvEJtuRYY9uKJIakPhRrda7EwIJwiigya4pPzn/14
+	 Zd9m+Ce5yPZOrHbh3mJQfVMA3RTxERhCRmObyRZPKVpgQhru82+0ZhQ3WdSboW8xTj
+	 Kko2T0f2ao9CHlYkPlMqoAmouYRZFMqvoppF9vGHB7Qbw7PXTLScWwekGE9GOaC3o0
+	 jTt/mGT/DDKzjtxRluT6Rarf2ssO1gY5CkLIrpl2HkvL/248GogdAVLy8XAAfa2Ouw
+	 5CRtT5y3J/NPTokVnPqB7OIfyJMgTNWTSy6TmUpB3CD8A90pA/HJJ9iAfO7EMCJsJ5
+	 lEQwieULs+Cmg==
 Received: from [100.115.70.228] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
 	by server-1.bemta.az-a.eu-central-1.aws.ess.symcld.net id
- E4/AA-31213-0CEC9C16; Mon, 27 Dec 2021 14:33:36 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrEIsWRWlGSWpSXmKPExsViZ8MxSXf/uZO
-  JBgtfGFtcPLyU2YHR49zGFYwBjFGsmXlJ+RUJrBkrbt5kL7irUNH8bSNzA+MZmS5GLg4hgSeM
-  Ep8vn2CEcC4wSeyZuYcNwjnBKPF871GmLkZODjYBNYnpt26wgtgiAvoSS2fvYQaxmQVUJF787
-  mEHsYUF7CSOzTwHZHNwsAioSpx6nQsS5hVwknj1/xpYuYSAgsSUh++ZIeKCEidnPmGBGCMhcf
-  DFC6gaRYnZl5tZIOwKiVmz2pggbDWJq+c2MU9g5J+FpH0WkvYFjEyrGO2SijLTM0pyEzNzdA0
-  NDHQNDU11zcx0DU1N9RKrdBP1Ukt1k1PzSooSgdJ6ieXFeqnFxXrFlbnJOSl6eaklmxiBwZlS
-  7DR7B+OOvp96hxglOZiURHm/TziZKMSXlJ9SmZFYnBFfVJqTWnyIUYaDQ0mCN/gUUE6wKDU9t
-  SItMwcYKTBpCQ4eJRFejbNAad7igsTc4sx0iNQpRl2OJ4e372IWYsnLz0uVEue1BCkSACnKKM
-  2DGwGL2kuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHmdQKbwZOaVwG16BXQEE9ARMx2Ogxx
-  RkoiQkmpg4nja8o5zm/nX4NfnuX8EsvZHce58t8ySLW3OmfwbnTanjlQBVfP/f75K7N+KZ1si
-  5qh+PHWzvLR++YzPNZwXclgKTnk5Kf2fV+NUe4eJ/39gna6it+zm1ezHrlj6aPJ27nmw63v6m
-  YIdbOe175/Wy92SYvPz2ZSE7z02Gmf1H5YZ7pn7TtG02WSt0a8PBxOLl8dwHl+sli9TtODaB9
-  NwpcC/01f/mpIl7ynquK38bLXRvVwJ1uxq++hl/rEn/+4RDgk7sbmojmuW979/Xf8Yd0x/0Mf
-  85Q7H5Dsfp5a1Bp+c+NDPbPaiI44P/nTNiJfeenNbdkuNjTzPHckWLqHG7udJ74/8dc/MVM6c
-  sU9RiaU4I9FQi7moOBEArijwIVUDAAA=
+ 0C/1B-31213-FCEC9C16; Mon, 27 Dec 2021 14:33:51 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrKIsWRWlGSWpSXmKPExsViZ8MRonv+3Ml
+  EgxPdMhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bCwy/YCvbLVdz8fIi5gfG3ZBcjF4eQwEwm
+  iZ83trBAOCcYJV6ePMrYxcjJwSagJjH91g1WEFtEQF9i6ew9zCA2s4CKxIvfPewgtrCAjcTsM
+  1tZQGwWAVWJf59XMoHYvAJOEktffWYDsSUEFCSmPHwP1ssp4CzRcGgPUA0H0DIniYmXnSHKBS
+  VOznzCAjFeQuLgixfMEK2KErMvN7NA2BUSs2a1MU1g5J+FpGUWkpYFjEyrGO2SijLTM0pyEzN
+  zdA0NDHQNDU11zYGUgYVeYpVuol5qqW5yal5JUSJQWi+xvFgvtbhYr7gyNzknRS8vtWQTIzA0
+  U4rdcnYwfuz7qXeIUZKDSUmU9/uEk4lCfEn5KZUZicUZ8UWlOanFhxhlODiUJHiDTwHlBItS0
+  1Mr0jJzgHECk5bg4FES4dU4C5TmLS5IzC3OTIdInWJUlBLntQRJCIAkMkrz4NpgsXmJUVZKmJ
+  eRgYFBiKcgtSg3swRV/hWjOAejkjCvE8gUnsy8Erjpr4AWMwEtnulwHGRxSSJCSqqB6ewdOWM
+  jvkln71o0+zEujN1wpeNW2Md+j7P+mv3eh81kLVQiqznUXoktcJxaobG6/OXdqWavvNrFmnly
+  KllEOeev+XjmOWun0/FDGzcecu9UsPWYz93+6p/V06LIdPcVZw5x8Nj7651TOOyjXGKv9zz9g
+  Hl9uHqBxB3pN/e4NvuvmuaycKWmYmlFe8rMP3/jylXP70t4InJu+dFXy1zb5TRz3GbwKDjEJb
+  wTkz5rHPzzfMOdopjmhTs+5L6RSnFWCN5V8u3siswJ95cJh3FbhJ6zWGbwa+3W+RumeAe+Y1+
+  xM37TtqenFqoV1iVf02ZreKYt279azznyXvuT957PZ9gVe0VqyAXGpl5dlfBEiaU4I9FQi7mo
+  OBEARos0IUgDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-17.tower-528.messagelabs.com!1640615615!226968!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-20.tower-528.messagelabs.com!1640615631!227339!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 13118 invoked from network); 27 Dec 2021 14:33:35 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-17.tower-528.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 27 Dec 2021 14:33:35 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 60240100344
+Received: (qmail 8590 invoked from network); 27 Dec 2021 14:33:51 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-20.tower-528.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 27 Dec 2021 14:33:51 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 1BREXp0k005346
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Dec 2021 14:33:35 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 53B1A100331
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Dec 2021 14:33:35 +0000 (GMT)
+ Mon, 27 Dec 2021 14:33:51 GMT
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Mon, 27 Dec 2021 14:33:33 +0000
+ (TLS) id 15.0.1497.26; Mon, 27 Dec 2021 14:33:49 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] qpdf: upgrade 10.4.0 -> 10.5.0
-Date: Mon, 27 Dec 2021 22:33:21 +0800
-Message-ID: <1640615604-22927-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] tree: upgrade 1.8.0 -> 2.0.0
+Date: Mon, 27 Dec 2021 22:33:22 +0800
+Message-ID: <1640615604-22927-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1640615604-22927-1-git-send-email-wangmy@fujitsu.com>
+References: <1640615604-22927-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
 X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Dec 2021 14:33:39 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Dec 2021 14:33:55 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94509
+ https://lists.openembedded.org/g/openembedded-devel/message/94510
 
 Changelog:
 =========
-Packaging changes:
------------------
-Pre-built documentation is no longer distributed with the source distribution.
-The AppImage and Windows binary distributions still contain embedded
-documentation, and a separate doc distribution file is available from the qpdf
-release site. Documentation is now available at https://qpdf.readthedocs.io
-for every major/minor version starting with version 10.5. Please see Packaging
-Documentation for details on how packagers should handle documentation.
+* This started out as a 1.9.0 release but then I got fed up with the abundance
+of directory listers (8 in total, 2 each for each output mode).
+Nothing is terribly well tested since there are a lot of changes and I would
+like to get this out the door finally, please report breakage. This reduced
+so much code that all the below additions only resulted in a code base that
+is only 54 lines larger than 1.8.0.
 
-The documentation sources have been switched from docbook to reStructuredText
-processed with Sphinx. This will break previous documentation links.
-A redirect is in place on the main website. A top-to-bottom review of the
-documentation is planned for an upcoming release.
+* Rolled all the directory listers into 2 functions that call output specific
+functions (removes one TODO).
 
-Library Enhancements:
---------------------
-Since qpdf version 8, using object accessor methods on an instance of
-QPDFObjectHandle may create warnings if the object is not of the expected type.
-These warnings now have an error code of qpdf_e_object instead of
-qpdf_e_damaged_pdf. Also, comments have been added to QPDFObjectHandle.hh to
-explain in more detail what the behavior is. See Object Accessor Methods for
-a more in-depth discussion.
+*-R option now recursively calls the emit_tree() function rather than using
+system() to re-call tree. Also removes a TODO.
 
-Add Pl_Buffer::getMallocBuffer() to initialize a buffer allocated with malloc()
-for better cross-language interoperability.
+* Adds --info to print information about files/directories from information
+found in .info files (removes a maybe do) In HTML output, comments show as
+mouse over tooltips, which I imagine will be the most useful use of this "feature".
 
-C API Enhancements:
--------------------
-Many thanks to M. Holger whose contributions have heavily influenced these C
-API enhancements. His several suggestions, pull requests, questions, and
-critical reading of documentation and comments have resulted in significant
-usability improvements to the C API.
+* Output un-indented JSON on file descriptor 3 ("stddata") automatically if
+file descriptor 3 is present (currently Linux only.) Maybe switch to BSON.
 
-Overhaul error handling for the object handle functions C API. Some rare error
-conditions that would previously have caused a crash are now trapped and
-reported, and the functions that generate them return fallback values.
-See comments in the ERROR HANDLING section of include/qpdf/qpdf-c.h for details.
-In particular, exceptions thrown by the underlying C++ code when calling object
-accessors are caught and converted into errors. The errors can be checked by
-calling qpdf_has_error. Use qpdf_silence_errors to prevent the error from being
-written to stderr.
+* Always HTML escape filenames in HTML output even when -C is used.
 
-Add qpdf_get_last_string_length to the C API to get the length of the last
-string that was returned. This is needed to handle strings that contain embedded
-null characters.
+* Return a non-zero exit status if there is a failure to open any directory.
 
-Add qpdf_oh_is_initialized and qpdf_oh_new_uninitialized to the C API to make it
-possible to work with uninitialized objects.
+* Added --gitignore option to filter out files specified by .gitignore files.
+(also reads $GIT_DIR/info/exclude if present.) To facilitate gitignore, adds
+support for ** on pattern matching to allow /**/ to match a single /.
+This is not well tested and kind of hacked together, so may not work correctly.
 
-Add qpdf_oh_new_object to the C API. This allows you to clone an object handle.
+* Now also supports multiple -I and -P instances.
 
-Add qpdf_get_object_by_id, qpdf_make_indirect_object, and qpdf_replace_object,
-exposing the corresponding methods in QPDF and QPDFObjectHandle.
+* Now prints meta data for the top level directory as well.
 
-Add several functions for working with pages. See PAGE FUNCTIONS in
-include/qpdf/qpdf-c.h for details.
+* Split spaghetti code in main into individual functions.
 
-Add several functions for working with streams. See STREAM FUNCTIONS in
-include/qpdf/qpdf-c.h for details.
+* Properly sort --fromfile input
 
-Add qpdf_oh_get_type_code and qpdf_oh_get_type_name.
+* Make tree colorization use reset (rs code in dir_colors,) not normal color
+when resetting attributes
 
-Add qpdf_oh_get_binary_string_value and qpdf_oh_new_binary_string for making it
-easier to deal with strings that contain embedded null characters.
+* Honor -n (no color) even if the CLICOLOR_FORCE environment variable is set
+
+* Fix --sort option to not require =
+
+* Defer sorting for --du until the entire sub-directory tree has been processed.
+
+* Optimized makefile, HP/UX support (Osipov, Michael). Note that this changes
+the prefix default to /usr/local, which is becoming required for many systems now.
+
+* Renamed (the by now very obsolete) doc/tree.1.fr to doc/tree.fr.1
+
+* Fix JSON string escaping such that it is not using the HTML escaping
+
+* Add --filesfirst option (John A. Fedoruk). Cleaned up sorting code to make
+--dirsfirst and --filesfirst top level meta-sorts.
+
+* "arial" not "ariel" (Mark), HTML style-sheet cleaned up in any event.
+
+* Deprecate using local -DLINUX / -DCYGWIN and use the OS provided __linux__ or
+__CYGWIN__
+
+* XML/HTML/JSON output needs to be mutually exclusive, last command line switch
+wins.
+
+* Make sure we use xmalloc instead of malloc in a number of places
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-printing/qpdf/{qpdf_10.4.0.bb => qpdf_10.5.0.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-printing/qpdf/{qpdf_10.4.0.bb => qpdf_10.5.0.bb} (90%)
+ meta-oe/recipes-support/tree/{tree_1.8.0.bb => tree_2.0.0.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-support/tree/{tree_1.8.0.bb => tree_2.0.0.bb} (80%)
 
-diff --git a/meta-oe/recipes-printing/qpdf/qpdf_10.4.0.bb b/meta-oe/recipes-printing/qpdf/qpdf_10.5.0.bb
-similarity index 90%
-rename from meta-oe/recipes-printing/qpdf/qpdf_10.4.0.bb
-rename to meta-oe/recipes-printing/qpdf/qpdf_10.5.0.bb
-index 793dbb195..9644c653e 100644
---- a/meta-oe/recipes-printing/qpdf/qpdf_10.4.0.bb
-+++ b/meta-oe/recipes-printing/qpdf/qpdf_10.5.0.bb
-@@ -5,7 +5,7 @@ SECTION = "libs"
- DEPENDS = "libpcre zlib libjpeg-turbo"
+diff --git a/meta-oe/recipes-support/tree/tree_1.8.0.bb b/meta-oe/recipes-support/tree/tree_2.0.0.bb
+similarity index 80%
+rename from meta-oe/recipes-support/tree/tree_1.8.0.bb
+rename to meta-oe/recipes-support/tree/tree_2.0.0.bb
+index 01b1ac384..257adfb42 100644
+--- a/meta-oe/recipes-support/tree/tree_1.8.0.bb
++++ b/meta-oe/recipes-support/tree/tree_2.0.0.bb
+@@ -5,8 +5,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=393a5ca445f6965873eca0259a17f833"
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/qpdf/qpdf-${PV}.tar.gz"
--SRC_URI[sha256sum] = "9ac6e691cc3f35a9fe44632e3fba727e1b6ef21181c0a883287abf5cf97ae222"
-+SRC_URI[sha256sum] = "88257d36a44fd5c50b2879488324dd9cafc11686ae49d8c4922a4872203ce006"
+ SRC_URI = "http://mama.indstate.edu/users/ice/tree/src/${BP}.tgz"
+-SRC_URI[md5sum] = "715191c7f369be377fc7cc8ce0ccd835"
+-SRC_URI[sha256sum] = "715d5d4b434321ce74706d0dd067505bb60c5ea83b5f0b3655dae40aa6f9b7c2"
++SRC_URI[sha256sum] = "782cd73179f65cfca7f29326f1511306e49e9b11d5b861daa57e13fd7262889f"
  
- LIC_FILES_CHKSUM = "file://Artistic-2.0;md5=7806296b9fae874361e6fb10072b7ee3"
- 
+ # tree's default CFLAGS for Linux
+ CFLAGS += "-Wall -DLINUX -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64"
 -- 
 2.25.1
 
