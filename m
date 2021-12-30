@@ -2,62 +2,61 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A93CDC433F5
-	for <webhook@archiver.kernel.org>; Thu, 30 Dec 2021 21:31:29 +0000 (UTC)
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
- [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.web10.3869.1640899889291621895
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A7A99C433EF
+	for <webhook@archiver.kernel.org>; Thu, 30 Dec 2021 21:31:30 +0000 (UTC)
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
+ [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.web12.3805.1640899889705534202
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 30 Dec 2021 13:31:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=fa3jfnf4;
- spf=pass (domain: gmail.com, ip: 209.85.215.171,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=AIqoReAZ;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id g22so22376262pgn.1
+Received: by mail-pf1-f180.google.com with SMTP id m1so22270661pfk.8
         for <openembedded-devel@lists.openembedded.org>;
  Thu, 30 Dec 2021 13:31:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=4Nw7yGMqa5ex1HRV7blywW+eDXdzeMvKpc/uhZOC6OQ=;
-        b=fa3jfnf4tofUvzF/krTlUxhiv+rgyJLy55AAmf6pBHd0LPOJhj5hBKhWGM2xkZ78Sd
-         sb2Gy0Hr88B+WZN4eWVNn+wURmpcQsk168fwNxKOusHB7mXsGdKEHMsQlosclTUX9X74
-         6lIEpUv+QaflK5YD5JN/B9dd0JJOpU5uI+3CnijP9sD7R3sFk6jR+kj74eDXo6gbwmrD
-         Yofg91iKGmgTJWmjGtrrEKb+D2OmkNfFZZ53VuDA7T+S0oU37gQt8IYgwQDrr48wilS1
-         gxVahuFM0NPOlmZxm4u/H4Auw5koR+0hb0b1AmYX9aRoXDgcJrnICuviXTeaFbyCCZtZ
-         N+Nw==
+        bh=5e970nFKNI2LtRj0CfvZL0qwIj770z5txzWYI6Kbgks=;
+        b=AIqoReAZ3VRBrn1fp6T5cs4rq3kCBfbZ4rlJVR0bMZPrDENNAyQVDfYD1V+1S/i0nO
+         c86iaFi36eG9/cb77EbI0HaF+KCXk+iDNbrqPPIwF75DyOLl6G45uv1xxDBH0rvxs2Fs
+         37m0Ynk0C6ssl7R6BIH7d1WJDLBR3YAYfiMIRD6SVAiQ5zIfx59GMnc3f4fr0ct/Ts8T
+         PX9C5tNJboenB1RQVuzxXvzV1C0fSNFsaN7fNjhkdklMcDRiu2wjYILYiiDRpQ4jt3Kw
+         bd6AuhM1sDuL7nTDC3xn1eW+GPZcbr5/TBfipKievM7gq5JGCHHRdvZQhHqPrn2d4ylT
+         DfnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=4Nw7yGMqa5ex1HRV7blywW+eDXdzeMvKpc/uhZOC6OQ=;
-        b=kFHtb1FvZ70c+8mpYRaUS/eJo9/qfqcb7vFBK96I+8YPoAZCtN2UDlJ4X64+XvTYFX
-         Kwp3kJNg88tKTOqq83oxH0MQigu/PwEKqk7LVfUGysmX+x2k0q396zU9kaIzdXuqYo0J
-         lLPuIe8X9pR+mJWpKREFMgp3xBH6q6ifNkWQLPdkRWyGOp1J69jYW7XWVL2TjvvF7Jdo
-         ZwGZoGRW7G7U/c41ph6QPF1OAkGS5vGHtYJJ1p3IzwgfpMlIPZH0R4a+zfd+zvAKECCD
-         Ib42ergcxwX6+nmtt4mzO3aYjn86cbyg9p+9ttqjPZfJGDlrrkxECPUMrSCe5Tb+rYxY
-         X1Ew==
-X-Gm-Message-State: AOAM533tteVtnTFVxqHZsTW5Hbq1QwcQ6xhF3RRMqLG0/TQRBtrziuLv
-	fx4lKUdALqikG+VjNkr5skMAYyPtqNQ=
+        bh=5e970nFKNI2LtRj0CfvZL0qwIj770z5txzWYI6Kbgks=;
+        b=fTOjamb1+XvyYYxyWlB53lfZFMIpEjYivLpwyMPQJit8jQ6BLatU4Bk8NSUlwrg4H5
+         yWYnBps7MrhghKTSTYomZ3Mb/pt/KBrKGm2Cb1xgbt3YaWafkRoR/ux9gOqshteRN37Q
+         9RlVACYwDhyFrYE56MTv2W63lZed8u6298LLIXYqdyKfZxlUP2cF0qvG6BR1x1g6gckd
+         +za+w2n7Xn8FiBag2J4G/49iIgvpQyFam90cKj0RUpJGhJUhPe4dxfsVepT4aSxBiP1W
+         VMISIUoMv/kFNe2crUVq5DeFyn+BNfJPUdbWlp4TqXRDtIZLKSHNASOgO7dHm7RhPW3H
+         zEXw==
+X-Gm-Message-State: AOAM531T8vpAA477UxyLre/Nvc72IV0IV1Q7g29qTuxaRM1W3bUWa8j2
+	Q3kiH/JPvgkHa31Yd+N8hnJBtflCb2I=
 X-Google-Smtp-Source: 
- ABdhPJw9OsrF+YT+QHcyRPV5NNJmwjQMNTd4DDuVyLZfHPhE+DSRjfjC1u81G7woKCziwKw1qCGBsg==
-X-Received: by 2002:a63:384d:: with SMTP id
- h13mr10293298pgn.472.1640899888310;
-        Thu, 30 Dec 2021 13:31:28 -0800 (PST)
+ ABdhPJxJgCNmrZA7eALWro2HcG6eG0YVM+LDkDcUebi56HJhds8kETfbKY2zVItuvESRTST8S8XQaQ==
+X-Received: by 2002:a63:3f01:: with SMTP id m1mr7176231pga.446.1640899889010;
+        Thu, 30 Dec 2021 13:31:29 -0800 (PST)
 Received: from keaua.caveonetworks.com
  ([2601:202:4180:a5c0:a625:8af4:d190:e823])
         by smtp.gmail.com with ESMTPSA id
- t27sm9348384pgm.52.2021.12.30.13.31.27
+ t27sm9348384pgm.52.2021.12.30.13.31.28
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Dec 2021 13:31:27 -0800 (PST)
+        Thu, 30 Dec 2021 13:31:28 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [Honister 2/7] postgresql: fix CVE-2021-23214,CVE-2021-23222
-Date: Thu, 30 Dec 2021 13:31:18 -0800
+Subject: [Honister 3/7] openvpn: upgrade 2.5.4 -> 2.5.5
+Date: Thu, 30 Dec 2021 13:31:19 -0800
 Message-Id: 
- <b707efaf8aae03aa2ae25df1e36a83503339a0d2.1640899794.git.akuster808@gmail.com>
+ <678f72c3d3a8e79b8b829cab21283e005f6d0ed5.1640899794.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1640899794.git.akuster808@gmail.com>
 References: <cover.1640899794.git.akuster808@gmail.com>
@@ -66,297 +65,71 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Dec 2021 21:31:29 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 Dec 2021 21:31:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94571
+ https://lists.openembedded.org/g/openembedded-devel/message/94572
 
-From: Changqing Li <changqing.li@windriver.com>
+From: zhengruoqin <zhengrq.fnst@fujitsu.com>
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Changelog:
+=========
+ Fix error in example firewall.sh script
+ configure: remove useless -Wno-* from default CFLAGS
+ Add argv_insert_head__empty_argv__head_only to argv tests
+ Move deprecation of SWEET32/64bit block size ciphers to 2.7
+ Include --push-remove in the output of --help.
+ Move '--push-peer-info' documentation from 'server' to 'client options'
+ add test case(s) to notice 'openvpn --show-cipher' crashing
+ BUILD: enable CFG and Spectre mitigation for MSVC
+ Fix loading PKCS12 files on Windows
+ msvc: fix product version display
+ msvc: add missing header to project file
+ config-msvc.h: fix OpenSSL-related defines
+ contrib/vcpkg-ports: remove openssl port
+ GitHub Actions: use latest working lukka/run-vcpkg
+ Use network address for emulated DHCP server as a default
+ Load OpenSSL config on Windows from trusted location
+ ring_buffer.h: fix GCC warning about unused function
+ ssh_openssl.h: remove unused declaration
+ vcpkg/pkcs11-helper: compatibility with latest vcpkg
+ config-msvc.h: indicate key material export support
+ Don't use BF-CBC in unit tests if we don't have it
+ Define have_blowfish variable in ncp unit tests
+ doc link-options.rst: Use free open-source dynamic-DNS provider URL
+ Fix some more wrong defines in config-msvc.h
+ Ensure the current common_name is in the environment for scripts
+ Require EC key support in Windows builds
+ resolvconf fails with -p
+ Update IRC information in CONTRIBUTING.rst
+ doc/man (vpn-network-options): fix foreign_option_{n} typo
+ README.down-root: Fix plugin module name
+
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 8e57fb9b1e4da504ceeaadcff2fe38555a47b6b6)
+(cherry picked from commit 2867330535cd93067d1fc005f0cdf5984a4c43fb)
+[2.5.x is a stable branch]
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../postgresql/files/CVE-2021-23214.patch     | 116 ++++++++++++++++
- .../postgresql/files/CVE-2021-23222.patch     | 131 ++++++++++++++++++
- .../recipes-dbs/postgresql/postgresql_13.4.bb |   2 +
- 3 files changed, 249 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2021-23214.patch
- create mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2021-23222.patch
+ .../openvpn/{openvpn_2.5.4.bb => openvpn_2.5.5.bb}              | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/openvpn/{openvpn_2.5.4.bb => openvpn_2.5.5.bb} (97%)
 
-diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2021-23214.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2021-23214.patch
-new file mode 100644
-index 0000000000..58bf810626
---- /dev/null
-+++ b/meta-oe/recipes-dbs/postgresql/files/CVE-2021-23214.patch
-@@ -0,0 +1,116 @@
-+From 24c2b9e42edb6d2f4ef2cead3b0aa1d6196adfce Mon Sep 17 00:00:00 2001
-+From: Tom Lane <tgl@sss.pgh.pa.us>
-+Date: Mon, 8 Nov 2021 11:01:43 -0500
-+Subject: [PATCH 2/2] Reject extraneous data after SSL or GSS encryption
-+ handshake.
-+
-+The server collects up to a bufferload of data whenever it reads data
-+from the client socket.  When SSL or GSS encryption is requested
-+during startup, any additional data received with the initial
-+request message remained in the buffer, and would be treated as
-+already-decrypted data once the encryption handshake completed.
-+Thus, a man-in-the-middle with the ability to inject data into the 
-+TCP connection could stuff some cleartext data into the start of
-+a supposedly encryption-protected database session.
-+
-+This could be abused to send faked SQL commands to the server,
-+although that would only work if the server did not demand any 
-+authentication data.  (However, a server relying on SSL certificate
-+authentication might well not do so.)
-+
-+To fix, throw a protocol-violation error if the internal buffer
-+is not empty after the encryption handshake.
-+
-+Our thanks to Jacob Champion for reporting this problem.
-+
-+Security: CVE-2021-23214
-+
-+Upstream-Status: Backport[https://github.com/postgres/postgres/commit/28e24125541545483093819efae9bca603441951]
-+CVE: CVE-2021-23214
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+
-+---
-+ src/backend/libpq/pqcomm.c          | 11 +++++++++++
-+ src/backend/postmaster/postmaster.c | 23 ++++++++++++++++++++++-
-+ src/include/libpq/libpq.h           |  1 +
-+ 3 files changed, 34 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/backend/libpq/pqcomm.c b/src/backend/libpq/pqcomm.c
-+index ee2cd86..4dd1c02 100644
-+--- a/src/backend/libpq/pqcomm.c
-++++ b/src/backend/libpq/pqcomm.c
-+@@ -1183,6 +1183,17 @@ pq_getstring(StringInfo s)
-+ 	}
-+ }
-+ 
-++/* -------------------------------
-++ *             pq_buffer_has_data              - is any buffered data available to read?
-++ *
-++ * This will *not* attempt to read more data.
-++ * --------------------------------
-++ */
-++bool
-++pq_buffer_has_data(void)
-++{
-++	return (PqRecvPointer < PqRecvLength);
-++}
-+ 
-+ /* --------------------------------
-+  *		pq_startmsgread - begin reading a message from the client.
-+diff --git a/src/backend/postmaster/postmaster.c b/src/backend/postmaster/postmaster.c
-+index 5775fc0..1fcc3f8 100644
-+--- a/src/backend/postmaster/postmaster.c
-++++ b/src/backend/postmaster/postmaster.c
-+@@ -2049,6 +2049,17 @@ retry1:
-+ 			return STATUS_ERROR;
-+ #endif
-+ 
-++		/*
-++		* At this point we should have no data already buffered.  If we do,
-++		* it was received before we performed the SSL handshake, so it wasn't
-++		* encrypted and indeed may have been injected by a man-in-the-middle.
-++		* We report this case to the client.
-++		*/
-++		if (pq_buffer_has_data())
-++			ereport(FATAL,
-++				(errcode(ERRCODE_PROTOCOL_VIOLATION),
-++				errmsg("received unencrypted data after SSL request"),
-++				errdetail("This could be either a client-software bug or evidence of an attempted man-in-the-middle attack.")));
-+ 		/*
-+ 		 * regular startup packet, cancel, etc packet should follow, but not
-+ 		 * another SSL negotiation request, and a GSS request should only
-+@@ -2080,7 +2091,17 @@ retry1:
-+ 		if (GSSok == 'G' && secure_open_gssapi(port) == -1)
-+ 			return STATUS_ERROR;
-+ #endif
-+-
-++		/*
-++		* At this point we should have no data already buffered.  If we do,
-++		* it was received before we performed the GSS handshake, so it wasn't
-++		* encrypted and indeed may have been injected by a man-in-the-middle.
-++		* We report this case to the client.
-++		*/
-++		if (pq_buffer_has_data())
-++			ereport(FATAL,
-++				(errcode(ERRCODE_PROTOCOL_VIOLATION),
-++				errmsg("received unencrypted data after GSSAPI encryption request"),
-++				errdetail("This could be either a client-software bug or evidence of an attempted man-in-the-middle attack.")));
-+ 		/*
-+ 		 * regular startup packet, cancel, etc packet should follow, but not
-+ 		 * another GSS negotiation request, and an SSL request should only
-+diff --git a/src/include/libpq/libpq.h b/src/include/libpq/libpq.h
-+index b115247..9969692 100644
-+--- a/src/include/libpq/libpq.h
-++++ b/src/include/libpq/libpq.h
-+@@ -73,6 +73,7 @@ extern int	pq_getbyte(void);
-+ extern int	pq_peekbyte(void);
-+ extern int	pq_getbyte_if_available(unsigned char *c);
-+ extern int	pq_putbytes(const char *s, size_t len);
-++extern bool pq_buffer_has_data(void);
-+ 
-+ /*
-+  * prototypes for functions in be-secure.c
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2021-23222.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2021-23222.patch
-new file mode 100644
-index 0000000000..42b78539b4
---- /dev/null
-+++ b/meta-oe/recipes-dbs/postgresql/files/CVE-2021-23222.patch
-@@ -0,0 +1,131 @@
-+From 79125ead2a6a234086844bb42f06d49603fe6ca0 Mon Sep 17 00:00:00 2001
-+From: Tom Lane <tgl@sss.pgh.pa.us>
-+Date: Mon, 8 Nov 2021 11:14:56 -0500
-+Subject: [PATCH 1/2] libpq: reject extraneous data after SSL or GSS encryption
-+ handshake.
-+
-+libpq collects up to a bufferload of data whenever it reads data from
-+the socket.  When SSL or GSS encryption is requested during startup,
-+any additional data received with the server's yes-or-no reply
-+remained in the buffer, and would be treated as already-decrypted data
-+once the encryption handshake completed.  Thus, a man-in-the-middle
-+with the ability to inject data into the TCP connection could stuff
-+some cleartext data into the start of a supposedly encryption-protected
-+database session.
-+
-+This could probably be abused to inject faked responses to the
-+client's first few queries, although other details of libpq's behavior
-+make that harder than it sounds.  A different line of attack is to
-+exfiltrate the client's password, or other sensitive data that might
-+be sent early in the session.  That has been shown to be possible with
-+a server vulnerable to CVE-2021-23214.
-+
-+To fix, throw a protocol-violation error if the internal buffer
-+is not empty after the encryption handshake.
-+
-+Our thanks to Jacob Champion for reporting this problem.
-+
-+Security: CVE-2021-23222
-+
-+Upstream-Status: Backport[https://github.com/postgres/postgres/commit/160c0258802d10b0600d7671b1bbea55d8e17d45]
-+CVE: CVE-2021-23222
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ doc/src/sgml/protocol.sgml        | 28 ++++++++++++++++++++++++++++
-+ src/interfaces/libpq/fe-connect.c | 26 ++++++++++++++++++++++++++
-+ 2 files changed, 54 insertions(+)
-+
-+diff --git a/doc/src/sgml/protocol.sgml b/doc/src/sgml/protocol.sgml
-+index e26619e1b5..b692648fca 100644
-+--- a/doc/src/sgml/protocol.sgml
-++++ b/doc/src/sgml/protocol.sgml
-+@@ -1471,6 +1471,20 @@ SELCT 1/0;<!-- this typo is intentional -->
-+     and proceed without requesting <acronym>SSL</acronym>.
-+    </para>
-+ 
-++   <para>
-++    When <acronym>SSL</acronym> encryption can be performed, the server
-++    is expected to send only the single <literal>S</literal> byte and then
-++    wait for the frontend to initiate an <acronym>SSL</acronym> handshake.
-++    If additional bytes are available to read at this point, it likely
-++    means that a man-in-the-middle is attempting to perform a
-++    buffer-stuffing attack
-++    (<ulink url="https://www.postgresql.org/support/security/CVE-2021-23222/">CVE-2021-23222</ulink>).
-++    Frontends should be coded either to read exactly one byte from the
-++    socket before turning the socket over to their SSL library, or to
-++    treat it as a protocol violation if they find they have read additional
-++    bytes.
-++   </para>
-++
-+    <para>
-+     An initial SSLRequest can also be used in a connection that is being
-+     opened to send a CancelRequest message.
-+@@ -1532,6 +1546,20 @@ SELCT 1/0;<!-- this typo is intentional -->
-+     encryption.
-+    </para>
-+ 
-++   <para>
-++    When <acronym>GSSAPI</acronym> encryption can be performed, the server
-++    is expected to send only the single <literal>G</literal> byte and then
-++    wait for the frontend to initiate a <acronym>GSSAPI</acronym> handshake.
-++    If additional bytes are available to read at this point, it likely
-++    means that a man-in-the-middle is attempting to perform a
-++    buffer-stuffing attack
-++    (<ulink url="https://www.postgresql.org/support/security/CVE-2021-23222/">CVE-2021-23222</ulink>).
-++    Frontends should be coded either to read exactly one byte from the
-++    socket before turning the socket over to their GSSAPI library, or to
-++    treat it as a protocol violation if they find they have read additional
-++    bytes.
-++   </para>
-++
-+    <para>
-+     An initial GSSENCRequest can also be used in a connection that is being
-+     opened to send a CancelRequest message.
-+diff --git a/src/interfaces/libpq/fe-connect.c b/src/interfaces/libpq/fe-connect.c
-+index f80f4e98d8..57aee95183 100644
-+--- a/src/interfaces/libpq/fe-connect.c
-++++ b/src/interfaces/libpq/fe-connect.c
-+@@ -3076,6 +3076,19 @@ keep_going:						/* We will come back to here until there is
-+ 				pollres = pqsecure_open_client(conn);
-+ 				if (pollres == PGRES_POLLING_OK)
-+ 				{
-++					/*
-++					 * At this point we should have no data already buffered.
-++					 * If we do, it was received before we performed the SSL
-++					 * handshake, so it wasn't encrypted and indeed may have
-++					 * been injected by a man-in-the-middle.
-++					 */
-++					if (conn->inCursor != conn->inEnd)
-++					{
-++						appendPQExpBufferStr(&conn->errorMessage,
-++											 libpq_gettext("received unencrypted data after SSL response\n"));
-++						goto error_return;
-++					}
-++
-+ 					/* SSL handshake done, ready to send startup packet */
-+ 					conn->status = CONNECTION_MADE;
-+ 					return PGRES_POLLING_WRITING;
-+@@ -3175,6 +3188,19 @@ keep_going:						/* We will come back to here until there is
-+ 				pollres = pqsecure_open_gss(conn);
-+ 				if (pollres == PGRES_POLLING_OK)
-+ 				{
-++					/*
-++					 * At this point we should have no data already buffered.
-++					 * If we do, it was received before we performed the GSS
-++					 * handshake, so it wasn't encrypted and indeed may have
-++					 * been injected by a man-in-the-middle.
-++					 */
-++					if (conn->inCursor != conn->inEnd)
-++					{
-++						appendPQExpBufferStr(&conn->errorMessage,
-++											 libpq_gettext("received unencrypted data after GSSAPI encryption response\n"));
-++						goto error_return;
-++					}
-++
-+ 					/* All set for startup packet */
-+ 					conn->status = CONNECTION_MADE;
-+ 					return PGRES_POLLING_WRITING;
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_13.4.bb b/meta-oe/recipes-dbs/postgresql/postgresql_13.4.bb
-index f63d23dbef..2ed0fa49bb 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql_13.4.bb
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql_13.4.bb
-@@ -7,6 +7,8 @@ SRC_URI += "\
-    file://0001-Add-support-for-RISC-V.patch \
-    file://0001-Improve-reproducibility.patch \
-    file://0001-configure.in-bypass-autoconf-2.69-version-check.patch \
-+   file://CVE-2021-23214.patch \
-+   file://CVE-2021-23222.patch \
- "
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.5.4.bb b/meta-networking/recipes-support/openvpn/openvpn_2.5.5.bb
+similarity index 97%
+rename from meta-networking/recipes-support/openvpn/openvpn_2.5.4.bb
+rename to meta-networking/recipes-support/openvpn/openvpn_2.5.5.bb
+index 6b588a5f50..2dc3af6bf9 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.5.4.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.5.5.bb
+@@ -14,7 +14,7 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
  
- SRC_URI[sha256sum] = "ea93e10390245f1ce461a54eb5f99a48d8cabd3a08ce4d652ec2169a357bc0cd"
+ UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
+ 
+-SRC_URI[sha256sum] = "f80f3c3df1b94a8892ae547df84f152583250684a24bd022ccc98ef56fa93d97"
++SRC_URI[sha256sum] = "7500df4734173bce2e95b5039079119dacaff121650b2b6ca76d2dc68bdac1c5"
+ 
+ # CVE-2020-7224 and CVE-2020-27569 are for Aviatrix OpenVPN client, not for openvpn.
+ CVE_CHECK_WHITELIST += "CVE-2020-7224 CVE-2020-27569"
 -- 
 2.25.1
 
