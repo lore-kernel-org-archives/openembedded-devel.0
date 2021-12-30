@@ -2,61 +2,62 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7A99C433EF
-	for <webhook@archiver.kernel.org>; Thu, 30 Dec 2021 21:31:30 +0000 (UTC)
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
- [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web12.3805.1640899889705534202
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B062BC433FE
+	for <webhook@archiver.kernel.org>; Thu, 30 Dec 2021 21:31:31 +0000 (UTC)
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
+ [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.web11.3795.1640899890423697733
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Dec 2021 13:31:29 -0800
+ Thu, 30 Dec 2021 13:31:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=AIqoReAZ;
- spf=pass (domain: gmail.com, ip: 209.85.210.180,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=VB82awGC;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id m1so22270661pfk.8
+Received: by mail-pj1-f51.google.com with SMTP id gj24so22136478pjb.0
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Dec 2021 13:31:29 -0800 (PST)
+ Thu, 30 Dec 2021 13:31:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=5e970nFKNI2LtRj0CfvZL0qwIj770z5txzWYI6Kbgks=;
-        b=AIqoReAZ3VRBrn1fp6T5cs4rq3kCBfbZ4rlJVR0bMZPrDENNAyQVDfYD1V+1S/i0nO
-         c86iaFi36eG9/cb77EbI0HaF+KCXk+iDNbrqPPIwF75DyOLl6G45uv1xxDBH0rvxs2Fs
-         37m0Ynk0C6ssl7R6BIH7d1WJDLBR3YAYfiMIRD6SVAiQ5zIfx59GMnc3f4fr0ct/Ts8T
-         PX9C5tNJboenB1RQVuzxXvzV1C0fSNFsaN7fNjhkdklMcDRiu2wjYILYiiDRpQ4jt3Kw
-         bd6AuhM1sDuL7nTDC3xn1eW+GPZcbr5/TBfipKievM7gq5JGCHHRdvZQhHqPrn2d4ylT
-         DfnQ==
+        bh=wEhkkbL3USYDUq/kZjSeUPxfg1PFc3qU6gm01t2lPLk=;
+        b=VB82awGCvncwgBBUr14erW/AmKOhBEXOSF50ud/CQ/ee+5g5eKQWpWik3X7bGQo234
+         m4WuQMjANtc6Ar5FRrVEXmbmpxO7xu4JKSIeR6OzrvggpcYBex4x1IvleikY4a9UY0ie
+         Z0i+brT+Nqh4FYY8M9Br7sPxHG8ji6jEj5QeyTtpHKLTk4RIiJ215sAwPi/V1bZKrhIw
+         up5WggQtIOmZVj7xcD2cpdnexCwcVAFNixHGPyZMc9OfQsN8umEhciqWeSX+OKrV9LJt
+         CPuUxwm+o+hIeGXVy/uymYFFvc89EHMMRdWwkWwi1vgC9X8VowDKBj2WqWSCIvqtmUiw
+         v9Ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=5e970nFKNI2LtRj0CfvZL0qwIj770z5txzWYI6Kbgks=;
-        b=fTOjamb1+XvyYYxyWlB53lfZFMIpEjYivLpwyMPQJit8jQ6BLatU4Bk8NSUlwrg4H5
-         yWYnBps7MrhghKTSTYomZ3Mb/pt/KBrKGm2Cb1xgbt3YaWafkRoR/ux9gOqshteRN37Q
-         9RlVACYwDhyFrYE56MTv2W63lZed8u6298LLIXYqdyKfZxlUP2cF0qvG6BR1x1g6gckd
-         +za+w2n7Xn8FiBag2J4G/49iIgvpQyFam90cKj0RUpJGhJUhPe4dxfsVepT4aSxBiP1W
-         VMISIUoMv/kFNe2crUVq5DeFyn+BNfJPUdbWlp4TqXRDtIZLKSHNASOgO7dHm7RhPW3H
-         zEXw==
-X-Gm-Message-State: AOAM531T8vpAA477UxyLre/Nvc72IV0IV1Q7g29qTuxaRM1W3bUWa8j2
-	Q3kiH/JPvgkHa31Yd+N8hnJBtflCb2I=
+        bh=wEhkkbL3USYDUq/kZjSeUPxfg1PFc3qU6gm01t2lPLk=;
+        b=n2Cj/R4FzJaQmgGJi7qb+iMB0PhEsWGF71m8wIJcf/RFp8i7LNDjWB6Jy6fTRv21DD
+         T3oD0AwTjOmzRDdDlaqLtOpMI68S/euc9aDOwn2sDpNGD9kQ9FE8982Rh/WLpMLi+Qg2
+         MaeBdS8AmMvA2aYWfzfx0xl5mBAVFW4Fb/45oEb+oHR8Ra0bH23k4SJq6DoIthtzVLFC
+         fg+iRJO1A2+0vj4eiyKDUpJbwbPusYrMwIIsD0b1W0+3lamukZxRCJCKm6u5akx+pyrV
+         13g10uoDjC8uVT0AGVS5DEKtnzcyE8KrU2pA7d/SEUMKoedndPa2aH2IuUe/BPxEbuIX
+         3twg==
+X-Gm-Message-State: AOAM5302xJM9RdiREA6JSZlRRr5fKbi3IT96FJS3NRJHnwPrl1KPG+Uf
+	KqXLFc7wpEuLLe77c4CNA6VanINmn6Y=
 X-Google-Smtp-Source: 
- ABdhPJxJgCNmrZA7eALWro2HcG6eG0YVM+LDkDcUebi56HJhds8kETfbKY2zVItuvESRTST8S8XQaQ==
-X-Received: by 2002:a63:3f01:: with SMTP id m1mr7176231pga.446.1640899889010;
+ ABdhPJzwMiYKLiTKgh/E1ET7lFxDaIN4TW/Jx6rXXR4GKL3qj7m4yvqWL4xexFC2/wtikYimqAwQzg==
+X-Received: by 2002:a17:90a:c506:: with SMTP id
+ k6mr40329046pjt.74.1640899889737;
         Thu, 30 Dec 2021 13:31:29 -0800 (PST)
 Received: from keaua.caveonetworks.com
  ([2601:202:4180:a5c0:a625:8af4:d190:e823])
         by smtp.gmail.com with ESMTPSA id
- t27sm9348384pgm.52.2021.12.30.13.31.28
+ t27sm9348384pgm.52.2021.12.30.13.31.29
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Dec 2021 13:31:28 -0800 (PST)
+        Thu, 30 Dec 2021 13:31:29 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [Honister 3/7] openvpn: upgrade 2.5.4 -> 2.5.5
-Date: Thu, 30 Dec 2021 13:31:19 -0800
+Subject: [Honister 4/7] postfix: upgrade 3.6.2 -> 3.6.3
+Date: Thu, 30 Dec 2021 13:31:20 -0800
 Message-Id: 
- <678f72c3d3a8e79b8b829cab21283e005f6d0ed5.1640899794.git.akuster808@gmail.com>
+ <550ea1cab266a9a08e28415529af1eed2d78c501.1640899794.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1640899794.git.akuster808@gmail.com>
 References: <cover.1640899794.git.akuster808@gmail.com>
@@ -65,71 +66,39 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Dec 2021 21:31:30 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 Dec 2021 21:31:31 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94572
+ https://lists.openembedded.org/g/openembedded-devel/message/94573
 
-From: zhengruoqin <zhengrq.fnst@fujitsu.com>
+From: Yi Zhao <yi.zhao@windriver.com>
 
-Changelog:
-=========
- Fix error in example firewall.sh script
- configure: remove useless -Wno-* from default CFLAGS
- Add argv_insert_head__empty_argv__head_only to argv tests
- Move deprecation of SWEET32/64bit block size ciphers to 2.7
- Include --push-remove in the output of --help.
- Move '--push-peer-info' documentation from 'server' to 'client options'
- add test case(s) to notice 'openvpn --show-cipher' crashing
- BUILD: enable CFG and Spectre mitigation for MSVC
- Fix loading PKCS12 files on Windows
- msvc: fix product version display
- msvc: add missing header to project file
- config-msvc.h: fix OpenSSL-related defines
- contrib/vcpkg-ports: remove openssl port
- GitHub Actions: use latest working lukka/run-vcpkg
- Use network address for emulated DHCP server as a default
- Load OpenSSL config on Windows from trusted location
- ring_buffer.h: fix GCC warning about unused function
- ssh_openssl.h: remove unused declaration
- vcpkg/pkcs11-helper: compatibility with latest vcpkg
- config-msvc.h: indicate key material export support
- Don't use BF-CBC in unit tests if we don't have it
- Define have_blowfish variable in ncp unit tests
- doc link-options.rst: Use free open-source dynamic-DNS provider URL
- Fix some more wrong defines in config-msvc.h
- Ensure the current common_name is in the environment for scripts
- Require EC key support in Windows builds
- resolvconf fails with -p
- Update IRC information in CONTRIBUTING.rst
- doc/man (vpn-network-options): fix foreign_option_{n} typo
- README.down-root: Fix plugin module name
+Release Notes:
+http://www.postfix.org/announcements/postfix-3.6.3.html
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 2867330535cd93067d1fc005f0cdf5984a4c43fb)
-[2.5.x is a stable branch]
+(cherry picked from commit 45fee2d0cec121808c6dda150b0d9ab990c74a72)
+[3.6.x is a stable release]
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../openvpn/{openvpn_2.5.4.bb => openvpn_2.5.5.bb}              | 2 +-
+ .../postfix/{postfix_3.6.2.bb => postfix_3.6.3.bb}              | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/openvpn/{openvpn_2.5.4.bb => openvpn_2.5.5.bb} (97%)
+ rename meta-networking/recipes-daemons/postfix/{postfix_3.6.2.bb => postfix_3.6.3.bb} (89%)
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.5.4.bb b/meta-networking/recipes-support/openvpn/openvpn_2.5.5.bb
-similarity index 97%
-rename from meta-networking/recipes-support/openvpn/openvpn_2.5.4.bb
-rename to meta-networking/recipes-support/openvpn/openvpn_2.5.5.bb
-index 6b588a5f50..2dc3af6bf9 100644
---- a/meta-networking/recipes-support/openvpn/openvpn_2.5.4.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.5.5.bb
-@@ -14,7 +14,7 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
- 
- UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
- 
--SRC_URI[sha256sum] = "f80f3c3df1b94a8892ae547df84f152583250684a24bd022ccc98ef56fa93d97"
-+SRC_URI[sha256sum] = "7500df4734173bce2e95b5039079119dacaff121650b2b6ca76d2dc68bdac1c5"
- 
- # CVE-2020-7224 and CVE-2020-27569 are for Aviatrix OpenVPN client, not for openvpn.
- CVE_CHECK_WHITELIST += "CVE-2020-7224 CVE-2020-27569"
+diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.6.2.bb b/meta-networking/recipes-daemons/postfix/postfix_3.6.3.bb
+similarity index 89%
+rename from meta-networking/recipes-daemons/postfix/postfix_3.6.2.bb
+rename to meta-networking/recipes-daemons/postfix/postfix_3.6.3.bb
+index 982544d5ca..98005797d9 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix_3.6.2.bb
++++ b/meta-networking/recipes-daemons/postfix/postfix_3.6.3.bb
+@@ -15,5 +15,5 @@ SRC_URI += "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
+            file://0001-makedefs-add-lnsl-and-lresolv-to-SYSLIBS-by-default.patch \
+            file://0007-correct-signature-of-closefrom-API.patch \
+            "
+-SRC_URI[sha256sum] = "507323d20d7b3f705f49cf8c07d437c6d8090bed07e15a3c0ec405edad54a7d4"
++SRC_URI[sha256sum] = "0f1241d456a0158e0c418abf62c52c2ff83f8f1dcf2fbdd4c40765b67789b1bc"
+ UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.6(\.\d+)+).tar.gz"
 -- 
 2.25.1
 
