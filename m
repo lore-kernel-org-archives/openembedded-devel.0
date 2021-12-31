@@ -1,228 +1,179 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <yi.zhao@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7167FC433EF
-	for <webhook@archiver.kernel.org>; Thu, 30 Dec 2021 23:22:27 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
- [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.web12.5115.1640906545820835009
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C926DC433EF
+	for <webhook@archiver.kernel.org>; Fri, 31 Dec 2021 06:14:06 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com
+ [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.9046.1640931244074216259
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Dec 2021 15:22:26 -0800
+ Thu, 30 Dec 2021 22:14:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=YozC8//Q;
- spf=pass (domain: gmail.com, ip: 209.85.221.43,
- mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wr1-f43.google.com with SMTP id v7so52974998wrv.12
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Dec 2021 15:22:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=md0NqTB2EuNApMTbyK7rL0EdjrYmK67zSO3DXE11Ios=;
-        b=YozC8//QvmUheku+RF0Hg8epmtnrCpU9BXNetuu1b3/IMyiJX26yb8r254PQTfqTcL
-         q8zCI8WZrH+mWVSCneVMKNlaj7CYJ+pY1eDBYMQp3jucfD2aY+yiP4shD4CJ7i2qZ5ha
-         WiAJUby0lEMtRSSnhtLFQ35NUgMOtwRwSjRjMjNh3di/l3g3TZ1AzRpSlj35EyyKe0c/
-         CPvGUBvqpyCYJoj/OmhghtjNvB70QW7FrtmlQV07313tTUT6r27gAiP6H/SR8Z7FEL60
-         sqgWS5yKxgWhSY0RuaAmAmnx40jfUm20XKAuFpStBEiGKOwXWK12isQYriuVfFSVHx6W
-         wnHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=md0NqTB2EuNApMTbyK7rL0EdjrYmK67zSO3DXE11Ios=;
-        b=qw6v9lKK2U+dZiVjV1k3JDgSKx0DckMiAPom8wHs6a4oRnjwrgmE2n2hERM+oTRMDI
-         4x4j4fE2AbjFRKmSMuUXJtK4e/14niKgQ48QM7K3yj/Wr25AE5RvY9vqiLM3ePckaEP5
-         M/BpwA3+LmM0fmyTCxovqCVYAHSHqYU42JC6DQfNlqqzLLt3xuXwTT9EwIlYaUTHiwAc
-         7IL+OHfZIG8112+A17tU+S1dJRPYj99PAtZveWaxbTcLSvCri60hkmFcziUPNblwP9SZ
-         aicbbMXycq9oGlnU9j3+NX5pmiYaalxHSVRS7CxuK5LzR8SBHrG/62Re1I2gz4t5i2CE
-         3Jnw==
-X-Gm-Message-State: AOAM530wJ6iszd14bK02OsiEcYhbOkpKxIe1gRUnI3QNXoU83mLG+WCi
-	5sA7F8gzMhdFAD+urOjLH5AobVMm/Z0=
-X-Google-Smtp-Source: 
- ABdhPJwXwWPNg1SXP/XAz2n9O1s59GYO+c/PSDFT6rzkG7oLrAWqq3QVr4+jG3U53q+6EjD9pQXc5A==
-X-Received: by 2002:adf:8165:: with SMTP id 92mr27645068wrm.199.1640906543885;
-        Thu, 30 Dec 2021 15:22:23 -0800 (PST)
-Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
- [91.135.6.246])
-        by smtp.gmail.com with ESMTPSA id
- c11sm31316198wmq.48.2021.12.30.15.22.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Dec 2021 15:22:23 -0800 (PST)
-From: Alex Kiernan <alex.kiernan@gmail.com>
-X-Google-Original-From: Alex Kiernan <alexk@zuma.ai>
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=ABoRLhJG;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
+ invalid domain name (domain: windriver.com, ip: 205.220.178.238,
+ mailfrom: prvs=89994c103b=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id
+ 1BV6C1S3019454
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri, 31 Dec 2021 06:14:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+ h=from : to :
+ subject : date : message-id : content-transfer-encoding : content-type :
+ mime-version; s=PPS06212021;
+ bh=U5i0QllmSHezTiYW0YLpTRKCMnsyi5P4HrrVSnxpAk0=;
+ b=ABoRLhJGVusU5h0lChqVzoxb2fJkWuE2mWELEcntH40QBuYGN8KQ6fWw/tQ+nKnm9IEv
+ SS1qFG8oW5cmhP64AM9Wb2pvGT2jqOVu1J5xuwjQ6f+bz2E3d87SJRvnL4PLOsasxLG0
+ U6LSL8OhtaKSp8BINdGOjdEvPe5vj/Ss7ZsBbBCJ88bOTVSp9ub/BGuaQdAFoOkXxHvy
+ +gqPObseA62RAgDb4JvxaCbZqHE5kLWteC0Ecrx1uU3L3zL/OBDsPvQLD/a4gsN+yqSg
+ 6Xc3gQKfkZDE8H1V2Z2ckIGNpFmFVvtVsASz5FFzs7C+yjA9Ilieam4+fypQsMkureUF Jw==
+Received: from nam12-mw2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12lp2042.outbound.protection.outlook.com [104.47.66.42])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3d8x51gtfp-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri, 31 Dec 2021 06:14:02 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=OUeaJtE688p/I7rXyL7270UfFARUr+PWXLNyZSacC8jf1Xo5Hosg/9OO0EI6ZWAcHCPXFaB4lvfoh1rwzMgyzZY3kV+1wvTo8wvR9+qRfQu0gTa0KzWZ7NW4Bl7yH4KfRCWK4nhmp+J+K0CiXQsdpTj43dXxEYeY4OJm+VV7m1t1ClLrbKcNU4L1xsHB4+D+3KmRvVFkPdLhnnPxcuMPMe2fiO+YSwtHcn50p0nnnB1AHDJ1p1Tj+9g4QT4v54pevlwh+FkbhW4jHzWvPvRCWJYopxRbnZkP/9lL/JoZ8byAAQDq9Xsc/vG4rvi7g7L27IreS74AyLuE1IEQqO2gEg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=U5i0QllmSHezTiYW0YLpTRKCMnsyi5P4HrrVSnxpAk0=;
+ b=DQqT5o9aTIQsxSWo6B0//zAKrcZJ/G4QxAvelmExVzvS/I2+Td9WvceQhCiXol8hBl9lt+B9B3kgHLOMU08MbYdwqyoV8CG2Or/22BJuHuYp/ES5JvsUzKGDpB6F1y7cLqzzyDEVorOF24qBU7fEVm+I1CL9F6WIdMBcaeO3Hhaexxys3NS9U5dwoUCylPtT4l1ClhAMAg3mSdOPAMQA7MA2MpHcbqrr25ZymGxjSVJfiV6lw5gCM8wf5WjlFN6q9VdSaapOLpCAmhZh3FAupA0lCgNur/hAc5p7l17oeZPM+2IGQn8H09x0fYGpM+wr1bygklgfafEvDJBi1kaw7Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
+ by CO1PR11MB4804.namprd11.prod.outlook.com (2603:10b6:303:6f::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4844.14; Fri, 31 Dec
+ 2021 06:14:01 +0000
+Received: from CO1PR11MB4867.namprd11.prod.outlook.com
+ ([fe80::8962:26c6:20fe:eaa4]) by CO1PR11MB4867.namprd11.prod.outlook.com
+ ([fe80::8962:26c6:20fe:eaa4%5]) with mapi id 15.20.4844.014; Fri, 31 Dec 2021
+ 06:14:01 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Alex Kiernan <alexk@zuma.ai>,
-	Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-networking][PATCH] ntpsec: Add glib-2.34/kernel-5.14 seccomp
- fixes
-Date: Thu, 30 Dec 2021 23:21:55 +0000
-Message-Id: <20211230232154.10021-1-alexk@zuma.ai>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
+Subject: [meta-oe][PATCH 1/3] upower: add UPSTREAM_CHECK_GITTAGREGEX
+Date: Fri, 31 Dec 2021 14:13:48 +0800
+Message-Id: <20211231061350.1166984-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.25.1
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: HK2PR02CA0195.apcprd02.prod.outlook.com
+ (2603:1096:201:21::31) To CO1PR11MB4867.namprd11.prod.outlook.com
+ (2603:10b6:303:9a::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: b2a35f8b-9195-494f-abfc-08d9cc24bcae
+X-MS-TrafficTypeDiagnostic: CO1PR11MB4804:EE_
+X-Microsoft-Antispam-PRVS: 
+	<CO1PR11MB4804F93FE0C2A5A060B6C618F9469@CO1PR11MB4804.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:369;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	+Bzn1J/z99BmCZwLAahOJNMJn/MIVMcniQLcyzwNeAlYwyJmtSWKQattAyH7n8M6AUBWSfCQBCs1rQXYRH/ZVOznoMRUpNdqW2D+GNA+uMqHk9Vj5+KzJaG3/9zVOM2EW+2FtqV5wkubsDUOYhr/uLrqPvHNgdkKz18WILvRK2LAyseRmTOP7RcRXSSrfaxMbt4AMUHmCqSEdhS7D54qKgDFg1Gg6UL1JoguZ2ci8WuGLbz67SE+vIBNRKrXswrxTH1XM5UnG0D5etF5WRGvD+3sQopL8+d7AK6W0DVY2Vc7GxIIBVg6JHwIoiUeXtOC1AHFyrLeKWjSirBYQ8NMSaykpdgpW++JwfDVHckQ2xSkfTaKGHtb61d7zlwalbsJ0WfJ4lCFS9nD4G6dZYUMPY5l9Z4gtCE8Eu13s614kU/0646EWluQ2nLk6FJpzZAkbS+zRKVTpgkZcadF45RxNfuXpRDCw8j8iLn3PCEpxCkYO6o3UcFC5pYg3pEQu+dbgnE7GIMhfgwBMy0HXX86FP53emgByp6tXbUzffJ7Udgamfh8WT+TPKrGN41LmHzc5d1M/usN81IEe98EPsiGoMVS45Z72YpQfkChScp9be+QaKTf2HTsqwveT/gre0thS7Uirkl3+/Wk51odIkKxcPAVnnZmQEV4j4Ry+1hX0WB/7uTQo2pxbSiDkQs0LyXDOqz1jIrnVoT/SU5ry1RvEg==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(86362001)(316002)(508600001)(2616005)(2906002)(36756003)(8676002)(6666004)(66946007)(26005)(38350700002)(6512007)(44832011)(52116002)(5660300002)(1076003)(186003)(6486002)(66476007)(66556008)(38100700002)(6506007)(8936002)(6916009);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?4RYcAMbroRohV8H4a/eXmLsEQeCIcqa4JkLo/zf/J8yPqv2iwdjYNfFDe+jX?=
+ =?us-ascii?Q?83Fkwcx1wSzA7zhagEYE4+TPNh/GIh4IVZz+3rd7JA7JEh2QpCfJ3UMTVSjY?=
+ =?us-ascii?Q?Dk+xqRGzvcaPie4lQ+KY0tgJjpuCNxyNWwUZipsxZfvDErLyBlAz5lC2bQPH?=
+ =?us-ascii?Q?j4/fepNIFgAWt+X9e+KUKPfIo8z3vzV8zArhexIWJ5VVxu6CS/AiVtuPA70J?=
+ =?us-ascii?Q?ZUg86V2gCu2aSZozAQi40XHh1M+1mm10+8HdFvv0BRDKnuGEPZKBBsDEkL3B?=
+ =?us-ascii?Q?58yqcWTERfqRvrA2DZbv+rM8EAx+Yb0c3/5IlnPdSS/lE5sisHZLaAIakT8l?=
+ =?us-ascii?Q?fLy0B/otAhQl++SphZzdBCWVQjU6NOfqU8JAZaHWBNwMf/H7JccsuZiK0Slq?=
+ =?us-ascii?Q?xdbJFzIaS7vRWu5cDy5FadfDxHJV/u55bYZiGBh8NSifrQNtp0xpfSxKEYJT?=
+ =?us-ascii?Q?phuIk4W8L2sKbOpR2gbrb01vHHBEMfAIR/LLcEMExgm+09Eek27S2DGAj39c?=
+ =?us-ascii?Q?yEwrbTsb5q/xGKQMtJU2pIEiuMBNFEDMvLGaN4HyvuaYNHtPtHeA8rvOR0P4?=
+ =?us-ascii?Q?fSMWXmIAfh83458qco2x6GMg8xJkqEshcFQgB4HFsnKb12Uwj9+atVKBC4/i?=
+ =?us-ascii?Q?/8SYbvhpRA/CboAXrFCR4bRKlq02iSXaGRCWrcdi7i/p9vv9sjcvTzyJH7ux?=
+ =?us-ascii?Q?1vMFFEUR21ODO1xvoX0zJZzvFVGE7UuDd+kTD3RjVWckfWCfFUjM2Dr0krAC?=
+ =?us-ascii?Q?EODoBxoT+rZ7jGdUlXi5cv4FjbEB9AkQDo7yn+gnctnhlzHZeD6BwXzYma6N?=
+ =?us-ascii?Q?BDoT3w1qAhk/LJcVgrRGsYWA3ACwVsz8ZxoqpeaZkSPd/21tec/smKydGAuZ?=
+ =?us-ascii?Q?jnyq6tio+fpPSXeWqOlYeXhCSsEyptW/esAPX4Fzn5t+XuF0mCHVIRhdXs0/?=
+ =?us-ascii?Q?8nD672MJOw+syUzU27/EY5P7h1Pmy3ask3XKqafNsi40xZhJ3eIvPToIVWkB?=
+ =?us-ascii?Q?mryB/Xbs/RnVH5kcQQWGCn2xgz4YE7tTXaIc7JUtJ0rqeas1XgQpMrgXMv3A?=
+ =?us-ascii?Q?IO6r0To+mmIoY1y+B6BsOdazwQe0yWsrDtg/CrC8xEctcYS9b6R2SNrz8jtZ?=
+ =?us-ascii?Q?pgQwTKHGl/Pu1IJNwL7qTXYf85lJJFloqY/2aYRjRIW2R8aM6eBslWgufpbd?=
+ =?us-ascii?Q?lGH2r3DFB9vh+50o8REeb+YaHz4Z7Y43CSdn7xld81JG2J3RAY5LeiYubwhA?=
+ =?us-ascii?Q?XAhC0bXV/kd/lW/HIPN9JTFhDbqHa8/MsSVzhuHgKOtFE+iPFhbwuM+p/OJa?=
+ =?us-ascii?Q?gspyp6DfrH8XpFp53K5PZpLtbhAI4ZxlbwQihRmrCRT+uYmVLncdx+OkoFTq?=
+ =?us-ascii?Q?XDlVdrbLb3RACf9d/pWkj1AN6jkQ4sMsiTIhc6NuadzKPtD9cdATeLdEKM0Q?=
+ =?us-ascii?Q?/s8H+JUkwFyyt9JeV57Az6cRylaTOq+2KzB3bJBzsTgAMsYY9nCKm3WTkJ1W?=
+ =?us-ascii?Q?Qn4hXunccDIF4tZpQJHf6bBZmYgYFFIZ/DXXsq5onYbw1jh/N0PjYMHmqGTX?=
+ =?us-ascii?Q?KGO1q72sfs7UIDrfY3jZ2qF5esNroWwlXZpoQfpXNNlHoZNfyG0UtD7RNcLx?=
+ =?us-ascii?Q?K/7ZjC+fBLOkk3rL3DDqn94=3D?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ b2a35f8b-9195-494f-abfc-08d9cc24bcae
+X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Dec 2021 06:14:00.9364
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 
+ 78Wtp1Y1+LHTaFzBJxprPdFpB0GXOuj805mFHQ78acXTBEGjO1CIJkVHW55QITZsIV9quV5mXdZshEtC01b4UQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR11MB4804
+X-Proofpoint-ORIG-GUID: Dx5mCHpaVWeCJbKMTQ_wccy5jYBHB747
+X-Proofpoint-GUID: Dx5mCHpaVWeCJbKMTQ_wccy5jYBHB747
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.11.62.513
+ definitions=2021-12-31_02,2021-12-30_02,2021-12-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ mlxlogscore=886 bulkscore=0
+ mlxscore=0 lowpriorityscore=0 phishscore=0 adultscore=0 impostorscore=0
+ malwarescore=0 clxscore=1015 suspectscore=0 priorityscore=1501 spamscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2110150000
+ definitions=main-2112310030
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Dec 2021 23:22:27 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 31 Dec 2021 06:14:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94577
+ https://lists.openembedded.org/g/openembedded-devel/message/94579
 
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-Signed-off-by: Alex Kiernan <alexk@zuma.ai>
+Add UPSTREAM_CHECK_GITTAGREGEX to check the correct latest version.
+
+Before the patch:
+$ devtool latest-version upower
+INFO: Current version: 0.99.13
+INFO: Latest version: 014
+INFO: Latest version's commit: 8cbaa7f70b1bc8aa96f420f9061b20e5d8839ea7
+
+After the patch:
+$ devtool latest-version upower
+INFO: Current version: 0.99.13
+INFO: Latest version: 0.99.13
+INFO: Latest version's commit: 0f6cc0a10be22d7ddd684e1cd851e4364a440494
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- ....c-allow-clone3-for-glibc-2.34-in-se.patch | 31 +++++++++++++
- ....c-allow-newfstatat-on-all-archs-for.patch | 43 +++++++++++++++++++
- ....c-match-riscv-to-aarch-in-seccomp-f.patch | 35 +++++++++++++++
- .../recipes-support/ntpsec/ntpsec_1.2.1.bb    |  3 ++
- 4 files changed, 112 insertions(+)
- create mode 100644 meta-networking/recipes-support/ntpsec/ntpsec/0001-ntpd-ntp_sandbox.c-allow-clone3-for-glibc-2.34-in-se.patch
- create mode 100644 meta-networking/recipes-support/ntpsec/ntpsec/0001-ntpd-ntp_sandbox.c-allow-newfstatat-on-all-archs-for.patch
- create mode 100644 meta-networking/recipes-support/ntpsec/ntpsec/0002-ntpd-ntp_sandbox.c-match-riscv-to-aarch-in-seccomp-f.patch
+ meta-oe/recipes-support/upower/upower_0.99.13.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-support/ntpsec/ntpsec/0001-ntpd-ntp_sandbox.c-allow-clone3-for-glibc-2.34-in-se.patch b/meta-networking/recipes-support/ntpsec/ntpsec/0001-ntpd-ntp_sandbox.c-allow-clone3-for-glibc-2.34-in-se.patch
-new file mode 100644
-index 000000000000..112aaa2a07d6
---- /dev/null
-+++ b/meta-networking/recipes-support/ntpsec/ntpsec/0001-ntpd-ntp_sandbox.c-allow-clone3-for-glibc-2.34-in-se.patch
-@@ -0,0 +1,31 @@
-+From d474682bb30b93d04b7b01c2dd09832e483265ed Mon Sep 17 00:00:00 2001
-+From: Sam James <sam@gentoo.org>
-+Date: Sun, 14 Nov 2021 08:54:58 +0000
-+Subject: [PATCH] ntpd/ntp_sandbox.c: allow clone3 for glibc-2.34 in seccomp
-+ filter
-+
-+Bug: https://bugs.gentoo.org/823692
-+Fixes: https://gitlab.com/NTPsec/ntpsec/-/issues/713
-+Signed-off-by: Sam James <sam@gentoo.org>
-+Upstream-Status: Backport [https://gitlab.com/NTPsec/ntpsec/-/commit/d474682bb30b93d04b7b01c2dd09832e483265ed]
-+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-+Signed-off-by: Alex Kiernan <alexk@zuma.ai>
-+---
-+ ntpd/ntp_sandbox.c | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/ntpd/ntp_sandbox.c b/ntpd/ntp_sandbox.c
-+index e66faaa8cbb0..3d6bccdfcf77 100644
-+--- a/ntpd/ntp_sandbox.c
-++++ b/ntpd/ntp_sandbox.c
-+@@ -401,6 +401,7 @@ int scmp_sc[] = {
-+  * rather than generate a trap.
-+  */
-+ 	SCMP_SYS(clone),	/* threads */
-++	SCMP_SYS(clone3),
-+ 	SCMP_SYS(kill),		/* generate signal */
-+ 	SCMP_SYS(madvise),
-+ 	SCMP_SYS(mprotect),
-+-- 
-+2.34.1
-+
-diff --git a/meta-networking/recipes-support/ntpsec/ntpsec/0001-ntpd-ntp_sandbox.c-allow-newfstatat-on-all-archs-for.patch b/meta-networking/recipes-support/ntpsec/ntpsec/0001-ntpd-ntp_sandbox.c-allow-newfstatat-on-all-archs-for.patch
-new file mode 100644
-index 000000000000..b4e6a2d0d5f7
---- /dev/null
-+++ b/meta-networking/recipes-support/ntpsec/ntpsec/0001-ntpd-ntp_sandbox.c-allow-newfstatat-on-all-archs-for.patch
-@@ -0,0 +1,43 @@
-+From 1e58cdd2ee488e1b20fbfcf80faa438d22820d0c Mon Sep 17 00:00:00 2001
-+From: Alex Kiernan <alexk@zuma.ai>
-+Date: Thu, 30 Dec 2021 09:32:26 +0000
-+Subject: [PATCH 1/2] ntpd/ntp_sandbox.c: allow newfstatat on all archs for
-+ glibc-2.34 in seccomp filter
-+
-+On Yocto Poky, newfstatat is used on (at least) arm64, x86_64 and
-+riscv64:
-+
-+  2021-12-30T09:32:04 ntpd[341]: ERR: SIGSYS: got a trap.
-+  2021-12-30T09:32:04 ntpd[341]: ERR: SIGSYS/seccomp bad syscall 262/0xc000003e
-+
-+Upstream-Status: Submitted
-+  https://gitlab.com/NTPsec/ntpsec/-/merge_requests/1248
-+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-+Signed-off-by: Alex Kiernan <alexk@zuma.ai>
-+---
-+ ntpd/ntp_sandbox.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/ntpd/ntp_sandbox.c b/ntpd/ntp_sandbox.c
-+index 3d6bccdfcf77..1ae82a671344 100644
-+--- a/ntpd/ntp_sandbox.c
-++++ b/ntpd/ntp_sandbox.c
-+@@ -349,6 +349,7 @@ int scmp_sc[] = {
-+ 	SCMP_SYS(lseek),
-+ 	SCMP_SYS(membarrier),	/* Needed on Alpine 3.11.3 */
-+ 	SCMP_SYS(munmap),
-++	SCMP_SYS(newfstatat),
-+ 	SCMP_SYS(open),
-+ #ifdef __NR_openat
-+ 	SCMP_SYS(openat),	/* SUSE */
-+@@ -452,7 +453,6 @@ int scmp_sc[] = {
-+ #endif
-+ #if defined(__aarch64__)
-+ 	SCMP_SYS(faccessat),
-+-	SCMP_SYS(newfstatat),
-+ 	SCMP_SYS(renameat),
-+ 	SCMP_SYS(linkat),
-+ 	SCMP_SYS(unlinkat),
-+-- 
-+2.34.1
-+
-diff --git a/meta-networking/recipes-support/ntpsec/ntpsec/0002-ntpd-ntp_sandbox.c-match-riscv-to-aarch-in-seccomp-f.patch b/meta-networking/recipes-support/ntpsec/ntpsec/0002-ntpd-ntp_sandbox.c-match-riscv-to-aarch-in-seccomp-f.patch
-new file mode 100644
-index 000000000000..cca6649e5f57
---- /dev/null
-+++ b/meta-networking/recipes-support/ntpsec/ntpsec/0002-ntpd-ntp_sandbox.c-match-riscv-to-aarch-in-seccomp-f.patch
-@@ -0,0 +1,35 @@
-+From 7536e2e4bc25fc8db4d5a2f00a91e91ba82d7d7b Mon Sep 17 00:00:00 2001
-+From: Alex Kiernan <alexk@zuma.ai>
-+Date: Thu, 30 Dec 2021 10:41:20 +0000
-+Subject: [PATCH 2/2] ntpd/ntp_sandbox.c: match riscv to aarch in seccomp
-+ filter
-+
-+On Yocto Poky, faccessat (et al) are also used on riscv64:
-+
-+  2018-03-09T12:35:32 ntpd[341]: ERR: SIGSYS: got a trap.
-+  2018-03-09T12:35:32 ntpd[341]: ERR: SIGSYS/seccomp bad syscall 48/0xc00000f3
-+
-+Upstream-Status: Submitted
-+  https://gitlab.com/NTPsec/ntpsec/-/merge_requests/1248
-+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-+Signed-off-by: Alex Kiernan <alexk@zuma.ai>
-+---
-+ ntpd/ntp_sandbox.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/ntpd/ntp_sandbox.c b/ntpd/ntp_sandbox.c
-+index 1ae82a671344..4a14ae224dc6 100644
-+--- a/ntpd/ntp_sandbox.c
-++++ b/ntpd/ntp_sandbox.c
-+@@ -451,7 +451,7 @@ int scmp_sc[] = {
-+ 	/* gentoo 64-bit and 32-bit, Intel and Arm use mmap */
-+ 	SCMP_SYS(mmap),
-+ #endif
-+-#if defined(__aarch64__)
-++#if defined(__aarch64__) || defined(__riscv)
-+ 	SCMP_SYS(faccessat),
-+ 	SCMP_SYS(renameat),
-+ 	SCMP_SYS(linkat),
-+-- 
-+2.34.1
-+
-diff --git a/meta-networking/recipes-support/ntpsec/ntpsec_1.2.1.bb b/meta-networking/recipes-support/ntpsec/ntpsec_1.2.1.bb
-index 2551b6aab828..3efac7d98383 100644
---- a/meta-networking/recipes-support/ntpsec/ntpsec_1.2.1.bb
-+++ b/meta-networking/recipes-support/ntpsec/ntpsec_1.2.1.bb
-@@ -13,6 +13,9 @@ DEPENDS += "bison-native \
+diff --git a/meta-oe/recipes-support/upower/upower_0.99.13.bb b/meta-oe/recipes-support/upower/upower_0.99.13.bb
+index 6110a26c0..105976316 100644
+--- a/meta-oe/recipes-support/upower/upower_0.99.13.bb
++++ b/meta-oe/recipes-support/upower/upower_0.99.13.bb
+@@ -8,6 +8,8 @@ SRC_URI = "git://gitlab.freedesktop.org/upower/upower.git;protocol=https;branch=
+ SRCREV = "0f6cc0a10be22d7ddd684e1cd851e4364a440494"
+ S = "${WORKDIR}/git"
  
- SRC_URI = "https://ftp.ntpsec.org/pub/releases/ntpsec-${PV}.tar.gz \
-            file://0001-Update-to-OpenSSL-3.0.0-alpha15.patch \
-+           file://0001-ntpd-ntp_sandbox.c-allow-clone3-for-glibc-2.34-in-se.patch \
-+           file://0001-ntpd-ntp_sandbox.c-allow-newfstatat-on-all-archs-for.patch \
-+           file://0002-ntpd-ntp_sandbox.c-match-riscv-to-aarch-in-seccomp-f.patch \
-            file://volatiles.ntpsec"
++UPSTREAM_CHECK_GITTAGREGEX = "UPOWER_(?P<pver>\d+(\_\d+)+)"
++
+ inherit autotools pkgconfig gtk-doc gettext gobject-introspection systemd
  
- SRC_URI[sha256sum] = "f2684835116c80b8f21782a5959a805ba3c44e3a681dd6c17c7cb00cc242c27a"
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 -- 
-2.34.1
+2.25.1
 
 
