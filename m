@@ -1,135 +1,139 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <alex.kiernan@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B2D0FC433EF
-	for <webhook@archiver.kernel.org>; Mon,  3 Jan 2022 06:58:40 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com
- [195.245.230.81])
- by mx.groups.io with SMTP id smtpd.web12.24545.1641193119347488057
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F4F5C433EF
+	for <webhook@archiver.kernel.org>; Mon,  3 Jan 2022 16:40:04 +0000 (UTC)
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
+ [209.85.221.54])
+ by mx.groups.io with SMTP id smtpd.web09.30711.1641228003667979875
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 02 Jan 2022 22:58:39 -0800
+ Mon, 03 Jan 2022 08:40:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=kWc3VL67;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.81,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1641193117; i=@fujitsu.com;
-	bh=lIfJe/NRNuGP1Afe+te4qznvq9Ugw7g6uz1l5TVrz8Y=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=kWc3VL67XZ9ioNc3g7H8DKoyt9PBdwDBOA5b6EaD9OPw6iaIZ63pC3XJgq7cWK1/9
-	 qaAOiMYpSM7zAdRrzG+JLS89bu021PRKHkVvHpzOw6UM5HrWA6BDiXi0BPnaEho+Lc
-	 Rdf8pQ0/9lK7mEpwjRhLRB0Y+63rqLtz4Ki7rZxeP0pzZ0M/aloC7ViQ5wbEW0vgFQ
-	 0pinfje/YC+LTVGNJFgMIrYSwZsYuwWUqE2Jnv4WC+CHWEjMhnB8ClKd0M3CtWdivB
-	 DWm0/tGMCip44glPXTss2CQtLXMmo9N+QueABeqU6zxGpKqnlRwqO/oUAbuaZ39MqB
-	 vCaFj221kO3tA==
-Received: from [100.115.4.42] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-a.eu-west-1.aws.ess.symcld.net id AE/38-13695-C9E92D16;
- Mon, 03 Jan 2022 06:58:36 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrEIsWRWlGSWpSXmKPExsViZ8ORqDtn3qV
-  Egz9vtSwuHl7K7MDocW7jCsYAxijWzLyk/IoE1oxJ/coF/3gqOqbvZ2lgvMrdxcjFISTwhFFi
-  89ZHbBDOBSaJ/u5GZgjnOKPEpCUdrF2MnBxsAmoS02/dALNFBPQlls7ewwxiMwuoSLz43cMOY
-  gsL+El8XDqPEcRmAYovazgPVsMr4CRxZ9cZNhBbQkBBYsrD91BxQYmTM5+wQMyRkDj44gUzRI
-  2ixOzLzSwQdoXErFltTBC2msTVc5uYJzDyz0LSPgtJ+wJGplWMVklFmekZJbmJmTm6hgYGuoa
-  GprqmukampnqJVbqJeqmluuWpxSW6hnqJ5cV6qcXFesWVuck5KXp5qSWbGIFBmVLM+n8HY3ff
-  T71DjJIcTEqivJVKFxOF+JLyUyozEosz4otKc1KLDzHKcHAoSfB+mHUpUUiwKDU9tSItMwcYI
-  TBpCQ4eJRHenVOA0rzFBYm5xZnpEKlTjIpS4rxcc4ESAiCJjNI8uDZYVF5ilJUS5mVkYGAQ4i
-  lILcrNLEGVf8UozsGoJMyrNBtoCk9mXgnc9FdAi5mAFvNqnQdZXJKIkJJqYDpWG/Us8csaa/+
-  CqrczLWfNFHjuKK21/vG096YbiuoCWLuNxVkXrTn8YcYCxqWnxfbc3nzSeM9elWeCTJ945L6Y
-  vXGL1Ah54W929/slu+q3zK6vGKZuvHNvhuRHptlrWLy2FJgeNrOuso2tTaspTg9jPN3amPKpT
-  ujjxWVxBg2sP3wqjunGORpUfFx8KnzOr4++izP4dsk9vP9b44ZmbKv57FuTXhmtmum3/Eros5
-  anzt2Wa8rutuX5rOrJ25X5bJPF0wihuQ0Kv7jnJLQlTs2QrF5rqBomcE1rZf7j2+UOommHJd1
-  1z7HtYBY25ri36XU7r2Z7T8DGIqFczq+iNZWdx9ym/N686YFrU4TsQiWW4oxEQy3mouJEAJPO
-  O7FFAwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-14.tower-585.messagelabs.com!1641193116!256334!1
-X-Originating-IP: [62.60.8.97]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.7; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 16306 invoked from network); 3 Jan 2022 06:58:36 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-14.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 3 Jan 2022 06:58:36 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 3E5B010018D
-	for <openembedded-devel@lists.openembedded.org>;
- Mon,  3 Jan 2022 06:58:36 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 31AA9100181
-	for <openembedded-devel@lists.openembedded.org>;
- Mon,  3 Jan 2022 06:58:36 +0000 (GMT)
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Mon, 3 Jan 2022 06:58:14 +0000
-From: Wang Mingyu <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-pymisp: upgrade 2.4.148 -> 2.4.152
-Date: Mon, 3 Jan 2022 14:58:03 +0800
-Message-ID: <1641193083-41938-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=fPuL2420;
+ spf=pass (domain: gmail.com, ip: 209.85.221.54,
+ mailfrom: alex.kiernan@gmail.com)
+Received: by mail-wr1-f54.google.com with SMTP id v7so70845349wrv.12
+        for <openembedded-devel@lists.openembedded.org>;
+ Mon, 03 Jan 2022 08:40:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Otz/SlnLc2C1+G4lqYEuhvQ8PpbIYlgxNksOGgAwFA4=;
+        b=fPuL24208IVc3ZFCl6uCkYYor1RGD+Soy12mRzqzav9aU2ESKj2uTIT6LLeG5QoJtT
+         Som7Ck+r64ZavNbnjhkP9cugKgNh6txnFiZxvp+kwQjtwLR3JcHvxNtDMe6SkaL8NgRu
+         oBeeHw3/FywxtNbI4HPNpk/Ji8LahduYP/Nd09XkworF/QT77cXcRBMlpEE57IG2VLZJ
+         wd/fHXyAzD9ho9QzJD9ZXEI2AsNSjIGkZIsR+QQ7Qly1RC3PTUNYA4bZdK+zQjwcGKmO
+         GtxZkdjOuxLGaUmW9H4TGLq4kFUMi45mk5XsEgZ7osjMFfM93ZL5WI+c43301ib4fTWz
+         iPNA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Otz/SlnLc2C1+G4lqYEuhvQ8PpbIYlgxNksOGgAwFA4=;
+        b=AsPeS0FJXFO9ruJiug2rFkp7+ZGobQnIODD5WzmhxhGYPmyt3A5a7/2RimxtZmEKAz
+         q6ZtQ/ShkMVa/2YqDhz9ZinbDeOAPABAUTZB/vD/pvoHAKzsmU3uB60ESXW1BRN2Neo/
+         oTWOaIR691xpQfmtMm+wSY5xZn31O9X8Iaxc1aw+X/4Fpuxbqw0b10G2JnqCwUi28qP0
+         FyQm/vKTLIa5HyqN7QsA85QUgca71j+DI+MjQnFedxNyOpFj3XPK2JSJh8T3QaC6CClr
+         WSTGGsDpNsTwyQkNydbi4gwKeEDRZ97SK3o7KIMB88fRBDM1KbKVFQJYiXgLhkiZleaF
+         QaVA==
+X-Gm-Message-State: AOAM5320YZPWRrc/juQ5lEvxFLdVqt9+hZiWZWUiAnk9ouukSqGUWNxd
+	zkjU78aTCVTm7GFqEEPDuxny5Fwfi4I=
+X-Google-Smtp-Source: 
+ ABdhPJyiFy3gjN/ivUZQq9TF+dZ2OX1k/1wmHrFgmcvf00LdnxpVmhFNXIOC1sdoSpcWhgQuFxBKUA==
+X-Received: by 2002:adf:aa93:: with SMTP id
+ h19mr38681133wrc.293.1641228001911;
+        Mon, 03 Jan 2022 08:40:01 -0800 (PST)
+Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
+ [91.135.6.246])
+        by smtp.gmail.com with ESMTPSA id
+ y3sm35296984wrq.12.2022.01.03.08.40.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 03 Jan 2022 08:40:01 -0800 (PST)
+From: Alex Kiernan <alex.kiernan@gmail.com>
+X-Google-Original-From: Alex Kiernan <alexk@zuma.ai>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alex Kiernan <alexk@zuma.ai>,
+	Alex Kiernan <alex.kiernan@gmail.com>
+Subject: [meta-networking][PATCH v2] ifupdown-ng: Add recipe
+Date: Mon,  3 Jan 2022 16:37:56 +0000
+Message-Id: <20220103163754.32439-1-alexk@zuma.ai>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 03 Jan 2022 06:58:40 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 03 Jan 2022 16:40:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94648
+ https://lists.openembedded.org/g/openembedded-devel/message/94649
 
-Changelog:
-==========
-Changes
-~~~~~~~
-- Bump version.
-- Bump deps, object templates.
-- Bump objects templates.
-- Bump misp-objects.
-- Lief doesn't supports python 3.10.
-- Debug poetry install, freezes on the GHA.
-- Bump deps, use pytest.
-- [feed-generator] support for distribution and sharing groups.
+ifupdown-ng is a network device manager that is largely compatible with
+Debian ifupdown, BusyBox ifupdown and Cumulus Networks' ifupdown2.
 
-Fix
-~~~
-- Update live tests to support proper format of SGs.
-- [sharinggroups] Fixes wrong model for SharingGroupOrg.
-- [feed-generator] code style fixes.
-- [feed-generator] keeping function compatibility.
-- [feed-generator] fix missing except type.
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Signed-off-by: Alex Kiernan <alexk@zuma.ai>
 ---
- .../{python3-pymisp_2.4.148.bb => python3-pymisp_2.4.152.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.148.bb => python3-pymisp_2.4.152.bb} (92%)
+Changes in v2:
+- drop merged upstream SBINDIR patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.148.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.152.bb
-similarity index 92%
-rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.148.bb
-rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.152.bb
-index e091e8757..254330bf5 100644
---- a/meta-python/recipes-devtools/python/python3-pymisp_2.4.148.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymisp_2.4.152.bb
-@@ -4,7 +4,7 @@ LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
- 
- SRC_URI = "git://github.com/MISP/PyMISP.git;protocol=https;branch=main"
--SRCREV = "6f7157cf26a6b4ec102021c8f1197a40380b12e3"
-+SRCREV = "d991e53f9a9641f454e116e83d2913edf405a53f"
- S = "${WORKDIR}/git"
- 
- inherit setuptools3
+ .../ifupdown-ng/ifupdown-ng_0.11.3.bb         | 45 +++++++++++++++++++
+ 1 file changed, 45 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ifupdown-ng/ifupdown-ng_0.11.3.bb
+
+diff --git a/meta-networking/recipes-support/ifupdown-ng/ifupdown-ng_0.11.3.bb b/meta-networking/recipes-support/ifupdown-ng/ifupdown-ng_0.11.3.bb
+new file mode 100644
+index 000000000000..42bf1c235b61
+--- /dev/null
++++ b/meta-networking/recipes-support/ifupdown-ng/ifupdown-ng_0.11.3.bb
+@@ -0,0 +1,45 @@
++SUMMARY = "Flexible ifup/ifdown implementation"
++DESCRIPTION = "ifupdown-ng is a network device manager that is largely \
++compatible with Debian ifupdown, BusyBox ifupdown and Cumulus Networks' \
++ifupdown2."
++LICENSE = "ISC"
++LIC_FILES_CHKSUM = "file://COPYING;md5=451f521abe917914139c9739ea0f2bc5"
++
++DEPENDS = "libbsd"
++
++PV .= "+git${SRCPV}"
++
++SRC_URI = "git://github.com/ifupdown-ng/ifupdown-ng.git;protocol=https;branch=main"
++SRCREV = "553f056ed9fccdf08709ea4d3087df5e7d590ff1"
++
++S = "${WORKDIR}/git"
++
++inherit pkgconfig update-alternatives
++
++LIBBSD_CFLAGS = "`pkg-config --cflags libbsd-overlay`"
++LIBBSD_LIBS = "`pkg-config --cflags --libs libbsd-overlay`"
++
++EXTRA_OEMAKE = "\
++    CC='${CC} ${CFLAGS} ${LDFLAGS}' \
++    LD='${LD} ${LDFLAGS}' \
++    SBINDIR='${base_sbindir}' \
++    LIBBSD_CFLAGS='${LIBBSD_CFLAGS}' \
++    LIBBSD_LIBS='${LIBBSD_LIBS}' \
++    INTERFACES_FILE='${sysconfdir}/network/interfaces' \
++    CONFIG_FILE='${sysconfdir}/network/ifupdown-ng.conf' \
++    EXECUTOR_PATH='${libexecdir}/${BPN}' \
++"
++
++do_compile () {
++	oe_runmake
++}
++
++do_install () {
++	oe_runmake 'DESTDIR=${D}' install
++}
++
++ALTERNATIVE_PRIORITY = "120"
++ALTERNATIVE:${PN} = "ifup ifdown"
++
++ALTERNATIVE_LINK_NAME[ifup] = "${base_sbindir}/ifup"
++ALTERNATIVE_LINK_NAME[ifdown] = "${base_sbindir}/ifdown"
 -- 
-2.25.1
+2.34.1
 
 
