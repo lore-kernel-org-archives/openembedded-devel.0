@@ -2,71 +2,74 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06E8BC433EF
-	for <webhook@archiver.kernel.org>; Mon,  3 Jan 2022 05:17:42 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.2])
- by mx.groups.io with SMTP id smtpd.web10.23777.1641187060958723868
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 020D6C433EF
+	for <webhook@archiver.kernel.org>; Mon,  3 Jan 2022 05:17:44 +0000 (UTC)
+Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
+ [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web12.23760.1641187058506132347
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 02 Jan 2022 21:17:41 -0800
+ Sun, 02 Jan 2022 21:17:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=hVpoq10J;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.2,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=SG/N2EUf;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1641187058; i=@fujitsu.com;
-	bh=tSHg6Bxh/nWua2fzsCkPY3HcXi640gk/qUEKIiReVUc=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=hVpoq10J8KRzF8DpMp1/HHq8m50eHxuyl1H8U/Awnq+fUAm+YKK+bVX9IEd+52+PR
-	 tCT6NC9pja9tatxaLGK1q/F2BJ9kDkTkFBLRs3KAOcU0wnSLWkHptkRWRU5B7LjPS0
-	 x6HNkdZurLaPwniJt0mJuuGarf7eBtP2Z8atJGO5zyF0NJxaU84fW1KC242h75Onw9
-	 Aip30rPxqbw2/hVHIGjJl/hpRx2iWte//n01hM9Iogrj+YugYK4sBUc/E02UXZ1dnx
-	 nLYFAdNGvRBji/qgUfYvgBGHMdTXiOtb2W2dmY42oD6kMlUx0mGDp8WA9QqeofZwhQ
-	 P42RfXefWOwLw==
-Received: from [100.115.35.72] (using TLSv1.2 with cipher
+	s=170520fj; t=1641187056; i=@fujitsu.com;
+	bh=PzhFaM3LhlyVhCKeHHzZ4PD+5tabebkgMzFtu+HnKHQ=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=SG/N2EUffsPuo/gtMsba1i6vQ/Ueyuo89ADdfsse+bocYgocCsKSCSNRgkQAc72IP
+	 wNynIHRn3lO8xsott4psUIPDwkieOYKkeR+9lC2BckgBpFAEBnLfM7K9nWZFb7bAra
+	 5M5pF7YkdvKfaXgzUTwChMlkHYIOWo334Xhmpouq19W69l1vM5uI6oMg3DmramAQ7m
+	 q3R9UxKOkYXRML5D10SLg64iC/URrdMm3bgImENQacdlw/7M7BeBpE7WEN/kk/jbOq
+	 BbUptpfAhsGmyX0W9vkUAp8Wz4KYG7CkqYiGIIAJRTMnsZ9wNiyfkaFDQiEef+PSCl
+	 OUs1uz7DBzYCg==
+Received: from [100.115.64.186] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-west-2.aws.ess.symcld.net id E7/5C-27579-2F682D16;
- Mon, 03 Jan 2022 05:17:38 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrGIsWRWlGSWpSXmKPExsViZ8MxRfd926V
-  Egx/bLC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1owtJw+yFvRpVXT2pDQw7lbtYuTiEBKYwSSx
-  +uo7RgjnOKPEui2v2bsYOTnYBNQkpt+6wQpiiwjoSyydvYcZxGYWUJF48bsHrEZYwFli5+1tY
-  HEWoPiyE0cYQWxeASeJ/jUTwXolBBQkpjx8zwwRF5Q4OfMJC8QcCYmDL14wQ9QoSsy+3MwCYV
-  dIzJrVxjSBkXcWkpZZSFoWMDKtYrROKspMzyjJTczM0TU0MNA1NDTVNTbSNbSw1Eus0k3USy3
-  VLU8tLtE10kssL9ZLLS7WK67MTc5J0ctLLdnECAyylGKFvTsYL6/8qXeIUZKDSUmUt1LpYqIQ
-  X1J+SmVGYnFGfFFpTmrxIUYZDg4lCd4jTZcShQSLUtNTK9Iyc4ABD5OW4OBREuHd0gqU5i0uS
-  MwtzkyHSJ1i1OW4fH3eImYhlrz8vFQpcd63IEUCIEUZpXlwI2DRd4lRVkqYl5GBgUGIpyC1KD
-  ezBFX+FaM4B6OSMG8ryBSezLwSuE2vgI5gAjqCV+s8yBEliQgpqQamwAWrs7e65pfuTwxl8JW
-  JfmjH9EPPO9zcbeVNjcXuck3qK/c8TnpR7Sp/vfj1xOiKTVIZ/zo/PclyvnhXlSPpfKx/UdqP
-  FU43j1nMPnz9wmfD3YtM5ye7ebb1KYQnTNugceaDD4vcJ53K0x8XXXjI9Me11q92x+HCwhvHG
-  Bq3lrAW5j+3D1gRuDTz6cwnvyTm7wrd3RPIkHFzswyz1+XOyseKb4KZJSfqNt5hdHkTMP1Mk9
-  lvrztdZVez9k7ovuLIPPeNxMxL7FF75kZp3PpRxuPFmv/MRjvrV9vfoumqmnditxXuEPuuznb
-  zRuSafTHqgsdX7A9IlHrVnT6XWzuc/UxO43GnI9LP+nt2Zk9SYinOSDTUYi4qTgQAszWdGjkD
-  AAA=
+	by server-3.bemta.az-a.eu-central-1.aws.ess.symcld.net id
+ B1/61-06990-0F682D16; Mon, 03 Jan 2022 05:17:36 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8MxRfd926V
+  Eg6vtNhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bTK32MBX0cFY9vbGdrYFzP3sXIxSEkMINJ
+  4vSCz4wQznFGiSsNi5m6GDk52ATUJKbfusEKYosI6Essnb2HGcRmFlCRePG7hx3EFhZwl5g2/
+  SsLiM0CFD/46TdQPQcHr4CTxPLJmSBhCQEFiSkP3zODhDkFnCWerE4CCQsBVXR0NIB18goISp
+  yc+YQFYrqExMEXL5ghWhUlZl9uZoGwKyRmzWpjmsDIPwtJyywkLQsYmVYx2iYVZaZnlOQmZub
+  oGhoY6BoamuqaWeqam+glVukm6qWW6ian5pUUJQJl9RLLi/VSi4v1iitzk3NS9PJSSzYxAsMy
+  pdjVawfjkb6feocYJTmYlER5K5UuJgrxJeWnVGYkFmfEF5XmpBYfYpTh4FCS4D3SdClRSLAoN
+  T21Ii0zBxgjMGkJDh4lEd4trUBp3uKCxNzizHSI1ClGRSlx3mqQhABIIqM0D64NFpeXGGWlhH
+  kZGRgYhHgKUotyM0tQ5V8xinMwKgnztoJM4cnMK4Gb/gpoMRPQYl6t8yCLSxIRUlINTFmX957
+  8cHRR5XRZKUHXkxk8UuoG3+2P1Cz133X50MVNevOZv0o+WtXMn2bQst1yaXCAUpZzT9PNlHTp
+  E+LPLsR3BB/hMJE2y55k63/QdJn1jfU8QY6q/c5TVT5MVpu1MuX9411HP0/7oJS8OohrfcU2v
+  19Td5p2+91Jau21K1jitWVO8wmhj9bNZtsZFutxJEyt6NDs/cIwP+LGx7nLDxx+kxLWY5keuG
+  LZa7drNwUcJedmxKgfu53r53HSXK0hOlz0vuhV36Q9+cHvHtZMDssr+rDB8+C96gm7Dp/ceeT
+  WDm2/GZmb6uveK9wSvxTP9Gk+oykwmXlk1x6f6iMaJKobo3fw0ZTQ4uCi8HcSSizFGYmGWsxF
+  xYkA2SG1iEYDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-4.tower-571.messagelabs.com!1641187055!534896!1
+X-Msg-Ref: server-10.tower-528.messagelabs.com!1641187055!163125!1
 X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 31604 invoked from network); 3 Jan 2022 05:17:35 -0000
+Received: (qmail 15593 invoked from network); 3 Jan 2022 05:17:35 -0000
 Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-4.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-10.tower-528.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 3 Jan 2022 05:17:35 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 2035HUkm025039
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 2035HUkn025039
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>; Mon, 3 Jan 2022 05:17:35 GMT
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Mon, 3 Jan 2022 05:17:28 +0000
+ (TLS) id 15.0.1497.26; Mon, 3 Jan 2022 05:17:31 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] weechat: upgrade 3.0 -> 3.4
-Date: Mon, 3 Jan 2022 13:17:14 +0800
-Message-ID: <1641187036-41392-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] wolfssl: upgrade 5.0.0 -> 5.1.0
+Date: Mon, 3 Jan 2022 13:17:15 +0800
+Message-ID: <1641187036-41392-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1641187036-41392-1-git-send-email-wangmy@fujitsu.com>
+References: <1641187036-41392-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -75,112 +78,31 @@ X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 03 Jan 2022 05:17:42 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 03 Jan 2022 05:17:44 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94646
-
-refresh 0001-use-pkg-config-for-gcrypt-instead.patch
-
-License-Update:
-Url changed
-from "https://www.gnu.org/philosophy/why-not-lgpl.html"
-to "https://www.gnu.org/licenses/why-not-lgpl.html"
-
-Changelog:
-=========
-New features
-----------------
-core: add support of static arrays in hdata
-core: add command /toggle
-api: add parameters pointers, extra_vars and options in function hdata_search
-api: add user variables in evaluation of expressions with "define:name,value"
-api: add IRC message parameters "param1" to "paramN" and "num_params" in output of irc_message_parse
-irc: allow quotes around IRC message in command /server fakerecv
-trigger: hide key and password in command "/msg nickserv setpass nick key password"
-trigger: add support of option "-server" when hiding passwords in command /msg nickserv register
-
-Bug fixes
----------------
-core: fix memory leak in evaluated expression "split:number,seps,flags,xxx" when multiple "strip_items" are given
-core: fix random integer number with large range in evaluation of expressions on GNU/Hurd
-core: fix access to integer/long/time arrays in hdata
-api: fix search of option when the section is not given in functions config_search_option and config_search_section_option
-irc: fix join of channels with long name (issue #1717)
-irc: fix parsing of parameters in all IRC messages (issue #1666)
-irc: fix parsing of CAP message when there is no prefix (issue #1707)
-irc: fix parsing of TAGMSG message when there is a colon before the channel
-
-Documentation
----------------
-doc: remove tester's guide
-doc: add dark theme (automatic, following browser/desktop settings)
-doc: make build reproducible
-doc: disable web fonts
-doc: switch from prettify to pygments for syntax highlighting
-
-Tests
---------------
-core: add build with CMake and Ninja in CI
-core: add build on macOS 11 in CI
-
-Build
-------------
-ruby: add detection of Ruby 3.0 (issue #1721, issue #1605)
-core: add targets "changelog" and "rn" to build HTML version of ChangeLog and release notes (CMake build only)
+ https://lists.openembedded.org/g/openembedded-devel/message/94644
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../0001-use-pkg-config-for-gcrypt-instead.patch   | 14 +++++++-------
- .../weechat/{weechat_3.0.bb => weechat_3.4.bb}     |  4 ++--
- 2 files changed, 9 insertions(+), 9 deletions(-)
- rename meta-networking/recipes-irc/weechat/{weechat_3.0.bb => weechat_3.4.bb} (87%)
+ .../wolfssl/{wolfssl_5.0.0.bb => wolfssl_5.1.0.bb}              | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-connectivity/wolfssl/{wolfssl_5.0.0.bb => wolfssl_5.1.0.bb} (93%)
 
-diff --git a/meta-networking/recipes-irc/weechat/weechat/0001-use-pkg-config-for-gcrypt-instead.patch b/meta-networking/recipes-irc/weechat/weechat/0001-use-pkg-config-for-gcrypt-instead.patch
-index 0717e9654..4a33dd720 100644
---- a/meta-networking/recipes-irc/weechat/weechat/0001-use-pkg-config-for-gcrypt-instead.patch
-+++ b/meta-networking/recipes-irc/weechat/weechat/0001-use-pkg-config-for-gcrypt-instead.patch
-@@ -28,10 +28,10 @@ Index: weechat-2.7.1/cmake/FindGCRYPT.cmake
-  
-  if(LIBGCRYPT_CONFIG_EXECUTABLE)
-  
---   exec_program(${LIBGCRYPT_CONFIG_EXECUTABLE} ARGS --libs RETURN_VALUE _return_VALUE OUTPUT_VARIABLE GCRYPT_LDFLAGS)
---   exec_program(${LIBGCRYPT_CONFIG_EXECUTABLE} ARGS --cflags RETURN_VALUE _return_VALUE OUTPUT_VARIABLE GCRYPT_CFLAGS)
--+   exec_program(${LIBGCRYPT_CONFIG_EXECUTABLE} ARGS libgcrypt --libs RETURN_VALUE _return_VALUE OUTPUT_VARIABLE GCRYPT_LDFLAGS)
--+   exec_program(${LIBGCRYPT_CONFIG_EXECUTABLE} ARGS libgcrypt --cflags RETURN_VALUE _return_VALUE OUTPUT_VARIABLE GCRYPT_CFLAGS)
-- 
--    if(${GCRYPT_CFLAGS} MATCHES "\n")
--       set(GCRYPT_CFLAGS " ")
-+-  execute_process(COMMAND ${LIBGCRYPT_CONFIG_EXECUTABLE} --libs RESULT_VARIABLE _return_VALUE OUTPUT_VARIABLE GCRYPT_LDFLAGS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_QUIET)
-+-  execute_process(COMMAND ${LIBGCRYPT_CONFIG_EXECUTABLE} --cflags RESULT_VARIABLE _return_VALUE OUTPUT_VARIABLE GCRYPT_CFLAGS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_QUIET)
-++  execute_process(COMMAND ${LIBGCRYPT_CONFIG_EXECUTABLE} libgcrypt --libs RESULT_VARIABLE _return_VALUE OUTPUT_VARIABLE GCRYPT_LDFLAGS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_QUIET)
-++  execute_process(COMMAND ${LIBGCRYPT_CONFIG_EXECUTABLE} libgcrypt --cflags RESULT_VARIABLE _return_VALUE OUTPUT_VARIABLE GCRYPT_CFLAGS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_QUIET)
-+
-+   if(NOT DEFINED ${GCRYPT_CFLAGS})
-+     set(GCRYPT_CFLAGS " ")
-diff --git a/meta-networking/recipes-irc/weechat/weechat_3.0.bb b/meta-networking/recipes-irc/weechat/weechat_3.4.bb
-similarity index 87%
-rename from meta-networking/recipes-irc/weechat/weechat_3.0.bb
-rename to meta-networking/recipes-irc/weechat/weechat_3.4.bb
-index 9f7e39297..ca404ebc8 100644
---- a/meta-networking/recipes-irc/weechat/weechat_3.0.bb
-+++ b/meta-networking/recipes-irc/weechat/weechat_3.4.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Full-featured IRC plugin: multi-servers, proxy support, IPv6, SASL au
- HOMEPAE = "https://weechat.org/"
- SECTION = "net"
- LICENSE = "GPLv3"
--LIC_FILES_CHKSUM = "file://COPYING;md5=c678957b0c8e964aa6c70fd77641a71e"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
+diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.0.0.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.1.0.bb
+similarity index 93%
+rename from meta-networking/recipes-connectivity/wolfssl/wolfssl_5.0.0.bb
+rename to meta-networking/recipes-connectivity/wolfssl/wolfssl_5.1.0.bb
+index ba4c774fa..7b43b0678 100644
+--- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.0.0.bb
++++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.1.0.bb
+@@ -13,7 +13,7 @@ PROVIDES += "cyassl"
+ RPROVIDES:${PN} = "cyassl"
  
- DEPENDS = "openssl zlib icu libgcrypt gnutls curl aspell"
+ SRC_URI = "git://github.com/wolfSSL/wolfssl.git;protocol=https;branch=master"
+-SRCREV = "7e01af012157bc20c840011a018619915380f05c"
++SRCREV = "2b670c026debc8e70621eb5c75b60931c9aa0bc5"
  
-@@ -10,7 +10,7 @@ SRC_URI = "https://weechat.org/files/src/weechat-${PV}.tar.xz \
-            file://0001-use-pkg-config-for-gcrypt-instead.patch \
-            "
- 
--SRC_URI[sha256sum] = "6cb7d25a363b66b835f1b9f29f3580d6f09ac7d38505b46a62c178b618d9f1fb"
-+SRC_URI[sha256sum] = "7cd3dcc7029e888de49e13ebbcc3749586ff59c9d97f89f5eeb611067c7bb94c"
- 
- inherit cmake pkgconfig
+ S = "${WORKDIR}/git"
  
 -- 
 2.25.1
