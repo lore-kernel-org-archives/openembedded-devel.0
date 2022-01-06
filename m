@@ -2,15 +2,15 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36EBFC433FE
-	for <webhook@archiver.kernel.org>; Thu,  6 Jan 2022 20:56:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 44FC7C433F5
+	for <webhook@archiver.kernel.org>; Thu,  6 Jan 2022 20:56:17 +0000 (UTC)
 Received: from voyager.superhosting.bg (voyager.superhosting.bg
  [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web10.14734.1641502572798918467
+ by mx.groups.io with SMTP id smtpd.web08.14829.1641502575247429865
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 Jan 2022 12:56:14 -0800
+ Thu, 06 Jan 2022 12:56:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=Kcv9ns5f;
+ dkim=pass header.i=@anavi.org header.s=default header.b=SQF4QpR4;
  spf=permerror,
  err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
  for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
@@ -21,24 +21,25 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=S2OgQ++zSuiB0qpPJDOAwhuxcWK5y3N2JtpmmlqsbE8=; b=Kcv9ns5fvNW4AegQwwtbtXoyMh
-	1n/odupg9bYb7r/e1NNVok1F8jq3ezLF0Q0vmsoxlGrMX4m52FXo6zDw2qQz7XgP548YLboVau61K
-	RPi3dHabEiA0cYQpskr0ynBxP5H4/SLxmsJpwwMXOtrqSv+iJqpmbZ93D0oWNFgEBupM6dvZkcUUG
-	1weqjeItZe29AswW/ZFCenu1hUuYV3u+9AefaYRgChYp+pKm7X4a3A6RSJr+L3xrFoh/+D6cOhod8
-	JuwPbIXP3oR/NzfYLeSOfgRH9QMyXfcm6zAQlQldscvDwAQeepzHv5CeliPYvsJmxhbjJGdV9Gh7U
-	V7dEfS3g==;
+	bh=GdeHiStgagGUE30mJFLo12GreR9iWSPsTaW2fAYOeHg=; b=SQF4QpR4QjmcI4GAwY/gtDjmy+
+	JL5oqjlWIZhlYo15+ufqq9sHOCH9gn6prxjlLvq2+Ivew4hlD6k/LJcLsOSGMDUnAEi+M/FWUQ0+L
+	gWGEzTQEKNWiS4o+vQlwhblr9hZYVVuWCDsY5G8240P4zcDTTIKfdOWa4KW+uSJb0GSCg+GyJoubb
+	mj+2JuTnS19BZ60xv2qif/08FDI4mObIZ8EwwdkLNtdFWB/KDfrPNtMArWaqgJzDVRAbFCWAJRgml
+	5w6qR7jxXZWaSBr7ByqF5BY4Z7tuphk8P0SuugkzsN/U8ZG5xxKUIl3KEaxPvAYkkFWVQJpxk4bSt
+	jjKOXTFg==;
 Received: from lan.nucleusys.com ([92.247.61.126]:44748 helo=lootbox.k.g)
 	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.94.2)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1n5ZpP-000AYs-Dx; Thu, 06 Jan 2022 22:56:13 +0200
+	id 1n5ZpR-000AYs-NK; Thu, 06 Jan 2022 22:56:16 +0200
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/4] python3-isodate: Upgrade 0.6.0 -> 0.6.1
-Date: Thu,  6 Jan 2022 22:55:58 +0200
-Message-Id: <20220106205600.3147781-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/4] python3-pychromecast: Upgrade 10.1.1 ->
+ 10.2.3
+Date: Thu,  6 Jan 2022 22:55:59 +0200
+Message-Id: <20220106205600.3147781-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220106205600.3147781-1-leon.anavi@konsulko.com>
 References: <20220106205600.3147781-1-leon.anavi@konsulko.com>
@@ -60,37 +61,36 @@ X-Source-Dir:
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 06 Jan 2022 20:56:15 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 06 Jan 2022 20:56:17 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94673
+ https://lists.openembedded.org/g/openembedded-devel/message/94674
 
-Upgrade to release 0.6.1:
+Upgrade to release 10.2.3:
 
-- support python 3.10
-- last version to support py 2.7
+- Attempt reconnect on unknown exceptions
+- Handle NotConnected exception when reconnecting
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-isodate_0.6.0.bb => python3-isodate_0.6.1.bb}     | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-isodate_0.6.0.bb => python3-isodate_0.6.1.bb} (65%)
+ ...n3-pychromecast_10.1.1.bb => python3-pychromecast_10.2.3.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pychromecast_10.1.1.bb => python3-pychromecast_10.2.3.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-isodate_0.6.0.bb b/meta-python/recipes-devtools/python/python3-isodate_0.6.1.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-isodate_0.6.0.bb
-rename to meta-python/recipes-devtools/python/python3-isodate_0.6.1.bb
-index dd3954172..2a5dcfca3 100644
---- a/meta-python/recipes-devtools/python/python3-isodate_0.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-isodate_0.6.1.bb
-@@ -2,8 +2,7 @@ SUMMARY = "ISO 8601 date/time parser"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e910b35b0ef4e1f665b9a75d6afb7709"
+diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_10.1.1.bb b/meta-python/recipes-devtools/python/python3-pychromecast_10.2.3.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-pychromecast_10.1.1.bb
+rename to meta-python/recipes-devtools/python/python3-pychromecast_10.2.3.bb
+index 185193992..9bd037981 100644
+--- a/meta-python/recipes-devtools/python/python3-pychromecast_10.1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pychromecast_10.2.3.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
  
--SRC_URI[md5sum] = "0e1203fce27ce65e2d01c5f21c4d428f"
--SRC_URI[sha256sum] = "2e364a3d5759479cdb2d37cce6b9376ea504db2ff90252a2e5b7cc89cc9ff2d8"
-+SRC_URI[sha256sum] = "48c5881de7e8b0a0d648cb024c8062dc84e7b840ed81e864c7614fd3c127bde9"
+-SRC_URI[sha256sum] = "33a47d551ae8b6f93129564828e72e7f4dcb26c9f8812328870cf300ee45438f"
++SRC_URI[sha256sum] = "ddb86c5acdc13e8bdadd2b7f5738fda36b32c1750548f7b629ca8d178f05e0da"
  
- inherit pypi setuptools3
+ PYPI_PACKAGE = "PyChromecast"
  
 -- 
 2.30.2
