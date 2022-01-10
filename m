@@ -2,45 +2,46 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D8514C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C64E6C433FE
 	for <webhook@archiver.kernel.org>; Mon, 10 Jan 2022 19:38:36 +0000 (UTC)
 Received: from voyager.superhosting.bg (voyager.superhosting.bg
  [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web09.36938.1641843514805151623
+ by mx.groups.io with SMTP id smtpd.web10.36860.1641843514811344745
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 10 Jan 2022 11:38:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=trKdphyz;
+ dkim=pass header.i=@anavi.org header.s=default header.b=R4KqfRpy;
  spf=permerror,
  err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
  for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
  (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
-	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
-	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
-	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=95N611K9l8D6W4SfE2wkpaF5U9jw4z5f5OVW9d/q9lA=; b=trKdphyzFsnrGd4CTBx92q8jS3
-	WQWy6U3GXWjSGVqqJJBaU4pDLtTgioX2HHKtyD/lOhdLSy+krJ5WofDoVoQhAk5xEya16uYh1dLwG
-	CVZMsD8N1iVIjAlZAUYtro2WsiJDt+343ViyUM4FSN1Nkbx0tpg41KgHOPdr5RPNsrEaGKdHphsMk
-	4nMY075ng4w14d7X8W7C0ovY3VZglbh+OZQ8doiwy2+uXH6ZywPxx5goIIIumXakvQlXWlkcidhgx
-	TBbI3/CuYdgaB4scMDpv6mCeksFUVErVtHlACkMyWK1vGsvrKD/FFedc/GKuSYns6KWXhXpmuv/89
-	4SurqrNg==;
+	bh=q3+d4IH0PWMUb4L/sCSKOCd1JLmuHiGkp7Dx1HIuFu0=; b=R4KqfRpyvJWvLmSYEkUkgvG/Hi
+	UkWbeKdJlb0F4cU2cwmn9mzOXXnWdTe/VO/OAEOTU4/J1d6467MGdtGrDdv78euX9JxDYCbpLIGxe
+	ouOgY7Q5F84GiUdOci8eLDCgzDjYMK7dY+JnFyvrzGwS6XCr0a4v9Me5lq9hOQLynL17sUs71hjs5
+	5endEsowon6cVKe+pdp/YA6xaeONIx9oa1o02axCsDHJiZ6gJw4VDZ35ONYUmNBsCL9qDYZBJl1nh
+	rk9LqTilHoTqCghgp41fl+6vFufzjPZSMBniySaGWj1Ts/PlYNvTVSBKdoKAjOefex0uEcxhviyFm
+	xDYj5V4w==;
 Received: from lan.nucleusys.com ([92.247.61.126]:51302 helo=lootbox.k.g)
 	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.94.2)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1n70We-0009id-Nt; Mon, 10 Jan 2022 21:38:29 +0200
+	id 1n70Wj-0009id-DH; Mon, 10 Jan 2022 21:38:34 +0200
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-google-api-core: Upgrade 2.2.0 ->
- 2.3.2
-Date: Mon, 10 Jan 2022 21:38:11 +0200
-Message-Id: <20220110193815.103592-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-urllib3: Upgrade 1.26.7 -> 1.26.8
+Date: Mon, 10 Jan 2022 21:38:13 +0200
+Message-Id: <20220110193815.103592-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20220110193815.103592-1-leon.anavi@konsulko.com>
+References: <20220110193815.103592-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-OutGoing-Spam-Status: No, score=-0.5
@@ -61,35 +62,47 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 10 Jan 2022 19:38:36 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94724
+ https://lists.openembedded.org/g/openembedded-devel/message/94726
 
-Upgrade to release 2.3.2:
+Upgrade to release 1.26.8:
 
-- add operations rest client to support long-running operations
-- handle bare 'grpc.Call' in 'from_grpc_error'
+- Added extra message tourllib3.exceptions.ProxyError when urllib3
+  detects that a proxy is configured to use HTTPS but the proxy
+  itself appears to only use HTTP.
+- Added a mention of the size of the connection pool when
+  discarding a connection due to the pool being full.
+- Added explicit support for Python 3.11.
+- Deprecated the Retry.MAX_BACKOFF class property in favor of
+  Retry.DEFAULT_MAX_BACKOFF to better match the rest of the default
+  parameter names. Retry.MAX_BACKOFF is removed in v2.0.
+- Changed location of the vendored ssl.match_hostname function from
+  urllib3.packages.ssl_match_hostname to urllib3.util.ssl_match_hostname
+  to ensure Python 3.10+ compatibility after being repackaged by
+  downstream distributors.
+- Fixed absolute imports, all imports are now relative.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...oogle-api-core_2.2.0.bb => python3-google-api-core_2.3.2.bb} | 2 +-
+ .../{python3-urllib3_1.26.7.bb => python3-urllib3_1.26.8.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-google-api-core_2.2.0.bb => python3-google-api-core_2.3.2.bb} (87%)
+ rename meta-python/recipes-devtools/python/{python3-urllib3_1.26.7.bb => python3-urllib3_1.26.8.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-google-api-core_2.2.0.bb b/meta-python/recipes-devtools/python/python3-google-api-core_2.3.2.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-google-api-core_2.2.0.bb
-rename to meta-python/recipes-devtools/python/python3-google-api-core_2.3.2.bb
-index d6293613b..c43fa4c58 100644
---- a/meta-python/recipes-devtools/python/python3-google-api-core_2.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-google-api-core_2.3.2.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.26.7.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.26.8.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-urllib3_1.26.7.bb
+rename to meta-python/recipes-devtools/python/python3-urllib3_1.26.8.bb
+index 72696749b..c2a51b914 100644
+--- a/meta-python/recipes-devtools/python/python3-urllib3_1.26.7.bb
++++ b/meta-python/recipes-devtools/python/python3-urllib3_1.26.8.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c2823cb995439c984fd62a973d79815c"
+ 
+-SRC_URI[sha256sum] = "4987c65554f7a2dbf30c18fd48778ef124af6fab771a377103da0585e2336ece"
++SRC_URI[sha256sum] = "0e7c33d9a63e7ddfcb86780aac87befc2fbddf46c58dbb487e0855f7ceec283c"
  
  inherit pypi setuptools3
  
--SRC_URI[sha256sum] = "dca67b5e369a5127ec00c8ea02de48517e39c1aad882e2e6d85da8050520cab6"
-+SRC_URI[sha256sum] = "c8889f45cf58deca522888ae1d39b2a25e93e7d1b019ae8cee6456d5c726a40c"
- 
- RDEPENDS:${PN} += "\
-     ${PYTHON_PN}-asyncio \
 -- 
 2.30.2
 
