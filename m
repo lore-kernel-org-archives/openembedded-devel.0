@@ -2,15 +2,15 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B0A2C433EF
-	for <webhook@archiver.kernel.org>; Mon, 10 Jan 2022 16:32:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A4BBC4332F
+	for <webhook@archiver.kernel.org>; Mon, 10 Jan 2022 16:32:09 +0000 (UTC)
 Received: from voyager.superhosting.bg (voyager.superhosting.bg
  [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web11.34318.1641832325375694032
+ by mx.groups.io with SMTP id smtpd.web12.33890.1641832326585620244
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Jan 2022 08:32:06 -0800
+ Mon, 10 Jan 2022 08:32:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=R6YHznFe;
+ dkim=pass header.i=@anavi.org header.s=default header.b=HsdApCJ/;
  spf=permerror,
  err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
  for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
@@ -21,24 +21,24 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=1SyxCCiIy7+FRiSwuOpclS5vFNK6pfAEyHjwGK+YSWY=; b=R6YHznFeYANLZNKRgo4inHGzth
-	sD5Je++n0a5LQiboFr2SqodFqpq8XTM4IKT1UqwfNXjlUXC6bs2S2q9ZhbbX6PDRvTGCgCxhVCg21
-	3yIllxlzuJk9dJjxi2tFECbov9vY+C9hMpplFqrLeUfAPi4ahddQgjXlzStTH+Zm9s90uOf/1MFwL
-	WeRYZ3hbBe56zfbCs2DfmO5Jn3Jn4YCyK1HZuIHWLqETHkWlrwfZaCnwRzfh5XerYiLhBPoIb8WAW
-	w7GWr7SFe25ZUVgHWrBQxL+03vk1UfNet4ZC4ylRyUEyI/NlwK44rPvgQaTZzXfdiXfsApiBUWcXS
-	ReVldtVg==;
+	bh=V6zG5irXCTksmv6CY03G/j+SivqXCZjf4c62TxozwXk=; b=HsdApCJ/jynvCTMvMNv4RB3k+a
+	fNtiHUWBou11qGIwrXSrDsbIlk6IoMCUZ8Rv00BrFypE2sU+x8VPDs9Vz0JeWagt3lMiyhk3S2NW3
+	yQuJBV+isUORxS4CqtypsWi2EKjD9wHHWDDeU4n+p4f9d+nyf61vOrRBfwQCD0uNeXah2kdomqS5H
+	oKs3qZ1SCHMAb8kZuUkhHp/nleKVeDmhqne7V2vuuyD4tdepmbxmU8rD/08K4OLFBXCfsdIzshIG3
+	Wq6gbsr7Jd5GCLIfGY3Ttu/FT/EuCltteyFEtdncFsFWyE9mDAhUg5H3OfZHzMLKA/HETMxbMpEcw
+	/GqIugvA==;
 Received: from lan.nucleusys.com ([92.247.61.126]:51272 helo=lootbox.k.g)
 	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.94.2)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1n6xcH-0009ij-HW; Mon, 10 Jan 2022 18:32:05 +0200
+	id 1n6xcF-0009ij-0v; Mon, 10 Jan 2022 18:32:03 +0200
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-huey: Upgrade 2.4.2 -> 2.4.3
-Date: Mon, 10 Jan 2022 18:31:46 +0200
-Message-Id: <20220110163146.40024-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/5] python3-typeguard: Upgrade 2.13.2 -> 2.13.3
+Date: Mon, 10 Jan 2022 18:31:45 +0200
+Message-Id: <20220110163146.40024-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220110163146.40024-1-leon.anavi@konsulko.com>
 References: <20220110163146.40024-1-leon.anavi@konsulko.com>
@@ -60,36 +60,40 @@ X-Source-Dir:
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Jan 2022 16:32:08 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Jan 2022 16:32:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94720
+ https://lists.openembedded.org/g/openembedded-devel/message/94722
 
-Upgrade to release 2.4.3:
+Upgrade to release 2.13.3:
 
-- Fix compatibility issue with new redis-py
+- Fixed TypeError when using typeguard within exec() (where
+  __module__ is None)
+- Fixed TypedDict causing TypeError: TypedDict does not support
+  instance and class checks on Python 3.8 with standard library
+  (not typing_extensions) typed dicts
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-huey_2.4.2.bb => python3-huey_2.4.3.bb}     | 2 +-
+ ...{python3-typeguard_2.13.2.bb => python3-typeguard_2.13.3.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-huey_2.4.2.bb => python3-huey_2.4.3.bb} (78%)
+ rename meta-python/recipes-devtools/python/{python3-typeguard_2.13.2.bb => python3-typeguard_2.13.3.bb} (87%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-huey_2.4.2.bb b/meta-python/recipes-devtools/python/python3-huey_2.4.3.bb
-similarity index 78%
-rename from meta-python/recipes-devtools/python/python3-huey_2.4.2.bb
-rename to meta-python/recipes-devtools/python/python3-huey_2.4.3.bb
-index 865e9ff77..f8f4062a6 100644
---- a/meta-python/recipes-devtools/python/python3-huey_2.4.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-huey_2.4.3.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5cac039fcc82f01141cc170b48f315d4"
+diff --git a/meta-python/recipes-devtools/python/python3-typeguard_2.13.2.bb b/meta-python/recipes-devtools/python/python3-typeguard_2.13.3.bb
+similarity index 87%
+rename from meta-python/recipes-devtools/python/python3-typeguard_2.13.2.bb
+rename to meta-python/recipes-devtools/python/python3-typeguard_2.13.3.bb
+index b7ae4a32c..21ca43950 100644
+--- a/meta-python/recipes-devtools/python/python3-typeguard_2.13.2.bb
++++ b/meta-python/recipes-devtools/python/python3-typeguard_2.13.3.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/typeguard/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f0e423eea5c91e7aa21bdb70184b3e53"
  
- PYPI_PACKAGE = "huey"
+-SRC_URI[sha256sum] = "7e50071590ab997509aa0977609eb5cf9d73d84c1f416cb4fab78b77a9d15326"
++SRC_URI[sha256sum] = "00edaa8da3a133674796cf5ea87d9f4b4c367d77476e185e80251cc13dfbb8c4"
  
--SRC_URI[sha256sum] = "20683288e27e851f786b38465784c5d0e7e2b93b8791cc826898f9555a320cb4"
-+SRC_URI[sha256sum] = "4fa2f6055d581778c3bcf93fc8c9ce87aecc2a345d5ff35bd955da152c02ef37"
+ inherit pypi setuptools3 ptest
  
- RDEPENDS:${PN} += " \
- 	python3-datetime \
 -- 
 2.30.2
 
