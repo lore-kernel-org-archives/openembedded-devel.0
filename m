@@ -2,15 +2,15 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BA51C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B0A2C433EF
 	for <webhook@archiver.kernel.org>; Mon, 10 Jan 2022 16:32:08 +0000 (UTC)
 Received: from voyager.superhosting.bg (voyager.superhosting.bg
  [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web11.34319.1641832326405580022
+ by mx.groups.io with SMTP id smtpd.web11.34318.1641832325375694032
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Jan 2022 08:32:07 -0800
+ Mon, 10 Jan 2022 08:32:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=OP46VIPN;
+ dkim=pass header.i=@anavi.org header.s=default header.b=R6YHznFe;
  spf=permerror,
  err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
  for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
@@ -21,24 +21,24 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=s+iDCdvnNh/7RwnSly4GakoiUsIG+o9hBoYZlo9ud4Y=; b=OP46VIPNQEgBmge8jBqaCckdEF
-	tn7Dvhh3G03vPdOFZ3laaG1gd0vAQrf8fqMs5/Ikrw47xfxVdIWpa5bvNYk6//wN55UGVT/x/0/uQ
-	OTF737zM3rIbgQ6rtvjjQPLp3Cv/Wx5XLEyyhErCFGubMpobj44YEZVOLSGX9Oyvo7aP0WqQVLDcw
-	FlEiqIk1N2G09PXhBYzNXZgU1fD1BpBEfE8dXlGKEjo6wPL4Eged8dHpGBUAA616YkHshd8jaCbUH
-	UVfyYWL7jBa+6CJlwbJ8T8e8wyAWU/X676e2lAI0EOEa1tcYSKnuh7lsoUhI9O68DlRnSds2cC9fZ
-	KZo5m23A==;
+	bh=1SyxCCiIy7+FRiSwuOpclS5vFNK6pfAEyHjwGK+YSWY=; b=R6YHznFeYANLZNKRgo4inHGzth
+	sD5Je++n0a5LQiboFr2SqodFqpq8XTM4IKT1UqwfNXjlUXC6bs2S2q9ZhbbX6PDRvTGCgCxhVCg21
+	3yIllxlzuJk9dJjxi2tFECbov9vY+C9hMpplFqrLeUfAPi4ahddQgjXlzStTH+Zm9s90uOf/1MFwL
+	WeRYZ3hbBe56zfbCs2DfmO5Jn3Jn4YCyK1HZuIHWLqETHkWlrwfZaCnwRzfh5XerYiLhBPoIb8WAW
+	w7GWr7SFe25ZUVgHWrBQxL+03vk1UfNet4ZC4ylRyUEyI/NlwK44rPvgQaTZzXfdiXfsApiBUWcXS
+	ReVldtVg==;
 Received: from lan.nucleusys.com ([92.247.61.126]:51272 helo=lootbox.k.g)
 	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.94.2)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1n6xcC-0009ij-UA; Mon, 10 Jan 2022 18:32:01 +0200
+	id 1n6xcH-0009ij-HW; Mon, 10 Jan 2022 18:32:05 +0200
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/5] python3-pycocotools: Upgrade 2.0.2 -> 2.0.4
-Date: Mon, 10 Jan 2022 18:31:44 +0200
-Message-Id: <20220110163146.40024-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-huey: Upgrade 2.4.2 -> 2.4.3
+Date: Mon, 10 Jan 2022 18:31:46 +0200
+Message-Id: <20220110163146.40024-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220110163146.40024-1-leon.anavi@konsulko.com>
 References: <20220110163146.40024-1-leon.anavi@konsulko.com>
@@ -62,36 +62,34 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 10 Jan 2022 16:32:08 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94721
+ https://lists.openembedded.org/g/openembedded-devel/message/94720
 
-Upgrade to release 2.0.4:
+Upgrade to release 2.4.3:
 
-- Revamp Python build system to fix multiple build problems
-- Update config.yml
+- Fix compatibility issue with new redis-py
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...thon3-pycocotools_2.0.2.bb => python3-pycocotools_2.0.4.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pycocotools_2.0.2.bb => python3-pycocotools_2.0.4.bb} (76%)
+ .../python/{python3-huey_2.4.2.bb => python3-huey_2.4.3.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-huey_2.4.2.bb => python3-huey_2.4.3.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pycocotools_2.0.2.bb b/meta-python/recipes-devtools/python/python3-pycocotools_2.0.4.bb
-similarity index 76%
-rename from meta-python/recipes-devtools/python/python3-pycocotools_2.0.2.bb
-rename to meta-python/recipes-devtools/python/python3-pycocotools_2.0.4.bb
-index d47b7b563..ec8585e61 100644
---- a/meta-python/recipes-devtools/python/python3-pycocotools_2.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pycocotools_2.0.4.bb
-@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = "file://pycocotools/coco.py;beginline=45;endline=45;md5=12cb5
+diff --git a/meta-python/recipes-devtools/python/python3-huey_2.4.2.bb b/meta-python/recipes-devtools/python/python3-huey_2.4.3.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-huey_2.4.2.bb
+rename to meta-python/recipes-devtools/python/python3-huey_2.4.3.bb
+index 865e9ff77..f8f4062a6 100644
+--- a/meta-python/recipes-devtools/python/python3-huey_2.4.2.bb
++++ b/meta-python/recipes-devtools/python/python3-huey_2.4.3.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5cac039fcc82f01141cc170b48f315d4"
  
- inherit setuptools3 pypi
+ PYPI_PACKAGE = "huey"
  
--SRC_URI[md5sum] = "33858f23c8b99ce8116b70c32f6b6dd9"
--SRC_URI[sha256sum] = "24717a12799b4471c2e54aa210d642e6cd4028826a1d49fcc2b0e3497e041f1a"
-+SRC_URI[sha256sum] = "2ab586aa389b9657b6d73c2b9a827a3681f8d00f36490c2e8ab05902e3fd9e93"
+-SRC_URI[sha256sum] = "20683288e27e851f786b38465784c5d0e7e2b93b8791cc826898f9555a320cb4"
++SRC_URI[sha256sum] = "4fa2f6055d581778c3bcf93fc8c9ce87aecc2a345d5ff35bd955da152c02ef37"
  
- DEPENDS = "python3-cython-native python3-numpy-native virtual/crypt"
- RDEPENDS:${PN} = "python3-matplotlib python3-pillow python3-profile"
+ RDEPENDS:${PN} += " \
+ 	python3-datetime \
 -- 
 2.30.2
 
