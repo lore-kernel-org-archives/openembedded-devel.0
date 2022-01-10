@@ -2,15 +2,15 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A4BBC4332F
-	for <webhook@archiver.kernel.org>; Mon, 10 Jan 2022 16:32:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA0F1C433F5
+	for <webhook@archiver.kernel.org>; Mon, 10 Jan 2022 19:38:36 +0000 (UTC)
 Received: from voyager.superhosting.bg (voyager.superhosting.bg
  [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web12.33890.1641832326585620244
+ by mx.groups.io with SMTP id smtpd.web11.37081.1641843515345224687
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Jan 2022 08:32:08 -0800
+ Mon, 10 Jan 2022 11:38:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=HsdApCJ/;
+ dkim=pass header.i=@anavi.org header.s=default header.b=cONYuyrg;
  spf=permerror,
  err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
  for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
@@ -21,27 +21,27 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=V6zG5irXCTksmv6CY03G/j+SivqXCZjf4c62TxozwXk=; b=HsdApCJ/jynvCTMvMNv4RB3k+a
-	fNtiHUWBou11qGIwrXSrDsbIlk6IoMCUZ8Rv00BrFypE2sU+x8VPDs9Vz0JeWagt3lMiyhk3S2NW3
-	yQuJBV+isUORxS4CqtypsWi2EKjD9wHHWDDeU4n+p4f9d+nyf61vOrRBfwQCD0uNeXah2kdomqS5H
-	oKs3qZ1SCHMAb8kZuUkhHp/nleKVeDmhqne7V2vuuyD4tdepmbxmU8rD/08K4OLFBXCfsdIzshIG3
-	Wq6gbsr7Jd5GCLIfGY3Ttu/FT/EuCltteyFEtdncFsFWyE9mDAhUg5H3OfZHzMLKA/HETMxbMpEcw
-	/GqIugvA==;
-Received: from lan.nucleusys.com ([92.247.61.126]:51272 helo=lootbox.k.g)
+	bh=npxdBJ6RylV1JGMd963mwOafL3eI86RTQn6WW+glm+8=; b=cONYuyrgFBkBKFBCnaKdrcgSQq
+	BB1LFR2fLcf8QDuThlfaj3Cp6XlcIulRegnmmFwwJBDQXouJmVzkBSJqDV/YCkrkCgCN3YGiow/Jy
+	jfv6ZjUHcrhAQQ0tdcWLUYTUIr3EyTQGxNfLt6dqxwH2+8qQxnJ/mytzxi+WR5/GGD08uvJtBKeMa
+	AhCApXBvEvXU3Kfm+FolpNna1mJGRfmG4JMQ5BKOU7WvdPtMucbXcasAyQ9Gw/bY6DoM3kIuW8JbX
+	rKFXWQeiecha6HlQEn72NiGhhy4Yky3IsCuRSNjcdlY9fFfJSL+Nc//kBc5ThN8By4g1M/1qNKPNv
+	8P/S9r7A==;
+Received: from lan.nucleusys.com ([92.247.61.126]:51302 helo=lootbox.k.g)
 	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.94.2)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1n6xcF-0009ij-0v; Mon, 10 Jan 2022 18:32:03 +0200
+	id 1n70Wl-0009id-Rz; Mon, 10 Jan 2022 21:38:36 +0200
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-typeguard: Upgrade 2.13.2 -> 2.13.3
-Date: Mon, 10 Jan 2022 18:31:45 +0200
-Message-Id: <20220110163146.40024-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/5] python3-rdflib: Upgrade 6.0.2 -> 6.1.1
+Date: Mon, 10 Jan 2022 21:38:14 +0200
+Message-Id: <20220110193815.103592-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220110163146.40024-1-leon.anavi@konsulko.com>
-References: <20220110163146.40024-1-leon.anavi@konsulko.com>
+In-Reply-To: <20220110193815.103592-1-leon.anavi@konsulko.com>
+References: <20220110193815.103592-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-OutGoing-Spam-Status: No, score=-0.5
@@ -60,39 +60,42 @@ X-Source-Dir:
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Jan 2022 16:32:09 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Jan 2022 19:38:36 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94722
+ https://lists.openembedded.org/g/openembedded-devel/message/94723
 
-Upgrade to release 2.13.3:
+Upgrade to release 6.1.1:
 
-- Fixed TypeError when using typeguard within exec() (where
-  __module__ is None)
-- Fixed TypedDict causing TypeError: TypedDict does not support
-  instance and class checks on Python 3.8 with standard library
-  (not typing_extensions) typed dicts
+- add support for Python 3.10
+- updates the test suite to pytest (from nose)
+- tidies up a lot of continuous integration
+- gets more tests tested, not skipped
+- implements lots of mypy tests
+- updates several parsers and serializers
+- supports the new HexTuples format!
+- many bug fixes
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-typeguard_2.13.2.bb => python3-typeguard_2.13.3.bb} | 2 +-
+ .../python/{python3-rdflib_6.0.2.bb => python3-rdflib_6.1.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-typeguard_2.13.2.bb => python3-typeguard_2.13.3.bb} (87%)
+ rename meta-python/recipes-devtools/python/{python3-rdflib_6.0.2.bb => python3-rdflib_6.1.1.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-typeguard_2.13.2.bb b/meta-python/recipes-devtools/python/python3-typeguard_2.13.3.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-typeguard_2.13.2.bb
-rename to meta-python/recipes-devtools/python/python3-typeguard_2.13.3.bb
-index b7ae4a32c..21ca43950 100644
---- a/meta-python/recipes-devtools/python/python3-typeguard_2.13.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-typeguard_2.13.3.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/typeguard/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f0e423eea5c91e7aa21bdb70184b3e53"
+diff --git a/meta-python/recipes-devtools/python/python3-rdflib_6.0.2.bb b/meta-python/recipes-devtools/python/python3-rdflib_6.1.1.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-rdflib_6.0.2.bb
+rename to meta-python/recipes-devtools/python/python3-rdflib_6.1.1.bb
+index 49e6d33ab..27f65dced 100644
+--- a/meta-python/recipes-devtools/python/python3-rdflib_6.0.2.bb
++++ b/meta-python/recipes-devtools/python/python3-rdflib_6.1.1.bb
+@@ -2,7 +2,7 @@ SUMMARY = "RDFLib is a pure Python package for working with RDF"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b6cde159c801514e0e45a40cf0a9d3d9"
  
--SRC_URI[sha256sum] = "7e50071590ab997509aa0977609eb5cf9d73d84c1f416cb4fab78b77a9d15326"
-+SRC_URI[sha256sum] = "00edaa8da3a133674796cf5ea87d9f4b4c367d77476e185e80251cc13dfbb8c4"
+-SRC_URI[sha256sum] = "6136ae056001474ee2aff5fc5b956e62a11c3a9c66bb0f3d9c0aaa5fbb56854e"
++SRC_URI[sha256sum] = "8dbfa0af2990b98471dacbc936d6494c997ede92fd8ed693fb84ee700ef6f754"
  
- inherit pypi setuptools3 ptest
+ inherit pypi setuptools3
  
 -- 
 2.30.2
