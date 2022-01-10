@@ -2,15 +2,15 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 08956C433EF
-	for <webhook@archiver.kernel.org>; Mon, 10 Jan 2022 12:21:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 21D69C433F5
+	for <webhook@archiver.kernel.org>; Mon, 10 Jan 2022 14:23:32 +0000 (UTC)
 Received: from voyager.superhosting.bg (voyager.superhosting.bg
  [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web10.30765.1641817306346051940
+ by mx.groups.io with SMTP id smtpd.web09.32271.1641824609835856591
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Jan 2022 04:21:47 -0800
+ Mon, 10 Jan 2022 06:23:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=uXh0CJwG;
+ dkim=pass header.i=@anavi.org header.s=default header.b=FTDKP082;
  spf=permerror,
  err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
  for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
@@ -21,24 +21,24 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
 	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
 	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=ePhjTtaUre7FXOYvkhGGWssGytCAN9SGAMnwZ+gPP6c=; b=uXh0CJwGY9Bllk/d1vspkakgF7
-	H/w10gyAGRc2U78/DfISgAikca98GmeyX4C/AZgOpYLNvTQ/tAJE85hqIiSP8ZNq42xwujMOgzTie
-	vcp3391vCfTFbzwMckA1yrJJ+KZZMYr067n4r8db2CaAgePXf0G+JqQIbSbtOEKMrWY2u8wAME5Vf
-	pni2vCtZifoMnk13X7vVG8gmWOJFachZkAC52VmCsrvIGbVSucGl6G2ZDLCp2s3w6prHp3Ubp5vcD
-	8yzFdnx+10IRMaxa++KXahqWUQUAExRr08fs+9EpNyW3Z5T6rR1LjljQyRGq4F08YJwJiDwAVZQab
-	y87qjgvg==;
-Received: from lan.nucleusys.com ([92.247.61.126]:49174 helo=lootbox.k.g)
+	bh=NChA5M26+9uj3E7l1hlLJquJSALzGzu8Asph5cXD8IM=; b=FTDKP082yK8C7/X+7zxHjDUu65
+	5l1X2XoSwZiMFm5XMiASZqpl0ohWILlr8Es493bUaSRzDM9s+jKKgQURVXiwMY+xDeXSBbNgscLtC
+	ZzT2k+71raCNUpbbYWwNfzJPA5BOb/J8hmzK5KsHGGMapmx5Tu+d8nOpDWPgB3fQXKuAm2Lyaiuao
+	YmxqmqFcbYhAtVOtqbJLAKTJi5p+wcRdKrjXQWey3S76p19/h4rvN7wtF3skzaOv4MmAEJLJzXsj4
+	90rqlNc7W1Ad0QTI0L5rIfClf5reAxTf0GN4VPJMV8k9cNxVYIDtKxZuPU25pI8enNmKRFmlXd1E/
+	9tyDSoBQ==;
+Received: from lan.nucleusys.com ([92.247.61.126]:51240 helo=lootbox.k.g)
 	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.94.2)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1n6ti0-0002R2-BP; Mon, 10 Jan 2022 14:21:44 +0200
+	id 1n6vbn-0002yZ-VP; Mon, 10 Jan 2022 16:23:28 +0200
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCHv2] python3-ujson: Upgrade 5.0.0 -> 5.1.0
-Date: Mon, 10 Jan 2022 14:21:34 +0200
-Message-Id: <20220110122134.3754857-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-paramiko: Upgrade 2.9.1 -> 2.9.2
+Date: Mon, 10 Jan 2022 16:23:17 +0200
+Message-Id: <20220110142318.9591-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -58,82 +58,44 @@ X-Source-Dir:
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Jan 2022 12:21:52 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Jan 2022 14:23:32 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94713
+ https://lists.openembedded.org/g/openembedded-devel/message/94714
 
-Upgrade to release 5.1.0:
+Upgrade to release 2.9.2:
 
-- Strip debugging symbols from Linux binaries
-
-Add a patch in setup.py to disable striping debugging symbols for
-Linux to avoid already-stripped build errors.
+- Enhanced log output when connecting to servers that do not
+  support server-sig-algs extensions, making the new-as-of-2.9
+  defaulting to SHA2 pubkey algorithms more obvious when it
+  kicks in.
+- Connecting to servers which support server-sig-algs but which
+  have no overlap between that list and what a Paramiko client
+  supports, now raise an exception instead of defaulting to
+  rsa-sha2-512 (since the use of server-sig-algs allows us to
+  know what the server supports).
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...up.py-Do-not-strip-debugging-symbols.patch | 29 +++++++++++++++++++
- ...-ujson_5.0.0.bb => python3-ujson_5.1.0.bb} |  3 +-
- 2 files changed, 31 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-ujson/0001-setup.py-Do-not-strip-debugging-symbols.patch
- rename meta-python/recipes-devtools/python/{python3-ujson_5.0.0.bb => python3-ujson_5.1.0.bb} (83%)
+ .../{python3-paramiko_2.9.1.bb => python3-paramiko_2.9.2.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-paramiko_2.9.1.bb => python3-paramiko_2.9.2.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ujson/0001-setup.py-Do-not-strip-debugging-symbols.patch b/meta-python/recipes-devtools/python/python3-ujson/0001-setup.py-Do-not-strip-debugging-symbols.patch
-new file mode 100644
-index 000000000..47da2b8cf
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-ujson/0001-setup.py-Do-not-strip-debugging-symbols.patch
-@@ -0,0 +1,29 @@
-+From aec3b64b0aaea0178b44ea65a204d76696e6a45e Mon Sep 17 00:00:00 2001
-+From: Leon Anavi <leon.anavi@konsulko.com>
-+Date: Mon, 10 Jan 2022 14:04:28 +0200
-+Subject: [PATCH] setup.py: Do not strip debugging symbols
-+
-+Do not strip debugging symbols from Linux binaries to avoid
-+bitbake build errors related to already-stripped.
-+
-+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-+---
-+ setup.py | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/setup.py b/setup.py
-+index 453dc31..962c507 100644
-+--- a/setup.py
-++++ b/setup.py
-+@@ -6,7 +6,7 @@ from setuptools import Extension, setup
-+ dconv_source_files = glob("./deps/double-conversion/double-conversion/*.cc")
-+ dconv_source_files.append("./lib/dconv_wrapper.cc")
-+ 
-+-strip_flags = ["-Wl,--strip-all"] if platform.system() == "Linux" else []
-++strip_flags = []
-+ 
-+ module1 = Extension(
-+     "ujson",
-+-- 
-+2.30.2
-+
-diff --git a/meta-python/recipes-devtools/python/python3-ujson_5.0.0.bb b/meta-python/recipes-devtools/python/python3-ujson_5.1.0.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-ujson_5.0.0.bb
-rename to meta-python/recipes-devtools/python/python3-ujson_5.1.0.bb
-index fb1bcd761..6c1bf7e82 100644
---- a/meta-python/recipes-devtools/python/python3-ujson_5.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-ujson_5.1.0.bb
-@@ -4,12 +4,13 @@ DESCRIPTION = "UltraJSON is an ultra fast JSON encoder and decoder written in pu
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=10fa10456417c0252bcb8a498e498ffe"
+diff --git a/meta-python/recipes-devtools/python/python3-paramiko_2.9.1.bb b/meta-python/recipes-devtools/python/python3-paramiko_2.9.2.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-paramiko_2.9.1.bb
+rename to meta-python/recipes-devtools/python/python3-paramiko_2.9.2.bb
+index 8cf004aa3..0a54efde8 100644
+--- a/meta-python/recipes-devtools/python/python3-paramiko_2.9.1.bb
++++ b/meta-python/recipes-devtools/python/python3-paramiko_2.9.2.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/paramiko/paramiko/"
+ LICENSE = "LGPL-2.1"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=fd0120fc2e9f841c73ac707a30389af5"
  
--SRC_URI[sha256sum] = "3ff7242816b1d22c08c04c4c6db0f6ba7c16cd624ce38534c1025defa011e50e"
-+SRC_URI[sha256sum] = "a88944d2f99db71a3ca0c63d81f37e55b660edde0b07216fb65a3e46403ef004"
+-SRC_URI[sha256sum] = "a1fdded3b55f61d23389e4fe52d9ae428960ac958d2edf50373faa5d8926edd0"
++SRC_URI[sha256sum] = "944a9e5dbdd413ab6c7951ea46b0ab40713235a9c4c5ca81cfe45c6f14fa677b"
  
- inherit pypi ptest setuptools3
+ PYPI_PACKAGE = "paramiko"
  
- SRC_URI += " \
-     file://run-ptest \
-+    file://0001-setup.py-Do-not-strip-debugging-symbols.patch \
- "
- 
- DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
 -- 
 2.30.2
 
