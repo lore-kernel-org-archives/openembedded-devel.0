@@ -2,147 +2,114 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 71C41C433F5
-	for <webhook@archiver.kernel.org>; Tue, 11 Jan 2022 19:26:37 +0000 (UTC)
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
- [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web11.12852.1641929196645635020
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9BF21C433FE
+	for <webhook@archiver.kernel.org>; Tue, 11 Jan 2022 19:29:44 +0000 (UTC)
+Received: from mail-qv1-f48.google.com (mail-qv1-f48.google.com
+ [209.85.219.48])
+ by mx.groups.io with SMTP id smtpd.web08.12651.1641929383995068917
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Jan 2022 11:26:36 -0800
+ Tue, 11 Jan 2022 11:29:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=lVGbdL4l;
- spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id
- lr15-20020a17090b4b8f00b001b19671cbebso698057pjb.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=MQJLL2Js;
+ spf=pass (domain: gmail.com, ip: 209.85.219.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f48.google.com with SMTP id a8so409462qvx.2
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Jan 2022 11:26:36 -0800 (PST)
+ Tue, 11 Jan 2022 11:29:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Aahuuc9tzNrwDKOJ82nACP1fwYadHLnk/WudDngDk6o=;
-        b=lVGbdL4lq2fqkk4/+/31OE4oVao76MNvNm0hHYqGL28U+g3lAp+2hFRzXe/5Qv1Hlv
-         LDg5kfFoQHox+oc3A8SD4jxiAxNxHn5VrEPNiOq8E+yrPXBm+LUVmyatf6PJ6P8dbk36
-         dyx4gXj0y+BhcQnGrxIxPW5lMBER7WU/dJIGASdpqyL8bpoyz3rXpVqFX9qJYLfT0p1A
-         EUQ1BUzTny+aCyBsR63dp870KFSkWahQWBnrSa1lVWt011sh5VURXFBtYa12X9xq0/9S
-         DgIa7VcNNnw8qqTseTOfoM9u2yng1maPB0TX0HnTRJGVcUpJK01+wyj/UhMIpy1cs25O
-         Pdfw==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=imPVkVyCcXUWcIWDGClwWhNTPMeZPFC/XlVfSIrDzb0=;
+        b=MQJLL2Js8KH+1/JFmmyFoe0tC6w6MmBErI3qyU/Xc/Z5PoBEtezMJexmbj8sDqnxZG
+         /BC2oz0nsqsMjasYbzIVxDdeE/vA4tgI0xIgwC7bGSODSIzguMnMM8BN52GIPinX3TUl
+         5r6MfoHWrv0yGPNO+uc5yqqyU9nCxxMtyKeEBHYbz3ZTsqAAgtFTsU2HaOe8nQeuNSzy
+         YXxM8+813OXp8/Afm8oCTA+cdJ47W+DTmuqtDy0BAX+BZaWJVJnWLH16hrVwnbkj9JY1
+         cYxcr8J4hriG/Hg4Kjegst1/8K3mZuQiWOBwbKBnmLCDz/CQnsPPxwJblpP+BFdHk736
+         DuEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Aahuuc9tzNrwDKOJ82nACP1fwYadHLnk/WudDngDk6o=;
-        b=anKE67Cb3u6jztZOaNyT6Plm2zUQlT04uq2Cg7BI9OAC22eWhqRk0nU3HKeEHqyZIB
-         h/2m2tsqRbZRTzbHIimJ4SOWQEuT5nW+AZoGPpgBPlrjr1xpy0wCFOV0qnVMjxj/0QKl
-         th7fUF0EXA1wnwJT9NT1mpEKUCtPqTwTO9JAh3/xiNJ79PYzmwyusxpvLsJf2ckkILxs
-         OqzAUuXaBSZw6t8bdnMYk0UB4+j4W7ximkY/Lpnc+lt7FeNpgh/AJMREJMyo3OS8RONB
-         H06lmUj0Bm2RUJ2HYpnafTk/syVkGpJwrrVOGN5Nc9/v0sEgPo5vLdg4EWDK3txmP3s4
-         CbgA==
-X-Gm-Message-State: AOAM531kwwDSZxkiUtSVMBIOhXJWmb8oVjZFd5tjTgLstU1q+XD/b+Vl
-	FYLOthlw5aZfewT/UPuDLz+XN357pN4Mvg==
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=imPVkVyCcXUWcIWDGClwWhNTPMeZPFC/XlVfSIrDzb0=;
+        b=I7rprHdDas8ei6mxggmgDiDLqtMEsmKlHiNgl/3KpJMqjkzJ/TZfl3B23GbNYfxOS0
+         KtHFrimhQWpdlIGqvXBlyWabbhNE/hmQF4/3gRwI8lU2qmweuGCgghEAn8GGYd+pCBUm
+         GdGWnGc11IxLt4gQqgf5A+lXNFcLWU4sgZfjxzqfaqkjQhBoxz7Ian19BbiEgPYzQrPD
+         g+aDQlwNoYqujg1N+94HYxrgwvcMrlOlM4+ykMSusUBmDDjjIyayHj090lBgjFoM+euO
+         83chw0cfwcsWtPaiah1IBnJVGuvzxzKRoMe5cVwLVUFuj9RK9vktvJJKLbPakvMERU44
+         4p8A==
+X-Gm-Message-State: AOAM532Vop9cEvwRVLlSqNiCtlHcwMycuWjiLM8mfVdo5kALsAcWEydO
+	wGQ+/VvC2BgoyF1itw7kp3CTOqkRTBHxIKDIb0A=
 X-Google-Smtp-Source: 
- ABdhPJzk8zk2S/xsVEXPQ69265Oab8fgrlcBr0EdZ4UIcHrAIilihBL0mf7ylmSiqbp67REv9kV+Dw==
-X-Received: by 2002:a17:90a:9d86:: with SMTP id
- k6mr4857710pjp.98.1641929195844;
-        Tue, 11 Jan 2022 11:26:35 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b5e3])
-        by smtp.gmail.com with ESMTPSA id
- h21sm8474710pfo.38.2022.01.11.11.26.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 11 Jan 2022 11:26:35 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Lei Maohui <leimaohui@fujitsu.com>
-Subject: [meta-oe][PATCH] pcp: Fix build to exclude qt5
-Date: Tue, 11 Jan 2022 11:26:33 -0800
-Message-Id: <20220111192633.1395522-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ ABdhPJyIR6+JEY+RrA354VhJ597ZdC5X44LwG0zD0Is+NH89DwXEQBDrvvrGsg6HND6EA9hLh2YVDKLoh42BHY+WNwU=
+X-Received: by 2002:a05:6214:1cca:: with SMTP id
+ g10mr5297008qvd.36.1641929382984;
+ Tue, 11 Jan 2022 11:29:42 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20220111121548.108735-1-schnitzeltony@gmail.com>
+ <20220111121548.108735-13-schnitzeltony@gmail.com>
+In-Reply-To: <20220111121548.108735-13-schnitzeltony@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 11 Jan 2022 11:29:17 -0800
+Message-ID: 
+ <CAMKF1spZ5MALAcn_y-syuA+h9X7F_D+9HP8e-xKA1btb9iEEdA@mail.gmail.com>
+Subject: Re: [oe] [PATCH 13/14] thunar: upgrade 4.16.8 -> 4.16.9
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 11 Jan 2022 19:26:37 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 11 Jan 2022 19:29:44 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94753
+ https://lists.openembedded.org/g/openembedded-devel/message/94754
 
-Pass right options to ar
+I am seeing this with master-next of oe-core
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Lei Maohui <leimaohui@fujitsu.com>
----
- meta-oe/recipes-support/pcp/pcp.inc           |  2 ++
- .../pcp/pcp/pass-options-to-AR.patch          | 29 +++++++++++++++++++
- meta-oe/recipes-support/pcp/pcp_5.3.5.bb      |  3 +-
- 3 files changed, 33 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/pcp/pcp/pass-options-to-AR.patch
+https://errors.yoctoproject.org/Errors/Details/622306/
 
-diff --git a/meta-oe/recipes-support/pcp/pcp.inc b/meta-oe/recipes-support/pcp/pcp.inc
-index f6f111b0e8..d50e7b0910 100644
---- a/meta-oe/recipes-support/pcp/pcp.inc
-+++ b/meta-oe/recipes-support/pcp/pcp.inc
-@@ -29,4 +29,6 @@ EXTRA_OECONF:append = " --with-dstat-symlink=yes --with-infiniband=no \
-                 --with-docdir=${docdir} \
-                 "
- 
-+PACKAGECONFIG[qt5] = "--with-qt=yes --with-qt3d=yes,--with-qt=no --with-qt3d=no,qtbase qt3d"
- 
-+PACKAGECONFIG ?= ""
-diff --git a/meta-oe/recipes-support/pcp/pcp/pass-options-to-AR.patch b/meta-oe/recipes-support/pcp/pcp/pass-options-to-AR.patch
-new file mode 100644
-index 0000000000..6fa864cd21
---- /dev/null
-+++ b/meta-oe/recipes-support/pcp/pcp/pass-options-to-AR.patch
-@@ -0,0 +1,29 @@
-+Do not pass cr option
-+
-+These options are already coming from builddefs
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+--- a/src/include/builddefs.in
-++++ b/src/include/builddefs.in
-+@@ -167,7 +167,7 @@ OBJECTS = $(ASFILES:.s=.o) \
-+ 
-+ #NB: don't override $(MAKE); gnumake sets it well, propagating -j etc.
-+ #MAKE	= @make@
-+-AR	= @ar@
-++AR	= @ar@ cqs
-+ CC	= @cc@
-+ CXX	= @cxx@
-+ LD	= @ld@
-+--- a/src/include/buildrules
-++++ b/src/include/buildrules
-+@@ -93,7 +93,7 @@ $(STATICLIBTARGET) : $(SUBDIRS) $(OBJECT
-+ ifeq ($(TARGET_OS), darwin)
-+ 	libtool -static -o $(STATICLIBTARGET) $?
-+ else
-+-	$(AR) cr $(STATICLIBTARGET) $?
-++	$(AR) $(STATICLIBTARGET) $?
-+ endif
-+ endif
-+ 
-diff --git a/meta-oe/recipes-support/pcp/pcp_5.3.5.bb b/meta-oe/recipes-support/pcp/pcp_5.3.5.bb
-index 2dafab1b57..cdf506577a 100644
---- a/meta-oe/recipes-support/pcp/pcp_5.3.5.bb
-+++ b/meta-oe/recipes-support/pcp/pcp_5.3.5.bb
-@@ -11,11 +11,12 @@ DEPENDS += "perl-native bison-native flex-native python3-native python3-setuptoo
- 
- 
- SRC_URI += "file://0001-Remove-unsuitble-part-for-cross-compile.patch \
-+            file://pass-options-to-AR.patch \
-            "
- 
- export PCP_DIR="${RECIPE_SYSROOT_NATIVE}"
- #export PCP_RUN_DIR="${RECIPE_SYSROOT_NATIVE}"
--EXTRA_OEMAKE = "CC="${CC}" LD="${LD}" AR="${AR}""
-+EXTRA_OEMAKE = "CC="${CC}" LD="${LD}""
- inherit useradd systemd 
- 
- SYSTEMD_AUTO_ENABLE:${PN} = "enable"
--- 
-2.34.1
-
+On Tue, Jan 11, 2022 at 4:16 AM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m> wrote:
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> ---
+>  .../recipes-xfce/thunar/{thunar_4.16.8.bb =3D> thunar_4.16.9.bb}  | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-xfce/recipes-xfce/thunar/{thunar_4.16.8.bb =3D> thunar_4.16.=
+9.bb} (89%)
+>
+> diff --git a/meta-xfce/recipes-xfce/thunar/thunar_4.16.8.bb b/meta-xfce/r=
+ecipes-xfce/thunar/thunar_4.16.9.bb
+> similarity index 89%
+> rename from meta-xfce/recipes-xfce/thunar/thunar_4.16.8.bb
+> rename to meta-xfce/recipes-xfce/thunar/thunar_4.16.9.bb
+> index 41963b996..169480ae8 100644
+> --- a/meta-xfce/recipes-xfce/thunar/thunar_4.16.8.bb
+> +++ b/meta-xfce/recipes-xfce/thunar/thunar_4.16.9.bb
+> @@ -8,7 +8,7 @@ inherit xfce gobject-introspection features_check mime-xd=
+g
+>
+>  REQUIRED_DISTRO_FEATURES =3D "x11"
+>
+> -SRC_URI[sha256sum] =3D "038ca228d220cd0ba1b7b76465d8a51f2433ad1f74648d1d=
+291daa0a24cb3195"
+> +SRC_URI[sha256sum] =3D "520bf318eef8bc792db38ae4af343b648f87d4b8d66f5b5d=
+6f092e15264ee5af"
+>
+>  PACKAGECONFIG ??=3D ""
+>  PACKAGECONFIG[pcre] =3D "--enable-pcre,--disable-pcre,libpcre"
+> --
+> 2.31.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#94742): https://lists.openembedded.org/g/openembedded=
+-devel/message/94742
+> Mute This Topic: https://lists.openembedded.org/mt/88347029/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
