@@ -1,79 +1,90 @@
-Return-Path: <ross@burtonini.com>
+Return-Path: <marex@denx.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5600BC433FE
-	for <webhook@archiver.kernel.org>; Tue, 11 Jan 2022 20:49:44 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
- [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.web12.13976.1641934183230066117
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3166C433F5
+	for <webhook@archiver.kernel.org>; Tue, 11 Jan 2022 22:47:39 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by mx.groups.io with SMTP id smtpd.web08.15441.1641941257728157349
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Jan 2022 12:49:43 -0800
+ Tue, 11 Jan 2022 14:47:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@burtonini-com.20210112.gappssmtp.com header.s=20210112
- header.b=HoD+mYLQ;
- spf=pass (domain: burtonini.com, ip: 209.85.128.52,
- mailfrom: ross@burtonini.com)
-Received: by mail-wm1-f52.google.com with SMTP id
- n19-20020a7bc5d3000000b003466ef16375so2215738wmk.1
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Jan 2022 12:49:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=burtonini-com.20210112.gappssmtp.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=oVHFtGkg65C4hqq+vdgr+I/fBF8OCdr/h6e30WOzyr4=;
-        b=HoD+mYLQxltkuGkS5Xcgv0lgsZ4qtMVqOmO4d4KcqaPd6RXC4is2ZALcLlOTQ3Us+h
-         jJrKbrU0guUdN9CPkgOtC0PL/2w6dxnxtPQwgQlTQH0MDkZDvNWQthUVBdwfC3js1dSK
-         fj/tL/LuvOhQ7GebXRGvbv09TR5qcnRNVbLaokSH8TDc6HEwZ7tuKOVm7PGJL0rU2BYk
-         /k9PmRl9YdjH66dEGJwYAVRzdPqrWBTBJHIYJHzUjDHlE9hdF6JM3g52zUHsFEtBbmKf
-         kluIFijMLRiLyx0ZE6KUAw7SMGqUG0EfMFVDDVE2WYiT871ZDqKfQZb4u8JEvv8hgQZi
-         XV9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=oVHFtGkg65C4hqq+vdgr+I/fBF8OCdr/h6e30WOzyr4=;
-        b=IM3tXIUTOX2Ar4KDW1c1Jqkisetn1u3+n6LoWmxtp4p/865s6gVMCHMgsGf6Ypyf4G
-         5c88nVbLf79KMvwOysJrmKYnq3+pAPcXVsVjpgOKjzgi0CuxRsWM0f9WmzJ135B3vBZy
-         bbUQPVlb119bXZyPqAt3V6JPu7Hq8/ZRbYnTQ8kRUQFc+rbKMvAeURakJgl4MV/HYWXM
-         jEzKa6uCokhY7IzQftzzkGyY5q1vvLlQyeq8WX1LJBr0/g7N8AABrZ8OyNpWk5RVks+N
-         4lgj0Gn9PV+RH7m7xY3a2EAATsch8UUN0D9GzpR69673bTX7harLffNCWrSlzPW6GNpF
-         qfxQ==
-X-Gm-Message-State: AOAM533FxAXjNQXJS/ndzmxQJT+5TY/DGoZGMbvUf8zuKZDSCHl6iBNk
-	7UHozMRYEw61EY5VIbwW++1poM+HkTze8sHivQyWlBaqsUM=
-X-Google-Smtp-Source: 
- ABdhPJxGI0rdvGSNlBePOmNprRoaDZ4ZrX3xE/J4KixAjWt/22fTU+H3N+VX+SfXB0ByAX3RBzQ0F9xbJKionK/p3Vk=
-X-Received: by 2002:a05:600c:154f:: with SMTP id
- f15mr4073190wmg.62.1641934181534;
- Tue, 11 Jan 2022 12:49:41 -0800 (PST)
+ dkim=fail reason="body hash did not verify" header.i=@denx.de
+ header.s=phobos-20191101 header.b=uqEYYOS+;
+ spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
+Received: from tr.lan (ip-89-176-112-137.net.upcbroadband.cz [89.176.112.137])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marex@denx.de)
+	by phobos.denx.de (Postfix) with ESMTPSA id 8FC4480394;
+	Tue, 11 Jan 2022 23:47:34 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1641941254;
+	bh=cBOz/Z1V9WbKQW8c/8D6HCmR5WxENzdabsezjo16YWE=;
+	h=From:To:Cc:Subject:Date:From;
+	b=uqEYYOS+5eDy+AMWFVGyUEg1c9kADqWQiGL2PrE+/UBiqH8YL7zE95HgWBZu/B0Wc
+	 FNvdK+t7kITDmuuLcFaIQAQgV+IUkknpYV0Mqr58316CiN2EcjGSq9FaU++rPo4K2p
+	 thy377/14Jxg9I4U84wvRwDmQNtpC5QHX1bWNYKp/bg5j2ujgYHYDlceY/V+hFRpIv
+	 VCn1U4+KIzFv+qKpt1aVwv3FGHxzUJkYQRohsGSpFRfpVSk1HEmIT0mr5CkM/j6MjL
+	 W9gVM+6PaMibRNWU4LhkGqfpQ5vMAD3fDqpfxmb03uKkpfbUnx8HEpyt+VRyxe5u4z
+	 g4nHvy6ptetdA==
+From: Marek Vasut <marex@denx.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: raj.khem@gmail.com,
+	Marek Vasut <marex@denx.de>
+Subject: [meta-oe][dunfell][PATCH 1/5] freerdp: Upgrade to 2.2.0
+Date: Tue, 11 Jan 2022 23:47:10 +0100
+Message-Id: <20220111224714.1289840-1-marex@denx.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20220111202225.1526283-1-raj.khem@gmail.com>
- <20220111202225.1526283-3-raj.khem@gmail.com>
-In-Reply-To: <20220111202225.1526283-3-raj.khem@gmail.com>
-From: Ross Burton <ross@burtonini.com>
-Date: Tue, 11 Jan 2022 20:49:30 +0000
-Message-ID: 
- <CAAnfSTtfcUFcy82GvXQZkNfe2fcPqkJ+82yCX5y16gzkHNRbVA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 3/3] influxdb: Enable network during
- do_compile
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+X-Virus-Scanned: clamav-milter 0.103.2 at phobos.denx.de
+X-Virus-Status: Clean
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 11 Jan 2022 20:49:44 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 11 Jan 2022 22:47:39 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94760
+ https://lists.openembedded.org/g/openembedded-devel/message/94761
 
-On Tue, 11 Jan 2022 at 20:22, Khem Raj <raj.khem@gmail.com> wrote:
-> +do_compile[network] = "1"
+From: Khem Raj <raj.khem@gmail.com>
 
-Can you add a comment making it clear in the recipe why this is here
-and that it is a short-term measure?
+(cherry picked from commit f751dcf81a18fe817b40e755a2ba3f54a74d1e02)
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+ .../freerdp/{freerdp_git.bb =3D> freerdp_2.2.0.bb}            | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-support/freerdp/{freerdp_git.bb =3D> freerdp_2.2.=
+0.bb} (94%)
 
-(ditto for the other patches)
+diff --git a/meta-oe/recipes-support/freerdp/freerdp_git.bb b/meta-oe/rec=
+ipes-support/freerdp/freerdp_2.2.0.bb
+similarity index 94%
+rename from meta-oe/recipes-support/freerdp/freerdp_git.bb
+rename to meta-oe/recipes-support/freerdp/freerdp_2.2.0.bb
+index 309acfbff..90ede1297 100644
+--- a/meta-oe/recipes-support/freerdp/freerdp_git.bb
++++ b/meta-oe/recipes-support/freerdp/freerdp_2.2.0.bb
+@@ -11,12 +11,10 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef9638=
+7f14655fc854ddc3c6bd57"
+ inherit pkgconfig cmake gitpkgv
+=20
+ PE =3D "1"
+-PV =3D "2.0.0+gitr${SRCPV}"
+ PKGV =3D "${GITPKGVTAG}"
+=20
+-# 2.0.0 release
+-SRCREV =3D "5ab2bed8749747b8e4b2ed431fd102bc726be684"
+-SRC_URI =3D "git://github.com/FreeRDP/FreeRDP.git;branch=3Dmaster;protoc=
+ol=3Dhttps \
++SRCREV =3D "d2ba84a6885f57674098fe8e76c5f99d880e580d"
++SRC_URI =3D "git://github.com/FreeRDP/FreeRDP.git;branch=3Dstable-2.0;pr=
+otocol=3Dhttps \
+     file://winpr-makecert-Build-with-install-RPATH.patch \
+ "
+=20
+--=20
+2.34.1
 
-Ross
 
