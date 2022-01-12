@@ -1,120 +1,91 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 64E46C433F5
-	for <webhook@archiver.kernel.org>; Wed, 12 Jan 2022 17:28:10 +0000 (UTC)
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com
- [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.web11.350.1642008489327725911
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 74D81C4332F
+	for <webhook@archiver.kernel.org>; Wed, 12 Jan 2022 18:35:47 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg
+ [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web09.1290.1642012545496809962
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Jan 2022 09:28:09 -0800
+ Wed, 12 Jan 2022 10:35:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=FolboG2n;
- spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f49.google.com with SMTP id
- y16-20020a17090a6c9000b001b13ffaa625so13517893pjj.2
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Jan 2022 09:28:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :references:from:organization:in-reply-to:content-transfer-encoding;
-        bh=XuCVBBls2m+vTALwBlqnuoBEsBhOp1LevYsBmBR/NSs=;
-        b=FolboG2n11TQibQ7AigecRDONXysTUJoo4dqilM/jx/Cly4JOv8ytwCydFLHmTRnL+
-         +JKySK/PB7CCTN0QdJadjYCYQd2UpbARmM17kTpND/c4Oz//78RRl280c73/izlAKXur
-         qIZIM5T8yLl9RfHqRb2AEq7iJyuZ12u+ln1LJOX6l3Vq2y8WYpy3bU6boVb+Zd2WD8LY
-         6HCItJ091uCbYaJU4oDqS/hA/cSu5lTq4wBdh7dIUZGyU7ahK/nIYjaWrczRSuViG6LY
-         TTpKLkJrjrM6ieiNg0ut2toifpqP2TIpEtGwAr01LK+pDuzG8n0Uo/fIhlzkFMNyZRSX
-         7dhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:references:from:organization:in-reply-to
-         :content-transfer-encoding;
-        bh=XuCVBBls2m+vTALwBlqnuoBEsBhOp1LevYsBmBR/NSs=;
-        b=mbbdGZE1BQeUtK9UHOAuzZ/OpXHImTBdbXBrJVqbv2OARAb+PVNfN4SXTvttlQz5Va
-         C4bK75aBesHpXb59uyUmxhWiETe2rvCEN1E54iauIoGtJrGOwVT/wxuj1XmuMVAel2oi
-         eEQPi3g3lXKzqJfFFIYVzgVmrmu1yjoBtTEuVIFzrYLR9WwP3c71z6wnphUjAQz26X3k
-         1tbOLZlKIkp8w7v5tj/MzS+JPe33+17Kw0imCQJqNdjvs5gIaMk5Iam4bQ72L77oags1
-         wHrRjbfQxp+3hbosljulg7hbkbnpCWmfkhZpKAkHtEbSrK2q95kptxErBQiiykZeSb/a
-         EDjA==
-X-Gm-Message-State: AOAM530BCbulUiLayYfSIy8mrx47tfmWt3usVpQUXeICUD/Ghjm3CncQ
-	+Ss3Z+9yU8U67hs1xGMeUjs=
-X-Google-Smtp-Source: 
- ABdhPJymZAXRKM8T4fpO9qDtC/Wlb1oToHtlPawjMQbRb6KxW44NZLCCx2v3M9+u3PskvzyYtvl3Cg==
-X-Received: by 2002:a17:90b:3b49:: with SMTP id
- ot9mr649940pjb.110.1642008488823;
-        Wed, 12 Jan 2022 09:28:08 -0800 (PST)
-Received: from ?IPV6:2601:646:9200:a0f0:9932:4bf6:8df9:9596?
- ([2601:646:9200:a0f0:9932:4bf6:8df9:9596])
-        by smtp.gmail.com with ESMTPSA id
- w5sm197369pfu.214.2022.01.12.09.28.08
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 12 Jan 2022 09:28:08 -0800 (PST)
-Message-ID: <dd63dd36-1b3d-7f1a-b77d-b090f02ba93b@gmail.com>
-Date: Wed, 12 Jan 2022 09:28:07 -0800
+ dkim=pass header.i=@anavi.org header.s=default header.b=cW7aFL6I;
+ spf=permerror,
+ err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
+ for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
+ (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=+wp2cBMJsTJBQEGhOaah7ssH0UdtHc9ysO7CWdRIvzA=; b=cW7aFL6I6XO2rf8k6E74/Yw4Vv
+	qpVDlgdSE/fxdiGbG2deGmTFfENnfKoKn74Gq50hCs1exYoiiHIVNPPqOCS3wxX474hRk8rxqko4G
+	yxcA4zhP+viviBAGGqeLGwTxbITaKNuvnef5P0CMwK7XqHB+kgHIcAdeas+S8Sf4BJOPHp4axGeGv
+	7obsx4ODmaPyRzqEwVaMHpkft53Ot4tWOO6Kk+9e7kkJqLAP60IUJ+08Ajok1BeTUVcSuLvL34q+S
+	IN5ppmg4TI17PgWDL7DWx0CfTkgST6koYsezcSksxj8euLX7k5hGQraba7CrNWlc7YQwdT7jEHl3T
+	uxeFj24A==;
+Received: from lan.nucleusys.com ([92.247.61.126]:48040 helo=tone.k.g)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.94.2)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1n7iVB-000Bc0-1f; Wed, 12 Jan 2022 20:35:43 +0200
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-asyncio-throttle: Add recipe
+Date: Wed, 12 Jan 2022 20:35:27 +0200
+Message-Id: <20220112183531.2712341-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.5.0
-Subject: Re: [meta-oe][master][PATCH 1/2] nodejs_12.21.0.bb: only handle npm
- if configured
-Content-Language: en-US
-To: Nisha Parrakat <nishaparrakat@gmail.com>,
- openembedded-devel@lists.openembedded.org
-References: <20220112091529.4853-1-nishaparrakat@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-In-Reply-To: <20220112091529.4853-1-nishaparrakat@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-OutGoing-Spam-Status: No, score=-1.0
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
+ leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Jan 2022 17:28:10 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Jan 2022 18:35:47 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94788
+ https://lists.openembedded.org/g/openembedded-devel/message/94789
 
+Add asyncio-throttle: a simple, easy-to-use throttler for asyncio.
 
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../python/python3-asyncio-throttle_1.0.2.bb             | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-asyncio-throttle_1.0.2.bb
 
-On 1/12/22 1:15 AM, Nisha Parrakat wrote:
-> npm-cli.js should be symlinked only when the file is present
-> the file may not be available if the configure option is --without-npm
-> 
-> Signed-off-by: Nisha Parrakat <nishaparrakat@gmail.com>
-> ---
->   meta-oe/recipes-devtools/nodejs/nodejs_12.21.0.bb | 8 ++++++--
+diff --git a/meta-python/recipes-devtools/python/python3-asyncio-throttle_1.0.2.bb b/meta-python/recipes-devtools/python/python3-asyncio-throttle_1.0.2.bb
+new file mode 100644
+index 000000000..1f907511a
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-asyncio-throttle_1.0.2.bb
+@@ -0,0 +1,9 @@
++DESCRIPTION = "Simple, easy-to-use throttler for asyncio."
++HOMEPAGE = "https://github.com/hallazzang/asyncio-throttle"
++SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=c7906e56b70808e1ade6ca05e0bb48d5"
++
++SRC_URI[sha256sum] = "2675282e99d9129ecc446f917e174bc205c65e36c602aa18603b4948567fcbd4"
++
++inherit pypi setuptools3
+-- 
+2.30.2
 
-
-we do not have nodejs 12.21.0 on master, is it meant for some other 
-release branch ?
-
->   1 file changed, 6 insertions(+), 2 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_12.21.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_12.21.0.bb
-> index b9e382177..22191a157 100644
-> --- a/meta-oe/recipes-devtools/nodejs/nodejs_12.21.0.bb
-> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_12.21.0.bb
-> @@ -133,7 +133,9 @@ do_install_append_class-native() {
->       # /usr/bin/npm is symlink to /usr/lib/node_modules/npm/bin/npm-cli.js
->       # use sed on npm-cli.js because otherwise symlink is replaced with normal file and
->       # npm-cli.js continues to use old shebang
-> -    sed "1s^.*^#\!/usr/bin/env node^g" -i ${D}${exec_prefix}/lib/node_modules/npm/bin/npm-cli.js
-> +    if [[ -f "${D}${exec_prefix}/lib/node_modules/npm/bin/npm-cli.js" ]]; then
-> +        sed "1s^.*^#\!/usr/bin/env node^g" -i ${D}${exec_prefix}/lib/node_modules/npm/bin/npm-cli.js
-> +    fi
->   
->       # Install the native binaries to provide it within sysroot for the target compilation
->       install -d ${D}${bindir}
-> @@ -147,7 +149,9 @@ do_install_append_class-native() {
->   }
->   
->   do_install_append_class-target() {
-> -    sed "1s^.*^#\!${bindir}/env node^g" -i ${D}${exec_prefix}/lib/node_modules/npm/bin/npm-cli.js
-> +    if [[ -f "${D}${exec_prefix}/lib/node_modules/npm/bin/npm-cli.js" ]]; then
-> +        sed "1s^.*^#\!${bindir}/env node^g" -i ${D}${exec_prefix}/lib/node_modules/npm/bin/npm-cli.js
-> +    fi
->   }
->   
->   PACKAGES =+ "${PN}-npm"
 
