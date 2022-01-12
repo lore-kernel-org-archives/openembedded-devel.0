@@ -1,194 +1,218 @@
-Return-Path: <marex@denx.de>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E69FC433EF
-	for <webhook@archiver.kernel.org>; Tue, 11 Jan 2022 22:47:40 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by mx.groups.io with SMTP id smtpd.web10.15469.1641941258987425941
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F65FC433EF
+	for <webhook@archiver.kernel.org>; Wed, 12 Jan 2022 04:28:07 +0000 (UTC)
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com
+ [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web08.18975.1641961686560298565
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Jan 2022 14:47:39 -0800
+ Tue, 11 Jan 2022 20:28:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@denx.de
- header.s=phobos-20191101 header.b=JNFK+xlF;
- spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
-Received: from tr.lan (ip-89-176-112-137.net.upcbroadband.cz [89.176.112.137])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: marex@denx.de)
-	by phobos.denx.de (Postfix) with ESMTPSA id 8A02A82EBB;
-	Tue, 11 Jan 2022 23:47:35 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1641941255;
-	bh=9c8dAcPhSmRbZ7wIY7SC6VrrYVThip317xiL3Sh3Ywg=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=JNFK+xlF+/C9TuWHXV85vWPaCNY1nJ+Ac1KZ28MA22LYe0QoGd/M/8JjSMOA7BFbw
-	 fW5JDm7W0gNi4rq5UxHfIIPTuqP52mGxjD23x6tkn66DKzrn68cwrAR9I3pVXl7+RH
-	 qRF3wS/JUhzNcKF3e6vacSwou26BqejnXAau8oIb17JmXwl4CdzSs1vcQxob6Uzvx5
-	 wz9lxZq79mYmmtDqs7tpVh9n/yKuOq6fWN9Dvx/x1duEy/F2l47rZ0AewJDUA7waKi
-	 dtOnRYdwiNq2/L+pnP/SLsdPedSxJwj0MZ3LpC5rMJnXWSu9Xn/+D6sK70ToLAi6Bp
-	 89vl7L5w7DfgQ==
-From: Marek Vasut <marex@denx.de>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=XVWOyjL+;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id
+ a1-20020a17090a688100b001b3fd52338eso1356902pjd.1
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 11 Jan 2022 20:28:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=8B2uOhTj5/ikKTMooh08F541qkuPawtoqssCJ6UXnTg=;
+        b=XVWOyjL+TyHOcA9i7R3SnPzRWYchHOMWi+tTm9PulTf1LeqZKV2mzYpI9Bfar8HrL7
+         Ewrzq8Wv7dMuEQ2h5ngrBfnxrC17NMDSCsQNT01gUSAYbdm3oOMJyxw8mG6ORgiWjeyY
+         Z48gS5wkAVdj2tSRaIv/DKRqv6hUXkl5iPkXghjLHSaJCm8ABj2/e5PKc0ZSG7Kgrb8n
+         6/ARoPBKlfC+NNF6Vtyjn/EjgMCHNCtsA4rk8jJ2FmkH/MbygP19L9eVyEvzv048NtfB
+         CIFpVa2DVPfxN6Za3NVDwZxVMp7iJm9kE1BaSuwmdFMjnlLyPi2S/ZOPG2CvsVm66yNo
+         eB5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=8B2uOhTj5/ikKTMooh08F541qkuPawtoqssCJ6UXnTg=;
+        b=yOfs8Bpw/HuFBKw2Za3+Rj6W1gUZ+7GNFmsneUGjDr/pnEPX7iBK9p2F+ogIaIqHpC
+         ElNvXlCVjmAzHzMmS+n+r3VFvfpJaiw5yPe7HbMQ0ErJTnry52/VbKaHLQIKx0C4cOAl
+         lhnJinBEfQ+DkYbindPrMt5u9XEAFPP3NpVWzlY7SjW2RHnSIbJQ1qqFxHmzUoWLktqJ
+         RTG4CuD0Z8z7YTR156GoVL+o8fRvjlK2FDojShNuXYbtE7P3uf9TZAMnwPpS53Htz8PB
+         nJN/R3Xx1ALlxSFE091OZ1zDSAeEo4EpCEiIUGJq5jtKY1ASB0z/GZj1fkOInZPRjapf
+         agiw==
+X-Gm-Message-State: AOAM5320+vDvFdccBbKB2ULsvAbm9GJQSsYbfyXQkrvGUdo8XbUplSRV
+	pwrN6w6Jn2TZUhw5I4pyciYJGmnuDLE=
+X-Google-Smtp-Source: 
+ ABdhPJyiXHe05a+q9IzTN+bWkHme//QVLW0B3Nve5e8x5Y5+Zllk0fVBCJzIg3iQjOBWy/d7LA2+BA==
+X-Received: by 2002:a17:902:6908:b0:149:b26a:b9b5 with SMTP id
+ j8-20020a170902690800b00149b26ab9b5mr7688018plk.169.1641961685039;
+        Tue, 11 Jan 2022 20:28:05 -0800 (PST)
+Received: from localhost.localdomain ([12.196.124.196])
+        by smtp.gmail.com with ESMTPSA id
+ s21sm310030pfk.55.2022.01.11.20.28.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 11 Jan 2022 20:28:04 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: raj.khem@gmail.com,
-	Marek Vasut <marex@denx.de>,
-	Alexander Kanavin <alex@linutronix.de>
-Subject: [meta-oe][dunfell][PATCH 4/5] freerdp: Upgrade 2.3.0 -> 2.4.1
-Date: Tue, 11 Jan 2022 23:47:13 +0100
-Message-Id: <20220111224714.1289840-4-marex@denx.de>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220111224714.1289840-1-marex@denx.de>
-References: <20220111224714.1289840-1-marex@denx.de>
+Cc: wangmy <wangmy@fujitsu.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][honister][PATCH 1/2] apache2: upgrade 2.4.51 -> 2.4.52
+Date: Tue, 11 Jan 2022 20:27:12 -0800
+Message-Id: <20220112042713.10199-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Virus-Scanned: clamav-milter 0.103.2 at phobos.denx.de
-X-Virus-Status: Clean
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 11 Jan 2022 22:47:40 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Jan 2022 04:28:07 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94763
+ https://lists.openembedded.org/g/openembedded-devel/message/94767
 
-Upgrade freerdp to latest stable 2.x version and drop
-OpenSSL 3.x backports which are already upstream.
+From: wangmy <wangmy@fujitsu.com>
 
-(cherry picked from commit 2b571a394acc3e006f0207c2152f3f895816c695)
-Signed-off-by: Marek Vasut <marex@denx.de>
-Cc: Alexander Kanavin <alex@linutronix.de>
-Cc: Khem Raj <raj.khem@gmail.com>
+Changelog:
+==========
+ *) SECURITY: CVE-2021-44790: Possible buffer overflow when parsing
+     multipart content in mod_lua of Apache HTTP Server 2.4.51 and
+     earlier (cve.mitre.org)
+     A carefully crafted request body can cause a buffer overflow in
+     the mod_lua multipart parser (r:parsebody() called from Lua
+     scripts).
+     The Apache httpd team is not aware of an exploit for the
+     vulnerabilty though it might be possible to craft one.
+     This issue affects Apache HTTP Server 2.4.51 and earlier.
+
+  *) SECURITY: CVE-2021-44224: Possible NULL dereference or SSRF in
+     forward proxy configurations in Apache HTTP Server 2.4.51 and
+     earlier (cve.mitre.org)
+     A crafted URI sent to httpd configured as a forward proxy
+     (ProxyRequests on) can cause a crash (NULL pointer dereference)
+     or, for configurations mixing forward and reverse proxy
+     declarations, can allow for requests to be directed to a
+     declared Unix Domain Socket endpoint (Server Side Request
+     Forgery).
+     This issue affects Apache HTTP Server 2.4.7 up to 2.4.51
+     (included).
+
+  *) http: Enforce that fully qualified uri-paths not to be forward-proxied
+     have an http(s) scheme, and that the ones to be forward proxied have a
+     hostname, per HTTP specifications.
+
+  *) OpenSSL autoconf detection improvement: pick up openssl.pc in the
+     specified openssl path.
+
+  *) mod_proxy_connect, mod_proxy: Do not change the status code after we
+     already sent it to the client.
+
+  *) mod_http: Correctly sent a 100 Continue status code when sending an interim
+     response as result of an Expect: 100-Continue in the request and not the
+     current status code of the request. PR 65725
+
+  *) mod_dav: Some DAV extensions, like CalDAV, specify both document
+     elements and property elements that need to be taken into account
+     when generating a property. The document element and property element
+     are made available in the dav_liveprop_elem structure by calling
+     dav_get_liveprop_element().
+
+  *) mod_dav: Add utility functions dav_validate_root_ns(),
+     dav_find_child_ns(), dav_find_next_ns(), dav_find_attr_ns() and
+     dav_find_attr() so that other modules get to play too.
+
+  *) mpm_event: Restart stopping of idle children after a load peak. PR 65626.
+
+  *) mod_http2: fixes 2 regressions in server limit handling.
+     1. When reaching server limits, such as MaxRequestsPerChild, the
+        HTTP/2 connection send a GOAWAY frame much too early on new
+        connections, leading to invalid protocol state and a client
+        failing the request. See PR65731.
+        The module now initializes the HTTP/2 protocol correctly and
+        allows the client to submit one request before the shutdown
+        via a GOAWAY frame is being announced.
+     2. A regression in v1.15.24 was fixed that could lead to httpd
+        child processes not being terminated on a graceful reload or
+        when reaching MaxConnectionsPerChild. When unprocessed h2
+        requests were queued at the time, these could stall.
+        See <https://github.com/icing/mod_h2/issues/212>.
+
+  *) mod_ssl: Add build support for OpenSSL v3.
+
+  *) mod_proxy_connect: Honor the smallest of the backend or client timeout
+     while tunneling.
+
+  *) mod_proxy: SetEnv proxy-nohalfclose (or alike) allows to disable TCP
+     half-close forwarding when tunneling protocols.
+
+  *) core: Be safe with ap_lingering_close() called with a socket NULL-ed by
+     a third-party module.  PR 65627.
+
+  *) mod_md: Fix memory leak in case of failures to load the private key.
+     PR 65620
+
+  *) mod_md: adding v2.4.8 with the following changes
+    - Added support for ACME External Account Binding (EAB).
+      Use the new directive `MDExternalAccountBinding` to provide the
+      server with the value for key identifier and hmac as provided by
+      your CA.
+      While working on some servers, EAB handling is not uniform
+      across CAs. First tests with a Sectigo Certificate Manager in
+      demo mode are successful. But ZeroSSL, for example, seems to
+      regard EAB values as a one-time-use-only thing, which makes them
+      fail if you create a seconde account or retry the creation of the
+      first account with the same EAB.
+    - The directive 'MDCertificateAuthority' now checks if its parameter
+      is a http/https url or one of a set of known names. Those are
+      'LetsEncrypt', 'LetsEncrypt-Test', 'Buypass' and 'Buypass-Test'
+      for now and they are not case-sensitive.
+      The default of LetsEncrypt is unchanged.
+    - `MDContactEmail` can now be specified inside a `<MDomain dnsname>`
+      section.
+    - Treating 401 HTTP status codes for orders like 403, since some ACME
+      servers seem to prefer that for accessing oders from other accounts.
+    - When retrieving certificate chains, try to read the repsonse even
+      if the HTTP Content-Type is unrecognized.
+    - Fixed a bug that reset the error counter of a certificate renewal
+      and prevented the increasing delays in further attempts.
+    - Fixed the renewal process giving up every time on an already existing
+      order with some invalid domains. Now, if such are seen in a previous
+      order, a new order is created for a clean start over again.
+      See <https://github.com/icing/mod_md/issues/268>
+    - Fixed a mixup in md-status handler when static certificate files
+      and renewal was configured at the same time.
+
+  *) mod_md: values for External Account Binding (EAB) can
+     now also be configured to be read from a separate JSON
+     file. This allows to keep server configuration permissions
+     world readable without exposing secrets.
+
+  *) mod_proxy_uwsgi: Remove duplicate slashes at the beginning of PATH_INFO.
+     PR 65616.
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-CVE: CVE-2021-41159 CVE-2021-41160
+(cherry picked from commit ea76fc643713915a1618597be8bdbe0e4a3d993e)
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
-CVEs added per https://lwn.net/Articles/876306/
----
- ...e-support-and-build-with-OpenSSL-3.0.patch | 43 -------------------
- ...d-calling-FIPS_mode-with-OpenSSL-3.0.patch | 28 ------------
- .../{freerdp_2.3.0.bb =3D> freerdp_2.4.1.bb}    |  4 +-
- 3 files changed, 1 insertion(+), 74 deletions(-)
- delete mode 100644 meta-oe/recipes-support/freerdp/freerdp/0001-Fix-FIPS=
--mode-support-and-build-with-OpenSSL-3.0.patch
- delete mode 100644 meta-oe/recipes-support/freerdp/freerdp/0002-winpr-av=
-oid-calling-FIPS_mode-with-OpenSSL-3.0.patch
- rename meta-oe/recipes-support/freerdp/{freerdp_2.3.0.bb =3D> freerdp_2.=
-4.1.bb} (94%)
+ .../apache2/{apache2_2.4.51.bb => apache2_2.4.52.bb}            | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.51.bb => apache2_2.4.52.bb} (99%)
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp/0001-Fix-FIPS-mode-s=
-upport-and-build-with-OpenSSL-3.0.patch b/meta-oe/recipes-support/freerdp=
-/freerdp/0001-Fix-FIPS-mode-support-and-build-with-OpenSSL-3.0.patch
-deleted file mode 100644
-index 04fe644d4..000000000
---- a/meta-oe/recipes-support/freerdp/freerdp/0001-Fix-FIPS-mode-support-=
-and-build-with-OpenSSL-3.0.patch
-+++ /dev/null
-@@ -1,43 +0,0 @@
--From f703b1184229796d504a2e833f72ace4cc605d15 Mon Sep 17 00:00:00 2001
--From: Ondrej Holy <oholy@redhat.com>
--Date: Wed, 12 May 2021 12:48:15 +0200
--Subject: [PATCH 1/2] Fix FIPS mode support and build with OpenSSL 3.0
--
--FreeRDP fails to build with OpenSSL 3.0 because of usage of the `FIPS_mo=
-de`
--and `FIPS_mode_set` functions, which were removed there. Just a note tha=
-t
--the FIPS mode is not supported by OpenSSL 1.1.* although the mentioned
--functions are still there (see https://wiki.openssl.org/index.php/FIPS_m=
-odules).
--Let's make FreeRDP build with OpenSSL 3.0 and fix the FIPS mode support.
--
--See: https://bugzilla.redhat.com/show_bug.cgi?id=3D1952937
--Upstream-Status: Backport
--Signed-off-by: Alexander Kanavin <alex@linutronix.de>
-----
-- winpr/libwinpr/utils/ssl.c | 8 ++++++++
-- 1 file changed, 8 insertions(+)
--
--diff --git a/winpr/libwinpr/utils/ssl.c b/winpr/libwinpr/utils/ssl.c
--index 3a8590390..03b23af43 100644
----- a/winpr/libwinpr/utils/ssl.c
--+++ b/winpr/libwinpr/utils/ssl.c
--@@ -244,9 +244,17 @@ static BOOL winpr_enable_fips(DWORD flags)
-- #else
-- 		WLog_DBG(TAG, "Ensuring openssl fips mode is ENabled");
--=20
--+#if defined(OPENSSL_VERSION_MAJOR) && (OPENSSL_VERSION_MAJOR >=3D 3)
--+		if (!EVP_default_properties_is_fips_enabled(NULL))
--+#else
-- 		if (FIPS_mode() !=3D 1)
--+#endif
-- 		{
--+#if defined(OPENSSL_VERSION_MAJOR) && (OPENSSL_VERSION_MAJOR >=3D 3)
--+			if (EVP_set_default_properties(NULL, "fips=3Dyes"))
--+#else
-- 			if (FIPS_mode_set(1))
--+#endif
-- 				WLog_INFO(TAG, "Openssl fips mode ENabled!");
-- 			else
-- 			{
----=20
--2.20.1
--
-diff --git a/meta-oe/recipes-support/freerdp/freerdp/0002-winpr-avoid-cal=
-ling-FIPS_mode-with-OpenSSL-3.0.patch b/meta-oe/recipes-support/freerdp/f=
-reerdp/0002-winpr-avoid-calling-FIPS_mode-with-OpenSSL-3.0.patch
-deleted file mode 100644
-index 728638e15..000000000
---- a/meta-oe/recipes-support/freerdp/freerdp/0002-winpr-avoid-calling-FI=
-PS_mode-with-OpenSSL-3.0.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From 4dbf108c0ae5e997d5c432f3da4b4c5fd7b35373 Mon Sep 17 00:00:00 2001
--From: Mike Gilbert <floppym@gentoo.org>
--Date: Sun, 1 Aug 2021 12:14:43 -0400
--Subject: [PATCH 2/2] winpr: avoid calling FIPS_mode() with OpenSSL 3.0
--
--Fixes: 26bf2816c3e0daeaf524c47cf0fcda8ae13b65ad
--Upstream-Status: Backport
--Signed-off-by: Alexander Kanavin <alex@linutronix.de>
-----
-- winpr/libwinpr/utils/ssl.c | 2 ++
-- 1 file changed, 2 insertions(+)
--
--diff --git a/winpr/libwinpr/utils/ssl.c b/winpr/libwinpr/utils/ssl.c
--index 03b23af43..74ef156e7 100644
----- a/winpr/libwinpr/utils/ssl.c
--+++ b/winpr/libwinpr/utils/ssl.c
--@@ -364,6 +364,8 @@ BOOL winpr_FIPSMode(void)
-- {
-- #if (OPENSSL_VERSION_NUMBER < 0x10001000L) || defined(LIBRESSL_VERSION_=
-NUMBER)
-- 	return FALSE;
--+#elif defined(OPENSSL_VERSION_MAJOR) && (OPENSSL_VERSION_MAJOR >=3D 3)
--+	return (EVP_default_properties_is_fips_enabled(NULL) =3D=3D 1);
-- #else
-- 	return (FIPS_mode() =3D=3D 1);
-- #endif
----=20
--2.20.1
--
-diff --git a/meta-oe/recipes-support/freerdp/freerdp_2.3.0.bb b/meta-oe/r=
-ecipes-support/freerdp/freerdp_2.4.1.bb
-similarity index 94%
-rename from meta-oe/recipes-support/freerdp/freerdp_2.3.0.bb
-rename to meta-oe/recipes-support/freerdp/freerdp_2.4.1.bb
-index 57170f68a..7ea7b71ef 100644
---- a/meta-oe/recipes-support/freerdp/freerdp_2.3.0.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp_2.4.1.bb
-@@ -13,11 +13,9 @@ inherit pkgconfig cmake gitpkgv
- PE =3D "1"
- PKGV =3D "${GITPKGVTAG}"
-=20
--SRCREV =3D "14c7f7aed7dd4e2454ee0cd81028b9f790885021"
-+SRCREV =3D "d39a7ba5c38e3ba3b99b1558dc2ab0970cbfb0c5"
- SRC_URI =3D "git://github.com/FreeRDP/FreeRDP.git;branch=3Dstable-2.0;pr=
-otocol=3Dhttps \
-     file://winpr-makecert-Build-with-install-RPATH.patch \
--    file://0001-Fix-FIPS-mode-support-and-build-with-OpenSSL-3.0.patch \
--    file://0002-winpr-avoid-calling-FIPS_mode-with-OpenSSL-3.0.patch \
- "
-=20
- S =3D "${WORKDIR}/git"
---=20
-2.34.1
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.51.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.52.bb
+similarity index 99%
+rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.51.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.52.bb
+index 4b36c50d55..0bf29a744e 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.51.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.52.bb
+@@ -26,7 +26,7 @@ SRC_URI:append:class-target = " \
+            "
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
+-SRC_URI[sha256sum] = "20e01d81fecf077690a4439e3969a9b22a09a8d43c525356e863407741b838f4"
++SRC_URI[sha256sum] = "0127f7dc497e9983e9c51474bed75e45607f2f870a7675a86dc90af6d572f5c9"
+ 
+ S = "${WORKDIR}/httpd-${PV}"
+ 
+-- 
+2.25.1
 
 
