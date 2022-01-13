@@ -1,105 +1,126 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <thakur.virendra1810@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75059C433EF
-	for <webhook@archiver.kernel.org>; Thu, 13 Jan 2022 13:26:05 +0000 (UTC)
-Received: from voyager.superhosting.bg (voyager.superhosting.bg
- [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web11.8729.1642080363607531305
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8974C433EF
+	for <webhook@archiver.kernel.org>; Thu, 13 Jan 2022 13:55:15 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com
+ [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web12.9078.1642082115137819953
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Jan 2022 05:26:04 -0800
+ Thu, 13 Jan 2022 05:55:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=BHAyE6RL;
- spf=permerror,
- err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
- for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
- (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
-	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
-	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=tzObLkwRX2Ni+jME16IJOmVBnHCJm6D6UMUJ4GFZIOo=; b=BHAyE6RLPyZLgV9DyvG8m4npZS
-	P+bjle5OBKRDP5llNwQpkVhLjLhR4jh0Gs6Cqfh6hujGrYhMCeoUu7WDIXfOjztTfb1YbsIufzrF6
-	sPUrQCE4FJgwY+bUUYTS9JDCB3DF8mQ3P226KbIjyQ049hVsPo48gRdDV9MWlC9YD5guSCAjZ77PS
-	yUYWb10WmMPBJ4ioXDbOQB8XY4jfxjlXu//3nd2YR0YBm40pmTGa7JaxBQIITFM/0iBN7gpuh1UPE
-	lGYSXyGsWTS6I1Xef9Ie/pibkmBxKj7oFDP5neg2Q6F8KrN01Gnls8SNACfRvnQvNO1rSVN9Uxb+n
-	UdwTj1ug==;
-Received: from lan.nucleusys.com ([92.247.61.126]:51702 helo=tone.k.g)
-	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.94.2)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1n8075-00068z-Ul; Thu, 13 Jan 2022 15:26:02 +0200
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-charset-normalizer: Upgarde 2.0.7 ->
- 2.0.10
-Date: Thu, 13 Jan 2022 15:25:44 +0200
-Message-Id: <20220113132544.779928-3-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220113132544.779928-1-leon.anavi@konsulko.com>
-References: <20220113132544.779928-1-leon.anavi@konsulko.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
- leon@anavi.org
-X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=CdF1N6Vs;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172,
+ mailfrom: thakur.virendra1810@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id p14so10058788plf.3
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 13 Jan 2022 05:55:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id;
+        bh=SkXzDKjix9nzLuKQdCuoMLdigvIHwg8DqgbwDPU0GVM=;
+        b=CdF1N6Vs+fOwI4cNeJPodWb7DZeUtxUem/b6tYAhEpTS33odwP21C5zQGsLQZ5JmGp
+         ne5/cJX+0/YCqW3RPMFEH+APlv83h1VWEVaz3zElO+zPpE2LF8Rk6qQkm9V36nffC6ku
+         +F7m5EwTvcxosoh7X2TozSWwVTG4tCCVBPhOoWbTXtfTarHuVn66GSQwssRO653wkyT0
+         kQNg1JuYXOAUbEOfCut0mLpgzT8ikcI9P2aq8koeDwmuVIPbc22+/Iir1/iiKsipPkI1
+         g/yz4G/XIrUYHt0u22GpMwCVyBZ7pRrNPhZIzlurSZPJT/6nKShpN2dJp+kGac2Ifd7O
+         xShQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=SkXzDKjix9nzLuKQdCuoMLdigvIHwg8DqgbwDPU0GVM=;
+        b=lZErAmh3NE8CKem9zc/tZlwSPB1ZoBi66IRUKUWIOfcRkFxIRQ7dWhwNK+Sln6wi3g
+         95jk3cQ8R3WXHDknplgIM/MmQG7ugjWXVh0rZe1t9Sv7hIt68OCoyutfUZkYMJmcTZ59
+         zkO6T77/XdX8s3G4TrhiUihiBdrWPH4Vob7PiRFOcLRji+u5IQ+HlT+dvOED8L/n1045
+         xO1PFBslio/W4lhKlYcUs2xOGDJnKrKVlD/KdorfNhpyAOs3DNbA+25qE3goyva5Mftp
+         2SdR1wHvQ2Rv+hQYndRvon42WtCwHioKreVP5zn+DBMDH+cUt9uHCKwjTHrTlKrRbfFD
+         a1wg==
+X-Gm-Message-State: AOAM530AOAknhk892BRoS6peCXgMZABhFFUh3tKNMTb8jUySnTznkXB3
+	abLjC7z2SqWJmb2BruQe6up6C0dRPT5QDA==
+X-Google-Smtp-Source: 
+ ABdhPJxh8DdzmX3J8njRQmzpivW/+n0cSNvgsRuF2bh7HhshjRhR2+O7tcpjFs34nGXVOilWMhrXAw==
+X-Received: by 2002:a17:90b:17c4:: with SMTP id
+ me4mr5265319pjb.15.1642082114357;
+        Thu, 13 Jan 2022 05:55:14 -0800 (PST)
+Received: from localhost.localdomain ([171.50.200.192])
+        by smtp.gmail.com with ESMTPSA id
+ m10sm2579796pgu.70.2022.01.13.05.55.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 13 Jan 2022 05:55:14 -0800 (PST)
+From: virendra thakur <thakur.virendra1810@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	raj.khem@gmail.com
+Cc: ranjitsinh.rathod@kpit.com,
+	Virendra Thakur <virendra.thakur@kpit.com>
+Subject: [oe][meta-oe][dunfell][PATCH] p7zip: Fix for CVE-2016-9296
+Date: Thu, 13 Jan 2022 19:24:32 +0530
+Message-Id: <20220113135432.5987-1-thakur.virendra1810@gmail.com>
+X-Mailer: git-send-email 2.17.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Jan 2022 13:26:05 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Jan 2022 13:55:15 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94808
+ https://lists.openembedded.org/g/openembedded-devel/message/94809
 
-Upgrade to release 2.0.10:
+From: Virendra Thakur <virendra.thakur@kpit.com>
 
-- Fallback match entries might lead to UnicodeDecodeError for
-  large bytes sequence
-- Skipping the language-detection (CD) on ASCII
+Add patch to fix CVE-2016-9296
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
 ---
- ...zer_2.0.7.bb => python3-charset-normalizer_2.0.10.bb} | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-charset-normalizer_2.0.7.bb => python3-charset-normalizer_2.0.10.bb} (58%)
+ .../p7zip/files/CVE-2016-9296.patch           | 27 +++++++++++++++++++
+ meta-oe/recipes-extended/p7zip/p7zip_16.02.bb |  1 +
+ 2 files changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/p7zip/files/CVE-2016-9296.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-charset-normalizer_2.0.7.bb b/meta-python/recipes-devtools/python/python3-charset-normalizer_2.0.10.bb
-similarity index 58%
-rename from meta-python/recipes-devtools/python/python3-charset-normalizer_2.0.7.bb
-rename to meta-python/recipes-devtools/python/python3-charset-normalizer_2.0.10.bb
-index 7db106398..3c1e6804e 100644
---- a/meta-python/recipes-devtools/python/python3-charset-normalizer_2.0.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-charset-normalizer_2.0.10.bb
-@@ -3,6 +3,13 @@ HOMEPAGE = "https://github.com/ousret/charset_normalizer"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0974a390827087287db39928f7c524b5"
- 
--SRC_URI[sha256sum] = "e019de665e2bcf9c2b64e2e5aa025fa991da8720daa3c1138cadd2fd1856aed0"
-+SRC_URI[sha256sum] = "876d180e9d7432c5d1dfd4c5d26b72f099d503e8fcc0feb7532c9289be60fcbd"
- 
- inherit pypi setuptools3
+diff --git a/meta-oe/recipes-extended/p7zip/files/CVE-2016-9296.patch b/meta-oe/recipes-extended/p7zip/files/CVE-2016-9296.patch
+new file mode 100644
+index 000000000..98e186cbf
+--- /dev/null
++++ b/meta-oe/recipes-extended/p7zip/files/CVE-2016-9296.patch
+@@ -0,0 +1,27 @@
++p7zip: Update CVE-2016-9296 patch URL.
++From: Robert Luberda <robert@debian.org>
++Date: Sat, 19 Nov 2016 08:48:08 +0100
++Subject: Fix nullptr dereference (CVE-2016-9296)
 +
-+RDEPENDS:${PN} += " \
-+	${PYTHON_PN}-core \
-+	${PYTHON_PN}-logging \
-+	${PYTHON_PN}-codecs \
-+	${PYTHON_PN}-json \
-+"
++Patch taken from https://sourceforge.net/p/p7zip/bugs/185/
++This patch file taken from Debian's patch set for p7zip
++
++Upstream-Status: Backport [https://sourceforge.net/p/p7zip/bugs/185/]
++CVE: CVE-2016-9296
++
++Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
++
++Index: p7zip_16.02/CPP/7zip/Archive/7z/7zIn.cpp
++===================================================================
++--- p7zip_16.02.orig/CPP/7zip/Archive/7z/7zIn.cpp
+++++ p7zip_16.02/CPP/7zip/Archive/7z/7zIn.cpp
++@@ -1097,7 +1097,8 @@ HRESULT CInArchive::ReadAndDecodePackedS
++       if (CrcCalc(data, unpackSize) != folders.FolderCRCs.Vals[i])
++         ThrowIncorrect();
++   }
++-  HeadersSize += folders.PackPositions[folders.NumPackStreams];
+++  if (folders.PackPositions)
+++      HeadersSize += folders.PackPositions[folders.NumPackStreams];
++   return S_OK;
++ }
++ 
+diff --git a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
+index 13479a90f..c79752f56 100644
+--- a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
++++ b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
+@@ -9,6 +9,7 @@ SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_al
+            file://do_not_override_compiler_and_do_not_strip.patch \
+            file://CVE-2017-17969.patch \
+            file://0001-Fix-narrowing-errors-Wc-11-narrowing.patch \
++           file://CVE-2016-9296.patch \
+            "
+ 
+ SRC_URI[md5sum] = "a0128d661cfe7cc8c121e73519c54fbf"
 -- 
-2.30.2
+2.17.1
 
 
