@@ -1,92 +1,119 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A92AC433EF
-	for <webhook@archiver.kernel.org>; Thu, 13 Jan 2022 18:19:30 +0000 (UTC)
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com
- [209.85.167.53])
- by mx.groups.io with SMTP id smtpd.web10.829.1642097968578957368
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BE0B0C433F5
+	for <webhook@archiver.kernel.org>; Thu, 13 Jan 2022 20:00:19 +0000 (UTC)
+Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com
+ [209.85.222.170])
+ by mx.groups.io with SMTP id smtpd.web08.2275.1642104018880765952
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Jan 2022 10:19:29 -0800
+ Thu, 13 Jan 2022 12:00:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=jI8FxSDN;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.167.53, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f53.google.com with SMTP id e3so19755941lfc.9
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=lVeGBptm;
+ spf=pass (domain: gmail.com, ip: 209.85.222.170,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f170.google.com with SMTP id 82so8710033qki.10
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Jan 2022 10:19:28 -0800 (PST)
+ Thu, 13 Jan 2022 12:00:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=uCspra9edwd6GF2WOIZSZYzmrNDQArUKN6sRGwRL5wY=;
-        b=jI8FxSDN9ezk+dfOwbocuOKvQQ8U+iAbZ32kyymkHI8Xk+rRBYaOe55nLvp7xqjLlh
-         u5nfNvX13JUmV9fY0suH0wl+t5urJp4QWSmfzBiELMES459g5687vMITafMWGUPtg04y
-         ytTdNBN7GGkd2AxhHS3Zsve9J/mdpYQjHvshRzGoslFsKRp1gQwuXtj3DNTDp/LQuiRj
-         9ixNWvU7eVwBVZSeeg/dBu6yp7UoBdWm+odP96FraQrj/CMeKZfYNepY+ry2FiWCwP3T
-         oYkD52pbbpY9JZJ5TUpWz1pjYVu4srxVukYtaQQLZCs4h6lOvz0a+6URhdam3hioxMXQ
-         RdeA==
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=1GM2Ptv838qibXDsurQmqhCCAi5DgsTcVngagclvgYU=;
+        b=lVeGBptmk6uNFs+dQAPm2F/5PQ/MjIxuTHqwkQ6ZFqSvBJtOy/ZH3Hw7Cqu+6aDyEw
+         2dlTx51AL7EEOZI/fmvMSTnuUm0DCJI1POSUzrvV+pEWek7npi6zdjEt2pxavNj/WjCS
+         2+BOIyThPaoMk1WRfd4emT5i9lpLFhZd5CEvCHYGAJUZVgKZx9e+qGo77obsfz8LeKPJ
+         ub1OiXco8g64vktcbQ0Xd22yG6lXL2yhTJnYPd25/+Kk9rTD0kzzG/+LjfSuk/5DkEUS
+         6W2rz/HqeLkAZtoNaiRL68aQFMr3J1YlTagk/HEccqdZac8QxcN+xEUWO92dp3fdRRVD
+         T9kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=uCspra9edwd6GF2WOIZSZYzmrNDQArUKN6sRGwRL5wY=;
-        b=zUhcgYmasm869z8cvq9k792j8zB9v8ky1fVKKFW5gMT5cDgGdZIQKURJs5jcVocf1j
-         P6N3Ye7uc0CNcMpbtsXR02t5n9V3toldyYSHRLxWIu5LmzKqR0sR9w58/3I9ap0jj52W
-         UQYd7f8wLIWQt3Lx5pxztIoFCaF+YoRABrXRRy6DA4qB1iFWeYUOlu/kEL3upI76oaaa
-         mnLzBi5cL7Ie0yFb+jSiXm4Nx2RaSlgMR21HSDUvy5vZXBfUdNjYiBQoFDp5dY3HGUMa
-         3Hgy2DNfR1SzYBRoHKXPzVQsHAIa8b0ZthHy41Y2/QWOzsQafQpkepBwF0SMdL5znjQq
-         Nnrg==
-X-Gm-Message-State: AOAM530j6Ud6mDKBk+XuDQI+L0g+dIBX2sYDaPGkz1A4V6Hi/ijJqfhx
-	FaR0ItoOmBKBUOdZRCVPkiP52MT/sKAOg9bW
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=1GM2Ptv838qibXDsurQmqhCCAi5DgsTcVngagclvgYU=;
+        b=hQ68l2rxmqZu6duKaz1nlCQTXE7nVXPrk5M4BLGrwI5FRk6iuGoFxDT869k4RYFCVH
+         FuwGDBRiyzCWBv14zbARZ9NZokcWRXn/fDfjwHo8QF3QJx1dL1oehkhmDbdZWsBORHlt
+         6j0veTqK2S/kJo2BBZsR2epPstsvzc+pgL6SBHLcVU3h9MmtoFDQZLO410x2LjuddSOH
+         EWCLEsmjDBzomgnn6w7biwS5yTATjnb7P+XEDK+pK3pWZCKd50OYXLgTC4rIEH14Wdb8
+         /yUc+Hf0z7I4Wes6tHg/xGngOlz1jCZH8WqBEU5TsSZux14/cs1j79/QQIqSv25txiqw
+         pqsw==
+X-Gm-Message-State: AOAM5311XZw3o/1H3zEDyCr67sF/vAPcdgdZHDBMNgOP31dzGA8Kuag7
+	U2KYO56KbOgkiMm4ZlJqhkBtsFSIyShMSaxQ9fo=
 X-Google-Smtp-Source: 
- ABdhPJwZJen/ueUvDNnKRCqoB/NAbuG6d3pQ7FEvNLCfrxz1kGdUZUvtpZP6F3OqCxulAp5qUY+xvg==
-X-Received: by 2002:a05:651c:171c:: with SMTP id
- be28mr3490125ljb.183.1642097965854;
-        Thu, 13 Jan 2022 10:19:25 -0800 (PST)
-Received: from localhost.localdomain
- (c-7918524e.023-160-67626725.bbcust.telenor.se. [78.82.24.121])
-        by smtp.gmail.com with ESMTPSA id z23sm339924ljn.4.2022.01.13.10.19.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Jan 2022 10:19:25 -0800 (PST)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python][PATCH] lirc: replace setuptools3-bas with
- distutils-common-base
-Date: Thu, 13 Jan 2022 19:19:22 +0100
-Message-Id: <20220113181922.2054457-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+ ABdhPJw8C+98Sfq0835+DjgtAcea3iTGwkJ+vAMs6HkLcVs3QoRL1ijXjesd3rbQKJhX+7qD8/3whgyvR/25MQgcEOM=
+X-Received: by 2002:a05:620a:f06:: with SMTP id
+ v6mr4463908qkl.149.1642104017870;
+ Thu, 13 Jan 2022 12:00:17 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <1642067014-26574-1-git-send-email-xuhuan.fnst@fujitsu.com>
+In-Reply-To: <1642067014-26574-1-git-send-email-xuhuan.fnst@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 13 Jan 2022 11:59:52 -0800
+Message-ID: 
+ <CAMKF1srHfNF+ZVg2N5NzPwouxumwgAh4z7Y1RnMv4ZJ4hm51tw@mail.gmail.com>
+Subject: Re: [oe] [meta-python] [PATCH] python3-pystache: upgrade 0.5.4 ->
+ 0.6.0
+To: "xuhuan.fnst@fujitsu.com" <xuhuan.fnst@fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Jan 2022 18:19:30 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Jan 2022 20:00:19 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94811
+ https://lists.openembedded.org/g/openembedded-devel/message/94812
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- .../meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+this fails to patch
+https://errors.yoctoproject.org/Errors/Details/622568/
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb
-index 1ca7b6084..f3070c5d2 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.1.bb
-@@ -29,7 +29,7 @@ SYSTEMD_SERVICE:${PN}-exec = "irexec.service"
- SYSTEMD_AUTO_ENABLE:lirc = "enable"
- SYSTEMD_AUTO_ENABLE:lirc-exec = "enable"
- 
--inherit autotools pkgconfig systemd python3native distutils-common-base
-+inherit autotools pkgconfig systemd python3native setuptools3-base
- 
- PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,--without-systemdsystemunitdir,systemd"
- PACKAGECONFIG[x11] = "--with-x,--with-x=no,libx11,"
--- 
-2.25.1
-
+On Thu, Jan 13, 2022 at 1:44 AM xuhuan.fnst@fujitsu.com
+<xuhuan.fnst@fujitsu.com> wrote:
+>
+> From: Xu Huan <xuhuan.fnst@fujitsu.com>
+>
+> changelog:
+> ===============================================================================
+> Bump spec versions to latest => v1.1.3
+> Modernize python and CI tools, update docs/doctests
+> Update unicode conversion test for py3-only
+> Add pep8speaks cfg, cleanup warnings
+> Remove superfluous setup test/unused imports
+> Add conda recipe/CI build
+>
+> Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
+> ---
+>  .../{python3-pystache_0.5.4.bb => python3-pystache_0.6.0.bb}   | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python3-pystache_0.5.4.bb => python3-pystache_0.6.0.bb} (73%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-pystache_0.5.4.bb b/meta-python/recipes-devtools/python/python3-pystache_0.6.0.bb
+> similarity index 73%
+> rename from meta-python/recipes-devtools/python/python3-pystache_0.5.4.bb
+> rename to meta-python/recipes-devtools/python/python3-pystache_0.6.0.bb
+> index 0ae5a19115..d64b806600 100644
+> --- a/meta-python/recipes-devtools/python/python3-pystache_0.5.4.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pystache_0.6.0.bb
+> @@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=eb4417802c56384aac71b34505528a60"
+>
+>  SRC_URI += "file://0001-Modernize-python-versions-remove-py2x-and-fix-tests-.patch"
+>
+> -SRC_URI[md5sum] = "485885e67a0f6411d5252e69b20a35ca"
+> -SRC_URI[sha256sum] = "f7bbc265fb957b4d6c7c042b336563179444ab313fb93a719759111eabd3b85a"
+> +SRC_URI[sha256sum] = "93bf92b2149a4c4b58d12142e2c4c6dd5c08d89e4c95afccd4b6efe2ee1d470d"
+>
+>  inherit pypi setuptools3
+>
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#94805): https://lists.openembedded.org/g/openembedded-devel/message/94805
+> Mute This Topic: https://lists.openembedded.org/mt/88393631/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
