@@ -2,77 +2,81 @@ Return-Path: <xuhuan.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6EE2FC433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DFDEC433F5
 	for <webhook@archiver.kernel.org>; Thu, 13 Jan 2022 09:44:05 +0000 (UTC)
 Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.2])
- by mx.groups.io with SMTP id smtpd.web10.6673.1642067043993266235
+ [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web10.6674.1642067044136726804
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 13 Jan 2022 01:44:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=U1OijJ44;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.2,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=umfDt6Yf;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
  mailfrom: xuhuan.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1642067041; i=@fujitsu.com;
-	bh=X85DgcKH5euXAfxKbBZtdeW32YNLRka96kpze9RoCAc=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=U1OijJ44GFcHRlTgRwNyHxfGx/wIUMEoYmiyrB+hCkXtPyHgVySZX4cZRfGkr4gZd
-	 QvMI84Zdf/YrvEORW3lfXzAztfKP9inJBhgR4AR1KJMLGzSaqAIrWnHP/RWlEziiiP
-	 5K8AU5k3bJSnO7PrZ0w6/1o/LA7h7gP0m24RKNZzhVuKbcNY+XpqeMr2CmvJdPCVlF
-	 7Yiti+2RPUcCbMZ/ruwDgS/BZR4TMJAJyOFiHgWHWMTiA0gJwgaSBM7xb8P5E1S4bU
-	 GBpWOHnWNObKAI56ndTTmB0Q6u0w6Fn+rpYoHUUO4oX0t2w9pJVdMXo4j5I4EYiT/5
-	 N9xrKIxgFI8Hw==
+	bh=sT9AL3Ee6dRev4igKe9JKeINnUdWPR4ZIDZD05gs6Kw=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=umfDt6YfkFmE7JIAlIHwxjudnSzl6vdiYSC95sPuI1ZCerUlPYJHCO25q/xec0vkp
+	 keyH3SUVwl/JhchOV0fU79cl2gK6cgLxQlzN5A+UuWaDR4cnzrymNYlIrxiwazI5C3
+	 tnXKV6EgjKIfmrgwNAM8Sc+L2ZLNrOhMn4YQ0a6uvanZbpnrt5tWu+q5vUjRz18x7n
+	 ZcQ525Gud1tOy0HvVjhKrUyCPJtXEoMLDnPScW7lBckCkh+qjzA+tbmlrpipAJeBB3
+	 OAVSkYVAHCfsgXfd/IiSwBRMZThqrj2Vf9EiFRNkmtNiOjBw1XPS4xoyHZt0NPeISn
+	 40pfbeuT6ttrA==
 Received: from [100.115.65.13] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-central-1.aws.ess.symcld.net id
- E9/AD-24146-064FFD16; Thu, 13 Jan 2022 09:44:00 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrKIsWRWlGSWpSXmKPExsViZ8MxSTfhy/1
-  Eg6+3VCwuHl7K7MDocW7jCsYAxijWzLyk/IoE1ozW62/YCjbzVFyd+J6pgXELdxcjF4eQwBNG
-  ifPXe5i7GDmBnAtMEhePmkIkTjJKfDu/gx0kwSagLvH45mtGEFtEQF9i6ew9YA3MAqoS3RfXg
-  NUIC/hIrP54lw3EZgGKH+ncyQpi8wq4S7T8aQSzJQQUJKY8fM8MEReUODnzCQvEHAmJgy9eME
-  PUKEmcWPGRCcKukHh9+BJUXE3i6rlNzBMY+WchaZ+FpH0BI9MqRtukosz0jJLcxMwcXUMDA11
-  DQ1NdMxNdYxO9xCrdRL3UUt3k1LySokSgrF5iebFeanGxXnFlbnJOil5easkmRmBophQ7KO1g
-  PNv3U+8QoyQHk5Ior9Cn+4lCfEn5KZUZicUZ8UWlOanFhxhlODiUJHgffwDKCRalpqdWpGXmA
-  OMEJi3BwaMkwjvvI1Cat7ggMbc4Mx0idYpRUUqcN/gzUEIAJJFRmgfXBovNS4yyUsK8jAwMDE
-  I8BalFuZklqPKvGMU5GJWEecNBpvBk5pXATX8FtJgJaPHbP/dAFpckIqSkGpjEj4T17vXvvpZ
-  65fWrVIm+6uVNPw49W8lp4dMk4XPwkq3ciXiGcr73UXPstZf+EWzZwXNot/n/OqmXN0La4178
-  sYqczCS6O0i0bUb2pN+xKTOy4zbunXZJKTvUxVHIf1ax3JSUjamTUw+ZsD15fUMvk6m/Z2rNQ
-  3HHBq/17/6G8LCdKl9Vuztp3bT/RTN/T9olc3f+9T2L3qRLXJu3xvm90DXhq8FvzvyZaKtTqN
-  tfskygNUVO3amdc9NenoKrv97G2xYyxZef1/rb89b+2ISJlyo/7Be2qtGvs58Z9Trv6Nmc18f
-  eRrzkLzyR2hiVcv0RX+fl/23fIw5/c7i1egrXvu7Zwf6OpZUCnJMVrv9WYinOSDTUYi4qTgQA
-  6jmGBEgDAAA=
+	by server-1.bemta.az-a.eu-central-1.aws.ess.symcld.net id
+ 7E/B0-31213-064FFD16; Thu, 13 Jan 2022 09:44:00 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrLIsWRWlGSWpSXmKPExsViZ8MxSTfhy/1
+  Eg1c9ahYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8a5pfcYC1ZyVtyYvZS1gfEKRxcjF4eQwBNG
+  iZ9X7zF1MXICOReYJHb2pULYJxkl1u3nB7HZBNQlHt98zQhiiwjoSyydvYcZxGYWUJXovriGH
+  cQWFgiS+Hb0KSuIzQIUn9G7H6yGV8Bd4t+bF2A1EgIKElMevgeLcwp4SCyd9JANYpe7RNvCRV
+  D1ghInZz5hgZgvIXHwxQtmiF4liRMrPjJB2BUSrw9fgoqrSVw9t4l5AqPgLCTts5C0L2BkWsV
+  ol1SUmZ5RkpuYmaNraGCga2hoqmtmpmtoYaaXWKWbqJdaqpucmldSlAiU1kssL9ZLLS7WK67M
+  Tc5J0ctLLdnECAzllGKnXTsYD/b91DvEKMnBpCTKK/TpfqIQX1J+SmVGYnFGfFFpTmrxIUYZD
+  g4lCd7HH4BygkWp6akVaZk5wLiCSUtw8CiJ8M77CJTmLS5IzC3OTIdInWJUlBLnDf4MlBAASW
+  SU5sG1wWL5EqOslDAvIwMDgxBPQWpRbmYJqvwrRnEORiVh3nCQKTyZeSVw018BLWYCWvz2zz2
+  QxSWJCCmpBiaxqzvuVO3eo7pn2vKv7YvaT70RqNetuC5Z6Xui9GZh4MFSp2uByx9eD/hV6u9V
+  VCIWotR9/8DVmk9nfy/fOWmRwNTdWWncbBbLv2+5sFVqy+JfL2//6zq/X+jbnFM/T+/mEJR6t
+  ufBI2nn88/3Pj+dnHRsLXvlD7HOA6xvj4TVOq44XLIsffuZB7KFWge3vNGZ3/xvm16+saB9+8
+  IJRxVeJeq94JshkBGxrmLznerkWoYp2zWFj9h0BIsmiz3ZWWW/9dB+JUlJh/Pv/TnKrjN0TA8
+  uWGM74cuSPe0t545v+yjVzffqimN9vvCzec+sN1jkR69iStuy4YFE68+Wjw8DNglUccxWlF3R
+  c2tbetDKz0osxRmJhlrMRcWJAM7pq1tgAwAA
 X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-6.tower-545.messagelabs.com!1642067040!10415!1
+X-Msg-Ref: server-16.tower-545.messagelabs.com!1642067040!9634!1
 X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 15875 invoked from network); 13 Jan 2022 09:44:00 -0000
+Received: (qmail 23651 invoked from network); 13 Jan 2022 09:44:00 -0000
 Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-6.tower-545.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-16.tower-545.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 13 Jan 2022 09:44:00 -0000
 Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 21C01100457
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 26FCB1000F9
 	for <openembedded-devel@lists.openembedded.org>;
  Thu, 13 Jan 2022 09:44:00 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 14B0210044F
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 18088100451
 	for <openembedded-devel@lists.openembedded.org>;
  Thu, 13 Jan 2022 09:44:00 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.131) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Thu, 13 Jan 2022 09:43:42 +0000
+ (TLS) id 15.0.1497.26; Thu, 13 Jan 2022 09:43:46 +0000
 From: XU Huan <xuhuan.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-pystache: upgrade 0.5.4 -> 0.6.0
-Date: Thu, 13 Jan 2022 17:43:33 +0800
-Message-ID: <1642067014-26574-1-git-send-email-xuhuan.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-pytest-timeout: upgrade 2.0.1 ->
+ 2.0.2
+Date: Thu, 13 Jan 2022 17:43:34 +0800
+Message-ID: <1642067014-26574-2-git-send-email-xuhuan.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1642067014-26574-1-git-send-email-xuhuan.fnst@fujitsu.com>
+References: <1642067014-26574-1-git-send-email-xuhuan.fnst@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.131]
@@ -84,39 +88,29 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 13 Jan 2022 09:44:05 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94805
+ https://lists.openembedded.org/g/openembedded-devel/message/94804
 
 From: Xu Huan <xuhuan.fnst@fujitsu.com>
 
-changelog:
-===============================================================================
-Bump spec versions to latest => v1.1.3
-Modernize python and CI tools, update docs/doctests
-Update unicode conversion test for py3-only
-Add pep8speaks cfg, cleanup warnings
-Remove superfluous setup test/unused imports
-Add conda recipe/CI build
-
 Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
 ---
- .../{python3-pystache_0.5.4.bb => python3-pystache_0.6.0.bb}   | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pystache_0.5.4.bb => python3-pystache_0.6.0.bb} (73%)
+ ...-pytest-timeout_2.0.1.bb => python3-pytest-timeout_2.0.2.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pytest-timeout_2.0.1.bb => python3-pytest-timeout_2.0.2.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pystache_0.5.4.bb b/meta-python/recipes-devtools/python/python3-pystache_0.6.0.bb
-similarity index 73%
-rename from meta-python/recipes-devtools/python/python3-pystache_0.5.4.bb
-rename to meta-python/recipes-devtools/python/python3-pystache_0.6.0.bb
-index 0ae5a19115..d64b806600 100644
---- a/meta-python/recipes-devtools/python/python3-pystache_0.5.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-pystache_0.6.0.bb
-@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=eb4417802c56384aac71b34505528a60"
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-timeout_2.0.1.bb b/meta-python/recipes-devtools/python/python3-pytest-timeout_2.0.2.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-pytest-timeout_2.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-pytest-timeout_2.0.2.bb
+index a790a6551f..7c77e4add6 100644
+--- a/meta-python/recipes-devtools/python/python3-pytest-timeout_2.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pytest-timeout_2.0.2.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d8048cd156eda3df2e7f111b0ae9ceff"
  
- SRC_URI += "file://0001-Modernize-python-versions-remove-py2x-and-fix-tests-.patch"
+ PYPI_PACKAGE = "pytest-timeout"
  
--SRC_URI[md5sum] = "485885e67a0f6411d5252e69b20a35ca"
--SRC_URI[sha256sum] = "f7bbc265fb957b4d6c7c042b336563179444ab313fb93a719759111eabd3b85a"
-+SRC_URI[sha256sum] = "93bf92b2149a4c4b58d12142e2c4c6dd5c08d89e4c95afccd4b6efe2ee1d470d"
+-SRC_URI[sha256sum] = "a5ec4eceddb8ea726911848593d668594107e797621e97f93a1d1dbc6fbb9080"
++SRC_URI[sha256sum] = "e6f98b54dafde8d70e4088467ff621260b641eb64895c4195b6e5c8f45638112"
  
  inherit pypi setuptools3
  
