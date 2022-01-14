@@ -1,171 +1,147 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <sakib.sajal@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E6BF4C433FE
-	for <webhook@archiver.kernel.org>; Fri, 14 Jan 2022 03:20:25 +0000 (UTC)
-Received: from mail-il1-f170.google.com (mail-il1-f170.google.com
- [209.85.166.170])
- by mx.groups.io with SMTP id smtpd.web12.2631.1642130425150248381
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9486EC433F5
+	for <webhook@archiver.kernel.org>; Fri, 14 Jan 2022 03:35:57 +0000 (UTC)
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
+ by mx.groups.io with SMTP id smtpd.web10.2759.1642131356663581771
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Jan 2022 19:20:25 -0800
+ Thu, 13 Jan 2022 19:35:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=KfDDAUf4;
- spf=pass (domain: gmail.com, ip: 209.85.166.170,
- mailfrom: ticotimo@gmail.com)
-Received: by mail-il1-f170.google.com with SMTP id a18so981496ilq.6
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Jan 2022 19:20:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=1zzcZ5ld+FC2sB5UeHDv6ccMtchOIfTvrWDCHJlVwT8=;
-        b=KfDDAUf4jQXHsE1x2K4Kf70lRmxaxyPcJZG/IkJYpK+0Nr19pNmIuR/EDEyDpCXSI8
-         +UldF8EQhN1ViG8jnwYQPnBj9bRaw+TCzu6J++s9wYwXFhynap+l6pLMzCcq7z91LXqz
-         vJ64Ec9T2H5RIshr6V+wkHyNBkNVQ9r+cInqRkeMG9Cs8AGjKJt2nCO6OxaS4fPoWr5p
-         5ZewJhuPad8SGHUn1710wur8Vl9EOO3d9quOzw7QaVefKlyqChywgkecTAcNd8JIQOSj
-         KMvdz0UY4aCVJFKjJOjSyxZKx9nMw3TreoqGTJtLh59Q6mKtPQY7oKShXHHNKJAHI2k0
-         u/lw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=1zzcZ5ld+FC2sB5UeHDv6ccMtchOIfTvrWDCHJlVwT8=;
-        b=MoeKQlzYCx/hWbu2vy1IqY1ol+fevbSAQJyFZrEuqoGLBqgXKlrqEWJgpJLMhygGDJ
-         07dz1PQoMYWV6WN1Dwn64WhgnFNma6sGTCi8LJ1JCsIjQt1QAKN+1u5CKrPApewD7LzJ
-         to7GlJVyu3u1zRTR77m0SOQtsA3RKH9Rr/qDuBrRe2HlqCyxkosV1Y8z3af1GCQ/8lfb
-         kxt02xg63WSOq49QL/cVmscIXMYmMSis4KkUxWRISSv5sml+SPZP/+e3hl7Lg9XZmuYZ
-         ZGosRw6rh0XC6Z3zR+Lz98saS6wmdQz7P+294bTigXuOAkeChZymy6attpZLqrP4v/rv
-         m+DQ==
-X-Gm-Message-State: AOAM531GygpqC2gQLaDAszOd2J9TyomQrdJUBDICOp+M69y8AT0iWxn+
-	P6IoIuCTr63eXRxRhKNbkbYrqBiJhLJYNA==
-X-Google-Smtp-Source: 
- ABdhPJxF4Rr5bF40Wgtsk+eykHHNgZ622Crd/5hMcMm3LtR0VI8TAsqvgYsrQS0h1T/hjbDHZJCDnQ==
-X-Received: by 2002:a05:6e02:1c2f:: with SMTP id
- m15mr3694778ilh.206.1642130424078;
-        Thu, 13 Jan 2022 19:20:24 -0800 (PST)
-Received: from lons-builder.int.hatle.net ([76.164.132.203])
-        by smtp.gmail.com with ESMTPSA id
- o15sm904500ilh.17.2022.01.13.19.20.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Jan 2022 19:20:23 -0800 (PST)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tim Orling <tim.orling@konsulko.com>
-Subject: [meta-oe][PATCH 2/2] python3-gammu: add recipe for v3.2.4
-Date: Thu, 13 Jan 2022 21:20:06 -0600
-Message-Id: <20220114032006.2521012-2-tim.orling@konsulko.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220114032006.2521012-1-tim.orling@konsulko.com>
-References: <20220114032006.2521012-1-tim.orling@konsulko.com>
+ dkim=missing;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
+ domain name (domain: windriver.com, ip: 147.11.3.146,
+ mailfrom: sakib.sajal@windriver.com)
+Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 20E3Ztri021178
+	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 13 Jan 2022 19:35:56 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 20E3ZtUL028151
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 13 Jan 2022 19:35:55 -0800 (PST)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Thu, 13 Jan 2022 19:35:55 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.20; Thu, 13 Jan 2022 19:35:54 -0800
+Received: from yow-lpggp3.wrs.com (128.224.137.13) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Thu, 13 Jan 2022 19:35:54 -0800
+From: Sakib Sajal <sakib.sajal@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [hardknott][PATCH] go: upgrade 1.16.10 -> 1.16.13
+Date: Thu, 13 Jan 2022 22:35:54 -0500
+Message-ID: <20220114033554.3686-1-sakib.sajal@windriver.com>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Jan 2022 03:20:25 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Jan 2022 03:35:57 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94822
+ https://lists.openembedded.org/g/openembedded-devel/message/94823
 
-The Python bindings for gammu have been moved into a separate package
-python-gammu.
+Release 1.16.13 includes fixes for CVE-2021-44716 and CVE-2021-44717.
 
-Send patch upstream to replace distutils.version.StrictVersion with
-packaging.version.parse and .Version
-
-Signed-off-by: Tim Orling <tim.orling@konsulko.com>
+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
 ---
- ...p.py-StrictVersion-packaging.version.patch | 49 +++++++++++++++++++
- .../gammu/python3-gammu_3.2.4.bb              | 21 ++++++++
- 2 files changed, 70 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/gammu/python3-gammu/0001-setup.py-StrictVersion-packaging.version.patch
- create mode 100644 meta-oe/recipes-connectivity/gammu/python3-gammu_3.2.4.bb
+ meta/recipes-devtools/go/{go-1.16.10.inc => go-1.16.13.inc}   | 4 ++--
+ ...o-binary-native_1.16.10.bb => go-binary-native_1.16.13.bb} | 4 ++--
+ ...cross-canadian_1.16.10.bb => go-cross-canadian_1.16.13.bb} | 0
+ .../go/{go-cross_1.16.10.bb => go-cross_1.16.13.bb}           | 0
+ .../go/{go-crosssdk_1.16.10.bb => go-crosssdk_1.16.13.bb}     | 0
+ .../go/{go-native_1.16.10.bb => go-native_1.16.13.bb}         | 0
+ .../go/{go-runtime_1.16.10.bb => go-runtime_1.16.13.bb}       | 0
+ meta/recipes-devtools/go/{go_1.16.10.bb => go_1.16.13.bb}     | 0
+ 8 files changed, 4 insertions(+), 4 deletions(-)
+ rename meta/recipes-devtools/go/{go-1.16.10.inc => go-1.16.13.inc} (91%)
+ rename meta/recipes-devtools/go/{go-binary-native_1.16.10.bb => go-binary-native_1.16.13.bb} (83%)
+ rename meta/recipes-devtools/go/{go-cross-canadian_1.16.10.bb => go-cross-canadian_1.16.13.bb} (100%)
+ rename meta/recipes-devtools/go/{go-cross_1.16.10.bb => go-cross_1.16.13.bb} (100%)
+ rename meta/recipes-devtools/go/{go-crosssdk_1.16.10.bb => go-crosssdk_1.16.13.bb} (100%)
+ rename meta/recipes-devtools/go/{go-native_1.16.10.bb => go-native_1.16.13.bb} (100%)
+ rename meta/recipes-devtools/go/{go-runtime_1.16.10.bb => go-runtime_1.16.13.bb} (100%)
+ rename meta/recipes-devtools/go/{go_1.16.10.bb => go_1.16.13.bb} (100%)
 
-diff --git a/meta-oe/recipes-connectivity/gammu/python3-gammu/0001-setup.py-StrictVersion-packaging.version.patch b/meta-oe/recipes-connectivity/gammu/python3-gammu/0001-setup.py-StrictVersion-packaging.version.patch
-new file mode 100644
-index 000000000..23fe4441d
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/gammu/python3-gammu/0001-setup.py-StrictVersion-packaging.version.patch
-@@ -0,0 +1,49 @@
-+From 96e8f0b2d13e890d9ffff8673f18dcc94290efb2 Mon Sep 17 00:00:00 2001
-+From: Tim Orling <tim.orling@konsulko.com>
-+Date: Thu, 13 Jan 2022 20:06:33 -0600
-+Subject: [PATCH] setup.py: StrictVersion -> packaging.version.*
-+
-+distutils is deprecated in Python 3.10 and will be removed in Python
-+3.12 [1]
-+
-+The recommended replacement for distutils.version is to use
-+packaging.version
-+
-+StrictVersion can be replaced by packaging.version.Version and helpers
-+like packaging.version.parse()
-+
-+[1] https://www.python.org/dev/peps/pep-0632/
-+[2] https://packaging.pypa.io/en/latest/version.html
-+
-+Upstream-Status: Submitted [https://github.com/gammu/python-gammu/pull/67]
-+
-+Signed-off-by: Tim Orling <tim.orling@konsulko.com>
-+---
-+ setup.py | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/setup.py b/setup.py
-+index a458181..bffb09d 100755
-+--- a/setup.py
-++++ b/setup.py
-+@@ -30,7 +30,7 @@ import os
-+ import platform
-+ import subprocess
-+ import sys
-+-from distutils.version import StrictVersion
-++from packaging.version import parse, Version
-+ 
-+ from setuptools import Extension, setup
-+ 
-+@@ -112,9 +112,9 @@ class GammuConfig:
-+         with open(self.config_path(self.path)) as handle:
-+             for line in handle:
-+                 if line.startswith("#define GAMMU_VERSION "):
-+-                    version = line.split('"')[1]
-++                    version = parse(line.split('"')[1])
-+ 
-+-        if version is None or StrictVersion(version) < StrictVersion(GAMMU_REQUIRED):
-++        if version is None or version < parse(GAMMU_REQUIRED):
-+             print("Too old Gammu version, please upgrade!")
-+             sys.exit(100)
-+ 
-diff --git a/meta-oe/recipes-connectivity/gammu/python3-gammu_3.2.4.bb b/meta-oe/recipes-connectivity/gammu/python3-gammu_3.2.4.bb
-new file mode 100644
-index 000000000..1fdb76eeb
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/gammu/python3-gammu_3.2.4.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "Gammu bindings for Python"
-+DESCRIPTION ="Python bindings for the Gammu library."
-+HOMEPAGE = "https://wammu.eu/python-gammu/"
-+BUGRACKER = "https://github.com/gammu/python-gammu/issues"
-+LICENSE = "GPL-2.0-or-later"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+PYPI_PACKAGE = "python-gammu"
-+
-+inherit pypi setuptools3 pkgconfig
-+
-+SRC_URI += "file://0001-setup.py-StrictVersion-packaging.version.patch"
-+SRC_URI[sha256sum] = "49fc70f01bc192c43ff3ec815e082df5261ea4c8d36a695e977734c4eb4df868"
-+
-+S = "${WORKDIR}/python-gammu-${PV}"
-+
-+DEPENDS += "gammu python3-packaging-native"
-+
-+RDEPENDS:${PN} += "python3-asyncio python3-core python3-threading"
-+
-+RRECOMMENDS:${PN} += "gammu"
+diff --git a/meta/recipes-devtools/go/go-1.16.10.inc b/meta/recipes-devtools/go/go-1.16.13.inc
+similarity index 91%
+rename from meta/recipes-devtools/go/go-1.16.10.inc
+rename to meta/recipes-devtools/go/go-1.16.13.inc
+index 08c85b275b..8675afc3bb 100644
+--- a/meta/recipes-devtools/go/go-1.16.10.inc
++++ b/meta/recipes-devtools/go/go-1.16.13.inc
+@@ -1,7 +1,7 @@
+ require go-common.inc
+ 
+ GO_BASEVERSION = "1.16"
+-PV = "1.16.10"
++PV = "1.16.13"
+ FILESEXTRAPATHS:prepend := "${FILE_DIRNAME}/go-${GO_BASEVERSION}:"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d4950ecb7b26d2c5e4e7b4e0dd74707"
+@@ -18,7 +18,7 @@ SRC_URI += "\
+     file://0009-Revert-cmd-go-make-sure-CC-and-CXX-are-absolute.patch \
+     file://0001-encoding-xml-handle-leading-trailing-or-double-colon.patch \
+ "
+-SRC_URI[main.sha256sum] = "a905472011585e403d00d2a41de7ced29b8884309d73482a307f689fd0f320b5"
++SRC_URI[main.sha256sum] = "b0926654eaeb01ef43816638f42d7b1681f2d3f41b9559f07735522b7afad41a"
+ 
+ # Upstream don't believe it is a signifiant real world issue and will only
+ # fix in 1.17 onwards where we can drop this.
+diff --git a/meta/recipes-devtools/go/go-binary-native_1.16.10.bb b/meta/recipes-devtools/go/go-binary-native_1.16.13.bb
+similarity index 83%
+rename from meta/recipes-devtools/go/go-binary-native_1.16.10.bb
+rename to meta/recipes-devtools/go/go-binary-native_1.16.13.bb
+index 4866c9f847..6e498a17be 100644
+--- a/meta/recipes-devtools/go/go-binary-native_1.16.10.bb
++++ b/meta/recipes-devtools/go/go-binary-native_1.16.13.bb
+@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d4950ecb7b26d2c5e4e7b4e0dd74707"
+ PROVIDES = "go-native"
+ 
+ SRC_URI = "https://dl.google.com/go/go${PV}.${BUILD_GOOS}-${BUILD_GOARCH}.tar.gz;name=go_${BUILD_GOTUPLE}"
+-SRC_URI[go_linux_amd64.sha256sum] = "414cd18ce1d193769b9e97d2401ad718755ab47816e13b2a1cde203d263b55cf"
+-SRC_URI[go_linux_arm64.sha256sum] = "bfe1d4b82626c742b4690a832ca59a21e3d702161556f3c0ed26dffb368927e9"
++SRC_URI[go_linux_amd64.sha256sum] = "275fc03c90c13b0bbff13125a43f1f7a9f9c00a0d5a9f2d5b16dbc2fa2c6e12a"
++SRC_URI[go_linux_arm64.sha256sum] = "3dd8e14837105cbfedf7124c7f8c524ce492748c370036c7316ef99e18d116d7"
+ 
+ UPSTREAM_CHECK_URI = "https://golang.org/dl/"
+ UPSTREAM_CHECK_REGEX = "go(?P<pver>\d+(\.\d+)+)\.linux"
+diff --git a/meta/recipes-devtools/go/go-cross-canadian_1.16.10.bb b/meta/recipes-devtools/go/go-cross-canadian_1.16.13.bb
+similarity index 100%
+rename from meta/recipes-devtools/go/go-cross-canadian_1.16.10.bb
+rename to meta/recipes-devtools/go/go-cross-canadian_1.16.13.bb
+diff --git a/meta/recipes-devtools/go/go-cross_1.16.10.bb b/meta/recipes-devtools/go/go-cross_1.16.13.bb
+similarity index 100%
+rename from meta/recipes-devtools/go/go-cross_1.16.10.bb
+rename to meta/recipes-devtools/go/go-cross_1.16.13.bb
+diff --git a/meta/recipes-devtools/go/go-crosssdk_1.16.10.bb b/meta/recipes-devtools/go/go-crosssdk_1.16.13.bb
+similarity index 100%
+rename from meta/recipes-devtools/go/go-crosssdk_1.16.10.bb
+rename to meta/recipes-devtools/go/go-crosssdk_1.16.13.bb
+diff --git a/meta/recipes-devtools/go/go-native_1.16.10.bb b/meta/recipes-devtools/go/go-native_1.16.13.bb
+similarity index 100%
+rename from meta/recipes-devtools/go/go-native_1.16.10.bb
+rename to meta/recipes-devtools/go/go-native_1.16.13.bb
+diff --git a/meta/recipes-devtools/go/go-runtime_1.16.10.bb b/meta/recipes-devtools/go/go-runtime_1.16.13.bb
+similarity index 100%
+rename from meta/recipes-devtools/go/go-runtime_1.16.10.bb
+rename to meta/recipes-devtools/go/go-runtime_1.16.13.bb
+diff --git a/meta/recipes-devtools/go/go_1.16.10.bb b/meta/recipes-devtools/go/go_1.16.13.bb
+similarity index 100%
+rename from meta/recipes-devtools/go/go_1.16.10.bb
+rename to meta/recipes-devtools/go/go_1.16.13.bb
 -- 
-2.25.1
+2.33.0
 
 
