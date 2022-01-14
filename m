@@ -2,38 +2,38 @@ Return-Path: <ross@burtonini.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 85509C433F5
-	for <webhook@archiver.kernel.org>; Fri, 14 Jan 2022 14:28:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DC1FAC433F5
+	for <webhook@archiver.kernel.org>; Fri, 14 Jan 2022 15:31:06 +0000 (UTC)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web08.7858.1642170483187736495
+ by mx.groups.io with SMTP id smtpd.web08.8727.1642174265644176287
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Jan 2022 06:28:03 -0800
+ Fri, 14 Jan 2022 07:31:06 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 529C6ED1
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 635666D
 	for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Jan 2022 06:28:02 -0800 (PST)
+ Fri, 14 Jan 2022 07:31:03 -0800 (PST)
 Received: from oss-tx204.lab.cambridge.arm.com
  (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id F0A9E3F774
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0E7F13F774
 	for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Jan 2022 06:28:01 -0800 (PST)
+ Fri, 14 Jan 2022 07:31:02 -0800 (PST)
 From: Ross Burton <ross.burton@arm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] python3-dbussy: port to setuptools
-Date: Fri, 14 Jan 2022 14:27:59 +0000
-Message-Id: <20220114142759.4002513-1-ross.burton@arm.com>
+Subject: [PATCH v2] python3-dbussy: port to setuptools
+Date: Fri, 14 Jan 2022 15:31:01 +0000
+Message-Id: <20220114153101.4003848-1-ross.burton@arm.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Jan 2022 14:28:04 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Jan 2022 15:31:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94839
+ https://lists.openembedded.org/g/openembedded-devel/message/94840
 
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
@@ -47,13 +47,13 @@ diff --git a/meta-python/recipes-devtools/python/python3-dbussy/setuptool=
 s.patch b/meta-python/recipes-devtools/python/python3-dbussy/setuptools.p=
 atch
 new file mode 100644
-index 0000000000..870345058a
+index 0000000000..3506f76d02
 --- /dev/null
 +++ b/meta-python/recipes-devtools/python/python3-dbussy/setuptools.patch
 @@ -0,0 +1,56 @@
 +Port setup.py to setuptools.
 +
-+Upstream-Status: Pending
++Upstream-Status: Submitted [https://github.com/ldo/dbussy/pull/53]
 +Signed-off-by: Ross Burton <ross.burton@arm.com>
 +
 +diff --git a/setup.py b/setup.py
