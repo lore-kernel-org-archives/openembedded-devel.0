@@ -1,178 +1,139 @@
-Return-Path: <robert.joslyn@redrectangle.org>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 27016C433F5
-	for <webhook@archiver.kernel.org>; Sat, 15 Jan 2022 14:19:59 +0000 (UTC)
-Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net
- [217.70.183.193])
- by mx.groups.io with SMTP id smtpd.web12.7741.1642256397678438433
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9510AC433F5
+	for <webhook@archiver.kernel.org>; Sat, 15 Jan 2022 14:27:58 +0000 (UTC)
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com
+ [209.85.214.170])
+ by mx.groups.io with SMTP id smtpd.web12.7842.1642256877948007335
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 15 Jan 2022 06:19:58 -0800
+ Sat, 15 Jan 2022 06:27:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: redrectangle.org,
- ip: 217.70.183.193, mailfrom: robert.joslyn@redrectangle.org)
-Received: (Authenticated sender: robert.joslyn@redrectangle.org)
-	by mail.gandi.net (Postfix) with ESMTPSA id 09F97240002;
-	Sat, 15 Jan 2022 14:19:54 +0000 (UTC)
-From: Robert Joslyn <robert.joslyn@redrectangle.org>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=nIonch/z;
+ spf=pass (domain: gmail.com, ip: 209.85.214.170,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f170.google.com with SMTP id f13so5347356plg.0
+        for <openembedded-devel@lists.openembedded.org>;
+ Sat, 15 Jan 2022 06:27:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=zc9Cz4nYld6I+Ltn58WotZ1HxmWSpjj5v5ZooLQz/Mc=;
+        b=nIonch/zSyXatxEwDxB/arhwvWBZm4JJbEw2LKRoxT5+lBUZzg2f5xJkRFe53xJI86
+         VkEItHeK3HLOOaQ476b0sM35hyJBrFxARmHrh5ZhUUhRX4rFQk/rO1m9mwv0+R72kLSK
+         7VwV6tJXsr35kvS83pq/OLxlXyS+Bl8aTg1sUsbLXAapQd7CilSx9L09SiNu/rLQtSEM
+         Kjne5Eyh5ta9vdGNZ4ZIsJM7UTWdHm9/sczp8JGJSdElIpmUSPN7iQGoMEdIiOQo1yVG
+         8++e7PxO2PnmH59HbgBN4f+5ooCDX1YU7utqeh9f3pD9JXEOuvuD/zppdBfYwuD8gvQx
+         SnQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=zc9Cz4nYld6I+Ltn58WotZ1HxmWSpjj5v5ZooLQz/Mc=;
+        b=ySxaWNoaOPitCauMPRz5YXl4qLh0pT1JAJ9pDmxPXi3V3GE7O6KNoB8xHpe777WaAK
+         hmRyfK3PHlJCSk2bAClrVh8Dg9vKHxfeTSOlaAwG+oFlN1dvWvSavcqeGjImIajIKM1v
+         X8ETqHL8LmU5AMr+3pK0s+cwvCEm5Eu+xj1hSDhDkKLubfRL5jum5mhtKWeJ+Dce/+xn
+         xZnCrJWHHBqfnXGoqOzZZLzx0JndIlToBy4e9EnDWVxNUC6SeLlgZHl8rMOBtAfScOHw
+         4vCZExNLpETKkcUKnvx7CW4vKWAmS6RKaTOJTxRbu5Nu53vydl9Or3yi6zCjDx4Op8W0
+         Pqhw==
+X-Gm-Message-State: AOAM531PW8v4uDKg2HpuHYZUHa/AStmQDbEl15XWevJHY4SVTCo/zkP0
+	BNupEVyXkWPfe8urHYqpop/XrjV5RCJvfw==
+X-Google-Smtp-Source: 
+ ABdhPJybJVbRd+STn2WgOhXM6uiLSrem0BqYFg3UZE5XWZNh01YuKUjhtU4Q9MP6YFf6iOY5zLlVDA==
+X-Received: by 2002:a17:90a:e50a:: with SMTP id
+ t10mr25296274pjy.186.1642256877167;
+        Sat, 15 Jan 2022 06:27:57 -0800 (PST)
+Received: from keaua.caveonetworks.com
+ ([2601:202:4180:a5c0:7ab9:6507:6566:58c8])
+        by smtp.gmail.com with ESMTPSA id
+ k20sm8606779pfk.111.2022.01.15.06.27.56
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 15 Jan 2022 06:27:56 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Robert Joslyn <robert.joslyn@redrectangle.org>
-Subject: [meta-oe][PATCH] htop: Update to 3.1.2
-Date: Sat, 15 Jan 2022 06:19:04 -0800
-Message-Id: <20220115141904.587561-1-robert.joslyn@redrectangle.org>
-X-Mailer: git-send-email 2.34.1
+Subject: [hardknott 00/11] Patch review: Jan 15th
+Date: Sat, 15 Jan 2022 06:27:43 -0800
+Message-Id: <cover.1642256648.git.akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 15 Jan 2022 14:19:59 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 15 Jan 2022 14:27:58 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94857
+ https://lists.openembedded.org/g/openembedded-devel/message/94859
 
-Upstream renamed the branch to "main", update SRC_URI.
+Please have comments back by Monday
 
-Refresh pkg-config patch.
+The following changes since commit 4932616b69b957e3a876541a579b79cb3f83306f:
 
-Update PACKAGECONFIG options. The linux-affinity option was renamed to
-affinity. Add a packageconfig conflict between affinity and hwloc, since
-these are mutually exclusive. The setuid option was removed by upstream,
-and a capabilities option added. The sensors option switched from
---with/--without to --enable/--disable. Reorder the option to match the
-order used in the configure script to make future updates easier.
+  sdbus-c++-libsystemd: Avoid hard dependency on rsync (2021-11-18 08:05:44 -0800)
 
-License-Update: The previous license contained an exception for the
-Portable Linux Processor Affinity (PLPA) project. This exception has
-been removed, so the project uses an unmodified GPLv2 license. Minor
-formatting and whitespace changes were also made to match the license
-text as published by the FSF. Commit making change:
-https://github.com/htop-dev/htop/commit/088dc5b9a7a5352ee7fdf85f3aff1368958634eb
+are available in the Git repository at:
 
-Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
----
- .../htop/files/0001-Use-pkg-config.patch      | 42 +++++++++----------
- .../htop/{htop_3.0.5.bb => htop_3.1.2.bb}     | 21 +++++-----
- 2 files changed, 32 insertions(+), 31 deletions(-)
- rename meta-oe/recipes-support/htop/{htop_3.0.5.bb => htop_3.1.2.bb} (54%)
+  git://git.openembedded.org/meta-openembedded-contrib stable/hardknott-nut
+  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/hardknott-nut
 
-diff --git a/meta-oe/recipes-support/htop/files/0001-Use-pkg-config.patch b/meta-oe/recipes-support/htop/files/0001-Use-pkg-config.patch
-index 93d6d5857..2760162ac 100644
---- a/meta-oe/recipes-support/htop/files/0001-Use-pkg-config.patch
-+++ b/meta-oe/recipes-support/htop/files/0001-Use-pkg-config.patch
-@@ -1,4 +1,4 @@
--From 14100c6fc2cce7260ca5ace81094aee0ae40dd07 Mon Sep 17 00:00:00 2001
-+From 98ed72177c49a8015a443b3ec272fee3fb5a4eb3 Mon Sep 17 00:00:00 2001
- From: Paul Barker <pbarker@toganlabs.com>
- Date: Sun, 5 Nov 2017 22:07:30 +0000
- Subject: [PATCH] htop: Update to v2.0.2
-@@ -17,32 +17,32 @@ Upstream-status: Inappropriate
-  1 file changed, 6 insertions(+), 6 deletions(-)
- 
- diff --git a/configure.ac b/configure.ac
--index 115d894..0e0a1eb 100644
-+index 0e69096..d20014f 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -205,10 +205,10 @@ AS_VAR_POPDEF([CACHEVAR])dnl
-- 
-- AC_ARG_ENABLE(unicode, [AS_HELP_STRING([--enable-unicode], [enable Unicode support])], ,enable_unicode="yes")
-+@@ -322,10 +322,10 @@ AC_ARG_ENABLE([unicode],
-+               [],
-+               [enable_unicode=yes])
-  if test "x$enable_unicode" = xyes; then
---   HTOP_CHECK_SCRIPT([ncursesw6], [addnwstr], [HAVE_LIBNCURSESW], "ncursesw6-config",
---    HTOP_CHECK_SCRIPT([ncursesw], [addnwstr], [HAVE_LIBNCURSESW], "ncursesw6-config",
---     HTOP_CHECK_SCRIPT([ncursesw], [addnwstr], [HAVE_LIBNCURSESW], "ncursesw5-config",
---      HTOP_CHECK_SCRIPT([ncurses], [addnwstr], [HAVE_LIBNCURSESW], "ncurses5-config",
--+   HTOP_CHECK_SCRIPT([ncursesw6], [addnwstr], [HAVE_LIBNCURSESW], "pkg-config ncursesw6",
--+    HTOP_CHECK_SCRIPT([ncursesw], [addnwstr], [HAVE_LIBNCURSESW], "pkg-config ncursesw6",
--+     HTOP_CHECK_SCRIPT([ncursesw], [addnwstr], [HAVE_LIBNCURSESW], "pkg-config ncursesw5",
--+      HTOP_CHECK_SCRIPT([ncurses], [addnwstr], [HAVE_LIBNCURSESW], "pkg-config ncurses5",
-+-   HTOP_CHECK_SCRIPT([ncursesw6], [waddwstr], [HAVE_LIBNCURSESW], "ncursesw6-config",
-+-    HTOP_CHECK_SCRIPT([ncursesw], [waddwstr], [HAVE_LIBNCURSESW], "ncursesw6-config",
-+-     HTOP_CHECK_SCRIPT([ncursesw], [wadd_wch], [HAVE_LIBNCURSESW], "ncursesw5-config",
-+-      HTOP_CHECK_SCRIPT([ncurses], [wadd_wch], [HAVE_LIBNCURSESW], "ncurses5-config",
-++   HTOP_CHECK_SCRIPT([ncursesw6], [waddwstr], [HAVE_LIBNCURSESW], "pkg-config ncursesw6",
-++    HTOP_CHECK_SCRIPT([ncursesw], [waddwstr], [HAVE_LIBNCURSESW], "pkg-config ncursesw6",
-++     HTOP_CHECK_SCRIPT([ncursesw], [wadd_wch], [HAVE_LIBNCURSESW], "pkg-config ncursesw5",
-++      HTOP_CHECK_SCRIPT([ncurses], [wadd_wch], [HAVE_LIBNCURSESW], "pkg-config ncurses5",
-         HTOP_CHECK_LIB([ncursesw6], [addnwstr], [HAVE_LIBNCURSESW],
-          HTOP_CHECK_LIB([ncursesw], [addnwstr], [HAVE_LIBNCURSESW],
-           HTOP_CHECK_LIB([ncurses], [addnwstr], [HAVE_LIBNCURSESW],
--@@ -225,8 +225,8 @@ if test "x$enable_unicode" = xyes; then
-+@@ -342,8 +342,8 @@ if test "x$enable_unicode" = xyes; then
-     # (at this point we already link against a working ncurses library with wide character support)
-     AC_SEARCH_LIBS([keypad], [tinfow tinfo])
-  else
---   HTOP_CHECK_SCRIPT([ncurses6], [refresh], [HAVE_LIBNCURSES], "ncurses6-config",
---    HTOP_CHECK_SCRIPT([ncurses], [refresh], [HAVE_LIBNCURSES], "ncurses5-config",
--+   HTOP_CHECK_SCRIPT([ncurses6], [refresh], [HAVE_LIBNCURSES], "pkg-config ncurses6",
--+    HTOP_CHECK_SCRIPT([ncurses], [refresh], [HAVE_LIBNCURSES], "pkg-config ncurses5",
--      HTOP_CHECK_LIB([ncurses6],  [refresh], [HAVE_LIBNCURSES],
--       HTOP_CHECK_LIB([ncurses],  [refresh], [HAVE_LIBNCURSES],
--       missing_libraries="$missing_libraries libncurses"
-+-   HTOP_CHECK_SCRIPT([ncurses6], [wnoutrefresh], [HAVE_LIBNCURSES], [ncurses6-config],
-+-    HTOP_CHECK_SCRIPT([ncurses], [wnoutrefresh], [HAVE_LIBNCURSES], [ncurses5-config],
-++   HTOP_CHECK_SCRIPT([ncurses6], [wnoutrefresh], [HAVE_LIBNCURSES], [pkg-config ncurses6],
-++    HTOP_CHECK_SCRIPT([ncurses], [wnoutrefresh], [HAVE_LIBNCURSES], [pkg-config ncurses5],
-+      HTOP_CHECK_LIB([ncurses6],  [doupdate], [HAVE_LIBNCURSES],
-+       HTOP_CHECK_LIB([ncurses],  [doupdate], [HAVE_LIBNCURSES],
-+        HTOP_CHECK_LIB([curses],  [doupdate], [HAVE_LIBNCURSES],
-diff --git a/meta-oe/recipes-support/htop/htop_3.0.5.bb b/meta-oe/recipes-support/htop/htop_3.1.2.bb
-similarity index 54%
-rename from meta-oe/recipes-support/htop/htop_3.0.5.bb
-rename to meta-oe/recipes-support/htop/htop_3.1.2.bb
-index 2772aa577..d8e241ed0 100644
---- a/meta-oe/recipes-support/htop/htop_3.0.5.bb
-+++ b/meta-oe/recipes-support/htop/htop_3.1.2.bb
-@@ -2,14 +2,14 @@ SUMMARY = "Interactive process viewer"
- HOMEPAGE = "https://htop.dev"
- SECTION = "console/utils"
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=4099d367cd5e59b6d4fc1ee33accb891"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- DEPENDS = "ncurses"
- 
--SRC_URI = "git://github.com/htop-dev/htop.git;branch=master;protocol=https \
-+SRC_URI = "git://github.com/htop-dev/htop.git;branch=main;protocol=https \
-            file://0001-Use-pkg-config.patch \
--           "
--SRCREV = "ce6d60e7def146c13d0b8bca4642e7401a0a8995"
-+"
-+SRCREV = "d73783d6dbec4a8d9d20d744bf2b5e6a7073aa46"
- 
- S = "${WORKDIR}/git"
- 
-@@ -17,18 +17,19 @@ inherit autotools pkgconfig
- 
- PACKAGECONFIG ??= " \
-     unicode \
--    linux-affinity \
-+    affinity \
-     delayacct \
- "
-+PACKAGECONFIG[unicode] = "--enable-unicode,--disable-unicode"
-+PACKAGECONFIG[affinity] = "--enable-affinity,--disable-affinity,,,,hwloc"
-+PACKAGECONFIG[unwind] = "--enable-unwind,--disable-unwind,libunwind"
-+PACKAGECONFIG[hwloc] = "--enable-hwloc,--disable-hwloc,hwloc,,,affinity"
- PACKAGECONFIG[openvz] = "--enable-openvz,--disable-openvz"
- PACKAGECONFIG[vserver] = "--enable-vserver,--disable-vserver"
- PACKAGECONFIG[ancient-vserver] = "--enable-ancient-vserver,--disable-ancient-vserver"
--PACKAGECONFIG[unicode] = "--enable-unicode,--disable-unicode"
--PACKAGECONFIG[hwloc] = "--enable-hwloc,--disable-hwloc,hwloc"
--PACKAGECONFIG[linux-affinity] = "--enable-linux-affinity,--disable-linux-affinity"
--PACKAGECONFIG[setuid] = "--enable-setuid,--disable-setuid"
-+PACKAGECONFIG[capabilities] = "--enable-capabilities,--disable-capabilities,libcap"
- PACKAGECONFIG[delayacct] = "--enable-delayacct,--disable-delayacct,libnl"
--PACKAGECONFIG[sensors] = "--with-sensors,--without-sensors,lmsensors,lmsensors-libsensors"
-+PACKAGECONFIG[sensors] = "--enable-sensors,--disable-sensors,lmsensors,lmsensors-libsensors"
- 
- FILES:${PN} += "${datadir}/icons/hicolor/scalable/apps/htop.svg"
- 
+Armin Kuster (1):
+  wireshark: update to latest stable 3.4.11
+
+Changqing Li (2):
+  syslog-ng: adjust control socket location
+  redis: add back missing patch
+
+Chen Qi (1):
+  udisks2: upgrade from 2.9.2 to 2.9.4
+
+Jeremy Puhlman (1):
+  ifenslave: Add branch=main
+
+Mingli Yu (1):
+  libteam: switch to python3
+
+Peter Kjellerstedt (1):
+  googletest: Switch branch from master to main
+
+Sakib Sajal (1):
+  nss: fix CVE-2021-43527
+
+Yi Zhao (2):
+  postfix: fix build with glibc 2.34
+  postfix: upgrade 3.4.12 -> 3.4.23
+
+wangmy (1):
+  apache2: upgrade 2.4.51 -> 2.4.52
+
+ .../0001-fix-build-with-glibc-2.34.patch      |  46 +++
+ .../{postfix_3.4.12.bb => postfix_3.4.23.bb}  |   5 +-
+ .../ifenslave/ifenslave_2.11.bb               |   2 +-
+ .../0004-lemon-Remove-line-directives.patch   |  15 +-
+ ...wireshark_3.4.8.bb => wireshark_3.4.11.bb} |   2 +-
+ meta-oe/recipes-extended/redis/redis_6.2.6.bb |   4 +
+ ...team_basic_test.py-switch-to-python3.patch | 101 ++++++
+ ...asic_test.py-use-python3-interpreter.patch |  28 --
+ .../recipes-support/libteam/libteam_1.31.bb   |   2 +-
+ ...re-DER-encoded-signatures-are-within.patch | 297 ++++++++++++++++++
+ meta-oe/recipes-support/nss/nss_3.64.bb       |   1 +
+ ...log-ng.service-the-syslog-ng-service.patch |   2 +-
+ .../{udisks2_2.9.2.bb => udisks2_2.9.4.bb}    |   4 +-
+ .../recipes-test/googletest/googletest_git.bb |   2 +-
+ .../{apache2_2.4.51.bb => apache2_2.4.52.bb}  |   2 +-
+ 15 files changed, 466 insertions(+), 47 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/postfix/files/0001-fix-build-with-glibc-2.34.patch
+ rename meta-networking/recipes-daemons/postfix/{postfix_3.4.12.bb => postfix_3.4.23.bb} (75%)
+ rename meta-networking/recipes-support/wireshark/{wireshark_3.4.8.bb => wireshark_3.4.11.bb} (97%)
+ create mode 100644 meta-oe/recipes-support/libteam/libteam/0001-team_basic_test.py-switch-to-python3.patch
+ delete mode 100644 meta-oe/recipes-support/libteam/libteam/0001-team_basic_test.py-use-python3-interpreter.patch
+ create mode 100644 meta-oe/recipes-support/nss/nss/0001-Bug-1737470-Ensure-DER-encoded-signatures-are-within.patch
+ rename meta-oe/recipes-support/udisks/{udisks2_2.9.2.bb => udisks2_2.9.4.bb} (89%)
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.51.bb => apache2_2.4.52.bb} (99%)
+
 -- 
-2.34.1
+2.25.1
 
 
