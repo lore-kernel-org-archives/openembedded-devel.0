@@ -2,137 +2,115 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9510AC433F5
-	for <webhook@archiver.kernel.org>; Sat, 15 Jan 2022 14:27:58 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com
- [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web12.7842.1642256877948007335
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 75FEBC433EF
+	for <webhook@archiver.kernel.org>; Sat, 15 Jan 2022 14:27:59 +0000 (UTC)
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com
+ [209.85.216.45])
+ by mx.groups.io with SMTP id smtpd.web08.7643.1642256878806053154
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 15 Jan 2022 06:27:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=nIonch/z;
- spf=pass (domain: gmail.com, ip: 209.85.214.170,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=MeDhqqqq;
+ spf=pass (domain: gmail.com, ip: 209.85.216.45,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id f13so5347356plg.0
+Received: by mail-pj1-f45.google.com with SMTP id
+ l16-20020a17090a409000b001b2e9628c9cso16909760pjg.4
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 15 Jan 2022 06:27:57 -0800 (PST)
+ Sat, 15 Jan 2022 06:27:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:subject:date:message-id:mime-version
+        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=zc9Cz4nYld6I+Ltn58WotZ1HxmWSpjj5v5ZooLQz/Mc=;
-        b=nIonch/zSyXatxEwDxB/arhwvWBZm4JJbEw2LKRoxT5+lBUZzg2f5xJkRFe53xJI86
-         VkEItHeK3HLOOaQ476b0sM35hyJBrFxARmHrh5ZhUUhRX4rFQk/rO1m9mwv0+R72kLSK
-         7VwV6tJXsr35kvS83pq/OLxlXyS+Bl8aTg1sUsbLXAapQd7CilSx9L09SiNu/rLQtSEM
-         Kjne5Eyh5ta9vdGNZ4ZIsJM7UTWdHm9/sczp8JGJSdElIpmUSPN7iQGoMEdIiOQo1yVG
-         8++e7PxO2PnmH59HbgBN4f+5ooCDX1YU7utqeh9f3pD9JXEOuvuD/zppdBfYwuD8gvQx
-         SnQQ==
+        bh=il8VWTvloA8FZUiyXDNdkvkmGPZYIEGNbF+kPczLHZM=;
+        b=MeDhqqqqqAYZIJSxGBADGi8Dy643h+//xB3LVdGi4uXDdJypJiFlfNJDlm/1d2YGb9
+         g4emwQUUntvkPt7G/sy57wY6lS5kAlZw4FHQuEtUvW326H9/SlQH7Py9UxW2YT4nKQnv
+         1W1U4FW9ktKZsvdTvvC8CbcXSZcV+KZ98FXQq/qcG21Y2f4TCcv6cKJ2dwsu6rsBmMCB
+         ObC21YV9RVCei9/xIcOw+3YSKFsD/x1SKy/Erf3Bmw1HuHiuOp9XbbxgrruPdyLpK3fT
+         AvGzMX6+8VvX9Nb3WKDzyXtBnpaXjQGOiRUHV27eWELJVm7r6IT4+VR5fc9nFnmsR+fg
+         RXeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=zc9Cz4nYld6I+Ltn58WotZ1HxmWSpjj5v5ZooLQz/Mc=;
-        b=ySxaWNoaOPitCauMPRz5YXl4qLh0pT1JAJ9pDmxPXi3V3GE7O6KNoB8xHpe777WaAK
-         hmRyfK3PHlJCSk2bAClrVh8Dg9vKHxfeTSOlaAwG+oFlN1dvWvSavcqeGjImIajIKM1v
-         X8ETqHL8LmU5AMr+3pK0s+cwvCEm5Eu+xj1hSDhDkKLubfRL5jum5mhtKWeJ+Dce/+xn
-         xZnCrJWHHBqfnXGoqOzZZLzx0JndIlToBy4e9EnDWVxNUC6SeLlgZHl8rMOBtAfScOHw
-         4vCZExNLpETKkcUKnvx7CW4vKWAmS6RKaTOJTxRbu5Nu53vydl9Or3yi6zCjDx4Op8W0
-         Pqhw==
-X-Gm-Message-State: AOAM531PW8v4uDKg2HpuHYZUHa/AStmQDbEl15XWevJHY4SVTCo/zkP0
-	BNupEVyXkWPfe8urHYqpop/XrjV5RCJvfw==
+        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=il8VWTvloA8FZUiyXDNdkvkmGPZYIEGNbF+kPczLHZM=;
+        b=02AwA2UvNy5WLr3zCcp+rB44NjZUrzTjr6wIxHErsMNTUiOdXUk+3l0dAXAYI1B+AN
+         /iqr1l3XAeJc539tdceLFs99YdbIyduwOIwVyEciHWPLargzjsf+BPWHTgkVichx7nI+
+         jkNZVNnK3l2DPnhrJOH2XbyDhMd8oihwKvehfrzi8+9w3x820qf9K2eBTY4YMXmdjrNL
+         2GfwrvtTLQz8dLbLl1+u5DBsvWkfMTycqy+Pn5z3RxNM4I66NUJHVXqwARwlsOu85F7O
+         CGIPZixmKHW89x8NYz2XFHQ9tw7G8myYiS0JvPavSB7cu8ORum1930WbJrYYy+kRyL5L
+         x+nA==
+X-Gm-Message-State: AOAM530/6tDZ3eDCk63xGdZsQhFNf8WeCrnvkCJRXEVs936hrx+gOPzv
+	6aHZDHtj544xyMMFavTRm4ikC0QMCKSm6A==
 X-Google-Smtp-Source: 
- ABdhPJybJVbRd+STn2WgOhXM6uiLSrem0BqYFg3UZE5XWZNh01YuKUjhtU4Q9MP6YFf6iOY5zLlVDA==
-X-Received: by 2002:a17:90a:e50a:: with SMTP id
- t10mr25296274pjy.186.1642256877167;
-        Sat, 15 Jan 2022 06:27:57 -0800 (PST)
+ ABdhPJx3yvybbI5BuGxJsfi2I3Z2+IrEnAZZNX9E3KzUJzxsO4E/Y5KHzBVtNDqazYLuQFWeXf6fVw==
+X-Received: by 2002:a17:902:d883:b0:14a:4ba5:6e72 with SMTP id
+ b3-20020a170902d88300b0014a4ba56e72mr14368651plz.27.1642256878205;
+        Sat, 15 Jan 2022 06:27:58 -0800 (PST)
 Received: from keaua.caveonetworks.com
  ([2601:202:4180:a5c0:7ab9:6507:6566:58c8])
         by smtp.gmail.com with ESMTPSA id
- k20sm8606779pfk.111.2022.01.15.06.27.56
+ k20sm8606779pfk.111.2022.01.15.06.27.57
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 15 Jan 2022 06:27:56 -0800 (PST)
+        Sat, 15 Jan 2022 06:27:57 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [hardknott 00/11] Patch review: Jan 15th
-Date: Sat, 15 Jan 2022 06:27:43 -0800
-Message-Id: <cover.1642256648.git.akuster808@gmail.com>
+Subject: [hardknott 01/11] syslog-ng: adjust control socket location
+Date: Sat, 15 Jan 2022 06:27:44 -0800
+Message-Id: 
+ <bc906a49dcc070c219587e6cf98caf2ea2219043.1642256649.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1642256648.git.akuster808@gmail.com>
+References: <cover.1642256648.git.akuster808@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 15 Jan 2022 14:27:58 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 15 Jan 2022 14:27:59 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94859
+ https://lists.openembedded.org/g/openembedded-devel/message/94860
 
-Please have comments back by Monday
+From: Changqing Li <changqing.li@windriver.com>
 
-The following changes since commit 4932616b69b957e3a876541a579b79cb3f83306f:
+Commit [1] changed the pidfile dir to /var/run/syslog-ng. This also changed
+the location where the control socket is searched for, causing the following
+error with systemd:
 
-  sdbus-c++-libsystemd: Avoid hard dependency on rsync (2021-11-18 08:05:44 -0800)
+root@qemux86-64:~# syslog-ng-ctl config
+Error connecting control socket, socket='/var/run/syslog-ng/syslog-ng.ctl',
+error='No such file or directory'
 
-are available in the Git repository at:
+Update the systemd service file to point to the new location.
 
-  git://git.openembedded.org/meta-openembedded-contrib stable/hardknott-nut
-  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/hardknott-nut
+[1] 00d1d63e4f7f ("syslog-ng: provide correct PID directory location to
+                   restart/stop syslog-ng daemon")
 
-Armin Kuster (1):
-  wireshark: update to latest stable 3.4.11
+(master rev: b57d824fdf822a4c3fdb153b92063f88705e3a6b)
 
-Changqing Li (2):
-  syslog-ng: adjust control socket location
-  redis: add back missing patch
+Signed-off-by: lmorales <luisalejandro.moralespena@windriver.com>
+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../files/syslog-ng.service-the-syslog-ng-service.patch         | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Chen Qi (1):
-  udisks2: upgrade from 2.9.2 to 2.9.4
-
-Jeremy Puhlman (1):
-  ifenslave: Add branch=main
-
-Mingli Yu (1):
-  libteam: switch to python3
-
-Peter Kjellerstedt (1):
-  googletest: Switch branch from master to main
-
-Sakib Sajal (1):
-  nss: fix CVE-2021-43527
-
-Yi Zhao (2):
-  postfix: fix build with glibc 2.34
-  postfix: upgrade 3.4.12 -> 3.4.23
-
-wangmy (1):
-  apache2: upgrade 2.4.51 -> 2.4.52
-
- .../0001-fix-build-with-glibc-2.34.patch      |  46 +++
- .../{postfix_3.4.12.bb => postfix_3.4.23.bb}  |   5 +-
- .../ifenslave/ifenslave_2.11.bb               |   2 +-
- .../0004-lemon-Remove-line-directives.patch   |  15 +-
- ...wireshark_3.4.8.bb => wireshark_3.4.11.bb} |   2 +-
- meta-oe/recipes-extended/redis/redis_6.2.6.bb |   4 +
- ...team_basic_test.py-switch-to-python3.patch | 101 ++++++
- ...asic_test.py-use-python3-interpreter.patch |  28 --
- .../recipes-support/libteam/libteam_1.31.bb   |   2 +-
- ...re-DER-encoded-signatures-are-within.patch | 297 ++++++++++++++++++
- meta-oe/recipes-support/nss/nss_3.64.bb       |   1 +
- ...log-ng.service-the-syslog-ng-service.patch |   2 +-
- .../{udisks2_2.9.2.bb => udisks2_2.9.4.bb}    |   4 +-
- .../recipes-test/googletest/googletest_git.bb |   2 +-
- .../{apache2_2.4.51.bb => apache2_2.4.52.bb}  |   2 +-
- 15 files changed, 466 insertions(+), 47 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/postfix/files/0001-fix-build-with-glibc-2.34.patch
- rename meta-networking/recipes-daemons/postfix/{postfix_3.4.12.bb => postfix_3.4.23.bb} (75%)
- rename meta-networking/recipes-support/wireshark/{wireshark_3.4.8.bb => wireshark_3.4.11.bb} (97%)
- create mode 100644 meta-oe/recipes-support/libteam/libteam/0001-team_basic_test.py-switch-to-python3.patch
- delete mode 100644 meta-oe/recipes-support/libteam/libteam/0001-team_basic_test.py-use-python3-interpreter.patch
- create mode 100644 meta-oe/recipes-support/nss/nss/0001-Bug-1737470-Ensure-DER-encoded-signatures-are-within.patch
- rename meta-oe/recipes-support/udisks/{udisks2_2.9.2.bb => udisks2_2.9.4.bb} (89%)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.51.bb => apache2_2.4.52.bb} (99%)
-
+diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
+index 0e1d09492b..7334800304 100644
+--- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
++++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
+@@ -38,7 +38,7 @@ index 0ccc2b9..7f08c0e 100644
+ -CONTROL_FILE=/var/run/syslog-ng.ctl
+ -PID_FILE=/var/run/syslog-ng.pid
+ +PERSIST_FILE=@LOCALSTATEDIR@/lib/syslog-ng/syslog-ng.persist
+-+CONTROL_FILE=@LOCALSTATEDIR@/lib/syslog-ng/syslog-ng.ctl
+++CONTROL_FILE=@LOCALSTATEDIR@/run/syslog-ng/syslog-ng.ctl
+ +PID_FILE=@LOCALSTATEDIR@/run/syslog-ng.pid
+  OTHER_OPTIONS="--enable-core"
+ -- 
 -- 
 2.25.1
 
