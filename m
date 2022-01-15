@@ -1,133 +1,120 @@
-Return-Path: <marex@denx.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B8B7BC433EF
-	for <webhook@archiver.kernel.org>; Sat, 15 Jan 2022 15:46:00 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by mx.groups.io with SMTP id smtpd.web08.8593.1642261558659664465
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22B88C433EF
+	for <webhook@archiver.kernel.org>; Sat, 15 Jan 2022 19:02:37 +0000 (UTC)
+Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com
+ [209.85.219.51])
+ by mx.groups.io with SMTP id smtpd.web09.11158.1642273356395407468
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 15 Jan 2022 07:46:00 -0800
+ Sat, 15 Jan 2022 11:02:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@denx.de header.s=phobos-20191101 header.b=tNFBXtDU;
- spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
-	(No client certificate requested)
-	(Authenticated sender: marex@denx.de)
-	by phobos.denx.de (Postfix) with ESMTPSA id 5BF6D8142D;
-	Sat, 15 Jan 2022 16:45:55 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1642261555;
-	bh=GcVuoVL/nS/r1CYapdUcGveZSAr827FFdvJPBcm2qkQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=tNFBXtDUIuvvX1PqqNu9LRXd86v7vJPgf8IpCgeuANq7pkIABRV6a8A8iG4lnrHD6
-	 PD3Gv0/mwqfYI4Rei9G3X6+VHVF0UCVaZnJcY9zZDgejKfaSK9eWjDRIdsP5+QcIDK
-	 aZy3W0wmVcckPNVNS0UwpHGMPGrTSvUgkrrq9E0oGN6H/AXBO+fQsYsYWwZwHHq35l
-	 0b+dXtZDpanLhEyOXUO8HMXoKx6wjlLpKhFQYtCyGkarTinCjwXj9OeBqkczZJ1FF9
-	 zQSd8soypA8jlQ2ocvItDNA0D+IFfl5KEIBPoSunuUa3i5iLQi3f7dI1Xd7HdaEElY
-	 eUkspV5fqkVIw==
-Message-ID: <5e27977c-15aa-42ca-463a-744d1b36d306@denx.de>
-Date: Sat, 15 Jan 2022 16:45:54 +0100
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=TFLTHS0U;
+ spf=pass (domain: gmail.com, ip: 209.85.219.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f51.google.com with SMTP id c2so4088430qvw.3
+        for <openembedded-devel@lists.openembedded.org>;
+ Sat, 15 Jan 2022 11:02:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=LHaftbkjxVsU+v0b8ll6Lp2jjelp23SwsI5BoVh1zvo=;
+        b=TFLTHS0UC5tpWPszqINy6IQVQS7HnTaAMJyWUBzrwO1YtN2jdUU5/YAa2RLQjWSKxy
+         BMb2HS3ullzNMVLH1O0yOzH1uWYMu6BbZT/A3TQxDlaLCDQNxpKqaFWEvg1c1MAXzOia
+         IwU2aMEqz3LzDEsTC0WGE42YvcpiWnCns44qbWQ5riWOS7bPX6et22TDmxcVKKDiYjjd
+         l3OmsjFBfKqtudCJFVl5SU80nBFQm9alPQ9fYxYTi4oQPsJS6I+IsbInPJSAae7Uoy1F
+         7UzfBn+OcPv4dzG6sELDFvreZKbLwPYp6sCJ7FShtOCt3hk3PNP2djkJD/ziS7TW0qDX
+         yBSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=LHaftbkjxVsU+v0b8ll6Lp2jjelp23SwsI5BoVh1zvo=;
+        b=vLcyhtyZodtLWPyr/tOTblyYF2YNn5rGThERZ1WqUduH8yi2H3oxdWZIMX67J7Vz11
+         lxPfb2MteDYs91fyoTN5a0NTybL+GG7xUv+es2eWPWGDV3Hv50u+7BgplZnjlfMfR/xS
+         dGKkTMp0LcxJvgsGBmGqXSd3EyfqcFB1jxqSmg0/FBWCyzUGT7soADvUeGjvGsyjYbpG
+         jutNzWjWPtK16FVQxehLBLVVSRZ1jA2bEEcyiXzuX0LSlsVlBYrmfGInRdRoKFutX+1b
+         /so+hwpUjMqhMVm/HvS+nXfzUY1o1osDvPc8wg2LGhrTUpOWiOeTxVK31WAubnv8hy6Y
+         HNxQ==
+X-Gm-Message-State: AOAM532anbBnXRQsHDJ7VZlo3ATgenbPl9WssOiEp9fndGN91w7HPqNg
+	7la1XcBOmY+ppffdZ4GEeCnIVvqm/93I6fYdpIo=
+X-Google-Smtp-Source: 
+ ABdhPJwiLH+ihu5q8I/lEjqOxGdIL8OOpfHlhuEj6M0Rb9i684o14crsjYvrWMA83q+cXNLl2Yle+mbXFKka6nfhDYo=
+X-Received: by 2002:a05:6214:629:: with SMTP id
+ a9mr314462qvx.110.1642273355245;
+ Sat, 15 Jan 2022 11:02:35 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.4.1
-Subject: Re: [oe] [meta-oe][dunfell][PATCH 1/5] freerdp: Upgrade to 2.2.0
-Content-Language: en-US
-To: akuster808 <akuster808@gmail.com>,
- openembedded-devel@lists.openembedded.org
-Cc: raj.khem@gmail.com
-References: <20220111224714.1289840-1-marex@denx.de>
- <4d1f655b-23c4-7f6a-c4bd-259a890738f5@gmail.com>
- <c020d0e7-8702-c169-5812-5a8c06f19b7c@denx.de>
- <d2d5d5dc-c1db-700d-470c-42126bc394dc@gmail.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <d2d5d5dc-c1db-700d-470c-42126bc394dc@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Virus-Scanned: clamav-milter 0.103.2 at phobos.denx.de
-X-Virus-Status: Clean
+References: <20220114115246.3985850-1-ross.burton@arm.com>
+ <20220114115246.3985850-2-ross.burton@arm.com>
+ <CAMKF1sqe8REidDKhe+VxwSSB9EPHtqVcdfQCXSvH4KPRqUuhGQ@mail.gmail.com>
+ <CAAnfSTuwhM8oik521ND9qPtFeorOxchkvWqrJDVcKEP+cSgOeg@mail.gmail.com>
+In-Reply-To: 
+ <CAAnfSTuwhM8oik521ND9qPtFeorOxchkvWqrJDVcKEP+cSgOeg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 15 Jan 2022 11:02:24 -0800
+Message-ID: 
+ <CAMKF1sqo1Rj2x74+KnGY4oNmpF06mkmB2dr1yrA_Q-zLGopGuA@mail.gmail.com>
+Subject: Re: [oe] [PATCH 2/3] iotop: move to the C port of iotop
+To: Ross Burton <ross@burtonini.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000f6ad6405d5a38f42"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 15 Jan 2022 15:46:00 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 15 Jan 2022 19:02:37 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94871
+ https://lists.openembedded.org/g/openembedded-devel/message/94872
 
-On 1/15/22 14:43, akuster808 wrote:
-> 
-> 
-> On 1/11/22 8:57 PM, Marek Vasut wrote:
->> On 1/12/22 05:42, akuster808 wrote:
->>>
->>>
->>> On 1/11/22 2:47 PM, Marek Vasut wrote:
->>>> From: Khem Raj <raj.khem@gmail.com>
->>>>
->>>> (cherry picked from commit f751dcf81a18fe817b40e755a2ba3f54a74d1e02)
->>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>>> Signed-off-by: Marek Vasut <marex@denx.de>
->>>
->>> And why should I allow this?
->>
->> This ... what ? The SoB line or the update ?
-> 
-> What is in the update from 2.2.0 to 2.4.1?
+--000000000000f6ad6405d5a38f42
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This patch updates freerdp from 2.0.0 to 2.2.0 , not from 2.2.0 to 2.4.1 
-, that's a later patch. This one addresses quite a few old CVEs though, 
-see below.
+On Sat, Jan 15, 2022 at 2:33 AM Ross Burton <ross@burtonini.com> wrote:
 
-> I had to look at the release notes myself and found new features being
-> added between those two. New features are not allowed per our process.
+> On Sat, 15 Jan 2022 at 01:26, Khem Raj <raj.khem@gmail.com> wrote:
+> > It fails on clang/arm see
+> > https://errors.yoctoproject.org/Errors/Details/622623/
+>
+> That's clang segfaulting, fun!  I don't have access to my build
+> machine this weekend, can you just throw in TOOLCHAIN=3D"gcc" for now?
+>
 
-This should all be part of FreeRDP stable-2.0 branch
-https://github.com/FreeRDP/FreeRDP/tree/stable-2.0
+Yeah and it=E2=80=99s with glibc master so not a big deal I will still extr=
+act a
+test case for reporting to llvm GitHub issue
 
-Their active development is happening toward 3.0 release, that's where 
-features are being added.
+>
+> Ross
+>
 
-Looking briefly at the debian changelog for the various CVEs this 
-patchset addresses, here is a list:
+--000000000000f6ad6405d5a38f42
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-https://metadata.ftp-master.debian.org/changelogs//main/f/freerdp2/freerdp2_2.4.1+dfsg1-1_changelog
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Sat, Jan 15, 2022 at 2:33 AM Ross Burton &lt;<a href=3D"=
+mailto:ross@burtonini.com">ross@burtonini.com</a>&gt; wrote:<br></div><bloc=
+kquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #cc=
+c solid;padding-left:1ex">On Sat, 15 Jan 2022 at 01:26, Khem Raj &lt;<a hre=
+f=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>&gt=
+; wrote:<br>
+&gt; It fails on clang/arm see<br>
+&gt; <a href=3D"https://errors.yoctoproject.org/Errors/Details/622623/" rel=
+=3D"noreferrer" target=3D"_blank">https://errors.yoctoproject.org/Errors/De=
+tails/622623/</a><br>
+<br>
+That&#39;s clang segfaulting, fun!=C2=A0 I don&#39;t have access to my buil=
+d<br>
+machine this weekend, can you just throw in TOOLCHAIN=3D&quot;gcc&quot; for=
+ now?<br>
+</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Yeah and it=E2=
+=80=99s with glibc master so not a big deal I will still extract a test cas=
+e for reporting to llvm GitHub issue=C2=A0</div><blockquote class=3D"gmail_=
+quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1=
+ex"><br>
+Ross<br>
+</blockquote></div></div>
 
-freerdp2 (2.2.0+dfsg1-1) unstable; urgency=medium
-
-   * New upstream release.
-     + CVE-2020-15103: Integer overflow due to missing input sanitation in
-...
-
-freerdp2 (2.1.2+dfsg1-1) unstable; urgency=medium
-
-   * New upstream release.
-     - CVE-2020-4033: Out of bound read in RLEDECOMPRESS
-     - CVE-2020-4031: Use-After-Free in gdi_SelectObject
-     - CVE-2020-4032: Integer casting vulnerability in
-       `update_recv_secondary_order`
-     - CVE-2020-4030: OOB read in `TrioParse`
-     - CVE-2020-11099: OOB Read in 
-license_read_new_or_upgrade_license_packet
-     - CVE-2020-11098: Out-of-bound read in glyph_cache_put
-     - CVE-2020-11097: OOB read in ntlm_av_pair_get
-     - CVE-2020-11095: Global OOB read in update_recv_primary_order
-     - CVE-2020-11096: Global OOB read in update_read_cache_bitmap_v3_order
-...
-
-freerdp2 (2.4.1+dfsg1-1) unstable; urgency=medium
-
-   * New upstream release. (Closes: #999727).
-     - CVE-2021-41160: Fix improper region checks in all clients that 
-allowed
-       out of bound write to memory. (Closes: #1001062).
-     - CVE-2021-41159: Fix improper client input validation for gateway
-       connections that allowed one to overwrite memory. (Closes: #1001061).
-
-> This patch set will not be included.
-
-I see you've made your decision then.
-
-How do you propose those CVEs be closed in dunfell then ?
-
-[...]
+--000000000000f6ad6405d5a38f42--
 
