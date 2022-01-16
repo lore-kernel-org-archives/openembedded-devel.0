@@ -2,64 +2,64 @@ Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A015C433EF
-	for <webhook@archiver.kernel.org>; Sun, 16 Jan 2022 05:29:24 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com
- [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web08.29798.1642310963651688597
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A5B0C433F5
+	for <webhook@archiver.kernel.org>; Sun, 16 Jan 2022 05:29:30 +0000 (UTC)
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com
+ [209.85.216.46])
+ by mx.groups.io with SMTP id smtpd.web10.29874.1642310969587273419
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 15 Jan 2022 21:29:23 -0800
+ Sat, 15 Jan 2022 21:29:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=TmTmSKR4;
- spf=pass (domain: gmail.com, ip: 209.85.214.180,
- mailfrom: ticotimo@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id t18so16878483plg.9
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=LXudSNsy;
+ spf=pass (domain: gmail.com, ip: 209.85.216.46, mailfrom: ticotimo@gmail.com)
+Received: by mail-pj1-f46.google.com with SMTP id
+ l10-20020a17090a384a00b001b22190e075so26238921pjf.3
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 15 Jan 2022 21:29:23 -0800 (PST)
+ Sat, 15 Jan 2022 21:29:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=qvm1ghHXVUvx5TjDa0wEPqA10jJwOoUcKoTh0E/RIPU=;
-        b=TmTmSKR4SWYLl7mt60/gJPVsQC+PdTd8v7HspA1WIPtjigpDe1mqX19+VA02FdcJQQ
-         WfFOQhOA2zZe2lHQUtZpee57z0SwQ98M8yujTDGNKlO5Uvv6F+8Z76dRTFmEx+/jo+YO
-         D33oaYJABjcBc0SyS08KDeL0BKZxMlV+oxu9/cjAx6gEaYOUr+T2h924YhYcghciFH0R
-         nJRSXnWC6OR3jG4QqWrSnAIw0ubLTXVw5q8PU2RchZIcwPnzq7EMn64NoiehUG33zOib
-         QOEI18SsX4KnvaO4WiuFo7I/h4GyS6y1w450sz7R8TCtkyV7DHpTMwfU/IuCwSplHtCv
-         reRw==
+        bh=Yh7uzIu+xeq/5fSUru4Sgdg26JONSvU3KeyHm6FgrPs=;
+        b=LXudSNsy5TdjhnmlrYlM3HJzeGJ4PKImAyKM0G7hrEZdTBEcoU8MmGtNfQM6MsRizX
+         tTLdFE61iOyjaDucHFqBI6CMC/LJZkYN1Xz0ztFwRwZltItoPW/fSHybex98ZJqhMSRV
+         8BvNzZTjJvGrR3l5HVs3loo15QPM6ejPKmfn1wvnYlpCg1VJNMJ19WYkLmA7rc7/cZVM
+         IbeWP5AYgLfBeHnnoCVFJFdNNeAoxXBqdhLX83NcQ1sWt5tmcd1nS8Wgm3Vz9lH2/rBv
+         kE2hI8U28K2jH6+/pZwu7uQeDEitLo96kzDmmpYnJAv1beiNVDJ+R3ZNDRXothQW1CBL
+         aXPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=qvm1ghHXVUvx5TjDa0wEPqA10jJwOoUcKoTh0E/RIPU=;
-        b=AJD7atJVF+Irn+YMLSVSxkeHnZDlLbmi7xuKvGio6zKQD+9zWrBEWQiFBBx4/474oN
-         8WJzs3gEyUGczELIYS3cDWEBi3XcFBUqp/sQhzG6HMIS3yEPD0aOVfPCfdxiWAVS5Pg9
-         XcbPf4Qca1drMA3bxt7gsoAw/jJRk/9JbJIOhF7NnnX9w90o2TwiqASAqIsolsR0wdVq
-         M/1xtWFqnWE23mYcqLAhEePTlZ5kU57q3pqeH4SFkRV83MC7hisckItKK868CGmUkREW
-         OHaSsyNN5gSfpZRhLhaAJ2Gxz3Uj13/WWsOpfFPNYZvpsF1IIV/NhyDkBp03YTV6NhsA
-         NdMg==
-X-Gm-Message-State: AOAM530LA7wWQtRDM0jmzytY0KTjyvdkG2F0C8BKvlvMoiWdwEVPjXw0
-	033bMRcdjDK1ucrG70KyEz7cyP8Qife6Xw==
+        bh=Yh7uzIu+xeq/5fSUru4Sgdg26JONSvU3KeyHm6FgrPs=;
+        b=V7r1p8LHGgvm1NjwAjVIfL23giX7+X06tXxLg+NMst9RlbqAUTy2gGJPoZkr8BE6tA
+         Lr1EK/og5S7qzMUbwZxr5/g2Y9weM85iErNnjZTrnFTpWgBHG9l/o2zFjF4GhtseZULj
+         HOWDs5upRTueE18/iIY4rmJjJqkiPvhcm8vSmFYz8o7WaUBFyF3rdzI6vtyyYxNNP/nZ
+         7KXgEhyNLc+u7n1XRq2l/alH1NeuZtpBcujjbdI3ZGfQrn1jXz29BL67dO/yOfrxvVhb
+         W+yeKlyT3yIh9VOaN8dnNpUJIWA2ioNWv0c9J3up7bVcVLtUlkPgJWwyWc66j6O+M3xv
+         usMg==
+X-Gm-Message-State: AOAM531Yg71y+BfXH/bznawRocijXjDeM3spq2QLdl2UArZaDCjVKPDb
+	GXUTgJ18J1bYuqQHmWD8p90QmwsBAxPVvA==
 X-Google-Smtp-Source: 
- ABdhPJzBpUO0hcGkKrXw8z5vfjecyRxb6BUr6t38anqnXMIco0LporycXFni5Gv5+9DPkG9TDj3bBg==
-X-Received: by 2002:a17:902:dad1:b0:14a:59cd:b0b8 with SMTP id
- q17-20020a170902dad100b0014a59cdb0b8mr16389039plx.13.1642310962810;
-        Sat, 15 Jan 2022 21:29:22 -0800 (PST)
+ ABdhPJxTB8JLOKhXLrvl2vpSGfONbfrQYUw+3RA22Ot8HiHaVR0VWrsI+p1dCVmD5ey/TsurhidpAg==
+X-Received: by 2002:a17:90a:c698:: with SMTP id
+ n24mr10745869pjt.188.1642310968833;
+        Sat, 15 Jan 2022 21:29:28 -0800 (PST)
 Received: from nereus.hsd1.or.comcast.net
  ([2601:1c0:6000:1b20:bfd3:7196:2716:eb37])
         by smtp.gmail.com with ESMTPSA id
- l11sm10062146pfu.115.2022.01.15.21.29.22
+ l11sm10062146pfu.115.2022.01.15.21.29.28
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 15 Jan 2022 21:29:22 -0800 (PST)
+        Sat, 15 Jan 2022 21:29:28 -0800 (PST)
 From: Tim Orling <ticotimo@gmail.com>
 X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 1/7] python3-setuptools-rust-native: add v1.1.2
- recipe
-Date: Sat, 15 Jan 2022 21:28:58 -0800
+Subject: [meta-python][PATCH 2/7] pyo3.bbclass: add class for PyO3
+ cross-compilation
+Date: Sat, 15 Jan 2022 21:28:59 -0800
 Message-Id: 
- <d8ed38996c92538bf44f7dfa2ce94b8496454243.1642309436.git.tim.orling@konsulko.com>
+ <2847980b4d497b069460a298853cb7f59fab662e.1642309436.git.tim.orling@konsulko.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <cover.1642309436.git.tim.orling@konsulko.com>
 References: <cover.1642309436.git.tim.orling@konsulko.com>
@@ -68,53 +68,66 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 16 Jan 2022 05:29:24 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 16 Jan 2022 05:29:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94876
+ https://lists.openembedded.org/g/openembedded-devel/message/94877
 
-Dependency for python3-cryptography 3.4.x+
+PyO3 provides Rust bindings for Python, including tools for creating native
+Python extension modules. Running and interacting with Python code from a
+Rust binary is also supported.
 
-Only native rustc is supported at this time in oe-core,
-therefore it makes no sense to try to build for target.
+This class sets up the cross-compilation environment.
+
+Export PYO3_CROSS, PYO3_CROSS_LIB_DIR, PYO3_CROSS_INCLUDE_DIR and CARGO_BUILD_TARGET
+to inform tools like setuptools-rust we are cross-compiling.
+
+Export RUSTFLAGS so cargo can find 'std' and 'core' for target
+
+Dynamically generate PyO3 config file and export PYO3_CONFIG_FILE
+absolute path. This is the trick that finally made pyo3 work.
 
 Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ---
- .../python3-setuptools-rust-native_1.1.2.bb   | 26 +++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-setuptools-rust-native_1.1.2.bb
+ meta-python/classes/pyo3.bbclass | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+ create mode 100644 meta-python/classes/pyo3.bbclass
 
-diff --git a/meta-python/recipes-devtools/python/python3-setuptools-rust-native_1.1.2.bb b/meta-python/recipes-devtools/python/python3-setuptools-rust-native_1.1.2.bb
+diff --git a/meta-python/classes/pyo3.bbclass b/meta-python/classes/pyo3.bbclass
 new file mode 100644
-index 0000000000..34ff91241f
+index 0000000000..4bae0949e5
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-setuptools-rust-native_1.1.2.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "Setuptools Rust extension plugin"
-+DESCRIPTION = "setuptools-rust is a plugin for setuptools to build Rust \
-+Python extensions implemented with PyO3 or rust-cpython.\
-+\
-+Compile and distribute Python extensions written in Rust as easily as if they were written in C."
-+HOMEPAGE = "https://github.com/PyO3/setuptools-rust"
-+BUGTRACKER = "https://github.com/PyO3/setuptools-rust/issues"
++++ b/meta-python/classes/pyo3.bbclass
+@@ -0,0 +1,30 @@
++#
++# This class helps make sure that Python extensions built with PyO3
++# and setuptools_rust properly set up the environment for cross compilation
++#
 +
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=011cd92e702dd9e6b1a26157b6fd53f5"
++inherit cargo python3-dir siteinfo
 +
-+SRC_URI = "https://files.pythonhosted.org/packages/67/08/e1aa2c582c62ac76e4d60f8e454bd3bba933781a06a88b4e38797445822a/setuptools-rust-${PV}.tar.gz"
-+SRC_URI[sha256sum] = "a0adb9b503c0ffc4e8fe80b7c617898cefa78049983aaaea7f747e153a3e65d1"
++export PYO3_CROSS="1"
++export PYO3_CROSS_PYTHON_VERSION="${PYTHON_BASEVERSION}"
++export PYO3_CROSS_LIB_DIR="${STAGING_LIBDIR}"
++export CARGO_BUILD_TARGET="${HOST_SYS}"
++export RUSTFLAGS
++export PYO3_PYTHON="${PYTHON}"
++export PYO3_CONFIG_FILE="${WORKDIR}/pyo3.config"
 +
-+inherit cargo pypi setuptools3 native
++pyo3_do_configure () {
++    cat > ${WORKDIR}/pyo3.config << EOF
++implementation=CPython
++version=${PYTHON_BASEVERSION}
++shared=true
++abi3=false
++lib_name=${PYTHON_DIR}
++lib_dir=${STAGING_LIBDIR}
++pointer_width=${SITEINFO_BITS}
++build_flags=WITH_THREAD
++suppress_build_script_link_lines=false
++EOF
++}
 +
-+DEPENDS += "python3-setuptools-scm-native python3-wheel-native"
-+
-+RDEPENDS:${PN}:class-native += " \
-+    python3-semantic-version-native \
-+    python3-setuptools-native \
-+    python3-setuptools-scm-native \
-+    python3-toml-native \
-+    python3-typing-extensions-native \
-+    python3-wheel-native \
-+"
++EXPORT_FUNCTIONS do_configure
 -- 
 2.30.2
 
