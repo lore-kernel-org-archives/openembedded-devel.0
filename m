@@ -1,382 +1,167 @@
-Return-Path: <robert.joslyn@redrectangle.org>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E51A6C433EF
-	for <webhook@archiver.kernel.org>; Sat, 15 Jan 2022 21:34:25 +0000 (UTC)
-Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net
- [217.70.183.200])
- by mx.groups.io with SMTP id smtpd.web09.12964.1642282464550764502
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87372C433EF
+	for <webhook@archiver.kernel.org>; Sun, 16 Jan 2022 05:29:18 +0000 (UTC)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
+ [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web08.29795.1642310957430791075
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 15 Jan 2022 13:34:25 -0800
+ Sat, 15 Jan 2022 21:29:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: redrectangle.org,
- ip: 217.70.183.200, mailfrom: robert.joslyn@redrectangle.org)
-Received: (Authenticated sender: robert.joslyn@redrectangle.org)
-	by mail.gandi.net (Postfix) with ESMTPSA id BB1C720005;
-	Sat, 15 Jan 2022 21:34:21 +0000 (UTC)
-From: Robert Joslyn <robert.joslyn@redrectangle.org>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=WTMFcSRX;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179,
+ mailfrom: ticotimo@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id n11so14940776plf.4
+        for <openembedded-devel@lists.openembedded.org>;
+ Sat, 15 Jan 2022 21:29:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=PfVIgZJx7iJf+/khIlAPETktMaH+knHhjBBbJFqs/AA=;
+        b=WTMFcSRX9E/ebhWEOSZ2qGN18HlAKAIoOGN14nymcDNUmIcB8iw3tcoMhsUwFZXAFp
+         795oTBNSR8vDEYxy9bohJUpxC0VhgUv79ewwQQaHk/LepLZ9fEcd/nywVnYY1C6psSKW
+         SEYWZr4e0XEX1m76LAhvvV4HW0kYB5nCU6m3LrwF5QwzpSJvAfYrxRSWPaNcuS4HmO9/
+         bILgckmigx2rEUXPPnxdctmEHw/JH9GoPKaZvYybUXHY3EqokDTZS2aE884gzsTqGm86
+         EIJQ8YYPdMf7W4bmjpFrnfzskfTgBNuJ3n/8yz6L1LD+TGmV0k0iWX1dewM57lq0JD/7
+         1Zcw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=PfVIgZJx7iJf+/khIlAPETktMaH+knHhjBBbJFqs/AA=;
+        b=5+zt2yBo6ugwRp0YeX8NJoy5ihpYhhxzGdjGc+A+nldOEOFtYjRBERbnMO70qpjepF
+         wGNebabt9RjVH3Z8TcHNe1321ta1vm6SHHOoKXfng4TJZoQTwavrgDgmk91m+C4DZ27g
+         IUapqCFnZoWaxh35mPqtdL6xkhRUrrKGh29Pacvz2JSPirx/4iYTZoRD/b+rpQryh3qi
+         Io1MuzNv9x/PzDTb8eEWlbELPthKRmHzaIjkARPOYu+XHTxAqhlgS47N67Mcc3sIVK5J
+         O4LUnro9kYOUIy6SHNkluDL4HR63GhwE2M3OXz1FKhFMBvfv4e6nr3nTdsE9CpyjSRdP
+         hs3w==
+X-Gm-Message-State: AOAM533Nm/rbiSlih2Yk5XTssYBMKyptMCIrxwbfbIQjIaVXMcv3M25n
+	8TBZSep7XdZZCKQlsfj2fGlu/501UfGNmw==
+X-Google-Smtp-Source: 
+ ABdhPJyRb3YVhzhdZAiw7i4doz78Vhz9VEMnqGo/87sWyKoBsxp4Gj++Tj3kApswq1qt/IkRQgRr+g==
+X-Received: by 2002:a17:902:ea06:b0:14a:6827:8cf9 with SMTP id
+ s6-20020a170902ea0600b0014a68278cf9mr16508215plg.100.1642310956542;
+        Sat, 15 Jan 2022 21:29:16 -0800 (PST)
+Received: from nereus.hsd1.or.comcast.net
+ ([2601:1c0:6000:1b20:bfd3:7196:2716:eb37])
+        by smtp.gmail.com with ESMTPSA id
+ l11sm10062146pfu.115.2022.01.15.21.29.16
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 15 Jan 2022 21:29:16 -0800 (PST)
+From: Tim Orling <ticotimo@gmail.com>
+X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Robert Joslyn <robert.joslyn@redrectangle.org>
-Subject: [meta-oe][hardknott][PATCH] postgresql: Update to 13.5
-Date: Sat, 15 Jan 2022 13:33:51 -0800
-Message-Id: <20220115213351.974981-1-robert.joslyn@redrectangle.org>
-X-Mailer: git-send-email 2.34.1
+Subject: [meta-python][PATCH 0/7] setuptools-rust and python3-cryptography
+Date: Sat, 15 Jan 2022 21:28:57 -0800
+Message-Id: <cover.1642309436.git.tim.orling@konsulko.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 15 Jan 2022 21:34:25 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 16 Jan 2022 05:29:18 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94874
+ https://lists.openembedded.org/g/openembedded-devel/message/94875
 
-This is a security and bugfix release. With this update, the backported
-patches for CVE-2021-2314 and CVE-2021-23222 are no longer needed. Full
-release notes are available at:
-https://www.postgresql.org/docs/release/13.5/
+This series upgrades python3-cryptography from the last version to be
+purely Python/C extensions (3.3.2) to the latest version which also
+includes Rust extensions (36.0.1).
 
-Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
----
- .../files/0001-Add-support-for-RISC-V.patch   |  10 +-
- ...n-bypass-autoconf-2.69-version-check.patch |   2 +-
- .../postgresql/files/CVE-2021-23214.patch     | 116 ----------------
- .../postgresql/files/CVE-2021-23222.patch     | 131 ------------------
- ...{postgresql_13.4.bb => postgresql_13.5.bb} |   4 +-
- 5 files changed, 8 insertions(+), 255 deletions(-)
- delete mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2021-23214.patch
- delete mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2021-23222.patch
- rename meta-oe/recipes-dbs/postgresql/{postgresql_13.4.bb => postgresql_13.5.bb} (67%)
+This has been tested (including full ptest runs) on:
+  - qemux86-64
+  - qemux86-musl
+  - qemuarm64
 
-diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch b/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
-index 0dc6ece6d..5c65e6185 100644
---- a/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
-+++ b/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
-@@ -1,4 +1,4 @@
--From b06a228a5fd1589fc9bed654b3288b321fc21aa1 Mon Sep 17 00:00:00 2001
-+From 0b60fe3c39b2f62f9867d955da82d9d20c42d028 Mon Sep 17 00:00:00 2001
- From: "Richard W.M. Jones" <rjones@redhat.com>
- Date: Sun, 20 Nov 2016 15:04:52 +0000
- Subject: [PATCH] Add support for RISC-V.
-@@ -9,9 +9,11 @@ extending the existing aarch64 macro works.
-  src/include/storage/s_lock.h | 5 +++--
-  1 file changed, 3 insertions(+), 2 deletions(-)
- 
-+diff --git a/src/include/storage/s_lock.h b/src/include/storage/s_lock.h
-+index 6b368a5..f7d3387 100644
- --- a/src/include/storage/s_lock.h
- +++ b/src/include/storage/s_lock.h
--@@ -316,11 +316,12 @@ tas(volatile slock_t *lock)
-+@@ -317,11 +317,12 @@ tas(volatile slock_t *lock)
-  
-  /*
-   * On ARM and ARM64, we use __sync_lock_test_and_set(int *, int) if available.
-@@ -25,7 +27,7 @@ extending the existing aarch64 macro works.
-  #ifdef HAVE_GCC__SYNC_INT32_TAS
-  #define HAS_TEST_AND_SET
-  
--@@ -337,7 +338,7 @@ tas(volatile slock_t *lock)
-+@@ -338,7 +339,7 @@ tas(volatile slock_t *lock)
-  #define S_UNLOCK(lock) __sync_lock_release(lock)
-  
-  #endif	 /* HAVE_GCC__SYNC_INT32_TAS */
-@@ -33,4 +35,4 @@ extending the existing aarch64 macro works.
- +#endif	 /* __arm__ || __arm || __aarch64__ || __aarch64 || __riscv */
-  
-  
-- /* S/390 and S/390x Linux (32- and 64-bit zSeries) */
-+ /*
-diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-configure.in-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0001-configure.in-bypass-autoconf-2.69-version-check.patch
-index db9769f82..17ba04b66 100644
---- a/meta-oe/recipes-dbs/postgresql/files/0001-configure.in-bypass-autoconf-2.69-version-check.patch
-+++ b/meta-oe/recipes-dbs/postgresql/files/0001-configure.in-bypass-autoconf-2.69-version-check.patch
-@@ -18,7 +18,7 @@ index fb14dcc..a2b4a4f 100644
- +++ b/configure.in
- @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch undefined macros
-  
-- AC_INIT([PostgreSQL], [13.4], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
-+ AC_INIT([PostgreSQL], [13.5], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
-  
- -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
- -Untested combinations of 'autoconf' and PostgreSQL versions are not
-diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2021-23214.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2021-23214.patch
-deleted file mode 100644
-index 58bf81062..000000000
---- a/meta-oe/recipes-dbs/postgresql/files/CVE-2021-23214.patch
-+++ /dev/null
-@@ -1,116 +0,0 @@
--From 24c2b9e42edb6d2f4ef2cead3b0aa1d6196adfce Mon Sep 17 00:00:00 2001
--From: Tom Lane <tgl@sss.pgh.pa.us>
--Date: Mon, 8 Nov 2021 11:01:43 -0500
--Subject: [PATCH 2/2] Reject extraneous data after SSL or GSS encryption
-- handshake.
--
--The server collects up to a bufferload of data whenever it reads data
--from the client socket.  When SSL or GSS encryption is requested
--during startup, any additional data received with the initial
--request message remained in the buffer, and would be treated as
--already-decrypted data once the encryption handshake completed.
--Thus, a man-in-the-middle with the ability to inject data into the 
--TCP connection could stuff some cleartext data into the start of
--a supposedly encryption-protected database session.
--
--This could be abused to send faked SQL commands to the server,
--although that would only work if the server did not demand any 
--authentication data.  (However, a server relying on SSL certificate
--authentication might well not do so.)
--
--To fix, throw a protocol-violation error if the internal buffer
--is not empty after the encryption handshake.
--
--Our thanks to Jacob Champion for reporting this problem.
--
--Security: CVE-2021-23214
--
--Upstream-Status: Backport[https://github.com/postgres/postgres/commit/28e24125541545483093819efae9bca603441951]
--CVE: CVE-2021-23214
--
--Signed-off-by: Changqing Li <changqing.li@windriver.com>
--
-----
-- src/backend/libpq/pqcomm.c          | 11 +++++++++++
-- src/backend/postmaster/postmaster.c | 23 ++++++++++++++++++++++-
-- src/include/libpq/libpq.h           |  1 +
-- 3 files changed, 34 insertions(+), 1 deletion(-)
--
--diff --git a/src/backend/libpq/pqcomm.c b/src/backend/libpq/pqcomm.c
--index ee2cd86..4dd1c02 100644
----- a/src/backend/libpq/pqcomm.c
--+++ b/src/backend/libpq/pqcomm.c
--@@ -1183,6 +1183,17 @@ pq_getstring(StringInfo s)
-- 	}
-- }
-- 
--+/* -------------------------------
--+ *             pq_buffer_has_data              - is any buffered data available to read?
--+ *
--+ * This will *not* attempt to read more data.
--+ * --------------------------------
--+ */
--+bool
--+pq_buffer_has_data(void)
--+{
--+	return (PqRecvPointer < PqRecvLength);
--+}
-- 
-- /* --------------------------------
--  *		pq_startmsgread - begin reading a message from the client.
--diff --git a/src/backend/postmaster/postmaster.c b/src/backend/postmaster/postmaster.c
--index 5775fc0..1fcc3f8 100644
----- a/src/backend/postmaster/postmaster.c
--+++ b/src/backend/postmaster/postmaster.c
--@@ -2049,6 +2049,17 @@ retry1:
-- 			return STATUS_ERROR;
-- #endif
-- 
--+		/*
--+		* At this point we should have no data already buffered.  If we do,
--+		* it was received before we performed the SSL handshake, so it wasn't
--+		* encrypted and indeed may have been injected by a man-in-the-middle.
--+		* We report this case to the client.
--+		*/
--+		if (pq_buffer_has_data())
--+			ereport(FATAL,
--+				(errcode(ERRCODE_PROTOCOL_VIOLATION),
--+				errmsg("received unencrypted data after SSL request"),
--+				errdetail("This could be either a client-software bug or evidence of an attempted man-in-the-middle attack.")));
-- 		/*
-- 		 * regular startup packet, cancel, etc packet should follow, but not
-- 		 * another SSL negotiation request, and a GSS request should only
--@@ -2080,7 +2091,17 @@ retry1:
-- 		if (GSSok == 'G' && secure_open_gssapi(port) == -1)
-- 			return STATUS_ERROR;
-- #endif
---
--+		/*
--+		* At this point we should have no data already buffered.  If we do,
--+		* it was received before we performed the GSS handshake, so it wasn't
--+		* encrypted and indeed may have been injected by a man-in-the-middle.
--+		* We report this case to the client.
--+		*/
--+		if (pq_buffer_has_data())
--+			ereport(FATAL,
--+				(errcode(ERRCODE_PROTOCOL_VIOLATION),
--+				errmsg("received unencrypted data after GSSAPI encryption request"),
--+				errdetail("This could be either a client-software bug or evidence of an attempted man-in-the-middle attack.")));
-- 		/*
-- 		 * regular startup packet, cancel, etc packet should follow, but not
-- 		 * another GSS negotiation request, and an SSL request should only
--diff --git a/src/include/libpq/libpq.h b/src/include/libpq/libpq.h
--index b115247..9969692 100644
----- a/src/include/libpq/libpq.h
--+++ b/src/include/libpq/libpq.h
--@@ -73,6 +73,7 @@ extern int	pq_getbyte(void);
-- extern int	pq_peekbyte(void);
-- extern int	pq_getbyte_if_available(unsigned char *c);
-- extern int	pq_putbytes(const char *s, size_t len);
--+extern bool pq_buffer_has_data(void);
-- 
-- /*
--  * prototypes for functions in be-secure.c
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2021-23222.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2021-23222.patch
-deleted file mode 100644
-index 42b78539b..000000000
---- a/meta-oe/recipes-dbs/postgresql/files/CVE-2021-23222.patch
-+++ /dev/null
-@@ -1,131 +0,0 @@
--From 79125ead2a6a234086844bb42f06d49603fe6ca0 Mon Sep 17 00:00:00 2001
--From: Tom Lane <tgl@sss.pgh.pa.us>
--Date: Mon, 8 Nov 2021 11:14:56 -0500
--Subject: [PATCH 1/2] libpq: reject extraneous data after SSL or GSS encryption
-- handshake.
--
--libpq collects up to a bufferload of data whenever it reads data from
--the socket.  When SSL or GSS encryption is requested during startup,
--any additional data received with the server's yes-or-no reply
--remained in the buffer, and would be treated as already-decrypted data
--once the encryption handshake completed.  Thus, a man-in-the-middle
--with the ability to inject data into the TCP connection could stuff
--some cleartext data into the start of a supposedly encryption-protected
--database session.
--
--This could probably be abused to inject faked responses to the
--client's first few queries, although other details of libpq's behavior
--make that harder than it sounds.  A different line of attack is to
--exfiltrate the client's password, or other sensitive data that might
--be sent early in the session.  That has been shown to be possible with
--a server vulnerable to CVE-2021-23214.
--
--To fix, throw a protocol-violation error if the internal buffer
--is not empty after the encryption handshake.
--
--Our thanks to Jacob Champion for reporting this problem.
--
--Security: CVE-2021-23222
--
--Upstream-Status: Backport[https://github.com/postgres/postgres/commit/160c0258802d10b0600d7671b1bbea55d8e17d45]
--CVE: CVE-2021-23222
--
--Signed-off-by: Changqing Li <changqing.li@windriver.com>
-----
-- doc/src/sgml/protocol.sgml        | 28 ++++++++++++++++++++++++++++
-- src/interfaces/libpq/fe-connect.c | 26 ++++++++++++++++++++++++++
-- 2 files changed, 54 insertions(+)
--
--diff --git a/doc/src/sgml/protocol.sgml b/doc/src/sgml/protocol.sgml
--index e26619e1b5..b692648fca 100644
----- a/doc/src/sgml/protocol.sgml
--+++ b/doc/src/sgml/protocol.sgml
--@@ -1471,6 +1471,20 @@ SELCT 1/0;<!-- this typo is intentional -->
--     and proceed without requesting <acronym>SSL</acronym>.
--    </para>
-- 
--+   <para>
--+    When <acronym>SSL</acronym> encryption can be performed, the server
--+    is expected to send only the single <literal>S</literal> byte and then
--+    wait for the frontend to initiate an <acronym>SSL</acronym> handshake.
--+    If additional bytes are available to read at this point, it likely
--+    means that a man-in-the-middle is attempting to perform a
--+    buffer-stuffing attack
--+    (<ulink url="https://www.postgresql.org/support/security/CVE-2021-23222/">CVE-2021-23222</ulink>).
--+    Frontends should be coded either to read exactly one byte from the
--+    socket before turning the socket over to their SSL library, or to
--+    treat it as a protocol violation if they find they have read additional
--+    bytes.
--+   </para>
--+
--    <para>
--     An initial SSLRequest can also be used in a connection that is being
--     opened to send a CancelRequest message.
--@@ -1532,6 +1546,20 @@ SELCT 1/0;<!-- this typo is intentional -->
--     encryption.
--    </para>
-- 
--+   <para>
--+    When <acronym>GSSAPI</acronym> encryption can be performed, the server
--+    is expected to send only the single <literal>G</literal> byte and then
--+    wait for the frontend to initiate a <acronym>GSSAPI</acronym> handshake.
--+    If additional bytes are available to read at this point, it likely
--+    means that a man-in-the-middle is attempting to perform a
--+    buffer-stuffing attack
--+    (<ulink url="https://www.postgresql.org/support/security/CVE-2021-23222/">CVE-2021-23222</ulink>).
--+    Frontends should be coded either to read exactly one byte from the
--+    socket before turning the socket over to their GSSAPI library, or to
--+    treat it as a protocol violation if they find they have read additional
--+    bytes.
--+   </para>
--+
--    <para>
--     An initial GSSENCRequest can also be used in a connection that is being
--     opened to send a CancelRequest message.
--diff --git a/src/interfaces/libpq/fe-connect.c b/src/interfaces/libpq/fe-connect.c
--index f80f4e98d8..57aee95183 100644
----- a/src/interfaces/libpq/fe-connect.c
--+++ b/src/interfaces/libpq/fe-connect.c
--@@ -3076,6 +3076,19 @@ keep_going:						/* We will come back to here until there is
-- 				pollres = pqsecure_open_client(conn);
-- 				if (pollres == PGRES_POLLING_OK)
-- 				{
--+					/*
--+					 * At this point we should have no data already buffered.
--+					 * If we do, it was received before we performed the SSL
--+					 * handshake, so it wasn't encrypted and indeed may have
--+					 * been injected by a man-in-the-middle.
--+					 */
--+					if (conn->inCursor != conn->inEnd)
--+					{
--+						appendPQExpBufferStr(&conn->errorMessage,
--+											 libpq_gettext("received unencrypted data after SSL response\n"));
--+						goto error_return;
--+					}
--+
-- 					/* SSL handshake done, ready to send startup packet */
-- 					conn->status = CONNECTION_MADE;
-- 					return PGRES_POLLING_WRITING;
--@@ -3175,6 +3188,19 @@ keep_going:						/* We will come back to here until there is
-- 				pollres = pqsecure_open_gss(conn);
-- 				if (pollres == PGRES_POLLING_OK)
-- 				{
--+					/*
--+					 * At this point we should have no data already buffered.
--+					 * If we do, it was received before we performed the GSS
--+					 * handshake, so it wasn't encrypted and indeed may have
--+					 * been injected by a man-in-the-middle.
--+					 */
--+					if (conn->inCursor != conn->inEnd)
--+					{
--+						appendPQExpBufferStr(&conn->errorMessage,
--+											 libpq_gettext("received unencrypted data after GSSAPI encryption response\n"));
--+						goto error_return;
--+					}
--+
-- 					/* All set for startup packet */
-- 					conn->status = CONNECTION_MADE;
-- 					return PGRES_POLLING_WRITING;
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_13.4.bb b/meta-oe/recipes-dbs/postgresql/postgresql_13.5.bb
-similarity index 67%
-rename from meta-oe/recipes-dbs/postgresql/postgresql_13.4.bb
-rename to meta-oe/recipes-dbs/postgresql/postgresql_13.5.bb
-index 2ed0fa49b..81193e30e 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql_13.4.bb
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql_13.5.bb
-@@ -7,8 +7,6 @@ SRC_URI += "\
-    file://0001-Add-support-for-RISC-V.patch \
-    file://0001-Improve-reproducibility.patch \
-    file://0001-configure.in-bypass-autoconf-2.69-version-check.patch \
--   file://CVE-2021-23214.patch \
--   file://CVE-2021-23222.patch \
- "
- 
--SRC_URI[sha256sum] = "ea93e10390245f1ce461a54eb5f99a48d8cabd3a08ce4d652ec2169a357bc0cd"
-+SRC_URI[sha256sum] = "9b81067a55edbaabc418aacef457dd8477642827499560b00615a6ea6c13f6b3"
+The test cases require an absolute minimum of 1 GB of free memory
+according to the documentation, but in practice it was more performant
+to have 2 GB of free memory. For this reason a check-memfree.py test is
+added to run-ptest to avoid OOM/Exit code 9 in the ptest-runner. The
+test cases were run with:
+
+    runqemu nographic slirp qemuparams="-m 2176 -smp 4"
+
+On x86-64 with kvm this takes about 5 minutes.
+
+The results are 2856+/-2 passed, 1654+/-2 skipped. Of the skipped tests
+1600 of them are because of unsupported "counter location middle_fixed"
+in https://github.com/pyca/cryptography/pull/2773. A further ~35 test
+cases are skipped because of not setting --wychefproof-root, but even
+when the Google wychefproof repository is cloned and the option is set,
+it adds another ~5000 skipped test cases:
+https://git.openembedded.org/meta-openembedded-contrib/commit/?h=timo/wip-python3-cryptography-ptest&id=fff4da6e70c97265e17a82f1d043ab16039d510e
+
+Upstream uses python3-pytest-xdist to parallize test cases (and
+python3-pytest-shard to distribute amongst workers), but this uses
+stdin/stdout and therefore we have no output to ptest-runner.
+
+This series introduces two helper classes pyo3.bbclass and
+setuptools_rust.bbclass for Python/Rust projects.
+
+The setuptools_rust.bbclass wraps PyO3, Cargo and the newly added
+python3-setuptools-rust-native recipe. Since oe-core only supports
+native rustc at this time, only a native recipe is provided.
+
+To demonstrate that these classes are applicable to multiple recipes, we
+also introduce python3-pyruvate, a WSGI implementation in Rust.
+
+While we are at it we upgrade python3-pytest-subtests from 0.5.0 to
+0.6.0.
+
+The following changes since commit df5c1a31fdb8325d1c514f9ed8a7b3805dc581ac:
+
+  python3-diskcache: Upgrade 5.3.0 -> 5.4.0 (2022-01-10 10:35:02 -0800)
+
+are available in the Git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib timo/python3-cryptography_36.0.1
+  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=timo/python3-cryptography_36.0.1
+
+Tim Orling (7):
+  python3-setuptools-rust-native: add v1.1.2 recipe
+  pyo3.bbclass: add class for PyO3 cross-compilation
+  setuptools3_rust.bbclass: setuptoools Rust plugin
+  python3-pyruvate: add recipe for v1.1.2
+  python3-pytest-subtests: upgrade 0.5.0 -> 0.6.0
+  python3-cryptography-vectors: upgrade 35.0.0 => 36.0.1
+  python3-cryptography: upgrade 3.3.2 -> 36.0.1
+
+ meta-python/classes/pyo3.bbclass              |  30 +++++
+ meta-python/classes/setuptools3_rust.bbclass  |  11 ++
+ ...=> python3-cryptography-vectors_36.0.1.bb} |   5 +-
+ .../0001-Cargo.toml-specify-pem-version.patch |  31 +++++
+ .../0002-Cargo.toml-edition-2018-2021.patch   |  28 ++++
+ .../python3-cryptography/check-memfree.py     |  10 ++
+ .../python/python3-cryptography/h-test.patch  |  10 --
+ .../python3-cryptography/openssl3.patch       |  62 ---------
+ .../python/python3-cryptography/run-ptest     |   4 +-
+ .../python/python3-cryptography_3.3.2.bb      |  68 ----------
+ .../python/python3-cryptography_36.0.1.bb     | 121 ++++++++++++++++++
+ .../python/python3-pyruvate_1.1.2.bb          | 119 +++++++++++++++++
+ .../python/python3-pytest-subtests_0.5.0.bb   |  16 ---
+ .../python/python3-pytest-subtests_0.6.0.bb   |  20 +++
+ .../python3-setuptools-rust-native_1.1.2.bb   |  26 ++++
+ 15 files changed, 403 insertions(+), 158 deletions(-)
+ create mode 100644 meta-python/classes/pyo3.bbclass
+ create mode 100644 meta-python/classes/setuptools3_rust.bbclass
+ rename meta-python/recipes-devtools/python/{python3-cryptography-vectors_35.0.0.bb => python3-cryptography-vectors_36.0.1.bb} (72%)
+ create mode 100644 meta-python/recipes-devtools/python/python3-cryptography/0001-Cargo.toml-specify-pem-version.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-cryptography/0002-Cargo.toml-edition-2018-2021.patch
+ create mode 100755 meta-python/recipes-devtools/python/python3-cryptography/check-memfree.py
+ delete mode 100644 meta-python/recipes-devtools/python/python3-cryptography/h-test.patch
+ delete mode 100644 meta-python/recipes-devtools/python/python3-cryptography/openssl3.patch
+ delete mode 100644 meta-python/recipes-devtools/python/python3-cryptography_3.3.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-cryptography_36.0.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pytest-subtests_0.5.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-pytest-subtests_0.6.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-setuptools-rust-native_1.1.2.bb
+
 -- 
-2.34.1
+2.30.2
 
 
