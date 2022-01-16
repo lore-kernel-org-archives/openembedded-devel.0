@@ -2,64 +2,63 @@ Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A5B0C433F5
-	for <webhook@archiver.kernel.org>; Sun, 16 Jan 2022 05:29:30 +0000 (UTC)
-Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com
- [209.85.216.46])
- by mx.groups.io with SMTP id smtpd.web10.29874.1642310969587273419
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 62B1FC433F5
+	for <webhook@archiver.kernel.org>; Sun, 16 Jan 2022 05:29:32 +0000 (UTC)
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com
+ [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web09.30010.1642310971763490622
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 15 Jan 2022 21:29:29 -0800
+ Sat, 15 Jan 2022 21:29:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=LXudSNsy;
- spf=pass (domain: gmail.com, ip: 209.85.216.46, mailfrom: ticotimo@gmail.com)
-Received: by mail-pj1-f46.google.com with SMTP id
- l10-20020a17090a384a00b001b22190e075so26238921pjf.3
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=hxTtGS+B;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173,
+ mailfrom: ticotimo@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id i8so6585053pgt.13
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 15 Jan 2022 21:29:29 -0800 (PST)
+ Sat, 15 Jan 2022 21:29:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=Yh7uzIu+xeq/5fSUru4Sgdg26JONSvU3KeyHm6FgrPs=;
-        b=LXudSNsy5TdjhnmlrYlM3HJzeGJ4PKImAyKM0G7hrEZdTBEcoU8MmGtNfQM6MsRizX
-         tTLdFE61iOyjaDucHFqBI6CMC/LJZkYN1Xz0ztFwRwZltItoPW/fSHybex98ZJqhMSRV
-         8BvNzZTjJvGrR3l5HVs3loo15QPM6ejPKmfn1wvnYlpCg1VJNMJ19WYkLmA7rc7/cZVM
-         IbeWP5AYgLfBeHnnoCVFJFdNNeAoxXBqdhLX83NcQ1sWt5tmcd1nS8Wgm3Vz9lH2/rBv
-         kE2hI8U28K2jH6+/pZwu7uQeDEitLo96kzDmmpYnJAv1beiNVDJ+R3ZNDRXothQW1CBL
-         aXPA==
+        bh=Fx9iuevlFXilhdkIVZvdLMDO97+f1GfSX7inFXIRWRA=;
+        b=hxTtGS+BQoO1/ldOInLuyQBIVCeLjM4905qv60+yXix6TLTB6h9DDDjzVdZksy1yXJ
+         ROMmxo9b+1txaqxJBYF8MMpK3VqGIwfbzIk2JdHwOYeskGcWe79VrN5ckR60xXSJt4y+
+         VLk021WZPRijg7dv40CB9iOtRvQRw+GtYgZBRkSBCR7kj4PIyLAjbsYo1if9pKyatrXa
+         SHG1+UMTTXQFijLM1MwoTlbLWIFnWO7prR18rylXxdnizuBHHZFStvdYJDgYWJsTL3xn
+         z1hX1JGkfnAT07ppg+YXux/MJVtEn0a5svgVxOgivcgwq8tiBrRrrbCp919byVplpqJG
+         Q/Ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=Yh7uzIu+xeq/5fSUru4Sgdg26JONSvU3KeyHm6FgrPs=;
-        b=V7r1p8LHGgvm1NjwAjVIfL23giX7+X06tXxLg+NMst9RlbqAUTy2gGJPoZkr8BE6tA
-         Lr1EK/og5S7qzMUbwZxr5/g2Y9weM85iErNnjZTrnFTpWgBHG9l/o2zFjF4GhtseZULj
-         HOWDs5upRTueE18/iIY4rmJjJqkiPvhcm8vSmFYz8o7WaUBFyF3rdzI6vtyyYxNNP/nZ
-         7KXgEhyNLc+u7n1XRq2l/alH1NeuZtpBcujjbdI3ZGfQrn1jXz29BL67dO/yOfrxvVhb
-         W+yeKlyT3yIh9VOaN8dnNpUJIWA2ioNWv0c9J3up7bVcVLtUlkPgJWwyWc66j6O+M3xv
-         usMg==
-X-Gm-Message-State: AOAM531Yg71y+BfXH/bznawRocijXjDeM3spq2QLdl2UArZaDCjVKPDb
-	GXUTgJ18J1bYuqQHmWD8p90QmwsBAxPVvA==
+        bh=Fx9iuevlFXilhdkIVZvdLMDO97+f1GfSX7inFXIRWRA=;
+        b=mY/KnKXM1cjsmcaWFb/raeZR56N1dJE/N0Zv+y7ELUKF2irWsX2emx98/bt0JEvldV
+         3skF6DJrEPj3vmlNCk74ouSFlxOVVztti6WM3K9y0UaWzkT8UaWIXGgHedOlKt8MPSSv
+         Hy+HjAsQaPZrVM0+bDph934iG2gay9ms4ye0nm+sv46FZwJPVHdfFwbWkk0NcOv15fYj
+         XrmFt2aK9ofcg9i/A/4dRVvlkrsfAtNYZXJh7P+h8CgpIntxI6oTtYpYEjOSe2nFlTNj
+         wXCzC/8mHMbQwHNm3RwGOwVVfcn2P+TjEdTyx1VJQgX1A1klQAJgApSvVCwCTP3bMCnr
+         QCvw==
+X-Gm-Message-State: AOAM5322kYP2OOFPL5C8IAQe0CbcpyA0D0eKmGEpu9HQaAAZajgeTRCr
+	UhuQXOg90/wjyLuHZAwoaeWjzrmuNbnzgg==
 X-Google-Smtp-Source: 
- ABdhPJxTB8JLOKhXLrvl2vpSGfONbfrQYUw+3RA22Ot8HiHaVR0VWrsI+p1dCVmD5ey/TsurhidpAg==
-X-Received: by 2002:a17:90a:c698:: with SMTP id
- n24mr10745869pjt.188.1642310968833;
-        Sat, 15 Jan 2022 21:29:28 -0800 (PST)
+ ABdhPJw3BX/pZJnmf5oO6Rg60MkK6zG2j8dMMBoFligIRHIme+ZmH+Yzf+EdZf4GfxJAFYEcT+60EQ==
+X-Received: by 2002:a63:1e0f:: with SMTP id e15mr33565pge.577.1642310970940;
+        Sat, 15 Jan 2022 21:29:30 -0800 (PST)
 Received: from nereus.hsd1.or.comcast.net
  ([2601:1c0:6000:1b20:bfd3:7196:2716:eb37])
         by smtp.gmail.com with ESMTPSA id
- l11sm10062146pfu.115.2022.01.15.21.29.28
+ l11sm10062146pfu.115.2022.01.15.21.29.30
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 15 Jan 2022 21:29:28 -0800 (PST)
+        Sat, 15 Jan 2022 21:29:30 -0800 (PST)
 From: Tim Orling <ticotimo@gmail.com>
 X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 2/7] pyo3.bbclass: add class for PyO3
- cross-compilation
-Date: Sat, 15 Jan 2022 21:28:59 -0800
+Subject: [meta-python][PATCH 3/7] setuptools3_rust.bbclass: setuptoools Rust
+ plugin
+Date: Sat, 15 Jan 2022 21:29:00 -0800
 Message-Id: 
- <2847980b4d497b069460a298853cb7f59fab662e.1642309436.git.tim.orling@konsulko.com>
+ <360dbafb5ca9b4cfd646a1ee1f63cb5d85b3a974.1642309436.git.tim.orling@konsulko.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <cover.1642309436.git.tim.orling@konsulko.com>
 References: <cover.1642309436.git.tim.orling@konsulko.com>
@@ -68,63 +67,59 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 16 Jan 2022 05:29:30 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 16 Jan 2022 05:29:32 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94877
+ https://lists.openembedded.org/g/openembedded-devel/message/94878
 
-PyO3 provides Rust bindings for Python, including tools for creating native
-Python extension modules. Running and interacting with Python code from a
-Rust binary is also supported.
+setuptools-rust is a plugin for setuptools to build Rust Python extensions
+implemented with PyO3 or rust-cpython.
 
-This class sets up the cross-compilation environment.
+Compile and distribute Python extensions written in Rust as easily as if
+they were written in C.
 
-Export PYO3_CROSS, PYO3_CROSS_LIB_DIR, PYO3_CROSS_INCLUDE_DIR and CARGO_BUILD_TARGET
-to inform tools like setuptools-rust we are cross-compiling.
+This class inherits pyo3.bbclass (and therefore cargo.bbclass) and
+setuptools3.bbclass to make it easier to build Python modules with Rust
+extensions.
 
-Export RUSTFLAGS so cargo can find 'std' and 'core' for target
+Need to call pyo3_do_configure to properly setup the PyO3 environment
+for cross-compiling.
 
-Dynamically generate PyO3 config file and export PYO3_CONFIG_FILE
-absolute path. This is the trick that finally made pyo3 work.
+Need to call cargo_common_do_configure to setup cargo_home/config so
+that the linker properly finds e.g. crti.o and crtbeginS.o
+
+It is strongly recommended to provide crates needed for your recipe
+using the crate:// fetcher. This can be helped with the cargo-bitbake
+command [1].
+
+If you choose not to use the crate fetcher, bitbake vendoring will not
+work with setuptools-rust, as it errors out immediately because it cannot
+find pyo3 or some other crate. The (strongly discouraged) workaround for
+this is to set:
+
+CARGO_DISABLE_BITBAKE_VENDORING = "1"
+
+[1] https://crates.io/crates/cargo-bitbake
 
 Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ---
- meta-python/classes/pyo3.bbclass | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
- create mode 100644 meta-python/classes/pyo3.bbclass
+ meta-python/classes/setuptools3_rust.bbclass | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 meta-python/classes/setuptools3_rust.bbclass
 
-diff --git a/meta-python/classes/pyo3.bbclass b/meta-python/classes/pyo3.bbclass
+diff --git a/meta-python/classes/setuptools3_rust.bbclass b/meta-python/classes/setuptools3_rust.bbclass
 new file mode 100644
-index 0000000000..4bae0949e5
+index 0000000000..fb11f08f89
 --- /dev/null
-+++ b/meta-python/classes/pyo3.bbclass
-@@ -0,0 +1,30 @@
-+#
-+# This class helps make sure that Python extensions built with PyO3
-+# and setuptools_rust properly set up the environment for cross compilation
-+#
++++ b/meta-python/classes/setuptools3_rust.bbclass
+@@ -0,0 +1,11 @@
++inherit pyo3 setuptools3
 +
-+inherit cargo python3-dir siteinfo
++DEPENDS += "python3-setuptools-rust-native"
 +
-+export PYO3_CROSS="1"
-+export PYO3_CROSS_PYTHON_VERSION="${PYTHON_BASEVERSION}"
-+export PYO3_CROSS_LIB_DIR="${STAGING_LIBDIR}"
-+export CARGO_BUILD_TARGET="${HOST_SYS}"
-+export RUSTFLAGS
-+export PYO3_PYTHON="${PYTHON}"
-+export PYO3_CONFIG_FILE="${WORKDIR}/pyo3.config"
-+
-+pyo3_do_configure () {
-+    cat > ${WORKDIR}/pyo3.config << EOF
-+implementation=CPython
-+version=${PYTHON_BASEVERSION}
-+shared=true
-+abi3=false
-+lib_name=${PYTHON_DIR}
-+lib_dir=${STAGING_LIBDIR}
-+pointer_width=${SITEINFO_BITS}
-+build_flags=WITH_THREAD
-+suppress_build_script_link_lines=false
-+EOF
++setuptools3_rust_do_configure() {
++    pyo3_do_configure
++    cargo_common_do_configure
++    setuptools3_do_configure
 +}
 +
 +EXPORT_FUNCTIONS do_configure
