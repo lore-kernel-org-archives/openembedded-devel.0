@@ -1,100 +1,119 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <marex@denx.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5464BC433EF
-	for <webhook@archiver.kernel.org>; Mon, 17 Jan 2022 18:05:22 +0000 (UTC)
-Received: from voyager.superhosting.bg (voyager.superhosting.bg
- [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web08.959.1642442721283947317
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BEE7BC433EF
+	for <webhook@archiver.kernel.org>; Mon, 17 Jan 2022 22:21:33 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by mx.groups.io with SMTP id smtpd.web12.4592.1642458087624225867
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Jan 2022 10:05:21 -0800
+ Mon, 17 Jan 2022 14:21:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=s+i55uvs;
- spf=permerror,
- err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
- for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
- (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
-	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
-	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=sfNz22xk3vTfApkfmYdM+EiKO6gWx0hWml7uSzqe7JA=; b=s+i55uvsDn0o8rc2uLEoKVpz6o
-	ip9wMQqi6dBa5oEOhoYtWv7lBuSh1hMnGbxP484ZPpVzMh9dS44hLo/ukopeDPtUkNKkeGKAxX7Kc
-	cAKWqG7cl4Ptfo4s3NH9GjAvH9+1lp2cdBO7p8ZMYk/KyVxlud+nMrqTqP6NNH0SzVLlLLTEdDPrV
-	imJFunGu4S6PgryDCZz+2djEV+1I0vv65rYPlfYyuilSsAM9i8f1Mqwl9DgS248ntIVzRCfGxHBUe
-	w9226nJ2z0RYTlVWuDJIW8UNCjWG827nQ71U7OnV0GRfO1gp474TsAuBhoTyFOnvnIe1YP+PqKI4Y
-	tx0j21xQ==;
-Received: from lan.nucleusys.com ([92.247.61.126]:57514 helo=tone.k.g)
-	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.94.2)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1n9WNs-0006Ib-Rg; Mon, 17 Jan 2022 20:05:20 +0200
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-croniter: Upgrade 1.1.0 -> 1.2.0
-Date: Mon, 17 Jan 2022 20:05:05 +0200
-Message-Id: <20220117180505.571730-3-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220117180505.571730-1-leon.anavi@konsulko.com>
-References: <20220117180505.571730-1-leon.anavi@konsulko.com>
+ dkim=pass header.i=@denx.de header.s=phobos-20191101 header.b=m9uwFL9a;
+ spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+	(No client certificate requested)
+	(Authenticated sender: marex@denx.de)
+	by phobos.denx.de (Postfix) with ESMTPSA id C8212830C0;
+	Mon, 17 Jan 2022 23:21:23 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1642458084;
+	bh=AuMndinVOPENlzarG2VQUQKRyicZiKk37uQ8ODlFmls=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=m9uwFL9absVtA3mJWWR5KXKjJ7SivrRCpwqTIgTteCAVHPQLHA2KFpg0dWwGU5Fs6
+	 djnQbem9doTriYJnbhYVJ0M5AHtY51cW84lqe7hVQO9vKNlevDl56lfVH1f+Zs90L2
+	 HDIoHrN6NkFdskIsPTyW9v7YXyhZihiHuM5f5A+i9MRXTKhPL/JV2BcskRx6ha42Wr
+	 TWAcjGaXFEppGJB+9D3dB0evdmdt+k99kHSnMLbz8i783s/A49UMCskVpLg9uEOQ8/
+	 lqGLNnhdlHdmDFNWLEJHCTYF7KdSh8NTZGeECLzkNE8m1hBY6PTEkEczOPvEGNwk/m
+	 xAq+nwWQZn4kA==
+Message-ID: <c001289b-219a-f9bf-64f4-1c09917b2809@denx.de>
+Date: Mon, 17 Jan 2022 23:21:23 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
- leon@anavi.org
-X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.4.1
+Subject: Re: [oe] [meta-oe][dunfell][PATCH 1/5] freerdp: Upgrade to 2.2.0
+Content-Language: en-US
+To: Marta Rybczynska <rybczynska@gmail.com>
+Cc: akuster808 <akuster808@gmail.com>,
+ openembedded-devel@lists.openembedded.org, raj.khem@gmail.com
+References: <20220111224714.1289840-1-marex@denx.de>
+ <4d1f655b-23c4-7f6a-c4bd-259a890738f5@gmail.com>
+ <c020d0e7-8702-c169-5812-5a8c06f19b7c@denx.de>
+ <d2d5d5dc-c1db-700d-470c-42126bc394dc@gmail.com>
+ <5e27977c-15aa-42ca-463a-744d1b36d306@denx.de>
+ <47b66e62-0682-38c7-6c03-a53427fdf4d9@gmail.com>
+ <e8bb6f21-5d2f-635f-ed8a-7977e4a32656@denx.de>
+ <CAApg2=QC-VnA3brVeOya4Yps+PLthVMQK7sZY8OKAh9WctH7LA@mail.gmail.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: 
+ <CAApg2=QC-VnA3brVeOya4Yps+PLthVMQK7sZY8OKAh9WctH7LA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Virus-Scanned: clamav-milter 0.103.2 at phobos.denx.de
+X-Virus-Status: Clean
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 17 Jan 2022 18:05:22 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 17 Jan 2022 22:21:33 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94904
+ https://lists.openembedded.org/g/openembedded-devel/message/94905
 
-Upgrade to release 1.2.0:
+On 1/17/22 18:34, Marta Rybczynska wrote:
+> On Sun, Jan 16, 2022 at 7:22 PM Marek Vasut <marex@denx.de> wrote:
+> 
+>> On 1/16/22 19:05, akuster808 wrote:
+>>>
+>>>
+>>> On 1/15/22 7:45 AM, Marek Vasut wrote:
+>>>> On 1/15/22 14:43, akuster808 wrote:
+>>>>>
+>>>>>
+>>>>> On 1/11/22 8:57 PM, Marek Vasut wrote:
+>>>>>> On 1/12/22 05:42, akuster808 wrote:
+>>>>>>>
+>>>>>>>
+>>>>>>> On 1/11/22 2:47 PM, Marek Vasut wrote:
+>>>>>>>> From: Khem Raj <raj.khem@gmail.com>
+>>>>>>>>
+>>>>>>>> (cherry picked from commit f751dcf81a18fe817b40e755a2ba3f54a74d1e02)
+>>>>>>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>>>>>>> Signed-off-by: Marek Vasut <marex@denx.de>
+>>>>>>>
+>>>>>>> And why should I allow this?
+>>>>>>
+>>>>>> This ... what ? The SoB line or the update ?
+>>>>>
+>>>>> What is in the update from 2.2.0 to 2.4.1?
+>>>>
+>>>> This patch updates freerdp from 2.0.0 to 2.2.0 , not from 2.2.0 to
+>>>> 2.4.1 , that's a later patch.
+>>> I still see new features being added in 2.2.0 so the same statements
+>>> apply.  Until the process changes to allow package updates that include
+>>> new features and functionality for a LTS branch, I am going to decline
+>>> taking this patch series.
+>>
+>> What about the large amount of CVE fixes and the fact that this is still
+>> a stable-2.0 branch update, not upgrade to 3.x , as explained below ?
+>>
+>>
+> Marek,
+> Are you able to backport needed fixes to 2.2.x series? This would be
+> something
+> Armin would likely accept.
 
-- Enforce validation for day=1. Before this release we used to
-  support day=0 and it was silently glided to day=1 to support
-  having both day in day in 4th field when it came to have
-  6fields cron forms (second repeat). It will now raises a
-  CroniterBadDateError.
+I'm not really confident at sifting through the 550 or so patches 
+between freerdp 2.0.0 and 2.4.1 and picking out what ought to be CVE 
+fixes correctly, so that might end up with even worse result.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../{python3-croniter_1.1.0.bb => python3-croniter_1.2.0.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-croniter_1.1.0.bb => python3-croniter_1.2.0.bb} (78%)
+We can likely pick the fixes from debian oldstable freerdp, but those 
+are also last updated in June 2020, and debian stable is on freerdp 
+2.3.0 now.
 
-diff --git a/meta-python/recipes-devtools/python/python3-croniter_1.1.0.bb b/meta-python/recipes-devtools/python/python3-croniter_1.2.0.bb
-similarity index 78%
-rename from meta-python/recipes-devtools/python/python3-croniter_1.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-croniter_1.2.0.bb
-index 6ae657fe3..13dbf155c 100644
---- a/meta-python/recipes-devtools/python/python3-croniter_1.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-croniter_1.2.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=b8ee59850b882cbf623188489ea748e2"
- 
- PYPI_PACKAGE = "croniter"
- 
--SRC_URI[sha256sum] = "4023e4d18ced979332369964351e8f4f608c1f7c763e146b1d740002c4245247"
-+SRC_URI[sha256sum] = "094422f6aeb9ed646714393503fa388afe4f846e110e1997fea5794e2085c2d7"
- 
- inherit pypi setuptools3
- 
--- 
-2.30.2
+Also, June 2020 is where freerdp no longer has CVE information in the 
+commit messages, for whatever reason.
 
+That's why I think rolling the freerdp forward to latest stable-2.x 
+series is the easiest, the CVEs get reliably closed and there shouldn't 
+be any API/ABI incompatibility.
 
