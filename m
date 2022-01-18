@@ -1,119 +1,86 @@
-Return-Path: <marex@denx.de>
+Return-Path: <mingli.yu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BEE7BC433EF
-	for <webhook@archiver.kernel.org>; Mon, 17 Jan 2022 22:21:33 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by mx.groups.io with SMTP id smtpd.web12.4592.1642458087624225867
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53C1CC433EF
+	for <webhook@archiver.kernel.org>; Tue, 18 Jan 2022 06:01:10 +0000 (UTC)
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
+ by mx.groups.io with SMTP id smtpd.web08.9219.1642485668580135400
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Jan 2022 14:21:29 -0800
+ Mon, 17 Jan 2022 22:01:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@denx.de header.s=phobos-20191101 header.b=m9uwFL9a;
- spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
-	(No client certificate requested)
-	(Authenticated sender: marex@denx.de)
-	by phobos.denx.de (Postfix) with ESMTPSA id C8212830C0;
-	Mon, 17 Jan 2022 23:21:23 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1642458084;
-	bh=AuMndinVOPENlzarG2VQUQKRyicZiKk37uQ8ODlFmls=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=m9uwFL9absVtA3mJWWR5KXKjJ7SivrRCpwqTIgTteCAVHPQLHA2KFpg0dWwGU5Fs6
-	 djnQbem9doTriYJnbhYVJ0M5AHtY51cW84lqe7hVQO9vKNlevDl56lfVH1f+Zs90L2
-	 HDIoHrN6NkFdskIsPTyW9v7YXyhZihiHuM5f5A+i9MRXTKhPL/JV2BcskRx6ha42Wr
-	 TWAcjGaXFEppGJB+9D3dB0evdmdt+k99kHSnMLbz8i783s/A49UMCskVpLg9uEOQ8/
-	 lqGLNnhdlHdmDFNWLEJHCTYF7KdSh8NTZGeECLzkNE8m1hBY6PTEkEczOPvEGNwk/m
-	 xAq+nwWQZn4kA==
-Message-ID: <c001289b-219a-f9bf-64f4-1c09917b2809@denx.de>
-Date: Mon, 17 Jan 2022 23:21:23 +0100
+ dkim=missing;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
+ domain name (domain: windriver.com, ip: 147.11.3.146,
+ mailfrom: mingli.yu@windriver.com)
+Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 20I617AS017863
+	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Mon, 17 Jan 2022 22:01:07 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 20I616ZQ018805
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Mon, 17 Jan 2022 22:01:07 -0800 (PST)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Mon, 17 Jan 2022 22:01:06 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.20; Mon, 17 Jan 2022 22:01:06 -0800
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Mon, 17 Jan 2022 22:01:05 -0800
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH v2] php: avoid textrel QA Issue warning
+Date: Tue, 18 Jan 2022 14:01:04 +0800
+Message-ID: <20220118060104.10360-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <84d5e5db-6b07-c88d-a719-bc71bcdaac1a@gmail.com>
+References: <84d5e5db-6b07-c88d-a719-bc71bcdaac1a@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.4.1
-Subject: Re: [oe] [meta-oe][dunfell][PATCH 1/5] freerdp: Upgrade to 2.2.0
-Content-Language: en-US
-To: Marta Rybczynska <rybczynska@gmail.com>
-Cc: akuster808 <akuster808@gmail.com>,
- openembedded-devel@lists.openembedded.org, raj.khem@gmail.com
-References: <20220111224714.1289840-1-marex@denx.de>
- <4d1f655b-23c4-7f6a-c4bd-259a890738f5@gmail.com>
- <c020d0e7-8702-c169-5812-5a8c06f19b7c@denx.de>
- <d2d5d5dc-c1db-700d-470c-42126bc394dc@gmail.com>
- <5e27977c-15aa-42ca-463a-744d1b36d306@denx.de>
- <47b66e62-0682-38c7-6c03-a53427fdf4d9@gmail.com>
- <e8bb6f21-5d2f-635f-ed8a-7977e4a32656@denx.de>
- <CAApg2=QC-VnA3brVeOya4Yps+PLthVMQK7sZY8OKAh9WctH7LA@mail.gmail.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: 
- <CAApg2=QC-VnA3brVeOya4Yps+PLthVMQK7sZY8OKAh9WctH7LA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Virus-Scanned: clamav-milter 0.103.2 at phobos.denx.de
-X-Virus-Status: Clean
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 17 Jan 2022 22:21:33 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Jan 2022 06:01:10 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94905
+ https://lists.openembedded.org/g/openembedded-devel/message/94906
 
-On 1/17/22 18:34, Marta Rybczynska wrote:
-> On Sun, Jan 16, 2022 at 7:22 PM Marek Vasut <marex@denx.de> wrote:
-> 
->> On 1/16/22 19:05, akuster808 wrote:
->>>
->>>
->>> On 1/15/22 7:45 AM, Marek Vasut wrote:
->>>> On 1/15/22 14:43, akuster808 wrote:
->>>>>
->>>>>
->>>>> On 1/11/22 8:57 PM, Marek Vasut wrote:
->>>>>> On 1/12/22 05:42, akuster808 wrote:
->>>>>>>
->>>>>>>
->>>>>>> On 1/11/22 2:47 PM, Marek Vasut wrote:
->>>>>>>> From: Khem Raj <raj.khem@gmail.com>
->>>>>>>>
->>>>>>>> (cherry picked from commit f751dcf81a18fe817b40e755a2ba3f54a74d1e02)
->>>>>>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>>>>>>> Signed-off-by: Marek Vasut <marex@denx.de>
->>>>>>>
->>>>>>> And why should I allow this?
->>>>>>
->>>>>> This ... what ? The SoB line or the update ?
->>>>>
->>>>> What is in the update from 2.2.0 to 2.4.1?
->>>>
->>>> This patch updates freerdp from 2.0.0 to 2.2.0 , not from 2.2.0 to
->>>> 2.4.1 , that's a later patch.
->>> I still see new features being added in 2.2.0 so the same statements
->>> apply.  Until the process changes to allow package updates that include
->>> new features and functionality for a LTS branch, I am going to decline
->>> taking this patch series.
->>
->> What about the large amount of CVE fixes and the fact that this is still
->> a stable-2.0 branch update, not upgrade to 3.x , as explained below ?
->>
->>
-> Marek,
-> Are you able to backport needed fixes to 2.2.x series? This would be
-> something
-> Armin would likely accept.
+From: Mingli Yu <mingli.yu@windriver.com>
 
-I'm not really confident at sifting through the 550 or so patches 
-between freerdp 2.0.0 and 2.4.1 and picking out what ought to be CVE 
-fixes correctly, so that might end up with even worse result.
+Fixes:
+WARNING: lib32-php-8.0.12-r0 do_package_qa: QA Issue: lib32-php: ELF binary /usr/libexec/apache2/modules/libphp.so has relocations in .text [textrel]
+WARNING: lib32-php-8.0.12-r0 do_package_qa: QA Issue: lib32-php-opcache: ELF binary /usr/lib/php8/extensions/no-debug-zts-20200930/opcache.so has relocations in .text [textrel]
 
-We can likely pick the fixes from debian oldstable freerdp, but those 
-are also last updated in June 2020, and debian stable is on freerdp 
-2.3.0 now.
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ meta-oe/recipes-devtools/php/php_8.1.0.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-Also, June 2020 is where freerdp no longer has CVE information in the 
-commit messages, for whatever reason.
+diff --git a/meta-oe/recipes-devtools/php/php_8.1.0.bb b/meta-oe/recipes-devtools/php/php_8.1.0.bb
+index 593eb3955..43e86fe55 100644
+--- a/meta-oe/recipes-devtools/php/php_8.1.0.bb
++++ b/meta-oe/recipes-devtools/php/php_8.1.0.bb
+@@ -217,6 +217,11 @@ ALLOW_EMPTY:${PN} = "1"
+ INITSCRIPT_PACKAGES = "${PN}-fpm"
+ inherit update-rc.d
+ 
++# WARNING: lib32-php-8.0.12-r0 do_package_qa: QA Issue: lib32-php: ELF binary /usr/libexec/apache2/modules/libphp.so has relocations in .text [textrel]
++#WARNING: lib32-php-8.0.12-r0 do_package_qa: QA Issue: lib32-php-opcache: ELF binary /usr/lib/php8/extensions/no-debug-zts-20200930/opcache.so has relocations in .text [textrel]
++INSANE_SKIP:${PN}:append:x86 = " textrel"
++INSANE_SKIP:${PN}-opcache:append:x86 = " textrel"
++
+ FILES:${PN}-dbg =+ "${bindir}/.debug \
+                     ${libexecdir}/apache2/modules/.debug"
+ FILES:${PN}-doc += "${PHP_LIBDIR}/php/doc"
+-- 
+2.17.1
 
-That's why I think rolling the freerdp forward to latest stable-2.x 
-series is the easiest, the CVEs get reliably closed and there shouldn't 
-be any API/ABI incompatibility.
 
