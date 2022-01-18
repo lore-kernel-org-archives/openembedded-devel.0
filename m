@@ -1,254 +1,222 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C72A8C433F5
-	for <webhook@archiver.kernel.org>; Tue, 18 Jan 2022 17:01:11 +0000 (UTC)
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com
- [209.85.208.52])
- by mx.groups.io with SMTP id smtpd.web11.15581.1642525270771117277
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B795C433F5
+	for <webhook@archiver.kernel.org>; Tue, 18 Jan 2022 17:15:54 +0000 (UTC)
+Received: from mail-qv1-f43.google.com (mail-qv1-f43.google.com
+ [209.85.219.43])
+ by mx.groups.io with SMTP id smtpd.web09.15759.1642526153069727933
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Jan 2022 09:01:11 -0800
+ Tue, 18 Jan 2022 09:15:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=I73z9+Hj;
- spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: ticotimo@gmail.com)
-Received: by mail-ed1-f52.google.com with SMTP id a18so82465850edj.7
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=VaLFcgau;
+ spf=pass (domain: gmail.com, ip: 209.85.219.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f43.google.com with SMTP id k9so6612182qvv.9
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Jan 2022 09:01:10 -0800 (PST)
+ Tue, 18 Jan 2022 09:15:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=dvpfpgqEvb1Ic4dG43mg3kD6zx1soCM1BGpb+F50R0I=;
-        b=I73z9+Hjdlb9qt4H50jA+y9unNaKpZ3STn+vuCAMvMzXDKu0H/hA+JhJL56UpYlecD
-         agfmg75shldvPPAAl1lUw0xFVvLaNJtNf7m6ZTQrnR43tmZieTbQUPzVsMsPictgY2FY
-         rbliu5J0sC7IpLErzxq0orqgmZUq94/9Egx7nPNrilqWJuGXxLliiho8NoYaT+GzUM/i
-         vOEkuQl+L+g0M00jEOqMm2TorW4JyPVaOFPhSbnQsX6NCFzw0QPny+O9HEXqO0ehW6nW
-         2XMW2u9632Cf5IqIwAmStzldEJv5IWHTSw5Yihz3KLElkOdU2UUOU8bZI+9zaSp2UxOP
-         mn5g==
+        bh=eumVaWU6MJqsFd2FqUjhhWu65X6iLI7IseU0sO2yOQ0=;
+        b=VaLFcgauRDBvXmpyr6xvmWqRKzj8gHbnblFj7fP61aQ97QyvsagWDh00MlcgbXkKjP
+         W8k6BcZCSMmxnukpqCJaKZZBiQvYjlHwf6vyWHEKucILAq/TcWIIeyD2+AF0JHRLPUbr
+         RQ5ybsP+G+s7ForO3J5Jin1PKGv0xWVO8IMZOrdzABWtJxyhmeOHvFCJ5sGKq5QPawwK
+         nbE+mlvpq2idBY20qCE614W3oCMCfv8ifi5Br4LsAlTpj0ABhgjtIFPw11dgn7MVTo9A
+         obGKQ4q/9LDu1R+WwlQ5rfGnE4KhMhVClUIdSN8QINuAk3OEcXST3Fuuww9hmpXef5r6
+         scbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=dvpfpgqEvb1Ic4dG43mg3kD6zx1soCM1BGpb+F50R0I=;
-        b=3UcVIHVRwN95EfGqG8DG1fOoX6cznN9WG0KGLsUEEdUHkKKqDWITj3Rn2Ctz1qgc54
-         gpfivNNuZVoAyPHr0pmGfztBveY4F9v1Tyf2yh/5aGgrHuaczbCu04Cwq/aRfLAOjdhd
-         Qfs0ROlpqliyIHGLiC3mWmHAaCmYJx12n1pMsTkIl38PR1Xxk1GgdbcNO5r8pAPwVRKy
-         /zm6Wf6WSLCtRxFOxH/caIMDLRUpUBRPxoa5z+iMURHrDX4SXGDrrOpCNWzy1Cva3F62
-         OZjZbzrtLnAlL2C8Z9QPk+/u7GTtB5f9KJyH3dH/alJcviTo3WABEl7dYqHfsJ9fx0VH
-         idOQ==
-X-Gm-Message-State: AOAM531qtJb4O0NAj1rbm2HgGjS8ESfx3YyyevQ/DEqEC3KecUHUA9b2
-	YTOztlLnpRhSsT5iuTMF5BcGAUvYpMaBzH3AKAM=
+        bh=eumVaWU6MJqsFd2FqUjhhWu65X6iLI7IseU0sO2yOQ0=;
+        b=v6yLBCDhsVVBq8S7dZ6CEHhBEmTOh8rAHKwUlWruEc5fpkA8JCH4blosP7mxnFCZ1E
+         qwqfAvOl6q/bzxVaAQBgLpsHo78cresElSHToXFb9JFlQz3F+aF1pp6UBZsoF8dpjVyy
+         KMKD37kRA6I1EjbU8+XIMjcSpRlJafmDVvK8NyFWtXidgy/yhHhKzBsOi4MN54evdeuc
+         kB5jjWHczw6qKgybokHq6uy9FmwiPb+0yJqQl7l9wFwZ4IF7Cwsit78WlA7pDVCmY5hD
+         +GevjILWMuj+gHi0I2COlLomNNXHH4B1w+yKyIJA1h4oKtzT7x6MNixTc3u9DBclZk72
+         6QeA==
+X-Gm-Message-State: AOAM532W743ojH1MMJpVtL+zjcDx5xC4+0uO5YDgcGZNS7Zt+4T0fOYG
+	t25kvrI+9JDJd8YaOc0y+N8ILAAIPn7r3+jOEOs=
 X-Google-Smtp-Source: 
- ABdhPJzwmXNxXrkwM9Vafk3IDl0HGdWF8l5q6+XuaeJbA4BVjUrhnx27tQtKdS5BwBqw7UfSo+bFixxiCx2LLDCPCtQ=
-X-Received: by 2002:a05:6402:4b:: with SMTP id
- f11mr27012385edu.267.1642525269128;
- Tue, 18 Jan 2022 09:01:09 -0800 (PST)
+ ABdhPJxMre+HPjZmw9zfU3LV4xD7y5iVgzypR1aQYELpOpZ6XcnGSeUy3vBhrpma7rSFzAe7Z1kQOPqabrZUjMRKnVM=
+X-Received: by 2002:a05:6214:21e3:: with SMTP id
+ p3mr23970716qvj.63.1642526151993;
+ Tue, 18 Jan 2022 09:15:51 -0800 (PST)
 MIME-Version: 1.0
-References: <20220118083234.2427848-1-Martin.Jansa@gmail.com>
-In-Reply-To: <20220118083234.2427848-1-Martin.Jansa@gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Tue, 18 Jan 2022 09:00:58 -0800
+References: <cover.1642309436.git.tim.orling@konsulko.com>
+ <1953cd6d6bf8617fb08b1244b0a8836732370523.1642309436.git.tim.orling@konsulko.com>
+In-Reply-To: 
+ <1953cd6d6bf8617fb08b1244b0a8836732370523.1642309436.git.tim.orling@konsulko.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 18 Jan 2022 09:15:26 -0800
 Message-ID: 
- <CANx9H-DfzVd4Xp_b+2jDDpO_DTO5J53MyEAagTgP8D_UG0KvGw@mail.gmail.com>
-Subject: Re: [oe] [meta-python2][PATCH] distutils-base: stop using
- distutils-common-base which now triggers warning about distutils removal in
- Python 3.12
-To: Martin Jansa <Martin.Jansa@gmail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="0000000000003379c605d5de3752"
+ <CAMKF1soYQst7H8qqyaDATcVuGbR2ma81-6q1Y5CE69SvfDzMhA@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 4/7] python3-pyruvate: add recipe for
+ v1.1.2
+To: Tim Orling <ticotimo@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Jan 2022 17:01:11 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Jan 2022 17:15:54 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94915
+ https://lists.openembedded.org/g/openembedded-devel/message/94916
 
---0000000000003379c605d5de3752
-Content-Type: text/plain; charset="UTF-8"
+this fail on mips see
 
-Thank you for this JaMa, it will make the move of distutils* classes to
-meta-python smoother. And when we drop distutils-common-base from oe-core
-it won't impact meta-python2.
+https://errors.yoctoproject.org/Errors/Details/622699/
 
-Thank you also for maintaining meta-python2. I do appreciate it.
-
-On Tue, Jan 18, 2022 at 12:32 AM Martin Jansa <Martin.Jansa@gmail.com>
-wrote:
-
-> * distutils removal in Python 3.12 doesn't affect already EOL Python2
-> recipes
+On Sat, Jan 15, 2022 at 9:29 PM Tim Orling <ticotimo@gmail.com> wrote:
 >
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> Pyruvate is a reasonably fast, multithreaded, non-blocking WSGI server
+> implemented in Rust.
 >
-Acked-by: Tim Orlnig <tim.orling@konsulko.com>
-
+> This recipe uses the new setuptools3_rust and pyo3 classes.
+>
+> Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 > ---
->  classes/distutils-base.bbclass | 32 +++++++++++++++++++++++++++++++-
->  1 file changed, 31 insertions(+), 1 deletion(-)
+>  .../python/python3-pyruvate_1.1.2.bb          | 119 ++++++++++++++++++
+>  1 file changed, 119 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
 >
-> diff --git a/classes/distutils-base.bbclass
-> b/classes/distutils-base.bbclass
-> index 803dc8b..26aadad 100644
-> --- a/classes/distutils-base.bbclass
-> +++ b/classes/distutils-base.bbclass
-> @@ -1,4 +1,34 @@
->  DEPENDS  += "${@["${PYTHON_PN}-native ${PYTHON_PN}",
-> ""][(d.getVar('PACKAGES') == '')]}"
->  RDEPENDS:${PN} += "${@['', '${PYTHON_PN}-core']['${CLASSOVERRIDE}' ==
-> 'class-target']}"
->
-> -inherit distutils-common-base pythonnative
-> +inherit pythonnative
+> diff --git a/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb b/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
+> new file mode 100644
+> index 0000000000..835cf9a93d
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
+> @@ -0,0 +1,119 @@
+> +SUMMARY = "WSGI server implemented in Rust."
+> +DESCRIPTION = "Pyruvate is a reasonably fast, multithreaded, non-blocking \
+> +WSGI server implemented in Rust."
+> +HOMEPAGE = "https://gitlab.com/tschorr/pyruvate"
+> +BUGTRACKER = "https://gitlab.com/tschorr/pyruvate/-/issues"
 > +
-> +# the rest is meta/classes/distutils-common-base.bbclass before the
-> bb.warn was added in:
+> +LICENSE = "GPL-2.0-only"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=051b48e640a6e2d795eac75542d9417c \
+> +                    file://LICENSE.GPL;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> +
+> +SRC_URI[sha256sum] = "10befedd97e73fc18b902d02aa3b24e8978aa162242c1b664849c886c0675899"
+> +
+> +S = "${WORKDIR}/pyruvate-${PV}"
+> +
+> +inherit pypi setuptools3_rust
+> +
+> +SRC_URI += " \
+> +    crate://crates.io/aho-corasick/0.7.18 \
+> +    crate://crates.io/atty/0.2.14 \
+> +    crate://crates.io/autocfg/1.0.1 \
+> +    crate://crates.io/bitflags/1.3.2 \
+> +    crate://crates.io/block-buffer/0.9.0 \
+> +    crate://crates.io/cc/1.0.72 \
+> +    crate://crates.io/cfg-if/1.0.0 \
+> +    crate://crates.io/chrono/0.4.19 \
+> +    crate://crates.io/cpufeatures/0.2.1 \
+> +    crate://crates.io/cpython/0.7.0 \
+> +    crate://crates.io/crossbeam-channel/0.5.2 \
+> +    crate://crates.io/crossbeam-deque/0.8.1 \
+> +    crate://crates.io/crossbeam-epoch/0.9.6 \
+> +    crate://crates.io/crossbeam-queue/0.3.3 \
+> +    crate://crates.io/crossbeam-utils/0.8.6 \
+> +    crate://crates.io/crossbeam/0.8.1 \
+> +    crate://crates.io/crypto-mac/0.11.1 \
+> +    crate://crates.io/ctrlc/3.2.1 \
+> +    crate://crates.io/digest/0.9.0 \
+> +    crate://crates.io/encoding-index-japanese/1.20141219.5 \
+> +    crate://crates.io/encoding-index-korean/1.20141219.5 \
+> +    crate://crates.io/encoding-index-simpchinese/1.20141219.5 \
+> +    crate://crates.io/encoding-index-singlebyte/1.20141219.5 \
+> +    crate://crates.io/encoding-index-tradchinese/1.20141219.5 \
+> +    crate://crates.io/encoding/0.2.33 \
+> +    crate://crates.io/encoding_index_tests/0.1.4 \
+> +    crate://crates.io/env_logger/0.9.0 \
+> +    crate://crates.io/errno-dragonfly/0.1.2 \
+> +    crate://crates.io/errno/0.2.8 \
+> +    crate://crates.io/fastrand/1.6.0 \
+> +    crate://crates.io/generic-array/0.14.5 \
+> +    crate://crates.io/getrandom/0.2.3 \
+> +    crate://crates.io/hermit-abi/0.1.19 \
+> +    crate://crates.io/hmac/0.11.0 \
+> +    crate://crates.io/httparse/1.5.1 \
+> +    crate://crates.io/humantime/2.1.0 \
+> +    crate://crates.io/instant/0.1.12 \
+> +    crate://crates.io/lazy_static/1.4.0 \
+> +    crate://crates.io/libc/0.2.112 \
+> +    crate://crates.io/libsystemd/0.4.1 \
+> +    crate://crates.io/log/0.4.14 \
+> +    crate://crates.io/memchr/2.4.1 \
+> +    crate://crates.io/memoffset/0.6.5 \
+> +    crate://crates.io/mio/0.8.0 \
+> +    crate://crates.io/miow/0.3.7 \
+> +    crate://crates.io/nix/0.23.1 \
+> +    crate://crates.io/ntapi/0.3.6 \
+> +    crate://crates.io/num-integer/0.1.44 \
+> +    crate://crates.io/num-traits/0.2.14 \
+> +    crate://crates.io/num_cpus/1.13.1 \
+> +    crate://crates.io/once_cell/1.9.0 \
+> +    crate://crates.io/opaque-debug/0.3.0 \
+> +    crate://crates.io/paste/1.0.6 \
+> +    crate://crates.io/ppv-lite86/0.2.16 \
+> +    crate://crates.io/proc-macro2/1.0.36 \
+> +    crate://crates.io/python3-sys/0.7.0 \
+> +    crate://crates.io/quote/1.0.14 \
+> +    crate://crates.io/rand/0.8.4 \
+> +    crate://crates.io/rand_chacha/0.3.1 \
+> +    crate://crates.io/rand_core/0.6.3 \
+> +    crate://crates.io/rand_hc/0.3.1 \
+> +    crate://crates.io/redox_syscall/0.2.10 \
+> +    crate://crates.io/regex-syntax/0.6.25 \
+> +    crate://crates.io/regex/1.5.4 \
+> +    crate://crates.io/remove_dir_all/0.5.3 \
+> +    crate://crates.io/scopeguard/1.1.0 \
+> +    crate://crates.io/serde/1.0.133 \
+> +    crate://crates.io/serde_derive/1.0.133 \
+> +    crate://crates.io/sha2/0.9.9 \
+> +    crate://crates.io/simplelog/0.11.1 \
+> +    crate://crates.io/spmc/0.3.0 \
+> +    crate://crates.io/subtle/2.4.1 \
+> +    crate://crates.io/syn/1.0.85 \
+> +    crate://crates.io/tempfile/3.3.0 \
+> +    crate://crates.io/termcolor/1.1.2 \
+> +    crate://crates.io/thiserror-impl/1.0.30 \
+> +    crate://crates.io/thiserror/1.0.30 \
+> +    crate://crates.io/threadpool/1.8.1 \
+> +    crate://crates.io/time/0.1.44 \
+> +    crate://crates.io/typenum/1.15.0 \
+> +    crate://crates.io/unicode-xid/0.2.2 \
+> +    crate://crates.io/urlencoding/2.1.0 \
+> +    crate://crates.io/uuid/0.8.2 \
+> +    crate://crates.io/version_check/0.9.4 \
+> +    crate://crates.io/wasi/0.10.0+wasi-snapshot-preview1 \
+> +    crate://crates.io/winapi-i686-pc-windows-gnu/0.4.0 \
+> +    crate://crates.io/winapi-util/0.1.5 \
+> +    crate://crates.io/winapi-x86_64-pc-windows-gnu/0.4.0 \
+> +    crate://crates.io/winapi/0.3.9 \
+> +"
+> +
+> +# The following configs & dependencies are from setuptools extras_require.
+> +# These dependencies are optional, hence can be controlled via PACKAGECONFIG.
+> +# The upstream names may not correspond exactly to bitbake package names.
 > +#
-> https://git.openembedded.org/openembedded-core/commit/?id=54b455049ee94c01c78b31b6c744c8e32b5b7737
-> +# as the distutils removal in Python 3.12 doesn't affect already EOL
-> Python2 recipes
+> +# Uncomment this line to enable all the optional features.
+> +#PACKAGECONFIG ?= "test"
+> +PACKAGECONFIG[test] = ",,,python3-pytest python3-requests"
 > +
-> +export STAGING_INCDIR
-> +export STAGING_LIBDIR
-> +
-> +# LDSHARED is the ld *command* used to create shared library
-> +export LDSHARED  = "${CCLD} -shared"
-> +# LDXXSHARED is the ld *command* used to create shared library of C++
-> +# objects
-> +export LDCXXSHARED  = "${CXX} -shared"
-> +# CCSHARED are the C *flags* used to create objects to go into a shared
-> +# library (module)
-> +export CCSHARED  = "-fPIC -DPIC"
-> +# LINKFORSHARED are the flags passed to the $(CC) command that links
-> +# the python executable
-> +export LINKFORSHARED = "${SECURITY_CFLAGS} -Xlinker -export-dynamic"
-> +
-> +FILES:${PN} += "${libdir}/* ${libdir}/${PYTHON_DIR}/*"
-> +
-> +FILES:${PN}-staticdev += "\
-> +  ${PYTHON_SITEPACKAGES_DIR}/*.a \
-> +"
-> +FILES:${PN}-dev += "\
-> +  ${datadir}/pkgconfig \
-> +  ${libdir}/pkgconfig \
-> +  ${PYTHON_SITEPACKAGES_DIR}/*.la \
-> +"
+> +# WARNING: the following rdepends are determined through basic analysis of the
+> +# python sources, and might not be 100% accurate.
+> +RDEPENDS:${PN} += "python3-core"
 > --
-> 2.32.0
+> 2.30.2
 >
 >
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#94910):
-> https://lists.openembedded.org/g/openembedded-devel/message/94910
-> Mute This Topic: https://lists.openembedded.org/mt/88505319/924729
+> View/Reply Online (#94879): https://lists.openembedded.org/g/openembedded-devel/message/94879
+> Mute This Topic: https://lists.openembedded.org/mt/88458053/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> ticotimo@gmail.com]
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
 >
->
-
---0000000000003379c605d5de3752
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Thank you for this JaMa, it will make the move of dis=
-tutils* classes to meta-python smoother. And when we drop distutils-common-=
-base from oe-core it won&#39;t impact meta-python2.</div><div><br></div><di=
-v>Thank you also for maintaining meta-python2. I do appreciate it.</div><br=
-><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, J=
-an 18, 2022 at 12:32 AM Martin Jansa &lt;<a href=3D"mailto:Martin.Jansa@gma=
-il.com">Martin.Jansa@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D=
-"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(2=
-04,204,204);padding-left:1ex">* distutils removal in Python 3.12 doesn&#39;=
-t affect already EOL Python2 recipes<br>
-<br>
-Signed-off-by: Martin Jansa &lt;<a href=3D"mailto:Martin.Jansa@gmail.com" t=
-arget=3D"_blank">Martin.Jansa@gmail.com</a>&gt;<br></blockquote><div>Acked-=
-by: Tim Orlnig &lt;<a href=3D"mailto:tim.orling@konsulko.com">tim.orling@ko=
-nsulko.com</a>&gt;=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"ma=
-rgin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:=
-1ex">
----<br>
-=C2=A0classes/distutils-base.bbclass | 32 +++++++++++++++++++++++++++++++-<=
-br>
-=C2=A01 file changed, 31 insertions(+), 1 deletion(-)<br>
-<br>
-diff --git a/classes/distutils-base.bbclass b/classes/distutils-base.bbclas=
-s<br>
-index 803dc8b..26aadad 100644<br>
---- a/classes/distutils-base.bbclass<br>
-+++ b/classes/distutils-base.bbclass<br>
-@@ -1,4 +1,34 @@<br>
-=C2=A0DEPENDS=C2=A0 +=3D &quot;${@[&quot;${PYTHON_PN}-native ${PYTHON_PN}&q=
-uot;, &quot;&quot;][(d.getVar(&#39;PACKAGES&#39;) =3D=3D &#39;&#39;)]}&quot=
-;<br>
-=C2=A0RDEPENDS:${PN} +=3D &quot;${@[&#39;&#39;, &#39;${PYTHON_PN}-core&#39;=
-][&#39;${CLASSOVERRIDE}&#39; =3D=3D &#39;class-target&#39;]}&quot;<br>
-<br>
--inherit distutils-common-base pythonnative<br>
-+inherit pythonnative<br>
-+<br>
-+# the rest is meta/classes/distutils-common-base.bbclass before the bb.war=
-n was added in:<br>
-+# <a href=3D"https://git.openembedded.org/openembedded-core/commit/?id=3D5=
-4b455049ee94c01c78b31b6c744c8e32b5b7737" rel=3D"noreferrer" target=3D"_blan=
-k">https://git.openembedded.org/openembedded-core/commit/?id=3D54b455049ee9=
-4c01c78b31b6c744c8e32b5b7737</a><br>
-+# as the distutils removal in Python 3.12 doesn&#39;t affect already EOL P=
-ython2 recipes<br>
-+<br>
-+export STAGING_INCDIR<br>
-+export STAGING_LIBDIR<br>
-+<br>
-+# LDSHARED is the ld *command* used to create shared library<br>
-+export LDSHARED=C2=A0 =3D &quot;${CCLD} -shared&quot;<br>
-+# LDXXSHARED is the ld *command* used to create shared library of C++<br>
-+# objects<br>
-+export LDCXXSHARED=C2=A0 =3D &quot;${CXX} -shared&quot;<br>
-+# CCSHARED are the C *flags* used to create objects to go into a shared<br=
->
-+# library (module)<br>
-+export CCSHARED=C2=A0 =3D &quot;-fPIC -DPIC&quot;<br>
-+# LINKFORSHARED are the flags passed to the $(CC) command that links<br>
-+# the python executable<br>
-+export LINKFORSHARED =3D &quot;${SECURITY_CFLAGS} -Xlinker -export-dynamic=
-&quot;<br>
-+<br>
-+FILES:${PN} +=3D &quot;${libdir}/* ${libdir}/${PYTHON_DIR}/*&quot;<br>
-+<br>
-+FILES:${PN}-staticdev +=3D &quot;\<br>
-+=C2=A0 ${PYTHON_SITEPACKAGES_DIR}/*.a \<br>
-+&quot;<br>
-+FILES:${PN}-dev +=3D &quot;\<br>
-+=C2=A0 ${datadir}/pkgconfig \<br>
-+=C2=A0 ${libdir}/pkgconfig \<br>
-+=C2=A0 ${PYTHON_SITEPACKAGES_DIR}/*.la \<br>
-+&quot;<br>
--- <br>
-2.32.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#94910): <a href=3D"https://lists.openembedded.org/g/ope=
-nembedded-devel/message/94910" rel=3D"noreferrer" target=3D"_blank">https:/=
-/lists.openembedded.org/g/openembedded-devel/message/94910</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/88505319/9247=
-29" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt/=
-88505319/924729</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
-et=3D"_blank">ticotimo@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---0000000000003379c605d5de3752--
 
