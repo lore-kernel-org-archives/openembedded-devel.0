@@ -1,122 +1,95 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F112EC433F5
-	for <webhook@archiver.kernel.org>; Tue, 18 Jan 2022 08:32:38 +0000 (UTC)
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com
- [209.85.208.53])
- by mx.groups.io with SMTP id smtpd.web09.10109.1642494758054656530
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6270DC433EF
+	for <webhook@archiver.kernel.org>; Tue, 18 Jan 2022 10:04:35 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg
+ [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web12.10811.1642500272689539696
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Jan 2022 00:32:38 -0800
+ Tue, 18 Jan 2022 02:04:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=cRMgIAh6;
- spf=pass (domain: gmail.com, ip: 209.85.208.53,
- mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f53.google.com with SMTP id u21so76080600edd.5
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Jan 2022 00:32:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=BELyZ/kBohj6sosVDCkbb/UvAX2xj683Tde0m+Z8Vvs=;
-        b=cRMgIAh6YtfRNk5oT4zSUGg3TOK/VFeWVw5MEY8cxAjsGAmGIHp0auzDitl3iX/EN1
-         Evak7Srhc+NOotrKpgw0EtnHV0eA7Ws4jzddDf9FG59WJfCrc+bG6NmF7KZGKfjsNXSD
-         SBhyiz/3WYd5hsJo02F+FXZFOuJDEnl7aqkbRR7vZr46ZQIKrmrRp3e21C996RrM32gt
-         pl93Mhab0gNIFAWiqw87V2cT/uYGM5LX/EqM3QvSy+EdTJKmxT/v08EWs4r14R9iN+Z9
-         hCXMTJo8Mwkdv0O0eJKqlh70akI2OvUEJJcMIAC/nCpcR8X8auNsk8gnTzsXtWltqK59
-         qKog==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=BELyZ/kBohj6sosVDCkbb/UvAX2xj683Tde0m+Z8Vvs=;
-        b=1nOycJpdcnOtzf8QwLOjb5E0lUjYCmyiESA7zyxyqnqRUkkcboESqIJNTmGnW0JQpz
-         rHdpJa5IBre3EsOl7h80Q0Taqr08crwue6rcGZCNQTSyFPBgPS0ZKMdh5YHfnefHgMcp
-         4/VCwhHyvaCrEcR0iNlz3gdimZVDBqX4yY8vlaWQcDNAOC58A/kjtcG21wS7pUeMLWHo
-         2cxYex36tAvkD3CV15c9cbO1RDIiz4TRGmW+wnmfEyZtL+Oq7ZuSvaf44sKqiTjqhIE8
-         u68K0kUPwsiEA5SFL2JgfHSeWWJLEQEdnCRWNyw8yBq6J89XIat9Ju31p/z2t5STjTGM
-         qZkQ==
-X-Gm-Message-State: AOAM533jtAprrDOYnG3wu5pVOp48iN59TydbLUyHJblZILsDIPiuMnPP
-	GsnLasD64bPR9qBP0TINv712YnExe0g=
-X-Google-Smtp-Source: 
- ABdhPJwegB5c5UQOLWCq+jHEA6Az9/5JJaycm7uPbnRQRyTd+YIEEFnpD1yjZ1jkRvLd4Kykcgnu3w==
-X-Received: by 2002:a17:907:6d9b:: with SMTP id
- sb27mr10060789ejc.139.1642494756219;
-        Tue, 18 Jan 2022 00:32:36 -0800 (PST)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id
- ku14sm105979ejc.197.2022.01.18.00.32.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 Jan 2022 00:32:35 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+ dkim=pass header.i=@anavi.org header.s=default header.b=LhYHfp1d;
+ spf=permerror,
+ err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
+ for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
+ (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=1yxOCPnX8VqmysBg69XF/yaYiJCsq7vVTA3HQSwP0FI=; b=LhYHfp1dUUiXkZfon8kvHfvwCD
+	nRDppJ706LSZe63gfZdrX9luJOxH/Vvn8e2T6AA++fewUv93/WLb97Jw6F7NAc0PWpPmOFGFESQl5
+	WayO1+jOhrG+y1YvSijE9uawgcnGRGdoWv9y1CyIxL6SswgKLx+fCd70R1vzASL9JVbeFroqZWe+k
+	C34acwjSP6oKfyW+UuQk6sGxSA/q3YQPSkHCl18dC3VvYD6zUfD4Pwpd+drHsV4FWFA4wz1yt4T08
+	wQ7Aj3gRT5yPpSg61ZvC7bcqcxvy5FmCVq/ym2casTY7Y/CQM9UbePSqjfg84sTJdOBr5r9jjg3YZ
+	hiDx3f5g==;
+Received: from lan.nucleusys.com ([92.247.61.126]:60642 helo=tone.k.g)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.94.2)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1n9lMB-00071P-IV; Tue, 18 Jan 2022 12:04:30 +0200
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-python2][PATCH] distutils-base: stop using
- distutils-common-base which now triggers warning about distutils removal in
- Python 3.12
-Date: Tue, 18 Jan 2022 09:32:34 +0100
-Message-Id: <20220118083234.2427848-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.32.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-gmpy2: Upgrade 2.1.1 -> 2.1.2
+Date: Tue, 18 Jan 2022 12:04:20 +0200
+Message-Id: <20220118100422.461016-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
+ leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Jan 2022 08:32:38 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Jan 2022 10:04:35 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94910
+ https://lists.openembedded.org/g/openembedded-devel/message/94911
 
-* distutils removal in Python 3.12 doesn't affect already EOL Python2 recipes
+Upgrade to release 2.1.2:
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+- Added binary wheels for Apple silicon
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- classes/distutils-base.bbclass | 32 +++++++++++++++++++++++++++++++-
- 1 file changed, 31 insertions(+), 1 deletion(-)
+ .../python/{python3-gmpy2_2.1.1.bb => python3-gmpy2_2.1.2.bb}  | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-gmpy2_2.1.1.bb => python3-gmpy2_2.1.2.bb} (82%)
 
-diff --git a/classes/distutils-base.bbclass b/classes/distutils-base.bbclass
-index 803dc8b..26aadad 100644
---- a/classes/distutils-base.bbclass
-+++ b/classes/distutils-base.bbclass
-@@ -1,4 +1,34 @@
- DEPENDS  += "${@["${PYTHON_PN}-native ${PYTHON_PN}", ""][(d.getVar('PACKAGES') == '')]}"
- RDEPENDS:${PN} += "${@['', '${PYTHON_PN}-core']['${CLASSOVERRIDE}' == 'class-target']}"
+diff --git a/meta-python/recipes-devtools/python/python3-gmpy2_2.1.1.bb b/meta-python/recipes-devtools/python/python3-gmpy2_2.1.2.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-gmpy2_2.1.1.bb
+rename to meta-python/recipes-devtools/python/python3-gmpy2_2.1.2.bb
+index fc8db9509..d064ba5c0 100644
+--- a/meta-python/recipes-devtools/python/python3-gmpy2_2.1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-gmpy2_2.1.2.bb
+@@ -7,7 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+ DEPENDS += "gmp mpfr libmpc"
  
--inherit distutils-common-base pythonnative
-+inherit pythonnative
+ PYPI_PACKAGE = "gmpy2"
+-SRC_URI[sha256sum] = "346f442063c8212c347e330519905591626ea6fa31aa6ccd299ecd5654e1086f"
++SRC_URI[sha256sum] = "da75140bca128ece795895477e53b43773e3748aa90ba6170eae7ca2c74b82d1"
+ 
+ inherit pypi setuptools3 python3native
 +
-+# the rest is meta/classes/distutils-common-base.bbclass before the bb.warn was added in:
-+# https://git.openembedded.org/openembedded-core/commit/?id=54b455049ee94c01c78b31b6c744c8e32b5b7737
-+# as the distutils removal in Python 3.12 doesn't affect already EOL Python2 recipes
-+
-+export STAGING_INCDIR
-+export STAGING_LIBDIR
-+
-+# LDSHARED is the ld *command* used to create shared library
-+export LDSHARED  = "${CCLD} -shared"
-+# LDXXSHARED is the ld *command* used to create shared library of C++
-+# objects
-+export LDCXXSHARED  = "${CXX} -shared"
-+# CCSHARED are the C *flags* used to create objects to go into a shared
-+# library (module)
-+export CCSHARED  = "-fPIC -DPIC"
-+# LINKFORSHARED are the flags passed to the $(CC) command that links
-+# the python executable
-+export LINKFORSHARED = "${SECURITY_CFLAGS} -Xlinker -export-dynamic"
-+
-+FILES:${PN} += "${libdir}/* ${libdir}/${PYTHON_DIR}/*"
-+
-+FILES:${PN}-staticdev += "\
-+  ${PYTHON_SITEPACKAGES_DIR}/*.a \
-+"
-+FILES:${PN}-dev += "\
-+  ${datadir}/pkgconfig \
-+  ${libdir}/pkgconfig \
-+  ${PYTHON_SITEPACKAGES_DIR}/*.la \
-+"
+ BBCLASSEXTEND = "native nativesdk"
 -- 
-2.32.0
+2.30.2
 
 
