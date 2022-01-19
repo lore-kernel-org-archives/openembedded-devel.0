@@ -2,179 +2,135 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 59026C433EF
-	for <webhook@archiver.kernel.org>; Wed, 19 Jan 2022 01:46:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 670E2C433F5
+	for <webhook@archiver.kernel.org>; Wed, 19 Jan 2022 01:46:47 +0000 (UTC)
 Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
  [195.245.231.1])
- by mx.groups.io with SMTP id smtpd.web08.887.1642556779503321039
+ by mx.groups.io with SMTP id smtpd.web10.828.1642556803217038470
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Jan 2022 17:46:19 -0800
+ Tue, 18 Jan 2022 17:46:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WPaihvwV;
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=joxVShRB;
  spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1642556777; i=@fujitsu.com;
-	bh=ocnF4ynvexf9Bxx/P8ErqW2dA1Az9bQDB7k6PnuNuJM=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=WPaihvwVysIod3mnOR4fBRFpcGHHr7trFOsSJv4EDjVHaBd7hpxLr2dkZ71aIJbRM
-	 9aTky90I4aJBsAOjFza3HCI7RbBNDBWhBYitP6hhhUBhZPCTU+yi3uhj85MwUZZVc4
-	 lGPSUlwdoEkpYUDq55YjwgwzQcyUbB90qcxJxV8QIac1hFiTOryyAj4UXcY/q2kP+R
-	 hLC8IVGidIWmG8GUKUo9o73lSCnEjgQNQXNO92+MYXAv0030RPPb2ltHEmvAqNAX+3
-	 HeklFsxV54dMpbSLvO2PwaNIxmtN4jrAKg+LLv+CAgjo3Qip1NGOMOafcTeNYd57xr
-	 +kw4jvIxt9bjA==
-Received: from [100.115.32.207] (using TLSv1.2 with cipher
+	s=170520fj; t=1642556801; i=@fujitsu.com;
+	bh=Ko5E9LIyIlksnBITNzEap+TMkZqxk2KAt9/2xkpsdZo=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=joxVShRBWZgk4wkQWslLuB+OY6SLUCm0141zpk6+4hqbmzFx70cuGDFn4VI/F++un
+	 T37fpix6v+v2/AhQEr1izMJeqF0XTkWcQ+f1rnavpIT0/Or4W1WinV5U1VCmFJX64F
+	 7jwYRwm2SB958aIEH8C6OzqOH5W2RBh5cHmAinTKuD0pDU3jMZD2P0PQCt9naIVJAj
+	 t5bRuPMqrFwVQpEX7a7A9hubVjUiAslqRMuZXbpS2oken1p8Xeiw7TPZBCtgaQ55vX
+	 CDyizItXuPIAacRyco8XwGO8/xpxCva5bmBa1d6whG5ZNuy0f0ObNAKV/cHtmStnAW
+	 yO0oMI7qNTbbA==
+Received: from [100.115.37.147] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-a.eu-west-2.aws.ess.symcld.net id 5A/43-28974-96D67E16;
- Wed, 19 Jan 2022 01:46:17 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprJIsWRWlGSWpSXmKPExsViZ8MxRTcj93m
-  iwdZmDYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaOr7yZLwRnZiivti1kaGA9IdTFycQgJzGSS
-  eLC4ixnCOcEocXLKatYuRk4ONgE1iem3boDZIgL6Ektn72EGsZkFVCRe/O5hB7GFBVwltpxcy
-  AJiswioSnTeP8XWxcjBwSvgJDFndgBIWEJAQWLKw/dgrbwCghInZz5hgRgjIXHwxQtmiBpFid
-  mXm1kg7AqJWbPamCYw8s5C0jILScsCRqZVjFZJRZnpGSW5iZk5uoYGBrqGhqa6xpa6pkZ6iVW
-  6iXqppbrlqcUlukBuebFeanGxXnFlbnJOil5easkmRmCIpRSrm+xg7F75U+8QoyQHk5Ior2j8
-  80QhvqT8lMqMxOKM+KLSnNTiQ4wyHBxKErysOUA5waLU9NSKtMwcYLjDpCU4eJREeJ9mAaV5i
-  wsSc4sz0yFSpxgVpcR5O7OBEgIgiYzSPLg2WIxdYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqC
-  TMextkCk9mXgnc9FdAi5mAFvc/ewayuCQRISXVwBS33XnBMYe53zX7P5keeH7h34KIJTwmiQX
-  dd75+D21wsp/17ZCz1VUvnsdfgyZZnuNbqu4hKiBz1eKv/bPEjY7MmtdqOb7s3nZjy9W8P4ej
-  +M96e6nqtK03Fo8Rcwi40Xpmi+CEvqmNkoKMU1+I/Hc48aVrstJbUQc9rn3LojeI6G0U/a97/
-  qPz9xdthj2eJ6Sttb14/8pGrrxv1ll+WsT70IQKEd22c++TPqvFaq74fNfkkSTjp8xp9UX8Py
-  P9OlTjf0fmfAvfrvLkU+lu7TNdAXreefof0rwDvOpVRYX/3P3nto9V48COq733H86dtdJeo+y
-  J7J/3AuFO3TVGsyc7CSvGtVclJBx6echATYmlOCPRUIu5qDgRAB3lai4sAwAA
+	by server-1.bemta.az-a.eu-west-2.aws.ess.symcld.net id 9F/93-28974-08D67E16;
+ Wed, 19 Jan 2022 01:46:40 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrJIsWRWlGSWpSXmKPExsViZ8MxSbc+93m
+  iwYmb7BYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aNmf9ZCs4JVLy/LtrAuIKvi5GLQ0jgCaNE
+  75npLBDOBSaJPZ8mMEM4Jxgljpy6zdjFyMnBJqAmMf3WDVYQW0RAX2Lp7D3MIDazgIrEi9897
+  F2MHBzCAvYSU47zgIRZBFQlVh3ewgQS5hVwkji4NgUkLCGgIDHl4XuwTk4BZ4l5nzvBbCGgkl
+  eHTjGB2LwCghInZz5hgZguIXHwxQtmiF5FidmXm1kg7AqJWbPamCBsNYmr5zYxT2AUnIWkfRa
+  S9gWMTKsYrZOKMtMzSnITM3N0DQ0MdA0NTXWNjXUNzS31Eqt0E/VSS3XLU4tLdI30EsuL9VKL
+  i/WKK3OTc1L08lJLNjECQzilWHHzDsaJK3/qHWKU5GBSEuUVjX+eKMSXlJ9SmZFYnBFfVJqTW
+  nyIUYaDQ0mClzUHKCdYlJqeWpGWmQOMJ5i0BAePkgjv0yygNG9xQWJucWY6ROoUo6KUOG9nNl
+  BCACSRUZoH1waL4UuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHlvg0zhycwrgZv+CmgxE9D
+  i/mfPQBaXJCKkpBqYJuVtvs0upxWYGu3ku2nJ3uenmJcfP88oszX1Ug7P431FawynO5vuWSFZ
+  kLj4nCoHV1f5rUrnP2f83s1ckW51+WLwmv5y04ZDz+7L89z2bK0TPLSB2ddV06J3wb6gpzOCm
+  P0O/tJ/sVB0K5e3wt1dq9ZmL2r6ebPhGNPkOI6mJ1dm+c7//s2mV8Q1641l3nWHvIuNsyo8Ge
+  8dU973IlLKtz315mPjx82yqqndnAXJC/0+M5hcW8ORHvzo/ce5Fy7+/OrV5FuYc0Hom/yzEss
+  nB0+lqZg2JRxYYu3RlpmSwC7i9PPeu925t5kz7ivkB/9+YV574Or95ZNeal7quvnRucfcy/zr
+  /nPv79VtklSapcRSnJFoqMVcVJwIAFwaWXNcAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-17.tower-565.messagelabs.com!1642556776!69533!1
-X-Originating-IP: [62.60.8.148]
+X-Msg-Ref: server-7.tower-571.messagelabs.com!1642556798!39404!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 25603 invoked from network); 19 Jan 2022 01:46:16 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-17.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 19 Jan 2022 01:46:16 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 20J1kGHw025504
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+Received: (qmail 25307 invoked from network); 19 Jan 2022 01:46:39 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-7.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 19 Jan 2022 01:46:39 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id BE491100446
 	for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Jan 2022 01:46:16 GMT
+ Wed, 19 Jan 2022 01:46:38 +0000 (GMT)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id B0DF11000FB
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 19 Jan 2022 01:46:38 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Wed, 19 Jan 2022 01:46:14 +0000
+ (TLS) id 15.0.1497.26; Wed, 19 Jan 2022 01:46:17 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] libsdl2-ttf: upgrade 2.0.15 -> 2.0.18
-Date: Wed, 19 Jan 2022 09:46:05 +0800
-Message-ID: <1642556766-18315-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] monit: upgrade 5.29.0 -> 5.30.0
+Date: Wed, 19 Jan 2022 09:46:06 +0800
+Message-ID: <1642556766-18315-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1642556766-18315-1-git-send-email-wangmy@fujitsu.com>
+References: <1642556766-18315-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
 X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 19 Jan 2022 01:46:37 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 19 Jan 2022 01:46:47 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94928
-
-refresh automake_foreign.patch
-
-License-Update: year updated to 2022.
+ https://lists.openembedded.org/g/openembedded-devel/message/94929
 
 Changelog:
 =========
--Added TTF_GetFreeTypeVersion() and TTF_GetHarfBuzzVersion()
--Added support for Signed Distance Field rendering with TTF_SetFontSDF() and
- TTF_GetFontSDF()
--Added optional DPI-scaling of fonts, with the following new functions:
- TTF_OpenFontDPI()
- TTF_OpenFontIndexDPI()
- TTF_OpenFontDPIRW()
- TTF_OpenFontIndexDPIRW()
- TTF_SetFontSizeDPI()
--Added 32-bit character support with:
- TTF_GlyphIsProvided32()
- TTF_GlyphMetrics32()
- TTF_RenderGlyph32_Solid()
- TTF_RenderGlyph32_Shaded()
- TTF_RenderGlyph32_Blended()
- TTF_GetFontKerningSizeGlyphs32()
--Added functions to set direction and script when using Harfbuzz:
- TTF_SetDirection()
- TTF_SetScript()
--Added extended API for text measurement:
- TTF_MeasureText()
- TTF_MeasureUTF8()
- TTF_MeasureUNICODE()
--Added TTF_SetFontSize() to set font size dynamically
--Added 'Shaded' and 'Solid' text wrapped functions:
- TTF_RenderText_Solid_Wrapped()
- TTF_RenderUTF8_Solid_Wrapped()
- TTF_RenderUNICODE_Solid_Wrapped()
- TTF_RenderText_Shaded_Wrapped()
- TTF_RenderUTF8_Shaded_Wrapped()
- TTF_RenderUNICODE_Shaded_Wrapped()
--Added TTF_HINTING_LIGHT_SUBPIXEL for better results at small text sizes at a
- performance cost
+-New: Add a read-only option to the set httpd statement. The option can be used
+ on the TCP socket, the unix socket, or both.
+-Changed: Issue #1011: The include statement was limited to 512 files, increase
+ the limit to 1024 files.
+-Fixed: The disk read and write bytes didn't show up in M/Monit for Monit 5.27.0
+ or later.
+-Fixed: Issue #998: Monit 5.29.0 may fail to compile on platforms without the
+ monotonic clock support.
+-Fixed: Issue #1002: 32-bit Linux machines with more then 4GB of RAM reported
+ wrong system memory size and swap size values.
+-Fixed: Issue #1005: When the port statement was used with the generic protocol
+ test and the target server returned zeros in response, Monit >= 5.20.0 may crash.
+-Fixed: Issue #1009: When one executes an action via the Monit HTML GUI (uses a
+ POST request), the Monit HTTP server will redirect the browser back to the base
+ URL, so the browser won't perform the POST request again on an automatic page
+ refresh, which is performed to poll for status changes.
+-Fixed: Issue #1015: The set httpd statement supports only one address option.
+ Display warning if multiple address options are used.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libsdl/libsdl2-ttf/automake_foreign.patch        |  6 +++---
- .../{libsdl2-ttf_2.0.15.bb => libsdl2-ttf_2.0.18.bb} | 12 +++++-------
- 2 files changed, 8 insertions(+), 10 deletions(-)
- rename meta-oe/recipes-graphics/libsdl/{libsdl2-ttf_2.0.15.bb => libsdl2-ttf_2.0.18.bb} (60%)
+ .../recipes-support/monit/{monit_5.29.0.bb => monit_5.30.0.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/monit/{monit_5.29.0.bb => monit_5.30.0.bb} (94%)
 
-diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-ttf/automake_foreign.patch b/meta-oe/recipes-graphics/libsdl/libsdl2-ttf/automake_foreign.patch
-index 871e6e94e..962c11979 100644
---- a/meta-oe/recipes-graphics/libsdl/libsdl2-ttf/automake_foreign.patch
-+++ b/meta-oe/recipes-graphics/libsdl/libsdl2-ttf/automake_foreign.patch
-@@ -1,4 +1,4 @@
--From f9c4ad3a171d676e3818b8f6897f325ccf0b2203 Mon Sep 17 00:00:00 2001
-+From 6ec375eaafc43a2b3c30a0e0e49447d231d81a67 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Tue, 9 May 2017 00:57:10 -0700
+diff --git a/meta-oe/recipes-support/monit/monit_5.29.0.bb b/meta-oe/recipes-support/monit/monit_5.30.0.bb
+similarity index 94%
+rename from meta-oe/recipes-support/monit/monit_5.29.0.bb
+rename to meta-oe/recipes-support/monit/monit_5.30.0.bb
+index 9528fe735..1496243c1 100644
+--- a/meta-oe/recipes-support/monit/monit_5.29.0.bb
++++ b/meta-oe/recipes-support/monit/monit_5.30.0.bb
+@@ -15,7 +15,7 @@ SRC_URI = " \
+ 	file://monitrc \
+ "
  
-@@ -7,10 +7,10 @@ Date: Tue, 9 May 2017 00:57:10 -0700
-  1 file changed, 2 insertions(+)
+-SRC_URI[sha256sum] = "f665e6dd1f26a74b5682899a877934167de2b2582e048652ecf036318477885f"
++SRC_URI[sha256sum] = "e85649dfa8586f4fcdd34a0295c55ddd69b0eda6cfbdac47105a2673d10b1008"
  
- diff --git a/Makefile.am b/Makefile.am
--index 8166d91..8e05e49 100644
-+index 8568dd2..5efc91e 100644
- --- a/Makefile.am
- +++ b/Makefile.am
--@@ -2,6 +2,8 @@
-+@@ -3,6 +3,8 @@ ACLOCAL_AMFLAGS = -I acinclude
-  
-  lib_LTLIBRARIES = libSDL2_ttf.la
-  
-diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-ttf_2.0.15.bb b/meta-oe/recipes-graphics/libsdl/libsdl2-ttf_2.0.18.bb
-similarity index 60%
-rename from meta-oe/recipes-graphics/libsdl/libsdl2-ttf_2.0.15.bb
-rename to meta-oe/recipes-graphics/libsdl/libsdl2-ttf_2.0.18.bb
-index 0fd9916e9..513b41144 100644
---- a/meta-oe/recipes-graphics/libsdl/libsdl2-ttf_2.0.15.bb
-+++ b/meta-oe/recipes-graphics/libsdl/libsdl2-ttf_2.0.18.bb
-@@ -2,14 +2,12 @@ SUMMARY = "Simple DirectMedia Layer truetype font library"
- SECTION = "libs"
- DEPENDS = "virtual/libsdl2 freetype virtual/libgl"
- LICENSE = "Zlib"
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=4bb27d550fdafcd8f8e4fb8cbb2775ef"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=e98cfd01ca78f683e9d035795810ce87"
- 
--SRC_URI = " \
--    http://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-${PV}.tar.gz \
--    file://automake_foreign.patch \
--"
--SRC_URI[md5sum] = "04fe06ff7623d7bdcb704e82f5f88391"
--SRC_URI[sha256sum] = "a9eceb1ad88c1f1545cd7bd28e7cbc0b2c14191d40238f531a15b01b1b22cd33"
-+SRC_URI = "http://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-${PV}.tar.gz \
-+           file://automake_foreign.patch \
-+           "
-+SRC_URI[sha256sum] = "7234eb8883514e019e7747c703e4a774575b18d435c22a4a29d068cb768a2251"
- 
- S = "${WORKDIR}/SDL2_ttf-${PV}"
+ DEPENDS = "zlib bison-native libnsl2 flex-native openssl virtual/crypt"
  
 -- 
 2.25.1
