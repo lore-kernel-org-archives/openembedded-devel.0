@@ -2,77 +2,80 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C656C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D42FC433FE
 	for <webhook@archiver.kernel.org>; Wed, 19 Jan 2022 01:42:37 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.2])
- by mx.groups.io with SMTP id smtpd.web08.832.1642556552868590655
+Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
+ [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web09.799.1642556553068555617
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 18 Jan 2022 17:42:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=hTvvfPBx;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.2,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=duKfSksI;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1642556550; i=@fujitsu.com;
-	bh=owWgqLN3+oys2NWKte+9YM9w1VajOuwcywFiEjdnNmw=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=hTvvfPBx61rJy1H8YtMP9Ah8BcX84TMNs9kuMU0L8+QKOP6GKGvUTp5RTDBWdLPZ1
-	 jG/L+AcAiXmAwSc5S7cbGNo9CgUSmXZDNJPbmwuiGCxKfiT6eU1zRkDP7YZJ78SVTi
-	 76Y0KliyB83LFfrZVm75vvUu5Lk1xWvwkdnHNUkUAp3UO9Ag5beYsHor4BJTNlFcCX
-	 3Uem8ZZt5Oc3/zeXm0XylAUUL8+nQFYP0NC1Td5f7k0mojefaZmMoOxT5NQBGoY6YI
-	 5Owi8Kevki3aA4t+WldlyADo6O/GF4Geph62j3E0cUiyDYqypPgdW9TjDXiKYs/Xgn
-	 zAUVGAR8ZgLSw==
-Received: from [100.115.1.107] (using TLSv1.2 with cipher
+	bh=4V/I3S64s4yFIAFlrv3eMCiyqSaVu09e5oc5WqtZZt8=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=duKfSksIlMKBoV0MahvbVzMaMGDfctB5Yy5oEBg5d9FfShoGNxuR8xX4i4vmBwKDP
+	 mdovigej00Pk9urvHeo3Or4IRqqMMj9jiYn5f5EehETmDSMrVR9Wh8IJC7jLu0h//G
+	 ccMQpQ1nDLUYowrj/+Prt1UweY8u05bZ8VcimyS2e0pFchyz1qiqY7Q9v8ihxT5aql
+	 HgWSHpLw7AlzYlKwNtaCX4CfIehKMy/Utky+uFC08NNsAbXtXtQGLU5IzrRYRRGvAY
+	 Zcugf9EmAywX5gNMD9mahwp72W5K3+A3hQyyEHba+dOzbLE8bzctOlsJQOoQMV/aAc
+	 0vwNu2WLRbwZg==
+Received: from [100.115.65.13] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-west-1.aws.ess.symcld.net id 1C/E7-10124-68C67E16;
- Wed, 19 Jan 2022 01:42:30 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8MxSbct53m
-  iwfmT7BYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8btqS/YC74qVGxY+YWtgfGRVBcjF4eQwBNG
-  iden5zBDOBeYJKZN3cAO4ZxglDjy6B9LFyMnB5uAmsT0WzdYQWwRAX2JpbP3MIPYzAIqEi9+9
-  7CD2MICjhLrWvsYQWwWAVWJsz1/wWxeASeJHTdPgfVKCChITHn4nhkiLihxcuYTFog5EhIHX7
-  xghqhRlJh9uZkFwq6QmDWrjQnCVpO4em4T8wRG/llI2mchaV/AyLSK0SqpKDM9oyQ3MTNH19D
-  AQNfQ0FTXUNfIwFgvsUo3US+1VLc8tbhE11AvsbxYL7W4WK+4Mjc5J0UvL7VkEyMwLFOKGU/v
-  YNzU91PvEKMkB5OSKK9o/PNEIb6k/JTKjMTijPii0pzU4kOMMhwcShK8rMBAFxIsSk1PrUjLz
-  AHGCExagoNHSYT3aRZQmre4IDG3ODMdInWKUVFKnLczGyghAJLIKM2Da4PF5SVGWSlhXkYGBg
-  YhnoLUotzMElT5V4ziHIxKwryvQcbzZOaVwE1/BbSYCWhx/7NnIItLEhFSUg1M7JdMN1z/bpP
-  hYXOj4NuNms2LW0J1vx64sP1KRFCzZvHTaac735pY7G2oOyFh/us6e+7hPXcNHlnpvs7iMq2W
-  sWWvZXfiUn+/ZpX6CR0PrQ9OIjmTKzd8n26S/fza/6pN0at/2c/YXXnLP17xRmyXZxn7DaalW
-  o0/GYOr2AxZ05Iro8946x5d//ZC4OPmihfz/zX/V35WJft1sdGCSRaCuolMjuZuvF++LVE9Ua
-  KZsUb5wslWxm1dcvnMrDw35u31TY4/N01D7tRHLlvTnd6dkuv6qp7FXX+y68H81WcW2D9PuJz
-  o5PZq4Z0EG+0LSzT+V8vuc8nkKij58UVHeI7unA0vt2vJGuTICi6JdmtUYinOSDTUYi4qTgQA
-  LnsK7kYDAAA=
+	by server-1.bemta.az-a.eu-central-1.aws.ess.symcld.net id
+ E5/29-31213-68C67E16; Wed, 19 Jan 2022 01:42:30 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrAIsWRWlGSWpSXmKPExsViZ8MxSbct53m
+  iwb0zvBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8axN1OZCz7oVtzac4S1gfGHWhcjF4eQwBNG
+  iTuffrBBOBeYJGbOXsgI4ZxglNjy5gVTFyMnB5uAmsT0WzdYQWwRAX2JpbP3MIPYzAIqEi9+9
+  7CD2MICThId//eCxVkEVCVOHl8IZvMCxS9+mQxmSwgoSEx5+B7M5hRwlpj//TbQTA6gZU4Scx
+  97Q5QLSpyc+YQFYryExMEXL6BaFSVmX25mgbArJGbNamOCsNUkrp7bxDyBUXAWkvZZSNoXMDK
+  tYrRLKspMzyjJTczM0TU0MNA1NDTVNTPRNTIx1Uus0k3USy3VTU7NKylKBErrJZYX66UWF+sV
+  V+Ym56To5aWWbGIEBnNKscPXHYzH+37qHWKU5GBSEuUVjX+eKMSXlJ9SmZFYnBFfVJqTWnyIU
+  YaDQ0mClxUYH0KCRanpqRVpmTnAyIJJS3DwKInwPs0CSvMWFyTmFmemQ6ROMRpzXL4+bxEzR/
+  Ok5duZhVjy8vNSpcR5O7OBSgVASjNK8+AGwSL+EqOslDAvIwMDgxBPQWpRbmYJqvwrRnEORiV
+  h3tcgC3ky80rg9r0COoUJ6JT+Z89ATilJREhJNTBV2ERzLer72ycZPL2zpOFN9zbXWwfWvghx
+  dfMLvXVA6brOhi0xeutmNquttMtZpvH/yP6Tnl43jOriDbPenl+n6/NT/vSP2mtyxlnOe19d2
+  32wqjAteHFdifGyj2r/1O/a6F390JTJOFGmpn3ftzkbZJeW1GnPl6n/9UfEaMucmU8WJc5bcH
+  jeRivLMKdf73Xt9awl934tO2tfX5vy/uf/Z/Fa3x5ruhy6rfyc12uR38WZv+Z/nODyMYjDZn7
+  ngRb+z0YmFYqlLpFv7VwlL36/H5Qk8Ed0svLcSa8/98Y4PZ95dsa61MY8R6eKP6dmr971pVqO
+  74FZSHQ6r86kK8rn6useLP33OKDRbPrunOJIJZbijERDLeai4kQAXfu5EHMDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-18.tower-591.messagelabs.com!1642556549!36459!1
+X-Msg-Ref: server-5.tower-532.messagelabs.com!1642556549!57367!1
 X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 7511 invoked from network); 19 Jan 2022 01:42:30 -0000
+Received: (qmail 10722 invoked from network); 19 Jan 2022 01:42:30 -0000
 Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-18.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-5.tower-532.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 19 Jan 2022 01:42:30 -0000
 Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id A6BC5100452
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id BE69F1000FB
 	for <openembedded-devel@lists.openembedded.org>;
  Wed, 19 Jan 2022 01:42:29 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 98FB8100352
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id A347D100446
 	for <openembedded-devel@lists.openembedded.org>;
  Wed, 19 Jan 2022 01:42:29 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Wed, 19 Jan 2022 01:42:08 +0000
+ (TLS) id 15.0.1497.26; Wed, 19 Jan 2022 01:42:13 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] mtr: upgrade 0.94 -> 0.95
-Date: Wed, 19 Jan 2022 09:41:57 +0800
-Message-ID: <1642556519-18240-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] cryptsetup: upgrade 2.4.2 -> 2.4.3
+Date: Wed, 19 Jan 2022 09:41:59 +0800
+Message-ID: <1642556519-18240-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1642556519-18240-1-git-send-email-wangmy@fujitsu.com>
+References: <1642556519-18240-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -84,112 +87,131 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 19 Jan 2022 01:42:37 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94923
+ https://lists.openembedded.org/g/openembedded-devel/message/94924
 
-0001-Fix-a-lot-of-Werror-format-security-errors-in-printw.patch
-removed since it is included in 0.95.
+Changelog:
+=========
+Stable security bug-fix release that fixes CVE-2021-4122.
+
+All users of cryptsetup 2.4.x must upgrade to this version.
+
+Changes since version 2.4.2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Fix possible attacks against data confidentiality through LUKS2 online
+  reencryption extension crash recovery (CVE-2021-4122).
+
+  An attacker can modify on-disk metadata to simulate decryption in
+  progress with crashed (unfinished) reencryption step and persistently
+  decrypt part of the LUKS device.
+
+  This attack requires repeated physical access to the LUKS device but
+  no knowledge of user passphrases.
+
+  The decryption step is performed after a valid user activates
+  the device with a correct passphrase and modified metadata.
+  There are no visible warnings for the user that such recovery happened
+  (except using the luksDump command). The attack can also be reversed
+  afterward (simulating crashed encryption from a plaintext) with
+  possible modification of revealed plaintext.
+
+  The size of possible decrypted data depends on configured LUKS2 header
+  size (metadata size is configurable for LUKS2).
+  With the default parameters (16 MiB LUKS2 header) and only one
+  allocated keyslot (512 bit key for AES-XTS), simulated decryption with
+  checksum resilience SHA1 (20 bytes checksum for 4096-byte blocks),
+  the maximal decrypted size can be over 3GiB.
+
+  The attack is not applicable to LUKS1 format, but the attacker can
+  update metadata in place to LUKS2 format as an additional step.
+  For such a converted LUKS2 header, the keyslot area is limited to
+  decrypted size (with SHA1 checksums) over 300 MiB.
+
+  The issue is present in all cryptsetup releases since 2.2.0.
+  Versions 1.x, 2.0.x, and 2.1.x are not affected, as these do not
+  contain LUKS2 reencryption extension.
+
+  The problem was caused by reusing a mechanism designed for actual
+  reencryption operation without reassessing the security impact for new
+  encryption and decryption operations. While the reencryption requires
+  calculating and verifying both key digests, no digest was needed to
+  initiate decryption recovery if the destination is plaintext (no
+  encryption key). Also, some metadata (like encryption cipher) is not
+  protected, and an attacker could change it. Note that LUKS2 protects
+  visible metadata only when a random change occurs. It does not protect
+  against intentional modification but such modification must not cause
+  a violation of data confidentiality.
+
+  The fix introduces additional digest protection of reencryption
+  metadata. The digest is calculated from known keys and critical
+  reencryption metadata. Now an attacker cannot create correct metadata
+  digest without knowledge of a passphrase for used keyslots.
+  For more details, see LUKS2 On-Disk Format Specification version 1.1.0.
+
+  The former reencryption operation (without the additional digest) is no
+  longer supported (reencryption with the digest is not backward
+  compatible). You need to finish in-progress reencryption before
+  updating to new packages. The alternative approach is to perform
+  a repair command from the updated package to recalculate reencryption
+  digest and fix metadata.
+  The reencryption repair operation always require a user passphrase.
+
+  WARNING: Devices with older reencryption in progress can be no longer
+  activated without performing the action mentioned above.
+
+  Encryption in progress can be detected by running the luksDump command
+  (output includes reencrypt keyslot with reencryption parameters). Also,
+  during the active reencryption, no keyslot operations are available
+  (change of passphrases, etc.).
+
+  The issue was found by Milan Broz as cryptsetup maintainer.
+
+Other changes
+~~~~~~~~~~~~~
+* Add configure option --disable-luks2-reencryption to completely disable
+  LUKS2 reencryption code.
+
+  When used, the libcryptsetup library can read metadata with
+  reencryption code, but all reencryption API calls and cryptsetup
+  reencrypt commands are disabled.
+
+  Devices with online reencryption in progress cannot be activated.
+  This option can cause some incompatibilities. Please use with care.
+
+* Improve internal metadata validation code for reencryption metadata.
+
+* Add updated documentation for LUKS2 On-Disk Format Specification
+  version 1.1.0 (with reencryption extension description and updated
+  metadata description). See docs/on-disk-format-luks2.pdf or online
+  version in https://gitlab.com/cryptsetup/LUKS2-docs repository.
+
+* Fix support for bitlk (BitLocker compatible) startup key with new
+  metadata entry introduced in Windows 11.
+
+* Fix space restriction for LUKS2 reencryption with data shift.
+  The code required more space than was needed.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ror-format-security-errors-in-printw.patch | 68 -------------------
- .../mtr/{mtr_0.94.bb => mtr_0.95.bb}          |  6 +-
- 2 files changed, 2 insertions(+), 72 deletions(-)
- delete mode 100644 meta-networking/recipes-support/mtr/mtr/0001-Fix-a-lot-of-Werror-format-security-errors-in-printw.patch
- rename meta-networking/recipes-support/mtr/{mtr_0.94.bb => mtr_0.95.bb} (83%)
+ .../cryptsetup/{cryptsetup_2.4.2.bb => cryptsetup_2.4.3.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.4.2.bb => cryptsetup_2.4.3.bb} (97%)
 
-diff --git a/meta-networking/recipes-support/mtr/mtr/0001-Fix-a-lot-of-Werror-format-security-errors-in-printw.patch b/meta-networking/recipes-support/mtr/mtr/0001-Fix-a-lot-of-Werror-format-security-errors-in-printw.patch
-deleted file mode 100644
-index 5a8ee49d5..000000000
---- a/meta-networking/recipes-support/mtr/mtr/0001-Fix-a-lot-of-Werror-format-security-errors-in-printw.patch
-+++ /dev/null
-@@ -1,68 +0,0 @@
--From 628b4b3a16c5e3416aac3eea041ff03375fb495b Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 30 Oct 2021 11:00:59 -0700
--Subject: [PATCH] Fix a lot of -Werror=format-security errors in
-- printw/mvprintw
--
--In all these places a non-constant is used as a format string which
--compiler complains about. Fix by using "%s" as format.
--
--Upstream-Status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- ui/curses.c | 10 +++++-----
-- 1 file changed, 5 insertions(+), 5 deletions(-)
--
--diff --git a/ui/curses.c b/ui/curses.c
--index 34bf30d..c24cf28 100644
----- a/ui/curses.c
--+++ b/ui/curses.c
--@@ -432,7 +432,7 @@ static void mtr_curses_hosts(
--                 attron(A_BOLD);
-- #ifdef HAVE_IPINFO
--             if (is_printii(ctl))
---                printw(fmt_ipinfo(ctl, addr));
--+                printw("%s", fmt_ipinfo(ctl, addr));
-- #endif
--             if (name != NULL) {
--                 if (ctl->show_ips)
--@@ -485,7 +485,7 @@ static void mtr_curses_hosts(
--                 printw("\n    ");
-- #ifdef HAVE_IPINFO
--                 if (is_printii(ctl))
---                    printw(fmt_ipinfo(ctl, addrs));
--+                    printw("%s", fmt_ipinfo(ctl, addrs));
-- #endif
--                 if (name != NULL) {
--                     if (ctl->show_ips)
--@@ -650,7 +650,7 @@ static void mtr_curses_graph(
-- 
-- #ifdef HAVE_IPINFO
--             if (is_printii(ctl))
---                printw(fmt_ipinfo(ctl, addr));
--+                printw("%s", fmt_ipinfo(ctl, addr));
-- #endif
--             name = dns_lookup(ctl, addr);
--             printw("%s", name ? name : strlongip(ctl, addr));
--@@ -700,7 +700,7 @@ void mtr_curses_redraw(
-- 
--     mvprintw(1, 0, "%s (%s) -> %s", ctl->LocalHostname, net_localaddr(), ctl->Hostname);
--     t = time(NULL);
---    mvprintw(1, maxx - 25, iso_time(&t));
--+    mvprintw(1, maxx - 25, "%s", iso_time(&t));
--     printw("\n");
-- 
--     printw("Keys:  ");
--@@ -760,7 +760,7 @@ void mtr_curses_redraw(
--         startstat = padding - 2;
-- 
--         snprintf(msg, sizeof(msg), " Last %3d pings", max_cols);
---        mvprintw(rowstat - 1, startstat, msg);
--+        mvprintw(rowstat - 1, startstat, "%s", msg);
-- 
--         attroff(A_BOLD);
--         move(rowstat, 0);
---- 
--2.33.1
--
-diff --git a/meta-networking/recipes-support/mtr/mtr_0.94.bb b/meta-networking/recipes-support/mtr/mtr_0.95.bb
-similarity index 83%
-rename from meta-networking/recipes-support/mtr/mtr_0.94.bb
-rename to meta-networking/recipes-support/mtr/mtr_0.95.bb
-index 460fd2e8b..b5e2fae50 100644
---- a/meta-networking/recipes-support/mtr/mtr_0.94.bb
-+++ b/meta-networking/recipes-support/mtr/mtr_0.95.bb
-@@ -8,10 +8,8 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://ui/mtr.c;beginline=5;endline=16;md5=00a894a39d53726a27386534d1c4e468"
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.2.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
+similarity index 97%
+rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.2.bb
+rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
+index 621ac0f2f..8f9f663a3 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.2.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
+@@ -21,7 +21,7 @@ DEPENDS:append:libc-musl = " argp-standalone"
+ LDFLAGS:append:libc-musl = " -largp"
  
--SRCREV = "2c73cbf4094e4eed343ed11ae5bab2580f3122d1"
--SRC_URI = "git://github.com/traviscross/mtr;branch=master;protocol=https \
--           file://0001-Fix-a-lot-of-Werror-format-security-errors-in-printw.patch \
--          "
-+SRCREV = "852e5617fbf331cf292723702161f0ac9afe257c"
-+SRC_URI = "git://github.com/traviscross/mtr;branch=master;protocol=https"
+ SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
+-SRC_URI[sha256sum] = "170cc2326a9daeeeb578579176bd10d4a60ee5c4fc5bc69018ce67dafc540b9c"
++SRC_URI[sha256sum] = "fc0df945188172264ec5bf1d0bda08264fadc8a3f856d47eba91f31fe354b507"
  
- S = "${WORKDIR}/git"
+ inherit autotools gettext pkgconfig
  
 -- 
 2.25.1
