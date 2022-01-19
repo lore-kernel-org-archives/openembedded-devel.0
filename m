@@ -2,217 +2,156 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D42FC433FE
-	for <webhook@archiver.kernel.org>; Wed, 19 Jan 2022 01:42:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 38608C433FE
+	for <webhook@archiver.kernel.org>; Wed, 19 Jan 2022 01:42:57 +0000 (UTC)
 Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web09.799.1642556553068555617
+ [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web11.832.1642556576274384767
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Jan 2022 17:42:33 -0800
+ Tue, 18 Jan 2022 17:42:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=duKfSksI;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=whLhEmin;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1642556550; i=@fujitsu.com;
-	bh=4V/I3S64s4yFIAFlrv3eMCiyqSaVu09e5oc5WqtZZt8=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=duKfSksIlMKBoV0MahvbVzMaMGDfctB5Yy5oEBg5d9FfShoGNxuR8xX4i4vmBwKDP
-	 mdovigej00Pk9urvHeo3Or4IRqqMMj9jiYn5f5EehETmDSMrVR9Wh8IJC7jLu0h//G
-	 ccMQpQ1nDLUYowrj/+Prt1UweY8u05bZ8VcimyS2e0pFchyz1qiqY7Q9v8ihxT5aql
-	 HgWSHpLw7AlzYlKwNtaCX4CfIehKMy/Utky+uFC08NNsAbXtXtQGLU5IzrRYRRGvAY
-	 Zcugf9EmAywX5gNMD9mahwp72W5K3+A3hQyyEHba+dOzbLE8bzctOlsJQOoQMV/aAc
-	 0vwNu2WLRbwZg==
+	s=170520fj; t=1642556574; i=@fujitsu.com;
+	bh=qcPge9xb+k8bjwCNvf+VJu3noe2XKHFF33hH7XmoIis=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=whLhEminaAfmem7byfwe1oiTNLCbmdJkAIBe61cOaEuggpsZz+wLIhniBgUAEeI8+
+	 m/ClQdsgK0MTo7ZLD7THxpOu/lqG3dNObtBE5/hj3dCwEQuW7pnMWRxVFru50tqkMw
+	 1Dlr5GbLun+Qw58Iwnj3aWWkczyw+QQ/MSicHLTvePjmPBk6wHysVyiIGWBIBfwYCo
+	 UYgP4buZaK8K8cZ2dRPtGxI20trNNHcbWHxv/UqHnO0p+HS4kcF9rC6yDqEUpVlTBN
+	 eZDwEWIJG8jSt8EWLxS25Xv0yKmYSEj9Hwr420Hb0d0mwE2xkto+PWKFN6q+NaVuZ9
+	 thwPhiDZjSoAw==
 Received: from [100.115.65.13] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-a.eu-central-1.aws.ess.symcld.net id
- E5/29-31213-68C67E16; Wed, 19 Jan 2022 01:42:30 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrAIsWRWlGSWpSXmKPExsViZ8MxSbct53m
-  iwb0zvBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8axN1OZCz7oVtzac4S1gfGHWhcjF4eQwBNG
-  iTuffrBBOBeYJGbOXsgI4ZxglNjy5gVTFyMnB5uAmsT0WzdYQWwRAX2JpbP3MIPYzAIqEi9+9
-  7CD2MICThId//eCxVkEVCVOHl8IZvMCxS9+mQxmSwgoSEx5+B7M5hRwlpj//TbQTA6gZU4Scx
-  97Q5QLSpyc+YQFYryExMEXL6BaFSVmX25mgbArJGbNamOCsNUkrp7bxDyBUXAWkvZZSNoXMDK
-  tYrRLKspMzyjJTczM0TU0MNA1NDTVNTPRNTIx1Uus0k3USy3VTU7NKylKBErrJZYX66UWF+sV
-  V+Ym56To5aWWbGIEBnNKscPXHYzH+37qHWKU5GBSEuUVjX+eKMSXlJ9SmZFYnBFfVJqTWnyIU
-  YaDQ0mClxUYH0KCRanpqRVpmTnAyIJJS3DwKInwPs0CSvMWFyTmFmemQ6ROMRpzXL4+bxEzR/
-  Ok5duZhVjy8vNSpcR5O7OBSgVASjNK8+AGwSL+EqOslDAvIwMDgxBPQWpRbmYJqvwrRnEORiV
-  h3tcgC3ky80rg9r0COoUJ6JT+Z89ATilJREhJNTBV2ERzLer72ycZPL2zpOFN9zbXWwfWvghx
-  dfMLvXVA6brOhi0xeutmNquttMtZpvH/yP6Tnl43jOriDbPenl+n6/NT/vSP2mtyxlnOe19d2
-  32wqjAteHFdifGyj2r/1O/a6F390JTJOFGmpn3ftzkbZJeW1GnPl6n/9UfEaMucmU8WJc5bcH
-  jeRivLMKdf73Xt9awl934tO2tfX5vy/uf/Z/Fa3x5ruhy6rfyc12uR38WZv+Z/nODyMYjDZn7
-  ngRb+z0YmFYqlLpFv7VwlL36/H5Qk8Ed0svLcSa8/98Y4PZ95dsa61MY8R6eKP6dmr971pVqO
-  74FZSHQ6r86kK8rn6useLP33OKDRbPrunOJIJZbijERDLeai4kQAXfu5EHMDAAA=
+	by server-3.bemta.az-a.eu-central-1.aws.ess.symcld.net id
+ BB/2E-15539-D9C67E16; Wed, 19 Jan 2022 01:42:53 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrAIsWRWlGSWpSXmKPExsViZ8MRojs353m
+  iwePtyhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8ai3bdYC75LVXzb84OxgbFVoouRi0NIYCaT
+  xOEvd5kgnBOMEq9uTWHsYuTkYBNQk5h+6wYriC0ioC+xdPYeZhCbWUBF4sXvHnYQW1jAXeLgx
+  O1gNouAqsSpWzOYQGxeASeJHX0rwGwJAQWJKQ/fM0PEBSVOznzCAjFHQuLgixfMEDWKErMvN7
+  NA2BUSs2a1MU1g5J2FpGUWkpYFjEyrGO2SijLTM0pyEzNzdA0NDHQNDU11zYGUmZleYpVuol5
+  qqW5yal5JUSJQWi+xvFgvtbhYr7gyNzknRS8vtWQTIzDYUordlu1g3Nf3U+8QoyQHk5Ior2j8
+  80QhvqT8lMqMxOKM+KLSnNTiQ4wyHBxKEryswPAVEixKTU+tSMvMAQY+TFqCg0dJhPdpFlCat
+  7ggMbc4Mx0idYrRmGPVgemrmDlet/zcwSzEkpeflyolztuZDVQqAFKaUZoHNwgWkZcYZaWEeR
+  kZGBiEeApSi3IzS1DlXzGKczAqCfO+BlnIk5lXArfvFdApTECn9D97BnJKSSJCSqqBqZ/V5e3
+  PY2mCU2WYlp4QVws/6jljbe7RhMKV65YsUN4Qu/6IQtxWa4W8NyIOy1kUIhrTCve8n3pe9rXU
+  SolbbFbfQz4t2no2JiAtwOPp9m8niyT6bSfbchxa7tS0yPZD/dN8m54IyUWfXyyf+uvTQYWaq
+  y/s7Xh+Ltz1+7LnnoNT0sMOHf/UuuTu1r3cNpMUCnUvPBXbvynHRfJtmG8ka8eVBJudr7wseO
+  NXiq0K0uIt8Tu3pPftg18JKwzXK0umue26OL/uwXcn9fNvj8pr7rjwbj1bfWp4bcnbrx9PVU2
+  4m1H2R+KwYKrSZAuDG7YiM7/U1vJHe/3Z553tH3rL1YHzmz/3mb+PRf9MmqXT9UGJpTgj0VCL
+  uag4EQC6Cc7nQwMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-5.tower-532.messagelabs.com!1642556549!57367!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-18.tower-532.messagelabs.com!1642556573!56832!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 10722 invoked from network); 19 Jan 2022 01:42:30 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-5.tower-532.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 19 Jan 2022 01:42:30 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id BE69F1000FB
+Received: (qmail 25089 invoked from network); 19 Jan 2022 01:42:53 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-18.tower-532.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 19 Jan 2022 01:42:53 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 20J1gkBZ020792
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Jan 2022 01:42:29 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id A347D100446
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Jan 2022 01:42:29 +0000 (GMT)
+ Wed, 19 Jan 2022 01:42:53 GMT
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.26; Wed, 19 Jan 2022 01:42:13 +0000
+ (TLS) id 15.0.1497.26; Wed, 19 Jan 2022 01:42:44 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] cryptsetup: upgrade 2.4.2 -> 2.4.3
-Date: Wed, 19 Jan 2022 09:41:59 +0800
-Message-ID: <1642556519-18240-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] cups-filters: upgrade 1.27.2 -> 1.28.11
+Date: Wed, 19 Jan 2022 09:42:33 +0800
+Message-ID: <1642556556-18277-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1642556519-18240-1-git-send-email-wangmy@fujitsu.com>
-References: <1642556519-18240-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
 X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 19 Jan 2022 01:42:37 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 19 Jan 2022 01:42:57 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94924
+ https://lists.openembedded.org/g/openembedded-devel/message/94926
+
+License-Update:
+"org.cups.cupsd.Notifier.xml" changed to "utils/org.cups.cupsd.Notifier.xml"
+"GNU Library" changed to "GNU Library General"
+"GNU Lesser" changed to "GNU Lesser General"
 
 Changelog:
+URL of issues  <https://github.com/OpenPrinting/cups-filters/pull/#####>
 =========
-Stable security bug-fix release that fixes CVE-2021-4122.
+Bug fix release, containing backports of many of the bugs recently fixed during
+the preparation of the cups-filters 2.x release.
+Important is that cups-browsed's queue naming is aligned with CUPS' temporary
+queue naming now and several bugs affecting driverless printing are fixed.
 
-All users of cryptsetup 2.4.x must upgrade to this version.
-
-Changes since version 2.4.2
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* Fix possible attacks against data confidentiality through LUKS2 online
-  reencryption extension crash recovery (CVE-2021-4122).
-
-  An attacker can modify on-disk metadata to simulate decryption in
-  progress with crashed (unfinished) reencryption step and persistently
-  decrypt part of the LUKS device.
-
-  This attack requires repeated physical access to the LUKS device but
-  no knowledge of user passphrases.
-
-  The decryption step is performed after a valid user activates
-  the device with a correct passphrase and modified metadata.
-  There are no visible warnings for the user that such recovery happened
-  (except using the luksDump command). The attack can also be reversed
-  afterward (simulating crashed encryption from a plaintext) with
-  possible modification of revealed plaintext.
-
-  The size of possible decrypted data depends on configured LUKS2 header
-  size (metadata size is configurable for LUKS2).
-  With the default parameters (16 MiB LUKS2 header) and only one
-  allocated keyslot (512 bit key for AES-XTS), simulated decryption with
-  checksum resilience SHA1 (20 bytes checksum for 4096-byte blocks),
-  the maximal decrypted size can be over 3GiB.
-
-  The attack is not applicable to LUKS1 format, but the attacker can
-  update metadata in place to LUKS2 format as an additional step.
-  For such a converted LUKS2 header, the keyslot area is limited to
-  decrypted size (with SHA1 checksums) over 300 MiB.
-
-  The issue is present in all cryptsetup releases since 2.2.0.
-  Versions 1.x, 2.0.x, and 2.1.x are not affected, as these do not
-  contain LUKS2 reencryption extension.
-
-  The problem was caused by reusing a mechanism designed for actual
-  reencryption operation without reassessing the security impact for new
-  encryption and decryption operations. While the reencryption requires
-  calculating and verifying both key digests, no digest was needed to
-  initiate decryption recovery if the destination is plaintext (no
-  encryption key). Also, some metadata (like encryption cipher) is not
-  protected, and an attacker could change it. Note that LUKS2 protects
-  visible metadata only when a random change occurs. It does not protect
-  against intentional modification but such modification must not cause
-  a violation of data confidentiality.
-
-  The fix introduces additional digest protection of reencryption
-  metadata. The digest is calculated from known keys and critical
-  reencryption metadata. Now an attacker cannot create correct metadata
-  digest without knowledge of a passphrase for used keyslots.
-  For more details, see LUKS2 On-Disk Format Specification version 1.1.0.
-
-  The former reencryption operation (without the additional digest) is no
-  longer supported (reencryption with the digest is not backward
-  compatible). You need to finish in-progress reencryption before
-  updating to new packages. The alternative approach is to perform
-  a repair command from the updated package to recalculate reencryption
-  digest and fix metadata.
-  The reencryption repair operation always require a user passphrase.
-
-  WARNING: Devices with older reencryption in progress can be no longer
-  activated without performing the action mentioned above.
-
-  Encryption in progress can be detected by running the luksDump command
-  (output includes reencrypt keyslot with reencryption parameters). Also,
-  during the active reencryption, no keyslot operations are available
-  (change of passphrases, etc.).
-
-  The issue was found by Milan Broz as cryptsetup maintainer.
-
-Other changes
-~~~~~~~~~~~~~
-* Add configure option --disable-luks2-reencryption to completely disable
-  LUKS2 reencryption code.
-
-  When used, the libcryptsetup library can read metadata with
-  reencryption code, but all reencryption API calls and cryptsetup
-  reencrypt commands are disabled.
-
-  Devices with online reencryption in progress cannot be activated.
-  This option can cause some incompatibilities. Please use with care.
-
-* Improve internal metadata validation code for reencryption metadata.
-
-* Add updated documentation for LUKS2 On-Disk Format Specification
-  version 1.1.0 (with reencryption extension description and updated
-  metadata description). See docs/on-disk-format-luks2.pdf or online
-  version in https://gitlab.com/cryptsetup/LUKS2-docs repository.
-
-* Fix support for bitlk (BitLocker compatible) startup key with new
-  metadata entry introduced in Windows 11.
-
-* Fix space restriction for LUKS2 reencryption with data shift.
-  The code required more space than was needed.
+-libcupsfilters: Let PPD generator take default ColorModel from printer
+ (CUPS issue #277).
+-Braille: In vectortopdf check inkscape version to call inkscape with the
+ correct command line (Issue #315, Pull request #443).
+-Build system: Make missing DejaVuSans.ttf non-fatal in ./configure as the font
+ is only needed for test programs, not for actual use of cups-filters
+ (Issue #411).
+-libcupsfilters: In imagetoraster() fixed crash with SGray (Issue #435).
+-cups-browsed: Naming of local queues is matched to CUPS' current naming of
+ temporary queues (no leading or trailing underscores), to avoid duplicates in
+ print dialogs which support CUPS' temporary queues.
+-libcupsfilters: Make cupsRasterParseIPPOptions() work correctly with PPDs
+ (Issue #436).
+-libcupsfilters: Let colord_get_profile_for_device_id() not return empty file
+ name, to avoid error messages in CUPS error_log.
+-foomatic-rip: Debug message was wrongly sent to stdout and not to log
+ (Issue #422).
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../cryptsetup/{cryptsetup_2.4.2.bb => cryptsetup_2.4.3.bb}     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.4.2.bb => cryptsetup_2.4.3.bb} (97%)
+ meta-oe/recipes-printing/cups/cups-filters.inc        | 2 +-
+ meta-oe/recipes-printing/cups/cups-filters_1.27.2.bb  | 4 ----
+ meta-oe/recipes-printing/cups/cups-filters_1.28.11.bb | 3 +++
+ 3 files changed, 4 insertions(+), 5 deletions(-)
+ delete mode 100644 meta-oe/recipes-printing/cups/cups-filters_1.27.2.bb
+ create mode 100644 meta-oe/recipes-printing/cups/cups-filters_1.28.11.bb
 
-diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.2.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
-similarity index 97%
-rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.2.bb
-rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
-index 621ac0f2f..8f9f663a3 100644
---- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.2.bb
-+++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
-@@ -21,7 +21,7 @@ DEPENDS:append:libc-musl = " argp-standalone"
- LDFLAGS:append:libc-musl = " -largp"
+diff --git a/meta-oe/recipes-printing/cups/cups-filters.inc b/meta-oe/recipes-printing/cups/cups-filters.inc
+index c01e2cd49..061c8a625 100644
+--- a/meta-oe/recipes-printing/cups/cups-filters.inc
++++ b/meta-oe/recipes-printing/cups/cups-filters.inc
+@@ -2,7 +2,7 @@ DESCRIPTION = "CUPS backends, filters, and other software"
+ HOMEPAGE = "http://www.linuxfoundation.org/collaborate/workgroups/openprinting/cups-filters"
  
- SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
--SRC_URI[sha256sum] = "170cc2326a9daeeeb578579176bd10d4a60ee5c4fc5bc69018ce67dafc540b9c"
-+SRC_URI[sha256sum] = "fc0df945188172264ec5bf1d0bda08264fadc8a3f856d47eba91f31fe354b507"
+ LICENSE = "GPLv2 & LGPLv2 & MIT & GPLv2+ & GPLv3"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=516215fd57564996d70327db19b368ff"
++LIC_FILES_CHKSUM = "file://COPYING;md5=2d77679ce6a2cc4d873d4ebbf2a401e6"
  
- inherit autotools gettext pkgconfig
+ SECTION = "console/utils"
  
+diff --git a/meta-oe/recipes-printing/cups/cups-filters_1.27.2.bb b/meta-oe/recipes-printing/cups/cups-filters_1.27.2.bb
+deleted file mode 100644
+index 35c4a929b..000000000
+--- a/meta-oe/recipes-printing/cups/cups-filters_1.27.2.bb
++++ /dev/null
+@@ -1,4 +0,0 @@
+-include cups-filters.inc
+-
+-SRC_URI[md5sum] = "90ebcae31f2eabd802236408646b1dd9"
+-SRC_URI[sha256sum] = "174a2a5c919bf88c63ced692a2170add6c2cd70ff06c49bcea32e9cf56960492"
+diff --git a/meta-oe/recipes-printing/cups/cups-filters_1.28.11.bb b/meta-oe/recipes-printing/cups/cups-filters_1.28.11.bb
+new file mode 100644
+index 000000000..bfe5375b2
+--- /dev/null
++++ b/meta-oe/recipes-printing/cups/cups-filters_1.28.11.bb
+@@ -0,0 +1,3 @@
++include cups-filters.inc
++
++SRC_URI[sha256sum] = "472418f1a1e12c9ad91b01caa020eb668626776d85de9da488be38e6663102ca"
 -- 
 2.25.1
 
