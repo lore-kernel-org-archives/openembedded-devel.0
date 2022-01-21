@@ -1,217 +1,150 @@
-Return-Path: <vincent.prince.fr@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 450C3C433EF
-	for <webhook@archiver.kernel.org>; Fri, 21 Jan 2022 10:56:47 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
- [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.web08.10304.1642762606064099275
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D034C433EF
+	for <webhook@archiver.kernel.org>; Fri, 21 Jan 2022 13:05:46 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg
+ [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web09.11464.1642770344452064449
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Jan 2022 02:56:46 -0800
+ Fri, 21 Jan 2022 05:05:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Wj54fCl0;
- spf=pass (domain: gmail.com, ip: 209.85.128.47,
- mailfrom: vincent.prince.fr@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 125so1199720wmc.0
-        for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Jan 2022 02:56:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=+yw2O12HvCKg6u8MsDYBMjP6c4N8nSrALCEZyrGZhn0=;
-        b=Wj54fCl0MVcFX80vP1JEPGrIx3QMR72KvccKtWNy1bjWZwSaAA6B7nUukVvrbKPFiB
-         0rujCcfQJiMLoQeYN3XDc7un+DW88SK9J+/aNbqq63UYthq8h85En//A/Ats8263TKe7
-         OI/BuL3s20pus2H3Cly4SNdXMx9fbegZihRwGREOyT+t4Iy7jG/GuRudoIGPXE7dWWf9
-         VZ2dlybHEfpHrJsNLpnDS8bYsD2J7PSzkboVcP3VkGt65qfOS9IwQvloGTsW6vUM2aWp
-         Os+x9kDPP0tbzWWZqYjrVshZ0hARH/3nKXY3wMJviCEjtRoVVmPxyn1AMz6lRgt9y9tm
-         B68g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=+yw2O12HvCKg6u8MsDYBMjP6c4N8nSrALCEZyrGZhn0=;
-        b=awR42vrSlWrBAuL3D4JwKFiGwSw3DTksOvhJa2DO1oO9NSNOIaVlJbdMPzS07fqV4E
-         flCwPX6+LvYOne5yeOfymtCMu7RRnk+QXClWOZqLxoyGGUcSTa0qsh6lL4KQJqgFxCU6
-         27ZdD7XEFDvPd0rEg3mXjeOCFTG5xvyD8yySM+KDP1PhP46ED5mkJYv23puJPWPFza13
-         +gQWVKKrtT9jIEvc0GMvaSLwtTDjAOYn7c6GPNXBUN0NRSWPXeqpHdep4T/fYyFwkak+
-         EstM1vIAARjX120RCuxEnn9mysyAdPdaCCCoktlXjJsD9V0NZqIvD2CeN5heO/twnSm7
-         NKsA==
-X-Gm-Message-State: AOAM530AYJsnfiK6KGOo8+oGZowPOjO7QNjw3dWzC4URJMcJGpOKAWa3
-	wocdS/+ISLwC4y3dw+NZR/IRDNjtCNys1a1PvQM=
-X-Google-Smtp-Source: 
- ABdhPJyCgrQ2YiUesRg553y99c9VEBghNVPLclsSHdvSCYrKl+E+QtlBmAjtXHVYuDHbyBCtSLwZRRTt27uDSBh4LfQ=
-X-Received: by 2002:a5d:608c:: with SMTP id w12mr3239305wrt.313.1642762604465;
- Fri, 21 Jan 2022 02:56:44 -0800 (PST)
+ dkim=pass header.i=@anavi.org header.s=default header.b=mDfgIXfd;
+ spf=permerror,
+ err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
+ for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
+ (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=WoO5x2LYKuid2fm2EpMjtCOnSzxfjtEN4GNMECM6FM0=; b=mDfgIXfdhAAPYp6/ZSNhJJMHH6
+	RdpOVr4KEmlLPPfpz8DsifwPjXM2l77lydatesomKIkMdLDCCbO/9L7QV2HOu+RTZAT/R4Y0od41X
+	6l0hxhHqG1euENyTqVYflBZqNwwj4WO0H89km5WQSiZeriCyyF9NFzrnamgvkqaEzyPBZFvaPx2qf
+	RoYufgw0JPQJ/P6fRDGwMWihxf88wdpgb0TYtxE3gDsKiY+dG2iaKD0prbHlOMmglRrJuX6C7GIiT
+	OmpeBhNLzSo00X/wBmUivk9uuzlfxwTLSaL13TPHr17D8ubf2InPWSCFHie+nqnZgl4D1Qgthyoyq
+	YWh9NngA==;
+Received: from lan.nucleusys.com ([92.247.61.126]:50940 helo=tone.k.g)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.94.2)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1nAtbt-0003GN-3k; Fri, 21 Jan 2022 15:05:43 +0200
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-pillow: Upgrade 8.3.2 -> 9.0.0
+Date: Fri, 21 Jan 2022 15:05:29 +0200
+Message-Id: <20220121130533.3973579-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-References: <1633013662-14499-1-git-send-email-zhengrq.fnst@fujitsu.com>
-In-Reply-To: <1633013662-14499-1-git-send-email-zhengrq.fnst@fujitsu.com>
-From: Vincent Prince <vincent.prince.fr@gmail.com>
-Date: Fri, 21 Jan 2022 11:56:33 +0100
-Message-ID: 
- <CAB2nKc8gyiq61aOe_1gsVUCD=yZE7zFZ+7KCdneSnF71jKKZEw@mail.gmail.com>
-Subject: Re: [oe] [meta-networking] [PATCH] cifs-utils: upgrade 6.13 -> 6.14
-To: zhengruoqin <zhengrq.fnst@fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="0000000000007d528005d6157996"
+Content-Transfer-Encoding: 8bit
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
+ leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Jan 2022 10:56:47 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 21 Jan 2022 13:05:46 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94965
+ https://lists.openembedded.org/g/openembedded-devel/message/94966
 
---0000000000007d528005d6157996
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Upgrade to release 9.0.0:
 
-Hi all,
+- Restrict builtins for ImageMath.eval()
+- Ensure JpegImagePlugin stops at the end of a truncated file
+- Fixed ImagePath.Path array handling
+- Remove consecutive duplicate tiles that only differ by their
+  offset
+- Removed redundant part of condition
+- Explicitly enable strip chopping for large uncompressed TIFFs
+- Use the Windows method to get TCL functions on Cygwin
+- Changed error type to allow for incremental WebP parsing
+- Improved I;16 operations on big endian
+- Ensure that BMP pixel data offset does not ignore palette
+- Limit quantized palette to number of colors
+- Use latin1 encoding to decode bytes
+- Fixed palette index for zeroed color in FASTOCTREE quantize
+- When saving RGBA to GIF, make use of first transparent palette
+  entry
+- Pass SAMPLEFORMAT to libtiff
+- Added rounding when converting P and PA
+- Improved putdata() documentation and data handling
+- Exclude carriage return in PDF regex to help prevent ReDoS
+- Image.NONE is only used for resampling and dithers
+- Fixed freeing pointer in ImageDraw.Outline.transform
+- Add Tidelift alignment action and badge
+- Replaced further direct invocations of setup.py
+- Added ImageShow support for xdg-open
+- Switched from deprecated "setup.py install" to "pip install ."
+- Support 16-bit grayscale ImageQt conversion
+- Fixed raising OSError in _safe_read when size is greater than
+  SAFEBLOCK
+- Convert subsequent GIF frames to RGB or RGBA
+- WebP: Fix memory leak during decoding on failure
+- Do not prematurely return in ImageFile when saving to stdout
+- Added support for top right and bottom right TGA orientations
+- Corrected ICNS file length in header
+- Block tile TIFF tags when saving
+- Added line width argument to ImageDraw polygon
+- Do not redeclare class each time when converting to NumPy
+- Only prevent repeated polygon pixels when drawing with
+  transparency
+- Fix pushes_fd method signature
+- Add support for pickling TrueType fonts
+- Only prefer command line tools SDK on macOS over default
+  MacOSX SDK
+- Fix compilation on 64-bit Termux
+- Replace 'setup.py sdist' with '-m build --sdist'
+- Use declarative package configuration
+- Use title for display in ImageShow
+- Fix for PyQt6
+- Rename master to main
 
-Am I the only one with some error on cifs-utils?
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../{python3-pillow_8.3.2.bb => python3-pillow_9.0.0.bb}    | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pillow_8.3.2.bb => python3-pillow_9.0.0.bb} (78%)
 
-| (cd
-/yocto/build/tmp/work/corei7-64-cube-linux/cifs-utils/6.13-r0/image/sbin &&
-ln -sf mount.cifs mount.smb3)
-| /bin/bash: line 0: cd:
-/yocto/build/tmp/work/corei7-64-cube-linux/cifs-utils/6.13-r0/image/sbin:
-No such file or directory
+diff --git a/meta-python/recipes-devtools/python/python3-pillow_8.3.2.bb b/meta-python/recipes-devtools/python/python3-pillow_9.0.0.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-pillow_8.3.2.bb
+rename to meta-python/recipes-devtools/python/python3-pillow_9.0.0.bb
+index bc6c801c3..de3c92c3d 100644
+--- a/meta-python/recipes-devtools/python/python3-pillow_8.3.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pillow_9.0.0.bb
+@@ -3,13 +3,13 @@ Clark and Contributors. PIL is the Python Imaging Library by Fredrik Lundh and \
+ Contributors."
+ HOMEPAGE = "https://pillow.readthedocs.io"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=0337b116233da4616ae9fdb130bf6f1a"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=ad081a0aede51e89f8da13333a8fb849"
+ 
+-SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=8.3.x;protocol=https \
++SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=9.0.x;protocol=https \
+            file://0001-support-cross-compiling.patch \
+            file://0001-explicitly-set-compile-options.patch \
+ "
+-SRCREV ?= "8013f130a5077b238a4346b73e149432b180a8ea"
++SRCREV ?= "82541b6dec8452cb612067fcebba1c5a1a2bfdc8"
+ 
+ inherit setuptools3
+ 
+-- 
+2.30.2
 
-From Makefile.in
-install-exec-hook: install-sbinPROGRAMS
-        (cd $(DESTDIR)$(ROOTSBINDIR) && ln -sf mount.cifs mount.smb3)
-
-In case we don't use usrmerge feature, shouldn't we create ${sbinbir} first=
-?
-
-Kind regards,
-Vincent
-
-Le jeu. 30 sept. 2021 =C3=A0 07:54, zhengruoqin <zhengrq.fnst@fujitsu.com> =
-a
-=C3=A9crit :
-
-> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
-> ---
->  .../cifs/{cifs-utils_6.13.bb =3D> cifs-utils_6.14.bb}             | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-networking/recipes-support/cifs/{cifs-utils_6.13.bb =3D>
-> cifs-utils_6.14.bb} (97%)
->
-> diff --git a/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb
-> b/meta-networking/recipes-support/cifs/cifs-utils_6.14.bb
-> similarity index 97%
-> rename from meta-networking/recipes-support/cifs/cifs-utils_6.13.bb
-> rename to meta-networking/recipes-support/cifs/cifs-utils_6.14.bb
-> index a8d3e91ebb..5fafb4ef69 100644
-> --- a/meta-networking/recipes-support/cifs/cifs-utils_6.13.bb
-> +++ b/meta-networking/recipes-support/cifs/cifs-utils_6.14.bb
-> @@ -4,7 +4,7 @@ SECTION =3D "otherosfs"
->  LICENSE =3D "GPLv3 & LGPLv3"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
-504"
->
-> -SRCREV =3D "464a60344a324311a6f5bb326fdf5f422a3c9005"
-> +SRCREV =3D "8c06dce7d596e478c20bc54bdcec87ad97f80a1b"
->  SRC_URI =3D "git://git.samba.org/cifs-utils.git"
->
->  S =3D "${WORKDIR}/git"
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#93177):
-> https://lists.openembedded.org/g/openembedded-devel/message/93177
-> Mute This Topic: https://lists.openembedded.org/mt/85967489/3616779
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> vincent.prince.fr@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---0000000000007d528005d6157996
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi all,=C2=A0<div><br></div><div>Am I the only one with so=
-me error on cifs-utils?</div><div><br></div><div>| (cd /yocto/build/tmp/wor=
-k/corei7-64-cube-linux/cifs-utils/6.13-r0/image/sbin &amp;&amp; ln -sf moun=
-t.cifs mount.smb3)<br>| /bin/bash: line 0: cd: /yocto/build/tmp/work/corei7=
--64-cube-linux/cifs-utils/6.13-r0/image/sbin: No such file or directory<br>=
-</div><div><br></div><div>From Makefile.in</div><div>install-exec-hook: ins=
-tall-sbinPROGRAMS<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 (cd $(DESTDIR)$(ROOTSBINDI=
-R) &amp;&amp; ln -sf mount.cifs mount.smb3)<br></div><div><br></div><div>In=
- case we don&#39;t use usrmerge=C2=A0feature, shouldn&#39;t we create ${sbi=
-nbir} first?</div><div><br></div><div>Kind regards,</div><div>Vincent=C2=A0=
-=C2=A0</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"=
-gmail_attr">Le=C2=A0jeu. 30 sept. 2021 =C3=A0=C2=A007:54, zhengruoqin &lt;<=
-a href=3D"mailto:zhengrq.fnst@fujitsu.com">zhengrq.fnst@fujitsu.com</a>&gt;=
- a =C3=A9crit=C2=A0:<br></div><blockquote class=3D"gmail_quote" style=3D"ma=
-rgin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:=
-1ex">Signed-off-by: Zheng Ruoqin &lt;<a href=3D"mailto:zhengrq.fnst@fujitsu=
-.com" target=3D"_blank">zhengrq.fnst@fujitsu.com</a>&gt;<br>
----<br>
-=C2=A0.../cifs/{<a href=3D"http://cifs-utils_6.13.bb" rel=3D"noreferrer" ta=
-rget=3D"_blank">cifs-utils_6.13.bb</a> =3D&gt; <a href=3D"http://cifs-utils=
-_6.14.bb" rel=3D"noreferrer" target=3D"_blank">cifs-utils_6.14.bb</a>}=C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 2 +-<br>
-=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-=C2=A0rename meta-networking/recipes-support/cifs/{<a href=3D"http://cifs-u=
-tils_6.13.bb" rel=3D"noreferrer" target=3D"_blank">cifs-utils_6.13.bb</a> =
-=3D&gt; <a href=3D"http://cifs-utils_6.14.bb" rel=3D"noreferrer" target=3D"=
-_blank">cifs-utils_6.14.bb</a>} (97%)<br>
-<br>
-diff --git a/meta-networking/recipes-support/cifs/<a href=3D"http://cifs-ut=
-ils_6.13.bb" rel=3D"noreferrer" target=3D"_blank">cifs-utils_6.13.bb</a> b/=
-meta-networking/recipes-support/cifs/<a href=3D"http://cifs-utils_6.14.bb" =
-rel=3D"noreferrer" target=3D"_blank">cifs-utils_6.14.bb</a><br>
-similarity index 97%<br>
-rename from meta-networking/recipes-support/cifs/<a href=3D"http://cifs-uti=
-ls_6.13.bb" rel=3D"noreferrer" target=3D"_blank">cifs-utils_6.13.bb</a><br>
-rename to meta-networking/recipes-support/cifs/<a href=3D"http://cifs-utils=
-_6.14.bb" rel=3D"noreferrer" target=3D"_blank">cifs-utils_6.14.bb</a><br>
-index a8d3e91ebb..5fafb4ef69 100644<br>
---- a/meta-networking/recipes-support/cifs/<a href=3D"http://cifs-utils_6.1=
-3.bb" rel=3D"noreferrer" target=3D"_blank">cifs-utils_6.13.bb</a><br>
-+++ b/meta-networking/recipes-support/cifs/<a href=3D"http://cifs-utils_6.1=
-4.bb" rel=3D"noreferrer" target=3D"_blank">cifs-utils_6.14.bb</a><br>
-@@ -4,7 +4,7 @@ SECTION =3D &quot;otherosfs&quot;<br>
-=C2=A0LICENSE =3D &quot;GPLv3 &amp; LGPLv3&quot;<br>
-=C2=A0LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3Dd32239bcb673463ab874e=
-80d47fae504&quot;<br>
-<br>
--SRCREV =3D &quot;464a60344a324311a6f5bb326fdf5f422a3c9005&quot;<br>
-+SRCREV =3D &quot;8c06dce7d596e478c20bc54bdcec87ad97f80a1b&quot;<br>
-=C2=A0SRC_URI =3D &quot;git://<a href=3D"http://git.samba.org/cifs-utils.gi=
-t" rel=3D"noreferrer" target=3D"_blank">git.samba.org/cifs-utils.git</a>&qu=
-ot;<br>
-<br>
-=C2=A0S =3D &quot;${WORKDIR}/git&quot;<br>
--- <br>
-2.25.1<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#93177): <a href=3D"https://lists.openembedded.org/g/ope=
-nembedded-devel/message/93177" rel=3D"noreferrer" target=3D"_blank">https:/=
-/lists.openembedded.org/g/openembedded-devel/message/93177</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/85967489/3616=
-779" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/85967489/3616779</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:vincent.prince.fr@gmail.=
-com" target=3D"_blank">vincent.prince.fr@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---0000000000007d528005d6157996--
 
