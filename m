@@ -2,92 +2,106 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93154C433F5
-	for <webhook@archiver.kernel.org>; Fri, 21 Jan 2022 19:35:35 +0000 (UTC)
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com
- [209.85.214.182])
- by mx.groups.io with SMTP id smtpd.web10.506.1642793734876744685
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CFE9AC433EF
+	for <webhook@archiver.kernel.org>; Fri, 21 Jan 2022 19:40:56 +0000 (UTC)
+Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com
+ [209.85.222.176])
+ by mx.groups.io with SMTP id smtpd.web08.617.1642794055810723068
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Jan 2022 11:35:34 -0800
+ Fri, 21 Jan 2022 11:40:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=JQGptcNp;
- spf=pass (domain: gmail.com, ip: 209.85.214.182,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=mrPWMjy3;
+ spf=pass (domain: gmail.com, ip: 209.85.222.176,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f182.google.com with SMTP id d7so9491522plr.12
+Received: by mail-qk1-f176.google.com with SMTP id 193so11047448qkh.13
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Jan 2022 11:35:34 -0800 (PST)
+ Fri, 21 Jan 2022 11:40:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=srNxbA3NpIvQDeUb2zPSLU/1CPoNJCsH52Qj1X09dug=;
-        b=JQGptcNpVvbX20Jf3c6v4eDqKmihB1fj8AbsrPj8xHxT9zrq3xF0BC0HPxkSXwCq+6
-         neHjyu8wLauoezDKyLkfrjyrrFyddzhaM6blPgn4D6ucqMLKY+JQRP/u9U1Evx+DsGx/
-         IX+qIa1J75Zuish5l7KfboygnqRwnBrnocZhOh36dKTrzBqfIyO06d0Aj7XYcfRAHmF4
-         NN7YbGKD1ALqQnFtYzxsjl5dZoJVws69DT0L1chZk4JSEA0YMa6AnS1m8qmgDi47cdNv
-         sFffCzlgj/sDCmbEdeDhbimnqi8qYswsY4RKvo3/9NlxWmwoMuqbd9uOSQqZQAyDFfgw
-         Zqeg==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=b4kjJ7fGPETc0YzBmleiUjxVKNubEfPwYjrSNM3wUoY=;
+        b=mrPWMjy3c/AClxwYTcnFIkvftxTf25DaXT7LzpaCGfsWSMNADsO0gxOvbKnjEQmNop
+         CwnVUw0WS5sjgrFLWuruvelZ/yCT8SPhq1/PrPXUsBux7aiJD55gvNz5CZfs49IvV7lg
+         5QXGD99RcDrs8JdpPV/5F3vwJQuS5KfRlLbD+birXtPYhvQ8bECt5q1+Ne6VXvvwZhKR
+         wbmuABbBRaOnif3nL3uDxnGrfTq6vpjpagoY39ZPrLsUz2VVEjdt69Fhwy7EuEtgFNFI
+         dnQGY/XXxakYCdMoWYXT4K7ALaTnKaBtfQ/wm4/0AZObRi3FWpSj67pRxGKEpvqfMFOS
+         SYGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=srNxbA3NpIvQDeUb2zPSLU/1CPoNJCsH52Qj1X09dug=;
-        b=b/q2ENIOg3gNDAyOPOtJnlRISjCwfakItrqmSS5wQ/JYFC+0+J9iKoWcL0g422b/zB
-         j64KTBijErSy+vBjGLmJugkBZC0Dhl7ejqi30v6v1aTi1KsxFZiTre1hZ0DTw6hA4rvz
-         pQfy6kev7N4giVFRQu/m5hKJpA8HTGsns44nZU6gvoX8Gz/UM/Wfm4NuIhlM8/CRUqBw
-         LD1xkAjm98/+kHeTEan8ieQ/R15Lf6nZSpjY7aewWbenXV1K6Pjy25R/G7ZTB9fAghTa
-         MRTE33e4uLIfga020qsM0oF1qns9dLGTU2y/8ZBcW2y/PNGxXdK4DizzgCkpPGeJCPNS
-         JtMg==
-X-Gm-Message-State: AOAM531MLQAs6BxpXjZe6MdweE+69d8tdDfV7+i3KEDIJjKr/l86be4Z
-	tQ55ZfewRw5Dwpl/p19foHjWZlBsIZbLiQ==
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=b4kjJ7fGPETc0YzBmleiUjxVKNubEfPwYjrSNM3wUoY=;
+        b=b+bOggu1WEhePJPfTPt6vXn3CzxECWXFdl1KjkrxKY7FBi8lZqxZmhMVCwfiArnMib
+         4nyF4UW45Lqm9Jm6wAjxiSPtkLODmb50HcZUGk0c1QrIEDLizbe3vseuM42vGnjKZZh9
+         b8kfeg551RLto+dDssoU3fqw3kCMY3nNW3nWAmwAsVx5+R14BiFu0AVyB8n92U34CTIL
+         0AsiwhfdMX6rfP7MHTzUaqn5uNE5pJT/0NWwESL921lpPIz7nW/Q/pphJkSLQzk7FI//
+         46DGTGYZWk+b+Qm2I6GqImOnmQz6L3bstTIU74jiP+qqeXRfKp2jGwWdcAGx9+3QNWFS
+         ImGQ==
+X-Gm-Message-State: AOAM533s9B7EU7jyQe6xw26A6rulvxk5o7WjIgK5r32DjaT4/mxanyKG
+	FtobGNT/S1WSiLEsw8S2ua0JcmKQGaP2+7iJ8PE=
 X-Google-Smtp-Source: 
- ABdhPJzbADuo5ILFLHnZlXJLke+SWGLnjghwnxuomDZclMKm1PKHuEY+QaTk3uUEhVCFFRR32HN2Ww==
-X-Received: by 2002:a17:902:7882:b0:14a:fd51:3b5f with SMTP id
- q2-20020a170902788200b0014afd513b5fmr5187376pll.98.1642793734163;
-        Fri, 21 Jan 2022 11:35:34 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b5e3])
-        by smtp.gmail.com with ESMTPSA id
- z21sm7797541pfe.108.2022.01.21.11.35.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Jan 2022 11:35:33 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] gtkmm3: Add missing dependency on gdk-pixbuf-native
-Date: Fri, 21 Jan 2022 11:35:31 -0800
-Message-Id: <20220121193531.66642-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ ABdhPJxVs2falIg65viSUjJLSL3rggAbq6X2x4t0MyMso5/gN4Hx7QCkcalZ7f7tnwwx+OB9wDTZqzM8j9LTgUNPEzc=
+X-Received: by 2002:a37:a84:: with SMTP id 126mr4030683qkk.72.1642794054744;
+ Fri, 21 Jan 2022 11:40:54 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <1642725351-24004-1-git-send-email-wangmy@fujitsu.com>
+ <1642725351-24004-2-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1642725351-24004-2-git-send-email-wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 21 Jan 2022 11:40:28 -0800
+Message-ID: 
+ <CAMKF1sq17qpZjOv_wD5OLM9yyW-_KkLX9=B5nPfpKgLRneHNvg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] sdbus-c++-libsystemd: upgrade 249 -> 250.3
+To: wangmy <wangmy@fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Jan 2022 19:35:35 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 21 Jan 2022 19:40:56 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94977
+ https://lists.openembedded.org/g/openembedded-devel/message/94978
 
-Fixes
-../gtkmm-3.24.5/demos/gtk-demo/demo.gresource.xml: to-pixdata preprocessing requested, but GDK_PIXBUF_PIXDATA is not set, and gdk-pixbuf-pixdata is not in PATH
+this fails on musl
+https://errors.yoctoproject.org/Errors/Details/623260/
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.5.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.5.bb b/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.5.bb
-index 428ec69d76..a8c7713645 100644
---- a/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.5.bb
-+++ b/meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.5.bb
-@@ -6,7 +6,7 @@ LICENSE = "LGPLv2.1 & GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
-                     file://COPYING.tools;md5=751419260aa954499f7abaabaa882bbe"
- 
--DEPENDS = "glib-2.0-native atkmm pangomm glibmm gtk+3 cairomm"
-+DEPENDS = "glib-2.0-native atkmm pangomm glibmm gtk+3 cairomm gdk-pixbuf-native"
- 
- BPN = "gtkmm"
- 
--- 
-2.34.1
-
+On Thu, Jan 20, 2022 at 4:36 PM wangmy <wangmy@fujitsu.com> wrote:
+>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  ...us-c++-libsystemd_249.bb => sdbus-c++-libsystemd_250.3.bb} | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-core/sdbus-c++/{sdbus-c++-libsystemd_249.bb => sdbus-c++-libsystemd_250.3.bb} (97%)
+>
+> diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_249.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_250.3.bb
+> similarity index 97%
+> rename from meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_249.bb
+> rename to meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_250.3.bb
+> index a3ef6a747..0cd96f528 100644
+> --- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_249.bb
+> +++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_250.3.bb
+> @@ -10,8 +10,8 @@ inherit meson pkgconfig
+>
+>  DEPENDS += "gperf-native gettext-native util-linux libcap util-linux python3-jinja2-native"
+>
+> -SRCREV = "00b0393e65252bf631670604f58b844780b08c50"
+> -SRCBRANCH = "v249-stable"
+> +SRCREV = "1b003bbc806198dbdd57b405d968f30565495e70"
+> +SRCBRANCH = "v250-stable"
+>  SRC_URI = "git://github.com/systemd/systemd-stable.git;protocol=https;branch=${SRCBRANCH} \
+>             file://static-libsystemd-pkgconfig.patch \
+>             "
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#94961): https://lists.openembedded.org/g/openembedded-devel/message/94961
+> Mute This Topic: https://lists.openembedded.org/mt/88573656/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
