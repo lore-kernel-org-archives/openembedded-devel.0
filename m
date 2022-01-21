@@ -2,61 +2,61 @@ Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 870B1C433EF
-	for <webhook@archiver.kernel.org>; Fri, 21 Jan 2022 21:39:16 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
- [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.web12.535.1642801155456937844
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8EB8BC4167B
+	for <webhook@archiver.kernel.org>; Fri, 21 Jan 2022 21:39:21 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
+ [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.web12.540.1642801160603977085
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Jan 2022 13:39:15 -0800
+ Fri, 21 Jan 2022 13:39:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=HNhRpYOw;
- spf=pass (domain: gmail.com, ip: 209.85.221.42,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=mQpWEvTe;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47,
  mailfrom: alex.kanavin@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id r14so1979177wrp.2
+Received: by mail-wr1-f47.google.com with SMTP id az25so1983648wrb.6
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Jan 2022 13:39:15 -0800 (PST)
+ Fri, 21 Jan 2022 13:39:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=8uxSMus+y5t9aeIQd65y9JSdq3tXd//CthdvXuoUuns=;
-        b=HNhRpYOw6f6r7PMsEXYunurwfinGG0zTxViTyKU1ib0tdcvtscfAQJ33Ja6UXv85sK
-         kRtyxGyUZUSjOWcCshaoT7SWXWENTnqVbtTowayP+i5uxc0jpQUF8TCpjyKRVC5h+aoH
-         62qs0lgvGcfE1hVRKe0k30dZr2HNvuH8xIRu2d57fF3eIRVEr8O2hiWCtCrs5xGDJqGm
-         qhhEVbw17ewXvmY6Ip08FLI1L4OCnzkRiT/27kl9hiCC/PKP/Fp5/gOc5xeHDFlhcWCB
-         MGrEO3MRYBx7NRgG9oYjT1+Vo1yCyv9apfAzoPkatLqHqvp82pghPgeH210hSisW5If0
-         fa9g==
+        bh=3FB8o5LbSa1c/Jt/9S7SHK6GGBbkBFoqasjcLpjnWTc=;
+        b=mQpWEvTe7z+MnVfamqaejZDKrBqZxIjzjDRWB58nUmocl4RVuDzWomdiMgmyM1N6k/
+         rNKHAbAC/CEzSkl8OwRcuyCAUxHcYNxH6p4NFyx3pO6CRYsmBAeVvMHCnrpuSUW9wybS
+         eAlz3G/qvygNTGteKnMK0psfJ4W7tHOODCzu3/9RaLgapmVu7X1z4lzrPQ6zuEuFtU8a
+         wzLSim4HGFEh/Wc55GmedDlKlRnReomcuvhLEplxfJnzdE6iUNkV4oKen0DgsqoYT2em
+         /cgy1PVNXle7wiFhvnpW+IcYEkskulwoK4ZXPyV8SrtQ6Wt1RBhiQXonebPaPsLcDYig
+         dyvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=8uxSMus+y5t9aeIQd65y9JSdq3tXd//CthdvXuoUuns=;
-        b=F105qYyx8+qZDqaLdMMD/P395YHk+n6wXeen8pZPcIQ/5c10rfdBMjGyVhut7s9kia
-         5cUb4N74jPUdfEkpDRsFhAaFObH2P2CHkJafoXSqzOwdcBSpxF8Bz8te4khJNeLUS+kc
-         YU5aaVuT3nX9hnhOKUNzAsq0ed9dJbdf9z2KktwyGsBwatNbIdQl8pMe3t7esa7ox9Au
-         NaEGq+ohAg/mwowHbqpizVPwm6tP9BeAHkMFSIUNlVZKhuDOBf2Bk+2CzMvOlo3ijfOD
-         xCKYBAYy8BuGQDZoh26jf3NoOX/8io/orwDE8IvX+M9O3TjnrdTlI0r1q2g/bVcV9gbo
-         GiEg==
-X-Gm-Message-State: AOAM53025YpwvG3QvU6ZDCRynNDyT1mH5CZauEpsAv1wUhZ4S7j9lO+V
-	+JB3eJNwAzmpvpYeLfbJeZakIfi0RzQ=
+        bh=3FB8o5LbSa1c/Jt/9S7SHK6GGBbkBFoqasjcLpjnWTc=;
+        b=iBWQnd3zlgQFIIbO2JWB2XCA226i805BLmqC2CcyI8w6KBKoKEQ7nzWqskz9C5Z1Ra
+         eGjQ5WsINXQD3btlPcOY/YTUnuLIrd9oz8Mny9xTl/ADbyDQcgUqUs1uxhruBqbTZ0s5
+         ESJEg6eJIzjnutw8crLnGbtwGhT9WPLozUBbnNkg549o3upjJeuSk45CoWrJ5kiqQEmB
+         gtD4mI0YxXnEIEZXUkvdfDZBBa0JXaOoc7zdEZ4MT6VRdUMALNNIZ3sDMazkwSe4RR7I
+         J3irGZeCYTdRXO8WHcbwk7ZzbTpSl0oEjeR5CIrxuHATAtg3W4n53XIY0f0dI8EE45/6
+         xf+Q==
+X-Gm-Message-State: AOAM531KO48ABVB7mKzdpaCvZsv3eUaB+ls6rFPvyVCJlieFIUUwVzYe
+	eU6M/QtPi7NFDWRGEktvsq8P95gRE3s=
 X-Google-Smtp-Source: 
- ABdhPJy0VgrNNk4pBWqpQxdWKJWsF1qZdZ1w1a7uOhhI0PKjEteCYs2OB6m9FskHY786OSlrMjXWew==
-X-Received: by 2002:a5d:598b:: with SMTP id n11mr5257675wri.562.1642801154032;
-        Fri, 21 Jan 2022 13:39:14 -0800 (PST)
+ ABdhPJwvXO5yASm2naKv7Rh8/uLABNp8ThC2E4SF/Y5xITFaCEk0VanWlarqaIqvAJ9L3Bm21FDatw==
+X-Received: by 2002:adf:f489:: with SMTP id l9mr4946587wro.489.1642801159254;
+        Fri, 21 Jan 2022 13:39:19 -0800 (PST)
 Received: from nereus.lab.linutronix.de. (b2b-109-90-143-203.unitymedia.biz.
  [109.90.143.203])
         by smtp.gmail.com with ESMTPSA id
- l24sm5870274wme.17.2022.01.21.13.39.13
+ l24sm5870274wme.17.2022.01.21.13.39.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Jan 2022 13:39:13 -0800 (PST)
+        Fri, 21 Jan 2022 13:39:18 -0800 (PST)
 From: Alexander Kanavin <alex.kanavin@gmail.com>
 X-Google-Original-From: Alexander Kanavin <alex@linutronix.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alexander Kanavin <alex@linutronix.de>
-Subject: [PATCH 09/19] accountsservice: backport a meson 0.61 patch
-Date: Fri, 21 Jan 2022 22:38:48 +0100
-Message-Id: <20220121213858.762625-9-alex@linutronix.de>
+Subject: [PATCH 15/19] gnome-disk-utility: add a meson 0.61 patch
+Date: Fri, 21 Jan 2022 22:38:54 +0100
+Message-Id: <20220121213858.762625-15-alex@linutronix.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20220121213858.762625-1-alex@linutronix.de>
 References: <20220121213858.762625-1-alex@linutronix.de>
@@ -65,117 +65,69 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Jan 2022 21:39:16 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 21 Jan 2022 21:39:21 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94987
+ https://lists.openembedded.org/g/openembedded-devel/message/94993
 
 Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ---
- .../0001-Fix-build-with-meson-0.60.patch      | 29 +++++++++++++++++++
- .../0001-musl-Hack-to-fix-build.patch         |  8 +----
- .../0002-musl-add-missing-fgetspent_r.patch   |  6 ++--
- .../accountsservice/accountsservice_0.6.55.bb |  4 ++-
- 4 files changed, 35 insertions(+), 12 deletions(-)
- create mode 100644 meta-gnome/recipes-support/accountsservice/accountsservice/0001-Fix-build-with-meson-0.60.patch
+ ...ild-fix-arguments-of-i18n.merge_file.patch | 34 +++++++++++++++++++
+ .../gnome-disk-utility_41.0.bb                |  1 +
+ 2 files changed, 35 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility/0001-build-fix-arguments-of-i18n.merge_file.patch
 
-diff --git a/meta-gnome/recipes-support/accountsservice/accountsservice/0001-Fix-build-with-meson-0.60.patch b/meta-gnome/recipes-support/accountsservice/accountsservice/0001-Fix-build-with-meson-0.60.patch
+diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility/0001-build-fix-arguments-of-i18n.merge_file.patch b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility/0001-build-fix-arguments-of-i18n.merge_file.patch
 new file mode 100644
-index 000000000..98b483d53
+index 000000000..2758af507
 --- /dev/null
-+++ b/meta-gnome/recipes-support/accountsservice/accountsservice/0001-Fix-build-with-meson-0.60.patch
-@@ -0,0 +1,29 @@
-+From bedec82615ca6858c3e9494650a5bbf33c710ebb Mon Sep 17 00:00:00 2001
-+From: Luca Boccassi <bluca@debian.org>
-+Date: Sun, 31 Oct 2021 12:29:14 +0000
-+Subject: [PATCH] Fix build with meson 0.60
++++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility/0001-build-fix-arguments-of-i18n.merge_file.patch
+@@ -0,0 +1,34 @@
++From 629ca0e61bb59303d43d7eac44a47ae866cc78f0 Mon Sep 17 00:00:00 2001
++From: rvalue <i@rvalue.moe>
++Date: Fri, 17 Dec 2021 12:29:30 +0000
++Subject: [PATCH] build: fix arguments of i18n.merge_file
 +
-+Positional parameters to merge_file() were never allowed and always
-+ignored, so just drop it.
-+See: https://github.com/mesonbuild/meson/issues/9441
-+
-+Fixes #97
++`i18n.merge_file` has been ignoring positional arguments for a time
++and explicitly rejects with error since meson 0.60.0
 +
 +Upstream-Status: Backport
 +Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 +---
-+ data/meson.build | 1 -
-+ 1 file changed, 1 deletion(-)
++ data/meson.build | 2 --
++ 1 file changed, 2 deletions(-)
 +
 +diff --git a/data/meson.build b/data/meson.build
-+index 4987937..ed0e2c4 100644
++index e38a1d8..38fb520 100644
 +--- a/data/meson.build
 ++++ b/data/meson.build
-+@@ -29,7 +29,6 @@ configure_file(
-+ policy = act_namespace.to_lower() + '.policy'
++@@ -11,7 +11,6 @@ desktops = [
++ 
++ foreach desktop: desktops
++   i18n.merge_file (
++-    desktop,
++     type: 'desktop',
++     input: desktop + '.in',
++     output: desktop,
++@@ -38,7 +37,6 @@ install_data(
++ info = 'org.gnome.DiskUtility.appdata.xml'
 + 
 + i18n.merge_file(
-+-  policy,
-+   input: policy + '.in',
-+   output: policy,
++-  info,
++   input: info + '.in',
++   output: info,
 +   po_dir: po_dir,
-diff --git a/meta-gnome/recipes-support/accountsservice/accountsservice/0001-musl-Hack-to-fix-build.patch b/meta-gnome/recipes-support/accountsservice/accountsservice/0001-musl-Hack-to-fix-build.patch
-index c2310fe46..429192cd0 100644
---- a/meta-gnome/recipes-support/accountsservice/accountsservice/0001-musl-Hack-to-fix-build.patch
-+++ b/meta-gnome/recipes-support/accountsservice/accountsservice/0001-musl-Hack-to-fix-build.patch
-@@ -1,10 +1,7 @@
--From 2a1c7103839c20df5ca9ce2fa863535d802f8f3a Mon Sep 17 00:00:00 2001
-+From ff0718174faf1167fb4765ebe4bd280bbe8d2ac6 Mon Sep 17 00:00:00 2001
- From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
- Date: Sun, 8 Dec 2019 23:42:00 +0100
- Subject: [PATCH] musl: Hack to fix configure
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
+diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_41.0.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_41.0.bb
+index 462865e72..7e254f52c 100644
+--- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_41.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_41.0.bb
+@@ -26,6 +26,7 @@ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+ # As soon as elogind is of interest this needs rework: meson option is combo
+ PACKAGECONFIG[systemd] = "-Dlogind=libsystemd,-Dlogind=none,systemd"
  
- ---
-  meson.build | 10 ++++++++--
-@@ -31,6 +28,3 @@ index 4465a26..726c9fe 100644
-  endif
-  
-  # compiler flags
---- 
--2.21.0
--
-diff --git a/meta-gnome/recipes-support/accountsservice/accountsservice/0002-musl-add-missing-fgetspent_r.patch b/meta-gnome/recipes-support/accountsservice/accountsservice/0002-musl-add-missing-fgetspent_r.patch
-index 14161804e..2b0924b2e 100644
---- a/meta-gnome/recipes-support/accountsservice/accountsservice/0002-musl-add-missing-fgetspent_r.patch
-+++ b/meta-gnome/recipes-support/accountsservice/accountsservice/0002-musl-add-missing-fgetspent_r.patch
-@@ -1,4 +1,4 @@
--From 820249ea8e38c568e6a36fbd9c852718c7665b56 Mon Sep 17 00:00:00 2001
-+From 7401e682400df87f3258f795bb1d143f64a35a9f Mon Sep 17 00:00:00 2001
- From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
- Date: Mon, 9 Dec 2019 00:12:08 +0100
- Subject: [PATCH] musl: add missing fgetspent_r
-@@ -6,6 +6,7 @@ Subject: [PATCH] musl: add missing fgetspent_r
- Stolen from void-linux
++SRC_URI += " file://0001-build-fix-arguments-of-i18n.merge_file.patch"
+ SRC_URI[archive.sha256sum] = "8743c98fd656062ef862933efe30c5be4c6b322ec02eee154ec70d08ed0895df"
  
- Upstream-Status: Inappropriate [musl-specific]
-+
- ---
-  src/daemon.c | 20 ++++++++++++++++++++
-  1 file changed, 20 insertions(+)
-@@ -41,6 +42,3 @@ index c52bda3..a7676fe 100644
-  static struct passwd *
-  entry_generator_fgetpwent (Daemon       *daemon,
-                             GHashTable   *users,
---- 
--2.21.0
--
-diff --git a/meta-gnome/recipes-support/accountsservice/accountsservice_0.6.55.bb b/meta-gnome/recipes-support/accountsservice/accountsservice_0.6.55.bb
-index a19102e8f..26cc04b8e 100644
---- a/meta-gnome/recipes-support/accountsservice/accountsservice_0.6.55.bb
-+++ b/meta-gnome/recipes-support/accountsservice/accountsservice_0.6.55.bb
-@@ -12,7 +12,9 @@ inherit meson gobject-introspection gtk-doc features_check systemd
- 
- REQUIRED_DISTRO_FEATURES = "polkit"
- 
--SRC_URI = "https://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
-+SRC_URI = "https://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
-+           file://0001-Fix-build-with-meson-0.60.patch \
-+           "
- SRC_URI:append:libc-musl = " \
-     file://0001-musl-Hack-to-fix-build.patch \
-     file://0002-musl-add-missing-fgetspent_r.patch \
+ FILES:${PN} += " \
 -- 
 2.20.1
 
