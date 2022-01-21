@@ -2,61 +2,61 @@ Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD789C433FE
-	for <webhook@archiver.kernel.org>; Fri, 21 Jan 2022 21:39:15 +0000 (UTC)
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com
- [209.85.221.52])
- by mx.groups.io with SMTP id smtpd.web11.582.1642801154493712202
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 881CEC433FE
+	for <webhook@archiver.kernel.org>; Fri, 21 Jan 2022 21:39:17 +0000 (UTC)
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
+ [209.85.221.54])
+ by mx.groups.io with SMTP id smtpd.web08.591.1642801156468383369
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Jan 2022 13:39:14 -0800
+ Fri, 21 Jan 2022 13:39:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=a9qmZNWC;
- spf=pass (domain: gmail.com, ip: 209.85.221.52,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=dpvVOhWF;
+ spf=pass (domain: gmail.com, ip: 209.85.221.54,
  mailfrom: alex.kanavin@gmail.com)
-Received: by mail-wr1-f52.google.com with SMTP id k18so1977775wrg.11
+Received: by mail-wr1-f54.google.com with SMTP id r14so1979260wrp.2
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Jan 2022 13:39:14 -0800 (PST)
+ Fri, 21 Jan 2022 13:39:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=+eHPYImAcHvjzI5WdFj6vbJcChkugdnIJ+2h/atb54E=;
-        b=a9qmZNWCuho8UQKspwVAnT6+snjOeeqr+GalAiVqpgTHocX3iiGf3aM+lEBAoDw8Cy
-         gvMH+I+iFWyfki3ZvHn+aNRiHRfojmBuPAP/vosyxcAv64qYmMJmtaNJryuNiXsqp4L3
-         8BL95XmYDjevAFXZQppaOXCLa8MFVpvLNUcgQeuEZNnJw5x5HSz4V8lIsxSKhIyqV8rV
-         YE7UhOUBF1TNMjejECvP504RqxN35G7UaMFkH47lgeMI1bl/XCohxfFP8xHmIjP7NExs
-         OgB0iIIH+Pnnj0N0rEqQkcMTIzp5BhhsuLxQNVkQoeWEalpArC6BmW7R7Bza+lAzdcAE
-         4IfQ==
+        bh=MKw1RAozLA5hKTgNoB8C7S4l796UujHD9uvMOXtqB5Q=;
+        b=dpvVOhWF00N3mjpeB+F3E9St5aR18ik1SCxeP3qGUCK0mlk63pKCNDhB7prNAKu4Cs
+         Fdhwtx+uQJMTURMp+Zob0KDlQKwQycKZCFZLzSbcCkwTUi/z3lgEasnSwumJ5jINZT3t
+         faZ/sOEh7BOEIxQlx7DFtNXXACOfHVih9a16W4EXS2ecpGyHSg6LnsQacNBk8APBYGTX
+         P092xMyodjgIrP1eNjbdrrMk7Na/QW0HOZ22YWcfYnCmAB8kL/fotEONnEF/2AqA//N5
+         nhrQWw7sGhRVLaoXOmmmBuULNwAhaVuhUuqERu60rLUML//eWoRs6HD/L4Tg0IqdpcyY
+         x4Dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=+eHPYImAcHvjzI5WdFj6vbJcChkugdnIJ+2h/atb54E=;
-        b=H5O18QP8PRrZbQ5SCsdw472wWMEhzAYBnp1PVuMJmXQsaLZjVcGy8IFFrm+IrQLoiu
-         rxPybdzYdccAEttnowZkG23hquErpOvEs0D8qExrZcPcUEV9Ok9exw1T30nmPEkmCVaE
-         48G1yOioQPVm/GkjSsDfd2pOBBjF5jVjUY4OF729CucDS2U0laG35t4WtVMZTPAnMxxq
-         KuRrgQwnWT2QqRrVodJdzdbhEDejoJLssl7/XgzDfUH2mvekZnQADfMFoK3mrziZ7IDv
-         HbTu1IsvNyoKDyiN/BqMBSaQHhazPkZLALZXXacsgw+1L94DN5FBOZNLlvRmjRS3Mj6i
-         eMPg==
-X-Gm-Message-State: AOAM53163zyeQIVDSXMAVqaBZpfdpvsvu+II8Vj7DJOBbQC8AyoLOeL/
-	JhCYLX3dmcfjsKhHvHl+Rtj0ykW/5cc=
+        bh=MKw1RAozLA5hKTgNoB8C7S4l796UujHD9uvMOXtqB5Q=;
+        b=8B3EhTKvyP2bEhslI6KLN24FHAeqD9/mhDLomCblr7GFPEud+o6Ep1CtSmaJFPyvpo
+         9n5xqRgFMg+qTTa2l3cPr1ePS1n4kiRUngi3uqHwhsPWYUAUupvghI+f8n94PS3E5VwG
+         EMrlMd+Mi9VEOBzmTtVIisN0ES5Xjqw6EjWXqWLheoTzEBWU8lUQATzVAKyea9h2FF98
+         pJmP2iTRZAGEQh/puMsp1bGbx+8vPxJeeWLnwu7Y9oswCVLLcUITsS1TI5wAJV3EogXo
+         KZEnhtgdJmlSrFGq+UEO5jhQo4kidhL6x4MN2o2ZI3yJkVZtMcQW7/dsnYCLWm/U/XuI
+         STUQ==
+X-Gm-Message-State: AOAM53007QOYafxheJsTiZISkbs5b4Jw7RDErsx0q5fAYOgYQiqZfogz
+	Rc3E3XSUob/lneXw+x3VNQYK53ODdBY=
 X-Google-Smtp-Source: 
- ABdhPJy3AzHipnUGJmcLEDsdRQ7wQ18qcHOr9Svhb4u5cTnR1bnpvdWIqRciwWhi3ne8NKj7mCaPyg==
-X-Received: by 2002:a5d:47c2:: with SMTP id o2mr5347785wrc.73.1642801153099;
-        Fri, 21 Jan 2022 13:39:13 -0800 (PST)
+ ABdhPJxuICgNSoOlJREFsgwoqmD2VxMeYfc4sfRIrQBenQrlU5OqP0/vbRr5f+a48v9f4btYUcphEw==
+X-Received: by 2002:a5d:610b:: with SMTP id v11mr5398646wrt.487.1642801155041;
+        Fri, 21 Jan 2022 13:39:15 -0800 (PST)
 Received: from nereus.lab.linutronix.de. (b2b-109-90-143-203.unitymedia.biz.
  [109.90.143.203])
         by smtp.gmail.com with ESMTPSA id
- l24sm5870274wme.17.2022.01.21.13.39.12
+ l24sm5870274wme.17.2022.01.21.13.39.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Jan 2022 13:39:12 -0800 (PST)
+        Fri, 21 Jan 2022 13:39:14 -0800 (PST)
 From: Alexander Kanavin <alex.kanavin@gmail.com>
 X-Google-Original-From: Alexander Kanavin <alex@linutronix.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alexander Kanavin <alex@linutronix.de>
-Subject: [PATCH 08/19] gnome-shell: backport a meson 0.61 patch
-Date: Fri, 21 Jan 2022 22:38:47 +0100
-Message-Id: <20220121213858.762625-8-alex@linutronix.de>
+Subject: [PATCH 10/19] gnome-screenshot: backport a meson 0.61 patch
+Date: Fri, 21 Jan 2022 22:38:49 +0100
+Message-Id: <20220121213858.762625-10-alex@linutronix.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20220121213858.762625-1-alex@linutronix.de>
 References: <20220121213858.762625-1-alex@linutronix.de>
@@ -65,116 +65,71 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Jan 2022 21:39:15 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 21 Jan 2022 21:39:17 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94986
+ https://lists.openembedded.org/g/openembedded-devel/message/94988
 
 Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ---
- ...-build-Drop-incorrect-positional-arg.patch | 81 +++++++++++++++++++
- .../gnome-shell/gnome-shell_41.2.bb           |  1 +
- 2 files changed, 82 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0001-build-Drop-incorrect-positional-arg.patch
+ ...emove-extraneous-positional-argument.patch | 36 +++++++++++++++++++
+ .../gnome-screenshot/gnome-screenshot_41.0.bb |  1 +
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-screenshot/gnome-screenshot/0001-meson-remove-extraneous-positional-argument.patch
 
-diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0001-build-Drop-incorrect-positional-arg.patch b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0001-build-Drop-incorrect-positional-arg.patch
+diff --git a/meta-gnome/recipes-gnome/gnome-screenshot/gnome-screenshot/0001-meson-remove-extraneous-positional-argument.patch b/meta-gnome/recipes-gnome/gnome-screenshot/gnome-screenshot/0001-meson-remove-extraneous-positional-argument.patch
 new file mode 100644
-index 000000000..edc32dee6
+index 000000000..c80fda63a
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0001-build-Drop-incorrect-positional-arg.patch
-@@ -0,0 +1,81 @@
-+From 6f797c21703ce9e996da17c49879e2a16dfbc256 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Florian=20M=C3=BCllner?= <fmuellner@gnome.org>
-+Date: Thu, 23 Dec 2021 17:18:16 +0100
-+Subject: [PATCH] build: Drop incorrect positional arg
++++ b/meta-gnome/recipes-gnome/gnome-screenshot/gnome-screenshot/0001-meson-remove-extraneous-positional-argument.patch
+@@ -0,0 +1,36 @@
++From c38c604b06a63f690d67318d4ef97ac556264876 Mon Sep 17 00:00:00 2001
++From: Jack Hill <jackhill@jackhill.us>
++Date: Thu, 18 Nov 2021 00:46:58 -0500
++Subject: [PATCH] meson: remove extraneous positional argument
 +
-+Unlike other targets that take a name, i18n.merge_file() does not.
++* data/meson.build (desktop_file)
++  (metainfo_file): Remove extraneous positional argument.
 +
-+Part-of: <https://gitlab.gnome.org/GNOME/gnome-shell/-/merge_requests/2078>
++Closes #186
++
 +Upstream-Status: Backport
 +Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 +---
-+ data/meson.build                                      | 2 +-
-+ src/calendar-server/meson.build                       | 2 +-
-+ subprojects/extensions-app/data/meson.build           | 2 +-
-+ subprojects/extensions-app/data/metainfo/meson.build  | 2 +-
-+ subprojects/extensions-tool/src/templates/meson.build | 2 +-
-+ 5 files changed, 5 insertions(+), 5 deletions(-)
++ data/meson.build | 2 --
++ 1 file changed, 2 deletions(-)
 +
 +diff --git a/data/meson.build b/data/meson.build
-+index f924fdf..76ae45c 100644
++index fd570b3..4e2e2e8 100644
 +--- a/data/meson.build
 ++++ b/data/meson.build
-+@@ -16,7 +16,7 @@ desktopconf.set('bindir', bindir)
-+ desktopconf.set('systemd_hidden', have_systemd ? 'true' : 'false')
++@@ -1,7 +1,6 @@
++ gnome = import('gnome')
 + 
-+ foreach desktop_file : desktop_files
-+-  i18n.merge_file('desktop',
-++  i18n.merge_file(
-+     input: configure_file(
-+       input: desktop_file + '.in.in',
-+       output: desktop_file + '.in',
-+diff --git a/src/calendar-server/meson.build b/src/calendar-server/meson.build
-+index 7363282..8b4ef41 100644
-+--- a/src/calendar-server/meson.build
-++++ b/src/calendar-server/meson.build
-+@@ -27,7 +27,7 @@ configure_file(
-+   install_dir: servicedir
-+ )
++ desktop_file = i18n.merge_file(
++-  'desktop',
++   type: 'desktop',
++   input: 'org.gnome.Screenshot.desktop.in',
++   output: 'org.gnome.Screenshot.desktop',
++@@ -23,7 +22,6 @@ if desktop_file_validate.found()
++ endif
 + 
-+-i18n.merge_file('evolution-calendar.desktop',
-++i18n.merge_file(
-+   input: 'evolution-calendar.desktop.in',
-+   output: 'evolution-calendar.desktop',
-+   po_dir: po_dir,
-+diff --git a/subprojects/extensions-app/data/meson.build b/subprojects/extensions-app/data/meson.build
-+index d7e7d40..4b601e8 100644
-+--- a/subprojects/extensions-app/data/meson.build
-++++ b/subprojects/extensions-app/data/meson.build
-+@@ -14,7 +14,7 @@ desktopconf.set('bindir', bindir)
-+ desktopconf.set('app_id', app_id)
-+ desktopconf.set('prgname', prgname)
-+ 
-+-i18n.merge_file('desktop',
-++i18n.merge_file(
-+   input: configure_file(
-+     input: base_id + '.desktop.in.in',
-+     output: desktop_file + '.in',
-+diff --git a/subprojects/extensions-app/data/metainfo/meson.build b/subprojects/extensions-app/data/metainfo/meson.build
-+index c4962c0..a19bfa8 100644
-+--- a/subprojects/extensions-app/data/metainfo/meson.build
-++++ b/subprojects/extensions-app/data/metainfo/meson.build
-+@@ -1,5 +1,5 @@
-+ metainfo = app_id + '.metainfo.xml'
-+-i18n.merge_file(metainfo,
-++i18n.merge_file(
-+   input: base_id + '.metainfo.xml.in',
-+   output: metainfo,
-+   po_dir: po_dir,
-+diff --git a/subprojects/extensions-tool/src/templates/meson.build b/subprojects/extensions-tool/src/templates/meson.build
-+index 670e2bf..d693bfa 100644
-+--- a/subprojects/extensions-tool/src/templates/meson.build
-++++ b/subprojects/extensions-tool/src/templates/meson.build
-+@@ -4,7 +4,7 @@ template_metas = [
-+ ]
-+ template_deps = []
-+ foreach template : template_metas
-+-  template_deps += i18n.merge_file(template,
-++  template_deps += i18n.merge_file(
-+     input: template + '.in',
-+     output: template,
-+     po_dir: po_dir,
-diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_41.2.bb b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_41.2.bb
-index 7a438e4c6..d1b19895a 100644
---- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_41.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_41.2.bb
-@@ -32,6 +32,7 @@ REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
++ metainfo_file = i18n.merge_file(
++-  'appdata',
++   input: 'org.gnome.Screenshot.metainfo.xml.in',
++   output: 'org.gnome.Screenshot.metainfo.xml',
++   po_dir: join_paths(meson.current_source_dir(), '../po'),
+diff --git a/meta-gnome/recipes-gnome/gnome-screenshot/gnome-screenshot_41.0.bb b/meta-gnome/recipes-gnome/gnome-screenshot/gnome-screenshot_41.0.bb
+index 834b443fa..18d73d872 100644
+--- a/meta-gnome/recipes-gnome/gnome-screenshot/gnome-screenshot_41.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-screenshot/gnome-screenshot_41.0.bb
+@@ -10,6 +10,7 @@ GNOMEBASEBUILDCLASS = "meson"
  
- SRC_URI[archive.sha256sum] = "384651eb051393dbabe006d1ad057bf29d5cd73ebb87bc779ff5e1c31e80a827"
- SRC_URI += "file://0001-Introduce-options-gjs_path-to-optionally-set-path-to.patch"
-+SRC_URI += "  file://0001-build-Drop-incorrect-positional-arg.patch"
+ inherit features_check gnomebase gettext upstream-version-is-even pkgconfig
  
- PACKAGECONFIG ??= "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
- PACKAGECONFIG[bluetooth] = ",,gnome-bluetooth"
++SRC_URI += " file://0001-meson-remove-extraneous-positional-argument.patch"
+ SRC_URI[archive.sha256sum] = "4adb7dec926428f74263d5796673cf142e4720b6e768f5468a8d0933f98c9597"
+ 
+ DEPENDS += "glib-2.0 glib-2.0-native gtk+3 libhandy xext"
 -- 
 2.20.1
 
