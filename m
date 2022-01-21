@@ -2,44 +2,46 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D034C433EF
-	for <webhook@archiver.kernel.org>; Fri, 21 Jan 2022 13:05:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FA83C433F5
+	for <webhook@archiver.kernel.org>; Fri, 21 Jan 2022 13:05:49 +0000 (UTC)
 Received: from voyager.superhosting.bg (voyager.superhosting.bg
  [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web09.11464.1642770344452064449
+ by mx.groups.io with SMTP id smtpd.web11.11638.1642770346733223440
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Jan 2022 05:05:45 -0800
+ Fri, 21 Jan 2022 05:05:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=mDfgIXfd;
+ dkim=pass header.i=@anavi.org header.s=default header.b=qJDmktC5;
  spf=permerror,
  err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
  for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
  (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
-	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
-	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
-	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=WoO5x2LYKuid2fm2EpMjtCOnSzxfjtEN4GNMECM6FM0=; b=mDfgIXfdhAAPYp6/ZSNhJJMHH6
-	RdpOVr4KEmlLPPfpz8DsifwPjXM2l77lydatesomKIkMdLDCCbO/9L7QV2HOu+RTZAT/R4Y0od41X
-	6l0hxhHqG1euENyTqVYflBZqNwwj4WO0H89km5WQSiZeriCyyF9NFzrnamgvkqaEzyPBZFvaPx2qf
-	RoYufgw0JPQJ/P6fRDGwMWihxf88wdpgb0TYtxE3gDsKiY+dG2iaKD0prbHlOMmglRrJuX6C7GIiT
-	OmpeBhNLzSo00X/wBmUivk9uuzlfxwTLSaL13TPHr17D8ubf2InPWSCFHie+nqnZgl4D1Qgthyoyq
-	YWh9NngA==;
+	bh=J2rdiyWP4ZaHDCI9xc149l14WVJktQQShvNS/k5Usz0=; b=qJDmktC5MODLKuo8rav+PbQNfq
+	i/DD9MxogQiFHxN+K0zGwyiaK7mcT0dE6rSW+jmzNfQ8gd+X2UoU1EqWPa5SY//fgiwtFWC+aR4/o
+	BPXNeDLoh8kd/H6QkhvOsaQUASQ0shVOU8hkOVHiHBWBCjOmOSVNgPtHs/la9+Bx8TzzAiT+dwZpW
+	qQlEFoLzvAk8bDGovON2r/T69ZuNxrM3vqDMNYUE9fcUpglA4ERn9DSWRjcPMLvIJGz7F6nJI2nK8
+	Zn5iXfu2QMJ0dO8MWnNFOZV/98C47V9WfB79IDxDCXj9V76mCrVro22XI+lgErMjzX1KTOBptkb6U
+	Xf5Y0W6Q==;
 Received: from lan.nucleusys.com ([92.247.61.126]:50940 helo=tone.k.g)
 	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.94.2)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1nAtbt-0003GN-3k; Fri, 21 Jan 2022 15:05:43 +0200
+	id 1nAtbv-0003GN-P4; Fri, 21 Jan 2022 15:05:45 +0200
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-pillow: Upgrade 8.3.2 -> 9.0.0
-Date: Fri, 21 Jan 2022 15:05:29 +0200
-Message-Id: <20220121130533.3973579-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] imageio: Upgrade 2.13.5 -> 2.14.0
+Date: Fri, 21 Jan 2022 15:05:30 +0200
+Message-Id: <20220121130533.3973579-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20220121130533.3973579-1-leon.anavi@konsulko.com>
+References: <20220121130533.3973579-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-OutGoing-Spam-Status: No, score=-0.5
@@ -58,91 +60,39 @@ X-Source-Dir:
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Jan 2022 13:05:46 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 21 Jan 2022 13:05:49 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94966
+ https://lists.openembedded.org/g/openembedded-devel/message/94967
 
-Upgrade to release 9.0.0:
+Upgrade to release 2.14.0:
 
-- Restrict builtins for ImageMath.eval()
-- Ensure JpegImagePlugin stops at the end of a truncated file
-- Fixed ImagePath.Path array handling
-- Remove consecutive duplicate tiles that only differ by their
-  offset
-- Removed redundant part of condition
-- Explicitly enable strip chopping for large uncompressed TIFFs
-- Use the Windows method to get TCL functions on Cygwin
-- Changed error type to allow for incremental WebP parsing
-- Improved I;16 operations on big endian
-- Ensure that BMP pixel data offset does not ignore palette
-- Limit quantized palette to number of colors
-- Use latin1 encoding to decode bytes
-- Fixed palette index for zeroed color in FASTOCTREE quantize
-- When saving RGBA to GIF, make use of first transparent palette
-  entry
-- Pass SAMPLEFORMAT to libtiff
-- Added rounding when converting P and PA
-- Improved putdata() documentation and data handling
-- Exclude carriage return in PDF regex to help prevent ReDoS
-- Image.NONE is only used for resampling and dithers
-- Fixed freeing pointer in ImageDraw.Outline.transform
-- Add Tidelift alignment action and badge
-- Replaced further direct invocations of setup.py
-- Added ImageShow support for xdg-open
-- Switched from deprecated "setup.py install" to "pip install ."
-- Support 16-bit grayscale ImageQt conversion
-- Fixed raising OSError in _safe_read when size is greater than
-  SAFEBLOCK
-- Convert subsequent GIF frames to RGB or RGBA
-- WebP: Fix memory leak during decoding on failure
-- Do not prematurely return in ImageFile when saving to stdout
-- Added support for top right and bottom right TGA orientations
-- Corrected ICNS file length in header
-- Block tile TIFF tags when saving
-- Added line width argument to ImageDraw polygon
-- Do not redeclare class each time when converting to NumPy
-- Only prevent repeated polygon pixels when drawing with
-  transparency
-- Fix pushes_fd method signature
-- Add support for pickling TrueType fonts
-- Only prefer command line tools SDK on macOS over default
-  MacOSX SDK
-- Fix compilation on 64-bit Termux
-- Replace 'setup.py sdist' with '-m build --sdist'
-- Use declarative package configuration
-- Use title for display in ImageShow
-- Fix for PyQt6
-- Rename master to main
+- Handle pillow9 GIFs
+- Allow mode=None when writing with pillow
+- Add repo to PYTHONPATH in should_release?
+- Reorganize commit tags
+- Reduce release frequency to weekly
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-pillow_8.3.2.bb => python3-pillow_9.0.0.bb}    | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pillow_8.3.2.bb => python3-pillow_9.0.0.bb} (78%)
+ .../{python3-imageio_2.13.5.bb => python3-imageio_2.14.0.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-imageio_2.13.5.bb => python3-imageio_2.14.0.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pillow_8.3.2.bb b/meta-python/recipes-devtools/python/python3-pillow_9.0.0.bb
-similarity index 78%
-rename from meta-python/recipes-devtools/python/python3-pillow_8.3.2.bb
-rename to meta-python/recipes-devtools/python/python3-pillow_9.0.0.bb
-index bc6c801c3..de3c92c3d 100644
---- a/meta-python/recipes-devtools/python/python3-pillow_8.3.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pillow_9.0.0.bb
-@@ -3,13 +3,13 @@ Clark and Contributors. PIL is the Python Imaging Library by Fredrik Lundh and \
- Contributors."
- HOMEPAGE = "https://pillow.readthedocs.io"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=0337b116233da4616ae9fdb130bf6f1a"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=ad081a0aede51e89f8da13333a8fb849"
+diff --git a/meta-python/recipes-devtools/python/python3-imageio_2.13.5.bb b/meta-python/recipes-devtools/python/python3-imageio_2.14.0.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-imageio_2.13.5.bb
+rename to meta-python/recipes-devtools/python/python3-imageio_2.14.0.bb
+index 72d10f70f..f0ac37026 100644
+--- a/meta-python/recipes-devtools/python/python3-imageio_2.13.5.bb
++++ b/meta-python/recipes-devtools/python/python3-imageio_2.14.0.bb
+@@ -5,7 +5,7 @@ SECTION = "devel/python"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=7b9bbbb543b6af3e6b53f9b7fb68f71d"
  
--SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=8.3.x;protocol=https \
-+SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=9.0.x;protocol=https \
-            file://0001-support-cross-compiling.patch \
-            file://0001-explicitly-set-compile-options.patch \
- "
--SRCREV ?= "8013f130a5077b238a4346b73e149432b180a8ea"
-+SRCREV ?= "82541b6dec8452cb612067fcebba1c5a1a2bfdc8"
+-SRC_URI[sha256sum] = "c7ec2be58e401b6eaa838f8eaf8368ed54b2de4a1b001fe6551644f1a30a843d"
++SRC_URI[sha256sum] = "1a612b46c24805115701ed7c4e1f2d7feb53bb615d52bfef9713a6836e997bb1"
  
- inherit setuptools3
+ inherit pypi setuptools3
  
 -- 
 2.30.2
