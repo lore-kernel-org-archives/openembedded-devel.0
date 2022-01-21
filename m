@@ -2,61 +2,63 @@ Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88EF3C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 89B25C4332F
 	for <webhook@archiver.kernel.org>; Fri, 21 Jan 2022 21:39:12 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
- [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.web09.591.1642801151273195400
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
+ [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.web10.556.1642801149704362526
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Jan 2022 13:39:11 -0800
+ Fri, 21 Jan 2022 13:39:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=oDbzjy9I;
- spf=pass (domain: gmail.com, ip: 209.85.221.43,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=PwXiLRo5;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47,
  mailfrom: alex.kanavin@gmail.com)
-Received: by mail-wr1-f43.google.com with SMTP id az25so1983160wrb.6
+Received: by mail-wm1-f47.google.com with SMTP id
+ l35-20020a05600c1d2300b0034d477271c1so23548055wms.3
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Jan 2022 13:39:11 -0800 (PST)
+ Fri, 21 Jan 2022 13:39:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=zJpJOG0G6z8q+HcWGWotZZrcs7iJQ0Z2SHwgVSQuNSs=;
-        b=oDbzjy9Iw/n2+TURh35j/Z5pa14mvO+/ELMvCLs0kY3nt5BqfxsBm7BR5isWoCRPOL
-         LK/SK5zqdCts8jUGRDgxjqdbOOM6cwAqTUkpdR7M5kTNLnUhLQAFov0wlwyi0J9ZK6Vg
-         lWoLqwaqARxP3p8I4R88XYnkiFu6mE6btnzryEGZlyQTGqE7Ygma6inQvbCHbI0gzgpH
-         v9o595Ht8+KXX3CCULld8ytUhXpO9DzXpD9R/lT0jCXxLHFgeazyJsWYjxin4i3u6NFx
-         avSNfn6Q3lEORCKIjhHsCVAswJ0v5HflUq8qkkSTddHRvy3visYMKCBuDv3YXIv+wc/a
-         Ij/g==
+        bh=k5CLAFITjj66AdlAuR6pnP4T7Cb4labPZht4WvtazZg=;
+        b=PwXiLRo5aN4xaVQoEbmWXUG/mBxVckR/6D6CFgoMmeyLUjXuc2KP82aCXYMlU7jgWc
+         Sbi+wczL3KNt5v2cSpHe+dM0A00q+k+pl6dMSFFuVo2S0XXsdfHQhS+T77PbT39yM5XJ
+         Py0PQb9OiNiIwrgMVzp4eyqxG7tvzb9XZjRGZbITdLJL+NuWB34rE9TnQpD1SDPUoNfs
+         woc7ONZah5+XyggRs7GYg9JA5L+HnACW5BPGgOm6Kq4ryBof/LTNqggmbsH3WP27SV+X
+         ZAdgtm9u43AJhSLAxdNeK9KJN6agwqi9QVaBv/UoJtfMierwa/FDGlWdiRpfFpcBRmPD
+         7UOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=zJpJOG0G6z8q+HcWGWotZZrcs7iJQ0Z2SHwgVSQuNSs=;
-        b=AMaeFz5rIzPPS6aalps9Vxff4qMvafjl3rrsImGZQsrikZ2GSVBK7f+ySWxisq/7Yt
-         /Gysi6FAi4+sYhMO3Wfwb4izpTnOkFcEt9UklF69Hj/adz+IJZ38LXmeH1FsvNorGsyM
-         juH1BUi+8Yv2rf0cUUlwzeqLLQXTq1N3336TE4WwkAdXohsHR35qvas5kdSSUvL5HhPp
-         c4zW5lHD+ZfktgU/JGNcZfuZKzW5qEsF9xY2e1ipw+56tO9qGtMHINcHFcui6Gq+hWvb
-         SMmVGqWSwkcJEtJqvzYPW+DdF35TDNinarufDqpL+FCK3irdqIwThaEkHlhx/txupRhY
-         itIg==
-X-Gm-Message-State: AOAM533r2I1vhAqr7CCvwjmPrp4YQAg89NztZy0zHb7He4bfYfIJ1ZBS
-	LyBoXjx6+eHBI8qm47UpPdVDOfYHCXw=
+        bh=k5CLAFITjj66AdlAuR6pnP4T7Cb4labPZht4WvtazZg=;
+        b=4xO6reGWjWiik128MlijloCkkKhQbIFS6+V1uNAVlDoyd3IiAPQjf9XOm6FdjyoAHK
+         NY81am/jzkCA7Ke9LOhpqgs7GgC+cJigr0evX7bLgCOYYlV8qAPTp4ofK25xqYzfOna6
+         rM4+jCB6vXvGOGy70Rw9AsmX9vnQYKa+Dr/gxuyYz1obmMqsOX5o9okIES9FZV9/AlXE
+         GR3DDAoh91Abrkz0V2pj4A3kUm7yrs/ojhCHXAh/B65mvVK+JDMRjpMZI+aZyBwtr0Bn
+         wV7yIvCjiBjMHeJpT3015ug3S9g0Rzq9vpA0WqaCSTEuADcidwydyyGXGwgtamOd521B
+         7q1w==
+X-Gm-Message-State: AOAM53152/GV1SRxZTjvTGAii/YmAsDJJmKPHs+4W6AvFtfo+N20s16i
+	eMtgTwh/4IUInrUbEH19MTMUBS8ue40=
 X-Google-Smtp-Source: 
- ABdhPJwjAtuh2YMwxshIW8QpWmYEsvwhQKiqj77wmzWMBnVKqwYnfAbJa3+TrhNhtlftJjaEqV7kLA==
-X-Received: by 2002:adf:f68e:: with SMTP id v14mr5672158wrp.585.1642801149876;
-        Fri, 21 Jan 2022 13:39:09 -0800 (PST)
+ ABdhPJxThqvee7eQjXgisn48oZb818cZ7Z4bum0EyJOPKjDRULqrQSBIYXm7q0JqlMGAWekziN49/w==
+X-Received: by 2002:a05:600c:2f17:: with SMTP id
+ r23mr84338wmn.6.1642801148265;
+        Fri, 21 Jan 2022 13:39:08 -0800 (PST)
 Received: from nereus.lab.linutronix.de. (b2b-109-90-143-203.unitymedia.biz.
  [109.90.143.203])
         by smtp.gmail.com with ESMTPSA id
- l24sm5870274wme.17.2022.01.21.13.39.09
+ l24sm5870274wme.17.2022.01.21.13.39.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Jan 2022 13:39:09 -0800 (PST)
+        Fri, 21 Jan 2022 13:39:07 -0800 (PST)
 From: Alexander Kanavin <alex.kanavin@gmail.com>
 X-Google-Original-From: Alexander Kanavin <alex@linutronix.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alexander Kanavin <alex@linutronix.de>
-Subject: [PATCH 05/19] gnome-font-viewer: backport a meson 0.61 patch
-Date: Fri, 21 Jan 2022 22:38:44 +0100
-Message-Id: <20220121213858.762625-5-alex@linutronix.de>
+Subject: [PATCH 03/19] gnome-terminal: backport a meson 0.61 patch
+Date: Fri, 21 Jan 2022 22:38:42 +0100
+Message-Id: <20220121213858.762625-3-alex@linutronix.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20220121213858.762625-1-alex@linutronix.de>
 References: <20220121213858.762625-1-alex@linutronix.de>
@@ -67,73 +69,79 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 21 Jan 2022 21:39:12 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94983
+ https://lists.openembedded.org/g/openembedded-devel/message/94981
 
 Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ---
- ...01-Fix-meson-build-with-meson-0.60.0.patch | 40 +++++++++++++++++++
- .../gnome-font-viewer_41.0.bb                 |  1 +
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer/0001-Fix-meson-build-with-meson-0.60.0.patch
+ .../0001-build-Fix-for-newer-meson.patch      | 46 +++++++++++++++++++
+ .../gnome-terminal/gnome-terminal_3.42.2.bb   |  1 +
+ 2 files changed, 47 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal/0001-build-Fix-for-newer-meson.patch
 
-diff --git a/meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer/0001-Fix-meson-build-with-meson-0.60.0.patch b/meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer/0001-Fix-meson-build-with-meson-0.60.0.patch
+diff --git a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal/0001-build-Fix-for-newer-meson.patch b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal/0001-build-Fix-for-newer-meson.patch
 new file mode 100644
-index 000000000..f32e120c1
+index 000000000..12520b177
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer/0001-Fix-meson-build-with-meson-0.60.0.patch
-@@ -0,0 +1,40 @@
-+From 9c5ce6836498fdb057a7f865f516ce28609f542a Mon Sep 17 00:00:00 2001
-+From: r-value <i@rvalue.moe>
-+Date: Thu, 30 Dec 2021 17:14:47 +0800
-+Subject: [PATCH] Fix meson build with meson 0.60.0+
++++ b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal/0001-build-Fix-for-newer-meson.patch
+@@ -0,0 +1,46 @@
++From f88447850e162c8d514be367db574c6fa2fec2a5 Mon Sep 17 00:00:00 2001
++From: Christian Persch <chpe@src.gnome.org>
++Date: Fri, 14 Jan 2022 11:33:32 +0100
++Subject: [PATCH] build: Fix for newer meson
 +
-+`i18n.merge_file` has been ignoring positional arguments for a time
-+and explicitly rejects with error since meson 0.60.0
-+
-+Upstrean-Status: Backport
++Upstream-Status: Backport
 +Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 +---
-+ data/meson.build | 2 +-
-+ src/meson.build  | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
++ data/meson.build | 5 +----
++ 1 file changed, 1 insertion(+), 4 deletions(-)
 +
 +diff --git a/data/meson.build b/data/meson.build
-+index bfc9caa..8e42134 100644
++index 79d97e5..e0bcbb9 100644
 +--- a/data/meson.build
 ++++ b/data/meson.build
-+@@ -1,6 +1,6 @@
-+ appdatadir = join_paths(datadir, 'metainfo')
-+ appdata_file = 'org.gnome.font-viewer.appdata.xml'
-+-merged_appdata = i18n.merge_file(appdata_file,
-++merged_appdata = i18n.merge_file(
-+   input: appdata_file + '.in',
-+   output: appdata_file,
-+   po_dir: '../po',
-+diff --git a/src/meson.build b/src/meson.build
-+index f863d45..826c59b 100644
-+--- a/src/meson.build
-++++ b/src/meson.build
-+@@ -39,7 +39,7 @@ desktop_file = 'org.gnome.font-viewer.desktop'
-+ desktop_conf = configuration_data()
-+ desktop_conf.set('VERSION', meson.project_version())
-+ desktop_conf.set('APPLICATION_ID', application_id)
-+-i18n.merge_file(desktop_file,
-++i18n.merge_file(
-+   input: configure_file(input: desktop_file + '.in.in',
-+     output: desktop_file + '.in',
-+     configuration: desktop_conf),
-diff --git a/meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer_41.0.bb b/meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer_41.0.bb
-index 7afdefda1..9528b6641 100644
---- a/meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer_41.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer_41.0.bb
-@@ -16,6 +16,7 @@ inherit gnomebase gtk-icon-cache gettext features_check mime-xdg
++@@ -18,7 +18,6 @@
++ metainfodir = gt_datadir / 'metainfo'
++ 
++ i18n.merge_file(
++-  gt_dns_name + '.metainfo.xml',
++   input: gt_dns_name + '.metainfo.xml.in',
++   output: '@BASENAME@',
++   po_dir: po_dir,
++@@ -27,7 +26,6 @@ i18n.merge_file(
++ )
++ 
++ i18n.merge_file(
++-  gt_dns_name + '.Nautilus.metainfo.xml',
++   input: gt_dns_name + '.Nautilus.metainfo.xml.in',
++   output: '@BASENAME@',
++   po_dir: po_dir,
++@@ -40,7 +38,6 @@ i18n.merge_file(
++ desktopdatadir = gt_datadir / 'applications'
++ 
++ i18n.merge_file(
++-  gt_dns_name + '.desktop',
++   input: gt_dns_name + '.desktop.in',
++   output: '@BASENAME@',
++   type: 'desktop',
++@@ -57,4 +54,4 @@ meson.add_install_script(
++ 
++ # Subdirs
++ 
++-subdir('icons')
++\ No newline at end of file
+++subdir('icons')
+diff --git a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.42.2.bb b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.42.2.bb
+index b000fa80f..2b3f3a616 100644
+--- a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.42.2.bb
++++ b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.42.2.bb
+@@ -24,6 +24,7 @@ DEPENDS = " \
  
- REQUIRED_DISTRO_FEATURES = "x11"
+ SRC_URI[archive.sha256sum] = "8a9c8e5ef7a3a73b246a947e1190bb08ec98935af860cf0b3aa2fbf4606817a0"
+ SRC_URI += "file://0001-Add-W_EXITCODE-macro-for-non-glibc-systems.patch"
++SRC_URI += "  file://0001-build-Fix-for-newer-meson.patch"
  
-+SRC_URI += " file://0001-Fix-meson-build-with-meson-0.60.0.patch"
- SRC_URI[archive.sha256sum] = "5dd410331be070e4e034397f2754980e073851d50a2119f2fbf96adc6fe2e876"
- 
- FILES:${PN} += " \
+ EXTRA_OEMESON += " \
+     -Dsearch_provider=false \
 -- 
 2.20.1
 
