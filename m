@@ -1,180 +1,283 @@
-Return-Path: <yi.zhao@windriver.com>
+Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 204DDC433F5
-	for <webhook@archiver.kernel.org>; Sat, 22 Jan 2022 14:12:40 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com
- [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web09.8542.1642860758842895740
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 35618C433EF
+	for <webhook@archiver.kernel.org>; Sat, 22 Jan 2022 19:54:51 +0000 (UTC)
+Received: from mail-ua1-f44.google.com (mail-ua1-f44.google.com
+ [209.85.222.44])
+ by mx.groups.io with SMTP id smtpd.web12.846.1642881290470242565
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 22 Jan 2022 06:12:39 -0800
+ Sat, 22 Jan 2022 11:54:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=ajBTU0bV;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
- invalid domain name (domain: windriver.com, ip: 205.220.166.238,
- mailfrom: prvs=8021fa1707=yi.zhao@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id
- 20MDxHBi001309
-	for <openembedded-devel@lists.openembedded.org>;
- Sat, 22 Jan 2022 06:12:38 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
- h=from : to :
- subject : date : message-id : content-transfer-encoding : content-type :
- mime-version; s=PPS06212021;
- bh=jHyKc0xfaU4X6g6cf617TBjG7Kmx6CDmTNAXDdc979I=;
- b=ajBTU0bV3gU3IDyfx4RlvPXIXA67RhrrrvyrlP+YqXTS4CCwnEtrOGSdqSPZHb6Sqm00
- heNxhJCrI8VrVkWZ5ekzjlk7glnMZytyy7ORoGSdc2EMYWb7SrSc0BKEg7/lXMn5kO5W
- vKN6RYngWM0PPpu6FWeX3F1Y7/ak7Lna5Eu4C73q6wBE1e/5zpKCapIgo9hr82SywC1z
- zIvL+A1wbNNxP2vgGDu0S6mHmOgOyLELdGlfd0XJ3VuO5bJq0PFP/tEGmUlkBkU2WqEP
- 8PxxlPmNr/UxCzNBDkB4DexB+9TlC1Uoe9/ufz/BFqZz1sLpyJ+0TliR96yqA7H47Hia Xw==
-Received: from nam12-dm6-obe.outbound.protection.outlook.com
- (mail-dm6nam12lp2172.outbound.protection.outlook.com [104.47.59.172])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3dre390499-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
- Sat, 22 Jan 2022 06:12:38 -0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=EmezAW9QerA+AVJ3C7jtntdwvvpYhJNRAjUZvxr9wU8YG02lywyYtiuud1ZAfeqwlnYB50qDyhU3OOFcOcNi0O/ZUJlYFwy7j8+JeF5UvjqUj/6zKB54vkunQpbjz8DULHNX9IbnmY2YwFJglRK+dvYLgm3TpO1WxvI8pmr6WXscU6EJ83hwrcNYpq+ktcYlCPmRVLza9IbVvDB85XCb62JINHi+c60J+yR88TsSrvTzfDq58uIIhSOjQsk4E5wMNgKpciXrAKZAg3dLW/p2U/rue07s+Og+4C6LlAbg7EMEDZi9n2BFEWi13QYV+cbN/CTBO0e7INwHYOZ41NzR8A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jHyKc0xfaU4X6g6cf617TBjG7Kmx6CDmTNAXDdc979I=;
- b=nHvTdTDNqtD5KMKVEi4i2qDdCRrIUs8z5Ph3sSV4lCEgjYg9WEAi3ZwHfQTz3oibq/rtyPz0e/+BlZzu51DzutrZvRDngrB4a9DC2kHhw80MS1QttRp+CqEMGx+CX4LPniuIm9KTv2Vr5GnNE5zziqH3MQLg8VeIT++qUPjqSWlV+IcZLdutd5AcejTyVEsi2d4t2dSEqw/y8A02FrBQipqZmZXvUV8rNvMWl65dflv5ujOnOAVLgvaHA5djJlT2k5DawAp+2e8BnToZxhHyRZYbjPz5fMpGmgKudQNiG4C4W+oLyM5yTJQ4CXnh15z+9H59FYCeIi3a0F4DC9h5SQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
- by DM8PR11MB5671.namprd11.prod.outlook.com (2603:10b6:8:3c::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4909.8; Sat, 22 Jan
- 2022 14:12:35 +0000
-Received: from CO1PR11MB4867.namprd11.prod.outlook.com
- ([fe80::1446:8499:7fbb:a706]) by CO1PR11MB4867.namprd11.prod.outlook.com
- ([fe80::1446:8499:7fbb:a706%7]) with mapi id 15.20.4909.014; Sat, 22 Jan 2022
- 14:12:35 +0000
-From: Yi Zhao <yi.zhao@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-webserver][PATCH] phpmyadmin: upgrade 5.1.1 -> 5.1.2
-Date: Sat, 22 Jan 2022 22:12:26 +0800
-Message-Id: <20220122141226.421624-1-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.25.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR13CA0209.namprd13.prod.outlook.com
- (2603:10b6:a03:2c3::34) To CO1PR11MB4867.namprd11.prod.outlook.com
- (2603:10b6:303:9a::13)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=pqX1R06e;
+ spf=pass (domain: gmail.com, ip: 209.85.222.44,
+ mailfrom: alex.kanavin@gmail.com)
+Received: by mail-ua1-f44.google.com with SMTP id 2so23389164uax.10
+        for <openembedded-devel@lists.openembedded.org>;
+ Sat, 22 Jan 2022 11:54:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=IouTIe6EjYdSULE6xBU0o+SBNeUWVt/5loudagNQYr8=;
+        b=pqX1R06eEM6C1H4idtIOReFSJ61mbA8Gc4fwsHqyvtwJuT9aSCE7LDb0rQ9O0fOpJq
+         2tRq0XY3SDTMO/qlE285vZN6G2nBjbTPZpQVkaqI6xOmIANB61/f8tE/JHE1w92bwcmg
+         tvaD6VI5o/+3dUH/KXHENXU136zt3n6MNKF8DkA5kSe3LsTAYzmnq/m6D4NJYgryeWnm
+         IEnX4MRSVF1FBxgtah4Vpprfccm3zFpyEi5dxGy+qrNWuvc8aASdx5j46vGPFLn+K0hf
+         ex1stEcatnBz6dxAe82wXLRi5m6RBLs2XwPaM7tFFwNYusWfxbPHQE4nU+ujlud+NQO4
+         O8jQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=IouTIe6EjYdSULE6xBU0o+SBNeUWVt/5loudagNQYr8=;
+        b=n45Du892zG9jLOEXU3nT0QcgEgre4nAXNu7aww1xB1Eh4WTrqKoccHchx08vYX0P82
+         dflQ7mevHIsySTh/0bVEva/WZdnstPnPt+wpInahyXbZsuQShFxVF6zZyYazATzY0OfV
+         uvHm684zSi3C03J2v5LiZeA6ogYRQDa6vyq+EfcUlDm8pzhc/258iZp7BwKZbM6rH0bf
+         OpSZuU6dQFHNZoA6UAwZjX1fm8EuxXbDPpIb5Xu1YvBWz3osF+vh4UR66yi9YQNAZKwB
+         L2gwb7l2baOvhhUIl8VKVCZeGA1zMBgLktL7rnUhpcBhQFqNsteb7a+y2WPfGn829QGf
+         PGEQ==
+X-Gm-Message-State: AOAM5304FlY0FhfdQVKu/Q9LLCh8TMhyKn2GuUvQunMFRMKJsKKL9G5X
+	X8Ko2UH37EgB3rpqNRgLw8C8iKOcycX9LEeS7XI=
+X-Google-Smtp-Source: 
+ ABdhPJyZP5gBYoOflhDU8uX2quIdfQ+/mcsC2UeTKElzAmDXNPbGHeOtXqSdqLRzZnZkLk74ebpTvYpxay2lgC4Ut3I=
+X-Received: by 2002:a67:d903:: with SMTP id t3mr3371793vsj.42.1642881289472;
+ Sat, 22 Jan 2022 11:54:49 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: b44dea87-9a15-4d24-5a94-08d9ddb13d1f
-X-MS-TrafficTypeDiagnostic: DM8PR11MB5671:EE_
-X-Microsoft-Antispam-PRVS: 
-	<DM8PR11MB56711BE4405F87A398C25010F95C9@DM8PR11MB5671.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:497;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	IRgvxBKlT67kow+kdihwhVKFSsfH1aJOpTUt4q/0y4Mu0CmcF2RXd0tKceNFRN58csdCSuWe9YIx1zuk/CTvA4UF2pIBYSsOU4hEjVvog1TiLdOosO9mFDgUHC3qsTNmHVZEYxdL9Rvjc5ZStPf1mJq439Qpaa0GCLFWWsk3RNZSd4DGeZLA9MsKosnPGYBq6VOxYIS+RcxfdmBxd8g695e415fF9XIVnsusJ/elrlmPZXFjq090r5ieLZhoEMZyw80nYQNIkPjToTMxETnthjJdmCpT2xrJtiiTQkPibaq3jLNuXPAmerKTRc6J6Nle0mzseRma5miJczF96lGmw+0/8hlhhhIPSITu+tV0B60bOzeIKoy6+EhhEc8XBNJrfYu9mr9qG0fYr0KDRcNwwUVMY9uJwLqrYaRTFTGB20QrksfDKEulhbNPpYdK1vxZoG2lPdkOKD9Lqo6lewVqIoiXZ76GfbpOGzPzncSmHsz56Ez84w+zEJhZhKk1nyO8KnoMIrS/PLAuG8eKUd1eyNY3xOQpZXmaIKkd1A4NRHQOM9bk92YTm92fb+M57ZHnYhb5oRSfJmT6/ZZHhaZY1lzv8NgzcsRprlieWoJruHlIS2cuvDR0Pll/nYc1H5cn/j4vkFZrRkf0ZqFbroBrZn0JAF9aF6u85ZKy7+ptKEXwKJ8ymHFD1dgRTJzg/njY5G6FVApXV8cHEsOh7PUUK1vtcRPki7GlgQ0aPT91rjLKu/hbq1k5wLJnM7CE+ZBM/2LaCE3tLO6SfY0V2p3WZ3hFP1iQcfYTAxgGZVRA3uI=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(36756003)(2906002)(1076003)(2616005)(8936002)(66476007)(66556008)(86362001)(66946007)(6486002)(508600001)(6506007)(26005)(316002)(5660300002)(38100700002)(52116002)(38350700002)(83380400001)(6916009)(186003)(6512007)(6666004)(44832011)(8676002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?faatQY5sKNYUV41n3CFAmua3MHc6Vzg28oH5BZA6NIqnNUbS6kB6ux3eegbJ?=
- =?us-ascii?Q?xMPUW8jfydtwEViBU3rxng51Se8bbP6yDGfgRXr7Gn6q2kZ2iJQ2TMY9Rh+g?=
- =?us-ascii?Q?8iTocpQKr71HLNW9NGAlmMBCVAs5XuGcjv+x7Egj1Ec2NFpuP+WmJW7LSWF9?=
- =?us-ascii?Q?s+sxB3Y9NfmL9HeMJN7xbDXyDyySvJo7PNTIvd6svnGodbxGKE9TupjmztzL?=
- =?us-ascii?Q?vFYmx6MD7sP/8tbA30fxP+UeMeCpLRbg5VLZatp+eY5zo9Edn7AuGAnFRKrp?=
- =?us-ascii?Q?TDMNWZVgtxG9vjUJ7Dcc6U0BzQDTrvC4GFsdVOQFV0X9Ke4QFj4R4SJbR/3e?=
- =?us-ascii?Q?qqXh5XkFNLaxJ9fZTF5xRGXsRvvzXjLCaeZCg3As/ysfIIXRZblNI0631JPu?=
- =?us-ascii?Q?O+4myyI5YDuY1UJvxbCOg8XLDJf537sfVSiVw6OBC/wJZAGLW4Vh+N+U84A9?=
- =?us-ascii?Q?vHkpyWWo1aTfshPcAs4DgEYuSDeBU+34a8E8od8DXV735+p88kor03G1dnjH?=
- =?us-ascii?Q?t6g4n4ERZQiKT+Wdk3nMVrij20Q1WWRgTKnU1GXOicUB+A7NY83k/gRv/JtD?=
- =?us-ascii?Q?+PYxVZvd/t4NmvbDyka6mg7I4l4QB15MrQ7jwsyS4FoCxiTy973/ugb0BKk0?=
- =?us-ascii?Q?FNCVl3sN/9AUXrkqqkzu5Dn8hxKJnmGE/e6NMLe1QudcLHnfbzSvQ+2qBDqB?=
- =?us-ascii?Q?QasrCE3ZXH9iAL/eVMpjEcGIWrytoN+6MZHqtHsgdYVG0wGe9nedBRTaxbDn?=
- =?us-ascii?Q?BRJrcoC6ZHaio56C8I5JVXrDngP7jYjdHCrvXTfn/PhgBWt7C3pycXryaFVY?=
- =?us-ascii?Q?5LqMpaOpOzQdOVIej2v84kHbB8sHfMH/YOwWLacXM3uB0jYspAsmWEFyl81Q?=
- =?us-ascii?Q?Kr8iZKNmcROJiCTz9F+GB6IxRJR9Dwukl3aI5Ouw0HuzwbGNtkdV4x3Bi/Y1?=
- =?us-ascii?Q?ETjYgWHHBOjY2nr7ACCOlOn4smoo8WXKOqCZEeLuQQ01z31CXwmPLpQ9QLa2?=
- =?us-ascii?Q?Nlfe0lRWH9AefYoZT+6NypZWsl6tcIsMti5aFqbvYvCy6grsLwYTKShV44RG?=
- =?us-ascii?Q?f7Ol48miOfzF6u8ElqI9+nGMslv2ZTFsPcdQ+uhLpXlIfmoN1bwyzoCh4nH1?=
- =?us-ascii?Q?sjTRot4InPjFiBgd25MX4WjgjMnl+RmoqhRPPOrA8DR53FjmLqxdbB85fs+V?=
- =?us-ascii?Q?oqPF+Igsj0zSmYsoWuVBqTIfJg/8iqnxch6NeqosdlI9IfmhLAZccrVJdYZ6?=
- =?us-ascii?Q?0UWTQyzzQ4hxypm7BO10rrXI9qR8tQzRAeez+YhrG30eGejfpZISFw6xD1LG?=
- =?us-ascii?Q?JfU0qvvzPLHJVXmakxtEbuSoG0y7nbCZ/GdTq6pmxb5kk6P3pgPF/wB4GNsf?=
- =?us-ascii?Q?sVfDnBTST6eVUmp03sAFgnTWKc30dmI0f9Jytp4AxYPX/izoEbWB2ZKSNPnH?=
- =?us-ascii?Q?HVBHHAPSdWStSzK6dYQnCpJeO0b7+XeTG/j580TI2W9rPYYbzUY0jtsfOHOO?=
- =?us-ascii?Q?TvPJPwKJUpBi16Y3uccCIN1BctAGkwcSe+NpWw7fSZ/OAPYzrPgJDYUrcDeZ?=
- =?us-ascii?Q?wEhmIXUJteC/A33XH05jb2HfxEHA+L3vgvz9+HEWEFRGNwkV24zvJqJD4Y7F?=
- =?us-ascii?Q?jQZQC9/fKjB0YTjJksoKcgc=3D?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- b44dea87-9a15-4d24-5a94-08d9ddb13d1f
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2022 14:12:35.6863
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 
- FvvqMBh8kwDPw0MzAi1r0KJ/3jFoHNMQRzAtdnYqZe93P/20+r9SeLiV+0w0EKQESBP3htdWRDLTLELD31jrAQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM8PR11MB5671
-X-Proofpoint-GUID: BleV-oFyI0wzAnfbvuAKyMNxNIg5qh3v
-X-Proofpoint-ORIG-GUID: BleV-oFyI0wzAnfbvuAKyMNxNIg5qh3v
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.816,Hydra:6.0.425,FMLib:17.11.62.513
- definitions=2022-01-22_05,2022-01-21_01,2021-12-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0
- spamscore=0 malwarescore=0 suspectscore=0 adultscore=0 mlxlogscore=894
- bulkscore=0 phishscore=0 priorityscore=1501 impostorscore=0 clxscore=1015
- mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2201110000 definitions=main-2201220100
+References: <20220120203602.3833757-1-f_l_k@t-online.de>
+ <33c62297-f753-3c63-d409-d6ed774ace94@t-online.de>
+In-Reply-To: <33c62297-f753-3c63-d409-d6ed774ace94@t-online.de>
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+Date: Sat, 22 Jan 2022 20:54:38 +0100
+Message-ID: 
+ <CANNYZj9V_6q9S-vovMMw7i3GdJjog==9EXDCJ_+SMnknCNxHuQ@mail.gmail.com>
+Subject: Re: [oe] [meta-gnome][PATCHv2] folks: initial add recipe
+To: Markus Volk <f_l_k@t-online.de>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000aacbfc05d6311b91"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 22 Jan 2022 14:12:40 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 22 Jan 2022 19:54:51 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/94999
+ https://lists.openembedded.org/g/openembedded-devel/message/95005
 
-License-Update: Change JS Foundation to OpenJS Foundation
+--000000000000aacbfc05d6311b91
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- .../phpmyadmin/{phpmyadmin_5.1.1.bb => phpmyadmin_5.1.2.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_5.1.1.bb => phpmyadmin_5.1.2.bb} (89%)
+Gobject introspection is inherently hostile to cross compilation
+environments as it requires running a cross-compiled binary with the qemu
+emulator. That does not always work, and if it does not, your build will
+break. So there must be a way to turn it off when it happens.
 
-diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.1.1.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.1.2.bb
-similarity index 89%
-rename from meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.1.1.bb
-rename to meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.1.2.bb
-index b64824c47..7d814abd5 100644
---- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.1.1.bb
-+++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.1.2.bb
-@@ -4,15 +4,15 @@ HOMEPAGE = "http://www.phpmyadmin.net"
- LICENSE = "GPLv2 & LGPLv3 & MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://vendor/tecnickcom/tcpdf/LICENSE.TXT;md5=dd6470bbcd3436ca317f82d34abaf688 \
--                    file://js/vendor/jquery/MIT-LICENSE.txt;md5=75308107741f7dcdc39127209c7e3fc8 \
-+                    file://js/vendor/jquery/MIT-LICENSE.txt;md5=de877aa6d744cc160ff41c26a8e4811f \
- "
- 
- SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-languages.tar.xz \
-            file://apache.conf \
- "
- 
--SRC_URI[md5sum] = "e73377b11b7d38fa3f3014f2799c5252"
--SRC_URI[sha256sum] = "1964d7190223c11e89fa1b7970c618e3a3bae2e859f5f60383f64c3848ef6921"
-+SRC_URI[md5sum] = "1e6e0c1a15e3c6e7c8771faef19edfa5"
-+SRC_URI[sha256sum] = "3aaaa86ded6308f511f67a907c0d7d6096e1dc2a8ae05581ba55a2510abde1e4"
- 
- UPSTREAM_CHECK_URI = "https://www.phpmyadmin.net/downloads/"
- UPSTREAM_CHECK_REGEX = "phpMyAdmin-(?P<pver>\d+(\.\d+)+)-all-languages.tar.xz"
--- 
-2.25.1
+Alex
 
+On Sat, 22 Jan 2022 at 20:29, Markus Volk <f_l_k@t-online.de> wrote:
+
+> I tried to make the 'folks' backends buildable and it turned out, that
+> there are some more places where vala introspection is missing.
+>
+>
+> https://github.com/openembedded/meta-openembedded/blob/461c04657c3151629b503fe134e9d672520aacbb/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb#L34
+>
+>
+> https://github.com/openembedded/meta-openembedded/blob/566049b4f1ddc049c1f89a5838d1a71bb429faa3/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb#L17
+>
+>
+> Most gnome projects meanwhile make gobject-introspection mandatory and i
+> can really feel why they are doing so for two important reasons.
+>
+> First it is just mandatory if you want to be able to build the whole
+> gnome universe and second it is in my option one of the greatest
+> features of gtk to be able to write code for it in almost every language
+> available. This should not be an optional feature so people could rely
+> on it.
+>
+> In both recipes introspection is disabled by default and dependent on
+> 'GI_DATA_ENABLED=true'. Wouldn't it be a good idea to just enable
+> Introspection by default? We already inherit gobject-introspection anyway.
+>
+> There are also some more issues in libgdata and libical with
+> introspection i was able to fix locally. Will send patches for it if
+> it'll be ok making introspection mandatory.
+>
+> Am 20.01.22 um 21:36 schrieb Markus Volk:
+> > Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> > ---
+> >   .../folks/folks_0.15.4.bb                     | 24 +++++++++++++++++++
+> >   1 file changed, 24 insertions(+)
+> >   create mode 100644 meta-gnome/recipes-connectivity/folks/
+> folks_0.15.4.bb
+> >
+> > diff --git a/meta-gnome/recipes-connectivity/folks/folks_0.15.4.bb
+> b/meta-gnome/recipes-connectivity/folks/folks_0.15.4.bb
+> > new file mode 100644
+> > index 000000000..b4ca551c8
+> > --- /dev/null
+> > +++ b/meta-gnome/recipes-connectivity/folks/folks_0.15.4.bb
+> > @@ -0,0 +1,24 @@
+> > +SUMMARY = "Folks is a contact aggregation library."
+> > +LICENSE = "LGPLv2.1"
+> > +LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+> > +
+> > +DEPENDS = " \
+> > +    glib-2.0 \
+> > +    libgee \
+> > +    libxml2 \
+> > +    dbus-glib \
+> > +    telepathy-glib \
+> > +"
+> > +
+> > +GNOMEBASEBUILDCLASS = "meson"
+> > +
+> > +# gobject-introspection is mandatory and cannot be configured
+> > +REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+> > +GIR_MESON_OPTION = ""
+> > +
+> > +EXTRA_OEMESON = "-Deds_backend=false -Dbluez_backend=false
+> -Dofono_backend=false -Dtelepathy_backend=false"
+> > +
+> > +inherit gnomebase gettext gobject-introspection vala features_check
+> > +
+> > +SRC_URI[archive.sha256sum] =
+> "e71099afc9e88fad4e757ae134bc3fd63e12b901ad62b0ed5536afb79124af5f"
+> > +
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#95004):
+> https://lists.openembedded.org/g/openembedded-devel/message/95004
+> Mute This Topic: https://lists.openembedded.org/mt/88611345/1686489
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> alex.kanavin@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
+>
+
+--000000000000aacbfc05d6311b91
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Gobject introspection is inherently hostile to cross =
+compilation environments as it requires running a cross-compiled binary wit=
+h the qemu emulator. That does not always work, and if it does not, your bu=
+ild will break. So there must be a way to turn it off when it happens.</div=
+><div><br></div><div>Alex<br></div></div><br><div class=3D"gmail_quote"><di=
+v dir=3D"ltr" class=3D"gmail_attr">On Sat, 22 Jan 2022 at 20:29, Markus Vol=
+k &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt; wrote:=
+<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
+ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">I tried to make=
+ the &#39;folks&#39; backends buildable and it turned out, that <br>
+there are some more places where vala introspection is missing.<br>
+<br>
+<a href=3D"https://github.com/openembedded/meta-openembedded/blob/461c04657=
+c3151629b503fe134e9d672520aacbb/meta-gnome/recipes-gnome/evolution-data-ser=
+ver/evolution-data-server.bb#L34" rel=3D"noreferrer" target=3D"_blank">http=
+s://github.com/openembedded/meta-openembedded/blob/461c04657c3151629b503fe1=
+34e9d672520aacbb/meta-gnome/recipes-gnome/evolution-data-server/evolution-d=
+ata-server.bb#L34</a><br>
+<br>
+<a href=3D"https://github.com/openembedded/meta-openembedded/blob/566049b4f=
+1ddc049c1f89a5838d1a71bb429faa3/meta-oe/recipes-connectivity/telepathy/tele=
+pathy-glib_0.24.1.bb#L17" rel=3D"noreferrer" target=3D"_blank">https://gith=
+ub.com/openembedded/meta-openembedded/blob/566049b4f1ddc049c1f89a5838d1a71b=
+b429faa3/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb#L1=
+7</a><br>
+<br>
+<br>
+Most gnome projects meanwhile make gobject-introspection mandatory and i <b=
+r>
+can really feel why they are doing so for two important reasons.<br>
+<br>
+First it is just mandatory if you want to be able to build the whole <br>
+gnome universe and second it is in my option one of the greatest <br>
+features of gtk to be able to write code for it in almost every language <b=
+r>
+available. This should not be an optional feature so people could rely <br>
+on it.<br>
+<br>
+In both recipes introspection is disabled by default and dependent on <br>
+&#39;GI_DATA_ENABLED=3Dtrue&#39;. Wouldn&#39;t it be a good idea to just en=
+able <br>
+Introspection by default? We already inherit gobject-introspection anyway.<=
+br>
+<br>
+There are also some more issues in libgdata and libical with <br>
+introspection i was able to fix locally. Will send patches for it if <br>
+it&#39;ll be ok making introspection mandatory.<br>
+<br>
+Am 20.01.22 um 21:36 schrieb Markus Volk:<br>
+&gt; Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" ta=
+rget=3D"_blank">f_l_k@t-online.de</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 =C2=A0.../folks/<a href=3D"http://folks_0.15.4.bb" rel=3D"norefe=
+rrer" target=3D"_blank">folks_0.15.4.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 24 +++++++++++++++++++<br>
+&gt;=C2=A0 =C2=A01 file changed, 24 insertions(+)<br>
+&gt;=C2=A0 =C2=A0create mode 100644 meta-gnome/recipes-connectivity/folks/<=
+a href=3D"http://folks_0.15.4.bb" rel=3D"noreferrer" target=3D"_blank">folk=
+s_0.15.4.bb</a><br>
+&gt;<br>
+&gt; diff --git a/meta-gnome/recipes-connectivity/folks/<a href=3D"http://f=
+olks_0.15.4.bb" rel=3D"noreferrer" target=3D"_blank">folks_0.15.4.bb</a> b/=
+meta-gnome/recipes-connectivity/folks/<a href=3D"http://folks_0.15.4.bb" re=
+l=3D"noreferrer" target=3D"_blank">folks_0.15.4.bb</a><br>
+&gt; new file mode 100644<br>
+&gt; index 000000000..b4ca551c8<br>
+&gt; --- /dev/null<br>
+&gt; +++ b/meta-gnome/recipes-connectivity/folks/<a href=3D"http://folks_0.=
+15.4.bb" rel=3D"noreferrer" target=3D"_blank">folks_0.15.4.bb</a><br>
+&gt; @@ -0,0 +1,24 @@<br>
+&gt; +SUMMARY =3D &quot;Folks is a contact aggregation library.&quot;<br>
+&gt; +LICENSE =3D &quot;LGPLv2.1&quot;<br>
+&gt; +LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3D2d5025d4aa3495befef8f=
+17206a5b0a1&quot;<br>
+&gt; +<br>
+&gt; +DEPENDS =3D &quot; \<br>
+&gt; +=C2=A0 =C2=A0 glib-2.0 \<br>
+&gt; +=C2=A0 =C2=A0 libgee \<br>
+&gt; +=C2=A0 =C2=A0 libxml2 \<br>
+&gt; +=C2=A0 =C2=A0 dbus-glib \<br>
+&gt; +=C2=A0 =C2=A0 telepathy-glib \<br>
+&gt; +&quot;<br>
+&gt; +<br>
+&gt; +GNOMEBASEBUILDCLASS =3D &quot;meson&quot;<br>
+&gt; +<br>
+&gt; +# gobject-introspection is mandatory and cannot be configured<br>
+&gt; +REQUIRED_DISTRO_FEATURES =3D &quot;gobject-introspection-data&quot;<b=
+r>
+&gt; +GIR_MESON_OPTION =3D &quot;&quot;<br>
+&gt; +<br>
+&gt; +EXTRA_OEMESON =3D &quot;-Deds_backend=3Dfalse -Dbluez_backend=3Dfalse=
+ -Dofono_backend=3Dfalse -Dtelepathy_backend=3Dfalse&quot;<br>
+&gt; +<br>
+&gt; +inherit gnomebase gettext gobject-introspection vala features_check<b=
+r>
+&gt; +<br>
+&gt; +SRC_URI[archive.sha256sum] =3D &quot;e71099afc9e88fad4e757ae134bc3fd6=
+3e12b901ad62b0ed5536afb79124af5f&quot;<br>
+&gt; +<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#95004): <a href=3D"https://lists.openembedded.org/g/ope=
+nembedded-devel/message/95004" rel=3D"noreferrer" target=3D"_blank">https:/=
+/lists.openembedded.org/g/openembedded-devel/message/95004</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/88611345/1686=
+489" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/88611345/1686489</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:alex.kanavin@gmail.com" =
+target=3D"_blank">alex.kanavin@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+
+--000000000000aacbfc05d6311b91--
 
