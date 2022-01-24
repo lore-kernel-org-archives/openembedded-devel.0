@@ -2,91 +2,110 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A52F6C433EF
-	for <webhook@archiver.kernel.org>; Mon, 24 Jan 2022 18:33:41 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com
- [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.web08.958.1643049220737036851
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D5D6C433F5
+	for <webhook@archiver.kernel.org>; Mon, 24 Jan 2022 19:18:53 +0000 (UTC)
+Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com
+ [209.85.222.170])
+ by mx.groups.io with SMTP id smtpd.web12.319.1643051932455319083
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Jan 2022 10:33:40 -0800
+ Mon, 24 Jan 2022 11:18:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=TC7CN3Z1;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id
- s61-20020a17090a69c300b001b4d0427ea2so21254314pjj.4
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=QlWtmR7l;
+ spf=pass (domain: gmail.com, ip: 209.85.222.170,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f170.google.com with SMTP id d11so21484848qkj.12
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Jan 2022 10:33:40 -0800 (PST)
+ Mon, 24 Jan 2022 11:18:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=0RkNO+l28cBLSW3r4t/vGK0o61bYujHTcWucqsLsLqQ=;
-        b=TC7CN3Z1KnT0LwHtGPt/XegzQaSCeGyB7/LMAQZ3dyti9wBL59gY4sNJrKu30TeCkU
-         7EM/HGDvWFyRIxUYxAE5eJzvfssufjH+O+iih2ZlUyLZmJSdmgS9omQTCxZ4fvQr5lZQ
-         sBX1FLAnU3GBQpwP/3IgzBKkHE0ZPDPGOWEZq3/BU6Vt9pGkh5E8CD1Cfs/zeCzyQ+2C
-         83r3SNJtHL+p9LYRxw6AKwek/2OTZtnh5jJ28xcxIwljWlaK4hrb5TMun/y/x4FqnS1j
-         /26YO1oVEGSe7fgaXxLq+2zk/fB5MqPQgQH/w5DtMvP/8pqU46OMOsSVkDa4pxBzBE8U
-         8tlA==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=LGL7xo3ky53CM7DFN2zttMN79/fCB61cwb11z2qL6sY=;
+        b=QlWtmR7l14HEqBg/NGKsuGpXiUnuFIYu7P9y1aQCAoebEdVcWcJ9OYg/a6MqXEr9Sf
+         vk62estL1zuvhkDBqDNffXjVv5M2WeQnqc9PSI/uPKQYwy9c2DL7p2QZhAIfiHLX8QDW
+         c3T1U/o/ZDAb75xn5LeWfHWEo5S9oYAiYz/XqyQjCa4xoMZ6W/CueXhmVBSSllJRE4SM
+         P9KR6E3uT49WCSuQxZZSDLqk/evMSzlsthEyavpJHzUSu7D2C+nTkEgDc7pJ0F+a3ua9
+         oBTNhvQUeib5jXMWlW3UyHgjHKfGggptuo4T+7P/h2uIL8nvlo38mZD03XtYLi3qTP4P
+         NnMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=0RkNO+l28cBLSW3r4t/vGK0o61bYujHTcWucqsLsLqQ=;
-        b=zUL7BqZz+dAuUZgy15cra8veDB52M+JUzOHuTcfnXp0ZDZHHN/f1AprrujQ5GlonCy
-         I94jUcim6rdHjfBtjydL6+Xg5EQC9pbR9IX0Sp7PqU7nonTWfrdJZ5lNmDz00Z7xH/s+
-         bBQHxv8R2RNj0HnCpgMHitPWwOFv4dQD26hN09Iade26KkNBdF6aiTz1Yb1yrVqxRlQc
-         W+qVlCNCTJb9sufShAOtqJoG4oJuvqHGI+Yu031z3oeLnDSAhGkEwocP9oKqfELxUOLc
-         49G5PN4yTuTP0JdjVcoyk5TRUJ6QkghLQpr5orZIyU61j24g1LwI02gxfz2MXxP6ec0o
-         bmRw==
-X-Gm-Message-State: AOAM532qtTz5ZmZOCMz0FqVra4IiHEFMhnHl1mCQWAq4XPw7A6EqCVL7
-	uUqSb7l/GSofX9/j0LUzG9wJopa1viJoDg==
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=LGL7xo3ky53CM7DFN2zttMN79/fCB61cwb11z2qL6sY=;
+        b=3DmV0ZeY+jO/8PlDbLs7lEe50GM34taqtPgr4/gCGARkhnAe0KYA2mkyLqz30iRq2r
+         pDwG3qyHlWAWLg1MmrqgbuJngV8qikI0QbKAt8OngE3wI/ybPsHRxxGd+JxswffMpPic
+         3O2IjKVEVtEUrtpZW9vnGRIRsEfVyUWYUuMdC4fZRs7K1Q3231hnoSN1cOuoKT+cO/Ex
+         xPPlht5cnl4rpH+ymONV/95nWhng9dEMTirzEuMuq7jgW9Sq57AYEW5Z1R5/v61Rh8XX
+         zWpaUaDRnfg4r93GQeQaPpHwgoZ8NIa3dZh5iskCXVuYC9Lcoit0Ma9J2Y2nreN2hSuW
+         P9+A==
+X-Gm-Message-State: AOAM531BIXuo8QVcjIIow2/vYzj4lMWkj4DxzTPokDUzUoivAbPqhuxg
+	vVZnmVlmlrztF9eDqSzRCNV/qS/R+V0SpGU7KTw=
 X-Google-Smtp-Source: 
- ABdhPJwHjiZYH4YsdqboUFkHoXTQG8EQ5tfj10bmR7I7Wc5Tc6LUq0ELwkVqK8qv20I1rcuiJlBdAw==
-X-Received: by 2002:a17:902:9001:b0:149:f2ae:6491 with SMTP id
- a1-20020a170902900100b00149f2ae6491mr15649459plp.39.1643049219917;
-        Mon, 24 Jan 2022 10:33:39 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b5e3])
-        by smtp.gmail.com with ESMTPSA id
- l23sm12960320pgj.20.2022.01.24.10.33.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 24 Jan 2022 10:33:39 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] iotop: Disable LTO with clang/rv64
-Date: Mon, 24 Jan 2022 10:33:37 -0800
-Message-Id: <20220124183337.2773373-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ ABdhPJw5wN0zUXWAaMMdqiKaVO5jobNj/BKjDqg4pWOoPsGAoo99uBpv8JFKfN8eva3UkEbyGpY28nofpNs6LYfeTnY=
+X-Received: by 2002:a05:620a:208e:: with SMTP id
+ e14mr12331505qka.227.1643051931372;
+ Mon, 24 Jan 2022 11:18:51 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <1642725351-24004-1-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1642725351-24004-1-git-send-email-wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 24 Jan 2022 11:18:25 -0800
+Message-ID: 
+ <CAMKF1spOo2GfuBaCdztx9wtTe-OaCXmZhpQpyLFUXa_-2fyvzg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] fmt: upgrade 8.0.1 -> 8.1.1
+To: wangmy <wangmy@fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Jan 2022 18:33:41 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Jan 2022 19:18:53 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95045
+ https://lists.openembedded.org/g/openembedded-devel/message/95046
 
-LTO with clang does not configure correctly yet with meta-clang
+since we use external fmt in spdlog this update regresses gerbera see
+https://errors.yoctoproject.org/Errors/Details/623452/
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-extended/iotop/iotop_1.20.bb | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/meta-oe/recipes-extended/iotop/iotop_1.20.bb b/meta-oe/recipes-extended/iotop/iotop_1.20.bb
-index b05c8cd35d..a044c9b248 100644
---- a/meta-oe/recipes-extended/iotop/iotop_1.20.bb
-+++ b/meta-oe/recipes-extended/iotop/iotop_1.20.bb
-@@ -11,6 +11,8 @@ UPSTREAM_CHECK_URI = "https://github.com/Tomas-M/iotop/releases"
- inherit pkgconfig
- 
- EXTRA_OEMAKE = "V=1 STRIP=true"
-+# Fixes llvm-bc70b5.o: can't link soft-float modules with double-float modules
-+EXTRA_OEMAKE:append:toolchain-clang:riscv64 = " NO_FLTO=1"
- 
- # Workaround BFD linker crash with clang on arm
- # revisit when upgrading binutils and see if its fixed
--- 
-2.34.1
-
+On Thu, Jan 20, 2022 at 4:36 PM wangmy <wangmy@fujitsu.com> wrote:
+>
+> Changelog:
+> =========
+> Restored ABI compatibility with version 8.0.x
+> Fixed chrono formatting on big endian systems
+> Fixed a linkage error with mingw
+>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  meta-oe/recipes-support/fmt/{fmt_8.0.1.bb => fmt_8.1.1.bb} | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-oe/recipes-support/fmt/{fmt_8.0.1.bb => fmt_8.1.1.bb} (90%)
+>
+> diff --git a/meta-oe/recipes-support/fmt/fmt_8.0.1.bb b/meta-oe/recipes-support/fmt/fmt_8.1.1.bb
+> similarity index 90%
+> rename from meta-oe/recipes-support/fmt/fmt_8.0.1.bb
+> rename to meta-oe/recipes-support/fmt/fmt_8.1.1.bb
+> index ee14ad55b..c53dd3890 100644
+> --- a/meta-oe/recipes-support/fmt/fmt_8.0.1.bb
+> +++ b/meta-oe/recipes-support/fmt/fmt_8.1.1.bb
+> @@ -5,7 +5,7 @@ LICENSE = "MIT"
+>  LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=af88d758f75f3c5c48a967501f24384b"
+>
+>  SRC_URI = "git://github.com/fmtlib/fmt;branch=master;protocol=https"
+> -SRCREV = "d141cdbeb0fb422a3fb7173b285fd38e0d1772dc"
+> +SRCREV = "b6f4ceaed0a0a24ccf575fab6c56dd50ccf6f1a9"
+>
+>  S = "${WORKDIR}/git"
+>
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#94963): https://lists.openembedded.org/g/openembedded-devel/message/94963
+> Mute This Topic: https://lists.openembedded.org/mt/88573659/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
