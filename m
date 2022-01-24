@@ -2,12 +2,12 @@ Return-Path: <mingli.yu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1DC67C433F5
-	for <webhook@archiver.kernel.org>; Mon, 24 Jan 2022 05:54:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BD57AC433EF
+	for <webhook@archiver.kernel.org>; Mon, 24 Jan 2022 06:11:37 +0000 (UTC)
 Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web10.186.1643003683942728801
+ by mx.groups.io with SMTP id smtpd.web09.286.1643004691556967909
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Jan 2022 21:54:45 -0800
+ Sun, 23 Jan 2022 22:11:32 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=permerror,
@@ -15,37 +15,39 @@ Authentication-Results: mx.groups.io;
  domain name (domain: windriver.com, ip: 147.11.3.146,
  mailfrom: mingli.yu@windriver.com)
 Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 20O5seda004500
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 20O6BUQ1005616
 	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Jan 2022 21:54:40 -0800
+ Sun, 23 Jan 2022 22:11:30 -0800
 Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
  [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 20O5sdKc029301
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 20O6BTwB001275
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Jan 2022 21:54:39 -0800 (PST)
+ Sun, 23 Jan 2022 22:11:30 -0800 (PST)
 Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Sun, 23 Jan 2022 21:54:38 -0800
+ 15.1.2242.12; Sun, 23 Jan 2022 22:11:29 -0800
 Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Sun, 23 Jan 2022 21:54:38 -0800
+ 15.1.2242.12 via Frontend Transport; Sun, 23 Jan 2022 22:11:28 -0800
 From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] plymouth: switch to KillMode=mixed
-Date: Mon, 24 Jan 2022 13:54:37 +0800
-Message-ID: <20220124055437.8726-1-mingli.yu@windriver.com>
+Subject: [meta-oe][PATCH v2] plymouth: switch to KillMode=mixed
+Date: Mon, 24 Jan 2022 14:11:27 +0800
+Message-ID: <20220124061127.40621-1-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <16CD1F25F9E3C646.15117@lists.openembedded.org>
+References: <16CD1F25F9E3C646.15117@lists.openembedded.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Jan 2022 05:54:46 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Jan 2022 06:11:37 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95027
+ https://lists.openembedded.org/g/openembedded-devel/message/95028
 
 From: Mingli Yu <mingli.yu@windriver.com>
 
@@ -61,17 +63,17 @@ going to require some effort.
 
 Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- ...001-systemd-switch-to-KillMode-mixed.patch | 39 +++++++++++++++++++
+ ...001-systemd-switch-to-KillMode-mixed.patch | 43 +++++++++++++++++++
  .../recipes-core/plymouth/plymouth_0.9.5.bb   |  1 +
- 2 files changed, 40 insertions(+)
+ 2 files changed, 44 insertions(+)
  create mode 100644 meta-oe/recipes-core/plymouth/files/0001-systemd-switch-to-KillMode-mixed.patch
 
 diff --git a/meta-oe/recipes-core/plymouth/files/0001-systemd-switch-to-KillMode-mixed.patch b/meta-oe/recipes-core/plymouth/files/0001-systemd-switch-to-KillMode-mixed.patch
 new file mode 100644
-index 000000000..40b1d8862
+index 000000000..eb1c8db21
 --- /dev/null
 +++ b/meta-oe/recipes-core/plymouth/files/0001-systemd-switch-to-KillMode-mixed.patch
-@@ -0,0 +1,39 @@
+@@ -0,0 +1,43 @@
 +From 9d0f8b2e7bc2d1d2b0900fcdf119bb9a2cc4f474 Mon Sep 17 00:00:00 2001
 +From: Ray Strode <rstrode@redhat.com>
 +Date: Tue, 25 Aug 2020 10:49:11 -0400
@@ -86,6 +88,10 @@ index 000000000..40b1d8862
 +going to require some effort.
 +
 +https://gitlab.freedesktop.org/plymouth/plymouth/-/issues/123
++
++Upstream-Status: Backport [https://gitlab.freedesktop.org/plymouth/plymouth/-/commit/9d0f8b2e7bc2d1d2b0900fcdf119bb9a2cc4f474]
++
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 +---
 + systemd-units/plymouth-start.service.in | 3 ++-
 + 1 file changed, 2 insertions(+), 1 deletion(-)
