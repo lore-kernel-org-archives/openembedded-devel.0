@@ -2,15 +2,15 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FEADC433F5
-	for <webhook@archiver.kernel.org>; Mon, 24 Jan 2022 15:16:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F4E6C433EF
+	for <webhook@archiver.kernel.org>; Mon, 24 Jan 2022 15:16:04 +0000 (UTC)
 Received: from voyager.superhosting.bg (voyager.superhosting.bg
  [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web11.4809.1643037360144076392
+ by mx.groups.io with SMTP id smtpd.web10.4896.1643037362005825573
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Jan 2022 07:16:01 -0800
+ Mon, 24 Jan 2022 07:16:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=O9tPjH8X;
+ dkim=pass header.i=@anavi.org header.s=default header.b=YS/d5FOy;
  spf=permerror,
  err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
  for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
@@ -21,24 +21,24 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=yHg2TB27H9Wnu5OYOgA51zooQa/5GaLBddiez9LIp8Y=; b=O9tPjH8Xmqc/2UR71MRaxf7sN4
-	SGaQ0/Qev235GRqkfdL84syC7tha+74rBaVvCBiipuG1P9jvsg3tM/wivU+ZLrK+/qthWjffLnBnl
-	ZQrjiX0QkbeY40HOSSZVfTzHZA6UtbD5f/M8/H0U9AnAsM2sUEV5vfvuwJMNlcqB6wDPiFOfBUjae
-	wLlHSNLPBEFaw48SZN93802NZ8SeTnKku4jt/phI8n0uyXZPFLZetHleEUERchOPClUeRSNBpYeWu
-	XAitJ7X6ljJtSa3MQKVpbv3CT8/EL1oFUkVWMhyXAHHgdFNTMTR6ktDjgOI5GKXoNVvOtF2tgqos/
-	gx7i/8RQ==;
+	bh=fbjeWAAsWuDxCeyNQrz+37K+6yhMMlHB6DPCYYJIJBE=; b=YS/d5FOySjJRVSzl72OVN5I3Pq
+	K8rl0aFNzAVdISQgL3e5fDpLKBD3DvXk4VZIzd3hhGn11bElZkuhspC3Xi3RfH7eYw8kLhN/n+A6Y
+	C9MSJWhM5CfrDgDEFNirC6veceVSG0B17VeKXfL/RezHHDFIsOKu08LPNJ4xI/5VAnt/Tsf/IKgZP
+	XyIPjTeDLA/f9a1thTJfuj9Way4CC03Grd/vtx3pyUibsPZBuUNpnd0QUv3AvdK7Wii183MaQMxR+
+	hcQZkGuQNz0y0EHY2YfgwQM9Wr/tFVhW3tdQbBREYzv92sWN3SAD+BgjiUEuAEur9ZslEmAuG58sx
+	MnZf7MJw==;
 Received: from lan.nucleusys.com ([92.247.61.126]:54618 helo=tone.k.g)
 	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.94.2)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1nC14p-0009G6-7C; Mon, 24 Jan 2022 17:15:59 +0200
+	id 1nC14r-0009G6-JM; Mon, 24 Jan 2022 17:16:01 +0200
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/4] python3-pandas: Upgrade 1.3.5 -> 1.4.0
-Date: Mon, 24 Jan 2022 17:15:42 +0200
-Message-Id: <20220124151544.876177-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/4] python3-aenum: Upgrade 3.1.6 -> 3.1.8
+Date: Mon, 24 Jan 2022 17:15:43 +0200
+Message-Id: <20220124151544.876177-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220124151544.876177-1-leon.anavi@konsulko.com>
 References: <20220124151544.876177-1-leon.anavi@konsulko.com>
@@ -60,50 +60,31 @@ X-Source-Dir:
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Jan 2022 15:16:02 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Jan 2022 15:16:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95036
+ https://lists.openembedded.org/g/openembedded-devel/message/95037
 
-Upgrade to release 1.4.0:
-
-- Improved warning messages
-- Index can hold arbitrary ExtensionArrays
-- Styler
-- Multi-threaded CSV reading with a new CSV Engine based on
-  pyarrow
-- Rank function for rolling and expanding windows
-- Groupby positional indexing
-- DataFrame.from_dict and DataFrame.to_dict have new 'tight'
-  option
-- Fix inconsistent date string parsing
-- Fix ignoring dtypes in concat with empty or all-NA columns
-- Null-values are no longer coerced to NaN-value in value_counts
-  and mode
-- mangle_dupe_cols in read_csv no longer renames unique columns
-  conflicting with target names
-- unstack and pivot_table no longer raises ValueError for result
-  that would exceed int32 limit
-- groupby.apply consistent transform detection
+Upgrade to release 3.1.8.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-pandas_1.3.5.bb => python3-pandas_1.4.0.bb} | 2 +-
+ .../python/{python3-aenum_3.1.6.bb => python3-aenum_3.1.8.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pandas_1.3.5.bb => python3-pandas_1.4.0.bb} (89%)
+ rename meta-python/recipes-devtools/python/{python3-aenum_3.1.6.bb => python3-aenum_3.1.8.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pandas_1.3.5.bb b/meta-python/recipes-devtools/python/python3-pandas_1.4.0.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-pandas_1.3.5.bb
-rename to meta-python/recipes-devtools/python/python3-pandas_1.4.0.bb
-index 254787539..9b395440f 100644
---- a/meta-python/recipes-devtools/python/python3-pandas_1.3.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-pandas_1.4.0.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "http://pandas.pydata.org/"
+diff --git a/meta-python/recipes-devtools/python/python3-aenum_3.1.6.bb b/meta-python/recipes-devtools/python/python3-aenum_3.1.8.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-aenum_3.1.6.bb
+rename to meta-python/recipes-devtools/python/python3-aenum_3.1.8.bb
+index 1d9bd32fb..86217c5fc 100644
+--- a/meta-python/recipes-devtools/python/python3-aenum_3.1.6.bb
++++ b/meta-python/recipes-devtools/python/python3-aenum_3.1.8.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/aenum/"
  LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3f23c5c092b74d245d48eeef72bc3fd2"
+ LIC_FILES_CHKSUM = "file://aenum/LICENSE;md5=c6a85477543f8b8591b9c1f82abebbe9"
  
--SRC_URI[sha256sum] = "1e4285f5de1012de20ca46b188ccf33521bff61ba5c5ebd78b4fb28e5416a9f1"
-+SRC_URI[sha256sum] = "cdd76254c7f0a1583bd4e4781fb450d0ebf392e10d3f12e92c95575942e37df5"
+-SRC_URI[sha256sum] = "3ba2c25dd03fbf3992353595be18152e2fb6042f47b526ea66cd5838bb9f1fb6"
++SRC_URI[sha256sum] = "8dbe15f446eb8264b788dfeca163fb0a043d408d212152397dc11377b851e4ae"
  
  inherit pypi setuptools3
  
