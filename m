@@ -2,12 +2,12 @@ Return-Path: <mingli.yu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BD57AC433EF
-	for <webhook@archiver.kernel.org>; Mon, 24 Jan 2022 06:11:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CCE63C433F5
+	for <webhook@archiver.kernel.org>; Mon, 24 Jan 2022 06:15:16 +0000 (UTC)
 Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web09.286.1643004691556967909
+ by mx.groups.io with SMTP id smtpd.web11.334.1643004916118194462
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Jan 2022 22:11:32 -0800
+ Sun, 23 Jan 2022 22:15:16 -0800
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=permerror,
@@ -15,39 +15,35 @@ Authentication-Results: mx.groups.io;
  domain name (domain: windriver.com, ip: 147.11.3.146,
  mailfrom: mingli.yu@windriver.com)
 Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 20O6BUQ1005616
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Jan 2022 22:11:30 -0800
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 20O6FDdp005746
+	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
+	Sun, 23 Jan 2022 22:15:13 -0800
 Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
  [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 20O6BTwB001275
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Jan 2022 22:11:30 -0800 (PST)
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 20O6FCth001390
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Sun, 23 Jan 2022 22:15:13 -0800 (PST)
 Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Sun, 23 Jan 2022 22:11:29 -0800
+ 15.1.2242.12; Sun, 23 Jan 2022 22:15:12 -0800
 Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Sun, 23 Jan 2022 22:11:28 -0800
+ 15.1.2242.12 via Frontend Transport; Sun, 23 Jan 2022 22:15:11 -0800
 From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH v2] plymouth: switch to KillMode=mixed
-Date: Mon, 24 Jan 2022 14:11:27 +0800
-Message-ID: <20220124061127.40621-1-mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <akuster808@gmail.com>
+Subject: [meta-oe][hardknott][PATCH] plymouth: switch to KillMode=mixed
+Date: Mon, 24 Jan 2022 14:15:10 +0800
+Message-ID: <20220124061510.13354-1-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <16CD1F25F9E3C646.15117@lists.openembedded.org>
-References: <16CD1F25F9E3C646.15117@lists.openembedded.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Jan 2022 06:11:37 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Jan 2022 06:15:16 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95028
+ https://lists.openembedded.org/g/openembedded-devel/message/95029
 
 From: Mingli Yu <mingli.yu@windriver.com>
 
@@ -118,10 +114,10 @@ index 000000000..eb1c8db21
 +2.17.1
 +
 diff --git a/meta-oe/recipes-core/plymouth/plymouth_0.9.5.bb b/meta-oe/recipes-core/plymouth/plymouth_0.9.5.bb
-index e5d8c9819..d096462ee 100644
+index 11fb30d48..158c42f9f 100644
 --- a/meta-oe/recipes-core/plymouth/plymouth_0.9.5.bb
 +++ b/meta-oe/recipes-core/plymouth/plymouth_0.9.5.bb
-@@ -20,6 +20,7 @@ RPROVIDES:${PN} = "virtual-psplash virtual-psplash-support"
+@@ -20,6 +20,7 @@ RPROVIDES_${PN} = "virtual-psplash virtual-psplash-support"
  SRC_URI = " \
      http://www.freedesktop.org/software/plymouth/releases/${BPN}-${PV}.tar.xz \
      file://0001-Make-full-path-to-systemd-tty-ask-password-agent-con.patch \
