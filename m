@@ -1,326 +1,311 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D0B0C433F5
-	for <webhook@archiver.kernel.org>; Mon, 24 Jan 2022 04:07:10 +0000 (UTC)
-Received: from esa14.fujitsucc.c3s2.iphmx.com (esa14.fujitsucc.c3s2.iphmx.com
- [68.232.156.101])
- by mx.groups.io with SMTP id smtpd.web11.19198.1642997228678603698
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0957AC433EF
+	for <webhook@archiver.kernel.org>; Mon, 24 Jan 2022 05:13:53 +0000 (UTC)
+Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com
+ [209.85.222.176])
+ by mx.groups.io with SMTP id smtpd.web11.19673.1643001232011422611
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Jan 2022 20:07:09 -0800
+ Sun, 23 Jan 2022 21:13:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj1 header.b=Iinfkvqp;
- spf=pass (domain: fujitsu.com, ip: 68.232.156.101,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj1;
-  t=1642997229; x=1674533229;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=TPwaLT9/he8wQzDullhonT1ycbfQVJR6f620Vlqzaz0=;
-  b=IinfkvqplC6oF06GnJ1uaoOEJ5C5jpd7i0SrBR/7z8BT8uVRmpb9Y219
-   S08M6ib0ClgsgY+PlliUHOoAex+Zt/hjYJW7JlugOdGJ1Wz05SJ7JXv+v
-   pmpbkcTHC2NfOTnFPs026N2PZ2KZvFETRiBKgOI9fgpugSCzXJIVdEXON
-   HuPcXcU8ky2jXxbNAlVkI81uAl49mOwxtxjzxUmJj+z7ZSUCWUTPnMLdB
-   grd3wfuTUk2wPsy/mFRXQjT1kObvbsfurczSxMO+4G6ig7tiEdsOyHpb2
-   3ZqHOjrJGlNXrfWh5xMyCVCT3nSU8NHxlweQYIYJDVYvnVnV7zoNhOlJc
-   g==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10236"; a="48068785"
-X-IronPort-AV: E=Sophos;i="5.88,311,1635174000";
-   d="scan'208";a="48068785"
-Received: from mail-os0jpn01lp2107.outbound.protection.outlook.com (HELO
- JPN01-OS0-obe.outbound.protection.outlook.com) ([104.47.23.107])
-  by ob1.fujitsucc.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 24 Jan 2022 13:07:04 +0900
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jau/R+2sX2PlYdHIMEuFOZUHorxutvWKdgMztmmnzkxZ2Wm38t8+/6f4mf0IO+i2Ca3Iw68PQ2T2LPVY6vDRLSMRq/gWkXrIGztxpLxR5GzFG/umO1DIyLJaoEkjvpws4+EBRtbS30eOfxrOqzDZpYAvEXY8IjpqCKEy8ow21q1uPzblQDNvfa4+u0wp2tWqL01n0phkzg3AHvVopRFTdsu8dzn7h54tbmZRA+atFnzxG3eDM7YSkr97Lb8CI9bOU3Coe210Ev2/rdWLhJ4MOiVAzcaVwBtE89UscpnPhq3/nZDAp+WFHVI7q6T523t9niV7PgfMB8PEjqbwLsATTw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=TPwaLT9/he8wQzDullhonT1ycbfQVJR6f620Vlqzaz0=;
- b=ap9eGLjX5ZuDMHn/S/E2SrkrOLdB1lbTotXikisLfZLE1Nnuar40Pg6n227l5fD76FYbhA2DenVWS2QmMB/Pp98L0eRSl+a7vETpOZ5GKpZ6N6/GOwb+Foo7JZQ2LFRmhGS3D0VEk63Js6kZKwcZ4FA7lQ1WtukCUno1mYTS+PUxEx2CHmb6g7p7BKT+ODq6G7Dp6XPNeBf8lal2FXsv70XwK1jypqRS1bi4T5DoGZYGu58dcgHCpz6Lbss4irz040zTI1GdkYi8OJZN/0RoA0NNkUsR10cJBcFK+dKwu4ybH7+l5bpbJjqskS7iuaQD5BlDCSveiQCqa9oqsZOw/w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ml9yDk1X;
+ spf=pass (domain: gmail.com, ip: 209.85.222.176,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f176.google.com with SMTP id a12so3857020qkk.9
+        for <openembedded-devel@lists.openembedded.org>;
+ Sun, 23 Jan 2022 21:13:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fujitsu.onmicrosoft.com; s=selector2-fujitsu-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=TPwaLT9/he8wQzDullhonT1ycbfQVJR6f620Vlqzaz0=;
- b=ZH+Ge/lAZ/z9v4Gu4ZPXRMyJbEb3Dzb/NblhoJKa86wsUePxG+z8/cbR+dZn6iqCTZjg7WcLWGgIjvv+S9DmCzDrYcIth7AaCMD/nfjIRVT5oFFCCqBVb1TrTrZwfwPxxtvxTCbNXh8MrAefaCTY5ll9KecijGlimMFIPnfShIk=
-Received: from OSBPR01MB1845.jpnprd01.prod.outlook.com (2603:1096:603:5::13)
- by OSBPR01MB1944.jpnprd01.prod.outlook.com (2603:1096:603:22::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4909.11; Mon, 24 Jan
- 2022 04:07:01 +0000
-Received: from OSBPR01MB1845.jpnprd01.prod.outlook.com
- ([fe80::704f:1c79:a029:e8d3]) by OSBPR01MB1845.jpnprd01.prod.outlook.com
- ([fe80::704f:1c79:a029:e8d3%6]) with mapi id 15.20.4909.017; Mon, 24 Jan 2022
- 04:07:01 +0000
-From: "wangmy@fujitsu.com" <wangmy@fujitsu.com>
-To: Khem Raj <raj.khem@gmail.com>
-CC: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] [meta-oe] [PATCH] dlt-daemon: upgrade 2.18.7 -> 2.18.8
-Thread-Topic: [oe] [meta-oe] [PATCH] dlt-daemon: upgrade 2.18.7 -> 2.18.8
-Thread-Index: AQHYDl7PgkCcNF/nc0i6cURDuoGr+6xtxiaAgAPMJzA=
-Date: Mon, 24 Jan 2022 04:07:01 +0000
-Message-ID: 
- <OSBPR01MB1845A35E58526F0B5DADEBA2DC5E9@OSBPR01MB1845.jpnprd01.prod.outlook.com>
-References: <1642725323-23968-1-git-send-email-wangmy@fujitsu.com>
- <CAMKF1soMTioS9bR31U4eG8vjDLN7TcU9gYc9YfHnP2M5VTzMkA@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1soMTioS9bR31U4eG8vjDLN7TcU9gYc9YfHnP2M5VTzMkA@mail.gmail.com>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=fujitsu.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 0a738703-829f-4bb6-246b-08d9deeef933
-x-ms-traffictypediagnostic: OSBPR01MB1944:EE_
-x-microsoft-antispam-prvs: 
- <OSBPR01MB1944D14C6F844A92DBB30D56DC5E9@OSBPR01MB1944.jpnprd01.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:6790;
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- qsT7z//whq1gdWqDz+EfHPrVA/OE+bMILJELrI4I+RPznJpsZz/wMF1OqeHgo2LYykQEtfwzcEk5MpTKyyFbi3GPaVifW40aZHjC5tvDZ/KRnpQPXvehL04rj4nNpI+7rysRZtz/8+lMU+cvIPV2+cqO79iaTVLSmZc48rP9ABehrJKrwEeW8q2q1qWyCotGcgVDbEZVitAY5N3sff19IS6SGis3V0FwP/XfyPyTN08r1FcJHH4I123KMQleid/rP2+6jsYFDf1ofarpTH9TZnDHi+Edh+mT92rQLYOLg+O8tHK3OS8Q481pecMdh31ewgedH2HiA9pjcS8ANYX7i4s+03PAbRV0rE8/CyHqFx1rMi0sIu4IlOdaaC8qzWJHdAvEDERK5r4ui+o587OGj27QZbRwSJk71KIwWz8XcHOUQcW6Ua2Ta04r+CYpQbwA0WEGTJalJOnJPfbYcO2edFyP0ccpRC953jTSTzHUkBboMelAa87n7qCmJX9HpG3v15h4MB0HdVWIHDYMeN0fRy5shPrd6cD9PF6RvA0ZmJOsH161wba+lz++Tl0pEGoeEnBmSdaNTQsb3KDa3QO5XnB07Xjb3AyQ8IayopZUPuE8pz0YW8mLDtf+iqP25p8D4zV92xMB+lTUNFHk1TdhFoLNW3XQ9+5OUSkmRtcUu6NBdu7n962/YG6f8sgqV9yB3nlHq3lN92fMij8m7ze4AmA7BKLPQHKyOTuqfaGGUeaWehy1fL0AtPv0jZ7iniyRAvZOtizv1/QkJRS48uTWAJ2AULNMEw9xg1ilPlv7dZXy0oA/lHJX5uCNul4F5v/UvuZYds81JilP0uRi+Ms60A==
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OSBPR01MB1845.jpnprd01.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(4326008)(38100700002)(76116006)(66476007)(186003)(66946007)(52536014)(64756008)(86362001)(66556008)(66446008)(6916009)(966005)(33656002)(8936002)(508600001)(9686003)(8676002)(7696005)(316002)(38070700005)(85182001)(83380400001)(122000001)(55016003)(6506007)(71200400001)(2906002)(53546011)(26005)(5660300002)(82960400001);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?VHpieEpFWm04S2JLQy95YUFWbFNWV0FYTk1ITmdhUmZZS2cvT042K1VwSks2?=
- =?utf-8?B?dTgyWWtYRkRoWURJdlBIeXlFcGsxMTkrZjY0UFV2ZGFabGhISnFXaksvbmE4?=
- =?utf-8?B?OWNPR1BsbW00ZGdxWVd1TXI0ZFZ3NW1ES1pPbE81QytVcGxLaE1ucVpBVmwr?=
- =?utf-8?B?Y0JRNDVmSnJsZnhzSUpiTjUyWFpuUjRVTkVCVEFiYll6TjhkVkZiVHErN1RB?=
- =?utf-8?B?UWtSUDJiemtlZUd5ck9jWTgyelpNTHA4ajMxZG15azhpcFE0MTEzdDFIQTBB?=
- =?utf-8?B?cXQ1dmJpS0pycVVRTUtrMld2bW84ekc3bmhKbWljZGsvRDFleEw4NzVtV3RX?=
- =?utf-8?B?ZTFiUHZ0bDloT3dOQ2FXaGtqNkh6NUM4MTVha2dqMDUrb3lDVE9jSnNnTFdC?=
- =?utf-8?B?OEJjSzY2Wm1QUkNSZFRrbHNLOGM0Z3NYa2tHbHNhZlIwcmRIOC9DR2NONith?=
- =?utf-8?B?S2VUeENSN3ZlbDlGSXdWSUYrSWMwU2kyWnhiZFBQMVNGUE0vanIyM1NOR0dy?=
- =?utf-8?B?VFhmRXNtNkY3MC81YWswTHJpcUxRcEdNa2dybFIzOGxyRGtyL1NXRkJvTlRt?=
- =?utf-8?B?Rm1JKytmcWorUEJZMTg4Z20vN3RyNDl1R3RhaGp6V2pjTFkxM0RINUVyQjQw?=
- =?utf-8?B?b0taTTNFK0tDT09kUkJrbFhxRi9qVkNDRzV0NnkxVXAwYjA3bERTVkdTWjNm?=
- =?utf-8?B?MWQ1aEFRSk5VTEhYVGlFQjVpemkrWW5ycFV3OVZwcTZBRU9RL3hHSkNxYTVa?=
- =?utf-8?B?eWhRSE5NLzdMTVoxNG1vaGU0S3QrUFkvcGFsTlV5b2NqaDQzSGYxeHdaMDBl?=
- =?utf-8?B?Rnc3Zkc1NWxYbFByeVlhcm5JWFhtQTlXYlRmZ3dST0hWT0xPV29ORzQybWZL?=
- =?utf-8?B?blJiNGdLb3ZnWkc0YnhmTVRGdXEyaG5LcWMzZnc1QldIQUV2S2UvUTc1Q25x?=
- =?utf-8?B?SDJXM2tobWhMUGdrZWkxVjBUKzJsamtGQlFaeHJQaGdkdnhqcHQyRTA0ZThN?=
- =?utf-8?B?aTZka2VJcVNhWU9Rd1VueVlIQ1pzNnoyV3hkZ1VHWEZXK21QK0MyZis4MmNv?=
- =?utf-8?B?UlNrSzhSdll2UjR3TlpVdndjazdpeDJtb2pRQVNUZGloY0thZWN3MjdUQTZa?=
- =?utf-8?B?VlQzR1RhcDlQYVB4RFBxcno3Y1J3NHZqeGdSZ1Q5QmM2TGlSTzNJVjc1N0Jy?=
- =?utf-8?B?MjRNY0NvWk1zWiswVkhwSURMb1pSa1NPTHRqR2R0RFJFdjhFQUhlR2N2elZM?=
- =?utf-8?B?dy9VdGtjU25BWGY0YkpTNjRDTlNFOHZ6ejlwaUp6OWthQnFIK2dzMjcvWEN5?=
- =?utf-8?B?WWVRdm4wbTNSTU1QRUtXQXNYWVgybVZjVEtZdDJsQXJ0NFNlUFh6YllPZ0JU?=
- =?utf-8?B?cXV5T3dYTVpnekd6eGMrcE9tNkMxbmU0TUJzV256NHZPSnhXUFRXSW1lTU03?=
- =?utf-8?B?VEZIZHB3L0U4aVhyL0llaU40ZWUwQmtQY2Qwd2dCUlBlMEhTSjhnRC9KRk5x?=
- =?utf-8?B?VDExSGRRYnQzL0ZxN2hJdDdMdEpMKzBaQk84bGlYM0YzV0U4by9BdFBmdzBp?=
- =?utf-8?B?SHNhUEdlTUJ0MnBwV3NkZWdydTZUZ1hLTkc4OStFVG5vdjVmUUtWcExKSzFB?=
- =?utf-8?B?RVRuSWJDd1ljQzB1UmJNaTQ1bzB5WWNMUmJ6ajRBU3lteDc0RllNUTVOWSt3?=
- =?utf-8?B?UnZZUUdNZUVwYlF4Vml0MGtzM01HYVFqWWQ4ajEwOFhQZTd5alEwSVBDcDVy?=
- =?utf-8?B?NWZaaEp3Rkd5cWhvMHZ5bHBXemsxcHFjNXNRaEZDdlVsdGlXZXM2YzhlWnRG?=
- =?utf-8?B?dWpjQWRINzgwR1J1elpXMkwyUXRnQlc4TmdieEdEZThmTXUzQWpIb2RuU3J3?=
- =?utf-8?B?ZmhoUkFsbDNQdDZMOTFhL0xmMVlpc0dSdUg3Q2ZVR2RvMFVScUlKdTN2L0Fr?=
- =?utf-8?B?VW5Sc0w1Vi9EZmR5OE5xTk1OTXJOK2IwVmJ1OHMrRSs0dStCTHpoeUFOQzYw?=
- =?utf-8?B?Q1NiVGg1d2FNK1lpVEc5eE9qamFsVDNXWVJCS3A5M0dmdU9zaG0rM3dLSE9V?=
- =?utf-8?B?MFlCU0Vkb0JJU2EyUDFlODcxQTIzQ0E3K0JsZkQyS0RUaW84NE1zSms5TDl1?=
- =?utf-8?B?bXBhME1NQkhJRVBHcFc0NURQNWlwaVBLV09RUmM4WEkxaFR6eTV0TUI4L0s4?=
- =?utf-8?Q?skXmKi1jlUOTSAxqLT2700o=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=9Px3/+qyoMM/+n9YqZUdQSrlmnBKLFq46cMpkJve6Js=;
+        b=ml9yDk1Xp3i+L38PcCT7E/wHMAINhPzgiGI5oUgEI004WzhQ+SYOoWxIfu8xhz6ml+
+         IgDE3/9wHWtNiPu63kmtwms2Box5SScGo4JQdSNE/2KCrKdeqImQP+i3SgfZAYB8sKMO
+         T1a+samIrZNBmniCv0B26EwY7P+9sxY34CEOXMbwaIZFrWgKuAmDJEHmrtSbPtJPQyBf
+         pPEMB243VHm7Bv1KsFrJ1AmyhsPNDBVqlARjl535jK7JpKwA1ew2WR5XDkm5DELJoeoP
+         8LNwD1JrZJuc6bcYa4Asl9YTcFN7ag+GJN+4oONfxSXgUiflbD1LIWl0gSNszhiv3QZ4
+         eGWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=9Px3/+qyoMM/+n9YqZUdQSrlmnBKLFq46cMpkJve6Js=;
+        b=lJACVuuKeG027wD/zmR7CDlWQkf5um3dVqEBdObQHjpGmkaD8FNdXqLmsciI5jwxbc
+         s7JBDAiGjociIPBE8PIdACuhGpzEEoviNUClpzBDFxbLWieKlRgwEaQXNRt0KoZV8bnI
+         /dL8Lp6efaTRBXU/FHlMmG2K7FKp25Qvvnu0pCRV/NiNIu0NzmUEtYe5JPdtTabjX0TS
+         Z6lqsTEDlDibtBvqqXb1ykK0HLtiTNlSvKHhpdhDFGmYSflTrlBy2SX2IdNVfGxHDGf8
+         T5x0Vsu4n/D/Dyw4PqX5dCDjLHZAQB0YjNevb6e8Q6g+yKXiwFQEANWMRTnE56wyNBst
+         VRjg==
+X-Gm-Message-State: AOAM531KBoYiGloaIVMUdnCRYUWJAqvJoQ2tiPBk03ITR4cSdZ89i5M5
+	5BcwN+U7H11wrM9d1k2+V660aHOPc/O8k0wsf3w=
+X-Google-Smtp-Source: 
+ ABdhPJw8VlZOFuSZCUwkAT4x7rjyXLrZYtp9LvSedgMqQ7YauJV04fSLiapwJbJicGNfgW+OhIE5PIRYYocWsVvrf6E=
+X-Received: by 2002:a05:620a:2990:: with SMTP id
+ r16mr9925836qkp.463.1643001230953;
+ Sun, 23 Jan 2022 21:13:50 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: fujitsu.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: OSBPR01MB1845.jpnprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 0a738703-829f-4bb6-246b-08d9deeef933
-X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Jan 2022 04:07:01.3472
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a19f121d-81e1-4858-a9d8-736e267fd4c7
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 
- FjUb997w2JJqmKLF2NHA9vF9rTVjRwL4bcofs8L7OZ0cp2mJPtVj5wYhGP+u4/WFyrEFq66CiZ2jJ1jFrJ70Bw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSBPR01MB1944
+References: <1642725351-24004-1-git-send-email-wangmy@fujitsu.com>
+ <1642725351-24004-2-git-send-email-wangmy@fujitsu.com>
+ <CAMKF1sq17qpZjOv_wD5OLM9yyW-_KkLX9=B5nPfpKgLRneHNvg@mail.gmail.com>
+ <OSBPR01MB184518BAB36CDC208212F232DC5E9@OSBPR01MB1845.jpnprd01.prod.outlook.com>
+In-Reply-To: 
+ <OSBPR01MB184518BAB36CDC208212F232DC5E9@OSBPR01MB1845.jpnprd01.prod.outlook.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 23 Jan 2022 21:13:40 -0800
+Message-ID: 
+ <CAMKF1srv-hW-=nZ=0JUsuR-_rPVf5sRmdg+3kprmVx7QXf2jew@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] sdbus-c++-libsystemd: upgrade 249 -> 250.3
+To: "wangmy@fujitsu.com" <wangmy@fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000bc91b105d64d0870"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Jan 2022 04:07:10 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Jan 2022 05:13:53 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95025
+ https://lists.openembedded.org/g/openembedded-devel/message/95026
 
-QXQgc3lzdGVtZCB0byBESVNUUk9fRkVBVFVSRVMgdG8gY29tcGlsZSBzeXN0ZW1kIGNhbiBzb2x2
-ZSB0aGlzIHByb2JsZW0uIA0KSSBhZGRlZCBzeXN0ZW1kIHRvIERFUEVORFMgaW4gYmIgZmlsZS4g
-U28gd2hlbiBjb21waWxpbmcsIGl0IHdpbGwgcHJvbXB0IHRoYXQgc3lzdGVtZCBuZWVkcyB0byBi
-ZSBhZGRlZCBpbiBESVNUUk9fRkVBVFVSRVMuDQpJcyB0aGlzIHNvbHV0aW9uIE9rPw0KwqAgLS0N
-CkJlc3QgUmVnYXJkcw0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tDQpXYW5nIE1pbmd5dQ0KRGV2ZWxvcG1lbnQgRGVwdC5JDQpOYW5qaW5nIEZ1aml0
-c3UgTmFuZGEgU29mdHdhcmUgVGVjaC4gQ28uLCBMdGQuKEZOU1QpIE5vLiA2IFdlbnpodSBSb2Fk
-LCBOYW5qaW5nLCAyMTAwMTIsIENoaW5hDQpURUw6ICs4NisyNS04NjYzMDU2Ni04NTY4DQpDT0lO
-UzogNzk5ODg1NDgNCkZBWDogKzg2KzI1LTgzMzE3Njg1DQpNQUlMOiB3YW5nbXlAZnVqaXRzdS5j
-b20NCmh0dHA6Ly93d3cuZnVqaXRzdS5jb20vY24vZm5zdC8NCg0KPiAtLS0tLU9yaWdpbmFsIE1l
-c3NhZ2UtLS0tLQ0KPiBGcm9tOiBLaGVtIFJhaiA8cmFqLmtoZW1AZ21haWwuY29tPg0KPiBTZW50
-OiBTYXR1cmRheSwgSmFudWFyeSAyMiwgMjAyMiAyOjA1IEFNDQo+IFRvOiBXYW5nLCBNaW5neXUv
-546LIOm4o+eRnCA8d2FuZ215QGZ1aml0c3UuY29tPg0KPiBDYzogb3BlbmVtYmVkZWQtZGV2ZWwg
-PG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPg0KPiBTdWJqZWN0OiBS
-ZTogW29lXSBbbWV0YS1vZV0gW1BBVENIXSBkbHQtZGFlbW9uOiB1cGdyYWRlIDIuMTguNyAtPiAy
-LjE4LjgNCj4gDQo+IGZhaWxzIHRvIGJ1aWxkIHNlZQ0KPiBodHRwczovL2F1dG9idWlsZGVyLnlv
-Y3RvcHJvamVjdC5vcmcvdHlwaG9vbi8jL2J1aWxkZXJzLzg4L2J1aWxkcy8xMzc2DQo+IA0KPiBP
-biBUaHUsIEphbiAyMCwgMjAyMiBhdCA0OjM2IFBNIHdhbmdteSA8d2FuZ215QGZ1aml0c3UuY29t
-PiB3cm90ZToNCj4gPg0KPiA+IENoYW5nZWxvZzoNCj4gPiA9PT09PT09PT0NCj4gPiBsaWI6IEZp
-eCB3cm9uZyB0eXBlIGFsZXJ0IGZyb20gbGd0bQ0KPiA+IGd0ZXN0X2RsdF9kYWVtb25fZ2F0ZXdh
-eTogZml4IGd0ZXN0IGJ1aWxkIGZhaWxlZA0KPiA+IGxpYjogZ2VuZXJhdGUgZGx0IGxpYnJhcnkg
-aW50ZXJuYWwgbG9nIGZpbGUNCj4gPiB0ZXN0czogYWRkIHN0ZGxpYiB0byBkbHRfY3BwX2V4dGVu
-c2lvbg0KPiA+IGRsdF91c2VyOiBNYWtlIGRsdF9pbml0IHRocmVhZCBzYWZlDQo+ID4gcmVtb3Zl
-IGNsYW5nLXRpZHkgYW5hbHl6ZXIgd2FybmluZ3M6IGluY29tcGF0aWJsZSBwb2ludGVyIHR5cGUN
-Cj4gPiBkZWJpYW46IGltcHJvdmUgZGViaWFuIGJ1aWxkIHBhY2thZ2UNCj4gPiBkbHQtY29udHJv
-bC1jb21tb246IHNodXRkb3duIGFuZCBjbG9zZSBzb2NrZXQNCj4gPiBkbHRfY29tbW9uOiBpbXBy
-b3ZlIGZ1bmN0aW9uIGRlc2NyaXB0aW9uDQo+ID4gZ3Rlc3Q6IEJyaW5nLWluIGNoYW5nZXMNCj4g
-PiBndGVzdDogUmV3b3JrIFdPUktJTkdfRElSRUNUT1JZDQo+ID4gZ3Rlc3Q6IENvcnJlY3QgZGF0
-YSBhbW91bnQgaW4gZ3Rlc3RfZGx0X2NvbW1vbg0KPiA+IGNtYWtlOiBTZXQgZW1wdHkgdG8gc3lz
-dGVtZF9TUkNTDQo+ID4gZ3Rlc3Q6IFJlZmFjdG9yIHRlc3RzL0NNYWtlTGlzdHMudHh0DQo+ID4g
-bGliOiBBZGQgU09DS19DTE9FWEVDIHRvIHNvY2tldA0KPiA+IGRhZW1vbjogQ3JlYXRlIHBhcmVu
-dCBkaXJlY3RvcnkgZm9yIHVuaXggc29ja2V0DQo+ID4gY21ha2U6IENvcnJlY3QgYWRkZWQgc3Vi
-ZGlyZWN0b3JpZXMNCj4gPiBjb25zb2xlOiBBZGQgY21ha2Ugb3B0aW9ucyBmb3IgY29udHJvbCBh
-bmQgdGltZXN0YW1wDQo+ID4gdGVzdHM6IEFkYXB0IHRvIERMVF9ESVNBQkxFX01BQ1JPDQo+ID4g
-aGVhZGVyOiBBZGFwdCB0byBETFRfRElTQUJMRV9NQUNSTw0KPiA+IGluY2x1ZGU6IFJlZmFjdG9y
-IENNYWtlTGlzdHMudHh0DQo+ID4gZ3Rlc3Q6IENoYW5nZSBzY3JpcHQgbmFtZSB0byBndGVzdF9k
-bHRfZGFlbW9uX29mZmxpbmVfbG9nLnNoDQo+ID4gZGFlbW9uOiBFbmFibGUgdG8gdXNlIEZJRk8g
-b24gUU5YDQo+ID4gdGVzdHM6IEFkZCBuZXcgdGVzdCBjYXNlIHdpdGggZ2l2ZW4gYnVmZmVyDQo+
-ID4gdGVzdHM6IEVuYWJsZSBtYWNybyBkaXNhYmxpbmcNCj4gPiBsaWI6IEFkZCBuZXcgaW50ZXJm
-YWNlcyB3aXRoIGdpdmVuIGJ1ZmZlciBJbXBsZW1lbnRpb24gb2YgdGVzdHMgZm9yDQo+ID4gdGhl
-IGRsdC1xbngtc3lzdGVtIG1vZHVsZQ0KPiA+IGxpYjogQWRkIE1heEZpbGVTaXplIGhhbmRsaW5n
-DQo+ID4gY2xpZW50OiBwdGhyZWFkX2pvaW4gZm9yIGRlaW5pdA0KPiA+IGRvYzogdXBkYXRlIGlu
-aXRpYWwgbG9nIGxldmVsIGRvY3VtZW50DQo+ID4gZGx0LXN5c3RlbTogRml4IG1lbW9yeSBsZWFr
-IGluIGRsdC1zeXN0ZW0gY29uZmlnDQo+ID4gZGx0X2NvbW1vbjogcmVtb3ZlIGR1cGxpY2F0ZSBz
-dGRib29sIGhlYWRlcg0KPiA+IGRsdC1jb250cm9sOiBBZGQgb3B0aW9uIHRvIGNvbmZpZyBwb3J0
-DQo+ID4gc3lzdGVtOiB1c2Ugc2lnbmFsZmQgZm9yIGRsdC1zeXN0ZW0NCj4gPiBjb25zb2xlOiBw
-cm92aWRlcyBhcmdzIG9wdGlvbiB0byBlbmFibGUgc2VuZC9yZWNlaXZlIHNlcmlhbCBoZWFkZXIg
-Zml4DQo+ID4gbWFsZm9ybWVkIHByaW50ZiBmb3JtYXQgc3RyaW5ncyAoIzI5NSkNCj4gPiBjbWFr
-ZTogU2V0IFdJVEhfTEVHQUNZX0lOQ0xVREVfUEFUSCB0byBPTiBhcyBkZWZhdWx0ICgjMzM0KSBN
-YWtlDQo+IHRoZQ0KPiA+IGxlZ2FjeSBpbmNsdWRlIHBhdGggYSBDTWFrZSBvcHRpb24gKCMzMzIp
-DQo+ID4gZGFlbW9uOiBDYWxsIGRsdF9kYWVtb25fY29uZmlndXJhdGlvbl9sb2FkKCkgcHJvcGVy
-bHkgKCMzMzApDQo+ID4gZGx0X3VzZXI6IFVzZSBwdGhyZWFkX3NldG5hbWVfbnAoKSBpZiBhdmFp
-bGFibGUgKCMzMjYpDQo+ID4gbGliZGx0OiBBZGQgbGVnYWN5IGluY2x1ZGUgcGF0aCBpbiBleHBv
-cnRlZCBDTWFrZSBjb25maWcgZmlsZSAoIzMyNykNCj4gPiBsaWI6IFNldCBUWUxFIHRvIDEgZm9y
-IEJPT0wgdHlwZSAoIzMyMCkNCj4gPiBmaWxlLXRyYW5zZmVyOiBBYm9ydCBmaWxlIHRyYW5zZmVy
-IGlmIGdldCBzZXJpYWwgbnVtYmVyIGZhaWxlZA0KPiA+IGRsdF91c2VyLmM6IGZpeGluZyBjYXN0
-aW5nIHdyb25nIHR5cGUNCj4gPiBkbHQtc29ydGJ5dGltZXN0YW1wOiBSZW1vdmUgZHVwbGljYXRl
-ZCBjb25kaXRpb25hbCBzdGF0ZW1lbnRzIGNvZGUNCj4gPiBkbHQtY29udmVydDogUmVtb3ZlIGR1
-cGxpY2F0ZWQgY29uZGl0aW9uYWwgc3RhdGVtZW50cyBjb2RlDQo+ID4gZG9jOiBNaW5vciBmaXgg
-aW4gZGx0X2Zvcl9kZXZlbG9wZXJzLm1kICgjMzIxKQ0KPiA+IGRsdC1jb250cm9sLWNvbW1vbi5j
-OiBGaXggYnVpbGQgZmFpbHVyZSBkdWUgdG8gb3V0LW9mLWJvdW5kIHdyaXRlDQo+ID4gLVdlcnJv
-cj1zdHJpbmdvcC10cnVuY2F0aW9uIEV4dGVuZCBpbmNsdWRlIHBhdGggaW4gKi5wYyBmaWxlICgj
-MzE5KQ0KPiA+DQo+ID4gU2lnbmVkLW9mZi1ieTogV2FuZyBNaW5neXUgPHdhbmdteUBmdWppdHN1
-LmNvbT4NCj4gPiAtLS0NCj4gPiAgLi4uL2RsdC1kYWVtb24vZGx0LWRhZW1vbi8zMTcucGF0Y2gg
-ICAgICAgICAgIHwgNDMgLS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiA+ICAuLi4tZGFlbW9uXzIuMTgu
-Ny5iYiA9PiBkbHQtZGFlbW9uXzIuMTguOC5iYn0gfCAgOSArKy0tDQo+ID4gIDIgZmlsZXMgY2hh
-bmdlZCwgNCBpbnNlcnRpb25zKCspLCA0OCBkZWxldGlvbnMoLSkgIGRlbGV0ZSBtb2RlIDEwMDY0
-NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9kbHQtZGFlbW9uL2RsdC1kYWVtb24vMzE3
-LnBhdGNoDQo+ID4gIHJlbmFtZSBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvZGx0LWRhZW1vbi97
-ZGx0LWRhZW1vbl8yLjE4LjcuYmINCj4gPT4NCj4gPiBkbHQtZGFlbW9uXzIuMTguOC5iYn0gKDkz
-JSkNCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvZGx0LWRh
-ZW1vbi9kbHQtZGFlbW9uLzMxNy5wYXRjaA0KPiA+IGIvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVk
-L2RsdC1kYWVtb24vZGx0LWRhZW1vbi8zMTcucGF0Y2gNCj4gPiBkZWxldGVkIGZpbGUgbW9kZSAx
-MDA2NDQNCj4gPiBpbmRleCBmZTQwMzM0YjYuLjAwMDAwMDAwMA0KPiA+IC0tLSBhL21ldGEtb2Uv
-cmVjaXBlcy1leHRlbmRlZC9kbHQtZGFlbW9uL2RsdC1kYWVtb24vMzE3LnBhdGNoDQo+ID4gKysr
-IC9kZXYvbnVsbA0KPiA+IEBAIC0xLDQzICswLDAgQEANCj4gPiAtT3JpZ2luOiBodHRwczovL2dp
-dGh1Yi5jb20vR0VOSVZJL2RsdC1kYWVtb24vcHVsbC8zMTcNCj4gPiAtRnJvbSA1NWQzMTIxNjgy
-Mzg0MWExNTQ3ZmUyNjFjZGY4ZTNiMTAwMmQ1Zjk0IE1vbiBTZXAgMTcNCj4gMDA6MDA6MDANCj4g
-PiAyMDAxDQo+ID4gLUZyb206IEdpYW5mcmFuY28gQ29zdGFtYWduYSA8Y29zdGFtYWduYWdpYW5m
-cmFuY29AeWFob28uaXQ+DQo+ID4gLURhdGU6IFRodSwgMSBKdWwgMjAyMSAxMjo1ODoyMCArMDIw
-MA0KPiA+IC1TdWJqZWN0OiBbUEFUQ0hdIGRsdC1jb250cm9sLWNvbW1vbi5jOiBGaXggYnVpbGQg
-ZmFpbHVyZSBkdWUgdG8NCj4gPiBvdXQtb2YtYm91bmQNCj4gPiAtIHdyaXRlIC1XZXJyb3I9c3Ry
-aW5nb3AtdHJ1bmNhdGlvbg0KPiA+IC0NCj4gPiAtY2QNCj4gL2J1aWxkL2RsdC1kYWVtb24tMi4x
-OC43L29iai14ODZfNjQtbGludXgtZ251L3NyYy9jb25zb2xlL2xvZ3N0b3JhZ2UgJiYNCj4gL3Vz
-ci9iaW4vY2MgLURDT05GSUdVUkFUSU9OX0ZJTEVTX0RJUj1cIi9ldGNcIg0KPiAtRERMVF9EQUVN
-T05fVVNFX0ZJRk9fSVBDIC1ERExUX0xJQl9VU0VfRklGT19JUEMNCj4gLURETFRfTkVUV09SS19U
-UkFDRV9FTkFCTEUgLURETFRfU1lTVEVNRF9FTkFCTEUNCj4gLURETFRfU1lTVEVNRF9KT1VSTkFM
-X0VOQUJMRSAtRERMVF9VTklUX1RFU1RTDQo+IC1ERExUX1VTRVJfSVBDX1BBVEg9XCIvdG1wXCIg
-LURETFRfVVNFX0lQdjYgLURFWFRFTkRFRF9GSUxURVJJTkcNCj4gLURfR05VX1NPVVJDRSAtSS9i
-dWlsZC9kbHQtZGFlbW9uLTIuMTguNw0KPiAtSS9idWlsZC9kbHQtZGFlbW9uLTIuMTguNy9vYmot
-eDg2XzY0LWxpbnV4LWdudS9pbmNsdWRlL2RsdA0KPiAtSS9idWlsZC9kbHQtZGFlbW9uLTIuMTgu
-Ny9pbmNsdWRlL2RsdA0KPiAtSS9idWlsZC9kbHQtZGFlbW9uLTIuMTguNy9zcmMvc2hhcmVkDQo+
-IC1JL2J1aWxkL2RsdC1kYWVtb24tMi4xOC43L3NyYy9jb3JlX2R1bXBfaGFuZGxlcg0KPiAtSS9i
-dWlsZC9kbHQtZGFlbW9uLTIuMTguNy9zcmMvb2ZmbGluZWxvZ3N0b3JhZ2UNCj4gLUkvYnVpbGQv
-ZGx0LWRhZW1vbi0yLjE4Ljcvc3JjL2xpYiAtSS9idWlsZC9kbHQtZGFlbW9uLTIuMTguNy9zcmMv
-ZGFlbW9uDQo+IC1JL2J1aWxkL2RsdC1kYWVtb24tMi4xOC43L3NyYy9jb25zb2xlDQo+IC1JL2J1
-aWxkL2RsdC1kYWVtb24tMi4xOC43L3NyYy9nYXRld2F5DQo+IC1JL2J1aWxkL2RsdC1kYWVtb24t
-Mi4xOC43L3N5c3RlbWQvM3JkcGFydHkgLWcgLU8yDQo+IC1mZmlsZS1wcmVmaXgtbWFwPS9idWls
-ZC9kbHQtZGFlbW9uLTIuMTguNz0uIC1mc3RhY2stcHJvdGVjdG9yLXN0cm9uZw0KPiAtV2Zvcm1h
-dCAtV2Vycm9yPWZvcm1hdC1zZWN1cml0eSAtV2RhdGUtdGltZSAtRF9GT1JUSUZZX1NPVVJDRT0y
-DQo+IC1XZXJyb3IgLXN0ZD1nbnU5OSAtV2FsbCAtV2V4dHJhIC1Xbm8tdmFyaWFkaWMtbWFjcm9z
-DQo+IC1Xbm8tc3RyaWN0LWFsaWFzaW5nIC1vDQo+IENNYWtlRmlsZXMvZGx0LWxvZ3N0b3JhZ2Ut
-Y3RybC5kaXIvX18vZGx0LWNvbnRyb2wtY29tbW9uLmMubyAtYw0KPiAvYnVpbGQvZGx0LWRhZW1v
-bi0yLjE4Ljcvc3JjL2NvbnNvbGUvZGx0LWNvbnRyb2wtY29tbW9uLmMNCj4gPiAtbWFrZVszXTog
-TGVhdmluZyBkaXJlY3RvcnkNCj4gJy9idWlsZC9kbHQtZGFlbW9uLTIuMTguNy9vYmoteDg2XzY0
-LWxpbnV4LWdudScNCj4gPiAtSW4gZmlsZSBpbmNsdWRlZCBmcm9tIC91c3IvaW5jbHVkZS9zdHJp
-bmcuaDo0OTUsDQo+ID4gLSAgICAgICAgICAgICAgICAgZnJvbQ0KPiAvYnVpbGQvZGx0LWRhZW1v
-bi0yLjE4Ljcvc3JjL2NvbnNvbGUvZGx0LWNvbnRyb2wtY29tbW9uLmM6NTY6DQo+ID4gLUluIGZ1
-bmN0aW9uICdzdHJuY3B5JywNCj4gPiAtICAgIGlubGluZWQgZnJvbSAnZGx0X2pzb25fZmlsdGVy
-X2xvYWQnIGF0DQo+IC9idWlsZC9kbHQtZGFlbW9uLTIuMTguNy9zcmMvY29uc29sZS9kbHQtY29u
-dHJvbC1jb21tb24uYzo3MTY6MTM6DQo+ID4gLS91c3IvaW5jbHVkZS94ODZfNjQtbGludXgtZ251
-L2JpdHMvc3RyaW5nX2ZvcnRpZmllZC5oOjEwNjoxMDogZXJyb3I6DQo+ICdfX2J1aWx0aW5fc3Ry
-bmNweScgc3BlY2lmaWVkIGJvdW5kIDQgZXF1YWxzIGRlc3RpbmF0aW9uIHNpemUNCj4gWy1XZXJy
-b3I9c3RyaW5nb3AtdHJ1bmNhdGlvbl0NCj4gPiAtICAxMDYgfCAgIHJldHVybiBfX2J1aWx0aW5f
-X19zdHJuY3B5X2NoayAoX19kZXN0LCBfX3NyYywgX19sZW4sIF9fYm9zDQo+IChfX2Rlc3QpKTsN
-Cj4gPiAtICAgICAgfA0KPiBefn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+
-fn5+fn5+fn5+fn5+fn5+fn5+fn5+fg0KPiA+IC1JbiBmdW5jdGlvbiAnc3RybmNweScsDQo+ID4g
-LSAgICBpbmxpbmVkIGZyb20gJ2RsdF9qc29uX2ZpbHRlcl9sb2FkJyBhdA0KPiAvYnVpbGQvZGx0
-LWRhZW1vbi0yLjE4Ljcvc3JjL2NvbnNvbGUvZGx0LWNvbnRyb2wtY29tbW9uLmM6NzIxOjEzOg0K
-PiA+IC0vdXNyL2luY2x1ZGUveDg2XzY0LWxpbnV4LWdudS9iaXRzL3N0cmluZ19mb3J0aWZpZWQu
-aDoxMDY6MTA6IGVycm9yOg0KPiAnX19idWlsdGluX3N0cm5jcHknIHNwZWNpZmllZCBib3VuZCA0
-IGVxdWFscyBkZXN0aW5hdGlvbiBzaXplDQo+IFstV2Vycm9yPXN0cmluZ29wLXRydW5jYXRpb25d
-DQo+ID4gLSAgMTA2IHwgICByZXR1cm4gX19idWlsdGluX19fc3RybmNweV9jaGsgKF9fZGVzdCwg
-X19zcmMsIF9fbGVuLCBfX2Jvcw0KPiAoX19kZXN0KSk7DQo+ID4gLSAgICAgIHwNCj4gXn5+fn5+
-fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn4N
-Cj4gPiAtDQo+ID4gLVNpZ25lZC1vZmYtYnk6IEdpYW5mcmFuY28gQ29zdGFtYWduYQ0KPiA8Y29z
-dGFtYWduYWdpYW5mcmFuY29AeWFob28uaXQ+DQo+ID4gLVNpZ25lZC1vZmYtYnk6IEdpYW5mcmFu
-Y28gQ29zdGFtYWduYSA8bG9jdXR1c29mYm9yZ0BkZWJpYW4ub3JnPg0KPiA+IC0tLS0NCj4gPiAt
-IHNyYy9jb25zb2xlL2RsdC1jb250cm9sLWNvbW1vbi5jIHwgNCArKy0tDQo+ID4gLSAxIGZpbGUg
-Y2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQ0KPiA+IC0NCj4gPiAtZGlm
-ZiAtLWdpdCBhL3NyYy9jb25zb2xlL2RsdC1jb250cm9sLWNvbW1vbi5jDQo+ID4gYi9zcmMvY29u
-c29sZS9kbHQtY29udHJvbC1jb21tb24uYw0KPiA+IC1pbmRleCA4YTlkMjlmMC4uZjU4ZDgyNjgg
-MTAwNjQ0DQo+ID4gLS0tLSBhL3NyYy9jb25zb2xlL2RsdC1jb250cm9sLWNvbW1vbi5jDQo+ID4g
-LSsrKyBiL3NyYy9jb25zb2xlL2RsdC1jb250cm9sLWNvbW1vbi5jDQo+ID4gLUBAIC02NzEsOCAr
-NjcxLDggQEAgRGx0UmV0dXJuVmFsdWUgZGx0X2pzb25fZmlsdGVyX2xvYWQoRGx0RmlsdGVyDQo+
-ICpmaWx0ZXIsIGNvbnN0IGNoYXIgKmZpbGVuYW1lLCBpbnQNCj4gPiAtICAgICBzdHJ1Y3QganNv
-bl9vYmplY3QgKmpfcGF5bG9hZF9tYXg7DQo+ID4gLSAgICAgZW51bSBqc29uX3Rva2VuZXJfZXJy
-b3IgamVycjsNCj4gPiAtDQo+ID4gLS0gICAgY2hhciBhcHBfaWRbRExUX0lEX1NJWkVdID0gIiI7
-DQo+ID4gLS0gICAgY2hhciBjb250ZXh0X2lkW0RMVF9JRF9TSVpFXSA9ICIiOw0KPiA+IC0rICAg
-IGNoYXIgYXBwX2lkW0RMVF9JRF9TSVpFICsgMV0gPSAiIjsNCj4gPiAtKyAgICBjaGFyIGNvbnRl
-eHRfaWRbRExUX0lEX1NJWkUgKyAxXSA9ICIiOw0KPiA+IC0gICAgIGludDMyX3QgbG9nX2xldmVs
-ID0gMDsNCj4gPiAtICAgICBpbnQzMl90IHBheWxvYWRfbWF4ID0gSU5UMzJfTUFYOw0KPiA+IC0g
-ICAgIGludDMyX3QgcGF5bG9hZF9taW4gPSAwOw0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3Jl
-Y2lwZXMtZXh0ZW5kZWQvZGx0LWRhZW1vbi9kbHQtZGFlbW9uXzIuMTguNy5iYg0KPiA+IGIvbWV0
-YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2RsdC1kYWVtb24vZGx0LWRhZW1vbl8yLjE4LjguYmINCj4g
-PiBzaW1pbGFyaXR5IGluZGV4IDkzJQ0KPiA+IHJlbmFtZSBmcm9tDQo+IG1ldGEtb2UvcmVjaXBl
-cy1leHRlbmRlZC9kbHQtZGFlbW9uL2RsdC1kYWVtb25fMi4xOC43LmJiDQo+ID4gcmVuYW1lIHRv
-IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9kbHQtZGFlbW9uL2RsdC1kYWVtb25fMi4xOC44LmJi
-DQo+ID4gaW5kZXggZTVhM2M3YzI5Li5mYzkwZDMwYjggMTAwNjQ0DQo+ID4gLS0tIGEvbWV0YS1v
-ZS9yZWNpcGVzLWV4dGVuZGVkL2RsdC1kYWVtb24vZGx0LWRhZW1vbl8yLjE4LjcuYmINCj4gPiAr
-KysgYi9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvZGx0LWRhZW1vbi9kbHQtZGFlbW9uXzIuMTgu
-OC5iYg0KPiA+IEBAIC0xNSwxMSArMTUsMTAgQEAgTElDX0ZJTEVTX0NIS1NVTSA9DQo+ICJmaWxl
-Oi8vTElDRU5TRTttZDU9ODE4NDIwODA2MGRmODgwZmUzMTM3YjkzZWI4OGFlZWEiDQo+ID4gIERF
-UEVORFMgPSAiemxpYiBnemlwLW5hdGl2ZSBqc29uLWMiDQo+ID4NCj4gPiAgU1JDX1VSSSA9DQo+
-ICJnaXQ6Ly9naXRodWIuY29tL0dFTklWSS8ke0JQTn0uZ2l0O3Byb3RvY29sPWh0dHBzO2JyYW5j
-aD1tYXN0ZXIgXA0KPiA+IC0gICAgZmlsZTovLzAwMDItRG9uLXQtZXhlY3V0ZS1wcm9jZXNzZXMt
-YXMtYS1zcGVjaWZpYy11c2VyLnBhdGNoIFwNCj4gPiAtICAgIGZpbGU6Ly8wMDA0LU1vZGlmeS1z
-eXN0ZW1kLWNvbmZpZy1kaXJlY3RvcnkucGF0Y2ggXA0KPiA+IC0gICAgZmlsZTovLzMxNy5wYXRj
-aCBcDQo+ID4gLSINCj4gPiAtU1JDUkVWID0gIjI0ZDE5NzIxNGJmZGNlYzc0MzBkMzFiNDJlNWM4
-N2RmMjcyODdhYWYiDQo+ID4gKw0KPiBmaWxlOi8vMDAwMi1Eb24tdC1leGVjdXRlLXByb2Nlc3Nl
-cy1hcy1hLXNwZWNpZmljLXVzZXIucGF0Y2ggXA0KPiA+ICsgICAgICAgICAgIGZpbGU6Ly8wMDA0
-LU1vZGlmeS1zeXN0ZW1kLWNvbmZpZy1kaXJlY3RvcnkucGF0Y2ggXA0KPiA+ICsgICAgICAgICAg
-ICINCj4gPiArU1JDUkVWID0gIjE0MzhmY2Y4Yzg4Y2Q0N2IyMGIyOTg0MTgwYTg0NTdjM2ViOTE5
-M2QiDQo+ID4NCj4gPiAgUyA9ICIke1dPUktESVJ9L2dpdCINCj4gPg0KPiA+IC0tDQo+ID4gMi4y
-NS4xDQo+ID4NCj4gPg0KPiA+IC09LT0tPS09LT0tPS09LT0tPS09LT0tDQo+ID4gTGlua3M6IFlv
-dSByZWNlaXZlIGFsbCBtZXNzYWdlcyBzZW50IHRvIHRoaXMgZ3JvdXAuDQo+ID4gVmlldy9SZXBs
-eSBPbmxpbmUgKCM5NDk2MCk6DQo+ID4gaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cv
-b3BlbmVtYmVkZGVkLWRldmVsL21lc3NhZ2UvOTQ5NjANCj4gPiBNdXRlIFRoaXMgVG9waWM6IGh0
-dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tdC84ODU3MzY1MC8xOTk3OTE0DQo+ID4gR3Jv
-dXAgT3duZXI6IG9wZW5lbWJlZGRlZC1kZXZlbCtvd25lckBsaXN0cy5vcGVuZW1iZWRkZWQub3Jn
-DQo+ID4gVW5zdWJzY3JpYmU6DQo+IGh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9nL29w
-ZW5lbWJlZGRlZC1kZXZlbC91bnN1Yg0KPiA+IFtyYWoua2hlbUBnbWFpbC5jb21dDQo+ID4gLT0t
-PS09LT0tPS09LT0tPS09LT0tPS0NCj4gPg0K
+--000000000000bc91b105d64d0870
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Sun, Jan 23, 2022 at 6:57 PM wangmy@fujitsu.com <wangmy@fujitsu.com>
+wrote:
+
+> When compiling the systemd, this message will be displayed:
+> systemd-1_250.1-r0 do_warn_musl: Using systemd with musl is not
+> recommended since it is not supported upstream and some patches are known
+> to be problematic.
+> Does sdbus-c++-libsystemd need to be compiled in musl?
+>
+
+Yes. I have send a patch to bring in needed patches for systemd 250 on musl
+
+
+>   --
+> Best Regards
+> ---------------------------------------------------
+> Wang Mingyu
+> Development Dept.I
+> Nanjing Fujitsu Nanda Software Tech. Co., Ltd.(FNST) No. 6 Wenzhu Road,
+> Nanjing, 210012, China
+> <https://www.google.com/maps/search/Wenzhu+Road,+Nanjing,+210012,+China?e=
+ntry=3Dgmail&source=3Dg>
+> TEL: +86+25-86630566-8568
+> COINS: 79988548
+> FAX: +86+25-83317685
+> MAIL: wangmy@fujitsu.com
+> http://www.fujitsu.com/cn/fnst/
+>
+> > -----Original Message-----
+> > From: Khem Raj <raj.khem@gmail.com>
+> > Sent: Saturday, January 22, 2022 3:40 AM
+> > To: Wang, Mingyu/=E7=8E=8B =E9=B8=A3=E7=91=9C <wangmy@fujitsu.com>
+> > Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+> > Subject: Re: [oe] [meta-oe] [PATCH] sdbus-c++-libsystemd: upgrade 249 -=
+>
+> > 250.3
+> >
+> > this fails on musl
+> > https://errors.yoctoproject.org/Errors/Details/623260/
+> >
+> > On Thu, Jan 20, 2022 at 4:36 PM wangmy <wangmy@fujitsu.com> wrote:
+> > >
+> > > Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> > > ---
+> > >  ...us-c++-libsystemd_249.bb =3D> sdbus-c++-libsystemd_250.3.bb} | 4
+> > > ++--
+> > >  1 file changed, 2 insertions(+), 2 deletions(-)  rename
+> > > meta-oe/recipes-core/sdbus-c++/{sdbus-c++-libsystemd_249.bb =3D>
+> > > sdbus-c++-libsystemd_250.3.bb} (97%)
+> > >
+> > > diff --git
+> > > a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_249.bb
+> > > b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_250.3.bb
+> > > similarity index 97%
+> > > rename from
+> > meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_249.bb
+> > > rename to
+> > meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_250.3.bb
+> > > index a3ef6a747..0cd96f528 100644
+> > > --- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_249.bb
+> > > +++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_250.3.bb
+> > > @@ -10,8 +10,8 @@ inherit meson pkgconfig
+> > >
+> > >  DEPENDS +=3D "gperf-native gettext-native util-linux libcap util-lin=
+ux
+> > python3-jinja2-native"
+> > >
+> > > -SRCREV =3D "00b0393e65252bf631670604f58b844780b08c50"
+> > > -SRCBRANCH =3D "v249-stable"
+> > > +SRCREV =3D "1b003bbc806198dbdd57b405d968f30565495e70"
+> > > +SRCBRANCH =3D "v250-stable"
+> > >  SRC_URI =3D
+> > "git://github.com/systemd/systemd-stable.git;protocol=3Dhttps;branch=3D=
+${SRC
+> <http://github.com/systemd/systemd-stable.git;protocol=3Dhttps;branch=3D$=
+%7BSRC>
+> > BRANCH} \
+> > >             file://static-libsystemd-pkgconfig.patch \
+> > >             "
+> > > --
+> > > 2.25.1
+> > >
+> > >
+> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > > Links: You receive all messages sent to this group.
+> > > View/Reply Online (#94961):
+> > > https://lists.openembedded.org/g/openembedded-devel/message/94961
+> > > Mute This Topic: https://lists.openembedded.org/mt/88573656/1997914
+> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > > Unsubscribe:
+> > https://lists.openembedded.org/g/openembedded-devel/unsub
+> > > [raj.khem@gmail.com]
+> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > >
+>
+
+--000000000000bc91b105d64d0870
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Sun, Jan 23, 2022 at 6:57 PM <a href=3D"mailto:wangmy@fu=
+jitsu.com">wangmy@fujitsu.com</a> &lt;<a href=3D"mailto:wangmy@fujitsu.com"=
+>wangmy@fujitsu.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quot=
+e" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-styl=
+e:solid;padding-left:1ex;border-left-color:rgb(204,204,204)">When compiling=
+ the systemd, this message will be displayed: <br>
+systemd-1_250.1-r0 do_warn_musl: Using systemd with musl is not recommended=
+ since it is not supported upstream and some patches are known to be proble=
+matic.<br>
+Does sdbus-c++-libsystemd need to be compiled in musl?<br>
+</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Yes. I have send=
+ a patch to bring in needed patches for systemd 250 on musl=C2=A0</div><div=
+ dir=3D"auto"><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0=
+px 0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;padding-left=
+:1ex;border-left-color:rgb(204,204,204)"><br>
+=C2=A0 --<br>
+Best Regards<br>
+---------------------------------------------------<br>
+Wang Mingyu<br>
+Development Dept.I<br>
+Nanjing Fujitsu Nanda Software Tech. Co., Ltd.(FNST) No. 6 <a href=3D"https=
+://www.google.com/maps/search/Wenzhu+Road,+Nanjing,+210012,+China?entry=3Dg=
+mail&amp;source=3Dg">Wenzhu Road, Nanjing, 210012, China</a><br>
+TEL: +86+25-86630566-8568<br>
+COINS: 79988548<br>
+FAX: +86+25-83317685<br>
+MAIL: <a href=3D"mailto:wangmy@fujitsu.com" target=3D"_blank">wangmy@fujits=
+u.com</a><br>
+<a href=3D"http://www.fujitsu.com/cn/fnst/" rel=3D"noreferrer" target=3D"_b=
+lank">http://www.fujitsu.com/cn/fnst/</a><br>
+<br>
+&gt; -----Original Message-----<br>
+&gt; From: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_bl=
+ank">raj.khem@gmail.com</a>&gt;<br>
+&gt; Sent: Saturday, January 22, 2022 3:40 AM<br>
+&gt; To: Wang, Mingyu/=E7=8E=8B =E9=B8=A3=E7=91=9C &lt;<a href=3D"mailto:wa=
+ngmy@fujitsu.com" target=3D"_blank">wangmy@fujitsu.com</a>&gt;<br>
+&gt; Cc: openembeded-devel &lt;<a href=3D"mailto:openembedded-devel@lists.o=
+penembedded.org" target=3D"_blank">openembedded-devel@lists.openembedded.or=
+g</a>&gt;<br>
+&gt; Subject: Re: [oe] [meta-oe] [PATCH] sdbus-c++-libsystemd: upgrade 249 =
+-&gt;<br>
+&gt; 250.3<br>
+&gt; <br>
+&gt; this fails on musl<br>
+&gt; <a href=3D"https://errors.yoctoproject.org/Errors/Details/623260/" rel=
+=3D"noreferrer" target=3D"_blank">https://errors.yoctoproject.org/Errors/De=
+tails/623260/</a><br>
+&gt; <br>
+&gt; On Thu, Jan 20, 2022 at 4:36 PM wangmy &lt;<a href=3D"mailto:wangmy@fu=
+jitsu.com" target=3D"_blank">wangmy@fujitsu.com</a>&gt; wrote:<br>
+&gt; &gt;<br>
+&gt; &gt; Signed-off-by: Wang Mingyu &lt;<a href=3D"mailto:wangmy@fujitsu.c=
+om" target=3D"_blank">wangmy@fujitsu.com</a>&gt;<br>
+&gt; &gt; ---<br>
+&gt; &gt;=C2=A0 ...us-c++-<a href=3D"http://libsystemd_249.bb" rel=3D"noref=
+errer" target=3D"_blank">libsystemd_249.bb</a> =3D&gt; sdbus-c++-<a href=3D=
+"http://libsystemd_250.3.bb" rel=3D"noreferrer" target=3D"_blank">libsystem=
+d_250.3.bb</a>} | 4<br>
+&gt; &gt; ++--<br>
+&gt; &gt;=C2=A0 1 file changed, 2 insertions(+), 2 deletions(-)=C2=A0 renam=
+e<br>
+&gt; &gt; meta-oe/recipes-core/sdbus-c++/{sdbus-c++-<a href=3D"http://libsy=
+stemd_249.bb" rel=3D"noreferrer" target=3D"_blank">libsystemd_249.bb</a> =
+=3D&gt;<br>
+&gt; &gt; sdbus-c++-<a href=3D"http://libsystemd_250.3.bb" rel=3D"noreferre=
+r" target=3D"_blank">libsystemd_250.3.bb</a>} (97%)<br>
+&gt; &gt;<br>
+&gt; &gt; diff --git<br>
+&gt; &gt; a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-<a href=3D"http://libs=
+ystemd_249.bb" rel=3D"noreferrer" target=3D"_blank">libsystemd_249.bb</a><b=
+r>
+&gt; &gt; b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-<a href=3D"http://libs=
+ystemd_250.3.bb" rel=3D"noreferrer" target=3D"_blank">libsystemd_250.3.bb</=
+a><br>
+&gt; &gt; similarity index 97%<br>
+&gt; &gt; rename from<br>
+&gt; meta-oe/recipes-core/sdbus-c++/sdbus-c++-<a href=3D"http://libsystemd_=
+249.bb" rel=3D"noreferrer" target=3D"_blank">libsystemd_249.bb</a><br>
+&gt; &gt; rename to<br>
+&gt; meta-oe/recipes-core/sdbus-c++/sdbus-c++-<a href=3D"http://libsystemd_=
+250.3.bb" rel=3D"noreferrer" target=3D"_blank">libsystemd_250.3.bb</a><br>
+&gt; &gt; index a3ef6a747..0cd96f528 100644<br>
+&gt; &gt; --- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-<a href=3D"http://=
+libsystemd_249.bb" rel=3D"noreferrer" target=3D"_blank">libsystemd_249.bb</=
+a><br>
+&gt; &gt; +++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-<a href=3D"http://=
+libsystemd_250.3.bb" rel=3D"noreferrer" target=3D"_blank">libsystemd_250.3.=
+bb</a><br>
+&gt; &gt; @@ -10,8 +10,8 @@ inherit meson pkgconfig<br>
+&gt; &gt;<br>
+&gt; &gt;=C2=A0 DEPENDS +=3D &quot;gperf-native gettext-native util-linux l=
+ibcap util-linux<br>
+&gt; python3-jinja2-native&quot;<br>
+&gt; &gt;<br>
+&gt; &gt; -SRCREV =3D &quot;00b0393e65252bf631670604f58b844780b08c50&quot;<=
+br>
+&gt; &gt; -SRCBRANCH =3D &quot;v249-stable&quot;<br>
+&gt; &gt; +SRCREV =3D &quot;1b003bbc806198dbdd57b405d968f30565495e70&quot;<=
+br>
+&gt; &gt; +SRCBRANCH =3D &quot;v250-stable&quot;<br>
+&gt; &gt;=C2=A0 SRC_URI =3D<br>
+&gt; &quot;git://<a href=3D"http://github.com/systemd/systemd-stable.git;pr=
+otocol=3Dhttps;branch=3D$%7BSRC" rel=3D"noreferrer" target=3D"_blank">githu=
+b.com/systemd/systemd-stable.git;protocol=3Dhttps;branch=3D${SRC</a><br>
+&gt; BRANCH} \<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://static-libs=
+ystemd-pkgconfig.patch \<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;<br>
+&gt; &gt; --<br>
+&gt; &gt; 2.25.1<br>
+&gt; &gt;<br>
+&gt; &gt;<br>
+&gt; &gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt; &gt; Links: You receive all messages sent to this group.<br>
+&gt; &gt; View/Reply Online (#94961):<br>
+&gt; &gt; <a href=3D"https://lists.openembedded.org/g/openembedded-devel/me=
+ssage/94961" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedde=
+d.org/g/openembedded-devel/message/94961</a><br>
+&gt; &gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/885=
+73656/1997914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembed=
+ded.org/mt/88573656/1997914</a><br>
+&gt; &gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.o=
+penembedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembed=
+ded.org</a><br>
+&gt; &gt; Unsubscribe:<br>
+&gt; <a href=3D"https://lists.openembedded.org/g/openembedded-devel/unsub" =
+rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/g/opene=
+mbedded-devel/unsub</a><br>
+&gt; &gt; [<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem=
+@gmail.com</a>]<br>
+&gt; &gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt; &gt;<br>
+</blockquote></div></div>
+
+--000000000000bc91b105d64d0870--
 
