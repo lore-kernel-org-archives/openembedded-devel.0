@@ -1,81 +1,124 @@
-Return-Path: <ross@burtonini.com>
+Return-Path: <chuckwolber@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C8007C433F5
-	for <webhook@archiver.kernel.org>; Tue, 25 Jan 2022 15:15:22 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
- [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.web08.8416.1643123721503137582
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D895C4332F
+	for <webhook@archiver.kernel.org>; Tue, 25 Jan 2022 15:50:47 +0000 (UTC)
+Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com
+ [209.85.219.177])
+ by mx.groups.io with SMTP id smtpd.web12.9009.1643125845735346169
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Jan 2022 07:15:21 -0800
+ Tue, 25 Jan 2022 07:50:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@burtonini-com.20210112.gappssmtp.com header.s=20210112
- header.b=PsUMchJ6;
- spf=pass (domain: burtonini.com, ip: 209.85.221.41,
- mailfrom: ross@burtonini.com)
-Received: by mail-wr1-f41.google.com with SMTP id c23so4830281wrb.5
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Jan 2022 07:15:21 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=WwBQsmP4;
+ spf=pass (domain: gmail.com, ip: 209.85.219.177,
+ mailfrom: chuckwolber@gmail.com)
+Received: by mail-yb1-f177.google.com with SMTP id c6so62930167ybk.3;
+        Tue, 25 Jan 2022 07:50:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=burtonini-com.20210112.gappssmtp.com; s=20210112;
+        d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=kwsiRmJ+LSBlzqonTd6zfNu0uItz5CpocUcBQLEwVeI=;
-        b=PsUMchJ6QEqxxGoLbTrQdZmHn9fYv/m945ODyJPxITrmJ9Y8A1Gx+2+/gf+XZgpPOw
-         c7ylG21ph1C+Ra6VNOkac+g/98xs+I7UlDHK6lCh8x5TgKXPyOAlqOxLoCRsxNRszGAx
-         6uDzCi/a3rP5+PVQ7Imy7r7WqWEpXQqCLaR7mZO3aR3imV6jE6/5ReNxuwauZ0OPR8rw
-         AwAjdtfNlRt7cKQJWx8iU426whCuQiAh2PDbUZ/0iHzBfzxp3k5tlha5IJ8i4SdXe7qB
-         QSVyxt6a1u2ZzNLjsyKLQTUO2pEeny2JF5scjmeGX+tivVM1ScpkeBeuqWqBJ1AFGTN9
-         AHFQ==
+        bh=BIZ6EGBdXeZNSn2lbknlhd7UsERpBbiSbW9WGOEHWic=;
+        b=WwBQsmP4F6jP4GsM8qZKNzZASh79xMi94QJutAfLfQ8zVVuG2mf33PD0OLudDWSD+u
+         +ZHPezGOj/Hs9hGTeEWtSayhwvc7p/hElLNJLNZyhuP3T2gwS8QjkuKUY4ANT2LwZ6kM
+         Mj118Rq8DhUT43AJSIuU3i0GJF+I5kLEQmUqx3NlrpI10xdTas5aRpTJsTXRUcNwhXMN
+         zPBYleCRLGcfdFSIKtPQwxoIar2fCLDMPYUiJsoe+IZr1JZPmHPMaLFShmCNbN2Gck/u
+         FLrZKWjQJDc/5i4Agc+PokhzeT5wxPw4PFdmzvGnfj47rosp+njglvfl2pdp/xxjcwmS
+         qgCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=kwsiRmJ+LSBlzqonTd6zfNu0uItz5CpocUcBQLEwVeI=;
-        b=x21wNK35fykHHOg4yShVAzLTmO0+b8mzdInisIS77b0ia3om8iav8RYhF3k5BdIBi1
-         ArwNbO3bASHs/hI4TDEQNMPItQ/qWOpY1uO+mEvFHh61LjJ2L9AqP1pX5Mrb3LmxFuYO
-         AZRIJvJ5WOHAiJirc2dTbvXH44RTKlBpjG215n41Hz9swf2zrIsBkrNPJ80cUmCkz070
-         nwpXuuHV4FzCFpeoOa4kt8SSpdpnv6UdW4yGx9YA3HAzl0RCYVA4zTeiHfG/+K/Cf4Wy
-         ZZiC+YRuZxmUVa4T/8Tdgo50c9i/pjWWJkywx+OIjXBnFXiRhy245VVCxH1zFIby3btG
-         WFxQ==
-X-Gm-Message-State: AOAM533HPWSC1fTxY1gsZL52ke3WjSV6lp3HdLFG9K6k8EZez2cVG3Ag
-	kzQpG17GSXmNRNiy1+SpnYCGxwvrw5gid+bw3FMF9Q==
+        bh=BIZ6EGBdXeZNSn2lbknlhd7UsERpBbiSbW9WGOEHWic=;
+        b=2IH+qXr5hLVSQHLWxCsjZbjG0EzyB+Ex0kXul6A/rYaiI1oD0B4O3P88iLNorRwfM4
+         OMA3uzL95wJlkRCkYnOOIAUZ+07qw2dEeYCJXuMjSxkv/TJAKu4pSiBUP2VnR6GGRNg/
+         Xfok6qnujajNt/24taE+omYcIIvAxRupbaHxsUwxPRahQRFaX1h4J2uAIuYPyIERT9Ky
+         MF9duqn7EqvNYFYYvF9rPZfxK76AbnUoiYAsHI+197zdV461rdFCBu5+8NNq1bHEzhWA
+         EbSD38l8//ZpBF2T1MEUQRXyj/lKI/HpYZX7MJy4An7gMkuUIJywYz5yXY1JLLwTYTO3
+         hnbQ==
+X-Gm-Message-State: AOAM530M1DjWOa2mpdlklZEwweEL/p5B0yPXoFEu/vn94XyPaPCM475r
+	7LUlyt2wSi6If5d8y+B5xDWRk+MDCPiunNRe2b4=
 X-Google-Smtp-Source: 
- ABdhPJz1MvZKqJt6AZbcjhY6zx1ZiVdrD/usG55WCfFXR6RVuZlJ4Zkp32KWKQXz6Sax8jQqWaXZsMbv8CPjU18ywgU=
-X-Received: by 2002:a5d:59a7:: with SMTP id p7mr13994512wrr.620.1643123719834;
- Tue, 25 Jan 2022 07:15:19 -0800 (PST)
+ ABdhPJw0XfzYQgUWH3TFhxAh6A1G8JCvHmNC9tXQaJ6LCiU6SbfOOncU6sh2zO7xGaUn1+lUZB+I3tS3fc7vMWOSY7A=
+X-Received: by 2002:a25:d44a:: with SMTP id
+ m71mr32204033ybf.173.1643125844777;
+ Tue, 25 Jan 2022 07:50:44 -0800 (PST)
 MIME-Version: 1.0
-References: <5dd6e735-8d84-b877-5976-371cb26c5367@pr.hu>
-In-Reply-To: <5dd6e735-8d84-b877-5976-371cb26c5367@pr.hu>
-From: Ross Burton <ross@burtonini.com>
-Date: Tue, 25 Jan 2022 15:15:08 +0000
+References: 
+ <CAPoiz9wL16OTzxNHdw_5-L72GOHkhhM0--WZF7An071cx6sr_A@mail.gmail.com>
+In-Reply-To: 
+ <CAPoiz9wL16OTzxNHdw_5-L72GOHkhhM0--WZF7An071cx6sr_A@mail.gmail.com>
+From: Chuck Wolber <chuckwolber@gmail.com>
+Date: Tue, 25 Jan 2022 07:50:33 -0800
 Message-ID: 
- <CAAnfSTss=nvahTKa82hdaKQ6r-6JCPuzUxTeeAZ-XQg_03XAuQ@mail.gmail.com>
-Subject: Re: [oe] do_compile sandboxed in kirkstone?
-To: zboszor@pr.hu
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+ <CAB=6tBSszdZEjyKPvMd88HFKZiszcVuGEt4BH6w8YsS0Ew=gNA@mail.gmail.com>
+Subject: Re: [OE-core] Inclusive Language Proposal for YP/OE
+To: Jon Mason <jdmason@kudzu.us>
+Cc: yocto <yocto@lists.yoctoproject.org>,
+	Patches and discussions about the oe-core layer
+ <openembedded-core@lists.openembedded.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="0000000000004c9e7505d66a0c4c"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Jan 2022 15:15:22 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Jan 2022 15:50:47 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95067
+ https://lists.openembedded.org/g/openembedded-devel/message/95068
 
-On Tue, 25 Jan 2022 at 14:38, Zoltan Boszormenyi via
-lists.openembedded.org <zboszor=pr.hu@lists.openembedded.org> wrote:
-> What has changed in kirkstone?
-> Is there some kind of sandbox now for do_compile that prevent networking?
-> Is there a switch that I can use in the recipe to disable this?
+--0000000000004c9e7505d66a0c4c
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Yes:
+On Mon, Jan 24, 2022 at 8:18 AM Jon Mason <jdmason@kudzu.us> wrote:
 
-https://git.yoctoproject.org/poky/commit/?id=4eea21b7addd091c7e549684699897fe7d60533c
+%< SNIP %<
 
-The best solution is to stop the recipe doing fetches in do_compile
-and instead do the fetching in do_fetch, but it's possible to allow
-network access.
 
-Ross
+> Branch Names
+> The =E2=80=9Cmaster=E2=80=9D branches on the relevant OpenEmbedded and Yo=
+cto Project
+> git trees will be changed to an alternative name at some point in the
+> future.  The current preferred name is =E2=80=9Cdevel=E2=80=9D.
+>
+
+Why devel instead of main [1]?
+
+[1]
+https://lore.kernel.org/git/pull.656.v4.git.1593009996.gitgitgadget@gmail.c=
+om/
+
+..Ch:W..
+
+
+
+--=20
+*"Perfection must be reached by degrees; she requires the slow hand of
+time." - Voltaire*
+
+--0000000000004c9e7505d66a0c4c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">On Mon, Jan 24, 2022 at 8:18 AM Jon Mason=
+ &lt;<a href=3D"mailto:jdmason@kudzu.us">jdmason@kudzu.us</a>&gt; wrote:<br=
+></div><div class=3D"gmail_quote"><div><br></div><div>%&lt; SNIP %&lt;<br><=
+/div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px=
+ 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Bra=
+nch Names<br>
+The =E2=80=9Cmaster=E2=80=9D branches on the relevant OpenEmbedded and Yoct=
+o Project<br>
+git trees will be changed to an alternative name at some point in the<br>
+future.=C2=A0 The current preferred name is =E2=80=9Cdevel=E2=80=9D. <br></=
+blockquote><div><br></div><div>Why devel instead of main [1]?</div><div><br=
+></div><div>[1] <a href=3D"https://lore.kernel.org/git/pull.656.v4.git.1593=
+009996.gitgitgadget@gmail.com/">https://lore.kernel.org/git/pull.656.v4.git=
+.1593009996.gitgitgadget@gmail.com/</a></div><div><br></div><div>..Ch:W..<b=
+r></div><div>=C2=A0</div></div><br clear=3D"all"><br>-- <br><div dir=3D"ltr=
+" class=3D"gmail_signature"><div dir=3D"ltr"><div><b><span style=3D"font-fa=
+mily:monospace">&quot;Perfection must be reached by degrees; she requires t=
+he slow hand of time.&quot; - Voltaire</span></b></div></div></div></div>
+
+--0000000000004c9e7505d66a0c4c--
 
