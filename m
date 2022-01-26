@@ -1,99 +1,162 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 10DD7C28CF5
-	for <webhook@archiver.kernel.org>; Wed, 26 Jan 2022 19:01:06 +0000 (UTC)
-Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com
- [209.85.160.179])
- by mx.groups.io with SMTP id smtpd.web11.17672.1643223664544875668
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 887E6C433EF
+	for <webhook@archiver.kernel.org>; Wed, 26 Jan 2022 21:46:02 +0000 (UTC)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
+ [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web08.19635.1643233561338774073
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Jan 2022 11:01:04 -0800
+ Wed, 26 Jan 2022 13:46:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20210112.gappssmtp.com header.s=20210112
- header.b=TeODDoAg;
- spf=pass (domain: ossystems.com.br, ip: 209.85.160.179,
- mailfrom: otavio.salvador@ossystems.com.br)
-Received: by mail-qt1-f179.google.com with SMTP id g12so484249qto.13
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=V7hu8Q4F;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d1so754799plh.10
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Jan 2022 11:01:04 -0800 (PST)
+ Wed, 26 Jan 2022 13:46:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ossystems-com-br.20210112.gappssmtp.com; s=20210112;
-        h=from:mime-version:references:in-reply-to:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=bbZrxS3zI8hkbAAN8mT524iVpkkIBncyNUJQV1g0yJ4=;
-        b=TeODDoAgTF69DItVQ5ixoj5Gs7ESzRcdkR1P+8OXoFBr6nG7c1N13yoTw/L57IQAob
-         OH14xrHT0cEZkObJtlwYb2VVpzeMbqKgndiY/7EFvi5hjT3X1JeAJqor74r2RxrqPCTg
-         zo0mSum6GoJ3RpoaaOQVYMiYpI1/KcqGo16hIPfLJEqY1QeYI0E126Hnu6QzI2FKcorq
-         Px5HLTL3MPC3c6DerOBHG0LKY6J2u4GuXBEMOq2l74V7EykMHpO4uqEjLfPlMWW/uJ8G
-         0WVUfGAUWb/vSGDbxbkSrOKNZ7Ja2Wz+mtf0ZoLuRjy1vpcWJW+H/Td4fHcSFGKFh5Ya
-         vYZQ==
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=mnOOHMVpNyv715qnAg97rck/yHuOXdaUH4p8O9aibKE=;
+        b=V7hu8Q4FD/6g/G6wvz4R8ykmFyBJRJ7AvbXAdT09ODdkwgAGg2Wwl7ckV/M65D32xU
+         ZUMs2TNiybYwq55jGcB1Ad6qVWCyVEy3c6iMlt7+h3Y0DmZ1iewZpnAxGVzIjfDj8O/M
+         6HI3wcSzQLFvHA6sHpR56oxw/cz7FDxUIFajGW7Z78Cns/v+1ioS+COWktroIosJjwVt
+         RUJyLXtTyvS9O3e/mFJiOjrbLWRXjxJpUVkCbVLSO2SPlB7q4narmmVk0f+6UrM70D4y
+         qFlkbW/CEtQU9GgqVCyW/RUcKUOAg99fG4JPCIkDcM0DkTK2UNG29ei+ZDHIZKjRDUuo
+         HmKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:mime-version:references:in-reply-to:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=bbZrxS3zI8hkbAAN8mT524iVpkkIBncyNUJQV1g0yJ4=;
-        b=LV44UyyGziQxvApgUKwqWdzMI/sY3N38idB8iXF6PJmePG/xBcjkJXuBq1slC0D42A
-         HO68tnF+J+TEM5g9O3oge3ok2Sr7H1jW5CuFOLf5RLsA8PX5s7zTbAqJKbwkEJHQ5NSN
-         MWzbovIoWVSghJ+uX/mPkcQDDVLimRyjgpGYbQ/fJA3N/UiyQmrR0/KzMuJu7lGUvi33
-         JUGCxKmVhpDq9dP+8BvfpJcRYAIVmokihFZtxYe0I0GPHsK+24IxZUWeDN1jVu8nzdAx
-         ERsqiTax3VwGnqSgHKcDJ0R+btztmJ43kmuTLnGnEOf0tvsXshX44lC4PhNOri0saMfw
-         2XBw==
-X-Gm-Message-State: AOAM533wVYHDvzSFHdyo4EYJZwP26COSW0kPpdUboW2wORskdbRgDx/U
-	ueA/RC7K5J7puRBlpp55qnaDiU+4o4uMqsLf
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=mnOOHMVpNyv715qnAg97rck/yHuOXdaUH4p8O9aibKE=;
+        b=3kUs6W/P3RXnaE8CXZcUXb0H8udSV9GHQjs88u2LGbQswBZe4Lymxl0DVETQ0KLYr4
+         NTEMBOszBlpBzOgTX4eEsB5zjJeGkDD04rb8Y1ZYBv7W6MEx+tWXz5JlNvBmvCZjcHa9
+         /H4U/QJJHq7rsV4LSDWzdbdD/ISoGx3pLBPOND4kfHR8ylCn0SZqzosxhlam1p2d80nX
+         TwYf1Z6bO9TafhnZeNyg8F7ByFDFNJ6q7n3saeQdYFLW6+rIGuYL9MFub044OWPbxss5
+         4kvSjowUVqWd4mIr0bFDSeYvo6A1KhdDdVBoAlIZXBwLIKTn1ENZgQfrS7kHmC91BqYy
+         UgMw==
+X-Gm-Message-State: AOAM532Pp2YeyCZNeu33OMRU2r2QKkArX5G96DEil7NZckEfpjbRdXf6
+	dy3F2FZEzTfiNfakT+h85tVv+5MdPp/Kmw==
 X-Google-Smtp-Source: 
- ABdhPJzPuPW1S3ZDJbLS2nsQR/rksUvRdRy0S8ghoO/Y/4GGDrj5MFgOLCn9j8hQcnO2nVw76Xjrqw==
-X-Received: by 2002:ac8:5a0e:: with SMTP id n14mr97873qta.304.1643223663315;
-        Wed, 26 Jan 2022 11:01:03 -0800 (PST)
-Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com.
- [209.85.160.169])
-        by smtp.gmail.com with ESMTPSA id r7sm60875qtw.25.2022.01.26.11.01.02
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 26 Jan 2022 11:01:02 -0800 (PST)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-qt1-f169.google.com with SMTP id k14so498340qtq.10
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Jan 2022 11:01:02 -0800 (PST)
-X-Received: by 2002:ac8:5e08:: with SMTP id h8mr128034qtx.82.1643223662451;
- Wed, 26 Jan 2022 11:01:02 -0800 (PST)
+ ABdhPJwyUlNbg42dGnoSBOQDcQO8J4UJ/nLOkYeJg2Guyhu2ldaXogcbUWFVubr9XT6y+u+gCIx8lw==
+X-Received: by 2002:a17:902:b7c1:: with SMTP id
+ v1mr1022468plz.44.1643233560467;
+        Wed, 26 Jan 2022 13:46:00 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b5e3])
+        by smtp.gmail.com with ESMTPSA id
+ p8sm3193114pfo.41.2022.01.26.13.45.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 26 Jan 2022 13:46:00 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Tim Orling <tim.orling@konsulko.com>
+Subject: [meta-python][PATCH v4] python3-pyruvate: Fix build with mips
+Date: Wed, 26 Jan 2022 13:45:57 -0800
+Message-Id: <20220126214557.1180426-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.35.0
 MIME-Version: 1.0
-References: <20220126182232.1790127-1-festevam@denx.de>
- <CAMKF1spmTzkh_egyGhyXgkfBag_eHMDZCHoaTQSPHpemo=MYbw@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1spmTzkh_egyGhyXgkfBag_eHMDZCHoaTQSPHpemo=MYbw@mail.gmail.com>
-Date: Wed, 26 Jan 2022 16:00:51 -0300
-X-Gmail-Original-Message-ID: 
- <CAP9ODKoyVa0NUzghEAQSRdXOtx_Zbmov+LGYXwz04tSn09GYOA@mail.gmail.com>
-Message-ID: 
- <CAP9ODKoyVa0NUzghEAQSRdXOtx_Zbmov+LGYXwz04tSn09GYOA@mail.gmail.com>
-Subject: Re: [PATCH v2 meta-oe] rtc-tools: Add a recipe
-To: Khem Raj <raj.khem@gmail.com>
-Cc: Fabio Estevam <festevam@denx.de>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
- Heiko Schocher <hs@denx.de>,
-	Alexandre BELLONI <alexandre.belloni@bootlin.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Jan 2022 19:01:06 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 26 Jan 2022 21:46:02 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95108
+ https://lists.openembedded.org/g/openembedded-devel/message/95109
 
-Em qua., 26 de jan. de 2022 =C3=A0s 15:32, Khem Raj <raj.khem@gmail.com> es=
-creveu:
-> > +do_install() {
-> > +       oe_runmake install
-> > +}
+mips/glibc systems have interesting problem where dev_t is not defined
+properly for O32 ABI [1], therefore address it for libsystemd crate, it
+works fine for musl
 
-IIRC this is the default so EXTRA_OEMAKE (removing this task) would just wo=
-rk.
+Fixes
+error[E0308]: mismatched types
+   --> /usr/src/debug/python3-pyruvate/1.1.2-r0/cargo_home/bitbake/libsystemd-0.4.1/src/logging.rs:296:25
+    |
+296 |                 device: stat.st_dev,
+    |                         ^^^^^^^^^^^ expected `u64`, found `u32`
 
---=20
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
+[1] https://sourceware.org/bugzilla/show_bug.cgi?id=17786
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Tim Orling <tim.orling@konsulko.com>
+---
+v2: Fix commit msg and apply the patch to musl too as it does not hurt
+v3: Use upstream submitted patch
+v4: Address upstream comments
+
+ ...-targets-for-stat.st_dev-definitions.patch | 45 +++++++++++++++++++
+ .../python/python3-pyruvate_1.1.2.bb          |  2 +
+ 2 files changed, 47 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyruvate/0001-check-for-mips-targets-for-stat.st_dev-definitions.patch
+
+diff --git a/meta-python/recipes-devtools/python/python3-pyruvate/0001-check-for-mips-targets-for-stat.st_dev-definitions.patch b/meta-python/recipes-devtools/python/python3-pyruvate/0001-check-for-mips-targets-for-stat.st_dev-definitions.patch
+new file mode 100644
+index 0000000000..f41e6cf116
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pyruvate/0001-check-for-mips-targets-for-stat.st_dev-definitions.patch
+@@ -0,0 +1,45 @@
++From 56984b19469ff5b69b8b8e180dc75cf825bb1123 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 25 Jan 2022 22:28:11 -0800
++Subject: [PATCH] check for mips targets for stat.st_dev definitions
++
++st_dev has wrong type in glibc when using mips/O32 ABI
++its type should be dev_t but it is set to unsigned long int
++this is specific issue on mips/o32 ABI in glibc for details
++
++See
++https://sourceware.org/bugzilla/show_bug.cgi?id=17786
++
++currently the build fails on mips archirecture with type mismatches
++
++      Fixes
++      error[E0308]: mismatched types
++*        --> /usr/src/debug/python3-pyruvate/1.1.2-r0/cargo_home/bitbake/libsystemd-0.4.1/src/logging.rs:296:25
++          |
++      296 |                 device: stat.st_dev,
++          |                         ^^^^^^^^^^^ expected `u64`, found `u32`
++
++Upstream-Status: Submitted [https://github.com/lucab/libsystemd-rs/pull/103]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/logging.rs | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/src/logging.rs b/src/logging.rs
++index a68c36a..6e374ae 100644
++--- a/src/logging.rs
+++++ b/src/logging.rs
++@@ -292,7 +292,10 @@ impl JournalStream {
++     pub fn from_fd<F: AsRawFd>(fd: F) -> std::io::Result<Self> {
++         nix::sys::stat::fstat(fd.as_raw_fd())
++             .map(|stat| JournalStream {
+++                #[cfg(not(target_arch = "mips"))]
++                 device: stat.st_dev,
+++                #[cfg(target_arch = "mips")]
+++                device: stat.st_dev as u64,
++                 inode: stat.st_ino,
++             })
++             .map_err(std::io::Error::from)
++-- 
++2.35.0
++
+diff --git a/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb b/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
+index dad18b78c2..14142fdb67 100644
+--- a/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
+@@ -22,6 +22,8 @@ RUSTFLAGS:append:mipsel = " --cfg crossbeam_no_atomic_64"
+ RUSTFLAGS:append:powerpc = " --cfg crossbeam_no_atomic_64"
+ RUSTFLAGS:append:riscv32 = " --cfg crossbeam_no_atomic_64"
+ 
++SRC_URI:append:mips = " file://0001-check-for-mips-targets-for-stat.st_dev-definitions.patch;patchdir=../cargo_home/bitbake/libsystemd-0.4.1/"
++
+ SRC_URI += " \
+     crate://crates.io/aho-corasick/0.7.18 \
+     crate://crates.io/atty/0.2.14 \
+-- 
+2.35.0
+
 
