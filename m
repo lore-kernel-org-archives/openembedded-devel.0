@@ -1,136 +1,82 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EDEBC2BA4C
-	for <webhook@archiver.kernel.org>; Wed, 26 Jan 2022 05:28:05 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com
- [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web11.9120.1643174885080814453
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B53E4C2BA4C
+	for <webhook@archiver.kernel.org>; Wed, 26 Jan 2022 06:01:27 +0000 (UTC)
+Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
+ by mx.groups.io with SMTP id smtpd.web09.9123.1643176886721980680
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Jan 2022 21:28:05 -0800
+ Tue, 25 Jan 2022 22:01:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=WomS7O8X;
- spf=pass (domain: gmail.com, ip: 209.85.214.173,
- mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id d7so21407621plr.12
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Jan 2022 21:28:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=m5ekc9bDB5z6A2h0wVAeDKUKKIKBm3h9JiOmRPQBkd4=;
-        b=WomS7O8X1zY+ZWsKR5WEcVy8cLQApUF0as2bGVu/kI1GKLGXb2vz6uO4geoGlYZkbJ
-         lstxl+YRT/ts7BtcKn7EETczJBEGI/kxczPZWQ17VGsvuzEpuL2fjieUUVrMf4nlZVC7
-         21mz4wWEAmhz6+ziHdIk3HD/Kz0HLCav0ZIpMLyFGXiXG+4fngBkUggy2bEJhydGkpcO
-         InN/flwVpx9fYUTDdBMJiOuB6BpgW7WqAIV6ANHUqfo79ELKH+8oFORZ3i1N49gn/HWV
-         jq38e1fP1dvWHlMiAMA8zRLf+OJebz6QehjS3mfPnM6FOcdQJnYPi+6x0JXrePaCHxia
-         N73g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=m5ekc9bDB5z6A2h0wVAeDKUKKIKBm3h9JiOmRPQBkd4=;
-        b=P0y7FZR9WE2iCRG0cU8bQ5ukpGA2dUX0nH6f4+RqPyNV7aLmQWAlHObPYNXpExUhUK
-         +xOkXdj8iRvkRT1lomipC//+4YQJX5Uw7er0OjqEV4+iwIoIb+TYK30kQfQ/LccFpPv8
-         cEs9/NMisBy2XeovVuqcKgPYmXiZO2R3639Kz/Hht/7kNxyo2TBoYL4gYFdkHD9mQAdc
-         45BxLDZ5TaacEnlowOfNy795juAwSKwcbwoTCafyJwzJbB1q8KqeQvbfIlvJGLFhoYOv
-         Vmg+jSqJcpb6NDbRfByX25xkpKPCV/S3Bot8mhozJ3afRDdSvXyML3nK1nYEfVau3d3f
-         VBFw==
-X-Gm-Message-State: AOAM530WFeJ20Y7Hqi59ijSss38eR7fCpXtCoPMd1PkjLmMUBAEE6zXj
-	pBmmPRXBx83xT+5bopkxm74SQir1A3StBg==
-X-Google-Smtp-Source: 
- ABdhPJzQmDxwCQhxFDkhrXWm3QNZsJLXUZEmLQNEwKsomwHyI2lKgKmY4oSoJz3Af7LcUut5/7gAUA==
-X-Received: by 2002:a17:902:9346:b0:14b:5c12:aa15 with SMTP id
- g6-20020a170902934600b0014b5c12aa15mr10526816plp.81.1643174884339;
-        Tue, 25 Jan 2022 21:28:04 -0800 (PST)
-Received: from ?IPV6:2601:202:4180:a5c0:d69:3d63:6b0c:a11b?
- ([2601:202:4180:a5c0:d69:3d63:6b0c:a11b])
-        by smtp.gmail.com with ESMTPSA id
- oo2sm681361pjb.31.2022.01.25.21.28.03
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 25 Jan 2022 21:28:03 -0800 (PST)
-Message-ID: <dd95de48-32fa-7ceb-3b74-bad9a92a1895@gmail.com>
-Date: Tue, 25 Jan 2022 21:28:03 -0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [oe] [meta-networking][dunfell][PATCH] wireshark: Update to
- 3.2.18
-Content-Language: en-US
+ dkim=missing;
+ spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.80,
+ mailfrom: f_l_k@t-online.de)
+Received: from fwd82.dcpf.telekom.de (fwd82.aul.t-online.de [10.223.144.108])
+	by mailout01.t-online.de (Postfix) with SMTP id 3FB355B2C
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 26 Jan 2022 07:01:24 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([84.163.47.134]) by fwd82.t-online.de
+	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
+	esmtp id 1nCbMs-2JJEIL0; Wed, 26 Jan 2022 07:01:18 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Armin Kuster <akuster@mvista.com>
-References: <16CD92912842F5D5.18975@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <16CD92912842F5D5.18975@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH] evolution-data-server: try to fix g-i data
+ generation
+Date: Wed, 26 Jan 2022 07:01:04 +0100
+Message-Id: <20220126060104.578932-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+X-TOI-EXPURGATEID: 150726::1643176878-0000B8A1-C11B3DDD/0/0 CLEAN NORMAL
+X-TOI-MSGID: 27bbd665-0de4-4925-b34a-13db04474d41
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Jan 2022 05:28:05 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 26 Jan 2022 06:01:27 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95095
+ https://lists.openembedded.org/g/openembedded-devel/message/95097
 
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../evolution-data-server/evolution-data-server.bb           | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-
-On 1/25/22 09:09, Armin Kuster via lists.openembedded.org wrote:
-> From: Armin Kuster <akuster@mvista.com>
->
-> Source: wireshark.org
-> MR: 114425, 114409, 114441, 114269, 114417, 114311, 114449
-> Type: Security Fix
-> Disposition: Backport from wireshark.org
-> ChangeID: 8663cdebb2f10ee84817e5199fa3be0acb715af9
-> Description:
->
-> This is a bugfix only update.
->
-> Addresses these CVES:
-> wnpa-sec-2021-07 Bluetooth DHT dissector crash. Issue 17651. CVE-2021-39929.
-> wnpa-sec-2021-09 Bluetooth SDP dissector crash. Issue 17635. CVE-2021-39925.
-> wnpa-sec-2021-10 Bluetooth DHT dissector large loop. Issue 17677. CVE-2021-39924.
-> wnpa-sec-2021-11 PNRP dissector large loop. Issue 17684.  CVE-2021-39920, CVE-2021-39923.
-> wnpa-sec-2021-12 C12.22 dissector crash. Issue 17636. CVE-2021-39922.
-> wnpa-sec-2021-13 IEEE 802.11 dissector crash. Issue 17704. CVE-2021-39928.
-> wnpa-sec-2021-14 Modbus dissector crash. Issue 17703. CVE-2021-39921.
->
-> Signed-off-by: Armin Kuster <akuster@mvista.com>
-
-This fails to build on arm and arm64. Seems to be lemon related.
-
-- armin
-> ---
->   .../wireshark/{wireshark_3.2.15.bb => wireshark_3.2.18.bb}      | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->   rename meta-networking/recipes-support/wireshark/{wireshark_3.2.15.bb => wireshark_3.2.18.bb} (96%)
->
-> diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.2.15.bb b/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
-> similarity index 96%
-> rename from meta-networking/recipes-support/wireshark/wireshark_3.2.15.bb
-> rename to meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
-> index 36e84d0ccd..9c234cf3f6 100644
-> --- a/meta-networking/recipes-support/wireshark/wireshark_3.2.15.bb
-> +++ b/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
-> @@ -12,7 +12,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
->   
->   UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
->   
-> -SRC_URI[sha256sum] = "32f6cfd67b00903a1bfca02ecc4ccf72db6b70d4fda33e4a099fefb03e849bdb"
-> +SRC_URI[sha256sum] = "bbe75d909b052fcd67a850f149f0d5b1e2531026fc2413946b48570293306887"
->   
->   PE = "1"
->   
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#95076): https://lists.openembedded.org/g/openembedded-devel/message/95076
-> Mute This Topic: https://lists.openembedded.org/mt/88676633/3616698
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-dat=
+a-server.bb b/meta-gnome/recipes-gnome/evolution-data-server/evolution-da=
+ta-server.bb
+index 9ccaedbcc..c5c7d947f 100644
+--- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
+r.bb
++++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
+r.bb
+@@ -27,14 +27,15 @@ EXTRA_OECMAKE =3D " \
+     -DENABLE_UOA=3DOFF \
+     -DENABLE_GOOGLE_AUTH=3DOFF \
+     -DENABLE_WEATHER=3DOFF \
+-    -DG_IR_COMPILER=3D${STAGING_BINDIR}/g-ir-compiler-wrapper \
+-    -DG_IR_SCANNER=3D${STAGING_BINDIR}/g-ir-scanner-wrapper \
+     -DVAPIGEN=3D${STAGING_BINDIR_NATIVE}/vapigen \
+     ${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-DENABLE_INTROSPECT=
+ION=3DON -DENABLE_VALA_BINDINGS=3DON', '-DENABLE_INTROSPECTION=3DOFF', d)=
+} \
+     -D${LKSTRFTIME} \
+     -DLIB_SUFFIX=3D${@d.getVar('baselib').replace('lib', '')} \
+ "
+=20
++EXTRA_OECMAKE:append:class-target =3D " -DG_IR_COMPILER=3D${STAGING_BIND=
+IR}/g-ir-compiler-wrapper"
++EXTRA_OECMAKE:append:class-target =3D " -DG_IR_SCANNER=3D${STAGING_BINDI=
+R}/g-ir-scanner-wrapper"
++
+ PACKAGECONFIG[canberra] =3D "-DENABLE_CANBERRA=3DON,-DENABLE_CANBERRA=3D=
+OFF,libcanberra"
+ PACKAGECONFIG[oauth]    =3D "-DENABLE_OAUTH2=3DON,-DENABLE_OAUTH2=3DOFF,=
+webkitgtk json-glib"
+ PACKAGECONFIG[goa]    =3D "-DENABLE_GOA=3DON,-DENABLE_GOA=3DOFF,gnome-on=
+line-accounts"
+--=20
+2.25.1
 
 
