@@ -1,126 +1,154 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9AFC2C5AC75
-	for <webhook@archiver.kernel.org>; Wed, 26 Jan 2022 02:39:00 +0000 (UTC)
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
- [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.web09.7436.1643164739807955327
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BE41C5AC75
+	for <webhook@archiver.kernel.org>; Wed, 26 Jan 2022 03:14:22 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.66])
+ by mx.groups.io with SMTP id smtpd.web08.7727.1643166860820520527
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Jan 2022 18:38:59 -0800
+ Tue, 25 Jan 2022 19:14:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=pHlEuN2f;
- spf=pass (domain: gmail.com, ip: 209.85.215.169,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id q75so19900578pgq.5
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Jan 2022 18:38:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=+S+oKIDG8vL7LkVsleybx407WaIftixHl4cHIsJhYJI=;
-        b=pHlEuN2fli4MrtTvNC8rZ2C0/wvBulfWijv7OpzIu0UNA2dqGOjNTG4OmL5jrLe77w
-         WDkb2G+bAFKggRDQ2/+oFMbDslIvC1NFu7DypwGKXLXChSrbiqFM6j8/uJGeiNcIyUQf
-         Umn0OPwnK5MmubqSD8qRmlaIzIbh+v/83eg9RP2gelZrdIU5r+Jif3iWs+tRa+2XAQvU
-         ETetgZBxRvI7yaFZmagGm7FAB3mL5DVcllrABIjs/1Qz9saK2pANp1Cjr0d7UNSua09A
-         1wdrVUdSVt0d9/cpggBR1dwN0WaNXa8CVek7d8gZR9JleIcIe1gMz3hs3KYh6CQs31bF
-         mY9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=+S+oKIDG8vL7LkVsleybx407WaIftixHl4cHIsJhYJI=;
-        b=JzL+Eb+l9kBJ7Zp3X8IVd5FC2ui0gAz47X/n8iBSc3Jf75b5VmF58wcB9UAI8NTE34
-         JRm/T/WcL+whSaz6v/6bxxU/MbZHS7fncsh19VqFcCgiq//lMlUB4TKYWlhSbFVkukx+
-         DsMhtqwJMixOHoGr11HP3xkF4/kSUYe/uXpuNfLctt5pKFQq8bKv2sRsN5SXkN192bPz
-         AKrjNTL5bncvzJHbn9gu/M59Q5LUch5evwqzBTGqQ+ZHureNObgs+YRsIFEFtURoSdGI
-         h83MMv4KPwXRX1FfSeeVnEE51V4Ok495hISPHg+47Mni/lX+ubRb9zDpBKtnvM6oucJU
-         Y0FA==
-X-Gm-Message-State: AOAM531p58VDTv38cRkRNN9tfcAYnrCIv2M4GTR5GYQxMo5H9+vBcUjV
-	/W7wDjpdkYF97b3vSDstdhFFlLlpKN0mrQ==
-X-Google-Smtp-Source: 
- ABdhPJxfcX+G8rQhdsc5XjnlBWtOA1RE3aQJ+keeEZ62UM/yV8gDmyuJRJqUZYTLHjJa6SlNy9z5bQ==
-X-Received: by 2002:a65:6a0f:: with SMTP id
- m15mr17547353pgu.391.1643164739064;
-        Tue, 25 Jan 2022 18:38:59 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b5e3])
-        by smtp.gmail.com with ESMTPSA id
- s6sm1666934pjg.22.2022.01.25.18.38.58
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 25 Jan 2022 18:38:58 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] php: Update to 8.1.2
-Date: Tue, 25 Jan 2022 18:38:54 -0800
-Message-Id: <20220126023854.2187653-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.35.0
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=a7RGFOIm;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.66,
+ mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1643166859; i=@fujitsu.com;
+	bh=8HY4XH0RQRNPgtIN87NCGVmrKQZVcXmr6UdgjuTGaBk=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=a7RGFOImreEdKjGzdg569cbhlWO8K5Vu7LigElyEfuA4PMBtDEzeXrI6nJswe9tei
+	 spKIwhynwkDOR/1xQTnr8TH+JEmIF2D45aJRretmFNmvxO7Yyl3zEEPbWGtOzkfCH+
+	 wQ4O9wVQqyqrG2IrbXi2EjIDBPu/XqicGvIr9DNuIVtF3WB/7lqiT9cV02m9dGRAlH
+	 goPY4wbQKfWe6LO1WRebERVfYvLerESUnClLlTJi2IVbIqVH2SdSegoLrxjUbbeRXK
+	 kLf9RE0O9CyG6+nYACMzfbh82mV+LN1uSpPButNq0hHMN89emy1GDoNuK+ttybkLgw
+	 Eibd+nq+qG8lg==
+Received: from [100.115.3.74] (using TLSv1.2 with cipher
+ DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-4.bemta.az-a.eu-west-1.aws.ess.symcld.net id 52/CB-12986-A8CB0F16;
+ Wed, 26 Jan 2022 03:14:18 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrIIsWRWlGSWpSXmKPExsViZ8ORqNu150O
+  iwcknghYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aZhftYC36IVJyfe5algXGvUBcjF4eQwBNG
+  iTe921ggnAtMEovbT7B2MXICOScYJRq21YDYbAJqEtNv3QCLiwjoSyydvYcZxGYWUJF48buHv
+  YuRg0NYIEBiwtVgkDCLgKrEoa2vmEBsXgFHiWsTp4LZEgIKElMevmeGiAtKnJz5hAVijITEwR
+  cvmCFqFCVmX25mgbArJGbNaoPqVZO4em4T8wRG/llI2mchaV/AyLSK0SqpKDM9oyQ3MTNH19D
+  AQNfQ0FTXBMgy1Eus0k3USy3VLU8tLtEFcsuL9VKLi/WKK3OTc1L08lJLNjECQzKlmCV1B2Nf
+  30+9Q4ySHExKorwvdT4kCvEl5adUZiQWZ8QXleakFh9ilOHgUJLg/bkdKCdYlJqeWpGWmQOMD
+  5i0BAePkgjvlZ1Aad7igsTc4sx0iNQpRkUpcV7FDUAJAZBERmkeXBssJi8xykoJ8zIyMDAI8R
+  SkFuVmlqDKv2IU52BUEuZ13Q00hSczrwRu+iugxUxAi3+ffweyuCQRISXVwJS7oMAk9fsWuQX
+  9c1/PmL40SV3DbMXd9jaLN41chi7ZGzW3rjVimV39/99lxUVv999/ZX4e6LbPpie+nLV/KRg0
+  c2H1+S0vj+3QEZ5gWbbjpt5Uk/n7FLxn7eaZ2ls482LY23jGE6l2yxdv28RfNcNvY6HxyS+N+
+  25cNHx6vcYsUiVz3hG19q+uPT7u3pfl/m7YscpLr0LLJcKXjTPJ3tYyaq3XshrfV5cXXfqlYn
+  1q+g5ZhXdXlx07cuS2f5J14eRa/Q0zd1nZlbwtm5FaIbPeRvMy77TtgVYtdyfembqoxyag/zA
+  /3+RjeSpGk7bssFjXqMkTMpG3QYzt7by5Xx+n3th5wLX8Qvpcle6JDQuVWIozEg21mIuKEwEC
+  MsO3RAMAAA==
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-19.tower-587.messagelabs.com!1643166858!51192!1
+X-Originating-IP: [62.60.8.97]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.7; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 7545 invoked from network); 26 Jan 2022 03:14:18 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-19.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 26 Jan 2022 03:14:18 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id D1135100192
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 26 Jan 2022 03:14:17 +0000 (GMT)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id C4F65100180
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 26 Jan 2022 03:14:17 +0000 (GMT)
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.26; Wed, 26 Jan 2022 03:13:55 +0000
+From: Wang Mingyu <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-multimedia] [PATCH] gerbera: fix bug caused by update of
+ fmt
+Date: Wed, 26 Jan 2022 11:13:45 +0800
+Message-ID: <1643166825-9023-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Jan 2022 02:39:00 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 26 Jan 2022 03:14:22 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95090
+ https://lists.openembedded.org/g/openembedded-devel/message/95091
 
-- Add fibers support for RISCV64
-
-- Disable build on RISCV32 musl since getcontext/setcontext APIs do not
-  exist on musl which are needed for fibers
-
-- Detailed changes are here [1]
-
-[1] https://www.php.net/ChangeLog-8.php#PHP_8_1
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-core/packagegroups/packagegroup-meta-oe.bb    | 1 +
- .../recipes-devtools/php/{php_8.1.0.bb => php_8.1.2.bb}   | 8 ++++++--
- 2 files changed, 7 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/php/{php_8.1.0.bb => php_8.1.2.bb} (97%)
+ ...0001-fix-bug-caused-by-update-of-fmt.patch | 36 +++++++++++++++++++
+ .../gerbera/gerbera_1.9.2.bb                  |  1 +
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-fix-bug-caused-by-update-of-fmt.patch
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 62ada76f93..3cf33c6943 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -327,6 +327,7 @@ RDEPENDS:packagegroup-meta-oe-devtools:remove:powerpc64 = "android-tools breakpa
- RDEPENDS:packagegroup-meta-oe-devtools:remove:powerpc64le = "android-tools breakpad lshw luajit ply uftrace"
- RDEPENDS:packagegroup-meta-oe-devtools:remove:riscv64 = "breakpad concurrencykit heaptrack lshw ltrace luajit nodejs ply uftrace"
- RDEPENDS:packagegroup-meta-oe-devtools:remove:riscv32 = "breakpad concurrencykit heaptrack lshw ltrace luajit nodejs ply uftrace"
-+RDEPENDS:packagegroup-meta-oe-devtools:remove:libc-musl:riscv32 = "php"
- RDEPENDS:packagegroup-meta-oe-devtools:remove:aarch64 = "concurrencykit"
- RDEPENDS:packagegroup-meta-oe-devtools:remove:x86 = "ply"
+diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-fix-bug-caused-by-update-of-fmt.patch b/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-fix-bug-caused-by-update-of-fmt.patch
+new file mode 100644
+index 000000000..eb3a80233
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-fix-bug-caused-by-update-of-fmt.patch
+@@ -0,0 +1,36 @@
++From 2d00f2c8ba8176d9fc6a266e9f4d5ebf75422414 Mon Sep 17 00:00:00 2001
++From: Wang Mingyu <wangmy@fujitsu.com>
++Date: Wed, 26 Jan 2022 10:17:31 +0900
++Subject: [PATCH] fix bug caused by update of fmt when do_compile 
++
++After fmt was updated to 8.1.1, the following problems were caused:
++
++gerbera/1.9.2-r0/recipe-sysroot/usr/include/fmt/core.h:1728:7: error: static
++assertion failed: Cannot format an argument. To make type T formattable
++provide a formatter<T> specialization: https://fmt.dev/latest/api.html#udt
++|  1728 |       formattable,
++|       |       ^~~~~~~~~~~
++
++Upstream-Status: Pending
++
++Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
++---
++ src/content/autoscan.cc | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/content/autoscan.cc b/src/content/autoscan.cc
++index ae0c0f9..6865a6c 100644
++--- a/src/content/autoscan.cc
+++++ b/src/content/autoscan.cc
++@@ -127,7 +127,7 @@ std::string_view AutoscanDirectory::mapScanmode(ScanMode scanmode)
++     case ScanMode::INotify:
++         return "inotify";
++     }
++-    throw_std_runtime_error("Illegal scanmode ({}) given to mapScanmode()", scanmode);
+++    throw_std_runtime_error("Illegal scanmode ({}) given to mapScanmode()", (int)scanmode);
++ }
++ 
++ ScanMode AutoscanDirectory::remapScanmode(const std::string& scanmode)
++-- 
++2.25.1
++
+diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera_1.9.2.bb b/meta-multimedia/recipes-multimedia/gerbera/gerbera_1.9.2.bb
+index 94657ba53..d05c36093 100644
+--- a/meta-multimedia/recipes-multimedia/gerbera/gerbera_1.9.2.bb
++++ b/meta-multimedia/recipes-multimedia/gerbera/gerbera_1.9.2.bb
+@@ -4,6 +4,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=25cdec9afe3f1f26212ead6bd2f7fac8"
  
-diff --git a/meta-oe/recipes-devtools/php/php_8.1.0.bb b/meta-oe/recipes-devtools/php/php_8.1.2.bb
-similarity index 97%
-rename from meta-oe/recipes-devtools/php/php_8.1.0.bb
-rename to meta-oe/recipes-devtools/php/php_8.1.2.bb
-index 43e86fe55b..038d79783b 100644
---- a/meta-oe/recipes-devtools/php/php_8.1.0.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.1.2.bb
-@@ -32,8 +32,7 @@ SRC_URI:append:class-target = " \
+ SRC_URI = "git://github.com/v00d00/gerbera.git;protocol=https;branch=master \
++           file://0001-fix-bug-caused-by-update-of-fmt.patch \
            "
  
- S = "${WORKDIR}/php-${PV}"
--SRC_URI[sha256sum] = "0725ed2baea125496a898455d501a77460218b2a0cfad773fa9322f491b82b61"
--
-+SRC_URI[sha256sum] = "913dc7dd4388427fa33ea4ac89834e856ff5394f4218eace260a3a279f5b53a9"
- 
- inherit autotools pkgconfig python3native gettext
- 
-@@ -273,3 +272,8 @@ do_install:append:class-native() {
- # | {standard input}:3797: Error: unshifted register required -- `sub r2,r2,r0,asr#31'
- # | make: *** [ext/standard/math.lo] Error 1
- ARM_INSTRUCTION_SET = "arm"
-+
-+# Needs fibers assembly implemented for rv32
-+# for example rv64 implementation is below
-+# see https://github.com/php/php-src/commit/70b02d75f2abe3a292d49c4a4e9e4f850c2fee68
-+COMPATIBLE_HOST:libc-musl:riscv32 = "null"
+ SRCREV = "3b93d362ec33f738868a4e896a2c9ee8e9d7a92a"
 -- 
-2.35.0
+2.25.1
 
 
