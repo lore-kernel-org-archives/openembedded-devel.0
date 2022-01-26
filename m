@@ -1,352 +1,276 @@
-Return-Path: <randy.macleod@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 229E2C5AC75
-	for <webhook@archiver.kernel.org>; Tue, 25 Jan 2022 23:07:24 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com
- [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web08.5104.1643152042390132983
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3EEEC5AC75
+	for <webhook@archiver.kernel.org>; Wed, 26 Jan 2022 00:50:25 +0000 (UTC)
+Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com
+ [209.85.222.175])
+ by mx.groups.io with SMTP id smtpd.web09.6261.1643158224788106815
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Jan 2022 15:07:23 -0800
+ Tue, 25 Jan 2022 16:50:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@windriver.com
- header.s=pps06212021 header.b=hC+eNeBS;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
- invalid domain name (domain: windriver.com, ip: 205.220.178.238,
- mailfrom: prvs=802412c067=randy.macleod@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id
- 20PMtElY001506;
-	Tue, 25 Jan 2022 23:07:21 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
- h=message-id : date
- : subject : to : references : from : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=PPS06212021;
- bh=ULN+3AO1uQbta+BrOtVm51ksgqxSEYG5eaHHtPUVXLY=;
- b=hC+eNeBSyCgcrpXLMrbISwRTMHKzlDS2XBlwj7tdnXJyniHN4JOBtNcHtLZFZphtgZNy
- ok2J75Te7lV4ZWX2Fg+yQyiSZF3YJqnGHu2RK/6tjsLNlpE65Z1dB/UNrDM3pbzamenM
- tiFKXGoSA18bLEbxZXO88zXwbBLUCvIkoJg7k4pbXcQVkmZjyLkbnkiTLBNXZfMHc0ka
- D5l6MKA1G+l8UWiKhqsjOFcTx8OgGHQYk8lOkbNmjIy3qzhPYMeEVOMzAKFwrR1pHosK
- H41qidgCq+zU1KwQFhJS4klLmAvHipza2Eb6fAADFHGFmba1Qqser9yYHmO/Nk77O0q8 zw==
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3dsqcvhg0r-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 25 Jan 2022 23:07:21 +0000
-Received: from m0250812.ppops.net (m0250812.ppops.net [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 20PN7KbI029071;
-	Tue, 25 Jan 2022 23:07:20 GMT
-Received: from nam12-bn8-obe.outbound.protection.outlook.com
- (mail-bn8nam12lp2174.outbound.protection.outlook.com [104.47.55.174])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3dsqcvhg0q-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 25 Jan 2022 23:07:20 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fIl79kXqIXTbQEg2U94zboWCzkN6qIoYFaU4N8gbETCQouy8t/5MySiGSrZ/qI0vPDsN7uA6cRKn11UeS+khIo7CXbyuiEtwrAF5aX2y5/2KaTQ9X/8Ra23gqclw4Os3f/MnlLb0cbC2b1zpq+9SDNx5U0g9TiwLPCaIPID6gcMNhEQeoKXuvJ8ADGxcLYNx1WmcRDiG2bQMDIMvvwJaTr7WDN++/synjZgODzDlNUNK8lb2P6XL0h3dyWJ0qOscFObuD+YICFpskh0Z4UD217Q+yE5ysFUe4ib4csHYuSC7kvS6OU5ZYn9V2ZjyAtSfCIfUoO5OM7LnsdNAQrOesw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ULN+3AO1uQbta+BrOtVm51ksgqxSEYG5eaHHtPUVXLY=;
- b=XtxOQ4GRAzesdMBgJjMr1UEFxom3U+cWkQnI90dXMbuxJA609IBq3VUhDurZkOs7DS8I7tj0A2Gr4QnsdHSKrRGGkdmbcCi7yYOesMLqsqTlt5Pn9hw34DFvGXzssPw14KMeH+1HEtl9/3b7NWeMXwsqEoSH2h829bYRee0E3B7zP5OeGy7k2lqkqxvE8Rae7zlQ5NN/fYKuZL5ikhtE0BqWFxM8IUTdPO+MU8vqQH41oYfzLON+gcDMXMjbclOt5a2hD+n5r2UgYQm0xsOXfSiMhBYdCcfqT9nSoqpSShTt2bauRLlzHf3pd36gVDNYZ8sE39FDCOKyolcy/NBLoQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-Received: from DM6PR11MB3994.namprd11.prod.outlook.com (2603:10b6:5:193::19)
- by DM5PR11MB1387.namprd11.prod.outlook.com (2603:10b6:3:7::21) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4909.8; Tue, 25 Jan 2022 23:07:18 +0000
-Received: from DM6PR11MB3994.namprd11.prod.outlook.com
- ([fe80::f4ad:a867:7f2:8958]) by DM6PR11MB3994.namprd11.prod.outlook.com
- ([fe80::f4ad:a867:7f2:8958%6]) with mapi id 15.20.4930.015; Tue, 25 Jan 2022
- 23:07:18 +0000
-Message-ID: <028eb842-5749-2f0c-a028-8717dc948821@windriver.com>
-Date: Tue, 25 Jan 2022 18:07:12 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [OE-core] Inclusive Language Proposal for YP/OE
-Content-Language: en-CA
-To: Jon Mason <jdmason@kudzu.us>, yocto@lists.yoctoproject.org,
-        Patches and discussions about the oe-core layer
- <openembedded-core@lists.openembedded.org>,
-        OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-References: 
- <CAPoiz9wL16OTzxNHdw_5-L72GOHkhhM0--WZF7An071cx6sr_A@mail.gmail.com>
-From: Randy MacLeod <randy.macleod@windriver.com>
-In-Reply-To: 
- <CAPoiz9wL16OTzxNHdw_5-L72GOHkhhM0--WZF7An071cx6sr_A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-X-ClientProxiedBy: BY5PR20CA0012.namprd20.prod.outlook.com
- (2603:10b6:a03:1f4::25) To DM6PR11MB3994.namprd11.prod.outlook.com
- (2603:10b6:5:193::19)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=L1Y8sQYs;
+ spf=pass (domain: gmail.com, ip: 209.85.222.175,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f175.google.com with SMTP id a12so11686643qkk.9
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 25 Jan 2022 16:50:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=NjB5CJT2+IWhyf9BsFv5ECMAdXVl1IpHLfPcza9lJb0=;
+        b=L1Y8sQYsB4SbRtcc5DYttNAJJbUM0CJVjs5Zd1WhQlLHZS1vL94PZCwrmalfn3mNCg
+         emkHaHvTzVTyeh9Eoa9z/ZaVFF5Q9GH2L6pfKR2pJCeu9tRIbqoL8rnW/zjjvz6Y4gYM
+         ID2Drn9cUSxIz/xJw7pFSCFnQ7KUdTQHgwZmxRSj4/NKYl1a8zjeYGFsQRuNnbcWw2Qw
+         11R2jPci65aEDOSza4TfG1UO0pstU0xnYhmM4hss8Dmx2x+BWZKYhPVM3qXuDfLfHHOg
+         XpoYTUGYalUnC8B+F/4DEDk03HnWmx8jfAauqjGjVhhjBWAntKgZaGetluWQYYLtuBhk
+         E06Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=NjB5CJT2+IWhyf9BsFv5ECMAdXVl1IpHLfPcza9lJb0=;
+        b=e6Vi2ZypiYAFVhQ8julOI5sWWRbptwT8ukYbbBbIsoyfgunyxNqp2QZwoNvnE13YMI
+         VTBBC4cJ9GpQ+NNWDNgp/SrdybpG3IR7G8hjMTkmQqYYfqXzT7B4HcZH2Z74e6SzJQmB
+         KkcmYnLEK4P7//M9Dav3Gj1u3GmmU2NG/9AmHI8PmrGG1Thema7BUOCu8Ye+CmmwSTBA
+         C47Gb2Ghbl5WQD6/OjtvO7ETVqEkDpTFLAVNyPkxvzL8V7EoiXYeix8kLfXwGko1k8Lj
+         LQ1I0KspcTrllNzcZgjlFrai2hP2ihgz4W6y8QlU+P5yo5r4WaLZc+pJo/u5ZSvyrHjF
+         e7Rw==
+X-Gm-Message-State: AOAM532zF8IHaP30Cm7mm25fSECu9q8nO1GaCVmvavbrgdqBhJAYDDTI
+	Bs3noiahHIBT04QOifx7gHVOxnaSD9iFPbvfzIU=
+X-Google-Smtp-Source: 
+ ABdhPJwry6JkFnoBQMV5xiOh0Xnf51SyM+LYTqTLqt0/3MnTZigOhiOrLkGW2YaZqYEFiA7W0NxisGPihCmoznijJKQ=
+X-Received: by 2002:a37:5541:: with SMTP id
+ j62mr16295084qkb.180.1643158223747;
+ Tue, 25 Jan 2022 16:50:23 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 8eaefb46-c174-4d24-f89c-08d9e0576f03
-X-MS-TrafficTypeDiagnostic: DM5PR11MB1387:EE_
-X-Microsoft-Antispam-PRVS: 
-	<DM5PR11MB138767464FBAD3F770655B3AF85F9@DM5PR11MB1387.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	veGliB8Du2atSJQvnPC5t+ePoMl3KvS+D/9o0rAQOpZP6dih2UZmLoMfZV2WoS4YaXD3RB1xthAV5qaQ3sM2orFr3NyqSQTe5Syt5RMJY42eAKT5v8y+EIL5B2F//S+dWl/Bxjb9G6b4OKKEH5n0tMkHJQr4wFLO1uz4SO+6qYkicEuVGSvUkaAPhqG8S7oxn/5B6XnfoucG75pTlVHjJ4QekXqiCuufZkzEQXFKO14oi7+TNhhkMZGEwWLUzwsc478NH4YyCDtiWByKSb0o5LEiw/qsD6nslHgj7wpVjgWUQgtDAtKepz35EVCls/qoO/QgYagcO7s88cigu2A/dgg+Vpopm8O0NdjigE3emsxqlM663Fd7kic62HagAVB2xMW4ftrifCG+rcR/IGf3qPQ6osBJC7LkwdJiMaBugJWpVNnaLTkiDdxFs3WJUEa513QPumkbFJ8RutN8JaDaKv5AwvX3qnHztzdHOaQPHXLLRlQ8uEG9f3HpU4ZnI22URifzW7LxTwy/WojiTxu0CwE5VUgUIC4Cm3mByQVomnNCFeEGDGPDxUh7xgZIVPFJlC7dnQcFqIEJmfv+bsLVGGde5SYSPbdCRsb+Ux//zQgohplyuBt0dpD6VCWUSq3kOOynAY1BFKmCUkc7ZJTG2y+wmTvNZdJzi8lrauo4DFqQjZMG++O1Lqyp57Es4oaIhFIUolbwEXaCEOx+cRIQH5CCrbcYpQj1LkMJBjJHWdCY4KBcp0NA6K5d8O/MbYsjdXP5TUOEhrPIsSBGwmRL9/FpeOyi+jqGVNgIGesZqbIDRreKalk0QyhwXvT2iZUgtD+RUjJ+XyVZxXqygt6X6Cb+u0kpV2h5hci6p5jIZkYF3H6dEak4yhI1+K1Wgb2xPszG7Z53xGY3Z47+IlbuOs0cd+Mtk5CKK5AJs0Po6gU=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3994.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(83380400001)(966005)(66556008)(66946007)(66476007)(186003)(38350700002)(52116002)(6512007)(36756003)(38100700002)(8676002)(6666004)(2906002)(26005)(6486002)(8936002)(5660300002)(86362001)(508600001)(31686004)(6506007)(110136005)(316002)(31696002)(53546011)(2616005)(21314003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?TTNOUmcxcWYyUURHZGlCaHBkejBJYnJDT0ppSzJ6aFpZd1Rzd3ljM1NTOU92?=
- =?utf-8?B?elFhRjRENXZmVzZEUHFIK1JJNGV3R2hmRWtMbERiK1Z3MVFBVFpteld3Vmcy?=
- =?utf-8?B?Y01kZGtZVXhvdit0b1NXWm4xSzdtTll5VDkrZTcwcUNuTTZjTGZZTDlJUENJ?=
- =?utf-8?B?U1JiSlhpSUdad1pTcG56QjBLTWkvZ3p4L2RaQkZ5UU45Wk1xczNidndnbFBm?=
- =?utf-8?B?N2d1aytrb1FqTHdnMXkwR0gyMHc5MzVKZ2NKUmNvZ2dydXYzMGhnTTd1SXhx?=
- =?utf-8?B?cU0vaFJVSG9JUXNGcWhSd3lwejFyMkhEWlBsMHVoODBJSjJMc0tpVnVlNWpF?=
- =?utf-8?B?SjFWNVdJeGxKbEI2N0g2c0RCVDhBYmRod1FxamdGM3pMdytxYXprMTdTUXli?=
- =?utf-8?B?T0Q4VCtXTVA1TnVacjh6NnVrWWZKelVJanBqOU9EdmVUdW0zVG12SVRDRG0y?=
- =?utf-8?B?Q2VEQ2JPZlUwblUzbStMS3lBdE1rNUhNandVY3BWaXY2cFlYVVpzM0xKN1RZ?=
- =?utf-8?B?NklVMjBTSEVxemtiSStqWmNMVTR5Q1dXSVNrb2s2Q3hpaHVVZUNiYVFGYzNz?=
- =?utf-8?B?SjVUa3VsbnlGY3hUczJUSzhFNVVUbU9VN3hhekxDUk5NbnJnTHpjVFBkc05P?=
- =?utf-8?B?NDVSdWpQUkFYRDNQNmVYdUM5amx0TWNwYkpibzJXS1h5bi9PeWFnckszTnhO?=
- =?utf-8?B?QjVKTktVRTgxUTU1bGVHV0NnNkIxTC9zNmxqQWtSWis2NklFS0ZJcFZpT3dT?=
- =?utf-8?B?UXhYTCtCc2xMWUg0STRucjNSdzZYajliSkpTUUZzR01WWE5ETFVKeWhnZWhi?=
- =?utf-8?B?NzVCODVhZ2gzYmUrY1I1Z0ZQZzR1T0Y5UnpPUGdvRlYvQXBHVFdKZ0lKUnll?=
- =?utf-8?B?M1A5K1JTUjlITXBURmZPaGdqaVVHU2o0NmgrWjRCbEdpSU5xVzlnV25VRCsy?=
- =?utf-8?B?bjdWcjlFREphenpMRXhFdGhybm9vUGtBY1NXUmpQUGNRcHFqTWpZUG90cUtS?=
- =?utf-8?B?MWlIbEVCeDJjdGE1MnV3eDliMlhQUWthUDBieUN2ZjltMzB1VUMwK3dSYXlx?=
- =?utf-8?B?N0FOTzdOa3kzVlg3NHY1MHhCMnNNQytva2orV0hPZFlYUHBKYzc1OW80dkZi?=
- =?utf-8?B?Q3hYKzJ3Yy9vc2tnWFdBMFdvTHFQOU10anJLSG5TUW9SRlFUZFRHakZBZTMy?=
- =?utf-8?B?K2FCbENPT1JUUExwZDBqZDFmQWtGdUQrWHhycDFCbXUwY0ZyVmJpbGF4ZzA1?=
- =?utf-8?B?U1VPbk9WbnFTUkpWUVhiODY0cWs0QTVlcitTWXJwckJ5aGhxd05rUldtc3pM?=
- =?utf-8?B?amFnWFpkcDBFcWRLYU95aXhVZitPdWN5Tnl4VXpJU0RXcXpUVDArTm1YMjYx?=
- =?utf-8?B?OE54UjVoQVArcGM0N0JVZmVROTZ5aGthVkt0VjNMa1czNHlrNTVNVmZQbm1F?=
- =?utf-8?B?RmpDeHkydENlWURBbzhWbnU0SHNpL0lMOHNGbjlpbUc1ajlzOWZIQW9YK0FF?=
- =?utf-8?B?T0hpemdualA4eVRnaEZlRUF2OHJockl6QktseVd2eVdhRzJZZ2swamdnY1pZ?=
- =?utf-8?B?eGY0RGt6YU1UYndFbFRWdVNWT3pQSTBhUjl2SzkzNmxtOUpSbGx4eG9rR2o4?=
- =?utf-8?B?SEdTNmJoaGtXeTdrZXlHcGVYSEZnOHloNGMzTlY2R05mMWN6Zm1wSlBkUVlD?=
- =?utf-8?B?R25GL3JmbUVZL0RHKzZobUE1RkNlcUxNVXNMWlkyY1VGaVRvZ2RETzBRSGFD?=
- =?utf-8?B?YXpic25CdTJvYWZPNGIrOVNqWDNyeGhOU3lwbUJXVlVlM1c1Ti83czljRFk4?=
- =?utf-8?B?STFPSWdEclZvUTJzdVlmVktFZHkzN29jdVVYd2VkWnJKUElXOG5xUVpybURM?=
- =?utf-8?B?Y3IvcmtJajcvd3pKKzdqU2oyVlhoVUpVM3hOVDlwdUhweFFpalZRWDlGNGNK?=
- =?utf-8?B?T1hkQU9ySVlUcXIrQlRjV0FwSFZLTnVFeExWeXR5alJzaXZrYTlGVDdpSnY3?=
- =?utf-8?B?Smp4Ym9IYy8xVWE0bmZxN0o0SXlVUjRpSDYvWHlnaFhaa3UvU3FzNERSbThm?=
- =?utf-8?B?eTlXaUhnV2UwM1A4cVpQbFQ1WlAwTnE2ZHdaR29Hd0RGRm9nVGFwaWxOY2Jm?=
- =?utf-8?B?aFl6eVk4SWJyNjJKeVlUZDJyOE15Nm1YYXZIYWkwVDZUVjVyV3NmZlVWbWRJ?=
- =?utf-8?B?TWFrakR5TXBVT1pyOXZFeWMxSFRqbU50WW11MCtGcm1xTVhLU3hpa2JycmQ2?=
- =?utf-8?Q?ApL0JxM1Ml+gglK++fG4+CoRKla0xhCKkYY3yJxdi0=3D?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 8eaefb46-c174-4d24-f89c-08d9e0576f03
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3994.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jan 2022 23:07:18.2537
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 
- VriXkSRMIDgKc5wRFubyb0AkACw4J+nahMqWH+tkMHhhVOv0pSsXffpGuzFvmikfBJux3OfG4ni1RFx41mbjCYG9smaX9gp/rddOwkAZcAI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB1387
-X-Proofpoint-ORIG-GUID: AgmJ3mAE-DqtQHik2zVZuXFWi4gPQpSX
-X-Proofpoint-GUID: FtMLbgSTRx66v3YYkwJlLGMtls7E9jY_
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.816,Hydra:6.0.425,FMLib:17.11.62.513
- definitions=2022-01-25_06,2022-01-25_02,2021-12-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1011 malwarescore=0
- mlxlogscore=999 phishscore=0 spamscore=0 mlxscore=0 lowpriorityscore=0
- adultscore=0 bulkscore=0 suspectscore=0 impostorscore=0 priorityscore=1501
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2201110000
- definitions=main-2201250140
+References: <1643092604-6478-1-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1643092604-6478-1-git-send-email-wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 25 Jan 2022 16:49:57 -0800
+Message-ID: 
+ <CAMKF1sptgvi3Np-TWQ=CVNXJDHLcD5Q=Bt1s+khpMFvvmeiZqw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH v2] dlt-daemon: upgrade 2.18.7 -> 2.18.8
+To: wangmy <wangmy@fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by
- mx0a-0064b401.pphosted.com id 20PMtElY001506
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Jan 2022 23:07:24 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 26 Jan 2022 00:50:25 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95086
+ https://lists.openembedded.org/g/openembedded-devel/message/95087
 
-On 2022-01-24 11:17, Jon Mason wrote:
->>From the beginning, OpenEmbedded and The Yocto Project have always
-> strived to be as inclusive as possible to all races, sexes,
-> orientations, religions, nationalities, and any other thing which
-> might divide people.  As continuation of this striving, there are
-> suggested changes below that are being proposed to make the projects
-> more inclusive and show the community as the professional, friendly,
-> and welcoming group that it is.   There are words in use by the
-> projects directly or one of its derivative layers that could be
-> offensive to some.  For more information on which words we selected
-> and why, please consult
-> https://inclusivenaming.org/word-lists/overview/
->=20
-> In the process of changing these, we are using this opportunity to
-> make the terms more obvious and useful, as well as removing cruft and
-> other unused code.  This is the pure definition of a win-win solution.
->=20
-> With this in mind, a group of people have tried to identify issues and
-> come up with a plan to address these.   We=E2=80=99ve divided the tasks=
- into 3
-> areas: bitbake variables, oe-core variables, and everything else.
+fails on mips/glibc and x86/musl perhaps more combinations too see
 
-Jon,
+https://errors.yoctoproject.org/Errors/Details/623558/
 
-I've looked over all the changes and agree with Ross on his one suggestio=
-n
-and that the rest of the changes are fine.
-
-
-The new terms are equally or in some cases more clear so hopefully that=20
-will
-result in less confusion and a better experience for everyone at the=20
-one-time
-cost of a hopefully not too bumpy transition.
-
-Thanks!
-
-../Randy
-
-
-
-
->=20
-> Bitbake Variables
-> Taking issues in turn, for bitbake:
->=20
-> For BB_DISKMON_DIRS, the actions "ABORT, STOPTASKS and WARN" would
-> become "HALT, NO_NEW_TASKS and "WARN".
->=20
-> BB_ENV_WHITELIST -> BB_ENV_PASSTHROUGH
-> BB_ENV_EXTRAWHITE -> BB_ENV_PASSTHROUGH_ADDITIONS
->=20
-> BB_HASHCONFIG_WHITELIST -> BB_HASHCONFIG_IGNORE_VARS
-> BB_SETSCENE_ENFORCE_WHITELIST -> BB_SETSCENE_ENFORCE_IGNORE_TASKS
-> BB_HASHBASE_WHITELIST -> BB_BASEHASH_IGNORE_VARS
-> MULTI_PROVIDER_WHITELIST -> BB_MULTI_PROVIDER_ALLOWED
-> BB_STAMP_WHITELIST and BB_STAMP_POLICY -> delete the code (already merg=
-ed)
->=20
-> basewhitelist and taskwhitelist as used in sigdata/siginfo will need
-> to be renamed and older file usage of the variables renamed at import
-> for backwards compatibility. The variables in bitbake along with usage
-> of abort will be renamed as appropriate.
->=20
-> For most variables, errors will be shown to the user if the old
-> variable names are set. Mostly this can be done in event hooks but
-> some like the BB_ENV changes will need special handling.
->=20
-> These changes hopefully improve consistency (e.g. a consistent BB_
-> prefix and BASHHASH as terminology used elsewhere) and also improve
-> the description of the variables to be more understandable to users.
->=20
-> OE-Core Variables
-> For OE-Core, the proposals are:
->=20
-> For blacklist.bbclass, the proposal is to add the functionality to the
-> anonymous Python in base.bbclass instead. PNBLACKLIST[xxx] would
-> become SKIP_RECIPE[xxx]. INHERIT_BLACKLIST would simply be dropped.
->=20
-> SSTATE_DUPWHITELIST -> SSTATE_ALLOW_OVERLAP_FILES
-> CVE_CHECK_PN_WHITELIST -> CVE_CHECK_SKIPRECIPE
-> CVE_CHECK_WHITELIST -> CVE_CHECK_IGNORECVE
-> SYSROOT_DIRS_BLACKLIST -> SYSROOT_DIRS_IGNORE
-> LICENSE_FLAGS_WHITELIST -> LICENSE_FLAGS_ACCEPTED
-> UNKNOWN_CONFIGURE_WHITELIST -> UNKNOWN_CONFIGURE_OPT_IGNORE
-> SDK_LOCAL_CONF_BLACKLIST -> ESDK_LOCALCONF_REMOVE
-> SDK_LOCAL_CONF_WHITELIST -> ESDK_LOCALCONF_ALLOW
-> SDK_INHERIT_BLACKLIST -> ESDK_CLASS_INHERIT_DISABLE
-> TUNEABI_WHITELIST - already removed as obsolete
->=20
-> For the ICECC_USER_XXX and ICECC_SYSTEM_XXX, we think these can likely
-> be merged into single variables:
->=20
-> ICECC_USER_CLASS_BL -> ICECC_CLASS_DISABLE
-> ICECC_SYSTEM_CLASS_BL -> ICECC_CLASS_DISABLE
-> ICECC_USER_PACKAGE_WL -> ICECC_RECIPE_ENABLE
-> ICECC_USER_PACKAGE_BL -> ICECC_RECIPE_DISABLE
-> ICECC_SYSTEM_PACKAGE_BL -> ICECC_RECIPE_DISABLE
->=20
-> For license handling, we=E2=80=99d use the opportunity to clean up the
-> WHITELIST_(ANY LICENSE) syntax and replace it with a
-> INCOMPATIBLE_LICENSE_ALLOWED_RECIPES, which would be a list of recipes
-> which are of a blocked the INCOMPATIBLE_LICENSE list.
->=20
-> Everything else
-> The migration plan includes writing a script to assist with the
-> migration. In many cases it can likely make the translation. In cases
-> where that isn=E2=80=99t possible, it will aim to list the areas the us=
-er
-> needs to fix references.
->=20
-> A warning mechanism will be added to bitbake to detect usage of old
-> variable names (post parsing), except for BB_ENV issues which will
-> likely need special handling. A (limited) conversion script will be
-> created to help with the migration. For those instances where a 1-1
-> mapping is not achievable, a list of the occurrences and what it
-> should be changed to will occur.
->=20
->=20
-> Patch files in OE to be renamed:
-> 11_tcpd_blacklist.patch -> 11_tcpd_blocklist.patch
-> mount.blacklist -> mount.disallow
-> 0001-lxdm.conf.in-blacklist-root-for-release-images.patch ->
-> 0001-lxdm.conf.in-deny-root-for-release-images.patch
-> 022-RH-Remove-the-property-blacklist-exception-builtin.patch ->
-> 022-RH-Remove-the-default-property-exception-builtin.patch
-> 0001-Cargo.toml-do-not-abort-on-panic.patch ->
-> 0001-Cargo.toml-do-not-exit-on-panic.patch
-> 0004-Cargo.toml-do-not-abort-on-panic.patch ->
-> 0004-Cargo.toml-do-not-exit-on-panic.patch
-> Also, there are a few others outside of OE that should probably be patc=
-hed too.
->=20
-> Branch Names
-> The =E2=80=9Cmaster=E2=80=9D branches on the relevant OpenEmbedded and =
-Yocto Project
-> git trees will be changed to an alternative name at some point in the
-> future.  The current preferred name is =E2=80=9Cdevel=E2=80=9D.  There =
-is no time
-> table for this currently, and there is no obligation or requirement to
-> change the branch name for any downstream project which is beyond the
-> project=E2=80=99s remit.
->=20
-> Similarly, there is no need to change any recipes that are using a
-> =E2=80=9Cmaster=E2=80=9D branch as part of the SRC_URI.  Those are outs=
-ide the scope
-> of YP/OE and this effort.
->=20
-> Note
-> These changes are only to bitbake and OE-Core.  There is no
-> requirement to change any other layers but we=E2=80=99d note consistenc=
-y is
-> encouraged and helpful to users.
->=20
-> Helping
-> If you would like to help, please put your name by the items in
-> question on the inclusive language wiki page.
-> https://wiki.yoctoproject.org/wiki/Inclusive_language
->=20
-> Thanks
-> Special thanks to Richard Purdie, Michael Opdenacker. Marta
-> Rybczynska, Scott Murray, Jan-Simon Moeller, Saul Wold, and Armin
-> Kuster for providing their time, technical details, text, and feedback
-> on this task.
->=20
->=20
->=20
+On Mon, Jan 24, 2022 at 10:37 PM wangmy <wangmy@fujitsu.com> wrote:
+>
+> 317.patch
+> removed since it is included in 2.18.8
+>
+> Changelog:
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D
+> lib: Fix wrong type alert from lgtm
+> gtest_dlt_daemon_gateway: fix gtest build failed
+> lib: generate dlt library internal log file
+> tests: add stdlib to dlt_cpp_extension
+> dlt_user: Make dlt_init thread safe
+> remove clang-tidy analyzer warnings: incompatible pointer type
+> debian: improve debian build package
+> dlt-control-common: shutdown and close socket
+> dlt_common: improve function description
+> gtest: Bring-in changes
+> gtest: Rework WORKING_DIRECTORY
+> gtest: Correct data amount in gtest_dlt_common
+> cmake: Set empty to systemd_SRCS
+> gtest: Refactor tests/CMakeLists.txt
+> lib: Add SOCK_CLOEXEC to socket
+> daemon: Create parent directory for unix socket
+> cmake: Correct added subdirectories
+> console: Add cmake options for control and timestamp
+> tests: Adapt to DLT_DISABLE_MACRO
+> header: Adapt to DLT_DISABLE_MACRO
+> include: Refactor CMakeLists.txt
+> gtest: Change script name to gtest_dlt_daemon_offline_log.sh
+> daemon: Enable to use FIFO on QNX
+> tests: Add new test case with given buffer
+> tests: Enable macro disabling
+> lib: Add new interfaces with given buffer
+> Implemention of tests for the dlt-qnx-system module
+> lib: Add MaxFileSize handling
+> client: pthread_join for deinit
+> doc: update initial log level document
+> dlt-system: Fix memory leak in dlt-system config
+> dlt_common: remove duplicate stdbool header
+> dlt-control: Add option to config port
+> system: use signalfd for dlt-system
+> console: provides args option to enable send/receive serial header
+> fix malformed printf format strings (#295)
+> cmake: Set WITH_LEGACY_INCLUDE_PATH to ON as default (#334)
+> Make the legacy include path a CMake option (#332)
+> daemon: Call dlt_daemon_configuration_load() properly (#330)
+> dlt_user: Use pthread_setname_np() if available (#326)
+> libdlt: Add legacy include path in exported CMake config file (#327)
+> lib: Set TYLE to 1 for BOOL type (#320)
+> file-transfer: Abort file transfer if get serial number failed
+> dlt_user.c: fixing casting wrong type
+> dlt-sortbytimestamp: Remove duplicated conditional statements code
+> dlt-convert: Remove duplicated conditional statements code
+> doc: Minor fix in dlt_for_developers.md (#321)
+> dlt-control-common.c: Fix build failure due to out-of-bound write -Werror=
+=3Dstringop-truncation
+> Extend include path in *.pc file (#319)
+>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  .../dlt-daemon/dlt-daemon/317.patch           | 43 -------------------
+>  ...-daemon_2.18.7.bb =3D> dlt-daemon_2.18.8.bb} | 11 +++--
+>  2 files changed, 5 insertions(+), 49 deletions(-)
+>  delete mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/317.pa=
+tch
+>  rename meta-oe/recipes-extended/dlt-daemon/{dlt-daemon_2.18.7.bb =3D> dl=
+t-daemon_2.18.8.bb} (90%)
+>
+> diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/317.patch b/m=
+eta-oe/recipes-extended/dlt-daemon/dlt-daemon/317.patch
+> deleted file mode 100644
+> index fe40334b6..000000000
+> --- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/317.patch
+> +++ /dev/null
+> @@ -1,43 +0,0 @@
+> -Origin: https://github.com/GENIVI/dlt-daemon/pull/317
+> -From 55d31216823841a1547fe261cdf8e3b1002d5f94 Mon Sep 17 00:00:00 2001
+> -From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+> -Date: Thu, 1 Jul 2021 12:58:20 +0200
+> -Subject: [PATCH] dlt-control-common.c: Fix build failure due to out-of-b=
+ound
+> - write -Werror=3Dstringop-truncation
+> -
+> -cd /build/dlt-daemon-2.18.7/obj-x86_64-linux-gnu/src/console/logstorage =
+&& /usr/bin/cc -DCONFIGURATION_FILES_DIR=3D\"/etc\" -DDLT_DAEMON_USE_FIFO_I=
+PC -DDLT_LIB_USE_FIFO_IPC -DDLT_NETWORK_TRACE_ENABLE -DDLT_SYSTEMD_ENABLE -=
+DDLT_SYSTEMD_JOURNAL_ENABLE -DDLT_UNIT_TESTS -DDLT_USER_IPC_PATH=3D\"/tmp\"=
+ -DDLT_USE_IPv6 -DEXTENDED_FILTERING -D_GNU_SOURCE -I/build/dlt-daemon-2.18=
+.7 -I/build/dlt-daemon-2.18.7/obj-x86_64-linux-gnu/include/dlt -I/build/dlt=
+-daemon-2.18.7/include/dlt -I/build/dlt-daemon-2.18.7/src/shared -I/build/d=
+lt-daemon-2.18.7/src/core_dump_handler -I/build/dlt-daemon-2.18.7/src/offli=
+nelogstorage -I/build/dlt-daemon-2.18.7/src/lib -I/build/dlt-daemon-2.18.7/=
+src/daemon -I/build/dlt-daemon-2.18.7/src/console -I/build/dlt-daemon-2.18.=
+7/src/gateway -I/build/dlt-daemon-2.18.7/systemd/3rdparty -g -O2 -ffile-pre=
+fix-map=3D/build/dlt-daemon-2.18.7=3D. -fstack-protector-strong -Wformat -W=
+error=3Dformat-security -Wdate-time -D_FORTIFY_SOURCE=3D2   -Werror -std=3D=
+gnu99 -Wall -Wextra -Wno-variadic-macros -Wno-strict-aliasing -o CMakeFiles=
+/dlt-logstorage-ctrl.dir/__/dlt-control-common.c.o -c /build/dlt-daemon-2.1=
+8.7/src/console/dlt-control-common.c
+> -make[3]: Leaving directory '/build/dlt-daemon-2.18.7/obj-x86_64-linux-gn=
+u'
+> -In file included from /usr/include/string.h:495,
+> -                 from /build/dlt-daemon-2.18.7/src/console/dlt-control-c=
+ommon.c:56:
+> -In function 'strncpy',
+> -    inlined from 'dlt_json_filter_load' at /build/dlt-daemon-2.18.7/src/=
+console/dlt-control-common.c:716:13:
+> -/usr/include/x86_64-linux-gnu/bits/string_fortified.h:106:10: error: '__=
+builtin_strncpy' specified bound 4 equals destination size [-Werror=3Dstrin=
+gop-truncation]
+> -  106 |   return __builtin___strncpy_chk (__dest, __src, __len, __bos (_=
+_dest));
+> -      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
+~~~~~~~
+> -In function 'strncpy',
+> -    inlined from 'dlt_json_filter_load' at /build/dlt-daemon-2.18.7/src/=
+console/dlt-control-common.c:721:13:
+> -/usr/include/x86_64-linux-gnu/bits/string_fortified.h:106:10: error: '__=
+builtin_strncpy' specified bound 4 equals destination size [-Werror=3Dstrin=
+gop-truncation]
+> -  106 |   return __builtin___strncpy_chk (__dest, __src, __len, __bos (_=
+_dest));
+> -      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
+~~~~~~~
+> -
+> -Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+> -Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+> ----
+> - src/console/dlt-control-common.c | 4 ++--
+> - 1 file changed, 2 insertions(+), 2 deletions(-)
+> -
+> -diff --git a/src/console/dlt-control-common.c b/src/console/dlt-control-=
+common.c
+> -index 8a9d29f0..f58d8268 100644
+> ---- a/src/console/dlt-control-common.c
+> -+++ b/src/console/dlt-control-common.c
+> -@@ -671,8 +671,8 @@ DltReturnValue dlt_json_filter_load(DltFilter *filte=
+r, const char *filename, int
+> -     struct json_object *j_payload_max;
+> -     enum json_tokener_error jerr;
+> -
+> --    char app_id[DLT_ID_SIZE] =3D "";
+> --    char context_id[DLT_ID_SIZE] =3D "";
+> -+    char app_id[DLT_ID_SIZE + 1] =3D "";
+> -+    char context_id[DLT_ID_SIZE + 1] =3D "";
+> -     int32_t log_level =3D 0;
+> -     int32_t payload_max =3D INT32_MAX;
+> -     int32_t payload_min =3D 0;
+> diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.7.bb b/m=
+eta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.8.bb
+> similarity index 90%
+> rename from meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.7.bb
+> rename to meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.8.bb
+> index e5a3c7c29..c3fa4677e 100644
+> --- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.7.bb
+> +++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.8.bb
+> @@ -15,11 +15,10 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D8184208060=
+df880fe3137b93eb88aeea"
+>  DEPENDS =3D "zlib gzip-native json-c"
+>
+>  SRC_URI =3D "git://github.com/GENIVI/${BPN}.git;protocol=3Dhttps;branch=
+=3Dmaster \
+> -    file://0002-Don-t-execute-processes-as-a-specific-user.patch \
+> -    file://0004-Modify-systemd-config-directory.patch \
+> -    file://317.patch \
+> -"
+> -SRCREV =3D "24d197214bfdcec7430d31b42e5c87df27287aaf"
+> +           file://0002-Don-t-execute-processes-as-a-specific-user.patch =
+\
+> +           file://0004-Modify-systemd-config-directory.patch \
+> +           "
+> +SRCREV =3D "1438fcf8c88cd47b20b2984180a8457c3eb9193d"
+>
+>  S =3D "${WORKDIR}/git"
+>
+> @@ -31,7 +30,7 @@ PACKAGECONFIG ?=3D "${@bb.utils.contains('DISTRO_FEATUR=
+ES', 'systemd', ' systemd s
+>  PACKAGECONFIG[dlt-examples] =3D "-DWITH_DLT_EXAMPLES=3DON,-DWITH_DLT_EXA=
+MPLES=3DOFF,,dlt-daemon-systemd"
+>
+>  # Linux options
+> -PACKAGECONFIG[systemd] =3D "-DWITH_SYSTEMD=3DON,-DWITH_SYSTEMD=3DOFF,sys=
+temd"
+> +PACKAGECONFIG[systemd] =3D "-DWITH_SYSTEMD=3DON,-DWITH_SYSTEMD=3DOFF -DW=
+ITH_DLT_SYSTEM=3DOFF,systemd"
+>  PACKAGECONFIG[systemd-watchdog] =3D "-DWITH_SYSTEMD_WATCHDOG=3DON,-DWITH=
+_SYSTEMD_WATCHDOG=3DOFF,systemd,libsystemd"
+>  PACKAGECONFIG[systemd-journal] =3D "-DWITH_SYSTEMD_JOURNAL=3DON,-DWITH_S=
+YSTEMD_JOURNAL=3DOFF,systemd,libsystemd"
+>  PACKAGECONFIG[dlt-dbus] =3D "-DWITH_DLT_DBUS=3DON,-DWITH_DLT_DBUS=3DOFF,=
+dbus,dbus-lib"
+> --
+> 2.25.1
+>
+>
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#160881): https://lists.openembedded.org/g/openembed=
-ded-core/message/160881
-> Mute This Topic: https://lists.openembedded.org/mt/88650128/3616765
-> Group Owner: openembedded-core+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-core/unsub [=
-randy.macleod@windriver.com]
+> View/Reply Online (#95052): https://lists.openembedded.org/g/openembedded=
+-devel/message/95052
+> Mute This Topic: https://lists.openembedded.org/mt/88666815/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->=20
-
-
---=20
-# Randy MacLeod
-# Wind River Linux
-
+>
 
