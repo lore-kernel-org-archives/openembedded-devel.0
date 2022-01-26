@@ -2,15 +2,15 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99A1CC28CF5
-	for <webhook@archiver.kernel.org>; Wed, 26 Jan 2022 14:07:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 70DABC3526D
+	for <webhook@archiver.kernel.org>; Wed, 26 Jan 2022 14:07:40 +0000 (UTC)
 Received: from voyager.superhosting.bg (voyager.superhosting.bg
  [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web11.13055.1643206056700531924
+ by mx.groups.io with SMTP id smtpd.web09.12814.1643206058858145355
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Jan 2022 06:07:38 -0800
+ Wed, 26 Jan 2022 06:07:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=XZ9Hd4xS;
+ dkim=pass header.i=@anavi.org header.s=default header.b=LG2kXZES;
  spf=permerror,
  err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
  for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
@@ -21,24 +21,24 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=cpolrbb/MlUD/+LqWtHoaaGzC2kI1qUbn7SficVcMa4=; b=XZ9Hd4xSBYpK+56kFn/6n0C5ZF
-	hoZ8ZVnzuxuazoy13/gE8BMIM/Im02VGMcqftYZhgueO+tuOGGovyeHWmyVd4QclYxfbyJqnJAk7o
-	OerBtoIkhyVOu+VC9+gJ1FY4h+wA7s32uLGKHtgn528HoxyQvYYR+MjFSdjUcAZC1V2ehKDfqjD0l
-	gJie1e3m9dIf9bfx5YMdD9xhFN99XyGEUlspeLV90e4YDbUF1ZqyepdrsDyst4SFPo66VFBnupQ2e
-	FGIWn6IPQUqmb+tGz06DF5HUJFOqlqbGdNjpCYhYeRGrCXGPoNuPBIGq1IScUc5AHTHX+p2U0KfeL
-	NqLW11ng==;
+	bh=UACqN2nQJIGeGxU+1Mm4MYJDxp8+P9bNJ/qN0KPvnCE=; b=LG2kXZESLV6grFsf2Sc0e1eAaK
+	+ekF4iMSrx2dvGmq5vu162PwiUhrqdn3+h3LtfZRRhywiMCF50iUNl0+HOeZR+VhYZg7g47Nsioq+
+	04HcqhczYLUWoTAa35THuWpG7BG8OD2J98nRVyp4PQXFAQaKAKRsNSyTSeNRUtSqlfUwAe3RtERPT
+	0J5Uu6UAz4ecFKDs3zlex/aK+61PUFtkGhoQ3bK/WzeWv8K7w64zZRls1voDB48pCQsTPOe48RrRW
+	vKqIRsLHNy6+vgiGO7vg916CN5Vz73XEH8vdb7tV4OXsMRG0suXyHXcRt31X6Adu28XXu9y0P6Ymd
+	ve8/6rRQ==;
 Received: from lan.nucleusys.com ([92.247.61.126]:57062 helo=tone.k.g)
 	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.94.2)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1nCixt-0009aJ-9U; Wed, 26 Jan 2022 16:07:36 +0200
+	id 1nCixv-0009aJ-GO; Wed, 26 Jan 2022 16:07:39 +0200
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-bandit: Upgrade 1.7.1 -> 1.7.2
-Date: Wed, 26 Jan 2022 16:07:23 +0200
-Message-Id: <20220126140724.3923567-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-fasteners: Upgrade 0.17.2 -> 0.17.3
+Date: Wed, 26 Jan 2022 16:07:24 +0200
+Message-Id: <20220126140724.3923567-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220126140724.3923567-1-leon.anavi@konsulko.com>
 References: <20220126140724.3923567-1-leon.anavi@konsulko.com>
@@ -60,45 +60,35 @@ X-Source-Dir:
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Jan 2022 14:07:38 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 26 Jan 2022 14:07:40 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95105
+ https://lists.openembedded.org/g/openembedded-devel/message/95106
 
-Upgrade to release 1.7.2:
+Upgrade to release 0.17.3:
 
-- Fix broken reported URL link for B107
-- test_help_arg: remove assert on 'optional arguments'
-- Create FUNDING.yml
-- Start using auto-formatters
-- Drop end-of-life Python 3.5 and 3.6
-- Fix README.rst
-- Added snmp_security check plugin for various SNMP checks
-- Remove leftover openstack code
-- Correctly define extras in setup.cfg
+- Allow writer to become a reader in thread ReaderWriter lock
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-bandit_1.7.1.bb => python3-bandit_1.7.2.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-bandit_1.7.1.bb => python3-bandit_1.7.2.bb} (68%)
+ ...{python3-fasteners_0.17.2.bb => python3-fasteners_0.17.3.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-fasteners_0.17.2.bb => python3-fasteners_0.17.3.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bandit_1.7.1.bb b/meta-python/recipes-devtools/python/python3-bandit_1.7.2.bb
-similarity index 68%
-rename from meta-python/recipes-devtools/python/python3-bandit_1.7.1.bb
-rename to meta-python/recipes-devtools/python/python3-bandit_1.7.2.bb
-index ad6df1be4..f1d387688 100644
---- a/meta-python/recipes-devtools/python/python3-bandit_1.7.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-bandit_1.7.2.bb
-@@ -1,8 +1,8 @@
- SUMMARY = "Security oriented static analyser for python code."
+diff --git a/meta-python/recipes-devtools/python/python3-fasteners_0.17.2.bb b/meta-python/recipes-devtools/python/python3-fasteners_0.17.3.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-fasteners_0.17.2.bb
+rename to meta-python/recipes-devtools/python/python3-fasteners_0.17.3.bb
+index 5e847497a..d67270877 100644
+--- a/meta-python/recipes-devtools/python/python3-fasteners_0.17.2.bb
++++ b/meta-python/recipes-devtools/python/python3-fasteners_0.17.3.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/harlowja/fasteners"
  LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=4476c4be31402271e101d9a4a3430d52"
  
--SRC_URI[sha256sum] = "a81b00b5436e6880fa8ad6799bc830e02032047713cbb143a12939ac67eb756c"
-+SRC_URI[sha256sum] = "6d11adea0214a43813887bfe71a377b5a9955e4c826c8ffd341b494e3ab25260"
+-SRC_URI[sha256sum] = "2aceacb2bd618ce8526676f7a3e84ea25d0165ef10abb574a45b4a9c07292d2e"
++SRC_URI[sha256sum] = "a9a42a208573d4074c77d041447336cf4e3c1389a256fd3e113ef59cf29b7980"
  
- DEPENDS = "python3-pbr-native python3-git python3-pbr python3-pyyaml python3-six python3-stevedore"
+ inherit pypi setuptools3
  
 -- 
 2.30.2
