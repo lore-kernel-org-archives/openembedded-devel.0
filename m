@@ -2,78 +2,74 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CFE43C2BA4C
-	for <webhook@archiver.kernel.org>; Wed, 26 Jan 2022 06:59:14 +0000 (UTC)
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com
- [209.85.216.47])
- by mx.groups.io with SMTP id smtpd.web12.9429.1643180354316819538
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 58AA2C2BA4C
+	for <webhook@archiver.kernel.org>; Wed, 26 Jan 2022 07:07:11 +0000 (UTC)
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
+ [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.web09.9543.1643180830527153644
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Jan 2022 22:59:14 -0800
+ Tue, 25 Jan 2022 23:07:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=XwazqRjB;
- spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f47.google.com with SMTP id
- b1-20020a17090a990100b001b14bd47532so5330259pjp.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=WmxYdQW1;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id d187so596134pfa.10
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Jan 2022 22:59:14 -0800 (PST)
+ Tue, 25 Jan 2022 23:07:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=adVTjGoR8o2S7knPxVnBU4hcBInk0UdJSG3Fg2ZnXsA=;
-        b=XwazqRjB2j1P1RuaP+nb8MPGQ2wMkPXyvJU6zmyU/LE08SWocORHzd/4xXGwuHiot4
-         33Dd/zsYEuGXanci/JnD4JkpkP3TNfZ1ZPq2Meu4Ls8iht/pLRZVslQIe2TbIw1cdmTc
-         itZQce1MYkn2SaYAX7vW+fZrRj6Vh/HencqL6fK8tRgDAXqu+2JtqvUcM5uoDrmDYoHt
-         aoaEuB2xJY5rZjgqOTBCoOtSxWsNVzYZVoMm5dZ7htU/FJSEEvwS08uu91AfO6VPVGKk
-         Z1uVRelCKlfoNuUuRvfbZ8ovBaCiIx2ymwnEb0yhbbXNmwoBxW+CbTiE1SZDGCu8BEPE
-         5doQ==
+        bh=1Uzf70ftonetYt8N6x0kYinzSV9oRQFwyTl0LAL+Huc=;
+        b=WmxYdQW1cvDDvc6DV8zK9jIiRbgNNwDQBAH4JUS3FbWBuF8hLpCqbBJS7DiWEjVf20
+         XFiHkvlDwVsHkkwdllet5BwjLZSZVPCtIlGHpqPgfvdQwSJubbrBoI8F+d4SchkL/rmS
+         0lIAKC2ou3rvLK6/kkDG7KRiXU5yj2Hj+kifFqdzjEomTGFHv1PvqmsAiRBmb6VtoFew
+         Z8DAqWPiuu/VmYmJIrKpNiY/bxm5P49p+YrUdAESdrT1pGsWt4RcIPa3Yb+GFLW+9feP
+         fm4Be42LrSSq/ZDlIZ2n65kiYZzyolSZ9D8QuPGAIWoVx72LzNlahPBV2fD7PERBk6Es
+         Tj1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=adVTjGoR8o2S7knPxVnBU4hcBInk0UdJSG3Fg2ZnXsA=;
-        b=rA1BhnTSZXHRoHyrd8CZj32fYwt7Dal98tbiEO5OPkcEi/Sdm3DjJmjNMk2iIfyRA3
-         xYvl+hPcBZ8DdKJ6wrVfCxGbV6vJDfSIlyx5EDDFaPJH9gP5fMJG+YXw1cbXR7gwToMh
-         aFLafc/wdq+9DEtwOebFqkUOor8BLXxSwt7j77phEqEjy4j5EjPLmshKQ1UL6SOeOePP
-         OEtD0T7JnZhnsa3EaR1d/NZ1mkciIAqVfj10eT4M15EuXM+uhqbkAP4kpMIUgf/L8X0x
-         gW8dJ2FSCJVbW5Avl6wAqxM9BdAydpkRdoOBpn27JFpeTKMSGkIIOvX5T78+TJjdHVww
-         eG3w==
-X-Gm-Message-State: AOAM530fnyDcHLv/KQFDxxZFyrs/jslDwSaOSLlHGm01ELAW8g8qVeSV
-	44cVVgSsWPhxQ2SiwEKFiTH8KQxa1ux8xA==
+        bh=1Uzf70ftonetYt8N6x0kYinzSV9oRQFwyTl0LAL+Huc=;
+        b=ngJU5JR4h0vHKMqx/+13DucJFTRk5Bs5un9AspI+Xkdb3h6c0F8xCoz1MI6fDEh1dJ
+         wCB/+xXil17mthOq5dAXNV2Z4R4R6RDtHXoe+F9SUR467IPplB6czNFz78eDcyRgQt6q
+         nDxkyY1h+neOX3pykgfhd5jw4uWI4O8y5wkgSjylWzadb0VIfxQ8uJ84GbdrxHfwIcEn
+         bdDYUJLV4oSaFrMC8DkBywkSVeV5riDDW0RU6HzTvqexOVx4EQT29NboqxoYgn0clqvW
+         jHUxKWgoNHjdgbJWUT5iNDrpoWgaYCOjOXW7l298qqKYt1vG+YyRkbVv8R4GmqQOnC/y
+         iSPQ==
+X-Gm-Message-State: AOAM531uCOYh65aYh31tZd+ShJc6ENqlk/n8hycEii+x5pDRFrP3x+ct
+	FuOXhKIqA0CxVsdQCQaJwij1h50LKA9J7A==
 X-Google-Smtp-Source: 
- ABdhPJx/SNmFBNU/coIx3g5XjQ73kxWa2C7cK4pFhwPKjDe0EMXuzLXORUtsqVuPkR+ZYYBXMo4Umw==
-X-Received: by 2002:a17:902:8498:b0:14a:1b37:9f2b with SMTP id
- c24-20020a170902849800b0014a1b379f2bmr22922541plo.85.1643180353499;
-        Tue, 25 Jan 2022 22:59:13 -0800 (PST)
+ ABdhPJyZ8XeLiZKqH3hlXKBJxWB6GbSLshkRRRo0zOrOeIHcUanCa1+MM/JbxhMV2m96b6d0tvDCoA==
+X-Received: by 2002:a05:6a00:883:b0:4bc:39c1:9644 with SMTP id
+ q3-20020a056a00088300b004bc39c19644mr21466030pfj.14.1643180829762;
+        Tue, 25 Jan 2022 23:07:09 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b5e3])
         by smtp.gmail.com with ESMTPSA id
- n34sm943633pfv.209.2022.01.25.22.59.12
+ j10sm1035508pfu.93.2022.01.25.23.07.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 25 Jan 2022 22:59:13 -0800 (PST)
+        Tue, 25 Jan 2022 23:07:09 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>,
 	Tim Orling <tim.orling@konsulko.com>
-Subject: [meta-python][PATCH] python3-pyruvate: Fix build with mips/glibc
-Date: Tue, 25 Jan 2022 22:59:10 -0800
-Message-Id: <20220126065910.3023993-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH v2] python3-pyruvate: Fix build with mips
+Date: Tue, 25 Jan 2022 23:07:05 -0800
+Message-Id: <20220126070705.3034779-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Jan 2022 06:59:14 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 26 Jan 2022 07:07:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95099
+ https://lists.openembedded.org/g/openembedded-devel/message/95100
 
 mips/glibc systems have interesting problem where dev_t is not defined
-properly for O32 ABI, therefore address it for libsystemd crate, it
-works fine for musl therefore apply it for glibc alone.
-
-network is now required to be enabled since the replacement crate for
-systemd will have to be refetched after patching the manifest which
-happens during do_patch and hence after do_fetch
+properly for O32 ABI [1], therefore address it for libsystemd crate, it
+works fine for musl
 
 Fixes
 error[E0308]: mismatched types
@@ -82,9 +78,13 @@ error[E0308]: mismatched types
 296 |                 device: stat.st_dev,
     |                         ^^^^^^^^^^^ expected `u64`, found `u32`
 
+[1] https://sourceware.org/bugzilla/show_bug.cgi?id=17786
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Cc: Tim Orling <tim.orling@konsulko.com>
 ---
+v2: Fix commit msg and apply the patch to musl too as it does not hurt
+
  ...-targets-for-stat.st_dev-definitions.patch | 32 +++++++++++++++++++
  .../python/python3-pyruvate_1.1.2.bb          |  2 ++
  2 files changed, 34 insertions(+)
@@ -129,14 +129,14 @@ index 0000000000..3bd80359f4
 +2.35.0
 +
 diff --git a/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb b/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
-index dad18b78c2..03bb45e767 100644
+index dad18b78c2..14142fdb67 100644
 --- a/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
 +++ b/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
 @@ -22,6 +22,8 @@ RUSTFLAGS:append:mipsel = " --cfg crossbeam_no_atomic_64"
  RUSTFLAGS:append:powerpc = " --cfg crossbeam_no_atomic_64"
  RUSTFLAGS:append:riscv32 = " --cfg crossbeam_no_atomic_64"
  
-+SRC_URI:append:mips:libc-glibc = " file://0001-check-for-mips-targets-for-stat.st_dev-definitions.patch;patchdir=../cargo_home/bitbake/libsystemd-0.4.1/"
++SRC_URI:append:mips = " file://0001-check-for-mips-targets-for-stat.st_dev-definitions.patch;patchdir=../cargo_home/bitbake/libsystemd-0.4.1/"
 +
  SRC_URI += " \
      crate://crates.io/aho-corasick/0.7.18 \
