@@ -1,239 +1,193 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 10D30C433F5
-	for <webhook@archiver.kernel.org>; Thu, 27 Jan 2022 10:49:05 +0000 (UTC)
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
- [209.85.221.54])
- by mx.groups.io with SMTP id smtpd.web11.27029.1643280544060216177
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25635C433F5
+	for <webhook@archiver.kernel.org>; Thu, 27 Jan 2022 15:30:23 +0000 (UTC)
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
+ [209.85.215.175])
+ by mx.groups.io with SMTP id smtpd.web09.29703.1643297422568710464
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jan 2022 02:49:04 -0800
+ Thu, 27 Jan 2022 07:30:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=lQQoOj0x;
- spf=pass (domain: gmail.com, ip: 209.85.221.54,
- mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-wr1-f54.google.com with SMTP id f17so4012325wrx.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=bLcfbgoQ;
+ spf=pass (domain: gmail.com, ip: 209.85.215.175,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f175.google.com with SMTP id z131so2537681pgz.12
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jan 2022 02:49:03 -0800 (PST)
+ Thu, 27 Jan 2022 07:30:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=GVLiX6Wg7WijII7OxlH62rDnKssaJX20QtAzvw4Qxd4=;
-        b=lQQoOj0xoIwgQO89FW5zbx8bzyGoSODBim0OhyGqsaPV/pbarZmBPfSjT1KOZ5LUTL
-         3YFxubkBYtbp6ah5JyylZPCqnw4nTVvgdHQ9d0LtciYiLBhfxBq0gRKuNw3SQ7w1BUI1
-         Jef+Ea6JLdt3rKoXho6QmN8WVLL8+RJUC+cMiY5P2Hd8hqaYs3kZVUJ4N3AG0xsyCLmH
-         /74wGGULKFJw+TgOVl566L9gyLAD0liOMYOyQaabqoSAHG4TK8XIWkYp0PZBXLeODcw1
-         4dpkbyP4cZBVudVxZWSj8YGH1GLQeOoSkkOsS+Gv7jSq5UhyyaFAqfv8akf5dpHBKLCt
-         +K6w==
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :references:from:in-reply-to:content-transfer-encoding;
+        bh=PZ/ZdVACWg83yZc/gPq6yNX1OUzdkaUrpGx+hDHvapA=;
+        b=bLcfbgoQzGmSX/5UsB6TtL1M47Jw2h7XNGjbjfZyMyA4k49KQrXHvkOn2zIRcQapb9
+         hCNvLht5QJXu1GzKcE6lk9oCOne6K2RqMIV+bgmYBa3fFK3pTJyUEQS8kw7n2vQWFqn8
+         lfo3mTW6fQGJeGRumgrrrY9w5EhdqFz4Nmvf2tqc0rYLhuGDGYUb6HTBOuF3j2/mrFDx
+         5uj4StF+gShR1KR7rwPKMKgvO+HANlCmWLkBPvj0q2tmgpUQlmKAo37qTshfm4b6jqU+
+         V9WIWL1bEY+L4I7HSUhxJ/UXo3GsL0m9EzoVHezxfYbhv8NtWqXNi5C2I7Oe7yKd13gR
+         SoMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:references:from:in-reply-to
          :content-transfer-encoding;
-        bh=GVLiX6Wg7WijII7OxlH62rDnKssaJX20QtAzvw4Qxd4=;
-        b=3ggARQCdqCFVfVJzDgBEiHRvc+glndqeNqhUgAw/xQCCNjXlD6UGxJgV9QG0do0ipq
-         3mfml8v5Lp1Xn+wGNkRx4nco3PcM32eO9zoep5rWGdNVjvtYs7J2rDBitvlMxfmhvtR2
-         pkj8AU8Pc+Ib1cgcOos88I4JbVS5lgXAJpZyQ6BdhsgUkB2MYBgWWEf5Lf3nEHvK/v7N
-         +XOw+nT8FCvYvfsi8cSt6tmWt438C5RFdrOtKpiXM9RPETB18FIYerq/SkW0nPChCRX8
-         KDckhCKlBGOYjmsSQiCpo1pYEj2u2hQ6bYKBb0+eZTudCZ8Zzl8ENcwsm60cm5KQ47i6
-         KMkA==
-X-Gm-Message-State: AOAM533uOx5qWXmouuBqwiK9RjNvif8IrRXX5MCH38ueY2OCbLnioQaV
-	q1MLJhiiZn7DxA75/dyvRc29Zi6RMbY4UA==
+        bh=PZ/ZdVACWg83yZc/gPq6yNX1OUzdkaUrpGx+hDHvapA=;
+        b=J2S/9kU/5YGNSfgT+/CdA4/YTG16atQ7Ha3TcCU9Tz5WVfJGpIYFLnFa44G3aYMV51
+         w2pSDBzr+8fw0oR++p4vFuhloAndfI0aFyXvmL/LqvXTJ/j+UlFp7cL+BdTuFUvKnc/o
+         6RPCgLfXyxQ+MEr4mNpMECo9VCmW/ExG0Vs4FLiI6tZ+LCdmhzn2CW2Y72OtMR9Eg6EM
+         1FzY73uSj4qhsPJJAsJ09swbDDoiDS4mmNnTC7zr05ZEP2vRaQim4YG+bGbYKu9r1ywI
+         7yGMcO/rjlsQbG8oZ//Wqu7vdV5MjxGDCUswnXWaCyf9eDUeu1mKK8CgsThhfuZUAS1M
+         qvnA==
+X-Gm-Message-State: AOAM533ORwlEKfSEPR4BCkvbQbAIzoYmHDQW8xOWRJd545bcru8vBCHv
+	TgCQ2ecnHyW2wRYfIAqzZes=
 X-Google-Smtp-Source: 
- ABdhPJyeUV2QahNEuWP7ilhG/U4mxGeq9qkBKu+uu4zlVXbeaw2GRGUYBcP7vSHLABhFx8qC2pr+2A==
-X-Received: by 2002:adf:ded0:: with SMTP id i16mr2591416wrn.64.1643280541909;
-        Thu, 27 Jan 2022 02:49:01 -0800 (PST)
-Received: from Unimatrix08-Focal.lan ([109.52.19.53])
+ ABdhPJytev8o1H2CgOuurBZDE08deG/qEKOvbvVB7VSzw2cZME5JVfl9JqxaPaxHlxWkuiLox9p8vw==
+X-Received: by 2002:a05:6a00:1a8f:: with SMTP id
+ e15mr3804102pfv.38.1643297421992;
+        Thu, 27 Jan 2022 07:30:21 -0800 (PST)
+Received: from ?IPV6:2601:202:4180:a5c0:5fd4:3341:c771:87a3?
+ ([2601:202:4180:a5c0:5fd4:3341:c771:87a3])
         by smtp.gmail.com with ESMTPSA id
- k25sm3764248wms.23.2022.01.27.02.49.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 27 Jan 2022 02:49:01 -0800 (PST)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	Gianfranco Costamagna <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH] boinc-client:
-Date: Thu, 27 Jan 2022 11:48:59 +0100
-Message-Id: <20220127104859.2338468-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.25.1
+ f15sm5832430pfn.19.2022.01.27.07.30.21
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 27 Jan 2022 07:30:21 -0800 (PST)
+Message-ID: <a5a2a439-7816-46a1-542f-07d49faceeea@gmail.com>
+Date: Thu, 27 Jan 2022 07:30:20 -0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Subject: Re: [oe] [meta-oe][dunfell][PATCH] CVE-2021-3466: polkit Local
+ privilege escalation in pkexec due to incorrect handling of argument vector
+Content-Language: en-US
+To: Jeremy Puhlman <jpuhlman@mvista.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20220127001425.7392-1-jpuhlman@mvista.com>
+From: akuster808 <akuster808@gmail.com>
+In-Reply-To: <20220127001425.7392-1-jpuhlman@mvista.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Jan 2022 10:49:05 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Jan 2022 15:30:23 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95121
+ https://lists.openembedded.org/g/openembedded-devel/message/95122
 
-* update to 7.18.1 and unblacklist
-* Add openssl 3.0 build fix provided by upstream
-* fix the sed command to work with the correct new libtool named file
-* refresh patches
-* drop patch part that is added in one patch and removed in the following one
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
----
- .../packagegroups/packagegroup-meta-oe.bb     |  1 +
- .../boinc/boinc-client/4563.patch             | 36 +++++++++++++++++++
- .../boinc-client/boinc-AM_CONDITIONAL.patch   | 11 +-----
- .../boinc/boinc-client/gtk-configure.patch    | 10 +-----
- ...ient_7.16.16.bb => boinc-client_7.18.1.bb} | 12 +++----
- 5 files changed, 45 insertions(+), 25 deletions(-)
- create mode 100644 meta-oe/recipes-extended/boinc/boinc-client/4563.patch
- rename meta-oe/recipes-extended/boinc/{boinc-client_7.16.16.bb => boinc-client_7.18.1.bb} (92%)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 3cf33c694..a600b24cc 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -333,6 +333,7 @@ RDEPENDS:packagegroup-meta-oe-devtools:remove:x86 = "ply"
- 
- RDEPENDS:packagegroup-meta-oe-extended ="\
-     bitwise \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland opengl", "boinc-client", "", d)} \
-     brotli \
-     byacc \
-     cmatrix \
-diff --git a/meta-oe/recipes-extended/boinc/boinc-client/4563.patch b/meta-oe/recipes-extended/boinc/boinc-client/4563.patch
-new file mode 100644
-index 000000000..a18da4539
---- /dev/null
-+++ b/meta-oe/recipes-extended/boinc/boinc-client/4563.patch
-@@ -0,0 +1,36 @@
-+From 689dc20ede9768377d4032ff8c70b58269c8dc9c Mon Sep 17 00:00:00 2001
-+From: Charlie Fenton <charlief@example.com>
-+Date: Mon, 18 Oct 2021 01:43:08 -0700
-+Subject: [PATCH 01/10] Mac: update dependent libraries to latest:
-+ c-ares-1.17.2, curl-7.79.1, freetype-2.11.0, openssl-3.0.0 Previously updated
-+ to wxWidgets-3.1.5. FTGL version ftgl-2.1.3~rc5  is still the current
-+ version.
-+
-+---
-+ lib/crypt.cpp                             |   7 +-
-+ 8 files changed, 199 insertions(+), 150 deletions(-)
-+
-+diff --git a/lib/crypt.cpp b/lib/crypt.cpp
-+index 01249cfc340..9b1f69160b8 100644
-+--- a/lib/crypt.cpp
-++++ b/lib/crypt.cpp
-+@@ -1,6 +1,6 @@
-+ // This file is part of BOINC.
-+ // http://boinc.berkeley.edu
-+-// Copyright (C) 2008 University of California
-++// Copyright (C) 2021 University of California
-+ //
-+ // BOINC is free software; you can redistribute it and/or modify it
-+ // under the terms of the GNU Lesser General Public License
-+@@ -672,7 +672,10 @@ int check_validity_of_cert(
-+         }
-+ #ifdef HAVE_OPAQUE_RSA_DSA_DH
-+         RSA *rsa;
-+-        rsa = EVP_PKEY_get0_RSA(pubKey);
-++        // CAUTION: In OpenSSL 3.0.0, EVP_PKEY_get0_RSA() now returns a
-++        // pointer of type "const struct rsa_st*" to an immutable value.
-++        // Do not try to modify the contents of the returned struct.
-++        rsa = (rsa_st*)EVP_PKEY_get0_RSA(pubKey);
-+         if (!RSA_blinding_on(rsa, c)) {
-+ #else
-+         if (!RSA_blinding_on(pubKey->pkey.rsa, c)) {
-diff --git a/meta-oe/recipes-extended/boinc/boinc-client/boinc-AM_CONDITIONAL.patch b/meta-oe/recipes-extended/boinc/boinc-client/boinc-AM_CONDITIONAL.patch
-index 7c3b0325d..0431f523e 100644
---- a/meta-oe/recipes-extended/boinc/boinc-client/boinc-AM_CONDITIONAL.patch
-+++ b/meta-oe/recipes-extended/boinc/boinc-client/boinc-AM_CONDITIONAL.patch
-@@ -14,7 +14,7 @@ diff --git a/configure.ac b/configure.ac
- index d81d795de4..7beeb34ae2 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -63,6 +63,7 @@ m4_pattern_allow([AC_PROG_OBJCXX])
-+@@ -59,6 +59,7 @@ m4_pattern_allow([AC_PROG_OBJCXX])
-  m4_ifdef([AC_PROG_OBJCXX],[AC_PROG_OBJCXX],)
-  dnl ------
-  AC_PROG_CPP
-@@ -22,12 +22,3 @@ index d81d795de4..7beeb34ae2 100644
-  AC_PROG_MAKE_SET
-  SAH_LINKS
-  AC_LANG_PUSH(C)
--@@ -1068,6 +1069,8 @@ AM_CONDITIONAL(ENABLE_BOINCCRYPT, [test "x${enable_server}" = xyes  || test "x${
-- AM_CONDITIONAL(INSTALL_HEADERS, [test "${enable_install_headers}" = yes])
-- AM_CONDITIONAL(HAVE_CUDA_LIB, [test "${enable_client}" = yes -a -f ./coprocs/CUDA/posix/${boinc_platform}/libcudart.so])
-- 
--+PKG_CHECK_MODULES([GTK2], [gtk+-2.0])
--+
-- dnl ======================================================================
-- dnl some more vodoo required for building portable client-binary (client, clientgui)
-- dnl ======================================================================
-diff --git a/meta-oe/recipes-extended/boinc/boinc-client/gtk-configure.patch b/meta-oe/recipes-extended/boinc/boinc-client/gtk-configure.patch
-index e060b1a40..3b814e903 100644
---- a/meta-oe/recipes-extended/boinc/boinc-client/gtk-configure.patch
-+++ b/meta-oe/recipes-extended/boinc/boinc-client/gtk-configure.patch
-@@ -14,7 +14,7 @@ diff --git a/configure.ac b/configure.ac
- index 7beeb34ae2..35234c2762 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -1018,6 +1018,11 @@ else
-+@@ -1044,6 +1044,11 @@ else
-    AM_CONDITIONAL([GUI_GTK], false)
-  fi
-  
-@@ -26,11 +26,3 @@ index 7beeb34ae2..35234c2762 100644
-  dnl ---------- libNotify --------------------------------------------------
-  if test "${enable_manager}" = yes ; then
-    PKG_CHECK_MODULES(LIBNOTIFY, [libnotify])
--@@ -1069,7 +1074,6 @@ AM_CONDITIONAL(ENABLE_BOINCCRYPT, [test "x${enable_server}" = xyes  || test "x${
-- AM_CONDITIONAL(INSTALL_HEADERS, [test "${enable_install_headers}" = yes])
-- AM_CONDITIONAL(HAVE_CUDA_LIB, [test "${enable_client}" = yes -a -f ./coprocs/CUDA/posix/${boinc_platform}/libcudart.so])
-- 
---PKG_CHECK_MODULES([GTK2], [gtk+-2.0])
-- 
-- dnl ======================================================================
-- dnl some more vodoo required for building portable client-binary (client, clientgui)
-diff --git a/meta-oe/recipes-extended/boinc/boinc-client_7.16.16.bb b/meta-oe/recipes-extended/boinc/boinc-client_7.18.1.bb
-similarity index 92%
-rename from meta-oe/recipes-extended/boinc/boinc-client_7.16.16.bb
-rename to meta-oe/recipes-extended/boinc/boinc-client_7.18.1.bb
-index 79aaad9d8..114e39463 100644
---- a/meta-oe/recipes-extended/boinc/boinc-client_7.16.16.bb
-+++ b/meta-oe/recipes-extended/boinc/boinc-client_7.18.1.bb
-@@ -16,7 +16,6 @@ global warming, discover sources of gravitational waves, and many other types \
- of scientific and mathematical research."
- 
- HOMEPAGE = "http://boinc.berkeley.edu/"
--PNBLACKLIST[boinc-client] ?= "Needs porting to openssl 3.x"
- LICENSE = "LGPLv2+ & GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
-                     file://COPYING.LESSER;md5=6a6a8e020838b23406c81b19c1d46df6"
-@@ -30,11 +29,12 @@ DEPENDS = "curl \
-            ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk+ libnotify xcb-util libxscrnsaver', '', d)} \
-            nettle \
- "
--SRCREV = "df0239e6f074207798a8ecf1358a74545dda9132"
--BRANCH = "client_release/7/7.16"
-+SRCREV = "b49adfb118211e11c719766c0d71e7bdfe7f3363"
-+BRANCH = "client_release/7/7.18"
- SRC_URI = "git://github.com/BOINC/boinc;protocol=https;branch=${BRANCH} \
-            file://boinc-AM_CONDITIONAL.patch \
-            file://gtk-configure.patch \
-+           file://4563.patch \
- "
- 
- inherit gettext autotools pkgconfig features_check systemd
-@@ -70,9 +70,9 @@ do_configure:prepend () {
- 
- do_compile:prepend () {
- 	# Disable rpaths
--	sed -i -e 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' ${B}/${TARGET_SYS}-libtool
--	sed -i -e 's|^sys_lib_dlsearch_path_spec=.*|sys_lib_dlsearch_path_spec=""|g' ${B}/${TARGET_SYS}-libtool
--	sed -i -e 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' ${B}/${TARGET_SYS}-libtool
-+	sed -i -e 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' ${B}/libtool
-+	sed -i -e 's|^sys_lib_dlsearch_path_spec=.*|sys_lib_dlsearch_path_spec=""|g' ${B}/libtool
-+	sed -i -e 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' ${B}/libtool
- }
- 
- do_install:append() {
--- 
-2.25.1
+On 1/26/22 16:14, Jeremy Puhlman wrote:
+> Upstream-Status: Backport
+> CVE: CVE-2021-3466
+> Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
+> ---
+>   .../polkit/files/CVE-2021-4034.patch          | 71 +++++++++++++++++++
+>   .../recipes-extended/polkit/polkit_0.116.bb   |  1 +
+>   2 files changed, 72 insertions(+)
+>   create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2021-4034.patch
+>
+> diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2021-4034.patch b/meta-oe/recipes-extended/polkit/files/CVE-2021-4034.patch
+> new file mode 100644
+> index 000000000..294ada961
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/polkit/files/CVE-2021-4034.patch
+> @@ -0,0 +1,71 @@
+> +From ed8b418f1341cf7fc576f6b17de5c6dd4017e034 Mon Sep 17 00:00:00 2001
+> +From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
+> +Date: Thu, 27 Jan 2022 00:01:27 +0000
+> +Subject: [PATCH] CVE-2021-4034: Local privilege escalation in pkexec due to
+> + incorrect handling of argument vector
+> +
+> +Upstream-Status: Backport https://gitlab.freedesktop.org/polkit/polkit/-/commit/a2bf5c9c83b6ae46cbd5c779d3055bff81ded683
+The patch itself needs to contain this additional information. Please add:
+
+CVE: CVE-2021-xxxx
+Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
+
+> +---
+> + src/programs/pkcheck.c |  6 ++++++
+> + src/programs/pkexec.c  | 21 ++++++++++++++++++++-
+> + 2 files changed, 26 insertions(+), 1 deletion(-)
+> +
+> +diff --git a/src/programs/pkcheck.c b/src/programs/pkcheck.c
+> +index f1bb4e1..aff4f60 100644
+> +--- a/src/programs/pkcheck.c
+> ++++ b/src/programs/pkcheck.c
+> +@@ -363,6 +363,12 @@ main (int argc, char *argv[])
+> +   local_agent_handle = NULL;
+> +   ret = 126;
+> +
+> ++  if (argc < 1)
+> ++    {
+> ++      help();
+> ++      exit(1);
+> ++    }
+> ++
+> +   /* Disable remote file access from GIO. */
+> +   setenv ("GIO_USE_VFS", "local", 1);
+> +
+> +diff --git a/src/programs/pkexec.c b/src/programs/pkexec.c
+> +index 7698c5c..3ff4c58 100644
+> +--- a/src/programs/pkexec.c
+> ++++ b/src/programs/pkexec.c
+> +@@ -488,6 +488,17 @@ main (int argc, char *argv[])
+> +   pid_t pid_of_caller;
+> +   gpointer local_agent_handle;
+> +
+> ++
+> ++  /*
+> ++   * If 'pkexec' is called wrong, just show help and bail out.
+> ++   */
+> ++  if (argc<1)
+> ++    {
+> ++      clearenv();
+> ++      usage(argc, argv);
+> ++      exit(1);
+> ++    }
+> ++
+> +   ret = 127;
+> +   authority = NULL;
+> +   subject = NULL;
+> +@@ -636,7 +647,15 @@ main (int argc, char *argv[])
+> +           goto out;
+> +         }
+> +       g_free (path);
+> +-      argv[n] = path = s;
+> ++      path = s;
+> ++
+> ++      /* argc<2 and pkexec runs just shell, argv is guaranteed to be null-terminated.
+> ++       * /-less shell shouldn't happen, but let's be defensive and don't write to null-termination
+> ++       */
+> ++      if (argv[n] != NULL)
+> ++      {
+> ++        argv[n] = path;
+> ++      }
+> +     }
+> +   if (access (path, F_OK) != 0)
+> +     {
+> +--
+> +2.26.2
+> +
+> diff --git a/meta-oe/recipes-extended/polkit/polkit_0.116.bb b/meta-oe/recipes-extended/polkit/polkit_0.116.bb
+> index ad1973b13..77288b008 100644
+> --- a/meta-oe/recipes-extended/polkit/polkit_0.116.bb
+> +++ b/meta-oe/recipes-extended/polkit/polkit_0.116.bb
+> @@ -25,6 +25,7 @@ PAM_SRC_URI = "file://polkit-1_pam.patch"
+>   SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
+>              ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
+>              file://0003-make-netgroup-support-optional.patch \
+> +           file://CVE-2021-4034.patch \
+>              "
+>   SRC_URI[md5sum] = "4b37258583393e83069a0e2e89c0162a"
+>   SRC_URI[sha256sum] = "88170c9e711e8db305a12fdb8234fac5706c61969b94e084d0f117d8ec5d34b1"
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#95110): https://lists.openembedded.org/g/openembedded-devel/message/95110
+> Mute This Topic: https://lists.openembedded.org/mt/88710808/3616698
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
