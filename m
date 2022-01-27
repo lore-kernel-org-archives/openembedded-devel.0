@@ -1,171 +1,129 @@
-Return-Path: <jpuhlman@mvista.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 68F76C433EF
-	for <webhook@archiver.kernel.org>; Thu, 27 Jan 2022 00:14:32 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com
- [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web08.21472.1643242470964663074
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33FE3C433EF
+	for <webhook@archiver.kernel.org>; Thu, 27 Jan 2022 01:28:10 +0000 (UTC)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com
+ [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.web08.22302.1643246850654499827
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Jan 2022 16:14:32 -0800
+ Wed, 26 Jan 2022 17:27:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=D98szyBb;
- spf=pass (domain: mvista.com, ip: 209.85.214.173,
- mailfrom: jpuhlman@mvista.com)
-Received: by mail-pl1-f173.google.com with SMTP id u11so1002467plh.13
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=PuXsvUcS;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id
+ s2-20020a17090ad48200b001b501977b23so5992733pju.2
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Jan 2022 16:14:30 -0800 (PST)
+ Wed, 26 Jan 2022 17:27:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google;
+        d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=aqDvmww4AYoIzNM8PFntBxCdsmRRji4ioCmgaWyK3hY=;
-        b=D98szyBb9PdkkQtnrzTqG7IBah+qJDFYF0fKZR5bdgovHWy22viR+ShchhgvbOGpvq
-         2wUNDF/lDOw8oWB6SQ6tdMW5RVrbqJJ/agY36ct15E39SVG8IZKHE0vWy5LY30bkuVda
-         Ty03ZDda6uf5cWJlUAVSBfPcx221jrzLEaios=
+        bh=wKsTvqBmpq8BL4GPvN7fW7LVEGeXJyjL/GwGklxA7Gs=;
+        b=PuXsvUcSJHA4lbs3Yb+tjfB0Bg52E4mBW/2JHfIf6qGaHhStPn1OyfAJOwzUjxELMx
+         FdUGXw3FvYLX+CJm2Gg64KxmQx3af4X0RKVqLUp7eNHT8hospdy3UDnQ76D0aAles/+9
+         s+TUxkOlm9hXs7KICZQ3Ux3YHHNhaFVHCg3/+odMdgk29cwjoWyG/PkchRZt3gcoQAdV
+         Z+eVj3i2rz2Bm8CeywcEckpYHYV4UEhQXITUnnYBYPgzUGzAPu8OGgg/peT1QtyzO6/B
+         x1rOJzEeZntVRyNfbHc5pDWX7TsQoRcKnkr2KC0YRs6bXSK/kqN5ULNO42xezGmllxzb
+         tuXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=aqDvmww4AYoIzNM8PFntBxCdsmRRji4ioCmgaWyK3hY=;
-        b=2e37kgj+qvq781GpeyopEL8a+a3lsxsYxE4uY1XriJeWUzL+zzz6Ki52dcDO3fkM5J
-         FqF/MI11FxTWV17P0tSLLB+x8LEdYR9suRanzbq7s7hbD998cPptkWcgS3Fz5iQYNpn1
-         gkOF4Y7Nx9SMKTHtLCzcBrkm3CVRneSmggNeTdx2iZNQ/VzhO/QU2IJjTiDRGJa16Niq
-         TWbBM3ePhnUg1D4dKL3SMPwRsaCnXS0kb11xsmzgZ0Ha4QjJd3/71VqjlQb5FiBZt8GB
-         VOdhp6JaKPhoKxA0C3ntkk+p4WJxvl5Sv6V14KKV6ndfyNoh+CPzipIu9mHXWb+1ebvy
-         Rsdg==
-X-Gm-Message-State: AOAM5305MR0Ef3/yX/MV+tIWW9ILfrCVT61ES12Ja482K3IUhpHEjUGC
-	l7zYdXtdSMjlpfz873l6NClalxDz+R8CQg==
+        bh=wKsTvqBmpq8BL4GPvN7fW7LVEGeXJyjL/GwGklxA7Gs=;
+        b=dhWk0PUazoz4NKd7cOeBImtmLkBNTcoDh3A3W4cZXnNPfAWq+ayr4dMk0FYyNjS/eM
+         ZHLgKB54Hqv5O6UEHPm3pvlFkrMr2cXeawfw/i29PQpJfbtb/YFuIlmNDBKuY38W++My
+         WZfM59MsJp5LF6PvIEnNVo/Dqm+d1pZMCRdSSzMF9wNvU4gTiB0ktzfCzkJ7Pr0DzwwG
+         +ktKWYEHONhiq/KzdE5Fa236u0V2DXgDQH/VHFpkm6aepFadJ3ITevP0NQ+su91iPMFP
+         l7CSBxBPwXVOJyxwHJsATD46PwtaZARrJGR2riGLIgj6O1EiXGHMJM4dqIdJmDw9KCN2
+         sIQw==
+X-Gm-Message-State: AOAM531sYt/rVP4Xl9R+TO0jflzmdZz7qWecRMks1c2SOQH58vxPM4Ep
+	gnX/4KKcicBw8ryhdRA7FvXpARE6i6lHXw==
 X-Google-Smtp-Source: 
- ABdhPJzivXb/QOnqzU++bPGBQkjUN4ufvbZA/kebLAJQPx8UfLkU/3pwJwEiLu0lZJImOQ3eONVeLw==
-X-Received: by 2002:a17:903:2093:: with SMTP id
- d19mr1089010plc.29.1643242469990;
-        Wed, 26 Jan 2022 16:14:29 -0800 (PST)
-Received: from black.maotig.mine.nu
- (99-14-97-149.lightspeed.frokca.sbcglobal.net. [99.14.97.149])
+ ABdhPJy1f2okNWaLREQfgEbCXQOe5mAsch5w3C1BhwEc5o/V/W/vRpQ5hHvkBgApw+t3jbec99uqNw==
+X-Received: by 2002:a17:902:ecd0:: with SMTP id
+ a16mr1168103plh.64.1643246849722;
+        Wed, 26 Jan 2022 17:27:29 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b5e3])
         by smtp.gmail.com with ESMTPSA id
- h6sm3462160pfk.110.2022.01.26.16.14.27
+ o23sm430015pjg.14.2022.01.26.17.27.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Jan 2022 16:14:29 -0800 (PST)
-Received: by black.maotig.mine.nu (sSMTP sendmail emulation);
- Wed, 26 Jan 2022 19:14:27 -0500
-From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
+        Wed, 26 Jan 2022 17:27:29 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
-Subject: [meta-oe][dunfell][PATCH] CVE-2021-3466: polkit Local privilege
- escalation in pkexec due to incorrect handling of argument vector
-Date: Wed, 26 Jan 2022 19:14:25 -0500
-Message-Id: <20220127001425.7392-1-jpuhlman@mvista.com>
-X-Mailer: git-send-email 2.20.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [PATCH] python3-pyruvate: Fix build with riscv64/musl
+Date: Wed, 26 Jan 2022 17:27:26 -0800
+Message-Id: <20220127012726.1210416-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.35.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Jan 2022 00:14:32 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Jan 2022 01:28:10 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95110
+ https://lists.openembedded.org/g/openembedded-devel/message/95111
 
-Upstream-Status: Backport
-CVE: CVE-2021-3466
-Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../polkit/files/CVE-2021-4034.patch          | 71 +++++++++++++++++++
- .../recipes-extended/polkit/polkit_0.116.bb   |  1 +
- 2 files changed, 72 insertions(+)
- create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2021-4034.patch
+ ...scv64-mod.rs-Add-missing-error-codes.patch | 32 +++++++++++++++++++
+ .../python/python3-pyruvate_1.1.2.bb          |  1 +
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyruvate/0001-riscv64-mod.rs-Add-missing-error-codes.patch
 
-diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2021-4034.patch b/meta-oe/recipes-extended/polkit/files/CVE-2021-4034.patch
+diff --git a/meta-python/recipes-devtools/python/python3-pyruvate/0001-riscv64-mod.rs-Add-missing-error-codes.patch b/meta-python/recipes-devtools/python/python3-pyruvate/0001-riscv64-mod.rs-Add-missing-error-codes.patch
 new file mode 100644
-index 000000000..294ada961
+index 0000000000..67108472ac
 --- /dev/null
-+++ b/meta-oe/recipes-extended/polkit/files/CVE-2021-4034.patch
-@@ -0,0 +1,71 @@
-+From ed8b418f1341cf7fc576f6b17de5c6dd4017e034 Mon Sep 17 00:00:00 2001
-+From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
-+Date: Thu, 27 Jan 2022 00:01:27 +0000
-+Subject: [PATCH] CVE-2021-4034: Local privilege escalation in pkexec due to 
-+ incorrect handling of argument vector
++++ b/meta-python/recipes-devtools/python/python3-pyruvate/0001-riscv64-mod.rs-Add-missing-error-codes.patch
+@@ -0,0 +1,32 @@
++From c711fb215de54f960a35cdc48cd506b6b5db4918 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 26 Jan 2022 11:50:58 -0800
++Subject: [PATCH] riscv64/mod.rs: Add missing error codes
 +
-+Upstream-Status: Backport https://gitlab.freedesktop.org/polkit/polkit/-/commit/a2bf5c9c83b6ae46cbd5c779d3055bff81ded683
++These are flagged by apps e.g. python3-pyruvate
++
++Upstream-Status: Submitted [https://github.com/rust-lang/libc/pull/2656]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/programs/pkcheck.c |  6 ++++++
-+ src/programs/pkexec.c  | 21 ++++++++++++++++++++-
-+ 2 files changed, 26 insertions(+), 1 deletion(-)
++ src/unix/linux_like/linux/musl/b64/riscv64/mod.rs | 5 +++++
++ 1 file changed, 5 insertions(+)
 +
-+diff --git a/src/programs/pkcheck.c b/src/programs/pkcheck.c
-+index f1bb4e1..aff4f60 100644
-+--- a/src/programs/pkcheck.c
-++++ b/src/programs/pkcheck.c
-+@@ -363,6 +363,12 @@ main (int argc, char *argv[])
-+   local_agent_handle = NULL;
-+   ret = 126;
-+ 
-++  if (argc < 1)
-++    {
-++      help();
-++      exit(1);
-++    }
-++
-+   /* Disable remote file access from GIO. */
-+   setenv ("GIO_USE_VFS", "local", 1);
-+ 
-+diff --git a/src/programs/pkexec.c b/src/programs/pkexec.c
-+index 7698c5c..3ff4c58 100644
-+--- a/src/programs/pkexec.c
-++++ b/src/programs/pkexec.c
-+@@ -488,6 +488,17 @@ main (int argc, char *argv[])
-+   pid_t pid_of_caller;
-+   gpointer local_agent_handle;
-+ 
-++
-++  /*
-++   * If 'pkexec' is called wrong, just show help and bail out.
-++   */
-++  if (argc<1)
-++    {
-++      clearenv();
-++      usage(argc, argv);
-++      exit(1);
-++    }
-++
-+   ret = 127;
-+   authority = NULL;
-+   subject = NULL;
-+@@ -636,7 +647,15 @@ main (int argc, char *argv[])
-+           goto out;
-+         }
-+       g_free (path);
-+-      argv[n] = path = s;
-++      path = s;
-++
-++      /* argc<2 and pkexec runs just shell, argv is guaranteed to be null-terminated.
-++       * /-less shell shouldn't happen, but let's be defensive and don't write to null-termination
-++       */
-++      if (argv[n] != NULL)
-++      {
-++        argv[n] = path;
-++      }
-+     }
-+   if (access (path, F_OK) != 0)
-+     {
++diff --git a/src/unix/linux_like/linux/musl/b64/riscv64/mod.rs b/src/unix/linux_like/linux/musl/b64/riscv64/mod.rs
++index b075b4a05..6b17621c7 100644
++--- a/src/unix/linux_like/linux/musl/b64/riscv64/mod.rs
+++++ b/src/unix/linux_like/linux/musl/b64/riscv64/mod.rs
++@@ -548,6 +548,11 @@ pub const EHOSTUNREACH: ::c_int = 113;
++ pub const EALREADY: ::c_int = 114;
++ pub const EINPROGRESS: ::c_int = 115;
++ pub const ESTALE: ::c_int = 116;
+++pub const EUCLEAN: ::c_int = 117;
+++pub const ENOTNAM: ::c_int = 118;
+++pub const ENAVAIL: ::c_int = 119;
+++pub const EISNAM: ::c_int = 120;
+++pub const EREMOTEIO: ::c_int = 121;
++ pub const EDQUOT: ::c_int = 122;
++ pub const ENOMEDIUM: ::c_int = 123;
++ pub const EMEDIUMTYPE: ::c_int = 124;
 +-- 
-+2.26.2
++2.35.0
 +
-diff --git a/meta-oe/recipes-extended/polkit/polkit_0.116.bb b/meta-oe/recipes-extended/polkit/polkit_0.116.bb
-index ad1973b13..77288b008 100644
---- a/meta-oe/recipes-extended/polkit/polkit_0.116.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_0.116.bb
-@@ -25,6 +25,7 @@ PAM_SRC_URI = "file://polkit-1_pam.patch"
- SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
-            ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
-            file://0003-make-netgroup-support-optional.patch \
-+           file://CVE-2021-4034.patch \
-            "
- SRC_URI[md5sum] = "4b37258583393e83069a0e2e89c0162a"
- SRC_URI[sha256sum] = "88170c9e711e8db305a12fdb8234fac5706c61969b94e084d0f117d8ec5d34b1"
+diff --git a/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb b/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
+index 14142fdb67..b83302d44c 100644
+--- a/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
+@@ -23,6 +23,7 @@ RUSTFLAGS:append:powerpc = " --cfg crossbeam_no_atomic_64"
+ RUSTFLAGS:append:riscv32 = " --cfg crossbeam_no_atomic_64"
+ 
+ SRC_URI:append:mips = " file://0001-check-for-mips-targets-for-stat.st_dev-definitions.patch;patchdir=../cargo_home/bitbake/libsystemd-0.4.1/"
++SRC_URI:append = " file://0001-riscv64-mod.rs-Add-missing-error-codes.patch;patchdir=../cargo_home/bitbake/libc-0.2.112/"
+ 
+ SRC_URI += " \
+     crate://crates.io/aho-corasick/0.7.18 \
 -- 
-2.20.1
+2.35.0
 
 
