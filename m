@@ -1,75 +1,166 @@
-Return-Path: <peter.kjellerstedt@axis.com>
+Return-Path: <festevam@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F260C433EF
-	for <webhook@archiver.kernel.org>; Thu, 27 Jan 2022 21:04:10 +0000 (UTC)
-Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
- by mx.groups.io with SMTP id smtpd.web09.3872.1643317448721624643
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1728C433F5
+	for <webhook@archiver.kernel.org>; Thu, 27 Jan 2022 23:07:00 +0000 (UTC)
+Received: from mail-ot1-f54.google.com (mail-ot1-f54.google.com
+ [209.85.210.54])
+ by mx.groups.io with SMTP id smtpd.web08.137.1643324819416482435
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jan 2022 13:04:09 -0800
+ Thu, 27 Jan 2022 15:06:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=axis-central1 header.b=o5NrkK8N;
- spf=pass (domain: axis.com, ip: 195.60.68.17,
- mailfrom: peter.kjellerstedt@axis.com)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=AT0PCN0I;
+ spf=pass (domain: gmail.com, ip: 209.85.210.54, mailfrom: festevam@gmail.com)
+Received: by mail-ot1-f54.google.com with SMTP id
+ b17-20020a9d4791000000b005a17fc2dfc1so4089094otf.1
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 27 Jan 2022 15:06:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; q=dns/txt; s=axis-central1; t=1643317449;
-  x=1674853449;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=tI6pbnzkKqhEM9C8NAvH/JuVGgCroO5940eHdN8TGAo=;
-  b=o5NrkK8NwglKNopeJxX7/oziZJHhiibQK/DWbXZy+HlQyAGqk/DMa2qX
-   lc4dKjbNXUBOqrRx1E4iE0SHZyzrcci8GalIzK6M0sxMpaNM2RORsHLuA
-   0oaZS2C+FMl02s+9WLhRHSYh9yRFG5+YAti7gtzEuOVyiTzZI2t3JqKOB
-   6lwlFHgtyFGGV6gJJ6QG0h/O0sQm1mbTkuhTCiDyW1cuPBTX/TiS2LQdi
-   1mH5xAjC4M2A9azO6e4VuSs1eHeDwbcozEU8grMicBpHUh1UiIEapUKrM
-   VWTo82e75hnpKU/iFK7YbvXzezdBR0mSohKJEZ/dLq0+en+B6OXUOkH3I
-   w==;
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: Otavio Salvador <otavio.salvador@ossystems.com.br>, Khem Raj
-	<raj.khem@gmail.com>
-CC: Fabio Estevam <festevam@denx.de>, openembeded-devel
-	<openembedded-devel@lists.openembedded.org>, Heiko Schocher <hs@denx.de>,
-	Alexandre BELLONI <alexandre.belloni@bootlin.com>
-Subject: RE: [oe] [PATCH v2 meta-oe] rtc-tools: Add a recipe
-Thread-Topic: [oe] [PATCH v2 meta-oe] rtc-tools: Add a recipe
-Thread-Index: AQHYEuMrpJMUSuWK7kKK2QJ0jebOyax1l4iAgAHE2ZA=
-Date: Thu, 27 Jan 2022 21:04:06 +0000
-Message-ID: <66a50b06d9314c8780ef653331d9ea06@axis.com>
-References: <20220126182232.1790127-1-festevam@denx.de>
- <CAMKF1spmTzkh_egyGhyXgkfBag_eHMDZCHoaTQSPHpemo=MYbw@mail.gmail.com>
- <CAP9ODKoyVa0NUzghEAQSRdXOtx_Zbmov+LGYXwz04tSn09GYOA@mail.gmail.com>
-In-Reply-To: 
- <CAP9ODKoyVa0NUzghEAQSRdXOtx_Zbmov+LGYXwz04tSn09GYOA@mail.gmail.com>
-Accept-Language: en-US, sv-SE
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.0.5.60]
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=vO8nxdv55n4cM2VU+RYUJqm6THNQP25XKaJVf3TkmuI=;
+        b=AT0PCN0IxcW7Lx8kIi8LzIAya6FZPOJ7FMsDKUGCKhzjr+1RFflFWTAfoOcsWaC2X4
+         79mcPoNm+E8HQpfbrnY7hBSXGjeJ162zfeJgDBWOjV9TCIEuoFK2jllE9mHQWfG4VaQu
+         jqIsOuTIkh6GpvnXexcs6PDgul7blC/Fxe6uRHCVYZpjXx2cb+2aaXJv3EwCUmielYSH
+         /HQZ+ed0iA4deRQiwXrNcNF7iGLi1IcMe/IF+gWkRmnw3FWhdyPJce1V6L7ke/vPF/4G
+         /An0bl0ZEhf3X/IPb6FWcucDxUWflsQuF8+umWfyp1jrk2i+mYTFOlTBaYyyt+yi/JtZ
+         wZcg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=vO8nxdv55n4cM2VU+RYUJqm6THNQP25XKaJVf3TkmuI=;
+        b=LvTwiSswnAliyBQvPM/nmavi45ho/MX9aSw6gUK83AlfXPxsgNgXWOfrppTAgxjvtp
+         vK60MmqQNp26Mi38QMeL3B8XuDDhexWAC0G4rDkht3cj/hq12sHiGql9yOGz0tKTUa/J
+         KQbXmihLeJIfPVa5N09d5jdfGUWXSmdT1J+YP87lixaPRdv4bHZq1EZhFqpZrgPLIPpN
+         x5c4O9ndvxu9brRfw45uKGHIVWnOmocpA7LM6TK3yJhL3wJHUaSVwTVh/lAcgFP7XWjc
+         E9RjyKvlgqfZ2vLwA6rGMrEzwOBeIVpXRXBMw6dlETR072l4uYxBJKTJLfDWWaxoDp2u
+         r8IA==
+X-Gm-Message-State: AOAM532TnCd546Qi/UUhCEf4ja9Qz5KMUqqK28xNP2pMvOhZAm9BBfJJ
+	neS7rbl64jYGg1vdpYhwX9KNwf3K144=
+X-Google-Smtp-Source: 
+ ABdhPJy6MyHEj5NpFggWxsE0dFMVx8juKKEr0QgbCxIi/unlVV6K8YMRiT7QLmF9+1PmDQAXZYK+7w==
+X-Received: by 2002:a05:6830:43a6:: with SMTP id
+ s38mr3393615otv.94.1643324818458;
+        Thu, 27 Jan 2022 15:06:58 -0800 (PST)
+Received: from localhost.localdomain ([2804:14c:485:4b69:95a2:6da9:5705:29a2])
+        by smtp.gmail.com with ESMTPSA id
+ s64sm6496253oos.0.2022.01.27.15.06.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 27 Jan 2022 15:06:57 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: otavio.salvador@ossystems.com.br,
+	hs@denx.de,
+	alexandre.belloni@bootlin.com,
+	raj.khem@gmail.com,
+	peter.kjellerstedt@axis.com,
+	Fabio Estevam <festevam@denx.de>
+Subject: [PATCH v3 meta-oe] rtc-tools: Add a recipe
+Date: Thu, 27 Jan 2022 20:06:07 -0300
+Message-Id: <20220127230607.35740-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Jan 2022 21:04:10 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Jan 2022 23:07:00 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95129
+ https://lists.openembedded.org/g/openembedded-devel/message/95130
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWxA
-bGlzdHMub3BlbmVtYmVkZGVkLm9yZyA8b3BlbmVtYmVkZGVkLQ0KPiBkZXZlbEBsaXN0cy5vcGVu
-ZW1iZWRkZWQub3JnPiBPbiBCZWhhbGYgT2YgT3RhdmlvIFNhbHZhZG9yDQo+IFNlbnQ6IGRlbiAy
-NiBqYW51YXJpIDIwMjIgMjA6MDENCj4gVG86IEtoZW0gUmFqIDxyYWoua2hlbUBnbWFpbC5jb20+
-DQo+IENjOiBGYWJpbyBFc3RldmFtIDxmZXN0ZXZhbUBkZW54LmRlPjsgb3BlbmVtYmVkZWQtZGV2
-ZWwgPG9wZW5lbWJlZGRlZC0NCj4gZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZz47IEhlaWtv
-IFNjaG9jaGVyIDxoc0BkZW54LmRlPjsgQWxleGFuZHJlDQo+IEJFTExPTkkgPGFsZXhhbmRyZS5i
-ZWxsb25pQGJvb3RsaW4uY29tPg0KPiBTdWJqZWN0OiBSZTogW29lXSBbUEFUQ0ggdjIgbWV0YS1v
-ZV0gcnRjLXRvb2xzOiBBZGQgYSByZWNpcGUNCj4gDQo+IEVtIHF1YS4sIDI2IGRlIGphbi4gZGUg
-MjAyMiDDoHMgMTU6MzIsIEtoZW0gUmFqIDxyYWoua2hlbUBnbWFpbC5jb20+DQo+IGVzY3JldmV1
-Og0KPiA+ID4gK2RvX2luc3RhbGwoKSB7DQo+ID4gPiArICAgICAgIG9lX3J1bm1ha2UgaW5zdGFs
-bA0KPiA+ID4gK30NCj4gDQo+IElJUkMgdGhpcyBpcyB0aGUgZGVmYXVsdCBzbyBFWFRSQV9PRU1B
-S0UgKHJlbW92aW5nIHRoaXMgdGFzaykgd291bGQganVzdA0KPiB3b3JrLg0KDQpOby4gVGhlcmUg
-aXMgYSBkZWZhdWx0IGJhc2VfZG9fY29tcGlsZSgpIGluIGJhc2UuYmJjbGFzcyB0aGF0IHJ1bnMg
-DQpvZV9ydW5tYWtlIGlmIGEgTWFrZWZpbGUgZXhpc3RzLCBidXQgdGhlIGRlZmF1bHQgYmFzZV9k
-b19pbnN0YWxsKCkgDQpkb2VzIG5vdGhpbmcuDQoNCi8vUGV0ZXINCg0K
+From: Fabio Estevam <festevam@denx.de>
+
+rtc-tools is a useful utility developed by Alexandre Belloni
+for testing RTC kernel drivers, such as y2038 support.
+
+Based on the initial recipe from Heiko Schocher <hs@denx.de>.
+
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+ .../0001-rtc-tools-Add-a-Makefile.patch       | 44 +++++++++++++++++++
+ .../rtc-tools/rtc-tools_1.0.0.bb              | 18 ++++++++
+ 2 files changed, 62 insertions(+)
+ create mode 100644 meta-oe/recipes-support/rtc-tools/rtc-tools/0001-rtc-tools-Add-a-Makefile.patch
+ create mode 100644 meta-oe/recipes-support/rtc-tools/rtc-tools_1.0.0.bb
+
+diff --git a/meta-oe/recipes-support/rtc-tools/rtc-tools/0001-rtc-tools-Add-a-Makefile.patch b/meta-oe/recipes-support/rtc-tools/rtc-tools/0001-rtc-tools-Add-a-Makefile.patch
+new file mode 100644
+index 000000000000..c1d1fa97eaa3
+--- /dev/null
++++ b/meta-oe/recipes-support/rtc-tools/rtc-tools/0001-rtc-tools-Add-a-Makefile.patch
+@@ -0,0 +1,44 @@
++From b19924f797d69475b1857272231500c97ba9959c Mon Sep 17 00:00:00 2001
++From: Fabio Estevam <festevam@denx.de>
++Date: Thu, 27 Jan 2022 18:40:29 -0300
++Subject: [PATCH rtc-tools v2] rtc-tools: Add a Makefile
++
++Add a Makefile to make installation and uninstallation
++process easier.
++
++Upstream-Status: Submitted [https://marc.info/?l=linux-rtc&m=164332426030004&w=2]
++Signed-off-by: Fabio Estevam <festevam@denx.de>
++---
++Changes since v1:
++- Simplify the Makefile by taking Peter Kjellerstedt's feedback in
++the oe-devel list.
++
++ Makefile | 16 ++++++++++++++++
++ 1 file changed, 16 insertions(+)
++ create mode 100644 Makefile
++
++diff --git a/Makefile b/Makefile
++new file mode 100644
++index 0000000..71a4c9c
++--- /dev/null
+++++ b/Makefile
++@@ -0,0 +1,16 @@
+++prefix ?= /usr
+++bindir ?= $(prefix)/bin
+++
+++EXEC = rtc-range rtc rtc-sync
+++
+++all: $(EXEC)
+++
+++clean:
+++	$(RM) $(EXEC)
+++
+++install:
+++	install -d $(DESTDIR)$(bindir)
+++	install $(EXEC) $(DESTDIR)$(bindir)
+++
+++uninstall:
+++	$(RM) -r $(addprefix $(DESTDIR)$(bindir)/,$(EXEC))
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-support/rtc-tools/rtc-tools_1.0.0.bb b/meta-oe/recipes-support/rtc-tools/rtc-tools_1.0.0.bb
+new file mode 100644
+index 000000000000..64ea3173d8a4
+--- /dev/null
++++ b/meta-oe/recipes-support/rtc-tools/rtc-tools_1.0.0.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Useful programs to test rtc drivers"
++LICENSE = "GPL-2.0-only"
++LIC_FILES_CHKSUM = "file://COPYING;md5=74274e8a218423e49eefdea80bc55038"
++
++SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/abelloni/${BPN}.git;protocol=https;branch=master \
++           file://0001-rtc-tools-Add-a-Makefile.patch \
++           "
++SRCREV = "acc442e7af4e1e783432a43d37f1a7938c692659"
++
++S = "${WORKDIR}/git"
++
++TARGET_CC_ARCH += "${LDFLAGS}"
++
++EXTRA_OEMAKE = "DESTDIR=${D}"
++
++do_install() {
++	oe_runmake install
++}
+-- 
+2.25.1
+
 
