@@ -1,150 +1,150 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D73FBC433F5
-	for <webhook@archiver.kernel.org>; Thu, 27 Jan 2022 17:54:14 +0000 (UTC)
-Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com
- [209.85.219.44])
- by mx.groups.io with SMTP id smtpd.web10.1308.1643306054017647431
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 791A4C433F5
+	for <webhook@archiver.kernel.org>; Thu, 27 Jan 2022 21:01:35 +0000 (UTC)
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+ by mx.groups.io with SMTP id smtpd.web09.3834.1643317293773692507
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jan 2022 09:54:14 -0800
+ Thu, 27 Jan 2022 13:01:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=p0Dch3Yr;
- spf=pass (domain: gmail.com, ip: 209.85.219.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f44.google.com with SMTP id h16so3496409qvk.10
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jan 2022 09:54:13 -0800 (PST)
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=fWbVP67K;
+ spf=pass (domain: axis.com, ip: 195.60.68.18,
+ mailfrom: peter.kjellerstedt@axis.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=OcSg45ki0gRgXLdO9pXqe0IYqdUFW5wnX756vQX+MDs=;
-        b=p0Dch3Yrd+lKmYlOgf9HgdNCMj4ktS+1zRYbJCkMpDfZnCYXTnNGi1fPC8cFWDXAWe
-         pDonvn24EdT2jpkTutCUfNWRZlEPO3Q59t/F7pgzyuWyoj2Vzkb6nx0x5TT05J8b6BSp
-         bgkbDM5yrJ0TuJOn/i4/PXGcdHNBPVjLI+Uqivegd1tkRYP5Cx1EhrJm0Um+apDD4F4B
-         oDPoNEeNu0m5MNVcemnwVEHDBnS9PhywlDFn7rMksiamoRWnRjcb+PZjio1DgcXV23A/
-         Y6LqZnN0aih/FL30GuUBGZHEV3jLYkhKLHBcUOB7DpCIXmi8f6exy1GLWuz1aSASOUbe
-         w53A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=OcSg45ki0gRgXLdO9pXqe0IYqdUFW5wnX756vQX+MDs=;
-        b=WWI9Iq6ME530033Rg8CM62DhnP3vyIksaYsHPdgYGhfItBUhcYC5L7raYoEoEceoIo
-         9oCycGMZBliGslXBgTOkKPQ2INejOaNUKpJcUjyp8dZaNaEbcob95337gqL5BV1XAmiX
-         ymRMTzsgC4fp1tjDghALzc4gP78cjTkA/7lb2EsX4Eo+XVN6CH2rukZl2dolB7YvmS2F
-         CRESL0I64aDGfwxCdmmXgjAn8BsLMEw6qkIMEUmvzsMabnopE/0+Uom++dn+gHW4vN0y
-         E28H65cHJa5zpHwDOwb3R3VRFvwNGfD2WmNKDRH0/lAkHQPVQjWXXXQiL9BIuhK70/Qn
-         QZIg==
-X-Gm-Message-State: AOAM5324FdiW74Ux3c1Ic8UDs3uIw/RyyGdYZ+8gRc9EYmprB3XbuMMp
-	ag/UOMuIXd29C/jc56VqOAYlv/JPXAVgFIuedWQ=
-X-Google-Smtp-Source: 
- ABdhPJxbrMYyf9lFncii0g6VRe+aTCRypveU2mSBLGCJu1Y4y8GYaD5bo1kLU4i7DzyEXDx50M/MondBvZrlPl4BwzU=
-X-Received: by 2002:a05:6214:27e8:: with SMTP id
- jt8mr4671358qvb.110.1643306052886;
- Thu, 27 Jan 2022 09:54:12 -0800 (PST)
+  d=axis.com; q=dns/txt; s=axis-central1; t=1643317294;
+  x=1674853294;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=9o86ofp5u6LxjMVBWvSZCCeDSISS4qOPlclGueFw0dE=;
+  b=fWbVP67K9aHBJyNOtFtgYomDjXTHtEUBFP3oCxIzyo9IY6q6x0fxreVX
+   Oj/EgU9mSwV49sGbseAV8T2j8S6oUNpdPtaNEgtf4WHz0cZQ2PB2AOPxV
+   y2DH+wdpitG0k07bLwlYyT3y/VOIqRj+w1fXQcnJUPWtQJgjWzg53xull
+   RNK6+WAGUP05QR2Ut5BSjIHmSjcpKSux33BWZ8q00SbeT/+lk4AmgZlux
+   hRKWpwr45toH+1DLSb36/wX8oxUQbbv7qzth5KCUqWhPopODzDX9rxbQI
+   BLry5Y5C5YH1qbo/OuPs5H07XQUn0QGJNvKyfmdStILA5kf2XYzeNmXQn
+   w==;
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Khem Raj <raj.khem@gmail.com>, Fabio Estevam <festevam@denx.de>
+CC: openembeded-devel <openembedded-devel@lists.openembedded.org>, "Otavio
+ Salvador" <otavio.salvador@ossystems.com.br>, Heiko Schocher <hs@denx.de>,
+	Alexandre BELLONI <alexandre.belloni@bootlin.com>
+Subject: RE: [oe] [PATCH v2 meta-oe] rtc-tools: Add a recipe
+Thread-Topic: [oe] [PATCH v2 meta-oe] rtc-tools: Add a recipe
+Thread-Index: AQHYEuMrpJMUSuWK7kKK2QJ0jebOyax3VZVA
+Date: Thu, 27 Jan 2022 21:01:31 +0000
+Message-ID: <2ae1517616ed4e068c46833e812d3e1e@axis.com>
+References: <20220126182232.1790127-1-festevam@denx.de>
+ <CAMKF1spmTzkh_egyGhyXgkfBag_eHMDZCHoaTQSPHpemo=MYbw@mail.gmail.com>
+In-Reply-To: 
+ <CAMKF1spmTzkh_egyGhyXgkfBag_eHMDZCHoaTQSPHpemo=MYbw@mail.gmail.com>
+Accept-Language: en-US, sv-SE
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.0.5.60]
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20220126060104.578932-1-f_l_k@t-online.de>
- <CAMKF1soCvBP6kNsGfcFQ1zaS6LUAK7thNy97aCj0B8q2+RzMjA@mail.gmail.com>
- <16CDC0E5A96FEE34.21331@lists.openembedded.org>
- <3ef87993-f28b-1d51-77d6-dfa7cfac7f0f@t-online.de>
-In-Reply-To: <3ef87993-f28b-1d51-77d6-dfa7cfac7f0f@t-online.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 27 Jan 2022 09:53:46 -0800
-Message-ID: 
- <CAMKF1spQM1X=ySDfyUHHTD7xL1xE3pMPpLsi7NES_GcWkEA-_g@mail.gmail.com>
-Subject: Re: [oe] [meta-gnome][PATCH] evolution-data-server: try to fix g-i
- data generation
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Jan 2022 17:54:14 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Jan 2022 21:01:35 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95127
+ https://lists.openembedded.org/g/openembedded-devel/message/95128
 
-On Wed, Jan 26, 2022 at 11:27 PM Markus Volk <f_l_k@t-online.de> wrote:
->
-> thanks to your patches for systemd i could try this now. i have
-> successfully built evolution-data-server for musl x86-64 with g-ir and
-> vapi. However, also with the recipe that is currently in master. So this
-> test is not really helpful.
-
-Thats good, can you try it with current master-next ?
-
->
-> Am 26.01.22 um 08:18 schrieb Markus Volk:
-> > i tried, but there are a lot of systemd patches that are not applying
-> > and thus i'm unable to compile it. But never mind ... if it doesn't
-> > run for you, just disable GIR. Maybe i find some time to look into it
-> > sometime later
-> >
-> > Am 26.01.22 um 07:35 schrieb Khem Raj:
-> >> On Tue, Jan 25, 2022 at 10:01 PM Markus Volk <f_l_k@t-online.de> wrote:
-> >>> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> >>> ---
-> >>>   .../evolution-data-server/evolution-data-server.bb | 5 +++--
-> >>>   1 file changed, 3 insertions(+), 2 deletions(-)
-> >>>
-> >>> diff --git
-> >>> a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
-> >>> b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
-> >>>
-> >>> index 9ccaedbcc..c5c7d947f 100644
-> >>> ---
-> >>> a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
-> >>> +++
-> >>> b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
-> >>> @@ -27,14 +27,15 @@ EXTRA_OECMAKE = " \
-> >>>       -DENABLE_UOA=OFF \
-> >>>       -DENABLE_GOOGLE_AUTH=OFF \
-> >>>       -DENABLE_WEATHER=OFF \
-> >>> -    -DG_IR_COMPILER=${STAGING_BINDIR}/g-ir-compiler-wrapper \
-> >>> -    -DG_IR_SCANNER=${STAGING_BINDIR}/g-ir-scanner-wrapper \
-> >>>       -DVAPIGEN=${STAGING_BINDIR_NATIVE}/vapigen \
-> >>>       ${@bb.utils.contains('GI_DATA_ENABLED', 'True',
-> >>> '-DENABLE_INTROSPECTION=ON -DENABLE_VALA_BINDINGS=ON',
-> >>> '-DENABLE_INTROSPECTION=OFF', d)} \
-> >>>       -D${LKSTRFTIME} \
-> >>>       -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
-> >>>   "
-> >>>
-> >>> +EXTRA_OECMAKE:append:class-target = "
-> >>> -DG_IR_COMPILER=${STAGING_BINDIR}/g-ir-compiler-wrapper"
-> >>> +EXTRA_OECMAKE:append:class-target = "
-> >>> -DG_IR_SCANNER=${STAGING_BINDIR}/g-ir-scanner-wrapper"
-> >>> +
-> >> Can you test it for TCLIBC = "musl"
-> >>
-> >>
-> >>>   PACKAGECONFIG[canberra] =
-> >>> "-DENABLE_CANBERRA=ON,-DENABLE_CANBERRA=OFF,libcanberra"
-> >>>   PACKAGECONFIG[oauth]    =
-> >>> "-DENABLE_OAUTH2=ON,-DENABLE_OAUTH2=OFF,webkitgtk json-glib"
-> >>>   PACKAGECONFIG[goa]    =
-> >>> "-DENABLE_GOA=ON,-DENABLE_GOA=OFF,gnome-online-accounts"
-> >>> --
-> >>> 2.25.1
-> >>>
-> >>>
-> >>>
-> >>>
-> >>>
-> >>>
-> >>>
-> >
-> >
-> >
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#95116): https://lists.openembedded.org/g/openembedded-devel/message/95116
-> Mute This Topic: https://lists.openembedded.org/mt/88691224/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWxA
+bGlzdHMub3BlbmVtYmVkZGVkLm9yZyA8b3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJl
+ZGRlZC5vcmc+IE9uIEJlaGFsZiBPZiBLaGVtIFJhag0KPiBTZW50OiBkZW4gMjYgamFudWFyaSAy
+MDIyIDE5OjMzDQo+IFRvOiBGYWJpbyBFc3RldmFtIDxmZXN0ZXZhbUBkZW54LmRlPg0KPiBDYzog
+b3BlbmVtYmVkZWQtZGV2ZWwgPG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQu
+b3JnPjsgT3RhdmlvIFNhbHZhZG9yIDxvdGF2aW8uc2FsdmFkb3JAb3NzeXN0ZW1zLmNvbS5icj47
+IEhlaWtvIFNjaG9jaGVyIDxoc0BkZW54LmRlPjsgQWxleGFuZHJlIEJFTExPTkkgPGFsZXhhbmRy
+ZS5iZWxsb25pQGJvb3RsaW4uY29tPg0KPiBTdWJqZWN0OiBSZTogW29lXSBbUEFUQ0ggdjIgbWV0
+YS1vZV0gcnRjLXRvb2xzOiBBZGQgYSByZWNpcGUNCj4gDQo+IE9uIFdlZCwgSmFuIDI2LCAyMDIy
+IGF0IDEwOjIyIEFNIEZhYmlvIEVzdGV2YW0gPGZlc3RldmFtQGRlbnguZGU+IHdyb3RlOg0KPiA+
+DQo+ID4gcnRjLXRvb2xzIGlzIGEgdXNlZnVsIHV0aWxpdHkgZGV2ZWxvcGVkIGJ5IEFsZXhhbmRy
+ZSBCZWxsb25pDQo+ID4gZm9yIHRlc3RpbmcgUlRDIGtlcm5lbCBkcml2ZXJzLCBzdWNoIGFzIHky
+MDM4IHN1cHBvcnQuDQo+ID4NCj4gPiBCYXNlZCBvbiB0aGUgaW5pdGlhbCByZWNpcGUgZnJvbSBI
+ZWlrbyBTY2hvY2hlciA8aHNAZGVueC5kZT4uDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBGYWJp
+byBFc3RldmFtIDxmZXN0ZXZhbUBkZW54LmRlPg0KPiA+IC0tLQ0KPiA+IENoYW5nZXMgc2luY2Ug
+djE6DQo+ID4gLSBOb25lOiBqdXN0IHNlbnQgaXQgdG8gb2UtZGV2ZWwgYXMgc3VnZ2VzdGVkIGJ5
+IEtoZW0uDQo+ID4NCj4gPiAgLi4uLzAwMDEtcnRjLXRvb2xzLUFkZC1hLU1ha2VmaWxlLnBhdGNo
+ICAgICAgIHwgNTIgKysrKysrKysrKysrKysrKysrKw0KPiA+ICAuLi4vcnRjLXRvb2xzL3J0Yy10
+b29sc18xLjAuMC5iYiAgICAgICAgICAgICAgfCAxOSArKysrKysrDQo+ID4gIDIgZmlsZXMgY2hh
+bmdlZCwgNzEgaW5zZXJ0aW9ucygrKQ0KPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9y
+ZWNpcGVzLXN1cHBvcnQvcnRjLXRvb2xzL3J0Yy10b29scy8wMDAxLXJ0Yy10b29scy1BZGQtYS1N
+YWtlZmlsZS5wYXRjaA0KPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNpcGVzLXN1
+cHBvcnQvcnRjLXRvb2xzL3J0Yy10b29sc18xLjAuMC5iYg0KPiA+DQo+ID4gZGlmZiAtLWdpdCBh
+L21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L3J0Yy10b29scy9ydGMtdG9vbHMvMDAwMS1ydGMtdG9v
+bHMtQWRkLWEtTWFrZWZpbGUucGF0Y2ggYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9ydGMtdG9v
+bHMvcnRjLXRvb2xzLzAwMDEtcnRjLXRvb2xzLUFkZC1hLU1ha2VmaWxlLnBhdGNoDQo+ID4gbmV3
+IGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwMDAwMDAuLmEzNzJlMzkwZWZiOQ0K
+PiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9ydGMt
+dG9vbHMvcnRjLXRvb2xzLzAwMDEtcnRjLXRvb2xzLUFkZC1hLU1ha2VmaWxlLnBhdGNoDQo+ID4g
+QEAgLTAsMCArMSw1MiBAQA0KPiA+ICtGcm9tIGZhYTZkZDJlNGQwNjNhZmNhYTE5ZjE2NzQwYTNm
+YzQxM2EzOTllNjAgTW9uIFNlcCAxNyAwMDowMDowMCAyMDAxDQo+ID4gK0Zyb206IEZhYmlvIEVz
+dGV2YW0gPGZlc3RldmFtQGRlbnguZGU+DQo+ID4gK0RhdGU6IFN1biwgMjMgSmFuIDIwMjIgMDk6
+MjI6MTkgLTAzMDANCj4gPiArU3ViamVjdDogW1BBVENIIHJ0Yy10b29sc10gcnRjLXRvb2xzOiBB
+ZGQgYSBNYWtlZmlsZQ0KPiA+ICsNCj4gPiArQWRkIGEgTWFrZWZpbGUgdG8gbWFrZSBpbnN0YWxs
+YXRpb24gYW5kIHVuaW5zdGFsbGF0aW9uDQo+ID4gK3Byb2Nlc3MgZWFzaWVyLg0KPiA+ICsNCj4g
+PiArVXBzdHJlYW0tU3RhdHVzOiBTdWJtaXR0ZWQgW2h0dHBzOi8vbWFyYy5pbmZvLz9sPWxpbnV4
+LXJ0YyZtPTE2NDI5NDA3MzEyOTgwMyZ3PTJdDQo+ID4gK1NpZ25lZC1vZmYtYnk6IEZhYmlvIEVz
+dGV2YW0gPGZlc3RldmFtQGRlbnguZGU+DQo+ID4gKy0tLQ0KPiA+ICsgTWFrZWZpbGUgfCAyOSAr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKw0KPiA+ICsgMSBmaWxlIGNoYW5nZWQsIDI5IGlu
+c2VydGlvbnMoKykNCj4gPiArIGNyZWF0ZSBtb2RlIDEwMDY0NCBNYWtlZmlsZQ0KPiA+ICsNCj4g
+PiArZGlmZiAtLWdpdCBhL01ha2VmaWxlIGIvTWFrZWZpbGUNCj4gPiArbmV3IGZpbGUgbW9kZSAx
+MDA2NDQNCj4gPiAraW5kZXggMDAwMDAwMDAwMDAwLi40ZjI0NGQ5Mjg5ZjENCj4gPiArLS0tIC9k
+ZXYvbnVsbA0KPiA+ICsrKysgYi9NYWtlZmlsZQ0KPiA+ICtAQCAtMCwwICsxLDI5IEBADQo+ID4g
+KytwcmVmaXggPz0gL3Vzcg0KPiA+ICsrYmluZGlyID89ICQocHJlZml4KS9iaW4NCj4gPiArKw0K
+PiA+ICsrRVhFQyA9IHJ0Yy1yYW5nZSBydGMgcnRjLXN5bmMNCj4gPiArKw0KPiA+ICsrYWxsOiAk
+KEVYRUMpDQo+ID4gKysNCj4gPiArK3J0Yy1yYW5nZTogcnRjLXJhbmdlLmMNCj4gPiArKyAgICAg
+ICQoQ0MpICQoQ0ZMQUdTKSAtbyAkQCBydGMtcmFuZ2UuYw0KPiANCj4gcGVyaGFwcyB5b3Ugc2hv
+dWxkIGFsc28gYmUgdXNpbmcgTERGTEFHUyBoZXJlLg0KPiANCj4gPiArKw0KPiA+ICsrcnRjOiBy
+dGMuYw0KPiA+ICsrICAgICAgJChDQykgJChDRkxBR1MpIC1vICRAIHJ0Yy5jDQo+IA0KPiBoZXJl
+DQo+IA0KPiA+ICsrDQo+ID4gKytydGMtc3luYzogcnRjLXN5bmMuYw0KPiA+ICsrICAgICAgJChD
+QykgJChDRkxBR1MpIC1vICRAIHJ0Yy1zeW5jLmMNCj4gPiArKw0KPiANCj4gYW5kIGhlcmUNCg0K
+QWN0dWFsbHksIGl0IGlzIGJldHRlciB0byBqdXN0IHJlbW92ZSB0aGUgdGhyZWUgcnVsZXMgYWJv
+dmUuIA0KTWFrZSBoYXMgYSBidWlsdCBpbiBydWxlIHRvIGJ1aWxkIGEgYmluYXJ5IGZyb20gYSBD
+IHNvdXJjZSBmaWxlLg0KDQo+ID4gKytjbGVhbjoNCj4gPiArKyAgICAgIHJtIC1mICQoRVhFQykN
+Cg0KQ2hhbmdlIHRvOg0KDQpjbGVhbjoNCgkkKFJNKSAkKEVYRUMpDQoNCj4gPiArKw0KPiA+ICsr
+aW5zdGFsbDogcnRjLXJhbmdlIHJ0YyBydGMtc3luYw0KPiA+ICsrICAgICAgbWtkaXIgLXAgJyQo
+REVTVERJUikkKGJpbmRpciknDQo+ID4gKysgICAgICBpbnN0YWxsIC1tNzU1IHJ0Yy1yYW5nZSAn
+JChERVNURElSKSQoYmluZGlyKS9ydGMtcmFuZ2UnDQo+ID4gKysgICAgICBpbnN0YWxsIC1tNzU1
+IHJ0YyAnJChERVNURElSKSQoYmluZGlyKS9ydGMnDQo+ID4gKysgICAgICBpbnN0YWxsIC1tNzU1
+IHJ0Yy1zeW5jICckKERFU1RESVIpJChiaW5kaXIpL3J0Yy1zeW5jJw0KDQpDaGFuZ2UgdG86DQoN
+Cmluc3RhbGw6DQoJaW5zdGFsbCAtZCAkKERFU1RESVIpJChiaW5kaXIpDQoJaW5zdGFsbCAkKEVY
+RUMpICQoREVTVERJUikkKGJpbmRpcikNCg0KVGhlIGluc3RhbGwgdGFyZ2V0IHNob3VsZCBub3Qg
+aGF2ZSBhbnkgZGVwZW5kZW5jaWVzIG9yIGl0IG1pZ2h0IA0KYnVpbGQgdGhlbSBpbiBwc2V1ZG8g
+Y29udGV4dC4NCg0KPiA+ICsrDQo+ID4gKyt1bmluc3RhbGw6DQo+ID4gKysgICAgICBybSAtcmYg
+JyQoREVTVERJUikkKGJpbmRpcikvcnRjLXJhbmdlJw0KPiA+ICsrICAgICAgcm0gLXJmICckKERF
+U1RESVIpJChiaW5kaXIpL3J0YycNCj4gPiArKyAgICAgIHJtIC1yZiAnJChERVNURElSKSQoYmlu
+ZGlyKS9ydGMtc3luYycNCg0KQ2hhbmdlIHRvOg0KDQp1bmluc3RhbGw6DQoJJChSTSkgLXIgJChh
+ZGRwcmVmaXggJChERVNURElSKSQoYmluZGlyKSwkKEVYRUMpKQ0KDQo+ID4gKy0tDQo+ID4gKzIu
+MjUuMQ0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9ydGMtdG9vbHMv
+cnRjLXRvb2xzXzEuMC4wLmJiIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvcnRjLXRvb2xzL3J0
+Yy10b29sc18xLjAuMC5iYg0KPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXggMDAw
+MDAwMDAwMDAwLi44ZjAzMjY4MjlkOGMNCj4gPiAtLS0gL2Rldi9udWxsDQo+ID4gKysrIGIvbWV0
+YS1vZS9yZWNpcGVzLXN1cHBvcnQvcnRjLXRvb2xzL3J0Yy10b29sc18xLjAuMC5iYg0KPiA+IEBA
+IC0wLDAgKzEsMTkgQEANCj4gPiArREVTQ1JJUFRJT04gPSAiVXNlZnVsIHByb2dyYW1zIHRvIHRl
+c3QgcnRjIGRyaXZlcnMiDQoNCkNoYW5nZSAiREVTQ1JJUFRJT04iIHRvICJTVU1NQVJZIi4NCg0K
+PiA+ICtMSUNFTlNFID0gIkdQTHYyIg0KDQpDaGFuZ2UgIkdQTHYyIiB0byAiR1BMLTIuMC1vbmx5
+Ii4NCg0KPiA+ICtMSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9DT1BZSU5HO21kNT03NDI3NGU4
+YTIxODQyM2U0OWVlZmRlYTgwYmM1NTAzOCINCj4gPiArDQo+ID4gK1NSQ19VUkkgPSAiZ2l0Oi8v
+Z2l0Lmtlcm5lbC5vcmcvcHViL3NjbS9saW51eC9rZXJuZWwvZ2l0L2FiZWxsb25pL3J0Yy10b29s
+cy5naXQ7cHJvdG9jb2w9aHR0cHM7YnJhbmNoPW1hc3RlciBcDQoNCkNoYW5nZSAicnRjLXRvb2xz
+IiB0byAiJHtCUE59Ii4NCg0KPiA+ICsgICAgICAgICAgIGZpbGU6Ly8wMDAxLXJ0Yy10b29scy1B
+ZGQtYS1NYWtlZmlsZS5wYXRjaCBcDQo+ID4gKyAgICAgICAgICAgIg0KPiA+ICtTUkNSRVYgPz0g
+ImFjYzQ0MmU3YWY0ZTFlNzgzNDMyYTQzZDM3ZjFhNzkzOGM2OTI2NTkiDQoNCkNoYW5nZSAiPz0i
+IHRvICI9Ii4NCg0KPiA+ICsNCj4gPiArUyA9ICIke1dPUktESVJ9L2dpdCINCj4gPiArDQo+ID4g
+K1RBUkdFVF9DQ19BUkNIICs9ICIke0xERkxBR1N9Ig0KPiANCj4gdGhpcyBtYXkgbm90IGJlIG5l
+ZWRlZCBpZiBhYm92ZSBjaGFuZ2VzIGFyZSBtYWRlLg0KDQpDb3JyZWN0LiBSZW1vdmUgaXQuDQoN
+Cj4gPiArRVhUUkFfT0VNQUtFID0gIiBcDQo+ID4gKyAgICAgICBERVNURElSPSR7RH0gXA0KPiAN
+Cj4gREVTVERJUj0ke0R9IHNob3VsZCBwZXJoYXBzIGFscmVhZHkgYmUgcGFydCBvZiBvZV9ydW5t
+YWtlDQoNCk5vLCBpdCBpc24ndCBieSBkZWZhdWx0Lg0KDQo+IA0KPiA+ICsgICAgICAgYWxsIFwN
+Cg0KUmVtb3ZlICJhbGwiLCBhbmQgcmV3cml0ZSB0aGlzIGFzOg0KDQpFWFRSQV9PRU1BS0UgPSAi
+REVTVERJUj0ke0R9Ig0KDQo+ID4gKyAgICAgICAiDQo+ID4gK2RvX2luc3RhbGwoKSB7DQo+ID4g
+KyAgICAgICBvZV9ydW5tYWtlIGluc3RhbGwNCj4gPiArfQ0KPiA+IC0tDQo+ID4gMi4yNS4xDQoN
+Ci8vUGV0ZXINCg0K
 
