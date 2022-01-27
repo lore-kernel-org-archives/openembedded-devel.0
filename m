@@ -1,175 +1,150 @@
-Return-Path: <jpuhlman@mvista.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 67ED5C433F5
-	for <webhook@archiver.kernel.org>; Thu, 27 Jan 2022 16:59:50 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com
- [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web08.450.1643302789191247193
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D73FBC433F5
+	for <webhook@archiver.kernel.org>; Thu, 27 Jan 2022 17:54:14 +0000 (UTC)
+Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com
+ [209.85.219.44])
+ by mx.groups.io with SMTP id smtpd.web10.1308.1643306054017647431
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jan 2022 08:59:49 -0800
+ Thu, 27 Jan 2022 09:54:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=F1oYuluw;
- spf=pass (domain: mvista.com, ip: 209.85.214.170,
- mailfrom: jpuhlman@mvista.com)
-Received: by mail-pl1-f170.google.com with SMTP id d18so3025557plg.2
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=p0Dch3Yr;
+ spf=pass (domain: gmail.com, ip: 209.85.219.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f44.google.com with SMTP id h16so3496409qvk.10
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jan 2022 08:59:49 -0800 (PST)
+ Thu, 27 Jan 2022 09:54:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=LR6Q19faibvflGXFy3ikJyVAHaowEDbngkVcSfkPU2A=;
-        b=F1oYuluwbYALzWgHf74Aw8F/ILafVpu4NXgWezik8LCUByspG4JKi/1NI/jn8uT8cy
-         /qw7/K95jrIml24soMLEeV39kE34//7wdTBaa4N+7qh4NJY+LXWDbCxRh+iNp4DuXbIr
-         YEl/AeICNCk/ODbmqq1V/xwqFuEaFncPo9JZg=
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=OcSg45ki0gRgXLdO9pXqe0IYqdUFW5wnX756vQX+MDs=;
+        b=p0Dch3Yrd+lKmYlOgf9HgdNCMj4ktS+1zRYbJCkMpDfZnCYXTnNGi1fPC8cFWDXAWe
+         pDonvn24EdT2jpkTutCUfNWRZlEPO3Q59t/F7pgzyuWyoj2Vzkb6nx0x5TT05J8b6BSp
+         bgkbDM5yrJ0TuJOn/i4/PXGcdHNBPVjLI+Uqivegd1tkRYP5Cx1EhrJm0Um+apDD4F4B
+         oDPoNEeNu0m5MNVcemnwVEHDBnS9PhywlDFn7rMksiamoRWnRjcb+PZjio1DgcXV23A/
+         Y6LqZnN0aih/FL30GuUBGZHEV3jLYkhKLHBcUOB7DpCIXmi8f6exy1GLWuz1aSASOUbe
+         w53A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=LR6Q19faibvflGXFy3ikJyVAHaowEDbngkVcSfkPU2A=;
-        b=Xp2Tw+Qzrp5y4+1jmcKhNyUDTAFyBOKYcx5NW2MN1UNuX8hjtC5aF6zQE4Pmd3X7ut
-         gYzA24suKocPpmYqHTj72tipEs8j3FA5DE+DwJxWZWRfTiGxnD3JvlruI+FplybtElXF
-         ia5fwrqSvnVpZj65DWqTmqcyr1J1Zuun/BSeWpMdXeBwMo/E9HYC5FMK+F03bzavkgBm
-         67HyHPDQYJm2jsB6hR9KF8svKPRWdFenZ2zcltqAABw4XZGzcu4CMaqdfIZXpcnkkXpX
-         lteyXYvqiEmUUj73fAnxXV3dsbKooQ5+7VLQ62V68cQcLojrM35n9rJoXoOaM2I4HqA9
-         SNqA==
-X-Gm-Message-State: AOAM533/fV0nPDu4TGoya+m28nYXd0j5or2yaFSztPuhiy3Zv0HNBARj
-	Th5y7jzCvM8ZIMYsnwwGL0PvRIMXPSBW/g==
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=OcSg45ki0gRgXLdO9pXqe0IYqdUFW5wnX756vQX+MDs=;
+        b=WWI9Iq6ME530033Rg8CM62DhnP3vyIksaYsHPdgYGhfItBUhcYC5L7raYoEoEceoIo
+         9oCycGMZBliGslXBgTOkKPQ2INejOaNUKpJcUjyp8dZaNaEbcob95337gqL5BV1XAmiX
+         ymRMTzsgC4fp1tjDghALzc4gP78cjTkA/7lb2EsX4Eo+XVN6CH2rukZl2dolB7YvmS2F
+         CRESL0I64aDGfwxCdmmXgjAn8BsLMEw6qkIMEUmvzsMabnopE/0+Uom++dn+gHW4vN0y
+         E28H65cHJa5zpHwDOwb3R3VRFvwNGfD2WmNKDRH0/lAkHQPVQjWXXXQiL9BIuhK70/Qn
+         QZIg==
+X-Gm-Message-State: AOAM5324FdiW74Ux3c1Ic8UDs3uIw/RyyGdYZ+8gRc9EYmprB3XbuMMp
+	ag/UOMuIXd29C/jc56VqOAYlv/JPXAVgFIuedWQ=
 X-Google-Smtp-Source: 
- ABdhPJy0rA5oTT2Cb8IaTQaVoOmh4XWYRKpjOj0dF77Xu/GDWMRaDaVno7FqybGfIRjSubU9OmEiAQ==
-X-Received: by 2002:a17:902:7fc9:: with SMTP id
- t9mr4070337plb.53.1643302788437;
-        Thu, 27 Jan 2022 08:59:48 -0800 (PST)
-Received: from black.maotig.mine.nu
- (99-14-97-149.lightspeed.frokca.sbcglobal.net. [99.14.97.149])
-        by smtp.gmail.com with ESMTPSA id
- 189sm6092892pfg.142.2022.01.27.08.59.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 27 Jan 2022 08:59:48 -0800 (PST)
-Received: by black.maotig.mine.nu (sSMTP sendmail emulation);
- Thu, 27 Jan 2022 11:59:45 -0500
-From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
-Subject: [meta-oe][dunfell][PATCH v2] CVE-2021-4034: polkit Local privilege
- escalation in pkexec due to incorrect handling of argument vector
-Date: Thu, 27 Jan 2022 11:59:44 -0500
-Message-Id: <20220127165944.8000-1-jpuhlman@mvista.com>
-X-Mailer: git-send-email 2.20.1
+ ABdhPJxbrMYyf9lFncii0g6VRe+aTCRypveU2mSBLGCJu1Y4y8GYaD5bo1kLU4i7DzyEXDx50M/MondBvZrlPl4BwzU=
+X-Received: by 2002:a05:6214:27e8:: with SMTP id
+ jt8mr4671358qvb.110.1643306052886;
+ Thu, 27 Jan 2022 09:54:12 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20220126060104.578932-1-f_l_k@t-online.de>
+ <CAMKF1soCvBP6kNsGfcFQ1zaS6LUAK7thNy97aCj0B8q2+RzMjA@mail.gmail.com>
+ <16CDC0E5A96FEE34.21331@lists.openembedded.org>
+ <3ef87993-f28b-1d51-77d6-dfa7cfac7f0f@t-online.de>
+In-Reply-To: <3ef87993-f28b-1d51-77d6-dfa7cfac7f0f@t-online.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 27 Jan 2022 09:53:46 -0800
+Message-ID: 
+ <CAMKF1spQM1X=ySDfyUHHTD7xL1xE3pMPpLsi7NES_GcWkEA-_g@mail.gmail.com>
+Subject: Re: [oe] [meta-gnome][PATCH] evolution-data-server: try to fix g-i
+ data generation
+To: Markus Volk <f_l_k@t-online.de>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Jan 2022 16:59:50 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Jan 2022 17:54:14 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95126
+ https://lists.openembedded.org/g/openembedded-devel/message/95127
 
-Upstream-Status: Backport
-CVE: CVE-2021-4034
+On Wed, Jan 26, 2022 at 11:27 PM Markus Volk <f_l_k@t-online.de> wrote:
+>
+> thanks to your patches for systemd i could try this now. i have
+> successfully built evolution-data-server for musl x86-64 with g-ir and
+> vapi. However, also with the recipe that is currently in master. So this
+> test is not really helpful.
 
-Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
----
- .../polkit/files/CVE-2021-4034.patch          | 74 +++++++++++++++++++
- .../recipes-extended/polkit/polkit_0.116.bb   |  1 +
- 2 files changed, 75 insertions(+)
- create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2021-4034.patch
+Thats good, can you try it with current master-next ?
 
-diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2021-4034.patch b/meta-oe/recipes-extended/polkit/files/CVE-2021-4034.patch
-new file mode 100644
-index 000000000..cab1c83c0
---- /dev/null
-+++ b/meta-oe/recipes-extended/polkit/files/CVE-2021-4034.patch
-@@ -0,0 +1,74 @@
-+From ed8b418f1341cf7fc576f6b17de5c6dd4017e034 Mon Sep 17 00:00:00 2001
-+From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
-+Date: Thu, 27 Jan 2022 00:01:27 +0000
-+Subject: [PATCH] CVE-2021-4034: Local privilege escalation in pkexec due to 
-+ incorrect handling of argument vector
-+
-+Upstream-Status: Backport https://gitlab.freedesktop.org/polkit/polkit/-/commit/a2bf5c9c83b6ae46cbd5c779d3055bff81ded683
-+CVE: CVE-2021-4034
-+
-+Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
-+---
-+ src/programs/pkcheck.c |  6 ++++++
-+ src/programs/pkexec.c  | 21 ++++++++++++++++++++-
-+ 2 files changed, 26 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/programs/pkcheck.c b/src/programs/pkcheck.c
-+index f1bb4e1..aff4f60 100644
-+--- a/src/programs/pkcheck.c
-++++ b/src/programs/pkcheck.c
-+@@ -363,6 +363,12 @@ main (int argc, char *argv[])
-+   local_agent_handle = NULL;
-+   ret = 126;
-+ 
-++  if (argc < 1)
-++    {
-++      help();
-++      exit(1);
-++    }
-++
-+   /* Disable remote file access from GIO. */
-+   setenv ("GIO_USE_VFS", "local", 1);
-+ 
-+diff --git a/src/programs/pkexec.c b/src/programs/pkexec.c
-+index 7698c5c..3ff4c58 100644
-+--- a/src/programs/pkexec.c
-++++ b/src/programs/pkexec.c
-+@@ -488,6 +488,17 @@ main (int argc, char *argv[])
-+   pid_t pid_of_caller;
-+   gpointer local_agent_handle;
-+ 
-++
-++  /*
-++   * If 'pkexec' is called wrong, just show help and bail out.
-++   */
-++  if (argc<1)
-++    {
-++      clearenv();
-++      usage(argc, argv);
-++      exit(1);
-++    }
-++
-+   ret = 127;
-+   authority = NULL;
-+   subject = NULL;
-+@@ -636,7 +647,15 @@ main (int argc, char *argv[])
-+           goto out;
-+         }
-+       g_free (path);
-+-      argv[n] = path = s;
-++      path = s;
-++
-++      /* argc<2 and pkexec runs just shell, argv is guaranteed to be null-terminated.
-++       * /-less shell shouldn't happen, but let's be defensive and don't write to null-termination
-++       */
-++      if (argv[n] != NULL)
-++      {
-++        argv[n] = path;
-++      }
-+     }
-+   if (access (path, F_OK) != 0)
-+     {
-+-- 
-+2.26.2
-+
-diff --git a/meta-oe/recipes-extended/polkit/polkit_0.116.bb b/meta-oe/recipes-extended/polkit/polkit_0.116.bb
-index ad1973b13..77288b008 100644
---- a/meta-oe/recipes-extended/polkit/polkit_0.116.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_0.116.bb
-@@ -25,6 +25,7 @@ PAM_SRC_URI = "file://polkit-1_pam.patch"
- SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
-            ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
-            file://0003-make-netgroup-support-optional.patch \
-+           file://CVE-2021-4034.patch \
-            "
- SRC_URI[md5sum] = "4b37258583393e83069a0e2e89c0162a"
- SRC_URI[sha256sum] = "88170c9e711e8db305a12fdb8234fac5706c61969b94e084d0f117d8ec5d34b1"
--- 
-2.20.1
-
+>
+> Am 26.01.22 um 08:18 schrieb Markus Volk:
+> > i tried, but there are a lot of systemd patches that are not applying
+> > and thus i'm unable to compile it. But never mind ... if it doesn't
+> > run for you, just disable GIR. Maybe i find some time to look into it
+> > sometime later
+> >
+> > Am 26.01.22 um 07:35 schrieb Khem Raj:
+> >> On Tue, Jan 25, 2022 at 10:01 PM Markus Volk <f_l_k@t-online.de> wrote:
+> >>> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> >>> ---
+> >>>   .../evolution-data-server/evolution-data-server.bb | 5 +++--
+> >>>   1 file changed, 3 insertions(+), 2 deletions(-)
+> >>>
+> >>> diff --git
+> >>> a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
+> >>> b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
+> >>>
+> >>> index 9ccaedbcc..c5c7d947f 100644
+> >>> ---
+> >>> a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
+> >>> +++
+> >>> b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
+> >>> @@ -27,14 +27,15 @@ EXTRA_OECMAKE = " \
+> >>>       -DENABLE_UOA=OFF \
+> >>>       -DENABLE_GOOGLE_AUTH=OFF \
+> >>>       -DENABLE_WEATHER=OFF \
+> >>> -    -DG_IR_COMPILER=${STAGING_BINDIR}/g-ir-compiler-wrapper \
+> >>> -    -DG_IR_SCANNER=${STAGING_BINDIR}/g-ir-scanner-wrapper \
+> >>>       -DVAPIGEN=${STAGING_BINDIR_NATIVE}/vapigen \
+> >>>       ${@bb.utils.contains('GI_DATA_ENABLED', 'True',
+> >>> '-DENABLE_INTROSPECTION=ON -DENABLE_VALA_BINDINGS=ON',
+> >>> '-DENABLE_INTROSPECTION=OFF', d)} \
+> >>>       -D${LKSTRFTIME} \
+> >>>       -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
+> >>>   "
+> >>>
+> >>> +EXTRA_OECMAKE:append:class-target = "
+> >>> -DG_IR_COMPILER=${STAGING_BINDIR}/g-ir-compiler-wrapper"
+> >>> +EXTRA_OECMAKE:append:class-target = "
+> >>> -DG_IR_SCANNER=${STAGING_BINDIR}/g-ir-scanner-wrapper"
+> >>> +
+> >> Can you test it for TCLIBC = "musl"
+> >>
+> >>
+> >>>   PACKAGECONFIG[canberra] =
+> >>> "-DENABLE_CANBERRA=ON,-DENABLE_CANBERRA=OFF,libcanberra"
+> >>>   PACKAGECONFIG[oauth]    =
+> >>> "-DENABLE_OAUTH2=ON,-DENABLE_OAUTH2=OFF,webkitgtk json-glib"
+> >>>   PACKAGECONFIG[goa]    =
+> >>> "-DENABLE_GOA=ON,-DENABLE_GOA=OFF,gnome-online-accounts"
+> >>> --
+> >>> 2.25.1
+> >>>
+> >>>
+> >>>
+> >>>
+> >>>
+> >>>
+> >>>
+> >
+> >
+> >
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#95116): https://lists.openembedded.org/g/openembedded-devel/message/95116
+> Mute This Topic: https://lists.openembedded.org/mt/88691224/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
