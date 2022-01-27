@@ -1,132 +1,117 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <xuhuan.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 834A3C433EF
-	for <webhook@archiver.kernel.org>; Thu, 27 Jan 2022 07:27:34 +0000 (UTC)
-Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
- by mx.groups.io with SMTP id smtpd.web09.25307.1643268453345510548
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DC31C433EF
+	for <webhook@archiver.kernel.org>; Thu, 27 Jan 2022 09:04:12 +0000 (UTC)
+Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
+ [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web12.25740.1643274250297643271
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Jan 2022 23:27:33 -0800
+ Thu, 27 Jan 2022 01:04:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.21,
- mailfrom: f_l_k@t-online.de)
-Received: from fwd76.dcpf.telekom.de (fwd76.aul.t-online.de [10.223.144.102])
-	by mailout10.t-online.de (Postfix) with SMTP id 57E874FC4
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=CDlzgZni;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113,
+ mailfrom: xuhuan.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1643274248; i=@fujitsu.com;
+	bh=1vn7pjAKKU/7/pS2H/IW77AE2NXjR9/7LW+cydBKS7g=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=CDlzgZnihTtd+2j7J3fnS8DmzdkmOfcQrUIIasa1VGeUo3E2RJDHl+nr6IW2ikRcX
+	 9/2PzN7s0L2KZaSHvJW5CI44deKJRwSN8v3Yx/+uyrUDnUPLVpG69zTPy9MEjyIm4l
+	 WHxFh6u3KnsRDq7apYHLuFSOI/hf2RGJkAWtOkABySBKTvMP1ZLZYOL/2pbw6ba+a9
+	 WnoPJ0PnvPHSYLF1e/CBiFN1gd6GvqeiZDSUjuFV4y5zjxA4tV2x5TAaInS+8L44g+
+	 25jOwC5nf8QSlW4wDEkHa7y5ae93JF8kdlIMO9bsQ896/l97gvNoPp88QVYNUiRRqK
+	 vCocbZJETDfkA==
+Received: from [100.115.65.74] (using TLSv1.2 with cipher
+ DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-4.bemta.az-a.eu-central-1.aws.ess.symcld.net id
+ 2D/47-23802-70062F16; Thu, 27 Jan 2022 09:04:07 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrIIsWRWlGSWpSXmKPExsViZ8MxSZc14VO
+  iwcZXFhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8b+Za+YCrZzVtx6V9rAeJeji5GTQ0jgCaPE
+  1HU6EPYFJokL85gh7JOMEocuZILYbALqEo9vvmYEsUUE9CWWzt4DVsMsoCrRfXENO4gtLBAls
+  b7zB0sXIwcHC1D87C4rEJNXwE3i1DJLkAoJAQWJKQ/fg3XyCghKnJz5hAViioTEwRcvmCFqlC
+  ROrPjIBGFXSLw+fAkqriZx9dwm5gmM/LOQtM9C0r6AkWkVo11SUWZ6RkluYmaOrqGBga6hoam
+  umZmukZGFXmKVbqJeaqlucmpeSVEiUFovsbxYL7W4WK+4Mjc5J0UvL7VkEyMwJFOKnZ7sYHzd
+  91PvEKMkB5OSKO8S80+JQnxJ+SmVGYnFGfFFpTmpxYcYZTg4lCR482OBcoJFqempFWmZOcD4g
+  ElLcPAoifCuigNK8xYXJOYWZ6ZDpE4xKkqJ84rGAyUEQBIZpXlwbbCYvMQoKyXMy8jAwCDEU5
+  BalJtZgir/ilGcg1FJmLcUZApPZl4J3PRXQIuZgBb/Pv8OZHFJIkJKqoGJ53hskIDTUktRUb/
+  Ap82Mf5q5WP/sfDUtMnEqS23ia7+w5nRr/uadDUsvWiUcWbxA9Iffz9PeL11Nrs68bhD6n/ff
+  VTmrnzERW4XVuGYGpMbq+ZQdfJO+/M+6ppexbz/NbTLr2+0qMadCYEdi9ZYfoX6Cx08n64v6m
+  f5dUiY/g2NV5fdZW78U5Pg82KGzRuOW1PPJh2599me5F8J61XDN0+woub+Hw2ZMPsZtobS33+
+  /fg96d+Qs+cQT9VlKyOi7IvazQxvWBjgPrtZSitj8WQuzn/Z4tZJXWlsm0/m6/gf9Ni8yJNZo
+  TeVyM8yRXH9y9MqV+R9iWoE/aihO/T7daXSF0ryvNwN9j4peD/nuUWIozEg21mIuKEwEcMxNR
+  RAMAAA==
+X-Env-Sender: xuhuan.fnst@fujitsu.com
+X-Msg-Ref: server-11.tower-545.messagelabs.com!1643274245!6259!1
+X-Originating-IP: [62.60.8.146]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.7; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 3481 invoked from network); 27 Jan 2022 09:04:05 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-11.tower-545.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 27 Jan 2022 09:04:05 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 67620100453
 	for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jan 2022 08:27:31 +0100 (CET)
-Received: from [192.168.178.83] ([84.163.47.60]) by fwd76.t-online.de
-	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
-	esmtp id 1nCzBo-1vRH4j0; Thu, 27 Jan 2022 08:27:28 +0100
-Message-ID: <3ef87993-f28b-1d51-77d6-dfa7cfac7f0f@t-online.de>
-Date: Thu, 27 Jan 2022 08:27:27 +0100
+ Thu, 27 Jan 2022 09:04:05 +0000 (GMT)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 58D9F100445
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 27 Jan 2022 09:04:05 +0000 (GMT)
+Received: from localhost.localdomain.localdomain (10.167.225.131) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.26; Thu, 27 Jan 2022 09:04:02 +0000
+From: XU Huan <xuhuan.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Xu Huan <xuhuan.fnst@fujitsu.com>
+Subject: [PATCH 1/3] [oe] [meta-python] [PATCH] python3-pulsectl upgrade
+ 21.10.5 -> 22.1.3
+Date: Thu, 27 Jan 2022 17:04:14 +0800
+Message-ID: <1643274256-7015-1-git-send-email-xuhuan.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [oe] [meta-gnome][PATCH] evolution-data-server: try to fix g-i
- data generation
-Content-Language: en-US
-To: openembedded-devel@lists.openembedded.org
-References: <20220126060104.578932-1-f_l_k@t-online.de>
- <CAMKF1soCvBP6kNsGfcFQ1zaS6LUAK7thNy97aCj0B8q2+RzMjA@mail.gmail.com>
- <16CDC0E5A96FEE34.21331@lists.openembedded.org>
-From: Markus Volk <f_l_k@t-online.de>
-In-Reply-To: <16CDC0E5A96FEE34.21331@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-X-TOI-EXPURGATEID: 150726::1643268448-0001619A-6317533C/0/0 CLEAN NORMAL
-X-TOI-MSGID: 5b09ae4a-11a8-4f0c-a14e-63484e31fe2c
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.131]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Jan 2022 07:27:34 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Jan 2022 09:04:12 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95116
+ https://lists.openembedded.org/g/openembedded-devel/message/95117
 
-thanks to your patches for systemd i could try this now. i have=20
-successfully built evolution-data-server for musl x86-64 with g-ir and=20
-vapi. However, also with the recipe that is currently in master. So this=20
-test is not really helpful.
+From: Xu Huan <xuhuan.fnst@fujitsu.com>
 
-Am 26.01.22 um 08:18 schrieb Markus Volk:
-> i tried, but there are a lot of systemd patches that are not applying=20
-> and thus i'm unable to compile it. But never mind ... if it doesn't=20
-> run for you, just disable GIR. Maybe i find some time to look into it=20
-> sometime later
->
-> Am 26.01.22 um 07:35 schrieb Khem Raj:
->> On Tue, Jan 25, 2022 at 10:01 PM Markus Volk <f_l_k@t-online.de> wrote=
-:
->>> Signed-off-by: Markus Volk <f_l_k@t-online.de>
->>> ---
->>> =C2=A0 .../evolution-data-server/evolution-data-server.bb | 5 +++--
->>> =C2=A0 1 file changed, 3 insertions(+), 2 deletions(-)
->>>
->>> diff --git=20
->>> a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
-r.bb=20
->>> b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
-r.bb=20
->>>
->>> index 9ccaedbcc..c5c7d947f 100644
->>> ---=20
->>> a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
-r.bb
->>> +++=20
->>> b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
-r.bb
->>> @@ -27,14 +27,15 @@ EXTRA_OECMAKE =3D " \
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -DENABLE_UOA=3DOFF \
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -DENABLE_GOOGLE_AUTH=3DOFF \
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -DENABLE_WEATHER=3DOFF \
->>> -=C2=A0=C2=A0=C2=A0 -DG_IR_COMPILER=3D${STAGING_BINDIR}/g-ir-compiler=
--wrapper \
->>> -=C2=A0=C2=A0=C2=A0 -DG_IR_SCANNER=3D${STAGING_BINDIR}/g-ir-scanner-w=
-rapper \
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -DVAPIGEN=3D${STAGING_BINDIR_NATIVE}/v=
-apigen \
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ${@bb.utils.contains('GI_DATA_ENABLED'=
-, 'True',=20
->>> '-DENABLE_INTROSPECTION=3DON -DENABLE_VALA_BINDINGS=3DON',=20
->>> '-DENABLE_INTROSPECTION=3DOFF', d)} \
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -D${LKSTRFTIME} \
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -DLIB_SUFFIX=3D${@d.getVar('baselib').=
-replace('lib', '')} \
->>> =C2=A0 "
->>>
->>> +EXTRA_OECMAKE:append:class-target =3D "=20
->>> -DG_IR_COMPILER=3D${STAGING_BINDIR}/g-ir-compiler-wrapper"
->>> +EXTRA_OECMAKE:append:class-target =3D "=20
->>> -DG_IR_SCANNER=3D${STAGING_BINDIR}/g-ir-scanner-wrapper"
->>> +
->> Can you test it for TCLIBC =3D "musl"
->>
->>
->>> =C2=A0 PACKAGECONFIG[canberra] =3D=20
->>> "-DENABLE_CANBERRA=3DON,-DENABLE_CANBERRA=3DOFF,libcanberra"
->>> =C2=A0 PACKAGECONFIG[oauth]=C2=A0=C2=A0=C2=A0 =3D=20
->>> "-DENABLE_OAUTH2=3DON,-DENABLE_OAUTH2=3DOFF,webkitgtk json-glib"
->>> =C2=A0 PACKAGECONFIG[goa]=C2=A0=C2=A0=C2=A0 =3D=20
->>> "-DENABLE_GOA=3DON,-DENABLE_GOA=3DOFF,gnome-online-accounts"
->>> --=20
->>> 2.25.1
->>>
->>>
->>>
->>>
->>>
->>>
->>>
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#95101): https://lists.openembedded.org/g/openembedd=
-ed-devel/message/95101
-> Mute This Topic: https://lists.openembedded.org/mt/88691224/3618223
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[f_l_k@t-online.de]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
+---
+ .../{python3-pulsectl_21.10.5.bb => python3-pulsectl_22.1.3.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pulsectl_21.10.5.bb => python3-pulsectl_22.1.3.bb} (84%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-pulsectl_21.10.5.bb b/meta-python/recipes-devtools/python/python3-pulsectl_22.1.3.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-pulsectl_21.10.5.bb
+rename to meta-python/recipes-devtools/python/python3-pulsectl_22.1.3.bb
+index 0b867b83a2..9a5b9f948c 100644
+--- a/meta-python/recipes-devtools/python/python3-pulsectl_21.10.5.bb
++++ b/meta-python/recipes-devtools/python/python3-pulsectl_22.1.3.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/mk-fg/python-pulse-control"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=f1d10048469ff90123263eb5e214061d"
+ 
+-SRC_URI[sha256sum] = "b347983fb78baab168f4dc4804ab2c59ca5b813bf62f8146dfb5fcb6ab6c8ba2"
++SRC_URI[sha256sum] = "f28fe4b881dd2cc144d2d94f83ec60d8c59a52642a0ad3635cc4d0f8406f4858"
+ 
+ RDEPENDS:${PN} += " \
+ 	libpulse \
+-- 
+2.25.1
+
 
