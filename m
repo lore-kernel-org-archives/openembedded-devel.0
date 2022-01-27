@@ -2,192 +2,90 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 25635C433F5
-	for <webhook@archiver.kernel.org>; Thu, 27 Jan 2022 15:30:23 +0000 (UTC)
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
- [209.85.215.175])
- by mx.groups.io with SMTP id smtpd.web09.29703.1643297422568710464
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E23D7C433F5
+	for <webhook@archiver.kernel.org>; Thu, 27 Jan 2022 15:45:05 +0000 (UTC)
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com
+ [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web08.29841.1643298295337109220
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jan 2022 07:30:22 -0800
+ Thu, 27 Jan 2022 07:44:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=bLcfbgoQ;
- spf=pass (domain: gmail.com, ip: 209.85.215.175,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=aGEG7FZ7;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f175.google.com with SMTP id z131so2537681pgz.12
+Received: by mail-pg1-f181.google.com with SMTP id e9so2612261pgb.3
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jan 2022 07:30:22 -0800 (PST)
+ Thu, 27 Jan 2022 07:44:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :references:from:in-reply-to:content-transfer-encoding;
-        bh=PZ/ZdVACWg83yZc/gPq6yNX1OUzdkaUrpGx+hDHvapA=;
-        b=bLcfbgoQzGmSX/5UsB6TtL1M47Jw2h7XNGjbjfZyMyA4k49KQrXHvkOn2zIRcQapb9
-         hCNvLht5QJXu1GzKcE6lk9oCOne6K2RqMIV+bgmYBa3fFK3pTJyUEQS8kw7n2vQWFqn8
-         lfo3mTW6fQGJeGRumgrrrY9w5EhdqFz4Nmvf2tqc0rYLhuGDGYUb6HTBOuF3j2/mrFDx
-         5uj4StF+gShR1KR7rwPKMKgvO+HANlCmWLkBPvj0q2tmgpUQlmKAo37qTshfm4b6jqU+
-         V9WIWL1bEY+L4I7HSUhxJ/UXo3GsL0m9EzoVHezxfYbhv8NtWqXNi5C2I7Oe7yKd13gR
-         SoMg==
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=2RFn+RTXpZGEgmziRDjkZwaklgDwFxzZ9EGB6mzkAEY=;
+        b=aGEG7FZ7lAjXV+B1ApFsqrFmCgbHhi1yOLXugJ9I82bXQ4fPFMbwLw9w9af2PqEv2C
+         jo2QU+6Dsz4U46lV7hv5sX6EsLUOj83a+Ae3m+tNDJeeifK6wL+Jd6dgRtwZzxFIszcq
+         X7a426MnUuZeqTBbNBJpYJ+BvFosxknXcgL9+od0kLqKN4GQXInSaI2oQfoPjoRc61mx
+         2TzliqYu5lVuRCRLM0Y2hyXvCJya8dGVYEgjG0kJ2OUeXfOBnceZfE627hZjLJhwLf0N
+         mOPKixFHQRFDXkwm10RydaD2qrfYImhJsHxDxNTe2uSw8Y5lAQslAfMRRbonzwgyXWmD
+         L+Qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:references:from:in-reply-to
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=PZ/ZdVACWg83yZc/gPq6yNX1OUzdkaUrpGx+hDHvapA=;
-        b=J2S/9kU/5YGNSfgT+/CdA4/YTG16atQ7Ha3TcCU9Tz5WVfJGpIYFLnFa44G3aYMV51
-         w2pSDBzr+8fw0oR++p4vFuhloAndfI0aFyXvmL/LqvXTJ/j+UlFp7cL+BdTuFUvKnc/o
-         6RPCgLfXyxQ+MEr4mNpMECo9VCmW/ExG0Vs4FLiI6tZ+LCdmhzn2CW2Y72OtMR9Eg6EM
-         1FzY73uSj4qhsPJJAsJ09swbDDoiDS4mmNnTC7zr05ZEP2vRaQim4YG+bGbYKu9r1ywI
-         7yGMcO/rjlsQbG8oZ//Wqu7vdV5MjxGDCUswnXWaCyf9eDUeu1mKK8CgsThhfuZUAS1M
-         qvnA==
-X-Gm-Message-State: AOAM533ORwlEKfSEPR4BCkvbQbAIzoYmHDQW8xOWRJd545bcru8vBCHv
-	TgCQ2ecnHyW2wRYfIAqzZes=
+        bh=2RFn+RTXpZGEgmziRDjkZwaklgDwFxzZ9EGB6mzkAEY=;
+        b=JE+l3ER08otoletC6mQE5w8Sa4nXML29OaouEPV3oRKfl2q+r0ARyqoM5LVbX5MGkd
+         GfMV/GoNWqy2Q/4xya3wztAYr0tidx0SnGqg0tiWCu9baAZs3BfHt+3EG5Z/ndy0B91i
+         v/jv9QxnK8o89t3gY1A+abd9LIJRlErOJbI2YCwZ6/Ls0GPIczisrl1ct9YqD3B6SkOQ
+         qS/ab52sEKF2RBMLhib+dZSh5hJm12rQJLIZDjYSYrISFik7F12BHtSUn6dIlU7yiMus
+         dQgUB72df2FobrDzREtKmgO8ht93l7E4XiQpNkGe4JruPsqMu0m/aBfQrS9otNdOSm2x
+         CRMg==
+X-Gm-Message-State: AOAM531C2sWBn5a+LF5ydT9lXm6UnQFRrrKwnhYfGqfmnCXDE3Uceiwp
+	72QffWQz/MoHvSRZ4QWBbpgyOzGjwAKIJw==
 X-Google-Smtp-Source: 
- ABdhPJytev8o1H2CgOuurBZDE08deG/qEKOvbvVB7VSzw2cZME5JVfl9JqxaPaxHlxWkuiLox9p8vw==
-X-Received: by 2002:a05:6a00:1a8f:: with SMTP id
- e15mr3804102pfv.38.1643297421992;
-        Thu, 27 Jan 2022 07:30:21 -0800 (PST)
-Received: from ?IPV6:2601:202:4180:a5c0:5fd4:3341:c771:87a3?
- ([2601:202:4180:a5c0:5fd4:3341:c771:87a3])
+ ABdhPJyheEpitr84+oi1efGTtuWtYaIGQI9Ixepc+ylNIh2rdty0KV87neElQ9S3XlSoJ+6dGfN5IQ==
+X-Received: by 2002:a63:8bc8:: with SMTP id
+ j191mr3169874pge.233.1643298294517;
+        Thu, 27 Jan 2022 07:44:54 -0800 (PST)
+Received: from keaua.caveonetworks.com
+ ([2601:202:4180:a5c0:fdd2:3cac:1ddb:a448])
         by smtp.gmail.com with ESMTPSA id
- f15sm5832430pfn.19.2022.01.27.07.30.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 27 Jan 2022 07:30:21 -0800 (PST)
-Message-ID: <a5a2a439-7816-46a1-542f-07d49faceeea@gmail.com>
-Date: Thu, 27 Jan 2022 07:30:20 -0800
+ ns21sm6736465pjb.43.2022.01.27.07.44.53
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 27 Jan 2022 07:44:54 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][dunfell][PATCH] c-ares: bump PV in recipe to 1.16.1
+Date: Thu, 27 Jan 2022 07:44:52 -0800
+Message-Id: <20220127154452.66380-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [oe] [meta-oe][dunfell][PATCH] CVE-2021-3466: polkit Local
- privilege escalation in pkexec due to incorrect handling of argument vector
-Content-Language: en-US
-To: Jeremy Puhlman <jpuhlman@mvista.com>,
- openembedded-devel@lists.openembedded.org
-References: <20220127001425.7392-1-jpuhlman@mvista.com>
-From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <20220127001425.7392-1-jpuhlman@mvista.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Jan 2022 15:30:23 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Jan 2022 15:45:05 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95122
+ https://lists.openembedded.org/g/openembedded-devel/message/95123
 
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-
-On 1/26/22 16:14, Jeremy Puhlman wrote:
-> Upstream-Status: Backport
-> CVE: CVE-2021-3466
-> Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
-> ---
->   .../polkit/files/CVE-2021-4034.patch          | 71 +++++++++++++++++++
->   .../recipes-extended/polkit/polkit_0.116.bb   |  1 +
->   2 files changed, 72 insertions(+)
->   create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2021-4034.patch
->
-> diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2021-4034.patch b/meta-oe/recipes-extended/polkit/files/CVE-2021-4034.patch
-> new file mode 100644
-> index 000000000..294ada961
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/polkit/files/CVE-2021-4034.patch
-> @@ -0,0 +1,71 @@
-> +From ed8b418f1341cf7fc576f6b17de5c6dd4017e034 Mon Sep 17 00:00:00 2001
-> +From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
-> +Date: Thu, 27 Jan 2022 00:01:27 +0000
-> +Subject: [PATCH] CVE-2021-4034: Local privilege escalation in pkexec due to
-> + incorrect handling of argument vector
-> +
-> +Upstream-Status: Backport https://gitlab.freedesktop.org/polkit/polkit/-/commit/a2bf5c9c83b6ae46cbd5c779d3055bff81ded683
-The patch itself needs to contain this additional information. Please add:
-
-CVE: CVE-2021-xxxx
-Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
-
-> +---
-> + src/programs/pkcheck.c |  6 ++++++
-> + src/programs/pkexec.c  | 21 ++++++++++++++++++++-
-> + 2 files changed, 26 insertions(+), 1 deletion(-)
-> +
-> +diff --git a/src/programs/pkcheck.c b/src/programs/pkcheck.c
-> +index f1bb4e1..aff4f60 100644
-> +--- a/src/programs/pkcheck.c
-> ++++ b/src/programs/pkcheck.c
-> +@@ -363,6 +363,12 @@ main (int argc, char *argv[])
-> +   local_agent_handle = NULL;
-> +   ret = 126;
-> +
-> ++  if (argc < 1)
-> ++    {
-> ++      help();
-> ++      exit(1);
-> ++    }
-> ++
-> +   /* Disable remote file access from GIO. */
-> +   setenv ("GIO_USE_VFS", "local", 1);
-> +
-> +diff --git a/src/programs/pkexec.c b/src/programs/pkexec.c
-> +index 7698c5c..3ff4c58 100644
-> +--- a/src/programs/pkexec.c
-> ++++ b/src/programs/pkexec.c
-> +@@ -488,6 +488,17 @@ main (int argc, char *argv[])
-> +   pid_t pid_of_caller;
-> +   gpointer local_agent_handle;
-> +
-> ++
-> ++  /*
-> ++   * If 'pkexec' is called wrong, just show help and bail out.
-> ++   */
-> ++  if (argc<1)
-> ++    {
-> ++      clearenv();
-> ++      usage(argc, argv);
-> ++      exit(1);
-> ++    }
-> ++
-> +   ret = 127;
-> +   authority = NULL;
-> +   subject = NULL;
-> +@@ -636,7 +647,15 @@ main (int argc, char *argv[])
-> +           goto out;
-> +         }
-> +       g_free (path);
-> +-      argv[n] = path = s;
-> ++      path = s;
-> ++
-> ++      /* argc<2 and pkexec runs just shell, argv is guaranteed to be null-terminated.
-> ++       * /-less shell shouldn't happen, but let's be defensive and don't write to null-termination
-> ++       */
-> ++      if (argv[n] != NULL)
-> ++      {
-> ++        argv[n] = path;
-> ++      }
-> +     }
-> +   if (access (path, F_OK) != 0)
-> +     {
-> +--
-> +2.26.2
-> +
-> diff --git a/meta-oe/recipes-extended/polkit/polkit_0.116.bb b/meta-oe/recipes-extended/polkit/polkit_0.116.bb
-> index ad1973b13..77288b008 100644
-> --- a/meta-oe/recipes-extended/polkit/polkit_0.116.bb
-> +++ b/meta-oe/recipes-extended/polkit/polkit_0.116.bb
-> @@ -25,6 +25,7 @@ PAM_SRC_URI = "file://polkit-1_pam.patch"
->   SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
->              ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
->              file://0003-make-netgroup-support-optional.patch \
-> +           file://CVE-2021-4034.patch \
->              "
->   SRC_URI[md5sum] = "4b37258583393e83069a0e2e89c0162a"
->   SRC_URI[sha256sum] = "88170c9e711e8db305a12fdb8234fac5706c61969b94e084d0f117d8ec5d34b1"
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#95110): https://lists.openembedded.org/g/openembedded-devel/message/95110
-> Mute This Topic: https://lists.openembedded.org/mt/88710808/3616698
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb b/meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb
+index b77604797d..692a5f0d6e 100644
+--- a/meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb
++++ b/meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb
+@@ -5,7 +5,7 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=fb997454c8d62aa6a47f07a8cd48b006"
+ 
+-PV = "1.16.0+gitr${SRCPV}"
++PV = "1.16.1+gitr${SRCPV}"
+ 
+ SRC_URI = "\
+     git://github.com/c-ares/c-ares.git;branch=main;protocol=https \
+-- 
+2.25.1
 
 
