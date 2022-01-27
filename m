@@ -1,129 +1,121 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <xuhuan.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 33FE3C433EF
-	for <webhook@archiver.kernel.org>; Thu, 27 Jan 2022 01:28:10 +0000 (UTC)
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com
- [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web08.22302.1643246850654499827
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19767C433EF
+	for <webhook@archiver.kernel.org>; Thu, 27 Jan 2022 02:06:55 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.1])
+ by mx.groups.io with SMTP id smtpd.web11.23245.1643249213585295863
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Jan 2022 17:27:30 -0800
+ Wed, 26 Jan 2022 18:06:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=PuXsvUcS;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id
- s2-20020a17090ad48200b001b501977b23so5992733pju.2
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Jan 2022 17:27:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=wKsTvqBmpq8BL4GPvN7fW7LVEGeXJyjL/GwGklxA7Gs=;
-        b=PuXsvUcSJHA4lbs3Yb+tjfB0Bg52E4mBW/2JHfIf6qGaHhStPn1OyfAJOwzUjxELMx
-         FdUGXw3FvYLX+CJm2Gg64KxmQx3af4X0RKVqLUp7eNHT8hospdy3UDnQ76D0aAles/+9
-         s+TUxkOlm9hXs7KICZQ3Ux3YHHNhaFVHCg3/+odMdgk29cwjoWyG/PkchRZt3gcoQAdV
-         Z+eVj3i2rz2Bm8CeywcEckpYHYV4UEhQXITUnnYBYPgzUGzAPu8OGgg/peT1QtyzO6/B
-         x1rOJzEeZntVRyNfbHc5pDWX7TsQoRcKnkr2KC0YRs6bXSK/kqN5ULNO42xezGmllxzb
-         tuXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=wKsTvqBmpq8BL4GPvN7fW7LVEGeXJyjL/GwGklxA7Gs=;
-        b=dhWk0PUazoz4NKd7cOeBImtmLkBNTcoDh3A3W4cZXnNPfAWq+ayr4dMk0FYyNjS/eM
-         ZHLgKB54Hqv5O6UEHPm3pvlFkrMr2cXeawfw/i29PQpJfbtb/YFuIlmNDBKuY38W++My
-         WZfM59MsJp5LF6PvIEnNVo/Dqm+d1pZMCRdSSzMF9wNvU4gTiB0ktzfCzkJ7Pr0DzwwG
-         +ktKWYEHONhiq/KzdE5Fa236u0V2DXgDQH/VHFpkm6aepFadJ3ITevP0NQ+su91iPMFP
-         l7CSBxBPwXVOJyxwHJsATD46PwtaZARrJGR2riGLIgj6O1EiXGHMJM4dqIdJmDw9KCN2
-         sIQw==
-X-Gm-Message-State: AOAM531sYt/rVP4Xl9R+TO0jflzmdZz7qWecRMks1c2SOQH58vxPM4Ep
-	gnX/4KKcicBw8ryhdRA7FvXpARE6i6lHXw==
-X-Google-Smtp-Source: 
- ABdhPJy1f2okNWaLREQfgEbCXQOe5mAsch5w3C1BhwEc5o/V/W/vRpQ5hHvkBgApw+t3jbec99uqNw==
-X-Received: by 2002:a17:902:ecd0:: with SMTP id
- a16mr1168103plh.64.1643246849722;
-        Wed, 26 Jan 2022 17:27:29 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::b5e3])
-        by smtp.gmail.com with ESMTPSA id
- o23sm430015pjg.14.2022.01.26.17.27.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Jan 2022 17:27:29 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH] python3-pyruvate: Fix build with riscv64/musl
-Date: Wed, 26 Jan 2022 17:27:26 -0800
-Message-Id: <20220127012726.1210416-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.35.0
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=SPd1IGq2;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
+ mailfrom: xuhuan.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1643249211; i=@fujitsu.com;
+	bh=Kp6qaHailBRJrjbnBQh/C+T8VhIxB+Ib8fro7sa89Jo=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=SPd1IGq22WQLvumGEaUJoiFpc/FePQp1Jw+igmx9bMjJ0fewYkLI13WlqidzBMo4F
+	 RL7E75EN/kbdSP/JEs3RGfhlJuu77Hs94N0cqbl4tZPCTuOWWnrI0uVGmoUuVbc3sS
+	 DUILTps01mgwJ+g9E18KF2dIIhcc1Ogk8ukdF/7oFqmfEyScmh05fLoEKy1eehLfoi
+	 1fpGpjAvMjMGNUmhM1JjBmO1Rldepm7Eo54rt2JNdfHzjXY9hoOcuMJI08Ou2A2gDs
+	 PxwMcnFoEJFwFDcaf2beH5DkAA567Y2ZXXay79nAT1c50Mb8QbnYpPp1gr4H4KgY4M
+	 TN1PdVO2HhgbQ==
+Received: from [100.115.34.7] (using TLSv1.2 with cipher
+ DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-1.bemta.az-a.eu-west-2.aws.ess.symcld.net id 6B/DC-14616-B3EF1F16;
+ Thu, 27 Jan 2022 02:06:51 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrIIsWRWlGSWpSXmKPExsViZ8ORqGv972O
+  iwfHLLBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aRf8oFs7gq/h87x9bAuIWzi5GTQ0jgCaPE
+  0z1CXYxcQPYFJonWq2uYIZyTjBI7135nA6liE1CXeHzzNSOILSKgL7F09h5mEJtZQFWi++Iad
+  hBbWMBXovXNPzCbBSi+4vh/MJtXwE3i8fL9TCC2hICCxJSH75kh4oISJ2c+YYGYIyFx8MULZo
+  gaJYkTKz5C1VdIvD58CSquJnH13CbmCYz8s5C0z0LSvoCRaRWjVVJRZnpGSW5iZo6uoYGBrqG
+  hqa6xpa6pkV5ilW6iXmqpbnlqcYkukFterJdaXKxXXJmbnJOil5dasokRGJIpxeomOxi7V/7U
+  O8QoycGkJMort+tjohBfUn5KZUZicUZ8UWlOavEhRhkODiUJ3nefgHKCRanpqRVpmTnA+IBJS
+  3DwKInwnv4NlOYtLkjMLc5Mh0idYlSUEuc99AcoIQCSyCjNg2uDxeQlRlkpYV5GBgYGIZ6C1K
+  LczBJU+VeM4hyMSsK8P0Gm8GTmlcBNfwW0mAlo8e/z70AWlyQipKQamCSjNiyWEtk6oc+nVGr
+  pBeODEuYrbKJml3549c9fx/xHyesIzkh7/13zi/LYfr1d4RK66LoF5yy12H9SN5+s2ufwoHpL
+  i8Wdj95/17sYVcVz87slThDZ2dzi8nuVp/MugUrm7u/bZpmsy2M+e6zOxSzQR31z+tI7BffWn
+  V/nnNdnuH3zSZUjd/RK9CRl471Uircp2q1lXnvpEOvmsO/HXuac5/POjdeY/khf/pbmayVFjV
+  PW3yzDF1yxV74YeWN10TYR89J8pg36zC9un3jILHPTSMTgFc868cVedU3ae9Y1+2o5zH3863e
+  aDceOAobvJcKHzNKZD69a7r6r4a57wQTlFZNf5gdLHonyOJAcqcRSnJFoqMVcVJwIAOzhUllE
+  AwAA
+X-Env-Sender: xuhuan.fnst@fujitsu.com
+X-Msg-Ref: server-5.tower-571.messagelabs.com!1643249210!27844!1
+X-Originating-IP: [62.60.8.97]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.7; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 25834 invoked from network); 27 Jan 2022 02:06:51 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-5.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 27 Jan 2022 02:06:51 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id B20D1100192
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 27 Jan 2022 02:06:50 +0000 (GMT)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id A510910018B
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 27 Jan 2022 02:06:50 +0000 (GMT)
+Received: from localhost.localdomain.localdomain (10.167.225.131) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.26; Thu, 27 Jan 2022 02:06:29 +0000
+From: XU Huan <xuhuan.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Xu Huan <xuhuan.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-multidict: upgrade 5.2.0 -> 6.0.2
+Date: Thu, 27 Jan 2022 10:06:51 +0800
+Message-ID: <1643249211-2594-1-git-send-email-xuhuan.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.131]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Jan 2022 01:28:10 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Jan 2022 02:06:55 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95111
+ https://lists.openembedded.org/g/openembedded-devel/message/95112
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+From: Xu Huan <xuhuan.fnst@fujitsu.com>
+
+changelog:
+Bugfixes
+Revert :issue:`644`
+restore type annotations to as-of 5.2.0 version. (:issue:`688`)
+
+Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
 ---
- ...scv64-mod.rs-Add-missing-error-codes.patch | 32 +++++++++++++++++++
- .../python/python3-pyruvate_1.1.2.bb          |  1 +
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pyruvate/0001-riscv64-mod.rs-Add-missing-error-codes.patch
+ .../{python3-multidict_5.2.0.bb => python3-multidict_6.0.2.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-multidict_5.2.0.bb => python3-multidict_6.0.2.bb} (85%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyruvate/0001-riscv64-mod.rs-Add-missing-error-codes.patch b/meta-python/recipes-devtools/python/python3-pyruvate/0001-riscv64-mod.rs-Add-missing-error-codes.patch
-new file mode 100644
-index 0000000000..67108472ac
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyruvate/0001-riscv64-mod.rs-Add-missing-error-codes.patch
-@@ -0,0 +1,32 @@
-+From c711fb215de54f960a35cdc48cd506b6b5db4918 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 26 Jan 2022 11:50:58 -0800
-+Subject: [PATCH] riscv64/mod.rs: Add missing error codes
-+
-+These are flagged by apps e.g. python3-pyruvate
-+
-+Upstream-Status: Submitted [https://github.com/rust-lang/libc/pull/2656]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/unix/linux_like/linux/musl/b64/riscv64/mod.rs | 5 +++++
-+ 1 file changed, 5 insertions(+)
-+
-+diff --git a/src/unix/linux_like/linux/musl/b64/riscv64/mod.rs b/src/unix/linux_like/linux/musl/b64/riscv64/mod.rs
-+index b075b4a05..6b17621c7 100644
-+--- a/src/unix/linux_like/linux/musl/b64/riscv64/mod.rs
-++++ b/src/unix/linux_like/linux/musl/b64/riscv64/mod.rs
-+@@ -548,6 +548,11 @@ pub const EHOSTUNREACH: ::c_int = 113;
-+ pub const EALREADY: ::c_int = 114;
-+ pub const EINPROGRESS: ::c_int = 115;
-+ pub const ESTALE: ::c_int = 116;
-++pub const EUCLEAN: ::c_int = 117;
-++pub const ENOTNAM: ::c_int = 118;
-++pub const ENAVAIL: ::c_int = 119;
-++pub const EISNAM: ::c_int = 120;
-++pub const EREMOTEIO: ::c_int = 121;
-+ pub const EDQUOT: ::c_int = 122;
-+ pub const ENOMEDIUM: ::c_int = 123;
-+ pub const EMEDIUMTYPE: ::c_int = 124;
-+-- 
-+2.35.0
-+
-diff --git a/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb b/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
-index 14142fdb67..b83302d44c 100644
---- a/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
-@@ -23,6 +23,7 @@ RUSTFLAGS:append:powerpc = " --cfg crossbeam_no_atomic_64"
- RUSTFLAGS:append:riscv32 = " --cfg crossbeam_no_atomic_64"
+diff --git a/meta-python/recipes-devtools/python/python3-multidict_5.2.0.bb b/meta-python/recipes-devtools/python/python3-multidict_6.0.2.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-multidict_5.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-multidict_6.0.2.bb
+index 05b18fa0b5..b0e111d643 100644
+--- a/meta-python/recipes-devtools/python/python3-multidict_5.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-multidict_6.0.2.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/aio-libs/multidict/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=84c63e2bcd84e619d249af5181e2147f"
  
- SRC_URI:append:mips = " file://0001-check-for-mips-targets-for-stat.st_dev-definitions.patch;patchdir=../cargo_home/bitbake/libsystemd-0.4.1/"
-+SRC_URI:append = " file://0001-riscv64-mod.rs-Add-missing-error-codes.patch;patchdir=../cargo_home/bitbake/libc-0.2.112/"
+-SRC_URI[sha256sum] = "0dd1c93edb444b33ba2274b66f63def8a327d607c6c790772f448a53b6ea59ce"
++SRC_URI[sha256sum] = "5ff3bd75f38e4c43f1f470f2df7a4d430b821c4ce22be384e1459cb57d6bb013"
  
- SRC_URI += " \
-     crate://crates.io/aho-corasick/0.7.18 \
+ inherit pypi setuptools3 ptest
+ 
 -- 
-2.35.0
+2.25.1
 
 
