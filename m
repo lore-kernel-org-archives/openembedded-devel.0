@@ -1,80 +1,132 @@
-Return-Path: <jacob.kroon@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5102C433EF
-	for <webhook@archiver.kernel.org>; Thu, 27 Jan 2022 07:12:52 +0000 (UTC)
-Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com
- [209.85.208.172])
- by mx.groups.io with SMTP id smtpd.web09.25226.1643267572110927531
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 834A3C433EF
+	for <webhook@archiver.kernel.org>; Thu, 27 Jan 2022 07:27:34 +0000 (UTC)
+Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
+ by mx.groups.io with SMTP id smtpd.web09.25307.1643268453345510548
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Jan 2022 23:12:52 -0800
+ Wed, 26 Jan 2022 23:27:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ogzq9FqW;
- spf=pass (domain: gmail.com, ip: 209.85.208.172,
- mailfrom: jacob.kroon@gmail.com)
-Received: by mail-lj1-f172.google.com with SMTP id z20so2914326ljo.6
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Jan 2022 23:12:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:content-language:to:cc:from
-         :subject:content-transfer-encoding;
-        bh=jZV//HSZ5k3J1x8eNvALZTDIHIkL4yBCEvS8y3MHr/Y=;
-        b=ogzq9FqWOIxJ0pF/8PKghTA+yHkKtcaQBAxM0zniFN5pmPhH25aHnoBmIlFnrH8G1Y
-         rasq4x5VIBraEl3UpQH6GiBbM8k+EIKLXV8tvD8NOg1/zDTfiGX+/3Zd8g7cc6nKt79c
-         zR3UNOj1OJwWtUYypHCA3yOPYPomAIhcH5e+E2/BHRaotYrun07oxImn2gIDtcAef1TT
-         9dlMUix8Wn4OyvOTuD67yimGtDd7SEioklikuiyN/2979sJr5Fz6aCNg3UKClG0jIp+5
-         J3a373Ap0iv71vOZw2xwbfFqc/rOykDUZtxPG3eLVuRothmny5d5MHFDjK4n9XBLx+qH
-         TF4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent
-         :content-language:to:cc:from:subject:content-transfer-encoding;
-        bh=jZV//HSZ5k3J1x8eNvALZTDIHIkL4yBCEvS8y3MHr/Y=;
-        b=C3PrGYCUhKsmq7fDqmv7NoK+m34K9pmbhQKTXx1l0pJGY0XCI+YFTzhlgOgC8VYtfZ
-         svBIgivaY3GDx3DFojW5NefH8tetXH2J3VGnGSwacfn+XYkexKvKpFTcCGNjD8RkWggC
-         mKamKufJkDE0XUFgip9JRlQjbvuEYwHp5qbLDMtNZQJWNwmHT//QCjvfU7h8ouXhZ6Rg
-         jbQuOsuFODIwSalNJ/Wf6a8vOQGcrc70aZPhk/9sMSVwpccRFTZlSj5PvETUUMmA2n3C
-         oHX8Ea4RjG1nLGcpcRXGh34nLAeuWezAYTJpwrNuJRJIRBJ+Rf3m4hdb/CZZ3MB/aAZq
-         wFUQ==
-X-Gm-Message-State: AOAM5339I6zbrkljaY8hujOFLLxcTHU7NzExHi8aswTIHQ4Sexfw5oS4
-	qFlcgUabYs74xhDVtsh0DDWhACOvHUXd2g==
-X-Google-Smtp-Source: 
- ABdhPJxKG/IyjwKHiDeGa5qdaWxRWOcYDSFFd2zzzQyJIdizRJoxynHUKOvi6qCVI+yd9xZ6pv581w==
-X-Received: by 2002:a2e:8689:: with SMTP id l9mr1942660lji.417.1643267570232;
-        Wed, 26 Jan 2022 23:12:50 -0800 (PST)
-Received: from [192.168.10.175] (37-247-29-68.customers.ownit.se.
- [37.247.29.68])
-        by smtp.gmail.com with ESMTPSA id
- k2sm1678985lja.104.2022.01.26.23.12.49
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 26 Jan 2022 23:12:49 -0800 (PST)
-Message-ID: <42b3fb2e-fe47-aac4-4375-66af366ed794@gmail.com>
-Date: Thu, 27 Jan 2022 08:12:48 +0100
+ dkim=missing;
+ spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.21,
+ mailfrom: f_l_k@t-online.de)
+Received: from fwd76.dcpf.telekom.de (fwd76.aul.t-online.de [10.223.144.102])
+	by mailout10.t-online.de (Postfix) with SMTP id 57E874FC4
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 27 Jan 2022 08:27:31 +0100 (CET)
+Received: from [192.168.178.83] ([84.163.47.60]) by fwd76.t-online.de
+	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
+	esmtp id 1nCzBo-1vRH4j0; Thu, 27 Jan 2022 08:27:28 +0100
+Message-ID: <3ef87993-f28b-1d51-77d6-dfa7cfac7f0f@t-online.de>
+Date: Thu, 27 Jan 2022 08:27:27 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.5.0
+Subject: Re: [oe] [meta-gnome][PATCH] evolution-data-server: try to fix g-i
+ data generation
 Content-Language: en-US
-To: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-Cc: henning@itconsulting-heinold.de, otavio@ossystems.com.br,
- Richard Leitner <richard.leitner@skidata.com>
-From: Jacob Kroon <jacob.kroon@gmail.com>
-Subject: [meta-java] Merge master-next into master ?
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+To: openembedded-devel@lists.openembedded.org
+References: <20220126060104.578932-1-f_l_k@t-online.de>
+ <CAMKF1soCvBP6kNsGfcFQ1zaS6LUAK7thNy97aCj0B8q2+RzMjA@mail.gmail.com>
+ <16CDC0E5A96FEE34.21331@lists.openembedded.org>
+From: Markus Volk <f_l_k@t-online.de>
+In-Reply-To: <16CDC0E5A96FEE34.21331@lists.openembedded.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+X-TOI-EXPURGATEID: 150726::1643268448-0001619A-6317533C/0/0 CLEAN NORMAL
+X-TOI-MSGID: 5b09ae4a-11a8-4f0c-a14e-63484e31fe2c
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Jan 2022 07:12:52 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Jan 2022 07:27:34 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95115
+ https://lists.openembedded.org/g/openembedded-devel/message/95116
 
-Hi,
+thanks to your patches for systemd i could try this now. i have=20
+successfully built evolution-data-server for musl x86-64 with g-ir and=20
+vapi. However, also with the recipe that is currently in master. So this=20
+test is not really helpful.
 
-Can we get master-next merged into master ?
-
-Thanks in advance,
-Jacob
+Am 26.01.22 um 08:18 schrieb Markus Volk:
+> i tried, but there are a lot of systemd patches that are not applying=20
+> and thus i'm unable to compile it. But never mind ... if it doesn't=20
+> run for you, just disable GIR. Maybe i find some time to look into it=20
+> sometime later
+>
+> Am 26.01.22 um 07:35 schrieb Khem Raj:
+>> On Tue, Jan 25, 2022 at 10:01 PM Markus Volk <f_l_k@t-online.de> wrote=
+:
+>>> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+>>> ---
+>>> =C2=A0 .../evolution-data-server/evolution-data-server.bb | 5 +++--
+>>> =C2=A0 1 file changed, 3 insertions(+), 2 deletions(-)
+>>>
+>>> diff --git=20
+>>> a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
+r.bb=20
+>>> b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
+r.bb=20
+>>>
+>>> index 9ccaedbcc..c5c7d947f 100644
+>>> ---=20
+>>> a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
+r.bb
+>>> +++=20
+>>> b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
+r.bb
+>>> @@ -27,14 +27,15 @@ EXTRA_OECMAKE =3D " \
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -DENABLE_UOA=3DOFF \
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -DENABLE_GOOGLE_AUTH=3DOFF \
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -DENABLE_WEATHER=3DOFF \
+>>> -=C2=A0=C2=A0=C2=A0 -DG_IR_COMPILER=3D${STAGING_BINDIR}/g-ir-compiler=
+-wrapper \
+>>> -=C2=A0=C2=A0=C2=A0 -DG_IR_SCANNER=3D${STAGING_BINDIR}/g-ir-scanner-w=
+rapper \
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -DVAPIGEN=3D${STAGING_BINDIR_NATIVE}/v=
+apigen \
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ${@bb.utils.contains('GI_DATA_ENABLED'=
+, 'True',=20
+>>> '-DENABLE_INTROSPECTION=3DON -DENABLE_VALA_BINDINGS=3DON',=20
+>>> '-DENABLE_INTROSPECTION=3DOFF', d)} \
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -D${LKSTRFTIME} \
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -DLIB_SUFFIX=3D${@d.getVar('baselib').=
+replace('lib', '')} \
+>>> =C2=A0 "
+>>>
+>>> +EXTRA_OECMAKE:append:class-target =3D "=20
+>>> -DG_IR_COMPILER=3D${STAGING_BINDIR}/g-ir-compiler-wrapper"
+>>> +EXTRA_OECMAKE:append:class-target =3D "=20
+>>> -DG_IR_SCANNER=3D${STAGING_BINDIR}/g-ir-scanner-wrapper"
+>>> +
+>> Can you test it for TCLIBC =3D "musl"
+>>
+>>
+>>> =C2=A0 PACKAGECONFIG[canberra] =3D=20
+>>> "-DENABLE_CANBERRA=3DON,-DENABLE_CANBERRA=3DOFF,libcanberra"
+>>> =C2=A0 PACKAGECONFIG[oauth]=C2=A0=C2=A0=C2=A0 =3D=20
+>>> "-DENABLE_OAUTH2=3DON,-DENABLE_OAUTH2=3DOFF,webkitgtk json-glib"
+>>> =C2=A0 PACKAGECONFIG[goa]=C2=A0=C2=A0=C2=A0 =3D=20
+>>> "-DENABLE_GOA=3DON,-DENABLE_GOA=3DOFF,gnome-online-accounts"
+>>> --=20
+>>> 2.25.1
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#95101): https://lists.openembedded.org/g/openembedd=
+ed-devel/message/95101
+> Mute This Topic: https://lists.openembedded.org/mt/88691224/3618223
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[f_l_k@t-online.de]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
