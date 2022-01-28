@@ -1,257 +1,396 @@
-Return-Path: <peter.kjellerstedt@axis.com>
+Return-Path: <trevor.gamblin@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 52688C433F5
-	for <webhook@archiver.kernel.org>; Fri, 28 Jan 2022 18:36:59 +0000 (UTC)
-Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
- by mx.groups.io with SMTP id smtpd.web10.102.1643395011889150852
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3AAFC433FE
+	for <webhook@archiver.kernel.org>; Fri, 28 Jan 2022 18:49:30 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com
+ [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web09.304.1643395770111742508
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 Jan 2022 10:36:52 -0800
+ Fri, 28 Jan 2022 10:49:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@axis.com
- header.s=axis-central1 header.b=Qe1d+OIK;
- spf=pass (domain: axis.com, ip: 195.60.68.17,
- mailfrom: peter.kjellerstedt@axis.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; q=dns/txt; s=axis-central1; t=1643395011;
-  x=1674931011;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:mime-version;
-  bh=ao9dCzlAS50+a20+aJKj+f9GEqTHYV6tVVqlATD8HYA=;
-  b=Qe1d+OIK20vbBZmrXHt2DY7Tc1udL0GxK7ZSwqWTJQbX3/tFkO3Bhjis
-   kP5yJzPM27IC/72LMJOxMhZbdH4jl2EdyUMglLWEhdqkfv6C92Pz+GSaE
-   fuoC44odxWKlhXtE0tfk3zOtQqtwhCbXaPQj9QoY37LK5IVCxkI0mZaGh
-   kMHvCEAqyvRBmcCqCuy0uVG3jxaxmENSNxf+/u1RzRRVkV+v4KvqXgOpX
-   o/pC3LHzVwWnJ11Zxryclqn3EHKRurTj41GgSf2VMf3TQxHTudva+rM45
-   KFPGldc27rXENFhTbuI8fk8Zh9HdSLjm/2Qg0dzvpyZX2UsOzR+egFVUG
-   w==;
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: Khem Raj <raj.khem@gmail.com>, Fabio Estevam <festevam@gmail.com>
-CC: Fabio Estevam <festevam@denx.de>, "alexandre.belloni@bootlin.com"
-	<alexandre.belloni@bootlin.com>, "hs@denx.de" <hs@denx.de>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	"otavio.salvador@ossystems.com.br" <otavio.salvador@ossystems.com.br>
-Subject: RE: [oe] [PATCH v3 meta-oe] rtc-tools: Add a recipe
-Thread-Topic: [oe] [PATCH v3 meta-oe] rtc-tools: Add a recipe
-Thread-Index: AQHYE9KcsmVUkEz+ukGtlSAl8TCAkqx323pAgABPlYCAAFU5AIAAPEWg
-Date: Fri, 28 Jan 2022 18:36:48 +0000
-Message-ID: <afd084404e704b268d2f6c6adb104bc3@axis.com>
-References: <20220127230607.35740-1-festevam@gmail.com>
- <d204889ebaf04514b6ec2863a5104052@axis.com>
- <CAOMZO5DmubmJmVgTwVdkVBOc8h7+Ep7C2n0eRSKbhDMj9TimTA@mail.gmail.com>
- <CAMKF1sr+tUripPnYtWz+2xcwAqJq4QMYYkE82nobkw8i=N3bHg@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1sr+tUripPnYtWz+2xcwAqJq4QMYYkE82nobkw8i=N3bHg@mail.gmail.com>
-Accept-Language: en-US, sv-SE
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=DJmrAdao;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
+ invalid domain name (domain: windriver.com, ip: 205.220.166.238,
+ mailfrom: prvs=9027cf57c8=trevor.gamblin@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id
+ 20SIGfPP020492
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri, 28 Jan 2022 10:49:28 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+ h=message-id : date
+ : subject : from : to : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=PPS06212021;
+ bh=lopPHSglESmajMt6nhovnyp0OnqsVncDf6V1nhgXpOE=;
+ b=DJmrAdaoaBa85AV+MCIpdPMzfYv1kH3pUhCQHISquUP4Pr39K6mQ/cDQ3onU4HtiwcxB
+ /1OMnCvkoUiKlDvJGsY6ZuzPULvxsPRBxYvqU93CqgFr3hmlkg0kOdt33rsb0H1Inooi
+ n9i/qm103iPy/+DrTS1sB2ZkSFMjyxkCCxs0aSmb8LoQwCexaSld/u6GMOVVNKCon22A
+ WtrzHpBxxIs3ec7j97zKUrkGjaKUoNt/OBe0bEgpFwe2QonPMbMwp+hjJmDbUPBeD6zc
+ xnD0FO7kdsWidvFqBQF6KUXt13xyF2Qn5rQ13FFFk3wXQt5+GIC0WIYf/dYat0uEHxlL Og==
+Received: from nam12-mw2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12lp2044.outbound.protection.outlook.com [104.47.66.44])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3dugc9hg8f-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri, 28 Jan 2022 10:49:27 -0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ZkF/wGjxkVvScR4Ykh7U7/gIXIL0EviRsIMLIQWhFNYOQSMf0qV8blITFxOJ7V+F7tjcTg8QpnmWxdXASgnJNYD4CInN/E0y/8Lp0W9zdYz68JzMnm6YUgzlDr0lGE8DmGv30RHLkPMblMl17WTHAbXs39eLVaqJ61GfhOrbStktNlRG3vvHjwPiLPbrAwoejSMeyipt6q3hFDydAnJhe8qQxMDRjiYwf88dG9kRDn7JzLfCQTu5z4qiX9Yb7IMoZZkxSTK0WRtlKaPUWVmXWJY2/7+oi6gUjMJNDATIbakVBOBXfJDtzIhfxIVOztVSsqbXfSeLjViqGPtVSjtzwg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lopPHSglESmajMt6nhovnyp0OnqsVncDf6V1nhgXpOE=;
+ b=ZGmyOuw+SkdbPDjF+Y2mBwcXWNdVqxVUV1SafkR6lnSy+XSvHkIIp65oVRJlHMqlYUlKMHER8ecyX43aUuxZcF2Fyc/s2H4Y5iPTQNd9Q+xzZttia6qhvaaIhFz2HdLFb2+awVr1QJ4ZkQNZmpVIq27vorb1V7+s/CrjR4ZztrUF59186lxnDu4K/l4iuZFB7CUECS3W9F1MOwrsl2zpCEHaW3oGronPZJDv0XOBpUg6rRDHqFr1IH7IJgyZ8CQEa/4vXc0JX0EJRMWIIYcc7JN7yKKQGKa76AevryordiCAW6AQHF6HeuKib/CqJbeYwCKXvluqRAjvql3ED93O+A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+Received: from DM6PR11MB3913.namprd11.prod.outlook.com (2603:10b6:5:193::33)
+ by DM5PR11MB1963.namprd11.prod.outlook.com (2603:10b6:3:10e::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4909.14; Fri, 28 Jan
+ 2022 18:49:26 +0000
+Received: from DM6PR11MB3913.namprd11.prod.outlook.com
+ ([fe80::1853:d98c:5147:611c]) by DM6PR11MB3913.namprd11.prod.outlook.com
+ ([fe80::1853:d98c:5147:611c%4]) with mapi id 15.20.4930.019; Fri, 28 Jan 2022
+ 18:49:25 +0000
+Message-ID: <bd95f281-82b4-910a-77a9-612db425499a@windriver.com>
+Date: Fri, 28 Jan 2022 13:49:21 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.4.0
+Subject: Re: [oe] [meta-python][hardknott][PATCH] python3-pillow: fix
+ CVE-2022-22815, 22816, 22817
 Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.0.5.60]
-Content-Type: multipart/alternative;
-	boundary="_000_afd084404e704b268d2f6c6adb104bc3axiscom_"
+From: Trevor Gamblin <trevor.gamblin@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+References: <16CE74488F9899AE.6390@lists.openembedded.org>
+In-Reply-To: <16CE74488F9899AE.6390@lists.openembedded.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: YTXPR0101CA0009.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00::22) To DM6PR11MB3913.namprd11.prod.outlook.com
+ (2603:10b6:5:193::33)
 MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 48d3fee1-ab58-4602-c984-08d9e28ee7cd
+X-MS-TrafficTypeDiagnostic: DM5PR11MB1963:EE_
+X-Microsoft-Antispam-PRVS: 
+	<DM5PR11MB1963A43FF3141CA87FB420FD9F229@DM5PR11MB1963.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:265;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	ECfg6jop4viZ7a3INDwTzhL9l4TvNoYoeSO59Dy/H3ltjZpKuvN1TWrlI4MaQfc+3AUjQ0aAFm6FklFhmwKNymCtPsg+zBepz11EkR//GKffU8J5GrY2gHVeTpnp5cMjsDxL0XNHL4VEKc/myN9c4Jvxhu59g7AXeUgvj0mQGjjvr6E+Sag3qkdS58FFlvFeDfNT0MuXQll5Y2kGeqdJ5vWnHKB28OaOc2mKxn2pbN9m2OG5kVR8cIUPu6JhUb4MsGVcFYgEpb6ieSFUtJgJr73rboREM7CvyR3qJANpANVB3keJhDlXnOogfPSsIj8V8kMLVx3BImjBlHy7HVbGOPFW0yoFNkDGDw2c5bJ8+mrjLmwpwLWVbyEqFFaFnEiNXmgblimE7GHFueQUh+wrp7r+2okaoKeuEyBFSU0RA2bEruUD9fyr3x9x3XSNdthsuu9d7sp5s9Ku+5rUB3OfE0ZjVjh5VMzTUbffytvsQ/ctsdVMoGAfBx99RYqn8pALP1/cNAaPX8xujmpyAH9mxYz1cxSOk6i7+VPKkFRsToCdqqtVKnc87OI5sowDppMCp62BjAoOcFci4qOuyCiEdQH6Uuy6qBze9qhbhHOUXLdtZ96JA5Yk8YnmwEyJHmECKQQsVOglXdbwezyQkQRStsFvSXlWksFuIZQvvttJpblTeiiR/U9HKQZ68yv10vWhnRlX28dccA+nFJwij8DNtp8YV8c1Pj205NyzzL/KJDc5ZTOxdL/R95842Mm5+B7X1ZlSzUQY/pTi4i3oD4IGJhWXoxOLMz6tuy12AS5Z9vOgoaLjt455loXU/p3UVQF4okDacNjFEagq5D/Y2xQgCkpVbw/lTmvpgdH1xLw2cxw=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3913.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(2906002)(8676002)(66556008)(6506007)(316002)(53546011)(83380400001)(66476007)(6666004)(44832011)(8936002)(86362001)(2616005)(6512007)(966005)(6486002)(66946007)(38100700002)(5660300002)(31686004)(6916009)(36756003)(508600001)(31696002)(186003)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?VUNjMFI0WitUdlR6MmRicGFTdSs4TXorTC84UFNkd3NNVGViaWlxTDR1elFq?=
+ =?utf-8?B?T3dKNCtscElxblV0YW8yRzJoUnhOQWNpb08wMS9SQWxZYVkzMHdUOUI0YzV2?=
+ =?utf-8?B?cmN2RWc4WHh0bGsrc0tncDZJOHU4Mk5KNlNFUVIzWWdlSENwckZpM2tla3hh?=
+ =?utf-8?B?UW5CTHFZbU9qZFB1U0NqbkpBV2J3MndNYllsNyt2ZWlCZmhHdEZ4ZVdCS01n?=
+ =?utf-8?B?TkRVK1FhTUkzejRvRkloZU5MU2ErN1RybHNobGh2eFAyNlo0ekpXWHQyd0pZ?=
+ =?utf-8?B?OW53S2xoQ0RQVUNyTE9uakYyZEwydmsrN01jVzZpdHNLR2dSR3N0TUVlaC9y?=
+ =?utf-8?B?OHN3MTlLKzVCSHkzbWtOQW5DREp3L1NVQ3pCeVBibTNYR1lCaDRpMDZEUEFa?=
+ =?utf-8?B?VVpTVU9EbExsNm4yV2EyTE1zN0orMWhuQmNBRVROZzlheVJjMjhDK2FHOEJZ?=
+ =?utf-8?B?bGJyYVBUbEVzeDhndEVMN3cycC9hM2RuNEFINDI3SWM1dEFBUUVHQ3dhR1JB?=
+ =?utf-8?B?OHA1SEtwZ1ZnVDByZkxxS3M2RE43WG5Cd2RBZmxEdTNNeWFJc3ZRK1RpZUxC?=
+ =?utf-8?B?Q3NjeWNLQWtWM0UzUFFQZmRMNUlURXFzNFk4eVNXUTFhNnkvc0ltT0lKVDlI?=
+ =?utf-8?B?aytSb2d4Tk4wMnNkV2JwR1dEdEoxZTFNcWlkdFMrQ0ZGYnRuM0FCamN3QWt0?=
+ =?utf-8?B?c1pINW5tUldQL3YzSHc3Q1E0MDJwcmFvclRyMVZIeVVwWG53ZmdFU3pkMkR4?=
+ =?utf-8?B?L2l6UHdQMzRCeUNud20zT1dwY3hac2VReEE2Wk1vRVB0dTMySlhHeXAwV3VG?=
+ =?utf-8?B?TGJ2d0FGWkxOcTZQTTRvT2dZdzh5N2xGblVyTHZjZkRiMFI1NmhZazI2Mnk5?=
+ =?utf-8?B?VXpxYllNMTY1VjNMUTY5OXBTZEk5dEtucjRjc0pZQ0o5cHMrVmVUR3BjUGY1?=
+ =?utf-8?B?cy9Td2N5THZyMGVZYXZTbmYySExUaW9PKzNvTEIrVEc1bWVZQThVa0JWVGt0?=
+ =?utf-8?B?bE11bm8wMEhGVW1aaHlUbHdNSFNwbHRYSm9RNTdDWlBRZHBHeGtDRUlkRXlU?=
+ =?utf-8?B?d3hlbGUwY3c0YjJvSktvUlBaektQb25va2hzcWVFN1hMU016a3c4M2MyMm1R?=
+ =?utf-8?B?REM1UTdKNjA1M3c0d3BGSWVadW5CMTd6QjNkYUcvRjlVNHYwSDh4TG43eGRL?=
+ =?utf-8?B?RkcyVzdmWEVSbmlDcGtkL1ZTZmN2NzNCa3lKWWJ0U0tyZEdDOVRUYjY3MkVY?=
+ =?utf-8?B?V2phS3BRaUhsNGptcWttU0JiaTFHRXU3WUpCYVQvNi9mVkN2MTV3N2dRd09v?=
+ =?utf-8?B?dnV3VWN5Wmp4YWZodDBiNVdRdER5bnpHQlRMQk5oNTdBMzY0S3NYeE9wVmlN?=
+ =?utf-8?B?UHpOQkJzdGFFZXFvNFNsWGJ3Vk1MS2NZbHNxaGZhRHpVOExLNFVpblRCSkJC?=
+ =?utf-8?B?dXhqaWtNVzRsN1dnZVloVUJDWEQvQ1JneUdRV1lMYm5jQi91d1Jwd3NrMnl5?=
+ =?utf-8?B?OXcvdDV4Z29TNHZRK054TC8vUjQrRTVacElHZFlnZ0FKN3gyeGVSMEZXaHBO?=
+ =?utf-8?B?UmpTVVBmOHpPZ3U3NU9scDlZMFJzZ0I0WldrOHBkc05RejZrOXhmL3VDUjVy?=
+ =?utf-8?B?bERJUFd5b2lLUlRmdFlDai9wK2k2dndka1RxMVlDL1RJMUE0VWZOZzhnSGZJ?=
+ =?utf-8?B?SSs5WUR5YUpHMnEvNzBHd2tYUTFiNEFZdWl0R0hKT2E0Qi8xUUFDYVlIQ0hO?=
+ =?utf-8?B?R3NKRDAybWw2NlBSN0Nia0huUCtJelJqcWpTVnd5Rk40Mld3bHRIYkJGdk1l?=
+ =?utf-8?B?SzBlNEVBMlJoVzB3Qkl3VnhrNDB3aFUyZWphYjhpZDVOSUFFUjQvZHpKM0ZT?=
+ =?utf-8?B?V1g0U2NYaUs2SFVYZms5bDRBT3Z3RnVHblRhUWlsNkxMRlRNYlZlK3FmNVR6?=
+ =?utf-8?B?WG1QMHFnWFNiTEZ1aVB3VHVJTFJEOHh1R043Mk16TjRCOEhRc2F2alpmWU5x?=
+ =?utf-8?B?ajNjWXB3aXpXcGZPUVgzRVpGM2hoTkl1Ny9hS3FBNm1qaS94RWtCVW11cEox?=
+ =?utf-8?B?bG1XMCtZWTBoSjdpMGhhVEVUdElERTlhOE9RRFlIL1h3RDBpOCs0MEYwYm80?=
+ =?utf-8?B?cHdHdjZaUjRsdkZuTWxTZ200VUxYSWxBU2RaYStMaU4zYUp1S1lPK3BWTm91?=
+ =?utf-8?B?M3E4R3Vja09pb1hMNjAzMVFnUHI4VWF3ejJZblBkN0UrU3d2bGxYTjVwSlpU?=
+ =?utf-8?B?Zm80NGcxUDhGL3VuNnhCU1d4WHRTbFEreWZ0WDE0d2FzMTFNSjBPMmJXZi9x?=
+ =?utf-8?Q?MuRfFiJpxPB1xlMVDO?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ 48d3fee1-ab58-4602-c984-08d9e28ee7cd
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3913.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jan 2022 18:49:25.7673
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 
+ WGNZkT8riuj8ji7qLa2oDfehCSbkKR2X3BqqeqEhaAEgBm0y/VuFxMp9Cm1cIo3ALRY4zeaYX8izESoqEXslMROV9urTRS295n9DzD/CE7k=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB1963
+X-Proofpoint-GUID: IM74BA2HfdgV4s48zi6JrKahBV6ZuUSW
+X-Proofpoint-ORIG-GUID: IM74BA2HfdgV4s48zi6JrKahBV6ZuUSW
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.816,Hydra:6.0.425,FMLib:17.11.62.513
+ definitions=2022-01-28_06,2022-01-28_01,2021-12-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 mlxscore=0
+ phishscore=0 lowpriorityscore=0 clxscore=1015 bulkscore=0
+ priorityscore=1501 impostorscore=0 adultscore=0 mlxlogscore=999
+ malwarescore=0 suspectscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.12.0-2201110000 definitions=main-2201280110
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 28 Jan 2022 18:36:59 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 28 Jan 2022 18:49:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95159
+ https://lists.openembedded.org/g/openembedded-devel/message/95160
 
---_000_afd084404e704b268d2f6c6adb104bc3axiscom_
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Missing a sign-off from me on one of the patches. Will send a v2...
 
-VGhlIGRlZmF1bHQgcnVsZXMgcHJvdmlkZWQgYnkgbWFrZSBkbyBpbmNsdWRlICQoTERGTEFHUyku
-IFRoaXMgaXMgdGhlIGRlZmF1bHQgcnVsZSBwcm92aWRlZCBieSBtYWtlIHRvIGxpbmsgYSBiaW5h
-cnkgZnJvbSBhIC5jIGZpbGU6DQoNCiU6ICUuYw0KIyAgcmVjaXBlIHRvIGV4ZWN1dGUgKGJ1aWx0
-LWluKToNCiAgICAgICAgJChMSU5LLmMpICReICQoTE9BRExJQkVTKSAkKExETElCUykgLW8gJEAN
-Cg0Kd2hlcmUgTElOSy5jIGlzIGRlZmluZWQgYXM6DQoNCkxJTksuYyA9ICQoQ0MpICQoQ0ZMQUdT
-KSAkKENQUEZMQUdTKSAkKExERkxBR1MpICQoVEFSR0VUX0FSQ0gpDQoNCih5b3UgY2FuIHNlZSB0
-aGUgZGVmYXVsdCBydWxlcyBieSBydW5uaW5nIG1ha2UgLXAgYW55d2hlcmUgd2hlcmUgdGhlcmUg
-aXNu4oCZdCBhIE1ha2VmaWxlKS4NCg0KSSBoYXZlIG5vdyBhbHNvIGFwcGxpZWQgdGhlIHBhdGNo
-IGZvciB0aGUgcnRjLXRvb2xzIHJlY2lwZS4gSSB0aGVuIHJlbW92ZWQgdGhlIFRBUkdFVF9DQ19B
-UkNIIGxpbmUgZnJvbSBpdCBhbmQgYnVpbHQgaXQgd2l0aG91dCBwcm9ibGVtcy4NCg0KQEZhYmlv
-OiBBcmUgeW91IHN1cmUgeW91IGJ1aWx0IHdpdGggdGhlIGNvcnJlY3QgdmVyc2lvbiBvZiB0aGUg
-cmVjaXBlIGFuZCBNYWtlZmlsZSB3aGVuIHlvdSBnb3QgdGhlIGVycm9yIGFib3V0IEdOVV9IQVNI
-PyBCZWNhdXNlIGl0IHNob3VsZCB3b3JrIChhbmQgSeKAmXZlIHZlcmlmaWVkIHRoYXQgdGhlIGZp
-bGVzIEkgYnVpbHQgaGF2ZSB0aGUgR05VX0hBU0ggYW5kIEkgbmV2ZXIgYnVpbHQgd2l0aCB0aGUg
-VEFSR0VUX0NDX0FSQ0ggbGluZSBpbiB0aGUgcmVjaXBlKS4NCg0KLy9QZXRlcg0KDQpGcm9tOiBL
-aGVtIFJhaiA8cmFqLmtoZW1AZ21haWwuY29tPg0KU2VudDogZGVuIDI4IGphbnVhcmkgMjAyMiAx
-NjozMw0KVG86IEZhYmlvIEVzdGV2YW0gPGZlc3RldmFtQGdtYWlsLmNvbT4NCkNjOiBGYWJpbyBF
-c3RldmFtIDxmZXN0ZXZhbUBkZW54LmRlPjsgUGV0ZXIgS2plbGxlcnN0ZWR0IDxwZXRlci5ramVs
-bGVyc3RlZHRAYXhpcy5jb20+OyBhbGV4YW5kcmUuYmVsbG9uaUBib290bGluLmNvbTsgaHNAZGVu
-eC5kZTsgb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc7IG90YXZpby5z
-YWx2YWRvckBvc3N5c3RlbXMuY29tLmJyDQpTdWJqZWN0OiBSZTogW29lXSBbUEFUQ0ggdjMgbWV0
-YS1vZV0gcnRjLXRvb2xzOiBBZGQgYSByZWNpcGUNCg0KDQoNCk9uIEZyaSwgSmFuIDI4LCAyMDIy
-IGF0IDI6MjggQU0gRmFiaW8gRXN0ZXZhbSA8ZmVzdGV2YW1AZ21haWwuY29tPG1haWx0bzpmZXN0
-ZXZhbUBnbWFpbC5jb20+PiB3cm90ZToNCkhpIFBldGVyLA0KDQpPbiBGcmksIEphbiAyOCwgMjAy
-MiBhdCAxOjQ4IEFNIFBldGVyIEtqZWxsZXJzdGVkdA0KPHBldGVyLmtqZWxsZXJzdGVkdEBheGlz
-LmNvbTxtYWlsdG86cGV0ZXIua2plbGxlcnN0ZWR0QGF4aXMuY29tPj4gd3JvdGU6DQoNCj4gPiAr
-VEFSR0VUX0NDX0FSQ0ggKz0gIiR7TERGTEFHU30iDQo+DQo+IFlvdSBmb3Jnb3QgdG8gcmVtb3Zl
-IHRoZSBUQUdFVF9DQ19BUkNIIGxpbmUuDQoNCklmIEkgcmVtb3ZlIHRoaXMgbGluZSwgdGhlIGZv
-bGxvd2luZyBlcnJvciBoYXBwZW5zOg0KDQpFUlJPUjogcnRjLXRvb2xzLTEuMC4wLXIwIGRvX3Bh
-Y2thZ2VfcWE6IFFBIElzc3VlOiBGaWxlDQovdXNyL2Jpbi9ydGMtc3luYyBpbiBwYWNrYWdlIHJ0
-Yy10b29scyBkb2Vzbid0IGhhdmUgR05VX0hBU0ggKGRpZG4ndCBwYXNzIExERkxBR1M/KQ0KRmls
-ZSAvdXNyL2Jpbi9ydGMgaW4gcGFja2FnZSBydGMtdG9vbHMgZG9lc24ndCBoYXZlIEdOVV9IQVNI
-IChkaWRuJ3QgcGFzcyBMREZMQUdTPykNCkZpbGUgL3Vzci9iaW4vcnRjLXJhbmdlIGluIHBhY2th
-Z2UgcnRjLXRvb2xzIGRvZXNuJ3QgaGF2ZSBHTlVfSEFTSCAoZGlkbid0IHBhc3MgTERGTEFHUz8p
-IFtsZGZsYWdzXQ0KRVJST1I6IHJ0Yy10b29scy0xLjAuMC1yMCBkb19wYWNrYWdlX3FhOiBRQSBy
-dW4gZm91bmQgZmF0YWwgZXJyb3JzLg0KUGxlYXNlIGNvbnNpZGVyIGZpeGluZyB0aGVtLg0KDQpB
-bnkgc3VnZ2VzdGlvbnMgYXMgdG8gaG93IHRoaXMgc2hvdWxkIGJlIGZpeGVkPw0KDQpJIGFscmVh
-ZHkgc3VnZ2VzdGVkIGluIGVhcmxpZXIgZW1haWwgdG8gYWRkIExERkxBR1MgaW4gbWFrZWZpbGUg
-cnVsZXMNCg0KDQpUaGFua3MNCg==
-
---_000_afd084404e704b268d2f6c6adb104bc3axiscom_
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: base64
-
-PGh0bWwgeG1sbnM6dj0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp2bWwiIHhtbG5zOm89InVy
-bjpzY2hlbWFzLW1pY3Jvc29mdC1jb206b2ZmaWNlOm9mZmljZSIgeG1sbnM6dz0idXJuOnNjaGVt
-YXMtbWljcm9zb2Z0LWNvbTpvZmZpY2U6d29yZCIgeG1sbnM6bT0iaHR0cDovL3NjaGVtYXMubWlj
-cm9zb2Z0LmNvbS9vZmZpY2UvMjAwNC8xMi9vbW1sIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
-VFIvUkVDLWh0bWw0MCI+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIg
-Y29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxtZXRhIG5hbWU9IkdlbmVyYXRv
-ciIgY29udGVudD0iTWljcm9zb2Z0IFdvcmQgMTUgKGZpbHRlcmVkIG1lZGl1bSkiPg0KPHN0eWxl
-PjwhLS0NCi8qIEZvbnQgRGVmaW5pdGlvbnMgKi8NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6
-IkNhbWJyaWEgTWF0aCI7DQoJcGFub3NlLTE6MiA0IDUgMyA1IDQgNiAzIDIgNDt9DQpAZm9udC1m
-YWNlDQoJe2ZvbnQtZmFtaWx5OkNhbGlicmk7DQoJcGFub3NlLTE6MiAxNSA1IDIgMiAyIDQgMyAy
-IDQ7fQ0KQGZvbnQtZmFjZQ0KCXtmb250LWZhbWlseTpDb25zb2xhczsNCglwYW5vc2UtMToyIDEx
-IDYgOSAyIDIgNCAzIDIgNDt9DQovKiBTdHlsZSBEZWZpbml0aW9ucyAqLw0KcC5Nc29Ob3JtYWws
-IGxpLk1zb05vcm1hbCwgZGl2Lk1zb05vcm1hbA0KCXttYXJnaW46MGNtOw0KCWZvbnQtc2l6ZTox
-MS4wcHQ7DQoJZm9udC1mYW1pbHk6IkNhbGlicmkiLHNhbnMtc2VyaWY7fQ0KYTpsaW5rLCBzcGFu
-Lk1zb0h5cGVybGluaw0KCXttc28tc3R5bGUtcHJpb3JpdHk6OTk7DQoJY29sb3I6Ymx1ZTsNCgl0
-ZXh0LWRlY29yYXRpb246dW5kZXJsaW5lO30NCnNwYW4uRW1haWxTdHlsZTE4DQoJe21zby1zdHls
-ZS10eXBlOnBlcnNvbmFsLXJlcGx5Ow0KCWZvbnQtZmFtaWx5OiJDYWxpYnJpIixzYW5zLXNlcmlm
-Ow0KCWNvbG9yOiM5NDM2MzQ7DQoJZm9udC13ZWlnaHQ6bm9ybWFsOw0KCWZvbnQtc3R5bGU6bm9y
-bWFsO30NCi5Nc29DaHBEZWZhdWx0DQoJe21zby1zdHlsZS10eXBlOmV4cG9ydC1vbmx5Ow0KCWZv
-bnQtZmFtaWx5OiJDYWxpYnJpIixzYW5zLXNlcmlmOw0KCW1zby1mYXJlYXN0LWxhbmd1YWdlOkVO
-LVVTO30NCkBwYWdlIFdvcmRTZWN0aW9uMQ0KCXtzaXplOjYxMi4wcHQgNzkyLjBwdDsNCgltYXJn
-aW46NzAuODVwdCA3MC44NXB0IDcwLjg1cHQgNzAuODVwdDt9DQpkaXYuV29yZFNlY3Rpb24xDQoJ
-e3BhZ2U6V29yZFNlY3Rpb24xO30NCi0tPjwvc3R5bGU+PCEtLVtpZiBndGUgbXNvIDldPjx4bWw+
-DQo8bzpzaGFwZWRlZmF1bHRzIHY6ZXh0PSJlZGl0IiBzcGlkbWF4PSIxMDI2IiAvPg0KPC94bWw+
-PCFbZW5kaWZdLS0+PCEtLVtpZiBndGUgbXNvIDldPjx4bWw+DQo8bzpzaGFwZWxheW91dCB2OmV4
-dD0iZWRpdCI+DQo8bzppZG1hcCB2OmV4dD0iZWRpdCIgZGF0YT0iMSIgLz4NCjwvbzpzaGFwZWxh
-eW91dD48L3htbD48IVtlbmRpZl0tLT4NCjwvaGVhZD4NCjxib2R5IGxhbmc9IlNWIiBsaW5rPSJi
-bHVlIiB2bGluaz0icHVycGxlIiBzdHlsZT0id29yZC13cmFwOmJyZWFrLXdvcmQiPg0KPGRpdiBj
-bGFzcz0iV29yZFNlY3Rpb24xIj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIGxhbmc9IkVO
-LVVTIiBzdHlsZT0iY29sb3I6Izk0MzYzNDttc28tZmFyZWFzdC1sYW5ndWFnZTpFTi1VUyI+VGhl
-IGRlZmF1bHQgcnVsZXMgcHJvdmlkZWQgYnkgbWFrZQ0KPGk+ZG88L2k+IGluY2x1ZGUgPC9zcGFu
-PjxzcGFuIGxhbmc9IkVOLVVTIiBzdHlsZT0iZm9udC1mYW1pbHk6Q29uc29sYXM7Y29sb3I6Izk0
-MzYzNDttc28tZmFyZWFzdC1sYW5ndWFnZTpFTi1VUyI+JChMREZMQUdTKTwvc3Bhbj48c3BhbiBs
-YW5nPSJFTi1VUyIgc3R5bGU9ImNvbG9yOiM5NDM2MzQ7bXNvLWZhcmVhc3QtbGFuZ3VhZ2U6RU4t
-VVMiPi4gVGhpcyBpcyB0aGUgZGVmYXVsdCBydWxlIHByb3ZpZGVkIGJ5IG1ha2UgdG8gbGluayBh
-IGJpbmFyeQ0KIGZyb20gYSAuYyBmaWxlOjxvOnA+PC9vOnA+PC9zcGFuPjwvcD4NCjxwIGNsYXNz
-PSJNc29Ob3JtYWwiPjxzcGFuIGxhbmc9IkVOLVVTIiBzdHlsZT0iY29sb3I6Izk0MzYzNDttc28t
-ZmFyZWFzdC1sYW5ndWFnZTpFTi1VUyI+PG86cD4mbmJzcDs8L286cD48L3NwYW4+PC9wPg0KPHAg
-Y2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gbGFuZz0iRU4tVVMiIHN0eWxlPSJmb250LWZhbWlseTpD
-b25zb2xhcztjb2xvcjojOTQzNjM0O21zby1mYXJlYXN0LWxhbmd1YWdlOkVOLVVTIj4lOiAlLmM8
-bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBsYW5nPSJF
-Ti1VUyIgc3R5bGU9ImZvbnQtZmFtaWx5OkNvbnNvbGFzO2NvbG9yOiM5NDM2MzQ7bXNvLWZhcmVh
-c3QtbGFuZ3VhZ2U6RU4tVVMiPiMmbmJzcDsgcmVjaXBlIHRvIGV4ZWN1dGUgKGJ1aWx0LWluKTo8
-bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBsYW5nPSJF
-Ti1VUyIgc3R5bGU9ImZvbnQtZmFtaWx5OkNvbnNvbGFzO2NvbG9yOiM5NDM2MzQ7bXNvLWZhcmVh
-c3QtbGFuZ3VhZ2U6RU4tVVMiPiZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
-YnNwOyAkKExJTksuYykgJF4gJChMT0FETElCRVMpICQoTERMSUJTKSAtbyAkQDxvOnA+PC9vOnA+
-PC9zcGFuPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIGxhbmc9IkVOLVVTIiBzdHls
-ZT0iY29sb3I6Izk0MzYzNDttc28tZmFyZWFzdC1sYW5ndWFnZTpFTi1VUyI+PG86cD4mbmJzcDs8
-L286cD48L3NwYW4+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gbGFuZz0iRU4tVVMi
-IHN0eWxlPSJjb2xvcjojOTQzNjM0O21zby1mYXJlYXN0LWxhbmd1YWdlOkVOLVVTIj53aGVyZQ0K
-PC9zcGFuPjxzcGFuIGxhbmc9IkVOLVVTIiBzdHlsZT0iZm9udC1mYW1pbHk6Q29uc29sYXM7Y29s
-b3I6Izk0MzYzNDttc28tZmFyZWFzdC1sYW5ndWFnZTpFTi1VUyI+TElOSy5jPC9zcGFuPjxzcGFu
-IGxhbmc9IkVOLVVTIiBzdHlsZT0iY29sb3I6Izk0MzYzNDttc28tZmFyZWFzdC1sYW5ndWFnZTpF
-Ti1VUyI+IGlzIGRlZmluZWQgYXM6PG86cD48L286cD48L3NwYW4+PC9wPg0KPHAgY2xhc3M9Ik1z
-b05vcm1hbCI+PHNwYW4gbGFuZz0iRU4tVVMiIHN0eWxlPSJjb2xvcjojOTQzNjM0O21zby1mYXJl
-YXN0LWxhbmd1YWdlOkVOLVVTIj48bzpwPiZuYnNwOzwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFz
-cz0iTXNvTm9ybWFsIj48c3BhbiBsYW5nPSJFTi1VUyIgc3R5bGU9ImZvbnQtZmFtaWx5OkNvbnNv
-bGFzO2NvbG9yOiM5NDM2MzQ7bXNvLWZhcmVhc3QtbGFuZ3VhZ2U6RU4tVVMiPkxJTksuYyA9ICQo
-Q0MpICQoQ0ZMQUdTKSAkKENQUEZMQUdTKSAkKExERkxBR1MpICQoVEFSR0VUX0FSQ0gpPG86cD48
-L286cD48L3NwYW4+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gbGFuZz0iRU4tVVMi
-IHN0eWxlPSJjb2xvcjojOTQzNjM0O21zby1mYXJlYXN0LWxhbmd1YWdlOkVOLVVTIj48bzpwPiZu
-YnNwOzwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBsYW5nPSJF
-Ti1VUyIgc3R5bGU9ImNvbG9yOiM5NDM2MzQ7bXNvLWZhcmVhc3QtbGFuZ3VhZ2U6RU4tVVMiPih5
-b3UgY2FuIHNlZSB0aGUgZGVmYXVsdCBydWxlcyBieSBydW5uaW5nDQo8L3NwYW4+PHNwYW4gbGFu
-Zz0iRU4tVVMiIHN0eWxlPSJmb250LWZhbWlseTpDb25zb2xhcztjb2xvcjojOTQzNjM0O21zby1m
-YXJlYXN0LWxhbmd1YWdlOkVOLVVTIj5tYWtlIC1wPC9zcGFuPjxzcGFuIGxhbmc9IkVOLVVTIiBz
-dHlsZT0iY29sb3I6Izk0MzYzNDttc28tZmFyZWFzdC1sYW5ndWFnZTpFTi1VUyI+IGFueXdoZXJl
-IHdoZXJlIHRoZXJlIGlzbuKAmXQgYSBNYWtlZmlsZSkuPG86cD48L286cD48L3NwYW4+PC9wPg0K
-PHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gbGFuZz0iRU4tVVMiIHN0eWxlPSJjb2xvcjojOTQz
-NjM0O21zby1mYXJlYXN0LWxhbmd1YWdlOkVOLVVTIj48bzpwPiZuYnNwOzwvbzpwPjwvc3Bhbj48
-L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBsYW5nPSJFTi1VUyIgc3R5bGU9ImNvbG9y
-OiM5NDM2MzQ7bXNvLWZhcmVhc3QtbGFuZ3VhZ2U6RU4tVVMiPkkgaGF2ZSBub3cgYWxzbyBhcHBs
-aWVkIHRoZSBwYXRjaCBmb3IgdGhlIHJ0Yy10b29scyByZWNpcGUuIEkgdGhlbiByZW1vdmVkIHRo
-ZQ0KPC9zcGFuPjxzcGFuIGxhbmc9IkVOLVVTIiBzdHlsZT0iZm9udC1mYW1pbHk6Q29uc29sYXM7
-Y29sb3I6Izk0MzYzNDttc28tZmFyZWFzdC1sYW5ndWFnZTpFTi1VUyI+VEFSR0VUX0NDX0FSQ0g8
-L3NwYW4+PHNwYW4gbGFuZz0iRU4tVVMiIHN0eWxlPSJjb2xvcjojOTQzNjM0O21zby1mYXJlYXN0
-LWxhbmd1YWdlOkVOLVVTIj4gbGluZSBmcm9tIGl0IGFuZCBidWlsdCBpdCB3aXRob3V0IHByb2Js
-ZW1zLjxvOnA+PC9vOnA+PC9zcGFuPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIGxh
-bmc9IkVOLVVTIiBzdHlsZT0iY29sb3I6Izk0MzYzNDttc28tZmFyZWFzdC1sYW5ndWFnZTpFTi1V
-UyI+PG86cD4mbmJzcDs8L286cD48L3NwYW4+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNw
-YW4gbGFuZz0iRU4tVVMiIHN0eWxlPSJjb2xvcjojOTQzNjM0O21zby1mYXJlYXN0LWxhbmd1YWdl
-OkVOLVVTIj5ARmFiaW86IEFyZSB5b3Ugc3VyZSB5b3UgYnVpbHQgd2l0aCB0aGUgY29ycmVjdCB2
-ZXJzaW9uIG9mIHRoZSByZWNpcGUgYW5kIE1ha2VmaWxlIHdoZW4geW91IGdvdCB0aGUgZXJyb3Ig
-YWJvdXQgR05VX0hBU0g/IEJlY2F1c2UgaXQgc2hvdWxkIHdvcmsgKGFuZCBJ4oCZdmUgdmVyaWZp
-ZWQgdGhhdA0KIHRoZSBmaWxlcyBJIGJ1aWx0IGhhdmUgdGhlIEdOVV9IQVNIIGFuZCBJIG5ldmVy
-IGJ1aWx0IHdpdGggdGhlIDwvc3Bhbj48c3BhbiBsYW5nPSJFTi1VUyIgc3R5bGU9ImZvbnQtZmFt
-aWx5OkNvbnNvbGFzO2NvbG9yOiM5NDM2MzQ7bXNvLWZhcmVhc3QtbGFuZ3VhZ2U6RU4tVVMiPlRB
-UkdFVF9DQ19BUkNIPC9zcGFuPjxzcGFuIGxhbmc9IkVOLVVTIiBzdHlsZT0iY29sb3I6Izk0MzYz
-NDttc28tZmFyZWFzdC1sYW5ndWFnZTpFTi1VUyI+IGxpbmUgaW4NCiB0aGUgcmVjaXBlKS48bzpw
-PjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBsYW5nPSJFTi1V
-UyIgc3R5bGU9ImNvbG9yOiM5NDM2MzQ7bXNvLWZhcmVhc3QtbGFuZ3VhZ2U6RU4tVVMiPjxvOnA+
-Jm5ic3A7PC9vOnA+PC9zcGFuPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIGxhbmc9
-IkVOLVVTIiBzdHlsZT0iY29sb3I6Izk0MzYzNDttc28tZmFyZWFzdC1sYW5ndWFnZTpFTi1VUyI+
-Ly9QZXRlcjxvOnA+PC9vOnA+PC9zcGFuPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFu
-IGxhbmc9IkVOLVVTIiBzdHlsZT0iY29sb3I6Izk0MzYzNDttc28tZmFyZWFzdC1sYW5ndWFnZTpF
-Ti1VUyI+PG86cD4mbmJzcDs8L286cD48L3NwYW4+PC9wPg0KPGRpdiBzdHlsZT0iYm9yZGVyOm5v
-bmU7Ym9yZGVyLWxlZnQ6c29saWQgYmx1ZSAxLjVwdDtwYWRkaW5nOjBjbSAwY20gMGNtIDQuMHB0
-Ij4NCjxkaXY+DQo8ZGl2IHN0eWxlPSJib3JkZXI6bm9uZTtib3JkZXItdG9wOnNvbGlkICNFMUUx
-RTEgMS4wcHQ7cGFkZGluZzozLjBwdCAwY20gMGNtIDBjbSI+DQo8cCBjbGFzcz0iTXNvTm9ybWFs
-Ij48Yj48c3BhbiBsYW5nPSJFTi1VUyI+RnJvbTo8L3NwYW4+PC9iPjxzcGFuIGxhbmc9IkVOLVVT
-Ij4gS2hlbSBSYWogJmx0O3Jhai5raGVtQGdtYWlsLmNvbSZndDsNCjxicj4NCjxiPlNlbnQ6PC9i
-PiBkZW4gMjggamFudWFyaSAyMDIyIDE2OjMzPGJyPg0KPGI+VG86PC9iPiBGYWJpbyBFc3RldmFt
-ICZsdDtmZXN0ZXZhbUBnbWFpbC5jb20mZ3Q7PGJyPg0KPGI+Q2M6PC9iPiBGYWJpbyBFc3RldmFt
-ICZsdDtmZXN0ZXZhbUBkZW54LmRlJmd0OzsgUGV0ZXIgS2plbGxlcnN0ZWR0ICZsdDtwZXRlci5r
-amVsbGVyc3RlZHRAYXhpcy5jb20mZ3Q7OyBhbGV4YW5kcmUuYmVsbG9uaUBib290bGluLmNvbTsg
-aHNAZGVueC5kZTsgb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc7IG90
-YXZpby5zYWx2YWRvckBvc3N5c3RlbXMuY29tLmJyPGJyPg0KPGI+U3ViamVjdDo8L2I+IFJlOiBb
-b2VdIFtQQVRDSCB2MyBtZXRhLW9lXSBydGMtdG9vbHM6IEFkZCBhIHJlY2lwZTxvOnA+PC9vOnA+
-PC9zcGFuPjwvcD4NCjwvZGl2Pg0KPC9kaXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48bzpwPiZu
-YnNwOzwvbzpwPjwvcD4NCjxkaXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48bzpwPiZuYnNwOzwv
-bzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxvOnA+Jm5ic3A7
-PC9vOnA+PC9wPg0KPGRpdj4NCjxkaXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj5PbiBGcmksIEph
-biAyOCwgMjAyMiBhdCAyOjI4IEFNIEZhYmlvIEVzdGV2YW0gJmx0OzxhIGhyZWY9Im1haWx0bzpm
-ZXN0ZXZhbUBnbWFpbC5jb20iPmZlc3RldmFtQGdtYWlsLmNvbTwvYT4mZ3Q7IHdyb3RlOjxvOnA+
-PC9vOnA+PC9wPg0KPC9kaXY+DQo8YmxvY2txdW90ZSBzdHlsZT0iYm9yZGVyOm5vbmU7Ym9yZGVy
-LWxlZnQ6c29saWQgI0NDQ0NDQyAxLjBwdDtwYWRkaW5nOjBjbSAwY20gMGNtIDYuMHB0O21hcmdp
-bi1sZWZ0OjQuOHB0O21hcmdpbi1yaWdodDowY20iPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+SGkg
-UGV0ZXIsPGJyPg0KPGJyPg0KT24gRnJpLCBKYW4gMjgsIDIwMjIgYXQgMTo0OCBBTSBQZXRlciBL
-amVsbGVyc3RlZHQ8YnI+DQombHQ7PGEgaHJlZj0ibWFpbHRvOnBldGVyLmtqZWxsZXJzdGVkdEBh
-eGlzLmNvbSIgdGFyZ2V0PSJfYmxhbmsiPnBldGVyLmtqZWxsZXJzdGVkdEBheGlzLmNvbTwvYT4m
-Z3Q7IHdyb3RlOjxicj4NCjxicj4NCiZndDsgJmd0OyAmIzQzO1RBUkdFVF9DQ19BUkNIICYjNDM7
-PSAmcXVvdDske0xERkxBR1N9JnF1b3Q7PGJyPg0KJmd0Ozxicj4NCiZndDsgWW91IGZvcmdvdCB0
-byByZW1vdmUgdGhlIFRBR0VUX0NDX0FSQ0ggbGluZS48YnI+DQo8YnI+DQo8c3BhbiBsYW5nPSJF
-Ti1VUyI+SWYgSSByZW1vdmUgdGhpcyBsaW5lLCB0aGUgZm9sbG93aW5nIGVycm9yIGhhcHBlbnM6
-PGJyPg0KPGJyPg0KRVJST1I6IHJ0Yy10b29scy0xLjAuMC1yMCBkb19wYWNrYWdlX3FhOiBRQSBJ
-c3N1ZTogRmlsZTxicj4NCi91c3IvYmluL3J0Yy1zeW5jIGluIHBhY2thZ2UgcnRjLXRvb2xzIGRv
-ZXNuJ3QgaGF2ZSBHTlVfSEFTSCAoZGlkbid0PHNwYW4gc3R5bGU9ImNvbG9yOiM5NDM2MzQiPg0K
-PC9zcGFuPnBhc3MgTERGTEFHUz8pPGJyPg0KRmlsZSAvdXNyL2Jpbi9ydGMgaW4gcGFja2FnZSBy
-dGMtdG9vbHMgZG9lc24ndCBoYXZlIEdOVV9IQVNIIChkaWRuJ3Q8c3BhbiBzdHlsZT0iY29sb3I6
-Izk0MzYzNCI+DQo8L3NwYW4+cGFzcyBMREZMQUdTPyk8YnI+DQpGaWxlIC91c3IvYmluL3J0Yy1y
-YW5nZSBpbiBwYWNrYWdlIHJ0Yy10b29scyBkb2Vzbid0IGhhdmUgR05VX0hBU0g8c3BhbiBzdHls
-ZT0iY29sb3I6Izk0MzYzNCI+DQo8L3NwYW4+KGRpZG4ndCBwYXNzIExERkxBR1M/KSA8L3NwYW4+
-W2xkZmxhZ3NdPGJyPg0KRVJST1I6IHJ0Yy10b29scy0xLjAuMC1yMCBkb19wYWNrYWdlX3FhOiBR
-QSBydW4gZm91bmQgZmF0YWwgZXJyb3JzLjxicj4NClBsZWFzZSBjb25zaWRlciBmaXhpbmcgdGhl
-bS48YnI+DQo8YnI+DQpBbnkgc3VnZ2VzdGlvbnMgYXMgdG8gaG93IHRoaXMgc2hvdWxkIGJlIGZp
-eGVkPzxvOnA+PC9vOnA+PC9wPg0KPC9ibG9ja3F1b3RlPg0KPGRpdj4NCjxwIGNsYXNzPSJNc29O
-b3JtYWwiPjxvOnA+Jm5ic3A7PC9vOnA+PC9wPg0KPC9kaXY+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1z
-b05vcm1hbCI+SSBhbHJlYWR5IHN1Z2dlc3RlZCBpbiBlYXJsaWVyIGVtYWlsIHRvIGFkZCBMREZM
-QUdTIGluIG1ha2VmaWxlIHJ1bGVzJm5ic3A7PG86cD48L286cD48L3A+DQo8L2Rpdj4NCjxibG9j
-a3F1b3RlIHN0eWxlPSJib3JkZXI6bm9uZTtib3JkZXItbGVmdDpzb2xpZCAjQ0NDQ0NDIDEuMHB0
-O3BhZGRpbmc6MGNtIDBjbSAwY20gNi4wcHQ7bWFyZ2luLWxlZnQ6NC44cHQ7bWFyZ2luLXJpZ2h0
-OjBjbSI+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48YnI+DQo8YnI+DQpUaGFua3M8bzpwPjwvbzpw
-PjwvcD4NCjwvYmxvY2txdW90ZT4NCjwvZGl2Pg0KPC9kaXY+DQo8L2Rpdj4NCjwvZGl2Pg0KPC9i
-b2R5Pg0KPC9odG1sPg0K
-
---_000_afd084404e704b268d2f6c6adb104bc3axiscom_--
+On 2022-01-28 09:05, Trevor Gamblin wrote:
+> Backport three patches from 9.0.0 upstream to fix CVES.
+>
+> Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> ---
+>   ...Handle-case-where-path-count-is-zero.patch | 75 +++++++++++++++++++
+>   .../0001-Initialize-coordinates-to-zero.patch | 45 +++++++++++
+>   ...Restrict-builtins-for-ImageMath.eval.patch | 60 +++++++++++++++
+>   .../python/python3-pillow_8.2.0.bb            |  3 +
+>   4 files changed, 183 insertions(+)
+>   create mode 100644 meta-python/recipes-devtools/python/python3-pillow/0001-Handle-case-where-path-count-is-zero.patch
+>   create mode 100644 meta-python/recipes-devtools/python/python3-pillow/0001-Initialize-coordinates-to-zero.patch
+>   create mode 100644 meta-python/recipes-devtools/python/python3-pillow/0001-Restrict-builtins-for-ImageMath.eval.patch
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-pillow/0001-Handle-case-where-path-count-is-zero.patch b/meta-python/recipes-devtools/python/python3-pillow/0001-Handle-case-where-path-count-is-zero.patch
+> new file mode 100644
+> index 000000000..26b741f9c
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-pillow/0001-Handle-case-where-path-count-is-zero.patch
+> @@ -0,0 +1,75 @@
+> +From c48271ab354db49cdbd740bc45e13be4f0f7993c Mon Sep 17 00:00:00 2001
+> +From: Andrew Murray <radarhere@users.noreply.github.com>
+> +Date: Mon, 6 Dec 2021 22:25:14 +1100
+> +Subject: [PATCH] Handle case where path count is zero
+> +
+> +CVE: CVE-2022-22816
+> +
+> +Upstream-Status: Backport
+> +(https://github.com/python-pillow/Pillow/pull/5920/commits/c48271ab354db49cdbd740bc45e13be4f0f7993c)
+> +
+> +---
+> + Tests/test_imagepath.py |  1 +
+> + src/path.c              | 33 +++++++++++++++++++--------------
+> + 2 files changed, 20 insertions(+), 14 deletions(-)
+> +
+> +diff --git a/Tests/test_imagepath.py b/Tests/test_imagepath.py
+> +index cd850bb1..b18271cc 100644
+> +--- a/Tests/test_imagepath.py
+> ++++ b/Tests/test_imagepath.py
+> +@@ -90,6 +90,7 @@ def test_path_odd_number_of_coordinates():
+> +     [
+> +         ([0, 1, 2, 3], (0.0, 1.0, 2.0, 3.0)),
+> +         ([3, 2, 1, 0], (1.0, 0.0, 3.0, 2.0)),
+> ++        (0, (0.0, 0.0, 0.0, 0.0)),
+> +         (1, (0.0, 0.0, 0.0, 0.0)),
+> +     ],
+> + )
+> +diff --git a/src/path.c b/src/path.c
+> +index 64c767cb..dea274ee 100644
+> +--- a/src/path.c
+> ++++ b/src/path.c
+> +@@ -327,21 +327,26 @@ path_getbbox(PyPathObject *self, PyObject *args) {
+> +
+> +     xy = self->xy;
+> +
+> +-    x0 = x1 = xy[0];
+> +-    y0 = y1 = xy[1];
+> ++    if (self->count == 0) {
+> ++        x0 = x1 = 0;
+> ++        y0 = y1 = 0;
+> ++    } else {
+> ++        x0 = x1 = xy[0];
+> ++        y0 = y1 = xy[1];
+> +
+> +-    for (i = 1; i < self->count; i++) {
+> +-        if (xy[i + i] < x0) {
+> +-            x0 = xy[i + i];
+> +-        }
+> +-        if (xy[i + i] > x1) {
+> +-            x1 = xy[i + i];
+> +-        }
+> +-        if (xy[i + i + 1] < y0) {
+> +-            y0 = xy[i + i + 1];
+> +-        }
+> +-        if (xy[i + i + 1] > y1) {
+> +-            y1 = xy[i + i + 1];
+> ++        for (i = 1; i < self->count; i++) {
+> ++            if (xy[i + i] < x0) {
+> ++                x0 = xy[i + i];
+> ++            }
+> ++            if (xy[i + i] > x1) {
+> ++                x1 = xy[i + i];
+> ++            }
+> ++            if (xy[i + i + 1] < y0) {
+> ++                y0 = xy[i + i + 1];
+> ++            }
+> ++            if (xy[i + i + 1] > y1) {
+> ++                y1 = xy[i + i + 1];
+> ++            }
+> +         }
+> +     }
+> +
+> +--
+> +2.33.0
+> +
+> diff --git a/meta-python/recipes-devtools/python/python3-pillow/0001-Initialize-coordinates-to-zero.patch b/meta-python/recipes-devtools/python/python3-pillow/0001-Initialize-coordinates-to-zero.patch
+> new file mode 100644
+> index 000000000..758531f67
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-pillow/0001-Initialize-coordinates-to-zero.patch
+> @@ -0,0 +1,45 @@
+> +From 1e092419b6806495c683043ab3feb6ce264f3b9c Mon Sep 17 00:00:00 2001
+> +From: Andrew Murray <radarhere@users.noreply.github.com>
+> +Date: Mon, 6 Dec 2021 22:24:19 +1100
+> +Subject: [PATCH] Initialize coordinates to zero
+> +
+> +CVE: CVE-2022-22815
+> +
+> +Upstream-Status: Backport
+> +(https://github.com/python-pillow/Pillow/pull/5920/commits/1e092419b6806495c683043ab3feb6ce264f3b9c)
+> +
+> +Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> +
+> +---
+> + Tests/test_imagepath.py | 1 +
+> + src/path.c              | 2 +-
+> + 2 files changed, 2 insertions(+), 1 deletion(-)
+> +
+> +diff --git a/Tests/test_imagepath.py b/Tests/test_imagepath.py
+> +index 0835fdb4..cd850bb1 100644
+> +--- a/Tests/test_imagepath.py
+> ++++ b/Tests/test_imagepath.py
+> +@@ -90,6 +90,7 @@ def test_path_odd_number_of_coordinates():
+> +     [
+> +         ([0, 1, 2, 3], (0.0, 1.0, 2.0, 3.0)),
+> +         ([3, 2, 1, 0], (1.0, 0.0, 3.0, 2.0)),
+> ++        (1, (0.0, 0.0, 0.0, 0.0)),
+> +     ],
+> + )
+> + def test_getbbox(coords, expected):
+> +diff --git a/src/path.c b/src/path.c
+> +index 4764c58a..64c767cb 100644
+> +--- a/src/path.c
+> ++++ b/src/path.c
+> +@@ -57,7 +57,7 @@ alloc_array(Py_ssize_t count) {
+> +     if ((unsigned long long)count > (SIZE_MAX / (2 * sizeof(double))) - 1) {
+> +         return ImagingError_MemoryError();
+> +     }
+> +-    xy = malloc(2 * count * sizeof(double) + 1);
+> ++    xy = calloc(2 * count * sizeof(double) + 1, sizeof(double));
+> +     if (!xy) {
+> +         ImagingError_MemoryError();
+> +     }
+> +--
+> +2.33.0
+> +
+> diff --git a/meta-python/recipes-devtools/python/python3-pillow/0001-Restrict-builtins-for-ImageMath.eval.patch b/meta-python/recipes-devtools/python/python3-pillow/0001-Restrict-builtins-for-ImageMath.eval.patch
+> new file mode 100644
+> index 000000000..4c266cc41
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-pillow/0001-Restrict-builtins-for-ImageMath.eval.patch
+> @@ -0,0 +1,60 @@
+> +From 8531b01d6cdf0b70f256f93092caa2a5d91afc11 Mon Sep 17 00:00:00 2001
+> +From: Andrew Murray <radarhere@users.noreply.github.com>
+> +Date: Sun, 2 Jan 2022 17:23:49 +1100
+> +Subject: [PATCH] Restrict builtins for ImageMath.eval
+> +
+> +CVE: CVE-2022-22817
+> +
+> +Upstream-Status: Backport
+> +(https://github.com/python-pillow/Pillow/pull/5923/commits/8531b01d6cdf0b70f256f93092caa2a5d91afc11)
+> +
+> +Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> +
+> +---
+> + Tests/test_imagemath.py     | 7 +++++++
+> + src/PIL/ImageMath.py        | 7 ++++++-
+> + 2 files changed, 13 insertions(+), 1 deletion(-)
+> +
+> +diff --git a/Tests/test_imagemath.py b/Tests/test_imagemath.py
+> +index e7afd1ab..25811aa8 100644
+> +--- a/Tests/test_imagemath.py
+> ++++ b/Tests/test_imagemath.py
+> +@@ -1,3 +1,5 @@
+> ++import pytest
+> ++
+> + from PIL import Image, ImageMath
+> +
+> +
+> +@@ -50,6 +52,11 @@ def test_ops():
+> +     assert pixel(ImageMath.eval("float(B)**33", images)) == "F 8589934592.0"
+> +
+> +
+> ++def test_prevent_exec():
+> ++    with pytest.raises(ValueError):
+> ++        ImageMath.eval("exec('pass')")
+> ++
+> ++
+> + def test_logical():
+> +     assert pixel(ImageMath.eval("not A", images)) == 0
+> +     assert pixel(ImageMath.eval("A and B", images)) == "L 2"
+> +diff --git a/src/PIL/ImageMath.py b/src/PIL/ImageMath.py
+> +index 7f9c88e1..06bea800 100644
+> +--- a/src/PIL/ImageMath.py
+> ++++ b/src/PIL/ImageMath.py
+> +@@ -246,7 +246,12 @@ def eval(expression, _dict={}, **kw):
+> +         if hasattr(v, "im"):
+> +             args[k] = _Operand(v)
+> +
+> +-    out = builtins.eval(expression, args)
+> ++    code = compile(expression, "<string>", "eval")
+> ++    for name in code.co_names:
+> ++        if name not in args and name != "abs":
+> ++            raise ValueError(f"'{name}' not allowed")
+> ++
+> ++    out = builtins.eval(expression, {"__builtins": {"abs": abs}}, args)
+> +     try:
+> +         return out.im
+> +     except AttributeError:
+> +--
+> +2.33.0
+> +
+> diff --git a/meta-python/recipes-devtools/python/python3-pillow_8.2.0.bb b/meta-python/recipes-devtools/python/python3-pillow_8.2.0.bb
+> index 8279544a8..4393d9356 100644
+> --- a/meta-python/recipes-devtools/python/python3-pillow_8.2.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pillow_8.2.0.bb
+> @@ -11,6 +11,9 @@ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=8.2.x;protocol=https
+>              file://0001-Limit-sprintf-modes-to-10-characters.patch \
+>              file://0001-Use-snprintf-instead-of-sprintf.patch \
+>              file://0001-Raise-ValueError-if-color-specifier-is-too-long.patch \
+> +           file://0001-Initialize-coordinates-to-zero.patch \
+> +           file://0001-Handle-case-where-path-count-is-zero.patch \
+> +           file://0001-Restrict-builtins-for-ImageMath.eval.patch \
+>   "
+>   SRCREV ?= "e0e353c0ef7516979a9aedce3792596649ce4433"
+>   
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#95147): https://lists.openembedded.org/g/openembedded-devel/message/95147
+> Mute This Topic: https://lists.openembedded.org/mt/88744867/3616776
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [trevor.gamblin@windriver.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
