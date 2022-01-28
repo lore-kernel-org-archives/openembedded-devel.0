@@ -1,152 +1,179 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 003DAC433F5
-	for <webhook@archiver.kernel.org>; Fri, 28 Jan 2022 02:34:35 +0000 (UTC)
-Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com
- [209.85.219.51])
- by mx.groups.io with SMTP id smtpd.web11.2155.1643337274666188937
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 13708C433EF
+	for <webhook@archiver.kernel.org>; Fri, 28 Jan 2022 04:48:30 +0000 (UTC)
+Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
+ by mx.groups.io with SMTP id smtpd.web10.3302.1643345308481166936
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jan 2022 18:34:34 -0800
+ Thu, 27 Jan 2022 20:48:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ELDNQ/Ij;
- spf=pass (domain: gmail.com, ip: 209.85.219.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f51.google.com with SMTP id t7so4668866qvj.0
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Jan 2022 18:34:34 -0800 (PST)
+ dkim=fail reason="signature has expired" header.i=@axis.com
+ header.s=axis-central1 header.b=JbvfaU6I;
+ spf=pass (domain: axis.com, ip: 195.60.68.17,
+ mailfrom: peter.kjellerstedt@axis.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=IQ7ron7UyuffqtDnsGOIAplRI5JAQajk8FgC/JPM340=;
-        b=ELDNQ/IjYWaqDKZoy3zeiB1t1QkZqIDVGuklaG/FaySeh4ERBzyHAoccJxbdvEvtpy
-         wS5d/E6fU2x3QVEpMqSNKUzHjzpWGfyy6D792dDkupyQkded+0hxW+/zInaS6zasICx0
-         Q6lgJY/tXvVpeZ29vzEyA2+tYc4B7laVYdQd5/9I1llSqb/MnzDR1J840GmXDkAdAbGi
-         CQt7qV9O+Wuuf3YtfERSO6H7PXxS6Kqr4CiCrvshLzvThy7kI8CY+J7SZ6R75PM521ez
-         TMQuG0KOVzkISDE4RrRq1K2l3kV/Ho2SF3DF/bnHrg8mp8YV5ubCvKMH/V4Mnqg4d1Dz
-         c7dQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=IQ7ron7UyuffqtDnsGOIAplRI5JAQajk8FgC/JPM340=;
-        b=zGb0pPOJp4Zx8+22YFalGZnKMe0UdBK6N8cPyBcPNSuazqkYRL0HZjnndr7ixDVJS8
-         dc17XRsDVUwQUatHafSzWuCrTbk8MV+lz/c1Y3WVYEc3f8sJUIFjgCN7DLIUr12k8OAw
-         JlfRxTxmkTkOA9eqXJfruPwKhEBw61vDBzA+XgLQi8t+tLo9Ub3M0WHn4VLfCYiKzA+M
-         7uItSJr1FFbS7sBRzP5iQ9Mbnoi5uV5qEGKXo70ay9T3DBCxCY8xqHzTskJXWpAPN8jl
-         YPKFHUxKqXkdGqnJqGgUwM7fFhrikBYWhnjmmapaNMHWtMRrCGsFyt3k814A+9golnBK
-         6wlw==
-X-Gm-Message-State: AOAM530Tg/myG6YiXayymzhkcYuyVdi2ZPzrLPnOIlfFGKzQmhy5U6x3
-	kJiZ3ysGf/R/QWN9s6MLvHd7Sum1zwKJJVI0DGI=
-X-Google-Smtp-Source: 
- ABdhPJyztCTH0u7FSe2XBd5hgBdzub8blBtw3dWkBQToNc0toy1ItexZ90QnIX51YT69smPJ/ciP0nTWSYohsL3Su3g=
-X-Received: by 2002:a05:6214:19ec:: with SMTP id
- q12mr5835296qvc.36.1643337273737;
- Thu, 27 Jan 2022 18:34:33 -0800 (PST)
-MIME-Version: 1.0
-References: <20220128013536.2809159-1-limon.anibal@gmail.com>
- <CAMKF1sog0kc5MYaZzJ161L+g4JgFBUKjg0D4UNKNJQZKznU2Wg@mail.gmail.com>
- <CAPS-YPAzCpUkB3SP-CQ+-c9HLgxvrr7Juv3Y1ZDOL6kWkHTvRQ@mail.gmail.com>
-In-Reply-To: 
- <CAPS-YPAzCpUkB3SP-CQ+-c9HLgxvrr7Juv3Y1ZDOL6kWkHTvRQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 27 Jan 2022 18:34:07 -0800
-Message-ID: 
- <CAMKF1soQc2Ape=LZy5i+dKCnfFCvC8YUxN3TfCnSTtueM9h5TQ@mail.gmail.com>
-Subject: Re: [oe] [meta-openembedded][PATCH 1/2] meta-oe/recipes-devtools: Add
- python3-apt bindings
-To: =?UTF-8?Q?Anibal_Lim=C3=B3n?= <limon.anibal@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	=?UTF-8?B?QW7DrWJhbCBMaW3Ds24=?= <anibal@rzerosystems.com>
-Content-Type: text/plain; charset="UTF-8"
+  d=axis.com; q=dns/txt; s=axis-central1; t=1643345308;
+  x=1674881308;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=84tvhlJjiP8m3cVCQlAJbs5d5UA4/u+izEnBqmF0TOw=;
+  b=JbvfaU6IumIw7jAjpjrNvGo66lkFukG+FB3T3nXWw4vONhbER9TWtW0F
+   1ZBZUh5yciVE0qiVH6mGa6T4dtqyVdcD3Rn1841gLBr2Wj1qvgTHCPFdg
+   5+oiDJ7ozRaAUpewMSwuqLF7Rjc08dsuydSN9bZjfghmD7DvAS1NIyruN
+   JU8PVBqh80hri65cZX1Q7rOWiOKt8Kz9gtySNhptwRWcT1BCsLy3yJY1i
+   MKkFqR+qdQDYYuSAW6HlWUrnlfH2YB9710M8URPrkW0q74yEAt3/+if6I
+   pmo+oDgOpUMbXOmAkbuu9UczEiZNSU7XHosMwOt/apf7gtwXb1YCcLiG9
+   g==;
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Fabio Estevam <festevam@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+CC: "otavio.salvador@ossystems.com.br" <otavio.salvador@ossystems.com.br>,
+	"hs@denx.de" <hs@denx.de>, "alexandre.belloni@bootlin.com"
+	<alexandre.belloni@bootlin.com>, "raj.khem@gmail.com" <raj.khem@gmail.com>,
+	Fabio Estevam <festevam@denx.de>
+Subject: RE: [oe] [PATCH v3 meta-oe] rtc-tools: Add a recipe
+Thread-Topic: [oe] [PATCH v3 meta-oe] rtc-tools: Add a recipe
+Thread-Index: AQHYE9KcsmVUkEz+ukGtlSAl8TCAkqx323pA
+Date: Fri, 28 Jan 2022 04:48:25 +0000
+Message-ID: <d204889ebaf04514b6ec2863a5104052@axis.com>
+References: <20220127230607.35740-1-festevam@gmail.com>
+In-Reply-To: <20220127230607.35740-1-festevam@gmail.com>
+Accept-Language: en-US, sv-SE
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.0.5.60]
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 28 Jan 2022 02:34:35 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 28 Jan 2022 04:48:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95139
+ https://lists.openembedded.org/g/openembedded-devel/message/95142
 
-On Thu, Jan 27, 2022 at 6:29 PM Anibal Lim=C3=B3n <limon.anibal@gmail.com> =
-wrote:
->
->
->
-> On Thu, Jan 27, 2022 at 8:27 PM Khem Raj <raj.khem@gmail.com> wrote:
->>
->> On Thu, Jan 27, 2022 at 5:35 PM An?bal Lim?n <limon.anibal@gmail.com> wr=
-ote:
->> >
->> > Signed-off-by: An=C3=ADbal Lim=C3=B3n <limon.anibal@gmail.com>
->> > Signed-off-by: An=C3=ADbal Lim=C3=B3n <anibal@rzerosystems.com>
->> > ---
->> >  .../python/python3-apt_2.3.0.bb                 | 17 ++++++++++++++++=
-+
->> >  1 file changed, 17 insertions(+)
->> >  create mode 100644 meta-oe/recipes-devtools/python/python3-apt_2.3.0.=
-bb
->> >
->> > diff --git a/meta-oe/recipes-devtools/python/python3-apt_2.3.0.bb b/me=
-ta-oe/recipes-devtools/python/python3-apt_2.3.0.bb
->> > new file mode 100644
->> > index 000000000..4e7138b33
->> > --- /dev/null
->> > +++ b/meta-oe/recipes-devtools/python/python3-apt_2.3.0.bb
->> > @@ -0,0 +1,17 @@
->> > +SUMMARY =3D "Python-apt is a wrapper to use features of apt from pyth=
-on."
->> > +LICENSE =3D "GPLv2 & Permissive"
->>
->> Permissive is not a standard SPDX license. So please explain it better.
->
->
-> Yep, this is a topic, comes from debian/copyright file in the repo, next,
->
-> https://salsa.debian.org/apt-team/python-apt/-/blob/main/debian/copyright=
-#L10
->
-> Any idea how to handle this?.
+> -----Original Message-----
+> From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists=
+.openembedded.org> On Behalf Of Fabio Estevam
+> Sent: den 28 januari 2022 00:06
+> To: openembedded-devel@lists.openembedded.org
+> Cc: otavio.salvador@ossystems.com.br; hs@denx.de; alexandre.belloni@bootl=
+in.com; raj.khem@gmail.com; Peter Kjellerstedt <peter.kjellerstedt@axis.com=
+>; Fabio Estevam <festevam@denx.de>
+> Subject: [oe] [PATCH v3 meta-oe] rtc-tools: Add a recipe
+>=20
+> From: Fabio Estevam <festevam@denx.de>
+>=20
+> rtc-tools is a useful utility developed by Alexandre Belloni
+> for testing RTC kernel drivers, such as y2038 support.
+>=20
+> Based on the initial recipe from Heiko Schocher <hs@denx.de>.
+>=20
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
+> ---
+>  .../0001-rtc-tools-Add-a-Makefile.patch       | 44 +++++++++++++++++++
+>  .../rtc-tools/rtc-tools_1.0.0.bb              | 18 ++++++++
+>  2 files changed, 62 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/rtc-tools/rtc-tools/0001-rtc-=
+tools-Add-a-Makefile.patch
+>  create mode 100644 meta-oe/recipes-support/rtc-tools/rtc-tools_1.0.0.bb
+>=20
+> diff --git a/meta-oe/recipes-support/rtc-tools/rtc-tools/0001-rtc-tools-A=
+dd-a-Makefile.patch b/meta-oe/recipes-support/rtc-tools/rtc-tools/0001-rtc-=
+tools-Add-a-Makefile.patch
+> new file mode 100644
+> index 000000000000..c1d1fa97eaa3
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/rtc-tools/rtc-tools/0001-rtc-tools-Add-a-
+> Makefile.patch
+> @@ -0,0 +1,44 @@
+> +From b19924f797d69475b1857272231500c97ba9959c Mon Sep 17 00:00:00 2001
+> +From: Fabio Estevam <festevam@denx.de>
+> +Date: Thu, 27 Jan 2022 18:40:29 -0300
+> +Subject: [PATCH rtc-tools v2] rtc-tools: Add a Makefile
+> +
+> +Add a Makefile to make installation and uninstallation
+> +process easier.
+> +
+> +Upstream-Status: Submitted [https://marc.info/?l=3Dlinux-rtc&m=3D1643324=
+26030004&w=3D2]
+> +Signed-off-by: Fabio Estevam <festevam@denx.de>
+> +---
+> +Changes since v1:
+> +- Simplify the Makefile by taking Peter Kjellerstedt's feedback in
+> +the oe-devel list.
 
-I think this is
-https://spdx.org/licenses/FSFAP.html
+This doesn't belong in the Makefile.patch file, it belongs after the=20
+commit message as it relates to the review process and has no bearing=20
+once this is integrated.
 
->
-> Regards,
-> Anibal
->
->>
->>
->> > +LIC_FILES_CHKSUM =3D "file://COPYING.GPL;md5=3D0636e73ff0215e8d672dc4=
-c32c317bb3 \
->> > +                    file://debian/copyright;md5=3D4ed7b6862ca422678b1=
-7e7d4ed592285"
->> > +
->> > +SRC_URI =3D "git://salsa.debian.org/apt-team/python-apt.git;protocol=
-=3Dhttps;branch=3Dmain"
->> > +
->> > +SRCREV =3D "6145b6484d220685edfd922d364afbf065127efe"
->> > +
->> > +S =3D "${WORKDIR}/git"
->> > +
->> > +inherit setuptools3
->> > +
->> > +DEPENDS +=3D "apt"
->> > +RDEPENDS:${PN} +=3D "apt python3-core"
->> > +
->> > +FILES:${PN} =3D "/usr/lib /usr/share/python-apt"
->> > --
->> > 2.34.1
->> >
->> >
->> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> > Links: You receive all messages sent to this group.
->> > View/Reply Online (#95133): https://lists.openembedded.org/g/openembed=
-ded-devel/message/95133
->> > Mute This Topic: https://lists.openembedded.org/mt/88736517/1997914
->> > Group Owner: openembedded-devel+owner@lists.openembedded.org
->> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub=
- [raj.khem@gmail.com]
->> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> >
+> +
+> + Makefile | 16 ++++++++++++++++
+> + 1 file changed, 16 insertions(+)
+> + create mode 100644 Makefile
+> +
+> +diff --git a/Makefile b/Makefile
+> +new file mode 100644
+> +index 0000000..71a4c9c
+> +--- /dev/null
+> ++++ b/Makefile
+> +@@ -0,0 +1,16 @@
+> ++prefix ?=3D /usr
+> ++bindir ?=3D $(prefix)/bin
+> ++
+> ++EXEC =3D rtc-range rtc rtc-sync
+> ++
+> ++all: $(EXEC)
+> ++
+> ++clean:
+> ++	$(RM) $(EXEC)
+> ++
+> ++install:
+> ++	install -d $(DESTDIR)$(bindir)
+> ++	install $(EXEC) $(DESTDIR)$(bindir)
+> ++
+> ++uninstall:
+> ++	$(RM) -r $(addprefix $(DESTDIR)$(bindir)/,$(EXEC))
+> +--
+> +2.25.1
+> +
+> diff --git a/meta-oe/recipes-support/rtc-tools/rtc-tools_1.0.0.bb b/meta-=
+oe/recipes-support/rtc-tools/rtc-tools_1.0.0.bb
+> new file mode 100644
+> index 000000000000..64ea3173d8a4
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/rtc-tools/rtc-tools_1.0.0.bb
+> @@ -0,0 +1,18 @@
+> +SUMMARY =3D "Useful programs to test rtc drivers"
+> +LICENSE =3D "GPL-2.0-only"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D74274e8a218423e49eefdea80bc55=
+038"
+> +
+> +SRC_URI =3D "git://git.kernel.org/pub/scm/linux/kernel/git/abelloni/${BP=
+N}.git;protocol=3Dhttps;branch=3Dmaster \
+> +           file://0001-rtc-tools-Add-a-Makefile.patch \
+> +           "
+> +SRCREV =3D "acc442e7af4e1e783432a43d37f1a7938c692659"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +TARGET_CC_ARCH +=3D "${LDFLAGS}"
+
+You forgot to remove the TAGET_CC_ARCH line.
+
+> +
+> +EXTRA_OEMAKE =3D "DESTDIR=3D${D}"
+> +
+> +do_install() {
+> +	oe_runmake install
+> +}
+> --
+> 2.25.1
+
+//Peter
+
 
