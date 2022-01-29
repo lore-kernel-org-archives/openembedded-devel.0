@@ -1,94 +1,106 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CDD5CC433F5
-	for <webhook@archiver.kernel.org>; Sat, 29 Jan 2022 00:59:23 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com
- [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web10.660.1643417962582839603
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C557C4332F
+	for <webhook@archiver.kernel.org>; Sat, 29 Jan 2022 03:30:05 +0000 (UTC)
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+ by mx.groups.io with SMTP id smtpd.web10.2025.1643427003158462864
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 Jan 2022 16:59:22 -0800
+ Fri, 28 Jan 2022 19:30:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=UyqJbamR;
- spf=pass (domain: gmail.com, ip: 209.85.214.175,
- mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id k17so7766532plk.0
-        for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 Jan 2022 16:59:22 -0800 (PST)
+ dkim=fail reason="signature has expired" header.i=@axis.com
+ header.s=axis-central1 header.b=nir76nkx;
+ spf=pass (domain: axis.com, ip: 195.60.68.18,
+ mailfrom: peter.kjellerstedt@axis.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=CJB6iv8zk6YQJUH8NGgmkGs6UUD5tdIITy1j5V4QKiw=;
-        b=UyqJbamREfaSkln0d6W4E2c6s4RirC8kA0IhRogPHrlvVoxvUJmVF4VjaUyn//AMSi
-         ipR8clvQrIpzG0UpypLCPDN8yioFlYnvoLWwzkTY8NtwUdwdEFJnOj16CSf+tu94vnmr
-         kqkRwSK7MhshAMGEpAX5Je6GLhpvHpauV30EDNe2pvs9K6L3dzMu41bWAPBh2mdePrPN
-         YlnmNRrIezzFbSbZLHbzBzzAuRAUW7AqsMMPpabTVk8GSt16QhzQFQpaR4ojthslHqsB
-         7WRIE3rbzEYJu86pB334lN4WXYfyd7/+oV+a/wDTnngx6+CjfQ44flYgjvLjoUBq1z8d
-         6/1g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=CJB6iv8zk6YQJUH8NGgmkGs6UUD5tdIITy1j5V4QKiw=;
-        b=4WkqfqULTcMC5bzarFhXP7EQDEaVeQ2w/8uUpWXM+Ipy8IPm7gsTJh1Ynf5OK8eEDu
-         WmpMATt+snQ7l68WwZaOFuGF5MNvhe/9Th4Gey2jXNgxb2TRkck+42eDq5TyOGEABxMf
-         poXZimfp+qchC2PbVYsXOPNVRgNBun3eCZLMbQ0ONBD8zO7rYOEI+3cI86wJgMUcQfqt
-         NTkbc16L0waCKXJW8T/UvXoUjbC8eDH7dG88abRLujCoQS9nYSUd1Sw2HJpXmuzC6I41
-         ePwtHOyyhtz5FegOWA10xJMoat4G6hKmqSUvJ+8YwEJaaSZ8b0OjzHFeAxkwcat4djPA
-         wp5g==
-X-Gm-Message-State: AOAM531xbH6bfTcnmBuC+H7N+53zpO7fPUQMuAH4emxLa5OioMwiXw/I
-	PbHYgbiHzyeX/atfSekpNzOMIkqqherz0g==
-X-Google-Smtp-Source: 
- ABdhPJyo7/1wj5lVAmE9i3KsyHjw22FXTIVru4XvCZqxX/+z8+D9sMoaSusVzVJKOki7sPS2eG8iwA==
-X-Received: by 2002:a17:90a:7e10:: with SMTP id
- i16mr22502215pjl.188.1643417961919;
-        Fri, 28 Jan 2022 16:59:21 -0800 (PST)
-Received: from keaua.caveonetworks.com
- ([2601:202:4180:a5c0:d32b:593f:f15f:8524])
-        by smtp.gmail.com with ESMTPSA id
- p21sm10806190pfh.89.2022.01.28.16.59.21
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 28 Jan 2022 16:59:21 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][hardknott][PATCH] dbus-cxx: fix fetch error.
-Date: Fri, 28 Jan 2022 16:59:20 -0800
-Message-Id: <20220129005920.3821924-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.25.1
+  d=axis.com; q=dns/txt; s=axis-central1; t=1643427003;
+  x=1674963003;
+  h=from:to:subject:date:message-id:references:in-reply-to:
+   content-transfer-encoding:mime-version;
+  bh=D6WPU7HVp3mLPzpBFIpe8jedxZuXz8X/PI3F8/RVfrI=;
+  b=nir76nkxfYyqFQKgmKS6ukVllce5sAHnxW6jiQEC2enrGMBNR+eyizAm
+   fPraGDQzAk3sd94g8NatWzfRA/vGsHTeCcWHTXqMLfUTbVlvR/xmx9LW6
+   sQpBsloYOImTLAhxPIEjhOwCUzPgBEcDwYoaw6/l89NfJqScXaAPV/VEl
+   R194zwwlcnB9JTW1ePCaeearGR3xKez2a5r7zKMiy0CHZLGdmJ7+xys7g
+   62JZ+Si4X7TiqREsfv63198dui+fAqJzzU1gWvb4rTqYzG+Ocf6Db3D03
+   quiVjP7fQUiJFC2ZGixaOuptelOTCHI/zJ7bELy4jsHxFkF9Z4DlLBOzV
+   g==;
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Jon Mason <jdmason@kudzu.us>, "yocto@lists.yoctoproject.org"
+	<yocto@lists.yoctoproject.org>, "Patches and discussions about the oe-core
+ layer" <openembedded-core@lists.openembedded.org>, OpenEmbedded Devel List
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] Inclusive Language Proposal for YP/OE
+Thread-Topic: [oe] Inclusive Language Proposal for YP/OE
+Thread-Index: AQHYET39iiSkLP06BkO8OVsLd9UEG6x5Udyg
+Date: Sat, 29 Jan 2022 03:30:00 +0000
+Message-ID: <14f6714d84944cba85099cb1d0ed24cf@axis.com>
+References: 
+ <CAPoiz9wL16OTzxNHdw_5-L72GOHkhhM0--WZF7An071cx6sr_A@mail.gmail.com>
+In-Reply-To: 
+ <CAPoiz9wL16OTzxNHdw_5-L72GOHkhhM0--WZF7An071cx6sr_A@mail.gmail.com>
+Accept-Language: en-US, sv-SE
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.0.5.60]
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 29 Jan 2022 00:59:23 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 29 Jan 2022 03:30:05 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95165
+ https://lists.openembedded.org/g/openembedded-devel/message/95166
 
-Upstream created a branch for the sources for this version.
-update accordingly
-
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-oe/recipes-core/dbus-cxx/dbus-cxx_0.12.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-core/dbus-cxx/dbus-cxx_0.12.bb b/meta-oe/recipes-core/dbus-cxx/dbus-cxx_0.12.bb
-index 79fb2f5100..099564eb34 100644
---- a/meta-oe/recipes-core/dbus-cxx/dbus-cxx_0.12.bb
-+++ b/meta-oe/recipes-core/dbus-cxx/dbus-cxx_0.12.bb
-@@ -5,7 +5,7 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4cf0188f02184e1e84b9586ac53c3f83"
- 
- FILEEXTRAPATHS_prepend = "${THISDIR}/files"
--SRC_URI = "git://github.com/dbus-cxx/dbus-cxx.git;branch=master;protocol=https"
-+SRC_URI = "git://github.com/dbus-cxx/dbus-cxx.git;branch=dbus-cxx-0.y;protocol=https"
- SRC_URI += "file://fix_build_musl.patch"
- SRCREV = "ea7f8e361d11dc7d41d9ae2c4128aed2cdadd84e"
- 
--- 
-2.25.1
-
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWxA
+bGlzdHMub3BlbmVtYmVkZGVkLm9yZyA8b3BlbmVtYmVkZGVkLQ0KPiBkZXZlbEBsaXN0cy5vcGVu
+ZW1iZWRkZWQub3JnPiBPbiBCZWhhbGYgT2YgSm9uIE1hc29uDQo+IFNlbnQ6IGRlbiAyNCBqYW51
+YXJpIDIwMjIgMTc6MTgNCj4gVG86IHlvY3RvQGxpc3RzLnlvY3RvcHJvamVjdC5vcmc7IFBhdGNo
+ZXMgYW5kIGRpc2N1c3Npb25zIGFib3V0IHRoZSBvZS0NCj4gY29yZSBsYXllciA8b3BlbmVtYmVk
+ZGVkLWNvcmVAbGlzdHMub3BlbmVtYmVkZGVkLm9yZz47IE9wZW5FbWJlZGRlZCBEZXZlbA0KPiBM
+aXN0IDxvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4NCj4gU3ViamVj
+dDogW29lXSBJbmNsdXNpdmUgTGFuZ3VhZ2UgUHJvcG9zYWwgZm9yIFlQL09FDQoNCltjdXRdDQoN
+Cj4gRm9yIGxpY2Vuc2UgaGFuZGxpbmcsIHdl4oCZZCB1c2UgdGhlIG9wcG9ydHVuaXR5IHRvIGNs
+ZWFuIHVwIHRoZQ0KPiBXSElURUxJU1RfKEFOWSBMSUNFTlNFKSBzeW50YXggYW5kIHJlcGxhY2Ug
+aXQgd2l0aCBhDQo+IElOQ09NUEFUSUJMRV9MSUNFTlNFX0FMTE9XRURfUkVDSVBFUywgd2hpY2gg
+d291bGQgYmUgYSBsaXN0IG9mIA0KPiByZWNpcGVzIHdoaWNoIGFyZSBvZiBhIGJsb2NrZWQgdGhl
+IElOQ09NUEFUSUJMRV9MSUNFTlNFIGxpc3QuDQoNCkkgYW0gbm90IHNvIHN1cmUgYWJvdXQgdGhp
+cyBuYW1lLiBOb3Qgb25seSBpcyBpdCBleHRyZW1lbHkgbG9uZywgDQpidXQgYXQgbGVhc3QgSSB3
+b3VsZCBsaWtlIHRvIHJldmlzZSB0aGUgZW50aXJlIHN5c3RlbSBvZiBob3cgDQpsaWNlbnNlcyBh
+cmUgaGFuZGxlZC4gVGhlIG1ham9yIHJlYXNvbiBmb3IgdGhpcyBpcyB0aGF0IG91ciANCmxlZ2Fs
+IGRlcGFydG1lbnQgcmVxdWlyZXMgdXMgdG8gaGF2ZSBhIGxpc3Qgb2YgYWxsb3dlZCBsaWNlbnNl
+cyANCnJhdGhlciB0aGFuIGEgbGlzdCBvZiBkaXNhbGxvd2VkIGxpY2Vuc2VzLiBUaHVzIHdlIGhh
+dmUgYSANCkNPTVBBVElCTEVfTElDRU5TRVMgdmFyaWFibGUuIFdlIHRoZW4gc2V0IElOQ09NUEFU
+SUJMRV9MSUNFTlNFIA0KdG8gQVZBSUxBQkxFX0xJQ0VOU0VTIC0gQ09NUEFUSUJMRV9MSUNFTlNF
+Uy4gSG93ZXZlciwgYWZ0ZXIgdGhlIA0KaW50cm9kdWN0aW9uIG9mIGFsbCBvZmZpY2lhbCBTUERY
+IGxpY2Vuc2VzIGludG8gT0UtQ29yZSBhIHdoaWxlIA0KYWdvIHRoaXMgYmVjYW1lIHByb2JsZW1h
+dGljIGFzIHRoZSBjdXJyZW50IGltcGxlbWVudGF0aW9uIHdpbGwgDQpnbyB0aHJvdWdoIGFsbCBs
+aWNlbnNlcyBzcGVjaWZpZWQgaW4gSU5DT01QQVRJQkxFX0xJQ0VOU0UgbWFueSwgDQptYW55IHRp
+bWVzIGR1cmluZyByZWNpcGUgcGFyc2luZywgd2hpY2ggY2F1c2VkIHRoZSB0aW1lIHRvIHBhcnNl
+IA0KYWxsIHJlY2lwZXMgdG8gaW5jcmVhc2UgdGhyZWUgdGltZXMgZm9yIHVzLiBUaHVzIEkgd291
+bGQgbGlrZSB0byANCmltcGxlbWVudCBwcm9wZXIgc3VwcG9ydCBmb3IgQ09NUEFUSUJMRV9MSUNF
+TlNFUyBpbiBhZGRpdGlvbiB0byANCnRoZSBJTkNPTVBBVElBQkxFX0xJQ0VOU0UgdmFyaWFibGUg
+dG8gYWxsb3cgY2hvb3NpbmcgdGhlIG9wdGlvbiANCnRoYXQgc3VpdHMgdGhlIHNpdHVhdGlvbiBi
+ZXN0Lg0KDQpIb3dldmVyLCBpbiBlaXRoZXIgY2FzZSB0aGVyZSB3b3VsZCBzdGlsbCBuZWVkIHRv
+IGJlIGEgd2F5IHRvIA0Kc3BlY2lmeSBleGNlcHRpb25zIHRvIHRoZSBpbmNvbXBhdGlibGUgbGlj
+ZW5zZXMsIHdoaWNoIGlzIHdoeSBJIA0Kd291bGQgcHJlZmVyIHRoYXQgdGhlIG5hbWUgaXMgbm90
+IGxvY2tlZCB0byB0aGUgDQpJTkNPTVBBVElCTEVfTElDRU5TRSB2YXJpYWJsZS4gSGVyZSBhcmUg
+YSBjb3VwbGUgb2YgYWx0ZXJuYXRpdmVzOg0KDQoqIExJQ0VOU0VfRVhDRVBUSU9OUw0KKiBBTExP
+V0VEX1JFQ0lQRVMNCiogTElDRU5TRV9BTExPV0VEX1JFQ0lQRVMNCg0KSXQgaXMgYWxzbyB0aGF0
+IHRoZSBXSElURUxJU1QgdmFyaWFibGVzIGhhdmUgdHdvIHVzZSBjYXNlcyB0b2RheSwgDQpvbmUg
+aXMgdG8gYWxsb3cgYSBfcmVjaXBlXyB0byBiZSBidWlsdCBhbmQgdGhlIG90aGVyIGlzIHRvIGFs
+bG93IA0KYSBfcGFja2FnZV8gdG8gYmUgYWRkZWQgdG8gYW4gaW1hZ2UgZXZlbiBpZiBpdCBoYXMg
+YW4gaW5jb21wYXRpYmxlIA0KbGljZW5zZS4gVGhlIGZpcnN0IHVzZSBjYXNlIGNhbiBqdXN0IGFz
+IGVhc2lseSBiZSBhY2hpZXZlZCBieSANCnNldHRpbmcgSU5DT01QQVRJQkxFX0xJQ0VOU0U6cG4t
+Zm9vID0gIiIgZm9yIGEgcmVjaXBlIGZvbyB0aGF0IA0Kc2hhbGwgYmUgYWxsb3dlZCB0byBiZSBi
+dWlsdCBldmVuIGlmIGl0IGhhcyBhbiBpbmNvbXBhdGlibGUgDQpsaWNlbnNlLiBXaXRoIHRoaXMg
+aW4gbWluZCwgbWF5YmUgdGhlIHZhcmlhYmxlIHNob3VsZCBhY3R1YWxseSBiZSANCmFuIGltYWdl
+IHZhcmlhYmxlIGFuZCBzcGVjaWZ5IGEgbGlzdCBvZiBhbGxvd2VkIHBhY2thZ2VzIGluc3RlYWQs
+IA0KZS5nLiwgSU1BR0VfQUxMT1dFRF9QQUNLQUdFUy4gV2hldGhlciB0aGUgdmFyaWFibGUgd2l0
+aCBhIGxpc3Qgb2YgDQphbGxvd2VkIHJlY2lwZXMgaXMgdGhlbiBzdGlsbCBuZWVkZWQgb3IgaWYg
+aXQgaXMgZW5vdWdoIHRvIA0KbWFuaXB1bGF0ZSBJTkNPTVBBVElCTEVfTElDRU5TRSBhcyBwZXIg
+YWJvdmUgY2FuIGJlIGRpc2N1c3NlZC4NCg0KLy9QZXRlcg0KDQo=
 
