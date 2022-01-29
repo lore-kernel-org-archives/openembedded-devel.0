@@ -2,79 +2,80 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DBA2BC433F5
-	for <webhook@archiver.kernel.org>; Sat, 29 Jan 2022 14:21:57 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
- [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web12.6261.1643466117014836404
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 030D2C433EF
+	for <webhook@archiver.kernel.org>; Sat, 29 Jan 2022 14:22:25 +0000 (UTC)
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com
+ [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.web09.6349.1643466144300798351
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 29 Jan 2022 06:21:57 -0800
+ Sat, 29 Jan 2022 06:22:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=nC1hQFpq;
- spf=pass (domain: gmail.com, ip: 209.85.216.43,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=CZRCfWto;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id
- b1-20020a17090a990100b001b14bd47532so9233191pjp.0
+Received: by mail-pg1-f180.google.com with SMTP id g2so7857317pgo.9
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 29 Jan 2022 06:21:56 -0800 (PST)
+ Sat, 29 Jan 2022 06:22:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=0MCEg3aLNhL9Bi3fErswpBfsN6rOCQPBJIv6wzB/PhU=;
-        b=nC1hQFpqGpHwWAu/2KTnYFplxEblIToY6+2xguRay2Tfr79Lc+Kig2Gvo0eR0o+TRW
-         u3ui0fFrvmI2HrEXE5MG4gkOPbrWMeb7cgUFberRobQhP8TXFUq6FkGcq/uryt4914Mm
-         aW3StmS2hblkTgPcAv7oLqRlHYY1bfFdqt3dD/wlSsytLLdSLq7QtKGxyDoP3a6bqd7q
-         XCRpk2Og4F/Iq08N+UbMnmb+5lHPzAqxCmTS53jNAkT6I4LzdGYrU4RcDi38opOkVmtq
-         xIfqAq93wOW8lUfJZjArtSX2w8ucdVdOEhMbNntTYMI9omn3KvL5C5fKaX/4ROZzmQWX
-         LlBw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=IkXFQ2tiPqQsOHfd89pMlUboUJ1WjVv4dBXtLyS/yuY=;
+        b=CZRCfWtoe02v8vFy9lK4l5jccOxGL8m6Kna6tN8O4W7jv8nsl2G5ph+kvQRVcV01Ts
+         DlMHjmgd+xiikBNUrdVjg5HJqehlOfrPezQHN6HHAEcPMp/6XDO9ehx39cDpkRbwC1Zj
+         812xtEqdD5xLAfXc+WF+i5/dMKn7ZL76+qAEtiDrGrPM0ukfmlN5WHRpqVDz5/YM6hu4
+         NrjZzkehNg1z/zahCIufCNf3bNE0A30txTcsb3z9VIEWXw+AVtJ3LExMSMe9MD8ka0Mx
+         iXMXcqBMyBtbvaCDa+cKPN8/KZnTDLS21Cw0aXoUyfoJ8pG1xH5UNh/0GvJbSFlqh6b4
+         Gw4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=0MCEg3aLNhL9Bi3fErswpBfsN6rOCQPBJIv6wzB/PhU=;
-        b=rN8vjEn86fCQb8jwkyza6cW26IR1i7dEisn/evHNLlxauSv6uaVl6fnjJwxLCTVKMg
-         Vh7vzBLtfrpa7LjfmLLTrFU2SCMkVQyDl2jrFxqvqV5BA8uGHfzjf5v7pVZC/gwyCcau
-         UuWjj3iKTJ6y4Yq0/KF2NDeiwXKuikkZ7MvSTScXLJUd1buX/QMBsh0SJXZgAQ2VTnHR
-         LMcaSjAa9PzSdwnX+lMcbil93iTXWHjiBwAi2+Ye41alCA/VqQ3r1PCepzbdyw7z3I+p
-         kY1gMsFQb8jULgvdptHi8DTqLT+tLsu88Lv6jkNaC0mSFDCdw8SzSZm/MZKmQ8sm5bfC
-         zubw==
-X-Gm-Message-State: AOAM533JPZcEDyD2+Ict+igVpx/JaY7XXXZtcWB0Zr9B+NROvuOjQNKk
-	6Q3WpXobHj/Tkii1q8fR2Q1XPFrhV+8bOA==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=IkXFQ2tiPqQsOHfd89pMlUboUJ1WjVv4dBXtLyS/yuY=;
+        b=wQvpQ4HiYHF6Gqy26a80WID+KPkmXihLMYDme0im094WeuXCMkQPkUCj02+ONJG7bQ
+         fpSWbBAmUQaZJByfQMdHKHiB66UJGsrm/XGmvFX+J2BUBKv0BCKOsaZPSk6S/4pxbvZb
+         /FzvSl7tCQZ/FrncHv1uvGYFuXEnZ4XqCAlMtBXf8sk/cU6E4t3LnwuD8WWxGSaPKtRV
+         GajNKRaNu7DtsmAC3DtpGwY8n6rpFoPQPtQukoLexX3VfqgTil+WP0YE0TXgZZ0od0R3
+         /vTIH1bMopMYyOVbHOVfF4YT1jzyM5/2WkieEU5eZ+P1n27XCd7Exxnrv/qOKI01MZlj
+         32DA==
+X-Gm-Message-State: AOAM533YOqp+YOqOdSNXK/uz+Fewt60Mkc4mNHrEPXyM4lsVrabFQf1O
+	rQRaigTi+fUBHSd8TnM6z4FFNCKlfFQVpQ==
 X-Google-Smtp-Source: 
- ABdhPJwGmcvckz0j0+/DodAGpl9pjkol/FDJBSCRYHhDxryyLbYCwCfLpU+k3lOyLkT33SULPZvuRw==
-X-Received: by 2002:a17:902:ab41:: with SMTP id
- ij1mr13623222plb.59.1643466116336;
-        Sat, 29 Jan 2022 06:21:56 -0800 (PST)
+ ABdhPJy60wtGTupZ0Ugpp5sxVHa3KQOydKhT+0WddW+cup7lFZ+0yqATg+uKPCU0PBUj8xWDcevhZg==
+X-Received: by 2002:a63:dd4d:: with SMTP id
+ g13mr10431114pgj.202.1643466143751;
+        Sat, 29 Jan 2022 06:22:23 -0800 (PST)
 Received: from keaua.caveonetworks.com
  ([2601:202:4180:a5c0:d32b:593f:f15f:8524])
-        by smtp.gmail.com with ESMTPSA id 9sm4498304pjg.50.2022.01.29.06.21.55
+        by smtp.gmail.com with ESMTPSA id
+ o9sm2320908pfw.86.2022.01.29.06.22.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 29 Jan 2022 06:21:56 -0800 (PST)
+        Sat, 29 Jan 2022 06:22:23 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leif Middelschulte <Leif.Middelschulte@klsmartin.com>
-Subject: [meta-oe][hardknott][PATCH 3/3] dbus-daemon-proxy: add missing
- `return` statement
-Date: Sat, 29 Jan 2022 06:21:53 -0800
-Message-Id: <20220129142153.3829490-3-akuster808@gmail.com>
+Cc: Leif Middelschulte <Leif.Middelschulte@klsmartin.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][dunfell][PATCH] dbus-daemon-proxy: add missing `return`
+ statement
+Date: Sat, 29 Jan 2022 06:22:22 -0800
+Message-Id: <20220129142222.3829587-1-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220129142153.3829490-1-akuster808@gmail.com>
-References: <20220129142153.3829490-1-akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 29 Jan 2022 14:21:57 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 29 Jan 2022 14:22:25 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95172
+ https://lists.openembedded.org/g/openembedded-devel/message/95173
 
 From: Leif Middelschulte <Leif.Middelschulte@klsmartin.com>
 
 The missing `return` statement leads to a `SIGABRT`.
 
 Signed-off-by: Leif Middelschulte <Leif.Middelschulte@klsmartin.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 77479e1c9b7bffb6ad89ae68f80605ad1c65ea75)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
  ...1-dbus-daemon-proxy-Return-DBUS_HANDLER_RESULT_NOT_YET.patch | 2 +-
