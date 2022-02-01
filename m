@@ -1,120 +1,80 @@
-Return-Path: <peter.griffin@linaro.org>
+Return-Path: <ross@burtonini.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A191C433F5
-	for <webhook@archiver.kernel.org>; Tue,  1 Feb 2022 20:52:41 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
- [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.web09.54819.1643748759917030693
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ECC97C433F5
+	for <webhook@archiver.kernel.org>; Tue,  1 Feb 2022 21:25:19 +0000 (UTC)
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
+ [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.web12.54897.1643750718956756470
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Feb 2022 12:52:40 -0800
+ Tue, 01 Feb 2022 13:25:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=zQ7nxlk/;
- spf=pass (domain: linaro.org, ip: 209.85.221.41,
- mailfrom: peter.griffin@linaro.org)
-Received: by mail-wr1-f41.google.com with SMTP id w11so34330578wra.4
+ dkim=pass header.i=@burtonini-com.20210112.gappssmtp.com header.s=20210112
+ header.b=VX35bpJa;
+ spf=pass (domain: burtonini.com, ip: 209.85.221.50,
+ mailfrom: ross@burtonini.com)
+Received: by mail-wr1-f50.google.com with SMTP id w11so34466666wra.4
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Feb 2022 12:52:39 -0800 (PST)
+ Tue, 01 Feb 2022 13:25:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Y8aomXBFBQOGZgHd5pjwpjUJspvZY9+8+ngz4uAkUUc=;
-        b=zQ7nxlk/NFovzC7Y5XKvyq5GWk/eiSF4cauMrnCWFkVJRZ8jcJ23bVtTaDQEmBamH2
-         cq69cAFtdzHTGCfwhnKBJ/Q5ELAs2eT5ILHocRMv9Gtvwc1GrP73HWdeky+SZLnWzebX
-         2m92Pixu03ZSJt3DEG4AHBoCDhrSGB7Q699HyWthNm1GIn4syGO0UlqgWBTpaaTbm8V8
-         SMlnu4glGHw494xIu1g8RizVgh7pSUpkN9HkucSJzd/jWkcZyuZqy7ydOZi49acMvzNX
-         oaon3Wv2sVcDygWoO7HemlCcISfj7ku+Hevi0oF4Fc9gA2QW2AJ2eBLhZGzdv7qLxIvC
-         BaGA==
+        d=burtonini-com.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=1pjEaxSNxALBKH6KJRcC3IQJ0OVzvjWtdspOFxCGemU=;
+        b=VX35bpJaAV786+xonXgtByiNtvAcMJzesoFj7NsVe6w1ajZi5EP6sCDiw6Y2BJ2CKd
+         O6jfhoiVSvt5Rh6zdo1vxRx48n+w1wdBzYUW23LNkC0QsZR39tbIk+L8lOevQBMCMF51
+         50VXn0uyxwFP0U9NQYM58+NP9ABC7RQO7O++o4TKbcHWoINpOwjONd/lWBnmLbFGh96I
+         4Izqx2dvwEw1y9Yfebff8JdFrDL9vAM6AoBxfJAzo3/Obgm6q2ya/qVOAgi7G+qZJIh2
+         6OaAq6ZPIos0rGPdTRNto8TrLmXCQ2/qHEdoWLgCil0bggc6R1gWOnofiwEWQqc77sjP
+         CE5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Y8aomXBFBQOGZgHd5pjwpjUJspvZY9+8+ngz4uAkUUc=;
-        b=qrluuKz+8MFdD+IDU1Zh7hxn7kihu0++JTTsWOXpoC+mSnieAjB55hnC7PiZKdM7rm
-         FDkeqkft1f6s9V9jhCEbWCCWlQsEiX+lDCHzH8mrHVUu3JCaEvpLstHhh2PecGBuDXVR
-         AXxUvbN4607DvmjrmgtS8PnxrKdLwPTjjDU81SevH9r7sE+VI/nT4ImfE3t7kDjkewRZ
-         Sr4PuPP2mYhVTxw86CUfzvQ6eo8p22gEjVKpZTU5DrRAWneDkZmZvpPAI5UQCyv5cZ8K
-         sW/UVNEPCWwjaExO17nr1Np6319lPNFliHT6PydIQVlfw3uM5rrVtFpOQLkYscDk6+31
-         Ylig==
-X-Gm-Message-State: AOAM530T6hu18w5zyEzz57lmFDxLgl3w62ghgRAwBGn1MuxiqLelKEUw
-	vg4P3Kzs6E+xN7nKzepMZ/uwk8T0hJJhxg==
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=1pjEaxSNxALBKH6KJRcC3IQJ0OVzvjWtdspOFxCGemU=;
+        b=OXotOSyizv1niyRLWnJztd+XCzkK7OzAdvcT14Ml2E2Mbs1UljyUo2rMXlRmKD5bMA
+         1w2s5EcyCTDvBKEHVA5uKX1vT8pha2STuIiGkIIdHtfevmH8OlfJ/OYo1m6wbliIHN00
+         xH7oL0bE5DRJDzqjgLs8eo15gySJ+sa/DAQtMyaoSzbYmmRw8kWg3O0kxT2Umbz05WA8
+         IGo6J28Inq5BDq/Qu01KQATNKRKHx+CNJOOk3vrrDNXbl9seQbFvfmXYXZdMtziF5lpm
+         5Wl6VVJXyaW9h5NFMtiTATAWvP6c92GOK+amq+/TauwtqLPmQKj2+1vTwCrpJDQWD5K0
+         jZMA==
+X-Gm-Message-State: AOAM532aPr3lB+qwGUjVbEvZm09KNbNup9oOv1YaEIKTEyCKFMphdwtg
+	f64BYVzbEpTzsQiDukQvaykt78RKXG7/JEUsVRL2OQ==
 X-Google-Smtp-Source: 
- ABdhPJwW7TsmKBpiBbhMU52KJER6sncPICV8fPa3SRoWCI4OsTsr4+6PPXO4D25glBKPs+jhGAizYQ==
-X-Received: by 2002:adf:d1ef:: with SMTP id g15mr255472wrd.214.1643748757983;
-        Tue, 01 Feb 2022 12:52:37 -0800 (PST)
-Received: from xps15-9570.lan ([85.210.223.90])
-        by smtp.gmail.com with ESMTPSA id
- h4sm18460680wre.0.2022.02.01.12.52.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Feb 2022 12:52:37 -0800 (PST)
-From: Peter Griffin <peter.griffin@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: Peter Griffin <peter.griffin@linaro.org>
-Subject: [meta-multimedia][PATCH] libcamera: update meson options to build
- pipeline handlers & cam utility
-Date: Tue,  1 Feb 2022 20:52:29 +0000
-Message-Id: <20220201205230.2221700-1-peter.griffin@linaro.org>
-X-Mailer: git-send-email 2.25.1
+ ABdhPJx7Hq5PoIaNqen+krpY5O9PvOQErO1ruh6Ro/dMK+PGKNrL1pKcpgFgj3/1+aUO+XykxKhPqKdty7v9sGavlOo=
+X-Received: by 2002:a5d:5258:: with SMTP id
+ k24mr22281140wrc.231.1643750717279;
+ Tue, 01 Feb 2022 13:25:17 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20220201165248.1329459-1-ross.burton@arm.com>
+ <CAMKF1srakWaXoSHgwziHgRX3MkK_TFZdG5YvMDxUJ1k5weWr+g@mail.gmail.com>
+In-Reply-To: 
+ <CAMKF1srakWaXoSHgwziHgRX3MkK_TFZdG5YvMDxUJ1k5weWr+g@mail.gmail.com>
+From: Ross Burton <ross@burtonini.com>
+Date: Tue, 1 Feb 2022 21:25:06 +0000
+Message-ID: 
+ <CAAnfSTvQo8mCvmwHjk4PK9--fJncufq0hn66mCD4rfugt38Arw@mail.gmail.com>
+Subject: Re: [oe] [PATCH] fwupd-efi: upgrade to 1.2
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Feb 2022 20:52:41 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Feb 2022 21:25:19 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95207
+ https://lists.openembedded.org/g/openembedded-devel/message/95209
 
-Enable uvcvideo, simple, and vimc pipeline handlers in libcamera. Without
-any pipeline handlers libcamera can't capture any frames.
+On Tue, 1 Feb 2022 at 18:11, Khem Raj <raj.khem@gmail.com> wrote:
+> > - option('efi-objcopy', type : 'string', value : 'objcopy', description : 'the objcopy utility to use for EFI modules')
+>
+> is this dropped upstream as well ?
 
-Also enable cam utility with is a cli utility that can use the library to
-capture some frames.
+Yes: https://github.com/fwupd/fwupd-efi/commit/6728afd4bca350a0a22aae12f8dc6cca777cbdde
 
-Signed-off-by: Peter Griffin <peter.griffin@linaro.org>
----
- .../recipes-multimedia/libcamera/libcamera.bb      | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
+Good work on calling me out on that, I should have explicitly said so
+in the commit.
 
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-index 82028ecb3..a8d54f08f 100644
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
-@@ -18,7 +18,7 @@ PV = "202105+git${SRCPV}"
- 
- S = "${WORKDIR}/git"
- 
--DEPENDS = "python3-pyyaml-native python3-jinja2-native python3-ply-native python3-jinja2-native udev gnutls boost chrpath-native"
-+DEPENDS = "python3-pyyaml-native python3-jinja2-native python3-ply-native python3-jinja2-native udev gnutls boost chrpath-native libevent"
- DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
- 
- PACKAGES =+ "${PN}-gst"
-@@ -26,6 +26,16 @@ PACKAGES =+ "${PN}-gst"
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[gst] = "-Dgstreamer=enabled,-Dgstreamer=disabled,gstreamer1.0 gstreamer1.0-plugins-base"
- 
-+EXTRA_OEMESON = " \
-+    -Dpipelines=uvcvideo,simple,vimc \
-+    -Dipas=vimc \
-+    -Dv4l2=true \
-+    -Dcam=enabled \
-+    -Dlc-compliance=disabled \
-+    -Dtest=false \
-+    -Ddocumentation=disabled \
-+"
-+
- RDEPENDS:${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayland', '', d)}"
- 
- inherit meson pkgconfig python3native
-@@ -59,4 +69,6 @@ FILES:${PN} += " ${libdir}/libcamera.so.0.0.0"
- FILES:${PN}-dev += " ${libdir}/libcamera-base.so"
- FILES:${PN}-dev += " ${libdir}/libcamera-base.so.0"
- FILES:${PN} += " ${libdir}/libcamera-base.so.0.0.0"
-+FILES:${PN} += " ${libdir}/v4l2-compat.so"
- FILES:${PN}-gst = "${libdir}/gstreamer-1.0/libgstlibcamera.so"
-+FILES:${PN} += " ${bindir}/cam"
--- 
-2.25.1
-
+Ross
 
