@@ -2,69 +2,72 @@ Return-Path: <peter.griffin@linaro.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D49AC433F5
-	for <webhook@archiver.kernel.org>; Tue,  1 Feb 2022 20:42:28 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
- [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.web12.54346.1643748146645006057
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B778C433F5
+	for <webhook@archiver.kernel.org>; Tue,  1 Feb 2022 20:44:21 +0000 (UTC)
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
+ [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.web12.54374.1643748259663405893
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Feb 2022 12:42:27 -0800
+ Tue, 01 Feb 2022 12:44:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=qzjJXQaq;
- spf=pass (domain: linaro.org, ip: 209.85.221.53,
+ dkim=pass header.i=@linaro.org header.s=google header.b=sxWFfbhl;
+ spf=pass (domain: linaro.org, ip: 209.85.221.41,
  mailfrom: peter.griffin@linaro.org)
-Received: by mail-wr1-f53.google.com with SMTP id s9so34287147wrb.6
+Received: by mail-wr1-f41.google.com with SMTP id u15so34366970wrt.3
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Feb 2022 12:42:26 -0800 (PST)
+ Tue, 01 Feb 2022 12:44:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
         bh=Y8aomXBFBQOGZgHd5pjwpjUJspvZY9+8+ngz4uAkUUc=;
-        b=qzjJXQaqWRA0GwJ8oaX15fcbiibKJYbV0qO6ZnxJsNn81ryxyaQg8hYu13uz7go893
-         PQAthtz5WP4/irZ7m06DU+4rQ5pMToLWj4mAoiBVWgec82S9ExXkMq/UKeGznqhxBdp+
-         iT3aoTQyiBXigvyp8PC0EIYBF9x3QtKo8lvapTbDKQuBEmfJZjg3RaW/QNkVlaSPEhyD
-         csKjtxvsTiQf21YUA3tWnbjOReUn4DfsUt33l/s/Y+/KGvUsMxf8jkysGSZ6YB1173f+
-         V3lbxIzrve5RNPWfKcabK2gYAPq1jJqcknzaTdi0kKKlVIXLETVyvkelFr8WDihbAeJq
-         ycsQ==
+        b=sxWFfbhlRvolINLnwS+xRWHPnivMIaaegYg8bYU16gxHX/9aIOuC8DCOk1wBlxXKEQ
+         YAniteVokc9NYoGu9tE9pFOyf9zMsIApHCHxFT6oXJj/EBnE0gH46tyUe5ua9jcpA1CK
+         8a/R3bHsWf/kWJbKntZpXMVMjBX6Ec3kx7puhxT6rdg4YXp02GBBzFcV4O0RrrxXVzQl
+         RBE2HXKzEGsDsS4+w9yoonkfUh7uSWXZnJEuIS8fnxJWcDiyeNY2Z+WASYY8EOd/kjfm
+         ZQDW2f59F+qQijJSaGwe+Y0GhIEgiZNl+uZjrIeyQd/O7GBPaQdPz7pVho51LQpPhZyu
+         zKwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
         bh=Y8aomXBFBQOGZgHd5pjwpjUJspvZY9+8+ngz4uAkUUc=;
-        b=NT9SyY0eMHkw8h6of3oWmMdb1zDeX4SuG5XuWLst279sSh64ibB9AQTGNVIUCToBdM
-         1RUSfP8D+wwom/QxV3o22wZJfnYyaFFlBPaxB3K+KyTFn3SQOItqj0r7916ct44i28f8
-         kZ/Is/aE0NtbaLrUupCBAMIOvYJ9Ug72nZYsokqgapqOH96xRdUp+8UorPrTHavbOLRS
-         vnKI3/CK6FOnowNM2vkXXvMWvvHqokPaghxVlVEwOwhkiuDw7veOnuGnvQ3dquT91k0q
-         uvyiSrrP17KKV3PZ3crsCvAfR4NGGQ5n7Yz0Tw+MjaygDyvhuik+tXQHPLoiwDkzS0rc
-         KnUg==
-X-Gm-Message-State: AOAM533FsFHrebuAzkoSFw0dMKaSrFGTHbYKkBk6s3/6kt+Ih48bg4bz
-	h+UdtMRDR1113yccnPKEp43KKlUQlt5yQQ==
+        b=VPmlClQE1tySPkr8JzrfXDrdpS5zo+YfID8XLkc4kpnPEszM9cHcDYRTvQtjqcdmTc
+         HEKU3x4T+hTLsR6ddSWcMZ6giHmleVGouBhcALzFz3LsdGpn5dUljxcX3iYBfN2lLoqS
+         ZtSrpj4XMSHcBwr79aUeaQnwqc52y0laHzBZXGuXfanHHa+VpJGoG/3bvWSOTHb4Y2vs
+         zecxsnNBy42zuQCuF+dOPV9lkBudQzR4M1/jhFIcfsuk3bOPdEWVZ2t0pRSvEuA03Qsp
+         Tntx5k7WsWedkCqUFY9Bcl7uLlEhHj/xE91osTCTtQYBIn36qaICXUtCCQIn5DJYPI/q
+         7xNQ==
+X-Gm-Message-State: AOAM532FIwgNoG28mDrphah8dargG7JEpbpbNUd70icUJv4MA5rKRB8b
+	6r8mx/oy+gXWoDaG9k74hZ1qUo+UmTCUJA==
 X-Google-Smtp-Source: 
- ABdhPJzGqTkjZn9xfORcQtQbdeOUmXKjuoAsXIupuKetopHYQHMJH/pPL185xD/S5mHslJ/zcKGZUg==
-X-Received: by 2002:a5d:6587:: with SMTP id q7mr13217672wru.657.1643748144489;
-        Tue, 01 Feb 2022 12:42:24 -0800 (PST)
+ ABdhPJzsfoSMVuKtebX+RC6ExNvGp+A61XSV50os+L8P8NN0Fqw0DzljJJXw/JRbCLverdBCY96jwQ==
+X-Received: by 2002:a5d:6e12:: with SMTP id
+ h18mr22973737wrz.674.1643748257721;
+        Tue, 01 Feb 2022 12:44:17 -0800 (PST)
 Received: from xps15-9570.lan ([85.210.223.90])
-        by smtp.gmail.com with ESMTPSA id m6sm3429347wmq.6.2022.02.01.12.42.23
+        by smtp.gmail.com with ESMTPSA id m6sm3429347wmq.6.2022.02.01.12.44.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Feb 2022 12:42:24 -0800 (PST)
+        Tue, 01 Feb 2022 12:44:17 -0800 (PST)
 From: Peter Griffin <peter.griffin@linaro.org>
 To: openembedded-devel@lists.openembedded.org,
 	schnitzeltony@gmail.com
 Cc: Peter Griffin <peter.griffin@linaro.org>
-Subject: [PATCH] libcamera: update meson options to build pipeline handlers &
- cam utility
-Date: Tue,  1 Feb 2022 20:42:08 +0000
-Message-Id: <20220201204209.2220556-1-peter.griffin@linaro.org>
+Subject: [meta-multimedia][PATCH] libcamera: update meson options to build
+ pipeline handlers & cam utility
+Date: Tue,  1 Feb 2022 20:42:09 +0000
+Message-Id: <20220201204209.2220556-2-peter.griffin@linaro.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220201204209.2220556-1-peter.griffin@linaro.org>
+References: <20220201204209.2220556-1-peter.griffin@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Feb 2022 20:42:28 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Feb 2022 20:44:21 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95205
+ https://lists.openembedded.org/g/openembedded-devel/message/95206
 
 Enable uvcvideo, simple, and vimc pipeline handlers in libcamera. Without
 any pipeline handlers libcamera can't capture any frames.
