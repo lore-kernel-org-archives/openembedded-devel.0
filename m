@@ -2,79 +2,178 @@ Return-Path: <ross@burtonini.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ECC97C433F5
-	for <webhook@archiver.kernel.org>; Tue,  1 Feb 2022 21:25:19 +0000 (UTC)
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
- [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.web12.54897.1643750718956756470
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 12E4BC433EF
+	for <webhook@archiver.kernel.org>; Tue,  1 Feb 2022 21:26:51 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by mx.groups.io with SMTP id smtpd.web10.55567.1643750809484768206
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Feb 2022 13:25:19 -0800
+ Tue, 01 Feb 2022 13:26:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@burtonini-com.20210112.gappssmtp.com header.s=20210112
- header.b=VX35bpJa;
- spf=pass (domain: burtonini.com, ip: 209.85.221.50,
- mailfrom: ross@burtonini.com)
-Received: by mail-wr1-f50.google.com with SMTP id w11so34466666wra.4
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Feb 2022 13:25:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=burtonini-com.20210112.gappssmtp.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=1pjEaxSNxALBKH6KJRcC3IQJ0OVzvjWtdspOFxCGemU=;
-        b=VX35bpJaAV786+xonXgtByiNtvAcMJzesoFj7NsVe6w1ajZi5EP6sCDiw6Y2BJ2CKd
-         O6jfhoiVSvt5Rh6zdo1vxRx48n+w1wdBzYUW23LNkC0QsZR39tbIk+L8lOevQBMCMF51
-         50VXn0uyxwFP0U9NQYM58+NP9ABC7RQO7O++o4TKbcHWoINpOwjONd/lWBnmLbFGh96I
-         4Izqx2dvwEw1y9Yfebff8JdFrDL9vAM6AoBxfJAzo3/Obgm6q2ya/qVOAgi7G+qZJIh2
-         6OaAq6ZPIos0rGPdTRNto8TrLmXCQ2/qHEdoWLgCil0bggc6R1gWOnofiwEWQqc77sjP
-         CE5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=1pjEaxSNxALBKH6KJRcC3IQJ0OVzvjWtdspOFxCGemU=;
-        b=OXotOSyizv1niyRLWnJztd+XCzkK7OzAdvcT14Ml2E2Mbs1UljyUo2rMXlRmKD5bMA
-         1w2s5EcyCTDvBKEHVA5uKX1vT8pha2STuIiGkIIdHtfevmH8OlfJ/OYo1m6wbliIHN00
-         xH7oL0bE5DRJDzqjgLs8eo15gySJ+sa/DAQtMyaoSzbYmmRw8kWg3O0kxT2Umbz05WA8
-         IGo6J28Inq5BDq/Qu01KQATNKRKHx+CNJOOk3vrrDNXbl9seQbFvfmXYXZdMtziF5lpm
-         5Wl6VVJXyaW9h5NFMtiTATAWvP6c92GOK+amq+/TauwtqLPmQKj2+1vTwCrpJDQWD5K0
-         jZMA==
-X-Gm-Message-State: AOAM532aPr3lB+qwGUjVbEvZm09KNbNup9oOv1YaEIKTEyCKFMphdwtg
-	f64BYVzbEpTzsQiDukQvaykt78RKXG7/JEUsVRL2OQ==
-X-Google-Smtp-Source: 
- ABdhPJx7Hq5PoIaNqen+krpY5O9PvOQErO1ruh6Ro/dMK+PGKNrL1pKcpgFgj3/1+aUO+XykxKhPqKdty7v9sGavlOo=
-X-Received: by 2002:a5d:5258:: with SMTP id
- k24mr22281140wrc.231.1643750717279;
- Tue, 01 Feb 2022 13:25:17 -0800 (PST)
+ dkim=missing;
+ spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2F96A113E
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue,  1 Feb 2022 13:26:48 -0800 (PST)
+Received: from oss-tx204.lab.cambridge.arm.com
+ (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CD9E33F774
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue,  1 Feb 2022 13:26:47 -0800 (PST)
+From: Ross Burton <ross.burton@arm.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH v2] s-nail: add a maintained mail(1) fork
+Date: Tue,  1 Feb 2022 21:26:40 +0000
+Message-Id: <20220201212640.2935995-1-ross.burton@arm.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20220201165248.1329459-1-ross.burton@arm.com>
- <CAMKF1srakWaXoSHgwziHgRX3MkK_TFZdG5YvMDxUJ1k5weWr+g@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1srakWaXoSHgwziHgRX3MkK_TFZdG5YvMDxUJ1k5weWr+g@mail.gmail.com>
-From: Ross Burton <ross@burtonini.com>
-Date: Tue, 1 Feb 2022 21:25:06 +0000
-Message-ID: 
- <CAAnfSTvQo8mCvmwHjk4PK9--fJncufq0hn66mCD4rfugt38Arw@mail.gmail.com>
-Subject: Re: [oe] [PATCH] fwupd-efi: upgrade to 1.2
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Feb 2022 21:25:19 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Feb 2022 21:26:51 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95209
+ https://lists.openembedded.org/g/openembedded-devel/message/95210
 
-On Tue, 1 Feb 2022 at 18:11, Khem Raj <raj.khem@gmail.com> wrote:
-> > - option('efi-objcopy', type : 'string', value : 'objcopy', description : 'the objcopy utility to use for EFI modules')
->
-> is this dropped upstream as well ?
+Heirloom Mailx hasn't been maintained for some time: the last release
+on their web site was 11.25 in 2005 and Debian shipped 12.5 in 2016, but
+this appears to be a Debian-specific fork which is also now dead.
 
-Yes: https://github.com/fwupd/fwupd-efi/commit/6728afd4bca350a0a22aae12f8dc6cca777cbdde
+s-nail is an alternative mail(1) fork which is actively maintained, so
+add a recipe for that.  It provides an alternative for ${bindir}/mailx,
+so should be a drop-in replacement.
 
-Good work on calling me out on that, I should have explicitly said so
-in the commit.
+Signed-off-by: Ross Burton <ross.burton@arm.com>
+---
+ .../packagegroups/packagegroup-meta-oe.bb     |  1 +
+ .../s-nail/files/make-errors.patch            | 45 +++++++++++++++++++
+ .../recipes-extended/s-nail/s-nail_14.9.23.bb | 44 ++++++++++++++++++
+ 3 files changed, 90 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/s-nail/files/make-errors.pat=
+ch
+ create mode 100644 meta-oe/recipes-extended/s-nail/s-nail_14.9.23.bb
 
-Ross
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b=
+/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index a600b24cc3..de7239287c 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -421,6 +421,7 @@ RDEPENDS:packagegroup-meta-oe-extended =3D"\
+     sedutil \
+     libsigrok \
+     libsigrokdecode \
++    s-nail \
+     sigrok-cli \
+     snappy \
+     tipcutils \
+diff --git a/meta-oe/recipes-extended/s-nail/files/make-errors.patch b/me=
+ta-oe/recipes-extended/s-nail/files/make-errors.patch
+new file mode 100644
+index 0000000000..68de68cdb8
+--- /dev/null
++++ b/meta-oe/recipes-extended/s-nail/files/make-errors.patch
+@@ -0,0 +1,45 @@
++Don't wrap CC in quotes as our CC has options and this breaks command lo=
+okup.
++
++Upstream-Status: Backport [https://git.sdaoden.eu/browse/s-nail.git/comm=
+it/?h=3Dnext&id=3Dc08f3c898def715edf9164e169c3b3522f4c7a1f]
++Signed-off-by: Ross Burton <ross.burton@arm.com>
++
++From c08f3c898def715edf9164e169c3b3522f4c7a1f Mon Sep 17 00:00:00 2001
++From: Steffen Nurpmeso <steffen@sdaoden.eu>
++Date: Tue, 1 Feb 2022 18:54:16 +0100
++Subject: [-] Remove even more bogus quotation marks (Ross Burton)..
++
++On top of (mk/su-find-command.sh: clearly define space behaviour)
++and (mx-test.sh: remove bogus quotation marks) Ross Burton
++reported some more on the ML.  I looked around and hope this was it.
++---
++ mk/pcb-cc.sh         | 2 +-
++ mk/su-make-errors.sh | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/mk/pcb-cc.sh b/mk/pcb-cc.sh
++index 2697c5cf..075f8988 100755
++--- a/mk/pcb-cc.sh
+++++ b/mk/pcb-cc.sh
++@@ -18,7 +18,7 @@ if dowemayhave "$@"; then
++    if acmd_set CC clang || acmd_set CC gcc ||
++          acmd_set CC tcc || acmd_set CC pcc ||
++          acmd_set CC c89 || acmd_set CC c99; then
++-      exec "$CC" "$@"
+++      exec $CC "$@"
++    else
++       echo >&2 'boing booom tschak'
++       echo >&2 'ERROR: I cannot find a compiler!'
++diff --git a/mk/su-make-errors.sh b/mk/su-make-errors.sh
++index f5c5144e..7fede15e 100644
++--- a/mk/su-make-errors.sh
+++++ b/mk/su-make-errors.sh
++@@ -157,7 +157,7 @@ compile_time() { # {{{
++    # The problem is that at least (some versions of) gcc mangle output.
++    # Ensure we get both arguments on one line.
++    # While here sort numerically.
++-   "${CC}" -E "${TARGET}".c |
+++   ${CC} -E "${TARGET}".c |
++       ${awk} '
++          function stripsym(sym){
++             sym =3D substr(sym, 2)
++--=20
+diff --git a/meta-oe/recipes-extended/s-nail/s-nail_14.9.23.bb b/meta-oe/=
+recipes-extended/s-nail/s-nail_14.9.23.bb
+new file mode 100644
+index 0000000000..4dbb99b3d5
+--- /dev/null
++++ b/meta-oe/recipes-extended/s-nail/s-nail_14.9.23.bb
+@@ -0,0 +1,44 @@
++SUMMARY =3D "Feature-rich BSD mail(1)"
++HOMEPAGE =3D "https://www.sdaoden.eu/code.html#s-mailx"
++SECTION =3D "console/network"
++
++LICENSE =3D "ISC & BSD-3-Clause & BSD-4-Clause"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D87266591c81260f10221f1f38872d=
+023"
++
++SRC_URI =3D "https://ftp.sdaoden.eu/${BP}.tar.xz \
++           file://make-errors.patch"
++SRC_URI[sha256sum] =3D "2c717b22f4cd8719b82b6618640da6031382d2bf8eb51283=
+bca2c6266957bca8"
++
++DEPENDS =3D "coreutils-native"
++
++B =3D "${WORKDIR}/build"
++
++inherit update-alternatives
++
++EXTRA_OEMAKE =3D "VERBOSE=3Dyes \
++                CONFIG=3Dminimal \
++                OPT_AUTOCC=3Dno \
++                OPT_CROSS_BUILD=3Dyes \
++                OBJDIR=3D${B} \
++                strip=3Dtrue \
++                VAL_PREFIX=3D${prefix} \
++                VAL_BINDIR=3D${bindir} \
++                VAL_LIBEXECDIR=3D${libexecdir} \
++                VAL_MANDIR=3D${mandir} \
++                VAL_SYSCONFDIR=3D${sysconfdir}"
++
++do_configure[cleandirs] +=3D "${B}"
++do_configure() {
++    oe_runmake -C ${S} config
++}
++
++do_compile() {
++    oe_runmake -C ${S} build
++}
++
++do_install() {
++    oe_runmake -C ${S} install DESTDIR=3D${D}
++}
++
++ALTERNATIVE:${PN} =3D "mailx"
++ALTERNATIVE_TARGET[mailx] =3D "${bindir}/s-nail"
+--=20
+2.25.1
+
 
