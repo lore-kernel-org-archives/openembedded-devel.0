@@ -1,179 +1,179 @@
-Return-Path: <ross@burtonini.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 12E4BC433EF
-	for <webhook@archiver.kernel.org>; Tue,  1 Feb 2022 21:26:51 +0000 (UTC)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web10.55567.1643750809484768206
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 076BFC433F5
+	for <webhook@archiver.kernel.org>; Wed,  2 Feb 2022 05:35:50 +0000 (UTC)
+Received: from mail-qv1-f42.google.com (mail-qv1-f42.google.com
+ [209.85.219.42])
+ by mx.groups.io with SMTP id smtpd.web09.60365.1643780149420109622
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Feb 2022 13:26:49 -0800
+ Tue, 01 Feb 2022 21:35:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2F96A113E
-	for <openembedded-devel@lists.openembedded.org>;
- Tue,  1 Feb 2022 13:26:48 -0800 (PST)
-Received: from oss-tx204.lab.cambridge.arm.com
- (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CD9E33F774
-	for <openembedded-devel@lists.openembedded.org>;
- Tue,  1 Feb 2022 13:26:47 -0800 (PST)
-From: Ross Burton <ross.burton@arm.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH v2] s-nail: add a maintained mail(1) fork
-Date: Tue,  1 Feb 2022 21:26:40 +0000
-Message-Id: <20220201212640.2935995-1-ross.burton@arm.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=D3L/YiPg;
+ spf=pass (domain: gmail.com, ip: 209.85.219.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f42.google.com with SMTP id g11so18091362qvu.3
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 01 Feb 2022 21:35:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=WlISv+Y8IzaD4EjCcDCKIQSKz8jaics8dt6M3LiM+mY=;
+        b=D3L/YiPgjd0/swtRd0SAe64iZmVD8jWoDGbZZV4Tt32UIlo+NvHj9NmgSLzet0LJyB
+         Q8k9zMASsPgaB2jCE35A4L3QVgTrrqVQXM9+eSJevJtx06SR8LfV0QGZIgtfsSe4+sB8
+         9hHJG2EdyeU2M/G3Sebewz0rVWJj2vceZ6/1evDvm7+1tkDwzPBLCaDgWMs8ErrRjfh0
+         8j+W/KROD7/vIzAuM+hm/X/wBFxB7FqGW0zgKdhLKoVSzYy5vtFzrVmVpEJY0zxNVnxc
+         hXsnZRw/5EQBZ7lBrA4GYJsrsDGMlD9ktTfaqmPu37vUKnsd37CQ8CrOfJBE/dZkqDEE
+         1+DQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=WlISv+Y8IzaD4EjCcDCKIQSKz8jaics8dt6M3LiM+mY=;
+        b=pEKMRLF1RWqLphffMAbrhMS4DQB1j8FJrRNol5fUa9YZIOupk2LHKorwJJstMf2nBn
+         U9/eTYJMl48WPZYSS5dsYAksN2tj2S1TFkYFAHIpqg/5anqlUtxcJsa8L9OyfhqNIJtH
+         tu7av2znfOvah6TMsKrC/dOngXi4SRtMVRMLCLAmmxGm6AGIOsVcDaO3sdmVmVMrOpZZ
+         5qn60eBHpVblmnShvkWohEyUoSrLL9DEYn7bYUuq+NVjXdT7Y5dyQHnhEA9k8hw4nYKl
+         g8AiVmP+eV6W+4wjlWTwSF1cSPQPzDg0nIp7U/9xtUe6ltyRvSQldhsjJ3Rs+xh7wv4I
+         WoBw==
+X-Gm-Message-State: AOAM531W0yrgqiF775W5O1vPJK10tVnV9xcE+OYVyNp5BWs0r0hAq1rR
+	T4naH3Jcam9vZvR6wdpgR6y+8Jb5XhJFcXBKico=
+X-Google-Smtp-Source: 
+ ABdhPJy/2cpDeWFTz5fxBms3ptNtjE/8L0/iYhqrJphhgKXhL4yNVbtH5uIO/x25Z4RrC8eVVV05eoqGrXkpAG+SzQI=
+X-Received: by 2002:ad4:5def:: with SMTP id
+ jn15mr19829492qvb.16.1643780148376;
+ Tue, 01 Feb 2022 21:35:48 -0800 (PST)
 MIME-Version: 1.0
+References: 
+ <20220201142608.186135-1-enguerrand.de-ribaucourt@savoirfairelinux.com>
+ <856308942.287191.1643726738861.JavaMail.zimbra@savoirfairelinux.com>
+In-Reply-To: 
+ <856308942.287191.1643726738861.JavaMail.zimbra@savoirfairelinux.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 1 Feb 2022 21:35:22 -0800
+Message-ID: 
+ <CAMKF1soFz0OT+mHJ6kk-cLUX97qP3Q1cFEMEjVDU8NfwVGUpeA@mail.gmail.com>
+Subject: Re: [meta-networking][PATCH V2] mdio-tools: add recipes
+To: Enguerrand de Ribaucourt <enguerrand.de-ribaucourt@savoirfairelinux.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Joe MacDonald <joe@deserted.net>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Feb 2022 21:26:51 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 02 Feb 2022 05:35:50 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95210
+ https://lists.openembedded.org/g/openembedded-devel/message/95211
 
-Heirloom Mailx hasn't been maintained for some time: the last release
-on their web site was 11.25 in 2005 and Debian shipped 12.5 in 2016, but
-this appears to be a Debian-specific fork which is also now dead.
+this fails on mips
+https://errors.yoctoproject.org/Errors/Details/623861/
 
-s-nail is an alternative mail(1) fork which is actively maintained, so
-add a recipe for that.  It provides an alternative for ${bindir}/mailx,
-so should be a drop-in replacement.
+aarch64
+https://errors.yoctoproject.org/Errors/Details/623865/
 
-Signed-off-by: Ross Burton <ross.burton@arm.com>
----
- .../packagegroups/packagegroup-meta-oe.bb     |  1 +
- .../s-nail/files/make-errors.patch            | 45 +++++++++++++++++++
- .../recipes-extended/s-nail/s-nail_14.9.23.bb | 44 ++++++++++++++++++
- 3 files changed, 90 insertions(+)
- create mode 100644 meta-oe/recipes-extended/s-nail/files/make-errors.pat=
-ch
- create mode 100644 meta-oe/recipes-extended/s-nail/s-nail_14.9.23.bb
-
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b=
-/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index a600b24cc3..de7239287c 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -421,6 +421,7 @@ RDEPENDS:packagegroup-meta-oe-extended =3D"\
-     sedutil \
-     libsigrok \
-     libsigrokdecode \
-+    s-nail \
-     sigrok-cli \
-     snappy \
-     tipcutils \
-diff --git a/meta-oe/recipes-extended/s-nail/files/make-errors.patch b/me=
-ta-oe/recipes-extended/s-nail/files/make-errors.patch
-new file mode 100644
-index 0000000000..68de68cdb8
---- /dev/null
-+++ b/meta-oe/recipes-extended/s-nail/files/make-errors.patch
-@@ -0,0 +1,45 @@
-+Don't wrap CC in quotes as our CC has options and this breaks command lo=
-okup.
-+
-+Upstream-Status: Backport [https://git.sdaoden.eu/browse/s-nail.git/comm=
-it/?h=3Dnext&id=3Dc08f3c898def715edf9164e169c3b3522f4c7a1f]
-+Signed-off-by: Ross Burton <ross.burton@arm.com>
-+
-+From c08f3c898def715edf9164e169c3b3522f4c7a1f Mon Sep 17 00:00:00 2001
-+From: Steffen Nurpmeso <steffen@sdaoden.eu>
-+Date: Tue, 1 Feb 2022 18:54:16 +0100
-+Subject: [-] Remove even more bogus quotation marks (Ross Burton)..
-+
-+On top of (mk/su-find-command.sh: clearly define space behaviour)
-+and (mx-test.sh: remove bogus quotation marks) Ross Burton
-+reported some more on the ML.  I looked around and hope this was it.
-+---
-+ mk/pcb-cc.sh         | 2 +-
-+ mk/su-make-errors.sh | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/mk/pcb-cc.sh b/mk/pcb-cc.sh
-+index 2697c5cf..075f8988 100755
-+--- a/mk/pcb-cc.sh
-++++ b/mk/pcb-cc.sh
-+@@ -18,7 +18,7 @@ if dowemayhave "$@"; then
-+    if acmd_set CC clang || acmd_set CC gcc ||
-+          acmd_set CC tcc || acmd_set CC pcc ||
-+          acmd_set CC c89 || acmd_set CC c99; then
-+-      exec "$CC" "$@"
-++      exec $CC "$@"
-+    else
-+       echo >&2 'boing booom tschak'
-+       echo >&2 'ERROR: I cannot find a compiler!'
-+diff --git a/mk/su-make-errors.sh b/mk/su-make-errors.sh
-+index f5c5144e..7fede15e 100644
-+--- a/mk/su-make-errors.sh
-++++ b/mk/su-make-errors.sh
-+@@ -157,7 +157,7 @@ compile_time() { # {{{
-+    # The problem is that at least (some versions of) gcc mangle output.
-+    # Ensure we get both arguments on one line.
-+    # While here sort numerically.
-+-   "${CC}" -E "${TARGET}".c |
-++   ${CC} -E "${TARGET}".c |
-+       ${awk} '
-+          function stripsym(sym){
-+             sym =3D substr(sym, 2)
-+--=20
-diff --git a/meta-oe/recipes-extended/s-nail/s-nail_14.9.23.bb b/meta-oe/=
-recipes-extended/s-nail/s-nail_14.9.23.bb
-new file mode 100644
-index 0000000000..4dbb99b3d5
---- /dev/null
-+++ b/meta-oe/recipes-extended/s-nail/s-nail_14.9.23.bb
-@@ -0,0 +1,44 @@
-+SUMMARY =3D "Feature-rich BSD mail(1)"
-+HOMEPAGE =3D "https://www.sdaoden.eu/code.html#s-mailx"
-+SECTION =3D "console/network"
-+
-+LICENSE =3D "ISC & BSD-3-Clause & BSD-4-Clause"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D87266591c81260f10221f1f38872d=
-023"
-+
-+SRC_URI =3D "https://ftp.sdaoden.eu/${BP}.tar.xz \
-+           file://make-errors.patch"
-+SRC_URI[sha256sum] =3D "2c717b22f4cd8719b82b6618640da6031382d2bf8eb51283=
-bca2c6266957bca8"
-+
-+DEPENDS =3D "coreutils-native"
-+
-+B =3D "${WORKDIR}/build"
-+
-+inherit update-alternatives
-+
-+EXTRA_OEMAKE =3D "VERBOSE=3Dyes \
-+                CONFIG=3Dminimal \
-+                OPT_AUTOCC=3Dno \
-+                OPT_CROSS_BUILD=3Dyes \
-+                OBJDIR=3D${B} \
-+                strip=3Dtrue \
-+                VAL_PREFIX=3D${prefix} \
-+                VAL_BINDIR=3D${bindir} \
-+                VAL_LIBEXECDIR=3D${libexecdir} \
-+                VAL_MANDIR=3D${mandir} \
-+                VAL_SYSCONFDIR=3D${sysconfdir}"
-+
-+do_configure[cleandirs] +=3D "${B}"
-+do_configure() {
-+    oe_runmake -C ${S} config
-+}
-+
-+do_compile() {
-+    oe_runmake -C ${S} build
-+}
-+
-+do_install() {
-+    oe_runmake -C ${S} install DESTDIR=3D${D}
-+}
-+
-+ALTERNATIVE:${PN} =3D "mailx"
-+ALTERNATIVE_TARGET[mailx] =3D "${bindir}/s-nail"
---=20
-2.25.1
-
+On Tue, Feb 1, 2022 at 6:45 AM Enguerrand de Ribaucourt
+<enguerrand.de-ribaucourt@savoirfairelinux.com> wrote:
+>
+> ----- Mail original -----
+> > De: "Enguerrand de Ribaucourt" <enguerrand.de-ribaucourt@savoirfairelin=
+ux.com>
+> > =C3=80: openembedded-devel@lists.openembedded.org
+> > Cc: "raj khem" <raj.khem@gmail.com>, joe@deserted.net, "Enguerrand de R=
+ibaucourt"
+> > <enguerrand.de-ribaucourt@savoirfairelinux.com>
+> > Envoy=C3=A9: Mardi 1 F=C3=A9vrier 2022 15:26:10
+> > Objet: [meta-networking][PATCH V2] mdio-tools: add recipes
+>
+> Hi,
+>
+> mdio-tools is a similar tool to phytool, by the same author, which is alr=
+eady present in meta-networking. This one allows a more low-level access to=
+ the MDIO bus as well as writing with the use of a kernel module.
+> I re-submitted the patch with some small corrections to respect coding st=
+yle conventions:
+> 1. Moved in recipes-support
+> 2. Removed version in mdio-tools_1.0.1.inc filename
+>
+> Please let me know if these recipes are relevant to meta-networking or if=
+ you have any comments about them.
+> Thank you for your time.
+>
+> > Self-description from the README: mdio-tools is a low-level debug tool
+> > for communicating with devices attached to an MDIO bus.
+>
+> > Signed-off-by: Enguerrand de Ribaucourt
+> > <enguerrand.de-ribaucourt@savoirfairelinux.com>
+> > ---
+> > .../mdio-tools/mdio-netlink_1.0.1.bb | 13 +++++++++++++
+> > .../recipes-support/mdio-tools/mdio-tools.inc | 8 ++++++++
+> > .../recipes-support/mdio-tools/mdio-tools_1.0.1.bb | 9 +++++++++
+> > 3 files changed, 30 insertions(+)
+> > create mode 100644
+> > meta-networking/recipes-support/mdio-tools/mdio-netlink_1.0.1.bb
+> > create mode 100644 meta-networking/recipes-support/mdio-tools/mdio-tool=
+s.inc
+> > create mode 100644
+> > meta-networking/recipes-support/mdio-tools/mdio-tools_1.0.1.bb
+>
+> > diff --git a/meta-networking/recipes-support/mdio-tools/mdio-netlink_1.=
+0.1.bb
+> > b/meta-networking/recipes-support/mdio-tools/mdio-netlink_1.0.1.bb
+> > new file mode 100644
+> > index 000000000..b50d33f90
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-support/mdio-tools/mdio-netlink_1.0.1.bb
+> > @@ -0,0 +1,13 @@
+> > +require mdio-tools.inc
+> > +
+> > +DEPENDS +=3D "virtual/kernel libmnl"
+> > +# This module requires Linux 5.6 higher
+> > +
+> > +S =3D "${WORKDIR}/git/kernel"
+> > +
+> > +inherit module
+> > +
+> > +EXTRA_OEMAKE =3D "KDIR=3D${STAGING_KERNEL_DIR}"
+> > +MODULES_INSTALL_TARGET =3D "install"
+> > +
+> > +RPROVIDES:${PN} +=3D "kernel-module-mdio-netlink"
+> > diff --git a/meta-networking/recipes-support/mdio-tools/mdio-tools.inc
+> > b/meta-networking/recipes-support/mdio-tools/mdio-tools.inc
+> > new file mode 100644
+> > index 000000000..bba8960d8
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-support/mdio-tools/mdio-tools.inc
+> > @@ -0,0 +1,8 @@
+> > +DESCRIPTION =3D "A low-level debug tool for communicating with devices=
+ attached
+> > to an MDIO bus"
+> > +SECTION =3D "networking"
+> > +HOMEPAGE =3D "https://github.com/wkz/mdio-tools"
+> > +LICENSE =3D "GPLv2"
+> > +LIC_FILES_CHKSUM =3D
+> > "file://${WORKDIR}/git/COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263"
+> > +
+> > +SRC_URI =3D "git://github.com/wkz/mdio-tools.git;protocol=3Dhttps;bran=
+ch=3Dmaster"
+> > +SRCREV =3D "b40809dd59aa199d8afc307e228b55eeae06b17e"
+> > diff --git a/meta-networking/recipes-support/mdio-tools/mdio-tools_1.0.=
+1.bb
+> > b/meta-networking/recipes-support/mdio-tools/mdio-tools_1.0.1.bb
+> > new file mode 100644
+> > index 000000000..cd4df3da0
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-support/mdio-tools/mdio-tools_1.0.1.bb
+> > @@ -0,0 +1,9 @@
+> > +require mdio-tools.inc
+> > +
+> > +DEPENDS +=3D "libmnl"
+> > +
+> > +S =3D "${WORKDIR}/git"
+> > +
+> > +inherit pkgconfig autotools
+> > +
+> > +RDEPENDS:${PN} =3D "kernel-module-mdio-netlink"
+> > --
+> > 2.25.1
 
