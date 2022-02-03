@@ -1,70 +1,107 @@
-Return-Path: <robert.joslyn@redrectangle.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8AE17C433F5
-	for <webhook@archiver.kernel.org>; Thu,  3 Feb 2022 04:37:57 +0000 (UTC)
-Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net
- [217.70.183.194])
- by mx.groups.io with SMTP id smtpd.web12.5084.1643863075778834985
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BD0FC433F5
+	for <webhook@archiver.kernel.org>; Thu,  3 Feb 2022 19:48:38 +0000 (UTC)
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com
+ [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web12.2840.1643917717076881206
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Feb 2022 20:37:56 -0800
+ Thu, 03 Feb 2022 11:48:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: redrectangle.org,
- ip: 217.70.183.194, mailfrom: robert.joslyn@redrectangle.org)
-Received: (Authenticated sender: robert.joslyn@redrectangle.org)
-	by mail.gandi.net (Postfix) with ESMTPSA id 24F6B40002;
-	Thu,  3 Feb 2022 04:37:52 +0000 (UTC)
-From: Robert Joslyn <robert.joslyn@redrectangle.org>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=JInnjhuR;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id e28so3101380pfj.5
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 03 Feb 2022 11:48:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=J9unuVSxgVgezmEm6hwVetWmqC/RVp25t/mFTGDqUy4=;
+        b=JInnjhuRezf22xnFMDKOmVIPbDmZUFLDzDDmSloEJkAuqYyv9W22pEkW3TOBFimt0L
+         0hEIG8z9SJwesIfMxOGbBiSTAhYdv1LfYuVGIVKMrnepj0holMdY9r0w+ONzXgnvpFBF
+         2bkUPBwtHURhWtS9d4j+1OVlsh+sSNO+WINqHvyYTe1JpHR2yC6g7CElaEYoC6lw5RfW
+         V4TUCmX+zWiMtDoP9ak28vth2Ox+S9VWuYsDyuXaNjc9O4EL3mdvrzirZxLh7AAFzsMK
+         o+paOexisVYyLWBOxdXkd4hEf/8qPsriWi6gbFwqJUb0ZI9HUoW6sEduE9Jk4u/RpPrj
+         KBBQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=J9unuVSxgVgezmEm6hwVetWmqC/RVp25t/mFTGDqUy4=;
+        b=AMe8pgfgWXethoEqgooueoA7133O3O1a0b57ENfMEzJzv21jkWakjTBKrdU4oIh328
+         65mJ2yHXSRA9cB8JjG931krovsDA3CMd6LW1MkRmXhIebcpKGnw5fIRCDx70PqW5XDe/
+         sK9c6e+0g2PtUSq4pMl40wMvw1dDI4dW6HH+6AsBJgmedncbST9YwZsNNtHyxQcCuJ4Q
+         u8bw11jsO+lU330xtL7HGmD2mU6oW1eqLTVVcnWX170TmgouR6rm4lrmLhGBvHIlVGNb
+         jsmr7cWLFc+rW7gFimI4WqOnB/OLYcEfNkHGGxzQP1FZM7jPnJc/amIfSsn2iLugrTrk
+         xrQA==
+X-Gm-Message-State: AOAM533wGRe3nEdr10/2FJxrLZweH23jj93SoT8oD6tyhMvJPuEzFV45
+	HgssiaClJ6/qCFYha8ZvGieADlIQcb3hGA==
+X-Google-Smtp-Source: 
+ ABdhPJxsCTCmodkHBthEf5waonyKOVCgjds4tFWwpnUc0hv9AM+6iC0SXqMD9+UieUMJEJzRQpCUVQ==
+X-Received: by 2002:a63:ec02:: with SMTP id j2mr14079595pgh.349.1643917716213;
+        Thu, 03 Feb 2022 11:48:36 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::fb6e])
+        by smtp.gmail.com with ESMTPSA id
+ c11sm30780867pfv.76.2022.02.03.11.48.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 03 Feb 2022 11:48:35 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Robert Joslyn <robert.joslyn@redrectangle.org>
-Subject: [meta-oe][dunfell][PATCH] linuxptp: Update to 2.0.1
-Date: Wed,  2 Feb 2022 20:37:26 -0800
-Message-Id: <20220203043726.773834-1-robert.joslyn@redrectangle.org>
-X-Mailer: git-send-email 2.34.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] pcp: Disable parallel compile
+Date: Thu,  3 Feb 2022 11:48:33 -0800
+Message-Id: <20220203194833.3698685-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Feb 2022 04:37:57 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Feb 2022 19:48:38 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95214
+ https://lists.openembedded.org/g/openembedded-devel/message/95215
 
-Fixes CVE-2021-3570 and CVE-2021-3571
+This fails often with
+| chkacc1.c:8:10: fatal error: localconfig.h: No such file or directory
+|     8 | #include "localconfig.h"
+|       |          ^~~~~~~~~~~~~~~
 
-Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../linuxptp/{linuxptp_2.0.bb => linuxptp_2.0.1.bb}          | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-connectivity/linuxptp/{linuxptp_2.0.bb => linuxptp_2.0.1.bb} (75%)
+ meta-oe/recipes-support/pcp/pcp-native_5.3.5.bb | 4 ++++
+ meta-oe/recipes-support/pcp/pcp_5.3.5.bb        | 4 ++++
+ 2 files changed, 8 insertions(+)
 
-diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb b/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.1.bb
-similarity index 75%
-rename from meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
-rename to meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.1.bb
-index c98976779..79e59a8fe 100644
---- a/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.bb
-+++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.1.bb
-@@ -2,14 +2,13 @@ DESCRIPTION = "Precision Time Protocol (PTP) according to IEEE standard 1588 for
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-oe/recipes-support/pcp/pcp-native_5.3.5.bb b/meta-oe/recipes-support/pcp/pcp-native_5.3.5.bb
+index 029a47531b..5f3c9b6f00 100644
+--- a/meta-oe/recipes-support/pcp/pcp-native_5.3.5.bb
++++ b/meta-oe/recipes-support/pcp/pcp-native_5.3.5.bb
+@@ -46,4 +46,8 @@ do_install () {
+     PCP_MAN_DIR=${D}/${mandir} \
+     PCP_DOC_DIR=${D}/${docdir} 
+ }
++#| chkacc1.c:8:10: fatal error: localconfig.h: No such file or directory
++#|     8 | #include "localconfig.h"
++#|       |          ^~~~~~~~~~~~~~~
++PARALLEL_MAKE = ""
  
--SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.tgz \
-+SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v2.0/linuxptp-${PV}.tgz \
-            file://build-Allow-CC-and-prefix-to-be-overriden.patch \
-            file://Use-cross-cpp-in-incdefs.patch \
-            file://time_t_maybe_long_long.patch \
-            "
- 
--SRC_URI[md5sum] = "d8bb7374943bb747db7786ac26f17f11"
--SRC_URI[sha256sum] = "0a24d9401e87d4af023d201e234d91127d82c350daad93432106284aa9459c7d"
-+SRC_URI[sha256sum] = "6f4669db1733747427217a9e74c8b5ca25c4245947463e9cdb860ec8f5ec797a"
- 
- EXTRA_OEMAKE = "ARCH=${TARGET_ARCH} EXTRA_CFLAGS='${CFLAGS}'"
- 
+diff --git a/meta-oe/recipes-support/pcp/pcp_5.3.5.bb b/meta-oe/recipes-support/pcp/pcp_5.3.5.bb
+index 290dbaaf4b..bd09985af3 100644
+--- a/meta-oe/recipes-support/pcp/pcp_5.3.5.bb
++++ b/meta-oe/recipes-support/pcp/pcp_5.3.5.bb
+@@ -219,3 +219,7 @@ FILES:${PN}-dev += " \
+         ${datadir}/man/man3/pms* \
+         ${datadir}/man/man3/pmt* \
+ "
++#| chkacc1.c:8:10: fatal error: localconfig.h: No such file or directory
++#|     8 | #include "localconfig.h"
++#|       |          ^~~~~~~~~~~~~~~
++PARALLEL_MAKE = ""
 -- 
-2.34.1
+2.35.1
 
 
