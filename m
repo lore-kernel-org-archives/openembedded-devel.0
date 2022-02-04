@@ -2,60 +2,63 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F911C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D92DFC433F5
 	for <webhook@archiver.kernel.org>; Fri,  4 Feb 2022 17:27:44 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
- [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web11.12146.1643995663589155038
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com
+ [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.web11.12147.1643995664450909705
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Feb 2022 09:27:43 -0800
+ Fri, 04 Feb 2022 09:27:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=TKO5st92;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id l1so1236104pjn.4
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=dKmCrslc;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id
+ o16-20020a17090aac1000b001b62f629953so13702462pjq.3
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Feb 2022 09:27:43 -0800 (PST)
+ Fri, 04 Feb 2022 09:27:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Y2dMo1SR3ccxfXsg7Je+XIoYjKYW2PCB34xuIVBwIQc=;
-        b=TKO5st924I6C31MBuggOhwES+TW5vtvHVekri8Gal9Q/Nk/Jd3hmDpq95gWbbeS86f
-         /uvDEiAWHmY81D/bCkUrIQSXrYurLyfPEsgd4xN5nDx7d8tctLygwn5FzCZCeNFJL76+
-         A2pkVTUYQWoH2ZhRX1ur0NkrZIyFb7Q7zzSyX4mZHtqmkR0IYIRPyGbx3IXc6mNPDc/a
-         y80ui52T2GuVEEjW5lBJlMUdFbRPSLEUhZd7XTMDF1knMYB7PS3tpYghVQV5TpwlHSlY
-         WnCuDMSSoPJ2MGBuQ1MTYAWTDYyHUQ/fvssmGu64N5SwSks12BmFo8RGvcgrT0NUZa5h
-         SFmw==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=LC6ub9UY+kCbfGfgnj3hcIOv3zo1LavgAOxFEl1v1CI=;
+        b=dKmCrslcJGannCXqihmyWrn9Hk5hwORmfvDnBRWy+ttuO7A1tD+d2K6xmgMQqcBvFv
+         2/+1kOtZaGbiWgl8BI0O4hvQ7A6TOaKRdJnu1/V1t9mg3J/byX/bcftAVqXh+glgd2di
+         ZLbxVlmHl/V1e60lFtZNY+9MiCljmbj3AoehamFWb08dqiEhNoY2l7ITPRM/6ccXsMz2
+         ZVkN8aP5yUOZqP3g5hHm0jbkEACJtR6e7vy/TizFQ0nBw7Wnz7XyAtVyjiBaCMBQl/Xx
+         hzycbmrK1yRgzgJw3BnFpx5wE/9jG9tAPwppAcnc9S+sGVJ75HnAJd7/u2eyTNWbDHEf
+         iaHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Y2dMo1SR3ccxfXsg7Je+XIoYjKYW2PCB34xuIVBwIQc=;
-        b=Wn15jxBsqOj5WFJk1yN8/HUggeRGdkRNFalSMqpPpM+SxF61lY2mV6PeOvleFuol5h
-         ZPdraQEcfh9MFdE1nokpcL3q0xNaxrArIeJp3dX34SyP0c8cuPejg6l6Ef1tzEQrx4Zw
-         iTArh/FANhE/H9giFi+WhAlsY8ZIlBxgyJAMT0+RC7tSju+FVsgXPJ76HJ1otMQUxrIG
-         XI2VyP24vPgESxDYeo9gGUcMl2SxdEmC5Ny9+xDbVQmAKhSi+ka8BePacclnvtJZBTbZ
-         ux/CVA9VENKGIq3p8IRVVnSjK2jC+ySmlJO+tR8LwIIxL7Qo/8BUwd7G7qIS+ZYeTh6J
-         LlBQ==
-X-Gm-Message-State: AOAM532uSjuBR/W5VmxRPBQHybnIIBRkjQOEwZiT0CtpbWJCxyhtb9Bj
-	2qDlK6fVjGP0Ip6fNInyfGpZ5tjg2687iw==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=LC6ub9UY+kCbfGfgnj3hcIOv3zo1LavgAOxFEl1v1CI=;
+        b=rtWqjNDYicHs1pSrSpfvXD+eCubWe9NOQP+layRqYQAoCR+qs6ILhBHUI7Ww4A9tk/
+         Y1m878CAH0sEFBWjyIJUfF2GJvxzDC30N9nyR6YgBv8TIxSy1QvEWNJHh9LP0RCHDleK
+         rHl9o1JZq9FRsfFOH0lZjgwio7nLjndJ1RVHIbNyfvIEJq4wTL/rjqtzQr8LoaDYiffG
+         ixX9JACZivHC3+BlpajwF7rAwE8Lb0HnfHSQxcV1wjqaF1wZ6Y8ROygRKwp1Wm0k4jIY
+         mHxTSPtWTppzqJtcKwQAaeghCPklbUWbBdLJoyWeO/qSy8d1AzBSIJJrDnpyyxSI013z
+         jtfQ==
+X-Gm-Message-State: AOAM532FMijYInFJtCgS45aqEaat1Bldiw0857QamtXnK1L7proDvOUL
+	rGN6qBF6eC5PW4vVamTUwE7PNPHXBWcEMQ==
 X-Google-Smtp-Source: 
- ABdhPJzHS2Q4IAtb56/9ezlc5aBlGkjXWn5b6ZfG1zuML28E25xplf9laxbYaFSJK3JA7O2BymUvag==
-X-Received: by 2002:a17:902:c409:: with SMTP id
- k9mr4347596plk.132.1643995662486;
-        Fri, 04 Feb 2022 09:27:42 -0800 (PST)
+ ABdhPJx7czh0u3a7MuZ0zEpC3OJMnbcpp1hcWUPVwonXqwxYUJ8tj80Dv3BY7rYEk8CggdNQQzWapw==
+X-Received: by 2002:a17:903:2309:: with SMTP id
+ d9mr3969468plh.149.1643995663676;
+        Fri, 04 Feb 2022 09:27:43 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::fb6e])
         by smtp.gmail.com with ESMTPSA id
- rm11sm2257954pjb.21.2022.02.04.09.27.41
+ rm11sm2257954pjb.21.2022.02.04.09.27.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Fri, 04 Feb 2022 09:27:42 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 1/2] gst-shark: Upgrade to 0.7.3.1
-Date: Fri,  4 Feb 2022 09:27:38 -0800
-Message-Id: <20220204172739.4009892-1-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 2/2] crda: Fix buffer overflow in sscanf
+Date: Fri,  4 Feb 2022 09:27:39 -0800
+Message-Id: <20220204172739.4009892-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220204172739.4009892-1-raj.khem@gmail.com>
+References: <20220204172739.4009892-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
@@ -63,79 +66,66 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 04 Feb 2022 17:27:44 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95224
+ https://lists.openembedded.org/g/openembedded-devel/message/95225
 
-Fix buffer overflow found with clang
+Fixes build with clang14
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-tracers-Fix-buffer-overflow.patch    | 33 +++++++++++++++++++
- .../gstreamer-1.0/gst-shark_git.bb            |  7 ++--
- 2 files changed, 37 insertions(+), 3 deletions(-)
- create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark/0001-tracers-Fix-buffer-overflow.patch
+ ...-Make-alpha2-to-be-3-characters-long.patch | 31 +++++++++++++++++++
+ .../recipes-connectivity/crda/crda_3.18.bb    |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark/0001-tracers-Fix-buffer-overflow.patch b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark/0001-tracers-Fix-buffer-overflow.patch
+diff --git a/meta-networking/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch b/meta-networking/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch
 new file mode 100644
-index 0000000000..1d85e51d6b
+index 0000000000..f1d2cbc5a3
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark/0001-tracers-Fix-buffer-overflow.patch
-@@ -0,0 +1,33 @@
-+From d84807ec6d6f8511e4ec939a745d4d7bb35c3cfb Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch
+@@ -0,0 +1,31 @@
++From 078e962d345fd0536fe7ba797485ee1a4159c032 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 4 Feb 2022 09:22:48 -0800
-+Subject: [PATCH] tracers: Fix buffer overflow
++Date: Fri, 4 Feb 2022 09:18:30 -0800
++Subject: [PATCH] Make alpha2 to be 3 characters long
 +
-+Fixes
-+| ../../../git/plugins/tracers/gstcpuusagecompute.c:106:9: error: 'fscanf' may overflow; destination buffer in argument 3 has size 8, but the corresponding specifier may require size 9 [-Werror,-Wfortify-sour
-+ce]
-+|         cpu_name, &user[0], &nice[0], &system[0], &idle[0], &iowait, &irq,
-+|         ^
-+
++Fixes buffer overflow
++reglib.c:969:9: error: 'sscanf' may overflow; destination buffer in argument 3 has size 2, but the corresponding specifier may require size 3 [-Werror,-Wfortify-source]
++                      alpha2,
++                      ^
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ plugins/tracers/gstcpuusagecompute.c | 2 +-
++ reglib.c | 2 +-
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/plugins/tracers/gstcpuusagecompute.c b/plugins/tracers/gstcpuusagecompute.c
-+index 39255fb..00bae66 100644
-+--- a/plugins/tracers/gstcpuusagecompute.c
-++++ b/plugins/tracers/gstcpuusagecompute.c
-+@@ -69,7 +69,7 @@ gst_cpu_usage_compute (GstCPUUsage * cpu_usage)
-+   gint *idle;
-+   gint *idle_aux;
++diff --git a/reglib.c b/reglib.c
++index e00e9b8..8565a0b 100644
++--- a/reglib.c
+++++ b/reglib.c
++@@ -958,7 +958,7 @@ reglib_parse_rules(FILE *fp, struct ieee80211_regdomain *trd)
++ static int reglib_parse_country_dfs(char *line, struct ieee80211_regdomain *rd)
++ {
++ 	char dfs_region_alpha[9];
++-	char alpha2[2];
+++	char alpha2[3];
++ 	int hits;
 + 
-+-  gchar cpu_name[CPU_NAME_MAX_SIZE];
-++  gchar cpu_name[CPU_NAME_MAX_SIZE+1];
-+   gint iowait;                  /* Time waiting for I/O to complete */
-+   gint irq;                     /* Time servicing interrupts        */
-+   gint softirq;                 /* Time servicing softirqs          */
++ 	memset(rd, 0, sizeof(*rd));
 +-- 
 +2.35.1
 +
-diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_git.bb b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_git.bb
-index d9863608a8..8c0a5c153f 100644
---- a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_git.bb
-+++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_git.bb
-@@ -10,14 +10,15 @@ DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad "
- 
- SRCBRANCH ?= "master"
- 
--PV = "0.7.2"
-+PV = "0.7.3.1"
- 
--SRCREV_base = "50e3dbd3b131de2a39d3917576e8f834631ec46b"
--SRCREV_common = "88e512ca7197a45c4114f7fa993108f23245bf50"
-+SRCREV_base = "5413ef5475e5b70476c2480a75ca3746d91d4caf"
-+SRCREV_common = "b64f03f6090245624608beb5d2fff335e23a01c0"
- SRCREV_FORMAT = "base_common"
- SRC_URI = " \
-     git://github.com/RidgeRun/gst-shark.git;protocol=https;branch=${SRCBRANCH};name=base \
-     git://gitlab.freedesktop.org/gstreamer/common.git;protocol=https;destsuffix=git/common;name=common;;branch=master \
-+    file://0001-tracers-Fix-buffer-overflow.patch \
-     "
- 
- S = "${WORKDIR}/git"
+diff --git a/meta-networking/recipes-connectivity/crda/crda_3.18.bb b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
+index f99dfd66f9..9abfd61cf2 100644
+--- a/meta-networking/recipes-connectivity/crda/crda_3.18.bb
++++ b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
+@@ -15,6 +15,7 @@ SRC_URI = "https://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.xz \
+            file://use-target-word-size-instead-of-host-s.patch \
+            file://fix-issues-when-USE_OPENSSL-1.patch \
+            file://crda-4.14-python-3.patch \
++           file://0001-Make-alpha2-to-be-3-characters-long.patch \
+ "
+ SRC_URI[md5sum] = "0431fef3067bf503dfb464069f06163a"
+ SRC_URI[sha256sum] = "43fcb9679f8b75ed87ad10944a506292def13e4afb194afa7aa921b01e8ecdbf"
 -- 
 2.35.1
 
