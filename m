@@ -1,199 +1,142 @@
-Return-Path: <bevenson@melinkcorp.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 694F4C433FE
-	for <webhook@archiver.kernel.org>; Fri,  4 Feb 2022 15:01:19 +0000 (UTC)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.98])
- by mx.groups.io with SMTP id smtpd.web08.10131.1643986878358083812
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F911C433EF
+	for <webhook@archiver.kernel.org>; Fri,  4 Feb 2022 17:27:44 +0000 (UTC)
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
+ [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web11.12146.1643995663589155038
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Feb 2022 07:01:19 -0800
+ Fri, 04 Feb 2022 09:27:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@melink.onmicrosoft.com
- header.s=selector1-melink-onmicrosoft-com header.b=OHzivOZ4;
- spf=pass (domain: melinkcorp.com, ip: 40.107.93.98,
- mailfrom: bevenson@melinkcorp.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fmsZe/1+Ao9li0xx05tBnyPfvqMpZXyo+TbsL8BKY8usX+qva15ni4cvZ2yQ6jozPynE+LkfqA+HMV1bF5WswtjZYp3U0ORJLIR3BsUd2ttH80kWUvQlyt837/CBUBdZN57nTQ8UumZmc/v+Fqx9WGy3YF6+Qk0cnh07wgpb7upmNsiishmooBz8WyS3LJPUCW6R+NOOSlPGs4AX8PtaSIoEgJ4sIJKQwh2YbsfnUdMbG63k3bB3E6XWvvgn7xl2bIlIC6jUMePcfl4KXg+6cJSab/mVBZR14HL87Lp8GGH8XInueVq42O+kIOU3Kp2IkpuydM7cTVPhhloW2neXmQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hDUtEY308AOchA0kuhlSKC+t+FEF3LnvBMcitdk161I=;
- b=kTyWssnN5dZ8PiUS3PlZo1b19WcKfHu0LhdnhY1+DfyoQY1+bHYl2/gPf6Jwe6tHedMwiYVM0+qTeJjOBDNMB7+FCWBQ8fJ91rhKs5Qj5jqaEaT08ao7rGNyUrP7TktMC78CrqBa8Bh2EGnUkj39n0hGu/XgBUVQHlfNO6EMop+cA2GecfooJ7nxk6Vea7Dh4soym+8zFBWERmqYEdUkqe/BrwjYQONFdKirmcX+lt0ZRQjbWu+PKsWXpVHJAvjF3Af0Jjfwr1WvDEKzJEoHwcs6aM7dqr6X7iGKBAsvvIeSlmt6yizsogvyOjsIhFWmJnUC25suvy4kxL7g3LRHzA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=TKO5st92;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id l1so1236104pjn.4
+        for <openembedded-devel@lists.openembedded.org>;
+ Fri, 04 Feb 2022 09:27:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=Melink.onmicrosoft.com; s=selector1-Melink-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hDUtEY308AOchA0kuhlSKC+t+FEF3LnvBMcitdk161I=;
- b=OHzivOZ4JzbqbjFPGoanGdeTjCCkxY8k8p7UAOBYXyS0cTMHl/9e2uoIB7LnBKsnoiAuE0nUsTL00ep7eHtH83y+tia/gfS1MPJTGhqJYa/e/1nlxq//yemITIG4xCJzMc/Q6LTim6PN9zDtV1F49mjIN59Iuh8XDnQQixN5tzfQY3DERcKm3xXdWV7aYMiqcQgjvc/Ja+yJt5VR6RSXSCUh+to4I0h0TAa5DBhTsEazPK5yrbCP0W3nAX5rUYmg+rE2ZxEnjg94QQzXV0UePJ9GNiRtY3Z1DuP38x+dRT/V9wdvZyky5Uf6HuSTmhJZ00Y+t/yIpurfKOJS9T+zaw==
-Received: from CH0PR20MB3948.namprd20.prod.outlook.com (2603:10b6:610:c6::22)
- by PH0PR20MB3703.namprd20.prod.outlook.com (2603:10b6:510:29::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4951.12; Fri, 4 Feb
- 2022 15:01:15 +0000
-Received: from CH0PR20MB3948.namprd20.prod.outlook.com
- ([fe80::b805:3743:bea:e7d]) by CH0PR20MB3948.namprd20.prod.outlook.com
- ([fe80::b805:3743:bea:e7d%5]) with mapi id 15.20.4951.012; Fri, 4 Feb 2022
- 15:01:15 +0000
-From: Bryan Evenson <bevenson@melinkcorp.com>
-To: "enrico.scholz@sigma-chemnitz.de" <enrico.scholz@sigma-chemnitz.de>,
-	Alexander Kanavin <alex.kanavin@gmail.com>
-CC: Jon Mason <jdmason@kudzu.us>, Yocto-mailing-list
-	<yocto@lists.yoctoproject.org>, Patches and discussions about the oe-core
- layer <openembedded-core@lists.openembedded.org>, OpenEmbedded Devel List
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] [OE-core] Inclusive Language Proposal for YP/OE
-Thread-Topic: [oe] [OE-core] Inclusive Language Proposal for YP/OE
-Thread-Index: AQHYGcoiZ54l3O2lkESg8ug3ybpvMKyDawQAgAAFCuKAAAYAsA==
-Date: Fri, 4 Feb 2022 15:01:14 +0000
-Message-ID: 
- <CH0PR20MB3948522D8A65FE1CED08EA37BB299@CH0PR20MB3948.namprd20.prod.outlook.com>
-References: 
- <CAPoiz9wL16OTzxNHdw_5-L72GOHkhhM0--WZF7An071cx6sr_A@mail.gmail.com>
-	<lyiltukbsk.fsf@ensc-virt.intern.sigma-chemnitz.de>
-	<CANNYZj9wOzJ-gp+HVP-915AQp9d-D_PN4GrgPqaC0ZLVvzbgqg@mail.gmail.com>
- <lyee4ik98t.fsf@ensc-virt.intern.sigma-chemnitz.de>
-In-Reply-To: <lyee4ik98t.fsf@ensc-virt.intern.sigma-chemnitz.de>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-bromium-msgid: 2691a096-4699-43b3-9a4c-bcee756ed94d
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=melinkcorp.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: d3f660d5-8ad5-45ed-0239-08d9e7ef30cb
-x-ms-traffictypediagnostic: PH0PR20MB3703:EE_
-x-microsoft-antispam-prvs: 
- <PH0PR20MB370360D501B76C2A4E6B349CBB299@PH0PR20MB3703.namprd20.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:7691;
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- LJ+l/OeuNqH89EZzTK7Qd663DkBnUyKhEQ7IKxi23UJKOunmzyiaMZ52jCU0QAHjppaHruKUjg/WVv5/5Oa/qNy8W5/+rMfqbm9AAvi7gnLuW6sN4SXsAYFql0+nRLY++EPq05WYsUU1Cf84cig9Kq/UFJmO027EN0FijPUWIpbgAHOZKJBS81vd6pm237UrFjq1Q2UJkNBgdd39nqcJap16BlDHnNFlzqlh9m4dUus02XupWTLuKeQjvH3QeiH4vmqZa6iqJtoXEeLo5UFdvEvFI3sowK+it5untwpH2+NTiIKTQJ966PohIcfKoPsRBcunmQ985LZOP2R5Y2jhTYIKCiLoTyftB486LknkTs6t6Jf/Ztwc1WiS4br95LbXo3bBD3F0b/upded329KWkTrC9sUPNLHuS9zWaL4wrPjs54QPoEva/GspsHiVFFysn+UBgcX9JzVFclP+5a7GWPkyz3h8NlDgKPjDGSVU8ys6Z43JwrgwjmkRvYYL3VAZFcQRNka81TX5aTKfXRAe08ZFqTCVm0afZFbuPKPnOFiFBo7OFHHEZT3zHbfunVR+/91ga/of0+FcLB9GJ8Hm1W2RtcnhMC3Ihtjf9VuPqFSX78cSwM4EbDy2T5DyRL1QgY98WSkV82pPMPPwIboE8QtKM5PLqZFYN3S4snHqH+lB/liy7EKc8A1/B6rSJVZFxaW4tbe3cDfdV25Zj7ylF980dTEqkIFhrosrOJRVGriKp9/cu5Vdqe+yZOCEze+P/izHJP9W0yMKEqmtQK+U7Fm6GQhxuU90mqY84TC1geo=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH0PR20MB3948.namprd20.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(396003)(346002)(376002)(136003)(39840400004)(366004)(4326008)(26005)(7696005)(8676002)(76116006)(52536014)(66946007)(86362001)(186003)(8936002)(66556008)(5660300002)(66476007)(64756008)(53546011)(66446008)(83380400001)(9686003)(6506007)(122000001)(966005)(316002)(110136005)(2906002)(33656002)(71200400001)(54906003)(55016003)(508600001)(38070700005)(38100700002);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?us-ascii?Q?F+vh2H9p1RP87MZMdAU18OIgdJ7vCXWQbie11uR5md2JCHl56ub/F+rOMg0T?=
- =?us-ascii?Q?lwBcCEzRrEIPCQkpDRbN/7SGyanzFVZ3+ic6wXFXLzVLJc/L7aT21AHtFSgm?=
- =?us-ascii?Q?FZ3w0aw6V+mtV17YhaH6kF1mPh+oNfe0bi8p14f0yesiF+NCOwVsdlf+1fJW?=
- =?us-ascii?Q?J0FhEFW43AylutFg6QNZQrbqJNgQE9wnZdSugpnZWBrAE+ywNMjJkByJAOBB?=
- =?us-ascii?Q?a7xxGaqyfNPtxD/ZyB8aLog55qTnpmnLSGiHNk6/NrfzHvEz/Z1PlwdNnl6B?=
- =?us-ascii?Q?rS8Kfin8IxbcoABdw5TsNYaqOaA8JLS3o3HxAB+e3XMQA13gjkaci1FJmWUF?=
- =?us-ascii?Q?7x6VZAdDlbdszX26uKEeIcGxbB4c1UX17suHDgNWqMqLbEI1BszCVrNvvCI2?=
- =?us-ascii?Q?uvSnGILnVw9Rt93/xoWTnR1PiAD9WQV3WawZ3/x/KzhNXmh1KIiCmz6rsDkB?=
- =?us-ascii?Q?UavaeaI0gH7b9UgVegcBfZv7lc1aw1/KPtYtFhruxKLSoIelH562C/4XkE4o?=
- =?us-ascii?Q?6ECCBx8AFAmbEuQZE67wjHORB6oeq94asvu7XG31ZmOwAIL+kxcTIsUZL/oz?=
- =?us-ascii?Q?uu0B04TWhv+b0ImmPReDQ++SrRQucyK7AOpSSms5oPtFy3LBLdWklirTZjak?=
- =?us-ascii?Q?ccKI0yOTQuhlb0FiWraMKSlBdZdeCqnnmyzoo4M5F3TO4rzXWSRdORtMVzYO?=
- =?us-ascii?Q?4R/dmoj1SIj+3wP1QP7sh7TYxSi/j9Y6TAQm106jkrrCi1WsZ02ZdWZqskM2?=
- =?us-ascii?Q?QCcsMMxXio82ey9XMovXUjhc0iFrjEHUkZ7ENxQIx9TIetmMb8qzDIEhwQKA?=
- =?us-ascii?Q?qhyCy3wOKN/VY3TAxGPS15bbU0HznC06fXwbQBZr+gfdUBuw/F7W72yOLLMc?=
- =?us-ascii?Q?mR3dbaB9ULNnTro4mkWorV1Yw6kpfbrb0IOjMMDAZd2BDRYxCdziuMaeUPPL?=
- =?us-ascii?Q?FnNnEOmGwdLqNgh2Ihasv7OC5glU26DqhuqnvvWRZoFBfbOOEYQ6fxwuPh1Y?=
- =?us-ascii?Q?a3NuvS0RcymzTnnDRR32P2MGtKgjjBMYn3GbLsQH+6pfcay+1zK0+UDOPcKY?=
- =?us-ascii?Q?4dr8Zl6AKePwvC0xlNv5C6DLm2xU85wcEER/CRoNac4v4HwTJRRC8x8KlvIS?=
- =?us-ascii?Q?OwF2uPEwrmykVz9FlQhU+VxvS9Z/4gxczVskNf4vA88NsVHURstcBcLfJQgm?=
- =?us-ascii?Q?DH5prPgy3luFzTbtluIziTi0JlPSnmqczmXrpH5VJtDhugoZvj+hFBljjvA8?=
- =?us-ascii?Q?nFVdqrUWWWxOPF7MwunYGeoRc9iKgvZKREpa4JTdfTkKtCi+CQNfAiCUZwIR?=
- =?us-ascii?Q?H0JZ75f/cE+vmR9ZlrUhLaHZcnIdtSpwEwH7AocvioJGDWb2NY9QRO4NCGOp?=
- =?us-ascii?Q?XpOfuteNgdaceWC2Ld8sHqB82r438XE+nZub/m3FhWdZfY3U8RQvOAeeWINq?=
- =?us-ascii?Q?sFUr9RVo0rw+EQXTagM131ZFhIf/P+LsEC8QI/7JtDRMCrwkPgbhn7ANhq2l?=
- =?us-ascii?Q?s0BskUAhOGMDGVODSB/pwV8jsRfqUe9iOQY5Ojo6ySu2LYIP/W2aHjkfSTre?=
- =?us-ascii?Q?efgFgY+4KXuLfki4AF6U2KYhxkYkik5xNTG8/w+jMM7GLWagQ6gWWO6U5lTE?=
- =?us-ascii?Q?PQWQKoyKwORV6Qak55O6lQQ=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Y2dMo1SR3ccxfXsg7Je+XIoYjKYW2PCB34xuIVBwIQc=;
+        b=TKO5st924I6C31MBuggOhwES+TW5vtvHVekri8Gal9Q/Nk/Jd3hmDpq95gWbbeS86f
+         /uvDEiAWHmY81D/bCkUrIQSXrYurLyfPEsgd4xN5nDx7d8tctLygwn5FzCZCeNFJL76+
+         A2pkVTUYQWoH2ZhRX1ur0NkrZIyFb7Q7zzSyX4mZHtqmkR0IYIRPyGbx3IXc6mNPDc/a
+         y80ui52T2GuVEEjW5lBJlMUdFbRPSLEUhZd7XTMDF1knMYB7PS3tpYghVQV5TpwlHSlY
+         WnCuDMSSoPJ2MGBuQ1MTYAWTDYyHUQ/fvssmGu64N5SwSks12BmFo8RGvcgrT0NUZa5h
+         SFmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Y2dMo1SR3ccxfXsg7Je+XIoYjKYW2PCB34xuIVBwIQc=;
+        b=Wn15jxBsqOj5WFJk1yN8/HUggeRGdkRNFalSMqpPpM+SxF61lY2mV6PeOvleFuol5h
+         ZPdraQEcfh9MFdE1nokpcL3q0xNaxrArIeJp3dX34SyP0c8cuPejg6l6Ef1tzEQrx4Zw
+         iTArh/FANhE/H9giFi+WhAlsY8ZIlBxgyJAMT0+RC7tSju+FVsgXPJ76HJ1otMQUxrIG
+         XI2VyP24vPgESxDYeo9gGUcMl2SxdEmC5Ny9+xDbVQmAKhSi+ka8BePacclnvtJZBTbZ
+         ux/CVA9VENKGIq3p8IRVVnSjK2jC+ySmlJO+tR8LwIIxL7Qo/8BUwd7G7qIS+ZYeTh6J
+         LlBQ==
+X-Gm-Message-State: AOAM532uSjuBR/W5VmxRPBQHybnIIBRkjQOEwZiT0CtpbWJCxyhtb9Bj
+	2qDlK6fVjGP0Ip6fNInyfGpZ5tjg2687iw==
+X-Google-Smtp-Source: 
+ ABdhPJzHS2Q4IAtb56/9ezlc5aBlGkjXWn5b6ZfG1zuML28E25xplf9laxbYaFSJK3JA7O2BymUvag==
+X-Received: by 2002:a17:902:c409:: with SMTP id
+ k9mr4347596plk.132.1643995662486;
+        Fri, 04 Feb 2022 09:27:42 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::fb6e])
+        by smtp.gmail.com with ESMTPSA id
+ rm11sm2257954pjb.21.2022.02.04.09.27.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 04 Feb 2022 09:27:42 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH 1/2] gst-shark: Upgrade to 0.7.3.1
+Date: Fri,  4 Feb 2022 09:27:38 -0800
+Message-Id: <20220204172739.4009892-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-X-OriginatorOrg: melinkcorp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CH0PR20MB3948.namprd20.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- d3f660d5-8ad5-45ed-0239-08d9e7ef30cb
-X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Feb 2022 15:01:15.0196
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: d06db0f9-efcc-42b5-9f8c-c934a01c9bfd
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 
- QCNAr3FvVkO6eHgstfR7tqYpIn7ckVDzVJmfsdr6kvqwVbJfT2+jcsQuEkcep3XOvxdsE5TvqjyDGlGikINSfg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR20MB3703
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 04 Feb 2022 15:01:19 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 04 Feb 2022 17:27:44 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95223
+ https://lists.openembedded.org/g/openembedded-devel/message/95224
 
-Enrico,
+Fix buffer overflow found with clang
 
-> -----Original Message-----
-> From: openembedded-core@lists.openembedded.org <openembedded-
-> core@lists.openembedded.org> On Behalf Of Enrico Scholz via
-> lists.openembedded.org
-> Sent: Friday, February 4, 2022 9:16 AM
-> To: Alexander Kanavin <alex.kanavin@gmail.com>
-> Cc: Jon Mason <jdmason@kudzu.us>; Yocto-mailing-list
-> <yocto@lists.yoctoproject.org>; Patches and discussions about the oe-core
-> layer <openembedded-core@lists.openembedded.org>; OpenEmbedded
-> Devel List <openembedded-devel@lists.openembedded.org>
-> Subject: Re: [oe] [OE-core] Inclusive Language Proposal for YP/OE
->=20
-> Alexander Kanavin <alex.kanavin@gmail.com> writes:
->=20
-> >> > For BB_DISKMON_DIRS, the actions "ABORT, STOPTASKS and WARN"
-> would
-> >> > become "HALT, NO_NEW_TASKS and "WARN".
-> >>
-> >> I am not an native english speaker, but for "HALT" I will have to
-> >> think twice whether it will pause the operation or abort it.  I would
-> >> stay at "ABORT" because it makes much more clear what happens.
-> >
-> > I'm not taking a stand here, but just providing the context for where
-> > the push for avoidance of 'abort' comes from:
-> > https://inclusivenaming.org/word-lists/tier-1/
-> >
-> > Keep in mind that for non-native english speakers none of these words
-> > are emotionally charged; they're just terms.
->=20
-> Yes; these are terms.  But it should be possible to understand the meanin=
-g of
-> these terms without using a special "inclusivenaming"
-> dictionary.  Else, we could just use "A", "B" and "C" for the actions abo=
-ve and
-> explain these "terms" in some documentation later.
->=20
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../0001-tracers-Fix-buffer-overflow.patch    | 33 +++++++++++++++++++
+ .../gstreamer-1.0/gst-shark_git.bb            |  7 ++--
+ 2 files changed, 37 insertions(+), 3 deletions(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark/0001-tracers-Fix-buffer-overflow.patch
 
-Would CANCEL be clearer to you than HALT?
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark/0001-tracers-Fix-buffer-overflow.patch b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark/0001-tracers-Fix-buffer-overflow.patch
+new file mode 100644
+index 0000000000..1d85e51d6b
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark/0001-tracers-Fix-buffer-overflow.patch
+@@ -0,0 +1,33 @@
++From d84807ec6d6f8511e4ec939a745d4d7bb35c3cfb Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 4 Feb 2022 09:22:48 -0800
++Subject: [PATCH] tracers: Fix buffer overflow
++
++Fixes
++| ../../../git/plugins/tracers/gstcpuusagecompute.c:106:9: error: 'fscanf' may overflow; destination buffer in argument 3 has size 8, but the corresponding specifier may require size 9 [-Werror,-Wfortify-sour
++ce]
++|         cpu_name, &user[0], &nice[0], &system[0], &idle[0], &iowait, &irq,
++|         ^
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ plugins/tracers/gstcpuusagecompute.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/plugins/tracers/gstcpuusagecompute.c b/plugins/tracers/gstcpuusagecompute.c
++index 39255fb..00bae66 100644
++--- a/plugins/tracers/gstcpuusagecompute.c
+++++ b/plugins/tracers/gstcpuusagecompute.c
++@@ -69,7 +69,7 @@ gst_cpu_usage_compute (GstCPUUsage * cpu_usage)
++   gint *idle;
++   gint *idle_aux;
++ 
++-  gchar cpu_name[CPU_NAME_MAX_SIZE];
+++  gchar cpu_name[CPU_NAME_MAX_SIZE+1];
++   gint iowait;                  /* Time waiting for I/O to complete */
++   gint irq;                     /* Time servicing interrupts        */
++   gint softirq;                 /* Time servicing softirqs          */
++-- 
++2.35.1
++
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_git.bb b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_git.bb
+index d9863608a8..8c0a5c153f 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_git.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_git.bb
+@@ -10,14 +10,15 @@ DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad "
+ 
+ SRCBRANCH ?= "master"
+ 
+-PV = "0.7.2"
++PV = "0.7.3.1"
+ 
+-SRCREV_base = "50e3dbd3b131de2a39d3917576e8f834631ec46b"
+-SRCREV_common = "88e512ca7197a45c4114f7fa993108f23245bf50"
++SRCREV_base = "5413ef5475e5b70476c2480a75ca3746d91d4caf"
++SRCREV_common = "b64f03f6090245624608beb5d2fff335e23a01c0"
+ SRCREV_FORMAT = "base_common"
+ SRC_URI = " \
+     git://github.com/RidgeRun/gst-shark.git;protocol=https;branch=${SRCBRANCH};name=base \
+     git://gitlab.freedesktop.org/gstreamer/common.git;protocol=https;destsuffix=git/common;name=common;;branch=master \
++    file://0001-tracers-Fix-buffer-overflow.patch \
+     "
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.35.1
 
->=20
-> >> > BB_HASHCONFIG_WHITELIST -> BB_HASHCONFIG_IGNORE_VARS
-> >> > BB_SETSCENE_ENFORCE_WHITELIST ->
-> BB_SETSCENE_ENFORCE_IGNORE_TASKS
-> >> > BB_HASHBASE_WHITELIST -> BB_BASEHASH_IGNORE_VARS
-> >> > MULTI_PROVIDER_WHITELIST -> BB_MULTI_PROVIDER_ALLOWED
-> >>
-> >> The new variable names sound like boolean flags, not like lists.
-> >
-> > I'd say the context should make it clear that they are lists
->=20
-> It is bad when a context is required to understand the meaning of a varia=
-ble.
->=20
-> And where do you see a context when local.conf contains
->=20
-> | BB_HASHCONFIG_IGNORE_VARS =3D "true"
-
-Would BB_HASHCONFIG_IGNORELIST or BB_HASHCONFIG_ALLOWEDLIST make more sense=
- to you?
-
-Bryan
->=20
->=20
->=20
-> Enrico
 
