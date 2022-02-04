@@ -1,132 +1,117 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <enrico.scholz@sigma-chemnitz.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D92DFC433F5
-	for <webhook@archiver.kernel.org>; Fri,  4 Feb 2022 17:27:44 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com
- [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.web11.12147.1643995664450909705
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A933EC433FE
+	for <webhook@archiver.kernel.org>; Fri,  4 Feb 2022 18:39:14 +0000 (UTC)
+Received: from smtpout.cvg.de (smtpout.cvg.de [87.128.211.67])
+ by mx.groups.io with SMTP id smtpd.web12.13377.1643999951087717625
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Feb 2022 09:27:44 -0800
+ Fri, 04 Feb 2022 10:39:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=dKmCrslc;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id
- o16-20020a17090aac1000b001b62f629953so13702462pjq.3
-        for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Feb 2022 09:27:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=LC6ub9UY+kCbfGfgnj3hcIOv3zo1LavgAOxFEl1v1CI=;
-        b=dKmCrslcJGannCXqihmyWrn9Hk5hwORmfvDnBRWy+ttuO7A1tD+d2K6xmgMQqcBvFv
-         2/+1kOtZaGbiWgl8BI0O4hvQ7A6TOaKRdJnu1/V1t9mg3J/byX/bcftAVqXh+glgd2di
-         ZLbxVlmHl/V1e60lFtZNY+9MiCljmbj3AoehamFWb08dqiEhNoY2l7ITPRM/6ccXsMz2
-         ZVkN8aP5yUOZqP3g5hHm0jbkEACJtR6e7vy/TizFQ0nBw7Wnz7XyAtVyjiBaCMBQl/Xx
-         hzycbmrK1yRgzgJw3BnFpx5wE/9jG9tAPwppAcnc9S+sGVJ75HnAJd7/u2eyTNWbDHEf
-         iaHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=LC6ub9UY+kCbfGfgnj3hcIOv3zo1LavgAOxFEl1v1CI=;
-        b=rtWqjNDYicHs1pSrSpfvXD+eCubWe9NOQP+layRqYQAoCR+qs6ILhBHUI7Ww4A9tk/
-         Y1m878CAH0sEFBWjyIJUfF2GJvxzDC30N9nyR6YgBv8TIxSy1QvEWNJHh9LP0RCHDleK
-         rHl9o1JZq9FRsfFOH0lZjgwio7nLjndJ1RVHIbNyfvIEJq4wTL/rjqtzQr8LoaDYiffG
-         ixX9JACZivHC3+BlpajwF7rAwE8Lb0HnfHSQxcV1wjqaF1wZ6Y8ROygRKwp1Wm0k4jIY
-         mHxTSPtWTppzqJtcKwQAaeghCPklbUWbBdLJoyWeO/qSy8d1AzBSIJJrDnpyyxSI013z
-         jtfQ==
-X-Gm-Message-State: AOAM532FMijYInFJtCgS45aqEaat1Bldiw0857QamtXnK1L7proDvOUL
-	rGN6qBF6eC5PW4vVamTUwE7PNPHXBWcEMQ==
-X-Google-Smtp-Source: 
- ABdhPJx7czh0u3a7MuZ0zEpC3OJMnbcpp1hcWUPVwonXqwxYUJ8tj80Dv3BY7rYEk8CggdNQQzWapw==
-X-Received: by 2002:a17:903:2309:: with SMTP id
- d9mr3969468plh.149.1643995663676;
-        Fri, 04 Feb 2022 09:27:43 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::fb6e])
-        by smtp.gmail.com with ESMTPSA id
- rm11sm2257954pjb.21.2022.02.04.09.27.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 04 Feb 2022 09:27:42 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 2/2] crda: Fix buffer overflow in sscanf
-Date: Fri,  4 Feb 2022 09:27:39 -0800
-Message-Id: <20220204172739.4009892-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220204172739.4009892-1-raj.khem@gmail.com>
-References: <20220204172739.4009892-1-raj.khem@gmail.com>
+ dkim=pass header.i=@sigma-chemnitz.de header.s=v2012061000 header.b=MyPPWmB5;
+ spf=pass (domain: sigma-chemnitz.de, ip: 87.128.211.67,
+ mailfrom: enrico.scholz@sigma-chemnitz.de)
+Received: from mail-mta-3.intern.sigma-chemnitz.de
+ (mail-mta-3.intern.sigma-chemnitz.de [192.168.12.71])
+	by mail-out-2.intern.sigma-chemnitz.de (8.16.1/8.16.1) with ESMTPS id
+ 214Id8R2114695
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=OK);
+	Fri, 4 Feb 2022 19:39:08 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sigma-chemnitz.de;
+	s=v2012061000; t=1643999948;
+	bh=b1t/F0XGvjdZzDKRl9+QN+kx7PPodsKEKfQc1RZnDQY=; l=1419;
+	h=From:To:Cc:Subject:References:Date:In-Reply-To;
+	b=MyPPWmB5gGbdyEGAj8XCdUfIw0iDCrh8oY/xHbO88/7H07kPYQbljrlaBqk/3ixgL
+	 P6MEU0zSA1WH9lL1t9x1nGA+18FuaX7ex+55xNwcfMq/4b8QInWDh7DBhmqnpiJIcO
+	 S2p2VP/Iu67PkK5Euoic0Ab0POdeGaGGUllWnCn0=
+Received: from reddoxx.intern.sigma-chemnitz.de (reddoxx.sigma.local
+ [192.168.16.32])
+	by mail-mta-3.intern.sigma-chemnitz.de (8.16.1/8.16.1) with ESMTP id
+ 214Id5QS351065;
+	Fri, 4 Feb 2022 19:39:05 +0100
+Received: from mail-msa-3.intern.sigma-chemnitz.de ( [192.168.12.73]) by
+ reddoxx.intern.sigma-chemnitz.de
+	(Reddoxx engine) with SMTP id 3481524690E; Fri, 4 Feb 2022 19:38:55 +0100
+Received: from ensc-virt.intern.sigma-chemnitz.de
+ (ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail-msa-3.intern.sigma-chemnitz.de (8.15.2/8.15.2) with ESMTPS id
+ 214Icsxm115816
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+	Fri, 4 Feb 2022 19:38:54 +0100
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+ 4.94.2)
+	(envelope-from <ensc@sigma-chemnitz.de>)
+	id 1nG3Tx-004MYn-Rl; Fri, 04 Feb 2022 19:38:53 +0100
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+To: Bryan Evenson <bevenson@melinkcorp.com>
+Cc: Alexander Kanavin <alex.kanavin@gmail.com>, Jon Mason
+ <jdmason@kudzu.us>,
+        Yocto-mailing-list <yocto@lists.yoctoproject.org>,
+        Patches and discussions about the oe-core layer
+ <openembedded-core@lists.openembedded.org>,
+        OpenEmbedded Devel List
+ <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [OE-core] Inclusive Language Proposal for YP/OE
+References: 
+ <CAPoiz9wL16OTzxNHdw_5-L72GOHkhhM0--WZF7An071cx6sr_A@mail.gmail.com>
+	<lyiltukbsk.fsf@ensc-virt.intern.sigma-chemnitz.de>
+	<CANNYZj9wOzJ-gp+HVP-915AQp9d-D_PN4GrgPqaC0ZLVvzbgqg@mail.gmail.com>
+	<lyee4ik98t.fsf@ensc-virt.intern.sigma-chemnitz.de>
+	<CH0PR20MB3948522D8A65FE1CED08EA37BB299@CH0PR20MB3948.namprd20.prod.outlook.com>
+Date: Fri, 04 Feb 2022 19:38:53 +0100
+In-Reply-To: 
+ <CH0PR20MB3948522D8A65FE1CED08EA37BB299@CH0PR20MB3948.namprd20.prod.outlook.com>
+	(Bryan Evenson's message of "Fri, 4 Feb 2022 15:01:14 +0000")
+Message-ID: <lya6f6jx36.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.2 (gnu/linux)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 04 Feb 2022 17:27:44 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 04 Feb 2022 18:39:14 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95225
+ https://lists.openembedded.org/g/openembedded-devel/message/95226
 
-Fixes build with clang14
+Bryan Evenson <bevenson@melinkcorp.com> writes:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...-Make-alpha2-to-be-3-characters-long.patch | 31 +++++++++++++++++++
- .../recipes-connectivity/crda/crda_3.18.bb    |  1 +
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch
+>> >> > For BB_DISKMON_DIRS, the actions "ABORT, STOPTASKS and WARN"
+>> >> > would become "HALT, NO_NEW_TASKS and "WARN".
+>> >>
+>> >> I am not an native english speaker, but for "HALT" I will have to
+>> >> think twice whether it will pause the operation or abort it.  I would
+>> >> stay at "ABORT" because it makes much more clear what happens.
+>
+> Would CANCEL be clearer to you than HALT?
 
-diff --git a/meta-networking/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch b/meta-networking/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch
-new file mode 100644
-index 0000000000..f1d2cbc5a3
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch
-@@ -0,0 +1,31 @@
-+From 078e962d345fd0536fe7ba797485ee1a4159c032 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 4 Feb 2022 09:18:30 -0800
-+Subject: [PATCH] Make alpha2 to be 3 characters long
-+
-+Fixes buffer overflow
-+reglib.c:969:9: error: 'sscanf' may overflow; destination buffer in argument 3 has size 2, but the corresponding specifier may require size 3 [-Werror,-Wfortify-source]
-+                      alpha2,
-+                      ^
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ reglib.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/reglib.c b/reglib.c
-+index e00e9b8..8565a0b 100644
-+--- a/reglib.c
-++++ b/reglib.c
-+@@ -958,7 +958,7 @@ reglib_parse_rules(FILE *fp, struct ieee80211_regdomain *trd)
-+ static int reglib_parse_country_dfs(char *line, struct ieee80211_regdomain *rd)
-+ {
-+ 	char dfs_region_alpha[9];
-+-	char alpha2[2];
-++	char alpha2[3];
-+ 	int hits;
-+ 
-+ 	memset(rd, 0, sizeof(*rd));
-+-- 
-+2.35.1
-+
-diff --git a/meta-networking/recipes-connectivity/crda/crda_3.18.bb b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-index f99dfd66f9..9abfd61cf2 100644
---- a/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-+++ b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-@@ -15,6 +15,7 @@ SRC_URI = "https://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.xz \
-            file://use-target-word-size-instead-of-host-s.patch \
-            file://fix-issues-when-USE_OPENSSL-1.patch \
-            file://crda-4.14-python-3.patch \
-+           file://0001-Make-alpha2-to-be-3-characters-long.patch \
- "
- SRC_URI[md5sum] = "0431fef3067bf503dfb464069f06163a"
- SRC_URI[sha256sum] = "43fcb9679f8b75ed87ad10944a506292def13e4afb194afa7aa921b01e8ecdbf"
--- 
-2.35.1
+mmmh.... for me as a developer (and non-native english speaker), "cancel"
+means some ordered ending of an operation.
 
+But the condition above causes an emergency abort.
+
+I do not know how this can be described without using "abort" or some
+extensively long terms.
+
+
+>> >> > BB_HASHCONFIG_WHITELIST -> BB_HASHCONFIG_IGNORE_VARS
+>> >> > BB_SETSCENE_ENFORCE_WHITELIST -> BB_SETSCENE_ENFORCE_IGNORE_TASKS
+>> >> > BB_HASHBASE_WHITELIST -> BB_BASEHASH_IGNORE_VARS
+>> >> > MULTI_PROVIDER_WHITELIST -> BB_MULTI_PROVIDER_ALLOWED
+>> >>
+>> >> The new variable names sound like boolean flags, not like lists.
+>
+> Would BB_HASHCONFIG_IGNORELIST or BB_HASHCONFIG_ALLOWEDLIST make more
+> sense to you?
+
+yes; it is much better.  But should it be an "IGNORELIST" or an
+"IGNORE*D*LIST"?
+
+
+
+Enrico
+[who is irritated how people and especially developer can waste their
+(and other developers) time in trying to change something which was
+completely fine before]
 
