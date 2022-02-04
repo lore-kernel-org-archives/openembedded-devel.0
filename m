@@ -1,82 +1,107 @@
-Return-Path: <sakib.sajal@windriver.com>
+Return-Path: <jdmason@kudzu.us>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C7E2DC433F5
-	for <webhook@archiver.kernel.org>; Thu,  3 Feb 2022 22:58:20 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web09.1767.1643929099571587877
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33896C433EF
+	for <webhook@archiver.kernel.org>; Fri,  4 Feb 2022 02:31:18 +0000 (UTC)
+Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com
+ [209.85.160.173])
+ by mx.groups.io with SMTP id smtpd.web12.4468.1643941877238659861
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Feb 2022 14:58:19 -0800
+ Thu, 03 Feb 2022 18:31:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.3.146,
- mailfrom: sakib.sajal@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 213MwHs7009903
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 3 Feb 2022 14:58:18 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 213MwGU0015225
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 3 Feb 2022 14:58:17 -0800 (PST)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Thu, 3 Feb 2022 14:58:16 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Thu, 3 Feb 2022 14:58:15 -0800
-Received: from localhost.localdomain (128.224.72.177) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Thu, 3 Feb 2022 14:58:15 -0800
-From: Sakib Sajal <sakib.sajal@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] nss: uprev v3.73.1 -> v3.74
-Date: Thu, 3 Feb 2022 17:58:06 -0500
-Message-ID: <20220203225806.75173-1-sakib.sajal@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@kudzu-us.20210112.gappssmtp.com header.s=20210112
+ header.b=aglW31J2;
+ spf=none, err=permanent DNS error (domain: kudzu.us, ip: 209.85.160.173,
+ mailfrom: jdmason@kudzu.us)
+Received: by mail-qt1-f173.google.com with SMTP id h8so4583928qtk.13
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 03 Feb 2022 18:31:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=kudzu-us.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=zNoB18OOKovCHPCNE772E4SbEYe1hwvmGZ05K2QPrsk=;
+        b=aglW31J2MYExZbN6xkEigGGOKofxp6+XKEJPEbpwyfDunAGB3DOt8FXWRD+HH2yLZ8
+         fTlG//28w5nb//KN+Rtjn9zwnbuoPu/OVPm6NmsXQKi6diIUVv7PZyIQBgB+ul1JA/l1
+         6iE0avTTOBOtnhWpTKTSPNbXWuB5q7KeVgxwzwpq4G3PmZgb3uN8SyxkIWrbdQ3rg5Tt
+         ZOCNwMHXoGFDoQxlLweS4J8QOJQh3ZHpKAA/03Lqbhvka4zUj5YqmtOqGYmodgdXzK4T
+         Y6nqEKq1+vWtRlaGEObLuWu0lXnGS7n9JtJ7aX6X90vPrG9DesCTbrK0nKWaFVJfClMJ
+         mfyQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=zNoB18OOKovCHPCNE772E4SbEYe1hwvmGZ05K2QPrsk=;
+        b=k2KABYqCSgBR18wn8hNCoZR7xLi1H9y6YRRSueXfL4Ao64wI21Fi1r6/SjJIUZv26H
+         87rPAuMj2QUjBtLxcZQ8vZEP3f9qU7vSR5LsjyALT5Je5dUqjhv0rkh4HbzsjQ0Dxso6
+         LMWHX7CiZGjJ7wN6s1PFbF7MlTt7q1js0qf4kl62N0FtPEMGz/Ub3hS9b7sYtNdQ2fNq
+         hwWNdpcBW9SrRUWe+dbaGXN9AE5WeVbDqesIEarUS5N+mJD5m8YmWtR+SeWljB+MQc63
+         qYTQ6BuIaJcNDkiEe5QMTRdlA7/BuzL34dMwHFRHIsg23kbPP1aiZuBr//QMMl12+NtW
+         307g==
+X-Gm-Message-State: AOAM531cMzuCkMKdrGIXidUQeigXbr6YCIxgmWfLbT7QsXQW0m9VpLHO
+	9NkB0ZaY1IiqQof7c8P0hJqpZM63b5o6fxNrvFog4NXexqRycw==
+X-Google-Smtp-Source: 
+ ABdhPJzvb/lZ6h0nKOVIFQt3DHx4fVJ9uGWWcRHWcLfm2PpLYVTlXYkmkuUdcrBuzadjOe/dWNrx0eERWjG3juVrmzc=
+X-Received: by 2002:a05:622a:4f:: with SMTP id
+ y15mr687627qtw.661.1643941876319;
+ Thu, 03 Feb 2022 18:31:16 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+From: Jon Mason <jdmason@kudzu.us>
+Date: Thu, 3 Feb 2022 21:31:08 -0500
+Message-ID: 
+ <CAPoiz9xdMynAdLjHMoG76kiny4CUbvj6n7DxHR6HYecuLxcVwg@mail.gmail.com>
+Subject: Inclusive Language Proposal for YP/OE folllow-up
+To: yocto@lists.yoctoproject.org,
+	Patches and discussions about the oe-core layer
+ <openembedded-core@lists.openembedded.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	openembedded-architecture <openembedded-architecture@lists.openembedded.org>,
+	bitbake-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Feb 2022 22:58:20 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 04 Feb 2022 02:31:18 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95217
+ https://lists.openembedded.org/g/openembedded-devel/message/95218
 
-Upgrade to newer version to resolve CVE-2022-22747.
+This is a follow up to the Inclusive Language email I sent out on
+January 24 (see
+https://lore.kernel.org/yocto/CAPoiz9wL16OTzxNHdw_5-L72GOHkhhM0--WZF7An071cx6sr_A@mail.gmail.com/).
+I'm adding a couple of additional mailing lists to this email that
+were not on the original distribution, in case there are developers
+for those areas which didn't see the original email.
 
-Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
----
- meta-oe/recipes-support/nss/{nss_3.73.1.bb => nss_3.74.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/nss/{nss_3.73.1.bb => nss_3.74.bb} (99%)
+I really appreciate the positive feedback received on this.  I've
+updated the wiki with the suggested changes by Ross (acked by Randy)
+and Mikko, and extrapolated that to be the following list:
 
-diff --git a/meta-oe/recipes-support/nss/nss_3.73.1.bb b/meta-oe/recipes-support/nss/nss_3.74.bb
-similarity index 99%
-rename from meta-oe/recipes-support/nss/nss_3.73.1.bb
-rename to meta-oe/recipes-support/nss/nss_3.74.bb
-index 274e85d1f..c93f7caeb 100644
---- a/meta-oe/recipes-support/nss/nss_3.73.1.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.74.bb
-@@ -33,7 +33,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
-            file://nss-fix-nsinstall-build.patch \
-            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
-            "
--SRC_URI[sha256sum] = "c768f9fe3129e8bcc2e9679456d7edd9453a225784a8fc7dc4501806f1fe9abe"
-+SRC_URI[sha256sum] = "88928811f9f40f87d42e2eaccdf6e454562e51486067f2ddbe90aa47ea6cd056"
- 
- UPSTREAM_CHECK_URI = "https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS/NSS_Releases"
- UPSTREAM_CHECK_REGEX = "NSS_(?P<pver>.+)_release_notes"
--- 
-2.25.1
+CVE_CHECK_PN_WHITELIST ->
+CVE_CHECK_SKIPRECIPE ->
+CVE_CHECK_SKIP_RECIPE
 
+CVE_CHECK_WHITELIST ->
+CVE_CHECK_IGNORECVE ->
+CVE_CHECK_IGNORE
+
+INHERIT_BLACKLIST ->
+INHERIT_RECIPESKIP ->
+INHERIT_RECIPE_SKIP
+
+SDK_LOCAL_CONF_BLACKLIST ->
+ESDK_LOCALCONF_REMOVE ->
+ESDK_LOCAL_CONF_REMOVE
+
+If anyone wants to nack the changes above, please let me know (or
+modify https://wiki.yoctoproject.org/wiki/Inclusive_language).
+Similarly, I've added all of the proposed names to the "approved name"
+column.
+
+On the same wiki, I've changed the tables to now have a volunteer
+developer column (from the "Assigned Developer" name) to make it more
+clear that we need help in doing these tasks.  If there is anything
+you are interested in, please feel free to put your name down there
+and have at it.
+
+Thanks,
+Jon
 
