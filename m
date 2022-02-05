@@ -1,120 +1,81 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <robert.joslyn@redrectangle.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B67A8C433EF
-	for <webhook@archiver.kernel.org>; Sat,  5 Feb 2022 17:55:23 +0000 (UTC)
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com
- [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.web08.1120.1644083719962380774
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 80CFBC433F5
+	for <webhook@archiver.kernel.org>; Sat,  5 Feb 2022 22:35:42 +0000 (UTC)
+Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net
+ [217.70.183.193])
+ by mx.groups.io with SMTP id smtpd.web10.2530.1644100541626959770
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Feb 2022 09:55:20 -0800
+ Sat, 05 Feb 2022 14:35:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=dI+euzb4;
- spf=pass (domain: gmail.com, ip: 209.85.216.49,
- mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f49.google.com with SMTP id
- r64-20020a17090a43c600b001b8854e682eso1358576pjg.0
-        for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Feb 2022 09:55:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=89+ukca41Yd1FynlLH3OXgur34EZthaT25AgpIv/dw0=;
-        b=dI+euzb4IfUJF3aceII8XYVq4cKbKlYo7d6M6gfJIgd7n8zwlpDXdT+T0jYIu9qjaG
-         +v1SqCTobStJMSiWNVquRoMZ3C0SWUQF60ckPAbqyK9k8g8RVn0Ad00TbvLYEsgAGDoz
-         wWEtliWsRNbKW1TNd3XBCBotetK1jafqYydKt62N0jB/JK1FdOOtfK6k+53c9A5ZHARH
-         glw7WY1Y77qfShS33Zm1RScqlwmBJdNNzvhow+Ud5s4VYncjtkhTaYgteucZCxfabrmz
-         uBA9XA2ptHEK8nUkWPKhwoDYJipx6VWJWmg3yw0Hl2nz6tmLIblywjpghx8od5aqsPia
-         qjzA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=89+ukca41Yd1FynlLH3OXgur34EZthaT25AgpIv/dw0=;
-        b=yT95maKX8tCXQDsAveqRf51d2yNXHFSgWH/cgVFlLCRWztQFcn20Y71ISeX8sgdvLr
-         XdTGSdJC0dz7sgV3EG136nUmovoYfyx6QPW75IsboMHZr/nKtlFLlGHXkVPPBoP038Wb
-         r1yQc8AG11DmXWiJaWn35aQiVEkZ3rB1p8nAiMKsA6Ofy/kKK2ENRP+SWDpU7rp9UjHC
-         r42GAiWOOlgF+o2+TaMrAKJ8e2dt2oK2YQrdko+uyiSVszjF5cUyx+m951ljRDVwa5Ci
-         7D+E/TOvRST4Lwjn+f7UMrE1Aj8wWhAAoZRKb3RKA9oZfcpanKOAmR7XYtGOJHAuHm3B
-         SEsw==
-X-Gm-Message-State: AOAM532iYEkb9wXq9fTsxMg2ePm3Quk5yBt0fq0EjcIvLTLKlsfIPs4d
-	AFN0k2mvkbtT7gU3mxOMCWHa3hSOFEk=
-X-Google-Smtp-Source: 
- ABdhPJzy6EvFSip+4t9lafEZhmJfg9E2Hs7jRMfDwFxN4Hh6C1ocejv2U9JPEtAvMHxAoJhMY+dA8w==
-X-Received: by 2002:a17:90b:3808:: with SMTP id
- mq8mr9819256pjb.225.1644083719313;
-        Sat, 05 Feb 2022 09:55:19 -0800 (PST)
-Received: from keaua.caveonetworks.com
- ([2601:202:4180:a5c0:c500:ff16:ca75:f2cc])
-        by smtp.gmail.com with ESMTPSA id
- pf8sm1140677pjb.20.2022.02.05.09.55.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 05 Feb 2022 09:55:19 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
+ dkim=missing;
+ spf=none, err=permanent DNS error (domain: redrectangle.org,
+ ip: 217.70.183.193, mailfrom: robert.joslyn@redrectangle.org)
+Received: (Authenticated sender: robert.joslyn@redrectangle.org)
+	by mail.gandi.net (Postfix) with ESMTPSA id 5AD3D240002;
+	Sat,  5 Feb 2022 22:35:37 +0000 (UTC)
+From: Robert Joslyn <robert.joslyn@redrectangle.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Tim Orling <ticotimo@gmail.com>,
-	Tim Orling <tim.orling@konsulko.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][honister][PATCH 3/3] tiptop: update download URL and
- HOMEPAGE
-Date: Sat,  5 Feb 2022 09:55:15 -0800
-Message-Id: <20220205175515.1767488-3-akuster808@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220205175515.1767488-1-akuster808@gmail.com>
-References: <20220205175515.1767488-1-akuster808@gmail.com>
+Cc: Robert Joslyn <robert.joslyn@redrectangle.org>
+Subject: [meta-oe][PATCH] hwdata: Update to 0.356
+Date: Sat,  5 Feb 2022 14:34:58 -0800
+Message-Id: <20220205223458.3696402-1-robert.joslyn@redrectangle.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 05 Feb 2022 17:55:23 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 05 Feb 2022 22:35:42 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95231
+ https://lists.openembedded.org/g/openembedded-devel/message/95232
 
-From: Tim Orling <ticotimo@gmail.com>
+This data is dual licensed under GPL-2.0-or-later and XFree86-1.0,
+update LICENSE to reflect this.
 
-HOMEPAGE is now https://team.inria.fr/pacap/software/tiptop/
-Download link is now https://files.inria.fr/pacap/tiptop/tiptop-2.3.1.tar.gz
+The data provided by this recipe are plain text files, so allarch can be
+used. The do_compile step doesn't do anything and can be skipped.
 
-Use HOMEPAGE url for UPSTREAM_CHECK_URI.
-
-Signed-off-by: Tim Orling <tim.orling@konsulko.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 3a723d762bb77d4dcf6061c6933caf0d2a9104b3)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
 ---
- meta-oe/recipes-extended/tiptop/tiptop_2.3.1.bb | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ .../hwdata/{hwdata_0.347.bb => hwdata_0.356.bb}           | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/hwdata/{hwdata_0.347.bb => hwdata_0.356.bb} (79%)
 
-diff --git a/meta-oe/recipes-extended/tiptop/tiptop_2.3.1.bb b/meta-oe/recipes-extended/tiptop/tiptop_2.3.1.bb
-index 31d0dae25c..b4e5fd4d73 100644
---- a/meta-oe/recipes-extended/tiptop/tiptop_2.3.1.bb
-+++ b/meta-oe/recipes-extended/tiptop/tiptop_2.3.1.bb
-@@ -1,10 +1,10 @@
- SUMMARY = "Hardware performance monitoring counters"
--HOMEPAGE = "http://tiptop.gforge.inria.fr/"
-+HOMEPAGE = "https://team.inria.fr/pacap/software/tiptop/"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- DEPENDS = "ncurses libxml2 bison-native flex-native"
+diff --git a/meta-oe/recipes-support/hwdata/hwdata_0.347.bb b/meta-oe/recipes-support/hwdata/hwdata_0.356.bb
+similarity index 79%
+rename from meta-oe/recipes-support/hwdata/hwdata_0.347.bb
+rename to meta-oe/recipes-support/hwdata/hwdata_0.356.bb
+index 3713004e8..6c2ae5e5a 100644
+--- a/meta-oe/recipes-support/hwdata/hwdata_0.347.bb
++++ b/meta-oe/recipes-support/hwdata/hwdata_0.356.bb
+@@ -2,17 +2,21 @@ DESCRIPTION = "Hardware identification and configuration data"
+ HOMEPAGE = "https://github.com/vcrhonek/hwdata"
+ SECTION = "System/Base"
  
--SRC_URI = "http://tiptop.gforge.inria.fr/releases/${BP}.tar.gz \
-+SRC_URI = "http://files.inria.fr/pacap/${BPN}/${BP}.tar.gz \
-            file://0001-Fix-parallel-build-problems-by-Adrian-Bunk.patch \
-            file://0002-fix-reproducibility-of-build-process.patch \
-            file://0001-Fix-build-when-S-B.patch \
-@@ -12,6 +12,8 @@ SRC_URI = "http://tiptop.gforge.inria.fr/releases/${BP}.tar.gz \
- SRC_URI[md5sum] = "46ca0fdf0236f02dd2b96d347626d2a2"
- SRC_URI[sha256sum] = "51c4449c95bba34f16b429729c2f58431490665d8093efaa8643b2e1d1084182"
+-LICENSE = "GPL-2.0+"
++LICENSE = "GPL-2.0+ | XFree86-1.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1556547711e8246992b999edd9445a57"
  
-+UPSTREAM_CHECK_URI = "https://team.inria.fr/pacap/software/tiptop/"
+-SRCREV = "ae89c73d89bb9f416b25ad9e850e9606e66a573e"
++SRCREV = "66a9f63255a06e2d9ec49501188ca47cb537675b"
+ SRC_URI = "git://github.com/vcrhonek/${BPN}.git;branch=master;protocol=https"
+ S = "${WORKDIR}/git"
+ 
++inherit allarch
 +
- inherit autotools
+ do_configure() {
+     ${S}/configure --datadir=${datadir} --libdir=${libdir}
+ }
  
- EXTRA_OECONF = "CFLAGS="$CFLAGS -I${STAGING_INCDIR}/libxml2""
++do_compile[noexec] = "1"
++
+ do_install() {
+     oe_runmake install DESTDIR=${D}
+ }
 -- 
-2.25.1
+2.34.1
 
 
