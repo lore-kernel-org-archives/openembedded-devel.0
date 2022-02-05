@@ -1,125 +1,100 @@
-Return-Path: <enrico.scholz@sigma-chemnitz.de>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 97467C433EF
-	for <webhook@archiver.kernel.org>; Fri,  4 Feb 2022 20:09:04 +0000 (UTC)
-Received: from smtpout.cvg.de (smtpout.cvg.de [87.128.211.67])
- by mx.groups.io with SMTP id smtpd.web08.14448.1644005340988799909
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4D1FC433EF
+	for <webhook@archiver.kernel.org>; Sat,  5 Feb 2022 17:55:18 +0000 (UTC)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com
+ [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.web12.1080.1644083718057650959
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Feb 2022 12:09:04 -0800
+ Sat, 05 Feb 2022 09:55:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@sigma-chemnitz.de header.s=v2012061000 header.b=fG70hJVR;
- spf=pass (domain: sigma-chemnitz.de, ip: 87.128.211.67,
- mailfrom: enrico.scholz@sigma-chemnitz.de)
-Received: from mail-mta-3.intern.sigma-chemnitz.de
- (mail-mta-3.intern.sigma-chemnitz.de [192.168.12.71])
-	by mail-out-3.intern.sigma-chemnitz.de (8.16.1/8.16.1) with ESMTPS id
- 214K8wk7119027
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=OK);
-	Fri, 4 Feb 2022 21:08:58 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sigma-chemnitz.de;
-	s=v2012061000; t=1644005338;
-	bh=BpUrJkx3eD1gIgcDL4D7V1xRLEGjGPcFYO/2vgNej1M=; l=1248;
-	h=From:To:Cc:Subject:References:Date:In-Reply-To;
-	b=fG70hJVRCkP/1Jq2YIUHzcy5CGE1MMnVE06rzsWS/ucnAmcfN8ZZwAYd9INQYyEJX
-	 Ryd8QOdm3Dm1EYaHWmbyBwqBT8nrebqi/9Kmij7AouVPC4bVyMQ0tjOA9jTAES4YRU
-	 3GzQ2jk3DZkRD0ManmyiD89OI+6A8TTlmWUz5E2w=
-Received: from reddoxx.intern.sigma-chemnitz.de (reddoxx.sigma.local
- [192.168.16.32])
-	by mail-mta-3.intern.sigma-chemnitz.de (8.16.1/8.16.1) with ESMTP id
- 214K8uKN352282;
-	Fri, 4 Feb 2022 21:08:56 +0100
-Received: from mail-msa-2.intern.sigma-chemnitz.de ( [192.168.12.72]) by
- reddoxx.intern.sigma-chemnitz.de
-	(Reddoxx engine) with SMTP id 2A881FAD28D; Fri, 4 Feb 2022 21:08:50 +0100
-Received: from ensc-virt.intern.sigma-chemnitz.de
- (ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail-msa-2.intern.sigma-chemnitz.de (8.16.1/8.16.1) with ESMTPS id
- 214K8nn9113263
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
-	Fri, 4 Feb 2022 21:08:50 +0100
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
- 4.94.2)
-	(envelope-from <ensc@sigma-chemnitz.de>)
-	id 1nG4sz-0062Rj-Hm; Fri, 04 Feb 2022 21:08:49 +0100
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: Alexander Kanavin <alex.kanavin@gmail.com>
-Cc: Bryan Evenson <bevenson@melinkcorp.com>, Jon Mason <jdmason@kudzu.us>,
-        Yocto-mailing-list <yocto@lists.yoctoproject.org>,
-        Patches and
- discussions about the oe-core layer
- <openembedded-core@lists.openembedded.org>,
-        OpenEmbedded Devel List
- <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [OE-core] Inclusive Language Proposal for YP/OE
-References: 
- <CAPoiz9wL16OTzxNHdw_5-L72GOHkhhM0--WZF7An071cx6sr_A@mail.gmail.com>
-	<lyiltukbsk.fsf@ensc-virt.intern.sigma-chemnitz.de>
-	<CANNYZj9wOzJ-gp+HVP-915AQp9d-D_PN4GrgPqaC0ZLVvzbgqg@mail.gmail.com>
-	<lyee4ik98t.fsf@ensc-virt.intern.sigma-chemnitz.de>
-	<CH0PR20MB3948522D8A65FE1CED08EA37BB299@CH0PR20MB3948.namprd20.prod.outlook.com>
-	<lya6f6jx36.fsf@ensc-virt.intern.sigma-chemnitz.de>
-	<CANNYZj86eHSn=5gcryZeVBS-qqqKKiafq5XyDO=nup-QdcF7iw@mail.gmail.com>
-Date: Fri, 04 Feb 2022 21:08:49 +0100
-In-Reply-To: 
- <CANNYZj86eHSn=5gcryZeVBS-qqqKKiafq5XyDO=nup-QdcF7iw@mail.gmail.com>
-	(Alexander Kanavin's message of "Fri, 4 Feb 2022 20:12:23 +0100")
-Message-ID: <lytudemm26.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.2 (gnu/linux)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Rtsaz+zf;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id y9so1179120pjf.1
+        for <openembedded-devel@lists.openembedded.org>;
+ Sat, 05 Feb 2022 09:55:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=iKlo7Pxm4WEnQZ+PJz6bq2ZDSfmugJ+oczni3Qly6PQ=;
+        b=Rtsaz+zfBgyMPi6j2yK4dRVa1aQ+ii/xkwRvndJwNmwm+fDrpMCF7r6GN5DH8oKC94
+         +mQvzX+dwv5Jg5XZ0+r0jJmYZvo43IQyhKzM9+5FPxi/ogvpof/H/jlhoPZ7Q+mMztKr
+         /zC6rTl4IGWFHVgdAMrkvNsaAXYOgxj4ucRRmfpUHPw57y5t32hFQN2NEOW14OTMD++k
+         NL5OCYoVir7SIxKFjDiXN6LUYYuKhFB3KD4MrtMnqPjxChmeHaUF0HExboizV/7B8o58
+         4bTSXPOeJVN4HYFV2oUWJWVOqULIy1Fdf1RzFTgTkXc9tTa1mGWiLlSSeGMu/r5tgShz
+         U+eg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=iKlo7Pxm4WEnQZ+PJz6bq2ZDSfmugJ+oczni3Qly6PQ=;
+        b=TuP9UzOPuwfPKWd+2P7bBaZTm+SUkBekwA8z4zmWgjpaiayIf14YJIj3OQrsNfTn3v
+         fUSTqWAA7+Eijs9KRMLoBp9mTctI7LcwfKTmoIS0eogZZ98MfnXjTi0UHpA05gsa/wEZ
+         IAqXSKGB9Oyf+/mxXJagr5QQIb3bnsV2FvSERctixHbYa+S8NPpEmVI+rO4reLTzYRkP
+         vdz+ID5C2Q0gSWPT7r/5ApxRla8EdAA8YqO8BnbdhRT63o3xm2KxjHFsgHb2m06t0u1T
+         WQvvTdJfLfSjInMClI/z02aozt5/rK12QqhbOTn2eXmHHxzwx8aIkKOMpIVS+UGBKR4o
+         j1oQ==
+X-Gm-Message-State: AOAM532oC9BHDCV6wt/qq+bl2bdkUaY8Avo68Mjd+XXeajIE/OUkIkRc
+	pm9b2MDCqsEyFmSPV6vesVwUumpHJ2Q=
+X-Google-Smtp-Source: 
+ ABdhPJxIM5SS5qvblHwf4gNCdJgZ5xfcrx2bIUgXyIMx1U6UcQjIgCzVDVlixy6/m8DNBdq5+52weA==
+X-Received: by 2002:a17:90b:1d0e:: with SMTP id
+ on14mr4895585pjb.59.1644083717386;
+        Sat, 05 Feb 2022 09:55:17 -0800 (PST)
+Received: from keaua.caveonetworks.com
+ ([2601:202:4180:a5c0:c500:ff16:ca75:f2cc])
+        by smtp.gmail.com with ESMTPSA id
+ pf8sm1140677pjb.20.2022.02.05.09.55.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 05 Feb 2022 09:55:17 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jan Luebbe <jlu@pengutronix.de>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][honister][PATCH 1/3] snappy: use main branch to fix fetch
+ failure
+Date: Sat,  5 Feb 2022 09:55:13 -0800
+Message-Id: <20220205175515.1767488-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 04 Feb 2022 20:09:04 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 05 Feb 2022 17:55:18 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95228
+ https://lists.openembedded.org/g/openembedded-devel/message/95229
 
-Alexander Kanavin <alex.kanavin@gmail.com> writes:
+From: Jan Luebbe <jlu@pengutronix.de>
 
->> > Would CANCEL be clearer to you than HALT?
->>
->> mmmh.... for me as a developer (and non-native english speaker), "cancel"
->> means some ordered ending of an operation.
->>
->> But the condition above causes an emergency abort.
->>
->
-> Cancel is the same as abort: a request to immediately stop the operation
-> (or not even start it) without reaching the originally requested
-> outcome.
+The project has renamed the master branch to main.
 
-https://english.stackexchange.com/questions/535153/what-is-the-difference-between-cancel-and-abort
+Signed-off-by: Jan Luebbe <jlu@pengutronix.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 0c9c5c666150bc105cad35b442fa76464885aa1c)
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-oe/recipes-extended/snappy/snappy_1.1.9.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-| Cancel implies the action is rescinded before it implements...
-|
-| Abort is an emergency procedure to interrupt...
+diff --git a/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb b/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb
+index 252ba9f3dc..0d58345d7a 100644
+--- a/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb
++++ b/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb
+@@ -10,7 +10,7 @@ compression ratio."
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=f62f3080324a97b3159a7a7e61812d0c"
+ 
+-SRC_URI = "gitsm://github.com/google/snappy.git;protocol=https;branch=master \
++SRC_URI = "gitsm://github.com/google/snappy.git;protocol=https;branch=main \
+     file://0001-Add-inline-with-SNAPPY_ATTRIBUTE_ALWAYS_INLINE.patch \
+ "
+ SRCREV = "2b63814b15a2aaae54b7943f0cd935892fae628f"
+-- 
+2.25.1
 
-
-> Halt implies the operation is not going to continue
-
-Really?
-
-https://translate.google.com/?sl=en&tl=de&text=halt&op=translate says
-
-| a suspension of movement or activity, typically a temporary one.
-
-Examples in
-
-      https://dictionary.cambridge.org/de/worterbuch/englisch/halt
-
-sound like there is a chance to continue after the "halt" (show the
-permit, resolve the pay dispute).
-
-
-When we want to continue this inclusion BS, then "halt" seems to be
-offending to some people because it can mean
-
-| ... having a physical disability.
-
-
-
-Enrico
 
