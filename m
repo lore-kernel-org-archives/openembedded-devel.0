@@ -2,98 +2,101 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D4D1FC433EF
-	for <webhook@archiver.kernel.org>; Sat,  5 Feb 2022 17:55:18 +0000 (UTC)
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com
- [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web12.1080.1644083718057650959
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7250C433F5
+	for <webhook@archiver.kernel.org>; Sat,  5 Feb 2022 17:55:23 +0000 (UTC)
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com
+ [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web11.1102.1644083718978029312
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Feb 2022 09:55:18 -0800
+ Sat, 05 Feb 2022 09:55:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Rtsaz+zf;
- spf=pass (domain: gmail.com, ip: 209.85.216.44,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=osOGAle9;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id y9so1179120pjf.1
+Received: by mail-pl1-f169.google.com with SMTP id h14so7913945plf.1
         for <openembedded-devel@lists.openembedded.org>;
  Sat, 05 Feb 2022 09:55:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=iKlo7Pxm4WEnQZ+PJz6bq2ZDSfmugJ+oczni3Qly6PQ=;
-        b=Rtsaz+zfBgyMPi6j2yK4dRVa1aQ+ii/xkwRvndJwNmwm+fDrpMCF7r6GN5DH8oKC94
-         +mQvzX+dwv5Jg5XZ0+r0jJmYZvo43IQyhKzM9+5FPxi/ogvpof/H/jlhoPZ7Q+mMztKr
-         /zC6rTl4IGWFHVgdAMrkvNsaAXYOgxj4ucRRmfpUHPw57y5t32hFQN2NEOW14OTMD++k
-         NL5OCYoVir7SIxKFjDiXN6LUYYuKhFB3KD4MrtMnqPjxChmeHaUF0HExboizV/7B8o58
-         4bTSXPOeJVN4HYFV2oUWJWVOqULIy1Fdf1RzFTgTkXc9tTa1mGWiLlSSeGMu/r5tgShz
-         U+eg==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=wDZAUrkVOFTa0Ry1bxtVzSubCTPHn2x23CZQLzz8CyU=;
+        b=osOGAle9S6WBECvIDOtO2vdBP+jSQ4CKK8DndH/qntCzi4jGHP3bLa/LkTrpcBGy3Z
+         Y6VmPzUTM8465Y4VJMZRGlBZaYHaRIvkTa/8Kfb8iVcRsfEExRYqIMAM8dsKCDA5UZhd
+         Rmef9CTgG0a2TFGXhHhnbtUhDVU9rf0Sweo1IHsz+AKq8hQnWNAxy3tYxeK1Oh2GoUg0
+         fnOXvVA+OGI7DBw88s11cZuKVDkRzFKglzlo15dUw60N3v+fpOdBhFe9QBfJKBsHKwxO
+         cFSuFqYoxY1Xv1uk9F8zJN6TIFEqtKJbuP1yrEmImNg5bf1EsFtk1gXwNMSmSvij/AZw
+         pXVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=iKlo7Pxm4WEnQZ+PJz6bq2ZDSfmugJ+oczni3Qly6PQ=;
-        b=TuP9UzOPuwfPKWd+2P7bBaZTm+SUkBekwA8z4zmWgjpaiayIf14YJIj3OQrsNfTn3v
-         fUSTqWAA7+Eijs9KRMLoBp9mTctI7LcwfKTmoIS0eogZZ98MfnXjTi0UHpA05gsa/wEZ
-         IAqXSKGB9Oyf+/mxXJagr5QQIb3bnsV2FvSERctixHbYa+S8NPpEmVI+rO4reLTzYRkP
-         vdz+ID5C2Q0gSWPT7r/5ApxRla8EdAA8YqO8BnbdhRT63o3xm2KxjHFsgHb2m06t0u1T
-         WQvvTdJfLfSjInMClI/z02aozt5/rK12QqhbOTn2eXmHHxzwx8aIkKOMpIVS+UGBKR4o
-         j1oQ==
-X-Gm-Message-State: AOAM532oC9BHDCV6wt/qq+bl2bdkUaY8Avo68Mjd+XXeajIE/OUkIkRc
-	pm9b2MDCqsEyFmSPV6vesVwUumpHJ2Q=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=wDZAUrkVOFTa0Ry1bxtVzSubCTPHn2x23CZQLzz8CyU=;
+        b=70Y46vUKH2ZHNnS+Xyq5R0voa/ZW3xUVQREJbNeongYqPh+ZWfhkiOfChrkmdzJslv
+         97gNOhu7gCYx9eMrFQu7KMfq3rbNvkD4P4ZS2z/tlooqCJfQEPmek2RlO0+I/O8ehSnT
+         AbEbRBPi9aS8zrrEmEOwytnL6Cfarnr63+5iPY1+esponhS1sQabtLablOC38j4w9ePR
+         N12J6WD4FmwsJky1TcBh1wBqFLrnOcNtbmP3ZiW+xIMRP78D8eQCdTjl/k0W7mFIRHrl
+         2Xv4hbJGPYIhboy3yF84RXqGjWyCi5IjFVoocNSXaloVTOlsU6ir6HdJ+4Q5al72/2Rm
+         eyHQ==
+X-Gm-Message-State: AOAM533dXI0NIx2A+csiU7QgkmZrtw5V/mCdpWh8SZZnu6307wErxng7
+	BuClt+3n/z8Mh3YdIp5HYutxXDJE7dU=
 X-Google-Smtp-Source: 
- ABdhPJxIM5SS5qvblHwf4gNCdJgZ5xfcrx2bIUgXyIMx1U6UcQjIgCzVDVlixy6/m8DNBdq5+52weA==
-X-Received: by 2002:a17:90b:1d0e:: with SMTP id
- on14mr4895585pjb.59.1644083717386;
-        Sat, 05 Feb 2022 09:55:17 -0800 (PST)
+ ABdhPJz8uom14zn1/FAvnmaE+SH0QofYdqaUT1uf37gNbIvMel3dvwd+OVBxMguvEJ88A46dG1FyTQ==
+X-Received: by 2002:a17:90b:3ec5:: with SMTP id
+ rm5mr5352860pjb.28.1644083718340;
+        Sat, 05 Feb 2022 09:55:18 -0800 (PST)
 Received: from keaua.caveonetworks.com
  ([2601:202:4180:a5c0:c500:ff16:ca75:f2cc])
         by smtp.gmail.com with ESMTPSA id
- pf8sm1140677pjb.20.2022.02.05.09.55.16
+ pf8sm1140677pjb.20.2022.02.05.09.55.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 05 Feb 2022 09:55:17 -0800 (PST)
+        Sat, 05 Feb 2022 09:55:18 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jan Luebbe <jlu@pengutronix.de>,
+Cc: Tim Orling <ticotimo@gmail.com>,
+	Tim Orling <tim.orling@konsulko.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][honister][PATCH 1/3] snappy: use main branch to fix fetch
- failure
-Date: Sat,  5 Feb 2022 09:55:13 -0800
-Message-Id: <20220205175515.1767488-1-akuster808@gmail.com>
+Subject: [meta-oe][honister][PATCH 2/3] cmocka: use https protocol for
+ fetching
+Date: Sat,  5 Feb 2022 09:55:14 -0800
+Message-Id: <20220205175515.1767488-2-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220205175515.1767488-1-akuster808@gmail.com>
+References: <20220205175515.1767488-1-akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 05 Feb 2022 17:55:18 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 05 Feb 2022 17:55:23 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95229
+ https://lists.openembedded.org/g/openembedded-devel/message/95230
 
-From: Jan Luebbe <jlu@pengutronix.de>
+From: Tim Orling <ticotimo@gmail.com>
 
-The project has renamed the master branch to main.
+Upstream gitlab instance is refusing git:// protocol.
 
-Signed-off-by: Jan Luebbe <jlu@pengutronix.de>
+Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 0c9c5c666150bc105cad35b442fa76464885aa1c)
+(cherry picked from commit 2a935801692a27b152041bd996ecc1b789a2f6ad)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-extended/snappy/snappy_1.1.9.bb | 2 +-
+ meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb b/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb
-index 252ba9f3dc..0d58345d7a 100644
---- a/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb
-+++ b/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb
-@@ -10,7 +10,7 @@ compression ratio."
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f62f3080324a97b3159a7a7e61812d0c"
+diff --git a/meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb b/meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb
+index 2e34f6ab44..554d582a57 100644
+--- a/meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb
++++ b/meta-oe/recipes-test/cmocka/cmocka_1.1.5.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
--SRC_URI = "gitsm://github.com/google/snappy.git;protocol=https;branch=master \
-+SRC_URI = "gitsm://github.com/google/snappy.git;protocol=https;branch=main \
-     file://0001-Add-inline-with-SNAPPY_ATTRIBUTE_ALWAYS_INLINE.patch \
- "
- SRCREV = "2b63814b15a2aaae54b7943f0cd935892fae628f"
+ SRCREV = "a4fc3dd7705c277e3a57432895e9852ea105dac9"
+ PV .= "+git${SRCPV}"
+-SRC_URI = "git://git.cryptomilk.org/projects/cmocka.git;branch=master \
++SRC_URI = "git://git.cryptomilk.org/projects/cmocka.git;protocol=https;branch=master \
+            file://run-ptest \
+           "
+ 
 -- 
 2.25.1
 
