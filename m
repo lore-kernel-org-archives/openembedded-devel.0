@@ -1,114 +1,92 @@
-Return-Path: <mingli.yu@windriver.com>
+Return-Path: <matthias@extraklein.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 958A8C433EF
-	for <webhook@archiver.kernel.org>; Mon,  7 Feb 2022 07:34:24 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web08.19314.1644219263113125870
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 65B74C433EF
+	for <webhook@archiver.kernel.org>; Mon,  7 Feb 2022 11:31:15 +0000 (UTC)
+Received: from relay.yourmailgateway.de (relay.yourmailgateway.de
+ [194.59.204.23])
+ by mx.groups.io with SMTP id smtpd.web08.20893.1644233470890420117
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 06 Feb 2022 23:34:23 -0800
+ Mon, 07 Feb 2022 03:31:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.3.146,
- mailfrom: mingli.yu@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 2177YLoW026620
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+ dkim=fail reason="body hash did not verify" header.i=@extraklein.de
+ header.s=key2 header.b=iPhuhvB3;
+ spf=pass (domain: extraklein.de, ip: 194.59.204.23,
+ mailfrom: matthias@extraklein.de)
+Received: from relay02-mors.netcup.net (localhost [127.0.0.1])
+	by relay02-mors.netcup.net (Postfix) with ESMTPS id 4JskVM4H2mz41DB
 	for <openembedded-devel@lists.openembedded.org>;
- Sun, 6 Feb 2022 23:34:21 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 2177YKkW010387
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+ Mon,  7 Feb 2022 12:31:07 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=extraklein.de;
+	s=key2; t=1644233467;
+	bh=0bpAILD+b9EuDmj6XKX3x1jkC/r50P2HzL4+lSMIj2A=;
+	h=From:To:Cc:Subject:Date:From;
+	b=iPhuhvB3lcKA4pFDYmfteJk3Sf8K2fYqPjWTGeaUufIRbNj0Q/u97GiXqHPP1UTMU
+	 ePZhy+Ub3s9j6Fo6vHNAImNkzxjdGixNHxgPVoSmXiWcgdTnRz0BIUG6B1O+bmuWNj
+	 LcUgSfFQZCEXgoo90eerz0UsMbpasv2xR+Sk/F02Sg9wu3t9TxRyQBj7iSB19QFtuT
+	 db30ORQkB+N2tmLA3v0tRnd6TWzywFH/JEul6zY0lbtqh2DdWMDCIxIjYWnVlj3ECK
+	 gilj6X+n/ppbxc0sXUXzwpUBAyaOg01WslNdDNvvHLXH9DRO/r1Ro7a2VEVQyvLa5A
+	 APsqmdL2iWjNA==
+Received: from policy02-mors.netcup.net (unknown [46.38.225.53])
+	by relay02-mors.netcup.net (Postfix) with ESMTPS id 4JskVM3syRz7vMC
 	for <openembedded-devel@lists.openembedded.org>;
- Sun, 6 Feb 2022 23:34:21 -0800 (PST)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Sun, 6 Feb 2022 23:34:20 -0800
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Sun, 6 Feb 2022 23:34:20 -0800
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] plymouth: add extra kernel parameter
-Date: Mon, 7 Feb 2022 15:34:19 +0800
-Message-ID: <20220207073419.19935-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ Mon,  7 Feb 2022 12:31:07 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at policy02-mors.netcup.net
+Received: from mx2fa3.netcup.net (unknown [10.243.12.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by policy02-mors.netcup.net (Postfix) with ESMTPS id 4JskVM0Pgnz8sjr
+	for <openembedded-devel@lists.openembedded.org>;
+ Mon,  7 Feb 2022 12:31:06 +0100 (CET)
+Received: from localhost (ip-062-143-218-156.um16.pools.vodafone-ip.de
+ [62.143.218.156])
+	by mx2fa3.netcup.net (Postfix) with ESMTPSA id 2F5BB140143;
+	Mon,  7 Feb 2022 12:31:06 +0100 (CET)
+Authentication-Results: mx2fa3;
+        spf=pass (sender IP is 62.143.218.156)
+ smtp.mailfrom=matthias@extraklein.de smtp.helo=localhost
+Received-SPF: pass (mx2fa3: connection is authenticated)
+From: Matthias Klein <matthias@extraklein.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Matthias Klein <matthias@extraklein.de>
+Subject: [meta-oe][PATCH] gpsd-machine-conf: set precise BSD-2-Clause license
+Date: Mon,  7 Feb 2022 12:31:02 +0100
+Message-Id: <20220207113102.5309-1-matthias@extraklein.de>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Type: text/plain
+X-PPP-Message-ID: <164423346644.12987.11357634664963876504@mx2fa3.netcup.net>
+X-PPP-Vhost: extraklein.de
+X-NC-CID: nQ583n7dc1XsrzEtHpmzSqkmk2sjxWS55bk9emcHujuwHRtBqW0=
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 07 Feb 2022 07:34:24 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 07 Feb 2022 11:31:15 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95237
+ https://lists.openembedded.org/g/openembedded-devel/message/95238
 
-From: Mingli Yu <mingli.yu@windriver.com>
-
-Add extra kernel parameter to make sure the plymouth splash
-screen display during boot.
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Matthias Klein <matthias@extraklein.de>
 ---
- ...ervice-in-add-related-kernel-paramet.patch | 31 +++++++++++++++++++
- .../recipes-core/plymouth/plymouth_0.9.5.bb   |  1 +
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-core/plymouth/files/0001-plymouth-start-service-in-add-related-kernel-paramet.patch
+ meta-oe/recipes-navigation/gpsd/gpsd-machine-conf_1.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-core/plymouth/files/0001-plymouth-start-service-in-add-related-kernel-paramet.patch b/meta-oe/recipes-core/plymouth/files/0001-plymouth-start-service-in-add-related-kernel-paramet.patch
-new file mode 100644
-index 000000000..7ba1034e9
---- /dev/null
-+++ b/meta-oe/recipes-core/plymouth/files/0001-plymouth-start-service-in-add-related-kernel-paramet.patch
-@@ -0,0 +1,31 @@
-+From 658eac007d14d836cb002a5675487bac63d50324 Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Mon, 7 Feb 2022 03:22:12 +0000
-+Subject: [PATCH] plymouth-start.service.in: add related kernel parameter
-+
-+Add extra kernel parameter to make the plymouth splash screen
-+display during boot.
-+
-+Upstream-Status: Submitted [https://gitlab.freedesktop.org/plymouth/plymouth/-/merge_requests/156]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ systemd-units/plymouth-start.service.in | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/systemd-units/plymouth-start.service.in b/systemd-units/plymouth-start.service.in
-+index 830a62d..c20aabe 100644
-+--- a/systemd-units/plymouth-start.service.in
-++++ b/systemd-units/plymouth-start.service.in
-+@@ -9,7 +9,7 @@ ConditionVirtualization=!container
-+ IgnoreOnIsolate=true
-+ 
-+ [Service]
-+-ExecStart=@PLYMOUTH_DAEMON_DIR@/plymouthd --mode=boot --pid-file=@plymouthruntimedir@/pid --attach-to-session
-++ExecStart=@PLYMOUTH_DAEMON_DIR@/plymouthd --mode=boot  --kernel-command-line="splash plymouth.ignore-serial-consoles" --pid-file=@plymouthruntimedir@/pid --attach-to-session
-+ ExecStartPost=-@PLYMOUTH_CLIENT_DIR@/plymouth show-splash
-+ Type=forking
-+ RemainAfterExit=yes
-+-- 
-+2.31.1
-+
-diff --git a/meta-oe/recipes-core/plymouth/plymouth_0.9.5.bb b/meta-oe/recipes-core/plymouth/plymouth_0.9.5.bb
-index d096462ee..8f9997e96 100644
---- a/meta-oe/recipes-core/plymouth/plymouth_0.9.5.bb
-+++ b/meta-oe/recipes-core/plymouth/plymouth_0.9.5.bb
-@@ -21,6 +21,7 @@ SRC_URI = " \
-     http://www.freedesktop.org/software/plymouth/releases/${BPN}-${PV}.tar.xz \
-     file://0001-Make-full-path-to-systemd-tty-ask-password-agent-con.patch \
-     file://0001-systemd-switch-to-KillMode-mixed.patch \
-+    file://0001-plymouth-start-service-in-add-related-kernel-paramet.patch \
-         "
- 
- SRC_URI[md5sum] = "8a25d23f3ae732af300a56fa33cacff2"
--- 
-2.17.1
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-machine-conf_1.0.bb b/m=
+eta-oe/recipes-navigation/gpsd/gpsd-machine-conf_1.0.bb
+index 8d74eb4a2..46e26767d 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd-machine-conf_1.0.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd-machine-conf_1.0.bb
+@@ -1,6 +1,6 @@
+ SUMMARY =3D "Machine specific gpsd config"
+ LICENSE =3D "BSD-3-Clause"
+-LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/files/common-licenses/BSD;=
+md5=3D3775480a712fc46a69647678acb234cb"
++LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/files/common-licenses/BSD-=
+2-Clause;md5=3Dcb641bc04cda31daea161b1bc15da69f"
+=20
+ # empty by default
+ # BSP layers can add stuff like meta-openmoko example:
+--=20
+2.30.2
 
 
