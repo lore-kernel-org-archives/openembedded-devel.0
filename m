@@ -2,80 +2,77 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BEDB4C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BED8BC433F5
 	for <webhook@archiver.kernel.org>; Tue,  8 Feb 2022 00:26:59 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.1])
- by mx.groups.io with SMTP id smtpd.web10.4755.1644280018199148448
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.3])
+ by mx.groups.io with SMTP id smtpd.web10.4756.1644280018720820831
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Feb 2022 16:26:58 -0800
+ Mon, 07 Feb 2022 16:26:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=NKYi+hfA;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.1,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WtqQJo6v;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1644280016; i=@fujitsu.com;
-	bh=ViYAD6pQrh7KjidFWXNr/n6NhxW6XXgEXk5mRTf2jwg=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=NKYi+hfAFXZ67AU+n6n7QKpv65TqLJcOZwaDaz8TMnU8iQQvllR2GaCTBmZ1KO/eU
-	 KLBHBPJn3TY5RkPxHVYmjXjOxFFWNsGqboSDKMLBbSKcATs0X1WyMR4zm/DRUfAU/7
-	 212m33lv4nsTxgsKRVunIcLnYSLgIvxh0FdvrZdY2oNiBFekcXrLfij+9W9icap1dX
-	 rFHeimUTDKOjOM1ZtQKt9fWOCbHnhAZ4KZZhyZ4gLcg3KqZzKKsUqplThPtQCgoHJp
-	 8PNRvIgGjI92Ggf3iRFDDVmxlvL6pfpxB8OGAeJiG85pK/RMqbKmOgn2vfkl1z3K0l
-	 hvtnsRSUV8O2w==
-Received: from [100.115.2.51] (using TLSv1.2 with cipher
+	bh=soSis8hzKHc9aIs+3G36N8UmJ4ahE+tLO1arp5neuS8=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=WtqQJo6vlUFNEmqKArj8T9n+Hr+QdVrG9Zs0EM6ySx7QfodnA8Ipcw2iVtVao3oIx
+	 IVapZ3QtFk5EtmKA8jrncdEnznig0xM2nCehCGiuyRuZj2UF5rOm+iJ4haEihqEG/e
+	 zlgtfQinDZn5solyHIjZ7nUVILSDN75z4bbRRM2ccjTcCJzafn7rTNFVpMj+hCN3R+
+	 a4DAt+WyEC7uqp8nzHQyHy8X38avVI6P7fMwbBbJubNtofU2s42vTx+Z3vAx99Kfrp
+	 2bjfT4mez//ttvaJ9fu929GoQGJNUvhlNzcAKyDDGtmfNuofZAU75PWYih+V/p9/aO
+	 dZ+H8Pr8SZKGA==
+Received: from [100.115.34.36] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-a.eu-west-1.aws.ess.symcld.net id 29/86-28285-0D8B1026;
+	by server-3.bemta.az-a.eu-west-2.aws.ess.symcld.net id 04/72-22205-0D8B1026;
  Tue, 08 Feb 2022 00:26:56 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrJIsWRWlGSWpSXmKPExsViZ8ORqHthB2O
-  SQYesxcXDS5kdGD3ObVzBGMAYxZqZl5RfkcCa0b9esaCfs6Lr/AHmBsYlHF2MXBxCAk8YJbaf
-  fsUK4Vxgkjh8cBkbhHOcUaLv8mT2LkZODjYBNYnpt26wgtgiAvoSS2fvYQaxmQVUJF787gGrE
-  RZwljh0bj0jiM0CFF+ztBWsnlfAUeL4/MNgtoSAgsSUh+/BejkFnCS6920E6xUCqvm/8iBUva
-  DEyZlPWCDmS0gcfPGCGaJXUWL25WYWCLtCYtasNiYIW03i6rlNzBMYBWchaZ+FpH0BI9MqRqu
-  kosz0jJLcxMwcXUMDA11DQ1NdQ10jQ3O9xCrdRL3UUt3y1OISXUO9xPJivdTiYr3iytzknBS9
-  vNSSTYzAEE4pZry5g7G176feIUZJDiYlUd7MdMYkIb6k/JTKjMTijPii0pzU4kOMMhwcShK8Z
-  7cD5QSLUtNTK9Iyc4DxBJOW4OBREuHVBknzFhck5hZnpkOkTjEqSonzmoIkBEASGaV5cG2wGL
-  7EKCslzMvIwMAgxFOQWpSbWYIq/4pRnINRSZi3AWQKT2ZeCdz0V0CLmYAWf130LxFocUkiQkq
-  qgYmtlatkmt0q9fPT2nbJCh5XbV/7uj+w4cPTgAWyfG4erJf2Ct5n/LOYRcjjb9mxnsbNC04E
-  CX3v9P95cvuOlAVMb4xZWDsjGsqusbaFuzkWCpWdZLYwENXtd73W9KFGnrle8P2BpydXfeD71
-  5hy7S7bzO4YXfdv7ELaHdUr/XT23r3F9C+iqfrOoXX91wqMGhPXSfQ6W9x8Yvgnp+DQUp0Npx
-  a/mh2d1ZZR+/z4r5o3a7Sjra9Vx+xd7+zPwDJH0cjD6M+Dr8X5SjebM+4Ls67ZadD+bV5L0+v
-  qSyXbxO6KzDvnsyotYee15c1Xek3+nD4cYmv/Y81Bl6PCoY+ZtsxTPd+vn726pH/Z0VgFPiWW
-  4oxEQy3mouJEAG7hI+RcAwAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8ORqHt+B2O
+  SQf98U4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeP5G76CvXwV72ecYW9gbOTtYuTiEBJ4wiix
+  b9FrNgjnApPE5Y7dLBDOcUaJY29XMnYxcnKwCahJTL91gxXEFhHQl1g6ew8ziM0soCLx4ncPO
+  4gtLOAp8WDhBrB6FqB4243XYDW8Ao4Sixa9YQGxJQQUJKY8fA8VF5Q4OfMJC8QcCYmDL14wQ9
+  QoSsy+3AxVXyExa1YbE4StJnH13CbmCYz8s5C0z0LSvoCRaRWjdVJRZnpGSW5iZo6uoYGBrqG
+  hqa6xpa6RgYFeYpVuol5qqW55anGJrpFeYnmxXmpxsV5xZW5yTopeXmrJJkZgWKYUq5/Ywfh0
+  5U+9Q4ySHExKoryZ6YxJQnxJ+SmVGYnFGfFFpTmpxYcYZTg4lCR4z24HygkWpaanVqRl5gBjB
+  CYtwcGjJMKrDZLmLS5IzC3OTIdInWJUlBLnNQVJCIAkMkrz4NpgcXmJUVZKmJeRgYFBiKcgtS
+  g3swRV/hWjOAejkjBvA8gUnsy8Erjpr4AWMwEt/rroXyLQ4pJEhJRUA9PZH18a2qdH3FN6E2N
+  /fMrTPY5bQz0PhER+yvMJdPcp/CS365+RlfHfzb4X2/6aq96ulfol7WnXtOdHjcBcLwuV2/y9
+  H22OW2v+Nj9Y+E5Ua6Xftrmthqdlwte+NauQfdJz94KuQRS79VW7A9vXC35bJfCsNJBLYoXHx
+  oM637zdHIN7u9bs4W1Q2xwltX/2mTUTz7QXXmk4kPgs3ai448fKL2xmCw/2Jdn1ubduMV+it3
+  D7Kn1Lu59BGybnHakVi+N5ee/Tax6l4O4HElXNb+U9UpTnBrNVcQSfu7W1N2T/qnkT4o22hmZ
+  nCxzwuj0/4teJy/XcMv+OzObgZPzSlnO96PZS97lO+2aFCVg0vVdiKc5INNRiLipOBABS0YqE
+  RgMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-18.tower-587.messagelabs.com!1644280015!51387!1
+X-Msg-Ref: server-14.tower-571.messagelabs.com!1644280015!41998!1
 X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 14276 invoked from network); 8 Feb 2022 00:26:55 -0000
+Received: (qmail 13646 invoked from network); 8 Feb 2022 00:26:55 -0000
 Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-18.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-14.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 8 Feb 2022 00:26:55 -0000
 Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 8B2F71001AA
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 795FA1001A7
 	for <openembedded-devel@lists.openembedded.org>;
  Tue,  8 Feb 2022 00:26:55 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 6FEC310019C
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 6CC3F100192
 	for <openembedded-devel@lists.openembedded.org>;
  Tue,  8 Feb 2022 00:26:55 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Tue, 8 Feb 2022 00:26:40 +0000
+ (TLS) id 15.0.1497.28; Tue, 8 Feb 2022 00:26:33 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-perl] [PATCH] libcgi-perl: upgrade 4.53 -> 4.54
-Date: Tue, 8 Feb 2022 08:26:27 +0800
-Message-ID: <1644279987-4303-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] tcpreplay: upgrade 4.3.4 -> 4.4.0
+Date: Tue, 8 Feb 2022 08:26:25 +0800
+Message-ID: <1644279987-4303-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1644279987-4303-1-git-send-email-wangmy@fujitsu.com>
-References: <1644279987-4303-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -87,34 +84,49 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 08 Feb 2022 00:26:59 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95255
+ https://lists.openembedded.org/g/openembedded-devel/message/95256
 
 Changelog:
 =========
-- fix use of cache when calling ->cookie
-- thanks to Sergey Panteleev for the PR
+Update strlcpy.c and strlcat.c
+PR #636
+Apply #616 fix to flows.c, fix #665
+Bug #670: update Travis CI to focal
+Bug #669: LINUX installed netmap auto detection
+Feature #626 - Support for Q-in-Q VLAN tags
+Bug #677 skipbroadcast
+Bug #689: add security policy document
+Directories of pcaps as arguments
+PR #682
+Bug #679 fix PPS calc for long-running sessions
+Bug #668 Improve SDK selection
+Bug #696 fix directory include feature
+Bug #695 mac os tests fail
+Bug #674 - Revert "send_packet: Avoid clock drift by using time since first packet"
+Feature #563 mac update on multicast
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libcgi/{libcgi-perl_4.53.bb => libcgi-perl_4.54.bb}         | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libcgi/{libcgi-perl_4.53.bb => libcgi-perl_4.54.bb} (93%)
+ .../tcpreplay/{tcpreplay_4.3.4.bb => tcpreplay_4.4.0.bb}       | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-networking/recipes-support/tcpreplay/{tcpreplay_4.3.4.bb => tcpreplay_4.4.0.bb} (78%)
 
-diff --git a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.53.bb b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb
-similarity index 93%
-rename from meta-perl/recipes-perl/libcgi/libcgi-perl_4.53.bb
-rename to meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb
-index 04bc362dfb..bca20f6a4a 100644
---- a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.53.bb
-+++ b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb
-@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=415fc49abed2728f9480cd32c8d67beb"
+diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.3.4.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.0.bb
+similarity index 78%
+rename from meta-networking/recipes-support/tcpreplay/tcpreplay_4.3.4.bb
+rename to meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.0.bb
+index eda51bb7f5..48cb045767 100644
+--- a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.3.4.bb
++++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.0.bb
+@@ -8,8 +8,7 @@ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=10f0474a2f0e5dccfca20f69d6598ad8"
  
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/L/LE/LEEJO/CGI-${PV}.tar.gz"
+ SRC_URI = "https://github.com/appneta/tcpreplay/releases/download/v${PV}/tcpreplay-${PV}.tar.gz"
  
--SRC_URI[sha256sum] = "c67e732f3c96bcb505405fd944f131fe5c57b46e5d02885c00714c452bf14e60"
-+SRC_URI[sha256sum] = "9608a044ae2e87cefae8e69b113e3828552ddaba0d596a02f9954c6ac17fa294"
+-SRC_URI[md5sum] = "305a84d84265705bd28f148698142188"
+-SRC_URI[sha256sum] = "ee065310806c22e2fd36f014e1ebb331b98a7ec4db958e91c3d9cbda0640d92c"
++SRC_URI[sha256sum] = "a3b125c0319bd096d68f821c4a08051b2d3d9278bac6fe18cfe3c9201703a567"
  
- S = "${WORKDIR}/CGI-${PV}"
+ UPSTREAM_CHECK_URI = "https://github.com/appneta/tcpreplay/releases"
  
 -- 
 2.25.1
