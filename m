@@ -2,71 +2,74 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C690FC433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C769BC433FE
 	for <webhook@archiver.kernel.org>; Tue,  8 Feb 2022 00:25:28 +0000 (UTC)
 Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.112])
- by mx.groups.io with SMTP id smtpd.web09.4898.1644279926781176748
+ [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web08.4700.1644279926743052916
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 07 Feb 2022 16:25:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=w+XG61ac;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.112,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=eO7Gw2eU;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1644279924; i=@fujitsu.com;
-	bh=Ht4Qh+Ox0YZq5JmQma6KTpNtzG6HH2Pi/x3mIZcVZZk=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=w+XG61acVhs/BsmdlxVFK24WbCH9L5ADkGo5Fe/Kgx76WNc8xinsXsFVLuigjWjRN
-	 yiNxOLzuEcMhq7rhDEbzTiIcCd49P9MH0WUVu+IiuY/bbj2ZzBTeikByovEi30GtXw
-	 CQLEsrLbZi05GgJTyP3nSFAaaLcTu/6DnIBu3HsPCaHsL+4ov7KgkqmNseL+LB/FmA
-	 R7NtcOqCdpB/bel+GB6hmudn24CPqDw1HZgfTF8h2G4iXwWqjeJECVl8ER/zDQUqJZ
-	 nnBcLCQ/5iOjUjNFsgY354QHCyRecUk41x3+BEExpKgvqU3xKUR7SYJhNhevAvokPh
-	 WgDhKZNmHcYWw==
+	bh=gfzkqgXGf7K04b+YUnlErBzU22lF3UtrtwmMyCSF0EQ=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=eO7Gw2eUJIB/Zmfopr2iSBoTlVAy5Xwi/SlvVCP00ly2VnXhLSAhMPp0AgFvNGxAl
+	 JTw8t4xRUl6BJvdSHsgMhftb6/RXl7taL/H97Gy8lacBIdUihbAwy16IppkWogsP1j
+	 suGTdlAbYEK6RGVTFVuz6yob0r2cVqFV+VOSq//7iNO17hFvYT9UIOw4ma6MFcW12k
+	 00wyZDQHXqFTSK3xbE8BtQUOeolEcYQHg41SGZx+Vi3hOln+VaLRFzqVRjHgOkpX8y
+	 qMXA5ar0872jj97Qyqk8q6HDuZQf5ffBWmuJRzDIFxV9P6amciuAKU8kNGSYMBczAw
+	 7WeEddan+h8dQ==
 Received: from [100.115.69.41] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-a.eu-central-1.aws.ess.symcld.net id
- C8/50-04599-478B1026; Tue, 08 Feb 2022 00:25:24 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrDIsWRWlGSWpSXmKPExsViZ8MxRbd4B2O
-  Swbouc4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaP/wlPGgkn8FcdOTWNuYJzL28XIxSEkMINJ
-  4tnqVkYI5zijxKkL05m6GDk52ATUJKbfusEKYosI6Essnb2HGcRmFlCRePG7hx3EFhZwlriy5
-  wNYnAUofub2SkYQm1fAUeJF9z6wORICChJTHr5nhogLSpyc+YQFYo6ExMEXL5ghahQlZl9uZo
-  GwKyRmzWpjmsDIOwtJyywkLQsYmVYx2iUVZaZnlOQmZuboGhoY6BoamuqaWeoaWprqJVbpJuq
-  lluomp+aVFCUCpfUSy4v1UouL9Yorc5NzUvTyUks2MQKDLaXY9fAOxt19P/UOMUpyMCmJ8mam
-  MyYJ8SXlp1RmJBZnxBeV5qQWH2KU4eBQkuA9ux0oJ1iUmp5akZaZAwx8mLQEB4+SCK82SJq3u
-  CAxtzgzHSJ1itGe483aJYuYOdru3QWSMxccXM3Mcb/90GpmIZa8/LxUKXFeU5A2AZC2jNI8uK
-  GwSL3EKCslzMvIwMAgxFOQWpSbWYIq/4pRnINRSZi3AWQKT2ZeCdzuV0BnMQGd9XXRv0Sgs0o
-  SEVJSDUyTDyg/yVtc4FTLormM49ZsmX1/zzB/7jkn/PX+xOYfiS96v89vrbIok/x4TJ6n5O++
-  jFzNE/GhKZOWGOnMj9owSyWwa+ZH02tFes/tj5xrNhZkDXtSf2a7lXjB9WeWV6L/b7U+2vDRY
-  1No+Q7JEx1z1FxqWqSOl339s9X7piLjZ9H5U415Hl7kyl76zCPD+46Y0I9Ag5gCA9nbe0TqpD
-  NaJrLuudy6sujfw6KMAxov7ypc2jwt4PqKHVzuszR2iIcZrTpyn11ZTeyxwfICkYuaMaEpGb/
-  XP/cViDLoW3MuxGzat/wjep9/7bgjcOSS7eIvia/llu7SfnNq3WWHvD3iq88Klk7WbNp8kz3Z
-  azGHEktxRqKhFnNRcSIANpCyq08DAAA=
+	by server-4.bemta.az-a.eu-central-1.aws.ess.symcld.net id
+ 83/EE-23802-478B1026; Tue, 08 Feb 2022 00:25:24 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrEIsWRWlGSWpSXmKPExsViZ8MxRbd4B2O
+  SwcZdlhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bGk32sBa91K/bv7WdqYHyt3sXIxSEkMINJ
+  4n77U3YI5zijxMbbs9i6GDk52ATUJKbfusEKYosI6Essnb2HGcRmFlCRePG7hx3EFhZwkHgy9
+  R2YzQIUb3rUzghi8wo4Slw4OwnMlhBQkJjy8D1YL6eAk8Tir0fAZgoB1extPcgMUS8ocXLmEx
+  aI+RISB1+8YIboVZSYfbmZBcKukJg1q41pAiP/LCQts5C0LGBkWsVol1SUmZ5RkpuYmaNraGC
+  ga2hoqmtmpmtoaqqXWKWbqJdaqpucmldSlAiU1kssL9ZLLS7WK67MTc5J0ctLLdnECAzOlGKn
+  2TsYd/T91DvEKMnBpCTKm5nOmCTEl5SfUpmRWJwRX1Sak1p8iFGGg0NJgvfsdqCcYFFqempFW
+  mYOMFJg0hIcPEoivNogad7igsTc4sx0iNQpRl2O5knLtzMLseTl56VKifOaghQJgBRllObBjY
+  BF7SVGWSlhXkYGBgYhnoLUotzMElT5V4ziHIxKwrwNIFN4MvNK4Da9AjqCCeiIr4v+JQIdUZK
+  IkJJqYAr8tDT65OPiixnVElGTuniYd1k++5G2UPHTnfiKm1yvA3/6eCYf4Hj7Z5NxU1nyj7yg
+  VZ+Cij5er14nffJ96G2Fw0kzr5jFz//KUD5/0reEYMk3/IVhGnZMDyL33Hm7/FXsZFsBkYdcX
+  N157xa3/Z0VZTu5/ZvuE8/3nb4rWvyvHYj2UPBq5k0orBGL8/D4Ui8sVbNCvO/l7KxjO/7NM+
+  LVlr7OeriSxUa/OPiM/xnXzbWs8xc0qm1h3TeFPWfunDmWAnn+Tw242Ksl79hYCyYw7nEz5xP
+  Pm5HgoCRVdOtof1R7D+NNqbQ/b2Qqz21vuvuwaPrkyqUpdZo/P0ZrFFfZdTZUmvDa/J3p9VhK
+  iaU4I9FQi7moOBEAR7Mhy1UDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-8.tower-532.messagelabs.com!1644279923!17889!1
+X-Msg-Ref: server-11.tower-528.messagelabs.com!1644279923!55825!1
 X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 9172 invoked from network); 8 Feb 2022 00:25:23 -0000
+Received: (qmail 30211 invoked from network); 8 Feb 2022 00:25:23 -0000
 Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-8.tower-532.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-11.tower-528.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 8 Feb 2022 00:25:23 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 2180PHpH021762
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 2180PHpI021762
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>; Tue, 8 Feb 2022 00:25:23 GMT
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Tue, 8 Feb 2022 00:25:16 +0000
+ (TLS) id 15.0.1497.28; Tue, 8 Feb 2022 00:25:19 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH] devilspie2: upgrade 0.43 -> 0.44
-Date: Tue, 8 Feb 2022 08:25:05 +0800
-Message-ID: <1644279908-4266-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] ndpi: upgrade 4.0 -> 4.2
+Date: Tue, 8 Feb 2022 08:25:06 +0800
+Message-ID: <1644279908-4266-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1644279908-4266-1-git-send-email-wangmy@fujitsu.com>
+References: <1644279908-4266-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -77,50 +80,179 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 08 Feb 2022 00:25:28 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95251
+ https://lists.openembedded.org/g/openembedded-devel/message/95252
+
+refresh 0001-autogen.sh-not-generate-configure.patch
 
 Changelog:
 =========
-* Default to Lua 5.3, and permit use of other versions
-* Add support for setting and deleting window properties
-* Add get_process_name(), which returns the name of the process
-  owning the window (if possible)
-* Add get_monitor_index() and get_monitor_geometry(); improve
-  monitor index/geometry discovery
-* Add get_window_is_decorated() (which uses the Motif window hints)
-* Alias center() as centre()
-* Extend centre() to allow centring on a given monitor and to allow
-  horizontal or vertical only
-* Extend set_window_position() to allow positioning on a given
-  monitor and control which corner is measured from.
-  (Behaviour with two parameters is unchanged.)
-* Quote the option hyphens in the man page (preventing replacement)
-* Various const & compiler warning (gcc -Wextra) fix-ups
-* Support for UTF-8 strings in window properties
-* Allow replacements for pkg-config at compile time
+New Features
+-----------
+Add a "confidence" field indicating the reliability of the classification
+Add risk exceptions for services and domain names via ndpi_add_domain_risk_exceptions()
+Add ability to report whether a protocol is encrypted
+
+New Supported Protocols and Services
+-----------------------------------
+Add protocol detection for:
+Badoo
+Cassandra
+EthernetIP
+
+Improvements
+------------
+Significantly reduced memory footprint from 2.94 KB to 688 B per flow
+Improve protocol detection for:
+BitTorrent
+ICloud Private Relay
+IMAP, POP3, SMTP
+Log4J/Log4Shell
+Microsoft Azure
+Pandora TV
+RTP
+RTSP
+Salesforce
+STUN
+Whatsapp
+QUICv2
+Zoom
+Add flow risk:
+NDPI_CLEAR_TEXT_CREDENTIALS
+NDPI_POSSIBLE_EXPLOIT (Log4J)
+NDPI_TLS_FATAL_ALERT
+NDPI_TLS_CERTIFICATE_ABOUT_TO_EXPIRE
+Update WhatsAPP and Instagram addresses
+Update the list of default ports for QUIC
+Update WindowsUpdate URLs
+Add support for the .goog Google TLD
+Add googletagmanager.com
+Add bitmaps and API for handling compressed bitmaps
+Add JA3 in risk exceptions
+Add entropy calculation to check for suspicious (encrypted) payload
+Add extraction of hostname in SMTP
+Add RDP over UDP dissection
+Add support for TLS over IPV6 in Subject Alt Names field
+Improve JSON and CSV serialization
+Improve IPv6 support for almost all dissectors
+Improve CI and unit tests, add arm64, armhf and s390x as part of CI
+Improve WHOIS detection, reduce false positives
+Improve DGA detection for skipping potential DGAs of known/popular domain names
+Improve user agent analysis
+Reworked HTTP protocol dissection including HTTP proxy and HTTP connect
+
+Changes
+--------
+TLS obsolete protocol is set when TLS < 1.2 (used to be 1.1)
+Numeric IPs are not considered for DGA checks
+Differentiate between standard Amazon stuff (i.e market) and AWS
+Remove Playstation VUE protocol
+Remove pandora.tv from Pandora protocol
+Remove outdated SoulSeek dissector
+
+Fixes
+-----
+Fix race conditions
+Fix dissectors to be big-endian friendly
+Fix heap overflow in realloc wrapper
+Fix errors in Kerberos, TLS, H323, Netbios, CSGO, Bittorrent
+Fix wrong tuple comparison
+Fix ndpi_serialize_string_int64
+Fix Grease values parsing
+Fix certificate mismatch check
+Fix null-dereference read for Zattoo with IPv6
+Fix dissectors initialization for XBox, Diameter
+Fix confidence for STUN classifications
+Fix FreeBSD support
+Fix old GQUIC versions on big-endian machines
+Fix aho-corasick on big-endian machines
+Fix DGA false positive
+Fix integer overflow for QUIC
+Fix HTTP false positives
+Fix SonarCloud-CI support
+Fix clashes setting the hostname on similar protocols (FTP, SMTP)
+Fix some invalid TLS guesses
+Fix crash on ARM (Raspberry)
+Fix DNS (including fragmented DNS) dissection
+Fix parsing of IPv6 packets with extension headers
+Fix extraction of Realm attribute in STUN
+Fix support for START-TLS sessions in FTP
+Fix TCP retransmissions for multiple dissectors
+Fix DES initialisation
+Fix Git protocol dissection
+Fix certificate mismatch for TLS flows with no client hello observed
+Fix old versions of GQUIC on big-endian machines
+
+Misc
+----
+Add tool for generating automatically the Azure IP list
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../devilspie/{devilspie2_0.43.bb => devilspie2_0.44.bb}        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/devilspie/{devilspie2_0.43.bb => devilspie2_0.44.bb} (95%)
+ ...001-autogen.sh-not-generate-configure.patch | 18 ++++++++----------
+ .../ntopng/{ndpi_4.0.bb => ndpi_4.2.bb}        |  6 +++---
+ 2 files changed, 11 insertions(+), 13 deletions(-)
+ rename meta-networking/recipes-support/ntopng/{ndpi_4.0.bb => ndpi_4.2.bb} (82%)
 
-diff --git a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.43.bb b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.44.bb
-similarity index 95%
-rename from meta-gnome/recipes-gnome/devilspie/devilspie2_0.43.bb
-rename to meta-gnome/recipes-gnome/devilspie/devilspie2_0.44.bb
-index 8372448432..8e048170bc 100644
---- a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.43.bb
-+++ b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.44.bb
-@@ -8,7 +8,7 @@ DEPENDS = "gtk+ glib-2.0 libwnck libxinerama lua virtual/libx11"
+diff --git a/meta-networking/recipes-support/ntopng/files/0001-autogen.sh-not-generate-configure.patch b/meta-networking/recipes-support/ntopng/files/0001-autogen.sh-not-generate-configure.patch
+index 1cbf059efd..d5c7f5f1cc 100644
+--- a/meta-networking/recipes-support/ntopng/files/0001-autogen.sh-not-generate-configure.patch
++++ b/meta-networking/recipes-support/ntopng/files/0001-autogen.sh-not-generate-configure.patch
+@@ -12,26 +12,24 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+ refresh patch to 4.0
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ ---
+- autogen.sh | 9 ---------
+- 1 file changed, 9 deletions(-)
++ autogen.sh | 7 -------
++ 1 file changed, 7 deletions(-)
  
- PV .= "+git${SRCPV}"
+ diff --git a/autogen.sh b/autogen.sh
+-index cf5d7057..cb73cf9d 100755
++index 0aa7507..36e0423 100755
+ --- a/autogen.sh
+ +++ b/autogen.sh
+-@@ -52,12 +52,3 @@ cat configure.seed | sed \
+-     -e "s/@NDPI_VERSION_SHORT@/$NDPI_VERSION_SHORT/g" \
+-     -e "s/@FUZZY@/$FUZZY/g" \
+-     > configure.ac
++@@ -33,10 +33,3 @@ if test -z $PKG_CONFIG; then
++     echo "pkg-config is missing: please install it (apt-get install pkg-config) and try again"
++     exit
++ fi
+ -
+ -autoreconf -ivf
+--cat configure | sed "s/#define PACKAGE/#define NDPI_PACKAGE/g" | sed "s/#define VERSION/#define NDPI_VERSION/g"  > configure.tmp
+--cat configure.tmp > configure
+ -
+ -echo "./configure $@"
+ -chmod +x configure
+ -./configure $@
+ -
+ -- 
+-2.17.1
++2.25.1
  
--SRCREV = "a3ee65b815a0247a0dbdaa39353444cef6f93499"
-+SRCREV = "b9d7ad9c09a5fb17a1562ee1d892798c646e9ec9"
+diff --git a/meta-networking/recipes-support/ntopng/ndpi_4.0.bb b/meta-networking/recipes-support/ntopng/ndpi_4.2.bb
+similarity index 82%
+rename from meta-networking/recipes-support/ntopng/ndpi_4.0.bb
+rename to meta-networking/recipes-support/ntopng/ndpi_4.2.bb
+index 960c4c2012..352d2d2426 100644
+--- a/meta-networking/recipes-support/ntopng/ndpi_4.0.bb
++++ b/meta-networking/recipes-support/ntopng/ndpi_4.2.bb
+@@ -8,10 +8,10 @@ RDEPENDS:${PN} += " libpcap"
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
  
- SRC_URI = "git://github.com/dsalt/devilspie2;branch=master;protocol=https \
-     file://default.lua \
+-SRCREV = "dabab0e9515c2e6a71a91bdc807453e416f831ca"
+-SRC_URI = "git://github.com/ntop/nDPI.git;branch=4.0-stable;protocol=https \
++SRCREV = "8b5c6af71b562549f8416b31803daae223e09f46"
++SRC_URI = "git://github.com/ntop/nDPI.git;branch=4.2-stable;protocol=https \
+            file://0001-autogen.sh-not-generate-configure.patch \
+-"
++           "
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.25.1
 
