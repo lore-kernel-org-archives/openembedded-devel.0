@@ -1,126 +1,100 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
+Return-Path: <crg7475@mailbox.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98CEEC433EF
-	for <webhook@archiver.kernel.org>; Tue,  8 Feb 2022 16:15:37 +0000 (UTC)
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com
- [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web10.13198.1644336936401171403
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7CFFDC433EF
+	for <webhook@archiver.kernel.org>; Tue,  8 Feb 2022 16:35:01 +0000 (UTC)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ by mx.groups.io with SMTP id smtpd.web10.13535.1644338099933795273
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Feb 2022 08:15:36 -0800
+ Tue, 08 Feb 2022 08:35:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=XswzLhJR;
- spf=pass (domain: gmail.com, ip: 209.85.218.49,
- mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-ej1-f49.google.com with SMTP id s21so25432766ejx.12
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Feb 2022 08:15:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=DG+xA3x/LUYa7+0jHA6phyrw5QpEx2ktDVB5xAHHhCA=;
-        b=XswzLhJRidiaenOazH6wsXiiRaHLlMXpLvteHQGr0i8FTetOrePmJ3ixllBKedAIwy
-         819h8yOJyxZ3jzYMonrRwJJOSHL7uC/siRJMZMxA3BHkswnScBJhrTtd+OtXtVaz1omZ
-         8Z6OvIT/Rha8NlyV4TYm8ew+NN2dplLbZYoraSNND7RmNxYGgQYHHwsMfJvDTW/fSIoq
-         6Hjj6EWsgI33Ye1zlIv57QFZ3+Irx/Hyv96mTfGD/op0t4ZbL1pr7qn+DcvCXGXMtGTq
-         yyKFDhOXHSls4oSiD1GSHN9qdzmISCj3UdTdd3ovm+ub8moqT7fAcyfFfNslnf6BnIqq
-         9Cwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=DG+xA3x/LUYa7+0jHA6phyrw5QpEx2ktDVB5xAHHhCA=;
-        b=XJEUwJPtoUv7qwzdxtM946egGkTN5sYO+JLu3NI6tmqpngzVd54zk9YL8jl0D1rjEU
-         06uN9VQGUkMl9OX5OPmsaZ6mX9/QYDXW7n+7nItNcCoYlWQs5d61+rIJJ5ZsGlreeY69
-         BrF+Lb5ZTRHW/iK+ebInLzE8DV1uUtOYUyryHGuPpn5E1Boy8GKIpVw2eSVFHpeXTH2/
-         jv3ndL95gixsZXB0sLKR4KS3yUQiYGb+0LxWENmrP3qyLdVBpJluQqRLbLllaVDUV2mt
-         byJElsMCN3iXPpvIOK2p7cN7KcRBz9I16IrFOOL3DrTVzA24u0PGribFFtirSb7/+s7f
-         kGMw==
-X-Gm-Message-State: AOAM531dQd1I77bx7xTYXt8l9ZpAgfeGaP6M7HA+Zgr9tjSvKvVTfhPV
-	2Ye1qiTbsQlyt8+BiIBc7it9G+PMwDWjlA==
-X-Google-Smtp-Source: 
- ABdhPJyjlmuBzKU9jv544EieXoX1cRXMqYYcWEmxodZZ9b2xCp5v+GYUNRNS6NF8vQanh6BuQIC/jg==
-X-Received: by 2002:a17:907:60cf:: with SMTP id
- hv15mr4143593ejc.488.1644336934522;
-        Tue, 08 Feb 2022 08:15:34 -0800 (PST)
-Received: from Unimatrix08-Focal.lan (mob-31-157-145-185.net.vodafone.it.
- [31.157.145.185])
-        by smtp.gmail.com with ESMTPSA id
- r14sm1530582edp.38.2022.02.08.08.15.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Feb 2022 08:15:34 -0800 (PST)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+ dkim=fail reason="body hash did not verify" header.i=@mailbox.org
+ header.s=mail20150812 header.b=HA14+cFx;
+ spf=pass (domain: mailbox.org, ip: 80.241.56.172,
+ mailfrom: crg7475@mailbox.org)
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:105:465:1:3:0])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits)
+ server-digest SHA256)
+	(No client certificate requested)
+	by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4JtTBS49vzz9sjD;
+	Tue,  8 Feb 2022 17:34:56 +0100 (CET)
+X-Virus-Scanned: amavisd-new at heinlein-support.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812;
+	t=1644338096;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=km61UCUbc0sy94m8U0p22HsqC4v3pR8JrjpfrmV0EFw=;
+	b=HA14+cFx9Gi8BEG/N3CtpXYF3tfNReEUa2HoqYtcKrn/dvWFgF4BRTM8IpuDV8AyAUdRQK
+	4w44tmVhJ2+g2545ks9yt8HciXsVIBc9wSnbn0cIuwxMjY2IQb6S4edeCwT06NFG3SvFoS
+	RsXPLFpvkC5SW5lY99Z3oosKkwUbsQDy+MnOiFqloQs4rRSsj/Qytg9DG+87WTaAkyI2R4
+	8T99q944fgJKF752Z/N5TsNtuAEsvB5/rn9n8geR4iSgGRpVKreUTW//fUJnF1o1TLYEmr
+	hsH9icp75WKP+si/QpVF4ZNEQK5y5pyqG2iP8Zy6nJNQb24JiMMNHk7Vyj064A==
+From: Carlos Rafael Giani <crg7475@mailbox.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>,
-	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	Gianfranco Costamagna <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH] mosquitto: upgrade 2.0.12 -> 2.0.14
-Date: Tue,  8 Feb 2022 17:15:32 +0100
-Message-Id: <20220208161532.1629033-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.25.1
+Cc: =george.kiagiadakis@collabora.com
+Subject: [meta-multimedia][RFC PATCH 0/2] PipeWire upgrade and WirePlumber
+ introduction
+Date: Tue,  8 Feb 2022 17:34:38 +0100
+Message-Id: <20220208163440.428471-1-crg7475@mailbox.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Feb 2022 16:15:37 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Feb 2022 16:35:01 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95267
+ https://lists.openembedded.org/g/openembedded-devel/message/95268
 
-From: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
+This short series of patches upgrades PipeWire to version 0.3.45 and
+adds a patch for WirePlumber, a session manager for PipeWire.
 
-- Upgrade license hash due to whitespace changes
-- refresh patch 1571.patch
+There are two commonly used session managers for PipeWire:
+media-session, which is a small session manager intended for very simple
+use cases, but mostly functions as a example; and WirePlumber, an
+extensible, scriptable session manager that is usable on both desktop
+and embedded systems. These days, media-session is considered deprecated
+by upstream, which is why as part of this recipe upgrade, media-session
+is no longer available. It is fully replaced by WirePlumber instead.
+WirePlumber runs as a separate daemon, alongside PipeWire.
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
----
- .../recipes-connectivity/mosquitto/files/1571.patch         | 2 +-
- .../mosquitto/{mosquitto_2.0.12.bb => mosquitto_2.0.14.bb}  | 6 +++---
- 2 files changed, 4 insertions(+), 4 deletions(-)
- rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.12.bb => mosquitto_2.0.14.bb} (93%)
+This is an RFC because there a few issues unclear at the moment:
 
-diff --git a/meta-networking/recipes-connectivity/mosquitto/files/1571.patch b/meta-networking/recipes-connectivity/mosquitto/files/1571.patch
-index 37560f30c..627638ec8 100644
---- a/meta-networking/recipes-connectivity/mosquitto/files/1571.patch
-+++ b/meta-networking/recipes-connectivity/mosquitto/files/1571.patch
-@@ -19,4 +19,4 @@ Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
- +	LINK_FLAGS "-Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/linker.version"
-  )
-  
-- install(TARGETS libmosquitto RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}")
-+ install(TARGETS libmosquitto
-diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.12.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.14.bb
-similarity index 93%
-rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.12.bb
-rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.14.bb
-index 06d8211a2..739b7de62 100644
---- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.12.bb
-+++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.14.bb
-@@ -8,8 +8,8 @@ HOMEPAGE = "http://mosquitto.org/"
- SECTION = "console/network"
- LICENSE = "EPL-2.0 | EDL-1.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ca9a8f366c6babf593e374d0d7d58749 \
--                    file://edl-v10;md5=c09f121939f063aeb5235972be8c722c \
--                    file://epl-v20;md5=d9fc0efef5228704e7f5b37f27192723 \
-+                    file://edl-v10;md5=9f6accb1afcb570f8be65039e2fcd49e \
-+                    file://epl-v20;md5=2dd765ca47a05140be15ebafddbeadfe \
-                     file://NOTICE.md;md5=a7a91b4754c6f7995020d1b49bc829c6 \
- "
- DEPENDS = "uthash cjson"
-@@ -19,7 +19,7 @@ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
-            file://1571.patch \
- "
- 
--SRC_URI[sha256sum] = "31cf0065cb431d6f4e57a5f4d56663e839c9d177362eff89582d7cfde191c933"
-+SRC_URI[sha256sum] = "d0dde8fdb12caf6e2426b4f28081919a2fce3448773bdb8af0d3cd5fe5776925"
- 
- inherit systemd update-rc.d useradd cmake pkgconfig
- 
--- 
-2.25.1
+1. Should the configurations be separate recipes for easier exchange of
+recipes? If so, would it make sense to introduce new virtual packages,
+like "virtual/wireplumber-configuration"? These would be used in
+RDEPENDS and RRECOMMENDS, and from what I understand, using virtual
+packages in these variables is discouraged. However, running PipeWire
+without any session manager typically is not useful, so I'd like to at
+least print a warning when this is done, since in >90% of all cases,
+this happens because the user forgot to add a PipeWire session manager
+to the image.
+
+2. WirePlumber currently does not run out of the box, since it is run
+system wide (just like PulseAudio for example, and PipeWire itself also
+runs system wide), and some of its scripts and modules try to access a
+session-wide DBus, which does not exist when WirePlumber is run system
+wide. I am unsure about a proper fix. Should upstream add system wide
+DBus support? Or is there a way in OE/Yocto to start session DBus for
+individual systemd services like WirePlumber?
+
+Carlos Rafael Giani (2):
+  pipewire: Upgrade to 0.3.45
+  wireplumber: Add recipe
+
+ ...{pipewire_0.3.34.bb =3D> pipewire_0.3.45.bb} | 117 ++++++++++-----
+ .../wireplumber/wireplumber_0.4.8.bb          | 140 ++++++++++++++++++
+ 2 files changed, 219 insertions(+), 38 deletions(-)
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.34.bb =3D=
+> pipewire_0.3.45.bb} (74%)
+ create mode 100644 meta-multimedia/recipes-multimedia/wireplumber/wirepl=
+umber_0.4.8.bb
+
+--=20
+2.32.0
 
 
