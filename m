@@ -1,169 +1,205 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 62173C433F5
-	for <webhook@archiver.kernel.org>; Tue,  8 Feb 2022 15:50:27 +0000 (UTC)
-Received: from mail-vs1-f41.google.com (mail-vs1-f41.google.com
- [209.85.217.41])
- by mx.groups.io with SMTP id smtpd.web08.12889.1644335426301224994
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7371C433F5
+	for <webhook@archiver.kernel.org>; Tue,  8 Feb 2022 15:53:28 +0000 (UTC)
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+ by mx.groups.io with SMTP id smtpd.web12.12941.1644335607495889778
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Feb 2022 07:50:26 -0800
+ Tue, 08 Feb 2022 07:53:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=MXREI8i/;
- spf=pass (domain: gmail.com, ip: 209.85.217.41,
- mailfrom: martin.jansa@gmail.com)
-Received: by mail-vs1-f41.google.com with SMTP id b2so3853974vso.9
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Feb 2022 07:50:26 -0800 (PST)
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=ADCe1UhV;
+ spf=pass (domain: axis.com, ip: 195.60.68.18,
+ mailfrom: peter.kjellerstedt@axis.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=nWhytmzkZsRLLinlTa+sl82KrE+cwof+UL/IftJ4C/A=;
-        b=MXREI8i/OqGV0x1G+/tGABb/aLa/P2v7uQsD71m3NhIohb3//KdtShLIUyQvTTTRXp
-         yaHwmNswlzziB20Ue+LoJG1msbqmmcsvVkdf3hPcBlHQveh2RMYuKDxAwfuTNflra5OP
-         /BUianSqI2gmN/DvXgl4PmDnocK7gJ2TNQL9qNittdp0DGPD8dLFJ7FUWU5niNHBuL79
-         NuS2S3h2JmeCvww+rNpI9mp+Erk3XDZBvdWiutgJPdsatBRwsjsMgskqQEeg5xK/syML
-         J9a7QEzLQzeUhDXQav1Ome9xe3bbfUu0MEgu9B9PX6A8W1jynz3BiodqL5Gj2mnk58oe
-         /XvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=nWhytmzkZsRLLinlTa+sl82KrE+cwof+UL/IftJ4C/A=;
-        b=WPT2adXFgiB2BoWjR51OrL8VxHl8ZijAGU9XVC9YPPYkRfcjvt9k84r7r0FZ+WY4ZX
-         /caRz/YTZ7q2gZV3hW4dse76Lkrb0eIWa3oP2Spdx7sG97w8vMNaVWGzvy/AkzcveXb4
-         SOkYn3w89yg421mUogu92E/dJ85VDiKE9nOa5W+v0aTl9eRW/Xl3o6tU8RXdrVBtaMCL
-         QEa4csTJEqcNVGdb2eXqTtw9/1XOnik2KhELUmwrvb+VGeiZSlk+QkmUhPN9N8jbrP8J
-         Rn0am16s96QYgpO1/I/wy8B48XkP9RM5GRFIbRx9J8SdcGWQh2FlsHn04HGEPnL80kgp
-         kjvw==
-X-Gm-Message-State: AOAM530RFGF+5aCXvyEFkVjhIUm6U7sTrxtgtiB9LtMnRWaGyDWOvlmX
-	Ifr4d+kDLAaPRj0wT0KaDWsuzyNb0B3pANBe+yc=
-X-Google-Smtp-Source: 
- ABdhPJwpgtcuXssrsS1SnbwDsFg7OO+soTnfH5LhxzBxupXuD2PPUXZdYbItLAX2X+8nuHmnNYAqBx8zs4LK8qzZ4h4=
-X-Received: by 2002:a67:ea4e:: with SMTP id r14mr1254889vso.51.1644335425405;
- Tue, 08 Feb 2022 07:50:25 -0800 (PST)
-MIME-Version: 1.0
-References: <20220208154731.10107-1-pkj@axis.com>
-In-Reply-To: <20220208154731.10107-1-pkj@axis.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 8 Feb 2022 16:50:11 +0100
-Message-ID: 
- <CA+chaQdodr+hu7Eh8ndGgpZSNPqfx5BO2ZHLMrEFuaQQ47speg@mail.gmail.com>
-Subject: Re: [oe] [honister][PATCH] insane.bbclass: Correct
+  d=axis.com; q=dns/txt; s=axis-central1; t=1644335608;
+  x=1675871608;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:mime-version;
+  bh=aVnddul/FPkUoF2XFuPzUyN9rldfCV2cAe9whT4Bf3c=;
+  b=ADCe1UhViFMtTMqjE6CK9baC09uQbp+sOE+DCZckK3zj4q0TC/fDdBpB
+   qd5zNYufTjo3BusL1o4nejDR+BM80QdI64oe/NfbvS27F2t3rV0lVKz+b
+   /syderD0CFAeNJ19Pp9nY6US79IWlbHYEvv7TOzs7V3PUBtmPYkAUgxKf
+   VNITM1CBrEtD78lHPtJ+qUb5kPnyLfobYupTUqNU0YeSn3KModjG7r61e
+   NCI8qV2xfnBjDAVaoNATnzod/XUq/Mmf040AHtfRSuoiyW1CHK43Cogyl
+   I8CDjOcT6CQBKAXawdykWp0DxaakVcLnvkzFbEgYrIae1ta2tXx7AH/JW
+   Q==;
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] [honister][PATCH] insane.bbclass: Correct
  package_qa_check_empty_dirs()
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000ec467f05d783ac21"
+Thread-Topic: [oe] [honister][PATCH] insane.bbclass: Correct
+ package_qa_check_empty_dirs()
+Thread-Index: AQHYHQONSlNNcP0v+UGMp8BWHGQWNKyJzXeg
+Date: Tue, 8 Feb 2022 15:53:25 +0000
+Message-ID: <9a5c347d020a4453930629c39ea5d66f@axis.com>
+References: <20220208154731.10107-1-pkj@axis.com>
+ <CA+chaQdodr+hu7Eh8ndGgpZSNPqfx5BO2ZHLMrEFuaQQ47speg@mail.gmail.com>
+In-Reply-To: 
+ <CA+chaQdodr+hu7Eh8ndGgpZSNPqfx5BO2ZHLMrEFuaQQ47speg@mail.gmail.com>
+Accept-Language: en-US, sv-SE
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.0.5.60]
+Content-Type: multipart/alternative;
+	boundary="_000_9a5c347d020a4453930629c39ea5d66faxiscom_"
+MIME-Version: 1.0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Feb 2022 15:50:27 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Feb 2022 15:53:28 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95265
+ https://lists.openembedded.org/g/openembedded-devel/message/95266
 
---000000000000ec467f05d783ac21
-Content-Type: text/plain; charset="UTF-8"
+--_000_9a5c347d020a4453930629c39ea5d66faxiscom_
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-This should be sent to oe-core ML.
+QWN0dWFsbHksIGl0IHNob3VsZG7igJl0IGhhdmUgYmVlbiBzZW50IGF0IGFsbCBhcyBJIGhhZCBh
+bHJlYWR5IHNlbnQgaXQgdG8gdGhlIG9lLWNvcmUgbGlzdC4NCg0KLy9QZXRlcg0KDQpGcm9tOiBN
+YXJ0aW4gSmFuc2EgPG1hcnRpbi5qYW5zYUBnbWFpbC5jb20+DQpTZW50OiBkZW4gOCBmZWJydWFy
+aSAyMDIyIDE2OjUwDQpUbzogUGV0ZXIgS2plbGxlcnN0ZWR0IDxwZXRlci5ramVsbGVyc3RlZHRA
+YXhpcy5jb20+DQpDYzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcN
+ClN1YmplY3Q6IFJlOiBbb2VdIFtob25pc3Rlcl1bUEFUQ0hdIGluc2FuZS5iYmNsYXNzOiBDb3Jy
+ZWN0IHBhY2thZ2VfcWFfY2hlY2tfZW1wdHlfZGlycygpDQoNClRoaXMgc2hvdWxkIGJlIHNlbnQg
+dG8gb2UtY29yZSBNTC4NCg0KT24gVHVlLCBGZWIgOCwgMjAyMiBhdCA0OjQ3IFBNIFBldGVyIEtq
+ZWxsZXJzdGVkdCA8cGV0ZXIua2plbGxlcnN0ZWR0QGF4aXMuY29tPG1haWx0bzpwZXRlci5ramVs
+bGVyc3RlZHRAYXhpcy5jb20+PiB3cm90ZToNClRoZSBvZS5xYS5hZGRfbWVzc2FnZSgpIG1ldGhv
+ZCBpcyBub3QgYXZhaWxhYmxlIGluIEhvbmlzdGVyLCB1c2UNCnBhY2thZ2VfcWFfYWRkX21lc3Nh
+Z2UoKSBpbnN0ZWFkLg0KDQpTaWduZWQtb2ZmLWJ5OiBQZXRlciBLamVsbGVyc3RlZHQgPHBldGVy
+LmtqZWxsZXJzdGVkdEBheGlzLmNvbTxtYWlsdG86cGV0ZXIua2plbGxlcnN0ZWR0QGF4aXMuY29t
+Pj4NCi0tLQ0KIG1ldGEvY2xhc3Nlcy9pbnNhbmUuYmJjbGFzcyB8IDIgKy0NCiAxIGZpbGUgY2hh
+bmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkNCg0KZGlmZiAtLWdpdCBhL21ldGEv
+Y2xhc3Nlcy9pbnNhbmUuYmJjbGFzcyBiL21ldGEvY2xhc3Nlcy9pbnNhbmUuYmJjbGFzcw0KaW5k
+ZXggYmZhZjI1NzdkMC4uMmM4ZjUzMzhlNSAxMDA2NDQNCi0tLSBhL21ldGEvY2xhc3Nlcy9pbnNh
+bmUuYmJjbGFzcw0KKysrIGIvbWV0YS9jbGFzc2VzL2luc2FuZS5iYmNsYXNzDQpAQCAtOTQ1LDcg
+Kzk0NSw3IEBAIGRlZiBwYWNrYWdlX3FhX2NoZWNrX2VtcHR5X2RpcnMocGtnLCBkLCBtZXNzYWdl
+cyk6DQogICAgICAgICAgICAgcmVjb21tZW5kYXRpb24gPSAoZC5nZXRWYXIoJ1FBX0VNUFRZX0RJ
+UlNfUkVDT01NRU5EQVRJT046JyArIGRpcikgb3INCiAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAiYnV0IGl0IGlzIGV4cGVjdGVkIHRvIGJlIGVtcHR5IikNCiAgICAgICAgICAgICBtc2cg
+PSAiJXMgaW5zdGFsbHMgZmlsZXMgaW4gJXMsICVzIiAlIChwa2csIGRpciwgcmVjb21tZW5kYXRp
+b24pDQotICAgICAgICAgICAgb2UucWEuYWRkX21lc3NhZ2UobWVzc2FnZXMsICJlbXB0eS1kaXJz
+IiwgbXNnKQ0KKyAgICAgICAgICAgIHBhY2thZ2VfcWFfYWRkX21lc3NhZ2UobWVzc2FnZXMsICJl
+bXB0eS1kaXJzIiwgbXNnKQ0KDQogZGVmIHBhY2thZ2VfcWFfY2hlY2tfZW5jb2Rpbmcoa2V5cywg
+ZW5jb2RlLCBkKToNCiAgICAgZGVmIGNoZWNrX2VuY29kaW5nKGtleSwgZW5jKToNCg0KLT0tPS09
+LT0tPS09LT0tPS09LT0tPS0NCkxpbmtzOiBZb3UgcmVjZWl2ZSBhbGwgbWVzc2FnZXMgc2VudCB0
+byB0aGlzIGdyb3VwLg0KVmlldy9SZXBseSBPbmxpbmUgKCM5NTI2NCk6IGh0dHBzOi8vbGlzdHMu
+b3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC9tZXNzYWdlLzk1MjY0DQpNdXRl
+IFRoaXMgVG9waWM6IGh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tdC84ODk5OTA4MS8z
+NjE3MTU2DQpHcm91cCBPd25lcjogb3BlbmVtYmVkZGVkLWRldmVsK293bmVyQGxpc3RzLm9wZW5l
+bWJlZGRlZC5vcmc8bWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZlbCUyQm93bmVyQGxpc3RzLm9wZW5l
+bWJlZGRlZC5vcmc+DQpVbnN1YnNjcmliZTogaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3Jn
+L2cvb3BlbmVtYmVkZGVkLWRldmVsL3Vuc3ViIFtNYXJ0aW4uSmFuc2FAZ21haWwuY29tPG1haWx0
+bzpNYXJ0aW4uSmFuc2FAZ21haWwuY29tPl0NCi09LT0tPS09LT0tPS09LT0tPS09LT0tDQo=
 
-On Tue, Feb 8, 2022 at 4:47 PM Peter Kjellerstedt <
-peter.kjellerstedt@axis.com> wrote:
+--_000_9a5c347d020a4453930629c39ea5d66faxiscom_
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-> The oe.qa.add_message() method is not available in Honister, use
-> package_qa_add_message() instead.
->
-> Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-> ---
->  meta/classes/insane.bbclass | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta/classes/insane.bbclass b/meta/classes/insane.bbclass
-> index bfaf2577d0..2c8f5338e5 100644
-> --- a/meta/classes/insane.bbclass
-> +++ b/meta/classes/insane.bbclass
-> @@ -945,7 +945,7 @@ def package_qa_check_empty_dirs(pkg, d, messages):
->              recommendation = (d.getVar('QA_EMPTY_DIRS_RECOMMENDATION:' +
-> dir) or
->                                "but it is expected to be empty")
->              msg = "%s installs files in %s, %s" % (pkg, dir,
-> recommendation)
-> -            oe.qa.add_message(messages, "empty-dirs", msg)
-> +            package_qa_add_message(messages, "empty-dirs", msg)
->
->  def package_qa_check_encoding(keys, encode, d):
->      def check_encoding(key, enc):
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#95264):
-> https://lists.openembedded.org/g/openembedded-devel/message/95264
-> Mute This Topic: https://lists.openembedded.org/mt/88999081/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> Martin.Jansa@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
->
+PGh0bWwgeG1sbnM6dj0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp2bWwiIHhtbG5zOm89InVy
+bjpzY2hlbWFzLW1pY3Jvc29mdC1jb206b2ZmaWNlOm9mZmljZSIgeG1sbnM6dz0idXJuOnNjaGVt
+YXMtbWljcm9zb2Z0LWNvbTpvZmZpY2U6d29yZCIgeG1sbnM6bT0iaHR0cDovL3NjaGVtYXMubWlj
+cm9zb2Z0LmNvbS9vZmZpY2UvMjAwNC8xMi9vbW1sIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
+VFIvUkVDLWh0bWw0MCI+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIg
+Y29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxtZXRhIG5hbWU9IkdlbmVyYXRv
+ciIgY29udGVudD0iTWljcm9zb2Z0IFdvcmQgMTUgKGZpbHRlcmVkIG1lZGl1bSkiPg0KPHN0eWxl
+PjwhLS0NCi8qIEZvbnQgRGVmaW5pdGlvbnMgKi8NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6
+IkNhbWJyaWEgTWF0aCI7DQoJcGFub3NlLTE6MiA0IDUgMyA1IDQgNiAzIDIgNDt9DQpAZm9udC1m
+YWNlDQoJe2ZvbnQtZmFtaWx5OkNhbGlicmk7DQoJcGFub3NlLTE6MiAxNSA1IDIgMiAyIDQgMyAy
+IDQ7fQ0KLyogU3R5bGUgRGVmaW5pdGlvbnMgKi8NCnAuTXNvTm9ybWFsLCBsaS5Nc29Ob3JtYWws
+IGRpdi5Nc29Ob3JtYWwNCgl7bWFyZ2luOjBjbTsNCglmb250LXNpemU6MTEuMHB0Ow0KCWZvbnQt
+ZmFtaWx5OiJDYWxpYnJpIixzYW5zLXNlcmlmO30NCmE6bGluaywgc3Bhbi5Nc29IeXBlcmxpbmsN
+Cgl7bXNvLXN0eWxlLXByaW9yaXR5Ojk5Ow0KCWNvbG9yOmJsdWU7DQoJdGV4dC1kZWNvcmF0aW9u
+OnVuZGVybGluZTt9DQpzcGFuLkVtYWlsU3R5bGUxOA0KCXttc28tc3R5bGUtdHlwZTpwZXJzb25h
+bC1yZXBseTsNCglmb250LWZhbWlseToiQ2FsaWJyaSIsc2Fucy1zZXJpZjsNCgljb2xvcjojOTQz
+NjM0Ow0KCWZvbnQtd2VpZ2h0Om5vcm1hbDsNCglmb250LXN0eWxlOm5vcm1hbDt9DQouTXNvQ2hw
+RGVmYXVsdA0KCXttc28tc3R5bGUtdHlwZTpleHBvcnQtb25seTsNCglmb250LWZhbWlseToiQ2Fs
+aWJyaSIsc2Fucy1zZXJpZjsNCgltc28tZmFyZWFzdC1sYW5ndWFnZTpFTi1VUzt9DQpAcGFnZSBX
+b3JkU2VjdGlvbjENCgl7c2l6ZTo2MTIuMHB0IDc5Mi4wcHQ7DQoJbWFyZ2luOjcwLjg1cHQgNzAu
+ODVwdCA3MC44NXB0IDcwLjg1cHQ7fQ0KZGl2LldvcmRTZWN0aW9uMQ0KCXtwYWdlOldvcmRTZWN0
+aW9uMTt9DQotLT48L3N0eWxlPjwhLS1baWYgZ3RlIG1zbyA5XT48eG1sPg0KPG86c2hhcGVkZWZh
+dWx0cyB2OmV4dD0iZWRpdCIgc3BpZG1heD0iMTAyNiIgLz4NCjwveG1sPjwhW2VuZGlmXS0tPjwh
+LS1baWYgZ3RlIG1zbyA5XT48eG1sPg0KPG86c2hhcGVsYXlvdXQgdjpleHQ9ImVkaXQiPg0KPG86
+aWRtYXAgdjpleHQ9ImVkaXQiIGRhdGE9IjEiIC8+DQo8L286c2hhcGVsYXlvdXQ+PC94bWw+PCFb
+ZW5kaWZdLS0+DQo8L2hlYWQ+DQo8Ym9keSBsYW5nPSJTViIgbGluaz0iYmx1ZSIgdmxpbms9InB1
+cnBsZSIgc3R5bGU9IndvcmQtd3JhcDpicmVhay13b3JkIj4NCjxkaXYgY2xhc3M9IldvcmRTZWN0
+aW9uMSI+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBsYW5nPSJFTi1VUyIgc3R5bGU9ImNv
+bG9yOiM5NDM2MzQ7bXNvLWZhcmVhc3QtbGFuZ3VhZ2U6RU4tVVMiPkFjdHVhbGx5LCBpdCBzaG91
+bGRu4oCZdCBoYXZlIGJlZW4gc2VudCBhdCBhbGwgYXMgSSBoYWQgYWxyZWFkeSBzZW50IGl0IHRv
+IHRoZSBvZS1jb3JlIGxpc3QuPG86cD48L286cD48L3NwYW4+PC9wPg0KPHAgY2xhc3M9Ik1zb05v
+cm1hbCI+PHNwYW4gbGFuZz0iRU4tVVMiIHN0eWxlPSJjb2xvcjojOTQzNjM0O21zby1mYXJlYXN0
+LWxhbmd1YWdlOkVOLVVTIj48bzpwPiZuYnNwOzwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0i
+TXNvTm9ybWFsIj48c3BhbiBsYW5nPSJFTi1VUyIgc3R5bGU9ImNvbG9yOiM5NDM2MzQ7bXNvLWZh
+cmVhc3QtbGFuZ3VhZ2U6RU4tVVMiPi8vUGV0ZXI8bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBj
+bGFzcz0iTXNvTm9ybWFsIj48c3BhbiBsYW5nPSJFTi1VUyIgc3R5bGU9ImNvbG9yOiM5NDM2MzQ7
+bXNvLWZhcmVhc3QtbGFuZ3VhZ2U6RU4tVVMiPjxvOnA+Jm5ic3A7PC9vOnA+PC9zcGFuPjwvcD4N
+CjxkaXYgc3R5bGU9ImJvcmRlcjpub25lO2JvcmRlci1sZWZ0OnNvbGlkIGJsdWUgMS41cHQ7cGFk
+ZGluZzowY20gMGNtIDBjbSA0LjBwdCI+DQo8ZGl2Pg0KPGRpdiBzdHlsZT0iYm9yZGVyOm5vbmU7
+Ym9yZGVyLXRvcDpzb2xpZCAjRTFFMUUxIDEuMHB0O3BhZGRpbmc6My4wcHQgMGNtIDBjbSAwY20i
+Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PGI+PHNwYW4gbGFuZz0iRU4tVVMiPkZyb206PC9zcGFu
+PjwvYj48c3BhbiBsYW5nPSJFTi1VUyI+IE1hcnRpbiBKYW5zYSAmbHQ7bWFydGluLmphbnNhQGdt
+YWlsLmNvbSZndDsNCjxicj4NCjxiPlNlbnQ6PC9iPiBkZW4gOCBmZWJydWFyaSAyMDIyIDE2OjUw
+PGJyPg0KPGI+VG86PC9iPiBQZXRlciBLamVsbGVyc3RlZHQgJmx0O3BldGVyLmtqZWxsZXJzdGVk
+dEBheGlzLmNvbSZndDs8YnI+DQo8Yj5DYzo8L2I+IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5v
+cGVuZW1iZWRkZWQub3JnPGJyPg0KPGI+U3ViamVjdDo8L2I+IFJlOiBbb2VdIFtob25pc3Rlcl1b
+UEFUQ0hdIGluc2FuZS5iYmNsYXNzOiBDb3JyZWN0IHBhY2thZ2VfcWFfY2hlY2tfZW1wdHlfZGly
+cygpPG86cD48L286cD48L3NwYW4+PC9wPg0KPC9kaXY+DQo8L2Rpdj4NCjxwIGNsYXNzPSJNc29O
+b3JtYWwiPjxvOnA+Jm5ic3A7PC9vOnA+PC9wPg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwi
+PlRoaXMgc2hvdWxkIGJlIHNlbnQgdG8gb2UtY29yZSBNTC48bzpwPjwvbzpwPjwvcD4NCjwvZGl2
+Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PG86cD4mbmJzcDs8L286cD48L3A+DQo8ZGl2Pg0KPGRp
+dj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPk9uIFR1ZSwgRmViIDgsIDIwMjIgYXQgNDo0NyBQTSBQ
+ZXRlciBLamVsbGVyc3RlZHQgJmx0OzxhIGhyZWY9Im1haWx0bzpwZXRlci5ramVsbGVyc3RlZHRA
+YXhpcy5jb20iPnBldGVyLmtqZWxsZXJzdGVkdEBheGlzLmNvbTwvYT4mZ3Q7IHdyb3RlOjxvOnA+
+PC9vOnA+PC9wPg0KPC9kaXY+DQo8YmxvY2txdW90ZSBzdHlsZT0iYm9yZGVyOm5vbmU7Ym9yZGVy
+LWxlZnQ6c29saWQgI0NDQ0NDQyAxLjBwdDtwYWRkaW5nOjBjbSAwY20gMGNtIDYuMHB0O21hcmdp
+bi1sZWZ0OjQuOHB0O21hcmdpbi1yaWdodDowY20iPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCIgc3R5
+bGU9Im1hcmdpbi1ib3R0b206MTIuMHB0Ij5UaGUgb2UucWEuYWRkX21lc3NhZ2UoKSBtZXRob2Qg
+aXMgbm90IGF2YWlsYWJsZSBpbiBIb25pc3RlciwgdXNlPGJyPg0KcGFja2FnZV9xYV9hZGRfbWVz
+c2FnZSgpIGluc3RlYWQuPGJyPg0KPGJyPg0KU2lnbmVkLW9mZi1ieTogUGV0ZXIgS2plbGxlcnN0
+ZWR0ICZsdDs8YSBocmVmPSJtYWlsdG86cGV0ZXIua2plbGxlcnN0ZWR0QGF4aXMuY29tIiB0YXJn
+ZXQ9Il9ibGFuayI+cGV0ZXIua2plbGxlcnN0ZWR0QGF4aXMuY29tPC9hPiZndDs8YnI+DQotLS08
+YnI+DQombmJzcDttZXRhL2NsYXNzZXMvaW5zYW5lLmJiY2xhc3MgfCAyICYjNDM7LTxicj4NCiZu
+YnNwOzEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigmIzQzOyksIDEgZGVsZXRpb24oLSk8YnI+
+DQo8YnI+DQpkaWZmIC0tZ2l0IGEvbWV0YS9jbGFzc2VzL2luc2FuZS5iYmNsYXNzIGIvbWV0YS9j
+bGFzc2VzL2luc2FuZS5iYmNsYXNzPGJyPg0KaW5kZXggYmZhZjI1NzdkMC4uMmM4ZjUzMzhlNSAx
+MDA2NDQ8YnI+DQotLS0gYS9tZXRhL2NsYXNzZXMvaW5zYW5lLmJiY2xhc3M8YnI+DQomIzQzOyYj
+NDM7JiM0MzsgYi9tZXRhL2NsYXNzZXMvaW5zYW5lLmJiY2xhc3M8YnI+DQpAQCAtOTQ1LDcgJiM0
+Mzs5NDUsNyBAQCBkZWYgcGFja2FnZV9xYV9jaGVja19lbXB0eV9kaXJzKHBrZywgZCwgbWVzc2Fn
+ZXMpOjxicj4NCiZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNw
+O3JlY29tbWVuZGF0aW9uID0gKGQuZ2V0VmFyKCdRQV9FTVBUWV9ESVJTX1JFQ09NTUVOREFUSU9O
+OicgJiM0MzsgZGlyKSBvcjxicj4NCiZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsg
+Jm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAm
+bmJzcDsgJm5ic3A7ICZuYnNwOyZxdW90O2J1dCBpdCBpcyBleHBlY3RlZCB0byBiZSBlbXB0eSZx
+dW90Oyk8YnI+DQombmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJz
+cDttc2cgPSAmcXVvdDslcyBpbnN0YWxscyBmaWxlcyBpbiAlcywgJXMmcXVvdDsgJSAocGtnLCBk
+aXIsIHJlY29tbWVuZGF0aW9uKTxicj4NCi0mbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5i
+c3A7ICZuYnNwOyBvZS5xYS5hZGRfbWVzc2FnZShtZXNzYWdlcywgJnF1b3Q7ZW1wdHktZGlycyZx
+dW90OywgbXNnKTxicj4NCiYjNDM7Jm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAm
+bmJzcDsgcGFja2FnZV9xYV9hZGRfbWVzc2FnZShtZXNzYWdlcywgJnF1b3Q7ZW1wdHktZGlycyZx
+dW90OywgbXNnKTxicj4NCjxicj4NCiZuYnNwO2RlZiBwYWNrYWdlX3FhX2NoZWNrX2VuY29kaW5n
+KGtleXMsIGVuY29kZSwgZCk6PGJyPg0KJm5ic3A7ICZuYnNwOyAmbmJzcDtkZWYgY2hlY2tfZW5j
+b2Rpbmcoa2V5LCBlbmMpOjxicj4NCjxicj4NCi09LT0tPS09LT0tPS09LT0tPS09LT0tPGJyPg0K
+TGlua3M6IFlvdSByZWNlaXZlIGFsbCBtZXNzYWdlcyBzZW50IHRvIHRoaXMgZ3JvdXAuPGJyPg0K
+Vmlldy9SZXBseSBPbmxpbmUgKCM5NTI2NCk6IDxhIGhyZWY9Imh0dHBzOi8vbGlzdHMub3BlbmVt
+YmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC9tZXNzYWdlLzk1MjY0IiB0YXJnZXQ9Il9i
+bGFuayI+DQpodHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2
+ZWwvbWVzc2FnZS85NTI2NDwvYT48YnI+DQpNdXRlIFRoaXMgVG9waWM6IDxhIGhyZWY9Imh0dHBz
+Oi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tdC84ODk5OTA4MS8zNjE3MTU2IiB0YXJnZXQ9Il9i
+bGFuayI+DQpodHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvbXQvODg5OTkwODEvMzYxNzE1
+NjwvYT48YnI+DQpHcm91cCBPd25lcjogPGEgaHJlZj0ibWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZl
+bCUyQm93bmVyQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmciIHRhcmdldD0iX2JsYW5rIj4NCm9wZW5l
+bWJlZGRlZC1kZXZlbCYjNDM7b3duZXJAbGlzdHMub3BlbmVtYmVkZGVkLm9yZzwvYT48YnI+DQpV
+bnN1YnNjcmliZTogPGEgaHJlZj0iaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3Bl
+bmVtYmVkZGVkLWRldmVsL3Vuc3ViIiB0YXJnZXQ9Il9ibGFuayI+DQpodHRwczovL2xpc3RzLm9w
+ZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvdW5zdWI8L2E+IFs8YSBocmVmPSJt
+YWlsdG86TWFydGluLkphbnNhQGdtYWlsLmNvbSIgdGFyZ2V0PSJfYmxhbmsiPk1hcnRpbi5KYW5z
+YUBnbWFpbC5jb208L2E+XTxicj4NCi09LT0tPS09LT0tPS09LT0tPS09LT0tPG86cD48L286cD48
+L3A+DQo8L2Jsb2NrcXVvdGU+DQo8L2Rpdj4NCjwvZGl2Pg0KPC9kaXY+DQo8L2JvZHk+DQo8L2h0
+bWw+DQo=
 
---000000000000ec467f05d783ac21
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">This should be sent to oe-core ML.</div><br><div class=3D"=
-gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Feb 8, 2022 at 4=
-:47 PM Peter Kjellerstedt &lt;<a href=3D"mailto:peter.kjellerstedt@axis.com=
-">peter.kjellerstedt@axis.com</a>&gt; wrote:<br></div><blockquote class=3D"=
-gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(20=
-4,204,204);padding-left:1ex">The oe.qa.add_message() method is not availabl=
-e in Honister, use<br>
-package_qa_add_message() instead.<br>
-<br>
-Signed-off-by: Peter Kjellerstedt &lt;<a href=3D"mailto:peter.kjellerstedt@=
-axis.com" target=3D"_blank">peter.kjellerstedt@axis.com</a>&gt;<br>
----<br>
-=C2=A0meta/classes/insane.bbclass | 2 +-<br>
-=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-<br>
-diff --git a/meta/classes/insane.bbclass b/meta/classes/insane.bbclass<br>
-index bfaf2577d0..2c8f5338e5 100644<br>
---- a/meta/classes/insane.bbclass<br>
-+++ b/meta/classes/insane.bbclass<br>
-@@ -945,7 +945,7 @@ def package_qa_check_empty_dirs(pkg, d, messages):<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0recommendation =3D (d.getVa=
-r(&#39;QA_EMPTY_DIRS_RECOMMENDATION:&#39; + dir) or<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;but it is expected to be empty&=
-quot;)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0msg =3D &quot;%s installs f=
-iles in %s, %s&quot; % (pkg, dir, recommendation)<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 oe.qa.add_message(messages, &quo=
-t;empty-dirs&quot;, msg)<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 package_qa_add_message(messages,=
- &quot;empty-dirs&quot;, msg)<br>
-<br>
-=C2=A0def package_qa_check_encoding(keys, encode, d):<br>
-=C2=A0 =C2=A0 =C2=A0def check_encoding(key, enc):<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#95264): <a href=3D"https://lists.openembedded.org/g/ope=
-nembedded-devel/message/95264" rel=3D"noreferrer" target=3D"_blank">https:/=
-/lists.openembedded.org/g/openembedded-devel/message/95264</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/88999081/3617=
-156" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/88999081/3617156</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:Martin.Jansa@gmail.com" =
-target=3D"_blank">Martin.Jansa@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---000000000000ec467f05d783ac21--
+--_000_9a5c347d020a4453930629c39ea5d66faxiscom_--
 
