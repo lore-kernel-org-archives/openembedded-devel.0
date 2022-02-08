@@ -1,205 +1,126 @@
-Return-Path: <peter.kjellerstedt@axis.com>
+Return-Path: <costamagna.gianfranco@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B7371C433F5
-	for <webhook@archiver.kernel.org>; Tue,  8 Feb 2022 15:53:28 +0000 (UTC)
-Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
- by mx.groups.io with SMTP id smtpd.web12.12941.1644335607495889778
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98CEEC433EF
+	for <webhook@archiver.kernel.org>; Tue,  8 Feb 2022 16:15:37 +0000 (UTC)
+Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com
+ [209.85.218.49])
+ by mx.groups.io with SMTP id smtpd.web10.13198.1644336936401171403
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Feb 2022 07:53:28 -0800
+ Tue, 08 Feb 2022 08:15:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=axis-central1 header.b=ADCe1UhV;
- spf=pass (domain: axis.com, ip: 195.60.68.18,
- mailfrom: peter.kjellerstedt@axis.com)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=XswzLhJR;
+ spf=pass (domain: gmail.com, ip: 209.85.218.49,
+ mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-ej1-f49.google.com with SMTP id s21so25432766ejx.12
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 08 Feb 2022 08:15:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; q=dns/txt; s=axis-central1; t=1644335608;
-  x=1675871608;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:mime-version;
-  bh=aVnddul/FPkUoF2XFuPzUyN9rldfCV2cAe9whT4Bf3c=;
-  b=ADCe1UhViFMtTMqjE6CK9baC09uQbp+sOE+DCZckK3zj4q0TC/fDdBpB
-   qd5zNYufTjo3BusL1o4nejDR+BM80QdI64oe/NfbvS27F2t3rV0lVKz+b
-   /syderD0CFAeNJ19Pp9nY6US79IWlbHYEvv7TOzs7V3PUBtmPYkAUgxKf
-   VNITM1CBrEtD78lHPtJ+qUb5kPnyLfobYupTUqNU0YeSn3KModjG7r61e
-   NCI8qV2xfnBjDAVaoNATnzod/XUq/Mmf040AHtfRSuoiyW1CHK43Cogyl
-   I8CDjOcT6CQBKAXawdykWp0DxaakVcLnvkzFbEgYrIae1ta2tXx7AH/JW
-   Q==;
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] [honister][PATCH] insane.bbclass: Correct
- package_qa_check_empty_dirs()
-Thread-Topic: [oe] [honister][PATCH] insane.bbclass: Correct
- package_qa_check_empty_dirs()
-Thread-Index: AQHYHQONSlNNcP0v+UGMp8BWHGQWNKyJzXeg
-Date: Tue, 8 Feb 2022 15:53:25 +0000
-Message-ID: <9a5c347d020a4453930629c39ea5d66f@axis.com>
-References: <20220208154731.10107-1-pkj@axis.com>
- <CA+chaQdodr+hu7Eh8ndGgpZSNPqfx5BO2ZHLMrEFuaQQ47speg@mail.gmail.com>
-In-Reply-To: 
- <CA+chaQdodr+hu7Eh8ndGgpZSNPqfx5BO2ZHLMrEFuaQQ47speg@mail.gmail.com>
-Accept-Language: en-US, sv-SE
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.0.5.60]
-Content-Type: multipart/alternative;
-	boundary="_000_9a5c347d020a4453930629c39ea5d66faxiscom_"
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=DG+xA3x/LUYa7+0jHA6phyrw5QpEx2ktDVB5xAHHhCA=;
+        b=XswzLhJRidiaenOazH6wsXiiRaHLlMXpLvteHQGr0i8FTetOrePmJ3ixllBKedAIwy
+         819h8yOJyxZ3jzYMonrRwJJOSHL7uC/siRJMZMxA3BHkswnScBJhrTtd+OtXtVaz1omZ
+         8Z6OvIT/Rha8NlyV4TYm8ew+NN2dplLbZYoraSNND7RmNxYGgQYHHwsMfJvDTW/fSIoq
+         6Hjj6EWsgI33Ye1zlIv57QFZ3+Irx/Hyv96mTfGD/op0t4ZbL1pr7qn+DcvCXGXMtGTq
+         yyKFDhOXHSls4oSiD1GSHN9qdzmISCj3UdTdd3ovm+ub8moqT7fAcyfFfNslnf6BnIqq
+         9Cwg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=DG+xA3x/LUYa7+0jHA6phyrw5QpEx2ktDVB5xAHHhCA=;
+        b=XJEUwJPtoUv7qwzdxtM946egGkTN5sYO+JLu3NI6tmqpngzVd54zk9YL8jl0D1rjEU
+         06uN9VQGUkMl9OX5OPmsaZ6mX9/QYDXW7n+7nItNcCoYlWQs5d61+rIJJ5ZsGlreeY69
+         BrF+Lb5ZTRHW/iK+ebInLzE8DV1uUtOYUyryHGuPpn5E1Boy8GKIpVw2eSVFHpeXTH2/
+         jv3ndL95gixsZXB0sLKR4KS3yUQiYGb+0LxWENmrP3qyLdVBpJluQqRLbLllaVDUV2mt
+         byJElsMCN3iXPpvIOK2p7cN7KcRBz9I16IrFOOL3DrTVzA24u0PGribFFtirSb7/+s7f
+         kGMw==
+X-Gm-Message-State: AOAM531dQd1I77bx7xTYXt8l9ZpAgfeGaP6M7HA+Zgr9tjSvKvVTfhPV
+	2Ye1qiTbsQlyt8+BiIBc7it9G+PMwDWjlA==
+X-Google-Smtp-Source: 
+ ABdhPJyjlmuBzKU9jv544EieXoX1cRXMqYYcWEmxodZZ9b2xCp5v+GYUNRNS6NF8vQanh6BuQIC/jg==
+X-Received: by 2002:a17:907:60cf:: with SMTP id
+ hv15mr4143593ejc.488.1644336934522;
+        Tue, 08 Feb 2022 08:15:34 -0800 (PST)
+Received: from Unimatrix08-Focal.lan (mob-31-157-145-185.net.vodafone.it.
+ [31.157.145.185])
+        by smtp.gmail.com with ESMTPSA id
+ r14sm1530582edp.38.2022.02.08.08.15.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 08 Feb 2022 08:15:34 -0800 (PST)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+To: openembedded-devel@lists.openembedded.org
+Cc: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>,
+	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	Gianfranco Costamagna <locutusofborg@debian.org>
+Subject: [meta-oe][PATCH] mosquitto: upgrade 2.0.12 -> 2.0.14
+Date: Tue,  8 Feb 2022 17:15:32 +0100
+Message-Id: <20220208161532.1629033-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Feb 2022 15:53:28 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Feb 2022 16:15:37 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95266
+ https://lists.openembedded.org/g/openembedded-devel/message/95267
 
---_000_9a5c347d020a4453930629c39ea5d66faxiscom_
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
 
-QWN0dWFsbHksIGl0IHNob3VsZG7igJl0IGhhdmUgYmVlbiBzZW50IGF0IGFsbCBhcyBJIGhhZCBh
-bHJlYWR5IHNlbnQgaXQgdG8gdGhlIG9lLWNvcmUgbGlzdC4NCg0KLy9QZXRlcg0KDQpGcm9tOiBN
-YXJ0aW4gSmFuc2EgPG1hcnRpbi5qYW5zYUBnbWFpbC5jb20+DQpTZW50OiBkZW4gOCBmZWJydWFy
-aSAyMDIyIDE2OjUwDQpUbzogUGV0ZXIgS2plbGxlcnN0ZWR0IDxwZXRlci5ramVsbGVyc3RlZHRA
-YXhpcy5jb20+DQpDYzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcN
-ClN1YmplY3Q6IFJlOiBbb2VdIFtob25pc3Rlcl1bUEFUQ0hdIGluc2FuZS5iYmNsYXNzOiBDb3Jy
-ZWN0IHBhY2thZ2VfcWFfY2hlY2tfZW1wdHlfZGlycygpDQoNClRoaXMgc2hvdWxkIGJlIHNlbnQg
-dG8gb2UtY29yZSBNTC4NCg0KT24gVHVlLCBGZWIgOCwgMjAyMiBhdCA0OjQ3IFBNIFBldGVyIEtq
-ZWxsZXJzdGVkdCA8cGV0ZXIua2plbGxlcnN0ZWR0QGF4aXMuY29tPG1haWx0bzpwZXRlci5ramVs
-bGVyc3RlZHRAYXhpcy5jb20+PiB3cm90ZToNClRoZSBvZS5xYS5hZGRfbWVzc2FnZSgpIG1ldGhv
-ZCBpcyBub3QgYXZhaWxhYmxlIGluIEhvbmlzdGVyLCB1c2UNCnBhY2thZ2VfcWFfYWRkX21lc3Nh
-Z2UoKSBpbnN0ZWFkLg0KDQpTaWduZWQtb2ZmLWJ5OiBQZXRlciBLamVsbGVyc3RlZHQgPHBldGVy
-LmtqZWxsZXJzdGVkdEBheGlzLmNvbTxtYWlsdG86cGV0ZXIua2plbGxlcnN0ZWR0QGF4aXMuY29t
-Pj4NCi0tLQ0KIG1ldGEvY2xhc3Nlcy9pbnNhbmUuYmJjbGFzcyB8IDIgKy0NCiAxIGZpbGUgY2hh
-bmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkNCg0KZGlmZiAtLWdpdCBhL21ldGEv
-Y2xhc3Nlcy9pbnNhbmUuYmJjbGFzcyBiL21ldGEvY2xhc3Nlcy9pbnNhbmUuYmJjbGFzcw0KaW5k
-ZXggYmZhZjI1NzdkMC4uMmM4ZjUzMzhlNSAxMDA2NDQNCi0tLSBhL21ldGEvY2xhc3Nlcy9pbnNh
-bmUuYmJjbGFzcw0KKysrIGIvbWV0YS9jbGFzc2VzL2luc2FuZS5iYmNsYXNzDQpAQCAtOTQ1LDcg
-Kzk0NSw3IEBAIGRlZiBwYWNrYWdlX3FhX2NoZWNrX2VtcHR5X2RpcnMocGtnLCBkLCBtZXNzYWdl
-cyk6DQogICAgICAgICAgICAgcmVjb21tZW5kYXRpb24gPSAoZC5nZXRWYXIoJ1FBX0VNUFRZX0RJ
-UlNfUkVDT01NRU5EQVRJT046JyArIGRpcikgb3INCiAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAiYnV0IGl0IGlzIGV4cGVjdGVkIHRvIGJlIGVtcHR5IikNCiAgICAgICAgICAgICBtc2cg
-PSAiJXMgaW5zdGFsbHMgZmlsZXMgaW4gJXMsICVzIiAlIChwa2csIGRpciwgcmVjb21tZW5kYXRp
-b24pDQotICAgICAgICAgICAgb2UucWEuYWRkX21lc3NhZ2UobWVzc2FnZXMsICJlbXB0eS1kaXJz
-IiwgbXNnKQ0KKyAgICAgICAgICAgIHBhY2thZ2VfcWFfYWRkX21lc3NhZ2UobWVzc2FnZXMsICJl
-bXB0eS1kaXJzIiwgbXNnKQ0KDQogZGVmIHBhY2thZ2VfcWFfY2hlY2tfZW5jb2Rpbmcoa2V5cywg
-ZW5jb2RlLCBkKToNCiAgICAgZGVmIGNoZWNrX2VuY29kaW5nKGtleSwgZW5jKToNCg0KLT0tPS09
-LT0tPS09LT0tPS09LT0tPS0NCkxpbmtzOiBZb3UgcmVjZWl2ZSBhbGwgbWVzc2FnZXMgc2VudCB0
-byB0aGlzIGdyb3VwLg0KVmlldy9SZXBseSBPbmxpbmUgKCM5NTI2NCk6IGh0dHBzOi8vbGlzdHMu
-b3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC9tZXNzYWdlLzk1MjY0DQpNdXRl
-IFRoaXMgVG9waWM6IGh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tdC84ODk5OTA4MS8z
-NjE3MTU2DQpHcm91cCBPd25lcjogb3BlbmVtYmVkZGVkLWRldmVsK293bmVyQGxpc3RzLm9wZW5l
-bWJlZGRlZC5vcmc8bWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZlbCUyQm93bmVyQGxpc3RzLm9wZW5l
-bWJlZGRlZC5vcmc+DQpVbnN1YnNjcmliZTogaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3Jn
-L2cvb3BlbmVtYmVkZGVkLWRldmVsL3Vuc3ViIFtNYXJ0aW4uSmFuc2FAZ21haWwuY29tPG1haWx0
-bzpNYXJ0aW4uSmFuc2FAZ21haWwuY29tPl0NCi09LT0tPS09LT0tPS09LT0tPS09LT0tDQo=
+- Upgrade license hash due to whitespace changes
+- refresh patch 1571.patch
 
---_000_9a5c347d020a4453930629c39ea5d66faxiscom_
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: base64
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+---
+ .../recipes-connectivity/mosquitto/files/1571.patch         | 2 +-
+ .../mosquitto/{mosquitto_2.0.12.bb => mosquitto_2.0.14.bb}  | 6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+ rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.12.bb => mosquitto_2.0.14.bb} (93%)
 
-PGh0bWwgeG1sbnM6dj0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp2bWwiIHhtbG5zOm89InVy
-bjpzY2hlbWFzLW1pY3Jvc29mdC1jb206b2ZmaWNlOm9mZmljZSIgeG1sbnM6dz0idXJuOnNjaGVt
-YXMtbWljcm9zb2Z0LWNvbTpvZmZpY2U6d29yZCIgeG1sbnM6bT0iaHR0cDovL3NjaGVtYXMubWlj
-cm9zb2Z0LmNvbS9vZmZpY2UvMjAwNC8xMi9vbW1sIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
-VFIvUkVDLWh0bWw0MCI+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIg
-Y29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxtZXRhIG5hbWU9IkdlbmVyYXRv
-ciIgY29udGVudD0iTWljcm9zb2Z0IFdvcmQgMTUgKGZpbHRlcmVkIG1lZGl1bSkiPg0KPHN0eWxl
-PjwhLS0NCi8qIEZvbnQgRGVmaW5pdGlvbnMgKi8NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6
-IkNhbWJyaWEgTWF0aCI7DQoJcGFub3NlLTE6MiA0IDUgMyA1IDQgNiAzIDIgNDt9DQpAZm9udC1m
-YWNlDQoJe2ZvbnQtZmFtaWx5OkNhbGlicmk7DQoJcGFub3NlLTE6MiAxNSA1IDIgMiAyIDQgMyAy
-IDQ7fQ0KLyogU3R5bGUgRGVmaW5pdGlvbnMgKi8NCnAuTXNvTm9ybWFsLCBsaS5Nc29Ob3JtYWws
-IGRpdi5Nc29Ob3JtYWwNCgl7bWFyZ2luOjBjbTsNCglmb250LXNpemU6MTEuMHB0Ow0KCWZvbnQt
-ZmFtaWx5OiJDYWxpYnJpIixzYW5zLXNlcmlmO30NCmE6bGluaywgc3Bhbi5Nc29IeXBlcmxpbmsN
-Cgl7bXNvLXN0eWxlLXByaW9yaXR5Ojk5Ow0KCWNvbG9yOmJsdWU7DQoJdGV4dC1kZWNvcmF0aW9u
-OnVuZGVybGluZTt9DQpzcGFuLkVtYWlsU3R5bGUxOA0KCXttc28tc3R5bGUtdHlwZTpwZXJzb25h
-bC1yZXBseTsNCglmb250LWZhbWlseToiQ2FsaWJyaSIsc2Fucy1zZXJpZjsNCgljb2xvcjojOTQz
-NjM0Ow0KCWZvbnQtd2VpZ2h0Om5vcm1hbDsNCglmb250LXN0eWxlOm5vcm1hbDt9DQouTXNvQ2hw
-RGVmYXVsdA0KCXttc28tc3R5bGUtdHlwZTpleHBvcnQtb25seTsNCglmb250LWZhbWlseToiQ2Fs
-aWJyaSIsc2Fucy1zZXJpZjsNCgltc28tZmFyZWFzdC1sYW5ndWFnZTpFTi1VUzt9DQpAcGFnZSBX
-b3JkU2VjdGlvbjENCgl7c2l6ZTo2MTIuMHB0IDc5Mi4wcHQ7DQoJbWFyZ2luOjcwLjg1cHQgNzAu
-ODVwdCA3MC44NXB0IDcwLjg1cHQ7fQ0KZGl2LldvcmRTZWN0aW9uMQ0KCXtwYWdlOldvcmRTZWN0
-aW9uMTt9DQotLT48L3N0eWxlPjwhLS1baWYgZ3RlIG1zbyA5XT48eG1sPg0KPG86c2hhcGVkZWZh
-dWx0cyB2OmV4dD0iZWRpdCIgc3BpZG1heD0iMTAyNiIgLz4NCjwveG1sPjwhW2VuZGlmXS0tPjwh
-LS1baWYgZ3RlIG1zbyA5XT48eG1sPg0KPG86c2hhcGVsYXlvdXQgdjpleHQ9ImVkaXQiPg0KPG86
-aWRtYXAgdjpleHQ9ImVkaXQiIGRhdGE9IjEiIC8+DQo8L286c2hhcGVsYXlvdXQ+PC94bWw+PCFb
-ZW5kaWZdLS0+DQo8L2hlYWQ+DQo8Ym9keSBsYW5nPSJTViIgbGluaz0iYmx1ZSIgdmxpbms9InB1
-cnBsZSIgc3R5bGU9IndvcmQtd3JhcDpicmVhay13b3JkIj4NCjxkaXYgY2xhc3M9IldvcmRTZWN0
-aW9uMSI+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBsYW5nPSJFTi1VUyIgc3R5bGU9ImNv
-bG9yOiM5NDM2MzQ7bXNvLWZhcmVhc3QtbGFuZ3VhZ2U6RU4tVVMiPkFjdHVhbGx5LCBpdCBzaG91
-bGRu4oCZdCBoYXZlIGJlZW4gc2VudCBhdCBhbGwgYXMgSSBoYWQgYWxyZWFkeSBzZW50IGl0IHRv
-IHRoZSBvZS1jb3JlIGxpc3QuPG86cD48L286cD48L3NwYW4+PC9wPg0KPHAgY2xhc3M9Ik1zb05v
-cm1hbCI+PHNwYW4gbGFuZz0iRU4tVVMiIHN0eWxlPSJjb2xvcjojOTQzNjM0O21zby1mYXJlYXN0
-LWxhbmd1YWdlOkVOLVVTIj48bzpwPiZuYnNwOzwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0i
-TXNvTm9ybWFsIj48c3BhbiBsYW5nPSJFTi1VUyIgc3R5bGU9ImNvbG9yOiM5NDM2MzQ7bXNvLWZh
-cmVhc3QtbGFuZ3VhZ2U6RU4tVVMiPi8vUGV0ZXI8bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBj
-bGFzcz0iTXNvTm9ybWFsIj48c3BhbiBsYW5nPSJFTi1VUyIgc3R5bGU9ImNvbG9yOiM5NDM2MzQ7
-bXNvLWZhcmVhc3QtbGFuZ3VhZ2U6RU4tVVMiPjxvOnA+Jm5ic3A7PC9vOnA+PC9zcGFuPjwvcD4N
-CjxkaXYgc3R5bGU9ImJvcmRlcjpub25lO2JvcmRlci1sZWZ0OnNvbGlkIGJsdWUgMS41cHQ7cGFk
-ZGluZzowY20gMGNtIDBjbSA0LjBwdCI+DQo8ZGl2Pg0KPGRpdiBzdHlsZT0iYm9yZGVyOm5vbmU7
-Ym9yZGVyLXRvcDpzb2xpZCAjRTFFMUUxIDEuMHB0O3BhZGRpbmc6My4wcHQgMGNtIDBjbSAwY20i
-Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PGI+PHNwYW4gbGFuZz0iRU4tVVMiPkZyb206PC9zcGFu
-PjwvYj48c3BhbiBsYW5nPSJFTi1VUyI+IE1hcnRpbiBKYW5zYSAmbHQ7bWFydGluLmphbnNhQGdt
-YWlsLmNvbSZndDsNCjxicj4NCjxiPlNlbnQ6PC9iPiBkZW4gOCBmZWJydWFyaSAyMDIyIDE2OjUw
-PGJyPg0KPGI+VG86PC9iPiBQZXRlciBLamVsbGVyc3RlZHQgJmx0O3BldGVyLmtqZWxsZXJzdGVk
-dEBheGlzLmNvbSZndDs8YnI+DQo8Yj5DYzo8L2I+IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5v
-cGVuZW1iZWRkZWQub3JnPGJyPg0KPGI+U3ViamVjdDo8L2I+IFJlOiBbb2VdIFtob25pc3Rlcl1b
-UEFUQ0hdIGluc2FuZS5iYmNsYXNzOiBDb3JyZWN0IHBhY2thZ2VfcWFfY2hlY2tfZW1wdHlfZGly
-cygpPG86cD48L286cD48L3NwYW4+PC9wPg0KPC9kaXY+DQo8L2Rpdj4NCjxwIGNsYXNzPSJNc29O
-b3JtYWwiPjxvOnA+Jm5ic3A7PC9vOnA+PC9wPg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwi
-PlRoaXMgc2hvdWxkIGJlIHNlbnQgdG8gb2UtY29yZSBNTC48bzpwPjwvbzpwPjwvcD4NCjwvZGl2
-Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PG86cD4mbmJzcDs8L286cD48L3A+DQo8ZGl2Pg0KPGRp
-dj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPk9uIFR1ZSwgRmViIDgsIDIwMjIgYXQgNDo0NyBQTSBQ
-ZXRlciBLamVsbGVyc3RlZHQgJmx0OzxhIGhyZWY9Im1haWx0bzpwZXRlci5ramVsbGVyc3RlZHRA
-YXhpcy5jb20iPnBldGVyLmtqZWxsZXJzdGVkdEBheGlzLmNvbTwvYT4mZ3Q7IHdyb3RlOjxvOnA+
-PC9vOnA+PC9wPg0KPC9kaXY+DQo8YmxvY2txdW90ZSBzdHlsZT0iYm9yZGVyOm5vbmU7Ym9yZGVy
-LWxlZnQ6c29saWQgI0NDQ0NDQyAxLjBwdDtwYWRkaW5nOjBjbSAwY20gMGNtIDYuMHB0O21hcmdp
-bi1sZWZ0OjQuOHB0O21hcmdpbi1yaWdodDowY20iPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCIgc3R5
-bGU9Im1hcmdpbi1ib3R0b206MTIuMHB0Ij5UaGUgb2UucWEuYWRkX21lc3NhZ2UoKSBtZXRob2Qg
-aXMgbm90IGF2YWlsYWJsZSBpbiBIb25pc3RlciwgdXNlPGJyPg0KcGFja2FnZV9xYV9hZGRfbWVz
-c2FnZSgpIGluc3RlYWQuPGJyPg0KPGJyPg0KU2lnbmVkLW9mZi1ieTogUGV0ZXIgS2plbGxlcnN0
-ZWR0ICZsdDs8YSBocmVmPSJtYWlsdG86cGV0ZXIua2plbGxlcnN0ZWR0QGF4aXMuY29tIiB0YXJn
-ZXQ9Il9ibGFuayI+cGV0ZXIua2plbGxlcnN0ZWR0QGF4aXMuY29tPC9hPiZndDs8YnI+DQotLS08
-YnI+DQombmJzcDttZXRhL2NsYXNzZXMvaW5zYW5lLmJiY2xhc3MgfCAyICYjNDM7LTxicj4NCiZu
-YnNwOzEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigmIzQzOyksIDEgZGVsZXRpb24oLSk8YnI+
-DQo8YnI+DQpkaWZmIC0tZ2l0IGEvbWV0YS9jbGFzc2VzL2luc2FuZS5iYmNsYXNzIGIvbWV0YS9j
-bGFzc2VzL2luc2FuZS5iYmNsYXNzPGJyPg0KaW5kZXggYmZhZjI1NzdkMC4uMmM4ZjUzMzhlNSAx
-MDA2NDQ8YnI+DQotLS0gYS9tZXRhL2NsYXNzZXMvaW5zYW5lLmJiY2xhc3M8YnI+DQomIzQzOyYj
-NDM7JiM0MzsgYi9tZXRhL2NsYXNzZXMvaW5zYW5lLmJiY2xhc3M8YnI+DQpAQCAtOTQ1LDcgJiM0
-Mzs5NDUsNyBAQCBkZWYgcGFja2FnZV9xYV9jaGVja19lbXB0eV9kaXJzKHBrZywgZCwgbWVzc2Fn
-ZXMpOjxicj4NCiZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNw
-O3JlY29tbWVuZGF0aW9uID0gKGQuZ2V0VmFyKCdRQV9FTVBUWV9ESVJTX1JFQ09NTUVOREFUSU9O
-OicgJiM0MzsgZGlyKSBvcjxicj4NCiZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsg
-Jm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAm
-bmJzcDsgJm5ic3A7ICZuYnNwOyZxdW90O2J1dCBpdCBpcyBleHBlY3RlZCB0byBiZSBlbXB0eSZx
-dW90Oyk8YnI+DQombmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJz
-cDttc2cgPSAmcXVvdDslcyBpbnN0YWxscyBmaWxlcyBpbiAlcywgJXMmcXVvdDsgJSAocGtnLCBk
-aXIsIHJlY29tbWVuZGF0aW9uKTxicj4NCi0mbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5i
-c3A7ICZuYnNwOyBvZS5xYS5hZGRfbWVzc2FnZShtZXNzYWdlcywgJnF1b3Q7ZW1wdHktZGlycyZx
-dW90OywgbXNnKTxicj4NCiYjNDM7Jm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAm
-bmJzcDsgcGFja2FnZV9xYV9hZGRfbWVzc2FnZShtZXNzYWdlcywgJnF1b3Q7ZW1wdHktZGlycyZx
-dW90OywgbXNnKTxicj4NCjxicj4NCiZuYnNwO2RlZiBwYWNrYWdlX3FhX2NoZWNrX2VuY29kaW5n
-KGtleXMsIGVuY29kZSwgZCk6PGJyPg0KJm5ic3A7ICZuYnNwOyAmbmJzcDtkZWYgY2hlY2tfZW5j
-b2Rpbmcoa2V5LCBlbmMpOjxicj4NCjxicj4NCi09LT0tPS09LT0tPS09LT0tPS09LT0tPGJyPg0K
-TGlua3M6IFlvdSByZWNlaXZlIGFsbCBtZXNzYWdlcyBzZW50IHRvIHRoaXMgZ3JvdXAuPGJyPg0K
-Vmlldy9SZXBseSBPbmxpbmUgKCM5NTI2NCk6IDxhIGhyZWY9Imh0dHBzOi8vbGlzdHMub3BlbmVt
-YmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC9tZXNzYWdlLzk1MjY0IiB0YXJnZXQ9Il9i
-bGFuayI+DQpodHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2
-ZWwvbWVzc2FnZS85NTI2NDwvYT48YnI+DQpNdXRlIFRoaXMgVG9waWM6IDxhIGhyZWY9Imh0dHBz
-Oi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tdC84ODk5OTA4MS8zNjE3MTU2IiB0YXJnZXQ9Il9i
-bGFuayI+DQpodHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvbXQvODg5OTkwODEvMzYxNzE1
-NjwvYT48YnI+DQpHcm91cCBPd25lcjogPGEgaHJlZj0ibWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZl
-bCUyQm93bmVyQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmciIHRhcmdldD0iX2JsYW5rIj4NCm9wZW5l
-bWJlZGRlZC1kZXZlbCYjNDM7b3duZXJAbGlzdHMub3BlbmVtYmVkZGVkLm9yZzwvYT48YnI+DQpV
-bnN1YnNjcmliZTogPGEgaHJlZj0iaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3Bl
-bmVtYmVkZGVkLWRldmVsL3Vuc3ViIiB0YXJnZXQ9Il9ibGFuayI+DQpodHRwczovL2xpc3RzLm9w
-ZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvdW5zdWI8L2E+IFs8YSBocmVmPSJt
-YWlsdG86TWFydGluLkphbnNhQGdtYWlsLmNvbSIgdGFyZ2V0PSJfYmxhbmsiPk1hcnRpbi5KYW5z
-YUBnbWFpbC5jb208L2E+XTxicj4NCi09LT0tPS09LT0tPS09LT0tPS09LT0tPG86cD48L286cD48
-L3A+DQo8L2Jsb2NrcXVvdGU+DQo8L2Rpdj4NCjwvZGl2Pg0KPC9kaXY+DQo8L2JvZHk+DQo8L2h0
-bWw+DQo=
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/1571.patch b/meta-networking/recipes-connectivity/mosquitto/files/1571.patch
+index 37560f30c..627638ec8 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/files/1571.patch
++++ b/meta-networking/recipes-connectivity/mosquitto/files/1571.patch
+@@ -19,4 +19,4 @@ Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+ +	LINK_FLAGS "-Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/linker.version"
+  )
+  
+- install(TARGETS libmosquitto RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}")
++ install(TARGETS libmosquitto
+diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.12.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.14.bb
+similarity index 93%
+rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.12.bb
+rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.14.bb
+index 06d8211a2..739b7de62 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.12.bb
++++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.14.bb
+@@ -8,8 +8,8 @@ HOMEPAGE = "http://mosquitto.org/"
+ SECTION = "console/network"
+ LICENSE = "EPL-2.0 | EDL-1.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ca9a8f366c6babf593e374d0d7d58749 \
+-                    file://edl-v10;md5=c09f121939f063aeb5235972be8c722c \
+-                    file://epl-v20;md5=d9fc0efef5228704e7f5b37f27192723 \
++                    file://edl-v10;md5=9f6accb1afcb570f8be65039e2fcd49e \
++                    file://epl-v20;md5=2dd765ca47a05140be15ebafddbeadfe \
+                     file://NOTICE.md;md5=a7a91b4754c6f7995020d1b49bc829c6 \
+ "
+ DEPENDS = "uthash cjson"
+@@ -19,7 +19,7 @@ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
+            file://1571.patch \
+ "
+ 
+-SRC_URI[sha256sum] = "31cf0065cb431d6f4e57a5f4d56663e839c9d177362eff89582d7cfde191c933"
++SRC_URI[sha256sum] = "d0dde8fdb12caf6e2426b4f28081919a2fce3448773bdb8af0d3cd5fe5776925"
+ 
+ inherit systemd update-rc.d useradd cmake pkgconfig
+ 
+-- 
+2.25.1
 
---_000_9a5c347d020a4453930629c39ea5d66faxiscom_--
 
