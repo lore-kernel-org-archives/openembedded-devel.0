@@ -1,231 +1,124 @@
-Return-Path: <crg7475@mailbox.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 610BDC433F5
-	for <webhook@archiver.kernel.org>; Tue,  8 Feb 2022 16:35:02 +0000 (UTC)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- by mx.groups.io with SMTP id smtpd.web12.13581.1644338101584534060
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6926BC433F5
+	for <webhook@archiver.kernel.org>; Tue,  8 Feb 2022 16:59:11 +0000 (UTC)
+Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com
+ [209.85.222.178])
+ by mx.groups.io with SMTP id smtpd.web09.13996.1644339550568598942
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Feb 2022 08:35:02 -0800
+ Tue, 08 Feb 2022 08:59:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@mailbox.org
- header.s=mail20150812 header.b=vJiuVGlm;
- spf=pass (domain: mailbox.org, ip: 80.241.56.152,
- mailfrom: crg7475@mailbox.org)
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:105:465:1:3:0])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits)
- server-digest SHA256)
-	(No client certificate requested)
-	by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4JtTBV2n3nz9sGf;
-	Tue,  8 Feb 2022 17:34:58 +0100 (CET)
-X-Virus-Scanned: amavisd-new at heinlein-support.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812;
-	t=1644338098;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=sVqI9kFoTZfcLrVK0DSG+w6U9tnZuYIhqGboLzIaJok=;
-	b=vJiuVGlmVN6LbizspkF9UHd50KIXmLVGgHGQE9Ul8nJoDQg3aPiMKns/yK5z6pDLwY30fX
-	r3h3hXaBC7hdeYZ85R9UoGzYbwh8T4MT6B89HuEAbCJ/Bilhvaj1fdytHRrNz9ryVgflaH
-	0LznBOGpXyuRMye/3hG5yTyat5KuqEZSITUjHJPzyEKIe8lYoxEHJHdfrbyEIVBucHVRDc
-	BAiMXwY/1fXbGCaJw88VckhqJPTd8iMirgveR4ZeizZvcWwYfrkjJ58zNq+FRMPHdy+k9X
-	sESF24gf1FgTnNy+uOvkgglRo/C7YaOfhSBc7EQ7LZhXcNNViwLkSzMM3mEbyQ==
-From: Carlos Rafael Giani <crg7475@mailbox.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: =george.kiagiadakis@collabora.com
-Subject: [meta-multimedia][RFC PATCH 2/2] wireplumber: Add recipe
-Date: Tue,  8 Feb 2022 17:34:40 +0100
-Message-Id: <20220208163440.428471-3-crg7475@mailbox.org>
-In-Reply-To: <20220208163440.428471-1-crg7475@mailbox.org>
-References: <20220208163440.428471-1-crg7475@mailbox.org>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=M+dGNci1;
+ spf=pass (domain: gmail.com, ip: 209.85.222.178,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f178.google.com with SMTP id c189so14181741qkg.11
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 08 Feb 2022 08:59:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=kgOn+13zSXfrqBKsEw6LLT4GYk2JZTAPcfRWq0g2fPs=;
+        b=M+dGNci1YzdykRmNsm84URthSMTYYfaFtKM+S6fFkhl7g/qDad+sy7YKYiE+CqV0Hx
+         Li4gNNISQZaNNqT4W12sLJzETKifZUSEPGNNEzkEYTTQqu7Ub1QkbVnUpfg5gPu4eCVR
+         OEWZnx9Og3y9rXcz2S4Lu6HdaQ56tpA4tjOeFDliYS0FJO0hgDeYWFc0b2FfpF3GaMf3
+         F8Vh3jBULhMH8cV6nZWpb5ycYI/nBz/SA/iLA1SIz5el32hWudoRFl27m/0JSuUwwwC+
+         1NOkExPbGEo8OFcp/pg4GJzlQLy/ypdMBzpaQCcVtBk+U4bkzyzlJEZ4vW2+hJdneNfB
+         GmBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=kgOn+13zSXfrqBKsEw6LLT4GYk2JZTAPcfRWq0g2fPs=;
+        b=zX7uq0B2R7mmDiYRCFQd6tQmaD83nCW8voxjE6uZUSnSYCGGN8IJE1lMow66Lm0F2A
+         rG0BIm2TddTj6VhNEFTvnp9PVPVV8okNDJIcvbQy4ZG+3SCPQbzJM5SyvYbTC616uBRX
+         IJL+nHzLV8mXVTZbwN+bgewDABmLoqm7rqpEPXHoCLH+kYSv+lIrw0LU2Bt3IP6Ik/hM
+         U19NiQF9VdoEp5Bbfp5/BlwNzaApuiIAmMh+T2pP1y/92ai2Ao+1IMJAX74Qnk37gH9u
+         jxNKXQz8rvReT4uha9KGMtPFh02mXIdGF/09SFLKt715rNNgakYzsxeaSKvXqvgyWs+q
+         KiZA==
+X-Gm-Message-State: AOAM531HyPn1f4TO8iKrHwxZCmqxqfJZDfWUrKUWN6YxodkNmRDsFt65
+	Rwy7dyJwtVX1MSERZYO1UtzDVra9XbhivFFQT6s=
+X-Google-Smtp-Source: 
+ ABdhPJxKJGaGkKdqch/nnpwCQmz7DXVA+628cEEoUTd6S/0dGDeYr60KTN8BxXAMZtZFmk6Nv4j6OyORoTuGceWVRfo=
+X-Received: by 2002:a05:620a:152b:: with SMTP id
+ n11mr3081159qkk.463.1644339549587;
+ Tue, 08 Feb 2022 08:59:09 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+References: <1644279908-4266-1-git-send-email-wangmy@fujitsu.com>
+ <1644279908-4266-4-git-send-email-wangmy@fujitsu.com>
+ <48a2f8fb-9ef6-81ab-57d6-6fc9e8eec471@windriver.com>
+In-Reply-To: <48a2f8fb-9ef6-81ab-57d6-6fc9e8eec471@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 8 Feb 2022 08:58:43 -0800
+Message-ID: 
+ <CAMKF1spUqUjWF1OC+kGSDay==968VSUgUM2Z6TieTuSH20t=qQ@mail.gmail.com>
+Subject: Re: [oe] [meta-networking] [PATCH] strongswan: upgrade 5.9.4 -> 5.9.5
+To: Yi Zhao <yi.zhao@windriver.com>
+Cc: wangmy <wangmy@fujitsu.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Feb 2022 16:35:02 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Feb 2022 16:59:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95270
+ https://lists.openembedded.org/g/openembedded-devel/message/95271
 
-WirePlumber is a session / policy manager for PipeWire with support
-for Lua scripting and adding functionality by installing extra modules.
+On Mon, Feb 7, 2022 at 11:57 PM Yi Zhao <yi.zhao@windriver.com> wrote:
+>
+> It failed to startup on my qemux86-64.
+>
+> I got a segfault with swanctl:
+> $ /usr/sbin/charon-systemd &
+> $ /usr/sbin/swanctl --load-all --noprompt
+> no files found matching '/etc/swanctl/conf.d/*.conf'
+> no authorities found, 0 unloaded
+> no pools found, 0 unloaded
+> no connections found, 0 unloaded
+> Segmentation fault
 
-Signed-off-by: Carlos Rafael Giani <crg7475@mailbox.org>
----
- .../wireplumber/wireplumber_0.4.8.bb          | 140 ++++++++++++++++++
- 1 file changed, 140 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/wireplumber/wirepl=
-umber_0.4.8.bb
+Thanks for report. I will drop it from master-next
 
-diff --git a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0=
-.4.8.bb b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.=
-8.bb
-new file mode 100644
-index 000000000..4d26e3360
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.8.bb
-@@ -0,0 +1,140 @@
-+SUMMARY    =3D "Session / policy manager implementation for PipeWire"
-+HOMEPAGE   =3D "https://gitlab.freedesktop.org/pipewire/wireplumber"
-+BUGTRACKER =3D "https://gitlab.freedesktop.org/pipewire/wireplumber/issu=
-es"
-+AUTHOR     =3D "George Kiagiadakis <george.kiagiadakis@collabora.com>"
-+SECTION    =3D "multimedia"
-+
-+LICENSE =3D "MIT"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D17d1fe479cdec331eecbc65d26bc7=
-e77"
-+
-+DEPENDS =3D "glib-2.0 glib-2.0-native lua pipewire \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data"=
-, "python3-native python3-lxml-native doxygen-native", "", d)} \
-+"
-+
-+SRCREV =3D "e14bb72dcc85e2130d0ea96768e5ae3b375a041e"
-+SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/wireplumber.git;branc=
-h=3Dmaster;protocol=3Dhttps \
-+           "
-+
-+S =3D "${WORKDIR}/git"
-+
-+inherit meson pkgconfig gobject-introspection systemd
-+
-+GIR_MESON_ENABLE_FLAG =3D 'enabled'
-+GIR_MESON_DISABLE_FLAG =3D 'disabled'
-+
-+# Enable system-lua to let wireplumber use OE's lua.
-+# Documentation needs python-sphinx, which is not in oe-core or meta-pyt=
-hon2 for now.
-+# elogind is not (yet) available in OE, so disable support.
-+EXTRA_OEMESON +=3D " \
-+    -Ddoc=3Ddisabled \
-+    -Dsystem-lua=3Dtrue \
-+    -Delogind=3Ddisabled \
-+    -Dsystemd-system-unit-dir=3D${systemd_system_unitdir} \
-+    -Dsystemd-user-unit-dir=3D${systemd_user_unitdir} \
-+    -Dtests=3Dfalse \
-+"
-+
-+PACKAGECONFIG ??=3D "\
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-=
-system-service', '', d)} \
-+"
-+
-+PACKAGECONFIG[systemd] =3D "-Dsystemd=3Denabled,-Dsystemd=3Ddisabled,sys=
-temd"
-+PACKAGECONFIG[systemd-system-service] =3D "-Dsystemd-system-service=3Dtr=
-ue,-Dsystemd-system-service=3Dfalse,systemd"
-+# "systemd-user-service" packageconfig will only install service
-+# files to rootfs but not enable them as systemd.bbclass
-+# currently lacks the feature of enabling user services.
-+PACKAGECONFIG[systemd-user-service] =3D "-Dsystemd-user-service=3Dtrue,-=
-Dsystemd-user-service=3Dfalse,systemd"
-+
-+PACKAGESPLITFUNCS:prepend =3D " split_dynamic_packages "
-+PACKAGESPLITFUNCS:append =3D " set_dynamic_metapkg_rdepends "
-+
-+WP_MODULE_SUBDIR =3D "wireplumber-0.4"
-+
-+python split_dynamic_packages () {
-+    # Create packages for each WirePlumber module.
-+    wp_module_libdir =3D d.expand('${libdir}/${WP_MODULE_SUBDIR}')
-+    do_split_packages(d, wp_module_libdir, r'^libwireplumber-module-(.*)=
-\.so$', d.expand('${PN}-modules-%s'), 'WirePlumber %s module', extra_depe=
-nds=3D'', recursive=3DFalse)
-+}
-+
-+python set_dynamic_metapkg_rdepends () {
-+    import os
-+    import oe.utils
-+
-+    # Go through all generated WirePlumber module packages
-+    # (excluding the main package and the -meta package itself)
-+    # and add them to the -meta package as RDEPENDS.
-+
-+    base_pn =3D d.getVar('PN')
-+
-+    wp_module_pn =3D base_pn + '-modules'
-+    wp_module_metapkg =3D  wp_module_pn + '-meta'
-+
-+    d.setVar('ALLOW_EMPTY:' + wp_module_metapkg, "1")
-+    d.setVar('FILES:' + wp_module_metapkg, "")
-+
-+    blacklist =3D [ wp_module_pn, wp_module_metapkg ]
-+    wp_module_metapkg_rdepends =3D []
-+    pkgdest =3D d.getVar('PKGDEST')
-+
-+    for pkg in oe.utils.packages_filter_out_system(d):
-+        if pkg in blacklist:
-+            continue
-+
-+        is_wp_module_pkg =3D pkg.startswith(wp_module_pn)
-+        if not is_wp_module_pkg:
-+            continue
-+
-+        if pkg in wp_module_metapkg_rdepends:
-+            continue
-+
-+        # See if the package is empty by looking at the contents of its
-+        # PKGDEST subdirectory. If this subdirectory is empty, then then
-+        # package is empty as well. Empty packages do not get added to
-+        # the meta package's RDEPENDS.
-+        pkgdir =3D os.path.join(pkgdest, pkg)
-+        if os.path.exists(pkgdir):
-+            dir_contents =3D os.listdir(pkgdir) or []
-+        else:
-+            dir_contents =3D []
-+        is_empty =3D len(dir_contents) =3D=3D 0
-+        if not is_empty:
-+            if is_wp_module_pkg:
-+                wp_module_metapkg_rdepends.append(pkg)
-+
-+    d.setVar('RDEPENDS:' + wp_module_metapkg, ' '.join(wp_module_metapkg=
-_rdepends))
-+    d.setVar('DESCRIPTION:' + wp_module_metapkg, wp_module_pn + ' meta p=
-ackage')
-+}
-+
-+PACKAGES =3D+ "\
-+    libwireplumber \
-+    ${PN}-default-config \
-+    ${PN}-scripts \
-+    ${PN}-modules \
-+    ${PN}-modules-meta \
-+"
-+
-+PACKAGES_DYNAMIC =3D "^${PN}-modules.*"
-+
-+SYSTEMD_SERVICE:${PN} =3D "wireplumber.service"
-+CONFFILES:${PN} +=3D " \
-+    ${sysconfdir}/wireplumber/config.lua \
-+    ${sysconfdir}/wireplumber/config.lua.d/* \
-+"
-+FILES:${PN} +=3D " \
-+    ${sysconfdir}/wireplumber/config.lua \
-+    ${sysconfdir}/wireplumber/config.lua.d/* \
-+"
-+# Add pipewire to RRECOMMENDS, since WirePlumber expects a PipeWire daem=
-on to
-+# be present. While in theory any application that uses libpipewire can =
-configure
-+# itself to become a daemon, in practice, the PipeWire daemon is used.
-+RRECOMMENDS:${PN} +=3D "${PN}-scripts pipewire"
-+
-+FILES:libwireplumber =3D " \
-+    ${libdir}/libwireplumber-*.so.* \
-+"
-+
-+FILES:${PN}-scripts +=3D "${datadir}/wireplumber/scripts/*"
-+
-+# Dynamic packages (see set_dynamic_metapkg_rdepends).
-+FILES:${PN}-modules =3D ""
-+RRECOMMENDS:${PN}-modules +=3D "${PN}-modules-meta"
---=20
-2.32.0
-
+>
+>
+> //Yi
+>
+>
+> On 2/8/22 08:25, wangmy wrote:
+> > Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> > ---
+> >   .../strongswan/{strongswan_5.9.4.bb => strongswan_5.9.5.bb}     | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> >   rename meta-networking/recipes-support/strongswan/{strongswan_5.9.4.bb => strongswan_5.9.5.bb} (99%)
+> >
+> > diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.9.4.bb b/meta-networking/recipes-support/strongswan/strongswan_5.9.5.bb
+> > similarity index 99%
+> > rename from meta-networking/recipes-support/strongswan/strongswan_5.9.4.bb
+> > rename to meta-networking/recipes-support/strongswan/strongswan_5.9.5.bb
+> > index 2b7a7a2410..dab2fd1497 100644
+> > --- a/meta-networking/recipes-support/strongswan/strongswan_5.9.4.bb
+> > +++ b/meta-networking/recipes-support/strongswan/strongswan_5.9.5.bb
+> > @@ -13,7 +13,7 @@ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+> >              file://0001-memory.h-Include-stdint.h-for-uintptr_t.patch \
+> >              "
+> >
+> > -SRC_URI[sha256sum] = "45fdf1a4c2af086d8ff5b76fd7b21d3b6f0890f365f83bf4c9a75dda26887518"
+> > +SRC_URI[sha256sum] = "983e4ef4a4c6c9d69f5fe6707c7fe0b2b9a9291943bbf4e008faab6bf91c0bdd"
+> >
+> >   UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
+> >
+> >
+> >
+> >
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#95260): https://lists.openembedded.org/g/openembedded-devel/message/95260
+> Mute This Topic: https://lists.openembedded.org/mt/88986556/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
