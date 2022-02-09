@@ -2,79 +2,79 @@ Return-Path: <kartikey.rameshbhai.parmar@intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 97A1CC433F5
-	for <webhook@archiver.kernel.org>; Wed,  9 Feb 2022 08:35:35 +0000 (UTC)
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
- by mx.groups.io with SMTP id smtpd.web10.23971.1644395734339913843
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19E43C433F5
+	for <webhook@archiver.kernel.org>; Wed,  9 Feb 2022 12:22:09 +0000 (UTC)
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+ by mx.groups.io with SMTP id smtpd.web12.25766.1644409327630150306
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Feb 2022 00:35:35 -0800
+ Wed, 09 Feb 2022 04:22:08 -0800
 Authentication-Results: mx.groups.io;
  dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel
- header.b=IhBmLCZR;
- spf=pass (domain: intel.com, ip: 192.55.52.115,
+ header.b=auAk7tn9;
+ spf=pass (domain: intel.com, ip: 192.55.52.93,
  mailfrom: kartikey.rameshbhai.parmar@intel.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1644395734; x=1675931734;
+  t=1644409327; x=1675945327;
   h=from:to:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=T+BXFpcJZ9R1woUo9STZD2y76NZGXEC8WEu/idy/u1k=;
-  b=IhBmLCZRvEP5qGdLGRa0lcGHybXpL/I1ABwGs5jvtDf8xMV3Xuzh3zti
-   jcaldgNYM1tQr/CMpksHXRzrz+JeLJ76/mq4VTNng4U5nUbXbtZA2SEYE
-   l0Sb2x1HKboUKyOv9cbwzygIMJ8hxms+rytW15Jlffl0JJ59riYXRjiRJ
-   EKdSNd8CfWUKCBI5GSfTWjYROLlSZOk6yXCtaJOHUPKgx2QAYfHSuWxmp
-   xbDcmbX5+Q1KCXkjJX+BlXjZT01VCH3aWOHyUbH/fZYEsTdLPf8MsFkmF
-   zPnnQuk3bCB/OLEXoylBsxYoigYngVvMG/6+TTeJftVSk4jF20kdir18C
+  bh=jVvG95c+rWI3TXqz8V13lekSVFRn+3HTPCJiXUH4kEA=;
+  b=auAk7tn9BEC9fl46Mj2l/e3VYcJH1iUXOAPpffwcdkSETWatuSaZO8cN
+   AooSUyDRtt6b4AvKoIZKuLzeqPqjUp0TFeI/7xSykjvW1PG/u/FWI2krl
+   9qK1T0vJO58MVZZUJIrMMSpaIlZA1gAFkdq/K/zWqTR3zA68bD2E7LYlM
+   NjD0KdMZercHm0Kn1bEWxUZh0eAoU3kkKRSPlXJuQMqgQLfieB7/JRDYZ
+   br++hT280deW1tqvY5SuQn5pFRBn3Td9qjHykkzQ9eKpLlFbgYzW51HeZ
+   5tikYkAyKF/UoGAj3at+duCQSi3yer+A0YOSMHz3xnBTWmAMgQtw6Z1Nl
    Q==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10252"; a="249362277"
+X-IronPort-AV: E=McAfee;i="6200,9189,10252"; a="246775402"
 X-IronPort-AV: E=Sophos;i="5.88,355,1635231600";
-   d="scan'208";a="249362277"
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
-  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Feb 2022 00:35:33 -0800
+   d="scan'208";a="246775402"
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Feb 2022 04:22:06 -0800
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="5.88,355,1635231600";
-   d="scan'208";a="525905360"
+   d="scan'208";a="678558537"
 Received: from ubuntu161tb.png.intel.com ([10.88.227.41])
-  by orsmga007.jf.intel.com with ESMTP; 09 Feb 2022 00:35:32 -0800
+  by fmsmga001.fm.intel.com with ESMTP; 09 Feb 2022 04:22:06 -0800
 From: kartikey.rameshbhai.parmar@intel.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][hardknott][PATCH] libsrtp: update SRC_URI branch to
+Subject: [meta-oe][hardknott][PATCH] imagemagick: update SRC_URI branch to
  main
-Date: Wed,  9 Feb 2022 08:35:22 +0000
-Message-Id: <20220209083522.4370-1-kartikey.rameshbhai.parmar@intel.com>
+Date: Wed,  9 Feb 2022 12:21:56 +0000
+Message-Id: <20220209122156.4914-1-kartikey.rameshbhai.parmar@intel.com>
 X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Feb 2022 08:35:35 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Feb 2022 12:22:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95275
+ https://lists.openembedded.org/g/openembedded-devel/message/95276
 
 From: Kartikey Rameshbhai Parmar <kartikey.rameshbhai.parmar@intel.com>
 
-master branch on the repository has been renamed upstream to main.
+master branch on the repository has been renamed in upstream to main.
 
 Signed-off-by: Kartikey Rameshbhai Parmar <kartikey.rameshbhai.parmar@intel.com>
 ---
- meta-multimedia/recipes-support/libsrtp/libsrtp_2.3.0.bb | 2 +-
+ meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-support/libsrtp/libsrtp_2.3.0.bb b/meta-multimedia/recipes-support/libsrtp/libsrtp_2.3.0.bb
-index 9197a842d..e26d11b68 100644
---- a/meta-multimedia/recipes-support/libsrtp/libsrtp_2.3.0.bb
-+++ b/meta-multimedia/recipes-support/libsrtp/libsrtp_2.3.0.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2909fcf6f09ffff8430463d91c08c4e1"
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+index f5ab795fd..985f3949b 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+@@ -11,7 +11,7 @@ DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
+ 
+ BASE_PV := "${PV}"
+ PV .= "_25"
+-SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=master;protocol=https"
++SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https"
+ SRCREV = "8b4e00829eb84d4e7b4da11acf1f98f1e8166e5b"
  
  S = "${WORKDIR}/git"
- SRCREV = "d02d21111e379c297e93a9033d7b653135f732ee"
--SRC_URI = "git://github.com/cisco/libsrtp.git;branch=master;protocol=https"
-+SRC_URI = "git://github.com/cisco/libsrtp.git;branch=main;protocol=https"
- 
- inherit autotools pkgconfig
- 
 -- 
 2.35.1
 
