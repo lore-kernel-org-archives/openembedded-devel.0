@@ -1,81 +1,70 @@
-Return-Path: <kartikey.rameshbhai.parmar@intel.com>
+Return-Path: <thomas.perrot@bootlin.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19E43C433F5
-	for <webhook@archiver.kernel.org>; Wed,  9 Feb 2022 12:22:09 +0000 (UTC)
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
- by mx.groups.io with SMTP id smtpd.web12.25766.1644409327630150306
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2248C433EF
+	for <webhook@archiver.kernel.org>; Wed,  9 Feb 2022 13:42:45 +0000 (UTC)
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net
+ [217.70.183.201])
+ by mx.groups.io with SMTP id smtpd.web10.26388.1644414164358659354
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Feb 2022 04:22:08 -0800
+ Wed, 09 Feb 2022 05:42:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel
- header.b=auAk7tn9;
- spf=pass (domain: intel.com, ip: 192.55.52.93,
- mailfrom: kartikey.rameshbhai.parmar@intel.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1644409327; x=1675945327;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=jVvG95c+rWI3TXqz8V13lekSVFRn+3HTPCJiXUH4kEA=;
-  b=auAk7tn9BEC9fl46Mj2l/e3VYcJH1iUXOAPpffwcdkSETWatuSaZO8cN
-   AooSUyDRtt6b4AvKoIZKuLzeqPqjUp0TFeI/7xSykjvW1PG/u/FWI2krl
-   9qK1T0vJO58MVZZUJIrMMSpaIlZA1gAFkdq/K/zWqTR3zA68bD2E7LYlM
-   NjD0KdMZercHm0Kn1bEWxUZh0eAoU3kkKRSPlXJuQMqgQLfieB7/JRDYZ
-   br++hT280deW1tqvY5SuQn5pFRBn3Td9qjHykkzQ9eKpLlFbgYzW51HeZ
-   5tikYkAyKF/UoGAj3at+duCQSi3yer+A0YOSMHz3xnBTWmAMgQtw6Z1Nl
-   Q==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10252"; a="246775402"
-X-IronPort-AV: E=Sophos;i="5.88,355,1635231600";
-   d="scan'208";a="246775402"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Feb 2022 04:22:06 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.88,355,1635231600";
-   d="scan'208";a="678558537"
-Received: from ubuntu161tb.png.intel.com ([10.88.227.41])
-  by fmsmga001.fm.intel.com with ESMTP; 09 Feb 2022 04:22:06 -0800
-From: kartikey.rameshbhai.parmar@intel.com
+ dkim=pass header.i=@bootlin.com header.s=gm1 header.b=ZmM1nnUu;
+ spf=pass (domain: bootlin.com, ip: 217.70.183.201,
+ mailfrom: thomas.perrot@bootlin.com)
+Received: (Authenticated sender: thomas.perrot@bootlin.com)
+	by mail.gandi.net (Postfix) with ESMTPSA id 62B631BF212;
+	Wed,  9 Feb 2022 13:42:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1644414162;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=7Z4qb3gXUslP4g8aUqln0HnIwmJEjhGrih7LpJ3dYIs=;
+	b=ZmM1nnUuZo9bj2oi4mqmbP9oWh2QwZiVAkbimaQSdkTuqW5cJWtza21YzWjHbD8Bwm4xfo
+	Qyd1WgIZPNkwSlf1bNHKBGc4O72ME6I+bZeZAogv7DUeMWqxJfgExemD33nikiaxQXxgsS
+	t3WYEyT+yP5/Pts1jzAC3PWsOkM2KYZmXl7mE7CyZJsD9fuSwH9nNiCrI6cp5ta6CzVStC
+	G4Fqor4EDvdUdX+UrXBTktzLDKDIQsOmmA2/5l3Xiu+3okF1ZS95sYuu2mLs2FpMcsX4SV
+	Dw3K4xkTW/gHeHj12Q/IkVAIJQTfQ6qZ8664Typ+9g2R8xpccxxjXWc7MBFsVQ==
+From: Thomas Perrot <thomas.perrot@bootlin.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][hardknott][PATCH] imagemagick: update SRC_URI branch to
- main
-Date: Wed,  9 Feb 2022 12:21:56 +0000
-Message-Id: <20220209122156.4914-1-kartikey.rameshbhai.parmar@intel.com>
-X-Mailer: git-send-email 2.35.1
+Cc: Thomas Perrot <thomas.perrot@bootlin.com>
+Subject: [oe][meta-oe][honister][PATCH] breakpad: fix branch for gtest in
+ SRC_URI
+Date: Wed,  9 Feb 2022 14:40:23 +0100
+Message-Id: <20220209134023.1102164-1-thomas.perrot@bootlin.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Feb 2022 12:22:09 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Feb 2022 13:42:45 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95276
+ https://lists.openembedded.org/g/openembedded-devel/message/95277
 
-From: Kartikey Rameshbhai Parmar <kartikey.rameshbhai.parmar@intel.com>
+The commit 4fe018038f87 is in the main branch, so the do_fetch task failed.
 
-master branch on the repository has been renamed in upstream to main.
-
-Signed-off-by: Kartikey Rameshbhai Parmar <kartikey.rameshbhai.parmar@intel.com>
+Signed-off-by: Thomas Perrot <thomas.perrot@bootlin.com>
 ---
- meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb | 2 +-
+ meta-oe/recipes-devtools/breakpad/breakpad_git.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-index f5ab795fd..985f3949b 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-@@ -11,7 +11,7 @@ DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
+diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
+index fabf59d4b29b..c752a100831f 100644
+--- a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
++++ b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
+@@ -29,7 +29,7 @@ SRCREV_lss = "fd00dbbd0c06a309c657d89e9430143b179ff6db"
+ SRCREV_gyp = "324dd166b7c0b39d513026fa52d6280ac6d56770"
  
- BASE_PV := "${PV}"
- PV .= "_25"
--SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=master;protocol=https"
-+SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https"
- SRCREV = "8b4e00829eb84d4e7b4da11acf1f98f1e8166e5b"
- 
- S = "${WORKDIR}/git"
+ SRC_URI = "git://github.com/google/breakpad;name=breakpad;branch=main;protocol=https \
+-           git://github.com/google/googletest.git;destsuffix=git/src/testing/gtest;name=gtest;branch=master;protocol=https \
++           git://github.com/google/googletest.git;destsuffix=git/src/testing/gtest;name=gtest;branch=main;protocol=https \
+            git://github.com/protocolbuffers/protobuf.git;destsuffix=git/src/third_party/protobuf/protobuf;name=protobuf;branch=master;protocol=https \
+            git://chromium.googlesource.com/linux-syscall-support;protocol=https;branch=main;destsuffix=git/src/third_party/lss;name=lss \
+            git://chromium.googlesource.com/external/gyp;protocol=https;destsuffix=git/src/tools/gyp;name=gyp;branch=master \
 -- 
-2.35.1
+2.31.1
 
 
