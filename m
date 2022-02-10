@@ -1,143 +1,101 @@
-Return-Path: <xuhuan.fnst@fujitsu.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 97B2FC4332F
-	for <webhook@archiver.kernel.org>; Thu, 10 Feb 2022 10:25:23 +0000 (UTC)
-Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.2])
- by mx.groups.io with SMTP id smtpd.web11.8505.1644488722257926789
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 811B9C433F5
+	for <webhook@archiver.kernel.org>; Thu, 10 Feb 2022 11:35:07 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg
+ [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web08.8857.1644492905097886596
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Feb 2022 02:25:22 -0800
+ Thu, 10 Feb 2022 03:35:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=svMouGUo;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.2,
- mailfrom: xuhuan.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1644488720; i=@fujitsu.com;
-	bh=1Qs4/dsJGknFTcHv2LTLIOgMKI7c/xwTz8Nynm/sdyM=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=svMouGUoY3s4IfeXhcmdsu4hxGBHLFdST4BEbM5bcqfLQaVSPH/vAWwvLvCtrs8Hm
-	 b/MSPXbF4nU2lLmhAaOcF/lBfEkQnwkv2EtvinzpEI6+05+sEeRG1B1xci6oLS4A3k
-	 ePnZp6AWfQrzA5J9r1c7BO1J5AgoK2Yng4WmAB/40oC7pVq6Ei/z7PwH1Neu+wqerE
-	 JCFNBdAWv994iLbH3CTtqAr/pzw2r2/niFrdpPEt8/1A/tGMu+aZ3I9D/SBhiupcKX
-	 V8B10kqE40qJ+xDgQuNcrVr31tjdriJQrsAOfr5FF34VKaJpMBk3cg/6bXVGC9aviC
-	 M3Aj2kd3RipPQ==
-Received: from [100.115.70.56] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-central-1.aws.ess.symcld.net id
- 25/5E-30582-018E4026; Thu, 10 Feb 2022 10:25:20 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrPIsWRWlGSWpSXmKPExsViZ8MxSZfjBUu
-  SwcsORYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPbgk8sBS/5Ku7t2snewLiet4uRi0NI4Amj
-  xJUth9ggnAtMEptProJyTjJKnP0+l7GLkZODTUBd4vHN12C2iIC+xNLZe5hBbGYBVYnui2vYQ
-  WxhgQiJ5zsbmUBsFqD49pbrYHFeATeJRbvXg9VLCChITHn4HszmFHCXmPv2HxuILQRU83jbVz
-  aIekGJkzOfsEDMl5A4+OIFVK+SxIkVH5kg7AqJ14cvQcXVJK6e28Q8gVFwFpL2WUjaFzAyrWK
-  0SyrKTM8oyU3MzNE1NDDQNTQ01TUz1TW0MNJLrNJN1Est1U1OzSspSgRK6yWWF+ulFhfrFVfm
-  Juek6OWllmxiBIZzSrHjth2Mp/p+6h1ilORgUhLlDTrHkiTEl5SfUpmRWJwRX1Sak1p8iFGGg
-  0NJgnfeBaCcYFFqempFWmYOMLZg0hIcPEoivK9vA6V5iwsSc4sz0yFSpxgVpcR5tz4DSgiAJD
-  JK8+DaYPF8iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5IwrwzIFJ7MvBK46a+AFjMBLd42nQl
-  kcUkiQkqqgcmA6dDJLUmvlLYun2t3bUF4gpG09cOtnbLT/YVMf5Y/55zRoJpTuywoT3bfevV7
-  P+RVT8+sKJmy8JK1W5RebLHhwubi+uCuPL6t63Pf3V15z+FBUbffxZlOUtdDPr4uz/v0fN9z1
-  oRDvsy9kUltMh5/Z3Af/5Bz/hyTylvGgDDO6ImPv89wq5qZL56a+rh+9gYrnRv//N0iry4yUT
-  bJWZtuEK5X/Fp6ZmnWL5/PJ1JmiPnluGa9C/la9erTgZ6vlsZPHp+8XFyzJHzzT6WXFW/v5qU
-  +WLtxlpz85AtpXfMXHZKfbFdofP7Un4IPk6qPWG+pt/fPkZ177NB5y90ecftqq67Zznmpf1n0
-  re2U8z1KLMUZiYZazEXFiQB5ruU7YgMAAA==
-X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-15.tower-528.messagelabs.com!1644488712!14075!1
-X-Originating-IP: [62.60.8.146]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.7; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 9747 invoked from network); 10 Feb 2022 10:25:12 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-15.tower-528.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 10 Feb 2022 10:25:12 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 1085E10045F
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Feb 2022 10:25:12 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 0407E100457
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Feb 2022 10:25:12 +0000 (GMT)
-Received: from localhost.localdomain.localdomain (10.167.225.131) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Thu, 10 Feb 2022 10:25:08 +0000
-From: XU Huan <xuhuan.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [PATCH 3/5] [oe] [meta-python] [PATCH] python3-oauthlib: upgrade
- 3.1.1 -> 3.2.0
-Date: Thu, 10 Feb 2022 18:25:37 +0800
-Message-ID: <1644488739-3593-3-git-send-email-xuhuan.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1644488739-3593-1-git-send-email-xuhuan.fnst@fujitsu.com>
-References: <1644488739-3593-1-git-send-email-xuhuan.fnst@fujitsu.com>
+ dkim=pass header.i=@anavi.org header.s=default header.b=azKULLq0;
+ spf=permerror,
+ err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
+ for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
+ (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=m08FhOTK19Lqg88mV3sd67OOkkhH+zkTKa52uStEqsM=; b=azKULLq0JbrYwsokkQiOH3YdHF
+	qBX2shkiYtg249NY/8vrNHFOVQIpMR/4NtesS41ThmtMj597vkzlCEJF7WwCzsWEBvuPElWjaH8N4
+	EYYZ6oDtgI9FYlK7KTiw1IRUiUBGX7+mp66kcF9v3nk/CZ3Tb2KhvSNj2fMFWKtYYQaXD2bJGPw6G
+	HgaP/8Y2lkdwrpWxYnhyFJ2TDraTPvzFw1uGLvQq/+tDj2WTJGWHSa//U2QVjcqtahWldbkOLT+je
+	yGZg8zpcI4f5aw8TqJaOsZUYnqnM0GxRmIOPZmNnhUMBCsuP7QQBSzEoLzLrs4yxM2lEWjHh83IX2
+	VzTS0peQ==;
+Received: from lan.nucleusys.com ([92.247.61.126]:42712 helo=tone.k.g)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.94.2)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1nI7ka-000CVK-CL; Thu, 10 Feb 2022 13:35:03 +0200
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-imageio: Upgrade 2.14.1 -> 2.15.0
+Date: Thu, 10 Feb 2022 13:34:52 +0200
+Message-Id: <20220210113454.2022446-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.131]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
+ leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Feb 2022 10:25:23 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Feb 2022 11:35:07 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95282
+ https://lists.openembedded.org/g/openembedded-devel/message/95284
 
-From: Xu Huan <xuhuan.fnst@fujitsu.com>
+Upgrade to release 2.15.0:
 
-changelog:
-===============================================================================
+- Fix webcam FPS settings on MacOS
+- Add format_hint to v3 API
+- Make tifffile read resolution metadata
+- Make RTD fail on warnings during CI
+- Remove link to download tracker
+- Type annotations for pillow
+- Contribution guidelines
+- Deprecate python 3.6 support
 
-OAuth2.0 Client:
-Add Device Authorization Flow for Web Application
-Add PKCE support for Client
-Fallback to none in case of wrong expires_at format.
-
-OAuth2.0 Provider:
-Add support for CORS to metadata endpoint.
-Add support for CORS to token endpoint.
-Remove comma after Bearer in WWW-Authenticate
-
-OAuth2.0 Provider - OIDC:
-Call save_token in Hybrid code flow
-OIDC add support of refreshing ID Tokens with refresh_id_token
-The RefreshTokenGrant modifiers now take the same arguments as the
-AuthorizationCodeGrant modifiers (token, token_handler, request).
-
-General:
-Added Python 3.9, 3.10, 3.11
-Improve Travis & Coverage
-
-Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-oauthlib_3.1.1.bb => python3-oauthlib_3.2.0.bb}    | 2 +-
+ .../{python3-imageio_2.14.1.bb => python3-imageio_2.15.0.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-oauthlib_3.1.1.bb => python3-oauthlib_3.2.0.bb} (92%)
+ rename meta-python/recipes-devtools/python/{python3-imageio_2.14.1.bb => python3-imageio_2.15.0.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-oauthlib_3.1.1.bb b/meta-python/recipes-devtools/python/python3-oauthlib_3.2.0.bb
-similarity index 92%
-rename from meta-python/recipes-devtools/python/python3-oauthlib_3.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-oauthlib_3.2.0.bb
-index c2ec856fdb..3e5d957c4e 100644
---- a/meta-python/recipes-devtools/python/python3-oauthlib_3.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-oauthlib_3.2.0.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/idan/oauthlib"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=abd2675e944a2011aed7e505290ba482"
+diff --git a/meta-python/recipes-devtools/python/python3-imageio_2.14.1.bb b/meta-python/recipes-devtools/python/python3-imageio_2.15.0.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-imageio_2.14.1.bb
+rename to meta-python/recipes-devtools/python/python3-imageio_2.15.0.bb
+index 736a18262..e3462ee44 100644
+--- a/meta-python/recipes-devtools/python/python3-imageio_2.14.1.bb
++++ b/meta-python/recipes-devtools/python/python3-imageio_2.15.0.bb
+@@ -5,7 +5,7 @@ SECTION = "devel/python"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=7b9bbbb543b6af3e6b53f9b7fb68f71d"
  
--SRC_URI[sha256sum] = "8f0215fcc533dd8dd1bee6f4c412d4f0cd7297307d43ac61666389e3bc3198a3"
-+SRC_URI[sha256sum] = "23a8208d75b902797ea29fd31fa80a15ed9dc2c6c16fe73f5d346f83f6fa27a2"
+-SRC_URI[sha256sum] = "709c18f800981e4286abe4bd86b6c9b5bb6e285b6b933b5ba0962ef8e7994058"
++SRC_URI[sha256sum] = "d0d7abb4e5c4044c06fc573233489c4a25582698f93ca94f7bd70b6f4ab172ec"
  
  inherit pypi setuptools3
  
 -- 
-2.25.1
+2.30.2
 
 
