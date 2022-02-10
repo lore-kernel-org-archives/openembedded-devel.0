@@ -1,100 +1,116 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <sam.van.den.berge@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 65330C433F5
-	for <webhook@archiver.kernel.org>; Thu, 10 Feb 2022 11:35:11 +0000 (UTC)
-Received: from voyager.superhosting.bg (voyager.superhosting.bg
- [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web09.8901.1644492909213754429
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E6E5C433EF
+	for <webhook@archiver.kernel.org>; Thu, 10 Feb 2022 14:15:25 +0000 (UTC)
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com
+ [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web10.10526.1644502524480030351
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Feb 2022 03:35:10 -0800
+ Thu, 10 Feb 2022 06:15:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=BKgDLRzF;
- spf=permerror,
- err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
- for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
- (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
-	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
-	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=UmA/qDE6eIGX+0zfHqGqH3ZMquop8Aq2UVdYE3b+Los=; b=BKgDLRzFgPVzXZn5PV/bzRHwwS
-	cG/MIsJ0JTIeRF3hmcQOxZZoMhoVEaUwT1GvIPD1VV1J0PcwmZHHslesMyJezjW1usXrK1iqWcAU3
-	9c9FrZe6z6RrfQhfipNOeulAjstFrzjqQn8VM2mfi5EwCLGP2QpL7DOiZiiWo84xdA2rIkbmgyIm0
-	V+f21mI7Y1a2EXAsKFO84GuFz0s08yKh6n2oMWPG/KtonhndfH+IvSWqbrXjQK+rETNsH25EX3GYm
-	fInGHy1nJ410/BcypclK1emvLyMqxym1yr7AhcfZkCIRH7hKusx1kzip/zBkwE3LoE+KhBIWYVbq0
-	Wl9PEyCw==;
-Received: from lan.nucleusys.com ([92.247.61.126]:42712 helo=tone.k.g)
-	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.94.2)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1nI7kf-000CVK-9G; Thu, 10 Feb 2022 13:35:08 +0200
-From: Leon Anavi <leon.anavi@konsulko.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=BeUD2Qbb;
+ spf=pass (domain: gmail.com, ip: 209.85.218.51,
+ mailfrom: sam.van.den.berge@gmail.com)
+Received: by mail-ej1-f51.google.com with SMTP id p24so15737689ejo.1
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 10 Feb 2022 06:15:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Hgmja+2E4Oy8zyT6p09VuOZAu5WtwW302FrVXBmU9rw=;
+        b=BeUD2QbbhW7QGllv7vOGpF45FU5RK930gJpuY9KCswE3xml2aZV61H6h8vdZPzsUwl
+         4/KuIkHjNs5xguNS1Jm4znfSzo3mXlwf05Rp9zDzokev5PcFvks59MYPDbHvPYmKML4U
+         pzfzCbNFHrEMxWg9kfWSnk/0zobPIzwzVoAeO7SDKZpE8cG7pchPuG6vwV/GIPcqeSpb
+         AkcEjJ4lbOZw2IRX6HTZ95bJCIjiBlIyU3N4Uqnlrz/DIZ4XHk14Is7N1G01AhLzIHEX
+         zq7++KJqpa5WfGYrwgvGXRQhuH/8yOD8LOKDh/0ECTMdhKcoUMsYsYzTjkVomTVntU3w
+         ELiA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Hgmja+2E4Oy8zyT6p09VuOZAu5WtwW302FrVXBmU9rw=;
+        b=G8xI6LSohBwVw0/ENQkryqmU06wIj1xabTxeF+4j12mc5mHYreVpwWh86q6D/1xYtF
+         W+KjmTYjDM9xppqcoL7LFT6XfUOQjGMGvtaxDSvf2dJplAKUWWTJAzdTzBGk+MyDHgNF
+         4nZ1klMcb3dBepZQiuHT5kcXp5j67s3ZoTD6uLWmCKXekbyaZJ159QJCufW4LHxnQQRN
+         GZuyUpVZAw73ziy3fiwu6KfmmZ9pacQAZSMIWxi9yRfXJ8v2vtLkDnrN1UcKnF3l+QdX
+         LRGGvaP9FRsFtoH1ExMEEnEHAwpkKrw5BCxDNaorOBDk3kD8UmXpaluYSFP5RoUAvp16
+         ymzQ==
+X-Gm-Message-State: AOAM532VqYMpmjPXXJzx1NoAPe0lCeU7ImL+mZFvrAkkY47slVSOtprV
+	XHhO0EvxVrsozSSwb6J+9uUmUDYKPw==
+X-Google-Smtp-Source: 
+ ABdhPJz1CGdp1FS6wXTdX8YqSqyr6SFnrpA4d7DUyIvGR1bwWhUDZ+VZipFMrcLzJKkConZjnUgrDA==
+X-Received: by 2002:a17:907:96a6:: with SMTP id
+ hd38mr6659517ejc.38.1644502522515;
+        Thu, 10 Feb 2022 06:15:22 -0800 (PST)
+Received: from OP01518NB.WTSOUT.OIP.LOCAL (mail.oip.be. [81.246.50.154])
+        by smtp.gmail.com with ESMTPSA id
+ h17sm4831904ejy.191.2022.02.10.06.15.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 10 Feb 2022 06:15:22 -0800 (PST)
+From: Sam Van Den Berge <sam.van.den.berge@gmail.com>
+X-Google-Original-From: Sam Van Den Berge <sam.van.den.berge@oip.be>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-bitarray: Upgrade 2.3.5 -> 2.3.6
-Date: Thu, 10 Feb 2022 13:34:54 +0200
-Message-Id: <20220210113454.2022446-3-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220210113454.2022446-1-leon.anavi@konsulko.com>
-References: <20220210113454.2022446-1-leon.anavi@konsulko.com>
+Cc: Sam Van Den Berge <sam.van.den.berge@gmail.com>
+Subject: [meta-oe][PATCH] libiio: use setuptools functions instead of
+ distutils
+Date: Thu, 10 Feb 2022 15:15:20 +0100
+Message-Id: <20220210141520.5348-1-sam.van.den.berge@oip.be>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
- leon@anavi.org
-X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Feb 2022 11:35:11 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Feb 2022 14:15:25 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95286
+ https://lists.openembedded.org/g/openembedded-devel/message/95287
 
-Upgrade to release 2.3.6:
+From: Sam Van Den Berge <sam.van.den.berge@gmail.com>
 
-- add optional value parameter to `util.count_n()`
-- determine machine endianness at build time when possible, by
-  using the `PY_LITTLE_ENDIAN` macro, in order to optimize
-  `shift_r8()`
-- add official Python 3.11 support
+Since ca73393a36c4144662ea8570f904154188e9815a in oe-core, setuptools
+does not inherit from distutils3 anymore. Therefore replace the
+distutils functions and variables by their setuptools counterparts which
+are now available.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Sam Van Den Berge <sam.van.den.berge@gmail.com>
 ---
- .../{python3-bitarray_2.3.5.bb => python3-bitarray_2.3.6.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-bitarray_2.3.5.bb => python3-bitarray_2.3.6.bb} (77%)
+ meta-oe/recipes-support/libiio/libiio_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_2.3.5.bb b/meta-python/recipes-devtools/python/python3-bitarray_2.3.6.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-bitarray_2.3.5.bb
-rename to meta-python/recipes-devtools/python/python3-bitarray_2.3.6.bb
-index 37fcfa1fe..d4fb6ed76 100644
---- a/meta-python/recipes-devtools/python/python3-bitarray_2.3.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-bitarray_2.3.6.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
- LICENSE = "PSF"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
+diff --git a/meta-oe/recipes-support/libiio/libiio_git.bb b/meta-oe/recipes-support/libiio/libiio_git.bb
+index 6632f7e64..f33fc0c1c 100644
+--- a/meta-oe/recipes-support/libiio/libiio_git.bb
++++ b/meta-oe/recipes-support/libiio/libiio_git.bb
+@@ -14,7 +14,7 @@ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
  
--SRC_URI[sha256sum] = "60285184cb02fdba5e1cc8605ac84e150a50f940e9383ab43564e5258d1f47bb"
-+SRC_URI[sha256sum] = "3bfdb59ded15c961e6e3d5b7f167155cda053be2475ea8017461df0b4d820b7d"
+ S = "${WORKDIR}/git"
  
- inherit setuptools3 pypi
+-DISTUTILS_SETUP_PATH ?= "${B}/bindings/python/"
++SETUPTOOLS_SETUP_PATH ?= "${B}/bindings/python/"
  
+ DEPENDS = " \
+     flex-native bison-native libaio \
+@@ -65,14 +65,14 @@ do_configure() {
+ 
+ do_compile() {
+     if ${@bb.utils.contains('PACKAGECONFIG', 'libiio-python3', 'true', 'false', d)}; then
+-        distutils3_do_compile
++        setuptools3_do_compile
+     fi
+     cmake_do_compile
+ }
+ 
+ do_install() {
+     if ${@bb.utils.contains('PACKAGECONFIG', 'libiio-python3', 'true', 'false', d)}; then
+-        distutils3_do_install
++        setuptools3_do_install
+     fi
+     cmake_do_install
+ }
 -- 
-2.30.2
+2.25.1
 
 
