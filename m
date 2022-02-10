@@ -2,15 +2,15 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 64D87C433EF
-	for <webhook@archiver.kernel.org>; Thu, 10 Feb 2022 11:35:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 65330C433F5
+	for <webhook@archiver.kernel.org>; Thu, 10 Feb 2022 11:35:11 +0000 (UTC)
 Received: from voyager.superhosting.bg (voyager.superhosting.bg
  [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web11.9067.1644492907438805916
+ by mx.groups.io with SMTP id smtpd.web09.8901.1644492909213754429
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Feb 2022 03:35:09 -0800
+ Thu, 10 Feb 2022 03:35:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=E6wqfidQ;
+ dkim=pass header.i=@anavi.org header.s=default header.b=BKgDLRzF;
  spf=permerror,
  err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
  for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
@@ -21,24 +21,24 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=cYAS0RJm0/EL6BDB3pWxeJau6BD5rCu58mbng5/PXdE=; b=E6wqfidQNiC9wzbKXsoLE5Tbri
-	2vOctBMpwUfcPBRn3phzrODgfdkmBcDWQRUBuZb3rBns5miAw2wCwchOeuQddCT866xiY98YqiiPf
-	kZALwdowXh9rNsunB725CZWGHwyqTONjIyT6/zNg1EhDEE6HpX8t1SrNUMAI7wPsz3/hLn6LOKI6c
-	Pavsm+GJOtrR8mTIsuleA5hSyi7uCrpGWIJsrQJRSmJecLCYzN30BWi04s5pNvGwsmKWc8AaVoPvZ
-	55VHmjIK9dgoK9xlNmkx4vlaypZE+O6LhQb01w4nEmEdPY7ZQNlmKiHLoalUSFZJ7E5UQm38tBRko
-	UuapuEaA==;
+	bh=UmA/qDE6eIGX+0zfHqGqH3ZMquop8Aq2UVdYE3b+Los=; b=BKgDLRzFgPVzXZn5PV/bzRHwwS
+	cG/MIsJ0JTIeRF3hmcQOxZZoMhoVEaUwT1GvIPD1VV1J0PcwmZHHslesMyJezjW1usXrK1iqWcAU3
+	9c9FrZe6z6RrfQhfipNOeulAjstFrzjqQn8VM2mfi5EwCLGP2QpL7DOiZiiWo84xdA2rIkbmgyIm0
+	V+f21mI7Y1a2EXAsKFO84GuFz0s08yKh6n2oMWPG/KtonhndfH+IvSWqbrXjQK+rETNsH25EX3GYm
+	fInGHy1nJ410/BcypclK1emvLyMqxym1yr7AhcfZkCIRH7hKusx1kzip/zBkwE3LoE+KhBIWYVbq0
+	Wl9PEyCw==;
 Received: from lan.nucleusys.com ([92.247.61.126]:42712 helo=tone.k.g)
 	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.94.2)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1nI7kd-000CVK-3q; Thu, 10 Feb 2022 13:35:05 +0200
+	id 1nI7kf-000CVK-9G; Thu, 10 Feb 2022 13:35:08 +0200
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-humanize: Upgrade 3.13.1 -> 3.14.0
-Date: Thu, 10 Feb 2022 13:34:53 +0200
-Message-Id: <20220210113454.2022446-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-bitarray: Upgrade 2.3.5 -> 2.3.6
+Date: Thu, 10 Feb 2022 13:34:54 +0200
+Message-Id: <20220210113454.2022446-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220210113454.2022446-1-leon.anavi@konsulko.com>
 References: <20220210113454.2022446-1-leon.anavi@konsulko.com>
@@ -60,36 +60,39 @@ X-Source-Dir:
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Feb 2022 11:35:09 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Feb 2022 11:35:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95285
+ https://lists.openembedded.org/g/openembedded-devel/message/95286
 
-Upgrade to release 3.14.0:
+Upgrade to release 2.3.6:
 
-- Don't deprecate time.Unit enumeration
-- Use humanize.intcomma to format years in time module
+- add optional value parameter to `util.count_n()`
+- determine machine endianness at build time when possible, by
+  using the `PY_LITTLE_ENDIAN` macro, in order to optimize
+  `shift_r8()`
+- add official Python 3.11 support
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-humanize_3.13.1.bb => python3-humanize_3.14.0.bb}  | 2 +-
+ .../{python3-bitarray_2.3.5.bb => python3-bitarray_2.3.6.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-humanize_3.13.1.bb => python3-humanize_3.14.0.bb} (82%)
+ rename meta-python/recipes-devtools/python/{python3-bitarray_2.3.5.bb => python3-bitarray_2.3.6.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-humanize_3.13.1.bb b/meta-python/recipes-devtools/python/python3-humanize_3.14.0.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-humanize_3.13.1.bb
-rename to meta-python/recipes-devtools/python/python3-humanize_3.14.0.bb
-index 2c601b5de..6b2fd3ad6 100644
---- a/meta-python/recipes-devtools/python/python3-humanize_3.13.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-humanize_3.14.0.bb
-@@ -5,7 +5,7 @@ SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d"
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_2.3.5.bb b/meta-python/recipes-devtools/python/python3-bitarray_2.3.6.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-bitarray_2.3.5.bb
+rename to meta-python/recipes-devtools/python/python3-bitarray_2.3.6.bb
+index 37fcfa1fe..d4fb6ed76 100644
+--- a/meta-python/recipes-devtools/python/python3-bitarray_2.3.5.bb
++++ b/meta-python/recipes-devtools/python/python3-bitarray_2.3.6.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+ LICENSE = "PSF"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
  
--SRC_URI[sha256sum] = "12f113f2e369dac7f35d3823f49262934f4a22a53a6d3d4c86b736f50db88c7b"
-+SRC_URI[sha256sum] = "60dd8c952b1df1ad83f0903844dec50a34ba7a04eea22a6b14204ffb62dbb0a4"
+-SRC_URI[sha256sum] = "60285184cb02fdba5e1cc8605ac84e150a50f940e9383ab43564e5258d1f47bb"
++SRC_URI[sha256sum] = "3bfdb59ded15c961e6e3d5b7f167155cda053be2475ea8017461df0b4d820b7d"
  
- inherit pypi setuptools3
+ inherit setuptools3 pypi
  
 -- 
 2.30.2
