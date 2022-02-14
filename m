@@ -1,154 +1,610 @@
-Return-Path: <ceggers@arri.de>
+Return-Path: <costamagna.gianfranco@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D033AC433EF
-	for <webhook@archiver.kernel.org>; Mon, 14 Feb 2022 12:36:58 +0000 (UTC)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.92])
- by mx.groups.io with SMTP id smtpd.web10.33122.1644842215474401935
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2F18C433EF
+	for <webhook@archiver.kernel.org>; Mon, 14 Feb 2022 13:19:46 +0000 (UTC)
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
+ [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.web10.33545.1644844782052594757
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Feb 2022 04:36:58 -0800
+ Mon, 14 Feb 2022 05:19:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify"
- header.i=@arrigroup.onmicrosoft.com
- header.s=selector1-arrigroup-onmicrosoft-com header.b=IokkUQo5;
- spf=pass (domain: arri.de, ip: 40.107.21.92, mailfrom: ceggers@arri.de)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=C1G+ObCfqsgZZ9FY+Bl17pg5qOoR8NvyC+vjr8j8PrOeQwk+TnF9a9rZmeBxjIiLCTlgRo4V80GPau/xuqKkoPKf0SyHUCbsRSHtswNWaaO+tsSNrLA2+LRhnsjkOeFscPWpjcv4Hh3QipnzLlirgOQLFrCByZqHEfqtGrdDfcBeLPoF2nnBjrCoRGYdXcSGRYXmHUPI1G3+oSqIteGPHJ5qXHrBgc/uOAugKFXoC05Jw1hCGNfSuU7npqVcDN7qToBccPuhMsPwjB9CA7fZY+I3U6i/HS5/5PVA/JJ5ZFqM/vARbPoYXXDXqLDvAHuQ0ckE2IWVWlveNdAgtSUF8w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3eoZK3sIHJZBM2NPB1eAca/5fRKifPtG9X7GQzoUED8=;
- b=CRpoYlp8T0CyXNGYK2n2DMuLJX/NRtO+HwMRDOjRn2JG2m7YuT0yl0SfKYSk5+Bz1mTU953+vhWhuM0WNV4heBHC+R7aOP9Yl4gdAh/vjJ2EXNlKKZ7HjMOBrtNsVqoViJwCk+/ltl85RO60Hokr9gOXzLghzHFFniJs1tnqMUN9rMQkIv0j42F9ZzHvxG2Cj7aEGrogLrfLPZ+3YILgBhzNQoDxo+2CT70fHAP2tMVKEbNq/SJ6oGJucUMrNjySd2QIRA7ou3EWXEmchS7ilFSd7B3g/4xYX7h/8OK5pLXbRfFsu+jfm9pNRQLZYnU0ZjUfXYrOh1c5IcDd0Jf92Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 217.111.95.7) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arri.de;
- dmarc=none action=none header.from=arri.de; dkim=none (message not signed);
- arc=none
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Dpk8nZYV;
+ spf=pass (domain: gmail.com, ip: 209.85.128.42,
+ mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-wm1-f42.google.com with SMTP id
+ k3-20020a1ca103000000b0037bdea84f9cso10838169wme.1
+        for <openembedded-devel@lists.openembedded.org>;
+ Mon, 14 Feb 2022 05:19:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=arrigroup.onmicrosoft.com; s=selector1-arrigroup-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3eoZK3sIHJZBM2NPB1eAca/5fRKifPtG9X7GQzoUED8=;
- b=IokkUQo5x1FK1KkA0p/igJetYci2L7igGSyyKMA1JWq8I/DMUhVPB4Wv7Xa2akeUw+VCyChE5wRIVRTa3bWBMDBA5VoHpRjCkW7RF/MIZuzZmNaiSBOD5SYdvMPqzRAKLHqMqxT0IhdaQ0we4ifLniB8SIMHnzdos4DUw/7dWB4=
-Received: from SV0P279CA0030.NORP279.PROD.OUTLOOK.COM (2603:10a6:f10:12::17)
- by DB6PR07MB4341.eurprd07.prod.outlook.com (2603:10a6:6:4f::26) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4995.8; Mon, 14 Feb
- 2022 12:36:51 +0000
-Received: from HE1EUR02FT041.eop-EUR02.prod.protection.outlook.com
- (2603:10a6:f10:12:cafe::a) by SV0P279CA0030.outlook.office365.com
- (2603:10a6:f10:12::17) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4975.12 via Frontend
- Transport; Mon, 14 Feb 2022 12:36:51 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 217.111.95.7)
- smtp.mailfrom=arri.de; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arri.de;
-Received-SPF: Fail (protection.outlook.com: domain of arri.de does not
- designate 217.111.95.7 as permitted sender) receiver=protection.outlook.com;
- client-ip=217.111.95.7; helo=mta.arri.de;
-Received: from mta.arri.de (217.111.95.7) by
- HE1EUR02FT041.mail.protection.outlook.com (10.152.11.146) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.4975.11 via Frontend Transport; Mon, 14 Feb 2022 12:36:50 +0000
-Received: from MucEx01.arri.de (10.10.18.25) by MucEx01.arri.de (10.10.18.25)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.7; Mon, 14 Feb
- 2022 13:36:50 +0100
-Received: from CASHUB3.arri.de (192.168.100.104) by MucEx01.arri.de
- (10.10.18.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.7 via Frontend
- Transport; Mon, 14 Feb 2022 13:36:50 +0100
-Received: from dhcp-192-168-0-28.wgnetz.xx.de (192.168.54.144) by mta.arri.de
- (192.168.100.104) with Microsoft SMTP Server (TLS) id 14.3.498.0; Mon, 14 Feb
- 2022 13:36:49 +0100
-From: Christian Eggers <ceggers@arri.de>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Christian Eggers <ceggers@arri.de>
-Subject: [meta-oe][PATCH] graphviz: native: create /usr/lib/graphviz/config6
- in populate_sysroot
-Date: Mon, 14 Feb 2022 13:36:39 +0100
-Message-ID: <20220214123639.26331-1-ceggers@arri.de>
-X-Mailer: git-send-email 2.34.1
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=//lvUmycc+nI39xy+Jwke7WNpvolT3l5XDQGPKUfBEs=;
+        b=Dpk8nZYV1QFigNrZ0w2tPMMkcV8pEUynlRFbksaWnshD1rLjjJez7PkxZ4h5l1yuVw
+         I09BnlBqZBAkljGsxOSVf2Z4g/dScEcFflKV5djEOy/el/KuPRgT8UWcwmK2U4nWfw4H
+         njjjex0D77KwXM8W9275lU6/TFlhH8EBcQhdzkR677OZbeKpYHgzChP7KXftp4fkaYEk
+         jcpj5S5u1XW+7NKoUyIKDH6bFzIXoHhrVI6aH91+ugBhnNA8LqTCbfHAr0lQ0bn/5Wtq
+         RZrtsknME3wwo1en6oshko9wT6SwuvYPqUbF3QeSMHdhvj9S0SIWxKYgZMUMHzraldFm
+         80tw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=//lvUmycc+nI39xy+Jwke7WNpvolT3l5XDQGPKUfBEs=;
+        b=qtvgPQUhcpNakHe/FBwgfrLdB6NmWAvMefejozFZbL6dD0tuvN7CrA4qr0tsM2/l0i
+         DZhE/e2Ec4wMns54+oBaWl1tRfl7wBM46X3sCiFz09oZbTKy7LzyDyI29EZ/Odg/JH2V
+         as2LNZfdXAW3hL+9D07a5xL6fYzMe+012JZ13OgqvrkQ8SY7Sjprtfvks3QnPuMxzjwh
+         rJoAOTxrHIXaaXIdbgJAWjXifbwqPu6hBBCzLXet+tkd8CxfDGb+/1hIUOi3DWTFoEax
+         uV2hL5YUPVv2nJ9+XKka4ciysSQqXmUDJ+nD+Ox5MApcjCHZbhS1LYPZnKZsuZes3IS0
+         dREA==
+X-Gm-Message-State: AOAM530OL/p+HVbxDw8Mr0yw5uYH2d7PWREW2YUVmM32QZYGZEVz7Leg
+	uFS+bjvtDt1z9iBmzdQ3G+fhW3RYQSnilw==
+X-Google-Smtp-Source: 
+ ABdhPJwxL4dNCHNmfM10ZKGoGM3iWo2QnJjLUzO5MPB2RLJs8ZnUKCPpHqz4x2oITyOjsImBW1Sfqg==
+X-Received: by 2002:a05:600c:3ce:: with SMTP id
+ z14mr10711843wmd.184.1644844779766;
+        Mon, 14 Feb 2022 05:19:39 -0800 (PST)
+Received: from Unimatrix08-Focal.lan ([2.198.230.143])
+        by smtp.gmail.com with ESMTPSA id
+ h4sm35407177wre.0.2022.02.14.05.19.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 14 Feb 2022 05:19:39 -0800 (PST)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+To: openembedded-devel@lists.openembedded.org
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	Gianfranco Costamagna <locutusofborg@debian.org>
+Subject: [meta-oe][PATCH] websocketpp: Apply upstream proposed patch to fix a
+ Scons 4.2.0+ build failure
+Date: Mon, 14 Feb 2022 14:19:36 +0100
+Message-Id: <20220214131936.883461-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-Originating-IP: [192.168.54.144]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 43d3506b-0a97-499a-6a03-08d9efb6ac95
-X-MS-TrafficTypeDiagnostic: DB6PR07MB4341:EE_
-X-Microsoft-Antispam-PRVS: 
-	<DB6PR07MB43416CD1AFB6CC91D0662E50BF339@DB6PR07MB4341.eurprd07.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	Yr0C0F1UZsETRejZvuGwmRx/HOwHEioZUYCPNfM+VVo8qfVIAYXHs9VnOf+lt/MU/viRz++Fmxdx+qnVmBx8/tumonFD2j17ab76MTLiWv5pxqTRgCUJfIEAwshyfePHmN93tLPdY9cTMOHHKgfUFefRRH0kWxvYYOjsn7mq64QSNElVBpbol1OgiakK6oncVUNdtIxIgD6h/bUnI5y3WW5Lgq81a2MFz0gdojEA43jZ3jm/euepEK9sjeHwcxCm0N2LEP1Wsa5tQoz6UIecbjJNKMf9wvXVHILNXyKzar3mdopu3mUpg1+Dj5xWXA/Iwn3akFpColK9xoSyT2cqRHsSpBNEKlh4Yrmn3Td0MmU9S7flIHlDxbdMX/mS8PrQolXAEImCEk+J7XZqOPC3TuUJ/KkbZTwfuBSw12uADZkLZbA2TtQySyJLmPgPckXgMY4n80LMzJMNZ7RBjvGR+7Ggs6inaVV3f4CHSz9rO6pI3MwQ7ARy/HK+B3XclmVn+hXt5baDNYg9KFD1TZsrXjZHGJAEHFT0e+GXXO2UOrc+f9WVtYV+RaaXI7RSeICk2YtWjjXq/ZcjW2IipYLiWx/hcX1nHEhY4Znd0tU8LayHDqNeWAjXOXLsYs2ry1rnk2632nk6F1MbP50WItNDRJqdT8tSizTBn0y926GK+/oyQNwj73utKw40ZpL4laoc
-X-Forefront-Antispam-Report: 
-	CIP:217.111.95.7;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mta.arri.de;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230001)(4636009)(46966006)(36840700001)(47076005)(107886003)(2906002)(83380400001)(336012)(186003)(36860700001)(16526019)(2616005)(6916009)(316002)(6666004)(508600001)(36756003)(8936002)(26005)(1076003)(426003)(8676002)(356005)(86362001)(82310400004)(5660300002)(4326008)(81166007)(70206006)(70586007)(36900700001);DIR:OUT;SFP:1102;
-X-OriginatorOrg: arri.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Feb 2022 12:36:50.7416
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 43d3506b-0a97-499a-6a03-08d9efb6ac95
-X-MS-Exchange-CrossTenant-Id: e6a73a5a-614d-4c51-b3e3-53b660a9433a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: 
- TenantId=e6a73a5a-614d-4c51-b3e3-53b660a9433a;Ip=[217.111.95.7];Helo=[mta.arri.de]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	HE1EUR02FT041.eop-EUR02.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB6PR07MB4341
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 14 Feb 2022 12:36:58 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 14 Feb 2022 13:19:46 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95308
+ https://lists.openembedded.org/g/openembedded-devel/message/95309
 
-The `dot` tool requires to be run once after installation in order to
-create its configuration file.
+See: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1003022
 
-The do_prepare_recipe_sysroot task uses do_populate_sysroot in order to
-prepare the recipe-sysroot-native. Package postinstall scripts are not
-executed for -native packages, but files under ${BINDIR}/postinst-* are.
-
-This is quite the same as graphviz-setup.sh does for nativesdk. The
-general idea has been taken from
-OECORE/meta/classes/pixbufcache.bbclass.
-
-Signed-off-by: Christian Eggers <ceggers@arri.de>
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 ---
- meta-oe/recipes-graphics/graphviz/graphviz_2.44.1.bb | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ .../websocketpp/websocketpp-0.8.2/1024.patch  | 506 ++++++++++++++++++
+ .../websocketpp/websocketpp_0.8.2.bb          |   1 +
+ 2 files changed, 507 insertions(+)
+ create mode 100644 meta-oe/recipes-support/websocketpp/websocketpp-0.8.2/1024.patch
 
-diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_2.44.1.bb b/meta-oe=
-/recipes-graphics/graphviz/graphviz_2.44.1.bb
-index 7d2515e07549..203e0206fbfe 100644
---- a/meta-oe/recipes-graphics/graphviz/graphviz_2.44.1.bb
-+++ b/meta-oe/recipes-graphics/graphviz/graphviz_2.44.1.bb
-@@ -74,6 +74,17 @@ do_install:append:class-nativesdk() {
- }
- FILES:${PN}:class-nativesdk +=3D "${SDKPATHNATIVE}"
-=20
-+# create /usr/lib/graphviz/config6
-+graphviz_sstate_postinst() {
-+    mkdir -p ${SYSROOT_DESTDIR}${bindir}
-+    dest=3D${SYSROOT_DESTDIR}${bindir}/postinst-${PN}
-+    echo '#!/bin/sh' > $dest
-+    echo '' >> $dest
-+    echo 'dot -c' >> $dest
-+    chmod 0755 $dest
-+}
-+SYSROOT_PREPROCESS_FUNCS:append:class-native =3D " graphviz_sstate_postins=
-t"
+diff --git a/meta-oe/recipes-support/websocketpp/websocketpp-0.8.2/1024.patch b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.2/1024.patch
+new file mode 100644
+index 000000000..7506d8bb2
+--- /dev/null
++++ b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.2/1024.patch
+@@ -0,0 +1,506 @@
++From 05d1189ffce562560da90056d96fe2084d84654a Mon Sep 17 00:00:00 2001
++From: "Laszlo Boszormenyi (GCS)" <gcs@debian.org>
++Date: Mon, 14 Feb 2022 14:13:13 +0100
++Subject: [PATCH] SCons 4.2.0 no longer has env_cpp11.has_key() Check env_cpp11
++ as an array.
 +
- PACKAGES =3D+ "${PN}-python ${PN}-perl ${PN}-demo"
-=20
- FILES:${PN}-python +=3D "${libdir}/python*/site-packages/ ${libdir}/graphv=
-iz/python/"
---=20
-2.34.1
++This fixes https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1003022
++---
++ examples/broadcast_server/SConscript    | 2 +-
++ examples/debug_client/SConscript        | 2 +-
++ examples/debug_server/SConscript        | 2 +-
++ examples/dev/SConscript                 | 2 +-
++ examples/echo_client/SConscript         | 2 +-
++ examples/echo_server/SConscript         | 2 +-
++ examples/echo_server_both/SConscript    | 2 +-
++ examples/echo_server_tls/SConscript     | 2 +-
++ examples/external_io_service/SConscript | 2 +-
++ examples/iostream_server/SConscript     | 2 +-
++ examples/print_client/SConscript        | 2 +-
++ examples/print_client_tls/SConscript    | 2 +-
++ examples/print_server/SConscript        | 2 +-
++ examples/scratch_client/SConscript      | 2 +-
++ examples/scratch_server/SConscript      | 2 +-
++ examples/sip_client/SConscript          | 2 +-
++ examples/subprotocol_server/SConscript  | 2 +-
++ examples/telemetry_client/SConscript    | 2 +-
++ examples/telemetry_server/SConscript    | 2 +-
++ examples/testee_client/SConscript       | 2 +-
++ examples/testee_server/SConscript       | 2 +-
++ examples/utility_client/SConscript      | 4 ++--
++ test/connection/SConscript              | 2 +-
++ test/endpoint/SConscript                | 2 +-
++ test/extension/SConscript               | 2 +-
++ test/http/SConscript                    | 2 +-
++ test/logger/SConscript                  | 2 +-
++ test/message_buffer/SConscript          | 2 +-
++ test/processors/SConscript              | 2 +-
++ test/random/SConscript                  | 2 +-
++ test/roles/SConscript                   | 2 +-
++ test/transport/SConscript               | 2 +-
++ test/transport/asio/SConscript          | 2 +-
++ test/transport/iostream/SConscript      | 2 +-
++ test/utility/SConscript                 | 2 +-
++ 35 files changed, 36 insertions(+), 36 deletions(-)
++
++diff --git a/examples/broadcast_server/SConscript b/examples/broadcast_server/SConscript
++index 5786f570d..06c55c147 100644
++--- a/examples/broadcast_server/SConscript
+++++ b/examples/broadcast_server/SConscript
++@@ -13,7 +13,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    prgs += env_cpp11.Program('broadcast_server', ["broadcast_server.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/debug_client/SConscript b/examples/debug_client/SConscript
++index 781db8371..b92b14653 100644
++--- a/examples/debug_client/SConscript
+++++ b/examples/debug_client/SConscript
++@@ -14,7 +14,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs] + [tls_libs]
++    prgs += env_cpp11.Program('debug_client', ["debug_client.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/debug_server/SConscript b/examples/debug_server/SConscript
++index 4d02261c6..7e24b07c8 100644
++--- a/examples/debug_server/SConscript
+++++ b/examples/debug_server/SConscript
++@@ -13,7 +13,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    prgs += env_cpp11.Program('debug_server', ["debug_server.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/dev/SConscript b/examples/dev/SConscript
++index 34ddac2d5..31062fee9 100644
++--- a/examples/dev/SConscript
+++++ b/examples/dev/SConscript
++@@ -11,7 +11,7 @@ env_cpp11 = env_cpp11.Clone ()
++ 
++ prgs = []
++ 
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    BOOST_LIBS_CPP11 = boostlibs(['unit_test_framework','system','timer','chrono'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    prgs += env_cpp11.Program('main', ["main.cpp"], LIBS = BOOST_LIBS_CPP11)
++ 
++diff --git a/examples/echo_client/SConscript b/examples/echo_client/SConscript
++index 0e4110822..2adf1166d 100644
++--- a/examples/echo_client/SConscript
+++++ b/examples/echo_client/SConscript
++@@ -13,7 +13,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs] + ['z']
++    prgs += env_cpp11.Program('echo_client', ["echo_client.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/echo_server/SConscript b/examples/echo_server/SConscript
++index a2978852e..a48724155 100644
++--- a/examples/echo_server/SConscript
+++++ b/examples/echo_server/SConscript
++@@ -13,7 +13,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    prgs += env_cpp11.Program('echo_server', ["echo_server.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/echo_server_both/SConscript b/examples/echo_server_both/SConscript
++index d1ecf202f..32f4c8c55 100644
++--- a/examples/echo_server_both/SConscript
+++++ b/examples/echo_server_both/SConscript
++@@ -14,7 +14,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs] + [tls_libs]
++    prgs += env_cpp11.Program('echo_server_both', ["echo_server_both.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/echo_server_tls/SConscript b/examples/echo_server_tls/SConscript
++index e24cc4ce8..688bf7c14 100644
++--- a/examples/echo_server_tls/SConscript
+++++ b/examples/echo_server_tls/SConscript
++@@ -14,7 +14,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs] + [tls_libs]
++    prgs += env_cpp11.Program('echo_server_tls', ["echo_server_tls.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/external_io_service/SConscript b/examples/external_io_service/SConscript
++index beb7c1c42..0abf3e175 100644
++--- a/examples/external_io_service/SConscript
+++++ b/examples/external_io_service/SConscript
++@@ -13,7 +13,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    prgs += env_cpp11.Program('external_io_service', ["external_io_service.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/iostream_server/SConscript b/examples/iostream_server/SConscript
++index dc90834cf..304142082 100644
++--- a/examples/iostream_server/SConscript
+++++ b/examples/iostream_server/SConscript
++@@ -13,7 +13,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    prgs += env_cpp11.Program('iostream_server', ["iostream_server.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/print_client/SConscript b/examples/print_client/SConscript
++index 8da4ce5b2..79fdea0fd 100644
++--- a/examples/print_client/SConscript
+++++ b/examples/print_client/SConscript
++@@ -13,7 +13,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    prgs += env_cpp11.Program('print_client', ["print_client.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/print_client_tls/SConscript b/examples/print_client_tls/SConscript
++index 01b011473..e57b9d691 100644
++--- a/examples/print_client_tls/SConscript
+++++ b/examples/print_client_tls/SConscript
++@@ -14,7 +14,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs] + [tls_libs]
++    prgs += env_cpp11.Program('print_client_tls', ["print_client_tls.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/print_server/SConscript b/examples/print_server/SConscript
++index 4f0e492be..454dcf01b 100644
++--- a/examples/print_server/SConscript
+++++ b/examples/print_server/SConscript
++@@ -13,7 +13,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    prgs += env_cpp11.Program('print_server', ["print_server.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/scratch_client/SConscript b/examples/scratch_client/SConscript
++index 6e7b2ef07..4be98f437 100644
++--- a/examples/scratch_client/SConscript
+++++ b/examples/scratch_client/SConscript
++@@ -14,7 +14,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs] + [tls_libs]
++    prgs += env_cpp11.Program('scratch_client', ["scratch_client.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/scratch_server/SConscript b/examples/scratch_server/SConscript
++index bf90f7433..cc495ba5c 100644
++--- a/examples/scratch_server/SConscript
+++++ b/examples/scratch_server/SConscript
++@@ -14,7 +14,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs] + [tls_libs] + ['z']
++    prgs += env_cpp11.Program('scratch_server', ["scratch_server.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/sip_client/SConscript b/examples/sip_client/SConscript
++index fafe7b4ff..e2afefe73 100644
++--- a/examples/sip_client/SConscript
+++++ b/examples/sip_client/SConscript
++@@ -13,7 +13,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    prgs += env_cpp11.Program('sip_client', ["sip_client.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/subprotocol_server/SConscript b/examples/subprotocol_server/SConscript
++index e97535ca5..299af43c5 100644
++--- a/examples/subprotocol_server/SConscript
+++++ b/examples/subprotocol_server/SConscript
++@@ -13,7 +13,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    prgs += env_cpp11.Program('subprotocol_server', ["subprotocol_server.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/telemetry_client/SConscript b/examples/telemetry_client/SConscript
++index 62396a5e3..ac0e6daba 100644
++--- a/examples/telemetry_client/SConscript
+++++ b/examples/telemetry_client/SConscript
++@@ -13,7 +13,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    prgs += env_cpp11.Program('telemetry_client', ["telemetry_client.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/telemetry_server/SConscript b/examples/telemetry_server/SConscript
++index 1b8ff2295..c620f38a4 100644
++--- a/examples/telemetry_server/SConscript
+++++ b/examples/telemetry_server/SConscript
++@@ -13,7 +13,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    prgs += env_cpp11.Program('telemetry_server', ["telemetry_server.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/testee_client/SConscript b/examples/testee_client/SConscript
++index 64f0ef1f3..6154bb966 100644
++--- a/examples/testee_client/SConscript
+++++ b/examples/testee_client/SConscript
++@@ -13,7 +13,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs] + ['z']
++    prgs += env_cpp11.Program('testee_client', ["testee_client.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/testee_server/SConscript b/examples/testee_server/SConscript
++index 3c75f4ff2..ca8ffb7d7 100644
++--- a/examples/testee_server/SConscript
+++++ b/examples/testee_server/SConscript
++@@ -13,7 +13,7 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs] + ['z']
++    prgs += env_cpp11.Program('testee_server', ["testee_server.cpp"], LIBS = ALL_LIBS)
++ else:
++diff --git a/examples/utility_client/SConscript b/examples/utility_client/SConscript
++index 6e6cd8c9d..f6d673a43 100644
++--- a/examples/utility_client/SConscript
+++++ b/examples/utility_client/SConscript
++@@ -13,11 +13,11 @@ env_cpp11 = env_cpp11.Clone ()
++ prgs = []
++ 
++ # if a C++11 environment is available build using that, otherwise use boost
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    ALL_LIBS = boostlibs(['system'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    prgs += env_cpp11.Program('utility_client', ["utility_client.cpp"], LIBS = ALL_LIBS)
++ else:
++    ALL_LIBS = boostlibs(['system','random'],env) + [platform_libs] + [polyfill_libs]
++    prgs += env.Program('utility_client', ["utility_client.cpp"], LIBS = ALL_LIBS)
++ 
++-Return('prgs')
++\ No newline at end of file
+++Return('prgs')
++diff --git a/test/connection/SConscript b/test/connection/SConscript
++index 4ed7a4e69..b79876bf1 100644
++--- a/test/connection/SConscript
+++++ b/test/connection/SConscript
++@@ -16,7 +16,7 @@ objs = env.Object('connection_boost.o', ["connection.cpp"], LIBS = BOOST_LIBS)
++ objs = env.Object('connection_tu2_boost.o', ["connection_tu2.cpp"], LIBS = BOOST_LIBS)
++ prgs = env.Program('test_connection_boost', ["connection_boost.o","connection_tu2_boost.o"], LIBS = BOOST_LIBS)
++ 
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    BOOST_LIBS_CPP11 = boostlibs(['unit_test_framework','system'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    objs += env_cpp11.Object('connection_stl.o', ["connection.cpp"], LIBS = BOOST_LIBS_CPP11)
++    objs += env_cpp11.Object('connection_tu2_stl.o', ["connection_tu2.cpp"], LIBS = BOOST_LIBS_CPP11)
++diff --git a/test/endpoint/SConscript b/test/endpoint/SConscript
++index 5cb3ede91..74912865e 100644
++--- a/test/endpoint/SConscript
+++++ b/test/endpoint/SConscript
++@@ -16,7 +16,7 @@ BOOST_LIBS = boostlibs(['unit_test_framework','system'],env) + [platform_libs] +
++ objs = env.Object('endpoint_boost.o', ["endpoint.cpp"], LIBS = BOOST_LIBS)
++ prgs = env.Program('test_endpoint_boost', ["endpoint_boost.o"], LIBS = BOOST_LIBS)
++ 
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    BOOST_LIBS_CPP11 = boostlibs(['unit_test_framework','system'],env_cpp11) + [platform_libs] + [polyfill_libs] + [tls_libs]
++    objs += env_cpp11.Object('endpoint_stl.o', ["endpoint.cpp"], LIBS = BOOST_LIBS_CPP11)
++    prgs += env_cpp11.Program('test_endpoint_stl', ["endpoint_stl.o"], LIBS = BOOST_LIBS_CPP11)
++diff --git a/test/extension/SConscript b/test/extension/SConscript
++index d8b425fda..0cb813856 100644
++--- a/test/extension/SConscript
+++++ b/test/extension/SConscript
++@@ -17,7 +17,7 @@ objs += env.Object('permessage_deflate_boost.o', ["permessage_deflate.cpp"], LIB
++ prgs = env.Program('test_extension_boost', ["extension_boost.o"], LIBS = BOOST_LIBS)
++ prgs += env.Program('test_permessage_deflate_boost', ["permessage_deflate_boost.o"], LIBS = BOOST_LIBS)
++ 
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    BOOST_LIBS_CPP11 = boostlibs(['unit_test_framework'],env_cpp11) + [platform_libs] + [polyfill_libs] + ['z']
++    objs += env_cpp11.Object('extension_stl.o', ["extension.cpp"], LIBS = BOOST_LIBS_CPP11)
++    objs += env_cpp11.Object('permessage_deflate_stl.o', ["permessage_deflate.cpp"], LIBS = BOOST_LIBS_CPP11)
++diff --git a/test/http/SConscript b/test/http/SConscript
++index 0a24a8774..422998e24 100644
++--- a/test/http/SConscript
+++++ b/test/http/SConscript
++@@ -15,7 +15,7 @@ BOOST_LIBS = boostlibs(['unit_test_framework'],env) + [platform_libs]
++ objs = env.Object('parser_boost.o', ["parser.cpp"], LIBS = BOOST_LIBS)
++ prgs = env.Program('test_http_boost', ["parser_boost.o"], LIBS = BOOST_LIBS)
++ 
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    BOOST_LIBS_CPP11 = boostlibs(['unit_test_framework'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    objs += env_cpp11.Object('parser_stl.o', ["parser.cpp"], LIBS = BOOST_LIBS_CPP11)
++    prgs += env_cpp11.Program('test_http_stl', ["parser_stl.o"], LIBS = BOOST_LIBS_CPP11)
++diff --git a/test/logger/SConscript b/test/logger/SConscript
++index 81d607601..0ccbbc5df 100644
++--- a/test/logger/SConscript
+++++ b/test/logger/SConscript
++@@ -15,7 +15,7 @@ BOOST_LIBS = boostlibs(['unit_test_framework','system'],env) + [platform_libs]
++ objs = env.Object('logger_basic_boost.o', ["basic.cpp"], LIBS = BOOST_LIBS)
++ prgs = env.Program('logger_basic_boost', ["logger_basic_boost.o"], LIBS = BOOST_LIBS)
++ 
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    BOOST_LIBS_CPP11 = boostlibs(['unit_test_framework','system'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    objs += env_cpp11.Object('logger_basic_stl.o', ["basic.cpp"], LIBS = BOOST_LIBS_CPP11)
++    prgs += env_cpp11.Program('logger_basic_stl', ["logger_basic_stl.o"], LIBS = BOOST_LIBS_CPP11)
++diff --git a/test/message_buffer/SConscript b/test/message_buffer/SConscript
++index 2ef6d71f3..89785cb3e 100644
++--- a/test/message_buffer/SConscript
+++++ b/test/message_buffer/SConscript
++@@ -17,7 +17,7 @@ objs += env.Object('alloc_boost.o', ["alloc.cpp"], LIBS = BOOST_LIBS)
++ prgs = env.Program('test_message_boost', ["message_boost.o"], LIBS = BOOST_LIBS)
++ prgs += env.Program('test_alloc_boost', ["alloc_boost.o"], LIBS = BOOST_LIBS)
++ 
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    BOOST_LIBS_CPP11 = boostlibs(['unit_test_framework'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    objs += env_cpp11.Object('message_stl.o', ["message.cpp"], LIBS = BOOST_LIBS_CPP11)
++    objs += env_cpp11.Object('alloc_stl.o', ["alloc.cpp"], LIBS = BOOST_LIBS_CPP11)
++diff --git a/test/processors/SConscript b/test/processors/SConscript
++index 406a7edc9..1b40d0b1d 100644
++--- a/test/processors/SConscript
+++++ b/test/processors/SConscript
++@@ -26,7 +26,7 @@ prgs += env.Program('test_hybi07_boost', ["test_hybi07_boost.o"], LIBS = BOOST_L
++ prgs += env.Program('test_hybi00_boost', ["test_hybi00_boost.o"], LIBS = BOOST_LIBS)
++ prgs += env.Program('test_extension_permessage_compress_boost', ["test_extension_permessage_compress_boost.o"], LIBS = BOOST_LIBS + ['z'])
++ 
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    BOOST_LIBS_CPP11 = boostlibs(['unit_test_framework'],env_cpp11) + [platform_libs] + [polyfill_libs] + ['z']
++    # no C++11 features are used in processor so there are no C++11 versions of
++    # these tests.
++diff --git a/test/random/SConscript b/test/random/SConscript
++index 3cadc9e97..4a11b0ce5 100644
++--- a/test/random/SConscript
+++++ b/test/random/SConscript
++@@ -17,7 +17,7 @@ objs += env.Object('random_device_boost.o', ["random_device.cpp"], LIBS = BOOST_
++ prgs = env.Program('test_random_none_boost', ["random_none_boost.o"], LIBS = BOOST_LIBS)
++ prgs += env.Program('test_random_device_boost', ["random_device_boost.o"], LIBS = BOOST_LIBS)
++ 
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    BOOST_LIBS_CPP11 = boostlibs(['unit_test_framework'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    objs += env_cpp11.Object('random_none_stl.o', ["none.cpp"], LIBS = BOOST_LIBS_CPP11)
++    objs += env_cpp11.Object('random_device_stl.o', ["random_device.cpp"], LIBS = BOOST_LIBS_CPP11)
++diff --git a/test/roles/SConscript b/test/roles/SConscript
++index e86107ece..17b3be105 100644
++--- a/test/roles/SConscript
+++++ b/test/roles/SConscript
++@@ -17,7 +17,7 @@ objs += env.Object('server_boost.o', ["server.cpp"], LIBS = BOOST_LIBS)
++ prgs = env.Program('test_client_boost', ["client_boost.o"], LIBS = BOOST_LIBS)
++ prgs += env.Program('test_server_boost', ["server_boost.o"], LIBS = BOOST_LIBS)
++ 
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    BOOST_LIBS_CPP11 = boostlibs(['unit_test_framework'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    objs += env_cpp11.Object('client_stl.o', ["client.cpp"], LIBS = BOOST_LIBS_CPP11)
++    objs += env_cpp11.Object('server_stl.o', ["server.cpp"], LIBS = BOOST_LIBS_CPP11)
++diff --git a/test/transport/SConscript b/test/transport/SConscript
++index 71b31b6c5..aa9b719ec 100644
++--- a/test/transport/SConscript
+++++ b/test/transport/SConscript
++@@ -16,7 +16,7 @@ BOOST_LIBS = boostlibs(['unit_test_framework','system','thread','random','chrono
++ objs = env.Object('boost_integration.o', ["integration.cpp"], LIBS = BOOST_LIBS)
++ prgs = env.Program('test_boost_integration', ["boost_integration.o"], LIBS = BOOST_LIBS)
++ 
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    BOOST_LIBS_CPP11 = boostlibs(['unit_test_framework','system'],env_cpp11) + [platform_libs] + [polyfill_libs] + [tls_libs]
++    objs += env_cpp11.Object('stl_integration.o', ["integration.cpp"], LIBS = BOOST_LIBS_CPP11)
++    prgs += env_cpp11.Program('test_stl_integration', ["stl_integration.o"], LIBS = BOOST_LIBS_CPP11)
++diff --git a/test/transport/asio/SConscript b/test/transport/asio/SConscript
++index f8185e57e..518d362b1 100644
++--- a/test/transport/asio/SConscript
+++++ b/test/transport/asio/SConscript
++@@ -20,7 +20,7 @@ prgs = env.Program('test_base_boost', ["base_boost.o"], LIBS = BOOST_LIBS)
++ prgs += env.Program('test_timers_boost', ["timers_boost.o"], LIBS = BOOST_LIBS)
++ prgs += env.Program('test_security_boost', ["security_boost.o"], LIBS = BOOST_LIBS)
++ 
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    BOOST_LIBS_CPP11 = boostlibs(['unit_test_framework','system'],env_cpp11) + [platform_libs] + [polyfill_libs] + [tls_libs]
++    objs += env_cpp11.Object('base_stl.o', ["base.cpp"], LIBS = BOOST_LIBS_CPP11)
++    objs += env_cpp11.Object('timers_stl.o', ["timers.cpp"], LIBS = BOOST_LIBS_CPP11)
++diff --git a/test/transport/iostream/SConscript b/test/transport/iostream/SConscript
++index 9e74c2f15..dcaf9f2d9 100644
++--- a/test/transport/iostream/SConscript
+++++ b/test/transport/iostream/SConscript
++@@ -19,7 +19,7 @@ prgs = env.Program('test_iostream_base_boost', ["iostream_base_boost.o"], LIBS =
++ prgs += env.Program('test_iostream_connection_boost', ["iostream_connection_boost.o"], LIBS = BOOST_LIBS)
++ prgs += env.Program('test_iostream_endpoint_boost', ["iostream_endpoint_boost.o"], LIBS = BOOST_LIBS)
++ 
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    BOOST_LIBS_CPP11 = boostlibs(['unit_test_framework'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    objs += env_cpp11.Object('iostream_base_stl.o', ["base.cpp"], LIBS = BOOST_LIBS_CPP11)
++    objs += env_cpp11.Object('iostream_connection_stl.o', ["connection.cpp"], LIBS = BOOST_LIBS_CPP11)
++diff --git a/test/utility/SConscript b/test/utility/SConscript
++index 80e9ef6c8..6f19aa52a 100644
++--- a/test/utility/SConscript
+++++ b/test/utility/SConscript
++@@ -24,7 +24,7 @@ prgs += env.Program('test_close_boost', ["close_boost.o"], LIBS = BOOST_LIBS)
++ prgs += env.Program('test_sha1_boost', ["sha1_boost.o"], LIBS = BOOST_LIBS)
++ prgs += env.Program('test_error_boost', ["error_boost.o"], LIBS = BOOST_LIBS)
++ 
++-if env_cpp11.has_key('WSPP_CPP11_ENABLED'):
+++if 'WSPP_CPP11_ENABLED' in env_cpp11:
++    BOOST_LIBS_CPP11 = boostlibs(['unit_test_framework'],env_cpp11) + [platform_libs] + [polyfill_libs]
++    objs += env_cpp11.Object('utilities_stl.o', ["utilities.cpp"], LIBS = BOOST_LIBS_CPP11)
++    objs += env_cpp11.Object('uri_stl.o', ["uri.cpp"], LIBS = BOOST_LIBS_CPP11)
+diff --git a/meta-oe/recipes-support/websocketpp/websocketpp_0.8.2.bb b/meta-oe/recipes-support/websocketpp/websocketpp_0.8.2.bb
+index a6f2186e4..f437accc5 100644
+--- a/meta-oe/recipes-support/websocketpp/websocketpp_0.8.2.bb
++++ b/meta-oe/recipes-support/websocketpp/websocketpp_0.8.2.bb
+@@ -11,6 +11,7 @@ SRC_URI = "git://github.com/zaphoyd/websocketpp.git;protocol=https;branch=master
+            file://855.patch \
+            file://857.patch \
+            file://0001-Correct-clang-compiler-flags.patch \
++           file://1024.patch \
+           "
+ 
+ EXTRA_OECMAKE = "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', '-DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON', '', d)} "
+-- 
+2.25.1
 
 
