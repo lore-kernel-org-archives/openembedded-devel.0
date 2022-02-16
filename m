@@ -1,91 +1,98 @@
-Return-Path: <denis@denix.org>
+Return-Path: <festevam@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CE07EC433F5
-	for <webhook@archiver.kernel.org>; Wed, 16 Feb 2022 21:06:20 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web08.1321.1645045579792378198
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73BEBC433EF
+	for <webhook@archiver.kernel.org>; Wed, 16 Feb 2022 21:18:57 +0000 (UTC)
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com
+ [209.85.208.53])
+ by mx.groups.io with SMTP id smtpd.web12.1441.1645046336168750435
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Feb 2022 13:06:20 -0800
+ Wed, 16 Feb 2022 13:18:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
- mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id B8E7240C2A;
-	Wed, 16 Feb 2022 21:06:18 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FmVYOipM8Smp; Wed, 16 Feb 2022 21:06:18 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
- [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 9EB8A407E5;
-	Wed, 16 Feb 2022 21:06:17 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id E064617475F; Wed, 16 Feb 2022 16:06:16 -0500 (EST)
-Date: Wed, 16 Feb 2022 16:06:16 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Armin Kuster <akuster808@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [hardknott 6/9] cryptsetup: Add runtime dependency on
- lvm2-udevrules for udev
-Message-ID: <20220216210616.GQ26229@denix.org>
-References: <cover.1631713963.git.akuster808@gmail.com>
- <32f1d758a14bba35d67a75778ae747f1ff5c5482.1631713963.git.akuster808@gmail.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ZGtG5x6i;
+ spf=pass (domain: gmail.com, ip: 209.85.208.53, mailfrom: festevam@gmail.com)
+Received: by mail-ed1-f53.google.com with SMTP id z22so6156835edd.1
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 16 Feb 2022 13:18:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=aZSPCOCQY/YFgwOjbz0qKnY226OcT5MWuudh9bqRnfo=;
+        b=ZGtG5x6ihCi3StT3K99pOyAk0UyDpQxOtC39wMSr/1gohXb/JSBsVa/lVxg5mXPiHp
+         BZuU1ISOnFV1ie1N9rrmZaPTr4CgHZ21xTUKn5JLp8gn7B5RgHgwc9zi2J7vy/O55zw4
+         6wyyRh0XVU1g5qY68I/ITxwf+bVGd/SDblyInEFxBLd679HE+mOQRMD52TjhYwQSofwO
+         bLyhiZx3Q2opvqmz39TL9QUvLhmmyIB3UkhbeGvkskQMZV6bHYVD5TD3+fYRQ7miplkM
+         nfVCA7pAGOU997jYFvCFWZSIzxyH8N1nidcEuWnkZhVp3JwAs4NwfQixJViUbTAsl0SQ
+         Mf/A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=aZSPCOCQY/YFgwOjbz0qKnY226OcT5MWuudh9bqRnfo=;
+        b=azoaXC/1ir21t/YcG7WyMcMfw9OyByvcEDKFpdmpU1iXyNY3et2vPGOyoSBZvF1Lef
+         EbAQ5Lg67IFY23a5Pj7WEZf582d3PDh2ueegmFmotUa7jYVW1NdGPXNwPC6sEDdroWg7
+         hyPTo02PnKP7F6jNyw2UaK3Ob91OhmlcbdRE8lJ93eyCbRFCxjmaS6mPBXWbVsaxsVR7
+         XvGUxs3A/65+fyqKJna1lFaWDJxR4LyVfhJfh0VQwhMGpKuaFZpMfqcrQDG32E9YWer/
+         ns+WLqmrgnTQrIZhNyKon4lC0QhP2GDrj5veFiuSsRW+xDqtVmvvsDDoJlE157eVGhMc
+         U96Q==
+X-Gm-Message-State: AOAM532Mr2pzUC+f0oC5Ekje2so3gC8cxUd8E31RO5KTkMTP73d06Flq
+	vAZxAAFF7B0SBqKw/6wmr//f/LdcJqx571g4n1hoJEBe8H4=
+X-Google-Smtp-Source: 
+ ABdhPJxI8QaGjNm/1rojPvqjkFzNyv4lq8ekBPc2e3CQtksZ4mJ4ZK2Sy43/OCNPbhiUqNsnNZeePLVZv67O/tYo4xQ=
+X-Received: by 2002:a05:6402:1cae:b0:410:d3ae:3c8a with SMTP id
+ cz14-20020a0564021cae00b00410d3ae3c8amr4963949edb.215.1645046334264; Wed, 16
+ Feb 2022 13:18:54 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: 
- <32f1d758a14bba35d67a75778ae747f1ff5c5482.1631713963.git.akuster808@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+References: <20220216171002.2338962-1-festevam@gmail.com>
+In-Reply-To: <20220216171002.2338962-1-festevam@gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 16 Feb 2022 18:18:42 -0300
+Message-ID: 
+ <CAOMZO5A4P5_bS+-mspJHYtCqRY9EzVnDKqDq_FEREA2U7XP-Wg@mail.gmail.com>
+Subject: Re: [PATCH v2] rtc-tools: Update to 2022.02
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Khem Raj <raj.khem@gmail.com>,
+ Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
+	Fabio Estevam <festevam@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Feb 2022 21:06:20 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Feb 2022 21:18:57 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95349
+ https://lists.openembedded.org/g/openembedded-devel/message/95350
 
-Can we also get this backported to Dunfell please?
-Do you want me to submit a separate patch for this to happen?
-Thanks!
+Hi Khem,
 
-
-On Wed, Sep 15, 2021 at 06:55:17AM -0700, Armin Kuster wrote:
-> From: Kristian Klausen <kristian@klausen.dk>
-> 
-> Without the udevrules cryptsetup luksOpen will be hanging with "Udev
-> cookie 0xd4de0f6 (semid 5) waiting for zero".
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> (cherry picked from commit 60b33e376b2331cd20950f0745336397790d2201)
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+On Wed, Feb 16, 2022 at 2:10 PM Fabio Estevam <festevam@gmail.com> wrote:
+>
+> From: Fabio Estevam <festevam@denx.de>
+>
+> The patch that adds the rtc-tools Makefile has been accepted
+> upstream, so update to the latest 2022.02 version and remove the
+> local Makefile patch.
+>
+> Also, rename the recipe to reflect the new version.
+>
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
 > ---
->  meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb
-> index 9e83b90eab..498f333810 100644
-> --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb
-> +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.6.bb
-> @@ -50,7 +50,7 @@ PACKAGECONFIG[veritysetup] = "--enable-veritysetup,--disable-veritysetup"
->  PACKAGECONFIG[cryptsetup-reencrypt] = "--enable-cryptsetup-reencrypt,--disable-cryptsetup-reencrypt"
->  PACKAGECONFIG[integritysetup] = "--enable-integritysetup,--disable-integritysetup"
->  PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux"
-> -PACKAGECONFIG[udev] = "--enable-udev,--disable-udev,,udev"
-> +PACKAGECONFIG[udev] = "--enable-udev,--disable-udev,,udev lvm2-udevrules"
->  PACKAGECONFIG[kernel_crypto] = "--enable-kernel_crypto,--disable-kernel_crypto"
->  # gcrypt-pkbdf2 requries --with-crypto_backend=gcrypt or the flag isn't
->  # recognized.
-> -- 
-> 2.25.1
-> 
+> Changes since v1:
+> - Use the 2022.02 tag (Peter)
+>
+>  .../0001-rtc-tools-Add-a-Makefile.patch       | 39 -------------------
+>  ...tc-tools_1.0.0.bb => rtc-tools_2022.02.bb} |  6 +--
+>  2 files changed, 2 insertions(+), 43 deletions(-)
+>  delete mode 100644 meta-oe/recipes-support/rtc-tools/rtc-tools/0001-rtc-tools-Add-a-Makefile.patch
+>  rename meta-oe/recipes-support/rtc-tools/{rtc-tools_1.0.0.bb => rtc-tools_2022.02.bb} (64%)
 
--- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+I see that the version applied in master-next is more similar to the
+previous version of this patch, ie, without the recipe rename:
+
+https://github.com/openembedded/meta-openembedded/commit/2cbb945d69104ffa51cba655626e66b46ee42380#diff-902da3ea68cbf9d19e75fd71125e1c0d61ee5d611640a7d1e7df36d277312600
+
+Would you like me to send an incremental patch doing the rename?
+
+Please advise.
 
