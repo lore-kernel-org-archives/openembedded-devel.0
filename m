@@ -1,132 +1,137 @@
-Return-Path: <zhengrq.fnst@fujitsu.com>
+Return-Path: <ceggers@arri.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1811AC433F5
-	for <webhook@archiver.kernel.org>; Wed, 16 Feb 2022 07:50:58 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.3])
- by mx.groups.io with SMTP id smtpd.web08.9352.1644997856549959505
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B892C433EF
+	for <webhook@archiver.kernel.org>; Wed, 16 Feb 2022 08:17:25 +0000 (UTC)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.126])
+ by mx.groups.io with SMTP id smtpd.web12.9398.1644999441912151463
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 15 Feb 2022 23:50:57 -0800
+ Wed, 16 Feb 2022 00:17:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=r4WDlTED;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
- mailfrom: zhengrq.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1644997854; i=@fujitsu.com;
-	bh=XwVsW5Dzzz6IHnp9BUCdPRD4waflLrPi2gpsxnZ+v4M=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=r4WDlTEDOZHIRWnngxu5YsZtoC7Mng2nn4oEn3xqEs9UgiQmZryjjZTqivuf0Tbz9
-	 CmrSYcU0r6hq21EF7xbMEX4Y0wNRTgBqHT0MO9edAmSFTyFcjEwPtxfvIdi3gkNhG0
-	 kMzhjhUXDNlxJaIGFYqlIkevVAQ3vaWZPa5TON1ziq/EncVN44Zz+iPWcaQpSIpo8c
-	 liJiCs6qKnL8YdkNCn7+IIV68DiLhSxS874wYaVPCOyyLRiZxxXeNkYlvaTbuLMiTu
-	 ymRfwGpO9hd1WzbLT+K04MoXN5Bha9KOmagDWfNQd8DbeoVluKb+YpG3Py80oJEqW1
-	 iu4gmohDA97Wg==
-Received: from [100.115.37.140] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-a.eu-west-2.aws.ess.symcld.net id BD/FB-22205-EDCAC026;
- Wed, 16 Feb 2022 07:50:54 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrOIsWRWlGSWpSXmKPExsViZ8MxSffeGp4
-  kg9uzOC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1owLcxezFmzmqfj08BhzA+Nfri5GLg4hgSeM
-  EjP/fmCEcC4wSXy4tpgVwtnDKHGifSGQw8nBJqArce7xWnYQW0RAX2Lp7D3MILawgJ3E7vZpY
-  DaLgKrE1h9LWEBsXgEPiZvHPoHVSwgoSEx5+J4ZIi4ocXLmE7AaZgEJiYMvXgDFOYBqFCVmT5
-  eHKK+QeH34EjOErSZx9dwm5gmMfLOQdM9C0r2AkWkVo3VSUWZ6RkluYmaOrqGBga6hoamusYW
-  ukaGRXmKVbqJeaqlueWpxiS6QW16sl1pcrFdcmZuck6KXl1qyiREYfinFald2MO5Z9VPvEKMk
-  B5OSKK/VKp4kIb6k/JTKjMTijPii0pzU4kOMMhwcShK8P0BygkWp6akVaZk5wFiASUtw8CiJ8
-  C5eCZTmLS5IzC3OTIdInWJUlBLnLVsNlBAASWSU5sG1weLvEqOslDAvIwMDgxBPQWpRbmYJqv
-  wrRnEORiVh3k6QKTyZeSVw018BLWYCWqzYyAWyuCQRISXVwDTlle6KK1vsDXbN1tr+WU4i7mN
-  QVvH/xS9MFweY2E0S9DJLfWHIPGlRx/MYC7O5gUJXC6ZvntH/8deafbx37RZv0vnsxDVD6PnN
-  mZav5rotfGPCzepw7NieCu5vrd/85p3a+1r2maH8ieAnQlfbBbe2ePnNZ+hkvfyv1LBLIGbz2
-  V3Vz32n/0/w2v03RCD/orr45/gvjZs3PdPqmHtZSnFWykZlv18hPv9yct38TCdnuhtoO6Va+N
-  VUXv299lzQqq2NgZZtefl9wsws08tMSl3bjhWdlDxzNj4711cibcOct8ETVhzz2t4SlrgqI0S
-  /4f4tiWVWM74tP37wyJ7iv4c3lgtmWbdbb15vcj/dIEaJpTgj0VCLuag4EQBCbc1OOgMAAA==
-X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-15.tower-565.messagelabs.com!1644997853!46600!1
-X-Originating-IP: [62.60.8.146]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.7; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 19260 invoked from network); 16 Feb 2022 07:50:54 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-15.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 16 Feb 2022 07:50:54 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id C9125100450
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Feb 2022 07:50:53 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id BCDA810033A
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Feb 2022 07:50:53 +0000 (GMT)
-Received: from localhost.localdomain (10.167.225.35) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Wed, 16 Feb 2022 07:50:33 +0000
-From: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+ dkim=fail reason="body hash did not verify"
+ header.i=@arrigroup.onmicrosoft.com
+ header.s=selector1-arrigroup-onmicrosoft-com header.b=eP9vtnrN;
+ spf=pass (domain: arri.de, ip: 40.107.21.126, mailfrom: ceggers@arri.de)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=OX+avDs4uhtYff4uCpRJVzPGP/h6vGaCTywe/nlQWHjoNMg/nhKqTKeRN/IqkxleGm8Ag5lf5RHPa3qKOpuAMRNpbZzwd7+asCrcLH6Nc23RvGgCyD4irUiNDhrk1Lt06BoAQA+kzOOGdV7SHSJQ0S4iw2xuTHmBHaUa7TvF2WBm0b7Nll2BBJvxeMNLmWybrarlf1m9zJPnTnGwT3tFZCeEKSueD8qJqJpHN9+kIDhpRMIZpbv0s+1XtYgtP0j/KlRDTwR/2YgyotJ9DoUL6dlQg4roPY7lDX3EUDzuhPJT6B3npUFMuRqtq5Db4q2V6hUkTn+iIodli/Yr0kRDMg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=8/EH2UDjDLlSR7upJQwOKU7Q5hBjRRipltGpIT1Um4M=;
+ b=DFN7Yj/k22x5UQSZEtCHo4h7B/iWPFs9xohRsGQ5tDABsYHjBmAMFrUtYwe9JRIKUJFIU/QHcKPPS5pEqSTOctllbhUiKAZ5imKaA4alFGJYzZcposvS0l/GC+mhoPHqck3IXSz7NWqgFjlpK0Yacqtl0ftZb4rTgh57PP2VL58AOG6s5pQZITy0iCq2yEn83BrGosXrLmlT1ueuIu3TOp0LwDUZ2fYoigFDMc/ZFzh3dwQR5j7QxyzG7rqYtyl7S8aOvNyZviKYhgeR7BaYCuGZiape7hY+X8iwFWOj8ti9FobGuIq3OeDlz8c/xEaQKvZqNX0vxfenJ+guFg8XRw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=temperror (sender ip
+ is 217.111.95.7) smtp.rcpttodomain=gmail.com smtp.mailfrom=arri.de;
+ dmarc=none action=none header.from=arri.de; dkim=none (message not signed);
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=arrigroup.onmicrosoft.com; s=selector1-arrigroup-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8/EH2UDjDLlSR7upJQwOKU7Q5hBjRRipltGpIT1Um4M=;
+ b=eP9vtnrNK57nzdcS2mF30e7w6sFtPfRH3dQ2ymgo+2FMCRmKl6QGU31YcVpk/eHsPClilMd2WVh3DxRkxEZAvos6Z0VPhYzJXxGmYPNi+8BBovwRzcOiYJz/slEeivqYNDD92D8B0+LVodx476fcqhEbodbO3oCHtftYfLKmCJo=
+Received: from SV0P279CA0063.NORP279.PROD.OUTLOOK.COM (2603:10a6:f10:14::14)
+ by AM0PR07MB4403.eurprd07.prod.outlook.com (2603:10a6:208:b5::31) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4995.8; Wed, 16 Feb
+ 2022 08:17:17 +0000
+Received: from HE1EUR02FT061.eop-EUR02.prod.protection.outlook.com
+ (2603:10a6:f10:14:cafe::d1) by SV0P279CA0063.outlook.office365.com
+ (2603:10a6:f10:14::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4995.15 via Frontend
+ Transport; Wed, 16 Feb 2022 08:17:17 +0000
+X-MS-Exchange-Authentication-Results: spf=temperror (sender IP is
+ 217.111.95.7) smtp.mailfrom=arri.de; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arri.de;
+Received-SPF: TempError (protection.outlook.com: error in processing during
+ lookup of arri.de: DNS Timeout)
+Received: from mta.arri.de (217.111.95.7) by
+ HE1EUR02FT061.mail.protection.outlook.com (10.152.11.17) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.4975.11 via Frontend Transport; Wed, 16 Feb 2022 08:17:16 +0000
+Received: from MucEx01.arri.de (10.10.18.25) by MucEx01.arri.de (10.10.18.25)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.7; Wed, 16 Feb
+ 2022 09:17:16 +0100
+Received: from CASHUB3.arri.de (192.168.100.104) by MucEx01.arri.de
+ (10.10.18.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.7 via Frontend
+ Transport; Wed, 16 Feb 2022 09:17:16 +0100
+Received: from localhost.de (192.168.54.102) by mta.arri.de (192.168.100.104)
+ with Microsoft SMTP Server (TLS) id 14.3.498.0; Wed, 16 Feb 2022 09:17:15
+ +0100
+From: Christian Eggers <ceggers@arri.de>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe][PATCH] libjs-jquery: Upgrade to 3.3.1.
-Date: Wed, 16 Feb 2022 15:50:17 +0800
-Message-ID: <1644997817-76002-1-git-send-email-zhengrq.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+CC: Christian Eggers <ceggers@arri.de>, Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][hardknott][PATCH] ebtables: remove perl from
+ RDEPENDS
+Date: Wed, 16 Feb 2022 09:17:07 +0100
+Message-ID: <20220216081707.16184-1-ceggers@arri.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+X-Originating-IP: [192.168.54.102]
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 7cb48aba-170f-4f54-b73c-08d9f124be8d
+X-MS-TrafficTypeDiagnostic: AM0PR07MB4403:EE_
+X-Microsoft-Antispam-PRVS: 
+	<AM0PR07MB440374062743F0B7AD046A2CBF359@AM0PR07MB4403.eurprd07.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:478;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	Nkil3GGzythDQe+b4dhLdplL2mw6gA6sqGigFpX6IR9P9f/JNu3x3nA4/nL7apKmZIvJlRABeWepRVB6Zbdgf6a5Z47NOt44MOwCr0FLbw3FXruRpPq9RpR6UGng3/Pmg+LYpCxmc/J3BIm3T06t8TxlUvwppq7L4VfqvaHKZ0MdIFYip0iSFKJ5zgOCGnuoFUzTyMbUuEWF5Zhw+Yb6XeOOAo+48xh8dRChAZ3W7JAJRM1zruSaCNRntKUVjUVri3qKiyL3Tdy9YYoUD1xB/GKbd9FFlA2fZiVF7QKcCr+nd4S0fs8Wwe6m37QG1apP/uC9x+t8kV7gWEE7JROGbEje1MGxAOFTsIxprKGy8wvFmlxCU+3Sz3JFn/6s1w2bbgyP+8P80/rc6hhQJ4s7b7ZajHdBe2NLb7q9grj9ShGvu6mcvEAQjX8qlx5lPGSp4tXH5Q4RQfgT1P7342BbykqHYZmbl57NTZQZjHrM0ReVdI2Hg8fgIdE7yNlmcbEsqTmXeCGN8i+ZPXS3wJX/+bZg3AXP9cGrjPJ4aPrhaC8DqB5yaP4ln9iN9vh8ha4hiGI3Pz1HVTiEuzAoLKILcCmqXEVl8v597b+9vo6oc4o5sN6LuHt3R9FcN98k3XgvOo027/nRM28FLr39I4L7bY021ChQ4fc/c6bvSAsw5I3gIbwQ7eZo7HHiu9Po9ejdVK8Gfy6UaN7vN/G2XhgCFA==
+X-Forefront-Antispam-Report: 
+	CIP:217.111.95.7;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mta.arri.de;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230001)(4636009)(40470700004)(36840700001)(46966006)(26005)(83380400001)(508600001)(86362001)(2616005)(63350400001)(36756003)(40460700003)(1076003)(82310400004)(54906003)(316002)(186003)(6916009)(426003)(70586007)(336012)(70206006)(4326008)(81166007)(4744005)(16526019)(5660300002)(6666004)(47076005)(8936002)(2906002)(36860700001)(8676002)(356005)(36900700001);DIR:OUT;SFP:1102;
+X-OriginatorOrg: arri.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Feb 2022 08:17:16.6927
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ 7cb48aba-170f-4f54-b73c-08d9f124be8d
+X-MS-Exchange-CrossTenant-Id: e6a73a5a-614d-4c51-b3e3-53b660a9433a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: 
+ TenantId=e6a73a5a-614d-4c51-b3e3-53b660a9433a;Ip=[217.111.95.7];Helo=[mta.arri.de]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	HE1EUR02FT061.eop-EUR02.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR07MB4403
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Feb 2022 07:50:58 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Feb 2022 08:17:25 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95331
+ https://lists.openembedded.org/g/openembedded-devel/message/95332
 
-libjs-jquery has been removed a few days ago because the version is too
-old.
+The upstream ebtables-legacy-save perl script is replaced by a bash
+implementation (taken from Fedora). So there's nothing left which
+RDEPENDs on perl.
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+Signed-off-by: Christian Eggers <ceggers@arri.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../libjs/libjs-jquery_3.3.1.bb               | 27 +++++++++++++++++++
- 1 file changed, 27 insertions(+)
- create mode 100644 meta-oe/recipes-support/libjs/libjs-jquery_3.3.1.bb
+ meta-networking/recipes-filter/ebtables/ebtables_2.0.11.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/libjs/libjs-jquery_3.3.1.bb b/meta-oe/recipes-support/libjs/libjs-jquery_3.3.1.bb
-new file mode 100644
-index 0000000000..1a5c35a4d2
---- /dev/null
-+++ b/meta-oe/recipes-support/libjs/libjs-jquery_3.3.1.bb
-@@ -0,0 +1,27 @@
-+SUMMARY = "JavaScript library for dynamic web applications"
-+HOMEPAGE = "https://jquery.com/"
-+LICENSE = "GPL-2 | MIT"
-+LIC_FILES_CHKSUM = "file://usr/share/doc/libjs-jquery/copyright;md5=04bfd6e5b918af29f2f79ce44527da62"
-+
-+SRC_URI = "http://kr.archive.ubuntu.com/ubuntu/pool/main/j/jquery/${BPN}_${PV}~dfsg-3_all.deb"
-+
-+SRC_URI[sha256sum] = "e04d192c2356e9d4c2b2c7d83fde9408713212b53c4d106e5b9e46c1a56da33b"
-+
-+JQUERYDIR = "${datadir}/javascript/jquery"
-+JQUERYDOCDIR = "${docdir}/libjs-jquery"
-+
-+S = "${WORKDIR}"
-+
-+do_install() {
-+    install -d -m 0755 ${D}${JQUERYDIR}
-+    install -m 0644 ${S}${JQUERYDIR}/jquery.js ${D}${JQUERYDIR}/
-+    install -m 0644 ${S}${JQUERYDIR}/jquery.min.js ${D}${JQUERYDIR}/
-+
-+    ln -sf jquery.min.js ${D}${JQUERYDIR}/jquery.lite.js
-+    ln -sf jquery.min.js ${D}${JQUERYDIR}/jquery.pack.js
-+
-+    install -d -m 0644 ${D}${JQUERYDOCDIR}
-+    install -m 0644 ${S}${JQUERYDOCDIR}/copyright ${D}${JQUERYDOCDIR}/
-+}
-+
-+FILES:${PN} = "/usr/share/javascript/jquery"
--- 
-2.25.1
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.11.bb b/m=
+eta-networking/recipes-filter/ebtables/ebtables_2.0.11.bb
+index bc33c18c0b67..7b8027259f00 100644
+--- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.11.bb
++++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.11.bb
+@@ -6,7 +6,7 @@ LICENSE =3D "GPLv2"
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D53b4a999993871a28ab1488fdbd2e73=
+e"
+ SECTION =3D "net"
+=20
+-RDEPENDS_${PN} +=3D "bash perl"
++RDEPENDS_${PN} +=3D "bash"
+=20
+ RRECOMMENDS_${PN} +=3D "kernel-module-ebtables \
+     "
+--=20
+2.34.1
 
 
