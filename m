@@ -1,199 +1,201 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <peron.clem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A477C433FE
-	for <webhook@archiver.kernel.org>; Thu, 17 Feb 2022 08:17:27 +0000 (UTC)
-Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
- by mx.groups.io with SMTP id smtpd.web08.5097.1645085846522811892
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F0C31C433FE
+	for <webhook@archiver.kernel.org>; Thu, 17 Feb 2022 13:13:23 +0000 (UTC)
+Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com
+ [209.85.210.53])
+ by mx.groups.io with SMTP id smtpd.web09.6987.1645103603166762033
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Feb 2022 00:17:26 -0800
+ Thu, 17 Feb 2022 05:13:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.19,
- mailfrom: f_l_k@t-online.de)
-Received: from fwd87.dcpf.telekom.de (fwd87.aul.t-online.de [10.223.144.113])
-	by mailout06.t-online.de (Postfix) with SMTP id AA72260DE
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Feb 2022 09:17:24 +0100 (CET)
-Received: from [192.168.178.83] ([79.219.224.19]) by fwd87.t-online.de
-	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
-	esmtp id 1nKbyd-0ocNBB0; Thu, 17 Feb 2022 09:17:23 +0100
-Message-ID: <d4f68a6f-547b-dcc2-683f-bb0a4f4195fe@t-online.de>
-Date: Thu, 17 Feb 2022 09:17:23 +0100
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=c41LeqwR;
+ spf=pass (domain: gmail.com, ip: 209.85.210.53,
+ mailfrom: peron.clem@gmail.com)
+Received: by mail-ot1-f53.google.com with SMTP id
+ c16-20020a9d6850000000b005ad05c1c8d7so2499931oto.9
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 17 Feb 2022 05:13:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=G6rZeq50p4b5/pebwgb9d7RULAE35RL5ZZEOsn+Z/EI=;
+        b=c41LeqwRYJDy2xT6cFdhiss5bCvrEnJZwE3CSu5inxx+s2Db2ouoWmX0FrpillJ6AW
+         3MqTEHNaKSyn+abTwHZ27DGJ/cLxRy5bR7p2eKJ7LZWBZUoeDOeXVOtqiyeVVkoQHPmA
+         ZuxzOeCBIiue0s2nv7MN//9STWiZ7v6DozLuOxGjXg3xgYqdOwfKKYw82ksp+XKILuHf
+         gdk6M0xfaxC4V29VSW7xWxKH+7K3+QvdrY4E24IQxw7m7v+b2nti3uc2c92RDf2XvfjG
+         V7tSrXDvG2JY+RY/xKGEEheEsreeyVXYeszNxp/TL/qdlHLYfFtsfGfYfzN7yjhpx6ro
+         roLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=G6rZeq50p4b5/pebwgb9d7RULAE35RL5ZZEOsn+Z/EI=;
+        b=d0c/dBMNb41D+XAmBAQO/FHO8T7t851sIDTTNn4CWFS422v/2ZLWQMW2ZobEGoSe3e
+         IAMTFUBnt+WeKuh1NiVbl4ZNC64LIFKm3CnXLzNuySGdDx7TMNO+d78id7agHnvUBwKs
+         Fi4z790cJREx0Ni6iVVXUwCYf4iv0CIX4bAwPgYqcsE7w7u0pevvnDhvq81MIY0b4N/k
+         5aiSFJm5vkUiSWe6aChErBpUHGMdpal8SVfFWdhZeYU/J76lZZD3AE2uCzswTlPt/3v0
+         hNtbVkNU6gvHadXZjG2Ltbtws0+Bpo68hrzN7FM5cFdv+nYHiIayw7HSOLQLXbBPR6su
+         1TPw==
+X-Gm-Message-State: AOAM530APDeETfXYLoiWSdfVNmpYJSuMJWy1Kfjc+w3SS9obJ0kIfsom
+	TB5epCm4yqrka7CtdZiURnJ01WrwgPdlT4TkNJTj0/Wyris=
+X-Google-Smtp-Source: 
+ ABdhPJzfpDlEoxm7JiBIWl2TLZdbj9bdO7h85k9b/JKzP8gGvBr7SYutonW+PaHjwrx90CWnWrUPlYICFTOthainldM=
+X-Received: by 2002:a05:6830:348b:b0:5ac:62e0:f559 with SMTP id
+ c11-20020a056830348b00b005ac62e0f559mr790329otu.326.1645103602225; Thu, 17
+ Feb 2022 05:13:22 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [oe] [meta-gnome][PATCH] seahorse: initial add recipe
-Content-Language: en-US
-To: openembedded-devel@lists.openembedded.org
-References: <20220216165722.25908-1-f_l_k@t-online.de>
- <CAMKF1sqA_Dryp--gMJtnbNtKgbzQ1KCJL31q_ptT54SOG0Ao3g@mail.gmail.com>
- <16D4815E2CBA08CD.19478@lists.openembedded.org>
- <16D4824B2C83E660.30488@lists.openembedded.org>
-From: Markus Volk <f_l_k@t-online.de>
-In-Reply-To: <16D4824B2C83E660.30488@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-X-TOI-EXPURGATEID: 150726::1645085843-00000271-4A01175A/0/0 CLEAN NORMAL
-X-TOI-MSGID: 76c25d51-ce2e-45e4-9047-7085be9bac8b
+References: <20220216145314.94270-1-peron.clem@gmail.com>
+ <525df22a-d452-1b1b-7e7f-4aa017e97524@gmail.com>
+In-Reply-To: <525df22a-d452-1b1b-7e7f-4aa017e97524@gmail.com>
+From: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
+Date: Thu, 17 Feb 2022 14:13:10 +0100
+Message-ID: 
+ <CAJiuCccP3BTaXDeggNnS9KtocYSRYUWwf0Lujxf30OnYa_-k_g@mail.gmail.com>
+Subject: Re: [meta-networking][PATCH] networking: add new netsniff-ng recipe
+ version 0.6.8
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 17 Feb 2022 08:17:27 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 17 Feb 2022 13:13:23 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95355
+ https://lists.openembedded.org/g/openembedded-devel/message/95356
 
-Apologies. Caused by my testing I had a lingering symlink to ssh-keygen=20
-in ${TMP}/hosttools. Therefore, I did not have a build error. Since=20
-'ssh' is in hosttools, maybe it would be best to add 'ssh-keygen' as well=
-?
+Hi Khem,
 
-Without building openssh-native, the only other way I could think of=20
-would be to use a hardcoded path like this:
 
-+--- a/meson.build=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 2022-02-17 09:03:0=
-0.081459067 +0100
-++++ b/meson.build=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 2022-02-17 09:02:3=
-4.321668809 +0100
-+@@ -44,7 +44,7 @@
-+ libpwquality =3D dependency('pwquality')
-+ posix =3D valac.find_library('posix')
-+ ssh_bin =3D find_program('ssh')
-+-ssh_keygen =3D find_program('ssh-keygen')
-++ssh_keygen =3D find_program('/usr/bin/ssh-keygen')
-+ gpg_bin =3D find_program('gpg2', 'gpg', required: get_option('pgp-suppo=
-rt'))
-+ gpgme_dep =3D dependency('gpgme', version: '>=3D 1.14.0', required:=20
-get_option('pgp-support'))
+On Wed, 16 Feb 2022 at 18:57, Khem Raj <raj.khem@gmail.com> wrote:
+>
+>
+>
+> On 2/16/22 6:53 AM, Cl=C3=A9ment P=C3=A9ron wrote:
+> > Netsniff-ng is a fast zero-copy analyzer, pcap capturing and replaying =
+tool.
+> >
+> > Actually the Makefile doesn't create the folder when installing tools, =
+let's
+> > add a patch to fix this.
+> >
+> > Signed-off-by: Cl=C3=A9ment P=C3=A9ron <peron.clem@gmail.com>
+> > ---
+> >   ...001-Cmds-automatically-create-folder.patch | 26 +++++++++++++
+> >   .../netsniff-ng/netsniff-ng_0.6.8.bb          | 39 ++++++++++++++++++=
 +
-+
+> >   2 files changed, 65 insertions(+)
+> >   create mode 100644 meta-networking/recipes-support/netsniff-ng/files/=
+0001-Cmds-automatically-create-folder.patch
+> >   create mode 100644 meta-networking/recipes-support/netsniff-ng/netsni=
+ff-ng_0.6.8.bb
+> >
+> > diff --git a/meta-networking/recipes-support/netsniff-ng/files/0001-Cmd=
+s-automatically-create-folder.patch b/meta-networking/recipes-support/netsn=
+iff-ng/files/0001-Cmds-automatically-create-folder.patch
+> > new file mode 100644
+> > index 000000000..e535aedf5
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-support/netsniff-ng/files/0001-Cmds-autom=
+atically-create-folder.patch
+> > @@ -0,0 +1,26 @@
+> > +From 7c00d75d16da18a9998fc4cca28d3c953dd54ceb Mon Sep 17 00:00:00 2001
+> > +From: =3D?UTF-8?q?Cl=3DC3=3DA9ment=3D20P=3DC3=3DA9ron?=3D <peron.clem@=
+gmail.com>
+> > +Date: Mon, 14 Feb 2022 18:37:22 +0100
+> > +Subject: [PATCH] Cmds: automatically create folder
+> > +
+> > +---
+> > + Cmds | 3 ++-
+> > + 1 file changed, 2 insertions(+), 1 deletion(-)
+> > +
+> > +diff --git a/Cmds b/Cmds
+> > +index e590b38..3df23b8 100644
+> > +--- a/Cmds
+> > ++++ b/Cmds
+> > +@@ -44,7 +44,8 @@ ifeq ("$(origin PREFIX)", "$(filter $(origin PREFIX)=
+, file command line)")
+> > +   INSTX =3D echo -e "  INST\t$(1)" && install -d $(2) && \
+> > +     install -C $(1) $(2)/$(shell basename $(1))
+> > + else
+> > +-  INSTX =3D echo -e "  INST\t$(1)" && install -C $(1) $(2)/$(shell ba=
+sename $(1))
+> > ++  INSTX =3D echo -e "  INST\t$(1)" && install -d $(2) && \
+> > ++    install -C $(1) $(2)/$(shell basename $(1))
+> > + endif
+> > +
+> > + MKDIR =3D echo -e  "  MKDIR\t$(1)" && mkdir -p $(1)
+> > +--
+> > +2.32.0
+> > +
+> > diff --git a/meta-networking/recipes-support/netsniff-ng/netsniff-ng_0.=
+6.8.bb b/meta-networking/recipes-support/netsniff-ng/netsniff-ng_0.6.8.bb
+> > new file mode 100644
+> > index 000000000..cb4f03400
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-support/netsniff-ng/netsniff-ng_0.6.8.bb
+> > @@ -0,0 +1,39 @@
+> > +DESCRIPTION =3D "Netsniff-ng is a fast zero-copy analyzer, pcap captur=
+ing and replaying tool"
+> > +HOMEPAGE =3D "http://netsniff-ng.org"
+> > +LICENSE =3D "GPLv2"
+> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D9dd40dfb621eed702c0775577fb=
+b7011"
+> > +DEPENDS =3D "libpcap"
+> > +
+> > +SRCREV =3D "v${PV}"
+>
+> Please use hardcoded git sha for SRCREV
+>
+> > +SRC_URI =3D " \
+> > +     git://github.com/netsniff-ng/netsniff-ng.git;protocol=3Dhttps;bra=
+nch=3Dmaster \
+> > +     file://0001-Cmds-automatically-create-folder.patch \
+> > +     "
+> > +
+> > +S =3D "${WORKDIR}/git"
+> > +
+> > +# Avoids build breaks when using no-static-libs.inc
+> > +DISABLE_STATIC =3D ""
+>
+> can this be explained a better why it fails.
 
+Hi, sorry this was required in a previous version when I used EXTRA_OECONF.
 
-Am 17.02.22 um 08:29 schrieb Markus Volk:
-> Maybe i'm not running into this because i have this in my config ?
+Without this EXTRA_OECONF was automatically set to "--disable-static"
+which is unrecognised by the configure script and makes the configure
+step fail.
+
+I will remove this in v2
+
+Thanks for the catch,
+Clement
+
 >
-> IMAGE_FEATURES +=3D " ssh-server-openssh"
->
-> Am 17.02.22 um 08:13 schrieb Markus Volk:
->> That's strange. I have this error only without using
->> meson-build-dont-look-for-native-ssh-keygen.patch
->>
->>
->> Native ssh Dependency is fullfilled because we have it in HOSTTOOLS,=20
->> probably because the machine fails to build openssh-native. But we=20
->> dont provide native ssh-keygen. Adding it to hosttools would help to=20
->> fix the issue.
->> Does it help to add 'openssh' to depends ?
->>
->> Am 17.02.22 um 07:59 schrieb Khem Raj:
->>> seeing configure failure
->>> https://errors.yoctoproject.org/Errors/Details/625735/
->>>
->>> On Wed, Feb 16, 2022 at 8:57 AM Markus Volk <f_l_k@t-online.de> wrote=
-:
->>>> Signed-off-by: Markus Volk <f_l_k@t-online.de>
->>>> ---
->>>> =C2=A0 ...uild-dont-look-for-native-ssh-keygen.patch | 15 ++++++++++=
-+
->>>> =C2=A0 .../recipes-gnome/seahorse/seahorse_41.0.bb=C2=A0=C2=A0 | 27=20
->>>> +++++++++++++++++++
->>>> =C2=A0 2 files changed, 42 insertions(+)
->>>> =C2=A0 create mode 100644=20
->>>> meta-gnome/recipes-gnome/seahorse/seahorse/meson-build-dont-look-for=
--native-ssh-keygen.patch
->>>> =C2=A0 create mode 100644=20
->>>> meta-gnome/recipes-gnome/seahorse/seahorse_41.0.bb
->>>>
->>>> diff --git=20
->>>> a/meta-gnome/recipes-gnome/seahorse/seahorse/meson-build-dont-look-f=
-or-native-ssh-keygen.patch=20
->>>> b/meta-gnome/recipes-gnome/seahorse/seahorse/meson-build-dont-look-f=
-or-native-ssh-keygen.patch=20
->>>>
->>>> new file mode 100644
->>>> index 000000000..ac83de486
->>>> --- /dev/null
->>>> +++=20
->>>> b/meta-gnome/recipes-gnome/seahorse/seahorse/meson-build-dont-look-f=
-or-native-ssh-keygen.patch
->>>> @@ -0,0 +1,15 @@
->>>> +From: Markus Volk <f_l_k@t-online.de>
->>>> +Date: Tue, 16 Feb 2022 10:38:04 +0100
->>>> +Subject: [PATCH] meson.build: dont look for native ssh-keygen
->>>> +
->>>> +--- a/meson.build=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 2022-02-16 10:38:04=
-.170081321 +0100
->>>> ++++ b/meson.build=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 2022-02-16 10:38:28=
-.257864179 +0100
->>>> +@@ -44,7 +44,7 @@
->>>> + libpwquality =3D dependency('pwquality')
->>>> + posix =3D valac.find_library('posix')
->>>> + ssh_bin =3D find_program('ssh')
->>>> +-ssh_keygen =3D find_program('ssh-keygen')
->>>> ++ssh_keygen =3D find_program('ssh-keygen', native : false)
->>>> + gpg_bin =3D find_program('gpg2', 'gpg', required:=20
->>>> get_option('pgp-support'))
->>>> + gpgme_dep =3D dependency('gpgme', version: '>=3D 1.14.0', required=
-:=20
->>>> get_option('pgp-support'))
->>>> +
->>>> diff --git a/meta-gnome/recipes-gnome/seahorse/seahorse_41.0.bb=20
->>>> b/meta-gnome/recipes-gnome/seahorse/seahorse_41.0.bb
->>>> new file mode 100644
->>>> index 000000000..ec1328598
->>>> --- /dev/null
->>>> +++ b/meta-gnome/recipes-gnome/seahorse/seahorse_41.0.bb
->>>> @@ -0,0 +1,27 @@
->>>> +SUMMARY =3D "Seahorse is a graphical interface for managing and=20
->>>> using encryption keys."
->>>> +LICENSE=3D"GPLv2"
->>>> +LIC_FILES_CHKSUM =3D=20
->>>> "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263"
->>>> +
->>>> +GNOMEBASEBUILDCLASS =3D "meson"
->>>> +
->>>> +DEPENDS =3D " \
->>>> +=C2=A0=C2=A0=C2=A0 avahi \
->>>> +=C2=A0=C2=A0=C2=A0 gcr \
->>>> +=C2=A0=C2=A0=C2=A0 glib-2.0 \
->>>> +=C2=A0=C2=A0=C2=A0 gnupg \
->>>> +=C2=A0=C2=A0=C2=A0 gpgme \
->>>> +=C2=A0=C2=A0=C2=A0 gtk+3 \
->>>> +=C2=A0=C2=A0=C2=A0 libhandy \
->>>> +=C2=A0=C2=A0=C2=A0 libpwquality \
->>>> +=C2=A0=C2=A0=C2=A0 libsecret \
->>>> +=C2=A0=C2=A0=C2=A0 libsoup-2.4 \
->>>> +=C2=A0=C2=A0=C2=A0 openldap \
->>>> +"
->>>> +
->>>> +inherit gnomebase itstool vala
->>>> +
->>>> +SRC_URI:append =3D "=20
->>>> file://meson-build-dont-look-for-native-ssh-keygen.patch"
->>>> +SRC_URI[archive.sha256sum] =3D=20
->>>> "e6eec09e810448295f547f18c1d5772b65c3edc1d9e5a2595f10b5dde68929f5"
->>>> +
->>>> +FILES:${PN} +=3D "${datadir}"
->>>> +
->>>> --=20
->>>> 2.25.1
->>>>
->>>>
->>>>
->>>>
->>
->>
->>
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#95354): https://lists.openembedded.org/g/openembedd=
-ed-devel/message/95354
-> Mute This Topic: https://lists.openembedded.org/mt/89189799/3618223
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[f_l_k@t-online.de]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+> > +
+> > +inherit pkgconfig
+> > +
+> > +EXTRA_OEMAKE +=3D " TERM=3D'' "
+> > +
+> > +PACKAGECONFIG ??=3D ""
+> > +PACKAGECONFIG[zlib] =3D ",--disable-zlib,zlib,"
+> > +PACKAGECONFIG[libnl] =3D ",--disable-libnl,libnl,"
+> > +PACKAGECONFIG[geoip] =3D ",--disable-geoip,geoip,"
+> > +
+> > +do_configure() {
+> > +    ./configure --prefix=3D${prefix}
+> > +}
+> > +
+> > +do_compile() {
+> > +    oe_runmake
+> > +}
+> > +
+> > +do_install() {
+> > +    oe_runmake DESTDIR=3D${D} netsniff-ng_install
+> > +}
+> > +
+> > +BBCLASSEXTEND =3D "native nativesdk"
 
