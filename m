@@ -1,119 +1,138 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <mikko.rapeli@bmw.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 081B0C433F5
-	for <webhook@archiver.kernel.org>; Fri, 18 Feb 2022 02:19:23 +0000 (UTC)
-Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com
- [209.85.219.51])
- by mx.groups.io with SMTP id smtpd.web12.6103.1645150761538648004
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D5F0C433FE
+	for <webhook@archiver.kernel.org>; Fri, 18 Feb 2022 08:00:36 +0000 (UTC)
+Received: from esa8.hc324-48.eu.iphmx.com (esa8.hc324-48.eu.iphmx.com
+ [207.54.65.242])
+ by mx.groups.io with SMTP id smtpd.web10.8287.1645171233463070813
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Feb 2022 18:19:21 -0800
+ Fri, 18 Feb 2022 00:00:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=mVf3/fYb;
- spf=pass (domain: gmail.com, ip: 209.85.219.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f51.google.com with SMTP id x3so12049058qvd.8
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Feb 2022 18:19:21 -0800 (PST)
+ dkim=fail reason="signature has expired" header.i=@bmw.de header.s=mailing1
+ header.b=KGstVexC;
+ spf=pass (domain: bmw.de, ip: 207.54.65.242,
+ mailfrom: prvs=041686c5e=mikko.rapeli@bmw.de)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=DfHZDb26r7mJOivJXY/9uVThRenI+v16LPmiLz5JugQ=;
-        b=mVf3/fYb+8H0jcaoowe1WdFmtKl+7ugQZGO93fHhhewvFdbKZMacpexggU7LsYj9Lj
-         Xqejs7QZli9ehdfLoz7bzBF5tu++9dZiOhm3OouzBE7EEai8V22h6r3vEEdnX0z34hum
-         te9Uoj55tiy6NULFxruaB+mdHkLAqfW4YecH5i35NlUF+BAt+tlUd+ECQlRrQGc63Ry2
-         Iz/Rvsg+MmLNCCmctG3T6UmcrbPX+NlzCMGizg/yLh7l4hZgWTzcEj/bYGSQF7P+kUPy
-         2r6Eo86kGhEE8nJlCdEHpgsQt+G4kZbX95RmY8zbEO4S6ZDQkYhqu5bw70mo4mXZzlZb
-         FOIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=DfHZDb26r7mJOivJXY/9uVThRenI+v16LPmiLz5JugQ=;
-        b=pTRm2gMtRBd157VExAyuHRA0JJaVFbUySzfbh3W9BUxj40enflCt5KvRPCY3Qx8P8z
-         aP0gqNfF95f4jRFUnxaP+BDnURZ0jbrEmLVxpZ6+Xd2L1wRNeEzV1Rym098+eNkT6RCW
-         RT3YlxQ82B2q6Fhk2ug4JU6ELMpaC6wQ0tXXRgkqG9FeN93UfK/R0sfs9p9X0lpAcKkW
-         0Ns5GSB9RqWr2c2toP/Grdg3mKDfcYtgLZmSFFg2FGCuDJhC4UumRjduTcV5lS2YIpJn
-         ZMkNeiIpJfN3iygP+IiOckvbHnPTzBMaj5YzJGBXhT7lOGzm8yBdZqe9WCbTGW/IvF2P
-         IoAQ==
-X-Gm-Message-State: AOAM530Jp0oZNEY7UaGjBIpEry5/xjF/6YrjTAKZdjWhTWROoNgecTUy
-	JT4TpRKtfVb/m4indICo4vBUrlo1X/m/ahXeFYA=
-X-Google-Smtp-Source: 
- ABdhPJyHVKJdBghjkN/rZYp+heCmGabqVSBv5QpZSAfm8UukW5E0tKl/KXZkLVA+jjjf+1+qfppGNivkzE9DWu1JSqc=
-X-Received: by 2002:ac8:584c:0:b0:2dd:aaa6:7865 with SMTP id
- h12-20020ac8584c000000b002ddaaa67865mr247681qth.330.1645150760444; Thu, 17
- Feb 2022 18:19:20 -0800 (PST)
+  d=bmw.de; i=@bmw.de; q=dns/txt; s=mailing1;
+  t=1645171233; x=1676707233;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-id:content-transfer-encoding:
+   mime-version;
+  bh=fx/l9o/ICKpHLESGIdVMHudVDb947GyhuyDX7W7TeXI=;
+  b=KGstVexC3tHogwnatO+WlNH8TsRnnrmHXa72ERBGJhkIdNFgPhHpWhJ8
+   UVHKD8htA2ua1W+4dqaNAtSXrxl31dUeBtaedxOQc9ARM/B4is1tm+D+T
+   RroK0B8qlJdJRwzlIfiz041sRS2U4bTT4AMhB5yYiHWmnkuz3CGyInjZ0
+   k=;
+Received: from esagw2.bmwgroup.com (HELO esagw2.muc) ([160.46.252.38]) by
+ esa8.hc324-48.eu.iphmx.com with ESMTP/TLS; 18 Feb 2022 09:00:30 +0100
+Received: from esabb5.muc ([160.50.100.47])  by esagw2.muc with ESMTP/TLS;
+ 18 Feb 2022 09:00:30 +0100
+Received: from smucm33j.bmwgroup.net (HELO smucm33j.europe.bmw.corp)
+ ([160.46.167.66])
+ by esabb5.muc with ESMTP/TLS; 18 Feb 2022 09:00:29 +0100
+Received: from smucm33l.europe.bmw.corp (160.46.167.68) by
+ smucm33j.europe.bmw.corp
+ (160.46.167.66) with Microsoft SMTP Server (TLS;
+ Fri, 18 Feb 2022 09:00:29 +0100
+Received: from smucm33l.europe.bmw.corp ([160.46.167.68]) by
+ smucm33l.europe.bmw.corp ([160.46.167.68]) with mapi id 15.00.1497.026; Fri,
+ 18 Feb 2022 09:00:28 +0100
+From: <Mikko.Rapeli@bmw.de>
+To: <armccurdy@gmail.com>
+CC: <Saul.Wold@windriver.com>,
+	<openembedded-architecture@lists.openembedded.org>,
+	<openembedded-core@lists.openembedded.org>,
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [Openembedded-architecture] [oe] INCOMPATIBLE_LICENSES and
+ WHITELIST_<license> usage
+Thread-Topic: [Openembedded-architecture] [oe] INCOMPATIBLE_LICENSES and
+ WHITELIST_<license> usage
+Thread-Index: AQHYJFJIMBbHPIrqo02bAwte8TOHNayYYSGAgACAowA=
+Date: Fri, 18 Feb 2022 08:00:28 +0000
+Message-ID: <Yg9SGkkOMwoPVcP1@korppu>
+References: <7d187920-92f0-a0fe-22b9-a77a1c98fd7d@windriver.com>
+ <CAJ86T=VF+6J3UBJ-=rYt=rODkdP=H73cWFXyE0YfJCaYJfb1oQ@mail.gmail.com>
+In-Reply-To: 
+ <CAJ86T=VF+6J3UBJ-=rYt=rODkdP=H73cWFXyE0YfJCaYJfb1oQ@mail.gmail.com>
+Accept-Language: en-US, de-DE
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-messagesentrepresentingtype: 1
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <9B5995C37EDFA94EA64FC26B23445C95@bmwmail.corp>
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-References: <20220218011204.5913-1-pkj@axis.com>
-In-Reply-To: <20220218011204.5913-1-pkj@axis.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 17 Feb 2022 18:18:54 -0800
-Message-ID: 
- <CAMKF1srXFHYf1bxDG5Cm74CU55bVgzcg3n690nJyqPWuavN6aQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] syslog-ng: adjust control socket location
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 18 Feb 2022 02:19:23 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 18 Feb 2022 08:00:36 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95368
+ https://lists.openembedded.org/g/openembedded-devel/message/95369
 
-this is already applied in master via b57d824fdf822a4c3fdb153b92063f88705e3a6b
+Hi,
 
-On Thu, Feb 17, 2022 at 5:12 PM Peter Kjellerstedt
-<peter.kjellerstedt@axis.com> wrote:
->
-> From: Ovidiu Panait <ovidiu.panait@windriver.com>
->
-> Commit [1] changed the pidfile dir to /var/run/syslog-ng. This also changed
-> the location where the control socket is searched for, causing the following
-> error with systemd:
->
-> root@qemux86-64:~# syslog-ng-ctl config
-> Error connecting control socket, socket='/var/run/syslog-ng/syslog-ng.ctl',
-> error='No such file or directory'
->
-> Update the systemd service file to point to the new location.
->
-> [1] 00d1d63e4f7f ("syslog-ng: provide correct PID directory location to
->                    restart/stop syslog-ng daemon")
->
-> Signed-off-by: lmorales <luisalejandro.moralespena@windriver.com>
-> Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-> ---
->
-> This has already been backported to the hardknott branch, but is missing
-> in honister...
->
->  .../files/syslog-ng.service-the-syslog-ng-service.patch         | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
-> index 0e1d09492..733480030 100644
-> --- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
-> +++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
-> @@ -38,7 +38,7 @@ index 0ccc2b9..7f08c0e 100644
->  -CONTROL_FILE=/var/run/syslog-ng.ctl
->  -PID_FILE=/var/run/syslog-ng.pid
->  +PERSIST_FILE=@LOCALSTATEDIR@/lib/syslog-ng/syslog-ng.persist
-> -+CONTROL_FILE=@LOCALSTATEDIR@/lib/syslog-ng/syslog-ng.ctl
-> ++CONTROL_FILE=@LOCALSTATEDIR@/run/syslog-ng/syslog-ng.ctl
->  +PID_FILE=@LOCALSTATEDIR@/run/syslog-ng.pid
->   OTHER_OPTIONS="--enable-core"
->  --
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#95367): https://lists.openembedded.org/g/openembedded-devel/message/95367
-> Mute This Topic: https://lists.openembedded.org/mt/89223977/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+On Thu, Feb 17, 2022 at 04:20:01PM -0800, Andre McCurdy wrote:
+> On Thu, Feb 17, 2022 at 3:01 PM Saul Wold <Saul.Wold@windriver.com> wrote=
+:
+> >
+> > Folks,
+> >
+> > I am working on a proposal to re-write how INCOMPATIBLE_LICENSES is use=
+d
+> > and processed to possibly include a COMPATIBLE_LICENSES variable as
+> > well, see PeterK's email [0]
+> >
+> > I am trying to determine the usage of WHITELIST_<license> which would b=
+e
+> > used to override a license that might be listed in INCOMPATIBLE_LICENSE=
+S
+> > variable.
+> >
+> > Randy and I have done a quick and dirty survey of a 100 or so layers
+> > (thanks Randy) and could not find any real usage other than what's
+> > currently in OE-Core for WHITELIST_GPL-3.0.
+> >
+> > If you are using WHITELIST_<license>, please let me reply with your usa=
+ge.
+>=20
+> Common case seems to be allowing gdb in debug builds of distros which
+> are otherwise free of GPLv3 etc, e.g.
+>=20
+>   https://github.com/MentorEmbedded/meta-mentor/blob/master/meta-mel/conf=
+/distro/include/gdbserver-gplv3.inc
+>   https://github.com/lgirdk/meta-mng/blob/ofw-2112.6/conf/distro/mng.conf
+
+Exactly, I'm using this in a lot of projects.
+
+Basically distro config has:
+
+INCOMPATIBLE_LICENSE_append +=3D " GPLv3 GPLv3+ LGPLv3 LGPLv3+"
+
+and then various GPLv3 tools are allowed in build but not allowed to be
+part of images:
+
+WHITELIST_GPL-3.0 +=3D "binutils"
+PACKAGE_EXCLUDE +=3D "binutils-dbg binutils-staticdev binutils-dev binutils=
+-doc binutils-locale libbfd binutils"
+
+WHITELIST_GPL-3.0 +=3D "gdb"
+PACKAGE_EXCLUDE +=3D "gdb-sdktests-dbg gdb-sdktests gdbserver gdb-dbg gdb-s=
+taticdev gdb-dev gdb-doc gdb-locale gdb"
+
+WHITELIST_GPL-3.0 +=3D "rsync"
+PACKAGE_EXCLUDE +=3D "rsync-dbg rsync-staticdev rsync-dev rsync-doc rsync-l=
+ocale rsync"
+
+etc etc.
+
+Use case is that developers can install additional GPLv3 licensed tooling i=
+f they
+need to debug something, but product images don't include them by default.
+
+Cheers,
+
+-Mikko=
 
