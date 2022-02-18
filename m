@@ -1,128 +1,103 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C2820C433EF
-	for <webhook@archiver.kernel.org>; Fri, 18 Feb 2022 14:24:53 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
- [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.web12.11368.1645194290432832663
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E5473C433EF
+	for <webhook@archiver.kernel.org>; Fri, 18 Feb 2022 16:32:04 +0000 (UTC)
+Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
+ by mx.groups.io with SMTP id smtpd.web08.12962.1645201922767302059
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Feb 2022 06:24:51 -0800
+ Fri, 18 Feb 2022 08:32:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linuxfoundation.org header.s=google header.b=DmlRwNwE;
- spf=pass (domain: linuxfoundation.org, ip: 209.85.128.42,
- mailfrom: richard.purdie@linuxfoundation.org)
-Received: by mail-wm1-f42.google.com with SMTP id o34so5368086wms.1
-        for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Feb 2022 06:24:50 -0800 (PST)
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=MH9YGxs3;
+ spf=pass (domain: axis.com, ip: 195.60.68.17,
+ mailfrom: peter.kjellerstedt@axis.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linuxfoundation.org; s=google;
-        h=message-id:subject:from:to:date:in-reply-to:references:user-agent
-         :mime-version:content-transfer-encoding;
-        bh=3CXhGkMmn7SXbuFA4TSAUlHySr8eeCepqAZ56J8X/Qg=;
-        b=DmlRwNwEdqfCx4drAo0l4XYBPjKvW8bBf3Ibdn3iPGanEFMK9cxW2WU1Lgt6Ludw2O
-         FDodU2YOYBxBHen+TwZqLGEOzlYa3TjN6mvuqLNfuM8FNz92H3/1aK7UyMl5OpSbS3ad
-         bLfXV9y2IlQcWizyzJ590KLQYuYbsbAc/76BU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-         :references:user-agent:mime-version:content-transfer-encoding;
-        bh=3CXhGkMmn7SXbuFA4TSAUlHySr8eeCepqAZ56J8X/Qg=;
-        b=EjZKWrC1A1MB98Ml2EJgFK3lhFulJCJQTsBsl0l9BPv7+JT7cRBHTEDy47hJSkDaoR
-         VPX2pS04Ayc4X5GlJvvIC3vrwe4Bvzr7hx3ScfP6LCoGR4q7mmG8iidxxRrxVpvzE4fn
-         eS181AgU0bmAMMbqOlCG7mvkeBy4Fhm9WmNmjoNRK4RPqzo3HLDx3ikbFbUbD9HsD7Db
-         4BwkNuSpGzZYxKBAkEf6sz2c+T/2L9cbXa91MmJ6n6QZAcB3Al6Jt5ueenV6f5EG1IcK
-         e6h+Rz6fqQJgR6VTxhQogCSAsTqz5YxgL9tu0hDahKyObwN+wb0gjCpzZJq3iWQAPcxa
-         BPuw==
-X-Gm-Message-State: AOAM531zDYvQNNa+CfwQhHIHrCJgoPTMtOgBnMVT30xnxEay2Tpy4NCJ
-	fW1UIWSvbvzaczsnDc9b88m2Rv8kYC6B6+jk
-X-Google-Smtp-Source: 
- ABdhPJzoLUXg0lm0KYPrRpUo4RByg3iOqflAWYkTQeMs7NMwglawmhjkZ1nq9ptXz8vg324gbV85AA==
-X-Received: by 2002:a05:600c:3b85:b0:37b:baf8:f542 with SMTP id
- n5-20020a05600c3b8500b0037bbaf8f542mr7479244wms.26.1645194288729;
-        Fri, 18 Feb 2022 06:24:48 -0800 (PST)
-Received: from ?IPv6:2001:8b0:aba:5f3c:7bc9:59b:7021:269f?
- ([2001:8b0:aba:5f3c:7bc9:59b:7021:269f])
-        by smtp.gmail.com with ESMTPSA id
- bg23sm5969189wmb.5.2022.02.18.06.24.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Feb 2022 06:24:48 -0800 (PST)
-Message-ID: 
- <e33918ce0c2ae29c0103feeba968dfc12e197db7.camel@linuxfoundation.org>
-Subject: Re: [OE-core] [oe] INCOMPATIBLE_LICENSES and WHITELIST_<license>
- usage
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Saul Wold <Saul.Wold@windriver.com>,
-	openembedded-architecture@lists.openembedded.org, OE-core
-	 <openembedded-core@lists.openembedded.org>, OpenEmbedded Devel List
-	 <openembedded-devel@lists.openembedded.org>
-Date: Fri, 18 Feb 2022 14:24:46 +0000
-In-Reply-To: <16D4E6E0715A89F5.27450@lists.openembedded.org>
-References: <7d187920-92f0-a0fe-22b9-a77a1c98fd7d@windriver.com>
-	 <16D4E6E0715A89F5.27450@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.40.4-1ubuntu2 
+  d=axis.com; q=dns/txt; s=axis-central1; t=1645201923;
+  x=1676737923;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=h7LgBKBPtycG8k9juJvvYCSEgUpfQGOF0bhNiEOfkF0=;
+  b=MH9YGxs3maxuTOhV3UZiDUI7hJ7F1YscsIpMssguEYvRsco1qpDBzHmG
+   qPZtWnRe8Eu74UXv5OQtKXfhwKX2M+QMlK7PWd17/fkcO98LqVBENk3Lf
+   xPlAT+pZMpiRR5YTv5p+V6eLanQTstgajtZRYG1hAmOSU/SQ/PUUuDY4e
+   VeE9WvOyc2FQhzxvDAK9S1UGsuOQdT6bNdgq4ejtRDsySIGSplK8f6NPc
+   /qVT0xEu3YgW2PNJ7YDSg+0mG8eOxP1HFDuqxHhSW/NrbXqxFc65oEtDm
+   v5C8F+QMjRx3FaKKtyrvhFni9uxh9VFVBtGdICFwM1purjvdB3UPsFair
+   w==;
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Khem Raj <raj.khem@gmail.com>
+CC: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] [meta-oe][PATCH] syslog-ng: adjust control socket location
+Thread-Topic: [oe] [meta-oe][PATCH] syslog-ng: adjust control socket location
+Thread-Index: AQHYJG3gt4rN/vS4s0KE6iKehdvO76yZgOSg
+Date: Fri, 18 Feb 2022 16:32:00 +0000
+Message-ID: <f9f5fd2b7e46412381fe3d40a383c78f@axis.com>
+References: <20220218011204.5913-1-pkj@axis.com>
+ <CAMKF1srXFHYf1bxDG5Cm74CU55bVgzcg3n690nJyqPWuavN6aQ@mail.gmail.com>
+In-Reply-To: 
+ <CAMKF1srXFHYf1bxDG5Cm74CU55bVgzcg3n690nJyqPWuavN6aQ@mail.gmail.com>
+Accept-Language: en-US, sv-SE
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.0.5.60]
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 18 Feb 2022 14:24:53 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 18 Feb 2022 16:32:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95376
+ https://lists.openembedded.org/g/openembedded-devel/message/95378
 
-On Fri, 2022-02-18 at 14:13 +0000, Richard Purdie via lists.openembedded.org
-wrote:
-> On Thu, 2022-02-17 at 15:01 -0800, Saul Wold wrote:
-> > I am working on a proposal to re-write how INCOMPATIBLE_LICENSES is used 
-> > and processed to possibly include a COMPATIBLE_LICENSES variable as 
-> > well, see PeterK's email [0]
-> > 
-> > I am trying to determine the usage of WHITELIST_<license> which would be 
-> > used to override a license that might be listed in INCOMPATIBLE_LICENSES 
-> > variable.
-> > 
-> > Randy and I have done a quick and dirty survey of a 100 or so layers 
-> > (thanks Randy) and could not find any real usage other than what's 
-> > currently in OE-Core for WHITELIST_GPL-3.0.
-> > 
-> > If you are using WHITELIST_<license>, please let me reply with your usage.
-> > 
-> > 
-> > [0] https://lists.openembedded.org/g/openembedded-devel/message/95166
-> 
-> We need to be mindful that we need to resolve this to unblock the other language
-> changes and feature creep here is potentially problematic. I do think it is
-> worth trying to improve things rather than blindly allowing the horrible syntax
-> in this variable to continue though.
-> 
-> The test case we have for this currently is:
-> 
-> WHITELIST_GPL-3.0:pn-core-image-minimal = "bash"
-> 
-> so I'd wondered about an alternative of:
-> 
-> INCOMPATIBLE_LICENSE_EXCEPTIONS:pn-core-image-minimal = "bash:GPL-3.0"
-> 
-> which matches the current functionality, removes the issue that the name of the
-> variable is unknown without iterating every possible license name and makes it
-> clear where it is applying to.
-> 
-> I don't really like INCOMPATIBLE_LICENSE_ALLOWED_RECIPES since:
-> 
-> a) it is long
-> b) it refers to recipes when it works against packages
-
-Just as a warning, the code is actually confused. The base.bbclass code assumes
-it is a recipe name, the license_image code assumes it is a package name.
-
-All the more reason to come up with a standard and resolve this. My proposal
-stands but we need to decide if it is a recipe or package name that is listed
-(or both?).
-
-Cheers,
-
-Richard
-
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWxA
+bGlzdHMub3BlbmVtYmVkZGVkLm9yZyA8b3BlbmVtYmVkZGVkLQ0KPiBkZXZlbEBsaXN0cy5vcGVu
+ZW1iZWRkZWQub3JnPiBPbiBCZWhhbGYgT2YgS2hlbSBSYWoNCj4gU2VudDogZGVuIDE4IGZlYnJ1
+YXJpIDIwMjIgMDM6MTkNCj4gVG86IFBldGVyIEtqZWxsZXJzdGVkdCA8cGV0ZXIua2plbGxlcnN0
+ZWR0QGF4aXMuY29tPg0KPiBDYzogb3BlbmVtYmVkZWQtZGV2ZWwgPG9wZW5lbWJlZGRlZC1kZXZl
+bEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPg0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1vZV1b
+UEFUQ0hdIHN5c2xvZy1uZzogYWRqdXN0IGNvbnRyb2wgc29ja2V0DQo+IGxvY2F0aW9uDQo+IA0K
+PiB0aGlzIGlzIGFscmVhZHkgYXBwbGllZCBpbiBtYXN0ZXIgdmlhDQo+IGI1N2Q4MjRmZGY4MjJh
+NGMzZmRiMTUzYjkyMDYzZjg4NzA1ZTNhNmINCg0KRHVoLiBJIGFwcGFyZW50bHkgZm9yZ290IHRo
+ZSAiW2hvbmlzdGVyXSIgdGFnIGluIHRoZSBzdWJqZWN0IChzZWUgbXkgDQpvcmlnaW5hbCBjb21t
+ZW50IGJlbG93KS4NCg0KPiBPbiBUaHUsIEZlYiAxNywgMjAyMiBhdCA1OjEyIFBNIFBldGVyIEtq
+ZWxsZXJzdGVkdA0KPiA8cGV0ZXIua2plbGxlcnN0ZWR0QGF4aXMuY29tPiB3cm90ZToNCj4gPg0K
+PiA+IEZyb206IE92aWRpdSBQYW5haXQgPG92aWRpdS5wYW5haXRAd2luZHJpdmVyLmNvbT4NCj4g
+Pg0KPiA+IENvbW1pdCBbMV0gY2hhbmdlZCB0aGUgcGlkZmlsZSBkaXIgdG8gL3Zhci9ydW4vc3lz
+bG9nLW5nLiBUaGlzIGFsc28NCj4gY2hhbmdlZA0KPiA+IHRoZSBsb2NhdGlvbiB3aGVyZSB0aGUg
+Y29udHJvbCBzb2NrZXQgaXMgc2VhcmNoZWQgZm9yLCBjYXVzaW5nIHRoZQ0KPiBmb2xsb3dpbmcN
+Cj4gPiBlcnJvciB3aXRoIHN5c3RlbWQ6DQo+ID4NCj4gPiByb290QHFlbXV4ODYtNjQ6fiMgc3lz
+bG9nLW5nLWN0bCBjb25maWcNCj4gPiBFcnJvciBjb25uZWN0aW5nIGNvbnRyb2wgc29ja2V0LCBz
+b2NrZXQ9Jy92YXIvcnVuL3N5c2xvZy1uZy9zeXNsb2ctDQo+IG5nLmN0bCcsDQo+ID4gZXJyb3I9
+J05vIHN1Y2ggZmlsZSBvciBkaXJlY3RvcnknDQo+ID4NCj4gPiBVcGRhdGUgdGhlIHN5c3RlbWQg
+c2VydmljZSBmaWxlIHRvIHBvaW50IHRvIHRoZSBuZXcgbG9jYXRpb24uDQo+ID4NCj4gPiBbMV0g
+MDBkMWQ2M2U0ZjdmICgic3lzbG9nLW5nOiBwcm92aWRlIGNvcnJlY3QgUElEIGRpcmVjdG9yeSBs
+b2NhdGlvbiB0bw0KPiA+ICAgICAgICAgICAgICAgICAgICByZXN0YXJ0L3N0b3Agc3lzbG9nLW5n
+IGRhZW1vbiIpDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBsbW9yYWxlcyA8bHVpc2FsZWphbmRy
+by5tb3JhbGVzcGVuYUB3aW5kcml2ZXIuY29tPg0KPiA+IFNpZ25lZC1vZmYtYnk6IE92aWRpdSBQ
+YW5haXQgPG92aWRpdS5wYW5haXRAd2luZHJpdmVyLmNvbT4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBL
+aGVtIFJhaiA8cmFqLmtoZW1AZ21haWwuY29tPg0KPiA+IFNpZ25lZC1vZmYtYnk6IFBldGVyIEtq
+ZWxsZXJzdGVkdCA8cGV0ZXIua2plbGxlcnN0ZWR0QGF4aXMuY29tPg0KPiA+IC0tLQ0KPiA+DQo+
+ID4gVGhpcyBoYXMgYWxyZWFkeSBiZWVuIGJhY2twb3J0ZWQgdG8gdGhlIGhhcmRrbm90dCBicmFu
+Y2gsIGJ1dCBpcyBtaXNzaW5nDQo+ID4gaW4gaG9uaXN0ZXIuLi4NCj4gPg0KPiA+ICAuLi4vZmls
+ZXMvc3lzbG9nLW5nLnNlcnZpY2UtdGhlLXN5c2xvZy1uZy1zZXJ2aWNlLnBhdGNoICAgICAgICAg
+fCAyICstDQo+ID4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigt
+KQ0KPiA+DQo+ID4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L3N5c2xvZy1u
+Zy9maWxlcy9zeXNsb2ctbmcuc2VydmljZS0NCj4gdGhlLXN5c2xvZy1uZy1zZXJ2aWNlLnBhdGNo
+IGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvc3lzbG9nLQ0KPiBuZy9maWxlcy9zeXNsb2ctbmcu
+c2VydmljZS10aGUtc3lzbG9nLW5nLXNlcnZpY2UucGF0Y2gNCj4gPiBpbmRleCAwZTFkMDk0OTIu
+LjczMzQ4MDAzMCAxMDA2NDQNCj4gPiAtLS0gYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9zeXNs
+b2ctbmcvZmlsZXMvc3lzbG9nLW5nLnNlcnZpY2UtdGhlLQ0KPiBzeXNsb2ctbmctc2VydmljZS5w
+YXRjaA0KPiA+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L3N5c2xvZy1uZy9maWxlcy9z
+eXNsb2ctbmcuc2VydmljZS10aGUtDQo+IHN5c2xvZy1uZy1zZXJ2aWNlLnBhdGNoDQo+ID4gQEAg
+LTM4LDcgKzM4LDcgQEAgaW5kZXggMGNjYzJiOS4uN2YwOGMwZSAxMDA2NDQNCj4gPiAgLUNPTlRS
+T0xfRklMRT0vdmFyL3J1bi9zeXNsb2ctbmcuY3RsDQo+ID4gIC1QSURfRklMRT0vdmFyL3J1bi9z
+eXNsb2ctbmcucGlkDQo+ID4gICtQRVJTSVNUX0ZJTEU9QExPQ0FMU1RBVEVESVJAL2xpYi9zeXNs
+b2ctbmcvc3lzbG9nLW5nLnBlcnNpc3QNCj4gPiAtK0NPTlRST0xfRklMRT1ATE9DQUxTVEFURURJ
+UkAvbGliL3N5c2xvZy1uZy9zeXNsb2ctbmcuY3RsDQo+ID4gKytDT05UUk9MX0ZJTEU9QExPQ0FM
+U1RBVEVESVJAL3J1bi9zeXNsb2ctbmcvc3lzbG9nLW5nLmN0bA0KPiA+ICArUElEX0ZJTEU9QExP
+Q0FMU1RBVEVESVJAL3J1bi9zeXNsb2ctbmcucGlkDQo+ID4gICBPVEhFUl9PUFRJT05TPSItLWVu
+YWJsZS1jb3JlIg0KPiA+ICAtLQ0KDQovL1BldGVyDQoNCg==
 
