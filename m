@@ -2,80 +2,77 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6EB06C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6EA75C433EF
 	for <webhook@archiver.kernel.org>; Mon, 21 Feb 2022 13:24:29 +0000 (UTC)
 Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web09.10472.1645449868291078443
+ [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web09.10471.1645449868236234080
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 21 Feb 2022 05:24:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=oMl3gu4E;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=MDSJJBEY;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1645449866; i=@fujitsu.com;
-	bh=7pZK0R1YQuzgx6ix9LH0tghv2Ww6iqgfw2maLEbgB80=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=oMl3gu4Eq2XM91+XF/m+amHsJDLi8UCf5WC4rVAwQy6EPAU3F8K5yApEGqMzSI64K
-	 tSxXNXszHw3ZNrfDqk67+X+DtgU6swmFSNqhAVtM289fQSRZeERpI5uIhE4WCxIUf1
-	 ypHksnlidsrBpFcQpC8snevdkWqQKlhcZvVcL31ciFt3q27DMyGzseHn/Uhrlkuar5
-	 6Q9BrJsMSmrXGxQ2BlG9t2o8XrXMyW+g3XlIfu9usYv0TwnVSY4L+Q0kzzvautBPA3
-	 yIVJLxmncCCe8URzfcUV7jR3gXd0p2K71Wj0eO2teXlm6uoTwnpLbovxa8tJ3Q62lR
-	 K1wCCEu6kH7FA==
+	bh=xwskJXYBV/D6CZQ4SEkbSCrnnG6kEDh0DGECAb1NYm4=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=MDSJJBEYbDYeqX8HP5AbhEeZiMtVNWXNbCSCT5VinlXj6yMZd6sF235Ut5veDVdKq
+	 T7vcu2+pBxRMEmNOoMQQ8Inuo/F6gDN3t9meQefJ07xNvaIbfQOl6TB+Ypga+JdaWd
+	 xjCYaPMMa914fZiQkInLsS/IyH6x1cIBCY4g8TIw7IBjsbuI4qJ8WZwOpROUeC/3AF
+	 /SfZC2sT57tzaAWgcwMsNRbNjSWZMsK9V2cZxIEsCvnXjBhgNkVPxCnnvEWKpfUxbs
+	 oThHRwD6pMJDIK9UB9X0eK1CtvjCxzHiLQ0ek7R7sJZvOgBEvkyit/vNzgGhi6vZDT
+	 10z4cs07KCpeg==
 Received: from [100.115.37.210] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-a.eu-west-2.aws.ess.symcld.net id 12/26-29321-A8293126;
+	by server-2.bemta.az-a.eu-west-2.aws.ess.symcld.net id 69/A1-12680-A8293126;
  Mon, 21 Feb 2022 13:24:26 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrNIsWRWlGSWpSXmKPExsViZ8MxSbdrknC
-  SwYl/EhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bT5CvsBcu4Ks68ncjWwNjM2cXIxSEk8IRR
-  YvnSVcwQzgUmiSs7jrNCOCcYJS7PuMXUxcjJwSagJjH91g1WEFtEQF9i6ew9zCA2s4CKxIvfP
-  ewgtrCAvcT3KSfZQGwWAVWJyX1zwGxeASeJa1vmg9VLCChITHn4HszmFHCWuNTfAWYLAdVc2r
-  CXHaJeUOLkzCcsEPMlJA6+eAHVqygx+3IzC4RdITFrVhsThK0mcfXcJuYJjIKzkLTPQtK+gJF
-  pFaNVUlFmekZJbmJmjq6hgYGuoaGprrG5rqGlXmKVbqJeaqlueWpxia6RXmJ5sV5qcbFecWVu
-  ck6KXl5qySZGYBinFKsK72DsWPlT7xCjJAeTkihvbbtwkhBfUn5KZUZicUZ8UWlOavEhRhkOD
-  iUJXuF+oJxgUWp6akVaZg4wpmDSEhw8SiK85c1Aad7igsTc4sx0iNQpRkUpcV7BiUAJAZBERm
-  keXBssji8xykoJ8zIyMDAI8RSkFuVmlqDKv2IU52BUEuYNBpnCk5lXAjf9FdBiJqDFU7KEQBa
-  XJCKkpBqYmD/PsRUOMGh8Pp1LJlNDlYlFclNzwxHfG7dtORYvmS3ZUCTzfeX7om8cnoLHojg1
-  TlVmT+VZx7e18Nj7mzan3d8csJ7EMPGpxs2QViu9m5cnuC42Pqb0Ka72edySR79+X+A/bh03O
-  aReanYd74XuP5nfYvRNfZynGK/N4WuYWOjl0Mlz56ePwaHkzlx180lOtyQj1rw4P30107zOBp
-  1U/Q13rkfs51pkW31g8vR3Mef/iB89uW+2SmWyb9LTVV0uLNNOaTro1Mse/HFGld/MnmnBFPc
-  wbi2W6XMPqyml/o7mauGJ0Sy52Xj4Xef0o7bHjFaoH2rvlWNj+9rHxMg3w7ri8VoT/nmXrn+6
-  q7BIiaU4I9FQi7moOBEA4NTDMF4DAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8MxSbdrknC
+  SwZyNYhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bXqSbWgsMcFf/WRDQw3mDvYuTiEBJ4wigx
+  6/5HVgjnApPEiRs3mCCcE4wSVzfdZ+ti5ORgE1CTmH7rBiuILSKgL7F09h5mEJtZQEXixe8ed
+  hBbWMBB4tadL2A2i4CqxN3p28DqeQWcJG71dIPFJQQUJKY8fM8MEReUODnzCQvEHAmJgy9eME
+  PUKErMvtzMAmFXSMya1cYEYatJXD23iXkCI/8sJO2zkLQvYGRaxWidVJSZnlGSm5iZo2toYKB
+  raGiqa2wBpAz1Eqt0E/VSS3XLU4tLdI30EsuL9VKLi/WKK3OTc1L08lJLNjECwzKlWC1/B+Pf
+  lT/1DjFKcjApifLWtgsnCfEl5adUZiQWZ8QXleakFh9ilOHgUJLgFe4HygkWpaanVqRl5gBjB
+  CYtwcGjJMJb3gyU5i0uSMwtzkyHSJ1iVJQS5xWcCJQQAElklObBtcHi8hKjrJQwLyMDA4MQT0
+  FqUW5mCar8K0ZxDkYlYd5gkCk8mXklcNNfAS1mAlo8JUsIZHFJIkJKqoFJYDW3tNsulzU9k3x
+  Eu3ibV7xxVJNbUydh4zDXKyE1UmGDzO4ifqU7T5oUf7sf+72HOe37/cRuf2sRFi0VQaUlH88a
+  c0bU6M47y7r9bR+L50HB95+WG7svV7iZUVjF/fWq/NqFMkFlVgKnIxsdOE8ayrU+d1oQcveW3
+  Szu2WobZTz7w3NS96jUc/w+s+z9zt11S3e9YJeorjwt2nxMQP1K3rQFfgo/9nU272kQfFOp9O
+  XgjR8HNi/Zc376gXflCfO+l5rF9t3RebbUpDFfNNn7073UG24fby6TMRdlzO37W3nws7067xX
+  e18Zz4wyqm9e0R7tIdZ400WVMOz7/08PppiLLnWbYNH9d8yixs0CJpTgj0VCLuag4EQDVfFro
+  RgMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-2.tower-565.messagelabs.com!1645449866!19069!1
+X-Msg-Ref: server-2.tower-565.messagelabs.com!1645449866!19068!1
 X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 4325 invoked from network); 21 Feb 2022 13:24:26 -0000
+Received: (qmail 4322 invoked from network); 21 Feb 2022 13:24:26 -0000
 Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
   by server-2.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 21 Feb 2022 13:24:26 -0000
 Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 0519710044D
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id F249110044C
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Feb 2022 13:24:26 +0000 (GMT)
+ Mon, 21 Feb 2022 13:24:25 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id EB6A2100354
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id E509F10033B
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 21 Feb 2022 13:24:25 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Mon, 21 Feb 2022 13:24:09 +0000
+ (TLS) id 15.0.1497.28; Mon, 21 Feb 2022 13:24:04 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] libxmlb: upgrade 0.3.6 -> 0.3.7
-Date: Mon, 21 Feb 2022 21:23:55 +0800
-Message-ID: <1645449836-23309-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libgusb: upgrade 0.3.9 -> 0.3.10
+Date: Mon, 21 Feb 2022 21:23:53 +0800
+Message-ID: <1645449836-23309-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1645449836-23309-1-git-send-email-wangmy@fujitsu.com>
-References: <1645449836-23309-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -87,36 +84,31 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 21 Feb 2022 13:24:29 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95416
+ https://lists.openembedded.org/g/openembedded-devel/message/95415
 
-Bugfixes:
- - Ensure reproducible results when importing a node
- - Ignore all hidden files when using _WATCH_DIRECTORY
- - Show the value bindings when using XB_SILO_PROFILE_FLAG_XPATH
- - Use the correct lookup method for the python3 script interpreter
+New Features:
+ - Add API to change the hotplug poll interval
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libxmlb/{libxmlb_0.3.6.bb => libxmlb_0.3.7.bb}              | 2 +-
+ .../libgusb/{libgusb_0.3.9.bb => libgusb_0.3.10.bb}             | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-gnome/libxmlb/{libxmlb_0.3.6.bb => libxmlb_0.3.7.bb} (91%)
+ rename meta-oe/recipes-support/libgusb/{libgusb_0.3.9.bb => libgusb_0.3.10.bb} (89%)
 
-diff --git a/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.6.bb b/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.7.bb
-similarity index 91%
-rename from meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.6.bb
-rename to meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.7.bb
-index 585c490194..48a7701db7 100644
---- a/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.6.bb
-+++ b/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.7.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1803fa9c2c3ce8cb06b4861d75310742"
- SRC_URI = "git://github.com/hughsie/libxmlb.git;branch=main;protocol=https \
-            file://run-ptest \
-            "
--SRCREV = "89276ffa4407a8d684e95675990fa864793a7586"
-+SRCREV = "dc96ba2327bb1f408909b2cd7fb4ecc318e8165a"
- S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-support/libgusb/libgusb_0.3.9.bb b/meta-oe/recipes-support/libgusb/libgusb_0.3.10.bb
+similarity index 89%
+rename from meta-oe/recipes-support/libgusb/libgusb_0.3.9.bb
+rename to meta-oe/recipes-support/libgusb/libgusb_0.3.10.bb
+index 3fdb2b7d3d..a606f175c6 100644
+--- a/meta-oe/recipes-support/libgusb/libgusb_0.3.9.bb
++++ b/meta-oe/recipes-support/libgusb/libgusb_0.3.10.bb
+@@ -10,5 +10,5 @@ PACKAGECONFIG ??= "${@bb.utils.contains('GI_DATA_ENABLED', 'True', 'vapi', '', d
+ PACKAGECONFIG[vapi] = "-Dvapi=true,-Dvapi=false"
  
- inherit gobject-introspection gtk-doc meson ptest-gnome lib_package
+ SRC_URI = "git://github.com/hughsie/libgusb.git;branch=main;protocol=https"
+-SRCREV = "582f33178a986e74543de8ced087865009f8fef0"
++SRCREV = "332d5b987ffecb824426e88518e05547faf2b520"
+ S = "${WORKDIR}/git"
 -- 
 2.25.1
 
