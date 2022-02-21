@@ -2,77 +2,77 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 42E19C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49164C4332F
 	for <webhook@archiver.kernel.org>; Mon, 21 Feb 2022 13:22:41 +0000 (UTC)
-Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.112])
- by mx.groups.io with SMTP id smtpd.web10.10446.1645449760201288690
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.2])
+ by mx.groups.io with SMTP id smtpd.web08.10726.1645449760247313110
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 21 Feb 2022 05:22:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ThWXtP3t;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.112,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=owOcoPRg;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.2,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1645449758; i=@fujitsu.com;
-	bh=f8lKJDu5ox3SyYjKpuTFJKCPO6ZTZM5cr+iLJP+IQNk=;
+	bh=/3rDcNSYaU0lt/7hqK7g2QJeqXo4S/zXcQ+/OUgiwqQ=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=ThWXtP3t8EVxVXRmR/3pKyOzgowCASyK1H6vvA9l6NKHIQQ61u05MSbX4uj9IwIOq
-	 K3roDdecVthtCJZWkKUVFIxu+sSOTdYnacyeYFIO2GL10tvdFGY1pRCzQkil0Xf1ZF
-	 w+Hmvdh2vJ77gqKotijsH9YAkOk7MKvJlTT5kxZbhsAmMM2cSSGnZ3kvby3cHzPuWP
-	 NgM+MutceHgWDW0Ky2eGgUsh+YWd+PMxtmaLxyRJs55E5NYSYbKD1pT/sUhhwYxI9A
-	 ROQC7FG9rY2mi+N9+KOXUUSp+DqFE5ZtmEg+qggx5t8ElPXsixDaPI6pWbmPUE9epg
-	 pv5K6Vkr52/iA==
-Received: from [100.115.69.48] (using TLSv1.2 with cipher
+	b=owOcoPRgWVE4ThbkfiZS4KNeyp19HN4RtbPH2uRWjWpJehgpx+PE0ZnxXRrzKnqzk
+	 W+B4R6RM8vnLGZnw4qfwekyjevNViQnsFi0yoQ2yVy2EW/z2gsCKgOZtJr+uYeoBB0
+	 YDtL6eCThK8+ITaRPJRfV3mrHEBqoqVPaI1IuLam/Uad7lPAjoYIw42wKyXVhL+g9S
+	 /K54kjAYkw6whaNq3kER5vmdp3xZZSq9idpKZ0OJo287SRp6Ygkdm8geiGS2YhMgJe
+	 MtYR/ylYIkKK35HK2Ds3QI/9bQ2CJugEfL5L6DXtnsxUY6vKYcBSI2Jall+e+GVDU5
+	 nOcQlbabDum4g==
+Received: from [100.115.7.206] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-a.eu-central-1.aws.ess.symcld.net id
- A8/68-25243-E1293126; Mon, 21 Feb 2022 13:22:38 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrLIsWRWlGSWpSXmKPExsViZ8ORqCs3STj
-  J4NZeTouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePE5aVsBQ3iFVNOHWVrYPwu0sXIxSEk8IRR
-  4s3nY0wQzgUmia4Pp1kgnBOMErNv/ALKcHKwCahJTL91gxXEFhHQl1g6ew8ziM0soCLx4ncPO
-  4gtLOAt8XnHZhYQm0VAVWLGs3NgNq+Ak8Sc5vdg9RICChJTHkLYnALOEuc7nrCB2EJANWfa90
-  DVC0qcnPmEBWK+hMTBFy+gehUlZl9uZoGwKyRmzWpjgrDVJK6e28Q8gVFwFpL2WUjaFzAyrWK
-  0SyrKTM8oyU3MzNE1NDDQNTQ01TWz1DU0NdNLrNJN1Est1U1OzSspSgRK6yWWF+ulFhfrFVfm
-  Juek6OWllmxiBIZzSrHrnB2MF/p+6h1ilORgUhLlrW0XThLiS8pPqcxILM6ILyrNSS0+xCjDw
-  aEkwSvcD5QTLEpNT61Iy8wBxhZMWoKDR0mEt7wZKM1bXJCYW5yZDpE6xWjPsXPL5b3MHFevXA
-  GSN8DkpjU39jILseTl56VKifMKTgRqEwBpyyjNgxsKSwWXGGWlhHkZGRgYhHgKUotyM0tQ5V8
-  xinMwKgnzBoNM4cnMK4Hb/QroLCags6ZkCYGcVZKIkJJqYLr85e0UMVPWxB0nVt3jD9xt6uD/
-  46ZfsvHnmrAJzEmb75y6vHCpF/OTJZNPBW2cJ8i0reXR5Of7zsxb8eLd9Q1Bis1F8jmlrN37O
-  87rb1I24uh9P+m9mfiNFjvDo6Jsq9T5i5mV6rUfrNsm9y/RguH6nbkbUkzDEswuutr+nVUuzC
-  lz7GvJI+5Kx2m8a9j0r4t7pz5h+yi5Pf7vopAlszkvqHS0lNefLI/kOb53/sUAa3HPplTFmul
-  qkYrcbj827FjWIG9iGV/Xm/yH3e5OXKDLplilD23lJdLPnrLHiVxdesihy1fkk93TrG3b3u2f
-  yLCdWXNe11mBJ+Fq1w6fCWaJzdj9Nv3i/jsb1T8rvFdiKc5INNRiLipOBAAg8O0VgAMAAA==
+	by server-2.bemta.az-a.eu-west-1.aws.ess.symcld.net id E6/D5-21232-E1293126;
+ Mon, 21 Feb 2022 13:22:38 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrGIsWRWlGSWpSXmKPExsViZ8ORqCs3STj
+  JoPMwh8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvF+2x+WgstiFVunP2VpYHwo3MXIxSEk8IRR
+  Yub1GUwQzgUmialrzrBCOCcYJZbfv8HcxcjJwSagJjH91g1WEFtEQF9i6ew9YHFmARWJF7972
+  EFsYQF7iV8LvzJ2MXJwsAioSpye6wgS5hVwkrh5ZTlYiYSAgsSUh+/BWjkFnCXOdzxhA7GFgG
+  rOtO9hgagXlDg58wkLxHgJiYMvXjBD9CpKzL7czAJhV0jMmtXGBGGrSVw9t4l5AqPgLCTts5C
+  0L2BkWsVolVSUmZ5RkpuYmaNraGCga2hoqmuia2RsqZdYpZuol1qqW55aXKJrqJdYXqyXWlys
+  V1yZm5yTopeXWrKJERjEKcUs73cwNvX91DvEKMnBpCTKW9sunCTEl5SfUpmRWJwRX1Sak1p8i
+  FGGg0NJgle4HygnWJSanlqRlpkDjCiYtAQHj5IIb3kzUJq3uCAxtzgzHSJ1ilGXY9OaG3uZhV
+  jy8vNSpcR5BScCFQmAFGWU5sGNgEX3JUZZKWFeRgYGBiGegtSi3MwSVPlXjOIcjErCvMEgU3g
+  y80rgNr0COoIJ6IgpWUIgR5QkIqSkGpgYZN+v0H7H6HljJq+JRf1L0ckGV6qf7zQ/N60xyppN
+  4QJP4rsZYVGbV14PVBZgeSoz89KKz0/W+nyKmGV7N/1ijEHImU/Tehu+MYa/2HEv58OENyXX1
+  lnsyD7979kD70m79x8JZz4oVDprnbhCX+A0loxFKjtDz6iYRS6Keu9Yd2S2XlU6Z/izWdevxT
+  WylXB1r+S7kPHjLvvfwwZ7/I7GHF4tG2c8ZdtZ/SrD2N8z2ypvGnyq/vBK4b7HhperOn9JXjP
+  SEIg+usb7mULIdKXZkYKsdTv8Zm1/sEzAkvn2Id89H2zuiDyNWLzbMn9O5GYrzZQDQg0WZT5m
+  jZxO0Q1nRQ3uCX1/6PM6do8Fv7u7EktxRqKhFnNRcSIAe9dTgmkDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-16.tower-532.messagelabs.com!1645449757!19118!1
+X-Msg-Ref: server-2.tower-591.messagelabs.com!1645449757!8460!1
 X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 25194 invoked from network); 21 Feb 2022 13:22:38 -0000
+Received: (qmail 26354 invoked from network); 21 Feb 2022 13:22:38 -0000
 Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-16.tower-532.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-2.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 21 Feb 2022 13:22:38 -0000
 Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id A2A741001A2
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 9E78510019C
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 21 Feb 2022 13:22:37 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 95E30100199
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 91E59100185
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 21 Feb 2022 13:22:37 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Mon, 21 Feb 2022 13:22:22 +0000
+ (TLS) id 15.0.1497.28; Mon, 21 Feb 2022 13:22:20 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] inotify-tools: upgrade 3.21.9.6 -> 3.22.1.0
-Date: Mon, 21 Feb 2022 21:22:08 +0800
-Message-ID: <1645449729-23271-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] gnuplot: upgrade 5.4.2 -> 5.4.3
+Date: Mon, 21 Feb 2022 21:22:07 +0800
+Message-ID: <1645449729-23271-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1645449729-23271-1-git-send-email-wangmy@fujitsu.com>
 References: <1645449729-23271-1-git-send-email-wangmy@fujitsu.com>
@@ -87,73 +87,66 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 21 Feb 2022 13:22:41 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95413
+ https://lists.openembedded.org/g/openembedded-devel/message/95412
 
-0001-libinotifytools-Include-limit.h-for-PATH_MAX.patch
-removed since it's included in 3.22.1.0
+Changelog:
+=========
+NEW "set pm3d border retrace" will use quadrangle color for the border
+NEW "nogrid" flag for plots to opt out of dgrid3d processing
+NEW option "above|below y=<val>" for "plot with fillsteps"
+NEW "set style histogram nokeyseparators" suppress blank key entries Bug #2473
+CHANGE always allow palette color for non-plot elements of 2D plot
+FIX contours were incorrectly allocated space in the key even if "notitle"
+FIX evaluation of unary minus in front of ternary operator Bug #2468
+FIX arm and s390 require "signed char" Bugs #2467 #2450
+FIX range errors if "smooth csplines" applied with x-axis reversed Bug #2465
+FIX handle various corner cases found by fuzzing
+FIX textcolor should accept "linetype N" Bug #2459
+FIX Windows: handling of Window messages for piped input Bugs #2204 #2412
+FIX aquaterm: auto-configuration use of Frameworks Bug #2419
+FIX qt: pm3d quadrangle borders for transparent surfaces
+FIX png/gif: gdlib auto-configuration issues
+FIX dumb: limit enhanced text markup to single-line vertical displacement
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...fytools-Include-limit.h-for-PATH_MAX.patch | 29 -------------------
- ..._3.21.9.6.bb => inotify-tools_3.22.1.0.bb} |  3 +-
- 2 files changed, 1 insertion(+), 31 deletions(-)
- delete mode 100644 meta-oe/recipes-support/inotify-tools/inotify-tools/0001-libinotifytools-Include-limit.h-for-PATH_MAX.patch
- rename meta-oe/recipes-support/inotify-tools/{inotify-tools_3.21.9.6.bb => inotify-tools_3.22.1.0.bb} (86%)
+ .../gnuplot/{gnuplot_5.4.2.bb => gnuplot_5.4.3.bb}  | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
+ rename meta-oe/recipes-extended/gnuplot/{gnuplot_5.4.2.bb => gnuplot_5.4.3.bb} (86%)
 
-diff --git a/meta-oe/recipes-support/inotify-tools/inotify-tools/0001-libinotifytools-Include-limit.h-for-PATH_MAX.patch b/meta-oe/recipes-support/inotify-tools/inotify-tools/0001-libinotifytools-Include-limit.h-for-PATH_MAX.patch
-deleted file mode 100644
-index f30a62d594..0000000000
---- a/meta-oe/recipes-support/inotify-tools/inotify-tools/0001-libinotifytools-Include-limit.h-for-PATH_MAX.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--From 1e37cc3aa674c4b052f0655fef59a910fd7325cb Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 16 Dec 2021 14:53:25 -0800
--Subject: [PATCH 1/2] libinotifytools: Include limit.h for PATH_MAX
--
--musl builds fail since the required header which defines PATH_MAX is
--missing, its perhaps included indirectly via glibc based systems
--
--Upstream-Status: Submitted [https://github.com/inotify-tools/inotify-tools/pull/153]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- libinotifytools/src/inotifytools.c | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/libinotifytools/src/inotifytools.c b/libinotifytools/src/inotifytools.c
--index 8bdfdb6..902eac2 100644
----- a/libinotifytools/src/inotifytools.c
--+++ b/libinotifytools/src/inotifytools.c
--@@ -17,6 +17,7 @@
-- #include "inotifytools_p.h"
-- #include "stats.h"
-- 
--+#include <limits.h>
-- #include <string.h>
-- #include <strings.h>
-- #include <stdlib.h>
---- 
--2.34.1
--
-diff --git a/meta-oe/recipes-support/inotify-tools/inotify-tools_3.21.9.6.bb b/meta-oe/recipes-support/inotify-tools/inotify-tools_3.22.1.0.bb
+diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.2.bb b/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb
 similarity index 86%
-rename from meta-oe/recipes-support/inotify-tools/inotify-tools_3.21.9.6.bb
-rename to meta-oe/recipes-support/inotify-tools/inotify-tools_3.22.1.0.bb
-index 89c3a00b71..38ba91552c 100644
---- a/meta-oe/recipes-support/inotify-tools/inotify-tools_3.21.9.6.bb
-+++ b/meta-oe/recipes-support/inotify-tools/inotify-tools_3.22.1.0.bb
-@@ -5,10 +5,9 @@ SECTION = "console/devel"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=ac6c26e52aea428ee7f56dc2c56424c6"
+rename from meta-oe/recipes-extended/gnuplot/gnuplot_5.4.2.bb
+rename to meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb
+index 5504515e98..087b69faae 100644
+--- a/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.2.bb
++++ b/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb
+@@ -11,19 +11,18 @@ inherit autotools features_check
+ # depends on virtual/libx11
+ REQUIRED_DISTRO_FEATURES = "x11"
  
--SRCREV = "8f8fcdffb7e80928bea6c1fccd3527a9f5d8fe77"
-+SRCREV = "4b72dcd15299e1d0cb096397d9aab513ffed1657"
+-SRC_URI = " \
+-    ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar.gz;name=archive \
+-    http://www.mneuroth.de/privat/zaurus/qtplot-0.2.tar.gz;name=qtplot \
+-    file://gnuplot.desktop \
+-    file://gnuplot.png \
+-"
++SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar.gz;name=archive \
++           http://www.mneuroth.de/privat/zaurus/qtplot-0.2.tar.gz;name=qtplot \
++           file://gnuplot.desktop \
++           file://gnuplot.png \
++           "
+ SRC_URI:append:class-target = " \
+     file://0002-do-not-build-demos.patch \
+     file://0003-Use-native-tools-to-build-docs.patch \
+     file://0004-Add-configure-option-to-find-qt5-native-tools.patch \
+ "
  
- SRC_URI = "git://github.com/${BPN}/${BPN};branch=master;protocol=https \
--           file://0001-libinotifytools-Include-limit.h-for-PATH_MAX.patch \
-            file://0002-libinotifytools-Bridge-differences-between-musl-glib.patch \
-           "
+-SRC_URI[archive.sha256sum] = "e57c75e1318133951d32a83bcdc4aff17fed28722c4e71f2305cfc2ae1cae7ba"
++SRC_URI[archive.sha256sum] = "51f89bbab90f96d3543f95235368d188eb1e26eda296912256abcd3535bd4d84"
+ SRC_URI[qtplot.sha256sum] = "6df317183ff62cc82f3dcf88207a267cd6478cb5147f55d7530c94f1ad5f4132"
  
+ # for building docs (they deserve it) we need *doc2* tools native
 -- 
 2.25.1
 
