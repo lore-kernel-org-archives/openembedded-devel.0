@@ -2,77 +2,77 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 559C1C433F5
-	for <webhook@archiver.kernel.org>; Mon, 21 Feb 2022 13:24:30 +0000 (UTC)
-Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web12.10497.1645449868744651513
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A32EC433FE
+	for <webhook@archiver.kernel.org>; Mon, 21 Feb 2022 13:24:31 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.65])
+ by mx.groups.io with SMTP id smtpd.web09.10473.1645449870026174018
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Feb 2022 05:24:29 -0800
+ Mon, 21 Feb 2022 05:24:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=YA9KYi5I;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=V07PkarH;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.65,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1645449867; i=@fujitsu.com;
-	bh=MzBgY0ABOSpOPsPSN8iouLuHa9IPm0TZ1w95TpV+DWM=;
+	s=170520fj; t=1645449868; i=@fujitsu.com;
+	bh=cmXhuq/mXObElIWte4Q7Cazg0mBOtKm0XCv0wTcNJDE=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=YA9KYi5I8kA4SJr32iLuiotkwtDopFLwCm8cO/y9ofGASh50lWg+NLxSOHy8r2o8V
-	 1+YobYtT1lly1sHv+o7D/ZEecpRN7AN/qM9/KqoO13CvcFER8oRt9ED9rUmaAP2Oxs
-	 Z+xWxifb1deuDxyXSzjeG87sYPRUldF4Th4rzo+f9Ka3BZTQrBLnfCDVtwNtyXCKAd
-	 NWB2BmT1q9GO0aB2nFAAbPnyI1iJFqdtuoKE8H7hLVESUpSrLopusX/JoBhmsmgAG/
-	 irscqupR0VIwxYvYgl0bzhV8JewJ1uA2HTSwskLdHkYf3SIsoCQ/HUpR2IczPJgttL
-	 ZKsY0Xll4+RmA==
-Received: from [100.115.69.174] (using TLSv1.2 with cipher
+	b=V07PkarHXytTKNsi/Sg41pevDzhgnqNV8ELji+/1pJxqll7tu03OIUJdsvIDLKVi/
+	 LeBHMHdRxMi6ICQPGPn+KLnT7ajVQ1cN48tCEvL/gJ2rrJNBu5MIg+1Ur0XMGjlnqo
+	 MDlrP78I422c/dmQleCsl9KZm8pVR4cLitkc9psSBdE107ohErjMRwfPvJEX1TGtpH
+	 Ti4+TgzZUYJbJ/k66cp618Rjk0vfOYWuK+ogNf8cdMSHoOkhosODlILuTx5NVYlM9i
+	 yBy4TGcjPRtLW6iAnXBcf0pm2bcbbCqJ//iNPReSTpFFnPs4UwQgdwqfxz1fYpy/Qf
+	 K/3lOKTHsM71Q==
+Received: from [100.115.7.114] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-a.eu-central-1.aws.ess.symcld.net id
- A0/FF-24566-A8293126; Mon, 21 Feb 2022 13:24:26 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrPIsWRWlGSWpSXmKPExsViZ8MxSbdrknC
-  SwZxFChYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bpjbdZCs7xVHxsWs3awNjL3cXIxSEk8IRR
-  Ytb/rywQzgUmiXPnPkE5Jxgl3h/+xdbFyMnBJqAmMf3WDVYQW0RAX2Lp7D3MIDazgIrEi9897
-  CC2sIC9xIYVU8BqWARUJfqPnGECsXkFnCSu3J8OVi8hoCAx5eF7MJtTwFniUn8HmC0EVHNpw1
-  52iHpBiZMzn7BAzJeQOPjiBVSvosTsy80sEHaFxKxZbUwQtprE1XObmCcwCs5C0j4LSfsCRqZ
-  VjHZJRZnpGSW5iZk5uoYGBrqGhqa65oa6hsbGeolVuol6qaW6yal5JUWJQGm9xPJivdTiYr3i
-  ytzknBS9vNSSTYzAcE4pdm/dwXi576feIUZJDiYlUd7aduEkIb6k/JTKjMTijPii0pzU4kOMM
-  hwcShK8wv1AOcGi1PTUirTMHGBswaQlOHiURHjLm4HSvMUFibnFmekQqVOMilLivIITgRICII
-  mM0jy4Nlg8X2KUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzBsMMoUnM68EbvoroMVMQIunZAm
-  BLC5JREhJNTBlqfZPvey/LXa+X5lTnK/PrIyQjBe+K0R/uL3Y5rmxr/qo3dnEhqkah54uZHww
-  8+qf2cl+nbMffuVykV5pJ8LiKPol5+WRCy9iVZRORQp+Y3l30ezneudjN6QfnE6czenHphSda
-  X93Bc/THL1r0+b/5drBdS3f7WDnll3z8wsm370X3HWrWmuS0LbzzHvFEl753/9VWbDo+he2l2
-  V3XC1/sN79+y73n5r1h6PWG+d6B+nOK73MPVN6t9mp+18+Sn72Cd3lkPVozuyLxyRM/SMqJYt
-  X/Hy5TFvtSmSfpPnfQ2riStYlEcfFfr/6x9Z//88lofZTasIX+Led9jY4utJM87nevA8VO4/o
-  yYct7xeepsRSnJFoqMVcVJwIALFdpCtiAwAA
+	by server-3.bemta.az-a.eu-west-1.aws.ess.symcld.net id 74/74-00700-C8293126;
+ Mon, 21 Feb 2022 13:24:28 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrFIsWRWlGSWpSXmKPExsViZ8MxSbdrknC
+  SwY+90hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bTxZesBTu5KnruGTcwTuPsYuTiEBJ4wiix
+  b80WZgjnApPE1GlfWCCcE4wSbTc2MHUxcnKwCahJTL91gxXEFhHQl1g6ew8ziM0soCLx4ncPO
+  4gtLOAgMfnaa7AaFgFViQuPd4HFeQWcJP7sWAcWlxBQkJjy8D1YL6eAs8Sl/g4wWwio5tKGvV
+  D1ghInZz5hgZgvIXHwxQtmiF5FidmXm1kg7AqJWbPamCBsNYmr5zYxT2AUnIWkfRaS9gWMTKs
+  YrZKKMtMzSnITM3N0DQ0MdA0NTXUNdI0MTfUSq3QT9VJLdctTi0t0DfUSy4v1UouL9Yorc5Nz
+  UvTyUks2MQKDOKWY4foOxol9P/UOMUpyMCmJ8ta2CycJ8SXlp1RmJBZnxBeV5qQWH2KU4eBQk
+  uAV7gfKCRalpqdWpGXmACMKJi3BwaMkwlveDJTmLS5IzC3OTIdInWJUlBLnFZwIlBAASWSU5s
+  G1waL4EqOslDAvIwMDgxBPQWpRbmYJqvwrRnEORiVh3mCQKTyZeSVw018BLWYCWjwlSwhkcUk
+  iQkqqgSl614t7r1YeTDrFa3xiapdo1DSOL4zdt77Xly2edlnp0wxHvalP9how7Nm7wTwmu9b/
+  UNTTZW6MAhNn/jKu3dMaZTGdmevh6hNN8/7If2Kud9nBxOh/05hBx9Pk26o3Edf+1n5cv2BHa
+  EWNwISr2vYG+h09H15s3XVnJsNqpm/Nyf2GczIuzeHNfPribeoKX/OncjvYm98rHvb7Heup/p
+  +Lj+vOo237uN//yjgbN+n3n13i0hPmpdhtmf1Ab9UTmxbNSUp7nzNGrui76f38S78PE1urKJv
+  jYu5qe7Y7waZTI5NiXWbN+3+279HsM9sTr7HHB1R5qrdq/5E58z9qc0nOkgNZJ9QO8lzcli09
+  Z2mrEktxRqKhFnNRcSIADfdNSV0DAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-16.tower-545.messagelabs.com!1645449866!30604!1
+X-Msg-Ref: server-8.tower-587.messagelabs.com!1645449866!8574!1
 X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 14789 invoked from network); 21 Feb 2022 13:24:26 -0000
+Received: (qmail 5565 invoked from network); 21 Feb 2022 13:24:26 -0000
 Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-16.tower-545.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-8.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 21 Feb 2022 13:24:26 -0000
 Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 09D41100456
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 00F0B10044A
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 21 Feb 2022 13:24:26 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id EE3AA100440
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id E8798100353
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 21 Feb 2022 13:24:25 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Mon, 21 Feb 2022 13:24:11 +0000
+ (TLS) id 15.0.1497.28; Mon, 21 Feb 2022 13:24:07 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] monit: upgrade 5.30.0 -> 5.31.0
-Date: Mon, 21 Feb 2022 21:23:56 +0800
-Message-ID: <1645449836-23309-4-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libjcat: upgrade 0.1.9 -> 0.1.10
+Date: Mon, 21 Feb 2022 21:23:54 +0800
+Message-ID: <1645449836-23309-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1645449836-23309-1-git-send-email-wangmy@fujitsu.com>
 References: <1645449836-23309-1-git-send-email-wangmy@fujitsu.com>
@@ -85,45 +85,43 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Feb 2022 13:24:30 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Feb 2022 13:24:31 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95417
+ https://lists.openembedded.org/g/openembedded-devel/message/95418
 
 Changelog:
-==========
--Add support for Linux OpenZFS 2.x I/O statistics.
--Add support for FreeBSD ZFS I/O statistics for FreeBSD 12.x or later.
--If Monit 5.30.0 CLI action was executed for a non-existent service name, the
- error message was not reported properly. Thanks to Lutz Mader for fix.
--If Monit reload was requested during the optional start delay interval, Monit
- still waited for the delay to pass and performed one test cycle with the old
- configuration, before the reload was performed. Monit will reload the
- configuration immediately now.
--New precompiled binaries: Added binaries for musl-based Linux distributions,
- such as Alpine Linux.
+=========
+New Features:
+- Add ED25519 support
+- Define three more types used for the firmware transparency log
+
+Bugfixes:
+- Include the pkgconfig variables in the subproject dependency
+- Drop the use of setuptools in the test script for regenerating ld version file
+- Use the correct lookup method for the python3 script interpreter
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-support/monit/{monit_5.30.0.bb => monit_5.31.0.bb}  | 2 +-
+ .../libjcat/{libjcat_0.1.9.bb => libjcat_0.1.10.bb}             | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/monit/{monit_5.30.0.bb => monit_5.31.0.bb} (94%)
+ rename meta-oe/recipes-gnome/libjcat/{libjcat_0.1.9.bb => libjcat_0.1.10.bb} (94%)
 
-diff --git a/meta-oe/recipes-support/monit/monit_5.30.0.bb b/meta-oe/recipes-support/monit/monit_5.31.0.bb
+diff --git a/meta-oe/recipes-gnome/libjcat/libjcat_0.1.9.bb b/meta-oe/recipes-gnome/libjcat/libjcat_0.1.10.bb
 similarity index 94%
-rename from meta-oe/recipes-support/monit/monit_5.30.0.bb
-rename to meta-oe/recipes-support/monit/monit_5.31.0.bb
-index 1496243c15..eaedf4a39a 100644
---- a/meta-oe/recipes-support/monit/monit_5.30.0.bb
-+++ b/meta-oe/recipes-support/monit/monit_5.31.0.bb
-@@ -15,7 +15,7 @@ SRC_URI = " \
- 	file://monitrc \
+rename from meta-oe/recipes-gnome/libjcat/libjcat_0.1.9.bb
+rename to meta-oe/recipes-gnome/libjcat/libjcat_0.1.10.bb
+index b0871c6a48..bbbc728d33 100644
+--- a/meta-oe/recipes-gnome/libjcat/libjcat_0.1.9.bb
++++ b/meta-oe/recipes-gnome/libjcat/libjcat_0.1.10.bb
+@@ -11,7 +11,7 @@ SRC_URI = "\
+     git://github.com/hughsie/libjcat.git;branch=main;protocol=https \
+     file://run-ptest \
  "
+-SRCREV = "d4833949f8f1997b83f35a03127b9e12c104a7c8"
++SRCREV = "edaf36b285497364bef8bf916ffe5b962d01c4b8"
+ S = "${WORKDIR}/git"
  
--SRC_URI[sha256sum] = "e85649dfa8586f4fcdd34a0295c55ddd69b0eda6cfbdac47105a2673d10b1008"
-+SRC_URI[sha256sum] = "eae71f28941fb663eec74c1a59b69546c659529796550bd9c0c544e9b52ac055"
- 
- DEPENDS = "zlib bison-native libnsl2 flex-native openssl virtual/crypt"
- 
+ inherit gobject-introspection gtk-doc meson ptest-gnome vala lib_package
 -- 
 2.25.1
 
