@@ -2,80 +2,80 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 49164C4332F
-	for <webhook@archiver.kernel.org>; Mon, 21 Feb 2022 13:22:41 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.2])
- by mx.groups.io with SMTP id smtpd.web08.10726.1645449760247313110
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6EB06C433FE
+	for <webhook@archiver.kernel.org>; Mon, 21 Feb 2022 13:24:29 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.4])
+ by mx.groups.io with SMTP id smtpd.web09.10472.1645449868291078443
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Feb 2022 05:22:40 -0800
+ Mon, 21 Feb 2022 05:24:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=owOcoPRg;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.2,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=oMl3gu4E;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1645449758; i=@fujitsu.com;
-	bh=/3rDcNSYaU0lt/7hqK7g2QJeqXo4S/zXcQ+/OUgiwqQ=;
+	s=170520fj; t=1645449866; i=@fujitsu.com;
+	bh=7pZK0R1YQuzgx6ix9LH0tghv2Ww6iqgfw2maLEbgB80=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=owOcoPRgWVE4ThbkfiZS4KNeyp19HN4RtbPH2uRWjWpJehgpx+PE0ZnxXRrzKnqzk
-	 W+B4R6RM8vnLGZnw4qfwekyjevNViQnsFi0yoQ2yVy2EW/z2gsCKgOZtJr+uYeoBB0
-	 YDtL6eCThK8+ITaRPJRfV3mrHEBqoqVPaI1IuLam/Uad7lPAjoYIw42wKyXVhL+g9S
-	 /K54kjAYkw6whaNq3kER5vmdp3xZZSq9idpKZ0OJo287SRp6Ygkdm8geiGS2YhMgJe
-	 MtYR/ylYIkKK35HK2Ds3QI/9bQ2CJugEfL5L6DXtnsxUY6vKYcBSI2Jall+e+GVDU5
-	 nOcQlbabDum4g==
-Received: from [100.115.7.206] (using TLSv1.2 with cipher
+	b=oMl3gu4Eq2XM91+XF/m+amHsJDLi8UCf5WC4rVAwQy6EPAU3F8K5yApEGqMzSI64K
+	 tSxXNXszHw3ZNrfDqk67+X+DtgU6swmFSNqhAVtM289fQSRZeERpI5uIhE4WCxIUf1
+	 ypHksnlidsrBpFcQpC8snevdkWqQKlhcZvVcL31ciFt3q27DMyGzseHn/Uhrlkuar5
+	 6Q9BrJsMSmrXGxQ2BlG9t2o8XrXMyW+g3XlIfu9usYv0TwnVSY4L+Q0kzzvautBPA3
+	 yIVJLxmncCCe8URzfcUV7jR3gXd0p2K71Wj0eO2teXlm6uoTwnpLbovxa8tJ3Q62lR
+	 K1wCCEu6kH7FA==
+Received: from [100.115.37.210] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-a.eu-west-1.aws.ess.symcld.net id E6/D5-21232-E1293126;
- Mon, 21 Feb 2022 13:22:38 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrGIsWRWlGSWpSXmKPExsViZ8ORqCs3STj
-  JoPMwh8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvF+2x+WgstiFVunP2VpYHwo3MXIxSEk8IRR
-  Yub1GUwQzgUmialrzrBCOCcYJZbfv8HcxcjJwSagJjH91g1WEFtEQF9i6ew9YHFmARWJF7972
-  EFsYQF7iV8LvzJ2MXJwsAioSpye6wgS5hVwkrh5ZTlYiYSAgsSUh+/BWjkFnCXOdzxhA7GFgG
-  rOtO9hgagXlDg58wkLxHgJiYMvXjBD9CpKzL7czAJhV0jMmtXGBGGrSVw9t4l5AqPgLCTts5C
-  0L2BkWsVolVSUmZ5RkpuYmaNraGCga2hoqmuia2RsqZdYpZuol1qqW55aXKJrqJdYXqyXWlys
-  V1yZm5yTopeXWrKJERjEKcUs73cwNvX91DvEKMnBpCTKW9sunCTEl5SfUpmRWJwRX1Sak1p8i
-  FGGg0NJgle4HygnWJSanlqRlpkDjCiYtAQHj5IIb3kzUJq3uCAxtzgzHSJ1ilGXY9OaG3uZhV
-  jy8vNSpcR5BScCFQmAFGWU5sGNgEX3JUZZKWFeRgYGBiGegtSi3MwSVPlXjOIcjErCvMEgU3g
-  y80rgNr0COoIJ6IgpWUIgR5QkIqSkGpgYZN+v0H7H6HljJq+JRf1L0ckGV6qf7zQ/N60xyppN
-  4QJP4rsZYVGbV14PVBZgeSoz89KKz0/W+nyKmGV7N/1ijEHImU/Tehu+MYa/2HEv58OENyXX1
-  lnsyD7979kD70m79x8JZz4oVDprnbhCX+A0loxFKjtDz6iYRS6Keu9Yd2S2XlU6Z/izWdevxT
-  WylXB1r+S7kPHjLvvfwwZ7/I7GHF4tG2c8ZdtZ/SrD2N8z2ypvGnyq/vBK4b7HhperOn9JXjP
-  SEIg+usb7mULIdKXZkYKsdTv8Zm1/sEzAkvn2Id89H2zuiDyNWLzbMn9O5GYrzZQDQg0WZT5m
-  jZxO0Q1nRQ3uCX1/6PM6do8Fv7u7EktxRqKhFnNRcSIAe9dTgmkDAAA=
+	by server-4.bemta.az-a.eu-west-2.aws.ess.symcld.net id 12/26-29321-A8293126;
+ Mon, 21 Feb 2022 13:24:26 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrNIsWRWlGSWpSXmKPExsViZ8MxSbdrknC
+  SwYl/EhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bT5CvsBcu4Ks68ncjWwNjM2cXIxSEk8IRR
+  YvnSVcwQzgUmiSs7jrNCOCcYJS7PuMXUxcjJwSagJjH91g1WEFtEQF9i6ew9zCA2s4CKxIvfP
+  ewgtrCAvcT3KSfZQGwWAVWJyX1zwGxeASeJa1vmg9VLCChITHn4HszmFHCWuNTfAWYLAdVc2r
+  CXHaJeUOLkzCcsEPMlJA6+eAHVqygx+3IzC4RdITFrVhsThK0mcfXcJuYJjIKzkLTPQtK+gJF
+  pFaNVUlFmekZJbmJmjq6hgYGuoaGprrG5rqGlXmKVbqJeaqlueWpxia6RXmJ5sV5qcbFecWVu
+  ck6KXl5qySZGYBinFKsK72DsWPlT7xCjJAeTkihvbbtwkhBfUn5KZUZicUZ8UWlOavEhRhkOD
+  iUJXuF+oJxgUWp6akVaZg4wpmDSEhw8SiK85c1Aad7igsTc4sx0iNQpRkUpcV7BiUAJAZBERm
+  keXBssji8xykoJ8zIyMDAI8RSkFuVmlqDKv2IU52BUEuYNBpnCk5lXAjf9FdBiJqDFU7KEQBa
+  XJCKkpBqYmD/PsRUOMGh8Pp1LJlNDlYlFclNzwxHfG7dtORYvmS3ZUCTzfeX7om8cnoLHojg1
+  TlVmT+VZx7e18Nj7mzan3d8csJ7EMPGpxs2QViu9m5cnuC42Pqb0Ka72edySR79+X+A/bh03O
+  aReanYd74XuP5nfYvRNfZynGK/N4WuYWOjl0Mlz56ePwaHkzlx180lOtyQj1rw4P30107zOBp
+  1U/Q13rkfs51pkW31g8vR3Mef/iB89uW+2SmWyb9LTVV0uLNNOaTro1Mse/HFGld/MnmnBFPc
+  wbi2W6XMPqyml/o7mauGJ0Sy52Xj4Xef0o7bHjFaoH2rvlWNj+9rHxMg3w7ri8VoT/nmXrn+6
+  q7BIiaU4I9FQi7moOBEA4NTDMF4DAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-2.tower-591.messagelabs.com!1645449757!8460!1
-X-Originating-IP: [62.60.8.97]
+X-Msg-Ref: server-2.tower-565.messagelabs.com!1645449866!19069!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 26354 invoked from network); 21 Feb 2022 13:22:38 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-2.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 21 Feb 2022 13:22:38 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 9E78510019C
+Received: (qmail 4325 invoked from network); 21 Feb 2022 13:24:26 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-2.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 21 Feb 2022 13:24:26 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 0519710044D
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Feb 2022 13:22:37 +0000 (GMT)
+ Mon, 21 Feb 2022 13:24:26 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 91E59100185
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id EB6A2100354
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Feb 2022 13:22:37 +0000 (GMT)
+ Mon, 21 Feb 2022 13:24:25 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Mon, 21 Feb 2022 13:22:20 +0000
+ (TLS) id 15.0.1497.28; Mon, 21 Feb 2022 13:24:09 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] gnuplot: upgrade 5.4.2 -> 5.4.3
-Date: Mon, 21 Feb 2022 21:22:07 +0800
-Message-ID: <1645449729-23271-2-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libxmlb: upgrade 0.3.6 -> 0.3.7
+Date: Mon, 21 Feb 2022 21:23:55 +0800
+Message-ID: <1645449836-23309-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1645449729-23271-1-git-send-email-wangmy@fujitsu.com>
-References: <1645449729-23271-1-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1645449836-23309-1-git-send-email-wangmy@fujitsu.com>
+References: <1645449836-23309-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -85,68 +85,38 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Feb 2022 13:22:41 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Feb 2022 13:24:29 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95412
+ https://lists.openembedded.org/g/openembedded-devel/message/95416
 
-Changelog:
-=========
-NEW "set pm3d border retrace" will use quadrangle color for the border
-NEW "nogrid" flag for plots to opt out of dgrid3d processing
-NEW option "above|below y=<val>" for "plot with fillsteps"
-NEW "set style histogram nokeyseparators" suppress blank key entries Bug #2473
-CHANGE always allow palette color for non-plot elements of 2D plot
-FIX contours were incorrectly allocated space in the key even if "notitle"
-FIX evaluation of unary minus in front of ternary operator Bug #2468
-FIX arm and s390 require "signed char" Bugs #2467 #2450
-FIX range errors if "smooth csplines" applied with x-axis reversed Bug #2465
-FIX handle various corner cases found by fuzzing
-FIX textcolor should accept "linetype N" Bug #2459
-FIX Windows: handling of Window messages for piped input Bugs #2204 #2412
-FIX aquaterm: auto-configuration use of Frameworks Bug #2419
-FIX qt: pm3d quadrangle borders for transparent surfaces
-FIX png/gif: gdlib auto-configuration issues
-FIX dumb: limit enhanced text markup to single-line vertical displacement
+Bugfixes:
+ - Ensure reproducible results when importing a node
+ - Ignore all hidden files when using _WATCH_DIRECTORY
+ - Show the value bindings when using XB_SILO_PROFILE_FLAG_XPATH
+ - Use the correct lookup method for the python3 script interpreter
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../gnuplot/{gnuplot_5.4.2.bb => gnuplot_5.4.3.bb}  | 13 ++++++-------
- 1 file changed, 6 insertions(+), 7 deletions(-)
- rename meta-oe/recipes-extended/gnuplot/{gnuplot_5.4.2.bb => gnuplot_5.4.3.bb} (86%)
+ .../libxmlb/{libxmlb_0.3.6.bb => libxmlb_0.3.7.bb}              | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-gnome/libxmlb/{libxmlb_0.3.6.bb => libxmlb_0.3.7.bb} (91%)
 
-diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.2.bb b/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb
-similarity index 86%
-rename from meta-oe/recipes-extended/gnuplot/gnuplot_5.4.2.bb
-rename to meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb
-index 5504515e98..087b69faae 100644
---- a/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.2.bb
-+++ b/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb
-@@ -11,19 +11,18 @@ inherit autotools features_check
- # depends on virtual/libx11
- REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.6.bb b/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.7.bb
+similarity index 91%
+rename from meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.6.bb
+rename to meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.7.bb
+index 585c490194..48a7701db7 100644
+--- a/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.6.bb
++++ b/meta-oe/recipes-gnome/libxmlb/libxmlb_0.3.7.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1803fa9c2c3ce8cb06b4861d75310742"
+ SRC_URI = "git://github.com/hughsie/libxmlb.git;branch=main;protocol=https \
+            file://run-ptest \
+            "
+-SRCREV = "89276ffa4407a8d684e95675990fa864793a7586"
++SRCREV = "dc96ba2327bb1f408909b2cd7fb4ecc318e8165a"
+ S = "${WORKDIR}/git"
  
--SRC_URI = " \
--    ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar.gz;name=archive \
--    http://www.mneuroth.de/privat/zaurus/qtplot-0.2.tar.gz;name=qtplot \
--    file://gnuplot.desktop \
--    file://gnuplot.png \
--"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar.gz;name=archive \
-+           http://www.mneuroth.de/privat/zaurus/qtplot-0.2.tar.gz;name=qtplot \
-+           file://gnuplot.desktop \
-+           file://gnuplot.png \
-+           "
- SRC_URI:append:class-target = " \
-     file://0002-do-not-build-demos.patch \
-     file://0003-Use-native-tools-to-build-docs.patch \
-     file://0004-Add-configure-option-to-find-qt5-native-tools.patch \
- "
- 
--SRC_URI[archive.sha256sum] = "e57c75e1318133951d32a83bcdc4aff17fed28722c4e71f2305cfc2ae1cae7ba"
-+SRC_URI[archive.sha256sum] = "51f89bbab90f96d3543f95235368d188eb1e26eda296912256abcd3535bd4d84"
- SRC_URI[qtplot.sha256sum] = "6df317183ff62cc82f3dcf88207a267cd6478cb5147f55d7530c94f1ad5f4132"
- 
- # for building docs (they deserve it) we need *doc2* tools native
+ inherit gobject-introspection gtk-doc meson ptest-gnome lib_package
 -- 
 2.25.1
 
