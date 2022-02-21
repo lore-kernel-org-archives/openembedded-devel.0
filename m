@@ -1,121 +1,147 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <ceggers@arri.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A6B7C433FE
-	for <webhook@archiver.kernel.org>; Mon, 21 Feb 2022 13:25:49 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web08.10763.1645449948789022450
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5E25C433F5
+	for <webhook@archiver.kernel.org>; Mon, 21 Feb 2022 17:30:23 +0000 (UTC)
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (EUR04-VI1-obe.outbound.protection.outlook.com [40.107.8.94])
+ by mx.groups.io with SMTP id smtpd.web09.1599.1645464620244060997
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Feb 2022 05:25:49 -0800
+ Mon, 21 Feb 2022 09:30:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=TqNoegZk;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1645449947; i=@fujitsu.com;
-	bh=DMVr+YabcNh/r/iRw7sD6wo0t1abCPeQgLAOSAOWnBI=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=TqNoegZkkqvYu/YUh32Vm1TVoNjlQfuZAtY64kQPjsT3B3AWk1tStq1AMo79ya5ZU
-	 5nYny974bW/sj5qCSCyika1EXKXxsTaYj4slBkT3vsMLRIEviU2gFfIOaHxQG+6so8
-	 gQ2TGhnocsjZwEUx5HDjPSDPqzNQK9i3rTyXKWJkWVmQ9Q32MmXETeyhreA+aLWNmx
-	 5/2pdbFzF95b1Uu00ZW7sJ88TyFSlvKZnuXlh9M2o3HLBdgEAPxS8yndYAeU34fAwe
-	 UhamphFpAuOw3c1LTmv/ilFmq5PCocKmxNS9w0E6rk9E7MGFLOlZzObLD+c51mnmJW
-	 rxKUsVD07PgZw==
-Received: from [100.115.32.10] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-a.eu-west-2.aws.ess.symcld.net id A1/6B-29321-BD293126;
- Mon, 21 Feb 2022 13:25:47 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8ORqHtrknC
-  Swem/mhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8akZZuZCu5wVWya9p+9gfE8ZxcjF4eQwBNG
-  ibXTDzBCOBeYJOY96GCGcE4wStzZNJGpi5GTg01ATWL6rRusILaIgL7E0tl7mEFsZgEViRe/e
-  9hBbGEBf4l9tzawgNgsAqoSjZ+3gdm8Ak4SJ3d0M4LYEgIKElMevmeGiAtKnJz5hAVijoTEwR
-  cvmCFqFCVmX25mgbArJGbNamOCsNUkrp7bxDyBkX8WkvZZSNoXMDKtYrRKKspMzyjJTczM0TU
-  0MNA1NDTVNbbUtTDSS6zSTdRLLdUtTy0u0QVyy4v1UouL9Yorc5NzUvTyUks2MQLDMqVYPWgH
-  47cVP/UOMUpyMCmJ8ta2CycJ8SXlp1RmJBZnxBeV5qQWH2KU4eBQkuAV7gfKCRalpqdWpGXmA
-  GMEJi3BwaMkwlveDJTmLS5IzC3OTIdInWJUlBLnFZwIlBAASWSU5sG1weLyEqOslDAvIwMDgx
-  BPQWpRbmYJqvwrRnEORiVh3mCQKTyZeSVw018BLWYCWjwlSwhkcUkiQkqqgenW8p1pNiu5J1T
-  nGTAUcl28NbXDZGJQVHTrRR0dv8Onur4sLpEU3HBR2i69fH2nzt7HxaUnogObug/6WNzs4lMt
-  XjMha9FG9SdTWKQLH4o8XH2d67+S//Jq9y87ny38u/GUuDznneVih77W1Hft+CjgyH2kcN0aK
-  dXKZ/8T9d5wLfVK8umT2li2Q7fu98zbH/UNPso0GS+6LTZni4R8wvkbS+4+iU7Q/B9++LXKTJ
-  5uplVZOsqBzxdpZly2Pv/bV/FD/eY/fnNfyd+/duLdqlMT1N91drdxtVm3rM90EPc7uFH7fsP
-  X9Jj/Z24b7A2dvqU49P4FTdNJC4Plz65YcvLc5Vpb/fiHsW8evlH7/XqLEktxRqKhFnNRcSIA
-  vp1t80YDAAA=
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-5.tower-548.messagelabs.com!1645449946!27277!1
-X-Originating-IP: [62.60.8.97]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.7; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 19853 invoked from network); 21 Feb 2022 13:25:46 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-5.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 21 Feb 2022 13:25:46 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 4EC6310019E
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Feb 2022 13:25:46 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 425CE100185
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Feb 2022 13:25:46 +0000 (GMT)
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Mon, 21 Feb 2022 13:25:26 +0000
-From: Wang Mingyu <wangmy@fujitsu.com>
+ dkim=fail reason="body hash did not verify"
+ header.i=@arrigroup.onmicrosoft.com
+ header.s=selector1-arrigroup-onmicrosoft-com header.b=Ai4LdJSa;
+ spf=pass (domain: arri.de, ip: 40.107.8.94, mailfrom: ceggers@arri.de)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=YnDqxtxHPc9QCC93VxSE4rsAZTkQEeFwRe0aRgBtAsBq7ifu2oOR8UeqoR7zMvafuSo1Rl1+aAwtt4TXQk/rnWpNNr5MATE3kpMXP6ziO7Tr6uP2AsG7JHbyEez1e25XFQRz4Sr9wpZooMVcJBbj0/UASoHK0YJXFsn3qnus9UHItLpRtGU+rghcCOF3UYTXZnv6nRIcuCnwqc+U49fC4yd4PctSLouCa3RRSHLhIIAee0GnFxUmmPMJ2b3Ur8F6B6jNqDPc5PvOqkvwFDXCFnq6gj4WJI6rc8+oAgCFykKBz4yNq/RExZK5x5eO+obUEXy1w8fI3rg97v93Gvnumw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=AIJJ8pwLxAM45u9AMBGAa4g0445NLGiT31eOSN1ek54=;
+ b=LyAjQ4w27DHFbsdX60+3uaTpsAwgS+RlJs1hwbL+EFY0NhV61aFckEB/XwesEhfSQ7jDW0i6oi6f/ZR0n+fSYi7s0vhP7wyJyd+4Boqs3lpIegN/x5nS1LYIwAryu8i94AA3JypR239kJiHBdeLJYlV//oRX1tDhtA5tF6PC+TnzGOptg1FMd9vi1D+rL0WH6mSxMqhhzMYDTnHCrjb/gwIbWzPWw0+ePDzmdcLrdnXkL33DTGOLCK3NriBaSAdN0x/Cy4srAZoivb9j7O5FGFuOwXkgVg9bn3xkD6ySwmqfKxQgxHkFZV6BGGK6dVRFR/9q4cy13+AEy4xV4NMJIA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 217.111.95.7) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arri.de;
+ dmarc=none action=none header.from=arri.de; dkim=none (message not signed);
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=arrigroup.onmicrosoft.com; s=selector1-arrigroup-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=AIJJ8pwLxAM45u9AMBGAa4g0445NLGiT31eOSN1ek54=;
+ b=Ai4LdJSas4Fl3tdBgei4rxQCj3zb2Y8RdiDEYMSIRL68rqYbDsYQVNlVGwBAdRsN0TOe1BV6InqX4yltQJuw8FdLcqj7+5aTB6XUC/zIjVxrq80uPFzAKxzFroclGMIJ12SJNTfF2GyyOPKZYUqG5F+nkr8Z7BT/DUuRvJA2Ws4=
+Received: from OL1P279CA0022.NORP279.PROD.OUTLOOK.COM (2603:10a6:e10:13::9) by
+ DB6PR0701MB2261.eurprd07.prod.outlook.com (2603:10a6:4:4a::17) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5017.21; Mon, 21 Feb 2022 17:30:16 +0000
+Received: from HE1EUR02FT038.eop-EUR02.prod.protection.outlook.com
+ (2603:10a6:e10:13:cafe::68) by OL1P279CA0022.outlook.office365.com
+ (2603:10a6:e10:13::9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4995.16 via Frontend
+ Transport; Mon, 21 Feb 2022 17:30:15 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 217.111.95.7)
+ smtp.mailfrom=arri.de; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arri.de;
+Received-SPF: Fail (protection.outlook.com: domain of arri.de does not
+ designate 217.111.95.7 as permitted sender) receiver=protection.outlook.com;
+ client-ip=217.111.95.7; helo=mta.arri.de;
+Received: from mta.arri.de (217.111.95.7) by
+ HE1EUR02FT038.mail.protection.outlook.com (10.152.11.30) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.4995.20 via Frontend Transport; Mon, 21 Feb 2022 17:30:14 +0000
+Received: from MucEx01.arri.de (10.10.18.25) by MucEx01.arri.de (10.10.18.25)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.7; Mon, 21 Feb
+ 2022 18:30:14 +0100
+Received: from CASHUB3.arri.de (192.168.100.104) by MucEx01.arri.de
+ (10.10.18.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.7 via Frontend
+ Transport; Mon, 21 Feb 2022 18:30:14 +0100
+Received: from localhost.de (192.168.54.110) by exmta.arri.de
+ (192.168.100.104) with Microsoft SMTP Server (TLS) id 14.3.498.0; Mon, 21 Feb
+ 2022 18:30:14 +0100
+From: Christian Eggers <ceggers@arri.de>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-perl] [PATCH] libio-socket-ssl-perl: upgrade 2.073 ->
- 2.074
-Date: Mon, 21 Feb 2022 21:25:18 +0800
-Message-ID: <1645449918-23366-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+CC: Christian Eggers <ceggers@arri.de>
+Subject: [meta-oe][PATCH] graphviz: added PACKAGECONFIG for librsvg
+Date: Mon, 21 Feb 2022 18:29:47 +0100
+Message-ID: <20220221172947.17173-1-ceggers@arri.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+X-Originating-IP: [192.168.54.110]
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: fec1040b-f539-4455-bf9a-08d9f55fd25f
+X-MS-TrafficTypeDiagnostic: DB6PR0701MB2261:EE_
+X-Microsoft-Antispam-PRVS: 
+	<DB6PR0701MB22613DA8062AE6CA54CED829BF3A9@DB6PR0701MB2261.eurprd07.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	vstTLicuVnZ5otm4JHaJEBTbTWriqzEMQIOWIXY8n/O6FKxHl4trFGZ969IRF+KAJ6BhZaR15wgR2x2w3npuGRJ6Xj8/JY1A90CTU/mPNRMSZ+FBjl+8VVrL9toJ6vwtmgFHfdwQkOVBIrppFszbOlx9Zmy2+EEN0dJ1eQpJ6uTdWlugmAG9AD6MUuDcVucvZt3uBwfyOR3aqFpLNyVo9lb2UGWS4qRup7Td24PHUvflaNTo1z0eSQ8prBbQKq5mX8PCPLuYs8osV8sJbaPWf2kWjWu5V55bpXnrwf1YE/FBfVmT14qQEuBFH9JBdvM8W3e3b1aku+1JxoIubnvzHCyY869wQl8KZivPNivxL56WcGeistMVnPXW7nbkTzDFUYrNfPyQu1gF9VAYi+yKM3SRhwbKSCwhH5catOfJ5PwrOTX9OJ+v7bduqVsCnbEQ3BBDZ1bJq1lE1iDNdj7kg/WC5wS/3RnD8lCv82w8jzoSRPHXG0lo4LegKpBkz0FepRf2RdTV7PfX+4mh9ekq4j6MwoK+Q/DGwDV0x2kB721gZe/RpM8YKC1NDDwc4QxKICsa/Dm+0WbMI52NdY/TTTv3rZErLtwtDNh3LC8mpE0737FmFBQsOSuHDr5ZxRi1EkvAd8XEMkFNyO0SemB5U6LNMVab9hZ8Vv2bSI1ZIbAv0TMsCgZ1/E9cyXdyW3ZG5Iy/TU2NkBE0pN59SbPVMDYgxCaaYq4Fi6R0g5p2v2AfS1x2KqZFeSW0YBIjIfZi67CzQqxU+W5aQJ4FM2fVvA==
+X-Forefront-Antispam-Report: 
+	CIP:217.111.95.7;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mta.arri.de;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230001)(4636009)(36840700001)(46966006)(4326008)(47076005)(426003)(336012)(83380400001)(36756003)(5660300002)(2906002)(8936002)(107886003)(1076003)(966005)(2616005)(16526019)(186003)(26005)(70206006)(70586007)(356005)(81166007)(8676002)(6666004)(86362001)(6916009)(316002)(508600001)(82310400004)(36860700001)(36900700001);DIR:OUT;SFP:1102;
+X-OriginatorOrg: arri.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Feb 2022 17:30:14.9199
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ fec1040b-f539-4455-bf9a-08d9f55fd25f
+X-MS-Exchange-CrossTenant-Id: e6a73a5a-614d-4c51-b3e3-53b660a9433a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: 
+ TenantId=e6a73a5a-614d-4c51-b3e3-53b660a9433a;Ip=[217.111.95.7];Helo=[mta.arri.de]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	HE1EUR02FT038.eop-EUR02.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB6PR0701MB2261
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Feb 2022 13:25:49 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Feb 2022 17:30:23 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95419
+ https://lists.openembedded.org/g/openembedded-devel/message/95420
 
-Changelog:
-=========
-- add SSL_ciphersuites option for TLS 1.3 ciphers
-- no longer use own default for ciphers, instead use system default but disable
-  some weak ciphers which might still be enabled on older systems
+nativesdk-librsvg is not available anymore ([2], transition to Rust).
+According to [2], graphviz can be used fine (even with svg images)
+without librsvg.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+[1] oe-core: 67dd505c42 ("librsvg: do not enable nativesdk")
+[2] https://www.linuxfromscratch.org/blfs/view/cvs/general/graphviz.html
+
+Signed-off-by: Christian Eggers <ceggers@arri.de>
 ---
- ...-socket-ssl-perl_2.073.bb => libio-socket-ssl-perl_2.074.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libio/{libio-socket-ssl-perl_2.073.bb => libio-socket-ssl-perl_2.074.bb} (94%)
+ meta-oe/recipes-graphics/graphviz/graphviz_2.44.1.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.073.bb b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.074.bb
-similarity index 94%
-rename from meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.073.bb
-rename to meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.074.bb
-index ef7fd08bfe..0be1497d9a 100644
---- a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.073.bb
-+++ b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.074.bb
-@@ -22,7 +22,7 @@ RDEPENDS:${PN} += "\
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz \
-            file://run-ptest \
-           "
--SRC_URI[sha256sum] = "b2c0b34df97cb1aa816221cee2454a1efd89b86ccbda810389a30e0d08cf57c8"
-+SRC_URI[sha256sum] = "36486b6be49da4d029819cf7069a7b41ed48af0c87e23be0f8e6aba23d08a832"
- 
- S = "${WORKDIR}/IO-Socket-SSL-${PV}"
- 
--- 
-2.25.1
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_2.44.1.bb b/meta-oe=
+/recipes-graphics/graphviz/graphviz_2.44.1.bb
+index 203e0206fbfe..ff9939ebd02a 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz_2.44.1.bb
++++ b/meta-oe/recipes-graphics/graphviz/graphviz_2.44.1.bb
+@@ -9,7 +9,6 @@ DEPENDS =3D " \
+     groff-native \
+     libtool \
+     gdk-pixbuf \
+-    librsvg \
+     cairo \
+     pango \
+     expat \
+@@ -34,6 +33,10 @@ SRC_URI:append:class-nativesdk =3D "\
+ "
+ SRC_URI[sha256sum] =3D "8e1b34763254935243ccdb83c6ce108f531876d7a5dfd443f2=
+55e6418b8ea313"
+=20
++PACKAGECONFIG ??=3D "librsvg"
++PACKAGECONFIG:class-nativesdk ??=3D ""
++PACKAGECONFIG[librsvg] =3D "--with-librsvg,--without-librsvg,librsvg"
++
+ EXTRA_OECONF:append =3D " PS2PDF=3D/bin/echo"
+=20
+ EXTRA_OECONF:class-target =3D "\
+--=20
+2.34.1
 
 
