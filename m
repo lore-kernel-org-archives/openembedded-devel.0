@@ -1,129 +1,92 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD3E3C433F5
-	for <webhook@archiver.kernel.org>; Sun, 20 Feb 2022 15:39:20 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
- [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.web08.22276.1645371559953527888
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 88473C433EF
+	for <webhook@archiver.kernel.org>; Mon, 21 Feb 2022 00:47:21 +0000 (UTC)
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
+ [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.web09.5296.1645404440366194864
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Feb 2022 07:39:20 -0800
+ Sun, 20 Feb 2022 16:47:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linuxfoundation.org header.s=google header.b=WIcaWZ6K;
- spf=pass (domain: linuxfoundation.org, ip: 209.85.221.43,
- mailfrom: richard.purdie@linuxfoundation.org)
-Received: by mail-wr1-f43.google.com with SMTP id d27so22932914wrb.5
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=lPQpZmg6;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f180.google.com with SMTP id g1so7285354pfv.1
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Feb 2022 07:39:19 -0800 (PST)
+ Sun, 20 Feb 2022 16:47:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linuxfoundation.org; s=google;
-        h=message-id:subject:from:to:date:in-reply-to:references:user-agent
-         :mime-version:content-transfer-encoding;
-        bh=7mZXnzUWh/SPBOEX6DgMaorM64zZMYfyAhbfklTqKz0=;
-        b=WIcaWZ6K1P9XAxzxnFZ9NISX5Lgv++Pn4AjBpyDVcVNn1u7MgTwKGpfN325vQiz0f3
-         NHGGsBHR8aDz8uyvGOJ0zsOkqDVem9ZYm5nQvP3ZseAT9t11MGE1oTSQW6FrxjVxbk+I
-         hNb2bkBR464LhebC1Dge9VxEh3dwYTOIRkfNk=
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=+zLPWULESP9BpM4KHoeMKUTW5TG1nvnoVFNdUVBiLd0=;
+        b=lPQpZmg66TJX9nDTn8nyBtdHnKoiEaKPaZnRWWgRWv9MAIPbkkRtTHVL5lH82sWJYj
+         lyfpDemRpb1qa4RP+NKbsCwdQSRjRmB5RGdIG5fOBxrVA5JM0GMfG6YwllYI6i7LGj70
+         bY3tVxeW0nSnP61BiKZfTze/cysVGjN4Xt0jqYR8BlfSQx01PIBbu6ksHOHpoH8UARMl
+         VAH3vct/D/Ma4fqAJciB/SeegB163o29CJ9hwrMb26vbIWKw4Pc+ZNOQciKIJ+CIid38
+         I97R2sw5HPrETn7Fwbs2a4cPgWgoLTcVdzBB7VWIdLDajYc6h1GGyO1RmbHMNxcli8Vt
+         1gqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-         :references:user-agent:mime-version:content-transfer-encoding;
-        bh=7mZXnzUWh/SPBOEX6DgMaorM64zZMYfyAhbfklTqKz0=;
-        b=WIxEpbJns7fci0wqaPyEUn1MHCMWTMknY4MBs0Wf6jsqitVOI1nT5WkzRXRSUwAg7g
-         wnnglPrYPN1qRLR5TkKFtGr+30h8opvEuBxrrEFSL6gGTFvzqO2SUYFCUttC6qyp2YOF
-         S/EG1NI+Cu99HB2Bh6yj0G6tIjFLlIBfbOkU4yqhxbQrfKlzP5DYqCnfKnMBMgm1/of7
-         15kP9NzTwBvTjPYzGCoMfstD0EcZd5iGQFcGNREDmPC+6Ti0HJ9K5Tvk5jK2W0MdO1gN
-         ZM/yiB/RWSyiYqaV6iw5XLiwzJrCwUTi/3fudqNxnEAF1QD19rKgu392paXrQH8lu10T
-         STLg==
-X-Gm-Message-State: AOAM530lqhM4o3HN+GKCEuvDfJxOdeHFiLExgoLISnw+az2BP4nWQC43
-	pBOvdDiVMfIbDYywFAn26iTcrA==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=+zLPWULESP9BpM4KHoeMKUTW5TG1nvnoVFNdUVBiLd0=;
+        b=q8EXLc/V2LDYJnsn/fVMc5bzabFnn7uLVU12BGI0ldToGNUU2lqFIeNJnuHKQM0TVD
+         tFyWlxRbMFMU1FC8962Mdxuw8pOEMMJGaMVgtV2UmNfevPvouN5sbbxlL8/reIUUPL/T
+         SyNQ+MmhbCAyJorThdzH1/W91wPsQgzhcArzZIO6XLlp3bCdcfds0tP46VHcUnpPnpAR
+         gPAfKnM4FTl4vZJQqUstuiHEtej1mtfmNY1dac+d2xPfkg2nlMo6+yOoxoE0uzCCzX5W
+         3wzcS61yqPLlyh2OZybtZMci1F8LKeDXLOHgTA0yAC+AvYObztJQMh6ctfaw64l9XVip
+         Ieuw==
+X-Gm-Message-State: AOAM530JYInMCXA6jj+boJGShHSu2IqLABMNYKIHntGqu4/pDciVyC1v
+	RgoIbbUs2hXo14g5g+zOjgx5r5SCw8xrTg==
 X-Google-Smtp-Source: 
- ABdhPJz6eJW9cvsTAqryf+XB5N2QtuMPOdC/440Brhv2BK2aQd30Z1GZPY1w2pWLqyheusXcd8Ubqw==
-X-Received: by 2002:a05:6000:1ac6:b0:1e9:3a52:4c86 with SMTP id
- i6-20020a0560001ac600b001e93a524c86mr9411489wry.389.1645371558323;
-        Sun, 20 Feb 2022 07:39:18 -0800 (PST)
-Received: from ?IPv6:2001:8b0:aba:5f3c:9355:e71:cc42:42f1?
- ([2001:8b0:aba:5f3c:9355:e71:cc42:42f1])
+ ABdhPJwruqCSdw2p90T+ESRqCJ6SmvzV0+PcXq9PrkvfbxeW3dRGPJheCD8wpQk35EspkNZ8cJg8tA==
+X-Received: by 2002:a63:f606:0:b0:363:c24:1576 with SMTP id
+ m6-20020a63f606000000b003630c241576mr14331350pgh.388.1645404439485;
+        Sun, 20 Feb 2022 16:47:19 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::fb6e])
         by smtp.gmail.com with ESMTPSA id
- h11sm29578472wrr.64.2022.02.20.07.39.17
+ 12sm16789627pgb.71.2022.02.20.16.47.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 20 Feb 2022 07:39:17 -0800 (PST)
-Message-ID: 
- <fc955ccbd9a05e04afb590ff908f10dd05da0d7f.camel@linuxfoundation.org>
-Subject: Re: [Openembedded-architecture] Proposal:
- INCOMPATIBLE_LICENSE_EXCEPTION
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Saul Wold <Saul.Wold@windriver.com>, OE-core
-	 <openembedded-core@lists.openembedded.org>, OpenEmbedded Devel List
-	 <openembedded-devel@lists.openembedded.org>,
-	openembedded-architecture@lists.openembedded.org
-Date: Sun, 20 Feb 2022 15:39:16 +0000
-In-Reply-To: <c2098bee-157e-4f23-d0bf-26fc4b5bb37d@windriver.com>
-References: <c2098bee-157e-4f23-d0bf-26fc4b5bb37d@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.40.4-1ubuntu2 
+        Sun, 20 Feb 2022 16:47:19 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] capnproto: Link with libatomic on rv32
+Date: Sun, 20 Feb 2022 16:47:16 -0800
+Message-Id: <20220221004716.3125216-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 20 Feb 2022 15:39:20 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Feb 2022 00:47:21 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95393
+ https://lists.openembedded.org/g/openembedded-devel/message/95394
 
-On Fri, 2022-02-18 at 11:41 -0800, Saul Wold wrote:
-> As a follow-on to yesterday's email and replies, I would like to make 
-> the following proposal for dealing with the changes to 
-> INCOMPATIBLE_LICENSE and associated variables.
-> 
-> Current Usage:
-> 
-> INCOMPATIBLE_LICENSE is a list of licenses that are considered 
-> incompatible with a distro's requirements. This is used to compare 
-> against packages built by a given recipe.
-> 
-> A set of exception variables based on the license name (currently 
-> WHITELIST_<license>) that contains a list of recipes that will be 
-> checked against the current recipe (PN) being evaluated.  If it's in 
-> that list then all packages in that recipe will be built and included 
-> and the rest of the evaluation will be skipped.
-> 
-> Otherwise, the packages (PKGS) from the recipe will be evaluated to see 
-> if any have a package specific license (LICENSE:<pkgname>). If a package 
-> has a license other than the INCOMPATIBLE_LICENSE the recipe will be 
-> built and any packages with the INCOMPATIBLE_LICENSE will be excluded 
-> from being packaged in package.bbclass via LICENSE_EXCLUSION-<pkgname> 
-> internal variable.
-> 
-> The exception is predominately used for GPLv3 related packages, based on 
-> the emails replies overnight.
-> 
-> 
-> Proposal:
-> 
-> Keep the existing INCOMPATIBLE_LICENSE variable with the same behavior. 
-> The values in INCOMPATIBLE_LICENSE should be SDPX normalized license 
-> strings.
-> 
-> As Richard has already suggested an alternative variable that is more 
-> meaningful: INCOMPATIBLE_LICENSE_EXCEPTION with an a <pkg>:<spdx_lic> 
-> value. Rename the LICENSE_EXCLUSION-<pkg> variable to make it clear that 
-> it is an internal variable. The usage of the _EXCEPTION variable should 
-> contain pkg names not recipe name. ** This would be an important change **
-> 
-> Clean up code as appropriate to ensure the exceptions are handled once 
-> and identified during parsing.
-> 
-> I will start working on the implementation, Monday is a holiday in the 
-> US, so this should give sometime for this to be reviewed for Tuesday.
+Fixes
+riscv32-yoe-linux-ld: layout.c++:(.text+0x570e): undefined reference to `__atomic_load_8'
 
-Thanks Saul, from my perspective I think this is a good balance between cleaning
-up the syntax and other issues whilst being practical to implement and test in
-the time frames available.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-devtools/capnproto/capnproto_0.9.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-Cheers,
-
-Richard
-
+diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_0.9.1.bb b/meta-oe/recipes-devtools/capnproto/capnproto_0.9.1.bb
+index 9616edd732..36004c53d6 100644
+--- a/meta-oe/recipes-devtools/capnproto/capnproto_0.9.1.bb
++++ b/meta-oe/recipes-devtools/capnproto/capnproto_0.9.1.bb
+@@ -14,6 +14,7 @@ S = "${WORKDIR}/git/c++"
+ inherit cmake
+ 
+ CXXFLAGS:append:mips = " -latomic"
++CXXFLAGS:append:riscv32 = " -latomic"
+ 
+ EXTRA_OECMAKE += "\
+     -DBUILD_TESTING=OFF \
+-- 
+2.35.1
 
 
