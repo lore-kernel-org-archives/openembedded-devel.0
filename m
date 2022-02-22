@@ -2,77 +2,77 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 581BFC4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 533B7C433FE
 	for <webhook@archiver.kernel.org>; Tue, 22 Feb 2022 23:45:24 +0000 (UTC)
 Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.3])
- by mx.groups.io with SMTP id smtpd.web11.1037.1645573522831544156
+ [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web10.1049.1645573522559434938
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 22 Feb 2022 15:45:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=jFhxDzzY;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Y/sDzJdN;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1645573521; i=@fujitsu.com;
-	bh=O8OcSX222bCN28NiaRaVvw8rzamMGzfJClODNhgijYw=;
+	s=170520fj; t=1645573520; i=@fujitsu.com;
+	bh=v0Mr19vPLaxjd9S/CYYhPg5GP41yYvHTEH+ASPohhGU=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=jFhxDzzYNXMo/oh6Gs2Hc688nG+suZHtibKlb1eGwUUQAFoOl06cJr127ToMGnClh
-	 jUtaiq9cTGYPDPMHD0ip/Uzstvis3fmWvoZs/0OrJ0KWxA1Xi2c2cSsmUecw+QE5F4
-	 km5z0IVW6RWlxVKJnbE8aC9ElfU5uFi2qA9YpSnnjWQtTvjLv8YnjBB1ecLS261Q6Z
-	 Aa7yGc0HgdW6ulmz29cBU6LghIhRsk7WVgCEFb+s2tUB/QtgndX/pI58WBmG2rn9uD
-	 pgtH7KsO0SV/zspvY0Lu/qAhbsUifyLbVfWjF31SPyGXm4nuZ9DxqgWP/0eYOCIz+9
-	 P2bF2FaesRQoQ==
+	b=Y/sDzJdNDxoPAoDhsDcj1q19s22FvSv9JdApOJ34J0l82DoiekRI2DmtVuliZ1P3d
+	 OFgDJpNj+qtEXAxHEV1pC5+bAVAV8mgPj3weTnirwvoo8EdaxHOhy1N21BBUO8WYmZ
+	 90uzO1a2Paeb0iYdwLOjLdP/5lBJ+PjuFXaab/MnYmEtrSD1uPA9+vYKAN4nhBglkm
+	 g1NkXS6rR+L9VU3z4Uyi6WtNNT8oJcP3jxzEQvlgEVJSpYsSnbZ91jK67ljMTPzFtL
+	 Pb+TAZXrp2BO/mm3d0EECHaunZwRI78Y9m0H6tNLQR4KdHdMmn6sHTeIx2IqGkaPcz
+	 lO7Lhex/YkBUA==
 Received: from [100.115.35.240] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-a.eu-west-2.aws.ess.symcld.net id FD/6A-02429-09575126;
+	by server-2.bemta.az-a.eu-west-2.aws.ess.symcld.net id B8/A6-12680-09575126;
  Tue, 22 Feb 2022 23:45:20 +0000
 X-Brightmail-Tracker: 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
-  SwaNT7BYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8axpysZC9bzV1yffY69gfEgbxcjF4eQwBNG
-  iY8bF7JAOBeYJPrmXmCGcE4wSvz/O4+1i5GTg01ATWL6rRtgtoiAvsTS2XuYQWxmARWJF7972
-  EFsYQFbiRMre8FsFgFViRm/XoLZvAJOEkf2d4L1SggoSEx5+B6sl1PAWeLKn2lgthBQzczGOy
-  wQ9YISJ2c+YYGYLyFx8MULZoheRYnZl5tZIOwKiVmz2pggbDWJq+c2MU9gFJyFpH0WkvYFjEy
-  rGK2TijLTM0pyEzNzdA0NDHQNDU11jY11Dc0t9RKrdBP1Ukt1y1OLS3SN9BLLi/VSi4v1iitz
-  k3NS9PJSSzYxAgM5pVhx8w7GiSt/6h1ilORgUhLlnesvmiTEl5SfUpmRWJwRX1Sak1p8iFGGg
-  0NJglelECgnWJSanlqRlpkDjCqYtAQHj5IIr0oxUJq3uCAxtzgzHSJ1ilGXY9OaG3uZhVjy8v
-  NSpcR5DUuAigRAijJK8+BGwCL8EqOslDAvIwMDgxBPQWpRbmYJqvwrRnEORiVh3vkgU3gy80r
-  gNr0COoIJ6IgpWUIgR5QkIqSkGpiszc1T9rieSU9a95NVKlHa8fw9xtkFE99ulz3zqbkowzmJ
-  7UmtjVXdxFtmGfH3ru/43rawItPXZt3+QgYVp4dSkStu6N+3Y2GWdNZZIbspadXkozuu3S8RC
-  ihln7Vxxb/8cL2jS2NMJ86a5a/xQ7hrsvJxs/4P7vFOW879f3myc4pA9tELZiXFj7383qU0LE
-  iTlX9jxxF3ZO/2lJXeGxlVtM+EyjHwFNas1/j+6Gvvn3TTZfta6j67zDn5021S0eNrvi79Jew
-  r33DXvj2jtELP4dlCx/V/y9d0XuVZ5avG6pTwt5e98m7+ydXTJ2hfWSOzpXZ+JrNnbED0EbFX
-  mw7sPFXyvOfvyw2ZMTNbrHyUWIozEg21mIuKEwEWvNPoawMAAA==
+  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
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-16.tower-565.messagelabs.com!1645573519!11760!1
+X-Msg-Ref: server-5.tower-548.messagelabs.com!1645573519!44216!1
 X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 25786 invoked from network); 22 Feb 2022 23:45:20 -0000
+Received: (qmail 22843 invoked from network); 22 Feb 2022 23:45:20 -0000
 Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-16.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-5.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 22 Feb 2022 23:45:20 -0000
 Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id B9F99100457
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id B3E81100456
 	for <openembedded-devel@lists.openembedded.org>;
  Tue, 22 Feb 2022 23:45:19 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 9D96E10044F
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 9A4C5100446
 	for <openembedded-devel@lists.openembedded.org>;
  Tue, 22 Feb 2022 23:45:19 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Tue, 22 Feb 2022 23:45:05 +0000
+ (TLS) id 15.0.1497.28; Tue, 22 Feb 2022 23:45:03 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] mpv: upgrade 0.34.0 -> 0.34.1
-Date: Wed, 23 Feb 2022 07:44:48 +0800
-Message-ID: <1645573488-27207-4-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] rdma-core: upgrade 38.0 -> 39.0
+Date: Wed, 23 Feb 2022 07:44:47 +0800
+Message-ID: <1645573488-27207-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1645573488-27207-1-git-send-email-wangmy@fujitsu.com>
 References: <1645573488-27207-1-git-send-email-wangmy@fujitsu.com>
@@ -87,53 +87,43 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 22 Feb 2022 23:45:24 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95455
+ https://lists.openembedded.org/g/openembedded-devel/message/95453
 
-This is a bug fix release for the 0.34 branch.
-
-Fixes and Minor Enhancements
-----------------------------
-
-- player: fix autofit/geometry related segfault
-- ao_oss: add missing PATH_DEV_MIXER define
-- egl_helpers: fix context creation if GLES 3 is not available
-- audio: stop corrupting audio on underreads
-- wayland: fix a potential segfault on surface enter
-- vo_gpu: opengl: fix wrong glMemoryBarrier call
-- vo_gpu: opengl: create context at version 4.4 again
-- af_lavcac3enc: fix memory leak on no-op
-- subprocess: unblock/reset signals before running child process
-- wayland: avoid doing unneccesary window resizes
+Changelog:
+=========
+b2fedc4 rsocket: Make sure that the allocated memory is aligned
+ebbdb85 Merge pull request #1107 from Sindhu-Devale/libirdma-12-9-fixes
+a83619b providers: Move input validation for memory window bind to core
+a274c9c providers/rxe: Replace '%' with '&' in check_qp_queue_full()
+812ab81 Merge pull request #1128 from Wenpeng-Liang/clear_rq_sge
+1a9b2db docs: Fix typo in pyverbs example
+d498180 libhns: Clear remaining unused sges when post recv
+d99f61c Merge pull request #1127 from Wenpeng-Liang/misc_bugfix
+7307264 verbs: Fix description of manual for ibv wc read byte len function
+c298130 verbs: Fix a typo
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../mplayer/{mpv_0.34.0.bb => mpv_0.34.1.bb}             | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-multimedia/mplayer/{mpv_0.34.0.bb => mpv_0.34.1.bb} (94%)
+ .../rdma-core/{rdma-core_38.0.bb => rdma-core_39.0.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/rdma-core/{rdma-core_38.0.bb => rdma-core_39.0.bb} (95%)
 
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.34.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.34.1.bb
-similarity index 94%
-rename from meta-oe/recipes-multimedia/mplayer/mpv_0.34.0.bb
-rename to meta-oe/recipes-multimedia/mplayer/mpv_0.34.1.bb
-index ebcaa6c932..17d4b6ba07 100644
---- a/meta-oe/recipes-multimedia/mplayer/mpv_0.34.0.bb
-+++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.34.1.bb
-@@ -18,11 +18,10 @@ DEPENDS += " \
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-networking/recipes-support/rdma-core/rdma-core_38.0.bb b/meta-networking/recipes-support/rdma-core/rdma-core_39.0.bb
+similarity index 95%
+rename from meta-networking/recipes-support/rdma-core/rdma-core_38.0.bb
+rename to meta-networking/recipes-support/rdma-core/rdma-core_39.0.bb
+index da1e013bd3..48434aa584 100644
+--- a/meta-networking/recipes-support/rdma-core/rdma-core_38.0.bb
++++ b/meta-networking/recipes-support/rdma-core/rdma-core_39.0.bb
+@@ -6,7 +6,7 @@ DEPENDS = "libnl"
+ RDEPENDS:${PN} = "bash perl"
  
--SRCREV_mpv = "9ca9066d052acecb5b05369141a76993a753ee1e"
--SRC_URI = " \
--    git://github.com/mpv-player/mpv;name=mpv;branch=master;protocol=https \
--    https://waf.io/waf-2.0.20;name=waf;subdir=git \
--"
-+SRCREV_mpv = "349e437466163cb52f7d0aa227d4606edd9db501"
-+SRC_URI = "git://github.com/mpv-player/mpv;name=mpv;branch=release/0.34;protocol=https \
-+           https://waf.io/waf-2.0.20;name=waf;subdir=git \
-+           "
- SRC_URI[waf.sha256sum] = "bf971e98edc2414968a262c6aa6b88541a26c3cd248689c89f4c57370955ee7f"
- 
+ SRC_URI = "git://github.com/linux-rdma/rdma-core.git;branch=master;protocol=https"
+-SRCREV = "02361e3b865995ce251923390df0d5a5c821195a"
++SRCREV = "b2fedc4b1b891afd2c26ebfd21f9e440e83c28ff"
  S = "${WORKDIR}/git"
+ 
+ #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
 -- 
 2.25.1
 
