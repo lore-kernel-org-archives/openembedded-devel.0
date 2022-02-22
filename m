@@ -1,242 +1,153 @@
-Return-Path: <denis@denix.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DC1F5C433EF
-	for <webhook@archiver.kernel.org>; Tue, 22 Feb 2022 02:50:59 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web09.8236.1645498251914895685
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 035EDC433EF
+	for <webhook@archiver.kernel.org>; Tue, 22 Feb 2022 04:42:10 +0000 (UTC)
+Received: from mail-qv1-f47.google.com (mail-qv1-f47.google.com
+ [209.85.219.47])
+ by mx.groups.io with SMTP id smtpd.web10.9169.1645504928953849038
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Feb 2022 18:50:52 -0800
+ Mon, 21 Feb 2022 20:42:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
- mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 46F2D40C2E
-	for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Feb 2022 02:50:51 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id R-kPOfM7WH_s
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Feb 2022 02:50:51 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
- [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3132D40C5D
-	for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Feb 2022 02:50:51 +0000 (UTC)
-Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id E1292174769;
-	Mon, 21 Feb 2022 21:50:50 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: Denys Dmytriyenko <denis@denix.org>
-Subject: [PATCH 3/4] meta-openembedded: rename PNBLACKLIST to SKIP_RECIPE
-Date: Tue, 22 Feb 2022 02:50:47 +0000
-Message-Id: <20220222025048.2826709-3-denis@denix.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220222025048.2826709-1-denis@denix.org>
-References: <20220222025048.2826709-1-denis@denix.org>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=LMVNFv/y;
+ spf=pass (domain: gmail.com, ip: 209.85.219.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f47.google.com with SMTP id p7so38054409qvk.11
+        for <openembedded-devel@lists.openembedded.org>;
+ Mon, 21 Feb 2022 20:42:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=GUdK5K7lExuxL1CBQqMVAmwBUl8ERITo+mm6dQrFGi0=;
+        b=LMVNFv/y//U/BOSsrPaqLy+AGJRtWYOKhJUIy46ZRTPP5MYcg3R0IcXgzoPl1G2UmM
+         AwgqGLQOF9A2lIgF5bmaAXWdrHJWJe0mQJfcjUqu9sPw6EnMj4F/GC1iairldUgbx1Gm
+         nuzqXKgawp3IEj4hRds8s101lZHGqLrxyA4dnKgtbnHy9QNDvWe7RGl1ye5vcAaV0b3x
+         Et2FKooQIYAOOrU0n2F/qwJfalUbOnZh86Z54p52eCcOI+Q3BV0zv36D5jbJubQNZwr4
+         eIxQau8L9P5SWh+Oh5pWjO6jn9Clztxpx8Y3++tm4NyIcPVYwMwgOi7d90yOTnlAR7KN
+         u/Ag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=GUdK5K7lExuxL1CBQqMVAmwBUl8ERITo+mm6dQrFGi0=;
+        b=B611twlW64/cv3dmObbIUKdPnU2GA8jR6aBMu0be9luWwGpfawxntiYSx5HqQv0Ay9
+         A3QQN368JHKZ9c7b5hhjZVrM1cB/MkOgN+imQ3qywXZtCPFf4Ak4GGMXHPNGIAH29b7P
+         ORUiMGF/mwmBqOQF5Cxh+R14G04kjwBQUrka44tXMP4Lgn9KFkPIyNILNDAPKzp0jPQX
+         gt8IUuSm82OwYhJ107v7U/xWIjTWx7jPo6VMz8b7TlWBrCpBi08LlPzuoRqGOPueHqsz
+         XMxsLdZ6MRi70f0/xhSaYRyyk7664tAqWltk9S+FouRv+OkGbkWEx93Zg/CVRCYtNpEH
+         zs0A==
+X-Gm-Message-State: AOAM5329xbyvbUxLaSYyz+rMmuT+Or7oedVgrlJSYNn8vG6JEtY8is3F
+	YhplWjVbyZNKNQRjZ5IAGcdwDXDGW7vNTBkWao16Ud2hzQE=
+X-Google-Smtp-Source: 
+ ABdhPJzaMMTXvxgmp68xqcc7Rx/wdMFJtp4I82DOqIy+crzOiGHRhOZA/OIM+LQYt3VIl9xbkf883EVOU+FcnujVeNQ=
+X-Received: by 2002:a05:622a:104c:b0:2de:377e:25d9 with SMTP id
+ f12-20020a05622a104c00b002de377e25d9mr4837277qte.229.1645504927863; Mon, 21
+ Feb 2022 20:42:07 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+References: <20220222025048.2826709-1-denis@denix.org>
+In-Reply-To: <20220222025048.2826709-1-denis@denix.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 21 Feb 2022 20:41:42 -0800
+Message-ID: 
+ <CAMKF1sredNtG1mj2SNvrfuiLVs_H5d0x1HMyeooQJq-ArAaSOg@mail.gmail.com>
+Subject: Re: [oe] [PATCH 1/4] layer.conf: update compatibility from honister
+ to kirkstone
+To: Denys Dmytriyenko <denis@denix.org>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 22 Feb 2022 02:50:59 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 22 Feb 2022 04:42:10 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95432
+ https://lists.openembedded.org/g/openembedded-devel/message/95436
 
-Part of inclusive language changes.
+I had patches in master-next to address these for few days now, they
+are already in master, please send anything thats missing as a rebase.
 
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
----
- .../recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb          | 2 +-
- meta-networking/recipes-support/drbd/drbd_9.0.24-1.bb           | 2 +-
- .../recipes-support/lowpan-tools/lowpan-tools_git.bb            | 2 +-
- meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb      | 2 +-
- meta-oe/recipes-dbs/mysql/mysql-python_1.2.5.bb                 | 2 +-
- meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb   | 2 +-
- meta-oe/recipes-extended/cfengine/cfengine_3.15.0.bb            | 2 +-
- meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb        | 2 +-
- meta-oe/recipes-graphics/dnfdragora/dnfdragora_2.1.2.bb         | 2 +-
- meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb              | 2 +-
- 10 files changed, 10 insertions(+), 10 deletions(-)
-
-diff --git a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0=
-.17.bb b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.=
-bb
-index 48b32eb7e..c45cbcd92 100644
---- a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-@@ -69,4 +69,4 @@ RDEPENDS:${PN}-server +=3D "tcp-wrappers xinetd rpcbind=
-"
-=20
- # http://errors.yoctoproject.org/Errors/Details/186962/
- COMPATIBLE_HOST:libc-musl =3D 'null'
--PNBLACKLIST[netkit-rusers] ?=3D "Fails to build rup.c:51:10: fatal error=
-: rstat.h: No such file or directory"
-+SKIP_RECIPE[netkit-rusers] ?=3D "Fails to build rup.c:51:10: fatal error=
-: rstat.h: No such file or directory"
-diff --git a/meta-networking/recipes-support/drbd/drbd_9.0.24-1.bb b/meta=
--networking/recipes-support/drbd/drbd_9.0.24-1.bb
-index 3ce63c457..05d42c75e 100644
---- a/meta-networking/recipes-support/drbd/drbd_9.0.24-1.bb
-+++ b/meta-networking/recipes-support/drbd/drbd_9.0.24-1.bb
-@@ -21,4 +21,4 @@ do_install () {
-     oe_runmake install DESTDIR=3D"${D}"
- }
-=20
--PNBLACKLIST[drbd] ?=3D "Needs coccinelle to build with SPAAS"
-+SKIP_RECIPE[drbd] ?=3D "Needs coccinelle to build with SPAAS"
-diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_gi=
-t.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-index 28def7b48..cc6053ba9 100644
---- a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-+++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-@@ -36,4 +36,4 @@ FILES:${PN}-dbg +=3D "${libexecdir}/lowpan-tools/.debug=
-/"
- PACKAGES =3D+ "${PN}-python"
- FILES:${PN}-python =3D "${libdir}/python*"
-=20
--PNBLACKLIST[lowpan-tools] ?=3D "WARNING these tools are deprecated! Use =
-wpan-tools instead"
-+SKIP_RECIPE[lowpan-tools] ?=3D "WARNING these tools are deprecated! Use =
-wpan-tools instead"
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b=
-/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-index be131cd26..b0e7475bd 100644
---- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-@@ -76,4 +76,4 @@ INHIBIT_PACKAGE_STRIP =3D "1"
- INHIBIT_PACKAGE_DEBUG_SPLIT =3D "1"
-=20
- # see https://github.com/libhugetlbfs/libhugetlbfs/issues/52
--PNBLACKLIST[libhugetlbfs] ?=3D "Needs porting to glibc 2.34+"
-+SKIP_RECIPE[libhugetlbfs] ?=3D "Needs porting to glibc 2.34+"
-diff --git a/meta-oe/recipes-dbs/mysql/mysql-python_1.2.5.bb b/meta-oe/re=
-cipes-dbs/mysql/mysql-python_1.2.5.bb
-index 43fc69073..cd4658651 100644
---- a/meta-oe/recipes-dbs/mysql/mysql-python_1.2.5.bb
-+++ b/meta-oe/recipes-dbs/mysql/mysql-python_1.2.5.bb
-@@ -16,7 +16,7 @@ SRC_URI[sha256sum] =3D "811040b647e5d5686f84db415efd697=
-e6250008b112b6909ba77ac059e
-=20
- S =3D "${WORKDIR}/${SRCNAME}-${PV}"
-=20
--PNBLACKLIST[mysql-python] ?=3D "${@bb.utils.contains('I_SWEAR_TO_MIGRATE=
-_TO_PYTHON3', 'yes', '', 'python2 is out of support for long time, read h=
-ttps://www.python.org/doc/sunset-python-2/ https://python3statement.org/ =
-and if you really have to temporarily use this, then set I_SWEAR_TO_MIGRA=
-TE_TO_PYTHON3 to "yes"', d)}"
-+SKIP_RECIPE[mysql-python] ?=3D "${@bb.utils.contains('I_SWEAR_TO_MIGRATE=
-_TO_PYTHON3', 'yes', '', 'python2 is out of support for long time, read h=
-ttps://www.python.org/doc/sunset-python-2/ https://python3statement.org/ =
-and if you really have to temporarily use this, then set I_SWEAR_TO_MIGRA=
-TE_TO_PYTHON3 to "yes"', d)}"
-=20
- inherit ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "setu=
-ptools", "", d)}
-=20
-diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.b=
-b b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-index 88c83f102..ddb93a040 100644
---- a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-+++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-@@ -37,4 +37,4 @@ RDEPENDS:${PN} +=3D " \
- "
-=20
- BBCLASSEXTEND =3D "nativesdk"
--PNBLACKLIST[dnf-plugin-tui] ?=3D "${@bb.utils.contains('PACKAGE_CLASSES'=
-, 'package_rpm', '', 'does not build correctly without package_rpm in PAC=
-KAGE_CLASSES', d)}"
-+SKIP_RECIPE[dnf-plugin-tui] ?=3D "${@bb.utils.contains('PACKAGE_CLASSES'=
-, 'package_rpm', '', 'does not build correctly without package_rpm in PAC=
-KAGE_CLASSES', d)}"
-diff --git a/meta-oe/recipes-extended/cfengine/cfengine_3.15.0.bb b/meta-=
-oe/recipes-extended/cfengine/cfengine_3.15.0.bb
-index 60c5ab381..05d3a1e23 100644
---- a/meta-oe/recipes-extended/cfengine/cfengine_3.15.0.bb
-+++ b/meta-oe/recipes-extended/cfengine/cfengine_3.15.0.bb
-@@ -10,7 +10,7 @@ its lifecycle. CFEngine takes systems from Build to Dep=
-loy, Manage and Audit."
-=20
- HOMEPAGE =3D "http://cfengine.com"
-=20
--PNBLACKLIST[cfengine] ?=3D "Needs porting to openssl 3.x"
-+SKIP_RECIPE[cfengine] ?=3D "Needs porting to openssl 3.x"
-=20
- LICENSE =3D "GPLv3"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D233aa25e53983237cf0bd4c238af2=
-55f"
-diff --git a/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb b/m=
-eta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
-index 850ed4f5f..24271eb2b 100644
---- a/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
-+++ b/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
-@@ -7,7 +7,7 @@ SECTION =3D "System/Management"
-=20
- inherit ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "setu=
-ptools", "", d)}
-=20
--PNBLACKLIST[openlmi-tools] ?=3D "${@bb.utils.contains('I_SWEAR_TO_MIGRAT=
-E_TO_PYTHON3', 'yes', '', 'python2 is out of support for long time, read =
-https://www.python.org/doc/sunset-python-2/ https://python3statement.org/=
- and if you really have to temporarily use this, then set I_SWEAR_TO_MIGR=
-ATE_TO_PYTHON3 to "yes"', d)}"
-+SKIP_RECIPE[openlmi-tools] ?=3D "${@bb.utils.contains('I_SWEAR_TO_MIGRAT=
-E_TO_PYTHON3', 'yes', '', 'python2 is out of support for long time, read =
-https://www.python.org/doc/sunset-python-2/ https://python3statement.org/=
- and if you really have to temporarily use this, then set I_SWEAR_TO_MIGR=
-ATE_TO_PYTHON3 to "yes"', d)}"
-=20
- DEPENDS =3D "python-native python-pywbem-native python-m2crypto python-p=
-ywbem"
-=20
-diff --git a/meta-oe/recipes-graphics/dnfdragora/dnfdragora_2.1.2.bb b/me=
-ta-oe/recipes-graphics/dnfdragora/dnfdragora_2.1.2.bb
-index eea231a2e..331e00fb8 100644
---- a/meta-oe/recipes-graphics/dnfdragora/dnfdragora_2.1.2.bb
-+++ b/meta-oe/recipes-graphics/dnfdragora/dnfdragora_2.1.2.bb
-@@ -27,5 +27,5 @@ BBCLASSEXTEND =3D "nativesdk"
-=20
- FILES:${PN} =3D "${PYTHON_SITEPACKAGES_DIR}/ ${datadir}/ ${bindir}/ ${sy=
-sconfdir}/dnfdragora ${sysconfdir}/xdg"
-=20
--PNBLACKLIST[dnfdragora] ?=3D "${@bb.utils.contains('PACKAGE_CLASSES', 'p=
-ackage_rpm', '', 'does not build correctly without package_rpm in PACKAGE=
-_CLASSES', d)}"
-+SKIP_RECIPE[dnfdragora] ?=3D "${@bb.utils.contains('PACKAGE_CLASSES', 'p=
-ackage_rpm', '', 'does not build correctly without package_rpm in PACKAGE=
-_CLASSES', d)}"
-=20
-diff --git a/meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb b/meta-oe=
-/recipes-support/lio-utils/lio-utils_4.1.bb
-index 108d65298..15acdf51a 100644
---- a/meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb
-+++ b/meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb
-@@ -55,7 +55,7 @@ do_install() {
-     install -m 755 ${S}/conf/lio_start.default ${D}/etc/target/lio_start=
-.sh
- }
-=20
--PNBLACKLIST[lio-utils] ?=3D "${@bb.utils.contains('I_SWEAR_TO_MIGRATE_TO=
-_PYTHON3', 'yes', '', 'python2 is out of support for long time, read http=
-s://www.python.org/doc/sunset-python-2/ https://python3statement.org/ and=
- if you really have to temporarily use this, then set I_SWEAR_TO_MIGRATE_=
-TO_PYTHON3 to "yes"', d)}"
-+SKIP_RECIPE[lio-utils] ?=3D "${@bb.utils.contains('I_SWEAR_TO_MIGRATE_TO=
-_PYTHON3', 'yes', '', 'python2 is out of support for long time, read http=
-s://www.python.org/doc/sunset-python-2/ https://python3statement.org/ and=
- if you really have to temporarily use this, then set I_SWEAR_TO_MIGRATE_=
-TO_PYTHON3 to "yes"', d)}"
-=20
- RDEPENDS:${PN} +=3D "python-stringold python-subprocess python-shell \
-     python-datetime python-textutils python-crypt python-netclient pytho=
-n-email \
---=20
-2.25.1
-
+On Mon, Feb 21, 2022 at 6:50 PM Denys Dmytriyenko <denis@denix.org> wrote:
+>
+> Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+> ---
+>  meta-filesystems/conf/layer.conf | 2 +-
+>  meta-gnome/conf/layer.conf       | 2 +-
+>  meta-networking/conf/layer.conf  | 2 +-
+>  meta-oe/conf/layer.conf          | 2 +-
+>  meta-python/conf/layer.conf      | 2 +-
+>  5 files changed, 5 insertions(+), 5 deletions(-)
+>
+> diff --git a/meta-filesystems/conf/layer.conf b/meta-filesystems/conf/layer.conf
+> index 6a9357d2a..b5f59d9ba 100644
+> --- a/meta-filesystems/conf/layer.conf
+> +++ b/meta-filesystems/conf/layer.conf
+> @@ -15,4 +15,4 @@ LAYERVERSION_filesystems-layer = "1"
+>
+>  LAYERDEPENDS_filesystems-layer = "core openembedded-layer"
+>
+> -LAYERSERIES_COMPAT_filesystems-layer = "honister"
+> +LAYERSERIES_COMPAT_filesystems-layer = "kirkstone"
+> diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
+> index d2ee3e069..3f6b4f7b7 100644
+> --- a/meta-gnome/conf/layer.conf
+> +++ b/meta-gnome/conf/layer.conf
+> @@ -17,7 +17,7 @@ LAYERVERSION_gnome-layer = "1"
+>
+>  LAYERDEPENDS_gnome-layer = "core openembedded-layer networking-layer"
+>
+> -LAYERSERIES_COMPAT_gnome-layer = "honister"
+> +LAYERSERIES_COMPAT_gnome-layer = "kirkstone"
+>
+>  SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += "\
+>    faenza-icon-theme->gdk-pixbuf \
+> diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
+> index 67fcda3d9..3f9699ad1 100644
+> --- a/meta-networking/conf/layer.conf
+> +++ b/meta-networking/conf/layer.conf
+> @@ -17,7 +17,7 @@ LAYERDEPENDS_networking-layer = "core"
+>  LAYERDEPENDS_networking-layer += "openembedded-layer"
+>  LAYERDEPENDS_networking-layer += "meta-python"
+>
+> -LAYERSERIES_COMPAT_networking-layer = "honister"
+> +LAYERSERIES_COMPAT_networking-layer = "kirkstone"
+>
+>  LICENSE_PATH += "${LAYERDIR}/licenses"
+>
+> diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+> index d25db911c..93f3dc580 100644
+> --- a/meta-oe/conf/layer.conf
+> +++ b/meta-oe/conf/layer.conf
+> @@ -42,7 +42,7 @@ LAYERVERSION_openembedded-layer = "1"
+>
+>  LAYERDEPENDS_openembedded-layer = "core"
+>
+> -LAYERSERIES_COMPAT_openembedded-layer = "honister"
+> +LAYERSERIES_COMPAT_openembedded-layer = "kirkstone"
+>
+>  LICENSE_PATH += "${LAYERDIR}/licenses"
+>
+> diff --git a/meta-python/conf/layer.conf b/meta-python/conf/layer.conf
+> index ffad953f9..98f734152 100644
+> --- a/meta-python/conf/layer.conf
+> +++ b/meta-python/conf/layer.conf
+> @@ -14,6 +14,6 @@ LAYERVERSION_meta-python = "1"
+>
+>  LAYERDEPENDS_meta-python = "core (>= 12) openembedded-layer"
+>
+> -LAYERSERIES_COMPAT_meta-python = "honister"
+> +LAYERSERIES_COMPAT_meta-python = "kirkstone"
+>
+>  LICENSE_PATH += "${LAYERDIR}/licenses"
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#95434): https://lists.openembedded.org/g/openembedded-devel/message/95434
+> Mute This Topic: https://lists.openembedded.org/mt/89309603/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
