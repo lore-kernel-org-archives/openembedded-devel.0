@@ -1,111 +1,157 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 56EC8C433EF
-	for <webhook@archiver.kernel.org>; Tue, 22 Feb 2022 19:15:27 +0000 (UTC)
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com
- [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.web12.1832.1645557322027400924
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 64A85C433F5
+	for <webhook@archiver.kernel.org>; Tue, 22 Feb 2022 21:15:52 +0000 (UTC)
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com
+ [209.85.214.174])
+ by mx.groups.io with SMTP id smtpd.web11.3538.1645564551274538787
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Feb 2022 11:15:22 -0800
+ Tue, 22 Feb 2022 13:15:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=dVNsd5Gf;
- spf=pass (domain: gmail.com, ip: 209.85.214.181,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id c3so6856342plh.9
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=jxulJeCZ;
+ spf=pass (domain: gmail.com, ip: 209.85.214.174,
+ mailfrom: ticotimo@gmail.com)
+Received: by mail-pl1-f174.google.com with SMTP id 4so8175662pll.6
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Feb 2022 11:15:21 -0800 (PST)
+ Tue, 22 Feb 2022 13:15:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=KOZkho9EnttwQQjZij/HjoZcgmtUfSXuefriOI43DUM=;
-        b=dVNsd5Gfy6Sl22zy+QWmzV2/lb9AU5UjbQz5vrwMBWHXnT0IX9DxuCvqDebeMFoKIz
-         fxfMX7Qo6miON8/g92LkKjgLinm3nXG4MekfwdpXGxkt2B1L3/5hiKsyrrhhy/JnfkcN
-         Ne3FolPUD/b6rCyxpja7u5zWfZd7Z5Ym2V9Ta5ELnhoFvBSiq4YL86J0pARBpNf1Z0AJ
-         XNxKV4TzflLIJU3l7ES1z7gG5nf3eHun+neb56oDduVfE2ECO1/ZQ9RnRwqRGreGPuZC
-         dO8d8n3Vvh1EEq772OcrIvqB5ISj8t+RLw1ChQbys9uMHglD8ZgJcvmjnwjZZl8e4sqA
-         cB+A==
+        bh=DQCIVrLgMsK0wZtK4A4aSyFpxHT2wFz8lsPgwcNN540=;
+        b=jxulJeCZQpbHQ4jMn6h16uvJ2Ub+kM9s1mzByyiTg37G0xG7mEJQBwOIQTiGix+LvH
+         MUNiDHzl53vf337d4y3NWrF9GJTbKb6to0HObZZomu3UsGOUW3ti4UJxQdxULqJ68rgI
+         20ZozyFWDTMVc5K0Mk8GmKhYa22IY4nSISmBZ22ZtQou11Y3E0EA8ejAsAeQ6tmdATBC
+         stRPHuaA/3tWv9Ra9Q33rdINLzcTINYjhSly2M7Tjw2Uk1HCfY5N+lf0bcge7MFYyagM
+         5dA67LQU6PPa2IBZ258R3i50Ud74jr5MKCLQZrD3luITnXf00h5o96zLvPJqaOhtp3lT
+         uaEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=KOZkho9EnttwQQjZij/HjoZcgmtUfSXuefriOI43DUM=;
-        b=IlWNrY9yeiOtV2ky6vw5TGLbrj08OudWA/jVbV4vs8jVP5JtNZl/e/n84a2OUZE40h
-         jPPLyDtwP4GoGPX1xJ0WqtIitna1hAkrSav3SEKqJBore/PbcaX9Lp+EC2M/brsqoLAf
-         P/MdCr8qp7owNMhRkhGbqv3BIcUBDFdSBz11cBLthkJMeSA6WB3jhBe3a5IkoezPrCry
-         tJny54nq04Eq4eKT/6YWD5lkW64kXFFhtXB5fNauQfjZ0ffJCKo0v3bYMpeDnI+G9K5K
-         yRN0irHO4mWdBtQ10c2/EIVFfhP8gumPAcP3vZZTg/tsNt3WYJPnwh3AO37STBJteX5I
-         0l8w==
-X-Gm-Message-State: AOAM530sSs3/1BvwB8FI0e1ZwpB5Zu6wobWbqQYisZMKq8OZ0lIRFC9x
-	IRqodS0S24URvezNwjbaw3I1HGQcIA5JjA==
+        bh=DQCIVrLgMsK0wZtK4A4aSyFpxHT2wFz8lsPgwcNN540=;
+        b=kTYtUolKeiy2AbNXFqcQEqomdoYpwM1jYdDgtTQeqE55QdRHvSDG4CBlyDx1LR8Y8t
+         k+q6uGJY9khuGp13eUxfFKjxYY78cvBXgUztUtFuk2YJRlTgA4M8yNoC++uNRL/Tc+Mr
+         kh9oxGH1G6CbvSnnmoOm7Pm4PzNEYiPiMrsVx9gtqx9m+Heuns+IAYgBQ6LXxzDkgwuz
+         QdtHWQ+laWn+TOdIrPiktNLGC9GX1NoZwfgSNtUmN8tYRYdiC/CZra7vVun7CrdViivk
+         Aq2nLK4vbpFYLYt6Q68//c+W6BPh6EbdJmNQS0hI8G2FtROBNhuQ0cy72Ff10t9khFeo
+         xAVQ==
+X-Gm-Message-State: AOAM530LUHB7+7GPelRsac/yn+sUZ/3vfU356eyN4PF86H+rS5LxESX/
+	/gRnNqsyg+NgaMJkj4mHqVUdctJcPevG7g==
 X-Google-Smtp-Source: 
- ABdhPJxfQnjHeVul96bcfePVU2u/XsW728T7T2cQQzF2uQ5OYoWvm0JGhm5nFmWDh3X3CTjL/8YJrw==
-X-Received: by 2002:a17:902:d103:b0:14f:a3a5:3974 with SMTP id
- w3-20020a170902d10300b0014fa3a53974mr13443728plw.74.1645557321249;
-        Tue, 22 Feb 2022 11:15:21 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::fb6e])
+ ABdhPJzGETseCW4ZEkAbQsc+i0DxdLp245rCE1zFFsEykZ5JNaPTpRYNPp3P+yeecjBjd1QUOvj9gg==
+X-Received: by 2002:a17:90b:1b51:b0:1b9:b61a:aaf4 with SMTP id
+ nv17-20020a17090b1b5100b001b9b61aaaf4mr6027457pjb.79.1645564550152;
+        Tue, 22 Feb 2022 13:15:50 -0800 (PST)
+Received: from nereus.hsd1.or.comcast.net
+ ([2601:1c0:6000:1b20:d208:bddf:2b06:2b5a])
         by smtp.gmail.com with ESMTPSA id
- p16sm19169973pfh.89.2022.02.22.11.15.20
+ h9sm18198024pfv.135.2022.02.22.13.15.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Feb 2022 11:15:20 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+        Tue, 22 Feb 2022 13:15:49 -0800 (PST)
+From: Tim Orling <ticotimo@gmail.com>
+X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH] python3-wheel: Delete
-Date: Tue, 22 Feb 2022 11:15:18 -0800
-Message-Id: <20220222191518.2413565-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.35.1
+Cc: raj.khem@gmail.com,
+	Tim Orling <tim.orling@konsulko.com>
+Subject: [meta-python][PATCH] python3-test-generator: drop recipe
+Date: Tue, 22 Feb 2022 13:15:45 -0800
+Message-Id: <20220222211545.2340237-1-tim.orling@konsulko.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 22 Feb 2022 19:15:27 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 22 Feb 2022 21:15:52 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95450
+ https://lists.openembedded.org/g/openembedded-devel/message/95451
 
-moved to oe-core
+python3-nose still contains Python 2 code which causes errors in
+do_compile when using bdist_wheel or PEP-517 packaging.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Like nose, test-generator has not been touched since 2016.
+
+Drop this recipe unless someone fixes the issues in python3-nose
+
+[YOCTO #14638]
+
+Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ---
- .../packagegroups/packagegroup-meta-python.bb        |  1 -
- .../recipes-devtools/python/python3-wheel_0.37.1.bb  | 12 ------------
- 2 files changed, 13 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-wheel_0.37.1.bb
+ .../packagegroups/packagegroup-meta-python.bb |  2 --
+ .../python/python3-test-generator/run-ptest   |  3 --
+ .../python/python3-test-generator_0.1.2.bb    | 29 -------------------
+ 3 files changed, 34 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-test-generator/run-ptest
+ delete mode 100644 meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb
 
 diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index 319d49267c..a8a09b4d56 100644
+index 8b574bdf0f..8345fc5989 100644
 --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
 +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -462,7 +462,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
-     python3-websockets \
-     python3-werkzeug \
-     python3-werkzeug \
--    python3-wheel \
-     python3-whoosh \
-     python3-wrapt \
-     python3-wtforms \
-diff --git a/meta-python/recipes-devtools/python/python3-wheel_0.37.1.bb b/meta-python/recipes-devtools/python/python3-wheel_0.37.1.bb
+@@ -423,7 +423,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
+     python3-tabulate \
+     python3-term \
+     python3-termcolor \
+-    python3-test-generator \
+     python3-textparser \
+     python3-texttable \
+     python3-thrift \
+@@ -535,7 +534,6 @@ RDEPENDS:packagegroup-meta-python3-ptest = "\
+     python3-smpplib-ptest \
+     python3-soupsieve-ptest \
+     python3-sqlparse-ptest \
+-    python3-test-generator-ptest \
+     python3-typeguard-ptest \
+     python3-ujson-ptest \
+     python3-u-msgpack-python-ptest \
+diff --git a/meta-python/recipes-devtools/python/python3-test-generator/run-ptest b/meta-python/recipes-devtools/python/python3-test-generator/run-ptest
 deleted file mode 100644
-index 6c7a31db9e..0000000000
---- a/meta-python/recipes-devtools/python/python3-wheel_0.37.1.bb
+index 5cec711696..0000000000
+--- a/meta-python/recipes-devtools/python/python3-test-generator/run-ptest
 +++ /dev/null
-@@ -1,12 +0,0 @@
--SUMMARY = "The official binary distribution format for Python "
--HOMEPAGE = "https://github.com/pypa/wheel"
--SECTION = "devel/python"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=10;endline=10;md5=8227180126797a0148f94f483f3e1489"
+@@ -1,3 +0,0 @@
+-#!/bin/sh
 -
--SRC_URI[sha256sum] = "e9a504e793efbca1b8e0e9cb979a249cf4a0a7b5b8c9e8b65a5e39d49529c1c4"
+-pytest
+diff --git a/meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb b/meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb
+deleted file mode 100644
+index 7f212ddd87..0000000000
+--- a/meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb
++++ /dev/null
+@@ -1,29 +0,0 @@
+-SUMMARY = "Generator is a helper for generating test methods for nose while still using unittest."
+-DESCRIPTION = "Python package with modified subclasses of all stdlib XML \
+-parsers that prevent any potentially malicious operation."
 -
--inherit pypi setuptools3
+-LICENSE = "ISC"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=041a2bff595d40ccb4b36356f89dab00"
 -
--BBCLASSEXTEND = "native"
+-SRC_URI += " \
+-	file://run-ptest \
+-"
 -
+-SRC_URI[md5sum] = "6c69e73ba5b4b3ed62f7bcda071c64f1"
+-SRC_URI[sha256sum] = "ad5925c814bfe79497b43df096e3bb52c166d1577f7aff160137301676232f4a"
+-
+-inherit pypi setuptools3 ptest
+-
+-RDEPENDS:${PN}-ptest += " \
+-	${PYTHON_PN}-pytest \
+-	${PYTHON_PN}-mock \
+-"
+-
+-do_install_ptest() {
+-	install -d ${D}${PTEST_PATH}/tests
+-	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+-}
+-
+-DEPENDS += "python3-nose-native"
+-
+-RDEPENDS:${PN} += "python3-six"
 -- 
-2.35.1
+2.30.2
 
 
