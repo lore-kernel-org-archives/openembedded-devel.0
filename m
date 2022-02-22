@@ -1,83 +1,92 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 113B5C433F5
-	for <webhook@archiver.kernel.org>; Tue, 22 Feb 2022 18:49:35 +0000 (UTC)
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com
- [209.85.216.47])
- by mx.groups.io with SMTP id smtpd.web12.1455.1645555774036148547
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56EC8C433EF
+	for <webhook@archiver.kernel.org>; Tue, 22 Feb 2022 19:15:27 +0000 (UTC)
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com
+ [209.85.214.181])
+ by mx.groups.io with SMTP id smtpd.web12.1832.1645557322027400924
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Feb 2022 10:49:34 -0800
+ Tue, 22 Feb 2022 11:15:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=diElzNlG;
- spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: ticotimo@gmail.com)
-Received: by mail-pj1-f47.google.com with SMTP id
- m1-20020a17090a668100b001bc023c6f34so408133pjj.3
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=dVNsd5Gf;
+ spf=pass (domain: gmail.com, ip: 209.85.214.181,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f181.google.com with SMTP id c3so6856342plh.9
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Feb 2022 10:49:34 -0800 (PST)
+ Tue, 22 Feb 2022 11:15:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=TDkEy7NE/r5aE3/wQeq7uAFJ+XZzWcn39+NngvuQPas=;
-        b=diElzNlGsNi01Glv433VcTJmY0KdqxdLZajm1XPCvUYFEiMDyDo8yxR5TCQnDyASNv
-         kndBTHaN1j3JYmwJwd2bPsWtTPhtE63HELAXFbLxO+GP5Q1enohOl3yA/IS3fP395kGN
-         17hUu404JRqt7PbsJAM8P5ewFCOdhmgZgUEWOD4ofJVg1QWQbqgU6Wls7L9mfYn9VGwL
-         s2yQIRoflj00Tj7m3td/gKirnC93ErLcccEjf10zKMxLmjYIBVmpm5wUNsLeOHix1rn2
-         GuTiXLkloy/ExG9S8hrZST0NnWJesagxTPhqQLFAbS9z44vVwS9nZwXhNMGql9JtLKx3
-         217g==
+        bh=KOZkho9EnttwQQjZij/HjoZcgmtUfSXuefriOI43DUM=;
+        b=dVNsd5Gfy6Sl22zy+QWmzV2/lb9AU5UjbQz5vrwMBWHXnT0IX9DxuCvqDebeMFoKIz
+         fxfMX7Qo6miON8/g92LkKjgLinm3nXG4MekfwdpXGxkt2B1L3/5hiKsyrrhhy/JnfkcN
+         Ne3FolPUD/b6rCyxpja7u5zWfZd7Z5Ym2V9Ta5ELnhoFvBSiq4YL86J0pARBpNf1Z0AJ
+         XNxKV4TzflLIJU3l7ES1z7gG5nf3eHun+neb56oDduVfE2ECO1/ZQ9RnRwqRGreGPuZC
+         dO8d8n3Vvh1EEq772OcrIvqB5ISj8t+RLw1ChQbys9uMHglD8ZgJcvmjnwjZZl8e4sqA
+         cB+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=TDkEy7NE/r5aE3/wQeq7uAFJ+XZzWcn39+NngvuQPas=;
-        b=CbpsNctmdAeXqus5iAi1+583CSnsDlNDSK8cQAtu/XeIozaO5gxV2oBsdwEzcyNghL
-         4wMUW5pfz2tBzd4VmfeMUP3UAvF9E9f9eB+DVi/NDyNpj5Gu6s22iBdx20dVEhkp546u
-         7UuFwGjSEoCCbCXYNAFtJNl1ur4JL7QIRo//CxIcKsiux4Tu20JwgD47vHlN2F+pe7r3
-         fvTL+TJwVZzuiyKWJXVVDREB2A0pl9svftHYVMUO77qVcltkZzboMquLnUw9N9VvYEtW
-         cmLZxWCch0ggUcfCm79g3ECBUfJO46xS63S26AMHMSV3Z5NK9bV37exB9gSsJZEbEQDC
-         bB4g==
-X-Gm-Message-State: AOAM5307pU6URkFMxIO0u9BMWZN/k3c4i5jRQ2Ll3mOmLS+WLy8muBU1
-	ZTp95QuLd6DZi3jS/HZd1MCjptpLk7VDnQ==
+        bh=KOZkho9EnttwQQjZij/HjoZcgmtUfSXuefriOI43DUM=;
+        b=IlWNrY9yeiOtV2ky6vw5TGLbrj08OudWA/jVbV4vs8jVP5JtNZl/e/n84a2OUZE40h
+         jPPLyDtwP4GoGPX1xJ0WqtIitna1hAkrSav3SEKqJBore/PbcaX9Lp+EC2M/brsqoLAf
+         P/MdCr8qp7owNMhRkhGbqv3BIcUBDFdSBz11cBLthkJMeSA6WB3jhBe3a5IkoezPrCry
+         tJny54nq04Eq4eKT/6YWD5lkW64kXFFhtXB5fNauQfjZ0ffJCKo0v3bYMpeDnI+G9K5K
+         yRN0irHO4mWdBtQ10c2/EIVFfhP8gumPAcP3vZZTg/tsNt3WYJPnwh3AO37STBJteX5I
+         0l8w==
+X-Gm-Message-State: AOAM530sSs3/1BvwB8FI0e1ZwpB5Zu6wobWbqQYisZMKq8OZ0lIRFC9x
+	IRqodS0S24URvezNwjbaw3I1HGQcIA5JjA==
 X-Google-Smtp-Source: 
- ABdhPJzHECVzqde7VUG0q8KdGV0LB5OH1uOWxxkKOP5M571C93qEMAa+pTDi6saXYIcpCxMICd4qCQ==
-X-Received: by 2002:a17:90b:4ac4:b0:1ba:3b4:d3c with SMTP id
- mh4-20020a17090b4ac400b001ba03b40d3cmr5469106pjb.201.1645555773122;
-        Tue, 22 Feb 2022 10:49:33 -0800 (PST)
-Received: from nereus.hsd1.or.comcast.net
- ([2601:1c0:6000:1b20:d208:bddf:2b06:2b5a])
+ ABdhPJxfQnjHeVul96bcfePVU2u/XsW728T7T2cQQzF2uQ5OYoWvm0JGhm5nFmWDh3X3CTjL/8YJrw==
+X-Received: by 2002:a17:902:d103:b0:14f:a3a5:3974 with SMTP id
+ w3-20020a170902d10300b0014fa3a53974mr13443728plw.74.1645557321249;
+        Tue, 22 Feb 2022 11:15:21 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::fb6e])
         by smtp.gmail.com with ESMTPSA id
- g126sm21422514pgc.31.2022.02.22.10.49.32
+ p16sm19169973pfh.89.2022.02.22.11.15.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Feb 2022 10:49:32 -0800 (PST)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
+        Tue, 22 Feb 2022 11:15:20 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: raj.khem@gmail.com,
-	Tim Orling <tim.orling@konsulko.com>
-Subject: [meta-python][PATCH] python3-wheel: drop; moved to oe-core
-Date: Tue, 22 Feb 2022 10:49:20 -0800
-Message-Id: <20220222184920.2310391-1-tim.orling@konsulko.com>
-X-Mailer: git-send-email 2.30.2
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-wheel: Delete
+Date: Tue, 22 Feb 2022 11:15:18 -0800
+Message-Id: <20220222191518.2413565-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 22 Feb 2022 18:49:35 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 22 Feb 2022 19:15:27 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95449
+ https://lists.openembedded.org/g/openembedded-devel/message/95450
 
-Because of layer priority, this recipe must be dropped before a build
-with the new PEP-517 packaging can proceed due to dependency loops.
+moved to oe-core
 
-Signed-off-by: Tim Orling <tim.orling@konsulko.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
+ .../packagegroups/packagegroup-meta-python.bb        |  1 -
  .../recipes-devtools/python/python3-wheel_0.37.1.bb  | 12 ------------
- 1 file changed, 12 deletions(-)
+ 2 files changed, 13 deletions(-)
  delete mode 100644 meta-python/recipes-devtools/python/python3-wheel_0.37.1.bb
 
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index 319d49267c..a8a09b4d56 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -462,7 +462,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
+     python3-websockets \
+     python3-werkzeug \
+     python3-werkzeug \
+-    python3-wheel \
+     python3-whoosh \
+     python3-wrapt \
+     python3-wtforms \
 diff --git a/meta-python/recipes-devtools/python/python3-wheel_0.37.1.bb b/meta-python/recipes-devtools/python/python3-wheel_0.37.1.bb
 deleted file mode 100644
 index 6c7a31db9e..0000000000
@@ -97,6 +106,6 @@ index 6c7a31db9e..0000000000
 -BBCLASSEXTEND = "native"
 -
 -- 
-2.30.2
+2.35.1
 
 
