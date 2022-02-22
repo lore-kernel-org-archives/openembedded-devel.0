@@ -1,105 +1,94 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 82636C433FE
-	for <webhook@archiver.kernel.org>; Tue, 22 Feb 2022 12:12:13 +0000 (UTC)
-Received: from voyager.superhosting.bg (voyager.superhosting.bg
- [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web10.11952.1645531931114600444
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FF11C433EF
+	for <webhook@archiver.kernel.org>; Tue, 22 Feb 2022 15:54:04 +0000 (UTC)
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com
+ [209.85.208.47])
+ by mx.groups.io with SMTP id smtpd.web08.14314.1645545243620351764
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Feb 2022 04:12:12 -0800
+ Tue, 22 Feb 2022 07:54:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=Csljoz5U;
- spf=permerror,
- err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
- for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
- (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
-	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
-	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=MLCiM6ids1lUN8wZ/FjXGVK1xjFg8CayjZm/dKdLtbo=; b=Csljoz5UZe96yWWVcCV9X5Oiak
-	yG3vSiqQ47KeOWzKBy1+R2dqYfTMGlKPdRO3kO9BaFoUeELiBPHkpg1uN4ErAVDARb4Nu0fSZr4aK
-	2dEi1Ml6gcthdaRj9ZMT6Y9zCFbtgxqgCAvU1/30gwDw1/qBRF051lA8U51uyBu9gewJL+4kKRvPp
-	w3sq0+jUviclKMBf6JdeF4WWGP5I6j3AVISeAvOPVhr3hOSUTDq8m7+UHj571OoDy7IRdii+bizjV
-	9TfhT7j9PJYoGGqHwfJcLb6MRm+2Fq3+/Dxe70fZJQa3PVgKiZ4iLBox7eV64u0LEIGIxWxy22lcX
-	mX1fWJSw==;
-Received: from lan.nucleusys.com ([92.247.61.126]:49814 helo=tone.k.g)
-	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.94.2)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1nMU3x-0006GM-ND; Tue, 22 Feb 2022 14:12:10 +0200
-From: Leon Anavi <leon.anavi@konsulko.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=SdfcayJj;
+ spf=pass (domain: gmail.com, ip: 209.85.208.47,
+ mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f47.google.com with SMTP id w3so38011739edu.8
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 22 Feb 2022 07:54:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=EKp39yaeLavz4MK1SeH5arsiVdYKxKt0P6eUytOF+QE=;
+        b=SdfcayJj0g/HP3iMZ3wQGCHFj41oL2UjqkwYq0x89gGQrfohptI5GOHpWKEZlMNI5O
+         vXEBVvUYTpK+46UI2T4ERnb56Ia1y1hjWO9RT5vxeZPCjxxHiBLlOFwGSK8NKa0u+9oI
+         6CO1bZwGA3QX9jRhQL006AqQZUcQh6WC1WtbNJtZORCt/F+CLs025JdhXi0otS2zP97u
+         bgfPCWhaTa2pSpAmpaxcLQ9k2PE5QGigqrGWukUXxtvrQHv7+hia8x9nC6jGNrluE+4o
+         XdFqHwdR5JBcigP+aB+eDK5RNwXIIYakIzT/YVjk91JmM3NrbIk21uN1PVfUICBWz79c
+         GqPA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=EKp39yaeLavz4MK1SeH5arsiVdYKxKt0P6eUytOF+QE=;
+        b=BIq4FAFt1MXyKyxOnNQo4JwET83qvUq81ecavMdbR4eDp8jEoFNpVbaKZXZs1MPip5
+         Oe72BUgrk/FaMcQtQCSUq48oUVb2vMRhTvmzsenCrr990w/Hg3BO1xa7n1bO4VUMSChI
+         wAw3/UbzaRhRl4Nyx9oYpLl348Ag1XebR6zYWhblzaada8ZWFHQYxUdunPmAkQvtGarD
+         W3wf5OKNYPCVpwr0qozucZnjdVSJs+ws0JgFVug8CmXy9GLr9yQfWYUeqEgfWl8M8jsE
+         7Zi2xegiUPs75QHtCxfZD2H4yonq4PgK/dj4f/o0gedGjfM2m/xuvJv0mSHWMO+MILa2
+         Gshg==
+X-Gm-Message-State: AOAM530JRUOtD0TzS6bKhDo98kQsmCvLN4jKw5IN748SG3xmb8irI0KF
+	UQbiDCkj18UlSctdjLLWN55sgfPPDEEOPw==
+X-Google-Smtp-Source: 
+ ABdhPJyprnA+odKaY2SJKeZ8pCnylyfinoFGPal1vwWeQl19CH9e6lh35FGgF4INc8F2/3wPXDaZYw==
+X-Received: by 2002:a05:6402:742:b0:410:a427:3634 with SMTP id
+ p2-20020a056402074200b00410a4273634mr27247651edy.304.1645545242269;
+        Tue, 22 Feb 2022 07:54:02 -0800 (PST)
+Received: from localhost ([109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id
+ k16sm3852931ejv.176.2022.02.22.07.54.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 22 Feb 2022 07:54:01 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-click: Upgrade 8.0.3 -> 8.0.4
-Date: Tue, 22 Feb 2022 14:11:58 +0200
-Message-Id: <20220222121158.3510277-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220222121158.3510277-1-leon.anavi@konsulko.com>
-References: <20220222121158.3510277-1-leon.anavi@konsulko.com>
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-python2][PATCH 3/3] layer.conf: update LAYERSERIES_COMPAT for
+ kirkstone
+Date: Tue, 22 Feb 2022 16:53:49 +0100
+Message-Id: <20220222155349.2206837-3-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220222155349.2206837-1-Martin.Jansa@gmail.com>
+References: <20220222155349.2206837-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
- leon@anavi.org
-X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 22 Feb 2022 12:12:13 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 22 Feb 2022 15:54:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95444
+ https://lists.openembedded.org/g/openembedded-devel/message/95447
 
-Upgrade to release 8.0.4:
-
-- open_file recognizes Path("-") as a standard stream, the same as
-  the string "-".
-- The option and argument decorators preserve the type annotation
-  of the decorated function.
-- A callable default value can customize its help text by
-  overriding __str__ instead of always showing (dynamic).
-- Fix a typo in the Bash completion script that affected file and
-  directory completion. If this script was generated by a previous
-  version, it should be regenerated.
-- Fix typing for echo and secho file argument.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../python/{python3-click_8.0.3.bb => python3-click_8.0.4.bb}   | 2 +-
+ conf/layer.conf | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-click_8.0.3.bb => python3-click_8.0.4.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-click_8.0.3.bb b/meta-python/recipes-devtools/python/python3-click_8.0.4.bb
-similarity index 92%
-rename from meta-python/recipes-devtools/python/python3-click_8.0.3.bb
-rename to meta-python/recipes-devtools/python/python3-click_8.0.4.bb
-index c31d06567..76f7a8e65 100644
---- a/meta-python/recipes-devtools/python/python3-click_8.0.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-click_8.0.4.bb
-@@ -8,7 +8,7 @@ HOMEPAGE = "http://click.pocoo.org/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=1fa98232fd645608937a0fdc82e999b8"
+diff --git a/conf/layer.conf b/conf/layer.conf
+index c91335d..38ef579 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -14,7 +14,7 @@ LAYERVERSION_meta-python2 = "1"
  
--SRC_URI[sha256sum] = "410e932b050f5eed773c4cda94de75971c89cdb3155a72a0831139a79e5ecb5b"
-+SRC_URI[sha256sum] = "8458d7b1287c5fb128c90e23381cf99dcde74beaf6c7ff6384ce84d6fe090adb"
+ LAYERDEPENDS_meta-python2 = "core openembedded-layer"
  
- inherit pypi setuptools3 ptest
+-LAYERSERIES_COMPAT_meta-python2 = "honister"
++LAYERSERIES_COMPAT_meta-python2 = "kirkstone"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
  
 -- 
-2.30.2
+2.35.1
 
 
