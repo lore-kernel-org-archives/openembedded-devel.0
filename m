@@ -1,170 +1,128 @@
-Return-Path: <sanakazisk19@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C70D7C433EF
-	for <webhook@archiver.kernel.org>; Wed, 23 Feb 2022 10:21:12 +0000 (UTC)
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
- [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.web09.5883.1645611671332517554
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A6FEC433F5
+	for <webhook@archiver.kernel.org>; Wed, 23 Feb 2022 13:17:34 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg
+ [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web12.7232.1645622252076646828
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Feb 2022 02:21:11 -0800
+ Wed, 23 Feb 2022 05:17:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=M7xRm5Dy;
- spf=pass (domain: gmail.com, ip: 209.85.215.169,
- mailfrom: sanakazisk19@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id f8so19484125pgc.8
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Feb 2022 02:21:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id;
-        bh=w2FZCI4F5IcY1IS5XWWkWdAkYnQYmiU37Ko5FehymBM=;
-        b=M7xRm5DyMSyV0E52VbUgaAmBWHhLfk2/fndmA6tVwyD8JmWJkUc2erBpVLdgcO6dvZ
-         Q0hT4I83hUyGjYDJ/lVqgwJ28QqiLzxrBn2YfBNjRg3egpsXuyfJlngaa5l4AU/Wv89p
-         jqa92y+BMS6D83UDKzfRNdrYVOehJ+ye1XoPbA4QxmU/DsnMknHz4zEk2NGNZzD/n5bk
-         lCV5WO5bmV3IF0wpWRRTDPdsnP0A0iJmZjZdwISrH2y4JgLvPeRdmOHm8D2vD5rXvPVt
-         CSd8Ffrg506lNBDtqz/X/gzUIH9HTDhybnVDt0qsXnXEM6vIpd+7v8eT89gV9MlJNYFT
-         GXkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=w2FZCI4F5IcY1IS5XWWkWdAkYnQYmiU37Ko5FehymBM=;
-        b=b8cxWHyTovRUcccyRctVcQxzuYcth1p3JKjeu7fQzBjg7ffQ7CDaZWUBy7A20X2n7F
-         fPGokKeu+JCM821e39TH46qTF5eaO+erE+lKolZVvZyD8zbU0exC22agHG0CZ0ddpsM7
-         SJqp6Yss5SqKrbo4DiAmpqFEgjN2IYAjGTgkkzzzq2hSbI4UiCDk0Yozw7zaRx1fEvOF
-         Awq2oLK/GdQ4gsglOHU4XX2zfiqgL5j6Xv2lYlBvvq/ujMZImEIyuIM5szH4LxbYHV6c
-         9+7YHRBfDgN6qGdNEEhQ0Ys6csRbWk6yPzv5ASf1rK/BGCIvIhAC+hz99fHKbwaGKyYN
-         ZHZg==
-X-Gm-Message-State: AOAM532+FSDnMk6S2+GAEii18Ri5HoFGekkrmmr7AK0un1zZPnVHYry0
-	GBrtrC63SuIDFKJFU0SN0cwGLiwprWE=
-X-Google-Smtp-Source: 
- ABdhPJyj074dsS5JRVbLKgHNn2J1L9k2P2gXo/DE4+IhYfGRHTDHJxO6Tl3oKmhaVUSttoiNSR8RNg==
-X-Received: by 2002:a63:2024:0:b0:374:1052:5679 with SMTP id
- g36-20020a632024000000b0037410525679mr15214153pgg.548.1645611670465;
-        Wed, 23 Feb 2022 02:21:10 -0800 (PST)
-Received: from localhost.localdomain
- ([2401:4900:5037:bd06:ed79:4b49:7d6b:e512])
-        by smtp.gmail.com with ESMTPSA id
- 12-20020a17090a01cc00b001bc1e04842fsm2473973pjd.26.2022.02.23.02.21.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Feb 2022 02:21:09 -0800 (PST)
-From: Sana Kazi <sanakazisk19@gmail.com>
+ dkim=pass header.i=@anavi.org header.s=default header.b=hgh7Q0m6;
+ spf=permerror,
+ err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
+ for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
+ (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=t42HICMeyNl8+03dQ/K1S8FEteX/6uW+pqjJ8swL34E=; b=hgh7Q0m6sCES4BJwCjTGTONbPf
+	5meoN5WB5ynZDYIc7STYt4+pA0kquAuGtKBHpRcvfW2kdSAfY/zhhK2NIQjbctuljSB/wLj4mbqH+
+	0X+zi2hFzqiGoU7gLALlfwF7uohOnFFO2/87bbdhrBSZ92K6zLQwzsJcK1cXU+Om7V/FPAH+fHelq
+	tTZ7tSwEyzPS9O+7tVYLazMyFnoEHOgeCRzNtTBfZ7IAaiVlqz32e2Y73wxSwVN6oEsZt8JizI0O/
+	0xQl64u4ws21D7//4YYwwuyDYSChl4/paOOmJrJuQd1fPx1I7116C6I2jfoGWX6qJdaPsis/cM+L4
+	srS/vZJQ==;
+Received: from lan.nucleusys.com ([92.247.61.126]:51954 helo=tone.k.g)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.94.2)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1nMrYo-000Bp1-Tr; Wed, 23 Feb 2022 15:17:30 +0200
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: ranjitsinh.rathod@kpit.com,
-	Sana Kazi <sanakazisk19@gmail.com>
-Subject: [meta-oe][dunfell][PATCH] protobuf: Fix CVE-2021-22570
-Date: Wed, 23 Feb 2022 15:50:16 +0530
-Message-Id: <20220223102016.28259-1-sanakazisk19@gmail.com>
-X-Mailer: git-send-email 2.17.1
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-ordered-set: Upgrade 4.0.2 -> 4.1.0
+Date: Wed, 23 Feb 2022 15:17:17 +0200
+Message-Id: <20220223131721.1683054-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
+ leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Feb 2022 10:21:12 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Feb 2022 13:17:34 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95476
+ https://lists.openembedded.org/g/openembedded-devel/message/95477
 
-Fix CVE-2021-22570.
-Link: https://koji.fedoraproject.org/koji/buildinfo?buildID=1916865
-Link: https://src.fedoraproject.org/rpms/protobuf/blob/394beeacb500861f76473d47e10314e6a3600810/f/CVE-2021-22570.patch
+Upgrade to release 4.1.0:
 
-Remove first and second hunk because the second argument in
-InsertIfNotPresent() function is of type const char* const& but the
-first and second hunk makes the type of second argument as const string
-which is not compatible with the type of second argument in
-InsertIfNotPresent().
+- Packaged using flit. Wheels now exist, and setuptools is no
+  longer required.
+- This package now has a typical package structure, instead of
+  being a single module. The code is in ordered_set/__init__.py
+  instead of ordered_set.py.
+- There is an ordered_set/py.typed so that type checkers know
+  about the types.
+- Use the type aliases SetLike[T] and OrderedSetInitializer[T] to
+  simplify some types.
+- Updated the way overloaded type signatures are written to what
+  MyPy currently expects.
+- Minimum Python version is 3.7.
 
-Signed-off-by: Sana Kazi <Sana.Kazi@kpit.com>
-Signed-off-by: Sana Kazi <sanakazisk19@gmail.com>
+License-Update: Update years
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../protobuf/protobuf/CVE-2021-22570.patch    | 64 +++++++++++++++++++
- .../protobuf/protobuf_3.11.4.bb               |  1 +
- 2 files changed, 65 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf/CVE-2021-22570.patch
+ .../recipes-devtools/python/python3-ordered-set/run-ptest  | 2 +-
+ ...3-ordered-set_4.0.2.bb => python3-ordered-set_4.1.0.bb} | 7 +++----
+ 2 files changed, 4 insertions(+), 5 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-ordered-set_4.0.2.bb => python3-ordered-set_4.1.0.bb} (57%)
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/CVE-2021-22570.patch b/meta-oe/recipes-devtools/protobuf/protobuf/CVE-2021-22570.patch
-new file mode 100644
-index 000000000..be3180181
---- /dev/null
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf/CVE-2021-22570.patch
-@@ -0,0 +1,64 @@
-+CVE: CVE-2021-22570
-+Upstream-Status: Backport [https://src.fedoraproject.org/rpms/protobuf/blob/394beeacb500861f76473d47e10314e6a3600810/f/CVE-2021-22570.patch]
-+Comment: Removed first and second hunk
-+Signed-off-by: Sana.Kazi <Sana.Kazi@kpit.com>
-+
-+diff --git a/src/google/protobuf/descriptor.cc b/src/google/protobuf/descriptor.cc
-+index 7af37c57f3..03c4e2b516 100644
-+--- a/src/google/protobuf/descriptor.cc
-++++ b/src/google/protobuf/descriptor.cc
-+@@ -2626,6 +2626,8 @@ void Descriptor::DebugString(int depth, std::string* contents,
-+       const Descriptor::ReservedRange* range = reserved_range(i);
-+       if (range->end == range->start + 1) {
-+         strings::SubstituteAndAppend(contents, "$0, ", range->start);
-++      } else if (range->end > FieldDescriptor::kMaxNumber) {
-++        strings::SubstituteAndAppend(contents, "$0 to max, ", range->start);
-+       } else {
-+         strings::SubstituteAndAppend(contents, "$0 to $1, ", range->start,
-+                                   range->end - 1);
-+@@ -2829,6 +2831,8 @@ void EnumDescriptor::DebugString(
-+       const EnumDescriptor::ReservedRange* range = reserved_range(i);
-+       if (range->end == range->start) {
-+         strings::SubstituteAndAppend(contents, "$0, ", range->start);
-++      } else if (range->end == INT_MAX) {
-++        strings::SubstituteAndAppend(contents, "$0 to max, ", range->start);
-+       } else {
-+         strings::SubstituteAndAppend(contents, "$0 to $1, ", range->start,
-+                                   range->end);
-+@@ -4019,6 +4023,11 @@ bool DescriptorBuilder::AddSymbol(const std::string& full_name,
-+   // Use its file as the parent instead.
-+   if (parent == nullptr) parent = file_;
-+ 
-++  if (full_name.find('\0') != std::string::npos) {
-++    AddError(full_name, proto, DescriptorPool::ErrorCollector::NAME,
-++             "\"" + full_name + "\" contains null character.");
-++    return false;
-++  }
-+   if (tables_->AddSymbol(full_name, symbol)) {
-+     if (!file_tables_->AddAliasUnderParent(parent, name, symbol)) {
-+       // This is only possible if there was already an error adding something of
-+@@ -4059,6 +4068,11 @@ bool DescriptorBuilder::AddSymbol(const std::string& full_name,
-+ void DescriptorBuilder::AddPackage(const std::string& name,
-+                                    const Message& proto,
-+                                    const FileDescriptor* file) {
-++  if (name.find('\0') != std::string::npos) {
-++    AddError(name, proto, DescriptorPool::ErrorCollector::NAME,
-++             "\"" + name + "\" contains null character.");
-++    return;
-++  }
-+   if (tables_->AddSymbol(name, Symbol(file))) {
-+     // Success.  Also add parent package, if any.
-+     std::string::size_type dot_pos = name.find_last_of('.');
-+@@ -4372,6 +4386,12 @@ FileDescriptor* DescriptorBuilder::BuildFileImpl(
-+   }
-+   result->pool_ = pool_;
-+ 
-++  if (result->name().find('\0') != std::string::npos) {
-++    AddError(result->name(), proto, DescriptorPool::ErrorCollector::NAME,
-++             "\"" + result->name() + "\" contains null character.");
-++    return nullptr;
-++  }
-++
-+   // Add to tables.
-+   if (!tables_->AddFile(result)) {
-+     AddError(proto.name(), proto, DescriptorPool::ErrorCollector::OTHER,
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
-index d2f22ba6b..55d56ff08 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
-@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/google/protobuf.git;branch=3.11.x;protocol=https \
-            file://0001-protobuf-fix-configure-error.patch \
-            file://0001-Makefile.am-include-descriptor.cc-when-building-libp.patch \
-            file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
-+           file://CVE-2021-22570.patch \
- "
- S = "${WORKDIR}/git"
+diff --git a/meta-python/recipes-devtools/python/python3-ordered-set/run-ptest b/meta-python/recipes-devtools/python/python3-ordered-set/run-ptest
+index f7b9d0907..c27a6c3c5 100644
+--- a/meta-python/recipes-devtools/python/python3-ordered-set/run-ptest
++++ b/meta-python/recipes-devtools/python/python3-ordered-set/run-ptest
+@@ -1,3 +1,3 @@
+ #!/bin/sh
  
+-pytest test.py
++pytest test_ordered_set.py
+diff --git a/meta-python/recipes-devtools/python/python3-ordered-set_4.0.2.bb b/meta-python/recipes-devtools/python/python3-ordered-set_4.1.0.bb
+similarity index 57%
+rename from meta-python/recipes-devtools/python/python3-ordered-set_4.0.2.bb
+rename to meta-python/recipes-devtools/python/python3-ordered-set_4.1.0.bb
+index 323fe18fd..2740b3355 100644
+--- a/meta-python/recipes-devtools/python/python3-ordered-set_4.0.2.bb
++++ b/meta-python/recipes-devtools/python/python3-ordered-set_4.1.0.bb
+@@ -1,10 +1,9 @@
+ SUMMARY = "A MutableSet that remembers its order, so that every entry has an index."
+ HOMEPAGE = "http://github.com/LuminosoInsight/ordered-set"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://MIT-LICENSE;md5=2b36be0d99854aa2ae292a800a7c1d4e"
++LIC_FILES_CHKSUM = "file://MIT-LICENSE;md5=3bf5e1ad64c0d99032c3143361fa234e"
+ 
+-SRC_URI[md5sum] = "5d88f3870c32d4868b28c8fe833f7e74"
+-SRC_URI[sha256sum] = "ba93b2df055bca202116ec44b9bead3df33ea63a7d5827ff8e16738b97f33a95"
++SRC_URI[sha256sum] = "694a8e44c87657c59292ede72891eb91d34131f6531463aab3009191c77364a8"
+ 
+ inherit pypi setuptools3 ptest
+ 
+@@ -19,5 +18,5 @@ RDEPENDS:${PN}-ptest += " \
+ "
+ 
+ do_install_ptest() {
+-	cp -f ${S}/test.py ${D}${PTEST_PATH}/
++	cp -f ${S}/test/test_ordered_set.py ${D}${PTEST_PATH}/
+ }
 -- 
-2.17.1
+2.30.2
 
 
