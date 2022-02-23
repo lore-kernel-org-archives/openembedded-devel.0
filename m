@@ -1,100 +1,68 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <denis@denix.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DC97DC433F5
-	for <webhook@archiver.kernel.org>; Wed, 23 Feb 2022 18:46:18 +0000 (UTC)
-Received: from mail-qv1-f47.google.com (mail-qv1-f47.google.com
- [209.85.219.47])
- by mx.groups.io with SMTP id smtpd.web11.317.1645641977395184225
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 641DCC433F5
+	for <webhook@archiver.kernel.org>; Wed, 23 Feb 2022 19:02:44 +0000 (UTC)
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web09.169.1645642963253999385
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Feb 2022 10:46:17 -0800
+ Wed, 23 Feb 2022 11:02:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=i82pmpVj;
- spf=pass (domain: gmail.com, ip: 209.85.219.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f47.google.com with SMTP id x3so10070391qvd.8
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Feb 2022 10:46:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=DOENnGHdrbYMDIGc8aRrziNiuRGw2mLx3Vzi6EPfLGI=;
-        b=i82pmpVjEBJ19y61kPmrd/kUA7oB1qeJJbt99aF+/lONvJ2xlVwZPeeKFQEJ0Mjo2p
-         108B3s5sJg2XBcsxHgph2YlsnQGqHiAsTkd6idRPArES1G3WitVdfH2gs5nLSk3e0jg+
-         pcNdPMLmKdxgx+x7JKqYbfEFzUc+ZWUpMm3gENMhBUyafTaKHa9qqch+bTWj7cgQ7eKd
-         YbxqqtOQ6nNjzCKdg+gMq63GzWyOyNTiUDN6ZKjrCC6nwmk7qfvnT6iPtswSBuiYMsbS
-         D8JntJ2yUpNignVBzXdJ6mLGshdfYfpxZTCuhxtO/ZrLSqlyPHunVy50CS5cqzYZ3X6q
-         Oc7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=DOENnGHdrbYMDIGc8aRrziNiuRGw2mLx3Vzi6EPfLGI=;
-        b=eCIQZd65bcPIuqK3HRgJmtLn7nDpno98v13ch8CL2ZSCXWW6ZXxIgEVak1qf+fKZ3m
-         g82Wne9BmwzfY3ckrnnLt3Xfpv/eDXbCA7rdqSIq5RRvbK6+3WpFoaTEo3HyjwymrrX6
-         Lhyma5sTtwtcCiLEANbfxBa+4tRe5enEOzF+5Z/ObzD4MZqyGMLHxYqyB6fvC90Ix1WA
-         Wqk/X65K/5T7uuvr+mMbi9FwwZQcVgQEM/VSBZcYfVLwcGqYBBLKaEUMzAriCdMkFORK
-         96LVXIZ3+0hWjUmPL4kc9dzwdg+X8c56l/S0m/1OR0zdZNgjWrScsJhYvReWW78JibxB
-         dNRw==
-X-Gm-Message-State: AOAM531lrjZyTQ+fTzju42jQZR+8MtipmRB2GK+toPPqCvWfjrrHPBp2
-	EI9sOWh55DDZxEkqv9ObApSsvzb6ZCyWnmlPp6w=
-X-Google-Smtp-Source: 
- ABdhPJxe7Vk2gHfhBMhZ1HxfuDfQ9SFj05oeDgvSRgzJCpD41jeQZ/XlNRZF+2LPqzqkAwEN5Br8PZZAgcDy+1PbidE=
-X-Received: by 2002:ac8:584c:0:b0:2dd:aaa6:7865 with SMTP id
- h12-20020ac8584c000000b002ddaaa67865mr1109322qth.330.1645641976396; Wed, 23
- Feb 2022 10:46:16 -0800 (PST)
+ dkim=missing;
+ spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
+ mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 3B1C040C52;
+	Wed, 23 Feb 2022 19:02:42 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id OKSghTftrZnN; Wed, 23 Feb 2022 19:02:42 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
+ [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 1880240AE9;
+	Wed, 23 Feb 2022 19:02:39 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 4CC7D1747A7; Wed, 23 Feb 2022 14:02:38 -0500 (EST)
+Date: Wed, 23 Feb 2022 14:02:38 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>,
+	Yocto Project <yocto@lists.yoctoproject.org>,
+	openembedded-members@lists.openembedded.org
+Subject: Re: OpenEmbedded Happy Hour February 23 9pm/2100 UTC
+Message-ID: <20220223190238.GX26229@denix.org>
+References: <16D5F0C611E396D0.24964@lists.openembedded.org>
 MIME-Version: 1.0
-References: <20220222064130.17190-1-ceggers@arri.de>
- <CAMKF1srreo8BKes+3DDnJWjkmu-ZdGqFKeGF7_x3dxUj08xrJQ@mail.gmail.com>
- <4795452.0VBMTVartN@localhost.localdomain>
-In-Reply-To: <4795452.0VBMTVartN@localhost.localdomain>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 23 Feb 2022 10:45:50 -0800
-Message-ID: 
- <CAMKF1sru1fKBBcBLaG6W4i9oA3hUP_U5YSq2c2L8dK=kO78eLw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH RFC] pcapplusplus: add new recipe
-To: Christian Eggers <ceggers@arri.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	=?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <16D5F0C611E396D0.24964@lists.openembedded.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Feb 2022 18:46:18 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Feb 2022 19:02:44 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95485
+ https://lists.openembedded.org/g/openembedded-devel/message/95486
 
-On Wed, Feb 23, 2022 at 10:41 AM Christian Eggers <ceggers@arri.de> wrote:
->
-> On Wednesday, 23 February 2022, 18:21:00 CET, Khem Raj wrote:
-> > https://errors.yoctoproject.org/Errors/Details/636127/
-> >
-> > NOTE: Applying patch '0001-Fix-timeval-to-timespec-conversions.patch' (sources/meta-openembedded/meta-oe/recipes-connectivity/pcapplusplus/pcapplusplus/0001-Fix-timeval-to-timespec-conversions.patch)
-> > ERROR: Applying patch '0001-Fix-timeval-to-timespec-conversions.patch' on target directory 'TOPDIR/build/tmp/work/mips32r2-yoe-linux/pcapplusplus/gitAUTOINC+1360d0ed91-r0/git'
-> > CmdError('quilt --quiltrc TOPDIR/build/tmp/work/mips32r2-yoe-linux/pcapplusplus/gitAUTOINC+1360d0ed91-r0/recipe-sysroot-native/etc/quiltrc push', 0, 'stdout: Applying patch 0001-Fix-timeval-to-timespec-conversions.patch
-> > patching file Pcap++/src/NetworkUtils.cpp
-> > Hunk #1 FAILED at 169 (different line endings).
-> > Hunk #2 FAILED at 436 (different line endings).
-> > 2 out of 2 hunks FAILED -- rejects in file Pcap++/src/NetworkUtils.cpp
-> > patching file Pcap++/src/PcapFileDevice.cpp
-> > Hunk #1 FAILED at 188 (different line endings).
-> > 1 out of 1 hunk FAILED -- rejects in file Pcap++/src/PcapFileDevice.cpp
-> > Patch 0001-Fix-timeval-to-timespec-conversions.patch does not apply (enforce with -f)
->
-> After cloning PcapPlusPlus on my machine, Pcap++/src/PcapFileDevice.cpp has
-> Windows line endings. The patch has the same for changed lines and the
-> context.
->
-> Is there an implicit conversion from Windows to Unix line endings on
-> the build machine (e.g. by git)? Are line feeds altered on when sent
-> via `git send-email`?
->
-> For reference, I have a attached the patch file to this email.
+On Mon, Feb 21, 2022 at 06:26:05PM -0500, Denys Dmytriyenko wrote:
+> All,
+> 
+> You are cordially invited to the next OpenEmbedded Happy Hour on February 23 
+> for Asia/Pacific timezones @ 2100/9pm UTC (4pm ET / 1pm PT):
+> 
+> https://www.openembedded.org/wiki/Calendar
+> https://www.openembedded.org/wiki/Happy_Hours
+> https://www.timeanddate.com/worldclock/fixedtime.html?msg=OpenEmbedded+Happy+Hour+February+23&iso=20220223T21
 
-maybe inheriting dos2unix would fix this.
+Reminder, this is happening in 2 hours! See you then and there.
 
->
-> regards
-> Christian
+-- 
+Regards,
+Denys Dmytriyenko <denis@denix.org>
+PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
+Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
 
