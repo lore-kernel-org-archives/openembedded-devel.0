@@ -2,75 +2,75 @@ Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2F33C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A3BAEC433FE
 	for <webhook@archiver.kernel.org>; Wed, 23 Feb 2022 02:36:34 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.3])
- by mx.groups.io with SMTP id smtpd.web08.2711.1645583792759101054
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.1])
+ by mx.groups.io with SMTP id smtpd.web09.2863.1645583793222887994
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Feb 2022 18:36:33 -0800
+ Tue, 22 Feb 2022 18:36:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=hjfJcN8D;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=fRjqVjbG;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.1,
  mailfrom: zhengrq.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1645583791; i=@fujitsu.com;
-	bh=lAVV8WxP4l4sWpQJpC/a7lMY7nYSldsW2HuDuGdE8jg=;
+	bh=nGdwGlV+2ZDeAl8u/Bnpk3vEdsjsDW5CgfIiwUp5MQg=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=hjfJcN8DbyFSA+5EJuBBz8LWWwzur960B0IvqOegHvW6gnDUm4rOYSs2OGKFGnyDN
-	 GCUda+WLLTrrDE7Mj+OZLXstF5aYUK6VW24FkZIzdbyeI3cB0SClYTgK7oDa3OEADA
-	 QgyKUuD30hkLRqw6FBUoouPfChkndTU6QqaN27vTWP4DFxVvFD2qHc2Xrnpl+UqzXN
-	 E4lqTKFcthH/ARrjrYa/xFBXmX3AyE5xseU9KWS840DGR8WZ0Ail0CxWGdFH0EjnBy
-	 1dr9suoDqhMToRBbqBgxs+RWs4lEjJJ8A5AqbR5CijWATpGAfGz8re+Ald44hgyt7L
-	 kP5Oive7tyqNw==
-Received: from [100.115.35.240] (using TLSv1.2 with cipher
+	b=fRjqVjbGzhSNkeZ6WTXamYcbkELExsYV8+yWnvOeKsn4CL5a8OvVLFAkkMuIKHurG
+	 ORx1FJfpGgscCT7jwu/+Js2u75lDyQYvH/0NE21jg63JNWR0I78J5hmDLb7m/G0BtI
+	 XmP2zsHqaJXW9zrNpU+tGP1YQuJ4hmC5vS7OOmm/+cckynJFN9653QcF67qKD2fQqy
+	 XTtIZ9IN3X9TUyttl2E+VIW/LlDsFM7TUa/cNWEJ2x0PE0ZmIfB5fIFRXlJPIexlkA
+	 GDBmChLA6uSyW6W93irR6gvacyjL79ZQDYmZA4rlfteoWPAI4v8jrtVl0P9CPsZbkA
+	 U8S5wegyUE1Cw==
+Received: from [100.115.7.206] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-a.eu-west-2.aws.ess.symcld.net id A7/C1-02429-EAD95126;
+	by server-1.bemta.az-a.eu-west-1.aws.ess.symcld.net id BB/FA-12292-EAD95126;
  Wed, 23 Feb 2022 02:36:30 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrKIsWRWlGSWpSXmKPExsViZ8ORqLturmi
-  SwZEvohYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bUb9PZCubwVxw8sIe5gfE/TxcjF4eQwBNG
-  id7jL1khnAtMEpcOP2fpYuQEcvYwSuy8nghiswnoSpx7vJYdxBYR0JdYOnsPM4gtLOAscX7uX
-  bYuRg4OFgFViVffdUHCvAIeEkc/fmEFsSUEFCSmPHzPDBEXlDg58wnYeGYBCYmDL14wg7RKCC
-  hKzJ4uD1FeIfH68CVmCFtN4uq5TcwTGPlmIemehaR7ASPTKkbrpKLM9IyS3MTMHF1DAwNdQ0N
-  TXWNTXUMLE73EKt1EvdRS3fLU4hJdI73E8mK91OJiveLK3OScFL281JJNjMDQSylW3rGDsW3V
-  T71DjJIcTEqivHP9RZOE+JLyUyozEosz4otKc1KLDzHKcHAoSfB+mAWUEyxKTU+tSMvMAcYBT
-  FqCg0dJhHf/HKA0b3FBYm5xZjpE6hSjopQ4rx4weoQEQBIZpXlwbbDYu8QoKyXMy8jAwCDEU5
-  BalJtZgir/ilGcg1FJmPcUyHiezLwSuOmvgBYzAS2ekiUEsrgkESEl1cDktHj7xf5nobuUeZj
-  7X2srzJ67c4nUYX85zQIPE++185Qelqxe+MUmrcFxb6XzPuXZG/Kmi9kG3tV9zzdZx1JsRW77
-  /RcCZTa31z3j1uy+F5Huu1bz9dJfWvNuu6yZe6Db7dUqaf39Lz9qvmacv9L8pw67v/Odi+95f
-  q62c4nebi1yL1+s4+w/kbzc7Aievx8u7FLt+7Ju6UaNK2HHPkg9WSpy5ue+uh/1YdU7I7Tm6J
-  vycZ7lVZOxOuXbe2tjcbj5QoO3/T8dTi1wrX1luv5cRPaB9WfS8lfmK2+05Dtk7q0hJ/Hg9SQ
-  BrYmLk3e9X3tff96/D8H/p2lxGE9qlviUcSevITHwV8OuyA+XogMLlViKMxINtZiLihMBhWiG
-  4zgDAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrGIsWRWlGSWpSXmKPExsViZ8ORqLturmi
+  SwfMueYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPjyT72go8CFZe+bGVrYJzA38XIxSEk8IRR
+  Ys7NV0wQzgUmiRNn7zJCOHsYJTZP3svWxcjJwSagK3Hu8Vp2EFtEQF9i6ew9zCC2sIC9RP+vN
+  jCbRUBV4lPLLVYQm1fAQ+LUg49MILaEgILElIfvmSHighInZz5hAbGZBSQkDr54ARTnAKpRlJ
+  g9XR6ivELi9eFLzBC2msTVc5uYJzDyzULSPQtJ9wJGplWMVklFmekZJbmJmTm6hgYGuoaGprr
+  GuoaWlnqJVbqJeqmluuWpxSW6hnqJ5cV6qcXFesWVuck5KXp5qSWbGIHBl1LMfHwH45S+n3qH
+  GCU5mJREeef6iyYJ8SXlp1RmJBZnxBeV5qQWH2KU4eBQkuD9MAsoJ1iUmp5akZaZA4wEmLQEB
+  4+SCO/+OUBp3uKCxNzizHSI1ClGRSlxXj1g/AgJgCQySvPg2mDRd4lRVkqYl5GBgUGIpyC1KD
+  ezBFX+FaM4B6OSMO8pkPE8mXklcNNfAS1mAlo8JUsIZHFJIkJKqoFphwtX8hfVSbXxdX5bHnj
+  anz59/6594gS9idvnvwk5d2rFbN+P9k2l9x5s3Vi4LWfOP9nKlimb9LfNa+7bfeXUuZclWh2r
+  li1Pz9BRmhD4RL85aWG14IqXkze/03vWMkvr430tEd+GLfrFYocMVr6qtpmczmnNfFyX2SfIo
+  2hn3xNF35X9m3IrZt/6JiWZEOnEu+Lx/ONNW++cK8yu+bKXQdt67l2L7sVftzlfPjj9iQHjO5
+  u1SfWHTizT1NO5FbNQI4/hQJOY2K6O2C0pM98s56yccNm41lf0v9Ua0/aFzHuOubUqWkf6pTs
+  6Rl/ekD078O6in6VRDH6KnbEbtN7/mMKtUfdvz02p98GH9zkbKbEUZyQaajEXFScCAH16KzA5
+  AwAA
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-5.tower-548.messagelabs.com!1645583790!52549!1
+X-Msg-Ref: server-2.tower-591.messagelabs.com!1645583790!51867!1
 X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 9976 invoked from network); 23 Feb 2022 02:36:30 -0000
+Received: (qmail 23472 invoked from network); 23 Feb 2022 02:36:30 -0000
 Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-5.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-2.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 23 Feb 2022 02:36:30 -0000
 Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id F311A100197
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 0FE5D100190
 	for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Feb 2022 02:36:29 +0000 (GMT)
+ Wed, 23 Feb 2022 02:36:30 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id E6AEC100192
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id E80DD100193
 	for <openembedded-devel@lists.openembedded.org>;
  Wed, 23 Feb 2022 02:36:29 +0000 (GMT)
 Received: from localhost.localdomain (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Wed, 23 Feb 2022 02:36:08 +0000
+ (TLS) id 15.0.1497.28; Wed, 23 Feb 2022 02:36:22 +0000
 From: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] poppler: upgrade 22.01.0 -> 22.02.0
-Date: Wed, 23 Feb 2022 10:35:53 +0800
-Message-ID: <1645583753-38611-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] pugixml: upgrade 1.11.4 -> 1.12
+Date: Wed, 23 Feb 2022 10:36:12 +0800
+Message-ID: <1645583772-38647-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -83,56 +83,60 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 23 Feb 2022 02:36:34 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95462
+ https://lists.openembedded.org/g/openembedded-devel/message/95463
+
+License-Update: year updated to 2022.
 
 Changelog:
 =========
-core:
- * Signature: Add a way to detect unsigned FormFieldSignature
- * Signature: Suport background image when using left and right text
- * Signature: Fix path where to search for Firefox NSS in Windows
- * Signature: Fix NSS code to work correctly in Windows/Android
- * Count only signature fields in PDFDoc::getNumSignatureFields
- * Minor code improvements
+Bug fixes:
+----------
+-Fix a bug in xml_document move construction when the source of the move is empty
+-Fix const-correctness issues with iterator objects to support C++20 ranges
 
-qt:
- * Allow signing unsigned signature fields
- * Allow passing a background image for the signature when signing
- * Allow passing the document password when signing
- * Fix leftFontSize being ignored when signing
+XPath improvements:
+-------------------
+-Improved detection of overly complex queries that may result in stack overflow
+ during parsing
 
-glib:
- * try with utf8 password if latin1 fails
- * New method for getting all signature fields of a document
- * Fix compile with MSVC
+Compatibility improvements:
+--------------------------
+-Fix Cygwin support for DLL builds
+-Fix Windows CE support
+-Add NuGet builds and project files for VS2022
 
-utils:
- * pdfsig: Fix compile with MSVC
-
-build system:
-         * Fix NSS cmake check for MSVC
+Build system changes:
+--------------------
+-All CMake options now have the prefix PUGIXML_. This may require changing
+ dependent build configurations.
+-Many build settings are now exposed via CMake settings, most notably
+ PUGIXML_COMPACT and PUGIXML_WCHAR_MODE can be set without changing pugiconfig.hpp
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../poppler/{poppler_22.01.0.bb => poppler_22.02.0.bb}          | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/poppler/{poppler_22.01.0.bb => poppler_22.02.0.bb} (96%)
+ .../pugixml/{pugixml_1.11.4.bb => pugixml_1.12.bb}            | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/pugixml/{pugixml_1.11.4.bb => pugixml_1.12.bb} (86%)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler_22.01.0.bb b/meta-oe/recipes-support/poppler/poppler_22.02.0.bb
-similarity index 96%
-rename from meta-oe/recipes-support/poppler/poppler_22.01.0.bb
-rename to meta-oe/recipes-support/poppler/poppler_22.02.0.bb
-index 02df6d2163..2954a89b8e 100644
---- a/meta-oe/recipes-support/poppler/poppler_22.01.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_22.02.0.bb
-@@ -7,7 +7,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            file://0001-Do-not-overwrite-all-our-build-flags.patch \
-            file://basename-include.patch \
-            "
--SRC_URI[sha256sum] = "7d3493056b5b86413e5c693c2cae02c5c06cd8e618d14c2c31e2c84b67b2313e"
-+SRC_URI[sha256sum] = "e390c8b806f6c9f0e35c8462033e0a738bb2460ebd660bdb8b6dca01556193e1"
+diff --git a/meta-oe/recipes-devtools/pugixml/pugixml_1.11.4.bb b/meta-oe/recipes-devtools/pugixml/pugixml_1.12.bb
+similarity index 86%
+rename from meta-oe/recipes-devtools/pugixml/pugixml_1.11.4.bb
+rename to meta-oe/recipes-devtools/pugixml/pugixml_1.12.bb
+index 4e4048f5e3..b09c46a66b 100644
+--- a/meta-oe/recipes-devtools/pugixml/pugixml_1.11.4.bb
++++ b/meta-oe/recipes-devtools/pugixml/pugixml_1.12.bb
+@@ -7,10 +7,10 @@ data-driven tree queries."
+ HOMEPAGE = "https://pugixml.org/"
  
- DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://readme.txt;beginline=29;endline=52;md5=d5ee91fb74cbb64223b3693fd64eb169"
++LIC_FILES_CHKSUM = "file://readme.txt;beginline=29;endline=52;md5=d11b640daff611273752ec136394347c"
+ 
+ SRC_URI = "https://github.com/zeux/${BPN}/releases/download/v${PV}/${BP}.tar.gz"
+-SRC_URI[sha256sum] = "8ddf57b65fb860416979a3f0640c2ad45ddddbbafa82508ef0a0af3ce7061716"
++SRC_URI[sha256sum] = "fd6922a4448ec2f3eb9db415d10a49660e5d84ce20ce66b8a07e72ffc84270a7"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/zeux/${BPN}/releases"
  
 -- 
 2.25.1
