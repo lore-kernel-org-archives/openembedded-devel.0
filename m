@@ -1,95 +1,118 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <xuhuan.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99398C433EF
-	for <webhook@archiver.kernel.org>; Thu, 24 Feb 2022 04:53:51 +0000 (UTC)
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com
- [209.85.218.42])
- by mx.groups.io with SMTP id smtpd.web10.6632.1645678430753918181
- for <Openembedded-devel@lists.openembedded.org>;
- Wed, 23 Feb 2022 20:53:51 -0800
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56E82C433F5
+	for <webhook@archiver.kernel.org>; Thu, 24 Feb 2022 06:00:34 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.66])
+ by mx.groups.io with SMTP id smtpd.web09.7156.1645682432482019802
+ for <openembedded-devel@lists.openembedded.org>;
+ Wed, 23 Feb 2022 22:00:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=PRbqWl9R;
- spf=pass (domain: gmail.com, ip: 209.85.218.42, mailfrom: ticotimo@gmail.com)
-Received: by mail-ej1-f42.google.com with SMTP id p9so1839381ejd.6
-        for <Openembedded-devel@lists.openembedded.org>;
- Wed, 23 Feb 2022 20:53:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=sY0fyLC32HmPJVXKKC2+t3sOkOB2WK0/y0IdG/xGOIc=;
-        b=PRbqWl9RVPs7n27RCkWC+Y3S+Qy+A5RdPkTgyCRpueXcURo8cKEktwyWwl4DZpK9EE
-         KA3KxF2ExiAcmoMKWdzXppqNkClprn2X3llD7UlvvbydAJfXCXmu3iK8dPxTx0ExJgfE
-         0KHRrtQ+xt7l1na5jx5CRFB9OmEI84jbqKPQGSa6w/dUtj2OlOcS8LGiK7xOJlWJnCCY
-         dOl9YZfS5FB5N8/h0ZPt1HNuGCZDuIJg009l8mzi6qM42FYHJW6lwKRiRmq6szcyeIN5
-         dGcvGnar/ucIJW6uZ3KCem6/B6JhHEe1tK2ZE646TY0LrSPRhf5t6dDgwpkhfXF/WRJj
-         k8XA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=sY0fyLC32HmPJVXKKC2+t3sOkOB2WK0/y0IdG/xGOIc=;
-        b=UYroBL3U80t4sFHI7ggTRla3WTGqDeHV/c/oOL0VYKAV991MZrf5TIMbmr2k3iP7wV
-         FnsbuSmQ5dbGqjwrOKsH2fMlJ9Z1UwFPyJkfsSXy5CXcRBfUGPBVpFUBxyA0HEzUvDBb
-         8YemiQxSkmR+aU8w0MCApWPVaX3dAVoXBORccFTPzwAKchxsGyXFBShA2KzWiMYkIrwI
-         WmHaq6W8yKYBdZjhDEAWVBwOQ8eC/UadraXhXQniw/UL3oAsOirYNkDMBlIowFRYr5RY
-         68jCpPgf720Lm4qINEH417m688FFAqK9PdA2eLIwlYMMOa6lpMFStYn4gn7FmHs6v6TR
-         Y5uw==
-X-Gm-Message-State: AOAM532DQtRqR0qRzh8cuOK3d1q4c52AX3ljnPkmuj0PB1BUX8KZDxtD
-	w/k8g7w4LD8qIRQ8h8/k+S6J7tWfzWulQuFE5hev/lGmCkBS/w==
-X-Google-Smtp-Source: 
- ABdhPJw43Kn3id/MeYRwgjpDhCqyJq6nhzFxqEMqPotbl+2hXjFIcKszqX5B7YwS0n0KnPs3AUV+7xgA7H1v3Q/SuZo=
-X-Received: by 2002:a17:906:f293:b0:6b6:bc93:f01f with SMTP id
- gu19-20020a170906f29300b006b6bc93f01fmr721552ejb.743.1645678428970; Wed, 23
- Feb 2022 20:53:48 -0800 (PST)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Eu6qyFWc;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.66,
+ mailfrom: xuhuan.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1645682430; i=@fujitsu.com;
+	bh=LCMBz1y8/+YEKikSrT2kR2++XQYnGsEmyvpX/9fkxQY=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=Eu6qyFWcLskixHsbhxUS7qfE6clWNsvEBnoOOipafNTmTOzxLdCi1z9CbuKbeS6Eq
+	 vZ0G/hgo/pdUE6c67s/qPhPT2ZP2p775joevOHP3TOquIn3eQ9X0A5PsFadydvXPHv
+	 ru76w8FJzD3r/f36j5j/5T8VDyx0WjcF8Rk2ITiYP6/64hw/yysiomSYilZmQmbnNE
+	 lO+K9f0XSgLhAP6zemcCXTvbCH9PQBv9PRcQHuLbgxxtCtvu00UYNTfeXxTBGTGxCa
+	 c4q04lJHjkPnd/bJ70Rbf/+dKgbJ+xlZrFS5yaAFpq0n33tnUsP4tN2REkbQRXGfJD
+	 XEdSCvc6t/Hnw==
+Received: from [100.115.7.114] (using TLSv1.2 with cipher
+ DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-4.bemta.az-a.eu-west-1.aws.ess.symcld.net id F9/FB-12986-EFE17126;
+ Thu, 24 Feb 2022 06:00:30 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprFIsWRWlGSWpSXmKPExsViZ8MRovtPTjz
+  JYFszq8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnF37mHWgtlcFVf3XGRsYFzF2cXIxSEkMJNJ
+  Yt+J/0wQzklGiZ9Xr7F2MXJysAmoSzy++ZoRxBYR0JdYOnsPM4jNLKAq0X1xDTuILSwQKXF6y
+  mIwmwUo/nfTGbB6XgF3iRUTpoPFJQQUJKY8fM8MEReUODnzCQvEHAmJgy9eMEPUKEmcWPGRCc
+  KukHh9+BLzBEbeWUhaZiFpWcDItIrRKqkoMz2jJDcxM0fX0MBA19DQVNdA18jEWC+xSjdRL7V
+  Utzy1uETXUC+xvFgvtbhYr7gyNzknRS8vtWQTIzDIUooZPu9gXND3U+8QoyQHk5IorySzeJIQ
+  X1J+SmVGYnFGfFFpTmrxIUYZDg4lCV4TGaCcYFFqempFWmYOMOBh0hIcPEoivM94gNK8xQWJu
+  cWZ6RCpU4yKUuK8fbJACQGQREZpHlwbLMouMcpKCfMyMjAwCPEUpBblZpagyr9iFOdgVBLmfQ
+  MyhSczrwRu+iugxUxAiw3ixUAWlyQipKQamCYE+a449+jvr5/17s0vK7yfu1y0lmPyFrofdPW
+  eVpIMx4cJkmrlK3l1fnVFqipcDwv4YHB3a0q2udHKlaY2h3LSFtS9uLS9SJT3H//+x9fFWTrD
+  1lR/WLVoj9M9D0MHD9XzD99O56vxYrWZcXuLp7qMz15FXV5BxjVTmv22O6Sd3fl6TuGvI1fur
+  7j9nCkxP1NGfuaT4ilWSofiV4k3uSW9YHNVXyrwwOiwYFPO3uSXut6sMdO1XGYzdDGE1Nfnn+
+  HIjnMvsTHcwXZO+G/ipz3HPOPMy5Qrj+9lcD+6ccnVYo0s9b93q7zmTVUw37flQ6fmq5ZKyxq
+  fplr9lXpPMk6+kxPL0t8h8vPmhE8flFiKMxINtZiLihMB8znely0DAAA=
+X-Env-Sender: xuhuan.fnst@fujitsu.com
+X-Msg-Ref: server-8.tower-587.messagelabs.com!1645682429!84253!1
+X-Originating-IP: [62.60.8.84]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.7; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 19268 invoked from network); 24 Feb 2022 06:00:30 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-8.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 24 Feb 2022 06:00:30 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 21O60MY0000540
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 24 Feb 2022 06:00:29 GMT
+Received: from localhost.localdomain.localdomain (10.167.225.131) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.28; Thu, 24 Feb 2022 06:00:21 +0000
+From: XU Huan <xuhuan.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Xu Huan <xuhuan.fnst@fujitsu.com>
+Subject: [PATCH 1/2] [oe] [meta-python] [PATCH] python3-imageio: upgrade
+ 2.15.0 -> 2.16.0
+Date: Thu, 24 Feb 2022 14:00:56 +0800
+Message-ID: <1645682457-31192-1-git-send-email-xuhuan.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-From: Tim Orling <ticotimo@gmail.com>
-Date: Wed, 23 Feb 2022 20:53:38 -0800
-Message-ID: 
- <CANx9H-Bs=XCdmTCE8uhqEtWYBNBotJA-sb-DOx-RZafs2FxRdA@mail.gmail.com>
-Subject: Fix for python3-setuptools-rust-native
-To: "openembedded-devel@lists.openembedded.org"
- <Openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="0000000000002c620c05d8bc5e81"
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.131]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Feb 2022 04:53:51 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Feb 2022 06:00:34 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95493
+ https://lists.openembedded.org/g/openembedded-devel/message/95494
 
---0000000000002c620c05d8bc5e81
-Content-Type: text/plain; charset="UTF-8"
+From: Xu Huan <xuhuan.fnst@fujitsu.com>
 
-I have a patch staged to fix python3-setuptools-rust-native (but it depends
-on pending patches just sent to oe-core).
+changelog:
+-Fix
+Read metadata of current frame when iterating + APNG fast path
+-Feature
+Improps and immeta
+-Other
+Dedicated namespaces for APIs
 
-This branch is where I will be staging fixes for meta-python, as time
-permits.
+Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
+---
+ .../{python3-imageio_2.15.0.bb => python3-imageio_2.16.0.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-imageio_2.15.0.bb => python3-imageio_2.16.0.bb} (81%)
 
-https://git.openembedded.org/meta-openembedded-contrib/log/?h=timo/pyprojecttoml
+diff --git a/meta-python/recipes-devtools/python/python3-imageio_2.15.0.bb b/meta-python/recipes-devtools/python/python3-imageio_2.16.0.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-imageio_2.15.0.bb
+rename to meta-python/recipes-devtools/python/python3-imageio_2.16.0.bb
+index e3462ee44a..04d5b9c95e 100644
+--- a/meta-python/recipes-devtools/python/python3-imageio_2.15.0.bb
++++ b/meta-python/recipes-devtools/python/python3-imageio_2.16.0.bb
+@@ -5,7 +5,7 @@ SECTION = "devel/python"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=7b9bbbb543b6af3e6b53f9b7fb68f71d"
+ 
+-SRC_URI[sha256sum] = "d0d7abb4e5c4044c06fc573233489c4a25582698f93ca94f7bd70b6f4ab172ec"
++SRC_URI[sha256sum] = "7f7d8d8e1eb6f8bb1d15e0dd93bee3f72026a4c3b96e9c690e42f403f7bdea3e"
+ 
+ inherit pypi setuptools3
+ 
+-- 
+2.25.1
 
-Please realize that I also need to spend time on the documentation for the
-changes in oe-core and have other customer work that must be done as well.
-
-Regards,
-
---Tim
-
---0000000000002c620c05d8bc5e81
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">I have a patch staged to fix python3-setuptools-rust-nativ=
-e (but it depends on pending patches just sent to oe-core).<div><br></div><=
-div>This branch is where I will be staging fixes for meta-python, as time p=
-ermits.</div><div><br></div><div><a href=3D"https://git.openembedded.org/me=
-ta-openembedded-contrib/log/?h=3Dtimo/pyprojecttoml">https://git.openembedd=
-ed.org/meta-openembedded-contrib/log/?h=3Dtimo/pyprojecttoml</a><br></div><=
-div><br></div><div>Please realize that I also need to spend time on the doc=
-umentation for the changes in oe-core and have other customer work that mus=
-t be done as well.</div><div><br></div><div>Regards,</div><div><br></div><d=
-iv>--Tim</div></div>
-
---0000000000002c620c05d8bc5e81--
 
