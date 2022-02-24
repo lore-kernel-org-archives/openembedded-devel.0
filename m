@@ -1,115 +1,221 @@
-Return-Path: <ross@burtonini.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F2A1C433F5
-	for <webhook@archiver.kernel.org>; Thu, 24 Feb 2022 19:32:23 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
- [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.web10.1023.1645731142285454179
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E1A6C433F5
+	for <webhook@archiver.kernel.org>; Thu, 24 Feb 2022 20:21:35 +0000 (UTC)
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com
+ [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web12.529.1645734094782439469
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Feb 2022 11:32:22 -0800
+ Thu, 24 Feb 2022 12:21:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@burtonini-com.20210112.gappssmtp.com header.s=20210112
- header.b=PKhyUxWg;
- spf=pass (domain: burtonini.com, ip: 209.85.221.41,
- mailfrom: ross@burtonini.com)
-Received: by mail-wr1-f41.google.com with SMTP id n14so1216738wrq.7
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=i5Kcs4fs;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173,
+ mailfrom: ticotimo@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id 75so2706103pgb.4
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Feb 2022 11:32:21 -0800 (PST)
+ Thu, 24 Feb 2022 12:21:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=burtonini-com.20210112.gappssmtp.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=68iiE24NS9f53RL3QwfQ9tjUveZaC61TipoMQnAbGhc=;
-        b=PKhyUxWgsr9jkDk+2/u47ntfrdif6GeZSflnoG0i9aKRLSQOCatL/AVVffVzQzwLm2
-         +pzRPui7pacSa+p7Tj1aYHak8wxn6M4Q2VekZcP8t6A0tVwLqEK8Crb65jMA7bRUmcQT
-         uCWQo1f8ch0YfavDK0OwjTbI1qtT5VssM9Lv7Iqa/huJKNA70esvmXK1RmVVQDm4SEp4
-         ErD+m4AiwaxbSCxByAzcN/u3O9WhhXo8hNKvae7J3MbJtmGzO2MFGubu28Mhrkz6ay47
-         lNn+0B0zwdL0WtmbrtSnaFn760bkz8i471r8iGOyaGrQufS/OfBN7HMvXjaUNm+zHshj
-         i+7Q==
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Ovhe4ffNxRkWdpoDGHNJJm2lSHQEsnPfFJvVByXGPiE=;
+        b=i5Kcs4fsGF3zwlB1Kb/jUgbdE64QJNeDBJIpwVITV7KSclwQu0D/NvTBBYIvjKJ4hu
+         ThEJk5Xe5WI9DJuUXIGN3pXyZfvjr2RG5ykIu5zX80N2WzEYVyEnWH63bEfSNhiiGtTu
+         2HJ6Bo42K39YIbUmnKdUj06Z+jN3jh0W7O1yvVQ9726bsacP3MxbLPp1Flr0YW4xanQ1
+         uX41A2FN4EuuJX7EHGg0dNuB4hJtAeku8yiQt2BR8MnxGhcR+qZ0MTeR7uxWEmt1Fwwd
+         UMrDl6m3yB4bCFlFIg5DcpXaQMDQIjX/qpnEMxmVbVWpHO6mC5LsdgIgmHNJfEUrf6wq
+         rMrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=68iiE24NS9f53RL3QwfQ9tjUveZaC61TipoMQnAbGhc=;
-        b=gihiWu4umHkhN0f7Grt7d9g43U60hmb1HJzkNl78lB3mKUM0G5OWkWGJIbpz4ed3TI
-         1z3ssU8OJLc9rwHhmAT1NZtlkU8medTB3yw1P0T9XInTR5SBUEKSmScn7IaY3i19xFYN
-         YmywLPYIybGAg1dNPcYNy78enfSgxMdnKbfDUeQYi5ouZxYgaBydTaWjNWOFENatw2lx
-         J6O3SCnVBB14CScalCL8LuBWGAFtxihTNLzX2dp8x6cAX0vbdW8jpU+a5mpG5HAscwFl
-         iApuYcWQTk4IId33jNgLL4fJudcaDDuA2V4r4m4AjJln7/+R8mfwK3TxmH1N8y9cnCPF
-         tJPg==
-X-Gm-Message-State: AOAM530GsNIa+of+ipUPqsvIbAo6jwn+1vILr69ZBlbfkXpcR/X7JGlG
-	8sW+5gsz0L5E9mjRQlMqOY1bPToHB+sw685ot5xqYg==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Ovhe4ffNxRkWdpoDGHNJJm2lSHQEsnPfFJvVByXGPiE=;
+        b=VyUCYjg8g0oWoukKXeYMb3MpEy57Ve7tP64DIl/L//9nY4LEbDdj+kQtkytod98w5m
+         dGDn/QFZXLnf6TKBH7oOLUs0g1BMDq1yqIPamuc6BU4lp5zHbt567VKIpxkqPriWFmfN
+         b9K6/LHWJWZsiO04a8QKaGQJOpkXYHF/4Cs6sbhZdAGRLcE9lOKRzmAU9SInhU2/YsJa
+         cjdopav/upd4T4v/P6dF86nM/IFVf8dlCBTFtb8GPv19uHw/d65rTSRXQD0pIucIlUM4
+         5ILhw4WOR7tNVSLHFuwg0MCM8QNW0viphHS4rwVw/nN/Cf+aJ3Cps1Dlq+uiEIXCcouN
+         X9gA==
+X-Gm-Message-State: AOAM533kgOfBWRe0KLlUDliF4zzlImbb3zFZKeRnOmBDo1kG58mNXU+w
+	QjPetQ8fK1OYeC0l4UBy9MArw//95Ukdrg==
 X-Google-Smtp-Source: 
- ABdhPJz5mvl543+7ZlcnNseiX4BUq8V9wY3BZGRgHKwP67/UurRlVwZybdbJrnNTMZdlZPFZ1MueWHrmR08es20k+yU=
-X-Received: by 2002:a5d:584d:0:b0:1e3:2157:d85b with SMTP id
- i13-20020a5d584d000000b001e32157d85bmr3437226wrf.451.1645731140512; Thu, 24
- Feb 2022 11:32:20 -0800 (PST)
+ ABdhPJwR5ONn9SHEEZQrgTlqWJYFgdnyWkJJ7wC4lz1ZiMt1X3uN58UYK68P/Du2pPz2kN9SVZ29Sg==
+X-Received: by 2002:a63:d30f:0:b0:376:a7b2:98a3 with SMTP id
+ b15-20020a63d30f000000b00376a7b298a3mr189352pgg.376.1645734093666;
+        Thu, 24 Feb 2022 12:21:33 -0800 (PST)
+Received: from nereus.hsd1.or.comcast.net
+ ([2601:1c0:6000:1b20:263d:523e:139c:a040])
+        by smtp.gmail.com with ESMTPSA id
+ d6-20020a056a0024c600b004ecc812de56sm273548pfv.199.2022.02.24.12.21.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 24 Feb 2022 12:21:33 -0800 (PST)
+From: Tim Orling <ticotimo@gmail.com>
+X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Tim Orling <tim.orling@konsulko.com>
+Subject: [meta-python][PATCH] distutils*.bbclass: move from oe-core
+Date: Thu, 24 Feb 2022 12:21:29 -0800
+Message-Id: <20220224202129.1885384-1-tim.orling@konsulko.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-References: <20220222184920.2310391-1-tim.orling@konsulko.com>
-In-Reply-To: <20220222184920.2310391-1-tim.orling@konsulko.com>
-From: Ross Burton <ross@burtonini.com>
-Date: Thu, 24 Feb 2022 19:32:09 +0000
-Message-ID: 
- <CAAnfSTvUUqLgLhCYro7LCGG1uMeR38gHsqPRtf_93G1w9NAgFw@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-wheel: drop; moved to oe-core
-To: Tim Orling <ticotimo@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, raj.khem@gmail.com,
-	Tim Orling <tim.orling@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Feb 2022 19:32:23 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Feb 2022 20:21:35 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95513
+ https://lists.openembedded.org/g/openembedded-devel/message/95514
 
-Can we have the discussion about moving meta-oe's priority so that it
-matches oe-core and we don't have to deal with this sort of madness
-again?
+distutils has been deprecated in Python 3.10 and will be removed in
+Python 3.12 (predicted release date October 2023). For now, move these
+classes from oe-core to allow users to migrate.
 
-Ross
+A deprecation warning has been added to each class.
 
-On Tue, 22 Feb 2022 at 18:49, Tim Orling <ticotimo@gmail.com> wrote:
->
-> Because of layer priority, this recipe must be dropped before a build
-> with the new PEP-517 packaging can proceed due to dependency loops.
->
-> Signed-off-by: Tim Orling <tim.orling@konsulko.com>
-> ---
->  .../recipes-devtools/python/python3-wheel_0.37.1.bb  | 12 ------------
->  1 file changed, 12 deletions(-)
->  delete mode 100644 meta-python/recipes-devtools/python/python3-wheel_0.37.1.bb
->
-> diff --git a/meta-python/recipes-devtools/python/python3-wheel_0.37.1.bb b/meta-python/recipes-devtools/python/python3-wheel_0.37.1.bb
-> deleted file mode 100644
-> index 6c7a31db9e..0000000000
-> --- a/meta-python/recipes-devtools/python/python3-wheel_0.37.1.bb
-> +++ /dev/null
-> @@ -1,12 +0,0 @@
-> -SUMMARY = "The official binary distribution format for Python "
-> -HOMEPAGE = "https://github.com/pypa/wheel"
-> -SECTION = "devel/python"
-> -LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=10;endline=10;md5=8227180126797a0148f94f483f3e1489"
-> -
-> -SRC_URI[sha256sum] = "e9a504e793efbca1b8e0e9cb979a249cf4a0a7b5b8c9e8b65a5e39d49529c1c4"
-> -
-> -inherit pypi setuptools3
-> -
-> -BBCLASSEXTEND = "native"
-> -
-> --
-> 2.30.2
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#95449): https://lists.openembedded.org/g/openembedded-devel/message/95449
-> Mute This Topic: https://lists.openembedded.org/mt/89323966/1676615
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [ross@burtonini.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Documentation is also being dropped in oe-core, but users can refer to
+3.4 documentation for the legacy variables and classes.
+
+[YOCTO #14610]
+
+Signed-off-by: Tim Orling <tim.orling@konsulko.com>
+---
+ .../classes/distutils-common-base.bbclass     | 28 ++++++++
+ meta-python/classes/distutils3-base.bbclass   |  9 +++
+ meta-python/classes/distutils3.bbclass        | 71 +++++++++++++++++++
+ 3 files changed, 108 insertions(+)
+ create mode 100644 meta-python/classes/distutils-common-base.bbclass
+ create mode 100644 meta-python/classes/distutils3-base.bbclass
+ create mode 100644 meta-python/classes/distutils3.bbclass
+
+diff --git a/meta-python/classes/distutils-common-base.bbclass b/meta-python/classes/distutils-common-base.bbclass
+new file mode 100644
+index 0000000000..59c750a3cf
+--- /dev/null
++++ b/meta-python/classes/distutils-common-base.bbclass
+@@ -0,0 +1,28 @@
++export STAGING_INCDIR
++export STAGING_LIBDIR
++
++# LDSHARED is the ld *command* used to create shared library
++export LDSHARED  = "${CCLD} -shared"
++# LDXXSHARED is the ld *command* used to create shared library of C++
++# objects
++export LDCXXSHARED  = "${CXX} -shared"
++# CCSHARED are the C *flags* used to create objects to go into a shared
++# library (module)
++export CCSHARED  = "-fPIC -DPIC"
++# LINKFORSHARED are the flags passed to the $(CC) command that links
++# the python executable
++export LINKFORSHARED = "${SECURITY_CFLAGS} -Xlinker -export-dynamic"
++
++FILES:${PN} += "${libdir}/* ${libdir}/${PYTHON_DIR}/*"
++
++FILES:${PN}-staticdev += "\
++  ${PYTHON_SITEPACKAGES_DIR}/*.a \
++"
++FILES:${PN}-dev += "\
++  ${datadir}/pkgconfig \
++  ${libdir}/pkgconfig \
++  ${PYTHON_SITEPACKAGES_DIR}/*.la \
++"
++python __anonymous() {
++    bb.warn("distutils-common-base.bbclass is deprecated, please use setuptools3-base.bbclass instead")
++}
+diff --git a/meta-python/classes/distutils3-base.bbclass b/meta-python/classes/distutils3-base.bbclass
+new file mode 100644
+index 0000000000..850c535bb1
+--- /dev/null
++++ b/meta-python/classes/distutils3-base.bbclass
+@@ -0,0 +1,9 @@
++DEPENDS:append:class-target = " ${PYTHON_PN}-native ${PYTHON_PN}"
++DEPENDS:append:class-nativesdk = " ${PYTHON_PN}-native ${PYTHON_PN}"
++RDEPENDS:${PN} += "${@['', '${PYTHON_PN}-core']['${CLASSOVERRIDE}' == 'class-target']}"
++
++inherit distutils-common-base python3native python3targetconfig
++
++python __anonymous() {
++    bb.warn("distutils3-base.bbclass is deprecated, please use setuptools3-base.bbclass instead")
++
+diff --git a/meta-python/classes/distutils3.bbclass b/meta-python/classes/distutils3.bbclass
+new file mode 100644
+index 0000000000..a6d8e8763f
+--- /dev/null
++++ b/meta-python/classes/distutils3.bbclass
+@@ -0,0 +1,71 @@
++inherit distutils3-base
++
++B = "${WORKDIR}/build"
++distutils_do_configure[cleandirs] = "${B}"
++
++DISTUTILS_BUILD_ARGS ?= ""
++DISTUTILS_INSTALL_ARGS ?= "--root=${D} \
++    --prefix=${prefix} \
++    --install-lib=${PYTHON_SITEPACKAGES_DIR} \
++    --install-data=${datadir}"
++
++DISTUTILS_PYTHON = "python3"
++DISTUTILS_PYTHON:class-native = "nativepython3"
++
++DISTUTILS_SETUP_PATH ?= "${S}"
++
++python __anonymous() {
++    bb.warn("distutils3.bbclass is deprecated, please use setuptools3.bbclass instead")
++}
++
++distutils3_do_configure() {
++    :
++}
++
++distutils3_do_compile() {
++        cd ${DISTUTILS_SETUP_PATH}
++        NO_FETCH_BUILD=1 \
++        STAGING_INCDIR=${STAGING_INCDIR} \
++        STAGING_LIBDIR=${STAGING_LIBDIR} \
++        ${STAGING_BINDIR_NATIVE}/${PYTHON_PN}-native/${PYTHON_PN} setup.py \
++        build --build-base=${B} ${DISTUTILS_BUILD_ARGS} || \
++        bbfatal_log "'${PYTHON_PN} setup.py build ${DISTUTILS_BUILD_ARGS}' execution failed."
++}
++distutils3_do_compile[vardepsexclude] = "MACHINE"
++
++distutils3_do_install() {
++        cd ${DISTUTILS_SETUP_PATH}
++        install -d ${D}${PYTHON_SITEPACKAGES_DIR}
++        STAGING_INCDIR=${STAGING_INCDIR} \
++        STAGING_LIBDIR=${STAGING_LIBDIR} \
++        PYTHONPATH=${D}${PYTHON_SITEPACKAGES_DIR} \
++        ${STAGING_BINDIR_NATIVE}/${PYTHON_PN}-native/${PYTHON_PN} setup.py \
++        build --build-base=${B} install --skip-build ${DISTUTILS_INSTALL_ARGS} || \
++        bbfatal_log "'${PYTHON_PN} setup.py install ${DISTUTILS_INSTALL_ARGS}' execution failed."
++
++        # support filenames with *spaces*
++        find ${D} -name "*.py" -exec grep -q ${D} {} \; \
++                               -exec sed -i -e s:${D}::g {} \;
++
++        for i in ${D}${bindir}/* ${D}${sbindir}/*; do
++            if [ -f "$i" ]; then
++                sed -i -e s:${PYTHON}:${USRBINPATH}/env\ ${DISTUTILS_PYTHON}:g $i
++                sed -i -e s:${STAGING_BINDIR_NATIVE}:${bindir}:g $i
++            fi
++        done
++
++        rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/easy-install.pth
++
++        #
++        # FIXME: Bandaid against wrong datadir computation
++        #
++        if [ -e ${D}${datadir}/share ]; then
++            mv -f ${D}${datadir}/share/* ${D}${datadir}/
++            rmdir ${D}${datadir}/share
++        fi
++}
++distutils3_do_install[vardepsexclude] = "MACHINE"
++
++EXPORT_FUNCTIONS do_configure do_compile do_install
++
++export LDSHARED="${CCLD} -shared"
+-- 
+2.30.2
+
 
