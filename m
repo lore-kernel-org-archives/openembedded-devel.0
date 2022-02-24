@@ -2,93 +2,97 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E90A5C433F5
-	for <webhook@archiver.kernel.org>; Thu, 24 Feb 2022 08:02:22 +0000 (UTC)
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com
- [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.web12.7657.1645689742105686162
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6BA2C433EF
+	for <webhook@archiver.kernel.org>; Thu, 24 Feb 2022 08:02:23 +0000 (UTC)
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
+ [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.web08.7769.1645689742933631349
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Feb 2022 00:02:22 -0800
+ Thu, 24 Feb 2022 00:02:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=mNtSdx2D;
- spf=pass (domain: gmail.com, ip: 209.85.210.171,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=IfCTINUL;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f171.google.com with SMTP id x18so1183188pfh.5
+Received: by mail-pf1-f180.google.com with SMTP id d17so1223288pfl.0
         for <openembedded-devel@lists.openembedded.org>;
  Thu, 24 Feb 2022 00:02:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Tdm7DNnl4AG4Psd0ipZg2JwmxE7z01SwcUeTkHTXRCA=;
-        b=mNtSdx2DSIipmgwhSFwllGwtmorK2ku/cg6uVRhTL8DN6dSY4mlB3LtpkuPh+sRMH9
-         P3FCl4eeTdUSuwPeX2MEL6yrHGK6gZyaGZlbOYRY2hFOM5ZC6uWfz2ZMFs+E6BMqE0rz
-         L3jVDxaqt32Wbfn14bh7ipXTISbXv9Ztt1al8XR7xhYM9Ucaxtq9v6/526AaKmKHmopU
-         deKPojyR+AotOYnsmU34Cpk5Y92Eyhnsy8eFfeJDEeYn6SZUECKVIDP8DgLsJrvPMBH6
-         rYNK55/apWrtDFv5cAYD8CwygSk8rV7tEV+X69WHENRzoOxWlMBqafk4IooKqFRmCuUG
-         yl7g==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=WwhW1lQJ6kwasHbphr7hHf9Jgd4VDclyukAgA+tOVr4=;
+        b=IfCTINULAEQbc/MAPwRFTjhNCCn56MUu2IoT6kkpdZ0mdvU3MlWOp5U34gDf8x7Tue
+         XyQ0Lv9vFx++h0TO8cSU9hzVJg8LEbNZbbANSvSgw56UBOCke0kS16rJzbnQliSAhrav
+         vn88i88HaP3kYsf4GTMPDSR1RAxUyAsj59szQAyLluXeNim6TCwGeELmmtNMhL5oPIlc
+         9lAqHAJPBYgJ+amb2Cc8hCyROtp+d1pOvwPa8Bn1FiAHfUWh+WbTr/30C+5lVTdY08aY
+         yO6yvj69G/kwb88bZZvKNLLRoZOwsdh2Ko5ZCsGvDnNEG/mrN4LXjwdsjCMQ+6/4h9JQ
+         qHgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Tdm7DNnl4AG4Psd0ipZg2JwmxE7z01SwcUeTkHTXRCA=;
-        b=vRj1PQtZTrVrUs8k8EVUI2IDRehcjqIMIzpX14w3lZ78rJ/QW0JmhNTfy62R2DOT7O
-         0j9DXgSoiw2eE0h+nJ3e5Izy6RL/za2LuR9Gm+/7JztRiNEuJmeb3iC8vwRpVhqLE7xX
-         /4MbuGh7qr+rkiLrKxjEEi4Ed9FZZjGSO6bgWlqluuoviA+kD6py4LCZAPEphBC2MiH0
-         gZTl8JMX5T0HWmosNhzCofpYK8CFY5lhvvauCc394UOVrySFk6U/NqEFP/aAHTzafy1j
-         boQhZAGEk7su8gQBDPQgsskaN3pI/a6KgdRZlxkn0JVJ8aHHZR1DvElLcXP3LIXD4kwt
-         sxHg==
-X-Gm-Message-State: AOAM533LE8IUcJQv02c9HLFR8z0ijML0V7iaXx8FvpTokHj6aHsKK4aa
-	I6ANS+jhyr0+E6VXsAWLjB3w9iIAA5yI6g==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=WwhW1lQJ6kwasHbphr7hHf9Jgd4VDclyukAgA+tOVr4=;
+        b=X/Ni4QMAWLoqugXv4+pzsSZLeo33znrCHga5AhkY0Kj0PgUoqsmvAXJewvPJfjqcjU
+         4cGrMaDONqsWtCJTT5z537JKu2WYohDV6hub55t2OA9zrCXgYq66P7VdTwXYECw9ViQo
+         Qo98up7zWsTRAkgDHCHSzoRZhA0q/jWxp/o1OUKXmOLLmkM+xM3f/amYADSQPAZXnTEH
+         FRX19dzTzQRUWbvcl9AouL5b+6h1owp6WR4rZbddEkcTGh6L6ZBDx5Q6VMRTJDWDMy+S
+         25sP1Dy8UBy1Q8kjhheyJI1L7q1XsIyDk7mbeu/PWx260T2ayfbbFDESmWpnTbC++5Mb
+         jKlw==
+X-Gm-Message-State: AOAM531uQlSzCn2N9AeiCr7tzUn1JWXaUMWZjSb5quzUzSUE1dJdCd5O
+	iU4m9tolz9u1EOUYMfdMXVA93EP1z1ti3Q==
 X-Google-Smtp-Source: 
- ABdhPJyZUUpQtOZk0vZm/NZK9221BwD7+EuVT4S60k+nrBdFMvGosWh58a8aToFmaX7QUCr7ndooXg==
-X-Received: by 2002:a63:549:0:b0:372:cef4:1c63 with SMTP id
- 70-20020a630549000000b00372cef41c63mr1357643pgf.404.1645689741227;
-        Thu, 24 Feb 2022 00:02:21 -0800 (PST)
+ ABdhPJxDWoTGOfuI7Lfok5TpzknC0O8oQ4O3nB4GGQG5kLXKK7lOmJ/6u8t22GllgGHG6twCMLEzBw==
+X-Received: by 2002:a63:5055:0:b0:372:f0e7:c034 with SMTP id
+ q21-20020a635055000000b00372f0e7c034mr1397228pgl.4.1645689742065;
+        Thu, 24 Feb 2022 00:02:22 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::fb6e])
         by smtp.gmail.com with ESMTPSA id
- ck20sm1879689pjb.27.2022.02.24.00.02.20
+ ck20sm1879689pjb.27.2022.02.24.00.02.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 24 Feb 2022 00:02:20 -0800 (PST)
+        Thu, 24 Feb 2022 00:02:21 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 1/2] python3-oauthlib: Drop redundant nose
- dependency
-Date: Thu, 24 Feb 2022 00:02:18 -0800
-Message-Id: <20220224080219.1354957-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 2/2] netplan: Add knob to enable tests
+Date: Thu, 24 Feb 2022 00:02:19 -0800
+Message-Id: <20220224080219.1354957-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220224080219.1354957-1-raj.khem@gmail.com>
+References: <20220224080219.1354957-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Feb 2022 08:02:22 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Feb 2022 08:02:23 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95500
+ https://lists.openembedded.org/g/openembedded-devel/message/95501
 
-Add pytest module dependency for testing
-nose has been dropped upstream too [1]
+this puts python3-nose away from default requirements, nose dependency
+should eventually be removed and perhaps converted to pytest
 
-[1] https://github.com/oauthlib/oauthlib/commit/037453c6f92b502eaae2acafe11161e4bb2e38bb
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-oauthlib_3.2.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-connectivity/netplan/netplan_0.104.bb           | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-oauthlib_3.2.0.bb b/meta-python/recipes-devtools/python/python3-oauthlib_3.2.0.bb
-index 3e5d957c4e..e7f7f0b47b 100644
---- a/meta-python/recipes-devtools/python/python3-oauthlib_3.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-oauthlib_3.2.0.bb
-@@ -14,7 +14,7 @@ inherit pypi setuptools3
- #
- # Uncomment this line to enable all the optional features.
- #PACKAGECONFIG ?= "test signedtoken signals rsa"
--PACKAGECONFIG[test] = ",,,${PYTHON_PN}-blinker ${PYTHON_PN}-cryptography ${PYTHON_PN}-nose ${PYTHON_PN}-pyjwt"
-+PACKAGECONFIG[test] = ",,,${PYTHON_PN}-blinker ${PYTHON_PN}-cryptography ${PYTHON_PN}-pytest ${PYTHON_PN}-pyjwt"
- PACKAGECONFIG[signedtoken] = ",,,${PYTHON_PN}-cryptography ${PYTHON_PN}-pyjwt"
- PACKAGECONFIG[signals] = ",,,${PYTHON_PN}-blinker"
- PACKAGECONFIG[rsa] = ",,,${PYTHON_PN}-cryptography"
+diff --git a/meta-networking/recipes-connectivity/netplan/netplan_0.104.bb b/meta-networking/recipes-connectivity/netplan/netplan_0.104.bb
+index 6a32f55d47..e26649744c 100644
+--- a/meta-networking/recipes-connectivity/netplan/netplan_0.104.bb
++++ b/meta-networking/recipes-connectivity/netplan/netplan_0.104.bb
+@@ -22,7 +22,11 @@ SRC_URI:append:libc-musl = " file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined
+ 
+ DEPENDS = "glib-2.0 libyaml ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+ 
+-RDEPENDS:${PN} = "python3 python3-core python3-pyyaml python3-netifaces python3-nose python3-coverage python3-pycodestyle python3-pyflakes util-linux-libuuid libnetplan"
++PACKAGECONFIG ?= ""
++
++PACKAGECONFIG[tests] = ",,,python3-nose python3-coverage python3-netifaces python3-pycodestyle python3-pyflakes python3-pyyaml"
++
++RDEPENDS:${PN} = "python3 python3-core python3-netifaces python3-pyyaml util-linux-libuuid libnetplan"
+ 
+ inherit pkgconfig systemd
+ 
 -- 
 2.35.1
 
