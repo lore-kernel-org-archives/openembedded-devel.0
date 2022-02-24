@@ -2,69 +2,70 @@ Return-Path: <randy.macleod@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 39329C433F5
-	for <webhook@archiver.kernel.org>; Thu, 24 Feb 2022 18:50:12 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com
- [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web09.540.1645728611396871418
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3477C433F5
+	for <webhook@archiver.kernel.org>; Thu, 24 Feb 2022 19:01:09 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com
+ [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.667.1645729238342843675
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Feb 2022 10:50:11 -0800
+ Thu, 24 Feb 2022 11:00:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=EpDHih7o;
+ dkim=fail reason="body hash did not verify" header.i=@windriver.com
+ header.s=pps06212021 header.b=QZbPs4Gm;
  spf=permerror,
  err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
- invalid domain name (domain: windriver.com, ip: 205.220.166.238,
+ invalid domain name (domain: windriver.com, ip: 205.220.178.238,
  mailfrom: prvs=90546d8fae=randy.macleod@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
 	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id
- 21OHRFZt023591
+ 21OCCBDp023243
 	for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Feb 2022 10:50:11 -0800
+ Thu, 24 Feb 2022 19:00:37 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
  h=content-type :
  message-id : date : to : from : subject : mime-version; s=PPS06212021;
- bh=uwgy3jOaECE3jpyW3F6UXiOrJkzQyeNqvxfpuAeZoic=;
- b=EpDHih7otRZb+ta3qAXkveesDfiqiBz4yaIiV2rV/Uz+obOLrlhyTnR0bFWlJnbeqwK9
- 79Lam4B+XX4r9sKjcq0SWJa/oBDHWETvccR97l48Jtqrn0LXGjCPGGftMstkKK1rIcwt
- OgPWuq9eNqhCCnD7i9NwM/+tD6WqbleubzvegwEcq68C9igLUv6SbcYk9JgE219I+jzG
- hfq2y0L0FEWlpDl+cUiJLP0gUoW7Wf8GY+nTUmjxf9QBhYuR27K9nDFbmOTWiw0UyPDX
- eW9Fh+wCE/hwKG8xBBq4JEew7WxSSLdeylImWsaU4PAdV82N7RMjgIIs9P6Ql6bwFr5m xw==
+ bh=PrZOMtY8SmP2VLTji42a1Q7Ka0go99GMqz/n7hAa1qc=;
+ b=QZbPs4GmrMEWo8DibU+6S2YfaMT5B6lAUClgfUkfvvFuBK5pNKvpoqeUEmex2nSzKA7d
+ gCResI5aOduhQ3vy985PU7IQENFejsC8w8jyPevltnz1L/qlWFIvr4QpL5mot7pOdgoe
+ nHuB/FM7j6DPipcEAtEdDOJI0qQSYt5TxSbDxS3dNWY1vA9qq5vsBZVfSy+jrUUq82ee
+ ijtg/+71QHNKjL2SsjCzEbzBAB6/veaXvoXpU6YXUxC590LVXUwTTXYiITYd7u0r4AYb
+ oE1Y3KU9GUoNHH2hF88cvVVn1p2BKIp9POVIWRAuv3722b6ARCq1lC1lFNqk/9fSlyAJ 9A==
 Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ecs9uaqwx-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3edukjh0nx-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Feb 2022 10:50:11 -0800
-Received: from m0250809.ppops.net (m0250809.ppops.net [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 21OIoAvd009507
+ Thu, 24 Feb 2022 19:00:36 +0000
+Received: from m0250811.ppops.net (m0250811.ppops.net [127.0.0.1])
+	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 21OIx7wi026670
 	for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Feb 2022 10:50:10 -0800
-Received: from nam11-co1-obe.outbound.protection.outlook.com
- (mail-co1nam11lp2177.outbound.protection.outlook.com [104.47.56.177])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ecs9uaqww-1
+ Thu, 24 Feb 2022 19:00:36 GMT
+Received: from nam12-bn8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12lp2171.outbound.protection.outlook.com [104.47.55.171])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3edukjh0nw-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 24 Feb 2022 10:50:10 -0800
+	Thu, 24 Feb 2022 19:00:36 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=iRb90t8W1nqc9Zof0oZicONHh1Hz8iYRNOYdRuk5ijTYOY98Vp9buXGuWxh0V3FWz1h7y13ud03myK6v5zX94p9dRH/n0oCEJrqwUBiFmtnj1d6Aid4bVQlA8nsu8Ns6CMpseLRsdq+s98oqednQMvTRtCsyYzw0JruJEa/VXFaQY7UdyQJuc9m4/mmBhds5+02QdK4qseotL8hAd1ONSAY5QDwJ/sozs+MvlGlUWjyPWaR+XfWCFtkX/zM7VHVDj/J9hLBoBhOywRj2JGZA++iFcTTAv9ZxHU/pQyxVfznQUZd2RsXZlOVzZCEu60xLI1G5KI/UCIFcPz/V5EDpKg==
+ b=aiH0+OAQA4iqEQIzzhCcluKGeyqO16towAvqvrq/COHQ1LdICnTUhczgClA6j7DcYJJp12cRAnKYJ8UFB6Vc4P29EHCuie0eJ8x1AdL/HPl2ZFxixXKkm+Q12b2y1cILuQZ4H/k/T23OcWlKoJz0Phg+MkVqd3CtwzFWyTs//t5DK8VdQ07HosmgqS8nbMU/eTU9NmbgkjtUf9Y9g8qJ0br3nM5zsWPVSVo6seOM4AXS5XyRYUqPRcHT7pAfV7DBf3UDlyjhWe2YIXSATMdzBcpjAvIQg8amq6fnr+TwIssT2DFFuQiN0GJZ8ROl4JhEj9wRk1ei0OxPl1CKMJA9Qg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uwgy3jOaECE3jpyW3F6UXiOrJkzQyeNqvxfpuAeZoic=;
- b=GMNG+4/iYw3bcvuOuKR4cKrqTK5onYiNl2Q5KwTTAupdPSLXScUDyfwiW+8Ar9oHU3y1TSlfaqTV+v01+6PLMaO0K0lKxSVB7PM5fSZhTiwuklzmBSwnGyztV8Dvt3a2r4cuXO+eLOo6TbXIHxyC3wvINQqOBxLAbTC7Us1l94AiOPhJ0HNsvvyP2YfntEazdd+PNZc51UmoV6SGJaR3ZY3cJXMiMfMJ9NX0u/njTjyaASA03qmshu8c5pSgppwAbpSLlmnL2otX828erNKbV9OXm/Pv0Y1Tp4vGCNvNJcMr20tSo37Cduo4ghHDXBXbGwXPsji9HD0cSai8fEwMhA==
+ bh=PrZOMtY8SmP2VLTji42a1Q7Ka0go99GMqz/n7hAa1qc=;
+ b=jHR8NyPD9eNghzqEtA6v9XogACwXBgmS9vWO5MYPGcFEPEkeYao46otyRPDbHixBZcz1HOiwOUhF8oNC+hdXoJflEln6Bc1kgUryAKpqjkSQDPbHQNO1MTtRl/KAHwXQ8Nj52RWWB75h1B8tmiGDrdekpSPCbl+mJe7ahwkjMGoM+amjrfbN6CcF9dvo6jnZILcWKLLcsh7DFoUP/3uas1z4f1E4Qx1OeC+/tPEv84Kz+MCLtFc2iTAd/nh2QKsRWpWIwiVGm1GSZNCIN3u3crc3d2chNrqCqyoWYyuA+fAkkauHCCtqVCh+jkBHrTZx1D2i3F9XgfndU83Q/oTBew==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 Received: from DM6PR11MB3994.namprd11.prod.outlook.com (2603:10b6:5:193::19)
- by DM6PR11MB4044.namprd11.prod.outlook.com (2603:10b6:5:6::23) with Microsoft
+ by DM5PR11MB1628.namprd11.prod.outlook.com (2603:10b6:4:c::11) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4995.24; Thu, 24 Feb 2022 18:50:07 +0000
+ 15.20.5017.22; Thu, 24 Feb 2022 19:00:30 +0000
 Received: from DM6PR11MB3994.namprd11.prod.outlook.com
  ([fe80::fca9:1fa9:6fdd:9dee]) by DM6PR11MB3994.namprd11.prod.outlook.com
  ([fe80::fca9:1fa9:6fdd:9dee%5]) with mapi id 15.20.4995.027; Thu, 24 Feb 2022
- 18:50:07 +0000
+ 19:00:30 +0000
 Content-Type: multipart/alternative;
- boundary="------------dAtgWvio5VxqJ0q8jeUOXZ2R"
-Message-ID: <f243d5d3-b94c-b1f9-082c-aded160d9519@windriver.com>
-Date: Thu, 24 Feb 2022 13:50:04 -0500
+ boundary="------------m40jOuKrT0cbQa0SMLCZNwVG"
+Message-ID: <66d48c03-abea-e9f2-3d98-3593a627778e@windriver.com>
+Date: Thu, 24 Feb 2022 14:00:27 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.5.0
 Content-Language: en-CA
@@ -73,134 +74,161 @@ To: Yocto discussion list <yocto@yoctoproject.org>,
  <openembedded-devel@lists.openembedded.org>
 From: Randy MacLeod <randy.macleod@windriver.com>
 Subject: Please provide YP bugzilla comments when encountering bugs.
-X-ClientProxiedBy: SJ0PR13CA0051.namprd13.prod.outlook.com
- (2603:10b6:a03:2c2::26) To DM6PR11MB3994.namprd11.prod.outlook.com
- (2603:10b6:5:193::19)
+X-ClientProxiedBy: BYAPR01CA0037.prod.exchangelabs.com (2603:10b6:a03:94::14)
+ To DM6PR11MB3994.namprd11.prod.outlook.com (2603:10b6:5:193::19)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: f7bd44f4-4634-4644-fdc2-08d9f7c67a26
-X-MS-TrafficTypeDiagnostic: DM6PR11MB4044:EE_
+X-MS-Office365-Filtering-Correlation-Id: ee00083c-00a4-4d0e-262f-08d9f7c7ed8e
+X-MS-TrafficTypeDiagnostic: DM5PR11MB1628:EE_
 X-Microsoft-Antispam-PRVS: 
-	<DM6PR11MB404409A5248B4F6444AD783BF83D9@DM6PR11MB4044.namprd11.prod.outlook.com>
+	<DM5PR11MB1628C6ECCA20D660FD7E5AF6F83D9@DM5PR11MB1628.namprd11.prod.outlook.com>
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	+2YKDrM+B6gq3brI+3OT9yljxeOk1pI58L/v3bi/qqiCTDHcV4TcGPWz/6xliszRlzMwzbFoq2yEsfpUhv3b6GP7glz5Jl0Pq4K6cSOc+/tFYHCuuaQ2eixWGsC7EXodLCgTRrodOEpIBNwL6Jj3psc5p0RXfUdDlloU0KCZR8HNZ3RLKmmsqYAbvOoNEabs9io86P86aQ7vn3DpWlyxX34ykapZHhfS4L+HlKerRov041keWOHSq91C6Hwiz5RImgvimJe5mHtyHiknUjkkJn7skT3JgjOyyH03OVyt+Vfqlc+jiTwlAzr4HjLBEjc34FZXFx1Sst6KeM9jS+trqbblkcFYB3DeEbfBkdYBcLaEWrfZUBOdcsoIploaButo6vAMOxYqzOej80maaAqZ0G7N6O+Og3hnxQv0bqD9BZrOk5f+zDX51XcRiQmpMtlJfBZVKTrg3Ik2ghi0uznBlEA+mmsWJHLAdr2iqZ2zaWxVaMdOsvjK1BM7kcqY2fmxgmAeiZ+mSIiX2KLCih0oJEaIZe1v3JGHK3vTCAwUkb2RRJAC6drXOJ7+7gUG6m0Z41Sl/jxi1Ui0eSPaXJvt4CqqmfFGkFAqOCXsU1kz2CpRYHniMNq1HG8x8T9+J1oozeEdaDjmkgFxb1qEImHr+2vU22zAh7ww46PBGN9aFMatAuJM4QoF+GHXucxE+y2oo+OtdAH5I99LBl36yVNzYlHpfqlW9DAUdxEcN8sHpvCefvNP6drkQ7VKdNrRrS1/2kq07bQM6nWEHbF4IdH5Yy7QNqYWh/HTPcA5g1RY62MEbeRyxUQHukWoefQgGLCd4r8FwWwvkXXyzNi8EdYq2kYQebk6+FCQ6qFGDjB9mjE=
+	Rc/9uRyNZ/xAzra/Raw7A6kD1a/0+wzpQ/ISuVAEPzvsFGIOMVGWLIL4YkVI6l/qBwMkI1XwFwKqc1o0XYGyxD4jYyXPRd3oFDrpvnPtzBkyNuzbYgqaHi+CIz3rkqJLJw0geXuxcUVAEqYYjZXa0xtgVV9CuaJ0doD0OV06dJBD132Gi1FLLdwxD12y9jcBwDiEnFkySB6L4PkZvdPHQBTTH56uifPMsThzOtVrU8+/MaSUZC4mKZng1rhR54yQbdfClZKY+Oass4We7UxmoS2BRk1lEKNFIm09nrnXXFrZvlHXGCdhOhgyDxhTwKLaLALJ+idjXr3NDTQisA3qTfQXE+Hddb78dVujFWMtojIb6wS4G6Vd72kRxJXJjMZsaK6FzJLK/EZe2YLMAzBYDeLLSCSwEoOMFA3yHGdb/TIuR6g63AQ1MiFyhcO983BlPjaDxfeYx+ZQgM08t7EsG0eDd+wq6nc6+q3pnIVB4U0DASEjPA8m+quQofBjrbktYCeCz7nLrfHETa63LV3YstDJWaN313M3gjub14O6NVhTU5rS9jApj3KzJXNvuVziKpHY/nE50ca4qo8Pc97LLA5Xuu6p0iD2epjLgzmoYXkG9L6LOqLx0Jd7zdA3kcM9n592p/KTGZsJWAv03hiPmhyS/uI17iYv2T6skGuy+267YFXKhLhNTNqTn+konftly58N9Ua1+BtKKuKUZydb7tZVLOxT0d2BdcVh6gdqw2FvydjPX2MFPxFtbWcMaE6C2TTiwWWHi5qeTXmzOmchDKHykH4jDVdCAnQIFSJ1ci8ptOEy+5pz3ksZ7c/6NNUjKga7wxAgbqSgj9jhbAUdG1cqEYORrUSEw6h/qoFpmifWcD17fl6qVKqkUaQ09EsJ
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3994.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(66946007)(110136005)(26005)(8676002)(8936002)(5660300002)(66556008)(186003)(66476007)(31696002)(83380400001)(166002)(316002)(86362001)(966005)(6666004)(2616005)(52116002)(6506007)(33964004)(36756003)(6486002)(38350700002)(2906002)(38100700002)(6512007)(508600001)(31686004)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB3994.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(52116002)(36756003)(26005)(186003)(38350700002)(38100700002)(83380400001)(31696002)(86362001)(2616005)(6512007)(316002)(6486002)(8676002)(2906002)(5660300002)(8936002)(66476007)(166002)(66946007)(66556008)(6666004)(508600001)(6506007)(110136005)(966005)(31686004)(33964004)(437434003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?dzFjbHBiQ2cwTHd0NnRYL1VmcTlZMGlCaG9LeVVmZmRFNWFOY1FzMFIzbTJJ?=
- =?utf-8?B?NEppTVNuZTFHallaQTRyblBUaEpqa0h1aitWREdxVlpsZmdqVVBram5PbGE2?=
- =?utf-8?B?TzhOVyt6dnhzRjF0WGJlVFFhNENkZVgrNnJNVy9MSmMxc1lNU2J5TEtsQXZB?=
- =?utf-8?B?RFplakVsMlVVNGdWZmducVI5T0lVTnJoZlZQb1U2aTJsNENMOWtablhCZHB3?=
- =?utf-8?B?Q1RhMHV1N2kyUTFRUnBRNUl4Z3lRV0d6VVFTLzg5T01ZZHdzUnk0TkV0c05N?=
- =?utf-8?B?K2hyV1VqakhTUnkyUEp1bVdLSjNRaVVzRDI2TEJCNjM3TW84alpjWFVMNGEy?=
- =?utf-8?B?L0ViU1d0QnlEckVJTmtJR1NObklhN2VrY3pjREwxejgrMjJTUWlsNTFXMHVS?=
- =?utf-8?B?T2VkR2RsKzNBZm03b3V4ajI2YXFxUFdPSjR1dnRBR3hJc1JmQjM2MnVqSk43?=
- =?utf-8?B?QWRrYVNGN3IzL2M5RXVLRGQxaUQvNjBLRXVNTCs0MGxIWStRUytBcVQxdW9E?=
- =?utf-8?B?VzVMQWpkaDY2VEdVMDRmSS81RnpzVThIWlREVjhUSzVBSlVkSVVvZjhwRWZv?=
- =?utf-8?B?MVdJNEFGSEppSXJlcmNKOVpYczk5K1NxdFJWYm1rS1Y3RjEzU0F2OFFLRkk0?=
- =?utf-8?B?V1B2RWJnWjNyNFZOUklVSk13Y2huK282NDllUUxuOFlwQnNzY3JWSUM4U0NX?=
- =?utf-8?B?Q21KMk51QnlZK0xUSHVFYUxmWjI0TEMzRHVIenl5K1ZZVENRTXJvTUllOWhj?=
- =?utf-8?B?cXZDUG5NbVBXMmpQVUFXc0dqeVZvaVQ4a2Q3a0JFWWZ4bFhxaENYV1NzUm03?=
- =?utf-8?B?Q29hMmh1T3c2RHRvRGpBRFpqaW5RTDgySjRCRzVtVjFLK2kwYTdjNkZrVlpS?=
- =?utf-8?B?bStySmdkcjhpTytKOTY0dm5MMi8xNkhYVXd3N0VHY3ZDdmY3RUJmWXZGdG5I?=
- =?utf-8?B?ZVpBNktwOThIY250cDRqUG9jYk40bzFzMFJxWnluTTdRU21paE9aZUhxVSts?=
- =?utf-8?B?Rk9oZ1p5L1dtUjRJMEc2WFF0VkVaekVKcWhVZW5aMEgwcUphdE8vU2xaeFZW?=
- =?utf-8?B?eHZoWTNzN050emVSVUwxYmpmbStuMlJ4YUZtRjFIN3pJaWlVK3I1bVIrQUtB?=
- =?utf-8?B?WTQyakdyQ1owaGVNYXFaWmxZdXB5RE9wTkVvQ0IvR1gvbXFYRUxDbGVDa1Nv?=
- =?utf-8?B?b1FjekJzenFrQUZ1SEw4Z0tUZHFrSkRGaVdUT0JueENNSHFnNXQ0bEx5dkly?=
- =?utf-8?B?enF3cnJVS2ZpYjNqRUxHUWZEU0hENUxVUHRMQndRazIyTnNjK3p2dElpU2xv?=
- =?utf-8?B?QnlFbklTQmRLUUNlb2QzQnp3OE51TndiT1FpMVVITW93N01JTWxxa1cwRUJM?=
- =?utf-8?B?cnBVWjAxMFRaZ1BNMXk3VDVGejFDdkQxMDM5UWF3M3p2WVhaNU5Ja1FlVW5s?=
- =?utf-8?B?V3B2Tmh6TkpUTEtJM2thQWNkY1hqMC8xMlpsQ2xMcGFLUnFrbmxRb3k3K2xv?=
- =?utf-8?B?ZUo3UlhybENaTUY3cXZkaEx2cWg4MkJqa05MK0F3QnpsVlU4RXBUUEVUajJO?=
- =?utf-8?B?QURXRVNEWHpoVmFQREE5NWM0ek1nYS9iZDNNbUdlYWxtN1lzcVZtVU1DSU5G?=
- =?utf-8?B?QkNHUjZNM2cyS0xQYUw5U0pqYy9SVjFhZ0J6NWQ0NXRjOUdpUi9BR1FYSjNJ?=
- =?utf-8?B?U2d2SFpCcitVbytHbGtxSEdPdjYyZFR6NVoxUnNNdG5nd0NqUndCcVNUdmV4?=
- =?utf-8?B?UmdvOE9YOFV4WWFBemcySXVUL0h5akVzRHpVQ3BFUGZaTlF3V3lybGN2bENT?=
- =?utf-8?B?OW51bTBjbkI3WUdaV0dJMEJHQ253Y1V4MmdaUUR5dk56eXVHdkdkeldCZFJU?=
- =?utf-8?B?NXFlZFZubWRVc3FGbGFwSEFrRXh1VkZGMDJSVnBQVldvalQxYXZzTHVhWml0?=
- =?utf-8?B?V3lscVlhQ2xnZUJHVUdsczBkTlFNc2tJMlhFVzJhT0ZiVnNhVkxuT2pYTGM5?=
- =?utf-8?B?ZSsyVHpHRFRtUTdyajJab1p0eHQrYnMzTlpLaEkwbDUweWcvais3VFo1bjJE?=
- =?utf-8?B?Q3RIUEg3R3kyYUVraE50RjhZc1RDNXdVVjFrVEY0aDlaL0Uydnl2U1krRWxr?=
- =?utf-8?B?b3pKdU1PYnR5WlMyZnBWWWdOMGhOL3NNbUJ0MGZoL2w4OHhBRDRpMjV4ZDJ6?=
- =?utf-8?B?SFJLRnRqOHNyeTV3UE5icks0UmRnQVBQNnpHWGFHSkFwVjBrYWN2Yml0Qmpo?=
- =?utf-8?Q?qWHMnAbe4BbXVklRZ8gFlETAIHmOJYgVKp/9qaXrOk=3D?=
+	=?utf-8?B?UXNiUXduNWVwcTJMdERqYmJUd0VnazExeXU4VmVvVXNVWXVQV0VzUXpZU0p2?=
+ =?utf-8?B?VWVMdGwwZW5HQXRKTEY5SlhsVTZqcTZjTU9iQ3FTTDhSZnpmOUlpYkhzRFRk?=
+ =?utf-8?B?bjQ4YXZOcFI0ekZzUWZHUUYxbFF0NWJXMEVzWmlhTWYrTGNiQWp0N002bE5V?=
+ =?utf-8?B?bytKbUVha3F1NWw3Vm5WcGNBSTZSZFZxaVRWOEJlNlVWajNpYzNaRGNyUktG?=
+ =?utf-8?B?bW5DYnc0L0JDN3RnRS9PTXFLVG1IQmlFSkhsUGtzM0dYVUtZZENHRzQwVGlR?=
+ =?utf-8?B?SisrUmNKK1Q3L0ZheDlIbHFxSzRPMy9QN2xValBOV2JIaEh6QUlXMGFTM21S?=
+ =?utf-8?B?eFBiTTkwbDByVytHMk44MVVVd2ZkUlJZQjlHYlVLVG45UmFtYjlWTnptOFBW?=
+ =?utf-8?B?T05aTmdHNjBzTnFTUlZhTk5WR1VhbmRCbTBxOG5GbUxkWWRMQytSNFpmQjRU?=
+ =?utf-8?B?Y1FIN3ZPUzJwbzYzcHh0MkFoVVNuVlgwNUt0elZNN09VMWNMYlVMN0Z2NGIr?=
+ =?utf-8?B?QkRuV2E3VEJpZ2x1dEZzNUxnWFZ5L1FCdEoyRHBHRTVEbGp1NStrTHE5WC9r?=
+ =?utf-8?B?UWJualRPN1hHU2hab01Da1VqKzg0WXlhd1hSaUcvUzVRaDBjb1NFcFRoK1FQ?=
+ =?utf-8?B?ZTBHMEo5bEdVRGdLUG5GOFRwOUZFVFJiM3dDTml1ajVnNnJjSE9CaU9hdmdI?=
+ =?utf-8?B?Q0QwZXNvbmRqbDYwQVZxbDV5L2NzOGpJSmR6NXYyOXlyMlZRSndzV3p3Z2pv?=
+ =?utf-8?B?MVJLVlVUZDRJZHgxNExweXVWSy9sQi9RaTMwZWl5dE5IOUsydE9jUFhLK2dl?=
+ =?utf-8?B?WDRWbVNNdGhabXBmMUF5TUdRSng5ZStoWWxhMjQzOVhiRzZCOEo5REdGa3Ry?=
+ =?utf-8?B?WlJzNEV5cFZQRmF0ZDAxT0FnL0JYNDZtUVZWWjhJQUNmc3B3ZFM4YkljSm0x?=
+ =?utf-8?B?d08xWjBMWGpQNmlrNVFZbFdxOXFwK0F4Y2NxWVRKYWphbGgvOVd4cDd2Sndy?=
+ =?utf-8?B?M2NzVEN2V21wUnNEczlnQzVwcGtBK2JMUHpKMlhVKzRqRmRsc1p2aldWYkp4?=
+ =?utf-8?B?VUlSMnh0VWtSWUhZSktzZmVXVWN1L01ra3IrQXQwTW00UWl6Yks1OE1ndGl2?=
+ =?utf-8?B?RmxDdHhKaDdMVGhtZndLN0p0S1BlTTFmZ3NtbDNUa3A0MzVzV1FaRGh1QXZT?=
+ =?utf-8?B?d055Y2lxMjQxdGNqekhmUm9GR2xhN3hyT0lnVHYwS0FZZ3BlNnRrRXhaa0tW?=
+ =?utf-8?B?aHE4TXRrR1BzSng4OThMNlBqZHBtK1d4RFhhcm1PUUJUSE5FdXpQUW0vS3hI?=
+ =?utf-8?B?MlVZSHVjVldpckduNE80OHc1b2ZIalR0TGl1VElMM0NBYkVSVXpqUEZBcDRZ?=
+ =?utf-8?B?NnNzY3IxeVlEZlVicUJ2NnVuYkJTc2NIeEZZNGtWYUtCZTR4S092c0dxVU5W?=
+ =?utf-8?B?TkJWMGM0MlQvUmNUWExOUjh2cWFRVFNNdFZPbyt0a3JESFpadU1pUjdjVW82?=
+ =?utf-8?B?SHlLYThtZUtMLy8zUEg2d3lva2JxUkIzQ28zUHhrN2Q5S2k5YmcyR2c4TlBS?=
+ =?utf-8?B?R2tzeStUU0NESSs5OTBwL2p4SzdXSGUxeHVLQ3F4cmRaUWY0SXAwbDZtS05h?=
+ =?utf-8?B?Vld3S0JjZmE0RFhORGVlS3FPVFlQUHN3clFaelZRK1dIOTd2TzNqSFVWQlZ6?=
+ =?utf-8?B?dDJQc1JtNmM2WmZvTGR3ZnR2VG1BV21qanpFVzJ2ZlZ6aXYwaVZ3bFBKSURk?=
+ =?utf-8?B?WWlmRlk5cTE5U1hOd3hRcHhQUlpvd2o5dFVsSE05blZyNmljanFwdndjdy9Q?=
+ =?utf-8?B?YS82Y2VzZWVjS1Bac2oyUFVuTHM2SnFLTE9SeU82OC82MnZMaTErdC82a0Ni?=
+ =?utf-8?B?V3RHc2d6UG1TNFd0T0t5d241WlltbTdLRXdHYkNJcTRhVUpMeUIxL3A3RWln?=
+ =?utf-8?B?MWJkQVo4bS90YVJQbExNSkdENHorYlJoYm44bEp6STdBckFQemhGWWo2TXRO?=
+ =?utf-8?B?ZmJQbXdYUmR3T1REY1VtMWtSYjM1TmFzdWtJWlFoRlJVRTBKMUhBZWVBK05i?=
+ =?utf-8?B?L0o5Smc4b0VXSDBzQVBhSTJDR0M2WkdWY1ZRTVFFdzhaaTZXWlJFU295S2dZ?=
+ =?utf-8?B?ajFROENWQ3hyOTYxb0hid0VFTFFWaGtyZy9SQkIwSk5aSU5RUnorOWVEdzM5?=
+ =?utf-8?B?NTBpWUs5NnVJcnp3VlpqSG9ybkpsU25UWU5WNE54SU5PTExEVHVCbkdLSWY4?=
+ =?utf-8?Q?jJwmS6EK1o9uTNV5cMTQ5RTE78/oPTbMi4UOXLo8ug=3D?=
 X-OriginatorOrg: windriver.com
 X-MS-Exchange-CrossTenant-Network-Message-Id: 
- f7bd44f4-4634-4644-fdc2-08d9f7c67a26
+ ee00083c-00a4-4d0e-262f-08d9f7c7ed8e
 X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB3994.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2022 18:50:07.6002
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2022 19:00:30.6798
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
 X-MS-Exchange-CrossTenant-UserPrincipalName: 
- 1B7OPKecXhFm3kPsHY+NJqN6A7X9uTJt5vBm4aTL8RMZJphyUe0ayKuycJx6yzPbelcLlDrTzplEbX+FpIBwOTWJM665oa59DS/ReuYzlzg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB4044
-X-Proofpoint-GUID: VdLnl4mDnOXVlaTJZiB3aQpGtVW8K2qf
-X-Proofpoint-ORIG-GUID: 5N6jHhxTSaALLbmCzHZdpEjqlombVYqg
+ v0HUxAHcW5YvzKWOPr6k0cKOeXAT/2AcW5e2YD5S6DkJYmlBgDvWAQXP3cd7OofHZHAleCI8tTW7MIpMdScsk7pNs6edf01YMXaQwkK2aEc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB1628
+X-Proofpoint-GUID: 0TCoglFy00tkNOE_zeAkZ2fHf8H0C5Oh
+X-Proofpoint-ORIG-GUID: wit1wCTZo3u-sc2MaDBoZQWDa6880yLD
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.816,Hydra:6.0.425,FMLib:17.11.64.514
  definitions=2022-02-24_04,2022-02-24_01,2022-02-23_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0
- lowpriorityscore=0 malwarescore=0 spamscore=0 impostorscore=0
- mlxlogscore=713 priorityscore=1501 mlxscore=0 bulkscore=0 phishscore=0
- clxscore=1015 suspectscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.12.0-2201110000 definitions=main-2202240105
+ malwarescore=0 suspectscore=0
+ phishscore=0 adultscore=0 bulkscore=0 clxscore=1015 impostorscore=0
+ mlxlogscore=902 spamscore=0 mlxscore=0 priorityscore=1501
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2201110000 definitions=main-2202240105
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Feb 2022 18:50:12 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Feb 2022 19:01:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95510
+ https://lists.openembedded.org/g/openembedded-devel/message/95511
 
---------------dAtgWvio5VxqJ0q8jeUOXZ2R
+--------------m40jOuKrT0cbQa0SMLCZNwVG
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by
+ mx0a-0064b401.pphosted.com id 21OCCBDp023243
 
 Hello,
 
 Summary:
-======
+=3D=3D=3D=3D=3D=3D
 
-If you encounter a bug when using a Yocto layer, please check if it's 
+If you encounter a bug when using a Yocto layer, please check if it's=20
 already reported
-in the Yocto Bugzilla. If it's not, open an new bug. If it is, please 
+in the Yocto Bugzilla. If it's not, open an new bug. If it is, please=20
 add a comment
-stating that you are also affected and provide any additional relevant 
+stating that you are also affected and provide any additional relevant=20
 details.
 
 https://bugzilla.yoctoproject.org/
 
 Details:
-=====
+=3D=3D=3D=3D=3D
 
-Some bugs are only happening occasionally even on the Yocto autobuilder so
-we'd like to encourage people to provide input so that people working on 
+Some bugs are only happening occasionally even on the Yocto autobuilder s=
+o
+we'd like to encourage people to provide input so that people working on=20
 the
 bug or prioritizing bugs can make more informed decisions.
 
 For example, this bug:
 
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=14726AB-INT-NET: fetch 
-failure in fetch.Fetch.test_git_mirrors
+https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D14726
+ =C2=A0=C2=A0 AB-INT-NET: fetch failure in fetch.Fetch.test_git_mirrors
 
-involves a fetch error for dbus-wait
+involves a fetch error for dbus-wait from:
+https://downloads.yoctoproject.org/mirror/sources/git2_git.yoctoproject.o=
+rg.dbus-wait.tar.gz
+
+It was happening intermittently on the Yocto autobuilder workers but=20
+we've heard that other
+people who are building outside of the autobuilder are also getting=20
+intermittent fetch errors.
+That helps because it points at the http server rather than problems=20
+with the internal autobuilder network.
 
 
--- 
+Note that layers like meta-openembedded, meta-virtualization, etc do NOT=20
+track bugs in
+the YP Bugzilla so you'll have to report bugs for those layers to email=20
+lists or as per the README.
+
+Aside: Some bug tracking systems have a way to just click a button to=20
+indicate that,
+ =C2=A0 "This bug affects me too."
+but unfortunately I don't see that in our version of Bugzilla.
+
+
+In conclusion, more input would be appreciated.
+
+Thanks!
+
+
+--=20
 # Randy MacLeod
 # Wind River Linux
 
---------------dAtgWvio5VxqJ0q8jeUOXZ2R
+--------------m40jOuKrT0cbQa0SMLCZNwVG
 Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 <html><head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -228,18 +256,43 @@ Content-Transfer-Encoding: 7bit
       bug or prioritizing bugs can make more informed decisions.</p>
     <p>For example, this bug:<br>
     </p>
-    <p><a class="moz-txt-link-freetext" href="https://bugzilla.yoctoproject.org/show_bug.cgi?id=14726">https://bugzilla.yoctoproject.org/show_bug.cgi?id=14726</a><span id="summary_alias_container"><span id="short_desc_nonedit_display">AB-INT-NET: fetch failure in
-          fetch.Fetch.test_git_mirrors</span></span></p>
+    <p>&nbsp;&nbsp; <a class="moz-txt-link-freetext" href="https://bugzilla.yoctoproject.org/show_bug.cgi?id=14726">https://bugzilla.yoctoproject.org/show_bug.cgi?id=14726</a><span id="summary_alias_container"><span id="short_desc_nonedit_display"><br>
+          &nbsp;&nbsp; AB-INT-NET: fetch failure in fetch.Fetch.test_git_mirrors</span></span></p>
     <p><span id="summary_alias_container"><span id="short_desc_nonedit_display">involves a fetch error for
-          dbus-wait <br>
-        </span></span></p>
+          dbus-wait from:<br>
+          &nbsp;&nbsp;&nbsp;
+<a class="moz-txt-link-freetext" href="https://downloads.yoctoproject.org/mirror/sources/git2_git.yoctoproject.org.dbus-wait.tar.gz">https://downloads.yoctoproject.org/mirror/sources/git2_git.yoctoproject.org.dbus-wait.tar.gz</a></span></span></p>
+    <p><span id="summary_alias_container"><span id="short_desc_nonedit_display"> It was happening
+          intermittently on the Yocto autobuilder workers but we've
+          heard that other<br>
+          people who are building outside of the autobuilder are also
+          getting intermittent fetch errors.<br>
+          That helps because it points at the http server rather than
+          problems with the internal autobuilder network.</span></span></p>
     <p><span id="summary_alias_container"><span id="short_desc_nonedit_display"><br>
         </span></span></p>
+    <p><span id="summary_alias_container"><span id="short_desc_nonedit_display">Note that layers like
+          meta-openembedded, meta-virtualization, etc do NOT track bugs
+          in<br>
+          the YP Bugzilla so you'll have to report bugs for those layers
+          to email lists or as per the README.</span></span></p>
+    <p><span id="summary_alias_container"><span id="short_desc_nonedit_display">Aside: Some bug tracking
+          systems have a way to just click a button to indicate that,</span></span><span id="summary_alias_container"><span id="short_desc_nonedit_display"><br>
+          &nbsp; &quot;This bug affects me too.&quot; <br>
+          but unfortunately I don't see that in our version of Bugzilla.</span></span></p>
+    <p><span id="summary_alias_container"><span id="short_desc_nonedit_display"><br>
+        </span></span></p>
+    <p><span id="summary_alias_container"><span id="short_desc_nonedit_display"></span></span></p>
+    <p><span id="summary_alias_container"><span id="short_desc_nonedit_display">In conclusion, more input
+          would be appreciated.</span></span></p>
+    <p><span id="summary_alias_container"><span id="short_desc_nonedit_display">Thanks!<br>
+        </span></span></p>
+    <br>
     <pre class="moz-signature" cols="72">-- 
 # Randy MacLeod
 # Wind River Linux</pre>
   </body>
 </html>
 
---------------dAtgWvio5VxqJ0q8jeUOXZ2R--
+--------------m40jOuKrT0cbQa0SMLCZNwVG--
 
