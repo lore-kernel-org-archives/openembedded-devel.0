@@ -1,120 +1,142 @@
-Return-Path: <xuhuan.fnst@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B811C433EF
-	for <webhook@archiver.kernel.org>; Thu, 24 Feb 2022 06:00:37 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web11.7076.1645682435041666842
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BB5DC433F5
+	for <webhook@archiver.kernel.org>; Thu, 24 Feb 2022 07:39:06 +0000 (UTC)
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
+ [209.85.215.175])
+ by mx.groups.io with SMTP id smtpd.web08.7615.1645688344997786876
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Feb 2022 22:00:36 -0800
+ Wed, 23 Feb 2022 23:39:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=iPpmxH+O;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
- mailfrom: xuhuan.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1645682431; i=@fujitsu.com;
-	bh=AliLHlUFBgwoL1BGp/qoEEDWtHwgfIt8MLMX8ru21FQ=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=iPpmxH+O31njqrlAI2SR9pi5vZxI9+adPm/G60o2MUHvnxWNSVp1H6mKB1+nSaOyi
-	 oaFQuaSYWYtQsTmZSp1qRieoeqUrE5aDTaO7enILL3rA7BhNASNEeVw1PZxdmoCMOQ
-	 fUDaAmqgNnqRqDrk1gRE7oz0vw8fM1qbV4D7AGdv/TyMnLGPeCHELaBNULXZgdOQCG
-	 vXes46pVbCrqLra8LuCCt+MgLGTtFZtfiXjfb5Iw1PpMPd/ADfI8kQlnF9rdYT/0It
-	 IAgHG6h3D2dmtldyiVik/a5mTj3RlR7J5KrpXAXXpYV5smsaSlCUBtnyuUHOwwcnu5
-	 NrdKf5hyJc69Q==
-Received: from [100.115.36.74] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-a.eu-west-2.aws.ess.symcld.net id D6/E4-29321-FFE17126;
- Thu, 24 Feb 2022 06:00:31 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8MRovtXTjz
-  J4NNea4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeP3rrssBb1cFdPurGJtYFzO2cXIxSEkMJNJ
-  Ys7FbywQzklGiWf7vzB2MXJysAmoSzy++RrMFhHQl1g6ew8ziM0soCrRfXENO4gtLBApsWNqG
-  wuIzQIU79l/HayGV8Bd4svW+UwgtoSAgsSUh+/B4pwCHhLPP25kA7GFgGpenV/GBlEvKHFy5h
-  MWiPkSEgdfvGCG6FWSOLHiI9ScConXhy8xT2Dkn4WkZRaSlgWMTKsYrZOKMtMzSnITM3N0DQ0
-  MdA0NTXWNLYBMS73EKt1EvdRS3fLU4hJdI73E8mK91OJiveLK3OScFL281JJNjMCwTClWy93B
-  OGXlT71DjJIcTEqivJLM4klCfEn5KZUZicUZ8UWlOanFhxhlODiUJHhNZIBygkWp6akVaZk5w
-  BiBSUtw8CiJ8D7jAUrzFhck5hZnpkOkTjEqSonz9skCJQRAEhmleXBtsLi8xCgrJczLyMDAIM
-  RTkFqUm1mCKv+KUZyDUUmY9w3IFJ7MvBK46a+AFjMBLTaIFwNZXJKIkJJqYFqTUPfMv/OTwzW
-  LHa8Ei+e6P/qY2r86b8/uI60r1ku1rlgkcFBeTz19cdtVW67eH/s0RV2shV5v9nbd8O9kze/0
-  TouE0jPhZzMqTi2bd/s0N8Olw95bt2Usnipa/WHyQlvrw6KTdszdbVp1Y8cqFum+2y2XopYV3
-  Vi01VLtv50P26KD/mzzrbJiL0UsbP7uNfnbecnlJXcnLOQP01B+9lo17GBLt9shG9bz37Ytm7
-  t7yel7q2ouynzPv7lx0+bU4159h8r2Pqkqtd9TFCLIyKrmbDr36YM0d8eVwrt2CjrHNe1OZJ5
-  kXbzW7nZYkWQXf9aRo0dPJKswHVNaEinO8EjuolLCiZ4L9ldljypwxIQrsRRnJBpqMRcVJwIA
-  zYeCz0YDAAA=
-X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-5.tower-571.messagelabs.com!1645682429!52118!1
-X-Originating-IP: [62.60.8.84]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.7; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 9359 invoked from network); 24 Feb 2022 06:00:29 -0000
-Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-5.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 24 Feb 2022 06:00:29 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 21O60MY1000540
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Feb 2022 06:00:29 GMT
-Received: from localhost.localdomain.localdomain (10.167.225.131) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Thu, 24 Feb 2022 06:00:23 +0000
-From: XU Huan <xuhuan.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [PATCH 2/2] [oe] [meta-python] [PATCH] python3-jdatetime: upgrade
- 3.8.2 -> 4.0.0
-Date: Thu, 24 Feb 2022 14:00:57 +0800
-Message-ID: <1645682457-31192-2-git-send-email-xuhuan.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1645682457-31192-1-git-send-email-xuhuan.fnst@fujitsu.com>
-References: <1645682457-31192-1-git-send-email-xuhuan.fnst@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=o5pddy7E;
+ spf=pass (domain: gmail.com, ip: 209.85.215.175,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f175.google.com with SMTP id 75so1071552pgb.4
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 23 Feb 2022 23:39:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=EobVlljTMKfFuCRV9abwYe9f0N1YqaSQZqCEL8xJJyw=;
+        b=o5pddy7E1kGZjrjorUl6MrUwczgbliPSBCR2N78GKdR6RAzkjtsonMUw13RyKR31Ur
+         /KE+1yjmpRa3JBF6CktJn9QQhGdykxRpnaaHzbkhMqbodQ5bOTuYznDyEwIXvKyyzrrV
+         j6whOqsVs+ImKgVeq3djRz0a4VCYE8th7fk2uHPYTwMwtXm04/0gIUNvfZs6emdcd89x
+         mgWaZbdyWBSb5NayI12AFqeDgCafkVwrJGH3p5YE7u/GiU8uxJdveqNm8EIDjE7CqtpK
+         S5V/LqOfkKTWaIcL5rMN2J9t2lzBe3EK/35zua9WD9GL/ic9Dl0WFckvGTUe4eSIO9qh
+         visg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=EobVlljTMKfFuCRV9abwYe9f0N1YqaSQZqCEL8xJJyw=;
+        b=KOQQatbIhFkVoWUHj4I7HUdwvgdmbf1f+rCYGS/oPYaMcpRoHSqDmSD3hQGN+t0tfH
+         uDomgZ2lpyC+mzKOhWHBesW+R6RzEgrVwwveAb685kyF9QQ+YCNwVIc4ntahQ2lPsJtv
+         nvTNg6y22s89aJgNUo+79xD/WNYFLCPDjYz/0PiRWjPAndVd0lw413lN6b/iZ7ldIslC
+         /kCfYqAQMF9kOcV+KxbZUhBN/a6eMt6Rq4v6Vf9fJViwuNAZMD2ZDW2v1sBTRcG33gjD
+         szWLfngQzS03v7TAvvV9Ohep+4U52IZ7/rxwY5z75Vfp9if62AFegAfpU6O0qntmXp9y
+         Keow==
+X-Gm-Message-State: AOAM532pF3zvAdTlclFVM12w6IbiIEmRowOgOVh9blJUXFscEV1mRY6g
+	Hu2fN4n2Z5n3BfYI19w5R/o4RYP+t6zjug==
+X-Google-Smtp-Source: 
+ ABdhPJzPpBlbjIkYKHRp9ZnU9OEE+Lv312UtGFrFw/b4kWURCPOAmjMDmawTPTTHxIEH+DOAe/6jMA==
+X-Received: by 2002:a05:6a00:190f:b0:4f3:a81d:c4c3 with SMTP id
+ y15-20020a056a00190f00b004f3a81dc4c3mr1383941pfi.45.1645688344021;
+        Wed, 23 Feb 2022 23:39:04 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::fb6e])
+        by smtp.gmail.com with ESMTPSA id
+ fv9-20020a17090b0e8900b001b8b01e2479sm5486180pjb.16.2022.02.23.23.39.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 23 Feb 2022 23:39:03 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Tim Orling <tim.orling@konsulko.com>
+Subject: [meta-python][PATCH 1/2] anyjson: Drop recipe
+Date: Wed, 23 Feb 2022 23:38:58 -0800
+Message-Id: <20220224073900.1350656-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.131]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Feb 2022 06:00:37 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Feb 2022 07:39:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95495
+ https://lists.openembedded.org/g/openembedded-devel/message/95497
 
-From: Xu Huan <xuhuan.fnst@fujitsu.com>
+anyjson is inactive [1] moreover does not have wheel support
 
-changelog:
--Add
-Add fold attribute to jdatetime.datetime
--Change
-Drop Python < 3.7 support
+there is drop-in replacement to use oslo.serialization if needed
+we can accept such a recipe if submitted
 
-Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
+[1] https://snyk.io/advisor/python/anyjson
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Tim Orling <tim.orling@konsulko.com>
 ---
- .../{python3-jdatetime_3.8.2.bb => python3-jdatetime_4.0.0.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-jdatetime_3.8.2.bb => python3-jdatetime_4.0.0.bb} (79%)
+ .../packagegroups/packagegroup-meta-python.bb |  2 --
+ .../python/python3-anyjson_0.3.3.bb           | 28 -------------------
+ 2 files changed, 30 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-anyjson_0.3.3.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-jdatetime_3.8.2.bb b/meta-python/recipes-devtools/python/python3-jdatetime_4.0.0.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-jdatetime_3.8.2.bb
-rename to meta-python/recipes-devtools/python/python3-jdatetime_4.0.0.bb
-index 67a6ea1f21..f76f275036 100644
---- a/meta-python/recipes-devtools/python/python3-jdatetime_3.8.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-jdatetime_4.0.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/slashmili/python-jalali"
- LICENSE = "Python-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c80be45b33471b4a23cf53d06a8172be"
- 
--SRC_URI[sha256sum] = "c685687e3f39e1b9a3ba9c00ed9d8e88603bc8994413e84623e6c5d43214e6f8"
-+SRC_URI[sha256sum] = "d35baea2ed213e4e87bb840c61637001540bd21e8e4454bd12352b06591ec08e"
- 
- PYPI_PACKAGE = "jdatetime"
- 
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index d90e6551e7..2b20937f78 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -26,7 +26,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
+     python3-alembic \
+     python3-ansi2html \
+     python3-ansicolors \
+-    python3-anyjson \
+     python3-appdirs \
+     python3-apply-defaults \
+     python3-argcomplete \
+@@ -485,7 +484,6 @@ RDEPENDS:packagegroup-meta-python3-ptest = "\
+     python3-jinja2-ptest \
+     python3-markupsafe-ptest \
+     python3-ansicolors-ptest \
+-    python3-anyjson-ptest \
+     python3-appdirs-ptest \
+     python3-backports-functools-lru-cache-ptest \
+     python3-bcrypt-ptest \
+diff --git a/meta-python/recipes-devtools/python/python3-anyjson_0.3.3.bb b/meta-python/recipes-devtools/python/python3-anyjson_0.3.3.bb
+deleted file mode 100644
+index 2b8abb8b80..0000000000
+--- a/meta-python/recipes-devtools/python/python3-anyjson_0.3.3.bb
++++ /dev/null
+@@ -1,28 +0,0 @@
+-SUMMARY = "Wraps the best available JSON implementation available in a common interface"
+-DESCRIPTION = "Anyjson loads whichever is the fastest JSON module installed and  \
+-provides a uniform API regardless of which JSON implementation is used."
+-HOMEPAGE = "https://bitbucket.org/runeh/anyjson"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=989aa97e73c912a83a3c873fa11deb08"
+-
+-inherit pypi setuptools3 ptest
+-
+-SRC_URI += " \
+-	file://0001-setup.py-Do-not-use-2to3.patch \
+-	file://run-ptest \
+-"
+-
+-RDEPENDS:${PN}-ptest += " \
+-	${PYTHON_PN}-pytest \
+-	${PYTHON_PN}-nose \
+-"
+-
+-do_install_ptest() {
+-	install -d ${D}${PTEST_PATH}/tests
+-	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+-}
+-
+-SRC_URI[md5sum] = "2ea28d6ec311aeeebaf993cb3008b27c"
+-SRC_URI[sha256sum] = "37812d863c9ad3e35c0734c42e0bf0320ce8c3bed82cd20ad54cb34d158157ba"
+-
+-RDEPENDS:${PN} += "${PYTHON_PN}-simplejson"
 -- 
-2.25.1
+2.35.1
 
 
