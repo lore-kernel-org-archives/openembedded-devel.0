@@ -2,62 +2,64 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BB5DC433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EDDA4C433EF
 	for <webhook@archiver.kernel.org>; Thu, 24 Feb 2022 07:39:06 +0000 (UTC)
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
- [209.85.215.175])
- by mx.groups.io with SMTP id smtpd.web08.7615.1645688344997786876
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
+ [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.web10.7579.1645688346427767695
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Feb 2022 23:39:05 -0800
+ Wed, 23 Feb 2022 23:39:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=o5pddy7E;
- spf=pass (domain: gmail.com, ip: 209.85.215.175,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=hPELfqIE;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f175.google.com with SMTP id 75so1071552pgb.4
+Received: by mail-pf1-f170.google.com with SMTP id g1so1151278pfv.1
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Feb 2022 23:39:04 -0800 (PST)
+ Wed, 23 Feb 2022 23:39:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=EobVlljTMKfFuCRV9abwYe9f0N1YqaSQZqCEL8xJJyw=;
-        b=o5pddy7E1kGZjrjorUl6MrUwczgbliPSBCR2N78GKdR6RAzkjtsonMUw13RyKR31Ur
-         /KE+1yjmpRa3JBF6CktJn9QQhGdykxRpnaaHzbkhMqbodQ5bOTuYznDyEwIXvKyyzrrV
-         j6whOqsVs+ImKgVeq3djRz0a4VCYE8th7fk2uHPYTwMwtXm04/0gIUNvfZs6emdcd89x
-         mgWaZbdyWBSb5NayI12AFqeDgCafkVwrJGH3p5YE7u/GiU8uxJdveqNm8EIDjE7CqtpK
-         S5V/LqOfkKTWaIcL5rMN2J9t2lzBe3EK/35zua9WD9GL/ic9Dl0WFckvGTUe4eSIO9qh
-         visg==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=UhvWkTdwOyZlEj8Di7dXbnwnHzNA9o+c70IfF6ddWrU=;
+        b=hPELfqIEXU91wXd16HTX1Xt9lxPWLr9DyniKyym+e8vOkES+A0Z7lnKI2waeKCFCQp
+         lditRi+z5mczBIf5UHT/JknzjTDLoUMiiQBROd3/ZaKy78Ra/5kVKN+AQZYI+ABKm5V2
+         8pkOjSoMt6KFDh71NQ/bymqaEA8TgEc+AAl9bOOUZf1PavlqvwTyExA37xJFSYqfag7K
+         sdlpDO68HxyklATGc/d/5yyCfkrh1oFLSHACTK9k2qPEikOs3wpfGe8SAX76Ogac7IYy
+         bMrD3gn654FQnzzehfqexD9CZHQSWTqYSNtDZYo/NAhRPBZROzAkzHZ4oIZo+bvGxROk
+         xc+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=EobVlljTMKfFuCRV9abwYe9f0N1YqaSQZqCEL8xJJyw=;
-        b=KOQQatbIhFkVoWUHj4I7HUdwvgdmbf1f+rCYGS/oPYaMcpRoHSqDmSD3hQGN+t0tfH
-         uDomgZ2lpyC+mzKOhWHBesW+R6RzEgrVwwveAb685kyF9QQ+YCNwVIc4ntahQ2lPsJtv
-         nvTNg6y22s89aJgNUo+79xD/WNYFLCPDjYz/0PiRWjPAndVd0lw413lN6b/iZ7ldIslC
-         /kCfYqAQMF9kOcV+KxbZUhBN/a6eMt6Rq4v6Vf9fJViwuNAZMD2ZDW2v1sBTRcG33gjD
-         szWLfngQzS03v7TAvvV9Ohep+4U52IZ7/rxwY5z75Vfp9if62AFegAfpU6O0qntmXp9y
-         Keow==
-X-Gm-Message-State: AOAM532pF3zvAdTlclFVM12w6IbiIEmRowOgOVh9blJUXFscEV1mRY6g
-	Hu2fN4n2Z5n3BfYI19w5R/o4RYP+t6zjug==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=UhvWkTdwOyZlEj8Di7dXbnwnHzNA9o+c70IfF6ddWrU=;
+        b=OBtzhYWPSZA+HcbEgG9Fc2SDDN2lTnovN1PP08UKnXwix2LoGHNtrui7/8hgBEZzXI
+         xXyVRvJfFGzOrmQ7lILTvbGj8tf9OZPmC6LdQpSfFIboo0CtYuBzD/I+ounaodhOgTCF
+         tAWV1Oq37NUlPjvS+b/ZEj9wRxvcDhCslhFG4CKYMkaNNtD/x4ZzY2Pufg6JRi/g/Mn6
+         9TfvGWg//AlwFZDffyaLwuX4i+XN8icjhbGByHXg6bJL/K5Hat7OTyUK4In9fPBiJE9Z
+         OWwVneZneJnDRubLm1qklTPiOJqzuGEJuKlq0Eg/k2tyh8hIp0M3OkSSs9lxazFrsFJl
+         eoPw==
+X-Gm-Message-State: AOAM533OmQk0WUZWAwlZBVsX4jDRRiGtKcx5uf+Ny7ORIZ5K53Ky5dyV
+	qUL1RyYAJhjELh9dQD5QnE9EcHBqo16iVA==
 X-Google-Smtp-Source: 
- ABdhPJzPpBlbjIkYKHRp9ZnU9OEE+Lv312UtGFrFw/b4kWURCPOAmjMDmawTPTTHxIEH+DOAe/6jMA==
-X-Received: by 2002:a05:6a00:190f:b0:4f3:a81d:c4c3 with SMTP id
- y15-20020a056a00190f00b004f3a81dc4c3mr1383941pfi.45.1645688344021;
-        Wed, 23 Feb 2022 23:39:04 -0800 (PST)
+ ABdhPJyfcyjLBpVEQ4LHFXlK5emxm2tCxYf6bOFJ76jjKSZSJiWuCHj3tz/uUF+DzMmIZx4g8Jn5Fw==
+X-Received: by 2002:a63:e5f:0:b0:374:62d8:c551 with SMTP id
+ 31-20020a630e5f000000b0037462d8c551mr1318455pgo.129.1645688345229;
+        Wed, 23 Feb 2022 23:39:05 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::fb6e])
         by smtp.gmail.com with ESMTPSA id
- fv9-20020a17090b0e8900b001b8b01e2479sm5486180pjb.16.2022.02.23.23.39.02
+ fv9-20020a17090b0e8900b001b8b01e2479sm5486180pjb.16.2022.02.23.23.39.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Feb 2022 23:39:03 -0800 (PST)
+        Wed, 23 Feb 2022 23:39:04 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Tim Orling <tim.orling@konsulko.com>
-Subject: [meta-python][PATCH 1/2] anyjson: Drop recipe
-Date: Wed, 23 Feb 2022 23:38:58 -0800
-Message-Id: <20220224073900.1350656-1-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH 2/2] python3-blinker: Migrate to use pytest
+ instead of nose for testing
+Date: Wed, 23 Feb 2022 23:38:59 -0800
+Message-Id: <20220224073900.1350656-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220224073900.1350656-1-raj.khem@gmail.com>
+References: <20220224073900.1350656-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
@@ -65,77 +67,77 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 24 Feb 2022 07:39:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95497
+ https://lists.openembedded.org/g/openembedded-devel/message/95498
 
-anyjson is inactive [1] moreover does not have wheel support
-
-there is drop-in replacement to use oslo.serialization if needed
-we can accept such a recipe if submitted
-
-[1] https://snyk.io/advisor/python/anyjson
+Nose wont work well with python 3.9+ anyway
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Tim Orling <tim.orling@konsulko.com>
 ---
- .../packagegroups/packagegroup-meta-python.bb |  2 --
- .../python/python3-anyjson_0.3.3.bb           | 28 -------------------
- 2 files changed, 30 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-anyjson_0.3.3.bb
+ ...se-pytest-instead-of-deprecated-nose.patch | 36 +++++++++++++++++++
+ .../python/python3-blinker_1.4.bb             |  2 +-
+ 2 files changed, 37 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-blinker/0001-use-pytest-instead-of-deprecated-nose.patch
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index d90e6551e7..2b20937f78 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -26,7 +26,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
-     python3-alembic \
-     python3-ansi2html \
-     python3-ansicolors \
--    python3-anyjson \
-     python3-appdirs \
-     python3-apply-defaults \
-     python3-argcomplete \
-@@ -485,7 +484,6 @@ RDEPENDS:packagegroup-meta-python3-ptest = "\
-     python3-jinja2-ptest \
-     python3-markupsafe-ptest \
-     python3-ansicolors-ptest \
--    python3-anyjson-ptest \
-     python3-appdirs-ptest \
-     python3-backports-functools-lru-cache-ptest \
-     python3-bcrypt-ptest \
-diff --git a/meta-python/recipes-devtools/python/python3-anyjson_0.3.3.bb b/meta-python/recipes-devtools/python/python3-anyjson_0.3.3.bb
-deleted file mode 100644
-index 2b8abb8b80..0000000000
---- a/meta-python/recipes-devtools/python/python3-anyjson_0.3.3.bb
-+++ /dev/null
-@@ -1,28 +0,0 @@
--SUMMARY = "Wraps the best available JSON implementation available in a common interface"
--DESCRIPTION = "Anyjson loads whichever is the fastest JSON module installed and  \
--provides a uniform API regardless of which JSON implementation is used."
--HOMEPAGE = "https://bitbucket.org/runeh/anyjson"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=989aa97e73c912a83a3c873fa11deb08"
--
--inherit pypi setuptools3 ptest
--
--SRC_URI += " \
--	file://0001-setup.py-Do-not-use-2to3.patch \
--	file://run-ptest \
--"
--
--RDEPENDS:${PN}-ptest += " \
--	${PYTHON_PN}-pytest \
+diff --git a/meta-python/recipes-devtools/python/python3-blinker/0001-use-pytest-instead-of-deprecated-nose.patch b/meta-python/recipes-devtools/python/python3-blinker/0001-use-pytest-instead-of-deprecated-nose.patch
+new file mode 100644
+index 0000000000..a04c79b1e0
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-blinker/0001-use-pytest-instead-of-deprecated-nose.patch
+@@ -0,0 +1,36 @@
++From 9750d01118ee59ab174525e30d987065b69c0538 Mon Sep 17 00:00:00 2001
++From: pgajdos <pgajdos@suse.cz>
++Date: Wed, 8 Jul 2020 15:22:19 +0200
++Subject: [PATCH] use pytest instead of deprecated nose
++
++Upstream-Status: Submitted [https://github.com/jek/blinker/pull/60]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ tests/test_signals.py | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/tests/test_signals.py b/tests/test_signals.py
++index 9771e40..ccbc35b 100644
++--- a/tests/test_signals.py
+++++ b/tests/test_signals.py
++@@ -4,7 +4,7 @@ import time
++ 
++ import blinker
++ 
++-from nose.tools import assert_raises
+++import pytest
++ 
++ 
++ jython = sys.platform.startswith('java')
++@@ -232,7 +232,7 @@ def test_meta_connect_failure():
++         pass
++     sig = blinker.Signal()
++ 
++-    assert_raises(TypeError, sig.connect, receiver)
+++    pytest.raises(TypeError, sig.connect, receiver)
++     assert not sig.receivers
++     assert not sig._by_receiver
++     assert sig._by_sender == {blinker.base.ANY_ID: set()}
++-- 
++2.35.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-blinker_1.4.bb b/meta-python/recipes-devtools/python/python3-blinker_1.4.bb
+index 397fdcfb05..08a961f938 100644
+--- a/meta-python/recipes-devtools/python/python3-blinker_1.4.bb
++++ b/meta-python/recipes-devtools/python/python3-blinker_1.4.bb
+@@ -8,12 +8,12 @@ SRC_URI[sha256sum] = "471aee25f3992bd325afa3772f1063dbdbbca947a041b8b89466dc00d6
+ inherit pypi setuptools3 ptest
+ 
+ SRC_URI += " \
++	file://0001-use-pytest-instead-of-deprecated-nose.patch \
+ 	file://run-ptest \
+ "
+ 
+ RDEPENDS:${PN}-ptest += " \
+ 	${PYTHON_PN}-pytest \
 -	${PYTHON_PN}-nose \
--"
--
--do_install_ptest() {
--	install -d ${D}${PTEST_PATH}/tests
--	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
--}
--
--SRC_URI[md5sum] = "2ea28d6ec311aeeebaf993cb3008b27c"
--SRC_URI[sha256sum] = "37812d863c9ad3e35c0734c42e0bf0320ce8c3bed82cd20ad54cb34d158157ba"
--
--RDEPENDS:${PN} += "${PYTHON_PN}-simplejson"
+ "
+ 
+ do_install_ptest() {
 -- 
 2.35.1
 
