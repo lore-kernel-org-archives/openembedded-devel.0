@@ -1,108 +1,95 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1957C433EF
-	for <webhook@archiver.kernel.org>; Fri, 25 Feb 2022 18:46:38 +0000 (UTC)
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com
- [209.85.208.45])
- by mx.groups.io with SMTP id smtpd.web09.1019.1645814798100721772
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 46B63C433F5
+	for <webhook@archiver.kernel.org>; Fri, 25 Feb 2022 18:55:58 +0000 (UTC)
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com
+ [209.85.215.178])
+ by mx.groups.io with SMTP id smtpd.web11.1141.1645815357176411348
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Feb 2022 10:46:38 -0800
+ Fri, 25 Feb 2022 10:55:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=JJUST1v4;
- spf=pass (domain: gmail.com, ip: 209.85.208.45,
- mailfrom: jan.vermaete@gmail.com)
-Received: by mail-ed1-f45.google.com with SMTP id m3so8609566eda.10
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=I/olp1Wq;
+ spf=pass (domain: gmail.com, ip: 209.85.215.178,
+ mailfrom: ticotimo@gmail.com)
+Received: by mail-pg1-f178.google.com with SMTP id t14so2485473pgr.3
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Feb 2022 10:46:37 -0800 (PST)
+ Fri, 25 Feb 2022 10:55:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=C9pqfD5/i7xb/C5BsD9ckFA6az9D6pwANTLLQzYdSbo=;
-        b=JJUST1v4AUJBGj8qyoTp0Bn2AyCe2N2F2Ol4MCcMobGnEBpJsAURWOO0jS/El1yD1d
-         YwD1opve5ZMDpguxkv5JgVllbYzF4MkhQVCy9s8pTSoFB97nQ15dLikXAfvGx3UfZ/bP
-         qLEbuZDHLr1gHz5o37bQHO7U4nxwwPRcLVekYs3CWLl/pCTc5HoeazUb/oaoiy28VTby
-         YX4G5eeIQ/XwAwTJCJwvLG1OxIqzZ0ALmAgyBB+mzr6KuNPP262PDNXnvLe7/6lRKNUr
-         XTSwDfq6fehorX2UrQ8zOIU+3gDNVb2hlOQjC+JmRfbZIGkqWEjdhFSmKLi0GTfPgCu7
-         eD5Q==
+        bh=EFkCPWzReNeIkoO3cORFxA2QzdW8ch5CmxQk9tL0TsI=;
+        b=I/olp1WqFREjksnqjwwGu/D3V67XdvVqSlvBg0WODmMOIxQ0VKaTEmrbzs1KK7g4a0
+         xyluqF0DPmqLSXiroQS79ShhMgv5Ij7IQ3zyPJ0RhpDPOZJdhtEEy1fQzYRh2EqnIeBx
+         uSB1JSvj82ypw2CB/FuNgM/8qwtFDEDkqpOXl7MyDvlov2sjEjezfqW0ZJXKbFsKxa1N
+         bHb3FuQxZ9o7ExRYCkac/LfEl6ZSo4wYoliI1D6ViJylE9VlwihxiWBT8jYw5Vk6FBpJ
+         pygVxHaqOaq8kytgkZGhVzGPzOMIaDNZeNgecKl59RFFz895gypyheC7Hfyj9hrOuS7t
+         9pHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=C9pqfD5/i7xb/C5BsD9ckFA6az9D6pwANTLLQzYdSbo=;
-        b=Vu4OHrtVaLZo8kUo5gBjoeiAmKAhYE32TaNXIv6SMnkQFAsQJwpQUV++Me08aK/nce
-         K6BrnvQoKmAkTGyi5S9ZWxu574I2nKK5aAWt9b4UgMO+MFg6Qfvz1+nJRPElZCaLRFvO
-         2j07aDM4tKluV3S8amqxYwQwEywHSYuGpgSDIa5fEDtKZYiyEmKJQtjN4EWe+I8OXqcw
-         TG3ho6JstX2ej8VkHIin+InSyLtJte6JawAZdNcLqseZvQ4xQ6GJS0AFetK8W6/F/9+i
-         h+AbrQAGMwSN2DF4wXisyyn7LRwr1GbMQ48PpDrT/DGw05vvomouhW5zeN6XeuyphBg0
-         Wv+w==
-X-Gm-Message-State: AOAM532TdsWdf/79GDTAoZzgmf36S6LTyf3G/FvYX1dGH1QoF9IIBNyU
-	9Gizerqh8xcg5ODlhsxUyiQQtuK8HfU=
+        bh=EFkCPWzReNeIkoO3cORFxA2QzdW8ch5CmxQk9tL0TsI=;
+        b=CYshkG7ekGCV8WmmRVbBxuql5kQkTn85QOuQmpsqVp+YFfy2efWoA4DBeWQ+TO3RrO
+         uIxkv+9bai74IGwjfGWPWSYSX6xz6Ewvs8qOsLgvWfLCjiPXyNG+XhttqJ2SPWiV6UdJ
+         t2zDfTAtjdKo4LTK/tKGXjXcHKa7I5uosZVgxYY4SAlyl1q6v1lm6Rhg5WWSboMyzHPA
+         9DD1jXGwoc2jHNPA1QRIYw4Ly+M+l/r2UKlDsbJ17FHr8xU6v2lI/UxqvhIGixusmX78
+         ihBJ2rEogJnNvd5+Ym6Uxp2AVn2sj9EF0tWgAwqu1kgzhuGYnMrrR9KnhMEuRXgSLOJu
+         ujnA==
+X-Gm-Message-State: AOAM531/Yvohtv3SDUH6ZniSawQk0lEoRGzQakhO5tA8VAkuHb6IOY9E
+	uou+bFzCJuwdeGezJ1L4u/yioA4YJPpbMQ==
 X-Google-Smtp-Source: 
- ABdhPJzv16DUAHYjV4t8TP3CXDGkqUvSrsllje419qGgbTzSljXw6ICe2xASpiEdjuAC46fvT6Vb6Q==
-X-Received: by 2002:a05:6402:51d1:b0:412:e72f:c6d3 with SMTP id
- r17-20020a05640251d100b00412e72fc6d3mr8458002edd.61.1645814796196;
-        Fri, 25 Feb 2022 10:46:36 -0800 (PST)
-Received: from localhost.localdomain (78-20-160-86.access.telenet.be.
- [78.20.160.86])
-        by smtp.googlemail.com with ESMTPSA id
- w10-20020a17090652ca00b006c605703245sm1316675ejn.43.2022.02.25.10.46.35
+ ABdhPJzqAyCFFKNWhpV0Wvj2GGPehYYWeJZ8j343Sl5/v7TWUTt4L5TO/fNJr3lcVYhTwgBAJDdcbA==
+X-Received: by 2002:aa7:9253:0:b0:4e1:53d4:c2c6 with SMTP id
+ 19-20020aa79253000000b004e153d4c2c6mr8945046pfp.62.1645815356166;
+        Fri, 25 Feb 2022 10:55:56 -0800 (PST)
+Received: from nereus.hsd1.or.comcast.net
+ ([2601:1c0:6000:1b20:d615:a2e3:253b:5be5])
+        by smtp.gmail.com with ESMTPSA id
+ 6-20020a17090a030600b001bc62ecad28sm9990150pje.41.2022.02.25.10.55.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Feb 2022 10:46:35 -0800 (PST)
-From: Jan Vermaete <jan.vermaete@gmail.com>
+        Fri, 25 Feb 2022 10:55:55 -0800 (PST)
+From: Tim Orling <ticotimo@gmail.com>
+X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Kas User <kas@example.com>,
-	Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-webserver][PATCH] netdata: added enable/disable cloud config.
-Date: Fri, 25 Feb 2022 19:46:25 +0100
-Message-Id: <20220225184625.2092491-1-jan.vermaete@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Tim Orling <tim.orling@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-cryptography: fix wheel build
+Date: Fri, 25 Feb 2022 10:55:50 -0800
+Message-Id: <20220225185551.1458871-1-tim.orling@konsulko.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 25 Feb 2022 18:46:38 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 25 Feb 2022 18:55:58 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95524
+ https://lists.openembedded.org/g/openembedded-devel/message/95525
 
-From: Kas User <kas@example.com>
+Like python3-setuptools-rust-native, this is building its wheel in
+${S}/dist rather than ${B}/dist. Set PIP_INSTALL_DIST_PATH accordingly.
 
-The json-c dependancy is only needed when cloud is enabled.
-
-Almost no inpact on the size of the package.
-
-Default disabled.
-
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ---
- meta-webserver/recipes-webadmin/netdata/netdata_1.33.1.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../recipes-devtools/python/python3-cryptography_36.0.1.bb      | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_1.33.1.bb b/meta-webserver/recipes-webadmin/netdata/netdata_1.33.1.bb
-index 2004670f6..3336b43c5 100644
---- a/meta-webserver/recipes-webadmin/netdata/netdata_1.33.1.bb
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata_1.33.1.bb
-@@ -1,7 +1,7 @@
--HOMEPAGE = "https://github.com/netdata/netdata/"
- SUMMARY = "Real-time performance monitoring"
- DESCRIPTION = "Netdata is high-fidelity infrastructure monitoring and troubleshooting. \
-                Open-source, free, preconfigured, opinionated, and always real-time."
-+HOMEPAGE = "https://github.com/netdata/netdata/"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography_36.0.1.bb b/meta-python/recipes-devtools/python/python3-cryptography_36.0.1.bb
+index abb15381f5..00791dce2d 100644
+--- a/meta-python/recipes-devtools/python/python3-cryptography_36.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-cryptography_36.0.1.bb
+@@ -20,6 +20,8 @@ SRC_URI += " \
  
-@@ -41,6 +41,7 @@ USERADD_PACKAGES = "${PN}"
- USERADD_PARAM:${PN} = "--system --no-create-home --home-dir ${localstatedir}/run/netdata --user-group netdata"
+ inherit pypi setuptools3_rust
  
- PACKAGECONFIG ??= "https"
-+PACKAGECONFIG[cloud] = "--enable-cloud, --disable-cloud, json-c"
- PACKAGECONFIG[compression] = "--enable-compression, --disable-compression, lz4"
- PACKAGECONFIG[https] = "--enable-https, --disable-https, openssl"
- 
++PIP_INSTALL_DIST_PATH = "${S}/dist"
++
+ DEPENDS += " \
+     ${PYTHON_PN}-asn1crypto-native \
+     ${PYTHON_PN}-cffi-native \
 -- 
-2.25.1
+2.30.2
 
 
