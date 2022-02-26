@@ -2,150 +2,97 @@ Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B3EB4C433F5
-	for <webhook@archiver.kernel.org>; Sat, 26 Feb 2022 03:31:24 +0000 (UTC)
-Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com
- [209.85.216.46])
- by mx.groups.io with SMTP id smtpd.web08.2982.1645846283302120081
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 07AAEC433EF
+	for <webhook@archiver.kernel.org>; Sat, 26 Feb 2022 03:40:52 +0000 (UTC)
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com
+ [209.85.210.172])
+ by mx.groups.io with SMTP id smtpd.web10.3047.1645846851083969566
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Feb 2022 19:31:23 -0800
+ Fri, 25 Feb 2022 19:40:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=d+4DtJtW;
- spf=pass (domain: gmail.com, ip: 209.85.216.46, mailfrom: ticotimo@gmail.com)
-Received: by mail-pj1-f46.google.com with SMTP id d15so3061301pjg.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=fbFTetGf;
+ spf=pass (domain: gmail.com, ip: 209.85.210.172,
+ mailfrom: ticotimo@gmail.com)
+Received: by mail-pf1-f172.google.com with SMTP id d187so6340743pfa.10
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Feb 2022 19:31:23 -0800 (PST)
+ Fri, 25 Feb 2022 19:40:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=65eFjLHW+z3obL0P4Yn++a0CfrCusbaEVKfuz26zfeQ=;
-        b=d+4DtJtW0B9CKwquSwdHqYy6vBOYuj0NodmL/sUNS+NuXC0vgKq3onzReJlilM3sql
-         iQetIBn8EetdLnZ3gPwSa/wThaIGp5tMdLUIq8bEuR0LiGLihOgsr7kZQq680wGXRrS4
-         AvkumFuGHNNYEc7pPzcdigYvEDjj6FAlQVn/CrwmxiPKlPbXgI3P+jhAvlvzA5Wox5zF
-         QxGy8GGLHBwcvTLeZl5qQ1hhx+sfidLkeSb/k4x5I17dA5/rcUwZotrctnZhr7CQnFdR
-         9uLj4FMUEvPVm0Umm2Au7N1naA8KZ0xWh6wHYQx169+qLym/0RmCUYV5sRfVdpMlRQ0S
-         x60Q==
+        bh=+tEr3Z0f0NUh2TljoOZ/C9+hmb6dN/Ft3aVj0IRr7KI=;
+        b=fbFTetGfYKVFJhF8DuwcfM+FiJThO4h0dyCWZkxamIyI0fFZO2h+4rzxMgG0IDuGlo
+         y7nJwAlSt1R6Gj8n6j16UR/3mZ698u02beU3ynkEaWTv/Y7wrPbbDwS9G6mqpqw4zLMB
+         Q/ds+utsUhNCpZWGpFGpKhh5MFN9yQDcmWBhMpSnNSJ97vXe3jK0Td7hlCbfhsCmUR9K
+         +m7l0rSyf3MpFPVO5uVHcrDkTTMdbVMMoh+JNzaphpA9q16B5KUoyytlRN7nvKeYJ6In
+         vlf2i2qclwhSJ25FnuO8nDL2kSv8cG+/O8WBugrd0e+Lc1vlvO5eSZQmbojCpx9RUv/c
+         GK8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=65eFjLHW+z3obL0P4Yn++a0CfrCusbaEVKfuz26zfeQ=;
-        b=MlDU4GE3q7i4EI2BqbVRlZ4XZ0E5ojH4h+LNG8dnMGxTp78DOvhIv3rZIYfPE/zyyZ
-         m9Tu6outugG1blyt9QqO0TMJUcWQqIPPM34eQaPFHz1rh49OTq7Aa4ngioRLxbQt9b9W
-         qXOamtrF5dh1rDOKKpGOJNlVG4ihuG5KVDNz0l1Y7tIk1ZF7VkAelFGXbuyZfMrMg8Vj
-         vgtzVgdM4LSP0/di3TX/uXw6YqMzZBDmwkK+Wlpvd560CM9OLC0/Tj8vYbXSl9s+8qjn
-         eOULAlsaQ7wr7imY0AuZfw2+lrMXjkNBpsxtIaG+wPvxUaMDF8Ls8pr/ZpFBa1rbfp6O
-         tXtA==
-X-Gm-Message-State: AOAM533XIi4vRSlBVH74JMtAi94Llba5n2D1gGDWf0ICICIoLy+CTH9c
-	y9hQMCh27bet7Ik3G4UJJHSfWns2a5I=
+        bh=+tEr3Z0f0NUh2TljoOZ/C9+hmb6dN/Ft3aVj0IRr7KI=;
+        b=n5JW0xhbq5h0E3cRCE4InS3QVKizYLCPs8SddefkAJISp10dYln9CREP8OVXfX9aRl
+         8pLSW1Ldt5GPiiVU9ZJxOobdqsJ/19GVoDTqc53tIGEiCtUMtaN1DVZs5nNcYiYUpz1j
+         WDQCjZsirqLr+96Q6p4gl+cX/hCz6/iErBJ8sc4wNSuh8o9F1xzIsIISMFqRc3idzBft
+         X8CEjhWB/u9MJ7tFbftxza3U/feBZKWZfiXt+NiSYzZ6Q1ydpFt8BXiJDTUh/2wBzAYm
+         jVDrU4LEtKJT/QVFxA7cNtA3Eny8rPG88X61D33psh5yDeJJpz75/av8MNKhmhdnyFQ4
+         b0hQ==
+X-Gm-Message-State: AOAM533GXj/ewIuY4Th778HtA0ESkR99r79JBIUnAvEa7fPLTOTgLHyc
+	CutWsVVwNj1IkkK6lRBCje/wrE9Z9r0=
 X-Google-Smtp-Source: 
- ABdhPJxjqGpp5kSv7HK5lpKUuPB+vkHAe4Wk8nyUXgDSp1VTwnrdTzkN2tjiNEwIXBf2szuEjHg/gA==
-X-Received: by 2002:a17:902:db0b:b0:150:2a0:189c with SMTP id
- m11-20020a170902db0b00b0015002a0189cmr10146416plx.128.1645846282382;
-        Fri, 25 Feb 2022 19:31:22 -0800 (PST)
+ ABdhPJz3m7E9HtRUoSAMiqOxd2OssU1P7yb14g7bRl0eCDoLX4W4Mq3LenijcRK2DMdchNQBYzMiGw==
+X-Received: by 2002:a63:6883:0:b0:378:3582:c94f with SMTP id
+ d125-20020a636883000000b003783582c94fmr3942528pgc.60.1645846849992;
+        Fri, 25 Feb 2022 19:40:49 -0800 (PST)
 Received: from nereus.hsd1.or.comcast.net
  ([2601:1c0:6000:1b20:d615:a2e3:253b:5be5])
         by smtp.gmail.com with ESMTPSA id
- y17-20020a63ce11000000b0036c96df445fsm3800513pgf.53.2022.02.25.19.31.21
+ lk9-20020a17090b33c900b001bc7c2dfcdbsm3870441pjb.37.2022.02.25.19.40.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Feb 2022 19:31:21 -0800 (PST)
+        Fri, 25 Feb 2022 19:40:49 -0800 (PST)
 From: Tim Orling <ticotimo@gmail.com>
 X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Tim Orling <tim.orling@konsulko.com>
-Subject: [meta-python][PATCH] ptyhon3-ipy: drop recipe
-Date: Fri, 25 Feb 2022 19:31:00 -0800
-Message-Id: <20220226033100.1353815-1-tim.orling@konsulko.com>
+Subject: [meta-python][PATCH] python3-pillow: fix wheel build
+Date: Fri, 25 Feb 2022 19:40:44 -0800
+Message-Id: <20220226034044.1381510-1-tim.orling@konsulko.com>
 X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 26 Feb 2022 03:31:24 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 26 Feb 2022 03:40:52 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95533
+ https://lists.openembedded.org/g/openembedded-devel/message/95534
 
-Does not build with bdist_wheel. If you need this package please work
-with upstream to update to PEP-517 packaging.
+Recipe does not inherit pypi nor would PN resolve to the name of the
+wheel so we must set PIP_INSTALL_PACKAGE appropriately.
+
+The recipe also builds its wheel in ${S}/dist so we must set
+PIP_INSTALL_DIST_PATH appropriately.
 
 Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ---
- .../packagegroups/packagegroup-meta-python.bb |  2 --
- .../python/python3-ipy/run-ptest              |  3 --
- .../python/python3-ipy_1.01.bb                | 32 -------------------
- 3 files changed, 37 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-ipy/run-ptest
- delete mode 100644 meta-python/recipes-devtools/python/python3-ipy_1.01.bb
+ meta-python/recipes-devtools/python/python3-pillow_9.0.0.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index 2b20937f78..ae9c86e7fb 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -190,7 +190,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
-     python3-intelhex \
-     python3-intervals \
-     python3-ipaddress \
--    python3-ipy \
-     python3-ipython \
-     python3-ipython-genutils \
-     python3-iso3166 \
-@@ -500,7 +499,6 @@ RDEPENDS:packagegroup-meta-python3-ptest = "\
-     python3-html2text-ptest \
-     python3-inflection-ptest \
-     python3-intervals-ptest \
--    python3-ipy-ptest \
-     python3-iso3166-ptest \
-     python3-jdcal-ptest \
-     python3-jinja2-ptest \
-diff --git a/meta-python/recipes-devtools/python/python3-ipy/run-ptest b/meta-python/recipes-devtools/python/python3-ipy/run-ptest
-deleted file mode 100644
-index b63c4de0d9..0000000000
---- a/meta-python/recipes-devtools/python/python3-ipy/run-ptest
-+++ /dev/null
-@@ -1,3 +0,0 @@
--#!/bin/sh
--
--pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-diff --git a/meta-python/recipes-devtools/python/python3-ipy_1.01.bb b/meta-python/recipes-devtools/python/python3-ipy_1.01.bb
-deleted file mode 100644
-index 8b39679e45..0000000000
---- a/meta-python/recipes-devtools/python/python3-ipy_1.01.bb
-+++ /dev/null
-@@ -1,32 +0,0 @@
--SUMMARY = "IPy - class and tools for handling of IPv4 and IPv6 addresses and networks"
--DESCRIPTION = "IPy is a Python module for handling IPv4 and IPv6 Addresses and Networks \
--in a fashion similar to perl's Net::IP and friends. The IP class allows \
--a comfortable parsing and handling for most notations in use for IPv4 \
--and IPv6 Addresses and Networks."
--SECTION = "devel/python"
--HOMEPAGE = "https://github.com/autocracy/python-ipy"
--
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://COPYING;md5=848d24919845901b4f48bae5f13252e6"
--
--SRC_URI[md5sum] = "d6cf83e7f418ebbd23324ba1c658b907"
--SRC_URI[sha256sum] = "edeca741dea2d54aca568fa23740288c3fe86c0f3ea700344571e9ef14a7cc1a"
--
--inherit pypi setuptools3 ptest
--
--SRC_URI += " \
--	file://run-ptest \
--"
--
--RDEPENDS:${PN}-ptest += " \
--	${PYTHON_PN}-pytest \
--"
--
--do_install_ptest() {
--	install -d ${D}${PTEST_PATH}/test/
--	cp -rf ${S}/test/* ${D}${PTEST_PATH}/test
--}
--
--PYPI_PACKAGE = "IPy"
--
--BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python3-pillow_9.0.0.bb b/meta-python/recipes-devtools/python/python3-pillow_9.0.0.bb
+index de3c92c3d3..487e4b54c4 100644
+--- a/meta-python/recipes-devtools/python/python3-pillow_9.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pillow_9.0.0.bb
+@@ -13,6 +13,9 @@ SRCREV ?= "82541b6dec8452cb612067fcebba1c5a1a2bfdc8"
+ 
+ inherit setuptools3
+ 
++PIP_INSTALL_PACKAGE = "Pillow"
++PIP_INSTALL_DIST_PATH = "${S}/dist"
++
+ DEPENDS += " \
+     zlib \
+     jpeg \
 -- 
 2.30.2
 
