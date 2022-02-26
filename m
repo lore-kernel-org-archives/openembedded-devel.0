@@ -1,164 +1,94 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E321C433EF
-	for <webhook@archiver.kernel.org>; Sat, 26 Feb 2022 08:20:42 +0000 (UTC)
-Received: from mail-qv1-f46.google.com (mail-qv1-f46.google.com
- [209.85.219.46])
- by mx.groups.io with SMTP id smtpd.web08.4257.1645863641512612334
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 750CEC433EF
+	for <webhook@archiver.kernel.org>; Sat, 26 Feb 2022 14:01:07 +0000 (UTC)
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com
+ [209.85.216.46])
+ by mx.groups.io with SMTP id smtpd.web10.5992.1645884066303851917
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 26 Feb 2022 00:20:41 -0800
+ Sat, 26 Feb 2022 06:01:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=cn6hKQ/s;
- spf=pass (domain: gmail.com, ip: 209.85.219.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f46.google.com with SMTP id w7so8549751qvr.3
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=XaoeIXCg;
+ spf=pass (domain: gmail.com, ip: 209.85.216.46,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f46.google.com with SMTP id
+ cp23-20020a17090afb9700b001bbfe0fbe94so7334505pjb.3
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 26 Feb 2022 00:20:41 -0800 (PST)
+ Sat, 26 Feb 2022 06:01:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=22wdIrDdNWRQl5LJk1jReckqEA3/rvAGH+C42c/iJpE=;
-        b=cn6hKQ/sDa3ZSkoFmC1R06o+tVKJAZdo6zqr3OLnK9o5VJqg/1yXxpr2jcj1BiN71U
-         CG9iKp3yCl5j+VA+c6LC8spvzKg0mjRXeanAyqNeKw1gP1Afg7BD+49g0XeCjqAyPylH
-         UUVT5T+zHeJSnIx0bdZPCO3zddG1XHGdvb8QjYl2TiLTiFTQMOIKtm3F+yPB8wLecQp+
-         y2a1KmbrSswV4JO04dRpYHDjQa845tgyVLyLfzPrUomKh4Ldzo6O5HkvqxCwvX6qunLK
-         GikTYpqjZIjVBp7bDzWpmQ7dUFyaELi8AmbE5JQs8U8WOaWyX5Qi+1quGn/vr6ykMQrc
-         w3Bw==
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=c6YLqV4HL2HA24yuyp44Vffi4+dOT5HjP5L5yz58B2g=;
+        b=XaoeIXCgeuAXKoZVRi3zOhuVfjJTSOPppJy6TyjOYnhyx1q5ts8t8K9jSlErV+sytE
+         A6JvXatu5xxJmO3RL55Xy0oWtLWBraDeEH3NZC4j5k8tR/LkpX8peBLwwiRJs4bM4rsV
+         CT2LAztEcqhkQyWrWjySbDjLggvo1XubvGS61nHLst1xspVXckX6982muzAYgoYuLEGH
+         Mr83xV8PuXDrTIM75dA1bFzgtlZl7HTaA/XXkMkwR7edyLOG4j2wGoGDOlOxlpCS66Zk
+         PqNg/wQYNIsnMXPGu64MwGRiL4nom7hFt/x4CfwedWoCxD/5Gv2KvStorbPz0IjWU+q0
+         N9mA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=22wdIrDdNWRQl5LJk1jReckqEA3/rvAGH+C42c/iJpE=;
-        b=zeyG2hLZz4S3jpA/MENFqorGaOoA69dwqEba30DVPIz54S1MePM6PZLfPN40AlEQ/n
-         2EDdKVz8fNdudzzgNcePawXdGonLVutu8FFzm7oh4rGlDExezYOJCjh6BrMRwNxwJ37j
-         CYGX9qXC72GFIO3cPbBeX7H8RhMG3aeNI+7hDBuG0/5imX5DxhdaBfM7hJTR3PbiBOlS
-         6hSHQwMBrx8C227H5YHXLLYNeSdjxfcy5yCrrsMyASPKNVVf5SrkxYw2smaTx7NhSkjY
-         1OXsSbyE1fhZnudE8FKONWPW2SnlKUZMI8XtqR0v6IUdZRKH4U8oo6279Cgi8oGCSerT
-         S9fg==
-X-Gm-Message-State: AOAM531B2yxF8BnnAoIYUissHtNrhOwYk5iRYy/XpunKQ/mwwkUDky/q
-	9kIAR+kdAEcz/UPV7ScEt+mva5LnGoXYQUmP9X0=
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=c6YLqV4HL2HA24yuyp44Vffi4+dOT5HjP5L5yz58B2g=;
+        b=T+aZ46V39bula/+YC7I0ZSGlB5Q139unodMVob5ngXz/SgdUH0eSyhvbggXTHCj9vT
+         DWT4z0uONE2VLh6LM52N5zCUJy+fZKdINyarZ0TmaPMStCt+rqq35jjMACEm9n5qpSA9
+         umidQaOEwSqyCih369jlY40Xvu2XW5zaeFYelUIKEbhsfs2U2jg6DtxeVnKDPgBwpiG4
+         g8VYmd4bvr2tVzlIaSAkm21jIKqhOp6yL9xMtbYkHwGKczmfQqm91MZi+ZP1A3YV6y9P
+         7wnPPx6ktSG5ZfBur80hoY7i/D8+j/Wg+079iCw2/hkexmc7R6PY6T52CUu7Sxt6S0Yi
+         2i6Q==
+X-Gm-Message-State: AOAM532isFeaddOUtIP/zadh8LmhIeR8STwkQeKAPLTLa+PNLQP7/gs6
+	knHeu5drVblj0zAKp94o88TL4LCpc+U=
 X-Google-Smtp-Source: 
- ABdhPJwqPOe0pBsjfSJzvV+3CrvsmxwUdtIhBqlEO7Th1w+YpogOmfE2CmIGO9fvA4zOyNARrVmE7ZvVtxZo+pLfmdM=
-X-Received: by 2002:a05:6214:1c0d:b0:432:6487:9c53 with SMTP id
- u13-20020a0562141c0d00b0043264879c53mr8479555qvc.36.1645863640407; Sat, 26
- Feb 2022 00:20:40 -0800 (PST)
+ ABdhPJx4lMwNJxQA2+n9Q1rmbp3rPqZYMVs3hRG4ELuKhw2f4q+Fzg4XlXxkmh8kuXK+S6S/d0RdeA==
+X-Received: by 2002:a17:90b:3c01:b0:1bc:b160:7811 with SMTP id
+ pb1-20020a17090b3c0100b001bcb1607811mr8007914pjb.164.1645884065366;
+        Sat, 26 Feb 2022 06:01:05 -0800 (PST)
+Received: from keaua.caveonetworks.com
+ ([2601:202:4180:a5c0:5954:439:c7aa:7238])
+        by smtp.gmail.com with ESMTPSA id
+ o17-20020a056a0015d100b004e1c11d833fsm7660026pfu.90.2022.02.26.06.01.03
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 26 Feb 2022 06:01:04 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] pw-am.sh: update to new patcwork system
+Date: Sat, 26 Feb 2022 06:01:02 -0800
+Message-Id: <20220226140102.2024217-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20220226041103.1398748-1-tim.orling@konsulko.com>
-In-Reply-To: <20220226041103.1398748-1-tim.orling@konsulko.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 26 Feb 2022 00:20:14 -0800
-Message-ID: 
- <CAMKF1sqtNuo0O63HGrvx8duSFptS+kM=9gOuwuFhmnrj+=v3zw@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-twofish: drop recipe
-To: Tim Orling <ticotimo@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Tim Orling <tim.orling@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 26 Feb 2022 08:20:42 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 26 Feb 2022 14:01:07 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95541
+ https://lists.openembedded.org/g/openembedded-devel/message/95542
 
-it appears in dependencies of one another recipe in meta-python
+Point to patchwork.yoctoproject.org
 
-ERROR: Nothing RPROVIDES 'python3-twofish' (but
-/mnt/b/yoe/master/sources/meta-openembedded/meta-python/recipes-devtools/python/python3-pyjks_20.0.0.bb
-RDEPENDS on or otherwise requires it
-)
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ contrib/pw-am.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Fri, Feb 25, 2022 at 8:11 PM Tim Orling <ticotimo@gmail.com> wrote:
->
-> The code has not been touched since 2013 and does not build with
-> bdist_wheel. If you depend upon this recipe, please work with upstream
-> to update the package to PEP-517 packaging.
->
-> Signed-off-by: Tim Orling <tim.orling@konsulko.com>
-> ---
->  ...ng-return-statements-in-module-stubs.patch | 38 -------------------
->  .../python/python3-twofish_0.3.0.bb           | 15 --------
->  2 files changed, 53 deletions(-)
->  delete mode 100644 meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch
->  delete mode 100644 meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb
->
-> diff --git a/meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch b/meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch
-> deleted file mode 100644
-> index c25b2457e2..0000000000
-> --- a/meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch
-> +++ /dev/null
-> @@ -1,38 +0,0 @@
-> -From 5704610f4b3aed5210e9c5b7c05ff8b5b2364c9c Mon Sep 17 00:00:00 2001
-> -From: Martin Jansa <Martin.Jansa@gmail.com>
-> -Date: Mon, 12 Aug 2019 08:18:21 +0000
-> -Subject: [PATCH] Fix missing return statements in module stubs
-> -
-> -* fixes build with -Werror=return-type
-> -  twofish.c: In function 'init_twofish':
-> -  twofish.c:45:1: error: control reaches end of non-void function [-Werror=return-type]
-> -     45 | PyMODINIT_FUNC init_twofish(void) { }
-> -        | ^~~~~~~~~~~~~~
-> -  twofish.c: In function 'PyInit__twofish':
-> -  twofish.c:46:1: error: control reaches end of non-void function [-Werror=return-type]
-> -     46 | PyMODINIT_FUNC PyInit__twofish(void) { }
-> -        | ^~~~~~~~~~~~~~
-> -  cc1: some warnings being treated as errors
-> -
-> -Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> -
-> -Upstream-Status: Submitted [https://github.com/keybase/python-twofish/pull/6]
-> ----
-> - twofish.c | 4 ++--
-> - 1 file changed, 2 insertions(+), 2 deletions(-)
-> -
-> -diff --git a/twofish.c b/twofish.c
-> -index e324c34..d4487d8 100644
-> ---- a/twofish.c
-> -+++ b/twofish.c
-> -@@ -42,5 +42,5 @@ DL_EXPORT(void) exp_Twofish_decrypt(Twofish_key * xkey, uint8_t c[16], uint8_t p
-> - We need a stub init_twofish function so the module will link as a proper module.
-> - Do not import _twofish from python; it will not work since _twofish is not a *real* module
-> - */
-> --PyMODINIT_FUNC init_twofish(void) { }
-> --PyMODINIT_FUNC PyInit__twofish(void) { }
-> -+PyMODINIT_FUNC init_twofish(void) { return NULL; }
-> -+PyMODINIT_FUNC PyInit__twofish(void) { return NULL; }
-> ---
-> -2.17.1
-> -
-> diff --git a/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb b/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb
-> deleted file mode 100644
-> index 94fb71090e..0000000000
-> --- a/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb
-> +++ /dev/null
-> @@ -1,15 +0,0 @@
-> -SUMMARY = "Bindings for the Twofish implementation by Niels Ferguson"
-> -DESCRIPTION = "Bindings for the Twofish implementation by Niels Ferguson\
-> - libtwofish-dev."
-> -HOMEPAGE = "http://github.com/keybase/python-twofish"
-> -LICENSE = "BSD-3-Clause"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=33a63abf6d7567b1689d8ce69f00e43b"
-> -
-> -SRC_URI += "file://0001-Fix-missing-return-statements-in-module-stubs.patch"
-> -
-> -SRC_URI[md5sum] = "d7d22f16dc4ffa0e3ae2200654033abe"
-> -SRC_URI[sha256sum] = "b09d8bb50d33b23ff34cafb1f9209f858f752935c6a5c901efb92a41acb830fa"
-> -
-> -inherit pypi setuptools3
-> -
-> -BBCLASSEXTEND = "native nativesdk"
-> --
-> 2.30.2
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#95537): https://lists.openembedded.org/g/openembedded-devel/message/95537
-> Mute This Topic: https://lists.openembedded.org/mt/89404719/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/contrib/pw-am.sh b/contrib/pw-am.sh
+index 8987eee8e..d9d1187b0 100755
+--- a/contrib/pw-am.sh
++++ b/contrib/pw-am.sh
+@@ -9,7 +9,7 @@
+ 
+ for patchnumber in $@;
+ do
+-	wget -nv http://patches.openembedded.org/patch/$patchnumber/mbox/ -O pw-am-$patchnumber.patch
++	wget -nv http://patchwork.yoctoproject.org/patch/$patchnumber/mbox/ -O pw-am-$patchnumber.patch
+ 	git am -s pw-am-$patchnumber.patch
+ 	rm pw-am-$patchnumber.patch
+ done
+-- 
+2.25.1
+
 
