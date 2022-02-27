@@ -2,60 +2,60 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B3A3FC433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B453BC4332F
 	for <webhook@archiver.kernel.org>; Sun, 27 Feb 2022 07:58:53 +0000 (UTC)
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
- [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.web10.7184.1645948732378735028
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com
+ [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web10.7185.1645948733255826591
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 26 Feb 2022 23:58:52 -0800
+ Sat, 26 Feb 2022 23:58:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=LZZkF8Ec;
- spf=pass (domain: gmail.com, ip: 209.85.210.170,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=dPGJfCq3;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id g21so2043469pfj.11
+Received: by mail-pl1-f169.google.com with SMTP id b22so8229465pls.7
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 26 Feb 2022 23:58:52 -0800 (PST)
+ Sat, 26 Feb 2022 23:58:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=bJiDEnV+feyMeNuL7sm2opkrGhoYQWLMB/dMQ/Seg70=;
-        b=LZZkF8Ecyy/0/KruwrHMjmCY7/PtWi4rWcD4VdbBBSxQZcQyY7cdn95GruB1U6OrJw
-         nkdPSc3zMkjZYAiJGS8N/IpPxerNjqd3QKJhqQgo+aBQLeBvF2wPVwZNVt0oLnVHsaOV
-         hlvfOdDZZMLwpPbDM10vX9QrErjWXADfbDvn29FSxJ/430MiImJADSVJFMqJR9IOlFE1
-         RSm92I1W+GQ94NUm8ad0slwqOQZs2qfUMveu1aMlKmpRd2jjmyNci6UAMAea/ivN7l6M
-         BavBfw46xSJit9Jmoh8kBHgiPcW+Bk0iyVyRAUwn/0QmXm4Mu2XyoT0FMLxwiUXHaT+7
-         jqsA==
+        bh=UYbAbEf4leac/OvAV/vonApmYpQBs/ZhTq9Gaj45+tQ=;
+        b=dPGJfCq3gCCH9N+jLDVKp6b9YOI4TKree3DFYlz9DhUfiJb61DXA0OXJ5MK+1vrWzQ
+         ALL7mv27lESNOwUDLY95bviBc0r5n+Lcm++G4uGlRM72f3/w+q/0DyZOEi5Gd8vieekG
+         Xe9V3PhIX1LugyvlGXEse8+nJ15KwWsBJkeypDfGZ7oUq6ggMXAixth1d39cYSiQkAyG
+         4rQnLZWGwwd5Kou2eQHQjdAr0tC86m1Ir7ZJUKFRTxfecOsWirACmXkMAx32+cP+x9y3
+         EPA11fvRogT3fMbB+lNUdl3EDso2jWTXfW55dd9hoOVREq8zMhMRncM7MHcCLNT4FbsR
+         4mKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=bJiDEnV+feyMeNuL7sm2opkrGhoYQWLMB/dMQ/Seg70=;
-        b=q3DofOz4p5CZhafp+n9T8NwRrBJsmtVb0hnkpEJlI5jeyji4OsYmVWzphTB/DKWyZ0
-         f0i7qDfqhPfqyJV9Pxy1qLNOeziY8wLBivlhc8LR2oTHr3apSz3g+fEv6UQycuricuUL
-         vgFLkHgsrRtsJYyudaCPgQMQg8yBbZOjv8r/eoKa35XSu3jFhz9+pFZZhBaB3nBdKV8d
-         oOlRC+VZYpDu1h6yTqMQNSM9Y7cmu2WHypU+3FTN8mSI6pNuRCGAj2S8BBwS4IEPrWv6
-         5P4oFpXa4bs8djMyly9sEJ6FNwGE/nwqojW4NJf/5cAKLer/u4mqrXIGUU1NMBAZvgE6
-         asXw==
-X-Gm-Message-State: AOAM532mCuYidWixZmcbHkPIwTzPd8SbX0Klmj6rjPZ8C6bQNx+pQ6Df
-	RgvS5/a8zjETbC1PjMLG8z0sJUv4ZWAt1A==
+        bh=UYbAbEf4leac/OvAV/vonApmYpQBs/ZhTq9Gaj45+tQ=;
+        b=K5Yv9CN61kEfpaVtiDKKlD7vn9nQJQjUgq2Ee9MaSBRudn/umcrL0m3akv0HaE6oh+
+         2DT8NBIMn9OC2N/qs+STfJFymLM4GzbcUPoymRFL3Yv6E5mom7duZpbmva2I2CFjqaGn
+         Uluz7Z1OmuCjNPZwTbrEZ1hm327mfPjwo7PuxC06zMPYFGMNiLhgZ6G2NGj9DwDSCWoP
+         Zo+O6N9JoVzGrLi7548oyBXmH8mYLE/H3mV4MxQ8a6l7htPwQZK+JI6Y7CN032JJDE4L
+         mdSRY+xKenh+wrs9kAj9nfGQelwytrdG7EeK1dc5gQtc6uv88KF2B3CYGoou1lhTwI9m
+         b5bQ==
+X-Gm-Message-State: AOAM530wqlZr89CW5tzAQROLH4M97z/QgHblN00HlA0NJLJNrNKy5bUD
+	Bh9ZgL8ajVkwE3oI7AuzQZvxGRsv4yzHlA==
 X-Google-Smtp-Source: 
- ABdhPJy93dl+TMy2iFin+nDsOQ5/moMryecOP9g1la8bE4ETOly/5VUQ+JiJTaxWFDhGPnAxvABpkw==
-X-Received: by 2002:a63:407:0:b0:373:a770:b1c with SMTP id
- 7-20020a630407000000b00373a7700b1cmr12921938pge.93.1645948731690;
-        Sat, 26 Feb 2022 23:58:51 -0800 (PST)
+ ABdhPJzs/z63Xuyhd9qaXjeGXRgcU8NXR55Z42kSxQs8lNBGGrNGtFjIgxWPaat9iiBgkSms/XyPjQ==
+X-Received: by 2002:a17:90b:4d86:b0:1bd:223f:6cb5 with SMTP id
+ oj6-20020a17090b4d8600b001bd223f6cb5mr4577556pjb.151.1645948732556;
+        Sat, 26 Feb 2022 23:58:52 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::1a20])
         by smtp.gmail.com with ESMTPSA id
- a22-20020a056a000c9600b004f10137a096sm9012845pfv.50.2022.02.26.23.58.50
+ a22-20020a056a000c9600b004f10137a096sm9012845pfv.50.2022.02.26.23.58.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 26 Feb 2022 23:58:51 -0800 (PST)
+        Sat, 26 Feb 2022 23:58:52 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/6] cxxtest: Define PIP_INSTALL_DIST_PATH
-Date: Sat, 26 Feb 2022 23:58:44 -0800
-Message-Id: <20220227075848.610467-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/6] python3-pycups: Inherit setuptools_build_meta
+Date: Sat, 26 Feb 2022 23:58:45 -0800
+Message-Id: <20220227075848.610467-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220227075848.610467-1-raj.khem@gmail.com>
 References: <20220227075848.610467-1-raj.khem@gmail.com>
@@ -66,28 +66,28 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 27 Feb 2022 07:58:53 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95555
+ https://lists.openembedded.org/g/openembedded-devel/message/95556
 
-Helps to find the wheel file
+Gets the wheel dependencies sorted during build
+Fixes
+| error: invalid command 'bdist_wheel'
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-test/cxxtest/cxxtest_4.4.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-devtools/python/python3-pycups_2.0.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-test/cxxtest/cxxtest_4.4.bb b/meta-oe/recipes-test/cxxtest/cxxtest_4.4.bb
-index 65b54ed548..b87972f413 100644
---- a/meta-oe/recipes-test/cxxtest/cxxtest_4.4.bb
-+++ b/meta-oe/recipes-test/cxxtest/cxxtest_4.4.bb
-@@ -10,6 +10,8 @@ SRC_URI[sha256sum] = "1c154fef91c65dbf1cd4519af7ade70a61d85a923b6e0c0b007dc7f489
+diff --git a/meta-oe/recipes-devtools/python/python3-pycups_2.0.1.bb b/meta-oe/recipes-devtools/python/python3-pycups_2.0.1.bb
+index dd00f444ed..3866e60a12 100644
+--- a/meta-oe/recipes-devtools/python/python3-pycups_2.0.1.bb
++++ b/meta-oe/recipes-devtools/python/python3-pycups_2.0.1.bb
+@@ -16,4 +16,4 @@ DEPENDS += "cups"
+ # See https://pypi.org/project/pycups/ for data
+ SRC_URI[sha256sum] = "57434ce5f62548eb12949ca8217f066f4eeb21a5d6ab8b13471dce350e380c90"
  
- inherit setuptools3
- 
-+PIP_INSTALL_DIST_PATH = "${B}/python/python3/dist"
-+
- SETUPTOOLS_SETUP_PATH = "${S}/python"
- 
- do_install:append() {
+-inherit pypi setuptools3
+\ No newline at end of file
++inherit pypi setuptools_build_meta
 -- 
 2.35.1
 
