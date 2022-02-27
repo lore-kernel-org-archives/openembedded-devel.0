@@ -2,90 +2,92 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1AF2C433EF
-	for <webhook@archiver.kernel.org>; Sun, 27 Feb 2022 07:58:52 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com
- [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web11.7223.1645948731480301041
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3A3FC433FE
+	for <webhook@archiver.kernel.org>; Sun, 27 Feb 2022 07:58:53 +0000 (UTC)
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
+ [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.web10.7184.1645948732378735028
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 26 Feb 2022 23:58:51 -0800
+ Sat, 26 Feb 2022 23:58:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=SgYQZsl3;
- spf=pass (domain: gmail.com, ip: 209.85.210.176,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=LZZkF8Ec;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id z15so8358820pfe.7
+Received: by mail-pf1-f170.google.com with SMTP id g21so2043469pfj.11
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 26 Feb 2022 23:58:51 -0800 (PST)
+ Sat, 26 Feb 2022 23:58:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=0qYc7zo9q4mH+VB7LGfbG7ehTTp09ga1jRkGeVXlRPU=;
-        b=SgYQZsl3mY+YH8VyI5a/qJvsq6apKf8yL5VUxEBg2+wvCYOOLjf94k8MwkElU56M20
-         MmtIJyhnuMjDGCIpiGh/KoaR+r3wu5jcLOKJdkh9Tho9j/AC3B35pwdsUMq3LY8ZEdoo
-         Z/yYwY/dCL4E0+dQqiQ7Va2ST85C+AKTNpUjiqxmL7DRfIxM6cgJctAuYw540bCl8F72
-         XSQe7OSw+zc2+B0tT1ObLvO4cXm7Yyon/RT0Up4E5SofWyRJwxBbCTU1HNYI+gwisfFM
-         26hUuzBniwHABeTJsbhyDt6iXAO6R12jwOS4iLfTF2v9OZ4hIeDuh9l1wXkSqSt32f1i
-         gECA==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=bJiDEnV+feyMeNuL7sm2opkrGhoYQWLMB/dMQ/Seg70=;
+        b=LZZkF8Ecyy/0/KruwrHMjmCY7/PtWi4rWcD4VdbBBSxQZcQyY7cdn95GruB1U6OrJw
+         nkdPSc3zMkjZYAiJGS8N/IpPxerNjqd3QKJhqQgo+aBQLeBvF2wPVwZNVt0oLnVHsaOV
+         hlvfOdDZZMLwpPbDM10vX9QrErjWXADfbDvn29FSxJ/430MiImJADSVJFMqJR9IOlFE1
+         RSm92I1W+GQ94NUm8ad0slwqOQZs2qfUMveu1aMlKmpRd2jjmyNci6UAMAea/ivN7l6M
+         BavBfw46xSJit9Jmoh8kBHgiPcW+Bk0iyVyRAUwn/0QmXm4Mu2XyoT0FMLxwiUXHaT+7
+         jqsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=0qYc7zo9q4mH+VB7LGfbG7ehTTp09ga1jRkGeVXlRPU=;
-        b=fdHQpSPrMeO4EcddIY3Wrt+Y7xb8BlFkIhCrW8nLBaBDWwYV0Lnxm4HeUqoSNm1nUQ
-         E+e0Xa4wC5zyvuVWaaOqSzZgbwsbEBvEUXXDMUSMRQJrx42Lb9r3+A0/PY7gQeX3Smre
-         WDQkYsy2qTeW7jiRGYI6vnEzPCs1idvR9NAL0K0Ds0g71b8WdCCDaraUA5pb4hJrR3d0
-         yWUCruc2YYfFfgBATpLxd4OjTVrMUeWWs5ZiKgnZfMKlaTAjdT63rAWNS70P7FUx6glB
-         kvWLcHUhAARBfirOYGZcwB+sH4O7CZrYrzZeYwCK0pABjBjQw5mmiXGVsZg/cp5EUl1G
-         SZ1w==
-X-Gm-Message-State: AOAM531XHxdxp3rWlCb3LsDnwX6/9bBSU6tPuOQ6rtQkCqoT5U5F57tG
-	yp0V631VC+WAEWhL17vuofiHFCzLu9Fjgw==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=bJiDEnV+feyMeNuL7sm2opkrGhoYQWLMB/dMQ/Seg70=;
+        b=q3DofOz4p5CZhafp+n9T8NwRrBJsmtVb0hnkpEJlI5jeyji4OsYmVWzphTB/DKWyZ0
+         f0i7qDfqhPfqyJV9Pxy1qLNOeziY8wLBivlhc8LR2oTHr3apSz3g+fEv6UQycuricuUL
+         vgFLkHgsrRtsJYyudaCPgQMQg8yBbZOjv8r/eoKa35XSu3jFhz9+pFZZhBaB3nBdKV8d
+         oOlRC+VZYpDu1h6yTqMQNSM9Y7cmu2WHypU+3FTN8mSI6pNuRCGAj2S8BBwS4IEPrWv6
+         5P4oFpXa4bs8djMyly9sEJ6FNwGE/nwqojW4NJf/5cAKLer/u4mqrXIGUU1NMBAZvgE6
+         asXw==
+X-Gm-Message-State: AOAM532mCuYidWixZmcbHkPIwTzPd8SbX0Klmj6rjPZ8C6bQNx+pQ6Df
+	RgvS5/a8zjETbC1PjMLG8z0sJUv4ZWAt1A==
 X-Google-Smtp-Source: 
- ABdhPJzAk71SEuxVLfFTxUnHTr4kComiwA/hsyfzOW48bEUqHsNyjn06QXTwp/PqKhBhf3Xz4WtuVQ==
-X-Received: by 2002:a05:6a00:1810:b0:4e1:2d4f:14aa with SMTP id
- y16-20020a056a00181000b004e12d4f14aamr15906980pfa.43.1645948730697;
-        Sat, 26 Feb 2022 23:58:50 -0800 (PST)
+ ABdhPJy93dl+TMy2iFin+nDsOQ5/moMryecOP9g1la8bE4ETOly/5VUQ+JiJTaxWFDhGPnAxvABpkw==
+X-Received: by 2002:a63:407:0:b0:373:a770:b1c with SMTP id
+ 7-20020a630407000000b00373a7700b1cmr12921938pge.93.1645948731690;
+        Sat, 26 Feb 2022 23:58:51 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::1a20])
         by smtp.gmail.com with ESMTPSA id
  a22-20020a056a000c9600b004f10137a096sm9012845pfv.50.2022.02.26.23.58.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 26 Feb 2022 23:58:50 -0800 (PST)
+        Sat, 26 Feb 2022 23:58:51 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/6] python3-apt: Point PYPA_WHEEL to custom location
-Date: Sat, 26 Feb 2022 23:58:43 -0800
-Message-Id: <20220227075848.610467-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/6] cxxtest: Define PIP_INSTALL_DIST_PATH
+Date: Sat, 26 Feb 2022 23:58:44 -0800
+Message-Id: <20220227075848.610467-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220227075848.610467-1-raj.khem@gmail.com>
+References: <20220227075848.610467-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 27 Feb 2022 07:58:52 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 27 Feb 2022 07:58:53 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95554
+ https://lists.openembedded.org/g/openembedded-devel/message/95555
 
-Standard deduction logic does not work so help the system a bit
+Helps to find the wheel file
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-devtools/python/python3-apt_2.3.0.bb | 2 ++
+ meta-oe/recipes-test/cxxtest/cxxtest_4.4.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/python/python3-apt_2.3.0.bb b/meta-oe/recipes-devtools/python/python3-apt_2.3.0.bb
-index 6463f49bb5..183836f406 100644
---- a/meta-oe/recipes-devtools/python/python3-apt_2.3.0.bb
-+++ b/meta-oe/recipes-devtools/python/python3-apt_2.3.0.bb
-@@ -10,6 +10,8 @@ SRCREV = "6145b6484d220685edfd922d364afbf065127efe"
- S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-test/cxxtest/cxxtest_4.4.bb b/meta-oe/recipes-test/cxxtest/cxxtest_4.4.bb
+index 65b54ed548..b87972f413 100644
+--- a/meta-oe/recipes-test/cxxtest/cxxtest_4.4.bb
++++ b/meta-oe/recipes-test/cxxtest/cxxtest_4.4.bb
+@@ -10,6 +10,8 @@ SRC_URI[sha256sum] = "1c154fef91c65dbf1cd4519af7ade70a61d85a923b6e0c0b007dc7f489
  
  inherit setuptools3
-+PIP_INSTALL_PACKAGE = "python_apt"
-+PYPA_WHEEL = "${PIP_INSTALL_DIST_PATH}/${PIP_INSTALL_PACKAGE}-0.0.0-*.whl"
  
- DEPENDS += "apt"
- RDEPENDS:${PN} += "apt python3-core"
++PIP_INSTALL_DIST_PATH = "${B}/python/python3/dist"
++
+ SETUPTOOLS_SETUP_PATH = "${S}/python"
+ 
+ do_install:append() {
 -- 
 2.35.1
 
