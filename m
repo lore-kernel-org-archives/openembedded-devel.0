@@ -2,150 +2,159 @@ Return-Path: <jsbronder@cold-front.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A915C433EF
-	for <webhook@archiver.kernel.org>; Mon, 28 Feb 2022 22:56:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE525C433EF
+	for <webhook@archiver.kernel.org>; Mon, 28 Feb 2022 22:59:22 +0000 (UTC)
 Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
  [66.111.4.28])
- by mx.groups.io with SMTP id smtpd.web08.1846.1646088996504568745
+ by mx.groups.io with SMTP id smtpd.web09.1904.1646089161311207802
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 14:56:37 -0800
+ Mon, 28 Feb 2022 14:59:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@cold-front.org header.s=mesmtp header.b=XqKdjg8g;
+ dkim=pass header.i=@cold-front.org header.s=mesmtp header.b=WS7y1yDG;
  spf=pass (domain: cold-front.org, ip: 66.111.4.28,
  mailfrom: jsbronder@cold-front.org)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
-	by mailout.nyi.internal (Postfix) with ESMTP id D95F55C0069
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+	by mailout.nyi.internal (Postfix) with ESMTP id 9DC555C02B3
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 17:56:35 -0500 (EST)
+ Mon, 28 Feb 2022 17:59:20 -0500 (EST)
 Received: from mailfrontend2 ([10.202.2.163])
-  by compute2.internal (MEProxy); Mon, 28 Feb 2022 17:56:35 -0500
+  by compute3.internal (MEProxy); Mon, 28 Feb 2022 17:59:20 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
 	 h=cc:content-type:date:date:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to; s=mesmtp; bh=0rinFHWDk+dYyYNTrUHebqtokmSJkLrvSl/
-	e97GsHyY=; b=XqKdjg8gJQml44zt8uEmFOtusZjiJoaxFWOjkQZJX1A6YEk8xvq
-	FcR7CIIi16G+0LpS1xr82USoJdOFmI3Cf2/Agt2n3UOuXCL6DZWc8DbCAg9H4cmy
-	nUF2yoThacU7rhbXNvEbqglT7BnQXrcNXFfW9NyWP/dzkU/qQgwcqGPI=
+	:subject:to:to; s=mesmtp; bh=xSdFGWs8pjhudMWGoFopUGM1eI/1+Z1W/0+
+	yxsq1ds8=; b=WS7y1yDGi83BBR3g8WKCZPxieskjAIhqgkWKkVifXRhUzHA+KC4
+	IT0U1w9zacUambWQVz2J9yE05QXuULmkNNDAuc69cmu0Cb5UPgCjOF2mM2BLL6Nv
+	uDWwACdPk9MEW3YwOEdLvHn4eaNs2w1a3/AgC5r9El0qQBDADLMz55OI=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:content-type:date:date:from:from
 	:in-reply-to:in-reply-to:message-id:mime-version:references
 	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=0rinFHWDk+dYyYNTr
-	UHebqtokmSJkLrvSl/e97GsHyY=; b=UNwQfItgnIFd7x9+SeKikk3BibGOOOHIy
-	1SvkU/NLYWLT9PDmiSBw979pqyQz2Rzc2UwAqUCMBRM9BYx7UYySkEdHXX12ul/X
-	hIHyYSsmjI/gtYxHpfyqEH6wzQCXRD3dO+KTyt4m5GsSaCmjbvdPTl2+Y6FpJa4x
-	mTQ5OeXNXYAI/FVreCscuCRS2bIIYZ58WEsrpM3CDHsk3a6LYMYCcadQJogGFEBA
-	DUml3wX6T8GZjZ1c8PlQj7FJjsqxigmor4sun0y8VJwNW+kDtxIb38Ifwksp3o9Z
-	r+sQEf4Z38X06VxgN1PqMTrfuPsb0+ygcrLyU+WYR/zaIKzxpZsNQ==
-X-ME-Sender: <xms:I1MdYgQhU-6Y3wXNwLuhPMQG7aWPqa21Qzkiefv5QFtE7jGv2CWp3Q>
-    <xme:I1MdYtzCtFhly6Ms6A-mWaytoqvj6XJyzafHi5M7MnledWoN--rpocll2daOU0FDd
-    X9MKZpzlnridX7xCQ>
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=xSdFGWs8pjhudMWGo
+	FopUGM1eI/1+Z1W/0+yxsq1ds8=; b=kmBk6kNILIGlBhqocR3kBdgzUejcWj4JC
+	5Fuz7gjNaSpFyV7E959YMQUqQ4+pSRSdpTJFw5/+boilpPIqd0fSxW4SYd8C03v0
+	iuwNVEJYgwwv/O1BytqC2bwbqror+QC+lD/6ogz0LoZQ0LrxrLuQoPGMvI2+kogl
+	zb2PUoxCPKHmk7qGEZCC3Fa7NcpsM08MI3cz3PLNyc7SNfXclQ2YLONIg3crOuSk
+	XmF6hYOoTvV+5bC69Uxdcf2tOMe6jkN3RNM1XZpxFb8ZVyGXm3FDi9AgHvAYvpZU
+	Lcxv/MjQcVxY9mc19ApbmWdz6cQ94ZvYZdDdu17osC6pjwdDtmrDw==
+X-ME-Sender: <xms:yFMdYiDixu4jkm9YEw2kvQ4APWNpdwH8LB9SRECnDIOAmotcccCxgw>
+    <xme:yFMdYsgjTddpRbQBQqm2ZODtXRwivtCSxgiC5KLoVPueAMsuSM4pXTJCbh5_CwdhL
+    tgUwW0Wa_DwO9cUjQ>
 X-ME-Received: 
- <xmr:I1MdYt33OI6gO-AWq0AbXKwjRVtuCO0HjLw-sGnkLrPLsBZTQjgMoLDaBGzbwMDuBuoZbhk6qTI-sAWUdLxsuRCU>
+ <xmr:yFMdYllEvl0yV6oeXJBl1l7YWQy3D7z5FRNv0NhmYm5rVJFOafdB0Qx1k4j2WaxWARCQ7p0kN_kM4qU3Vs57vwyp>
 X-ME-Proxy-Cause: 
- gggruggvucftvghtrhhoucdtuddrgedvvddruddtuddgtdefucetufdoteggodetrfdotf
+ gggruggvucftvghtrhhoucdtuddrgedvvddruddtuddgtdegucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucenucfjughrpeffhffvuffkfhggtggujgesthdtre
-    dttddtvdenucfhrhhomheplfhushhtihhnuceurhhonhguvghruceojhhssghrohhnuggv
-    rhestgholhguqdhfrhhonhhtrdhorhhgqeenucggtffrrghtthgvrhhnpeegvedtgfekue
-    evgfdugfdvjeeitddufffgueegteelkeehueegueeigeevhffgvdenucevlhhushhtvghr
-    ufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjshgsrhhonhguvghrsegtoh
-    hlugdqfhhrohhnthdrohhrgh
-X-ME-Proxy: <xmx:I1MdYkCDkSeaTyLPn-Bb0hH0Fgh_OwRjho-a3uK5UE3Bf4ZhzBv9SA>
-    <xmx:I1MdYpgmJFA2gJK8WVsOsmOw02_bs1RKk2rdrsqol_58w05I_1GMmQ>
-    <xmx:I1MdYgqbF39dwuzREgao9MMLFKTtR6oIiPTAG794ayofFufpHhmRog>
-    <xmx:I1MdYjf14_F0fcIwRrZE_-qIxMeukwAxAmHXvaIXlD1WAlWPlmR6Fg>
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhepfffhvffukfhfgggtuggjsehttdertddttddvnecuhfhrohhmpefluhhsthhi
+    nhcuuehrohhnuggvrhcuoehjshgsrhhonhguvghrsegtohhlugdqfhhrohhnthdrohhrgh
+    eqnecuggftrfgrthhtvghrnhepfeehudfhhfffffeukedvhfetleffkeeuheeutefhfeel
+    vddthffgffetveeujeelnecuffhomhgrihhnpeihohgtthhophhrohhjvggtthdrohhrgh
+    dpghhithhhuhgsrdgtohhmpdhophgvnhgvmhgsvgguuggvugdrohhrghenucevlhhushht
+    vghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjshgsrhhonhguvghrse
+    gtohhlugdqfhhrohhnthdrohhrgh
+X-ME-Proxy: <xmx:yFMdYgx8WlAeKSXyLSiv0ocYN0ws_rJFMxQbvB6IB5mKH2A0gSsG5g>
+    <xmx:yFMdYnRdTYH71m1hC6H2P2xLfigzrgykjkn4eE_r1SB6LM63h6Nj2Q>
+    <xmx:yFMdYraevc_aCO7bhMNpdiWubEjjxyQTETNCTGMJ2uexyhiyDGtgTw>
+    <xmx:yFMdYqMH1318Gm5d1gpVO1cUqTszit0rL530g79tBdBDKjEq5RPa4g>
 Received: by mail.messagingengine.com (Postfix) with ESMTPA for
  <openembedded-devel@lists.openembedded.org>; Mon,
- 28 Feb 2022 17:56:35 -0500 (EST)
-Date: Mon, 28 Feb 2022 17:56:35 -0500
+ 28 Feb 2022 17:59:20 -0500 (EST)
+Date: Mon, 28 Feb 2022 17:59:20 -0500
 From: Justin Bronder <jsbronder@cold-front.org>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: python3-termcolor: Use setuptools instead of distutils
-Message-ID: <Yh1TI+NaXzec30cv@ravine.members.linode.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: python3-configobj: drop recipe
+Message-ID: <Yh1TyAUZz6bCAIba@ravine.members.linode.com>
 Mail-Followup-To: Justin Bronder <jsbronder@cold-front.org>,
-	openembedded-devel@lists.openembedded.org
-References: <20220228224810.218466-1-raj.khem@gmail.com>
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <20220228222206.25716-1-jsbronder@cold-front.org>
+ <CAMKF1sppTUJmQQ0QgfE0j3i7ZqRAATPLA+2o3sKy1_Cd_3d51g@mail.gmail.com>
+ <CAMKF1sq5Z5Vwx60Kym1wV8uN5taFeZ0dOxZ4EW4eY_6bkzCasQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20220228224810.218466-1-raj.khem@gmail.com>
+In-Reply-To: 
+ <CAMKF1sq5Z5Vwx60Kym1wV8uN5taFeZ0dOxZ4EW4eY_6bkzCasQ@mail.gmail.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Feb 2022 22:56:37 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Feb 2022 22:59:22 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95607
+ https://lists.openembedded.org/g/openembedded-devel/message/95608
 
-So, am I right to stand corrected that patching stagnant projects to use
-distutils over setuptools is preferable to dropping the recipe?  I had assumed
-from other distribution work that cleaning things out when the opportunity arose
-was the norm.  If so, I'll stop trying to figure out if upstream is active and
-will fix the package along with sending patch upstream.
-
-Regardless,
-
-Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
-
-On 28/02/22 14:48 -0800, Khem Raj wrote:
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Cc: Justin Bronder <jsbronder@cold-front.org>
-> ---
->  ...-Use-setuptools-instead-of-distutils.patch | 27 +++++++++++++++++++
->  .../python/python3-termcolor_1.1.0.bb         |  3 ++-
->  2 files changed, 29 insertions(+), 1 deletion(-)
->  create mode 100644 meta-python/recipes-devtools/python/python3-termcolor/0001-setup.py-Use-setuptools-instead-of-distutils.patch
+On 28/02/22 14:38 -0800, Khem Raj wrote:
+> oh well Tim already fixed it, I would suggest you use master-next for
+> this work since it has latest collaborations from everyone.
 > 
-> diff --git a/meta-python/recipes-devtools/python/python3-termcolor/0001-setup.py-Use-setuptools-instead-of-distutils.patch b/meta-python/recipes-devtools/python/python3-termcolor/0001-setup.py-Use-setuptools-instead-of-distutils.patch
-> new file mode 100644
-> index 0000000000..a55a6a914b
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-termcolor/0001-setup.py-Use-setuptools-instead-of-distutils.patch
-> @@ -0,0 +1,27 @@
-> +From e30308284c721210e2ba50d8b3d159cedf5eada8 Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Mon, 28 Feb 2022 14:44:42 -0800
-> +Subject: [PATCH] setup.py: Use setuptools instead of distutils
-> +
-> +Upstream-Status: Pending
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> + setup.py | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/setup.py b/setup.py
-> +index c4fe4ed..dad1d29 100755
-> +--- a/setup.py
-> ++++ b/setup.py
-> +@@ -23,7 +23,7 @@
-> + # Author: Konstantin Lepa <konstantin.lepa@gmail.com>
-> + 
-> + import os
-> +-from distutils.core import setup
-> ++from setuptools import setup
-> + 
-> + prjdir = os.path.dirname(__file__)
-> + 
-> +-- 
-> +2.35.1
-> +
-> diff --git a/meta-python/recipes-devtools/python/python3-termcolor_1.1.0.bb b/meta-python/recipes-devtools/python/python3-termcolor_1.1.0.bb
-> index 17df7f983d..15bab622a6 100644
-> --- a/meta-python/recipes-devtools/python/python3-termcolor_1.1.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-termcolor_1.1.0.bb
-> @@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=809e8749b63567978acfbd81d9f6a27d"
->  
->  inherit pypi setuptools3
->  
-> -SRC_URI[md5sum] = "043e89644f8909d462fbbfa511c768df"
-> +SRC_URI += "file://0001-setup.py-Use-setuptools-instead-of-distutils.patch"
-> +
->  SRC_URI[sha256sum] = "1d6d69ce66211143803fbc56652b41d73b4a400a2891d7bf7a1cdf4c02de613b"
->  
->  BBCLASSEXTEND = "native"
-> -- 
-> 2.35.1
+> https://patchwork.yoctoproject.org/project/oe/patch/20220227234254.1089695-1-tim.orling@konsulko.com/
+
+Ah, will do.  I was just searching subject lines for patches posted to this list
+and missed the typo in the subject line ;)
+
 > 
+> On Mon, Feb 28, 2022 at 2:32 PM Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > Thanks for looking into this, Armin added this recipe in 2020, I would
+> > like to hear from him as well on what this recipe's future plans are.
+> >
+> > On Mon, Feb 28, 2022 at 2:22 PM Justin Bronder <jsbronder@cold-front.org> wrote:
+> > >
+> > > The last official release, 5.0.6 is from 2014 and does not build with
+> > > bdist_wheel.  The upstream repository does appear active but it's
+> > > unclear if anyone has the ability/motivation to tag a new release or
+> > > upload it to PyPI.  If you depend upon this recipe, please work with
+> > > upstream to tag a PEP-517 compliant release.
+> > >
+> > > https://github.com/DiffSK/configobj/issues/160
+> > > https://github.com/DiffSK/configobj/issues/197
+> > > https://github.com/DiffSK/configobj/issues/204
+> > >
+> > > Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
+> > > ---
+> > >  .../packagegroups/packagegroup-meta-python.bb            | 1 -
+> > >  .../recipes-devtools/python/python3-configobj_5.0.6.bb   | 9 ---------
+> > >  2 files changed, 10 deletions(-)
+> > >  delete mode 100644 meta-python/recipes-devtools/python/python3-configobj_5.0.6.bb
+> > >
+> > > diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> > > index dbfa991ebe..6b10913657 100644
+> > > --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> > > +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> > > @@ -81,7 +81,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
+> > >      python3-colorlog \
+> > >      python3-colorzero \
+> > >      python3-configargparse \
+> > > -    python3-configobj \
+> > >      python3-configparser \
+> > >      python3-configshell-fb \
+> > >      python3-constantly \
+> > > diff --git a/meta-python/recipes-devtools/python/python3-configobj_5.0.6.bb b/meta-python/recipes-devtools/python/python3-configobj_5.0.6.bb
+> > > deleted file mode 100644
+> > > index 1b85368105..0000000000
+> > > --- a/meta-python/recipes-devtools/python/python3-configobj_5.0.6.bb
+> > > +++ /dev/null
+> > > @@ -1,9 +0,0 @@
+> > > -SUMMARY = "Config file reading, writing and validation."
+> > > -SECTION = "devel/python"
+> > > -LICENSE = "BSD-3-Clause"
+> > > -LIC_FILES_CHKSUM = "file://configobj.py;md5=a7c3968dd866dfd23e91e125b669ab21"
+> > > -
+> > > -PYPI_PACKAGE = "configobj"
+> > > -SRC_URI[sha256sum] = "a2f5650770e1c87fb335af19a9b7eb73fc05ccf22144eb68db7d00cd2bcb0902"
+> > > -
+> > > -inherit pypi setuptools3
+> > > --
+> > > 2.35.1
+> > >
+> > >
+> > > -=-=-=-=-=-=-=-=-=-=-=-
+> > > Links: You receive all messages sent to this group.
+> > > View/Reply Online (#95601): https://lists.openembedded.org/g/openembedded-devel/message/95601
+> > > Mute This Topic: https://lists.openembedded.org/mt/89462996/1997914
+> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> > > -=-=-=-=-=-=-=-=-=-=-=-
+> > >
 
 -- 
 Justin Bronder
