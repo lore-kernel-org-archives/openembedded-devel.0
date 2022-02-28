@@ -2,181 +2,135 @@ Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F1B7C433EF
-	for <webhook@archiver.kernel.org>; Mon, 28 Feb 2022 16:03:47 +0000 (UTC)
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com
- [209.85.208.54])
- by mx.groups.io with SMTP id smtpd.web08.21858.1646064226094630168
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F0482C433EF
+	for <webhook@archiver.kernel.org>; Mon, 28 Feb 2022 16:18:22 +0000 (UTC)
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com
+ [209.85.210.181])
+ by mx.groups.io with SMTP id smtpd.web10.21558.1646065102495298130
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 08:03:46 -0800
+ Mon, 28 Feb 2022 08:18:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=FH3wAjL+;
- spf=pass (domain: gmail.com, ip: 209.85.208.54, mailfrom: ticotimo@gmail.com)
-Received: by mail-ed1-f54.google.com with SMTP id s14so18330820edw.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=IbfRcY2f;
+ spf=pass (domain: gmail.com, ip: 209.85.210.181,
+ mailfrom: ticotimo@gmail.com)
+Received: by mail-pf1-f181.google.com with SMTP id y11so11414670pfa.6
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 08:03:45 -0800 (PST)
+ Mon, 28 Feb 2022 08:18:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=OfHrjCJhUrF1bvEMI+q3e+zWuwaoBGdTeJHHGOu8r74=;
-        b=FH3wAjL+xpORmkEWHM5pEskaBGmzyrj8oY3WsGsZ2jWtmRNzQDtJBHVPEJ9RP//UpU
-         +pBsEyB5F/IucPR8qU7hqx2FKLZZauNdGAtXcrnIx2Wj5+QP0JtzK/iftq3vn8gC7w+i
-         neNOk0+GjGzerHHaUsBrWSoMbrhOc6yxcXi06AA0N47pKPIkOZcNPrITU4kN90vQFgTf
-         lOWxsotEpvDk1He2IjgmorFyGTImAPA2G2Vh2+ophocrn3tOqrzsVSSOASa6DhC35qxG
-         BVjty+nXw0KXemufzrbbkMcHZZpyHnU3BXIuB/sCc05amz4LyKF53T0b3xWO1EKK815l
-         bYVQ==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=L6d5KLPSpPrHGX1C7pjOv7F3yJXSmT3wuCP51K4oSL4=;
+        b=IbfRcY2fA34bwTaMKnnhQapzSltB2Oke1QVSS/2PGHOfC2LjZ3jO28LUU3CQBRJyAQ
+         bQ27+Nu14ofreTzBvcdR3mgvPtZ5k+9YCRIA8we7p3mwR0qTmzC2gMEuVyFA0MYtpzyD
+         8i46hHjaEK2TKARNIKsxFsFXLWvUZJi94fR3kVObeLV3fu7DWNQ2zA8FnjvAitfj8yct
+         FX5LWF9EPtriEzpCehs49SCtg4ry0YeqD6RK6g9Cq+B66vYDE+vP4mz9aGozuwQsGgrx
+         lz2/dTqsgVKgJh8By0ncsd1debBOQMQ8qzNS19JGfSmlWMSMzmdO9WLTh9DHPXntxE0E
+         wpAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=OfHrjCJhUrF1bvEMI+q3e+zWuwaoBGdTeJHHGOu8r74=;
-        b=3fQmrHSu0BjS1WIXQohSfHteaQsnxzndKZeYbAXh9d4DIu//U5wwh760eB+iyMKzUn
-         nmOKjC8Q8+1k8Fc4wigesQEDaroqeBfdQpE4SUI55MrFLIjIiWyArdKjv6kpFPkID23B
-         Ok+Q/4GnY8oQzV5mUQ1ca4PlC7c3gYV9qLYChwkzMXs3dJrRu+lMOJcVlNLJrYxKLX/n
-         oyoLCtzS307akcLDTmwPwlNrpu3PqVv8Iabot/d3IbCiGn9eTPFrN3OpKE5nEXil3bC5
-         27akXh5XFApgSS4HiuqSjp8h7M1TMnyS/3osQMv+4J7nV9ZmdcG4PlJQh83SnNPH8+yW
-         EGLQ==
-X-Gm-Message-State: AOAM531gJmAHZ0x/RNzgWA6tbT0rU6TIuySgK9qMzUH+LFA2oy0qhICb
-	hhK0tq7+pIs59ORjejJnSL/fc8Bi30lnZ4W+G4M=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=L6d5KLPSpPrHGX1C7pjOv7F3yJXSmT3wuCP51K4oSL4=;
+        b=MG7Q6hnwgAxQf/aXCfleIeop9olMNEJr2QHMebAAGRlLD0bqz7kRm8+IX54hiupNd+
+         f0Qcq93w8/5v+MKsQbm2SjwNsTgbxfLlqEdX/SP6aKW5zyVLZYopMQhQ9vRrT8qf6CUe
+         blDrWgSCLbI2JErowii4PUikTL1MXPrSMkEUUMqJRRs7IQHSnIhdTD7D8DeidXckQlM/
+         /5K5HwAO8DquaoGYgyKMqT/78Nfh65xonlH+b+8ttWwOkHCnRcLozhOQ2G7sJGtTqgXR
+         WoJIx5j6xNUa0tfODDPJQga0qoWKD6bIEWptiyjxeEYev29c6KzZ/lnRymzs6TMoNUMR
+         3yeA==
+X-Gm-Message-State: AOAM532O9FQm1uex6ZuZ7y6Cs449dxWtmAcG8V/gVIHEpwhSb43Ce3cJ
+	LTXx7UsTksNQXQiwxeyxAZqdFDK3RnI=
 X-Google-Smtp-Source: 
- ABdhPJzmT5EclB5BM6g7i6nyKqz8P4gBFNbwWyglncuN2DTJJ7fgFu1Xd9eN/tyGSLEQxwVFCy/9YsgLTySgVEJk+0I=
-X-Received: by 2002:a05:6402:4c6:b0:410:b8e5:334 with SMTP id
- n6-20020a05640204c600b00410b8e50334mr20003388edw.321.1646064224450; Mon, 28
- Feb 2022 08:03:44 -0800 (PST)
-MIME-Version: 1.0
-References: <20220228155234.1053650-1-troth@openavr.org>
-In-Reply-To: <20220228155234.1053650-1-troth@openavr.org>
+ ABdhPJwExmQ9CZuAd79xAzGrmrXWe2CZfFsDZMWXPyQD5Y8fYoAoZ4Oy4423t4GXj1pJm0EeGuR5Ng==
+X-Received: by 2002:a65:6803:0:b0:378:9366:3849 with SMTP id
+ l3-20020a656803000000b0037893663849mr5369013pgt.484.1646065101536;
+        Mon, 28 Feb 2022 08:18:21 -0800 (PST)
+Received: from nereus.hsd1.or.comcast.net
+ ([2601:1c0:6000:1b20:1961:a694:c80b:3158])
+        by smtp.gmail.com with ESMTPSA id
+ q10-20020a056a00084a00b004f26d3f5d8fsm14053668pfk.25.2022.02.28.08.18.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 28 Feb 2022 08:18:20 -0800 (PST)
 From: Tim Orling <ticotimo@gmail.com>
-Date: Mon, 28 Feb 2022 08:03:33 -0800
-Message-ID: 
- <CANx9H-Cw0Ro7bGk=akTNAw_00ghWP-4NYi0ZJGCu1Qbb4TEBsA@mail.gmail.com>
-Subject: Re: [oe] [PATCH] python3-marshmallow: fix wheel build
-To: "Theodore A. Roth" <troth@openavr.org>
-Cc: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>,
-	"Theodore A . Roth" <theodore_roth@trimble.com>
-Content-Type: multipart/alternative; boundary="000000000000603dca05d916313e"
+X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Tim Orling <tim.orling@konsulko.com>
+Subject: [meta-python][PATCH] python3-sdnotify: patch to use setuptools
+Date: Mon, 28 Feb 2022 08:18:16 -0800
+Message-Id: <20220228161816.1259930-1-tim.orling@konsulko.com>
+X-Mailer: git-send-email 2.30.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Feb 2022 16:03:47 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Feb 2022 16:18:22 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95586
+ https://lists.openembedded.org/g/openembedded-devel/message/95587
 
---000000000000603dca05d916313e
-Content-Type: text/plain; charset="UTF-8"
+setup.py bdist_wheel does not work with distutils (which is deprecated
+anyway). Add a patch to switch to setuptools to allow the wheel to be
+built.
 
-On Mon, Feb 28, 2022 at 7:52 AM Theodore A. Roth <troth@openavr.org> wrote:
+Signed-off-by: Tim Orling <tim.orling@konsulko.com>
+---
+ .../0001-setup.py-switch-to-setuptools.patch  | 31 +++++++++++++++++++
+ .../python/python3-sdnotify_0.3.2.bb          |  3 +-
+ 2 files changed, 33 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-sdnotify/0001-setup.py-switch-to-setuptools.patch
 
-> Recipe does not inherit pypi nor would PN be a good guess at the name of
-> the wheel. Set PIP_INSTALL_PACKAGE appropriately.
->
-> Signed-off-by: Theodore A. Roth <theodore_roth@trimble.com>
-> Signed-off-by: Theodore A. Roth <troth@openavr.org>
->
-Reviewed-by: TIm Orling <tim.orling@konsulko.com>
+diff --git a/meta-python/recipes-devtools/python/python3-sdnotify/0001-setup.py-switch-to-setuptools.patch b/meta-python/recipes-devtools/python/python3-sdnotify/0001-setup.py-switch-to-setuptools.patch
+new file mode 100644
+index 0000000000..cf7696aa63
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-sdnotify/0001-setup.py-switch-to-setuptools.patch
+@@ -0,0 +1,31 @@
++From f662280b26eb1549890e88e8e9085f1937d7962d Mon Sep 17 00:00:00 2001
++From: Tim Orling <tim.orling@konsulko.com>
++Date: Mon, 28 Feb 2022 07:54:03 -0800
++Subject: [PATCH] setup.py: switch to setuptools
++
++In Python 3.10, 'distutils' is deprecated and is slated for removal in
++Python 3.12.
++
++Switch from distutils.core to setuptools. This also allows the 'wheel'
++binary archive format to be built with 'setup.py bdist_wheel'.
++
++Upstream-Status: Submitted [https://github.com/bb4242/sdnotify/pull/7]
++
++Signed-off-by: Tim Orling <tim.orling@konsulko.com>
++---
++ setup.py | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/setup.py b/setup.py
++index 433222c..32b5bd6 100644
++--- a/setup.py
+++++ b/setup.py
++@@ -1,4 +1,4 @@
++-from distutils.core import setup
+++from setuptools import setup
++ 
++ VERSION='0.3.2'
++ 
++-- 
++2.30.2
++
+diff --git a/meta-python/recipes-devtools/python/python3-sdnotify_0.3.2.bb b/meta-python/recipes-devtools/python/python3-sdnotify_0.3.2.bb
+index 221a8c8717..dc1961ac30 100644
+--- a/meta-python/recipes-devtools/python/python3-sdnotify_0.3.2.bb
++++ b/meta-python/recipes-devtools/python/python3-sdnotify_0.3.2.bb
+@@ -12,7 +12,8 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=cc572ccc4b18a4b7d13be5d01bc8213e"
+ 
+-SRC_URI[md5sum] = "749ddca1c70be1697fecc443fb1fdb16"
+ SRC_URI[sha256sum] = "73977fc746b36cc41184dd43c3fe81323e7b8b06c2bb0826c4f59a20c56bb9f1"
+ 
++SRC_URI += "file://0001-setup.py-switch-to-setuptools.patch"
++
+ inherit setuptools3 pypi
+-- 
+2.30.2
 
-> ---
->  .../recipes-devtools/python/python3-marshmallow_3.14.1.bb       | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/meta-python/recipes-devtools/python/
-> python3-marshmallow_3.14.1.bb b/meta-python/recipes-devtools/python/
-> python3-marshmallow_3.14.1.bb
-> index ddfe4b99c..dc5f17388 100644
-> --- a/meta-python/recipes-devtools/python/python3-marshmallow_3.14.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-marshmallow_3.14.1.bb
-> @@ -15,4 +15,6 @@ S = "${WORKDIR}/git"
->
->  inherit setuptools3
->
-> +PIP_INSTALL_PACKAGE = "marshmallow"
-> +
->  RDEPENDS:${PN} += "python3-core"
-> --
-> 2.25.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#95584):
-> https://lists.openembedded.org/g/openembedded-devel/message/95584
-> Mute This Topic: https://lists.openembedded.org/mt/89453269/924729
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> ticotimo@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
->
-
---000000000000603dca05d916313e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Mon, Feb 28, 2022 at 7:52 AM Theod=
-ore A. Roth &lt;<a href=3D"mailto:troth@openavr.org">troth@openavr.org</a>&=
-gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
-px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Recip=
-e does not inherit pypi nor would PN be a good guess at the name of<br>
-the wheel. Set PIP_INSTALL_PACKAGE appropriately.<br>
-<br>
-Signed-off-by: Theodore A. Roth &lt;<a href=3D"mailto:theodore_roth@trimble=
-.com" target=3D"_blank">theodore_roth@trimble.com</a>&gt;<br>
-Signed-off-by: Theodore A. Roth &lt;<a href=3D"mailto:troth@openavr.org" ta=
-rget=3D"_blank">troth@openavr.org</a>&gt;<br></blockquote><div>Reviewed-by:=
- TIm Orling &lt;<a href=3D"mailto:tim.orling@konsulko.com">tim.orling@konsu=
-lko.com</a>&gt;=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margi=
-n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
-">
----<br>
-=C2=A0.../recipes-devtools/python/<a href=3D"http://python3-marshmallow_3.1=
-4.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-marshmallow_3.14.1.bb<=
-/a>=C2=A0 =C2=A0 =C2=A0 =C2=A0| 2 ++<br>
-=C2=A01 file changed, 2 insertions(+)<br>
-<br>
-diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
-marshmallow_3.14.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-marshma=
-llow_3.14.1.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://=
-python3-marshmallow_3.14.1.bb" rel=3D"noreferrer" target=3D"_blank">python3=
--marshmallow_3.14.1.bb</a><br>
-index ddfe4b99c..dc5f17388 100644<br>
---- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-marshma=
-llow_3.14.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-marshmallow_3.=
-14.1.bb</a><br>
-+++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-marshma=
-llow_3.14.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-marshmallow_3.=
-14.1.bb</a><br>
-@@ -15,4 +15,6 @@ S =3D &quot;${WORKDIR}/git&quot;<br>
-<br>
-=C2=A0inherit setuptools3<br>
-<br>
-+PIP_INSTALL_PACKAGE =3D &quot;marshmallow&quot;<br>
-+<br>
-=C2=A0RDEPENDS:${PN} +=3D &quot;python3-core&quot;<br>
--- <br>
-2.25.1<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#95584): <a href=3D"https://lists.openembedded.org/g/ope=
-nembedded-devel/message/95584" rel=3D"noreferrer" target=3D"_blank">https:/=
-/lists.openembedded.org/g/openembedded-devel/message/95584</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/89453269/9247=
-29" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt/=
-89453269/924729</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
-et=3D"_blank">ticotimo@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---000000000000603dca05d916313e--
 
