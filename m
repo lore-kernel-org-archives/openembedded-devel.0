@@ -1,121 +1,94 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <troth@openavr.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66297C433EF
-	for <webhook@archiver.kernel.org>; Mon, 28 Feb 2022 14:14:14 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.66])
- by mx.groups.io with SMTP id smtpd.web12.20023.1646057653066418497
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B0D8C433EF
+	for <webhook@archiver.kernel.org>; Mon, 28 Feb 2022 15:22:52 +0000 (UTC)
+Received: from mail-il1-f179.google.com (mail-il1-f179.google.com
+ [209.85.166.179])
+ by mx.groups.io with SMTP id smtpd.web11.21062.1646061771391203719
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 06:14:13 -0800
+ Mon, 28 Feb 2022 07:22:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=gnOyK/oH;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.66,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1646057651; i=@fujitsu.com;
-	bh=mReKJ3GtRRgzdBmQ3hy4lGt72gdkeIuL0BhIYpAeJms=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=gnOyK/oH44+DIwUZVM+cN+D60GQJ4t9rZDs2wIRqaXXgT6YTvuf5jLuhxI7dLBTbO
-	 xVPPgy4pNxl1dWMoUvGwctbb77RiPtSDjeBY3h/030JUdcxpmOTeje8y5yMOkvPA4d
-	 DL/G6CUXvTw5bw1EC9AUox46IHMMnuAHP0IRw3IBwZ+vNbRUM/q9B3PUTA8Dux6eBl
-	 SBk/N0q/Z7pyeQO7cGvFlOx6OiAlItZH4vSV+N2lStukD0Meaz6ItVGvn3vm6nDNQw
-	 eQleMMbVkNKwNL/Wb4Kba2T5VpYr5k2X3EkhOgtRuG2sPiNuAKdjWotWkDosmzx1R+
-	 hvVQIy+1gXf/g==
-Received: from [100.115.7.206] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-4.bemta.az-a.eu-west-1.aws.ess.symcld.net id C8/24-12986-3B8DC126;
- Mon, 28 Feb 2022 14:14:11 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrAIsWRWlGSWpSXmKPExsViZ8MxSXfzDZk
-  kg3tRFhcPL2V2YPQ4t3EFYwBjFGtmXlJ+RQJrxuZHy1kK/nBV7Doyh7WBsZWri5GLQ0jgCaPE
-  rCMrWLoYOYGcC0wSG995QiROMEq8vXsBLMEmoCYx/dYNVhBbREBfYunsPcwgNrOAisSL3z3sX
-  YwcHMICPhLTViaDhFkEVCWm75gP1sor4CTRdPc5G4gtIaAgMeXhe2aIuKDEyZlPWCDGSEgcfP
-  GCGaJGUWL25WYWCLtCYtasNiYIW03i6rlNzBMY+WchaZ+FpH0BI9MqRqukosz0jJLcxMwcXUM
-  DA11DQ1NdU10jI3O9xCrdRL3UUt3y1OISXUO9xPJivdTiYr3iytzknBS9vNSSTYzAgEwpZn28
-  g3FN30+9Q4ySHExKorycXZJJQnxJ+SmVGYnFGfFFpTmpxYcYZTg4lCR4RYEhLiRYlJqeWpGWm
-  QOMDpi0BAePkgjv08tAad7igsTc4sx0iNQpRkUpcV5WkD4BkERGaR5cGywiLzHKSgnzMjIwMA
-  jxFKQW5WaWoMq/YhTnYFQS5tUAmcKTmVcCN/0V0GImoMV/g6VAFpckIqSkGpikZSLe3560QiF
-  bfiEPx3Qmub9VvvMW3/82ZULG9LV5D3m3SCVv/Bn/5rHjJtGgNOmPuTdfdhjOmeR7MD/C6WJn
-  btfGgpc/vTxnTJcKF1nvXpwxPznGSG32XK0J7xe/Y9xQueqn6awzy/+JuWpNPp64fOqKyQf+C
-  c1mf2qwatlDnvYPBocF/hn/OOt//UnVUnuznJ1mnB0RvHedf1bsXZxctb5ixQyb67e4vq31//
-  jI77Jd0Mp3O1PPpS9pm769ovMx6wWdx1c5Xi+QD37BuufrzNifVmVrbC9a2bm0hW1zz75VKzV
-  12zcGkRrfU5PbObevXmTcVVu9yC426ETOTlF/QYV1d5Trd0S0bq7d6t+zVomlOCPRUIu5qDgR
-  AKdltQdDAwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-9.tower-591.messagelabs.com!1646057650!350!1
-X-Originating-IP: [62.60.8.146]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.7; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 23181 invoked from network); 28 Feb 2022 14:14:10 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-9.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 28 Feb 2022 14:14:10 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 7291110044A
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 14:14:10 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 6611C100047
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 14:14:10 +0000 (GMT)
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Mon, 28 Feb 2022 14:13:49 +0000
-From: Wang Mingyu <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH v2] openconnect: upgrade 8.10 -> 8.20
-Date: Mon, 28 Feb 2022 22:13:42 +0800
-Message-ID: <1646057622-36275-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@openavr-org.20210112.gappssmtp.com header.s=20210112
+ header.b=7NqxMkyD;
+ spf=none, err=permanent DNS error (domain: openavr.org, ip: 209.85.166.179,
+ mailfrom: troth@openavr.org)
+Received: by mail-il1-f179.google.com with SMTP id y5so10185131ill.13
+        for <openembedded-devel@lists.openembedded.org>;
+ Mon, 28 Feb 2022 07:22:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=openavr-org.20210112.gappssmtp.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ti4Z4N5LZr5ksd3RjwjuHaH981Q2eDEXw3twuVYIOtM=;
+        b=7NqxMkyDx64JgLcxcNooV2n8RsxGVZTqiDMWO86rWgTekYZDjDs4V7mL9vMYvP3+09
+         fHsne7ISxDGzuraQDRcTqxO/iOKhbpz60Njpz/kXcEjmNIOkJgtPifSM1v4dC5s2jJO+
+         ixST59Sli/HfM6lPEyv5B3/I7FT+8xO/XbMh2R8xLVL1Zy4fpQUc118/XvlEgXoVSzUW
+         6mrTa6TveBL0mG9/C1EY0iWznXKOyT/I80KLH1j7TQW9Los4MIWtyKghx0GcZxrGeR7x
+         qvtkYZBZCwXvMUHng8TO6Iq3fBEDmGryB0SzU5+LeVOa8Onh4zw8p0eN+b/qTfsJFIZe
+         PEEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ti4Z4N5LZr5ksd3RjwjuHaH981Q2eDEXw3twuVYIOtM=;
+        b=jTm20ntr571QtJU7RleKHG8i3UdN7QxdR8vpOCNiaJL0r3sp5yGrJ6NdkU3REr+Qpp
+         Vw0E+NFYlFzqDiyi6gnoeWZ9Y+U4MCA6AeBzmcQcdLxCto0btmYI5wGt3hggpXpfMRmR
+         I5JImI0v5sehvO2+dozKD45TtyEhMN+VUX+B3l29wDWKsvjPH9BwriioRIByc2+73m5M
+         wYes2DuCX/48Y3z4ZzHop1Be3+/VOi+QuAEhJl1YuEFqKIpI1OjpBcWZTubv7EzPZ++z
+         U/2iXLZ08noVxuE5iV3N6WLczETMS8KO5BU8tadiXS4u77sX/Sddsn95WSqiZ0ixLmru
+         ZS5Q==
+X-Gm-Message-State: AOAM530w897ZYalSk1ywj5nRjK9FcAxJEh7eVaOMiFnArqajfrOZ7ofK
+	HYam13z2Md/9qlzciJOBV7K1sL9gQu9oKXV8
+X-Google-Smtp-Source: 
+ ABdhPJxFYC4WKqwe4k8jbVDL+0dNvhe5DkfQPOKnNd9mDg/XgpZbnP7rtaSPe+nmAblHiW2HhsmyjA==
+X-Received: by 2002:a05:6e02:1c8c:b0:2c2:4647:28f4 with SMTP id
+ w12-20020a056e021c8c00b002c2464728f4mr18927665ill.79.1646061770491;
+        Mon, 28 Feb 2022 07:22:50 -0800 (PST)
+Received: from beast.bozoland.org (c-24-8-35-226.hsd1.co.comcast.net.
+ [24.8.35.226])
+        by smtp.gmail.com with ESMTPSA id
+ h1-20020a056e021d8100b002c15a824df3sm6183670ila.38.2022.02.28.07.22.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 28 Feb 2022 07:22:50 -0800 (PST)
+From: "Theodore A. Roth" <troth@openavr.org>
+To: openembedded-devel@lists.openembedded.org
+Cc: "Theodore A. Roth" <troth@openavr.org>,
+	"Theodore A . Roth" <theodore_roth@trimble.com>
+Subject: [PATCH] pyhton3-marshmallow: fix wheel build
+Date: Mon, 28 Feb 2022 08:22:31 -0700
+Message-Id: <20220228152231.1050011-1-troth@openavr.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Feb 2022 14:14:14 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Feb 2022 15:22:52 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95578
+ https://lists.openembedded.org/g/openembedded-devel/message/95579
 
-COPYING.LGPL:
-Two blank lines were deleted.
+Recipe does not inherit pypi nor would PN be a good guess at the name of
+the wheel. Set PIP_INSTALL_PACKAGE appropriately.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Theodore A. Roth <theodore_roth@trimble.com>
+Signed-off-by: Theodore A. Roth <troth@openavr.org>
 ---
- .../openconnect/{openconnect_8.10.bb => openconnect_8.20.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/openconnect/{openconnect_8.10.bb => openconnect_8.20.bb} (87%)
+ .../recipes-devtools/python/python3-marshmallow_3.14.1.bb       | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-connectivity/openconnect/openconnect_8.10.bb b/meta-networking/recipes-connectivity/openconnect/openconnect_8.20.bb
-similarity index 87%
-rename from meta-networking/recipes-connectivity/openconnect/openconnect_8.10.bb
-rename to meta-networking/recipes-connectivity/openconnect/openconnect_8.20.bb
-index 7a61f74e31..d204481164 100644
---- a/meta-networking/recipes-connectivity/openconnect/openconnect_8.10.bb
-+++ b/meta-networking/recipes-connectivity/openconnect/openconnect_8.20.bb
-@@ -1,11 +1,11 @@
- SUMMARY = "Open client for Cisco AnyConnect VPN"
- LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING.LGPL;md5=243b725d71bb5df4a1e5920b344b86ad"
-+LIC_FILES_CHKSUM = "file://COPYING.LGPL;md5=8c2e1ec1540fb3e0beb68361344cba7e"
+diff --git a/meta-python/recipes-devtools/python/python3-marshmallow_3.14.1.bb b/meta-python/recipes-devtools/python/python3-marshmallow_3.14.1.bb
+index ddfe4b99c..dc5f17388 100644
+--- a/meta-python/recipes-devtools/python/python3-marshmallow_3.14.1.bb
++++ b/meta-python/recipes-devtools/python/python3-marshmallow_3.14.1.bb
+@@ -15,4 +15,6 @@ S = "${WORKDIR}/git"
  
- SRC_URI = " \
-     git://git.infradead.org/users/dwmw2/openconnect.git;branch=master \
- "
--SRCREV = "9d287e40c57233190a51b6434ba7345370e36f38"
-+SRCREV = "03a3b9c76a9b6d0a65073b6bebbc1192e3445507"
+ inherit setuptools3
  
- DEPENDS = "vpnc libxml2 krb5 gettext-native"
- RDEPENDS:${PN} = "bash python3-core vpnc-script"
++PIP_INSTALL_PACKAGE = "marshmallow"
++
+ RDEPENDS:${PN} += "python3-core"
 -- 
 2.25.1
 
