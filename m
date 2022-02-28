@@ -1,95 +1,90 @@
-Return-Path: <troth@openavr.org>
+Return-Path: <matthias@extraklein.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B0D8C433EF
-	for <webhook@archiver.kernel.org>; Mon, 28 Feb 2022 15:22:52 +0000 (UTC)
-Received: from mail-il1-f179.google.com (mail-il1-f179.google.com
- [209.85.166.179])
- by mx.groups.io with SMTP id smtpd.web11.21062.1646061771391203719
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CF43DC433EF
+	for <webhook@archiver.kernel.org>; Mon, 28 Feb 2022 15:30:41 +0000 (UTC)
+Received: from relay.yourmailgateway.de (relay.yourmailgateway.de
+ [188.68.63.165])
+ by mx.groups.io with SMTP id smtpd.web09.21229.1646062236999527494
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 07:22:51 -0800
+ Mon, 28 Feb 2022 07:30:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@openavr-org.20210112.gappssmtp.com header.s=20210112
- header.b=7NqxMkyD;
- spf=none, err=permanent DNS error (domain: openavr.org, ip: 209.85.166.179,
- mailfrom: troth@openavr.org)
-Received: by mail-il1-f179.google.com with SMTP id y5so10185131ill.13
-        for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 07:22:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=openavr-org.20210112.gappssmtp.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ti4Z4N5LZr5ksd3RjwjuHaH981Q2eDEXw3twuVYIOtM=;
-        b=7NqxMkyDx64JgLcxcNooV2n8RsxGVZTqiDMWO86rWgTekYZDjDs4V7mL9vMYvP3+09
-         fHsne7ISxDGzuraQDRcTqxO/iOKhbpz60Njpz/kXcEjmNIOkJgtPifSM1v4dC5s2jJO+
-         ixST59Sli/HfM6lPEyv5B3/I7FT+8xO/XbMh2R8xLVL1Zy4fpQUc118/XvlEgXoVSzUW
-         6mrTa6TveBL0mG9/C1EY0iWznXKOyT/I80KLH1j7TQW9Los4MIWtyKghx0GcZxrGeR7x
-         qvtkYZBZCwXvMUHng8TO6Iq3fBEDmGryB0SzU5+LeVOa8Onh4zw8p0eN+b/qTfsJFIZe
-         PEEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ti4Z4N5LZr5ksd3RjwjuHaH981Q2eDEXw3twuVYIOtM=;
-        b=jTm20ntr571QtJU7RleKHG8i3UdN7QxdR8vpOCNiaJL0r3sp5yGrJ6NdkU3REr+Qpp
-         Vw0E+NFYlFzqDiyi6gnoeWZ9Y+U4MCA6AeBzmcQcdLxCto0btmYI5wGt3hggpXpfMRmR
-         I5JImI0v5sehvO2+dozKD45TtyEhMN+VUX+B3l29wDWKsvjPH9BwriioRIByc2+73m5M
-         wYes2DuCX/48Y3z4ZzHop1Be3+/VOi+QuAEhJl1YuEFqKIpI1OjpBcWZTubv7EzPZ++z
-         U/2iXLZ08noVxuE5iV3N6WLczETMS8KO5BU8tadiXS4u77sX/Sddsn95WSqiZ0ixLmru
-         ZS5Q==
-X-Gm-Message-State: AOAM530w897ZYalSk1ywj5nRjK9FcAxJEh7eVaOMiFnArqajfrOZ7ofK
-	HYam13z2Md/9qlzciJOBV7K1sL9gQu9oKXV8
-X-Google-Smtp-Source: 
- ABdhPJxFYC4WKqwe4k8jbVDL+0dNvhe5DkfQPOKnNd9mDg/XgpZbnP7rtaSPe+nmAblHiW2HhsmyjA==
-X-Received: by 2002:a05:6e02:1c8c:b0:2c2:4647:28f4 with SMTP id
- w12-20020a056e021c8c00b002c2464728f4mr18927665ill.79.1646061770491;
-        Mon, 28 Feb 2022 07:22:50 -0800 (PST)
-Received: from beast.bozoland.org (c-24-8-35-226.hsd1.co.comcast.net.
- [24.8.35.226])
-        by smtp.gmail.com with ESMTPSA id
- h1-20020a056e021d8100b002c15a824df3sm6183670ila.38.2022.02.28.07.22.50
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Feb 2022 07:22:50 -0800 (PST)
-From: "Theodore A. Roth" <troth@openavr.org>
+ dkim=fail reason="body hash did not verify" header.i=@extraklein.de
+ header.s=key2 header.b=RzWSCHMF;
+ spf=pass (domain: extraklein.de, ip: 188.68.63.165,
+ mailfrom: matthias@extraklein.de)
+Received: from mors-relay-8202.netcup.net (localhost [127.0.0.1])
+	by mors-relay-8202.netcup.net (Postfix) with ESMTPS id 4K6kpx6Z3Nz3t3S;
+	Mon, 28 Feb 2022 16:30:33 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=extraklein.de;
+	s=key2; t=1646062233;
+	bh=FCqq1AwWEfPmfGHTd2nOlDTsoXeUq/fRUYe63Z3mzbg=;
+	h=From:To:Cc:Subject:Date:From;
+	b=RzWSCHMFkq1NOXU8ijM38pRVTeD9nRAJNdQRXdB0BPI4H+GfpClPIfI0m0NbNtJcM
+	 ryHdMuOippIld/ct1F6twW4R1AYOC7xDvR9h6Abn3D+R2ympkOw1ZrCmvj1lBMMziw
+	 CbF1ZNdzjVBHIs2/WlVhHSBdv6fPTknfQa6wl/jYRW5bCkmonMZB0PtnxCnggtkr4s
+	 ZCU2cO6oL8OzYdy/sFffLOoRKtcWmkcJJNdrB/F/remK1T1smJD92wXf/XCULDz9sD
+	 mj0LaDC3XMpmFCu8ZJ1dhKBaktrgdPhpbolFfLIvely6h40ENBSk8G/rjcLQ+G9tyg
+	 vhX8XUvoQ5rtQ==
+Received: from policy02-mors.netcup.net (unknown [46.38.225.53])
+	by mors-relay-8202.netcup.net (Postfix) with ESMTPS id 4K6kpx6B5jz3t2t;
+	Mon, 28 Feb 2022 16:30:33 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at policy02-mors.netcup.net
+Received: from mx2fa3.netcup.net (unknown [10.243.12.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by policy02-mors.netcup.net (Postfix) with ESMTPS id 4K6kpx1Rl4z8sh0;
+	Mon, 28 Feb 2022 16:30:32 +0100 (CET)
+Received: from localhost (ip-062-143-218-156.um16.pools.vodafone-ip.de
+ [62.143.218.156])
+	by mx2fa3.netcup.net (Postfix) with ESMTPSA id 63AB91400E4;
+	Mon, 28 Feb 2022 16:30:32 +0100 (CET)
+Authentication-Results: mx2fa3;
+	spf=pass (sender IP is 62.143.218.156) smtp.mailfrom=matthias@extraklein.de
+ smtp.helo=localhost
+Received-SPF: pass (mx2fa3: connection is authenticated)
+From: Matthias Klein <matthias@extraklein.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: "Theodore A. Roth" <troth@openavr.org>,
-	"Theodore A . Roth" <theodore_roth@trimble.com>
-Subject: [PATCH] pyhton3-marshmallow: fix wheel build
-Date: Mon, 28 Feb 2022 08:22:31 -0700
-Message-Id: <20220228152231.1050011-1-troth@openavr.org>
-X-Mailer: git-send-email 2.25.1
+Cc: kweihmann@outlook.com,
+	Matthias Klein <matthias@extraklein.de>
+Subject: [meta-python][PATCH] python3-smbus: fix wheel build Recipe does not
+ inherit pypi nor would PN be a good guess for the wheel name so set
+ PIP_INSTALL_PACKAGE appropriately. PYPA_WHEEL doesn't respect
+ SETUPTOOLS_SETUP_PATH so set PYPA_WHEEL appropriately.
+Date: Mon, 28 Feb 2022 16:29:58 +0100
+Message-Id: <20220228152958.1419-1-matthias@extraklein.de>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-PPP-Message-ID: <164606223261.25351.7636834588135797561@mx2fa3.netcup.net>
+X-PPP-Vhost: extraklein.de
+X-NC-CID: v6C3ChJ2GB72P3Ugno91vJkOINS/VeA4FF24QLjdBM5mDd/Ho74=
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Feb 2022 15:22:52 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Feb 2022 15:30:41 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95579
+ https://lists.openembedded.org/g/openembedded-devel/message/95580
 
-Recipe does not inherit pypi nor would PN be a good guess at the name of
-the wheel. Set PIP_INSTALL_PACKAGE appropriately.
-
-Signed-off-by: Theodore A. Roth <theodore_roth@trimble.com>
-Signed-off-by: Theodore A. Roth <troth@openavr.org>
+Signed-off-by: Matthias Klein <matthias@extraklein.de>
 ---
- .../recipes-devtools/python/python3-marshmallow_3.14.1.bb       | 2 ++
+ meta-python/recipes-devtools/python/python3-smbus_4.3.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-marshmallow_3.14.1.bb b/meta-python/recipes-devtools/python/python3-marshmallow_3.14.1.bb
-index ddfe4b99c..dc5f17388 100644
---- a/meta-python/recipes-devtools/python/python3-marshmallow_3.14.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-marshmallow_3.14.1.bb
-@@ -15,4 +15,6 @@ S = "${WORKDIR}/git"
- 
+diff --git a/meta-python/recipes-devtools/python/python3-smbus_4.3.bb b/m=
+eta-python/recipes-devtools/python/python3-smbus_4.3.bb
+index ecdff3ada..1a6c99cfc 100644
+--- a/meta-python/recipes-devtools/python/python3-smbus_4.3.bb
++++ b/meta-python/recipes-devtools/python/python3-smbus_4.3.bb
+@@ -13,4 +13,6 @@ S =3D "${WORKDIR}/i2c-tools-${PV}"
+=20
  inherit setuptools3
- 
-+PIP_INSTALL_PACKAGE = "marshmallow"
-+
- RDEPENDS:${PN} += "python3-core"
--- 
-2.25.1
+=20
++PIP_INSTALL_PACKAGE =3D "smbus"
++PYPA_WHEEL =3D "${S}/py-smbus/dist/smbus-*-*.whl"
+ SETUPTOOLS_SETUP_PATH =3D "${S}/py-smbus"
+--=20
+2.30.2
 
 
