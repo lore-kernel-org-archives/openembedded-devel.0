@@ -2,77 +2,80 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 29537C433EF
-	for <webhook@archiver.kernel.org>; Mon, 28 Feb 2022 14:08:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 15342C433F5
+	for <webhook@archiver.kernel.org>; Mon, 28 Feb 2022 14:08:07 +0000 (UTC)
 Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web10.19975.1646057280349625267
+ [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web08.20431.1646057285534415774
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 06:08:00 -0800
+ Mon, 28 Feb 2022 06:08:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Tc8lV4Bn;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=YwSypOzV;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1646057278; i=@fujitsu.com;
-	bh=WU1Ijabqr4OGm8StDeZ8C+mKLsUgnBHIJ1Tpx4LfSqA=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=Tc8lV4BnxAbKPwdrCiwUqbS+CBC4S5py3mnxgO3sghzBiA47oOAa1SRAG21d3N4KY
-	 V0PwSYd8ERX56Ig+xw9d5k5lyw35Rn+eADnn8pUdE0+kAYZDf1tzcdfD/SFhXCdDK7
-	 FkjeU9WH9SiSycz2H2BKaNSsEdkg6bDdjiHagUiWFRGw3lWGCvuBSHRAsN4Y7xsHxI
-	 TnP8uEzVUqRiv/f33KP9OMMuIvNSuNS3cE3yHOnyrdLbXvpMY7p3Nn2zLDaS49UTi1
-	 qXONPQ+NSBh3nMHcqsIZaTw/kB6eqN8x8/z+PRlWAK4tm0Ag3by6m13mj4yTqt4T7q
-	 ALZfHo838o2Qw==
+	s=170520fj; t=1646057283; i=@fujitsu.com;
+	bh=A3brMJwHvT7vNHprWXBzUo2UnVeEodxSeznXs1/q7A0=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=YwSypOzVE6o9j0l7K9wa01EQqk5uKn4KFosiHVs3eZF81v+qt4WjSNQNZ/Nn0T1LF
+	 JRsuw69uXAyCRzXmf3C6QKhAgTpCYUY8AEOJX25RZxcH54DArVFgHSdRfw7aNi2YTw
+	 yFAlotbk7B/emiDz0J+yZySvR3Ekic4y5Ewb3iySSgMorcBt2n7UFdBMsXUtjRYHST
+	 Mtl5BY1oVXQKidn/MLfO4UHMNH0nEkIcWBgxMZkKwVm00OjBnw44G+WVSNRz/GWT+L
+	 mK/DUA72pnlT5LdAo7e2IKH/1+orCYOaJoU/k/CnOYDTMkkTIwxgdDK2QXy6cmQMYo
+	 oV2K4ZiebBknA==
 Received: from [100.115.66.23] (using TLSv1.2 with cipher
  DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-a.eu-central-1.aws.ess.symcld.net id
- 21/90-24566-E37DC126; Mon, 28 Feb 2022 14:07:58 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrKIsWRWlGSWpSXmKPExsViZ8MxSdfuuky
-  SwepTfBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bOnSeYCo5yVfR8fsHcwHics4uRi0NI4Amj
-  xIQP31ggnAtMEj2nTzNDOCcYJR43rQRyODnYBNQkpt+6wQpiiwjoSyydvQcsziygIvHidw97F
-  yMHh7CAo8TMCSkgYRYBVYkP/1ezg9i8Ak4SWw53g9kSAgoSUx6+Z4aIC0qcnPmEBWKMhMTBFy
-  +YIWoUJWZfbmaBsCskZs1qY4Kw1SSuntvEPIGRfxaS9llI2hcwMq1itE0qykzPKMlNzMzRNTQ
-  w0DU0NNU1M9O1NNNLrNJN1Est1U1OzSspSgTK6iWWF+ulFhfrFVfmJuek6OWllmxiBIZmSrFT
-  wg7GR30/9Q4xSnIwKYnycnZJJgnxJeWnVGYkFmfEF5XmpBYfYpTh4FCS4O08JpMkJFiUmp5ak
-  ZaZA4wTmLQEB4+SCO/Ty0Bp3uKCxNzizHSI1ClGRSlxXsurQAkBkERGaR5cGyw2LzHKSgnzMj
-  IwMAjxFKQW5WaWoMq/YhTnYFQS5r0IMoUnM68EbvoroMVMQIv/BkuBLC5JREhJNTAtPfjyxvM
-  TzI+0FcwiZDtnKqxn9Fvp/6lPtGlaWyKb0o+2spmPMs2/vNvwuPfj2zXX4w1vMl2xuHDws8XL
-  pXP/PfkVzmqrITrRRGDuHh3bnRbNXeUH8s/Fc0pP/C2+LMuV0VGVd2PexiRfZXszq4XL5WQvC
-  FdwMxsWmDTlK84M/bXaLIev9k+U6PTiI4oRJfyCsduUln0MsAp7euTvFfsXT426BUqDJzYpZ6
-  s1MJ566Hcv7l2O+uNF3TGfdd/m3oleqnczdbZpnM/8zDe2Oi3lBXPFJHdGMV3dLTKt/rXKEu/
-  p91e6Hmq2lw/9+72qZt0VmcvTBS6zZUo0rZf659axa26iVdDtfY4zN77XlVViKc5INNRiLipO
-  BABqd7lsSAMAAA==
+	by server-4.bemta.az-a.eu-central-1.aws.ess.symcld.net id
+ 67/C4-13301-347DC126; Mon, 28 Feb 2022 14:08:03 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrJIsWRWlGSWpSXmKPExsViZ8MxSdfuuky
+  SweHdkhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aODW1sBUc5Ks4u/M7SwPiSvYuRi0NI4Amj
+  xObO+SwQzgUmie+H7jFBOCcYJR6vnMfYxcjJwSagJjH91g1WEFtEQF9i6ew9zCA2s4CKxIvfP
+  ewgtrCAo8TjxV+BJnFwsAioSjw9wgQS5hVwkjix5AjYGAkBBYkpD98zg5RwCjhL7L2oAhIWAi
+  q58u04M0S5oMTJmU9YIKZLSBx88YIZolVRYvblZhYIu0Ji1qw2JghbTeLquU3MExgFZyFpn4W
+  kfQEj0ypGu6SizPSMktzEzBxdQwMDXUNDU10zC11DE2O9xCrdRL3UUt3k1LySokSgtF5iebFe
+  anGxXnFlbnJOil5easkmRmAopxS79O9gvN/3U+8QoyQHk5IoL2eXZJIQX1J+SmVGYnFGfFFpT
+  mrxIUYZDg4lCd7OYzJJQoJFqempFWmZOcC4gklLcPAoifA+vQyU5i0uSMwtzkyHSJ1i1OX4++
+  nvXmYhlrz8vFQpcd6Ua0BFAiBFGaV5cCNgMX6JUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjA
+  vP8gUnsy8ErhNr4COYAI64m+wFMgRJYkIKakGpt78q6YLhdZqh4iZRojXzpRtvnNj8eanIQcn
+  G/6WX1SwL5dXUuHL3a1PRFhvt3RY7mwVn/bPd4LE1hCZmUmN8kYXJx5q5bq9de5Lxmlb7vH62
+  8Q4JdzY+2RmY+7xYL19ppqJn1gCbp54c/VfMMNr0ecPlRYZbRPO613K/XmZjNGsjIc+O2ae+S
+  nIzya0s/alXjgf375jJ1aGr6lXmPxb+wNHaD7npy1lf63erYowywuX1drE46NxYMpBycDQReo
+  yi748eLP7Qd+lnf/WLnX2rbJPSFrd2WDnr11+gGfj41wB98Nbmn7HFDfNK+Sd1/EnwPCxXUxJ
+  buFnkSop3bK9LuECiz8VMD+b+rnx1KWWu0osxRmJhlrMRcWJAH+30OJsAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-6.tower-532.messagelabs.com!1646057277!46441!1
+X-Msg-Ref: server-9.tower-545.messagelabs.com!1646057278!1!1
 X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 30858 invoked from network); 28 Feb 2022 14:07:58 -0000
+Received: (qmail 17983 invoked from network); 28 Feb 2022 14:07:58 -0000
 Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-6.tower-532.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-9.tower-545.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 28 Feb 2022 14:07:58 -0000
 Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id BC3D610044C
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id B83BE10044A
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 28 Feb 2022 14:07:57 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 9A450100354
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 9DCDD100440
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 28 Feb 2022 14:07:57 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Mon, 28 Feb 2022 14:07:44 +0000
+ (TLS) id 15.0.1497.28; Mon, 28 Feb 2022 14:07:47 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH] babl: upgrade 0.1.88 -> 0.1.90
-Date: Mon, 28 Feb 2022 22:07:36 +0800
-Message-ID: <1646057257-36047-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] gegl: upgrade 0.4.34 -> 0.4.36
+Date: Mon, 28 Feb 2022 22:07:37 +0800
+Message-ID: <1646057257-36047-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1646057257-36047-1-git-send-email-wangmy@fujitsu.com>
+References: <1646057257-36047-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -82,36 +85,32 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Feb 2022 14:08:01 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Feb 2022 14:08:07 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95569
-
-Automatic LUT creation for conversions from &lt;24bpp of colorant componants,
-SIMD builds for x86_64 micro-architecture levels and ARM neon, pre-defined
-CIE Lab u8 and CIE Lab u16 formats. Fix bug of an unlocked non-locked mutex,
-which started failing on some platforms.
+ https://lists.openembedded.org/g/openembedded-devel/message/95570
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-gnome/recipes-gimp/babl/{babl_0.1.88.bb => babl_0.1.90.bb} | 2 +-
+ meta-gnome/recipes-gimp/gegl/{gegl_0.4.34.bb => gegl_0.4.36.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gimp/babl/{babl_0.1.88.bb => babl_0.1.90.bb} (87%)
+ rename meta-gnome/recipes-gimp/gegl/{gegl_0.4.34.bb => gegl_0.4.36.bb} (96%)
 
-diff --git a/meta-gnome/recipes-gimp/babl/babl_0.1.88.bb b/meta-gnome/recipes-gimp/babl/babl_0.1.90.bb
-similarity index 87%
-rename from meta-gnome/recipes-gimp/babl/babl_0.1.88.bb
-rename to meta-gnome/recipes-gimp/babl/babl_0.1.90.bb
-index 8a09fdf0e5..cf10a5ce80 100644
---- a/meta-gnome/recipes-gimp/babl/babl_0.1.88.bb
-+++ b/meta-gnome/recipes-gimp/babl/babl_0.1.90.bb
-@@ -15,6 +15,6 @@ CFLAGS:append:toolchain-clang:mipsarch = " -ffp-exception-behavior=ignore "
- CFLAGS:append:toolchain-clang:riscv64 = " -ffp-exception-behavior=ignore "
+diff --git a/meta-gnome/recipes-gimp/gegl/gegl_0.4.34.bb b/meta-gnome/recipes-gimp/gegl/gegl_0.4.36.bb
+similarity index 96%
+rename from meta-gnome/recipes-gimp/gegl/gegl_0.4.34.bb
+rename to meta-gnome/recipes-gimp/gegl/gegl_0.4.36.bb
+index 2f8928d164..d7595b7c9a 100644
+--- a/meta-gnome/recipes-gimp/gegl/gegl_0.4.34.bb
++++ b/meta-gnome/recipes-gimp/gegl/gegl_0.4.36.bb
+@@ -22,7 +22,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
+ SHPV = "${@gnome_verdir("${PV}")}"
  
- SRC_URI = "https://download.gimp.org/pub/${BPN}/0.1/${BP}.tar.xz"
--SRC_URI[sha256sum] = "4f0d7f4aaa0bb2e725f349adf7b351a957d9fb26d555d9895a7af816b4167039"
-+SRC_URI[sha256sum] = "6e2ebb636f37581588e3d02499b3d2f69f9ac73e34a262f42911d7f5906a9243"
+ SRC_URI = "https://download.gimp.org/pub/${BPN}/${SHPV}/${BP}.tar.xz"
+-SRC_URI[sha256sum] = "ef63f0bca5b431c6119addd834ca7fbb507c900c4861c57b3667b6f4ccfcaaaa"
++SRC_URI[sha256sum] = "6fd58a0cdcc7702258adaeffb573a389228ae8f0eff47578efda2309b61b2ca6"
  
- BBCLASSEXTEND = "native"
+ PACKAGECONFIG ??= "gexiv2 jpeg libpng libraw librsvg pango poppler sdl2"
+ PACKAGECONFIG:class-native = "libpng librsvg"
 -- 
 2.25.1
 
