@@ -2,47 +2,47 @@ Return-Path: <jsbronder@cold-front.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 527EFC433EF
-	for <webhook@archiver.kernel.org>; Mon, 28 Feb 2022 20:24:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E8719C433EF
+	for <webhook@archiver.kernel.org>; Mon, 28 Feb 2022 21:25:03 +0000 (UTC)
 Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
  [66.111.4.29])
- by mx.groups.io with SMTP id smtpd.web09.2786.1646079839406715473
+ by mx.groups.io with SMTP id smtpd.web11.623.1646083502831504951
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 12:23:59 -0800
+ Mon, 28 Feb 2022 13:25:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@cold-front.org header.s=mesmtp header.b=Cy4U7Hwc;
+ dkim=pass header.i=@cold-front.org header.s=mesmtp header.b=f+XTZhMX;
  spf=pass (domain: cold-front.org, ip: 66.111.4.29,
  mailfrom: jsbronder@cold-front.org)
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
-	by mailout.nyi.internal (Postfix) with ESMTP id 562435C0293;
-	Mon, 28 Feb 2022 15:23:56 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
-  by compute5.internal (MEProxy); Mon, 28 Feb 2022 15:23:56 -0500
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+	by mailout.nyi.internal (Postfix) with ESMTP id 233B15C01D7;
+	Mon, 28 Feb 2022 16:25:02 -0500 (EST)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute3.internal (MEProxy); Mon, 28 Feb 2022 16:25:02 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
 	 h=cc:cc:content-transfer-encoding:date:date:from:from
 	:in-reply-to:message-id:mime-version:reply-to:sender:subject
-	:subject:to:to; s=mesmtp; bh=rL12srmqmEAJQwmENFINO0XOycySfc+muye
-	WWWvpKQ0=; b=Cy4U7HwcAeYS1L5XNK2s9h06mQ4d6GF/20RTycMxnk12YNOFDaa
-	uxyCdSoDOzr+mEH1rMG4duyd6QxQ0kM6CB7Z6Onbl0PWxgMTAqKccGfIZhBM0b8/
-	5ZAqUFtlSRSb/ZH/zrtmpwfMjo++0i0QthmgNwrJwnUhQhpyDbJc+KUQ=
+	:subject:to:to; s=mesmtp; bh=TrSjAbAS3zn7E5+rtFhASxvSGoXegfVoU4U
+	D0prA5eY=; b=f+XTZhMXoMBcGZA08epHLIe3CHPrJ6/Cao2cXFTreJS05xUZsIe
+	uv9snoET78s3p9Ekeu92I1KhvjUe3sbqyRXB4az8x2LUMD7FIMHdZ4udoZ7zaX/s
+	VvaWadsDWMxRzThjjVOSiyMSecPE919EUd5V3D3dOcYjW+fM+7ehUvm8=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
 	:from:from:in-reply-to:message-id:mime-version:reply-to:sender
 	:subject:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender
-	:x-me-sender:x-sasl-enc; s=fm2; bh=rL12srmqmEAJQwmENFINO0XOycySf
-	c+muyeWWWvpKQ0=; b=a/+gZK71Q5KzMudic4Q31sTBWrvFIOPystITwlrKWICzX
-	s6zROUe5KaeRI2dR8OESLwWMZ1k3AnUJ0crVLIFBtozm9xNBYB8HhgllSEZztpfw
-	EmCR3s4/cxowD1GXHZaI5kC6F6R7dvB+Mbbbz/u/T3OHlOXedMmsmVuSYynUGCcX
-	OCGuLkRfEkOI3lafaK53UafjGdNS1TBYf72AY+T/9oRofdskzN0xbOFnct2J7GnY
-	McAv/L9B5xEaHNFw7iTfdd0QGEBbaQkvHX840ZGXLXzeIZ5dH/qzKVDyfGsjDPIx
-	fWEBAHqWrIyKb2rEtJ+j7mRLY2+8lFBZOhIsQD7fg==
-X-ME-Sender: <xms:XC8dYh5zRoIjKTbsxIURqCcrcH5kSKfMWj0CJPXuuKVEgLl7sB9KfQ>
-    <xme:XC8dYu4TCi_HMINdr61X_p3gPekGMlKhorBJyGrwgLxfsuPDPunM4PCv8DS14Qi_N
-    y3stMUh05DCjGWkrA>
+	:x-me-sender:x-sasl-enc; s=fm2; bh=TrSjAbAS3zn7E5+rtFhASxvSGoXeg
+	fVoU4UD0prA5eY=; b=X0Em6epxrCH8beWT2wPI44KgeO9Gi9GywSywsj0kKRZMz
+	Axp/zmGbb3Ar6k2/JZ+CrxncdItBgUeaKAag+8JVxzFX9ZyJSStouQ4c5YfftKwU
+	8NG/ryNUEKtOxb3Rp2sSKONH8Vhi3W+CBKxO3A2qaYgh0j1WPeYlInhKUeJC9afI
+	emefd+TwyDtFsKIbzxwOvI7EXQFS0SfQ9l9xNdBaykoqhqY7a/M48yKRtYzOmtc3
+	aY9L0Ry6ncxVb7jfFYjzfBWYMugv7S/8R5yYTARAAu6YAUd4jC/1b8jTb3rl4gZJ
+	WIe6alAIP1hcwQZFxD4snp7j2nv1bmWnLQmRXb21g==
+X-ME-Sender: <xms:rT0dYjmVPNOyab_jOO5bk1zmVVL0cz8dXSWY7YbfYYtguoutyn_CTw>
+    <xme:rT0dYm3bXqW30kFe7ao5ae4BNHneZsvbWJkkFpSL5CuSht3EEKhs1zp8tKovD2yZ5
+    sfuZy338bLyNrgj7g>
 X-ME-Received: 
- <xmr:XC8dYoeo-s_G1vU6giYEJA9MDNnTi2W5IZo4j7hzqlMdmqCilwU7QTG2sJ3T7FBFiGjI3px4K4nZxZqpBX783-9ijIZk7KUkjRv3182hcitU>
+ <xmr:rT0dYpqzY2iRx6zsQ4A5kf20LSEM6JY0Qx9ASGybk1NTdBN9Pw17bXHo8l-6JyNKWo78_uPrskqrHnnYPsyVSiQU4WiyuBixRPI9z68vezAI>
 X-ME-Proxy-Cause: 
- gggruggvucftvghtrhhoucdtuddrgedvvddruddttddgudefhecutefuodetggdotefrod
+ gggruggvucftvghtrhhoucdtuddrgedvvddruddttddgudegkecutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
     necuuegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffoggfgsedtkeertd
     ertddtnecuhfhrohhmpefluhhsthhinhcuuehrohhnuggvrhcuoehjshgsrhhonhguvghr
@@ -50,86 +50,48 @@ X-ME-Proxy-Cause:
     dvhfekieffkeelheettefgieeuhfeuffffheevveeuhfeigedtnecuffhomhgrihhnpehg
     ihhthhhusgdrtghomhenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
     hlfhhrohhmpehjshgsrhhonhguvghrsegtohhlugdqfhhrohhnthdrohhrgh
-X-ME-Proxy: <xmx:XC8dYqJ3enTUyIlgUmWFY8Z5yTyzOfamF2Bj_yMRhLhd0mQ70irf4g>
-    <xmx:XC8dYlJAPKESSS3W7GWULqmiCbkXS9dmfOmPVNgY5qqN3L3jzYZKVg>
-    <xmx:XC8dYjyr77ABTQlqd7vT7BpE6LWwAYlvNvODzH_jMQYV1LE_fP4E-A>
-    <xmx:XC8dYnyvy9qF-FnDnSPmH8sym9eqGf4BfbxBNny5bJQ-dB3bOsa1lg>
+X-ME-Proxy: <xmx:rT0dYrlAq2iZP761Akc0nhOsb-S_b5PMqpI8uiPdr1pio0h0bc99tg>
+    <xmx:rT0dYh2J4MFoMSz-KvEATK7qz_OvD6Uo1FuYsrMhqHQjx3ML_x_oug>
+    <xmx:rT0dYqsLbVWEiPOc6H9r9VyvUv5TY0vjBFiMlzWxtI7x4WfURBfaXQ>
+    <xmx:rj0dYu_p9SSAIDBdLHrEBU34GBA-q4N7Lz1yAbGBQU4gF-HhcABGaQ>
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 28 Feb 2022 15:23:56 -0500 (EST)
+ 28 Feb 2022 16:25:01 -0500 (EST)
 From: Justin Bronder <jsbronder@cold-front.org>
 To: openembedded-devel@lists.openembedded.org
 Cc: Justin Bronder <jsbronder@cold-front.org>
-Subject: [meta-python][PATCH] python3-bitarray: switch to setuptools
-Date: Mon, 28 Feb 2022 15:23:43 -0500
-Message-Id: <20220228202343.3386-1-jsbronder@cold-front.org>
+Subject: [meta-python][PATCH] python3-kivy: fix wheel build
+Date: Mon, 28 Feb 2022 16:24:58 -0500
+Message-Id: <20220228212458.15786-1-jsbronder@cold-front.org>
 X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Feb 2022 20:24:00 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Feb 2022 21:25:03 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95595
+ https://lists.openembedded.org/g/openembedded-devel/message/95596
 
-Backported patch from https://github.com/ilanschnell/bitarray/pull/168,
-committed upstream as
-https://github.com/ilanschnell/bitarray/commit/947d364841954d60bab7a4cf1497a272b1bf73ca
+Recipe does not inherity pypi and the package name is capitalized
+regardless.  Set PIP_INSTALL_PACKAGE appropriately.
 
 Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
 ---
- ...-use-setuptools-instead-of-distutils.patch | 29 +++++++++++++++++++
- .../python/python3-bitarray_2.3.7.bb          |  3 ++
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-bitarray/setup.py-use-setuptools-instead-of-distutils.patch
+ meta-python/recipes-devtools/python/python3-kivy_2.0.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray/setup.py-use-setuptools-instead-of-distutils.patch b/meta-python/recipes-devtools/python/python3-bitarray/setup.py-use-setuptools-instead-of-distutils.patch
-new file mode 100644
-index 0000000000..cef7ce15a4
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-bitarray/setup.py-use-setuptools-instead-of-distutils.patch
-@@ -0,0 +1,29 @@
-+From 947d364841954d60bab7a4cf1497a272b1bf73ca Mon Sep 17 00:00:00 2001
-+From: Konrad Weihmann <kweihmann@outlook.com>
-+Date: Sun, 27 Feb 2022 11:57:09 +0100
-+Subject: [PATCH] setup.py: use setuptools instead of distutils
-+
-+as distutils will be deprecated in python 3.12 and already produces
-+a warning when run with python 3.10.x, it might be a good time to
-+switch to setuptools.
-+It offers the same interface, so results will be the same
-+
-+Signed-off-by: Konrad Weihmann <kweihmann@outlook.com>
-+
-+Upstream-Status: Backport [https://github.com/ilanschnell/bitarray/commit/947d364841954d60bab7a4cf1497a272b1bf73ca]
-+
-+---
-+ setup.py | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/setup.py b/setup.py
-+index 4dbdf859..c7787dad 100644
-+--- a/setup.py
-++++ b/setup.py
-+@@ -1,5 +1,5 @@
-+ import re
-+-from distutils.core import setup, Extension
-++from setuptools import setup, Extension
-+ 
-+ 
-+ kwds = {}
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_2.3.7.bb b/meta-python/recipes-devtools/python/python3-bitarray_2.3.7.bb
-index cac003a4fb..6566f8d664 100644
---- a/meta-python/recipes-devtools/python/python3-bitarray_2.3.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-bitarray_2.3.7.bb
-@@ -7,4 +7,7 @@ SRC_URI[sha256sum] = "4da790ab193e993107f3ff0aebc4f8d6ad5196a19071fbafad16b02898
+diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.0.0.bb b/meta-python/recipes-devtools/python/python3-kivy_2.0.0.bb
+index 3daf13473a..38f5216f56 100644
+--- a/meta-python/recipes-devtools/python/python3-kivy_2.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-kivy_2.0.0.bb
+@@ -5,6 +5,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f0c851d60495c7e27225a819e179208a"
  
- inherit setuptools3 pypi
+ inherit setuptools3 pkgconfig features_check
++PIP_INSTALL_PACKAGE = "Kivy"
  
-+# Backported from 2.3.8
-+SRC_URI += "file://setup.py-use-setuptools-instead-of-distutils.patch"
-+
- BBCLASSEXTEND = "native nativesdk"
+ SRC_URI = "\
+     git://github.com/kivy/kivy.git;protocol=https;branch=master \
 -- 
 2.35.1
 
