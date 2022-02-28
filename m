@@ -1,121 +1,91 @@
-Return-Path: <jsbronder@cold-front.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41796C433F5
-	for <webhook@archiver.kernel.org>; Mon, 28 Feb 2022 21:55:52 +0000 (UTC)
-Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
- [66.111.4.28])
- by mx.groups.io with SMTP id smtpd.web12.1014.1646085351224379722
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E850C433FE
+	for <webhook@archiver.kernel.org>; Mon, 28 Feb 2022 22:22:00 +0000 (UTC)
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com
+ [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.web10.1425.1646086917097059565
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 13:55:51 -0800
+ Mon, 28 Feb 2022 14:21:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@cold-front.org header.s=mesmtp header.b=b0EYv2jE;
- spf=pass (domain: cold-front.org, ip: 66.111.4.28,
- mailfrom: jsbronder@cold-front.org)
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
-	by mailout.nyi.internal (Postfix) with ESMTP id 940D55C0120;
-	Mon, 28 Feb 2022 16:55:50 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
-  by compute5.internal (MEProxy); Mon, 28 Feb 2022 16:55:50 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
-	 h=cc:cc:content-transfer-encoding:date:date:from:from
-	:in-reply-to:message-id:mime-version:reply-to:sender:subject
-	:subject:to:to; s=mesmtp; bh=ALaD2i2g2VPem53qs3vduFcOrJgYKee7hGW
-	VwzEnGME=; b=b0EYv2jEJRTE2my6Msh+l2VXprdq2kKuaz7SAhd7mjOHAfOpXn/
-	CraqbobXbl3kp7j0GU8b7gPMai8SJvmjaxKNeOKqVTbECWHyjq4yvyhqi6mlFff1
-	NN/1S8ZrVvJLUBsZxZXQih7wCur8moa1lFJgfae+z7MfhUrrdGza82q0=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
-	:from:from:in-reply-to:message-id:mime-version:reply-to:sender
-	:subject:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender
-	:x-me-sender:x-sasl-enc; s=fm2; bh=ALaD2i2g2VPem53qs3vduFcOrJgYK
-	ee7hGWVwzEnGME=; b=TMC9B100AZNIA6GyczY+Kaj/rDOW4IdQv9GAczqJInKwv
-	HcC94b06fUtDj86rr9YmruGwCmzzuYPH+DuzDc8Msu6Z9kZDNfD4J86OgjF4LiZN
-	1WisrAYvne0E4WaRq7ZqTrszQQOB5irLGtLJgXE68guOLNoF/UKVl++DUU9UxS8Q
-	ZeHQMRYAGJi+2x+T4MUH7mpxglE5eHwfQ69ArkIH9UM99Kw5/EZIvMvSkJLQS9Ev
-	56F/pAeHOhWdswl0NmeEkJfZyKE9z1I8am/zs2QIb4I2ol0ouQjfJ3s7/JF7ZnfH
-	nI3iDUMHLSScyijHPQRaeGhDoe5HJIc/hT+U5/Qtg==
-X-ME-Sender: <xms:5kQdYhH6HLwW4X3zb0WUfqww20sgew8LQdT514rzVPmYcKiw4yaEWg>
-    <xme:5kQdYmXbo67E5KPEQ_iJqsu6IPCJ1KUgsL_14s_qCVc_FQQFGkQj0Am6JR8-V6YQI
-    t7Dc0Y5TI8kM-5Z0g>
-X-ME-Received: 
- <xmr:5kQdYjKAXWEWm_jC0yuJZYsl6JGpxoCmeYKrhoTNaB0q48qeARTPagiir398hXA7KvJ0xim5nNsFKU4z-kT5D_4FZut9299RBlXZvv64eeG2>
-X-ME-Proxy-Cause: 
- gggruggvucftvghtrhhoucdtuddrgedvvddruddttddgudehfecutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
-    necuuegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffoggfgsedtkeertd
-    ertddtnecuhfhrohhmpefluhhsthhinhcuuehrohhnuggvrhcuoehjshgsrhhonhguvghr
-    segtohhlugdqfhhrohhnthdrohhrgheqnecuggftrfgrthhtvghrnhepfefhgeeujeelud
-    dtveejledtkedufeejueetgfdutddugeekgeevgeeitefgkeefnecuffhomhgrihhnpehp
-    hihthhhonhdrohhrghenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
-    hlfhhrohhmpehjshgsrhhonhguvghrsegtohhlugdqfhhrohhnthdrohhrgh
-X-ME-Proxy: <xmx:5kQdYnHt90Ro9FJtEH0gy0XzqvB4w-RoqbtDfcZCD6oNIccWFSwb6Q>
-    <xmx:5kQdYnVjUzu2LQ0hbiu_grjqTyYHSCY0ZIuEk0xEw4b7Ia4YWPK19A>
-    <xmx:5kQdYiMTn9TN3IPRHnhstcgN7fT4cSv2K1p8P7W8fyxeV76o4luHDQ>
-    <xmx:5kQdYoexM10-43ahL8SppD2sBKtdR-35c0eRes--Gato81QXTkAsTw>
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 28 Feb 2022 16:55:50 -0500 (EST)
-From: Justin Bronder <jsbronder@cold-front.org>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ESc8Mz52;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id 132so12781499pga.5
+        for <openembedded-devel@lists.openembedded.org>;
+ Mon, 28 Feb 2022 14:21:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=JDj91XuUfxXv2Qs96HSJuqU0tVYMUKeOpjUB0u2SZvg=;
+        b=ESc8Mz52dHLf+Xbvmj4x+MdjIGEDSHRbavrdt2jOfgd6oUB0xmzDqKO1xnxsq/NP/U
+         LNr4LOJ0I3QeaPBWonw/5036TnB/cYuW8GBuyrgVYiJ6eJmXoMCzISiGPtlWbCy18VRw
+         Cu5sSefOZjXLwUcVDQwNQpx43wD7GFQx+4ojSEfimgW8UnErNo9l9wBCtM+dlp8GL/vc
+         buK2Jh9jziVBwevSf/uQT8SoFpg6tbNQD85zzxayH/NS0FbKhSJP6hlMPGGSuIrgzVBo
+         UN/Om4No0de3eB6er04LryfQFlv+l7FBG6oj3fZD5LVEVGqX4oLEo7jKByQ1dFAxr1Ge
+         sq/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=JDj91XuUfxXv2Qs96HSJuqU0tVYMUKeOpjUB0u2SZvg=;
+        b=h+hRCEE5Gvjfh4JCrimtyBBlYoH5A0Syipaud0T0jfy8W1dGQfWoozUR82Zw39egX7
+         tSSS/OwnGoas+VrJIgIZFEZdjj1CXsXl4YHnVGVZEiDq0oNJU5/Lgk2nY0h6TKDQbuT9
+         LcOe5wKbWZW/z6rQIylywIQnLZumIM98sPG69j58ZeNLc3leP1qTs/FiIVeEaoHZmBG3
+         6S++GL2jPpAzFyAiJRwi+e8V2b8qlyjgjGCbb3+GDqjJyYkDzDIp/NxMMgCP1VUGDGTM
+         IEe/DRpimzenpoAeWl9O0QKe0qXmsZL1IqmjQ+V7iqO7qAOCCJY5kYUAA3ib5zwgTYEc
+         zGnA==
+X-Gm-Message-State: AOAM5307fJ+PXZw9hRKyEg6OREQgOpTQPdvoVOeqNgHwQw1ZMG7o/EFt
+	29fv7jUZ9SttMa/YP1SbGzMhR7vnqom66A==
+X-Google-Smtp-Source: 
+ ABdhPJyLA0CTvGNIyrLdqG10aU6dziu/xv6IIW+yzVb0oJYRBNYDiwkLxJHLvyxN/x/IKzXA4vTCww==
+X-Received: by 2002:a05:6a00:1307:b0:4b0:b1c:6fd9 with SMTP id
+ j7-20020a056a00130700b004b00b1c6fd9mr24030228pfu.27.1646086916310;
+        Mon, 28 Feb 2022 14:21:56 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::1a20])
+        by smtp.gmail.com with ESMTPSA id
+ o17-20020a056a0015d100b004e1c11d833fsm15430992pfu.90.2022.02.28.14.21.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 28 Feb 2022 14:21:55 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Justin Bronder <jsbronder@cold-front.org>
-Subject: [meta-python][PATCH] python3-termcolor: drop recipe
-Date: Mon, 28 Feb 2022 16:55:47 -0500
-Message-Id: <20220228215547.17414-1-jsbronder@cold-front.org>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 1/3] python3-scapy: Define custom PYPA_WHEEL
+Date: Mon, 28 Feb 2022 14:21:52 -0800
+Message-Id: <20220228222154.210195-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Feb 2022 21:55:52 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Feb 2022 22:22:00 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95597
+ https://lists.openembedded.org/g/openembedded-devel/message/95598
 
-No releases since 2011, no upstream repository and does not build with
-bdist_wheel.  If you depend upon this recipe, please work with upstream
-to update the package to PEP-517 packaging.
+Standard defaults are not able to guess it right, so aid it a bit
 
-Note that there are alternatives on PyPI and numerous forks on github,
-but none appear to have become canonical.
-
-Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../packagegroups/packagegroup-meta-python.bb        |  1 -
- .../python/python3-termcolor_1.1.0.bb                | 12 ------------
- 2 files changed, 13 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-termcolor_1.1.0.bb
+ meta-networking/recipes-devtools/python/python3-scapy_2.4.5.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index 9626231bba..dbfa991ebe 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -421,7 +421,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
-     python3-sympy \
-     python3-tabulate \
-     python3-term \
--    python3-termcolor \
-     python3-textparser \
-     python3-texttable \
-     python3-thrift \
-diff --git a/meta-python/recipes-devtools/python/python3-termcolor_1.1.0.bb b/meta-python/recipes-devtools/python/python3-termcolor_1.1.0.bb
-deleted file mode 100644
-index 17df7f983d..0000000000
---- a/meta-python/recipes-devtools/python/python3-termcolor_1.1.0.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--SUMMARY = "ANSII Color formatting for output in terminal"
--HOMEPAGE = "https://pypi.python.org/pypi/termcolor"
--SECTION = "devel/python"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=809e8749b63567978acfbd81d9f6a27d"
--
--inherit pypi setuptools3
--
--SRC_URI[md5sum] = "043e89644f8909d462fbbfa511c768df"
--SRC_URI[sha256sum] = "1d6d69ce66211143803fbc56652b41d73b4a400a2891d7bf7a1cdf4c02de613b"
--
--BBCLASSEXTEND = "native"
+diff --git a/meta-networking/recipes-devtools/python/python3-scapy_2.4.5.bb b/meta-networking/recipes-devtools/python/python3-scapy_2.4.5.bb
+index d318c27c5a..3a1f102dc9 100644
+--- a/meta-networking/recipes-devtools/python/python3-scapy_2.4.5.bb
++++ b/meta-networking/recipes-devtools/python/python3-scapy_2.4.5.bb
+@@ -25,6 +25,8 @@ S = "${WORKDIR}/git"
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+ inherit setuptools3 ptest
++PIP_INSTALL_PACKAGE = "scapy"
++PYPA_WHEEL = "${PIP_INSTALL_DIST_PATH}/${PIP_INSTALL_PACKAGE}-*-*.whl"
+ 
+ do_install:append() {
+         mv ${D}${bindir}/scapy ${D}${bindir}/scapy3
 -- 
 2.35.1
 
