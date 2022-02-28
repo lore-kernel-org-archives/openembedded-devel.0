@@ -1,94 +1,178 @@
-Return-Path: <matthias@extraklein.de>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 83B68C433F5
-	for <webhook@archiver.kernel.org>; Mon, 28 Feb 2022 15:46:01 +0000 (UTC)
-Received: from relay.yourmailgateway.de (relay.yourmailgateway.de
- [188.68.63.97])
- by mx.groups.io with SMTP id smtpd.web11.21333.1646063157786564322
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C7FDC433EF
+	for <webhook@archiver.kernel.org>; Mon, 28 Feb 2022 15:49:38 +0000 (UTC)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com
+ [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.web10.21156.1646063376336011275
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 07:46:00 -0800
+ Mon, 28 Feb 2022 07:49:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@extraklein.de
- header.s=key2 header.b=D2RJWvI4;
- spf=pass (domain: extraklein.de, ip: 188.68.63.97,
- mailfrom: matthias@extraklein.de)
-Received: from mors-relay-2501.netcup.net (localhost [127.0.0.1])
-	by mors-relay-2501.netcup.net (Postfix) with ESMTPS id 4K6l8g38jvz4ysZ
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 16:45:55 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=extraklein.de;
-	s=key2; t=1646063155;
-	bh=tOlTLJU/WR8o+DK0iUlUUPajwa+fzIVJZjIqA4nxPdA=;
-	h=From:To:Cc:Subject:Date:From;
-	b=D2RJWvI4kskoOzTgtG5MJmGDs99skRZTBZ/sbfehvsv5KmRjGlClIGF+n5P89JLSA
-	 0A4ykTQLB5ah1qwl9HcuFqKtx9OK2XrJ8BaoK1dV0XH1tsmn3nC0WsvBbmnDElsX6n
-	 u3FJOl3ZAa5at13GAOZgo52I4mHx5qj1R1ZD77Prh/Lp3ovlrjVJo4faosx8HAUbsA
-	 oDxysmm41orlZv8fAC+LG1AoBxanbLycs1hDOKqQGt40sYGrs4Dnz1rEOao08RvgX1
-	 phV10WrXkq2+DYFwlijCT14wf3sENhfbVyrpL84w0vcvxpMPjnLprlU3q/VbAOp00E
-	 gKWyXzpuJVJzQ==
-Received: from policy02-mors.netcup.net (unknown [46.38.225.53])
-	by mors-relay-2501.netcup.net (Postfix) with ESMTPS id 4K6l8g2mFtz4xyQ
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 16:45:55 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at policy02-mors.netcup.net
-Received: from mx2fa3.netcup.net (unknown [10.243.12.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by policy02-mors.netcup.net (Postfix) with ESMTPS id 4K6l8f1brhz8sh0
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 16:45:53 +0100 (CET)
-Received: from localhost (ip-062-143-218-156.um16.pools.vodafone-ip.de
- [62.143.218.156])
-	by mx2fa3.netcup.net (Postfix) with ESMTPSA id 61F041400F2;
-	Mon, 28 Feb 2022 16:45:53 +0100 (CET)
-Authentication-Results: mx2fa3;
-        spf=pass (sender IP is 62.143.218.156)
- smtp.mailfrom=matthias@extraklein.de smtp.helo=localhost
-Received-SPF: pass (mx2fa3: connection is authenticated)
-From: Matthias Klein <matthias@extraklein.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: Matthias Klein <matthias@extraklein.de>
-Subject: [meta-python][PATCH V2] python3-smbus: fix wheel build
-Date: Mon, 28 Feb 2022 16:45:39 +0100
-Message-Id: <20220228154539.1227-1-matthias@extraklein.de>
-X-Mailer: git-send-email 2.30.2
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=hwY+uI+a;
+ spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: ticotimo@gmail.com)
+Received: by mail-ej1-f44.google.com with SMTP id vz16so25749760ejb.0
+        for <openembedded-devel@lists.openembedded.org>;
+ Mon, 28 Feb 2022 07:49:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=YvtK8D5phSDHWDQA5bK5/xWCNTS1bC1wgAJmiaoStiA=;
+        b=hwY+uI+aw/Jbnm4hns7UHO+N7Fb5I4XNsIiDUqZFPVRZgmU/2vH8XywYhb+dXhGFhM
+         /Kh3ssJdOdejuVyxPUxfoHSdCH0GVngRIXheFH2W/eGi81zObt6XQtTPTltKaKspfnFc
+         k/cTzdOdtRWTtBT+lYJinJwgsIcCJ6BFlGkCeu66BPC7wgxOs0iMcy1Rjjt556NP2OTb
+         JWlADKRbhb/mDS18JXnZhJhSVWQOEoK6njktjUc2Jbv8VO1/dIfF+EiXleptkmuYe7gW
+         auM5Frws6uvmW7x9K29kHXPGrLyo/B78X0nERpNt9QarnTw31Z/ya09rckyj9vd66ATr
+         xHww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=YvtK8D5phSDHWDQA5bK5/xWCNTS1bC1wgAJmiaoStiA=;
+        b=aM0vRRdNvjFaUvCcWaQ2XSrGDimlHAAVxxG0eXyQx0BdEhSeC702prpRzSqqO09tk4
+         J+YhiuUIAXgM6+rFpPg6USebMPKxL1q7zU6BFrLx0LBsKhxXSLLk9yt8IVUKxl8Kj+3M
+         veuE9vY9V6FGZbtpm2UmcN4g3l6ShwxX86YnmhP7OaM80hrcn738PAfTksn6j0Hul9VA
+         FtcNgrPx+tYipKXkmMVJsWue6qw3rIFzQksMiAo82WaDjlHw/k/tiVgN/ZeD/O49tWWu
+         NwsogEazWleRqAQPh3BTeedH6DPuQbA2evnY+5NIS6YOQKoSoL+FOqqCR8Hv1A1LMB6l
+         8npw==
+X-Gm-Message-State: AOAM533hox8p4o/b7okNkZgEbf2gxACwPwsVGtzqr9ZMt1r/A+hTBvmA
+	6NT/SamL7DrkvqTR58hll+8ad6zbvZ2A9buABFA=
+X-Google-Smtp-Source: 
+ ABdhPJyr1Nfx5lUT9i5OgtZHpBChKSUfuK2nbG8qwuQfc6HJqHMBeodfoVGIq5K3tPclhLTYVCHGoJuj9k4AjrdQbdw=
+X-Received: by 2002:a17:906:3e4b:b0:6cf:7f02:9332 with SMTP id
+ t11-20020a1709063e4b00b006cf7f029332mr15543470eji.404.1646063374676; Mon, 28
+ Feb 2022 07:49:34 -0800 (PST)
 MIME-Version: 1.0
-X-PPP-Message-ID: <164606315360.3068.4231251475699465553@mx2fa3.netcup.net>
-X-PPP-Vhost: extraklein.de
-X-NC-CID: ht4DaEmJmlZj+zPfx1YZwbNhVvYuKe2REcx56e/JE/lsIrKV0hE=
-Content-Transfer-Encoding: quoted-printable
+References: <20220228152231.1050011-1-troth@openavr.org>
+In-Reply-To: <20220228152231.1050011-1-troth@openavr.org>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Mon, 28 Feb 2022 07:49:23 -0800
+Message-ID: 
+ <CANx9H-AZqJHFbGiY_ft4OFGPp4O1HbDQsNeu98zP2Y_LMjkK7w@mail.gmail.com>
+Subject: Re: [oe] [PATCH] pyhton3-marshmallow: fix wheel build
+To: "Theodore A. Roth" <troth@openavr.org>
+Cc: "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>,
+	"Theodore A . Roth" <theodore_roth@trimble.com>
+Content-Type: multipart/alternative; boundary="000000000000b9b53405d915feb8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Feb 2022 15:46:01 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Feb 2022 15:49:38 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95582
+ https://lists.openembedded.org/g/openembedded-devel/message/95583
 
-Recipe does not inherit pypi nor would PN be a good guess for the wheel
-name so set PIP_INSTALL_PACKAGE appropriately.
-PYPA_WHEEL doesn't respect SETUPTOOLS_SETUP_PATH so set PYPA_WHEEL
-appropriately.
+--000000000000b9b53405d915feb8
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Matthias Klein <matthias@extraklein.de>
----
- meta-python/recipes-devtools/python/python3-smbus_4.3.bb | 2 ++
- 1 file changed, 2 insertions(+)
+Typo in the subject line (pyhton)
 
-diff --git a/meta-python/recipes-devtools/python/python3-smbus_4.3.bb b/m=
-eta-python/recipes-devtools/python/python3-smbus_4.3.bb
-index ecdff3ada..1a6c99cfc 100644
---- a/meta-python/recipes-devtools/python/python3-smbus_4.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-smbus_4.3.bb
-@@ -13,4 +13,6 @@ S =3D "${WORKDIR}/i2c-tools-${PV}"
-=20
- inherit setuptools3
-=20
-+PIP_INSTALL_PACKAGE =3D "smbus"
-+PYPA_WHEEL =3D "${S}/py-smbus/dist/smbus-*-*.whl"
- SETUPTOOLS_SETUP_PATH =3D "${S}/py-smbus"
---=20
-2.30.2
+On Mon, Feb 28, 2022 at 7:22 AM Theodore A. Roth <troth@openavr.org> wrote:
 
+> Recipe does not inherit pypi nor would PN be a good guess at the name of
+> the wheel. Set PIP_INSTALL_PACKAGE appropriately.
+>
+> Signed-off-by: Theodore A. Roth <theodore_roth@trimble.com>
+> Signed-off-by: Theodore A. Roth <troth@openavr.org>
+> ---
+>  .../recipes-devtools/python/python3-marshmallow_3.14.1.bb       | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-python/recipes-devtools/python/
+> python3-marshmallow_3.14.1.bb b/meta-python/recipes-devtools/python/
+> python3-marshmallow_3.14.1.bb
+> index ddfe4b99c..dc5f17388 100644
+> --- a/meta-python/recipes-devtools/python/python3-marshmallow_3.14.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-marshmallow_3.14.1.bb
+> @@ -15,4 +15,6 @@ S = "${WORKDIR}/git"
+>
+>  inherit setuptools3
+>
+> +PIP_INSTALL_PACKAGE = "marshmallow"
+> +
+>  RDEPENDS:${PN} += "python3-core"
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#95579):
+> https://lists.openembedded.org/g/openembedded-devel/message/95579
+> Mute This Topic: https://lists.openembedded.org/mt/89452513/924729
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> ticotimo@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
+>
+
+--000000000000b9b53405d915feb8
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Typo in the subject line (pyhton)</div><br><div class=3D"g=
+mail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Feb 28, 2022 at 7=
+:22 AM Theodore A. Roth &lt;<a href=3D"mailto:troth@openavr.org">troth@open=
+avr.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"=
+margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-lef=
+t:1ex">Recipe does not inherit pypi nor would PN be a good guess at the nam=
+e of<br>
+the wheel. Set PIP_INSTALL_PACKAGE appropriately.<br>
+<br>
+Signed-off-by: Theodore A. Roth &lt;<a href=3D"mailto:theodore_roth@trimble=
+.com" target=3D"_blank">theodore_roth@trimble.com</a>&gt;<br>
+Signed-off-by: Theodore A. Roth &lt;<a href=3D"mailto:troth@openavr.org" ta=
+rget=3D"_blank">troth@openavr.org</a>&gt;<br>
+---<br>
+=C2=A0.../recipes-devtools/python/<a href=3D"http://python3-marshmallow_3.1=
+4.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-marshmallow_3.14.1.bb<=
+/a>=C2=A0 =C2=A0 =C2=A0 =C2=A0| 2 ++<br>
+=C2=A01 file changed, 2 insertions(+)<br>
+<br>
+diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
+marshmallow_3.14.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-marshma=
+llow_3.14.1.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://=
+python3-marshmallow_3.14.1.bb" rel=3D"noreferrer" target=3D"_blank">python3=
+-marshmallow_3.14.1.bb</a><br>
+index ddfe4b99c..dc5f17388 100644<br>
+--- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-marshma=
+llow_3.14.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-marshmallow_3.=
+14.1.bb</a><br>
++++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-marshma=
+llow_3.14.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-marshmallow_3.=
+14.1.bb</a><br>
+@@ -15,4 +15,6 @@ S =3D &quot;${WORKDIR}/git&quot;<br>
+<br>
+=C2=A0inherit setuptools3<br>
+<br>
++PIP_INSTALL_PACKAGE =3D &quot;marshmallow&quot;<br>
++<br>
+=C2=A0RDEPENDS:${PN} +=3D &quot;python3-core&quot;<br>
+-- <br>
+2.25.1<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#95579): <a href=3D"https://lists.openembedded.org/g/ope=
+nembedded-devel/message/95579" rel=3D"noreferrer" target=3D"_blank">https:/=
+/lists.openembedded.org/g/openembedded-devel/message/95579</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/89452513/9247=
+29" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt/=
+89452513/924729</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
+et=3D"_blank">ticotimo@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+
+--000000000000b9b53405d915feb8--
 
