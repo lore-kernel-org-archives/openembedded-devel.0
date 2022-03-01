@@ -1,121 +1,171 @@
-Return-Path: <xuhuan.fnst@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5014FC433F5
-	for <webhook@archiver.kernel.org>; Tue,  1 Mar 2022 01:28:29 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com
- [195.245.230.17])
- by mx.groups.io with SMTP id smtpd.web09.3346.1646098107287233758
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A655EC433F5
+	for <webhook@archiver.kernel.org>; Tue,  1 Mar 2022 01:59:10 +0000 (UTC)
+Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com
+ [209.85.160.177])
+ by mx.groups.io with SMTP id smtpd.web12.3589.1646099949530517869
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 17:28:28 -0800
+ Mon, 28 Feb 2022 17:59:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=A73cDoJU;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.17,
- mailfrom: xuhuan.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1646098105; i=@fujitsu.com;
-	bh=fDqP3TsCzajkBqBS+r12lZb9+ZW9I/sRROdQidsQWfM=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=A73cDoJUmO0Fu4hCf90nBpsOJx/K+C/8l3fTss7AmhWYhRFryU+Zei0LpuRN1o4Mq
-	 Gw2NDHIA/SXV6BODPNiX4bxo7xjYFIyexSjPyFZ66+9vDnnMvKlkxqljUXlTpR5UqB
-	 Bj8pygdgHMYN3HrZkFDDThxh3UdUb5wYatesiUMNAXE/8hYAhMALXXllGdA+PjCn9w
-	 YVrpb/ogbkMUYYxNCRlHSuznFNq8UI9oXsxPQ0JKTJn+8T0lp1A45J4PDWLfnj4lPo
-	 DZSgDmem9XK9GCG+91+U+oIC9UKjjNeaLtrxy2ShgMn9ZZmSwfL4kpSV07DRJm9Le4
-	 1/SqXM7F7O60g==
-Received: from [100.115.7.206] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta.az-a.eu-west-1.aws.ess.symcld.net id 6A/FC-12292-8B67D126;
- Tue, 01 Mar 2022 01:28:24 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrLIsWRWlGSWpSXmKPExsViZ8ORqLumTDb
-  JoPWjvMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmjH9+iWWgmWcFVufN7A1MB7j6GLk4hASeMIo
-  8W/HDkYI5wKTxJr915ghnBOMElPunwNyODnYBNQlHt98zQhiiwjoSyydvQcsziygKtF9cQ07i
-  C0sECbx9OUfJhCbRUBF4sjCSWA2r4C7xJ/581hBbAkBBYkpD9+D9XIKeEisuDIZrEYIqObX8w
-  4WiHpBiZMzn7BAzJeQOPjiBTNEr5LEiRUfmSDsConXhy9BxdUkrp7bxDyBUXAWkvZZSNoXMDK
-  tYrRKKspMzyjJTczM0TU0MNA1NDTVBZKmJnqJVbqJeqmluuWpxSW6hnqJ5cV6qcXFesWVuck5
-  KXp5qSWbGIFhnFLMMGsH46y+n3qHGCU5mJREeed6yiYJ8SXlp1RmJBZnxBeV5qQWH2KU4eBQk
-  uBVKwHKCRalpqdWpGXmAGMKJi3BwaMkwitbCJTmLS5IzC3OTIdInWI05jh85cpeZo6HG2/sZR
-  ZiycvPS5US5+0pBSoVACnNKM2DGwSL9UuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHnngkz
-  hycwrgdv3CugUJqBT/gZLgZxSkoiQkmpgcuetCHigvLvW1Oi/wRv3pWzZZy98U9ORb5TcxLOj
-  q9vJwbAjwWJdc+4U3w6HlQWxnux25hI9T2seTat1V/9X62bwSOSWdlWFp5HcrZUCd/83z/d6c
-  PYqEy/T4psPZogrPZjt1LXh+9T/herr1mS/7y7ZLa2ZPPNk2pyn4R4CvPXVqnL8+ydETohNOH
-  L6Ho+sesi0uQvPSc8/Kr+XJXX5SpEKu2l/HS5+WT7js9iH7Sn1D52l9UM3O23Z+DPlo3mvzEY
-  tMTnNbq6rGVPXt/+xTZyTuHtO58Z8rp8TODZrXJTuv5y+5OP8pG+7dHcun8O94hyHs+oabrlj
-  J7xYT2gePs9/6KSruawx69kCll0blViKMxINtZiLihMBO+kIP3ADAAA=
-X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-22.tower-585.messagelabs.com!1646098092!10228!1
-X-Originating-IP: [62.60.8.97]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.8; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 31611 invoked from network); 1 Mar 2022 01:28:12 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-22.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 1 Mar 2022 01:28:12 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 083A810018E
-	for <openembedded-devel@lists.openembedded.org>;
- Tue,  1 Mar 2022 01:28:12 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id E509C100186
-	for <openembedded-devel@lists.openembedded.org>;
- Tue,  1 Mar 2022 01:28:11 +0000 (GMT)
-Received: from localhost.localdomain.localdomain (10.167.225.131) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Tue, 1 Mar 2022 01:27:57 +0000
-From: XU Huan <xuhuan.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [PATCH 2/2] [oe] [meta-python] [PATCH] python3-mccabe: upgrade 0.6.1
- -> 0.7.0
-Date: Tue, 1 Mar 2022 09:28:33 +0800
-Message-ID: <1646098113-11465-2-git-send-email-xuhuan.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1646098113-11465-1-git-send-email-xuhuan.fnst@fujitsu.com>
-References: <1646098113-11465-1-git-send-email-xuhuan.fnst@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=iLbZvB4q;
+ spf=pass (domain: gmail.com, ip: 209.85.160.177,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f177.google.com with SMTP id a1so4248088qta.13
+        for <openembedded-devel@lists.openembedded.org>;
+ Mon, 28 Feb 2022 17:59:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=cRQwNAzh7ld/4es6XqjofoGi+P3MZV8QwIhycYkT6mQ=;
+        b=iLbZvB4qybqSct0FsJYluFPrDw1hb/+DgNCkj3sbYdr3iDzbpWosRJpw8JQ77LazE0
+         DNw0eAhBYLR1XvZ4rumP8zmUBXr42yM3SpriU3re+L2pH55z4PC/wptTHmiPxJp6qi6r
+         o3Px+VCavsWVWOFJrJzONMP+Ez01yqOnXbgqomXLmhQdskft1W7rY/zjK4SxG45OzIC5
+         swIPW34/bYjArUwhKGH7VJMQmQanY013J8vOeetkzOcxWaDUHcyJkWX231DgVRJr2Mxe
+         Ms+KR2KCxgls3fsaEwV45Ex6hMSZzEnA9+d22aWDRj5lfkbmfgmxT/Htx6Ie9Q+RW+hm
+         XTDg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=cRQwNAzh7ld/4es6XqjofoGi+P3MZV8QwIhycYkT6mQ=;
+        b=Osmm3Tkjd6WjYKI83yx7ZY0DqrBkbGVVBoJ3VslhOUg9CVyH12fvy+pySfy7ASyzGF
+         WsX0of3qjXqLSj0cOI9GjaKG7SPN79HHGPbOYdJNAaQMMfnIPD9nLKO4hxQNG6p38Rxf
+         l9/YOoViXxp/jrhRvwWlNcPgIIEmgIFHEQoNSC3W2A5rHwJZtLGrL5DSbhBwndeDYqW2
+         46cw+atEJFHq+VZsjs/dgedph+Ppk7xhkukc27X9Xj5Ko7kQ0LqT74/GfkYM/VAt3oar
+         wXZxsHbYgW6sb7beKf3ChXCVaYzaux+h+BTU5RtUQtg/MwV5Z8boS8jaBrW1lpaYBBWF
+         kKAw==
+X-Gm-Message-State: AOAM5318mSSqM36DMvWGlranJb3dESJ4s/4XAqhAPREv6GPiLyDC6INF
+	VteMUiZP1hbAoORd9GVatiaFErMxMLhl9Ua48cEGp4TpQI0=
+X-Google-Smtp-Source: 
+ ABdhPJx2SIwzKYFo3WGYEOigXBExJfPznrly4BdXn5ynY7jocMh8QgSmqKBTqT4s5nvxIC9R/iWEp1FelOEClUCp0PU=
+X-Received: by 2002:ac8:5a86:0:b0:2de:29af:5658 with SMTP id
+ c6-20020ac85a86000000b002de29af5658mr18456999qtc.54.1646099948505; Mon, 28
+ Feb 2022 17:59:08 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.131]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+References: <20220228222206.25716-1-jsbronder@cold-front.org>
+ <CAMKF1sppTUJmQQ0QgfE0j3i7ZqRAATPLA+2o3sKy1_Cd_3d51g@mail.gmail.com>
+ <CAMKF1sq5Z5Vwx60Kym1wV8uN5taFeZ0dOxZ4EW4eY_6bkzCasQ@mail.gmail.com>
+ <Yh1TyAUZz6bCAIba@ravine.members.linode.com>
+ <CANx9H-Ba16h+X4p_thHhzSMeCy3feC+Hvj+Y7XHDB6pAE83uzw@mail.gmail.com>
+In-Reply-To: 
+ <CANx9H-Ba16h+X4p_thHhzSMeCy3feC+Hvj+Y7XHDB6pAE83uzw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 28 Feb 2022 17:58:42 -0800
+Message-ID: 
+ <CAMKF1srLJovLtF9kfMrXtYbzaUgxH53jDup-MXrUXdXwR=XaYw@mail.gmail.com>
+Subject: Re: [oe] python3-configobj: drop recipe
+To: Tim Orling <ticotimo@gmail.com>
+Cc: Justin Bronder <jsbronder@cold-front.org>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Mar 2022 01:28:29 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Mar 2022 01:59:10 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95615
+ https://lists.openembedded.org/g/openembedded-devel/message/95616
 
-From: Xu Huan <xuhuan.fnst@fujitsu.com>
+On Mon, Feb 28, 2022 at 4:50 PM Tim Orling <ticotimo@gmail.com> wrote:
+>
+>
+>
+> On Mon, Feb 28, 2022 at 2:59 PM Justin Bronder <jsbronder@cold-front.org> wrote:
+>>
+>> On 28/02/22 14:38 -0800, Khem Raj wrote:
+>> > oh well Tim already fixed it, I would suggest you use master-next for
+>> > this work since it has latest collaborations from everyone.
+>> >
+>> > https://patchwork.yoctoproject.org/project/oe/patch/20220227234254.1089695-1-tim.orling@konsulko.com/
+>>
+>> Ah, will do.  I was just searching subject lines for patches posted to this list
+>> and missed the typo in the subject line ;)
 
-Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
----
- .../{python3-mccabe_0.6.1.bb => python3-mccabe_0.7.0.bb}       | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-mccabe_0.6.1.bb => python3-mccabe_0.7.0.bb} (66%)
+yes good find.
 
-diff --git a/meta-python/recipes-devtools/python/python3-mccabe_0.6.1.bb b/meta-python/recipes-devtools/python/python3-mccabe_0.7.0.bb
-similarity index 66%
-rename from meta-python/recipes-devtools/python/python3-mccabe_0.6.1.bb
-rename to meta-python/recipes-devtools/python/python3-mccabe_0.7.0.bb
-index 513a5a9f2..a2c72fcc9 100644
---- a/meta-python/recipes-devtools/python/python3-mccabe_0.6.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-mccabe_0.7.0.bb
-@@ -4,8 +4,7 @@ SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a489dc62bacbdad3335c0f160a974f0f"
- 
--SRC_URI[md5sum] = "723df2f7b1737b8887475bac4c763e1e"
--SRC_URI[sha256sum] = "dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f"
-+SRC_URI[sha256sum] = "348e0240c33b60bbdf4e523192ef919f28cb2c3d7d5c7794f74009290f236325"
- 
- inherit pypi setuptools3
- 
--- 
-2.25.1
+>
+>
+> Ugh. Fly fast and typos happen.
 
+No worries, I have it taken care of on master-next
+
+>
+>>
+>>
+>> >
+>> > On Mon, Feb 28, 2022 at 2:32 PM Khem Raj <raj.khem@gmail.com> wrote:
+>> > >
+>> > > Thanks for looking into this, Armin added this recipe in 2020, I would
+>> > > like to hear from him as well on what this recipe's future plans are.
+>> > >
+>> > > On Mon, Feb 28, 2022 at 2:22 PM Justin Bronder <jsbronder@cold-front.org> wrote:
+>> > > >
+>> > > > The last official release, 5.0.6 is from 2014 and does not build with
+>> > > > bdist_wheel.  The upstream repository does appear active but it's
+>> > > > unclear if anyone has the ability/motivation to tag a new release or
+>> > > > upload it to PyPI.  If you depend upon this recipe, please work with
+>> > > > upstream to tag a PEP-517 compliant release.
+>> > > >
+>> > > > https://github.com/DiffSK/configobj/issues/160
+>> > > > https://github.com/DiffSK/configobj/issues/197
+>> > > > https://github.com/DiffSK/configobj/issues/204
+>> > > >
+>> > > > Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
+>> > > > ---
+>> > > >  .../packagegroups/packagegroup-meta-python.bb            | 1 -
+>> > > >  .../recipes-devtools/python/python3-configobj_5.0.6.bb   | 9 ---------
+>> > > >  2 files changed, 10 deletions(-)
+>> > > >  delete mode 100644 meta-python/recipes-devtools/python/python3-configobj_5.0.6.bb
+>> > > >
+>> > > > diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+>> > > > index dbfa991ebe..6b10913657 100644
+>> > > > --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+>> > > > +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+>> > > > @@ -81,7 +81,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
+>> > > >      python3-colorlog \
+>> > > >      python3-colorzero \
+>> > > >      python3-configargparse \
+>> > > > -    python3-configobj \
+>> > > >      python3-configparser \
+>> > > >      python3-configshell-fb \
+>> > > >      python3-constantly \
+>> > > > diff --git a/meta-python/recipes-devtools/python/python3-configobj_5.0.6.bb b/meta-python/recipes-devtools/python/python3-configobj_5.0.6.bb
+>> > > > deleted file mode 100644
+>> > > > index 1b85368105..0000000000
+>> > > > --- a/meta-python/recipes-devtools/python/python3-configobj_5.0.6.bb
+>> > > > +++ /dev/null
+>> > > > @@ -1,9 +0,0 @@
+>> > > > -SUMMARY = "Config file reading, writing and validation."
+>> > > > -SECTION = "devel/python"
+>> > > > -LICENSE = "BSD-3-Clause"
+>> > > > -LIC_FILES_CHKSUM = "file://configobj.py;md5=a7c3968dd866dfd23e91e125b669ab21"
+>> > > > -
+>> > > > -PYPI_PACKAGE = "configobj"
+>> > > > -SRC_URI[sha256sum] = "a2f5650770e1c87fb335af19a9b7eb73fc05ccf22144eb68db7d00cd2bcb0902"
+>> > > > -
+>> > > > -inherit pypi setuptools3
+>> > > > --
+>> > > > 2.35.1
+>> > > >
+>> > > >
+>> > > >
+>> > > >
+>>
+>> --
+>> Justin Bronder
+>>
+>>
+>>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#95613): https://lists.openembedded.org/g/openembedded-devel/message/95613
+> Mute This Topic: https://lists.openembedded.org/mt/89463815/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
