@@ -1,133 +1,110 @@
-Return-Path: <sakib.sajal@windriver.com>
+Return-Path: <patrick@stwcx.xyz>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6818EC433EF
-	for <webhook@archiver.kernel.org>; Tue,  1 Mar 2022 19:12:13 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web08.1248.1646161932293941545
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CC3EFC433EF
+	for <webhook@archiver.kernel.org>; Tue,  1 Mar 2022 19:22:10 +0000 (UTC)
+Received: from wout1-smtp.messagingengine.com (wout1-smtp.messagingengine.com
+ [64.147.123.24])
+ by mx.groups.io with SMTP id smtpd.web10.1473.1646162529625171456
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Mar 2022 11:12:12 -0800
+ Tue, 01 Mar 2022 11:22:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.3.146,
- mailfrom: sakib.sajal@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 221JCBYf015709
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Tue, 1 Mar 2022 11:12:11 -0800
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Tue, 1 Mar 2022 11:12:10 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Tue, 1 Mar 2022 11:12:10 -0800
-Received: from yow-lpggp3.wrs.com (128.224.137.13) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Tue, 1 Mar 2022 11:12:10 -0800
-From: Sakib Sajal <sakib.sajal@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][hardknott][PATCH] nss: fix CVE-2022-22747
-Date: Tue, 1 Mar 2022 14:12:10 -0500
-Message-ID: <20220301191210.19499-1-sakib.sajal@windriver.com>
-X-Mailer: git-send-email 2.33.0
+ dkim=pass header.i=@stwcx.xyz header.s=fm1 header.b=YC7Gf4TY;
+ spf=pass (domain: stwcx.xyz, ip: 64.147.123.24, mailfrom: patrick@stwcx.xyz)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+	by mailout.west.internal (Postfix) with ESMTP id 743863200911;
+	Tue,  1 Mar 2022 14:22:08 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute4.internal (MEProxy); Tue, 01 Mar 2022 14:22:08 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stwcx.xyz; h=cc
+	:cc:content-transfer-encoding:date:date:from:from:in-reply-to
+	:message-id:mime-version:reply-to:sender:subject:subject:to:to;
+	 s=fm1; bh=jxT6/R+hIQ2aBkTYR0/xyqPDwDeZsj1PFvsNZCoIXYM=; b=YC7Gf
+	4TYvrJZ//wTfrchjn+fP9MT94PxPvXsXOsAO8lxLP2f/uDVN7VP4gBDIZj/bq1We
+	T60GIh5mXc545P1eZv+SSZ8C48RCETCBi9zaToom3924bAHjen3P0H/e9PS5yeBy
+	ZoOcXwHfPyPPnsBU2OgOTaTe0cQLbAD5zzNHmKSH/h/+3T8N8WRLi0z6DUsBiHD2
+	Mlm6RHLsL+S2HfpSMoZncmJPkXK+5MlGjpK64TvBvC4BX/ycjdhYdA43+oD47zFq
+	XQHwIqYJDWuplQ0cB6sdVv0Fz1Jb5gLRV2RZw2lZT0Gi7m5RhfVztz9NgnfQ28aM
+	gkO/P2pG6RSE2doeg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
+	:from:from:in-reply-to:message-id:mime-version:reply-to:sender
+	:subject:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender
+	:x-me-sender:x-sasl-enc; s=fm2; bh=jxT6/R+hIQ2aBkTYR0/xyqPDwDeZs
+	j1PFvsNZCoIXYM=; b=KdhHvv6mhHvNy2UnISKOMHYiDIjsmRNxdYpjhCOedC/AH
+	G7P4q6wle3u7L9OEj7v1uw/0HWfmx38vkm/qCxpO7CWfRHFwG29Zp/XK/7aREom3
+	d/TISGRAha8ZZNDHS0LAjus3VLz08vFkUkIeXWVeiFhXxAVvqmEFSXGUpsDzW2oM
+	NH5x66VQa7r+IH+KbPpC4hmoqg38IodwY0dv1dMV1I3RkZPgcWSQZd9xwD9xe3VS
+	rQ/wFhGXa0Vos9fI52wdZPd4P3oY4XF4EIIx6+6gBfbDDPZr3I0l6tBnh3TtI1a1
+	0SlfZtglyc2gMTB81ETQ6BN22u25TJQc08UewIKfg==
+X-ME-Sender: <xms:X3IeYvp2qm4JHpxpXN9nxkYDRLFJ_rbIdWStNq8ZjTopXdYbrBTzlg>
+    <xme:X3IeYppg5wd2hF9f7tK_Sz4vsii096xSukWYcFu7K4jIup3f4LW2qb_D_GYjSrTXP
+    6ONvekYOMqUXbAehFg>
+X-ME-Received: 
+ <xmr:X3IeYsPVps_xy2FbQK61nutzJXjuXiUFMTEZhct2ihQKwGCVCov_iZQNgPXHxdjSo4Ten2Tu_iU72_v7AL69b7yxpAqjH2g0768UhVNmFPbs4w>
+X-ME-Proxy-Cause: 
+ gggruggvucftvghtrhhoucdtuddrgedvvddruddtvddguddvudcutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+    enfghrlhcuvffnffculdefhedmnegovehorghsthgrlhdqhfeguddvqddtvdculdduhedt
+    mdenucfjughrpefhvffufffkofgggfestdekredtredttdenucfhrhhomheprfgrthhrih
+    gtkhcuhghilhhlihgrmhhsuceophgrthhrihgtkhesshhtfigtgidrgiihiieqnecuggft
+    rfgrthhtvghrnheptdeggeefteejjeeltdefvedttdfhieffvedvteefvdeljedvheeufe
+    eggfetleffnecuffhomhgrihhnpehgihhthhhusgdrtghomhenucevlhhushhtvghrufhi
+    iigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehprghtrhhitghksehsthiftgigrd
+    ighiii
+X-ME-Proxy: <xmx:X3IeYi6ivbxgXfDnl6vk-p56pFVlOfSSfebvs77aqamYh1CjX_fD0A>
+    <xmx:X3IeYu4lH1_m61hd3PbETkjgEi7R2ymXZDSGcpGIG2oBWjIk_lE4XA>
+    <xmx:X3IeYqiWpVjneZfJH94_x4rXhs0by6y9EYkJCgma6xbMlhvG_Nfatw>
+    <xmx:YHIeYkkp20lAPMU3j_Dda7hEYhe6y2ks6h9me03CulsBs2CU9yk0Jg>
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
+ 1 Mar 2022 14:22:07 -0500 (EST)
+From: Patrick Williams <patrick@stwcx.xyz>
+To: openembedded-devel@lists.openembedded.org
+Cc: Peter Kjellerstedt <pkj@axis.com>,
+	Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
+	Khem Raj <raj.khem@gmail.com>,
+	Patrick Williams <patrick@stwcx.xyz>
+Subject: [meta-oe][dunfell][PATCH] googletest: Switch branch from master to
+ main
+Date: Tue,  1 Mar 2022 13:21:47 -0600
+Message-Id: <20220301192147.3931475-1-patrick@stwcx.xyz>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Mar 2022 19:12:13 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Mar 2022 19:22:10 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95645
+ https://lists.openembedded.org/g/openembedded-devel/message/95646
 
-Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
+From: Peter Kjellerstedt <pkj@axis.com>
+
+The master branch has been renamed to main in the github repo.
+
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Patrick Williams <patrick@stwcx.xyz>
 ---
- ...k-for-missing-signedData-field-r-kee.patch | 55 +++++++++++++++++++
- meta-oe/recipes-support/nss/nss_3.64.bb       |  1 +
- 2 files changed, 56 insertions(+)
- create mode 100644 meta-oe/recipes-support/nss/nss/0001-Bug-1735028-check-for-missing-signedData-field-r-kee.patch
+ meta-oe/recipes-test/googletest/googletest_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/nss/nss/0001-Bug-1735028-check-for-missing-signedData-field-r-kee.patch b/meta-oe/recipes-support/nss/nss/0001-Bug-1735028-check-for-missing-signedData-field-r-kee.patch
-new file mode 100644
-index 000000000..38b982b48
---- /dev/null
-+++ b/meta-oe/recipes-support/nss/nss/0001-Bug-1735028-check-for-missing-signedData-field-r-kee.patch
-@@ -0,0 +1,55 @@
-+From 074e29e6724d443d3161ee2982ba7f017d3075dd Mon Sep 17 00:00:00 2001
-+From: "John M. Schanck" <jschanck@mozilla.com>
-+Date: Mon, 11 Oct 2021 22:09:25 +0000
-+Subject: [PATCH] Bug 1735028 - check for missing signedData field r=keeler
-+
-+Differential Revision: https://phabricator.services.mozilla.com/D128112
-+
-+Upstream-Status: Backport [074e29e6724d443d3161ee2982ba7f017d3075dd]
-+CVE: CVE-2022-22747
-+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
-+---
-+ gtests/certdb_gtest/decode_certs_unittest.cc | 13 +++++++++++++
-+ lib/pkcs7/certread.c                         |  5 +++++
-+ 2 files changed, 18 insertions(+)
-+
-+diff --git a/nss/gtests/certdb_gtest/decode_certs_unittest.cc b/nss/gtests/certdb_gtest/decode_certs_unittest.cc
-+index 405194edc..3317ae8ee 100644
-+--- a/nss/gtests/certdb_gtest/decode_certs_unittest.cc
-++++ b/nss/gtests/certdb_gtest/decode_certs_unittest.cc
-+@@ -26,3 +26,16 @@ TEST_F(DecodeCertsTest, EmptyCertPackage) {
-+                          sizeof(emptyCertPackage)));
-+   EXPECT_EQ(SEC_ERROR_BAD_DER, PR_GetError());
-+ }
-++
-++TEST_F(DecodeCertsTest, EmptySignedData) {
-++  // This represents a PKCS#7 ContentInfo of contentType
-++  // 1.2.840.113549.1.7.2 (signedData) with missing content.
-++  unsigned char emptySignedData[] = {0x30, 0x80, 0x06, 0x09, 0x2a, 0x86,
-++                                     0x48, 0x86, 0xf7, 0x0d, 0x01, 0x07,
-++                                     0x02, 0x00, 0x00, 0x05, 0x00};
-++
-++  EXPECT_EQ(nullptr,
-++            CERT_DecodeCertFromPackage(reinterpret_cast<char*>(emptySignedData),
-++                                       sizeof(emptySignedData)));
-++  EXPECT_EQ(SEC_ERROR_BAD_DER, PR_GetError());
-++}
-+diff --git a/nss/lib/pkcs7/certread.c b/nss/lib/pkcs7/certread.c
-+index 3091f9947..15094f2d7 100644
-+--- a/nss/lib/pkcs7/certread.c
-++++ b/nss/lib/pkcs7/certread.c
-+@@ -139,6 +139,11 @@ SEC_ReadPKCS7Certs(SECItem *pkcs7Item, CERTImportCertificateFunc f, void *arg)
-+         goto done;
-+     }
-+ 
-++    if (contentInfo.content.signedData == NULL) {
-++        PORT_SetError(SEC_ERROR_BAD_DER);
-++        goto done;
-++    }
-++
-+     rv = SECSuccess;
-+ 
-+     certs = contentInfo.content.signedData->certificates;
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-support/nss/nss_3.64.bb b/meta-oe/recipes-support/nss/nss_3.64.bb
-index ccb5201d4..d16aec65d 100644
---- a/meta-oe/recipes-support/nss/nss_3.64.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.64.bb
-@@ -33,6 +33,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
-            file://nss-fix-nsinstall-build.patch \
-            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
-            file://0001-Bug-1737470-Ensure-DER-encoded-signatures-are-within.patch \
-+           file://0001-Bug-1735028-check-for-missing-signedData-field-r-kee.patch \
-            "
- SRC_URI[sha256sum] = "d3175427172e9c3a6f1ebc74452cb791590f28191c6a1a443dbc0d87c9df1126"
+diff --git a/meta-oe/recipes-test/googletest/googletest_git.bb b/meta-oe/recipes-test/googletest/googletest_git.bb
+index 898f23faf..35fe1bed0 100644
+--- a/meta-oe/recipes-test/googletest/googletest_git.bb
++++ b/meta-oe/recipes-test/googletest/googletest_git.bb
+@@ -11,7 +11,7 @@ PROVIDES += "gmock gtest"
+ 
+ S = "${WORKDIR}/git"
+ SRCREV = "703bd9caab50b139428cea1aaff9974ebee5742e"
+-SRC_URI = "git://github.com/google/googletest.git;branch=master;protocol=https"
++SRC_URI = "git://github.com/google/googletest.git;branch=main;protocol=https"
+ 
+ inherit cmake
  
 -- 
-2.33.0
+2.34.1
 
 
