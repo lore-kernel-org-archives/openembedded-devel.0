@@ -1,135 +1,127 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jsbronder@cold-front.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44C01C433F5
-	for <webhook@archiver.kernel.org>; Tue,  1 Mar 2022 16:19:13 +0000 (UTC)
-Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com
- [209.85.160.171])
- by mx.groups.io with SMTP id smtpd.web08.10115.1646151552657602340
- for <Openembedded-devel@lists.openembedded.org>;
- Tue, 01 Mar 2022 08:19:12 -0800
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E032DC433F5
+	for <webhook@archiver.kernel.org>; Tue,  1 Mar 2022 16:33:05 +0000 (UTC)
+Received: from wout3-smtp.messagingengine.com (wout3-smtp.messagingengine.com
+ [64.147.123.19])
+ by mx.groups.io with SMTP id smtpd.web08.10296.1646152384839643826
+ for <openembedded-devel@lists.openembedded.org>;
+ Tue, 01 Mar 2022 08:33:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=a3MClSqc;
- spf=pass (domain: gmail.com, ip: 209.85.160.171,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f171.google.com with SMTP id bt3so10340933qtb.0
-        for <Openembedded-devel@lists.openembedded.org>;
- Tue, 01 Mar 2022 08:19:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
-        bh=qREVVIX2VpvlZExQjlU2lJGZ91mhTq7UkcQ3AWAgHDM=;
-        b=a3MClSqcyGupJXvE7OyfMUKi/AL9op3z6NNp2N9ibPKuCKUlWl/ibyZscfK5gjgxTd
-         WTwzWVUIa5k3DsFNQr/wbamlnJXi+P7zU2F0IolLn51/HT6mxvRNjZZbBoT8DHs1Lv5b
-         arRD5YdHdg/NDQO7whMDGX/zeJTOJia5js1XYhzcGVFkxnwHWg8XYJcBniNiEpjMzQQK
-         b73dmwlX0YXdcFjL+S6susHDzYnOGelQoyWl/IcSokMwKE4BWFzu3Dkbjirpe98w/42U
-         ZE3i7rlD38qtuCg0bhzBiKAV/7PocF2H0DO742dRmI6rWIaa1ZVyI04d7tqB+k/8qnv9
-         2brg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to;
-        bh=qREVVIX2VpvlZExQjlU2lJGZ91mhTq7UkcQ3AWAgHDM=;
-        b=xC/snjPlCpbs5K9zpLZYYpCyew8NZd5Ayn4Ok1eEYAMwSvPk19k6Egwwg1cOxnDFXO
-         ovzqUzh3U3rh8AHV3jaoVFUQS1BAFpEAYwg/IzMv6qXjBPNnzE6HA7vOMnVCwNUeBi6f
-         CcLxsyVH87YsIAAebM1rfn/jLVHaP0ZFtW9LK4XZYk3U7QUQoYM7SKZm2KBZQGT4rLS8
-         vV9h9Ja7k6ygN7iZpe3u7/FGaSOPc04aSLV3ZwO7Gy1wvcHtsToEl5G2atsBTD0VmUdM
-         kUCpuYQIyfo6ucEa8e3V4wer11l4A9Jbp0HTpEYBV25nysCK1Swd8LL20tKLPBxz2GPg
-         R+hA==
-X-Gm-Message-State: AOAM53361ch4ZLaQhgLUnRGIbHSsMMqDEJUuewmnDF6FbvURqs8rMNNg
-	tXbC5U5Z/fcPVdsQHBemCDEUeJfitywyLlTEeYa1kEvticwxMQ==
-X-Google-Smtp-Source: 
- ABdhPJw1TP0ABc4liR11eMTivSZZaBeXyCRpdcpJQ4q9Alf5O/0w23kTX/jHUAFUGF6Hyi+kC9cN7t3rob73OL4GDZY=
-X-Received: by 2002:a05:622a:104c:b0:2de:377e:25d9 with SMTP id
- f12-20020a05622a104c00b002de377e25d9mr20578456qte.229.1646151551488; Tue, 01
- Mar 2022 08:19:11 -0800 (PST)
+ dkim=pass header.i=@cold-front.org header.s=mesmtp header.b=l/jGstrk;
+ spf=pass (domain: cold-front.org, ip: 64.147.123.19,
+ mailfrom: jsbronder@cold-front.org)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+	by mailout.west.internal (Postfix) with ESMTP id 1177F3201E78;
+	Tue,  1 Mar 2022 11:33:03 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute4.internal (MEProxy); Tue, 01 Mar 2022 11:33:04 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
+	 h=cc:cc:content-transfer-encoding:date:date:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to; s=mesmtp; bh=VDO1FBufMQ471llRUaRinqAu4uMq4RAQ9Ew
+	7ek25mOw=; b=l/jGstrkNbPwcslnEFIvYfHw5XrAXw6VZsqPxR+RjniGw3j+qms
+	k8WJgmL7P//ETI8bFxyLCoksDGUxDBT5tzwnqYZqFv6/SL5KDXWeEBWRsN0W4Hl8
+	rVp0LURXymvQJokSPMy7IXGt/kn7yN9yFFpCMXeyD0uSMdG2JQRIkJqk=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
+	:from:from:in-reply-to:message-id:mime-version:reply-to:sender
+	:subject:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender
+	:x-me-sender:x-sasl-enc; s=fm2; bh=VDO1FBufMQ471llRUaRinqAu4uMq4
+	RAQ9Ew7ek25mOw=; b=NSXwWeLu4NNff2QjyD9LjvP7QLOFFt4+MkmDBAPeRnTkO
+	UEXxSGN8J+ZBj5Il98gypxlKZANpM7o1o3fV1+1WxfcNWzICkbuUrIcZ6SxhuAwu
+	HmXJS91ZeeyMFbsk3KNyJ4VAlGB1qY2kMlWdjUZ/qIkY4zxwiQNuuzxVYRS9CIQx
+	umc/Ar6u2kXsBveypRLuagNTbvBHcBzwHEoi2Gd4iUwZ8dgS4MSk9iRe5jsTHWxS
+	Q0WlF2I96P35O01uRevUD64qNbdYwl8A43oX6LgewgHP2h3+3pKjn+RCiPih4XUV
+	Ini8HfWChMiEVkOYY7ySVuOXDJPgH4uOlFn27MIPA==
+X-ME-Sender: <xms:v0oeYjmo7agL9Z37udoy5CEAyj1aPt-Ph3PHzqZHtZsFD9tpwfUCzA>
+    <xme:v0oeYm3y1TwWPA5L-x07scJgj3xAVb-m2NqM7oEPxpzTaqssiPeH3VMQduXUu3a5U
+    -91OUgO-1r4apus9g>
+X-ME-Received: 
+ <xmr:v0oeYpp-whjXmwWn_3fnLs2ofmK9Deukm0lpg-a0FYfNzhldhwCKm8pHgAmEtLMHgXy4eMXdyRH9Buxmnb5Avcm4sluS7S79q-Cfgn28qcN8>
+X-ME-Proxy-Cause: 
+ gggruggvucftvghtrhhoucdtuddrgedvvddruddtvddgkeejucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucenucfjughrpefhvffufffkofgggfestdekredtre
+    dttdenucfhrhhomheplfhushhtihhnuceurhhonhguvghruceojhhssghrohhnuggvrhes
+    tgholhguqdhfrhhonhhtrdhorhhgqeenucggtffrrghtthgvrhhnpedvhfdthfffieffve
+    etveeifeeuvddthfeludeitedukeeggfevfffgffffffffhfenucevlhhushhtvghrufhi
+    iigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjshgsrhhonhguvghrsegtohhlug
+    dqfhhrohhnthdrohhrgh
+X-ME-Proxy: <xmx:v0oeYrmvac_kE5TIwzioOkihKbLw13y5ZshugXoQQyxrTL-IKXM9-w>
+    <xmx:v0oeYh3Mr-yvSdkwNeEd1ZbLllXJqPNUwTgwj1OwWRBUGEXaGXdjIA>
+    <xmx:v0oeYquS3ol7UYcE8ZPr_fkoq4KGn40qmHl7rWixzujg5hcTATXWEg>
+    <xmx:v0oeYu8UQxgUdtRoxz4uziXC0KRmxPm1KFBmA5u2x4Isyun6Uyew1w>
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
+ 1 Mar 2022 11:33:03 -0500 (EST)
+From: Justin Bronder <jsbronder@cold-front.org>
+To: openembedded-devel@lists.openembedded.org
+Cc: Justin Bronder <jsbronder@cold-front.org>
+Subject: [meta-python][PATCH] python3-crcmod: use setuptools instead of
+ distutils
+Date: Tue,  1 Mar 2022 11:32:58 -0500
+Message-Id: <20220301163258.1329-1-jsbronder@cold-front.org>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-References: 
- <CAMKF1sppjOqUoU2zswWD1h9E8gSntfMiQUak=wQrWrSJ71Qx3w@mail.gmail.com>
- <CAMKF1spv_=Lm=4=oBLA8v=Dx_=wzcGt1rZ89xxAZN-rPcnKgag@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1spv_=Lm=4=oBLA8v=Dx_=wzcGt1rZ89xxAZN-rPcnKgag@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 1 Mar 2022 08:18:45 -0800
-Message-ID: 
- <CAMKF1sq1-WTR_ndLV_oGJ+2HqWpMzt6ZePGqLJBXSSVcD25Sdw@mail.gmail.com>
-Subject: Re: PEP-517 packaging fixes needed in meta-openembedded
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Mar 2022 16:19:13 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Mar 2022 16:33:05 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95638
+ https://lists.openembedded.org/g/openembedded-devel/message/95639
 
-We are making some progress. This is the latest ( 24 build failures )
-as of last night.
+Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
+---
+ ...-use-setuptools-instead-of-distutils.patch | 22 +++++++++++++++++++
+ .../python/python3-crcmod_1.7.bb              |  2 +-
+ 2 files changed, 23 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-crcmod/0001-setup.py-use-setuptools-instead-of-distutils.patch
 
-https://errors.yoctoproject.org/Errors/Build/142052/
+diff --git a/meta-python/recipes-devtools/python/python3-crcmod/0001-setup.py-use-setuptools-instead-of-distutils.patch b/meta-python/recipes-devtools/python/python3-crcmod/0001-setup.py-use-setuptools-instead-of-distutils.patch
+new file mode 100644
+index 0000000000..9bcb871135
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-crcmod/0001-setup.py-use-setuptools-instead-of-distutils.patch
+@@ -0,0 +1,22 @@
++From 3dc1e9584ed2ac81e7526b8dbf76b4a06ea8ac76 Mon Sep 17 00:00:00 2001
++From: Justin Bronder <jsbronder@cold-front.org>
++Date: Tue, 1 Mar 2022 10:34:42 -0500
++Subject: [PATCH] setup.py use setuptools instead of distutils
++
++Upstream-Status: Pending
++Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
++---
++ setup.py | 3 +--
++ 1 file changed, 1 insertion(+), 2 deletions(-)
++
++diff --git a/setup.py b/setup.py
++index e3a524b..2f2bcfc 100644
++--- a/setup.py
+++++ b/setup.py
++@@ -1,5 +1,4 @@
++-from distutils.core import setup
++-from distutils.extension import Extension
+++from setuptools import Extension, setup
++ import sys,os
++ 
++ if sys.version_info[0] == 2:
+diff --git a/meta-python/recipes-devtools/python/python3-crcmod_1.7.bb b/meta-python/recipes-devtools/python/python3-crcmod_1.7.bb
+index df8f0d83d8..f8f1683601 100644
+--- a/meta-python/recipes-devtools/python/python3-crcmod_1.7.bb
++++ b/meta-python/recipes-devtools/python/python3-crcmod_1.7.bb
+@@ -4,7 +4,7 @@ LICENSE = "MIT"
+ SECTION = "devel/python"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f9a19291627cad2d1dfbfcf3c9fb85c2"
+ 
+-SRC_URI[md5sum] = "2d5b92117d958dcead94f9e17f54cd32"
++SRC_URI += "file://0001-setup.py-use-setuptools-instead-of-distutils.patch"
+ SRC_URI[sha256sum] = "dc7051a0db5f2bd48665a990d3ec1cc305a466a77358ca4492826f41f283601e"
+ 
+ inherit pypi setuptools3
+-- 
+2.35.1
 
-On Mon, Feb 28, 2022 at 3:21 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> Thanks for sending fixing everyone. Lets keep going. Here is latest
-> list of failing recipes on master-next now
->
-> Summary: 32 tasks failed:
->   meta-openembedded/meta-python/recipes-extended/python-blivet/python3-blivet_3.4.0.bb:do_install
->   meta-openembedded/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.9.bb:do_compile
->   meta-openembedded/meta-python/recipes-devtools/python/python3-crcmod_1.7.bb:do_compile
->   meta-openembedded/meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb:do_compile
->   meta-openembedded/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb:do_compile
->   meta-openembedded/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.2.1.bb:do_compile
->   meta-raspberrypi/recipes-devtools/python/python3-rtimu_git.bb:do_compile
->   meta-openembedded/meta-python/recipes-devtools/python/python3-flask-versioned_0.9.4-20101221.bb:do_install
->   meta-openembedded/meta-python/recipes-devtools/python/python3-ntplib_0.4.0.bb:do_install
->   meta-raspberrypi/recipes-devtools/python/python3-adafruit-circuitpython-register_1.9.4.bb:do_install
->   meta-openembedded/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb:do_install
->   meta-atmel/recipes-utils/mpio/mpio_1.3.bb:do_install
->   meta-openembedded/meta-python/recipes-devtools/python/python3-pystache_0.5.4.bb:do_install
->   meta-raspberrypi/recipes-devtools/python/python3-adafruit-pureio_1.1.8.bb:do_install
->   meta-openembedded/meta-python/recipes-devtools/python/python3-pyscaffold_4.1.4.bb:do_install
->   meta-openembedded/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb:do_install
->   meta-openembedded/meta-python/recipes-devtools/python/python3-pymetno_0.9.0.bb:do_install
->   meta-openembedded/meta-python/recipes-extended/python-cson/python3-cson_git.bb:do_install
->   meta-openembedded/meta-python/recipes-devtools/python/python3-pydbus-manager_git.bb:do_install
->   meta-openembedded/meta-python/recipes-devtools/python/python3-pymisp_2.4.152.bb:do_install
->   meta-openembedded/meta-python/recipes-devtools/python/python3-dbussy_1.3.bb:do_install
->   meta-openembedded/meta-python/recipes-devtools/gyp/gyp_git.bb:do_install
->   meta-openembedded/meta-python/recipes-devtools/python/python3-keras-applications_1.0.8.bb:do_install
->   meta-openembedded/meta-python/recipes-devtools/python/python3-gcovr_5.0.bb:do_install
->   meta-raspberrypi/recipes-devtools/python/python3-adafruit-platformdetect_3.1.1.bb:do_install
->   meta-openembedded/meta-python/recipes-devtools/python/python3-configshell-fb_1.1.29.bb:do_install
->   meta-openembedded/meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb:do_package
->   meta-openembedded/meta-oe/recipes-devtools/unattended-upgrades/unattended-upgrades_2.6.bb:do_install
->   meta-openembedded/meta-python/recipes-connectivity/python-txws/python3-txws_0.9.1.bb:do_install
->   meta-openembedded/meta-xfce/recipes-apps/catfish/catfish_4.16.3.bb:do_compile
->   meta-openembedded/meta-xfce/recipes-apps/menulibre/menulibre_2.2.3.bb:do_install
->   meta-openembedded/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb:do_compile
->
-> On Sat, Feb 26, 2022 at 11:49 AM Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > Hello All,
-> >
-> > We have PEP-517 packaging related infra changes merged into oe-core,
-> > which obviously
-> > mean there are some failures on various python packages.
-> >
-> > I am posting the latest results (qemux86-64/glibc)
-> >
-> > https://errors.yoctoproject.org/Errors/Build/141804/
-> >
-> > We have 57 recipes left, Tim has worked diligently on fixing the
-> > PEP-517 issues but we would
-> > need more hands. If you see any of
-> > these recipes that you can help fixing, please send patches
-> >
-> > Since upcoming release is an LTS release, I would like to have these
-> > issues fixed for this
-> > release.
-> >
-> > Thank you for your help
-> >
-> > -Khem
 
