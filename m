@@ -2,88 +2,90 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DA891C433EF
-	for <webhook@archiver.kernel.org>; Tue,  1 Mar 2022 04:22:11 +0000 (UTC)
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
- [209.85.215.175])
- by mx.groups.io with SMTP id smtpd.web11.4706.1646108531010080655
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B7DDC433EF
+	for <webhook@archiver.kernel.org>; Tue,  1 Mar 2022 06:43:42 +0000 (UTC)
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com
+ [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.web09.5515.1646117021012298181
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 20:22:11 -0800
+ Mon, 28 Feb 2022 22:43:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=irHCLEeX;
- spf=pass (domain: gmail.com, ip: 209.85.215.175,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=J9vF22h7;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f175.google.com with SMTP id o8so13385306pgf.9
+Received: by mail-pl1-f173.google.com with SMTP id e2so298202pls.10
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 20:22:10 -0800 (PST)
+ Mon, 28 Feb 2022 22:43:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=28pmAHbK06jbgJmOhNOgX3chM5G2a4CzFAUajKXHN1M=;
-        b=irHCLEeXdbkxHdsgFZkTIdzhw+C6a9xK/Xg13H20rHeVzkZv8ZoTJdBRVt2VCXZd6n
-         5jBS1bbPk0YaOBt8+lT1J/Yq53oYVdQ0j9R3NxBfWpctffeWImqld6DoKhtnOnFMg0nm
-         8GcEgMDygfbFX9dpscTcXS4cVK/9aJeVRDXZojD5TRmRBHme5ExxknTnrAiQbf36x+Gl
-         KwyWiNJdo2ANf2DbJVHC1GXTFS9pUB6is204BgbJMSQaB0G1XNdJ7YiCAb2F5aJpOGpd
-         rju5u4cs5icuM/1ZLYt5oJZ3xKSwNPA3phOclSnYxQmHaJpEMmBCY485SBh20crPwv2v
-         bJ+Q==
+        bh=NmoK9KGsXvrgv+QvyYkZzTSe2abd3t+bIj165+lJmv8=;
+        b=J9vF22h74yVHEmRnDquFP49EgkysJi1I2PowvwgESxmLZWUv82rEyOguMuoLpIMLEp
+         4g4fqe+GRFxFK9a/ME09ETcwsRjRjkQljlBg1BPzaWOKkhqbjRBEiYNCZZqLHgugUXPt
+         QQ8ndKw+leoUo6tyYECsQnPKW4F5H1rUvXXNsyMZMni0J273mh3+Cu9LFhmFcQ0nje+K
+         kSJAunPMiI5eDIQyo7VTba9Z/z60m+uFKhaSBl2UyR0dtcP4RU1jCn2HWtQf9SqcygIN
+         GcE7nnYErmSJUioXfL0wGuIfWel56WR1P6RoviHsRuMUMbHowKAaizwzIveT3BHcfMXG
+         g+mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=28pmAHbK06jbgJmOhNOgX3chM5G2a4CzFAUajKXHN1M=;
-        b=d2hIFj5CDiv90OTO7w5pV/0dKReh+u+MUD9tDi9IjgsArM8mEPShmRVss60CmYfQV+
-         yGuTyUD+yUxtewGssWybTFUybumsTnjSH0UKx7YB5VViD+XDpRPhQvBwp+M5C7Hz7VHW
-         yYh3T8pJEsHkkz0R08cpemPWJ6rA7rCqDPBzzjjKnVy45tITwIKouYMBWP0YHO6F1UYi
-         4IRuc0TdpMxYoX6/PiQjuGBmVrtwkU1yzIvLLAikIvEa7MuRgdCXAy1WlKmV8SJpT0XC
-         AvGmtl3OYhoUGuy3DVOjXjih927C8PvBpH5CqgCGUWP4IK1cqMpTt3OGBZP5SH/ZLsNb
-         9qgw==
-X-Gm-Message-State: AOAM530XEkQK7H+evpr9NeDd1/XZkoLqourT7YgU1kUmrYidIeVcMLNb
-	5oZmK1CVl11aIY/jgDX5WjQ3En20vG1Ivw==
+        bh=NmoK9KGsXvrgv+QvyYkZzTSe2abd3t+bIj165+lJmv8=;
+        b=2PmCaArsU3MhGkNBQQFjXQuzGYYBfC7D+55vm91u3yxT1GFMUzWVUrtOkLlOod4Oml
+         OTO26XvUSPzNC8bL8xwgXXi+N0YaAXo63IsVP5Fdql+XSqnFzWX7Gy8L0/tOr8tGwtZX
+         e7QUHM8c8nnsrXBJD10ay11Pgkj2MySQ+JyhvSJOn0o16hyott51bsnRacx5CZFirXO9
+         7RsuOxV4F7HmrdR3ybwZsiYefVTAo/PCs+9VCwviaYWojaIvhK03ynE+a4iyqFoXiIW1
+         nJoYmqieyrBFqxyMpm8Cq4wpb/B7Sfixz2c4r0yPBt/rAcI900GKUcRkYNh0GjNL8xmX
+         lvbw==
+X-Gm-Message-State: AOAM531KAGsQRSC114hc6sRiEAH4GYLPDyxpCXGzGXWSXUmfuoL8cXFP
+	mt5I+f8Ft2MzPlX6eh6xG+NVr27zjVRvpQ==
 X-Google-Smtp-Source: 
- ABdhPJxDhMFiG4iYQ+4jrl25+/ntoyP4GPCgkFlkP6fB9IGknG6T7ACp1q4SS/Q6q1kvIjOwIEL3Iw==
-X-Received: by 2002:a63:4543:0:b0:374:87b6:c9f5 with SMTP id
- u3-20020a634543000000b0037487b6c9f5mr19713675pgk.302.1646108530284;
-        Mon, 28 Feb 2022 20:22:10 -0800 (PST)
+ ABdhPJzGX0SEwRXufUIV2yh6AZrM2Jmubhe801lau9HbSuXr+1DxuLeFkPI57JwCbOGFpJxKdDeBLA==
+X-Received: by 2002:a17:90a:10d6:b0:1bc:48ad:c8c8 with SMTP id
+ b22-20020a17090a10d600b001bc48adc8c8mr20610614pje.149.1646117020144;
+        Mon, 28 Feb 2022 22:43:40 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::1a20])
         by smtp.gmail.com with ESMTPSA id
- o11-20020a056a0015cb00b004ce19332265sm15489644pfu.34.2022.02.28.20.22.09
+ ep22-20020a17090ae65600b001b92477db10sm1110388pjb.29.2022.02.28.22.43.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Feb 2022 20:22:09 -0800 (PST)
+        Mon, 28 Feb 2022 22:43:39 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-xfce][PATCH] catfish: Fix wheel build
-Date: Mon, 28 Feb 2022 20:22:07 -0800
-Message-Id: <20220301042207.1703852-1-raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH] onboard: Inherit setuptools3-base instead of
+ setuptools3
+Date: Mon, 28 Feb 2022 22:43:37 -0800
+Message-Id: <20220301064337.1825899-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Mar 2022 04:22:11 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Mar 2022 06:43:42 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95617
+ https://lists.openembedded.org/g/openembedded-devel/message/95618
+
+It uses distutils heavily
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-xfce/recipes-apps/catfish/catfish_4.16.3.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-gnome/recipes-support/onboard/onboard_1.4.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-apps/catfish/catfish_4.16.3.bb b/meta-xfce/recipes-apps/catfish/catfish_4.16.3.bb
-index bf3d7ed979..853d77e395 100644
---- a/meta-xfce/recipes-apps/catfish/catfish_4.16.3.bb
-+++ b/meta-xfce/recipes-apps/catfish/catfish_4.16.3.bb
-@@ -3,7 +3,8 @@ SECTION = "x11/application"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
+diff --git a/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb b/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb
+index e7733bf8b3..775e7c3c7a 100644
+--- a/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb
++++ b/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb
+@@ -10,7 +10,7 @@ SRC_URI = "https://launchpad.net/onboard/1.4/${PV}/+download/${BPN}-${PV}.tar.gz
+ SRC_URI[md5sum] = "1a2fbe82e934f5b37841d17ff51e80e8"
+ SRC_URI[sha256sum] = "01cae1ac5b1ef1ab985bd2d2d79ded6fc99ee04b1535cc1bb191e43a231a3865"
  
--inherit xfce-app setuptools3 gtk-icon-cache mime-xdg
-+inherit xfce-app setuptools_build_meta gtk-icon-cache mime-xdg
-+PYPA_WHEEL = "${B}/dist/UNKNOWN-*-*.whl"
+-inherit features_check setuptools3 pkgconfig gtk-icon-cache gsettings mime-xdg
++inherit features_check setuptools3-base pkgconfig gtk-icon-cache gsettings mime-xdg
  
- DEPENDS += "python3-distutils-extra-native"
+ REQUIRED_DISTRO_FEATURES = "x11"
  
 -- 
 2.35.1
