@@ -1,229 +1,109 @@
-Return-Path: <ranjitsinhrathod1991@gmail.com>
+Return-Path: <daniel@qtec.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 107D0C433F5
-	for <webhook@archiver.kernel.org>; Tue,  1 Mar 2022 12:31:09 +0000 (UTC)
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
- [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web08.7431.1646137867765437414
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E70DC433EF
+	for <webhook@archiver.kernel.org>; Tue,  1 Mar 2022 13:46:05 +0000 (UTC)
+Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com
+ [209.85.208.172])
+ by mx.groups.io with SMTP id smtpd.web12.8185.1646142352603084156
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Mar 2022 04:31:07 -0800
+ Tue, 01 Mar 2022 05:45:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=RPfeBa5t;
- spf=pass (domain: gmail.com, ip: 209.85.214.179,
- mailfrom: ranjitsinhrathod1991@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id z2so13312359plg.8
+ dkim=pass header.i=@qtec.com header.s=google header.b=Fe7FJms2;
+ spf=pass (domain: qtec.com, ip: 209.85.208.172, mailfrom: daniel@qtec.com)
+Received: by mail-lj1-f172.google.com with SMTP id u7so21899309ljk.13
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Mar 2022 04:31:07 -0800 (PST)
+ Tue, 01 Mar 2022 05:45:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id;
-        bh=mscWYOYjn0EDmMv6UT893WuUeIDrJoelYFlVBZq+UtI=;
-        b=RPfeBa5tmAtSAvMhviowmR7Xw8hvsTwto8ABeFB3Ltqo4XnW86ddiwixetn9RcEZ9q
-         KV+wtqKCj6RL7qElAVXH6kMdiqg1Or5ZanyWllxlPXVAhEZikOz1G/i3uwC96fZu1kOT
-         9wugEy/wdaXcJC7UcwfJaa+J3QUD7tCeIDt+Gr9dsAyg+p6WtrXTZOoY+VTokWMkALEX
-         4XPypzYdhnE5V7q5Z1vAlhaaTSMB+2upzFKtbXd5ZzTXp6AKVV3T3Ncp5oQpauBP80ry
-         DgPyqRqBGeRL13rgpdEc7ziqdUUjlaHrpZxo2IvuAzAxpiuU6ZiKy3zcV7mH/QHW955e
-         eQLw==
+        d=qtec.com; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=F/ffSFbB+P/czUIqaWp4EeTnymyi6DrdCVAhLaujQIQ=;
+        b=Fe7FJms2tbBRZVVPB3OnvphaR70tWDgnUXUll2YVMLXJa2fMvlVUVBNR/QHRHZ6HTD
+         ox7uhSRkFuxXRe6WKX86MNHjsqRjd7ms7dZuZGx0Vik1Oxo7KvMaoVf4/WmUSTE/Do7d
+         zCM00FP1wv81vSfZ7z8z18wZUffk3EgE+cITlaqR5/fQLzMJdyOEtybaRsDy3p4qi5YV
+         pOLt9fNjPy5XiddqzFQ+/lQDrCXxwlxCIFESNALY7D29qrNbg/8Mlhl0mDItWOmIgokj
+         Zt2tufiXcOEW3u1fO+No/ywmpq58/JzPcK07qqlxbUBOgerRjDi3BsIGBOY23VSZ7uKX
+         DVeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=mscWYOYjn0EDmMv6UT893WuUeIDrJoelYFlVBZq+UtI=;
-        b=Y/Cqo9NtrpUFcqkZbjatVS0O8WLM4sdBXBYqYkGt3M/7sXTq4hke3QoBJd6Xajzrnt
-         XNz6m2jvSogzjqmqcYNh8O8fwnevvGTPn/Ln2LZUnUKXTm+luOYKFhQS+qSrO9dJe4s0
-         IC36odx0MmAIFsmBZTe60VTfCenXCapDX8JsZ9xoKCB31ZzNRXy9LKrK0GJUxBs+fdqp
-         wsMJBmUScNMxGcNZmd4FJUyiOhKNhNxwnVhSV7gm856vGT88DPcSSLPLm4nJPW5dC5QU
-         RT1QVtAuHOEiIR/5KiW5enH5Busjbk0TLFCLetvuMQQrPZRvhMHXqz+R9qcRett0e33+
-         nACw==
-X-Gm-Message-State: AOAM531Z0nag8URauGemYJKnX0WpiB8GCZlgvxoVNBg/Y8Wkv5uHCGpx
-	bDSUPMToOHxEx0H8QLuUYppT/ai/ofs=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=F/ffSFbB+P/czUIqaWp4EeTnymyi6DrdCVAhLaujQIQ=;
+        b=7Hlf6fpHT9TCc5fVnazoWWCJKsyyTC6/jw6epnUBnZryaujjWSVAchjmEWSYM5gx4n
+         a6lvxuGq5GOxBqQ2Gc0RW0KaGyfXDUd8nsSAcy6X0IZoN1LkrBOjwtOYAxhNNRHo6il6
+         g6IlHnXx7mjcNwbw65/MX72IIUiuGWB9owYUlDhUkKPUQpLDOO6aSmL5kFCOIx7cJ7K4
+         dLfJW5yGLqbM5ug45bZ0UNJdEgfJzpb77trghbI8hyf54gervxuuFkVgkooHJP/gOLoP
+         r3Hm8XED4GeJVwSy/wLNxiUxhwXLaeuBnkoWXAm1zUq80ybjUOekWIHrDY12elGTbTV5
+         fyfQ==
+X-Gm-Message-State: AOAM5328jHY1hpYdfwp/frGsiQeK9S6r5LoBPSWdYRHtNJ5mr/m5hbZa
+	XH8Vaud6QyzXVWACtHHAK8LjdlWb68g5UH6Kj9wMrjXuuJQuNE0YF8JVOFQJSbHaLGuDofLBSCk
+	VtIl6DmYuIAECbnDc4px7kHlynvwcYFuEEDClpeLfEJcxWIA9OYZcjfMpwKCCCdJ0KehotQslL/
+	lO0np2+9SA9B22jA==
 X-Google-Smtp-Source: 
- ABdhPJxD3PXGiypi1bwiv7iSWWfKYUuJzWdi2QiDDzD4FJ2m2pD3ZHyK/n6Wx3PX/03jDwN8u8NMNA==
-X-Received: by 2002:a17:902:e88e:b0:150:25e3:739c with SMTP id
- w14-20020a170902e88e00b0015025e3739cmr21428217plg.13.1646137866789;
-        Tue, 01 Mar 2022 04:31:06 -0800 (PST)
-Received: from localhost.localdomain ([103.161.99.181])
+ ABdhPJzgOZe8GnJ6RYKPCcK8MJJD1G8NaflOJlisi37B5eSKUwwRJDd2IgTwMvAK0Dfo6zrMdysA7A==
+X-Received: by 2002:a2e:9897:0:b0:246:7228:1871 with SMTP id
+ b23-20020a2e9897000000b0024672281871mr15028448ljj.371.1646142350337;
+        Tue, 01 Mar 2022 05:45:50 -0800 (PST)
+Received: from localhost.localdomain (87-52-47-7-cable.dk.customer.tdc.net.
+ [87.52.47.7])
         by smtp.gmail.com with ESMTPSA id
- p10-20020a056a0026ca00b004f38e426e3csm17015117pfw.201.2022.03.01.04.31.04
+ t2-20020a2e2d02000000b00244dc8ba5absm1972302ljt.117.2022.03.01.05.45.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Mar 2022 04:31:06 -0800 (PST)
-From: Ranjitsinh Rathod <ranjitsinhrathod1991@gmail.com>
+        Tue, 01 Mar 2022 05:45:50 -0800 (PST)
+From: Daniel Gomez <daniel@qtec.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: akuster808@gmail.com,
-	Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
-Subject: [meta-oe][dunfell][PATCH] polkit: Fix for CVE-2021-4115
-Date: Tue,  1 Mar 2022 18:00:42 +0530
-Message-Id: <20220301123043.1084-1-ranjitsinhrathod1991@gmail.com>
-X-Mailer: git-send-email 2.17.1
+Cc: dagmcr@gmail.com,
+	Daniel Gomez <daniel@qtec.com>
+Subject: [oe][meta-python][PATCH] python3-flask-versioned: Fix PYPA_WHEEL name
+Date: Tue,  1 Mar 2022 14:45:47 +0100
+Message-Id: <20220301134547.113525-1-daniel@qtec.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Mar 2022 12:31:09 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Mar 2022 13:46:05 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95630
+ https://lists.openembedded.org/g/openembedded-devel/message/95632
 
-From: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
+Add function to generate expected PYPA_WHEEL name.
 
-Add patch to fix CVE-2021-4115
-Also, add a support patch to cleanly apply CVE patch
-Link: https://gitlab.freedesktop.org/polkit/polkit/-/merge_requests/109
+Generated name:
+/yp/builds/meta-qtec-distro/tmp/work/dbfp4-poky-linux/python3-flask-versioned/0.9.4-20101221-r0/Flask-Versioned-0.9.4-20101221/dist/
+Flask_Versioned-0.9.4.post20101221-py3-none-any.whl
 
-Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
-Signed-off-by: Ranjitsinh Rathod <ranjitsinhrathod1991@gmail.com>
+Default (wrong) name:
+Flask_Versioned-0.9.4-20101221-*.whl
+
+Error:
+WARNING: Requirement '/yp/builds/meta-qtec-distro/tmp/work/dbfp4-poky-linux/python3-flask-versioned/0.9.4-20101221-r0/Flask-Versioned-0.9.4-20101221/dist/Flask_Versioned-0.9.4-20101221-*.whl'
+looks like a filename, but the file does not exist
+ERROR: Flask_Versioned-0.9.4-20101221-*.whl is not a valid wheel filename.
+
+Signed-off-by: Daniel Gomez <daniel@qtec.com>
 ---
- ...thentication-bypass-vulnerability-in.patch | 32 +++++++
- .../polkit/files/CVE-2021-4115.patch          | 87 +++++++++++++++++++
- .../recipes-extended/polkit/polkit_0.116.bb   |  2 +
- 3 files changed, 121 insertions(+)
- create mode 100644 meta-oe/recipes-extended/polkit/files/0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch
- create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2021-4115.patch
+ .../python/python3-flask-versioned_0.9.4-20101221.bb       | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/polkit/files/0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch b/meta-oe/recipes-extended/polkit/files/0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch
-new file mode 100644
-index 000000000..2a2373ed5
---- /dev/null
-+++ b/meta-oe/recipes-extended/polkit/files/0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch
-@@ -0,0 +1,32 @@
-+From a04d13affe0fa53ff618e07aa8f57f4c0e3b9b81 Mon Sep 17 00:00:00 2001
-+From: Jan Rybar <jrybar@redhat.com>
-+Date: Wed, 2 Jun 2021 15:43:38 +0200
-+Subject: [PATCH] GHSL-2021-074: authentication bypass vulnerability in polkit
+diff --git a/meta-python/recipes-devtools/python/python3-flask-versioned_0.9.4-20101221.bb b/meta-python/recipes-devtools/python/python3-flask-versioned_0.9.4-20101221.bb
+index 7aaf439b8..04493b21d 100644
+--- a/meta-python/recipes-devtools/python/python3-flask-versioned_0.9.4-20101221.bb
++++ b/meta-python/recipes-devtools/python/python3-flask-versioned_0.9.4-20101221.bb
+@@ -7,3 +7,10 @@ PYPI_PACKAGE = "Flask-Versioned"
+ SRC_URI[sha256sum] = "516694dc860a1bc4f22ab60b324a85083c0150522be109282a3bed681057fd34"
+
+ inherit pypi setuptools3
 +
-+initial values returned if error caught
++def get_pypa_wheel_name(d):
++    return (d.getVar('PIP_INSTALL_DIST_PATH') + '/' + \
++           d.getVar('PIP_INSTALL_PACKAGE') + '-'  + \
++           d.getVar('PV').replace('-', '.post') + '-*.whl')
 +
-+Upstream-Status: Backport [https://gitlab.freedesktop.org/polkit/polkit/-/commit/a04d13affe0fa53ff618e07aa8f57f4c0e3b9b81.patch]
-+CVE: CVE-2021-4115
-+Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
-+
-+---
-+ src/polkit/polkitsystembusname.c | 3 +++
-+ 1 file changed, 3 insertions(+)
-+
-+diff --git a/src/polkit/polkitsystembusname.c b/src/polkit/polkitsystembusname.c
-+index 8daa12c..8ed1363 100644
-+--- a/src/polkit/polkitsystembusname.c
-++++ b/src/polkit/polkitsystembusname.c
-+@@ -435,6 +435,9 @@ polkit_system_bus_name_get_creds_sync (PolkitSystemBusName           *system_bus
-+   while (!((data.retrieved_uid && data.retrieved_pid) || data.caught_error))
-+     g_main_context_iteration (tmp_context, TRUE);
-+ 
-++  if (data.caught_error)
-++    goto out;
-++
-+   if (out_uid)
-+     *out_uid = data.uid;
-+   if (out_pid)
-+-- 
-+GitLab
-+
-diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2021-4115.patch b/meta-oe/recipes-extended/polkit/files/CVE-2021-4115.patch
-new file mode 100644
-index 000000000..37e0d6063
---- /dev/null
-+++ b/meta-oe/recipes-extended/polkit/files/CVE-2021-4115.patch
-@@ -0,0 +1,87 @@
-+From 41cb093f554da8772362654a128a84dd8a5542a7 Mon Sep 17 00:00:00 2001
-+From: Jan Rybar <jrybar@redhat.com>
-+Date: Mon, 21 Feb 2022 08:29:05 +0000
-+Subject: [PATCH] CVE-2021-4115 (GHSL-2021-077) fix
-+
-+Upstream-Status: Backport [https://gitlab.freedesktop.org/polkit/polkit/-/commit/41cb093f554da8772362654a128a84dd8a5542a7.patch]
-+CVE: CVE-2021-4115
-+Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
-+
-+---
-+ src/polkit/polkitsystembusname.c | 38 ++++++++++++++++++++++++++++----
-+ 1 file changed, 34 insertions(+), 4 deletions(-)
-+
-+diff --git a/src/polkit/polkitsystembusname.c b/src/polkit/polkitsystembusname.c
-+index 8ed1363..2fbf5f1 100644
-+--- a/src/polkit/polkitsystembusname.c
-++++ b/src/polkit/polkitsystembusname.c
-+@@ -62,6 +62,10 @@ enum
-+   PROP_NAME,
-+ };
-+ 
-++
-++guint8 dbus_call_respond_fails;      // has to be global because of callback
-++
-++
-+ static void subject_iface_init (PolkitSubjectIface *subject_iface);
-+ 
-+ G_DEFINE_TYPE_WITH_CODE (PolkitSystemBusName, polkit_system_bus_name, G_TYPE_OBJECT,
-+@@ -364,6 +368,7 @@ on_retrieved_unix_uid_pid (GObject              *src,
-+   if (!v)
-+     {
-+       data->caught_error = TRUE;
-++      dbus_call_respond_fails += 1;
-+     }
-+   else
-+     {
-+@@ -405,6 +410,8 @@ polkit_system_bus_name_get_creds_sync (PolkitSystemBusName           *system_bus
-+   tmp_context = g_main_context_new ();
-+   g_main_context_push_thread_default (tmp_context);
-+ 
-++  dbus_call_respond_fails = 0;
-++
-+   /* Do two async calls as it's basically as fast as one sync call.
-+    */
-+   g_dbus_connection_call (connection,
-+@@ -432,11 +439,34 @@ polkit_system_bus_name_get_creds_sync (PolkitSystemBusName           *system_bus
-+ 			  on_retrieved_unix_uid_pid,
-+ 			  &data);
-+ 
-+-  while (!((data.retrieved_uid && data.retrieved_pid) || data.caught_error))
-+-    g_main_context_iteration (tmp_context, TRUE);
-++  while (TRUE)
-++  {
-++    /* If one dbus call returns error, we must wait until the other call
-++     * calls _call_finish(), otherwise fd leak is possible.
-++     * Resolves: GHSL-2021-077
-++    */
-+ 
-+-  if (data.caught_error)
-+-    goto out;
-++    if ( (dbus_call_respond_fails > 1) )
-++    {
-++      // we got two faults, we can leave
-++      goto out;
-++    }
-++
-++    if ((data.caught_error && (data.retrieved_pid || data.retrieved_uid)))
-++    {
-++      // we got one fault and the other call finally finished, we can leave
-++      goto out;
-++    }
-++
-++    if ( !(data.retrieved_uid && data.retrieved_pid) )
-++    {
-++      g_main_context_iteration (tmp_context, TRUE);
-++    }
-++    else
-++    {
-++      break;
-++    }
-++  }
-+ 
-+   if (out_uid)
-+     *out_uid = data.uid;
-+-- 
-+GitLab
-+
-diff --git a/meta-oe/recipes-extended/polkit/polkit_0.116.bb b/meta-oe/recipes-extended/polkit/polkit_0.116.bb
-index 77288b008..aceb68699 100644
---- a/meta-oe/recipes-extended/polkit/polkit_0.116.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_0.116.bb
-@@ -26,6 +26,8 @@ SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.
-            ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
-            file://0003-make-netgroup-support-optional.patch \
-            file://CVE-2021-4034.patch \
-+           file://0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch \
-+           file://CVE-2021-4115.patch \
-            "
- SRC_URI[md5sum] = "4b37258583393e83069a0e2e89c0162a"
- SRC_URI[sha256sum] = "88170c9e711e8db305a12fdb8234fac5706c61969b94e084d0f117d8ec5d34b1"
--- 
-2.17.1
++PYPA_WHEEL = "${@get_pypa_wheel_name(d)}"
+--
+2.34.1
 
 
