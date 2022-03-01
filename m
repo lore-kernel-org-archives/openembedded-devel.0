@@ -2,91 +2,91 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B7DDC433EF
-	for <webhook@archiver.kernel.org>; Tue,  1 Mar 2022 06:43:42 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com
- [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web09.5515.1646117021012298181
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 806DCC433EF
+	for <webhook@archiver.kernel.org>; Tue,  1 Mar 2022 07:36:40 +0000 (UTC)
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
+ [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.web11.5798.1646120199275669945
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 22:43:41 -0800
+ Mon, 28 Feb 2022 23:36:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=J9vF22h7;
- spf=pass (domain: gmail.com, ip: 209.85.214.173,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=f+U2WrzG;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id e2so298202pls.10
+Received: by mail-pf1-f180.google.com with SMTP id u16so13405442pfg.12
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Feb 2022 22:43:40 -0800 (PST)
+ Mon, 28 Feb 2022 23:36:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=NmoK9KGsXvrgv+QvyYkZzTSe2abd3t+bIj165+lJmv8=;
-        b=J9vF22h74yVHEmRnDquFP49EgkysJi1I2PowvwgESxmLZWUv82rEyOguMuoLpIMLEp
-         4g4fqe+GRFxFK9a/ME09ETcwsRjRjkQljlBg1BPzaWOKkhqbjRBEiYNCZZqLHgugUXPt
-         QQ8ndKw+leoUo6tyYECsQnPKW4F5H1rUvXXNsyMZMni0J273mh3+Cu9LFhmFcQ0nje+K
-         kSJAunPMiI5eDIQyo7VTba9Z/z60m+uFKhaSBl2UyR0dtcP4RU1jCn2HWtQf9SqcygIN
-         GcE7nnYErmSJUioXfL0wGuIfWel56WR1P6RoviHsRuMUMbHowKAaizwzIveT3BHcfMXG
-         g+mg==
+        bh=5fWf+et89xVeaOJYw3uZYp2s7CtHbKmAIsCXYtyAhag=;
+        b=f+U2WrzGJAuMjUe93eTYJymQdt0spV4RM8Oy/LkUHKnFEUNwKt1xMBSz5DfTwRa2mA
+         7RAqqk1MYEk0WQsIgXjJml7eKg+KNqPfZXObBRtLevdw97C76UGU957uFMWtfo7Iiq8J
+         +cp37RmGeV8YSW4DFSTRmjRoeWT0UwkVH/YUJMHUtg36nigmyMondxNcXfd4hNukKlQZ
+         +H2OON1q3NYn2BGYLnF/iGlVQPIfBLPJ1SBNCNY92Rgkt9UT9vci+BIdsxTKSFIF7jsp
+         +frlgyb5ly4KNiCTTh0FElgeibfiz9/CkPUpyfCd0lYQb9NTDmpd9ameIJe9ZwGLaX9e
+         OTsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=NmoK9KGsXvrgv+QvyYkZzTSe2abd3t+bIj165+lJmv8=;
-        b=2PmCaArsU3MhGkNBQQFjXQuzGYYBfC7D+55vm91u3yxT1GFMUzWVUrtOkLlOod4Oml
-         OTO26XvUSPzNC8bL8xwgXXi+N0YaAXo63IsVP5Fdql+XSqnFzWX7Gy8L0/tOr8tGwtZX
-         e7QUHM8c8nnsrXBJD10ay11Pgkj2MySQ+JyhvSJOn0o16hyott51bsnRacx5CZFirXO9
-         7RsuOxV4F7HmrdR3ybwZsiYefVTAo/PCs+9VCwviaYWojaIvhK03ynE+a4iyqFoXiIW1
-         nJoYmqieyrBFqxyMpm8Cq4wpb/B7Sfixz2c4r0yPBt/rAcI900GKUcRkYNh0GjNL8xmX
-         lvbw==
-X-Gm-Message-State: AOAM531KAGsQRSC114hc6sRiEAH4GYLPDyxpCXGzGXWSXUmfuoL8cXFP
-	mt5I+f8Ft2MzPlX6eh6xG+NVr27zjVRvpQ==
+        bh=5fWf+et89xVeaOJYw3uZYp2s7CtHbKmAIsCXYtyAhag=;
+        b=mUxQLplRrWcPjIYEtNmEqnNA6lSuVr5Ld0zQ0ytqql6NQCSQMlYYkr0GcOcTIaFoeF
+         vHmc5I4VV481i9jq5It9ZVnQluToPF4sWS7zD3by/h0sWIsU3ievI1iTqeGB7o8uH8Po
+         FE3i/kcfDIaGb4nGRxnil1xLP40RHMUc19lXZByotXF/IF1XMFHocXKPTHOuSebht1Hb
+         rsWnOSo5MLSRBan/0p/iX0pNBgUvJPDXKJzLwf1HKGtUqUlgGBYl+Fo/okRlpeFk3dD8
+         8yOb7Nk7pMqebAevW4u4xlMR/TAP8LHpmW/Lc97Szu3VVCrerUF5Wbksfq2JaYbuI6W/
+         xw7Q==
+X-Gm-Message-State: AOAM5302tBzjzEmeui+wVb5JdklLf4pCQkoZQvIY0eSUoaxbVmKxTpeZ
+	b5No7kjJlYrvMNzlebYUJjKjjXdALoD1Gw==
 X-Google-Smtp-Source: 
- ABdhPJzGX0SEwRXufUIV2yh6AZrM2Jmubhe801lau9HbSuXr+1DxuLeFkPI57JwCbOGFpJxKdDeBLA==
-X-Received: by 2002:a17:90a:10d6:b0:1bc:48ad:c8c8 with SMTP id
- b22-20020a17090a10d600b001bc48adc8c8mr20610614pje.149.1646117020144;
-        Mon, 28 Feb 2022 22:43:40 -0800 (PST)
+ ABdhPJxSzYDT7yWem7X5OW0XTGEU2lgANs7DmP7Pfq33sa5y5ToTbc/6SGvfwsXp+NhUTVQsbFQBvw==
+X-Received: by 2002:a05:6a00:2402:b0:4e1:3df2:5373 with SMTP id
+ z2-20020a056a00240200b004e13df25373mr25677359pfh.40.1646120198587;
+        Mon, 28 Feb 2022 23:36:38 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::1a20])
         by smtp.gmail.com with ESMTPSA id
- ep22-20020a17090ae65600b001b92477db10sm1110388pjb.29.2022.02.28.22.43.39
+ cv15-20020a17090afd0f00b001bedcbca1a9sm902979pjb.57.2022.02.28.23.36.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Feb 2022 22:43:39 -0800 (PST)
+        Mon, 28 Feb 2022 23:36:38 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH] onboard: Inherit setuptools3-base instead of
- setuptools3
-Date: Mon, 28 Feb 2022 22:43:37 -0800
-Message-Id: <20220301064337.1825899-1-raj.khem@gmail.com>
+Subject: [meta-xfce][PATCH] menulibre: Inherit distutils3
+Date: Mon, 28 Feb 2022 23:36:36 -0800
+Message-Id: <20220301073636.1923510-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Mar 2022 06:43:42 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Mar 2022 07:36:40 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95618
+ https://lists.openembedded.org/g/openembedded-devel/message/95619
 
-It uses distutils heavily
+It does not work with setuptools unfortunately
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-gnome/recipes-support/onboard/onboard_1.4.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-xfce/recipes-apps/menulibre/menulibre_2.2.3.bb | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb b/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb
-index e7733bf8b3..775e7c3c7a 100644
---- a/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb
-+++ b/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb
-@@ -10,7 +10,7 @@ SRC_URI = "https://launchpad.net/onboard/1.4/${PV}/+download/${BPN}-${PV}.tar.gz
- SRC_URI[md5sum] = "1a2fbe82e934f5b37841d17ff51e80e8"
- SRC_URI[sha256sum] = "01cae1ac5b1ef1ab985bd2d2d79ded6fc99ee04b1535cc1bb191e43a231a3865"
+diff --git a/meta-xfce/recipes-apps/menulibre/menulibre_2.2.3.bb b/meta-xfce/recipes-apps/menulibre/menulibre_2.2.3.bb
+index 3d0e55d360..db9004692b 100644
+--- a/meta-xfce/recipes-apps/menulibre/menulibre_2.2.3.bb
++++ b/meta-xfce/recipes-apps/menulibre/menulibre_2.2.3.bb
+@@ -9,8 +9,7 @@ DEPENDS = " \
+     intltool-native \
+ "
  
--inherit features_check setuptools3 pkgconfig gtk-icon-cache gsettings mime-xdg
-+inherit features_check setuptools3-base pkgconfig gtk-icon-cache gsettings mime-xdg
- 
+-inherit setuptools3 gtk-icon-cache features_check
+-
++inherit distutils3 gtk-icon-cache features_check
  REQUIRED_DISTRO_FEATURES = "x11"
  
+ SRC_URI = "git://github.com/bluesabre/menulibre.git;protocol=https;branch=master"
 -- 
 2.35.1
 
