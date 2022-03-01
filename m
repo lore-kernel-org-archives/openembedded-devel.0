@@ -1,96 +1,96 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C7B8C433F5
-	for <webhook@archiver.kernel.org>; Tue,  1 Mar 2022 20:34:16 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com
- [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web12.2273.1646166855582150798
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FF56C433F5
+	for <webhook@archiver.kernel.org>; Tue,  1 Mar 2022 20:55:29 +0000 (UTC)
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com
+ [209.85.210.172])
+ by mx.groups.io with SMTP id smtpd.web12.2535.1646168128350481775
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Mar 2022 12:34:15 -0800
+ Tue, 01 Mar 2022 12:55:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=J8Xftamj;
- spf=pass (domain: gmail.com, ip: 209.85.214.173,
- mailfrom: ticotimo@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id p17so14405087plo.9
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=pFmbR3aG;
+ spf=pass (domain: gmail.com, ip: 209.85.210.172,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f172.google.com with SMTP id p8so15410944pfh.8
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Mar 2022 12:34:15 -0800 (PST)
+ Tue, 01 Mar 2022 12:55:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=S2YR9UxhuXhC2PVjwT+SGxdk2B/Nd3fbwgYjBh33CQs=;
-        b=J8XftamjikxRioGP7TFlB9anNxzOdpHF0BdKyXnuJdfS6UgXeYri62C0qQfiQAEAis
-         4db/i3L6UJepylq1W6TDumGbEch0wudL/t9Yxl9Pe4iGeQtfw9YJO1cJQ9f9IGI4t8Nx
-         P+L6NFmMCL2o6PORkN2wB3TjkSAK6xwCUdWibuAgK20pkSCJCWuTPY8LsqCgy6UVmfWs
-         yjp2vNrPAWGQXBxFlvT2wjFgAwMhuzh00Oarh+HELcjZhxkI4C1hC2H0aYfyAorb0ixy
-         ZbIVIQHGgiGopkOA4sJpEfQWIw5NlJ/XzaW8q0gWgm9FZ4eh77HZ/X/y7GrmdRxwz0hx
-         pJtQ==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=oNkgOwGZEYAy/mUyDFvS9FHyr6TGehVLuoxaKrUMhZM=;
+        b=pFmbR3aG5Rq7+NUl4o8Xg5IW3ryh2mhMOVJIIEyDzgAXIIHqPlmHFYV8NRPASed4V5
+         cg+BK8IGagHmXqBkLn73Nwo6qhf5br3MIoqmWwHBzKfqymwNYIkDUQXDUYEA4UHrcv5Y
+         vJMyexPFh0vUqCnShsltfKHByX754zs3udwiKq2HEEb2JJocmYv8cU2yQi+2UMbyXxuF
+         vXvvuu0cGhU05TJeXPpuzs19DKEwD4kGBL/+2e3h/lui5cwwiuCgrPTH9MkHN9LEjmdo
+         UD/0kR6aI7mlxg22Po2qqxa4/9uRjlVDIiuBbvyuYcHCVB9BrKybfBlIYujoVXEM7k+A
+         61qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=S2YR9UxhuXhC2PVjwT+SGxdk2B/Nd3fbwgYjBh33CQs=;
-        b=lzM52TMZP9glHm+2T78ZlNJPK5rlJEVm8CTCg2y2DfhtCOfWD3n8+KE0fTt91h3Tb4
-         PEaa+m4RuF8PECNSz7Ftij+NRWxlhgS+jEr4tJWVgs8N87ticEfvbT1G1bYmSqabdb7m
-         LN0b+YamV6QeHR3K48J8cCxffE1IpvBDPZQR7Xn/WtiwsR0TMQZ7EIDN0g767Yg/wo4b
-         8R3KJB2uamKb83UffZwWrvM1slmXxbLY7AeZQYqEQwbIG/jKpIuVdP9C4UfmrUnTxwX8
-         cWBX5tgvsszg3hQNI6Zd0iXmvb4I1mAcf54lq6ygu0ZYU/yyQUR9hBDhGhNBxDmJZ+Xi
-         IFQQ==
-X-Gm-Message-State: AOAM532TlRkUAymNLxZt8VJpirfrSWWR9PtNm7Yl+96cur7mt6rIPUT3
-	LAF0wfURiyZ1EFS4+vrsTh/6f7WGRlo=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=oNkgOwGZEYAy/mUyDFvS9FHyr6TGehVLuoxaKrUMhZM=;
+        b=MI7VeyGY4N8CKXAyFfqwpimvGuRRpj5oYPIzlckCXq4JFsgHV4V6fZYuek0pZbQ/Q3
+         U+ZoUwmlQ+OROy4VJUw8eat07A1aEXIkRpIezVzsIJb46vdOYVR3eb454XRpuOnpvUs5
+         nw+Ki9zXGryVKFW0tjGDwp0TTi1qeUA/NFRazEwzN9opYJfgTdzatpMCU0EQWWXhfRYM
+         8FRsiPgfOvcyXiYa7dVF9yyXpb9C3p9zFDGxxfUaPhBuOl7NDyZqdkgxPo2ZBt2P3TRx
+         Iolr80wL7n3Zu7ft6dBNzLMO87y5mY9Tm3Pja/7yh9TMnOOapVSfBbJ5yub6o9UZE2tI
+         FF8g==
+X-Gm-Message-State: AOAM530S8CmS7lJA5/v45zBxCstWNWS9he3fqxSJwTQ5+rjXZDFQ0XsI
+	0I0sLE6klrxaNTfNq5mno64FeyEBf1nkgw==
 X-Google-Smtp-Source: 
- ABdhPJyzflxzFSPoUF5Tlxz4XrfCnlI2WcfEbqHDvqlq3ijjQr931IUwXiry0P3rfBplWRYTNECwVg==
-X-Received: by 2002:a17:90a:d494:b0:1bc:54d7:9e80 with SMTP id
- s20-20020a17090ad49400b001bc54d79e80mr23658422pju.4.1646166854740;
-        Tue, 01 Mar 2022 12:34:14 -0800 (PST)
-Received: from nereus.hsd1.or.comcast.net
- ([2601:1c0:6000:1b20:b4e2:b3d2:f012:52ea])
+ ABdhPJxZlSAwyKZ8qy7tj3jqT/B8h0H6PHKazOZ6rDASeBHf5b8bJpODs3jbrNYgC7ioR4Ab2KexFA==
+X-Received: by 2002:a63:fa4a:0:b0:378:5d07:96d3 with SMTP id
+ g10-20020a63fa4a000000b003785d0796d3mr16888483pgk.54.1646168127503;
+        Tue, 01 Mar 2022 12:55:27 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::1a20])
         by smtp.gmail.com with ESMTPSA id
- o6-20020a17090ad20600b001b8d01566ccsm2896968pju.8.2022.03.01.12.34.13
+ f31-20020a631f1f000000b003742e45f7d7sm13498942pgf.32.2022.03.01.12.55.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Mar 2022 12:34:14 -0800 (PST)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
+        Tue, 01 Mar 2022 12:55:27 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Tim Orling <tim.orling@konsulko.com>
-Subject: [meta-python][PATCH 9/9] python3-aiofiles: inherit poetry_core
-Date: Tue,  1 Mar 2022 12:33:54 -0800
-Message-Id: <20220301203354.3839755-9-tim.orling@konsulko.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220301203354.3839755-1-tim.orling@konsulko.com>
-References: <20220301203354.3839755-1-tim.orling@konsulko.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-xmodem: Move docs to /usr/share/doc
+Date: Tue,  1 Mar 2022 12:55:25 -0800
+Message-Id: <20220301205525.2264936-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Mar 2022 20:34:16 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Mar 2022 20:55:29 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95656
+ https://lists.openembedded.org/g/openembedded-devel/message/95657
 
-Use PEP-517 build-backend instead of setuptools3.
-
-Signed-off-by: Tim Orling <tim.orling@konsulko.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-aiofiles_0.8.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-devtools/python/python3-xmodem_0.4.6.bb        | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiofiles_0.8.0.bb b/meta-python/recipes-devtools/python/python3-aiofiles_0.8.0.bb
-index f7a75ec1ef..d3bca2c213 100644
---- a/meta-python/recipes-devtools/python/python3-aiofiles_0.8.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiofiles_0.8.0.bb
-@@ -8,7 +8,7 @@ SRC_URI[sha256sum] = "8334f23235248a3b2e83b2c3a78a22674f39969b96397126cc93664d9a
+diff --git a/meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb b/meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb
+index 9d722b84f6..6df392e2d6 100644
+--- a/meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb
++++ b/meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb
+@@ -7,8 +7,13 @@ SRC_URI[sha256sum] = "089737298f5738eabc43f2519efdc80b402693768f16383f7013b9e6f8
  
- PYPI_PACKAGE = "aiofiles"
+ inherit pypi setuptools3
  
--inherit pypi setuptools3
-+inherit pypi poetry_core
- 
- RDEPENDS:${PN} = "\
-     ${PYTHON_PN}-asyncio \
++do_install:append() {
++    install -d ${D}${docdir}/${PN}
++    mv ${D}/usr/doc/* ${D}${docdir}/${PN}/
++    rmdir ${D}/usr/doc
++}
++
+ RDEPENDS:${PN} += " \
+     ${PYTHON_PN}-logging \
+ "
+-
+ BBCLASSEXTEND = "native nativesdk"
 -- 
-2.30.2
+2.35.1
 
 
