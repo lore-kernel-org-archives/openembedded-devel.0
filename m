@@ -1,107 +1,79 @@
-Return-Path: <jsbronder@cold-front.org>
+Return-Path: <schnitzeltony@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 77A25C433F5
-	for <webhook@archiver.kernel.org>; Tue,  1 Mar 2022 17:48:01 +0000 (UTC)
-Received: from wout1-smtp.messagingengine.com (wout1-smtp.messagingengine.com
- [64.147.123.24])
- by mx.groups.io with SMTP id smtpd.web08.143.1646156880370622805
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB527C433EF
+	for <webhook@archiver.kernel.org>; Tue,  1 Mar 2022 18:40:42 +0000 (UTC)
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
+ [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web12.859.1646160041924787080
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Mar 2022 09:48:00 -0800
+ Tue, 01 Mar 2022 10:40:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@cold-front.org header.s=mesmtp header.b=BBZusItN;
- spf=pass (domain: cold-front.org, ip: 64.147.123.24,
- mailfrom: jsbronder@cold-front.org)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
-	by mailout.west.internal (Postfix) with ESMTP id 7DEA53201D7C;
-	Tue,  1 Mar 2022 12:47:59 -0500 (EST)
-Received: from mailfrontend1 ([10.202.2.162])
-  by compute4.internal (MEProxy); Tue, 01 Mar 2022 12:47:59 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
-	 h=cc:cc:content-transfer-encoding:date:date:from:from
-	:in-reply-to:message-id:mime-version:reply-to:sender:subject
-	:subject:to:to; s=mesmtp; bh=5J/jPJyL8sxgN3E3POvGBgJKHiJy7abG+yJ
-	SZlmqG88=; b=BBZusItNTG5T6giurxliJud9GOBber4/xoCDsiL+QdnhSwBdMAU
-	x8OWFXWa/znzkPlBkCongEZnIO6iBt/Kub1/mHhKVq5NeCQvoGWd2jYTwga9IcoJ
-	3OduQrS9i1pYD8/H+oBVs6ffi6Edt7tQAUL+HePOYdiYv82FfpC0MsHQ=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
-	:from:from:in-reply-to:message-id:mime-version:reply-to:sender
-	:subject:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender
-	:x-me-sender:x-sasl-enc; s=fm2; bh=5J/jPJyL8sxgN3E3POvGBgJKHiJy7
-	abG+yJSZlmqG88=; b=VwJu2RHDOFNG87RCFDbJ5dtQr59zOFwJfm2cmsuDPu9JP
-	RcGEs0wWqa/f7lcZhaAQr67G1ROe5uecFHWFicCjjaMFagzU/Bds4TOxQ8ElnJ+l
-	l93KS1EkI046wmHoYLF5/jILTRIG2qOnSEpld9jmmNMFrPf77MXhxHpLJM0W+7vK
-	ICSFbIirXDHVTUvFskkSRmdIwyuh7086hSkEs1mIR5l3wCaSY8A7XA5LAWU4jqCF
-	m1RGvjjhbQcIcJN7ZTHfK/AZVGM66sK6j8Q4o/4vkVwhRU7Dy0zIlMU2i3E9nODE
-	y4Wjy9IuXGL76NlZgeKWRyABZ8mUxAWU8E+N1PZpA==
-X-ME-Sender: <xms:TlweYp3oltqhyYr5cCStCvqvZKYgaSwP5kMPaj8g4-4GfVs0zXbuZA>
-    <xme:TlweYgE18IVyrk_CnBNMA3N08D4EVnjfftctRuhDQZ03ESqUVQjaBEoPxE4cXDTN_
-    OinWuL2z98B6ijVbg>
-X-ME-Received: 
- <xmr:TlweYp7PMYkuvisnAs5Na6oy_-jl3O2uFLEeFX54EMCx4RyfH8Lx4Gb4nSsskoQf4zpEHynxG68Nu6ZB-h08v83iATWjsmXojl4gCeF2fRTK>
-X-ME-Proxy-Cause: 
- gggruggvucftvghtrhhoucdtuddrgedvvddruddtvddguddtvdcutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
-    necuuegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffoggfgsedtkeertd
-    ertddtnecuhfhrohhmpefluhhsthhinhcuuehrohhnuggvrhcuoehjshgsrhhonhguvghr
-    segtohhlugdqfhhrohhnthdrohhrgheqnecuggftrfgrthhtvghrnheptedtgefhhfdtie
-    dvhfekieffkeelheettefgieeuhfeuffffheevveeuhfeigedtnecuffhomhgrihhnpehg
-    ihhthhhusgdrtghomhenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
-    hlfhhrohhmpehjshgsrhhonhguvghrsegtohhlugdqfhhrohhnthdrohhrgh
-X-ME-Proxy: <xmx:TlweYm3GSNkuAIuJGbk2XxkUQy0mgbB2CTTnwB6TZUAz_oRoU6w_OQ>
-    <xmx:TlweYsEuApVJLJglZ7dBXFsWhTiQvVDfBCWMgsU82X2Pjnh1pEtfKA>
-    <xmx:TlweYn_qwWDYCbZErlgTUYTGfMSz8iwHsSBrKLyh8YDjZlzgpb9SYw>
-    <xmx:T1weYnMCgusp4lY4kr7i0go7U88B09aOhhcanb6VPuttGek9Yz67MQ>
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 1 Mar 2022 12:47:58 -0500 (EST)
-From: Justin Bronder <jsbronder@cold-front.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: Justin Bronder <jsbronder@cold-front.org>
-Subject: [meta-python][PATCH] python3-prctl: fix wheel build
-Date: Tue,  1 Mar 2022 12:47:41 -0500
-Message-Id: <20220301174741.17308-1-jsbronder@cold-front.org>
-X-Mailer: git-send-email 2.35.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=cxs/kZnJ;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43,
+ mailfrom: schnitzeltony@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id
+ ge19-20020a17090b0e1300b001bcca16e2e7so2646892pjb.3
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 01 Mar 2022 10:40:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Bv4mWmQkGbc04e1rNvHOD28ZvdRBAJoJT4wUmlbeYZg=;
+        b=cxs/kZnJ6dZEa00L05vRzfDKMWqndBSKAm6PkS1PTaBRsIZCeqvl9v1kVGViBA1M6q
+         Q+m8pnGAAH/QdkmWxm3bz0PbUAWXOu76MWjYjG2bd0oYhniYQ8F/QSBOlzeSndasOYIg
+         08u6p9AJdyMVhhi72Uctvc8cu2ZNzNykJQttGTl49cTe8MDDTo+rkG9NSQDVOgCKLb+W
+         mAF6nm0K9bVKbb7ONuOiT4BKM/0zFCR808X5QqPoFm2xHjEKcZwVEVenACRia5QzW0Sc
+         FYYqyyPa9gCnpEU9cJybaSWahCcnFw3sWVQYQr7L1sGPAW3ngtKf/tmio15BXsvD6ACg
+         a78A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Bv4mWmQkGbc04e1rNvHOD28ZvdRBAJoJT4wUmlbeYZg=;
+        b=0LE11nbYpJ07ui5msB8zrRwTi95Xiz85rxicgZ2lA25Kpv/qVpzRVuDgWrtafq+Tix
+         rCfJVHTvEfRjdMDppeqdtTQjOanlKEGb/jUNJZovj0Gr/XdwD5GEuEnC6T89ZXne26jH
+         mSalNNEK+LJUTfEaj+Byip52YUWj/6oXIrW8so11PGJFRc8F+f1FfJm44jSL850ccdjL
+         eExYSt3cZcbuGZvUuAl3G8xMAegDbYgxLoDCgGnFFa03UPtnR5hY7CjangoXqDKPmRps
+         KebnRgCex6eRTQt/NDXao3nC6UIw9rcLtau3aGYTXDuhtPrvgdS3heL2stmuXuGmFIpY
+         PlwA==
+X-Gm-Message-State: AOAM531PWYQ8F1MEnZMy6qjKNcrnJFLeY+yOuZWormjHeltgixEIYu37
+	BmyXjjB5EImJIqrgRkj1vyWNCvIGGq3uepLVORU=
+X-Google-Smtp-Source: 
+ ABdhPJythloFx7KpZX3sz0nCTVHdfSZ3dysAi2qkwoAsS6T49HsEXUCxDthoRF9Fl6oaUVF3W1Rc+igEY0/mjS1hMAc=
+X-Received: by 2002:a17:902:d4d1:b0:150:1d1c:30bd with SMTP id
+ o17-20020a170902d4d100b001501d1c30bdmr25167367plg.1.1646160041258; Tue, 01
+ Mar 2022 10:40:41 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20220301161346.700028-1-adrian.freihofer@siemens.com>
+In-Reply-To: <20220301161346.700028-1-adrian.freihofer@siemens.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Tue, 1 Mar 2022 19:40:29 +0100
+Message-ID: 
+ <CALbNGRSuvB0i-T9-_8m6Cpw698ssHEK0QSbOQs5VuP97tyvN2g@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH 1/2] networkmanager: switch to meson
+ and git
+To: Adrian Freihofer <adrian.freihofer@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org,
+	Adrian Freihofer <adrian.freihofer@siemens.com>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Mar 2022 17:48:01 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Mar 2022 18:40:42 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95643
+ https://lists.openembedded.org/g/openembedded-devel/message/95644
 
-Recipe does not inherit pypi nor would PN be a good guess at the name of
-the wheel. Set PIP_INSTALL_PACKAGE appropriately.
+On Tue, Mar 1, 2022 at 5:13 PM Adrian Freihofer
+<adrian.freihofer@gmail.com> wrote:
+>
+> - Switch to meson build-system
+> - Switch to git download (was not really possible with autotools)
+Why switch to git?
 
-Also dropping '+git${SRCPV}' from PV as the SRCREV is pointing to the
-1.8.1 tag.
+Cheers
 
-Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
----
- meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
-
-diff --git a/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
-index 8426e48113..28d94ba5bf 100644
---- a/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
-@@ -11,12 +11,11 @@ S = "${WORKDIR}/git"
- B = "${S}"
- 
- SRCREV = "5e12e398eb5c4e30d7b29b02458c76d2cc780700"
--PV = "1.8.1+git${SRCPV}"
--
- SRC_URI = "git://github.com/seveas/python-prctl;protocol=https;branch=main \
-            file://0001-support-cross-complication.patch \
- "
- inherit setuptools3 python3native
-+PIP_INSTALL_PACKAGE = "python_prctl"
- 
- DEPENDS += "libcap"
- 
--- 
-2.35.1
-
+Andreas
 
