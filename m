@@ -1,138 +1,98 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jsbronder@cold-front.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0ABBAC433EF
-	for <webhook@archiver.kernel.org>; Wed,  2 Mar 2022 15:59:30 +0000 (UTC)
-Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com
- [209.85.222.176])
- by mx.groups.io with SMTP id smtpd.web10.8878.1646236768658000324
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19C04C433EF
+	for <webhook@archiver.kernel.org>; Wed,  2 Mar 2022 17:03:30 +0000 (UTC)
+Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
+ [66.111.4.29])
+ by mx.groups.io with SMTP id smtpd.web08.163.1646240608736327079
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Mar 2022 07:59:28 -0800
+ Wed, 02 Mar 2022 09:03:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=k2FmlC66;
- spf=pass (domain: gmail.com, ip: 209.85.222.176,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f176.google.com with SMTP id n185so1616398qke.5
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Mar 2022 07:59:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=GBwHXGcOkiz3e8ps7pmr5TvcLGhWiZLSQloKcTKsn3s=;
-        b=k2FmlC66HUBRfu79zx1HeP0irQGbpfIcJm5E83wqwikME4kBfrKeXIzcqf0T9itAnf
-         zlMwFbxDXkF45GBRMbMoni3l57GqEvV9hAnfmFYj/1/k+daCi2IMCGb+UCzhuZEy8Pbv
-         jCp0Mt7Ra4GkgJSfsj36XAGLU4XUZYatKJxFFV68Ip8B05rWyCMMsI9Sh6K+0xcZmsm/
-         9vM6HnFDSDoc93fn2gb1Q8rOjkJKU9dwPjJehdB2VUKNy9p5qbZBA1w8uDwWUAerMbdB
-         5i0ybyfINNJ+5/8KgORgIhbj5e26kw2iTtmD4dlQHp4tEIbFnrJS+9BLRL4klctMoSrF
-         lwzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=GBwHXGcOkiz3e8ps7pmr5TvcLGhWiZLSQloKcTKsn3s=;
-        b=594j0IgEOYJK3exprdarJzLd1w5J47LnxdUvAbtBzGbhYwVAG9MQTFzMwVGjsabeWo
-         n6x8DdyEltRPoXwVomZBuRRS8c2jy0jaL8g1MoRvz7FZeq/Xk7u3ZdXoj/ijvlJvk96x
-         wLkC48KWGfnI01/oRivpXGvkJBD1Nt6Tetuuua55imybyK4bEgA71UtwHK/4XsNwLOzH
-         bg7iKg6rwXgcCvPKfO4XamjfmfC2Q/prNEoYNH1eif1ma2shKC9cB2AAuoziUwhTRSz7
-         wTgk2VR5p7qCdC7M+9iYEO4RpsBFxn86tStT8Fc1bnHsPmZneb/2m7L7EwDuFV0GoJbR
-         qsMQ==
-X-Gm-Message-State: AOAM531Hqa63aMQKlov/qHszasRxJnDv2k1RdxI4l6KzOCQe8/0xpm4J
-	y3c3jH+vaDKuRypDwYNwe3Cg+bYq36QvwmbNsaXEgFgAXZg=
-X-Google-Smtp-Source: 
- ABdhPJxA06K+sSSWLxUJXrhitDrlssxbIM/KEdKKsEZDcOr5w7fKovdPOA0JdxRM4tew4HyZhkpklkWKD+HlY8S4Sp0=
-X-Received: by 2002:a05:620a:12ba:b0:663:6779:beeb with SMTP id
- x26-20020a05620a12ba00b006636779beebmr1261495qki.227.1646236767577; Wed, 02
- Mar 2022 07:59:27 -0800 (PST)
+ dkim=pass header.i=@cold-front.org header.s=mesmtp header.b=gfZapSRn;
+ spf=pass (domain: cold-front.org, ip: 66.111.4.29,
+ mailfrom: jsbronder@cold-front.org)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+	by mailout.nyi.internal (Postfix) with ESMTP id C8B525C01BD
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed,  2 Mar 2022 12:03:27 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute4.internal (MEProxy); Wed, 02 Mar 2022 12:03:27 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
+	 h=cc:content-transfer-encoding:date:date:from:from:in-reply-to
+	:message-id:mime-version:reply-to:sender:subject:subject:to:to;
+	 s=mesmtp; bh=JZb3poVCeGuKldhsBqXTXu6/AN5gZP/MKRjvR+TbgPk=; b=gf
+	ZapSRni+7oqU4bA5cjiXxS4O5fu09hIDK9qbXEg18gia9TWBs7xWz/JfHChLFJXF
+	+U+TscI6p0WmSJVXfCXoSnIaIQ86+cJ/aObV3LmCqKBcMjycjYyQZCfm77qeYu1a
+	m44fEpqOhQYVbSY+qJrhvwQ7Gb+X7a/Y4LGeiwpYM=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:content-transfer-encoding:date:date
+	:from:from:in-reply-to:message-id:mime-version:reply-to:sender
+	:subject:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender
+	:x-me-sender:x-sasl-enc; s=fm2; bh=JZb3poVCeGuKldhsBqXTXu6/AN5gZ
+	P/MKRjvR+TbgPk=; b=a8JqLVsDTwl8euJWjNPPYeAazG+LM/z2/XpdZPP8fcynn
+	I2LmgrrlJDU7xzWoPu8dAfnHvbyJE6K7SFoKxHqs2z+hfuZysdrLTNjQWeeOaPgk
+	ZjB9HzqmIrd1N+40++33/0VrlM6SMTeTEmBHYEUQkXX+o1CJPKFakwKDJkO4lmq8
+	hwjgZhPqOb3Iz5ZfFJngfzlazGbBwfw3F+kOx/pRLyD/7aPyUXrFN6Lg2QxrYqzB
+	9JCuBoCUZcHA26t1FeEKGhJIwgwI/8j5XG5hTPs1tOJiOonKhsq8dl2a49OsVb/P
+	oIRgKQb1Nw1gCIcNEDX0gsIbcl0NeoG2Cse1U9ddw==
+X-ME-Sender: <xms:WaMfYmT-0t3IMSHIc2L9QA9g37OWV06cvsFZZJZZ3N5iQu2L3HJNmw>
+    <xme:WaMfYrxEiocJdGn-LBbAM7zXDHyAcdN8-ZMsuKuP2g7cyHmJE5rW7ylCU2O5AdnQY
+    DV9pEoPlN6QRkxsOw>
+X-ME-Received: 
+ <xmr:WaMfYj2EUExLNVZh2tnR75oUMxJ-upONdp0X2hQyqAyUZ-I0OQZ4PblmgLYpz523VgFAj2g6CB74J9Jbta851VkigK5OzsFDmidPfZm2hF7a>
+X-ME-Proxy-Cause: 
+ gggruggvucftvghtrhhoucdtuddrgedvvddruddtgedgleduucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucenucfjughrpefhvffufffkofgggfestdekredtre
+    dttdenucfhrhhomheplfhushhtihhnuceurhhonhguvghruceojhhssghrohhnuggvrhes
+    tgholhguqdhfrhhonhhtrdhorhhgqeenucggtffrrghtthgvrhhnpedvhfdthfffieffve
+    etveeifeeuvddthfeludeitedukeeggfevfffgffffffffhfenucevlhhushhtvghrufhi
+    iigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjshgsrhhonhguvghrsegtohhlug
+    dqfhhrohhnthdrohhrgh
+X-ME-Proxy: <xmx:WaMfYiCINujAUiTOtALOLUxYfRDhgBDiloo1hBoeJQU5PK6u18ekxw>
+    <xmx:WaMfYvh5SFdCvEW6m0kVbb7NPKAXBVFw-bMCcQ_VclelzbtnN0K4Dw>
+    <xmx:WaMfYupa90joKSgiVONTzQcdcfvEaPyjGpg-3QnEwNeh1WJlCGsgWw>
+    <xmx:X6MfYhfTc3wSXEFAKodAvT5ZPomdxjPEgywZIARznKYTNN0LS3HCGQ>
+Received: by mail.messagingengine.com (Postfix) with ESMTPA for
+ <openembedded-devel@lists.openembedded.org>; Wed,
+ 2 Mar 2022 12:03:21 -0500 (EST)
+From: Justin Bronder <jsbronder@cold-front.org>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH] python3-configshell-fb: set PIP_INSTALL_PACKAGE
+Date: Wed,  2 Mar 2022 12:03:17 -0500
+Message-Id: <20220302170317.24076-1-jsbronder@cold-front.org>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-References: <20211020225246.659813-1-raj.khem@gmail.com>
- <5a6ea84f-a5cc-25cf-a917-db3cd3c810f2@pr.hu>
- <25148490-0b41-de90-c014-2d2856de8950@gmail.com>
- <6b1ef880-a75b-80b1-63f9-f91f88353200@pr.hu>
-In-Reply-To: <6b1ef880-a75b-80b1-63f9-f91f88353200@pr.hu>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 2 Mar 2022 07:59:16 -0800
-Message-ID: 
- <CAMKF1srf1707vBB_SnmTUcK4JUAmJOD7QYDq4D+A6XQZur5LVg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] nodejs: Upgrade to 16.11.1
-To: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@pr.hu>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000bf69fe05d93e5d2c"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 02 Mar 2022 15:59:30 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 02 Mar 2022 17:03:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95693
+ https://lists.openembedded.org/g/openembedded-devel/message/95694
 
---000000000000bf69fe05d93e5d2c
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Recipe does not inherit pypi nor would PN resolve to the name of the
+wheel so we must set PIP_INSTALL_PACKAGE appropriately.
 
-On Tue, Mar 1, 2022 at 11:13 PM B=C3=B6sz=C3=B6rm=C3=A9nyi Zolt=C3=A1n <zbo=
-szor@pr.hu> wrote:
+Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
+---
+ .../recipes-devtools/python/python3-configshell-fb_1.1.29.bb     | 1 +
+ 1 file changed, 1 insertion(+)
 
-> 2022. 03. 01. 18:12 keltez=C3=A9ssel, Khem Raj =C3=ADrta:
-> >
-> >
-> > On 3/1/22 5:35 AM, B=C3=B6sz=C3=B6rm=C3=A9nyi Zolt=C3=A1n wrote:
-> >> 2021. 10. 21. 0:52 keltez=C3=A9ssel, Khem Raj =C3=ADrta:
-> >>> * This is new LTS release
-> >>
-> >> 16.14.0 is released since then, and 16.x is the LTS series.
-> >> Can you please upgrade the recipe?
-> >
-> > Currently, drowned in making meta-oe layers build. Perhaps it will
-> happen after that,
-> > unless someone beats me to it.
->
-> Would you accept a patch to add into Kirkstone?
+diff --git a/meta-python/recipes-devtools/python/python3-configshell-fb_1.1.29.bb b/meta-python/recipes-devtools/python/python3-configshell-fb_1.1.29.bb
+index 359c9d002c..2bb196c209 100644
+--- a/meta-python/recipes-devtools/python/python3-configshell-fb_1.1.29.bb
++++ b/meta-python/recipes-devtools/python/python3-configshell-fb_1.1.29.bb
+@@ -12,5 +12,6 @@ SRCREV = "d74a33b69f688ed9b8b28033835303604639d4eb"
+ S = "${WORKDIR}/git"
+ 
+ inherit setuptools3
++PIP_INSTALL_PACKAGE = "configshell_fb"
+ 
+ RDEPENDS:${PN} += "python3-modules python3-fcntl python3-six"
+-- 
+2.35.1
 
-
-Kirkstone is not branch yet so yes
-
->
->
-> >
-> >>
-> >> Thanks in advance.
->
->
-
---000000000000bf69fe05d93e5d2c
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Tue, Mar 1, 2022 at 11:13 PM B=C3=B6sz=C3=B6rm=C3=A9nyi =
-Zolt=C3=A1n &lt;<a href=3D"mailto:zboszor@pr.hu">zboszor@pr.hu</a>&gt; wrot=
-e:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bo=
-rder-left:1px #ccc solid;padding-left:1ex">2022. 03. 01. 18:12 keltez=C3=A9=
-ssel, Khem Raj =C3=ADrta:<br>
-&gt; <br>
-&gt; <br>
-&gt; On 3/1/22 5:35 AM, B=C3=B6sz=C3=B6rm=C3=A9nyi Zolt=C3=A1n wrote:<br>
-&gt;&gt; 2021. 10. 21. 0:52 keltez=C3=A9ssel, Khem Raj =C3=ADrta:<br>
-&gt;&gt;&gt; * This is new LTS release<br>
-&gt;&gt;<br>
-&gt;&gt; 16.14.0 is released since then, and 16.x is the LTS series.<br>
-&gt;&gt; Can you please upgrade the recipe?<br>
-&gt; <br>
-&gt; Currently, drowned in making meta-oe layers build. Perhaps it will hap=
-pen after that, <br>
-&gt; unless someone beats me to it.<br>
-<br>
-Would you accept a patch to add into Kirkstone?</blockquote><div dir=3D"aut=
-o"><br></div><div dir=3D"auto">Kirkstone is not branch yet so yes=C2=A0</di=
-v><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:=
-1px #ccc solid;padding-left:1ex" dir=3D"auto"><br>
-<br>
-&gt; <br>
-&gt;&gt;<br>
-&gt;&gt; Thanks in advance.<br>
-<br>
-</blockquote></div></div>
-
---000000000000bf69fe05d93e5d2c--
 
