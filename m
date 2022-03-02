@@ -1,106 +1,97 @@
-Return-Path: <adrian.freihofer@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ADA25C4332F
-	for <webhook@archiver.kernel.org>; Wed,  2 Mar 2022 20:00:10 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
- [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.web08.2301.1646251209717735846
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E07B4C433F5
+	for <webhook@archiver.kernel.org>; Wed,  2 Mar 2022 20:02:47 +0000 (UTC)
+Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com
+ [209.85.222.171])
+ by mx.groups.io with SMTP id smtpd.web11.2366.1646251366530606053
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Mar 2022 12:00:10 -0800
+ Wed, 02 Mar 2022 12:02:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=q4z8NaFJ;
- spf=pass (domain: gmail.com, ip: 209.85.128.52,
- mailfrom: adrian.freihofer@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id c192so1857287wma.4
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=AyQ1KRie;
+ spf=pass (domain: gmail.com, ip: 209.85.222.171,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f171.google.com with SMTP id b13so2212824qkj.12
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Mar 2022 12:00:09 -0800 (PST)
+ Wed, 02 Mar 2022 12:02:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=TIw4Sd6fs2PUkNiQudt1rpMq8oYKgJMm7dcdSARnvTk=;
-        b=q4z8NaFJzjbHix2WWwd1eZh8djC8JAWhxDupHCloUJ6+2wOY7kMZWP9t1pPF6SqbM9
-         9FZueKVU4gdqjns6uGrMCF7vKaT88D2c4ERuG68DxSt/j4ESLvZChLd6u44TiuTgRSx6
-         PostWj0z7kHGSPGmHKT2v8xCsGJoP6DGk/M4dIQhLiGHjc0SBQcIteNhBmRkRmMatNBh
-         eU3NnPaPSCKFXhGhtZBWa1digA0vPW9xeT+WSq+nx0l8NJ6cYgs8gciSgRXuW47OVpGZ
-         UZeNFWT/5Sak1jY+HpVhE7g3j514UnhZxyydEAVnkxwkhBdu1DCbt22RGbnb2/o9hWrB
-         dUFQ==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=UUnkIULFp+KocWWqjJZ1Pb57Dfog0rdXUgr3OlDZ5g0=;
+        b=AyQ1KRie6VDknU35e0Fs84tKlHqTfZQfsKjFMly8kKJI94CkBml/X6AVBGZpvvwtXR
+         PUYGgq+DzDcurj2vqJ4NIIs97T/SbptN2wwzDp3lnXwmK+5HW9OfDcugYfNER9a99XKl
+         9gsY0/KOh7EY6FK9vZMNefUOWcukMUtOpMToajFlB6MTNo0AmIZKeRxUtFwxmr1USuVX
+         IXjIut9lzRhZpojgpI08GfN4S5VTEB3hv9CdnzP4l23BlwYGsZn9F90B4nuVRlQFTm/R
+         BMWrUhyHeWWTZB5J1r9m3J+HqMR1IgP/esbPPXnCMaqhRseAtiWcuYD5o8CeKqZOfqEt
+         D6tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=TIw4Sd6fs2PUkNiQudt1rpMq8oYKgJMm7dcdSARnvTk=;
-        b=bklsy94c7+bwn4HRZvxt6zi4xs+EdwebfTJ+lorDkHG6pUn4BhOt2IlUb0ufJ+TJrD
-         Ayi8EMlWyvzfRLH6SxgaRLZPHsUAtgm6L3m600Hlwi2JKEB1rWSPOpgYjdjlxIELlNLp
-         h19G/Aky8Kd928g4/4w70soytMK21qAJDwuwVW0XRFMx7NQiGiQ6IceWMCVOq8H/qFSm
-         fmmAgIEKrAcJ2hdjwAvGwIuEIDsrRj8MeIYjgoYUJtOi3wTAK3j7nbHPvCvg686J5sz+
-         zKJPFUhEpvRwwQZ4+bMiIgrmZns4AfFQdqPA0XgB9D7AAv1Oi7D05hhLczY1wAvDIQ76
-         0asQ==
-X-Gm-Message-State: AOAM530EV657mw4yKtLaP7iMrz6GNzMuEqZsTeFpo/+FqeGEAW2TZ85U
-	gfgnV8eDKtQvGDJCM+JNC1n1iR1uLtw=
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=UUnkIULFp+KocWWqjJZ1Pb57Dfog0rdXUgr3OlDZ5g0=;
+        b=OJ8kMrejzPhHrYTebkbSWJ9SmVY7Cwr3uk/6HPPdjL2760usr3GLWVS+3jzyAcq8SP
+         DYmElpGjNV4hlBHb14H+ZCZ1gPckyFTMC4+95C1xwNM3zHjKzi6YyC7CSTn2q50LFMSL
+         IXH2HJwJO2uSK+tdnYQ7vlQXPW6HC+ux5/tiitZplO+fjqbK+zVRA0pR8Alsn/yeB1O2
+         /AQigLEOKoKa7fN7FxQNHXo/Dh+sMk5GuKoYjNcRdXPnFwslK4vwW8l9o6VkbG+DLwCt
+         TFPK8pAIf6fnO55nHRkODz4Zyrduw4iHhEVjHR2ONFdpT21XHddjFo7xbhaJKW78WWfs
+         U7lA==
+X-Gm-Message-State: AOAM533rAbG2aLSRo3L2blF1+nRpfmDboA9TmlrJ7G5fn1aBRrrGM6LU
+	L1NjGdZyLTX+92kAUh5SXSG6XBQ4jndRgEsvGp4=
 X-Google-Smtp-Source: 
- ABdhPJz2knVASjukYCTWNtY8GVNLWyGBPCfZulkjanrTTfPla/ry0eFT56FI9sHq/aMQ2Y1CCVeDHA==
-X-Received: by 2002:a7b:cf23:0:b0:385:17a6:9b9f with SMTP id
- m3-20020a7bcf23000000b0038517a69b9fmr1149448wmg.151.1646251208114;
-        Wed, 02 Mar 2022 12:00:08 -0800 (PST)
-Received: from md2ramxc.ad001.siemens.net ([62.32.0.69])
-        by smtp.gmail.com with ESMTPSA id
- q124-20020a1ca782000000b00382b3260778sm4415373wme.3.2022.03.02.12.00.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Mar 2022 12:00:07 -0800 (PST)
-From: Adrian Freihofer <adrian.freihofer@gmail.com>
-X-Google-Original-From: Adrian Freihofer <adrian.freihofer@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Adrian Freihofer <adrian.freihofer@siemens.com>
-Subject: [meta-networking][PATCH V3 2/2] feat: add networkmanager
-Date: Wed,  2 Mar 2022 20:59:45 +0100
-Message-Id: <20220302195945.3818037-3-adrian.freihofer@siemens.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220302195945.3818037-1-adrian.freihofer@siemens.com>
-References: <20220302195945.3818037-1-adrian.freihofer@siemens.com>
+ ABdhPJwYNQB8FE9DveoYjC/BVHJh2MdgyNNWN3RG6+KvzrV6SDXxbNS/R9B9ecU6Gcroz2LVt5gxUOWgzhNZ1Dyc2F8=
+X-Received: by 2002:a37:b541:0:b0:475:4524:bb4b with SMTP id
+ e62-20020a37b541000000b004754524bb4bmr17575556qkf.149.1646251365616; Wed, 02
+ Mar 2022 12:02:45 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20220302195945.3818037-1-adrian.freihofer@siemens.com>
+ <20220302195945.3818037-2-adrian.freihofer@siemens.com>
+In-Reply-To: <20220302195945.3818037-2-adrian.freihofer@siemens.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 2 Mar 2022 12:02:19 -0800
+Message-ID: 
+ <CAMKF1so6xS6MgDAep0K9-5ROu0jpx_QJM7H5H6L4mvOS6U6y1A@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH V3 1/2] feat(meta-openembedded):
+ refer to nm-1.36 branch
+To: Adrian Freihofer <adrian.freihofer@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Adrian Freihofer <adrian.freihofer@siemens.com>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 02 Mar 2022 20:00:10 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 02 Mar 2022 20:02:47 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95707
+ https://lists.openembedded.org/g/openembedded-devel/message/95708
 
----
- projects/poky-oe-glibc-sd/conf/site.conf | 5 +++++
- projects/poky-tiny-oe/conf/site.conf     | 5 +++++
- 2 files changed, 10 insertions(+)
+I think this belongs to your distro project I guess.
 
-diff --git a/projects/poky-oe-glibc-sd/conf/site.conf b/projects/poky-oe-glibc-sd/conf/site.conf
-index d51cc82..55c2c66 100644
---- a/projects/poky-oe-glibc-sd/conf/site.conf
-+++ b/projects/poky-oe-glibc-sd/conf/site.conf
-@@ -11,3 +11,8 @@ DISTRO_FEATURES:append = " systemd"
- VIRTUAL-RUNTIME_init_manager = "systemd"
- DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
- VIRTUAL-RUNTIME_initscripts = ""
-+
-+# add NetworkManager
-+IMAGE_INSTALL:append = "networkmanager-nmcli"
-+
-+# PACKAGECONFIG:pn-networkmanager = "systemd libedit gnutls nmcli dhcpcd wifi modemmanager ppp"
-diff --git a/projects/poky-tiny-oe/conf/site.conf b/projects/poky-tiny-oe/conf/site.conf
-index 2b0c389..31fac0f 100644
---- a/projects/poky-tiny-oe/conf/site.conf
-+++ b/projects/poky-tiny-oe/conf/site.conf
-@@ -7,3 +7,8 @@ SSTATE_DIR ?= "${TOPDIR}/../../temp/sstate-cache"
- # Enabling Build History
- INHERIT += "buildhistory"
- BUILDHISTORY_COMMIT = "1"
-+
-+# add NetworkManager
-+IMAGE_INSTALL:append = "networkmanager-nmcli"
-+
-+# PACKAGECONFIG:pn-networkmanager = "libedit gnutls nmcli dhcpcd wifi modemmanager ppp"
--- 
-2.34.1
-
+On Wed, Mar 2, 2022 at 12:00 PM Adrian Freihofer
+<adrian.freihofer@gmail.com> wrote:
+>
+> ---
+>  meta-openembedded | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-openembedded b/meta-openembedded
+> index cf0ed42..36019b4 160000
+> --- a/meta-openembedded
+> +++ b/meta-openembedded
+> @@ -1 +1 @@
+> -Subproject commit cf0ed4239196a76800f8c2facb5a285409b8147a
+> +Subproject commit 36019b487d7854d09cdb4d39d5ba7a42725f2372
+> --
+> 2.34.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#95706): https://lists.openembedded.org/g/openembedded-devel/message/95706
+> Mute This Topic: https://lists.openembedded.org/mt/89510131/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
