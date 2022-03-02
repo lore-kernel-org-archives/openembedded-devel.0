@@ -2,45 +2,46 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75A94C433EF
-	for <webhook@archiver.kernel.org>; Wed,  2 Mar 2022 22:27:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68711C433F5
+	for <webhook@archiver.kernel.org>; Wed,  2 Mar 2022 22:27:52 +0000 (UTC)
 Received: from voyager.superhosting.bg (voyager.superhosting.bg
  [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web10.3988.1646260068355922181
+ by mx.groups.io with SMTP id smtpd.web09.4124.1646260070145816812
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Mar 2022 14:27:49 -0800
+ Wed, 02 Mar 2022 14:27:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=tD2kbob0;
+ dkim=pass header.i=@anavi.org header.s=default header.b=t51EeMVu;
  spf=permerror,
  err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
  for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
  (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
-	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
-	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
-	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=mq7cNvV4bGN8J7NLbBzgxMudBZEHdsAJsJdYbpVrnMI=; b=tD2kbob0Gmr4Z2wc9ft26ZGtLC
-	QV4q1h0bKS4zV/WKny2TSVPF/iGsKw5fdp7OmysADW9jer5j08lb1J7tpzeWTLAdVGb4UGgXSFQ0j
-	Ic8bySTq17IrHosX5J0olAd29cmV5RSwYgjWS4NWbrzHsAhNf0S4bN/VoqI5OxWzR/B9T52VGgoLZ
-	5LzD9+PxvJYjlykB1HEziVIz35M5MsVfPXMbC6AhvdP2oXBmUYRAK2rTPlX1n5z++6KyLHCeobpFK
-	qNjQ9FClcIb3mGZ5FIT7cCtdYxxAjTqG6bA/t/Q1+kAAbO1S1YhPUORew91gPlOWCF5EMET3LThfe
-	NKcwuBSw==;
+	bh=G1qTrsGqnzCEiwJLmnGtfqghlqpfz1rROuVE5RIY7yg=; b=t51EeMVuq4K+YWxCUff86154+6
+	k65LTB7atWhBTCxNrLIbJJcWfIw9mmzWX1GgxyyXj1x8NohrbUGVTIia4kD0Rs35MfUqM2hHc/e4n
+	yS7dZIA4wdoWqSCTETp7Uwev4khf6eBNJPSmx0zeCGtxYru05fdnk+twjrVRJZUqQcFW+wONfzgA4
+	Kx3z547gcMUrRpSudOWYIEhuPNMSIxqUoHnE6h7HVbX8ZCVzdJLk0gGqjt/UAPVVa32nbooBvBYhg
+	OXcQ6hHQORTZPUV0Voyq2Uh1dyld3NcCYxdW58yUqWueo+ZD72WH4lmSk4YhxSt7VaaSOzW4p4dD5
+	WA+Eryag==;
 Received: from lan.nucleusys.com ([92.247.61.126]:32944 helo=tone.k.g)
 	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.94.2)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1nPXRr-000BsC-Jn; Thu, 03 Mar 2022 00:27:48 +0200
+	id 1nPXRu-000BsC-5D; Thu, 03 Mar 2022 00:27:50 +0200
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-semantic-version: Upgrade 2.8.5 ->
- 2.9.0
-Date: Thu,  3 Mar 2022 00:27:34 +0200
-Message-Id: <20220302222738.1047918-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-networkx: Upgrade 2.6.3 -> 2.7
+Date: Thu,  3 Mar 2022 00:27:35 +0200
+Message-Id: <20220302222738.1047918-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20220302222738.1047918-1-leon.anavi@konsulko.com>
+References: <20220302222738.1047918-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-OutGoing-Spam-Status: No, score=-0.5
@@ -59,37 +60,52 @@ X-Source-Dir:
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 02 Mar 2022 22:27:50 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 02 Mar 2022 22:27:52 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95714
+ https://lists.openembedded.org/g/openembedded-devel/message/95715
 
-Upgrade to release 2.9.0:
+Upgrade to release 2.7:
 
-- Add support for Django 3.1, 3.2, 4.0
-- Add support for Python 3.7 / 3.8 / 3.9 / 3.10
+- Dropped support for Python 3.7
+- Added the Asadpour algorithm for solving the asymmetric traveling
+  salesman problem
+- Removed all internal usage of the numpy.matrix class, and added a
+  FutureWarning to all functions that return a numpy.matrix
+  instance
+- Added support for the scipy.sparse array interface
+- Added generic dtype support to
+  ~networkx.convert_matrix.to_numpy_array
+- Added support for computing betweenness centrality on multigraphs
+- Added support for directed graphs and multigraphs to
+  greedy_modularity_communities
+
+License-Update: Update year
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...antic-version_2.8.5.bb => python3-semantic-version_2.9.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-semantic-version_2.8.5.bb => python3-semantic-version_2.9.0.bb} (81%)
+ .../{python3-networkx_2.6.3.bb => python3-networkx_2.7.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-networkx_2.6.3.bb => python3-networkx_2.7.bb} (76%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-semantic-version_2.8.5.bb b/meta-python/recipes-devtools/python/python3-semantic-version_2.9.0.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-semantic-version_2.8.5.bb
-rename to meta-python/recipes-devtools/python/python3-semantic-version_2.9.0.bb
-index b8541ff57..ee635871b 100644
---- a/meta-python/recipes-devtools/python/python3-semantic-version_2.8.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-semantic-version_2.9.0.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/rbarrois/python-semanticversion"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=4fb31e3c1c7eeb8b5e8c07657cdd54e2"
+diff --git a/meta-python/recipes-devtools/python/python3-networkx_2.6.3.bb b/meta-python/recipes-devtools/python/python3-networkx_2.7.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-networkx_2.6.3.bb
+rename to meta-python/recipes-devtools/python/python3-networkx_2.7.bb
+index 1608e0380..10030074d 100644
+--- a/meta-python/recipes-devtools/python/python3-networkx_2.6.3.bb
++++ b/meta-python/recipes-devtools/python/python3-networkx_2.7.bb
+@@ -1,9 +1,9 @@
+ DESCRIPTION = "Python package for creating and manipulating graphs and networks"
+ HOMEPAGE = "http://networkx.github.io/"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5cfa4d8f5881e0d053bb497130b9c73a"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=44614b6df7cf3c19be69d0a945e29904"
  
--SRC_URI[sha256sum] = "d2cb2de0558762934679b9a104e82eca7af448c9f4974d1f3eeccff651df8a54"
-+SRC_URI[sha256sum] = "abf54873553e5e07a6fd4d5f653b781f5ae41297a493666b59dcf214006a12b2"
+-SRC_URI[sha256sum] = "c0946ed31d71f1b732b5aaa6da5a0388a345019af232ce2f49c766e2d6795c51"
++SRC_URI[sha256sum] = "effb7d9cd5c36e1e0d33f42a3aef5badde5030535826a367d5cf608a170af515"
  
- PYPI_PACKAGE = "semantic_version"
  inherit pypi setuptools3
+ 
 -- 
 2.30.2
 
