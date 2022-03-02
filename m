@@ -1,130 +1,198 @@
-Return-Path: <xuhuan.fnst@fujitsu.com>
+Return-Path: <ross@burtonini.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 502E5C43217
-	for <webhook@archiver.kernel.org>; Wed,  2 Mar 2022 09:52:42 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.3])
- by mx.groups.io with SMTP id smtpd.web09.5714.1646214759496814162
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DDD9CC433EF
+	for <webhook@archiver.kernel.org>; Wed,  2 Mar 2022 10:29:12 +0000 (UTC)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
+ [209.85.221.43])
+ by mx.groups.io with SMTP id smtpd.web12.5989.1646216951757346529
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Mar 2022 01:52:41 -0800
+ Wed, 02 Mar 2022 02:29:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WiBweGtZ;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
- mailfrom: xuhuan.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1646214757; i=@fujitsu.com;
-	bh=RmF+VmNL2+yH5Ns06a9OEB50I43hZvsVy764RZcI0SE=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=WiBweGtZbI7pS7/R4atsPt8YBfEIo0eB2wrWeXT49ETMYG/oUrFlYrYrHa925Y9lL
-	 3G69lednWf/I/TluihmpDAeTAkY4KRfbPvS9For4lAG6HO4lB8ak/4SB4LKAMuAJXS
-	 FKunYilPEj+xhYH1JD8lmp/z8JgYM77a/q1Fpyv1TLThpeItxUrKYN04VqwGgN8ooe
-	 vKKWazYR6ehexSIXPKJDchFlY9CWi66VEdCOffLeC5lzdnwhT7lcsr6KXsthzRjwyy
-	 gYkyDukzlcXOmSCA/SmIAMQpvXKpKFsxo0TsAZOilMwAMvxQ9mVmub7Za+6Mdx5irC
-	 LY+frWEfAepPA==
-Received: from [100.115.35.140] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-3.bemta.az-a.eu-west-2.aws.ess.symcld.net id AD/73-02429-56E3F126;
- Wed, 02 Mar 2022 09:52:37 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrDIsWRWlGSWpSXmKPExsViZ8MxSTfVTj7
-  JoOu+pMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvFnwQe2giXcFVeuPmRpYFzF1cXIxSEk8IRR
-  omPvfRYI5wKTxMR3b5ggnBOMEg+u9jF3MXJysAmoSzy++ZoRxBYR0JdYOnsPWJxZQFWi++Iad
-  hBbWCBU4veXH2wgNouAikTT4vNgcV4BV4kjZxeygtgSAgoSUx6+B+vlFHCTOLJ2OliNEFBN6/
-  XlUPWCEidnPmGBmC8hcfDFC2aIXiWJEys+MkHYFRKvD1+CiqtJXD23iXkCo+AsJO2zkLQvYGR
-  axWidVJSZnlGSm5iZo2toYKBraGiqa2yha2hkrpdYpZuol1qqW55aXKJrpJdYXqyXWlysV1yZ
-  m5yTopeXWrKJERjIKcVq9TsYX6z8qXeIUZKDSUmUd7mYfJIQX1J+SmVGYnFGfFFpTmrxIUYZD
-  g4lCV4Na6CcYFFqempFWmYOMKpg0hIcPEoivKtsgdK8xQWJucWZ6RCpU4yKUuK8S22AEgIgiY
-  zSPLg2WCRfYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCTM2wwyniczrwRu+iugxUxAi7d6yIE
-  sLklESEk1MJk5SXI45kuezDr5xkq3wzPpbHRMpZHXpju5E3o3vnHZeYb3yq0Tl+xEdz1KdbGr
-  kOfasWpiyuGU1XrJOy4d4znHMH/h8sXBqtFXOsKzrl1XiWm/H/O68+3+vglb3hldPRXOczSxr
-  N94Fa+a/jW+wJ6nBy6/4/5h1h/049hC5/K0vXrl3NX/C2aw1E7/an9yReznyqmvC2+VeYYbu9
-  w56PCJbWp374LXBYGbF/jc99pvUPJx49bO8vktX9adurPE5G2Q+LGJfE+dRCV7J8om8ayRn11
-  +88JCq8uBu4t3Rt4rOZt9d7GD5sXb2zWUz3IzTV5+N3HZuzbvP68YH+y+taXzX8mdzkgL+erm
-  0Nb9SVeVWIozEg21mIuKEwHnKaPIXwMAAA==
-X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-20.tower-565.messagelabs.com!1646214757!3597!1
-X-Originating-IP: [62.60.8.146]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.8; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 12399 invoked from network); 2 Mar 2022 09:52:37 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-20.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 2 Mar 2022 09:52:37 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 0747610044D
-	for <openembedded-devel@lists.openembedded.org>;
- Wed,  2 Mar 2022 09:52:37 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id EC060100455
-	for <openembedded-devel@lists.openembedded.org>;
- Wed,  2 Mar 2022 09:52:36 +0000 (GMT)
-Received: from localhost.localdomain.localdomain (10.167.225.131) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Wed, 2 Mar 2022 09:52:27 +0000
-From: XU Huan <xuhuan.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [PATCH 3/3] [oe] [meta-python] [PATCH] python3-twine: upgrade 3.7.1
- -> 3.8.0
-Date: Wed, 2 Mar 2022 17:52:52 +0800
-Message-ID: <1646214772-692-3-git-send-email-xuhuan.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1646214772-692-1-git-send-email-xuhuan.fnst@fujitsu.com>
-References: <1646214772-692-1-git-send-email-xuhuan.fnst@fujitsu.com>
+ dkim=pass header.i=@burtonini-com.20210112.gappssmtp.com header.s=20210112
+ header.b=5r2X8rKV;
+ spf=pass (domain: burtonini.com, ip: 209.85.221.43,
+ mailfrom: ross@burtonini.com)
+Received: by mail-wr1-f43.google.com with SMTP id r10so1994749wrp.3
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 02 Mar 2022 02:29:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=burtonini-com.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=YB97M4q8vDK/v3IFpHGMamWdpTaCe/4R5gx3bZa5Bsk=;
+        b=5r2X8rKVtGo4sfSV/9ZfwXYMgfHFqcEcNJYyLFj4BWHkje2B/tIflpWrS8DKKfY4FS
+         9HmarpPUS2J7YLEn7tekqrGk+9p+F82R4wKqCpM25OZFkoZx+3Gq0OnTjcDqzgKwEvgA
+         0PUA/fzjLzDOuER6FkI+VVJqnuKrmCxXXtbYShu2JVeXafBUJgmh7QPJVt9sCR0scAvF
+         9tjtoVFsbPYSVDoPA4UlGyS1qKKr9OCOsO8gUsgGrI4ZC1Ej2Wr+gVEyRn3cAbuuZxdb
+         bK02O4+cAcv13aaWhwv7T0hm4mBJghf8xSJGD5m7HJ88QPOvxqJrifEhT3jgAvc5rNDO
+         tOOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=YB97M4q8vDK/v3IFpHGMamWdpTaCe/4R5gx3bZa5Bsk=;
+        b=zf7NUOMfXg7ukGKHi0XN2bbqF2k1qvhUI23gJjVlFpQSrcB/8LC2azjqpt74dMv6VZ
+         vAI+6SsmZTb2aNRSnxlPvaIQ1jwfkBQPye9+5a7TD1d3SGLMrrU9AiZ/c/D1bvIUS2tA
+         N2pfYcXskBtkLFVAvecYBeph9Me+Fy5a02/WQp5uMWypdO2uDwf6F/5WAoBGQxIBjIkr
+         fUejLrgwLgrTCls/kDYiyYEDvHzNZ43mLoLasBxq2glvopRVgGD/t5rPLYAtGVPJYCC5
+         hDBrWVRhVsJ8XZno1UULXo0EhGBhVZ3BXfNuQGkiI9uNF53vXBT0hJ0K0xzgcbme4u9K
+         DP8g==
+X-Gm-Message-State: AOAM530DUNb4uq9BTGgGZTH/uLPXUJ+wu909nts64vZIRnwVtnk0+abv
+	JzHd6v9fGQcCYy61n5VR927WVurdmnsO9hq7u7Ozew==
+X-Google-Smtp-Source: 
+ ABdhPJzq/jAy2rLOZEcQUtreEsLAHwn6pgd1mE0tXyYLwPOfLIAicoeeOqno5H3019CJtgKM6a7eoiA92KcW722REWY=
+X-Received: by 2002:a5d:5918:0:b0:1f0:3295:f4ec with SMTP id
+ v24-20020a5d5918000000b001f03295f4ecmr1608123wrd.451.1646216949838; Wed, 02
+ Mar 2022 02:29:09 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.131]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+References: <20220223102016.28259-1-sanakazisk19@gmail.com>
+In-Reply-To: <20220223102016.28259-1-sanakazisk19@gmail.com>
+From: Ross Burton <ross@burtonini.com>
+Date: Wed, 2 Mar 2022 10:28:58 +0000
+Message-ID: 
+ <CAAnfSTuHU7om3vZTMHL0dSzoeqJwPqSUPHbQX8yXfp6q=k_ANQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][dunfell][PATCH] protobuf: Fix CVE-2021-22570
+To: sana kazi <sanakazisk19@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, ranjitsinh.rathod@kpit.com
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 02 Mar 2022 09:52:42 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 02 Mar 2022 10:29:12 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95685
+ https://lists.openembedded.org/g/openembedded-devel/message/95687
 
-From: Xu Huan <xuhuan.fnst@fujitsu.com>
+This causes QA warnings:
 
-changelog:
-===============================================================================
+WARNING: protobuf-native-3.11.4-r0 do_patch: Fuzz detected:
+Applying patch CVE-2021-22570.patch
+patching file src/google/protobuf/descriptor.cc
+Hunk #1 succeeded at 2603 with fuzz 1 (offset -23 lines).
+Hunk #2 succeeded at 2817 with fuzz 1 (offset -14 lines).
+Hunk #3 succeeded at 4006 (offset -17 lines).
+Hunk #4 succeeded at 4050 (offset -18 lines).
+Hunk #5 succeeded at 4368 (offset -18 lines).
+The context lines in the patches can be updated with devtool:
+devtool modify protobuf-native
+devtool finish --force-patch-refresh protobuf-native <layer_path>
+Don't forget to review changes done by devtool!
 
-Add --verbose logging for querying keyring credentials.
-Log all upload responses with --verbose.
-Show more helpful error message for invalid metadata.
+Ross
 
--Bugfixes
-Require a recent version of urllib3.
-
-Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
----
- .../python/{python3-twine_3.7.1.bb => python3-twine_3.8.0.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-twine_3.7.1.bb => python3-twine_3.8.0.bb} (84%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-twine_3.7.1.bb b/meta-python/recipes-devtools/python/python3-twine_3.8.0.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-twine_3.7.1.bb
-rename to meta-python/recipes-devtools/python/python3-twine_3.8.0.bb
-index bcc881e44..d9aa3dce9 100644
---- a/meta-python/recipes-devtools/python/python3-twine_3.7.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-twine_3.8.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://twine.readthedocs.io/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a3d1106b253a8d50dd82a4202a045b4c"
- 
--SRC_URI[sha256sum] = "28460a3db6b4532bde6a5db6755cf2dce6c5020bada8a641bb2c5c7a9b1f35b8"
-+SRC_URI[sha256sum] = "8efa52658e0ae770686a13b675569328f1fba9837e5de1867bfe5f46a9aefe19"
- 
- inherit pypi setuptools3
- 
--- 
-2.25.1
-
+On Wed, 23 Feb 2022 at 10:21, sana kazi <sanakazisk19@gmail.com> wrote:
+>
+> Fix CVE-2021-22570.
+> Link: https://koji.fedoraproject.org/koji/buildinfo?buildID=1916865
+> Link: https://src.fedoraproject.org/rpms/protobuf/blob/394beeacb500861f76473d47e10314e6a3600810/f/CVE-2021-22570.patch
+>
+> Remove first and second hunk because the second argument in
+> InsertIfNotPresent() function is of type const char* const& but the
+> first and second hunk makes the type of second argument as const string
+> which is not compatible with the type of second argument in
+> InsertIfNotPresent().
+>
+> Signed-off-by: Sana Kazi <Sana.Kazi@kpit.com>
+> Signed-off-by: Sana Kazi <sanakazisk19@gmail.com>
+> ---
+>  .../protobuf/protobuf/CVE-2021-22570.patch    | 64 +++++++++++++++++++
+>  .../protobuf/protobuf_3.11.4.bb               |  1 +
+>  2 files changed, 65 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf/CVE-2021-22570.patch
+>
+> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/CVE-2021-22570.patch b/meta-oe/recipes-devtools/protobuf/protobuf/CVE-2021-22570.patch
+> new file mode 100644
+> index 000000000..be3180181
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/protobuf/protobuf/CVE-2021-22570.patch
+> @@ -0,0 +1,64 @@
+> +CVE: CVE-2021-22570
+> +Upstream-Status: Backport [https://src.fedoraproject.org/rpms/protobuf/blob/394beeacb500861f76473d47e10314e6a3600810/f/CVE-2021-22570.patch]
+> +Comment: Removed first and second hunk
+> +Signed-off-by: Sana.Kazi <Sana.Kazi@kpit.com>
+> +
+> +diff --git a/src/google/protobuf/descriptor.cc b/src/google/protobuf/descriptor.cc
+> +index 7af37c57f3..03c4e2b516 100644
+> +--- a/src/google/protobuf/descriptor.cc
+> ++++ b/src/google/protobuf/descriptor.cc
+> +@@ -2626,6 +2626,8 @@ void Descriptor::DebugString(int depth, std::string* contents,
+> +       const Descriptor::ReservedRange* range = reserved_range(i);
+> +       if (range->end == range->start + 1) {
+> +         strings::SubstituteAndAppend(contents, "$0, ", range->start);
+> ++      } else if (range->end > FieldDescriptor::kMaxNumber) {
+> ++        strings::SubstituteAndAppend(contents, "$0 to max, ", range->start);
+> +       } else {
+> +         strings::SubstituteAndAppend(contents, "$0 to $1, ", range->start,
+> +                                   range->end - 1);
+> +@@ -2829,6 +2831,8 @@ void EnumDescriptor::DebugString(
+> +       const EnumDescriptor::ReservedRange* range = reserved_range(i);
+> +       if (range->end == range->start) {
+> +         strings::SubstituteAndAppend(contents, "$0, ", range->start);
+> ++      } else if (range->end == INT_MAX) {
+> ++        strings::SubstituteAndAppend(contents, "$0 to max, ", range->start);
+> +       } else {
+> +         strings::SubstituteAndAppend(contents, "$0 to $1, ", range->start,
+> +                                   range->end);
+> +@@ -4019,6 +4023,11 @@ bool DescriptorBuilder::AddSymbol(const std::string& full_name,
+> +   // Use its file as the parent instead.
+> +   if (parent == nullptr) parent = file_;
+> +
+> ++  if (full_name.find('\0') != std::string::npos) {
+> ++    AddError(full_name, proto, DescriptorPool::ErrorCollector::NAME,
+> ++             "\"" + full_name + "\" contains null character.");
+> ++    return false;
+> ++  }
+> +   if (tables_->AddSymbol(full_name, symbol)) {
+> +     if (!file_tables_->AddAliasUnderParent(parent, name, symbol)) {
+> +       // This is only possible if there was already an error adding something of
+> +@@ -4059,6 +4068,11 @@ bool DescriptorBuilder::AddSymbol(const std::string& full_name,
+> + void DescriptorBuilder::AddPackage(const std::string& name,
+> +                                    const Message& proto,
+> +                                    const FileDescriptor* file) {
+> ++  if (name.find('\0') != std::string::npos) {
+> ++    AddError(name, proto, DescriptorPool::ErrorCollector::NAME,
+> ++             "\"" + name + "\" contains null character.");
+> ++    return;
+> ++  }
+> +   if (tables_->AddSymbol(name, Symbol(file))) {
+> +     // Success.  Also add parent package, if any.
+> +     std::string::size_type dot_pos = name.find_last_of('.');
+> +@@ -4372,6 +4386,12 @@ FileDescriptor* DescriptorBuilder::BuildFileImpl(
+> +   }
+> +   result->pool_ = pool_;
+> +
+> ++  if (result->name().find('\0') != std::string::npos) {
+> ++    AddError(result->name(), proto, DescriptorPool::ErrorCollector::NAME,
+> ++             "\"" + result->name() + "\" contains null character.");
+> ++    return nullptr;
+> ++  }
+> ++
+> +   // Add to tables.
+> +   if (!tables_->AddFile(result)) {
+> +     AddError(proto.name(), proto, DescriptorPool::ErrorCollector::OTHER,
+> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
+> index d2f22ba6b..55d56ff08 100644
+> --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
+> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.11.4.bb
+> @@ -17,6 +17,7 @@ SRC_URI = "git://github.com/google/protobuf.git;branch=3.11.x;protocol=https \
+>             file://0001-protobuf-fix-configure-error.patch \
+>             file://0001-Makefile.am-include-descriptor.cc-when-building-libp.patch \
+>             file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
+> +           file://CVE-2021-22570.patch \
+>  "
+>  S = "${WORKDIR}/git"
+>
+> --
+> 2.17.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#95476): https://lists.openembedded.org/g/openembedded-devel/message/95476
+> Mute This Topic: https://lists.openembedded.org/mt/89337770/1676615
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [ross@burtonini.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
