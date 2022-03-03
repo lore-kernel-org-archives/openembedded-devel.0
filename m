@@ -1,238 +1,299 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ross@burtonini.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36313C433F5
-	for <webhook@archiver.kernel.org>; Thu,  3 Mar 2022 21:49:46 +0000 (UTC)
-Received: from mail-qv1-f45.google.com (mail-qv1-f45.google.com
- [209.85.219.45])
- by mx.groups.io with SMTP id smtpd.web11.66.1646344182975027327
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 050E0C433F5
+	for <webhook@archiver.kernel.org>; Thu,  3 Mar 2022 22:00:06 +0000 (UTC)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
+ [209.85.221.43])
+ by mx.groups.io with SMTP id smtpd.web08.187.1646344804176001435
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Mar 2022 13:49:43 -0800
+ Thu, 03 Mar 2022 14:00:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=jZOBrrHW;
- spf=pass (domain: gmail.com, ip: 209.85.219.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f45.google.com with SMTP id p8so2234103qvg.12
+ dkim=pass header.i=@burtonini-com.20210112.gappssmtp.com header.s=20210112
+ header.b=zeZnYO4H;
+ spf=pass (domain: burtonini.com, ip: 209.85.221.43,
+ mailfrom: ross@burtonini.com)
+Received: by mail-wr1-f43.google.com with SMTP id ay10so9861720wrb.6
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Mar 2022 13:49:42 -0800 (PST)
+ Thu, 03 Mar 2022 14:00:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
+        d=burtonini-com.20210112.gappssmtp.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc:content-transfer-encoding;
-        bh=TpYRBvvdWtRB9aUfizZBlO4uc91731Z8P35hE7oA4hY=;
-        b=jZOBrrHWeUajCAYBIOLYgZY1+5zvA/FnwKg+DCf1/gypQntbxRhzx+P8Tio5pCl6Kc
-         3VkICm4J6MybU1FvLWVjow+UHcggd5KpV/kj//O81QVBEO8k0VAyheYwgQkL/yyeemmT
-         xh5ted1888jQUy9ISRX5LMUqiQCP4JiQLQ3kfiECZeNTzR0vaL03DG3MfmT7T5CMkEHe
-         uQTW6u+zGtZFMDoPjo9qyjtEaPPSre4fD2ok0rfPLP8L6ptWrllhMfSOUBkm4W/t33OH
-         IM8NDrC+6QDGLZZrNbfK0fx86iAnZXbFbPD/XVKamNpFGS3f3TSybfvKpuT99qOs/qh8
-         aHEg==
+        bh=B0YZXeo5f+A63Ma9ujiOT6hDNbL0B0eGH7F/XbcYJyw=;
+        b=zeZnYO4Hm2eCU5Qsiga5UgMYuwoXyJ6rC3+TWd9cNjgqX77UbVxTarfKkXVF6ffZiY
+         JHsO0Y450ZI8kU0eImLuBZLgEgcRkT/XqjlY2HyEbIv/UnlDOd5oYk0wS3dW5oUaM+sf
+         TYmOeq2IhhsDYigUHXXRr0pvpmN3E8eTvpBoZjtASeRSMV47EUzGPk+f9cKWTF4875Dx
+         J/+TAoG3YZANBRKRvTTqzdVpNH7Iq7LcTig4tnO9MuJc8o95lE8PIavxZ7/pDo4vJtb/
+         syNzqsw+eGKB2/pI9fxGnRALdy5MrO6mqKQ+VzQxs0ZtthrlWYzg4J148kBLgdKonsE5
+         CuJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc:content-transfer-encoding;
-        bh=TpYRBvvdWtRB9aUfizZBlO4uc91731Z8P35hE7oA4hY=;
-        b=IDHNMc7wKdWVzeSGd3vRqjSfmg6av7P+yEcOt0SAUnDSIR0tx1Db7AnbqcFvPK6XGY
-         qxtglp8p/UVdKR8bfglVGIMQDPLAKwWizEAiM+UT3cpSm8q/ydUk5HPub0QJn+bf+5yS
-         5A9+grF3RV6qB6QiA704mT0HYKrQBeP3sFfH7aWs1ngxTP00csGZ9f1pT8SemjKu9Vk7
-         0C9BEmYTyXypy1rE7CUxEQsrs2HEdK+U77V6DEEKgYqrDKzMXXOT2+PsZoUx0L1dfafa
-         /xT2dQBvr+siMdUj9hiUUC0P0SxXPsbuGiwG7xFFHf0Fa1HfENVkjmETAKKjC8MlH0In
-         L/FA==
-X-Gm-Message-State: AOAM532PRy5Eahxqb5sy5YuUovrMKxGZdnEvdBAyLlbix9oj09g6aSRG
-	L+x8MkHdBPMz6Q8Wtazdr7YSe4vjyUvPBBBB6eKXoW64Gd0=
+        bh=B0YZXeo5f+A63Ma9ujiOT6hDNbL0B0eGH7F/XbcYJyw=;
+        b=uiDmslelrM13uDIE6feMpi4+lt7kxi5In0sL2LvQa5iW/kyGMrWzVrj0l2cezlCSLF
+         eVup0fZtKAMViagKi8OkFSlN0TSpA1CqBLJRVHz2zSE7yTqdVRNCradKNjmZP1ktixO0
+         3PZhS+Fye8jnPne5At4PVB7FISKOr4lZfXDOH8mfhfBEo6c45VD1ztAylscx55j+V+7l
+         llVQrJoAjx5QkIWb+W/jQpo5ccuLzDzzyihYTvtbeIgFTL34P3UOt6n9Wt2oGfEkprMe
+         lGd133cdPpmuuhB/VT1PT4e62NAQO5+p4uaQS3h8EtzWM+3tWPQ1N9SOUZD3UtIrrRsh
+         Xkaw==
+X-Gm-Message-State: AOAM531tlGz9Pdc9KzJJq9OAzV/etyivNv3V3qIz/adHwnm/jXCTLAWP
+	cjBIzq57g8OKO6aILY9ghPRwbVdiSlr4AuJsZ5BqiA==
 X-Google-Smtp-Source: 
- ABdhPJw19W2B18RsWZIGgfGUK3dfvFIs/rJoeiKTu3W73Nr/cvYG0yA+b9EF7LbKV8Avwitip1V8NpLtQBymZbQnb/w=
-X-Received: by 2002:ad4:574a:0:b0:42b:ef56:c2a4 with SMTP id
- q10-20020ad4574a000000b0042bef56c2a4mr25585587qvx.16.1646344181898; Thu, 03
- Mar 2022 13:49:41 -0800 (PST)
+ ABdhPJxgCWXHg4NixsJMmNzs2jG4SIYg0wPrx/UvNoL+cDh9XOSOuhkNhtuE1mYxZKBwFU7rC3P9S+hNszd7BNsBofQ=
+X-Received: by 2002:adf:f38d:0:b0:1f0:490a:92ae with SMTP id
+ m13-20020adff38d000000b001f0490a92aemr4925976wro.497.1646344802256; Thu, 03
+ Mar 2022 14:00:02 -0800 (PST)
 MIME-Version: 1.0
-References: <20220303130618.1108977-1-adrian.freihofer@siemens.com>
- <20220303130618.1108977-3-adrian.freihofer@siemens.com>
- <CAMKF1sqSPYC4bOn0ihnh2dpD4Heg5sBHT0WY7U5oz9PvZ_JX-A@mail.gmail.com>
- <93e1fb5cb301dae3f56bb108bebf1862ba9d5329.camel@gmail.com>
- <CAMKF1soJENEKfAGLmRexmtQ=X4-nJhWop+dR4YjU5K7P22WOrw@mail.gmail.com>
- <60fa6b252def56b1726e5826122d334433817e89.camel@gmail.com>
-In-Reply-To: <60fa6b252def56b1726e5826122d334433817e89.camel@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 3 Mar 2022 13:49:15 -0800
+References: 
+ <CAMKF1sppjOqUoU2zswWD1h9E8gSntfMiQUak=wQrWrSJ71Qx3w@mail.gmail.com>
+ <CAMKF1spv_=Lm=4=oBLA8v=Dx_=wzcGt1rZ89xxAZN-rPcnKgag@mail.gmail.com>
+ <CAMKF1sq1-WTR_ndLV_oGJ+2HqWpMzt6ZePGqLJBXSSVcD25Sdw@mail.gmail.com>
+ <CAMKF1sp4VCcuiJxOF1zDC0jB2860EGa6y+RKB0xWPeLBH_AGCw@mail.gmail.com>
+ <CAMKF1spnXiT9PyV1HRVEuZAXFgWaX3m3tFrKHmT2Fhvgnb2BvQ@mail.gmail.com>
+ <CANx9H-CtXBXECQUK98wyfruz7n2+rRC_X0CgFsPDhxDKCw1gdw@mail.gmail.com>
+ <CAMKF1sqzPuN6dZch0LPhG-WGYSBX+z4nk9HjQ1KR-9BiKcQGCA@mail.gmail.com>
+In-Reply-To: 
+ <CAMKF1sqzPuN6dZch0LPhG-WGYSBX+z4nk9HjQ1KR-9BiKcQGCA@mail.gmail.com>
+From: Ross Burton <ross@burtonini.com>
+Date: Thu, 3 Mar 2022 21:59:51 +0000
 Message-ID: 
- <CAMKF1sqdsuq92L6cZ4dQZ6xt+yFYzho7pHMVp-BJ+kiwQFOsfw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 2/4] libqmi: switch to meson and git
-To: Adrian Freihofer <adrian.freihofer@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+ <CAAnfSTvjPeyJHjd-FiYoXmxPMaXM0AH9KMXm6n5ooJNfQp80Sw@mail.gmail.com>
+Subject: Re: [oe] PEP-517 packaging fixes needed in meta-openembedded
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Tim Orling <ticotimo@gmail.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Mar 2022 21:49:46 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Mar 2022 22:00:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95760
+ https://lists.openembedded.org/g/openembedded-devel/message/95761
 
-On Thu, Mar 3, 2022 at 1:46 PM Adrian Freihofer
-<adrian.freihofer@gmail.com> wrote:
+I've been having an interesting discussion with the PyPA about the
+future of packaging Python.  It's illuminating, to say the least.  The
+full thread is at
+https://github.com/pypa/packaging-problems/issues/576 but the
+highlights are:
+
+1) Calling 'setup.py install' is deprecated, so anything which uses a
+non-standard install class (ufw, for example) won't work in the
+future.  With setuptool3.bbclass now doing bdist_wheel/pip the install
+task is ran in a special environment, and non-standard install classes
+break quite badly.
+
+2) Python packaging is moving fast towards a world where the only
+things packagable are pure modules with entry point scripts and data.
+If you want to do more (e.g. install a systemd unit file), then use
+something like Meson.
+
+This is going to be interesting.  My short-term plan is to bring back
+the traditional setuptool3.bbclass code as setuptools3-legacy, for the
+period between now and when "setup.py install" doesn't exist.
+
+Ross
+
+On Thu, 3 Mar 2022 at 07:08, Khem Raj <raj.khem@gmail.com> wrote:
 >
-> On Thu, 2022-03-03 at 13:15 -0800, Khem Raj via lists.openembedded.org
-> wrote:
-> > On Thu, Mar 3, 2022 at 12:59 PM Adrian Freihofer
-> > <adrian.freihofer@gmail.com> wrote:
-> > >
-> > > On Thu, 2022-03-03 at 11:00 -0800, Khem Raj wrote:
-> > > > On Thu, Mar 3, 2022 at 5:07 AM Adrian Freihofer
-> > > > <adrian.freihofer@gmail.com> wrote:
-> > > > >
-> > > > > - Switching to meson and git because of the following statement f=
-rom news file:
-> > > > >   "The next major release will likely be a meson-only one, and wi=
-ll therefore
-> > > > >    not be based on a source release tarball any more, but on spec=
-ific git tags
-> > > > >    instead."
-> > > > > - Add PACKAGECONFIG for qrtr.
-> > > > > - Updateing deprecated licenses acc. to
-> > > > >   https://eur01.safelinks.protection.outlook.com/?url=3Dhttps%3A%=
-2F%2Fgitlab.freedesktop.org%2Fmobile-broadband%2Flibqmi%2F%23license&amp;da=
-ta=3D04%7C01%7Cadrian.freihofer%40siemens.com%7Cf7ebbe47af824ea9229808d9fd5=
-afc09%7C38ae3bcd95794fd4addab42e1495d55a%7C1%7C0%7C637819389490459432%7CUnk=
-nown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJX=
-VCI6Mn0%3D%7C3000&amp;sdata=3D0ugE3JGPM6qGMhsljzUTU5dsSyH2I8hqqZnX8GHKnoM%3=
-D&amp;reserved=3D0
-> > > > >
-> > > > > Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
-> > > > > ---
-> > > > >  .../0001-build-use-python3-everywhere.patch   | 33 +++++++++++++=
-++++++
-> > > > >  .../libqmi/libqmi_1.30.4.bb                   | 23 +++++++++----
-> > > > >  2 files changed, 50 insertions(+), 6 deletions(-)
-> > > > >  create mode 100644 meta-oe/recipes-connectivity/libqmi/files/000=
-1-build-use-python3-everywhere.patch
-> > > > >
-> > > > > diff --git a/meta-oe/recipes-connectivity/libqmi/files/0001-build=
--use-python3-everywhere.patch b/meta-oe/recipes-connectivity/libqmi/files/0=
-001-build-use-python3-everywhere.patch
-> > > > > new file mode 100644
-> > > > > index 0000000000..e345d28031
-> > > > > --- /dev/null
-> > > > > +++ b/meta-oe/recipes-connectivity/libqmi/files/0001-build-use-py=
-thon3-everywhere.patch
-> > > > > @@ -0,0 +1,33 @@
-> > > > > +From 189528e879e4099b44aae26a2af0cb16aaa96db6 Mon Sep 17 00:00:0=
-0 2001
-> > > > > +From: goapunk <goapunk@riseup.net>
-> > > > > +Date: Mon, 13 Sep 2021 13:45:41 +0200
-> > > > > +Subject: [PATCH] build: use python3 everywhere
-> > > > > +
-> > > > > +---
-> > > > > + build-aux/qmi-codegen/qmi-codegen                  | 2 +-
-> > > > > + examples/simple-tester-python/simple-tester-python | 2 +-
-> > > > > + 2 files changed, 2 insertions(+), 2 deletions(-)
-> > > > > +
-> > > > > +diff --git a/build-aux/qmi-codegen/qmi-codegen b/build-aux/qmi-c=
-odegen/qmi-codegen
-> > > > > +index 1fea7c1..1092c8e 100755
-> > > > > +--- a/build-aux/qmi-codegen/qmi-codegen
-> > > > > ++++ b/build-aux/qmi-codegen/qmi-codegen
-> > > > > +@@ -1,4 +1,4 @@
-> > > > > +-#!/usr/bin/env python
-> > > > > ++#!/usr/bin/env python3
-> > > > > + # -*- Mode: python; tab-width: 4; indent-tabs-mode: nil; c-basi=
-c-offset: 4 -*-
-> > > > > + #
-> > > > > + # This program is free software; you can redistribute it and/or=
- modify it under
-> > > > > +diff --git a/examples/simple-tester-python/simple-tester-python =
-b/examples/simple-tester-python/simple-tester-python
-> > > > > +index af9065a..a35e505 100755
-> > > > > +--- a/examples/simple-tester-python/simple-tester-python
-> > > > > ++++ b/examples/simple-tester-python/simple-tester-python
-> > > > > +@@ -1,4 +1,4 @@
-> > > > > +-#!/usr/bin/env python
-> > > > > ++#!/usr/bin/env python3
-> > > > > + # -*- Mode: python; tab-width: 4; indent-tabs-mode: nil; c-basi=
-c-offset: 4 -*-
-> > > > > + #
-> > > > > + # This program is free software; you can redistribute it and/or=
- modify it under
-> > > > > +--
-> > > > > +2.34.1
-> > > > > +
-> > > > > diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.30.4.bb=
- b/meta-oe/recipes-connectivity/libqmi/libqmi_1.30.4.bb
-> > > > > index dee36d7b45..4807244a58 100644
-> > > > > --- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.30.4.bb
-> > > > > +++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.30.4.bb
-> > > > > @@ -2,7 +2,7 @@ SUMMARY =3D "libqmi is a library for talking to W=
-WAN devices by QMI protocol"
-> > > > >  DESCRIPTION =3D "libqmi is a glib-based library for talking to W=
-WAN modems and \
-> > > > >                 devices which speak the Qualcomm MSM Interface (Q=
-MI) protocol"
-> > > > >  HOMEPAGE =3D "https://eur01.safelinks.protection.outlook.com/?ur=
-l=3Dhttp%3A%2F%2Fwww.freedesktop.org%2Fwiki%2FSoftware%2Flibqmi&amp;data=3D=
-04%7C01%7Cadrian.freihofer%40siemens.com%7Cf7ebbe47af824ea9229808d9fd5afc09=
-%7C38ae3bcd95794fd4addab42e1495d55a%7C1%7C0%7C637819389490459432%7CUnknown%=
-7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6M=
-n0%3D%7C3000&amp;sdata=3DdWHuppNvGtDzV%2Fu4MHiLiE1ddOXzyxxDJE5T%2FMV7C%2B8%=
-3D&amp;reserved=3D0"
-> > > > > -LICENSE =3D "GPLv2 & LGPLv2.1"
-> > > > > +LICENSE =3D "GPL-2.0-or-later & LGPL-2.1-or-later"
-> > > > >  LIC_FILES_CHKSUM =3D " \
-> > > > >      file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263 \
-> > > > >      file://COPYING.LIB;md5=3D4fbd65380cdd255951079008b364516c \
-> > > > > @@ -10,12 +10,23 @@ LIC_FILES_CHKSUM =3D " \
-> > > > >
-> > > > >  DEPENDS =3D "glib-2.0 glib-2.0-native"
-> > > > >
-> > > > > -inherit autotools pkgconfig bash-completion gobject-introspectio=
+> On Wed, Mar 2, 2022 at 9:13 PM Tim Orling <ticotimo@gmail.com> wrote:
+> >
+> >
+> >
+> > On Wed, Mar 2, 2022 at 6:45 PM Khem Raj <raj.khem@gmail.com> wrote:
+> >>
+> >> Here is latest failures we are down to 3
+> >>
+> >> https://errors.yoctoproject.org/Errors/Build/142145/
+> >
+> >
+> > I have a partial fix for python3-slip-dbus, but it doesn=E2=80=99t solv=
+e the problem.
+> > https://git.openembedded.org/meta-openembedded-contrib/commit/?h=3Dtimo=
+/pyprojecttoml&id=3D79b14b76276ac9a9378ed37bb39959de8bf4c751
+> >
+>
+> I have addressed it. Right now we are effectively left with
+>
+> meta-openembedded/meta-oe/recipes-devtools/unattended-upgrades/unattended=
+-upgrades_2.6.bb
+>
+> It fails in weird ways
+>
+> | Installing collected packages: unattended-upgrades
+> | ERROR: For req: unattended-upgrades=3D=3D0.1. Unknown scheme key used i=
 n
-> > > > > +inherit meson pkgconfig bash-completion gobject-introspection
-> > > > >
-> > > > > -SRC_URI =3D "https://eur01.safelinks.protection.outlook.com/?url=
-=3Dhttp%3A%2F%2Fwww.freedesktop.org%2Fsoftware%2F%24&amp;data=3D04%7C01%7Ca=
-drian.freihofer%40siemens.com%7Cf7ebbe47af824ea9229808d9fd5afc09%7C38ae3bcd=
-95794fd4addab42e1495d55a%7C1%7C0%7C637819389490459432%7CUnknown%7CTWFpbGZsb=
-3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C300=
-0&amp;sdata=3DA5%2Fk3gLTbBPWeP0WOVhjQvG1Nqj%2ByXCmY4mxMrbSOXo%3D&amp;reserv=
-ed=3D0{BPN}/${BPN}-${PV}.tar.xz"
-> > > > > +SRCREV ?=3D "f6c2feaf199e0f129a0bde8c5e6cba5f2117b564"
-> > > >
-> > > > it this same SHA which is used for 1.30.4 release tarball ?
-> > >
-> > > Yes the version did not change. See
-> > > https://eur01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fg=
-itlab.freedesktop.org%2Fmobile-broadband%2Flibqmi%2F-%2Ftags%2F1.30.4&amp;d=
-ata=3D04%7C01%7Cadrian.freihofer%40siemens.com%7Cf7ebbe47af824ea9229808d9fd=
-5afc09%7C38ae3bcd95794fd4addab42e1495d55a%7C1%7C0%7C637819389490459432%7CUn=
-known%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJ=
-XVCI6Mn0%3D%7C3000&amp;sdata=3De%2B%2BhzTGb%2Fp1MSKqKTalkv3klm1zLq8o%2FuYBI=
-fLBI1CE%3D&amp;reserved=3D0
-> > >
-> >
-> > so its for convenience to use git here then, perhaps for same reasons
-> > we discussed yesterday
-> > perhaps sticking to tarball is a better approach. ?
+> /mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/unattended-upgrades/=
+2.6-r0/git/dist/unattended_upgrades-0.1-py3-
+> none-any.whl: etc (for file
+> 'unattended_upgrades-0.1.data/etc/kernel/postinst.d/unattended-upgrades')=
+.
+> .data directory contents should be in subdirectories named with a
+> valid scheme key (d
+> ata, headers, platlib, purelib, scripts)
+> | Exception information:
+> | Traceback (most recent call last):
+> |   File "/mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/unattended=
+-upgrades/2.6-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/pip=
+/_internal/operations/install/wheel.py",
+> line 521, in make_data_scheme_file
+> |     scheme_path =3D scheme_paths[scheme_key]
+> | KeyError: 'etc'
+> |
+> | During handling of the above exception, another exception occurred:
+> |
 >
-> I try hard not to send the same error twice to a busy maintainer. ;-)
+> >>
+> >> On Wed, Mar 2, 2022 at 10:40 AM Khem Raj <raj.khem@gmail.com> wrote:
+> >> >
+> >> > Here is latest list which is significantly less so thanks for
+> >> > contributions thus far.
+> >> >
+> >> >   meta-openembedded/meta-python/recipes-extended/python-blivet/pytho=
+n3-blivetgui_2.2.1.bb
+> >> >   meta-openembedded/meta-python/recipes-devtools/python/python3-aws-=
+iot-device-sdk-python_1.4.9.bb
+> >> >   meta-openembedded/meta-python/recipes-extended/python-blivet/pytho=
+n3-blivet_3.4.3.bb
+> >> >   meta-openembedded/meta-python/recipes-devtools/python/python3-slip=
+-dbus_0.6.5.bb
+> >> >   meta-openembedded/meta-python/recipes-devtools/python/python3-kera=
+s-applications_1.0.8.bb
+> >> >   meta-openembedded/meta-python/recipes-devtools/python/python3-pyme=
+tno_0.9.0.bb
+> >> >   meta-openembedded/meta-python/recipes-extended/python-cson/python3=
+-cson_git.bb
+> >> >   meta-openembedded/meta-python/recipes-devtools/python/python3-dbus=
+sy_1.3.bb
+> >> >   meta-openembedded/meta-python/recipes-connectivity/python-txws/pyt=
+hon3-txws_0.9.1.bb
+> >> >   meta-openembedded/meta-oe/recipes-devtools/unattended-upgrades/una=
+ttended-upgrades_2.6.bb
+> >> >
+> >> >
+> >> > On Tue, Mar 1, 2022 at 8:18 AM Khem Raj <raj.khem@gmail.com> wrote:
+> >> > >
+> >> > > We are making some progress. This is the latest ( 24 build failure=
+s )
+> >> > > as of last night.
+> >> > >
+> >> > > https://errors.yoctoproject.org/Errors/Build/142052/
+> >> > >
+> >> > > On Mon, Feb 28, 2022 at 3:21 PM Khem Raj <raj.khem@gmail.com> wrot=
+e:
+> >> > > >
+> >> > > > Thanks for sending fixing everyone. Lets keep going. Here is lat=
+est
+> >> > > > list of failing recipes on master-next now
+> >> > > >
+> >> > > > Summary: 32 tasks failed:
+> >> > > >   meta-openembedded/meta-python/recipes-extended/python-blivet/p=
+ython3-blivet_3.4.0.bb:do_install
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+aws-iot-device-sdk-python_1.4.9.bb:do_compile
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+crcmod_1.7.bb:do_compile
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+lrparsing_1.0.17.bb:do_compile
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+slip-dbus_0.6.5.bb:do_compile
+> >> > > >   meta-openembedded/meta-python/recipes-extended/python-blivet/p=
+ython3-blivetgui_2.2.1.bb:do_compile
+> >> > > >   meta-raspberrypi/recipes-devtools/python/python3-rtimu_git.bb:=
+do_compile
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+flask-versioned_0.9.4-20101221.bb:do_install
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+ntplib_0.4.0.bb:do_install
+> >> > > >   meta-raspberrypi/recipes-devtools/python/python3-adafruit-circ=
+uitpython-register_1.9.4.bb:do_install
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+behave_1.2.6.bb:do_install
+> >> > > >   meta-atmel/recipes-utils/mpio/mpio_1.3.bb:do_install
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+pystache_0.5.4.bb:do_install
+> >> > > >   meta-raspberrypi/recipes-devtools/python/python3-adafruit-pure=
+io_1.1.8.bb:do_install
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+pyscaffold_4.1.4.bb:do_install
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+prctl_1.8.1.bb:do_install
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+pymetno_0.9.0.bb:do_install
+> >> > > >   meta-openembedded/meta-python/recipes-extended/python-cson/pyt=
+hon3-cson_git.bb:do_install
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+pydbus-manager_git.bb:do_install
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+pymisp_2.4.152.bb:do_install
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+dbussy_1.3.bb:do_install
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/gyp/gyp_git.bb:=
+do_install
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+keras-applications_1.0.8.bb:do_install
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+gcovr_5.0.bb:do_install
+> >> > > >   meta-raspberrypi/recipes-devtools/python/python3-adafruit-plat=
+formdetect_3.1.1.bb:do_install
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+configshell-fb_1.1.29.bb:do_install
+> >> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+xmodem_0.4.6.bb:do_package
+> >> > > >   meta-openembedded/meta-oe/recipes-devtools/unattended-upgrades=
+/unattended-upgrades_2.6.bb:do_install
+> >> > > >   meta-openembedded/meta-python/recipes-connectivity/python-txws=
+/python3-txws_0.9.1.bb:do_install
+> >> > > >   meta-openembedded/meta-xfce/recipes-apps/catfish/catfish_4.16.=
+3.bb:do_compile
+> >> > > >   meta-openembedded/meta-xfce/recipes-apps/menulibre/menulibre_2=
+.2.3.bb:do_install
+> >> > > >   meta-openembedded/meta-gnome/recipes-support/onboard/onboard_1=
+.4.1.bb:do_compile
+> >> > > >
+> >> > > > On Sat, Feb 26, 2022 at 11:49 AM Khem Raj <raj.khem@gmail.com> w=
+rote:
+> >> > > > >
+> >> > > > > Hello All,
+> >> > > > >
+> >> > > > > We have PEP-517 packaging related infra changes merged into oe=
+-core,
+> >> > > > > which obviously
+> >> > > > > mean there are some failures on various python packages.
+> >> > > > >
+> >> > > > > I am posting the latest results (qemux86-64/glibc)
+> >> > > > >
+> >> > > > > https://errors.yoctoproject.org/Errors/Build/141804/
+> >> > > > >
+> >> > > > > We have 57 recipes left, Tim has worked diligently on fixing t=
+he
+> >> > > > > PEP-517 issues but we would
+> >> > > > > need more hands. If you see any of
+> >> > > > > these recipes that you can help fixing, please send patches
+> >> > > > >
+> >> > > > > Since upcoming release is an LTS release, I would like to have=
+ these
+> >> > > > > issues fixed for this
+> >> > > > > release.
+> >> > > > >
+> >> > > > > Thank you for your help
+> >> > > > >
+> >> > > > > -Khem
+> >>
+> >>
+> >>
 >
-> No, this time it is because the changelog file mentions that for the
-> next version there will be no tar available and only a git tag.
-> Currently the tar is still available, but there is no meson.build file
-> in the tar. This seems to be the way some freedesktop projects will go:
-> autotools and tar are replaced by git tags and meson.
-> I have also cited this in my commit messages.
-
-thanks for the info. Makes sense
-
->
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#95758): https://lists.openembedded.org/g/openembedd=
-ed-devel/message/95758
-> > Mute This Topic: https://lists.openembedded.org/mt/89524244/3616858
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[adrian.freihofer@siemens.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
->
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#95730): https://lists.openembedded.org/g/openembedded=
+-devel/message/95730
+> Mute This Topic: https://lists.openembedded.org/mt/89416561/1676615
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+oss@burtonini.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 
