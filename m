@@ -1,263 +1,188 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D6E4C433EF
-	for <webhook@archiver.kernel.org>; Thu,  3 Mar 2022 07:08:52 +0000 (UTC)
-Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com
- [209.85.219.41])
- by mx.groups.io with SMTP id smtpd.web09.8405.1646291331459817104
- for <Openembedded-devel@lists.openembedded.org>;
- Wed, 02 Mar 2022 23:08:51 -0800
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FA9AC433EF
+	for <webhook@archiver.kernel.org>; Thu,  3 Mar 2022 07:32:17 +0000 (UTC)
+Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
+ by mx.groups.io with SMTP id smtpd.web08.8408.1646292735942240754
+ for <openembedded-devel@lists.openembedded.org>;
+ Wed, 02 Mar 2022 23:32:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=oI9gUrHU;
- spf=pass (domain: gmail.com, ip: 209.85.219.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f41.google.com with SMTP id x3so3433746qvd.8
-        for <Openembedded-devel@lists.openembedded.org>;
- Wed, 02 Mar 2022 23:08:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=gL64ojdJY4gaz+MDTIVgylJaw2UWhUbOppX6u4mFB00=;
-        b=oI9gUrHUy0N7U3CSKQy+o5T4cxy27s8rGc0JKykBioEa0dPEUYbv70OFmoOEhQiZlJ
-         mj0ndsCwxns5pEeEhZpVmQo3+27AbZtprW2fOeBccWJo9Mc/cg8QCMLZEt08fYmHuMPV
-         gZAGthMwanPBiGvrL/MpiujPDuE++A3eBQv+ZKjztkSD1fPAwvvqRv2P4TyZasdnvMYs
-         ryTsHVTH7ITIR1dLWrClpMj6XiR6/d4llE7WKdzVOBzhOW54GBdtRbziHc7XYNnhemhT
-         Xd9msaiRzFLDo8zyBkDUsNrsQra0q5A/6YNqPckjAKkoYhIeTaFCo3ErI0K7TjduQYLF
-         If0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=gL64ojdJY4gaz+MDTIVgylJaw2UWhUbOppX6u4mFB00=;
-        b=MLb2hSy8feD9WyHqXmoKpqLlfuWquP3DO1phOSH7PZRJwqn1fJadlKYUPhxns9vinG
-         DabV2tPwC5lds5NviYgWajLVCGolIc8VNDQm4wDir7L96a8dCGyMN76NcNndbbfIiI3V
-         dUuodMJJXfNWukGDbrkavswAaazTR/6hzCKhQLnqfL/3dOCCPyoZ9E3xkT/UidQr+oBK
-         q5etxPIAPUWEf2+d/hq7ybCztU/+7QJSza0pGq4LP+qdE4497ma1QLnxHag8QeuH3Cel
-         d8yI2SrC2ot1n+ICxdvKDeX09T293upGvXwTNBdwBOLeMVYkI0lgnP3HpDpJThF35a8l
-         hbDg==
-X-Gm-Message-State: AOAM53179li9LN9CQ8/YL33RVEiP5RU650YiPuS7MsfIFtnMFc9K3aeM
-	Tbjoff1gE2vSpfahBKdOvgJq3PGHVWYkJviRxis=
-X-Google-Smtp-Source: 
- ABdhPJxrERD9Ttyw9uIRSJuOg3e5zWuoIAgPMW1whOrkcleEKnzKXqnc050Hbp0q5RFun+w4qN/7pIpzk+gLDbqh4u4=
-X-Received: by 2002:a05:6214:1c0d:b0:432:6487:9c53 with SMTP id
- u13-20020a0562141c0d00b0043264879c53mr23058507qvc.36.1646291330392; Wed, 02
- Mar 2022 23:08:50 -0800 (PST)
+ dkim=missing;
+ spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.80,
+ mailfrom: f_l_k@t-online.de)
+Received: from fwd79.dcpf.telekom.de (fwd79.aul.t-online.de [10.223.144.105])
+	by mailout01.t-online.de (Postfix) with SMTP id E47335731
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu,  3 Mar 2022 08:32:13 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([79.219.225.177]) by fwd79.t-online.de
+	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
+	esmtp id 1nPfwb-0o4pDF0; Thu, 3 Mar 2022 08:32:13 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH] gjs: update; customize dependencies
+Date: Thu,  3 Mar 2022 08:31:38 +0100
+Message-Id: <20220303073138.1434568-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: 
- <CAMKF1sppjOqUoU2zswWD1h9E8gSntfMiQUak=wQrWrSJ71Qx3w@mail.gmail.com>
- <CAMKF1spv_=Lm=4=oBLA8v=Dx_=wzcGt1rZ89xxAZN-rPcnKgag@mail.gmail.com>
- <CAMKF1sq1-WTR_ndLV_oGJ+2HqWpMzt6ZePGqLJBXSSVcD25Sdw@mail.gmail.com>
- <CAMKF1sp4VCcuiJxOF1zDC0jB2860EGa6y+RKB0xWPeLBH_AGCw@mail.gmail.com>
- <CAMKF1spnXiT9PyV1HRVEuZAXFgWaX3m3tFrKHmT2Fhvgnb2BvQ@mail.gmail.com>
- <CANx9H-CtXBXECQUK98wyfruz7n2+rRC_X0CgFsPDhxDKCw1gdw@mail.gmail.com>
-In-Reply-To: 
- <CANx9H-CtXBXECQUK98wyfruz7n2+rRC_X0CgFsPDhxDKCw1gdw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 2 Mar 2022 23:08:24 -0800
-Message-ID: 
- <CAMKF1sqzPuN6dZch0LPhG-WGYSBX+z4nk9HjQ1KR-9BiKcQGCA@mail.gmail.com>
-Subject: Re: [oe] PEP-517 packaging fixes needed in meta-openembedded
-To: Tim Orling <ticotimo@gmail.com>
-Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1646292733-00010BFA-C0EE1E13/0/0 CLEAN NORMAL
+X-TOI-MSGID: 16c252d1-e7ce-4c7f-a302-2fcf858ebdce
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Mar 2022 07:08:52 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Mar 2022 07:32:17 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95730
+ https://lists.openembedded.org/g/openembedded-devel/message/95731
 
-On Wed, Mar 2, 2022 at 9:13 PM Tim Orling <ticotimo@gmail.com> wrote:
->
->
->
-> On Wed, Mar 2, 2022 at 6:45 PM Khem Raj <raj.khem@gmail.com> wrote:
->>
->> Here is latest failures we are down to 3
->>
->> https://errors.yoctoproject.org/Errors/Build/142145/
->
->
-> I have a partial fix for python3-slip-dbus, but it doesn=E2=80=99t solve =
-the problem.
-> https://git.openembedded.org/meta-openembedded-contrib/commit/?h=3Dtimo/p=
-yprojecttoml&id=3D79b14b76276ac9a9378ed37bb39959de8bf4c751
->
+gjs seems to be the only gnome recipe to be built against gtk4. Align thi=
+s to the
+rest of the universe.
 
-I have addressed it. Right now we are effectively left with
+Update mozjs dependency to mozjs-91 since polkit also builds with it.
 
-meta-openembedded/meta-oe/recipes-devtools/unattended-upgrades/unattended-u=
-pgrades_2.6.bb
+These changes should reduce the compilation of additional packages and th=
+us save
+space and time during build.
 
-It fails in weird ways
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ ...0001-Support-cross-builds-a-bit-better.patch | 17 +++++++----------
+ ...-not-add-dir-installed-tests-when-inst.patch |  9 +++------
+ .../gjs/{gjs_1.70.1.bb =3D> gjs_1.71.1.bb}        |  4 ++--
+ 3 files changed, 12 insertions(+), 18 deletions(-)
+ rename meta-gnome/recipes-gnome/gjs/{gjs_1.70.1.bb =3D> gjs_1.71.1.bb} (=
+90%)
 
-| Installing collected packages: unattended-upgrades
-| ERROR: For req: unattended-upgrades=3D=3D0.1. Unknown scheme key used in
-/mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/unattended-upgrades/2.=
-6-r0/git/dist/unattended_upgrades-0.1-py3-
-none-any.whl: etc (for file
-'unattended_upgrades-0.1.data/etc/kernel/postinst.d/unattended-upgrades').
-.data directory contents should be in subdirectories named with a
-valid scheme key (d
-ata, headers, platlib, purelib, scripts)
-| Exception information:
-| Traceback (most recent call last):
-|   File "/mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/unattended-u=
-pgrades/2.6-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/pip/_=
-internal/operations/install/wheel.py",
-line 521, in make_data_scheme_file
-|     scheme_path =3D scheme_paths[scheme_key]
-| KeyError: 'etc'
-|
-| During handling of the above exception, another exception occurred:
-|
+diff --git a/meta-gnome/recipes-gnome/gjs/gjs/0001-Support-cross-builds-a=
+-bit-better.patch b/meta-gnome/recipes-gnome/gjs/gjs/0001-Support-cross-b=
+uilds-a-bit-better.patch
+index 55af681af..0c45e6095 100644
+--- a/meta-gnome/recipes-gnome/gjs/gjs/0001-Support-cross-builds-a-bit-be=
+tter.patch
++++ b/meta-gnome/recipes-gnome/gjs/gjs/0001-Support-cross-builds-a-bit-be=
+tter.patch
+@@ -1,4 +1,4 @@
+-From 550e98013b0e003c1a6771d8e811375913adf16b Mon Sep 17 00:00:00 2001
++From fa47185d9c8150a0dcb0ea12b92fcf139edbef35 Mon Sep 17 00:00:00 2001
+ From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
+om>
+ Date: Wed, 27 Oct 2021 20:18:47 +0200
+ Subject: [PATCH] Support cross builds a bit better
+@@ -17,10 +17,10 @@ Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gma=
+il.com>
+  1 file changed, 3 insertions(+), 1 deletion(-)
+=20
+ diff --git a/meson.build b/meson.build
+-index dfcc2c3..192b1b5 100644
++index 136e812..f5b91e0 100644
+ --- a/meson.build
+ +++ b/meson.build
+-@@ -234,6 +234,7 @@ release builds of SpiderMonkey. Try configuring Spid=
+erMonkey with
++@@ -252,6 +252,7 @@ release builds of SpiderMonkey. Try configuring Spid=
+erMonkey with
+  --disable-debug.''')
+  endif
+ =20
+@@ -28,15 +28,15 @@ index dfcc2c3..192b1b5 100644
+  # Check if a minimal SpiderMonkey program compiles, links, and runs. If=
+ not,
+  # it's most likely the case that SpiderMonkey was configured incorrectl=
+y, for
+  # example by building mozglue as a shared library.
+-@@ -254,6 +255,7 @@ could not be compiled, linked, or run. Most likely y=
+ou should build it with a
+- different configuration. Check the recommended configuration:
+- https://github.com/spidermonkey-embedders/spidermonkey-embedding-exampl=
+es/blob/esr78/docs/Building%20SpiderMonkey.md''')
++@@ -282,6 +283,7 @@ elif minimal_program.returncode() !=3D 0
++ failed to execute. Most likely you should build it with a different
++ configuration.''' + recommended_configuration)
+  endif
+ +endif # not meson.is_cross_build()
+ =20
+  have_printf_alternative_int =3D cc.compiles('''
+  #include <stdio.h>
+-@@ -662,7 +664,7 @@ endif
++@@ -682,7 +684,7 @@ subdir('installed-tests')
+ =20
+  # Note: The test program in test/ needs to be ported
+  #       to Windows before we can build it on Windows.
+@@ -45,6 +45,3 @@ index dfcc2c3..192b1b5 100644
+      subdir('test')
+  endif
+ =20
+---=20
+-2.31.1
+-
+diff --git a/meta-gnome/recipes-gnome/gjs/gjs/0002-meson.build-Do-not-add=
+-dir-installed-tests-when-inst.patch b/meta-gnome/recipes-gnome/gjs/gjs/0=
+002-meson.build-Do-not-add-dir-installed-tests-when-inst.patch
+index 8777d14f5..6e7b5504e 100644
+--- a/meta-gnome/recipes-gnome/gjs/gjs/0002-meson.build-Do-not-add-dir-in=
+stalled-tests-when-inst.patch
++++ b/meta-gnome/recipes-gnome/gjs/gjs/0002-meson.build-Do-not-add-dir-in=
+stalled-tests-when-inst.patch
+@@ -1,4 +1,4 @@
+-From 6a29818204e647d5fad68ed7ca8cac53d301cae6 Mon Sep 17 00:00:00 2001
++From 2b8aa1ea4a4d1836164c934b1ab2556a32cb5af7 Mon Sep 17 00:00:00 2001
+ From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
+om>
+ Date: Wed, 27 Oct 2021 20:04:02 +0200
+ Subject: [PATCH] meson.build: Do not add dir installed-tests when
+@@ -15,10 +15,10 @@ Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gma=
+il.com>
+  1 file changed, 3 insertions(+), 1 deletion(-)
+=20
+ diff --git a/meson.build b/meson.build
+-index 6878e2e..edbbf79 100644
++index f5b91e0..3110530 100644
+ --- a/meson.build
+ +++ b/meson.build
+-@@ -635,7 +635,9 @@ if not get_option('skip_gtk_tests')
++@@ -680,7 +680,9 @@ if not get_option('skip_gtk_tests')
+      have_gtk4 =3D dependency('gtk4', required: false).found()
+  endif
+ =20
+@@ -29,6 +29,3 @@ index 6878e2e..edbbf79 100644
+ =20
+  # Note: The test program in test/ needs to be ported
+  #       to Windows before we can build it on Windows.
+---=20
+-2.31.1
+-
+diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.70.1.bb b/meta-gnome/reci=
+pes-gnome/gjs/gjs_1.71.1.bb
+similarity index 90%
+rename from meta-gnome/recipes-gnome/gjs/gjs_1.70.1.bb
+rename to meta-gnome/recipes-gnome/gjs/gjs_1.71.1.bb
+index 90ea14044..e85304434 100644
+--- a/meta-gnome/recipes-gnome/gjs/gjs_1.70.1.bb
++++ b/meta-gnome/recipes-gnome/gjs/gjs_1.71.1.bb
+@@ -4,11 +4,11 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8dcea832f6ac=
+f45d856abfeb2d51ec48"
+=20
+ GNOMEBASEBUILDCLASS =3D "meson"
+=20
+-DEPENDS =3D "mozjs-78 gtk4"
++DEPENDS =3D "mozjs-91 gtk+3"
+=20
+ inherit gnomebase gsettings gobject-introspection vala gettext features_=
+check upstream-version-is-even pkgconfig
+=20
+-SRC_URI[archive.sha256sum] =3D "bbdc0eec7cf25fbc534769f6a1fb2c7a18e17b87=
+1efdb0ca58e9abf08b28003f"
++SRC_URI[archive.sha256sum] =3D "f15ad0d45a7d31a1ac4e07479038c0536713cca3=
+c5492ca2f2731c04a3a5f1e9"
+ SRC_URI +=3D " \
+     file://0001-Support-cross-builds-a-bit-better.patch \
+     file://0002-meson.build-Do-not-add-dir-installed-tests-when-inst.pat=
+ch \
+--=20
+2.25.1
 
->>
->> On Wed, Mar 2, 2022 at 10:40 AM Khem Raj <raj.khem@gmail.com> wrote:
->> >
->> > Here is latest list which is significantly less so thanks for
->> > contributions thus far.
->> >
->> >   meta-openembedded/meta-python/recipes-extended/python-blivet/python3=
--blivetgui_2.2.1.bb
->> >   meta-openembedded/meta-python/recipes-devtools/python/python3-aws-io=
-t-device-sdk-python_1.4.9.bb
->> >   meta-openembedded/meta-python/recipes-extended/python-blivet/python3=
--blivet_3.4.3.bb
->> >   meta-openembedded/meta-python/recipes-devtools/python/python3-slip-d=
-bus_0.6.5.bb
->> >   meta-openembedded/meta-python/recipes-devtools/python/python3-keras-=
-applications_1.0.8.bb
->> >   meta-openembedded/meta-python/recipes-devtools/python/python3-pymetn=
-o_0.9.0.bb
->> >   meta-openembedded/meta-python/recipes-extended/python-cson/python3-c=
-son_git.bb
->> >   meta-openembedded/meta-python/recipes-devtools/python/python3-dbussy=
-_1.3.bb
->> >   meta-openembedded/meta-python/recipes-connectivity/python-txws/pytho=
-n3-txws_0.9.1.bb
->> >   meta-openembedded/meta-oe/recipes-devtools/unattended-upgrades/unatt=
-ended-upgrades_2.6.bb
->> >
->> >
->> > On Tue, Mar 1, 2022 at 8:18 AM Khem Raj <raj.khem@gmail.com> wrote:
->> > >
->> > > We are making some progress. This is the latest ( 24 build failures =
-)
->> > > as of last night.
->> > >
->> > > https://errors.yoctoproject.org/Errors/Build/142052/
->> > >
->> > > On Mon, Feb 28, 2022 at 3:21 PM Khem Raj <raj.khem@gmail.com> wrote:
->> > > >
->> > > > Thanks for sending fixing everyone. Lets keep going. Here is lates=
-t
->> > > > list of failing recipes on master-next now
->> > > >
->> > > > Summary: 32 tasks failed:
->> > > >   meta-openembedded/meta-python/recipes-extended/python-blivet/pyt=
-hon3-blivet_3.4.0.bb:do_install
->> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-aw=
-s-iot-device-sdk-python_1.4.9.bb:do_compile
->> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-cr=
-cmod_1.7.bb:do_compile
->> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-lr=
-parsing_1.0.17.bb:do_compile
->> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-sl=
-ip-dbus_0.6.5.bb:do_compile
->> > > >   meta-openembedded/meta-python/recipes-extended/python-blivet/pyt=
-hon3-blivetgui_2.2.1.bb:do_compile
->> > > >   meta-raspberrypi/recipes-devtools/python/python3-rtimu_git.bb:do=
-_compile
->> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-fl=
-ask-versioned_0.9.4-20101221.bb:do_install
->> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-nt=
-plib_0.4.0.bb:do_install
->> > > >   meta-raspberrypi/recipes-devtools/python/python3-adafruit-circui=
-tpython-register_1.9.4.bb:do_install
->> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-be=
-have_1.2.6.bb:do_install
->> > > >   meta-atmel/recipes-utils/mpio/mpio_1.3.bb:do_install
->> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-py=
-stache_0.5.4.bb:do_install
->> > > >   meta-raspberrypi/recipes-devtools/python/python3-adafruit-pureio=
-_1.1.8.bb:do_install
->> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-py=
-scaffold_4.1.4.bb:do_install
->> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-pr=
-ctl_1.8.1.bb:do_install
->> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-py=
-metno_0.9.0.bb:do_install
->> > > >   meta-openembedded/meta-python/recipes-extended/python-cson/pytho=
-n3-cson_git.bb:do_install
->> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-py=
-dbus-manager_git.bb:do_install
->> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-py=
-misp_2.4.152.bb:do_install
->> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-db=
-ussy_1.3.bb:do_install
->> > > >   meta-openembedded/meta-python/recipes-devtools/gyp/gyp_git.bb:do=
-_install
->> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-ke=
-ras-applications_1.0.8.bb:do_install
->> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-gc=
-ovr_5.0.bb:do_install
->> > > >   meta-raspberrypi/recipes-devtools/python/python3-adafruit-platfo=
-rmdetect_3.1.1.bb:do_install
->> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-co=
-nfigshell-fb_1.1.29.bb:do_install
->> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-xm=
-odem_0.4.6.bb:do_package
->> > > >   meta-openembedded/meta-oe/recipes-devtools/unattended-upgrades/u=
-nattended-upgrades_2.6.bb:do_install
->> > > >   meta-openembedded/meta-python/recipes-connectivity/python-txws/p=
-ython3-txws_0.9.1.bb:do_install
->> > > >   meta-openembedded/meta-xfce/recipes-apps/catfish/catfish_4.16.3.=
-bb:do_compile
->> > > >   meta-openembedded/meta-xfce/recipes-apps/menulibre/menulibre_2.2=
-.3.bb:do_install
->> > > >   meta-openembedded/meta-gnome/recipes-support/onboard/onboard_1.4=
-.1.bb:do_compile
->> > > >
->> > > > On Sat, Feb 26, 2022 at 11:49 AM Khem Raj <raj.khem@gmail.com> wro=
-te:
->> > > > >
->> > > > > Hello All,
->> > > > >
->> > > > > We have PEP-517 packaging related infra changes merged into oe-c=
-ore,
->> > > > > which obviously
->> > > > > mean there are some failures on various python packages.
->> > > > >
->> > > > > I am posting the latest results (qemux86-64/glibc)
->> > > > >
->> > > > > https://errors.yoctoproject.org/Errors/Build/141804/
->> > > > >
->> > > > > We have 57 recipes left, Tim has worked diligently on fixing the
->> > > > > PEP-517 issues but we would
->> > > > > need more hands. If you see any of
->> > > > > these recipes that you can help fixing, please send patches
->> > > > >
->> > > > > Since upcoming release is an LTS release, I would like to have t=
-hese
->> > > > > issues fixed for this
->> > > > > release.
->> > > > >
->> > > > > Thank you for your help
->> > > > >
->> > > > > -Khem
->>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#95721): https://lists.openembedded.org/g/openembedde=
-d-devel/message/95721
->> Mute This Topic: https://lists.openembedded.org/mt/89416561/924729
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [=
-ticotimo@gmail.com]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
 
