@@ -1,116 +1,97 @@
-Return-Path: <ross@burtonini.com>
+Return-Path: <adrian.freihofer@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B89E1C433FE
-	for <webhook@archiver.kernel.org>; Thu,  3 Mar 2022 11:06:55 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
- [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.web12.9608.1646305614986326115
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F076CC433EF
+	for <webhook@archiver.kernel.org>; Thu,  3 Mar 2022 13:06:52 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
+ [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.web11.10262.1646312812212683932
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Mar 2022 03:06:55 -0800
+ Thu, 03 Mar 2022 05:06:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@burtonini-com.20210112.gappssmtp.com header.s=20210112
- header.b=vxTKu9WN;
- spf=pass (domain: burtonini.com, ip: 209.85.128.54,
- mailfrom: ross@burtonini.com)
-Received: by mail-wm1-f54.google.com with SMTP id
- m42-20020a05600c3b2a00b00382ab337e14so3907009wms.3
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=EsMT77Tg;
+ spf=pass (domain: gmail.com, ip: 209.85.221.48,
+ mailfrom: adrian.freihofer@gmail.com)
+Received: by mail-wr1-f48.google.com with SMTP id n14so7763872wrq.7
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Mar 2022 03:06:54 -0800 (PST)
+ Thu, 03 Mar 2022 05:06:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=burtonini-com.20210112.gappssmtp.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=NGkOgNM/mRV57JRIR/649qmBdbcDE80mU96A0xBnxRs=;
-        b=vxTKu9WNOnB6jiB0Hiv79WY5uuYpDA2Zdwx16xEER2leUjzEyBBkVsUlG2LQdIcRZ7
-         nMABAGed1uJ87bBVmyrZ8HEv6JtWFtN0Mt5HQ9k2NyHsDtVCVi+Pp6R/cU0dxOYhDJYJ
-         868p1+sQWhWb0tBxqXvNUtortre3KKsmF/D18p3dVeWVGROEXMKzJ7oF4tsNEGVrSi+w
-         G1444y0JUv8q8prvxcigWwWPJz2Zw0eI8SPWoFJ3Jtw31GwjAUvqSt0s+L6/zkCpTIpF
-         Ivu0kCjXFsbi63vNUCJNR1X+cDAjB1U9UIY0rQT/ZHhDJSE/e8GMPnDQ2LI/NBOMjYt0
-         QeLA==
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Ywl5V5Eud78fbSzqKDijfuKZHPahI0XaLH65RRITWso=;
+        b=EsMT77TgLRqlH1D3t7UKDe93RwElkwiJ9cmxufYA7Z2BoghHtgK7eZ+NV1pOKjoT9K
+         2afhKiZfdVNJaYuHO4oByVEJcv7rXLgXQiAty9Ot13OH5xddMIFWIkBxtXIcSyOCRL0f
+         d7pIQik2KM/MP/MTarQtIUOD3nXGv+jCoyrVoMjgRJdwRHs0snUFB5ygxmcO6QU+CEIU
+         wobQ4juW8GjiR1kQi6E6tUmhvrBytH4bpPPhEMggs0MhG3vtF1mzRnifOPsgRwzyr+Zw
+         EmxdWGQtU3ZRDqQpod3vZJ5m/zDAQIQYlAmGma/rkc77x42o8ZnpecFHopDKINDWdoQH
+         gp8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=NGkOgNM/mRV57JRIR/649qmBdbcDE80mU96A0xBnxRs=;
-        b=dR7MAycqgyYs9ipfodMd3GJ1wzbZRqwJpw1GX5T0QAoXWxiVsbvUPr8GMbYOwOTND/
-         BhIjHqdsjfenX/rqKyY30Bi/SJxhfocAhvPF4WAvNuSOS0MDan+2Fn8AKPUnN38cvNAx
-         TincxiFwMqSdsmyDZ+Av8/SG7Klc7kbmZQivn8YPzxW2I9/Kii4Jzu8ZlQzOcvpEtcMa
-         KOLB56e88RG/OAAGk3zVqPLPZkMLw9QqAeLnmUGoQomf3J4V0tV0OHrC7LmRcCtA6Rbj
-         yDB8k5sqraOg6Gkhge5O6bcWHJ51w10P9Ph69tDYxKQ+L73JprS6+vQ9RzhnOzEmKDPl
-         RgRw==
-X-Gm-Message-State: AOAM5301DrRMyPhYtYCPZFIVgz3AIiIeyALanXEjwohfxITZfto3yrGa
-	4vF49S3c19ImJDRVKO9DztIY6M6uEqZvSAzJz4IYEA==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Ywl5V5Eud78fbSzqKDijfuKZHPahI0XaLH65RRITWso=;
+        b=1ngt1KWnE3p52owU/YFz1Cd+d3KQFu2QBbqD4MVtbKKymRbMH7pZa4U2T9pt1De445
+         KP6zbFkR/CgLWjkv61zZJ7hiw/RT3FlQ5EhA+mUJsNf6Ax1vcJSTiViV31yA4pC+Zg/p
+         QlYqhBDgkNXSIhfcCZueQj2xIwlX7AojElvScA3Mv55c6rXacIHjuZOIsSLSPcCjTf7E
+         FAOvlWqWz5PzP/5o3DLomg5C05K9lE8quatQUOP4bt0js0Ux9hw+Xv8g79orT/2PU0Ft
+         EJ+9Fx4mdcIAGoFJxra/HmMles2dbL/kK4fP7PP8Gxm2dGNRynSUG8nnqRMOZPA8L5v9
+         tf3w==
+X-Gm-Message-State: AOAM532A4Q6xrdNDrQ8HCNKhlF3qH6tyRSSaHKLOXfF/ZgJE9u7CwTml
+	UBp35Ii7DW/WyKY5BxXPtpZrD8vlnK8=
 X-Google-Smtp-Source: 
- ABdhPJxcqWgzaYgmGZZcVLA+J9UDuFKtV0V6cZsd61Ub5kzPE1P5d8fpsA8tAWMkL2ciZHQgSgjJE0LPWU2mW6UMHQw=
-X-Received: by 2002:a7b:c5d5:0:b0:37b:fda9:a5e2 with SMTP id
- n21-20020a7bc5d5000000b0037bfda9a5e2mr3368087wmk.62.1646305613265; Thu, 03
- Mar 2022 03:06:53 -0800 (PST)
+ ABdhPJwC2FLRu+rnCs4hRQU1n6Dt05E2yuD9UZZDYYPqvHAhTkOX5YaBvMDNeN9172zaKp6gMO12NQ==
+X-Received: by 2002:adf:d08a:0:b0:1ef:5a1c:d50c with SMTP id
+ y10-20020adfd08a000000b001ef5a1cd50cmr23954796wrh.582.1646312810313;
+        Thu, 03 Mar 2022 05:06:50 -0800 (PST)
+Received: from md2ramxc.ad001.siemens.net ([62.32.0.69])
+        by smtp.gmail.com with ESMTPSA id
+ n15-20020a05600c500f00b003814673f202sm9612380wmr.47.2022.03.03.05.06.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 03 Mar 2022 05:06:49 -0800 (PST)
+From: Adrian Freihofer <adrian.freihofer@gmail.com>
+X-Google-Original-From: Adrian Freihofer <adrian.freihofer@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Adrian Freihofer <adrian.freihofer@siemens.com>
+Subject: [meta-oe][PATCH 0/4] update modemmanager
+Date: Thu,  3 Mar 2022 14:06:14 +0100
+Message-Id: <20220303130618.1108977-1-adrian.freihofer@siemens.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20220303040416.874842-1-raj.khem@gmail.com>
-In-Reply-To: <20220303040416.874842-1-raj.khem@gmail.com>
-From: Ross Burton <ross@burtonini.com>
-Date: Thu, 3 Mar 2022 11:06:42 +0000
-Message-ID: 
- <CAAnfSTtoszebXPuh-0T4qXRo7Tu=MUFdF5mCYRLuSNzkiTOGAQ@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-blivet: Adjust install location
- for binaries and systemd units
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Mar 2022 11:06:55 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Mar 2022 13:06:52 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95738
+ https://lists.openembedded.org/g/openembedded-devel/message/95739
 
-FWIW, this happens with ufw too when it's ported to use setuptools.
+Update modem manager and related libraries to latest stable vresions.
 
-Ross
+Adrian Freihofer (4):
+  libqrtr-glib: add new recipe
+  libqmi: switch to meson and git
+  modemmanager: update 1.16.8 -> 1.18.6
+  networkmanager: replace deprecated licenses
 
-On Thu, 3 Mar 2022 at 04:04, Khem Raj <raj.khem@gmail.com> wrote:
->
-> With wheels changes it is also getting installed under PYTHON_SITEPACKAGES_DIR
-> perhaps something to fix in setup.py but this fix works better from a
-> packager point of view.
->
-> Moves the systemd unit files and daemon into /usr/lib and /usr/libexec
-> dirs
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../recipes-extended/python-blivet/python3-blivet_3.4.3.bb  | 6 ++++++
->  1 file changed, 6 insertions(+)
->
-> diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet_3.4.3.bb b/meta-python/recipes-extended/python-blivet/python3-blivet_3.4.3.bb
-> index d79fc7d003..85575df7b5 100644
-> --- a/meta-python/recipes-extended/python-blivet/python3-blivet_3.4.3.bb
-> +++ b/meta-python/recipes-extended/python-blivet/python3-blivet_3.4.3.bb
-> @@ -23,6 +23,12 @@ inherit pypi features_check systemd setuptools3
->
->  REQUIRED_DISTRO_FEATURES = "systemd"
->
-> +do_install:append() {
-> +    mv ${D}${PYTHON_SITEPACKAGES_DIR}${exec_prefix}/* ${D}${exec_prefix}
-> +    mv ${D}${PYTHON_SITEPACKAGES_DIR}${sysconfdir} ${D}
-> +    mv ${D}${PYTHON_SITEPACKAGES_DIR}${base_libdir} ${D}
-> +}
-> +
->  RDEPENDS:${PN} += "python3-pykickstart python3-pyudev \
->                    parted python3-pyparted multipath-tools \
->                    lsof cryptsetup libblockdev \
-> --
-> 2.35.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#95725): https://lists.openembedded.org/g/openembedded-devel/message/95725
-> Mute This Topic: https://lists.openembedded.org/mt/89519129/1676615
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [ross@burtonini.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+ .../networkmanager/networkmanager_1.36.0.bb   |   2 +-
+ .../0001-build-use-python3-everywhere.patch   |  33 ++++++
+ .../libqmi/libqmi_1.30.4.bb                   |  23 ++--
+ .../libqrtr-glib/libqrtr-glib_git.bb          |  21 ++++
+ ...-shell-scripts-to-use-bin-sh-for-use.patch |  68 ++++++++++++
+ ...-Make-scripts-POSIX-shell-compatible.patch | 100 ++++++++++++++++++
+ .../modemmanager/modemmanager_1.16.8.bb       |  53 ----------
+ .../modemmanager/modemmanager_1.18.6.bb       |  62 +++++++++++
+ 8 files changed, 302 insertions(+), 60 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/libqmi/files/0001-build-use-python3-everywhere.patch
+ create mode 100644 meta-oe/recipes-connectivity/libqrtr-glib/libqrtr-glib_git.bb
+ create mode 100644 meta-oe/recipes-connectivity/modemmanager/files/0001-core-switch-bash-shell-scripts-to-use-bin-sh-for-use.patch
+ create mode 100644 meta-oe/recipes-connectivity/modemmanager/files/0002-fcc-unlock-Make-scripts-POSIX-shell-compatible.patch
+ delete mode 100644 meta-oe/recipes-connectivity/modemmanager/modemmanager_1.16.8.bb
+ create mode 100644 meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.6.bb
+
+-- 
+2.34.1
+
 
