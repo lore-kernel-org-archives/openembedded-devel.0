@@ -1,99 +1,210 @@
-Return-Path: <adrian.freihofer@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E8EFEC433EF
-	for <webhook@archiver.kernel.org>; Thu,  3 Mar 2022 13:07:17 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
- [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.web11.10264.1646312836616675342
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31021C433F5
+	for <webhook@archiver.kernel.org>; Thu,  3 Mar 2022 13:57:56 +0000 (UTC)
+Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
+ by mx.groups.io with SMTP id smtpd.web11.10829.1646315871593418424
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Mar 2022 05:07:16 -0800
+ Thu, 03 Mar 2022 05:57:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=dD8zxFKQ;
- spf=pass (domain: gmail.com, ip: 209.85.128.45,
- mailfrom: adrian.freihofer@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id
- 7-20020a05600c228700b00385fd860f49so2364781wmf.0
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Mar 2022 05:07:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=sXrOoaU2BMxnYAZw+ry7kh2dPjyN/BF5o9S7NebCRnM=;
-        b=dD8zxFKQfFP4dz8B6NkVGJ2K9SbDrf+cvwHVJVCBCFMBqpArkMYl0givm3G8DYVT8E
-         Q1zl8Q048YuWBtu2RH0JxLz3yCjuOhFdrXAEOLIrEfA8PnsbqJgfGfhfx+PLXSA9vA16
-         uqQw3ho/Jhf6Bh/BA6//RS9c+KSyKOANq7SX9Mzpnlc+Y4T+KOWzmGEwO9CtMzsubq/1
-         gNYJWjvG5HBcWxRCXSs2r7EhBbuVXw8/nxiYPcBYv+4XQv6rykjcqXHlJ/DnvYEC3a5Y
-         iNaiBiYmhnu6kEX5NQpvPlwKG9Kqdd23ovch96ln73Sov4yUhVSGoYDIZbPtdTQ85oO9
-         aAIQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=sXrOoaU2BMxnYAZw+ry7kh2dPjyN/BF5o9S7NebCRnM=;
-        b=50CLhbK81F/1WJhTluxGY4DVNedy/o3y/FlyjbNY/f59xbWFPeAP4VcAgJ8Ng3r9wz
-         WX+blQrIdKLt4c+Z7qMADzEhHHzqaT4a1H7oxn9GyxZ/pbQixBBdG9Np0Ymcct9CvUcF
-         usQ9hWhCOBhmq7T8yq7YBc8efRmY69Ir+WdCOUNEn5iisgjxamK6u19PIIX+qzB2PA+u
-         f2yAgws8TBMdkrrZfJjzGifqjuTST7LQGzByEF71VdxN3EzAz4SNMR0S2Hd+nnXNN8b8
-         tC+xiSyc+GokAC7xfezZb8DFQaYqq7gBu9Lh9M3pr62QAo/3oFutj4tXORMA+Dc+l2hG
-         wYiA==
-X-Gm-Message-State: AOAM530X8f/laz+I9jRByULbcrEWZAjffXeeGpRdKG9Ezr+GF9gkVvm4
-	nrSgzA6cypGZTE1ValWkN6jtJG99YuU=
-X-Google-Smtp-Source: 
- ABdhPJwq3iEu1O0jIiqXurSQ5f78+K9kCEOOU1cnn2i70rFhXqxTYLSw9NA6T+7NNCDXFPjJ8U4otg==
-X-Received: by 2002:a05:600c:384a:b0:37b:e8ac:851f with SMTP id
- s10-20020a05600c384a00b0037be8ac851fmr3775998wmr.158.1646312834818;
-        Thu, 03 Mar 2022 05:07:14 -0800 (PST)
-Received: from md2ramxc.ad001.siemens.net ([62.32.0.69])
-        by smtp.gmail.com with ESMTPSA id
- n15-20020a05600c500f00b003814673f202sm9612380wmr.47.2022.03.03.05.07.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Mar 2022 05:07:14 -0800 (PST)
-From: Adrian Freihofer <adrian.freihofer@gmail.com>
-X-Google-Original-From: Adrian Freihofer <adrian.freihofer@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Adrian Freihofer <adrian.freihofer@siemens.com>
-Subject: [meta-oe][PATCH 4/4] networkmanager: replace deprecated licenses
-Date: Thu,  3 Mar 2022 14:06:18 +0100
-Message-Id: <20220303130618.1108977-5-adrian.freihofer@siemens.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220303130618.1108977-1-adrian.freihofer@siemens.com>
-References: <20220303130618.1108977-1-adrian.freihofer@siemens.com>
+ dkim=missing;
+ spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.22,
+ mailfrom: f_l_k@t-online.de)
+Received: from fwd73.dcpf.telekom.de (fwd73.aul.t-online.de [10.223.144.99])
+	by mailout12.t-online.de (Postfix) with SMTP id C1E18176F9
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu,  3 Mar 2022 14:57:49 +0100 (CET)
+Received: from [192.168.178.83] ([79.219.225.177]) by fwd73.t-online.de
+	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
+	esmtp id 1nPlxl-1nPpbN0; Thu, 3 Mar 2022 14:57:49 +0100
+Message-ID: <ea8fef0f-e6e8-b6f3-6595-bc2f0acc63b9@t-online.de>
+Date: Thu, 3 Mar 2022 14:57:48 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Subject: Re: [oe] [meta-gnome][PATCH] gjs: update; customize dependencies
+Content-Language: en-US
+To: openembedded-devel@lists.openembedded.org
+References: <16D8CE8588A26E50.5647@lists.openembedded.org>
+From: Markus Volk <f_l_k@t-online.de>
+In-Reply-To: <16D8CE8588A26E50.5647@lists.openembedded.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+X-TOI-EXPURGATEID: 150726::1646315869-0000C4DD-1ADEE791/0/0 CLEAN NORMAL
+X-TOI-MSGID: 99fd489b-3748-4930-83a2-16ff2a5d08cd
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Mar 2022 13:07:17 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Mar 2022 13:57:56 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95743
+ https://lists.openembedded.org/g/openembedded-devel/message/95744
 
-NetworkManager should only be licensed under LGPL 2.1 or higher. But as far as
-I understand, the process is not finished yet and some codes are still under
-GPL-2.0.
-https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/blob/main/RELICENSE.md
+I had a closer look at gjs source and it seems that gtk is needed only=20
+for the gtk_tests.
 
-Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
----
- .../networkmanager/networkmanager_1.36.0.bb                     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+This is only working with gtk4, so depending on gtk+3 doesnt help here.
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.36.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.36.0.bb
-index 2f8b616a68..f6d1b6c385 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.36.0.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.36.0.bb
-@@ -2,7 +2,7 @@ SUMMARY = "NetworkManager"
- HOMEPAGE = "https://wiki.gnome.org/Projects/NetworkManager"
- SECTION = "net/misc"
- 
--LICENSE = "GPLv2+ & LGPLv2.1+"
-+LICENSE = "GPL-2.0-or-later & LGPL-2.1-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c \
- "
--- 
-2.34.1
+But maybe it would be an option to build with "-Dskip_gtk_tests" and=20
+drop gtk dependency entirely?
 
+Am 03.03.22 um 08:31 schrieb Markus Volk:
+
+> gjs seems to be the only gnome recipe to be built against gtk4. Align t=
+his to the
+> rest of the universe.
+>
+> Update mozjs dependency to mozjs-91 since polkit also builds with it.
+>
+> These changes should reduce the compilation of additional packages and =
+thus save
+> space and time during build.
+>
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> ---
+>   ...0001-Support-cross-builds-a-bit-better.patch | 17 +++++++---------=
+-
+>   ...-not-add-dir-installed-tests-when-inst.patch |  9 +++------
+>   .../gjs/{gjs_1.70.1.bb =3D> gjs_1.71.1.bb}        |  4 ++--
+>   3 files changed, 12 insertions(+), 18 deletions(-)
+>   rename meta-gnome/recipes-gnome/gjs/{gjs_1.70.1.bb =3D> gjs_1.71.1.bb=
+} (90%)
+>
+> diff --git a/meta-gnome/recipes-gnome/gjs/gjs/0001-Support-cross-builds=
+-a-bit-better.patch b/meta-gnome/recipes-gnome/gjs/gjs/0001-Support-cross=
+-builds-a-bit-better.patch
+> index 55af681af..0c45e6095 100644
+> --- a/meta-gnome/recipes-gnome/gjs/gjs/0001-Support-cross-builds-a-bit-=
+better.patch
+> +++ b/meta-gnome/recipes-gnome/gjs/gjs/0001-Support-cross-builds-a-bit-=
+better.patch
+> @@ -1,4 +1,4 @@
+> -From 550e98013b0e003c1a6771d8e811375913adf16b Mon Sep 17 00:00:00 2001
+> +From fa47185d9c8150a0dcb0ea12b92fcf139edbef35 Mon Sep 17 00:00:00 2001
+>   From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmai=
+l.com>
+>   Date: Wed, 27 Oct 2021 20:18:47 +0200
+>   Subject: [PATCH] Support cross builds a bit better
+> @@ -17,10 +17,10 @@ Signed-off-by: Andreas M=C3=BCller <schnitzeltony@g=
+mail.com>
+>    1 file changed, 3 insertions(+), 1 deletion(-)
+>  =20
+>   diff --git a/meson.build b/meson.build
+> -index dfcc2c3..192b1b5 100644
+> +index 136e812..f5b91e0 100644
+>   --- a/meson.build
+>   +++ b/meson.build
+> -@@ -234,6 +234,7 @@ release builds of SpiderMonkey. Try configuring Sp=
+iderMonkey with
+> +@@ -252,6 +252,7 @@ release builds of SpiderMonkey. Try configuring Sp=
+iderMonkey with
+>    --disable-debug.''')
+>    endif
+>   =20
+> @@ -28,15 +28,15 @@ index dfcc2c3..192b1b5 100644
+>    # Check if a minimal SpiderMonkey program compiles, links, and runs.=
+ If not,
+>    # it's most likely the case that SpiderMonkey was configured incorre=
+ctly, for
+>    # example by building mozglue as a shared library.
+> -@@ -254,6 +255,7 @@ could not be compiled, linked, or run. Most likely=
+ you should build it with a
+> - different configuration. Check the recommended configuration:
+> - https://github.com/spidermonkey-embedders/spidermonkey-embedding-exam=
+ples/blob/esr78/docs/Building%20SpiderMonkey.md''')
+> +@@ -282,6 +283,7 @@ elif minimal_program.returncode() !=3D 0
+> + failed to execute. Most likely you should build it with a different
+> + configuration.''' + recommended_configuration)
+>    endif
+>   +endif # not meson.is_cross_build()
+>   =20
+>    have_printf_alternative_int =3D cc.compiles('''
+>    #include <stdio.h>
+> -@@ -662,7 +664,7 @@ endif
+> +@@ -682,7 +684,7 @@ subdir('installed-tests')
+>   =20
+>    # Note: The test program in test/ needs to be ported
+>    #       to Windows before we can build it on Windows.
+> @@ -45,6 +45,3 @@ index dfcc2c3..192b1b5 100644
+>        subdir('test')
+>    endif
+>   =20
+> ---
+> -2.31.1
+> -
+> diff --git a/meta-gnome/recipes-gnome/gjs/gjs/0002-meson.build-Do-not-a=
+dd-dir-installed-tests-when-inst.patch b/meta-gnome/recipes-gnome/gjs/gjs=
+/0002-meson.build-Do-not-add-dir-installed-tests-when-inst.patch
+> index 8777d14f5..6e7b5504e 100644
+> --- a/meta-gnome/recipes-gnome/gjs/gjs/0002-meson.build-Do-not-add-dir-=
+installed-tests-when-inst.patch
+> +++ b/meta-gnome/recipes-gnome/gjs/gjs/0002-meson.build-Do-not-add-dir-=
+installed-tests-when-inst.patch
+> @@ -1,4 +1,4 @@
+> -From 6a29818204e647d5fad68ed7ca8cac53d301cae6 Mon Sep 17 00:00:00 2001
+> +From 2b8aa1ea4a4d1836164c934b1ab2556a32cb5af7 Mon Sep 17 00:00:00 2001
+>   From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmai=
+l.com>
+>   Date: Wed, 27 Oct 2021 20:04:02 +0200
+>   Subject: [PATCH] meson.build: Do not add dir installed-tests when
+> @@ -15,10 +15,10 @@ Signed-off-by: Andreas M=C3=BCller <schnitzeltony@g=
+mail.com>
+>    1 file changed, 3 insertions(+), 1 deletion(-)
+>  =20
+>   diff --git a/meson.build b/meson.build
+> -index 6878e2e..edbbf79 100644
+> +index f5b91e0..3110530 100644
+>   --- a/meson.build
+>   +++ b/meson.build
+> -@@ -635,7 +635,9 @@ if not get_option('skip_gtk_tests')
+> +@@ -680,7 +680,9 @@ if not get_option('skip_gtk_tests')
+>        have_gtk4 =3D dependency('gtk4', required: false).found()
+>    endif
+>   =20
+> @@ -29,6 +29,3 @@ index 6878e2e..edbbf79 100644
+>   =20
+>    # Note: The test program in test/ needs to be ported
+>    #       to Windows before we can build it on Windows.
+> ---
+> -2.31.1
+> -
+> diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.70.1.bb b/meta-gnome/re=
+cipes-gnome/gjs/gjs_1.71.1.bb
+> similarity index 90%
+> rename from meta-gnome/recipes-gnome/gjs/gjs_1.70.1.bb
+> rename to meta-gnome/recipes-gnome/gjs/gjs_1.71.1.bb
+> index 90ea14044..e85304434 100644
+> --- a/meta-gnome/recipes-gnome/gjs/gjs_1.70.1.bb
+> +++ b/meta-gnome/recipes-gnome/gjs/gjs_1.71.1.bb
+> @@ -4,11 +4,11 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8dcea832f6=
+acf45d856abfeb2d51ec48"
+>  =20
+>   GNOMEBASEBUILDCLASS =3D "meson"
+>  =20
+> -DEPENDS =3D "mozjs-78 gtk4"
+> +DEPENDS =3D "mozjs-91 gtk+3"
+>  =20
+>   inherit gnomebase gsettings gobject-introspection vala gettext featur=
+es_check upstream-version-is-even pkgconfig
+>  =20
+> -SRC_URI[archive.sha256sum] =3D "bbdc0eec7cf25fbc534769f6a1fb2c7a18e17b=
+871efdb0ca58e9abf08b28003f"
+> +SRC_URI[archive.sha256sum] =3D "f15ad0d45a7d31a1ac4e07479038c0536713cc=
+a3c5492ca2f2731c04a3a5f1e9"
+>   SRC_URI +=3D " \
+>       file://0001-Support-cross-builds-a-bit-better.patch \
+>       file://0002-meson.build-Do-not-add-dir-installed-tests-when-inst.=
+patch \
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#95731): https://lists.openembedded.org/g/openembedd=
+ed-devel/message/95731
+> Mute This Topic: https://lists.openembedded.org/mt/89521251/3618223
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[f_l_k@t-online.de]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
