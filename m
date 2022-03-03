@@ -2,239 +2,262 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 577BBC433F5
-	for <webhook@archiver.kernel.org>; Thu,  3 Mar 2022 06:59:59 +0000 (UTC)
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com
- [209.85.210.172])
- by mx.groups.io with SMTP id smtpd.web09.8379.1646290798237016714
- for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Mar 2022 22:59:58 -0800
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D6E4C433EF
+	for <webhook@archiver.kernel.org>; Thu,  3 Mar 2022 07:08:52 +0000 (UTC)
+Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com
+ [209.85.219.41])
+ by mx.groups.io with SMTP id smtpd.web09.8405.1646291331459817104
+ for <Openembedded-devel@lists.openembedded.org>;
+ Wed, 02 Mar 2022 23:08:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ahF3czs1;
- spf=pass (domain: gmail.com, ip: 209.85.210.172,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f172.google.com with SMTP id k1so4009766pfu.2
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Mar 2022 22:59:58 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=oI9gUrHU;
+ spf=pass (domain: gmail.com, ip: 209.85.219.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f41.google.com with SMTP id x3so3433746qvd.8
+        for <Openembedded-devel@lists.openembedded.org>;
+ Wed, 02 Mar 2022 23:08:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=u61oHPG+P/NDjvpT99NLYkpsCo1l+cmd6+qon5u3ogI=;
-        b=ahF3czs1onB+pd6DgeJU/BJmyDfI4PFmf4MqRn+1QpgZaN5NzmKaDycdVB2QIuABxY
-         qvfU7hk/Jl6oQgje7tWjDx5i+u5kRowc54gySHgn65khmA2n17KNL+iMjVJUASs+pIOP
-         hq5kSHdkBJBvNdHbuMy99SRZrzi2CJ/kN4miSuEwFWos2idbVg5l/jKszXStNrCQqdSv
-         6fUREwBfXmL1/3vouD2TqLVN3A6fiQd2Cqe3kjxe+hASuRLYN016Jw6edJcKGyMayjcT
-         8cCXkCYIe9EN4zpNEb+S97j1F9MGrp7AhUKRkQ5vIhN/6TK1iXxkYAWo/UGB5tJkgeQX
-         R8ww==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=gL64ojdJY4gaz+MDTIVgylJaw2UWhUbOppX6u4mFB00=;
+        b=oI9gUrHUy0N7U3CSKQy+o5T4cxy27s8rGc0JKykBioEa0dPEUYbv70OFmoOEhQiZlJ
+         mj0ndsCwxns5pEeEhZpVmQo3+27AbZtprW2fOeBccWJo9Mc/cg8QCMLZEt08fYmHuMPV
+         gZAGthMwanPBiGvrL/MpiujPDuE++A3eBQv+ZKjztkSD1fPAwvvqRv2P4TyZasdnvMYs
+         ryTsHVTH7ITIR1dLWrClpMj6XiR6/d4llE7WKdzVOBzhOW54GBdtRbziHc7XYNnhemhT
+         Xd9msaiRzFLDo8zyBkDUsNrsQra0q5A/6YNqPckjAKkoYhIeTaFCo3ErI0K7TjduQYLF
+         If0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=u61oHPG+P/NDjvpT99NLYkpsCo1l+cmd6+qon5u3ogI=;
-        b=7ex4gLxs5pT1IsNux0kFZV2Es9zWl9u7ZhQnCBq57bjIrivKiOUqm971GWorpiBeSJ
-         JRg9o7GVGL9rqKwgCpn+kti0DdPMXGGZQgmK9LTNtAFsxDr9DMtgOAk/ss0xYTwWkLmg
-         kij0Ziq7TFVUftlhukvgn92Jrz4OPhDu4uvzSXQygKik+jWcQHF7oM6A3wQ9aEjjnGmK
-         Lm923KMVIUyqnFPgd0uLWqPZ74POyamFcrLLVGliGNOaB7mGHF3Xj3btM6yHtLXY6Noo
-         G8i6YNWL/HBfxYLfSXAw94Cn6B5SiUKf3D1FYHmexMO1B0mcrxBMwtGFZoHblQALYoV+
-         FiKQ==
-X-Gm-Message-State: AOAM5329VdLh+Nk8j9Ps+5wL5c/yGp1hJjWlTJXZctCWvkQ+u8/8BcIS
-	U7r8zja+Bd/fUU9mifN8XTb+U9HVkGp7mQ==
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=gL64ojdJY4gaz+MDTIVgylJaw2UWhUbOppX6u4mFB00=;
+        b=MLb2hSy8feD9WyHqXmoKpqLlfuWquP3DO1phOSH7PZRJwqn1fJadlKYUPhxns9vinG
+         DabV2tPwC5lds5NviYgWajLVCGolIc8VNDQm4wDir7L96a8dCGyMN76NcNndbbfIiI3V
+         dUuodMJJXfNWukGDbrkavswAaazTR/6hzCKhQLnqfL/3dOCCPyoZ9E3xkT/UidQr+oBK
+         q5etxPIAPUWEf2+d/hq7ybCztU/+7QJSza0pGq4LP+qdE4497ma1QLnxHag8QeuH3Cel
+         d8yI2SrC2ot1n+ICxdvKDeX09T293upGvXwTNBdwBOLeMVYkI0lgnP3HpDpJThF35a8l
+         hbDg==
+X-Gm-Message-State: AOAM53179li9LN9CQ8/YL33RVEiP5RU650YiPuS7MsfIFtnMFc9K3aeM
+	Tbjoff1gE2vSpfahBKdOvgJq3PGHVWYkJviRxis=
 X-Google-Smtp-Source: 
- ABdhPJyLQm81/7QUWI934MU8+zQ7sk23GGq/0DWAM6POxT0ygyLSr3/GL1iflaX2/URxpf0HfRg/DA==
-X-Received: by 2002:a63:471f:0:b0:373:9b10:886e with SMTP id
- u31-20020a63471f000000b003739b10886emr24880664pga.307.1646290797231;
-        Wed, 02 Mar 2022 22:59:57 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ff3d])
-        by smtp.gmail.com with ESMTPSA id
- nl12-20020a17090b384c00b001bc1bb5449bsm1229859pjb.2.2022.03.02.22.59.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Mar 2022 22:59:56 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH] python3-slip-dbus: Fix build with wheel
- packaging
-Date: Wed,  2 Mar 2022 22:59:54 -0800
-Message-Id: <20220303065954.909740-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.35.1
+ ABdhPJxrERD9Ttyw9uIRSJuOg3e5zWuoIAgPMW1whOrkcleEKnzKXqnc050Hbp0q5RFun+w4qN/7pIpzk+gLDbqh4u4=
+X-Received: by 2002:a05:6214:1c0d:b0:432:6487:9c53 with SMTP id
+ u13-20020a0562141c0d00b0043264879c53mr23058507qvc.36.1646291330392; Wed, 02
+ Mar 2022 23:08:50 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: 
+ <CAMKF1sppjOqUoU2zswWD1h9E8gSntfMiQUak=wQrWrSJ71Qx3w@mail.gmail.com>
+ <CAMKF1spv_=Lm=4=oBLA8v=Dx_=wzcGt1rZ89xxAZN-rPcnKgag@mail.gmail.com>
+ <CAMKF1sq1-WTR_ndLV_oGJ+2HqWpMzt6ZePGqLJBXSSVcD25Sdw@mail.gmail.com>
+ <CAMKF1sp4VCcuiJxOF1zDC0jB2860EGa6y+RKB0xWPeLBH_AGCw@mail.gmail.com>
+ <CAMKF1spnXiT9PyV1HRVEuZAXFgWaX3m3tFrKHmT2Fhvgnb2BvQ@mail.gmail.com>
+ <CANx9H-CtXBXECQUK98wyfruz7n2+rRC_X0CgFsPDhxDKCw1gdw@mail.gmail.com>
+In-Reply-To: 
+ <CANx9H-CtXBXECQUK98wyfruz7n2+rRC_X0CgFsPDhxDKCw1gdw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 2 Mar 2022 23:08:24 -0800
+Message-ID: 
+ <CAMKF1sqzPuN6dZch0LPhG-WGYSBX+z4nk9HjQ1KR-9BiKcQGCA@mail.gmail.com>
+Subject: Re: [oe] PEP-517 packaging fixes needed in meta-openembedded
+To: Tim Orling <ticotimo@gmail.com>
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Mar 2022 06:59:59 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Mar 2022 07:08:52 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95729
+ https://lists.openembedded.org/g/openembedded-devel/message/95730
 
-Migrate to use setuptools instead of distutils
-merge slip.dbus into slip module since we use
-slip.dbus, it works fine for OE
+On Wed, Mar 2, 2022 at 9:13 PM Tim Orling <ticotimo@gmail.com> wrote:
+>
+>
+>
+> On Wed, Mar 2, 2022 at 6:45 PM Khem Raj <raj.khem@gmail.com> wrote:
+>>
+>> Here is latest failures we are down to 3
+>>
+>> https://errors.yoctoproject.org/Errors/Build/142145/
+>
+>
+> I have a partial fix for python3-slip-dbus, but it doesn=E2=80=99t solve =
+the problem.
+> https://git.openembedded.org/meta-openembedded-contrib/commit/?h=3Dtimo/p=
+yprojecttoml&id=3D79b14b76276ac9a9378ed37bb39959de8bf4c751
+>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...-Use-setuptools-instead-of-distutils.patch | 38 ++++++++++
- ...9c0b534c1b7958fa0a3c7aedf30bca910431.patch | 76 +++++++++++++++++++
- .../python/python3-slip-dbus_0.6.5.bb         | 11 ++-
- 3 files changed, 121 insertions(+), 4 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-slip-dbus/0001-setup.py-Use-setuptools-instead-of-distutils.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-slip-dbus/9b939c0b534c1b7958fa0a3c7aedf30bca910431.patch
+I have addressed it. Right now we are effectively left with
 
-diff --git a/meta-python/recipes-devtools/python/python3-slip-dbus/0001-setup.py-Use-setuptools-instead-of-distutils.patch b/meta-python/recipes-devtools/python/python3-slip-dbus/0001-setup.py-Use-setuptools-instead-of-distutils.patch
-new file mode 100644
-index 0000000000..1208769b2f
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-slip-dbus/0001-setup.py-Use-setuptools-instead-of-distutils.patch
-@@ -0,0 +1,38 @@
-+From 4309ce76351b1685d08b3ba55d4f62b3e53ef76b Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 1 Mar 2022 19:06:35 -0800
-+Subject: [PATCH] setup.py: Use setuptools instead of distutils
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ setup.py.in | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+--- a/setup.py.in
-++++ b/setup.py.in
-+@@ -2,20 +2,17 @@
-+ # -*- coding: utf-8 -*-
-+ 
-+ import sys
-+-from distutils.core import setup
-++from setuptools import setup, find_packages
-+ 
-+ setup(name="slip", version="@VERSION@",
-+         py_modules=["slip.__init__", "slip.util.__init__",
-+             "slip.util.hookable", "slip.util.files",
-+-            "slip._wrappers.__init__", "slip._wrappers._glib"],
-+-        requires=["selinux"])
-+-
-+-setup(name="slip.dbus", version="@VERSION@",
-+-        py_modules=["slip.dbus.__init__", "slip.dbus.bus",
-++            "slip._wrappers.__init__", "slip._wrappers._glib",
-++            "slip.dbus.__init__", "slip.dbus.bus",
-+             "slip.dbus.constants", "slip.dbus.introspection",
-+             "slip.dbus.mainloop", "slip.dbus.polkit", "slip.dbus.proxies",
-+             "slip.dbus.service"],
-+-        requires=["dbus", "decorator", "StringIO", "xml.etree.ElementTree"])
-++      requires=["dbus", "decorator", "selinux", "StringIO", "xml.etree.ElementTree"])
-+ 
-+ if sys.version_info.major == 2:
-+     setup(name="slip.gtk", version="@VERSION@",
-diff --git a/meta-python/recipes-devtools/python/python3-slip-dbus/9b939c0b534c1b7958fa0a3c7aedf30bca910431.patch b/meta-python/recipes-devtools/python/python3-slip-dbus/9b939c0b534c1b7958fa0a3c7aedf30bca910431.patch
-new file mode 100644
-index 0000000000..b0e9d2215f
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-slip-dbus/9b939c0b534c1b7958fa0a3c7aedf30bca910431.patch
-@@ -0,0 +1,76 @@
-+From 9b939c0b534c1b7958fa0a3c7aedf30bca910431 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Miro=20Hron=C4=8Dok?= <miro@hroncok.cz>
-+Date: Mon, 7 Jun 2021 23:23:47 +0200
-+Subject: [PATCH] Python 3.10+ fix: Use collections.abc.Callable instead of
-+ collections.Callable
-+
-+The deprecated aliases to Collections Abstract Base Classes were removed from
-+the collections module in Python 3.10.
-+https://docs.python.org/3.10/whatsnew/changelog.html#python-3-10-0-alpha-5
-+https://bugs.python.org/issue37324
-+---
-+ slip/dbus/polkit.py   | 6 +++---
-+ slip/util/hookable.py | 6 +++---
-+ 2 files changed, 6 insertions(+), 6 deletions(-)
-+
-+diff --git a/slip/dbus/polkit.py b/slip/dbus/polkit.py
-+index 128e8ce..320676d 100644
-+--- a/slip/dbus/polkit.py
-++++ b/slip/dbus/polkit.py
-+@@ -26,7 +26,7 @@
-+ 
-+ from __future__ import absolute_import
-+ 
-+-import collections
-++import collections.abc
-+ import dbus
-+ from decorator import decorator
-+ from functools import reduce
-+@@ -103,14 +103,14 @@ class MyProxy(object):
-+             def some_method(self, ...):
-+                 ..."""
-+ 
-+-    assert(func is None or isinstance(func, collections.Callable))
-++    assert(func is None or isinstance(func, collections.abc.Callable))
-+ 
-+     assert(
-+         authfail_result in (None, AUTHFAIL_DONTCATCH) or
-+         authfail_exception is None)
-+     assert(
-+         authfail_callback is None or
-+-        isinstance(authfail_callback, collections.Callable))
-++        isinstance(authfail_callback, collections.abc.Callable))
-+     assert(
-+         authfail_exception is None or
-+         issubclass(authfail_exception, Exception))
-+diff --git a/slip/util/hookable.py b/slip/util/hookable.py
-+index 89c7392..0cd9967 100644
-+--- a/slip/util/hookable.py
-++++ b/slip/util/hookable.py
-+@@ -23,7 +23,7 @@
-+ """This module contains variants of certain base types which call registered
-+ hooks on changes."""
-+ 
-+-import collections
-++import collections.abc
-+ from six import with_metaclass
-+ 
-+ __all__ = ["Hookable", "HookableSet"]
-+@@ -67,7 +67,7 @@ class _HookEntry(object):
-+ 
-+     def __init__(self, hook, args, kwargs, hookable=None):
-+ 
-+-        assert(isinstance(hook, collections.Callable))
-++        assert(isinstance(hook, collections.abc.Callable))
-+         assert(isinstance(hookable, Hookable))
-+ 
-+         for n, x in enumerate(args):
-+@@ -174,7 +174,7 @@ def add_hook_hookable(self, hook, *args, **kwargs):
-+         self.__add_hook(hook, self, *args, **kwargs)
-+ 
-+     def __add_hook(self, hook, _hookable, *args, **kwargs):
-+-        assert isinstance(hook, collections.Callable)
-++        assert isinstance(hook, collections.abc.Callable)
-+         assert isinstance(_hookable, Hookable)
-+         hookentry = _HookEntry(hook, args, kwargs, hookable=_hookable)
-+         self.__hooks__.add(hookentry)
-diff --git a/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb b/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb
-index 00d83ab61b..57a9185289 100644
---- a/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb
-@@ -14,12 +14,14 @@ LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
- SRCNAME = "python-slip"
- 
--SRC_URI = "https://github.com/nphilipp/${SRCNAME}/releases/download/${SRCNAME}-${PV}/${SRCNAME}-${PV}.tar.bz2"
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--SRC_URI[md5sum] = "28ae5f93853466c44ec96706ba2a1eb4"
-+SRC_URI = "https://github.com/nphilipp/${SRCNAME}/releases/download/${SRCNAME}-${PV}/${SRCNAME}-${PV}.tar.bz2 \
-+           file://9b939c0b534c1b7958fa0a3c7aedf30bca910431.patch \
-+           file://0001-setup.py-Use-setuptools-instead-of-distutils.patch \
-+          "
- SRC_URI[sha256sum] = "c726c086f0dd93a0ac7a0176f383a12af91b6657b78a301e3f5b25d9f8d4d10b"
- 
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
- do_compile:prepend() {
-     sed -e 's/@VERSION@/${PV}/g' ${S}/setup.py.in > ${S}/setup.py
- }
-@@ -32,3 +34,4 @@ RDEPENDS:${PN} += "\
- CLEANBROKEN = "1"
- 
- inherit setuptools3
-+PIP_INSTALL_PACKAGE = "slip"
--- 
-2.35.1
+meta-openembedded/meta-oe/recipes-devtools/unattended-upgrades/unattended-u=
+pgrades_2.6.bb
 
+It fails in weird ways
+
+| Installing collected packages: unattended-upgrades
+| ERROR: For req: unattended-upgrades=3D=3D0.1. Unknown scheme key used in
+/mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/unattended-upgrades/2.=
+6-r0/git/dist/unattended_upgrades-0.1-py3-
+none-any.whl: etc (for file
+'unattended_upgrades-0.1.data/etc/kernel/postinst.d/unattended-upgrades').
+.data directory contents should be in subdirectories named with a
+valid scheme key (d
+ata, headers, platlib, purelib, scripts)
+| Exception information:
+| Traceback (most recent call last):
+|   File "/mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/unattended-u=
+pgrades/2.6-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/pip/_=
+internal/operations/install/wheel.py",
+line 521, in make_data_scheme_file
+|     scheme_path =3D scheme_paths[scheme_key]
+| KeyError: 'etc'
+|
+| During handling of the above exception, another exception occurred:
+|
+
+>>
+>> On Wed, Mar 2, 2022 at 10:40 AM Khem Raj <raj.khem@gmail.com> wrote:
+>> >
+>> > Here is latest list which is significantly less so thanks for
+>> > contributions thus far.
+>> >
+>> >   meta-openembedded/meta-python/recipes-extended/python-blivet/python3=
+-blivetgui_2.2.1.bb
+>> >   meta-openembedded/meta-python/recipes-devtools/python/python3-aws-io=
+t-device-sdk-python_1.4.9.bb
+>> >   meta-openembedded/meta-python/recipes-extended/python-blivet/python3=
+-blivet_3.4.3.bb
+>> >   meta-openembedded/meta-python/recipes-devtools/python/python3-slip-d=
+bus_0.6.5.bb
+>> >   meta-openembedded/meta-python/recipes-devtools/python/python3-keras-=
+applications_1.0.8.bb
+>> >   meta-openembedded/meta-python/recipes-devtools/python/python3-pymetn=
+o_0.9.0.bb
+>> >   meta-openembedded/meta-python/recipes-extended/python-cson/python3-c=
+son_git.bb
+>> >   meta-openembedded/meta-python/recipes-devtools/python/python3-dbussy=
+_1.3.bb
+>> >   meta-openembedded/meta-python/recipes-connectivity/python-txws/pytho=
+n3-txws_0.9.1.bb
+>> >   meta-openembedded/meta-oe/recipes-devtools/unattended-upgrades/unatt=
+ended-upgrades_2.6.bb
+>> >
+>> >
+>> > On Tue, Mar 1, 2022 at 8:18 AM Khem Raj <raj.khem@gmail.com> wrote:
+>> > >
+>> > > We are making some progress. This is the latest ( 24 build failures =
+)
+>> > > as of last night.
+>> > >
+>> > > https://errors.yoctoproject.org/Errors/Build/142052/
+>> > >
+>> > > On Mon, Feb 28, 2022 at 3:21 PM Khem Raj <raj.khem@gmail.com> wrote:
+>> > > >
+>> > > > Thanks for sending fixing everyone. Lets keep going. Here is lates=
+t
+>> > > > list of failing recipes on master-next now
+>> > > >
+>> > > > Summary: 32 tasks failed:
+>> > > >   meta-openembedded/meta-python/recipes-extended/python-blivet/pyt=
+hon3-blivet_3.4.0.bb:do_install
+>> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-aw=
+s-iot-device-sdk-python_1.4.9.bb:do_compile
+>> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-cr=
+cmod_1.7.bb:do_compile
+>> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-lr=
+parsing_1.0.17.bb:do_compile
+>> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-sl=
+ip-dbus_0.6.5.bb:do_compile
+>> > > >   meta-openembedded/meta-python/recipes-extended/python-blivet/pyt=
+hon3-blivetgui_2.2.1.bb:do_compile
+>> > > >   meta-raspberrypi/recipes-devtools/python/python3-rtimu_git.bb:do=
+_compile
+>> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-fl=
+ask-versioned_0.9.4-20101221.bb:do_install
+>> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-nt=
+plib_0.4.0.bb:do_install
+>> > > >   meta-raspberrypi/recipes-devtools/python/python3-adafruit-circui=
+tpython-register_1.9.4.bb:do_install
+>> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-be=
+have_1.2.6.bb:do_install
+>> > > >   meta-atmel/recipes-utils/mpio/mpio_1.3.bb:do_install
+>> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-py=
+stache_0.5.4.bb:do_install
+>> > > >   meta-raspberrypi/recipes-devtools/python/python3-adafruit-pureio=
+_1.1.8.bb:do_install
+>> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-py=
+scaffold_4.1.4.bb:do_install
+>> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-pr=
+ctl_1.8.1.bb:do_install
+>> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-py=
+metno_0.9.0.bb:do_install
+>> > > >   meta-openembedded/meta-python/recipes-extended/python-cson/pytho=
+n3-cson_git.bb:do_install
+>> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-py=
+dbus-manager_git.bb:do_install
+>> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-py=
+misp_2.4.152.bb:do_install
+>> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-db=
+ussy_1.3.bb:do_install
+>> > > >   meta-openembedded/meta-python/recipes-devtools/gyp/gyp_git.bb:do=
+_install
+>> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-ke=
+ras-applications_1.0.8.bb:do_install
+>> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-gc=
+ovr_5.0.bb:do_install
+>> > > >   meta-raspberrypi/recipes-devtools/python/python3-adafruit-platfo=
+rmdetect_3.1.1.bb:do_install
+>> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-co=
+nfigshell-fb_1.1.29.bb:do_install
+>> > > >   meta-openembedded/meta-python/recipes-devtools/python/python3-xm=
+odem_0.4.6.bb:do_package
+>> > > >   meta-openembedded/meta-oe/recipes-devtools/unattended-upgrades/u=
+nattended-upgrades_2.6.bb:do_install
+>> > > >   meta-openembedded/meta-python/recipes-connectivity/python-txws/p=
+ython3-txws_0.9.1.bb:do_install
+>> > > >   meta-openembedded/meta-xfce/recipes-apps/catfish/catfish_4.16.3.=
+bb:do_compile
+>> > > >   meta-openembedded/meta-xfce/recipes-apps/menulibre/menulibre_2.2=
+.3.bb:do_install
+>> > > >   meta-openembedded/meta-gnome/recipes-support/onboard/onboard_1.4=
+.1.bb:do_compile
+>> > > >
+>> > > > On Sat, Feb 26, 2022 at 11:49 AM Khem Raj <raj.khem@gmail.com> wro=
+te:
+>> > > > >
+>> > > > > Hello All,
+>> > > > >
+>> > > > > We have PEP-517 packaging related infra changes merged into oe-c=
+ore,
+>> > > > > which obviously
+>> > > > > mean there are some failures on various python packages.
+>> > > > >
+>> > > > > I am posting the latest results (qemux86-64/glibc)
+>> > > > >
+>> > > > > https://errors.yoctoproject.org/Errors/Build/141804/
+>> > > > >
+>> > > > > We have 57 recipes left, Tim has worked diligently on fixing the
+>> > > > > PEP-517 issues but we would
+>> > > > > need more hands. If you see any of
+>> > > > > these recipes that you can help fixing, please send patches
+>> > > > >
+>> > > > > Since upcoming release is an LTS release, I would like to have t=
+hese
+>> > > > > issues fixed for this
+>> > > > > release.
+>> > > > >
+>> > > > > Thank you for your help
+>> > > > >
+>> > > > > -Khem
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#95721): https://lists.openembedded.org/g/openembedde=
+d-devel/message/95721
+>> Mute This Topic: https://lists.openembedded.org/mt/89416561/924729
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [=
+ticotimo@gmail.com]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
 
