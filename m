@@ -2,48 +2,48 @@ Return-Path: <jiaqing.zhao@linux.intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4441C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8682C433F5
 	for <webhook@archiver.kernel.org>; Thu,  3 Mar 2022 09:59:22 +0000 (UTC)
 Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
- by mx.groups.io with SMTP id smtpd.web10.9120.1646301561489036194
+ by mx.groups.io with SMTP id smtpd.web09.9241.1646301562087852502
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 03 Mar 2022 01:59:22 -0800
 Authentication-Results: mx.groups.io;
  dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel
- header.b=XxUj0mhW;
+ header.b=ksKQL7UN;
  spf=none, err=permanent DNS error (domain: linux.intel.com,
  ip: 134.134.136.126, mailfrom: jiaqing.zhao@linux.intel.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1646301561; x=1677837561;
+  t=1646301562; x=1677837562;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=D0eoFXeJZ+FCsR0UwVvnTZ7PlMFD/JFhy7bwJlKwj0c=;
-  b=XxUj0mhWRCjSNO/+fvuowpwCWepzcHA1jyNQxb7fV2rVvPEg1gmLlROz
-   Ce0Ul0oDcLNP+gtGeInfRIVbhskAa6b0v104pPrshoiA59r+7BjHXwyaS
-   0cipeusYIa09agshMDMEvBZn20c6zJoZjvXs4hW7XY40CIkUiJUYrz0uT
-   RVPSFEignz64DfqurOX2W/2bnkWdXx+1FMvmVMYG1HrnMv1aRN1B73pJY
-   WABqFSI6lYhtYWmPjhfAVBFSQ/orrSyUtaddTbilEGsclhfSfZ1dDVUXY
-   VR9ekRdRiJIlYTThSCDujEmz4JHIGRil0yo9OMSRshA17jf7otXZBkDHO
-   g==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10274"; a="237143517"
+  bh=FW3D6tpaOQv50EYLN1Mo9BJcC0LNNrgCzksklGRtKU4=;
+  b=ksKQL7UNFDz7rVXvGwbyYfwKmN0FfbI85Y6pYXcK5nBKrQIYvGhkloQx
+   5Sm0ytyEioxNJ3fEF2S1emTS2+oypbdi1t9OdVL4IgQuKJWpir8eUk7N7
+   K3gmKi4suJkNLUQOVPtmj7kp3VBe22GYKzevZaBR52sQa/TR1/XfMAB/V
+   NRHASj3mJdU6Y/w65rHzYpG6532ov4trgPMK+0Hu3aZtYkKKSEVMuQjSW
+   qOROkvJAKAHlIEQMN18Kws2CHi1kBqq14GocsrqvPyL2CMugBkmnAe/3g
+   qJHtLEzvyZq/AtzrkwHaeZ7gtzBQHeLavlPfVp0iZiqWWPIyNRO6it40C
+   A==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10274"; a="237143522"
 X-IronPort-AV: E=Sophos;i="5.90,151,1643702400";
-   d="scan'208";a="237143517"
+   d="scan'208";a="237143522"
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
   by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Mar 2022 01:59:16 -0800
+ 03 Mar 2022 01:59:17 -0800
 X-IronPort-AV: E=Sophos;i="5.90,151,1643702400";
-   d="scan'208";a="686450859"
+   d="scan'208";a="686450863"
 Received: from unknown (HELO jiaqingz-bmcdev-container.sh.intel.com)
  ([10.239.138.232])
   by fmsmga001-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Mar 2022 01:59:15 -0800
+ 03 Mar 2022 01:59:16 -0800
 From: Jiaqing Zhao <jiaqing.zhao@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jiaqing Zhao <jiaqing.zhao@linux.intel.com>
-Subject: [meta-networking][PATCH 1/2] libesmtp: bump 1.0.6 -> 1.1.0
-Date: Thu,  3 Mar 2022 09:58:59 +0000
-Message-Id: <20220303095900.2533635-2-jiaqing.zhao@linux.intel.com>
+Subject: [meta-networking][PATCH 2/2] esmtp: fix libesmtp dependency check
+Date: Thu,  3 Mar 2022 09:59:00 +0000
+Message-Id: <20220303095900.2533635-3-jiaqing.zhao@linux.intel.com>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20220303095900.2533635-1-jiaqing.zhao@linux.intel.com>
 References: <20220303095900.2533635-1-jiaqing.zhao@linux.intel.com>
@@ -54,183 +54,89 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 03 Mar 2022 09:59:22 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95735
+ https://lists.openembedded.org/g/openembedded-devel/message/95736
 
-This also fixes CVE-2019-19977.
+Since libesmtp-1.1.0, libesmtp-config is removed, use pkg-config to
+check for existence instead.
 
 Signed-off-by: Jiaqing Zhao <jiaqing.zhao@linux.intel.com>
 ---
- .../libesmtp/libesmtp/include-topdir.patch    | 48 -------------------
- .../libesmtp/libesmtp/snprintf.patch          | 19 --------
- .../libesmtp/libesmtp_1.0.6.bb                | 38 ---------------
- .../libesmtp/libesmtp_1.1.0.bb                | 32 +++++++++++++
- 4 files changed, 32 insertions(+), 105 deletions(-)
- delete mode 100644 meta-networking/recipes-support/libesmtp/libesmtp/include-topdir.patch
- delete mode 100644 meta-networking/recipes-support/libesmtp/libesmtp/snprintf.patch
- delete mode 100644 meta-networking/recipes-support/libesmtp/libesmtp_1.0.6.bb
- create mode 100644 meta-networking/recipes-support/libesmtp/libesmtp_1.1.0.bb
+ .../0001-Fix-libESMTP-dependency-check.patch  | 44 +++++++++++++++++++
+ .../recipes-support/esmtp/esmtp_1.2.bb        |  6 ++-
+ 2 files changed, 48 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-support/esmtp/esmtp/0001-Fix-libESMTP-dependency-check.patch
 
-diff --git a/meta-networking/recipes-support/libesmtp/libesmtp/include-topdir.patch b/meta-networking/recipes-support/libesmtp/libesmtp/include-topdir.patch
-deleted file mode 100644
-index 90c4ce75e..000000000
---- a/meta-networking/recipes-support/libesmtp/libesmtp/include-topdir.patch
-+++ /dev/null
-@@ -1,48 +0,0 @@
--diff -Nurp libesmtp-1.0.6.org/crammd5/Makefile.am libesmtp-1.0.6/crammd5/Makefile.am
----- libesmtp-1.0.6.org/crammd5/Makefile.am	2010-08-08 23:45:57.000000000 +0800
--+++ libesmtp-1.0.6/crammd5/Makefile.am	2014-11-17 11:17:21.663624295 +0800
--@@ -2,7 +2,7 @@
-- 
-- libdir = @plugindir@
-- 
---INCLUDES = -I@srcdir@
--+INCLUDES = -I@srcdir@ -I@srcdir@/../
-- AM_CFLAGS = @CFLAGS@ @EXTRA_CFLAGS@
-- 
-- lib_LTLIBRARIES = sasl-cram-md5.la
--diff -Nurp libesmtp-1.0.6.org/login/Makefile.am libesmtp-1.0.6/login/Makefile.am
----- libesmtp-1.0.6.org/login/Makefile.am	2010-08-08 23:45:56.000000000 +0800
--+++ libesmtp-1.0.6/login/Makefile.am	2014-11-17 11:17:54.339623018 +0800
--@@ -2,7 +2,7 @@
-- 
-- libdir = @plugindir@
-- 
---INCLUDES = -I@srcdir@
--+INCLUDES = -I@srcdir@ -I@srcdir@/../
-- 
-- lib_LTLIBRARIES = sasl-login.la
-- AM_CFLAGS = @CFLAGS@ @EXTRA_CFLAGS@
--diff -Nurp libesmtp-1.0.6.org/ntlm/Makefile.am libesmtp-1.0.6/ntlm/Makefile.am
----- libesmtp-1.0.6.org/ntlm/Makefile.am	2010-08-08 23:45:56.000000000 +0800
--+++ libesmtp-1.0.6/ntlm/Makefile.am	2014-11-17 11:18:10.551622385 +0800
--@@ -2,7 +2,7 @@
-- 
-- libdir = @plugindir@
-- 
---INCLUDES = -I@srcdir@
--+INCLUDES = -I@srcdir@ -I@srcdir@/../
-- AM_CFLAGS = @CFLAGS@ @EXTRA_CFLAGS@
-- 
-- lib_LTLIBRARIES = sasl-ntlm.la
--diff -Nurp libesmtp-1.0.6.org/plain/Makefile.am libesmtp-1.0.6/plain/Makefile.am
----- libesmtp-1.0.6.org/plain/Makefile.am	2010-08-08 23:45:54.000000000 +0800
--+++ libesmtp-1.0.6/plain/Makefile.am	2014-11-17 11:18:33.355621494 +0800
--@@ -2,7 +2,7 @@
-- 
-- libdir = @plugindir@
-- 
---INCLUDES = -I@srcdir@
--+INCLUDES = -I@srcdir@ -I@srcdir@/../
-- AM_CFLAGS = @CFLAGS@ @EXTRA_CFLAGS@
-- 
-- lib_LTLIBRARIES = sasl-plain.la
-diff --git a/meta-networking/recipes-support/libesmtp/libesmtp/snprintf.patch b/meta-networking/recipes-support/libesmtp/libesmtp/snprintf.patch
-deleted file mode 100644
-index d0d203ead..000000000
---- a/meta-networking/recipes-support/libesmtp/libesmtp/snprintf.patch
-+++ /dev/null
-@@ -1,19 +0,0 @@
--Use HAVE_WORKING_SNPRINTF to check for snprintf()
--
--Upstream-Status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
--Index: libesmtp-1.0.6/missing.h
--===================================================================
----- libesmtp-1.0.6.orig/missing.h
--+++ libesmtp-1.0.6/missing.h
--@@ -43,7 +43,7 @@ int strncasecmp (const char *a, const ch
-- void *memrchr (const void *a, int c, size_t len);
-- #endif
-- 
---#ifndef HAVE_SNPRINTF
--+#ifndef HAVE_WORKING_SNPRINTF
-- #include <sys/types.h>
-- int snprintf(char *s, size_t n, const char *format, ...);
-- #endif
-diff --git a/meta-networking/recipes-support/libesmtp/libesmtp_1.0.6.bb b/meta-networking/recipes-support/libesmtp/libesmtp_1.0.6.bb
-deleted file mode 100644
-index ed2a5d904..000000000
---- a/meta-networking/recipes-support/libesmtp/libesmtp_1.0.6.bb
-+++ /dev/null
-@@ -1,38 +0,0 @@
--SUMMARY = "SMTP client library"
--DESCRIPTION = "LibESMTP is a library to manage posting \
--(or submission of) electronic mail using SMTP to a \
--preconfigured Mail Transport Agent (MTA) such as Exim or PostFix."
--HOMEPAGE = "http://www.stafford.uklinux.net/libesmtp/"
--LICENSE = "LGPLv2+"
--SECTION = "libs"
--
--DEPENDS = "openssl"
--
--SRC_URI = "http://www.stafford.uklinux.net/libesmtp/libesmtp-${PV}.tar.bz2 \
--           file://include-topdir.patch \
--           file://snprintf.patch \
--          "
--SRC_URI[md5sum] = "bf3915e627fd8f35524a8fdfeed979c8"
--SRC_URI[sha256sum] = "d0a61a5c52d99fa7ce7d00ed0a07e341dbda67101dbed1ab0cdae3f37db4eb0b"
--
--LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
--                    file://COPYING.LIB;md5=e3eda01d9815f8d24aae2dbd89b68b06"
--
--inherit autotools binconfig
--
--EXTRA_OECONF = " \
--    --with-auth-plugin-dir=${libdir}/esmtp-plugins \
--    --enable-pthreads                              \
--    --enable-debug                                 \
--    --enable-etrn                                  \
--    --disable-isoc                                 \
--    --disable-more-warnings                        \
--    --disable-static                               \
--"
--
--FILES:${PN} = "${libdir}/lib*${SOLIBS} \
--               ${libdir}/esmtp-plugins/*${SOLIBSDEV}"
--
--FILES:${PN}-dev  += "${libdir}/esmtp-plugins/*.la"
--FILES:${PN}-static += "${libdir}/esmtp-plugins/*.a"
--FILES:${PN}-dbg += "${libdir}/esmtp-plugins/.debug/"
-diff --git a/meta-networking/recipes-support/libesmtp/libesmtp_1.1.0.bb b/meta-networking/recipes-support/libesmtp/libesmtp_1.1.0.bb
+diff --git a/meta-networking/recipes-support/esmtp/esmtp/0001-Fix-libESMTP-dependency-check.patch b/meta-networking/recipes-support/esmtp/esmtp/0001-Fix-libESMTP-dependency-check.patch
 new file mode 100644
-index 000000000..7d65133c5
+index 000000000..92ac4b12b
 --- /dev/null
-+++ b/meta-networking/recipes-support/libesmtp/libesmtp_1.1.0.bb
-@@ -0,0 +1,32 @@
-+SUMMARY = "SMTP client library"
-+DESCRIPTION = "LibESMTP is a library to manage posting \
-+(or submission of) electronic mail using SMTP to a \
-+preconfigured Mail Transport Agent (MTA) such as Exim or PostFix."
-+HOMEPAGE = "https://libesmtp.github.io/"
-+LICENSE = "LGPLv2+"
-+SECTION = "libs"
++++ b/meta-networking/recipes-support/esmtp/esmtp/0001-Fix-libESMTP-dependency-check.patch
+@@ -0,0 +1,44 @@
++From 63dbf8a9f04b34474021e8f0bf239b7446f10a7f Mon Sep 17 00:00:00 2001
++From: Jiaqing Zhao <jiaqing.zhao@linux.intel.com>
++Date: Thu, 3 Mar 2022 09:01:23 +0000
++Subject: [PATCH] Fix libESMTP dependency check
 +
-+DEPENDS = "openssl"
++Since libesmtp-1.1.0, libesmtp-config is removed, use pkg-config to
++check for existence instead.
 +
-+SRC_URI = "git://github.com/libesmtp/libESMTP.git;branch=master;protocol=https"
-+SRCREV = "1d0af244310a66943ab400be56b15a9087f181eb"
++Signed-off-by: Jiaqing Zhao <jiaqing.zhao@linux.intel.com>
++---
++ configure.ac | 8 +++++---
++ 1 file changed, 5 insertions(+), 3 deletions(-)
 +
-+S = "${WORKDIR}/git"
++diff --git a/configure.ac b/configure.ac
++index 64b19b4..83346a8 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -11,6 +11,8 @@ AC_PROG_CC
++ 
++ AC_HEADER_STDC
++ 
+++PKG_PROG_PKG_CONFIG
+++
++ dnl getopt needs this
++ AC_C_CONST
++ 
++@@ -30,11 +32,11 @@ then
++ 	AC_CHECK_HEADER(libesmtp.h, ,[AC_MSG_ERROR([libesmtp.h not found in $with_libesmtp])])
++ fi    
++ AC_MSG_CHECKING(for libESMTP)
++-if libesmtp-config --version > /dev/null 2>&1
+++if $PKG_CONFIG --exists 'libesmtp-1.0'
++ then
++ 	AC_MSG_RESULT(yes)
++-	CFLAGS="$CFLAGS `libesmtp-config --cflags`"
++-	LIBS="$LIBS `libesmtp-config --libs`"
+++	CFLAGS="$CFLAGS `$PKG_CONFIG --cflags 'libesmtp-1.0'`"
+++	LIBS="$LIBS `$PKG_CONFIG --libs 'libesmtp-1.0'`"
++ else
++ 	AC_MSG_RESULT(no)
++ 	AC_MSG_ERROR(libESMTP library not found)
++-- 
++2.32.0
 +
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=1803fa9c2c3ce8cb06b4861d75310742 \
-+                    file://COPYING.GPL;md5=393a5ca445f6965873eca0259a17f833"
-+
-+inherit meson pkgconfig
-+
-+EXTRA_OEMESON = " \
-+    -Dpthreads=enabled \
-+    -Dtls=enabled \
-+    -Dxdg=false \
-+    -Dlwres=disabled \
-+    -Dbdat=true \
-+    -Detrn=true \
-+    -Dxusr=true \
-+"
-+
-+FILES:${PN} = "${libdir}/lib*${SOLIBS} \
-+               ${libdir}/esmtp-plugins-6.2.0/*${SOLIBSDEV}"
+diff --git a/meta-networking/recipes-support/esmtp/esmtp_1.2.bb b/meta-networking/recipes-support/esmtp/esmtp_1.2.bb
+index 110399a36..be4cfe3e2 100644
+--- a/meta-networking/recipes-support/esmtp/esmtp_1.2.bb
++++ b/meta-networking/recipes-support/esmtp/esmtp_1.2.bb
+@@ -11,12 +11,14 @@ DEPENDS = "libesmtp"
+ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${PV}/${BPN}-${PV}.tar.bz2"
++SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${PV}/${BPN}-${PV}.tar.bz2 \
++           file://0001-Fix-libESMTP-dependency-check.patch \
++           "
+ 
+ # Have to set this or we get -L/lib in LDFLAGS
+ EXTRA_OECONF = "--with-libesmtp=${STAGING_EXECPREFIXDIR}"
+ 
+-inherit autotools update-alternatives
++inherit autotools update-alternatives pkgconfig
+ 
+ ALTERNATIVE:${PN} = "sendmail mailq newaliases"
+ # /usr/lib/sendmial is required by LSB core test
 -- 
 2.32.0
 
