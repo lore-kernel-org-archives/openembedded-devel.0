@@ -1,118 +1,175 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jsbronder@cold-front.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 588C4C433F5
-	for <webhook@archiver.kernel.org>; Thu,  3 Mar 2022 16:40:18 +0000 (UTC)
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com
- [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web12.13053.1646325617452520135
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 11A4FC433F5
+	for <webhook@archiver.kernel.org>; Thu,  3 Mar 2022 18:53:11 +0000 (UTC)
+Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com
+ [66.111.4.27])
+ by mx.groups.io with SMTP id smtpd.web12.14900.1646333590471615708
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Mar 2022 08:40:17 -0800
+ Thu, 03 Mar 2022 10:53:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=XfzfJH0E;
- spf=pass (domain: gmail.com, ip: 209.85.210.179,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id d17so5180364pfl.0
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Mar 2022 08:40:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=4aHxm0LQFAo0oOKBZdsf8xB3F8OrvVIoJV/zRONDKOQ=;
-        b=XfzfJH0ERZLLS39KWcsevCy5jCNk9nQ2kKLzPCTO71kwmfmgmwo7G6ulKVnIde03fI
-         LXOOG1CqCLfv6DX5bPZOZh7XyO4lyn4Z9FhQiGjdac9khnVOIIydqhJgs8iYpUjYExwQ
-         tntQ8NFLvuzS1r3E1nBWTBCCAD+DEgEmvzqxCiZYhF9lIiwuQXne8do+sYOYd3Q/e1ez
-         Tng3XaKkwJxHMIRjK+AEsAsDk6OE1MonZB2ce1ISjegInNTFu1ESswD9a8X44KDXoww1
-         viAnar2y4j61z8Hm0JZw6l5GyBoPw2PyP4vxBt2N/DgIpeXPtwhcoFHxwjq5z+foBTZ3
-         hbOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=4aHxm0LQFAo0oOKBZdsf8xB3F8OrvVIoJV/zRONDKOQ=;
-        b=4kTZFuCo4+Igiok3DN4TxGQP57Rxrp5uvoB6Xn8FAsOgPrda+dwHg32jIs0rxS5v+g
-         Qh5xQh0On4AIcgTG7HVTKkJVese61oWjVmXzEBKSuaMUenVR2i0kBiVi8Ly/oqF23bpb
-         DG5+H7bGuWNkHkb7Gkisd/vnD183yBSof5URs2Gxt0qbruf+sIyrMDjHk0e70dQ5wF3P
-         SwClTDzGrvM81r4VRMDqTUfeZSKWinEX53fQRuHqVmo+PYAuQbRkSwemOBq9Tmg5mByY
-         3FVDO727N6lMs4MZgA21/hPZnYKEI2fUmCmhMaGl7wz4pVO66FNRKB0daG4iwaUU3og+
-         9b1A==
-X-Gm-Message-State: AOAM5312M8lN7ggQgvjKUak9kFAjFkmheZreabx28cjqXRevfl7EkE45
-	3VTv9FDnHr/VT/U611DmaONHDb1gIz/xUg==
-X-Google-Smtp-Source: 
- ABdhPJz0zP+QPlb3vWFNWjMxx8xQa+Q5L8oY7w0p1kedk3K/nelK+ZkjkmJ1Ur5bWvlM5L0usaOF5w==
-X-Received: by 2002:a63:af06:0:b0:378:3582:a49f with SMTP id
- w6-20020a63af06000000b003783582a49fmr26244029pge.125.1646325616251;
-        Thu, 03 Mar 2022 08:40:16 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ff3d])
-        by smtp.gmail.com with ESMTPSA id
- t9-20020a656089000000b00372c36604a7sm2535050pgu.13.2022.03.03.08.40.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Mar 2022 08:40:15 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 1/2] unattended-upgrades: Move to meta-python
-Date: Thu,  3 Mar 2022 08:40:12 -0800
-Message-Id: <20220303164013.3149208-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.35.1
+ dkim=pass header.i=@cold-front.org header.s=mesmtp header.b=ggxYEe9s;
+ spf=pass (domain: cold-front.org, ip: 66.111.4.27,
+ mailfrom: jsbronder@cold-front.org)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+	by mailout.nyi.internal (Postfix) with ESMTP id B9FCB5C0371;
+	Thu,  3 Mar 2022 13:53:09 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute2.internal (MEProxy); Thu, 03 Mar 2022 13:53:09 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
+	 h=cc:cc:content-transfer-encoding:content-type:date:date:from
+	:from:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:sender:subject:subject:to:to; s=mesmtp; bh=gIIfBuXi9Lv
+	l/FqopClY5T5MHc33tOPe7VFYrqaI2yk=; b=ggxYEe9sQ+xAM+NMPNN7jvbTtqa
+	A9xInTtbP3l3T7Ie3KpqN7hhjzvWYtwnJXoo4wtfWu6txqbuNMpzquDMZAtSMTB7
+	JAziYLwiTvTsdmFGHfGn+fvzSW2MCTTnGKMp9uJUGWt2dS4s38th3C6ZZt1o4JL3
+	RZfoQg2wIp+MaqIk=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm2; bh=gIIfBuXi9Lvl/FqopClY5T5MHc33tOPe7VFYrqaI2
+	yk=; b=ZNNh2xLQD1Y4yfAHrJXsg0VEZUkWjFicvhFeaKJtwaLIPIlnqxjjUvaHz
+	hPhjqImQmZSManJ9BtjdnwMmVoB3IQoQcKjw1NDLAN/EdO8Yf3ggiZS5414v3q3N
+	1/xSDrBB/QlTGj0lZVXQCmSY3N0Xc0R6lwtgqbXlT+r7f6TriDg5DgyH4/OSXFMb
+	/Gumm+lnZLO2VIAenCCv8g/8MGVqccOvM3kxaMyqtSCgzeHxA9C9UAlkr1wCSSTc
+	GIdmzuGDVl9AkxPvMt+q1hHrY0c1enTQ8xMH+QYZPmELYMx0vMEx6zyJAesnuFNG
+	nOEFaFJZ6nEo7e62OROX89UMgtQ8Q==
+X-ME-Sender: <xms:lQ4hYt--XdlqrgpJ24PmbXQC0onue_Evds8JCXDGn7KELi39Zkt-ZA>
+    <xme:lQ4hYhu78GU29Zi8X-TgCkuTfYoYzdgKgid4dgilB7InJcdwUBwhPTlS2AEXzFka-
+    a9vciwohiVaQY4YTQ>
+X-ME-Received: 
+ <xmr:lQ4hYrBE3o0LyPDbFjorxS2CM5aWWFHM8WCF7G4v2lOHqe-CEJptIx2iG1QBtXhHG8vFSzzNdF5_EFG0LzYPmtqy>
+X-ME-Proxy-Cause: 
+ gggruggvucftvghtrhhoucdtuddrgedvvddruddtiedguddujecutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+    enucfjughrpeffhffvuffkfhggtggugfgjsehtqhertddttddvnecuhfhrohhmpefluhhs
+    thhinhcuuehrohhnuggvrhcuoehjshgsrhhonhguvghrsegtohhlugdqfhhrohhnthdroh
+    hrgheqnecuggftrfgrthhtvghrnhepkeeuhffgleefveejfeeuleevkeevheffkeetgefh
+    gfejgedtteffteegudevheehnecuffhomhgrihhnpeihohgtthhophhrohhjvggtthdroh
+    hrghdpghhithhhuhgsrdgtohhmpdhophgvnhgvmhgsvgguuggvugdrohhrghenucevlhhu
+    shhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjshgsrhhonhguvg
+    hrsegtohhlugdqfhhrohhnthdrohhrgh
+X-ME-Proxy: <xmx:lQ4hYhfLfFA70pll8OGY2CxIVxjXaJ6LLbsP67r1YJsjsFy79wAlOQ>
+    <xmx:lQ4hYiPnEMu30jhh1fpXI7w2Rn7GWwIoM1p9hI3bvJ2OW3KsVBMnIg>
+    <xmx:lQ4hYjl4BpWIA5j17mSQFar62F5yr3mHiSry_FnOaXJKcUTQ-PmnMw>
+    <xmx:lQ4hYsVHDbz5aUdu-nrWAkPcylHdnY9X4H1KzVQfpH5tM0MEoFNW1A>
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 3 Mar 2022 13:53:09 -0500 (EST)
+Date: Thu, 3 Mar 2022 13:53:08 -0500
+From: Justin Bronder <jsbronder@cold-front.org>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: python3-crc32c: add 2.2.post0
+Message-ID: <YiEOlH9jmQ/3JEjo@ravine.members.linode.com>
+Mail-Followup-To: Justin Bronder <jsbronder@cold-front.org>,
+	Khem Raj <raj.khem@gmail.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <20220228155714.7894-1-jsbronder@cold-front.org>
+ <CAMKF1spdXVvNtLfq=-GBRROe+-=D0jZ+9Pg=EfaoK55A7uqtuw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: 
+ <CAMKF1spdXVvNtLfq=-GBRROe+-=D0jZ+9Pg=EfaoK55A7uqtuw@mail.gmail.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Mar 2022 16:40:18 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Mar 2022 18:53:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95752
+ https://lists.openembedded.org/g/openembedded-devel/message/95754
 
-It needs distutils, until its ported to use setuptools, keep it in
-meta-python as it depends on distutils infra from here.
+Ah right, this package only support arm or x86.  I'll send an update.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../recipes-core/packagegroups/packagegroup-meta-python.bb    | 1 +
- ...unattended-upgrade-Remove-distro_info-usage-to-check.patch | 0
- .../unattended-upgrades/unattended-upgrades_2.6.bb            | 4 ++--
- 3 files changed, 3 insertions(+), 2 deletions(-)
- rename {meta-oe => meta-python}/recipes-devtools/unattended-upgrades/files/0001-unattended-upgrade-Remove-distro_info-usage-to-check.patch (100%)
- rename {meta-oe => meta-python}/recipes-devtools/unattended-upgrades/unattended-upgrades_2.6.bb (92%)
+On 02/03/22 18:47 -0800, Khem Raj wrote:
+> I am seeing a failure with clang on non x86 host. See
+>=20
+> https://errors.yoctoproject.org/Errors/Details/650724/
+>=20
+> On Mon, Feb 28, 2022 at 7:57 AM Justin Bronder <jsbronder@cold-front.org>=
+ wrote:
+> >
+> > Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
+> > ---
+> >  meta-python/licenses/CRC32C-ADLER                | 15 +++++++++++++++
+> >  .../python/python3-crc32c_2.2.post0.bb           | 16 ++++++++++++++++
+> >  2 files changed, 31 insertions(+)
+> >  create mode 100644 meta-python/licenses/CRC32C-ADLER
+> >  create mode 100644 meta-python/recipes-devtools/python/python3-crc32c_=
+2.2.post0.bb
+> >
+> > diff --git a/meta-python/licenses/CRC32C-ADLER b/meta-python/licenses/C=
+RC32C-ADLER
+> > new file mode 100644
+> > index 0000000000..f1f0e94ee0
+> > --- /dev/null
+> > +++ b/meta-python/licenses/CRC32C-ADLER
+> > @@ -0,0 +1,15 @@
+> > +This software is provided 'as-is', without any express or implied
+> > +warranty.  In no event will the author be held liable for any damages
+> > +arising from the use of this software.
+> > +
+> > +Permission is granted to anyone to use this software for any purpose,
+> > +including commercial applications, and to alter it and redistribute it
+> > +freely, subject to the following restrictions:
+> > +
+> > +1. The origin of this software must not be misrepresented; you must not
+> > +   claim that you wrote the original software. If you use this software
+> > +   in a product, an acknowledgment in the product documentation would =
+be
+> > +   appreciated but is not required.
+> > +2. Altered source versions must be plainly marked as such, and must no=
+t be
+> > +   misrepresented as being the original software.
+> > +3. This notice may not be removed or altered from any source distribut=
+ion.
+> > diff --git a/meta-python/recipes-devtools/python/python3-crc32c_2.2.pos=
+t0.bb b/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb
+> > new file mode 100644
+> > index 0000000000..0d51420939
+> > --- /dev/null
+> > +++ b/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb
+> > @@ -0,0 +1,16 @@
+> > +SUMMARY =3D "A python package implementing the crc32c algorithmin hard=
+ware and software"
+> > +HOMEPAGE =3D "https://github.com/ICRAR/crc32c"
+> > +
+> > +LICENSE =3D "BSD-2-Clause & BSD-3-Clause & CRC32C-ADLER & LGPL-2.0+"
+> > +LIC_FILES_CHKSUM =3D " \
+> > +    file://LICENSE;md5=3D4fbd65380cdd255951079008b364516c \
+> > +    file://LICENSE.google-crc32c;md5=3De9ed01b5e5ac9eae23fc2bb33701220=
+c \
+> > +    file://LICENSE.slice-by-8;md5=3D6b3bc7709d6b2db6646ec2467310ff6b \
+> > +    file://crc32c_adler.c;startline=3D9;endline=3D24;md5=3Dc60e6e55d0e=
+5d95effa6fad27db0711a \
+> > +"
+> > +
+> > +SRC_URI[sha256sum] =3D "3d058e7a5e37e4985d1a7ad4cb702bca56b490daa658d4=
+851377d13ead8b435e"
+> > +
+> > +inherit pypi setuptools3
+> > +
+> > +RDEPENDS:${PN} +=3D "python3-core"
+> > --
+> > 2.35.1
+> >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#95585): https://lists.openembedded.org/g/openembedd=
+ed-devel/message/95585
+> > Mute This Topic: https://lists.openembedded.org/mt/89453390/1997914
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[raj.khem@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index 670361598e..b2d31282e6 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -474,6 +474,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
-     python3-yarl \
-     python3-zopeinterface \
-     telepathy-python3 \
-+    unattended-upgrades \
- "
- RDEPENDS:packagegroup-meta-python3:remove:libc-musl:powerpc64le = "python3-grpcio python3-grpcio-tools"
- 
-diff --git a/meta-oe/recipes-devtools/unattended-upgrades/files/0001-unattended-upgrade-Remove-distro_info-usage-to-check.patch b/meta-python/recipes-devtools/unattended-upgrades/files/0001-unattended-upgrade-Remove-distro_info-usage-to-check.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/unattended-upgrades/files/0001-unattended-upgrade-Remove-distro_info-usage-to-check.patch
-rename to meta-python/recipes-devtools/unattended-upgrades/files/0001-unattended-upgrade-Remove-distro_info-usage-to-check.patch
-diff --git a/meta-oe/recipes-devtools/unattended-upgrades/unattended-upgrades_2.6.bb b/meta-python/recipes-devtools/unattended-upgrades/unattended-upgrades_2.6.bb
-similarity index 92%
-rename from meta-oe/recipes-devtools/unattended-upgrades/unattended-upgrades_2.6.bb
-rename to meta-python/recipes-devtools/unattended-upgrades/unattended-upgrades_2.6.bb
-index 85e5f59c7a..0629bf6db1 100644
---- a/meta-oe/recipes-devtools/unattended-upgrades/unattended-upgrades_2.6.bb
-+++ b/meta-python/recipes-devtools/unattended-upgrades/unattended-upgrades_2.6.bb
-@@ -13,8 +13,8 @@ SRCREV = "c6db6fad26a2b83ba301b52ff5dee98cef7558ca"
- 
- S = "${WORKDIR}/git"
- 
--inherit setuptools_build_meta
--PYPA_WHEEL = "${PIP_INSTALL_DIST_PATH}/${PIP_INSTALL_PACKAGE}-0.1-*.whl"
-+inherit distutils3
-+#PYPA_WHEEL = "${PIP_INSTALL_DIST_PATH}/${PIP_INSTALL_PACKAGE}-0.1-*.whl"
- 
- DEPENDS += "apt intltool-native python3-distutils-extra-native"
- RDEPENDS:${PN} += "apt lsb-release python3-apt python3-core python3-datetime python3-email python3-fcntl python3-io python3-logging python3-stringold python3-syslog"
--- 
-2.35.1
-
+--=20
+Justin Bronder
 
