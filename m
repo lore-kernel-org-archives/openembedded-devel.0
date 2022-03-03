@@ -1,242 +1,160 @@
-Return-Path: <sjl@vctlabs.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AC830C433F5
-	for <webhook@archiver.kernel.org>; Wed,  2 Mar 2022 23:28:37 +0000 (UTC)
-Received: from dent.vctlabs.com (dent.vctlabs.com [207.154.65.135])
- by mx.groups.io with SMTP id smtpd.web08.4875.1646263716509105150
- for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Mar 2022 15:28:36 -0800
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68395C433EF
+	for <webhook@archiver.kernel.org>; Thu,  3 Mar 2022 02:45:11 +0000 (UTC)
+Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com
+ [209.85.160.182])
+ by mx.groups.io with SMTP id smtpd.web09.6858.1646275510599817409
+ for <Openembedded-devel@lists.openembedded.org>;
+ Wed, 02 Mar 2022 18:45:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: vctlabs.com, ip: 207.154.65.135,
- mailfrom: sjl@vctlabs.com)
-Received: by dent.vctlabs.com (Postfix, from userid 112)
-	id 1705128025C; Wed,  2 Mar 2022 15:30:33 -0800 (PST)
-Received: from codepurple (c-73-158-3-176.hsd1.ca.comcast.net [73.158.3.176])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits)
- server-digest SHA256)
-	(No client certificate requested)
-	by dent.vctlabs.com (Postfix) with ESMTPSA id 7595E280197
-	for <openembedded-devel@lists.openembedded.org>;
- Wed,  2 Mar 2022 15:30:32 -0800 (PST)
-Date: Wed, 2 Mar 2022 15:28:33 -0800
-From: "S. Lockwood-Childs" <sjl@vctlabs.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] devmem2: patches have been upstreamed
-Message-ID: <20220302232833.GT661312@codepurple>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=GwsT/7KS;
+ spf=pass (domain: gmail.com, ip: 209.85.160.182,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f182.google.com with SMTP id bc10so3509404qtb.5
+        for <Openembedded-devel@lists.openembedded.org>;
+ Wed, 02 Mar 2022 18:45:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=N23clBqMqYD/kidc9qtgRvqJEJk0M7hns/rHBTSUhjY=;
+        b=GwsT/7KSPXWO/uXscagXuXPGxeSTj25zBQTwRthitJqmm9YbcU5mkzsEFaxqpaVgv7
+         +ifCUUboTwhHZU69ua4JbD9Q3MVvC6AYW8WTzd5JZzCyLx80RCDK1zMcsx6Cp9qi5gV5
+         YbPRdh5EhVGxJgkcQGVfCAGzxgTbUed8FEVCFWFKd110lx2vm7DP8LsHCRGm4Wnt4BpV
+         OF+zgxrCatNzpVvedKOFyhgCKkHPoQuBLLRjSnwO6/u9tB4OxPKEH+UXQGJNdcvyXqpJ
+         Y5eCKOPZf6KGYyrCr0ldoMlF/SNpWVvTeBcImIzrOUGHhE0lASUhQ5lcYFjdvXWNN9yA
+         YzSw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=N23clBqMqYD/kidc9qtgRvqJEJk0M7hns/rHBTSUhjY=;
+        b=du8ja+m/tkoVD+1pCInEphyvs/SuiJWYUUolExm3KmQI5vuGhfaw9Jlicwfcn9YHF0
+         t09Ln5O3x5DivEus+00JhA6PNJJ8YBYuI4I5pTZnhL8EyNK0Ikpq73r5x4Fnyk0tTPKm
+         3F7M+foHd6ei1soC4s//xwymyt4oJg5yCu6r8Lx5BjSl5BSW1NTT9ruECL2kiFmOZ7p8
+         F4DHuNNIaPgOVxGhKqGmWDwJZphIuGjWxlamCDfr/JOBoJiZNxtsoMd66aT2oTsMtCAw
+         Yhu484Acv7lTcgURSOiwf8HObh+yEGj/ME9zucrqeUDuQmNoMpu6JF3zht95+ckzu/N4
+         lBAg==
+X-Gm-Message-State: AOAM5331yt9nE7ZAG47ZvU9HNHoAGPQ2rTv5h/3XRUPxihlZOr7bo3E4
+	VkCKyKCYAwdpIDHf1kOfGQ8Gpkw2aWjTR+uJAl/xMIse4AghMg==
+X-Google-Smtp-Source: 
+ ABdhPJzS7G4mVbAXqMhaJntFEW5QL/sDrAeNOC9qV28DQVnJLl+8lb/fM/OiSu93mpWWpNzZ7Sw9O3oNVbNpXkPfUHs=
+X-Received: by 2002:ac8:7dd1:0:b0:2de:600:a5ab with SMTP id
+ c17-20020ac87dd1000000b002de0600a5abmr25809261qte.532.1646275509497; Wed, 02
+ Mar 2022 18:45:09 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+References: 
+ <CAMKF1sppjOqUoU2zswWD1h9E8gSntfMiQUak=wQrWrSJ71Qx3w@mail.gmail.com>
+ <CAMKF1spv_=Lm=4=oBLA8v=Dx_=wzcGt1rZ89xxAZN-rPcnKgag@mail.gmail.com>
+ <CAMKF1sq1-WTR_ndLV_oGJ+2HqWpMzt6ZePGqLJBXSSVcD25Sdw@mail.gmail.com>
+ <CAMKF1sp4VCcuiJxOF1zDC0jB2860EGa6y+RKB0xWPeLBH_AGCw@mail.gmail.com>
+In-Reply-To: 
+ <CAMKF1sp4VCcuiJxOF1zDC0jB2860EGa6y+RKB0xWPeLBH_AGCw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 2 Mar 2022 18:44:43 -0800
+Message-ID: 
+ <CAMKF1spnXiT9PyV1HRVEuZAXFgWaX3m3tFrKHmT2Fhvgnb2BvQ@mail.gmail.com>
+Subject: Re: PEP-517 packaging fixes needed in meta-openembedded
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 02 Mar 2022 23:28:37 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Mar 2022 02:45:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95720
+ https://lists.openembedded.org/g/openembedded-devel/message/95721
 
-quilt complains that both patches have already been applied,
-so drop them.
+Here is latest failures we are down to 3
 
-Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
----
- meta-oe/recipes-support/devmem2/devmem2.bb    |  3 +-
- ...word-is-32-bit-and-add-support-for-6.patch | 70 --------------
- .../devmem2/devmem2/devmem2-fixups-2.patch    | 91 -------------------
- 3 files changed, 1 insertion(+), 163 deletions(-)
- delete mode 100644 meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
- delete mode 100644 meta-oe/recipes-support/devmem2/devmem2/devmem2-fixups-2.patch
+https://errors.yoctoproject.org/Errors/Build/142145/
 
-diff --git a/meta-oe/recipes-support/devmem2/devmem2.bb b/meta-oe/recipes-support/devmem2/devmem2.bb
-index 56ca7a1b3..d0a86184a 100644
---- a/meta-oe/recipes-support/devmem2/devmem2.bb
-+++ b/meta-oe/recipes-support/devmem2/devmem2.bb
-@@ -4,8 +4,7 @@ LIC_FILES_CHKSUM = "file://devmem2.c;endline=38;md5=a9eb9f3890384519f435aedf9862
- PR = "r7"
- 
- SRC_URI = "http://www.free-electrons.com/pub/mirror/devmem2.c;downloadfilename=devmem2-new.c \
--           file://devmem2-fixups-2.patch;apply=yes;striplevel=0 \
--           file://0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch"
-+          " 
- 
- S = "${WORKDIR}"
- 
-diff --git a/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch b/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
-deleted file mode 100644
-index 2a57f2989..000000000
---- a/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
-+++ /dev/null
-@@ -1,70 +0,0 @@
--From 1360a907879dd24041797a3b709d49aeac2ab444 Mon Sep 17 00:00:00 2001
--From: Denys Dmytriyenko <denys@ti.com>
--Date: Tue, 29 May 2018 16:55:42 -0400
--Subject: [PATCH] devmem.c: ensure word is 32-bit and add support for 64-bit
-- long
--
--Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-----
-- devmem2.c | 23 +++++++++++++++++------
-- 1 file changed, 17 insertions(+), 6 deletions(-)
--
--diff --git a/devmem2.c b/devmem2.c
--index 5845381..68131b2 100644
----- a/devmem2.c
--+++ b/devmem2.c
--@@ -39,6 +39,7 @@
-- 
-- #include <stdio.h>
-- #include <stdlib.h>
--+#include <stdint.h>
-- #include <unistd.h>
-- #include <string.h>
-- #include <errno.h>
--@@ -69,7 +70,7 @@ int main(int argc, char **argv) {
-- 	if(argc < 2) {
-- 		fprintf(stderr, "\nUsage:\t%s { address } [ type [ data ] ]\n"
-- 			"\taddress : memory address to act upon\n"
---			"\ttype    : access operation type : [b]yte, [h]alfword, [w]ord\n"
--+			"\ttype    : access operation type : [b]yte, [h]alfword, [w]ord, [l]ong\n"
-- 			"\tdata    : data to be written\n\n",
-- 			argv[0]);
-- 		exit(1);
--@@ -103,9 +104,14 @@ int main(int argc, char **argv) {
-- 			read_result = *((unsigned short *) virt_addr);
-- 			break;
-- 		case 'w':
---			data_size = sizeof(unsigned long);
--+			data_size = sizeof(uint32_t);
-- 			virt_addr = fixup_addr(virt_addr, data_size);
---			read_result = *((unsigned long *) virt_addr);
--+			read_result = *((uint32_t *) virt_addr);
--+			break;
--+		case 'l':
--+			data_size = sizeof(uint64_t);
--+			virt_addr = fixup_addr(virt_addr, data_size);
--+			read_result = *((uint64_t *) virt_addr);
-- 			break;
-- 		default:
-- 			fprintf(stderr, "Illegal data type '%c'.\n", access_type);
--@@ -129,9 +135,14 @@ int main(int argc, char **argv) {
-- 				read_result = *((unsigned short *) virt_addr);
-- 				break;
-- 			case 'w':
---				virt_addr = fixup_addr(virt_addr, sizeof(unsigned long));
---				*((unsigned long *) virt_addr) = write_val;
---				read_result = *((unsigned long *) virt_addr);
--+				virt_addr = fixup_addr(virt_addr, sizeof(uint32_t));
--+				*((uint32_t *) virt_addr) = write_val;
--+				read_result = *((uint32_t *) virt_addr);
--+				break;
--+			case 'l':
--+				virt_addr = fixup_addr(virt_addr, sizeof(uint64_t));
--+				*((uint64_t *) virt_addr) = write_val;
--+				read_result = *((uint64_t *) virt_addr);
-- 				break;
-- 		}
-- 		sprintf(fmt_str, "Write at address 0x%%08lX (%%p): 0x%%0%dlX, "
---- 
--2.7.4
--
-diff --git a/meta-oe/recipes-support/devmem2/devmem2/devmem2-fixups-2.patch b/meta-oe/recipes-support/devmem2/devmem2/devmem2-fixups-2.patch
-deleted file mode 100644
-index 4517797fc..000000000
---- a/meta-oe/recipes-support/devmem2/devmem2/devmem2-fixups-2.patch
-+++ /dev/null
-@@ -1,91 +0,0 @@
----- devmem2.c	2004-08-05 01:55:25.000000000 +0200
--+++ devmem2_modif.c	2011-01-13 15:48:37.798799784 +0100
--@@ -45,12 +45,16 @@
-- #define MAP_SIZE 4096UL
-- #define MAP_MASK (MAP_SIZE - 1)
-- 
--+static inline void *fixup_addr(void *addr, size_t size);
--+
-- int main(int argc, char **argv) {
--     int fd;
--     void *map_base, *virt_addr; 
---	unsigned long read_result, writeval;
--+	unsigned long read_result, write_val;
-- 	off_t target;
-- 	int access_type = 'w';
--+	char fmt_str[128];
--+	size_t data_size;
-- 	
-- 	if(argc < 2) {
-- 		fprintf(stderr, "\nUsage:\t%s { address } [ type [ data ] ]\n"
--@@ -79,38 +83,51 @@
--     virt_addr = map_base + (target & MAP_MASK);
--     switch(access_type) {
-- 		case 'b':
--+			data_size = sizeof(unsigned char);
--+			virt_addr = fixup_addr(virt_addr, data_size);
-- 			read_result = *((unsigned char *) virt_addr);
-- 			break;
-- 		case 'h':
--+			data_size = sizeof(unsigned short);
--+			virt_addr = fixup_addr(virt_addr, data_size);
-- 			read_result = *((unsigned short *) virt_addr);
-- 			break;
-- 		case 'w':
--+			data_size = sizeof(unsigned long);
--+			virt_addr = fixup_addr(virt_addr, data_size);
-- 			read_result = *((unsigned long *) virt_addr);
-- 			break;
-- 		default:
-- 			fprintf(stderr, "Illegal data type '%c'.\n", access_type);
-- 			exit(2);
-- 	}
---    printf("Value at address 0x%X (%p): 0x%X\n", target, virt_addr, read_result); 
--+	sprintf(fmt_str, "Read at address  0x%%08lX (%%p): 0x%%0%dlX\n", 2*data_size);
--+    printf(fmt_str, (unsigned long)target, virt_addr, read_result);
--     fflush(stdout);
-- 
-- 	if(argc > 3) {
---		writeval = strtoul(argv[3], 0, 0);
--+		write_val = strtoul(argv[3], 0, 0);
-- 		switch(access_type) {
-- 			case 'b':
---				*((unsigned char *) virt_addr) = writeval;
--+				virt_addr = fixup_addr(virt_addr, sizeof(unsigned char));
--+				*((unsigned char *) virt_addr) = write_val;
-- 				read_result = *((unsigned char *) virt_addr);
-- 				break;
-- 			case 'h':
---				*((unsigned short *) virt_addr) = writeval;
--+				virt_addr = fixup_addr(virt_addr, sizeof(unsigned short));
--+				*((unsigned short *) virt_addr) = write_val;
-- 				read_result = *((unsigned short *) virt_addr);
-- 				break;
-- 			case 'w':
---				*((unsigned long *) virt_addr) = writeval;
--+				virt_addr = fixup_addr(virt_addr, sizeof(unsigned long));
--+				*((unsigned long *) virt_addr) = write_val;
-- 				read_result = *((unsigned long *) virt_addr);
-- 				break;
-- 		}
---		printf("Written 0x%X; readback 0x%X\n", writeval, read_result); 
--+		sprintf(fmt_str, "Write at address 0x%%08lX (%%p): 0x%%0%dlX, "
--+			"readback 0x%%0%dlX\n",	2*data_size, 2*data_size);
--+		printf(fmt_str, (unsigned long)target, virt_addr,
--+			write_val, read_result);
-- 		fflush(stdout);
-- 	}
-- 	
--@@ -119,3 +136,12 @@
--     return 0;
-- }
-- 
--+static inline void *fixup_addr(void *addr, size_t size)
--+{
--+#ifdef FORCE_STRICT_ALIGNMENT
--+	unsigned long aligned_addr = (unsigned long)addr;
--+	aligned_addr &= ~(size - 1);
--+	addr = (void *)aligned_addr;
--+#endif
--+	return addr;
--+}
--- 
-2.20.1
-
+On Wed, Mar 2, 2022 at 10:40 AM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> Here is latest list which is significantly less so thanks for
+> contributions thus far.
+>
+>   meta-openembedded/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.2.1.bb
+>   meta-openembedded/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.9.bb
+>   meta-openembedded/meta-python/recipes-extended/python-blivet/python3-blivet_3.4.3.bb
+>   meta-openembedded/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb
+>   meta-openembedded/meta-python/recipes-devtools/python/python3-keras-applications_1.0.8.bb
+>   meta-openembedded/meta-python/recipes-devtools/python/python3-pymetno_0.9.0.bb
+>   meta-openembedded/meta-python/recipes-extended/python-cson/python3-cson_git.bb
+>   meta-openembedded/meta-python/recipes-devtools/python/python3-dbussy_1.3.bb
+>   meta-openembedded/meta-python/recipes-connectivity/python-txws/python3-txws_0.9.1.bb
+>   meta-openembedded/meta-oe/recipes-devtools/unattended-upgrades/unattended-upgrades_2.6.bb
+>
+>
+> On Tue, Mar 1, 2022 at 8:18 AM Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > We are making some progress. This is the latest ( 24 build failures )
+> > as of last night.
+> >
+> > https://errors.yoctoproject.org/Errors/Build/142052/
+> >
+> > On Mon, Feb 28, 2022 at 3:21 PM Khem Raj <raj.khem@gmail.com> wrote:
+> > >
+> > > Thanks for sending fixing everyone. Lets keep going. Here is latest
+> > > list of failing recipes on master-next now
+> > >
+> > > Summary: 32 tasks failed:
+> > >   meta-openembedded/meta-python/recipes-extended/python-blivet/python3-blivet_3.4.0.bb:do_install
+> > >   meta-openembedded/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.9.bb:do_compile
+> > >   meta-openembedded/meta-python/recipes-devtools/python/python3-crcmod_1.7.bb:do_compile
+> > >   meta-openembedded/meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb:do_compile
+> > >   meta-openembedded/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb:do_compile
+> > >   meta-openembedded/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.2.1.bb:do_compile
+> > >   meta-raspberrypi/recipes-devtools/python/python3-rtimu_git.bb:do_compile
+> > >   meta-openembedded/meta-python/recipes-devtools/python/python3-flask-versioned_0.9.4-20101221.bb:do_install
+> > >   meta-openembedded/meta-python/recipes-devtools/python/python3-ntplib_0.4.0.bb:do_install
+> > >   meta-raspberrypi/recipes-devtools/python/python3-adafruit-circuitpython-register_1.9.4.bb:do_install
+> > >   meta-openembedded/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb:do_install
+> > >   meta-atmel/recipes-utils/mpio/mpio_1.3.bb:do_install
+> > >   meta-openembedded/meta-python/recipes-devtools/python/python3-pystache_0.5.4.bb:do_install
+> > >   meta-raspberrypi/recipes-devtools/python/python3-adafruit-pureio_1.1.8.bb:do_install
+> > >   meta-openembedded/meta-python/recipes-devtools/python/python3-pyscaffold_4.1.4.bb:do_install
+> > >   meta-openembedded/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb:do_install
+> > >   meta-openembedded/meta-python/recipes-devtools/python/python3-pymetno_0.9.0.bb:do_install
+> > >   meta-openembedded/meta-python/recipes-extended/python-cson/python3-cson_git.bb:do_install
+> > >   meta-openembedded/meta-python/recipes-devtools/python/python3-pydbus-manager_git.bb:do_install
+> > >   meta-openembedded/meta-python/recipes-devtools/python/python3-pymisp_2.4.152.bb:do_install
+> > >   meta-openembedded/meta-python/recipes-devtools/python/python3-dbussy_1.3.bb:do_install
+> > >   meta-openembedded/meta-python/recipes-devtools/gyp/gyp_git.bb:do_install
+> > >   meta-openembedded/meta-python/recipes-devtools/python/python3-keras-applications_1.0.8.bb:do_install
+> > >   meta-openembedded/meta-python/recipes-devtools/python/python3-gcovr_5.0.bb:do_install
+> > >   meta-raspberrypi/recipes-devtools/python/python3-adafruit-platformdetect_3.1.1.bb:do_install
+> > >   meta-openembedded/meta-python/recipes-devtools/python/python3-configshell-fb_1.1.29.bb:do_install
+> > >   meta-openembedded/meta-python/recipes-devtools/python/python3-xmodem_0.4.6.bb:do_package
+> > >   meta-openembedded/meta-oe/recipes-devtools/unattended-upgrades/unattended-upgrades_2.6.bb:do_install
+> > >   meta-openembedded/meta-python/recipes-connectivity/python-txws/python3-txws_0.9.1.bb:do_install
+> > >   meta-openembedded/meta-xfce/recipes-apps/catfish/catfish_4.16.3.bb:do_compile
+> > >   meta-openembedded/meta-xfce/recipes-apps/menulibre/menulibre_2.2.3.bb:do_install
+> > >   meta-openembedded/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb:do_compile
+> > >
+> > > On Sat, Feb 26, 2022 at 11:49 AM Khem Raj <raj.khem@gmail.com> wrote:
+> > > >
+> > > > Hello All,
+> > > >
+> > > > We have PEP-517 packaging related infra changes merged into oe-core,
+> > > > which obviously
+> > > > mean there are some failures on various python packages.
+> > > >
+> > > > I am posting the latest results (qemux86-64/glibc)
+> > > >
+> > > > https://errors.yoctoproject.org/Errors/Build/141804/
+> > > >
+> > > > We have 57 recipes left, Tim has worked diligently on fixing the
+> > > > PEP-517 issues but we would
+> > > > need more hands. If you see any of
+> > > > these recipes that you can help fixing, please send patches
+> > > >
+> > > > Since upcoming release is an LTS release, I would like to have these
+> > > > issues fixed for this
+> > > > release.
+> > > >
+> > > > Thank you for your help
+> > > >
+> > > > -Khem
 
