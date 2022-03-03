@@ -1,68 +1,92 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63A9CC433EF
-	for <webhook@archiver.kernel.org>; Thu,  3 Mar 2022 15:12:15 +0000 (UTC)
-Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
- by mx.groups.io with SMTP id smtpd.web11.11763.1646320333721609226
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 57EA7C433EF
+	for <webhook@archiver.kernel.org>; Thu,  3 Mar 2022 16:40:18 +0000 (UTC)
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com
+ [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.web08.13044.1646325617732267008
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Mar 2022 07:12:14 -0800
+ Thu, 03 Mar 2022 08:40:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.22,
- mailfrom: f_l_k@t-online.de)
-Received: from fwd80.dcpf.telekom.de (fwd80.aul.t-online.de [10.223.144.106])
-	by mailout12.t-online.de (Postfix) with SMTP id A469C20E7C;
-	Thu,  3 Mar 2022 16:12:11 +0100 (CET)
-Received: from [192.168.178.83] ([79.219.225.177]) by fwd80.t-online.de
-	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
-	esmtp id 1nPn7j-0ugH2H0; Thu, 3 Mar 2022 16:12:11 +0100
-Message-ID: <21198b64-b539-57e1-d5a9-09c7e762610c@t-online.de>
-Date: Thu, 3 Mar 2022 16:12:10 +0100
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Nmmmm1vF;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id
+ mg21-20020a17090b371500b001bef9e4657cso4774846pjb.0
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 03 Mar 2022 08:40:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=MK3YeI5adPDnS4YxkMtfbJJcWn8m6QHJusamXxABkI8=;
+        b=Nmmmm1vFrOHn9vHtNq4RhFObcs4mrNkEVwdH1rkNjzgpFU++qZYY3yw/STEL5bmiFO
+         lczYq5srKJk63AvAp+RUvAxmAd6Cxp8iSniuInyPvERZSvNAbe3A2IeCwWiRpsBBM1er
+         +QCsw19TKotghQkWUQOhaKbTUtEF4eL52kmuPeps2AMYs3/3QbqbXub5+Y86Z6QnTqhp
+         kXS9Wxw/G6Dl0bu+aYo7Ks8bPpJBkq2aD+FJWF3xn5LpjVSEPZcfe7xezToqWuqZIL5W
+         /d2pkqBVFe/VvlQ28Z8VJR9iJwPQmzkYGA6xqj3CfW/fAaL3v0VD3lfoBEfm524FRlys
+         vt5w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=MK3YeI5adPDnS4YxkMtfbJJcWn8m6QHJusamXxABkI8=;
+        b=mXsNufoz/fpLa7YfmP7xOR7KeciBmndgd5BCBeAWMkHLJdu7VV8E56rGAA+WzwQCge
+         saO5AxOTl/2gykPfGCj34L1bDfFKhHJ23E0TpSRUUs5qqY3SsBJJXPLhwcrYpEz4gJeW
+         4cuMFZJHXSoI3DBLHgSKxMQJsHbpW0a528TdobEopsfhfekhCsyzr6PbPKMzbX+9mKpA
+         pGb0wr9MbDmp2rFjrPTM3GfkPOEHaubImUHSTva6ADEbVXZzvunN/Zg/0u0CdkFrRqtF
+         hzy7z6nInQrzCX/Gq8YAOLDhLu5aYIt5jwQKOziHEVbxzJpEe/KCaTB7T7Ywz/aneZzI
+         qc4w==
+X-Gm-Message-State: AOAM530EvRXtgycO1z5IHnkhIKG2kdmFeBMX08OQCBvzIugX7rbJUVk9
+	OANMqD/qxnGu5FZyIq9ulyCGuA0HdxpXWg==
+X-Google-Smtp-Source: 
+ ABdhPJzhKKMSVBjhfSJsszwvYlx5+0kIZVPX6LpbPh5JweKiYlR4U2Q3RcdR+/51WWsKwD9mUMauZg==
+X-Received: by 2002:a17:90a:dd46:b0:1b8:8:7303 with SMTP id
+ u6-20020a17090add4600b001b800087303mr6096551pjv.197.1646325616941;
+        Thu, 03 Mar 2022 08:40:16 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ff3d])
+        by smtp.gmail.com with ESMTPSA id
+ t9-20020a656089000000b00372c36604a7sm2535050pgu.13.2022.03.03.08.40.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 03 Mar 2022 08:40:16 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH 2/2] python3-blivetgui: Set PIP_INSTALL_PACKAGE
+Date: Thu,  3 Mar 2022 08:40:13 -0800
+Message-Id: <20220303164013.3149208-2-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220303164013.3149208-1-raj.khem@gmail.com>
+References: <20220303164013.3149208-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [oe] [meta-gnome][PATCH] gjs: update; customize dependencies
-Content-Language: en-US
-To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-References: <20220303073138.1434568-1-f_l_k@t-online.de>
- <CALbNGRTM1_J=rZHXisUj6hJZ1Hamcj8A6NWrAiFxhv47sUrZ7g@mail.gmail.com>
-From: Markus Volk <f_l_k@t-online.de>
-In-Reply-To: 
- <CALbNGRTM1_J=rZHXisUj6hJZ1Hamcj8A6NWrAiFxhv47sUrZ7g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-X-TOI-EXPURGATEID: 150726::1646320331-00001C4D-C80F8D42/0/0 CLEAN NORMAL
-X-TOI-MSGID: 95d1e3e9-5ece-4cfd-bc66-733d9aabf658
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Mar 2022 15:12:15 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Mar 2022 16:40:18 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95751
+ https://lists.openembedded.org/g/openembedded-devel/message/95753
 
-> What about gnome-shell - or why go backwards?
-That is correct. Since I'm not building it, I didn't notice that=20
-gnome-shell now also uses gtk4. For me, gjs was the only recipe that=20
-included gtk4.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb   | 2 ++
+ 1 file changed, 2 insertions(+)
 
-But since it is only needed for gtk_tests, I sent a v2 to disable it.
+diff --git a/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb b/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb
+index 9522770eff..4bcb45ebd6 100644
+--- a/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb
++++ b/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb
+@@ -18,6 +18,8 @@ REQUIRED_DISTRO_FEATURES = "x11 systemd"
+ 
+ inherit setuptools3 python3native
+ 
++PIP_INSTALL_PACKAGE = "blivet_gui"
++
+ RDEPENDS:${PN} = "python3-pygobject python3 \
+                   python3-blivet gtk+3  \
+                   python3-pid libreport \
+-- 
+2.35.1
 
-However, if you want to keep the gtk dependency, I'll send another patch=20
-that contains only the recipe and mozjs updates
-
-Am 03.03.22 um 15:45 schrieb Andreas M=C3=BCller:
-> On Thu, Mar 3, 2022 at 8:32 AM Markus Volk <f_l_k@t-online.de> wrote:
->> gjs seems to be the only gnome recipe to be built against gtk4. Align =
-this to the
->> rest of the universe.
-> What about gnome-shell - or why go backwards?
->> Update mozjs dependency to mozjs-91 since polkit also builds with it.
-> Glad to see
->
-> Cheers
->
-> Andreas
 
