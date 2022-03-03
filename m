@@ -2,95 +2,107 @@ Return-Path: <adrian.freihofer@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F076CC433EF
-	for <webhook@archiver.kernel.org>; Thu,  3 Mar 2022 13:06:52 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
- [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.web11.10262.1646312812212683932
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D8220C433F5
+	for <webhook@archiver.kernel.org>; Thu,  3 Mar 2022 13:07:08 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com
+ [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.web08.10282.1646312828273875819
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Mar 2022 05:06:52 -0800
+ Thu, 03 Mar 2022 05:07:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=EsMT77Tg;
- spf=pass (domain: gmail.com, ip: 209.85.221.48,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=bU+TLvof;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46,
  mailfrom: adrian.freihofer@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id n14so7763872wrq.7
+Received: by mail-wm1-f46.google.com with SMTP id
+ n33-20020a05600c3ba100b003832caf7f3aso2562949wms.0
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Mar 2022 05:06:51 -0800 (PST)
+ Thu, 03 Mar 2022 05:07:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Ywl5V5Eud78fbSzqKDijfuKZHPahI0XaLH65RRITWso=;
-        b=EsMT77TgLRqlH1D3t7UKDe93RwElkwiJ9cmxufYA7Z2BoghHtgK7eZ+NV1pOKjoT9K
-         2afhKiZfdVNJaYuHO4oByVEJcv7rXLgXQiAty9Ot13OH5xddMIFWIkBxtXIcSyOCRL0f
-         d7pIQik2KM/MP/MTarQtIUOD3nXGv+jCoyrVoMjgRJdwRHs0snUFB5ygxmcO6QU+CEIU
-         wobQ4juW8GjiR1kQi6E6tUmhvrBytH4bpPPhEMggs0MhG3vtF1mzRnifOPsgRwzyr+Zw
-         EmxdWGQtU3ZRDqQpod3vZJ5m/zDAQIQYlAmGma/rkc77x42o8ZnpecFHopDKINDWdoQH
-         gp8A==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=fUnr8vqITbem99AJZC3x+A/kj14MvMG99Rx9NaylEAs=;
+        b=bU+TLvofJoCZz6VhfTg0CcEoID6EL/EQrXlPEhGdRgc+62kbgVKaw0u/1kR6Hl2GvS
+         1+Z0XyuEbcq1GTdjuGyGBN/jt6lwmG8KFOwIYMXkPO02ZY/ZD7i/57r2HR473rzmLA4p
+         uKDMPb+2TJuziBGRp6Nb4Qa9ge3ySE7eMtfkQlPBeSL8ZB45Xx4mjmOnHNp4cxOQYryc
+         RFYiQSpoC8t27nuQxn1G26zgC35211KyNLthUT5zGv1l+ThPiy1nuRq8SvhL+Wcb9yYb
+         lzt3oVdQS8nLELcRqmkDIoLl+IQXgS1RZSo5+ZR8CY+g4o2wvvx1oSigTHXctZFeK0Sp
+         iASQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Ywl5V5Eud78fbSzqKDijfuKZHPahI0XaLH65RRITWso=;
-        b=1ngt1KWnE3p52owU/YFz1Cd+d3KQFu2QBbqD4MVtbKKymRbMH7pZa4U2T9pt1De445
-         KP6zbFkR/CgLWjkv61zZJ7hiw/RT3FlQ5EhA+mUJsNf6Ax1vcJSTiViV31yA4pC+Zg/p
-         QlYqhBDgkNXSIhfcCZueQj2xIwlX7AojElvScA3Mv55c6rXacIHjuZOIsSLSPcCjTf7E
-         FAOvlWqWz5PzP/5o3DLomg5C05K9lE8quatQUOP4bt0js0Ux9hw+Xv8g79orT/2PU0Ft
-         EJ+9Fx4mdcIAGoFJxra/HmMles2dbL/kK4fP7PP8Gxm2dGNRynSUG8nnqRMOZPA8L5v9
-         tf3w==
-X-Gm-Message-State: AOAM532A4Q6xrdNDrQ8HCNKhlF3qH6tyRSSaHKLOXfF/ZgJE9u7CwTml
-	UBp35Ii7DW/WyKY5BxXPtpZrD8vlnK8=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=fUnr8vqITbem99AJZC3x+A/kj14MvMG99Rx9NaylEAs=;
+        b=HrjUOPzHalPqgU77e44Ix1HEEXnV73aozyG8Gx2gXC6dhlBf4TQMdNRNZba8Ew89ex
+         W9IW6ZJtJV+xuHHaoduCFOg78LhpT6cPApGKwmVlZs8L+g6CpYluPfC+eRrJvSqD2CiZ
+         AKUVD6zMC8RWogwH/iwn2oQGkzrbz0mvsk+HEbY1U5LmYu4ff/5JKJrPVUFoLSjGH7HM
+         Q6OAQhoVRZJuBiU7fdNEVVo6IYf8cb8zXskRDco2Z54H/KSrsbTifCfFoyxfQpyJ0rH1
+         j9LuOu4xrTkvSbo12+AF8PEXhuBBtF5aazxxiG/AG72ssbaawh7oHz7mHuqrOTu3GnPO
+         y3Dw==
+X-Gm-Message-State: AOAM530Ule/qfOQKaIhfveIF3mQHeG18Mizjr6vihdPkBmrqRAnOijU/
+	t/hU+qI0Clq+ZA9WU2s9CFTY1H+OClo=
 X-Google-Smtp-Source: 
- ABdhPJwC2FLRu+rnCs4hRQU1n6Dt05E2yuD9UZZDYYPqvHAhTkOX5YaBvMDNeN9172zaKp6gMO12NQ==
-X-Received: by 2002:adf:d08a:0:b0:1ef:5a1c:d50c with SMTP id
- y10-20020adfd08a000000b001ef5a1cd50cmr23954796wrh.582.1646312810313;
-        Thu, 03 Mar 2022 05:06:50 -0800 (PST)
+ ABdhPJx8FE+fCxXI0iWDdUvCo283cvvGIMM5LAUEc/LrBUMZnDm0+JdMLDaoTAIkoQfsJm4o5vr1Gg==
+X-Received: by 2002:a05:600c:4ec6:b0:352:cc24:1754 with SMTP id
+ g6-20020a05600c4ec600b00352cc241754mr3637153wmq.184.1646312826199;
+        Thu, 03 Mar 2022 05:07:06 -0800 (PST)
 Received: from md2ramxc.ad001.siemens.net ([62.32.0.69])
         by smtp.gmail.com with ESMTPSA id
- n15-20020a05600c500f00b003814673f202sm9612380wmr.47.2022.03.03.05.06.49
+ n15-20020a05600c500f00b003814673f202sm9612380wmr.47.2022.03.03.05.07.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Mar 2022 05:06:49 -0800 (PST)
+        Thu, 03 Mar 2022 05:07:05 -0800 (PST)
 From: Adrian Freihofer <adrian.freihofer@gmail.com>
 X-Google-Original-From: Adrian Freihofer <adrian.freihofer@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Adrian Freihofer <adrian.freihofer@siemens.com>
-Subject: [meta-oe][PATCH 0/4] update modemmanager
-Date: Thu,  3 Mar 2022 14:06:14 +0100
-Message-Id: <20220303130618.1108977-1-adrian.freihofer@siemens.com>
+Subject: [meta-oe][PATCH 1/4] libqrtr-glib: add new recipe
+Date: Thu,  3 Mar 2022 14:06:15 +0100
+Message-Id: <20220303130618.1108977-2-adrian.freihofer@siemens.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220303130618.1108977-1-adrian.freihofer@siemens.com>
+References: <20220303130618.1108977-1-adrian.freihofer@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Mar 2022 13:06:52 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Mar 2022 13:07:08 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95739
+ https://lists.openembedded.org/g/openembedded-devel/message/95740
 
-Update modem manager and related libraries to latest stable vresions.
-
-Adrian Freihofer (4):
-  libqrtr-glib: add new recipe
-  libqmi: switch to meson and git
-  modemmanager: update 1.16.8 -> 1.18.6
-  networkmanager: replace deprecated licenses
-
- .../networkmanager/networkmanager_1.36.0.bb   |   2 +-
- .../0001-build-use-python3-everywhere.patch   |  33 ++++++
- .../libqmi/libqmi_1.30.4.bb                   |  23 ++--
- .../libqrtr-glib/libqrtr-glib_git.bb          |  21 ++++
- ...-shell-scripts-to-use-bin-sh-for-use.patch |  68 ++++++++++++
- ...-Make-scripts-POSIX-shell-compatible.patch | 100 ++++++++++++++++++
- .../modemmanager/modemmanager_1.16.8.bb       |  53 ----------
- .../modemmanager/modemmanager_1.18.6.bb       |  62 +++++++++++
- 8 files changed, 302 insertions(+), 60 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/libqmi/files/0001-build-use-python3-everywhere.patch
+Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
+---
+ .../libqrtr-glib/libqrtr-glib_git.bb          | 21 +++++++++++++++++++
+ 1 file changed, 21 insertions(+)
  create mode 100644 meta-oe/recipes-connectivity/libqrtr-glib/libqrtr-glib_git.bb
- create mode 100644 meta-oe/recipes-connectivity/modemmanager/files/0001-core-switch-bash-shell-scripts-to-use-bin-sh-for-use.patch
- create mode 100644 meta-oe/recipes-connectivity/modemmanager/files/0002-fcc-unlock-Make-scripts-POSIX-shell-compatible.patch
- delete mode 100644 meta-oe/recipes-connectivity/modemmanager/modemmanager_1.16.8.bb
- create mode 100644 meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.6.bb
 
+diff --git a/meta-oe/recipes-connectivity/libqrtr-glib/libqrtr-glib_git.bb b/meta-oe/recipes-connectivity/libqrtr-glib/libqrtr-glib_git.bb
+new file mode 100644
+index 0000000000..7bac3117cd
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/libqrtr-glib/libqrtr-glib_git.bb
+@@ -0,0 +1,21 @@
++SUMMARY = "library to use and manage the QRTR bus"
++DESCRIPTION = "libqrtr-glib is a glib-based library to use and manage the QRTR (Qualcomm IPC Router) bus"
++HOMEPAGE = "https://gitlab.freedesktop.org/mobile-broadband/libqrtr-glib"
++
++LICENSE = "LGPL-2.1-or-later"
++LIC_FILES_CHKSUM = "file://LICENSES/LGPL-2.1-or-later.txt;md5=4fbd65380cdd255951079008b364516c"
++
++SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/libqrtr-glib.git;protocol=https;branch=qrtr-1-2"
++
++PV = "1.2.2+git${SRCPV}"
++SRCREV = "8991f0e93713ebf4da48ae4f23940ead42f64c8c"
++
++S = "${WORKDIR}/git"
++
++inherit meson pkgconfig gobject-introspection
++
++DEPENDS = "glib-2.0"
++
++EXTRA_OEMESON = " \
++    -Dgtk_doc=false \
++"
 -- 
 2.34.1
 
