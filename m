@@ -2,153 +2,326 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EA22BC433F5
-	for <webhook@archiver.kernel.org>; Fri,  4 Mar 2022 16:40:12 +0000 (UTC)
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com
- [209.85.222.174])
- by mx.groups.io with SMTP id smtpd.web12.616.1646412012294444649
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1CFAC433EF
+	for <webhook@archiver.kernel.org>; Fri,  4 Mar 2022 18:30:28 +0000 (UTC)
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com
+ [209.85.160.174])
+ by mx.groups.io with SMTP id smtpd.web09.64.1646418628011302562
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Mar 2022 08:40:12 -0800
+ Fri, 04 Mar 2022 10:30:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=gnfj5i6K;
- spf=pass (domain: gmail.com, ip: 209.85.222.174,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Yy4LBWWl;
+ spf=pass (domain: gmail.com, ip: 209.85.160.174,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f174.google.com with SMTP id t21so6850403qkg.6
+Received: by mail-qt1-f174.google.com with SMTP id s15so8118804qtk.10
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Mar 2022 08:40:12 -0800 (PST)
+ Fri, 04 Mar 2022 10:30:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=qLVy92K1a16ufSQt6sZ22P1nLgJpAVvgW3GnjxAm3fM=;
-        b=gnfj5i6Ke8us6BmqicWEVEM87UovzU+0Cb5pzND35F8AIP16fpNSj2tqyxezVvYTeN
-         HVETvkaI61x4ah5OwIzchquF0FR7H1fFm+PpB9cXZAqeq4cuROdMWifQXsXzp9kQ8ylV
-         pdC2xPUmgspSYlDaLuH37GbJrQ4p7zE4HyWYPHsT2+N/GjjqRNcuC3b5tCpKx9qb112p
-         QW6OiJ72rKUXZrmgH1BXYh3Q3KO6xBu0HlU40rBGOw8bc7EvkDVSWVqwTK3KEvtODSZL
-         ZRh5BBvU43eRF/QmRJGsJJkDY9hy0+G3bo2a6LkYYlbmjZJsntBGlJk3lVVQFDn1M0TA
-         F8aw==
+         :cc:content-transfer-encoding;
+        bh=FXYZCQU+ZNquO7l5hNOYGwMyhJV82wboiYoTCuBS6Z4=;
+        b=Yy4LBWWlHmTH76qh4un0bGdkHrPGXSSIwU7dMFOSb5jsNxWUogKvLEgtgafAIL05L/
+         g+UpFf6BGXlBo5/rMG4EjQ5ovX6E+oX4yt4ZGk5oiYo/s0xCVB2i75uCB1xeeIA/r061
+         pomKZILn/N2tgPWjVNfIP6nbSJfTKqd2SgO8JpMwYdu3BqYEQrRwEmEm8UEOlP03JH6b
+         i9l8wrdiWlzChMggszUnWlmdzM6dNgby9L7ZFm88T/tveOPObChI7bOvvYBBLNwWLA1g
+         isxJI3hOI0y4izEoDa2Uk2flZMbEBiAQTJykDEnozMZP3HKlXCkFJATHUT2DutvS+biX
+         3dMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=qLVy92K1a16ufSQt6sZ22P1nLgJpAVvgW3GnjxAm3fM=;
-        b=nRbLnzpnSGwDHIH+0Y3LTRnxMJovuI+ujOuj/JkoLyr8GoKXBWGEI3mQlJ8c6T6BLz
-         Zdk80qlybRNrfdkWNN+rfHVzp2/iFCqVpgCI7OVtn/mIfbdyamhOmN5ImWks7ZresT6z
-         3qr2/jLfldeR45djcO007h7yDM59FHEp9DrorAtNAzW93cFyWxP6DblPm2HZJfD63QRD
-         dGauNs9hn9G2JpsgCtgzwSTqFgtxRUA2uSkH97A4PRIJ0lnWvpsKJjrS2gRjYQzWM9VF
-         yTBHaS3/BHIqSkVCPj5qycRWsyszOY5LBJvS9SiFzC1BRAMKvym8ewHgZAMm8cwlrjF/
-         hD8w==
-X-Gm-Message-State: AOAM532z98mTMsaIGip1wDguOCveMqCcNulSeuIh61BMyUpEP9ofrNS+
-	u2NhFS1Ytuf6lv7ALUTjlX7YxgY3wc29xk9UmiAdt1KTsjg=
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=FXYZCQU+ZNquO7l5hNOYGwMyhJV82wboiYoTCuBS6Z4=;
+        b=g0YBj+ICQcXCGKyI3VHRy64hJ08eUh6fS95M8CgS332nRRwTqf1UWUNR4SpE000OCE
+         nXF5TV4uuXLyMKKB0u9IDL2RO0j1h1Gapr4OEgtPxDL1U0/Yp0fNyH4iwcgSptVp1Lwb
+         zCaeBUPIdUqMyp0BsDTuDY4DlO+MO4+oL3xzhSS1tQ72Z0C3GCOo7VJhH1QMlf/tbXW5
+         heLB24RfsnPObIHJtvQJ6kD69iEBf09dvMvN5CzcTMpE/nzL8EMQHtxj02JPnlDrQF1k
+         Ac4TmttgcREHKXrxFgqAtX6uDYb+qtN2KVhn2aSLgpIpqC1brkcD0Qo+AHlv+9y+uc9J
+         NY7A==
+X-Gm-Message-State: AOAM530jXapVVtSLk63sS6WepNP1e8mFI4SjCygYN86qWtf+4XJStgDT
+	SE0XQt3g/Y/92r4/Od0y7YZ3tH3+f9jsDiIGDMQ=
 X-Google-Smtp-Source: 
- ABdhPJxqgBex58G0RNuaKKsY5OkQY0BIjAZdqS5208lhQ8/XPfnd4OvEpLYQa/c/oQEaRxpY07XN5YsAu98q7Uq5K3U=
-X-Received: by 2002:a05:620a:16d5:b0:60d:d3a7:af9e with SMTP id
- a21-20020a05620a16d500b0060dd3a7af9emr3018341qkn.463.1646412011178; Fri, 04
- Mar 2022 08:40:11 -0800 (PST)
+ ABdhPJxv05kwTXKZ63SA2BBCgQ0wbN5hyN81hwgiYALD0fLwRB0eu3uJOHZEb5l2jGal7U3xZ+cNqBGNlKSqNy4odSY=
+X-Received: by 2002:ac8:584c:0:b0:2dd:aaa6:7865 with SMTP id
+ h12-20020ac8584c000000b002ddaaa67865mr38899qth.330.1646418626911; Fri, 04 Mar
+ 2022 10:30:26 -0800 (PST)
 MIME-Version: 1.0
-References: <20220304134220.2254908-1-ross.burton@arm.com>
- <CAAnfSTsCm7yVOPfuJd4fXkp_fZzrP3MfyeOKyZuRt0x+_DyBHQ@mail.gmail.com>
+References: 
+ <CAMKF1sppjOqUoU2zswWD1h9E8gSntfMiQUak=wQrWrSJ71Qx3w@mail.gmail.com>
+ <CAMKF1spv_=Lm=4=oBLA8v=Dx_=wzcGt1rZ89xxAZN-rPcnKgag@mail.gmail.com>
+ <CAMKF1sq1-WTR_ndLV_oGJ+2HqWpMzt6ZePGqLJBXSSVcD25Sdw@mail.gmail.com>
+ <CAMKF1sp4VCcuiJxOF1zDC0jB2860EGa6y+RKB0xWPeLBH_AGCw@mail.gmail.com>
+ <CAMKF1spnXiT9PyV1HRVEuZAXFgWaX3m3tFrKHmT2Fhvgnb2BvQ@mail.gmail.com>
+ <CANx9H-CtXBXECQUK98wyfruz7n2+rRC_X0CgFsPDhxDKCw1gdw@mail.gmail.com>
+ <CAMKF1sqzPuN6dZch0LPhG-WGYSBX+z4nk9HjQ1KR-9BiKcQGCA@mail.gmail.com>
+ <CAAnfSTvjPeyJHjd-FiYoXmxPMaXM0AH9KMXm6n5ooJNfQp80Sw@mail.gmail.com>
+ <CAMKF1sptk+EwYhQ9Ri5oh8oSh4T-x8Ox1j1wiLhs09WoDOVkOA@mail.gmail.com>
 In-Reply-To: 
- <CAAnfSTsCm7yVOPfuJd4fXkp_fZzrP3MfyeOKyZuRt0x+_DyBHQ@mail.gmail.com>
+ <CAMKF1sptk+EwYhQ9Ri5oh8oSh4T-x8Ox1j1wiLhs09WoDOVkOA@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 4 Mar 2022 08:39:45 -0800
+Date: Fri, 4 Mar 2022 10:30:01 -0800
 Message-ID: 
- <CAMKF1sq+21P6xE7CTwsjnHeFZ3tCJhXu9qTEFiMZ8HDViMXvMg@mail.gmail.com>
-Subject: Re: [oe] [PATCH] ufw: port to setuptools, use setuptools_legacy
+ <CAMKF1spRNTUgpzQKG1QsUpmru33xq+0+2iN2866g27DUtU9Nvg@mail.gmail.com>
+Subject: Re: [oe] PEP-517 packaging fixes needed in meta-openembedded
 To: Ross Burton <ross@burtonini.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Cc: Tim Orling <ticotimo@gmail.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 04 Mar 2022 16:40:12 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 04 Mar 2022 18:30:28 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95791
+ https://lists.openembedded.org/g/openembedded-devel/message/95792
 
-On Fri, Mar 4, 2022 at 5:43 AM Ross Burton <ross@burtonini.com> wrote:
->
-> Obviously this depends on the addition of setuptools_legacy to
-> oe-core, which is on the list now.
+We have all recipes building now ( few with some warnings ) which
+should get better with setuptools_legacy changes
 
-yeah I have cherry-picked that patch into my distro testing for now.
+https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1482
 
+Sincere gratitude to all those who stepped up in time and helped patching.
+
+On Thu, Mar 3, 2022 at 2:12 PM Khem Raj <raj.khem@gmail.com> wrote:
 >
-> Ross
->
-> On Fri, 4 Mar 2022 at 13:42, Ross Burton via lists.openembedded.org
-> <ross=burtonini.com@lists.openembedded.org> wrote:
+> On Thu, Mar 3, 2022 at 2:00 PM Ross Burton <ross@burtonini.com> wrote:
 > >
-> > This package has a traditional setup.py which has a custom install command,
-> > which isn't supported with the modern wheel/pip installation method.
+> > I've been having an interesting discussion with the PyPA about the
+> > future of packaging Python.  It's illuminating, to say the least.  The
+> > full thread is at
+> > https://github.com/pypa/packaging-problems/issues/576 but the
+> > highlights are:
 > >
-> > Until upstream has moved away from distutils, use setuptools_legacy so
-> > the installation is correct.
-> >
-> > Signed-off-by: Ross Burton <ross.burton@arm.com>
-> > ---
-> >  .../ufw/ufw/setuptools.patch                  | 20 +++++++++++++++++++
-> >  .../recipes-connectivity/ufw/ufw_0.36.1.bb    |  3 ++-
-> >  2 files changed, 22 insertions(+), 1 deletion(-)
-> >  create mode 100644 meta-networking/recipes-connectivity/ufw/ufw/setuptools.patch
-> >
-> > diff --git a/meta-networking/recipes-connectivity/ufw/ufw/setuptools.patch b/meta-networking/recipes-connectivity/ufw/ufw/setuptools.patch
-> > new file mode 100644
-> > index 0000000000..ad5391cb98
-> > --- /dev/null
-> > +++ b/meta-networking/recipes-connectivity/ufw/ufw/setuptools.patch
-> > @@ -0,0 +1,20 @@
-> > +Move to setuptools as distutils is now deprecated.
-> > +
-> > +Upstream-Status: Submitted [https://code.launchpad.net/~tgamblin/ufw/distutils-to-setuptools]
-> > +Signed-off-by: Ross Burton <ross.burton@arm.com>
-> > +
-> > +diff --git a/setup.py b/setup.py
-> > +index cb67a6a..de648d3 100644
-> > +--- a/setup.py
-> > ++++ b/setup.py
-> > +@@ -25,8 +25,8 @@
-> > + #
-> > +
-> > + from __future__ import print_function
-> > +-from distutils.command.install import install as _install
-> > +-from distutils.core import setup
-> > ++from setuptools.command.install import install as _install
-> > ++from setuptools import setup
-> > + import errno
-> > + import os
-> > + import re
-> > diff --git a/meta-networking/recipes-connectivity/ufw/ufw_0.36.1.bb b/meta-networking/recipes-connectivity/ufw/ufw_0.36.1.bb
-> > index c427e4ffde..70216a85e3 100644
-> > --- a/meta-networking/recipes-connectivity/ufw/ufw_0.36.1.bb
-> > +++ b/meta-networking/recipes-connectivity/ufw/ufw_0.36.1.bb
-> > @@ -12,12 +12,13 @@ SRC_URI = "https://launchpad.net/ufw/0.36/0.36.1/+download/ufw-0.36.1.tar.gz \
-> >             file://0001-optimize-boot.patch \
-> >             file://0002-add-an-option-to-specify-iptables-location.patch \
-> >             file://0003-only-make-one-reference-to-env.patch \
-> > +           file://setuptools.patch \
-> >             "
-> >  SRC_URI[sha256sum] = "1c57e78fbf2970f0cc9c56ea87a231e6d83d825e55b9e31e2c88b91b0ea03c8c"
-> >
-> >  UPSTREAM_CHECK_URI = "https://launchpad.net/ufw"
-> >
-> > -inherit distutils3 features_check systemd update-rc.d
-> > +inherit setuptools3_legacy features_check systemd update-rc.d
-> >
-> >  RDEPENDS:${PN} = " \
-> >                    iptables \
-> > --
-> > 2.25.1
-> >
-> >
-> >
+> > 1) Calling 'setup.py install' is deprecated, so anything which uses a
+> > non-standard install class (ufw, for example) won't work in the
+> > future.  With setuptool3.bbclass now doing bdist_wheel/pip the install
+> > task is ran in a special environment, and non-standard install classes
+> > break quite badly.
 > >
 >
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#95784): https://lists.openembedded.org/g/openembedded-devel/message/95784
-> Mute This Topic: https://lists.openembedded.org/mt/89548753/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
+> right, I was coming to same conclusion, as I was messing to get
+> unattended-upgrades
+> working with new world. I did realize the fact that we did not give any t=
+ime
+> to port recipes and has made this a breaking change.
 >
+> > 2) Python packaging is moving fast towards a world where the only
+> > things packagable are pure modules with entry point scripts and data.
+> > If you want to do more (e.g. install a systemd unit file), then use
+> > something like Meson.
+>
+> I see, that limits the use from distro packaging point of view.
+>
+> >
+> > This is going to be interesting.  My short-term plan is to bring back
+> > the traditional setuptool3.bbclass code as setuptools3-legacy, for the
+> > period between now and when "setup.py install" doesn't exist.
+>
+> yeah I think we need that. that will be an improvement.
+>
+> >
+> > Ross
+> >
+> > On Thu, 3 Mar 2022 at 07:08, Khem Raj <raj.khem@gmail.com> wrote:
+> > >
+> > > On Wed, Mar 2, 2022 at 9:13 PM Tim Orling <ticotimo@gmail.com> wrote:
+> > > >
+> > > >
+> > > >
+> > > > On Wed, Mar 2, 2022 at 6:45 PM Khem Raj <raj.khem@gmail.com> wrote:
+> > > >>
+> > > >> Here is latest failures we are down to 3
+> > > >>
+> > > >> https://errors.yoctoproject.org/Errors/Build/142145/
+> > > >
+> > > >
+> > > > I have a partial fix for python3-slip-dbus, but it doesn=E2=80=99t =
+solve the problem.
+> > > > https://git.openembedded.org/meta-openembedded-contrib/commit/?h=3D=
+timo/pyprojecttoml&id=3D79b14b76276ac9a9378ed37bb39959de8bf4c751
+> > > >
+> > >
+> > > I have addressed it. Right now we are effectively left with
+> > >
+> > > meta-openembedded/meta-oe/recipes-devtools/unattended-upgrades/unatte=
+nded-upgrades_2.6.bb
+> > >
+> > > It fails in weird ways
+> > >
+> > > | Installing collected packages: unattended-upgrades
+> > > | ERROR: For req: unattended-upgrades=3D=3D0.1. Unknown scheme key us=
+ed in
+> > > /mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/unattended-upgra=
+des/2.6-r0/git/dist/unattended_upgrades-0.1-py3-
+> > > none-any.whl: etc (for file
+> > > 'unattended_upgrades-0.1.data/etc/kernel/postinst.d/unattended-upgrad=
+es').
+> > > .data directory contents should be in subdirectories named with a
+> > > valid scheme key (d
+> > > ata, headers, platlib, purelib, scripts)
+> > > | Exception information:
+> > > | Traceback (most recent call last):
+> > > |   File "/mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/unatte=
+nded-upgrades/2.6-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages=
+/pip/_internal/operations/install/wheel.py",
+> > > line 521, in make_data_scheme_file
+> > > |     scheme_path =3D scheme_paths[scheme_key]
+> > > | KeyError: 'etc'
+> > > |
+> > > | During handling of the above exception, another exception occurred:
+> > > |
+> > >
+> > > >>
+> > > >> On Wed, Mar 2, 2022 at 10:40 AM Khem Raj <raj.khem@gmail.com> wrot=
+e:
+> > > >> >
+> > > >> > Here is latest list which is significantly less so thanks for
+> > > >> > contributions thus far.
+> > > >> >
+> > > >> >   meta-openembedded/meta-python/recipes-extended/python-blivet/p=
+ython3-blivetgui_2.2.1.bb
+> > > >> >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+aws-iot-device-sdk-python_1.4.9.bb
+> > > >> >   meta-openembedded/meta-python/recipes-extended/python-blivet/p=
+ython3-blivet_3.4.3.bb
+> > > >> >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+slip-dbus_0.6.5.bb
+> > > >> >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+keras-applications_1.0.8.bb
+> > > >> >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+pymetno_0.9.0.bb
+> > > >> >   meta-openembedded/meta-python/recipes-extended/python-cson/pyt=
+hon3-cson_git.bb
+> > > >> >   meta-openembedded/meta-python/recipes-devtools/python/python3-=
+dbussy_1.3.bb
+> > > >> >   meta-openembedded/meta-python/recipes-connectivity/python-txws=
+/python3-txws_0.9.1.bb
+> > > >> >   meta-openembedded/meta-oe/recipes-devtools/unattended-upgrades=
+/unattended-upgrades_2.6.bb
+> > > >> >
+> > > >> >
+> > > >> > On Tue, Mar 1, 2022 at 8:18 AM Khem Raj <raj.khem@gmail.com> wro=
+te:
+> > > >> > >
+> > > >> > > We are making some progress. This is the latest ( 24 build fai=
+lures )
+> > > >> > > as of last night.
+> > > >> > >
+> > > >> > > https://errors.yoctoproject.org/Errors/Build/142052/
+> > > >> > >
+> > > >> > > On Mon, Feb 28, 2022 at 3:21 PM Khem Raj <raj.khem@gmail.com> =
+wrote:
+> > > >> > > >
+> > > >> > > > Thanks for sending fixing everyone. Lets keep going. Here is=
+ latest
+> > > >> > > > list of failing recipes on master-next now
+> > > >> > > >
+> > > >> > > > Summary: 32 tasks failed:
+> > > >> > > >   meta-openembedded/meta-python/recipes-extended/python-bliv=
+et/python3-blivet_3.4.0.bb:do_install
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/python/pyth=
+on3-aws-iot-device-sdk-python_1.4.9.bb:do_compile
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/python/pyth=
+on3-crcmod_1.7.bb:do_compile
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/python/pyth=
+on3-lrparsing_1.0.17.bb:do_compile
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/python/pyth=
+on3-slip-dbus_0.6.5.bb:do_compile
+> > > >> > > >   meta-openembedded/meta-python/recipes-extended/python-bliv=
+et/python3-blivetgui_2.2.1.bb:do_compile
+> > > >> > > >   meta-raspberrypi/recipes-devtools/python/python3-rtimu_git=
+.bb:do_compile
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/python/pyth=
+on3-flask-versioned_0.9.4-20101221.bb:do_install
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/python/pyth=
+on3-ntplib_0.4.0.bb:do_install
+> > > >> > > >   meta-raspberrypi/recipes-devtools/python/python3-adafruit-=
+circuitpython-register_1.9.4.bb:do_install
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/python/pyth=
+on3-behave_1.2.6.bb:do_install
+> > > >> > > >   meta-atmel/recipes-utils/mpio/mpio_1.3.bb:do_install
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/python/pyth=
+on3-pystache_0.5.4.bb:do_install
+> > > >> > > >   meta-raspberrypi/recipes-devtools/python/python3-adafruit-=
+pureio_1.1.8.bb:do_install
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/python/pyth=
+on3-pyscaffold_4.1.4.bb:do_install
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/python/pyth=
+on3-prctl_1.8.1.bb:do_install
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/python/pyth=
+on3-pymetno_0.9.0.bb:do_install
+> > > >> > > >   meta-openembedded/meta-python/recipes-extended/python-cson=
+/python3-cson_git.bb:do_install
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/python/pyth=
+on3-pydbus-manager_git.bb:do_install
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/python/pyth=
+on3-pymisp_2.4.152.bb:do_install
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/python/pyth=
+on3-dbussy_1.3.bb:do_install
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/gyp/gyp_git=
+.bb:do_install
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/python/pyth=
+on3-keras-applications_1.0.8.bb:do_install
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/python/pyth=
+on3-gcovr_5.0.bb:do_install
+> > > >> > > >   meta-raspberrypi/recipes-devtools/python/python3-adafruit-=
+platformdetect_3.1.1.bb:do_install
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/python/pyth=
+on3-configshell-fb_1.1.29.bb:do_install
+> > > >> > > >   meta-openembedded/meta-python/recipes-devtools/python/pyth=
+on3-xmodem_0.4.6.bb:do_package
+> > > >> > > >   meta-openembedded/meta-oe/recipes-devtools/unattended-upgr=
+ades/unattended-upgrades_2.6.bb:do_install
+> > > >> > > >   meta-openembedded/meta-python/recipes-connectivity/python-=
+txws/python3-txws_0.9.1.bb:do_install
+> > > >> > > >   meta-openembedded/meta-xfce/recipes-apps/catfish/catfish_4=
+.16.3.bb:do_compile
+> > > >> > > >   meta-openembedded/meta-xfce/recipes-apps/menulibre/menulib=
+re_2.2.3.bb:do_install
+> > > >> > > >   meta-openembedded/meta-gnome/recipes-support/onboard/onboa=
+rd_1.4.1.bb:do_compile
+> > > >> > > >
+> > > >> > > > On Sat, Feb 26, 2022 at 11:49 AM Khem Raj <raj.khem@gmail.co=
+m> wrote:
+> > > >> > > > >
+> > > >> > > > > Hello All,
+> > > >> > > > >
+> > > >> > > > > We have PEP-517 packaging related infra changes merged int=
+o oe-core,
+> > > >> > > > > which obviously
+> > > >> > > > > mean there are some failures on various python packages.
+> > > >> > > > >
+> > > >> > > > > I am posting the latest results (qemux86-64/glibc)
+> > > >> > > > >
+> > > >> > > > > https://errors.yoctoproject.org/Errors/Build/141804/
+> > > >> > > > >
+> > > >> > > > > We have 57 recipes left, Tim has worked diligently on fixi=
+ng the
+> > > >> > > > > PEP-517 issues but we would
+> > > >> > > > > need more hands. If you see any of
+> > > >> > > > > these recipes that you can help fixing, please send patche=
+s
+> > > >> > > > >
+> > > >> > > > > Since upcoming release is an LTS release, I would like to =
+have these
+> > > >> > > > > issues fixed for this
+> > > >> > > > > release.
+> > > >> > > > >
+> > > >> > > > > Thank you for your help
+> > > >> > > > >
+> > > >> > > > > -Khem
+> > > >>
+> > > >>
+> > > >>
+> > >
+> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > > Links: You receive all messages sent to this group.
+> > > View/Reply Online (#95730): https://lists.openembedded.org/g/openembe=
+dded-devel/message/95730
+> > > Mute This Topic: https://lists.openembedded.org/mt/89416561/1676615
+> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsu=
+b [ross@burtonini.com]
+> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > >
 
