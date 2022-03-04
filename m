@@ -2,150 +2,176 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B4E3C433F5
-	for <webhook@archiver.kernel.org>; Fri,  4 Mar 2022 08:05:17 +0000 (UTC)
-Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com
- [209.85.219.41])
- by mx.groups.io with SMTP id smtpd.web08.4828.1646381116074225429
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D10EC433FE
+	for <webhook@archiver.kernel.org>; Fri,  4 Mar 2022 08:50:26 +0000 (UTC)
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com
+ [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.web12.5139.1646383825454049062
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Mar 2022 00:05:16 -0800
+ Fri, 04 Mar 2022 00:50:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=KTVkG6CL;
- spf=pass (domain: gmail.com, ip: 209.85.219.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f41.google.com with SMTP id e22so6072164qvf.9
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=UdJ4WxHR;
+ spf=pass (domain: gmail.com, ip: 209.85.210.179,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f179.google.com with SMTP id y11so7079043pfa.6
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Mar 2022 00:05:15 -0800 (PST)
+ Fri, 04 Mar 2022 00:50:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
-        bh=KpfnjkeVpFALKil2US3+kdu1le8Fa7gpWVvIIZ1DHfk=;
-        b=KTVkG6CLZVyZuWBjJCR5HN/LO8WpnDvQybLKPzqWdjCVEMFfEmiO20MTRtjSw4F1sA
-         BmLiSfiDExqHG+7rntNRbl3NFspf+1fU/SKtIZkECw63DUgRM3JiE+kXjHwjzRdASY/w
-         9SAhlC+2N+uJWb3Jo86Ptqivtnbe7jxyVW98Tp7W0aMiCxFSu/en9Ief5rZF/pWW4/mq
-         lGCrk4Zp9x1xOfH+BWHRE6zl84TEJ+PxGnCEnpHgk5NCCKlkCg7Dtok4B/bauluJBtzb
-         QVB8SXAYcCetkxkMj1QUfhFOcd2dDxtKIkfoKzJ9WXnWMGt0uLzBNe8KmO8lHRnDwAzv
-         Ggeg==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=ulOkyRzPyZVbcP2j7U5SpyG6oPNYIrTAHoZ3GgbV4Wo=;
+        b=UdJ4WxHRGj5bsLd7UTs2ULe4vgBUvL1NjNrlFDhDzDz3lvmdUcV9DnLhpnFV4IUPHM
+         2Lj3Lsrc1+cL/ptLEdFjmXDUwhD9YB2toj8yB2B3gKwS4b2YsgeJMKGU8nDo3Cl/DBHJ
+         eFqEmlUaEXatUY52UIs0JC+xXSFAtg1sNrJXL3JWa8qVPWSk16lfgbXpf/4bL186IcZK
+         xWngIrfTzLNyvfBDPHtJqAbsyR0i53z1/nqjHilLcTrtM1+Ah8RBz5eVGbkezYFstAQA
+         rl0WHV3HM/tTCVCNe82N7iBN9/QzgyXejO8Ww5H2ojJV+fX2ocDgTpU5/1uyUSgNYh3t
+         qX5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to;
-        bh=KpfnjkeVpFALKil2US3+kdu1le8Fa7gpWVvIIZ1DHfk=;
-        b=JdASckO4pZ3FLKDhUVqeeATr4AWzTVYCmEzV0B/lAFuWxEsnbQtNmofLZKoEmBABtY
-         xj8i5mQjhRjcyft17H4uyjt0ev8uATSuu8utJs2c7WBqXSBeJXOFrDaHxaWZijEEjWKf
-         3N6nwIAayl1fqhgOT5YkLgoIh7Qp37Uva0zGyW3uBQ899Gbn+6NWLwTTLzBF+GWYHHoN
-         38OtTp+LswIpJLgBf5ZRPsNZGLDitaG1JeesYir37iR7VWBF9Z/eJOP8KWDdzw1ALAsG
-         GHLFiAnumqhWTL0knNcl9r5S4EKwqgo8RtH+OIKLM6iMnxUROmvWHKd5GnP7CJNdhSdS
-         xqPw==
-X-Gm-Message-State: AOAM531tYNDfpoPL76ay8WOSJ0/wt8oJvKato1FpOEaffmg6vKPZHE2v
-	HSGln6S2m9whoFUNNQqwqnv042ddZs5XtK7cw9g=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=ulOkyRzPyZVbcP2j7U5SpyG6oPNYIrTAHoZ3GgbV4Wo=;
+        b=igHayK3yZ/FxexqWzYAdZRlx1v8VhcXJTD1usQcYJNf7oIeucHdG5AUSHZNG6Hc9eX
+         wtxBTZgW2t29Q0yF4ukcEb2CYQsE1IiL5btFw0mRZkap6jDI9+vIrV26V6wva6FYTlf1
+         nWJ0HmvPfORH3LO2tfFSziQbRQEfmEEI6ikkoMHota8Ram69vKaj8qKxRT9LQjiDwBjJ
+         fcSiSVR3+W+eylUQGLcu5l+fQ0+J5z6BTXaC2hFYmIyCrAlbvCYQ9qY6HC3N8WF5bCu6
+         GRNCN8blcG8ctmvi/ak1utWgeDJ6ERpNLA+nwwJWuoCaJclj49/bPoRvkOr1ZIYOCXF7
+         L/+w==
+X-Gm-Message-State: AOAM5337owIrhhtIJb6TC4l2Jwpy9tnZyQl+evvZX4bAAZxLSJsF7YEE
+	hM2M8xouiURxvRS6trR/6EZyLceKVhctSw==
 X-Google-Smtp-Source: 
- ABdhPJz7qmm34VGOOnfWs2CTIH/8GQIOCCSDnllp5vkloqPRRxrLxsu6XPllzQPlIjY5UDX5z2QGkNpE8QA2Vo13Uyw=
-X-Received: by 2002:ad4:5dea:0:b0:433:2d8f:f85 with SMTP id
- jn10-20020ad45dea000000b004332d8f0f85mr15157170qvb.63.1646381115098; Fri, 04
- Mar 2022 00:05:15 -0800 (PST)
-MIME-Version: 1.0
-References: <20220228155714.7894-1-jsbronder@cold-front.org>
- <CAMKF1spdXVvNtLfq=-GBRROe+-=D0jZ+9Pg=EfaoK55A7uqtuw@mail.gmail.com>
- <YiEOlH9jmQ/3JEjo@ravine.members.linode.com>
-In-Reply-To: <YiEOlH9jmQ/3JEjo@ravine.members.linode.com>
+ ABdhPJxnZRvpkn6WCGTYeX0bDLIXtakFWW6HTGdDI/mYXO8al69E642684Immpq90XalC3+sscoKSQ==
+X-Received: by 2002:a05:6a00:150b:b0:4f6:66be:314c with SMTP id
+ q11-20020a056a00150b00b004f666be314cmr8651489pfu.83.1646383824619;
+        Fri, 04 Mar 2022 00:50:24 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ff3d])
+        by smtp.gmail.com with ESMTPSA id
+ k12-20020a635a4c000000b0037852b86236sm3912283pgm.75.2022.03.04.00.50.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 04 Mar 2022 00:50:24 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 4 Mar 2022 00:04:49 -0800
-Message-ID: 
- <CAMKF1sr4g7bZVF+=asUsmpZutoak1HFO79GmN_UnnRiqYSo1Kw@mail.gmail.com>
-Subject: Re: python3-crc32c: add 2.2.post0
-To: Justin Bronder <jsbronder@cold-front.org>, Khem Raj <raj.khem@gmail.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-initramfs][PATCH 04/10] recipes: Update LICENSE variable to use
+ SPDX license identifiers
+Date: Fri,  4 Mar 2022 00:50:12 -0800
+Message-Id: <20220304085018.1255075-4-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220304085018.1255075-1-raj.khem@gmail.com>
+References: <20220304085018.1255075-1-raj.khem@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 04 Mar 2022 08:05:17 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 04 Mar 2022 08:50:26 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95768
+ https://lists.openembedded.org/g/openembedded-devel/message/95769
 
-On Thu, Mar 3, 2022 at 10:53 AM Justin Bronder <jsbronder@cold-front.org> wrote:
->
-> Ah right, this package only support arm or x86.  I'll send an update.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb        | 2 +-
+ meta-initramfs/recipes-devtools/dracut/dracut_055.bb         | 2 +-
+ meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb        | 2 +-
+ meta-initramfs/recipes-devtools/grubby/grubby_git.bb         | 2 +-
+ meta-initramfs/recipes-devtools/klibc/klibc.inc              | 2 +-
+ meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb | 2 +-
+ meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb | 2 +-
+ 7 files changed, 7 insertions(+), 7 deletions(-)
 
-actually thats not the case, it tries to use SSE when target is x86
-and crc extensions on aarch64, for
-other architectures it uses general purpose instructions.
-however it uses wrong way to detect platform by poking at build system
-for platform architecture
-I have sent a patch to fix it.
+diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
+index 08d983e625..9f7a214d8b 100644
+--- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
++++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "kexecboot linux-as-bootloader"
+ DESCRIPTION = "kexecboot is a graphical linux-as-bootloader implementation based on kexec."
+ HOMEPAGE = "http://kexecboot.org"
+-LICENSE = "GPLv2"
++LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ PV = "0.6+git${SRCPV}"
+ S = "${WORKDIR}/git"
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_055.bb b/meta-initramfs/recipes-devtools/dracut/dracut_055.bb
+index 3eee6669a3..a8fc5462f7 100644
+--- a/meta-initramfs/recipes-devtools/dracut/dracut_055.bb
++++ b/meta-initramfs/recipes-devtools/dracut/dracut_055.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Initramfs generator using udev"
+ HOMEPAGE = "https://dracut.wiki.kernel.org/index.php/Main_Page"
+ DESCRIPTION = "Dracut is an event driven initramfs infrastructure. dracut (the tool) is used to create an initramfs image by copying tools and files from an installed system and combining it with the dracut framework, usually found in /usr/lib/dracut/modules.d."
+ 
+-LICENSE = "GPLv2"
++LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ PE = "1"
+diff --git a/meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb b/meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb
+index b224a5c255..307c0e85d8 100644
+--- a/meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb
++++ b/meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb
+@@ -5,7 +5,7 @@ zipl (s390) boot loaders. It is primarily designed to be used from scripts which
+ new kernels and need to find information about the current boot environment. \
+ "
+ HOMEPAGE = "https://github.com/rhboot/grubby"
+-LICENSE = "GPLv2+"
++LICENSE = "GPL-2.0-or-later"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
+ 
+diff --git a/meta-initramfs/recipes-devtools/grubby/grubby_git.bb b/meta-initramfs/recipes-devtools/grubby/grubby_git.bb
+index 43fcc1aee8..a276bf423c 100644
+--- a/meta-initramfs/recipes-devtools/grubby/grubby_git.bb
++++ b/meta-initramfs/recipes-devtools/grubby/grubby_git.bb
+@@ -5,7 +5,7 @@ zipl (s390) boot loaders. It is primarily designed to be used from scripts which
+ new kernels and need to find information about the current boot environment. \
+ "
+ HOMEPAGE = "https://github.com/rhboot/grubby"
+-LICENSE = "GPLv2+"
++LICENSE = "GPL-2.0-or-later"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
+ 
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index 1a188a6faf..ceb4f5ad3b 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -2,7 +2,7 @@ DESCRIPTION = "klibc is intended to be a minimalistic libc subset for \
+ use with initramfs.  It is deliberately written for small size, \
+ minimal entaglement, and portability, not speed."
+ SECTION = "libs"
+-LICENSE = "BSD-3-Clause & GPL-2.0 & MIT & Zlib"
++LICENSE = "BSD-3-Clause & GPL-2.0-only & MIT & Zlib"
+ LIC_FILES_CHKSUM = "file://usr/klibc/LICENSE;md5=d75181f10e998c21eb147f6d2e43ce8b"
+ DEPENDS = "linux-libc-headers perl-native"
+ 
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb
+index e5446c1806..8b91fb4b93 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Small sized tools from mtd-utils for use with initramfs."
+ SECTION = "base"
+ DEPENDS = "zlib lzo e2fsprogs util-linux"
+ HOMEPAGE = "http://www.linux-mtd.infradead.org/"
+-LICENSE = "GPLv2+"
++LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
+                     file://include/common.h;beginline=1;endline=17;md5=ba05b07912a44ea2bf81ce409380049c"
+ 
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
+index a588296c05..88f32c8182 100644
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
+@@ -3,7 +3,7 @@ SUMMARY = "Kexec tools, statically compiled against klibc"
+ AUTHOR = "Eric Biederman"
+ HOMEPAGE = "http://kernel.org/pub/linux/utils/kernel/kexec/"
+ SECTION = "kernel/userland"
+-LICENSE = "GPLv2"
++LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=ea5bed2f60d357618ca161ad539f7c0a \
+                     file://kexec/kexec.c;beginline=1;endline=20;md5=af10f6ae4a8715965e648aa687ad3e09"
+ PV = "2.0.18+git${SRCPV}"
+-- 
+2.35.1
 
->
-> On 02/03/22 18:47 -0800, Khem Raj wrote:
-> > I am seeing a failure with clang on non x86 host. See
-> >
-> > https://errors.yoctoproject.org/Errors/Details/650724/
-> >
-> > On Mon, Feb 28, 2022 at 7:57 AM Justin Bronder <jsbronder@cold-front.org> wrote:
-> > >
-> > > Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
-> > > ---
-> > >  meta-python/licenses/CRC32C-ADLER                | 15 +++++++++++++++
-> > >  .../python/python3-crc32c_2.2.post0.bb           | 16 ++++++++++++++++
-> > >  2 files changed, 31 insertions(+)
-> > >  create mode 100644 meta-python/licenses/CRC32C-ADLER
-> > >  create mode 100644 meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb
-> > >
-> > > diff --git a/meta-python/licenses/CRC32C-ADLER b/meta-python/licenses/CRC32C-ADLER
-> > > new file mode 100644
-> > > index 0000000000..f1f0e94ee0
-> > > --- /dev/null
-> > > +++ b/meta-python/licenses/CRC32C-ADLER
-> > > @@ -0,0 +1,15 @@
-> > > +This software is provided 'as-is', without any express or implied
-> > > +warranty.  In no event will the author be held liable for any damages
-> > > +arising from the use of this software.
-> > > +
-> > > +Permission is granted to anyone to use this software for any purpose,
-> > > +including commercial applications, and to alter it and redistribute it
-> > > +freely, subject to the following restrictions:
-> > > +
-> > > +1. The origin of this software must not be misrepresented; you must not
-> > > +   claim that you wrote the original software. If you use this software
-> > > +   in a product, an acknowledgment in the product documentation would be
-> > > +   appreciated but is not required.
-> > > +2. Altered source versions must be plainly marked as such, and must not be
-> > > +   misrepresented as being the original software.
-> > > +3. This notice may not be removed or altered from any source distribution.
-> > > diff --git a/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb b/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb
-> > > new file mode 100644
-> > > index 0000000000..0d51420939
-> > > --- /dev/null
-> > > +++ b/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb
-> > > @@ -0,0 +1,16 @@
-> > > +SUMMARY = "A python package implementing the crc32c algorithmin hardware and software"
-> > > +HOMEPAGE = "https://github.com/ICRAR/crc32c"
-> > > +
-> > > +LICENSE = "BSD-2-Clause & BSD-3-Clause & CRC32C-ADLER & LGPL-2.0+"
-> > > +LIC_FILES_CHKSUM = " \
-> > > +    file://LICENSE;md5=4fbd65380cdd255951079008b364516c \
-> > > +    file://LICENSE.google-crc32c;md5=e9ed01b5e5ac9eae23fc2bb33701220c \
-> > > +    file://LICENSE.slice-by-8;md5=6b3bc7709d6b2db6646ec2467310ff6b \
-> > > +    file://crc32c_adler.c;startline=9;endline=24;md5=c60e6e55d0e5d95effa6fad27db0711a \
-> > > +"
-> > > +
-> > > +SRC_URI[sha256sum] = "3d058e7a5e37e4985d1a7ad4cb702bca56b490daa658d4851377d13ead8b435e"
-> > > +
-> > > +inherit pypi setuptools3
-> > > +
-> > > +RDEPENDS:${PN} += "python3-core"
-> > > --
-> > > 2.35.1
-> > >
-> > >
-> > > -=-=-=-=-=-=-=-=-=-=-=-
-> > > Links: You receive all messages sent to this group.
-> > > View/Reply Online (#95585): https://lists.openembedded.org/g/openembedded-devel/message/95585
-> > > Mute This Topic: https://lists.openembedded.org/mt/89453390/1997914
-> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> > > -=-=-=-=-=-=-=-=-=-=-=-
-> > >
->
-> --
-> Justin Bronder
 
