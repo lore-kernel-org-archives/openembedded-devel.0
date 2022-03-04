@@ -2,61 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C924C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3362FC433EF
 	for <webhook@archiver.kernel.org>; Fri,  4 Mar 2022 08:50:30 +0000 (UTC)
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
- [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web08.5028.1646383829470616461
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
+ [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.web11.5085.1646383829057554960
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 04 Mar 2022 00:50:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=J15iwC3v;
- spf=pass (domain: gmail.com, ip: 209.85.210.180,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=PXtyVttN;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id s8so2999576pfk.12
+Received: by mail-pf1-f170.google.com with SMTP id a5so7070774pfv.9
         for <openembedded-devel@lists.openembedded.org>;
  Fri, 04 Mar 2022 00:50:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=5/KazRnGqF2Ow8M9Ic5C3+RE0fmeEvJ9/XQhTNgdm0g=;
-        b=J15iwC3vnYDoV0ZJkPdrrPOdlKjmhzXq6LmORb2ftHD3vNfh8FqLj1gxKhE9eg9OWw
-         LmkW4i7rRPbbi8MU36Q67QPrx9kTbwojNREbMRPEyk7T1DAD677WDYBGVzj6wCsGT2g6
-         2jLvDI0sbACma6Uv4J7f3Yf8f72eqdt2h9JJz4U5zyO8gftgbVZYxqKmvIEM/64JEYgu
-         q3sVTI+ptMR2bQJdM4+pJAM7GPGmB4S1e8iJI+H28SULm1iWIQbtU8dnK35hDGqD3B97
-         FLHgoHL2++/Zp5+1KM8GjAvDpSFfbppFBLGXzzCYsShyMIHROrONDOTWM6lwBCKoC8L8
-         tQyQ==
+        bh=ckf+0UHmjEJvGezrHHOaICM2q9dmxx/MMQPuhP9hkyw=;
+        b=PXtyVttNU3o0ECOPRMr2sP+P2c1HVMR0mC3jMOdCUEfSCsEZMSamq3QWQIriSgWsrd
+         KxCWoRcmsoSOkofdrDUA/94NF1rNstMKGiAmoLa7hDWLKd8X5xemYnfXEUtUhu1QUP99
+         pn6s098kIBuWj8QCTo+ufiwc6MPLj3wkAWT6qNgR2fNtMJCK/zeLuKMDuhyF1IpfT8iZ
+         UUev38zgCiiCbONM4qbmx+44k3yHEWDUZL4LKcR9XclWhuGKQ3uv+KpSyLAdejtwoJuF
+         5c3u+UfI+5E73bMM01/MlXnLwp3FYefOO8bImi04Z7+TFxTImqA4A3MQ6ClWu4WHyylw
+         idRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=5/KazRnGqF2Ow8M9Ic5C3+RE0fmeEvJ9/XQhTNgdm0g=;
-        b=6dp73iryXVEBZYNn1+y3cfPg/dzQqV3h/4FhYEOOFba4/YymLhU+cx5uKtRlBMmUhD
-         M1ykBz9NRglNLxXMncSXrL0dm87yldLz9r4ArsDyOST50e3zWzqVZDwlgI1f4mk0aLqs
-         ZQjpdKv6QAN2eFH4KYV+v/dn8OlS6v3LCPGtVANQp4pqSsdOmzoxu6pCO5tlo7lSz19y
-         X2qDzY13RPsLSZ8gH6VXzRX6hfTQEaFiX0xeRLsrvBQj43ujo3bKtbv6NgRDM6TMUuX3
-         huHN2WI6hFEqkZBIlK0cenXL22AN0IL0f+xzcGJIM0Ln3c1b8nYWuPpFL9Sf9ib4Ifxw
-         V0YQ==
-X-Gm-Message-State: AOAM530GRpEu/MGuZcC6m9wMCDGdSUpPVWO9NDquUr7gyHnL5h6QGzj+
-	mwPhZ+f4VHFVXQdJL7A3YBMzQlMPjHJ7FQ==
+        bh=ckf+0UHmjEJvGezrHHOaICM2q9dmxx/MMQPuhP9hkyw=;
+        b=U+Ap6JFnRwhOfG62Ciqv65o7aM3ZE+5Jmq086He/+CRn4w+wWBK/t3NXKal0mKzbJO
+         ojuOEfIZa+RB6uy8OIOvCNIImjB1j3i1FF3/PcgszdWJ1K9V1mzjSA/hbGy4H2V+pgLx
+         4sbO85Vezh0nG62msijNdfaVaDHMTEONlsfYUMI1EHI+XpDFjirXuLGj5uYUDHAGGSb1
+         3lCYhbSnBw0kCRWztOJ56bZxIdUkdG8hMw57c10AlFI92HgseFnBNb+CxoClASyQyHbO
+         STxC/2lxZww+aYkbjBK7koWJxGRoGnB4h+9HRYlz39WrGn5h2TmJaCmgkKjmlKdf+zwl
+         BCdA==
+X-Gm-Message-State: AOAM531ZH1Y3Sf45A0ERcQmoXzg4GfW8VFmAj6Vk201vR4MD8i4ldlA7
+	T3486PiHLPmTtUUUgH9Ci86HJWVMGeEYVw==
 X-Google-Smtp-Source: 
- ABdhPJwwQ1k3r6ww0yUdp5nMpFTNT0SdyN7KNBZUOMpWCY2k2XGRmvsOP6TcCs/tosJOIbZ6d/ulgA==
-X-Received: by 2002:a65:6255:0:b0:364:4513:67bf with SMTP id
- q21-20020a656255000000b00364451367bfmr33542473pgv.64.1646383828355;
-        Fri, 04 Mar 2022 00:50:28 -0800 (PST)
+ ABdhPJwV1Mbz7snGu8aEYY337hlfvG27YzOd0PpNszZ/W8tMz95OpZX/WB/IjUElV2kr895UY+28uA==
+X-Received: by 2002:a05:6a00:a8f:b0:4e1:2619:11a2 with SMTP id
+ b15-20020a056a000a8f00b004e1261911a2mr42151950pfl.53.1646383827549;
+        Fri, 04 Mar 2022 00:50:27 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ff3d])
         by smtp.gmail.com with ESMTPSA id
- k12-20020a635a4c000000b0037852b86236sm3912283pgm.75.2022.03.04.00.50.27
+ k12-20020a635a4c000000b0037852b86236sm3912283pgm.75.2022.03.04.00.50.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Fri, 04 Mar 2022 00:50:27 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 08/10] recipes: Update LICENSE variable to use
- SPDX license identifiers
-Date: Fri,  4 Mar 2022 00:50:16 -0800
-Message-Id: <20220304085018.1255075-8-raj.khem@gmail.com>
+Subject: [meta-perl][PATCH 07/10] recipes: Update LICENSE variable to use SPDX
+ license identifiers
+Date: Fri,  4 Mar 2022 00:50:15 -0800
+Message-Id: <20220304085018.1255075-7-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220304085018.1255075-1-raj.khem@gmail.com>
 References: <20220304085018.1255075-1-raj.khem@gmail.com>
@@ -67,795 +67,1003 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 04 Mar 2022 08:50:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95775
+ https://lists.openembedded.org/g/openembedded-devel/message/95774
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb | 2 +-
- meta-python/recipes-devtools/python/python3-ansi2html_1.7.0.bb  | 2 +-
- meta-python/recipes-devtools/python/python3-argh_0.26.2.bb      | 2 +-
- meta-python/recipes-devtools/python/python3-astroid_2.9.3.bb    | 2 +-
- meta-python/recipes-devtools/python/python3-asyncio-glib_0.1.bb | 2 +-
- meta-python/recipes-devtools/python/python3-bitarray_2.3.7.bb   | 2 +-
- meta-python/recipes-devtools/python/python3-can_3.3.4.bb        | 2 +-
- meta-python/recipes-devtools/python/python3-cchardet_2.1.7.bb   | 2 +-
- meta-python/recipes-devtools/python/python3-chardet_4.0.0.bb    | 2 +-
- .../recipes-devtools/python/python3-contextlib2_21.6.0.bb       | 2 +-
- meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb | 2 +-
- meta-python/recipes-devtools/python/python3-cvxopt_1.2.7.bb     | 2 +-
- meta-python/recipes-devtools/python/python3-dbussy_1.3.bb       | 2 +-
- meta-python/recipes-devtools/python/python3-defusedxml_0.7.1.bb | 2 +-
- meta-python/recipes-devtools/python/python3-dominate_2.6.0.bb   | 2 +-
- meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb      | 2 +-
- meta-python/recipes-devtools/python/python3-gmpy2_2.1.2.bb      | 2 +-
- meta-python/recipes-devtools/python/python3-greenlet_1.1.2.bb   | 2 +-
- .../recipes-devtools/python/python3-html2text_2020.1.16.bb      | 2 +-
- .../recipes-devtools/python/python3-intervals_1.10.0.post1.bb   | 2 +-
- meta-python/recipes-devtools/python/python3-langtable_0.0.57.bb | 2 +-
- meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb | 2 +-
- meta-python/recipes-devtools/python/python3-lxml_4.7.1.bb       | 2 +-
- meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb | 2 +-
- meta-python/recipes-devtools/python/python3-nocasedict_1.0.2.bb | 2 +-
- meta-python/recipes-devtools/python/python3-obd_0.7.1.bb        | 2 +-
- meta-python/recipes-devtools/python/python3-paramiko_2.9.2.bb   | 2 +-
- meta-python/recipes-devtools/python/python3-portion_2.2.0.bb    | 2 +-
- meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb      | 2 +-
- .../recipes-devtools/python/python3-pyalsaaudio_0.9.0.bb        | 2 +-
- meta-python/recipes-devtools/python/python3-pyatspi_2.38.2.bb   | 2 +-
- meta-python/recipes-devtools/python/python3-pybluez_0.23.bb     | 2 +-
- meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb    | 2 +-
- meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb     | 2 +-
- meta-python/recipes-devtools/python/python3-pyiface_git.bb      | 2 +-
- meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb     | 2 +-
- meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb  | 2 +-
- meta-python/recipes-devtools/python/python3-pystemd_0.8.0.bb    | 2 +-
- .../recipes-devtools/python/python3-python-vlc_3.0.12118.bb     | 2 +-
- meta-python/recipes-devtools/python/python3-pyudev_0.23.2.bb    | 2 +-
- meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb     | 2 +-
- meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb  | 2 +-
- meta-python/recipes-devtools/python/python3-smbus_4.3.bb        | 2 +-
- meta-python/recipes-devtools/python/python3-smpplib_2.2.1.bb    | 2 +-
- meta-python/recipes-devtools/python/python3-systemd_234.bb      | 2 +-
- meta-python/recipes-devtools/python/python3-term_2.3.bb         | 2 +-
- .../python/python3-typing-extensions_3.10.0.0.bb                | 2 +-
- .../recipes-devtools/python/python3-versiontools_1.9.1.bb       | 2 +-
- meta-python/recipes-devtools/python/python3-xmlrunner_1.7.7.bb  | 2 +-
- .../python/python3-xstatic-font-awesome_4.7.0.0.bb              | 2 +-
- meta-python/recipes-devtools/python/python3-zeroconf_0.38.1.bb  | 2 +-
- .../unattended-upgrades/unattended-upgrades_2.6.bb              | 2 +-
- .../recipes-extended/python-blivet/python3-blivet_3.4.3.bb      | 2 +-
- .../recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb   | 2 +-
- meta-python/recipes-extended/python-meh/python3-meh_0.50.1.bb   | 2 +-
- .../python-pykickstart/python3-pykickstart_3.34.bb              | 2 +-
- .../recipes-extended/python-pyparted/python3-pyparted_3.11.7.bb | 2 +-
- .../python3-portalocker/python3-portalocker_2.3.2.bb            | 2 +-
- meta-python/recipes-extended/pywbem/python3-pywbem_1.3.0.bb     | 2 +-
- 59 files changed, 59 insertions(+), 59 deletions(-)
+ meta-perl/recipes-extended/logcheck/logcheck_1.3.23.bb          | 2 +-
+ .../recipes-extended/mime-construct/mime-construct_1.11.bb      | 2 +-
+ meta-perl/recipes-perl/adduser/adduser_3.118.bb                 | 2 +-
+ .../recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb    | 2 +-
+ meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb    | 2 +-
+ meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.48.bb  | 2 +-
+ meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb               | 2 +-
+ .../libclass/libclass-method-modifiers-perl_2.13.bb             | 2 +-
+ .../recipes-perl/libconfig/libconfig-autoconf-perl_0.319.bb     | 2 +-
+ .../recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.15.bb   | 2 +-
+ .../recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.15.bb  | 2 +-
+ .../recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.32.bb     | 2 +-
+ meta-perl/recipes-perl/libcurses/libcurses-perl_1.38.bb         | 2 +-
+ meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.68.bb         | 2 +-
+ .../libdevel/libdevel-globaldestruction-perl_0.14.bb            | 2 +-
+ meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb    | 2 +-
+ meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb    | 2 +-
+ meta-perl/recipes-perl/libencode/libencode-locale-perl_1.05.bb  | 2 +-
+ meta-perl/recipes-perl/libencode/libencode-perl_3.16.bb         | 2 +-
+ meta-perl/recipes-perl/libenv/libenv-perl_1.04.bb               | 2 +-
+ .../recipes-perl/libextutils/libextutils-config-perl_0.008.bb   | 2 +-
+ .../recipes-perl/libextutils/libextutils-cppguess-perl_0.23.bb  | 2 +-
+ .../recipes-perl/libextutils/libextutils-helpers-perl_0.026.bb  | 2 +-
+ .../libextutils/libextutils-installpaths-perl_0.012.bb          | 2 +-
+ .../recipes-perl/libextutils/libextutils-parsexs-perl_3.35.bb   | 2 +-
+ meta-perl/recipes-perl/libfile/libfile-slurp-perl_9999.19.bb    | 2 +-
+ meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.013.bb    | 2 +-
+ meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.72.bb      | 2 +-
+ meta-perl/recipes-perl/libhtml/libhtml-tagset-perl_3.20.bb      | 2 +-
+ meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb        | 2 +-
+ .../recipes-perl/libimport/libimport-into-perl_1.002004.bb      | 2 +-
+ meta-perl/recipes-perl/libio/compress-raw-bzip2-perl_2.096.bb   | 2 +-
+ meta-perl/recipes-perl/libio/compress-raw-lzma-perl_2.096.bb    | 2 +-
+ meta-perl/recipes-perl/libio/compress-raw-zlib-perl_2.096.bb    | 2 +-
+ meta-perl/recipes-perl/libio/io-compress-lzma-perl_2.096.bb     | 2 +-
+ meta-perl/recipes-perl/libio/io-compress-perl_2.096.bb          | 2 +-
+ meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.074.bb     | 2 +-
+ meta-perl/recipes-perl/libio/libio-stringy-perl_2.111.bb        | 2 +-
+ meta-perl/recipes-perl/libipc/libipc-signal-perl_1.00.bb        | 2 +-
+ meta-perl/recipes-perl/liblocale/liblocale-gettext-perl_1.07.bb | 2 +-
+ meta-perl/recipes-perl/libmime/libmime-charset-perl_1.012.2.bb  | 2 +-
+ meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb       | 2 +-
+ .../recipes-perl/libmodule/libmodule-build-tiny-perl_0.039.bb   | 2 +-
+ .../recipes-perl/libmodule/libmodule-pluggable-perl_5.2.bb      | 2 +-
+ .../recipes-perl/libmodule/libmodule-runtime-perl_0.016.bb      | 2 +-
+ meta-perl/recipes-perl/libmoo/libmoo-perl_2.005004.bb           | 2 +-
+ meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.68.bb          | 2 +-
+ meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb        | 2 +-
+ meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb        | 2 +-
+ meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.05.bb        | 2 +-
+ meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb    | 2 +-
+ meta-perl/recipes-perl/librole/librole-tiny-perl_2.002004.bb    | 2 +-
+ meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb    | 2 +-
+ .../recipes-perl/libstrictures/libstrictures-perl_2.000006.bb   | 2 +-
+ .../libsub/libsub-exporter-progressive-perl_0.001013.bb         | 2 +-
+ meta-perl/recipes-perl/libsub/libsub-uplevel-perl_0.2800.bb     | 2 +-
+ meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.38.bb     | 2 +-
+ meta-perl/recipes-perl/libtest/libtest-deep-perl_1.130.bb       | 2 +-
+ meta-perl/recipes-perl/libtest/libtest-harness-perl_3.42.bb     | 2 +-
+ meta-perl/recipes-perl/libtest/libtest-nowarnings-perl_1.04.bb  | 2 +-
+ meta-perl/recipes-perl/libtest/libtest-warn-perl_0.36.bb        | 2 +-
+ meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.031.bb   | 2 +-
+ meta-perl/recipes-perl/libtext/libtext-charwidth-perl_0.04.bb   | 2 +-
+ meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb        | 2 +-
+ meta-perl/recipes-perl/libtext/libtext-iconv-perl_1.7.bb        | 2 +-
+ meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb    | 2 +-
+ .../libunicode/libunicode-linebreak-perl_2019.001.bb            | 2 +-
+ .../recipes-perl/libxml/libxml-filter-buffertext-perl_1.01.bb   | 2 +-
+ meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb      | 2 +-
+ meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.57.bb    | 2 +-
+ meta-perl/recipes-perl/po4a/po4a_0.49.bb                        | 2 +-
+ 71 files changed, 71 insertions(+), 71 deletions(-)
 
-diff --git a/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb b/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb
-index 1e9ba9e140..f5e2f67b35 100644
---- a/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb
-+++ b/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Telepathy IM framework - Python package"
- HOMEPAGE = "http://telepathy.freedesktop.org/wiki/"
--LICENSE = "LGPLv2.1+"
-+LICENSE = "LGPL-2.1-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1 \
-                     file://src/utils.py;beginline=1;endline=17;md5=9a07d1a9791a7429a14e7b25c6c86822"
- 
-diff --git a/meta-python/recipes-devtools/python/python3-ansi2html_1.7.0.bb b/meta-python/recipes-devtools/python/python3-ansi2html_1.7.0.bb
-index df50bc7a89..0a81ebdded 100644
---- a/meta-python/recipes-devtools/python/python3-ansi2html_1.7.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-ansi2html_1.7.0.bb
-@@ -1,7 +1,7 @@
- DESCRPTION = "ansi2html - Convert text with ANSI color codes to HTML or to LaTeX"
- HOMEPAGE = "https://github.com/ralphbean/ansi2html"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3000208d539ec061b899bce1d9ce9404"
--LICENSE = "GPLv3"
-+LICENSE = "GPL-3.0-only"
- 
- PYPI_PACKAGE = "ansi2html"
- 
-diff --git a/meta-python/recipes-devtools/python/python3-argh_0.26.2.bb b/meta-python/recipes-devtools/python/python3-argh_0.26.2.bb
-index d07ccbbf90..c02e31a9a1 100644
---- a/meta-python/recipes-devtools/python/python3-argh_0.26.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-argh_0.26.2.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Pattern matching and various utilities for file systems paths."
- 
--LICENSE = "LGPLv2"
-+LICENSE = "LGPL-2.0-only"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=cede70b648dcc81baf5b431d38905bad"
- 
- SRC_URI[sha256sum] = "e9535b8c84dc9571a48999094fda7f33e63c3f1b74f3e5f3ac0105a58405bb65"
-diff --git a/meta-python/recipes-devtools/python/python3-astroid_2.9.3.bb b/meta-python/recipes-devtools/python/python3-astroid_2.9.3.bb
-index 7bc93bf335..5828c24a23 100644
---- a/meta-python/recipes-devtools/python/python3-astroid_2.9.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-astroid_2.9.3.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "An abstract syntax tree for Python with inference support."
- HOMEPAGE = "https://pypi.python.org/pypi/astroid"
- SECTION = "devel/python"
--LICENSE = "LGPL-2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
- 
- SRC_URI[sha256sum] = "1efdf4e867d4d8ba4a9f6cf9ce07cd182c4c41de77f23814feb27ca93ca9d877"
-diff --git a/meta-python/recipes-devtools/python/python3-asyncio-glib_0.1.bb b/meta-python/recipes-devtools/python/python3-asyncio-glib_0.1.bb
-index 6f67d28651..2314f72845 100644
---- a/meta-python/recipes-devtools/python/python3-asyncio-glib_0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-asyncio-glib_0.1.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "An implementation of the Python 3 asyncio event loop on top of GLib"
- AUTHOR = "James Henstridge"
--LICENSE = "LGPL-2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c"
- 
- inherit setuptools3 pypi
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_2.3.7.bb b/meta-python/recipes-devtools/python/python3-bitarray_2.3.7.bb
-index 6566f8d664..46ceed8b80 100644
---- a/meta-python/recipes-devtools/python/python3-bitarray_2.3.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-bitarray_2.3.7.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
- HOMEPAGE = "https://github.com/ilanschnell/bitarray"
--LICENSE = "PSF"
-+LICENSE = "PSF-2.0"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
- 
- SRC_URI[sha256sum] = "4da790ab193e993107f3ff0aebc4f8d6ad5196a19071fbafad16b02898a44fd7"
-diff --git a/meta-python/recipes-devtools/python/python3-can_3.3.4.bb b/meta-python/recipes-devtools/python/python3-can_3.3.4.bb
-index 760b5dde9c..4fe7bcbff0 100644
---- a/meta-python/recipes-devtools/python/python3-can_3.3.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-can_3.3.4.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Controller Area Network (CAN) interface module for Python"
- SECTION = "devel/python"
--LICENSE = "LGPLv3"
-+LICENSE = "LGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e6a600fd5e1d9cbde2d983680233ad02"
- 
- SRC_URI[md5sum] = "305075968c56bd85130b19d86e9e505d"
-diff --git a/meta-python/recipes-devtools/python/python3-cchardet_2.1.7.bb b/meta-python/recipes-devtools/python/python3-cchardet_2.1.7.bb
-index 8fa9797768..d6d96965eb 100644
---- a/meta-python/recipes-devtools/python/python3-cchardet_2.1.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-cchardet_2.1.7.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Universal character encoding detector"
- HOMEPAGE = "https://github.com/PyYoshi/cChardet"
--LICENSE = "MPLv1.1"
-+LICENSE = "MPL-1.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=6ecda54f6f525388d71d6b3cd92f7474"
- 
- SRC_URI[sha256sum] = "c428b6336545053c2589f6caf24ea32276c6664cb86db817e03a94c60afa0eaf"
-diff --git a/meta-python/recipes-devtools/python/python3-chardet_4.0.0.bb b/meta-python/recipes-devtools/python/python3-chardet_4.0.0.bb
-index 8b3c8bbaaf..75fe4df8d7 100644
---- a/meta-python/recipes-devtools/python/python3-chardet_4.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-chardet_4.0.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Universal encoding detector for Python 2 and 3"
--LICENSE = "LGPL-2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a6f89e2100d9b6cdffcea4f398e37343"
- 
- SRC_URI[sha256sum] = "0d6f53a15db4120f2b08c94f11e7d93d2c911ee118b6b30a04ec3ee8310179fa"
-diff --git a/meta-python/recipes-devtools/python/python3-contextlib2_21.6.0.bb b/meta-python/recipes-devtools/python/python3-contextlib2_21.6.0.bb
-index f9900b134b..5a54c696f4 100644
---- a/meta-python/recipes-devtools/python/python3-contextlib2_21.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-contextlib2_21.6.0.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Backports and enhancements for the contextlib module"
- HOMEPAGE = "http://contextlib2.readthedocs.org/"
- SECTION = "devel/python"
--LICENSE = "PSF & Apache-2"
-+LICENSE = "PSF-2.0 & Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d2b6be100f1002194122ec9bfee7b8b4"
- 
- SRC_URI[sha256sum] = "ab1e2bfe1d01d968e1b7e8d9023bc51ef3509bba217bb730cee3827e1ee82869"
-diff --git a/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb b/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb
-index 040bbd320d..78e14e1d2f 100644
---- a/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb
-+++ b/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "A python package implementing the crc32c algorithmin hardware and software"
- HOMEPAGE = "https://github.com/ICRAR/crc32c"
- 
--LICENSE = "BSD-2-Clause & BSD-3-Clause & CRC32C-ADLER & LGPL-2.0+"
-+LICENSE = "BSD-2-Clause & BSD-3-Clause & CRC32C-ADLER & LGPL-2.0-or-later"
- LIC_FILES_CHKSUM = " \
-     file://LICENSE;md5=4fbd65380cdd255951079008b364516c \
-     file://LICENSE.google-crc32c;md5=e9ed01b5e5ac9eae23fc2bb33701220c \
-diff --git a/meta-python/recipes-devtools/python/python3-cvxopt_1.2.7.bb b/meta-python/recipes-devtools/python/python3-cvxopt_1.2.7.bb
-index 1bcf18ab6f..70e9831770 100644
---- a/meta-python/recipes-devtools/python/python3-cvxopt_1.2.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-cvxopt_1.2.7.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Convex optimization package"
- HOMEPAGE = "http://cvxopt.org"
--LICENSE = "GPL-3.0"
-+LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=ba1a8a73d8ebea5c47a1173aaf476ddd"
- 
- SRC_URI = "git://github.com/cvxopt/cvxopt;protocol=https;branch=master"
-diff --git a/meta-python/recipes-devtools/python/python3-dbussy_1.3.bb b/meta-python/recipes-devtools/python/python3-dbussy_1.3.bb
-index 1911182fcd..b1ba953922 100644
---- a/meta-python/recipes-devtools/python/python3-dbussy_1.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-dbussy_1.3.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "language bindings for libdbus, for Python 3.5 or later"
- HOMEPAGE = "https://github.com/ldo/dbussy"
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=a916467b91076e631dd8edb7424769c7"
- 
- SRC_URI = "git://github.com/ldo/dbussy.git;branch=master;protocol=https \
-diff --git a/meta-python/recipes-devtools/python/python3-defusedxml_0.7.1.bb b/meta-python/recipes-devtools/python/python3-defusedxml_0.7.1.bb
-index e5790f478c..3396c7262d 100644
---- a/meta-python/recipes-devtools/python/python3-defusedxml_0.7.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-defusedxml_0.7.1.bb
-@@ -2,7 +2,7 @@ SUMMARY = "XML bomb protection for Python stdlib modules"
- DESCRIPTION = "Python package with modified subclasses of all stdlib XML \
- parsers that prevent any potentially malicious operation."
- 
--LICENSE = "PSF"
-+LICENSE = "PSF-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=056fea6a4b395a24d0d278bf5c80249e"
- 
- SRC_URI[sha256sum] = "1bb3032db185915b62d7c6209c5a8792be6a32ab2fedacc84e01b52c51aa3e69"
-diff --git a/meta-python/recipes-devtools/python/python3-dominate_2.6.0.bb b/meta-python/recipes-devtools/python/python3-dominate_2.6.0.bb
-index 40bc1868f4..8e17438262 100644
---- a/meta-python/recipes-devtools/python/python3-dominate_2.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-dominate_2.6.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Dominate is a Python library for creating and manipulating HTML documents using an elegant DOM API."
--LICENSE = "LGPLv3"
-+LICENSE = "LGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
- 
- SRC_URI[md5sum] = "9f714324ca99eee98bb3c3cdbe838de6"
-diff --git a/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb b/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb
-index 3fdc1363c1..2fbc277139 100644
---- a/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Python bindings for Fast Artificial Neural Networks 2.2.0 (FANN >= 2.2.0)"
- SECTION = "devel/python"
--LICENSE = "LGPLv2"
-+LICENSE = "LGPL-2.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c73b943dc75f6f65e007c56ac6515c8f"
- 
- SRC_URI[md5sum] = "0b85b418018746d63ed66b55465697a9"
-diff --git a/meta-python/recipes-devtools/python/python3-gmpy2_2.1.2.bb b/meta-python/recipes-devtools/python/python3-gmpy2_2.1.2.bb
-index d064ba5c07..274f24090b 100644
---- a/meta-python/recipes-devtools/python/python3-gmpy2_2.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-gmpy2_2.1.2.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "GMP/MPIR, MPFR, and MPC interface to Python 2.6+ and 3.x"
- SECTION = "devel/python"
--LICENSE = "GPL-3.0 | LGPL-3.0+"
-+LICENSE = "GPL-3.0-only | LGPL-3.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
-                     file://COPYING.LESSER;md5=e6a600fd5e1d9cbde2d983680233ad02"
- 
-diff --git a/meta-python/recipes-devtools/python/python3-greenlet_1.1.2.bb b/meta-python/recipes-devtools/python/python3-greenlet_1.1.2.bb
-index 4a5b1d2c8b..d14987b1fe 100644
---- a/meta-python/recipes-devtools/python/python3-greenlet_1.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-greenlet_1.1.2.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Python lightweight in-process concurrent programming"
- HOMEPAGE = "https://greenlet.readthedocs.io/en/latest/"
--LICENSE = "MIT & PSF"
-+LICENSE = "MIT & PSF-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e95668d68e4329085c7ab3535e6a7aee \
-                     file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
- 
-diff --git a/meta-python/recipes-devtools/python/python3-html2text_2020.1.16.bb b/meta-python/recipes-devtools/python/python3-html2text_2020.1.16.bb
-index c5ef2ccd3a..64873d2464 100644
---- a/meta-python/recipes-devtools/python/python3-html2text_2020.1.16.bb
-+++ b/meta-python/recipes-devtools/python/python3-html2text_2020.1.16.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "Convert HTML to Markdown-formatted text"
- HOMEPAGE = "https://github.com/Alir3z4/html2text"
- 
--LICENSE = "GPL-3.0"
-+LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- SRC_URI[md5sum] = "c77b580c94d1a9e0145f23cc4472993d"
-diff --git a/meta-python/recipes-devtools/python/python3-intervals_1.10.0.post1.bb b/meta-python/recipes-devtools/python/python3-intervals_1.10.0.post1.bb
-index fd636421bd..d841f92343 100644
---- a/meta-python/recipes-devtools/python/python3-intervals_1.10.0.post1.bb
-+++ b/meta-python/recipes-devtools/python/python3-intervals_1.10.0.post1.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "Interval arithmetic for Python"
- HOMEPAGE = "https://github.com/AlexandreDecan/python-intervals"
- SECTION = "devel/python"
- 
--LICENSE = "LGPLv3"
-+LICENSE = "LGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=05f1e16a8e59ce3e9a979e881816c2ab"
- 
- PYPI_PACKAGE := "python-intervals"
-diff --git a/meta-python/recipes-devtools/python/python3-langtable_0.0.57.bb b/meta-python/recipes-devtools/python/python3-langtable_0.0.57.bb
-index 39819f4351..948f7651a0 100644
---- a/meta-python/recipes-devtools/python/python3-langtable_0.0.57.bb
-+++ b/meta-python/recipes-devtools/python/python3-langtable_0.0.57.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "langtable is used to guess reasonable defaults for locale,\
- keyboard, territory"
- HOMEPAGE = "https://github.com/mike-fabian/langtable/"
--LICENSE = "GPLv3+"
-+LICENSE = "GPL-3.0-or-later"
- SECTION = "devel/python"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-diff --git a/meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb b/meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb
-index 9974326de6..673d32c2d4 100644
---- a/meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb
-+++ b/meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Python LR parsing library"
- SECTION = "devel/python"
--LICENSE = "AGPL-3.0"
-+LICENSE = "AGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://agpl-3.0.txt;md5=73f1eb20517c55bf9493b7dd6e480788"
- 
- HOMEPAGE = "http://lrparsing.sourceforge.net/"
-diff --git a/meta-python/recipes-devtools/python/python3-lxml_4.7.1.bb b/meta-python/recipes-devtools/python/python3-lxml_4.7.1.bb
-index 43f071281d..f3b7e0c6cd 100644
---- a/meta-python/recipes-devtools/python/python3-lxml_4.7.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-lxml_4.7.1.bb
-@@ -6,7 +6,7 @@ significantly to offer support for XPath, RelaxNG, XML Schema, XSLT, \
- C14N and much more."
- HOMEPAGE = "https://lxml.de/"
- SECTION = "devel/python"
--LICENSE = "BSD-3-Clause & GPLv2 & MIT & PSF"
-+LICENSE = "BSD-3-Clause & GPL-2.0-only & MIT & PSF-2.0"
- LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=e4c045ebad958ead4b48008f70838403 \
-                     file://doc/licenses/elementtree.txt;md5=eb34d036a6e3d56314ee49a6852ac891 \
-                     file://doc/licenses/BSD.txt;md5=700a1fc17f4797d4f2d34970c8ee694b \
-diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb
-index 84bec0b201..b9eab3c931 100644
---- a/meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb
-@@ -5,7 +5,7 @@ publication-quality figures in a variety of hardcopy formats \
- and interactive environments across platforms."
- HOMEPAGE = "https://github.com/matplotlib/matplotlib"
- SECTION = "devel/python"
--LICENSE = "PSF"
-+LICENSE = "PSF-2.0"
- LIC_FILES_CHKSUM = "\
-     file://setup.py;beginline=296;endline=296;md5=20e7ab4d2b2b1395a0e4ab800181eb96 \
-     file://LICENSE/LICENSE;md5=afec61498aa5f0c45936687da9a53d74 \
-diff --git a/meta-python/recipes-devtools/python/python3-nocasedict_1.0.2.bb b/meta-python/recipes-devtools/python/python3-nocasedict_1.0.2.bb
-index 952286d37c..591b9c6b8d 100644
---- a/meta-python/recipes-devtools/python/python3-nocasedict_1.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-nocasedict_1.0.2.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "A case-insensitive ordered dictionary for Python"
- HOMEPAGE = "https://github.com/pywbem/nocasedict"
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a87a7059d580c45495c1218f53e3610d"
- 
- SRC_URI[sha256sum] = "86e2dae49e34de7c31b65b486c8f9aa58b66dc2e8ee9b34c390c6c58885c85a0"
-diff --git a/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb b/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb
-index b3a78ad651..0cb1b85e5a 100644
---- a/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "A python module for handling realtime sensor data from OBD-II vehicle ports"HOMEPAGE = "https://github.com/brendan-w/python-OBD"
+diff --git a/meta-perl/recipes-extended/logcheck/logcheck_1.3.23.bb b/meta-perl/recipes-extended/logcheck/logcheck_1.3.23.bb
+index 38ef0f8dc8..b40d52ab94 100644
+--- a/meta-perl/recipes-extended/logcheck/logcheck_1.3.23.bb
++++ b/meta-perl/recipes-extended/logcheck/logcheck_1.3.23.bb
+@@ -8,7 +8,7 @@ Normal entries are entries which match one of the many included regular \
+ expression files contain in the database."
+ SECTION = "Applications/System"
+ HOMEPAGE = "http://logcheck.org/"
 -LICENSE = "GPLv2"
 +LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://README.md;md5=58ba896fa086c96ad23317cebfeab277"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c93c0550bd3173f4504b2cbd8991e50b"
  
- SRC_URI[md5sum] = "305efcb6c650db7b9583532355ebeb7c"
-diff --git a/meta-python/recipes-devtools/python/python3-paramiko_2.9.2.bb b/meta-python/recipes-devtools/python/python3-paramiko_2.9.2.bb
-index 0a54efde82..a02a7891a7 100644
---- a/meta-python/recipes-devtools/python/python3-paramiko_2.9.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-paramiko_2.9.2.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "The leading native Python SSHv2 protocol library."
- HOMEPAGE = "https://github.com/paramiko/paramiko/"
--LICENSE = "LGPL-2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=fd0120fc2e9f841c73ac707a30389af5"
- 
- SRC_URI[sha256sum] = "944a9e5dbdd413ab6c7951ea46b0ab40713235a9c4c5ca81cfe45c6f14fa677b"
-diff --git a/meta-python/recipes-devtools/python/python3-portion_2.2.0.bb b/meta-python/recipes-devtools/python/python3-portion_2.2.0.bb
-index e712c8f1ed..0dad8b0ce9 100644
---- a/meta-python/recipes-devtools/python/python3-portion_2.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-portion_2.2.0.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "Python data structure and operations for intervals"
- HOMEPAGE = "https://github.com/AlexandreDecan/portion"
- SECTION = "devel/python"
- 
--LICENSE = "LGPLv3"
-+LICENSE = "LGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=05f1e16a8e59ce3e9a979e881816c2ab"
- 
- inherit pypi setuptools3
-diff --git a/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
-index 28d94ba5bf..a45ef45f32 100644
---- a/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
-@@ -4,7 +4,7 @@ process' behaviour. Usage of the function is fairly messy though, due to \
- limitations in C and linux. This module provides a nice non-messy python(ic) \
- interface."
- SECTION = "devel/python"
--LICENSE = "GPLv3"
-+LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=1475481f9ec754d758859bd2c75f6f6f"
- 
- S = "${WORKDIR}/git"
-diff --git a/meta-python/recipes-devtools/python/python3-pyalsaaudio_0.9.0.bb b/meta-python/recipes-devtools/python/python3-pyalsaaudio_0.9.0.bb
-index c1e549bcb5..862c3d594e 100644
---- a/meta-python/recipes-devtools/python/python3-pyalsaaudio_0.9.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyalsaaudio_0.9.0.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "ALSA bindings"
- SECTION = "devel/python"
--LICENSE = "PSF"
-+LICENSE = "PSF-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1a3b161aa0fcec32a0c8907a2219ad9d"
- 
- inherit pypi setuptools3
-diff --git a/meta-python/recipes-devtools/python/python3-pyatspi_2.38.2.bb b/meta-python/recipes-devtools/python/python3-pyatspi_2.38.2.bb
-index d67975b52b..7c822ac23f 100644
---- a/meta-python/recipes-devtools/python/python3-pyatspi_2.38.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyatspi_2.38.2.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Python bindings for DBus AT-SPI2 accessibility"
- DESCRIPTION = "AT-SPI2 is a protocol over DBus, toolkit widgets use to provide content to screen readers such as Orca"
- SECTION = "devel/python"
- HOMEPAGE = "https://www.freedesktop.org/wiki/Accessibility/AT-SPI2/"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=db29218e6ba3794c56df7d4987dc7e4d \
-                     file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe"
- DEPENDS = "python3-dbus-native glib-2.0 dbus-glib libxml2 atk gtk+ python3-pygobject"
-diff --git a/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb b/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
-index cc659ea678..b32f3a3627 100644
---- a/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
-+++ b/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
- 
- DEPENDS = "bluez5"
- 
--LICENSE = "GPL-2.0"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=8a71d0475d08eee76d8b6d0c6dbec543"
- 
- SRC_URI[md5sum] = "afbe8429bb82d2c46a3d0f5f4f898f9d"
-diff --git a/meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb b/meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb
-index a80fed62de..0f1ae3caca 100644
---- a/meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb
-@@ -7,7 +7,7 @@ be used to fetch objects identified by a URL from a Python program \
- SECTION = "devel/python"
- HOMEPAGE = "http://pycurl.io/"
- 
--LICENSE = "LGPLv2 | MIT"
-+LICENSE = "LGPL-2.0-only | MIT"
- LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=4fbd65380cdd255951079008b364516c \
-                     file://COPYING-MIT;md5=75f131c591546fd1277ca49c9a81ab1b \
-                     "
-diff --git a/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb b/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb
-index 188934ab97..a1b9fffea6 100644
---- a/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Pythonic DBus library"
- HOMEPAGE = "https://pypi.python.org/pypi/pydbus/"
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a916467b91076e631dd8edb7424769c7"
- 
- SRC_URI += "file://0001-Support-asynchronous-calls-58.patch \
-diff --git a/meta-python/recipes-devtools/python/python3-pyiface_git.bb b/meta-python/recipes-devtools/python/python3-pyiface_git.bb
-index 847efd8cf8..5e0d2de916 100644
---- a/meta-python/recipes-devtools/python/python3-pyiface_git.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyiface_git.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "Pyiface is a package that exposes the network interfaces of the operating system in a easy to use and transparent way"
- SECTION = "devel/python"
- HOMEPAGE = "https://pypi.python.org/pypi/pyiface/"
--LICENSE = "GPLv3+"
-+LICENSE = "GPL-3.0-or-later"
- 
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
- 
-diff --git a/meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb b/meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb
-index 47a40fdce2..60726df09d 100644
---- a/meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb
-@@ -1,6 +1,6 @@
- SUMMARY="Pylint is a Python source code analyzer"
- HOMEPAGE= "http://www.pylint.org/"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
- 
- SRC_URI[md5sum] = "2eb5f3cb8fe567eaf5420dd415012202"
-diff --git a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb b/meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb
-index a85b0929d4..fa5b3a522a 100644
---- a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "A pure Python netlink and Linux network configuration library"
--LICENSE = "GPLv2 & Apache-2.0"
-+LICENSE = "GPL-2.0-only & Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://LICENSE.Apache.v2;md5=34281e312165f843a2b7d1f114fe65ce"
- 
-diff --git a/meta-python/recipes-devtools/python/python3-pystemd_0.8.0.bb b/meta-python/recipes-devtools/python/python3-pystemd_0.8.0.bb
-index cdfb7d3b0c..0056a794f9 100644
---- a/meta-python/recipes-devtools/python/python3-pystemd_0.8.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pystemd_0.8.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Python bindings for interacting with systemd over DBus"
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c"
- 
- SRC_URI[md5sum] = "f993739eca645749f18d4ccfd4a0fbf3"
-diff --git a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.12118.bb b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.12118.bb
-index 3e799cf622..147e3bf6aa 100644
---- a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.12118.bb
-+++ b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.12118.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "This module provides ctypes-based bindings for the native libvlc API of the VLC video player."
- HOMEPAGE = "wiki.videolan.org/PythonBinding"
--LICENSE = "LGPL-2.0"
-+LICENSE = "LGPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- 
- SRC_URI[sha256sum] = "566f2f7c303f6800851cacc016df1c6eeec094ad63e0a49d87db9d698094f1fb"
-diff --git a/meta-python/recipes-devtools/python/python3-pyudev_0.23.2.bb b/meta-python/recipes-devtools/python/python3-pyudev_0.23.2.bb
-index 183bf7273c..4c4c959eba 100644
---- a/meta-python/recipes-devtools/python/python3-pyudev_0.23.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyudev_0.23.2.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "A libudev binding"
- 
--LICENSE = "LGPLv2.1+"
-+LICENSE = "LGPL-2.1-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
- 
- SRC_URI[sha256sum] = "32ae3585b320a51bc283e0a04000fd8a25599edb44541e2f5034f6afee5d15cc"
-diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb b/meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb
-index 87605c2b3e..09e7341877 100644
---- a/meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Pyzmq provides Zero message queue access for the Python language"
- HOMEPAGE = "http://zeromq.org/bindings:python"
--LICENSE = "BSD-3-Clause & LGPL-3.0"
-+LICENSE = "BSD-3-Clause & LGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING.BSD;md5=11c65680f637c3df7f58bbc8d133e96e \
-                     file://COPYING.LESSER;md5=12c592fa0bcfff3fb0977b066e9cb69e"
- DEPENDS = "zeromq"
-diff --git a/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb b/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb
-index 57a9185289..ae4e6f72da 100644
---- a/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb
-@@ -10,7 +10,7 @@ there are no clients anymore on the message bus, as well as convenience \
- functions and decorators for integrating a dbus service with PolicyKit."
- 
- SECTION = "devel/python"
+ SRC_URI = "${DEBIAN_MIRROR}/main/l/${BPN}/${BPN}_${PV}.tar.xz \
+diff --git a/meta-perl/recipes-extended/mime-construct/mime-construct_1.11.bb b/meta-perl/recipes-extended/mime-construct/mime-construct_1.11.bb
+index 2919904572..a5d28265d7 100644
+--- a/meta-perl/recipes-extended/mime-construct/mime-construct_1.11.bb
++++ b/meta-perl/recipes-extended/mime-construct/mime-construct_1.11.bb
+@@ -5,7 +5,7 @@ DESCRIPTION = "Constructs and (by default) mails MIME messages. \
+                like programs."
+ HOMEPAGE = "http://search.cpan.org/~rosch/mime-construct/mime-construct"
+ SECTION = "mail"
 -LICENSE = "GPLv2+"
 +LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
- SRCNAME = "python-slip"
+ LIC_FILES_CHKSUM = "file://debian/copyright;md5=5e2e5da619ac8ef8c84767ccc4656e96"
  
-diff --git a/meta-python/recipes-devtools/python/python3-smbus_4.3.bb b/meta-python/recipes-devtools/python/python3-smbus_4.3.bb
-index a9ba24fdbc..3e14736b2d 100644
---- a/meta-python/recipes-devtools/python/python3-smbus_4.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-smbus_4.3.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Set of i2c tools for linux - Python module"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/R/RO/ROSCH/mime-construct-${PV}.tar.gz \
+diff --git a/meta-perl/recipes-perl/adduser/adduser_3.118.bb b/meta-perl/recipes-perl/adduser/adduser_3.118.bb
+index 7554014fab..3ac2211aa6 100644
+--- a/meta-perl/recipes-perl/adduser/adduser_3.118.bb
++++ b/meta-perl/recipes-perl/adduser/adduser_3.118.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "adduser, addgroup - add a user or group to the system"
+ HOMEPAGE = "https://salsa.debian.org/debian/adduser"
+ SECTION = "base/utils"
+ 
 -LICENSE = "GPLv2"
 +LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://py-smbus/smbusmodule.c;beginline=1;endline=18;md5=46e424fb045901ab25e0f92c28c80055"
+ LIC_FILES_CHKSUM = "file://debian/copyright;md5=caed49ab166f22ef31bf1127f558d0ef"
  
- SRC_URI = "${KERNELORG_MIRROR}/software/utils/i2c-tools/i2c-tools-${PV}.tar.gz \
-diff --git a/meta-python/recipes-devtools/python/python3-smpplib_2.2.1.bb b/meta-python/recipes-devtools/python/python3-smpplib_2.2.1.bb
-index 7401e039bf..be0bafd33f 100644
---- a/meta-python/recipes-devtools/python/python3-smpplib_2.2.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-smpplib_2.2.1.bb
+ SRC_URI = "https://launchpad.net/debian/+archive/primary/+sourcefiles/adduser/${PV}/${BPN}_${PV}.tar.xz \
+diff --git a/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb b/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb
+index 4155fade97..d87df0974b 100644
+--- a/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb
++++ b/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb
+@@ -9,7 +9,7 @@ differences. \
+ SECTION = "libs"
+ HOMEPAGE = "http://search.cpan.org/~nedkonz/Algorithm-Diff/"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://lib/Algorithm/Diff.pm;beginline=406;endline=409;md5=d393b8ad3b8994b9d0ae9299b8a8a1ee"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/N/NE/NEDKONZ/Algorithm-Diff-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb b/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb
+index 4212dd228c..8545eb50f7 100644
+--- a/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb
++++ b/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb
+@@ -5,7 +5,7 @@ protocols should be able to share."
+ HOMEPAGE = "http://search.cpan.org/dist/Authen-SASL/"
+ SECTION = "libs"
+ 
+-LICENSE = "Artistic-1.0|GPL-1.0+"
++LICENSE = "Artistic-1.0|GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://lib/Authen/SASL/Perl.pm;beginline=1;endline=3;md5=17123315bbcda19f484c07227594a609"
+ 
+ DEPENDS = "perl"
+diff --git a/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.48.bb b/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.48.bb
+index 358513121b..a51d327a31 100644
+--- a/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.48.bb
++++ b/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.48.bb
+@@ -10,7 +10,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "http://search.cpan.org/~dagolden/Capture-Tiny/"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=37a4918a30ace24395020e5b8c03b83f"
+ 
+ SRCNAME = "Capture-Tiny"
+diff --git a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb
+index bca20f6a4a..4c9864094d 100644
+--- a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb
++++ b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb
+@@ -4,7 +4,7 @@ submissions, file uploads, reading and writing cookies, query string generation
+ and manipulation, and processing and preparing HTTP headers."
+ HOMEPAGE = "http://search.cpan.org/~leejo/CGI-4.28/lib/CGI.pod"
+ SECTION = "libs"
+-LICENSE = "Artistic-2.0 | GPL-2.0"
++LICENSE = "Artistic-2.0 | GPL-2.0-only"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=415fc49abed2728f9480cd32c8d67beb"
+ 
+diff --git a/meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.13.bb b/meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.13.bb
+index dc62f58e9f..4cd6343878 100644
+--- a/meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.13.bb
++++ b/meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.13.bb
+@@ -6,7 +6,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "https://github.com/moose/Class-Method-Modifiers/"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=16fd0ec7b73c0e158426f753943f1058"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/E/ET/ETHER/Class-Method-Modifiers-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.319.bb b/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.319.bb
+index ea9dfed261..5db0bb4269 100644
+--- a/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.319.bb
++++ b/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.319.bb
+@@ -9,7 +9,7 @@ Shell developers."
+ HOMEPAGE=       "https://metacpan.org/release/Config-AutoConf"
+ 
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ 
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
+ file://${COMMON_LICENSE_DIR}/GPL-1.0-or-later;md5=30c0b8a5048cc2f4be5ff15ef0d8cf61"
+diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.15.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.15.bb
+index 6e1ea54611..3f004bb2ec 100644
+--- a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.15.bb
++++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.15.bb
 @@ -1,6 +1,6 @@
- SUMMARY = "SMPP library for python"
- SECTION = "devel/python"
--LICENSE = "GPLv3.0"
-+LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://README.md;md5=8b4e2ac8cf248f7b991784f88b630852"
+ SUMMARY = "Guess OpenSSL include path"
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=ea914cc2718e8d53bd7744d96e66c03c"
  
- PYPI_PACKAGE = "smpplib"
-diff --git a/meta-python/recipes-devtools/python/python3-systemd_234.bb b/meta-python/recipes-devtools/python/python3-systemd_234.bb
-index 1aecb375bf..10614fe374 100644
---- a/meta-python/recipes-devtools/python/python3-systemd_234.bb
-+++ b/meta-python/recipes-devtools/python/python3-systemd_234.bb
+ SRC_URI = "http://www.cpan.org/modules/by-module/Crypt/Crypt-OpenSSL-Guess-${PV}.tar.gz "
+diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.15.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.15.bb
+index 5b6e9b4937..9bfb631d30 100644
+--- a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.15.bb
++++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.15.bb
 @@ -1,6 +1,6 @@
- SUMMARY = "Python interface for libsystemd"
- HOMEPAGE = "https://github.com/systemd/python-systemd"
--LICENSE = "LGPLv2.1+"
-+LICENSE = "LGPL-2.1-or-later"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fbd65380cdd255951079008b364516c"
+ SUMMARY = "Crypt::OpenSSL::Random - OpenSSL/LibreSSL pseudo-random number generator access"
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
  
- PYPI_PACKAGE = "systemd-python"
-diff --git a/meta-python/recipes-devtools/python/python3-term_2.3.bb b/meta-python/recipes-devtools/python/python3-term_2.3.bb
-index 723f1db512..6b62eb02ce 100644
---- a/meta-python/recipes-devtools/python/python3-term_2.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-term_2.3.bb
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=089c18d635ae273e1727ec385e64063b"
+ 
+diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.32.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.32.bb
+index 8dd2574e97..fd92c8a8db 100644
+--- a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.32.bb
++++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.32.bb
 @@ -1,6 +1,6 @@
- SUMMARY = "An enhanced version of the tty module"
- SECTION = "devel/python"
--LICENSE = "Python-2"
-+LICENSE = "Python-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d90e2d280a4836c607520383d1639be1"
+ SUMMARY = "Crypt Openssl RSA cpan module"
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a67ceecc5d9a91a5a0d003ba50c26346"
  
- SRC_URI[md5sum] = "ab0c1bce381b1109fe4390c56aa06237"
-diff --git a/meta-python/recipes-devtools/python/python3-typing-extensions_3.10.0.0.bb b/meta-python/recipes-devtools/python/python3-typing-extensions_3.10.0.0.bb
-index a8e632487d..a5f491c770 100644
---- a/meta-python/recipes-devtools/python/python3-typing-extensions_3.10.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-typing-extensions_3.10.0.0.bb
-@@ -1,5 +1,5 @@
- HOMEPAGE = "https://github.com/python/typing"
--LICENSE = "PSF"
-+LICENSE = "PSF-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=64fc2b30b67d0a8423c250e0386ed72f"
+ SRC_URI = "http://www.cpan.org/modules/by-module/Crypt/Crypt-OpenSSL-RSA-${PV}.tar.gz \
+diff --git a/meta-perl/recipes-perl/libcurses/libcurses-perl_1.38.bb b/meta-perl/recipes-perl/libcurses/libcurses-perl_1.38.bb
+index a398382c66..8c56c206f7 100644
+--- a/meta-perl/recipes-perl/libcurses/libcurses-perl_1.38.bb
++++ b/meta-perl/recipes-perl/libcurses/libcurses-perl_1.38.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "lib-curses provides an interface between Perl programs and \
+ the curses library."
  
- # The name on PyPi is slightly different.
-diff --git a/meta-python/recipes-devtools/python/python3-versiontools_1.9.1.bb b/meta-python/recipes-devtools/python/python3-versiontools_1.9.1.bb
-index cf0fa30a32..ea40d5f6bb 100644
---- a/meta-python/recipes-devtools/python/python3-versiontools_1.9.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-versiontools_1.9.1.bb
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ 
+ LIC_FILES_CHKSUM = "file://README;beginline=26;endline=30;md5=0b37356c5e9e28080a3422d82af8af09"
+ 
+diff --git a/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.68.bb b/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.68.bb
+index c328696b02..c7baeab6be 100644
+--- a/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.68.bb
++++ b/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.68.bb
+@@ -7,7 +7,7 @@ module, and nothing else. \
+ HOMEPAGE = "https://metacpan.org/release/DBD-SQLite"
+ 
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1726e2117494ba3e13e1c3d93f795360"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/I/IS/ISHIGAKI/DBD-SQLite-${PV}.tar.gz \
+diff --git a/meta-perl/recipes-perl/libdevel/libdevel-globaldestruction-perl_0.14.bb b/meta-perl/recipes-perl/libdevel/libdevel-globaldestruction-perl_0.14.bb
+index 9f9950e35c..1dcecd0dcf 100644
+--- a/meta-perl/recipes-perl/libdevel/libdevel-globaldestruction-perl_0.14.bb
++++ b/meta-perl/recipes-perl/libdevel/libdevel-globaldestruction-perl_0.14.bb
+@@ -6,7 +6,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "https://metacpan.org/pod/Devel-GlobalDestruction/"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=53;endline=55;md5=935dadb9423774f53548e5cd5055d41a"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/Devel-GlobalDestruction-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb b/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
+index 10b4d6e2ba..51a2ad3498 100644
+--- a/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
++++ b/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Keyed-Hashing for Message Authentication"
+ HOMEPAGE = "http://search.cpan.org/~gaas/Digest-HMAC-1.03/"
+ SECTION = "libs"
+ 
+-LICENSE = "Artistic-1.0|GPLv1+"
++LICENSE = "Artistic-1.0|GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=13;endline=17;md5=da980cdc026faa065e5d5004115334e6"
+ 
+ RDEPENDS:${PN} = "libdigest-sha1-perl perl-module-extutils-makemaker perl-module-digest-md5"
+diff --git a/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb b/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
+index 91c5f08f9e..cd63675128 100644
+--- a/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
++++ b/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Digest::SHA1 - Perl interface to the SHA-1 algorithm"
+ HOMEPAGE = "http://search.cpan.org/~gaas/Digest-SHA1-2.13/"
+ SECTION = "libs"
+ 
+-LICENSE = "Artistic-1.0|GPLv1+"
++LICENSE = "Artistic-1.0|GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=10;endline=14;md5=ff5867ebb4bc1103a7a416aef2fce00a"
+ 
+ SRC_URI = "http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/Digest-SHA1-${PV}.tar.gz \
+diff --git a/meta-perl/recipes-perl/libencode/libencode-locale-perl_1.05.bb b/meta-perl/recipes-perl/libencode/libencode-locale-perl_1.05.bb
+index 700974b423..ae193dbc6a 100644
+--- a/meta-perl/recipes-perl/libencode/libencode-locale-perl_1.05.bb
++++ b/meta-perl/recipes-perl/libencode/libencode-locale-perl_1.05.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Encode::Locale - Determine the locale encoding"
+ AUTHOR = "Gisle Aas <gisle@activestate.com>"
+ HOMEPAGE = "https://metacpan.org/module/Encode::Locale"
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;md5=14e8006c2134045725fd81292a323d24"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/G/GA/GAAS/Encode-Locale-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libencode/libencode-perl_3.16.bb b/meta-perl/recipes-perl/libencode/libencode-perl_3.16.bb
+index 2286ee5249..8d239e7e2e 100644
+--- a/meta-perl/recipes-perl/libencode/libencode-perl_3.16.bb
++++ b/meta-perl/recipes-perl/libencode/libencode-perl_3.16.bb
+@@ -11,7 +11,7 @@ of characters."
+ AUTHOR = "Dan Kogai <dankogai+cpan@gmail.com>"
+ HOMEPAGE = "https://metacpan.org/release/Encode"
+ SECTION = "lib"
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://META.json;beginline=8;endline=10;md5=b12e3be1e17a7e99ca4f429ff32c28b5"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/DANKOGAI/Encode-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libenv/libenv-perl_1.04.bb b/meta-perl/recipes-perl/libenv/libenv-perl_1.04.bb
+index dd8e1159ee..79fff9d520 100644
+--- a/meta-perl/recipes-perl/libenv/libenv-perl_1.04.bb
++++ b/meta-perl/recipes-perl/libenv/libenv-perl_1.04.bb
+@@ -5,7 +5,7 @@ variables to be treated as scalar or array variables."
+ 
+ HOMEPAGE = "http://search.cpan.org/~flora/Env/"
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=76c1cbf18db56b3340d91cb947943bd3"
+ 
+diff --git a/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.008.bb b/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.008.bb
+index bc54634705..a58d96582e 100644
+--- a/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.008.bb
++++ b/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.008.bb
+@@ -4,7 +4,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "http://search.cpan.org/~leont/ExtUtils-Config/"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1932ab4d8b84c25fd7967aa18088e57e"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/ExtUtils-Config-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.23.bb b/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.23.bb
+index 5e869c8112..fd6347b3d0 100644
+--- a/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.23.bb
++++ b/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.23.bb
+@@ -8,7 +8,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "http://search.cpan.org/~smueller/ExtUtils-CppGuess/"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=81;endline=84;md5=84c0390b90ea8c6702ce659b67bed699"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/E/ET/ETJ/ExtUtils-CppGuess-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.026.bb b/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.026.bb
+index 3538e11ac0..8534822e62 100644
+--- a/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.026.bb
++++ b/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.026.bb
+@@ -4,7 +4,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "http://search.cpan.org/~leont/ExtUtils-Helpers/"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=223c04045664f72c3a6556462612bddd"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/ExtUtils-Helpers-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.012.bb b/meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.012.bb
+index de3a745f88..07dab4e161 100644
+--- a/meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.012.bb
++++ b/meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.012.bb
+@@ -5,7 +5,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "http://search.cpan.org/~leont/ExtUtils-InstallPaths/"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b6fa54d873ce6bcf4809ea88bdf97769"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/ExtUtils-InstallPaths-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libextutils/libextutils-parsexs-perl_3.35.bb b/meta-perl/recipes-perl/libextutils/libextutils-parsexs-perl_3.35.bb
+index e6034904f5..43b5b60ef6 100644
+--- a/meta-perl/recipes-perl/libextutils/libextutils-parsexs-perl_3.35.bb
++++ b/meta-perl/recipes-perl/libextutils/libextutils-parsexs-perl_3.35.bb
+@@ -9,7 +9,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "http://metapan.org/release/ExtUtils-ParseXS/"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=120;endline=129;md5=eb858f0e3b1b0bee0c05b86a474ae2b6"
+ 
+ SRCNAME = "ExtUtils-ParseXS"
+diff --git a/meta-perl/recipes-perl/libfile/libfile-slurp-perl_9999.19.bb b/meta-perl/recipes-perl/libfile/libfile-slurp-perl_9999.19.bb
+index 945b4c1c87..1012ae952e 100644
+--- a/meta-perl/recipes-perl/libfile/libfile-slurp-perl_9999.19.bb
++++ b/meta-perl/recipes-perl/libfile/libfile-slurp-perl_9999.19.bb
+@@ -4,7 +4,7 @@ DESCRIPTION = "This module provides subroutines to read or write \
+   reading the list of filenames in a directory. \
+ "
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ 
+ LIC_FILES_CHKSUM = "file://README;beginline=37;endline=41;md5=255fbd5f98a90d51d9908d31271ae4d4"
+ SRC_URI = "http://search.cpan.org/CPAN/authors/id/U/UR/URI/File-Slurp-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.013.bb b/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.013.bb
+index c7e5c56b6e..3fa4fb17b4 100644
+--- a/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.013.bb
++++ b/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.013.bb
+@@ -4,7 +4,7 @@ All functions are optionally exported. All functions throw exceptions on \
+ errors, write functions don't return any meaningful value."
+ 
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ 
+ HOMEPAGE=       "https://metacpan.org/release/File-Slurper"
+ 
+diff --git a/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.72.bb b/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.72.bb
+index 38ea9cebc8..216d7c4136 100644
+--- a/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.72.bb
++++ b/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.72.bb
 @@ -1,7 +1,7 @@
- SUMMARY = "Smart replacement for plain tuple used in __version__"
- SECTION = "devel/python"
- HOMEPAGE = "https://launchpad.net/versiontools"
--LICENSE = "LGPLv3"
-+LICENSE = "LGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://setup.py;beginline=3;endline=20;md5=02193721a38fd8a05a4ddeb7df8e294d"
+ DESCRIPTION = "This package contains the Parser.pm module with friends."
+ HOMEPAGE = "https://metacpan.org/release/HTML-Parser"
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
  
- SRC_URI[md5sum] = "602b7db8eea30dd29a1d451997adf251"
-diff --git a/meta-python/recipes-devtools/python/python3-xmlrunner_1.7.7.bb b/meta-python/recipes-devtools/python/python3-xmlrunner_1.7.7.bb
-index 7e7b5235ee..e81e4dabee 100644
---- a/meta-python/recipes-devtools/python/python3-xmlrunner_1.7.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-xmlrunner_1.7.7.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "unittest-based test runner with Ant/JUnit like XML reporting"
- HOMEPAGE = "https://github.com/pycontribs/xmlrunner"
--LICENSE = "LGPL-3.0"
-+LICENSE = "LGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://PKG-INFO;md5=fa964f202b6ae067ed5828fe43c77c1a"
+ LIC_FILES_CHKSUM = "file://README;md5=b0459e4426b94753b9a9b8a15f1223b8"
  
- SRC_URI[md5sum] = "7b0b152ed2d278516aedbc0cac22dfb3"
-diff --git a/meta-python/recipes-devtools/python/python3-xstatic-font-awesome_4.7.0.0.bb b/meta-python/recipes-devtools/python/python3-xstatic-font-awesome_4.7.0.0.bb
-index b45e96d387..ccd1cd787d 100644
---- a/meta-python/recipes-devtools/python/python3-xstatic-font-awesome_4.7.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-xstatic-font-awesome_4.7.0.0.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Font Awesome icons packaged for setuptools (easy_install) / pip."
- HOMEPAGE = "https://pypi.python.org/pypi/XStatic-Font-Awesome"
- SECTION = "devel/python"
--LICENSE = "Apache-2"
-+LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://PKG-INFO;md5=313d021898694cd2b0ea6508bdfe51a2"
+diff --git a/meta-perl/recipes-perl/libhtml/libhtml-tagset-perl_3.20.bb b/meta-perl/recipes-perl/libhtml/libhtml-tagset-perl_3.20.bb
+index b506589f64..c871b97c39 100644
+--- a/meta-perl/recipes-perl/libhtml/libhtml-tagset-perl_3.20.bb
++++ b/meta-perl/recipes-perl/libhtml/libhtml-tagset-perl_3.20.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "This module contains several data tables useful in various \
+ kinds of HTML parsing operations."
+ HOMEPAGE = "https://metacpan.org/release/HTML-Tagset"
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
  
- PYPI_PACKAGE = "XStatic-Font-Awesome"
-diff --git a/meta-python/recipes-devtools/python/python3-zeroconf_0.38.1.bb b/meta-python/recipes-devtools/python/python3-zeroconf_0.38.1.bb
-index c49782e426..bc06618c1e 100644
---- a/meta-python/recipes-devtools/python/python3-zeroconf_0.38.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-zeroconf_0.38.1.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Pure Python Multicast DNS Service Discovery Library (Bonjour/Avahi compatible)"
- HOMEPAGE = "https://github.com/jstasiak/python-zeroconf"
--LICENSE = "LGPL-2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3bb705b228ea4a14ea2728215b780d80"
+ LIC_FILES_CHKSUM = "file://README;beginline=62;endline=66;md5=aa91eed6adfe182d2af676954f06a7c9"
  
- SRC_URI[sha256sum] = "10c501b25d8881b656e56c34674d98fe6bc752240a572e74f918bc849c93ba9c"
-diff --git a/meta-python/recipes-devtools/unattended-upgrades/unattended-upgrades_2.6.bb b/meta-python/recipes-devtools/unattended-upgrades/unattended-upgrades_2.6.bb
-index 0629bf6db1..22d9a196db 100644
---- a/meta-python/recipes-devtools/unattended-upgrades/unattended-upgrades_2.6.bb
-+++ b/meta-python/recipes-devtools/unattended-upgrades/unattended-upgrades_2.6.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "This script upgrades packages automatically and unattended."
- DESCRIPTION = "The purpose of unattended-upgrades is to keep the computer current with the latest security (and other) updates automatically."
- HOMEPAGE = "https://wiki.debian.org/UnattendedUpgrades"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
-                     file://debian/copyright;md5=62b5f2ac0ede901fb245eefbe54c181f"
+diff --git a/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb b/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb
+index e3c8663ea0..d2c151bf5c 100644
+--- a/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb
++++ b/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb
+@@ -8,7 +8,7 @@ SECTION = "libs"
  
-diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet_3.4.3.bb b/meta-python/recipes-extended/python-blivet/python3-blivet_3.4.3.bb
-index 85575df7b5..fcadf130c9 100644
---- a/meta-python/recipes-extended/python-blivet/python3-blivet_3.4.3.bb
-+++ b/meta-python/recipes-extended/python-blivet/python3-blivet_3.4.3.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "A python module for system storage configuration"
- HOMEPAGE = "http://fedoraproject.org/wiki/blivet"
--LICENSE = "LGPLv2+"
-+LICENSE = "LGPL-2.0-or-later"
- SECTION = "devel/python"
+ HOMEPAGE = "http://www.cpan.org/authors/id/C/CJ/CJM/HTML-Tree-${PV}.readme"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-diff --git a/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb b/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb
-index 4bcb45ebd6..89f1c700f4 100644
---- a/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb
-+++ b/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "GUI tool for storage configuration using blivet library"
- HOMEPAGE = "https://github.com/rhinstaller/blivet-gui"
--LICENSE = "GPLv2+"
-+LICENSE = "GPL-2.0-or-later"
- SECTION = "devel/python"
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3eb57a8958cae73cb65e7d0c26339242"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-diff --git a/meta-python/recipes-extended/python-meh/python3-meh_0.50.1.bb b/meta-python/recipes-extended/python-meh/python3-meh_0.50.1.bb
-index 96dba96123..16596596a6 100644
---- a/meta-python/recipes-extended/python-meh/python3-meh_0.50.1.bb
-+++ b/meta-python/recipes-extended/python-meh/python3-meh_0.50.1.bb
-@@ -2,7 +2,7 @@ SUMMARY = "A python library for handling exceptions"
- DESCRIPTION = "The python-meh package is a python library for handling, saving, and reporting \
- exceptions."
- HOMEPAGE = "http://git.fedorahosted.org/git/?p=python-meh.git"
--LICENSE = "GPLv2+"
-+LICENSE = "GPL-2.0-or-later"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/C/CJ/CJM/HTML-Tree-${PV}.tar.gz \
+diff --git a/meta-perl/recipes-perl/libimport/libimport-into-perl_1.002004.bb b/meta-perl/recipes-perl/libimport/libimport-into-perl_1.002004.bb
+index a0be629683..e88d60d13a 100644
+--- a/meta-perl/recipes-perl/libimport/libimport-into-perl_1.002004.bb
++++ b/meta-perl/recipes-perl/libimport/libimport-into-perl_1.002004.bb
+@@ -13,7 +13,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "https://metacpan.org/pod/Import-Into/"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=209;endline=223;md5=3cf363f1e405dea6db2c6cd0ef23680c"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/E/ET/ETHER/Import-Into-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libio/compress-raw-bzip2-perl_2.096.bb b/meta-perl/recipes-perl/libio/compress-raw-bzip2-perl_2.096.bb
+index 272f7c5f33..ef69987ea3 100644
+--- a/meta-perl/recipes-perl/libio/compress-raw-bzip2-perl_2.096.bb
++++ b/meta-perl/recipes-perl/libio/compress-raw-bzip2-perl_2.096.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = ""Compress::Raw::Bzip2" provides an interface to the in-memory \
+ compression/uncompression functions from the bzip2 compression library."
+ 
+ SECTION = "libs"
+-LICENSE = "Artisticv1 | GPLv1+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ 
+ MAINTAINER=	"Poky <poky@yoctoproject.org>"
+ HOMEPAGE=	"https://metacpan.org/release/Compress-Raw-Bzip2"
+diff --git a/meta-perl/recipes-perl/libio/compress-raw-lzma-perl_2.096.bb b/meta-perl/recipes-perl/libio/compress-raw-lzma-perl_2.096.bb
+index 38655892a2..04295cd3c6 100644
+--- a/meta-perl/recipes-perl/libio/compress-raw-lzma-perl_2.096.bb
++++ b/meta-perl/recipes-perl/libio/compress-raw-lzma-perl_2.096.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = ""Compress::Raw::Lzma" provides an interface to the in-memory \
+ compression/uncompression functions from the lzma compression library."
+ 
+ SECTION = "libs"
+-LICENSE = "Artisticv1 | GPLv1+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ 
+ MAINTAINER=	"Poky <poky@yoctoproject.org>"
+ HOMEPAGE=	"https://metacpan.org/release/Compress-Raw-Lzma"
+diff --git a/meta-perl/recipes-perl/libio/compress-raw-zlib-perl_2.096.bb b/meta-perl/recipes-perl/libio/compress-raw-zlib-perl_2.096.bb
+index 8b2ab14599..81c370df2a 100644
+--- a/meta-perl/recipes-perl/libio/compress-raw-zlib-perl_2.096.bb
++++ b/meta-perl/recipes-perl/libio/compress-raw-zlib-perl_2.096.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "The *Compress::Raw::Zlib* module provides a Perl interface to the
+ compression library (see "AUTHOR" for details about where to get *zlib*)."
+ 
+ SECTION = "libs"
+-LICENSE = "Artisticv1 | GPLv1+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ 
+ MAINTAINER=	"Poky <poky@yoctoproject.org>"
+ HOMEPAGE=	"https://metacpan.org/release/Compress-Raw-Zlib"
+diff --git a/meta-perl/recipes-perl/libio/io-compress-lzma-perl_2.096.bb b/meta-perl/recipes-perl/libio/io-compress-lzma-perl_2.096.bb
+index a5c773551d..9655176a86 100644
+--- a/meta-perl/recipes-perl/libio/io-compress-lzma-perl_2.096.bb
++++ b/meta-perl/recipes-perl/libio/io-compress-lzma-perl_2.096.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "This module provides a Perl interface that allows writing lzma co
+ data to files or buffer."
+ 
+ SECTION = "libs"
+-LICENSE = "Artisticv1 | GPLv1+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ 
+ MAINTAINER=	"Poky <poky@yoctoproject.org>"
+ HOMEPAGE=	"https://metacpan.org/release/IO-Compress-Lzma"
+diff --git a/meta-perl/recipes-perl/libio/io-compress-perl_2.096.bb b/meta-perl/recipes-perl/libio/io-compress-perl_2.096.bb
+index 01580db03f..ccc78d0078 100644
+--- a/meta-perl/recipes-perl/libio/io-compress-perl_2.096.bb
++++ b/meta-perl/recipes-perl/libio/io-compress-perl_2.096.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "This module is not intended for direct use in application code. I
+ purpose is to be sub-classed by IO::Compress modules."
+ 
+ SECTION = "libs"
+-LICENSE = "Artisticv1 | GPLv1+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ 
+ MAINTAINER=	"Poky <poky@yoctoproject.org>"
+ HOMEPAGE=	"https://metacpan.org/release/IO-Compress"
+diff --git a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.074.bb b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.074.bb
+index 0be1497d9a..1d04f0054f 100644
+--- a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.074.bb
++++ b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.074.bb
+@@ -9,7 +9,7 @@ mod_perl."
+ HOMEPAGE = "http://search.cpan.org/dist/IO-Socket-SSL/"
+ SECTION = "libs"
+ 
+-LICENSE = "Artistic-1.0|GPLv1+"
++LICENSE = "Artistic-1.0|GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://META.yml;beginline=12;endline=12;md5=963ce28228347875ace682de56eef8e8"
+ 
+ RDEPENDS:${PN} += "\
+diff --git a/meta-perl/recipes-perl/libio/libio-stringy-perl_2.111.bb b/meta-perl/recipes-perl/libio/libio-stringy-perl_2.111.bb
+index 3f5a27843a..b745939234 100644
+--- a/meta-perl/recipes-perl/libio/libio-stringy-perl_2.111.bb
++++ b/meta-perl/recipes-perl/libio/libio-stringy-perl_2.111.bb
+@@ -5,7 +5,7 @@ filehandles; in particular, IO::Scalar, IO::ScalarArray, and IO::Lines."
+ 
+ HOMEPAGE = "http://www.zeegee.com/products/IO-stringy/"
+ SECTION = "devel"
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=01406e4ff2e60d88d42ef1caebdd0011"
+ 
+ 
+diff --git a/meta-perl/recipes-perl/libipc/libipc-signal-perl_1.00.bb b/meta-perl/recipes-perl/libipc/libipc-signal-perl_1.00.bb
+index b518164df9..389be2c16c 100644
+--- a/meta-perl/recipes-perl/libipc/libipc-signal-perl_1.00.bb
++++ b/meta-perl/recipes-perl/libipc/libipc-signal-perl_1.00.bb
+@@ -5,7 +5,7 @@ dealing with signals."
+ HOMEPAGE = "http://search.cpan.org/~rosch/IPC-Signal-1.00/"
+ SECTION = "libs"
+ 
+-LICENSE = "Artistic-1.0|GPLv1+"
++LICENSE = "Artistic-1.0|GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=16;endline=18;md5=f36550f59a0ae5e6e3b0be6a4da60d26"
+ 
+ S = "${WORKDIR}/IPC-Signal-${PV}"
+diff --git a/meta-perl/recipes-perl/liblocale/liblocale-gettext-perl_1.07.bb b/meta-perl/recipes-perl/liblocale/liblocale-gettext-perl_1.07.bb
+index fdc72a2b92..1e4b563532 100644
+--- a/meta-perl/recipes-perl/liblocale/liblocale-gettext-perl_1.07.bb
++++ b/meta-perl/recipes-perl/liblocale/liblocale-gettext-perl_1.07.bb
+@@ -6,7 +6,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "http://search.cpan.org/~pvandry/Locale-gettext-${PV}/"
+ 
+-LICENSE = "Artistic-1.0 | GPLv1+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;md5=d028249c2d08dca6ca6c5bb43b56d926"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/P/PV/PVANDRY/Locale-gettext-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libmime/libmime-charset-perl_1.012.2.bb b/meta-perl/recipes-perl/libmime/libmime-charset-perl_1.012.2.bb
+index 79b4681a63..20557a3f3e 100644
+--- a/meta-perl/recipes-perl/libmime/libmime-charset-perl_1.012.2.bb
++++ b/meta-perl/recipes-perl/libmime/libmime-charset-perl_1.012.2.bb
+@@ -4,7 +4,7 @@ messages on Internet."
+ HOMEPAGE = "http://search.cpan.org/~nezumi/MIME-Charset-${PV}/"
+ SECTION = "libs"
+ 
+-LICENSE = "Artistic-1.0 | GPLv1+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
  LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- inherit setuptools3
-diff --git a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.34.bb b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.34.bb
-index 7aa0758400..6bf9ada581 100644
---- a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.34.bb
-+++ b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.34.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "A python library for manipulating kickstart files"
- HOMEPAGE = "http://fedoraproject.org/wiki/pykickstart"
--LICENSE = "GPLv2+"
-+LICENSE = "GPL-2.0-or-later"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/N/NE/NEZUMI/MIME-Charset-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb b/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
+index 18fa46f017..2c06728ed2 100644
+--- a/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
++++ b/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
+@@ -8,7 +8,7 @@ one known mime type."
+ HOMEPAGE = "http://search.cpan.org/~markov/MIME-Types-${PV}"
+ SECTION = "libraries"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
- FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
-diff --git a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.7.bb b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.7.bb
-index 66cd27d447..2cdf82365a 100644
---- a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.7.bb
-+++ b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.7.bb
-@@ -3,7 +3,7 @@ an interface to libparted, the GNU parted library for disk partitioning and \
- filesystem manipulation."
- SUMMARY = "Python bindings for libparted"
- HOMEPAGE = "https://github.com/rhinstaller/pyparted"
--LICENSE = "GPL-2.0+"
-+LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "\
-     file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
-     file://src/_pedmodule.c;beginline=10;endline=22;md5=9e53304db812b80d0939e11bb69dcab2 \
-diff --git a/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.3.2.bb b/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.3.2.bb
-index bf9304cdd1..2d23017c88 100644
---- a/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.3.2.bb
-+++ b/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.3.2.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Cross-platform locking library"
- DESCRIPTION = "Portalocker is a library to provide an easy API to file locking"
--LICENSE = "PSF"
-+LICENSE = "PSF-2.0"
+-LICENSE = "Artistic-1.0|GPLv1+"
++LICENSE = "Artistic-1.0|GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://META.yml;beginline=11;endline=11;md5=963ce28228347875ace682de56eef8e8"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f9273424c73af966635d66eb53487e14"
+ SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MA/MARKOV/MIME-Types-${PV}.tar.gz \
+diff --git a/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.039.bb b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.039.bb
+index ebf2a5b4de..ff3f4d6944 100644
+--- a/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.039.bb
++++ b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.039.bb
+@@ -9,7 +9,7 @@ SECTION = "libs"
  
-diff --git a/meta-python/recipes-extended/pywbem/python3-pywbem_1.3.0.bb b/meta-python/recipes-extended/pywbem/python3-pywbem_1.3.0.bb
-index 26758427a2..676c654b52 100644
---- a/meta-python/recipes-extended/pywbem/python3-pywbem_1.3.0.bb
-+++ b/meta-python/recipes-extended/pywbem/python3-pywbem_1.3.0.bb
-@@ -13,7 +13,7 @@ at http://www.dmtf.org/standards/wbem. \
- It also provides a Python provider interface, and is the fastest and easiest \
- way to write providers on the planet."
- HOMEPAGE = "http://pywbem.github.io"
--LICENSE = "LGPLv2.1"
+ HOMEPAGE = "http://search.cpan.org/~leont/Module-Build-Tiny/"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=57b8100f0b648cd37fbc3725fe3c111a"
+ 
+ DEPENDS = "libextutils-config-perl-native libextutils-helpers-perl-native libextutils-installpaths-perl-native"
+diff --git a/meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_5.2.bb b/meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_5.2.bb
+index 1d257ce4f0..6f3d5ba59d 100644
+--- a/meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_5.2.bb
++++ b/meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_5.2.bb
+@@ -13,7 +13,7 @@ SECTION = "libs"
+ AUTHOR = "Simon Wistow <simon@thegestalt.org>"
+ HOMEPAGE = "https://github.com/simonwistow/Module-Pluggable"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=322;endline=325;md5=086450ce010f6fda25db0b38fcc41086"
+ 
+ SRCNAME = "Module-Pluggable"
+diff --git a/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.016.bb b/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.016.bb
+index bb950b80de..205df68029 100644
+--- a/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.016.bb
++++ b/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.016.bb
+@@ -16,7 +16,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "http://search.cpan.org/~zefram/Module-Runtime/"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=36;endline=44;md5=9416434672a57853d6181f3da9094963"
+ 
+ SRCNAME = "Module-Runtime"
+diff --git a/meta-perl/recipes-perl/libmoo/libmoo-perl_2.005004.bb b/meta-perl/recipes-perl/libmoo/libmoo-perl_2.005004.bb
+index 596d448253..5480b9069f 100644
+--- a/meta-perl/recipes-perl/libmoo/libmoo-perl_2.005004.bb
++++ b/meta-perl/recipes-perl/libmoo/libmoo-perl_2.005004.bb
+@@ -6,7 +6,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "http://metapan.org/release/Moo/"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=742;endline=787;md5=0e7ee44f5ce5e9b84619cd198caad1d6"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/Moo-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.68.bb b/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.68.bb
+index c82190a336..293f421205 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.68.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.68.bb
+@@ -6,7 +6,7 @@ deleting or modifying entries."
+ 
+ SECTION = "libs"
+ 
+-LICENSE = "Artistic-1.0|GPLv1+"
++LICENSE = "Artistic-1.0|GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=3;endline=5;md5=4d6588c2fa0d38ae162f6314d201d89e"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/M/MA/MARSCHAP/perl-ldap-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb b/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
+index 37586fd4f0..4c4faab4db 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
+@@ -5,7 +5,7 @@ Domain Names according to IDNA (RFC 3490), in a way very much inspired by \
+ Turbo Fredriksson's PHP-IDN. \
+ "
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPLv1+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ HOMEPAGE = "http://search.cpan.org/dist/Net-LibIDN/"
+ DEPENDS += "libidn"
+ # We must need glibc-gconvs to enable charset related functions,
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
+index effcb3dc75..5d0eccd84a 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
+@@ -7,7 +7,7 @@ so you can write servers or clients for more complicated applications."
+ HOMEPAGE = "http://search.cpan.org/dist/Net-SSLeay/"
+ SECTION = "libs"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=274;endline=294;md5=67d67095d83e339da538a082fad5f38e"
+ 
+ DEPENDS = "openssl zlib openssl-native"
+diff --git a/meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.05.bb b/meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.05.bb
+index 9b259ab879..d7d4201048 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.05.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.05.bb
+@@ -11,7 +11,7 @@ shell."
+ HOMEPAGE = "http://search.cpan.org/dist/Net-Telnet/"
+ SECTION = "Development/Libraries"
+ 
+-LICENSE = "Artistic-1.0|GPLv1+"
++LICENSE = "Artistic-1.0|GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=4;endline=7;md5=e94ab3b72335e3cdadd6c1ff736dd714"
+ 
+ SRC_URI = "http://search.cpan.org/CPAN/authors/id/J/JR/JROGERS/Net-Telnet-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb b/meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb
+index 1dbd923b07..ffd87ed0b5 100644
+--- a/meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb
++++ b/meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb
+@@ -5,7 +5,7 @@ on wait status values."
+ HOMEPAGE = "http://search.cpan.org/~rosch/Proc-WaitStat/"
+ SECTION = "libraries"
+ 
+-LICENSE = "Artistic-1.0|GPLv1+"
++LICENSE = "Artistic-1.0|GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=21;endline=23;md5=f36550f59a0ae5e6e3b0be6a4da60d26"
+ 
+ RDEPENDS:${PN} += "perl libipc-signal-perl"
+diff --git a/meta-perl/recipes-perl/librole/librole-tiny-perl_2.002004.bb b/meta-perl/recipes-perl/librole/librole-tiny-perl_2.002004.bb
+index df7b9b8081..c5efc15358 100644
+--- a/meta-perl/recipes-perl/librole/librole-tiny-perl_2.002004.bb
++++ b/meta-perl/recipes-perl/librole/librole-tiny-perl_2.002004.bb
+@@ -5,7 +5,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "https://metacpan.org/pod/Role::Tiny"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=197;endline=234;md5=26df7e7c20551fb1906e2286624f0b71"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/Role-Tiny-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb b/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
+index c2b6d4abf8..c568ade997 100644
+--- a/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
++++ b/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
+@@ -7,7 +7,7 @@ etc."
+ 
+ HOMEPAGE = "https://metacpan.org/release/Unix-Statgrab"
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPL-1.0+ | LGPL-2.1+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later | LGPL-2.1-or-later"
+ DEPENDS += "libcapture-tiny-perl-native"
+ DEPENDS += "libconfig-autoconf-perl-native"
+ DEPENDS += "libstatgrab"
+diff --git a/meta-perl/recipes-perl/libstrictures/libstrictures-perl_2.000006.bb b/meta-perl/recipes-perl/libstrictures/libstrictures-perl_2.000006.bb
+index 765455b490..80c21b2b14 100644
+--- a/meta-perl/recipes-perl/libstrictures/libstrictures-perl_2.000006.bb
++++ b/meta-perl/recipes-perl/libstrictures/libstrictures-perl_2.000006.bb
+@@ -25,7 +25,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "https://metacpan.org/pod/strictures"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=246;endline=262;md5=43be558cf4f19823cdd6af22135cf5f8"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/strictures-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libsub/libsub-exporter-progressive-perl_0.001013.bb b/meta-perl/recipes-perl/libsub/libsub-exporter-progressive-perl_0.001013.bb
+index fa66cd8f3b..d51ab21715 100644
+--- a/meta-perl/recipes-perl/libsub/libsub-exporter-progressive-perl_0.001013.bb
++++ b/meta-perl/recipes-perl/libsub/libsub-exporter-progressive-perl_0.001013.bb
+@@ -10,7 +10,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "https://metacpan.org/pod/Sub-Exporter-Progressive/"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=003fa970662359a43ac2c2961108b0f1"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/F/FR/FREW/Sub-Exporter-Progressive-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libsub/libsub-uplevel-perl_0.2800.bb b/meta-perl/recipes-perl/libsub/libsub-uplevel-perl_0.2800.bb
+index 98c322fabb..3a0de9757b 100644
+--- a/meta-perl/recipes-perl/libsub/libsub-uplevel-perl_0.2800.bb
++++ b/meta-perl/recipes-perl/libsub/libsub-uplevel-perl_0.2800.bb
+@@ -9,7 +9,7 @@ THIS IS NOT THE SORT OF THING YOU WANT TO DO EVERYDAY \
+ SECTION = "libs"
+ HOMEPAGE= "https://metacpan.org/release/Sub-Uplevel"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=7f1207cd3108e4ade18448d81e6bcb6c"
+ 
+ CPAN_PACKAGE = "Sub-Uplevel"
+diff --git a/meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.38.bb b/meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.38.bb
+index 3948f3c6f3..f4ce3131de 100644
+--- a/meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.38.bb
++++ b/meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.38.bb
+@@ -9,7 +9,7 @@ working."
+ HOMEPAGE = "http://search.cpan.org/~jstowe/TermReadKey-${PV}"
+ SECTION = "libraries"
+ 
+-LICENSE = "Artistic-1.0 | GPLv1+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;md5=c275db663c8489a5709ebb22b185add5"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/J/JS/JSTOWE/TermReadKey-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libtest/libtest-deep-perl_1.130.bb b/meta-perl/recipes-perl/libtest/libtest-deep-perl_1.130.bb
+index 75e1623f94..6252bc3351 100644
+--- a/meta-perl/recipes-perl/libtest/libtest-deep-perl_1.130.bb
++++ b/meta-perl/recipes-perl/libtest/libtest-deep-perl_1.130.bb
+@@ -22,7 +22,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "http://github.com/rjbs/Test-Deep/"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://lib/Test/Deep.pm;beginline=1817;endline=1826;md5=a897a42bafc3422cab17c2eb94f87a7c"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/R/RJ/RJBS/Test-Deep-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.42.bb b/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.42.bb
+index 7d7f336c3d..b8547cb1fe 100644
+--- a/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.42.bb
++++ b/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.42.bb
+@@ -22,7 +22,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "http://testanything.org"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=29;endline=30;md5=b08db4360eec119e875dddd7cb8a5ddd"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/Test-Harness-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libtest/libtest-nowarnings-perl_1.04.bb b/meta-perl/recipes-perl/libtest/libtest-nowarnings-perl_1.04.bb
+index b20668331d..d74a347293 100644
+--- a/meta-perl/recipes-perl/libtest/libtest-nowarnings-perl_1.04.bb
++++ b/meta-perl/recipes-perl/libtest/libtest-nowarnings-perl_1.04.bb
+@@ -14,7 +14,7 @@ The test is run by an \\"END\\" block in Test::NoWarnings. It will not be \
+ run when any forked children exit."
+ 
+ SECTION = "libs"
+-LICENSE = "LGPL-2.1"
 +LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
  
- SRC_URI[sha256sum] = "5df0af28f81891a3914a12f3a30b11b1981f7b30e09c5a42c011797e7fce9b6a"
+ HOMEPAGE= "https://metacpan.org/release/Test-NoWarnings"
+ 
+diff --git a/meta-perl/recipes-perl/libtest/libtest-warn-perl_0.36.bb b/meta-perl/recipes-perl/libtest/libtest-warn-perl_0.36.bb
+index 96939ec4d7..7f539933d7 100644
+--- a/meta-perl/recipes-perl/libtest/libtest-warn-perl_0.36.bb
++++ b/meta-perl/recipes-perl/libtest/libtest-warn-perl_0.36.bb
+@@ -9,7 +9,7 @@ the time to go take a look. \
+ SECTION = "libs"
+ HOMEPAGE= "https://metacpan.org/release/Test-Warn"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=73;endline=78;md5=42b423d91c92ba59c215835a2ee9b57a"
+ 
+ CPAN_PACKAGE = "Test-Warn"
+diff --git a/meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.031.bb b/meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.031.bb
+index 8014c19a95..d1c0d95fd3 100644
+--- a/meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.031.bb
++++ b/meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.031.bb
+@@ -10,7 +10,7 @@ be calculated *before* the warnings test is run, resulting in a TAP error. \
+ demonstration.)"
+ 
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ 
+ HOMEPAGE=       "https://metacpan.org/release/Test-Warnings"
+ 
+diff --git a/meta-perl/recipes-perl/libtext/libtext-charwidth-perl_0.04.bb b/meta-perl/recipes-perl/libtext/libtext-charwidth-perl_0.04.bb
+index 9057ae7fa4..29118129ad 100644
+--- a/meta-perl/recipes-perl/libtext/libtext-charwidth-perl_0.04.bb
++++ b/meta-perl/recipes-perl/libtext/libtext-charwidth-perl_0.04.bb
+@@ -12,7 +12,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "http://search.cpan.org/~kubota/Text-CharWidth-${PV}/"
+ 
+-LICENSE = "Artistic-1.0 | GPLv1+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;md5=d8d54c8c500cbdd57a4c15911d9d96db"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/K/KU/KUBOTA/Text-CharWidth-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb b/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
+index b6f7495eb2..afdf63ede4 100644
+--- a/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
++++ b/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
+@@ -8,7 +8,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "http://search.cpan.org/~ovid/Text-Diff/"
+ 
+-LICENSE = "Artistic-1.0 | GPL-2.0+"
++LICENSE = "Artistic-1.0 | GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=385c55653886acac3821999a3ccd17b3"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/O/OV/OVID/Text-Diff-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libtext/libtext-iconv-perl_1.7.bb b/meta-perl/recipes-perl/libtext/libtext-iconv-perl_1.7.bb
+index a16bf8797e..1e8405cab9 100644
+--- a/meta-perl/recipes-perl/libtext/libtext-iconv-perl_1.7.bb
++++ b/meta-perl/recipes-perl/libtext/libtext-iconv-perl_1.7.bb
+@@ -8,7 +8,7 @@ Settings of fromcode and tocode and their permitted combinations are \
+ implementation-dependent. Valid values are specified in the system \
+ documentation."
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=3;endline=6;md5=fadf2919c7128e887d26b4d905f90649"
+ RRECOMMENDS:${PN}:append:libc-glibc = " glibc-gconvs"
+ 
+diff --git a/meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb b/meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb
+index 5dc2ad32a5..017e951d3a 100644
+--- a/meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb
++++ b/meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb
+@@ -13,7 +13,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "http://search.cpan.org/~kubota/Text-WrapI18N-${PV}/"
+ 
+-LICENSE = "Artistic-1.0 | GPLv1+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;md5=080862e1e40cdcddef4393e137285858"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/K/KU/KUBOTA/Text-WrapI18N-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libunicode/libunicode-linebreak-perl_2019.001.bb b/meta-perl/recipes-perl/libunicode/libunicode-linebreak-perl_2019.001.bb
+index 4c01a4ca18..a7a998c358 100644
+--- a/meta-perl/recipes-perl/libunicode/libunicode-linebreak-perl_2019.001.bb
++++ b/meta-perl/recipes-perl/libunicode/libunicode-linebreak-perl_2019.001.bb
+@@ -7,7 +7,7 @@ SECTION = "libs"
+ 
+ HOMEPAGE = "https://metacpan.org/release/Unicode-LineBreak"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=5;endline=9;md5=b5e8b1099b86b86fbc315b50484231ab"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/N/NE/NEZUMI/Unicode-LineBreak-${PV}.tar.gz"
+diff --git a/meta-perl/recipes-perl/libxml/libxml-filter-buffertext-perl_1.01.bb b/meta-perl/recipes-perl/libxml/libxml-filter-buffertext-perl_1.01.bb
+index 62477458a0..7962d22c9d 100644
+--- a/meta-perl/recipes-perl/libxml/libxml-filter-buffertext-perl_1.01.bb
++++ b/meta-perl/recipes-perl/libxml/libxml-filter-buffertext-perl_1.01.bb
+@@ -7,7 +7,7 @@ to, and most don't.  This filter does the trivial but oft-repeated task \
+ of putting all characters into a single event. \
+ "
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPLv1+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ HOMEPAGE = "http://search.cpan.org/dist/XML-Filter-BufferText/"
+ DEPENDS += "libxml-sax-perl-native"
+ RDEPENDS:${PN} += "libxml-sax-perl"
+diff --git a/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb
+index 58d0e4cb2b..c2898a9012 100644
+--- a/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb
++++ b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb
+@@ -8,7 +8,7 @@ your programs."
+ 
+ HOMEPAGE = "http://search.cpan.org/dist/XML-LibXML-1.99/"
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0|GPLv1+"
++LICENSE = "Artistic-1.0|GPL-1.0-or-later"
+ DEPENDS += "libxml2 \
+         libxml-sax-perl-native \
+         zlib \
+diff --git a/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.57.bb b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.57.bb
+index ab684eaaaa..487a5c22cd 100644
+--- a/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.57.bb
++++ b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.57.bb
+@@ -7,7 +7,7 @@ although it has been put to limited use in settings such as XML::LibXML and \
+ the AxKit XML Application Server. \
+ "
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPLv1+"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ HOMEPAGE = "http://search.cpan.org/dist/XML-SAX-Writer/"
+ DEPENDS += "libxml-filter-buffertext-perl-native"
+ RDEPENDS:${PN} += "libxml-filter-buffertext-perl"
+diff --git a/meta-perl/recipes-perl/po4a/po4a_0.49.bb b/meta-perl/recipes-perl/po4a/po4a_0.49.bb
+index d7a97dd90e..679ea0fb44 100644
+--- a/meta-perl/recipes-perl/po4a/po4a_0.49.bb
++++ b/meta-perl/recipes-perl/po4a/po4a_0.49.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "The po4a (PO for anything) project goal is to ease translations \
+ (and more interestingly, the maintenance of translations) using gettext tools \
+ on areas where they were not expected like documentation."
+ HOMEPAGE = "https://po4a.alioth.debian.org"
+-LICENSE = "GPLv2"
++LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=a96fc9b4cc36d80659e694ea109f0325"
+ 
+ SRC_URI = "git://github.com/mquinson/po4a.git;protocol=https;branch=master"
 -- 
 2.35.1
 
