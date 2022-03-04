@@ -1,154 +1,176 @@
-Return-Path: <jsbronder@cold-front.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 11A48C433EF
-	for <webhook@archiver.kernel.org>; Fri,  4 Mar 2022 15:28:34 +0000 (UTC)
-Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
- [66.111.4.26])
- by mx.groups.io with SMTP id smtpd.web08.8085.1646407712753410115
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 474CCC433FE
+	for <webhook@archiver.kernel.org>; Fri,  4 Mar 2022 15:52:27 +0000 (UTC)
+Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com
+ [209.85.160.177])
+ by mx.groups.io with SMTP id smtpd.web11.8568.1646409146081190289
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Mar 2022 07:28:32 -0800
+ Fri, 04 Mar 2022 07:52:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@cold-front.org header.s=mesmtp header.b=qHKHo3zo;
- spf=pass (domain: cold-front.org, ip: 66.111.4.26,
- mailfrom: jsbronder@cold-front.org)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
-	by mailout.nyi.internal (Postfix) with ESMTP id 194F15C01BD
-	for <openembedded-devel@lists.openembedded.org>;
- Fri,  4 Mar 2022 10:28:32 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
-  by compute2.internal (MEProxy); Fri, 04 Mar 2022 10:28:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
-	 h=cc:content-transfer-encoding:date:date:from:from:in-reply-to
-	:message-id:mime-version:reply-to:sender:subject:subject:to:to;
-	 s=mesmtp; bh=45dUgJSkWl6kVuch7zxT7LrBXeIwS2VBB2NHb9sCa7w=; b=qH
-	KHo3zofbSw9YG6DDBLXlBj64bmqIQjl6Ge/MQAOJu85157as8gptvu/Aw7q+V0O6
-	wyMtrHvpgY2essyf3wl5u5EM6GQjIpm9exdLdye8c7fezuYIE6fWi9MXpfA0ZB75
-	GOfGbomtgOdfOSNN/wqKAiAtR9lDAkKx2gVys/DxE=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-transfer-encoding:date:date
-	:from:from:in-reply-to:message-id:mime-version:reply-to:sender
-	:subject:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender
-	:x-me-sender:x-sasl-enc; s=fm2; bh=45dUgJSkWl6kVuch7zxT7LrBXeIwS
-	2VBB2NHb9sCa7w=; b=lqfIoWmqbkVmYfrqBDvgKeazBdK1xvckbHg9Kxer99S+V
-	5f4/DPYhzcF0yJ30qFVyyYa+d6CNrQ8qDBBOqVMdo4tPG7gcwqcH+1IAJsIyKoAe
-	3pNTPowWqj2cTiUD+W+5hb4yYQy+jzqrGGl/MV/HBI/YDJQ7bMgV5bZFOocHk1wd
-	tTohpydnA0wGcz3NSr5FzenKswf3uzJeAozzpkMFPyX2CK9i6oVku9i9PvGRWT4+
-	bydKlWSYm5WlG5OohLLkHSjkJB3SbPEG7WnFPBJyRwX514cjMiRXFKmTwR9JuyV6
-	qSuSExBfnm69YTdbKZ/pu4DeGSh49v35VYsE2B8qg==
-X-ME-Sender: <xms:HzAiYg4oh62FZ0f8FCMu12PAo3_HtEoZMp0N0sftjkSwrwD1yLCwnA>
-    <xme:HzAiYh6-ZqmwPYJiJ-Ce9j3mudHfmhwznIKe3d_5ZhHI05FsMCL6Cns5DuFcGfAjq
-    yiIq6IXbiuL9nSidA>
-X-ME-Received: 
- <xmr:HzAiYvc-lq4XkXHetLTteVsYKkjHC9NbJEmMvXRgx_JbKVMOSyOcejEmoW_Nre8M0JAXj2Nor9QCEHHcsNEYbghQlaCua0rQFVZtuTEFP6EW>
-X-ME-Proxy-Cause: 
- gggruggvucftvghtrhhoucdtuddrgedvvddruddtkedgjeeiucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucenucfjughrpefhvffufffkofgggfestdekredtre
-    dttdenucfhrhhomheplfhushhtihhnuceurhhonhguvghruceojhhssghrohhnuggvrhes
-    tgholhguqdhfrhhonhhtrdhorhhgqeenucggtffrrghtthgvrhhnpeekffdvjefgffeige
-    dvieefteehgedutdeuudeileeigfejjefghfehtdefleevffenucffohhmrghinhepghhi
-    thhhuhgsrdgtohhmpdhlohhgrdhinhhfohenucevlhhushhtvghrufhiiigvpedtnecurf
-    grrhgrmhepmhgrihhlfhhrohhmpehjshgsrhhonhguvghrsegtohhlugdqfhhrohhnthdr
-    ohhrgh
-X-ME-Proxy: <xmx:HzAiYlIlItXpRiNStUrsDw5QI2lW0oZklq_050y_ZG86mQOf5ehI0g>
-    <xmx:HzAiYkJU7SwfN2uaaUfiU8KLAw7t_bqp8cB765eDnkuGlatJOvQ6jQ>
-    <xmx:HzAiYmzIfsRPtxdNtW1d-d83PYQdNfxhlwLM5yFJbEVEulc8LtWD0w>
-    <xmx:IDAiYrlWbTK9zlCMrWYVUSvYyOQRhwBP5PMJIlIX7eYQ5G456RLbdg>
-Received: by mail.messagingengine.com (Postfix) with ESMTPA for
- <openembedded-devel@lists.openembedded.org>; Fri,
- 4 Mar 2022 10:28:31 -0500 (EST)
-From: Justin Bronder <jsbronder@cold-front.org>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH] python3-crc32c: set target platform via
- setup.cfg
-Date: Fri,  4 Mar 2022 10:28:27 -0500
-Message-Id: <20220304152827.31576-1-jsbronder@cold-front.org>
-X-Mailer: git-send-email 2.35.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=JeoRHABN;
+ spf=pass (domain: gmail.com, ip: 209.85.160.177,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f177.google.com with SMTP id n11so7688416qtk.8
+        for <openembedded-devel@lists.openembedded.org>;
+ Fri, 04 Mar 2022 07:52:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=T7hEoXrQiA3sgfwgOtmmFb9Ky2nWr5Eo2Mw3z8Ma+dg=;
+        b=JeoRHABNgRTEX6skiCM05q4RBj77f8K4IdBhjr94rRp5MjIydMo8eEz2VvJX+3Yxqw
+         XJXzBulc2dlGuNrlhxhxiPS9S2DOEWJkRmuJNxggK+k8Y/gItfWKdNNJohynrX1G1xPE
+         BhPXS9EVAAPtAZwas3kMj+Qu0kJtXo21Y46j8pFfJGaC5v3prZ/pP4WIZAaIa3Tlbhxw
+         kY9Bdcer9pAs2Bya4vQ32luT5CkGdy4d2EDVIhhNCANWnzQ+/XENdQKOLtwSsAbSyOlu
+         3e/BWshsC9kudCDxNowzDrXXhKwjooBIVHa9w6uMIKjDDnrtJm33YtD7PT4zMi0Z2Rut
+         EhBg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=T7hEoXrQiA3sgfwgOtmmFb9Ky2nWr5Eo2Mw3z8Ma+dg=;
+        b=mXW0W+iE/pP8a5SNI8CYeFJgTyXdh6SFswWkzoPeRx67Pj7bnQYvr2J2KS+9dg47TM
+         xAUwtVx8ZC2GVVCPlcz6+DJDWtw6h/c+4ic0ML/N9mEDQTKW0PWzqgmkUxc1NrF12Y95
+         sBRsLcZ7Z0gzISsHfbGC8mhQotUWuy+BaxNGzCz5/i/U2ZHORL5AwoiL3k+tNH3SGmZu
+         IMTqt/7kSb6RhnhznybD1Mdq4GHzvxyda2pqpknR2MLhR0g0qkIuV0LJSM137rulKpJX
+         qYKk3N6fFodptl2IavQigkILivlMD7a0ku351YQgwB+jvQ3bWguDyTRx3sVkNxfLh0lg
+         BmZQ==
+X-Gm-Message-State: AOAM5306muUYrHDxJM4/GZo5zVEPHBxNmj9tjVfnu7XCrRSnQyha/xmI
+	XHdAGPNpGzaWZjpUMhZaPD0srKB3mZ0dwRBMIwo=
+X-Google-Smtp-Source: 
+ ABdhPJzsR7kfAh47jw5nZ7pn94jXxo7xaAva5VN8ieaRWo2/OFWFVwppSEXwOCzMt3QaPamSR1/KLS2QrwI+CbcMudc=
+X-Received: by 2002:ac8:5a86:0:b0:2de:29af:5658 with SMTP id
+ c6-20020ac85a86000000b002de29af5658mr31979021qtc.54.1646409144993; Fri, 04
+ Mar 2022 07:52:24 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20220228155714.7894-1-jsbronder@cold-front.org>
+ <CAMKF1spdXVvNtLfq=-GBRROe+-=D0jZ+9Pg=EfaoK55A7uqtuw@mail.gmail.com>
+ <YiEOlH9jmQ/3JEjo@ravine.members.linode.com>
+ <CAMKF1sr4g7bZVF+=asUsmpZutoak1HFO79GmN_UnnRiqYSo1Kw@mail.gmail.com>
+ <YiIv7PqwqdTxKDid@ravine.members.linode.com>
+In-Reply-To: <YiIv7PqwqdTxKDid@ravine.members.linode.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 4 Mar 2022 07:51:59 -0800
+Message-ID: 
+ <CAMKF1spfMDpjR-3RkaeT_UFN0xuGcWBcfoSBRoPaHyg2pqbhkw@mail.gmail.com>
+Subject: Re: python3-crc32c: add 2.2.post0
+To: Justin Bronder <jsbronder@cold-front.org>, Khem Raj <raj.khem@gmail.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 04 Mar 2022 15:28:34 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 04 Mar 2022 15:52:27 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95788
+ https://lists.openembedded.org/g/openembedded-devel/message/95789
 
-Looks like we're not the first to need to specify the target platform
-when building this package.  According to upstream, we can just update
-setup.cfg instead of patching setup.py.
-https://github.com/ICRAR/crc32c/pull/10
+On Fri, Mar 4, 2022 at 7:27 AM Justin Bronder <jsbronder@cold-front.org> wrote:
+>
+> On 04/03/22 00:04 -0800, Khem Raj wrote:
+> > On Thu, Mar 3, 2022 at 10:53 AM Justin Bronder <jsbronder@cold-front.org> wrote:
+> > >
+> > > Ah right, this package only support arm or x86.  I'll send an update.
+> >
+> > actually thats not the case, it tries to use SSE when target is x86
+> > and crc extensions on aarch64, for
+> > other architectures it uses general purpose instructions.
+> > however it uses wrong way to detect platform by poking at build system
+> > for platform architecture
+> > I have sent a patch to fix it.
+>
+> You're much quicker then I am.  However, based on
+> https://github.com/ICRAR/crc32c/pull/10 I think we can simply update setup.cfg.
+> I'll send a patch in case you prefer that mechanism, but no problem if patching
+> setup.py is preferable.
 
-Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
----
- ...p.py-Fix-determining-target-platform.patch | 34 -------------------
- .../python/python3-crc32c_2.2.post0.bb        |  7 ++--
- 2 files changed, 5 insertions(+), 36 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-crc32c/0001-setup.py-Fix-determining-target-platform.patch
+That patch seems incomplete, it does not consider the arm/aarch64
+piece which perhaps
+is added after that pull was created. So someone needs to forward port
+that patch and
+refresh the pull, until then my proposed patch is more comprehensive.
 
-diff --git a/meta-python/recipes-devtools/python/python3-crc32c/0001-setup.py-Fix-determining-target-platform.patch b/meta-python/recipes-devtools/python/python3-crc32c/0001-setup.py-Fix-determining-target-platform.patch
-deleted file mode 100644
-index b534c05e9a..0000000000
---- a/meta-python/recipes-devtools/python/python3-crc32c/0001-setup.py-Fix-determining-target-platform.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From 855428feb14c44762ea21a18b05638e3e6266ab5 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 3 Mar 2022 23:50:30 -0800
--Subject: [PATCH] setup.py: Fix determining target platform
--
--Do not poke at the build machine to determine target platform or architecture
--pass it from environment instead for cross compiling to work
--
--Upstream-Status: Inappropriate [OE-Specific]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- setup.py | 3 ++-
-- 1 file changed, 2 insertions(+), 1 deletion(-)
--
----- a/setup.py
--+++ b/setup.py
--@@ -20,6 +20,7 @@
-- #    MA 02111-1307  USA
-- #
-- import glob
--+import os
-- import platform
-- 
-- import distutils.ccompiler
--@@ -58,7 +59,8 @@ class _build_ext(build_ext):
-- 
--     def run(self):
--         assert(len(self.distribution.ext_modules) == 1)
---        platform = self.platform.lower()
--+        platform = os.environ.get('PLATFORM', 'True')
--+
--         is_intel = platform in ['x86_64', 'amd64', 'i386', 'i686']
--         is_arm = platform in ['aarch64_be', 'aarch64', 'armv8b', 'armv8l']
--         distutils.log.info("platform: %s, is_intel: %d, is_arm: %d", platform, is_intel, is_arm)
-diff --git a/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb b/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb
-index 78e14e1d2f..4f6a3aba99 100644
---- a/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb
-+++ b/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb
-@@ -9,11 +9,14 @@ LIC_FILES_CHKSUM = " \
-     file://crc32c_adler.c;startline=9;endline=24;md5=c60e6e55d0e5d95effa6fad27db0711a \
- "
- 
--SRC_URI += "file://0001-setup.py-Fix-determining-target-platform.patch"
- SRC_URI[sha256sum] = "3d058e7a5e37e4985d1a7ad4cb702bca56b490daa658d4851377d13ead8b435e"
- 
- inherit pypi setuptools3
- 
--export PLATFORM = "${TARGET_ARCH}"
-+do_compile:prepend() {
-+    if ! grep 'platform =' setup.cfg; then
-+        printf "[build_ext]\nplatform = ${TARGET_ARCH}" >> setup.cfg
-+    fi
-+}
- 
- RDEPENDS:${PN} += "python3-core"
--- 
-2.35.1
-
+>
+> I did try passing '--platform=${TARGET_ARCH}' but bdist_wheel didn't recognize
+> the parameter.
+>
+> >
+> > >
+> > > On 02/03/22 18:47 -0800, Khem Raj wrote:
+> > > > I am seeing a failure with clang on non x86 host. See
+> > > >
+> > > > https://errors.yoctoproject.org/Errors/Details/650724/
+> > > >
+> > > > On Mon, Feb 28, 2022 at 7:57 AM Justin Bronder <jsbronder@cold-front.org> wrote:
+> > > > >
+> > > > > Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
+> > > > > ---
+> > > > >  meta-python/licenses/CRC32C-ADLER                | 15 +++++++++++++++
+> > > > >  .../python/python3-crc32c_2.2.post0.bb           | 16 ++++++++++++++++
+> > > > >  2 files changed, 31 insertions(+)
+> > > > >  create mode 100644 meta-python/licenses/CRC32C-ADLER
+> > > > >  create mode 100644 meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb
+> > > > >
+> > > > > diff --git a/meta-python/licenses/CRC32C-ADLER b/meta-python/licenses/CRC32C-ADLER
+> > > > > new file mode 100644
+> > > > > index 0000000000..f1f0e94ee0
+> > > > > --- /dev/null
+> > > > > +++ b/meta-python/licenses/CRC32C-ADLER
+> > > > > @@ -0,0 +1,15 @@
+> > > > > +This software is provided 'as-is', without any express or implied
+> > > > > +warranty.  In no event will the author be held liable for any damages
+> > > > > +arising from the use of this software.
+> > > > > +
+> > > > > +Permission is granted to anyone to use this software for any purpose,
+> > > > > +including commercial applications, and to alter it and redistribute it
+> > > > > +freely, subject to the following restrictions:
+> > > > > +
+> > > > > +1. The origin of this software must not be misrepresented; you must not
+> > > > > +   claim that you wrote the original software. If you use this software
+> > > > > +   in a product, an acknowledgment in the product documentation would be
+> > > > > +   appreciated but is not required.
+> > > > > +2. Altered source versions must be plainly marked as such, and must not be
+> > > > > +   misrepresented as being the original software.
+> > > > > +3. This notice may not be removed or altered from any source distribution.
+> > > > > diff --git a/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb b/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb
+> > > > > new file mode 100644
+> > > > > index 0000000000..0d51420939
+> > > > > --- /dev/null
+> > > > > +++ b/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb
+> > > > > @@ -0,0 +1,16 @@
+> > > > > +SUMMARY = "A python package implementing the crc32c algorithmin hardware and software"
+> > > > > +HOMEPAGE = "https://github.com/ICRAR/crc32c"
+> > > > > +
+> > > > > +LICENSE = "BSD-2-Clause & BSD-3-Clause & CRC32C-ADLER & LGPL-2.0+"
+> > > > > +LIC_FILES_CHKSUM = " \
+> > > > > +    file://LICENSE;md5=4fbd65380cdd255951079008b364516c \
+> > > > > +    file://LICENSE.google-crc32c;md5=e9ed01b5e5ac9eae23fc2bb33701220c \
+> > > > > +    file://LICENSE.slice-by-8;md5=6b3bc7709d6b2db6646ec2467310ff6b \
+> > > > > +    file://crc32c_adler.c;startline=9;endline=24;md5=c60e6e55d0e5d95effa6fad27db0711a \
+> > > > > +"
+> > > > > +
+> > > > > +SRC_URI[sha256sum] = "3d058e7a5e37e4985d1a7ad4cb702bca56b490daa658d4851377d13ead8b435e"
+> > > > > +
+> > > > > +inherit pypi setuptools3
+> > > > > +
+> > > > > +RDEPENDS:${PN} += "python3-core"
+> > > > > --
+> > > > > 2.35.1
+> > > > >
+> > > > >
+> > > > > -=-=-=-=-=-=-=-=-=-=-=-
+> > > > > Links: You receive all messages sent to this group.
+> > > > > View/Reply Online (#95585): https://lists.openembedded.org/g/openembedded-devel/message/95585
+> > > > > Mute This Topic: https://lists.openembedded.org/mt/89453390/1997914
+> > > > > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > > > > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> > > > > -=-=-=-=-=-=-=-=-=-=-=-
+> > > > >
+> > >
+> > > --
+> > > Justin Bronder
+>
+> --
+> Justin Bronder
 
