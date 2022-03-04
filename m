@@ -2,60 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 416BEC4332F
-	for <webhook@archiver.kernel.org>; Fri,  4 Mar 2022 08:50:26 +0000 (UTC)
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
- [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web08.5026.1646383825560111622
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C924C433F5
+	for <webhook@archiver.kernel.org>; Fri,  4 Mar 2022 08:50:30 +0000 (UTC)
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
+ [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.web08.5028.1646383829470616461
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Mar 2022 00:50:25 -0800
+ Fri, 04 Mar 2022 00:50:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Un1xgKbB;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id m22so6866987pja.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=J15iwC3v;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f180.google.com with SMTP id s8so2999576pfk.12
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 04 Mar 2022 00:50:25 -0800 (PST)
+ Fri, 04 Mar 2022 00:50:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=aYeZoXcaSz7PPxCXEw+8waqzoz+N6ikrJhq9Eoz8VAI=;
-        b=Un1xgKbB2L3xDa7ypd9mCjGvrpH2jkitxcwkaFOSpXTxcik1MX1UPBzYo9rQ6UreOT
-         nuoOu+3BBxIs3oTnu1mgx/yOV3K005GFoJ0cG7YRM8/STfHZtJbUYiGpxlhoaxa97mRn
-         u7t59NCxG3jz8mWH+gslh43wpo1SqblzMiufoQDfOogLeiLo2u4ZcgkrF45CWkv3TgKa
-         SEzK2mgQdXq/JhN3vCeU7VkW1twQOArc6VpIYU2a+USwDkLGH8IYyrFVhHLaK8z4q2j2
-         kkr1TIfBcJAoMQbEfejjJjGehSYYnNJNeEC4A0ex7CFFJ35v0MS00kCPO12ls+UqThql
-         ATpA==
+        bh=5/KazRnGqF2Ow8M9Ic5C3+RE0fmeEvJ9/XQhTNgdm0g=;
+        b=J15iwC3vnYDoV0ZJkPdrrPOdlKjmhzXq6LmORb2ftHD3vNfh8FqLj1gxKhE9eg9OWw
+         LmkW4i7rRPbbi8MU36Q67QPrx9kTbwojNREbMRPEyk7T1DAD677WDYBGVzj6wCsGT2g6
+         2jLvDI0sbACma6Uv4J7f3Yf8f72eqdt2h9JJz4U5zyO8gftgbVZYxqKmvIEM/64JEYgu
+         q3sVTI+ptMR2bQJdM4+pJAM7GPGmB4S1e8iJI+H28SULm1iWIQbtU8dnK35hDGqD3B97
+         FLHgoHL2++/Zp5+1KM8GjAvDpSFfbppFBLGXzzCYsShyMIHROrONDOTWM6lwBCKoC8L8
+         tQyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=aYeZoXcaSz7PPxCXEw+8waqzoz+N6ikrJhq9Eoz8VAI=;
-        b=gbr/J/u4TEbENBru3jC0kx57U19BXCHcRjw4ofH0n5N4wKLD3OV6kRgOdLZ9oDTqDr
-         BnaCAGyUaiAyXVgEe6aYe1G8XxzZPRUd9qf7fM+ogxaGY8iuotoLZfaiYQiX1RAoeDA6
-         7qA2xkVQ7P1NN7TyvknxCPgMotaTfhLl+7tTu/Ek1Trwj9OecNyh0Vprta8xCijc8sFS
-         w5fI887yCoZH2k49km1N7cEwPTD009HeZMzWP0wp12S8pBHbZUKMsrLyv5bKXuZ4hFfx
-         Yco5hSNKJCBx6BueOxShQ+ayKUapnJyoBFUt6B+jzLOtZmMUliKYIFNEA/xlno5Mfsj1
-         nrYQ==
-X-Gm-Message-State: AOAM532z8FKQ1TFHQtUV9LmTuncvF2WR7+cbL7mKUXSOZ6AJi+JMEe/m
-	4A8FB0H85ici+GFTkNs/dO3khFl2lP5UHg==
+        bh=5/KazRnGqF2Ow8M9Ic5C3+RE0fmeEvJ9/XQhTNgdm0g=;
+        b=6dp73iryXVEBZYNn1+y3cfPg/dzQqV3h/4FhYEOOFba4/YymLhU+cx5uKtRlBMmUhD
+         M1ykBz9NRglNLxXMncSXrL0dm87yldLz9r4ArsDyOST50e3zWzqVZDwlgI1f4mk0aLqs
+         ZQjpdKv6QAN2eFH4KYV+v/dn8OlS6v3LCPGtVANQp4pqSsdOmzoxu6pCO5tlo7lSz19y
+         X2qDzY13RPsLSZ8gH6VXzRX6hfTQEaFiX0xeRLsrvBQj43ujo3bKtbv6NgRDM6TMUuX3
+         huHN2WI6hFEqkZBIlK0cenXL22AN0IL0f+xzcGJIM0Ln3c1b8nYWuPpFL9Sf9ib4Ifxw
+         V0YQ==
+X-Gm-Message-State: AOAM530GRpEu/MGuZcC6m9wMCDGdSUpPVWO9NDquUr7gyHnL5h6QGzj+
+	mwPhZ+f4VHFVXQdJL7A3YBMzQlMPjHJ7FQ==
 X-Google-Smtp-Source: 
- ABdhPJwhEFU9maLIzTEY465EWt9JH0xLnpo1GcTIcjYYCCpJW7iFOmg5IxvYkX5fzbqG/26dhwABTg==
-X-Received: by 2002:a17:902:6ac4:b0:149:907d:afdc with SMTP id
- i4-20020a1709026ac400b00149907dafdcmr40320018plt.59.1646383823890;
-        Fri, 04 Mar 2022 00:50:23 -0800 (PST)
+ ABdhPJwwQ1k3r6ww0yUdp5nMpFTNT0SdyN7KNBZUOMpWCY2k2XGRmvsOP6TcCs/tosJOIbZ6d/ulgA==
+X-Received: by 2002:a65:6255:0:b0:364:4513:67bf with SMTP id
+ q21-20020a656255000000b00364451367bfmr33542473pgv.64.1646383828355;
+        Fri, 04 Mar 2022 00:50:28 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ff3d])
         by smtp.gmail.com with ESMTPSA id
- k12-20020a635a4c000000b0037852b86236sm3912283pgm.75.2022.03.04.00.50.23
+ k12-20020a635a4c000000b0037852b86236sm3912283pgm.75.2022.03.04.00.50.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 04 Mar 2022 00:50:23 -0800 (PST)
+        Fri, 04 Mar 2022 00:50:27 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH 03/10] recipes: Update LICENSE variable to use
+Subject: [meta-python][PATCH 08/10] recipes: Update LICENSE variable to use
  SPDX license identifiers
-Date: Fri,  4 Mar 2022 00:50:11 -0800
-Message-Id: <20220304085018.1255075-3-raj.khem@gmail.com>
+Date: Fri,  4 Mar 2022 00:50:16 -0800
+Message-Id: <20220304085018.1255075-8-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220304085018.1255075-1-raj.khem@gmail.com>
 References: <20220304085018.1255075-1-raj.khem@gmail.com>
@@ -64,1074 +65,797 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 04 Mar 2022 08:50:26 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 04 Mar 2022 08:50:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95771
+ https://lists.openembedded.org/g/openembedded-devel/message/95775
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-gnome/recipes-connectivity/folks/folks_0.15.4.bb           | 2 +-
- meta-gnome/recipes-connectivity/geary/geary_40.0.bb             | 2 +-
- meta-gnome/recipes-connectivity/libnma/libnma_1.8.34.bb         | 2 +-
- .../network-manager-applet/network-manager-applet_1.24.0.bb     | 2 +-
- meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb            | 2 +-
- meta-gnome/recipes-gimp/babl/babl_0.1.90.bb                     | 2 +-
- meta-gnome/recipes-gimp/gegl/gegl_0.4.36.bb                     | 2 +-
- meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb                    | 2 +-
- meta-gnome/recipes-gnome/amtk/amtk_5.3.1.bb                     | 2 +-
- meta-gnome/recipes-gnome/dconf/dconf-editor_3.38.3.bb           | 2 +-
- meta-gnome/recipes-gnome/dconf/dconf_0.40.0.bb                  | 2 +-
- meta-gnome/recipes-gnome/devilspie/devilspie2_0.44.bb           | 2 +-
- meta-gnome/recipes-gnome/evince/evince_41.3.bb                  | 2 +-
- .../evolution-data-server/evolution-data-server.inc             | 2 +-
- .../recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb    | 2 +-
- meta-gnome/recipes-gnome/file-roller/file-roller_3.40.0.bb      | 2 +-
- meta-gnome/recipes-gnome/gdm/gdm_41.0.bb                        | 2 +-
- meta-gnome/recipes-gnome/gedit/gedit_41.0.bb                    | 2 +-
- meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.2.bb    | 2 +-
- meta-gnome/recipes-gnome/gexiv2/gexiv2_0.14.0.bb                | 2 +-
- meta-gnome/recipes-gnome/gfbgraph/gfbgraph_0.2.4.bb             | 2 +-
- meta-gnome/recipes-gnome/ghex/ghex_3.18.4.bb                    | 2 +-
- meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.4.3.bb     | 2 +-
- .../recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.34.5.bb     | 2 +-
- .../recipes-gnome/gnome-calculator/gnome-calculator_41.1.bb     | 2 +-
- meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_41.2.bb  | 2 +-
- .../gnome-control-center/gnome-control-center_41.2.bb           | 2 +-
- meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_41.2.bb    | 2 +-
- .../recipes-gnome/gnome-disk-utility/gnome-disk-utility_41.0.bb | 2 +-
- .../recipes-gnome/gnome-flashback/gnome-flashback_3.42.1.bb     | 2 +-
- .../recipes-gnome/gnome-font-viewer/gnome-font-viewer_41.0.bb   | 2 +-
- meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_40.0.bb    | 2 +-
- meta-gnome/recipes-gnome/gnome-menus/gnome-menus_3.36.0.bb      | 2 +-
- .../gnome-online-accounts/gnome-online-accounts_3.43.1.bb       | 2 +-
- meta-gnome/recipes-gnome/gnome-panel/gnome-panel_3.42.0.bb      | 2 +-
- meta-gnome/recipes-gnome/gnome-photos/gnome-photos_40.0.bb      | 2 +-
- .../recipes-gnome/gnome-screenshot/gnome-screenshot_41.0.bb     | 2 +-
- meta-gnome/recipes-gnome/gnome-session/gnome-session_41.3.bb    | 2 +-
- .../gnome-settings-daemon/gnome-settings-daemon_41.0.bb         | 2 +-
- .../recipes-gnome/gnome-shell/gnome-shell-extensions_41.1.bb    | 2 +-
- meta-gnome/recipes-gnome/gnome-shell/gnome-shell_41.2.bb        | 2 +-
- .../gnome-system-monitor/gnome-system-monitor_41.0.bb           | 2 +-
- .../recipes-gnome/gnome-terminal/gnome-terminal_3.42.2.bb       | 2 +-
- meta-gnome/recipes-gnome/gnome-tweaks/gnome-tweaks_40.0.bb      | 2 +-
- meta-gnome/recipes-gnome/grilo/grilo-plugins_0.3.14.bb          | 2 +-
- meta-gnome/recipes-gnome/grilo/grilo_0.3.14.bb                  | 2 +-
- meta-gnome/recipes-gnome/gsound/gsound_1.0.3.bb                 | 2 +-
- meta-gnome/recipes-gnome/gspell/gspell_1.9.1.bb                 | 2 +-
- meta-gnome/recipes-gnome/gthumb/gthumb_3.12.0.bb                | 2 +-
- .../gtksourceview/gtksourceview-classic-light_1.0.bb            | 2 +-
- .../recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb       | 2 +-
- meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.2.bb  | 2 +-
- meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.2.0.bb  | 2 +-
- meta-gnome/recipes-gnome/gvfs/gvfs_1.49.1.bb                    | 2 +-
- meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb   | 2 +-
- meta-gnome/recipes-gnome/libgdata/libgdata_0.18.1.bb            | 2 +-
- meta-gnome/recipes-gnome/libgsf/libgsf_1.14.48.bb               | 2 +-
- meta-gnome/recipes-gnome/libgtop/libgtop_2.40.0.bb              | 2 +-
- meta-gnome/recipes-gnome/libgweather/libgweather_40.0.bb        | 2 +-
- meta-gnome/recipes-gnome/libportal/libportal_0.5.bb             | 2 +-
- meta-gnome/recipes-gnome/libtimezonemap/libtimezonemap_0.4.6.bb | 2 +-
- meta-gnome/recipes-gnome/libwnck/libwnck3_40.1.bb               | 2 +-
- meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb              | 2 +-
- meta-gnome/recipes-gnome/libxklavier/libxklavier_5.4.bb         | 2 +-
- meta-gnome/recipes-gnome/metacity/metacity_3.42.0.bb            | 2 +-
- meta-gnome/recipes-gnome/mutter/mutter_41.2.bb                  | 2 +-
- meta-gnome/recipes-gnome/nautilus/nautilus_41.2.bb              | 2 +-
- meta-gnome/recipes-gnome/rest/rest_0.8.1.bb                     | 2 +-
- meta-gnome/recipes-gnome/sysprof/sysprof_3.42.1.bb              | 2 +-
- meta-gnome/recipes-gnome/tracker/tracker-miners_3.2.1.bb        | 2 +-
- meta-gnome/recipes-gnome/tracker/tracker_3.2.1.bb               | 2 +-
- meta-gnome/recipes-gnome/yelp/yelp-tools_41.0.bb                | 2 +-
- meta-gnome/recipes-gnome/yelp/yelp-xsl_41.1.bb                  | 2 +-
- meta-gnome/recipes-gnome/yelp/yelp_41.2.bb                      | 2 +-
- meta-gnome/recipes-graphics/clutter/clutter-1.0.inc             | 2 +-
- meta-gnome/recipes-graphics/clutter/clutter-gst-3.0.inc         | 2 +-
- meta-gnome/recipes-graphics/clutter/clutter-gtk-1.0.inc         | 2 +-
- .../recipes-support/accountsservice/accountsservice_0.6.55.bb   | 2 +-
- .../recipes-support/appstream-glib/appstream-glib_0.7.18.bb     | 2 +-
- meta-gnome/recipes-support/colord-gtk/colord-gtk_0.2.0.bb       | 2 +-
- meta-gnome/recipes-support/ibus/ibus.inc                        | 2 +-
- meta-gnome/recipes-support/libuser/libuser_0.62.bb              | 2 +-
- meta-gnome/recipes-support/onboard/onboard_1.4.1.bb             | 2 +-
- meta-gnome/recipes-support/usermode/usermode_1.114.bb           | 2 +-
- 84 files changed, 84 insertions(+), 84 deletions(-)
+ .../recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-ansi2html_1.7.0.bb  | 2 +-
+ meta-python/recipes-devtools/python/python3-argh_0.26.2.bb      | 2 +-
+ meta-python/recipes-devtools/python/python3-astroid_2.9.3.bb    | 2 +-
+ meta-python/recipes-devtools/python/python3-asyncio-glib_0.1.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-bitarray_2.3.7.bb   | 2 +-
+ meta-python/recipes-devtools/python/python3-can_3.3.4.bb        | 2 +-
+ meta-python/recipes-devtools/python/python3-cchardet_2.1.7.bb   | 2 +-
+ meta-python/recipes-devtools/python/python3-chardet_4.0.0.bb    | 2 +-
+ .../recipes-devtools/python/python3-contextlib2_21.6.0.bb       | 2 +-
+ meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-cvxopt_1.2.7.bb     | 2 +-
+ meta-python/recipes-devtools/python/python3-dbussy_1.3.bb       | 2 +-
+ meta-python/recipes-devtools/python/python3-defusedxml_0.7.1.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-dominate_2.6.0.bb   | 2 +-
+ meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb      | 2 +-
+ meta-python/recipes-devtools/python/python3-gmpy2_2.1.2.bb      | 2 +-
+ meta-python/recipes-devtools/python/python3-greenlet_1.1.2.bb   | 2 +-
+ .../recipes-devtools/python/python3-html2text_2020.1.16.bb      | 2 +-
+ .../recipes-devtools/python/python3-intervals_1.10.0.post1.bb   | 2 +-
+ meta-python/recipes-devtools/python/python3-langtable_0.0.57.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-lxml_4.7.1.bb       | 2 +-
+ meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-nocasedict_1.0.2.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-obd_0.7.1.bb        | 2 +-
+ meta-python/recipes-devtools/python/python3-paramiko_2.9.2.bb   | 2 +-
+ meta-python/recipes-devtools/python/python3-portion_2.2.0.bb    | 2 +-
+ meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb      | 2 +-
+ .../recipes-devtools/python/python3-pyalsaaudio_0.9.0.bb        | 2 +-
+ meta-python/recipes-devtools/python/python3-pyatspi_2.38.2.bb   | 2 +-
+ meta-python/recipes-devtools/python/python3-pybluez_0.23.bb     | 2 +-
+ meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb    | 2 +-
+ meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb     | 2 +-
+ meta-python/recipes-devtools/python/python3-pyiface_git.bb      | 2 +-
+ meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb     | 2 +-
+ meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb  | 2 +-
+ meta-python/recipes-devtools/python/python3-pystemd_0.8.0.bb    | 2 +-
+ .../recipes-devtools/python/python3-python-vlc_3.0.12118.bb     | 2 +-
+ meta-python/recipes-devtools/python/python3-pyudev_0.23.2.bb    | 2 +-
+ meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb     | 2 +-
+ meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb  | 2 +-
+ meta-python/recipes-devtools/python/python3-smbus_4.3.bb        | 2 +-
+ meta-python/recipes-devtools/python/python3-smpplib_2.2.1.bb    | 2 +-
+ meta-python/recipes-devtools/python/python3-systemd_234.bb      | 2 +-
+ meta-python/recipes-devtools/python/python3-term_2.3.bb         | 2 +-
+ .../python/python3-typing-extensions_3.10.0.0.bb                | 2 +-
+ .../recipes-devtools/python/python3-versiontools_1.9.1.bb       | 2 +-
+ meta-python/recipes-devtools/python/python3-xmlrunner_1.7.7.bb  | 2 +-
+ .../python/python3-xstatic-font-awesome_4.7.0.0.bb              | 2 +-
+ meta-python/recipes-devtools/python/python3-zeroconf_0.38.1.bb  | 2 +-
+ .../unattended-upgrades/unattended-upgrades_2.6.bb              | 2 +-
+ .../recipes-extended/python-blivet/python3-blivet_3.4.3.bb      | 2 +-
+ .../recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb   | 2 +-
+ meta-python/recipes-extended/python-meh/python3-meh_0.50.1.bb   | 2 +-
+ .../python-pykickstart/python3-pykickstart_3.34.bb              | 2 +-
+ .../recipes-extended/python-pyparted/python3-pyparted_3.11.7.bb | 2 +-
+ .../python3-portalocker/python3-portalocker_2.3.2.bb            | 2 +-
+ meta-python/recipes-extended/pywbem/python3-pywbem_1.3.0.bb     | 2 +-
+ 59 files changed, 59 insertions(+), 59 deletions(-)
 
-diff --git a/meta-gnome/recipes-connectivity/folks/folks_0.15.4.bb b/meta-gnome/recipes-connectivity/folks/folks_0.15.4.bb
-index c3c30ca467..14e74cd0a2 100644
---- a/meta-gnome/recipes-connectivity/folks/folks_0.15.4.bb
-+++ b/meta-gnome/recipes-connectivity/folks/folks_0.15.4.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Folks is a contact aggregation library."
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
- 
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-connectivity/geary/geary_40.0.bb b/meta-gnome/recipes-connectivity/geary/geary_40.0.bb
-index b3b4311320..5821122759 100644
---- a/meta-gnome/recipes-connectivity/geary/geary_40.0.bb
-+++ b/meta-gnome/recipes-connectivity/geary/geary_40.0.bb
+diff --git a/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb b/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb
+index 1e9ba9e140..f5e2f67b35 100644
+--- a/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb
++++ b/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb
 @@ -1,6 +1,6 @@
- SUMMARY = "Geary is an email application built around conversations, for the GNOME 3 desktop."
- SECTION = "network"
--LICENSE = "LGPL-2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2a2244d5a13871ad950c55877546a6a2"
- 
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-connectivity/libnma/libnma_1.8.34.bb b/meta-gnome/recipes-connectivity/libnma/libnma_1.8.34.bb
-index 311492eea3..ea852ce3a0 100644
---- a/meta-gnome/recipes-connectivity/libnma/libnma_1.8.34.bb
-+++ b/meta-gnome/recipes-connectivity/libnma/libnma_1.8.34.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "NetworkManager GUI library"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- DEPENDS = "glib-2.0 gtk+3 networkmanager"
-diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.24.0.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.24.0.bb
-index c181d3943e..c0667b5bb1 100644
---- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.24.0.bb
-+++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.24.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GTK+ applet for NetworkManager"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- DEPENDS = "gtk+3 libnma libnotify libsecret libgudev networkmanager iso-codes nss"
-diff --git a/meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb b/meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb
-index 355bcce9b6..d1a9759303 100644
---- a/meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb
-+++ b/meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "A partition editor to graphically manage disk partitions "
- HOMEPAGE = "http://gparted.org/index.php"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
- inherit features_check autotools pkgconfig python3native gnome-help gtk-icon-cache
-diff --git a/meta-gnome/recipes-gimp/babl/babl_0.1.90.bb b/meta-gnome/recipes-gimp/babl/babl_0.1.90.bb
-index cf10a5ce80..0d2ac527a0 100644
---- a/meta-gnome/recipes-gimp/babl/babl_0.1.90.bb
-+++ b/meta-gnome/recipes-gimp/babl/babl_0.1.90.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Babl is a dynamic, any to any, pixel format conversion library"
--LICENSE = "LGPL-3.0"
-+LICENSE = "LGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
- 
- GNOMEBASEBUILDCLASS = "meson"
-diff --git a/meta-gnome/recipes-gimp/gegl/gegl_0.4.36.bb b/meta-gnome/recipes-gimp/gegl/gegl_0.4.36.bb
-index d7595b7c9a..a6e5fa0300 100644
---- a/meta-gnome/recipes-gimp/gegl/gegl_0.4.36.bb
-+++ b/meta-gnome/recipes-gimp/gegl/gegl_0.4.36.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GEGL (Generic Graphics Library) is a graph based image processing framework"
--LICENSE = "GPLv3"
-+LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f1a8bfcbc85304df454b65d378b299c7"
- 
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb b/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb
-index 5081583d63..36448b8f76 100644
---- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb
-+++ b/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "The GIMP is the GNU Image Manipulation Program"
- HOMEPAGE = "http://www.gimp.org"
- SECTION = "x11/graphics"
--LICENSE = "GPLv3"
-+LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c678957b0c8e964aa6c70fd77641a71e"
- 
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-gnome/amtk/amtk_5.3.1.bb b/meta-gnome/recipes-gnome/amtk/amtk_5.3.1.bb
-index d4d91ed51a..f6d8739dae 100644
---- a/meta-gnome/recipes-gnome/amtk/amtk_5.3.1.bb
-+++ b/meta-gnome/recipes-gnome/amtk/amtk_5.3.1.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Actions, Menus and Toolbars Kit"
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- 
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-gnome/dconf/dconf-editor_3.38.3.bb b/meta-gnome/recipes-gnome/dconf/dconf-editor_3.38.3.bb
-index 55b29139bb..ef26caa144 100644
---- a/meta-gnome/recipes-gnome/dconf/dconf-editor_3.38.3.bb
-+++ b/meta-gnome/recipes-gnome/dconf/dconf-editor_3.38.3.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Configuration editor for dconf"
--LICENSE = "GPLv3"
-+LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
- 
- GNOMEBASEBUILDCLASS = "meson"
-diff --git a/meta-gnome/recipes-gnome/dconf/dconf_0.40.0.bb b/meta-gnome/recipes-gnome/dconf/dconf_0.40.0.bb
-index 5613556aa7..6641be86ee 100644
---- a/meta-gnome/recipes-gnome/dconf/dconf_0.40.0.bb
-+++ b/meta-gnome/recipes-gnome/dconf/dconf_0.40.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "configuation database system"
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
- SECTION = "x11/gnome"
- 
-diff --git a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.44.bb b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.44.bb
-index 8e048170bc..01900cce39 100644
---- a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.44.bb
-+++ b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.44.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Devilspie2 is a window matching utility, allowing the user to perform scripted actions on windows as they are created"
- HOMEPAGE = "http://www.gusnan.se/devilspie2"
--LICENSE = "GPLv3"
-+LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=00aefaa50aad75c21367df66102d542c \
-                     file://GPL3.txt;md5=d32239bcb673463ab874e80d47fae504"
- 
-diff --git a/meta-gnome/recipes-gnome/evince/evince_41.3.bb b/meta-gnome/recipes-gnome/evince/evince_41.3.bb
-index ec3dca209d..2dc0aeaa82 100644
---- a/meta-gnome/recipes-gnome/evince/evince_41.3.bb
-+++ b/meta-gnome/recipes-gnome/evince/evince_41.3.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Evince is a document viewer for document formats like pdf, ps, djvu"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=96f2f8d5ee576a2163977938ea36fa7b"
- SECTION = "x11/office"
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-index 96367aa0c6..d22310f7ec 100644
---- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-+++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-@@ -2,7 +2,7 @@ SUMMARY = "Evolution database backend server"
- HOMEPAGE = "http://www.gnome.org/projects/evolution/"
- BUGTRACKER = "https://bugzilla.gnome.org/"
- 
--LICENSE = "LGPLv2 & LGPLv2+"
-+LICENSE = "LGPL-2.0-only & LGPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=6a6e689d19255cf0557f3fe7d7068212 \
-                     file://src/camel/camel.h;endline=24;md5=342fc5e9357254bc30c24e43ae47d9a1 \
-                     file://src/libedataserver/e-data-server-util.h;endline=20;md5=8f21a9c80ea82a4fb80b5f959f672543"
-diff --git a/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb b/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb
-index 55fdba5e38..5ed3375eb0 100644
---- a/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb
-+++ b/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "An icon theme for Gnome"
- SECTION = "x11/wm"
--LICENSE = "GPLv3"
-+LICENSE = "GPL-3.0-only"
- HOMEPAGE = "http://code.google.com/p/faenza-icon-theme/"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
-diff --git a/meta-gnome/recipes-gnome/file-roller/file-roller_3.40.0.bb b/meta-gnome/recipes-gnome/file-roller/file-roller_3.40.0.bb
-index ccc82aec45..cce7f211f7 100644
---- a/meta-gnome/recipes-gnome/file-roller/file-roller_3.40.0.bb
-+++ b/meta-gnome/recipes-gnome/file-roller/file-roller_3.40.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "An archive manager utility for the  GNOME Environment"
--LICENSE="GPLv2"
-+LICENSE="GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
- 
- GNOMEBASEBUILDCLASS = "meson"
-diff --git a/meta-gnome/recipes-gnome/gdm/gdm_41.0.bb b/meta-gnome/recipes-gnome/gdm/gdm_41.0.bb
-index e31ca13f0f..94ffdc28eb 100644
---- a/meta-gnome/recipes-gnome/gdm/gdm_41.0.bb
-+++ b/meta-gnome/recipes-gnome/gdm/gdm_41.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME Display Manager"
--LICENSE="GPLv2"
-+LICENSE="GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-gnome/gedit/gedit_41.0.bb b/meta-gnome/recipes-gnome/gedit/gedit_41.0.bb
-index 8c11fb52e0..b8d686fa50 100644
---- a/meta-gnome/recipes-gnome/gedit/gedit_41.0.bb
-+++ b/meta-gnome/recipes-gnome/gedit/gedit_41.0.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "GNOME editor"
- SECTION = "x11/gnome"
--LICENSE = "GPLv2+"
-+LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
- 
- GNOMEBASEBUILDCLASS = "meson"
-diff --git a/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.2.bb b/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.2.bb
-index c0f3c27af4..df401f7291 100644
---- a/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.2.bb
-+++ b/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.2.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "A convenience library for the geocoding"
- 
--LICENSE = "LGPLv2"
-+LICENSE = "LGPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=55ca817ccb7d5b5b66355690e9abc605"
- 
- GNOMEBASEBUILDCLASS = "meson"
-diff --git a/meta-gnome/recipes-gnome/gexiv2/gexiv2_0.14.0.bb b/meta-gnome/recipes-gnome/gexiv2/gexiv2_0.14.0.bb
-index b2fd4b0316..afec302cb4 100644
---- a/meta-gnome/recipes-gnome/gexiv2/gexiv2_0.14.0.bb
-+++ b/meta-gnome/recipes-gnome/gexiv2/gexiv2_0.14.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "A GObject-based Exiv2 wrapper"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=625f055f41728f84a8d7938acc35bdc2"
- 
- DEPENDS = "exiv2 python3-pygobject-native"
-diff --git a/meta-gnome/recipes-gnome/gfbgraph/gfbgraph_0.2.4.bb b/meta-gnome/recipes-gnome/gfbgraph/gfbgraph_0.2.4.bb
-index 23b3bf63a5..b64b231b50 100644
---- a/meta-gnome/recipes-gnome/gfbgraph/gfbgraph_0.2.4.bb
-+++ b/meta-gnome/recipes-gnome/gfbgraph/gfbgraph_0.2.4.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "A GObject library for Facebook Graph API"
- SECTION = "x11/gnome"
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=5804fe91d3294da4ac47c02b454bbc8a"
- 
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-gnome/ghex/ghex_3.18.4.bb b/meta-gnome/recipes-gnome/ghex/ghex_3.18.4.bb
-index 438f8113a6..08e50409eb 100644
---- a/meta-gnome/recipes-gnome/ghex/ghex_3.18.4.bb
-+++ b/meta-gnome/recipes-gnome/ghex/ghex_3.18.4.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GHex - a hex editor for GNOME"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- GNOMEBASEBUILDCLASS = "meson"
-diff --git a/meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.4.3.bb b/meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.4.3.bb
-index 0015e9f05b..017d67b5a6 100644
---- a/meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.4.3.bb
-+++ b/meta-gnome/recipes-gnome/gnome-autoar/gnome-autoar_0.4.3.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME archive library"
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- 
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.34.5.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.34.5.bb
-index 8eed262998..57fe74495d 100644
---- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.34.5.bb
-+++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.34.5.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME bluetooth manager"
--LICENSE = "GPLv2 & LGPLv2.1"
-+LICENSE = "GPL-2.0-only & LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
-                     file://COPYING.LIB;md5=a6f89e2100d9b6cdffcea4f398e37343 \
- "
-diff --git a/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_41.1.bb b/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_41.1.bb
-index f4aba65953..607f52afeb 100644
---- a/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_41.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_41.1.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME calculator"
--LICENSE = "GPLv3"
-+LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- SECTION = "x11/gnome"
-diff --git a/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_41.2.bb b/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_41.2.bb
-index 4b62a0c07c..c97bf0bec8 100644
---- a/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_41.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-calendar/gnome-calendar_41.2.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME calendar"
--LICENSE = "GPLv3"
-+LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=8f0e2cd40e05189ec81232da84bd6e1a"
- 
- SECTION = "x11/gnome"
-diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_41.2.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_41.2.bb
-index f2b95edd06..1cdc96ba0b 100644
---- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_41.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_41.2.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "GNOME Settings"
- DESCRIPTION = "GNOME Settings is GNOME's main interface for configuration of various aspects of your desktop"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
- 
- GNOMEBASEBUILDCLASS = "meson"
-diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_41.2.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_41.2.bb
-index 3085d2767e..6bf2ab3986 100644
---- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_41.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_41.2.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "GNOME library for reading .desktop files"
- SECTION = "x11/gnome"
--LICENSE = "GPLv2 & LGPLv2"
-+LICENSE = "GPL-2.0-only & LGPL-2.0-only"
- LIC_FILES_CHKSUM = " \
-     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
-diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_41.0.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_41.0.bb
-index 7e254f52c7..a7945dd3e4 100644
---- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_41.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_41.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME disk utility"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- SECTION = "x11/gnome"
-diff --git a/meta-gnome/recipes-gnome/gnome-flashback/gnome-flashback_3.42.1.bb b/meta-gnome/recipes-gnome/gnome-flashback/gnome-flashback_3.42.1.bb
-index 3f47de6f29..13a68e3c80 100644
---- a/meta-gnome/recipes-gnome/gnome-flashback/gnome-flashback_3.42.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-flashback/gnome-flashback_3.42.1.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME Flashback (GNOME 2) session"
--LICENSE = "GPLv3"
-+LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- inherit gnomebase gsettings gtk-icon-cache gettext upstream-version-is-even features_check
-diff --git a/meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer_41.0.bb b/meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer_41.0.bb
-index 9528b6641c..2e2927f1c7 100644
---- a/meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer_41.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-font-viewer/gnome-font-viewer_41.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME font viewer"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
- SECTION = "x11/gnome"
-diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_40.0.bb b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_40.0.bb
-index 5bc5f2e0fb..5aa52d1a50 100644
---- a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_40.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_40.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.gnome.org/"
- BUGTRACKER = "https://bugzilla.gnome.org/"
- SECTION = "x11/gnome"
- 
--LICENSE = "GPLv2+ & LGPLv2+ & LGPLv2.1+"
-+LICENSE = "GPL-2.0-or-later & LGPL-2.0-or-later & LGPL-2.1-or-later"
- LIC_FILES_CHKSUM = " \
-     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
-diff --git a/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_3.36.0.bb b/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_3.36.0.bb
-index c58229879c..dbc6e962eb 100644
---- a/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_3.36.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_3.36.0.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "GNOME menus"
- SECTION = "x11/gnome"
--LICENSE = "GPLv2 & LGPLv2"
-+LICENSE = "GPL-2.0-only & LGPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2"
- 
-diff --git a/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.43.1.bb b/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.43.1.bb
-index 3dca7e37a8..8dabb9e0c1 100644
---- a/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.43.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.43.1.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME Online Accounts - Single sign-on framework for GNOME"
--LICENSE = "LGPLv2+"
-+LICENSE = "LGPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=34c88b124db5fb2762c1676be7dadd36"
- 
- GNOMEBASEBUILDCLASS = "autotools"
-diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_3.42.0.bb b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_3.42.0.bb
-index 9c9add4f48..2bcf145471 100644
---- a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_3.42.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_3.42.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME flashback panel"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- inherit gnomebase gsettings itstool gnome-help gtk-icon-cache gtk-doc gettext upstream-version-is-even features_check
-diff --git a/meta-gnome/recipes-gnome/gnome-photos/gnome-photos_40.0.bb b/meta-gnome/recipes-gnome/gnome-photos/gnome-photos_40.0.bb
-index ae8ab31f64..52f5154ac9 100644
---- a/meta-gnome/recipes-gnome/gnome-photos/gnome-photos_40.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-photos/gnome-photos_40.0.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Access, organize and share your photos on GNOME"
- SECTION = "x11/gnome"
--LICENSE = "GPLv3"
-+LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
- 
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-gnome/gnome-screenshot/gnome-screenshot_41.0.bb b/meta-gnome/recipes-gnome/gnome-screenshot/gnome-screenshot_41.0.bb
-index 18d73d872a..fa7e161e9e 100644
---- a/meta-gnome/recipes-gnome/gnome-screenshot/gnome-screenshot_41.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-screenshot/gnome-screenshot_41.0.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "GNOME Screenshot"
- DESCRIPTION = "GNOME Screenshot is a small utility that takes a screenshot \
- of the whole desktop, the currently focused window, or an area of the screen."
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
- 
- SECTION = "x11/gnome"
-diff --git a/meta-gnome/recipes-gnome/gnome-session/gnome-session_41.3.bb b/meta-gnome/recipes-gnome/gnome-session/gnome-session_41.3.bb
-index 010f815cdd..07f3634294 100644
---- a/meta-gnome/recipes-gnome/gnome-session/gnome-session_41.3.bb
-+++ b/meta-gnome/recipes-gnome/gnome-session/gnome-session_41.3.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME session"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_41.0.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_41.0.bb
-index 78d6811700..cbc4c460c1 100644
---- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_41.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_41.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Window navigation construction toolkit"
--LICENSE = "LGPLv2"
-+LICENSE = "LGPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
- 
- GNOMEBASEBUILDCLASS = "meson"
-diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_41.1.bb b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_41.1.bb
-index db1c0a5797..f51ca9f918 100644
---- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_41.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_41.1.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME Shell Extensions"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4cb3a392cbf81a9e685ec13b88c4c101"
- 
- GNOMEBASEBUILDCLASS = "meson"
-diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_41.2.bb b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_41.2.bb
-index d1b19895ae..8d0dba4840 100644
---- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_41.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_41.2.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME Shell is the graphical shell of the GNOME desktop environment"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- GNOMEBASEBUILDCLASS = "meson"
-diff --git a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_41.0.bb b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_41.0.bb
-index 9b573d0ff0..c0b4b39375 100644
---- a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_41.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_41.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Gnome system monitor"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.42.2.bb b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.42.2.bb
-index 2b3f3a6162..061da27f60 100644
---- a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.42.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.42.2.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME terminal"
--LICENSE = "GPLv3 & GFDL-1.3"
-+LICENSE = "GPL-3.0-only & GFDL-1.3"
- LIC_FILES_CHKSUM = " \
-     file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949 \
-     file://COPYING.GFDL;md5=a22d0be1ce2284b67950a4d1673dd1b0 \
-diff --git a/meta-gnome/recipes-gnome/gnome-tweaks/gnome-tweaks_40.0.bb b/meta-gnome/recipes-gnome/gnome-tweaks/gnome-tweaks_40.0.bb
-index c816fc209a..ffdf2c9d38 100644
---- a/meta-gnome/recipes-gnome/gnome-tweaks/gnome-tweaks_40.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-tweaks/gnome-tweaks_40.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME tweaks: Advanced options for GNOME 3 session"
--LICENSE = "GPLv3 & CC0-1.0"
-+LICENSE = "GPL-3.0-only & CC0-1.0"
- LIC_FILES_CHKSUM = " \
-     file://LICENSES/CC0-1.0;md5=65d3616852dbf7b1a6d4b53b00626032 \
-     file://LICENSES/GPL-3.0;md5=9eef91148a9b14ec7f9df333daebc746 \
-diff --git a/meta-gnome/recipes-gnome/grilo/grilo-plugins_0.3.14.bb b/meta-gnome/recipes-gnome/grilo/grilo-plugins_0.3.14.bb
-index 028e1d22b7..d00e737f4a 100644
---- a/meta-gnome/recipes-gnome/grilo/grilo-plugins_0.3.14.bb
-+++ b/meta-gnome/recipes-gnome/grilo/grilo-plugins_0.3.14.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Grilo is a framework forsearching media content from various sources"
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
- 
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-gnome/grilo/grilo_0.3.14.bb b/meta-gnome/recipes-gnome/grilo/grilo_0.3.14.bb
-index 53d80c5cbe..7ceb26d7a2 100644
---- a/meta-gnome/recipes-gnome/grilo/grilo_0.3.14.bb
-+++ b/meta-gnome/recipes-gnome/grilo/grilo_0.3.14.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Grilo is a framework forsearching media content from various sources"
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
- 
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-gnome/gsound/gsound_1.0.3.bb b/meta-gnome/recipes-gnome/gsound/gsound_1.0.3.bb
-index 7c7925420c..bdef603f0d 100644
---- a/meta-gnome/recipes-gnome/gsound/gsound_1.0.3.bb
-+++ b/meta-gnome/recipes-gnome/gsound/gsound_1.0.3.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Small gobject library for playing system sounds"
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=447b837ae57f08b7060593ac6256163f"
- 
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-gnome/gspell/gspell_1.9.1.bb b/meta-gnome/recipes-gnome/gspell/gspell_1.9.1.bb
-index aba9be87aa..15f1cadbab 100644
---- a/meta-gnome/recipes-gnome/gspell/gspell_1.9.1.bb
-+++ b/meta-gnome/recipes-gnome/gspell/gspell_1.9.1.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "gspell adds spell-checking to a GTK+ applications"
- HOMEPAGE = "https://wiki.gnome.org/Projects/gspell"
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=8c2e1ec1540fb3e0beb68361344cba7e"
- 
- DEPENDS = "gtk+3 iso-codes enchant2"
-diff --git a/meta-gnome/recipes-gnome/gthumb/gthumb_3.12.0.bb b/meta-gnome/recipes-gnome/gthumb/gthumb_3.12.0.bb
-index e9c52f3470..1459e0b434 100644
---- a/meta-gnome/recipes-gnome/gthumb/gthumb_3.12.0.bb
-+++ b/meta-gnome/recipes-gnome/gthumb/gthumb_3.12.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Image viewer and browser"
--LICENSE="GPLv2"
-+LICENSE="GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
- 
- GNOMEBASEBUILDCLASS = "meson"
-diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview-classic-light_1.0.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview-classic-light_1.0.bb
-index 64d5b868f7..4e1e434314 100644
---- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview-classic-light_1.0.bb
-+++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview-classic-light_1.0.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "Gtksourceview Classic-Light theme"
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://classic-light.xml;beginline=6;endline=23;md5=2b4f75364fad00a4d752214dcbd7d7c3"
- 
- inherit allarch
-diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb
-index 9f88513f7d..1e5652d3bd 100644
---- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb
-+++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "Portable C library for multiline text editing"
- HOMEPAGE = "http://projects.gnome.org/gtksourceview/"
- 
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
- 
- DEPENDS = "gtk+3 libxml2 intltool-native gnome-common-native glib-2.0-native"
-diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.2.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.2.bb
-index 5b5ce5328a..db4d89de22 100644
---- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.2.bb
-+++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.2.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "Portable C library for multiline text editing"
- HOMEPAGE = "http://projects.gnome.org/gtksourceview/"
- 
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
- 
- DEPENDS = "gtk+3 libxml2 intltool-native gnome-common-native glib-2.0-native"
-diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.2.0.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.2.0.bb
-index c7c6e92037..00487743e8 100644
---- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.2.0.bb
-+++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.2.0.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "Portable C library for multiline text editing"
- HOMEPAGE = "http://projects.gnome.org/gtksourceview/"
- 
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
- 
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.49.1.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.49.1.bb
-index c73716d749..9df054d3b5 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.49.1.bb
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.49.1.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "gvfs is a userspace virtual filesystem"
--LICENSE = "LGPLv2"
-+LICENSE = "LGPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=05df38dd77c35ec8431f212410a3329e"
- 
- GNOMEBASEBUILDCLASS = "meson"
-diff --git a/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb b/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb
-index 51ca63e1fb..859eab9164 100644
---- a/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb
-+++ b/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "libchamplain is a Gtk widget displaying zoomable and pannable maps"
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
- DEPENDS = "glib-2.0 gtk+3 gdk-pixbuf clutter-1.0 clutter-gtk-1.0 libsoup-2.4"
- 
-diff --git a/meta-gnome/recipes-gnome/libgdata/libgdata_0.18.1.bb b/meta-gnome/recipes-gnome/libgdata/libgdata_0.18.1.bb
-index a1be2a2b64..921c3ee805 100644
---- a/meta-gnome/recipes-gnome/libgdata/libgdata_0.18.1.bb
-+++ b/meta-gnome/recipes-gnome/libgdata/libgdata_0.18.1.bb
-@@ -2,7 +2,7 @@ SUMMARY = "GLib-based library for accessing online service APIs using the GData
- HOMEPAGE = "http://live.gnome.org/libgdata"
- BUGTRACKER = "https://bugzilla.gnome.org/"
- 
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
-                     file://gdata/gdata.h;endline=20;md5=079a554efcf65d46f96a515806e7e99a \
-                     file://gdata/gdata-types.h;endline=20;md5=7399b111aac8718da13888fc634be6ef"
-diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.48.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.48.bb
-index a3ff13f9ba..22599f599e 100644
---- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.48.bb
-+++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.48.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME Structured File Library"
--LICENSE = "GPLv2 & LGPLv2.1"
-+LICENSE = "GPL-2.0-only & LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=dc7371b50816c96e145fa0f8ade8e24d \
-                     file://COPYING.LIB;md5=61464cfe342798eeced82efe9ae55f63"
- 
-diff --git a/meta-gnome/recipes-gnome/libgtop/libgtop_2.40.0.bb b/meta-gnome/recipes-gnome/libgtop/libgtop_2.40.0.bb
-index 6d9398f4e4..3ee7746c10 100644
---- a/meta-gnome/recipes-gnome/libgtop/libgtop_2.40.0.bb
-+++ b/meta-gnome/recipes-gnome/libgtop/libgtop_2.40.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "A library for collecting system monitoring data"
--LICENSE = "GPLv2+"
-+LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
- 
- inherit gnomebase lib_package gtk-doc gobject-introspection gettext upstream-version-is-even
-diff --git a/meta-gnome/recipes-gnome/libgweather/libgweather_40.0.bb b/meta-gnome/recipes-gnome/libgweather/libgweather_40.0.bb
-index 49493b17b2..771fc62e1e 100644
---- a/meta-gnome/recipes-gnome/libgweather/libgweather_40.0.bb
-+++ b/meta-gnome/recipes-gnome/libgweather/libgweather_40.0.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "A library to access weather information from online services"
- 
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- GNOMEBASEBUILDCLASS = "meson"
-diff --git a/meta-gnome/recipes-gnome/libportal/libportal_0.5.bb b/meta-gnome/recipes-gnome/libportal/libportal_0.5.bb
-index 67f63fea68..6deac38fda 100644
---- a/meta-gnome/recipes-gnome/libportal/libportal_0.5.bb
-+++ b/meta-gnome/recipes-gnome/libportal/libportal_0.5.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "It provides simple asynchronous wrappers for most Flatpak portals
- with a familiar GObject API along side the D-Bus API"
- HOMEPAGE = "https://github.com/flatpak/libportal"
- BUGTRACKER = "https://github.com/flatpak/libportal/issues"
--LICENSE = "LGPLv3"
-+LICENSE = "LGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3000208d539ec061b899bce1d9ce9404"
- 
- SRC_URI = "git://github.com/flatpak/${BPN}.git;protocol=https;branch=master"
-diff --git a/meta-gnome/recipes-gnome/libtimezonemap/libtimezonemap_0.4.6.bb b/meta-gnome/recipes-gnome/libtimezonemap/libtimezonemap_0.4.6.bb
-index c74e1d4388..d633b0621d 100644
---- a/meta-gnome/recipes-gnome/libtimezonemap/libtimezonemap_0.4.6.bb
-+++ b/meta-gnome/recipes-gnome/libtimezonemap/libtimezonemap_0.4.6.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Time zone map widget for Gtk+"
- HOMEPAGE = "https://launchpad.net/timezonemap"
- SECTION = "devel/lib"
--LICENSE = "GPLv3"
-+LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- SRC_URI = "http://archive.ubuntu.com/ubuntu/pool/main/libt/${BPN}/${BPN}_${PV}.tar.gz"
-diff --git a/meta-gnome/recipes-gnome/libwnck/libwnck3_40.1.bb b/meta-gnome/recipes-gnome/libwnck/libwnck3_40.1.bb
-index 6c9e631e11..cb4e459b3d 100644
---- a/meta-gnome/recipes-gnome/libwnck/libwnck3_40.1.bb
-+++ b/meta-gnome/recipes-gnome/libwnck/libwnck3_40.1.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Window navigation construction toolkit"
--LICENSE = "LGPLv2"
-+LICENSE = "LGPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
- 
- BPN = "libwnck"
-diff --git a/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb b/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
-index d1f36a94d2..3abba94990 100644
---- a/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
-+++ b/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Window navigation construction toolkit"
--LICENSE = "LGPLv2"
-+LICENSE = "LGPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
- 
- SECTION = "x11/libs"
-diff --git a/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.4.bb b/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.4.bb
-index e47d74b7b8..7955663f26 100644
---- a/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.4.bb
-+++ b/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.4.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Helper lib for keyboard management"
--LICENSE = "LGPLv2"
-+LICENSE = "LGPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=6e29c688d912da12b66b73e32b03d812"
- 
- DEPENDS = "xkbcomp gtk+ iso-codes libxi libxml2"
-diff --git a/meta-gnome/recipes-gnome/metacity/metacity_3.42.0.bb b/meta-gnome/recipes-gnome/metacity/metacity_3.42.0.bb
-index 58479cf7b3..8baf2bc62b 100644
---- a/meta-gnome/recipes-gnome/metacity/metacity_3.42.0.bb
-+++ b/meta-gnome/recipes-gnome/metacity/metacity_3.42.0.bb
-@@ -1,6 +1,6 @@
- SECTION = "x11/wm"
- SUMMARY = "Metacity is the boring window manager for the adult in you"
--LICENSE = "GPLv2+"
-+LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b4cce53560b8e619ffa7c830fb8761aa \
-                     file://src/include/main.h;endline=24;md5=72148ede07a6dadd01de6a882d20a9ad"
- 
-diff --git a/meta-gnome/recipes-gnome/mutter/mutter_41.2.bb b/meta-gnome/recipes-gnome/mutter/mutter_41.2.bb
-index 19dad21380..08ac897a7f 100644
---- a/meta-gnome/recipes-gnome/mutter/mutter_41.2.bb
-+++ b/meta-gnome/recipes-gnome/mutter/mutter_41.2.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Window and compositing manager based on Clutter"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_41.2.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_41.2.bb
-index e9541a7150..66043fad34 100644
---- a/meta-gnome/recipes-gnome/nautilus/nautilus_41.2.bb
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus_41.2.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "File manager for GNOME"
- SECTION = "x11/gnome"
- 
--LICENSE="GPLv3"
-+LICENSE="GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
- 
- GNOMEBASEBUILDCLASS = "meson"
-diff --git a/meta-gnome/recipes-gnome/rest/rest_0.8.1.bb b/meta-gnome/recipes-gnome/rest/rest_0.8.1.bb
-index 545224a99e..f1c9915c09 100644
---- a/meta-gnome/recipes-gnome/rest/rest_0.8.1.bb
-+++ b/meta-gnome/recipes-gnome/rest/rest_0.8.1.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "library to access web services that claim to be "RESTful""
- HOMEPAGE = "https://wiki.gnome.org/Projects/Librest"
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
- 
- GNOMEBASEBUILDCLASS = "autotools"
-diff --git a/meta-gnome/recipes-gnome/sysprof/sysprof_3.42.1.bb b/meta-gnome/recipes-gnome/sysprof/sysprof_3.42.1.bb
-index 3dd08a29cd..99b3c60fa5 100644
---- a/meta-gnome/recipes-gnome/sysprof/sysprof_3.42.1.bb
-+++ b/meta-gnome/recipes-gnome/sysprof/sysprof_3.42.1.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "System-wide Performance Profiler for Linux"
- HOMEPAGE = "http://www.sysprof.com"
--LICENSE = "GPLv3+"
-+LICENSE = "GPL-3.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
-                     file://src/sysprof/sysprof-application.c;endline=17;md5=a3de8df3b0f8876dd01e1388d2d4b607"
- 
-diff --git a/meta-gnome/recipes-gnome/tracker/tracker-miners_3.2.1.bb b/meta-gnome/recipes-gnome/tracker/tracker-miners_3.2.1.bb
-index 44b3671122..2847635b6d 100644
---- a/meta-gnome/recipes-gnome/tracker/tracker-miners_3.2.1.bb
-+++ b/meta-gnome/recipes-gnome/tracker/tracker-miners_3.2.1.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Tracker miners and metadata extractors"
--LICENSE = "GPLv2 & LGPLv2.1"
-+LICENSE = "GPL-2.0-only & LGPL-2.1-only"
- LIC_FILES_CHKSUM = " \
-     file://COPYING.GPL;md5=ee31012bf90e7b8c108c69f197f3e3a4 \
-     file://COPYING.LGPL;md5=2d5025d4aa3495befef8f17206a5b0a1 \
-diff --git a/meta-gnome/recipes-gnome/tracker/tracker_3.2.1.bb b/meta-gnome/recipes-gnome/tracker/tracker_3.2.1.bb
-index 1c18efbcef..f81a84cd31 100644
---- a/meta-gnome/recipes-gnome/tracker/tracker_3.2.1.bb
-+++ b/meta-gnome/recipes-gnome/tracker/tracker_3.2.1.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Tracker is a file search engine"
--LICENSE = "GPLv2 & LGPLv2.1"
-+LICENSE = "GPL-2.0-only & LGPL-2.1-only"
- LIC_FILES_CHKSUM = " \
-     file://COPYING.GPL;md5=ee31012bf90e7b8c108c69f197f3e3a4 \
-     file://COPYING.LGPL;md5=2d5025d4aa3495befef8f17206a5b0a1 \
-diff --git a/meta-gnome/recipes-gnome/yelp/yelp-tools_41.0.bb b/meta-gnome/recipes-gnome/yelp/yelp-tools_41.0.bb
-index ec8edb80d3..13dada4438 100644
---- a/meta-gnome/recipes-gnome/yelp/yelp-tools_41.0.bb
-+++ b/meta-gnome/recipes-gnome/yelp/yelp-tools_41.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Collection of scripts and build utilities for documentation"
--LICENSE = "GPLv2+"
-+LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = " \
-     file://COPYING;md5=d67c6f9f1515506abfea4f0d920c0774 \
-     file://COPYING.GPL;md5=eb723b61539feef013de476e68b5c50a \
-diff --git a/meta-gnome/recipes-gnome/yelp/yelp-xsl_41.1.bb b/meta-gnome/recipes-gnome/yelp/yelp-xsl_41.1.bb
-index 3b23979780..50cc8fc3a7 100644
---- a/meta-gnome/recipes-gnome/yelp/yelp-xsl_41.1.bb
-+++ b/meta-gnome/recipes-gnome/yelp/yelp-xsl_41.1.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "XSL stylesheets for the yelp help browser"
--LICENSE = "LGPLv2.1 & GPLv2 & BSD-3-Clause"
-+LICENSE = "LGPL-2.1-only & GPL-2.0-only & BSD-3-Clause"
- LIC_FILES_CHKSUM = " \
-     file://COPYING;md5=8ca13a5a6972ac1620a1e42a3dacd774 \
-     file://COPYING.GPL;md5=eb723b61539feef013de476e68b5c50a \
-diff --git a/meta-gnome/recipes-gnome/yelp/yelp_41.2.bb b/meta-gnome/recipes-gnome/yelp/yelp_41.2.bb
-index 590ff2f548..01427b157d 100644
---- a/meta-gnome/recipes-gnome/yelp/yelp_41.2.bb
-+++ b/meta-gnome/recipes-gnome/yelp/yelp_41.2.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Help browser for the GNOME desktop"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = " \
-     file://COPYING;md5=6e1b9cb787e76d7e6946887a65caa754 \
- "
-diff --git a/meta-gnome/recipes-graphics/clutter/clutter-1.0.inc b/meta-gnome/recipes-graphics/clutter/clutter-1.0.inc
-index b91bc30488..ce6b8a0f49 100644
---- a/meta-gnome/recipes-graphics/clutter/clutter-1.0.inc
-+++ b/meta-gnome/recipes-graphics/clutter/clutter-1.0.inc
-@@ -3,7 +3,7 @@ DESCRIPTION = "Clutter is an Open GL based interactive canvas library, \
- designed for creating fast, mainly 2D single window applications such as media \
- box UIs, presentations, kiosk style applications and so on."
- HOMEPAGE = "http://www.clutter-project.org/"
+ SUMMARY = "Telepathy IM framework - Python package"
+ HOMEPAGE = "http://telepathy.freedesktop.org/wiki/"
 -LICENSE = "LGPLv2.1+"
 +LICENSE = "LGPL-2.1-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+                     file://src/utils.py;beginline=1;endline=17;md5=9a07d1a9791a7429a14e7b25c6c86822"
  
- inherit clutter ptest-gnome features_check upstream-version-is-even gobject-introspection
- # depends on cogl-1.0 which needs opengl
-diff --git a/meta-gnome/recipes-graphics/clutter/clutter-gst-3.0.inc b/meta-gnome/recipes-graphics/clutter/clutter-gst-3.0.inc
-index 8c6d0b3a07..7880021755 100644
---- a/meta-gnome/recipes-graphics/clutter/clutter-gst-3.0.inc
-+++ b/meta-gnome/recipes-graphics/clutter/clutter-gst-3.0.inc
-@@ -4,7 +4,7 @@ It provides a GStreamer sink to upload frames to GL and an actor that \
- implements the ClutterGstPlayer interface using playbin."
- HOMEPAGE = "http://www.clutter-project.org/"
- BUGTRACKER = "https://gitlab.gnome.org/GNOME/clutter-gst/-/issues"
--LICENSE = "LGPLv2+"
-+LICENSE = "LGPL-2.0-or-later"
- 
- inherit clutter features_check upstream-version-is-even gobject-introspection
- # depends on clutter-1.0 which depends on cogl-1.0
-diff --git a/meta-gnome/recipes-graphics/clutter/clutter-gtk-1.0.inc b/meta-gnome/recipes-graphics/clutter/clutter-gtk-1.0.inc
-index 9a28b5219b..025e95b5d4 100644
---- a/meta-gnome/recipes-graphics/clutter/clutter-gtk-1.0.inc
-+++ b/meta-gnome/recipes-graphics/clutter/clutter-gtk-1.0.inc
-@@ -5,7 +5,7 @@ a Clutter stage into any GtkContainer; and GtkClutterActor, a Clutter \
- actor for embedding any GtkWidget inside a Clutter stage."
- HOMEPAGE = "http://www.clutter-project.org/"
- BUGTRACKER = "https://gitlab.gnome.org/GNOME/clutter/-/issues"
--LICENSE = "LGPLv2+"
-+LICENSE = "LGPL-2.0-or-later"
- 
- CLUTTERBASEBUILDCLASS = "meson"
- inherit clutter features_check upstream-version-is-even gobject-introspection gtk-doc
-diff --git a/meta-gnome/recipes-support/accountsservice/accountsservice_0.6.55.bb b/meta-gnome/recipes-support/accountsservice/accountsservice_0.6.55.bb
-index 26cc04b8e2..551ff5dc9d 100644
---- a/meta-gnome/recipes-support/accountsservice/accountsservice_0.6.55.bb
-+++ b/meta-gnome/recipes-support/accountsservice/accountsservice_0.6.55.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "D-Bus interfaces for querying and manipulating user account information"
- HOMEPAGE = "https://www.freedesktop.org/wiki/Software/AccountsService/"
+diff --git a/meta-python/recipes-devtools/python/python3-ansi2html_1.7.0.bb b/meta-python/recipes-devtools/python/python3-ansi2html_1.7.0.bb
+index df50bc7a89..0a81ebdded 100644
+--- a/meta-python/recipes-devtools/python/python3-ansi2html_1.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-ansi2html_1.7.0.bb
+@@ -1,7 +1,7 @@
+ DESCRPTION = "ansi2html - Convert text with ANSI color codes to HTML or to LaTeX"
+ HOMEPAGE = "https://github.com/ralphbean/ansi2html"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3000208d539ec061b899bce1d9ce9404"
 -LICENSE = "GPLv3"
 +LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
  
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-support/appstream-glib/appstream-glib_0.7.18.bb b/meta-gnome/recipes-support/appstream-glib/appstream-glib_0.7.18.bb
-index 3488fb568c..45a28ed967 100644
---- a/meta-gnome/recipes-support/appstream-glib/appstream-glib_0.7.18.bb
-+++ b/meta-gnome/recipes-support/appstream-glib/appstream-glib_0.7.18.bb
+ PYPI_PACKAGE = "ansi2html"
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-argh_0.26.2.bb b/meta-python/recipes-devtools/python/python3-argh_0.26.2.bb
+index d07ccbbf90..c02e31a9a1 100644
+--- a/meta-python/recipes-devtools/python/python3-argh_0.26.2.bb
++++ b/meta-python/recipes-devtools/python/python3-argh_0.26.2.bb
 @@ -1,6 +1,6 @@
- SUMMARY = "Objects and helper methods to help reading and writing AppStream metadata"
- HOMEPAGE = "https://people.freedesktop.org/~hughsient/appstream-glib/index.htm"
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- 
- DEPENDS = " \
-diff --git a/meta-gnome/recipes-support/colord-gtk/colord-gtk_0.2.0.bb b/meta-gnome/recipes-support/colord-gtk/colord-gtk_0.2.0.bb
-index 2b09adf710..e9c79e28b2 100644
---- a/meta-gnome/recipes-support/colord-gtk/colord-gtk_0.2.0.bb
-+++ b/meta-gnome/recipes-support/colord-gtk/colord-gtk_0.2.0.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "GTK support library for colord"
- HOMEPAGE = "https://www.freedesktop.org/software/colord/"
--LICENSE = "LGPLv3"
-+LICENSE = "LGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=e6a600fd5e1d9cbde2d983680233ad02"
- 
- inherit meson gobject-introspection gettext gtk-doc features_check
-diff --git a/meta-gnome/recipes-support/ibus/ibus.inc b/meta-gnome/recipes-support/ibus/ibus.inc
-index 01f05c1b69..23f565f661 100644
---- a/meta-gnome/recipes-support/ibus/ibus.inc
-+++ b/meta-gnome/recipes-support/ibus/ibus.inc
-@@ -1,6 +1,6 @@
- SUMMARY = "Intelligent Input Bus for Linux/Unix"
- HOMEPAGE = "https://github.com/ibus/ibus/wiki"
--LICENSE = "LGPLv2.1"
-+LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
- 
- inherit autotools-brokensep pkgconfig gobject-introspection gettext gtk-doc vala
-diff --git a/meta-gnome/recipes-support/libuser/libuser_0.62.bb b/meta-gnome/recipes-support/libuser/libuser_0.62.bb
-index 722b647f21..22ddd10a63 100644
---- a/meta-gnome/recipes-support/libuser/libuser_0.62.bb
-+++ b/meta-gnome/recipes-support/libuser/libuser_0.62.bb
-@@ -4,7 +4,7 @@ and group accounts"
- HOMEPAGE = "https://pagure.io/libuser"
- BUGTRACKER = "https://pagure.io/libuser/issues"
+ SUMMARY = "Pattern matching and various utilities for file systems paths."
  
 -LICENSE = "LGPLv2"
 +LICENSE = "LGPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
-                     file://lib/user.h;endline=19;md5=76b301f63c39fa992062395efbdc9558 \
-                     file://samples/testuser.c;endline=19;md5=3b87fa660fa3f4a6bb31d624afe30ba1"
-diff --git a/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb b/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb
-index 775e7c3c7a..9325ef9c25 100644
---- a/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb
-+++ b/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=cede70b648dcc81baf5b431d38905bad"
+ 
+ SRC_URI[sha256sum] = "e9535b8c84dc9571a48999094fda7f33e63c3f1b74f3e5f3ac0105a58405bb65"
+diff --git a/meta-python/recipes-devtools/python/python3-astroid_2.9.3.bb b/meta-python/recipes-devtools/python/python3-astroid_2.9.3.bb
+index 7bc93bf335..5828c24a23 100644
+--- a/meta-python/recipes-devtools/python/python3-astroid_2.9.3.bb
++++ b/meta-python/recipes-devtools/python/python3-astroid_2.9.3.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "An abstract syntax tree for Python with inference support."
+ HOMEPAGE = "https://pypi.python.org/pypi/astroid"
+ SECTION = "devel/python"
+-LICENSE = "LGPL-2.1"
++LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
+ 
+ SRC_URI[sha256sum] = "1efdf4e867d4d8ba4a9f6cf9ce07cd182c4c41de77f23814feb27ca93ca9d877"
+diff --git a/meta-python/recipes-devtools/python/python3-asyncio-glib_0.1.bb b/meta-python/recipes-devtools/python/python3-asyncio-glib_0.1.bb
+index 6f67d28651..2314f72845 100644
+--- a/meta-python/recipes-devtools/python/python3-asyncio-glib_0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-asyncio-glib_0.1.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "An implementation of the Python 3 asyncio event loop on top of GLib"
+ AUTHOR = "James Henstridge"
+-LICENSE = "LGPL-2.1"
++LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c"
+ 
+ inherit setuptools3 pypi
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_2.3.7.bb b/meta-python/recipes-devtools/python/python3-bitarray_2.3.7.bb
+index 6566f8d664..46ceed8b80 100644
+--- a/meta-python/recipes-devtools/python/python3-bitarray_2.3.7.bb
++++ b/meta-python/recipes-devtools/python/python3-bitarray_2.3.7.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
+ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+-LICENSE = "PSF"
++LICENSE = "PSF-2.0"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
+ 
+ SRC_URI[sha256sum] = "4da790ab193e993107f3ff0aebc4f8d6ad5196a19071fbafad16b02898a44fd7"
+diff --git a/meta-python/recipes-devtools/python/python3-can_3.3.4.bb b/meta-python/recipes-devtools/python/python3-can_3.3.4.bb
+index 760b5dde9c..4fe7bcbff0 100644
+--- a/meta-python/recipes-devtools/python/python3-can_3.3.4.bb
++++ b/meta-python/recipes-devtools/python/python3-can_3.3.4.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Controller Area Network (CAN) interface module for Python"
+ SECTION = "devel/python"
+-LICENSE = "LGPLv3"
++LICENSE = "LGPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e6a600fd5e1d9cbde2d983680233ad02"
+ 
+ SRC_URI[md5sum] = "305075968c56bd85130b19d86e9e505d"
+diff --git a/meta-python/recipes-devtools/python/python3-cchardet_2.1.7.bb b/meta-python/recipes-devtools/python/python3-cchardet_2.1.7.bb
+index 8fa9797768..d6d96965eb 100644
+--- a/meta-python/recipes-devtools/python/python3-cchardet_2.1.7.bb
++++ b/meta-python/recipes-devtools/python/python3-cchardet_2.1.7.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Universal character encoding detector"
+ HOMEPAGE = "https://github.com/PyYoshi/cChardet"
+-LICENSE = "MPLv1.1"
++LICENSE = "MPL-1.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=6ecda54f6f525388d71d6b3cd92f7474"
+ 
+ SRC_URI[sha256sum] = "c428b6336545053c2589f6caf24ea32276c6664cb86db817e03a94c60afa0eaf"
+diff --git a/meta-python/recipes-devtools/python/python3-chardet_4.0.0.bb b/meta-python/recipes-devtools/python/python3-chardet_4.0.0.bb
+index 8b3c8bbaaf..75fe4df8d7 100644
+--- a/meta-python/recipes-devtools/python/python3-chardet_4.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-chardet_4.0.0.bb
 @@ -1,5 +1,5 @@
- SUMMARY = "An onscreen keyboard"
+ SUMMARY = "Universal encoding detector for Python 2 and 3"
+-LICENSE = "LGPL-2.1"
++LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a6f89e2100d9b6cdffcea4f398e37343"
+ 
+ SRC_URI[sha256sum] = "0d6f53a15db4120f2b08c94f11e7d93d2c911ee118b6b30a04ec3ee8310179fa"
+diff --git a/meta-python/recipes-devtools/python/python3-contextlib2_21.6.0.bb b/meta-python/recipes-devtools/python/python3-contextlib2_21.6.0.bb
+index f9900b134b..5a54c696f4 100644
+--- a/meta-python/recipes-devtools/python/python3-contextlib2_21.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-contextlib2_21.6.0.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Backports and enhancements for the contextlib module"
+ HOMEPAGE = "http://contextlib2.readthedocs.org/"
+ SECTION = "devel/python"
+-LICENSE = "PSF & Apache-2"
++LICENSE = "PSF-2.0 & Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d2b6be100f1002194122ec9bfee7b8b4"
+ 
+ SRC_URI[sha256sum] = "ab1e2bfe1d01d968e1b7e8d9023bc51ef3509bba217bb730cee3827e1ee82869"
+diff --git a/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb b/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb
+index 040bbd320d..78e14e1d2f 100644
+--- a/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb
++++ b/meta-python/recipes-devtools/python/python3-crc32c_2.2.post0.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "A python package implementing the crc32c algorithmin hardware and software"
+ HOMEPAGE = "https://github.com/ICRAR/crc32c"
+ 
+-LICENSE = "BSD-2-Clause & BSD-3-Clause & CRC32C-ADLER & LGPL-2.0+"
++LICENSE = "BSD-2-Clause & BSD-3-Clause & CRC32C-ADLER & LGPL-2.0-or-later"
+ LIC_FILES_CHKSUM = " \
+     file://LICENSE;md5=4fbd65380cdd255951079008b364516c \
+     file://LICENSE.google-crc32c;md5=e9ed01b5e5ac9eae23fc2bb33701220c \
+diff --git a/meta-python/recipes-devtools/python/python3-cvxopt_1.2.7.bb b/meta-python/recipes-devtools/python/python3-cvxopt_1.2.7.bb
+index 1bcf18ab6f..70e9831770 100644
+--- a/meta-python/recipes-devtools/python/python3-cvxopt_1.2.7.bb
++++ b/meta-python/recipes-devtools/python/python3-cvxopt_1.2.7.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Convex optimization package"
+ HOMEPAGE = "http://cvxopt.org"
+-LICENSE = "GPL-3.0"
++LICENSE = "GPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=ba1a8a73d8ebea5c47a1173aaf476ddd"
+ 
+ SRC_URI = "git://github.com/cvxopt/cvxopt;protocol=https;branch=master"
+diff --git a/meta-python/recipes-devtools/python/python3-dbussy_1.3.bb b/meta-python/recipes-devtools/python/python3-dbussy_1.3.bb
+index 1911182fcd..b1ba953922 100644
+--- a/meta-python/recipes-devtools/python/python3-dbussy_1.3.bb
++++ b/meta-python/recipes-devtools/python/python3-dbussy_1.3.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "language bindings for libdbus, for Python 3.5 or later"
+ HOMEPAGE = "https://github.com/ldo/dbussy"
+-LICENSE = "LGPLv2.1"
++LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=a916467b91076e631dd8edb7424769c7"
+ 
+ SRC_URI = "git://github.com/ldo/dbussy.git;branch=master;protocol=https \
+diff --git a/meta-python/recipes-devtools/python/python3-defusedxml_0.7.1.bb b/meta-python/recipes-devtools/python/python3-defusedxml_0.7.1.bb
+index e5790f478c..3396c7262d 100644
+--- a/meta-python/recipes-devtools/python/python3-defusedxml_0.7.1.bb
++++ b/meta-python/recipes-devtools/python/python3-defusedxml_0.7.1.bb
+@@ -2,7 +2,7 @@ SUMMARY = "XML bomb protection for Python stdlib modules"
+ DESCRIPTION = "Python package with modified subclasses of all stdlib XML \
+ parsers that prevent any potentially malicious operation."
+ 
+-LICENSE = "PSF"
++LICENSE = "PSF-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=056fea6a4b395a24d0d278bf5c80249e"
+ 
+ SRC_URI[sha256sum] = "1bb3032db185915b62d7c6209c5a8792be6a32ab2fedacc84e01b52c51aa3e69"
+diff --git a/meta-python/recipes-devtools/python/python3-dominate_2.6.0.bb b/meta-python/recipes-devtools/python/python3-dominate_2.6.0.bb
+index 40bc1868f4..8e17438262 100644
+--- a/meta-python/recipes-devtools/python/python3-dominate_2.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-dominate_2.6.0.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Dominate is a Python library for creating and manipulating HTML documents using an elegant DOM API."
+-LICENSE = "LGPLv3"
++LICENSE = "LGPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
+ 
+ SRC_URI[md5sum] = "9f714324ca99eee98bb3c3cdbe838de6"
+diff --git a/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb b/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb
+index 3fdc1363c1..2fbc277139 100644
+--- a/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-fann2_1.1.2.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Python bindings for Fast Artificial Neural Networks 2.2.0 (FANN >= 2.2.0)"
+ SECTION = "devel/python"
+-LICENSE = "LGPLv2"
++LICENSE = "LGPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c73b943dc75f6f65e007c56ac6515c8f"
+ 
+ SRC_URI[md5sum] = "0b85b418018746d63ed66b55465697a9"
+diff --git a/meta-python/recipes-devtools/python/python3-gmpy2_2.1.2.bb b/meta-python/recipes-devtools/python/python3-gmpy2_2.1.2.bb
+index d064ba5c07..274f24090b 100644
+--- a/meta-python/recipes-devtools/python/python3-gmpy2_2.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-gmpy2_2.1.2.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "GMP/MPIR, MPFR, and MPC interface to Python 2.6+ and 3.x"
+ SECTION = "devel/python"
+-LICENSE = "GPL-3.0 | LGPL-3.0+"
++LICENSE = "GPL-3.0-only | LGPL-3.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+                     file://COPYING.LESSER;md5=e6a600fd5e1d9cbde2d983680233ad02"
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-greenlet_1.1.2.bb b/meta-python/recipes-devtools/python/python3-greenlet_1.1.2.bb
+index 4a5b1d2c8b..d14987b1fe 100644
+--- a/meta-python/recipes-devtools/python/python3-greenlet_1.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-greenlet_1.1.2.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Python lightweight in-process concurrent programming"
+ HOMEPAGE = "https://greenlet.readthedocs.io/en/latest/"
+-LICENSE = "MIT & PSF"
++LICENSE = "MIT & PSF-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e95668d68e4329085c7ab3535e6a7aee \
+                     file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-html2text_2020.1.16.bb b/meta-python/recipes-devtools/python/python3-html2text_2020.1.16.bb
+index c5ef2ccd3a..64873d2464 100644
+--- a/meta-python/recipes-devtools/python/python3-html2text_2020.1.16.bb
++++ b/meta-python/recipes-devtools/python/python3-html2text_2020.1.16.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "Convert HTML to Markdown-formatted text"
+ HOMEPAGE = "https://github.com/Alir3z4/html2text"
+ 
+-LICENSE = "GPL-3.0"
++LICENSE = "GPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+ SRC_URI[md5sum] = "c77b580c94d1a9e0145f23cc4472993d"
+diff --git a/meta-python/recipes-devtools/python/python3-intervals_1.10.0.post1.bb b/meta-python/recipes-devtools/python/python3-intervals_1.10.0.post1.bb
+index fd636421bd..d841f92343 100644
+--- a/meta-python/recipes-devtools/python/python3-intervals_1.10.0.post1.bb
++++ b/meta-python/recipes-devtools/python/python3-intervals_1.10.0.post1.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "Interval arithmetic for Python"
+ HOMEPAGE = "https://github.com/AlexandreDecan/python-intervals"
+ SECTION = "devel/python"
+ 
+-LICENSE = "LGPLv3"
++LICENSE = "LGPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=05f1e16a8e59ce3e9a979e881816c2ab"
+ 
+ PYPI_PACKAGE := "python-intervals"
+diff --git a/meta-python/recipes-devtools/python/python3-langtable_0.0.57.bb b/meta-python/recipes-devtools/python/python3-langtable_0.0.57.bb
+index 39819f4351..948f7651a0 100644
+--- a/meta-python/recipes-devtools/python/python3-langtable_0.0.57.bb
++++ b/meta-python/recipes-devtools/python/python3-langtable_0.0.57.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "langtable is used to guess reasonable defaults for locale,\
+ keyboard, territory"
+ HOMEPAGE = "https://github.com/mike-fabian/langtable/"
+-LICENSE = "GPLv3+"
++LICENSE = "GPL-3.0-or-later"
+ SECTION = "devel/python"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb b/meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb
+index 9974326de6..673d32c2d4 100644
+--- a/meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb
++++ b/meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Python LR parsing library"
+ SECTION = "devel/python"
+-LICENSE = "AGPL-3.0"
++LICENSE = "AGPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://agpl-3.0.txt;md5=73f1eb20517c55bf9493b7dd6e480788"
+ 
+ HOMEPAGE = "http://lrparsing.sourceforge.net/"
+diff --git a/meta-python/recipes-devtools/python/python3-lxml_4.7.1.bb b/meta-python/recipes-devtools/python/python3-lxml_4.7.1.bb
+index 43f071281d..f3b7e0c6cd 100644
+--- a/meta-python/recipes-devtools/python/python3-lxml_4.7.1.bb
++++ b/meta-python/recipes-devtools/python/python3-lxml_4.7.1.bb
+@@ -6,7 +6,7 @@ significantly to offer support for XPath, RelaxNG, XML Schema, XSLT, \
+ C14N and much more."
+ HOMEPAGE = "https://lxml.de/"
+ SECTION = "devel/python"
+-LICENSE = "BSD-3-Clause & GPLv2 & MIT & PSF"
++LICENSE = "BSD-3-Clause & GPL-2.0-only & MIT & PSF-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=e4c045ebad958ead4b48008f70838403 \
+                     file://doc/licenses/elementtree.txt;md5=eb34d036a6e3d56314ee49a6852ac891 \
+                     file://doc/licenses/BSD.txt;md5=700a1fc17f4797d4f2d34970c8ee694b \
+diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb
+index 84bec0b201..b9eab3c931 100644
+--- a/meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb
++++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb
+@@ -5,7 +5,7 @@ publication-quality figures in a variety of hardcopy formats \
+ and interactive environments across platforms."
+ HOMEPAGE = "https://github.com/matplotlib/matplotlib"
+ SECTION = "devel/python"
+-LICENSE = "PSF"
++LICENSE = "PSF-2.0"
+ LIC_FILES_CHKSUM = "\
+     file://setup.py;beginline=296;endline=296;md5=20e7ab4d2b2b1395a0e4ab800181eb96 \
+     file://LICENSE/LICENSE;md5=afec61498aa5f0c45936687da9a53d74 \
+diff --git a/meta-python/recipes-devtools/python/python3-nocasedict_1.0.2.bb b/meta-python/recipes-devtools/python/python3-nocasedict_1.0.2.bb
+index 952286d37c..591b9c6b8d 100644
+--- a/meta-python/recipes-devtools/python/python3-nocasedict_1.0.2.bb
++++ b/meta-python/recipes-devtools/python/python3-nocasedict_1.0.2.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "A case-insensitive ordered dictionary for Python"
+ HOMEPAGE = "https://github.com/pywbem/nocasedict"
+-LICENSE = "LGPLv2.1"
++LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a87a7059d580c45495c1218f53e3610d"
+ 
+ SRC_URI[sha256sum] = "86e2dae49e34de7c31b65b486c8f9aa58b66dc2e8ee9b34c390c6c58885c85a0"
+diff --git a/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb b/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb
+index b3a78ad651..0cb1b85e5a 100644
+--- a/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb
++++ b/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "A python module for handling realtime sensor data from OBD-II vehicle ports"HOMEPAGE = "https://github.com/brendan-w/python-OBD"
+-LICENSE = "GPLv2"
++LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://README.md;md5=58ba896fa086c96ad23317cebfeab277"
+ 
+ SRC_URI[md5sum] = "305efcb6c650db7b9583532355ebeb7c"
+diff --git a/meta-python/recipes-devtools/python/python3-paramiko_2.9.2.bb b/meta-python/recipes-devtools/python/python3-paramiko_2.9.2.bb
+index 0a54efde82..a02a7891a7 100644
+--- a/meta-python/recipes-devtools/python/python3-paramiko_2.9.2.bb
++++ b/meta-python/recipes-devtools/python/python3-paramiko_2.9.2.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "The leading native Python SSHv2 protocol library."
+ HOMEPAGE = "https://github.com/paramiko/paramiko/"
+-LICENSE = "LGPL-2.1"
++LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=fd0120fc2e9f841c73ac707a30389af5"
+ 
+ SRC_URI[sha256sum] = "944a9e5dbdd413ab6c7951ea46b0ab40713235a9c4c5ca81cfe45c6f14fa677b"
+diff --git a/meta-python/recipes-devtools/python/python3-portion_2.2.0.bb b/meta-python/recipes-devtools/python/python3-portion_2.2.0.bb
+index e712c8f1ed..0dad8b0ce9 100644
+--- a/meta-python/recipes-devtools/python/python3-portion_2.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-portion_2.2.0.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "Python data structure and operations for intervals"
+ HOMEPAGE = "https://github.com/AlexandreDecan/portion"
+ SECTION = "devel/python"
+ 
+-LICENSE = "LGPLv3"
++LICENSE = "LGPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=05f1e16a8e59ce3e9a979e881816c2ab"
+ 
+ inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
+index 28d94ba5bf..a45ef45f32 100644
+--- a/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
++++ b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
+@@ -4,7 +4,7 @@ process' behaviour. Usage of the function is fairly messy though, due to \
+ limitations in C and linux. This module provides a nice non-messy python(ic) \
+ interface."
+ SECTION = "devel/python"
 -LICENSE = "GPLv3"
 +LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING.GPL3;md5=8521fa4dd51909b407c5150498d34f4e"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=1475481f9ec754d758859bd2c75f6f6f"
  
- DEPENDS += "gtk+3 hunspell libcanberra libxkbfile dconf python3-distutils-extra-native intltool-native"
-diff --git a/meta-gnome/recipes-support/usermode/usermode_1.114.bb b/meta-gnome/recipes-support/usermode/usermode_1.114.bb
-index 478d8fa9b5..1811b2d3c4 100644
---- a/meta-gnome/recipes-support/usermode/usermode_1.114.bb
-+++ b/meta-gnome/recipes-support/usermode/usermode_1.114.bb
-@@ -7,7 +7,7 @@ graphical tools for users: \
- * userpasswd allows users to change their passwords. \
- "
- HOMEPAGE = "https://pagure.io/usermode"
+ S = "${WORKDIR}/git"
+diff --git a/meta-python/recipes-devtools/python/python3-pyalsaaudio_0.9.0.bb b/meta-python/recipes-devtools/python/python3-pyalsaaudio_0.9.0.bb
+index c1e549bcb5..862c3d594e 100644
+--- a/meta-python/recipes-devtools/python/python3-pyalsaaudio_0.9.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pyalsaaudio_0.9.0.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "ALSA bindings"
+ SECTION = "devel/python"
+-LICENSE = "PSF"
++LICENSE = "PSF-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1a3b161aa0fcec32a0c8907a2219ad9d"
+ 
+ inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-pyatspi_2.38.2.bb b/meta-python/recipes-devtools/python/python3-pyatspi_2.38.2.bb
+index d67975b52b..7c822ac23f 100644
+--- a/meta-python/recipes-devtools/python/python3-pyatspi_2.38.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pyatspi_2.38.2.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Python bindings for DBus AT-SPI2 accessibility"
+ DESCRIPTION = "AT-SPI2 is a protocol over DBus, toolkit widgets use to provide content to screen readers such as Orca"
+ SECTION = "devel/python"
+ HOMEPAGE = "https://www.freedesktop.org/wiki/Accessibility/AT-SPI2/"
+-LICENSE = "GPLv2"
++LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=db29218e6ba3794c56df7d4987dc7e4d \
+                     file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe"
+ DEPENDS = "python3-dbus-native glib-2.0 dbus-glib libxml2 atk gtk+ python3-pygobject"
+diff --git a/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb b/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
+index cc659ea678..b32f3a3627 100644
+--- a/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
++++ b/meta-python/recipes-devtools/python/python3-pybluez_0.23.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ 
+ DEPENDS = "bluez5"
+ 
+-LICENSE = "GPL-2.0"
++LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8a71d0475d08eee76d8b6d0c6dbec543"
+ 
+ SRC_URI[md5sum] = "afbe8429bb82d2c46a3d0f5f4f898f9d"
+diff --git a/meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb b/meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb
+index a80fed62de..0f1ae3caca 100644
+--- a/meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb
+@@ -7,7 +7,7 @@ be used to fetch objects identified by a URL from a Python program \
+ SECTION = "devel/python"
+ HOMEPAGE = "http://pycurl.io/"
+ 
+-LICENSE = "LGPLv2 | MIT"
++LICENSE = "LGPL-2.0-only | MIT"
+ LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=4fbd65380cdd255951079008b364516c \
+                     file://COPYING-MIT;md5=75f131c591546fd1277ca49c9a81ab1b \
+                     "
+diff --git a/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb b/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb
+index 188934ab97..a1b9fffea6 100644
+--- a/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Pythonic DBus library"
+ HOMEPAGE = "https://pypi.python.org/pypi/pydbus/"
+-LICENSE = "LGPLv2.1"
++LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a916467b91076e631dd8edb7424769c7"
+ 
+ SRC_URI += "file://0001-Support-asynchronous-calls-58.patch \
+diff --git a/meta-python/recipes-devtools/python/python3-pyiface_git.bb b/meta-python/recipes-devtools/python/python3-pyiface_git.bb
+index 847efd8cf8..5e0d2de916 100644
+--- a/meta-python/recipes-devtools/python/python3-pyiface_git.bb
++++ b/meta-python/recipes-devtools/python/python3-pyiface_git.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "Pyiface is a package that exposes the network interfaces of the operating system in a easy to use and transparent way"
+ SECTION = "devel/python"
+ HOMEPAGE = "https://pypi.python.org/pypi/pyiface/"
+-LICENSE = "GPLv3+"
++LICENSE = "GPL-3.0-or-later"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb b/meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb
+index 47a40fdce2..60726df09d 100644
+--- a/meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb
+@@ -1,6 +1,6 @@
+ SUMMARY="Pylint is a Python source code analyzer"
+ HOMEPAGE= "http://www.pylint.org/"
+-LICENSE = "GPLv2"
++LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
+ 
+ SRC_URI[md5sum] = "2eb5f3cb8fe567eaf5420dd415012202"
+diff --git a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb b/meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb
+index a85b0929d4..fa5b3a522a 100644
+--- a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb
++++ b/meta-python/recipes-devtools/python/python3-pyroute2_0.5.19.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "A pure Python netlink and Linux network configuration library"
+-LICENSE = "GPLv2 & Apache-2.0"
++LICENSE = "GPL-2.0-only & Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://LICENSE.Apache.v2;md5=34281e312165f843a2b7d1f114fe65ce"
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-pystemd_0.8.0.bb b/meta-python/recipes-devtools/python/python3-pystemd_0.8.0.bb
+index cdfb7d3b0c..0056a794f9 100644
+--- a/meta-python/recipes-devtools/python/python3-pystemd_0.8.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pystemd_0.8.0.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Python bindings for interacting with systemd over DBus"
+-LICENSE = "LGPLv2.1"
++LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c"
+ 
+ SRC_URI[md5sum] = "f993739eca645749f18d4ccfd4a0fbf3"
+diff --git a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.12118.bb b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.12118.bb
+index 3e799cf622..147e3bf6aa 100644
+--- a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.12118.bb
++++ b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.12118.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "This module provides ctypes-based bindings for the native libvlc API of the VLC video player."
+ HOMEPAGE = "wiki.videolan.org/PythonBinding"
+-LICENSE = "LGPL-2.0"
++LICENSE = "LGPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+ 
+ SRC_URI[sha256sum] = "566f2f7c303f6800851cacc016df1c6eeec094ad63e0a49d87db9d698094f1fb"
+diff --git a/meta-python/recipes-devtools/python/python3-pyudev_0.23.2.bb b/meta-python/recipes-devtools/python/python3-pyudev_0.23.2.bb
+index 183bf7273c..4c4c959eba 100644
+--- a/meta-python/recipes-devtools/python/python3-pyudev_0.23.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pyudev_0.23.2.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "A libudev binding"
+ 
+-LICENSE = "LGPLv2.1+"
++LICENSE = "LGPL-2.1-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
+ 
+ SRC_URI[sha256sum] = "32ae3585b320a51bc283e0a04000fd8a25599edb44541e2f5034f6afee5d15cc"
+diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb b/meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb
+index 87605c2b3e..09e7341877 100644
+--- a/meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pyzmq_22.3.0.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Pyzmq provides Zero message queue access for the Python language"
+ HOMEPAGE = "http://zeromq.org/bindings:python"
+-LICENSE = "BSD-3-Clause & LGPL-3.0"
++LICENSE = "BSD-3-Clause & LGPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING.BSD;md5=11c65680f637c3df7f58bbc8d133e96e \
+                     file://COPYING.LESSER;md5=12c592fa0bcfff3fb0977b066e9cb69e"
+ DEPENDS = "zeromq"
+diff --git a/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb b/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb
+index 57a9185289..ae4e6f72da 100644
+--- a/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb
++++ b/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb
+@@ -10,7 +10,7 @@ there are no clients anymore on the message bus, as well as convenience \
+ functions and decorators for integrating a dbus service with PolicyKit."
+ 
+ SECTION = "devel/python"
 -LICENSE = "GPLv2+"
 +LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
+ SRCNAME = "python-slip"
  
- DEPENDS = "libuser ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} \
+diff --git a/meta-python/recipes-devtools/python/python3-smbus_4.3.bb b/meta-python/recipes-devtools/python/python3-smbus_4.3.bb
+index a9ba24fdbc..3e14736b2d 100644
+--- a/meta-python/recipes-devtools/python/python3-smbus_4.3.bb
++++ b/meta-python/recipes-devtools/python/python3-smbus_4.3.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Set of i2c tools for linux - Python module"
+-LICENSE = "GPLv2"
++LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://py-smbus/smbusmodule.c;beginline=1;endline=18;md5=46e424fb045901ab25e0f92c28c80055"
+ 
+ SRC_URI = "${KERNELORG_MIRROR}/software/utils/i2c-tools/i2c-tools-${PV}.tar.gz \
+diff --git a/meta-python/recipes-devtools/python/python3-smpplib_2.2.1.bb b/meta-python/recipes-devtools/python/python3-smpplib_2.2.1.bb
+index 7401e039bf..be0bafd33f 100644
+--- a/meta-python/recipes-devtools/python/python3-smpplib_2.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-smpplib_2.2.1.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "SMPP library for python"
+ SECTION = "devel/python"
+-LICENSE = "GPLv3.0"
++LICENSE = "GPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://README.md;md5=8b4e2ac8cf248f7b991784f88b630852"
+ 
+ PYPI_PACKAGE = "smpplib"
+diff --git a/meta-python/recipes-devtools/python/python3-systemd_234.bb b/meta-python/recipes-devtools/python/python3-systemd_234.bb
+index 1aecb375bf..10614fe374 100644
+--- a/meta-python/recipes-devtools/python/python3-systemd_234.bb
++++ b/meta-python/recipes-devtools/python/python3-systemd_234.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Python interface for libsystemd"
+ HOMEPAGE = "https://github.com/systemd/python-systemd"
+-LICENSE = "LGPLv2.1+"
++LICENSE = "LGPL-2.1-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fbd65380cdd255951079008b364516c"
+ 
+ PYPI_PACKAGE = "systemd-python"
+diff --git a/meta-python/recipes-devtools/python/python3-term_2.3.bb b/meta-python/recipes-devtools/python/python3-term_2.3.bb
+index 723f1db512..6b62eb02ce 100644
+--- a/meta-python/recipes-devtools/python/python3-term_2.3.bb
++++ b/meta-python/recipes-devtools/python/python3-term_2.3.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "An enhanced version of the tty module"
+ SECTION = "devel/python"
+-LICENSE = "Python-2"
++LICENSE = "Python-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d90e2d280a4836c607520383d1639be1"
+ 
+ SRC_URI[md5sum] = "ab0c1bce381b1109fe4390c56aa06237"
+diff --git a/meta-python/recipes-devtools/python/python3-typing-extensions_3.10.0.0.bb b/meta-python/recipes-devtools/python/python3-typing-extensions_3.10.0.0.bb
+index a8e632487d..a5f491c770 100644
+--- a/meta-python/recipes-devtools/python/python3-typing-extensions_3.10.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-typing-extensions_3.10.0.0.bb
+@@ -1,5 +1,5 @@
+ HOMEPAGE = "https://github.com/python/typing"
+-LICENSE = "PSF"
++LICENSE = "PSF-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=64fc2b30b67d0a8423c250e0386ed72f"
+ 
+ # The name on PyPi is slightly different.
+diff --git a/meta-python/recipes-devtools/python/python3-versiontools_1.9.1.bb b/meta-python/recipes-devtools/python/python3-versiontools_1.9.1.bb
+index cf0fa30a32..ea40d5f6bb 100644
+--- a/meta-python/recipes-devtools/python/python3-versiontools_1.9.1.bb
++++ b/meta-python/recipes-devtools/python/python3-versiontools_1.9.1.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "Smart replacement for plain tuple used in __version__"
+ SECTION = "devel/python"
+ HOMEPAGE = "https://launchpad.net/versiontools"
+-LICENSE = "LGPLv3"
++LICENSE = "LGPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://setup.py;beginline=3;endline=20;md5=02193721a38fd8a05a4ddeb7df8e294d"
+ 
+ SRC_URI[md5sum] = "602b7db8eea30dd29a1d451997adf251"
+diff --git a/meta-python/recipes-devtools/python/python3-xmlrunner_1.7.7.bb b/meta-python/recipes-devtools/python/python3-xmlrunner_1.7.7.bb
+index 7e7b5235ee..e81e4dabee 100644
+--- a/meta-python/recipes-devtools/python/python3-xmlrunner_1.7.7.bb
++++ b/meta-python/recipes-devtools/python/python3-xmlrunner_1.7.7.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "unittest-based test runner with Ant/JUnit like XML reporting"
+ HOMEPAGE = "https://github.com/pycontribs/xmlrunner"
+-LICENSE = "LGPL-3.0"
++LICENSE = "LGPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;md5=fa964f202b6ae067ed5828fe43c77c1a"
+ 
+ SRC_URI[md5sum] = "7b0b152ed2d278516aedbc0cac22dfb3"
+diff --git a/meta-python/recipes-devtools/python/python3-xstatic-font-awesome_4.7.0.0.bb b/meta-python/recipes-devtools/python/python3-xstatic-font-awesome_4.7.0.0.bb
+index b45e96d387..ccd1cd787d 100644
+--- a/meta-python/recipes-devtools/python/python3-xstatic-font-awesome_4.7.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-xstatic-font-awesome_4.7.0.0.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Font Awesome icons packaged for setuptools (easy_install) / pip."
+ HOMEPAGE = "https://pypi.python.org/pypi/XStatic-Font-Awesome"
+ SECTION = "devel/python"
+-LICENSE = "Apache-2"
++LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;md5=313d021898694cd2b0ea6508bdfe51a2"
+ 
+ PYPI_PACKAGE = "XStatic-Font-Awesome"
+diff --git a/meta-python/recipes-devtools/python/python3-zeroconf_0.38.1.bb b/meta-python/recipes-devtools/python/python3-zeroconf_0.38.1.bb
+index c49782e426..bc06618c1e 100644
+--- a/meta-python/recipes-devtools/python/python3-zeroconf_0.38.1.bb
++++ b/meta-python/recipes-devtools/python/python3-zeroconf_0.38.1.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Pure Python Multicast DNS Service Discovery Library (Bonjour/Avahi compatible)"
+ HOMEPAGE = "https://github.com/jstasiak/python-zeroconf"
+-LICENSE = "LGPL-2.1"
++LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=3bb705b228ea4a14ea2728215b780d80"
+ 
+ SRC_URI[sha256sum] = "10c501b25d8881b656e56c34674d98fe6bc752240a572e74f918bc849c93ba9c"
+diff --git a/meta-python/recipes-devtools/unattended-upgrades/unattended-upgrades_2.6.bb b/meta-python/recipes-devtools/unattended-upgrades/unattended-upgrades_2.6.bb
+index 0629bf6db1..22d9a196db 100644
+--- a/meta-python/recipes-devtools/unattended-upgrades/unattended-upgrades_2.6.bb
++++ b/meta-python/recipes-devtools/unattended-upgrades/unattended-upgrades_2.6.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "This script upgrades packages automatically and unattended."
+ DESCRIPTION = "The purpose of unattended-upgrades is to keep the computer current with the latest security (and other) updates automatically."
+ HOMEPAGE = "https://wiki.debian.org/UnattendedUpgrades"
+-LICENSE = "GPLv2"
++LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
+                     file://debian/copyright;md5=62b5f2ac0ede901fb245eefbe54c181f"
+ 
+diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet_3.4.3.bb b/meta-python/recipes-extended/python-blivet/python3-blivet_3.4.3.bb
+index 85575df7b5..fcadf130c9 100644
+--- a/meta-python/recipes-extended/python-blivet/python3-blivet_3.4.3.bb
++++ b/meta-python/recipes-extended/python-blivet/python3-blivet_3.4.3.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "A python module for system storage configuration"
+ HOMEPAGE = "http://fedoraproject.org/wiki/blivet"
+-LICENSE = "LGPLv2+"
++LICENSE = "LGPL-2.0-or-later"
+ SECTION = "devel/python"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb b/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb
+index 4bcb45ebd6..89f1c700f4 100644
+--- a/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb
++++ b/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "GUI tool for storage configuration using blivet library"
+ HOMEPAGE = "https://github.com/rhinstaller/blivet-gui"
+-LICENSE = "GPLv2+"
++LICENSE = "GPL-2.0-or-later"
+ SECTION = "devel/python"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-python/recipes-extended/python-meh/python3-meh_0.50.1.bb b/meta-python/recipes-extended/python-meh/python3-meh_0.50.1.bb
+index 96dba96123..16596596a6 100644
+--- a/meta-python/recipes-extended/python-meh/python3-meh_0.50.1.bb
++++ b/meta-python/recipes-extended/python-meh/python3-meh_0.50.1.bb
+@@ -2,7 +2,7 @@ SUMMARY = "A python library for handling exceptions"
+ DESCRIPTION = "The python-meh package is a python library for handling, saving, and reporting \
+ exceptions."
+ HOMEPAGE = "http://git.fedorahosted.org/git/?p=python-meh.git"
+-LICENSE = "GPLv2+"
++LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ inherit setuptools3
+diff --git a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.34.bb b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.34.bb
+index 7aa0758400..6bf9ada581 100644
+--- a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.34.bb
++++ b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.34.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "A python library for manipulating kickstart files"
+ HOMEPAGE = "http://fedoraproject.org/wiki/pykickstart"
+-LICENSE = "GPLv2+"
++LICENSE = "GPL-2.0-or-later"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+diff --git a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.7.bb b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.7.bb
+index 66cd27d447..2cdf82365a 100644
+--- a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.7.bb
++++ b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.7.bb
+@@ -3,7 +3,7 @@ an interface to libparted, the GNU parted library for disk partitioning and \
+ filesystem manipulation."
+ SUMMARY = "Python bindings for libparted"
+ HOMEPAGE = "https://github.com/rhinstaller/pyparted"
+-LICENSE = "GPL-2.0+"
++LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "\
+     file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
+     file://src/_pedmodule.c;beginline=10;endline=22;md5=9e53304db812b80d0939e11bb69dcab2 \
+diff --git a/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.3.2.bb b/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.3.2.bb
+index bf9304cdd1..2d23017c88 100644
+--- a/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.3.2.bb
++++ b/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.3.2.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Cross-platform locking library"
+ DESCRIPTION = "Portalocker is a library to provide an easy API to file locking"
+-LICENSE = "PSF"
++LICENSE = "PSF-2.0"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f9273424c73af966635d66eb53487e14"
+ 
+diff --git a/meta-python/recipes-extended/pywbem/python3-pywbem_1.3.0.bb b/meta-python/recipes-extended/pywbem/python3-pywbem_1.3.0.bb
+index 26758427a2..676c654b52 100644
+--- a/meta-python/recipes-extended/pywbem/python3-pywbem_1.3.0.bb
++++ b/meta-python/recipes-extended/pywbem/python3-pywbem_1.3.0.bb
+@@ -13,7 +13,7 @@ at http://www.dmtf.org/standards/wbem. \
+ It also provides a Python provider interface, and is the fastest and easiest \
+ way to write providers on the planet."
+ HOMEPAGE = "http://pywbem.github.io"
+-LICENSE = "LGPLv2.1"
++LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
+ 
+ SRC_URI[sha256sum] = "5df0af28f81891a3914a12f3a30b11b1981f7b30e09c5a42c011797e7fce9b6a"
 -- 
 2.35.1
 
