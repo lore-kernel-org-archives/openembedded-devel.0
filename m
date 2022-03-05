@@ -2,71 +2,70 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7CAE5C433F5
-	for <webhook@archiver.kernel.org>; Sat,  5 Mar 2022 18:43:09 +0000 (UTC)
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com
- [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.web10.8040.1646505788912522688
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92F2DC433EF
+	for <webhook@archiver.kernel.org>; Sat,  5 Mar 2022 18:44:58 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com
+ [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web10.8062.1646505898091136964
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Mar 2022 10:43:09 -0800
+ Sat, 05 Mar 2022 10:44:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=HvsWYqOW;
- spf=pass (domain: gmail.com, ip: 209.85.216.49,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=SLZKIMWO;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f49.google.com with SMTP id
- ev16-20020a17090aead000b001bc3835fea8so10772334pjb.0
+Received: by mail-pl1-f172.google.com with SMTP id p17so10480436plo.9
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Mar 2022 10:43:08 -0800 (PST)
+ Sat, 05 Mar 2022 10:44:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
         bh=Nt0UEgXiQXHjJo3fTCakiWnPdFLFvWXEEx7ojmgMSWs=;
-        b=HvsWYqOWXICBq20sMT2WmWmRSowJADHaB/LTk4ZQP+byIM8LrfmPEBGUck3RrCZWA6
-         ll/bxcOPPPn4Ktwh3rAryqHv3dKfcFlgy+Ox17HtnJij3Ii5rQkCTvbTnTlXr9QnfO+s
-         FSRwtOVO+nRtcOBB+vyHuMwujEgZqNb38G2/jj1jNjsGgxTE2LFc4K3XLVdI+apvM5Cv
-         nYMcRvhfAkZ65hwsFao76ALUo5uRbdH/ClJznMnuhr4L6hhTUoXWer/pKqItQ4HJnwpe
-         udVe52Gw5TyJFmWsovCzc9cuDeQ/tKzb5GL4f9A+WiIQiAtyyUULXGD5frR8f7RPd6Bt
-         soyw==
+        b=SLZKIMWOQp+O4kke09u1Y/X4da9MS7X86oze9xBfEMAwki0k7hb/yUqoYjksIvL+Zr
+         aYH9YovUdYGWlY55yGzDNZ34rw8/Kz2NpMz9e+qDkTmlbi3Xge0vMrNUoQer/uvTTcGw
+         EGk3+t+5ZqjeIYFY8IgYzRHsQ0BoYl29FW6HzDrMXv6dNzmzifKFhFTbQ+BTmir79gZj
+         Ma5rQ9ehrMQnxuPQH3iGgR3sFkUQ/zDGeFesaTjyq2Ywh1SUPjU/SC/LdHwlTavQG0tz
+         ka1Lsa1/u8W+rQpLlBA9Sv4Zh5R+8PBnbf4PuMYWzxWVpKEthe3bWDQYcaQha7bDTNKy
+         3X4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
         bh=Nt0UEgXiQXHjJo3fTCakiWnPdFLFvWXEEx7ojmgMSWs=;
-        b=kpuB5imBFZZC4/Nkh99eBqsBiQ8+/7OJJj3iDkoG9chQcHvK2AyZCJkW0eqa81Q5S+
-         x4FSUfdAvHeexcLImIk09lfmuxXfyYZbF4N5MWcFQEA9ExB2jT+Fa+j2gQeKWruMlLrY
-         8oGl07zqOTTpyL0owSxaemb6qtMgnbNgzFQM7rSlw3vTc0oc6j3zZEdsNkzBVH0NQXA7
-         r4SudnoeiZfNUGqmLfNTaNclNa11cNS5tNcGZ3ZcbpoH0fDl5KKLU2HUJpNFQQ0wH80T
-         hqkXGfs+/pJtEexp+8XAX1blpG52TwlZqXDbRx4s9OLF6Q1Tcpb5nSKbA6xElotUWQ0e
-         30dA==
-X-Gm-Message-State: AOAM533J53umaAPvioQC8g3IzGoJdHnTMkJ1Z2bpX2vL3mSP8xw4YD6i
-	5wCUQ1XEg8P9wZRoR1bXzxFxbjT5Mrw=
+        b=gddHXCxHoJb6IQpttJNamHxBY1ImyPnoPa+Vq/n9l++TrcMv9j2tS5vbKKvqyWUoU6
+         ZDZH8UNozQnuJ88vEB9HUK1oR0kBnJxTvthYpIxXfmszjLSTneXrPr1l2jBQcyBAuAWj
+         yTt/qJ/W5x/C8ig49HhKRK3g1THA6XbCdif+tny1yI8c2KE0HMV408r2Mn/7w3lfPGMB
+         xNAN8Y1j+Onsk7RGRXBQidWn5ug2+66HKjUXBYhHC80yRRcL2uQICssM4I/9i5RDjreb
+         R5Ks9sbo/edKPLy4GM0s6eGya7cn5FmPViq8dhZLKje5kjaeo7rKP5Io9Hxuy2bjRXXS
+         vJ2Q==
+X-Gm-Message-State: AOAM530iuOX2ny0swzX3I7Q1WkqZ9hPFbzerGxaeaB1cvnLv2VJl4HXg
+	R9fAcoHZH1qd5hfaQrpzNv9N1ovoEOs=
 X-Google-Smtp-Source: 
- ABdhPJzusSl3bu89tG1tJOgI7chhPUfJXSM3yhTR14/H5k710CcLkG9ok9E0+e890nmTPU1wS4xxBg==
-X-Received: by 2002:a17:90b:1d90:b0:1bf:2e8f:9bb5 with SMTP id
- pf16-20020a17090b1d9000b001bf2e8f9bb5mr8010159pjb.236.1646505788214;
-        Sat, 05 Mar 2022 10:43:08 -0800 (PST)
+ ABdhPJxj57WWRkYQwWgT+uPwBdPQHeJR0Zh7QmedU21oeZLhYx37yMPqxJnI4AShs6JTR5NC4LSyug==
+X-Received: by 2002:a17:902:e5d0:b0:151:cc18:9ebf with SMTP id
+ u16-20020a170902e5d000b00151cc189ebfmr4785635plf.110.1646505897517;
+        Sat, 05 Mar 2022 10:44:57 -0800 (PST)
 Received: from keaua.caveonetworks.com
  ([2601:202:4180:a5c0:2999:fd67:72a5:6dc5])
         by smtp.gmail.com with ESMTPSA id
- lw18-20020a17090b181200b001bf057106ebsm9968686pjb.41.2022.03.05.10.43.07
+ j14-20020a056a00174e00b004f66ce6367bsm10914524pfc.147.2022.03.05.10.44.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 05 Mar 2022 10:43:07 -0800 (PST)
+        Sat, 05 Mar 2022 10:44:57 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][hardknott][PATCH] pw-am.sh: update to new patcwork system
-Date: Sat,  5 Mar 2022 10:43:06 -0800
-Message-Id: <20220305184306.4010265-1-akuster808@gmail.com>
+Subject: [meta-oe][dunfell][PATCH] pw-am.sh: update to new patcwork system
+Date: Sat,  5 Mar 2022 10:44:56 -0800
+Message-Id: <20220305184456.4010458-1-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 05 Mar 2022 18:43:09 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 05 Mar 2022 18:44:58 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95802
+ https://lists.openembedded.org/g/openembedded-devel/message/95803
 
 Point to patchwork.yoctoproject.org
 
