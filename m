@@ -2,196 +2,282 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 04480C433F5
-	for <webhook@archiver.kernel.org>; Sat,  5 Mar 2022 18:53:24 +0000 (UTC)
-Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com
- [209.85.215.178])
- by mx.groups.io with SMTP id smtpd.web09.8289.1646506402875469195
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 36FE0C433EF
+	for <webhook@archiver.kernel.org>; Sat,  5 Mar 2022 19:47:28 +0000 (UTC)
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com
+ [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.web09.8815.1646509647478182624
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Mar 2022 10:53:22 -0800
+ Sat, 05 Mar 2022 11:47:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=hi+7oo/o;
- spf=pass (domain: gmail.com, ip: 209.85.215.178,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=oePlbDvl;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f178.google.com with SMTP id 27so10177091pgk.10
+Received: by mail-pj1-f47.google.com with SMTP id cx5so10009149pjb.1
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 05 Mar 2022 10:53:22 -0800 (PST)
+ Sat, 05 Mar 2022 11:47:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=message-id:date:mime-version:user-agent:subject:content-language:to
          :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=5vAaP2kk2UjT4m7EEH6kfBYuXWCPUNxvrlhjD+LEnzo=;
-        b=hi+7oo/ow0ZZbmhlOyceSLzs/yf41ooPTBs8QrIvTxpOLtr5PCiy38Wso3x9XothID
-         8j6oV4Rybro9MVhtITmXYqAdKL4FrkS/ek1vG49yAy8UzHCo1j+U7o4gp64Dl/c16+6T
-         ahaNm7zZbPIvXOxCiIA3rbHM4kdx5AKLGhGN0CqirjV7VU9W+GkDr9aYIjccZZ4213j3
-         MSN0TYxCEnup1dpN67IjjSBk0okyPJRTo9LiVjwJlr/+9X0Tk86FTBOptWVSlXKA7wVz
-         0yTtBN/XRE1mSnQGLHlqvQ+Y0s3pkKZQi0XChUJb2zdE94h5airpi9lzZwtgS70UN5Ce
-         lBPg==
+        bh=62zd0hz8TzmYoCw4Jw8KHkxcIrs6L4xIxLYkcdpAddY=;
+        b=oePlbDvlgERONbp0hz8RtB6/vjzFl7kYg3wRT/FKLuN1bc8Ib6EdN3DpmNpdW0kCUa
+         E3SYb8+QIGn2BTlNlzd+nPvq9rZEUooGU4Q89d38HZ1uQhIPDAzUY6k3k0SObqBY2PLJ
+         JjI8S4a7W+H6udMzKYa3DU22pIE6IOyG8H4vPG3la5jvcFM9XuZEGjJ8EuyzcRxhh93I
+         RxDKibQijS2BgQpQ3luKUPXIqA/0t5+rToDDvRuYJi/0WMuIlu0K1NBkypqUzq8bMNTV
+         ne36x+Ko3TmvcK7l3NfzVHxyWRekCeqaaAYHOr20PDGKDzK9UKnQTduFpLBh7mAkiL+o
+         AxOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
          :content-language:to:cc:references:from:in-reply-to
          :content-transfer-encoding;
-        bh=5vAaP2kk2UjT4m7EEH6kfBYuXWCPUNxvrlhjD+LEnzo=;
-        b=KOhQ5dhQnZrkNgdMfCNGVExSAKVdIxkBtawvCh2v0ZFmZjWWfsT0voNlLiGOvHjqNo
-         BJZJ9l23eJOqKADLSRvbINXaxZ/2sX1V57/hFrGP3owjva27ZYatYuDP+Tt6PASXwdvH
-         SeVaB5whd7rkf0g0tcOz0ZVFIhnQvbp5x8i47F5Ex5zrutn3OOF4ohMAZzYVdaSL2HDS
-         scEkUSfqivBib3h6+HqdwHwe+v529KITHbzgD8de9s5ZpQUnKfY+UE36nyIw9yOvrHR5
-         fqkuS34FmrnANpvvVioDTm5g/FnU4WxO89bnRqfUbSTLVNwE9y9GpVUEvESKyKET/iG7
-         5cug==
-X-Gm-Message-State: AOAM530KBM5oOwvDBDTh0PNatsQXTabJ3xBL3RSuK628+yS7/n5uqFin
-	CAzFhVSWXwd5uf90Lj1cVKs=
+        bh=62zd0hz8TzmYoCw4Jw8KHkxcIrs6L4xIxLYkcdpAddY=;
+        b=ciEalSEpvFdY+S8oedx0mO0sPmX2hq/J/UyTySLrN6sz7fIq9+LpZtMDp0WeEkHvDv
+         RTm6UrwRHA2U+E+BVEH2GadRw+xmaDNQs+g41HNkdzi0hbCyrKMi9etsWyshtMy2aO3z
+         lHetQ6ny2mrJ9pA2HP9RQp9kzk51gh+pxPBeNErs6PfgwFHJ6CdrJVcjjo8fZNhu54AA
+         McZ6VIZlx+WAiwrgW7bw2d2ynIYaHYDvwdg70xM800RBYgIVR6Jj5oFj86mjN7q9vP9g
+         omblZdQtAeIVBd+omK3GxJGsuI/i1qyOWbS063MHcFCJKm0+7l66MZNxpmW/9igMvanz
+         QWiw==
+X-Gm-Message-State: AOAM532+qCaTfPIQzU1n2uhTKh+6QQpe1R5ZeRvRM7+xzIRTJxDE6jAn
+	Y+OxWvg+v6HGd1ZABLKhZbw=
 X-Google-Smtp-Source: 
- ABdhPJzg4a0pRtEbyZ1s5M3qlUMCRHWH+KUD9tftAUUqVNuR2IT9w3TXy+p8Pp3UwI4faPWknWCEKw==
-X-Received: by 2002:a63:c04c:0:b0:363:d7b7:1cb7 with SMTP id
- z12-20020a63c04c000000b00363d7b71cb7mr3577054pgi.309.1646506402355;
-        Sat, 05 Mar 2022 10:53:22 -0800 (PST)
+ ABdhPJyM8p8lP4QadMz4BigO4teLxNzqtN8Rl5lMmvIeRX74sB6KNMH0wD4Xsjqp+GUDbPQTycz7AA==
+X-Received: by 2002:a17:903:32c3:b0:151:58b1:adf8 with SMTP id
+ i3-20020a17090332c300b0015158b1adf8mr4723806plr.29.1646509646746;
+        Sat, 05 Mar 2022 11:47:26 -0800 (PST)
 Received: from ?IPV6:2601:202:4180:a5c0:2999:fd67:72a5:6dc5?
  ([2601:202:4180:a5c0:2999:fd67:72a5:6dc5])
         by smtp.gmail.com with ESMTPSA id
- nv9-20020a17090b1b4900b001bf46719b8asm1428490pjb.2.2022.03.05.10.53.21
+ s33-20020a056a0017a100b004bf85a94ef2sm10833085pfg.183.2022.03.05.11.47.26
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 05 Mar 2022 10:53:21 -0800 (PST)
-Message-ID: <777eceb3-6341-21ef-34f4-00e6c552d96c@gmail.com>
-Date: Sat, 5 Mar 2022 10:53:20 -0800
+        Sat, 05 Mar 2022 11:47:26 -0800 (PST)
+Message-ID: <1690792f-499a-6fcd-4938-52ed894fa052@gmail.com>
+Date: Sat, 5 Mar 2022 11:47:25 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.5.0
-Subject: Re: [oe][meta-oe][dunfell][PATCH] p7zip: build and package lib7z.so
- needed for fastboot
+Subject: Re: [oe] [meta-oe][PATCH v2] nodejs: add option to use openssl legacy
+ providers again
 Content-Language: en-US
-To: akash.hadke@kpit.com, openembedded-devel@lists.openembedded.org,
- raj.khem@gmail.com
-Cc: ranjitsinh.rathod@kpit.com, Nisha Parrakat <nishaparrakat@gmail.com>,
- Nisha Parrakat <Nisha.Parrakat@kpit.com>, Akash Hadke <hadkeakash4@gmail.com>
-References: <1646210995-8717-1-git-send-email-akash.hadke@kpit.com>
+To: Andrej Valek <andrej.valek@siemens.com>,
+ openembedded-devel@lists.openembedded.org
+Cc: raj.khem@gmail.com, zboszor@gmail.com
+References: <20220218133121.222269-1-andrej.valek@siemens.com>
+ <20220305131625.16138-1-andrej.valek@siemens.com>
 From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <1646210995-8717-1-git-send-email-akash.hadke@kpit.com>
+In-Reply-To: <20220305131625.16138-1-andrej.valek@siemens.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 05 Mar 2022 18:53:23 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 05 Mar 2022 19:47:28 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95804
+ https://lists.openembedded.org/g/openembedded-devel/message/95805
 
 
 
-On 3/2/22 00:49, akash hadke via lists.openembedded.org wrote:
-> From: Nisha Parrakat <nishaparrakat@gmail.com>
+On 3/5/22 05:16, Andrej Valek wrote:
+> Current nodejs version v16 does not fully support new OpenSSL, so add option
+> to use legacy provider.
 >
-> a) use option 7z to build the lib7z.so library
-> This is needed for android-tools for building fastboot
-> from android-tools
+> |   opensslErrorStack: [ 'error:03000086:digital envelope routines::initialization error' ],
+> |   library: 'digital envelope routines',
+> |   reason: 'unsupported',
+> |   code: 'ERR_OSSL_EVP_UNSUPPORTED'
 >
-> b) Packaged the lib7z.so and codec libraries as a part of this recipe
-> Fastboot RDepends on it lib7z.so
+> It was blindly removed by upgrade to 16.14.0 version
 >
-> c) Fixed a C++17 forbidden error when lib7z.so is built
->
-> fixes the below error
->
-> | ../../../../CPP/7zip/Archive/Wim/WimHandler.cpp: In member function 'virtual LONG NArchive::NWim::CHandler::GetArchiveProperty(PROPID, PROPVARIANT*)':
-> | ../../../../CPP/7zip/Archive/Wim/WimHandler.cpp:308:11: error: use of an operand of type 'bool' in 'operator++' is forbidden in C++17
-> |   308 |           numMethods++;
-> |       |           ^~~~~~~~~~
-> | ../../../../CPP/7zip/Archive/Wim/WimHandler.cpp:318:9: error: use of an operand of type 'bool' in 'operator++' is forbidden in C++17
-> |   318 |         numMethods++;
->
-> Signed-off-by: Nisha Parrakat <Nisha.Parrakat@kpit.com>
-> Signed-off-by: Nisha Parrakat <nishaparrakat@gmail.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Signed-off-by: Akash Hadke <Akash.Hadke@kpit.com>
-> Signed-off-by: Akash Hadke <hadkeakash4@gmail.com>
-> (cherry picked from commit 3c36a8efe2a964c3aa9bfcd836cee3f80a837fcd)
+> Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
 > ---
->   .../change_numMethods_from_bool_to_unsigned.patch  | 25 ++++++++++++++++++++++
->   meta-oe/recipes-extended/p7zip/p7zip_16.02.bb      | 21 ++++++++++++++++--
->   2 files changed, 44 insertions(+), 2 deletions(-)
->   create mode 100644 meta-oe/recipes-extended/p7zip/files/change_numMethods_from_bool_to_unsigned.patch
+>   ...5-add-openssl-legacy-provider-option.patch | 151 ++++++++++++++++++
+>   .../recipes-devtools/nodejs/nodejs_16.14.0.bb |   1 +
+>   2 files changed, 152 insertions(+)
+>   create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0005-add-openssl-legacy-provider-option.patch
 >
-> diff --git a/meta-oe/recipes-extended/p7zip/files/change_numMethods_from_bool_to_unsigned.patch b/meta-oe/recipes-extended/p7zip/files/change_numMethods_from_bool_to_unsigned.patch
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0005-add-openssl-legacy-provider-option.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0005-add-openssl-legacy-provider-option.patch
 > new file mode 100644
-> index 0000000..edde525
+> index 000000000..5af6c6114
 > --- /dev/null
-> +++ b/meta-oe/recipes-extended/p7zip/files/change_numMethods_from_bool_to_unsigned.patch
-> @@ -0,0 +1,25 @@
-> +fixes the below error
+> +++ b/meta-oe/recipes-devtools/nodejs/nodejs/0005-add-openssl-legacy-provider-option.patch
+> @@ -0,0 +1,151 @@
+> +From 86d1c0cc6a5dcf57e413a1cc1c29203e87cf9a14 Mon Sep 17 00:00:00 2001
+> +From: Daniel Bevenius <daniel.bevenius@gmail.com>
+> +Date: Sat, 16 Oct 2021 08:50:16 +0200
+> +Subject: [PATCH] src: add --openssl-legacy-provider option
 > +
-> +| ../../../../CPP/7zip/Archive/Wim/WimHandler.cpp: In member function 'virtual LONG NArchive::NWim::CHandler::GetArchiveProperty(PROPID, PROPVARIANT*)':
-> +| ../../../../CPP/7zip/Archive/Wim/WimHandler.cpp:308:11: error: use of an operand of type 'bool' in 'operator++' is forbidden in C++17
-> +|   308 |           numMethods++;
-> +|       |           ^~~~~~~~~~
-> +| ../../../../CPP/7zip/Archive/Wim/WimHandler.cpp:318:9: error: use of an operand of type 'bool' in 'operator++' is forbidden in C++17
-> +|   318 |         numMethods++;
+> +This commit adds an option to Node.js named --openssl-legacy-provider
+> +and if specified will load OpenSSL 3.0 Legacy provider.
 > +
+> +$ ./node --help
+> +...
+> +--openssl-legacy-provider  enable OpenSSL 3.0 legacy provider
 > +
-> +use unsigned instead of bool
-
-Missing "Upstream-Status":
-
--armin
-> +Signed-off-by: Nisha Parrakat <Nisha.Parrakat@kpit.com>
+> +Example usage:
 > +
-> +Upstream-Status: Pending
-> +--- ./CPP/7zip/Archive/Wim/WimHandler.cpp       2021-05-20 10:51:56.997402701 +0000
-> ++++ ./CPP/7zip/Archive/Wim/WimHandler.cpp       2021-05-20 10:52:16.665604125 +0000
-> +@@ -298,7 +298,7 @@
-> +
-> +       AString res;
-> +
-> +-      bool numMethods = 0;
-> ++      unsigned numMethods = 0;
-> +       for (unsigned i = 0; i < ARRAY_SIZE(k_Methods); i++)
-> +       {
-> +         if (methodMask & ((UInt32)1 << i
-> diff --git a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
-> index ebe32f1..8984f96 100644
-> --- a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
-> +++ b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
-> @@ -9,6 +9,7 @@ SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_al
->              file://do_not_override_compiler_and_do_not_strip.patch \
->              file://CVE-2017-17969.patch \
->              file://0001-Fix-narrowing-errors-Wc-11-narrowing.patch \
-> +           file://change_numMethods_from_bool_to_unsigned.patch \
->              file://CVE-2018-5996.patch \
->              "
->   
-> @@ -17,10 +18,26 @@ SRC_URI[sha256sum] = "5eb20ac0e2944f6cb9c2d51dd6c4518941c185347d4089ea89087ffdd6
->   
->   S = "${WORKDIR}/${BPN}_${PV}"
->   
-> +do_compile_append() {
-> +    oe_runmake 7z
+> +$ ./node --openssl-legacy-provider  -p 'crypto.createHash("md4")'
+> +Hash {
+> +  _options: undefined,
+> +  [Symbol(kHandle)]: Hash {},
+> +  [Symbol(kState)]: { [Symbol(kFinalized)]: false }
 > +}
-> +FILES_${PN} += "${libdir}/* ${bindir}/7z"
 > +
-> +FILES_SOLIBSDEV = ""
-> +INSANE_SKIP_${PN} += "dev-so"
+> +Co-authored-by: Richard Lau <rlau@redhat.com>
 > +
->   do_install() {
->   	install -d ${D}${bindir}
-> -	install -m 0755 ${S}/bin/* ${D}${bindir}
-> +	install -d ${D}${bindir}/Codecs
-> +	install -d ${D}${libdir}
-> +	install -d ${D}${libdir}/Codecs
-> +	install -m 0755 ${S}/bin/7za ${D}${bindir}
->   	ln -s 7za ${D}${bindir}/7z
-> +	install -m 0755 ${S}/bin/Codecs/* ${D}${libdir}/Codecs/
-> +	install -m 0755 ${S}/bin/7z.so ${D}${libdir}/lib7z.so
->   }
->   
-> -BBCLASSEXTEND = "native"
-> +RPROVIDES_${PN} += "lib7z.so()(64bit) 7z lib7z.so"
-> +RPROVIDES_${PN}-dev += "lib7z.so()(64bit) 7z lib7z.so"
+> +Refs: https://github.com/nodejs/node/issues/40455
+
+The patch is self is missing:
+
+Signed-off-by: "you"
+Upstream-Status: (see 
+https://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines)
+
+
+> +---
+> + doc/api/cli.md                                         | 10 ++++++++++
+> + src/crypto/crypto_util.cc                              | 10 ++++++++++
+> + src/node_options.cc                                    | 10 ++++++++++
+> + src/node_options.h                                     |  7 +++++++
+> + .../test-process-env-allowed-flags-are-documented.js   |  5 +++++
+> + 5 files changed, 42 insertions(+)
 > +
-> +BBCLASSEXTEND = "native nativesdk"
+> +diff --git a/doc/api/cli.md b/doc/api/cli.md
+> +index 74057706bf8d..608b9cdeddf1 100644
+> +--- a/doc/api/cli.md
+> ++++ b/doc/api/cli.md
+> +@@ -687,6 +687,14 @@ Load an OpenSSL configuration file on startup. Among other uses, this can be
+> + used to enable FIPS-compliant crypto if Node.js is built
+> + against FIPS-enabled OpenSSL.
+> +
+> ++### `--openssl-legacy-provider`
+> ++<!-- YAML
+> ++added: REPLACEME
+> ++-->
+> ++
+> ++Enable OpenSSL 3.0 legacy provider. For more information please see
+> ++[providers readme][].
+> ++
+> + ### `--pending-deprecation`
+> +
+> + <!-- YAML
+> +@@ -1544,6 +1552,7 @@ Node.js options that are allowed are:
+> + * `--no-warnings`
+> + * `--node-memory-debug`
+> + * `--openssl-config`
+> ++* `--openssl-legacy-provider`
+> + * `--pending-deprecation`
+> + * `--policy-integrity`
+> + * `--preserve-symlinks-main`
+> +@@ -1933,6 +1942,7 @@ $ node --max-old-space-size=1536 index.js
+> + [emit_warning]: process.md#processemitwarningwarning-options
+> + [jitless]: https://v8.dev/blog/jitless
+> + [libuv threadpool documentation]: https://docs.libuv.org/en/latest/threadpool.html
+> ++[providers readme]: https://github.com/openssl/openssl/blob/openssl-3.0.0/README-PROVIDERS.md
+> + [remote code execution]: https://www.owasp.org/index.php/Code_Injection
+> + [security warning]: #warning-binding-inspector-to-a-public-ipport-combination-is-insecure
+> + [timezone IDs]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+> +diff --git a/src/crypto/crypto_util.cc b/src/crypto/crypto_util.cc
+> +index 7e0c8ba3eb60..796ea3025e41 100644
+> +--- a/src/crypto/crypto_util.cc
+> ++++ b/src/crypto/crypto_util.cc
+> +@@ -148,6 +148,16 @@ void InitCryptoOnce() {
+> +   }
+> + #endif
+> +
+> ++#if OPENSSL_VERSION_MAJOR >= 3
+> ++  // --openssl-legacy-provider
+> ++  if (per_process::cli_options->openssl_legacy_provider) {
+> ++    OSSL_PROVIDER* legacy_provider = OSSL_PROVIDER_load(nullptr, "legacy");
+> ++    if (legacy_provider == nullptr) {
+> ++      fprintf(stderr, "Unable to load legacy provider.\n");
+> ++    }
+> ++  }
+> ++#endif
+> ++
+> +   OPENSSL_init_ssl(0, settings);
+> +   OPENSSL_INIT_free(settings);
+> +   settings = nullptr;
+> +diff --git a/src/node_options.cc b/src/node_options.cc
+> +index 00bdc6688a4c..3363860919a9 100644
+> +--- a/src/node_options.cc
+> ++++ b/src/node_options.cc
+> +@@ -4,6 +4,9 @@
+> + #include "env-inl.h"
+> + #include "node_binding.h"
+> + #include "node_internals.h"
+> ++#if HAVE_OPENSSL
+> ++#include "openssl/opensslv.h"
+> ++#endif
+> +
+> + #include <errno.h>
+> + #include <sstream>
+> +diff --git a/src/node_options.h b/src/node_options.h
+> +index fd772478d04d..1c0e018ab16f 100644
+> +--- a/src/node_options.h
+> ++++ b/src/node_options.h
+> +@@ -11,6 +11,10 @@
+> + #include "node_mutex.h"
+> + #include "util.h"
+> +
+> ++#if HAVE_OPENSSL
+> ++#include "openssl/opensslv.h"
+> ++#endif
+> ++
+> + namespace node {
+> +
+> + class HostPort {
+> +@@ -251,6 +255,9 @@ class PerProcessOptions : public Options {
+> +   bool enable_fips_crypto = false;
+> +   bool force_fips_crypto = false;
+> + #endif
+> ++#if OPENSSL_VERSION_MAJOR >= 3
+> ++  bool openssl_legacy_provider = false;
+> ++#endif
+> +
+> +   // Per-process because reports can be triggered outside a known V8 context.
+> +   bool report_on_fatalerror = false;
+> +diff --git a/test/parallel/test-process-env-allowed-flags-are-documented.js b/test/parallel/test-process-env-allowed-flags-are-documented.js
+> +index 64626b71f019..8a4e35997907 100644
+> +--- a/test/parallel/test-process-env-allowed-flags-are-documented.js
+> ++++ b/test/parallel/test-process-env-allowed-flags-are-documented.js
+> +@@ -43,6 +43,10 @@ for (const line of [...nodeOptionsLines, ...v8OptionsLines]) {
+> +   }
+> + }
+> +
+> ++if (!common.hasOpenSSL3) {
+> ++  documented.delete('--openssl-legacy-provider');
+> ++}
+> ++
+> + // Filter out options that are conditionally present.
+> + const conditionalOpts = [
+> +   {
+> +@@ -50,6 +54,7 @@ const conditionalOpts = [
+> +     filter: (opt) => {
+> +       return [
+> +         '--openssl-config',
+> ++        common.hasOpenSSL3 ? '--openssl-legacy-provider' : '',
+> +         '--tls-cipher-list',
+> +         '--use-bundled-ca',
+> +         '--use-openssl-ca',
+> +
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_16.14.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_16.14.0.bb
+> index 9514ec499..7b9644ec8 100644
+> --- a/meta-oe/recipes-devtools/nodejs/nodejs_16.14.0.bb
+> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_16.14.0.bb
+> @@ -20,6 +20,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+>              file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
+>              file://0002-Install-both-binaries-and-use-libdir.patch \
+>              file://0004-v8-don-t-override-ARM-CFLAGS.patch \
+> +           file://0005-add-openssl-legacy-provider-option.patch \
+>              file://big-endian.patch \
+>              file://mips-less-memory.patch \
+>              file://system-c-ares.patch \
 >
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#95681): https://lists.openembedded.org/g/openembedded-devel/message/95681
-> Mute This Topic: https://lists.openembedded.org/mt/89497302/3616698
+> View/Reply Online (#95799): https://lists.openembedded.org/g/openembedded-devel/message/95799
+> Mute This Topic: https://lists.openembedded.org/mt/89569235/3616698
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
