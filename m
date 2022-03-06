@@ -1,127 +1,198 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <nishaparrakat@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FABEC433EF
-	for <webhook@archiver.kernel.org>; Sun,  6 Mar 2022 17:16:45 +0000 (UTC)
-Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
- by mx.groups.io with SMTP id smtpd.web10.17147.1646587003823727870
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 107AAC433F5
+	for <webhook@archiver.kernel.org>; Sun,  6 Mar 2022 19:53:04 +0000 (UTC)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com
+ [209.85.218.47])
+ by mx.groups.io with SMTP id smtpd.web12.18460.1646596382900578193
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 06 Mar 2022 09:16:44 -0800
+ Sun, 06 Mar 2022 11:53:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.85,
- mailfrom: f_l_k@t-online.de)
-Received: from fwd78.dcpf.telekom.de (fwd78.aul.t-online.de [10.223.144.104])
-	by mailout11.t-online.de (Postfix) with SMTP id D40B0F91C
-	for <openembedded-devel@lists.openembedded.org>;
- Sun,  6 Mar 2022 18:16:41 +0100 (CET)
-Received: from flk-MS-7C91.fritz.box ([84.154.165.147]) by fwd78.t-online.de
-	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
-	esmtp id 1nQuUr-0WnDcX0; Sun, 6 Mar 2022 18:16:41 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-gnome][PATCHv2] evolution-data-server: update to v3.43.1
-Date: Sun,  6 Mar 2022 18:16:31 +0100
-Message-Id: <20220306171631.3814680-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ha8Wc1PU;
+ spf=pass (domain: gmail.com, ip: 209.85.218.47,
+ mailfrom: nishaparrakat@gmail.com)
+Received: by mail-ej1-f47.google.com with SMTP id qx21so27748033ejb.13
+        for <openembedded-devel@lists.openembedded.org>;
+ Sun, 06 Mar 2022 11:53:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :cc:references:from:in-reply-to:content-transfer-encoding;
+        bh=tzaN9IrNcpbVW1EnTm496BhdMD4WJyJfOcDHHIxUjAU=;
+        b=ha8Wc1PUw+XKwys8OjHaMQWgBXxtxHhyz1yjo2bSHH+1r6BfN8fDm5H6KJVTc9aUft
+         dxeP2vIMXDkVJuMPtv+VPRELW0MWlVTfyrySlx0RSO9BvsMUjZiYNVdiJt0SGg20FKZb
+         xx8ErYlqZ2Lw0D69pWUVpduWXNnkLnvKoLOdU06iYByhi9fK/iCpXb+ipB6cWqysvaQp
+         DYr23iKueawXZvg/+/qcbWeqaWboWAYNgYuMSfgfOQCJZtNSW9XFtk6EpnROSjeelwv0
+         t4ErRjoFBBYjfXxHNtfvDM0mdlHp1Y7EZaTDiOrAUtnX7dey+4PrZvNzvDqvb7xy6fF8
+         czcg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:cc:references:from:in-reply-to
+         :content-transfer-encoding;
+        bh=tzaN9IrNcpbVW1EnTm496BhdMD4WJyJfOcDHHIxUjAU=;
+        b=1Tmy8ikCYL+SlZ1e/t40rN+8wLx0qjFRjzJdAyLE0Q6Yx6VzRQD2P4FAe+vUmECVZ0
+         jPm1eJqWKr0vwzYFiFaNOgdYLwklUNwlguobj3DzW9Thz012VPwGUjtTGtBf4OQFyc3E
+         9amksJCoI7YQ2YOjHleKk9N2Hys6V0KIB6Sy+pKQ6t69TyOtlGxeaQaGnTqNRGKbm+In
+         2Jdlv/5FWjD41GGQoSmPOBAxJUapAo1goEKHwe6n9BKSq3TA5Ih7l2A6va493c8CE9G9
+         HF+zX4EH1pRf2lsY3L6iRYN4DhQM8R+gBmN559t9FsjEOWyCEbGlMBl+x+C+k+pb2VaO
+         C9FQ==
+X-Gm-Message-State: AOAM531yKiQVbAmzEsao0zzvWZFYQizNNdejtA188iIxXoyw6Arkn+8o
+	HnARMyhOvnHOR8wkjHp3F7Y=
+X-Google-Smtp-Source: 
+ ABdhPJx6edeHltBEISiXz1BvUYVyaCC+XqwdS903eNMaUqnJmLoMkfaZsTk3CSvmIYAaWThTgTXRwQ==
+X-Received: by 2002:a17:906:2bc1:b0:6cf:d009:7f6b with SMTP id
+ n1-20020a1709062bc100b006cfd0097f6bmr6649710ejg.17.1646596381269;
+        Sun, 06 Mar 2022 11:53:01 -0800 (PST)
+Received: from ?IPV6:2003:c0:f45:8e08:b2f2:a000:5828:3f16?
+ (p200300c00f458e08b2f2a00058283f16.dip0.t-ipconnect.de.
+ [2003:c0:f45:8e08:b2f2:a000:5828:3f16])
+        by smtp.gmail.com with ESMTPSA id
+ k9-20020a1709063e0900b0069f263a80fesm4117179eji.171.2022.03.06.11.52.59
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 06 Mar 2022 11:53:00 -0800 (PST)
+Message-ID: <7cc31e53-fff4-76c1-87bc-7d10cc630c47@gmail.com>
+Date: Sun, 6 Mar 2022 20:52:59 +0100
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1646587001-0000AD4E-E2B12522/0/0 CLEAN NORMAL
-X-TOI-MSGID: cdaabf35-eabf-46f2-b3f3-b6ad2a62b1ef
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Subject: Re: [oe] [meta-oe][master][PATCH] libtinyxml2: fix packaging of test
+ files
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>, akuster808 <akuster808@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <20220305213515.5572-1-nisha.m.parrakat@bmw.de>
+ <6a14ee75-6c38-c7c4-7942-09db621ac036@gmail.com>
+ <CAMKF1spcUmsW=1sVwH7jCXVaobTTLLQ7=3i1ODgVk3qf+Q3V7A@mail.gmail.com>
+From: nisha parrakat <nishaparrakat@gmail.com>
+In-Reply-To: 
+ <CAMKF1spcUmsW=1sVwH7jCXVaobTTLLQ7=3i1ODgVk3qf+Q3V7A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 06 Mar 2022 17:16:45 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 06 Mar 2022 19:53:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95818
+ https://lists.openembedded.org/g/openembedded-devel/message/95819
 
-fix evolution-data-server build in the same way it was done for libical
+HI Khem,
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../evolution-data-server/evolution-data-server.bb  |  3 ++-
- .../evolution-data-server/evolution-data-server.inc |  4 ++--
- ...1-cmake-Do-not-export-CC-into-gir-compiler.patch | 13 +++++++++++++
- 3 files changed, 17 insertions(+), 3 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/evolution-data-server/evolut=
-ion-data-server/0001-cmake-Do-not-export-CC-into-gir-compiler.patch
+unable to understand why it doesn't apply.
 
-diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-dat=
-a-server.bb b/meta-gnome/recipes-gnome/evolution-data-server/evolution-da=
-ta-server.bb
-index 59856f3ab..f6b719392 100644
---- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
-r.bb
-+++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
-r.bb
-@@ -11,6 +11,7 @@ inherit pkgconfig gsettings gobject-introspection featu=
-res_check cmake gtk-doc g
- REQUIRED_DISTRO_FEATURES =3D "x11"
-=20
- SRC_URI +=3D " \
-+    file://0001-cmake-Do-not-export-CC-into-gir-compiler.patch \
-     file://0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch \
-     file://0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch \
-     file://0003-contact-Replace-the-Novell-sample-contact-with-somet.pat=
-ch \
-@@ -25,7 +26,7 @@ GI_DATA_ENABLED=3D"False"
- EXTRA_OECMAKE =3D " \
-     -DSYSCONF_INSTALL_DIR=3D${sysconfdir} \
-     -DWITH_KRB5=3DOFF \
--    -DENABLE_UOA=3DOFF \
-+    -DENABLE_GOA=3DOFF \
-     -DENABLE_GOOGLE_AUTH=3DOFF \
-     -DENABLE_WEATHER=3DOFF \
-     -DVAPIGEN=3D${STAGING_BINDIR_NATIVE}/vapigen \
-diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-dat=
-a-server.inc b/meta-gnome/recipes-gnome/evolution-data-server/evolution-d=
-ata-server.inc
-index d22310f7e..bcbe20d75 100644
---- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
-r.inc
-+++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
-r.inc
-@@ -9,5 +9,5 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6a6e689d19255c=
-f0557f3fe7d7068212 \
-=20
- inherit gnomebase upstream-version-is-even
-=20
--SRC_URI[archive.sha256sum] =3D "6f5847a1234799073e9585db861c21381a09ed55=
-0dc0a2125f00ba5f90bd361d"
--PV =3D "3.42.3"
-+SRC_URI[archive.sha256sum] =3D "8c437af75edbef196034f7913f505c3f68acc185=
-15a6eed20f3ef52452785898"
-+PV =3D "3.43.1"
-diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-dat=
-a-server/0001-cmake-Do-not-export-CC-into-gir-compiler.patch b/meta-gnome=
-/recipes-gnome/evolution-data-server/evolution-data-server/0001-cmake-Do-=
-not-export-CC-into-gir-compiler.patch
-new file mode 100644
-index 000000000..8fd077ced
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-serve=
-r/0001-cmake-Do-not-export-CC-into-gir-compiler.patch
-@@ -0,0 +1,13 @@
-+--- a/cmake/modules/GObjectIntrospection.cmake	2022-03-06 18:10:47.72418=
-4883 +0100
-++++ b/cmake/modules/GObjectIntrospection.cmake	2022-03-06 18:10:12.56045=
-0948 +0100
-+@@ -122,9 +122,7 @@
-+ 		file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/${_gir_name}_files "${_gir_fil=
-es}")
-+=20
-+ 		add_custom_command(
-+-			COMMAND ${CMAKE_COMMAND} -E env "CC=3D'${CMAKE_C_COMPILER}'" LDFLAGS=
-=3D
-+-				${INTROSPECTION_SCANNER_ENV}
-+-				${G_IR_SCANNER}
-++			COMMAND ${G_IR_SCANNER}
-+ 				${INTROSPECTION_SCANNER_ARGS}
-+ 				--namespace=3D${_gir_namespace}
-+ 				--nsversion=3D${_gir_version}
---=20
-2.25.1
+it seems to build locally at my system.
 
+The file that i patch that is CMakeLists.txt is of format dos. Is that 
+creating a problem ?
+
+
+regards
+
+Nisha P
+
+
+
+On 06.03.22 04:55, Khem Raj wrote:
+> this patch does not apply again
+>
+> https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1488
+>
+> On Sat, Mar 5, 2022 at 1:49 PM akuster808 <akuster808@gmail.com> wrote:
+>> Nisha,
+>>
+>> thanks for the patch. feedback in-lined below.
+>>
+>> On 3/5/22 13:35, Nisha Parrakat wrote:
+>>> The xml files inside the resources are to be used for the
+>>> run of test named xmltest
+>>> they were not getting copied from the source directory to the directory
+>>> where xmltest was installed
+>>>
+>>> fixes the below error when code built with cmake
+>>> ./xmltest
+>>> Error opening test file 'dream.xml'.
+>>> Is your working directory the same as where
+>>> the xmltest.cpp and dream.xml file are?
+>>>
+>>> Upstream-Status: Submitted (https://github.com/leethomason/tinyxml2/pull/902)
+>> This seems to confuse folks a lot. The "Upstream-Status" needs to be in
+>> the patch it self, not the commit message.
+>>
+>> see below.
+>>
+>>> Signed-off-by: Nisha Parrakat <nisha.m.parrakat@bmw.de>
+>>> ---
+>>>    ...y_resources_with_tests_in_CMakelists.patch | 30 +++++++++++++++++++
+>>>    .../libtinyxml2/libtinyxml2_9.0.0.bb          |  4 ++-
+>>>    2 files changed, 33 insertions(+), 1 deletion(-)
+>>>    create mode 100644 meta-oe/recipes-support/libtinyxml2/files/copy_resources_with_tests_in_CMakelists.patch
+>>>
+>>> diff --git a/meta-oe/recipes-support/libtinyxml2/files/copy_resources_with_tests_in_CMakelists.patch b/meta-oe/recipes-support/libtinyxml2/files/copy_resources_with_tests_in_CMakelists.patch
+>>> new file mode 100644
+>>> index 000000000..09245ad36
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-support/libtinyxml2/files/copy_resources_with_tests_in_CMakelists.patch
+>>> @@ -0,0 +1,30 @@
+>>> +The xml files inside the resources are to be used for the
+>>> +run of test named xmltest
+>>> +they were not getting copied from the source directory to the directory
+>>> +where xmltest was installed
+>>> +
+>>> +fixes the below error when code built with cmake
+>>> +./xmltest
+>>> +Error opening test file 'dream.xml'.
+>>> +Is your working directory the same as where
+>>> +the xmltest.cpp and dream.xml file are?
+>> Here:
+>>
+>> Upstream-Status: Submitted (https://github.com/leethomason/tinyxml2/pull/902)
+>>
+>>
+>> -armin
+>>> +
+>>> +Signed-off-by: Nisha Parrakat <nisha.m.parrakat@bmw.de>
+>>> +Signed-off-by: Nisha Parrakat <nishaparrakat@gmail.com>
+>>> +
+>>> +Upstream-Status: Submitted (https://github.com/leethomason/tinyxml2/pull/902)
+>>> +--- a/CMakeLists.txt 2022-03-05 22:00:33.361601287 +0100
+>>> ++++ b/CMakelist.txt  2022-03-05 22:05:19.953940006 +0100
+>>> +@@ -51,6 +51,12 @@
+>>> +         WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+>>> +     )
+>>> +
+>>> ++    # Copy test resources and create test output directory
+>>> ++    add_custom_command(TARGET xmltest POST_BUILD
+>>> ++    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/resources $<TARGET_FILE_DIR:xmltest>/resources
+>>> ++    COMMAND ${CMAKE_COMMAND} -E make_directory $<TARGET_FILE_DIR:xmltest>/resources/out
+>>> ++    COMMENT "Configuring xmltest resources directory: ${CMAKE_CURRENT_BINARY_DIR}/resources"
+>>> ++    )
+>>> +     set_tests_properties(xmltest PROPERTIES PASS_REGULAR_EXPRESSION ", Fail 0")
+>>> + endif ()
+>>> +
+>>> diff --git a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_9.0.0.bb b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_9.0.0.bb
+>>> index 7f205987f..06410ab6e 100644
+>>> --- a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_9.0.0.bb
+>>> +++ b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_9.0.0.bb
+>>> @@ -4,7 +4,9 @@ SECTION = "libs"
+>>>    LICENSE = "Zlib"
+>>>    LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=135624eef03e1f1101b9ba9ac9b5fffd"
+>>>
+>>> -SRC_URI = "git://github.com/leethomason/tinyxml2.git;branch=master;protocol=https"
+>>> +SRC_URI = "git://github.com/leethomason/tinyxml2.git;branch=master;protocol=https \
+>>> +           file://copy_resources_with_tests_in_CMakelists.patch \
+>>> +          "
+>>>
+>>>    SRCREV = "1dee28e51f9175a31955b9791c74c430fe13dc82"
+>>>
+>>>
+>>> -=-=-=-=-=-=-=-=-=-=-=-
+>>> Links: You receive all messages sent to this group.
+>>> View/Reply Online (#95806): https://lists.openembedded.org/g/openembedded-devel/message/95806
+>>> Mute This Topic: https://lists.openembedded.org/mt/89522514/3616698
+>>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+>>> -=-=-=-=-=-=-=-=-=-=-=-
+>>>
 
