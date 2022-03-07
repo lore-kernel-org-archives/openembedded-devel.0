@@ -2,101 +2,127 @@ Return-Path: <jsbronder@cold-front.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 38366C433F5
-	for <webhook@archiver.kernel.org>; Mon,  7 Mar 2022 20:19:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24133C433EF
+	for <webhook@archiver.kernel.org>; Mon,  7 Mar 2022 20:19:03 +0000 (UTC)
 Received: from wout5-smtp.messagingengine.com (wout5-smtp.messagingengine.com
  [64.147.123.21])
- by mx.groups.io with SMTP id smtpd.web09.210.1646684339816076520
+ by mx.groups.io with SMTP id smtpd.web09.211.1646684342161556295
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Mar 2022 12:19:00 -0800
+ Mon, 07 Mar 2022 12:19:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@cold-front.org header.s=mesmtp header.b=icsioONj;
+ dkim=pass header.i=@cold-front.org header.s=mesmtp header.b=lP83UKiu;
  spf=pass (domain: cold-front.org, ip: 64.147.123.21,
  mailfrom: jsbronder@cold-front.org)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
-	by mailout.west.internal (Postfix) with ESMTP id 383C53201487
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+	by mailout.west.internal (Postfix) with ESMTP id AC6573200B23
 	for <openembedded-devel@lists.openembedded.org>;
- Mon,  7 Mar 2022 15:18:59 -0500 (EST)
-Received: from mailfrontend1 ([10.202.2.162])
-  by compute3.internal (MEProxy); Mon, 07 Mar 2022 15:18:59 -0500
+ Mon,  7 Mar 2022 15:19:01 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute4.internal (MEProxy); Mon, 07 Mar 2022 15:19:01 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
 	 h=cc:content-transfer-encoding:date:date:from:from:in-reply-to
-	:message-id:mime-version:reply-to:sender:subject:subject:to:to;
-	 s=mesmtp; bh=4Y8121bJRIsnXvHQF7K3MWmJtWLL52tz3Cc+aeIOLzE=; b=ic
-	sioONjPkrIxPNz/48P6lKNbDwEorC9l2QIOK0CK1sZ59aD60C8c//5HAFIfi0s0I
-	ei751kjksXmZxMPvAhp3kx6KL+FRJQ3jK59+BbC72X1Ow/jmcp0PTAxnUXRLE6om
-	V2CG8QYZlL5qdOmntATjbGxoNLk7JUywK35zYYsl4=
+	:in-reply-to:message-id:mime-version:references:reply-to:sender
+	:subject:subject:to:to; s=mesmtp; bh=xleFbUNWoZjajx4HXYNejLqtTPm
+	rSt/c1ATOwXy+s6U=; b=lP83UKiuvmRpvnL0nrrqtYyjtiojoP43uBn1/35rJO+
+	411GYvaDwKPyLWN8AhtmW6i9jVR++k/+LCS8J7Mi11G84TLAkx0Y5sg0RhN9SvCS
+	VOkwbP45NhcLLv4SYsC+RRlGRrW4b935djD7zd12LVGIrNy1Ayh3w3Rjg740net0
+	=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:content-transfer-encoding:date:date
-	:from:from:in-reply-to:message-id:mime-version:reply-to:sender
-	:subject:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender
-	:x-me-sender:x-sasl-enc; s=fm2; bh=4Y8121bJRIsnXvHQF7K3MWmJtWLL5
-	2tz3Cc+aeIOLzE=; b=nCubaOcHjq9vkQVLcuNqxSc83tkGQeqPJZ38PXY7FepH2
-	dt8sU4jvmCNMkAbgNidc5J3B31TI/XiwMBU6mtsNdSUR54FLByIeFYrQDXa76Vx2
-	Giti1bhB8hUOoIV46cvxzuFX6PM4ojDPgyYaLAN5Qt6zuV/ilyZ4+aM/wECH2OOh
-	ppEG2XotylEbGTd/f/6z2GRV5EFVgRv9r4AEdy2fiRN1suxDoCPrjI2A+jN3jecx
-	FDwN06GuQEsKM1kPvzrxrttRow00RfM3uPQfShMXy2JKpxYCRt9e5KbsdqKEzPpA
-	hkcGUOE+6CHOSqt4A29kYf0zZk/oWaOWYsdSUTBAA==
-X-ME-Sender: <xms:smgmYo0YQNk69U94oaeK0AtVJ-FyK_iRW5PvD3tOYYuMckGU2JR4pA>
-    <xme:smgmYjE-S0ZqY7mr4h-CMYV2dvj_BogLkbUbInjU5e3WpvQZNfuoZB2rrJCV4i6cH
-    CgRT-FfrbQQNnPhGw>
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:sender:subject:subject:to:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=xleFbU
+	NWoZjajx4HXYNejLqtTPmrSt/c1ATOwXy+s6U=; b=JYRTX5UtQqy9P8wEG+aItA
+	RE2TzxKLUjhDJ8jO2SVA2evibqg6Y3TSSNcoPkW6VnBoXff7u0xQdVmU0rQQeCGm
+	DutKfNn5vVykkontCz95PQuLNEQN4sz8vIh9I7GCeMIQcKKjuuTTDNLx/1tpRmVP
+	1Pl9l5Gkq4r9klWK2gwQLI17EaTJMauU0sz4ARBBmu8Vcs/0fyJpB0VlvsmPFTb4
+	pUW+1j7FSlQruBessYXT9yvfDg3PexNlRa64mHizcQEkq+pZBdVRwPkQT0NmlN8Z
+	xH0a3/qKFxk+ZNHDM3+SAA7b7FuIrWvEwA+dWtHBdryNKvfqtfeoYxBJOop/sHMw
+	==
+X-ME-Sender: <xms:tWgmYo-gSGrR6Ol_CnjbygpxIUBaA_Gm4onE6V4IhyDX1GsQPiv5KA>
+    <xme:tWgmYgvz9s5SLy47-8QP0ucEi3ZGtnQG0tsIRTkEaKJdn4IkDIL7xm4pBl7VIha0u
+    jMFaKanMW6JOy7Uvw>
 X-ME-Received: 
- <xmr:smgmYg7ZdVJYww96EYt7aEDGbj9GGH26qfGhqG_bSsaaCY638f-l6_RIDfYH2VfrlQi_utlQ8lg6xYwASCTFzras1mk-LynJTRBsN2kOINfp>
+ <xmr:tWgmYuC1BY2L5kFrW-CVmYdj99Oco-0Pbsdd7eK-TuEpuQKh5Y1pZNATK7n0duvbZ0nQWyzE0-TlVFSPOxqhvjlXHnRzdn0c1GTYuB4hOe6e>
 X-ME-Proxy-Cause: 
- gggruggvucftvghtrhhoucdtuddrgedvvddruddugedgudefiecutefuodetggdotefrod
+ gggruggvucftvghtrhhoucdtuddrgedvvddruddugedgudefhecutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
-    necuuegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffoggfgsedtkeertd
-    ertddtnecuhfhrohhmpefluhhsthhinhcuuehrohhnuggvrhcuoehjshgsrhhonhguvghr
-    segtohhlugdqfhhrohhnthdrohhrgheqnecuggftrfgrthhtvghrnheptedtgefhhfdtie
-    dvhfekieffkeelheettefgieeuhfeuffffheevveeuhfeigedtnecuffhomhgrihhnpehg
-    ihhthhhusgdrtghomhenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
-    hlfhhrohhmpehjshgsrhhonhguvghrsegtohhlugdqfhhrohhnthdrohhrgh
-X-ME-Proxy: <xmx:smgmYh1r-34uC69CFvoZMpqh0FC-QKdRpsoyb_J7BUTXLrdrJR9XuA>
-    <xmx:smgmYrFtSBRBit48adjbd95XfT42KDntYRstL_NiSwz0gpg2BgTT4A>
-    <xmx:smgmYq9WdtNRKhvAwYfW_iBhQkrpuEXudOuKt02JNZ8K8wFCgHwYvA>
-    <xmx:smgmYiymLKfW74MtsVCB87bAsGXKA_Bmeyy4YQ49v-eYcu56Mh4Png>
+    necuuegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffojghfggfgsedtke
+    ertdertddtnecuhfhrohhmpefluhhsthhinhcuuehrohhnuggvrhcuoehjshgsrhhonhgu
+    vghrsegtohhlugdqfhhrohhnthdrohhrgheqnecuggftrfgrthhtvghrnhepheelteetje
+    eiieetjeeuueefuddulefggeffveeikeevffelgeeigfefteehgfeknecuffhomhgrihhn
+    pehgihhthhhusgdrtghomhenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmh
+    grihhlfhhrohhmpehjshgsrhhonhguvghrsegtohhlugdqfhhrohhnthdrohhrgh
+X-ME-Proxy: <xmx:tWgmYoccOVx89Z3Szu7QgH_gXvtlUgGQe4kGMldKaDB4LiwkgAYpQA>
+    <xmx:tWgmYtMzqi7UcZbRiR6x7xF86Xl0xpmCl765TOkr7hb-mkAMYK50rw>
+    <xmx:tWgmYik_cgqUWuu-DPyu2rTJYkzJEuYK5j4eB3xrwxaL94QPGo6XeA>
+    <xmx:tWgmYkZcJHQKClQtHRA8NqTyN1XozCOhUDluuUKKtJzjudClbMIjfQ>
 Received: by mail.messagingengine.com (Postfix) with ESMTPA for
  <openembedded-devel@lists.openembedded.org>; Mon,
- 7 Mar 2022 15:18:58 -0500 (EST)
+ 7 Mar 2022 15:19:01 -0500 (EST)
 From: Justin Bronder <jsbronder@cold-front.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 1/2] python3-pyserial-asyncio: add 0.6
-Date: Mon,  7 Mar 2022 15:17:01 -0500
-Message-Id: <20220307201702.31435-1-jsbronder@cold-front.org>
+Subject: [meta-python][PATCH 2/2] python3-pymodbus: add 2.5.3
+Date: Mon,  7 Mar 2022 15:17:02 -0500
+Message-Id: <20220307201702.31435-2-jsbronder@cold-front.org>
 X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220307201702.31435-1-jsbronder@cold-front.org>
+References: <20220307201702.31435-1-jsbronder@cold-front.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 07 Mar 2022 20:19:01 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 07 Mar 2022 20:19:03 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95873
-
-Dependency of python3-pymodbus.
+ https://lists.openembedded.org/g/openembedded-devel/message/95874
 
 Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
 ---
- .../python/python3-pyserial-asyncio_0.6.bb             | 10 ++++++++++
- 1 file changed, 10 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pyserial-asyncio_0.6.bb
+ .../python/python3-pymodbus_2.5.3.bb          | 34 +++++++++++++++++++
+ 1 file changed, 34 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pymodbus_2.5.3.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyserial-asyncio_0.6.bb b/meta-python/recipes-devtools/python/python3-pyserial-asyncio_0.6.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pymodbus_2.5.3.bb b/meta-python/recipes-devtools/python/python3-pymodbus_2.5.3.bb
 new file mode 100644
-index 0000000000..30ff62a7ed
+index 0000000000..b628cadafe
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyserial-asyncio_0.6.bb
-@@ -0,0 +1,10 @@
-+SUMMARY = "Python Serial Port Extension - Asynchronous I/O support"
-+HOMEPAGE = "https://github.com/pyserial/pyserial-asyncio"
++++ b/meta-python/recipes-devtools/python/python3-pymodbus_2.5.3.bb
+@@ -0,0 +1,34 @@
++SUMMARY = "A fully featured modbus protocol stack in python"
++HOMEPAGE = "https://github.com/riptideio/pymodbus/"
 +LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9a79418f241689e78034391d51162d24"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=2c2223d66c7e674b40527b5a4c35bd76"
++DEPENDS += "python3-six-native"
 +
-+SRC_URI[sha256sum] = "b6032923e05e9d75ec17a5af9a98429c46d2839adfaf80604d52e0faacd7a32f"
++SRC_URI[sha256sum] = "5ef68c1a109bdb467c830ef003ef2db6494349a5248e4af946fe21c9eefe7e74"
++S = "${WORKDIR}/pymodbus-${PV}"
 +
 +inherit pypi setuptools3
 +
-+RDEPENDS:${PN} += "python3-asyncio python3-core python3-pyserial"
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[repl] = ",,,python3-aiohttp python3-click python3-prompt-toolkit python3-pygments python3-pyserial-asyncio"
++PACKAGECONFIG[tornado] = ",,,python3-tornado"
++PACKAGECONFIG[twisted] = ",,,python3-twisted-conch"
++PACKAGECONFIG[redis] = ",,,python3-redis"
++PACKAGECONFIG[sql] = ",,,python3-sqlalchemy"
++
++RDEPENDS:${PN} += " \
++    python3-asyncio \
++    python3-core \
++    python3-io \
++    python3-json \
++    python3-logging \
++    python3-math \
++    python3-netserver \
++"
++
++RDEPENDS:${PN} += " \
++    python3-pyserial \
++    python3-six \
++"
++
++
 -- 
 2.35.1
 
