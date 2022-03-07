@@ -2,73 +2,73 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E24DC433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C25BC433EF
 	for <webhook@archiver.kernel.org>; Mon,  7 Mar 2022 12:45:06 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web12.25705.1646657104293069852
+Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com
+ [195.245.230.17])
+ by mx.groups.io with SMTP id smtpd.web09.25879.1646657104543851747
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 07 Mar 2022 04:45:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ubT+wxPl;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=uCos12wz;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.17,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1646657102; i=@fujitsu.com;
-	bh=9AR9EH8k2WBjWH8OBELSsppWePc7z5CVpC+853sSsDQ=;
+	bh=IXXZrVWKEDmfMQPnsbu8cUq1WzG/WoCI7QjEIjH4nOo=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=ubT+wxPlJ/T8WDXWGL9KRHKlZfrO9VyWQbqyPhRuzJI/8xxjpUha4En0Zee9bhWSZ
-	 alM/H9W6VzrkplyDWAbqmc5lcKZUrDbN3txzbvaoIr7I1lJIps9g7CLYWrBlTlMSpx
-	 XSpdpOGDNKfeWnGED4XK46pNjpNOc6nHaUcHoZeGOdJmMCjvDWGUKIMDHS8ohGMN/n
-	 97K0SgNTKWyScqHHW4chiSLrLcxUjgBkIRUe/iLhBOZVDRvoexVgOdbYtoYu+rsKWk
-	 Pag7gLPLValnj1pboWTppoWfBBRMAYxAnizBHo/li7b5oqS/lzUOBjayObUCqO1CaE
-	 7aei//CfwVfcQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrDIsWRWlGSWpSXmKPExsViZ8ORqOv3TzX
-  J4H83m8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmjFzfR9bwQGeiv+bNzE2ML7h6mLk4hASeMIo
-  8WLBHGYI5wKTxKXjW9ghnOOMEgf+PWPqYuTkYBNQk5h+6wYriC0ioC+xdPYeZhCbWUBF4sXvH
-  nYQW1jAWeLJru0sIDYLUHzt+f2MIDavgJNE89EOsHoJAQWJKQ/fg9mcQPWPnt4Es4WAap7cf8
-  cEUS8ocXLmExaI+RISB1+8gOpVlJh9uZkFwq6QmDWrjQnCVpO4em4T8wRGwVlI2mchaV/AyLS
-  K0TqpKDM9oyQ3MTNH19DAQNfQ0FTX2ELX0MhcL7FKN1EvtVS3PLW4RNdIL7G8WC+1uFivuDI3
-  OSdFLy+1ZBMjMJBTitXqdzC+WPlT7xCjJAeTkihvygLVJCG+pPyUyozE4oz4otKc1OJDjDIcH
-  EoSvF//AOUEi1LTUyvSMnOAUQWTluDgURLhDfkClOYtLkjMLc5Mh0idYlSUEuf9AdInAJLIKM
-  2Da4NF8iVGWSlhXkYGBgYhnoLUotzMElT5V4ziHIxKwrzuf4Gm8GTmlcBNfwW0mAlocZWtEsj
-  ikkSElFQDU/apk0KTpnx8/W9FAfOGgCCJ9uvev350sfJ72B2VTdKWk7r8+7OLW2Hnk14DzlVm
-  +eqSs9mPPnh5w844kfXTEaMP63/lGO/+aMaqqFT45/4TOd3592d2PpgjZzxfSHr+hMO8vxb9s
-  eM6PfubjcO8u+G9/6QeytTpl6punRKaZHCwNKbWv3DLmWsf9hVrvlyTVtbPcYqxwvDJQYWHCi
-  f/b06/aabek/fapDlf4/THM4ZvTyyRD9p295bCyujFTy9I77Iz5qxj5/1lVxT1aH1QWaT685f
-  /p/252NLyYN3bPwpPPXiY/TQO8m3UehCe+lno7b53ynw3pata1gdf+yIqqMxz2Jh7771u7m4P
-  th9qv5VYijMSDbWYi4oTAe0d5HtfAwAA
+	b=uCos12wzEcB6vo3tgq1MHU9Yo2C6nD0SOBB2NUcEX4yn8QtERov/HUR1oF2F2OX+B
+	 mM0AuYzIyO5EAaxbKiUa/Wy/sjmwQ44WYowKWmV8ej3v+vgIoHHCQMqijdjODGVyaR
+	 Rt6uyWKa04Br9y97peCMlc6+vUIzk/0LP4CE8cUW1UME+JnviQr+PkbIh1g4y1BMTX
+	 bkyP+3mzf6tni/6Nixyf/Au6Vh5akFTqY1zqRrlIcpDh8L1JiGpcOm9PM5l5n1nT28
+	 ZcmZh88zAzgNciV2eD3IiO6hs9HGJ9m+qAJMKNs+QHe1Cc7lQjxYqYQ05sqioRGjur
+	 r/gcH4ivlPp0g==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrNIsWRWlGSWpSXmKPExsViZ8ORqOv3TzX
+  JYNYBHouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPDxCuMBcdEKy7Ou8XUwLhbuIuRk0NI4Amj
+  xNkzeV2MXED2BSaJxacvMEI4xxklnnScZQSpYhNQk5h+6wYriC0ioC+xdPYeZhCbWUBF4sXvH
+  nYQW1jATmLnzb9gNgtQvGP3cZYuRg4OXgEniRsreUHCEgIKElMevgdr5RRwlnj09CYzxBFOEk
+  /uv2MCsXkFBCVOznzCAjFeQuLgixfMEL2KErMvN7NA2BUSs2a1MUHYahJXz21insAoOAtJ+yw
+  k7QsYmVYxWiUVZaZnlOQmZuboGhoY6Boamuoa6hoZGOslVukm6qWW6panFpfoGuollhfrpRYX
+  6xVX5ibnpOjlpZZsYgSGcEox4+kdjJv6fuodYpTkYFIS5U1ZoJokxJeUn1KZkVicEV9UmpNaf
+  IhRhoNDSYL36x+gnGBRanpqRVpmDjCeYNISHDxKIrwhX4DSvMUFibnFmekQqVOMxhw7t1zey8
+  zx4dCVvcxCLHn5ealS4rw/QCYJgJRmlObBDYLF+SVGWSlhXkYGBgYhnoLUotzMElT5V4ziHIx
+  Kwrzuf4Gm8GTmlcDtewV0ChPQKVW2SiCnlCQipKQamGKmvHzqJFHdXyMUF/bHhC1zAvu/2y3n
+  3y80lvzz6d6FlgMTXvku6D/Em1KQrv/wUP98xedP4h+71h8V3Tvl1p1kh3tmifYqC3Xqi8tep
+  l9MtkpKTJZaKinudnCl6wWBIsU7F7RnTOPgUEs5YqqkuWSays2Jf59n7kh5oXzBZMUpn1VRtx
+  nf8B/NlTh99Mdvn1ki/YySJd8OOk0ofCmxcuKr0Ne/hLa69E5LrD2atngu/71zys+/Cj9elqR
+  xTknE6tZpd46YS3e+LCwSmTN35qbytXOFUorXu++74Hhl/fbVa3piNwV3vOJvXfJ9r5hhWoRR
+  uc2y1r6C0Clde7wMBdRbZ+XvN94jX6pU4p6lnK7EUpyRaKjFXFScCABwyp2ebgMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-5.tower-565.messagelabs.com!1646657101!117161!1
+X-Msg-Ref: server-6.tower-585.messagelabs.com!1646657101!20749!1
 X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.8; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 31333 invoked from network); 7 Mar 2022 12:45:02 -0000
+Received: (qmail 14473 invoked from network); 7 Mar 2022 12:45:02 -0000
 Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-5.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-6.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 7 Mar 2022 12:45:02 -0000
 Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 9D36E1001A4
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 8436810019D
 	for <openembedded-devel@lists.openembedded.org>;
  Mon,  7 Mar 2022 12:45:01 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 81399100193
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 7693B100185
 	for <openembedded-devel@lists.openembedded.org>;
  Mon,  7 Mar 2022 12:45:01 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Mon, 7 Mar 2022 12:44:44 +0000
+ (TLS) id 15.0.1497.28; Mon, 7 Mar 2022 12:44:42 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] poppler: upgrade 22.02.0 -> 22.03.0
-Date: Mon, 7 Mar 2022 20:44:28 +0800
-Message-ID: <1646657069-56146-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] poco: upgrade 1.11.0 -> 1.11.1
+Date: Mon, 7 Mar 2022 20:44:27 +0800
+Message-ID: <1646657069-56146-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1646657069-56146-1-git-send-email-wangmy@fujitsu.com>
 References: <1646657069-56146-1-git-send-email-wangmy@fujitsu.com>
@@ -83,47 +83,70 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 07 Mar 2022 12:45:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95854
+ https://lists.openembedded.org/g/openembedded-devel/message/95856
 
-Changelog:
-=========
-core:
- * Signature: Fix finding Signatures that are in Pages not not in the global the Forms object
- * Signature: Improve getting the path to the firefox certificate database
- * Splash: Fix rendering of some joints. Issue #1212
- * Fix get_poppler_localdir for relocatable Windows builds
- * Minor code improvements
-
-qt:
- * Minor code improvements
-
-utils:
- * pdfimages: Fix the wrong Stream being passed for drawMaskedImage
-
-build system:
- * Small code improvements
+0001-fix-missing-expat-definition.patch
+removed since it's included in 1.11.1
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../poppler/{poppler_22.02.0.bb => poppler_22.03.0.bb}          | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/poppler/{poppler_22.02.0.bb => poppler_22.03.0.bb} (96%)
+ .../0001-fix-missing-expat-definition.patch   | 27 -------------------
+ .../poco/{poco_1.11.0.bb => poco_1.11.1.bb}   |  3 +--
+ 2 files changed, 1 insertion(+), 29 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/poco/poco/0001-fix-missing-expat-definition.patch
+ rename meta-oe/recipes-support/poco/{poco_1.11.0.bb => poco_1.11.1.bb} (97%)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler_22.02.0.bb b/meta-oe/recipes-support/poppler/poppler_22.03.0.bb
-similarity index 96%
-rename from meta-oe/recipes-support/poppler/poppler_22.02.0.bb
-rename to meta-oe/recipes-support/poppler/poppler_22.03.0.bb
-index a53b3fe65..a0d8be6af 100644
---- a/meta-oe/recipes-support/poppler/poppler_22.02.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_22.03.0.bb
-@@ -7,7 +7,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            file://0001-Do-not-overwrite-all-our-build-flags.patch \
-            file://basename-include.patch \
-            "
--SRC_URI[sha256sum] = "e390c8b806f6c9f0e35c8462033e0a738bb2460ebd660bdb8b6dca01556193e1"
-+SRC_URI[sha256sum] = "728c78ba94d75a55f6b6355d4fbdaa6f49934d9616be58e5e679a9cfd0980e1e"
+diff --git a/meta-oe/recipes-support/poco/poco/0001-fix-missing-expat-definition.patch b/meta-oe/recipes-support/poco/poco/0001-fix-missing-expat-definition.patch
+deleted file mode 100644
+index 625aa3191..000000000
+--- a/meta-oe/recipes-support/poco/poco/0001-fix-missing-expat-definition.patch
++++ /dev/null
+@@ -1,27 +0,0 @@
+-From 3f288fefbd683d687bde3fc63964da64bc3c8a40 Mon Sep 17 00:00:00 2001
+-From: Pascal Bach <pascal.bach@siemens.com>
+-Date: Wed, 11 Aug 2021 15:11:49 +0200
+-Subject: [PATCH] fix missing expat definition
+-
+-Upstream-Status: Submitted [https://github.com/pocoproject/poco/pull/3414]
+-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+----
+- XML/src/ParserEngine.cpp | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/XML/src/ParserEngine.cpp b/XML/src/ParserEngine.cpp
+-index 82d477478..6213e555b 100644
+---- a/XML/src/ParserEngine.cpp
+-+++ b/XML/src/ParserEngine.cpp
+-@@ -504,7 +504,7 @@ void ParserEngine::init()
+- 	XML_SetParamEntityParsing(_parser, _externalParameterEntities ? XML_PARAM_ENTITY_PARSING_ALWAYS : XML_PARAM_ENTITY_PARSING_NEVER);
+- 	XML_SetUnknownEncodingHandler(_parser, handleUnknownEncoding, this);
+-
+--#if XML_MAJOR_VERSION > 2 || (XML_MAJOR_VERSION == 2 && XML_MINOR_VERSION >= 4)
+-+#if XML_DTD && (XML_MAJOR_VERSION > 2 || (XML_MAJOR_VERSION == 2 && XML_MINOR_VERSION >= 4))
+- 	if (_maximumAmplificationFactor > 1.0)
+- 	{
+- 		XML_SetBillionLaughsAttackProtectionMaximumAmplification(_parser, _maximumAmplificationFactor);
+---
+-2.32.0
+-
+diff --git a/meta-oe/recipes-support/poco/poco_1.11.0.bb b/meta-oe/recipes-support/poco/poco_1.11.1.bb
+similarity index 97%
+rename from meta-oe/recipes-support/poco/poco_1.11.0.bb
+rename to meta-oe/recipes-support/poco/poco_1.11.1.bb
+index 027ff6469..3cfd49fcd 100644
+--- a/meta-oe/recipes-support/poco/poco_1.11.0.bb
++++ b/meta-oe/recipes-support/poco/poco_1.11.1.bb
+@@ -10,10 +10,9 @@ DEPENDS = "libpcre zlib"
  
- DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
+ SRC_URI = " \
+     git://github.com/pocoproject/poco.git;branch=master;protocol=https \
+-    file://0001-fix-missing-expat-definition.patch \
+     file://run-ptest \
+    "
+-SRCREV = "f81a38057f1d240fe7b7a069612776f788bc88ea"
++SRCREV = "de61f0049175a941cc83c2615c3bdc5e947b89f9"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "poco-(?P<pver>\d+(\.\d+)+)"
  
 -- 
 2.25.1
