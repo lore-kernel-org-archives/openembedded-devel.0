@@ -2,73 +2,74 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E34F1C433F5
-	for <webhook@archiver.kernel.org>; Mon,  7 Mar 2022 11:47:06 +0000 (UTC)
-Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.2])
- by mx.groups.io with SMTP id smtpd.web12.25289.1646653626060214366
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE9B1C433FE
+	for <webhook@archiver.kernel.org>; Mon,  7 Mar 2022 11:47:07 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.1])
+ by mx.groups.io with SMTP id smtpd.web10.25299.1646653626340564653
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 07 Mar 2022 03:47:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Xv/sZg6n;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.2,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=fRQorwSh;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.1,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1646653624; i=@fujitsu.com;
-	bh=4lKwRIFWIKMEQVrPmH+5exS4UQ1aZ4nSs1BJg2x6WXI=;
+	bh=Mfeg4tAR0Ap6Uoqr5QXS1IthkMkxvXmmunhxMVbImO0=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=Xv/sZg6nZWU/GjFxkWc/ZZtOeirUtPVgZ8cFtRvtXdvNfA8JXOvirIDKCyMwfIkyQ
-	 ly/+9kKJd82wGTiRgFqllMDX2DBUniTLNE2JmRWZ6ratJj8T8SIFSchzYNNv1ihfcR
-	 NFalGnlZ7pKDzuoMrLJbDSInTxueXTJhRkWqbENNcczyzJD781iZcOOxdO4N+yLNvM
-	 C7+zAATMO1A9Iqw1hWesEmH5jGR6dRnZ7hlvHRY4tXv+uBZBhCbvlBVeS+oPhH8FMT
-	 rGSizCwaaokM00a2Ik7Fkf4XD7E+k6wCRlFHlVch8TiPJmGmpAIR9l+Ebk/xBaskAW
-	 010wIPtnzQCcA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrAIsWRWlGSWpSXmKPExsViZ8ORqLvjg2q
-  SwfNVLBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8b5g7NZChbKV6xvmMnUwLhFuouRi0NI4Amj
-  xPQFr5khnAtMEkem/meFcI4zSjTcO8zYxcjJwSagJjH91g1WEFtEQF9i6ew9zCA2s4CKxIvfP
-  ewgtrCAh8SWm7vB6lmA4qe+TAeL8wo4SWyduQQsLiGgIDHl4XuwXk4BZ4nb516C1QgB1ayf3c
-  wKUS8ocXLmExaI+RISB1+8YIboVZSYfbmZBcKukJg1q40JwlaTuHpuE/MERsFZSNpnIWlfwMi
-  0itE2qSgzPaMkNzEzR9fQwEDX0NBU18xC18hEL7FKN1EvtVQ3OTWvpCgRKKuXWF6sl1pcrFdc
-  mZuck6KXl1qyiREYzCnFLhI7GG/2/dQ7xCjJwaQkypuyQDVJiC8pP6UyI7E4I76oNCe1+BCjD
-  AeHkgTvpzdAOcGi1PTUirTMHGBkwaQlOHiURHiPXwJK8xYXJOYWZ6ZDpE4xGnOsbTiwl5lj55
-  bLe5mFWPLy81KlxHk5gTErJABSmlGaBzcIFvGXGGWlhHkZGRgYhHgKUotyM0tQ5V8xinMwKgn
-  zSoNM4cnMK4Hb9wroFCagU6pslUBOKUlESEk1MGUwLVO48KJprriInemkh6xiEQ+Meh45if8P
-  9NXQNuf2brPmEG4Pmroxqy2rver65WMvzhwMy2v6ZFWz0/TJdZapqz7ZnDq/rUDNjT+b8cXM4
-  4GTPIQZDx1MW/Tt08ppx651hbpp3T6/dkZP+LKjtw3nZaTMlP8g+UsvceW9CtcrO7Rfe0/757
-  vGw0aTv+3xxUXzFk6LVAjs+JZ2IPtHqMNjlf0zJ9oeZeq9NXuP36/jk77cmtl8/q60skCu7Bd
-  BFkV+Jcv/t2LUuBRDNzCZP9Vi7Zx+rHHN07MOpz+yt5zWvPHefbuUL3PQiRXO7Y+cG3nLsu2U
-  3zEk3nn31yeoJ+EO84qgDt7VG2O+2Rd+e6zEUpyRaKjFXFScCAANM/yVcwMAAA==
+	b=fRQorwShoXPbyK8n5niwqEAsMVhvKIQ6fK57F7mSUUHFIcswGQJaJw89qsYQ7Drus
+	 F2vD0Ld0mexZhZH97BGPHlewGPv016NNwiY8Jaj+CYgb/JmZ21DOPd/BbI3iMWPpyQ
+	 7b7OISxPTGRViGwjdzOx2Nuyp2OFRLkv28wbs31zhPdBO2Yusnz9nIveIgCEzOsvGh
+	 MIXYihILvQZh7hj1soYZ0P8kkF7cCx/hC0wFDivlDQcZQ/c4sVFsALQeaw7DT7dBc6
+	 wlGaRLC1DPeyzi+zT8PIqdu9OaQZ9Vmc+xUdiQIvrblrBGzxF2eJthtO9PWmZS1jDe
+	 754wNO4KMSiMw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrKIsWRWlGSWpSXmKPExsViZ8ORqLvjg2q
+  Swd79zBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8asd2+YCiZyVUx7t4y1gXErZxcjJ4eQwBNG
+  iaV/GLsYuYDsC0wSy76uY4NwjjNKLHzawgJSxSagJjH91g1WEFtEQF9i6ew9zCA2s4CKxIvfP
+  ewgtrBAoMSxDT+A6jk4WIDii6emgoR5BZwk7p9pAiuXEFCQmPLwPZjNKeAscfvcS3aII5wk1s
+  9uZoWoF5Q4OfMJC8R4CYmDL15A9SpKzL7czAJhV0jMmtXGBGGrSVw9t4l5AqPgLCTts5C0L2B
+  kWsVolVSUmZ5RkpuYmaNraGCga2hoqmuqa2RqqpdYpZuol1qqW55aXKJrqJdYXqyXWlysV1yZ
+  m5yTopeXWrKJERjCKcWs/3cwdvf91DvEKMnBpCTKm7JANUmILyk/pTIjsTgjvqg0J7X4EKMMB
+  4eSBO+nN0A5waLU9NSKtMwcYDzBpCU4eJREeI9fAkrzFhck5hZnpkOkTjHqcuzccnkvsxBLXn
+  5eqpQ4LycwOoUEQIoySvPgRsBi+xKjrJQwLyMDA4MQT0FqUW5mCar8K0ZxDkYlYV5pkCk8mXk
+  lcJteAR3BBHREla0SyBEliQgpqQYmgwuzNuVNrQhzlvHft2vDKwc73ZCtf+dwKFxa/pdxeWNc
+  18NTC66Ia1d9vHhCwSje1tl/4jKd2z3/hZ5yp+YfenvR+b9bfRDPq++dbQlRYYzr9n86Osmiy
+  nZl9bnirVcuCfSqSM6fNqvpSv+TI8+f5hxyalK+Yld5yi6De9n0axWPr5h9m1/ht6CgJu6Fbm
+  PJxMOld0uyl9QrxsoynZoxR6fDif2q/d2Huk/vGV6y9eCtU8624Px/TlrtVqCJpkrai9ywDyc
+  TPH0lNrzYtqjweexhdvMGg3Pblp4OuWpqk1EX1CXnX924/dzWnGkrXj6pr3L/m3h5xekf16+/
+  7K5kesv9uZEv3CGjPsJ1XZaYEktxRqKhFnNRcSIAkQ6SmWgDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-3.tower-545.messagelabs.com!1646653623!23854!1
+X-Msg-Ref: server-9.tower-587.messagelabs.com!1646653623!102548!1
 X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.8; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 2853 invoked from network); 7 Mar 2022 11:47:04 -0000
+Received: (qmail 30168 invoked from network); 7 Mar 2022 11:47:04 -0000
 Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-3.tower-545.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-9.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 7 Mar 2022 11:47:04 -0000
 Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 81A9F1001A4
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 80A0D1001A2
 	for <openembedded-devel@lists.openembedded.org>;
  Mon,  7 Mar 2022 11:47:03 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 759B9100186
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 73A26100185
 	for <openembedded-devel@lists.openembedded.org>;
  Mon,  7 Mar 2022 11:47:03 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Mon, 7 Mar 2022 11:46:57 +0000
+ (TLS) id 15.0.1497.28; Mon, 7 Mar 2022 11:46:54 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-lxml: upgrade 4.7.1 -> 4.8.0
-Date: Mon, 7 Mar 2022 19:46:41 +0800
-Message-ID: <1646653602-55882-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-jsonrpcserver: upgrade 5.0.3 ->
+ 5.0.6
+Date: Mon, 7 Mar 2022 19:46:40 +0800
+Message-ID: <1646653602-55882-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1646653602-55882-1-git-send-email-wangmy@fujitsu.com>
 References: <1646653602-55882-1-git-send-email-wangmy@fujitsu.com>
@@ -81,117 +82,37 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 07 Mar 2022 11:47:06 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 07 Mar 2022 11:47:07 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95837
-
-0001-setupinfo.py-check-the-return-value.patch
-removed since it's included in 4.8.0.
+ https://lists.openembedded.org/g/openembedded-devel/message/95838
 
 Changelog:
-=========
-Features added
---------------
-
-* GH#337: Path-like objects are now supported throughout the API instead of just strings.
-  Patch by Henning Janssen.
-
-* The ''ElementMaker'' now supports ''QName'' values as tags, which always override
-  the default namespace of the factory.
-
-Bugs fixed
-----------
-
-* GH#338: In lxml.objectify, the XSI float annotation "nan" and "inf" were spelled in
-  lower case, whereas XML Schema datatypes define them as "NaN" and "INF" respectively.
-  Patch by Tobias Deiminger.
-
-Other changes
--------------
-
-* Built with Cython 0.29.28.
+==========
+Fix reversed Result Either type ([#227]
+(https://github.com/explodinglabs/jsonrpcserver/pull/227)).
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...-setupinfo.py-check-the-return-value.patch | 46 -------------------
- ...n3-lxml_4.7.1.bb => python3-lxml_4.8.0.bb} |  6 +--
- 2 files changed, 2 insertions(+), 50 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-lxml/0001-setupinfo.py-check-the-return-value.patch
- rename meta-python/recipes-devtools/python/{python3-lxml_4.7.1.bb => python3-lxml_4.8.0.bb} (91%)
+ ...n3-jsonrpcserver_5.0.3.bb => python3-jsonrpcserver_5.0.6.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-jsonrpcserver_5.0.3.bb => python3-jsonrpcserver_5.0.6.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-lxml/0001-setupinfo.py-check-the-return-value.patch b/meta-python/recipes-devtools/python/python3-lxml/0001-setupinfo.py-check-the-return-value.patch
-deleted file mode 100644
-index 7d9121846..000000000
---- a/meta-python/recipes-devtools/python/python3-lxml/0001-setupinfo.py-check-the-return-value.patch
-+++ /dev/null
-@@ -1,46 +0,0 @@
--From 057872fa40e061100d61117cee5c3413ef2e40fc Mon Sep 17 00:00:00 2001
--From: Mingli Yu <mingli.yu@windriver.com>
--Date: Thu, 20 Jan 2022 15:18:20 +0800
--Subject: [PATCH] setupinfo.py: check the return value
--
--Use the return value altogether to check the subprocess execute
--successfully or not as in some case it will print some noise
--message though run successfully as below.
--
-- # python
-- Python 3.8.10 (default, Nov 26 2021, 20:14:08)
-- [GCC 9.3.0] on linux
-- Type "help", "copyright", "credits" or "license" for more information.
-- >>> import subprocess
-- >>> cmd = "pkg-config --modversion libxml-2.0"
-- >>> p = subprocess.Popen(cmd, shell=True,stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-- >>> stdout_data, errors = p.communicate()
-- >>> print(stdout_data)
-- b'2.9.12\n'
-- >>> print(errors)
-- b'do_ypcall: clnt_call: RPC: Unable to send; errno = Network is unreachable\n'
-- >>>
--
--Upstream-Status: Submitted [https://github.com/lxml/lxml/pull/336]
--
--Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-----
-- setupinfo.py | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/setupinfo.py b/setupinfo.py
--index 8c2a36fb..c1247c6d 100644
----- a/setupinfo.py
--+++ b/setupinfo.py
--@@ -365,7 +365,7 @@ def run_command(cmd, *args):
--                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
--     stdout_data, errors = p.communicate()
-- 
---    if errors:
--+    if p.returncode != 0 and errors:
--         return ''
--     return decode_input(stdout_data).strip()
-- 
---- 
--2.17.1
--
-diff --git a/meta-python/recipes-devtools/python/python3-lxml_4.7.1.bb b/meta-python/recipes-devtools/python/python3-lxml_4.8.0.bb
-similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-lxml_4.7.1.bb
-rename to meta-python/recipes-devtools/python/python3-lxml_4.8.0.bb
-index f3b7e0c6c..c4d4df383 100644
---- a/meta-python/recipes-devtools/python/python3-lxml_4.7.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-lxml_4.8.0.bb
-@@ -18,11 +18,9 @@ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=e4c045ebad958ead4b48008f70838403 \
+diff --git a/meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.3.bb b/meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.6.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.3.bb
+rename to meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.6.bb
+index c2500300f..cdd93516c 100644
+--- a/meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.3.bb
++++ b/meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.6.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/bcb/jsonrpcserver"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=61b63ea9d36f6fb63ddaaaac8265304f"
  
- DEPENDS += "libxml2 libxslt"
+-SRC_URI[sha256sum] = "0cc514559596fa380bf188e31b0cdf3d9e6d9cc162fdca8a49ed511b291a9ae1"
++SRC_URI[sha256sum] = "0fdd69c15e67004fb064d2254469cf82d02b7bc8a7bf7760055caa9d62d92f7c"
  
--SRC_URI[sha256sum] = "a1613838aa6b89af4ba10a0f3a972836128801ed008078f8c1244e65958f1b24"
-+SRC_URI[sha256sum] = "f63f62fc60e6228a4ca9abae28228f35e1bd3ce675013d1dfb828688d50c6e23"
+ inherit pypi setuptools3
  
--SRC_URI += " \
--           file://0001-setupinfo.py-check-the-return-value.patch \
--"
-+SRC_URI += "${PYPI_SRC_URI}"
- inherit pkgconfig pypi setuptools3
- 
- # {standard input}: Assembler messages:
 -- 
 2.25.1
 
