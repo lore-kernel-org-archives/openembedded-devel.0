@@ -1,133 +1,153 @@
-Return-Path: <jpuhlman@mvista.com>
+Return-Path: <kai.kang@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EA41C433EF
-	for <webhook@archiver.kernel.org>; Wed,  9 Mar 2022 20:31:32 +0000 (UTC)
-Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com
- [209.85.222.182])
- by mx.groups.io with SMTP id smtpd.web08.1629.1646857892107915053
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3339C433F5
+	for <webhook@archiver.kernel.org>; Wed,  9 Mar 2022 23:28:58 +0000 (UTC)
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
+ by mx.groups.io with SMTP id smtpd.web11.3664.1646868536788455797
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Mar 2022 12:31:32 -0800
+ Wed, 09 Mar 2022 15:28:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=fT8ncoYC;
- spf=pass (domain: mvista.com, ip: 209.85.222.182,
- mailfrom: jpuhlman@mvista.com)
-Received: by mail-qk1-f182.google.com with SMTP id r127so2740046qke.13
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Mar 2022 12:31:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=oHLi9Zn4TDTHHJwPv6UBaThD7cuyp3MVQEH3I+JKEvY=;
-        b=fT8ncoYCFFw8VHFL9tAuZUqkStcU3ysbgU1o8cBTSuANlWSjG84c0UQiNJOgSCZ8wT
-         0d/8erEzZqYfAcWIsfZeg81q8e29F5c10RXF4I/tkZSEVpJAdMVYcF9KrUELVBEpbDKV
-         L8VeS2mTQeauXbSxrxIaW46oMRjUrkLnDY89Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=oHLi9Zn4TDTHHJwPv6UBaThD7cuyp3MVQEH3I+JKEvY=;
-        b=SwqnpRtS0z5MPC8sG3+VGE50jqnpyXiIqDwhTHBPImSHg3lxPFLTRdL43safDNj5VO
-         qZAAU7lbn5HDgkSC9mIj7s9oFThoBNzBcJkBOheRMu5WZmRfXk+YflVMzkkmb+JuZe2W
-         slIphTc3p3Z4VCsWdnodlf2GsFWuSUTPfKAiiD3c/Liv+qNzIQ5vKK0/fSh9oNNDvPyY
-         vu86zCsVGidxH+d3ryH9VGOOn+p2ifPcNf8NxMhBRvVXCGIAonRGf/1amh0mZd6AMSY5
-         y16Eo7PWVE/kU439bDwXOL0TZ/FA4WFdKM1ndF5+k0W1qkCvQUkQkgBplx4IZJuFYK24
-         lWuA==
-X-Gm-Message-State: AOAM5335BsOPMSD9R7fQpQ8xuOOOmxiFAHsTkXEV6dhaj1SgpM6eriXX
-	pVFZjhXa0anDr10RDEujM/f9fA==
-X-Google-Smtp-Source: 
- ABdhPJw4rZ5icSV1LBCQ1FT4sCEjs5hKWRkswVFjdjcdon9Khzf+ap8Z4FMBmk/A1RHbDETbPjDAsg==
-X-Received: by 2002:a05:620a:1a15:b0:47e:9aff:14b3 with SMTP id
- bk21-20020a05620a1a1500b0047e9aff14b3mr1017712qkb.372.1646857891149;
-        Wed, 09 Mar 2022 12:31:31 -0800 (PST)
-Received: from [192.168.1.31] (99-14-97-149.lightspeed.frokca.sbcglobal.net.
- [99.14.97.149])
-        by smtp.gmail.com with ESMTPSA id
- 188-20020a3709c5000000b0067b147584c2sm1343077qkj.102.2022.03.09.12.31.30
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 09 Mar 2022 12:31:30 -0800 (PST)
-Message-ID: <ec51b807-97c0-19dc-dbd5-ca11459e44ef@mvista.com>
-Date: Wed, 9 Mar 2022 12:31:28 -0800
+ dkim=missing;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
+ domain name (domain: windriver.com, ip: 147.11.3.146,
+ mailfrom: kai.kang@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 229NStIc007066
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 9 Mar 2022 15:28:55 -0800
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Wed, 9 Mar 2022 15:28:55 -0800
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Wed, 9 Mar 2022 15:28:54 -0800
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH 2/2] wxwidgets: fix install errors
+Date: Thu, 10 Mar 2022 07:28:51 +0800
+Message-ID: <20220309232851.14147-2-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20220309232851.14147-1-kai.kang@windriver.com>
+References: <20220309232851.14147-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.6.2
-Subject: Re: [oe] [meta-oe][PATCH] nspr-native: build correclty with extended
- buildtools.
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-References: <20220309194127.725972-1-jpuhlman@mvista.com>
- <CAMKF1sohSPqiXO=19AF0GxVHuise2RrPC1+hu-55ORd+LJAzcg@mail.gmail.com>
-From: Jeremy Puhlman <jpuhlman@mvista.com>
-In-Reply-To: 
- <CAMKF1sohSPqiXO=19AF0GxVHuise2RrPC1+hu-55ORd+LJAzcg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Mar 2022 20:31:32 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Mar 2022 23:28:58 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95914
+ https://lists.openembedded.org/g/openembedded-devel/message/95915
 
+From: Kai Kang <kai.kang@windriver.com>
 
+There are errors during do install. So link files 'wx-config' and 'wxrc'
+are not created, and rename failed either:
 
-On 3/9/2022 12:06 PM, Khem Raj wrote:
-> Thanks Jeremy
->
-> I wonder why we don't see it failing on AB or in my local testing. is
-> it specific to some build host distro ?
+| CMake Error: failed to create symbolic link '/usr/bin/wx-config': Permission denied
+| Error renaming from "/usr/bin/wxrc" to "/usr/bin/wxrc-3.1": No such file or directory
+| CMake Error: failed to create symbolic link '/usr/bin/wxrc': Permission denied
 
-I am seeing the same issue reported on ubuntu 18.04, centos 7 and 8, but 
-its only with the extended buildtools.
+Respect variable 'DESTDIR' to make it work as expect.
 
->
-> On Wed, Mar 9, 2022 at 11:41 AM Jeremy Puhlman <jpuhlman@mvista.com> wrote:
->> From: Jeremy Puhlman <jpuhlman@mvista.com>
->>
->> gcc   abstract.o -Xlinker -L../../dist/lib -lplc4 -L../../dist/lib -lnspr4 -lpthread -o abstract
->> /build/buildtools/sysroots/x86_64-pokysdk-linux/usr/lib/gcc/x86_64-pokysdk-linux/11.2.0/../../../../x86_64-pokysdk-linux/bin/ld: /lib64/librt.so.1: undefined reference to `__libc_dlsym@GLIBC_PRIVATE'
->> /build/buildtools/sysroots/x86_64-pokysdk-linux/usr/lib/gcc/x86_64-pokysdk-linux/11.2.0/../../../../x86_64-pokysdk-linux/bin/ld: /lib64/librt.so.1: undefined reference to `__pthread_unwind@GLIBC_PRIVATE'
->> /build/buildtools/sysroots/x86_64-pokysdk-linux/usr/lib/gcc/x86_64-pokysdk-linux/11.2.0/../../../../x86_64-pokysdk-linux/bin/ld: /lib64/librt.so.1: undefined reference to `__libc_dlopen_mode@GLIBC_PRIVATE'
->> /build/buildtools/sysroots/x86_64-pokysdk-linux/usr/lib/gcc/x86_64-pokysdk-linux/11.2.0/../../../../x86_64-pokysdk-linux/bin/ld: /lib64/librt.so.1: undefined reference to `__clock_getcpuclockid@GLIBC_PRIVATE'
->> /build/buildtools/sysroots/x86_64-pokysdk-linux/usr/lib/gcc/x86_64-pokysdk-linux/11.2.0/../../../../x86_64-pokysdk-linux/bin/ld: /lib64/librt.so.1: undefined reference to `__clock_nanosleep@GLIBC_PRIVATE'
->> /build/buildtools/sysroots/x86_64-pokysdk-linux/usr/lib/gcc/x86_64-pokysdk-linux/11.2.0/../../../../x86_64-pokysdk-linux/bin/ld: /lib64/librt.so.1: undefined reference to `__clock_settime@GLIBC_PRIVATE'
->> /build/buildtools/sysroots/x86_64-pokysdk-linux/usr/lib/gcc/x86_64-pokysdk-linux/11.2.0/../../../../x86_64-pokysdk-linux/bin/ld: /lib64/librt.so.1: undefined reference to `__clock_getres@GLIBC_PRIVATE'
->>
->> The linker is not correctly pulling in lrt as needed.
->>
->> Signed-off-by: Jeremy Puhlman <jpuhlman@mvista.com>
->> ---
->>   meta-oe/recipes-support/nspr/nspr_4.29.bb | 2 ++
->>   1 file changed, 2 insertions(+)
->>
->> diff --git a/meta-oe/recipes-support/nspr/nspr_4.29.bb b/meta-oe/recipes-support/nspr/nspr_4.29.bb
->> index f224bcd34..2717f37bc 100644
->> --- a/meta-oe/recipes-support/nspr/nspr_4.29.bb
->> +++ b/meta-oe/recipes-support/nspr/nspr_4.29.bb
->> @@ -160,6 +160,8 @@ PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
->>   # preferred path upstream.
->>   EXTRA_OECONF += "--includedir=${includedir}/nspr"
->>
->> +EXTRA_OEMAKE:append:class-native = " EXTRA_LIBS='-lpthread -lrt'"
->> +
->>   do_compile:prepend() {
->>          oe_runmake CROSS_COMPILE=1 CFLAGS="-DXP_UNIX ${BUILD_CFLAGS}" LDFLAGS="" CC="${BUILD_CC}" -C config export
->>   }
->> --
->> 2.31.1
->>
->>
->> -=-=-=-=-=-=-=-=-=-=-=-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#95912): https://lists.openembedded.org/g/openembedded-devel/message/95912
->> Mute This Topic: https://lists.openembedded.org/mt/89670512/1997914
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
->> -=-=-=-=-=-=-=-=-=-=-=-
->>
+And package ${libdir}/wx/config/gtk3-unicode-3.1 to ${PN}-dev that
+/usr/bin/wx-config from ${PN}-dev links to it.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ .../respect-DESTDIR-when-create-link.patch    | 55 +++++++++++++++++++
+ .../wxwidgets/wxwidgets_git.bb                |  6 +-
+ 2 files changed, 60 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/wxwidgets/wxwidgets/respect-DESTDIR-when-create-link.patch
+
+diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets/respect-DESTDIR-when-create-link.patch b/meta-oe/recipes-extended/wxwidgets/wxwidgets/respect-DESTDIR-when-create-link.patch
+new file mode 100644
+index 000000000..69be32928
+--- /dev/null
++++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets/respect-DESTDIR-when-create-link.patch
+@@ -0,0 +1,55 @@
++There are errors during do install. So link files 'wx-config' and 'wxrc' are
++not created, and rename failed either:
++
++| CMake Error: failed to create symbolic link '/usr/bin/wx-config': Permission denied
++| Error renaming from "/usr/bin/wxrc" to "/usr/bin/wxrc-3.1": No such file or directory
++| CMake Error: failed to create symbolic link '/usr/bin/wxrc': Permission denied
++
++Respect variable 'DESTDIR' to make it work as expect.
++
++Upstream-Status: Pending
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++---
++ build/cmake/install.cmake        | 4 ++--
++ build/cmake/utils/CMakeLists.txt | 8 ++++----
++ 2 files changed, 6 insertions(+), 6 deletions(-)
++
++diff --git a/build/cmake/install.cmake b/build/cmake/install.cmake
++index c850c51844..5cbc67daa1 100644
++--- a/build/cmake/install.cmake
+++++ b/build/cmake/install.cmake
++@@ -46,8 +46,8 @@ else()
++     install(DIRECTORY DESTINATION "bin")
++     install(CODE "execute_process( \
++         COMMAND ${CMAKE_COMMAND} -E create_symlink \
++-        ${CMAKE_INSTALL_PREFIX}/lib${wxPLATFORM_LIB_DIR}/wx/config/${wxBUILD_FILE_ID} \
++-        ${CMAKE_INSTALL_PREFIX}/bin/wx-config \
+++        ../lib${wxPLATFORM_LIB_DIR}/wx/config/${wxBUILD_FILE_ID} \
+++        \$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wx-config \
++         )"
++     )
++ endif()
++diff --git a/build/cmake/utils/CMakeLists.txt b/build/cmake/utils/CMakeLists.txt
++index 4108d6a723..fbac6bb533 100644
++--- a/build/cmake/utils/CMakeLists.txt
+++++ b/build/cmake/utils/CMakeLists.txt
++@@ -34,14 +34,14 @@ if(wxUSE_XRC)
++     if(NOT MSVC)
++         install(CODE "execute_process( \
++             COMMAND ${CMAKE_COMMAND} -E rename \
++-            ${CMAKE_INSTALL_PREFIX}/bin/wxrc${EXE_SUFFIX} \
++-            ${CMAKE_INSTALL_PREFIX}/bin/wxrc-${wxMAJOR_VERSION}.${wxMINOR_VERSION}${EXE_SUFFIX} \
+++            \$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wxrc${EXE_SUFFIX} \
+++            \$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wxrc-${wxMAJOR_VERSION}.${wxMINOR_VERSION}${EXE_SUFFIX} \
++             )"
++         )
++         install(CODE "execute_process( \
++             COMMAND ${CMAKE_COMMAND} -E create_symlink \
++-            ${CMAKE_INSTALL_PREFIX}/bin/wxrc-${wxMAJOR_VERSION}.${wxMINOR_VERSION}${EXE_SUFFIX} \
++-            ${CMAKE_INSTALL_PREFIX}/bin/wxrc${EXE_SUFFIX} \
+++            wxrc-${wxMAJOR_VERSION}.${wxMINOR_VERSION}${EXE_SUFFIX} \
+++            \$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wxrc${EXE_SUFFIX} \
++             )"
++         )
++     endif()
+diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb b/meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb
+index 724bc0084..b4420a18e 100644
+--- a/meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb
++++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb
+@@ -25,6 +25,7 @@ SRC_URI = " \
+     git://github.com/wxWidgets/wxWidgets.git;branch=master;protocol=https \
+     file://0001-wx-config.in-Disable-cross-magic-it-does-not-work-fo.patch \
+     file://fix-libdir-for-multilib.patch \
++    file://respect-DESTDIR-when-create-link.patch \
+ "
+ PV = "3.1.4"
+ SRCREV= "6cdaedd42ba59331b3dc4ead50e0bac76ae14c19"
+@@ -103,4 +104,7 @@ FILES:${PN} += " \
+     ${libdir}/wx/ \
+ "
+ 
+-FILES:${PN}-dev += "${libdir}/wx/include/"
++FILES:${PN}-dev += " \
++    ${libdir}/wx/include/ \
++    ${libdir}/wx/config/ \
++"
+-- 
+2.17.1
 
 
