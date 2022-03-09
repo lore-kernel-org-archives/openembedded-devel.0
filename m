@@ -1,94 +1,104 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jpuhlman@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D3AFC433FE
-	for <webhook@archiver.kernel.org>; Wed,  9 Mar 2022 19:05:47 +0000 (UTC)
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com
- [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web10.624.1646852746924101306
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49342C433F5
+	for <webhook@archiver.kernel.org>; Wed,  9 Mar 2022 19:41:35 +0000 (UTC)
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com
+ [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.web10.1036.1646854893971500778
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Mar 2022 11:05:47 -0800
+ Wed, 09 Mar 2022 11:41:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=o8zQM4/H;
- spf=pass (domain: gmail.com, ip: 209.85.210.182,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id d17so3114734pfv.6
+ dkim=pass header.i=@mvista.com header.s=google header.b=BYA28xyv;
+ spf=pass (domain: mvista.com, ip: 209.85.216.50,
+ mailfrom: jpuhlman@mvista.com)
+Received: by mail-pj1-f50.google.com with SMTP id
+ mv5-20020a17090b198500b001bf2a039831so6213583pjb.5
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Mar 2022 11:05:46 -0800 (PST)
+ Wed, 09 Mar 2022 11:41:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=z2q4cxUC70qkhg+ggNgpDZk41yZFbTQseX1FlS09dHw=;
-        b=o8zQM4/Hc2J+k7g0I0sm0PWUxt3WLSmMvN/wQ4Dr67Va9++OuC5/qC7gxk8VbEqAUF
-         4I6tYQTocwMtC0JcnXkqcXcuASJzDX5vTn191STkwO6yjlBnU7/k5yMb9SlnJ+yBAD6K
-         /lFlvCvde1LUAMOTKAZpL4biIS5OQ93bTRf5Dod+oN/eOznpi5cr/CLbWZR+HdTucPwI
-         Z8y/rhshuTtcR5x37lXvrMQ7jQYr7Br8abliS3fKXUSMUkDyLP/6vhy/EJcyyaAf7a97
-         pc10SrDQD9e9YfKOXWIhzqS7dMeNzxcUcsogIJ4bIEZ1RAR4r3Ccg/UuPZtyhwOOMBby
-         ANGw==
+        d=mvista.com; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=N16KIg6ofDOBbroiCvXqChpv17E+/0VJYOYB3cZPt6Q=;
+        b=BYA28xyv+mrLQ+I4flr6yG49rCy2NRZYkVnGSDG8OtRdKQcFd27jjaeP28bx5yzgMr
+         6vgWnWOW4qPyavGOwx22+kyg7qerpn0xTewxx9+A8BxENQSL+1FPnQ2/Mau8afkvBtJ9
+         LXa0jkvJmDVYhk7MSLl9HwN8D60fGG4gqGNtg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=z2q4cxUC70qkhg+ggNgpDZk41yZFbTQseX1FlS09dHw=;
-        b=262Ov7T2u+E0UaCg2QGIiW7BJIwzSHABbS03cUHmEw9p6rwWk1Ka4+moDxDquKZhVI
-         gWqNi8uwY3yBUO9o1Gbx1fqDfG1whSR4T7C5P9bQvMcsVOQ8yK3IMy8/s+s17iApwaoC
-         yxg1WYKwpBfOaUBavzGj+e3BuM7BFWKjGctSGkExP9uHAAwePmok97srVBervZAw3g2F
-         8o3QEJYtUPlNf9eN2IXXfMi1jyZiVt/n7/GXgqz28UDLtZwDEixlywPBApN7XdFzfYAi
-         9FkftcqVQ//as0GQwfZpgc5jyqPlrtnsuOU5L+Eqk6pXu3fP7QsPdF2/VlPVHPNF/hYn
-         8G0Q==
-X-Gm-Message-State: AOAM530jupLHXc5YqTcIyLWkD0MgBfDIstVDio0aix5XztVY1mfgKej6
-	M2cA4PDlOyxHppohN2XH12aVWWSj34qHXQ==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=N16KIg6ofDOBbroiCvXqChpv17E+/0VJYOYB3cZPt6Q=;
+        b=Thp8e8i5R9T1pYS8Zar+3bLTkC6Hr/FvbfS+vxlmUG773YkAm+iO8Crc/SsIbn8rr0
+         SOFVRYB14VztcBHnlIq7CXv7VM/c9vxoDxhFUYbYLzzypoBUjPiISbWMeQYLp5rfIRc8
+         FN2Ov5T/CFM+nltJBmF1KNS3GP6ma4xDBjXRhsd4SgXPrM99GNunq9QHsj5g+JyKbtZh
+         Dj0SUhwjnBOQpkRzTDfvjZtbHrLObXqUsGhe4ja+Oi+5k1epZW8lyvyvizyFWtE1WLHP
+         VNwvidAr5mT2N5e/huYx/j4MdWFo/HRiKNmWGjxmqM2Y5d+VZEaBLERXIIdWj9aih1lD
+         EoQQ==
+X-Gm-Message-State: AOAM530bKQcZIefHdTg+8qHP1/AuYrj0PkZA/f5ZrwizuMxsEW8KJiA0
+	iznWX+ysiVRSdjHqx6LKlgdijkJphhfDzg==
 X-Google-Smtp-Source: 
- ABdhPJxcxiPbuk4sDaRK/5UpcurV8pkszQGBgFmVimEnbleW+o6ClAMuwxmIW05+UbD9t7YoJ2ftRQ==
-X-Received: by 2002:a05:6a00:15c6:b0:4f0:ecec:8214 with SMTP id
- o6-20020a056a0015c600b004f0ecec8214mr968061pfu.33.1646852745986;
-        Wed, 09 Mar 2022 11:05:45 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ff3d])
+ ABdhPJzzLZHMbplzNBKPbHpGXkU09BClT91JCHVyzcB2K2kyvLQqp0n2a8czkjfReGuuhRpX+hTpHw==
+X-Received: by 2002:a17:90b:4a07:b0:1bf:b159:185 with SMTP id
+ kk7-20020a17090b4a0700b001bfb1590185mr1110587pjb.65.1646854893145;
+        Wed, 09 Mar 2022 11:41:33 -0800 (PST)
+Received: from red (99-14-97-149.lightspeed.frokca.sbcglobal.net.
+ [99.14.97.149])
         by smtp.gmail.com with ESMTPSA id
- 14-20020a17090a01ce00b001bfbffc1331sm1063540pjd.46.2022.03.09.11.05.45
+ 1-20020a17090a1a0100b001bf3ba1508fsm3378184pjk.33.2022.03.09.11.41.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Mar 2022 11:05:45 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+        Wed, 09 Mar 2022 11:41:32 -0800 (PST)
+Received: by red (sSMTP sendmail emulation); Wed, 09 Mar 2022 14:41:30 -0500
+From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-xfce][PATCH 2/2] catfish: Do not set PYPA_WHEEL
-Date: Wed,  9 Mar 2022 11:05:43 -0800
-Message-Id: <20220309190543.664728-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220309190543.664728-1-raj.khem@gmail.com>
-References: <20220309190543.664728-1-raj.khem@gmail.com>
+Cc: Jeremy Puhlman <jpuhlman@mvista.com>
+Subject: [meta-oe][PATCH] nspr-native: build correclty with extended
+ buildtools.
+Date: Wed,  9 Mar 2022 14:41:27 -0500
+Message-Id: <20220309194127.725972-1-jpuhlman@mvista.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Mar 2022 19:05:47 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Mar 2022 19:41:35 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95911
+ https://lists.openembedded.org/g/openembedded-devel/message/95912
 
-OE-Core has addressed the pertaining issue which does not require
-setting this here anymore
+From: Jeremy Puhlman <jpuhlman@mvista.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+gcc   abstract.o -Xlinker -L../../dist/lib -lplc4 -L../../dist/lib -lnspr4 -lpthread -o abstract
+/build/buildtools/sysroots/x86_64-pokysdk-linux/usr/lib/gcc/x86_64-pokysdk-linux/11.2.0/../../../../x86_64-pokysdk-linux/bin/ld: /lib64/librt.so.1: undefined reference to `__libc_dlsym@GLIBC_PRIVATE'
+/build/buildtools/sysroots/x86_64-pokysdk-linux/usr/lib/gcc/x86_64-pokysdk-linux/11.2.0/../../../../x86_64-pokysdk-linux/bin/ld: /lib64/librt.so.1: undefined reference to `__pthread_unwind@GLIBC_PRIVATE'
+/build/buildtools/sysroots/x86_64-pokysdk-linux/usr/lib/gcc/x86_64-pokysdk-linux/11.2.0/../../../../x86_64-pokysdk-linux/bin/ld: /lib64/librt.so.1: undefined reference to `__libc_dlopen_mode@GLIBC_PRIVATE'
+/build/buildtools/sysroots/x86_64-pokysdk-linux/usr/lib/gcc/x86_64-pokysdk-linux/11.2.0/../../../../x86_64-pokysdk-linux/bin/ld: /lib64/librt.so.1: undefined reference to `__clock_getcpuclockid@GLIBC_PRIVATE'
+/build/buildtools/sysroots/x86_64-pokysdk-linux/usr/lib/gcc/x86_64-pokysdk-linux/11.2.0/../../../../x86_64-pokysdk-linux/bin/ld: /lib64/librt.so.1: undefined reference to `__clock_nanosleep@GLIBC_PRIVATE'
+/build/buildtools/sysroots/x86_64-pokysdk-linux/usr/lib/gcc/x86_64-pokysdk-linux/11.2.0/../../../../x86_64-pokysdk-linux/bin/ld: /lib64/librt.so.1: undefined reference to `__clock_settime@GLIBC_PRIVATE'
+/build/buildtools/sysroots/x86_64-pokysdk-linux/usr/lib/gcc/x86_64-pokysdk-linux/11.2.0/../../../../x86_64-pokysdk-linux/bin/ld: /lib64/librt.so.1: undefined reference to `__clock_getres@GLIBC_PRIVATE'
+
+The linker is not correctly pulling in lrt as needed.
+
+Signed-off-by: Jeremy Puhlman <jpuhlman@mvista.com>
 ---
- meta-xfce/recipes-apps/catfish/catfish_4.16.3.bb | 1 -
- 1 file changed, 1 deletion(-)
+ meta-oe/recipes-support/nspr/nspr_4.29.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-xfce/recipes-apps/catfish/catfish_4.16.3.bb b/meta-xfce/recipes-apps/catfish/catfish_4.16.3.bb
-index 6aa5ae8c30..27a807be29 100644
---- a/meta-xfce/recipes-apps/catfish/catfish_4.16.3.bb
-+++ b/meta-xfce/recipes-apps/catfish/catfish_4.16.3.bb
-@@ -4,7 +4,6 @@ LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
+diff --git a/meta-oe/recipes-support/nspr/nspr_4.29.bb b/meta-oe/recipes-support/nspr/nspr_4.29.bb
+index f224bcd34..2717f37bc 100644
+--- a/meta-oe/recipes-support/nspr/nspr_4.29.bb
++++ b/meta-oe/recipes-support/nspr/nspr_4.29.bb
+@@ -160,6 +160,8 @@ PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+ # preferred path upstream.
+ EXTRA_OECONF += "--includedir=${includedir}/nspr"
  
- inherit xfce-app setuptools_build_meta gtk-icon-cache mime-xdg
--PYPA_WHEEL = "${B}/dist/UNKNOWN-*-*.whl"
- 
- DEPENDS += "python3-distutils-extra-native"
- 
++EXTRA_OEMAKE:append:class-native = " EXTRA_LIBS='-lpthread -lrt'"
++
+ do_compile:prepend() {
+ 	oe_runmake CROSS_COMPILE=1 CFLAGS="-DXP_UNIX ${BUILD_CFLAGS}" LDFLAGS="" CC="${BUILD_CC}" -C config export
+ }
 -- 
-2.35.1
+2.31.1
 
 
