@@ -2,67 +2,71 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DCE04C433FE
-	for <webhook@archiver.kernel.org>; Wed,  9 Mar 2022 10:44:25 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.2])
- by mx.groups.io with SMTP id smtpd.web11.4121.1646822664922355392
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BA16EC4332F
+	for <webhook@archiver.kernel.org>; Wed,  9 Mar 2022 10:44:26 +0000 (UTC)
+Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
+ [85.158.142.2])
+ by mx.groups.io with SMTP id smtpd.web08.4123.1646822665023073992
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 09 Mar 2022 02:44:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ZYhfPdrC;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.2,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=xiWWW8Mk;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.2,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1646822663; i=@fujitsu.com;
-	bh=zIYG9Oxv9T8+n59aTQ5CjFHX9u19F+bs5+JqolC/A0E=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=ZYhfPdrCK/MgbLJzdMjkCzGj/JU8bNqTN4kpwAQ134yvOfhG0IeBI6NE1UuXpeI1v
-	 v5N7HCJ4D9RnPRjN8HhvuUYY5AxkDoP/6DomsXBHQQHzUmpxRQl7wRCYfbD1KYkwbX
-	 EvEAS22t/9W5/XUyZ+DeV3PjFfH0dZdm7oyjz9QnV1YpCOwLS1CzqBPKomm0Y96av8
-	 lgkRaqwvGBy31bf7Gwqdnl4q6wVPBDrSVrpoTVK5acelO5HaT+zicWZZFDL/o9w3pb
-	 oGLveE0B0VIrMU4MNLszBGe1lum2wkbTWe9L6qeyCzFL1ETcs2tIkh4j7BrWyk/ApS
-	 7DQM5Kex44Urg==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrGIsWRWlGSWpSXmKPExsViZ8MRosvWqpF
-  ksOS8isXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnFw4g72gtdiFfuObGRpYPwm3MXIySEkMINJ
-  orG1pouRC8g+ziix4Ot0JpAEm4CaxPRbN1hBbBEBfYmls/cwg9jMAioSL373sIPYwgI+Evdv3
-  wOrZwGK35h0hwXE5hVwkrh9pBcsLiGgIDHl4XtmiLigxMmZT1gg5khIHHzxghmiRlFi9uVmFg
-  i7QmLWrDamCYy8s5C0zELSsoCRaRWjdVJRZnpGSW5iZo6uoYGBrqGhqa6xka6hkZleYpVuol5
-  qqW55anGJrpFeYnmxXmpxsV5xZW5yTopeXmrJJkZgkKUUK9TtYLy28qfeIUZJDiYlUV6ZYI0k
-  Ib6k/JTKjMTijPii0pzU4kOMMhwcShK8nU1AOcGi1PTUirTMHGDAw6QlOHiURHg/1wCleYsLE
-  nOLM9MhUqcYdTl2brm8l1mIJS8/L1VKnPdNM1CRAEhRRmke3AhY9F1ilJUS5mVkYGAQ4ilILc
-  rNLEGVf8UozsGoJMzL1wI0hSczrwRu0yugI5iAjrAzUgM5oiQRISXVwOR0c+HC5W86T/F5Lsq
-  VM72h99OVqZTtSIb6B7NlZ8s/TBbe+UyU77o704eLu7jtNsiJTjjUKNn/S7Fu2cfk1SJLogPY
-  Xf+2WTzpyel2D+Dn+ztZ9+wt17U6Hs4+GlWnGq+s+lv54PBxU8Wapc2Z7k7rV+4rsNr9VuWE0
-  QlhJaeARZxhS8RUD2xIUwz+sPoQp6+F75mEzfFhwhN+7XJ99u7YeRGfR611GVZ/rM5xuaZZ+V
-  2tS3nC21uR9yz85ApH6UiT7tr/jhXv19+W2Vbjlj8/KdDTTlIvNkDvzcON7nbZkgw9LQfuH5S
-  SOKj/lfuOvG79p18LixrNQho6Xhg9NPqut3iC0K2d+cHWj26kKrEUZyQaajEXFScCAKgDIBg5
-  AwAA
+	bh=ZEwLW2T7sPudscnPze4xOK0uT55YFoMpzpj2DzJCr54=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=xiWWW8MkRZDKpgcorxz26tuQQ5m9Kgf+P8RA8VVBcdpoN7X05tuX6V64/X+dA/BmM
+	 x1KIqaErKMISoj/20FqTzb2og8eAwuNv+ieKIR0Fncdn+WmcI0DjZoVgbO/MIlpcx7
+	 Yy2WHqy/76SmV4y9q2eUXV3jOwSck017jJqCvhemN9fqbWAWBz4tMI0BsI9wRg+1lX
+	 Nvtnp9+oeawyw4qfPS8IlOFbUdMxnQmX0guTO0mueqYF5Z6xG0J2cabY/sbW1aVN+i
+	 iAll2a40QsZkqEnDoydRFrxDQnZVEiCKU2GucocSDXhgb1duLCnjbbk3uEQvDRAFtl
+	 JeB7o1pSQBy/g==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrEIsWRWlGSWpSXmKPExsViZ8MRosvWqpF
+  kcH2jvsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmrFl8UnmgkcSFdPPHmJtYNwh1sXIxSEkMINJ
+  YufMJ2wQznFGiVPdc4EcTg42ATWJ6bdusILYIgL6Ektn72EGsZkFVCRe/O5hB7GFBUIkXndMY
+  QSxWYDiz5+dBYvzCjhJvP//AKxeQkBBYsrD92A2p4CzxIvTM8HmCwHVnD79gxmiXlDi5MwnLB
+  DzJSQOvngB1asoMftyMwuEXSExa1Yb0wRG/llIWmYhaVnAyLSK0S6pKDM9oyQ3MTNH19DAQNf
+  Q0FTXzEzXyMhCL7FKN1EvtVQ3OTWvpCgRKK2XWF6sl1pcrFdcmZuck6KXl1qyiREYnCnFTk92
+  ML7u+6l3iFGSg0lJlFcmWCNJiC8pP6UyI7E4I76oNCe1+BCjDAeHkgRvZxNQTrAoNT21Ii0zB
+  xgpMGkJDh4lEd7PNUBp3uKCxNzizHSI1ClGXY6dWy7vZRZiycvPS5US533TDFQkAFKUUZoHNw
+  IWtZcYZaWEeRkZGBiEeApSi3IzS1DlXzGKczAqCfPytQBN4cnMK4Hb9AroCCagI+yM1ECOKEl
+  ESEk1MOl8PrRad4+L/ks3hezJN2sSROubFyW+bvb8mRf2YMq2f5dPzjbM2BaktdtuyY0la/u3
+  ZJoI39/Obn/0PIflJkanA6cDVs0q7Zj7UTdgr+WPiNqMjJW1KzfUnejLZpx4QUbvwupjFkmmb
+  yee2CHlKROXzXf8ZXO57KUg4fwEf4bUt1sWr7srUSb0c9dBI5WfeQVdRsn+27gT7k5rTzMVdm
+  7iCrS5+eVAq9/5wL/zKtYtnvtuActVzjIJ/34Bb18vn5MVn6S1Xge9O2kYnHr6wiq++5+0XvQ
+  VNE91+6SrOemY8a5aPTcJB5ddpU9eaZ+Pv/p21eVlM1PT2tdskUhfvL5G6cgmnZ2+2ZMnmMzJ
+  m6nEUpyRaKjFXFScCABw7OzgVQMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-7.tower-565.messagelabs.com!1646822662!2861!1
+X-Msg-Ref: server-19.tower-545.messagelabs.com!1646822662!3365!1
 X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
-X-StarScan-Version: 9.81.9; banners=-,-,-
+X-StarScan-Version: 9.81.8; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 16855 invoked from network); 9 Mar 2022 10:44:22 -0000
+Received: (qmail 6837 invoked from network); 9 Mar 2022 10:44:22 -0000
 Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-7.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-19.tower-545.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 9 Mar 2022 10:44:22 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 229AiGV6008214
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 229AiGV8008214
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>; Wed, 9 Mar 2022 10:44:22 GMT
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Wed, 9 Mar 2022 10:44:14 +0000
+ (TLS) id 15.0.1497.28; Wed, 9 Mar 2022 10:44:20 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-astroid: upgrade 2.9.3 -> 2.10.0
-Date: Wed, 9 Mar 2022 18:44:00 +0800
-Message-ID: <1646822643-61935-1-git-send-email-wangmy@fujitsu.com>
+Subject: [PATCH] [oe] [meta-python] [PATCH] python3-bitarray: upgrade 2.3.7 ->
+ 2.4.0
+Date: Wed, 9 Mar 2022 18:44:02 +0800
+Message-ID: <1646822643-61935-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1646822643-61935-1-git-send-email-wangmy@fujitsu.com>
+References: <1646822643-61935-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -71,63 +75,83 @@ X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Mar 2022 10:44:25 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Mar 2022 10:44:26 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95898
+ https://lists.openembedded.org/g/openembedded-devel/message/95899
+
+setup.py-use-setuptools-instead-of-distutils.patch
+removed since it's included in 2.4.0
 
 Changelog:
 =========
-* Fixed inference of "self" in binary operations in which "self"
-  is part of a list or tuple.
-* Fixed builtin inference on `property` calls not calling the `postinit` of the new node, which
-  resulted in instance arguments missing on these nodes.
-* Fixed a crash on "Super.getattr" when the attribute was previously uninferable due to a cache
-  limit size. This limit can be hit when the inheritance pattern of a class (and therefore of the
-  "__init__" attribute) is very large.
-* Inlcude names of keyword-only arguments in "astroid.scoped_nodes.Lambda.argnames".
-* Fixed a crash inferring on a "NewType" named with an f-string.
-* Add support for [attrs v21.3.0](https://github.com/python-attrs/attrs/releases/tag/21.3.0) which
-  added a new `attrs` module alongside the existing `attr`.
-* Use the "end_lineno" attribute for the "NodeNG.tolineno" property
-  when it is available.
-* Add "is_dataclass" attribute to "ClassDef" nodes.
-* Use "sysconfig" instead of "distutils" to determine the location of
-  python stdlib files and packages.
-* Fixed crash with recursion error for inference of class attributes that referenced
-  the class itself.
-* Fixed crash when trying to infer "items()" on the "__dict__"
-  attribute of an imported module.
-* Add optional "NodeNG.position" attribute.
-  Used for block nodes to highlight position of keyword(s) and name
-  in cases where the AST doesn't provide good enough positional information.
-  E.g. "nodes.ClassDef", "nodes.FunctionDef".
-* Fix "ClassDef.fromlineno". For Python < 3.8 the "lineno" attribute includes decorators.
-  "fromlineno" should return the line of the "class" statement itself.
-* Performance improvements. Only run expensive decorator functions when
-  non-default Deprecation warnings are enabled, eg. during a Pytest run.
+* enable building wheels for multiple platforms and Python versions using
+  pypa/cibuildwheel, see #165 and #170
+* use setuptools instead of distutils in 'setup.py', #168
+* add missing type hinting for '.count()' step argument
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-astroid_2.9.3.bb => python3-astroid_2.10.0.bb}     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-astroid_2.9.3.bb => python3-astroid_2.10.0.bb} (89%)
+ ...-use-setuptools-instead-of-distutils.patch | 29 -------------------
+ ...ray_2.3.7.bb => python3-bitarray_2.4.0.bb} |  5 +---
+ 2 files changed, 1 insertion(+), 33 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-bitarray/setup.py-use-setuptools-instead-of-distutils.patch
+ rename meta-python/recipes-devtools/python/{python3-bitarray_2.3.7.bb => python3-bitarray_2.4.0.bb} (62%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-astroid_2.9.3.bb b/meta-python/recipes-devtools/python/python3-astroid_2.10.0.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-astroid_2.9.3.bb
-rename to meta-python/recipes-devtools/python/python3-astroid_2.10.0.bb
-index 5828c24a23..fc23f17c6b 100644
---- a/meta-python/recipes-devtools/python/python3-astroid_2.9.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-astroid_2.10.0.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
- LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray/setup.py-use-setuptools-instead-of-distutils.patch b/meta-python/recipes-devtools/python/python3-bitarray/setup.py-use-setuptools-instead-of-distutils.patch
+deleted file mode 100644
+index cef7ce15a4..0000000000
+--- a/meta-python/recipes-devtools/python/python3-bitarray/setup.py-use-setuptools-instead-of-distutils.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 947d364841954d60bab7a4cf1497a272b1bf73ca Mon Sep 17 00:00:00 2001
+-From: Konrad Weihmann <kweihmann@outlook.com>
+-Date: Sun, 27 Feb 2022 11:57:09 +0100
+-Subject: [PATCH] setup.py: use setuptools instead of distutils
+-
+-as distutils will be deprecated in python 3.12 and already produces
+-a warning when run with python 3.10.x, it might be a good time to
+-switch to setuptools.
+-It offers the same interface, so results will be the same
+-
+-Signed-off-by: Konrad Weihmann <kweihmann@outlook.com>
+-
+-Upstream-Status: Backport [https://github.com/ilanschnell/bitarray/commit/947d364841954d60bab7a4cf1497a272b1bf73ca]
+-
+----
+- setup.py | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/setup.py b/setup.py
+-index 4dbdf859..c7787dad 100644
+---- a/setup.py
+-+++ b/setup.py
+-@@ -1,5 +1,5 @@
+- import re
+--from distutils.core import setup, Extension
+-+from setuptools import setup, Extension
+- 
+- 
+- kwds = {}
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_2.3.7.bb b/meta-python/recipes-devtools/python/python3-bitarray_2.4.0.bb
+similarity index 62%
+rename from meta-python/recipes-devtools/python/python3-bitarray_2.3.7.bb
+rename to meta-python/recipes-devtools/python/python3-bitarray_2.4.0.bb
+index 46ceed8b80..39d1618cb1 100644
+--- a/meta-python/recipes-devtools/python/python3-bitarray_2.3.7.bb
++++ b/meta-python/recipes-devtools/python/python3-bitarray_2.4.0.bb
+@@ -3,11 +3,8 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+ LICENSE = "PSF-2.0"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
  
--SRC_URI[sha256sum] = "1efdf4e867d4d8ba4a9f6cf9ce07cd182c4c41de77f23814feb27ca93ca9d877"
-+SRC_URI[sha256sum] = "f616b9687a5f4afa673dfd2d684d2b6f38365c8ad7c6f27229dda1ede750c445"
+-SRC_URI[sha256sum] = "4da790ab193e993107f3ff0aebc4f8d6ad5196a19071fbafad16b02898a44fd7"
++SRC_URI[sha256sum] = "f1203e902d51df31917d77eeba9c3fe78d032873a2ad78c737e26420f0080e58"
  
- inherit pypi setuptools3
+ inherit setuptools3 pypi
  
+-# Backported from 2.3.8
+-SRC_URI += "file://setup.py-use-setuptools-instead-of-distutils.patch"
+-
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.25.1
 
