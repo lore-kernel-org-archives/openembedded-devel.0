@@ -1,72 +1,90 @@
-Return-Path: <peter.kjellerstedt@axis.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BBC0C433EF
-	for <webhook@archiver.kernel.org>; Thu, 10 Mar 2022 15:19:30 +0000 (UTC)
-Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
- by mx.groups.io with SMTP id smtpd.web10.10631.1646925568617421654
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 11B9EC4332F
+	for <webhook@archiver.kernel.org>; Thu, 10 Mar 2022 15:38:30 +0000 (UTC)
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
+ [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web12.10958.1646926708837497714
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Mar 2022 07:19:29 -0800
+ Thu, 10 Mar 2022 07:38:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=axis-central1 header.b=bDvp55rb;
- spf=pass (domain: axis.com, ip: 195.60.68.17,
- mailfrom: peter.kjellerstedt@axis.com)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=L7MY7QZj;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id h2so1433270pfh.6
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 10 Mar 2022 07:38:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; q=dns/txt; s=axis-central1; t=1646925569;
-  x=1678461569;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=RWfhsi1R200/6bBxUxcbA/ggR4W5tEGvTOHl5vZ212Q=;
-  b=bDvp55rbsCNSh3TiFRTkoV6PM0OlaIvaDcSv9Ex5g/2UzkiLRYfjtBBe
-   +/Ahti+zWOrbmbep4OMNhjFeL1vrXwZE5I9Gh+A2G9zJz4hVlLG7UiyY5
-   ap0nkmvFQclZG3YU/PnzNvLfUbBm0Kn+qwZsp3ZDptIKPTcxIsUFXe59F
-   6FShI+BpH648TTTQjZiEpIagJNHl/cD4XxyYTgh/AIjHDRhzB69vZIX8c
-   GMK26nH5jJRlHBkfkTV8HC+kGgDCu8aMJRwhhj5H9LAOBunGgDMrr9aad
-   AL/uG6XWL+TXqfdyy1ybAMaE9iroY3LBPmdqQIXSvnSkfWRyiZk0EUrpn
-   A==;
-From: Peter Kjellerstedt <pkj@axis.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][PATCH] net-snmp: Avoid running `make clean` as it
- may fail
-Date: Thu, 10 Mar 2022 16:19:24 +0100
-Message-ID: <20220310151924.14089-1-pkj@axis.com>
-X-Mailer: git-send-email 2.21.3
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Pr6NV6ZNVjbhbBxvPKFhvqNUlzFI5ur5HZD3yAUbuSw=;
+        b=L7MY7QZjMyyvzMNVTBm3nve0R8Wsh7NhkUK/w388DKKiOZLJRWd9UtFc/uJd0S2vrX
+         9dcdnl6YQb2RvCr8VXjBRzDEvywbvV1LDJaN+Ps9T9kStyveIF31mV+twTZcpJkrXlMB
+         6RX+Ci1U7kK0BM7FHRd+SzL1vIZVEnzfOK2iRnE/cTxOlaIU2YMBT0m8O9axpBgxgOXg
+         tsp5JllWsQiyNcDcU/req4yE0ZtC+NU4PuPAN+opVAJqaMX6+x3LXWeCujMlUqntisgd
+         0+HRicir1xfLvRte/qJkvhVESuJUbG6hS0J6iF0kenXRAai4fsYay/Tb4HFmquzAZ3gz
+         2oVg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Pr6NV6ZNVjbhbBxvPKFhvqNUlzFI5ur5HZD3yAUbuSw=;
+        b=qXSIERpnz4yeUR/ni5mXCtzBgb0gMmCfFkClu4GHBPX8waya6mhPz5cHij84jNf7ZH
+         2+7wN5wodHRX0UErkhWZo6YzPu6/LQNXCrZ/U8IuBhm4omBGTppXRl8IVYDKA5n92gSB
+         VzW3crVpMETiUEWi64OG1T0DgtGWKIgzcoM/XQUW3zkAtX+4DZz0cZJADTvp5LhJ9Wvy
+         aSNofgqBrVBmzK/6vxzZy8pHI9fWv0IWSjK8R1K/ORTW78O3cob8CnwRdOtV0I5+t2AH
+         5D43wEgZj07T4O4EVXac7Abz3SFyH4+ynVEn54e3TPeRyqZfLhRsFE5cP1zyV60v2PP4
+         3gdQ==
+X-Gm-Message-State: AOAM531MNrVt5jx3wywcYupdoF5VmWfulfhv+GPDzyVsyXKjhX3fEyRI
+	ATB6sbSe1U0JebHVjzBA4jIVlLRLWnDo7w==
+X-Google-Smtp-Source: 
+ ABdhPJyOdAS6B9E5JfflKfptfxg6DR/8vmfyk1obiUEMUsfsGWurkZY96ROTTIMangwkGJb/+OWkBQ==
+X-Received: by 2002:a05:6a00:139e:b0:4f7:1576:f8fb with SMTP id
+ t30-20020a056a00139e00b004f71576f8fbmr5341741pfg.85.1646926707803;
+        Thu, 10 Mar 2022 07:38:27 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::ff3d])
+        by smtp.gmail.com with ESMTPSA id
+ oo17-20020a17090b1c9100b001bf0ccc59c2sm11312306pjb.16.2022.03.10.07.38.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 10 Mar 2022 07:38:27 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] ttf-vlgothic: Specify accurate BSD license type
+Date: Thu, 10 Mar 2022 07:38:25 -0800
+Message-Id: <20220310153825.3203568-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Mar 2022 15:19:30 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Mar 2022 15:38:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95933
+ https://lists.openembedded.org/g/openembedded-devel/message/95934
 
-Rebuilding net-snmp may cause autotools_preconfigure() to run `make
-clean`, which in turn can cause `configure`to be run. However, since
-CACHED_CONFIGUREVARS is not set under those circumstances, `configure`
-will run with an incorrect configuration and the build will fail with:
-
-  checking for /etc/printcap... configure: error: cannot check for
-  file existence when cross compiling
-
-Avoid the problem by setting CLEANBROKEN = "1".
-
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb
-index b0c5bbdac..5f887b886 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb
-@@ -40,6 +40,7 @@ EXTRA_OEMAKE = "INSTALL_PREFIX=${D} OTHERLDFLAGS='${LDFLAGS}' HOST_CPPFLAGS='${B
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb
+index a386bb850f..6b79eb9197 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb
+@@ -4,7 +4,7 @@ SUMMARY = "Japanese TrueType fonts from Vine Linux"
+ AUTHOR = "Contributor: noonov <noonov@gmail.com>"
+ HOMEPAGE = "http://vlgothic.dicey.org/"
  
- PARALLEL_MAKE = ""
- CCACHE = ""
-+CLEANBROKEN = "1"
- 
- TARGET_CC_ARCH += "${LDFLAGS}"
- 
+-LICENSE = "ttf-mplus & BSD"
++LICENSE = "ttf-mplus & BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.en;md5=cc06b20e7a20bdf6c989624405378303 \
+                     file://LICENSE_E.mplus;md5=1c4767416f20215f1e61b970f2117db9 \
+ "
+-- 
+2.35.1
+
 
