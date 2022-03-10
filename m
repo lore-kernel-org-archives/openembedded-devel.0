@@ -1,179 +1,98 @@
-Return-Path: <kai.kang@windriver.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AB65BC433F5
-	for <webhook@archiver.kernel.org>; Wed,  9 Mar 2022 23:29:01 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web10.3682.1646868540733361089
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6AF49C433EF
+	for <webhook@archiver.kernel.org>; Thu, 10 Mar 2022 05:02:43 +0000 (UTC)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
+ [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.web12.6388.1646888561939719221
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Mar 2022 15:29:00 -0800
+ Wed, 09 Mar 2022 21:02:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.3.146,
- mailfrom: kai.kang@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 229NSt3a007065
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 9 Mar 2022 15:28:55 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 229NSs5R008187
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 9 Mar 2022 15:28:55 -0800 (PST)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Wed, 9 Mar 2022 15:28:54 -0800
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Wed, 9 Mar 2022 15:28:54 -0800
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Wed, 9 Mar 2022 15:28:53 -0800
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH 1/2] wxwidgets: fix libdir for multilib
-Date: Thu, 10 Mar 2022 07:28:50 +0800
-Message-ID: <20220309232851.14147-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=RmBYY4M/;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f178.google.com with SMTP id n2so3863550plf.4
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 09 Mar 2022 21:02:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :references:from:in-reply-to:content-transfer-encoding;
+        bh=1MSE7/4NBGap+W1j2UbRCLpLl00e/5q4mcZh2q9c7OY=;
+        b=RmBYY4M/pAUF3OB5mkedgO5yIXHC1W/xPR700rlJipWX1aJ6CEoZI/CH9G7sMC0e7e
+         3R7JgdYwFql8o7kcqfw5OjZJn8P0j8VGfYp6NA9kWJoiVsLO9gR2urOU1wuwumhYg8Uv
+         6fQxF4+KJQLPumHZhxfvl2i90vTJxWwq3dfL5rZyffGQkXopKKmSvvF1+i37wy2dcqSt
+         /Ju/GfnUKu4moI5m9/J/x6BNV93GeLOpJdOBERM1cF3PaqYKTPIaldvO9BW4XMwY6gCA
+         jljB1btnW5bhNeBPtvzK8RZmLCW4Je8sLUR3XTotSeiqrxFDf6sE/ce0B1jzUeIzJKyb
+         Arhw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:references:from:in-reply-to
+         :content-transfer-encoding;
+        bh=1MSE7/4NBGap+W1j2UbRCLpLl00e/5q4mcZh2q9c7OY=;
+        b=pgIj3ND7oIfxi33jagRrk3o0s41biaPEMciHunFG3dmW5ACV6A5OYbAXJgHQaSVdsR
+         M43Hd5T2VCi7vIP6uDQnSZ2Ztr0Pur9jdBlWY/Ro0/L74dLJbm+adVudonlXzqpPqPFe
+         uJYsea03bN+ZIbKp4AW9k6D0Y3tuydwWtWnDOgH/wmW5OuXAlwJZ8W/30+DUAvCMrTUr
+         fwGoz4qvryf/ERxGW9o8sYw5jmUJ3e6VbilojLsVeAU1sPe4KvA4MDxnRNDqzxSZtWBG
+         YSPUm8b68F+d9u0aDyGdmyw+KkzjADvFrbB2YPcwMHzgrsmgY3kVsZhoT2wP9+uxhFb9
+         +yaQ==
+X-Gm-Message-State: AOAM531cbQNkZeFuX6SQNVLQng0AyTJLPM0GLSZwMzS/y/DyQL4j1AuM
+	5hyQ8VzOoG/hn2qjpk1DEyc=
+X-Google-Smtp-Source: 
+ ABdhPJzzqjzxRf6ag0YCmkhh2QHp8C7Laq4gm8Ii3ScM1Niug8TG0IokEJ/sExZeCFs6qVszwtZUOg==
+X-Received: by 2002:a17:90a:faa:b0:1bf:b996:42c0 with SMTP id
+ 39-20020a17090a0faa00b001bfb99642c0mr3114817pjz.197.1646888561480;
+        Wed, 09 Mar 2022 21:02:41 -0800 (PST)
+Received: from [10.21.12.132] ([12.186.46.6])
+        by smtp.gmail.com with ESMTPSA id
+ k22-20020aa788d6000000b004f73278d1aasm5051237pff.138.2022.03.09.21.02.40
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 09 Mar 2022 21:02:40 -0800 (PST)
+Message-ID: <cb279bf8-bcbb-16cd-5e42-078ad181e4c1@gmail.com>
+Date: Wed, 9 Mar 2022 21:02:39 -0800
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Subject: Re: [oe] [meta-oe][dunfell][PATCH] p7zip: build and package lib7z.so
+ needed for fastboot
+Content-Language: en-US
+To: akash.hadke@kpit.com, openembedded-devel@lists.openembedded.org
+References: <777eceb3-6341-21ef-34f4-00e6c552d96c@gmail.com>
+ <28973.1646633028649902215@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+In-Reply-To: <28973.1646633028649902215@lists.openembedded.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Mar 2022 23:29:01 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Mar 2022 05:02:43 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95916
+ https://lists.openembedded.org/g/openembedded-devel/message/95917
 
-From: Kai Kang <kai.kang@windriver.com>
 
-wxWidgets hardcodes libdir with 'lib' and does not support multilib
-which will change it. Respect variable wxPLATFORM_LIB_DIR to support
-libdir be configurable.
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- .../wxwidgets/fix-libdir-for-multilib.patch   | 83 +++++++++++++++++++
- .../wxwidgets/wxwidgets_git.bb                |  2 +
- 2 files changed, 85 insertions(+)
- create mode 100644 meta-oe/recipes-extended/wxwidgets/wxwidgets/fix-libdir-for-multilib.patch
+On 3/6/22 22:03, akash hadke via lists.openembedded.org wrote:
+> Hi Armin,
+>
+> Do you want me to add 'Upstream-Status:' in 
+> 'change_numMethods_from_bool_to_unsigned.patch'? Its already present 
+> as 'Pending'.
 
-diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets/fix-libdir-for-multilib.patch b/meta-oe/recipes-extended/wxwidgets/wxwidgets/fix-libdir-for-multilib.patch
-new file mode 100644
-index 000000000..637e54b2b
---- /dev/null
-+++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets/fix-libdir-for-multilib.patch
-@@ -0,0 +1,83 @@
-+wxWidgets hardcodes libdir with 'lib' and does not support multilib which will
-+change it. Respect variable wxPLATFORM_LIB_DIR to support libdir be configurable.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+ CMakeLists.txt              | 2 +-
-+ build/cmake/config.cmake    | 2 +-
-+ build/cmake/functions.cmake | 6 +++---
-+ build/cmake/install.cmake   | 6 +++---
-+ 4 files changed, 8 insertions(+), 8 deletions(-)
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index e30d3db934..8f93c57108 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -37,7 +37,7 @@ include(build/cmake/policies.cmake NO_POLICY_SCOPE)
-+ # Initialize variables for quick access to wx root dir in sub dirs
-+ set(wxSOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
-+ set(wxBINARY_DIR ${CMAKE_BINARY_DIR})
-+-set(wxOUTPUT_DIR ${wxBINARY_DIR}/lib)
-++set(wxOUTPUT_DIR ${wxBINARY_DIR}/lib${wxPLATFORM_LIB_DIR})
-+ 
-+ # parse the version number from wx/version.h and include in wxMAJOR_VERSION and wxMINOR_VERSION
-+ file(READ include/wx/version.h WX_VERSION_H_CONTENTS)
-+diff --git a/build/cmake/config.cmake b/build/cmake/config.cmake
-+index 6978cc2725..ed16ee5635 100644
-+--- a/build/cmake/config.cmake
-++++ b/build/cmake/config.cmake
-+@@ -52,7 +52,7 @@ function(wx_write_config_inplace)
-+     execute_process(
-+         COMMAND
-+         ${CMAKE_COMMAND} -E create_symlink
-+-        "lib/wx/config/inplace-${TOOLCHAIN_FULLNAME}"
-++        "lib${wxPLATFORM_LIB_DIR}/wx/config/inplace-${TOOLCHAIN_FULLNAME}"
-+         "${CMAKE_CURRENT_BINARY_DIR}/wx-config"
-+         )
-+ endfunction()
-+diff --git a/build/cmake/functions.cmake b/build/cmake/functions.cmake
-+index c33dd3946c..51e47e05b3 100644
-+--- a/build/cmake/functions.cmake
-++++ b/build/cmake/functions.cmake
-+@@ -78,9 +78,9 @@ function(wx_set_common_target_properties target_name)
-+     cmake_parse_arguments(wxCOMMON_TARGET_PROPS "DEFAULT_WARNINGS" "" "" ${ARGN})
-+ 
-+     set_target_properties(${target_name} PROPERTIES
-+-        LIBRARY_OUTPUT_DIRECTORY "${wxOUTPUT_DIR}${wxPLATFORM_LIB_DIR}"
-+-        ARCHIVE_OUTPUT_DIRECTORY "${wxOUTPUT_DIR}${wxPLATFORM_LIB_DIR}"
-+-        RUNTIME_OUTPUT_DIRECTORY "${wxOUTPUT_DIR}${wxPLATFORM_LIB_DIR}"
-++        LIBRARY_OUTPUT_DIRECTORY "${wxOUTPUT_DIR}"
-++        ARCHIVE_OUTPUT_DIRECTORY "${wxOUTPUT_DIR}"
-++        RUNTIME_OUTPUT_DIRECTORY "${wxOUTPUT_DIR}"
-+         )
-+ 
-+     if(MSVC)
-+diff --git a/build/cmake/install.cmake b/build/cmake/install.cmake
-+index 968dff859e..c850c51844 100644
-+--- a/build/cmake/install.cmake
-++++ b/build/cmake/install.cmake
-+@@ -33,11 +33,11 @@ if(MSVC)
-+ else()
-+     wx_install(
-+         DIRECTORY "${wxSETUP_HEADER_PATH}"
-+-        DESTINATION "lib/wx/include")
-++        DESTINATION "lib${wxPLATFORM_LIB_DIR}/wx/include")
-+ 
-+     wx_install(
-+         FILES "${wxOUTPUT_DIR}/wx/config/${wxBUILD_FILE_ID}"
-+-        DESTINATION "lib/wx/config"
-++        DESTINATION "lib${wxPLATFORM_LIB_DIR}/wx/config"
-+         PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
-+                     GROUP_EXECUTE GROUP_READ
-+                     WORLD_EXECUTE WORLD_READ
-+@@ -46,7 +46,7 @@ else()
-+     install(DIRECTORY DESTINATION "bin")
-+     install(CODE "execute_process( \
-+         COMMAND ${CMAKE_COMMAND} -E create_symlink \
-+-        ${CMAKE_INSTALL_PREFIX}/lib/wx/config/${wxBUILD_FILE_ID} \
-++        ${CMAKE_INSTALL_PREFIX}/lib${wxPLATFORM_LIB_DIR}/wx/config/${wxBUILD_FILE_ID} \
-+         ${CMAKE_INSTALL_PREFIX}/bin/wx-config \
-+         )"
-+     )
-diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb b/meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb
-index 404ab2605..724bc0084 100644
---- a/meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb
-+++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb
-@@ -24,6 +24,7 @@ DEPENDS += " \
- SRC_URI = " \
-     git://github.com/wxWidgets/wxWidgets.git;branch=master;protocol=https \
-     file://0001-wx-config.in-Disable-cross-magic-it-does-not-work-fo.patch \
-+    file://fix-libdir-for-multilib.patch \
- "
- PV = "3.1.4"
- SRCREV= "6cdaedd42ba59331b3dc4ead50e0bac76ae14c19"
-@@ -37,6 +38,7 @@ EXTRA_OECMAKE += " \
-     -DwxUSE_LIBPNG=sys \
-     -DwxUSE_LIBTIFF=sys \
-     -DwxUSE_REGEX=builtin \
-+    -DwxPLATFORM_LIB_DIR=${@d.getVar('baselib').replace('lib', '')} \
- "
- EXTRA_OECMAKE:append:libc-musl = " \
-     -DHAVE_LOCALE_T=OFF \
--- 
-2.17.1
+If only I could read. I just saw it
+
+- armin.
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#95832): https://lists.openembedded.org/g/openembedded-devel/message/95832
+> Mute This Topic: https://lists.openembedded.org/mt/89497302/3616698
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
