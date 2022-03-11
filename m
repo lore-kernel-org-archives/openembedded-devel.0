@@ -1,101 +1,165 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ross@burtonini.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D65D2C433EF
-	for <webhook@archiver.kernel.org>; Fri, 11 Mar 2022 16:56:16 +0000 (UTC)
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com
- [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web09.7706.1647017776319687997
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE3E4C433EF
+	for <webhook@archiver.kernel.org>; Fri, 11 Mar 2022 17:00:30 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by mx.groups.io with SMTP id smtpd.web11.7755.1647018029870098733
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Mar 2022 08:56:16 -0800
+ Fri, 11 Mar 2022 09:00:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=KF4LPXw6;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id cx5so8678170pjb.1
-        for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Mar 2022 08:56:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=4gBy1hoEkrSiRZ9tS3z2veZeQgJoDL5kwRPIM1DVjsA=;
-        b=KF4LPXw6sjt8kiOaT5EMljQLpogmHxMbMFwKY+ZmUdqdlVvALy9S/XY5f/qLuLuX6R
-         leD/mpleSlP9M6Nnaxpekl3TOomuTwdRiqCpxYqO9nzgyxr1fZoW5Ehrk/PSSmSqJhfZ
-         96zeOlMpUHCKGT1s5hi8BJ/D7sLOmpwV8qpml8kDGY9TcSV7LZr2LvI9Zdji08mJIrkc
-         dDcg8XJnYEyGTneM33L1pJkthU0CeL+J8xkdoQBBpiBx2+E3r/JI5eEUM+a7af6zbHIV
-         97DRyykmY8ih7/ZPCRX7JEbIOB0onypJSJEHDX8CzrVzOdkkaqjtHJwJoCFfBgv+FnK/
-         s7MA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=4gBy1hoEkrSiRZ9tS3z2veZeQgJoDL5kwRPIM1DVjsA=;
-        b=dX1OZzqDng2CtYaT3247LmApXnPxsMmyIeqnYynlumd34pTveTkIbcxecZ9gktC7hX
-         4gqMckdfOVU6Fn0hhNRmLHtRY67odd0tS7efKU4VOAAEV6wM1iLJ4345b+yQpYiVD99o
-         6oSUgVArM37DqoZhrKDEq0ab5/PxG8NLJwI7nD6tND8cXv7/sOpHmyELT/bgHuL4M0ed
-         o/4QOi3bIWGEq+m1c8mtF9LXBZZboP7z/+Dw3nGnW8PIRK8nFFZeO2PPdT91+/a+usNY
-         9HhAzWs5HwhZJO3r5i81i0DYFJpcDFM51N55JlRbCYIeTROUJ/Rt/YwiGsuutse50x7Y
-         J+yg==
-X-Gm-Message-State: AOAM531XJcpSnv2QixonHI2PGzx3znmxNfD9VQ967SbkKJJCGkQzKk/f
-	5JjkYyjlYq6Cp0HYZP7pTYDnMCH1eFW6DQ==
-X-Google-Smtp-Source: 
- ABdhPJyQaYCcHkfN1cHn+0qOwb5WSQtgYaTmQr8y3vENUk3rtPd0czvl8g4E9tEgPqs6sx59PfgAOA==
-X-Received: by 2002:a17:902:c745:b0:151:e8fa:629b with SMTP id
- q5-20020a170902c74500b00151e8fa629bmr11685283plq.90.1647017775363;
-        Fri, 11 Mar 2022 08:56:15 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
-        by smtp.gmail.com with ESMTPSA id
- x29-20020aa79a5d000000b004f0ef1822d3sm10639597pfj.128.2022.03.11.08.56.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Mar 2022 08:56:15 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=missing;
+ spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C3958175A
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri, 11 Mar 2022 09:00:28 -0800 (PST)
+Received: from oss-tx204.lab.cambridge.arm.com
+ (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 719F03FA45
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri, 11 Mar 2022 09:00:28 -0800 (PST)
+From: Ross Burton <ross.burton@arm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] libcereal: Link libatomics on mips for ptests
-Date: Fri, 11 Mar 2022 08:56:12 -0800
-Message-Id: <20220311165612.2909327-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.35.1
+Subject: [PATCH] meta-*: remove obsolete PYPA_WHEEL and PIP_INSTALL_PACKAGE
+ assignments
+Date: Fri, 11 Mar 2022 17:00:25 +0000
+Message-Id: <20220311170025.21266-1-ross.burton@arm.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Mar 2022 16:56:16 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Mar 2022 17:00:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95954
+ https://lists.openembedded.org/g/openembedded-devel/message/95955
 
-clang/mips emits calls to atomic builtins which it expects from C
-runtime perhaps but compiler-rt does not provide them so link in
-libatomics
+These variables are no longer used by pip_install_wheel, so remove them
+from all recipes that set them.
 
-Fixes
-atomic.cpp:(.text._ZN6cereal12Inpu
-tArchiveINS_16JSONInputArchiveELj0EE7processIRNSt3__16atomicIdEEEEvOT_[_ZN6cereal12InputArchiveINS_16JSONInputArchiveELj0EE7processIRNSt3__16atomicIdEEEEvOT_]+0x10c): undefined reference to `__atomic_store_8'
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ meta-networking/recipes-connectivity/bluepy/bluepy_git.bb  | 2 --
+ .../recipes-devtools/python/python3-scapy_2.4.5.bb         | 2 --
+ meta-oe/recipes-devtools/guider/guider_3.9.8.bb            | 1 -
+ meta-oe/recipes-devtools/python/python3-apt_2.3.0.bb       | 2 --
+ meta-oe/recipes-extended/sanlock/sanlock_3.8.4.bb          | 3 ---
+ .../python/python3-flask-versioned_0.9.4-20101221.bb       | 7 -------
+ meta-python/recipes-devtools/python/python3-path_16.4.0.bb | 1 -
+ 7 files changed, 18 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb b/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
-index 250ea97f40..fb37de3c30 100644
---- a/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
-+++ b/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
-@@ -26,9 +26,10 @@ S = "${WORKDIR}/git"
- 
- inherit cmake pkgconfig ptest
- 
--PACKAGECONFIG ??= "${@bb.utils.contains('PTEST_ENABLED', '1', 'with-tests', '', d)}"
--PACKAGECONFIG[with-tests] = "-DWITH_WERROR=OFF -DBUILD_TESTS=ON,,"
-+LIBATOMIC:mips:toolchain-clang = "${@bb.utils.contains('PTEST_ENABLED', '1', '-DCEREAL_THREAD_LIBS="-latomic"', '', d)}"
- 
-+PACKAGECONFIG ??= "${@bb.utils.contains('PTEST_ENABLED', '1', 'with-tests', '', d)}"
-+PACKAGECONFIG[with-tests] = "-DWITH_WERROR=OFF -DBUILD_TESTS=ON ${LIBATOMIC},,"
- EXTRA_OECMAKE = "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', '', '-DJUST_INSTALL_CEREAL=ON', d)} \
-                  ${@['','-DSKIP_PORTABILITY_TEST=ON'][d.getVar('SITEINFO_BITS') != '32']}"
- 
--- 
-2.35.1
+diff --git a/meta-networking/recipes-connectivity/bluepy/bluepy_git.bb b/=
+meta-networking/recipes-connectivity/bluepy/bluepy_git.bb
+index ba5d9ac0e6..8e164708ed 100644
+--- a/meta-networking/recipes-connectivity/bluepy/bluepy_git.bb
++++ b/meta-networking/recipes-connectivity/bluepy/bluepy_git.bb
+@@ -15,8 +15,6 @@ S =3D "${WORKDIR}/git"
+=20
+ inherit setuptools3 pkgconfig
+=20
+-PYPA_WHEEL =3D "${PIP_INSTALL_DIST_PATH}/${PIP_INSTALL_PACKAGE}-*-*.whl"
+-
+ RDEPENDS:${PN} =3D "bluez5"
+=20
+ TARGET_CC_ARCH +=3D "${LDFLAGS}"
+diff --git a/meta-networking/recipes-devtools/python/python3-scapy_2.4.5.=
+bb b/meta-networking/recipes-devtools/python/python3-scapy_2.4.5.bb
+index 53c2ce3d8e..0f66dfd784 100644
+--- a/meta-networking/recipes-devtools/python/python3-scapy_2.4.5.bb
++++ b/meta-networking/recipes-devtools/python/python3-scapy_2.4.5.bb
+@@ -25,8 +25,6 @@ S =3D "${WORKDIR}/git"
+ UPSTREAM_CHECK_COMMITS =3D "1"
+=20
+ inherit setuptools3 ptest
+-PIP_INSTALL_PACKAGE =3D "scapy"
+-PYPA_WHEEL =3D "${PIP_INSTALL_DIST_PATH}/${PIP_INSTALL_PACKAGE}-*-*.whl"
+=20
+ do_install:append() {
+         mv ${D}${bindir}/scapy ${D}${bindir}/scapy3
+diff --git a/meta-oe/recipes-devtools/guider/guider_3.9.8.bb b/meta-oe/re=
+cipes-devtools/guider/guider_3.9.8.bb
+index c519fa02a3..30d17c84b3 100644
+--- a/meta-oe/recipes-devtools/guider/guider_3.9.8.bb
++++ b/meta-oe/recipes-devtools/guider/guider_3.9.8.bb
+@@ -14,7 +14,6 @@ SRCREV =3D "a502cd93b13235b7539557a91328de00b7c51bc3"
+ S =3D "${WORKDIR}/git"
+=20
+ inherit setuptools3
+-PYPA_WHEEL =3D "${PIP_INSTALL_DIST_PATH}/${PIP_INSTALL_PACKAGE}-3.9.8-*.=
+whl"
+=20
+ RDEPENDS:${PN} =3D "python3 python3-core \
+         python3-ctypes python3-shell python3-json"
+diff --git a/meta-oe/recipes-devtools/python/python3-apt_2.3.0.bb b/meta-=
+oe/recipes-devtools/python/python3-apt_2.3.0.bb
+index e17e773cb4..ec1539b442 100644
+--- a/meta-oe/recipes-devtools/python/python3-apt_2.3.0.bb
++++ b/meta-oe/recipes-devtools/python/python3-apt_2.3.0.bb
+@@ -10,8 +10,6 @@ SRCREV =3D "6145b6484d220685edfd922d364afbf065127efe"
+ S =3D "${WORKDIR}/git"
+=20
+ inherit setuptools3
+-PIP_INSTALL_PACKAGE =3D "python_apt"
+-PYPA_WHEEL =3D "${PIP_INSTALL_DIST_PATH}/${PIP_INSTALL_PACKAGE}-0.0.0-*.=
+whl"
+=20
+ DEPENDS +=3D "apt"
+ RDEPENDS:${PN} +=3D "apt python3-core"
+diff --git a/meta-oe/recipes-extended/sanlock/sanlock_3.8.4.bb b/meta-oe/=
+recipes-extended/sanlock/sanlock_3.8.4.bb
+index d8cb24cab0..ecbfad394d 100644
+--- a/meta-oe/recipes-extended/sanlock/sanlock_3.8.4.bb
++++ b/meta-oe/recipes-extended/sanlock/sanlock_3.8.4.bb
+@@ -26,9 +26,6 @@ DEPENDS =3D "libaio util-linux"
+ inherit setuptools3 useradd
+=20
+ SETUPTOOLS_SETUP_PATH =3D "${S}/python"
+-PIP_INSTALL_DIST_PATH =3D "${B}/python/dist"
+-PIP_INSTALL_PACKAGE =3D "sanlock_python"
+-PYPA_WHEEL =3D "${PIP_INSTALL_DIST_PATH}/${PIP_INSTALL_PACKAGE}-3.8.4-*.=
+whl"
+=20
+ do_compile:prepend () {
+     oe_runmake -C ${S}/wdmd CMD_LDFLAGS=3D"${LDFLAGS}" LIB_LDFLAGS=3D"${=
+LDFLAGS}"
+diff --git a/meta-python/recipes-devtools/python/python3-flask-versioned_=
+0.9.4-20101221.bb b/meta-python/recipes-devtools/python/python3-flask-ver=
+sioned_0.9.4-20101221.bb
+index 04493b21d4..7aaf439b83 100644
+--- a/meta-python/recipes-devtools/python/python3-flask-versioned_0.9.4-2=
+0101221.bb
++++ b/meta-python/recipes-devtools/python/python3-flask-versioned_0.9.4-2=
+0101221.bb
+@@ -7,10 +7,3 @@ PYPI_PACKAGE =3D "Flask-Versioned"
+ SRC_URI[sha256sum] =3D "516694dc860a1bc4f22ab60b324a85083c0150522be10928=
+2a3bed681057fd34"
+=20
+ inherit pypi setuptools3
+-
+-def get_pypa_wheel_name(d):
+-    return (d.getVar('PIP_INSTALL_DIST_PATH') + '/' + \
+-           d.getVar('PIP_INSTALL_PACKAGE') + '-'  + \
+-           d.getVar('PV').replace('-', '.post') + '-*.whl')
+-
+-PYPA_WHEEL =3D "${@get_pypa_wheel_name(d)}"
+diff --git a/meta-python/recipes-devtools/python/python3-path_16.4.0.bb b=
+/meta-python/recipes-devtools/python/python3-path_16.4.0.bb
+index 0fc0a33b2b..60ac948cf4 100644
+--- a/meta-python/recipes-devtools/python/python3-path_16.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-path_16.4.0.bb
+@@ -5,6 +5,5 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D7a7126e0682062=
+90f3fe9f8d6c713ea6"
+ SRC_URI[sha256sum] =3D "baf2e757c4b19be8208f9e67e48fb475b4a577d5613590ce=
+46693bdbdf082f52"
+=20
+ inherit pypi setuptools_build_meta
+-PYPA_WHEEL =3D "${PIP_INSTALL_DIST_PATH}/${PIP_INSTALL_PACKAGE}-0.0.0-*.=
+whl"
+=20
+ BBCLASSEXTEND =3D "nativesdk native"
+--=20
+2.25.1
 
 
