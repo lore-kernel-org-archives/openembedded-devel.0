@@ -1,151 +1,426 @@
-Return-Path: <rybczynska@gmail.com>
+Return-Path: <macpaul.lin@mediatek.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A08CC433F5
-	for <webhook@archiver.kernel.org>; Fri, 11 Mar 2022 05:27:04 +0000 (UTC)
-Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com
- [209.85.167.47])
- by mx.groups.io with SMTP id smtpd.web12.2614.1646976423106278733
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BA63C433F5
+	for <webhook@archiver.kernel.org>; Fri, 11 Mar 2022 07:57:38 +0000 (UTC)
+Received: from mailgw01.mediatek.com (mailgw01.mediatek.com [60.244.123.138])
+ by mx.groups.io with SMTP id smtpd.web10.3304.1646985456948451255
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Mar 2022 21:27:03 -0800
+ Thu, 10 Mar 2022 23:57:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=mimz7W3f;
- spf=pass (domain: gmail.com, ip: 209.85.167.47,
- mailfrom: rybczynska@gmail.com)
-Received: by mail-lf1-f47.google.com with SMTP id bu29so13291369lfb.0
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Mar 2022 21:27:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=MVWW0ju5GqA3XTRTn2ktACVi5ifGcYs6ZHcBSLG/1eU=;
-        b=mimz7W3fwb+7w1uyKmDEPrkZqsUwVXjbkBCwIGfCPAjfCePcdhV7lpV8HLVScgG3Xn
-         Lz/+mA2fu6JQ3HyUvIkCvEND57ZtBpC3HgiRYlRfwZMyM58fNb90Xi+IArrLA8aJJmvv
-         759AkEyJ2OXr8W2HZMb/hf09JsvgiDfX495NXJkMB1h++R+yd+wAXTeVR1JZ+FP+Vygh
-         YNfqPNLLd6hYMFKhLQ3/hKt5FadfapMplJ4+xlW+pY4szL/S+vLb/MwyJzHb+HHjkT5W
-         GmdXpr1sFsJAuKMruaP4OOAOdYTrApejwN9DM2aKpm10iVo+Legi67GmfxvvLdYSRQhk
-         2tjQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=MVWW0ju5GqA3XTRTn2ktACVi5ifGcYs6ZHcBSLG/1eU=;
-        b=K/UFlGUw9DdyO1SiGUmvNa7MCK9ldrrhWWTKzQWtkiefVNJ8YGoarxMo0GnrIXt8hD
-         aXDMQ7fwVKw/8Y70GnjfBy2lc/tHFIxpqLd1s20JXL+tDHg7O+1Kmv72VfmHrPzxilr3
-         sMtJ/wY6w39Hra71ljf5BV7GQgffLvmSDtafqNoWNiXvJ8njAl6U7WKXhBtsfZ/jnZqZ
-         8XcNFFrh3fqPcRSYX3mhX8AgiTxJrkhCNpa1sxQvjykOMur5NJRUfSdfLSbY47FErsIx
-         jbY54Smjj8HqHdGI2orZEKtRK7ZqKA5HzxdEztslWYq3CS/eYhHZLeVxkGeD8Hc4soAl
-         IQgg==
-X-Gm-Message-State: AOAM532R0dwrK/HWXVy0IFycXCAqSOFe10gxhIp5LhS80oPaoq1KNTwQ
-	1ZAEl+If4GZZZpZZrXadPmrHcmi6Km/ruvbkqbU=
-X-Google-Smtp-Source: 
- ABdhPJxsyCdb6zfaLlaPdmGOlHhaHWT4kVUonYW3O+BVAdt5K9OztyqWvwdaxdyCcOhlyKbIDZpsgE8I8sd5I9MYJdg=
-X-Received: by 2002:a05:6512:2305:b0:448:614a:b597 with SMTP id
- o5-20020a056512230500b00448614ab597mr4127118lfu.277.1646976420931; Thu, 10
- Mar 2022 21:27:00 -0800 (PST)
+ dkim=missing;
+ spf=pass (domain: mediatek.com, ip: 60.244.123.138, mailfrom: macpaul.lin@mediatek.com)
+X-UUID: f461dfee1a534be2b5e9a55a5576fbd9-20220311
+X-UUID: f461dfee1a534be2b5e9a55a5576fbd9-20220311
+Received: from mtkmbs10n1.mediatek.inc [(172.21.101.34)] by
+ mailgw01.mediatek.com
+	(envelope-from <macpaul.lin@mediatek.com>)
+	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+	with ESMTP id 1155209436; Fri, 11 Mar 2022 15:57:19 +0800
+Received: from mtkcas11.mediatek.inc (172.21.101.40) by
+ mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.2.792.3;
+ Fri, 11 Mar 2022 15:57:18 +0800
+Received: from mtksdccf07.mediatek.inc (172.21.84.99) by mtkcas11.mediatek.inc
+ (172.21.101.73) with Microsoft SMTP Server id 15.0.1497.2 via Frontend
+ Transport; Fri, 11 Mar 2022 15:57:18 +0800
+From: Macpaul Lin <macpaul.lin@mediatek.com>
+To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
+CC: Miles Chen <miles.chen@mediatek.com>, Bear Wang <bear.wang@mediatek.com>,
+	Pablo Sun <pablo.sun@mediatek.com>, Fabien Parent <fparent@baylibre.com>,
+	Macpaul Lin <macpaul.lin@mediatek.com>, Macpaul Lin <macpaul@gmail.com>,
+	Jiacheng Liu <jiacheng.liu@mediatek.com>
+Subject: [meta-oe][PATCH] android-tools: adb: add u3 ss descriptor support
+Date: Fri, 11 Mar 2022 15:57:10 +0800
+Message-ID: <20220311075710.29970-1-macpaul.lin@mediatek.com>
+X-Mailer: git-send-email 2.18.0
 MIME-Version: 1.0
-References: <20220311041033.1684086-1-shin.matsunaga@fujitsu.com>
-In-Reply-To: <20220311041033.1684086-1-shin.matsunaga@fujitsu.com>
-From: Marta Rybczynska <rybczynska@gmail.com>
-Date: Fri, 11 Mar 2022 06:26:48 +0100
-Message-ID: 
- <CAApg2=RCBt272k4-b0x+ymoToqbHam7ZVJRFt=f4kw7zLQXJ8w@mail.gmail.com>
-Subject: Re: [oe] [PATCH] ecryptfs-utils: add CVE-2016-1572 to allowlist
-To: Matsunaga-Shinji <shin.matsunaga@fujitsu.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="00000000000085eefe05d9ea947d"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-MTK: N
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Mar 2022 05:27:04 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Mar 2022 07:57:38 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95947
+ https://lists.openembedded.org/g/openembedded-devel/message/95948
 
---00000000000085eefe05d9ea947d
-Content-Type: text/plain; charset="UTF-8"
+Porting u3 Superspeed descriptor support to open-embedded android-tools package.
+This patch origins from the the patch in android project [1], but has been
+modified for backporting to android-tools_5.1.1.r37.
 
-On Fri, Mar 11, 2022, 05:14 Matsunaga-Shinji <shin.matsunaga@fujitsu.com>
-wrote:
+[1] https://android.googlesource.com/platform/system/core/+/d6ee9f26a5163af4121f4380264fcbd4e6851a17%5E%21
 
-> Patch for CVE-2016-1572 is applied in version 109.
->
-> Signed-off-by: matsunaga-shinji <shin.matsunaga@fujitsu.com>
-> ---
->  recipes-security/ecryptfs-utils/ecryptfs-utils_111.bb | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/recipes-security/ecryptfs-utils/ecryptfs-utils_111.bb
-> b/recipes-security/ecryptfs-utils/ecryptfs-utils_111.bb
-> index 9aefc32..d98724c 100644
-> --- a/recipes-security/ecryptfs-utils/ecryptfs-utils_111.bb
-> +++ b/recipes-security/ecryptfs-utils/ecryptfs-utils_111.bb
-> @@ -68,3 +68,6 @@ FILES:${PN} += "${base_libdir}/security/*
-> ${base_libdir}/ecryptfs/*"
->
->  RDEPENDS:${PN} += "cryptsetup"
->  RRECOMMENDS:${PN} = "gettext-runtime"
-> +
-> +# Patch for CVE-2016-1572 is applied in version 109.
-> +CVE_CHECK_IGNORE += "CVE-2016-1572"
->
+Signed-off-by: Macpaul Lin <macpaul.lin@mediatek.com>
+Signed-off-by: Jiacheng Liu <jiacheng.liu@mediatek.com>
+---
+ ...add-u3-ss-descriptor-support-for-adb.patch | 342 ++++++++++++++++++
+ .../android-tools/android-tools_5.1.1.r37.bb  |   1 +
+ 2 files changed, 343 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0014-add-u3-ss-descriptor-support-for-adb.patch
 
-Wouldn't it be better to report this to the NVD and do the fix in the
-database instead?
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0014-add-u3-ss-descriptor-support-for-adb.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0014-add-u3-ss-descriptor-support-for-adb.patch
+new file mode 100644
+index 000000000..05973aaaf
+--- /dev/null
++++ b/meta-oe/recipes-devtools/android-tools/android-tools/core/0014-add-u3-ss-descriptor-support-for-adb.patch
+@@ -0,0 +1,342 @@
++From dae9a11f3a158357966399aef97c48b5f16934d9 Mon Sep 17 00:00:00 2001
++From: Jiacheng Liu <jiacheng.liu@mediatek.com>
++Date: Sat, 24 Jul 2021 11:01:18 +0800
++Subject: [PATCH] android-tools: adb: add u3 ss descriptor support
++
++Porting u3 Superspeed descriptor support to open-embedded android-tools package.
++This patch origins from the the patch in android project [1], but has been
++modified for backporting to android-tools_5.1.1.r37.
++
++[1] https://android.googlesource.com/platform/system/core/+/d6ee9f26a5163af4121f4380264fcbd4e6851a17%5E%21
++
++Signed-off-by: Macpaul Lin <macpaul.lin@mediatek.com>
++Signed-off-by: Jiacheng Liu <jiacheng.liu@mediatek.com>
++---
++ adb/usb_linux_client.c | 275 +++++++++++++++++++++++++++++++----------
++ 1 file changed, 207 insertions(+), 68 deletions(-)
++
++diff --git a/adb/usb_linux_client.c b/adb/usb_linux_client.c
++index 6e8b5bb..884e85e 100644
++--- a/adb/usb_linux_client.c
+++++ b/adb/usb_linux_client.c
++@@ -31,8 +31,10 @@
++ #define   TRACE_TAG  TRACE_USB
++ #include "adb.h"
++ 
+++#define USB_EXT_PROP_UNICODE    1
++ #define MAX_PACKET_SIZE_FS	64
++ #define MAX_PACKET_SIZE_HS	512
+++#define MAX_PACKET_SIZE_SS	1024
++ 
++ #if __BYTE_ORDER == __LITTLE_ENDIAN
++ # define cpu_to_le16(x) (x)
++@@ -62,74 +64,185 @@ struct usb_handle
++     int bulk_in;  /* "in" from the host's perspective => sink for adbd */
++ };
++ 
++-static const struct {
++-    struct usb_functionfs_descs_head header;
++-    struct {
++-        struct usb_interface_descriptor intf;
++-        struct usb_endpoint_descriptor_no_audio source;
++-        struct usb_endpoint_descriptor_no_audio sink;
++-    } __attribute__((packed)) fs_descs, hs_descs;
++-} __attribute__((packed)) descriptors = {
++-    .header = {
++-        .magic = cpu_to_le32(FUNCTIONFS_DESCRIPTORS_MAGIC),
++-        .length = cpu_to_le32(sizeof(descriptors)),
++-        .fs_count = 3,
++-        .hs_count = 3,
+++struct func_desc {
+++    struct usb_interface_descriptor intf;
+++    struct usb_endpoint_descriptor_no_audio source;
+++    struct usb_endpoint_descriptor_no_audio sink;
+++} __attribute__((packed));
+++
+++struct ss_func_desc {
+++    struct usb_interface_descriptor intf;
+++    struct usb_endpoint_descriptor_no_audio source;
+++    struct usb_ss_ep_comp_descriptor source_comp;
+++    struct usb_endpoint_descriptor_no_audio sink;
+++    struct usb_ss_ep_comp_descriptor sink_comp;
+++} __attribute__((packed));
+++
+++struct desc_v1 {
+++    struct usb_functionfs_descs_head_v1 {
+++        __le32 magic;
+++        __le32 length;
+++        __le32 fs_count;
+++        __le32 hs_count;
+++    } __attribute__((packed)) header;
+++    struct func_desc fs_descs, hs_descs;
+++} __attribute__((packed));
+++
+++struct usb_os_desc_ext_prop {
+++    uint32_t dwSize;
+++    uint32_t dwPropertyDataType;
+++
+++    // Property name and value are transmitted as UTF-16, but the kernel only
+++    // accepts ASCII values and performs the conversion for us.
+++    uint16_t wPropertyNameLength;
+++    char bPropertyName[20];
+++
+++    uint32_t dwPropertyDataLength;
+++    char bProperty[39];
+++} __attribute__((packed)) os_desc_guid = {
+++    .dwSize = sizeof(struct usb_os_desc_ext_prop),
+++    .dwPropertyDataType = cpu_to_le32(USB_EXT_PROP_UNICODE),
+++    .wPropertyNameLength = cpu_to_le16(20),
+++    .bPropertyName = "DeviceInterfaceGUID",
+++    .dwPropertyDataLength = cpu_to_le32(39),
+++    .bProperty = "{F72FE0D4-CBCB-407D-8814-9ED673D0DD6B}",
+++};
+++
+++struct usb_ext_prop_values {
+++    struct usb_os_desc_ext_prop guid;
+++} __attribute__((packed));
+++
+++struct desc_v2 {
+++    struct usb_functionfs_descs_head_v2 header;
+++    // The rest of the structure depends on the flags in the header.
+++    __le32 fs_count;
+++    __le32 hs_count;
+++    __le32 ss_count;
+++    __le32 os_count;
+++    struct func_desc fs_descs, hs_descs;
+++    struct ss_func_desc ss_descs;
+++    struct usb_os_desc_header os_header;
+++    struct usb_ext_compat_desc os_desc;
+++    struct usb_os_desc_header os_prop_header;
+++    struct usb_ext_prop_values os_prop_values;
+++} __attribute__((packed));
+++
+++static struct func_desc fs_descriptors = {
+++    .intf = {
+++        .bLength = sizeof(fs_descriptors.intf),
+++        .bDescriptorType = USB_DT_INTERFACE,
+++        .bInterfaceNumber = 0,
+++        .bNumEndpoints = 2,
+++        .bInterfaceClass = ADB_CLASS,
+++        .bInterfaceSubClass = ADB_SUBCLASS,
+++        .bInterfaceProtocol = ADB_PROTOCOL,
+++        .iInterface = 1, /* first string from the provided table */
+++    },
+++    .source = {
+++        .bLength = sizeof(fs_descriptors.source),
+++        .bDescriptorType = USB_DT_ENDPOINT,
+++        .bEndpointAddress = 1 | USB_DIR_OUT,
+++        .bmAttributes = USB_ENDPOINT_XFER_BULK,
+++        .wMaxPacketSize = MAX_PACKET_SIZE_FS,
+++    },
+++    .sink = {
+++        .bLength = sizeof(fs_descriptors.sink),
+++        .bDescriptorType = USB_DT_ENDPOINT,
+++        .bEndpointAddress = 2 | USB_DIR_IN,
+++        .bmAttributes = USB_ENDPOINT_XFER_BULK,
+++        .wMaxPacketSize = MAX_PACKET_SIZE_FS,
+++    },
+++};
+++
+++static struct func_desc hs_descriptors = {
+++    .intf = {
+++        .bLength = sizeof(hs_descriptors.intf),
+++        .bDescriptorType = USB_DT_INTERFACE,
+++        .bInterfaceNumber = 0,
+++        .bNumEndpoints = 2,
+++        .bInterfaceClass = ADB_CLASS,
+++        .bInterfaceSubClass = ADB_SUBCLASS,
+++        .bInterfaceProtocol = ADB_PROTOCOL,
+++        .iInterface = 1, /* first string from the provided table */
+++    },
+++    .source = {
+++        .bLength = sizeof(hs_descriptors.source),
+++        .bDescriptorType = USB_DT_ENDPOINT,
+++        .bEndpointAddress = 1 | USB_DIR_OUT,
+++        .bmAttributes = USB_ENDPOINT_XFER_BULK,
+++        .wMaxPacketSize = MAX_PACKET_SIZE_HS,
+++    },
+++    .sink = {
+++        .bLength = sizeof(hs_descriptors.sink),
+++        .bDescriptorType = USB_DT_ENDPOINT,
+++        .bEndpointAddress = 2 | USB_DIR_IN,
+++        .bmAttributes = USB_ENDPOINT_XFER_BULK,
+++        .wMaxPacketSize = MAX_PACKET_SIZE_HS,
+++    },
+++};
+++
+++static struct ss_func_desc ss_descriptors = {
+++    .intf = {
+++        .bLength = sizeof(ss_descriptors.intf),
+++        .bDescriptorType = USB_DT_INTERFACE,
+++        .bInterfaceNumber = 0,
+++        .bNumEndpoints = 2,
+++        .bInterfaceClass = ADB_CLASS,
+++        .bInterfaceSubClass = ADB_SUBCLASS,
+++        .bInterfaceProtocol = ADB_PROTOCOL,
+++        .iInterface = 1, /* first string from the provided table */
+++    },
+++    .source = {
+++        .bLength = sizeof(ss_descriptors.source),
+++        .bDescriptorType = USB_DT_ENDPOINT,
+++        .bEndpointAddress = 1 | USB_DIR_OUT,
+++        .bmAttributes = USB_ENDPOINT_XFER_BULK,
+++        .wMaxPacketSize = MAX_PACKET_SIZE_SS,
+++    },
+++    .source_comp = {
+++        .bLength = sizeof(ss_descriptors.source_comp),
+++        .bDescriptorType = USB_DT_SS_ENDPOINT_COMP,
+++        .bMaxBurst = 4,
++     },
++-    .fs_descs = {
++-        .intf = {
++-            .bLength = sizeof(descriptors.fs_descs.intf),
++-            .bDescriptorType = USB_DT_INTERFACE,
++-            .bInterfaceNumber = 0,
++-            .bNumEndpoints = 2,
++-            .bInterfaceClass = ADB_CLASS,
++-            .bInterfaceSubClass = ADB_SUBCLASS,
++-            .bInterfaceProtocol = ADB_PROTOCOL,
++-            .iInterface = 1, /* first string from the provided table */
++-        },
++-        .source = {
++-            .bLength = sizeof(descriptors.fs_descs.source),
++-            .bDescriptorType = USB_DT_ENDPOINT,
++-            .bEndpointAddress = 1 | USB_DIR_OUT,
++-            .bmAttributes = USB_ENDPOINT_XFER_BULK,
++-            .wMaxPacketSize = MAX_PACKET_SIZE_FS,
++-        },
++-        .sink = {
++-            .bLength = sizeof(descriptors.fs_descs.sink),
++-            .bDescriptorType = USB_DT_ENDPOINT,
++-            .bEndpointAddress = 2 | USB_DIR_IN,
++-            .bmAttributes = USB_ENDPOINT_XFER_BULK,
++-            .wMaxPacketSize = MAX_PACKET_SIZE_FS,
++-        },
+++    .sink = {
+++        .bLength = sizeof(ss_descriptors.sink),
+++        .bDescriptorType = USB_DT_ENDPOINT,
+++        .bEndpointAddress = 2 | USB_DIR_IN,
+++        .bmAttributes = USB_ENDPOINT_XFER_BULK,
+++        .wMaxPacketSize = MAX_PACKET_SIZE_SS,
++     },
++-    .hs_descs = {
++-        .intf = {
++-            .bLength = sizeof(descriptors.hs_descs.intf),
++-            .bDescriptorType = USB_DT_INTERFACE,
++-            .bInterfaceNumber = 0,
++-            .bNumEndpoints = 2,
++-            .bInterfaceClass = ADB_CLASS,
++-            .bInterfaceSubClass = ADB_SUBCLASS,
++-            .bInterfaceProtocol = ADB_PROTOCOL,
++-            .iInterface = 1, /* first string from the provided table */
++-        },
++-        .source = {
++-            .bLength = sizeof(descriptors.hs_descs.source),
++-            .bDescriptorType = USB_DT_ENDPOINT,
++-            .bEndpointAddress = 1 | USB_DIR_OUT,
++-            .bmAttributes = USB_ENDPOINT_XFER_BULK,
++-            .wMaxPacketSize = MAX_PACKET_SIZE_HS,
++-        },
++-        .sink = {
++-            .bLength = sizeof(descriptors.hs_descs.sink),
++-            .bDescriptorType = USB_DT_ENDPOINT,
++-            .bEndpointAddress = 2 | USB_DIR_IN,
++-            .bmAttributes = USB_ENDPOINT_XFER_BULK,
++-            .wMaxPacketSize = MAX_PACKET_SIZE_HS,
++-        },
+++    .sink_comp = {
+++        .bLength = sizeof(ss_descriptors.sink_comp),
+++        .bDescriptorType = USB_DT_SS_ENDPOINT_COMP,
+++        .bMaxBurst = 4,
++     },
++ };
++ 
+++struct usb_ext_compat_desc os_desc_compat = {
+++    .bFirstInterfaceNumber = 0,
+++    .Reserved1 = cpu_to_le32(1),
+++    .CompatibleID = { 'W', 'I', 'N', 'U', 'S', 'B', '\0', '\0'},
+++    .SubCompatibleID = {0},
+++    .Reserved2 = {0},
+++};
+++
+++static struct usb_os_desc_header os_desc_header = {
+++    .interface = cpu_to_le32(0),
+++    .dwLength = cpu_to_le32(sizeof(os_desc_header) + sizeof(os_desc_compat)),
+++    .bcdVersion = cpu_to_le32(1),
+++    .wIndex = cpu_to_le32(4),
+++    .bCount = cpu_to_le32(1),
+++    .Reserved = cpu_to_le32(0),
+++};
+++
+++static struct usb_os_desc_header os_prop_header = {
+++    .interface = cpu_to_le32(0),
+++    .dwLength = cpu_to_le32(sizeof(os_desc_header) + sizeof(struct usb_ext_prop_values)),
+++    .bcdVersion = cpu_to_le32(1),
+++    .wIndex = cpu_to_le32(5),
+++    .wCount = cpu_to_le16(1),
+++};
+++
++ #define STR_INTERFACE_ "ADB Interface"
++ 
++ static const struct {
++@@ -151,8 +264,6 @@ static const struct {
++     },
++ };
++ 
++-
++-
++ static void *usb_adb_open_thread(void *x)
++ {
++     struct usb_handle *usb = (struct usb_handle *)x;
++@@ -270,6 +381,24 @@ static void usb_adb_init()
++ static void init_functionfs(struct usb_handle *h)
++ {
++     ssize_t ret;
+++    struct desc_v1 v1_descriptor = {};
+++    struct desc_v2 v2_descriptor = {};
+++
+++    v2_descriptor.header.magic = cpu_to_le32(FUNCTIONFS_DESCRIPTORS_MAGIC_V2);
+++    v2_descriptor.header.length = cpu_to_le32(sizeof(v2_descriptor));
+++    v2_descriptor.header.flags = FUNCTIONFS_HAS_FS_DESC | FUNCTIONFS_HAS_HS_DESC |
+++                                 FUNCTIONFS_HAS_SS_DESC | FUNCTIONFS_HAS_MS_OS_DESC;
+++    v2_descriptor.fs_count = 3;
+++    v2_descriptor.hs_count = 3;
+++    v2_descriptor.ss_count = 5;
+++    v2_descriptor.os_count = 2;
+++    v2_descriptor.fs_descs = fs_descriptors;
+++    v2_descriptor.hs_descs = hs_descriptors;
+++    v2_descriptor.ss_descs = ss_descriptors;
+++    v2_descriptor.os_header = os_desc_header;
+++    v2_descriptor.os_desc = os_desc_compat;
+++    v2_descriptor.os_prop_header = os_prop_header;
+++    v2_descriptor.os_prop_values.guid = os_desc_guid;
++ 
++     if (h->control < 0) { // might have already done this before
++         D("OPENING %s\n", USB_FFS_ADB_EP0);
++@@ -279,10 +408,20 @@ static void init_functionfs(struct usb_handle *h)
++             goto err;
++         }
++ 
++-        ret = adb_write(h->control, &descriptors, sizeof(descriptors));
+++        ret = adb_write(h->control, &v2_descriptor, sizeof(v2_descriptor));
++         if (ret < 0) {
++-            D("[ %s: write descriptors failed: errno=%d ]\n", USB_FFS_ADB_EP0, errno);
++-            goto err;
+++            D("[ %s: write v2_descriptor failed: errno=%d ]\n", USB_FFS_ADB_EP0, errno);
+++            v1_descriptor.header.magic = cpu_to_le32(FUNCTIONFS_DESCRIPTORS_MAGIC);
+++            v1_descriptor.header.length = cpu_to_le32(sizeof(v1_descriptor));
+++            v1_descriptor.header.fs_count = 3;
+++            v1_descriptor.header.hs_count = 3;
+++            v1_descriptor.fs_descs = fs_descriptors;
+++            v1_descriptor.hs_descs = hs_descriptors;
+++	    ret = adb_write(h->control, &v1_descriptor, sizeof(v1_descriptor));
+++	    if (ret < 0) {
+++		D("[ %s: failed to write USB descriptors]\n", USB_FFS_ADB_EP0);
+++		goto err;
+++	    }
++         }
++ 
++         ret = adb_write(h->control, &strings, sizeof(strings));
++-- 
++2.18.0
++
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+index ef440471b..b6c788388 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
++++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+@@ -40,6 +40,7 @@ SRC_URI = " \
+     file://core/0012-Fix-implicit-declaration-of-stlcat-strlcopy-function.patch;patchdir=system/core \
+     file://core/adb_libssl_11.diff;patchdir=system/core \
+     file://core/0013-adb-Support-riscv64.patch;patchdir=system/core \
++    file://core/0014-add-u3-ss-descriptor-support-for-adb.patch;patchdir=system/core \
+     file://extras/0001-ext4_utils-remove-selinux-extensions.patch;patchdir=system/extras \
+     file://extras/0002-ext4_utils-add-o-argument-to-preserve-ownership.patch;patchdir=system/extras \
+     file://libselinux/0001-Remove-bionic-specific-calls.patch;patchdir=external/libselinux \
+-- 
+2.18.0
 
-Regards
-Marta
-
->
-
---00000000000085eefe05d9ea947d
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
-class=3D"gmail_attr">On Fri, Mar 11, 2022, 05:14 Matsunaga-Shinji &lt;<a hr=
-ef=3D"mailto:shin.matsunaga@fujitsu.com">shin.matsunaga@fujitsu.com</a>&gt;=
- wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8=
-ex;border-left:1px #ccc solid;padding-left:1ex">Patch for CVE-2016-1572 is =
-applied in version 109.<br>
-<br>
-Signed-off-by: matsunaga-shinji &lt;<a href=3D"mailto:shin.matsunaga@fujits=
-u.com" target=3D"_blank" rel=3D"noreferrer">shin.matsunaga@fujitsu.com</a>&=
-gt;<br>
----<br>
-=C2=A0recipes-security/ecryptfs-utils/<a href=3D"http://ecryptfs-utils_111.=
-bb" rel=3D"noreferrer noreferrer" target=3D"_blank">ecryptfs-utils_111.bb</=
-a> | 3 +++<br>
-=C2=A01 file changed, 3 insertions(+)<br>
-<br>
-diff --git a/recipes-security/ecryptfs-utils/<a href=3D"http://ecryptfs-uti=
-ls_111.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">ecryptfs-utils_1=
-11.bb</a> b/recipes-security/ecryptfs-utils/<a href=3D"http://ecryptfs-util=
-s_111.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">ecryptfs-utils_11=
-1.bb</a><br>
-index 9aefc32..d98724c 100644<br>
---- a/recipes-security/ecryptfs-utils/<a href=3D"http://ecryptfs-utils_111.=
-bb" rel=3D"noreferrer noreferrer" target=3D"_blank">ecryptfs-utils_111.bb</=
-a><br>
-+++ b/recipes-security/ecryptfs-utils/<a href=3D"http://ecryptfs-utils_111.=
-bb" rel=3D"noreferrer noreferrer" target=3D"_blank">ecryptfs-utils_111.bb</=
-a><br>
-@@ -68,3 +68,6 @@ FILES:${PN} +=3D &quot;${base_libdir}/security/* ${base_l=
-ibdir}/ecryptfs/*&quot;<br>
-<br>
-=C2=A0RDEPENDS:${PN} +=3D &quot;cryptsetup&quot;<br>
-=C2=A0RRECOMMENDS:${PN} =3D &quot;gettext-runtime&quot;<br>
-+<br>
-+# Patch for CVE-2016-1572 is applied in version 109.<br>
-+CVE_CHECK_IGNORE +=3D &quot;CVE-2016-1572&quot;<br></blockquote></div></di=
-v><div dir=3D"auto"><br></div><div dir=3D"auto">Wouldn&#39;t it be better t=
-o report this to the NVD and do the fix in the database instead?</div><div =
-dir=3D"auto"><br></div><div dir=3D"auto">Regards</div><div dir=3D"auto">Mar=
-ta</div><div dir=3D"auto"><div class=3D"gmail_quote"><blockquote class=3D"g=
-mail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-l=
-eft:1ex">
-</blockquote></div></div></div>
-
---00000000000085eefe05d9ea947d--
 
