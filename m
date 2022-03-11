@@ -1,74 +1,74 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <rybczynska@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 806C1C433EF
-	for <webhook@archiver.kernel.org>; Fri, 11 Mar 2022 05:05:23 +0000 (UTC)
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com
- [209.85.222.181])
- by mx.groups.io with SMTP id smtpd.web12.2470.1646975122944519080
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A08CC433F5
+	for <webhook@archiver.kernel.org>; Fri, 11 Mar 2022 05:27:04 +0000 (UTC)
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com
+ [209.85.167.47])
+ by mx.groups.io with SMTP id smtpd.web12.2614.1646976423106278733
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Mar 2022 21:05:23 -0800
+ Thu, 10 Mar 2022 21:27:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=W3f1VUG3;
- spf=pass (domain: gmail.com, ip: 209.85.222.181,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f181.google.com with SMTP id k125so823753qkf.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=mimz7W3f;
+ spf=pass (domain: gmail.com, ip: 209.85.167.47,
+ mailfrom: rybczynska@gmail.com)
+Received: by mail-lf1-f47.google.com with SMTP id bu29so13291369lfb.0
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Mar 2022 21:05:22 -0800 (PST)
+ Thu, 10 Mar 2022 21:27:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=g9leHbN7dQtydQwkBSp8MU0LpuQhTTi34CtpVkROWsk=;
-        b=W3f1VUG3IfSktZuz0etipR5/kfTJnTK97tGqXP/Sxgcp5kbdrucs0lpCd17Tj/J0Xj
-         PBaoFP9ctH5qKjKrXofuBfLM553H1WaMNhv2BFeKFOGuLtUsRUCFTHKbPcyy/ltC1ubx
-         IjC9O0jB4MJeNabbZCU7BPudFFRIH9CHFmEnr/LLIR21o3g6b9CBy0WIfiazD8Gr5Q2p
-         cShH4d4P2k1ZL6yC8NyevBvl3dBdQ6UtVsotC3ukrJbp6o3LfeFh05yPB4LadRW0KBIn
-         ChcxNSMS79maid0z70xCiHBdQxGh5ABoQ7WXx3bQ5GhZXaI6b6ypmB1RI2uVUeJBgBFk
-         fDAA==
+        bh=MVWW0ju5GqA3XTRTn2ktACVi5ifGcYs6ZHcBSLG/1eU=;
+        b=mimz7W3fwb+7w1uyKmDEPrkZqsUwVXjbkBCwIGfCPAjfCePcdhV7lpV8HLVScgG3Xn
+         Lz/+mA2fu6JQ3HyUvIkCvEND57ZtBpC3HgiRYlRfwZMyM58fNb90Xi+IArrLA8aJJmvv
+         759AkEyJ2OXr8W2HZMb/hf09JsvgiDfX495NXJkMB1h++R+yd+wAXTeVR1JZ+FP+Vygh
+         YNfqPNLLd6hYMFKhLQ3/hKt5FadfapMplJ4+xlW+pY4szL/S+vLb/MwyJzHb+HHjkT5W
+         GmdXpr1sFsJAuKMruaP4OOAOdYTrApejwN9DM2aKpm10iVo+Legi67GmfxvvLdYSRQhk
+         2tjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=g9leHbN7dQtydQwkBSp8MU0LpuQhTTi34CtpVkROWsk=;
-        b=iTeiVHYDClfmdYgW+DvOAJbSbMAvA2Mrz/t1qH8EItHD/M0qXgXxucP+QNBMoo1wEN
-         TvW4hswBrqc/wtSNUe11V+UjEPJkpHZMhopkE8IjwfWlTQkrqYduzcP6mJgpTHW3fD6U
-         WgglL5LjCqWwUBmsLrwDN+Ydz+mbDdGiSR1ZZAo12hkbKaNlDhhJxN4F2apFCttT437P
-         bnKiPbxNpO8sTY7u2Jt1flerV9e2+n5+A7seMygT5SQP44+JoGrvloZ4oh4RLZ/ZbPmX
-         9Fa/R4GnHR85bqHa//UrF1YkPVuQdQaWKqdd/s3x615NlYim+JzwBwQBT96ritAcKBYz
-         GADQ==
-X-Gm-Message-State: AOAM530abSfPK6ctrOWaWHLGX0Pf1+raB4+yjoOhbxKzJFDv7A7fqhz8
-	SWsjOEe078uBuu01yQCfMaRMdJ9NxHsVHNqPjmI=
+        bh=MVWW0ju5GqA3XTRTn2ktACVi5ifGcYs6ZHcBSLG/1eU=;
+        b=K/UFlGUw9DdyO1SiGUmvNa7MCK9ldrrhWWTKzQWtkiefVNJ8YGoarxMo0GnrIXt8hD
+         aXDMQ7fwVKw/8Y70GnjfBy2lc/tHFIxpqLd1s20JXL+tDHg7O+1Kmv72VfmHrPzxilr3
+         sMtJ/wY6w39Hra71ljf5BV7GQgffLvmSDtafqNoWNiXvJ8njAl6U7WKXhBtsfZ/jnZqZ
+         8XcNFFrh3fqPcRSYX3mhX8AgiTxJrkhCNpa1sxQvjykOMur5NJRUfSdfLSbY47FErsIx
+         jbY54Smjj8HqHdGI2orZEKtRK7ZqKA5HzxdEztslWYq3CS/eYhHZLeVxkGeD8Hc4soAl
+         IQgg==
+X-Gm-Message-State: AOAM532R0dwrK/HWXVy0IFycXCAqSOFe10gxhIp5LhS80oPaoq1KNTwQ
+	1ZAEl+If4GZZZpZZrXadPmrHcmi6Km/ruvbkqbU=
 X-Google-Smtp-Source: 
- ABdhPJytqQMe5SFyo8JznHr3Nh/g+VjQbBYolWoF1Ob+xVry2/Nb/dZ0V8+TAJZ0fSZWtjeXIbh98dQi7NlO/PzPptY=
-X-Received: by 2002:a05:620a:29c3:b0:67b:31ff:bfb2 with SMTP id
- s3-20020a05620a29c300b0067b31ffbfb2mr5275692qkp.463.1646975121904; Thu, 10
- Mar 2022 21:05:21 -0800 (PST)
+ ABdhPJxsyCdb6zfaLlaPdmGOlHhaHWT4kVUonYW3O+BVAdt5K9OztyqWvwdaxdyCcOhlyKbIDZpsgE8I8sd5I9MYJdg=
+X-Received: by 2002:a05:6512:2305:b0:448:614a:b597 with SMTP id
+ o5-20020a056512230500b00448614ab597mr4127118lfu.277.1646976420931; Thu, 10
+ Mar 2022 21:27:00 -0800 (PST)
 MIME-Version: 1.0
 References: <20220311041033.1684086-1-shin.matsunaga@fujitsu.com>
 In-Reply-To: <20220311041033.1684086-1-shin.matsunaga@fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 10 Mar 2022 21:04:55 -0800
+From: Marta Rybczynska <rybczynska@gmail.com>
+Date: Fri, 11 Mar 2022 06:26:48 +0100
 Message-ID: 
- <CAMKF1sprmowXndi=Fuu0u6PxweGBtkWEt065SGNcb+x-6ZZqTQ@mail.gmail.com>
+ <CAApg2=RCBt272k4-b0x+ymoToqbHam7ZVJRFt=f4kw7zLQXJ8w@mail.gmail.com>
 Subject: Re: [oe] [PATCH] ecryptfs-utils: add CVE-2016-1572 to allowlist
 To: Matsunaga-Shinji <shin.matsunaga@fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="00000000000085eefe05d9ea947d"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Mar 2022 05:05:23 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Mar 2022 05:27:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95946
+ https://lists.openembedded.org/g/openembedded-devel/message/95947
 
-I guess this belongs to meta-security, please prefix the patch subject
-with layer name [meta-security] in this case.
+--00000000000085eefe05d9ea947d
+Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Mar 10, 2022 at 8:14 PM Matsunaga-Shinji
-<shin.matsunaga@fujitsu.com> wrote:
->
+On Fri, Mar 11, 2022, 05:14 Matsunaga-Shinji <shin.matsunaga@fujitsu.com>
+wrote:
+
 > Patch for CVE-2016-1572 is applied in version 109.
 >
 > Signed-off-by: matsunaga-shinji <shin.matsunaga@fujitsu.com>
@@ -76,27 +76,76 @@ On Thu, Mar 10, 2022 at 8:14 PM Matsunaga-Shinji
 >  recipes-security/ecryptfs-utils/ecryptfs-utils_111.bb | 3 +++
 >  1 file changed, 3 insertions(+)
 >
-> diff --git a/recipes-security/ecryptfs-utils/ecryptfs-utils_111.bb b/recipes-security/ecryptfs-utils/ecryptfs-utils_111.bb
+> diff --git a/recipes-security/ecryptfs-utils/ecryptfs-utils_111.bb
+> b/recipes-security/ecryptfs-utils/ecryptfs-utils_111.bb
 > index 9aefc32..d98724c 100644
 > --- a/recipes-security/ecryptfs-utils/ecryptfs-utils_111.bb
 > +++ b/recipes-security/ecryptfs-utils/ecryptfs-utils_111.bb
-> @@ -68,3 +68,6 @@ FILES:${PN} += "${base_libdir}/security/* ${base_libdir}/ecryptfs/*"
+> @@ -68,3 +68,6 @@ FILES:${PN} += "${base_libdir}/security/*
+> ${base_libdir}/ecryptfs/*"
 >
 >  RDEPENDS:${PN} += "cryptsetup"
 >  RRECOMMENDS:${PN} = "gettext-runtime"
 > +
 > +# Patch for CVE-2016-1572 is applied in version 109.
 > +CVE_CHECK_IGNORE += "CVE-2016-1572"
-> --
-> 2.25.1
 >
+
+Wouldn't it be better to report this to the NVD and do the fix in the
+database instead?
+
+Regards
+Marta
+
 >
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#95945): https://lists.openembedded.org/g/openembedded-devel/message/95945
-> Mute This Topic: https://lists.openembedded.org/mt/89704285/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+
+--00000000000085eefe05d9ea947d
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
+class=3D"gmail_attr">On Fri, Mar 11, 2022, 05:14 Matsunaga-Shinji &lt;<a hr=
+ef=3D"mailto:shin.matsunaga@fujitsu.com">shin.matsunaga@fujitsu.com</a>&gt;=
+ wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8=
+ex;border-left:1px #ccc solid;padding-left:1ex">Patch for CVE-2016-1572 is =
+applied in version 109.<br>
+<br>
+Signed-off-by: matsunaga-shinji &lt;<a href=3D"mailto:shin.matsunaga@fujits=
+u.com" target=3D"_blank" rel=3D"noreferrer">shin.matsunaga@fujitsu.com</a>&=
+gt;<br>
+---<br>
+=C2=A0recipes-security/ecryptfs-utils/<a href=3D"http://ecryptfs-utils_111.=
+bb" rel=3D"noreferrer noreferrer" target=3D"_blank">ecryptfs-utils_111.bb</=
+a> | 3 +++<br>
+=C2=A01 file changed, 3 insertions(+)<br>
+<br>
+diff --git a/recipes-security/ecryptfs-utils/<a href=3D"http://ecryptfs-uti=
+ls_111.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">ecryptfs-utils_1=
+11.bb</a> b/recipes-security/ecryptfs-utils/<a href=3D"http://ecryptfs-util=
+s_111.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">ecryptfs-utils_11=
+1.bb</a><br>
+index 9aefc32..d98724c 100644<br>
+--- a/recipes-security/ecryptfs-utils/<a href=3D"http://ecryptfs-utils_111.=
+bb" rel=3D"noreferrer noreferrer" target=3D"_blank">ecryptfs-utils_111.bb</=
+a><br>
++++ b/recipes-security/ecryptfs-utils/<a href=3D"http://ecryptfs-utils_111.=
+bb" rel=3D"noreferrer noreferrer" target=3D"_blank">ecryptfs-utils_111.bb</=
+a><br>
+@@ -68,3 +68,6 @@ FILES:${PN} +=3D &quot;${base_libdir}/security/* ${base_l=
+ibdir}/ecryptfs/*&quot;<br>
+<br>
+=C2=A0RDEPENDS:${PN} +=3D &quot;cryptsetup&quot;<br>
+=C2=A0RRECOMMENDS:${PN} =3D &quot;gettext-runtime&quot;<br>
++<br>
++# Patch for CVE-2016-1572 is applied in version 109.<br>
++CVE_CHECK_IGNORE +=3D &quot;CVE-2016-1572&quot;<br></blockquote></div></di=
+v><div dir=3D"auto"><br></div><div dir=3D"auto">Wouldn&#39;t it be better t=
+o report this to the NVD and do the fix in the database instead?</div><div =
+dir=3D"auto"><br></div><div dir=3D"auto">Regards</div><div dir=3D"auto">Mar=
+ta</div><div dir=3D"auto"><div class=3D"gmail_quote"><blockquote class=3D"g=
+mail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-l=
+eft:1ex">
+</blockquote></div></div></div>
+
+--00000000000085eefe05d9ea947d--
 
