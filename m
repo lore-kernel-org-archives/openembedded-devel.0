@@ -2,100 +2,89 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CC45C433F5
-	for <webhook@archiver.kernel.org>; Fri, 11 Mar 2022 19:20:25 +0000 (UTC)
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
- [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web10.9399.1647026424151316313
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5280EC433F5
+	for <webhook@archiver.kernel.org>; Sat, 12 Mar 2022 08:44:35 +0000 (UTC)
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
+ [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web11.3220.1647074674603102621
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Mar 2022 11:20:24 -0800
+ Sat, 12 Mar 2022 00:44:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=E/WkjH32;
- spf=pass (domain: gmail.com, ip: 209.85.214.178,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id h5so7086664plf.7
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=kyjgLAdd;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id cx5so10203935pjb.1
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Mar 2022 11:20:24 -0800 (PST)
+ Sat, 12 Mar 2022 00:44:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=4gBy1hoEkrSiRZ9tS3z2veZeQgJoDL5kwRPIM1DVjsA=;
-        b=E/WkjH32jXBlQZMoAcqkDTkrUj3wWSm6mEp5Esi4QzAnPBhno2RndaK/Z8ddUGDlVi
-         cEjiMNZqfN9f/6D6a6X2uF2UjdXayJaORxM6b3gXkCYGYpsNnjGL1V3EnjL+JuTto/oi
-         ztjuPrOy63HbCQoRX/sdE1intRyCV34RhnvLb29flrxWFCOg6B1yePRWa8CUPD65LuEr
-         XJfSjqHth7mk8yt6KNg5RTWvwPmU84wywLdUKsnDeswkrgLT9j7ukRPmayfmpcM9xzSq
-         HKjabDkEbFBIIxIx32TYW12kNWC4+Adj7Vm4BMgSzyUE9ec3LEs8CMvgyHB2wsTBmW7R
-         iagw==
+        bh=tV8ESACGJZOAPcT0cX/PSapscJA4/PVwMzxcIIgfFA4=;
+        b=kyjgLAdd/8MWFb0MzQaQSn4ItSAcas4rshbiu4zuB5l4K4FWumboMBMpz/HaPp85ou
+         ZBZQ5tZlcqwyfL8NTf3wdwxEJzQj+Ukhc6haI6sT6GId4bS7wRnZMafLvTZwx3v19/Mo
+         /5+gNU+6JrPaxLN0fiLnhm0T7two+XioXUajqHlh+m8+yVDXWxMqzToc0YUk5xiPCkZa
+         CtYQLduScE7TRFP11UP9c+Pq+549bdLJ4TE3Dtmq2IcHy0jPZJpl1qhEQUUIOFA64wQI
+         bUcjf9otumtVM+b/M6co2XRMri8u/neI8LYGwkJhfec0FaxGdkmChvxVgQxYNfh+73xU
+         CI3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=4gBy1hoEkrSiRZ9tS3z2veZeQgJoDL5kwRPIM1DVjsA=;
-        b=gldhFyPdju5i3ibeh4NQ2YTtoKvgAwnKFr2afkbXNWUpfhrT06GyNBlUwyjE0h7ejT
-         LFGSFDlCLEuvogbDlwWbHxDem61nb7P1SCFjQukomEiBeqPMTJAFVSIE19H4UQLw7JFW
-         9Qpb/HZ3e+/q/Y+/KzdHzotGDTJYBN8W1a7Yjet/RxoGBbCpmCYxG0FL095nHRG/GFvv
-         v7jhAfaJvsEllEbxGaVHlGOLWloQ7b5eoUsMk8MGXDcKKLjj7WFvGK3t02mwWqON4L8e
-         7TNa1QwiEGS+kfJjy13KCoRK3C6XpyCpQJMA+L7XegTS7xRgfGEIiA/W/MSzMVutu6s9
-         agPQ==
-X-Gm-Message-State: AOAM533zLbtYZG3hjhQogru5A4EzKAIdlx7D80SJlmwfv4yE0LwzftK6
-	i/YClMFOlqxYsIEcRxyQ9vbn/JA5xkgGPQ==
+        bh=tV8ESACGJZOAPcT0cX/PSapscJA4/PVwMzxcIIgfFA4=;
+        b=S3tAhjgLmeC7/LqJ5n7WhFhkeL++nzsPkotUGs6PgNtf8+B4OnZro0L6z1ntTpTNEg
+         NIlynbwfVbkBPgz+cTBlQdVJkYkdwqNF22vLWtB1XEFnb53HfMO2ahMEQAqrl7C8/WCN
+         0w+FgsQHPb5C4k1VSMC7Nr+Vvz0p8KtNKTmGy1SQ6yYvk1FQEv6jzcsr+TdQNL3rH9BO
+         dnzyw1eb50iivrUBpeJz8mM8nBoWIC4dgbEYWTk0L5/2vYSNo5IkSwdZWmASZS6XIIvq
+         4L768f46w8Ieunjn+Eniou0PDZzUmoOoluWD0TS1LYBlNSuQhDgBna6YQz/cicKSk4eP
+         5oiA==
+X-Gm-Message-State: AOAM531afBDlIYpgZQgTaTT/j8IZzSTDh+gVPM4Nxx0NuRLEGbkqvUvO
+	5Q0unCTkaCs9xmHfiveBOVolQRVw1TnVhw==
 X-Google-Smtp-Source: 
- ABdhPJxgKnWH4lnUCbmIUbzjz93sUPOg9f3sHLH3/rpEOahYvVSN7kK80hZVEu9ezu1DFGK0zn7Yew==
-X-Received: by 2002:a17:902:d2ce:b0:150:19a9:d171 with SMTP id
- n14-20020a170902d2ce00b0015019a9d171mr11698449plc.155.1647026423337;
-        Fri, 11 Mar 2022 11:20:23 -0800 (PST)
+ ABdhPJwrupLJzJsYZh70K+9WFPxVlZaGYHiqzjNF6VzRUKzMgBplBYKyDMnbVhIM948jWRgUqqS+AA==
+X-Received: by 2002:a17:90b:1c8f:b0:1b8:c6dc:ca61 with SMTP id
+ oo15-20020a17090b1c8f00b001b8c6dcca61mr15077854pjb.13.1647074673532;
+        Sat, 12 Mar 2022 00:44:33 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
         by smtp.gmail.com with ESMTPSA id
- q4-20020a056a00150400b004f78d4821a0sm3431581pfu.204.2022.03.11.11.20.22
+ f194-20020a6238cb000000b004f6ce898c61sm12803499pfa.77.2022.03.12.00.44.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Mar 2022 11:20:22 -0800 (PST)
+        Sat, 12 Mar 2022 00:44:33 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] libcereal: Link libatomics on mips for ptests
-Date: Fri, 11 Mar 2022 11:20:20 -0800
-Message-Id: <20220311192020.1908488-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/4] nodejs: Disable for powerpc
+Date: Sat, 12 Mar 2022 00:44:28 -0800
+Message-Id: <20220312084431.1123151-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Mar 2022 19:20:25 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 12 Mar 2022 08:44:35 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95957
-
-clang/mips emits calls to atomic builtins which it expects from C
-runtime perhaps but compiler-rt does not provide them so link in
-libatomics
+ https://lists.openembedded.org/g/openembedded-devel/message/95958
 
 Fixes
-atomic.cpp:(.text._ZN6cereal12Inpu
-tArchiveINS_16JSONInputArchiveELj0EE7processIRNSt3__16atomicIdEEEEvOT_[_ZN6cereal12InputArchiveINS_16JSONInputArchiveELj0EE7processIRNSt3__16atomicIdEEEEvOT_]+0x10c): undefined reference to `__atomic_store_8'
+../deps/v8/src/objects/code.h:564:2: error: #error Unknown architecture.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ meta-oe/recipes-devtools/nodejs/nodejs_16.14.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb b/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
-index 250ea97f40..fb37de3c30 100644
---- a/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
-+++ b/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
-@@ -26,9 +26,10 @@ S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_16.14.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_16.14.0.bb
+index 7b9644ec8d..0ab68cc608 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_16.14.0.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_16.14.0.bb
+@@ -15,6 +15,7 @@ COMPATIBLE_MACHINE:mips64 = "(!.*mips64).*"
  
- inherit cmake pkgconfig ptest
+ COMPATIBLE_HOST:riscv64 = "null"
+ COMPATIBLE_HOST:riscv32 = "null"
++COMPATIBLE_HOST:powerpc = "null"
  
--PACKAGECONFIG ??= "${@bb.utils.contains('PTEST_ENABLED', '1', 'with-tests', '', d)}"
--PACKAGECONFIG[with-tests] = "-DWITH_WERROR=OFF -DBUILD_TESTS=ON,,"
-+LIBATOMIC:mips:toolchain-clang = "${@bb.utils.contains('PTEST_ENABLED', '1', '-DCEREAL_THREAD_LIBS="-latomic"', '', d)}"
- 
-+PACKAGECONFIG ??= "${@bb.utils.contains('PTEST_ENABLED', '1', 'with-tests', '', d)}"
-+PACKAGECONFIG[with-tests] = "-DWITH_WERROR=OFF -DBUILD_TESTS=ON ${LIBATOMIC},,"
- EXTRA_OECMAKE = "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', '', '-DJUST_INSTALL_CEREAL=ON', d)} \
-                  ${@['','-DSKIP_PORTABILITY_TEST=ON'][d.getVar('SITEINFO_BITS') != '32']}"
- 
+ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
 -- 
 2.35.1
 
