@@ -2,206 +2,191 @@ Return-Path: <daniel@qtec.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36995C433EF
-	for <webhook@archiver.kernel.org>; Mon, 14 Mar 2022 08:57:08 +0000 (UTC)
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com
- [209.85.167.53])
- by mx.groups.io with SMTP id smtpd.web10.24183.1647248225983400747
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2136BC433F5
+	for <webhook@archiver.kernel.org>; Mon, 14 Mar 2022 08:57:09 +0000 (UTC)
+Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com
+ [209.85.208.174])
+ by mx.groups.io with SMTP id smtpd.web11.24333.1647248227269371793
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Mar 2022 01:57:07 -0700
+ Mon, 14 Mar 2022 01:57:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qtec.com header.s=google header.b=W+HhVV8r;
- spf=pass (domain: qtec.com, ip: 209.85.167.53, mailfrom: daniel@qtec.com)
-Received: by mail-lf1-f53.google.com with SMTP id bu29so25936381lfb.0
+ dkim=pass header.i=@qtec.com header.s=google header.b=I853ccqt;
+ spf=pass (domain: qtec.com, ip: 209.85.208.174, mailfrom: daniel@qtec.com)
+Received: by mail-lj1-f174.google.com with SMTP id c15so4181425ljr.9
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Mar 2022 01:57:05 -0700 (PDT)
+ Mon, 14 Mar 2022 01:57:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=qtec.com; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=xJNRVVHJc8LSdWl6sNF5zcRvXNUxc9yMuGqq2XSJEaM=;
-        b=W+HhVV8rm6vLPNb09N/WDwOnPWmWwqf0hnuiQQCm+bwaog5TXodMc4W3WhThRNjYpN
-         7yqnpW6SvFlM54R5mnFoxGSS6K31fw1FhbQzXk6FDEvsdbgSXeyCkDqunjs85FNOxs1t
-         Mdim2WfFrRsjuaCAYGaaG1zj8PqFrVZmqyNFXk8y/CLpMbvloD7vvfYMvPw4lmbFoXYb
-         CGEk4tcVAAY7WM33nC2xFMKQUYY/bgsmnPRVQglT1qU/MjgZkvcJeqVzJ3uEI3lA31Tj
-         eUNbAqxkL2u2Q75djWx/5bt+frP57s6dovDXslCDRaCCCEF4iOow7i54ojcJMgYvRIZE
-         jluA==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=NwlNrAyedU+5f55GS3bO6AQzed5A9jUlyf32fBx60CA=;
+        b=I853ccqtGsu114qkZj/btAvoBovOBtlO29ohOCspyahtmg7DIAkJ4o2Uepcl2/s/Ur
+         009hpVxigdKOgKKFeuSiaRB+ebtdJBAx4QXvK8M8hgpQiF05oHLwVNkfF9L0I4zzRcWO
+         HjZzrgj1588M+RkMqRRE9TauZSGMev2pr2KODPEepfZAwMHsTHeGirvS0uUPbO4q8iLZ
+         GuaaMbqRbsMmQyMjxcD1CyvkMld3UAS3JW9DW+9sKBhofZEKIaW0wK64pX37zAMFntyd
+         huEoiY0DQFS9WklMoUEe4+mB/QFDf/JSR48AAlAb3dPYA7xt4yYhtRqFvjODF/BEB8V/
+         nQXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=xJNRVVHJc8LSdWl6sNF5zcRvXNUxc9yMuGqq2XSJEaM=;
-        b=g/FIlG/WQiPlU2sVXBN/P/UPcjTk+PUSfXJgavtuqTY+Fn4GpTLeiktqnhkRQfZmOq
-         RQkYVjrENdV+Dw5QQLrN10M2xEOgFrobttqftuQE3LanM0FyOXcz0Bnw/6cYGRmBHCjg
-         9Uolwdkcdwqy1iRBcclV2Git10KjcbCARF+3kNmzLWmDbA70TetESBpHhg+n3x/MAYnz
-         dGjSMrBYPQulchD2/gblFMGBcZTjrf+1LV4JYCMa0ZqH5dK6WE5hr/V1QLNreZyQC6aj
-         C/aGcCx4xtTD+RgR04/czZ/AjvyWW08bJ0GiH4qUHSEZMViMOnonPvTMzPDa2asn22e2
-         7MeA==
-X-Gm-Message-State: AOAM533+bRhWV/IKEW1nF9axjmsq1kAg08qdj8Q9/27mc7vx+lk66UPz
-	XHPeYNjceqrAAhdPTL7yJaKsxcA0d+eoVKecpaZRKdSZFSGi09hK+JvJWRZs+gBU2C4hPtEU8/b
-	7hAqp8ii+nAc7Qvvby1iPA6HmbCkUp7H2mdbXv+wrrFLPUDmo6ol7GoKp2SAy8krsjkg1DFRHFv
-	vF2FjEVbh0ngfUbQ==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=NwlNrAyedU+5f55GS3bO6AQzed5A9jUlyf32fBx60CA=;
+        b=h3CQ7tXEYKaUB+dcrb9j7qmXDvE0lp3Ep66o/tHvM4hr1EHhZRJqSylCMLBRTyz9nQ
+         YoMm+uSiTzBYBtR+lRrmd7XpbvhI9zWFkqIOjzHyR0OaVDGNxodhTwjYjqlZeaaTySBq
+         OcSipWR7ddYq5DSwMI4AyVKf8315KJF0WaOiWq2gjaZbnPK/YQLPkJu9ot1iwucMDeoB
+         l9wXpwfoor86C4au7KTgdgTQ0Ebb4mMiKONO5LY9TROWFe76ivVt1fvn0zZUroQX5XVn
+         uEkCSXFCxTCDaJtV42moQuJ9EsDEAVMd3mSQ16tzQgYTz4CWlsdRaop9z7ELVAFxnPmr
+         XiMA==
+X-Gm-Message-State: AOAM531eNsfRCofr7g89/NGqbASKZjCALmwX85cJHk/64WND+2O53g8m
+	DWsHyBALhySMD8cXdNCCHYJZeeQKnqmOWjs7y5NmkXYferhUstINjXVD1m04eABXGyo+IA1ecTv
+	Dy7Z8e0vsZCAab9LDnET252wwE6SjLKzP0w+B+I96Q5zPziHolnPsDPo2iddQlkPuW02qyhseWt
+	zowbhqSGVBquEeXw==
 X-Google-Smtp-Source: 
- ABdhPJxj9adSx2Y5Wmxm3GCQUl0oQG82CFodgsNaEAHsKztzZv66LETGgo9vyXVrib2ytkTagJplCw==
-X-Received: by 2002:ac2:5082:0:b0:448:35ad:23b7 with SMTP id
- f2-20020ac25082000000b0044835ad23b7mr13183487lfm.509.1647248223154;
-        Mon, 14 Mar 2022 01:57:03 -0700 (PDT)
+ ABdhPJxIA8WLckopukXDEk+1rthupTvkyMU6vDBB96MV6eKCVwW8+sppI61NGLcQMXB0aDkVDqe9IQ==
+X-Received: by 2002:a2e:8e85:0:b0:249:22ad:7bf0 with SMTP id
+ z5-20020a2e8e85000000b0024922ad7bf0mr8069871ljk.340.1647248225194;
+        Mon, 14 Mar 2022 01:57:05 -0700 (PDT)
 Received: from localhost.localdomain
  (cpe.ge-3-0-8-100.ryvnqe10.dk.customer.tdc.net. [80.197.57.18])
         by smtp.gmail.com with ESMTPSA id
- h3-20020a2e9003000000b00249278d3bd7sm1751237ljg.77.2022.03.14.01.57.02
+ h3-20020a2e9003000000b00249278d3bd7sm1751237ljg.77.2022.03.14.01.57.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 14 Mar 2022 01:57:02 -0700 (PDT)
+        Mon, 14 Mar 2022 01:57:04 -0700 (PDT)
 From: Daniel Gomez <daniel@qtec.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: dagmcr@gmail.com,
 	Daniel Gomez <daniel@qtec.com>
-Subject: [meta-oe][PATCH 1/6] zbar: Update 1.23.1 -> 1.23.92+4e0f618
-Date: Mon, 14 Mar 2022 09:56:41 +0100
-Message-Id: <20220314085646.38283-1-daniel@qtec.com>
+Subject: [meta-oe][PATCH 4/6] opencl-icd-loader: Update 2020.12.18 ->
+ v2022.01.04
+Date: Mon, 14 Mar 2022 09:56:44 +0100
+Message-Id: <20220314085646.38283-4-daniel@qtec.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220314085646.38283-1-daniel@qtec.com>
+References: <20220314085646.38283-1-daniel@qtec.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 14 Mar 2022 08:57:08 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 14 Mar 2022 08:57:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95972
+ https://lists.openembedded.org/g/openembedded-devel/message/95975
 
-- Drop patches already upstream.
-- Remove duplicated PACKAGECONFIG variable.
-- Update to master: Version 1.23.92+4e0f618.
+- Fix recipe style WARNINGS from oe-stylize.
+
+    ./contrib/oe-stylize.py
+    meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb
+
+    Reminder:  Tabs should not be used (use spaces instead)  in : '
+    ${bindir}/icd_loader_test \ '
+
+    Reminder:  The correct spacing for a variable is FOO = "BAR"
+    in : '
+    SUMMARY  = "OpenCL ICD Loader" '
+
+- Fix missing lib for CL applications
+
+    strace clinfo:
+    openat(AT_FDCWD, "/usr/lib/libOpenCL.so.1", O_RDONLY|O_CLOEXEC) =
+    -1 ENOENT (No such file or directory)
+    newfstatat(AT_FDCWD, "/usr/lib", {st_mode=S_IFDIR|0755, st_size=36864, ...}, 0) = 0
+    writev(2, [{iov_base="clinfo", iov_len=6}, {iov_base=": ", iov_len=2},
+    {iov_base="error while loading shared libra"..., iov_len=36},
+    {iov_base=": ", iov_len=2}, {iov_base="libOpenCL.so.1", iov_len=14},
+    {iov_base=": ", iov_len=2}, {iov_base="cannot open shared object file", iov_len=30},
+    {iov_base=": ", iov_len=2}, {iov
+    _base="No such file or directory", iov_len=25}, {iov_base="\n", iov_len=1}], 10
+    clinfo: error while loading shared libraries: libOpenCL.so.1: cannot open shared
+    object file: No such file or directory) = 120
+    exit_group(127)                         = ?
+
+- Change branch name master -> main according to upstream repository.
 
 Signed-off-by: Daniel Gomez <daniel@qtec.com>
 ---
- .../0001-qt-Create-subdir-in-Makefile.patch   | 35 ----------------
- ...02-zbarcam-Create-subdir-in-Makefile.patch | 40 -------------------
- meta-oe/recipes-support/zbar/zbar_git.bb      | 12 ++----
- 3 files changed, 4 insertions(+), 83 deletions(-)
- delete mode 100644 meta-oe/recipes-support/zbar/zbar/0001-qt-Create-subdir-in-Makefile.patch
- delete mode 100644 meta-oe/recipes-support/zbar/zbar/0002-zbarcam-Create-subdir-in-Makefile.patch
+ .../opencl/opencl-icd-loader_git.bb           | 54 ++++++++++---------
+ 1 file changed, 30 insertions(+), 24 deletions(-)
 
-diff --git a/meta-oe/recipes-support/zbar/zbar/0001-qt-Create-subdir-in-Makefile.patch b/meta-oe/recipes-support/zbar/zbar/0001-qt-Create-subdir-in-Makefile.patch
-deleted file mode 100644
-index d7ca15207..000000000
---- a/meta-oe/recipes-support/zbar/zbar/0001-qt-Create-subdir-in-Makefile.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From 9c67f377477a07495a712f478eabfa8d33164c45 Mon Sep 17 00:00:00 2001
--From: Daniel Gomez <dagmcr@gmail.com>
--Date: Sun, 17 Jan 2021 23:32:51 +0100
--Subject: [PATCH 1/2] qt: Create subdir in Makefile
--
--Create builddir/qt subdir when --with-qt5 is enabled.
--
--Fixes the following error:
--
--moc -Iqt -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
---I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtWidgets
---I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtGui
---I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtCore
---I../git/include ../git/include/zbar/QZBar.h -o qt/moc_QZBar.cpp
--moc: Cannot create qt/moc_QZBar.cpp
--make: *** [Makefile:2459: qt/moc_QZBar.cpp] Error 1
--
--Signed-off-by: Daniel Gomez <dagmcr@gmail.com>
-----
-- qt/Makefile.am.inc | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/qt/Makefile.am.inc b/qt/Makefile.am.inc
--index b099c2b..c98fbeb 100644
----- a/qt/Makefile.am.inc
--+++ b/qt/Makefile.am.inc
--@@ -15,4 +15,5 @@ qt/moc_%.cpp: qt/%.h
-- 	$(MOC) $(qt_libzbarqt_la_CPPFLAGS) $< -o $@
--
-- qt/moc_%.cpp: include/zbar/%.h
--+	@$(mkdir_p) qt 2>/dev/null
-- 	$(MOC) $(qt_libzbarqt_la_CPPFLAGS) $< -o $@
----
--2.29.2
--
-diff --git a/meta-oe/recipes-support/zbar/zbar/0002-zbarcam-Create-subdir-in-Makefile.patch b/meta-oe/recipes-support/zbar/zbar/0002-zbarcam-Create-subdir-in-Makefile.patch
-deleted file mode 100644
-index a1c27b8b4..000000000
---- a/meta-oe/recipes-support/zbar/zbar/0002-zbarcam-Create-subdir-in-Makefile.patch
-+++ /dev/null
-@@ -1,40 +0,0 @@
--From fe751929ccc8fd75e350ed6db9d28d04bd31fc79 Mon Sep 17 00:00:00 2001
--From: Daniel Gomez <dagmcr@gmail.com>
--Date: Sun, 17 Jan 2021 23:33:19 +0100
--Subject: [PATCH 2/2] zbarcam: Create subdir in Makefile
--
--Create builddir/zbarcam when --with-qt5 is enabled.
--
--Fixes the following error:
--
--moc -i -Izbarcam -DQT_WIDGETS_LIB -DQT_X11EXTRAS_LIB -DQT_GUI_LIB
---DQT_CORE_LIB
---I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtWidgets
---I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtX11Extras
---I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtGui
---I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtCore
---I../git/include ../git/zbarcam/zbarcam-qt.cpp -o
--zbarcam/moc_zbarcam_qt.h
--moc: Cannot create zbarcam/moc_zbarcam_qt.h
--make: *** [Makefile:2438: zbarcam/moc_zbarcam_qt.h] Error 1
--
--Signed-off-by: Daniel Gomez <dagmcr@gmail.com>
-----
-- zbarcam/Makefile.am.inc | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/zbarcam/Makefile.am.inc b/zbarcam/Makefile.am.inc
--index b6de82c..e90c50c 100644
----- a/zbarcam/Makefile.am.inc
--+++ b/zbarcam/Makefile.am.inc
--@@ -28,6 +28,7 @@ DISTCLEANFILES += $(nodist_zbarcam_zbarcam_qt_SOURCES) zbarcam/moc_zbarcam_qt.h
--
--
-- zbarcam/moc_zbarcam_qt.h: zbarcam/zbarcam-qt.cpp
--+	@$(mkdir_p) zbarcam 2>/dev/null
-- 	$(MOC) -i $(zbarcam_zbarcam_qt_CPPFLAGS) $< -o $@
-- endif
--
----
--2.29.2
--
-diff --git a/meta-oe/recipes-support/zbar/zbar_git.bb b/meta-oe/recipes-support/zbar/zbar_git.bb
-index 17084f830..5d7d7e173 100644
---- a/meta-oe/recipes-support/zbar/zbar_git.bb
-+++ b/meta-oe/recipes-support/zbar/zbar_git.bb
-@@ -9,23 +9,19 @@ SECTION = "graphics"
- LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5e9ee833a2118adc7d8b5ea38e5b1cef"
-
--SRC_URI = "git://github.com/mchehab/zbar.git;branch=master;protocol=https \
--    file://0001-qt-Create-subdir-in-Makefile.patch \
--    file://0002-zbarcam-Create-subdir-in-Makefile.patch \
--"
--SRCREV = "89e7900d85dd54ef351a7ed582aec6a5a5d7fa37"
-+SRC_URI = "git://github.com/mchehab/zbar.git;branch=master;protocol=https"
-+SRCREV = "4e0f618b54af060fc3516acfb34b6023ed064620"
-
+diff --git a/meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb b/meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb
+index 45b1ad549..67437732d 100644
+--- a/meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb
++++ b/meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb
+@@ -1,30 +1,36 @@
+-SUMMARY  = "OpenCL ICD Loader"
++SUMMARY = "OpenCL ICD Loader"
+ DESCRIPTION = "OpenCL compute ICD Loader from Khronos Group"
+-LICENSE  = "Apache-2.0"
++LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+ SECTION = "base"
+ 
++inherit pkgconfig cmake
++
+ DEPENDS += "opencl-headers"
+ 
+-inherit pkgconfig cmake
++PROVIDES = "virtual/opencl-icd"
+ 
  S = "${WORKDIR}/git"
--PV = "0.23.1+git${SRCPV}"
-+PV = "0.23.92+git${SRCPV}"
-
- DEPENDS += "xmlto-native"
-
- PACKAGECONFIG ??= "\
-     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
-+    video python3 \
- "
-
--PACKAGECONFIG ??= "video python3"
+-PV = "2020.12.18+git${SRCPV}"
+-SRCREV = "1d5315c3ed30d026acb79a1aa53a276fc833ffa7"
+-SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git;branch=master;protocol=https"
 -
- inherit autotools pkgconfig gettext \
-     ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3native', '', d)} \
-     ${@bb.utils.contains('PACKAGECONFIG', 'gtk3', 'gobject-introspection',	'', d)} \
---
+-do_install () {
+-	install -d ${D}${bindir}
+-	install -m 0755 ${B}/test/loader_test/icd_loader_test ${D}${bindir}/
+-	chrpath -d ${D}${bindir}/icd_loader_test
+-	install -d ${D}${libdir}
+-	install -m 0644 ${B}/test/log/libIcdLog.so ${D}${libdir}/
+-	install -m 0644 ${B}/test/driver_stub/libOpenCLDriverStub.so ${D}${libdir}/
+-	chrpath -d ${D}${libdir}/libOpenCLDriverStub.so
+-	install -m 0644 ${B}/libOpenCL.so.1.2 ${D}${libdir}/
+-	cd ${D}${libdir}
+-	ln -s libOpenCL.so.1.2 libOpenCL.so.1
+-	ln -s libOpenCL.so.1 libOpenCL.so
++PV = "v2022.01.04+git${SRCPV}"
++SRCREV = "169f05d026e65948b30cfe2200595fda92198cf7"
++SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git;branch=main;protocol=https"
++
++EXTRA_OECMAKE:append = " \
++    -DOPENCL_ICD_LOADER_HEADERS_DIR=${STAGING_INCDIR} \
++"
++
++do_install() {
++    install -d ${D}${bindir}
++    install -m 0755 ${B}/test/loader_test/icd_loader_test ${D}${bindir}/
++    chrpath -d ${D}${bindir}/icd_loader_test
++    install -d ${D}${libdir}
++    install -m 0644 ${B}/test/log/libIcdLog.so ${D}${libdir}/
++    install -m 0644 ${B}/test/driver_stub/libOpenCLDriverStub.so ${D}${libdir}/
++    chrpath -d ${D}${libdir}/libOpenCLDriverStub.so
++    install -m 0644 ${B}/libOpenCL.so.1.2 ${D}${libdir}/
++    cd ${D}${libdir}
++    ln -s libOpenCL.so.1.2 libOpenCL.so.1
++    ln -s libOpenCL.so.1 libOpenCL.so
+ }
+ 
+ PACKAGES = "opencl-icd-loader opencl-icd-loader-dev"
+@@ -32,13 +38,13 @@ PACKAGES += "libicdlog libicdlog-dbg"
+ PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
+ 
+ FILES:${PN} = " \
+-	${bindir}/icd_loader_test \
+-	${libdir}/libOpenCLDriverStub.so \
+-	${libdir}/libOpenCL.so.1.2 \
++    ${bindir}/icd_loader_test \
++    ${libdir}/libOpenCLDriverStub.so \
++    ${libdir}/libOpenCL.so.1.2 \
++    ${libdir}/libOpenCL.so.1 \
+ "
+ FILES:${PN}-dev = " \
+-	${libdir}/libOpenCL.so \
+-	${libdir}/libOpenCL.so.1 \
++    ${libdir}/libOpenCL.so \
+ "
+ 
+ FILES:libicdlog = "${libdir}/libIcdLog.so"
+-- 
 2.34.1
 
 
