@@ -2,64 +2,64 @@ Return-Path: <daniel@qtec.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2136BC433F5
-	for <webhook@archiver.kernel.org>; Mon, 14 Mar 2022 08:57:09 +0000 (UTC)
-Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com
- [209.85.208.174])
- by mx.groups.io with SMTP id smtpd.web11.24333.1647248227269371793
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 26AA4C43217
+	for <webhook@archiver.kernel.org>; Mon, 14 Mar 2022 08:57:10 +0000 (UTC)
+Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com
+ [209.85.167.44])
+ by mx.groups.io with SMTP id smtpd.web11.24334.1647248228245256547
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Mar 2022 01:57:08 -0700
+ Mon, 14 Mar 2022 01:57:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qtec.com header.s=google header.b=I853ccqt;
- spf=pass (domain: qtec.com, ip: 209.85.208.174, mailfrom: daniel@qtec.com)
-Received: by mail-lj1-f174.google.com with SMTP id c15so4181425ljr.9
+ dkim=pass header.i=@qtec.com header.s=google header.b=TF4jULUK;
+ spf=pass (domain: qtec.com, ip: 209.85.167.44, mailfrom: daniel@qtec.com)
+Received: by mail-lf1-f44.google.com with SMTP id e6so19209465lfc.1
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Mar 2022 01:57:06 -0700 (PDT)
+ Mon, 14 Mar 2022 01:57:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=qtec.com; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=NwlNrAyedU+5f55GS3bO6AQzed5A9jUlyf32fBx60CA=;
-        b=I853ccqtGsu114qkZj/btAvoBovOBtlO29ohOCspyahtmg7DIAkJ4o2Uepcl2/s/Ur
-         009hpVxigdKOgKKFeuSiaRB+ebtdJBAx4QXvK8M8hgpQiF05oHLwVNkfF9L0I4zzRcWO
-         HjZzrgj1588M+RkMqRRE9TauZSGMev2pr2KODPEepfZAwMHsTHeGirvS0uUPbO4q8iLZ
-         GuaaMbqRbsMmQyMjxcD1CyvkMld3UAS3JW9DW+9sKBhofZEKIaW0wK64pX37zAMFntyd
-         huEoiY0DQFS9WklMoUEe4+mB/QFDf/JSR48AAlAb3dPYA7xt4yYhtRqFvjODF/BEB8V/
-         nQXw==
+        bh=GnGy073kaaL8V14m6NMt69HGOnHbtc6g04mLnQsN7Ls=;
+        b=TF4jULUKfRP9xciwci46+i4jVnHYCKik6tcq3P9R8DMd/2X3IZW2divXUq3qPMmA0Z
+         a/yJKGIBOgk0nDbhLRrge77UWO1ZmQQAZDkEiaaNIEv2jxzSDy/KY6fvKm6ytD0BKR61
+         EEMH5CectPMiK7Tpur1CUIDW/Y6ui1Uhy0KnExFW197VpJ1Ce6SN5KrijMT9eRgbjvR+
+         7wRSZJAke7LUK/Kk8zlDsP675bEQ3+/yyn6j78h427ORQFPw/noj9H7TVvpVF1sVVoMV
+         +shbzFSfMPMIV2r3/kZOryzkj8jd6lh5cifSaywGzln0xHF4MI6prmGSAn7ZiIk73Bc2
+         yvlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=NwlNrAyedU+5f55GS3bO6AQzed5A9jUlyf32fBx60CA=;
-        b=h3CQ7tXEYKaUB+dcrb9j7qmXDvE0lp3Ep66o/tHvM4hr1EHhZRJqSylCMLBRTyz9nQ
-         YoMm+uSiTzBYBtR+lRrmd7XpbvhI9zWFkqIOjzHyR0OaVDGNxodhTwjYjqlZeaaTySBq
-         OcSipWR7ddYq5DSwMI4AyVKf8315KJF0WaOiWq2gjaZbnPK/YQLPkJu9ot1iwucMDeoB
-         l9wXpwfoor86C4au7KTgdgTQ0Ebb4mMiKONO5LY9TROWFe76ivVt1fvn0zZUroQX5XVn
-         uEkCSXFCxTCDaJtV42moQuJ9EsDEAVMd3mSQ16tzQgYTz4CWlsdRaop9z7ELVAFxnPmr
-         XiMA==
-X-Gm-Message-State: AOAM531eNsfRCofr7g89/NGqbASKZjCALmwX85cJHk/64WND+2O53g8m
-	DWsHyBALhySMD8cXdNCCHYJZeeQKnqmOWjs7y5NmkXYferhUstINjXVD1m04eABXGyo+IA1ecTv
-	Dy7Z8e0vsZCAab9LDnET252wwE6SjLKzP0w+B+I96Q5zPziHolnPsDPo2iddQlkPuW02qyhseWt
-	zowbhqSGVBquEeXw==
+        bh=GnGy073kaaL8V14m6NMt69HGOnHbtc6g04mLnQsN7Ls=;
+        b=iTo0xXy3ZPYYZkyESk74VLihcAL10ilnrecQ9I8BUR5/nkyjMIQOjmt5RHGVBxbYmy
+         pm5O56kyzFc20NgI45hJwojYy4GZYPgRG0KDdZrzieXi/FVtcS0oyFoQV5VpJNg4+ESS
+         TP8G5mugq989CG7w1tNnsqWU9QLB39ECx+OmDocXFt7ipiZrm0z2j86qHRoZ+WKfBN45
+         0NcdIb5PRF2iWqX8wX4Le1tIaoxoVY3HwLR7Hr3N09Zkz6XtEysO1fY3KZ+9eIN2Wbpu
+         Aq2Obm5QBElZejC4rCCl2vsnvptr8HRnaykv4DqMmw/kaZxJTlyyC6rGAT2JbiDg00DU
+         otZQ==
+X-Gm-Message-State: AOAM532EdMvIayMDwiJAiZ+YGLGw1v3s0hBfpv54vAH0RUb6zE6CQUE3
+	/LI75NI0YDOHSmUPiUF6ENIx9IoZRsO/FcXZrpkMQ8jAp+4pn3sC/5yVkNabGf8hpqxQrDwztom
+	fRp8N/nbIVd0mOnml+WiB6y2VGdZUDbs6h7UgN4Cz/YheRfNNh3Jt4YHg8k993PtF+X5EROD4yT
+	c6pd83NLHwFno5nA==
 X-Google-Smtp-Source: 
- ABdhPJxIA8WLckopukXDEk+1rthupTvkyMU6vDBB96MV6eKCVwW8+sppI61NGLcQMXB0aDkVDqe9IQ==
-X-Received: by 2002:a2e:8e85:0:b0:249:22ad:7bf0 with SMTP id
- z5-20020a2e8e85000000b0024922ad7bf0mr8069871ljk.340.1647248225194;
+ ABdhPJx2VPU4vKeMwk99MhB6ld6K+41mQI2eUm7AFVtdVj0UpBq6Ix6GVgA20+6SRjNaMefE88rd4w==
+X-Received: by 2002:a05:6512:b27:b0:448:23da:dcb0 with SMTP id
+ w39-20020a0565120b2700b0044823dadcb0mr13151594lfu.55.1647248225882;
         Mon, 14 Mar 2022 01:57:05 -0700 (PDT)
 Received: from localhost.localdomain
  (cpe.ge-3-0-8-100.ryvnqe10.dk.customer.tdc.net. [80.197.57.18])
         by smtp.gmail.com with ESMTPSA id
- h3-20020a2e9003000000b00249278d3bd7sm1751237ljg.77.2022.03.14.01.57.04
+ h3-20020a2e9003000000b00249278d3bd7sm1751237ljg.77.2022.03.14.01.57.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 14 Mar 2022 01:57:04 -0700 (PDT)
+        Mon, 14 Mar 2022 01:57:05 -0700 (PDT)
 From: Daniel Gomez <daniel@qtec.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: dagmcr@gmail.com,
 	Daniel Gomez <daniel@qtec.com>
-Subject: [meta-oe][PATCH 4/6] opencl-icd-loader: Update 2020.12.18 ->
+Subject: [meta-oe][PATCH 5/6] opencl-headers: Update v2020.12.18 ->
  v2022.01.04
-Date: Mon, 14 Mar 2022 09:56:44 +0100
-Message-Id: <20220314085646.38283-4-daniel@qtec.com>
+Date: Mon, 14 Mar 2022 09:56:45 +0100
+Message-Id: <20220314085646.38283-5-daniel@qtec.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220314085646.38283-1-daniel@qtec.com>
 References: <20220314085646.38283-1-daniel@qtec.com>
@@ -68,125 +68,44 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 14 Mar 2022 08:57:09 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 14 Mar 2022 08:57:10 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95975
+ https://lists.openembedded.org/g/openembedded-devel/message/95976
 
-- Fix recipe style WARNINGS from oe-stylize.
-
-    ./contrib/oe-stylize.py
-    meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb
-
-    Reminder:  Tabs should not be used (use spaces instead)  in : '
-    ${bindir}/icd_loader_test \ '
-
-    Reminder:  The correct spacing for a variable is FOO = "BAR"
-    in : '
-    SUMMARY  = "OpenCL ICD Loader" '
-
-- Fix missing lib for CL applications
-
-    strace clinfo:
-    openat(AT_FDCWD, "/usr/lib/libOpenCL.so.1", O_RDONLY|O_CLOEXEC) =
-    -1 ENOENT (No such file or directory)
-    newfstatat(AT_FDCWD, "/usr/lib", {st_mode=S_IFDIR|0755, st_size=36864, ...}, 0) = 0
-    writev(2, [{iov_base="clinfo", iov_len=6}, {iov_base=": ", iov_len=2},
-    {iov_base="error while loading shared libra"..., iov_len=36},
-    {iov_base=": ", iov_len=2}, {iov_base="libOpenCL.so.1", iov_len=14},
-    {iov_base=": ", iov_len=2}, {iov_base="cannot open shared object file", iov_len=30},
-    {iov_base=": ", iov_len=2}, {iov
-    _base="No such file or directory", iov_len=25}, {iov_base="\n", iov_len=1}], 10
-    clinfo: error while loading shared libraries: libOpenCL.so.1: cannot open shared
-    object file: No such file or directory) = 120
-    exit_group(127)                         = ?
-
+- Add PV to include package version + git revision.
+- Add ALLOW_EMPTY to prevent error [1] when installing package in image.
 - Change branch name master -> main according to upstream repository.
+
+[1]: opencl-headers installation error:
+E: Package 'opencl-headers' has no installation candidate
 
 Signed-off-by: Daniel Gomez <daniel@qtec.com>
 ---
- .../opencl/opencl-icd-loader_git.bb           | 54 ++++++++++---------
- 1 file changed, 30 insertions(+), 24 deletions(-)
+ meta-oe/recipes-core/opencl/opencl-headers_git.bb | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb b/meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb
-index 45b1ad549..67437732d 100644
---- a/meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb
-+++ b/meta-oe/recipes-core/opencl/opencl-icd-loader_git.bb
-@@ -1,30 +1,36 @@
--SUMMARY  = "OpenCL ICD Loader"
-+SUMMARY = "OpenCL ICD Loader"
- DESCRIPTION = "OpenCL compute ICD Loader from Khronos Group"
--LICENSE  = "Apache-2.0"
-+LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+diff --git a/meta-oe/recipes-core/opencl/opencl-headers_git.bb b/meta-oe/recipes-core/opencl/opencl-headers_git.bb
+index f77bf46d2..5e8e6f07f 100644
+--- a/meta-oe/recipes-core/opencl/opencl-headers_git.bb
++++ b/meta-oe/recipes-core/opencl/opencl-headers_git.bb
+@@ -5,12 +5,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  SECTION = "base"
- 
-+inherit pkgconfig cmake
-+
- DEPENDS += "opencl-headers"
- 
--inherit pkgconfig cmake
-+PROVIDES = "virtual/opencl-icd"
- 
+
  S = "${WORKDIR}/git"
--PV = "2020.12.18+git${SRCPV}"
--SRCREV = "1d5315c3ed30d026acb79a1aa53a276fc833ffa7"
--SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git;branch=master;protocol=https"
--
--do_install () {
--	install -d ${D}${bindir}
--	install -m 0755 ${B}/test/loader_test/icd_loader_test ${D}${bindir}/
--	chrpath -d ${D}${bindir}/icd_loader_test
--	install -d ${D}${libdir}
--	install -m 0644 ${B}/test/log/libIcdLog.so ${D}${libdir}/
--	install -m 0644 ${B}/test/driver_stub/libOpenCLDriverStub.so ${D}${libdir}/
--	chrpath -d ${D}${libdir}/libOpenCLDriverStub.so
--	install -m 0644 ${B}/libOpenCL.so.1.2 ${D}${libdir}/
--	cd ${D}${libdir}
--	ln -s libOpenCL.so.1.2 libOpenCL.so.1
--	ln -s libOpenCL.so.1 libOpenCL.so
+-# v2020.12.18
+-SRCREV = "c57ba81c460ee97b6b9d0b8d18faf5ba6883114b"
+-SRC_URI = "git://github.com/KhronosGroup/OpenCL-Headers.git;branch=master;protocol=https"
 +PV = "v2022.01.04+git${SRCPV}"
-+SRCREV = "169f05d026e65948b30cfe2200595fda92198cf7"
-+SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git;branch=main;protocol=https"
-+
-+EXTRA_OECMAKE:append = " \
-+    -DOPENCL_ICD_LOADER_HEADERS_DIR=${STAGING_INCDIR} \
-+"
-+
-+do_install() {
-+    install -d ${D}${bindir}
-+    install -m 0755 ${B}/test/loader_test/icd_loader_test ${D}${bindir}/
-+    chrpath -d ${D}${bindir}/icd_loader_test
-+    install -d ${D}${libdir}
-+    install -m 0644 ${B}/test/log/libIcdLog.so ${D}${libdir}/
-+    install -m 0644 ${B}/test/driver_stub/libOpenCLDriverStub.so ${D}${libdir}/
-+    chrpath -d ${D}${libdir}/libOpenCLDriverStub.so
-+    install -m 0644 ${B}/libOpenCL.so.1.2 ${D}${libdir}/
-+    cd ${D}${libdir}
-+    ln -s libOpenCL.so.1.2 libOpenCL.so.1
-+    ln -s libOpenCL.so.1 libOpenCL.so
- }
- 
- PACKAGES = "opencl-icd-loader opencl-icd-loader-dev"
-@@ -32,13 +38,13 @@ PACKAGES += "libicdlog libicdlog-dbg"
- PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
- 
- FILES:${PN} = " \
--	${bindir}/icd_loader_test \
--	${libdir}/libOpenCLDriverStub.so \
--	${libdir}/libOpenCL.so.1.2 \
-+    ${bindir}/icd_loader_test \
-+    ${libdir}/libOpenCLDriverStub.so \
-+    ${libdir}/libOpenCL.so.1.2 \
-+    ${libdir}/libOpenCL.so.1 \
- "
- FILES:${PN}-dev = " \
--	${libdir}/libOpenCL.so \
--	${libdir}/libOpenCL.so.1 \
-+    ${libdir}/libOpenCL.so \
- "
- 
- FILES:libicdlog = "${libdir}/libIcdLog.so"
--- 
++SRCREV = "59ac4dc2f282286d8db83143686cfe37ec658b84"
++SRC_URI = "git://github.com/KhronosGroup/OpenCL-Headers.git;branch=main;protocol=https"
+
+ do_configure[noexec] = "1"
+ do_compile[noexec] = "1"
++ALLOW_EMPTY:${PN} = "1"
+
+ do_install () {
+ 	install -d ${D}${includedir}/CL/
+--
 2.34.1
 
 
