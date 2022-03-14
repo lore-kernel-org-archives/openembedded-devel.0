@@ -1,735 +1,207 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <daniel@qtec.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0DCD3C433F5
-	for <webhook@archiver.kernel.org>; Mon, 14 Mar 2022 03:58:35 +0000 (UTC)
-Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com
- [209.85.160.181])
- by mx.groups.io with SMTP id smtpd.web09.22925.1647230314176242138
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 36995C433EF
+	for <webhook@archiver.kernel.org>; Mon, 14 Mar 2022 08:57:08 +0000 (UTC)
+Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com
+ [209.85.167.53])
+ by mx.groups.io with SMTP id smtpd.web10.24183.1647248225983400747
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 13 Mar 2022 20:58:34 -0700
+ Mon, 14 Mar 2022 01:57:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=jhUoL54k;
- spf=pass (domain: gmail.com, ip: 209.85.160.181,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f181.google.com with SMTP id i8so282705qtx.6
+ dkim=pass header.i=@qtec.com header.s=google header.b=W+HhVV8r;
+ spf=pass (domain: qtec.com, ip: 209.85.167.53, mailfrom: daniel@qtec.com)
+Received: by mail-lf1-f53.google.com with SMTP id bu29so25936381lfb.0
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 13 Mar 2022 20:58:34 -0700 (PDT)
+ Mon, 14 Mar 2022 01:57:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=1QSFzxEob3u3MurVy1/TBS/VymVHcBiOXEMAT1geFTI=;
-        b=jhUoL54knalw8toK17nLkNqTOT/X+tmzDzwwxnQnWzLnHnnz26F4T7P5+2DKr3hL/5
-         bujVg4ha1AEsA1R8a57DK67R0pi6jiKBR0SC1KjaLO4/ACmN9lmIA0q6gz40hpuZUrgA
-         cnfYEaiy6RhCB57Vm5OqbauOCygUxpq1JmE710/cgFJAz4QY/PA3C5Hq5+dCoWPyL+qB
-         LU5wXgaA1njZNbpSmWI+yI12TOxaec5WhzfXDu869IKyft1y/TgkbWZfIiKHhccNCsZf
-         EvDvxti9cLYJwinIJzROVG79MqYsWKMdiFQHuR05lGIDWgI7xPPzYZ1CemOkzp3EcnJ8
-         +Twg==
+        d=qtec.com; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=xJNRVVHJc8LSdWl6sNF5zcRvXNUxc9yMuGqq2XSJEaM=;
+        b=W+HhVV8rm6vLPNb09N/WDwOnPWmWwqf0hnuiQQCm+bwaog5TXodMc4W3WhThRNjYpN
+         7yqnpW6SvFlM54R5mnFoxGSS6K31fw1FhbQzXk6FDEvsdbgSXeyCkDqunjs85FNOxs1t
+         Mdim2WfFrRsjuaCAYGaaG1zj8PqFrVZmqyNFXk8y/CLpMbvloD7vvfYMvPw4lmbFoXYb
+         CGEk4tcVAAY7WM33nC2xFMKQUYY/bgsmnPRVQglT1qU/MjgZkvcJeqVzJ3uEI3lA31Tj
+         eUNbAqxkL2u2Q75djWx/5bt+frP57s6dovDXslCDRaCCCEF4iOow7i54ojcJMgYvRIZE
+         jluA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=1QSFzxEob3u3MurVy1/TBS/VymVHcBiOXEMAT1geFTI=;
-        b=DktvUuKhwJQrVUOJ/I2JbThfsc1Fe8CASabCXC/3yOdBMAtrXneMPpcYe29tl2WJxg
-         U3MmzNIh9ZJPepKNFfaiKRjJoBdAweOfPTVQl1b/aZZTtpMJPtiyaXwxx9/Z+Iz9I1xC
-         AGHzmkK1azv1mphbVS1VGw1QuKF6G43CZgkPzcOSLRgY1Goq10V5h5LX73466CEZzU/A
-         YRopTEs8c03OGOHMOyuCfHCbiD1EZxztsRdyN7ZN5AF9sjWMIE0K7xlYTONvMS8HeS/g
-         rM4YqZZ/oaQ8Qb8FY7uewmEDb0qo0cCvUPL/V2iN+h3QmjiOJ09c9NQvoGIEpzZdO+SZ
-         ByJw==
-X-Gm-Message-State: AOAM532l8X6B7Wdc6OO74Ktw+3O6TjOnpMFprS5N1NpCL/7o9nTBbRif
-	BPwd7mA0iVBYpiSKkKS7NH3h9k47201/vp1pnS0=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=xJNRVVHJc8LSdWl6sNF5zcRvXNUxc9yMuGqq2XSJEaM=;
+        b=g/FIlG/WQiPlU2sVXBN/P/UPcjTk+PUSfXJgavtuqTY+Fn4GpTLeiktqnhkRQfZmOq
+         RQkYVjrENdV+Dw5QQLrN10M2xEOgFrobttqftuQE3LanM0FyOXcz0Bnw/6cYGRmBHCjg
+         9Uolwdkcdwqy1iRBcclV2Git10KjcbCARF+3kNmzLWmDbA70TetESBpHhg+n3x/MAYnz
+         dGjSMrBYPQulchD2/gblFMGBcZTjrf+1LV4JYCMa0ZqH5dK6WE5hr/V1QLNreZyQC6aj
+         C/aGcCx4xtTD+RgR04/czZ/AjvyWW08bJ0GiH4qUHSEZMViMOnonPvTMzPDa2asn22e2
+         7MeA==
+X-Gm-Message-State: AOAM533+bRhWV/IKEW1nF9axjmsq1kAg08qdj8Q9/27mc7vx+lk66UPz
+	XHPeYNjceqrAAhdPTL7yJaKsxcA0d+eoVKecpaZRKdSZFSGi09hK+JvJWRZs+gBU2C4hPtEU8/b
+	7hAqp8ii+nAc7Qvvby1iPA6HmbCkUp7H2mdbXv+wrrFLPUDmo6ol7GoKp2SAy8krsjkg1DFRHFv
+	vF2FjEVbh0ngfUbQ==
 X-Google-Smtp-Source: 
- ABdhPJxNBvGL33oZQAiWhc/NA0XArek3tlEORu2xmm4oJv8EXft97ATgeviqghxtGUT/BhZ5goVsBZpCMH/8kKtYu8Y=
-X-Received: by 2002:ac8:5a84:0:b0:2e1:4f1d:36fb with SMTP id
- c4-20020ac85a84000000b002e14f1d36fbmr17178465qtc.54.1647230313076; Sun, 13
- Mar 2022 20:58:33 -0700 (PDT)
+ ABdhPJxj9adSx2Y5Wmxm3GCQUl0oQG82CFodgsNaEAHsKztzZv66LETGgo9vyXVrib2ytkTagJplCw==
+X-Received: by 2002:ac2:5082:0:b0:448:35ad:23b7 with SMTP id
+ f2-20020ac25082000000b0044835ad23b7mr13183487lfm.509.1647248223154;
+        Mon, 14 Mar 2022 01:57:03 -0700 (PDT)
+Received: from localhost.localdomain
+ (cpe.ge-3-0-8-100.ryvnqe10.dk.customer.tdc.net. [80.197.57.18])
+        by smtp.gmail.com with ESMTPSA id
+ h3-20020a2e9003000000b00249278d3bd7sm1751237ljg.77.2022.03.14.01.57.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 14 Mar 2022 01:57:02 -0700 (PDT)
+From: Daniel Gomez <daniel@qtec.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: dagmcr@gmail.com,
+	Daniel Gomez <daniel@qtec.com>
+Subject: [meta-oe][PATCH 1/6] zbar: Update 1.23.1 -> 1.23.92+4e0f618
+Date: Mon, 14 Mar 2022 09:56:41 +0100
+Message-Id: <20220314085646.38283-1-daniel@qtec.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20220314020328.1234253-1-alejandro@enedino.org>
-In-Reply-To: <20220314020328.1234253-1-alejandro@enedino.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 13 Mar 2022 20:58:07 -0700
-Message-ID: 
- <CAMKF1srX6O1UstYNudc70PmHqB11APfBwLPq-uJUzi1QZNpvfg@mail.gmail.com>
-Subject: Re: [oe] [PATCH] meta-python: Clean up recipes and classes that were
- moved to oe-core
-To: Alejandro Hernandez Samaniego <alejandro@enedino.org>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Alejandro Enedino Hernandez Samaniego
- <alejandro.hernandez@linux.microsoft.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 14 Mar 2022 03:58:35 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 14 Mar 2022 08:57:08 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/95971
+ https://lists.openembedded.org/g/openembedded-devel/message/95972
 
-missed python3-pyrad, I have taken care of that
+- Drop patches already upstream.
+- Remove duplicated PACKAGECONFIG variable.
+- Update to master: Version 1.23.92+4e0f618.
 
-On Sun, Mar 13, 2022 at 7:03 PM Alejandro Hernandez Samaniego
-<alejandro@enedino.org> wrote:
->
-> From: Alejandro Enedino Hernandez Samaniego <alejandro.hernandez@linux.microsoft.com>
->
-> Signed-off-by: Alejandro Enedino Hernandez Samaniego <alejandro.hernandez@linux.microsoft.com>
-> ---
->  meta-python/classes/poetry_core.bbclass       |  15 ---
->  meta-python/classes/pyo3.bbclass              |  30 -----
->  meta-python/classes/setuptools3_rust.bbclass  |  11 --
->  .../python/python3-aiofiles_0.8.0.bb          |   2 +-
->  .../python/python3-asn1crypto_1.4.0.bb        |  25 ----
->  .../python/python3-cffi_1.15.0.bb             |  18 ---
->  .../python3-cryptography-vectors_36.0.1.bb    |  24 ----
->  .../0001-Cargo.toml-specify-pem-version.patch |  31 -----
->  .../0002-Cargo.toml-edition-2018-2021.patch   |  28 ----
->  .../python3-cryptography/check-memfree.py     |  10 --
->  .../python/python3-cryptography/run-ptest     |   4 -
->  .../python/python3-cryptography_36.0.1.bb     | 123 ------------------
->  .../python/python3-dnspython_2.2.0.bb         |   2 +-
->  .../python/python3-iso8601_1.0.2.bb           |   2 +-
->  .../python/python3-isort_5.10.1.bb            |   2 +-
->  .../python/python3-pkgconfig_1.5.5.bb         |   2 +-
->  .../python/python3-poetry-core_1.0.8.bb       |   2 +-
->  .../python/python3-pycparser_2.21.bb          |  21 ---
->  .../python/python3-pymisp_2.4.155.1.bb        |   2 +-
->  .../python/python3-pyruvate_1.1.2.bb          |   2 +-
->  .../python/python3-rsa_4.8.bb                 |   2 +-
->  .../python/python3-semantic-version_2.9.0.bb  |  12 --
->  .../python3-setuptools-rust-native_1.1.2.bb   |  33 -----
->  .../python3-typing-extensions_3.10.0.0.bb     |  12 --
->  24 files changed, 9 insertions(+), 406 deletions(-)
->  delete mode 100644 meta-python/classes/poetry_core.bbclass
->  delete mode 100644 meta-python/classes/pyo3.bbclass
->  delete mode 100644 meta-python/classes/setuptools3_rust.bbclass
->  delete mode 100644 meta-python/recipes-devtools/python/python3-asn1crypto_1.4.0.bb
->  delete mode 100644 meta-python/recipes-devtools/python/python3-cffi_1.15.0.bb
->  delete mode 100644 meta-python/recipes-devtools/python/python3-cryptography-vectors_36.0.1.bb
->  delete mode 100644 meta-python/recipes-devtools/python/python3-cryptography/0001-Cargo.toml-specify-pem-version.patch
->  delete mode 100644 meta-python/recipes-devtools/python/python3-cryptography/0002-Cargo.toml-edition-2018-2021.patch
->  delete mode 100755 meta-python/recipes-devtools/python/python3-cryptography/check-memfree.py
->  delete mode 100644 meta-python/recipes-devtools/python/python3-cryptography/run-ptest
->  delete mode 100644 meta-python/recipes-devtools/python/python3-cryptography_36.0.1.bb
->  delete mode 100644 meta-python/recipes-devtools/python/python3-pycparser_2.21.bb
->  delete mode 100644 meta-python/recipes-devtools/python/python3-semantic-version_2.9.0.bb
->  delete mode 100644 meta-python/recipes-devtools/python/python3-setuptools-rust-native_1.1.2.bb
->  delete mode 100644 meta-python/recipes-devtools/python/python3-typing-extensions_3.10.0.0.bb
->
-> diff --git a/meta-python/classes/poetry_core.bbclass b/meta-python/classes/poetry_core.bbclass
-> deleted file mode 100644
-> index fb37c78c7..000000000
-> --- a/meta-python/classes/poetry_core.bbclass
-> +++ /dev/null
-> @@ -1,15 +0,0 @@
-> -inherit pip_install_wheel python3native setuptools3-base
-> -
-> -DEPENDS += "python3-poetry-core-native"
-> -
-> -poetry_core_do_configure () {
-> -    :
-> -}
-> -
-> -# TODO: ideally this uses pypa/build
-> -poetry_core_do_compile () {
-> -    nativepython3 -c "from poetry.core.masonry import api; api.build_wheel('${PIP_INSTALL_DIST_PATH}')"
-> -}
-> -do_compile[cleandirs] += "${PIP_INSTALL_DIST_PATH}"
-> -
-> -EXPORT_FUNCTIONS do_configure do_compile
-> diff --git a/meta-python/classes/pyo3.bbclass b/meta-python/classes/pyo3.bbclass
-> deleted file mode 100644
-> index 6ce21329c..000000000
-> --- a/meta-python/classes/pyo3.bbclass
-> +++ /dev/null
-> @@ -1,30 +0,0 @@
-> -#
-> -# This class helps make sure that Python extensions built with PyO3
-> -# and setuptools_rust properly set up the environment for cross compilation
-> -#
-> -
-> -inherit cargo python3-dir siteinfo
-> -
-> -export PYO3_CROSS="1"
-> -export PYO3_CROSS_PYTHON_VERSION="${PYTHON_BASEVERSION}"
-> -export PYO3_CROSS_LIB_DIR="${STAGING_LIBDIR}"
-> -export CARGO_BUILD_TARGET="${HOST_SYS}"
-> -export RUSTFLAGS
-> -export PYO3_PYTHON="${PYTHON}"
-> -export PYO3_CONFIG_FILE="${WORKDIR}/pyo3.config"
-> -
-> -pyo3_do_configure () {
-> -    cat > ${WORKDIR}/pyo3.config << EOF
-> -implementation=CPython
-> -version=${PYTHON_BASEVERSION}
-> -shared=true
-> -abi3=false
-> -lib_name=${PYTHON_DIR}
-> -lib_dir=${STAGING_LIBDIR}
-> -pointer_width=${SITEINFO_BITS}
-> -build_flags=WITH_THREAD
-> -suppress_build_script_link_lines=false
-> -EOF
-> -}
-> -
-> -EXPORT_FUNCTIONS do_configure
-> diff --git a/meta-python/classes/setuptools3_rust.bbclass b/meta-python/classes/setuptools3_rust.bbclass
-> deleted file mode 100644
-> index fb11f08f8..000000000
-> --- a/meta-python/classes/setuptools3_rust.bbclass
-> +++ /dev/null
-> @@ -1,11 +0,0 @@
-> -inherit pyo3 setuptools3
-> -
-> -DEPENDS += "python3-setuptools-rust-native"
-> -
-> -setuptools3_rust_do_configure() {
-> -    pyo3_do_configure
-> -    cargo_common_do_configure
-> -    setuptools3_do_configure
-> -}
-> -
-> -EXPORT_FUNCTIONS do_configure
-> diff --git a/meta-python/recipes-devtools/python/python3-aiofiles_0.8.0.bb b/meta-python/recipes-devtools/python/python3-aiofiles_0.8.0.bb
-> index d3bca2c21..d50cb8e6f 100644
-> --- a/meta-python/recipes-devtools/python/python3-aiofiles_0.8.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-aiofiles_0.8.0.bb
-> @@ -8,7 +8,7 @@ SRC_URI[sha256sum] = "8334f23235248a3b2e83b2c3a78a22674f39969b96397126cc93664d9a
->
->  PYPI_PACKAGE = "aiofiles"
->
-> -inherit pypi poetry_core
-> +inherit pypi python_poetry_core
->
->  RDEPENDS:${PN} = "\
->      ${PYTHON_PN}-asyncio \
-> diff --git a/meta-python/recipes-devtools/python/python3-asn1crypto_1.4.0.bb b/meta-python/recipes-devtools/python/python3-asn1crypto_1.4.0.bb
-> deleted file mode 100644
-> index c052cb8c8..000000000
-> --- a/meta-python/recipes-devtools/python/python3-asn1crypto_1.4.0.bb
-> +++ /dev/null
-> @@ -1,25 +0,0 @@
-> -DESCRIPTION = "A fast, pure Python library for parsing and serializing ASN.1 structures"
-> -HOMEPAGE = "https://github.com/wbond/asn1crypto"
-> -SECTION = "devel/python"
-> -LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=7439e38f5e04ff62fae436184786b7ca"
-> -
-> -PYPI_PACKAGE = "asn1crypto"
-> -
-> -SRC_URI[md5sum] = "00bf5b72d37778e62cc73b1d8909ae27"
-> -SRC_URI[sha256sum] = "f4f6e119474e58e04a2b1af817eb585b4fd72bdd89b998624712b5c99be7641c"
-> -
-> -inherit pypi setuptools3
-> -
-> -RDEPENDS:${PN}:class-target += " \
-> -    ${PYTHON_PN}-codecs \
-> -    ${PYTHON_PN}-crypt \
-> -    ${PYTHON_PN}-ctypes \
-> -    ${PYTHON_PN}-datetime \
-> -    ${PYTHON_PN}-io \
-> -    ${PYTHON_PN}-netclient \
-> -    ${PYTHON_PN}-numbers \
-> -    ${PYTHON_PN}-shell \
-> -"
-> -
-> -BBCLASSEXTEND = "native nativesdk"
-> diff --git a/meta-python/recipes-devtools/python/python3-cffi_1.15.0.bb b/meta-python/recipes-devtools/python/python3-cffi_1.15.0.bb
-> deleted file mode 100644
-> index c36f23b3d..000000000
-> --- a/meta-python/recipes-devtools/python/python3-cffi_1.15.0.bb
-> +++ /dev/null
-> @@ -1,18 +0,0 @@
-> -SUMMARY = "Foreign Function Interface for Python calling C code"
-> -HOMEPAGE = "http://cffi.readthedocs.org/"
-> -LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
-> -DEPENDS += "libffi ${PYTHON_PN}-pycparser"
-> -
-> -SRC_URI[sha256sum] = "920f0d66a896c2d99f0adbb391f990a84091179542c205fa53ce5787aff87954"
-> -
-> -inherit pypi setuptools3
-> -
-> -RDEPENDS:${PN}:class-target = " \
-> -    ${PYTHON_PN}-ctypes \
-> -    ${PYTHON_PN}-io \
-> -    ${PYTHON_PN}-pycparser \
-> -    ${PYTHON_PN}-shell \
-> -"
-> -
-> -BBCLASSEXTEND = "native nativesdk"
-> diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_36.0.1.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_36.0.1.bb
-> deleted file mode 100644
-> index b9e6b811c..000000000
-> --- a/meta-python/recipes-devtools/python/python3-cryptography-vectors_36.0.1.bb
-> +++ /dev/null
-> @@ -1,24 +0,0 @@
-> -SUMMARY = "Test vectors for the cryptography package."
-> -HOMEPAGE = "https://cryptography.io/"
-> -SECTION = "devel/python"
-> -LICENSE = "Apache-2.0 | BSD-3-Clause"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4 \
-> -                    file://LICENSE.APACHE;md5=4e168cce331e5c827d4c2b68a6200e1b \
-> -                    file://LICENSE.BSD;md5=5ae30ba4123bc4f2fa49aa0b0dce887b"
-> -
-> -# NOTE: Make sure to keep this recipe at the same version as python3-cryptography
-> -#       Upgrade both recipes at the same time
-> -
-> -SRC_URI[sha256sum] = "fc8490afd5424342b868215435bd174dcd76ab396b4ea9435498be5721dcd598"
-> -
-> -PYPI_PACKAGE = "cryptography_vectors"
-> -
-> -inherit pypi setuptools3
-> -
-> -DEPENDS += " \
-> -    ${PYTHON_PN}-cryptography \
-> -"
-> -
-> -BBCLASSEXTEND = "native nativesdk"
-> -
-> -UPSTREAM_CHECK_REGEX = ""
-> diff --git a/meta-python/recipes-devtools/python/python3-cryptography/0001-Cargo.toml-specify-pem-version.patch b/meta-python/recipes-devtools/python/python3-cryptography/0001-Cargo.toml-specify-pem-version.patch
-> deleted file mode 100644
-> index d7ab757bb..000000000
-> --- a/meta-python/recipes-devtools/python/python3-cryptography/0001-Cargo.toml-specify-pem-version.patch
-> +++ /dev/null
-> @@ -1,31 +0,0 @@
-> -From ec8d3f3c61280c8140b34ed1479baef5e706f064 Mon Sep 17 00:00:00 2001
-> -From: Tim Orling <tim.orling@konsulko.com>
-> -Date: Fri, 14 Jan 2022 22:02:25 -0800
-> -Subject: [PATCH] Cargo.toml: specify pem version
-> -
-> -pem = "1.0" is not resolving, specify the current
-> -pem = { version: "1.0.2"}
-> -
-> -Upstream-Status: Pending
-> -
-> -Signed-off-by: Tim Orling <tim.orling@konsulko.com>
-> ----
-> - src/rust/Cargo.toml | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/src/rust/Cargo.toml b/src/rust/Cargo.toml
-> -index 617167d0..174eaa80 100644
-> ---- a/src/rust/Cargo.toml
-> -+++ b/src/rust/Cargo.toml
-> -@@ -9,7 +9,7 @@ publish = false
-> - lazy_static = "1"
-> - pyo3 = { version = "0.15.1" }
-> - asn1 = { version = "0.8.7", default-features = false, features = ["derive"] }
-> --pem = "1.0"
-> -+pem = { version = "1.0.2" }
-> - chrono = { version = "0.4", default-features = false, features = ["alloc", "clock"] }
-> - ouroboros = "0.13"
-> -
-> ---
-> -2.30.2
-> -
-> diff --git a/meta-python/recipes-devtools/python/python3-cryptography/0002-Cargo.toml-edition-2018-2021.patch b/meta-python/recipes-devtools/python/python3-cryptography/0002-Cargo.toml-edition-2018-2021.patch
-> deleted file mode 100644
-> index 366e3a4d3..000000000
-> --- a/meta-python/recipes-devtools/python/python3-cryptography/0002-Cargo.toml-edition-2018-2021.patch
-> +++ /dev/null
-> @@ -1,28 +0,0 @@
-> -From 4b73298b214a5b69ea6edf3c2e21dd82b2b29708 Mon Sep 17 00:00:00 2001
-> -From: Tim Orling <tim.orling@konsulko.com>
-> -Date: Fri, 14 Jan 2022 22:34:59 -0800
-> -Subject: [PATCH 2/2] Cargo.toml: edition 2018 -> 2021
-> -
-> -Upstream-Status: Pending
-> -
-> -Signed-off-by: Tim Orling <tim.orling@konsulko.com>
-> ----
-> - src/rust/Cargo.toml | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/src/rust/Cargo.toml b/src/rust/Cargo.toml
-> -index 174eaa80..7ad053d9 100644
-> ---- a/src/rust/Cargo.toml
-> -+++ b/src/rust/Cargo.toml
-> -@@ -2,7 +2,7 @@
-> - name = "cryptography-rust"
-> - version = "0.1.0"
-> - authors = ["The cryptography developers <cryptography-dev@python.org>"]
-> --edition = "2018"
-> -+edition = "2021"
-> - publish = false
-> -
-> - [dependencies]
-> ---
-> -2.30.2
-> -
-> diff --git a/meta-python/recipes-devtools/python/python3-cryptography/check-memfree.py b/meta-python/recipes-devtools/python/python3-cryptography/check-memfree.py
-> deleted file mode 100755
-> index c111a9074..000000000
-> --- a/meta-python/recipes-devtools/python/python3-cryptography/check-memfree.py
-> +++ /dev/null
-> @@ -1,10 +0,0 @@
-> -#!/usr/bin/env python3
-> -# https://stackoverflow.com/questions/22102999/get-total-physical-memory-in-python/28161352
-> -import sys
-> -meminfo = dict((i.split()[0].rstrip(':'),int(i.split()[1])) for i in open('/proc/meminfo').readlines())
-> -mem_free = meminfo['MemTotal']/1024./1024.
-> -if mem_free < 2.:
-> -    raise RuntimeError("Insufficient free memory({:.3f}): requires > 2 GB".format(mem_free))
-> -    sys.exit(1)
-> -else:
-> -    print("Free memory: {:.3f} GB".format(mem_free))
-> diff --git a/meta-python/recipes-devtools/python/python3-cryptography/run-ptest b/meta-python/recipes-devtools/python/python3-cryptography/run-ptest
-> deleted file mode 100644
-> index 1e97dda63..000000000
-> --- a/meta-python/recipes-devtools/python/python3-cryptography/run-ptest
-> +++ /dev/null
-> @@ -1,4 +0,0 @@
-> -#!/bin/sh
-> -if ./check-memfree.py; then
-> -    pytest -vvvv tests/
-> -fi
-> diff --git a/meta-python/recipes-devtools/python/python3-cryptography_36.0.1.bb b/meta-python/recipes-devtools/python/python3-cryptography_36.0.1.bb
-> deleted file mode 100644
-> index 00791dce2..000000000
-> --- a/meta-python/recipes-devtools/python/python3-cryptography_36.0.1.bb
-> +++ /dev/null
-> @@ -1,123 +0,0 @@
-> -SUMMARY = "Provides cryptographic recipes and primitives to python developers"
-> -HOMEPAGE = "https://cryptography.io/"
-> -SECTION = "devel/python"
-> -LICENSE = "( Apache-2.0 | BSD-3-Clause ) & PSF-2.0"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=bf405a8056a6647e7d077b0e7bc36aba \
-> -                    file://LICENSE.APACHE;md5=4e168cce331e5c827d4c2b68a6200e1b \
-> -                    file://LICENSE.BSD;md5=5ae30ba4123bc4f2fa49aa0b0dce887b \
-> -                    file://LICENSE.PSF;md5=43c37d21e1dbad10cddcd150ba2c0595 \
-> -                   "
-> -LDSHARED += "-pthread"
-> -
-> -SRC_URI[sha256sum] = "53e5c1dc3d7a953de055d77bef2ff607ceef7a2aac0353b5d630ab67f7423638"
-> -
-> -SRC_URI += " \
-> -    file://run-ptest \
-> -    file://check-memfree.py \
-> -    file://0001-Cargo.toml-specify-pem-version.patch \
-> -    file://0002-Cargo.toml-edition-2018-2021.patch \
-> -"
-> -
-> -inherit pypi setuptools3_rust
-> -
-> -PIP_INSTALL_DIST_PATH = "${S}/dist"
-> -
-> -DEPENDS += " \
-> -    ${PYTHON_PN}-asn1crypto-native \
-> -    ${PYTHON_PN}-cffi-native \
-> -    ${PYTHON_PN}-setuptools-rust-native \
-> -    ${PYTHON_PN}-six-native \
-> -"
-> -
-> -SRC_URI += " \
-> -    crate://crates.io/Inflector/0.11.4 \
-> -    crate://crates.io/aliasable/0.1.3 \
-> -    crate://crates.io/asn1/0.8.7 \
-> -    crate://crates.io/asn1_derive/0.8.7 \
-> -    crate://crates.io/autocfg/1.0.1 \
-> -    crate://crates.io/base64/0.13.0 \
-> -    crate://crates.io/bitflags/1.3.2 \
-> -    crate://crates.io/cfg-if/1.0.0 \
-> -    crate://crates.io/chrono/0.4.19 \
-> -    crate://crates.io/indoc-impl/0.3.6 \
-> -    crate://crates.io/indoc/0.3.6 \
-> -    crate://crates.io/instant/0.1.12 \
-> -    crate://crates.io/lazy_static/1.4.0 \
-> -    crate://crates.io/libc/0.2.112 \
-> -    crate://crates.io/lock_api/0.4.5 \
-> -    crate://crates.io/num-integer/0.1.44 \
-> -    crate://crates.io/num-traits/0.2.14 \
-> -    crate://crates.io/once_cell/1.9.0 \
-> -    crate://crates.io/ouroboros/0.13.0 \
-> -    crate://crates.io/ouroboros_macro/0.13.0 \
-> -    crate://crates.io/parking_lot/0.11.2 \
-> -    crate://crates.io/parking_lot_core/0.8.5 \
-> -    crate://crates.io/paste-impl/0.1.18 \
-> -    crate://crates.io/paste/0.1.18 \
-> -    crate://crates.io/pem/1.0.2 \
-> -    crate://crates.io/proc-macro-error-attr/1.0.4 \
-> -    crate://crates.io/proc-macro-error/1.0.4 \
-> -    crate://crates.io/proc-macro-hack/0.5.19 \
-> -    crate://crates.io/proc-macro2/1.0.36 \
-> -    crate://crates.io/pyo3-build-config/0.15.1 \
-> -    crate://crates.io/pyo3-macros-backend/0.15.1 \
-> -    crate://crates.io/pyo3-macros/0.15.1 \
-> -    crate://crates.io/pyo3/0.15.1 \
-> -    crate://crates.io/quote/1.0.14 \
-> -    crate://crates.io/redox_syscall/0.2.10 \
-> -    crate://crates.io/scopeguard/1.1.0 \
-> -    crate://crates.io/smallvec/1.7.0 \
-> -    crate://crates.io/stable_deref_trait/1.2.0 \
-> -    crate://crates.io/syn/1.0.85 \
-> -    crate://crates.io/unicode-xid/0.2.2 \
-> -    crate://crates.io/unindent/0.1.7 \
-> -    crate://crates.io/version_check/0.9.4 \
-> -    crate://crates.io/winapi-i686-pc-windows-gnu/0.4.0 \
-> -    crate://crates.io/winapi-x86_64-pc-windows-gnu/0.4.0 \
-> -    crate://crates.io/winapi/0.3.9 \
-> -"
-> -
-> -RDEPENDS:${PN} += " \
-> -    ${PYTHON_PN}-asn1crypto \
-> -    ${PYTHON_PN}-cffi \
-> -    ${PYTHON_PN}-idna \
-> -    ${PYTHON_PN}-setuptools \
-> -    ${PYTHON_PN}-six \
-> -"
-> -
-> -RDEPENDS:${PN}:append:class-target = " \
-> -    ${PYTHON_PN}-numbers \
-> -    ${PYTHON_PN}-threading \
-> -"
-> -
-> -RDEPENDS:${PN}-ptest += " \
-> -    ${PYTHON_PN}-bcrypt \
-> -    ${PYTHON_PN}-cryptography-vectors \
-> -    ${PYTHON_PN}-hypothesis \
-> -    ${PYTHON_PN}-iso8601 \
-> -    ${PYTHON_PN}-pretend \
-> -    ${PYTHON_PN}-psutil \
-> -    ${PYTHON_PN}-pytest \
-> -    ${PYTHON_PN}-pytest-subtests \
-> -    ${PYTHON_PN}-pytz \
-> -"
-> -
-> -inherit ptest
-> -
-> -do_install_ptest() {
-> -    install -D ${WORKDIR}/check-memfree.py ${D}${PTEST_PATH}/
-> -    install -d ${D}${PTEST_PATH}/tests
-> -    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-> -    install -d ${D}${PTEST_PATH}/tests/hazmat
-> -    cp -rf ${S}/tests/hazmat/* ${D}${PTEST_PATH}/tests/hazmat/
-> -    cp -r ${S}/pyproject.toml ${D}${PTEST_PATH}/
-> -}
-> -
-> -FILES:${PN}-ptest += " \
-> -    ${PTEST_PATH}/check-memfree.py \
-> -"
-> -FILES:${PN}-dbg += " \
-> -    ${PYTHON_SITEPACKAGES_DIR}/${SRCNAME}/hazmat/bindings/.debug \
-> -"
-> -
-> -BBCLASSEXTEND = "native nativesdk"
-> diff --git a/meta-python/recipes-devtools/python/python3-dnspython_2.2.0.bb b/meta-python/recipes-devtools/python/python3-dnspython_2.2.0.bb
-> index cf76a142b..eb8269e4f 100644
-> --- a/meta-python/recipes-devtools/python/python3-dnspython_2.2.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-dnspython_2.2.0.bb
-> @@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5af50906b5929837f667dfe31052bd34"
->
->  SRC_URI[sha256sum] = "e79351e032d0b606b98d38a4b0e6e2275b31a5b85c873e587cc11b73aca026d6"
->
-> -inherit pypi poetry_core ptest
-> +inherit pypi python_poetry_core ptest
->
->  SRC_URI += " \
->         file://run-ptest \
-> diff --git a/meta-python/recipes-devtools/python/python3-iso8601_1.0.2.bb b/meta-python/recipes-devtools/python/python3-iso8601_1.0.2.bb
-> index aabc47d69..93af233d2 100644
-> --- a/meta-python/recipes-devtools/python/python3-iso8601_1.0.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-iso8601_1.0.2.bb
-> @@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b05625f2336fa024e8d57e65c6595844"
->
->  SRC_URI[sha256sum] = "27f503220e6845d9db954fb212b95b0362d8b7e6c1b2326a87061c3de93594b1"
->
-> -inherit pypi poetry_core
-> +inherit pypi python_poetry_core
->
->  RDEPENDS:${PN} += "\
->      ${PYTHON_PN}-datetime \
-> diff --git a/meta-python/recipes-devtools/python/python3-isort_5.10.1.bb b/meta-python/recipes-devtools/python/python3-isort_5.10.1.bb
-> index 6a6d5ed13..27977821c 100644
-> --- a/meta-python/recipes-devtools/python/python3-isort_5.10.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-isort_5.10.1.bb
-> @@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=8227180126797a0148
->
->  SRC_URI[sha256sum] = "e8443a5e7a020e9d7f97f1d7d9cd17c88bcb3bc7e218bf9cf5095fe550be2951"
->
-> -inherit pypi poetry_core
-> +inherit pypi python_poetry_core
->
->  RDEPENDS:${PN} += "\
->      ${PYTHON_PN}-datetime \
-> diff --git a/meta-python/recipes-devtools/python/python3-pkgconfig_1.5.5.bb b/meta-python/recipes-devtools/python/python3-pkgconfig_1.5.5.bb
-> index c5a74796a..1aa91deac 100644
-> --- a/meta-python/recipes-devtools/python/python3-pkgconfig_1.5.5.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pkgconfig_1.5.5.bb
-> @@ -10,7 +10,7 @@ RDEPENDS:${PN} = "pkgconfig \
->                   ${PYTHON_PN}-shell \
->                   "
->
-> -inherit pypi poetry_core
-> +inherit pypi python_poetry_core
->
->  BBCLASSEXTEND = "native"
->
-> diff --git a/meta-python/recipes-devtools/python/python3-poetry-core_1.0.8.bb b/meta-python/recipes-devtools/python/python3-poetry-core_1.0.8.bb
-> index 99ec763c4..2e8688b8e 100644
-> --- a/meta-python/recipes-devtools/python/python3-poetry-core_1.0.8.bb
-> +++ b/meta-python/recipes-devtools/python/python3-poetry-core_1.0.8.bb
-> @@ -21,7 +21,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=104d5c3c653aeededf4076773aa4c236 \
->
->  SRC_URI[sha256sum] = "951fc7c1f8d710a94cb49019ee3742125039fc659675912ea614ac2aa405b118"
->
-> -inherit poetry_core pypi
-> +inherit python_poetry_core pypi
->
->  PIP_INSTALL_PACKAGE = "poetry_core"
->
-> diff --git a/meta-python/recipes-devtools/python/python3-pycparser_2.21.bb b/meta-python/recipes-devtools/python/python3-pycparser_2.21.bb
-> deleted file mode 100644
-> index 53b736790..000000000
-> --- a/meta-python/recipes-devtools/python/python3-pycparser_2.21.bb
-> +++ /dev/null
-> @@ -1,21 +0,0 @@
-> -SUMMARY = "Parser of the C language, written in pure Python"
-> -HOMEPAGE = "https://github.com/eliben/pycparser"
-> -LICENSE = "BSD-3-Clause"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=2c28cdeabcb88f5843d934381b4b4fea"
-> -
-> -SRC_URI[sha256sum] = "e644fdec12f7872f86c58ff790da456218b10f863970249516d60a5eaca77206"
-> -
-> -inherit pypi setuptools3
-> -
-> -BBCLASSEXTEND = "native nativesdk"
-> -
-> -RDEPENDS:${PN}:class-target += "\
-> -    ${PYTHON_PN}-netclient \
-> -    ${PYTHON_PN}-ply \
-> -    ${PYTHON_PN}-pprint \
-> -    "
-> -
-> -RSUGGESTS:${PN}:class-target += "\
-> -    cpp \
-> -    cpp-symlinks \
-> -    "
-> diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.155.1.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.155.1.bb
-> index ef18671a0..613a009d4 100644
-> --- a/meta-python/recipes-devtools/python/python3-pymisp_2.4.155.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pymisp_2.4.155.1.bb
-> @@ -7,7 +7,7 @@ SRC_URI = "git://github.com/MISP/PyMISP.git;protocol=https;branch=main"
->  SRCREV = "03dc22f9598e6caae81b0e40ce27bf3f17799f4e"
->  S = "${WORKDIR}/git"
->
-> -inherit poetry_core
-> +inherit python_poetry_core
->
->  PIP_INSTALL_PACKAGE = "pymisp"
->
-> diff --git a/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb b/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
-> index 143125bbb..97fce690e 100644
-> --- a/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pyruvate_1.1.2.bb
-> @@ -12,7 +12,7 @@ SRC_URI[sha256sum] = "10befedd97e73fc18b902d02aa3b24e8978aa162242c1b664849c886c0
->
->  S = "${WORKDIR}/pyruvate-${PV}"
->
-> -inherit pypi setuptools3_rust
-> +inherit pypi python_setuptools3_rust
->
->  PIP_INSTALL_DIST_PATH = "${S}/dist"
->
-> diff --git a/meta-python/recipes-devtools/python/python3-rsa_4.8.bb b/meta-python/recipes-devtools/python/python3-rsa_4.8.bb
-> index 7e572a933..21b664ddd 100644
-> --- a/meta-python/recipes-devtools/python/python3-rsa_4.8.bb
-> +++ b/meta-python/recipes-devtools/python/python3-rsa_4.8.bb
-> @@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c403f6882d4f97a9cd927df987d55634"
->
->  SRC_URI[sha256sum] = "5c6bd9dc7a543b7fe4304a631f8a8a3b674e2bbfc49c2ae96200cdbe55df6b17"
->
-> -inherit pypi poetry_core update-alternatives
-> +inherit pypi python_poetry_core update-alternatives
->
->  ALTERNATIVE:${PN} = "\
->      pyrsa-decrypt \
-> diff --git a/meta-python/recipes-devtools/python/python3-semantic-version_2.9.0.bb b/meta-python/recipes-devtools/python/python3-semantic-version_2.9.0.bb
-> deleted file mode 100644
-> index ee635871b..000000000
-> --- a/meta-python/recipes-devtools/python/python3-semantic-version_2.9.0.bb
-> +++ /dev/null
-> @@ -1,12 +0,0 @@
-> -SUMMARY  = "A library implementing the 'SemVer' scheme."
-> -DESCRIPTION = "Semantic version comparison for Python (see http://semver.org/)"
-> -HOMEPAGE = "https://github.com/rbarrois/python-semanticversion"
-> -LICENSE = "BSD-2-Clause"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=4fb31e3c1c7eeb8b5e8c07657cdd54e2"
-> -
-> -SRC_URI[sha256sum] = "abf54873553e5e07a6fd4d5f653b781f5ae41297a493666b59dcf214006a12b2"
-> -
-> -PYPI_PACKAGE = "semantic_version"
-> -inherit pypi setuptools3
-> -
-> -BBCLASSEXTEND = "native nativesdk"
-> diff --git a/meta-python/recipes-devtools/python/python3-setuptools-rust-native_1.1.2.bb b/meta-python/recipes-devtools/python/python3-setuptools-rust-native_1.1.2.bb
-> deleted file mode 100644
-> index 73dcbb26e..000000000
-> --- a/meta-python/recipes-devtools/python/python3-setuptools-rust-native_1.1.2.bb
-> +++ /dev/null
-> @@ -1,33 +0,0 @@
-> -SUMMARY = "Setuptools Rust extension plugin"
-> -DESCRIPTION = "setuptools-rust is a plugin for setuptools to build Rust \
-> -Python extensions implemented with PyO3 or rust-cpython.\
-> -\
-> -Compile and distribute Python extensions written in Rust as easily as if they were written in C."
-> -HOMEPAGE = "https://github.com/PyO3/setuptools-rust"
-> -BUGTRACKER = "https://github.com/PyO3/setuptools-rust/issues"
-> -
-> -LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=011cd92e702dd9e6b1a26157b6fd53f5"
-> -
-> -SRC_URI = "https://files.pythonhosted.org/packages/67/08/e1aa2c582c62ac76e4d60f8e454bd3bba933781a06a88b4e38797445822a/setuptools-rust-${PV}.tar.gz"
-> -SRC_URI[sha256sum] = "a0adb9b503c0ffc4e8fe80b7c617898cefa78049983aaaea7f747e153a3e65d1"
-> -
-> -# While this has a pyproject.toml and declares that setuptools_build_meta should work
-> -# it results in a wheel named UNKNOWN-0.0.0-py3-none-any.whl so stay with setuptools3
-> -# until that can be resolved
-> -inherit cargo pypi setuptools3 native
-> -
-> -# For some reason the wheel is built in ${S} not ${B}
-> -PIP_INSTALL_DIST_PATH = "${S}/dist"
-> -PIP_INSTALL_PACKAGE = "setuptools_rust"
-> -
-> -DEPENDS += "python3-setuptools-scm-native python3-wheel-native"
-> -
-> -RDEPENDS:${PN}:class-native += " \
-> -    python3-semantic-version-native \
-> -    python3-setuptools-native \
-> -    python3-setuptools-scm-native \
-> -    python3-toml-native \
-> -    python3-typing-extensions-native \
-> -    python3-wheel-native \
-> -"
-> diff --git a/meta-python/recipes-devtools/python/python3-typing-extensions_3.10.0.0.bb b/meta-python/recipes-devtools/python/python3-typing-extensions_3.10.0.0.bb
-> deleted file mode 100644
-> index a5f491c77..000000000
-> --- a/meta-python/recipes-devtools/python/python3-typing-extensions_3.10.0.0.bb
-> +++ /dev/null
-> @@ -1,12 +0,0 @@
-> -HOMEPAGE = "https://github.com/python/typing"
-> -LICENSE = "PSF-2.0"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=64fc2b30b67d0a8423c250e0386ed72f"
-> -
-> -# The name on PyPi is slightly different.
-> -PYPI_PACKAGE = "typing_extensions"
-> -
-> -SRC_URI[sha256sum] = "50b6f157849174217d0656f99dc82fe932884fb250826c18350e159ec6cdf342"
-> -
-> -inherit pypi setuptools3
-> -
-> -BBCLASSEXTEND = "native nativesdk"
-> --
-> 2.25.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#95969): https://lists.openembedded.org/g/openembedded-devel/message/95969
-> Mute This Topic: https://lists.openembedded.org/mt/89765063/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Signed-off-by: Daniel Gomez <daniel@qtec.com>
+---
+ .../0001-qt-Create-subdir-in-Makefile.patch   | 35 ----------------
+ ...02-zbarcam-Create-subdir-in-Makefile.patch | 40 -------------------
+ meta-oe/recipes-support/zbar/zbar_git.bb      | 12 ++----
+ 3 files changed, 4 insertions(+), 83 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/zbar/zbar/0001-qt-Create-subdir-in-Makefile.patch
+ delete mode 100644 meta-oe/recipes-support/zbar/zbar/0002-zbarcam-Create-subdir-in-Makefile.patch
+
+diff --git a/meta-oe/recipes-support/zbar/zbar/0001-qt-Create-subdir-in-Makefile.patch b/meta-oe/recipes-support/zbar/zbar/0001-qt-Create-subdir-in-Makefile.patch
+deleted file mode 100644
+index d7ca15207..000000000
+--- a/meta-oe/recipes-support/zbar/zbar/0001-qt-Create-subdir-in-Makefile.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-From 9c67f377477a07495a712f478eabfa8d33164c45 Mon Sep 17 00:00:00 2001
+-From: Daniel Gomez <dagmcr@gmail.com>
+-Date: Sun, 17 Jan 2021 23:32:51 +0100
+-Subject: [PATCH 1/2] qt: Create subdir in Makefile
+-
+-Create builddir/qt subdir when --with-qt5 is enabled.
+-
+-Fixes the following error:
+-
+-moc -Iqt -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+--I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtWidgets
+--I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtGui
+--I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtCore
+--I../git/include ../git/include/zbar/QZBar.h -o qt/moc_QZBar.cpp
+-moc: Cannot create qt/moc_QZBar.cpp
+-make: *** [Makefile:2459: qt/moc_QZBar.cpp] Error 1
+-
+-Signed-off-by: Daniel Gomez <dagmcr@gmail.com>
+----
+- qt/Makefile.am.inc | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/qt/Makefile.am.inc b/qt/Makefile.am.inc
+-index b099c2b..c98fbeb 100644
+---- a/qt/Makefile.am.inc
+-+++ b/qt/Makefile.am.inc
+-@@ -15,4 +15,5 @@ qt/moc_%.cpp: qt/%.h
+- 	$(MOC) $(qt_libzbarqt_la_CPPFLAGS) $< -o $@
+-
+- qt/moc_%.cpp: include/zbar/%.h
+-+	@$(mkdir_p) qt 2>/dev/null
+- 	$(MOC) $(qt_libzbarqt_la_CPPFLAGS) $< -o $@
+---
+-2.29.2
+-
+diff --git a/meta-oe/recipes-support/zbar/zbar/0002-zbarcam-Create-subdir-in-Makefile.patch b/meta-oe/recipes-support/zbar/zbar/0002-zbarcam-Create-subdir-in-Makefile.patch
+deleted file mode 100644
+index a1c27b8b4..000000000
+--- a/meta-oe/recipes-support/zbar/zbar/0002-zbarcam-Create-subdir-in-Makefile.patch
++++ /dev/null
+@@ -1,40 +0,0 @@
+-From fe751929ccc8fd75e350ed6db9d28d04bd31fc79 Mon Sep 17 00:00:00 2001
+-From: Daniel Gomez <dagmcr@gmail.com>
+-Date: Sun, 17 Jan 2021 23:33:19 +0100
+-Subject: [PATCH 2/2] zbarcam: Create subdir in Makefile
+-
+-Create builddir/zbarcam when --with-qt5 is enabled.
+-
+-Fixes the following error:
+-
+-moc -i -Izbarcam -DQT_WIDGETS_LIB -DQT_X11EXTRAS_LIB -DQT_GUI_LIB
+--DQT_CORE_LIB
+--I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtWidgets
+--I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtX11Extras
+--I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtGui
+--I/var/lib/yocto/gallium/tmp_20210113/work/znver1-poky-linux/zbar/0.23.1+gitAUTOINC+89e7900d85-r0/recipe-sysroot/usr/include/QtCore
+--I../git/include ../git/zbarcam/zbarcam-qt.cpp -o
+-zbarcam/moc_zbarcam_qt.h
+-moc: Cannot create zbarcam/moc_zbarcam_qt.h
+-make: *** [Makefile:2438: zbarcam/moc_zbarcam_qt.h] Error 1
+-
+-Signed-off-by: Daniel Gomez <dagmcr@gmail.com>
+----
+- zbarcam/Makefile.am.inc | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/zbarcam/Makefile.am.inc b/zbarcam/Makefile.am.inc
+-index b6de82c..e90c50c 100644
+---- a/zbarcam/Makefile.am.inc
+-+++ b/zbarcam/Makefile.am.inc
+-@@ -28,6 +28,7 @@ DISTCLEANFILES += $(nodist_zbarcam_zbarcam_qt_SOURCES) zbarcam/moc_zbarcam_qt.h
+-
+-
+- zbarcam/moc_zbarcam_qt.h: zbarcam/zbarcam-qt.cpp
+-+	@$(mkdir_p) zbarcam 2>/dev/null
+- 	$(MOC) -i $(zbarcam_zbarcam_qt_CPPFLAGS) $< -o $@
+- endif
+-
+---
+-2.29.2
+-
+diff --git a/meta-oe/recipes-support/zbar/zbar_git.bb b/meta-oe/recipes-support/zbar/zbar_git.bb
+index 17084f830..5d7d7e173 100644
+--- a/meta-oe/recipes-support/zbar/zbar_git.bb
++++ b/meta-oe/recipes-support/zbar/zbar_git.bb
+@@ -9,23 +9,19 @@ SECTION = "graphics"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5e9ee833a2118adc7d8b5ea38e5b1cef"
+
+-SRC_URI = "git://github.com/mchehab/zbar.git;branch=master;protocol=https \
+-    file://0001-qt-Create-subdir-in-Makefile.patch \
+-    file://0002-zbarcam-Create-subdir-in-Makefile.patch \
+-"
+-SRCREV = "89e7900d85dd54ef351a7ed582aec6a5a5d7fa37"
++SRC_URI = "git://github.com/mchehab/zbar.git;branch=master;protocol=https"
++SRCREV = "4e0f618b54af060fc3516acfb34b6023ed064620"
+
+ S = "${WORKDIR}/git"
+-PV = "0.23.1+git${SRCPV}"
++PV = "0.23.92+git${SRCPV}"
+
+ DEPENDS += "xmlto-native"
+
+ PACKAGECONFIG ??= "\
+     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
++    video python3 \
+ "
+
+-PACKAGECONFIG ??= "video python3"
+-
+ inherit autotools pkgconfig gettext \
+     ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3native', '', d)} \
+     ${@bb.utils.contains('PACKAGECONFIG', 'gtk3', 'gobject-introspection',	'', d)} \
+--
+2.34.1
+
 
