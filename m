@@ -2,71 +2,67 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A038C433EF
-	for <webhook@archiver.kernel.org>; Wed, 16 Mar 2022 08:34:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BF99C433F5
+	for <webhook@archiver.kernel.org>; Wed, 16 Mar 2022 08:36:37 +0000 (UTC)
 Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.3])
- by mx.groups.io with SMTP id smtpd.web10.22615.1647419673376669874
+ [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web08.22804.1647419796246341285
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Mar 2022 01:34:34 -0700
+ Wed, 16 Mar 2022 01:36:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=w+mwvfCE;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=HB+vk0+R;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1647419671; i=@fujitsu.com;
-	bh=gRPoNSbDmrksJI0fqEqZMqYipXXcKWhgrVnbm1lFb9s=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=w+mwvfCEab+wDynBk2qHrDMjq/Y+wQ4g7R73o5j+37PuVCtXhB+nr3q2Z+Vs9HVyC
-	 IfF3NSdh4V1Q5XvlLPnx9jtp7e/i/1pa7trfOchU+87AAjWNLJr/Y/MpDhxfx70H8z
-	 RMWiRLe/gDKFIMZNke4CNeTwR7mGpWkMX0vTOBevGNS8tEVQziM1QFms0lXLI9AgTZ
-	 tbqrCHwbfpYZ1prseM+cJbHCIJqz4VRuD0siH0n0gvw+3cq4JnSp5BXdGosRIITnrK
-	 r5hBDsIY0m174PeCR//zsXd3Fo2T8qBMwjzcXSG+8mSCkDPuMlZhndVRVTm3QeakdA
-	 Kq7P2wmS+hLrw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8MxRVd8oWG
-  SwZJmUYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaPjUB97wRbuiu7VB1kaGPdzdTFycQgJzGSS
-  OPl9CQuEc4JRYufqaexdjJwcbAJqEtNv3WAFsUUE9CWWzt7DDGIzC6hIvPjdA1YjLOAn8fvSe
-  bAaFgFVibNb1zGB2LwCThILNzWygdgSAgoSUx6+B+vlFHCW2HKnnRHEFgKq6e7cyQZRLyhxcu
-  YTFoj5EhIHX7xghuhVlJh9uZkFwq6QmDWrjWkCI/8sJC2zkLQsYGRaxWidVJSZnlGSm5iZo2t
-  oYKBraGiqa2yqa2hhopdYpZuol1qqW55aXKJrpJdYXqyXWlysV1yZm5yTopeXWrKJERiWKcXK
-  O3Ywtq36qXeIUZKDSUmU9/xMwyQhvqT8lMqMxOKM+KLSnNTiQ4wyHBxKEry75wDlBItS01Mr0
-  jJzgDECk5bg4FES4XWdB5TmLS5IzC3OTIdInWJUlBLnZQDpEwBJZJTmwbXB4vISo6yUMC8jAw
-  ODEE9BalFuZgmq/CtGcQ5GJWFemxlAU3gy80rgpr8CWswEtHietB7I4pJEhJRUA5PkpfApHtq
-  Ct1SdPhZ/uLlzz2ur3QtCTY//lDDNe7rz59PnkT+3u795MHfnZS6H3zedflpqfNs3Q+1QdYP/
-  u5vTLt7TyE1Sr+masbi2Xkz46dJFYhrbLe97sc6YKyf7quDx++Ve93fH/7g6X8pJe2N3nouGr
-  m3B0T71kp93JX5UJflLX7FzOeT0ujv4VKbolFhG7i3LnfLPxR+9f2yf4o2t8wKvnqrxnOD0x6
-  l8b+Mv1tsK7762b3JwqzIoO7jix+u5mjxcLQXOZQ/Xe06X/B389VrfaokydnaHjPsBfCcOSSs
-  28W6bxC5umnLRlU9VpV3Q+7iD6rpZ+9ZMcjl8PXKDal5uZni6F6dl/MOJJnZKLMUZiYZazEXF
-  iQCX5tNeRgMAAA==
+	s=170520fj; t=1647419794; i=@fujitsu.com;
+	bh=cU8fZuwLrZKtPqzWP8MsUUTW4iFO36dWPomZkHdlPxA=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=HB+vk0+R8THWmxAcWdivd281/vTKbopy49zqX9LtmZJp9W8692EqBYaXA1h5sSiXd
+	 v+Lur/pcbhM/byqqpn0Loufk1DgzTuNzFjqmT80Csk97O1j6pgUeDRecvK0eem85LW
+	 DBdqZKRdon5PSulRW99HttxJfO2WkXCZnzle+Uh1xIKkz4+qVERiblShTCyr/gf0gU
+	 qgSY5ffnFAB/fHZtMSechs2y4A6IPRIaUwR8dyD03cgsBqPRrmb+FbEg12mH4VJ+OU
+	 RcVeqPrxemxOHJ9x6k0R3FmxLpsuEV+8eF1Qp/5gABpRAHwQcvLMjbTUD6f4O+MOC+
+	 IzIXJqdl0cjbg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprNIsWRWlGSWpSXmKPExsViZ8MRojtxoWG
+  SweKlNhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8ac3Q9YClYLVvy/dYKlgXE7fxcjF4eQwEwm
+  iR9dT1khnBOMEruunWfuYuTkYBNQk5h+6wYriC0ioC+xdPYesDizgIrEi9897CC2sICvRM/2q
+  SwgNouAqsT5jf+YQGxeASeJ9R+egtVLCChITHn4nhkiLihxcuYTFog5EhIHX7yAqlGUmH25mQ
+  XCrpCYNauNaQIj7ywkLbOQtCxgZFrFaJ1UlJmeUZKbmJmja2hgoGtoaKprbK5raGakl1ilm6i
+  XWqpbnlpcogvklhfrpRYX6xVX5ibnpOjlpZZsYgSGWUqx6qIdjPtX/dQ7xCjJwaQkynt+pmGS
+  EF9SfkplRmJxRnxRaU5q8SFGGQ4OJQne2wuAcoJFqempFWmZOcCQh0lLcPAoifDeBEnzFhck5
+  hZnpkOkTjEqSonzMswBSgiAJDJK8+DaYHF2iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5Iwr8
+  0MoCk8mXklcNNfAS1mAlo8T1oPZHFJIkJKqoFJ4aTyob9b//9ri4sT23mtY+WvpXt+bV7McHL
+  avLn/wzJdgkQTlnw2nt61K3Wd4sumc25cf3LKPwf+eG9d88dqkUPFPtFFSu+bZLcWOa747iso
+  yHDKVnbXkcc5zN4Py+W1clR0bzkUvPt8vj4j9E7B4Usi23W7Op0Xb//qLZvdEeT2/fzW5AKpK
+  sPXa7n3S3Xsq+e7sfbGg+jKBxPCD5jdT92gcMza/cxh54mTGr+tv/pv6fozFXFVshfeT9+lE9
+  smMnNeWJzQ51DdGUITmtc8rl/2O3NXj+6P6zPSIlef+al8esHbNFnl2yLd6/dlbFsWuW/G0Qc
+  b2PnPbJ/60c5/2qRN3T/j3nAaCl6e1nz30BUlluKMREMt5qLiRABDHKZFLgMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-4.tower-565.messagelabs.com!1647419671!26105!1
-X-Originating-IP: [62.60.8.148]
+X-Msg-Ref: server-13.tower-548.messagelabs.com!1647419793!31368!1
+X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.10; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 24388 invoked from network); 16 Mar 2022 08:34:31 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-4.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 16 Mar 2022 08:34:31 -0000
+Received: (qmail 7571 invoked from network); 16 Mar 2022 08:36:33 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-13.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 16 Mar 2022 08:36:33 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 22G8YNn3007464
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 22G8aXTH003498
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Mar 2022 08:34:31 GMT
+ Wed, 16 Mar 2022 08:36:33 GMT
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Wed, 16 Mar 2022 08:34:22 +0000
+ (TLS) id 15.0.1497.28; Wed, 16 Mar 2022 08:36:32 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-asn1crypto: upgrade 1.4.0 -> 1.5.1
-Date: Wed, 16 Mar 2022 16:34:01 +0800
-Message-ID: <1647419641-81593-4-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-astroid: upgrade 2.10.0 -> 2.11.0
+Date: Wed, 16 Mar 2022 16:36:16 +0800
+Message-ID: <1647419779-81651-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1647419641-81593-1-git-send-email-wangmy@fujitsu.com>
-References: <1647419641-81593-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -75,37 +71,59 @@ X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Mar 2022 08:34:35 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Mar 2022 08:36:37 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96014
+ https://lists.openembedded.org/g/openembedded-devel/message/96015
 
-License-Update: year updated to 2022
+Changelog:
+=========
+Add new (optional) doc_node attribute to nodes.Module, nodes.ClassDef,
+and nodes.FunctionDef.
+
+Accessing the doc attribute of nodes.Module, nodes.ClassDef, and
+nodes.FunctionDef has been deprecated in favour of the doc_node attribute.
+Note: doc_node is an (optional) nodes.Const whereas doc was an (optional) str.
+
+Passing the doc argument to the __init__ of nodes.Module, nodes.ClassDef,
+and nodes.FunctionDef has been deprecated in favour of the postinit doc_node attribute.
+Note: doc_node is an (optional) nodes.Const whereas doc was an (optional) str.
+
+Replace custom cachedproperty with functools.cached_property and deprecate it
+for Python 3.8+.
+
+Closes #1410
+
+Set end_lineno and end_col_offset attributes to None for all nodes
+with PyPy 3.8. PyPy 3.8 assigns these attributes inconsistently which could lead
+to unexpected errors. Overwriting them with None will cause a fallback
+to the already supported way of PyPy 3.7.
+
+Add missing shape parameter to numpy zeros_like, ones_like,
+and full_like methods.
+
+Closes PyCQA/pylint#5871
+
+Only pin wrapt on the major version.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...thon3-asn1crypto_1.4.0.bb => python3-asn1crypto_1.5.1.bb} | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-asn1crypto_1.4.0.bb => python3-asn1crypto_1.5.1.bb} (70%)
+ .../{python3-astroid_2.10.0.bb => python3-astroid_2.11.0.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-astroid_2.10.0.bb => python3-astroid_2.11.0.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-asn1crypto_1.4.0.bb b/meta-python/recipes-devtools/python/python3-asn1crypto_1.5.1.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-asn1crypto_1.4.0.bb
-rename to meta-python/recipes-devtools/python/python3-asn1crypto_1.5.1.bb
-index c052cb8c82..5fa2ed987c 100644
---- a/meta-python/recipes-devtools/python/python3-asn1crypto_1.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-asn1crypto_1.5.1.bb
-@@ -2,12 +2,11 @@ DESCRIPTION = "A fast, pure Python library for parsing and serializing ASN.1 str
- HOMEPAGE = "https://github.com/wbond/asn1crypto"
- SECTION = "devel/python"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=7439e38f5e04ff62fae436184786b7ca"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b5cda97fbd7959ad47a952651a87051a"
+diff --git a/meta-python/recipes-devtools/python/python3-astroid_2.10.0.bb b/meta-python/recipes-devtools/python/python3-astroid_2.11.0.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-astroid_2.10.0.bb
+rename to meta-python/recipes-devtools/python/python3-astroid_2.11.0.bb
+index fc23f17c6b..1a69be2f98 100644
+--- a/meta-python/recipes-devtools/python/python3-astroid_2.10.0.bb
++++ b/meta-python/recipes-devtools/python/python3-astroid_2.11.0.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
  
- PYPI_PACKAGE = "asn1crypto"
- 
--SRC_URI[md5sum] = "00bf5b72d37778e62cc73b1d8909ae27"
--SRC_URI[sha256sum] = "f4f6e119474e58e04a2b1af817eb585b4fd72bdd89b998624712b5c99be7641c"
-+SRC_URI[sha256sum] = "13ae38502be632115abf8a24cbe5f4da52e3b5231990aff31123c805306ccb9c"
+-SRC_URI[sha256sum] = "f616b9687a5f4afa673dfd2d684d2b6f38365c8ad7c6f27229dda1ede750c445"
++SRC_URI[sha256sum] = "d56f6a5239981567ceaa3413d4971936c7b4b0c796fcff90c24254dcf8b05b62"
  
  inherit pypi setuptools3
  
