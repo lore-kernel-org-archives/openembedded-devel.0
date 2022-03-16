@@ -2,113 +2,291 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DB45EC433F5
-	for <webhook@archiver.kernel.org>; Wed, 16 Mar 2022 18:46:09 +0000 (UTC)
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
- [209.85.215.176])
- by mx.groups.io with SMTP id smtpd.web09.648.1647456369195540028
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E9C57C433F5
+	for <webhook@archiver.kernel.org>; Wed, 16 Mar 2022 19:30:41 +0000 (UTC)
+Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com
+ [209.85.222.169])
+ by mx.groups.io with SMTP id smtpd.web12.1071.1647459040547318459
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Mar 2022 11:46:09 -0700
+ Wed, 16 Mar 2022 12:30:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=eEKtIazf;
- spf=pass (domain: gmail.com, ip: 209.85.215.176,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=n8fvzqKK;
+ spf=pass (domain: gmail.com, ip: 209.85.222.169,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f176.google.com with SMTP id o23so849293pgk.13
+Received: by mail-qk1-f169.google.com with SMTP id q194so2732792qke.5
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Mar 2022 11:46:09 -0700 (PDT)
+ Wed, 16 Mar 2022 12:30:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=m8K1qXepaNnHrdAu9lw27BbTtlXa/Cum2p6T0gu1bZU=;
-        b=eEKtIazf33A8ZYg1HXBCDtyoSgtojlXf3wjSAbhLvQBjMZ7khg98Tph2BvYoitUbnm
-         jA7JY0DwxRCOdmQoDtvWpdv4zP6XDXKLh9t+WzMT6NjdEnQiGUqE4P2gwAVa+VYFKSBO
-         h6s9YOPU1f1j8t05kgPdCgROy8H5J+JHicOyjymRaGEYjNbUgig7BXPaD8PbCMDQH2mD
-         3Lw46a41r8C1mN2+5EHWHPSY+RFOvBbrzRKANotqfKwiFlNehJ4joHNfmdwR9tgXsJD8
-         ZxAHsCbGtDguiVXcNqpEIJ66xM+JTfrnhJsMBqPPmiHSl/1cqF62OrtW9vSa6vtI1nu/
-         MKtA==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=mcHv0jtzu6nH52IAy5SHWCpjBgRQ0yFYTJwtF9MKGGg=;
+        b=n8fvzqKK0kUYHbvacqeVVW/QDfbER+Jp0369bjsoQgSx7wKXt/b/ovUD/q8vM4otVz
+         nfSyK7H9Symq3HXS3IXADthWEU0EMVMmbidHcpKfgpOMC+2pxmoBm82b4+LV6V1Tf5tj
+         97ODXB4Hp1ck0NbdW+L0ecXl6aq2w8yTOpv6qShG4unLPVJfIz8wLNX1iAiiAyxKxPDu
+         mCHV3KwDKia8y2aRWzeHFv5TJezjTbrLEtD0PB5VyF907jAdJFCCCvaw8fO548jAkfJ5
+         gJ9egb5E0riPLHXhpE9sfJUprG1KLzeESMRZYUbpALHfVgG++ZjJ4KAVRYPmqubB7ba/
+         GpDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=m8K1qXepaNnHrdAu9lw27BbTtlXa/Cum2p6T0gu1bZU=;
-        b=N2HHFyDV4BQxZxGD2mQuabO78PgN6SPBrrmrPfcoceNSl9V2aZBTlih/qvvtSQuBQb
-         27Y1O8z7bKqVoVo6zZncs0jH1vABKvkYlYtqfnS4v2b7OwDOPO6+nwI90uLKXYB3M3la
-         eOxpwX0EgnPtEweK6vTF01eZhe5dY2vjH3YYOYGbugAmQDnkXD7TNbR8byPpVYBS0Jgk
-         9lw2mpvacgqvqocpBQQkgq4ID4n1VCL1m17EpjeW+fMv55cdaa1E0n0gTAYPB6/I9vRW
-         ZyyLyqaeycu0SJCG0s6FsNwes0EVodceHSeI5yszPCQp9EqbWEJU668bdo90yNl3yEd/
-         1A8A==
-X-Gm-Message-State: AOAM532FjxeV5ULRzQkmyT4gQab7pwX89VDrE99O00MDjyGb+spvYuJN
-	/AH7g5Vw09WfEhzdCnYBu20Dzl2IbbCBuw==
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=mcHv0jtzu6nH52IAy5SHWCpjBgRQ0yFYTJwtF9MKGGg=;
+        b=8RU5IFLEiAN99sAM9Ja8VgNE2i7XPLBB6OP9fqqBrqKFcW2fO1FAHbJec7loRWeFT6
+         17158wuH5W4pK26aNfnR/LCnJamUpbvBygAv4ptaahrQL6PCetzyuGiOORwsiftNwZ0d
+         ZYYImuW68LuGwVZOhRTuZH4KjbURsWoKI1GTLzGDUfgRhdxlgMkUq8IpP+Y5+v0PrCya
+         CG1HIF5b/TtMaSdX2MLMPFU7agntwFFzcIiCJzZp/0SOEEj7pLm1HEyWYKj5NUCSgBew
+         S/eYXhHltZ5U+3u/zNFIkj78mtmdA56DHnt05H4F+W9Ow6hjKT11TMJMYq7ElLuejE8r
+         WNKw==
+X-Gm-Message-State: AOAM530qJEUnjodaPD/3qIWfDsNMIu2A45FI0jYo2kGK+bJdd4TPs4qm
+	4wnd/gx6vmaWdfmwStWqW4pLIKTXOERZiA7jj1Q=
 X-Google-Smtp-Source: 
- ABdhPJw/dYWdjkMTz7VyUaGDMDFMPW79rVmEMliukKamxml/rSOJzRMX54tu3YTHCkwBPuSkKzVEIw==
-X-Received: by 2002:a63:874a:0:b0:37c:7fab:50fe with SMTP id
- i71-20020a63874a000000b0037c7fab50femr724276pge.93.1647456368296;
-        Wed, 16 Mar 2022 11:46:08 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
-        by smtp.gmail.com with ESMTPSA id
- a22-20020a056a000c9600b004f7ba8b445asm4078949pfv.65.2022.03.16.11.46.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Mar 2022 11:46:07 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH] python3-kiwisolver: Upgrade to 1.4.0
-Date: Wed, 16 Mar 2022 11:46:05 -0700
-Message-Id: <20220316184605.3280922-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.35.1
+ ABdhPJx59dnXu2HU1c1rKSO5Bt5TdH9eaGIfv7jdgEM7OZcT4YGN0mCT44SOzrwUiHSwMMC+9klqRjVXo0i4diVmYDk=
+X-Received: by 2002:a05:620a:4103:b0:67b:49f4:3ee4 with SMTP id
+ j3-20020a05620a410300b0067b49f43ee4mr932144qko.72.1647459039463; Wed, 16 Mar
+ 2022 12:30:39 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20220316143115.3790996-1-anudeepthika@code1.emi.philips.com>
+In-Reply-To: <20220316143115.3790996-1-anudeepthika@code1.emi.philips.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 16 Mar 2022 12:30:13 -0700
+Message-ID: 
+ <CAMKF1spJ-0sNHybVutCD9hnrOnoxgg5k0cOYim6EB6nWLy1jZg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v5] usbguard: Add inital recipe
+To: Nandipati.AnuDeepthika@philips.com
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Mar 2022 18:46:09 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Mar 2022 19:30:41 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96025
+ https://lists.openembedded.org/g/openembedded-devel/message/96026
 
-License-Update: There is separate License file now so use that for
-checksums
+1.1.1 is latest release [1], can you update to this release and resend.
 
-use setuptools_build_meta since normal setuptools3 bbclass ends up
-in errors
+[1] https://github.com/USBGuard/usbguard/releases/tag/usbguard-1.1.1
 
-| distutils.errors.DistutilsError: Command '['/mnt/b/yoe/master/build/tmp/work/riscv32-yoe-linux-musl/python3-kiwisolver/1.4.0-r0/recipe-sysroot-native/usr/bin/python3-native/python3', '-m
-', 'pip', '--disable-pip-version-check', 'wheel', '--no-deps', '-w', '/tmp/tmpmeo45wf4', '--quiet', 'cppy>=1.2.0']' returned non-zero exit status 1.
-| ERROR: 'python3 setup.py bdist_wheel ' execution failed.
-
-Release is here [1]
-
-[1] https://github.com/nucleic/kiwi/releases/tag/1.4.0
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...hon3-kiwisolver_1.3.2.bb => python3-kiwisolver_1.4.0.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-kiwisolver_1.3.2.bb => python3-kiwisolver_1.4.0.bb} (59%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-kiwisolver_1.3.2.bb b/meta-python/recipes-devtools/python/python3-kiwisolver_1.4.0.bb
-similarity index 59%
-rename from meta-python/recipes-devtools/python/python3-kiwisolver_1.3.2.bb
-rename to meta-python/recipes-devtools/python/python3-kiwisolver_1.4.0.bb
-index dac6cd48b9..0f343b2fdd 100644
---- a/meta-python/recipes-devtools/python/python3-kiwisolver_1.3.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-kiwisolver_1.4.0.bb
-@@ -1,11 +1,11 @@
- SUMMARY = "A fast implementation of the Cassowary constraint solver"
- HOMEPAGE = "https://github.com/nucleic/kiwi"
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://setup.py;endline=7;md5=e54bd74bd9d0a84ae3f8f6d21ada0ab4"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=f137eeae9cf8004d06830f6ab25b2d52"
- 
--SRC_URI[sha256sum] = "fc4453705b81d03568d5b808ad8f09c77c47534f6ac2e72e733f9ca4714aa75c"
-+SRC_URI[sha256sum] = "7508b01e211178a85d21f1f87029846b77b2404a4c68cbd14748d4d4142fa3b8"
- 
--inherit pypi setuptools3
-+inherit pypi setuptools_build_meta
- 
- DEPENDS += "\
-     python3-cppy-native \
--- 
-2.35.1
-
+On Wed, Mar 16, 2022 at 2:01 AM Anu Deepthika via
+lists.openembedded.org
+<Nandipati.AnuDeepthika=philips.com@lists.openembedded.org> wrote:
+>
+> From: "Anu Deepthika, Nandipati" <Nandipati.AnuDeepthika@philips.com>
+>
+> Set one crypto-backend library at a time
+> OpenSSL is the crypto-backend library set for device hashing
+> Override PACKAGECONFIG to replace it with libsodium or libgcrypt
+>
+> Signed-off-by: Anu Deepthika, Nandipati <Nandipati.AnuDeepthika@philips.com>
+> ---
+>  ...kgconfig-instead-of-libgcrypt-config.patch | 106 ++++++++++++++++++
+>  .../usbguard/usbguard_1.1.0.bb                |  74 ++++++++++++
+>  2 files changed, 180 insertions(+)
+>  create mode 100644 meta-oe/recipes-security/usbguard/usbguard/0001-Add-and-use-pkgconfig-instead-of-libgcrypt-config.patch
+>  create mode 100644 meta-oe/recipes-security/usbguard/usbguard_1.1.0.bb
+>
+> diff --git a/meta-oe/recipes-security/usbguard/usbguard/0001-Add-and-use-pkgconfig-instead-of-libgcrypt-config.patch b/meta-oe/recipes-security/usbguard/usbguard/0001-Add-and-use-pkgconfig-instead-of-libgcrypt-config.patch
+> new file mode 100644
+> index 000000000..a7a3eb043
+> --- /dev/null
+> +++ b/meta-oe/recipes-security/usbguard/usbguard/0001-Add-and-use-pkgconfig-instead-of-libgcrypt-config.patch
+> @@ -0,0 +1,106 @@
+> +From e36cbf9d7a32de9945a8b6c62ad29dfb60358081 Mon Sep 17 00:00:00 2001
+> +From: "Anu Deepthika, Nandipati" <Nandipati.AnuDeepthika@philips.com>
+> +Date: Wed, 9 Mar 2022 02:03:51 +0530
+> +Subject: [PATCH] Add and use pkgconfig instead of libgcrypt-config
+> +
+> +Upstream-Status: Pending
+> +
+> +Signed-off-by: Anu Deepthika, Nandipati <Nandipati.AnuDeepthika@philips.com>
+> +---
+> + m4/libgcrypt.m4 | 56 ++-----------------------------------------------
+> + 1 file changed, 2 insertions(+), 54 deletions(-)
+> +
+> +diff --git a/m4/libgcrypt.m4 b/m4/libgcrypt.m4
+> +index 9a29eb5..465fe24 100644
+> +--- a/m4/libgcrypt.m4
+> ++++ b/m4/libgcrypt.m4
+> +@@ -22,17 +22,7 @@ dnl with a changed API.
+> + dnl
+> + AC_DEFUN([AM_PATH_LIBGCRYPT],
+> + [ AC_REQUIRE([AC_CANONICAL_HOST])
+> +-  AC_ARG_WITH(libgcrypt-prefix,
+> +-            AS_HELP_STRING([--with-libgcrypt-prefix=PFX],
+> +-                           [prefix where LIBGCRYPT is installed (optional)]),
+> +-     libgcrypt_config_prefix="$withval", libgcrypt_config_prefix="")
+> +-  if test x$libgcrypt_config_prefix != x ; then
+> +-     if test x${LIBGCRYPT_CONFIG+set} != xset ; then
+> +-        LIBGCRYPT_CONFIG=$libgcrypt_config_prefix/bin/libgcrypt-config
+> +-     fi
+> +-  fi
+> +
+> +-  AC_PATH_TOOL(LIBGCRYPT_CONFIG, libgcrypt-config, no)
+> +   tmp=ifelse([$1], ,1:1.2.0,$1)
+> +   if echo "$tmp" | grep ':' >/dev/null 2>/dev/null ; then
+> +      req_libgcrypt_api=`echo "$tmp"     | sed 's/\(.*\):\(.*\)/\1/'`
+> +@@ -41,44 +31,8 @@ AC_DEFUN([AM_PATH_LIBGCRYPT],
+> +      req_libgcrypt_api=0
+> +      min_libgcrypt_version="$tmp"
+> +   fi
+> ++  PKG_CHECK_MODULES(LIBGCRYPT, [libgcrypt >= $min_libgcrypt_version], [ok=yes], [ok=no])
+> +
+> +-  AC_MSG_CHECKING(for LIBGCRYPT - version >= $min_libgcrypt_version)
+> +-  ok=no
+> +-  if test "$LIBGCRYPT_CONFIG" != "no" ; then
+> +-    req_major=`echo $min_libgcrypt_version | \
+> +-               sed 's/\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\1/'`
+> +-    req_minor=`echo $min_libgcrypt_version | \
+> +-               sed 's/\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\2/'`
+> +-    req_micro=`echo $min_libgcrypt_version | \
+> +-               sed 's/\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\3/'`
+> +-    libgcrypt_config_version=`$LIBGCRYPT_CONFIG --version`
+> +-    major=`echo $libgcrypt_config_version | \
+> +-               sed 's/\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\).*/\1/'`
+> +-    minor=`echo $libgcrypt_config_version | \
+> +-               sed 's/\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\).*/\2/'`
+> +-    micro=`echo $libgcrypt_config_version | \
+> +-               sed 's/\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\).*/\3/'`
+> +-    if test "$major" -gt "$req_major"; then
+> +-        ok=yes
+> +-    else
+> +-        if test "$major" -eq "$req_major"; then
+> +-            if test "$minor" -gt "$req_minor"; then
+> +-               ok=yes
+> +-            else
+> +-               if test "$minor" -eq "$req_minor"; then
+> +-                   if test "$micro" -ge "$req_micro"; then
+> +-                     ok=yes
+> +-                   fi
+> +-               fi
+> +-            fi
+> +-        fi
+> +-    fi
+> +-  fi
+> +-  if test $ok = yes; then
+> +-    AC_MSG_RESULT([yes ($libgcrypt_config_version)])
+> +-  else
+> +-    AC_MSG_RESULT(no)
+> +-  fi
+> +   if test $ok = yes; then
+> +      # If we have a recent libgcrypt, we should also check that the
+> +      # API is compatible
+> +@@ -96,10 +50,8 @@ AC_DEFUN([AM_PATH_LIBGCRYPT],
+> +      fi
+> +   fi
+> +   if test $ok = yes; then
+> +-    LIBGCRYPT_CFLAGS=`$LIBGCRYPT_CONFIG --cflags`
+> +-    LIBGCRYPT_LIBS=`$LIBGCRYPT_CONFIG --libs`
+> +     ifelse([$2], , :, [$2])
+> +-    libgcrypt_config_host=`$LIBGCRYPT_CONFIG --host 2>/dev/null || echo none`
+> ++      libgcrypt_config_host=`$PKG_CONFIG --variable=host libgcrypt`
+> +     if test x"$libgcrypt_config_host" != xnone ; then
+> +       if test x"$libgcrypt_config_host" != x"$host" ; then
+> +   AC_MSG_WARN([[
+> +@@ -112,10 +64,6 @@ AC_DEFUN([AM_PATH_LIBGCRYPT],
+> + ***]])
+> +       fi
+> +     fi
+> +-  else
+> +-    LIBGCRYPT_CFLAGS=""
+> +-    LIBGCRYPT_LIBS=""
+> +-    ifelse([$3], , :, [$3])
+> +   fi
+> +   AC_SUBST(LIBGCRYPT_CFLAGS)
+> +   AC_SUBST(LIBGCRYPT_LIBS)
+> +--
+> +2.25.1
+> +
+> diff --git a/meta-oe/recipes-security/usbguard/usbguard_1.1.0.bb b/meta-oe/recipes-security/usbguard/usbguard_1.1.0.bb
+> new file mode 100644
+> index 000000000..3a2966ff4
+> --- /dev/null
+> +++ b/meta-oe/recipes-security/usbguard/usbguard_1.1.0.bb
+> @@ -0,0 +1,74 @@
+> +# Copyright (c) 2021 Koninklijke Philips N.V.
+> +#
+> +# SPDX-License-Identifier: MIT
+> +#
+> +SUMMARY = "USBGuard daemon for blacklisting and whitelisting of USB devices"
+> +DESCRIPTION = "The USBGuard software framework helps to protect your computer against \
+> +rogue USB devices (a.k.a. Bad USB) by implementing basic whitelisting and blacklisting \
+> +capabilities based on device attributes. This recipe takes OpenSSL as crypto-backend for \
+> +computing device hashes (Supported values are sodium, gcrypt, openssl)."
+> +HOMEPAGE = "https://usbguard.github.io/"
+> +LICENSE = "GPL-2.0-only"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> +
+> +SRC_URI = "https://github.com/USBGuard/usbguard/releases/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
+> +    file://0001-Add-and-use-pkgconfig-instead-of-libgcrypt-config.patch"
+> +
+> +SRC_URI[sha256sum] = "a39104042b0c57f969c4e6580f6d80ad7066551eda966600695e644081128a2d"
+> +
+> +inherit autotools-brokensep bash-completion pkgconfig systemd
+> +
+> +DEPENDS = "glib-2.0-native libcap-ng libqb libxml2-native libxslt-native pegtl protobuf protobuf-native xmlto-native"
+> +
+> +S = "${WORKDIR}/${BPN}-${PV}"
+> +
+> +EXTRA_OECONF += "\
+> +    --with-bundled-catch \
+> +    --with-bundled-pegtl \
+> +"
+> +
+> +PACKAGECONFIG ?= "\
+> +    openssl \
+> +    ${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)} \
+> +    ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
+> +"
+> +
+> +# USBGuard has made polkit mandatory to configure with-dbus
+> +PACKAGECONFIG[dbus] = "--with-dbus,--without-dbus,dbus-glib polkit"
+> +PACKAGECONFIG[libgcrypt] = "--with-crypto-library=gcrypt,,libgcrypt,,,libsodium openssl"
+> +PACKAGECONFIG[libsodium] = "--with-crypto-library=sodium,,libsodium,,,libgcrypt openssl"
+> +PACKAGECONFIG[openssl] = "--with-crypto-library=openssl,,openssl,,,libgcrypt libsodium"
+> +PACKAGECONFIG[polkit] = "--with-polkit,--without-polkit,polkit"
+> +PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
+> +
+> +SYSTEMD_PACKAGES = "${PN}"
+> +
+> +SYSTEMD_SERVICE:${PN} = "usbguard.service"
+> +
+> +SYSTEMD_PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'dbus', '${PN}-dbus', '', d)}"
+> +
+> +SYSTEMD_SERVICE:${PN}-dbus = "usbguard-dbus.service"
+> +
+> +PACKAGES =+ "${PN}-dbus"
+> +
+> +FILES:${PN} += "\
+> +    ${systemd_unitdir}/system/usbguard.service \
+> +    ${systemd_unitdir}/system/usbguard-dbus.service \
+> +    ${datadir}/polkit-1 \
+> +    ${datadir}/polkit-1/actions \
+> +    ${datadir}/dbus-1 \
+> +    ${nonarch_libdir}/tmpfiles.d \
+> +"
+> +
+> +do_install:append() {
+> +# Create /var/log/usbguard in runtime.
+> +    if [ "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}" ]; then
+> +        install -d ${D}${nonarch_libdir}/tmpfiles.d
+> +        echo "d ${localstatedir}/log/${BPN} 0755 root root -" > ${D}${nonarch_libdir}/tmpfiles.d/${BPN}.conf
+> +    fi
+> +    if [ "${@bb.utils.filter('DISTRO_FEATURES', 'sysvinit', d)}" ]; then
+> +        install -d ${D}${sysconfdir}/default/volatiles
+> +        echo "d root root 0755 ${localstatedir}/log/${BPN} none" > ${D}${sysconfdir}/default/volatiles/99_${BPN}
+> +    fi
+> +    rm -rf ${D}${localstatedir}/log
+> +}
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#96020): https://lists.openembedded.org/g/openembedded-devel/message/96020
+> Mute This Topic: https://lists.openembedded.org/mt/89817582/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
