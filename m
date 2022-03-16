@@ -1,93 +1,114 @@
-Return-Path: <uvv.mail@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41358C433F5
-	for <webhook@archiver.kernel.org>; Wed, 16 Mar 2022 17:53:41 +0000 (UTC)
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com
- [209.85.208.49])
- by mx.groups.io with SMTP id smtpd.web11.679.1647453219534364551
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DB45EC433F5
+	for <webhook@archiver.kernel.org>; Wed, 16 Mar 2022 18:46:09 +0000 (UTC)
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
+ [209.85.215.176])
+ by mx.groups.io with SMTP id smtpd.web09.648.1647456369195540028
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Mar 2022 10:53:39 -0700
+ Wed, 16 Mar 2022 11:46:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=XIkTz4se;
- spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: uvv.mail@gmail.com)
-Received: by mail-ed1-f49.google.com with SMTP id h13so3721198ede.5
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=eEKtIazf;
+ spf=pass (domain: gmail.com, ip: 209.85.215.176,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f176.google.com with SMTP id o23so849293pgk.13
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Mar 2022 10:53:39 -0700 (PDT)
+ Wed, 16 Mar 2022 11:46:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=mukthPzFv7aFF+L3W6+hytNoq8GBMLiEJUOYO3bl758=;
-        b=XIkTz4seIxsMW9hn/nAgFODBmB9KIRwHCJG1eJOpvpD5NoyFfCNLdKzNnWGFmJBAsg
-         E7s3iVu+PgRAumPVjUy6tjWECFFb82+ibbG9s26QrmJ+bzqe71jN7ByzfJrjnyENb7Wm
-         ONcy+A2Uk8nrNMzkNpFYD4yk8t4sEVsVZ+AHS/UtP7R3ryqMtVK+NVClLFF3mRCtUJgU
-         3dGhWs4nBmbXzCD2DFRYa7W4V4sbPTD4/kVT09dasywrM/y1g0NSMMJxe/0ERZ1uO0Hq
-         V92tPKX2F9xn2ghsEaPw82PXxhExKsOP7aeN6ujZ28O+WWLncTxrzvAJAtja/mKRFXzP
-         jWEA==
+        bh=m8K1qXepaNnHrdAu9lw27BbTtlXa/Cum2p6T0gu1bZU=;
+        b=eEKtIazf33A8ZYg1HXBCDtyoSgtojlXf3wjSAbhLvQBjMZ7khg98Tph2BvYoitUbnm
+         jA7JY0DwxRCOdmQoDtvWpdv4zP6XDXKLh9t+WzMT6NjdEnQiGUqE4P2gwAVa+VYFKSBO
+         h6s9YOPU1f1j8t05kgPdCgROy8H5J+JHicOyjymRaGEYjNbUgig7BXPaD8PbCMDQH2mD
+         3Lw46a41r8C1mN2+5EHWHPSY+RFOvBbrzRKANotqfKwiFlNehJ4joHNfmdwR9tgXsJD8
+         ZxAHsCbGtDguiVXcNqpEIJ66xM+JTfrnhJsMBqPPmiHSl/1cqF62OrtW9vSa6vtI1nu/
+         MKtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=mukthPzFv7aFF+L3W6+hytNoq8GBMLiEJUOYO3bl758=;
-        b=yMA+iYNCZpjpp3oSw5KOZRe8X0dH4LPePSMPDATcTVECH+aNlgAwN3MN0gRDqlWSl2
-         nKgUccI7eYsi4a4hJ87pEOtkKo94AOk29ZjWSb7oc/STtX+loQ7Hj86F0wZ1cEbiMIzr
-         KIiutGkVsDYKoX/RVkZHgxe30RrQg6ieTrvv6LIdS5E/nH3wb74mhuEZ3BBJZCcuwoiy
-         d88MUGs171SvusY9+swaD2fN3Q+JJXX2QsrPpWsOzSy3jeyhpE7UvUkAWbme6eo/Dq8Z
-         f+3iSRB/7Rr02Jban3wVvT3KYClwx+BMNrAGWGsSbzyDshrStoyZjaex0nbYxfw9OdfC
-         MQag==
-X-Gm-Message-State: AOAM530wg/3dQGKI96YyLYEWjO6z4qlOC4RunNojXBBAlBlV9kVkmocA
-	mjwUvkMpWFOj9I+c6+OP91kYdVE1LVoIeA==
+        bh=m8K1qXepaNnHrdAu9lw27BbTtlXa/Cum2p6T0gu1bZU=;
+        b=N2HHFyDV4BQxZxGD2mQuabO78PgN6SPBrrmrPfcoceNSl9V2aZBTlih/qvvtSQuBQb
+         27Y1O8z7bKqVoVo6zZncs0jH1vABKvkYlYtqfnS4v2b7OwDOPO6+nwI90uLKXYB3M3la
+         eOxpwX0EgnPtEweK6vTF01eZhe5dY2vjH3YYOYGbugAmQDnkXD7TNbR8byPpVYBS0Jgk
+         9lw2mpvacgqvqocpBQQkgq4ID4n1VCL1m17EpjeW+fMv55cdaa1E0n0gTAYPB6/I9vRW
+         ZyyLyqaeycu0SJCG0s6FsNwes0EVodceHSeI5yszPCQp9EqbWEJU668bdo90yNl3yEd/
+         1A8A==
+X-Gm-Message-State: AOAM532FjxeV5ULRzQkmyT4gQab7pwX89VDrE99O00MDjyGb+spvYuJN
+	/AH7g5Vw09WfEhzdCnYBu20Dzl2IbbCBuw==
 X-Google-Smtp-Source: 
- ABdhPJwZqv5pStYBmhUUqYvoQLc89ZSppsPVO8wjhmEtXGPOgtWK2w55dECRsA4hgZjzVTfQ8bBYRg==
-X-Received: by 2002:a05:6402:2754:b0:418:afad:bc2f with SMTP id
- z20-20020a056402275400b00418afadbc2fmr681460edd.170.1647453217769;
-        Wed, 16 Mar 2022 10:53:37 -0700 (PDT)
-Received: from uvv-2004-vm.localdomain
- (dslb-002-205-242-161.002.205.pools.vodafone-ip.de. [2.205.242.161])
+ ABdhPJw/dYWdjkMTz7VyUaGDMDFMPW79rVmEMliukKamxml/rSOJzRMX54tu3YTHCkwBPuSkKzVEIw==
+X-Received: by 2002:a63:874a:0:b0:37c:7fab:50fe with SMTP id
+ i71-20020a63874a000000b0037c7fab50femr724276pge.93.1647456368296;
+        Wed, 16 Mar 2022 11:46:08 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
         by smtp.gmail.com with ESMTPSA id
- sg9-20020a170907a40900b006df8c6df89fsm68097ejc.93.2022.03.16.10.53.37
+ a22-20020a056a000c9600b004f7ba8b445asm4078949pfv.65.2022.03.16.11.46.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Mar 2022 10:53:37 -0700 (PDT)
-From: Vyacheslav Yurkov <uvv.mail@gmail.com>
+        Wed, 16 Mar 2022 11:46:07 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Vyacheslav Yurkov <uvv.mail@gmail.com>
-Subject: [meta-oe][PATCH] sdbus-c++: disable code generation tools
-Date: Wed, 16 Mar 2022 18:53:10 +0100
-Message-Id: <20220316175310.1245775-1-uvv.mail@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-kiwisolver: Upgrade to 1.4.0
+Date: Wed, 16 Mar 2022 11:46:05 -0700
+Message-Id: <20220316184605.3280922-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Mar 2022 17:53:41 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Mar 2022 18:46:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96024
+ https://lists.openembedded.org/g/openembedded-devel/message/96025
 
-Tools are covered by sdbus-c++-tools recipe. It doesn't make sense to
-compile them here too.
+License-Update: There is separate License file now so use that for
+checksums
 
-Signed-off-by: Vyacheslav Yurkov <uvv.mail@gmail.com>
+use setuptools_build_meta since normal setuptools3 bbclass ends up
+in errors
+
+| distutils.errors.DistutilsError: Command '['/mnt/b/yoe/master/build/tmp/work/riscv32-yoe-linux-musl/python3-kiwisolver/1.4.0-r0/recipe-sysroot-native/usr/bin/python3-native/python3', '-m
+', 'pip', '--disable-pip-version-check', 'wheel', '--no-deps', '-w', '/tmp/tmpmeo45wf4', '--quiet', 'cppy>=1.2.0']' returned non-zero exit status 1.
+| ERROR: 'python3 setup.py bdist_wheel ' execution failed.
+
+Release is here [1]
+
+[1] https://github.com/nucleic/kiwi/releases/tag/1.4.0
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.0.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...hon3-kiwisolver_1.3.2.bb => python3-kiwisolver_1.4.0.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-kiwisolver_1.3.2.bb => python3-kiwisolver_1.4.0.bb} (59%)
 
-diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.0.0.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.0.0.bb
-index 0e07868ba..39f0b4c56 100644
---- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.0.0.bb
-+++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.0.0.bb
-@@ -21,7 +21,7 @@ SRCREV = "65782bbf435d91e5eb6af9ddab110df406a824a9"
- SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master"
- SRC_URI += "file://run-ptest"
+diff --git a/meta-python/recipes-devtools/python/python3-kiwisolver_1.3.2.bb b/meta-python/recipes-devtools/python/python3-kiwisolver_1.4.0.bb
+similarity index 59%
+rename from meta-python/recipes-devtools/python/python3-kiwisolver_1.3.2.bb
+rename to meta-python/recipes-devtools/python/python3-kiwisolver_1.4.0.bb
+index dac6cd48b9..0f343b2fdd 100644
+--- a/meta-python/recipes-devtools/python/python3-kiwisolver_1.3.2.bb
++++ b/meta-python/recipes-devtools/python/python3-kiwisolver_1.4.0.bb
+@@ -1,11 +1,11 @@
+ SUMMARY = "A fast implementation of the Cassowary constraint solver"
+ HOMEPAGE = "https://github.com/nucleic/kiwi"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://setup.py;endline=7;md5=e54bd74bd9d0a84ae3f8f6d21ada0ab4"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=f137eeae9cf8004d06830f6ab25b2d52"
  
--EXTRA_OECMAKE = "-DBUILD_CODE_GEN=ON \
-+EXTRA_OECMAKE = "-DBUILD_CODE_GEN=OFF \
-                  -DBUILD_DOC=ON \
-                  -DBUILD_DOXYGEN_DOC=OFF"
+-SRC_URI[sha256sum] = "fc4453705b81d03568d5b808ad8f09c77c47534f6ac2e72e733f9ca4714aa75c"
++SRC_URI[sha256sum] = "7508b01e211178a85d21f1f87029846b77b2404a4c68cbd14748d4d4142fa3b8"
  
+-inherit pypi setuptools3
++inherit pypi setuptools_build_meta
+ 
+ DEPENDS += "\
+     python3-cppy-native \
 -- 
-2.25.1
+2.35.1
 
 
