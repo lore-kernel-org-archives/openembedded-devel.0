@@ -1,115 +1,93 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <uvv.mail@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D1D5C433F5
-	for <webhook@archiver.kernel.org>; Wed, 16 Mar 2022 15:58:48 +0000 (UTC)
-Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com
- [209.85.222.175])
- by mx.groups.io with SMTP id smtpd.web12.26794.1647446327110803200
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41358C433F5
+	for <webhook@archiver.kernel.org>; Wed, 16 Mar 2022 17:53:41 +0000 (UTC)
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com
+ [209.85.208.49])
+ by mx.groups.io with SMTP id smtpd.web11.679.1647453219534364551
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Mar 2022 08:58:47 -0700
+ Wed, 16 Mar 2022 10:53:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=oNnqLz1T;
- spf=pass (domain: gmail.com, ip: 209.85.222.175,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f175.google.com with SMTP id z66so2198975qke.10
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=XIkTz4se;
+ spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: uvv.mail@gmail.com)
+Received: by mail-ed1-f49.google.com with SMTP id h13so3721198ede.5
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Mar 2022 08:58:47 -0700 (PDT)
+ Wed, 16 Mar 2022 10:53:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=LvxnHg8orYfVL7/ZzXaqi0qMMroVER9KAMVV+G/DsOM=;
-        b=oNnqLz1TPsvA/oXqFzxXvSLRH+BQsdf7C/8kDUxjmqY81kvy3FaC5OjO99IC+t/NQP
-         u4eNJdKHSSiQitIGQnx0prUxUYsrcYKr44nibSjfngSr6zJ7joleYyxfXleh1g0HV8CN
-         33dw3EgXa+dn25ywsr1fjKdURYWyr6WOftVSAErHQd6Adot350VZKP1aQGIkO5P3cpHl
-         NzjJxNPY1IRXqAw1fAKdErBcfkHycVQTCYKipu5eNXh+IqhvVeCIRHGVxb7tlzejehOS
-         S8maK2wVbKFXiT7f5mTs90ndVFjmHlbF8Jdc5tkiqCjzBwwaXwGB4WwxRwqorM/pjNIA
-         XCyQ==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=mukthPzFv7aFF+L3W6+hytNoq8GBMLiEJUOYO3bl758=;
+        b=XIkTz4seIxsMW9hn/nAgFODBmB9KIRwHCJG1eJOpvpD5NoyFfCNLdKzNnWGFmJBAsg
+         E7s3iVu+PgRAumPVjUy6tjWECFFb82+ibbG9s26QrmJ+bzqe71jN7ByzfJrjnyENb7Wm
+         ONcy+A2Uk8nrNMzkNpFYD4yk8t4sEVsVZ+AHS/UtP7R3ryqMtVK+NVClLFF3mRCtUJgU
+         3dGhWs4nBmbXzCD2DFRYa7W4V4sbPTD4/kVT09dasywrM/y1g0NSMMJxe/0ERZ1uO0Hq
+         V92tPKX2F9xn2ghsEaPw82PXxhExKsOP7aeN6ujZ28O+WWLncTxrzvAJAtja/mKRFXzP
+         jWEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=LvxnHg8orYfVL7/ZzXaqi0qMMroVER9KAMVV+G/DsOM=;
-        b=ahmKC1xhkmxNOxJl10H7LwasrHDny6VBOvEPY9BKfU3FButOBcAet5qK8/0LODze+0
-         VlPSnPcW0DFr1qf6kIgqejiaPbHUeMr6gpE5Fe1o6UI6XTQG7E4ONicCFjPvwSDVKZSQ
-         8KeydImcqNPgkwrGqKp0wHh6KozKpuEmk9+fSF8ZpLsBx9RD5XCicKSiGWX9/1KTfFT8
-         KeAa8IcF+fFqgVLDcEYYeDrKyKj62kfrrX1DH6hMsawS1w3mvQiqnnPl2IwUwHebc318
-         5reRNPO6TNypgezEYTG3v3Zu2yaMZjqXKvWAVlQv68LVkIJ6gdlvlDZQpY+SHy2KHXYv
-         knjg==
-X-Gm-Message-State: AOAM530AygE1cGEwfr6FKAqudiMuth40Iwx1ALtCCR71o6A2tAU9Bieu
-	ErXt/S/QSAZLpBFTDHW1x/xNUL0VSDTv7p85jNI=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=mukthPzFv7aFF+L3W6+hytNoq8GBMLiEJUOYO3bl758=;
+        b=yMA+iYNCZpjpp3oSw5KOZRe8X0dH4LPePSMPDATcTVECH+aNlgAwN3MN0gRDqlWSl2
+         nKgUccI7eYsi4a4hJ87pEOtkKo94AOk29ZjWSb7oc/STtX+loQ7Hj86F0wZ1cEbiMIzr
+         KIiutGkVsDYKoX/RVkZHgxe30RrQg6ieTrvv6LIdS5E/nH3wb74mhuEZ3BBJZCcuwoiy
+         d88MUGs171SvusY9+swaD2fN3Q+JJXX2QsrPpWsOzSy3jeyhpE7UvUkAWbme6eo/Dq8Z
+         f+3iSRB/7Rr02Jban3wVvT3KYClwx+BMNrAGWGsSbzyDshrStoyZjaex0nbYxfw9OdfC
+         MQag==
+X-Gm-Message-State: AOAM530wg/3dQGKI96YyLYEWjO6z4qlOC4RunNojXBBAlBlV9kVkmocA
+	mjwUvkMpWFOj9I+c6+OP91kYdVE1LVoIeA==
 X-Google-Smtp-Source: 
- ABdhPJw2NvxSRV4Lpsx5hF3xWHvznf3gHibEYjCgpXE+DbjECOjT1gKxJGePW76Xxsed5KuWy7kax0Vx98rsa7H9MFA=
-X-Received: by 2002:a05:620a:2993:b0:67d:7116:a642 with SMTP id
- r19-20020a05620a299300b0067d7116a642mr365105qkp.180.1647446326068; Wed, 16
- Mar 2022 08:58:46 -0700 (PDT)
+ ABdhPJwZqv5pStYBmhUUqYvoQLc89ZSppsPVO8wjhmEtXGPOgtWK2w55dECRsA4hgZjzVTfQ8bBYRg==
+X-Received: by 2002:a05:6402:2754:b0:418:afad:bc2f with SMTP id
+ z20-20020a056402275400b00418afadbc2fmr681460edd.170.1647453217769;
+        Wed, 16 Mar 2022 10:53:37 -0700 (PDT)
+Received: from uvv-2004-vm.localdomain
+ (dslb-002-205-242-161.002.205.pools.vodafone-ip.de. [2.205.242.161])
+        by smtp.gmail.com with ESMTPSA id
+ sg9-20020a170907a40900b006df8c6df89fsm68097ejc.93.2022.03.16.10.53.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 16 Mar 2022 10:53:37 -0700 (PDT)
+From: Vyacheslav Yurkov <uvv.mail@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Vyacheslav Yurkov <uvv.mail@gmail.com>
+Subject: [meta-oe][PATCH] sdbus-c++: disable code generation tools
+Date: Wed, 16 Mar 2022 18:53:10 +0100
+Message-Id: <20220316175310.1245775-1-uvv.mail@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <1647419641-81593-1-git-send-email-wangmy@fujitsu.com>
- <1647419641-81593-4-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1647419641-81593-4-git-send-email-wangmy@fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 16 Mar 2022 08:58:19 -0700
-Message-ID: 
- <CAMKF1soOBw-dcU1vm_kLAUn2f3ZEdoNrpfc+sG9wfwmHTjc7Aw@mail.gmail.com>
-Subject: Re: [oe] [meta-python] [PATCH] python3-asn1crypto: upgrade 1.4.0 ->
- 1.5.1
-To: wangmy <wangmy@fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Mar 2022 15:58:48 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Mar 2022 17:53:41 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96023
+ https://lists.openembedded.org/g/openembedded-devel/message/96024
 
-This recipe has moved to oe-core. Please regenerate against latest
-oe-core/master and submit it to oe-core ml
+Tools are covered by sdbus-c++-tools recipe. It doesn't make sense to
+compile them here too.
 
-On Wed, Mar 16, 2022 at 1:34 AM wangmy <wangmy@fujitsu.com> wrote:
->
-> License-Update: year updated to 2022
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  ...thon3-asn1crypto_1.4.0.bb => python3-asn1crypto_1.5.1.bb} | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
->  rename meta-python/recipes-devtools/python/{python3-asn1crypto_1.4.0.bb => python3-asn1crypto_1.5.1.bb} (70%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-asn1crypto_1.4.0.bb b/meta-python/recipes-devtools/python/python3-asn1crypto_1.5.1.bb
-> similarity index 70%
-> rename from meta-python/recipes-devtools/python/python3-asn1crypto_1.4.0.bb
-> rename to meta-python/recipes-devtools/python/python3-asn1crypto_1.5.1.bb
-> index c052cb8c82..5fa2ed987c 100644
-> --- a/meta-python/recipes-devtools/python/python3-asn1crypto_1.4.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-asn1crypto_1.5.1.bb
-> @@ -2,12 +2,11 @@ DESCRIPTION = "A fast, pure Python library for parsing and serializing ASN.1 str
->  HOMEPAGE = "https://github.com/wbond/asn1crypto"
->  SECTION = "devel/python"
->  LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=7439e38f5e04ff62fae436184786b7ca"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=b5cda97fbd7959ad47a952651a87051a"
->
->  PYPI_PACKAGE = "asn1crypto"
->
-> -SRC_URI[md5sum] = "00bf5b72d37778e62cc73b1d8909ae27"
-> -SRC_URI[sha256sum] = "f4f6e119474e58e04a2b1af817eb585b4fd72bdd89b998624712b5c99be7641c"
-> +SRC_URI[sha256sum] = "13ae38502be632115abf8a24cbe5f4da52e3b5231990aff31123c805306ccb9c"
->
->  inherit pypi setuptools3
->
-> --
-> 2.25.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#96014): https://lists.openembedded.org/g/openembedded-devel/message/96014
-> Mute This Topic: https://lists.openembedded.org/mt/89817413/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Signed-off-by: Vyacheslav Yurkov <uvv.mail@gmail.com>
+---
+ meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.0.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.0.0.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.0.0.bb
+index 0e07868ba..39f0b4c56 100644
+--- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.0.0.bb
++++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.0.0.bb
+@@ -21,7 +21,7 @@ SRCREV = "65782bbf435d91e5eb6af9ddab110df406a824a9"
+ SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master"
+ SRC_URI += "file://run-ptest"
+ 
+-EXTRA_OECMAKE = "-DBUILD_CODE_GEN=ON \
++EXTRA_OECMAKE = "-DBUILD_CODE_GEN=OFF \
+                  -DBUILD_DOC=ON \
+                  -DBUILD_DOXYGEN_DOC=OFF"
+ 
+-- 
+2.25.1
+
 
