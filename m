@@ -2,73 +2,77 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BF61C4332F
-	for <webhook@archiver.kernel.org>; Wed, 16 Mar 2022 08:33:14 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.2])
- by mx.groups.io with SMTP id smtpd.web10.22605.1647419592275531045
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25CFAC433EF
+	for <webhook@archiver.kernel.org>; Wed, 16 Mar 2022 08:33:15 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.4])
+ by mx.groups.io with SMTP id smtpd.web12.22333.1647419592012384552
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Mar 2022 01:33:13 -0700
+ Wed, 16 Mar 2022 01:33:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=AXGnppaF;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.2,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=jAmuJmWu;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1647419590; i=@fujitsu.com;
-	bh=MihxYeZK/IXwbyIMQCd7JW2XqdbkORbUPTy3YVsvRjQ=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=AXGnppaFTFyt3b+oK1mshoR8cOCeOvZUo9arUKYUp2Ls3whg/1Q2uJyXMRLG8b/6j
-	 BKPu1/LRW5cnu4p+InuO2O6yps6qLEDRwR1HDR8P8BFior7mS0i/RV94NtvORbFg0s
-	 ERnXWgydbdZAIe2rGH6KrkY9iyawUuJi3+J0Fvk19IohrRseKG/0QrKkW6CTjJfYP9
-	 kLmmrvgCFXy0dHueh01yh7GzbyP1ButTrkR9Q5dI+xug0fcvn64Y/s9o7+dixQ9U37
-	 DEg3z0PhxstYxhDIGvpAo1aVP8wirS13IP8uAGLsB6IE7o00J88n3zE8GEAc9Ol27B
-	 ovVp80FEDpdOQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8ORqHt0gWG
-  SwZNj1hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aBiZ/YC35zVuz6uIatgXEGZxcjF4eQwBNG
-  iZlbf7FCOBeYJNZ297JBOCcYJfpXdQJlODnYBNQkpt+6AWaLCOhLLJ29hxnEZhZQkXjxu4cdx
-  BYW8Jb4/mcuWJxFQFVi49ctLCA2r4CTRNeU32C2hICCxJSH75kh4oISJ2c+YYGYIyFx8MULZo
-  gaRYnZl5uh6iskZs1qY4Kw1SSuntvEPIGRfxaS9llI2hcwMq1itEoqykzPKMlNzMzRNTQw0DU
-  0NNU11TUyNtZLrNJN1Est1S1PLS7RNdRLLC/WSy0u1iuuzE3OSdHLSy3ZxAgMy5Ri1pc7GKf3
-  /dQ7xCjJwaQkynt+pmGSEF9SfkplRmJxRnxRaU5q8SFGGQ4OJQne3XOAcoJFqempFWmZOcAYg
-  UlLcPAoifC6zgNK8xYXJOYWZ6ZDpE4xKkqJ8zKA9AmAJDJK8+DaYHF5iVFWSpiXkYGBQYinIL
-  UoN7MEVf4VozgHo5Iwr80MoCk8mXklcNNfAS1mAlo8T1oPZHFJIkJKqoGp4ZQxo/60XE0VAeM
-  TUyTT/ja7Nd04uP7HmiX8bUq791XFmqT/P2Q04Xc6V7XbjYjs9wIerf1H21zdmaPUVm1+/jrl
-  9PvGql2SjSyNvsftdqlOacovm/k2KqIgzXRNab6xzNT9Bx8q+P0W31EkGDxDdILJn5WRVV9LP
-  2d5n7mSG3rZkCXzlP/9+zKd/vtLXt2zydgqt6+i3PKb+bMnT2JdVM9afMifEhBk9ytWTIlZz/
-  KDCNfGOdq6j+o3HzB+bBhWlKjM02wvOr/o0lZDZ8akzUIPyqp/SSYt0zhsWnwoySgyof1uV5P
-  l9u4NfV6LO+T19qjyLw01+2qqon7ow8OZH1O2qTlZdrk955z0X4mlOCPRUIu5qDgRAJyzUXlG
-  AwAA
+	s=170520fj; t=1647419593; i=@fujitsu.com;
+	bh=pSPQFLew6oUV+jKmWb6ge5UkAZaRPWdJ4hj526VrnEg=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=jAmuJmWuRhHgyyB+tyCsnACe2Qee2KK5cgP4Jlvm+munriyYrzUgE9VQ/I5fLxkA0
+	 jlayhnyixU5xITxF4FEkoV4u+vr/C45JR8QR5L870xEfHJ8O0gTQIXEMO8blyhlpjh
+	 vNeuj+Cv372uXQRK9AzTNLXxs3fG5pA7TKMphLRmH6l4s6T9QsvTYIBCvicwWyZQVZ
+	 rnmAUGoivGVVwZR9E7FalC5rFdBJ+BNetORYQa1kT3H29AKlwe7p5WmZloP4f5rPLm
+	 XA/j3HpHktiRdyzaytT+cWIuRC7blyTPGy081ZUt6+08T9UackNeeT9J2Dw609ge2N
+	 dHIHZYONpYBoA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrDIsWRWlGSWpSXmKPExsViZ8ORqHtsgWG
+  SQctHQYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaPnxROWgl2SFX2Xb7A0MHaKdzFycQgJPGGU
+  mPTxLAuEc4FJYtKEq8wQzglGiUs/WoEynBxsAmoS02/dYAWxRQT0JZbO3sMMYjMLqEi8+N3DD
+  mILCwRI/LzYBFbPIqAqsWTJRiYQm1fASeLsg8NgvRICChJTHr4H6+UUcJaYNGUPI4gtBFQz9f
+  JXZoh6QYmTM5+wQMyXkDj44gUzRK+ixOzLzSwQdoXErFltTBC2msTVc5uYJzAKzkLSPgtJ+wJ
+  GplWM1klFmekZJbmJmTm6hgYGuoaGprrGRrqGRmZ6iVW6iXqppbrlqcUlukZ6ieXFeqnFxXrF
+  lbnJOSl6eaklmxiBgZxSrFC3g/Hayp96hxglOZiURHnPzzRMEuJLyk+pzEgszogvKs1JLT7EK
+  MPBoSTBu3sOUE6wKDU9tSItMwcYVTBpCQ4eJRFe13lAad7igsTc4sx0iNQpRkUpcV4GkD4BkE
+  RGaR5cGyySLzHKSgnzMjIwMAjxFKQW5WaWoMq/YhTnYFQS5rWZATSFJzOvBG76K6DFTECL50n
+  rgSwuSURISTUwrbvyKqfikk2qXqZVrbZTss0TmbKN+qvOx0xerPhi0seNZ7qqilX2T5996wjj
+  2sQfZcqHhDKPek949P7j9x98esm1N95Evype/WzOl7O1fmfu7O28uus8+6X8BSG7XLgTf93ey
+  Ls/w3/mPtdvqVX2PrWGxrlfrJUvTvIxS/m3h+PAsQi3rqRF52vPOe0/dCbo+/3XQgdeHpLmDD
+  A5vV0+s1zautxDc8Xj/B2er5mf1aUKf+9WXsOx49L+quXNr4vVa48aODTcjmd4uJxNMP2N+tq
+  CS/uUNhp82vwgp9ef24BDf0VFoonPRe7yPMuz78R23zA9KXOUL7akpspvj+/3iE8Cxlt/zOhR
+  zjufMZkjXYmlOCPRUIu5qDgRAJpZKVlfAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-17.tower-591.messagelabs.com!1647419589!9421!1
+X-Msg-Ref: server-23.tower-565.messagelabs.com!1647419590!51565!1
 X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.81.10; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 18802 invoked from network); 16 Mar 2022 08:33:09 -0000
+Received: (qmail 2831 invoked from network); 16 Mar 2022 08:33:10 -0000
 Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-17.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 16 Mar 2022 08:33:09 -0000
+  by server-23.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 16 Mar 2022 08:33:10 -0000
 Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 69B59100194
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 7B8A21001AE
 	for <openembedded-devel@lists.openembedded.org>;
  Wed, 16 Mar 2022 08:33:09 +0000 (GMT)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 385E6100196
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 419CD10004D
 	for <openembedded-devel@lists.openembedded.org>;
  Wed, 16 Mar 2022 08:33:09 +0000 (GMT)
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.28; Wed, 16 Mar 2022 08:32:54 +0000
+ (TLS) id 15.0.1497.28; Wed, 16 Mar 2022 08:33:03 +0000
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] libiec61850: upgrade 1.5.0 -> 1.5.1
-Date: Wed, 16 Mar 2022 16:32:38 +0800
-Message-ID: <1647419561-81555-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] networkmanager: upgrade 1.36.0 ->
+ 1.36.2
+Date: Wed, 16 Mar 2022 16:32:41 +0800
+Message-ID: <1647419561-81555-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1647419561-81555-1-git-send-email-wangmy@fujitsu.com>
+References: <1647419561-81555-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -78,32 +82,74 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Mar 2022 08:33:14 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Mar 2022 08:33:15 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96008
+ https://lists.openembedded.org/g/openembedded-devel/message/96010
+
+0001-do-not-ask-host-for-ifcfg-defaults.patch refreshed for new version
+
+Changelog:
+==========
+* When the list of plugins is not specified via "main.plugins" in
+  NetworkManager.conf and no build-time default is set with
+  "--with-config-plugins-default" configure argument, now all known
+  plugins found in the plugin directory are loaded (and the built-in
+  "keyfile" plugin is preferred over others).
+* Preserve external ports during checkpoint rollback
+* Fix removal of ovsdb entry when an OVS interface goes away
+* Fix DNS configuration for WWAN connections
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libiec61850/{libiec61850_1.5.0.bb => libiec61850_1.5.1.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/libiec61850/{libiec61850_1.5.0.bb => libiec61850_1.5.1.bb} (96%)
+ .../0001-do-not-ask-host-for-ifcfg-defaults.patch        | 9 +++------
+ ...networkmanager_1.36.0.bb => networkmanager_1.36.2.bb} | 2 +-
+ 2 files changed, 4 insertions(+), 7 deletions(-)
+ rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.36.0.bb => networkmanager_1.36.2.bb} (99%)
 
-diff --git a/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.0.bb b/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.1.bb
-similarity index 96%
-rename from meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.0.bb
-rename to meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.1.bb
-index 13e0250fa6..11050e2050 100644
---- a/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.0.bb
-+++ b/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.1.bb
-@@ -13,7 +13,7 @@ SECTION = "console/network"
- LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- DEPENDS = "swig-native python3"
--SRCREV = "fcefc746fea286aeaa40d2f62240216da81c85e5"
-+SRCREV = "210cf30897631fe2006ac50483caf8fd616622a2"
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-do-not-ask-host-for-ifcfg-defaults.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-do-not-ask-host-for-ifcfg-defaults.patch
+index d3393b50c1..92b129320c 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-do-not-ask-host-for-ifcfg-defaults.patch
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-do-not-ask-host-for-ifcfg-defaults.patch
+@@ -1,4 +1,4 @@
+-From 3894ddf5f677a42ed01d676b68e25a414fd8a0ce Mon Sep 17 00:00:00 2001
++From 37559b659e22886d5f55837d4f167ba5fda73e85 Mon Sep 17 00:00:00 2001
+ From: Adrian Freihofer <adrian.freihofer@siemens.com>
+ Date: Sun, 29 Aug 2021 15:50:35 +0200
+ Subject: [PATCH] do-not-ask-host-for-ifcfg-defaults
+@@ -8,7 +8,7 @@ Subject: [PATCH] do-not-ask-host-for-ifcfg-defaults
+  1 file changed, 2 insertions(+), 2 deletions(-)
  
- SRC_URI = "git://github.com/mz-automation/${BPN}.git;branch=v1.5;protocol=https \
-            file://0001-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch \
+ diff --git a/meson.build b/meson.build
+-index 3c4be61509..8833c62fa3 100644
++index d0cec83..289aa1b 100644
+ --- a/meson.build
+ +++ b/meson.build
+ @@ -304,8 +304,8 @@ else
+@@ -21,7 +21,4 @@ index 3c4be61509..8833c62fa3 100644
+ +enable_ifupdown = get_option('ifupdown')
+  
+  config_plugins_default = get_option('config_plugins_default')
+- if config_plugins_default == ''
+--- 
+-2.31.1
+-
++ config_h.set_quoted('NM_CONFIG_DEFAULT_MAIN_PLUGINS', config_plugins_default)
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.36.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.36.2.bb
+similarity index 99%
+rename from meta-networking/recipes-connectivity/networkmanager/networkmanager_1.36.0.bb
+rename to meta-networking/recipes-connectivity/networkmanager/networkmanager_1.36.2.bb
+index 0ab8cad21c..b09ff18bf7 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.36.0.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.36.2.bb
+@@ -30,7 +30,7 @@ SRC_URI = " \
+     file://enable-iwd.conf \
+     file://0001-do-not-ask-host-for-ifcfg-defaults.patch \
+ "
+-SRC_URI[sha256sum] = "faa389c9e9ca78243cfab4a8bed6db132f82e5b5e66bb9d44af93379d1348398"
++SRC_URI[sha256sum] = "ab855cbe3b41832e9a3b003810e7c7313dfe19e630d29806d14d87fdd1470cab"
+ 
+ S = "${WORKDIR}/NetworkManager-${PV}"
+ 
 -- 
 2.25.1
 
