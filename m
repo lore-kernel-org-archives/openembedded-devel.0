@@ -2,115 +2,120 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D19DC433F5
-	for <webhook@archiver.kernel.org>; Thu, 17 Mar 2022 02:52:48 +0000 (UTC)
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
- [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.web10.5831.1647485566854775949
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C54A4C433EF
+	for <webhook@archiver.kernel.org>; Thu, 17 Mar 2022 03:49:58 +0000 (UTC)
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com
+ [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.web10.6288.1647488997942856739
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Mar 2022 19:52:47 -0700
+ Wed, 16 Mar 2022 20:49:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ShZvuNs4;
- spf=pass (domain: gmail.com, ip: 209.85.210.170,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id h2so5712389pfh.6
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ResdYCqy;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id
+ mr5-20020a17090b238500b001c67366ae93so1950737pjb.4
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Mar 2022 19:52:46 -0700 (PDT)
+ Wed, 16 Mar 2022 20:49:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=N+sfKkSFX989irhcA1Hgmyeha8M5rvFMp8JNB7Ts7PU=;
-        b=ShZvuNs4z0u5Au/7oOTGMLvZVDc81zjWhZv5Ri+8ihcg5MOdUQQvBvnhqE4zfVXjku
-         A9YHWPWtDvAPSUJa0qUWvJ/NhSB+HqBnJLzvkb+LRL4RW3sQZSxoUrYStosXdGzIkZge
-         Bs6WvR1r4vylsG0CNNf6YHQcGdiW+v/Ceo+wSvsRRcoy+4wo84892FAc1B8sDLiyTboj
-         PPozdebeI+cUAhhGvBe/O+0D7tqwoeg1Q7YUOFstlX6KmaX2H84rbVRqs8HaEzNCz/rK
-         CdW2wy/GymApxJwqAFDx379WTo8VIdBgOC1mhrzyE7IhMJEzOeO0LcfkYtrBgvhnHnwg
-         h4Jw==
+        bh=QWYadhfAf5E4+mPzcsfaW5GkkK8IaCjkRr0lIqZD1bI=;
+        b=ResdYCqyjaCjpithm60t0HVMRw0DpL6NtXjVmF1hOL1BYy/YTf3ZhDYYVq8e1wo1Xy
+         tCBsPp4Ts2RnsIXwuKN6GVikZrIHLjQ/EZr5kxlxqPjDbn9M/yWpMqzWsn0aCGwMyrjS
+         CXiJZ3FN/jXXJTD7NViHQIjk9KHpxI+zaesSr1ohMJcvddoA46JEOLwr6/+dPqo7vxms
+         4TYX34TG13vFWfhhJ9f8DqviZSNKrNwYaFJVGIDQDcfMAGqIJ52fV4aQsHqKlcjjbZy7
+         7OtwLJf7TBeb9/9FsSQomYemafQ1DnPt2DF4Ji72XqRy/WLHPD1MCvX6a7XOhI6Ilgff
+         ykzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=N+sfKkSFX989irhcA1Hgmyeha8M5rvFMp8JNB7Ts7PU=;
-        b=60loIGf/IpwFaZQAzZu+ZQ1zQAuGdVRIozdwK+8q7Jv7c6ZlpLZ/Sk1AYPeShMzR9b
-         PW+MwsAPvWgenqVMVm7fhvKJgdmO/cYwLTv14mzWYtZN3QIXUqyWR/alGUgjSs4FmjWj
-         e60DVwiffk8QGGf44iWQtQBaUAMnVF7KpqPxA7zHrXmmscYR9hMEN4/X+iaXAotPG50w
-         zjjx/0NgGmV1j7rSGmw7xKUP5+S2JdwiGC06T8hkx/qKLrAKVRKcXWuwZwulbJvb7yvK
-         1yAnjHHkW1PIki3PJ6j4EYKJc1LBV+ZJkzDoMzz0meti3lPGJogUbeZA7FE4Y4hLG6kZ
-         U/ow==
-X-Gm-Message-State: AOAM531AXgl30Hb7qIVViSnp6dt1MpUJYwa2OV/Yn/TIZLQtpKTgnJUZ
-	rNspEp1vDFIEQD+iMEaPP/UMw6TIDYYvCA==
+        bh=QWYadhfAf5E4+mPzcsfaW5GkkK8IaCjkRr0lIqZD1bI=;
+        b=gdL1Udcy/k17OMHcPbfxuxp6S0O8lUXYlC1jn8KQ3cAt78j5a4JHxWQktbN9qHFRwn
+         g+SaBbzKyV6MUj+F5Km4dCSCNqdV1FjgnExJV7aEyt2aR/0nuozjgy0OVQzV4nOs1Hqh
+         LI/AIbR5Nau+3Y2kljluL5vNSsYP4gOT2fev2AIhM1jccYcPzWrCtmKAXU7axLgv41VQ
+         Qffv/7FYcTD0pZu2CN21QaN/nUXjB4BgNLxcd2IY9yAOlUgYox7a7IOv1Is9QwJTBeZe
+         2kcDjhZJH6ZGsA6uY6JbwZLbWFPmAUNNE4nJpdSYHeCwQ8Fk9HvWYnYfxHORxKHrgPSZ
+         IeBQ==
+X-Gm-Message-State: AOAM5334tJ7yRHRgGRQn2kWXqwLoHmiXT1QLEHifa/Q3If7/JdMYE2cF
+	fYKnowSaVAf9bVKyaiGnJCXpa3IekQ72ag==
 X-Google-Smtp-Source: 
- ABdhPJxCuk6W07KOMsra+0PECsxmCZbSKoWFhwmtNeRkD7nejPdzNgx3ESV2WqIsXB5tazpwur/M/g==
-X-Received: by 2002:a65:43c8:0:b0:378:7add:ec4c with SMTP id
- n8-20020a6543c8000000b003787addec4cmr1927507pgp.570.1647485566036;
-        Wed, 16 Mar 2022 19:52:46 -0700 (PDT)
+ ABdhPJyVN/zhE1c7LYDxMY0DBmEtdCV70Deg1iu9BuR6L7cLMKaTDOuZe75THhUW+QsobJ8SpU/jGA==
+X-Received: by 2002:a17:903:2291:b0:153:be61:dfb1 with SMTP id
+ b17-20020a170903229100b00153be61dfb1mr3191171plh.64.1647488997161;
+        Wed, 16 Mar 2022 20:49:57 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
         by smtp.gmail.com with ESMTPSA id
- z16-20020a056a00241000b004f3a647ae89sm4862829pfh.174.2022.03.16.19.52.45
+ w12-20020a056a0014cc00b004f790cdbf9dsm5262665pfu.183.2022.03.16.20.49.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Mar 2022 19:52:45 -0700 (PDT)
+        Wed, 16 Mar 2022 20:49:56 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] php: Fix build on rv32/musl
-Date: Wed, 16 Mar 2022 19:52:43 -0700
-Message-Id: <20220317025243.518388-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 1/2] python3-chardet: Remove
+Date: Wed, 16 Mar 2022 20:49:52 -0700
+Message-Id: <20220317034953.2517843-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 17 Mar 2022 02:52:48 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 17 Mar 2022 03:49:58 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96031
+ https://lists.openembedded.org/g/openembedded-devel/message/96032
+
+Its moved to oe-core
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-devtools/php/php_8.1.3.bb | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ .../packagegroups/packagegroup-meta-python.bb |  1 -
+ .../python/python3-chardet_4.0.0.bb           | 23 -------------------
+ 2 files changed, 24 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-chardet_4.0.0.bb
 
-diff --git a/meta-oe/recipes-devtools/php/php_8.1.3.bb b/meta-oe/recipes-devtools/php/php_8.1.3.bb
-index bfe4d270d6..8086bac550 100644
---- a/meta-oe/recipes-devtools/php/php_8.1.3.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.1.3.bb
-@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=99532e0f6620bc9bca34f12fadaee33c"
- 
- BBCLASSEXTEND = "native"
- DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native"
-+DEPENDS:append:libc-musl = " libucontext"
- DEPENDS:class-native = "zlib-native libxml2-native"
- 
- PHP_MAJOR_VERSION = "${@d.getVar('PV').split('.')[0]}"
-@@ -66,6 +67,10 @@ EXTRA_OECONF = "--enable-mbstring \
- 
- EXTRA_OECONF:append:riscv64 = " --with-pcre-jit=no"
- EXTRA_OECONF:append:riscv32 = " --with-pcre-jit=no"
-+# Needs fibers assembly implemented for rv32
-+# for example rv64 implementation is below
-+# see https://github.com/php/php-src/commit/70b02d75f2abe3a292d49c4a4e9e4f850c2fee68
-+EXTRA_OECONF:append:riscv32:libc-musl = " --disable-fiber-asm"
- 
- CACHED_CONFIGUREVARS += "ac_cv_func_dlopen=no ac_cv_lib_dl_dlopen=yes"
- 
-@@ -116,6 +121,7 @@ CFLAGS += " -D_GNU_SOURCE -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I${STAGING_IN
- # See https://bugs.php.net/bug.php?id=60109
- CFLAGS += " -DHAVE_LIBDL "
- LDFLAGS += " -ldl "
-+LDFLAGS:append:libc-musl = " -lucontext "
- 
- EXTRA_OEMAKE = "INSTALL_ROOT=${D}"
- 
-@@ -272,8 +278,3 @@ do_install:append:class-native() {
- # | {standard input}:3797: Error: unshifted register required -- `sub r2,r2,r0,asr#31'
- # | make: *** [ext/standard/math.lo] Error 1
- ARM_INSTRUCTION_SET = "arm"
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index d770014203..e285692f47 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -62,7 +62,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
+     python3-cantools \
+     python3-cassandra-driver \
+     python3-cbor2 \
+-    python3-cchardet \
+     python3-cerberus \
+     python3-certifi \
+     python3-chardet \
+diff --git a/meta-python/recipes-devtools/python/python3-chardet_4.0.0.bb b/meta-python/recipes-devtools/python/python3-chardet_4.0.0.bb
+deleted file mode 100644
+index 75fe4df8d7..0000000000
+--- a/meta-python/recipes-devtools/python/python3-chardet_4.0.0.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-SUMMARY = "Universal encoding detector for Python 2 and 3"
+-LICENSE = "LGPL-2.1-only"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=a6f89e2100d9b6cdffcea4f398e37343"
 -
--# Needs fibers assembly implemented for rv32
--# for example rv64 implementation is below
--# see https://github.com/php/php-src/commit/70b02d75f2abe3a292d49c4a4e9e4f850c2fee68
--COMPATIBLE_HOST:libc-musl:riscv32 = "null"
+-SRC_URI[sha256sum] = "0d6f53a15db4120f2b08c94f11e7d93d2c911ee118b6b30a04ec3ee8310179fa"
+-
+-# setup.py of chardet needs this.
+-DEPENDS += "${PYTHON_PN}-pytest-runner-native"
+-
+-inherit pypi setuptools3
+-
+-PACKAGES =+ "${PN}-cli"
+-FILES:${PN}-cli += " \
+-    ${PYTHON_SITEPACKAGES_DIR}/chardet/cli \
+-"
+-
+-RDEPENDS:${PN}-cli = "${PN} "
+-
+-RDEPENDS:${PN}:class-target += " \
+-    ${PYTHON_PN}-logging \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
 -- 
 2.35.1
 
