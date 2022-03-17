@@ -1,114 +1,148 @@
-Return-Path: <xuhuan.fnst@fujitsu.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7657CC433EF
-	for <webhook@archiver.kernel.org>; Thu, 17 Mar 2022 13:46:31 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com
- [195.245.230.81])
- by mx.groups.io with SMTP id smtpd.web09.10538.1647524789561183396
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19C13C433EF
+	for <webhook@archiver.kernel.org>; Thu, 17 Mar 2022 15:00:32 +0000 (UTC)
+Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
+ by mx.groups.io with SMTP id smtpd.web12.11330.1647529230456724016
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Mar 2022 06:46:30 -0700
+ Thu, 17 Mar 2022 08:00:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=FOrR0VoM;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.81,
- mailfrom: xuhuan.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1647524787; i=@fujitsu.com;
-	bh=z39/Kj92/q7UO1zn6Cy12gziTY4w1r1ePQO+Vb9v4w8=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=FOrR0VoMm8Ofw34HZISL2GTo2KFuQcQiTAAl9vqQHBMb5s1YP5wPLWLspaGIYEvdw
-	 VcbW6ozB0PUiJjddz3cCPdAUXCnI6W0cjobHEJAAkyPhe3nm5ZC1P97R7lizOTsSUl
-	 diqobQXEyeSDlo5Dq89ChxI3nnYUQKj3BC1j7Qim0nmFOKSKYYSunPnFzzIdSHb7YI
-	 yYsXiyhrFmGNjJGS9h0Q5effMWQ+W5r7UMOhp2c5f5kGRv8CnDAQ/SySym4xPqKSki
-	 kSt2KkDjjtNtZO4JYSRKxHokRwyVNYLZpzTQB7VzJz2eRllBYfbP7D8VIoJyr+/mJo
-	 IYSp9QPcv5NrQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrEIsWRWlGSWpSXmKPExsViZ8MRorvZ2jj
-  JoPGHksXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnHi4gu2giecFTM3HmRqYGzm7GLk4hASmMkk
-  seDIJRYI5ySjxPr1f5m6GDk52ATUJR7ffM0IYosI6Essnb2HGcRmFlCV6L64hh3EFhaIkpj59
-  SmYzQIUf/zxPJjNK+Au8f7zEjBbQkBBYsrD92C9nAIeEos7X4PNFwKqafm/jQ2iXlDi5MwnLB
-  DzJSQOvnjBDNGrJHFixUcmCLtC4vXhS8wTGPlnIWmZhaRlASPTKkarpKLM9IyS3MTMHF1DAwN
-  dQ0NTXUNdIwNjvcQq3US91FLd8tTiEl1DvcTyYr3U4mK94src5JwUvbzUkk2MwKBMKWY8vYNx
-  U99PvUOMkhxMSqK8R9WNk4T4kvJTKjMSizPii0pzUosPMcpwcChJ8DJaAuUEi1LTUyvSMnOAE
-  QKTluDgURLhDdcBSvMWFyTmFmemQ6ROMSpKifN+sgJKCIAkMkrz4NpgUXmJUVZKmJeRgYFBiK
-  cgtSg3swRV/hWjOAejkjBvGMgUnsy8Erjpr4AWMwEtbhQwAllckoiQkmpgYjGZ9uzczpUf0v1
-  +lvG9vh+/+YdGc9y/g1opzQb6eyL3ne5ebdNXstI+W9F9/mrBh7OZje5J5PFbHuDm/Jwpk98f
-  dcBE96jLjxffnt63a978tTn/dJaydKF9p7yM5PKmhBXKDDfE36fYcO+5f1/lv9+8E9WvM5lPy
-  18ovyVSucqk8bOKmVbUKu6Pv7063kfxp044zcXuc9tbQvizN7PsrogmBhmX61LPXy1amrHvjH
-  GiXVu39IsjP5p2RbdK3uVjtvWSSD3DoL833+z8BcmzjLeDVjIqFjLaqTGfcb+eZt60ryA2q23
-  vzHaxLxt2mRhl/BLbIMl1Y/P3L5pZu/iuNJxYEbE+/13zDc6NTplKLMUZiYZazEXFiQArpaw+
-  RQMAAA==
-X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-13.tower-585.messagelabs.com!1647524787!15385!1
-X-Originating-IP: [62.60.8.84]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.10; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 9747 invoked from network); 17 Mar 2022 13:46:27 -0000
-Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-13.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 17 Mar 2022 13:46:27 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 22HDkLMQ012949
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+ dkim=missing;
+ spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.20,
+ mailfrom: f_l_k@t-online.de)
+Received: from fwd83.dcpf.telekom.de (fwd83.aul.t-online.de [10.223.144.109])
+	by mailout08.t-online.de (Postfix) with SMTP id A6C6643DC
 	for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Mar 2022 13:46:27 GMT
-Received: from localhost.localdomain.localdomain (10.167.225.131) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Thu, 17 Mar 2022 13:46:20 +0000
-From: XU Huan <xuhuan.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [PATCH 3/3] [oe] [meta-python] [PATCH] python3-sentry-sdk: upgrade
- 1.5.6 -> 1.5.7
-Date: Thu, 17 Mar 2022 21:46:47 +0800
-Message-ID: <1647524807-17685-3-git-send-email-xuhuan.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1647524807-17685-1-git-send-email-xuhuan.fnst@fujitsu.com>
-References: <1647524807-17685-1-git-send-email-xuhuan.fnst@fujitsu.com>
+ Thu, 17 Mar 2022 15:59:48 +0100 (CET)
+Received: from flk-MS-7C91.fritz.box ([84.163.47.192]) by fwd83.t-online.de
+	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
+	esmtp id 1nUrbP-2QtRvV0; Thu, 17 Mar 2022 15:59:48 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-oe][PATCH] perfetto: initial add commit
+Date: Thu, 17 Mar 2022 15:59:37 +0100
+Message-Id: <20220317145937.217432-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.131]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-TOI-EXPURGATEID: 150726::1647529188-0000EDC4-262363D4/0/0 CLEAN NORMAL
+X-TOI-MSGID: e5a3a64f-5217-4a5d-a233-a7f51211a963
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 17 Mar 2022 13:46:31 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 17 Mar 2022 15:00:32 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96036
+ https://lists.openembedded.org/g/openembedded-devel/message/96038
 
-From: Xu Huan <xuhuan.fnst@fujitsu.com>
+mesa 22.0.0 supports profiling GPU acceleration using google perfetto
 
-changelog:
+This adds a recipe for it
 
-fix(serializer): Make sentry_repr dunder method to avoid mock problems
-
-Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- ...{python3-sentry-sdk_1.5.6.bb => python3-sentry-sdk_1.5.7.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-sentry-sdk_1.5.6.bb => python3-sentry-sdk_1.5.7.bb} (82%)
+ ...meson.build-add-pc-file-build-shared.patch | 45 +++++++++++++++++++
+ .../recipes-devtools/perfetto/perfetto_git.bb | 28 ++++++++++++
+ 2 files changed, 73 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/perfetto/perfetto/0001-meson=
+.build-add-pc-file-build-shared.patch
+ create mode 100644 meta-oe/recipes-devtools/perfetto/perfetto_git.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_1.5.6.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.5.7.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-sentry-sdk_1.5.6.bb
-rename to meta-python/recipes-devtools/python/python3-sentry-sdk_1.5.7.bb
-index 915fc47352..1594fb5dd7 100644
---- a/meta-python/recipes-devtools/python/python3-sentry-sdk_1.5.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.5.7.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341"
- 
- RDEPENDS:${PN} += "python3-urllib3"
- 
--SRC_URI[sha256sum] = "ac2a50128409d57655279817aedcb7800cace1f76b266f3dd62055d5afd6e098"
-+SRC_URI[sha256sum] = "aa52da941c56b5a76fd838f8e9e92a850bf893a9eb1e33ffce6c21431d07ee30"
- 
- PYPI_PACKAGE = "sentry-sdk"
- 
--- 
+diff --git a/meta-oe/recipes-devtools/perfetto/perfetto/0001-meson.build-=
+add-pc-file-build-shared.patch b/meta-oe/recipes-devtools/perfetto/perfet=
+to/0001-meson.build-add-pc-file-build-shared.patch
+new file mode 100644
+index 000000000..46e3ec9ec
+--- /dev/null
++++ b/meta-oe/recipes-devtools/perfetto/perfetto/0001-meson.build-add-pc-=
+file-build-shared.patch
+@@ -0,0 +1,45 @@
++From f70ed62ce4a42525c9738455966bec2ed9647568 Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Thu, 17 Mar 2022 15:44:23 +0100
++Subject: [PATCH] meson.build: add pc file; build shared
++
++---
++ meson.build | 11 ++++++++++-
++ 1 file changed, 10 insertions(+), 1 deletion(-)
++
++diff --git a/meson.build b/meson.build
++index 06015141c..74fe2348f 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -19,6 +19,7 @@
++ project(
++     'perfetto',
++     ['c','cpp'],
+++    version : '24.2',
++     default_options: ['c_std=3Dc99', 'cpp_std=3Dc++11']
++ )
++=20
++@@ -30,7 +31,7 @@ endif
++=20
++ dep_threads =3D dependency('threads')
++=20
++-lib_perfetto =3D static_library(
+++lib_perfetto =3D shared_library(
++     'perfetto',
++     sources: 'sdk/perfetto.cc',
++     dependencies: dep_threads,
++@@ -43,3 +44,11 @@ dep_perfetto =3D declare_dependency(
++     link_with: lib_perfetto,
++     include_directories: inc_perfetto,
++ )
+++
+++pkgconfig =3D import('pkgconfig')
+++pkgconfig.generate(
+++    libraries:    lib_perfetto,
+++    version:      meson.project_version(),
+++    filebase:     meson.project_name(),
+++    name:         meson.project_name(),
+++    description: 'Perfetto Tracing Tool')
++--=20
++2.25.1
++
+diff --git a/meta-oe/recipes-devtools/perfetto/perfetto_git.bb b/meta-oe/=
+recipes-devtools/perfetto/perfetto_git.bb
+new file mode 100644
+index 000000000..07b1a0b4b
+--- /dev/null
++++ b/meta-oe/recipes-devtools/perfetto/perfetto_git.bb
+@@ -0,0 +1,28 @@
++SUMMARY =3D "Perfetto - System profiling, app tracing and trace analysis=
+"
++HOMEPAGE =3D "https://github.com/google/perfetto"
++BUGTRACKER =3D "https://github.com/google/perfetto/issues"
++LICENSE =3D "Apache-2.0"
++
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Df87516e0b698007e9e75a1fe1012b=
+390"
++
++SRC_URI =3D " \
++	git://github.com/google/perfetto.git;protocol=3Dhttps;branch=3Dreleases=
+/v24.x \
++	file://0001-meson.build-add-pc-file-build-shared.patch \
++"
++
++S =3D "${WORKDIR}/git"
++PV =3D "24.2"
++SRCREV =3D "7cb228c16d69aee297a106ad3ccc7461fa0b8045"
++
++inherit meson
++
++do_install:append() {
++	install -d ${D}${includedir}
++	install -m 0664 ${S}/sdk/perfetto.h ${D}${includedir}
++}
++
++FILES:${PN} =3D "${includedir} ${libdir}"
++FILES:${PN}-dev =3D ""
++
++BBCLASSEXTEND =3D "native nativesdk"
++
+--=20
 2.25.1
 
 
