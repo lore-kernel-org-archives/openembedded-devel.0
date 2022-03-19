@@ -2,93 +2,100 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D982C433EF
-	for <webhook@archiver.kernel.org>; Sat, 19 Mar 2022 08:44:46 +0000 (UTC)
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com
- [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web12.5290.1647679485238640171
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D058C433FE
+	for <webhook@archiver.kernel.org>; Sat, 19 Mar 2022 08:44:47 +0000 (UTC)
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
+ [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.web10.5241.1647679486298206977
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 19 Mar 2022 01:44:45 -0700
+ Sat, 19 Mar 2022 01:44:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=UKHdAnr7;
- spf=pass (domain: gmail.com, ip: 209.85.214.177,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=AGaBHPmX;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id q11so8853231pln.11
+Received: by mail-pf1-f177.google.com with SMTP id z16so11506843pfh.3
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 19 Mar 2022 01:44:45 -0700 (PDT)
+ Sat, 19 Mar 2022 01:44:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=BaR9urwx50Q7befDxxFBkgSJAPu5z0kQcvM/GrswzKA=;
-        b=UKHdAnr728QM1Gkl2zl+kur17t3Ulhl9U5pVqb1nipfmWI5Kv8jDElspcIAGc/zO9O
-         Xjhs/RdA1Bgo9Gig3msDvEZgQSqmYuNuu+3w0EEGKNLHb90wlFEGEYTa3EWJ7mTkFkfk
-         YWFH/Lh6qhMsjcybKyILF1LUBgRJQnsXJB7/mOQWgUouSbPjzdQmiOJalTOa2+ThSFkd
-         8ecIA18RRJdbCP3bZe2Vnc0Vit0GGPxdwuOwVYJL71Oc6MH1Fyusue8o9kRR+12EPA8L
-         +1V4R/MPb7AqJqIEmRF6fRqFBxlZA1IO8rWWeUcZe5lGWPb+iJTVQ9Ika1txNFA3wTBo
-         m6aw==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=AhG8ROeYzHhPQQjX6/uM3/VIC5e8rNXavkiM1O/Yxhk=;
+        b=AGaBHPmXjx6YMnuA76PHswmmWuz0/E/36zrLAAbXG/+7pXRtYKx1uNeeNnBxcZcsW8
+         p+6NZsVqMY4AiBuooUpsqxO1b37zQh55G5Xp64Xmwb4AbU5uk7QwKVgu8M8JNhANRzor
+         4h8f/mtPnW8eOlWgJYBMStL8D/wxcS5v98mCFLXVgsv2hK+LpgZW6js9Nphm00o4JDrm
+         JTWBbdsfDnEkVOdwfF24coU2bc6Ri4sNMy4gIUt3nDIc3umMqkM2CGPkSDYUt0aM33wz
+         freF4rBKgW538dS4Gsru4+zgwo+jjeTfKhGepM3MiIl1jNJnfg7osKSMbKEvE2rfJNf8
+         Ml4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=BaR9urwx50Q7befDxxFBkgSJAPu5z0kQcvM/GrswzKA=;
-        b=eJcKSlNI5PhiZk2M6kZx9Y/bzLnQqyljdOn5J8F1CvBX6BQRfZo0K4uP5szxhbF/JQ
-         HiUpYlSnpjHJVnS/V0FGWePewUW2/ptmMopLKpb2ECq3EX12f1g0WuP8ejEoN6Uhoh06
-         i8tUSyF+8THvJ2FS5JmBbl0mbbya7GcpuTZ7KAJFQXGo99GTT0dl8nZMoDSTYVTnLoxp
-         H7PMWbjOPZrDhc2dCKgElPfl6BpMApCewxdkfGg7IwyRXQ82wfR2aaQxZu914dnvwOph
-         qQ4oLw+kcLs+XP83NptwyT5u7t/wwfHVVLgL9B4hGGwheSy3FNqfjuzaJDahd3M7oN93
-         giCA==
-X-Gm-Message-State: AOAM533/5YEGVgbW8JSuDVSo6flhM0jEAMDvhZKuUm/3PRdHupFSbZwu
-	QUEdgaQ5zHbKvrXeeBAXRAymSpS505RhkA==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=AhG8ROeYzHhPQQjX6/uM3/VIC5e8rNXavkiM1O/Yxhk=;
+        b=4iLmvlgIfO4Jvz5OHMAQv03HJSrlUGDCaDp3ORbKxyWv6wOE/4hX9Dm14lvbNPI3Sp
+         vvg3GvNRBmke51DlYRB6efkSS15JadSUkK05h+LRZkWTIR8U4YHTJAtUKGkGYvN5D/kQ
+         1VJDqDoGTZaPrbFIhnqfS9N17Mb0BRnRs/IZJchQ02sCd3ZpVgZprgVbrVq/nEKYirPg
+         tRxdd7xTCb9xOqNDpaaFgwlQwnHoTCzsV7YCO6TDuvBM1pLNzKoPpXpFJzBmCb/IU3Mz
+         pUnTEkzerlbKxbG3jbEEXHE5WNi8dtzpdCwG0dsARd+3357kT9F+FifFhgz861f3NcSc
+         rErA==
+X-Gm-Message-State: AOAM532T4O8rym1w5cGmB+SCxf+R5KiI83wVjfSi8gvx2rOU1Fz+uV3d
+	QUarrdYRQshE+WxVX/hhDw6lCJvYrmIibw==
 X-Google-Smtp-Source: 
- ABdhPJwR2Cz/JoBbgqMraSlafih7TfLFjW1yOvQ22h4mmOCNCtbAJ8n35S29uSTXonZP5s234vw/Fw==
-X-Received: by 2002:a17:90b:f82:b0:1c6:58b9:bd36 with SMTP id
- ft2-20020a17090b0f8200b001c658b9bd36mr19897121pjb.141.1647679484187;
-        Sat, 19 Mar 2022 01:44:44 -0700 (PDT)
+ ABdhPJzeI/BOvfzBpsQ9Pxf7IJdd1pHCMKR7Y+SDXdDXByOgF/S0n+0vOWO6ML+UUhS3RQkVJpr1jw==
+X-Received: by 2002:aa7:8211:0:b0:4f7:8b7:239b with SMTP id
+ k17-20020aa78211000000b004f708b7239bmr13727983pfi.64.1647679485623;
+        Sat, 19 Mar 2022 01:44:45 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
         by smtp.gmail.com with ESMTPSA id
- ip13-20020a17090b314d00b001bfaa1f060bsm15113107pjb.5.2022.03.19.01.44.43
+ ip13-20020a17090b314d00b001bfaa1f060bsm15113107pjb.5.2022.03.19.01.44.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 19 Mar 2022 01:44:43 -0700 (PDT)
+        Sat, 19 Mar 2022 01:44:45 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/3] libgphoto: Fix build with libtool 2.4.7
-Date: Sat, 19 Mar 2022 01:44:40 -0700
-Message-Id: <20220319084442.425475-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/3] uim: Fix build with libtool 2.4.7
+Date: Sat, 19 Mar 2022 01:44:42 -0700
+Message-Id: <20220319084442.425475-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220319084442.425475-1-raj.khem@gmail.com>
+References: <20220319084442.425475-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 19 Mar 2022 08:44:46 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 19 Mar 2022 08:44:47 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96060
+ https://lists.openembedded.org/g/openembedded-devel/message/96062
 
 Delete old m4 macros, so autoreconf can repopulate it.
 
+Fixes
+
+libtool: Version mismatch error.  This is libtool 2.4.7, but the
+libtool: definition of this LT_INIT comes from libtool 2.4.6.
+libtool: You should recreate aclocal.m4 with macros from libtool 2.4.7
+libtool: and run autoconf again.
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.27.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-oe/recipes-support/uim/uim_1.8.8.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.27.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.27.bb
-index cb289751ea..41600be2e1 100644
---- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.27.bb
-+++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.27.bb
-@@ -25,6 +25,11 @@ PACKAGECONFIG ??= ""
- PACKAGECONFIG[gd] = ",--without-gdlib,gd"
- PACKAGECONFIG[serial] = "--enable-serial,--disable-serial,lockdev"
+diff --git a/meta-oe/recipes-support/uim/uim_1.8.8.bb b/meta-oe/recipes-support/uim/uim_1.8.8.bb
+index fca914ed67..e0d9d05dce 100644
+--- a/meta-oe/recipes-support/uim/uim_1.8.8.bb
++++ b/meta-oe/recipes-support/uim/uim_1.8.8.bb
+@@ -51,6 +51,9 @@ PARALLEL_MAKE = ""
  
-+do_configure:prepend() {
-+    rm -rf ${S}/libgphoto2_port/auto-m4/*
-+    rm -rf ${S}/auto-m4/*
-+}
-+
- do_configure:append() {
-     cp ${STAGING_DATADIR_NATIVE}/gettext/po/Makefile.in.in ${S}/libgphoto2_port/po/
-     cd ${S}/libgphoto2_port/
+ #Because m4 file's find maxdepth=2, so copy the m4 files of the deep depth.
+ do_configure:prepend () {
++    rm -rf ${S}/m4.generated/lt*.m4 ${S}/m4.generated/libtool.m4
++    rm -rf ${S}/sigscheme/libgcroots/m4/lt*.m4 ${S}/sigscheme/libgcroots/m4/libtool.m4
++    rm -rf ${S}/sigscheme/m4/lt*.m4 ${S}/sigscheme/m4/libtool.m4
+     cp ${S}/sigscheme/m4/* ${S}/m4/
+ }
+ 
 -- 
 2.35.1
 
