@@ -1,102 +1,205 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <randy.macleod@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D058C433FE
-	for <webhook@archiver.kernel.org>; Sat, 19 Mar 2022 08:44:47 +0000 (UTC)
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
- [209.85.210.177])
- by mx.groups.io with SMTP id smtpd.web10.5241.1647679486298206977
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA2DEC433EF
+	for <webhook@archiver.kernel.org>; Sat, 19 Mar 2022 15:08:24 +0000 (UTC)
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
+ by mx.groups.io with SMTP id smtpd.web10.8023.1647702504332174656
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 19 Mar 2022 01:44:46 -0700
+ Sat, 19 Mar 2022 08:08:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=AGaBHPmX;
- spf=pass (domain: gmail.com, ip: 209.85.210.177,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f177.google.com with SMTP id z16so11506843pfh.3
-        for <openembedded-devel@lists.openembedded.org>;
- Sat, 19 Mar 2022 01:44:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=AhG8ROeYzHhPQQjX6/uM3/VIC5e8rNXavkiM1O/Yxhk=;
-        b=AGaBHPmXjx6YMnuA76PHswmmWuz0/E/36zrLAAbXG/+7pXRtYKx1uNeeNnBxcZcsW8
-         p+6NZsVqMY4AiBuooUpsqxO1b37zQh55G5Xp64Xmwb4AbU5uk7QwKVgu8M8JNhANRzor
-         4h8f/mtPnW8eOlWgJYBMStL8D/wxcS5v98mCFLXVgsv2hK+LpgZW6js9Nphm00o4JDrm
-         JTWBbdsfDnEkVOdwfF24coU2bc6Ri4sNMy4gIUt3nDIc3umMqkM2CGPkSDYUt0aM33wz
-         freF4rBKgW538dS4Gsru4+zgwo+jjeTfKhGepM3MiIl1jNJnfg7osKSMbKEvE2rfJNf8
-         Ml4g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=AhG8ROeYzHhPQQjX6/uM3/VIC5e8rNXavkiM1O/Yxhk=;
-        b=4iLmvlgIfO4Jvz5OHMAQv03HJSrlUGDCaDp3ORbKxyWv6wOE/4hX9Dm14lvbNPI3Sp
-         vvg3GvNRBmke51DlYRB6efkSS15JadSUkK05h+LRZkWTIR8U4YHTJAtUKGkGYvN5D/kQ
-         1VJDqDoGTZaPrbFIhnqfS9N17Mb0BRnRs/IZJchQ02sCd3ZpVgZprgVbrVq/nEKYirPg
-         tRxdd7xTCb9xOqNDpaaFgwlQwnHoTCzsV7YCO6TDuvBM1pLNzKoPpXpFJzBmCb/IU3Mz
-         pUnTEkzerlbKxbG3jbEEXHE5WNi8dtzpdCwG0dsARd+3357kT9F+FifFhgz861f3NcSc
-         rErA==
-X-Gm-Message-State: AOAM532T4O8rym1w5cGmB+SCxf+R5KiI83wVjfSi8gvx2rOU1Fz+uV3d
-	QUarrdYRQshE+WxVX/hhDw6lCJvYrmIibw==
-X-Google-Smtp-Source: 
- ABdhPJzeI/BOvfzBpsQ9Pxf7IJdd1pHCMKR7Y+SDXdDXByOgF/S0n+0vOWO6ML+UUhS3RQkVJpr1jw==
-X-Received: by 2002:aa7:8211:0:b0:4f7:8b7:239b with SMTP id
- k17-20020aa78211000000b004f708b7239bmr13727983pfi.64.1647679485623;
-        Sat, 19 Mar 2022 01:44:45 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
-        by smtp.gmail.com with ESMTPSA id
- ip13-20020a17090b314d00b001bfaa1f060bsm15113107pjb.5.2022.03.19.01.44.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 19 Mar 2022 01:44:45 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/3] uim: Fix build with libtool 2.4.7
-Date: Sat, 19 Mar 2022 01:44:42 -0700
-Message-Id: <20220319084442.425475-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220319084442.425475-1-raj.khem@gmail.com>
-References: <20220319084442.425475-1-raj.khem@gmail.com>
+ dkim=missing;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
+ domain name (domain: windriver.com, ip: 147.11.3.146,
+ mailfrom: randy.macleod@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 22JF8LRY031516
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Sat, 19 Mar 2022 08:08:22 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Sat, 19 Mar 2022 08:08:20 -0700
+Received: from ala-lpggp3.wrs.com (147.11.105.124) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Sat, 19 Mar 2022 08:08:20 -0700
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH] libyang: update from 2.0.7 to 2.0.164
+Date: Sat, 19 Mar 2022 08:08:20 -0700
+Message-ID: <20220319150820.105493-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 19 Mar 2022 08:44:47 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 19 Mar 2022 15:08:24 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96062
+ https://lists.openembedded.org/g/openembedded-devel/message/96063
 
-Delete old m4 macros, so autoreconf can repopulate it.
+Modify the patch since the removal of pcre2-config is no long needed as
+upstream now does:
+   75518cf7 cmake FEATURE read pcre2 version from header
+and created an upstream PR as per new Upstream-Status.
 
-Fixes
+The flag for building the test code was changed from ENABLE_BUILD_TESTS to
+just ENABLE_TESTS in:
+   cdffdabb build REFACTOR rename test option to unify with other projects
 
-libtool: Version mismatch error.  This is libtool 2.4.7, but the
-libtool: definition of this LT_INIT comes from libtool 2.4.6.
-libtool: You should recreate aclocal.m4 with macros from libtool 2.4.7
-libtool: and run autoconf again.
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
 ---
- meta-oe/recipes-support/uim/uim_1.8.8.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../libyang/libyang-add-stdint-h.patch        | 35 ++++++++++++
+ ...byang-skip-pcre2-config-add-stdint-h.patch | 55 -------------------
+ .../{libyang_2.0.7.bb => libyang_2.0.164.bb}  |  7 ++-
+ 3 files changed, 39 insertions(+), 58 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/libyang/libyang/libyang-add-stdint-h.patch
+ delete mode 100644 meta-oe/recipes-extended/libyang/libyang/libyang-skip-pcre2-config-add-stdint-h.patch
+ rename meta-oe/recipes-extended/libyang/{libyang_2.0.7.bb => libyang_2.0.164.bb} (85%)
 
-diff --git a/meta-oe/recipes-support/uim/uim_1.8.8.bb b/meta-oe/recipes-support/uim/uim_1.8.8.bb
-index fca914ed67..e0d9d05dce 100644
---- a/meta-oe/recipes-support/uim/uim_1.8.8.bb
-+++ b/meta-oe/recipes-support/uim/uim_1.8.8.bb
-@@ -51,6 +51,9 @@ PARALLEL_MAKE = ""
+diff --git a/meta-oe/recipes-extended/libyang/libyang/libyang-add-stdint-h.patch b/meta-oe/recipes-extended/libyang/libyang/libyang-add-stdint-h.patch
+new file mode 100644
+index 000000000..d35741114
+--- /dev/null
++++ b/meta-oe/recipes-extended/libyang/libyang/libyang-add-stdint-h.patch
+@@ -0,0 +1,35 @@
++From c7f3e2a8fe530beec6103cb9071ccc41458879aa Mon Sep 17 00:00:00 2001
++From: Tony Tascioglu <tony.tascioglu@windriver.com>
++Date: Mon, 21 Jun 2021 12:34:22 -0400
++Subject: [PATCH] libyang: fix initial build errors
++
++This patch addresses build errors seen when integrating libyang as a
++recipe.
++
++There is a missing include statement for stdint.h in utests.h which
++causes build problems. stdint.h is required to be imported by cmocka.h
++prior to the cmocka file. Adding the stdint allows it to build the
++tests correctly
++
++Upstream-Status: Submitted [ https://github.com/CESNET/libyang/pull/1819 ]
++
++Signed-off-by: Tony Tascioglu <tony.tascioglu@windriver.com>
++Signed-off-by: Randy MacLeod <randy.macleod@windriver.com>
++---
++ tests/utests/utests.h | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/tests/utests/utests.h b/tests/utests/utests.h
++index 7e85a66e..8eee26ce 100644
++--- a/tests/utests/utests.h
+++++ b/tests/utests/utests.h
++@@ -22,6 +22,7 @@
++ #include <stdarg.h>
++ #include <stddef.h>
++ #include <stdlib.h>
+++#include <stdint.h>
++ 
++ #include <cmocka.h>
++ 
++-- 
++2.32.0
+diff --git a/meta-oe/recipes-extended/libyang/libyang/libyang-skip-pcre2-config-add-stdint-h.patch b/meta-oe/recipes-extended/libyang/libyang/libyang-skip-pcre2-config-add-stdint-h.patch
+deleted file mode 100644
+index e3b2d0e02..000000000
+--- a/meta-oe/recipes-extended/libyang/libyang/libyang-skip-pcre2-config-add-stdint-h.patch
++++ /dev/null
+@@ -1,55 +0,0 @@
+-From c7f3e2a8fe530beec6103cb9071ccc41458879aa Mon Sep 17 00:00:00 2001
+-From: Tony Tascioglu <tony.tascioglu@windriver.com>
+-Date: Mon, 21 Jun 2021 12:34:22 -0400
+-Subject: [PATCH] libyang: fix initial build errors
+-
+-This patch addresses build errors seen when integrating libyang as a
+-recipe.
+-
+-The call to pcre2-config has been commented out. *-config calls are
+-being replaced by pkgconfig, and we want to avoid the binary config
+-calls. This call can safely be discarded since it is used to check
+-the version of libpcre2 on the system, and all recent YP builds meet
+-the minimum required version (v10.21).
+-
+-There is a missing include statement for stdint.h in utests.h which
+-causes build problems. stdint.h is required to be imported by cmocka.h
+-prior to the cmocka file. Adding the stdint allows it to build the
+-tests correctly
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Tony Tascioglu <tony.tascioglu@windriver.com>
+----
+- CMakeModules/FindPCRE2.cmake | 2 +-
+- tests/utests/utests.h        | 1 +
+- 2 files changed, 2 insertions(+), 1 deletion(-)
+-
+-diff --git a/CMakeModules/FindPCRE2.cmake b/CMakeModules/FindPCRE2.cmake
+-index 8f60daa2..ad014f14 100644
+---- a/CMakeModules/FindPCRE2.cmake
+-+++ b/CMakeModules/FindPCRE2.cmake
+-@@ -12,7 +12,7 @@ FIND_PATH(PCRE2_INCLUDE_DIR pcre2.h)
+- FIND_LIBRARY(PCRE2_LIBRARY NAMES libpcre2.a pcre2-8)
+- 
+- # Check required version
+--execute_process(COMMAND pcre2-config --version OUTPUT_VARIABLE PCRE2_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
+-+# execute_process(COMMAND pcre2-config --version OUTPUT_VARIABLE PCRE2_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
+- 
+- # Handle the QUIETLY and REQUIRED arguments and set PCRE_FOUND to TRUE if all listed variables are TRUE.
+- INCLUDE(FindPackageHandleStandardArgs)
+-diff --git a/tests/utests/utests.h b/tests/utests/utests.h
+-index 5bea0459..a256120c 100644
+---- a/tests/utests/utests.h
+-+++ b/tests/utests/utests.h
+-@@ -23,6 +23,7 @@
+- #include <stddef.h>
+- #include <stdlib.h>
+- 
+-+#include <stdint.h>
+- #include <cmocka.h>
+- 
+- #include <string.h>
+--- 
+-2.32.0
+-
+diff --git a/meta-oe/recipes-extended/libyang/libyang_2.0.7.bb b/meta-oe/recipes-extended/libyang/libyang_2.0.164.bb
+similarity index 85%
+rename from meta-oe/recipes-extended/libyang/libyang_2.0.7.bb
+rename to meta-oe/recipes-extended/libyang/libyang_2.0.164.bb
+index 2f5e4615f..8f41769e0 100644
+--- a/meta-oe/recipes-extended/libyang/libyang_2.0.7.bb
++++ b/meta-oe/recipes-extended/libyang/libyang_2.0.164.bb
+@@ -6,15 +6,16 @@ LICENSE = "BSD-3-Clause"
  
- #Because m4 file's find maxdepth=2, so copy the m4 files of the deep depth.
- do_configure:prepend () {
-+    rm -rf ${S}/m4.generated/lt*.m4 ${S}/m4.generated/libtool.m4
-+    rm -rf ${S}/sigscheme/libgcroots/m4/lt*.m4 ${S}/sigscheme/libgcroots/m4/libtool.m4
-+    rm -rf ${S}/sigscheme/m4/lt*.m4 ${S}/sigscheme/m4/libtool.m4
-     cp ${S}/sigscheme/m4/* ${S}/m4/
- }
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f3916d7d8d42a6508d0ea418cfff10ad"
  
+-SRCREV = "69d9fff65abb58beb0bb6aa9ecacd572ca1dfc56"
++SRCREV = "a0cc89516ab5eca84d01c85309f320a94752a64c"
+ 
+ SRC_URI = "git://github.com/CESNET/libyang.git;branch=master;protocol=https \
+-           file://libyang-skip-pcre2-config-add-stdint-h.patch \
++           file://libyang-add-stdint-h.patch \
+            file://run-ptest \
+            "
+ 
+ S = "${WORKDIR}/git"
+ 
++# Due to valgrind not supported on these arches:
+ COMPATIBLE_HOST:riscv32 = "null"
+ COMPATIBLE_HOST:armv5 = "null"
+ COMPATIBLE_HOST:riscv64 = "null"
+@@ -29,7 +30,7 @@ BINCONFIG = "${bindir}/pcre2-config"
+ RDEPENDS:${PN}-ptest += "valgrind"
+ 
+ EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=Release"
+-EXTRA_OECMAKE += " ${@bb.utils.contains('PTEST_ENABLED', '1', '-DENABLE_BUILD_TESTS=ON', '', d)}"
++EXTRA_OECMAKE += " ${@bb.utils.contains('PTEST_ENABLED', '1', '-DENABLE_TESTS=ON', '', d)}"
+ 
+ do_install_ptest () {
+     cp -fR ${B}/tests/ ${D}${PTEST_PATH}/
 -- 
-2.35.1
+2.31.1
 
 
