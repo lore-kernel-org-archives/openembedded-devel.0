@@ -2,136 +2,117 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EAD89C433EF
-	for <webhook@archiver.kernel.org>; Sun, 20 Mar 2022 08:44:58 +0000 (UTC)
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com
- [209.85.215.177])
- by mx.groups.io with SMTP id smtpd.web10.16329.1647765898463609761
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E4EDFC433F5
+	for <webhook@archiver.kernel.org>; Sun, 20 Mar 2022 08:44:59 +0000 (UTC)
+Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com
+ [209.85.215.174])
+ by mx.groups.io with SMTP id smtpd.web10.16330.1647765898993750330
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Mar 2022 01:44:58 -0700
+ Sun, 20 Mar 2022 01:44:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=LXv7ud3n;
- spf=pass (domain: gmail.com, ip: 209.85.215.177,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=IdyLNBDi;
+ spf=pass (domain: gmail.com, ip: 209.85.215.174,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f177.google.com with SMTP id t14so8242579pgr.3
+Received: by mail-pg1-f174.google.com with SMTP id o23so8237911pgk.13
         for <openembedded-devel@lists.openembedded.org>;
  Sun, 20 Mar 2022 01:44:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=odXRI30lRuoOcNUHZo+8q1w2iU6LtT8r4AqU9/oiVBg=;
-        b=LXv7ud3nwvjfMHqqjychhLAIefkwOI+bfppEvpwdu/E2U1DVYt/UoD3VRgXHgUsnKU
-         Dt5duEVEr0EcIQiPM3OqJHzI7nRzRypy5CBGeyEjtuTGdiVs3IrFEPJriEtBQkRQbPVt
-         k+2voTBvFGHr9y/TtAQIwNcHW8/sNlWDaLD2U0HhhJa4Z7nL6v2tZWW/n+mU8yhPmcDw
-         ghhcAHm6pUgqXj+joXyGcZFli8Grhn501HaSoEPAa/GGV5oozfTut0knpfScSDxkV0Ea
-         3/mrJ1NPPhgv9xcgy4EHHvdJqE5cqhb0b9n1hwx7ue0JC7zrC3dm1RWMpnUfXz0okS2h
-         Qftg==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=i+e27b3nC5ZvfNmRhZRad8VKAHOXkNMI6qw24xCER2Y=;
+        b=IdyLNBDio9t1OuQZ3qkVVSWge73fzkUp+1ddsn2NvWovcbVamgGbNy1eV04wPVJL82
+         +Ie/ZonDdk0xxUPQgZcNWwu5l1p8vg7lufnmFAKk3UDmveKrmj8sH6kYFYQRGM4sxYQn
+         Vfi/1X59tWvKDzT737NoZmt8SZXKJXDV1QPvzolT/tZkd4uKmoAnRHiURS1qG4o+00T3
+         MjLhb39ZpZp1EeFdCD4IcjYRn0ZozuZSbR5KBohgJlip2WTMvlMyeF5/hHGtEEqyaz6c
+         KXqCK/ff6ON6OUs72WmKsIjqBFSWB2dcqWol+h6U3g/iOInwAHI17lLq4dEBoWOuV70L
+         Qghg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=odXRI30lRuoOcNUHZo+8q1w2iU6LtT8r4AqU9/oiVBg=;
-        b=okyxEp78EW4OLNbjQajvPtqUR2TodFQzPIZrXuRno26PH6Jq7Lh+cKzfbBcaPgG1Ic
-         cOMVE53wUmDm5XieSeAJP4+M4kOgPsGhbneMhTDTe6Rg8Wm/MV9FmaWQvHfYoiUU3Qtw
-         e4cg5TpWjREk0BYWohdQmhbXpXRKVAcJxeVpSTv+ZJrqBkB29IlDy8ShyxWKd3wH7r3R
-         ryGJID5SgHtjau3zmlNvZMXvHFToioTzJycaHrKORzRnMmojHpmaCQ82oJC8/8m6WyhN
-         4KdazpNVwbtNEkWsQK4QVILtBOi6Gyx0s0u79gpZFnyiLosHVdreXlTha3ZIV0294m1U
-         ee+w==
-X-Gm-Message-State: AOAM5309IKRrxHXJ73+T8qxCbQeTM2JZ0m6WX8MGTGStkJfDhzkfjRM6
-	WjDNvREwNu31jzQqHBSQ8DgaQ2i6kXRS1w==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=i+e27b3nC5ZvfNmRhZRad8VKAHOXkNMI6qw24xCER2Y=;
+        b=hhmG8ImONijR8WCZx1qNvSKLvlj4QG5xJv2aAiOcz+GSlM8uiYqQzi9bgAJdcy/Plj
+         b61xMyk82FjY1HUa+m5NkZjcYB6Oyu5V0wott6TGB9qwi//A6708sMz6wa9GuPa5TcBb
+         inQBSph/XREOf9LRCW3cmDbWc7P10dY18LPpms8Ao84eNaqFyGCSKQo8K9KRSsx+aDEX
+         GZo1PvifTE8GguIHdvvUMiahKcOS3GzzFedHyKiYcrawKE/ez6QJIFrbZEFIQMqhS8hr
+         WiNbkqD7ptC+m6UArlPIKjW8dWGA8CTJTDScNNe6Bd7lQxKPqhR8HHBDJyJjmQ6suOz8
+         eXFg==
+X-Gm-Message-State: AOAM533q4h8pT2HGvohn9POiwYB4Zr8n4H/bN7zkjoR6idIWb5Zieg8M
+	l8HeIJRL2nx/Sr/6UQ02oVDWNRh8jhWOYg==
 X-Google-Smtp-Source: 
- ABdhPJy/ICAgqtlC0jdj3RCADobcMB/i8xYaPKIxHDdgTzROqfC4kQlvKWRWpY3PY9Ai1M1qYwusQQ==
-X-Received: by 2002:a05:6a00:26cf:b0:4f6:fc52:7b6a with SMTP id
- p15-20020a056a0026cf00b004f6fc527b6amr18487513pfw.39.1647765897484;
-        Sun, 20 Mar 2022 01:44:57 -0700 (PDT)
+ ABdhPJxXVC5rU4/xO6O221DV/9dHYp4AKmqXS8mlVS535i/1fRvIzuuFr/g+ds11U0qyKj6r0bQ0dQ==
+X-Received: by 2002:a63:2358:0:b0:380:e306:f0bd with SMTP id
+ u24-20020a632358000000b00380e306f0bdmr13997513pgm.594.1647765898311;
+        Sun, 20 Mar 2022 01:44:58 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
         by smtp.gmail.com with ESMTPSA id
- f13-20020a056a0022cd00b004f7eaac852dsm15896497pfj.151.2022.03.20.01.44.56
+ f13-20020a056a0022cd00b004f7eaac852dsm15896497pfj.151.2022.03.20.01.44.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sun, 20 Mar 2022 01:44:57 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 1/2] libsquish: Define LIBDIR knob
-Date: Sun, 20 Mar 2022 01:44:54 -0700
-Message-Id: <20220320084455.878607-1-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Hongxu Jia <hongxu.jia@windriver.com>
+Subject: [meta-perl][PATCH 2/2] io-compress-lzma-perl,io-compress-perl: Do not
+ mark allarch
+Date: Sun, 20 Mar 2022 01:44:55 -0700
+Message-Id: <20220320084455.878607-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220320084455.878607-1-raj.khem@gmail.com>
+References: <20220320084455.878607-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 20 Mar 2022 08:44:58 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 20 Mar 2022 08:44:59 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96082
+ https://lists.openembedded.org/g/openembedded-devel/message/96083
 
-this is to avoid assuming /lib for library path
-Enable compile with altivec when in machine features
+These recipes are using target perl install during build so they can not be
+allarch, the issue becomes evident when libdir for target the native
+build hosts do not match e.g. ppc64 where target libdir is usr/lib64
+then the do_configure starts to fail because it can not find
+Config_heavy-target.pl script which is part of tatget perl install and
+allarch recipes seems to assume libdir defaults to /usr/lib when
+accessing it.
+
+I think it can be fixed by perhaps building the missing perl files into
+perl native perhaps.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Hongxu Jia <hongxu.jia@windriver.com>
+Cc: Tim "moto-timo" Orling <ticotimo@gmail.com>
 ---
- .../libsquish/0001-makefile-Add-LIBDIR.patch  | 36 +++++++++++++++++++
- .../libsquish/libsquish_git.bb                |  3 +-
- 2 files changed, 38 insertions(+), 1 deletion(-)
- create mode 100644 meta-multimedia/recipes-multimedia/libsquish/libsquish/0001-makefile-Add-LIBDIR.patch
+ meta-perl/recipes-perl/libio/io-compress-lzma-perl_2.096.bb | 2 +-
+ meta-perl/recipes-perl/libio/io-compress-perl_2.096.bb      | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/libsquish/libsquish/0001-makefile-Add-LIBDIR.patch b/meta-multimedia/recipes-multimedia/libsquish/libsquish/0001-makefile-Add-LIBDIR.patch
-new file mode 100644
-index 0000000000..c6eb7ac576
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libsquish/libsquish/0001-makefile-Add-LIBDIR.patch
-@@ -0,0 +1,36 @@
-+From 4fd08c0446ca02917014b63f9080c4205958a130 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 20 Mar 2022 01:15:32 -0700
-+Subject: [PATCH] makefile: Add LIBDIR
-+
-+Avoid hardcoding /lib
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ Makefile | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 1c01f89..2b1df5b 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -11,12 +11,12 @@ all : $(LIB) squish.pc
-+ 
-+ install : $(LIB) squish.pc
-+ 	install squish.h $(INSTALL_DIR)/include 
-+-	install libsquish.a $(INSTALL_DIR)/lib
-+-	install squish.pc $(INSTALL_DIR)/lib/pkgconfig
-++	install libsquish.a $(INSTALL_DIR)/$(LIBDIR)
-++	install squish.pc $(INSTALL_DIR)/$(LIBDIR)/pkgconfig
-+ 
-+ uninstall:
-+ 	$(RM) $(INSTALL_DIR)/include/squish.h
-+-	$(RM) $(INSTALL_DIR)/lib/libsquish.a
-++	$(RM) $(INSTALL_DIR)/$(LIBDIR)/libsquish.a
-+ 
-+ $(LIB) : $(OBJ)
-+ 	$(AR) cr $@ $?
-+-- 
-+2.35.1
-+
-diff --git a/meta-multimedia/recipes-multimedia/libsquish/libsquish_git.bb b/meta-multimedia/recipes-multimedia/libsquish/libsquish_git.bb
-index cb42d943fc..b69d30d259 100644
---- a/meta-multimedia/recipes-multimedia/libsquish/libsquish_git.bb
-+++ b/meta-multimedia/recipes-multimedia/libsquish/libsquish_git.bb
-@@ -10,7 +10,8 @@ SRC_URI = "git://github.com/OpenELEC/libsquish.git;protocol=https;branch=master"
+diff --git a/meta-perl/recipes-perl/libio/io-compress-lzma-perl_2.096.bb b/meta-perl/recipes-perl/libio/io-compress-lzma-perl_2.096.bb
+index 9655176a86..3b8ce8d02d 100644
+--- a/meta-perl/recipes-perl/libio/io-compress-lzma-perl_2.096.bb
++++ b/meta-perl/recipes-perl/libio/io-compress-lzma-perl_2.096.bb
+@@ -19,6 +19,6 @@ RDEPENDS:${PN} += "io-compress-perl"
  
- S = "${WORKDIR}/git"
+ S = "${WORKDIR}/IO-Compress-Lzma-${PV}"
  
--EXTRA_OEMAKE = "INSTALL_DIR=${D}${prefix}"
-+EXTRA_OEMAKE = "INSTALL_DIR=${D}${prefix} LIBDIR=${base_libdir} \
-+                ${@bb.utils.contains('TUNE_FEATURES', 'altivec', 'USE_ALTIVEC=1', '', d)}"
+-inherit cpan allarch
++inherit cpan
  
- do_install() {
- 	install -d ${D}${includedir}
+ BBCLASSEXTEND = "native"
+diff --git a/meta-perl/recipes-perl/libio/io-compress-perl_2.096.bb b/meta-perl/recipes-perl/libio/io-compress-perl_2.096.bb
+index ccc78d0078..c00d8945b7 100644
+--- a/meta-perl/recipes-perl/libio/io-compress-perl_2.096.bb
++++ b/meta-perl/recipes-perl/libio/io-compress-perl_2.096.bb
+@@ -19,6 +19,6 @@ RDEPENDS:${PN} += "compress-raw-zlib-perl"
+ 
+ S = "${WORKDIR}/IO-Compress-${PV}"
+ 
+-inherit cpan allarch
++inherit cpan
+ 
+ BBCLASSEXTEND = "native"
 -- 
 2.35.1
 
