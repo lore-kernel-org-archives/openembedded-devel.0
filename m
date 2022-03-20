@@ -1,162 +1,133 @@
-Return-Path: <randy.macleod@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A718FC433EF
-	for <webhook@archiver.kernel.org>; Sun, 20 Mar 2022 17:47:15 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web10.20619.1647798422447033695
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C407AC433F5
+	for <webhook@archiver.kernel.org>; Sun, 20 Mar 2022 18:59:00 +0000 (UTC)
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com
+ [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.web11.21357.1647802740390788705
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Mar 2022 10:47:02 -0700
+ Sun, 20 Mar 2022 11:59:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.3.146,
- mailfrom: randy.macleod@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 22KHl0UO005987
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Mar 2022 10:47:00 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Sun, 20 Mar 2022 10:47:00 -0700
-Received: from ala-lpggp3.wrs.com (147.11.105.124) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Sun, 20 Mar 2022 10:47:00 -0700
-From: Randy MacLeod <Randy.MacLeod@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH] iperf3: upgrade from 3.9 to 3.11
-Date: Sun, 20 Mar 2022 10:47:00 -0700
-Message-ID: <20220320174700.40077-1-Randy.MacLeod@windriver.com>
-X-Mailer: git-send-email 2.31.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=eoUm2tmH;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id p5so7661453pfo.5
+        for <openembedded-devel@lists.openembedded.org>;
+ Sun, 20 Mar 2022 11:59:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=x1GCYKsO4iPUP6VPmvwJbkwK6VOyIxVjs5xR4u4ctW4=;
+        b=eoUm2tmHpL8ckb1FsiuclyUMniHPI8weO2sijo9WfLv6tmOmYCI6HdTlRBdQPf1jt3
+         QAM//9VrIzf1xbiRVhuTKSkuhrXhso32CfIJeSnsQAIaKd7S0XGlAKJYclgd9zBZ8JiC
+         zG5G0ZuyvaAi3A4FGxyS2rZMtJYxfCG45WsUvNisJH/Z5x0JZZ5u+rRR3hlndkgGe79m
+         GhTRPMzjCpVYWmd6JkLBi1o9klg8DglrV8D4BPl+uUKWPZcFUN9lAvalbPvOlYBtdnYy
+         DElYh2v4P6TfxuZIoaUHSs4x7mWiqH9x88YPTlFHea5W1OrNNK9RXCEkJcnDsQoyVcbZ
+         wbWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=x1GCYKsO4iPUP6VPmvwJbkwK6VOyIxVjs5xR4u4ctW4=;
+        b=47AaMgH6EV3vzgegVpS85/hFeb+HeAsXWvgGdlll12Ow9n9ppdAdqW1xThPYyvLbaY
+         Rn+G9gOc32ce760EP2r/tku0XbYitAoPASnRBJkNvJhlmOoyYJCjtHYpY/4MIA6AmyQ2
+         mz0hDtyYU7HI9+r8k7z5UFJp23RG0ng5kj5epA9LatCuMmINWZOy6PiRFYDRI3l6NrcV
+         2h5D6UKroONr3xCBRJW7Tqprkpxd0ul0Yj1XIzSpXLhyXRjbdfL7TEidniLFjG+RCupa
+         s0zdSyDfEJSUpvpdXqXzNNY1fVHyIqii9nFB0UKsxBhpY0X5T8vngUAxMSaYnqLT/MOs
+         FSxA==
+X-Gm-Message-State: AOAM5337zTfEFdbtGuYu0uOYjJ/CYCs69tBEVJ/SqLLbX0aHbr7cCkkb
+	pri7BExyxByDTP+GyH0yMFF3e2Ckq0lGdw==
+X-Google-Smtp-Source: 
+ ABdhPJxopJykU990t9MT0AavCs4i+IPsckdOT51lkorrI6yYdZUNwh1DLw0d7P55iN6hN1QcPFEIkw==
+X-Received: by 2002:a05:6a00:1254:b0:4fa:874e:1319 with SMTP id
+ u20-20020a056a00125400b004fa874e1319mr6596880pfi.14.1647802739594;
+        Sun, 20 Mar 2022 11:58:59 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
+        by smtp.gmail.com with ESMTPSA id
+ u10-20020a17090a2b8a00b001c6594e5ddcsm13884074pjd.15.2022.03.20.11.58.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 20 Mar 2022 11:58:59 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/4] libcppkafka: Use CMAKE_INSTALL_LIBDIR instead of
+ hardcoding lib
+Date: Sun, 20 Mar 2022 11:58:54 -0700
+Message-Id: <20220320185856.3302842-2-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220320185856.3302842-1-raj.khem@gmail.com>
+References: <20220320185856.3302842-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 20 Mar 2022 17:47:15 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 20 Mar 2022 18:59:00 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96085
+ https://lists.openembedded.org/g/openembedded-devel/message/96087
 
-The copyright dates were exteneded to 2022 so the LICENSE hash changed.
-
-Add some blank lines in the recipe to make it easier to read and
-refresh the patches to eliminate patch fuzz warnings.
-
-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-configure.ac-check-for-CPP-prog.patch       | 12 +++++-------
- .../iperf3/0002-Remove-pg-from-profile_CFLAGS.patch  |  8 +++-----
- .../iperf3/{iperf3_3.9.bb => iperf3_3.11.bb}         |  6 ++++--
- 3 files changed, 12 insertions(+), 14 deletions(-)
- rename meta-oe/recipes-benchmark/iperf3/{iperf3_3.9.bb => iperf3_3.11.bb} (89%)
+ .../0001-cmake-Use-CMAKE_INSTALL_LIBDIR.patch | 30 +++++++++++++++++++
+ .../libcppkafka/libcppkafka_git.bb            |  4 ++-
+ 2 files changed, 33 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/libcppkafka/libcppkafka/0001-cmake-Use-CMAKE_INSTALL_LIBDIR.patch
 
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3/0001-configure.ac-check-for-CPP-prog.patch b/meta-oe/recipes-benchmark/iperf3/iperf3/0001-configure.ac-check-for-CPP-prog.patch
-index 739fd20fc..09e3d9ca9 100644
---- a/meta-oe/recipes-benchmark/iperf3/iperf3/0001-configure.ac-check-for-CPP-prog.patch
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3/0001-configure.ac-check-for-CPP-prog.patch
-@@ -1,4 +1,4 @@
--From cc4499cd4cfcb655fc44c3f3571eee20663dafde Mon Sep 17 00:00:00 2001
-+From 4801363fbff12bf1019aaf90142981702cecff92 Mon Sep 17 00:00:00 2001
- From: Andrey Zhizhikin <andrey.z@gmail.com>
- Date: Wed, 3 Feb 2021 20:44:34 +0000
- Subject: [PATCH] configure.ac: check for CPP prog
-@@ -10,22 +10,20 @@ Absence of check for CPP_PROG causes following build errors:
- 
- Upstream-Status: Pending
- Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
+diff --git a/meta-oe/recipes-support/libcppkafka/libcppkafka/0001-cmake-Use-CMAKE_INSTALL_LIBDIR.patch b/meta-oe/recipes-support/libcppkafka/libcppkafka/0001-cmake-Use-CMAKE_INSTALL_LIBDIR.patch
+new file mode 100644
+index 0000000000..d78ee7a8df
+--- /dev/null
++++ b/meta-oe/recipes-support/libcppkafka/libcppkafka/0001-cmake-Use-CMAKE_INSTALL_LIBDIR.patch
+@@ -0,0 +1,30 @@
++From 51ec4c1f533dee9a499490c1c5bbd23d2191a4a7 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sun, 20 Mar 2022 11:14:25 -0700
++Subject: [PATCH] cmake: Use CMAKE_INSTALL_LIBDIR
 +
- ---
-  configure.ac | 1 +
-  1 file changed, 1 insertion(+)
- 
- diff --git a/configure.ac b/configure.ac
--index 939cf0a..f75b398 100644
-+index 53a4db4..3462b3e 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -47,6 +47,7 @@ AC_CANONICAL_HOST
-+@@ -48,6 +48,7 @@ AC_CANONICAL_HOST
-  # Checks for tools: c compiler, ranlib (used for creating static libraries),
-  # symlinks and libtool
-  AC_PROG_CC
- +AC_PROG_CPP
-  AC_PROG_RANLIB
-  AC_PROG_LN_S
-- AC_PROG_LIBTOOL
---- 
--2.17.1
--
-+ LT_INIT
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3/0002-Remove-pg-from-profile_CFLAGS.patch b/meta-oe/recipes-benchmark/iperf3/iperf3/0002-Remove-pg-from-profile_CFLAGS.patch
-index 959e29389..7870261ee 100644
---- a/meta-oe/recipes-benchmark/iperf3/iperf3/0002-Remove-pg-from-profile_CFLAGS.patch
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3/0002-Remove-pg-from-profile_CFLAGS.patch
-@@ -1,4 +1,4 @@
--From 3ae408402635ea21ad90cd722c99ae3334376c91 Mon Sep 17 00:00:00 2001
-+From 155ae12f7809e387a379703d8c09f227e430336d Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 14 Jul 2017 13:00:16 -0700
- Subject: [PATCH] Remove -pg from profile_CFLAGS
-@@ -7,12 +7,13 @@ musl fails to link with missing gcrt1.o
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++Do not hardcode library path, this helps it install in right location
++independent of platforms, e.g. ppc64 uses lib64 and not lib
 +
- ---
-  src/Makefile.am | 4 ++--
-  1 file changed, 2 insertions(+), 2 deletions(-)
- 
- diff --git a/src/Makefile.am b/src/Makefile.am
--index 5be8562..3881aa6 100644
-+index 11d3e17..4058cff 100644
- --- a/src/Makefile.am
- +++ b/src/Makefile.am
- @@ -58,9 +58,9 @@ if ENABLE_PROFILING
-@@ -27,6 +28,3 @@ index 5be8562..3881aa6 100644
-  endif
-  
-  # Specify the sources and various flags for the test cases
---- 
--2.21.0
--
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.9.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.11.bb
-similarity index 89%
-rename from meta-oe/recipes-benchmark/iperf3/iperf3_3.9.bb
-rename to meta-oe/recipes-benchmark/iperf3/iperf3_3.11.bb
-index 47bf4d501..a6af23aec 100644
---- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.9.bb
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.11.bb
-@@ -4,19 +4,21 @@ iperf is a tool for active measurements of the maximum achievable bandwidth \
- on IP networks. It supports tuning of various parameters related to timing, \
- protocols, and buffers. For each test it reports the bandwidth, loss, and \
- other parameters."
++Upstream-Status: Submitted [https://github.com/mfontanini/cppkafka/pull/291]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
- HOMEPAGE = "http://software.es.net/iperf/"
- SECTION = "console/network"
- BUGTRACKER = "https://github.com/esnet/iperf/issues"
- AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport@lbl.gov>"
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index c4e44e6..25ec1ce 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -51,7 +51,7 @@ option(CPPKAFKA_EXPORT_CMAKE_CONFIG "Generate CMake config, target and version f
++ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
++ 
++ if (NOT CPPKAFKA_CONFIG_DIR)
++-    set(CPPKAFKA_CONFIG_DIR lib/cmake/${PROJECT_NAME})
+++    set(CPPKAFKA_CONFIG_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
++ endif()
++ 
++ # Maintain previous compatibility
++-- 
++2.35.1
 +
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=b7fb682e9941a49f1214dcd7441410d7"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=68ae8cfc577a2c8c51bb51e9628e80b7"
+diff --git a/meta-oe/recipes-support/libcppkafka/libcppkafka_git.bb b/meta-oe/recipes-support/libcppkafka/libcppkafka_git.bb
+index 8f777eb182..0cb33fcd50 100644
+--- a/meta-oe/recipes-support/libcppkafka/libcppkafka_git.bb
++++ b/meta-oe/recipes-support/libcppkafka/libcppkafka_git.bb
+@@ -8,7 +8,9 @@ LIC_FILES_CHKSUM = " \
+ file://LICENSE;md5=d8b4ca15d239dc1485ef495c8f1bcc72 \
+ "
  
- SRC_URI = "git://github.com/esnet/iperf.git;branch=master;protocol=https \
-            file://0002-Remove-pg-from-profile_CFLAGS.patch \
-            file://0001-configure.ac-check-for-CPP-prog.patch \
-            "
+-SRC_URI = "git://github.com/mfontanini/cppkafka;protocol=https;branch=master"
++SRC_URI = "git://github.com/mfontanini/cppkafka;protocol=https;branch=master \
++           file://0001-cmake-Use-CMAKE_INSTALL_LIBDIR.patch \
++"
+ SRCREV = "5e4b350806d561473138ce7a982e8f6cf2e77733"
  
--SRCREV = "1f8fb13297f3e3e40169ebcd12e171167e394473"
-+SRCREV = "76bd67f6e90e239a7686202d2b1b595159826d24"
- 
- S = "${WORKDIR}/git"
- 
+ DEPENDS = "librdkafka boost chrpath-replacement-native"
 -- 
-2.31.1
+2.35.1
 
 
