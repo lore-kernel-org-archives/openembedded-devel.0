@@ -2,110 +2,120 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C5AAEC433EF
-	for <webhook@archiver.kernel.org>; Sun, 20 Mar 2022 18:59:00 +0000 (UTC)
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
- [209.85.210.177])
- by mx.groups.io with SMTP id smtpd.web08.21487.1647802739426473539
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2C4AC433EF
+	for <webhook@archiver.kernel.org>; Sun, 20 Mar 2022 18:59:02 +0000 (UTC)
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com
+ [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.web09.21638.1647802741407012934
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Mar 2022 11:58:59 -0700
+ Sun, 20 Mar 2022 11:59:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=NOnxGXPY;
- spf=pass (domain: gmail.com, ip: 209.85.210.177,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=J4nIzeJ7;
+ spf=pass (domain: gmail.com, ip: 209.85.215.182,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f177.google.com with SMTP id p8so13761522pfh.8
+Received: by mail-pg1-f182.google.com with SMTP id c2so8840389pga.10
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Mar 2022 11:58:59 -0700 (PDT)
+ Sun, 20 Mar 2022 11:59:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=5ZUb39/AcHxOm4CQ7dBhrVeDtz3yTiHSR9bZ2rFrExc=;
-        b=NOnxGXPYDF1/axSegssBPUzs5848eQ3T5OCwnNMHQN3Ry279PMjvm1KGAoumfom/zf
-         3mVjhA89sMwAXnKsjLqH5mUYJABObdmD7SgIhiiDr5vluThA+G3ZqmlmeH7yr/vrKyDk
-         6BlE8iHS7ZLIzAn+lEuDyA/oQeG9tVorBDtG1UiZr4Zs9HySAQ87j0uQKydU+yug4QMW
-         o8wbnLDSTasWNDvhtlPB763a2ylLXOF0EwdWZnE2HbNU82t9uXdKII8d+4qfLbsocGLl
-         Z+yR9iqu8M+JbIpemAsR4e9VGsENgQX6McKbOkTP5R7oIh0UvTiRXYEfSbrcgCH5Uj6s
-         8YPA==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=Ibsw+odFjv1od3O7zmvaUetyxqbB0W3xsv6Zfx2VVX8=;
+        b=J4nIzeJ7JxabOSRT/i9Vil7BQaBb+P2PahHhe7P9xwk+yEwn7E5N9+RKZMWoQOkQWW
+         5BcStaRDpLmcmooqdmFDf34zSy/rhLcaiPv3cjcLfmKIDAXNeJ93jyGA7CHxgNuXT9hP
+         AzjxaF63gJ9+dNjPTBMbHOek2KN8bcL8tHwOwtxDqXPMIK/+a2EbRfCdtBpGIs0vM5FH
+         iVuwwY326WIdvtyoaCo5vAC/HeU6TDd9e3Rl4qm4ceBtZv+rtbQWxt+eiKRbuGZY/jCI
+         VlESw/LMb3RPjFRfpxqHIy1ovQafD9swoCHTZvdSSXWQBiBr/Sa2rzg05x3SazL7FLly
+         K4eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=5ZUb39/AcHxOm4CQ7dBhrVeDtz3yTiHSR9bZ2rFrExc=;
-        b=G79/U6oiGFZeFCsSQENHMtwtW+/mhBqnEKoJ3zthmMVBlO8In2vgNvx3Rsu4qEAIg5
-         xH5600pW4nG7WekMZ23Af34D9+SkUebh82ctYEStMhvgakvcJItaP1BeYX+dviNSk8G6
-         P9rmJ6zjYaFsL4SJJ4wK03YtuQX2xJFhR2/SoH6B+ZUw4Qrkrtr/mse/enh/4fYfZ8rE
-         pW7+5d9gJDa8c580JejbgB00HCuK6gBeNjjmbPiA6te45w2KTgl0KCMsZ+eWdwuZzupj
-         4SomWYCNkf7tTEphNqB8Ee72W2dsTIPa/PIE0LM4nxoLYnAEVRD2XcYShvw5ukAyAoIa
-         /Tag==
-X-Gm-Message-State: AOAM532ys5V2jeb5Tv62cTvaouOkv1OFT7S9RTKQtD/rPHyFzRkCFNwY
-	N5zsSTDFZhsY9DrvCENcHztjJNSFakIUxA==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=Ibsw+odFjv1od3O7zmvaUetyxqbB0W3xsv6Zfx2VVX8=;
+        b=qMfK/NCSPCKOK9EhOagnt6tMP2eoD6apq3NyaZoGfA6bStU8TatsR0vTP9gV6lfScL
+         7aDue8qhcSRmKe6kp8PtKjMAOUQwwMLuh1Lxm0Y3iY6jOC6nwCWslhJfP0tGlNCcAyhJ
+         DsM5CRpEQRCpqeVA8MGkrbrE6wzsGVKB+gkyrlE9z0L0a1FclDil2aPZFcXrp9S2CCwq
+         8EtOiZLe3mcUvdOUBZioKQl4sHtwO35iWjAliklTUofB3KyRvYAtxGVyOkZuYAkMPEdz
+         8b3pa/awye8RMwiqdiCSQKaQD9zO5pTBid9RJn01VZQ9kCxsGVIq0bmglDpSiIhdVF3J
+         Tggw==
+X-Gm-Message-State: AOAM530XS7BRADUew3Kl63tU0q2uSkInW47wYqruOsEf2qDy7P/vbNpu
+	BhPkmQzhVFsJUTnxyRD+vkiXnKHqP/3QTw==
 X-Google-Smtp-Source: 
- ABdhPJxeyr7wVta8YD4bsetZG0s9i82wm1ab1Q8n2D5vCVEgoe5RLkF4CT/p5oOb+OmC76lIB35noQ==
-X-Received: by 2002:a65:63d2:0:b0:381:7d61:fda8 with SMTP id
- n18-20020a6563d2000000b003817d61fda8mr15570366pgv.228.1647802738612;
-        Sun, 20 Mar 2022 11:58:58 -0700 (PDT)
+ ABdhPJzYuaLNhv8nZozQDLBMGHc3oswYGRqvRhCSZQFDpVB9ZONuU5hNasOwR/cNMRhpDkOgBZRtjw==
+X-Received: by 2002:a63:6949:0:b0:380:94ab:9333 with SMTP id
+ e70-20020a636949000000b0038094ab9333mr15314226pgc.199.1647802740747;
+        Sun, 20 Mar 2022 11:59:00 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
         by smtp.gmail.com with ESMTPSA id
- u10-20020a17090a2b8a00b001c6594e5ddcsm13884074pjd.15.2022.03.20.11.58.57
+ u10-20020a17090a2b8a00b001c6594e5ddcsm13884074pjd.15.2022.03.20.11.58.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 20 Mar 2022 11:58:58 -0700 (PDT)
+        Sun, 20 Mar 2022 11:59:00 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/4] luajit: Upgrade to latest on v2.1 branch
-Date: Sun, 20 Mar 2022 11:58:53 -0700
-Message-Id: <20220320185856.3302842-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/4] lvgl,lv-lib-png,lv-drivers: Pass libdir via
+ LIB_INSTALL_DIR to cmake
+Date: Sun, 20 Mar 2022 11:58:55 -0700
+Message-Id: <20220320185856.3302842-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220320185856.3302842-1-raj.khem@gmail.com>
+References: <20220320185856.3302842-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 20 Mar 2022 18:59:00 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 20 Mar 2022 18:59:02 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96086
+ https://lists.openembedded.org/g/openembedded-devel/message/96088
 
-License-Update: Copyright years and date updated [1] [2]
-
-[1] https://repo.or.cz/luajit-2.0.git/commit/f47c864b0186fc92a2264e68e1151d0d2b24969e
-[2] https://repo.or.cz/luajit-2.0.git/commit/c4dfb625bad8937d72074852a977738ec3eb1ab7
+Ensures it packages correclty on all platforms e.g. pp64
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-devtools/luajit/luajit_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-oe/recipes-graphics/lvgl/lv-drivers_7.11.0.bb | 2 +-
+ meta-oe/recipes-graphics/lvgl/lv-lib-png_8.0.2.bb  | 2 ++
+ meta-oe/recipes-graphics/lvgl/lvgl_8.1.0.bb        | 1 +
+ 3 files changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/luajit/luajit_git.bb b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-index d4ff06b677..3f3939eeb4 100644
---- a/meta-oe/recipes-devtools/luajit/luajit_git.bb
-+++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Just-In-Time Compiler for Lua"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=abe9020de9c00909317d02d5c803810e"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=23d6278200de9b48fd1439f80507cba8"
- HOMEPAGE = "http://luajit.org"
+diff --git a/meta-oe/recipes-graphics/lvgl/lv-drivers_7.11.0.bb b/meta-oe/recipes-graphics/lvgl/lv-drivers_7.11.0.bb
+index 7ccee6bf11..1a94215839 100644
+--- a/meta-oe/recipes-graphics/lvgl/lv-drivers_7.11.0.bb
++++ b/meta-oe/recipes-graphics/lvgl/lv-drivers_7.11.0.bb
+@@ -24,7 +24,7 @@ S = "${WORKDIR}/${PN}-${PV}"
+ LVGL_CONFIG_WAYLAND_HOR_RES ?= "480"
+ LVGL_CONFIG_WAYLAND_VER_RES ?= "320"
  
- SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
-@@ -10,7 +10,7 @@ SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
+-EXTRA_OECMAKE += "-Dinstall:BOOL=ON"
++EXTRA_OECMAKE += "-Dinstall:BOOL=ON -DLIB_INSTALL_DIR=${BASELIB}"
  
- # Set PV to a version tag and date (YYMMDD) associated with SRCREV if it is later.
- PV = "2.1.0~beta3-210112"
--SRCREV = "ec6edc5c39c25e4eb3fca51b753f9995e97215da"
-+SRCREV = "43ebb949a249a16c49d232ad24dc9127cc4302bb"
+ TARGET_CFLAGS += "-DLV_CONF_INCLUDE_SIMPLE=1"
+ TARGET_CFLAGS += "-I${RECIPE_SYSROOT}/${includedir}/lvgl"
+diff --git a/meta-oe/recipes-graphics/lvgl/lv-lib-png_8.0.2.bb b/meta-oe/recipes-graphics/lvgl/lv-lib-png_8.0.2.bb
+index 5b3b38d4a6..032e85f522 100644
+--- a/meta-oe/recipes-graphics/lvgl/lv-lib-png_8.0.2.bb
++++ b/meta-oe/recipes-graphics/lvgl/lv-lib-png_8.0.2.bb
+@@ -16,6 +16,8 @@ REQUIRED_DISTRO_FEATURES = "wayland"
  
- S = "${WORKDIR}/git"
+ DEPENDS += "lvgl"
  
-@@ -92,7 +92,7 @@ FILES:${PN}-dev += "${libdir}/libluajit-5.1.a \
- "
- FILES:luajit-common = "${datadir}/${BPN}-${PV}"
++EXTRA_OECMAKE += "-DLIB_INSTALL_DIR=${BASELIB}"
++
+ inherit cmake
+ inherit features_check
  
--# mips64/ppc/ppc64/riscv64 is not supported in this release
-+# mips64/ppc/ppc64/riscv64/riscv32 is not supported in this release
- COMPATIBLE_HOST:mipsarchn32 = "null"
- COMPATIBLE_HOST:mipsarchn64 = "null"
- COMPATIBLE_HOST:powerpc = "null"
+diff --git a/meta-oe/recipes-graphics/lvgl/lvgl_8.1.0.bb b/meta-oe/recipes-graphics/lvgl/lvgl_8.1.0.bb
+index 958639b046..2005afa2fd 100644
+--- a/meta-oe/recipes-graphics/lvgl/lvgl_8.1.0.bb
++++ b/meta-oe/recipes-graphics/lvgl/lvgl_8.1.0.bb
+@@ -16,6 +16,7 @@ REQUIRED_DISTRO_FEATURES = "wayland"
+ inherit cmake
+ inherit features_check
+ 
++EXTRA_OECMAKE = "-DLIB_INSTALL_DIR=${BASELIB}"
+ S = "${WORKDIR}/${PN}-${PV}"
+ 
+ LVGL_CONFIG_LV_MEM_CUSTOM ?= "0"
 -- 
 2.35.1
 
