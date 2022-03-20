@@ -2,60 +2,60 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 73CBBC433EF
-	for <webhook@archiver.kernel.org>; Sun, 20 Mar 2022 08:08:24 +0000 (UTC)
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
- [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web12.16150.1647763703528290481
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A2BFC433F5
+	for <webhook@archiver.kernel.org>; Sun, 20 Mar 2022 08:08:25 +0000 (UTC)
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com
+ [209.85.216.45])
+ by mx.groups.io with SMTP id smtpd.web10.16166.1647763704355642992
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Mar 2022 01:08:23 -0700
+ Sun, 20 Mar 2022 01:08:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ZgLTd154;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id
- m11-20020a17090a7f8b00b001beef6143a8so11929797pjl.4
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=HcwQqwbg;
+ spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f45.google.com with SMTP id e3so10697794pjm.5
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Mar 2022 01:08:23 -0700 (PDT)
+ Sun, 20 Mar 2022 01:08:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=2eljWw+TSpQcu+rqRX9z8OQ1QlZiCFy6ke5IpnVRAJo=;
-        b=ZgLTd154P7kgcfQxIFd/eB3Z5GyIfH26AyqcEVfJS5GQ/UdfNQK7dhqBqiJyIIPlh9
-         4yMPXkYXQ3CdLvIcLWKM7S4BRayJOk6EIKH1JuwV06uuarqHobvtVsXa6S66Zx2hWiOl
-         2s8TapcvPNw4yDhf6ns3T8T3xhwKEvsbWouL1P6pA5/AmNZ75XhhGRaa0gUS7Ki540j3
-         A6pW7qA7llxZ1znCRIu3FisUSjL7A4miltVuYFbTksCsq9b04e1Tu8ttPNYo8KcJuz85
-         1Ou6Tl9KdW3ElOIXC/LeSprELNxp0sF8QIZxLNrP81xfajlB8MLeDUfGsDo2UdHhE9qs
-         UCZQ==
+        bh=gX/a4UnJHAMnEPr944tOD1+5jv22wbuAGnr3pTbmqnQ=;
+        b=HcwQqwbgAkumzP7wkiYDi5y4z+6SrfiRGDLSzhn6GGUn1yIdiamhnF2tqiqbQR29Yd
+         yXb5HeAFf5jEkwnVm59vDA075F/Sb7sFNXHFqiOIfVTD9aW6/bLc6Nd9OXQhJaLB32p1
+         oIYTgW0/ChoPs3kTsehlEzy/ntd0RsazfFDMIjmeHP9Luho5Ga1q7KF0qJyydNoehRd+
+         qjqyDTRuv9t0LjywEGQoyB21ARGLEa7SffPYsWN7Wq/qG8BSNXNQL9tdvAXjqdzUxZP0
+         YMz+FG2l3S/iJHvlFkhW+X/DKwuV6/0FVQK5lxYkLmT6n4JOK8suqoskA/4P3FiBsVQI
+         +7iA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=2eljWw+TSpQcu+rqRX9z8OQ1QlZiCFy6ke5IpnVRAJo=;
-        b=forcsQ2aSuWniQ65LCFtpT2yMzZ0Jtyws7rtE6GnMVkrnj5yFJ7r0u8oaDBonnTyw5
-         yCa0Wn4+ZkQI5+McsCjTgStPJQs4x3PncQ/mFXWWwiTEwafe8D0hkeTdFsGCrT7xwg6B
-         KCQFMEOxY4bbCRkJDwRkTTQMIANkyuqaY3Kt6tCZP3xOo+e3nvlbHA9vgMQDJGVmU3pd
-         GbV5O9XWlMe+iYYj7aSSJXjdZorEkqzqX7OAwobbEQgXmwwsBPxZabPT+KYQf7uYfLEP
-         noFeaf/piXNYFGY9GxZZ+QvgCGHMie9p2959ywS9vGcoFO8F3onn2v47GKuv8JFd6WS9
-         R3mg==
-X-Gm-Message-State: AOAM532MvUJFbctkzSq6CGrxV41HDTqqLkMy1ykN581MH8eQ8NeL0f4b
-	1Rfwo39N37q7r01z3Iv2yutNYeODAPhrvQ==
+        bh=gX/a4UnJHAMnEPr944tOD1+5jv22wbuAGnr3pTbmqnQ=;
+        b=i9hT/YpRwz1PPqjeAx0vOMpQ/OqQ+g/Dg1Qkf5j+HYHzHhnY3bKYIMC1XXFsToYSHG
+         5mfClW5JTVCjuKo4mK96B2Fb0nNdyH7fKkocCDfsEJkj/WB5GB5mj3XWc7NllbHsP++R
+         JoSJ/ARKg8Phe2YTzhd5ojZFhJIgG1rYveBavx0IuEwi9iS/DxCI7+LA36JQMCy4IBYb
+         UvhIo3j6B2k3s1KaxrnKePjzX6s4+TyYb0viWy/81ML24zZcMGx723Me//M+4JINB63W
+         d2IOxEGWqBaidBmVo7tAX/tZ9r/PHuDLJL6frORuJoF7o83PqTHXnS43nU04ie2jbUf6
+         vVPQ==
+X-Gm-Message-State: AOAM530NFqCUbYJH4hm+89gHzjoWfRIaTuDyCcbLX83wcq+irNKP33HY
+	pKBBK1ip2+M1nery4ZHhksU7yOaNzthxtw==
 X-Google-Smtp-Source: 
- ABdhPJyuEpKwcaDGjEkSAhJkRPGhNvSPJE0HTEUSGURYTiz8RU+qMk2Mm3cUPoszQHsLHYNRH6TR8w==
-X-Received: by 2002:a17:902:f70a:b0:153:88c7:774 with SMTP id
- h10-20020a170902f70a00b0015388c70774mr7444862plo.166.1647763702756;
-        Sun, 20 Mar 2022 01:08:22 -0700 (PDT)
+ ABdhPJyNAz1IVH8y4wN2dqRAiMzlNI3RfKcpIE9jQ2FzwPc2Wm5+di3nQNUV8dbsepCDmnkrPmriVA==
+X-Received: by 2002:a17:90a:4e87:b0:1c7:49c:2e3f with SMTP id
+ o7-20020a17090a4e8700b001c7049c2e3fmr1134186pjh.191.1647763703561;
+        Sun, 20 Mar 2022 01:08:23 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
         by smtp.gmail.com with ESMTPSA id
  s6-20020a056a0008c600b004f667b8a6b6sm15607763pfu.193.2022.03.20.01.08.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 20 Mar 2022 01:08:22 -0700 (PDT)
+        Sun, 20 Mar 2022 01:08:23 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 08/17] redis-plus-plus: Use GNUInstallDirs in cmake
-Date: Sun, 20 Mar 2022 01:08:06 -0700
-Message-Id: <20220320080815.825928-8-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 09/17] libiec61850: Use GNUInstallDirs in
+ cmake
+Date: Sun, 20 Mar 2022 01:08:07 -0700
+Message-Id: <20220320080815.825928-9-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220320080815.825928-1-raj.khem@gmail.com>
 References: <20220320080815.825928-1-raj.khem@gmail.com>
@@ -64,81 +64,62 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 20 Mar 2022 08:08:24 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 20 Mar 2022 08:08:25 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96072
+ https://lists.openembedded.org/g/openembedded-devel/message/96073
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...E_INSTALL_LIBDIR-from-GNUInstallDirs.patch | 45 +++++++++++++++++++
- .../redis-plus-plus/redis-plus-plus_1.3.3.bb  |  4 +-
- 2 files changed, 48 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus/0001-cmake-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallDirs.patch
+ ...MAKE_INSTALL_LIBDIR-from-GNUInstallD.patch | 29 +++++++++++++++++++
+ .../libiec61850/libiec61850_1.5.1.bb          |  1 +
+ 2 files changed, 30 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/libiec61850/files/0001-pyiec61850-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch
 
-diff --git a/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus/0001-cmake-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallDirs.patch b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus/0001-cmake-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallDirs.patch
+diff --git a/meta-networking/recipes-connectivity/libiec61850/files/0001-pyiec61850-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch b/meta-networking/recipes-connectivity/libiec61850/files/0001-pyiec61850-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch
 new file mode 100644
-index 0000000000..9ce39f3f77
+index 0000000000..e778e8158b
 --- /dev/null
-+++ b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus/0001-cmake-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallDirs.patch
-@@ -0,0 +1,45 @@
-+From fbb13cdb0b3591616c3f77b6bc76e75af8906cda Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-connectivity/libiec61850/files/0001-pyiec61850-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch
+@@ -0,0 +1,29 @@
++From 16d07a82242c3263ec0038c9b4c97355795d2dd9 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 19 Mar 2022 22:59:58 -0700
-+Subject: [PATCH] cmake: Use CMAKE_INSTALL_LIBDIR from GNUInstallDirs
++Date: Sat, 19 Mar 2022 23:16:51 -0700
++Subject: [PATCH] pyiec61850: Use CMAKE_INSTALL_LIBDIR from GNUInstallDirs in
++ cmake
 +
-+makes it portable across platforms e.g. ppc64/linux uses usr/lib64 for
-+system libs
++This ensures that it gets installed in platform specified system libdir
++all platforms do not use /usr/lib as assumed here e.g. ppc64 uses lib64
 +
-+Upstream-Status: Submitted [https://github.com/sewenew/redis-plus-plus/pull/344]
++Upstream-Status: Submitted [https://github.com/mz-automation/libiec61850/pull/376]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ CMakeLists.txt | 8 +++++---
-+ 1 file changed, 5 insertions(+), 3 deletions(-)
++ pyiec61850/CMakeLists.txt | 6 ++++--
++ 1 file changed, 4 insertions(+), 2 deletions(-)
 +
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 4f28ee4..8150f5c 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -239,10 +239,12 @@ if(REDIS_PLUS_PLUS_BUILD_TEST)
-+     add_subdirectory(test)
-+ endif()
++--- a/pyiec61850/CMakeLists.txt
+++++ b/pyiec61850/CMakeLists.txt
++@@ -31,7 +31,9 @@ endif()
 + 
++ swig_link_libraries(iec61850 ${PYTHON_LIBRARIES} ${LIBS})
++ 
++-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/iec61850.py DESTINATION /usr/lib/python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}/site-packages)
++-install(TARGETS _iec61850 LIBRARY DESTINATION /usr/lib/python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}/site-packages)
 ++include(GNUInstallDirs)
 ++
-+ install(TARGETS ${REDIS_PLUS_PLUS_TARGETS}
-+         EXPORT redis++-targets
-+-        LIBRARY DESTINATION lib
-+-        ARCHIVE DESTINATION lib
-++        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-++        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-+         RUNTIME DESTINATION bin
-+         INCLUDES DESTINATION include)
+++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/iec61850.py DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}/site-packages)
+++install(TARGETS _iec61850 LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}//python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}/site-packages)
 + 
-+@@ -284,7 +286,7 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/redis++.pc.in"
-+         "${CMAKE_CURRENT_BINARY_DIR}/cmake/redis++.pc" @ONLY)
-+ 
-+ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/cmake/redis++.pc"
-+-        DESTINATION "lib/pkgconfig")
-++        DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
-+ 
-+ # All the Debian-specific cpack defines.
-+ if(${CMAKE_VERSION} VERSION_GREATER 3.6)
-+-- 
-+2.35.1
-+
-diff --git a/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.3.bb b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.3.bb
-index c135105f90..575443f0e5 100644
---- a/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.3.bb
-+++ b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.3.bb
-@@ -4,7 +4,9 @@ SECTION = "libs"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
++ add_test(test_pyiec61850 ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/test_pyiec61850.py)
+diff --git a/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.1.bb b/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.1.bb
+index 11050e2050..3e5fc91dad 100644
+--- a/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.1.bb
++++ b/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.1.bb
+@@ -17,6 +17,7 @@ SRCREV = "210cf30897631fe2006ac50483caf8fd616622a2"
  
--SRC_URI = "git://github.com/sewenew/redis-plus-plus;branch=master;protocol=https"
-+SRC_URI = "git://github.com/sewenew/redis-plus-plus;branch=master;protocol=https \
-+           file://0001-cmake-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallDirs.patch \
-+          "
- SRCREV = "389ffdf9e72035ea2096b03cda7f4a6809ae6363"
+ SRC_URI = "git://github.com/mz-automation/${BPN}.git;branch=v1.5;protocol=https \
+            file://0001-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch \
++           file://0001-pyiec61850-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch \
+ "
  
  S = "${WORKDIR}/git"
 -- 
