@@ -2,64 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C407AC433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5AAEC433EF
 	for <webhook@archiver.kernel.org>; Sun, 20 Mar 2022 18:59:00 +0000 (UTC)
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com
- [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.web11.21357.1647802740390788705
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
+ [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.web08.21487.1647802739426473539
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Mar 2022 11:59:00 -0700
+ Sun, 20 Mar 2022 11:58:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=eoUm2tmH;
- spf=pass (domain: gmail.com, ip: 209.85.210.173,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=NOnxGXPY;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f173.google.com with SMTP id p5so7661453pfo.5
+Received: by mail-pf1-f177.google.com with SMTP id p8so13761522pfh.8
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Mar 2022 11:59:00 -0700 (PDT)
+ Sun, 20 Mar 2022 11:58:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=x1GCYKsO4iPUP6VPmvwJbkwK6VOyIxVjs5xR4u4ctW4=;
-        b=eoUm2tmHpL8ckb1FsiuclyUMniHPI8weO2sijo9WfLv6tmOmYCI6HdTlRBdQPf1jt3
-         QAM//9VrIzf1xbiRVhuTKSkuhrXhso32CfIJeSnsQAIaKd7S0XGlAKJYclgd9zBZ8JiC
-         zG5G0ZuyvaAi3A4FGxyS2rZMtJYxfCG45WsUvNisJH/Z5x0JZZ5u+rRR3hlndkgGe79m
-         GhTRPMzjCpVYWmd6JkLBi1o9klg8DglrV8D4BPl+uUKWPZcFUN9lAvalbPvOlYBtdnYy
-         DElYh2v4P6TfxuZIoaUHSs4x7mWiqH9x88YPTlFHea5W1OrNNK9RXCEkJcnDsQoyVcbZ
-         wbWw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=5ZUb39/AcHxOm4CQ7dBhrVeDtz3yTiHSR9bZ2rFrExc=;
+        b=NOnxGXPYDF1/axSegssBPUzs5848eQ3T5OCwnNMHQN3Ry279PMjvm1KGAoumfom/zf
+         3mVjhA89sMwAXnKsjLqH5mUYJABObdmD7SgIhiiDr5vluThA+G3ZqmlmeH7yr/vrKyDk
+         6BlE8iHS7ZLIzAn+lEuDyA/oQeG9tVorBDtG1UiZr4Zs9HySAQ87j0uQKydU+yug4QMW
+         o8wbnLDSTasWNDvhtlPB763a2ylLXOF0EwdWZnE2HbNU82t9uXdKII8d+4qfLbsocGLl
+         Z+yR9iqu8M+JbIpemAsR4e9VGsENgQX6McKbOkTP5R7oIh0UvTiRXYEfSbrcgCH5Uj6s
+         8YPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=x1GCYKsO4iPUP6VPmvwJbkwK6VOyIxVjs5xR4u4ctW4=;
-        b=47AaMgH6EV3vzgegVpS85/hFeb+HeAsXWvgGdlll12Ow9n9ppdAdqW1xThPYyvLbaY
-         Rn+G9gOc32ce760EP2r/tku0XbYitAoPASnRBJkNvJhlmOoyYJCjtHYpY/4MIA6AmyQ2
-         mz0hDtyYU7HI9+r8k7z5UFJp23RG0ng5kj5epA9LatCuMmINWZOy6PiRFYDRI3l6NrcV
-         2h5D6UKroONr3xCBRJW7Tqprkpxd0ul0Yj1XIzSpXLhyXRjbdfL7TEidniLFjG+RCupa
-         s0zdSyDfEJSUpvpdXqXzNNY1fVHyIqii9nFB0UKsxBhpY0X5T8vngUAxMSaYnqLT/MOs
-         FSxA==
-X-Gm-Message-State: AOAM5337zTfEFdbtGuYu0uOYjJ/CYCs69tBEVJ/SqLLbX0aHbr7cCkkb
-	pri7BExyxByDTP+GyH0yMFF3e2Ckq0lGdw==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=5ZUb39/AcHxOm4CQ7dBhrVeDtz3yTiHSR9bZ2rFrExc=;
+        b=G79/U6oiGFZeFCsSQENHMtwtW+/mhBqnEKoJ3zthmMVBlO8In2vgNvx3Rsu4qEAIg5
+         xH5600pW4nG7WekMZ23Af34D9+SkUebh82ctYEStMhvgakvcJItaP1BeYX+dviNSk8G6
+         P9rmJ6zjYaFsL4SJJ4wK03YtuQX2xJFhR2/SoH6B+ZUw4Qrkrtr/mse/enh/4fYfZ8rE
+         pW7+5d9gJDa8c580JejbgB00HCuK6gBeNjjmbPiA6te45w2KTgl0KCMsZ+eWdwuZzupj
+         4SomWYCNkf7tTEphNqB8Ee72W2dsTIPa/PIE0LM4nxoLYnAEVRD2XcYShvw5ukAyAoIa
+         /Tag==
+X-Gm-Message-State: AOAM532ys5V2jeb5Tv62cTvaouOkv1OFT7S9RTKQtD/rPHyFzRkCFNwY
+	N5zsSTDFZhsY9DrvCENcHztjJNSFakIUxA==
 X-Google-Smtp-Source: 
- ABdhPJxopJykU990t9MT0AavCs4i+IPsckdOT51lkorrI6yYdZUNwh1DLw0d7P55iN6hN1QcPFEIkw==
-X-Received: by 2002:a05:6a00:1254:b0:4fa:874e:1319 with SMTP id
- u20-20020a056a00125400b004fa874e1319mr6596880pfi.14.1647802739594;
-        Sun, 20 Mar 2022 11:58:59 -0700 (PDT)
+ ABdhPJxeyr7wVta8YD4bsetZG0s9i82wm1ab1Q8n2D5vCVEgoe5RLkF4CT/p5oOb+OmC76lIB35noQ==
+X-Received: by 2002:a65:63d2:0:b0:381:7d61:fda8 with SMTP id
+ n18-20020a6563d2000000b003817d61fda8mr15570366pgv.228.1647802738612;
+        Sun, 20 Mar 2022 11:58:58 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
         by smtp.gmail.com with ESMTPSA id
- u10-20020a17090a2b8a00b001c6594e5ddcsm13884074pjd.15.2022.03.20.11.58.58
+ u10-20020a17090a2b8a00b001c6594e5ddcsm13884074pjd.15.2022.03.20.11.58.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 20 Mar 2022 11:58:59 -0700 (PDT)
+        Sun, 20 Mar 2022 11:58:58 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/4] libcppkafka: Use CMAKE_INSTALL_LIBDIR instead of
- hardcoding lib
-Date: Sun, 20 Mar 2022 11:58:54 -0700
-Message-Id: <20220320185856.3302842-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/4] luajit: Upgrade to latest on v2.1 branch
+Date: Sun, 20 Mar 2022 11:58:53 -0700
+Message-Id: <20220320185856.3302842-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220320185856.3302842-1-raj.khem@gmail.com>
-References: <20220320185856.3302842-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
@@ -67,66 +64,48 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 20 Mar 2022 18:59:00 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96087
+ https://lists.openembedded.org/g/openembedded-devel/message/96086
+
+License-Update: Copyright years and date updated [1] [2]
+
+[1] https://repo.or.cz/luajit-2.0.git/commit/f47c864b0186fc92a2264e68e1151d0d2b24969e
+[2] https://repo.or.cz/luajit-2.0.git/commit/c4dfb625bad8937d72074852a977738ec3eb1ab7
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-cmake-Use-CMAKE_INSTALL_LIBDIR.patch | 30 +++++++++++++++++++
- .../libcppkafka/libcppkafka_git.bb            |  4 ++-
- 2 files changed, 33 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/libcppkafka/libcppkafka/0001-cmake-Use-CMAKE_INSTALL_LIBDIR.patch
+ meta-oe/recipes-devtools/luajit/luajit_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libcppkafka/libcppkafka/0001-cmake-Use-CMAKE_INSTALL_LIBDIR.patch b/meta-oe/recipes-support/libcppkafka/libcppkafka/0001-cmake-Use-CMAKE_INSTALL_LIBDIR.patch
-new file mode 100644
-index 0000000000..d78ee7a8df
---- /dev/null
-+++ b/meta-oe/recipes-support/libcppkafka/libcppkafka/0001-cmake-Use-CMAKE_INSTALL_LIBDIR.patch
-@@ -0,0 +1,30 @@
-+From 51ec4c1f533dee9a499490c1c5bbd23d2191a4a7 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 20 Mar 2022 11:14:25 -0700
-+Subject: [PATCH] cmake: Use CMAKE_INSTALL_LIBDIR
-+
-+Do not hardcode library path, this helps it install in right location
-+independent of platforms, e.g. ppc64 uses lib64 and not lib
-+
-+Upstream-Status: Submitted [https://github.com/mfontanini/cppkafka/pull/291]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ CMakeLists.txt | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index c4e44e6..25ec1ce 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -51,7 +51,7 @@ option(CPPKAFKA_EXPORT_CMAKE_CONFIG "Generate CMake config, target and version f
-+ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
-+ 
-+ if (NOT CPPKAFKA_CONFIG_DIR)
-+-    set(CPPKAFKA_CONFIG_DIR lib/cmake/${PROJECT_NAME})
-++    set(CPPKAFKA_CONFIG_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
-+ endif()
-+ 
-+ # Maintain previous compatibility
-+-- 
-+2.35.1
-+
-diff --git a/meta-oe/recipes-support/libcppkafka/libcppkafka_git.bb b/meta-oe/recipes-support/libcppkafka/libcppkafka_git.bb
-index 8f777eb182..0cb33fcd50 100644
---- a/meta-oe/recipes-support/libcppkafka/libcppkafka_git.bb
-+++ b/meta-oe/recipes-support/libcppkafka/libcppkafka_git.bb
-@@ -8,7 +8,9 @@ LIC_FILES_CHKSUM = " \
- file://LICENSE;md5=d8b4ca15d239dc1485ef495c8f1bcc72 \
+diff --git a/meta-oe/recipes-devtools/luajit/luajit_git.bb b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+index d4ff06b677..3f3939eeb4 100644
+--- a/meta-oe/recipes-devtools/luajit/luajit_git.bb
++++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Just-In-Time Compiler for Lua"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=abe9020de9c00909317d02d5c803810e"
++LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=23d6278200de9b48fd1439f80507cba8"
+ HOMEPAGE = "http://luajit.org"
+ 
+ SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
+@@ -10,7 +10,7 @@ SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
+ 
+ # Set PV to a version tag and date (YYMMDD) associated with SRCREV if it is later.
+ PV = "2.1.0~beta3-210112"
+-SRCREV = "ec6edc5c39c25e4eb3fca51b753f9995e97215da"
++SRCREV = "43ebb949a249a16c49d232ad24dc9127cc4302bb"
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -92,7 +92,7 @@ FILES:${PN}-dev += "${libdir}/libluajit-5.1.a \
  "
+ FILES:luajit-common = "${datadir}/${BPN}-${PV}"
  
--SRC_URI = "git://github.com/mfontanini/cppkafka;protocol=https;branch=master"
-+SRC_URI = "git://github.com/mfontanini/cppkafka;protocol=https;branch=master \
-+           file://0001-cmake-Use-CMAKE_INSTALL_LIBDIR.patch \
-+"
- SRCREV = "5e4b350806d561473138ce7a982e8f6cf2e77733"
- 
- DEPENDS = "librdkafka boost chrpath-replacement-native"
+-# mips64/ppc/ppc64/riscv64 is not supported in this release
++# mips64/ppc/ppc64/riscv64/riscv32 is not supported in this release
+ COMPATIBLE_HOST:mipsarchn32 = "null"
+ COMPATIBLE_HOST:mipsarchn64 = "null"
+ COMPATIBLE_HOST:powerpc = "null"
 -- 
 2.35.1
 
