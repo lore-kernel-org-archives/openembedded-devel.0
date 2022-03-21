@@ -1,122 +1,134 @@
-Return-Path: <scott.murray@konsulko.com>
+Return-Path: <randy.macleod@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 566A0C433F5
-	for <webhook@archiver.kernel.org>; Mon, 21 Mar 2022 00:51:16 +0000 (UTC)
-Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com
- [209.85.160.178])
- by mx.groups.io with SMTP id smtpd.web10.24943.1647823875397237172
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8FFFC433EF
+	for <webhook@archiver.kernel.org>; Mon, 21 Mar 2022 01:21:39 +0000 (UTC)
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
+ by mx.groups.io with SMTP id smtpd.web10.25196.1647825698545455624
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Mar 2022 17:51:15 -0700
+ Sun, 20 Mar 2022 18:21:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=rb3trJ0h;
- spf=pass (domain: konsulko.com, ip: 209.85.160.178,
- mailfrom: scott.murray@konsulko.com)
-Received: by mail-qt1-f178.google.com with SMTP id 10so10871064qtz.11
-        for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Mar 2022 17:51:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=aNZ0+x4pYGaR+WgLkLcNN1gxl3sZPAHihcue3TRWy/M=;
-        b=rb3trJ0hiM6auFE8J0XQSnYoyNrdP+ypVS9ml5Vnv2wiIk4uFVQ9xGtHWrGkrmJuCv
-         Rdp6TbR1zZ79fiI6BZoKEUVZY/M6khc2i9TUEoaneCAxaEp9LQ2tYCLw40nGWxWunOUy
-         gZ/SYtQjTw6im2KC9LEzaXWoUK41pLswDUMA8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=aNZ0+x4pYGaR+WgLkLcNN1gxl3sZPAHihcue3TRWy/M=;
-        b=Nd6Pqy/EdEKqLT1xHxErcyv4welQ6HYvbjX0ezOuCPr2o9bbDmlXjWay9BPNEh1gOB
-         56j8fybNt3V2ZQxLgYevYVSZeFhRhq/2sW9L51yEsejzEmOWARw33xLPof3e51cKtwkF
-         /q3ZtpROrwMi7TIpS4pNg1DEsIt0CZsQaQzXA/ZPDMk+qaCwcPFQ3g74g0wjNCCSu6zl
-         3J631WVytky8ed3oeg7SEHplEwJEzXRIqzeyAftFRz9DUv1bXD3y0Y9wOf32tQQQOOQm
-         t8/4HqGjhknwsp2HX1LrZBSER9Fzx3QJcixALbzJ+dVYuWk1koQllOcpW0AUsru9WOds
-         UmFA==
-X-Gm-Message-State: AOAM533Lggh7qVtoe1WmQtPIJXooJZNwLk3H3siNtzB5rLdFz9OiyZFV
-	NOj7CqkeXelhQOl8Aso1W4I68ykFRxA1Vg==
-X-Google-Smtp-Source: 
- ABdhPJzMpXecZWcS0GRcl1JhApTW9bv7F3W8RPXEzlnitJ1tAWgOlR3WuIeC2NX7eCQX6XxrrlAA+Q==
-X-Received: by 2002:ac8:4e95:0:b0:2e2:15e6:c10c with SMTP id
- 21-20020ac84e95000000b002e215e6c10cmr1206519qtp.444.1647823874133;
-        Sun, 20 Mar 2022 17:51:14 -0700 (PDT)
-Received: from ghidorah.spiteful.org (192-0-174-222.cpe.teksavvy.com.
- [192.0.174.222])
-        by smtp.gmail.com with ESMTPSA id
- c20-20020a05622a025400b002e1dd71e797sm10493790qtx.15.2022.03.20.17.51.13
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 20 Mar 2022 17:51:13 -0700 (PDT)
-From: Scott Murray <scott.murray@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 8/8] python3-urllib3: Remove
-Date: Sun, 20 Mar 2022 20:50:42 -0400
-Message-Id: 
- <02662d3430bc0e066fe63b0de33f9e55f3db89aa.1647823458.git.scott.murray@konsulko.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <cover.1647823458.git.scott.murray@konsulko.com>
-References: <cover.1647823458.git.scott.murray@konsulko.com>
+ dkim=missing;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
+ domain name (domain: windriver.com, ip: 147.11.3.146,
+ mailfrom: randy.macleod@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 22L1Larj017192
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Sun, 20 Mar 2022 18:21:37 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Sun, 20 Mar 2022 18:21:36 -0700
+Received: from ala-lpggp3.wrs.com (147.11.105.124) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Sun, 20 Mar 2022 18:21:36 -0700
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH 1/2] mcelog: update from 175 to 180
+Date: Sun, 20 Mar 2022 18:21:35 -0700
+Message-ID: <20220321012136.188270-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Mar 2022 00:51:16 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Mar 2022 01:21:39 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96099
+ https://lists.openembedded.org/g/openembedded-devel/message/96100
 
-This recipe has been moved to oe-core.
+The patch has been merged upstream so drop it:
+   f922739 test: avoid the pfa test hang
 
-Signed-off-by: Scott Murray <scott.murray@konsulko.com>
+A LICENSE file was added, with the same terms, so update the
+file and checksum. Change the HOMEPAGE link to https.
+
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
 ---
- .../packagegroups/packagegroup-meta-python.bb |  1 -
- .../python/python3-urllib3_1.26.8.bb          | 22 -------------------
- 2 files changed, 23 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-urllib3_1.26.8.bb
+ .../0001-test-avoid-the-pfa-test-hang.patch   | 36 -------------------
+ .../mcelog/{mcelog_175.bb => mcelog_180.bb}   |  7 ++--
+ 2 files changed, 3 insertions(+), 40 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/mcelog/mcelog/0001-test-avoid-the-pfa-test-hang.patch
+ rename meta-oe/recipes-support/mcelog/{mcelog_175.bb => mcelog_180.bb} (82%)
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index 260687aa5..682814a6a 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -421,7 +421,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
-     python3-ujson \
-     python3-unidiff \
-     python3-uritemplate \
--    python3-urllib3 \
-     python3-vcversioner \
-     python3-versiontools \
-     python3-visitor \
-diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.26.8.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.26.8.bb
+diff --git a/meta-oe/recipes-support/mcelog/mcelog/0001-test-avoid-the-pfa-test-hang.patch b/meta-oe/recipes-support/mcelog/mcelog/0001-test-avoid-the-pfa-test-hang.patch
 deleted file mode 100644
-index c2a51b914..000000000
---- a/meta-python/recipes-devtools/python/python3-urllib3_1.26.8.bb
+index 03bcc451d..000000000
+--- a/meta-oe/recipes-support/mcelog/mcelog/0001-test-avoid-the-pfa-test-hang.patch
 +++ /dev/null
-@@ -1,22 +0,0 @@
--SUMMARY = "Python HTTP library with thread-safe connection pooling, file post support, sanity friendly, and more"
--HOMEPAGE = "https://github.com/shazow/urllib3"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c2823cb995439c984fd62a973d79815c"
+@@ -1,36 +0,0 @@
+-From 3765b3a4cabf76f55c1c126ac64780a8c117d1d9 Mon Sep 17 00:00:00 2001
+-From: Mingli Yu <mingli.yu@windriver.com>
+-Date: Tue, 12 Jan 2021 10:30:13 +0800
+-Subject: [PATCH] test: avoid the pfa test hang
 -
--SRC_URI[sha256sum] = "0e7c33d9a63e7ddfcb86780aac87befc2fbddf46c58dbb487e0855f7ceec283c"
+-Per [1], the pfa test needs to install page-types and the pfa test
+-will hang forever if there is no page-types installed.
 -
--inherit pypi setuptools3
+-Improve the test script to avoid the pfa test hang.
 -
--RDEPENDS:${PN} += "\
--    ${PYTHON_PN}-certifi \
--    ${PYTHON_PN}-cryptography \
--    ${PYTHON_PN}-email \
--    ${PYTHON_PN}-idna \
--    ${PYTHON_PN}-netclient \
--    ${PYTHON_PN}-pyopenssl \
--    ${PYTHON_PN}-threading \
--"
+-[1] https://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git/tree/tests/pfa/PFA_test_howto?id=7b776a8c005b60572f49797e81287540f99fff1f
 -
--CVE_PRODUCT = "urllib3"
+-Upstream-Status: Submitted [https://github.com/andikleen/mcelog/pull/87]
 -
--BBCLASSEXTEND = "native nativesdk"
+-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+----
+- tests/test | 3 +++
+- 1 file changed, 3 insertions(+)
+-
+-diff --git a/tests/test b/tests/test
+-index 020ae2b..320f57f 100755
+---- a/tests/test
+-+++ b/tests/test
+-@@ -47,6 +47,9 @@ do
+- 	# Inject mce records and run mcelog in parallel.
+- 	# So that the mce records can be consumed by mcelog in time (avoid mce record overflow).
+- 	./inject $conf &
+-+	if [ "$1" = "pfa" ] ; then
+-+		which page-types > /dev/null 2>&1 || continue
+-+	fi
+- 	$D ../../mcelog --foreground --daemon --debug-numerrors --config $conf --logfile $log >> result
+- 
+- 	# let triggers finish
+--- 
+-2.29.2
+-
+diff --git a/meta-oe/recipes-support/mcelog/mcelog_175.bb b/meta-oe/recipes-support/mcelog/mcelog_180.bb
+similarity index 82%
+rename from meta-oe/recipes-support/mcelog/mcelog_175.bb
+rename to meta-oe/recipes-support/mcelog/mcelog_180.bb
+index bbe81a920..249e2421c 100644
+--- a/meta-oe/recipes-support/mcelog/mcelog_175.bb
++++ b/meta-oe/recipes-support/mcelog/mcelog_180.bb
+@@ -2,18 +2,17 @@ SUMMARY = "mcelog daemon accounts memory and some other errors in various ways."
+ DESCRIPTION = "mcelog is required by both 32bit x86 Linux kernels (since 2.6.30) \
+ and 64bit Linux kernels (since early 2.6 kernel releases) to log machine checks \
+ and should run on all Linux systems that need error handling."
+-HOMEPAGE = "http://mcelog.org/"
++HOMEPAGE = "https://mcelog.org/"
+ SECTION = "System Environment/Base"
+ 
+ SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git;protocol=http;;branch=master \
+-    file://0001-test-avoid-the-pfa-test-hang.patch \
+     file://run-ptest \
+ "
+ 
+-SRCREV = "7b776a8c005b60572f49797e81287540f99fff1f"
++SRCREV = "4146c9296a0cbd26f1c5e411cb44877f350053bd"
+ 
+ LICENSE = "GPL-2.0-only"
+-LIC_FILES_CHKSUM = "file://README.md;md5=74bb47b9a68850cb398665cf78b31de6"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.35.1
+2.31.1
 
 
