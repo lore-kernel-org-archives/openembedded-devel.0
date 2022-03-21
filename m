@@ -1,115 +1,125 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 088F3C433F5
-	for <webhook@archiver.kernel.org>; Mon, 21 Mar 2022 12:35:23 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.2])
- by mx.groups.io with SMTP id smtpd.web12.29659.1647866121788930429
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DD2EAC433F5
+	for <webhook@archiver.kernel.org>; Mon, 21 Mar 2022 15:27:07 +0000 (UTC)
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
+ [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web08.32011.1647876426680533009
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Mar 2022 05:35:22 -0700
+ Mon, 21 Mar 2022 08:27:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ZXo2EsaQ;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.2,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1647866120; i=@fujitsu.com;
-	bh=khIvYyISh/lNdkgl3YG+RL2a8B7wPGLwY3jiRuWS+yg=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=ZXo2EsaQDV63Gy5BSLZlpVgaCp2VZcy+eXZFLkSokaX5TSYa9SoWRhJVpoU3VFUsq
-	 dXy7DvrZXwMn3iqprtaNzKsnZ+OoD1P+T1OvvuOoIdgLB/dWtM1YCJNsfnOb4RMDiU
-	 7exZJWwVz5gqUfCZ/su0ybdHQXcrucVVJdKwZkHJoy0+JL6ydjWpbMBYQ4UZyH2+Q+
-	 ce4aMmUOnX8aNZpu7Y8GKZu4Bkp+AoxXJ0N4NXuKdsG99O+StmI8yCZA1054kuKAyC
-	 3hwu930U/03wvfy7etYNRHlB1iROi9A8C4pvACmCOzK6fgfhiGi8+QV4Vmbk5cLKdq
-	 BFolDFvE0HMfw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrFIsWRWlGSWpSXmKPExsViZ8MxSZe90CL
-  JYNo9HouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPx8V7GgiscFad/vGduYHzO3sXIxSEk8IRR
-  4uX3HUwQzgUmifMHJjJ2MXICOXsYJY5ejgGx2QTUJKbfusEKYosI6Essnb2HGcRmFlCRePG7h
-  x3EFhawl/hwbCZYnEVAVWLHwTY2EJtXwEnix7Y5YLaEgILElIfvgWo4ODgFnCWWvk+HWOUk0X
-  BtKitEuaDEyZlPWCDGS0gcfPGCGaJVUWL25WYWCLtCYtasNiYIW03i6rlNzBMYBWchaZ+FpH0
-  BI9MqRuukosz0jJLcxMwcXUMDA11DQ1NdYwsg01IvsUo3US+1VLc8tbhE10gvsbxYL7W4WK+4
-  Mjc5J0UvL7VkEyMwiFOK1XJ3ME5Z+VPvEKMkB5OSKG+dkUWSEF9SfkplRmJxRnxRaU5q8SFGG
-  Q4OJQlejjygnGBRanpqRVpmDjCiYNISHDxKIrx3soHSvMUFibnFmekQqVOMilLivH/ygRICII
-  mM0jy4NlgUX2KUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzPsWZApPZl4J3PRXQIuZgBbrs5q
-  BLC5JREhJNTB5Suo4rBcJ2+lz+1eRquOL20lXLwRtmmxosV2w86HOjISpZ+Pvvn83dYXP18rq
-  spb7breecm1ecea8/QotnWn/ir9ujIrez/lQevrjb/rm51bX7Lw9daNDXvH+21lKeie8w4xc2
-  Hf92b+V59o3SRafH/mnj3e+tPv8rvzvy0W5a+0vflX2bSs5bZk8P3WZ1kfF03Lc+sufOjzqZe
-  CdbVLntsQ95PNvkX3LbcL2TXwTafT9qIK6teyTmhl7DnAxy4X7zz19uiXy1f0de/J+/M0znpu
-  WUln12tPg0vpq896NB+5nddwKZmKNPm0cwLLwf0/QnT7tus1z5i+T6rdNvXzggchWzr3v3l87
-  KHfslcejbiWW4oxEQy3mouJEABfGDgpdAwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-4.tower-548.messagelabs.com!1647866119!8618!1
-X-Originating-IP: [62.60.8.146]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.85.5; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 24826 invoked from network); 21 Mar 2022 12:35:19 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-4.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 21 Mar 2022 12:35:19 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id C966210033B
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Mar 2022 12:35:18 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id BCD341000F5
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Mar 2022 12:35:18 +0000 (GMT)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 21 Mar 2022 12:34:41 +0000
-From: Wang Mingyu <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] rrdtool: upgrade 1.7.2 -> 1.8.0
-Date: Mon, 21 Mar 2022 20:34:28 +0800
-Message-ID: <1647866068-30929-2-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1647866068-30929-1-git-send-email-wangmy@fujitsu.com>
-References: <1647866068-30929-1-git-send-email-wangmy@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Wc9sqfi7;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id m22so13368993pja.0
+        for <openembedded-devel@lists.openembedded.org>;
+ Mon, 21 Mar 2022 08:27:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=FJOeX3BhuKKU8fpZO0rxxUzlTG8dYN1JY3uMC/9HODg=;
+        b=Wc9sqfi7rvYJwdGsYrE+hVO4daHo17oUfQQwqaGJMJ5mIagqWfrI20yj6Dicsy42QZ
+         UVGNQB8DcJZob6YOEelRyDy5I1AOCZLmuzWOZI/lYJ/FQMRxdhxyr/FhdbLe/iDDB3cx
+         Gnp0z+cUqXkkUaxGQpeDThL/ff8hhNKI5pshc7ToQAk69UzT6ld+zdlOjmstch2oKXm2
+         8Py40prngzYKW4LkVC7589cAlO9720xs1j+Hu1t8nCq1GNGPxf4BWUJZEfuChfbGh+xc
+         5hsVT6oyELE+cwzpgG1JgHJiBr0LP2ULWGQio8lbEiSDXAdsJJiEr7/rXjcUG72KGMts
+         ZeBQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=FJOeX3BhuKKU8fpZO0rxxUzlTG8dYN1JY3uMC/9HODg=;
+        b=6jQGrp9zij2yIdyoLm0Sc1DPYyvEmmi3gq+KfNwagugD3TY28WXKwvEtlJ9C1mBUnt
+         vZLTL/eYbTWFQ6vrEV2dT5FNEwgb0jPn85WWfRdySytwWxJ98FJp0gwIPQG1htSqwae6
+         yNcry3/WdrpSC5+Rg+qtaEfRrv8zimuErokShj/DnDPYO2jJjnTmG/5O8r2BT1SJsQhL
+         agyoBRU9fnKT5UxDwWxU6lyv09NlkHzEE2xn3nlM7ZHUbICAf1X8i3KvUOeHUgTqB/tn
+         Y8g+gWhsy18/J14Dnc7qP4DoDB691WaUnsDprMO4PQDPunIKLzghxqYFr/q2588f1RsL
+         ZYcQ==
+X-Gm-Message-State: AOAM530o0ubOqwLqxsOkoHZG87lZEQSK5MRgHfdga/dtp8mISDzne88P
+	pNTmRkqJNPbL8FfflbwHh1H83k/hMYXPUg==
+X-Google-Smtp-Source: 
+ ABdhPJyOKJ/+feyPdLlRL81lDidrukTiiaQD5RXKJoH9OtLFvQHf9stmnwT3zR3JUPvkq7R3cigmtg==
+X-Received: by 2002:a17:902:6845:b0:153:9af1:3134 with SMTP id
+ f5-20020a170902684500b001539af13134mr13473152pln.169.1647876425444;
+        Mon, 21 Mar 2022 08:27:05 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
+        by smtp.gmail.com with ESMTPSA id
+ d21-20020a056a00199500b004fa1f42eb77sm19437360pfl.117.2022.03.21.08.27.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 21 Mar 2022 08:27:05 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH] projucer: Upgrade to 6.1.6
+Date: Mon, 21 Mar 2022 08:27:02 -0700
+Message-Id: <20220321152702.3994142-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Mar 2022 12:35:23 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Mar 2022 15:27:07 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96110
+ https://lists.openembedded.org/g/openembedded-devel/message/96111
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Consider the commercial aspects of JUCE 6 End User License Agreement [1]
+
+[1] https://juce.com/juce-6-licence
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../rrdtool/{rrdtool_1.7.2.bb => rrdtool_1.8.0.bb}            | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-extended/rrdtool/{rrdtool_1.7.2.bb => rrdtool_1.8.0.bb} (98%)
+ meta-multimedia/recipes-multimedia/juce/projucer.inc      | 8 +++++---
+ .../packagegroups/packagegroup-meta-multimedia.bb         | 2 +-
+ 2 files changed, 6 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb
-similarity index 98%
-rename from meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb
-rename to meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb
-index 122b0707cf..d953c11ee8 100644
---- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb
-+++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb
-@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=39df84cfd8a5e18bf988f277f7946676"
+diff --git a/meta-multimedia/recipes-multimedia/juce/projucer.inc b/meta-multimedia/recipes-multimedia/juce/projucer.inc
+index 37680f498e..feb3564633 100644
+--- a/meta-multimedia/recipes-multimedia/juce/projucer.inc
++++ b/meta-multimedia/recipes-multimedia/juce/projucer.inc
+@@ -4,7 +4,9 @@ JUCE supported platforms, including Linux and Embedded Linux."
+ SECTION = "utils"
+ HOMEPAGE = "http://juce.com/"
+ LICENSE = "GPL-3.0-only"
+-LIC_FILES_CHKSUM = "file://LICENSE.md;md5=12e9c2db7897c0349a4cc1c6d2a8c5d5"
++LIC_FILES_CHKSUM = "file://LICENSE.md;md5=eff9da77cdb81a803f8cbca6c16801d8"
++
++LICENSE_FLAGS = "commercial"
  
- DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2 groff-native python3-setuptools-native"
+ inherit pkgconfig features_check
  
--SRCREV = "56a83f4f52e6745cd4352f9ee008be3183a6dedf"
--PV = "1.7.2"
-+SRCREV = "3af04acd38bbc61bbdcdd931dcf234c971aa5336"
-+PV = "1.8.0"
+@@ -13,13 +15,13 @@ REQUIRED_DISTRO_FEATURES = "x11"
+ DEPENDS = "libx11 libxext libxinerama libxrandr libxcursor freetype alsa-lib curl bzip2 libpng harfbuzz glib-2.0 libpcre"
+ DEPENDS:append:libc-musl = " libexecinfo"
  
- SRC_URI = "\
-     git://github.com/oetiker/rrdtool-1.x.git;branch=master;protocol=http;;protocol=https \
+-SRCREV = "90e8da0cfb54ac593cdbed74c3d0c9b09bad3a9f"
++SRCREV = "2f980209cc4091a4490bb1bafc5d530f16834e58"
+ BRANCH = "master"
+ SRC_URI = "git://github.com/WeAreROLI/JUCE.git;protocol=https;branch=${BRANCH} \
+ "
+ 
+ S = "${WORKDIR}/git"
+-PV = "6.0.8"
++PV = "6.1.6"
+ 
+ JUCE_PROJUCER_BUILD_PATH = "${B}/extras/Projucer/Builds"
+ JUCE_PROJUCER_MAKEFILE_PATH = "${JUCE_PROJUCER_BUILD_PATH}/LinuxMakefile"
+diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+index 62ca273160..2b7a43b93d 100644
+--- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
++++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+@@ -55,7 +55,7 @@ RDEPENDS:packagegroup-meta-multimedia = "\
+     tearsofsteel-1080p \
+     schroedinger \
+     pipewire \
+-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "projucer", "", d)} \
++    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "projucer", "", d)} \
+     libcamera \
+     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "libde265 openh264", "", d)} \
+     vorbis-tools \
 -- 
-2.25.1
+2.35.1
 
 
