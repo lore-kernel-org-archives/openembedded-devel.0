@@ -1,124 +1,104 @@
-Return-Path: <ross@burtonini.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0032AC433EF
-	for <webhook@archiver.kernel.org>; Mon, 21 Mar 2022 16:45:21 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
- [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.web09.802.1647881119306126600
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE23BC433F5
+	for <webhook@archiver.kernel.org>; Mon, 21 Mar 2022 19:39:43 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg
+ [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web12.253.1647891581660159998
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Mar 2022 09:45:19 -0700
+ Mon, 21 Mar 2022 12:39:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@burtonini-com.20210112.gappssmtp.com header.s=20210112
- header.b=17TRg/17;
- spf=pass (domain: burtonini.com, ip: 209.85.221.53,
- mailfrom: ross@burtonini.com)
-Received: by mail-wr1-f53.google.com with SMTP id q8so10161730wrc.0
-        for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Mar 2022 09:45:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=burtonini-com.20210112.gappssmtp.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=MVr7g8HtS4ri2wXyLk7CyRS3Nx3+4NatZ2EJNy6ASL8=;
-        b=17TRg/17C+tynS85f5BD+LMuY21BNNpUi8o0wZ4d8iQcC26hx+odYbicl4j/w/gKfn
-         EjkJ4zdqOBYUF93mqyc9zaoHWLFSkj2/lcFaCnl6UJzNTNq0fK6+hiRCsqRcewVJ3Ton
-         Hl81FVkAajmLxmEFdz2ZyRiHtCkHbJbVSPZRaaoNjHJWz2e7lQFmLKHmuILmig1KeSRy
-         d7D6QY3BiMa6N2tCo92HkyAxM5pCGlTXW+/V/8hMHknd1ybXYBWT1G7i9VrAZC3DJKHW
-         zDEKdMeh1u9cd4Eg7QggnxtYDe/P9nTl6dnp9VDnqwsHOE5gD0B1vUilz0/wIw/UZnlW
-         YE4g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=MVr7g8HtS4ri2wXyLk7CyRS3Nx3+4NatZ2EJNy6ASL8=;
-        b=wwaA9e+z5EffZSSGP7qMkoIwqUqXVYmBv6Udv4+hPN5Gtvg+D+CQwamQfxKL4/zJCc
-         +MNjhmLy38wJzv0rT8/QSWxN8UeQdMuFNN9mHa3SFlEGMjd0fP+7ZaXXnBEohkTkQm7f
-         5BXNTr1BLwctSvNwKw3uaAj+dyk0mgnoTcF6VHOrR3MNjILN+ZPZSnM1AFOgZNgOzqFG
-         hUVaHOZhIsFFUMTymRXQ+LDdUEqgKdwRfeqieKnNB9Pc+eUdMweckTiNhACD88PqW66/
-         gaqCyfK/IFSv5FeJ/1wmbzNFUg7mUXCShEcxJNoOKVDGVLGkNpZgKmc40JKeQnzLAb4h
-         D+xQ==
-X-Gm-Message-State: AOAM532NGcWkb8yMLM8IMPCObJ4EW3+kuzDaVoS64uYL1B+eYQRNflBj
-	flh/9xLnhFo6FQ9u7J12/BeGHfJ/nWAKZLVq/bQ6pQ==
-X-Google-Smtp-Source: 
- ABdhPJw6oIosq0QhD6auTB1k8WpKtRaP7xG1vq1M78IlDVzqXxxKtPZzA9J82hfpT6qyNvUPjbRjPrI6bigftyfrU8I=
-X-Received: by 2002:a5d:47a8:0:b0:204:72:7051 with SMTP id
- 8-20020a5d47a8000000b0020400727051mr9885479wrb.451.1647881117485;
- Mon, 21 Mar 2022 09:45:17 -0700 (PDT)
+ dkim=pass header.i=@anavi.org header.s=default header.b=NWwx6KHY;
+ spf=permerror,
+ err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
+ for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
+ (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=0BEf4CPaQ0WIy/OLHkKXHmPWTKYweLKw7u/LD9taoGU=; b=NWwx6KHYGVgSrAZOQJQaYtDoRR
+	2SWJzhDwBNwpVpgGJCh5ZjKCQn5D+EhJFnKFdWNUPt8BUzDNI1ar8l0A0T2QDssOLOVhFiM0Xfxdb
+	+IOsJpOX93E6nR9oy/fbFWR3uqki8srmoBkW2irrKmqcNEplfHHga+UV2EWfeYsNMdSV4gII+4kjL
+	XAubfEoOV9ZpgPTOq1cPPSllxUft9bSx7WgE8odHQ3A18/KdtJWwsXlWPbFHZb9TZDymSWB83dyXV
+	9Ren611O+axtKLf/ogbL5OhJxvPIgskzXM9Lx6OqQmx8IOFMgq/Qb+Pdrsbx/Js1QtBNHsBmJRSeb
+	+xcUf2Tg==;
+Received: from lan.nucleusys.com ([92.247.61.126]:38484 helo=tone.k.g)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.94.2)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1nWNt5-0009eP-MY; Mon, 21 Mar 2022 21:39:41 +0200
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCH] xbindkeys: Add recipe
+Date: Mon, 21 Mar 2022 21:39:29 +0200
+Message-Id: <20220321193929.1529905-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-References: <20220321114353.1731727-1-ross.burton@arm.com>
- <8f64a372-9b1c-7fc1-42ed-f74c664a5f3e@gmail.com>
-In-Reply-To: <8f64a372-9b1c-7fc1-42ed-f74c664a5f3e@gmail.com>
-From: Ross Burton <ross@burtonini.com>
-Date: Mon, 21 Mar 2022 16:45:06 +0000
-Message-ID: 
- <CAAnfSTuKtY_Cgd-PWxNNbDUNPMaK8oyWV9gToDfbZZ0RD8Wiiw@mail.gmail.com>
-Subject: Re: [oe] [PATCH v2 1/2] python3-lz4: use system lz4 library
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-OutGoing-Spam-Status: No, score=-1.0
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
+ leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Mar 2022 16:45:20 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Mar 2022 19:39:43 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96113
+ https://lists.openembedded.org/g/openembedded-devel/message/96114
 
-This was just a rebase on top of the python rename, so it's all in now.
+xbindkeys is an application that allows you to launch shell
+commands with your keyboard or your mouse under X Window. It links
+commands to keys or mouse buttons, using a configuration file. It
+is independant of the window manager and can capture all keyboard
+keys.
 
-Thanks
-Ross
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../xbindkeys/xbindkeys_1.8.7.bb               | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/xbindkeys/xbindkeys_1.8.7.bb
 
-On Mon, 21 Mar 2022 at 15:45, Khem Raj <raj.khem@gmail.com> wrote:
->
-> v1 was merged. Can you rebase and send the changes on top of
-> master/master-next as v3
->
-> On 3/21/22 4:43 AM, Ross Burton wrote:
-> > Instead of using the copy of lz4 that is embedded in the python3-lz4
-> > source code, use the system lz4 library.
-> >
-> > python3-lz4: PKGSIZE changed from 718282 to 165043 (-77%)
-> > python3-lz4: RDEPENDS: added "lz4 (['>= 1.9.3'])"
-> >
-> > Signed-off-by: Ross Burton <ross.burton@arm.com>
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > ---
-> >   meta-python/recipes-devtools/python/python3-lz4_4.0.0.bb | 3 ++-
-> >   1 file changed, 2 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/meta-python/recipes-devtools/python/python3-lz4_4.0.0.bb b/meta-python/recipes-devtools/python/python3-lz4_4.0.0.bb
-> > index 42f0743bea..75472d327e 100644
-> > --- a/meta-python/recipes-devtools/python/python3-lz4_4.0.0.bb
-> > +++ b/meta-python/recipes-devtools/python/python3-lz4_4.0.0.bb
-> > @@ -4,12 +4,13 @@ LICENSE = "BSD-3-Clause"
-> >   LIC_FILES_CHKSUM = "file://LICENSE;md5=6231efa4dd4811e62407314d90a57573"
-> >
-> >   DEPENDS += " \
-> > +    lz4 \
-> >       ${PYTHON_PN}-setuptools-scm-native \
-> >       ${PYTHON_PN}-pkgconfig-native \
-> >   "
-> >
-> >   SRC_URI[sha256sum] = "57c5dfd3b7dae833b0d2b2c1aafd7f9d0dfcab40683d183d010c67c9fd1beca3"
-> >
-> > -inherit pypi python_setuptools_build_meta
-> > +inherit pkgconfig pypi python_setuptools_build_meta
-> >
-> >   BBCLASSEXTEND = "native nativesdk"
-> >
-> >
-> >
-> >
-> >
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#96112): https://lists.openembedded.org/g/openembedded-devel/message/96112
-> Mute This Topic: https://lists.openembedded.org/mt/89925656/1676615
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [ross@burtonini.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-oe/recipes-graphics/xbindkeys/xbindkeys_1.8.7.bb b/meta-oe/recipes-graphics/xbindkeys/xbindkeys_1.8.7.bb
+new file mode 100644
+index 000000000..0c316edf9
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xbindkeys/xbindkeys_1.8.7.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "xbindkeys - Tool for launching commands on keystrokes"
++HOMEPAGE = "http://www.nongnu.org/xbindkeys/xbindkeys.html"
++LICENSE = "GPL-2.0-only"
++LIC_FILES_CHKSUM = "file://COPYING;md5=7d715d0b23c4bd9265b7435f546e9fe8"
++SECTION = "x11"
++
++DEPENDS = "virtual/libx11"
++
++inherit features_check autotools
++
++# depends on virtual/libx11
++REQUIRED_DISTRO_FEATURES = "x11"
++
++SRC_URI = "http://www.nongnu.org/xbindkeys/xbindkeys-${PV}.tar.gz"
++SRC_URI[md5sum] = "b5e1a9668ba13ff8673836d1d965d951"
++SRC_URI[sha256sum] = "a29b86a8ec91d4abc83b420e547da27470847d0efe808aa6e75147aa0adb82f2"
++
++EXTRA_OECONF = "--disable-guile"
+-- 
+2.30.2
+
 
