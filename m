@@ -1,133 +1,105 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <scott.murray@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 04362C433F5
-	for <webhook@archiver.kernel.org>; Mon, 21 Mar 2022 00:18:53 +0000 (UTC)
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com
- [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.web10.24654.1647821932032235202
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 676A4C433F5
+	for <webhook@archiver.kernel.org>; Mon, 21 Mar 2022 00:51:07 +0000 (UTC)
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com
+ [209.85.160.180])
+ by mx.groups.io with SMTP id smtpd.web11.24906.1647823866616579556
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Mar 2022 17:18:52 -0700
+ Sun, 20 Mar 2022 17:51:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=CIuA1/9M;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id
- l4-20020a17090a49c400b001c6840df4a3so9242213pjm.0
+ dkim=pass header.i=@konsulko.com header.s=google header.b=kgaQIO8O;
+ spf=pass (domain: konsulko.com, ip: 209.85.160.180,
+ mailfrom: scott.murray@konsulko.com)
+Received: by mail-qt1-f180.google.com with SMTP id i8so10886618qtx.6
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Mar 2022 17:18:51 -0700 (PDT)
+ Sun, 20 Mar 2022 17:51:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
+        d=konsulko.com; s=google;
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=JRtAhO398Y55DZD5kkHz3VTsgiQU98Oew9EIR0nEJh8=;
-        b=CIuA1/9MD4n+yzr0ddXahWB6BPNf79IFKktvpsC9NwxFbakXcpqkR9/ZP/asejmOog
-         EeSNW44gur5JBasVGlosiDvuqdg8CckiJhnos8ltNwgf72b/xtTKkWP8ZFl6DV/V700Y
-         b8rm6JEdH4pOgpwLwZK9FaWOv9KwJh6FB7cafuv+yq8QkARjIKB3a9UWxq0mfSiixKld
-         KZjTwTUpVkbbiB+Kzj9Z+/SfgegjqIvsK3sv457pK0hC1ukotZlEy8o1CtJi5vkC7D4R
-         TdVBwbTvOINpVtAyRs8Mw/uOxiTa0Qy5O2AmNn5IrCgzvW/SBTGrWer9MdkR/7NauYcn
-         2/yA==
+        bh=g0vkT48nEcHJtANDzZJxJOVLy6lhfBqmmPKDWab95CM=;
+        b=kgaQIO8O7rWszm2ZgMCdGyToHGe4Kkvha2ZeGrzn7z8W4XLYwcnv0cF/91qZzKub7v
+         A192HNQWWy9YeTGt9kap+ACzGiBaNigoVd32iB+Qn9EFwgnEebzUhnf++d6BEdb6Psyl
+         1QakM2WU+F0o2mMjBVjLlLlNxPrIteg16ft2k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=JRtAhO398Y55DZD5kkHz3VTsgiQU98Oew9EIR0nEJh8=;
-        b=yt3JjYJSBBF6xDaEXGrfOhitMs2mNor11fOgvJe7Du5tdCA6Xt8t5Y7JraSQCM+Wl4
-         3pYE9/QnCRsawQM/Ied5uXb13FDjUgl0IKM/BOpVocBiZEUghn+flICBEAvYBjA1vi/b
-         COSZc02R5HWmJ2BGt3LykKrz1M+31nDXLG8NEaDxVk45nqHX6Z1xZggVrVOPXVh2dUlL
-         u9a8vBOBccb4Z2KPSp/n/4J/0fDRkcF7SqFMDod/gP1dFyf+sz4oghqwixZyZ8DMTujN
-         ybrg4i8Id0cW/vpNCqrC11cteTDmaVHlOIon/ygxm5hQlvfEPGBz7/uOYOoQaTgTA2Gn
-         LQVg==
-X-Gm-Message-State: AOAM530xFkJfR30piqkYyngBQcfEChzt7rBUaS4tTwx7Of7hf6iUY2By
-	3oDWslgoITk66I/oV8M03x6PZCzxUWG3nw==
+        bh=g0vkT48nEcHJtANDzZJxJOVLy6lhfBqmmPKDWab95CM=;
+        b=ogX2+SnQjTWM2K7GiN+CzjpuFRqI+TJ6W5EIOhQT7UkWWtinbVEZAF2Qij/oLfydVj
+         WcJ9csy1VJypXbUfsblA2/2T620nhVa7XimbITWS6hHJYgpba3EvB8gPxXlHTs8kUI2U
+         Mt6STxEu58y4jLuPpqYx7tllTtzty52GJKV5HbZfdVISNeJVofANjVM7zHJDn/XNChbI
+         nM12qUB/q2MLO8hvUk1cR294XRbPSEs75LbFKHbFJKUGhrbZ4E0F5Pbo/K1wbO2zNWG6
+         vdpip9SxCBuT1EWRals7lZZWVD7sXWBj2HMCTqGOfXAjvAtjFyFEuA67hpPzlCkolVyw
+         UGVw==
+X-Gm-Message-State: AOAM5304L47ZYpeE/pziN0ybp/oH7Hxl5RAH51Q32vVR+qELhoKz3dMQ
+	+G51ZTGN3VqBtpdpf6kv4s8OBMSL5Hwjaw==
 X-Google-Smtp-Source: 
- ABdhPJz6oTrD6SH9kQRYUpneyK5JPfzDyOGMPAT1yPUycTmuCuUfrv8ekBEcsz8HTW6YQW/7AWK63w==
-X-Received: by 2002:a17:902:f787:b0:152:157:eb7 with SMTP id
- q7-20020a170902f78700b0015201570eb7mr10123123pln.109.1647821931040;
-        Sun, 20 Mar 2022 17:18:51 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
+ ABdhPJxUZ7ITo9kKHlpubcmgxiybwSNTt/TxlRc99+1K1yOEmPHyeUK9j5F2JMsMo4s5M14LdWT10g==
+X-Received: by 2002:ac8:118a:0:b0:2d8:a3b2:7501 with SMTP id
+ d10-20020ac8118a000000b002d8a3b27501mr14786448qtj.354.1647823865302;
+        Sun, 20 Mar 2022 17:51:05 -0700 (PDT)
+Received: from ghidorah.spiteful.org (192-0-174-222.cpe.teksavvy.com.
+ [192.0.174.222])
         by smtp.gmail.com with ESMTPSA id
- b16-20020a056a00115000b004f6ff260c9esm16713342pfm.207.2022.03.20.17.18.50
+ c20-20020a05622a025400b002e1dd71e797sm10493790qtx.15.2022.03.20.17.51.04
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 20 Mar 2022 17:18:50 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Sun, 20 Mar 2022 17:51:04 -0700 (PDT)
+From: Scott Murray <scott.murray@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] geany-plugins: Do not overwrite OE's pkg-config env
-Date: Sun, 20 Mar 2022 17:18:48 -0700
-Message-Id: <20220321001848.2618871-1-raj.khem@gmail.com>
+Subject: [PATCH 0/8] Remove recipes moved to oe-core
+Date: Sun, 20 Mar 2022 20:50:34 -0400
+Message-Id: <cover.1647823458.git.scott.murray@konsulko.com>
 X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Mar 2022 00:18:53 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Mar 2022 00:51:07 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96090
+ https://lists.openembedded.org/g/openembedded-devel/message/96091
 
-geany.m4 tries to push additional pkg-config paths to respect
---with-geany-libdir if it sets to different paths, however we
-do not use --with-geany-libdir with in OE build so this is more
-of a problem for OE than solution.
+I didn't see anything queued in master-next, so here are some patches
+to remove the recipes that were moved to oe-core this week.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...-Do-not-tinker-with-pkg-config-paths.patch | 32 +++++++++++++++++++
- .../geany/geany-plugins_1.38.bb               |  1 +
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/geany/geany-plugins/0001-geany.m4-Do-not-tinker-with-pkg-config-paths.patch
+Scott Murray (8):
+  python3-babel: Remove
+  python3-certifi: Remove
+  python3-ndg-httpsclient: Remove
+  python3-pyasn1: Remove
+  python3-pyopenssl: Remove
+  python3-pysocks: Remove
+  python3-requests: Remove
+  python3-urllib3: Remove
 
-diff --git a/meta-oe/recipes-devtools/geany/geany-plugins/0001-geany.m4-Do-not-tinker-with-pkg-config-paths.patch b/meta-oe/recipes-devtools/geany/geany-plugins/0001-geany.m4-Do-not-tinker-with-pkg-config-paths.patch
-new file mode 100644
-index 0000000000..cd417e0d7b
---- /dev/null
-+++ b/meta-oe/recipes-devtools/geany/geany-plugins/0001-geany.m4-Do-not-tinker-with-pkg-config-paths.patch
-@@ -0,0 +1,32 @@
-+From b2187b45f61ce362a9d58d9081d66daddb4e577f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 20 Mar 2022 15:54:14 -0700
-+Subject: [PATCH] geany.m4: Do not tinker with pkg-config paths
-+
-+OE sets up these paths correctly w.r.t. target sysroot
-+
-+Upstream-Status: Inappropriate [OE-Specific]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ build/geany.m4 | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+--- a/build/geany.m4
-++++ b/build/geany.m4
-+@@ -32,7 +32,8 @@ AC_DEFUN([GP_CHECK_GEANY],
-+ [
-+     AC_REQUIRE([PKG_PROG_PKG_CONFIG])
-+ 
-+-    GP_GEANY_PKG_CONFIG_PATH_PUSH
-++    dnl GP_GEANY_PKG_CONFIG_PATH_PUSH
-++    AC_REQUIRE([_GP_GEANY_LIBDIR])
-+ 
-+     PKG_CHECK_MODULES([GEANY], [geany >= $1])
-+     geanypluginsdir=$geany_libdir/geany
-+@@ -40,5 +41,5 @@ AC_DEFUN([GP_CHECK_GEANY],
-+     AC_SUBST([geanypluginsdir])
-+     AC_SUBST([GEANY_VERSION])
-+ 
-+-    GP_GEANY_PKG_CONFIG_PATH_POP
-++    dnl GP_GEANY_PKG_CONFIG_PATH_POP
-+ ])
-diff --git a/meta-oe/recipes-devtools/geany/geany-plugins_1.38.bb b/meta-oe/recipes-devtools/geany/geany-plugins_1.38.bb
-index b6857917f5..fa4cccca03 100644
---- a/meta-oe/recipes-devtools/geany/geany-plugins_1.38.bb
-+++ b/meta-oe/recipes-devtools/geany/geany-plugins_1.38.bb
-@@ -32,6 +32,7 @@ SRC_URI = " \
-     https://plugins.geany.org/${BPN}/${BP}.tar.bz2 \
-     file://0001-Use-pkg-config-to-find-gpgme.patch \
-     file://0001-git-changebar-Adjust-structs-for-libgit2-1.4.x.patch \
-+    file://0001-geany.m4-Do-not-tinker-with-pkg-config-paths.patch \
- "
- SRC_URI[sha256sum] = "1c578a7ebb390aa8882f195acd3d8da3ceb73925d291b28dec90cd3e5fd20586"
- 
+ .../packagegroups/packagegroup-meta-python.bb |  8 -----
+ .../recipes-devtools/python/python-pyasn1.inc | 31 -------------------
+ .../python/python3-babel_2.9.1.bb             | 26 ----------------
+ .../python/python3-certifi_2021.10.8.bb       | 14 ---------
+ .../python/python3-ndg-httpsclient_0.5.1.bb   | 31 -------------------
+ .../python/python3-pyasn1/run-ptest           |  3 --
+ .../python/python3-pyasn1_0.4.8.bb            |  2 --
+ .../python/python3-pyopenssl_22.0.0.bb        | 23 --------------
+ .../python/python3-pysocks_1.7.1.bb           | 20 ------------
+ .../python/python3-requests_2.27.1.bb         | 25 ---------------
+ .../python/python3-urllib3_1.26.8.bb          | 22 -------------
+ 11 files changed, 205 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pyasn1.inc
+ delete mode 100644 meta-python/recipes-devtools/python/python3-babel_2.9.1.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-certifi_2021.10.8.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.5.1.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pyasn1/run-ptest
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pyasn1_0.4.8.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pyopenssl_22.0.0.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pysocks_1.7.1.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-requests_2.27.1.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-urllib3_1.26.8.bb
+
 -- 
 2.35.1
 
