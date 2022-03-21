@@ -2,124 +2,122 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DD2EAC433F5
-	for <webhook@archiver.kernel.org>; Mon, 21 Mar 2022 15:27:07 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
- [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web08.32011.1647876426680533009
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3EE2C433F5
+	for <webhook@archiver.kernel.org>; Mon, 21 Mar 2022 15:44:29 +0000 (UTC)
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
+ [209.85.215.170])
+ by mx.groups.io with SMTP id smtpd.web08.32274.1647877468463689532
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Mar 2022 08:27:06 -0700
+ Mon, 21 Mar 2022 08:44:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Wc9sqfi7;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id m22so13368993pja.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Z44q/yF0;
+ spf=pass (domain: gmail.com, ip: 209.85.215.170,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f170.google.com with SMTP id w21so6887223pgm.7
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Mar 2022 08:27:06 -0700 (PDT)
+ Mon, 21 Mar 2022 08:44:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=FJOeX3BhuKKU8fpZO0rxxUzlTG8dYN1JY3uMC/9HODg=;
-        b=Wc9sqfi7rvYJwdGsYrE+hVO4daHo17oUfQQwqaGJMJ5mIagqWfrI20yj6Dicsy42QZ
-         UVGNQB8DcJZob6YOEelRyDy5I1AOCZLmuzWOZI/lYJ/FQMRxdhxyr/FhdbLe/iDDB3cx
-         Gnp0z+cUqXkkUaxGQpeDThL/ff8hhNKI5pshc7ToQAk69UzT6ld+zdlOjmstch2oKXm2
-         8Py40prngzYKW4LkVC7589cAlO9720xs1j+Hu1t8nCq1GNGPxf4BWUJZEfuChfbGh+xc
-         5hsVT6oyELE+cwzpgG1JgHJiBr0LP2ULWGQio8lbEiSDXAdsJJiEr7/rXjcUG72KGMts
-         ZeBQ==
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :references:from:organization:in-reply-to:content-transfer-encoding;
+        bh=+eWwMcsongS1QfdSAngnL0DKy6EqVWJgf/sWt8S+OPk=;
+        b=Z44q/yF06oSCr+FQKlvi0tf+M2NYsBXjRh7CNsl0fftuxiHZK5oiRWi8B6aEzkWzZc
+         wFg4o5eknCoHo7PHCOHJmqwiTdyhnDkAz4u7hFcnb6oq66eZYMgb86WqlcwzT0Wtdi8J
+         3wgMIGG9YAiEJTZdaiABMyFg+WsiiO4XEqE1wxZpFzhe/Fhvv2251dLzbSTvSvhturfK
+         fwvJ4rKPbi7q+CGM7L7WQBjP66BuA6JjEMBOCcmNDVjWqE1fUcPHeKrpMoLX7sF6jcBF
+         cq1Yo4H/TH0e1F7YMTLTP2IBvvrTLHvJMxDafkOviT1QcoJBz3+3E0RUB6qDg3YwqP11
+         LSPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:references:from:organization:in-reply-to
          :content-transfer-encoding;
-        bh=FJOeX3BhuKKU8fpZO0rxxUzlTG8dYN1JY3uMC/9HODg=;
-        b=6jQGrp9zij2yIdyoLm0Sc1DPYyvEmmi3gq+KfNwagugD3TY28WXKwvEtlJ9C1mBUnt
-         vZLTL/eYbTWFQ6vrEV2dT5FNEwgb0jPn85WWfRdySytwWxJ98FJp0gwIPQG1htSqwae6
-         yNcry3/WdrpSC5+Rg+qtaEfRrv8zimuErokShj/DnDPYO2jJjnTmG/5O8r2BT1SJsQhL
-         agyoBRU9fnKT5UxDwWxU6lyv09NlkHzEE2xn3nlM7ZHUbICAf1X8i3KvUOeHUgTqB/tn
-         Y8g+gWhsy18/J14Dnc7qP4DoDB691WaUnsDprMO4PQDPunIKLzghxqYFr/q2588f1RsL
-         ZYcQ==
-X-Gm-Message-State: AOAM530o0ubOqwLqxsOkoHZG87lZEQSK5MRgHfdga/dtp8mISDzne88P
-	pNTmRkqJNPbL8FfflbwHh1H83k/hMYXPUg==
+        bh=+eWwMcsongS1QfdSAngnL0DKy6EqVWJgf/sWt8S+OPk=;
+        b=yq+n//Z+sKfAovWCIWzPQkoyHettRI8neRlnmhW/E7c0Kjz0ESam6alePLOyGxiQTJ
+         sNvLdET4rE7Rg2h1BT/3m4A7so2yURF+5cPIWcI82yxKmvAnP6rbxVQ/fCwo7Ude7aTp
+         sGJqdbOZnP7BG5imGmE132ztAg1SkNHnukR8GejJNjJC73ltcK666xqPpC8ALNnIAjMH
+         vBbo5y5rwdzo01/sGxfOWu58zp6sBFoc8HSB2kdFDfJV6ttX1wG2/dTu5RdFHoIPGS6W
+         LN+YO/rk8Um9MB7xZMaJLBZDGReP7RxzctY4uiRCFvHTYYprnrMXCxO7p9YtDTHxFzAL
+         seew==
+X-Gm-Message-State: AOAM53070kYGQiPt1PqbozOU4dnoozraB5/68MHWnZRvZkIAxnzTPQ1L
+	rY9S/xp7h/QA8L5ksgWDeDlJhjwr/yYmcw==
 X-Google-Smtp-Source: 
- ABdhPJyOKJ/+feyPdLlRL81lDidrukTiiaQD5RXKJoH9OtLFvQHf9stmnwT3zR3JUPvkq7R3cigmtg==
-X-Received: by 2002:a17:902:6845:b0:153:9af1:3134 with SMTP id
- f5-20020a170902684500b001539af13134mr13473152pln.169.1647876425444;
-        Mon, 21 Mar 2022 08:27:05 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
+ ABdhPJzjUu0sUIXHk2Ec+ogrqofsHS0fzR+hUaqWcgECNN1G3HqrFMgQDLMC6Xb/CAZ37H8X6a3BXQ==
+X-Received: by 2002:a62:1ad3:0:b0:4fa:9adc:7680 with SMTP id
+ a202-20020a621ad3000000b004fa9adc7680mr6558653pfa.25.1647877467312;
+        Mon, 21 Mar 2022 08:44:27 -0700 (PDT)
+Received: from ?IPV6:2601:646:9200:a0f0:fd5f:548f:7771:4010?
+ ([2601:646:9200:a0f0:fd5f:548f:7771:4010])
         by smtp.gmail.com with ESMTPSA id
- d21-20020a056a00199500b004fa1f42eb77sm19437360pfl.117.2022.03.21.08.27.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 21 Mar 2022 08:27:05 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH] projucer: Upgrade to 6.1.6
-Date: Mon, 21 Mar 2022 08:27:02 -0700
-Message-Id: <20220321152702.3994142-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.35.1
+ a17-20020a62e211000000b004faa5233213sm3345296pfi.101.2022.03.21.08.44.26
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 21 Mar 2022 08:44:27 -0700 (PDT)
+Message-ID: <8f64a372-9b1c-7fc1-42ed-f74c664a5f3e@gmail.com>
+Date: Mon, 21 Mar 2022 08:44:25 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.7.0
+Subject: Re: [oe] [PATCH v2 1/2] python3-lz4: use system lz4 library
+Content-Language: en-US
+To: openembedded-devel@lists.openembedded.org
+References: <20220321114353.1731727-1-ross.burton@arm.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+In-Reply-To: <20220321114353.1731727-1-ross.burton@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Mar 2022 15:27:07 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Mar 2022 15:44:29 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96111
+ https://lists.openembedded.org/g/openembedded-devel/message/96112
 
-Consider the commercial aspects of JUCE 6 End User License Agreement [1]
+v1 was merged. Can you rebase and send the changes on top of 
+master/master-next as v3
 
-[1] https://juce.com/juce-6-licence
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-multimedia/recipes-multimedia/juce/projucer.inc      | 8 +++++---
- .../packagegroups/packagegroup-meta-multimedia.bb         | 2 +-
- 2 files changed, 6 insertions(+), 4 deletions(-)
-
-diff --git a/meta-multimedia/recipes-multimedia/juce/projucer.inc b/meta-multimedia/recipes-multimedia/juce/projucer.inc
-index 37680f498e..feb3564633 100644
---- a/meta-multimedia/recipes-multimedia/juce/projucer.inc
-+++ b/meta-multimedia/recipes-multimedia/juce/projucer.inc
-@@ -4,7 +4,9 @@ JUCE supported platforms, including Linux and Embedded Linux."
- SECTION = "utils"
- HOMEPAGE = "http://juce.com/"
- LICENSE = "GPL-3.0-only"
--LIC_FILES_CHKSUM = "file://LICENSE.md;md5=12e9c2db7897c0349a4cc1c6d2a8c5d5"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=eff9da77cdb81a803f8cbca6c16801d8"
-+
-+LICENSE_FLAGS = "commercial"
- 
- inherit pkgconfig features_check
- 
-@@ -13,13 +15,13 @@ REQUIRED_DISTRO_FEATURES = "x11"
- DEPENDS = "libx11 libxext libxinerama libxrandr libxcursor freetype alsa-lib curl bzip2 libpng harfbuzz glib-2.0 libpcre"
- DEPENDS:append:libc-musl = " libexecinfo"
- 
--SRCREV = "90e8da0cfb54ac593cdbed74c3d0c9b09bad3a9f"
-+SRCREV = "2f980209cc4091a4490bb1bafc5d530f16834e58"
- BRANCH = "master"
- SRC_URI = "git://github.com/WeAreROLI/JUCE.git;protocol=https;branch=${BRANCH} \
- "
- 
- S = "${WORKDIR}/git"
--PV = "6.0.8"
-+PV = "6.1.6"
- 
- JUCE_PROJUCER_BUILD_PATH = "${B}/extras/Projucer/Builds"
- JUCE_PROJUCER_MAKEFILE_PATH = "${JUCE_PROJUCER_BUILD_PATH}/LinuxMakefile"
-diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-index 62ca273160..2b7a43b93d 100644
---- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-+++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-@@ -55,7 +55,7 @@ RDEPENDS:packagegroup-meta-multimedia = "\
-     tearsofsteel-1080p \
-     schroedinger \
-     pipewire \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "projucer", "", d)} \
-+    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "projucer", "", d)} \
-     libcamera \
-     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "libde265 openh264", "", d)} \
-     vorbis-tools \
--- 
-2.35.1
-
+On 3/21/22 4:43 AM, Ross Burton wrote:
+> Instead of using the copy of lz4 that is embedded in the python3-lz4
+> source code, use the system lz4 library.
+> 
+> python3-lz4: PKGSIZE changed from 718282 to 165043 (-77%)
+> python3-lz4: RDEPENDS: added "lz4 (['>= 1.9.3'])"
+> 
+> Signed-off-by: Ross Burton <ross.burton@arm.com>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>   meta-python/recipes-devtools/python/python3-lz4_4.0.0.bb | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/meta-python/recipes-devtools/python/python3-lz4_4.0.0.bb b/meta-python/recipes-devtools/python/python3-lz4_4.0.0.bb
+> index 42f0743bea..75472d327e 100644
+> --- a/meta-python/recipes-devtools/python/python3-lz4_4.0.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-lz4_4.0.0.bb
+> @@ -4,12 +4,13 @@ LICENSE = "BSD-3-Clause"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=6231efa4dd4811e62407314d90a57573"
+>   
+>   DEPENDS += " \
+> +    lz4 \
+>       ${PYTHON_PN}-setuptools-scm-native \
+>       ${PYTHON_PN}-pkgconfig-native \
+>   "
+>   
+>   SRC_URI[sha256sum] = "57c5dfd3b7dae833b0d2b2c1aafd7f9d0dfcab40683d183d010c67c9fd1beca3"
+>   
+> -inherit pypi python_setuptools_build_meta
+> +inherit pkgconfig pypi python_setuptools_build_meta
+>   
+>   BBCLASSEXTEND = "native nativesdk"
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#96107): https://lists.openembedded.org/g/openembedded-devel/message/96107
+> Mute This Topic: https://lists.openembedded.org/mt/89925656/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
