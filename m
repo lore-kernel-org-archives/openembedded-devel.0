@@ -1,190 +1,137 @@
-Return-Path: <randy.macleod@windriver.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CC10FC433F5
-	for <webhook@archiver.kernel.org>; Mon, 21 Mar 2022 01:21:39 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web12.25199.1647825699356668365
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 27EA2C433FE
+	for <webhook@archiver.kernel.org>; Mon, 21 Mar 2022 10:46:00 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.1])
+ by mx.groups.io with SMTP id smtpd.web12.28782.1647859559127501373
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Mar 2022 18:21:39 -0700
+ Mon, 21 Mar 2022 03:45:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.3.146,
- mailfrom: randy.macleod@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 22L1LbZZ017195
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=jlZNFryj;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
+ mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1647859557; i=@fujitsu.com;
+	bh=U3cIp0FOyQeh3Sb2vPBkOHg2mgWfa8c9mt8SKLZR3+o=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=jlZNFryjAdMpzHvCphVOrWE85RYTClC3wZvXpJhacUhIkbX9HkUmMsWGKnnW1m0at
+	 ryULMEKX/+I1ZHyNqUrjpzrfCOayu/2iRZPzPBKqciXhlUzl398niqgjtQeOxBkqsv
+	 6ktkDYFVB2BQHazJm3qAj+Zw72sWteYXuj9Mu3elsvbki5YVj3+GpLgVnQhkCBcttI
+	 RSWlPa7cduPNdqOosqy3ucgc1gxHQmWaiypU2qF8oAypwpYbSnp415Hbf1EP2IqPWD
+	 ylzUqzSDsWPvrmaji+ntC9OY3f/jCfzBNqsuwnb2mA9woXPvUn0MwwKpn+WxREhkjh
+	 AWRs8msQUJWKg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprJIsWRWlGSWpSXmKPExsViZ8MRopsabpF
+  kcK+Bw+Li4aXMDowe5zauYAxgjGLNzEvKr0hgzXjf3cdasEGk4v/OJuYGxg6hLkZODiGBmUwS
+  Uw9FdjFyAdl7GCV+/jnADpJgE1CTmH7rBiuILSKgL7F09h5mEJtZQEXixe8esBphAXeJlX/Os
+  XUxcnCwCKhKHH5nCRLmFXCSWP16DxOILSGgIDHl4XtmiLigxMmZT1ggxkhIHHzxghmiRlFi9u
+  VmFgi7QmLWrDamCYy8s5C0zELSsoCRaRWjdVJRZnpGSW5iZo6uoYGBrqGhqa6xqa6hhYleYpV
+  uol5qqW55anGJrpFeYnmxXmpxsV5xZW5yTopeXmrJJkZgiKUUK+/Ywdi26qfeIUZJDiYlUd46
+  I4skIb6k/JTKjMTijPii0pzU4kOMMhwcShK8eUFAOcGi1PTUirTMHGC4w6QlOHiURHh9QFp5i
+  wsSc4sz0yFSpxgVpcR5j4UCJQRAEhmleXBtsBi7xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUU
+  mYVyAMaApPZl4J3PRXQIuZgBbrs5qBLC5JREhJNTAl6iZdZ7LmPzrd9tPvv/7Vf6UzF9UUxcX
+  a/VKXZTPt/SGv9k/qk39m1LsEHxHVgJibXPuKcnpbUxLqOY59kQi0X7Wr/AefRM1Xiys3Xn5u
+  vtujEH64UVq1N+NDj55877648lgJrc6tk+fq/mYx+MGdlPphh3C0WlBbNHOq4K6VSz5H2u/98
+  mPty8y+70/ZXZ94/t3yqMCD7+bCaad3r5p//17qBae6HSYdj39nrnsi+fGp3ge+5xbrNDT+mW
+  078+LBpUmdG/auKJ9+fNWft5aFF1svfVH6+jl9qbzizdCaV1PvZi8+kKLyxU3lSWAt0xun9V7
+  pp29s4GRREz55uOmm33Ze55XGecpXek/6V31QYinOSDTUYi4qTgQARZdODywDAAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-5.tower-548.messagelabs.com!1647859556!168468!1
+X-Originating-IP: [62.60.8.84]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.85.5; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 15259 invoked from network); 21 Mar 2022 10:45:57 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-5.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 21 Mar 2022 10:45:57 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 22LAjnkZ006943
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Mar 2022 18:21:38 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 22L1LbG1016841
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Mar 2022 18:21:37 -0700 (PDT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Sun, 20 Mar 2022 18:21:37 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27; Sun, 20 Mar 2022 18:21:36 -0700
-Received: from ala-lpggp3.wrs.com (147.11.105.124) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Sun, 20 Mar 2022 18:21:36 -0700
-From: Randy MacLeod <Randy.MacLeod@windriver.com>
+ Mon, 21 Mar 2022 10:45:56 GMT
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Mon, 21 Mar 2022 10:45:48 +0000
+From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH 2/2] syslog-ng: update from 3.31.2 to 3.26.1
-Date: Sun, 20 Mar 2022 18:21:36 -0700
-Message-ID: <20220321012136.188270-2-Randy.MacLeod@windriver.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20220321012136.188270-1-Randy.MacLeod@windriver.com>
-References: <20220321012136.188270-1-Randy.MacLeod@windriver.com>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] openvpn: upgrade 2.5.5 -> 2.5.6
+Date: Mon, 21 Mar 2022 18:45:36 +0800
+Message-ID: <1647859537-30207-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Mar 2022 01:21:39 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Mar 2022 10:46:00 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96101
+ https://lists.openembedded.org/g/openembedded-devel/message/96102
 
-Drop two patches that are upstream now:
-   90459087f scl: fix wrong ownership during installation
-   c1054d3f6 python: s/python/python3/ shebang (exclude tests)
+Liense-Update : year updated to 2022.
 
-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+Changelog:
+=========
+ GitHub Actions: update script to same version as master
+ update copyright year to 2022
+ keyingmaterialexporter.c: include strings.h
+ remove unused sitnl.h file
+ sample-plugin: New plugin for testing multiple auth plugins
+ plug-ins: Disallow multiple deferred authentication plug-ins
+ doc/Makefile: rebuild rst docs if input files change
+ doc/options: clean up documentation for --proto and related options
+ fix Changes.rst errors in 2.5.3 and 2.5.5 announcement
+ Repair --inactive with 'bytes' argument larger 2Gbytes.
+ Fix --mtu-disc maybe|yes on Linux.
+ Preparing release 2.5.6
+ CI: github actions: keep "pdb" in artifacts
+ auth_token.c: add NULL initialization
+ vcpkg-ports/pkcs11-helper: bump to release 1.28
+ vcpkg-ports/pkcs11-helper: indicate OpenSSL EC support
+ msvc: cleanup
+ vcpkg: link lzo statically
+ vcpkg-ports/pkcs11-helper: adapt to new upstream URL
+ vcpkg-ports: add openssl 1.1.1n
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...-wrong-ownership-during-installation.patch | 30 -----------
- ...5-.py-s-python-python3-exclude-tests.patch | 53 -------------------
- ...yslog-ng_3.31.2.bb => syslog-ng_3.36.1.bb} |  5 +-
- 3 files changed, 1 insertion(+), 87 deletions(-)
- delete mode 100644 meta-oe/recipes-support/syslog-ng/files/0002-scl-fix-wrong-ownership-during-installation.patch
- delete mode 100644 meta-oe/recipes-support/syslog-ng/files/0005-.py-s-python-python3-exclude-tests.patch
- rename meta-oe/recipes-support/syslog-ng/{syslog-ng_3.31.2.bb => syslog-ng_3.36.1.bb} (95%)
+ .../openvpn/{openvpn_2.5.5.bb => openvpn_2.5.6.bb}            | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/openvpn/{openvpn_2.5.5.bb => openvpn_2.5.6.bb} (95%)
 
-diff --git a/meta-oe/recipes-support/syslog-ng/files/0002-scl-fix-wrong-ownership-during-installation.patch b/meta-oe/recipes-support/syslog-ng/files/0002-scl-fix-wrong-ownership-during-installation.patch
-deleted file mode 100644
-index b2683350b..000000000
---- a/meta-oe/recipes-support/syslog-ng/files/0002-scl-fix-wrong-ownership-during-installation.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From 7a8c458b7acf4732af74317f8a535077eb451b1e Mon Sep 17 00:00:00 2001
--From: Ming Liu <ming.liu@windriver.com>
--Date: Thu, 17 Jul 2014 05:37:08 -0400
--Subject: [PATCH] scl: fix wrong ownership during installation
--
--The ownership of build user is preserved for some target files, fixed it by
--adding --no-same-owner option to tar when extracting files.
--
--Signed-off-by: Ming Liu <ming.liu@windriver.com>
--
--Upstream-Status: Backport [9045908]
--
--Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
-----
-- scl/Makefile.am | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/scl/Makefile.am b/scl/Makefile.am
--index 940a467..3c19e50 100644
----- a/scl/Makefile.am
--+++ b/scl/Makefile.am
--@@ -51,7 +51,7 @@ scl-install-data-local:
-- 		fi; \
-- 	done
-- 	$(mkinstalldirs) $(DESTDIR)/$(scldir)
---	(cd $(srcdir)/scl; tar cf - $(SCL_SUBDIRS)) | (cd $(DESTDIR)/$(scldir) && tar xf -)
--+	(cd $(srcdir)/scl; tar cf - $(SCL_SUBDIRS)) | (cd $(DESTDIR)/$(scldir) && tar xf - --no-same-owner)
-- 	chmod -R u+rwX $(DESTDIR)/$(scldir)
-- 
-- scl-uninstall-local:
-diff --git a/meta-oe/recipes-support/syslog-ng/files/0005-.py-s-python-python3-exclude-tests.patch b/meta-oe/recipes-support/syslog-ng/files/0005-.py-s-python-python3-exclude-tests.patch
-deleted file mode 100644
-index a8be7d81d..000000000
---- a/meta-oe/recipes-support/syslog-ng/files/0005-.py-s-python-python3-exclude-tests.patch
-+++ /dev/null
-@@ -1,53 +0,0 @@
--From b64fcc414316592968f181c85447cfd01d1e461e Mon Sep 17 00:00:00 2001
--From: Yi Fan Yu <yifan.yu@windriver.com>
--Date: Thu, 15 Apr 2021 13:48:19 -0400
--Subject: [PATCH] *.py: s/python/python3/ (exclude tests)
--
--As stated by https://github.com/syslog-ng/syslog-ng/pull/3603
--python2 is EOL.
--
--Fix all shebangs calling python instead of python3
--except the tests.
--
--(correcting lib/merge-grammar.py)
--Signed-off-by: Joe Slater <joe.slater@windriver.com>
--(adding the rest)
--Upstream-Status: Submitted [https://github.com/syslog-ng/syslog-ng/pull/3647]
--
--Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
-----
-- contrib/scripts/config-graph-json-to-dot.py | 2 +-
-- lib/merge-grammar.py                        | 2 +-
-- modules/python/pylib/setup.py               | 2 +-
-- 3 files changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/contrib/scripts/config-graph-json-to-dot.py b/contrib/scripts/config-graph-json-to-dot.py
--index 4955c81..0351a9a 100755
----- a/contrib/scripts/config-graph-json-to-dot.py
--+++ b/contrib/scripts/config-graph-json-to-dot.py
--@@ -1,4 +1,4 @@
---#!/usr/bin/env python
--+#!/usr/bin/env python3
-- import json, sys
-- 
-- j = None
--diff --git a/lib/merge-grammar.py b/lib/merge-grammar.py
--index 7313ff5..459712d 100755
----- a/lib/merge-grammar.py
--+++ b/lib/merge-grammar.py
--@@ -1,4 +1,4 @@
---#!/usr/bin/env python
--+#!/usr/bin/env python3
-- #############################################################################
-- # Copyright (c) 2010-2017 Balabit
-- #
--diff --git a/modules/python/pylib/setup.py b/modules/python/pylib/setup.py
--index 23bb5cc..a2fa05e 100755
----- a/modules/python/pylib/setup.py
--+++ b/modules/python/pylib/setup.py
--@@ -1,4 +1,4 @@
---#!/usr/bin/env python
--+#!/usr/bin/env python3
-- #############################################################################
-- # Copyright (c) 2015-2016 Balabit
-- #
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.31.2.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.36.1.bb
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.5.5.bb b/meta-networking/recipes-support/openvpn/openvpn_2.5.6.bb
 similarity index 95%
-rename from meta-oe/recipes-support/syslog-ng/syslog-ng_3.31.2.bb
-rename to meta-oe/recipes-support/syslog-ng/syslog-ng_3.36.1.bb
-index 92b66e9ce..40bbfe495 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.31.2.bb
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.36.1.bb
-@@ -22,12 +22,9 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
-            file://volatiles.03_syslog-ng \
-            file://syslog-ng-tmp.conf \
-            file://syslog-ng.service-the-syslog-ng-service.patch \
--           file://0002-scl-fix-wrong-ownership-during-installation.patch \
--           file://0005-.py-s-python-python3-exclude-tests.patch \
- "
+rename from meta-networking/recipes-support/openvpn/openvpn_2.5.5.bb
+rename to meta-networking/recipes-support/openvpn/openvpn_2.5.6.bb
+index 3e725ec418..218e72b7a8 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.5.5.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.5.6.bb
+@@ -2,7 +2,7 @@ SUMMARY = "A full-featured SSL VPN solution via tun device."
+ HOMEPAGE = "https://openvpn.net/"
+ SECTION = "net"
+ LICENSE = "GPL-2.0-only"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=377a495e6f12b2a3adcee797e59540b8"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b76abd82c14ee01cc34c4ff5e3627b89"
+ DEPENDS = "lzo openssl iproute2 ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
  
--SRC_URI[md5sum] = "69ef4dc5628d5e603e9e4a1b937592f8"
--SRC_URI[sha256sum] = "2eeb8e0dbbcb556fdd4e50bc9f29bc8c66c9b153026f87caa7567bd3139c186a"
-+SRC_URI[sha256sum] = "90a25c9767fe749db50f118ddfc92ec71399763d2ecd5ad4f11ff5eea049e60b"
+ inherit autotools systemd update-rc.d
+@@ -14,7 +14,7 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
  
- UPSTREAM_CHECK_URI = "https://github.com/balabit/syslog-ng/releases"
+ UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
  
+-SRC_URI[sha256sum] = "7500df4734173bce2e95b5039079119dacaff121650b2b6ca76d2dc68bdac1c5"
++SRC_URI[sha256sum] = "333a7ef3d5b317968aca2c77bdc29aa7c6d6bb3316eb3f79743b59c53242ad3d"
+ 
+ # CVE-2020-7224 and CVE-2020-27569 are for Aviatrix OpenVPN client, not for openvpn.
+ CVE_CHECK_IGNORE += "CVE-2020-7224 CVE-2020-27569"
 -- 
-2.31.1
+2.25.1
 
 
