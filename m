@@ -1,957 +1,221 @@
-Return-Path: <sanakazisk19@gmail.com>
+Return-Path: <trevor.gamblin@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EA644C433F5
-	for <webhook@archiver.kernel.org>; Tue, 22 Mar 2022 12:03:57 +0000 (UTC)
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com
- [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.web10.8990.1647950636770870748
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1096C433F5
+	for <webhook@archiver.kernel.org>; Tue, 22 Mar 2022 15:00:38 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com
+ [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.11075.1647961238191695533
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Mar 2022 05:03:56 -0700
+ Tue, 22 Mar 2022 08:00:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=NChOTPId;
- spf=pass (domain: gmail.com, ip: 209.85.210.178,
- mailfrom: sanakazisk19@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id u22so6579271pfg.6
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Mar 2022 05:03:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id;
-        bh=nHHka5iNvlp4H7ZSCJnmffuOAS/FHiOwL0v+Nr/HF6k=;
-        b=NChOTPIdOeWo6BVU2Rt/hXMkbgZuy6w2WVs5Hv1LLQq6ovBXfoyOtcTNp7r59nIg9V
-         gXO23ydgR1e4xKQOwsqxsP/AY+IgCBivqsECp47l4iALWsv3zE/TxXXR+a5uuPtVxG7z
-         AFxblH3f9DzzYXpQfLjC7wJ+wwyW1dMZsRe0y/P+zxeVc4B2FjDa9DbWSRLqVhHMaHO6
-         wyhzxwnrnjI/3lTdeeSYtaAFVZuysyuC3hUF24NwlwYLGyOlqvvuNDt5rOQMuKOc45hY
-         5rF3v/8XHwe/BfW/H9nc4PRa7GY8EhbvUjl2dKdXGh88aeJEYZYJP7L0Qkr6kCNBK1yo
-         EQgw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=nHHka5iNvlp4H7ZSCJnmffuOAS/FHiOwL0v+Nr/HF6k=;
-        b=qEN/Uk7qyNtyAyZ4amEGxEHnpu4yl4dAZkLBRV//RGI56TF0J0sNCQlOf5wmAcQqmS
-         oWioKAcDvcGcvytTJzaEIRS4OB7xyBLndQVuLSkiMbFsok+E/RHzVGQYkJkGAMJiuXZL
-         l1EOr8QuK/O0Z4/vbNrhV5s3Uxh9BKuxUdpLzjyn0BGonu1P2xx0+CtMffXUXkSZCTE/
-         AKmjf7B6rrozSihD1vOxGw6PbNTRinV9OUsKMri07Xrv27UkK3/o7YUZ8v0NpO1erz0z
-         tVCqDH2a/CYXIvJe+6A147sV0D5WfX0dOSsjcbaTAwOzCqFv/bYIO+4N04Ji/pZZ4Qv4
-         on7Q==
-X-Gm-Message-State: AOAM532xK5rERxQCXTv3+E9EURB3cMYFfA358QlrcNYaVhY/lFF9glwG
-	3wA6NUmfFSWbWYelxVNPJ5+RZ1xDMz3bgQ==
-X-Google-Smtp-Source: 
- ABdhPJyxKo8hPU0f8z3fSZdtL/HoMXMOD1qH9TPGDmtLa3UTbd6QBFtSLgqdGXQpVPWJy4OYjxNZ7Q==
-X-Received: by 2002:a63:1243:0:b0:381:6713:241b with SMTP id
- 3-20020a631243000000b003816713241bmr21359856pgs.76.1647950634946;
-        Tue, 22 Mar 2022 05:03:54 -0700 (PDT)
-Received: from localhost.localdomain ([103.115.128.22])
-        by smtp.gmail.com with ESMTPSA id
- j18-20020a056a00235200b004faabd8d2f2sm6034779pfj.192.2022.03.22.05.03.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Mar 2022 05:03:54 -0700 (PDT)
-From: Sana Kazi <sanakazisk19@gmail.com>
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=gCaSY79z;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
+ invalid domain name (domain: windriver.com, ip: 205.220.178.238,
+ mailfrom: prvs=0080b8e7e1=trevor.gamblin@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id
+ 22MDUUf7028067
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 22 Mar 2022 15:00:33 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+ h=from : to :
+ subject : date : message-id : content-transfer-encoding : content-type :
+ mime-version; s=PPS06212021;
+ bh=o5BmN86E3kchQMEbxwLaWzNwdxGiD4EYFQz+//8EOT0=;
+ b=gCaSY79zFPVsp0cnVRgp6NpNDe38WoPinGopijM7SREdCOzLlw+oAyMd3WiAyKPbCH9N
+ dhF9naqOz1+lU65TYDGKQLdx06+/dqQMnkLSjcSkZpCMFtd/SCQxQmq3u2tAPVf5ubSX
+ NEfBN5E0V99/TtDOjX1+utNCANfKxBfVq22rYlEko6AG2kD3JEU3rTYb2tXIighYeNWm
+ cwFgTZ7OL96puntn7XfsIzlZnCylAR89YZd76RpoJAoLVL/C2WLS2n9AGtlMgZm5BNxd
+ dGQxnUZ2mJsHAcc5AqvH1c/1xLyT/GrxWpLdW+iUmwk9NTIWZKjF0R7JJAMM5m61i+4v lg==
+Received: from nam04-bn8-obe.outbound.protection.outlook.com
+ (mail-bn8nam08lp2047.outbound.protection.outlook.com [104.47.74.47])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ew4d02k1e-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 22 Mar 2022 15:00:32 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=fJmTFx0erLIuxxK/iekTMYsBxcVnjUzGIzd0kVykA13rSY2mDY7Tqh3iQrSmvsWKjgRyh2pzOo6xm2NHp0o5EFoh5hXom2ZXj0jy1pgp7AlbD44CGiaMkhAmYS4mBU4HNsR9n1exPByec7WPRwd59iA9b5A1Vw1+cny47+AJiWzslvOlGb8WIIhGODjgey8wmurEYgxlmRiPxZQN+qo01DtvkBs/bz7CN9HcXPQDa6PS7V6lPcouOsrok0JJX2GN1l78183/L+MdIQ3WDj533+kkXNvpeDsB7+vqs0I4hyBiVt8CtFhNq8YyVpNVAJ2n7rqnFtfcYwvlgYia0bmshA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=o5BmN86E3kchQMEbxwLaWzNwdxGiD4EYFQz+//8EOT0=;
+ b=SkUuuWQKx57J1c5vZHvT572BfH7tbW3WXDGFhNfQ9Spr7p6lK99OOskEIaX2z/sPb4netGyKmQcEVMHXkrUhuFxleORCVdwPpTmn7ZDbI4fxVk8FpGt4zcxXrNOcZVIAw2UJl+7x+gaueuWoFaNK29vpZn4LKH9dmeeBNXI/NevePzI3PB3rYWygpsRF0yU70pLD1HV8bzmm95ysH3h3HXKOQotoV04kIJUwykwmlo8PtIRYHor/gmDz076T4J8gD2Jfv8HQPZMJFoxrcOVZgHXVdQn4v55FepIaPGVwf7v0hM9MBSo4pcUG8AR+gQTX9B9FEgcuYA+N71/9r313JQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
+ by BY5PR11MB3878.namprd11.prod.outlook.com (2603:10b6:a03:182::31) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5081.15; Tue, 22 Mar
+ 2022 15:00:26 +0000
+Received: from BY5PR11MB3909.namprd11.prod.outlook.com
+ ([fe80::c1c7:209:c28f:67dc]) by BY5PR11MB3909.namprd11.prod.outlook.com
+ ([fe80::c1c7:209:c28f:67dc%3]) with mapi id 15.20.5081.023; Tue, 22 Mar 2022
+ 15:00:26 +0000
+From: Trevor Gamblin <trevor.gamblin@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: ranjitsinh.rathod@kpit.com,
-	Sana Kazi <sanakazisk19@gmail.com>
-Subject: [meta-oe][dunfell][PATCH] openjpeg: Fix multiple CVE
-Date: Tue, 22 Mar 2022 17:33:24 +0530
-Message-Id: <20220322120324.25032-1-sanakazisk19@gmail.com>
-X-Mailer: git-send-email 2.17.1
+Subject: [meta-networking][PATCH] nftables: upgrade v1.0.0 -> v1.0.2
+Date: Tue, 22 Mar 2022 11:00:10 -0400
+Message-Id: <20220322150010.32030-1-trevor.gamblin@windriver.com>
+X-Mailer: git-send-email 2.33.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: YQBPR0101CA0170.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:c01:f::13) To BY5PR11MB3909.namprd11.prod.outlook.com
+ (2603:10b6:a03:191::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 625623fd-54ac-4676-cb47-08da0c14b2d2
+X-MS-TrafficTypeDiagnostic: BY5PR11MB3878:EE_
+X-Microsoft-Antispam-PRVS: 
+	<BY5PR11MB38783BA311E5CC45F4114F799F179@BY5PR11MB3878.namprd11.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	hocxqdgaL62gpYFx/p6+OHx4bWT2oktlhhrEcPNXybgbAuxmtEGust6A4Kr8chgGOjLnHjfcBx73yMSRRERqVsQxbffj7kEk2qGEzaPHTygITOZOmpUkOR2bF9NmHWvWlKYly3fMKMMHSEhIn07dJWVCyq+E4ZhioVgSQuti3wlZexUHhcvVOekUqHwjswL60n4JeoDaE0s8V1etG0FDDollbLRCmEskgYI4MXzmUJ8RllohgZl4UZioCDwgQuz2uO/OWWFPuP0r7wULmsgikR/kaQIJrS3y2gn+lG0Qoct0RMrS159qiJzjRh+gQXxJNaRWqYWjeU/3B7EXmvKCeQWQVBlF0FUvij2SJWXNjuIBfCn09U9lO5Y9BKWaa2et+BV/exR+bUBYBZYJnYc/KlY1kHUCitJmUglW2JbGldpjUZ4wVfFi0wLIJZeOFy5koszSQ3pCKs9Bj88l/VEp/QYybdIzEVTL4kUt9rc5U2Jem2ynfxCMufwngjPRI2yBxFQGEwNXAbIsnrtPzjIxxpfxYYXbYdpKQgqzjc73+f5+4dA/e0zDqhmsmAi46VvTma/v56ojXYpjbBoBdIjJC6iQgZ1oLkH+UJpZ+j3ma9qYoYu4h64Zy0oTmCS4detP6IZ9UkbVY/s1tVbQeG/n/RBZkMLqcNV/WW+mavbGD9ZQexQ9flFq0KNsx9GD0h4Bvm/JiSQaXn+cNgegn0Gc7IssAr4a74ufsrP5OHk8EDWNSFR6bVORApsrHZMyRrHpDKeaVDg/gAg0XlQeetuSvQ5++wCS//QQuGWpJKdRwEQ=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(66476007)(66556008)(66946007)(8676002)(2906002)(38350700002)(83380400001)(36756003)(38100700002)(52116002)(6512007)(6506007)(508600001)(6666004)(6486002)(186003)(1076003)(6916009)(26005)(5660300002)(316002)(2616005)(86362001)(8936002)(44832011);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?/3whcvRIY0SnCQVRUK73kfOz8JfZxXzGI/zCZu7r8USaq0ZrMLXJk3RzJVsW?=
+ =?us-ascii?Q?DgAZbOxyBGrpYND/H+UMdnDrCCQbZSqtu701e9Mubhf9zO37z6t8lfqG8QF1?=
+ =?us-ascii?Q?FXThT5kg7FyLiQr0sd2NONg7DqwIIxuarXO8JHGh92YrDNhFzD8E2bE020Zq?=
+ =?us-ascii?Q?x9wt6Wb6ncrnenpgPZOL3TVpInM2KM678BqU6MnDP4AKzl+eB21DQihSnlNO?=
+ =?us-ascii?Q?A/RQAFR+lfWxe7vbw8ZWqey5fzco8Jl3DCqHoOAGdP3QgOq7N7gpaHLlX9XF?=
+ =?us-ascii?Q?4PzWbIySNjXzcJNJD9hjy4/NWN44Cu1drAs7FIQxsbOOA1jQZ18X4hkOCxTB?=
+ =?us-ascii?Q?v2gZC8w812fJa37oFQew7K+G3m3sq47dOSRel3G3emvYNDSDjiodfQHYJmzT?=
+ =?us-ascii?Q?9AG1cA6tLpK26QYMZCPPM+PrhtDv6M6iSMcYe+NJNuzJv2OLxhgmOPg66CEs?=
+ =?us-ascii?Q?ffi2qbZmbRYtowsRqbpViHjBlAMZpsHnfBghTdYfUQFvc8pXkm/0baOL0Ubh?=
+ =?us-ascii?Q?ZeQ64OaER1qPYHwfYyjNL2FvSV9dIwEetNz1cfABXSDWdJx5/2QMkxVnADQX?=
+ =?us-ascii?Q?t9t64VqYoRlAnwIRKQENoDkPboFFFK4Kz0z3tYJeDbbeRi69eMFXYNBYy6ii?=
+ =?us-ascii?Q?wsNY+AFA0Z+vxpbCp8kfnDRxvvq0atQbU4bByFd7B2UiXMFnSYxIwqws3g31?=
+ =?us-ascii?Q?eAbKaLqFOX1Mf4ms4WNmRqEPUySQmPph7W+VfB3SsRe76cz8fb6563r4THdd?=
+ =?us-ascii?Q?FMQxjAP4bDkA5Jx5JE3GszMvHfba5Ay2mIXGwAT494DluH1itYc4pMhF90A9?=
+ =?us-ascii?Q?AVCU7PW9pV/hb0FefaaT6TCKj5KBDqnw1KOEslYU/aLBpU1LktglQmXxcts6?=
+ =?us-ascii?Q?GifP2Yo1bflYC6dnS3Onp/orGZoJh6Tyx7DfL4PH7v+kBynDU0qKPXrV1fpT?=
+ =?us-ascii?Q?pMSAMcQOiF5qTpFswHXWworjyE2bp9C7rmPKCZK4J8MXJxJqi/xWGdqBnvM3?=
+ =?us-ascii?Q?lGrZFg9o5jREJG6uFrMAUiYdFrG0sYnopnadZiXeZ49P0FoYEJhelFpC7zxt?=
+ =?us-ascii?Q?YPKny5akSGOmH7epMNM45RFZFiEqzdy67mKKQY8St+lBJpZCZq3+FIqkfWZH?=
+ =?us-ascii?Q?S5AH3KaxpNmT7duYZl7s0k7e8n6fT9QCae/mNDQuO1fsxZeNw0HYPKk8v3sG?=
+ =?us-ascii?Q?YFuZoAXU1sjsWAZ1HEzV0q62F18LeAFzbEUepCJIbo0B7GSQHieDahdhTRv+?=
+ =?us-ascii?Q?Z/9373+es+1YvE/ya6kij2RmwbZDWAcswkNTBbqery83tFtq6YMskNNtdwhn?=
+ =?us-ascii?Q?dP8ZOB+W7z3k1IYGdLuoozdtABTeEmdJskoXiDib//nOAOb78rhhb+iGmoSI?=
+ =?us-ascii?Q?FHCchuJZVZqmughz9QLH7zD6UpqlCIFkmxMIK7DMRRA9eZ2HpimmWYcBMt/g?=
+ =?us-ascii?Q?83H/tSpym8wmj8l4MOk5WudpM7o/FzzkEHxfjU4sUYPqBiKdy3CeXg=3D=3D?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ 625623fd-54ac-4676-cb47-08da0c14b2d2
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Mar 2022 15:00:26.6634
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 
+ dGu4UGLH5EWi9gVzhTl01ac0yZoXajRccTfDRdXgd/vvX0ZMyLkxwp3nAv1Oqpe1xvHFkJKgSYaDHOTpoePqYcoJ2UWSx5A6Bk0ccUqkdkQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR11MB3878
+X-Proofpoint-GUID: 8vjfr91_ewaIcfaTiHv3Z-D3k0wtRMs1
+X-Proofpoint-ORIG-GUID: 8vjfr91_ewaIcfaTiHv3Z-D3k0wtRMs1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.850,Hydra:6.0.425,FMLib:17.11.64.514
+ definitions=2022-03-22_06,2022-03-22_01,2022-02-23_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 phishscore=0
+ mlxscore=0 malwarescore=0 mlxlogscore=999 spamscore=0 impostorscore=0
+ lowpriorityscore=0 suspectscore=0 priorityscore=1501 adultscore=0
+ clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2202240000 definitions=main-2203220086
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 22 Mar 2022 12:03:57 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 22 Mar 2022 15:00:38 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96140
+ https://lists.openembedded.org/g/openembedded-devel/message/96141
 
-Add patch to fix below CVE:
-CVE-2019-12973
-CVE-2020-15389
-CVE-2020-27814
-CVE-2020-27823
-CVE-2020-27824
-CVE-2020-27841
-CVE-2020-27842
-CVE-2020-27843
-CVE-2020-27845
+Add libmnl and libnftnl to the RDEPENDS for the recipe. Also add a
+patch to remove the "example" directory from the list of build
+subdirs in Makefile.am, since this was added in v1.0.2 but it is
+breaking the build for content that we don't need in the image.
 
-Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
-Signed-off-by: Sana Kazi <sanakazisk19@gmail.com>
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 ---
- .../openjpeg/openjpeg/CVE-2019-12973-1.patch  |  72 ++++++
- .../openjpeg/openjpeg/CVE-2019-12973-2.patch  |  86 +++++++
- .../openjpeg/openjpeg/CVE-2020-15389.patch    |  43 ++++
- .../openjpeg/openjpeg/CVE-2020-27814-1.patch  |  29 +++
- .../openjpeg/openjpeg/CVE-2020-27814-2.patch  |  27 ++
- .../openjpeg/openjpeg/CVE-2020-27814-3.patch  |  30 +++
- .../openjpeg/openjpeg/CVE-2020-27814-4.patch  |  27 ++
- .../openjpeg/openjpeg/CVE-2020-27823.patch    |  29 +++
- .../openjpeg/openjpeg/CVE-2020-27824.patch    |  24 ++
- .../openjpeg/openjpeg/CVE-2020-27841.patch    | 238 ++++++++++++++++++
- .../openjpeg/openjpeg/CVE-2020-27842.patch    |  31 +++
- .../openjpeg/openjpeg/CVE-2020-27843.patch    |  31 +++
- .../openjpeg/openjpeg/CVE-2020-27845.patch    |  74 ++++++
- .../openjpeg/openjpeg_2.3.1.bb                |  13 +
- 14 files changed, 754 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2019-12973-1.patch
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2019-12973-2.patch
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-15389.patch
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27814-1.patch
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27814-2.patch
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27814-3.patch
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27814-4.patch
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27823.patch
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27824.patch
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27841.patch
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27842.patch
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27843.patch
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27845.patch
+ ...e.am-do-not-build-examples-directory.patch | 34 +++++++++++++++++++
+ .../{nftables_1.0.1.bb => nftables_1.0.2.bb}  |  8 +++--
+ 2 files changed, 40 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-filter/nftables/nftables/0001-Makefile.am-do-not-build-examples-directory.patch
+ rename meta-networking/recipes-filter/nftables/{nftables_1.0.1.bb => nftables_1.0.2.bb} (85%)
 
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2019-12973-1.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2019-12973-1.patch
+diff --git a/meta-networking/recipes-filter/nftables/nftables/0001-Makefile.am-do-not-build-examples-directory.patch b/meta-networking/recipes-filter/nftables/nftables/0001-Makefile.am-do-not-build-examples-directory.patch
 new file mode 100644
-index 0000000000..98988e686e
+index 000000000..da568900c
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2019-12973-1.patch
-@@ -0,0 +1,72 @@
-+From 21399f6b7d318fcdf4406d5e88723c4922202aa3 Mon Sep 17 00:00:00 2001
-+From: Young Xiao <YangX92@hotmail.com>
-+Date: Sat, 16 Mar 2019 19:57:27 +0800
-+Subject: [PATCH] convertbmp: detect invalid file dimensions early
++++ b/meta-networking/recipes-filter/nftables/nftables/0001-Makefile.am-do-not-build-examples-directory.patch
+@@ -0,0 +1,34 @@
++From 4a0a013647054994e089a024b07d76b25af6ab76 Mon Sep 17 00:00:00 2001
++From: Trevor Gamblin <trevor.gamblin@windriver.com>
++Date: Tue, 22 Mar 2022 10:11:10 -0400
++Subject: [PATCH] Makefile.am: do not build examples directory
 +
-+width/length dimensions read from bmp headers are not necessarily
-+valid. For instance they may have been maliciously set to very large
-+values with the intention to cause DoS (large memory allocation, stack
-+overflow). In these cases we want to detect the invalid size as early
-+as possible.
++v1.0.2 added the "examples" subdir in Makefile.am, but the contents of
++this directory do "#include <nftables/libnftables.h>", which is breaking
++the build. Since we don't need the content in that directory, patch it
++locally to prevent it from being built.
 +
-+This commit introduces a counter which verifies that the number of
-+written bytes corresponds to the advertized width/length.
++Upstream-Status: Inappropriate (embedded-specific)
 +
-+See commit 8ee335227bbc for details.
-+
-+Signed-off-by: Young Xiao <YangX92@hotmail.com>
-+
-+Upstream-Status: Backport [https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/openjpeg2/2.3.1-1ubuntu4.20.04.1/openjpeg2_2.3.1-1ubuntu4.20.04.1.debian.tar.xz]
-+CVE: CVE-2019-12973
-+Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
++Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 +---
-+ src/bin/jp2/convertbmp.c | 10 ++++++++--
-+ 1 file changed, 8 insertions(+), 2 deletions(-)
++ Makefile.am | 3 +--
++ 1 file changed, 1 insertion(+), 2 deletions(-)
 +
-+diff --git a/src/bin/jp2/convertbmp.c b/src/bin/jp2/convertbmp.c
-+index 0af52f816..ec34f535b 100644
-+--- a/src/bin/jp2/convertbmp.c
-++++ b/src/bin/jp2/convertbmp.c
-+@@ -622,13 +622,13 @@ static OPJ_BOOL bmp_read_rle8_data(FILE* IN, OPJ_UINT8* pData,
-+ static OPJ_BOOL bmp_read_rle4_data(FILE* IN, OPJ_UINT8* pData,
-+                                    OPJ_UINT32 stride, OPJ_UINT32 width, OPJ_UINT32 height)
-+ {
-+-    OPJ_UINT32 x, y;
-++    OPJ_UINT32 x, y, written;
-+     OPJ_UINT8 *pix;
-+     const OPJ_UINT8 *beyond;
-+ 
-+     beyond = pData + stride * height;
-+     pix = pData;
-+-    x = y = 0U;
-++    x = y = written = 0U;
-+     while (y < height) {
-+         int c = getc(IN);
-+         if (c == EOF) {
-+@@ -642,6 +642,7 @@ static OPJ_BOOL bmp_read_rle4_data(FILE* IN, OPJ_UINT8* pData,
-+             for (j = 0; (j < c) && (x < width) &&
-+                     ((OPJ_SIZE_T)pix < (OPJ_SIZE_T)beyond); j++, x++, pix++) {
-+                 *pix = (OPJ_UINT8)((j & 1) ? (c1 & 0x0fU) : ((c1 >> 4) & 0x0fU));
-++                written++;
-+             }
-+         } else { /* absolute mode */
-+             c = getc(IN);
-+@@ -671,6 +672,7 @@ static OPJ_BOOL bmp_read_rle4_data(FILE* IN, OPJ_UINT8* pData,
-+                         c1 = (OPJ_UINT8)getc(IN);
-+                     }
-+                     *pix = (OPJ_UINT8)((j & 1) ? (c1 & 0x0fU) : ((c1 >> 4) & 0x0fU));
-++                    written++;
-+                 }
-+                 if (((c & 3) == 1) || ((c & 3) == 2)) { /* skip padding byte */
-+                     getc(IN);
-+@@ -678,6 +680,10 @@ static OPJ_BOOL bmp_read_rle4_data(FILE* IN, OPJ_UINT8* pData,
-+             }
-+         }
-+     }  /* while(y < height) */
-++    if (written != width * height) {
-++        fprintf(stderr, "warning, image's actual size does not match advertized one\n");
-++        return OPJ_FALSE;
-++    }
-+     return OPJ_TRUE;
-+ }
-+ 
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2019-12973-2.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2019-12973-2.patch
-new file mode 100644
-index 0000000000..2177bfdbdb
---- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2019-12973-2.patch
-@@ -0,0 +1,86 @@
-+From 3aef207f90e937d4931daf6d411e092f76d82e66 Mon Sep 17 00:00:00 2001
-+From: Young Xiao <YangX92@hotmail.com>
-+Date: Sat, 16 Mar 2019 20:09:59 +0800
-+Subject: [PATCH] bmp_read_rle4_data(): avoid potential infinite loop
++diff --git a/Makefile.am b/Makefile.am
++index 72fb4e88..4a17424d 100644
++--- a/Makefile.am
+++++ b/Makefile.am
++@@ -3,8 +3,7 @@ ACLOCAL_AMFLAGS	= -I m4
++ SUBDIRS = 	src	\
++ 		include	\
++ 		files	\
++-		doc	\
++-		examples
+++		doc
++ if HAVE_PYTHON
++ SUBDIRS += py
++ endif
++-- 
++2.35.1
 +
-+Upstream-Status: Backport [https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/openjpeg2/2.3.1-1ubuntu4.20.04.1/openjpeg2_2.3.1-1ubuntu4.20.04.1.debian.tar.xz]
-+CVE: CVE-2019-12973
-+Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
-+---
-+ src/bin/jp2/convertbmp.c | 32 ++++++++++++++++++++++++++------
-+ 1 file changed, 26 insertions(+), 6 deletions(-)
+diff --git a/meta-networking/recipes-filter/nftables/nftables_1.0.1.bb b/meta-networking/recipes-filter/nftables/nftables_1.0.2.bb
+similarity index 85%
+rename from meta-networking/recipes-filter/nftables/nftables_1.0.1.bb
+rename to meta-networking/recipes-filter/nftables/nftables_1.0.2.bb
+index 2c378e8fd..1556b217f 100644
+--- a/meta-networking/recipes-filter/nftables/nftables_1.0.1.bb
++++ b/meta-networking/recipes-filter/nftables/nftables_1.0.2.bb
+@@ -6,11 +6,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d1a78fdd879a263a5e0b42d1fc565e79"
+ DEPENDS = "libmnl libnftnl bison-native \
+            ${@bb.utils.contains('PACKAGECONFIG', 'mini-gmp', '', 'gmp', d)}"
+ 
++RDEPENDS:${PN} = "libmnl libnftnl"
 +
-+diff --git a/src/bin/jp2/convertbmp.c b/src/bin/jp2/convertbmp.c
-+index ec34f535b..2fc4e9bc4 100644
-+--- a/src/bin/jp2/convertbmp.c
-++++ b/src/bin/jp2/convertbmp.c
-+@@ -632,12 +632,18 @@ static OPJ_BOOL bmp_read_rle4_data(FILE* IN, OPJ_UINT8* pData,
-+     while (y < height) {
-+         int c = getc(IN);
-+         if (c == EOF) {
-+-            break;
-++            return OPJ_FALSE;
-+         }
-+ 
-+         if (c) { /* encoded mode */
-+-            int j;
-+-            OPJ_UINT8 c1 = (OPJ_UINT8)getc(IN);
-++            int j, c1_int;
-++            OPJ_UINT8 c1;
-++
-++            c1_int = getc(IN);
-++            if (c1_int == EOF) {
-++                return OPJ_FALSE;
-++            }
-++            c1 = (OPJ_UINT8)c1_int;
-+ 
-+             for (j = 0; (j < c) && (x < width) &&
-+                     ((OPJ_SIZE_T)pix < (OPJ_SIZE_T)beyond); j++, x++, pix++) {
-+@@ -647,7 +653,7 @@ static OPJ_BOOL bmp_read_rle4_data(FILE* IN, OPJ_UINT8* pData,
-+         } else { /* absolute mode */
-+             c = getc(IN);
-+             if (c == EOF) {
-+-                break;
-++                return OPJ_FALSE;
-+             }
-+ 
-+             if (c == 0x00) { /* EOL */
-+@@ -658,8 +664,14 @@ static OPJ_BOOL bmp_read_rle4_data(FILE* IN, OPJ_UINT8* pData,
-+                 break;
-+             } else if (c == 0x02) { /* MOVE by dxdy */
-+                 c = getc(IN);
-++                if (c == EOF) {
-++                    return OPJ_FALSE;
-++                }
-+                 x += (OPJ_UINT32)c;
-+                 c = getc(IN);
-++                if (c == EOF) {
-++                    return OPJ_FALSE;
-++                }
-+                 y += (OPJ_UINT32)c;
-+                 pix = pData + y * stride + x;
-+             } else { /* 03 .. 255 : absolute mode */
-+@@ -669,13 +681,21 @@ static OPJ_BOOL bmp_read_rle4_data(FILE* IN, OPJ_UINT8* pData,
-+                 for (j = 0; (j < c) && (x < width) &&
-+                         ((OPJ_SIZE_T)pix < (OPJ_SIZE_T)beyond); j++, x++, pix++) {
-+                     if ((j & 1) == 0) {
-+-                        c1 = (OPJ_UINT8)getc(IN);
-++                        int c1_int;
-++                        c1_int = getc(IN);
-++                        if (c1_int == EOF) {
-++                            return OPJ_FALSE;
-++                        }
-++                        c1 = (OPJ_UINT8)c1_int;
-+                     }
-+                     *pix = (OPJ_UINT8)((j & 1) ? (c1 & 0x0fU) : ((c1 >> 4) & 0x0fU));
-+                     written++;
-+                 }
-+                 if (((c & 3) == 1) || ((c & 3) == 2)) { /* skip padding byte */
-+-                    getc(IN);
-++                    c = getc(IN);
-++                    if (c == EOF) {
-++                        return OPJ_FALSE;
-++                    }
-+                 }
-+             }
-+         }
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-15389.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-15389.patch
-new file mode 100644
-index 0000000000..f22e153b52
---- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-15389.patch
-@@ -0,0 +1,43 @@
-+From e8e258ab049240c2dd1f1051b4e773b21e2d3dc0 Mon Sep 17 00:00:00 2001
-+From: Even Rouault <even.rouault@spatialys.com>
-+Date: Sun, 28 Jun 2020 14:19:59 +0200
-+Subject: [PATCH] opj_decompress: fix double-free on input directory with mix
-+ of valid and invalid images (CVE-2020-15389)
-+
-+Fixes #1261
-+
-+Credits to @Ruia-ruia for reporting and analysis.
-+
-+Upstream-Status: Backport [https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/openjpeg2/2.3.1-1ubuntu4.20.04.1/openjpeg2_2.3.1-1ubuntu4.20.04.1.debian.tar.xz]
-+CVE: CVE-2020-15389
-+Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
-+---
-+ src/bin/jp2/opj_decompress.c | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
-+
-+diff --git a/src/bin/jp2/opj_decompress.c b/src/bin/jp2/opj_decompress.c
-+index 7eeb0952f..2634907f0 100644
-+--- a/src/bin/jp2/opj_decompress.c
-++++ b/src/bin/jp2/opj_decompress.c
-+@@ -1316,10 +1316,6 @@ static opj_image_t* upsample_image_components(opj_image_t* original)
-+ int main(int argc, char **argv)
-+ {
-+     opj_decompress_parameters parameters;           /* decompression parameters */
-+-    opj_image_t* image = NULL;
-+-    opj_stream_t *l_stream = NULL;              /* Stream */
-+-    opj_codec_t* l_codec = NULL;                /* Handle to a decompressor */
-+-    opj_codestream_index_t* cstr_index = NULL;
-+ 
-+     OPJ_INT32 num_images, imageno;
-+     img_fol_t img_fol;
-+@@ -1393,6 +1389,10 @@ int main(int argc, char **argv)
-+ 
-+     /*Decoding image one by one*/
-+     for (imageno = 0; imageno < num_images ; imageno++)  {
-++        opj_image_t* image = NULL;
-++        opj_stream_t *l_stream = NULL;              /* Stream */
-++        opj_codec_t* l_codec = NULL;                /* Handle to a decompressor */
-++        opj_codestream_index_t* cstr_index = NULL;
-+ 
-+         if (!parameters.quiet) {
-+             fprintf(stderr, "\n");
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27814-1.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27814-1.patch
-new file mode 100644
-index 0000000000..da06db6db7
---- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27814-1.patch
-@@ -0,0 +1,29 @@
-+From eaa098b59b346cb88e4d10d505061f669d7134fc Mon Sep 17 00:00:00 2001
-+From: Even Rouault <even.rouault@spatialys.com>
-+Date: Mon, 23 Nov 2020 13:49:05 +0100
-+Subject: [PATCH] Encoder: grow buffer size in
-+ opj_tcd_code_block_enc_allocate_data() to avoid write heap buffer overflow in
-+ opj_mqc_flush (fixes #1283)
-+
-+Upstream-Status: Backport [https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/openjpeg2/2.3.1-1ubuntu4.20.04.1/openjpeg2_2.3.1-1ubuntu4.20.04.1.debian.tar.xz]
-+CVE: CVE-2020-27814
-+Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
-+---
-+ src/lib/openjp2/tcd.c | 4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
-+
-+--- a/src/lib/openjp2/tcd.c
-++++ b/src/lib/openjp2/tcd.c
-+@@ -1235,9 +1235,11 @@ static OPJ_BOOL opj_tcd_code_block_enc_a
-+ 
-+     /* +1 is needed for https://github.com/uclouvain/openjpeg/issues/835 */
-+     /* and actually +2 required for https://github.com/uclouvain/openjpeg/issues/982 */
-++    /* and +7 for https://github.com/uclouvain/openjpeg/issues/1283 (-M 3) */
-++    /* and +26 for https://github.com/uclouvain/openjpeg/issues/1283 (-M 7) */
-+     /* TODO: is there a theoretical upper-bound for the compressed code */
-+     /* block size ? */
-+-    l_data_size = 2 + (OPJ_UINT32)((p_code_block->x1 - p_code_block->x0) *
-++    l_data_size = 26 + (OPJ_UINT32)((p_code_block->x1 - p_code_block->x0) *
-+                                    (p_code_block->y1 - p_code_block->y0) * (OPJ_INT32)sizeof(OPJ_UINT32));
-+ 
-+     if (l_data_size > p_code_block->data_size) {
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27814-2.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27814-2.patch
-new file mode 100644
-index 0000000000..9c5894c720
---- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27814-2.patch
-@@ -0,0 +1,27 @@
-+From 15cf3d95814dc931ca0ecb132f81cb152e051bae Mon Sep 17 00:00:00 2001
-+From: Even Rouault <even.rouault@spatialys.com>
-+Date: Mon, 23 Nov 2020 18:14:02 +0100
-+Subject: [PATCH] Encoder: grow again buffer size in
-+ opj_tcd_code_block_enc_allocate_data() (fixes #1283)
-+
-+Upstream-Status: Backport [https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/openjpeg2/2.3.1-1ubuntu4.20.04.1/openjpeg2_2.3.1-1ubuntu4.20.04.1.debian.tar.xz]
-+CVE: CVE-2020-27814
-+Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
-+---
-+ src/lib/openjp2/tcd.c | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+--- a/src/lib/openjp2/tcd.c
-++++ b/src/lib/openjp2/tcd.c
-+@@ -1237,9 +1237,10 @@ static OPJ_BOOL opj_tcd_code_block_enc_a
-+     /* and actually +2 required for https://github.com/uclouvain/openjpeg/issues/982 */
-+     /* and +7 for https://github.com/uclouvain/openjpeg/issues/1283 (-M 3) */
-+     /* and +26 for https://github.com/uclouvain/openjpeg/issues/1283 (-M 7) */
-++    /* and +28 for https://github.com/uclouvain/openjpeg/issues/1283 (-M 44) */
-+     /* TODO: is there a theoretical upper-bound for the compressed code */
-+     /* block size ? */
-+-    l_data_size = 26 + (OPJ_UINT32)((p_code_block->x1 - p_code_block->x0) *
-++    l_data_size = 28 + (OPJ_UINT32)((p_code_block->x1 - p_code_block->x0) *
-+                                    (p_code_block->y1 - p_code_block->y0) * (OPJ_INT32)sizeof(OPJ_UINT32));
-+ 
-+     if (l_data_size > p_code_block->data_size) {
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27814-3.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27814-3.patch
-new file mode 100644
-index 0000000000..1eb030af46
---- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27814-3.patch
-@@ -0,0 +1,30 @@
-+From 649298dcf84b2f20cfe458d887c1591db47372a6 Mon Sep 17 00:00:00 2001
-+From: yuan <zodf0055980@gmail.com>
-+Date: Wed, 25 Nov 2020 20:41:39 +0800
-+Subject: [PATCH] Encoder: grow again buffer size in
-+ opj_tcd_code_block_enc_allocate_data() (fixes #1283)
-+
-+Upstream-Status: Backport [https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/openjpeg2/2.3.1-1ubuntu4.20.04.1/openjpeg2_2.3.1-1ubuntu4.20.04.1.debian.tar.xz]
-+CVE: CVE-2020-27814
-+Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
-+---
-+ src/lib/openjp2/tcd.c | 6 ++++--
-+ 1 file changed, 4 insertions(+), 2 deletions(-)
-+
-+--- a/src/lib/openjp2/tcd.c
-++++ b/src/lib/openjp2/tcd.c
-+@@ -1238,10 +1238,12 @@ static OPJ_BOOL opj_tcd_code_block_enc_a
-+     /* and +7 for https://github.com/uclouvain/openjpeg/issues/1283 (-M 3) */
-+     /* and +26 for https://github.com/uclouvain/openjpeg/issues/1283 (-M 7) */
-+     /* and +28 for https://github.com/uclouvain/openjpeg/issues/1283 (-M 44) */
-++    /* and +33 for https://github.com/uclouvain/openjpeg/issues/1283 (-M 4) */
-++    /* and +63 for https://github.com/uclouvain/openjpeg/issues/1283 (-M 4 -IMF 2K) */
-+     /* TODO: is there a theoretical upper-bound for the compressed code */
-+     /* block size ? */
-+-    l_data_size = 28 + (OPJ_UINT32)((p_code_block->x1 - p_code_block->x0) *
-+-                                   (p_code_block->y1 - p_code_block->y0) * (OPJ_INT32)sizeof(OPJ_UINT32));
-++    l_data_size = 63 + (OPJ_UINT32)((p_code_block->x1 - p_code_block->x0) *
-++                                    (p_code_block->y1 - p_code_block->y0) * (OPJ_INT32)sizeof(OPJ_UINT32));
-+ 
-+     if (l_data_size > p_code_block->data_size) {
-+         if (p_code_block->data) {
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27814-4.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27814-4.patch
-new file mode 100644
-index 0000000000..1c267c313b
---- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27814-4.patch
-@@ -0,0 +1,27 @@
-+From 4ce7d285a55d29b79880d0566d4b010fe1907aa9 Mon Sep 17 00:00:00 2001
-+From: yuan <zodf0055980@gmail.com>
-+Date: Fri, 4 Dec 2020 19:00:22 +0800
-+Subject: [PATCH] Encoder: grow again buffer size in
-+ opj_tcd_code_block_enc_allocate_data() (fixes #1283)
-+
-+Upstream-Status: Backport [https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/openjpeg2/2.3.1-1ubuntu4.20.04.1/openjpeg2_2.3.1-1ubuntu4.20.04.1.debian.tar.xz]
-+CVE: CVE-2020-27814
-+Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
-+---
-+ src/lib/openjp2/tcd.c | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+--- a/src/lib/openjp2/tcd.c
-++++ b/src/lib/openjp2/tcd.c
-+@@ -1240,9 +1240,10 @@ static OPJ_BOOL opj_tcd_code_block_enc_a
-+     /* and +28 for https://github.com/uclouvain/openjpeg/issues/1283 (-M 44) */
-+     /* and +33 for https://github.com/uclouvain/openjpeg/issues/1283 (-M 4) */
-+     /* and +63 for https://github.com/uclouvain/openjpeg/issues/1283 (-M 4 -IMF 2K) */
-++    /* and +74 for https://github.com/uclouvain/openjpeg/issues/1283 (-M 4 -n 8 -s 7,7 -I) */
-+     /* TODO: is there a theoretical upper-bound for the compressed code */
-+     /* block size ? */
-+-    l_data_size = 63 + (OPJ_UINT32)((p_code_block->x1 - p_code_block->x0) *
-++    l_data_size = 74 + (OPJ_UINT32)((p_code_block->x1 - p_code_block->x0) *
-+                                     (p_code_block->y1 - p_code_block->y0) * (OPJ_INT32)sizeof(OPJ_UINT32));
-+ 
-+     if (l_data_size > p_code_block->data_size) {
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27823.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27823.patch
-new file mode 100644
-index 0000000000..e4373d0d32
---- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27823.patch
-@@ -0,0 +1,29 @@
-+From b2072402b7e14d22bba6fb8cde2a1e9996e9a919 Mon Sep 17 00:00:00 2001
-+From: Even Rouault <even.rouault@spatialys.com>
-+Date: Mon, 30 Nov 2020 22:31:51 +0100
-+Subject: [PATCH] pngtoimage(): fix wrong computation of x1,y1 if -d option is
-+ used, that would result in a heap buffer overflow (fixes #1284)
-+
-+Upstream-Status: Backport [https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/openjpeg2/2.3.1-1ubuntu4.20.04.1/openjpeg2_2.3.1-1ubuntu4.20.04.1.debian.tar.xz]
-+CVE: CVE-2020-27823
-+Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
-+---
-+ src/bin/jp2/convertpng.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/bin/jp2/convertpng.c b/src/bin/jp2/convertpng.c
-+index 328c91beb..00f596e27 100644
-+--- a/src/bin/jp2/convertpng.c
-++++ b/src/bin/jp2/convertpng.c
-+@@ -223,9 +223,9 @@ opj_image_t *pngtoimage(const char *read_idf, opj_cparameters_t * params)
-+     image->x0 = (OPJ_UINT32)params->image_offset_x0;
-+     image->y0 = (OPJ_UINT32)params->image_offset_y0;
-+     image->x1 = (OPJ_UINT32)(image->x0 + (width  - 1) * (OPJ_UINT32)
-+-                             params->subsampling_dx + 1 + image->x0);
-++                             params->subsampling_dx + 1);
-+     image->y1 = (OPJ_UINT32)(image->y0 + (height - 1) * (OPJ_UINT32)
-+-                             params->subsampling_dy + 1 + image->y0);
-++                             params->subsampling_dy + 1);
-+ 
-+     row32s = (OPJ_INT32 *)malloc((size_t)width * nr_comp * sizeof(OPJ_INT32));
-+     if (row32s == NULL) {
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27824.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27824.patch
-new file mode 100644
-index 0000000000..5f3deb4dda
---- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27824.patch
-@@ -0,0 +1,24 @@
-+From 6daf5f3e1ec6eff03b7982889874a3de6617db8d Mon Sep 17 00:00:00 2001
-+From: Even Rouault <even.rouault@spatialys.com>
-+Date: Mon, 30 Nov 2020 22:37:07 +0100
-+Subject: [PATCH] Encoder: avoid global buffer overflow on irreversible
-+ conversion when too many decomposition levels are specified (fixes #1286)
-+
-+Upstream-Status: Backport [https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/openjpeg2/2.3.1-1ubuntu4.20.04.1/openjpeg2_2.3.1-1ubuntu4.20.04.1.debian.tar.xz]
-+CVE: CVE-2020-27824
-+Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
-+---
-+ src/lib/openjp2/dwt.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+--- a/src/lib/openjp2/dwt.c
-++++ b/src/lib/openjp2/dwt.c
-+@@ -1293,7 +1293,7 @@ void opj_dwt_calc_explicit_stepsizes(opj
-+         if (tccp->qntsty == J2K_CCP_QNTSTY_NOQNT) {
-+             stepsize = 1.0;
-+         } else {
-+-            OPJ_FLOAT64 norm = opj_dwt_norms_real[orient][level];
-++            OPJ_FLOAT64 norm = opj_dwt_getnorm_real(level, orient);
-+             stepsize = (1 << (gain)) / norm;
-+         }
-+         opj_dwt_encode_stepsize((OPJ_INT32) floor(stepsize * 8192.0),
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27841.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27841.patch
-new file mode 100644
-index 0000000000..db6d12dc2c
---- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27841.patch
-@@ -0,0 +1,238 @@
-+From 00383e162ae2f8fc951f5745bf1011771acb8dce Mon Sep 17 00:00:00 2001
-+From: Even Rouault <even.rouault@spatialys.com>
-+Date: Wed, 2 Dec 2020 14:02:17 +0100
-+Subject: [PATCH] pi.c: avoid out of bounds access with POC (refs
-+ https://github.com/uclouvain/openjpeg/issues/1293#issuecomment-737122836)
-+
-+Upstream-Status: Backport [https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/openjpeg2/2.3.1-1ubuntu4.20.04.1/openjpeg2_2.3.1-1ubuntu4.20.04.1.debian.tar.xz]
-+CVE: CVE-2020-27841
-+Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
-+---
-+ src/lib/openjp2/pi.c | 49 +++++++++++++++++++++++++++++---------------
-+ src/lib/openjp2/pi.h | 10 +++++++--
-+ src/lib/openjp2/t2.c |  4 ++--
-+ 3 files changed, 42 insertions(+), 21 deletions(-)
-+
-+--- a/src/lib/openjp2/pi.c
-++++ b/src/lib/openjp2/pi.c
-+@@ -192,10 +192,12 @@ static void opj_get_all_encoding_paramet
-+  * @param   p_image     the image used to initialize the packet iterator (in fact only the number of components is relevant.
-+  * @param   p_cp        the coding parameters.
-+  * @param   tileno  the index of the tile from which creating the packet iterator.
-++ * @param   manager Event manager
-+  */
-+ static opj_pi_iterator_t * opj_pi_create(const opj_image_t *p_image,
-+         const opj_cp_t *p_cp,
-+-        OPJ_UINT32 tileno);
-++        OPJ_UINT32 tileno,
-++        opj_event_mgr_t* manager);
-+ /**
-+  * FIXME DOC
-+  */
-+@@ -230,12 +232,6 @@ static OPJ_BOOL opj_pi_check_next_level(
-+ ==========================================================
-+ */
-+ 
-+-static void opj_pi_emit_error(opj_pi_iterator_t * pi, const char* msg)
-+-{
-+-    (void)pi;
-+-    (void)msg;
-+-}
-+-
-+ static OPJ_BOOL opj_pi_next_lrcp(opj_pi_iterator_t * pi)
-+ {
-+     opj_pi_comp_t *comp = NULL;
-+@@ -272,7 +268,7 @@ static OPJ_BOOL opj_pi_next_lrcp(opj_pi_
-+                     /* include should be resized when a POC arises, or */
-+                     /* the POC should be rejected */
-+                     if (index >= pi->include_size) {
-+-                        opj_pi_emit_error(pi, "Invalid access to pi->include");
-++                        opj_event_msg(pi->manager, EVT_ERROR, "Invalid access to pi->include");
-+                         return OPJ_FALSE;
-+                     }
-+                     if (!pi->include[index]) {
-+@@ -318,7 +314,7 @@ static OPJ_BOOL opj_pi_next_rlcp(opj_pi_
-+                     index = pi->layno * pi->step_l + pi->resno * pi->step_r + pi->compno *
-+                             pi->step_c + pi->precno * pi->step_p;
-+                     if (index >= pi->include_size) {
-+-                        opj_pi_emit_error(pi, "Invalid access to pi->include");
-++                        opj_event_msg(pi->manager, EVT_ERROR, "Invalid access to pi->include");
-+                         return OPJ_FALSE;
-+                     }
-+                     if (!pi->include[index]) {
-+@@ -449,7 +445,7 @@ static OPJ_BOOL opj_pi_next_rpcl(opj_pi_
-+                         index = pi->layno * pi->step_l + pi->resno * pi->step_r + pi->compno *
-+                                 pi->step_c + pi->precno * pi->step_p;
-+                         if (index >= pi->include_size) {
-+-                            opj_pi_emit_error(pi, "Invalid access to pi->include");
-++                            opj_event_msg(pi->manager, EVT_ERROR, "Invalid access to pi->include");
-+                             return OPJ_FALSE;
-+                         }
-+                         if (!pi->include[index]) {
-+@@ -473,6 +469,13 @@ static OPJ_BOOL opj_pi_next_pcrl(opj_pi_
-+     opj_pi_resolution_t *res = NULL;
-+     OPJ_UINT32 index = 0;
-+ 
-++    if (pi->poc.compno0 >= pi->numcomps ||
-++            pi->poc.compno1 >= pi->numcomps + 1) {
-++        opj_event_msg(pi->manager, EVT_ERROR,
-++                      "opj_pi_next_pcrl(): invalid compno0/compno1");
-++        return OPJ_FALSE;
-++    }
-++
-+     if (!pi->first) {
-+         comp = &pi->comps[pi->compno];
-+         goto LABEL_SKIP;
-+@@ -580,7 +583,7 @@ static OPJ_BOOL opj_pi_next_pcrl(opj_pi_
-+                         index = pi->layno * pi->step_l + pi->resno * pi->step_r + pi->compno *
-+                                 pi->step_c + pi->precno * pi->step_p;
-+                         if (index >= pi->include_size) {
-+-                            opj_pi_emit_error(pi, "Invalid access to pi->include");
-++                            opj_event_msg(pi->manager, EVT_ERROR, "Invalid access to pi->include");
-+                             return OPJ_FALSE;
-+                         }
-+                         if (!pi->include[index]) {
-+@@ -604,6 +607,13 @@ static OPJ_BOOL opj_pi_next_cprl(opj_pi_
-+     opj_pi_resolution_t *res = NULL;
-+     OPJ_UINT32 index = 0;
-+ 
-++    if (pi->poc.compno0 >= pi->numcomps ||
-++            pi->poc.compno1 >= pi->numcomps + 1) {
-++        opj_event_msg(pi->manager, EVT_ERROR,
-++                      "opj_pi_next_cprl(): invalid compno0/compno1");
-++        return OPJ_FALSE;
-++    }
-++
-+     if (!pi->first) {
-+         comp = &pi->comps[pi->compno];
-+         goto LABEL_SKIP;
-+@@ -708,7 +718,7 @@ static OPJ_BOOL opj_pi_next_cprl(opj_pi_
-+                         index = pi->layno * pi->step_l + pi->resno * pi->step_r + pi->compno *
-+                                 pi->step_c + pi->precno * pi->step_p;
-+                         if (index >= pi->include_size) {
-+-                            opj_pi_emit_error(pi, "Invalid access to pi->include");
-++                            opj_event_msg(pi->manager, EVT_ERROR, "Invalid access to pi->include");
-+                             return OPJ_FALSE;
-+                         }
-+                         if (!pi->include[index]) {
-+@@ -981,7 +991,8 @@ static void opj_get_all_encoding_paramet
-+ 
-+ static opj_pi_iterator_t * opj_pi_create(const opj_image_t *image,
-+         const opj_cp_t *cp,
-+-        OPJ_UINT32 tileno)
-++        OPJ_UINT32 tileno,
-++        opj_event_mgr_t* manager)
-+ {
-+     /* loop*/
-+     OPJ_UINT32 pino, compno;
-+@@ -1015,6 +1026,8 @@ static opj_pi_iterator_t * opj_pi_create
-+     l_current_pi = l_pi;
-+     for (pino = 0; pino < l_poc_bound ; ++pino) {
-+ 
-++        l_current_pi->manager = manager;
-++
-+         l_current_pi->comps = (opj_pi_comp_t*) opj_calloc(image->numcomps,
-+                               sizeof(opj_pi_comp_t));
-+         if (! l_current_pi->comps) {
-+@@ -1352,7 +1365,8 @@ static OPJ_BOOL opj_pi_check_next_level(
-+ */
-+ opj_pi_iterator_t *opj_pi_create_decode(opj_image_t *p_image,
-+                                         opj_cp_t *p_cp,
-+-                                        OPJ_UINT32 p_tile_no)
-++                                        OPJ_UINT32 p_tile_no,
-++                                        opj_event_mgr_t* manager)
-+ {
-+     OPJ_UINT32 numcomps = p_image->numcomps;
-+ 
-+@@ -1407,7 +1421,7 @@ opj_pi_iterator_t *opj_pi_create_decode(
-+     }
-+ 
-+     /* memory allocation for pi */
-+-    l_pi = opj_pi_create(p_image, p_cp, p_tile_no);
-++    l_pi = opj_pi_create(p_image, p_cp, p_tile_no, manager);
-+     if (!l_pi) {
-+         opj_free(l_tmp_data);
-+         opj_free(l_tmp_ptr);
-+@@ -1552,7 +1566,8 @@ opj_pi_iterator_t *opj_pi_create_decode(
-+ opj_pi_iterator_t *opj_pi_initialise_encode(const opj_image_t *p_image,
-+         opj_cp_t *p_cp,
-+         OPJ_UINT32 p_tile_no,
-+-        J2K_T2_MODE p_t2_mode)
-++        J2K_T2_MODE p_t2_mode,
-++        opj_event_mgr_t* manager)
-+ {
-+     OPJ_UINT32 numcomps = p_image->numcomps;
-+ 
-+@@ -1606,7 +1621,7 @@ opj_pi_iterator_t *opj_pi_initialise_enc
-+     }
-+ 
-+     /* memory allocation for pi*/
-+-    l_pi = opj_pi_create(p_image, p_cp, p_tile_no);
-++    l_pi = opj_pi_create(p_image, p_cp, p_tile_no, manager);
-+     if (!l_pi) {
-+         opj_free(l_tmp_data);
-+         opj_free(l_tmp_ptr);
-+--- a/src/lib/openjp2/pi.h
-++++ b/src/lib/openjp2/pi.h
-+@@ -107,6 +107,8 @@ typedef struct opj_pi_iterator {
-+     OPJ_INT32 x, y;
-+     /** FIXME DOC*/
-+     OPJ_UINT32 dx, dy;
-++    /** event manager */
-++    opj_event_mgr_t* manager;
-+ } opj_pi_iterator_t;
-+ 
-+ /** @name Exported functions */
-+@@ -119,13 +121,15 @@ typedef struct opj_pi_iterator {
-+  * @param   cp      the coding parameters.
-+  * @param   tileno  index of the tile being encoded.
-+  * @param   t2_mode the type of pass for generating the packet iterator
-++ * @param   manager Event manager
-+  *
-+  * @return  a list of packet iterator that points to the first packet of the tile (not true).
-+ */
-+ opj_pi_iterator_t *opj_pi_initialise_encode(const opj_image_t *image,
-+         opj_cp_t *cp,
-+         OPJ_UINT32 tileno,
-+-        J2K_T2_MODE t2_mode);
-++        J2K_T2_MODE t2_mode,
-++        opj_event_mgr_t* manager);
-+ 
-+ /**
-+  * Updates the encoding parameters of the codec.
-+@@ -161,12 +165,14 @@ Create a packet iterator for Decoder
-+ @param image Raw image for which the packets will be listed
-+ @param cp Coding parameters
-+ @param tileno Number that identifies the tile for which to list the packets
-++@param manager Event manager
-+ @return Returns a packet iterator that points to the first packet of the tile
-+ @see opj_pi_destroy
-+ */
-+ opj_pi_iterator_t *opj_pi_create_decode(opj_image_t * image,
-+                                         opj_cp_t * cp,
-+-                                        OPJ_UINT32 tileno);
-++                                        OPJ_UINT32 tileno,
-++                                        opj_event_mgr_t* manager);
-+ /**
-+  * Destroys a packet iterator array.
-+  *
-+--- a/src/lib/openjp2/t2.c
-++++ b/src/lib/openjp2/t2.c
-+@@ -244,7 +244,7 @@ OPJ_BOOL opj_t2_encode_packets(opj_t2_t*
-+                             l_image->numcomps : 1;
-+     OPJ_UINT32 l_nb_pocs = l_tcp->numpocs + 1;
-+ 
-+-    l_pi = opj_pi_initialise_encode(l_image, l_cp, p_tile_no, p_t2_mode);
-++    l_pi = opj_pi_initialise_encode(l_image, l_cp, p_tile_no, p_t2_mode, p_manager);
-+     if (!l_pi) {
-+         return OPJ_FALSE;
-+     }
-+@@ -405,7 +405,7 @@ OPJ_BOOL opj_t2_decode_packets(opj_tcd_t
-+ #endif
-+ 
-+     /* create a packet iterator */
-+-    l_pi = opj_pi_create_decode(l_image, l_cp, p_tile_no);
-++    l_pi = opj_pi_create_decode(l_image, l_cp, p_tile_no, p_manager);
-+     if (!l_pi) {
-+         return OPJ_FALSE;
-+     }
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27842.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27842.patch
-new file mode 100644
-index 0000000000..6984aa8602
---- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27842.patch
-@@ -0,0 +1,31 @@
-+From fbd30b064f8f9607d500437b6fedc41431fd6cdc Mon Sep 17 00:00:00 2001
-+From: Even Rouault <even.rouault@spatialys.com>
-+Date: Tue, 1 Dec 2020 19:51:35 +0100
-+Subject: [PATCH] opj_t2_encode_packet(): avoid out of bound access of #1294,
-+ but likely not the proper fix
-+
-+Upstream-Status: Backport [https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/openjpeg2/2.3.1-1ubuntu4.20.04.1/openjpeg2_2.3.1-1ubuntu4.20.04.1.debian.tar.xz]
-+CVE: CVE-2020-27842
-+Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
-+---
-+ src/lib/openjp2/t2.c | 9 +++++++++
-+ 1 file changed, 9 insertions(+)
-+
-+--- a/src/lib/openjp2/t2.c
-++++ b/src/lib/openjp2/t2.c
-+@@ -711,6 +711,15 @@ static OPJ_BOOL opj_t2_encode_packet(OPJ
-+                 continue;
-+             }
-+ 
-++            /* Avoid out of bounds access of https://github.com/uclouvain/openjpeg/issues/1294 */
-++            /* but likely not a proper fix. */
-++            if (precno >= res->pw * res->ph) {
-++                opj_event_msg(p_manager, EVT_ERROR,
-++                              "opj_t2_encode_packet(): accessing precno=%u >= %u\n",
-++                              precno, res->pw * res->ph);
-++                return OPJ_FALSE;
-++            }
-++
-+             prc = &band->precincts[precno];
-+             opj_tgt_reset(prc->incltree);
-+             opj_tgt_reset(prc->imsbtree);
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27843.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27843.patch
-new file mode 100644
-index 0000000000..53c86ea5e4
---- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27843.patch
-@@ -0,0 +1,31 @@
-+From 38d661a3897052c7ff0b39b30c29cb067e130121 Mon Sep 17 00:00:00 2001
-+From: Even Rouault <even.rouault@spatialys.com>
-+Date: Wed, 2 Dec 2020 13:13:26 +0100
-+Subject: [PATCH] opj_t2_encode_packet(): avoid out of bound access of #1297,
-+ but likely not the proper fix
-+
-+Upstream-Status: Backport [https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/openjpeg2/2.3.1-1ubuntu4.20.04.1/openjpeg2_2.3.1-1ubuntu4.20.04.1.debian.tar.xz]
-+CVE: CVE-2020-27843
-+Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
-+---
-+ src/lib/openjp2/t2.c | 9 +++++++++
-+ 1 file changed, 9 insertions(+)
-+
-+--- a/src/lib/openjp2/t2.c
-++++ b/src/lib/openjp2/t2.c
-+@@ -787,6 +787,15 @@ static OPJ_BOOL opj_t2_encode_packet(OPJ
-+             continue;
-+         }
-+ 
-++        /* Avoid out of bounds access of https://github.com/uclouvain/openjpeg/issues/1297 */
-++        /* but likely not a proper fix. */
-++        if (precno >= res->pw * res->ph) {
-++            opj_event_msg(p_manager, EVT_ERROR,
-++                          "opj_t2_encode_packet(): accessing precno=%u >= %u\n",
-++                          precno, res->pw * res->ph);
-++            return OPJ_FALSE;
-++        }
-++
-+         prc = &band->precincts[precno];
-+         l_nb_blocks = prc->cw * prc->ch;
-+         cblk = prc->cblks.enc;
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27845.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27845.patch
-new file mode 100644
-index 0000000000..a1aa49a217
---- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-27845.patch
-@@ -0,0 +1,74 @@
-+From 8f5aff1dff510a964d3901d0fba281abec98ab63 Mon Sep 17 00:00:00 2001
-+From: Even Rouault <even.rouault@spatialys.com>
-+Date: Fri, 4 Dec 2020 20:45:25 +0100
-+Subject: [PATCH] pi.c: avoid out of bounds access with POC (fixes #1302)
-+
-+Upstream-Status: Backport [https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/openjpeg2/2.3.1-1ubuntu4.20.04.1/openjpeg2_2.3.1-1ubuntu4.20.04.1.debian.tar.xz]
-+CVE: CVE-2020-27845
-+Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
-+---
-+ src/lib/openjp2/pi.c | 25 +++++++++++++++++++++++--
-+ 1 file changed, 23 insertions(+), 2 deletions(-)
-+
-+--- a/src/lib/openjp2/pi.c
-++++ b/src/lib/openjp2/pi.c
-+@@ -238,6 +238,13 @@ static OPJ_BOOL opj_pi_next_lrcp(opj_pi_
-+     opj_pi_resolution_t *res = NULL;
-+     OPJ_UINT32 index = 0;
-+ 
-++    if (pi->poc.compno0 >= pi->numcomps ||
-++            pi->poc.compno1 >= pi->numcomps + 1) {
-++        opj_event_msg(pi->manager, EVT_ERROR,
-++                      "opj_pi_next_lrcp(): invalid compno0/compno1\n");
-++        return OPJ_FALSE;
-++    }
-++
-+     if (!pi->first) {
-+         comp = &pi->comps[pi->compno];
-+         res = &comp->resolutions[pi->resno];
-+@@ -291,6 +298,13 @@ static OPJ_BOOL opj_pi_next_rlcp(opj_pi_
-+     opj_pi_resolution_t *res = NULL;
-+     OPJ_UINT32 index = 0;
-+ 
-++    if (pi->poc.compno0 >= pi->numcomps ||
-++            pi->poc.compno1 >= pi->numcomps + 1) {
-++        opj_event_msg(pi->manager, EVT_ERROR,
-++                      "opj_pi_next_rlcp(): invalid compno0/compno1\n");
-++        return OPJ_FALSE;
-++    }
-++
-+     if (!pi->first) {
-+         comp = &pi->comps[pi->compno];
-+         res = &comp->resolutions[pi->resno];
-+@@ -337,6 +351,13 @@ static OPJ_BOOL opj_pi_next_rpcl(opj_pi_
-+     opj_pi_resolution_t *res = NULL;
-+     OPJ_UINT32 index = 0;
-+ 
-++    if (pi->poc.compno0 >= pi->numcomps ||
-++            pi->poc.compno1 >= pi->numcomps + 1) {
-++        opj_event_msg(pi->manager, EVT_ERROR,
-++                      "opj_pi_next_rpcl(): invalid compno0/compno1\n");
-++        return OPJ_FALSE;
-++    }
-++
-+     if (!pi->first) {
-+         goto LABEL_SKIP;
-+     } else {
-+@@ -472,7 +493,7 @@ static OPJ_BOOL opj_pi_next_pcrl(opj_pi_
-+     if (pi->poc.compno0 >= pi->numcomps ||
-+             pi->poc.compno1 >= pi->numcomps + 1) {
-+         opj_event_msg(pi->manager, EVT_ERROR,
-+-                      "opj_pi_next_pcrl(): invalid compno0/compno1");
-++                      "opj_pi_next_pcrl(): invalid compno0/compno1\n");
-+         return OPJ_FALSE;
-+     }
-+ 
-+@@ -610,7 +631,7 @@ static OPJ_BOOL opj_pi_next_cprl(opj_pi_
-+     if (pi->poc.compno0 >= pi->numcomps ||
-+             pi->poc.compno1 >= pi->numcomps + 1) {
-+         opj_event_msg(pi->manager, EVT_ERROR,
-+-                      "opj_pi_next_cprl(): invalid compno0/compno1");
-++                      "opj_pi_next_cprl(): invalid compno0/compno1\n");
-+         return OPJ_FALSE;
-+     }
-+ 
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-index 2fdcec0ec2..218dc911fe 100644
---- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-@@ -8,8 +8,21 @@ DEPENDS = "libpng tiff lcms zlib"
- SRC_URI = " \
-     git://github.com/uclouvain/openjpeg.git;branch=master;protocol=https \
-     file://0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
-+    file://CVE-2019-12973-1.patch \
-+    file://CVE-2019-12973-2.patch \
-     file://CVE-2020-6851.patch \
-     file://CVE-2020-8112.patch \
-+    file://CVE-2020-15389.patch \
-+    file://CVE-2020-27814-1.patch \
-+    file://CVE-2020-27814-2.patch \
-+    file://CVE-2020-27814-3.patch \
-+    file://CVE-2020-27814-4.patch \
-+    file://CVE-2020-27823.patch \
-+    file://CVE-2020-27824.patch \
-+    file://CVE-2020-27841.patch \
-+    file://CVE-2020-27842.patch \
-+    file://CVE-2020-27843.patch \
-+    file://CVE-2020-27845.patch \
- "
- SRCREV = "57096325457f96d8cd07bd3af04fe81d7a2ba788"
- S = "${WORKDIR}/git"
+ # Ensure we reject the 0.099 version by matching at least two dots
+ UPSTREAM_CHECK_REGEX = "nftables-(?P<pver>\d+(\.\d+){2,}).tar.bz2"
+ 
+-SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2"
+-SRC_URI[sha256sum] = "3ceeba625818e81a0be293e9dd486c3ef799ebd92165270f1e57e9a201efa423"
++SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2 \
++           file://0001-Makefile.am-do-not-build-examples-directory.patch \
++          "
++SRC_URI[sha256sum] = "0b28a36ffcf4567b841de7bd3f37918b1fed27859eb48bdec51e1f7a83954c02"
+ 
+ inherit autotools manpages pkgconfig
+ 
 -- 
-2.17.1
+2.33.0
 
 
