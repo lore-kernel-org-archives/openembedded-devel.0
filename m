@@ -2,295 +2,166 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CB647C433F5
-	for <webhook@archiver.kernel.org>; Tue, 22 Mar 2022 15:17:19 +0000 (UTC)
-Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com
- [209.85.160.169])
- by mx.groups.io with SMTP id smtpd.web10.11303.1647962239178119036
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DCCAFC433F5
+	for <webhook@archiver.kernel.org>; Tue, 22 Mar 2022 15:38:30 +0000 (UTC)
+Received: from mail-qv1-f46.google.com (mail-qv1-f46.google.com
+ [209.85.219.46])
+ by mx.groups.io with SMTP id smtpd.web10.11599.1647963510032694323
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Mar 2022 08:17:19 -0700
+ Tue, 22 Mar 2022 08:38:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=oCwwJ5Np;
- spf=pass (domain: gmail.com, ip: 209.85.160.169,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f169.google.com with SMTP id t2so875524qtw.9
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=nSmLYl0T;
+ spf=pass (domain: gmail.com, ip: 209.85.219.46, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f46.google.com with SMTP id kj22so3499326qvb.6
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Mar 2022 08:17:19 -0700 (PDT)
+ Tue, 22 Mar 2022 08:38:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=g2lQ5/cOeeRaqglraGvJTbmRjEr4f9DHrekuUR4Q2tQ=;
-        b=oCwwJ5Np1cO9J+MyNir/ryWyOg3Q9kxJZAA+1I73OeGIIyDs904n9S9YJNVuXHbcgu
-         kjoGZmQ9Wt+I+Vm7bTVSuzJ/c/wOiEwqQXIMVBNhHV6spzJHr8YgL5QededfWvWUzWPR
-         hTSxBGpsSBdPvL4/0uOv6mNb1BQzIZwf8QIaXW+koyo+wkdoBORQO4+vF7qcg6weMaSD
-         uLtUbjNwb/1BSgsbbnYmjQ6yvNkHZL/OhmgV6zdAPHVTzKxAPsnmmaoMKZWuN23PWrB0
-         uNoz5+YjWC2uKzxsLl16YmmIeeTzekCtiUMQl2ELPRippex4GM6BPLb0xv/QQ1KFVHOW
-         3f+A==
+        bh=G5CqPhlLYe3stjujUf+Q0ZWl1wfst8xVa6rnFyETYIg=;
+        b=nSmLYl0T2tNTn1j/Z8C+DcnidrFDSS5n+7PNaq1w93w2LIsb1p85UbuKOvQH8kjbn3
+         s4yWgzH5NEvOOAut3rqyvqvWUD7c7sKKEcvUpOPdFioiuWoID4k32ROw3ai7o549YC9U
+         IZ58Y6sxWSmKAKpBSspuD+dxDpSin4Xwgd/3Ox19Mjwu6Sdz/v8yD2El32RJ5ot0IEE1
+         LP6F1k+ELIsP9WqEQPskL5VzgwVtmipUXXAurJ8e0UImWk4QYCwC/wmBdA/Me1M4Nrq1
+         WnHV8/1uTVgl3+CY8jJKNOSsfkT9NLOJPBM2FEpToSwNIsTdUXgLQvTLE0lk+elqlhvk
+         SSqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=g2lQ5/cOeeRaqglraGvJTbmRjEr4f9DHrekuUR4Q2tQ=;
-        b=Mbj8JN8qgX27ajTXLe9lu4gSw7YCUoWfSNjPzGAPxRS7Ho8OZEVUdJNg11pZaRDXDf
-         x/eM0YUUFa2V3+v/DF/vaE8D4xjVBpNFt3dPW/8OQkjbaCPFxbCCrowzmEgJMuqYkTkf
-         z5lE/rQcXC8v7j7PlKCVUeGqwZDiG+3ChUKRB53hmZmDs2xwN9tjd56fqsroJq4qPSjp
-         REmfWpHVz/98Z805lL6nuBf4Sta+HywzbnKxZEHDGiS0wvVT5Uhe6N7SHVUNkGuLcSfY
-         e2KrloIW6bvQAq8gqqzsEISVLCSzW5l6ACdxEnw1wYic0TsBGUKoeaTtJOtqe4TRMbJ6
-         I4nw==
-X-Gm-Message-State: AOAM533kwA+4igf7uFaszCjea1nXLn5GDp1u1bwV68yngjbzsCX1LtQ9
-	rcag34sK7Ay7UUI+pJcpco7KzqFTlDRYEK+BCuHerQig5A5dvg==
+        bh=G5CqPhlLYe3stjujUf+Q0ZWl1wfst8xVa6rnFyETYIg=;
+        b=7tQKKD7oIkZ4+f10J8M+iQmPa99gbi3PY3SBkFrvipYzZqMPFJdp51KuZbpZL96y+q
+         Qaw+GMa09IRF8pmciboXspjNn+r6/AbutUAib8CxL+Mf8TiKs0cMMpsNS4BUKECGNNAy
+         1+YCRPgXzW61Q1a7xrXtb/gcdDj1ZQX93Cy5KRuRW+SxYHn27IXxTHDYq9FzAQs6T1l+
+         XC+iJLKyEFiadrD3nXGyLkybGh5QelEDPsC0KhOdJBaa+PW1Bs+taPoWbyK/WsaXJ5uD
+         5DOOV3RxB8dP1SastSa/pZNAJwmbFrfPpvDAYyEPy46E+O6qAnqoS88ALA5+tuGTzq/g
+         zX5Q==
+X-Gm-Message-State: AOAM532+3+jzgiaw1lEWGUmzcVmEHT90y4IkQj1d276NT5Y1ZisBas0d
+	IVz2lJxpQtLRrB+c8b0Agl8b6Kttvw5T8WG/8NwWgzqVHpXoHw==
 X-Google-Smtp-Source: 
- ABdhPJz6pNgvTUgR1USZ3v/56zkQWKh/VpTSKFWDdna2gQq46tJNFoO0hfoTA1dwrBSlx2IK/kPDFcC55Lp+NLXD87E=
-X-Received: by 2002:ac8:5842:0:b0:2e1:aa10:e7cd with SMTP id
- h2-20020ac85842000000b002e1aa10e7cdmr20774040qth.330.1647962237999; Tue, 22
- Mar 2022 08:17:17 -0700 (PDT)
+ ABdhPJyoGYzlBiGFNgJsw7XsnXAQxnitqcOo6+m3dlRF/o6/HiwDRA2k2NYwZDZjlR0mAZSgp/yrvrYHxCiswQj+8b0=
+X-Received: by 2002:a05:6214:4017:b0:441:35e:fcbd with SMTP id
+ kd23-20020a056214401700b00441035efcbdmr14249868qvb.110.1647963508809; Tue, 22
+ Mar 2022 08:38:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220321161755.3866390-1-anudeepthika@code1.emi.philips.com>
-In-Reply-To: <20220321161755.3866390-1-anudeepthika@code1.emi.philips.com>
+References: <20220322150010.32030-1-trevor.gamblin@windriver.com>
+In-Reply-To: <20220322150010.32030-1-trevor.gamblin@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 22 Mar 2022 08:16:52 -0700
+Date: Tue, 22 Mar 2022 08:38:02 -0700
 Message-ID: 
- <CAMKF1spP4k3jgJ12y9vHXwkzRcx2rmcDBCmZkEe1ROEhEMgeHQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v6] usbguard: Add inital recipe
-To: Nandipati.AnuDeepthika@philips.com
+ <CAMKF1srgf2hhxLMV0jcg+hQc4uypWf5fyGAxJSFzFcR=aEOAtw@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH] nftables: upgrade v1.0.0 -> v1.0.2
+To: Trevor Gamblin <trevor.gamblin@windriver.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 22 Mar 2022 15:17:19 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 22 Mar 2022 15:38:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96142
+ https://lists.openembedded.org/g/openembedded-devel/message/96143
 
-Seeing this
+There is a prior patch doing this upgrade slightly differently
 
-https://errors.yoctoproject.org/Errors/Details/652984/
+https://patchwork.yoctoproject.org/project/oe/patch/20220322044616.867009-1-yi.zhao@windriver.com/
 
-perhaps do
+and since it fixes the extramples/ build with a backport, I think
+thats better tha disabling the build.
 
-bitbake -ccleanall usbguard
-bitbake usbguard
+This patch adds explicit rdeps on libmnl and libnftnl, is there a
+reason to do so ? is shlibs code failing to detect
+the dependencies?
 
-On Mon, Mar 21, 2022 at 3:48 AM Anu Deepthika via
-lists.openembedded.org
-<Nandipati.AnuDeepthika=philips.com@lists.openembedded.org> wrote:
+On Tue, Mar 22, 2022 at 8:00 AM Trevor Gamblin
+<trevor.gamblin@windriver.com> wrote:
 >
-> From: "Anu Deepthika, Nandipati" <Nandipati.AnuDeepthika@philips.com>
+> Add libmnl and libnftnl to the RDEPENDS for the recipe. Also add a
+> patch to remove the "example" directory from the list of build
+> subdirs in Makefile.am, since this was added in v1.0.2 but it is
+> breaking the build for content that we don't need in the image.
 >
-> Set one crypto-backend library at a time
-> OpenSSL is the crypto-backend library set for device hashing
-> Override PACKAGECONFIG to replace it with libsodium or libgcrypt
->
-> Signed-off-by: Anu Deepthika, Nandipati <Nandipati.AnuDeepthika@philips.com>
+> Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > ---
->  ...kgconfig-instead-of-libgcrypt-config.patch | 106 ++++++++++++++++++
->  .../usbguard/usbguard_1.1.1.bb                |  75 +++++++++++++
->  2 files changed, 181 insertions(+)
->  create mode 100644 meta-oe/recipes-security/usbguard/usbguard/0001-Add-and-use-pkgconfig-instead-of-libgcrypt-config.patch
->  create mode 100644 meta-oe/recipes-security/usbguard/usbguard_1.1.1.bb
+>  ...e.am-do-not-build-examples-directory.patch | 34 +++++++++++++++++++
+>  .../{nftables_1.0.1.bb => nftables_1.0.2.bb}  |  8 +++--
+>  2 files changed, 40 insertions(+), 2 deletions(-)
+>  create mode 100644 meta-networking/recipes-filter/nftables/nftables/0001-Makefile.am-do-not-build-examples-directory.patch
+>  rename meta-networking/recipes-filter/nftables/{nftables_1.0.1.bb => nftables_1.0.2.bb} (85%)
 >
-> diff --git a/meta-oe/recipes-security/usbguard/usbguard/0001-Add-and-use-pkgconfig-instead-of-libgcrypt-config.patch b/meta-oe/recipes-security/usbguard/usbguard/0001-Add-and-use-pkgconfig-instead-of-libgcrypt-config.patch
+> diff --git a/meta-networking/recipes-filter/nftables/nftables/0001-Makefile.am-do-not-build-examples-directory.patch b/meta-networking/recipes-filter/nftables/nftables/0001-Makefile.am-do-not-build-examples-directory.patch
 > new file mode 100644
-> index 000000000..a7a3eb043
+> index 000000000..da568900c
 > --- /dev/null
-> +++ b/meta-oe/recipes-security/usbguard/usbguard/0001-Add-and-use-pkgconfig-instead-of-libgcrypt-config.patch
-> @@ -0,0 +1,106 @@
-> +From e36cbf9d7a32de9945a8b6c62ad29dfb60358081 Mon Sep 17 00:00:00 2001
-> +From: "Anu Deepthika, Nandipati" <Nandipati.AnuDeepthika@philips.com>
-> +Date: Wed, 9 Mar 2022 02:03:51 +0530
-> +Subject: [PATCH] Add and use pkgconfig instead of libgcrypt-config
+> +++ b/meta-networking/recipes-filter/nftables/nftables/0001-Makefile.am-do-not-build-examples-directory.patch
+> @@ -0,0 +1,34 @@
+> +From 4a0a013647054994e089a024b07d76b25af6ab76 Mon Sep 17 00:00:00 2001
+> +From: Trevor Gamblin <trevor.gamblin@windriver.com>
+> +Date: Tue, 22 Mar 2022 10:11:10 -0400
+> +Subject: [PATCH] Makefile.am: do not build examples directory
 > +
-> +Upstream-Status: Pending
+> +v1.0.2 added the "examples" subdir in Makefile.am, but the contents of
+> +this directory do "#include <nftables/libnftables.h>", which is breaking
+> +the build. Since we don't need the content in that directory, patch it
+> +locally to prevent it from being built.
 > +
-> +Signed-off-by: Anu Deepthika, Nandipati <Nandipati.AnuDeepthika@philips.com>
+> +Upstream-Status: Inappropriate (embedded-specific)
+> +
+> +Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 > +---
-> + m4/libgcrypt.m4 | 56 ++-----------------------------------------------
-> + 1 file changed, 2 insertions(+), 54 deletions(-)
+> + Makefile.am | 3 +--
+> + 1 file changed, 1 insertion(+), 2 deletions(-)
 > +
-> +diff --git a/m4/libgcrypt.m4 b/m4/libgcrypt.m4
-> +index 9a29eb5..465fe24 100644
-> +--- a/m4/libgcrypt.m4
-> ++++ b/m4/libgcrypt.m4
-> +@@ -22,17 +22,7 @@ dnl with a changed API.
-> + dnl
-> + AC_DEFUN([AM_PATH_LIBGCRYPT],
-> + [ AC_REQUIRE([AC_CANONICAL_HOST])
-> +-  AC_ARG_WITH(libgcrypt-prefix,
-> +-            AS_HELP_STRING([--with-libgcrypt-prefix=PFX],
-> +-                           [prefix where LIBGCRYPT is installed (optional)]),
-> +-     libgcrypt_config_prefix="$withval", libgcrypt_config_prefix="")
-> +-  if test x$libgcrypt_config_prefix != x ; then
-> +-     if test x${LIBGCRYPT_CONFIG+set} != xset ; then
-> +-        LIBGCRYPT_CONFIG=$libgcrypt_config_prefix/bin/libgcrypt-config
-> +-     fi
-> +-  fi
-> +
-> +-  AC_PATH_TOOL(LIBGCRYPT_CONFIG, libgcrypt-config, no)
-> +   tmp=ifelse([$1], ,1:1.2.0,$1)
-> +   if echo "$tmp" | grep ':' >/dev/null 2>/dev/null ; then
-> +      req_libgcrypt_api=`echo "$tmp"     | sed 's/\(.*\):\(.*\)/\1/'`
-> +@@ -41,44 +31,8 @@ AC_DEFUN([AM_PATH_LIBGCRYPT],
-> +      req_libgcrypt_api=0
-> +      min_libgcrypt_version="$tmp"
-> +   fi
-> ++  PKG_CHECK_MODULES(LIBGCRYPT, [libgcrypt >= $min_libgcrypt_version], [ok=yes], [ok=no])
-> +
-> +-  AC_MSG_CHECKING(for LIBGCRYPT - version >= $min_libgcrypt_version)
-> +-  ok=no
-> +-  if test "$LIBGCRYPT_CONFIG" != "no" ; then
-> +-    req_major=`echo $min_libgcrypt_version | \
-> +-               sed 's/\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\1/'`
-> +-    req_minor=`echo $min_libgcrypt_version | \
-> +-               sed 's/\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\2/'`
-> +-    req_micro=`echo $min_libgcrypt_version | \
-> +-               sed 's/\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\3/'`
-> +-    libgcrypt_config_version=`$LIBGCRYPT_CONFIG --version`
-> +-    major=`echo $libgcrypt_config_version | \
-> +-               sed 's/\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\).*/\1/'`
-> +-    minor=`echo $libgcrypt_config_version | \
-> +-               sed 's/\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\).*/\2/'`
-> +-    micro=`echo $libgcrypt_config_version | \
-> +-               sed 's/\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\).*/\3/'`
-> +-    if test "$major" -gt "$req_major"; then
-> +-        ok=yes
-> +-    else
-> +-        if test "$major" -eq "$req_major"; then
-> +-            if test "$minor" -gt "$req_minor"; then
-> +-               ok=yes
-> +-            else
-> +-               if test "$minor" -eq "$req_minor"; then
-> +-                   if test "$micro" -ge "$req_micro"; then
-> +-                     ok=yes
-> +-                   fi
-> +-               fi
-> +-            fi
-> +-        fi
-> +-    fi
-> +-  fi
-> +-  if test $ok = yes; then
-> +-    AC_MSG_RESULT([yes ($libgcrypt_config_version)])
-> +-  else
-> +-    AC_MSG_RESULT(no)
-> +-  fi
-> +   if test $ok = yes; then
-> +      # If we have a recent libgcrypt, we should also check that the
-> +      # API is compatible
-> +@@ -96,10 +50,8 @@ AC_DEFUN([AM_PATH_LIBGCRYPT],
-> +      fi
-> +   fi
-> +   if test $ok = yes; then
-> +-    LIBGCRYPT_CFLAGS=`$LIBGCRYPT_CONFIG --cflags`
-> +-    LIBGCRYPT_LIBS=`$LIBGCRYPT_CONFIG --libs`
-> +     ifelse([$2], , :, [$2])
-> +-    libgcrypt_config_host=`$LIBGCRYPT_CONFIG --host 2>/dev/null || echo none`
-> ++      libgcrypt_config_host=`$PKG_CONFIG --variable=host libgcrypt`
-> +     if test x"$libgcrypt_config_host" != xnone ; then
-> +       if test x"$libgcrypt_config_host" != x"$host" ; then
-> +   AC_MSG_WARN([[
-> +@@ -112,10 +64,6 @@ AC_DEFUN([AM_PATH_LIBGCRYPT],
-> + ***]])
-> +       fi
-> +     fi
-> +-  else
-> +-    LIBGCRYPT_CFLAGS=""
-> +-    LIBGCRYPT_LIBS=""
-> +-    ifelse([$3], , :, [$3])
-> +   fi
-> +   AC_SUBST(LIBGCRYPT_CFLAGS)
-> +   AC_SUBST(LIBGCRYPT_LIBS)
+> +diff --git a/Makefile.am b/Makefile.am
+> +index 72fb4e88..4a17424d 100644
+> +--- a/Makefile.am
+> ++++ b/Makefile.am
+> +@@ -3,8 +3,7 @@ ACLOCAL_AMFLAGS        = -I m4
+> + SUBDIRS =     src     \
+> +               include \
+> +               files   \
+> +-              doc     \
+> +-              examples
+> ++              doc
+> + if HAVE_PYTHON
+> + SUBDIRS += py
+> + endif
 > +--
-> +2.25.1
+> +2.35.1
 > +
-> diff --git a/meta-oe/recipes-security/usbguard/usbguard_1.1.1.bb b/meta-oe/recipes-security/usbguard/usbguard_1.1.1.bb
-> new file mode 100644
-> index 000000000..1e1f807db
-> --- /dev/null
-> +++ b/meta-oe/recipes-security/usbguard/usbguard_1.1.1.bb
-> @@ -0,0 +1,75 @@
-> +# Copyright (c) 2021 Koninklijke Philips N.V.
-> +#
-> +# SPDX-License-Identifier: MIT
-> +#
-> +SUMMARY = "USBGuard daemon for blacklisting and whitelisting of USB devices"
-> +DESCRIPTION = "The USBGuard software framework helps to protect your computer against \
-> +rogue USB devices (a.k.a. Bad USB) by implementing basic whitelisting and blacklisting \
-> +capabilities based on device attributes. This recipe takes OpenSSL as crypto-backend for \
-> +computing device hashes (Supported values are sodium, gcrypt, openssl)."
-> +HOMEPAGE = "https://usbguard.github.io/"
-> +LICENSE = "GPL-2.0-only"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> diff --git a/meta-networking/recipes-filter/nftables/nftables_1.0.1.bb b/meta-networking/recipes-filter/nftables/nftables_1.0.2.bb
+> similarity index 85%
+> rename from meta-networking/recipes-filter/nftables/nftables_1.0.1.bb
+> rename to meta-networking/recipes-filter/nftables/nftables_1.0.2.bb
+> index 2c378e8fd..1556b217f 100644
+> --- a/meta-networking/recipes-filter/nftables/nftables_1.0.1.bb
+> +++ b/meta-networking/recipes-filter/nftables/nftables_1.0.2.bb
+> @@ -6,11 +6,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d1a78fdd879a263a5e0b42d1fc565e79"
+>  DEPENDS = "libmnl libnftnl bison-native \
+>             ${@bb.utils.contains('PACKAGECONFIG', 'mini-gmp', '', 'gmp', d)}"
+>
+> +RDEPENDS:${PN} = "libmnl libnftnl"
 > +
-> +SRC_URI = "https://github.com/USBGuard/usbguard/releases/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
-> +    file://0001-Add-and-use-pkgconfig-instead-of-libgcrypt-config.patch"
-> +
-> +SRC_URI[sha256sum] = "a39104042b0c57f969c4e6580f6d80ad7066551eda966600695e644081128a2d"
-> +
-> +inherit autotools-brokensep bash-completion pkgconfig systemd
-> +
-> +DEPENDS = "glib-2.0-native libcap-ng libqb libxml2-native libxslt-native pegtl protobuf protobuf-native xmlto-native"
-> +
-> +S = "${WORKDIR}/${BPN}-${PV}"
-> +
-> +EXTRA_OECONF += "\
-> +    --with-bundled-catch \
-> +    --with-bundled-pegtl \
-> +"
-> +
-> +PACKAGECONFIG ?= "\
-> +    openssl \
-> +    ${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)} \
-> +    ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
-> +"
-> +
-> +# USBGuard has made polkit mandatory to configure with-dbus
-> +PACKAGECONFIG[dbus] = "--with-dbus,--without-dbus,dbus-glib polkit"
-> +PACKAGECONFIG[libgcrypt] = "--with-crypto-library=gcrypt,,libgcrypt,,,libsodium openssl"
-> +PACKAGECONFIG[libsodium] = "--with-crypto-library=sodium,,libsodium,,,libgcrypt openssl"
-> +PACKAGECONFIG[openssl] = "--with-crypto-library=openssl,,openssl,,,libgcrypt libsodium"
-> +PACKAGECONFIG[polkit] = "--with-polkit,--without-polkit,polkit"
-> +PACKAGECONFIG[seccomp] = "--enable-seccomp,--disable-seccomp,libseccomp"
-> +PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
-> +
-> +SYSTEMD_PACKAGES = "${PN}"
-> +
-> +SYSTEMD_SERVICE:${PN} = "usbguard.service"
-> +
-> +SYSTEMD_PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'dbus', '${PN}-dbus', '', d)}"
-> +
-> +SYSTEMD_SERVICE:${PN}-dbus = "usbguard-dbus.service"
-> +
-> +PACKAGES =+ "${PN}-dbus"
-> +
-> +FILES:${PN} += "\
-> +    ${systemd_unitdir}/system/usbguard.service \
-> +    ${systemd_unitdir}/system/usbguard-dbus.service \
-> +    ${datadir}/polkit-1 \
-> +    ${datadir}/polkit-1/actions \
-> +    ${datadir}/dbus-1 \
-> +    ${nonarch_libdir}/tmpfiles.d \
-> +"
-> +
-> +do_install:append() {
-> +# Create /var/log/usbguard in runtime.
-> +    if [ "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}" ]; then
-> +        install -d ${D}${nonarch_libdir}/tmpfiles.d
-> +        echo "d ${localstatedir}/log/${BPN} 0755 root root -" > ${D}${nonarch_libdir}/tmpfiles.d/${BPN}.conf
-> +    fi
-> +    if [ "${@bb.utils.filter('DISTRO_FEATURES', 'sysvinit', d)}" ]; then
-> +        install -d ${D}${sysconfdir}/default/volatiles
-> +        echo "d root root 0755 ${localstatedir}/log/${BPN} none" > ${D}${sysconfdir}/default/volatiles/99_${BPN}
-> +    fi
-> +    rm -rf ${D}${localstatedir}/log
-> +}
+>  # Ensure we reject the 0.099 version by matching at least two dots
+>  UPSTREAM_CHECK_REGEX = "nftables-(?P<pver>\d+(\.\d+){2,}).tar.bz2"
+>
+> -SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2"
+> -SRC_URI[sha256sum] = "3ceeba625818e81a0be293e9dd486c3ef799ebd92165270f1e57e9a201efa423"
+> +SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2 \
+> +           file://0001-Makefile.am-do-not-build-examples-directory.patch \
+> +          "
+> +SRC_URI[sha256sum] = "0b28a36ffcf4567b841de7bd3f37918b1fed27859eb48bdec51e1f7a83954c02"
+>
+>  inherit autotools manpages pkgconfig
+>
 > --
-> 2.25.1
+> 2.33.0
 >
 >
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#96104): https://lists.openembedded.org/g/openembedded-devel/message/96104
-> Mute This Topic: https://lists.openembedded.org/mt/89924944/1997914
+> View/Reply Online (#96141): https://lists.openembedded.org/g/openembedded-devel/message/96141
+> Mute This Topic: https://lists.openembedded.org/mt/89953861/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
