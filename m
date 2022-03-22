@@ -1,822 +1,161 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <richard.leitner@skidata.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 874E1C433EF
-	for <webhook@archiver.kernel.org>; Tue, 22 Mar 2022 04:53:12 +0000 (UTC)
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
- [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web08.6153.1647924791095136340
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6AA4C433F5
+	for <webhook@archiver.kernel.org>; Tue, 22 Mar 2022 08:16:55 +0000 (UTC)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.100])
+ by mx.groups.io with SMTP id smtpd.web11.7240.1647937011794153122
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Mar 2022 21:53:11 -0700
+ Tue, 22 Mar 2022 01:16:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=bheQzNYH;
- spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id
- bx24-20020a17090af49800b001c6872a9e4eso1128557pjb.5
-        for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Mar 2022 21:53:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=SV0DmWucuuFsxpOVmGPNmG2t/04kEnmsb3jRN6ujSFo=;
-        b=bheQzNYH/EKxsIhti//5tKdj02f3VigV5CVTbL8hzidESs9Ofb2WguoLswycXZMkHC
-         5TuxcR9bUbFKlZmJ9Xi/f08hqyTJOl3BAufhZjqrv6K+ULx0zNt5+hytL7RelOBn0LuJ
-         YYGyzbPjSmkccfNPBzE3oug5+bYasvRMCJdx3dlN+61wE1ujw7vFgcrzcxwFsR/BbNrM
-         Vm1PhscQrqS+ku9jfIgml0ZUI8IkMYJcyp0R21CYVbQYR9UJ3+fwIK44G8eNyKA0/ym2
-         PvIGOuBzfZ2pogoK9bXGbuiG8gOmSak60inENhLdt5E9agbF1m2pM8zOkT9tCiyzYFO7
-         CYJg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=SV0DmWucuuFsxpOVmGPNmG2t/04kEnmsb3jRN6ujSFo=;
-        b=RbAccN3Z/75s7vWxtZbqfmiv6hJP2EhZ3VhOHRhY86TpHInVuq6RjdIVGzNxqXNeZo
-         zVuQ3FcNUm2ifOtbDZbJMx5KeSgA13hu4S0lktItVVAttmblYOcBc1OBJ7RyjZ2qpo3t
-         Rm0PHhuvQsYoqIfVTR1Q9c/m5bnVO8IkD9DKC4hVDNElgy56lKrc4SHGsVV24fTdLF8x
-         l/SAk76+0Dr0GdzbVN/92bwsCdCDhWhQDy+lC3OjiF8b74jrfOXLfF/U9FbJHJX+I/gB
-         2S9DATsESg86PfoD9OgOpHOF3mUFcd58nvItTF2vBP/AXZ9/JLlAhLYNFENFqy05Iojo
-         78ig==
-X-Gm-Message-State: AOAM532ZlY1CoRwXXu14vuzH8kG8jIGqX1mCzm3b8TCwvmkNEc293/Sx
-	SyrRDB/sJPjaNlNW+MaKHp2LCzkYAx3iUA==
-X-Google-Smtp-Source: 
- ABdhPJybvI7A/c3dX44YWSTudETpW/Ptbb6AjNUPVQj4eB95c7HSRrOayqrERO4gZWJos+D+GnnW4g==
-X-Received: by 2002:a17:903:11cc:b0:151:71e4:dadc with SMTP id
- q12-20020a17090311cc00b0015171e4dadcmr15955353plh.78.1647924790068;
-        Mon, 21 Mar 2022 21:53:10 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
-        by smtp.gmail.com with ESMTPSA id
- d5-20020a17090acd0500b001b9c05b075dsm1039024pju.44.2022.03.21.21.53.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 21 Mar 2022 21:53:09 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] sysdig: Upgrade to 0.28.0
-Date: Mon, 21 Mar 2022 21:53:07 -0700
-Message-Id: <20220322045307.2841335-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220322045307.2841335-1-raj.khem@gmail.com>
-References: <20220322045307.2841335-1-raj.khem@gmail.com>
+ dkim=pass header.i=@skidata.com header.s=selector1 header.b=z4/OdLTr;
+ spf=pass (domain: skidata.com, ip: 40.107.21.100,
+ mailfrom: richard.leitner@skidata.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=KVWE2Y4vrGFfIgiU1aG5MlXce4nZoh7/W+uYrqDNEeoxGJYUBhuy8iFhbIGApUE4E8fKyhVefb4tB5vM1KC1/fjVaoBS8MKNfZfQxZ+8P6dfxc5aU6Cm9POKFRJRtYtV6mSidZE9QfWvG76tppar0vnqAlwIyYRk60jBRAkNwvkM/p6yUVAP35/5KwjkQe0nPfVmEzb56Hh/zRO/o89i5sDcgWjRl04INIlSF+c0jkHLyZgaURiPwPtWwrzVcwmcFBggqyPAQ4RqZWD+dPvCfM4980N0V3WMIcOMgZUvK9bYJyB0V/Y1XM0ouxaqpqrsI4gdC6KPExnasxPKNQRnYQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=H7G5asdgWujAwFBAD8aMlB5yzfL4h4IPiNyCqFYmrXM=;
+ b=NeQkMzOzkxXS/d3JGfSNcC08qWiiZ6Yqn5ZmvmyE1enTJNEBoc0KuNnhWepivUMN4d5pD+jO0TxKZO3Ng/9Ygfz/OjLgCBxjnBFcbxC6C5CqwCEeJJ2lPxJxq26DSi3RrkaOng6ee9wVPp8VnisezWmAEEwnqg/aB96XPpO+SKzxItzQPzrF/9h+XyOcR9Jb3J1s0X+jMCpGo2RqobSFEzVBtnLJf/K/pxG/qWM7P674hDsgwIvhbHnn+BpXMgEpWmzwvidsCPOYRBuO55IOha8oVkvdVlX4TcXcbqN/TvWwKdYRp67QUvVYqwf7aY6oe0RSmgRjJwEqoK2Y8suwug==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=skidata.com; dmarc=pass action=none header.from=skidata.com;
+ dkim=pass header.d=skidata.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=skidata.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=H7G5asdgWujAwFBAD8aMlB5yzfL4h4IPiNyCqFYmrXM=;
+ b=z4/OdLTrJOPYX+iSB1pAMByGHV29QYNaIxqzhDKWyVXuNc1I9HRvJZP9hhBWZpCdzlqGk6rGSxrC4sgA0fyK383r086U+JfBmbaxu1HWjUHMUGTbEF9/LTWMHnVFwYHMXOERCwJKZ0lVLK2Sowv1+LdRZ7nrYVmFL2fPRMvzZ6F+D3za59WJTE26ylyrN32ZTaRWUOiK7Yh7H49uq8Guy/iZE4IWQF3omUsXwg7bcguf0EmUqII302SoPoUE1Y6d/yjqqvYd8cSt6MiH8TrVGUBdlH30DBvPLZ8xRNkDSBL9btw3JM1/De/maBt8URfbg/w7vF2a5BiHIe7EWxPX5Q==
+Received: from VE1PR05MB7376.eurprd05.prod.outlook.com (2603:10a6:800:1b3::19)
+ by AS8PR05MB8502.eurprd05.prod.outlook.com (2603:10a6:20b:3cf::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5081.23; Tue, 22 Mar
+ 2022 08:16:47 +0000
+Received: from VE1PR05MB7376.eurprd05.prod.outlook.com
+ ([fe80::980:e7b9:5c2d:ece3]) by VE1PR05MB7376.eurprd05.prod.outlook.com
+ ([fe80::980:e7b9:5c2d:ece3%9]) with mapi id 15.20.5081.023; Tue, 22 Mar 2022
+ 08:16:47 +0000
+From: Richard Leitner - SKIDATA <Richard.Leitner@skidata.com>
+To: "zboszor@pr.hu" <zboszor@pr.hu>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, Henning Heinold
+	<henning@itconsulting-heinold.de>, Otavio Salvador <otavio@ossystems.com.br>,
+	=?utf-8?B?Wm9sdMOhbiBCw7ZzesO2cm3DqW55aQ==?= <zboszor@gmail.com>
+Subject: Re: [oe] [meta-java][PATCH] classpath: inherit pkgconfig
+Thread-Topic: [oe] [meta-java][PATCH] classpath: inherit pkgconfig
+Thread-Index: AQHYPaw+b5ZjNJT1GUuVm+YBovgc0qzLDvuA
+Date: Tue, 22 Mar 2022 08:16:47 +0000
+Message-ID: <YjmF6aa8kI9m7/Jd@ltleri2>
+References: <20220322051740.2214007-1-zboszor@pr.hu>
+In-Reply-To: <20220322051740.2214007-1-zboszor@pr.hu>
+Accept-Language: en-AT, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=skidata.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: e7179cd5-1db6-47fd-d92d-08da0bdc4f16
+x-ms-traffictypediagnostic: AS8PR05MB8502:EE_
+x-microsoft-antispam-prvs: 
+ <AS8PR05MB85025F6F43DC152B5F83D846F0179@AS8PR05MB8502.eurprd05.prod.outlook.com>
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ JjtxLpbiWy7aA7B2eNrq6Hk7+GPZ1if+/+tA7ClzTJX5Y/L08Vk/wv26Z0h/ZjW8pS+HkqvgBR/iU3pn2eLy6fwpO83+GqT1+XRcKRsirbstLXSPMe2xs/UfUOOa8w5mGmfreT5jTtePcUW1eADFk/sIz+IbgvHmoHHI9SrqOKs+Gap8V5i4azGWAI6t+FVbfhyADY8PC6BRlXJbDsDzLKW7xReKho5szG++Gm0n3OWGUX6W5rhgWGI9E0WqHpgxufXeChUNC4o2tVY87rmHqX1REjvEuWl/mklWaWHnsvkiMmEXGrS1wx+QUuFoWSJwd4oGV+F14oS9Q5UZimHdPumeOy017FYlQy5qqgaTxt4h1eJDMRYWslI0ZPWZlpGH0SH4b9X66T0yedrmTBntuADYVKznX1cdiZSxWD9Sbj6W+ZqYF/KLqeYorpVUk005p06uY4spv2CLWPvKniEA1blWILHsMjuHfvMI4YyHel5xw2t5g7Dukm/bKKem7tZ0u8wim9wvvSWJRjkW/XG6DOMSIvRhfWBNYekscVFysW4AGwlcN+9nWqkJBE+RunJ8E9UbU6T4w+D2xFYQR+uaQtjkn55Eyhm9cvhgZrbOS1hyAtlZfyj2vnm7ppiXBaI/okgarhT+uyHuVhhNH0SbaKi1+INHmSubQkZZ3rWrlec8Yk0XfvrQDymnC1po3L5pdzLbzA8retFVYCXFB8fO9Q==
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR05MB7376.eurprd05.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(7916004)(4636009)(366004)(26005)(86362001)(186003)(76116006)(66946007)(316002)(91956017)(2906002)(8936002)(5660300002)(6512007)(83380400001)(6506007)(66574015)(8676002)(4326008)(66446008)(64756008)(33716001)(71200400001)(508600001)(66556008)(38100700002)(66476007)(6486002)(9686003)(38070700005)(122000001)(54906003)(6916009);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?VUYrQXA3QjVLSUsvMTVuT3N5YTZmcjF4TWY5YUsrSUtXd1BQZmRnak1zNi83?=
+ =?utf-8?B?TkNTRnp1Z0F0U0pYUEdCMWE4ZHhLd0JiVUs5ZVdPaGcrcm5GK2VRdUZobzdv?=
+ =?utf-8?B?ZnVyaXhuaDh1dUxmOHJ4cUVuZDVuR3k0T3NHRnFvY0hTaUNzZkN1dGZaNEVm?=
+ =?utf-8?B?YS9JaVBFWU1lR2pyMkw1WmdET3JjQmpDZjVsZFh2N2EvWjZzN21LMUpFR0Vk?=
+ =?utf-8?B?UjFzZkZVdGpGcnlVNXVrVUFLWWdmc1NhQzREOTZodGxnZXFVdjdIY0g5RzNI?=
+ =?utf-8?B?Tm90MEMzeWM3SFhaZHRJQkE4WnJRZUtBa3VCNjNDeTZ1UkJSM2tWZjJPYkdN?=
+ =?utf-8?B?OFcwYTZYYjdMMGtrNm1VWnhhemN2dWFiOEFQREdra0FKQVI2UTRQU1c0ZzJV?=
+ =?utf-8?B?ZEdUbjM2dFVpZFF2akQyU29INC9NNjRHTHRjdHA4czE4cVFiSVJCMUx3T0NM?=
+ =?utf-8?B?d2pUTm9takptcDhUZGN4TW9TMWJUd2taYXhtZ1dqdGRuR1VWMDQwenFKOFFu?=
+ =?utf-8?B?RnN0cGM4akUzUkx5eUxUbFpOTTRGSWxqUGVjN0I0eUFka2tlYVFwQVMyU0hW?=
+ =?utf-8?B?alBsK3ZTSENTK1VzTmFDR2M3SCtEaDFiU1lyUlJnam53WHNJWWRQQmxJcElW?=
+ =?utf-8?B?bG44Ri8rUjdNUGZRQ1BhYTc1S2RrTkdyTGVQWXdKMWhDMzVrK1UyVzNLRFBh?=
+ =?utf-8?B?VmU1UjNTd2FOSEVQbnZydmcxVnd5dkZkb1V1Y3I3ZTNaUjlTMnc2KzF6cVJJ?=
+ =?utf-8?B?NmcwK0R1N3drUnUvaEpUWXFpdFkrWnpabndVUHhHcHQzOU9sOTRpKzY2YkdL?=
+ =?utf-8?B?SjVpd2lFRHI3UGtJSnZQRlk4d1IvOVdVOFYxcDFyckJ3MjYyQkROZ0JmS1ZY?=
+ =?utf-8?B?d0Y3d0hUSjlFUFJrT3ZzQkkzZ1J2V2J1MnJDZ0VGQTFrRnRxVVR5MlpwNG1v?=
+ =?utf-8?B?WEFWY25tZWJFbFR2UXhRRmNGbWhSelBPSEJMMWNVTkNTY1h3SGJydVZ5UW43?=
+ =?utf-8?B?NFVreGhrREJ1aDh6ZTRLdFNndEVLYTV3SlQrMlMvUUV4UjBDQzBpRXR6VlVx?=
+ =?utf-8?B?OW9wc2hGRjNCNGJyTzhOc0VFL2VWYTR0TWpZYWg0ajAzWkJWbDc3NXJHV3Vl?=
+ =?utf-8?B?M3lidS91SXUySktlMG0zZ3Z3dUlXN2pSeWxDdHdmNzNGdHJpVmx5clVhcVJF?=
+ =?utf-8?B?QjdGMWJYQ3VJcjJSMnRicW9BUTE4emduOWx6TmROYmowREwrNGhwMG1GVW8y?=
+ =?utf-8?B?a0NkSmVJRE42M2w4TlFFdUdPcGVLRXR0Y1paVUFpWHk4aklVeEFQTy9DN3h4?=
+ =?utf-8?B?WTlLSUVRYkRsRHpHdjAzbjNuWjJzQklmSmxhTm1pcnNDVVBZejdFdHNkR0pl?=
+ =?utf-8?B?eFJrK1lOS2RId3hYTW5qazYvL2RzR3Rkays3TkJqd2VJdE9ZOU4zWE5DMmdp?=
+ =?utf-8?B?SVlZODkxN2IyMlBKSmh1TzBibWl0Ykphd2FrMDRkV2dwbllRNlpIaUlBUkhW?=
+ =?utf-8?B?WExvVmpIMmRJYmFjejcwZTVtSGgvdzBXRWpUa3lJRnJPdkhuaFk2OCtZS1hq?=
+ =?utf-8?B?L3RLK0JXUGVFM0ZOODBwZjQwbXFkamk3YkYwYnNxOHlrYTkxdWVKWjJ1OEtp?=
+ =?utf-8?B?cHJxK3NzN3U0cTJ6dSt1c2lpYitpQVpnUERnWU5JcC9Wd0l0QWdXaDNGY1F6?=
+ =?utf-8?B?bndCQ0o1bmVPNVlEZWlUdGk5Y3VzRjllZyt5K0RPalA2dGVpVlpZT3g3aUdh?=
+ =?utf-8?B?RnBYTXRFVnZ3eG93MVYrekd6NitnQlpBbVdnM2NVcHU0RTR1K2NGUTgxbWIv?=
+ =?utf-8?B?UldhWUx0V2VvT3liQUNiV1J4NFlpTlhBbFgxRkVUd1NHTER6KzY1RkVOaDZC?=
+ =?utf-8?B?bnorK0h2Z2VXbjUzL1dHckNtTXpCM3NCVVFPSDNTTWxXdlFTdStuYXVjOXhL?=
+ =?utf-8?B?MzBVSjZTdVgyNGZJMXVzWDF2eFJkRnBaWU14VVk5dHR0RjdhWEM3cDBvbXha?=
+ =?utf-8?Q?jBwrWmElLi/9DyIBo+L5JiuDu5F0ys=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <3D91A2F0C4336549A8D04F6F1568136C@eurprd05.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: skidata.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: VE1PR05MB7376.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ e7179cd5-1db6-47fd-d92d-08da0bdc4f16
+X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Mar 2022 08:16:47.2861
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: e5733095-4425-4f08-b6ba-487b9a46a425
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 
+ tGf+PnW6wNd6GzYmQgwDGXQ8buZJZJsjVv/xzRG5FOiI5Rcvyi4nDCkTD/MQ/CkPAdGipcaMlKn7UQhwp8PjZ/hyYCjFBHwFI5GBk8aCMsU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR05MB8502
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 22 Mar 2022 04:53:12 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 22 Mar 2022 08:16:55 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96131
+ https://lists.openembedded.org/g/openembedded-devel/message/96133
 
-Drop patches, since they are not needed
-Add a patch to define PROBE_NAME for CFLAGS
-Disable sysdig for ppc64
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../packagegroups/packagegroup-meta-oe.bb     |   2 +-
- ...001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch |  29 ++
- ...0001-fix-build-with-LuaJIT-2.1-betas.patch |  96 -----
- ...ot-of-Werror-format-security-errors-.patch | 155 --------
- .../sysdig/sysdig/aarch64.patch               | 359 ------------------
- .../{sysdig_git.bb => sysdig_0.28.0.bb}       |  21 +-
- 6 files changed, 43 insertions(+), 619 deletions(-)
- create mode 100644 meta-oe/recipes-extended/sysdig/sysdig/0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch
- delete mode 100644 meta-oe/recipes-extended/sysdig/sysdig/0001-fix-build-with-LuaJIT-2.1-betas.patch
- delete mode 100644 meta-oe/recipes-extended/sysdig/sysdig/0001-libsinsp-Fix-a-lot-of-Werror-format-security-errors-.patch
- delete mode 100644 meta-oe/recipes-extended/sysdig/sysdig/aarch64.patch
- rename meta-oe/recipes-extended/sysdig/{sysdig_git.bb => sysdig_0.28.0.bb} (69%)
-
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 5992cdd950..52a82e8acd 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -446,7 +446,7 @@ RDEPENDS:packagegroup-meta-oe-extended:remove:mipsarch = "upm mraa minifi-cpp ti
- RDEPENDS:packagegroup-meta-oe-extended:remove:mips = "sysdig"
- RDEPENDS:packagegroup-meta-oe-extended:remove:powerpc = "upm mraa minifi-cpp"
- RDEPENDS:packagegroup-meta-oe-extended:remove:powerpc64 = "upm mraa minifi-cpp"
--RDEPENDS:packagegroup-meta-oe-extended:remove:powerpc64le = "upm mraa"
-+RDEPENDS:packagegroup-meta-oe-extended:remove:powerpc64le = "upm mraa sysdig"
- RDEPENDS:packagegroup-meta-oe-extended:remove:riscv64 = "upm libleak libyang mraa sysdig tiptop"
- RDEPENDS:packagegroup-meta-oe-extended:remove:riscv32 = "upm libleak libyang mraa sysdig tiptop"
- 
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig/0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch b/meta-oe/recipes-extended/sysdig/sysdig/0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch
-new file mode 100644
-index 0000000000..903ccdf36a
---- /dev/null
-+++ b/meta-oe/recipes-extended/sysdig/sysdig/0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch
-@@ -0,0 +1,29 @@
-+From ed8969a233adb6bf701de96d0fd0570e5ddcc787 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 21 Mar 2022 19:35:48 -0700
-+Subject: [PATCH] cmake: Pass PROBE_NAME via CFLAGS
-+
-+This helps compliation of driver code where its calling modprobe on the
-+given kernel module via system() API
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ CMakeLists.txt | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 7dceb7ae..e156c36f 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -149,6 +149,7 @@ if(CMAKE_SYSTEM_NAME MATCHES "Linux")
-+ 	if(NOT DEFINED PROBE_NAME)
-+ 		set(PROBE_NAME "scap")
-+ 	endif()
-++	add_definitions(-DPROBE_NAME="${PROBE_NAME}")
-+ 
-+ 	set(DRIVERS_REPO "https://download.sysdig.com/scap-drivers")
-+ 	
-+-- 
-+2.35.1
-+
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig/0001-fix-build-with-LuaJIT-2.1-betas.patch b/meta-oe/recipes-extended/sysdig/sysdig/0001-fix-build-with-LuaJIT-2.1-betas.patch
-deleted file mode 100644
-index 71b0b8c8b9..0000000000
---- a/meta-oe/recipes-extended/sysdig/sysdig/0001-fix-build-with-LuaJIT-2.1-betas.patch
-+++ /dev/null
-@@ -1,96 +0,0 @@
--From ae82de664a6ba6ab2654adf9bed81f22b6fdc19d Mon Sep 17 00:00:00 2001
--From: Evgeni Golov <evgeni@golov.de>
--Date: Sun, 27 Aug 2017 13:51:19 +0200
--Subject: [PATCH] fix build with LuaJIT 2.1 betas
--
--LuaJIT 2.1 drops some compat symbols [1]. And while I think that this is
--wrong, as it breaks compatibility with Lua 5.1 [2], it is quite easy to
--adopt the code to work with both versions (2.0 and 2.1) of LuaJIT and
--remain Lua 5.1 compatible.
--
--[1] https://github.com/LuaJIT/LuaJIT/commit/dc320ca70f2c5bb3977b82853bcee6dad2523d01
--[2] https://github.com/LuaJIT/LuaJIT/issues/325
--
--Upstream-Status: Submitted [https://github.com/LuaJIT/LuaJIT/issues/325]
--Signed-off-by: Evgeni Golov <evgeni@golov.de>
--sysdig-CLA-1.0-signed-off-by: Evgeni Golov <evgeni@golov.de>
-----
-- CMakeLists.txt                        | 2 +-
-- userspace/libsinsp/chisel.cpp         | 6 +++---
-- userspace/libsinsp/lua_parser.cpp     | 2 +-
-- userspace/libsinsp/lua_parser_api.cpp | 2 +-
-- 4 files changed, 6 insertions(+), 6 deletions(-)
--
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index d7020493..33e524f5 100644
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -140,7 +140,7 @@ option(USE_BUNDLED_DEPS "Enable bundled dependencies instead of using the system
-- option(USE_BUNDLED_LUAJIT "Enable building of the bundled LuaJIT" ${USE_BUNDLED_DEPS})
-- 
-- if(NOT USE_BUNDLED_LUAJIT)
---	find_path(LUAJIT_INCLUDE luajit.h PATH_SUFFIXES luajit-2.0 luajit)
--+	find_path(LUAJIT_INCLUDE luajit.h PATH_SUFFIXES luajit-2.1 luajit-2.0 luajit)
-- 	find_library(LUAJIT_LIB NAMES luajit luajit-5.1)
-- 	if(LUAJIT_INCLUDE AND LUAJIT_LIB)
-- 		message(STATUS "Found LuaJIT: include: ${LUAJIT_INCLUDE}, lib: ${LUAJIT_LIB}")
--diff --git a/userspace/libsinsp/chisel.cpp b/userspace/libsinsp/chisel.cpp
--index 0a6e3cf8..0c2e255a 100644
----- a/userspace/libsinsp/chisel.cpp
--+++ b/userspace/libsinsp/chisel.cpp
--@@ -98,7 +98,7 @@ void lua_stackdump(lua_State *L)
-- // Lua callbacks
-- ///////////////////////////////////////////////////////////////////////////////
-- #ifdef HAS_LUA_CHISELS
---const static struct luaL_reg ll_sysdig [] =
--+const static struct luaL_Reg ll_sysdig [] =
-- {
-- 	{"set_filter", &lua_cbacks::set_global_filter},
-- 	{"set_snaplen", &lua_cbacks::set_snaplen},
--@@ -134,7 +134,7 @@ const static struct luaL_reg ll_sysdig [] =
-- 	{NULL,NULL}
-- };
-- 
---const static struct luaL_reg ll_chisel [] =
--+const static struct luaL_Reg ll_chisel [] =
-- {
-- 	{"request_field", &lua_cbacks::request_field},
-- 	{"set_filter", &lua_cbacks::set_filter},
--@@ -146,7 +146,7 @@ const static struct luaL_reg ll_chisel [] =
-- 	{NULL,NULL}
-- };
-- 
---const static struct luaL_reg ll_evt [] =
--+const static struct luaL_Reg ll_evt [] =
-- {
-- 	{"field", &lua_cbacks::field},
-- 	{"get_num", &lua_cbacks::get_num},
--diff --git a/userspace/libsinsp/lua_parser.cpp b/userspace/libsinsp/lua_parser.cpp
--index 0e26617d..78810d96 100644
----- a/userspace/libsinsp/lua_parser.cpp
--+++ b/userspace/libsinsp/lua_parser.cpp
--@@ -32,7 +32,7 @@ extern "C" {
-- #include "lauxlib.h"
-- }
-- 
---const static struct luaL_reg ll_filter [] =
--+const static struct luaL_Reg ll_filter [] =
-- {
-- 	{"rel_expr", &lua_parser_cbacks::rel_expr},
-- 	{"bool_op", &lua_parser_cbacks::bool_op},
--diff --git a/userspace/libsinsp/lua_parser_api.cpp b/userspace/libsinsp/lua_parser_api.cpp
--index c89e9126..e0169fe1 100644
----- a/userspace/libsinsp/lua_parser_api.cpp
--+++ b/userspace/libsinsp/lua_parser_api.cpp
--@@ -266,7 +266,7 @@ int lua_parser_cbacks::rel_expr(lua_State *ls)
-- 					string err = "Got non-table as in-expression operand\n";
-- 					throw sinsp_exception("parser API error");
-- 				}
---				int n = luaL_getn(ls, 4);  /* get size of table */
--+				int n = (int)lua_objlen(ls, 4);  /* get size of table */
-- 				for (i=1; i<=n; i++)
-- 				{
-- 					lua_rawgeti(ls, 4, i);
---- 
--2.25.1
--
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig/0001-libsinsp-Fix-a-lot-of-Werror-format-security-errors-.patch b/meta-oe/recipes-extended/sysdig/sysdig/0001-libsinsp-Fix-a-lot-of-Werror-format-security-errors-.patch
-deleted file mode 100644
-index 055b0c1c29..0000000000
---- a/meta-oe/recipes-extended/sysdig/sysdig/0001-libsinsp-Fix-a-lot-of-Werror-format-security-errors-.patch
-+++ /dev/null
-@@ -1,155 +0,0 @@
--From a5c8e2676b94d2ea41b44b4e05943bee6459f337 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 30 Oct 2021 09:46:35 -0700
--Subject: [PATCH] libsinsp: Fix a lot of -Werror=format-security errors with
-- mvprintw/mvwprintw
--
--In all these places a non-constant is used as a format string which
--compiler complains about. Fix by using "%s" as format.
--
--Upstream-Status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- userspace/libsinsp/cursescomponents.cpp |  4 ++--
-- userspace/libsinsp/cursesspectro.cpp    |  2 +-
-- userspace/libsinsp/cursestable.cpp      |  6 +++---
-- userspace/libsinsp/cursesui.cpp         | 14 +++++++-------
-- 4 files changed, 13 insertions(+), 13 deletions(-)
--
--diff --git a/userspace/libsinsp/cursescomponents.cpp b/userspace/libsinsp/cursescomponents.cpp
--index 4003cb4e..372b4526 100644
----- a/userspace/libsinsp/cursescomponents.cpp
--+++ b/userspace/libsinsp/cursescomponents.cpp
--@@ -877,7 +877,7 @@ void curses_textbox::print_no_data()
-- 	string wstr = "No Data For This Selection";
-- 	mvprintw(m_parent->m_screenh / 2,
-- 		m_parent->m_screenw / 2 - wstr.size() / 2,
---		wstr.c_str());
--+		"%s", wstr.c_str());
-- 
-- 	refresh();
-- }
--@@ -1100,7 +1100,7 @@ void curses_textbox::render()
-- 		attrset(m_parent->m_colors[sinsp_cursesui::LARGE_NUMBER]);
-- 		mvprintw(0,
-- 			m_parent->m_screenw / 2 - wstr.size() / 2,
---			wstr.c_str());
--+			"%s", wstr.c_str());
-- 	}
-- 
-- 	//
--diff --git a/userspace/libsinsp/cursesspectro.cpp b/userspace/libsinsp/cursesspectro.cpp
--index 6858bc95..32012963 100644
----- a/userspace/libsinsp/cursesspectro.cpp
--+++ b/userspace/libsinsp/cursesspectro.cpp
--@@ -227,7 +227,7 @@ void curses_spectro::print_error(string wstr)
-- 	mvwprintw(m_tblwin, 
-- 		m_parent->m_screenh / 2,
-- 		m_parent->m_screenw / 2 - wstr.size() / 2, 
---		wstr.c_str());	
--+		"%s", wstr.c_str());	
-- }
-- 
-- void curses_spectro::update_data(vector<sinsp_sample_row>* data, bool force_selection_change)
--diff --git a/userspace/libsinsp/cursestable.cpp b/userspace/libsinsp/cursestable.cpp
--index 69c2aa32..54667554 100644
----- a/userspace/libsinsp/cursestable.cpp
--+++ b/userspace/libsinsp/cursestable.cpp
--@@ -254,7 +254,7 @@ void curses_table::print_line_centered(string line, int32_t off)
-- 		mvwprintw(m_tblwin, 
-- 			m_parent->m_screenh / 2 + off,
-- 			m_parent->m_screenw / 2 - line.size() / 2, 
---			line.c_str());
--+			"%s", line.c_str());
-- 	}
-- 	else
-- 	{
--@@ -268,7 +268,7 @@ glogf("2, %d %s\n", spos, ss.c_str());
-- 			mvwprintw(m_tblwin, 
-- 				m_parent->m_screenh / 2 + off + j,
-- 				0,
---				ss.c_str());
--+				"%s", ss.c_str());
-- 
-- 			spos += m_parent->m_screenw;
-- 			if(spos >= line.size())
--@@ -328,7 +328,7 @@ void curses_table::print_error(string wstr)
-- 	mvwprintw(m_tblwin, 
-- 		m_parent->m_screenh / 2,
-- 		m_parent->m_screenw / 2 - wstr.size() / 2, 
---		wstr.c_str());	
--+		"%s", wstr.c_str());	
-- }
-- 
-- void curses_table::render(bool data_changed)
--diff --git a/userspace/libsinsp/cursesui.cpp b/userspace/libsinsp/cursesui.cpp
--index 1eeb0864..69652edc 100644
----- a/userspace/libsinsp/cursesui.cpp
--+++ b/userspace/libsinsp/cursesui.cpp
--@@ -825,7 +825,7 @@ void sinsp_cursesui::render_header()
-- 		attrset(m_colors[sinsp_cursesui::LARGE_NUMBER]);
-- 		mvprintw(0,
-- 			m_screenw / 2 - wstr.size() / 2, 
---			wstr.c_str());	
--+			"%s", wstr.c_str());	
-- 	}
-- 
-- 	//
--@@ -1123,7 +1123,7 @@ void sinsp_cursesui::render_filtersearch_main_menu()
-- 
-- 		m_cursor_pos = cursor_pos;
-- 
---		mvprintw(m_screenh - 1, m_cursor_pos, str->c_str());
--+		mvprintw(m_screenh - 1, m_cursor_pos, "%s", str->c_str());
-- 
-- 		m_cursor_pos += str->size();
-- 	}
--@@ -2189,7 +2189,7 @@ void sinsp_cursesui::print_progress(double progress)
-- 	string wstr = "Processing File";
-- 	mvprintw(m_screenh / 2,
-- 		m_screenw / 2 - wstr.size() / 2, 
---		wstr.c_str());	
--+		"%s", wstr.c_str());	
-- 
-- 	//
-- 	// Using sprintf because to_string doesn't support setting the precision 
--@@ -2199,7 +2199,7 @@ void sinsp_cursesui::print_progress(double progress)
-- 	wstr = "Progress: " + string(numbuf);
-- 	mvprintw(m_screenh / 2 + 1,
-- 		m_screenw / 2 - wstr.size() / 2, 
---		wstr.c_str());
--+		"%s", wstr.c_str());
-- 
-- 	refresh();
-- }
--@@ -2308,7 +2308,7 @@ sysdig_table_action sinsp_cursesui::handle_textbox_input(int ch)
-- 						attrset(m_colors[sinsp_cursesui::FAILED_SEARCH]);
-- 						mvprintw(m_screenh / 2,
-- 							m_screenw / 2 - wstr.size() / 2, 
---							wstr.c_str());	
--+							"%s", wstr.c_str());	
-- 
-- 						//
-- 						// Restore the cursor
--@@ -2363,7 +2363,7 @@ sysdig_table_action sinsp_cursesui::handle_textbox_input(int ch)
-- 
-- 					mvprintw(m_screenh / 2,
-- 						m_screenw / 2 - wstr.size() / 2, 
---						wstr.c_str());
--+						"%s", wstr.c_str());
-- 
-- 					render();
-- 				}
--@@ -2436,7 +2436,7 @@ sysdig_table_action sinsp_cursesui::handle_textbox_input(int ch)
-- 
-- 				mvprintw(m_screenh / 2,
-- 					m_screenw / 2 - wstr.size() / 2, 
---					wstr.c_str());
--+					"%s", wstr.c_str());
-- 
-- 				render();
-- 			}
---- 
--2.33.1
--
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig/aarch64.patch b/meta-oe/recipes-extended/sysdig/sysdig/aarch64.patch
-deleted file mode 100644
-index f16b0eca50..0000000000
---- a/meta-oe/recipes-extended/sysdig/sysdig/aarch64.patch
-+++ /dev/null
-@@ -1,359 +0,0 @@
--Check if legacy syscalls exist
--
--A lot of legacy syscalls are replaced with *at and are not implemented in newer
--architectures like aarch64
--
--Upstream-Status: Submitted [https://github.com/draios/sysdig/pull/1601]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
----- a/driver/syscall_table.c
--+++ b/driver/syscall_table.c
--@@ -42,26 +42,46 @@ or GPL2.txt for full copies of the licen
--  * SYSCALL TABLE
--  */
-- const struct syscall_evt_pair g_syscall_table[SYSCALL_TABLE_SIZE] = {
--+#ifdef __NR_open
-- 	[__NR_open - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_OPEN_E, PPME_SYSCALL_OPEN_X},
--+#endif
--+#ifdef __NR_creat
-- 	[__NR_creat - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_CREAT_E, PPME_SYSCALL_CREAT_X},
--+#endif
-- 	[__NR_close - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_CLOSE_E, PPME_SYSCALL_CLOSE_X},
-- 	[__NR_brk - SYSCALL_TABLE_ID0] =                        {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_BRK_4_E, PPME_SYSCALL_BRK_4_X},
-- 	[__NR_read - SYSCALL_TABLE_ID0] =                       {UF_USED, PPME_SYSCALL_READ_E, PPME_SYSCALL_READ_X},
-- 	[__NR_write - SYSCALL_TABLE_ID0] =                      {UF_USED, PPME_SYSCALL_WRITE_E, PPME_SYSCALL_WRITE_X},
-- 	[__NR_execve - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_EXECVE_19_E, PPME_SYSCALL_EXECVE_19_X},
-- 	[__NR_clone - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_CLONE_20_E, PPME_SYSCALL_CLONE_20_X},
--+#ifdef __NR_fork
-- 	[__NR_fork - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_FORK_20_E, PPME_SYSCALL_FORK_20_X},
--+#endif
--+#ifdef __NR_vfork
-- 	[__NR_vfork - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_VFORK_20_E, PPME_SYSCALL_VFORK_20_X},
--+#endif
--+#ifdef __NR_pipe
-- 	[__NR_pipe - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_PIPE_E, PPME_SYSCALL_PIPE_X},
--+#endif
-- 	[__NR_pipe2 - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_PIPE_E, PPME_SYSCALL_PIPE_X},
--+#ifdef __NR_eventfd
-- 	[__NR_eventfd - SYSCALL_TABLE_ID0] =                    {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_EVENTFD_E, PPME_SYSCALL_EVENTFD_X},
--+#endif
-- 	[__NR_eventfd2 - SYSCALL_TABLE_ID0] =                   {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_EVENTFD_E, PPME_SYSCALL_EVENTFD_X},
-- 	[__NR_futex - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_FUTEX_E, PPME_SYSCALL_FUTEX_X},
--+#ifdef __NR_stat
-- 	[__NR_stat - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_STAT_E, PPME_SYSCALL_STAT_X},
--+#endif
--+#ifdef __NR_lstat
-- 	[__NR_lstat - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_LSTAT_E, PPME_SYSCALL_LSTAT_X},
--+#endif
-- 	[__NR_fstat - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_FSTAT_E, PPME_SYSCALL_FSTAT_X},
--+#ifdef __NR_epoll_wait
-- 	[__NR_epoll_wait - SYSCALL_TABLE_ID0] =                 {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_EPOLLWAIT_E, PPME_SYSCALL_EPOLLWAIT_X},
--+#endif
--+#ifdef __NR_poll
-- 	[__NR_poll - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_POLL_E, PPME_SYSCALL_POLL_X},
--+#endif
-- #ifdef __NR_select
-- 	[__NR_select - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_SELECT_E, PPME_SYSCALL_SELECT_X},
-- #endif
--@@ -70,13 +90,21 @@ const struct syscall_evt_pair g_syscall_
-- 	[__NR_getcwd - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_GETCWD_E, PPME_SYSCALL_GETCWD_X},
-- 	[__NR_chdir - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_CHDIR_E, PPME_SYSCALL_CHDIR_X},
-- 	[__NR_fchdir - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_FCHDIR_E, PPME_SYSCALL_FCHDIR_X},
--+#ifdef __NR_mkdir
-- 	[__NR_mkdir - SYSCALL_TABLE_ID0] =                      {UF_USED, PPME_SYSCALL_MKDIR_2_E, PPME_SYSCALL_MKDIR_2_X},
--+#endif
--+#ifdef __NR_rmdir
-- 	[__NR_rmdir - SYSCALL_TABLE_ID0] =                      {UF_USED, PPME_SYSCALL_RMDIR_2_E, PPME_SYSCALL_RMDIR_2_X},
--+#endif
-- 	[__NR_openat - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_OPENAT_2_E, PPME_SYSCALL_OPENAT_2_X},
-- 	[__NR_mkdirat - SYSCALL_TABLE_ID0] =                    {UF_USED, PPME_SYSCALL_MKDIRAT_E, PPME_SYSCALL_MKDIRAT_X},
--+#ifdef __NR_link
-- 	[__NR_link - SYSCALL_TABLE_ID0] =                       {UF_USED, PPME_SYSCALL_LINK_2_E, PPME_SYSCALL_LINK_2_X},
--+#endif
-- 	[__NR_linkat - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_SYSCALL_LINKAT_2_E, PPME_SYSCALL_LINKAT_2_X},
--+#ifdef __NR_unlink
-- 	[__NR_unlink - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_SYSCALL_UNLINK_2_E, PPME_SYSCALL_UNLINK_2_X},
--+#endif
-- 	[__NR_unlinkat - SYSCALL_TABLE_ID0] =                   {UF_USED, PPME_SYSCALL_UNLINKAT_2_E, PPME_SYSCALL_UNLINKAT_2_X},
-- 	[__NR_pread64 - SYSCALL_TABLE_ID0] =                    {UF_USED, PPME_SYSCALL_PREAD_E, PPME_SYSCALL_PREAD_X},
-- 	[__NR_pwrite64 - SYSCALL_TABLE_ID0] =                   {UF_USED, PPME_SYSCALL_PWRITE_E, PPME_SYSCALL_PWRITE_X},
--@@ -85,16 +113,22 @@ const struct syscall_evt_pair g_syscall_
-- 	[__NR_preadv - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_SYSCALL_PREADV_E, PPME_SYSCALL_PREADV_X},
-- 	[__NR_pwritev - SYSCALL_TABLE_ID0] =                    {UF_USED, PPME_SYSCALL_PWRITEV_E, PPME_SYSCALL_PWRITEV_X},
-- 	[__NR_dup - SYSCALL_TABLE_ID0] =                        {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_DUP_E, PPME_SYSCALL_DUP_X},
--+#ifdef __NR_dup2
-- 	[__NR_dup2 - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_DUP_E, PPME_SYSCALL_DUP_X},
--+#endif
-- 	[__NR_dup3 - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_DUP_E, PPME_SYSCALL_DUP_X},
--+#ifdef __NR_signalfd
-- 	[__NR_signalfd - SYSCALL_TABLE_ID0] =                   {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_SIGNALFD_E, PPME_SYSCALL_SIGNALFD_X},
--+#endif
-- 	[__NR_signalfd4 - SYSCALL_TABLE_ID0] =                  {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_SIGNALFD_E, PPME_SYSCALL_SIGNALFD_X},
-- 	[__NR_kill - SYSCALL_TABLE_ID0] =                       {UF_USED, PPME_SYSCALL_KILL_E, PPME_SYSCALL_KILL_X},
-- 	[__NR_tkill - SYSCALL_TABLE_ID0] =                      {UF_USED, PPME_SYSCALL_TKILL_E, PPME_SYSCALL_TKILL_X},
-- 	[__NR_tgkill - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_SYSCALL_TGKILL_E, PPME_SYSCALL_TGKILL_X},
-- 	[__NR_nanosleep - SYSCALL_TABLE_ID0] =                  {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_NANOSLEEP_E, PPME_SYSCALL_NANOSLEEP_X},
-- 	[__NR_timerfd_create - SYSCALL_TABLE_ID0] =             {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_TIMERFD_CREATE_E, PPME_SYSCALL_TIMERFD_CREATE_X},
--+#ifdef __NR_inotify_init
-- 	[__NR_inotify_init - SYSCALL_TABLE_ID0] =               {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_INOTIFY_INIT_E, PPME_SYSCALL_INOTIFY_INIT_X},
--+#endif
-- 	[__NR_inotify_init1 - SYSCALL_TABLE_ID0] =              {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_INOTIFY_INIT_E, PPME_SYSCALL_INOTIFY_INIT_X},
-- 	[__NR_fchmodat - SYSCALL_TABLE_ID0] =                   {UF_USED, PPME_SYSCALL_FCHMODAT_E, PPME_SYSCALL_FCHMODAT_X},
-- 	[__NR_fchmod - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_SYSCALL_FCHMOD_E, PPME_SYSCALL_FCHMOD_X},
--@@ -114,14 +148,22 @@ const struct syscall_evt_pair g_syscall_
-- #endif
-- /* [__NR_old_select - SYSCALL_TABLE_ID0] =	{UF_USED, PPME_GENERIC_E, PPME_GENERIC_X}, */
-- 	[__NR_pselect6 - SYSCALL_TABLE_ID0] =                   {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
--+#ifdef __NR_epoll_create
-- 	[__NR_epoll_create - SYSCALL_TABLE_ID0] =               {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
--+#endif
-- 	[__NR_epoll_ctl - SYSCALL_TABLE_ID0] =                  {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
--+#ifdef __NR_uselib
-- 	[__NR_uselib - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
--+#endif
-- 	[__NR_sched_setparam - SYSCALL_TABLE_ID0] =             {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
-- 	[__NR_sched_getparam - SYSCALL_TABLE_ID0] =             {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
-- 	[__NR_syslog - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
--+#ifdef __NR_chmod
-- 	[__NR_chmod - SYSCALL_TABLE_ID0] =                      {UF_USED, PPME_SYSCALL_CHMOD_E, PPME_SYSCALL_CHMOD_X},
--+#endif
--+#ifdef __NR_lchown
-- 	[__NR_lchown - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_GENERIC_E, PPME_GENERIC_X},
--+#endif
-- #ifdef __NR_utime
-- 	[__NR_utime - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
-- #endif
--@@ -131,8 +173,9 @@ const struct syscall_evt_pair g_syscall_
-- #ifdef __NR_alarm
-- 	[__NR_alarm - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
-- #endif
--+#ifdef __NR_pause
-- 	[__NR_pause - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
---
--+#endif
-- #ifndef __NR_socketcall
-- 	[__NR_socket - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SOCKET_SOCKET_E, PPME_SOCKET_SOCKET_X},
-- 	[__NR_bind - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_NEVER_DROP, PPME_SOCKET_BIND_E,  PPME_SOCKET_BIND_X},
--@@ -184,9 +227,13 @@ const struct syscall_evt_pair g_syscall_
-- 	[__NR_process_vm_writev - SYSCALL_TABLE_ID0] =          {UF_USED, PPME_GENERIC_E, PPME_GENERIC_X},
-- #endif
-- 
--+#ifdef __NR_rename
-- 	[__NR_rename - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_SYSCALL_RENAME_E, PPME_SYSCALL_RENAME_X},
--+#endif
-- 	[__NR_renameat - SYSCALL_TABLE_ID0] =                   {UF_USED, PPME_SYSCALL_RENAMEAT_E, PPME_SYSCALL_RENAMEAT_X},
--+#ifdef __NR_symlink
-- 	[__NR_symlink - SYSCALL_TABLE_ID0] =                    {UF_USED, PPME_SYSCALL_SYMLINK_E, PPME_SYSCALL_SYMLINK_X},
--+#endif
-- 	[__NR_symlinkat - SYSCALL_TABLE_ID0] =                  {UF_USED, PPME_SYSCALL_SYMLINKAT_E, PPME_SYSCALL_SYMLINKAT_X},
-- 	[__NR_sendfile - SYSCALL_TABLE_ID0] =                   {UF_USED, PPME_SYSCALL_SENDFILE_E, PPME_SYSCALL_SENDFILE_X},
-- #ifdef __NR_sendfile64
--@@ -255,7 +302,9 @@ const struct syscall_evt_pair g_syscall_
-- #ifdef __NR_getresgid32
-- 	[__NR_getresgid32 - SYSCALL_TABLE_ID0] =                {UF_USED, PPME_SYSCALL_GETRESGID_E, PPME_SYSCALL_GETRESGID_X },
-- #endif
--+#ifdef __NR_getdents
-- 	[__NR_getdents - SYSCALL_TABLE_ID0] =                   {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_GETDENTS_E, PPME_SYSCALL_GETDENTS_X},
--+#endif
-- 	[__NR_getdents64 - SYSCALL_TABLE_ID0] =                 {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_GETDENTS64_E, PPME_SYSCALL_GETDENTS64_X},
-- #ifdef __NR_setns
-- 	[__NR_setns - SYSCALL_TABLE_ID0] =                      {UF_USED, PPME_SYSCALL_SETNS_E, PPME_SYSCALL_SETNS_X},
--@@ -298,19 +347,33 @@ const enum ppm_syscall_code g_syscall_co
-- 	[__NR_exit - SYSCALL_TABLE_ID0] = PPM_SC_EXIT,
-- 	[__NR_read - SYSCALL_TABLE_ID0] = PPM_SC_READ,
-- 	[__NR_write - SYSCALL_TABLE_ID0] = PPM_SC_WRITE,
--+#ifdef __NR_open
-- 	[__NR_open - SYSCALL_TABLE_ID0] = PPM_SC_OPEN,
--+#endif
-- 	[__NR_close - SYSCALL_TABLE_ID0] = PPM_SC_CLOSE,
--+#ifdef __NR_creat
-- 	[__NR_creat - SYSCALL_TABLE_ID0] = PPM_SC_CREAT,
--+#endif
--+#ifdef __NR_link
-- 	[__NR_link - SYSCALL_TABLE_ID0] = PPM_SC_LINK,
--+#endif
--+#ifdef __NR_unlink
-- 	[__NR_unlink - SYSCALL_TABLE_ID0] = PPM_SC_UNLINK,
--+#endif
-- 	[__NR_chdir - SYSCALL_TABLE_ID0] = PPM_SC_CHDIR,
-- #ifdef __NR_time
-- 	[__NR_time - SYSCALL_TABLE_ID0] = PPM_SC_TIME,
-- #endif
--+#ifdef __NR_mknod
-- 	[__NR_mknod - SYSCALL_TABLE_ID0] = PPM_SC_MKNOD,
--+#endif
--+#ifdef __NR_chmod
-- 	[__NR_chmod - SYSCALL_TABLE_ID0] = PPM_SC_CHMOD,
--+#endif
-- /* [__NR_lchown16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_LCHOWN16, */
--+#ifdef __NR_stat
-- 	[__NR_stat - SYSCALL_TABLE_ID0] = PPM_SC_STAT,
--+#endif
-- 	[__NR_lseek - SYSCALL_TABLE_ID0] = PPM_SC_LSEEK,
-- 	[__NR_getpid - SYSCALL_TABLE_ID0] = PPM_SC_GETPID,
-- 	[__NR_mount - SYSCALL_TABLE_ID0] = PPM_SC_MOUNT,
--@@ -322,17 +385,27 @@ const enum ppm_syscall_code g_syscall_co
-- 	[__NR_alarm - SYSCALL_TABLE_ID0] = PPM_SC_ALARM,
-- #endif
-- 	[__NR_fstat - SYSCALL_TABLE_ID0] = PPM_SC_FSTAT,
--+#ifdef __NR_pause
-- 	[__NR_pause - SYSCALL_TABLE_ID0] = PPM_SC_PAUSE,
--+#endif
-- #ifdef __NR_utime
-- 	[__NR_utime - SYSCALL_TABLE_ID0] = PPM_SC_UTIME,
-- #endif
-- 	[__NR_sync - SYSCALL_TABLE_ID0] = PPM_SC_SYNC,
-- 	[__NR_kill - SYSCALL_TABLE_ID0] = PPM_SC_KILL,
--+#ifdef __NR_rename
-- 	[__NR_rename - SYSCALL_TABLE_ID0] = PPM_SC_RENAME,
--+#endif
--+#ifdef __NR_mkdir
-- 	[__NR_mkdir - SYSCALL_TABLE_ID0] = PPM_SC_MKDIR,
--+#endif
--+#ifdef __NR_rmdir
-- 	[__NR_rmdir - SYSCALL_TABLE_ID0] = PPM_SC_RMDIR,
--+#endif
-- 	[__NR_dup - SYSCALL_TABLE_ID0] = PPM_SC_DUP,
--+#ifdef __NR_pipe
-- 	[__NR_pipe - SYSCALL_TABLE_ID0] = PPM_SC_PIPE,
--+#endif
-- 	[__NR_times - SYSCALL_TABLE_ID0] = PPM_SC_TIMES,
-- 	[__NR_brk - SYSCALL_TABLE_ID0] = PPM_SC_BRK,
-- /* [__NR_setgid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_SETGID16, */
--@@ -345,10 +418,16 @@ const enum ppm_syscall_code g_syscall_co
-- 	[__NR_setpgid - SYSCALL_TABLE_ID0] = PPM_SC_SETPGID,
-- 	[__NR_umask - SYSCALL_TABLE_ID0] = PPM_SC_UMASK,
-- 	[__NR_chroot - SYSCALL_TABLE_ID0] = PPM_SC_CHROOT,
--+#ifdef __NR_ustat
-- 	[__NR_ustat - SYSCALL_TABLE_ID0] = PPM_SC_USTAT,
--+#endif
--+#ifdef __NR_dup2
-- 	[__NR_dup2 - SYSCALL_TABLE_ID0] = PPM_SC_DUP2,
--+#endif
-- 	[__NR_getppid - SYSCALL_TABLE_ID0] = PPM_SC_GETPPID,
--+#ifdef __NR_getpgrp
-- 	[__NR_getpgrp - SYSCALL_TABLE_ID0] = PPM_SC_GETPGRP,
--+#endif
-- 	[__NR_setsid - SYSCALL_TABLE_ID0] = PPM_SC_SETSID,
-- 	[__NR_sethostname - SYSCALL_TABLE_ID0] = PPM_SC_SETHOSTNAME,
-- 	[__NR_setrlimit - SYSCALL_TABLE_ID0] = PPM_SC_SETRLIMIT,
--@@ -359,10 +438,18 @@ const enum ppm_syscall_code g_syscall_co
-- /* [__NR_getgroups16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_GETGROUPS16, */
-- /* [__NR_setgroups16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_SETGROUPS16, */
-- /* [__NR_old_select - SYSCALL_TABLE_ID0] = PPM_SC_NR_OLD_SELECT, */
--+#ifdef __NR_symlink
-- 	[__NR_symlink - SYSCALL_TABLE_ID0] = PPM_SC_SYMLINK,
--+#endif
--+#ifdef __NR_lstat
-- 	[__NR_lstat - SYSCALL_TABLE_ID0] = PPM_SC_LSTAT,
--+#endif
--+#ifdef __NR_readlink
-- 	[__NR_readlink - SYSCALL_TABLE_ID0] = PPM_SC_READLINK,
--+#endif
--+#ifdef __NR_uselib
-- 	[__NR_uselib - SYSCALL_TABLE_ID0] = PPM_SC_USELIB,
--+#endif
-- 	[__NR_swapon - SYSCALL_TABLE_ID0] = PPM_SC_SWAPON,
-- 	[__NR_reboot - SYSCALL_TABLE_ID0] = PPM_SC_REBOOT,
-- /* [__NR_old_readdir - SYSCALL_TABLE_ID0] = PPM_SC_NR_OLD_READDIR, */
--@@ -399,12 +486,16 @@ const enum ppm_syscall_code g_syscall_co
-- 	[__NR_delete_module - SYSCALL_TABLE_ID0] = PPM_SC_DELETE_MODULE,
-- 	[__NR_getpgid - SYSCALL_TABLE_ID0] = PPM_SC_GETPGID,
-- 	[__NR_fchdir - SYSCALL_TABLE_ID0] = PPM_SC_FCHDIR,
--+#ifdef __NR_sysfs
-- 	[__NR_sysfs - SYSCALL_TABLE_ID0] = PPM_SC_SYSFS,
--+#endif
-- 	[__NR_personality - SYSCALL_TABLE_ID0] = PPM_SC_PERSONALITY,
-- /* [__NR_setfsuid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_SETFSUID16, */
-- /* [__NR_setfsgid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_SETFSGID16, */
-- /* [__NR_llseek - SYSCALL_TABLE_ID0] = PPM_SC_NR_LLSEEK, */
--+#ifdef __NR_getdents
-- 	[__NR_getdents - SYSCALL_TABLE_ID0] = PPM_SC_GETDENTS,
--+#endif
-- #ifdef __NR_select
-- 	[__NR_select - SYSCALL_TABLE_ID0] = PPM_SC_SELECT,
-- #endif
--@@ -431,7 +522,9 @@ const enum ppm_syscall_code g_syscall_co
-- 	[__NR_mremap - SYSCALL_TABLE_ID0] = PPM_SC_MREMAP,
-- /* [__NR_setresuid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_SETRESUID16, */
-- /* [__NR_getresuid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_GETRESUID16, */
--+#ifdef __NR_poll
-- 	[__NR_poll - SYSCALL_TABLE_ID0] = PPM_SC_POLL,
--+#endif
-- /* [__NR_setresgid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_SETRESGID16, */
-- /* [__NR_getresgid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_GETRESGID16, */
-- 	[__NR_prctl - SYSCALL_TABLE_ID0] = PPM_SC_PRCTL,
--@@ -453,13 +546,17 @@ const enum ppm_syscall_code g_syscall_co
-- 	[__NR_getrlimit - SYSCALL_TABLE_ID0] = PPM_SC_GETRLIMIT,
-- #endif
-- /* [__NR_mmap_pgoff - SYSCALL_TABLE_ID0] = PPM_SC_NR_MMAP_PGOFF, */
--+#ifdef __NR_lchown
-- 	[__NR_lchown - SYSCALL_TABLE_ID0] = PPM_SC_LCHOWN,
--+#endif
-- 	[__NR_setreuid - SYSCALL_TABLE_ID0] = PPM_SC_SETREUID,
-- 	[__NR_setregid - SYSCALL_TABLE_ID0] = PPM_SC_SETREGID,
-- 	[__NR_getgroups - SYSCALL_TABLE_ID0] = PPM_SC_GETGROUPS,
-- 	[__NR_setgroups - SYSCALL_TABLE_ID0] = PPM_SC_SETGROUPS,
-- 	[__NR_fchown - SYSCALL_TABLE_ID0] = PPM_SC_FCHOWN,
--+#ifdef __NR_chown
-- 	[__NR_chown - SYSCALL_TABLE_ID0] = PPM_SC_CHOWN,
--+#endif
-- 	[__NR_setfsuid - SYSCALL_TABLE_ID0] = PPM_SC_SETFSUID,
-- 	[__NR_setfsgid - SYSCALL_TABLE_ID0] = PPM_SC_SETFSGID,
-- 	[__NR_pivot_root - SYSCALL_TABLE_ID0] = PPM_SC_PIVOT_ROOT,
--@@ -494,9 +591,13 @@ const enum ppm_syscall_code g_syscall_co
-- 	[__NR_io_submit - SYSCALL_TABLE_ID0] = PPM_SC_IO_SUBMIT,
-- 	[__NR_io_cancel - SYSCALL_TABLE_ID0] = PPM_SC_IO_CANCEL,
-- 	[__NR_exit_group - SYSCALL_TABLE_ID0] = PPM_SC_EXIT_GROUP,
--+#ifdef __NR_epoll_create
-- 	[__NR_epoll_create - SYSCALL_TABLE_ID0] = PPM_SC_EPOLL_CREATE,
--+#endif
-- 	[__NR_epoll_ctl - SYSCALL_TABLE_ID0] = PPM_SC_EPOLL_CTL,
--+#ifdef __NR_epoll_wait
-- 	[__NR_epoll_wait - SYSCALL_TABLE_ID0] = PPM_SC_EPOLL_WAIT,
--+#endif
-- 	[__NR_remap_file_pages - SYSCALL_TABLE_ID0] = PPM_SC_REMAP_FILE_PAGES,
-- 	[__NR_set_tid_address - SYSCALL_TABLE_ID0] = PPM_SC_SET_TID_ADDRESS,
-- 	[__NR_timer_create - SYSCALL_TABLE_ID0] = PPM_SC_TIMER_CREATE,
--@@ -509,7 +610,9 @@ const enum ppm_syscall_code g_syscall_co
-- 	[__NR_clock_getres - SYSCALL_TABLE_ID0] = PPM_SC_CLOCK_GETRES,
-- 	[__NR_clock_nanosleep - SYSCALL_TABLE_ID0] = PPM_SC_CLOCK_NANOSLEEP,
-- 	[__NR_tgkill - SYSCALL_TABLE_ID0] = PPM_SC_TGKILL,
--+#ifdef __NR_utimes
-- 	[__NR_utimes - SYSCALL_TABLE_ID0] = PPM_SC_UTIMES,
--+#endif
-- 	[__NR_mq_open - SYSCALL_TABLE_ID0] = PPM_SC_MQ_OPEN,
-- 	[__NR_mq_unlink - SYSCALL_TABLE_ID0] = PPM_SC_MQ_UNLINK,
-- 	[__NR_mq_timedsend - SYSCALL_TABLE_ID0] = PPM_SC_MQ_TIMEDSEND,
--@@ -523,14 +626,18 @@ const enum ppm_syscall_code g_syscall_co
-- 	[__NR_keyctl - SYSCALL_TABLE_ID0] = PPM_SC_KEYCTL,
-- 	[__NR_ioprio_set - SYSCALL_TABLE_ID0] = PPM_SC_IOPRIO_SET,
-- 	[__NR_ioprio_get - SYSCALL_TABLE_ID0] = PPM_SC_IOPRIO_GET,
--+#ifdef __NR_inotify_init
-- 	[__NR_inotify_init - SYSCALL_TABLE_ID0] = PPM_SC_INOTIFY_INIT,
--+#endif
-- 	[__NR_inotify_add_watch - SYSCALL_TABLE_ID0] = PPM_SC_INOTIFY_ADD_WATCH,
-- 	[__NR_inotify_rm_watch - SYSCALL_TABLE_ID0] = PPM_SC_INOTIFY_RM_WATCH,
-- 	[__NR_openat - SYSCALL_TABLE_ID0] = PPM_SC_OPENAT,
-- 	[__NR_mkdirat - SYSCALL_TABLE_ID0] = PPM_SC_MKDIRAT,
-- 	[__NR_mknodat - SYSCALL_TABLE_ID0] = PPM_SC_MKNODAT,
-- 	[__NR_fchownat - SYSCALL_TABLE_ID0] = PPM_SC_FCHOWNAT,
--+#ifdef __NR_futimesat
-- 	[__NR_futimesat - SYSCALL_TABLE_ID0] = PPM_SC_FUTIMESAT,
--+#endif
-- 	[__NR_unlinkat - SYSCALL_TABLE_ID0] = PPM_SC_UNLINKAT,
-- 	[__NR_renameat - SYSCALL_TABLE_ID0] = PPM_SC_RENAMEAT,
-- 	[__NR_linkat - SYSCALL_TABLE_ID0] = PPM_SC_LINKAT,
--@@ -551,9 +658,13 @@ const enum ppm_syscall_code g_syscall_co
-- #endif
-- 	[__NR_epoll_pwait - SYSCALL_TABLE_ID0] = PPM_SC_EPOLL_PWAIT,
-- 	[__NR_utimensat - SYSCALL_TABLE_ID0] = PPM_SC_UTIMENSAT,
--+#ifdef __NR_signalfd
-- 	[__NR_signalfd - SYSCALL_TABLE_ID0] = PPM_SC_SIGNALFD,
--+#endif
-- 	[__NR_timerfd_create - SYSCALL_TABLE_ID0] = PPM_SC_TIMERFD_CREATE,
--+#ifdef __NR_eventfd
-- 	[__NR_eventfd - SYSCALL_TABLE_ID0] = PPM_SC_EVENTFD,
--+#endif
-- 	[__NR_timerfd_settime - SYSCALL_TABLE_ID0] = PPM_SC_TIMERFD_SETTIME,
-- 	[__NR_timerfd_gettime - SYSCALL_TABLE_ID0] = PPM_SC_TIMERFD_GETTIME,
-- 	[__NR_signalfd4 - SYSCALL_TABLE_ID0] = PPM_SC_SIGNALFD4,
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig_git.bb b/meta-oe/recipes-extended/sysdig/sysdig_0.28.0.bb
-similarity index 69%
-rename from meta-oe/recipes-extended/sysdig/sysdig_git.bb
-rename to meta-oe/recipes-extended/sysdig/sysdig_0.28.0.bb
-index 3916bbd60d..4181da732f 100644
---- a/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-+++ b/meta-oe/recipes-extended/sysdig/sysdig_0.28.0.bb
-@@ -18,28 +18,32 @@ JIT:powerpc = ""
- JIT:powerpc64le = ""
- JIT:powerpc64 = ""
- 
--DEPENDS += "libb64 lua${JIT} zlib c-ares grpc-native grpc curl ncurses jsoncpp tbb jq openssl elfutils protobuf protobuf-native jq-native"
-+DEPENDS += "libb64 lua${JIT} zlib c-ares grpc-native grpc curl ncurses jsoncpp \
-+            tbb jq openssl elfutils protobuf protobuf-native jq-native valijson"
- RDEPENDS:${PN} = "bash"
- 
--SRC_URI = "git://github.com/draios/sysdig.git;branch=dev;protocol=https \
--           file://0001-fix-build-with-LuaJIT-2.1-betas.patch \
--           file://aarch64.patch \
--           file://0001-libsinsp-Fix-a-lot-of-Werror-format-security-errors-.patch \
-+SRC_URI = "git://github.com/draios/sysdig.git;branch=dev;protocol=https;name=sysdig \
-+           git://github.com/falcosecurity/libs;protocol=https;branch=master;name=falco;subdir=git/falcosecurity-libs \
-+           file://0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch \
-           "
--SRCREV = "67833b2aca06bd9d11cff7cb29f04fbf4ef96cad"
--PV = "0.27.1"
-+SRCREV_sysdig = "4fb6288275f567f63515df0ff0a6518043ecfa9b"
-+SRCREV_falco= "caa0e4d0044fdaaebab086592a97f0c7f32aeaa9"
- 
- S = "${WORKDIR}/git"
- 
- EXTRA_OECMAKE = "\
-                 -DBUILD_DRIVER=OFF \
-+                -DMINIMAL_BUILD=ON \
-                 -DUSE_BUNDLED_DEPS=OFF \
-                 -DCREATE_TEST_TARGETS=OFF \
-                 -DDIR_ETC=${sysconfdir} \
-                 -DLUA_INCLUDE_DIR=${STAGING_INCDIR}/luajit-2.1 \
--                -DLUA_LIBRARY=libluajit-5.1.so \
-+                -DFALCOSECURITY_LIBS_SOURCE_DIR=${S}/falcosecurity-libs \
-+                -DVALIJSON_INCLUDE=${STAGING_INCDIR}/valijson \
- "
- 
-+#CMAKE_VERBOSE = "VERBOSE=1"
-+
- FILES:${PN} += " \
-     ${DIR_ETC}/* \
-     ${datadir}/zsh/* \
-@@ -54,3 +58,4 @@ COMPATIBLE_HOST:mips = "null"
- COMPATIBLE_HOST:riscv64 = "null"
- COMPATIBLE_HOST:riscv32 = "null"
- COMPATIBLE_HOST:powerpc = "null"
-+COMPATIBLE_HOST:powerpc64le = "null"
--- 
-2.35.1
-
+SGkgWm9sdMOhbiwNCg0KdGhhbmtzIGZvciB0aGUgcGF0Y2ghIEkndmUganVzdCBhcHBsaWVkIGl0
+IHRvIG1hc3Rlci1uZXh0LiBBZnRlciBzb21lDQp0ZXN0aW5nIGlzIHdpbGwgbGlrZWx5IGdldCBt
+ZXJnZWQgdG8gbWFzdGVyIGFuZCBraXJrc3RvbmUgYnJhbmNoLg0KDQpyZWdhcmRzO3JsDQoNCk9u
+IFR1ZSwgTWFyIDIyLCAyMDIyIGF0IDA2OjE3OjQwQU0gKzAxMDAsIFpvbHRhbiBCb3N6b3JtZW55
+aSB2aWEgbGlzdHMub3BlbmVtYmVkZGVkLm9yZyB3cm90ZToNCj4gRnJvbTogWm9sdMOhbiBCw7Zz
+esO2cm3DqW55aSA8emJvc3pvckBnbWFpbC5jb20+DQo+IA0KPiBJdCBmaXhlcyB0aGlzIGVycm9y
+Og0KPiANCj4gfCBjaGVja2luZyBmb3IgcGtnLWNvbmZpZy4uLiBubw0KPiB8ICoqKiBUaGUgcGtn
+LWNvbmZpZyBzY3JpcHQgY291bGQgbm90IGJlIGZvdW5kLiBNYWtlIHN1cmUgaXQgaXMNCj4gfCAq
+KiogaW4geW91ciBwYXRoLCBvciBzZXQgdGhlIFBLR19DT05GSUcgZW52aXJvbm1lbnQgdmFyaWFi
+bGUNCj4gfCAqKiogdG8gdGhlIGZ1bGwgcGF0aCB0byBwa2ctY29uZmlnLg0KPiB8IGNvbmZpZ3Vy
+ZTogZXJyb3I6IExpYnJhcnkgcmVxdWlyZW1lbnRzIChndGsrLTIuMCA+PSAyLjggZ3RocmVhZC0y
+LjAgPj0gMi4yIGdkay1waXhidWYtMi4wKSBub3QgbWV0OyBjb25zaWRlciBhZGp1c3RpbmcgdGhl
+IFBLR19DT05GSUdfUEFUSCBlbnZpcm9ubWVudCB2YXJpYWJsZSBpZiB5b3VyIGxpYnJhcmllcyBh
+cmUgaW4gYSBub25zdGFuZGFyZCBwcmVmaXggc28gcGtnLWNvbmZpZyBjYW4gZmluZCB0aGVtLg0K
+PiB8IE5PVEU6IFRoZSBmb2xsb3dpbmcgY29uZmlnLmxvZyBmaWxlcyBtYXkgcHJvdmlkZSBmdXJ0
+aGVyIGluZm9ybWF0aW9uLg0KPiB8IE5PVEU6IC4uLi93b3JrL2NvcmUyLTY0LW9lLWxpbnV4L2Ns
+YXNzcGF0aC8wLjk5LXIzL2J1aWxkL2NvbmZpZy5sb2cNCj4gfCBFUlJPUjogY29uZmlndXJlIGZh
+aWxlZA0KPiANCj4gU2lnbmVkLW9mZi1ieTogWm9sdMOhbiBCw7ZzesO2cm3DqW55aSA8emJvc3pv
+ckBnbWFpbC5jb20+DQo+IC0tLQ0KPiAgcmVjaXBlcy1jb3JlL2NsYXNzcGF0aC9jbGFzc3BhdGgu
+aW5jIHwgMiArLQ0KPiAgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9u
+KC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEvcmVjaXBlcy1jb3JlL2NsYXNzcGF0aC9jbGFzc3BhdGgu
+aW5jIGIvcmVjaXBlcy1jb3JlL2NsYXNzcGF0aC9jbGFzc3BhdGguaW5jDQo+IGluZGV4IDQyYzVk
+YWYuLjM1ZTdkYjMgMTAwNjQ0DQo+IC0tLSBhL3JlY2lwZXMtY29yZS9jbGFzc3BhdGgvY2xhc3Nw
+YXRoLmluYw0KPiArKysgYi9yZWNpcGVzLWNvcmUvY2xhc3NwYXRoL2NsYXNzcGF0aC5pbmMNCj4g
+QEAgLTcsNyArNyw3IEBAIExJQ0VOU0UgPSAiR1BMLTIuMCAmIFNBWC1QRCINCj4gIA0KPiAgUEJO
+ID0gImNsYXNzcGF0aCINCj4gIA0KPiAtaW5oZXJpdCBhdXRvdG9vbHMgamF2YSBnZXR0ZXh0DQo+
+ICtpbmhlcml0IGF1dG90b29scyBwa2djb25maWcgamF2YSBnZXR0ZXh0DQo+ICANCj4gIERFUEVO
+RFMgPSAidmlydHVhbC9qYXZhYy1uYXRpdmUgZmFzdGphci1uYXRpdmUgemlwLW5hdGl2ZSBnbXAg
+YW50bHItbmF0aXZlIGd0aysgZ2NvbmYgbGlieHRzdCBmaWxlIg0KPiAgDQo+IC0tIA0KPiAyLjM1
+LjENCj4g
 
