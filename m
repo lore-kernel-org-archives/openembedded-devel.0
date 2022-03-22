@@ -1,131 +1,98 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 31F53C433F5
-	for <webhook@archiver.kernel.org>; Tue, 22 Mar 2022 17:50:18 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com
- [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web10.13494.1647971417383966818
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D59BC433FE
+	for <webhook@archiver.kernel.org>; Tue, 22 Mar 2022 18:14:20 +0000 (UTC)
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
+ [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.web08.13702.1647972859531655551
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Mar 2022 10:50:17 -0700
+ Tue, 22 Mar 2022 11:14:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=GcUQTh2E;
- spf=pass (domain: gmail.com, ip: 209.85.214.170,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id q11so16093351pln.11
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=YC8p+KqT;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f42.google.com with SMTP id
+ bx24-20020a17090af49800b001c6872a9e4eso2864603pjb.5
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Mar 2022 10:50:17 -0700 (PDT)
+ Tue, 22 Mar 2022 11:14:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ooApyl9yTTJuJ3NvDwUn4ry9wmGhiWN8xOCtCYriNLw=;
-        b=GcUQTh2EvRbW8TM0W1aknE053AH93bu+6QRLw5wIJJ8GYAsg/ITpQJVv7n32VDPkBs
-         Epq4XzsEY8dqDmWcfqzqNBjY2fOsCKQLhN5phoOYDFztqHKd3DUHDcFaxbpVJceeLp8w
-         gJHvx+12oMErVSp2+cP/sxaizY9tHI/R/bSJXFUZwmn2GORBI03ZiY7KJiLq7al3tVGN
-         fNXOl3Y4wK2gGqFQxP2BuIbO6SSQ+KssK/jMHjPSTW7lWM61QRAfLrbq4VmqnWneTjxq
-         MKTF3PTfxMYbMoINoqg0p3mMDHSBbkNb95zjian9LNf49KA8do5Mn/LmWkh5vOLDw202
-         aPEQ==
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :references:from:in-reply-to:content-transfer-encoding;
+        bh=8FsoM7G5+1jnpTBpInDrHePJGiMDcjdcsW+VGUA+HJ4=;
+        b=YC8p+KqTdxCb0P1ObnpecEzSXyOH4/8kk8iB5qxpptzFboVAc8D4NqDsIZR17AX08y
+         phQTeIXxxrTHVtFQhFZNDfGl7j0dz2ayuHFYGtjSlzovHMd8mzGdOl1qdSXYR2VD459W
+         d2zEzYVuNUFP3Nrmn2vvbxKutTMWeSJcshXJuNm+phlShJPm4TH2X2eEJ/zm4105mRk6
+         K4uXZadDqOvzjnk1I197rWGxeslD4sQkI0mzJFM/S99wFMVhQPMSMvadUsFbdFPvM7sH
+         CkkDFJeVjSFXR+Bax8XBejTXXWGIffoDB1i8rcJziQfP7V51MlseDVHsOsjOrmeRBfVQ
+         Y6EA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:references:from:in-reply-to
          :content-transfer-encoding;
-        bh=ooApyl9yTTJuJ3NvDwUn4ry9wmGhiWN8xOCtCYriNLw=;
-        b=pwVieahyCVXDmRogOmxcST8wMjZeLd5rAT+jThfxM05Tz5pZCY26NjeDGzAMSipVZe
-         U8LmZlf/fClACF0IyI3jKAf/s0RZ53vZiemoX24aVu/giQu9hkE3RxYx2l9YUxPQyRct
-         JfIz4LnDjFfsZR276c9yfAYN348b16RHwfda2NbfWIeSbKeivaP17Ew5W49GBqc6C34T
-         lqtYUevV/xRuKJI4zlF0DOxRgoIoTBou+TiLzWA7eTgh8aGHwAjZTNpJUPZxmiInjhax
-         tKY0AJFywQyWu4xk5KrPhKWFoi5qcDQmdS/6n3DqxAshwqmO1vQ/nKOSuNlOSNBv6ZTg
-         GcaA==
-X-Gm-Message-State: AOAM533eoTmFrHT0sJ8leV+7t3r/3u8oL8cLlD//Y+KuNrkUN7ZaVgSj
-	A63iCh77UH6JH5zpvbjV311kHN1tsy2iQQ==
+        bh=8FsoM7G5+1jnpTBpInDrHePJGiMDcjdcsW+VGUA+HJ4=;
+        b=kVt/4xqjPxUZtTuf3Ex7ySigM0Nb07iviGnM9GdIjjUQKkdXXSQ905a+ASNCbpuTTF
+         E0w7OOLVmcWfVhqNGmogCFy8isCwePKxmRW4i1wdSHPIZDtGC1y4UwjcErGy9DOe6PKv
+         TUyz9qZHzi96M3EMDQmsON0BBaMaE0M0tgqAOcMUjwd7VBBSlc7ktzuYhDoLlbArsatY
+         l2bkCIMF5nfNiXZQur4yv7UinWBN4MGwfzpPp2BdGwwhYnugk+CWrywxTpmFgVm8nFBO
+         7oCzab2Iy2g2G4PXarfncXVKpWrWFk3tVtx1/QhWj+06elXBLpaWQ2V4f0r7PJ7eQ8v3
+         0fug==
+X-Gm-Message-State: AOAM532T8xodVdOuJoezCAbtHtSt3T1yp93fBCL54kIePCsIFYosb+wG
+	Codc8M6zWpav7jKLD+XsGpA=
 X-Google-Smtp-Source: 
- ABdhPJzmzjcVKJ9MgCmHwaQvdcMMQwLrbon0EaBy0ZJwyN8b5+0c9FB+qVFiG4Yh1V3nEi9J/8EXIQ==
-X-Received: by 2002:a17:90b:3e82:b0:1c7:2920:7c54 with SMTP id
- rj2-20020a17090b3e8200b001c729207c54mr6440140pjb.2.1647971416506;
-        Tue, 22 Mar 2022 10:50:16 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
+ ABdhPJw9qU9/0MHnIfUFQcDMMSMMRhvImnHkmlhPtF5QRUKMv6dBqtlMHBFozh5HSjYhRhF0wczyuA==
+X-Received: by 2002:a17:902:724c:b0:154:67d1:f56c with SMTP id
+ c12-20020a170902724c00b0015467d1f56cmr9341086pll.23.1647972858845;
+        Tue, 22 Mar 2022 11:14:18 -0700 (PDT)
+Received: from ?IPV6:2601:202:4180:a5c0:cbeb:b220:70ab:871d?
+ ([2601:202:4180:a5c0:cbeb:b220:70ab:871d])
         by smtp.gmail.com with ESMTPSA id
- i9-20020a17090a2a0900b001c6e540fb6asm3351302pjd.13.2022.03.22.10.50.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Mar 2022 10:50:16 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] valijson: move out of hard dep on meta-networking
-Date: Tue, 22 Mar 2022 10:50:13 -0700
-Message-Id: <20220322175013.3378960-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.35.1
+ a32-20020a631a20000000b003756899829csm17866126pga.58.2022.03.22.11.14.17
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 22 Mar 2022 11:14:18 -0700 (PDT)
+Message-ID: <b37193fb-6051-59e1-7113-5ebbac752185@gmail.com>
+Date: Tue, 22 Mar 2022 11:14:16 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Subject: Re: [oe] [meta-oe][dunfell][PATCH] p7zip: Fix for CVE-2016-9296
+Content-Language: en-US
+To: akash.hadke@kpit.com, openembedded-devel@lists.openembedded.org
+References: <20220113135432.5987-1-thakur.virendra1810@gmail.com>
+ <5677.1647413071739537247@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+In-Reply-To: <5677.1647413071739537247@lists.openembedded.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 22 Mar 2022 17:50:18 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 22 Mar 2022 18:14:20 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96148
+ https://lists.openembedded.org/g/openembedded-devel/message/96149
 
-curlpp is only needed to build examples, therefore make it a
-packageconfig and keep it disabled, which is default anyway
 
-Add packageconfigs for tests and disabling boost as well.
 
-Include boost support by default.
+On 3/15/22 23:44, akash hadke via lists.openembedded.org wrote:
+> Hello,
+>
+> Any update on this?
+its in the testing branch.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../packagegroups/packagegroup-meta-oe.bbappend             | 4 ----
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb  | 1 +
- .../recipes-devtools/valijson/valijson_0.6.bb               | 6 ++++--
- 3 files changed, 5 insertions(+), 6 deletions(-)
- rename meta-oe/{dynamic-layers/networking-layer => }/recipes-devtools/valijson/valijson_0.6.bb (81%)
+thanks for the ping.
 
-diff --git a/meta-oe/dynamic-layers/networking-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend b/meta-oe/dynamic-layers/networking-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
-index 359067cda3..b71b7e4f8a 100644
---- a/meta-oe/dynamic-layers/networking-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
-+++ b/meta-oe/dynamic-layers/networking-layer/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
-@@ -1,6 +1,2 @@
--RDEPENDS:packagegroup-meta-oe-devtools += "\
--    valijson \
--"
--
- RDEPENDS:packagegroup-meta-oe-support:append:x86 = "${@bb.utils.contains('BBFILE_COLLECTIONS', 'filesystems-layer', ' open-vm-tools', '', d)}"
- RDEPENDS:packagegroup-meta-oe-support:append:x86-64 = "${@bb.utils.contains('BBFILE_COLLECTIONS', 'filesystems-layer', ' open-vm-tools', '', d)}"
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 52a82e8acd..a74fe0e9d0 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -303,6 +303,7 @@ RDEPENDS:packagegroup-meta-oe-devtools ="\
-     squashfs-tools-ng \
-     uftrace \
-     unifex \
-+    valijson \
-     libxerces-c \
-     xerces-c-samples \
-     xmlrpc-c \
-diff --git a/meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.6.bb b/meta-oe/recipes-devtools/valijson/valijson_0.6.bb
-similarity index 81%
-rename from meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.6.bb
-rename to meta-oe/recipes-devtools/valijson/valijson_0.6.bb
-index 1d3daa1443..4bed4a4f10 100644
---- a/meta-oe/dynamic-layers/networking-layer/recipes-devtools/valijson/valijson_0.6.bb
-+++ b/meta-oe/recipes-devtools/valijson/valijson_0.6.bb
-@@ -10,9 +10,11 @@ S = "${WORKDIR}/git"
- 
- inherit cmake
- 
--EXTRA_OECMAKE = "-DINSTALL_HEADERS=1 -DBUILD_TESTS=0"
-+PACKAGECONFIG ?= "boost"
- 
--DEPENDS = "curlpp"
-+PACKAGECONFIG[boost] = "-Dvalijson_EXCLUDE_BOOST=FALSE,-Dvalijson_EXCLUDE_BOOST=TRUE,boost"
-+PACKAGECONFIG[examples] = "-Dvalijson_BUILD_EXAMPLES=TRUE,-Dvalijson_BUILD_EXAMPLES=FALSE,curlpp"
-+PACKAGECONFIG[tests] = "-Dvalijson_BUILD_TESTS=TRUE,-Dvalijson_BUILD_TESTS=FALSE,curlpp"
- 
- # valijson is a header only C++ library, so the main package will be empty.
- RDEPENDS:${PN}-dev = ""
--- 
-2.35.1
+-armin
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#96006): https://lists.openembedded.org/g/openembedded-devel/message/96006
+> Mute This Topic: https://lists.openembedded.org/mt/88396742/3616698
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
