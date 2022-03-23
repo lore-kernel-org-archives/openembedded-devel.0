@@ -1,245 +1,299 @@
-Return-Path: <sakib.sajal@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86859C433EF
-	for <webhook@archiver.kernel.org>; Wed, 23 Mar 2022 22:15:01 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web09.3520.1648073700220358218
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97E09C433F5
+	for <webhook@archiver.kernel.org>; Wed, 23 Mar 2022 23:20:52 +0000 (UTC)
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
+ [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web11.4392.1648077651773172865
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Mar 2022 15:15:00 -0700
+ Wed, 23 Mar 2022 16:20:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.3.146,
- mailfrom: sakib.sajal@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 22NMEwfQ011935
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Mar 2022 15:14:58 -0700
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Wed, 23 Mar 2022 15:14:58 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27; Wed, 23 Mar 2022 15:14:57 -0700
-Received: from yow-lpggp3.wrs.com (128.224.137.13) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Wed, 23 Mar 2022 15:14:57 -0700
-From: Sakib Sajal <sakib.sajal@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][PATCH] drbd-utils: update 9.13.1 -> 9.20.2
-Date: Wed, 23 Mar 2022 18:14:55 -0400
-Message-ID: <20220323221455.37922-1-sakib.sajal@windriver.com>
-X-Mailer: git-send-email 2.33.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=PH5so5N1;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id b8so3167386pjb.4
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 23 Mar 2022 16:20:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Y3xPs6NFhuUDvPXWZE3jzhPTYYR36zVGAWn9EQoyfgs=;
+        b=PH5so5N1Ekl4pvAF2vi2QowzKkjcY7Y+iZwKqNL+YlU9bfkEIZ/4P0YATtHhGIPQL/
+         Z/1hJjjbRcicEsuDoYJoWPbwQuBPUfWXEFfLfsSMWJVmW2xhJSlhPaS7ka8kx/98c0Lr
+         wZTE8bvANV78DLgyHtIhu0LOsl8aq5NPBlCrnJjo4FUPNzpY94k2OiyXdLxMmkuTGuDi
+         59pguVJguYaGyCQ8tL6vU8PUVYwuqoiK/AUyKPBUjH/T+c4bleTGnX3TvhfyW7dWJUlz
+         Zj7llSzg7pNxk1h9ElJ0uxX+iH7LSGFTLt0GvSr1P3XjTQDSUjCZSlNE6OLl8oFc2t7G
+         yS9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Y3xPs6NFhuUDvPXWZE3jzhPTYYR36zVGAWn9EQoyfgs=;
+        b=ENR+4SYpPdUSFrkRaNBJcmwbecB/0v9NEbBkunBiUluBEB7wjE1NPnUcyRXoAEuHBX
+         yiaxW1rvLQmShWiFRzbJl9kKTk2o7vswdEHbgbm2vEosfyIeyr+1r+d2A7NVZKLV9/RY
+         Ynp5HqvNmEUF+/Z2rGOaN5cBrOdCg7ff5oaBUoWxwx94e5fY80iNASD9dCopvoXaIlVw
+         rv8eHAw3Inj77Nc5zLcxiPUoEflBwplFjS9lBe11EpI1TR4s8IRzvHk/gfkzT/IgMjwz
+         xglTqX+vGSvmBxpRlsN0hvaY4fmtTgq4Q14S5eXK8wmtZGDCSW81iER8dRwJdzW/luJt
+         NitA==
+X-Gm-Message-State: AOAM532fkk12mBiSsVGdvyqCp8Gio5WfAeEN9mGqczIFT84JCQlF82Rt
+	CV/xD3LBvRF3H+u1tPwJ1DXz8kskdPBp+w==
+X-Google-Smtp-Source: 
+ ABdhPJxpD0S7hR6KDk6BP72xDsmtxpspr+faqDTE62wYK6JidWBVYMe19MLx4Fz/4Eo5XxPA/KV+uQ==
+X-Received: by 2002:a17:902:c948:b0:154:1e4f:9837 with SMTP id
+ i8-20020a170902c94800b001541e4f9837mr2512482pla.115.1648077650846;
+        Wed, 23 Mar 2022 16:20:50 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
+        by smtp.gmail.com with ESMTPSA id
+ m18-20020a639412000000b003820bd9f2f2sm733427pge.53.2022.03.23.16.20.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 23 Mar 2022 16:20:50 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Mingli Yu <mingli.yu@windriver.com>
+Subject: [PATCH] mariadb: Align atomic ops to help clang on x86
+Date: Wed, 23 Mar 2022 16:20:48 -0700
+Message-Id: <20220323232048.1585948-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Mar 2022 22:15:01 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Mar 2022 23:20:52 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96167
+ https://lists.openembedded.org/g/openembedded-devel/message/96168
 
-Dropped patch which is merged upstream:
-	0001-v84-Make-setup_options-definitions-as-extern.patch
+clang complains about alignments on 64bit atomics and falls back to
+using these functions from libatomic. And the configure part does not
+detect this condition and thinks that system can support 64bit atomics
+just fine.
 
-Refreshed patch:
-	0001-drbd-utils-support-usrmerge.patch
+clang needs this patch to fix
 
-The compiled binaries are not linked to LDFLAGS options provided
-by the build system cause QA issue:
-	do_package_qa: QA Issue: File /usr/sbin/drbdmon in package
-	drbd-utils doesn't have GNU_HASH (didn't pass LDFLAGS?)
+| pfs_instr.cc:(.text+0x10a5): undefined reference to `__atomic_fetch_add_8'
 
-Add 'TARGET_CC_ARCH += "${LDFLAGS}"' to resolve the issue.
-
-Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Mingli Yu <mingli.yu@windriver.com>
 ---
- .../0001-drbd-utils-support-usrmerge.patch    | 39 +++++++++++--------
- ...-setup_options-definitions-as-extern.patch | 32 ---------------
- ...d-utils_9.13.1.bb => drbd-utils_9.20.2.bb} | 11 ++++--
- 3 files changed, 30 insertions(+), 52 deletions(-)
- delete mode 100644 meta-networking/recipes-support/drbd/drbd-utils/0001-v84-Make-setup_options-definitions-as-extern.patch
- rename meta-networking/recipes-support/drbd/{drbd-utils_9.13.1.bb => drbd-utils_9.20.2.bb} (89%)
+ meta-oe/recipes-dbs/mysql/mariadb.inc         |   4 +
+ .../mysql/mariadb/clang-64bit-atomics.patch   | 178 ++++++++++++++++++
+ 2 files changed, 182 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/clang-64bit-atomics.patch
 
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch b/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch
-index 5e128727d..d976680e3 100644
---- a/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch
-+++ b/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch
-@@ -1,4 +1,4 @@
--From 642b5823abeee27a0fdc2d12d0e1235461ace9ed Mon Sep 17 00:00:00 2001
-+From 83764f5d57b3370e0b04a70f814ca49237a66eea Mon Sep 17 00:00:00 2001
- From: Changqing Li <changqing.li@windriver.com>
- Date: Thu, 5 Sep 2019 18:57:39 +0800
- Subject: [PATCH] drbd-utils: support usrmerge
-@@ -6,18 +6,19 @@ Subject: [PATCH] drbd-utils: support usrmerge
- Upstream-Status: Inappropriate[oe-specific]
- 
- Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
- ---
-  configure.ac         |  2 +-
-- scripts/Makefile.in  |  4 ++--
-+ scripts/Makefile.in  | 10 +++++-----
-  user/v83/Makefile.in | 14 +++++++-------
-  user/v84/Makefile.in | 14 +++++++-------
-- 4 files changed, 17 insertions(+), 17 deletions(-)
-+ 4 files changed, 20 insertions(+), 20 deletions(-)
- 
- diff --git a/configure.ac b/configure.ac
--index 4df1b4d..c4ef1bc 100644
-+index ae575586..3d7deeae 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -176,7 +176,7 @@ AC_ARG_WITH(tmpfilesdir,
-+@@ -180,7 +180,7 @@ AC_ARG_WITH(tmpfilesdir,
-  AC_SUBST(tmpfilesdir)
-  
-  # set default early
-@@ -27,22 +28,28 @@ index 4df1b4d..c4ef1bc 100644
-     test x"$with_udev" = xyes ; then
-  	if test x"$PKG_CONFIG" != x; then
- diff --git a/scripts/Makefile.in b/scripts/Makefile.in
--index fbb0beb..da701a1 100644
-+index fcd298e9..2521fb08 100644
- --- a/scripts/Makefile.in
- +++ b/scripts/Makefile.in
--@@ -75,8 +75,8 @@ endif
-- ifeq ($(subst both,systemd,$(initscripttype)),systemd)
-+@@ -88,11 +88,11 @@ ifeq ($(subst both,systemd,$(initscripttype)),systemd)
-  	install -d $(DESTDIR)$(systemdunitdir)
-  	install -m 644 drbd.service $(DESTDIR)$(systemdunitdir)/
---	install -d $(DESTDIR)/lib/drbd/
---	install -m 755 drbd $(DESTDIR)/lib/drbd/
--+	install -d $(DESTDIR)/${nonarch_libdir}/drbd
--+	install -m 755 drbd $(DESTDIR)/${nonarch_libdir}/drbd
-+ 	install -m 644 $(SYSTEMD_TEMPLATES) $(DESTDIR)$(systemdunitdir)/
-+-	install -d $(DESTDIR)/lib/drbd/scripts
-+-	install -m 755 drbd $(DESTDIR)/lib/drbd/scripts
-+-	install -m 755 drbd-service-shim.sh $(DESTDIR)/lib/drbd/scripts
-+-	install -m 755 drbd-wait-promotable.sh $(DESTDIR)/lib/drbd/scripts
-+-	install -m 755 ocf.ra.wrapper.sh $(DESTDIR)/lib/drbd/scripts
-++	install -d $(DESTDIR)/${nonarch_libdir}/drbdscripts
-++	install -m 755 drbd $(DESTDIR)/${nonarch_libdir}/drbdscripts
-++	install -m 755 drbd-service-shim.sh $(DESTDIR)/${nonarch_libdir}/drbdscripts
-++	install -m 755 drbd-wait-promotable.sh $(DESTDIR)/${nonarch_libdir}/drbdscripts
-++	install -m 755 ocf.ra.wrapper.sh $(DESTDIR)/${nonarch_libdir}/drbdscripts
-  	install -d $(DESTDIR)$(tmpfilesdir)/
-  	install -m 444 drbd.tmpfiles.conf $(DESTDIR)$(tmpfilesdir)/drbd.conf
-  endif
- diff --git a/user/v83/Makefile.in b/user/v83/Makefile.in
--index 27516de..b301376 100644
-+index 08cfe574..4c4971b6 100644
- --- a/user/v83/Makefile.in
- +++ b/user/v83/Makefile.in
- @@ -96,19 +96,19 @@ install:
-@@ -73,10 +80,10 @@ index 27516de..b301376 100644
-  .PHONY: install uninstall clean distclean
-  ../../configure:
- diff --git a/user/v84/Makefile.in b/user/v84/Makefile.in
--index 38977c6..05ef060 100644
-+index 0fcefc5f..81f7d5ec 100644
- --- a/user/v84/Makefile.in
- +++ b/user/v84/Makefile.in
--@@ -109,19 +109,19 @@ ifeq ($(WITH_84_SUPPORT),yes)
-+@@ -110,19 +110,19 @@ ifeq ($(WITH_84_SUPPORT),yes)
-  	install -d $(DESTDIR)$(localstatedir)/lib/drbd
-  	install -d $(DESTDIR)$(localstatedir)/run/drbd
-  	install -d $(DESTDIR)$(localstatedir)/lock
-@@ -104,5 +111,5 @@ index 38977c6..05ef060 100644
-  spell:
-  	for f in drbdadm_adjust.c drbdadm_main.c drbdadm_parser.c drbdadm_usage_cnt.c drbdsetup.c drbdtool_common.c; do \
- -- 
--2.7.4
-+2.33.0
- 
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils/0001-v84-Make-setup_options-definitions-as-extern.patch b/meta-networking/recipes-support/drbd/drbd-utils/0001-v84-Make-setup_options-definitions-as-extern.patch
-deleted file mode 100644
-index 6702f3bde..000000000
---- a/meta-networking/recipes-support/drbd/drbd-utils/0001-v84-Make-setup_options-definitions-as-extern.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From d095caf6f8f77fe056fb90ccd5d89c207a7f346d Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 12 Aug 2020 12:59:38 -0700
--Subject: [PATCH] v84: Make setup_options definitions as extern
--
--This is already defined in drbdadm_main.c, therefore make this
--declaration to be extern for other modules
--
--Fixes compatibility with gcc-10 which uses -fno-common by default
--
--Upstream-Status: Submitted [https://github.com/LINBIT/drbd-utils/pull/7]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- user/v84/drbdadm.h | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/user/v84/drbdadm.h b/user/v84/drbdadm.h
--index ed63d78c..8469f1c4 100644
----- a/user/v84/drbdadm.h
--+++ b/user/v84/drbdadm.h
--@@ -251,7 +251,7 @@ struct setup_option {
-- 	bool explicit;
-- 	char *option;
-- };
---struct setup_option *setup_options;
--+extern struct setup_option *setup_options;
-- 
-- extern void add_setup_option(bool explicit, char *option);
-- 
---- 
--2.28.0
--
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.13.1.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.20.2.bb
-similarity index 89%
-rename from meta-networking/recipes-support/drbd/drbd-utils_9.13.1.bb
-rename to meta-networking/recipes-support/drbd/drbd-utils_9.20.2.bb
-index a246464b2..4a1776908 100644
---- a/meta-networking/recipes-support/drbd/drbd-utils_9.13.1.bb
-+++ b/meta-networking/recipes-support/drbd/drbd-utils_9.20.2.bb
-@@ -10,11 +10,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
- 
- SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils;branch=${PV};protocol=https \
-            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers;branch=master;protocol=https \
--           file://0001-v84-Make-setup_options-definitions-as-extern.patch \
-            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 02ca5f96f2..7139ba08a4 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -20,6 +20,7 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
+            file://mm_malloc.patch \
+            file://sys_futex.patch \
+            file://mariadb-openssl3.patch \
++           file://clang-64bit-atomics.patch \
            "
--SRCREV_drbd-utils = "b24b0f7e42d500d3538d7eeffa017ec78d08f918"
--SRCREV_drbd-headers = "c757cf357edef67751b8f45a6ea894d287180087"
-+SRCREV_drbd-utils = "087ee6b4961ca154d76e4211223b03149373bed8"
-+SRCREV_drbd-headers = "f1529aa84e9d2f66c96ad283a1bbb708aabf03f7"
+ SRC_URI:append:libc-musl = " file://ppc-remove-glibc-dep.patch"
  
- SRCREV_FORMAT = "drbd-utils_drbd-headers"
- 
-@@ -40,6 +39,8 @@ EXTRA_OECONF = " \
-                 --without-manual \
-                "
- 
-+TARGET_CC_ARCH += "${LDFLAGS}"
+@@ -73,6 +74,7 @@ PACKAGECONFIG[openssl] = "-DWITH_SSL='system',-DWITH_SSL='bundled',openssl"
+ # https://mariadb.atlassian.net/browse/MDEV-5982
+ TARGET_CFLAGS += "-fuse-ld=bfd"
+ LDFLAGS += " -pthread"
 +
- # If we have inherited reproducible_build, we want to use it.
- export WANT_DRBD_REPRODUCIBLE_BUILD = "yes"
+ BUILD_CFLAGS += "-fuse-ld=bfd"
+ BUILD_CXXFLAGS += "-fuse-ld=bfd"
  
-@@ -56,7 +57,9 @@ RDEPENDS:${PN} += "bash perl-module-getopt-long perl-module-exporter perl-module
- FILES:${PN} += "/run"
- FILES:${PN} += "${nonarch_base_libdir}/drbd \
-                 ${nonarch_libdir}/drbd \
--                ${nonarch_libdir}/tmpfiles.d"
-+                ${nonarch_libdir}/tmpfiles.d \
-+                ${nonarch_libdir}/drbdscripts/* \
-+"
- FILES:${PN}-dbg += "${nonarch_base_libdir}/drbd/.debug"
+@@ -332,3 +334,5 @@ FILES:${PN}-server = "\
  
- CLEANBROKEN = "1"
+ DESCRIPTION:${PN}-leftovers = "unpackaged and probably unneeded files for ${PN}"
+ FILES:${PN}-leftovers = "/"
++
++CMAKE_VERBOSE = "VERBOSE=1"
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/clang-64bit-atomics.patch b/meta-oe/recipes-dbs/mysql/mariadb/clang-64bit-atomics.patch
+new file mode 100644
+index 0000000000..50ee0adf94
+--- /dev/null
++++ b/meta-oe/recipes-dbs/mysql/mariadb/clang-64bit-atomics.patch
+@@ -0,0 +1,178 @@
++Prevent Clang from emitting atomic libcalls
++
++Clang expects 8-byte alignment for some 64-bit atomic operations
++in some 32-bit targets. Native instruction lock cmpxchg8b (for x86)
++should only require 4-byte alignment.
++
++This patch tries to add 8-byte alignents to data needing atomic ops
++which helps clang to not generate the libatomic calls but emit
++builtins directly.
++
++Upstream-Status: Submitted[https://jira.mariadb.org/browse/MDEV-28162]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++--- a/include/my_atomic.h
+++++ b/include/my_atomic.h
++@@ -115,6 +115,16 @@
++ #include "atomic/gcc_builtins.h"
++ #endif
++ 
+++#include <stdint.h>
+++
+++# ifdef __GNUC__
+++typedef __attribute__((__aligned__(8))) int64_t ATOMIC_I64;
+++typedef __attribute__((__aligned__(8))) uint64_t ATOMIC_U64;
+++# else
+++typedef int64_t ATOMIC_I64;
+++typedef uint64_t ATOMIC_U64;
+++# endif
+++
++ #if SIZEOF_LONG == 4
++ #define my_atomic_addlong(A,B) my_atomic_add32((int32*) (A), (B))
++ #define my_atomic_loadlong(A) my_atomic_load32((int32*) (A))
++@@ -123,12 +133,12 @@
++ #define my_atomic_faslong(A,B) my_atomic_fas32((int32*) (A), (B))
++ #define my_atomic_caslong(A,B,C) my_atomic_cas32((int32*) (A), (int32*) (B), (C))
++ #else
++-#define my_atomic_addlong(A,B) my_atomic_add64((int64*) (A), (B))
++-#define my_atomic_loadlong(A) my_atomic_load64((int64*) (A))
++-#define my_atomic_loadlong_explicit(A,O) my_atomic_load64_explicit((int64*) (A), (O))
++-#define my_atomic_storelong(A,B) my_atomic_store64((int64*) (A), (B))
++-#define my_atomic_faslong(A,B) my_atomic_fas64((int64*) (A), (B))
++-#define my_atomic_caslong(A,B,C) my_atomic_cas64((int64*) (A), (int64*) (B), (C))
+++#define my_atomic_addlong(A,B) my_atomic_add64((ATOMIC_I64*) (A), (B))
+++#define my_atomic_loadlong(A) my_atomic_load64((ATOMIC_I64*) (A))
+++#define my_atomic_loadlong_explicit(A,O) my_atomic_load64_explicit((ATOMIC_I64*) (A), (O))
+++#define my_atomic_storelong(A,B) my_atomic_store64((ATOMIC_I64*) (A), (B))
+++#define my_atomic_faslong(A,B) my_atomic_fas64((ATOMIC_I64*) (A), (B))
+++#define my_atomic_caslong(A,B,C) my_atomic_cas64((ATOMIC_I64*) (A), (ATOMIC_I64*) (B), (C))
++ #endif
++ 
++ #ifndef MY_MEMORY_ORDER_SEQ_CST
++--- a/storage/perfschema/pfs_atomic.h
+++++ b/storage/perfschema/pfs_atomic.h
++@@ -41,7 +41,7 @@ public:
++   }
++ 
++   /** Atomic load. */
++-  static inline int64 load_64(int64 *ptr)
+++  static inline int64 load_64(ATOMIC_I64 *ptr)
++   {
++     return my_atomic_load64(ptr);
++   }
++@@ -53,9 +53,9 @@ public:
++   }
++ 
++   /** Atomic load. */
++-  static inline uint64 load_u64(uint64 *ptr)
+++  static inline uint64 load_u64(ATOMIC_U64 *ptr)
++   {
++-    return (uint64) my_atomic_load64((int64*) ptr);
+++    return (uint64) my_atomic_load64((ATOMIC_I64*) ptr);
++   }
++ 
++   /** Atomic store. */
++@@ -65,7 +65,7 @@ public:
++   }
++ 
++   /** Atomic store. */
++-  static inline void store_64(int64 *ptr, int64 value)
+++  static inline void store_64(ATOMIC_I64 *ptr, int64 value)
++   {
++     my_atomic_store64(ptr, value);
++   }
++@@ -77,9 +77,9 @@ public:
++   }
++ 
++   /** Atomic store. */
++-  static inline void store_u64(uint64 *ptr, uint64 value)
+++  static inline void store_u64(ATOMIC_U64 *ptr, uint64 value)
++   {
++-    my_atomic_store64((int64*) ptr, (int64) value);
+++    my_atomic_store64((ATOMIC_I64*) ptr, (int64) value);
++   }
++ 
++   /** Atomic add. */
++@@ -89,7 +89,7 @@ public:
++   }
++ 
++   /** Atomic add. */
++-  static inline int64 add_64(int64 *ptr, int64 value)
+++  static inline int64 add_64(ATOMIC_I64 *ptr, int64 value)
++   {
++     return my_atomic_add64(ptr, value);
++   }
++@@ -101,9 +101,9 @@ public:
++   }
++ 
++   /** Atomic add. */
++-  static inline uint64 add_u64(uint64 *ptr, uint64 value)
+++  static inline uint64 add_u64(ATOMIC_U64 *ptr, uint64 value)
++   {
++-    return (uint64) my_atomic_add64((int64*) ptr, (int64) value);
+++    return (uint64) my_atomic_add64((ATOMIC_I64*) ptr, (int64) value);
++   }
++ 
++   /** Atomic compare and swap. */
++@@ -114,7 +114,7 @@ public:
++   }
++ 
++   /** Atomic compare and swap. */
++-  static inline bool cas_64(int64 *ptr, int64 *old_value,
+++  static inline bool cas_64(ATOMIC_I64 *ptr, ATOMIC_I64 *old_value,
++                             int64 new_value)
++   {
++     return my_atomic_cas64(ptr, old_value, new_value);
++@@ -129,10 +129,10 @@ public:
++   }
++ 
++   /** Atomic compare and swap. */
++-  static inline bool cas_u64(uint64 *ptr, uint64 *old_value,
+++  static inline bool cas_u64(ATOMIC_U64 *ptr, ATOMIC_U64 *old_value,
++                              uint64 new_value)
++   {
++-    return my_atomic_cas64((int64*) ptr, (int64*) old_value,
+++    return my_atomic_cas64((ATOMIC_I64*) ptr, (ATOMIC_I64*) old_value,
++                             (uint64) new_value);
++   }
++ };
++--- a/sql/sql_class.h
+++++ b/sql/sql_class.h
++@@ -1049,7 +1049,7 @@ static inline void update_global_memory_
++                       (longlong) global_status_var.global_memory_used,
++                       size));
++   // workaround for gcc 4.2.4-1ubuntu4 -fPIE (from DEB_BUILD_HARDENING=1)
++-  int64 volatile * volatile ptr= &global_status_var.global_memory_used;
+++  ATOMIC_I64 volatile * volatile ptr= &global_status_var.global_memory_used;
++   my_atomic_add64_explicit(ptr, size, MY_MEMORY_ORDER_RELAXED);
++ }
++ 
++--- a/storage/innobase/include/srv0mon.h
+++++ b/storage/innobase/include/srv0mon.h
++@@ -49,7 +49,7 @@ enum monitor_running_status {
++ typedef enum monitor_running_status	monitor_running_t;
++ 
++ /** Monitor counter value type */
++-typedef	int64_t				mon_type_t;
+++typedef	ATOMIC_I64			mon_type_t;
++ 
++ /** Two monitor structures are defined in this file. One is
++ "monitor_value_t" which contains dynamic counter values for each
++@@ -568,7 +568,7 @@ Use MONITOR_INC if appropriate mutex pro
++ 	if (enabled) {							\
++ 		ib_uint64_t	value;					\
++ 		value  = my_atomic_add64_explicit(			\
++-			(int64*) &MONITOR_VALUE(monitor), 1,		\
+++			(ATOMIC_I64*) &MONITOR_VALUE(monitor), 1,	\
++ 			MY_MEMORY_ORDER_RELAXED) + 1;			\
++ 		/* Note: This is not 100% accurate because of the	\
++ 		inherent race, we ignore it due to performance. */	\
++@@ -585,7 +585,7 @@ Use MONITOR_DEC if appropriate mutex pro
++ 	if (enabled) {							\
++ 		ib_uint64_t	value;					\
++ 		value = my_atomic_add64_explicit(			\
++-			(int64*) &MONITOR_VALUE(monitor), -1,		\
+++			(ATOMIC_I64*) &MONITOR_VALUE(monitor), -1,	\
++ 			MY_MEMORY_ORDER_RELAXED) - 1;			\
++ 		/* Note: This is not 100% accurate because of the	\
++ 		inherent race, we ignore it due to performance. */	\
 -- 
-2.33.0
+2.35.1
 
 
