@@ -1,180 +1,245 @@
-Return-Path: <trevor.gamblin@windriver.com>
+Return-Path: <sakib.sajal@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DE677C433FE
-	for <webhook@archiver.kernel.org>; Wed, 23 Mar 2022 20:33:03 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com
- [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web12.2305.1648067582518587541
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 86859C433EF
+	for <webhook@archiver.kernel.org>; Wed, 23 Mar 2022 22:15:01 +0000 (UTC)
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
+ by mx.groups.io with SMTP id smtpd.web09.3520.1648073700220358218
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Mar 2022 13:33:02 -0700
+ Wed, 23 Mar 2022 15:15:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=AA3TN2jl;
+ dkim=missing;
  spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
- invalid domain name (domain: windriver.com, ip: 205.220.166.238,
- mailfrom: prvs=00811796c1=trevor.gamblin@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id
- 22NJk9TR015179
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
+ domain name (domain: windriver.com, ip: 147.11.3.146,
+ mailfrom: sakib.sajal@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 22NMEwfQ011935
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Mar 2022 13:33:02 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
- h=from : to :
- subject : date : message-id : content-transfer-encoding : content-type :
- mime-version; s=PPS06212021;
- bh=MDONOjgTTr5z/JfiraTKM0ZMmm3wOZuW/kDQWYiTkC8=;
- b=AA3TN2jlOKb7TtKEvhW1RovEdvA7bZ9ZZvcykb1zMEEoHHyTicp+RhOvbNP2q0x/WFxb
- /+Y0AxO9zz9Mug5n+wS6flqyDhTyJ5UWmgqgguBxeSk4WEhWulwpqgMiEVFPAqTi4GQa
- XBpwHJDAWFwnktTTB93ao/b7fLGnqQGT6EwmFsbdFMjRb/Q0jMGX+RUHIAT+qZfvar8f
- 3Sjz1YpOSt+C/GyG8lB/5YUwWSTALfXz+uglufGKRlT1cLUzx0Oi58dJT6nPumDhU8Jy
- iaej+0WFe9FZIwKOKPEpHtR47xNyqSUIio50qtaZbVFTLpjMNv4f/IOzo0JVgwEelA5y 4w==
-Received: from nam02-bn1-obe.outbound.protection.outlook.com
- (mail-bn1nam07lp2046.outbound.protection.outlook.com [104.47.51.46])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ewaf3uqc5-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Mar 2022 13:33:02 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=h2E8vKRU+mYcmYr8eo0005kwt1om12SAH29AmIWdsIL+y8G0icBTlg9bOg48Ynt//aq25t6fcELj1HxhHvlX6lzPCRFsQyQKtI23itej4koDsf7WgJ0/7RqeUuEiN6rODADfBXJZJ8zKd3+ABoBNp6SHF6ka6u0dfH/rdPitct8Iwjsnn7CSdBpXKTSqef70WpT1zTaZ5Re4ObjUgwoYPI9TUfuQ/6zoM0+O2ZlxZoLrU/v8V/w4BvPiBrIsJoL/Rnu/iV5lnqHFHh7B3aKl29ON+9T7AeNRuIsyLJbfYZvM3lTlkJ1xNldgV0LchLyZqAsCMykfxmV2CQDipD+vDg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MDONOjgTTr5z/JfiraTKM0ZMmm3wOZuW/kDQWYiTkC8=;
- b=jDe3RJLDjYzS35ndukVJfnoi3c5juudGlKwaig7srKgUrz5pj6R3fAZIEhF7xvXXPc/ten0u9cTEBDAjP1S4jWt765xxSqWWkJLIpFeMqhL7IuTTxYnyN1iu/1lYvXu1/g+Uodho1kQck/0YjK72R6Mw2ObQ9SxG8kJ3k3SAxE9AOS3i8MlV6Q0vh7RqdZdvX+U1vt0vbRDcz9j3HTpmZLUXBVhbteJaByD1M0DzrcjHi0UehHVn6Bf4oAmkuEMPwiNi+yhnbBlUmrA1tk22hLVHRL8BCaU4jtCDQAsbaiMERu+LegK+aik79fL/RPo5vG+UL0LXfpeyXr9gJw9OTw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BL0PR11MB3009.namprd11.prod.outlook.com (2603:10b6:208:31::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5081.15; Wed, 23 Mar
- 2022 20:32:57 +0000
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::c1c7:209:c28f:67dc]) by BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::c1c7:209:c28f:67dc%3]) with mapi id 15.20.5081.023; Wed, 23 Mar 2022
- 20:32:57 +0000
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH] packagegroup-meta-python: add
- python3-pytest-lazy-fixture
-Date: Wed, 23 Mar 2022 16:32:50 -0400
-Message-Id: <20220323203250.4029016-1-trevor.gamblin@windriver.com>
-X-Mailer: git-send-email 2.35.1
+ Wed, 23 Mar 2022 15:14:58 -0700
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Wed, 23 Mar 2022 15:14:58 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.27; Wed, 23 Mar 2022 15:14:57 -0700
+Received: from yow-lpggp3.wrs.com (128.224.137.13) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Wed, 23 Mar 2022 15:14:57 -0700
+From: Sakib Sajal <sakib.sajal@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-networking][PATCH] drbd-utils: update 9.13.1 -> 9.20.2
+Date: Wed, 23 Mar 2022 18:14:55 -0400
+Message-ID: <20220323221455.37922-1-sakib.sajal@windriver.com>
+X-Mailer: git-send-email 2.33.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: YT1PR01CA0141.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2f::20) To BY5PR11MB3909.namprd11.prod.outlook.com
- (2603:10b6:a03:191::13)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 0c9ec738-0532-4c9f-b281-08da0d0c50d2
-X-MS-TrafficTypeDiagnostic: BL0PR11MB3009:EE_
-X-Microsoft-Antispam-PRVS: 
-	<BL0PR11MB30093D3CFC799598DEE70D4D9F189@BL0PR11MB3009.namprd11.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	lAA5s9kpsq59iJfsiKTAYgwgsI9jg7Zo8H4Eg9sXTEpncyLH3Q/OFPq/jUeayxNZRq0bTJXgDZumxgNN+gQrs4gGepSxb8n96xZvwQcmhsxHc1L8VBUEJIFDih0eQtiTEpkjo53sBh1naDda2BMRmVCcD8oG0IZTyVXDIfqkGR6Bbi9HHz+pXvMNBoGtK82ZnC6hOumkqlBHyPDukjR5nJSySOBh3RVnnyno0pOZXvH1tFUV9U7/3k6ju0OA/2NCwsNM3H80uWU1q76FLp6Bmg+KbF7ZV/M/288CdocSUhRueZbzL8htwevNBlBbQ/StX9G/QGmSXp/PFu2BJP/PQWJKsqSghl/WD8af1D6C5xpMck5P/VGVxGf2CMUSqihruwl5KObJ8qiMby0HRj18v2q4SJuACzCb89Tb8g1LcjYxCJTIQMlKZQlc51NOIU8IHO63uca+Fjk6yBCXqifrKm6IR2YkUoNKxcJC/fzNCnocwsJHrdkkURTf38ZOes/djmEH1VkCX6BZx8t1TEPbDShc2VFpjUuEU+0qNsXJpn1rqposM4w8NeV8T3JLL5ne/C3Ogu3SwVuH3blWoTJ0CyJkNdXGoLt96NQS7v8nM5tC/tPFEwEz6crfQbxt3kgDNHSRo9OScgjwYtb1p9Gs09OoDN9zvPeDTSzcEeBjnSH72ufj5k4byd9bjxAmQvUQd5qwDUkUrb0kedZT1Q9T8w==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(8936002)(5660300002)(83380400001)(6506007)(44832011)(66556008)(6916009)(2906002)(52116002)(6666004)(316002)(26005)(508600001)(6486002)(6512007)(186003)(1076003)(8676002)(2616005)(66476007)(38350700002)(66946007)(38100700002)(36756003)(86362001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?UilRWgSfkU+C+PidGHZ/9Y7Y7jwLLkyu9PEpQTURQLV8XKyCYmREP4KwUkaS?=
- =?us-ascii?Q?mBRs7QPMAejnTfgjUMkL6iPbD9R21VR1/TV/GSM6zXsUxADKncZlBOMivT6W?=
- =?us-ascii?Q?Ouj010wNl4Y+XL/CzJMuqNPvP5tLrYFH0yEfFL8KeYGsQkaTJB+61nWsakX1?=
- =?us-ascii?Q?iAoNCiqb3nVhYcwBwCRjrpkeT3Eq0I5ZjHI7wH0S04bgK8lwvzHi/y6Sq7Cy?=
- =?us-ascii?Q?Hjbsnwzj4/VKjJoINZPUClHEaGvYcrzS2OYvC3ezcp0dASQw4wWvcUBj8JG4?=
- =?us-ascii?Q?vdQjKvvLjf9iYOdqHz0D9Svjyx4y5Ef26u/jdXiRmxe4WCiPhmvFrF0fUtMU?=
- =?us-ascii?Q?Ub/KssP0Qb28L/xI5iGtanDIsFdN0KJfY6JNdO9tk5/DU+3jV21Psw0isPGC?=
- =?us-ascii?Q?njXaXAZUro5fj9Mu3OdPZogSfKXvwnYzI7ZUW3WNP2l9HIFmN7JSNhnx/ZO1?=
- =?us-ascii?Q?mr3VwzKRIWlGBnJpHHxh3qpuvfGAFgtbKoDfeYfDRGZKLnPKl++9b4uTCBiW?=
- =?us-ascii?Q?AyZWOGN16rNOBzE2JkhCZDL7PL49nDpw0Q08NDZsfN/XlnAwjmm2fXcVqImF?=
- =?us-ascii?Q?+mypGDrVDQwZslKT539KJnKs3spAmJwzK9IY0ODxO+iVO+du37+M6QfaqcFT?=
- =?us-ascii?Q?2Pe7Ozxk6SqVeE1Y1rD2VDttMhRdqUgk5KrnxCti6k0uaBbR/ILZVhwk6qd5?=
- =?us-ascii?Q?Dd08MYD35LIGyFDZhnbeyBAqBbcfJ9SWXUBp4qOws/eL1JVEaMYPuWSFwlkf?=
- =?us-ascii?Q?9A1ffuwzcdyjo1C6JkoiQ+R/r06g2lyUlGd9DwIt2O9Zx8EnJVPd7vU9q00B?=
- =?us-ascii?Q?GOwBsrTzp0xfUtGtL4RubGhRb+wln6We4eNjeiqJrd4+78lPc3elpUuu5ADo?=
- =?us-ascii?Q?ODgrxoNZ1OQCYW1YmMUwmjGsxI4XNVk+Rez7rMXDzx9I7n89VE3sC4cQ+pS4?=
- =?us-ascii?Q?2vAJ5ZyX83Krdw1u0uuJwzLXy2RJwVzEAWp7jIfhWBJgU14tP9lnvXaYZn7r?=
- =?us-ascii?Q?b4u93ye7S+fOIFE3fjxORThwHFPsywp3mxpnCWH+3jJc1c8Ip8NWHFhli2fQ?=
- =?us-ascii?Q?RjgkDz4bWjk+t1uh/aznm1gDucPz/rgmxyiPI7MoZ1AsvZRu5gIIarZSy2w9?=
- =?us-ascii?Q?ZLVTlV3iHHB55j80KsdaLNEN7OU46LyEiA2+isUC2hweQVschoqbeKkEUPJq?=
- =?us-ascii?Q?TcML2a4KrOdFJoUGwJXHaHRb/E2O46C6H1Sj80E8pieYWghOe7WEPDspEg+C?=
- =?us-ascii?Q?sLvHHwa8JHIT8EDd3CruhH5YOEtl3QDK2a1NiOC7j9HbzTG1vw57ZhLZZYTA?=
- =?us-ascii?Q?4kbLlybbI9mJOsCGkj13YIPwYfOJofsocrfaSxJGW3QW7e4+AYuAnURybUHC?=
- =?us-ascii?Q?8LcaLiTpCkishYryO2uwx8VyUVTg3zo/BefK1s5O5mw3jb2V/G1gsct6V8ij?=
- =?us-ascii?Q?vhaIV9M7ZMf7qEVAwbVDPLV+5ZF+8jpPnTfoHCXQRH+oXobWQzdtHQ=3D=3D?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 0c9ec738-0532-4c9f-b281-08da0d0c50d2
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2022 20:32:57.4819
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 
- 34tiK1wWLn9uKBg/ibCPQrbBAqGFKXJFgKU450sICAnRuToi6EUSpLMYuZIHYO2yOZoM0T/7McB+3zsSKbhrDv+DXWOD2aCrrkgkSrH2iQo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR11MB3009
-X-Proofpoint-ORIG-GUID: FFN1JD8cb1GVPtiwLGM-2GNVTaRJ3YAG
-X-Proofpoint-GUID: FFN1JD8cb1GVPtiwLGM-2GNVTaRJ3YAG
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.850,Hydra:6.0.425,FMLib:17.11.64.514
- definitions=2022-03-23_08,2022-03-23_01,2022-02-23_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 adultscore=0
- priorityscore=1501 lowpriorityscore=0 impostorscore=0 mlxscore=0
- bulkscore=0 malwarescore=0 mlxlogscore=876 suspectscore=0 clxscore=1015
- spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2202240000 definitions=main-2203230107
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Mar 2022 20:33:03 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Mar 2022 22:15:01 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96166
+ https://lists.openembedded.org/g/openembedded-devel/message/96167
 
-Also remove two redundant ptest listings for jinja2 and markupsafe.
+Dropped patch which is merged upstream:
+	0001-v84-Make-setup_options-definitions-as-extern.patch
 
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+Refreshed patch:
+	0001-drbd-utils-support-usrmerge.patch
+
+The compiled binaries are not linked to LDFLAGS options provided
+by the build system cause QA issue:
+	do_package_qa: QA Issue: File /usr/sbin/drbdmon in package
+	drbd-utils doesn't have GNU_HASH (didn't pass LDFLAGS?)
+
+Add 'TARGET_CC_ARCH += "${LDFLAGS}"' to resolve the issue.
+
+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
 ---
- .../recipes-core/packagegroups/packagegroup-meta-python.bb    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../0001-drbd-utils-support-usrmerge.patch    | 39 +++++++++++--------
+ ...-setup_options-definitions-as-extern.patch | 32 ---------------
+ ...d-utils_9.13.1.bb => drbd-utils_9.20.2.bb} | 11 ++++--
+ 3 files changed, 30 insertions(+), 52 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/drbd/drbd-utils/0001-v84-Make-setup_options-definitions-as-extern.patch
+ rename meta-networking/recipes-support/drbd/{drbd-utils_9.13.1.bb => drbd-utils_9.20.2.bb} (89%)
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index 682814a6a..f7bf36519 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -334,6 +334,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
-     python3-pytest-forked \
-     python3-pytest-helpers-namespace \
-     python3-pytest-html \
-+    python3-pytest-lazy-fixture \
-     python3-pytest-metadata \
-     python3-pytest-tempdir \
-     python3-pytest-timeout \
-@@ -452,8 +453,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
- "
+diff --git a/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch b/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch
+index 5e128727d..d976680e3 100644
+--- a/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch
++++ b/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch
+@@ -1,4 +1,4 @@
+-From 642b5823abeee27a0fdc2d12d0e1235461ace9ed Mon Sep 17 00:00:00 2001
++From 83764f5d57b3370e0b04a70f814ca49237a66eea Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+ Date: Thu, 5 Sep 2019 18:57:39 +0800
+ Subject: [PATCH] drbd-utils: support usrmerge
+@@ -6,18 +6,19 @@ Subject: [PATCH] drbd-utils: support usrmerge
+ Upstream-Status: Inappropriate[oe-specific]
  
- RDEPENDS:packagegroup-meta-python3-ptest = "\
--    python3-jinja2-ptest \
--    python3-markupsafe-ptest \
-     python3-ansicolors-ptest \
-     python3-appdirs-ptest \
-     python3-betamax-ptest \
-@@ -489,6 +488,7 @@ RDEPENDS:packagegroup-meta-python3-ptest = "\
-     python3-pyasn1-modules-ptest \
-     python3-pyroute2-ptest \
-     python3-pyserial-ptest \
-+    python3-pytest-lazy-fixture-ptest \
-     python3-pytoml-ptest \
-     python3-requests-file-ptest \
-     python3-requests-toolbelt-ptest \
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
+ ---
+  configure.ac         |  2 +-
+- scripts/Makefile.in  |  4 ++--
++ scripts/Makefile.in  | 10 +++++-----
+  user/v83/Makefile.in | 14 +++++++-------
+  user/v84/Makefile.in | 14 +++++++-------
+- 4 files changed, 17 insertions(+), 17 deletions(-)
++ 4 files changed, 20 insertions(+), 20 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index 4df1b4d..c4ef1bc 100644
++index ae575586..3d7deeae 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -176,7 +176,7 @@ AC_ARG_WITH(tmpfilesdir,
++@@ -180,7 +180,7 @@ AC_ARG_WITH(tmpfilesdir,
+  AC_SUBST(tmpfilesdir)
+  
+  # set default early
+@@ -27,22 +28,28 @@ index 4df1b4d..c4ef1bc 100644
+     test x"$with_udev" = xyes ; then
+  	if test x"$PKG_CONFIG" != x; then
+ diff --git a/scripts/Makefile.in b/scripts/Makefile.in
+-index fbb0beb..da701a1 100644
++index fcd298e9..2521fb08 100644
+ --- a/scripts/Makefile.in
+ +++ b/scripts/Makefile.in
+-@@ -75,8 +75,8 @@ endif
+- ifeq ($(subst both,systemd,$(initscripttype)),systemd)
++@@ -88,11 +88,11 @@ ifeq ($(subst both,systemd,$(initscripttype)),systemd)
+  	install -d $(DESTDIR)$(systemdunitdir)
+  	install -m 644 drbd.service $(DESTDIR)$(systemdunitdir)/
+--	install -d $(DESTDIR)/lib/drbd/
+--	install -m 755 drbd $(DESTDIR)/lib/drbd/
+-+	install -d $(DESTDIR)/${nonarch_libdir}/drbd
+-+	install -m 755 drbd $(DESTDIR)/${nonarch_libdir}/drbd
++ 	install -m 644 $(SYSTEMD_TEMPLATES) $(DESTDIR)$(systemdunitdir)/
++-	install -d $(DESTDIR)/lib/drbd/scripts
++-	install -m 755 drbd $(DESTDIR)/lib/drbd/scripts
++-	install -m 755 drbd-service-shim.sh $(DESTDIR)/lib/drbd/scripts
++-	install -m 755 drbd-wait-promotable.sh $(DESTDIR)/lib/drbd/scripts
++-	install -m 755 ocf.ra.wrapper.sh $(DESTDIR)/lib/drbd/scripts
+++	install -d $(DESTDIR)/${nonarch_libdir}/drbdscripts
+++	install -m 755 drbd $(DESTDIR)/${nonarch_libdir}/drbdscripts
+++	install -m 755 drbd-service-shim.sh $(DESTDIR)/${nonarch_libdir}/drbdscripts
+++	install -m 755 drbd-wait-promotable.sh $(DESTDIR)/${nonarch_libdir}/drbdscripts
+++	install -m 755 ocf.ra.wrapper.sh $(DESTDIR)/${nonarch_libdir}/drbdscripts
+  	install -d $(DESTDIR)$(tmpfilesdir)/
+  	install -m 444 drbd.tmpfiles.conf $(DESTDIR)$(tmpfilesdir)/drbd.conf
+  endif
+ diff --git a/user/v83/Makefile.in b/user/v83/Makefile.in
+-index 27516de..b301376 100644
++index 08cfe574..4c4971b6 100644
+ --- a/user/v83/Makefile.in
+ +++ b/user/v83/Makefile.in
+ @@ -96,19 +96,19 @@ install:
+@@ -73,10 +80,10 @@ index 27516de..b301376 100644
+  .PHONY: install uninstall clean distclean
+  ../../configure:
+ diff --git a/user/v84/Makefile.in b/user/v84/Makefile.in
+-index 38977c6..05ef060 100644
++index 0fcefc5f..81f7d5ec 100644
+ --- a/user/v84/Makefile.in
+ +++ b/user/v84/Makefile.in
+-@@ -109,19 +109,19 @@ ifeq ($(WITH_84_SUPPORT),yes)
++@@ -110,19 +110,19 @@ ifeq ($(WITH_84_SUPPORT),yes)
+  	install -d $(DESTDIR)$(localstatedir)/lib/drbd
+  	install -d $(DESTDIR)$(localstatedir)/run/drbd
+  	install -d $(DESTDIR)$(localstatedir)/lock
+@@ -104,5 +111,5 @@ index 38977c6..05ef060 100644
+  spell:
+  	for f in drbdadm_adjust.c drbdadm_main.c drbdadm_parser.c drbdadm_usage_cnt.c drbdsetup.c drbdtool_common.c; do \
+ -- 
+-2.7.4
++2.33.0
+ 
+diff --git a/meta-networking/recipes-support/drbd/drbd-utils/0001-v84-Make-setup_options-definitions-as-extern.patch b/meta-networking/recipes-support/drbd/drbd-utils/0001-v84-Make-setup_options-definitions-as-extern.patch
+deleted file mode 100644
+index 6702f3bde..000000000
+--- a/meta-networking/recipes-support/drbd/drbd-utils/0001-v84-Make-setup_options-definitions-as-extern.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From d095caf6f8f77fe056fb90ccd5d89c207a7f346d Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 12 Aug 2020 12:59:38 -0700
+-Subject: [PATCH] v84: Make setup_options definitions as extern
+-
+-This is already defined in drbdadm_main.c, therefore make this
+-declaration to be extern for other modules
+-
+-Fixes compatibility with gcc-10 which uses -fno-common by default
+-
+-Upstream-Status: Submitted [https://github.com/LINBIT/drbd-utils/pull/7]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- user/v84/drbdadm.h | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/user/v84/drbdadm.h b/user/v84/drbdadm.h
+-index ed63d78c..8469f1c4 100644
+---- a/user/v84/drbdadm.h
+-+++ b/user/v84/drbdadm.h
+-@@ -251,7 +251,7 @@ struct setup_option {
+- 	bool explicit;
+- 	char *option;
+- };
+--struct setup_option *setup_options;
+-+extern struct setup_option *setup_options;
+- 
+- extern void add_setup_option(bool explicit, char *option);
+- 
+--- 
+-2.28.0
+-
+diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.13.1.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.20.2.bb
+similarity index 89%
+rename from meta-networking/recipes-support/drbd/drbd-utils_9.13.1.bb
+rename to meta-networking/recipes-support/drbd/drbd-utils_9.20.2.bb
+index a246464b2..4a1776908 100644
+--- a/meta-networking/recipes-support/drbd/drbd-utils_9.13.1.bb
++++ b/meta-networking/recipes-support/drbd/drbd-utils_9.20.2.bb
+@@ -10,11 +10,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
+ 
+ SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils;branch=${PV};protocol=https \
+            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers;branch=master;protocol=https \
+-           file://0001-v84-Make-setup_options-definitions-as-extern.patch \
+            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
+           "
+-SRCREV_drbd-utils = "b24b0f7e42d500d3538d7eeffa017ec78d08f918"
+-SRCREV_drbd-headers = "c757cf357edef67751b8f45a6ea894d287180087"
++SRCREV_drbd-utils = "087ee6b4961ca154d76e4211223b03149373bed8"
++SRCREV_drbd-headers = "f1529aa84e9d2f66c96ad283a1bbb708aabf03f7"
+ 
+ SRCREV_FORMAT = "drbd-utils_drbd-headers"
+ 
+@@ -40,6 +39,8 @@ EXTRA_OECONF = " \
+                 --without-manual \
+                "
+ 
++TARGET_CC_ARCH += "${LDFLAGS}"
++
+ # If we have inherited reproducible_build, we want to use it.
+ export WANT_DRBD_REPRODUCIBLE_BUILD = "yes"
+ 
+@@ -56,7 +57,9 @@ RDEPENDS:${PN} += "bash perl-module-getopt-long perl-module-exporter perl-module
+ FILES:${PN} += "/run"
+ FILES:${PN} += "${nonarch_base_libdir}/drbd \
+                 ${nonarch_libdir}/drbd \
+-                ${nonarch_libdir}/tmpfiles.d"
++                ${nonarch_libdir}/tmpfiles.d \
++                ${nonarch_libdir}/drbdscripts/* \
++"
+ FILES:${PN}-dbg += "${nonarch_base_libdir}/drbd/.debug"
+ 
+ CLEANBROKEN = "1"
 -- 
-2.35.1
+2.33.0
 
 
