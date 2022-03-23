@@ -2,218 +2,180 @@ Return-Path: <trevor.gamblin@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E671C433EF
-	for <webhook@archiver.kernel.org>; Wed, 23 Mar 2022 17:34:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD956C433EF
+	for <webhook@archiver.kernel.org>; Wed, 23 Mar 2022 19:45:52 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com
  [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.160.1648056833721455900
+ by mx.groups.io with SMTP id smtpd.web10.1794.1648064750783792003
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Mar 2022 10:33:54 -0700
+ Wed, 23 Mar 2022 12:45:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=E+w7CW7i;
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=FMy/DyGS;
  spf=permerror,
  err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
  invalid domain name (domain: windriver.com, ip: 205.220.178.238,
  mailfrom: prvs=00811796c1=trevor.gamblin@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
 	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id
- 22NDeW2s014831
+ 22NIgL45018336
 	for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Mar 2022 17:33:53 GMT
+ Wed, 23 Mar 2022 19:45:49 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
  h=from : to :
  subject : date : message-id : content-transfer-encoding : content-type :
  mime-version; s=PPS06212021;
- bh=rZrEnb5PdYnBA+By9vygHuXUlPVG5jn+/74jJhpTsfY=;
- b=E+w7CW7iyUpVY3NJPycRe7679LTvY/H4biMcFb5WyUIikDR5BW9j5mQSt5RrlH1a9IRo
- zvWo/0iJWz/YUVgcl7Bln350tCJsrUUOxI+XlcYk8UB8FMe/JkIyzFJ4FhAD8f0qqyCM
- qEG68fGN6o1XYelfTcWplCiOcCpGctljoxNP+TdYMVYWJF7/VXDn9cs9HSXFkkmU89SX
- k2I5RePDf4F9HqSqkkeD05VgW1CxX3CZSDpywNKSEP1tO0YnOU6DhVDlGqBRbA1l+9k5
- VQ2PVc2KwTWSbmGVKAIYn8KVJEiXkdGyKcLSkC+OEGHMPjHI/zS38WytmCdTlBG5jglk mg==
-Received: from nam10-dm6-obe.outbound.protection.outlook.com
- (mail-dm6nam10lp2102.outbound.protection.outlook.com [104.47.58.102])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ew4d03qup-2
+ bh=OGCYNJfStE0LVMuWvNt4LIBfEWfTEy409wPXcHz+AGQ=;
+ b=FMy/DyGSPShy16jjnf2p2jWESslTsQ97kNAE4QJkDGuJ0E30Ja5AtV7ugfXcoIic3gFk
+ O+eFXvv4zGoOBipLlMIBtRS41UzrdzOo8DZWoLpv4XReZqh5DCFHXCCXjaXqxGikNEx9
+ 00ZO9jnjzKLYM+gXesrG6+BOZSGJz7d/vsCh0iakS8DknaHWv+z0MbuyS2E82QJMadEw
+ IqNSn5qB0Q/0EXBE7FReZqiV4WT2pnQxtbVqs/66ni+z7Eerq87vabRdEOqVHCJYg8K1
+ HKY8I3omG6ixvPFriEK3ur1LeKqfiqgvVf3GRQZrrqWvE36jrENkryqLfLJotYR1SXeg Hw==
+Received: from nam02-sn1-obe.outbound.protection.outlook.com
+ (mail-sn1anam02lp2042.outbound.protection.outlook.com [104.47.57.42])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ew657bsgt-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
- Wed, 23 Mar 2022 17:33:52 +0000
+ Wed, 23 Mar 2022 19:45:49 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kSFPsp8GKIRHUW115us0T7+0f/3ixL4ZDfPcPCf/CJpAOubZjC4NNa4Du1pIUxj0tIBYliua3t+ECY+EX43imrp0C9xwFmI82SjHlor67r8MiEuLJK3oHoYu1byn8i3k7HUs9feVVWnaodf4P/75ZqyqYc8EeO9bYbPd+IarxeD2Ao0RyY/BAk3T8ZTJeWGmKDGau5Ii+NfQJhp8UzWve4n+LoTesN+/zhmYb4Elym/Dx4jq1XXDl0N/JOKjOFoDXO/bHNpm8qePV+ueWy53JC8uMAsRd0+L0dQBQYEvKP+y1iYag0yl6s/JrJv+r0fKPBifgBapw62LvCT1xrbeyA==
+ b=D/GUiHrtucVhzYeluZsR75SJQTzq+xr5PT4IVMP8YRS8waFse+QMXipOYTa3B++Ze88y2wU1E4pzPVrubjLxppOZsLMIvixdNiJP8q8CXRxIDribqCLItYd0Jq1E9kbqUN0xTy/2tWdYIs91x/7IvIkxWxm1t0K0aLRXn2fKAPjDPMqcZAXNcPX+b6Y81Ti8X5bdmD6pIZNAf+UzA71To8STkSRbSSXDNFserYbTltuD4JsZHfYrf8kzbGE1ql2AB8czuPbgCr5pH4m/UT9GQT3hx3yqFvncUnPD6yc6yegtYIeiVKgYbEJFnt/P8nu0THtF+HPDG3nGmbvMXI1E+Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rZrEnb5PdYnBA+By9vygHuXUlPVG5jn+/74jJhpTsfY=;
- b=PXhP1gBf2s5Qci6qQp0X33Uu2U9Emy80Cg1Xha0flvPjYupJ0FnbsW6vxxpEL0tVhO9ik9TveybYX+BQRdEzZWkhCgXDlgr+rHUITFyEqMvOkKI5QHOdSobqjEO81B8OJnbAkngK2fT0lMM9R4UxyBNk0rOO4qjFUdy+AgB5K9JBRRKZRBi8K5NrpAHxLN5uHpOAQr7nZY2xowwKVvmcnqygwmUYg+NRXjuzfZ9HndDITUk8q93bAeKC/o6TS0mmhAtmZeg3xPRiC/gAeZERS/GxarTJeRIuKJjxry4oxsXev6581FaoSUr3zml3qF2dp8wwbG40rs0VnwZahO3tEA==
+ bh=OGCYNJfStE0LVMuWvNt4LIBfEWfTEy409wPXcHz+AGQ=;
+ b=OC5a9Ybn2Uq6Q4NLHI3RF7NxXmpQYEX07Cx37LZjNk7do7xuwhEnxnJwbCVRqkaYLrxhSWn8uT7wcGZgShS7OONeILSDjP46mosy/W2ksnOkZ53vSa3L58O9Rouybx8KWW2lV3mUPfVZz+z1UPHrBt88tdg4JbdtG4l/PY9PfAfsjlWvmJLdkXpPvFz0Ur/yYKe5VYsoG3b6DC0IiIV6G2/lGm/q6bP4aNPa9viFkgzvGUmOIuGqCZ0QrI4t6yICuYLM6H+Gn8msQ2vgjkbc/DTYllZlP2ss59xnvnk3Me0nIYE+7Zecica380F6lGja/1luFKPPcO0ocSRD58rBUQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by BN8PR11MB3844.namprd11.prod.outlook.com (2603:10b6:408:91::24) with
+ by BN6PR1101MB2308.namprd11.prod.outlook.com (2603:10b6:405:54::20) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5081.15; Wed, 23 Mar
- 2022 17:33:48 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5102.17; Wed, 23 Mar
+ 2022 19:45:47 +0000
 Received: from BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::c1c7:209:c28f:67dc]) by BY5PR11MB3909.namprd11.prod.outlook.com
  ([fe80::c1c7:209:c28f:67dc%3]) with mapi id 15.20.5081.023; Wed, 23 Mar 2022
- 17:33:48 +0000
+ 19:45:47 +0000
 From: Trevor Gamblin <trevor.gamblin@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][hardknott][PATCH 1/2] python3-django: upgrade 2.2.24 ->
- 2.2.27
-Date: Wed, 23 Mar 2022 13:33:31 -0400
-Message-Id: <20220323173332.16576-1-trevor.gamblin@windriver.com>
-X-Mailer: git-send-email 2.33.0
+Subject: [meta-oe][PATCH] grpc: upgrade 1.41.1 -> 1.45.0
+Date: Wed, 23 Mar 2022 15:45:40 -0400
+Message-Id: <20220323194540.4024812-1-trevor.gamblin@windriver.com>
+X-Mailer: git-send-email 2.35.1
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: YQBPR0101CA0141.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:c01:e::14) To BY5PR11MB3909.namprd11.prod.outlook.com
+X-ClientProxiedBy: YQBPR0101CA0201.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:c01:67::7) To BY5PR11MB3909.namprd11.prod.outlook.com
  (2603:10b6:a03:191::13)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: c1d9f7c2-b6be-4d42-b51b-08da0cf34938
-X-MS-TrafficTypeDiagnostic: BN8PR11MB3844:EE_
+X-MS-Office365-Filtering-Correlation-Id: ebae3ca1-0912-4aa3-5f87-08da0d05ba03
+X-MS-TrafficTypeDiagnostic: BN6PR1101MB2308:EE_
 X-Microsoft-Antispam-PRVS: 
-	<BN8PR11MB38447B0BCAA645EE0DDF68239F189@BN8PR11MB3844.namprd11.prod.outlook.com>
+	<BN6PR1101MB230851AA42FC168CB52755309F189@BN6PR1101MB2308.namprd11.prod.outlook.com>
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	SxGOIrdSIp+JJ9wHoQlUug+gCCrkOx/+HY0sEHYhxa3Ik2uopnWoZBXyoXTsqLsO1OOhL8GxjQIuQ6PQuWxQWhx8T3yPIN2MWvjbnRo9GYvDw8CC+3DrMAkIDPFYBHfKjlM6DMN05+F5u4RZ0iEK7YvoeELh2Br2wifD55glTwgJuKsrVhXZy86dKwiIH0kkKW3J6tpP7reCdOvWirIfIBBmeWh+WDQwiY2PxYWY2J9OTfP7Rg21nCvVtziiGFelKhyfVtoHfD5FPFCUx1LGz0SjhFN/IMPDjGTDrDtmphvJM+QQjFx7lPPNo3QF8sZzYdk1bk346VPUTUkN9y2a0sRiINdQT2xwQ54Ani//Ei4lnan4qAfhAealM/o+8djLFK+DbqnODfAIHnUQG6NlkjprodSDkVfBcyIB2CX/K/WbcZZrUTnQD6r4K3gvXosKelhZWmV2N4l4BfktiHdJYlyHHEsYRa/uMwc+KkvtI+B9Ktcu7cMQ5pALJUdGZT704vISJeq3VXq0w0IG6Rweqd1EkkbNNAwYOGvJ8ksU3UrBvBWkqSbInr20yv8VupairlHq+kNcD8wTQiRzeyaNi6nHEs0szDhl04rGuB9v+pEzWQFhVV2bJu5vfNRNLT+4X73p/3Z+gBMBDbMSWr26ed9vjWzqjwhKAHw61dcRvqKlDtR67mUJKkXDAnK/yCH/ZIbVqDThVkOZ7xxgs1tC2g==
+	idpOu93L2VAUJAp33OXiJHH8Gps8se1EiMHYBMbif+r/bZXFsJ1BPskgXbc9bdNZ5i5rjEs8nMUBFPCs3syU5Fh/mh8J4qPO9jNzx0MLCOWhxIr1mrWRz/un72SaLFbxVjK205vLzwziATTfs2rBdqFr2+1xqTvHyHvTQ37lzOd+xI+DgS0LN4K02rXTmQPBoigIEbxcfv6AVNDFAzTK9JP+51diId5/cXTEi0Clx8nHfEFHtmiWlkb28kOWYdfIT7QOuiXBq9DblSsQ4tyR1UAXGXwUNkI+aIwemqOn0WsGOnPXSABHyDMdS9kR3x5+laZbuJCNEaTnApHCodA+sSSXdEWIIw81AgseC9x8JfBzWu7toMsdaqVsj0DdoQjwGjrJphJ2pJknYzBe9T/rHIOprecwdEx/nn21miJ/hflYpi97Rt/kmVBdvb4PzvcL/FgquVpoK822kMiPYwWJ6mQ4yc+xe47m16u/o2iXVhDQWtAQUFX7oVoDZFPNxTzUmg2KYDRxd0QvgkXodFcT77GtqvxZWm5rrG0Uf/dfUcCgWvpVrn10Gs3IWf530wzm+zfTSRvx+MAuPBrCRMM1Bs+iHOfG9yBT03BizbV21OQjc+qBKa14Em45/KPFlunl5vSAdLaPg/sIYfGaNr2q87rnNFMOK+i2T9cRxU7vimXK+33E84hAyq7ie4zsXz8Yah/uud1d2xrWXfbOyAVkB5WP0n/B4ju4uwriRmQuI/wQRuRskLwoPJDQ0HApqzXZUN7K+fC3JDPlVRzwMg6i2+aQNdq7TnZwRByai9KzP89YtaZ7jv8DpLhBDMpDPi4N
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(316002)(6916009)(66556008)(66476007)(8676002)(66946007)(1076003)(36756003)(6486002)(8936002)(5660300002)(44832011)(508600001)(86362001)(26005)(186003)(2906002)(38100700002)(6666004)(38350700002)(6512007)(6506007)(52116002)(2616005)(83380400001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(6666004)(44832011)(2906002)(36756003)(26005)(186003)(508600001)(38100700002)(83380400001)(6506007)(966005)(38350700002)(6486002)(52116002)(86362001)(6512007)(5660300002)(66946007)(8676002)(66476007)(66556008)(8936002)(6916009)(316002)(1076003)(2616005);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?PLBMokOVcT5WhNzrPtVe1QuNQ4F1cuR8R6j8q7cLoKvdZPFN05AgBwxf3FwN?=
- =?us-ascii?Q?R35ItzfukzR5xw0/zApAPm1jLmBnIRVur75x7J9wI6zchXwHnrmen6/PzMMT?=
- =?us-ascii?Q?j9I4fnvVaAAG0GKzLKJFvgJ4i+BJgDEj070GtLn2OuohipC33lwHCBctClQQ?=
- =?us-ascii?Q?FN5KJMfuvsgNvlyO/XGITU3RQC3lSRBFJE2fddGXO+zQYvUrT80SOcptWuyY?=
- =?us-ascii?Q?b3J0yPBDk0jlm9OiTbGDfGzsncpv+beT8l2ltbgDdf96MBqK98bTGKOY99a6?=
- =?us-ascii?Q?EwDy+fqZFiEAUUF8fRkEippZUo8ZYgyTSkOL+qMiyWjns3v1KOCpskO2Gl3P?=
- =?us-ascii?Q?53PEFJ9a8R0N9Jv9HpbfpLbSO1lB4CGu8HRy98JtdNoXbL0W85yl24CM93SG?=
- =?us-ascii?Q?8KTQEXo6V0J0Ej0E4eiYsQfCEOzSOzCGuhUv2klkQZyZbH/nBl1JTrQWaEHz?=
- =?us-ascii?Q?pSX9bZFg32rID74yey6vpxpVaNFuGbWYK7Z/0qxSY9WIskZO/61oPoN64n0J?=
- =?us-ascii?Q?55m7nFzf/xcqy42t72B2tXdpQrgr/1b30m1N6IG2IGPupWw8C4Ma/uqJ4Crg?=
- =?us-ascii?Q?S6RICgRm2qnEheNtNyWCxS8oYg9AjCK6elk5DYRwy693msV1zxKxRvCyx8OH?=
- =?us-ascii?Q?X8uyy2ZwZixL/YLRnG7jzMrzDjCwSL9Elhkw85fKQ7/3z2r8VOBGcnxV4bTK?=
- =?us-ascii?Q?9fVRuOFDqrpcPc8Uq8XuMUCwO8foPk5i6Y9sU4erwFf27UD9XLia1BpA1Xiw?=
- =?us-ascii?Q?BBR+Wa7fi5wB6m41kF+o4GoeVXrAlsa/v7zsWizcqNDvZnLc9dpDRLyJpEmm?=
- =?us-ascii?Q?hMujrgcZCoLnWplknHT6IJ/91do9IxVgYGV9CIMwUGplvCTgrED2ZeHwmiBD?=
- =?us-ascii?Q?jHChjzInIxwQmVXqXlCvd3JtB43nofof97v5WPBYvuDnRuUbNIEbVSWb6Suo?=
- =?us-ascii?Q?Y9mJE0w7KoHT5ixTE8nv+ynlgIo8L5AWMa8B2/kiI5XmyNFmEZDGnK7yU4Q6?=
- =?us-ascii?Q?elguRV+2/Bbt048Mp138TfH7uuq6fzuA41ufgL9jvJTofc6Sgt8EA51YzlrO?=
- =?us-ascii?Q?BcBNmEVhY63G6fVl3whti5IPvqOV0YcyDgv2rzViVQKD9QiW2tEirPCfmMXg?=
- =?us-ascii?Q?ETiZODwyb/is1tpTX2c4rWUuDiTd4Ht6wSzVGaqPaRG9tPoTsykSkEafn1ip?=
- =?us-ascii?Q?42xs4EmQ/L9kvGDgSeh5YMEDHDCD3TQNK9JyYpjtB868XLZDxxwDbAFKUESb?=
- =?us-ascii?Q?0Pg+Lv1qf8hQsqtKYsyTUzUvQJ/GtdtyOL2h2B4WX+cSx1g4c9Ar946dCNsy?=
- =?us-ascii?Q?T/RrWtY0Mvrf/DC5BrBnXnNRD9EW6DEPUOyAUlIeSSLUA+2rbVnV+KwI7OE4?=
- =?us-ascii?Q?aHy6UVPPAJiBD0ujbw9XotJ7d6MN/pzDJHP2frfvjxKWHrTCRs9ztbHZlvkl?=
- =?us-ascii?Q?/OanHI030hVGl3Pk9D2+v9ExPJRJYiL+HYcZpGnLqmMthcaL5CjpOA=3D=3D?=
+	=?us-ascii?Q?0qGhh2ynMbxqQohcbLCgs9Jwk2CQJnZQd4jFz/NZ8qx8Exvyq8iaFHuIK974?=
+ =?us-ascii?Q?E5NlhI1RtjMj3XFDMF9FHtXSlUEC0AbmoxWsxd2hFUxQmm+oj0URQJ3jEwTY?=
+ =?us-ascii?Q?i9DFmiahmI5mJdPJ6IKOBgr5kUsNz7/WSKN7zvH8S2Yem+CAU62AgHdCnxTB?=
+ =?us-ascii?Q?IC/qn/i77oBQLXfFBssxtanNoZsar5AGgHsg9ZEMdgTqUognFhK8I/OWgqIX?=
+ =?us-ascii?Q?k6aKWcnMceocp756jUxA7NiSAGVG2dD6cJDUo1SmIEFoLTSiMQvYaLSjePCq?=
+ =?us-ascii?Q?SOh/qxeXR7hUxDHGCabixaDu5XlXQGJX8zacF3rBIJWw+2wWsu+2NX5ZYZnz?=
+ =?us-ascii?Q?bTfiA1AKtSb2xs72H8ANJsq8g5uLPuSxHawLjvTYp5jSP1DgMf05EKq/sy17?=
+ =?us-ascii?Q?q1NhlnzX6kTsogj88N93h0BgZWGkr0Jwdh3GhjNFfZH0sPILvxuFvqTd6INS?=
+ =?us-ascii?Q?75Dm7uhWqWD4dh2LGuLe2J1+Kw0T1GGzmrvxG4Gxrf0HZhcdL6uNEI8VHyS6?=
+ =?us-ascii?Q?6qf++h+SrgdOvmDu84UBEBVwnZO5G1lVQGP4HYVEHaR+lfudLp4/ZMhS0kFl?=
+ =?us-ascii?Q?hPAGuSeBcU2lMPH1nXQyQvJSt381Dy+OP9V65ekfg2FCvdd0wB0yZ7i+CFmT?=
+ =?us-ascii?Q?8iT7uDSHhXe3ZPwDfK62YoguiNfx11kSQAuUoTxRDjzOBOZmXbBAADX3QpAA?=
+ =?us-ascii?Q?WoSA9oe0ON3GWYKV9QILjZLtFG4Qkfk4Pt14uSo46UWb82yuUKKYudS3sz7F?=
+ =?us-ascii?Q?gvEgsPcBXOZGod9XvSLUlP5m3pvjuX18bDwhe3u7myEKzLs+O24hyN3MB9NG?=
+ =?us-ascii?Q?cKYyJyhpMf/netVHPQc2vfGLCRt1t2h7p4IvHYbheQjeyURQPl9A7Dpkgydm?=
+ =?us-ascii?Q?K8hWVA+stH+1ttr79Hv0Pj3MOi1+qkELWkVLPvERQ7+IqILznKVenRIZRXxQ?=
+ =?us-ascii?Q?9mWb/Y60IOmCjYEHpPC4jWTuUMxMlNI2stH0CRP/P7FaucHpKxPRatJTJ/DJ?=
+ =?us-ascii?Q?/4PcjZrm4QU5P6CGsijC1FzSW60+DiWfvR+1t89uT1ibcktUDhk20kKte32J?=
+ =?us-ascii?Q?1NJWqdsqbwjB/+sel44s+ASKxH0ELmcADzJeUND7VKi/k2MYXG9LOqLxQpHF?=
+ =?us-ascii?Q?Gw86sD9q1C2QeqS1Wmskp3HAAXJzZ3tVMHpDK092rnhaY9rBTrlr8zvYyebV?=
+ =?us-ascii?Q?1sW76msUxm+hIUYJf/HdyX0oqzt3/WC4e9Ykq746QR2iDBhbc2Ck/4GeN+wN?=
+ =?us-ascii?Q?4iNQ1+zaedJc3oADUjtWSvjH2W7MZQ+hpwVWe4z/gAdqUtt86QQrzRGlVyJD?=
+ =?us-ascii?Q?nm9BuIQry+tdyfXQb/EXJfOrmSF7xslQS7srcxvec51tVv7IrO9+PeTMqVoU?=
+ =?us-ascii?Q?gQ08oe4bv2VxyuG9kjtPaaIvH15K6lqNNbLmatdzY7VdLuEqb97dmqMQd2o8?=
+ =?us-ascii?Q?J/LHHzyGdKGHd4JDzRxELcj2j5vS32u3JqtA4IL0gGgHha2I+GyoWA=3D=3D?=
 X-OriginatorOrg: windriver.com
 X-MS-Exchange-CrossTenant-Network-Message-Id: 
- c1d9f7c2-b6be-4d42-b51b-08da0cf34938
+ ebae3ca1-0912-4aa3-5f87-08da0d05ba03
 X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2022 17:33:48.0603
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2022 19:45:47.5627
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
 X-MS-Exchange-CrossTenant-UserPrincipalName: 
- Qb+PzjP+jRkLyIQr2iQtCyHy3MUWudmod68igf6DsnKuan6H3hUbXCKzsAw8MV3HU+c3h5aobegL6nqjyaYFnU8y07aRUcW8EHkk41yhyIU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR11MB3844
-X-Proofpoint-GUID: 0I-tQ1x-QugrpsbYaJiNDe76oJgVNpui
-X-Proofpoint-ORIG-GUID: 0I-tQ1x-QugrpsbYaJiNDe76oJgVNpui
+ T7H8Bat9n1bp9Yp9TQKWkxyUXFSdSuQxwsZ1VA4BaIbTFOAXPzQeDmJttH5JbdlS/bL91JVw7MryKCmku9qcyqaHWsOX1Mcm8Jm7Rwifhc8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR1101MB2308
+X-Proofpoint-GUID: PEvn_sQUsbWrk1W5M6kUwvFXjr5SNOmC
+X-Proofpoint-ORIG-GUID: PEvn_sQUsbWrk1W5M6kUwvFXjr5SNOmC
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.850,Hydra:6.0.425,FMLib:17.11.64.514
- definitions=2022-03-23_07,2022-03-23_01,2022-02-23_01
+ definitions=2022-03-23_08,2022-03-23_01,2022-02-23_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 phishscore=0
- mlxscore=0 malwarescore=0 mlxlogscore=999 spamscore=0 impostorscore=0
- lowpriorityscore=0 suspectscore=0 priorityscore=1501 adultscore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2202240000 definitions=main-2203230093
+ bulkscore=0 adultscore=0
+ lowpriorityscore=0 clxscore=1015 mlxscore=0 suspectscore=0 spamscore=0
+ phishscore=0 impostorscore=0 priorityscore=1501 mlxlogscore=697
+ malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2202240000 definitions=main-2203230102
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Mar 2022 17:34:00 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Mar 2022 19:45:52 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96164
+ https://lists.openembedded.org/g/openembedded-devel/message/96165
 
-The delta between 2.2.24 and 2.2.27 contain numerous CVE and other
-bugfixes. git log --oneline 2.2.24..2.2.27 shows:
-
-e541f2d05b (tag: 2.2.27) [2.2.x] Bumped version for 2.2.27 release.
-c477b76180 [2.2.x] Fixed CVE-2022-23833 -- Fixed DoS possiblity in file uploads.
-c27a7eb9f4 [2.2.x] Fixed CVE-2022-22818 -- Fixed possible XSS via {% debug %} template tag.
-4cafd3aacb [2.2.x] Added stub release notes 2.2.27.
-77d0fe5868 [2.2.x] Added CVE-2021-45115, CVE-2021-45116, and CVE-2021-45452 to security archive.
-e085d46e4b [2.2.x] Post-release version bump.
-44e7cca623 (tag: 2.2.26) 2.2.x] Bumped version for 2.2.26 release.
-4cb35b384c [2.2.x] Fixed CVE-2021-45452 -- Fixed potential path traversal in storage subsystem.
-c9f648ccfa [2.2.x] Fixed CVE-2021-45116 -- Fixed potential information disclosure in dictsort template filter.
-2135637fdd [2.2.x] Fixed CVE-2021-45115 -- Prevented DoS vector in UserAttributeSimilarityValidator.
-03b733d8a8 [2.2.x] Added stub release notes for 2.2.26 release.
-b87820668e [2.2.x] Refs #33365, Refs #30530 -- Doc'd re_path() behavior change in Django 2.2.25, 3.1.14, and 3.2.10.
-573e70ea48 [2.2.x] Added CVE-2021-44420 to security archive.
-8439938602 [2.2.x] Post-release version bump.
-79d8dcefb2 (tag: 2.2.25) [2.2.x] Bumped version for 2.2.25 release.
-7cf7d74e8a [2.2.x] Fixed #30530, CVE-2021-44420 -- Fixed potential bypass of an upstream access control based on URL paths.
-0007a5f9fa [2.2.x] Added requirements.txt to files ignored by Sphinx builds.
-fac0fdd95d [2.2.x] Added stub release notes for 2.2.25.
-4bc10b7955 [2.2.x] Fixed crash building HTML docs since Sphinx 4.3.
-5289fcfffe [2.2.x] Configured Read The Docs to build all formats.
-9a4a2b2089 [2.2.x] Refs #33247 -- Corrected configuration for Read The Docs.
-029c830b71 [2.2.x] Fixed #33247 -- Added configuration for Read The Docs.
-12141e3116 [2.2.x] Refs #32856 -- Clarified that psycopg2 < 2.9 is required.
-cf63dd5c1b [2.2.x] Added 'formatter' to spelling wordlist.
-05bc1c81aa [2.2.x] Fixed #33082 -- Fixed CommandTests.test_subparser_invalid_option on Python 3.9.7+.
-a9c0aa11e7 [2.2.x] Refs #31676 -- Updated technical board description in organization docs.
-66008c2af0 [2.2.x] Refs #31676 -- Added Mergers and Releasers to organization docs.
-d4d1c2b3db [2.2.x] Refs #31676 -- Removed Core team from organization docs.
-8f59f72a20 [2.2.x] Refs #31676 -- Removed Django Core-Mentorship mailing list references in docs.
-837ffcfa68 [2.2.x] Refs #32856 -- Doc'd that psycopg2 < 2.9 is required.
-dc43667eab [2.2.x] Fixed docs header underlines in security archive.
-3e7bb564be [2.2.x] Added CVE-2021-33203 and CVE-2021-33571 to security archive.
-48bde7cab4 [2.2.x] Post-release version bump.
+The changes between these versions are too numerous to list here, but
+can be found at https://github.com/grpc/grpc/releases/tag/v1.45.0
 
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 ---
- .../recipes-devtools/python/python3-django_2.2.24.bb     | 9 ---------
- .../recipes-devtools/python/python3-django_2.2.27.bb     | 9 +++++++++
- 2 files changed, 9 insertions(+), 9 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-django_2.2.24.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-django_2.2.27.bb
+ .../grpc/{grpc_1.41.1.bb => grpc_1.45.0.bb}                | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-devtools/grpc/{grpc_1.41.1.bb => grpc_1.45.0.bb} (94%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.24.bb b/meta-python/recipes-devtools/python/python3-django_2.2.24.bb
-deleted file mode 100644
-index 964ca6ba0..000000000
---- a/meta-python/recipes-devtools/python/python3-django_2.2.24.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--require python-django.inc
--inherit setuptools3
--
--SRC_URI[md5sum] = "ebf3bbb7716a7b11029e860475b9a122"
--SRC_URI[sha256sum] = "3339ff0e03dee13045aef6ae7b523edff75b6d726adf7a7a48f53d5a501f7db7"
--
--RDEPENDS_${PN} += "\
--    ${PYTHON_PN}-sqlparse \
--"
-diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.27.bb b/meta-python/recipes-devtools/python/python3-django_2.2.27.bb
-new file mode 100644
-index 000000000..7a50a6928
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django_2.2.27.bb
-@@ -0,0 +1,9 @@
-+require python-django.inc
-+inherit setuptools3
-+
-+SRC_URI[md5sum] = "4af3aeed9e515ccde107ae6a9804c31f"
-+SRC_URI[sha256sum] = "1ee37046b0bf2b61e83b3a01d067323516ec3b6f2b17cd49b1326dd4ba9dc913"
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-sqlparse \
-+"
+diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.41.1.bb b/meta-oe/recipes-devtools/grpc/grpc_1.45.0.bb
+similarity index 94%
+rename from meta-oe/recipes-devtools/grpc/grpc_1.41.1.bb
+rename to meta-oe/recipes-devtools/grpc/grpc_1.45.0.bb
+index 3fe799310..8063f343a 100644
+--- a/meta-oe/recipes-devtools/grpc/grpc_1.41.1.bb
++++ b/meta-oe/recipes-devtools/grpc/grpc_1.45.0.bb
+@@ -4,7 +4,7 @@ Provides gRPC libraries for multiple languages written on top of shared C core l
+ HOMEPAGE = "https://github.com/grpc/grpc"
+ SECTION = "libs"
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=6e4cf218112648d22420a84281b68b88"
+ 
+ DEPENDS = "c-ares protobuf protobuf-native protobuf-c protobuf-c-native openssl libnsl2 abseil-cpp re2"
+ DEPENDS:append:class-target = " googletest grpc-native "
+@@ -20,10 +20,9 @@ RDEPENDS:${PN}-dev:class_native += "${PN}-compiler"
+ # RDEPENDS:${PN}-dev += "${PN}-compiler"
+ 
+ S = "${WORKDIR}/git"
+-SRCREV_grpc = "635693ce624f3b3a89e5a764f0664958ef08b2b9"
+-BRANCH = "v1.41.x"
++SRCREV_grpc = "494b08ada4009ead0d0b70e44d354be72f9c283a"
++BRANCH = "v1.45.x"
+ SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
+-           file://0001-cmake-revert-db88fb0ee826e73323e06ac6166ac038ee71f6a.patch \
+            file://0001-Revert-Changed-GRPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch \
+            "
+ # Fixes build with older compilers 4.8 especially on ubuntu 14.04
 -- 
-2.33.0
+2.35.1
 
 
