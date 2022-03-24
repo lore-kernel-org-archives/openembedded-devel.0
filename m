@@ -1,88 +1,98 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <scott.murray@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F1A12C433EF
-	for <webhook@archiver.kernel.org>; Thu, 24 Mar 2022 19:08:13 +0000 (UTC)
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com
- [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.web11.15293.1648148892875266540
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D9998C433EF
+	for <webhook@archiver.kernel.org>; Thu, 24 Mar 2022 19:50:00 +0000 (UTC)
+Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
+ [209.85.160.172])
+ by mx.groups.io with SMTP id smtpd.web09.15716.1648151399711244473
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Mar 2022 12:08:13 -0700
+ Thu, 24 Mar 2022 12:49:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=FSmb67aL;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id
- mp6-20020a17090b190600b001c6841b8a52so10256044pjb.5
+ dkim=pass header.i=@konsulko.com header.s=google header.b=DjgnB9/r;
+ spf=pass (domain: konsulko.com, ip: 209.85.160.172,
+ mailfrom: scott.murray@konsulko.com)
+Received: by mail-qt1-f172.google.com with SMTP id t7so4817826qta.10
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Mar 2022 12:08:12 -0700 (PDT)
+ Thu, 24 Mar 2022 12:49:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
+        d=konsulko.com; s=google;
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=+ZlHdxMX0MeiqoRlglp7EeGmDd1LcPrOSroSiaFEtLY=;
-        b=FSmb67aLmE2W5/ZVZUnZALsZQdfDxf5NdApLLXuJpnMiAOqtH52/HAFUlhPpxGgKTc
-         yO78Wz7hGQRwAry+Cw54Bgjvgh8jLqaqNTsdM0+GZbl3lnLFgSGJy7BalX+Vp1T6Govd
-         NTelv0ENBRCap7HSR8HeKf1VZ6FrFRsOtRXe97pfsbliBa6YKqwLhMQh7DFYq9DciF6a
-         oaP/Rf2zu1+KfkX3gM+0jPP+8ckqltIUwG+vWFXOtJjo32BOSW3BteoF76Hpu3Jbmyzf
-         uF7PaukoEaO+XeJCS/UL2z4iC7ZAunO+o+Jg90YkwWaHKMmS/norx783EoU/1NV1JWvL
-         uOKQ==
+        bh=QiSENU44x/pyE84oUT+iU00m5jhtPCzkyANZaniwpKE=;
+        b=DjgnB9/rrF6oGzcLZT55tBAo0CKugJDK8RUVKN//qqHprZYqO7H0NI3pot8hiZo8sX
+         07hKschTAWczz2v/bIsdyIJF+fjd+BPy1bNU8GRMP458TRn3L/TisuPFaAAatwr29Tpi
+         p2Kior+M9OZkSiQXVE6gB3lC4wZ1u5NtbUMrA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=+ZlHdxMX0MeiqoRlglp7EeGmDd1LcPrOSroSiaFEtLY=;
-        b=U4dcoDtoSXqIur6adVyr709/vZ1vXMo/BtgKWygq/+S/KJ8JoBCm68TD1L12mhGP+A
-         sI2lBM7C2QwoZjQq2agbEHjZHeoVBCstY1etjKKn2V/qRlov1P7KGWL2MPCRiplVbuMO
-         VmRYrmLAO467tuJOSRlbzPgpW7+VSOu8lnEWs8VOdC+rCOkdjUv67cZaiLA0zYwaRLPJ
-         inLvg4yviL+PA9cL2WJWEa47TAHzjukldnTgjTcnAgtJMH0tvK2bUDO22nRl+jsmtCZT
-         iv5fVqR8tN4DeIsGp9GolDMcM3iU2FOk8iKzPq1VYcX87isD4387Q0nW5qc0SHF8rAfA
-         28Tg==
-X-Gm-Message-State: AOAM530BO2sc3C0LuBWBMD9mzUI61mwVdBT06noSQKxQykaP7d/3DKOn
-	EEaVYYXUXtRe9VKMIRnsKAqR2b7NDLw=
+        bh=QiSENU44x/pyE84oUT+iU00m5jhtPCzkyANZaniwpKE=;
+        b=Twd0w8uiCkXD350h7vIXL493bTR9I6BfrEp3hV3UXTnaPlloT4M/Vksmdtd/JbbT7c
+         SrvsY6wCa+HSoMjzy7oJMnDd8hl23cYRFxjAUpa1VrN6q/cZ3KmlULibPAtrOWCi5rHd
+         9TDjG+ePKwBCxdZrK2VseHuyYnK6aJBmUwhQTqsLvfpc6DEn/jVUhAvie27nuw4suHcr
+         pvbWPo9RblWUtBM83STETpO0gC3S/QBROMpz9gAIU/7n+gcdASFkqXYTjTVKWxRJz4vT
+         Jho/uWUDw/vRBqlxW6W2iHCy89btUbSEpcqmvfS5awsZg1AFiQBHnD6FmERpo+TCum+x
+         UXYg==
+X-Gm-Message-State: AOAM5304M2fShi2Vto0DtU3gdiUAXiA6tvwAYED8Dz6zDQtvtHMHcmX9
+	VMNXXROyVIb8Y1oXhKCLGoBeTsE1HDe/RQ==
 X-Google-Smtp-Source: 
- ABdhPJzQXTvgn8a0ykAHiZsIgAltb2Rwrn39rGPkzaCUasa1NdGdtegv4JuqS2jsEmI9SReCA9FKCQ==
-X-Received: by 2002:a17:90a:e545:b0:1c6:d783:6e64 with SMTP id
- ei5-20020a17090ae54500b001c6d7836e64mr20596473pjb.222.1648148892076;
-        Thu, 24 Mar 2022 12:08:12 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
+ ABdhPJys380z2ZIYxq8VhdXDyEjgvQwyHQ42v4NleRe9hvOPrGVlCudAxa7SyKF/5WGcw9FB/05dqA==
+X-Received: by 2002:ac8:5bc7:0:b0:2e1:ecde:e1e6 with SMTP id
+ b7-20020ac85bc7000000b002e1ecdee1e6mr6089151qtb.529.1648151398413;
+        Thu, 24 Mar 2022 12:49:58 -0700 (PDT)
+Received: from ghidorah.spiteful.org (192-0-174-222.cpe.teksavvy.com.
+ [192.0.174.222])
         by smtp.gmail.com with ESMTPSA id
- ds15-20020a17090b08cf00b001c6a4974b45sm10029671pjb.40.2022.03.24.12.08.11
+ a9-20020ac85b89000000b002e2072c9dedsm3203874qta.67.2022.03.24.12.49.57
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 24 Mar 2022 12:08:11 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Thu, 24 Mar 2022 12:49:57 -0700 (PDT)
+From: Scott Murray <scott.murray@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-webserver][PATCH] netdata: Fix override separator syntax
-Date: Thu, 24 Mar 2022 12:08:09 -0700
-Message-Id: <20220324190809.1934248-1-raj.khem@gmail.com>
+Subject: [PATCH] polkit: Fix build with libtool 2.4.7
+Date: Thu, 24 Mar 2022 15:49:49 -0400
+Message-Id: <20220324194949.1769445-1-scott.murray@konsulko.com>
 X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Mar 2022 19:08:13 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Mar 2022 19:50:00 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96202
+ https://lists.openembedded.org/g/openembedded-devel/message/96203
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Delete old m4 macros, so autoreconf can repopulate it.
+
+Fixes
+
+libtool: Version mismatch error.  This is libtool 2.4.7, but the
+libtool: definition of this LT_INIT comes from libtool 2.4.6.
+libtool: You should recreate aclocal.m4 with macros from libtool 2.4.7
+libtool: and run autoconf again.
+
+Signed-off-by: Scott Murray <scott.murray@konsulko.com>
 ---
- meta-webserver/recipes-webadmin/netdata/netdata_1.33.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-extended/polkit/polkit_0.119.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_1.33.1.bb b/meta-webserver/recipes-webadmin/netdata/netdata_1.33.1.bb
-index 012efc0682..f575a4cbaf 100644
---- a/meta-webserver/recipes-webadmin/netdata/netdata_1.33.1.bb
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata_1.33.1.bb
-@@ -76,6 +76,6 @@ do_install:append() {
-     chown -R netdata:netdata ${D}${datadir}/netdata/web
+diff --git a/meta-oe/recipes-extended/polkit/polkit_0.119.bb b/meta-oe/recipes-extended/polkit/polkit_0.119.bb
+index b5f77700c..8a326a981 100644
+--- a/meta-oe/recipes-extended/polkit/polkit_0.119.bb
++++ b/meta-oe/recipes-extended/polkit/polkit_0.119.bb
+@@ -35,6 +35,10 @@ EXTRA_OECONF = "--with-os-type=moblin \
+                 --disable-libelogind \
+                "
+ 
++do_configure:prepend () {
++    rm -f ${S}/buildutil/lt*.m4 ${S}/buildutil/libtool.m4
++}
++
+ do_compile:prepend () {
+     export GIR_EXTRA_LIBS_PATH="${B}/src/polkit/.libs"
  }
- 
--FILES_${PN} += "${localstatedir}/cache/netdata/ ${localstatedir}/lib/netdata/"
-+FILES:${PN} += "${localstatedir}/cache/netdata/ ${localstatedir}/lib/netdata/"
- 
- RDEPENDS:${PN} = "bash zlib"
 -- 
 2.35.1
 
