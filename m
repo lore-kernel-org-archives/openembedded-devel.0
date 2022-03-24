@@ -1,115 +1,82 @@
-Return-Path: <xuhuan.fnst@fujitsu.com>
+Return-Path: <mikko.rapeli@bmw.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8F22DC433FE
-	for <webhook@archiver.kernel.org>; Thu, 24 Mar 2022 09:18:34 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.1])
- by mx.groups.io with SMTP id smtpd.web08.8666.1648113512857969392
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E8F94C433F5
+	for <webhook@archiver.kernel.org>; Thu, 24 Mar 2022 10:14:35 +0000 (UTC)
+Received: from esa7.hc324-48.eu.iphmx.com (esa7.hc324-48.eu.iphmx.com
+ [207.54.71.126])
+ by mx.groups.io with SMTP id smtpd.web08.9003.1648116873870213203
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Mar 2022 02:18:33 -0700
+ Thu, 24 Mar 2022 03:14:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=R+akh+zu;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.1,
- mailfrom: xuhuan.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1648113511; i=@fujitsu.com;
-	bh=zxAx7wrwOaxq51ay1sBXBc+8KBMTLGKTWLMfp7EvFdQ=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=R+akh+zuvh8P/3IO2+sDWXGh/HJ751+rzRgfX6+JGbkT2GMHAZ61UR0jnfDcaJ9Zo
-	 zpiRScPqtH6Q8ibKX17EztgjzdIZ/UaX6NJaWcg14ibREuUATTAPHmdiSaXvFukKgr
-	 uLF9vpmuM1lYOqeuPCeMH7SVJ4b03l9Orv2ObyQvYV+t9aPHBmUq1EU9S3HGkkYAaH
-	 P4hujD3kCqq4p3jnfSyvbrhASWzeyotpxkxIdp7jPFsax7To8z6pAGHY7NoJfBXxKG
-	 JJyVWBW6vJ1rg+sjAjFPf0DQbWvIPkmQrMWMPanT2ZuTQzqPLra+N0AC1drbpVYtpm
-	 O5SFALTXxTXNQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrBIsWRWlGSWpSXmKPExsViZ8MxSTfN3Cb
-  J4NhKVYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePQ107Wgm8cFfu3/2BvYFzE0cXIxSEk8IRR
-  4lzbJXYI5wKTxKU375i6GDmBnJOMErduxIDYbALqEo9vvmYEsUUE9CWWzt7DDGIzC6hKdF9cw
-  w5iCwskSvxedB6slwUovufGZzYQm1fAXWL3nmNgcQkBBYkpD98D9XJwcAp4SHx5bw5iCgGV/F
-  ocCVEtKHFy5hMWiOkSEgdfvGCG6FSSOLHiI9SUConXhy9BxdUkrp7bxDyBUXAWkvZZSNoXMDK
-  tYrRKKspMzyjJTczM0TU0MNA1NDTVNdA1MjTVS6zSTdRLLdUtTy0u0TXUSywv1kstLtYrrsxN
-  zknRy0st2cQIDOCUYobrOxgn9v3UO8QoycGkJMr72dgmSYgvKT+lMiOxOCO+qDQntfgQowwHh
-  5IE7y4joJxgUWp6akVaZg4wmmDSEhw8SiK8NYZAad7igsTc4sx0iNQpRkUpcd5YM6CEAEgioz
-  QPrg0WwZcYZaWEeRkZGBiEeApSi3IzS1DlXzGKczAqCfOWgkzhycwrgZv+CmgxE9Di5z8tQRa
-  XJCKkpBqYzCwNjCw5hX55JR+avn7z6g6OhadcvxyZzxWpx3fpdTKbKDPf4utnjWMOTbhnkj9V
-  pXah3G6V3dqTftntOzbjpX60xYq+NXL7jwd5GUjm9bNNPvf6x7y9XJcu8R7smd3+suyYlUdp7
-  9/JorZfhVb/vp3RHS0wMXZbZHbGlj55iTRxyQViNaVN9zwbbxyYJ3WnaNOP0p2SjLPZeK8Jan
-  Wk7X2gPyXradXvnrfzLmieMqlxlvth+Wjhw0063J/mrjOLEff97PvxbE/rIS7lOb61Jk0xGwJ
-  +/XN0n+8l7eS8ITM56tR9h5KXCj53vspH2MRfuj99ebv0m5ITa69lq185ULRjm7VrtnDDlu3v
-  DJ6sV2Ipzkg01GIuKk4EAMG5+opbAwAA
-X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-5.tower-587.messagelabs.com!1648113510!997!1
-X-Originating-IP: [62.60.8.146]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.81.10; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 25297 invoked from network); 24 Mar 2022 09:18:30 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-5.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 24 Mar 2022 09:18:30 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 29F6E100464
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Mar 2022 09:18:30 +0000 (GMT)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 1D81D100359
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Mar 2022 09:18:30 +0000 (GMT)
-Received: from localhost.localdomain.localdomain (10.167.225.131) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Thu, 24 Mar 2022 09:18:14 +0000
-From: XU Huan <xuhuan.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [PATCH 5/5] [oe] [meta-python] [PATCH] python3-intervals: upgrade
- 1.10.0.post1 -> 1.10.0
-Date: Thu, 24 Mar 2022 17:18:00 +0800
-Message-ID: <1648113480-29846-5-git-send-email-xuhuan.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1648113480-29846-1-git-send-email-xuhuan.fnst@fujitsu.com>
-References: <1648113480-29846-1-git-send-email-xuhuan.fnst@fujitsu.com>
+ dkim=fail reason="signature has expired" header.i=@bmw.de header.s=mailing1
+ header.b=dAm6xfbF;
+ spf=pass (domain: bmw.de, ip: 207.54.71.126,
+ mailfrom: prvs=0757247b9=mikko.rapeli@bmw.de)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=bmw.de; i=@bmw.de; q=dns/txt; s=mailing1;
+  t=1648116873; x=1679652873;
+  h=from:cc:subject:date:message-id:references:in-reply-to:
+   content-id:content-transfer-encoding:mime-version;
+  bh=TSBT/eQsjlXA1i6TMHODU6FdEE9fGdu2tpZhJlYnMko=;
+  b=dAm6xfbF0K7ggFsbsnONSN5iB3RTkSq64POVXZZVA7xYSlOgole7xwjR
+   D+XzTqe+0InLuQ+pQM3p51LZYFLU8IzPLb5R5Otx2SwamFnzfUC4MHas5
+   +C68fjA6j7L3rbH5rZoc97N0vtr9izlAJcNiJl4KoJ1OZQVVLnHDUkjMs
+   s=;
+Received: from esagw6.bmwgroup.com (HELO esagw6.muc) ([160.46.252.49]) by
+ esa7.hc324-48.eu.iphmx.com with ESMTP/TLS; 24 Mar 2022 11:14:30 +0100
+Received: from esabb2.muc ([160.50.100.34])  by esagw6.muc with ESMTP/TLS;
+ 24 Mar 2022 11:14:29 +0100
+Received: from smucm33l.bmwgroup.net (HELO smucm33l.europe.bmw.corp)
+ ([160.46.167.68])
+ by esabb2.muc with ESMTP/TLS; 24 Mar 2022 11:14:30 +0100
+Received: from smucm33l.europe.bmw.corp (160.46.167.68) by
+ smucm33l.europe.bmw.corp
+ (160.46.167.68) with Microsoft SMTP Server (TLS;
+ Thu, 24 Mar 2022 11:14:28 +0100
+Received: from smucm33l.europe.bmw.corp ([160.46.167.68]) by
+ smucm33l.europe.bmw.corp ([160.46.167.68]) with mapi id 15.00.1497.033; Thu,
+ 24 Mar 2022 11:14:28 +0100
+From: <Mikko.Rapeli@bmw.de>
+CC: <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/2] polkit: add patches for CVE-2021-4034 and
+ CVE-2021-4115
+Thread-Topic: [meta-oe][PATCH 1/2] polkit: add patches for CVE-2021-4034 and
+ CVE-2021-4115
+Thread-Index: AQHYP1ui4IXTv1Qqqk6/mllZlOdHw6zOQGgA
+Date: Thu, 24 Mar 2022 10:14:28 +0000
+Message-ID: <YjxEhI4Zxhmfi/Qm@korppu>
+References: <20220324084536.25647-1-mikko.rapeli@iki.fi>
+ <20220324084536.25647-2-mikko.rapeli@iki.fi>
+In-Reply-To: <20220324084536.25647-2-mikko.rapeli@iki.fi>
+Accept-Language: en-US, de-DE
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-messagesentrepresentingtype: 1
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <D8264331A9A89A43BEC3F0F3EB989A50@bmwmail.corp>
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.131]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Mar 2022 09:18:34 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Mar 2022 10:14:35 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96189
+ https://lists.openembedded.org/g/openembedded-devel/message/96191
 
-From: Xu Huan <xuhuan.fnst@fujitsu.com>
+On Thu, Mar 24, 2022 at 10:45:35AM +0200, mikko.rapeli@iki.fi wrote:
+> +++ b/meta-oe/recipes-extended/polkit/polkit/0001-pkexec-local-privilege-=
+escalation-CVE-2021-4034.patch
+> @@ -0,0 +1,82 @@
+> +From 85c2dd9275cdfb369f613089f22733c0f1ba2aec Mon Sep 17 00:00:00 2001
+> +From: Jan Rybar <jrybar@redhat.com>
+> +Date: Tue, 25 Jan 2022 17:21:46 +0000
+> +Subject: [PATCH 1/3] pkexec: local privilege escalation (CVE-2021-4034)
+> +
 
-Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
----
- ...n3-intervals_1.10.0.post1.bb => python3-intervals_1.10.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-intervals_1.10.0.post1.bb => python3-intervals_1.10.0.bb} (85%)
+Patches are missing Signed-off-by lines, I'll add in a v2.
 
-diff --git a/meta-python/recipes-devtools/python/python3-intervals_1.10.0.post1.bb b/meta-python/recipes-devtools/python/python3-intervals_1.10.0.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-intervals_1.10.0.post1.bb
-rename to meta-python/recipes-devtools/python/python3-intervals_1.10.0.bb
-index d841f92343..abf87c597c 100644
---- a/meta-python/recipes-devtools/python/python3-intervals_1.10.0.post1.bb
-+++ b/meta-python/recipes-devtools/python/python3-intervals_1.10.0.bb
-@@ -22,6 +22,6 @@ do_install_ptest() {
- 	cp -f ${S}/README.md ${D}${PTEST_PATH}
- }
- 
--SRC_URI[sha256sum] = "68a772dc2de6b2b2e83b457329ffa8f9286710994b8070db54348a05762515d2"
-+SRC_URI[sha256sum] = "0d26746eaed0be78a61dd289bb7a10721b08770bb3e807614835f490d514f2a5"
- 
- BBCLASSEXTEND = "native"
--- 
-2.25.1
-
+-Mikko=
 
