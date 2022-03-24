@@ -2,175 +2,106 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 90DA3C433EF
-	for <webhook@archiver.kernel.org>; Thu, 24 Mar 2022 16:30:12 +0000 (UTC)
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
- [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web11.13186.1648139411581518749
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ACD9AC433F5
+	for <webhook@archiver.kernel.org>; Thu, 24 Mar 2022 16:57:36 +0000 (UTC)
+Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
+ [209.85.222.179])
+ by mx.groups.io with SMTP id smtpd.web10.13696.1648141055708238647
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Mar 2022 09:30:11 -0700
+ Thu, 24 Mar 2022 09:57:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=eRXtFk7o;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id gb19so5162075pjb.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=cC1l2ZWc;
+ spf=pass (domain: gmail.com, ip: 209.85.222.179,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f179.google.com with SMTP id b189so3977738qkf.11
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Mar 2022 09:30:11 -0700 (PDT)
+ Thu, 24 Mar 2022 09:57:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3vAtIfHjzNdN2y5fUFe0IHeMUtdYo/JWUHvN+W/c9sM=;
-        b=eRXtFk7ozbzov3ylZpWQzxzoPC/alX2/kEtbbMy38VMTPs2VXa8tGXkmHfqqIS6Dg7
-         5zB11PdSk0bVft+SIlDDcOPFgfhwGZrc+hANtAl5Mg+UBiK9NwR90rMz1a0U5AtVudOi
-         91IMw3NxCMX+Uc9POQfsRCX66uOZpe6EcwK82vMUb3lWR1/fWUxRXgJbyhihwkOXhs8G
-         7tZFcLz1+xJzTin4vq2d/9WUOOycKlKm84NIGu+aW1pqG2TuSISUhUxNsznjhSieqtDj
-         nWv4jvvwbuy974rlPu8DnGIuGMGPF8CeG7Ff1O4VxFIBuKZYekyYSA04XRJonnOGIDcY
-         4z+A==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=RBEosxVYEdDOsR1xUtM1TvPcfj3+yq2EIsDwzCyh+GQ=;
+        b=cC1l2ZWcCL2EeTmqHeo6YCZtly4Wf1C33KSKq78okTUt5ihATnohZRHLKLwb+nD44/
+         aLE1vB78HoJasmGaTmLnpFj/iBGJU+9aLvuXtjSGop9NsL4ZNsCIeDJjSM/rXK14KWQR
+         BgM+e/fJAGyazshXzqdMTbZwWRQBj0Djj5Hlme40pR9K5vJCLq3qtAdFMUGjKd6kIh2d
+         7dKrKWW8QDw50VpjeBwkeGiZkJBwtdW5mha6R375NdPD8RcKm9uvNv2Ull5RL8uerUtr
+         y8yEvtyhmboEWftwOcPAMwje7cUAC0SfY4F7jtX06FNVS3T3T/0TJXlTO06hjQnC/ZrE
+         VdXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3vAtIfHjzNdN2y5fUFe0IHeMUtdYo/JWUHvN+W/c9sM=;
-        b=bIdaana2EZrzDuwN6lR8GAFKMNStmS802j0spoi+NeS1W371pb26fvYODyQ6bwg5VJ
-         3ZuDqkqY38YKWbAeYlByt34EGL9cX+L9gc8Omco/p3Fl2txEGgjybSUTRoOb9tYPB8p9
-         kF2Ezj5MNSI6bT6TbV+LO1YhOMv+5OUmkRwqGcXUvz5L8GfDQL37sqshtT6p3lN1pZ9M
-         cJ8ka9cHKMt7hrQcn3lCsXqYIzVgROpUrG63DYsKxGysncgWMIRGFUkKSHQujjEdqW/6
-         g+6IIze4sbh5PjmqvUiK6OxtfSRgCayi+MALkuL9pwpd/L4UIE112cd85kd0gxg1HvVE
-         +Bow==
-X-Gm-Message-State: AOAM530DBs//lvD7sekLJJa7C3JxxsGfPdtYWwFfHnx4LbfikKVpgcfO
-	QmEEYjILrHT+3oguHGeOthi8lmgMb8E=
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=RBEosxVYEdDOsR1xUtM1TvPcfj3+yq2EIsDwzCyh+GQ=;
+        b=NcV0tjyPTQw+iXMLuTO62xRaPluGGCB5Ap4nsBf0o17VrP2GLYISx/yKpjgLwIBh12
+         OdwJPoY2I2Hku8pg8E2jKjoT2BHfxT5sGOXuFMvnKh5sLkCro/jgPdKbqyeR505FpcED
+         gISCJt6ezIFHquxwsPGLwInUWQBrkdfh3B+li6F0yFmyaKA7AWwP7MfezrLYNQnmLGci
+         qk4rr2s3dzpgrwUygugyoQnBkIvqHcrLLRbUviPswIX8IWd/iqheBgvxYwdnzgHOuvok
+         3bbWJziUCESsQSVIWXwTN4E2/9PpqPBgt6iEceTh5SvmtCabVbYrYPXQr0xx7LgVQC1k
+         Xryw==
+X-Gm-Message-State: AOAM533fuIRBGvw/6Auu/XM4e2t6a1NmGPqOU2fL1uASX/M6rm13SRhH
+	Rkr8Rdo8xHSqBd7aCUMq8OFmCGbXbFPJpMjhfTOZkLxrAfk=
 X-Google-Smtp-Source: 
- ABdhPJziO348oSlU3xae2rufNZw5qWB+mU2zPWdEfGG3RcLn2+XHdVmuOy6bjjcTY3xs05VVn96BlA==
-X-Received: by 2002:a17:902:ca94:b0:154:b606:dd83 with SMTP id
- v20-20020a170902ca9400b00154b606dd83mr6617965pld.167.1648139410791;
-        Thu, 24 Mar 2022 09:30:10 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
-        by smtp.gmail.com with ESMTPSA id
- a38-20020a056a001d2600b004f72acd4dadsm3995447pfx.81.2022.03.24.09.30.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 24 Mar 2022 09:30:10 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH] geary: Fix build failures with latest vala
-Date: Thu, 24 Mar 2022 09:30:08 -0700
-Message-Id: <20220324163008.37725-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.35.1
+ ABdhPJz7AgRKsgUwncIFsgWUBaKbis8dPSXi2KtJfL/24dcuKTDlPHpawy1nSMzZFexwPtOLJAmhYfeqrhBrmbhOnwo=
+X-Received: by 2002:a05:620a:4103:b0:67b:49f4:3ee4 with SMTP id
+ j3-20020a05620a410300b0067b49f43ee4mr4167757qko.72.1648141054679; Thu, 24 Mar
+ 2022 09:57:34 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20220324090901.7061-1-mikko.rapeli@bmw.de>
+In-Reply-To: <20220324090901.7061-1-mikko.rapeli@bmw.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 24 Mar 2022 09:57:08 -0700
+Message-ID: 
+ <CAMKF1sq7nGjy7Bnkw5D5qmqEEtgG3-fFfmz=HTdu+fbwVTmeYQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 0/2] polkit: switch from mozjs to duktape
+ javascript engine
+To: Mikko Rapeli <mikko.rapeli@bmw.de>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Mar 2022 16:30:12 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Mar 2022 16:57:36 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96200
+ https://lists.openembedded.org/g/openembedded-devel/message/96201
 
-Backport needed patches
+v2 of first patch applied the second patch does not apply, Can you
+send full series rebased on top of master next ?
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...orkaround-missing-generic-type-argum.patch | 27 ++++++++++++
- ...y-issues-with-initializer-of-constan.patch | 42 +++++++++++++++++++
- .../recipes-connectivity/geary/geary_40.0.bb  |  2 +
- 3 files changed, 71 insertions(+)
- create mode 100644 meta-gnome/recipes-connectivity/geary/geary/0001-Util.Cache.Lru-Workaround-missing-generic-type-argum.patch
- create mode 100644 meta-gnome/recipes-connectivity/geary/geary/0002-Fix-accessibility-issues-with-initializer-of-constan.patch
-
-diff --git a/meta-gnome/recipes-connectivity/geary/geary/0001-Util.Cache.Lru-Workaround-missing-generic-type-argum.patch b/meta-gnome/recipes-connectivity/geary/geary/0001-Util.Cache.Lru-Workaround-missing-generic-type-argum.patch
-new file mode 100644
-index 0000000000..22af4f5bea
---- /dev/null
-+++ b/meta-gnome/recipes-connectivity/geary/geary/0001-Util.Cache.Lru-Workaround-missing-generic-type-argum.patch
-@@ -0,0 +1,27 @@
-+From 166198735e9f4fbe91557df1351b3481bcf79e78 Mon Sep 17 00:00:00 2001
-+From: Rico Tzschichholz <ricotz@ubuntu.com>
-+Date: Sun, 30 Jan 2022 19:54:11 +0100
-+Subject: [PATCH 1/2] Util.Cache.Lru: Workaround missing generic type argument
-+
-+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/geary/-/commit/0f75e7a84a39492d0748cec2ba6028e08cae3644]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/client/util/util-cache.vala | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/client/util/util-cache.vala b/src/client/util/util-cache.vala
-+index f054e32e..ecc275e8 100644
-+--- a/src/client/util/util-cache.vala
-++++ b/src/client/util/util-cache.vala
-+@@ -12,7 +12,7 @@ public class Util.Cache.Lru<T> : Geary.BaseObject {
-+     private class CacheEntry<T> {
-+ 
-+ 
-+-        public static int lru_compare(CacheEntry<T> a, CacheEntry<T> b) {
-++        public static int lru_compare(CacheEntry a, CacheEntry b) {
-+             if (a.key == b.key) {
-+                 return 0;
-+             }
-+-- 
-+2.35.1
-+
-diff --git a/meta-gnome/recipes-connectivity/geary/geary/0002-Fix-accessibility-issues-with-initializer-of-constan.patch b/meta-gnome/recipes-connectivity/geary/geary/0002-Fix-accessibility-issues-with-initializer-of-constan.patch
-new file mode 100644
-index 0000000000..76315f3a0e
---- /dev/null
-+++ b/meta-gnome/recipes-connectivity/geary/geary/0002-Fix-accessibility-issues-with-initializer-of-constan.patch
-@@ -0,0 +1,42 @@
-+From 64b56e75a54a9fa3f37c7686be97a5c8818413a4 Mon Sep 17 00:00:00 2001
-+From: Rico Tzschichholz <ricotz@ubuntu.com>
-+Date: Tue, 30 Nov 2021 15:31:31 +0100
-+Subject: [PATCH 2/2] Fix accessibility issues with initializer of constants
-+
-+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/geary/-/commit/9bd4c82952a0a2c3308c5cc86c0b85650c1fb484]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/client/application/application-client.vala | 14 +++++++-------
-+ 1 file changed, 7 insertions(+), 7 deletions(-)
-+
-+diff --git a/src/client/application/application-client.vala b/src/client/application/application-client.vala
-+index 6ce19ce2..e6ba8533 100644
-+--- a/src/client/application/application-client.vala
-++++ b/src/client/application/application-client.vala
-+@@ -8,16 +8,16 @@
-+ 
-+ // Defined by CMake build script.
-+ extern const string GETTEXT_PACKAGE;
-+-extern const string _APP_ID;
-+-extern const string _BUILD_ROOT_DIR;
-+-extern const string _GSETTINGS_DIR;
-+-extern const string _INSTALL_PREFIX;
-+-extern const string _NAME_SUFFIX;
-++public extern const string _APP_ID;
-++public extern const string _BUILD_ROOT_DIR;
-++public extern const string _GSETTINGS_DIR;
-++public extern const string _INSTALL_PREFIX;
-++public extern const string _NAME_SUFFIX;
-+ extern const string _PLUGINS_DIR;
-+ extern const string _PROFILE;
-+ extern const string _REVNO;
-+-extern const string _SOURCE_ROOT_DIR;
-+-extern const string _VERSION;
-++public extern const string _SOURCE_ROOT_DIR;
-++public extern const string _VERSION;
-+ extern const string _WEB_EXTENSIONS_DIR;
-+ 
-+ 
-+-- 
-+2.35.1
-+
-diff --git a/meta-gnome/recipes-connectivity/geary/geary_40.0.bb b/meta-gnome/recipes-connectivity/geary/geary_40.0.bb
-index 9b671eeab4..501b27a544 100644
---- a/meta-gnome/recipes-connectivity/geary/geary_40.0.bb
-+++ b/meta-gnome/recipes-connectivity/geary/geary_40.0.bb
-@@ -34,6 +34,8 @@ inherit meson pkgconfig mime-xdg gtk-icon-cache gobject-introspection vala featu
- 
- SRC_URI = " \
- 	git://github.com/GNOME/geary.git;nobranch=1;protocol=https \
-+        file://0001-Util.Cache.Lru-Workaround-missing-generic-type-argum.patch \
-+        file://0002-Fix-accessibility-issues-with-initializer-of-constan.patch \
- "
- 
- S = "${WORKDIR}/git"
--- 
-2.35.1
-
+On Thu, Mar 24, 2022 at 2:09 AM Mikko Rapeli <mikko.rapeli@bmw.de> wrote:
+>
+> From: Mikko Rapeli <mikko.rapeli@bmw.de>
+>
+> polkit 0.121 will contain support for duktape but the patch applies
+> to 0.119 already so use it to get rid of mozjs and free 20 Mb of space.
+> Pick some CVE patches from master while at it.
+>
+> Mikko Rapeli (2):
+>   polkit: add patches for CVE-2021-4034 and CVE-2021-4115
+>   polkit: switch from mozjs to duktape javascript engine
+>
+>  ...l-privilege-escalation-CVE-2021-4034.patch |   82 +
+>  ...0002-CVE-2021-4115-GHSL-2021-077-fix.patch |   86 +
+>  .../0002-jsauthority-port-to-mozjs-91.patch   |   38 -
+>  ...ded-support-for-duktape-as-JS-engine.patch | 3460 +++++++++++++++++
+>  ...re-to-call-JS_Init-and-JS_ShutDown-e.patch |   63 -
+>  .../recipes-extended/polkit/polkit_0.119.bb   |    8 +-
+>  6 files changed, 3633 insertions(+), 104 deletions(-)
+>  create mode 100644 meta-oe/recipes-extended/polkit/polkit/0001-pkexec-local-privilege-escalation-CVE-2021-4034.patch
+>  create mode 100644 meta-oe/recipes-extended/polkit/polkit/0002-CVE-2021-4115-GHSL-2021-077-fix.patch
+>  delete mode 100644 meta-oe/recipes-extended/polkit/polkit/0002-jsauthority-port-to-mozjs-91.patch
+>  create mode 100644 meta-oe/recipes-extended/polkit/polkit/0003-Added-support-for-duktape-as-JS-engine.patch
+>  delete mode 100644 meta-oe/recipes-extended/polkit/polkit/0003-jsauthority-ensure-to-call-JS_Init-and-JS_ShutDown-e.patch
+>
+> --
+> 2.20.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#96183): https://lists.openembedded.org/g/openembedded-devel/message/96183
+> Mute This Topic: https://lists.openembedded.org/mt/89995316/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
