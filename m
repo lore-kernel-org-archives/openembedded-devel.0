@@ -1,277 +1,143 @@
-Return-Path: <mikko.rapeli@bmw.de>
+Return-Path: <xuhuan.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 39D65C433F5
-	for <webhook@archiver.kernel.org>; Thu, 24 Mar 2022 09:09:12 +0000 (UTC)
-Received: from mail.kapsi.fi (mail.kapsi.fi [91.232.154.25])
- by mx.groups.io with SMTP id smtpd.web08.8619.1648112950426313931
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A22EAC433F5
+	for <webhook@archiver.kernel.org>; Thu, 24 Mar 2022 09:17:51 +0000 (UTC)
+Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
+ [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web09.8615.1648113470591868838
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Mar 2022 02:09:10 -0700
+ Thu, 24 Mar 2022 02:17:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: lakka.kapsi.fi, ip: 91.232.154.25,
- mailfrom: mcfrisk@lakka.kapsi.fi)
-Received: from kapsi.fi ([2001:67c:1be8::11] helo=lakka.kapsi.fi)
-	by mail.kapsi.fi with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.89)
-	(envelope-from <mcfrisk@lakka.kapsi.fi>)
-	id 1nXJSt-0001qi-7P; Thu, 24 Mar 2022 11:09:07 +0200
-Received: from mcfrisk by lakka.kapsi.fi with local (Exim 4.92)
-	(envelope-from <mcfrisk@lakka.kapsi.fi>)
-	id 1nXJSt-0002Dk-2C; Thu, 24 Mar 2022 11:09:07 +0200
-From: mikko.rapeli@bmw.de
-To: openembedded-devel@lists.openembedded.org
-Cc: Mikko Rapeli <mikko.rapeli@bmw.de>
-Subject: [meta-oe][PATCH 1/2] polkit: add patches for CVE-2021-4034 and
- CVE-2021-4115
-Date: Thu, 24 Mar 2022 11:09:00 +0200
-Message-Id: <20220324090901.7061-2-mikko.rapeli@bmw.de>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20220324090901.7061-1-mikko.rapeli@bmw.de>
-References: <20220324090901.7061-1-mikko.rapeli@bmw.de>
+ dkim=fail reason="body hash did not verify" header.i=@fujitsu.com
+ header.s=170520fj header.b=In1t7lsm;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112,
+ mailfrom: xuhuan.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1648113468; i=@fujitsu.com;
+	bh=Jv7ydpBSx5doS821XsVXATtjGWZZB8i9KDS30FNx5so=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	b=In1t7lsmmaWzCe55QCibQdNOjzfw2ocsNrLLzMPRdMvDfw4/dgYTjsKDcyeTN5aog
+	 IIVss3R8zJhKahmi+KBCJU9g5CrwIWeibnMLFBsIc+l6xQNRUpfYIFslB3Mrl4bBla
+	 2bKI9Gr4tmIoU94Sc1sE+iZ0We5DKsapMXBlhq2n9iR8042Y+iYYwHK2ACFprrYAXn
+	 BdLmviPU5ZAk7/jnXsmPTBMEHclyKQihu+VFR0T3iNwxXr3K/6u77KXO+U7YKFHVDq
+	 t4VXzOAODHeLlNoZ3L37jlhqpadt2rTgLeCyC2dAmkIFRL9BkSKZkIwvzuzDOeEvXg
+	 LD5SjpjrzQR5Q==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrPIsWRWlGSWpSXmKPExsViZ8ORqGtjbpN
+  ksPksj8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnHowXH2gtnCFWuu7WFtYJwm2MXIxSEk8IRR
+  ouPpJHYI5wKTxOLb71ghnJOMEmun7GPsYuTkYBNQl3h88zWYLSKgL7F09h5mEJtZQFWi++Iad
+  hBbWCBc4tLdJrAaFqD4jp39TCA2r4C7xO0L59lAbAkBBYkpD98zQ8QFJU7OfMICMUdTonX7b3
+  YIW16ieetsZoh6JYkTKz4yQdgVEq8PX4KKq0lcPbeJeQKjwCwko2YhGTULyagFjMyrGO2SijL
+  TM0pyEzNzdA0NDHQNDU11zUx1DS2M9BKrdBP1Ukt1k1PzSooSgdJ6ieXFeqnFxXrFlbnJOSl6
+  eaklmxiB4ZxS7LhtB+Opvp96hxglOZiURHk/G9skCfEl5adUZiQWZ8QXleakFh9ilOHgUJLg3
+  WUElBMsSk1PrUjLzAHGFkxagoNHSYS3xhAozVtckJhbnJkOkTrFqCglzhtrBpQQAElklObBtc
+  Hi+RKjrJQwLyMDA4MQT0FqUW5mCar8K0ZxDkYlYd5SkCk8mXklcNNfAS1mAlr8/KclyOKSRIS
+  UVAOTy5/gpT0TVSMDWtPi+41vBrwsrwirf7EsQcBuw4fpZ71iX8YeuJ7ocSPVh01Y47eCVtbX
+  8tYPS7/NNNUSsT62u6y370nyQuZ1S8LipDk9fkz/YpR07q6y7Rp+i+PH2Y/WHejfvKfI/6/lq
+  4mMS9I8NsU+3f9Bx6jy2VPhru5l047nvpdze5d0SvZ50cIlK9cKpjOGfPbbtejE4vNHMw9M1n
+  2ZK5Vg+dP5F1/zira0vkqRyvWKticbNPXetuc0yOSnROycElKxrqO7J5bPRSDz36G1/8ILWqS
+  vJJx853OjRcfDWkV9j9QDZs6Z7LW8N1YWf/P68+cCwywZ0brHn0+d5uv97fzircS5f0XvKyqV
+  WIozEg21mIuKEwGDp0CMYgMAAA==
+X-Env-Sender: xuhuan.fnst@fujitsu.com
+X-Msg-Ref: server-10.tower-545.messagelabs.com!1648113467!159320!1
+X-Originating-IP: [62.60.8.97]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.81.10; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 19444 invoked from network); 24 Mar 2022 09:17:48 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-10.tower-545.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 24 Mar 2022 09:17:48 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id B60A61001A2
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 24 Mar 2022 09:17:47 +0000 (GMT)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 9D1F41001A0
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 24 Mar 2022 09:17:47 +0000 (GMT)
+Received: from localhost.localdomain.localdomain (10.167.225.131) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Thu, 24 Mar 2022 09:17:27 +0000
+From: XU Huan <xuhuan.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Xu Huan <xuhuan.fnst@fujitsu.com>
+Subject: [PATCH 1/5] [oe] [meta-python] [PATCH] python3-alembic: upgrade 1.7.6
+ -> 1.7.7
+Date: Thu, 24 Mar 2022 17:17:56 +0800
+Message-ID: <1648113480-29846-1-git-send-email-xuhuan.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspam-Score: -1.2 (-)
-X-Rspam-Report: Action: no action
- Symbol: RCVD_TLS_LAST(0.00)
- Symbol: ARC_NA(0.00)
- Symbol: DMARC_POLICY_SOFTFAIL(0.10)
- Symbol: TO_DN_SOME(0.00)
- Symbol: R_MISSING_CHARSET(0.50)
- Symbol: TO_MATCH_ENVRCPT_ALL(0.00)
- Symbol: MIME_GOOD(-0.10)
- Symbol: RCPT_COUNT_TWO(0.00)
- Symbol: FROM_NO_DN(0.00)
- Symbol: MID_CONTAINS_FROM(1.00)
- Symbol: NEURAL_HAM(-0.00)
- Symbol: R_SPF_NA(0.00)
- Symbol: FORGED_SENDER(0.30)
- Symbol: R_DKIM_NA(0.00)
- Symbol: MIME_TRACE(0.00)
- Symbol: ASN(0.00)
- Symbol: FROM_NEQ_ENVFROM(0.00)
- Symbol: BAYES_HAM(-3.00)
- Symbol: RCVD_COUNT_TWO(0.00)
- Message-ID: 20220324090901.7061-2-mikko.rapeli@bmw.de
-X-SA-Exim-Connect-IP: 2001:67c:1be8::11
-X-SA-Exim-Mail-From: mcfrisk@lakka.kapsi.fi
-X-SA-Exim-Scanned: No (on mail.kapsi.fi); SAEximRunCond expanded to false
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Originating-IP: [10.167.225.131]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Mar 2022 09:09:12 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Mar 2022 09:17:51 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96184
+ https://lists.openembedded.org/g/openembedded-devel/message/96186
 
-From: Mikko Rapeli <mikko.rapeli@bmw.de>
+From: Xu Huan <xuhuan.fnst@fujitsu.com>
 
-They were available in polkit master branch and cherry-pick to
-0.119 version works so pick the patches.
+changelog:
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+-[bug] [operations]
 
-Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
+Fixed issue where using Operations.create_table() in conjunction with a
+CheckConstraint that referred to table-bound Column objects rather than string
+expressions would be added to the parent table potentially multiple times,
+resulting in an incorrect DDL sequence. Pull request courtesy Nicolas CANIART.
+
+-[bug] [environment]
+
+The logging.fileConfig() line in env.py templates, which is used to setup Python
+logging for the migration run, is now conditional on Config.config_file_name not
+being None. Otherwise, the line is skipped as there is no default logging
+configuration present.
+
+-[bug] [mssql]
+
+Fixed bug where an Operations.alter_column() operation would change a =E2=80=9CNOT NULL=E2=80=9D
+column to =E2=80=9CNULL=E2=80=9D by emitting an ALTER COLUMN statement that did not specify
+=E2=80=9CNOT NULL=E2=80=9D. (In the absence of =E2=80=9CNOT NULL=E2=80=9D T-SQL was implicitly assuming =E2=80=9CNULL=E2=80=9D).
+An Operations.alter_column() operation that specifies
+Operations.alter_column.type should also specify include either
+Operations.alter_column.nullable or Operations.alter_column.existing_nullable to
+inform Alembic as to whether the emitted DDL should include =E2=80=9CNULL=E2=80=9D or =E2=80=9CNOT NULL=E2=80=9D;
+a warning is now emitted if this is missing under this scenario.
+
+Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
 ---
- ...l-privilege-escalation-CVE-2021-4034.patch | 82 ++++++++++++++++++
- ...0002-CVE-2021-4115-GHSL-2021-077-fix.patch | 86 +++++++++++++++++++
- .../recipes-extended/polkit/polkit_0.119.bb   |  2 +
- 3 files changed, 170 insertions(+)
- create mode 100644 meta-oe/recipes-extended/polkit/polkit/0001-pkexec-local-privilege-escalation-CVE-2021-4034.patch
- create mode 100644 meta-oe/recipes-extended/polkit/polkit/0002-CVE-2021-4115-GHSL-2021-077-fix.patch
+ .../{python3-alembic_1.7.6.bb =3D> python3-alembic_1.7.7.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-alembic_1.7.6.bb =3D> python3-alembic_1.7.7.bb} (81%)
 
-diff --git a/meta-oe/recipes-extended/polkit/polkit/0001-pkexec-local-privilege-escalation-CVE-2021-4034.patch b/meta-oe/recipes-extended/polkit/polkit/0001-pkexec-local-privilege-escalation-CVE-2021-4034.patch
-new file mode 100644
-index 000000000..4691bd102
---- /dev/null
-+++ b/meta-oe/recipes-extended/polkit/polkit/0001-pkexec-local-privilege-escalation-CVE-2021-4034.patch
-@@ -0,0 +1,82 @@
-+From 85c2dd9275cdfb369f613089f22733c0f1ba2aec Mon Sep 17 00:00:00 2001
-+From: Jan Rybar <jrybar@redhat.com>
-+Date: Tue, 25 Jan 2022 17:21:46 +0000
-+Subject: [PATCH 1/3] pkexec: local privilege escalation (CVE-2021-4034)
-+
-+---
-+ src/programs/pkcheck.c |  5 +++++
-+ src/programs/pkexec.c  | 23 ++++++++++++++++++++---
-+ 2 files changed, 25 insertions(+), 3 deletions(-)
-+
-+CVE: CVE-2021-4034
-+Upstream-Status: Backport [a2bf5c9c83b6ae46cbd5c779d3055bff81ded683]
-+
-+diff --git a/src/programs/pkcheck.c b/src/programs/pkcheck.c
-+index f1bb4e1..768525c 100644
-+--- a/src/programs/pkcheck.c
-++++ b/src/programs/pkcheck.c
-+@@ -363,6 +363,11 @@ main (int argc, char *argv[])
-+   local_agent_handle = NULL;
-+   ret = 126;
-+ 
-++  if (argc < 1)
-++    {
-++      exit(126);
-++    }
-++
-+   /* Disable remote file access from GIO. */
-+   setenv ("GIO_USE_VFS", "local", 1);
-+ 
-+diff --git a/src/programs/pkexec.c b/src/programs/pkexec.c
-+index 7698c5c..84e5ef6 100644
-+--- a/src/programs/pkexec.c
-++++ b/src/programs/pkexec.c
-+@@ -488,6 +488,15 @@ main (int argc, char *argv[])
-+   pid_t pid_of_caller;
-+   gpointer local_agent_handle;
-+ 
-++
-++  /*
-++   * If 'pkexec' is called THIS wrong, someone's probably evil-doing. Don't be nice, just bail out.
-++   */
-++  if (argc<1)
-++    {
-++      exit(127);
-++    }
-++
-+   ret = 127;
-+   authority = NULL;
-+   subject = NULL;
-+@@ -614,10 +623,10 @@ main (int argc, char *argv[])
-+ 
-+       path = g_strdup (pwstruct.pw_shell);
-+       if (!path)
-+-	{
-++        {
-+           g_printerr ("No shell configured or error retrieving pw_shell\n");
-+           goto out;
-+-	}
-++        }
-+       /* If you change this, be sure to change the if (!command_line)
-+ 	 case below too */
-+       command_line = g_strdup (path);
-+@@ -636,7 +645,15 @@ main (int argc, char *argv[])
-+           goto out;
-+         }
-+       g_free (path);
-+-      argv[n] = path = s;
-++      path = s;
-++
-++      /* argc<2 and pkexec runs just shell, argv is guaranteed to be null-terminated.
-++       * /-less shell shouldn't happen, but let's be defensive and don't write to null-termination
-++       */
-++      if (argv[n] != NULL)
-++      {
-++        argv[n] = path;
-++      }
-+     }
-+   if (access (path, F_OK) != 0)
-+     {
-+-- 
-+2.20.1
-+
-diff --git a/meta-oe/recipes-extended/polkit/polkit/0002-CVE-2021-4115-GHSL-2021-077-fix.patch b/meta-oe/recipes-extended/polkit/polkit/0002-CVE-2021-4115-GHSL-2021-077-fix.patch
-new file mode 100644
-index 000000000..264ccdd79
---- /dev/null
-+++ b/meta-oe/recipes-extended/polkit/polkit/0002-CVE-2021-4115-GHSL-2021-077-fix.patch
-@@ -0,0 +1,86 @@
-+From c86aea01a06ad4d6c428137e9cfe2f74b1ae7f01 Mon Sep 17 00:00:00 2001
-+From: Jan Rybar <jrybar@redhat.com>
-+Date: Mon, 21 Feb 2022 08:29:05 +0000
-+Subject: [PATCH 2/3] CVE-2021-4115 (GHSL-2021-077) fix
-+
-+---
-+ src/polkit/polkitsystembusname.c | 38 ++++++++++++++++++++++++++++----
-+ 1 file changed, 34 insertions(+), 4 deletions(-)
-+
-+CVE: CVE-2021-4115
-+Upstream-Status: Backport [41cb093f554da8772362654a128a84dd8a5542a7]
-+
-+diff --git a/src/polkit/polkitsystembusname.c b/src/polkit/polkitsystembusname.c
-+index 8ed1363..2fbf5f1 100644
-+--- a/src/polkit/polkitsystembusname.c
-++++ b/src/polkit/polkitsystembusname.c
-+@@ -62,6 +62,10 @@ enum
-+   PROP_NAME,
-+ };
-+ 
-++
-++guint8 dbus_call_respond_fails;      // has to be global because of callback
-++
-++
-+ static void subject_iface_init (PolkitSubjectIface *subject_iface);
-+ 
-+ G_DEFINE_TYPE_WITH_CODE (PolkitSystemBusName, polkit_system_bus_name, G_TYPE_OBJECT,
-+@@ -364,6 +368,7 @@ on_retrieved_unix_uid_pid (GObject              *src,
-+   if (!v)
-+     {
-+       data->caught_error = TRUE;
-++      dbus_call_respond_fails += 1;
-+     }
-+   else
-+     {
-+@@ -405,6 +410,8 @@ polkit_system_bus_name_get_creds_sync (PolkitSystemBusName           *system_bus
-+   tmp_context = g_main_context_new ();
-+   g_main_context_push_thread_default (tmp_context);
-+ 
-++  dbus_call_respond_fails = 0;
-++
-+   /* Do two async calls as it's basically as fast as one sync call.
-+    */
-+   g_dbus_connection_call (connection,
-+@@ -432,11 +439,34 @@ polkit_system_bus_name_get_creds_sync (PolkitSystemBusName           *system_bus
-+ 			  on_retrieved_unix_uid_pid,
-+ 			  &data);
-+ 
-+-  while (!((data.retrieved_uid && data.retrieved_pid) || data.caught_error))
-+-    g_main_context_iteration (tmp_context, TRUE);
-++  while (TRUE)
-++  {
-++    /* If one dbus call returns error, we must wait until the other call
-++     * calls _call_finish(), otherwise fd leak is possible.
-++     * Resolves: GHSL-2021-077
-++    */
-+ 
-+-  if (data.caught_error)
-+-    goto out;
-++    if ( (dbus_call_respond_fails > 1) )
-++    {
-++      // we got two faults, we can leave
-++      goto out;
-++    }
-++
-++    if ((data.caught_error && (data.retrieved_pid || data.retrieved_uid)))
-++    {
-++      // we got one fault and the other call finally finished, we can leave
-++      goto out;
-++    }
-++
-++    if ( !(data.retrieved_uid && data.retrieved_pid) )
-++    {
-++      g_main_context_iteration (tmp_context, TRUE);
-++    }
-++    else
-++    {
-++      break;
-++    }
-++  }
-+ 
-+   if (out_uid)
-+     *out_uid = data.uid;
-+-- 
-+2.20.1
-+
-diff --git a/meta-oe/recipes-extended/polkit/polkit_0.119.bb b/meta-oe/recipes-extended/polkit/polkit_0.119.bb
-index b5f77700c..a9559c4db 100644
---- a/meta-oe/recipes-extended/polkit/polkit_0.119.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_0.119.bb
-@@ -27,6 +27,8 @@ SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.
-            file://0003-make-netgroup-support-optional.patch \
-            file://0002-jsauthority-port-to-mozjs-91.patch \
-            file://0003-jsauthority-ensure-to-call-JS_Init-and-JS_ShutDown-e.patch \
-+           file://0001-pkexec-local-privilege-escalation-CVE-2021-4034.patch \
-+           file://0002-CVE-2021-4115-GHSL-2021-077-fix.patch \
-            "
- SRC_URI[sha256sum] = "c8579fdb86e94295404211285fee0722ad04893f0213e571bd75c00972fd1f5c"
+diff --git a/meta-python/recipes-devtools/python/python3-alembic_1.7.6.bb b/meta-python/recipes-devtools/python/python3-alembic_1.7.7.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-alembic_1.7.6.bb
+rename to meta-python/recipes-devtools/python/python3-alembic_1.7.7.bb
+index 822b3c02b8..6b7ac4a99c 100644
+--- a/meta-python/recipes-devtools/python/python3-alembic_1.7.6.bb
++++ b/meta-python/recipes-devtools/python/python3-alembic_1.7.7.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Df5a8522010db1a393833988dbe2c7f0b"
+ 
+ inherit pypi setuptools3
+ 
+-SRC_URI[sha256sum] =3D "6c0c05e9768a896d804387e20b299880fe01bc56484246b0dffe8075d6d3d847"
++SRC_URI[sha256sum] =3D "4961248173ead7ce8a21efb3de378f13b8398e6630fab0eb258dc74a8af24c58"
+ 
+ PYPI_PACKAGE =3D "alembic"
  
 -- 
-2.20.1
+2.25.1
 
 
