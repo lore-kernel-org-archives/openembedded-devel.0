@@ -1,165 +1,175 @@
-Return-Path: <trevor.gamblin@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE639C433FE
-	for <webhook@archiver.kernel.org>; Thu, 24 Mar 2022 15:58:00 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com
- [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web09.12629.1648137479540659679
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90DA3C433EF
+	for <webhook@archiver.kernel.org>; Thu, 24 Mar 2022 16:30:12 +0000 (UTC)
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
+ [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.web11.13186.1648139411581518749
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Mar 2022 08:58:00 -0700
+ Thu, 24 Mar 2022 09:30:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=QxoTIZ0M;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
- invalid domain name (domain: windriver.com, ip: 205.220.166.238,
- mailfrom: prvs=008297714c=trevor.gamblin@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id
- 22OFSQ3Q032749
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Mar 2022 08:57:59 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
- h=from : to :
- subject : date : message-id : in-reply-to : references :
- content-transfer-encoding : content-type : mime-version; s=PPS06212021;
- bh=tu452+DtuHlp3F7VJww2LUm4JkQGYGNV6MO5Kl3UoGA=;
- b=QxoTIZ0MNuX8La/AbnhULFt4uCzh44+mzzUVkJc7HN5/22JJTX+6b0JvUPrLUb1fPgUz
- gXX3oY9WBj5rij44kdzcT5h1eZJaYH86Q56EBVH/XW7QArAyabrEi5/Ed7mD1AiiNhG3
- O/YcAOhNpdW+7n2FHI8WHk1H1PA3D2Aey/kh31AFBUpamAsJai7oW/yMzjJmvVwtlcsp
- bB0po2MgBMdV0ywZh4jyLLwxsf9zKS4Hlwc9uI1SNYMed8Qyj+4KtG9OhrPi02M0pntb
- omMG+yT3964SHDzXUVr9mIFeIntX3XjEFvRoA8gfp/lcRtS1flC25Waoufi46Tra3R3T Dg==
-Received: from nam12-bn8-obe.outbound.protection.outlook.com
- (mail-bn8nam12lp2171.outbound.protection.outlook.com [104.47.55.171])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ewepj4ehm-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Mar 2022 08:57:59 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=O7ajYlDEvDagcXK3dY9D8/KvmIjYOsyGu1DRLONMwoFzonBkd6dlNMCUkZpJ2QQ3jV90oQ7SKPSFtfhfo9WNl4nhlR4nxf39OVePdV+RMvxIOqF3BMtHbpMRkQwtJipsD7OxhnRVJLX3g++ff7hXVPNtaBrPUtdfjlJupuI00e9DpkfMXlgCbLYL2nCEJi9Hyr4zpPRD4SN7i3qoYNqD0J99Z6a1lqAfoPASjifhSsYCD5Xi/e8iOqaYoUTW4AJ71GoHJCOXDqIKVgBPBE38mh2hyDBotsp7sgp0I9noolzUd5O8lFN70x6vjAVADXx4aPqvWBUo+tcAJ1gWV19WeQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tu452+DtuHlp3F7VJww2LUm4JkQGYGNV6MO5Kl3UoGA=;
- b=gnrYgCnIiO+sM8fglG4Vwff57U9+HEhijeNCLOlv+awx7UyPXXvWWksD1pt/v5mcSBvSU8RiUp1jnbtePbFuXF30K59fYUyzWXmsSJuzzJz9ZSW4smTLZbDagJCwd4JxLlItyVo2pIAzx2xb7p07yt7OjWx7hzLblF4bocb3p2GQssKNX4PQN1UGKc3QyDMx+xgo4pJJ8Zp+8uXD5O86LebwuamilGX3fSR4PCzpW5g1dmI9y5xmK0KmNEoZ+CbR4Hvche5wyDiFKlftQvtHh9ea2B0Xgz+aVuA84wh/NiHE8e6PMZlUDy83eLEaNQMrmE6mjV6/Ll1fsdOONJFbQg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
- by MN2PR11MB3869.namprd11.prod.outlook.com (2603:10b6:208:138::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5081.15; Thu, 24 Mar
- 2022 15:57:57 +0000
-Received: from BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::c1c7:209:c28f:67dc]) by BY5PR11MB3909.namprd11.prod.outlook.com
- ([fe80::c1c7:209:c28f:67dc%3]) with mapi id 15.20.5081.023; Thu, 24 Mar 2022
- 15:57:57 +0000
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=eRXtFk7o;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id gb19so5162075pjb.1
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 24 Mar 2022 09:30:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=3vAtIfHjzNdN2y5fUFe0IHeMUtdYo/JWUHvN+W/c9sM=;
+        b=eRXtFk7ozbzov3ylZpWQzxzoPC/alX2/kEtbbMy38VMTPs2VXa8tGXkmHfqqIS6Dg7
+         5zB11PdSk0bVft+SIlDDcOPFgfhwGZrc+hANtAl5Mg+UBiK9NwR90rMz1a0U5AtVudOi
+         91IMw3NxCMX+Uc9POQfsRCX66uOZpe6EcwK82vMUb3lWR1/fWUxRXgJbyhihwkOXhs8G
+         7tZFcLz1+xJzTin4vq2d/9WUOOycKlKm84NIGu+aW1pqG2TuSISUhUxNsznjhSieqtDj
+         nWv4jvvwbuy974rlPu8DnGIuGMGPF8CeG7Ff1O4VxFIBuKZYekyYSA04XRJonnOGIDcY
+         4z+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=3vAtIfHjzNdN2y5fUFe0IHeMUtdYo/JWUHvN+W/c9sM=;
+        b=bIdaana2EZrzDuwN6lR8GAFKMNStmS802j0spoi+NeS1W371pb26fvYODyQ6bwg5VJ
+         3ZuDqkqY38YKWbAeYlByt34EGL9cX+L9gc8Omco/p3Fl2txEGgjybSUTRoOb9tYPB8p9
+         kF2Ezj5MNSI6bT6TbV+LO1YhOMv+5OUmkRwqGcXUvz5L8GfDQL37sqshtT6p3lN1pZ9M
+         cJ8ka9cHKMt7hrQcn3lCsXqYIzVgROpUrG63DYsKxGysncgWMIRGFUkKSHQujjEdqW/6
+         g+6IIze4sbh5PjmqvUiK6OxtfSRgCayi+MALkuL9pwpd/L4UIE112cd85kd0gxg1HvVE
+         +Bow==
+X-Gm-Message-State: AOAM530DBs//lvD7sekLJJa7C3JxxsGfPdtYWwFfHnx4LbfikKVpgcfO
+	QmEEYjILrHT+3oguHGeOthi8lmgMb8E=
+X-Google-Smtp-Source: 
+ ABdhPJziO348oSlU3xae2rufNZw5qWB+mU2zPWdEfGG3RcLn2+XHdVmuOy6bjjcTY3xs05VVn96BlA==
+X-Received: by 2002:a17:902:ca94:b0:154:b606:dd83 with SMTP id
+ v20-20020a170902ca9400b00154b606dd83mr6617965pld.167.1648139410791;
+        Thu, 24 Mar 2022 09:30:10 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
+        by smtp.gmail.com with ESMTPSA id
+ a38-20020a056a001d2600b004f72acd4dadsm3995447pfx.81.2022.03.24.09.30.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 24 Mar 2022 09:30:10 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 4/4] python3-paramiko: upgrade 2.9.2 -> 2.10.3
-Date: Thu, 24 Mar 2022 11:57:46 -0400
-Message-Id: <20220324155746.2341330-4-trevor.gamblin@windriver.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH] geary: Fix build failures with latest vala
+Date: Thu, 24 Mar 2022 09:30:08 -0700
+Message-Id: <20220324163008.37725-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220324155746.2341330-1-trevor.gamblin@windriver.com>
-References: <20220324155746.2341330-1-trevor.gamblin@windriver.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: YQBPR01CA0033.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:c01::41)
- To BY5PR11MB3909.namprd11.prod.outlook.com (2603:10b6:a03:191::13)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: f166fb22-bc33-4bad-229c-08da0daf1032
-X-MS-TrafficTypeDiagnostic: MN2PR11MB3869:EE_
-X-Microsoft-Antispam-PRVS: 
-	<MN2PR11MB38696BB01533FCFB3F4289B09F199@MN2PR11MB3869.namprd11.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	E4szlZDyWCACwNeCGNaAngJoOX19rHjZEIOIEfY89HNaPAyQT9sx+UlaFhB8g2oGzW/HwXZPFnc5t7wA4KdjBRLCjFC+ffyrGXW3zlIA2jze+zwiDF6sy28n6Xj1J9L+ucJEgLhHrVYlnxrTgPCFqbChN5UKZrOE8roESAMOohZrVZd1Gjf4/6tvbE/h8qlsnNgYGC8TOipRxQ4KwfCCe8aLVBGZcyXl5onN5wvQDo4xUq9FKwbskB78WYkoGfodpIantgK0cndza8NeHg76femdY8OFH/C0jBIdGJZHaUjMlJl/5xnJVR9HqkAgew7PUl97lOUFZCUsrSa+8dJBwb+Dz26n40TYNeQ5iqf5pQV8gyGIr57SbVZM7Ujc7CDNa/f/6rR1E+BGXFvjzWEbvXvpeafurj0Kij15cMBqzRjA9M/A6mIR+qAKSgkFB0dPHrQU4KaPfU52NpCnW1jq4R+0+MjOEQQ9E+mq7ZU6ukibhmdZ67WqGRjLrXvu6c+b2oHnaO95SIex3CelxuhMGevrap7rLiqx3AIPnhXOaPzVtfU3GW1TfOXwTAeUkGunECfV4MDUt/wyMcmAm9D0wbx606f6RVpcxSGtCuy+9KxKtORYTPko00953XSbWpAgDK+1ArhS24pTAftSPJY+wP8kt7bcxXWeA23rvrxlWgdIPED/Y6KVDvwfpkps134MXvN0xL16bzdUsxN8t5Lg8w1ytY/nNd9C2mxHsujETA0cQgvoPo6QHAHNp8Lpdnl7K+a4qWRqqML57xvlBiXWy9dgVPgD9rDdgu4KlXCUCQY=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR11MB3909.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(83380400001)(38100700002)(1076003)(6916009)(38350700002)(316002)(26005)(66946007)(186003)(2616005)(66556008)(86362001)(66476007)(6666004)(8676002)(5660300002)(508600001)(6486002)(6512007)(2906002)(52116002)(6506007)(8936002)(36756003)(44832011);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?HbyxmWskltMwMvEjJUdfo5P2o/2ZL27XnHUDTlgvAgicPDROLPFueO0B85IQ?=
- =?us-ascii?Q?f3zPXlMJLqlOhnIOQhUr91J9/Ca2xyZXLXE1F59lC0gnNIeSWrS1eV2VVytG?=
- =?us-ascii?Q?DhEMz7Ru8qK+2bC2iXFNOVw5GM7zB+77C33edkLZB1cXrWzcE8n28Jw/3GH+?=
- =?us-ascii?Q?NZT8+gAgDflxMXkyQMy0dM7T23OkuWFGgEdh/eNQAYFVCUiB3vwWjDOjxOKr?=
- =?us-ascii?Q?qtmDBcE6bRaB3TbpBXVz/Sor86s/CA71FNFdKkfe6TFutSAKBpdmfw9opCnV?=
- =?us-ascii?Q?t5e5Xo5LHaJPrRrsWRI3JP3SiyQFT+enKnKENcQGmvZzokpl08LQEu0W1hZL?=
- =?us-ascii?Q?UkRzM5RnoN44lMQB1T3msV7hyx2xtGIF7bNT4ARUJBv7m+GkeKkjuZRkRc+i?=
- =?us-ascii?Q?vYlcHGqC4X8SSwA8oBIcIE3b5BbRRRxpYaarx8aoYrIVTKTmibl7bi5lLsgL?=
- =?us-ascii?Q?MwgetJbAyfMMxa7JOBzTlT4GkuXqLDtob2+1dBQSDh3XPqQ7GW9JGxdtBCSZ?=
- =?us-ascii?Q?5jE+x7igTfI9/FYE9la5RTsvvZC0INooVqFRLfWTt2Z/FRgQyKJDFU1Dsbx0?=
- =?us-ascii?Q?DjRDFR+k+qvQPA4v1oliIqJI//1EYQG4hFw5Qp9nlDPO8oksMZIrAnYb0+gN?=
- =?us-ascii?Q?n7WP7Xj1SQ5xs5IZbPxnPo2PZbgXdp0W7w4HwkEW5dN+ynGwVcRxgd8dNaEM?=
- =?us-ascii?Q?HD4FNIGralbE5xJxbixxp0GQt8Bv61gPRGX5RBfCoJ3qjIEV1ddBkX6NHaay?=
- =?us-ascii?Q?H+qiAVmz4T2uGA5WaxKInqBtvUtMHfeQUlXG0J1mc+GYTlHPTmAvH0XWP1mk?=
- =?us-ascii?Q?rVd6i/JQoK2ueNNE2CoFSCStDLlVmdn7uwWPDnsGZUGjsrNJMDpAyqSjNCFR?=
- =?us-ascii?Q?+xCOgezSJdhdiUKuCAVTU9sUqSLV+KZIzFU764MDE9FAplBMi0ihRolT+9OE?=
- =?us-ascii?Q?aC8RvFcJT2Mm9Kh0vKzJGGCSH1FqZjR2Pk1xnUGblDNYiMD0KCVGHkyhy5Hk?=
- =?us-ascii?Q?1q3vH/F9be5hBpf1T8z+f3K63eE0JWnwaGTDhzcaCM7D3muluv0TQ79kW67M?=
- =?us-ascii?Q?Nj1ISYpac6JkcCqHTaTLuySKNCmJgXPvV58xxxjYaJ/uNAadytgSkm8jLpe4?=
- =?us-ascii?Q?2gxhFwtoRNVH3Ts5ntFCs0DPe5Vqtyp/6Q4gX0WpMPU52FALxute536MexKz?=
- =?us-ascii?Q?trqFe+8civSeA/E532kWbRNVkOV5ff833h6pH/OSe0QqCExCA17tg9kW0MMs?=
- =?us-ascii?Q?aurP6eYfeQjX2w73yG3eL67oqimDFUVmqvuZFpcu2/9yazMToB9FeA2KoGIv?=
- =?us-ascii?Q?6awzKQiXmNoNoti9P/mkimcuoBQhPKda8/kNytFGn7MY8sBqbZNsdP9fqGm9?=
- =?us-ascii?Q?DwevixsZxEntXGCvYuo6VuY17nhiEjH7KXL3rH1En1nQ/1zyF2mo4jTBGX6l?=
- =?us-ascii?Q?0HqQ2WTL7YQWU3O2q9utYqfrTeGndcjA43bp+EyFU1bkxCLOnp401Q=3D=3D?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- f166fb22-bc33-4bad-229c-08da0daf1032
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB3909.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Mar 2022 15:57:57.1161
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 
- gYD6HlHfk1YSR+TLMzlYP/T+BovD495b+qQpjQQZdGeg8E0x8CQdiIs2RkJ5QtjCljOD1p+NBqsoIrVVA0lnbAaCheFMfaOLW5V3aP5p3h8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR11MB3869
-X-Proofpoint-GUID: QlA9Di8ZDRXC5KO4inohTS2bHDX8vrbE
-X-Proofpoint-ORIG-GUID: QlA9Di8ZDRXC5KO4inohTS2bHDX8vrbE
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.850,Hydra:6.0.425,FMLib:17.11.64.514
- definitions=2022-03-24_04,2022-03-24_01,2022-02-23_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 bulkscore=0
- priorityscore=1501 impostorscore=0 spamscore=0 adultscore=0 mlxscore=0
- suspectscore=0 lowpriorityscore=0 phishscore=0 malwarescore=0
- mlxlogscore=846 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2202240000 definitions=main-2203240089
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Mar 2022 15:58:00 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Mar 2022 16:30:12 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96199
+ https://lists.openembedded.org/g/openembedded-devel/message/96200
 
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+Backport needed patches
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../{python3-paramiko_2.9.2.bb => python3-paramiko_2.10.3.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-paramiko_2.9.2.bb => python3-paramiko_2.10.3.bb} (82%)
+ ...orkaround-missing-generic-type-argum.patch | 27 ++++++++++++
+ ...y-issues-with-initializer-of-constan.patch | 42 +++++++++++++++++++
+ .../recipes-connectivity/geary/geary_40.0.bb  |  2 +
+ 3 files changed, 71 insertions(+)
+ create mode 100644 meta-gnome/recipes-connectivity/geary/geary/0001-Util.Cache.Lru-Workaround-missing-generic-type-argum.patch
+ create mode 100644 meta-gnome/recipes-connectivity/geary/geary/0002-Fix-accessibility-issues-with-initializer-of-constan.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-paramiko_2.9.2.bb b/meta-python/recipes-devtools/python/python3-paramiko_2.10.3.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-paramiko_2.9.2.bb
-rename to meta-python/recipes-devtools/python/python3-paramiko_2.10.3.bb
-index a02a7891a..9f7f45872 100644
---- a/meta-python/recipes-devtools/python/python3-paramiko_2.9.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-paramiko_2.10.3.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/paramiko/paramiko/"
- LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=fd0120fc2e9f841c73ac707a30389af5"
+diff --git a/meta-gnome/recipes-connectivity/geary/geary/0001-Util.Cache.Lru-Workaround-missing-generic-type-argum.patch b/meta-gnome/recipes-connectivity/geary/geary/0001-Util.Cache.Lru-Workaround-missing-generic-type-argum.patch
+new file mode 100644
+index 0000000000..22af4f5bea
+--- /dev/null
++++ b/meta-gnome/recipes-connectivity/geary/geary/0001-Util.Cache.Lru-Workaround-missing-generic-type-argum.patch
+@@ -0,0 +1,27 @@
++From 166198735e9f4fbe91557df1351b3481bcf79e78 Mon Sep 17 00:00:00 2001
++From: Rico Tzschichholz <ricotz@ubuntu.com>
++Date: Sun, 30 Jan 2022 19:54:11 +0100
++Subject: [PATCH 1/2] Util.Cache.Lru: Workaround missing generic type argument
++
++Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/geary/-/commit/0f75e7a84a39492d0748cec2ba6028e08cae3644]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/client/util/util-cache.vala | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/client/util/util-cache.vala b/src/client/util/util-cache.vala
++index f054e32e..ecc275e8 100644
++--- a/src/client/util/util-cache.vala
+++++ b/src/client/util/util-cache.vala
++@@ -12,7 +12,7 @@ public class Util.Cache.Lru<T> : Geary.BaseObject {
++     private class CacheEntry<T> {
++ 
++ 
++-        public static int lru_compare(CacheEntry<T> a, CacheEntry<T> b) {
+++        public static int lru_compare(CacheEntry a, CacheEntry b) {
++             if (a.key == b.key) {
++                 return 0;
++             }
++-- 
++2.35.1
++
+diff --git a/meta-gnome/recipes-connectivity/geary/geary/0002-Fix-accessibility-issues-with-initializer-of-constan.patch b/meta-gnome/recipes-connectivity/geary/geary/0002-Fix-accessibility-issues-with-initializer-of-constan.patch
+new file mode 100644
+index 0000000000..76315f3a0e
+--- /dev/null
++++ b/meta-gnome/recipes-connectivity/geary/geary/0002-Fix-accessibility-issues-with-initializer-of-constan.patch
+@@ -0,0 +1,42 @@
++From 64b56e75a54a9fa3f37c7686be97a5c8818413a4 Mon Sep 17 00:00:00 2001
++From: Rico Tzschichholz <ricotz@ubuntu.com>
++Date: Tue, 30 Nov 2021 15:31:31 +0100
++Subject: [PATCH 2/2] Fix accessibility issues with initializer of constants
++
++Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/geary/-/commit/9bd4c82952a0a2c3308c5cc86c0b85650c1fb484]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/client/application/application-client.vala | 14 +++++++-------
++ 1 file changed, 7 insertions(+), 7 deletions(-)
++
++diff --git a/src/client/application/application-client.vala b/src/client/application/application-client.vala
++index 6ce19ce2..e6ba8533 100644
++--- a/src/client/application/application-client.vala
+++++ b/src/client/application/application-client.vala
++@@ -8,16 +8,16 @@
++ 
++ // Defined by CMake build script.
++ extern const string GETTEXT_PACKAGE;
++-extern const string _APP_ID;
++-extern const string _BUILD_ROOT_DIR;
++-extern const string _GSETTINGS_DIR;
++-extern const string _INSTALL_PREFIX;
++-extern const string _NAME_SUFFIX;
+++public extern const string _APP_ID;
+++public extern const string _BUILD_ROOT_DIR;
+++public extern const string _GSETTINGS_DIR;
+++public extern const string _INSTALL_PREFIX;
+++public extern const string _NAME_SUFFIX;
++ extern const string _PLUGINS_DIR;
++ extern const string _PROFILE;
++ extern const string _REVNO;
++-extern const string _SOURCE_ROOT_DIR;
++-extern const string _VERSION;
+++public extern const string _SOURCE_ROOT_DIR;
+++public extern const string _VERSION;
++ extern const string _WEB_EXTENSIONS_DIR;
++ 
++ 
++-- 
++2.35.1
++
+diff --git a/meta-gnome/recipes-connectivity/geary/geary_40.0.bb b/meta-gnome/recipes-connectivity/geary/geary_40.0.bb
+index 9b671eeab4..501b27a544 100644
+--- a/meta-gnome/recipes-connectivity/geary/geary_40.0.bb
++++ b/meta-gnome/recipes-connectivity/geary/geary_40.0.bb
+@@ -34,6 +34,8 @@ inherit meson pkgconfig mime-xdg gtk-icon-cache gobject-introspection vala featu
  
--SRC_URI[sha256sum] = "944a9e5dbdd413ab6c7951ea46b0ab40713235a9c4c5ca81cfe45c6f14fa677b"
-+SRC_URI[sha256sum] = "ddb1977853aef82804b35d72a0e597b244fa326c404c350bd00c5b01dbfee71a"
+ SRC_URI = " \
+ 	git://github.com/GNOME/geary.git;nobranch=1;protocol=https \
++        file://0001-Util.Cache.Lru-Workaround-missing-generic-type-argum.patch \
++        file://0002-Fix-accessibility-issues-with-initializer-of-constan.patch \
+ "
  
- PYPI_PACKAGE = "paramiko"
- 
+ S = "${WORKDIR}/git"
 -- 
 2.35.1
 
