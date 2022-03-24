@@ -2,106 +2,88 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ACD9AC433F5
-	for <webhook@archiver.kernel.org>; Thu, 24 Mar 2022 16:57:36 +0000 (UTC)
-Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
- [209.85.222.179])
- by mx.groups.io with SMTP id smtpd.web10.13696.1648141055708238647
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1A12C433EF
+	for <webhook@archiver.kernel.org>; Thu, 24 Mar 2022 19:08:13 +0000 (UTC)
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com
+ [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web11.15293.1648148892875266540
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Mar 2022 09:57:35 -0700
+ Thu, 24 Mar 2022 12:08:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=cC1l2ZWc;
- spf=pass (domain: gmail.com, ip: 209.85.222.179,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f179.google.com with SMTP id b189so3977738qkf.11
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=FSmb67aL;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id
+ mp6-20020a17090b190600b001c6841b8a52so10256044pjb.5
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Mar 2022 09:57:35 -0700 (PDT)
+ Thu, 24 Mar 2022 12:08:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=RBEosxVYEdDOsR1xUtM1TvPcfj3+yq2EIsDwzCyh+GQ=;
-        b=cC1l2ZWcCL2EeTmqHeo6YCZtly4Wf1C33KSKq78okTUt5ihATnohZRHLKLwb+nD44/
-         aLE1vB78HoJasmGaTmLnpFj/iBGJU+9aLvuXtjSGop9NsL4ZNsCIeDJjSM/rXK14KWQR
-         BgM+e/fJAGyazshXzqdMTbZwWRQBj0Djj5Hlme40pR9K5vJCLq3qtAdFMUGjKd6kIh2d
-         7dKrKWW8QDw50VpjeBwkeGiZkJBwtdW5mha6R375NdPD8RcKm9uvNv2Ull5RL8uerUtr
-         y8yEvtyhmboEWftwOcPAMwje7cUAC0SfY4F7jtX06FNVS3T3T/0TJXlTO06hjQnC/ZrE
-         VdXA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=+ZlHdxMX0MeiqoRlglp7EeGmDd1LcPrOSroSiaFEtLY=;
+        b=FSmb67aLmE2W5/ZVZUnZALsZQdfDxf5NdApLLXuJpnMiAOqtH52/HAFUlhPpxGgKTc
+         yO78Wz7hGQRwAry+Cw54Bgjvgh8jLqaqNTsdM0+GZbl3lnLFgSGJy7BalX+Vp1T6Govd
+         NTelv0ENBRCap7HSR8HeKf1VZ6FrFRsOtRXe97pfsbliBa6YKqwLhMQh7DFYq9DciF6a
+         oaP/Rf2zu1+KfkX3gM+0jPP+8ckqltIUwG+vWFXOtJjo32BOSW3BteoF76Hpu3Jbmyzf
+         uF7PaukoEaO+XeJCS/UL2z4iC7ZAunO+o+Jg90YkwWaHKMmS/norx783EoU/1NV1JWvL
+         uOKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=RBEosxVYEdDOsR1xUtM1TvPcfj3+yq2EIsDwzCyh+GQ=;
-        b=NcV0tjyPTQw+iXMLuTO62xRaPluGGCB5Ap4nsBf0o17VrP2GLYISx/yKpjgLwIBh12
-         OdwJPoY2I2Hku8pg8E2jKjoT2BHfxT5sGOXuFMvnKh5sLkCro/jgPdKbqyeR505FpcED
-         gISCJt6ezIFHquxwsPGLwInUWQBrkdfh3B+li6F0yFmyaKA7AWwP7MfezrLYNQnmLGci
-         qk4rr2s3dzpgrwUygugyoQnBkIvqHcrLLRbUviPswIX8IWd/iqheBgvxYwdnzgHOuvok
-         3bbWJziUCESsQSVIWXwTN4E2/9PpqPBgt6iEceTh5SvmtCabVbYrYPXQr0xx7LgVQC1k
-         Xryw==
-X-Gm-Message-State: AOAM533fuIRBGvw/6Auu/XM4e2t6a1NmGPqOU2fL1uASX/M6rm13SRhH
-	Rkr8Rdo8xHSqBd7aCUMq8OFmCGbXbFPJpMjhfTOZkLxrAfk=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=+ZlHdxMX0MeiqoRlglp7EeGmDd1LcPrOSroSiaFEtLY=;
+        b=U4dcoDtoSXqIur6adVyr709/vZ1vXMo/BtgKWygq/+S/KJ8JoBCm68TD1L12mhGP+A
+         sI2lBM7C2QwoZjQq2agbEHjZHeoVBCstY1etjKKn2V/qRlov1P7KGWL2MPCRiplVbuMO
+         VmRYrmLAO467tuJOSRlbzPgpW7+VSOu8lnEWs8VOdC+rCOkdjUv67cZaiLA0zYwaRLPJ
+         inLvg4yviL+PA9cL2WJWEa47TAHzjukldnTgjTcnAgtJMH0tvK2bUDO22nRl+jsmtCZT
+         iv5fVqR8tN4DeIsGp9GolDMcM3iU2FOk8iKzPq1VYcX87isD4387Q0nW5qc0SHF8rAfA
+         28Tg==
+X-Gm-Message-State: AOAM530BO2sc3C0LuBWBMD9mzUI61mwVdBT06noSQKxQykaP7d/3DKOn
+	EEaVYYXUXtRe9VKMIRnsKAqR2b7NDLw=
 X-Google-Smtp-Source: 
- ABdhPJz7AgRKsgUwncIFsgWUBaKbis8dPSXi2KtJfL/24dcuKTDlPHpawy1nSMzZFexwPtOLJAmhYfeqrhBrmbhOnwo=
-X-Received: by 2002:a05:620a:4103:b0:67b:49f4:3ee4 with SMTP id
- j3-20020a05620a410300b0067b49f43ee4mr4167757qko.72.1648141054679; Thu, 24 Mar
- 2022 09:57:34 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220324090901.7061-1-mikko.rapeli@bmw.de>
-In-Reply-To: <20220324090901.7061-1-mikko.rapeli@bmw.de>
+ ABdhPJzQXTvgn8a0ykAHiZsIgAltb2Rwrn39rGPkzaCUasa1NdGdtegv4JuqS2jsEmI9SReCA9FKCQ==
+X-Received: by 2002:a17:90a:e545:b0:1c6:d783:6e64 with SMTP id
+ ei5-20020a17090ae54500b001c6d7836e64mr20596473pjb.222.1648148892076;
+        Thu, 24 Mar 2022 12:08:12 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::781b])
+        by smtp.gmail.com with ESMTPSA id
+ ds15-20020a17090b08cf00b001c6a4974b45sm10029671pjb.40.2022.03.24.12.08.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 24 Mar 2022 12:08:11 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 24 Mar 2022 09:57:08 -0700
-Message-ID: 
- <CAMKF1sq7nGjy7Bnkw5D5qmqEEtgG3-fFfmz=HTdu+fbwVTmeYQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 0/2] polkit: switch from mozjs to duktape
- javascript engine
-To: Mikko Rapeli <mikko.rapeli@bmw.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-webserver][PATCH] netdata: Fix override separator syntax
+Date: Thu, 24 Mar 2022 12:08:09 -0700
+Message-Id: <20220324190809.1934248-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.35.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Mar 2022 16:57:36 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Mar 2022 19:08:13 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96201
+ https://lists.openembedded.org/g/openembedded-devel/message/96202
 
-v2 of first patch applied the second patch does not apply, Can you
-send full series rebased on top of master next ?
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-webserver/recipes-webadmin/netdata/netdata_1.33.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Thu, Mar 24, 2022 at 2:09 AM Mikko Rapeli <mikko.rapeli@bmw.de> wrote:
->
-> From: Mikko Rapeli <mikko.rapeli@bmw.de>
->
-> polkit 0.121 will contain support for duktape but the patch applies
-> to 0.119 already so use it to get rid of mozjs and free 20 Mb of space.
-> Pick some CVE patches from master while at it.
->
-> Mikko Rapeli (2):
->   polkit: add patches for CVE-2021-4034 and CVE-2021-4115
->   polkit: switch from mozjs to duktape javascript engine
->
->  ...l-privilege-escalation-CVE-2021-4034.patch |   82 +
->  ...0002-CVE-2021-4115-GHSL-2021-077-fix.patch |   86 +
->  .../0002-jsauthority-port-to-mozjs-91.patch   |   38 -
->  ...ded-support-for-duktape-as-JS-engine.patch | 3460 +++++++++++++++++
->  ...re-to-call-JS_Init-and-JS_ShutDown-e.patch |   63 -
->  .../recipes-extended/polkit/polkit_0.119.bb   |    8 +-
->  6 files changed, 3633 insertions(+), 104 deletions(-)
->  create mode 100644 meta-oe/recipes-extended/polkit/polkit/0001-pkexec-local-privilege-escalation-CVE-2021-4034.patch
->  create mode 100644 meta-oe/recipes-extended/polkit/polkit/0002-CVE-2021-4115-GHSL-2021-077-fix.patch
->  delete mode 100644 meta-oe/recipes-extended/polkit/polkit/0002-jsauthority-port-to-mozjs-91.patch
->  create mode 100644 meta-oe/recipes-extended/polkit/polkit/0003-Added-support-for-duktape-as-JS-engine.patch
->  delete mode 100644 meta-oe/recipes-extended/polkit/polkit/0003-jsauthority-ensure-to-call-JS_Init-and-JS_ShutDown-e.patch
->
-> --
-> 2.20.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#96183): https://lists.openembedded.org/g/openembedded-devel/message/96183
-> Mute This Topic: https://lists.openembedded.org/mt/89995316/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_1.33.1.bb b/meta-webserver/recipes-webadmin/netdata/netdata_1.33.1.bb
+index 012efc0682..f575a4cbaf 100644
+--- a/meta-webserver/recipes-webadmin/netdata/netdata_1.33.1.bb
++++ b/meta-webserver/recipes-webadmin/netdata/netdata_1.33.1.bb
+@@ -76,6 +76,6 @@ do_install:append() {
+     chown -R netdata:netdata ${D}${datadir}/netdata/web
+ }
+ 
+-FILES_${PN} += "${localstatedir}/cache/netdata/ ${localstatedir}/lib/netdata/"
++FILES:${PN} += "${localstatedir}/cache/netdata/ ${localstatedir}/lib/netdata/"
+ 
+ RDEPENDS:${PN} = "bash zlib"
+-- 
+2.35.1
+
 
