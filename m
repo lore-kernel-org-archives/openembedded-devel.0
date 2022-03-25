@@ -1,129 +1,511 @@
-Return-Path: <ceggers@arri.de>
+Return-Path: <ranjitsinhrathod1991@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C2767C433EF
-	for <webhook@archiver.kernel.org>; Fri, 25 Mar 2022 14:34:16 +0000 (UTC)
-Received: from EUR03-VE1-obe.outbound.protection.outlook.com
- (EUR03-VE1-obe.outbound.protection.outlook.com [40.107.5.104])
- by mx.groups.io with SMTP id smtpd.web11.6147.1648218853840472168
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E1FD1C433EF
+	for <webhook@archiver.kernel.org>; Fri, 25 Mar 2022 17:29:41 +0000 (UTC)
+Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com
+ [209.85.218.49])
+ by mx.groups.io with SMTP id smtpd.web12.8514.1648229380408674634
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Mar 2022 07:34:16 -0700
+ Fri, 25 Mar 2022 10:29:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify"
- header.i=@arrigroup.onmicrosoft.com
- header.s=selector1-arrigroup-onmicrosoft-com header.b=wfdPwbVe;
- spf=pass (domain: arri.de, ip: 40.107.5.104, mailfrom: ceggers@arri.de)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=BVikeVXyrTnPjLnzEtzKJ/61MK1M0UwW7ZauUS24ENw/GQoB/DfXfoBBidN0vdYBgsAzoqc4TFUVbgYHPmDQm1kVPbJJlEYBpqAQE6C+pv/iNtjNbAS7t3IDwmKU3iQUt7wydxoMe9LWQYnYzLjiXEgD17SCvyqyyVthnYX5nki5ygfA7QAUqZ7r+5zePOijLXCxzEnB1e0pESdDOtyHBRgo9j8US418o+pXVxXqjbgL0cUcU4bPEvTmyFD1hbmT4glBRzVsmvIvdGYlcHm9c4O2q1F0oaabjFD43DXpcT11latv8CSuu/dVCJzI7nSeJ13Dvkwpuhm5uQGSL/ojNg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DNm/8KEcFDos7hpm1RSQ4+NXDB4GkAbYO9tDgF+mfZI=;
- b=b0AQ8P2vZkfb2wtU/Ij6dexMTXP0ZK9WAMnWMRciOe0v3wLSLy0FsUcm0Sc1doYFbsRLTFf+mRP11iTTJyfmz0lUIh+GWYPvcwgP+awqU90qJ8Sx/vpR6ZN/zgfoTnjhsHVnlwDfuD2aWSz3SKVBFbUU0p9/+oTJybEU3xHF1vEmqjRoLOM5YKODtrqzAbzdQsSUFdXvO45s3kKG256IKMeRJ5+r6lbhI1jP9rifuGvkNi1LDzcY7+KP5MP8s2UKqKI0Yc76KrOmhF8nsrbSL4LROdefXewKkvG/B2kb1EznxOR1cvOT6NdoMdSuoEkawM1JPfL4DCHbXStLuSpzxg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 217.111.95.7) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arri.de;
- dmarc=none action=none header.from=arri.de; dkim=none (message not signed);
- arc=none
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Vu1PvalB;
+ spf=pass (domain: gmail.com, ip: 209.85.218.49,
+ mailfrom: ranjitsinhrathod1991@gmail.com)
+Received: by mail-ej1-f49.google.com with SMTP id bq8so2766249ejb.10
+        for <openembedded-devel@lists.openembedded.org>;
+ Fri, 25 Mar 2022 10:29:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=arrigroup.onmicrosoft.com; s=selector1-arrigroup-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DNm/8KEcFDos7hpm1RSQ4+NXDB4GkAbYO9tDgF+mfZI=;
- b=wfdPwbVeSxm198M0It1nqEFwpDqFtdjP0bnbf251u+7eFrUOGYp/q9kXF09QcvT/jAVfKYRUyXVvehABUBTAaXrxwVuO9v8LmXkBhqcfTLZh+g6CBQjwntGrAj54yw91eZsP6H6X96AiFqSyeFUYLgdtWTwsbMbW3ILuaReAfCo=
-Received: from AS9PR06CA0221.eurprd06.prod.outlook.com (2603:10a6:20b:45e::6)
- by HE1PR0701MB2170.eurprd07.prod.outlook.com (2603:10a6:3:2b::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5123.8; Fri, 25 Mar
- 2022 14:34:09 +0000
-Received: from AM5EUR02FT027.eop-EUR02.prod.protection.outlook.com
- (2603:10a6:20b:45e:cafe::c4) by AS9PR06CA0221.outlook.office365.com
- (2603:10a6:20b:45e::6) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5102.16 via Frontend
- Transport; Fri, 25 Mar 2022 14:34:09 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 217.111.95.7)
- smtp.mailfrom=arri.de; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arri.de;
-Received-SPF: Fail (protection.outlook.com: domain of arri.de does not
- designate 217.111.95.7 as permitted sender) receiver=protection.outlook.com;
- client-ip=217.111.95.7; helo=mta.arri.de;
-Received: from mta.arri.de (217.111.95.7) by
- AM5EUR02FT027.mail.protection.outlook.com (10.152.8.127) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5102.17 via Frontend Transport; Fri, 25 Mar 2022 14:34:09 +0000
-Received: from localhost.de (192.168.54.144) by mta.arri.de (10.10.18.5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.24; Fri, 25 Mar
- 2022 15:34:08 +0100
-From: Christian Eggers <ceggers@arri.de>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Christian Eggers <ceggers@arri.de>
-Subject: [meta-oe][PATCH] boost-sml: 1.1.4+git --> 1.1.5
-Date: Fri, 25 Mar 2022 15:33:51 +0100
-Message-ID: <20220325143351.12827-1-ceggers@arri.de>
-X-Mailer: git-send-email 2.34.1
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=bj7buEMSL6KuphNJYTx9RIiAHoCmhwxEB0d7YdCfp24=;
+        b=Vu1PvalBf+ecyVzOVTLoek0lHsHRLyummv9RlEGglQ3gh/G4dzW62QB2Sh4cyEDICS
+         O/wcfXeCHZBCnN7hNCqilcl+28dblxmYYAJmnIBHuuvjA2wkVD+SN47gw8nFZOlmb0RS
+         gtJFm8HMdqyrU6pUe5Sj4M1HZjBhr2DLo9VJGt9KMZ2gftcFq8gL6CYvQz4rH74X5SOg
+         Pxvz2DFnvWkE6DMHtdXnJdfE/RQO9PkYEtiSWT+0CHcBEHm01x4JgdFNZ0pOACXkFdvl
+         gm0qhXjqtHbcTl1XhzQy5Pvf8OpdwDhu+qO2d57N38H26Z2sszIyns/ZY4yKHqVsdl/6
+         trsw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=bj7buEMSL6KuphNJYTx9RIiAHoCmhwxEB0d7YdCfp24=;
+        b=EJC6N2zHrPHClrjYP30kC8slvZOnttLwb79oP8s/xSNlhovzKg2haxdRd9OM6jlnMl
+         6pmNRK7hA0ZXaPyOuyYK7gV/F23yo3+Ntn72a9RLvesgE7TV4emtRASfx1yrTly/PL5Q
+         1kv+z74T+nsQ6ZZcxK/VjAZDhSBFqIESp9vzzb+K7LXkb5usMjnSiODjBYw7LF4XcfKZ
+         Lm79qzQMPwcqqmcH55c0kGcqaEfgoRjqXevujL0KPQdRHGXdvTyf1rJcAuw6uTSTRP0I
+         MHmPIacLzWubSE2fDVVkKQpVHmd5zzakOdmAqRisv1XJwl93qvfBYMUGMOWBbPWGOX9x
+         Rm5A==
+X-Gm-Message-State: AOAM5300WoTUOnbBnMSVysIbGRfu2s4RjQhYv+4zp1Q88xjcgNqxMi7i
+	ac/8ZeHmNFBnZsV+XSl8Hu0ssABbynAuPfs/mHDLXv7D
+X-Google-Smtp-Source: 
+ ABdhPJz7kdhNaj8pNhZa+FeGgFBJOM5RbQiTsOG2Er3KAQf6AfzijMhA4GyEv4NxbGfXOxyEwbIsvrAEoVhQ7UdYPJw=
+X-Received: by 2002:a17:906:1603:b0:6ce:362:c938 with SMTP id
+ m3-20020a170906160300b006ce0362c938mr12840739ejd.253.1648229378614; Fri, 25
+ Mar 2022 10:29:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-Originating-IP: [192.168.54.144]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: e4229992-220c-4d71-67a7-08da0e6c85fe
-X-MS-TrafficTypeDiagnostic: HE1PR0701MB2170:EE_
-X-Microsoft-Antispam-PRVS: 
-	<HE1PR0701MB21709AA72BBF4580C52C2D0DBF1A9@HE1PR0701MB2170.eurprd07.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	0jpAvfDSZpH/8G/2wmiOy7nCXsLIRwI3hVrJtgAnGOa4zOphop2CDNQfULG05Q5KzEZqKQ3uHG4ycw7Zn/9Cs69Tyx2diwWo8Sqy6trpew30RPJFZenZ2XyjUS8dhu0APjUHGn15JsbG+4lMRNAzvK+1Yxpsd+xZuQSwvhMpVmIxzpzjnFe21RaMti18U0gZhRShEjpm3nzR/bHpch7H0769/Ufhy0vtOcG030Ia1f6T9/iXet42RidoP/4n26nr0Td5hFe7c9fCVUCYT6RMfTCJxRz60XE5Zg8YRdet7RDNUQyN7w/wjmAJwyAEFSj1YpqfpFuNXkNwtiWq6DcKepKirjK8v++yCfxjSmPW12vsyNzzhkjzDEi9i2rLJahwoBs2e9yf22Qikr/iX+R5u8R2WiVzbstRbvzznx9iSvbIJVom1s4WGzjrnwPaWAJB7MqwsLV29sZnfGuX+Masx35iYFrs89FaCKoEb4Y67dx/s72ACN76Yln9WIOMYmROKjecNL4CED2/aY0LIWsUmkr9tYwRDTwJeFuijp0+rkDue3GY58vgcWQ4z8wRcb/zEtZjgBje9A3d4J4B71BdkGrhmgGZxJ/WuV+PAaoP8vGdREQf0q7HD82XYpCyd55vroQL8YkNPuuhgNugMIvZNriIrpD2sZ6maxTDy/5SCM7/7R9peN1Gu15I0LCPSaggnU7KyaaLT71xpn62ljea6g==
-X-Forefront-Antispam-Report: 
-	CIP:217.111.95.7;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mta.arri.de;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230001)(4636009)(36840700001)(46966006)(40470700004)(6916009)(70586007)(81166007)(4326008)(70206006)(82310400004)(8676002)(40460700003)(83380400001)(336012)(26005)(186003)(107886003)(2616005)(47076005)(426003)(356005)(1076003)(316002)(86362001)(16526019)(508600001)(6666004)(36860700001)(2906002)(5660300002)(4744005)(36756003)(8936002)(36900700001);DIR:OUT;SFP:1102;
-X-OriginatorOrg: arri.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Mar 2022 14:34:09.3177
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- e4229992-220c-4d71-67a7-08da0e6c85fe
-X-MS-Exchange-CrossTenant-Id: e6a73a5a-614d-4c51-b3e3-53b660a9433a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: 
- TenantId=e6a73a5a-614d-4c51-b3e3-53b660a9433a;Ip=[217.111.95.7];Helo=[mta.arri.de]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AM5EUR02FT027.eop-EUR02.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR0701MB2170
+References: <20220301123043.1084-1-ranjitsinhrathod1991@gmail.com>
+In-Reply-To: <20220301123043.1084-1-ranjitsinhrathod1991@gmail.com>
+From: Ranjitsinh Rathod <ranjitsinhrathod1991@gmail.com>
+Date: Fri, 25 Mar 2022 22:59:25 +0530
+Message-ID: 
+ <CACpMEhM+QJZ-+YREz9JpCXtxXvffV-sXVA=kgWK+7KUJDZpS1A@mail.gmail.com>
+Subject: Re: [meta-oe][dunfell][PATCH] polkit: Fix for CVE-2021-4115
+To: openembedded-devel@lists.openembedded.org
+Cc: akuster808@gmail.com, Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
+Content-Type: multipart/alternative; boundary="0000000000009eea1805db0e4e85"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 25 Mar 2022 14:34:16 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 25 Mar 2022 17:29:41 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96208
+ https://lists.openembedded.org/g/openembedded-devel/message/96209
 
-Signed-off-by: Christian Eggers <ceggers@arri.de>
----
- meta-oe/recipes-support/boost-sml/boost-sml_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+--0000000000009eea1805db0e4e85
+Content-Type: text/plain; charset="UTF-8"
 
-diff --git a/meta-oe/recipes-support/boost-sml/boost-sml_git.bb b/meta-oe/r=
-ecipes-support/boost-sml/boost-sml_git.bb
-index 42b9f1ee3c5c..97c04899bfc7 100644
---- a/meta-oe/recipes-support/boost-sml/boost-sml_git.bb
-+++ b/meta-oe/recipes-support/boost-sml/boost-sml_git.bb
-@@ -9,10 +9,10 @@ LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3De4224ccaecb=
-14d942c71d31bef20d78c"
-=20
- DEPENDS +=3D "boost qemu-native"
-=20
--PV =3D "git${SRCPV}"
-+PV =3D "1.1.5"
-=20
- SRC_URI =3D "git://github.com/boost-ext/sml.git;protocol=3Dhttps;branch=3D=
-master"
--SRCREV =3D "bcc8dc7815c0d17ad3a8bd52b202f4e90d4d4ca1"
-+SRCREV =3D "7ed8f85fbe5b5af87bfb818e9e0347aaf7f7056d"
-=20
- S =3D "${WORKDIR}/git"
-=20
---=20
-2.34.1
+May I know by when this fix will be available in the dunfell branch??
 
+I can see it is available in the testing branch since many days.
+
+Thanks,
+Ranjitsinh Rathod
+
+On Tue, 1 Mar, 2022, 6:01 pm Ranjitsinh Rathod, <
+ranjitsinhrathod1991@gmail.com> wrote:
+
+> From: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
+>
+> Add patch to fix CVE-2021-4115
+> Also, add a support patch to cleanly apply CVE patch
+> Link: https://gitlab.freedesktop.org/polkit/polkit/-/merge_requests/109
+>
+> Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
+> Signed-off-by: Ranjitsinh Rathod <ranjitsinhrathod1991@gmail.com>
+> ---
+>  ...thentication-bypass-vulnerability-in.patch | 32 +++++++
+>  .../polkit/files/CVE-2021-4115.patch          | 87 +++++++++++++++++++
+>  .../recipes-extended/polkit/polkit_0.116.bb   |  2 +
+>  3 files changed, 121 insertions(+)
+>  create mode 100644
+> meta-oe/recipes-extended/polkit/files/0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch
+>  create mode 100644
+> meta-oe/recipes-extended/polkit/files/CVE-2021-4115.patch
+>
+> diff --git
+> a/meta-oe/recipes-extended/polkit/files/0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch
+> b/meta-oe/recipes-extended/polkit/files/0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch
+> new file mode 100644
+> index 000000000..2a2373ed5
+> --- /dev/null
+> +++
+> b/meta-oe/recipes-extended/polkit/files/0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch
+> @@ -0,0 +1,32 @@
+> +From a04d13affe0fa53ff618e07aa8f57f4c0e3b9b81 Mon Sep 17 00:00:00 2001
+> +From: Jan Rybar <jrybar@redhat.com>
+> +Date: Wed, 2 Jun 2021 15:43:38 +0200
+> +Subject: [PATCH] GHSL-2021-074: authentication bypass vulnerability in
+> polkit
+> +
+> +initial values returned if error caught
+> +
+> +Upstream-Status: Backport [
+> https://gitlab.freedesktop.org/polkit/polkit/-/commit/a04d13affe0fa53ff618e07aa8f57f4c0e3b9b81.patch
+> ]
+> +CVE: CVE-2021-4115
+> +Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
+> +
+> +---
+> + src/polkit/polkitsystembusname.c | 3 +++
+> + 1 file changed, 3 insertions(+)
+> +
+> +diff --git a/src/polkit/polkitsystembusname.c
+> b/src/polkit/polkitsystembusname.c
+> +index 8daa12c..8ed1363 100644
+> +--- a/src/polkit/polkitsystembusname.c
+> ++++ b/src/polkit/polkitsystembusname.c
+> +@@ -435,6 +435,9 @@ polkit_system_bus_name_get_creds_sync
+> (PolkitSystemBusName           *system_bus
+> +   while (!((data.retrieved_uid && data.retrieved_pid) ||
+> data.caught_error))
+> +     g_main_context_iteration (tmp_context, TRUE);
+> +
+> ++  if (data.caught_error)
+> ++    goto out;
+> ++
+> +   if (out_uid)
+> +     *out_uid = data.uid;
+> +   if (out_pid)
+> +--
+> +GitLab
+> +
+> diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2021-4115.patch
+> b/meta-oe/recipes-extended/polkit/files/CVE-2021-4115.patch
+> new file mode 100644
+> index 000000000..37e0d6063
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/polkit/files/CVE-2021-4115.patch
+> @@ -0,0 +1,87 @@
+> +From 41cb093f554da8772362654a128a84dd8a5542a7 Mon Sep 17 00:00:00 2001
+> +From: Jan Rybar <jrybar@redhat.com>
+> +Date: Mon, 21 Feb 2022 08:29:05 +0000
+> +Subject: [PATCH] CVE-2021-4115 (GHSL-2021-077) fix
+> +
+> +Upstream-Status: Backport [
+> https://gitlab.freedesktop.org/polkit/polkit/-/commit/41cb093f554da8772362654a128a84dd8a5542a7.patch
+> ]
+> +CVE: CVE-2021-4115
+> +Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
+> +
+> +---
+> + src/polkit/polkitsystembusname.c | 38 ++++++++++++++++++++++++++++----
+> + 1 file changed, 34 insertions(+), 4 deletions(-)
+> +
+> +diff --git a/src/polkit/polkitsystembusname.c
+> b/src/polkit/polkitsystembusname.c
+> +index 8ed1363..2fbf5f1 100644
+> +--- a/src/polkit/polkitsystembusname.c
+> ++++ b/src/polkit/polkitsystembusname.c
+> +@@ -62,6 +62,10 @@ enum
+> +   PROP_NAME,
+> + };
+> +
+> ++
+> ++guint8 dbus_call_respond_fails;      // has to be global because of
+> callback
+> ++
+> ++
+> + static void subject_iface_init (PolkitSubjectIface *subject_iface);
+> +
+> + G_DEFINE_TYPE_WITH_CODE (PolkitSystemBusName, polkit_system_bus_name,
+> G_TYPE_OBJECT,
+> +@@ -364,6 +368,7 @@ on_retrieved_unix_uid_pid (GObject              *src,
+> +   if (!v)
+> +     {
+> +       data->caught_error = TRUE;
+> ++      dbus_call_respond_fails += 1;
+> +     }
+> +   else
+> +     {
+> +@@ -405,6 +410,8 @@ polkit_system_bus_name_get_creds_sync
+> (PolkitSystemBusName           *system_bus
+> +   tmp_context = g_main_context_new ();
+> +   g_main_context_push_thread_default (tmp_context);
+> +
+> ++  dbus_call_respond_fails = 0;
+> ++
+> +   /* Do two async calls as it's basically as fast as one sync call.
+> +    */
+> +   g_dbus_connection_call (connection,
+> +@@ -432,11 +439,34 @@ polkit_system_bus_name_get_creds_sync
+> (PolkitSystemBusName           *system_bus
+> +                         on_retrieved_unix_uid_pid,
+> +                         &data);
+> +
+> +-  while (!((data.retrieved_uid && data.retrieved_pid) ||
+> data.caught_error))
+> +-    g_main_context_iteration (tmp_context, TRUE);
+> ++  while (TRUE)
+> ++  {
+> ++    /* If one dbus call returns error, we must wait until the other call
+> ++     * calls _call_finish(), otherwise fd leak is possible.
+> ++     * Resolves: GHSL-2021-077
+> ++    */
+> +
+> +-  if (data.caught_error)
+> +-    goto out;
+> ++    if ( (dbus_call_respond_fails > 1) )
+> ++    {
+> ++      // we got two faults, we can leave
+> ++      goto out;
+> ++    }
+> ++
+> ++    if ((data.caught_error && (data.retrieved_pid ||
+> data.retrieved_uid)))
+> ++    {
+> ++      // we got one fault and the other call finally finished, we can
+> leave
+> ++      goto out;
+> ++    }
+> ++
+> ++    if ( !(data.retrieved_uid && data.retrieved_pid) )
+> ++    {
+> ++      g_main_context_iteration (tmp_context, TRUE);
+> ++    }
+> ++    else
+> ++    {
+> ++      break;
+> ++    }
+> ++  }
+> +
+> +   if (out_uid)
+> +     *out_uid = data.uid;
+> +--
+> +GitLab
+> +
+> diff --git a/meta-oe/recipes-extended/polkit/polkit_0.116.bb
+> b/meta-oe/recipes-extended/polkit/polkit_0.116.bb
+> index 77288b008..aceb68699 100644
+> --- a/meta-oe/recipes-extended/polkit/polkit_0.116.bb
+> +++ b/meta-oe/recipes-extended/polkit/polkit_0.116.bb
+> @@ -26,6 +26,8 @@ SRC_URI = "
+> http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.
+>             ${@bb.utils.contains('DISTRO_FEATURES', 'pam',
+> '${PAM_SRC_URI}', '', d)} \
+>             file://0003-make-netgroup-support-optional.patch \
+>             file://CVE-2021-4034.patch \
+> +
+>  file://0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch \
+> +           file://CVE-2021-4115.patch \
+>             "
+>  SRC_URI[md5sum] = "4b37258583393e83069a0e2e89c0162a"
+>  SRC_URI[sha256sum] =
+> "88170c9e711e8db305a12fdb8234fac5706c61969b94e084d0f117d8ec5d34b1"
+> --
+> 2.17.1
+>
+>
+
+--0000000000009eea1805db0e4e85
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto">May I know by when this fix will be available in the dunf=
+ell branch??<div dir=3D"auto"><br></div><div dir=3D"auto">I can see it is a=
+vailable in the testing branch since many days.</div><div dir=3D"auto"><br>=
+</div><div dir=3D"auto">Thanks,</div><div dir=3D"auto">Ranjitsinh Rathod</d=
+iv></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_att=
+r">On Tue, 1 Mar, 2022, 6:01 pm Ranjitsinh Rathod, &lt;<a href=3D"mailto:ra=
+njitsinhrathod1991@gmail.com">ranjitsinhrathod1991@gmail.com</a>&gt; wrote:=
+<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bord=
+er-left:1px #ccc solid;padding-left:1ex">From: Ranjitsinh Rathod &lt;<a hre=
+f=3D"mailto:ranjitsinh.rathod@kpit.com" target=3D"_blank" rel=3D"noreferrer=
+">ranjitsinh.rathod@kpit.com</a>&gt;<br>
+<br>
+Add patch to fix CVE-2021-4115<br>
+Also, add a support patch to cleanly apply CVE patch<br>
+Link: <a href=3D"https://gitlab.freedesktop.org/polkit/polkit/-/merge_reque=
+sts/109" rel=3D"noreferrer noreferrer" target=3D"_blank">https://gitlab.fre=
+edesktop.org/polkit/polkit/-/merge_requests/109</a><br>
+<br>
+Signed-off-by: Ranjitsinh Rathod &lt;<a href=3D"mailto:ranjitsinh.rathod@kp=
+it.com" target=3D"_blank" rel=3D"noreferrer">ranjitsinh.rathod@kpit.com</a>=
+&gt;<br>
+Signed-off-by: Ranjitsinh Rathod &lt;<a href=3D"mailto:ranjitsinhrathod1991=
+@gmail.com" target=3D"_blank" rel=3D"noreferrer">ranjitsinhrathod1991@gmail=
+.com</a>&gt;<br>
+---<br>
+=C2=A0...thentication-bypass-vulnerability-in.patch | 32 +++++++<br>
+=C2=A0.../polkit/files/CVE-2021-4115.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 | 87 +++++++++++++++++++<br>
+=C2=A0.../recipes-extended/polkit/<a href=3D"http://polkit_0.116.bb" rel=3D=
+"noreferrer noreferrer" target=3D"_blank">polkit_0.116.bb</a>=C2=A0 =C2=A0|=
+=C2=A0 2 +<br>
+=C2=A03 files changed, 121 insertions(+)<br>
+=C2=A0create mode 100644 meta-oe/recipes-extended/polkit/files/0001-GHSL-20=
+21-074-authentication-bypass-vulnerability-in.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2021-411=
+5.patch<br>
+<br>
+diff --git a/meta-oe/recipes-extended/polkit/files/0001-GHSL-2021-074-authe=
+ntication-bypass-vulnerability-in.patch b/meta-oe/recipes-extended/polkit/f=
+iles/0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch<br>
+new file mode 100644<br>
+index 000000000..2a2373ed5<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-extended/polkit/files/0001-GHSL-2021-074-authenticati=
+on-bypass-vulnerability-in.patch<br>
+@@ -0,0 +1,32 @@<br>
++From a04d13affe0fa53ff618e07aa8f57f4c0e3b9b81 Mon Sep 17 00:00:00 2001<br>
++From: Jan Rybar &lt;<a href=3D"mailto:jrybar@redhat.com" target=3D"_blank"=
+ rel=3D"noreferrer">jrybar@redhat.com</a>&gt;<br>
++Date: Wed, 2 Jun 2021 15:43:38 +0200<br>
++Subject: [PATCH] GHSL-2021-074: authentication bypass vulnerability in pol=
+kit<br>
++<br>
++initial values returned if error caught<br>
++<br>
++Upstream-Status: Backport [<a href=3D"https://gitlab.freedesktop.org/polki=
+t/polkit/-/commit/a04d13affe0fa53ff618e07aa8f57f4c0e3b9b81.patch" rel=3D"no=
+referrer noreferrer" target=3D"_blank">https://gitlab.freedesktop.org/polki=
+t/polkit/-/commit/a04d13affe0fa53ff618e07aa8f57f4c0e3b9b81.patch</a>]<br>
++CVE: CVE-2021-4115<br>
++Signed-off-by: Ranjitsinh Rathod &lt;<a href=3D"mailto:ranjitsinh.rathod@k=
+pit.com" target=3D"_blank" rel=3D"noreferrer">ranjitsinh.rathod@kpit.com</a=
+>&gt;<br>
++<br>
++---<br>
++ src/polkit/polkitsystembusname.c | 3 +++<br>
++ 1 file changed, 3 insertions(+)<br>
++<br>
++diff --git a/src/polkit/polkitsystembusname.c b/src/polkit/polkitsystembus=
+name.c<br>
++index 8daa12c..8ed1363 100644<br>
++--- a/src/polkit/polkitsystembusname.c<br>
+++++ b/src/polkit/polkitsystembusname.c<br>
++@@ -435,6 +435,9 @@ polkit_system_bus_name_get_creds_sync (PolkitSystemBus=
+Name=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*system_bus<br>
++=C2=A0 =C2=A0while (!((data.retrieved_uid &amp;&amp; data.retrieved_pid) |=
+| data.caught_error))<br>
++=C2=A0 =C2=A0 =C2=A0g_main_context_iteration (tmp_context, TRUE);<br>
++ <br>
+++=C2=A0 if (data.caught_error)<br>
+++=C2=A0 =C2=A0 goto out;<br>
+++<br>
++=C2=A0 =C2=A0if (out_uid)<br>
++=C2=A0 =C2=A0 =C2=A0*out_uid =3D data.uid;<br>
++=C2=A0 =C2=A0if (out_pid)<br>
++-- <br>
++GitLab<br>
++<br>
+diff --git a/meta-oe/recipes-extended/polkit/files/CVE-2021-4115.patch b/me=
+ta-oe/recipes-extended/polkit/files/CVE-2021-4115.patch<br>
+new file mode 100644<br>
+index 000000000..37e0d6063<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-extended/polkit/files/CVE-2021-4115.patch<br>
+@@ -0,0 +1,87 @@<br>
++From 41cb093f554da8772362654a128a84dd8a5542a7 Mon Sep 17 00:00:00 2001<br>
++From: Jan Rybar &lt;<a href=3D"mailto:jrybar@redhat.com" target=3D"_blank"=
+ rel=3D"noreferrer">jrybar@redhat.com</a>&gt;<br>
++Date: Mon, 21 Feb 2022 08:29:05 +0000<br>
++Subject: [PATCH] CVE-2021-4115 (GHSL-2021-077) fix<br>
++<br>
++Upstream-Status: Backport [<a href=3D"https://gitlab.freedesktop.org/polki=
+t/polkit/-/commit/41cb093f554da8772362654a128a84dd8a5542a7.patch" rel=3D"no=
+referrer noreferrer" target=3D"_blank">https://gitlab.freedesktop.org/polki=
+t/polkit/-/commit/41cb093f554da8772362654a128a84dd8a5542a7.patch</a>]<br>
++CVE: CVE-2021-4115<br>
++Signed-off-by: Ranjitsinh Rathod &lt;<a href=3D"mailto:ranjitsinh.rathod@k=
+pit.com" target=3D"_blank" rel=3D"noreferrer">ranjitsinh.rathod@kpit.com</a=
+>&gt;<br>
++<br>
++---<br>
++ src/polkit/polkitsystembusname.c | 38 ++++++++++++++++++++++++++++----<br=
+>
++ 1 file changed, 34 insertions(+), 4 deletions(-)<br>
++<br>
++diff --git a/src/polkit/polkitsystembusname.c b/src/polkit/polkitsystembus=
+name.c<br>
++index 8ed1363..2fbf5f1 100644<br>
++--- a/src/polkit/polkitsystembusname.c<br>
+++++ b/src/polkit/polkitsystembusname.c<br>
++@@ -62,6 +62,10 @@ enum<br>
++=C2=A0 =C2=A0PROP_NAME,<br>
++ };<br>
++ <br>
+++<br>
+++guint8 dbus_call_respond_fails;=C2=A0 =C2=A0 =C2=A0 // has to be global b=
+ecause of callback<br>
+++<br>
+++<br>
++ static void subject_iface_init (PolkitSubjectIface *subject_iface);<br>
++ <br>
++ G_DEFINE_TYPE_WITH_CODE (PolkitSystemBusName, polkit_system_bus_name, G_T=
+YPE_OBJECT,<br>
++@@ -364,6 +368,7 @@ on_retrieved_unix_uid_pid (GObject=C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 *src,<br>
++=C2=A0 =C2=A0if (!v)<br>
++=C2=A0 =C2=A0 =C2=A0{<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0data-&gt;caught_error =3D TRUE;<br>
+++=C2=A0 =C2=A0 =C2=A0 dbus_call_respond_fails +=3D 1;<br>
++=C2=A0 =C2=A0 =C2=A0}<br>
++=C2=A0 =C2=A0else<br>
++=C2=A0 =C2=A0 =C2=A0{<br>
++@@ -405,6 +410,8 @@ polkit_system_bus_name_get_creds_sync (PolkitSystemBus=
+Name=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*system_bus<br>
++=C2=A0 =C2=A0tmp_context =3D g_main_context_new ();<br>
++=C2=A0 =C2=A0g_main_context_push_thread_default (tmp_context);<br>
++ <br>
+++=C2=A0 dbus_call_respond_fails =3D 0;<br>
+++<br>
++=C2=A0 =C2=A0/* Do two async calls as it&#39;s basically as fast as one sy=
+nc call.<br>
++=C2=A0 =C2=A0 */<br>
++=C2=A0 =C2=A0g_dbus_connection_call (connection,<br>
++@@ -432,11 +439,34 @@ polkit_system_bus_name_get_creds_sync (PolkitSystemB=
+usName=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*system_bus<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0on_retrieved_unix_uid_pid,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0&amp;data);<br>
++ <br>
++-=C2=A0 while (!((data.retrieved_uid &amp;&amp; data.retrieved_pid) || dat=
+a.caught_error))<br>
++-=C2=A0 =C2=A0 g_main_context_iteration (tmp_context, TRUE);<br>
+++=C2=A0 while (TRUE)<br>
+++=C2=A0 {<br>
+++=C2=A0 =C2=A0 /* If one dbus call returns error, we must wait until the o=
+ther call<br>
+++=C2=A0 =C2=A0 =C2=A0* calls _call_finish(), otherwise fd leak is possible=
+.<br>
+++=C2=A0 =C2=A0 =C2=A0* Resolves: GHSL-2021-077<br>
+++=C2=A0 =C2=A0 */<br>
++ <br>
++-=C2=A0 if (data.caught_error)<br>
++-=C2=A0 =C2=A0 goto out;<br>
+++=C2=A0 =C2=A0 if ( (dbus_call_respond_fails &gt; 1) )<br>
+++=C2=A0 =C2=A0 {<br>
+++=C2=A0 =C2=A0 =C2=A0 // we got two faults, we can leave<br>
+++=C2=A0 =C2=A0 =C2=A0 goto out;<br>
+++=C2=A0 =C2=A0 }<br>
+++<br>
+++=C2=A0 =C2=A0 if ((data.caught_error &amp;&amp; (data.retrieved_pid || da=
+ta.retrieved_uid)))<br>
+++=C2=A0 =C2=A0 {<br>
+++=C2=A0 =C2=A0 =C2=A0 // we got one fault and the other call finally finis=
+hed, we can leave<br>
+++=C2=A0 =C2=A0 =C2=A0 goto out;<br>
+++=C2=A0 =C2=A0 }<br>
+++<br>
+++=C2=A0 =C2=A0 if ( !(data.retrieved_uid &amp;&amp; data.retrieved_pid) )<=
+br>
+++=C2=A0 =C2=A0 {<br>
+++=C2=A0 =C2=A0 =C2=A0 g_main_context_iteration (tmp_context, TRUE);<br>
+++=C2=A0 =C2=A0 }<br>
+++=C2=A0 =C2=A0 else<br>
+++=C2=A0 =C2=A0 {<br>
+++=C2=A0 =C2=A0 =C2=A0 break;<br>
+++=C2=A0 =C2=A0 }<br>
+++=C2=A0 }<br>
++ <br>
++=C2=A0 =C2=A0if (out_uid)<br>
++=C2=A0 =C2=A0 =C2=A0*out_uid =3D data.uid;<br>
++-- <br>
++GitLab<br>
++<br>
+diff --git a/meta-oe/recipes-extended/polkit/<a href=3D"http://polkit_0.116=
+.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">polkit_0.116.bb</a> b/=
+meta-oe/recipes-extended/polkit/<a href=3D"http://polkit_0.116.bb" rel=3D"n=
+oreferrer noreferrer" target=3D"_blank">polkit_0.116.bb</a><br>
+index 77288b008..aceb68699 100644<br>
+--- a/meta-oe/recipes-extended/polkit/<a href=3D"http://polkit_0.116.bb" re=
+l=3D"noreferrer noreferrer" target=3D"_blank">polkit_0.116.bb</a><br>
++++ b/meta-oe/recipes-extended/polkit/<a href=3D"http://polkit_0.116.bb" re=
+l=3D"noreferrer noreferrer" target=3D"_blank">polkit_0.116.bb</a><br>
+@@ -26,6 +26,8 @@ SRC_URI =3D &quot;<a href=3D"http://www.freedesktop.org/s=
+oftware/polkit/releases/polkit-$%7BPV%7D.tar" rel=3D"noreferrer noreferrer"=
+ target=3D"_blank">http://www.freedesktop.org/software/polkit/releases/polk=
+it-${PV}.tar</a>.<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${@bb.utils.contains(&#39;DISTRO_=
+FEATURES&#39;, &#39;pam&#39;, &#39;${PAM_SRC_URI}&#39;, &#39;&#39;, d)} \<b=
+r>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0003-make-netgroup-support=
+-optional.patch \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://CVE-2021-4034.patch \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-GHSL-2021-074-authent=
+ication-bypass-vulnerability-in.patch \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://CVE-2021-4115.patch \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
+=C2=A0SRC_URI[md5sum] =3D &quot;4b37258583393e83069a0e2e89c0162a&quot;<br>
+=C2=A0SRC_URI[sha256sum] =3D &quot;88170c9e711e8db305a12fdb8234fac5706c6196=
+9b94e084d0f117d8ec5d34b1&quot;<br>
+-- <br>
+2.17.1<br>
+<br>
+</blockquote></div>
+
+--0000000000009eea1805db0e4e85--
 
