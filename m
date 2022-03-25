@@ -1,63 +1,95 @@
-Return-Path: <denis@denix.org>
+Return-Path: <mikko.rapeli@bmw.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 28499C433F5
-	for <webhook@archiver.kernel.org>; Thu, 24 Mar 2022 22:42:08 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web12.1288.1648161723499751192
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C6C6C433F5
+	for <webhook@archiver.kernel.org>; Fri, 25 Mar 2022 08:56:48 +0000 (UTC)
+Received: from mail.kapsi.fi (mail.kapsi.fi [91.232.154.25])
+ by mx.groups.io with SMTP id smtpd.web11.2880.1648198606930314751
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Mar 2022 15:42:04 -0700
+ Fri, 25 Mar 2022 01:56:47 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
- spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
- mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 5227940C3A;
-	Thu, 24 Mar 2022 22:42:02 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id gj5W0rHV6AK3; Thu, 24 Mar 2022 22:42:02 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
- [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 285AE40301;
-	Thu, 24 Mar 2022 22:41:59 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id DD1171748B5; Thu, 24 Mar 2022 18:41:58 -0400 (EDT)
-Date: Thu, 24 Mar 2022 18:41:58 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	Yocto Project <yocto@lists.yoctoproject.org>,
-	openembedded-members@lists.openembedded.org
-Subject: OpenEmbedded Happy Hour March 30 5pm/1700 UTC
-Message-ID: <20220324224158.GC23554@denix.org>
+ spf=none, err=permanent DNS error (domain: lakka.kapsi.fi, ip: 91.232.154.25,
+ mailfrom: mcfrisk@lakka.kapsi.fi)
+Received: from kapsi.fi ([91.232.154.11] helo=lakka.kapsi.fi)
+	by mail.kapsi.fi with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.89)
+	(envelope-from <mcfrisk@lakka.kapsi.fi>)
+	id 1nXfkR-0002Qm-2e; Fri, 25 Mar 2022 10:56:43 +0200
+Received: from mcfrisk by lakka.kapsi.fi with local (Exim 4.92)
+	(envelope-from <mcfrisk@lakka.kapsi.fi>)
+	id 1nXfkQ-000Bub-VX; Fri, 25 Mar 2022 10:56:42 +0200
+From: mikko.rapeli@bmw.de
+To: openembedded-devel@lists.openembedded.org
+Cc: Mikko Rapeli <mikko.rapeli@bmw.de>
+Subject: [meta-oe][PATCH v3 0/2] polkit: switch from mozjs to duktape
+ javascript engine
+Date: Fri, 25 Mar 2022 10:56:25 +0200
+Message-Id: <20220325085627.45116-1-mikko.rapeli@bmw.de>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Transfer-Encoding: 8bit
+X-Rspam-Score: -1.2 (-)
+X-Rspam-Report: Action: no action
+ Symbol: RCVD_TLS_LAST(0.00)
+ Symbol: ARC_NA(0.00)
+ Symbol: DMARC_POLICY_SOFTFAIL(0.10)
+ Symbol: TO_DN_SOME(0.00)
+ Symbol: R_MISSING_CHARSET(0.50)
+ Symbol: TO_MATCH_ENVRCPT_ALL(0.00)
+ Symbol: MIME_GOOD(-0.10)
+ Symbol: RCPT_COUNT_TWO(0.00)
+ Symbol: FROM_NO_DN(0.00)
+ Symbol: MID_CONTAINS_FROM(1.00)
+ Symbol: NEURAL_HAM(-0.00)
+ Symbol: R_SPF_NA(0.00)
+ Symbol: FORGED_SENDER(0.30)
+ Symbol: R_DKIM_NA(0.00)
+ Symbol: MIME_TRACE(0.00)
+ Symbol: ASN(0.00)
+ Symbol: FROM_NEQ_ENVFROM(0.00)
+ Symbol: BAYES_HAM(-3.00)
+ Symbol: RCVD_COUNT_TWO(0.00)
+ Message-ID: 20220325085627.45116-1-mikko.rapeli@bmw.de
+X-SA-Exim-Connect-IP: 91.232.154.11
+X-SA-Exim-Mail-From: mcfrisk@lakka.kapsi.fi
+X-SA-Exim-Scanned: No (on mail.kapsi.fi); SAEximRunCond expanded to false
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Mar 2022 22:42:08 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 25 Mar 2022 08:56:48 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96204
+ https://lists.openembedded.org/g/openembedded-devel/message/96205
 
-All,
+From: Mikko Rapeli <mikko.rapeli@bmw.de>
 
-You are cordially invited to the next OpenEmbedded Happy Hour on March 30 
-for Europe/Americas timezones @ 1700/5pm UTC (1pm ET / 10am PT):
+polkit 0.121 will contain support for duktape but the patch applies
+to 0.119 already so use it to get rid of mozjs and free 20 Mb of space.
+Pick some CVE patches from master while at it.
 
-https://www.openembedded.org/wiki/Calendar
-https://www.openembedded.org/wiki/Happy_Hours
-https://www.timeanddate.com/worldclock/fixedtime.html?msg=OpenEmbedded+Happy+Hour+March+30&iso=20220330T17
+v3: rebased to master-next
+
+v2: added Signed-off-By lines to all patches
+
+Mikko Rapeli (2):
+  polkit: add patches for CVE-2021-4034 and CVE-2021-4115
+  polkit: switch from mozjs to duktape javascript engine
+
+ ...l-privilege-escalation-CVE-2021-4034.patch |   84 +
+ ...0002-CVE-2021-4115-GHSL-2021-077-fix.patch |   88 +
+ .../0002-jsauthority-port-to-mozjs-91.patch   |   38 -
+ ...ded-support-for-duktape-as-JS-engine.patch | 3463 +++++++++++++++++
+ ...re-to-call-JS_Init-and-JS_ShutDown-e.patch |   63 -
+ .../recipes-extended/polkit/polkit_0.119.bb   |    8 +-
+ 6 files changed, 3640 insertions(+), 104 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/polkit/polkit/0001-pkexec-local-privilege-escalation-CVE-2021-4034.patch
+ create mode 100644 meta-oe/recipes-extended/polkit/polkit/0002-CVE-2021-4115-GHSL-2021-077-fix.patch
+ delete mode 100644 meta-oe/recipes-extended/polkit/polkit/0002-jsauthority-port-to-mozjs-91.patch
+ create mode 100644 meta-oe/recipes-extended/polkit/polkit/0003-Added-support-for-duktape-as-JS-engine.patch
+ delete mode 100644 meta-oe/recipes-extended/polkit/polkit/0003-jsauthority-ensure-to-call-JS_Init-and-JS_ShutDown-e.patch
 
 -- 
-Regards,
-Denys Dmytriyenko <denis@denix.org>
-PGP: 0x420902729A92C964 - https://denix.org/0x420902729A92C964
-Fingerprint: 25FC E4A5 8A72 2F69 1186  6D76 4209 0272 9A92 C964
+2.20.1
+
 
