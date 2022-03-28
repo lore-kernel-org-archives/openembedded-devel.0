@@ -1,103 +1,149 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <Nandipati.AnuDeepthika@philips.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F58CC433F5
-	for <webhook@archiver.kernel.org>; Mon, 28 Mar 2022 13:20:04 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web11.10794.1648473603285344361
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D75BC433EF
+	for <webhook@archiver.kernel.org>; Mon, 28 Mar 2022 14:19:02 +0000 (UTC)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (EUR05-DB8-obe.outbound.protection.outlook.com [40.107.20.114])
+ by mx.groups.io with SMTP id smtpd.web10.11422.1648477140917221341
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Mar 2022 06:20:04 -0700
+ Mon, 28 Mar 2022 07:19:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=AqttuATF;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1648473601; i=@fujitsu.com;
-	bh=JxH06WxvYoXBUU5qWngYUjvSQ6R4HLO6ZbPeLYPqags=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=AqttuATFyVqPiyRBL255adT1Y5PCYa95N/B7mYKlm3lWYa5pSxw8O0hNHwGaXkaFo
-	 cu8VVp5rFOMSGm8WhP8kvs7G/NNgIiyJ1wHgzwA3AIS+xHdJzxjx0Tf7IjZVaLspqe
-	 mGrepgo+Fo268OLmR75In3IhW+hTaQerKF+FAKgZ9hI/NPGBSe0Y58NyAqlqsn22p5
-	 0opeGgL/8lM7pIz4/jCGulSNd+9oHAFjEOuXixcUDme7DzPu/f3Qm3W7dow+Wiv+UJ
-	 V4sty5wgV9N54GJ3nNu3MOiAhZJ0jyHkTQnvBGz2MalYbbA6Wn85ORGYJCuHq7h3ec
-	 abmbrac54hPsw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprFIsWRWlGSWpSXmKPExsViZ8MxRff/Vsc
-  kg1MzpC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oypx6ezFDzmqHhz5wFrA2MfRxcjF4eQwGwm
-  iU1zFrNCOHsYJY5u2MPUxcjJwSagJjH91g1WEFtEQF9i6ew9zCA2s4CKxIvfPewgtrCAj8S22
-  9fB6lkEVCW+f3rKCGLzCjhJXOzsB4tLCChITHn4nhkiLihxcuYTFog5EhIHX7xghqhRlJh9uZ
-  kFwq6QmDWrjWkCI+8sJC2zkLQsYGRaxWiVVJSZnlGSm5iZo2toYKBraGiqa2ypa2qkl1ilm6i
-  XWqpbnlpcogvklhfrpRYX6xVX5ibnpOjlpZZsYgQGWUqxuskOxu6VP/UOMUpyMCmJ8l6c65gk
-  xJeUn1KZkVicEV9UmpNafIhRhoNDSYLXZSNQTrAoNT21Ii0zBxjwMGkJDh4lEd6A2UBp3uKCx
-  NzizHSI1ClGRSlx3g9bgBICIImM0jy4NliUXWKUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzK
-  sAjFkhnsy8Erjpr4AWMwEtXvvOFmRxSSJCSqqBqfKW7crdflk6C78JXD0094D3/5m3Ladwf3T
-  Xy7jeZqoZasx7I7zy5U7Pf+rztT7cu/De5uPRx68vPL3k6evYUNtq7JRVL5/7YkH78iWW3xk+
-  rfZt2s+6JvnmtXfmPi51j3g/72EW39TBtj5H8OE2o1kK34pzl9q3lszXdJzuzfRP/E9efe4BW
-  5U7LUH511L1JqQdW+HH+jHfWHT+5X2v18YcPaHkI9+4Nf1C77RPIl85f5XN+zRl99X+GvWlyy
-  anPp+xbxFPVOrntB81CfPczu7zfS4Voig443NF2/4UmUOiqlXT2OtfLr1zeVn3zd8PpzOfUpG
-  tifVazD9X/62d9tUpLVfv3w5gWRl8Oej+DEMlluKMREMt5qLiRACdr9yhLQMAAA==
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-23.tower-571.messagelabs.com!1648473599!47645!1
-X-Originating-IP: [62.60.8.148]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.85.5; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 8711 invoked from network); 28 Mar 2022 13:19:59 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-23.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 28 Mar 2022 13:19:59 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 22SDJqsX028058
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Mar 2022 14:19:59 +0100
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 28 Mar 2022 14:19:50 +0100
-From: Wang Mingyu <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-watchdog: upgrade 2.1.6 -> 2.1.7
-Date: Mon, 28 Mar 2022 21:19:39 +0800
-Message-ID: <1648473579-17138-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=fail reason="body hash did not verify" header.i=@philips.onmicrosoft.com
+ header.s=selector2-philips-onmicrosoft-com header.b=YILtmSPg;
+ spf=pass (domain: code1.emi.philips.com, ip: 40.107.20.114,
+ mailfrom: anudeepthika@code1.emi.philips.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=gIz+mEGoM6Zdq8FleezlZTmeppxCCSZU92R4LHEVkUrBMLk3IRCbWwSl321pypnvfZ2CiPXsjfEmZVgOJT/9TtDLVr2W8YPeN00Avj/HrY3VUjWD/Qw+zBYF13HCd5bKFQwckekhMFnIqw1HBoaZFkxinoMsglFH3JtXDsu+mGvdqVxm11rXwvHYXbL9INFax96a1ldI/pJCuB1CQ+3bCJsUkIU1ATKDtFerzixZsyIoJ2twMnDv45gS0gyZkARFffjT834n/fBCQTbP2BwWoOK82Q0cS0vyJndP4ncWAKaRqRgvjovjAIQv5NFa8e/Cl+BFbIOFQvD467dc7KHgvA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=BxQlITDxaCKh+HFi0CMJ8WvTgr2tzxyFAwjewNPr0Ek=;
+ b=fybZtgEOZLE3Hv3Qdk8JGFVngvK9HtlPb2WdpBV6q5aa1fLqeZnQgQkQI01t8Q5P7M+B5S+6v4s/AJERRqSfrUqkfJNI2C3DGvTlv5D/PbiApxHW72GDY6vkOjLzIe2ruAB1k/1CiBNitwvYkncf4HBb3LUHdJeNw+w9xjJCLq2D3MdAbpyTLDF7m/KUEqklae1PLxthQ9c/6cx03QAObDXQ+4r6d+70Lim1TwyV5O0sb8u7vRA+3AFSMyqLb5vaHiEA34/5ujIaDN0q2iAnLvgo2iRNFQuL7RLqfvNUgLJYu0RYItAS9UrQBV3pJQSYKILdA4imwz2HkR/iSCYw9Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 18.136.170.117) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=code1.emi.philips.com; dmarc=pass (p=reject sp=reject pct=100)
+ action=none header.from=code1.emi.philips.com; dkim=none (message not
+ signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=Philips.onmicrosoft.com; s=selector2-Philips-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=BxQlITDxaCKh+HFi0CMJ8WvTgr2tzxyFAwjewNPr0Ek=;
+ b=YILtmSPgD7Smvswm+Lsy4AvYmW0HQur9hiiVT9KXhvrMPL59is3EuZkTIpd88zc9xFoAgENW07RCd7ECNf0rlFA9XQPnAGi+2+9UrZDGuKVebHjMmTR4YKuHc+CmCHWRak6TGGT48urbMD2ryZ2Oa3JB0Hd1l6+a07reIGx4UCc=
+Received: from AM5PR0201CA0002.eurprd02.prod.outlook.com
+ (2603:10a6:203:3d::12) by AM0P122MB0147.EURP122.PROD.OUTLOOK.COM
+ (2603:10a6:208:14c::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5102.22; Mon, 28 Mar
+ 2022 14:18:57 +0000
+Received: from VE1EUR01FT004.eop-EUR01.prod.protection.outlook.com
+ (2603:10a6:203:3d:cafe::1f) by AM5PR0201CA0002.outlook.office365.com
+ (2603:10a6:203:3d::12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5102.18 via Frontend
+ Transport; Mon, 28 Mar 2022 14:18:57 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 18.136.170.117)
+ smtp.mailfrom=code1.emi.philips.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=code1.emi.philips.com;
+Received-SPF: Pass (protection.outlook.com: domain of code1.emi.philips.com
+ designates 18.136.170.117 as permitted sender)
+ receiver=protection.outlook.com; client-ip=18.136.170.117;
+ helo=ext-asp1.smtp.philips.com;
+Received: from ext-asp1.smtp.philips.com (18.136.170.117) by
+ VE1EUR01FT004.mail.protection.outlook.com (10.152.2.101) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5102.17 via Frontend Transport; Mon, 28 Mar 2022 14:18:56 +0000
+Received: from smtprelay-asp1.philips.com ([161.92.84.252])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 256/256 bits)
+	(Client did not present a certificate)
+	by ext-asp1.smtp.philips.com with ESMTP
+	id YpfXn2K74jUOjYpzBnrLKd; Mon, 28 Mar 2022 14:04:45 +0000
+Received: from INGBTCPIC6LX130.in-101.lan.philips.com ([161.85.104.54])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 256/256 bits)
+	(Client did not present a certificate)
+	by smtprelay-asp1.philips.com with ESMTPA
+	id YqCpnZKVgJwPtYqCtnJ3rA; Mon, 28 Mar 2022 14:18:56 +0000
+X-CLAM-Verdict: legit
+X-CLAM-Score: ??
+X-CLAM-Description: ??
+From: Anu Deepthika <anudeepthika@code1.emi.philips.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] usbguard: package simplification
+Date: Tue, 29 Mar 2022 01:18:27 +0530
+Message-ID: <20220328194827.317689-1-anudeepthika@code1.emi.philips.com>
+X-Mailer: git-send-email 2.25.1
+Reply-To: Nandipati.AnuDeepthika@philips.com
 MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
 Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-MS-Office365-Filtering-Correlation-Id: 34ee409e-def5-4bb4-2a05-08da10c5e56f
+X-MS-TrafficTypeDiagnostic: AM0P122MB0147:EE_
+X-Microsoft-Antispam-PRVS: 
+	<AM0P122MB0147478F9D468EE5D89B7ED68E1D9@AM0P122MB0147.EURP122.PROD.OUTLOOK.COM>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	/oZtsNyYHWXw90Nj9s7K5bxXyBBuUD1Z4FS4c6RNirfNWWCOrceNagPrHgoPJ87ZlgpItXcuxb/jYyGWU5LOIwnK7ARtTirnIlkTbTr9+EfAiswuCU8jVjwOVWtl0TlXlseT1g2iTUYJl+XicPkNy0u3KE2TjHHeZOnLO8GBkAh4nsDfLSZQVQZd4gzTGFIbHtQW/qxWssw2xZcWoNENRr0bYAsWYvoGbWYVYFAqCZU9miOER5sKdsQ7HW7nY5j9/FXGcfOjiPXk83pH6kbAAGpScTJcQWOQ7tE/v+ZCDblcXBIqdbaJQPRwfo1ts9HXMdjOyNwj0wkdeJiFjkpaoHGUhwViIAL8nMUD66ZDDOxOEN5Me1zo8edbY7WXJREhl+NduFPuIMjgQDImn+4IhymV3SuXnb/G6Su247yMZKq79TwxShiqwP5tN1/4l8RAEOnFoyBm3w2FVmGTO1TUlVLcb+HQKUvtqxdXPZuETDzat6V98SZPVbp4x3w46dDkDbLYKeQnTqWU2gm02dyDDKF6/TNhpD3PDZSWa/ZvnquCDIEYpv2k/SWOBxFkN41IZ9lXH824NC8ANZjojIhQqjuXP17kjEko3VLXvkfwHwsSepJZpyr1/s8oWK/hhxZ5dtbWl2QUJnXV/hUCUxcECXdFdXJ3Qa+1tK1wnPYnyXqsNTJsVPIIT+nYNW6cAWmu
+X-Forefront-Antispam-Report: 
+	CIP:18.136.170.117;CTRY:SG;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:ext-asp1.smtp.philips.com;PTR:ec2-18-136-170-117.ap-southeast-1.compute.amazonaws.com;CAT:NONE;SFS:(13230001)(4636009)(46966006)(40470700004)(36840700001)(81166007)(336012)(36860700001)(83380400001)(1076003)(186003)(508600001)(8936002)(47076005)(6916009)(26005)(6666004)(316002)(40460700003)(8676002)(70586007)(70206006)(956004)(2616005)(356005)(5660300002)(2906002)(82310400004)(82960400001)(86362001);DIR:OUT;SFP:1102;
+X-OriginatorOrg: code1.emi.philips.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Mar 2022 14:18:56.5279
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ 34ee409e-def5-4bb4-2a05-08da10c5e56f
+X-MS-Exchange-CrossTenant-Id: 1a407a2d-7675-4d17-8692-b3ac285306e4
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: 
+ TenantId=1a407a2d-7675-4d17-8692-b3ac285306e4;Ip=[18.136.170.117];Helo=[ext-asp1.smtp.philips.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	VE1EUR01FT004.eop-EUR01.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0P122MB0147
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Mar 2022 13:20:04 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Mar 2022 14:19:02 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96244
+ https://lists.openembedded.org/g/openembedded-devel/message/96245
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+From: "Anu Deepthika, Nandipati" <Nandipati.AnuDeepthika@philips.com>
+
 ---
- .../{python3-watchdog_2.1.6.bb => python3-watchdog_2.1.7.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-watchdog_2.1.6.bb => python3-watchdog_2.1.7.bb} (80%)
+ meta-oe/recipes-security/usbguard/usbguard_1.1.1.bb | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-watchdog_2.1.6.bb b/meta-python/recipes-devtools/python/python3-watchdog_2.1.7.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-watchdog_2.1.6.bb
-rename to meta-python/recipes-devtools/python/python3-watchdog_2.1.7.bb
-index 2bb110049f..7e91295fb4 100644
---- a/meta-python/recipes-devtools/python/python3-watchdog_2.1.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-watchdog_2.1.7.bb
-@@ -4,7 +4,7 @@ DEPENDS = "${PYTHON_PN}-argh"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
--SRC_URI[sha256sum] = "a36e75df6c767cbf46f61a91c70b3ba71811dfa0aca4a324d9407a06a8b7a2e7"
-+SRC_URI[sha256sum] = "3fd47815353be9c44eebc94cc28fe26b2b0c5bd889dafc4a5a7cbdf924143480"
- 
- inherit pypi setuptools3
- 
--- 
+diff --git a/meta-oe/recipes-security/usbguard/usbguard_1.1.1.bb b/meta-oe/=
+recipes-security/usbguard/usbguard_1.1.1.bb
+index 4ecaa4e6b..8df78ec81 100644
+--- a/meta-oe/recipes-security/usbguard/usbguard_1.1.1.bb
++++ b/meta-oe/recipes-security/usbguard/usbguard_1.1.1.bb
+@@ -44,19 +44,12 @@ PACKAGECONFIG[systemd] =3D "--enable-systemd,--disable-=
+systemd,systemd"
+=20
+ SYSTEMD_PACKAGES =3D "${PN}"
+=20
+-SYSTEMD_SERVICE:${PN} =3D "usbguard.service"
+-
+-SYSTEMD_PACKAGES +=3D "${@bb.utils.contains('PACKAGECONFIG', 'dbus', '${PN=
+}-dbus', '', d)}"
+-
+-SYSTEMD_SERVICE:${PN}-dbus =3D "usbguard-dbus.service"
+-
+-PACKAGES =3D+ "${PN}-dbus"
++SYSTEMD_SERVICE:${PN} =3D "usbguard.service ${@bb.utils.contains('PACKAGEC=
+ONFIG', 'dbus', 'usbguard-dbus.service', '', d)}"
+=20
+ FILES:${PN} +=3D "\
+     ${systemd_unitdir}/system/usbguard.service \
+     ${systemd_unitdir}/system/usbguard-dbus.service \
+     ${datadir}/polkit-1 \
+-    ${datadir}/polkit-1/actions \
+     ${datadir}/dbus-1 \
+     ${nonarch_libdir}/tmpfiles.d \
+ "
+--=20
 2.25.1
 
 
