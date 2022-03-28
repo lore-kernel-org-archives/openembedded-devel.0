@@ -2,73 +2,73 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C1ABC433EF
-	for <webhook@archiver.kernel.org>; Mon, 28 Mar 2022 09:40:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 48383C433EF
+	for <webhook@archiver.kernel.org>; Mon, 28 Mar 2022 09:40:52 +0000 (UTC)
 Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web09.9037.1648460447030872174
+ [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web11.9007.1648460446787215579
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 28 Mar 2022 02:40:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=GFthMKyX;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ZLubRex9;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1648460445; i=@fujitsu.com;
-	bh=z37WQ0mMb/UrZIfZmg6h3ZDwdNCAJfS+jbu2MQwF06U=;
+	bh=CxeFLDbXOFz/XmKXg54c9gEJMFL9UpffQFcNxgz86wA=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=GFthMKyXrNMHEd/KGVioF/O5ntAOBE/T58YoiaH88Ml89+JwMrZQkLBHYe5OAmcyA
-	 L2wx2YxF7toZsB7+8wFuG6vxbwpR/C5eD3J1zNpbgl7VIp0mvp0fmNuQDLONDpp7Ku
-	 XZBoTK2et7wvpTEtsHOD3nzWATsJnE2S0gyXw6H0M7UYB94Oq74aWam/s4KEH6T+s9
-	 6TUMITPl/miLDAk4UmC0OEZ4uvJ7/rRlY4OooyqFtLF59aD9HY7gr5g2cCaxhesq5Q
-	 E7mwEcVURZnwIH4sIRkZG4VQPhljMPelBlibb9x9GvLJRfxu6w7hrCmoiZp92f6mW7
-	 hrUnwaDftKpCw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrFIsWRWlGSWpSXmKPExsViZ8ORqDunyTH
-  JYM4mI4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaOxpYOp4B57xenbug2M/9m6GLk4hASeMEq8
-  u36WqYuRE8i5wCSx83oQRGIPo8Th/xfZQBJsAmoS02/dYAWxRQT0JZbO3sMMYjMLqEi8+N3DD
-  mILC9hK7L/ewQhiswioSiy9t4QFxOYVcJLYf2AVWL2EgILElIfvwWxOAWeJ7gdv2CEWO0kcPn
-  GXFaJeUOLkzCcsEPMlJA6+eAHVqygx+3IzC4RdITFrVhsThK0mcfXcJuYJjIKzkLTPQtK+gJF
-  pFaN1UlFmekZJbmJmjq6hgYGuoaGprrGFrpGhkV5ilW6iXmqpbnlqcYkukFterJdaXKxXXJmb
-  nJOil5dasokRGMQpxWpXdjDuWfVT7xCjJAeTkiivUaZjkhBfUn5KZUZicUZ8UWlOavEhRhkOD
-  iUJ3ooGoJxgUWp6akVaZg4womDSEhw8SiK8E2qA0rzFBYm5xZnpEKlTjIpS4rxrG4ESAiCJjN
-  I8uDZYFF9ilJUS5mVkYGAQ4ilILcrNLEGVf8UozsGoJMxrBjKFJzOvBG76K6DFTECL176zBVl
-  ckoiQkmpgMuVuTDgp9WvpMrlfvG2aPH3z5VdZnVN0V87t0ZdPUo7wcX3x/tuu637ZO7y446/K
-  aLLPvaW7S6B1anRCUeOPwyqfmY4dYOvp7Kz7KO4cHfx5ymtvRgdF+euTdi7f2SpdrpSY/ef1p
-  Lnct989myVeZOvT/WMJV0HdbR+J+aFX7n35J7Lxyc0j16sUJKb9yW/ndi44cET6fERhgV9O6B
-  Ef+20OotsTUlceip7yPclnasN+3Y4yf54nyR0vOfd1vgut+/V24ovJ11KzNr9tte0P7+B8+2+
-  xwssr71oEni8LmavVfm3WOdZ7ZoEBq6sj0sUnbHvI05a14LfPB8FfS5atvsy99qtOMOPjN+Fn
-  K59uVWIpzkg01GIuKk4EANM3v1ZdAwAA
+	b=ZLubRex9XxUG5g8664PqMDoiwFwBPqjuAQURy4ndhzi5oC0X93ansk6+Wz8ni6JM3
+	 yn3ylMlgb9Nwj9+A+EBfUZQ3XaCBiaBubrzLY1LIwzf4IfQLjTlsdn+xBDkZdjvE6G
+	 87W5+vaqCwdOvpyogcsHUV/Ni34n5O0TVJWBmZqioe/mKtUFND8pvMV/Kg4HeHZemo
+	 MhTjmYDxatEqIXfotUM56s/+hu92DBUDIzvCRnFXL1X4q6Aqx1nA3Oc9ahkI9ORUmX
+	 Cc2aA6Lifnzk5PLUwMQh4jygAICXHZsJsQzY6e/d+7b0E06K1ldTz17yf1KZD8ceLL
+	 mKVjaQv1QLD9A==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrGIsWRWlGSWpSXmKPExsViZ8ORqDunyTH
+  JYPYdY4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWP//f3sBRM5KpZuv8PYwLievYuRi0NI4Amj
+  xNKpU9kgnAtMEo/u3GftYuQEcvYwSvx6mAtiswmoSUy/dQMsLiKgL7F09h5mEJtZQEXixe8eo
+  EkcHMICzhI3H9eAhFkEVCU2XXoBVs4r4CTxqv0CE4gtIaAgMeXhe7BWTqDy7gdv2CFWOUkcPn
+  EXql5Q4uTMJywQ4yUkDr54wQzRqygx+3IzC4RdITFrVhvUTDWJq+c2MU9gFJyFpH0WkvYFjEy
+  rGK2TijLTM0pyEzNzdA0NDHQNDU11jS11jQyN9RKrdBP1Ukt1y1OLS3SN9BLLi/VSi4v1iitz
+  k3NS9PJSSzYxAoM4pVj96g7Gzat+6h1ilORgUhLlNcp0TBLiS8pPqcxILM6ILyrNSS0+xCjDw
+  aEkwVvRAJQTLEpNT61Iy8wBRhRMWoKDR0mEd0INUJq3uCAxtzgzHSJ1ilGX4+qVK3uZhVjy8v
+  NSpcR51zYCFQmAFGWU5sGNgEX3JUZZKWFeRgYGBiGegtSi3MwSVPlXjOIcjErCvGYgU3gy80r
+  gNr0COoIJ6Ii172xBjihJREhJNTCxq8VvYFrTs3jjv1PObNI+/ufbK3S+n7m5I2PtZemVdh0n
+  fj99VHXryK22omUl92Ju62mE/2WODZVsv7I+OctkQfPl+SaLLmTNqO29Nv+k3OLqn09j/S882
+  bb9YnMu41b5XJ9/q7Oaz6ycarnOY/c5F8Vjt/LPsCe3fv578N0S1jk7XG98evhzx7ezm59lGl
+  xZI35lQ8evGPnPv0LzbBlqymREQz21LJ5zCTy/d2my3qppeWf/XDuQzvnfRWzZ0j+L/OY27da
+  6WxcbXR4t1//koknwbAu5754ZXZ1bThjrXSt6tsMt6/LRe8d/lbW3WKyPq02U3fX9sZ+u1+QU
+  62gfueTyXRZmN29MvZSxVG9BpBJLcUaioRZzUXEiAB/4yoppAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-21.tower-548.messagelabs.com!1648460444!37663!1
+X-Msg-Ref: server-17.tower-571.messagelabs.com!1648460444!24404!1
 X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.85.5; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 14690 invoked from network); 28 Mar 2022 09:40:44 -0000
+Received: (qmail 22292 invoked from network); 28 Mar 2022 09:40:44 -0000
 Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-21.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-17.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 28 Mar 2022 09:40:44 -0000
 Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 48FBC100192
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 4B459100196
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 28 Mar 2022 10:40:44 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 1B7AC100183
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 1E4E4100186
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 28 Mar 2022 10:40:44 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 28 Mar 2022 10:40:22 +0100
+ (TLS) id 15.0.1497.32; Mon, 28 Mar 2022 10:40:25 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] libqb: upgrade 2.0.4 -> 2.0.6
-Date: Mon, 28 Mar 2022 17:39:41 +0800
-Message-ID: <1648460382-15591-4-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] libwacom: upgrade 2.1.0 -> 2.2.0
+Date: Mon, 28 Mar 2022 17:39:42 +0800
+Message-ID: <1648460382-15591-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1648460382-15591-1-git-send-email-wangmy@fujitsu.com>
 References: <1648460382-15591-1-git-send-email-wangmy@fujitsu.com>
@@ -81,32 +81,32 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Mar 2022 09:40:48 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Mar 2022 09:40:52 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96230
+ https://lists.openembedded.org/g/openembedded-devel/message/96229
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-extended/libqb/{libqb_2.0.4.bb => libqb_2.0.6.bb}   | 2 +-
+ .../libwacom/{libwacom_2.1.0.bb => libwacom_2.2.0.bb}           | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/libqb/{libqb_2.0.4.bb => libqb_2.0.6.bb} (93%)
+ rename meta-gnome/recipes-support/libwacom/{libwacom_2.1.0.bb => libwacom_2.2.0.bb} (93%)
 
-diff --git a/meta-oe/recipes-extended/libqb/libqb_2.0.4.bb b/meta-oe/recipes-extended/libqb/libqb_2.0.6.bb
+diff --git a/meta-gnome/recipes-support/libwacom/libwacom_2.1.0.bb b/meta-gnome/recipes-support/libwacom/libwacom_2.2.0.bb
 similarity index 93%
-rename from meta-oe/recipes-extended/libqb/libqb_2.0.4.bb
-rename to meta-oe/recipes-extended/libqb/libqb_2.0.6.bb
-index eb818e5651..ce3606d777 100644
---- a/meta-oe/recipes-extended/libqb/libqb_2.0.4.bb
-+++ b/meta-oe/recipes-extended/libqb/libqb_2.0.6.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=321bf41f280cf805086dd5a720b37785"
+rename from meta-gnome/recipes-support/libwacom/libwacom_2.1.0.bb
+rename to meta-gnome/recipes-support/libwacom/libwacom_2.2.0.bb
+index 226446dcbb..78f5a289c6 100644
+--- a/meta-gnome/recipes-support/libwacom/libwacom_2.1.0.bb
++++ b/meta-gnome/recipes-support/libwacom/libwacom_2.2.0.bb
+@@ -8,7 +8,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=40a21fffb367c82f39fd91a3b137c36e"
  
- inherit autotools pkgconfig
+ SRC_URI = "git://github.com/linuxwacom/libwacom.git;branch=master;protocol=https"
+-SRCREV = "0f263ce26edc47587d5f7604e44fad1b61240c3d"
++SRCREV = "be485deca03157b0dbd702c7acaf35b71378be9e"
  
--SRCREV = "a2691b96188033b5ad5c08871982048ae1f4f4e8"
-+SRCREV = "758044bed5f615c90818aa5431d00303288888e5"
- SRC_URI = "git://github.com/ClusterLabs/${BPN}.git;branch=main;protocol=https \
-           "
- S = "${WORKDIR}/git"
+ DEPENDS = " \
+     libxml2-native \
 -- 
 2.25.1
 
