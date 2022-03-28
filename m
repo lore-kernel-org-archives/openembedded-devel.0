@@ -2,73 +2,73 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B4E5C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F673C433F5
 	for <webhook@archiver.kernel.org>; Mon, 28 Mar 2022 09:42:18 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.1])
- by mx.groups.io with SMTP id smtpd.web12.8981.1648460536599830893
+Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com
+ [195.245.230.81])
+ by mx.groups.io with SMTP id smtpd.web12.8982.1648460536867323357
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Mar 2022 02:42:18 -0700
+ Mon, 28 Mar 2022 02:42:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Ubbzto9N;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=tuURLCbU;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.81,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1648460535; i=@fujitsu.com;
-	bh=NwNi7G40ixepBkda0FErJ5nFiWXEqh6HJPwCIpyLNMA=;
+	bh=kuNI85aBiYHAGTbRxM9yeGGZigdrnGeRYXamiABss3M=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=Ubbzto9N1tauLmQa3s+1sg2eAixgVS9Xswj1+2QcLyZKublzO7f5LilWXnyInhMvb
-	 iOEdwloHezBNlUAQbH7Ta1bCS/ppIj95daDIpAUrq/UWimw/yjTx653ymmbYwpDBpH
-	 jqHH3r1s17G3jhxUKSggpQJtKzJzu0WIIw5t1INrSzuupGuVukt1BBovifBj1nf1Of
-	 KIVrW2KLkuUFoUtZLHIB/3Aje/pALimsWSRvb0n2puA9La7LaNmEqoU9L1pjZF0M9v
-	 kliGXjOhHU7o5eGNhOp/7+U+HLE6jB8jjR7DQFoUnwvj83BXsQ/rQty9MwJKP8UmDf
-	 U4YNyHjVZQmaA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrNIsWRWlGSWpSXmKPExsViZ8ORqPu9yTH
-  J4MRhRouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPjj5lsBUfZK/5/3s7UwPiFrYuRi0NI4Amj
-  xJmz39khnAtMEi/WvWKEcPYwSsx8Pp+5i5GTg01ATWL6rRusILaIgL7E0tl7wOLMAioSL373s
-  IPYwgJ2Eoea9oDVsAioSuzfPRXM5hVwkpj//DojiC0hoCAx5eF7sF5OAWeJ7z3zwGwhoJqZe/
-  8zQtQLSpyc+YQFYr6ExMEXL5ghehUlZl9uZoGwKyRmzWpjgrDVJK6e28Q8gVFwFpL2WUjaFzA
-  yrWK0SirKTM8oyU3MzNE1NDDQNTQ01TU21zW01Eus0k3USy3VLU8tLtE10kssL9ZLLS7WK67M
-  Tc5J0ctLLdnECAzjlGJV4R2MHSt/6h1ilORgUhLlNcp0TBLiS8pPqcxILM6ILyrNSS0+xCjDw
-  aEkwVvRAJQTLEpNT61Iy8wBxhRMWoKDR0mEd0INUJq3uCAxtzgzHSJ1ilFRSpx3bSNQQgAkkV
-  GaB9cGi+NLjLJSwryMDAwMQjwFqUW5mSWo8q8YxTkYlYR5zUCm8GTmlcBNfwW0mAlo8dp3tiC
-  LSxIRUlINTA3J3xKy/a0teE8pSwWJC/a7TahdsOjiEda3zMG/eGqW7KmMSj/B2TFLPz9xD2/l
-  5MJN/gzR03I3Cgt7/mLky2njlZnnrpTxcH6e0fKlE17NSw/2+6dvafCCsSNadLt+fvNq5TavW
-  cXhKx2apfSS1otMmPYt4MpaKaVdHVujvJfkPHmT5/X2jt3FCbq77NyX7N/tsf+l1yLt40E7Qk
-  2DN69kUkq13boohEMn+0cug7zqqs4Cye6qdYvevqljzKiW7HA9p3DKaRd/p67dI5tHHeJGy22
-  /zOV7Yb/2/4oMv6+93UqHbn0v7+j86M3/+XXG8blCXyIP9zx79PnpvJNfNs/MtAuNyl7wLCd+
-  6dw7SizFGYmGWsxFxYkAl+qtTl4DAAA=
+	b=tuURLCbU9wHAiLUXJwBaCMgYgPF46zGQNwX7d4xWOXwvpq3ljaR8SW67j7C2GZPgx
+	 RYsZdy4boH79pDk5hpvhSrPbzs6Sd5IWcu+7YVE69WktFnHX8EBfrd7t5qpW65810J
+	 E7QMG6p+AGQwuPH5lAbCY9CKGyUvsklff2995HSefjz0oqb1eQuXP3ujMitqO9gY7h
+	 0OEOtLbfDrgjz298/0BSwhr6CzcDypPpQ+NYGEZfFviejkoWhvOeCX9H1uXLqDE/JL
+	 ixAR2bYUE+HmP0JqPEhFODHUH3Yw9TrTzJu5vqU9wz8cw3eV7SXdd17R93PfPYxCLR
+	 8NjUBOTF4lTrQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrFIsWRWlGSWpSXmKPExsViZ8ORqPutyTH
+  J4NVHFYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePdj0dsBVs5KlbsaGFtYHzI3sXIxSEk8IRR
+  4sbz91DOBSaJ25f3s0E4exglns99z9zFyMnBJqAmMf3WDVYQW0RAX2Lp7D1gcWYBFYkXv3vYQ
+  WxhAUeJhhPHwWpYBFQl9hz6yQhi8wo4SdxfdxssLiGgIDHlIcRMTgFnie8988BsIaCamXv/Q9
+  ULSpyc+YQFYr6ExMEXL5ghehUlZl9uZoGwKyRmzWpjgrDVJK6e28Q8gVFwFpL2WUjaFzAyrWK
+  0TCrKTM8oyU3MzNE1NDDQNTQ01TXWtTDTS6zSTdRLLdUtTy0u0TXUSywv1kstLtYrrsxNzknR
+  y0st2cQIDOKUYuawHYx/en/qHWKU5GBSEuU1ynRMEuJLyk+pzEgszogvKs1JLT7EKMPBoSTBW
+  9EAlBMsSk1PrUjLzAFGFExagoNHSYR3Qg1Qmre4IDG3ODMdInWKUVFKnHdtI1BCACSRUZoH1w
+  aL4kuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHnNQKbwZOaVwE1/BbSYCWjx2ne2IItLEhF
+  SUg1MXBphnOFnHrhJtZlPawp80rKge2u4yGfvv9fWWfzevUXK9dUnpbWc19NWPTFIu5pZfSV8
+  FX+2LtN7O5n5E/zO/fqo37P5osvkmS2ddne7laen6W9VUqqXTooNfhbUNO/eZbPF8tGLHpcbn
+  Q9RXL72abvfqg1qhwpF/z2I1f/tkt2qZNRU8kloHrvYr7WBYvu1DGf6ntXITs65UXbHUspC0a
+  23Urlr4s3ZHIHsn4SSCyUz1U9es+Q7Z7RH6cFkxX9d+p6FQsumqT+/wbt12T3DjPt51VHcl7d
+  MM18W8lhErI/rktcFu91XHTy+M07duoJl2+9aH5UaUcFHNX97A01MDD84Nq3R5uXV/Xtn3nQl
+  luKMREMt5qLiRABhy0j+XQMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-13.tower-565.messagelabs.com!1648460534!183349!1
+X-Msg-Ref: server-22.tower-585.messagelabs.com!1648460534!130438!1
 X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.85.5; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 15447 invoked from network); 28 Mar 2022 09:42:15 -0000
+Received: (qmail 17545 invoked from network); 28 Mar 2022 09:42:14 -0000
 Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-13.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 28 Mar 2022 09:42:15 -0000
+  by server-22.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 28 Mar 2022 09:42:14 -0000
 Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 5767E1001A4
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id E725510004D
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Mar 2022 10:42:14 +0100 (BST)
+ Mon, 28 Mar 2022 10:42:13 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 9EF2F100198
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 8AF7910018B
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 28 Mar 2022 10:42:13 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 28 Mar 2022 10:42:01 +0100
+ (TLS) id 15.0.1497.32; Mon, 28 Mar 2022 10:41:58 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] stm32flash: upgrade 0.6 -> 0.7
-Date: Mon, 28 Mar 2022 17:41:43 +0800
-Message-ID: <1648460503-15630-4-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] babl: upgrade 0.1.90 -> 0.1.92
+Date: Mon, 28 Mar 2022 17:41:42 +0800
+Message-ID: <1648460503-15630-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1648460503-15630-1-git-send-email-wangmy@fujitsu.com>
 References: <1648460503-15630-1-git-send-email-wangmy@fujitsu.com>
@@ -83,27 +83,29 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 28 Mar 2022 09:42:18 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96234
+ https://lists.openembedded.org/g/openembedded-devel/message/96233
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../stm32flash/{stm32flash_0.6.bb => stm32flash_0.7.bb}         | 2 +-
+ meta-gnome/recipes-gimp/babl/{babl_0.1.90.bb => babl_0.1.92.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/stm32flash/{stm32flash_0.6.bb => stm32flash_0.7.bb} (82%)
+ rename meta-gnome/recipes-gimp/babl/{babl_0.1.90.bb => babl_0.1.92.bb} (87%)
 
-diff --git a/meta-oe/recipes-support/stm32flash/stm32flash_0.6.bb b/meta-oe/recipes-support/stm32flash/stm32flash_0.7.bb
-similarity index 82%
-rename from meta-oe/recipes-support/stm32flash/stm32flash_0.6.bb
-rename to meta-oe/recipes-support/stm32flash/stm32flash_0.7.bb
-index b86b047fc1..0998aa6778 100644
---- a/meta-oe/recipes-support/stm32flash/stm32flash_0.6.bb
-+++ b/meta-oe/recipes-support/stm32flash/stm32flash_0.7.bb
-@@ -10,4 +10,4 @@ do_install() {
- 	oe_runmake install DESTDIR=${D} PREFIX=${prefix}
- }
+diff --git a/meta-gnome/recipes-gimp/babl/babl_0.1.90.bb b/meta-gnome/recipes-gimp/babl/babl_0.1.92.bb
+similarity index 87%
+rename from meta-gnome/recipes-gimp/babl/babl_0.1.90.bb
+rename to meta-gnome/recipes-gimp/babl/babl_0.1.92.bb
+index 0d2ac527a0..156c91bcbd 100644
+--- a/meta-gnome/recipes-gimp/babl/babl_0.1.90.bb
++++ b/meta-gnome/recipes-gimp/babl/babl_0.1.92.bb
+@@ -15,6 +15,6 @@ CFLAGS:append:toolchain-clang:mipsarch = " -ffp-exception-behavior=ignore "
+ CFLAGS:append:toolchain-clang:riscv64 = " -ffp-exception-behavior=ignore "
  
--SRC_URI[sha256sum] = "ee9b40d4d3e5cd28b993e08ae2a2c3c559b6bea8730cd7e1d40727dedb1dda09"
-+SRC_URI[sha256sum] = "c4c9cd8bec79da63b111d15713ef5cc2cd947deca411d35d6e3065e227dc414a"
+ SRC_URI = "https://download.gimp.org/pub/${BPN}/0.1/${BP}.tar.xz"
+-SRC_URI[sha256sum] = "6e2ebb636f37581588e3d02499b3d2f69f9ac73e34a262f42911d7f5906a9243"
++SRC_URI[sha256sum] = "f667735028944b6375ad18f160a64ceb93f5c7dccaa9d8751de359777488a2c1"
+ 
+ BBCLASSEXTEND = "native"
 -- 
 2.25.1
 
