@@ -1,110 +1,79 @@
-Return-Path: <kai.kang@windriver.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5E46C433F5
-	for <webhook@archiver.kernel.org>; Tue, 29 Mar 2022 06:11:28 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web11.3413.1648534287162690531
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C42B4C433F5
+	for <webhook@archiver.kernel.org>; Tue, 29 Mar 2022 08:35:15 +0000 (UTC)
+Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
+ by mx.groups.io with SMTP id smtpd.web09.4350.1648542914686547731
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Mar 2022 23:11:27 -0700
+ Tue, 29 Mar 2022 01:35:15 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.3.146,
- mailfrom: kai.kang@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 22T6BNvE018320
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
-	Mon, 28 Mar 2022 23:11:23 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 22T6BHGw016043
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 28 Mar 2022 23:11:17 -0700 (PDT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Mon, 28 Mar 2022 23:11:17 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27; Mon, 28 Mar 2022 23:11:17 -0700
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Mon, 28 Mar 2022 23:11:16 -0700
-From: <kai.kang@windriver.com>
-To: <raj.khem@gmail.com>
-CC: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH v2] graphviz: add pkg_postinst script
-Date: Tue, 29 Mar 2022 14:11:11 +0800
-Message-ID: <20220329061111.39292-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.22,
+ mailfrom: f_l_k@t-online.de)
+Received: from fwd85.dcpf.telekom.de (fwd85.aul.t-online.de [10.223.144.111])
+	by mailout12.t-online.de (Postfix) with SMTP id 33ABFEAD2
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 29 Mar 2022 10:34:34 +0200 (CEST)
+Received: from flk-MS-7C91.fritz.box ([79.219.227.151]) by fwd85.t-online.de
+	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
+	esmtp id 1nZ7JB-2BG8Wn0; Tue, 29 Mar 2022 10:34:33 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-multimedia][PATCH] crossguid: update
+Date: Tue, 29 Mar 2022 10:34:27 +0200
+Message-Id: <20220329083427.402421-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
+X-TOI-EXPURGATEID: 150726::1648542873-00014AB5-FB96CBBE/0/0 CLEAN NORMAL
+X-TOI-MSGID: 3aa49c2a-4c92-45f2-982d-de09c8bb3d77
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 29 Mar 2022 06:11:28 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 29 Mar 2022 08:35:15 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96251
+ https://lists.openembedded.org/g/openembedded-devel/message/96252
 
-From: Kai Kang <kai.kang@windriver.com>
+v0.2.2 is from 2017. meanwhile there have been some important improvement=
+s
+and also some renaming of headers and such but unfortunately there has ne=
+ver
+been a new release. Kodi uses the latest crossguid. Update it accordingly=
+ to
+avoid having to patch Kodi.
 
-It needs to run `dot -c` first before call 'dot' command, otherwise it
-fails with:
-
-| Format: "png" not recognized. No formats found.
-| Perhaps "dot -c" needs to be run (with installer's privileges) to
-  register the plugins?
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
-v2:
-* add guard to check qemu-usermode is supported
+ .../recipes-support/crossguid/crossguid_0.2.2.bb            | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
 
- .../graphviz/graphviz_2.50.0.bb               | 19 ++++++++++++++++++-
- 1 file changed, 18 insertions(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_2.50.0.bb b/meta-oe/recipes-graphics/graphviz/graphviz_2.50.0.bb
-index 0eca7fdba..66353b837 100644
---- a/meta-oe/recipes-graphics/graphviz/graphviz_2.50.0.bb
-+++ b/meta-oe/recipes-graphics/graphviz/graphviz_2.50.0.bb
-@@ -17,7 +17,7 @@ DEPENDS = " \
- DEPENDS:append:class-target = " ${BPN}-native"
- DEPENDS:append:class-nativesdk = " ${BPN}-native"
- 
--inherit autotools-brokensep pkgconfig gettext
-+inherit autotools-brokensep pkgconfig gettext qemu
- 
- SRC_URI = "https://gitlab.com/api/v4/projects/4207231/packages/generic/${BPN}-releases/${PV}/${BP}.tar.xz \
-            "
-@@ -81,6 +81,23 @@ graphviz_sstate_postinst() {
- }
- SYSROOT_PREPROCESS_FUNCS:append:class-native = " graphviz_sstate_postinst"
- 
-+pkg_postinst:${PN} () {
-+    if [ -n "$D" ]; then
-+        if ${@bb.utils.contains('MACHINE_FEATURES', 'qemu-usermode', 'true', 'false', d)}; then
-+            ${@qemu_run_binary(d, '$D', '${bindir}/dot')} -c
-+        fi
-+    else
-+        dot -c
-+    fi
-+}
-+
-+pkg_postrm:${PN} () {
-+    rm -f $D${libdir}/graphviz/config*
-+    rmdir --ignore-fail-on-non-empty $D${libdir}/graphviz
-+}
-+
-+PACKAGE_WRITE_DEPS += "qemu-native"
-+
- PACKAGES =+ "${PN}-python ${PN}-perl ${PN}-demo"
- 
- FILES:${PN}-python += "${libdir}/python*/site-packages/ ${libdir}/graphviz/python/"
--- 
-2.17.1
+diff --git a/meta-multimedia/recipes-support/crossguid/crossguid_0.2.2.bb=
+ b/meta-multimedia/recipes-support/crossguid/crossguid_0.2.2.bb
+index bc54ea9fe..b496531ab 100644
+--- a/meta-multimedia/recipes-support/crossguid/crossguid_0.2.2.bb
++++ b/meta-multimedia/recipes-support/crossguid/crossguid_0.2.2.bb
+@@ -7,14 +7,10 @@ LICENSE =3D "MIT"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D1373274bc8d8001edc54933919f36=
+f68"
+ DEPENDS +=3D "util-linux"
+=20
+-SRCREV =3D "5b45cdd9a56ca9da35ee0f8845cb4e2603d245dc"
++SRCREV =3D "ca1bf4b810e2d188d04cb6286f957008ee1b7681"
+ SRC_URI =3D "git://github.com/graeme-hill/crossguid;protocol=3Dhttps;bra=
+nch=3Dmaster"
+=20
+ S =3D "${WORKDIR}/git"
+=20
+ inherit cmake
+=20
+-do_install() {
+-	install -D -m 0644 ${B}/libxg.a ${D}${libdir}/libxg.a
+-	install -D -m 0644 ${S}/Guid.hpp ${D}${includedir}/Guid.hpp
+-}
+--=20
+2.25.1
 
 
