@@ -1,150 +1,194 @@
-Return-Path: <stefan.herbrechtsmeier-oss@weidmueller.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4489CC433F5
-	for <webhook@archiver.kernel.org>; Tue, 29 Mar 2022 11:32:47 +0000 (UTC)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (EUR05-AM6-obe.outbound.protection.outlook.com [40.107.22.57])
- by mx.groups.io with SMTP id smtpd.web10.5565.1648553565128347596
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DFDD0C433EF
+	for <webhook@archiver.kernel.org>; Tue, 29 Mar 2022 12:29:31 +0000 (UTC)
+Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
+ by mx.groups.io with SMTP id smtpd.web12.5937.1648556970850537585
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Mar 2022 04:32:46 -0700
+ Tue, 29 Mar 2022 05:29:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify"
- header.i=@weidmueller.onmicrosoft.com
- header.s=selector1-weidmueller-onmicrosoft-com header.b=rdtHbcCR;
- spf=pass (domain: weidmueller.com, ip: 40.107.22.57,
- mailfrom: stefan.herbrechtsmeier-oss@weidmueller.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WBON2U9mUeRA0V8Q0ntypCHBy514rtbCGrg5lbVfN6/tBXDFpuxERbJSB/Po9M3QsfPlvgC2YeQUzL252bomUkJ5btAKh6HLCMvySzHs2b9j5wiliB0tYGhLDI4F+RNi3mpHNnB/haLWsZKOGrRGGPyU1JenAofU0SbiYFMgtYWXXkZdFHOHeMHUqIJ286X71B+AoUnCIN00mvunFQclKNFhDlPcNq1IQF6eTJ08MCKQgYsFuyrTQielz+AZ+LELfZXNGxcsqxbkdXnY+f5T23GGjx2pZueIsjTZPcsPPSQzfOdHfwQqLGegGQk7EkanyWSjTxeWfI4mRpxvvopMwA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1YuPmE/4wg7S6TFrFU96WSn1BVn3Gwfr2PdxkGLlR34=;
- b=asj312OyG2YwdIQ8QbSBJ3L6LZYH/6WlFUF1djVORWE8tBS1PVzCso7QXu/oHC3jArj0mwJEI8ahhOiRRaSRnCoEa8ImktAHjxzDmL74JUZZjD2kvw6AGn8fX6x/x7W3XqN/eSHuSEZmS3ZA1Vh+VzngsVW8uuCPHn+nzuBIA+PYmKc5P3LaVKjSqiPnO0fYRcFVvQj50S/acTNrwMoLLjFd4Pos513RkbhX7w1zR4uNfPamCoNGffnULbwbCVI1YacjynTGGxK7m+/JtTvovadXu2pD43LyekblvA0gcFbHlagFUj/bE67EJUGlN3hCWvn2FoMk/q6x3cZHaeEwfw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=weidmueller.com; dmarc=pass action=none
- header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1YuPmE/4wg7S6TFrFU96WSn1BVn3Gwfr2PdxkGLlR34=;
- b=rdtHbcCRDtDy68cKT52sgHkPS9oUe8lLrp01yKJXToHcpNFSnvxKWsRgjQ2JrpTRmP3jhgCuYHr1X0DFBiwBe0jhxZZxUEn6ZdRjPsMlvLt8zxMMKLiscpmBw9q+Na2bOFd1MNxLdfugacK2nMwhe7sfW6/8oiL2/Glys+xtJvk=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=weidmueller.com;
-Received: from PAXPR08MB6969.eurprd08.prod.outlook.com (2603:10a6:102:1d8::23)
- by PAXPR08MB6765.eurprd08.prod.outlook.com (2603:10a6:102:138::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5102.17; Tue, 29 Mar
- 2022 11:32:42 +0000
-Received: from PAXPR08MB6969.eurprd08.prod.outlook.com
- ([fe80::21c3:3ec0:a144:68ba]) by PAXPR08MB6969.eurprd08.prod.outlook.com
- ([fe80::21c3:3ec0:a144:68ba%7]) with mapi id 15.20.5102.022; Tue, 29 Mar 2022
- 11:32:42 +0000
-From: Stefan Herbrechtsmeier <stefan.herbrechtsmeier-oss@weidmueller.com>
+ dkim=missing;
+ spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.82,
+ mailfrom: f_l_k@t-online.de)
+Received: from fwd88.dcpf.telekom.de (fwd88.aul.t-online.de [10.223.144.114])
+	by mailout05.t-online.de (Postfix) with SMTP id 484A1928A
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 29 Mar 2022 14:29:04 +0200 (CEST)
+Received: from flk-MS-7C91.fritz.box ([79.219.227.151]) by fwd88.t-online.de
+	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
+	esmtp id 1nZAy7-029dlh0; Tue, 29 Mar 2022 14:29:03 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-CC: Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
-Subject: [PATCH] openldap: correct slapd systemd service support
-Date: Tue, 29 Mar 2022 13:32:22 +0200
-Message-ID: 
- <20220329113222.12443-1-stefan.herbrechtsmeier-oss@weidmueller.com>
-X-Mailer: git-send-email 2.30.2
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-ClientProxiedBy: AS9PR0301CA0029.eurprd03.prod.outlook.com
- (2603:10a6:20b:468::10) To PAXPR08MB6969.eurprd08.prod.outlook.com
- (2603:10a6:102:1d8::23)
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-networking][PATCH] blueman: update; add missing RDEPENDS
+Date: Tue, 29 Mar 2022 14:28:51 +0200
+Message-Id: <20220329122851.518573-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 23311936-7040-4c0e-5d74-08da1177d634
-X-MS-TrafficTypeDiagnostic: PAXPR08MB6765:EE_
-X-Microsoft-Antispam-PRVS: 
-	<PAXPR08MB6765C58EA11433827CFBAA45D71E9@PAXPR08MB6765.eurprd08.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	bkRi5wg9dGwiek0PwMhBMv5Z8a6FknkT58O0dv84cQp9e5N5FPTm7vSHN6VEAhiBvK3+njx3RFfhrHnk+MMUt/SDGknX7z97ziyf7UcxxaSzGLlI7nBSwFjyX8nkwXXLyGbTYbgXUpnruynAWkxPT3afoW26zh0UFyvmd2q6llhxYVnFN/H+A3iJaqXVA6sP0e5hM5QXprEiIEDYgClINeY1XahHFe3wOJfpUeRT5Xwx22vOM5tUnwVTBUpNgV/3w+CMuw/epK7tF5QCyr3q1FZ/zAwnSkF8o9qAKz18xaTUKXn8C7SoxhRQNMIutI54SyBrGgZinEd/DHYyxdlxtANi8KsdZfGrgivXskY+umsW2f2IPOtXCGnZvk7VaNnA2rBDQYwzmcsiZxEzRixLAJRPSUa4tGvpi/FNYoFKRJIWbJBTkPE2djxT7ToAzuiNrQkpFBrdQolPc7fw5FAERUL+yJ5ZnhQ2Eg9fG90LYtPKw1BteR1HsRhCoKSW8DKgvAET2PqJ/OSaqptYH7GuK80tyfm1m0CJ6yySbAnGyjkNYtXUaAdUYUZFDS4EIFBLCCeIQ4/Xx2oR4HDxtu05EiTYeojUKOiCkY0AMnoI1ktouYv1Tp6vnsfCnhO8rD8kSDRhc8f6a2ohZ50xfQCxCeYX1VKnl1ruKLcWNNirb8Hrkb59SIBVcJW0lcSfUDpzJohLSuSWkQ0AW8/Qa3EvmA==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAXPR08MB6969.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(6916009)(5660300002)(38350700002)(2906002)(4744005)(316002)(66946007)(66556008)(66476007)(38100700002)(4326008)(6486002)(83380400001)(86362001)(1076003)(8936002)(26005)(8676002)(6512007)(186003)(6506007)(52116002)(6666004)(508600001)(107886003)(2616005)(36756003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?cYrlwbvYLA08U9xeO/ETiMzCqTBUvPvIDaq6Wqb7NkncYV8zYpGK+zLtTlsp?=
- =?us-ascii?Q?Emq7ejA3e9oSxNybh6k7XNGKv9uxd0xcC8m4UIEVzYXR0y7hdqDbZ5L2pV3V?=
- =?us-ascii?Q?0E74FoBZ9J53eGvZJM6Sv0PScwERDvFCqqZjzS4s9/pXtKERQ3U/D8uyqMuX?=
- =?us-ascii?Q?IV28CChwvXhms1DatGLMXE2abofpJP6Ythu2LTBMhtXnMVPEMnUbdA2Y+XbL?=
- =?us-ascii?Q?63vZHuRz4Xtf3VqW6ddxLljPVGknFiwBKFooK/u9VBq/j/tStsPJDnzPCgiE?=
- =?us-ascii?Q?xQIkDFXeNsWpgnNH1hsMxTOlmcboPB9xpHog+YGsnceC7/9XOEaJCc8QzLRI?=
- =?us-ascii?Q?+4AsjiNDhhPRDSfbsdg7bApuhjlIfzXDUjJBzY28JDYkKDkwL8slyVV9hjq2?=
- =?us-ascii?Q?0sZicFKD8M6rqAhjduzlpOPv9cvd2uKNY4P5BADpUnQnakhwV/VY03vuuVTs?=
- =?us-ascii?Q?p3U8KFQxrWisgELAE/m/QAwlzOZlNL0L22OyTwJP+7gRGgfIKEtvyuxhcnVh?=
- =?us-ascii?Q?IsPq2cFkfKimCTL4yv9Lmji9pl9R+2wRBGd4CzF3UoGqt0Aak8YWHJlJL751?=
- =?us-ascii?Q?H8qSAUJH5KdTWuyYHUA9AxtFBX7Yp9v571OF1i7s6El0JiOlkEnR5NcLMSU3?=
- =?us-ascii?Q?2O4GpEJWEguxHQkbw6u4gfrVI/v3LpCkfGGBT1hihzA5DythulelJylIc/0U?=
- =?us-ascii?Q?zYqWwC2sAN9kWmnPvvRp936gGaxDGMyf5lcvxdri+Ippf+UXO/ZH0ozBek9R?=
- =?us-ascii?Q?94q7nY/xHHT6lP7lUipxMuUKsNIDFcumyqJ19Z7KTdih3Klm4A/sZeLE4h3T?=
- =?us-ascii?Q?TyQ9wBGFGkQ8JZw+36CHDfPf4LIbtJh3ors0omM8xNwWUG5B+1THlUifv5JK?=
- =?us-ascii?Q?Dq17nrh5Qq78XZSdemYGdBQQScfkeKxzokgnY0oWP5HUJ7+ZgmtkyjUJG77H?=
- =?us-ascii?Q?sk5pRUZtWkNaf53E1bhPNx9WzNE2M8lakEDlcixKaXl4IoCrXT1FP6lC9m+H?=
- =?us-ascii?Q?4j1K9fMa11lXTNyNiwhPnoaVXg8rsG1O6dnUQxb+yysoBY+xaAQIjpAmcKOR?=
- =?us-ascii?Q?n54yfZ06FJLPs+VCd3av2NvbD9ZswmHAwvaBJ8y/aVUv5iobpthIhwRN2UWz?=
- =?us-ascii?Q?tZTvnfSeqw1Xu+xX+loyk36EVwqQ0ov0dLL/EXZoVP7cNFjNNSQxHToXuCiL?=
- =?us-ascii?Q?OH84fSpa63py9l7cAPB2zu5urKqRHVDETnGu4BV//PnO9hS8znSRStmpIB+z?=
- =?us-ascii?Q?D3Xdl8GWY43JbHJ50U3QtKwmcPgKfCM7HLnIm3Dm9iZWmfQTEBAu7vGxHMSX?=
- =?us-ascii?Q?d2Cd1jnX0rCtOdSHszYVxEAitSa9XL2TodLX76OwW8i/4OrKeyUYu9GiG3j8?=
- =?us-ascii?Q?+7txUFu7jy7iErsF4WlWNHJrXbhg9BNqcUdzAhpOpao9tvBK0E/m9Lk98nEn?=
- =?us-ascii?Q?tluEWIajGRUiqKR4M5SQumn2DnL5b4xEY9fSvc8m/EhM3T9H4c6Mq0Xg/qZt?=
- =?us-ascii?Q?2SRwPUAFEOhVXmkI3j59i3Rzdo9EXstLuPr44RcSKr4iuOkP0+7ZblDbxmXT?=
- =?us-ascii?Q?w3bNaq/jMRSztnGFEPz5QcR3nI+0SI3civ8zp3lpskm3NoFktQw/dkNUokUE?=
- =?us-ascii?Q?RtfaG0o1CJ4TZmRLiIpMCSkklAZN+qmFmiPWLXI1nVNClqikPUYSEAMR8bfW?=
- =?us-ascii?Q?Chr7QWjyKR3fFhecyiG5ZEtnP14LnIA4NlZofGCZjf3HVN0WUGOhzBhBeHcb?=
- =?us-ascii?Q?Z1q+F68G6JO9Pg6Oj0yJ39j5lEskkWs=3D?=
-X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 23311936-7040-4c0e-5d74-08da1177d634
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR08MB6969.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Mar 2022 11:32:41.9976
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 
- uzS6x/DBuV2cKlulbtxwl9qSFvLM4SHxdmzURVQmxNKlPGaUaVcyW3IixH803JM7EYt5O6nfUDigC8e9RHi9hw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR08MB6765
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1648556943-00013579-309C9727/0/0 CLEAN NORMAL
+X-TOI-MSGID: 4f6d5c91-cff8-4140-ba46-2a1ffc9d3fe9
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 29 Mar 2022 11:32:47 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 29 Mar 2022 12:29:31 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96257
+ https://lists.openembedded.org/g/openembedded-devel/message/96258
 
-From: Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+- update to v2.2.4
+- switch to meson buildsystem
+- add missing RDEPENDS
 
-Signed-off-by: Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.c=
-om>
-
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
+ .../blueman/0001-Search-for-cython3.patch     | 29 +++++++-----------
+ .../{blueman_2.2.3.bb =3D> blueman_2.2.4.bb}    | 30 +++++++++----------
+ 2 files changed, 26 insertions(+), 33 deletions(-)
+ rename meta-networking/recipes-connectivity/blueman/{blueman_2.2.3.bb =3D=
+> blueman_2.2.4.bb} (69%)
 
- meta-oe/recipes-support/openldap/openldap_2.5.9.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.5.9.bb b/meta-oe/r=
-ecipes-support/openldap/openldap_2.5.9.bb
-index 541a6238a..5ac5660cd 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.5.9.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.5.9.bb
-@@ -203,7 +203,8 @@ do_install:append() {
- INITSCRIPT_PACKAGES =3D "${PN}-slapd"
- INITSCRIPT_NAME:${PN}-slapd =3D "openldap"
- INITSCRIPT_PARAMS:${PN}-slapd =3D "defaults"
--SYSTEMD_SERVICE:${PN}-slapd =3D "hostapd.service"
-+SYSTEMD_PACKAGES =3D "${PN}-slapd"
-+SYSTEMD_SERVICE:${PN}-slapd =3D "slapd.service"
- SYSTEMD_AUTO_ENABLE:${PN}-slapd ?=3D "disable"
+diff --git a/meta-networking/recipes-connectivity/blueman/blueman/0001-Se=
+arch-for-cython3.patch b/meta-networking/recipes-connectivity/blueman/blu=
+eman/0001-Search-for-cython3.patch
+index 269174b2f..913566dce 100644
+--- a/meta-networking/recipes-connectivity/blueman/blueman/0001-Search-fo=
+r-cython3.patch
++++ b/meta-networking/recipes-connectivity/blueman/blueman/0001-Search-fo=
+r-cython3.patch
+@@ -1,31 +1,24 @@
+-From 77db892cdee265e971270c06ca1ffbaeea6449a3 Mon Sep 17 00:00:00 2001
+-From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
+om>
+-Date: Tue, 26 Jun 2018 00:27:40 +0200
+ Subject: [PATCH] Search for cython3
+ MIME-Version: 1.0
+ Content-Type: text/plain; charset=3DUTF-8
+ Content-Transfer-Encoding: 8bit
 =20
- PACKAGES_DYNAMIC +=3D "^${PN}-backends.* ^${PN}-backend-.*"
+-Upstream-Status: Pending
++Upstream-Status: Inappropriate
+=20
+-Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
++Signed-off-by: Markus Volk <f_l_k@gmx.net>
+ ---
+- configure.ac | 2 +-
++ meson.build | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+=20
+-diff --git a/configure.ac b/configure.ac
+-index 727089d1..6b565cdc 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -58,7 +58,7 @@ AC_SUBST([PYGOBJECT_LIBS])
++--- a/module/meson.build        2022-02-10 08:49:35.000000000 +0100
+++++ b/module/meson.build        2022-03-29 12:58:03.456193737 +0200
++@@ -1,4 +1,4 @@
++-cython =3D find_program('cython', required: true)
+++cython =3D find_program('cython3', required: true)
+ =20
+- AC_ARG_VAR([CYTHONEXEC], [Cython compiler])
+- if test "x$CYTHONEXEC" =3D "x"; then
+--   AC_PATH_PROG([CYTHONEXEC],[cython])
+-+   AC_PATH_PROG([CYTHONEXEC],[cython3])
+- fi
+- AC_SUBST([CYTHONEXEC])
+- AC_MSG_CHECKING([for cython executable])
++ blueman_c =3D custom_target(
++     'blueman_c',
++
+ --=20
+ 2.14.3
+=20
+diff --git a/meta-networking/recipes-connectivity/blueman/blueman_2.2.3.b=
+b b/meta-networking/recipes-connectivity/blueman/blueman_2.2.4.bb
+similarity index 69%
+rename from meta-networking/recipes-connectivity/blueman/blueman_2.2.3.bb
+rename to meta-networking/recipes-connectivity/blueman/blueman_2.2.4.bb
+index a16bcf77a..ea06ee67f 100644
+--- a/meta-networking/recipes-connectivity/blueman/blueman_2.2.3.bb
++++ b/meta-networking/recipes-connectivity/blueman/blueman_2.2.4.bb
+@@ -2,22 +2,18 @@ DESCRIPTION =3D "Blueman is a GTK+ Bluetooth Manager"
+ LICENSE =3D "GPL-3.0-only"
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
+504"
+=20
+-DEPENDS =3D "bluez5 python3-pygobject python3-cython-native python3-setu=
+ptools-native intltool-native"
++DEPENDS =3D "gtk+3 glib-2.0 bluez5 python3-pygobject python3-cython-nati=
+ve"
+=20
+-inherit autotools gettext systemd gsettings pkgconfig python3native gtk-=
+icon-cache
++inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon=
+-cache
+=20
+ SRC_URI =3D " \
+     https://github.com/blueman-project/blueman/releases/download/${PV}/b=
+lueman-${PV}.tar.xz \
+     file://0001-Search-for-cython3.patch \
+     file://0002-fix-fail-to-enable-bluetooth.patch \
+ "
+-SRC_URI[sha256sum] =3D "6edd791da6afd8f610ffb08d5138cfcf50e6257ad30efad6=
+86287f3a2be106e9"
++SRC_URI[sha256sum] =3D "55d639feeda0b43b18a659e65985213a54b47dcb1348f3b4=
+effb5238db242602"
+=20
+-EXTRA_OECONF =3D " \
+-    --disable-appindicator \
+-    --disable-runtime-deps-check \
+-    --disable-schemas-compile \
+-"
++EXTRA_OEMESON =3D "-Druntime_deps_check=3Dfalse -Dappindicator=3Dfalse"
+=20
+ SYSTEMD_SERVICE:${PN} =3D "${BPN}-mechanism.service"
+ SYSTEMD_AUTO_ENABLE:${PN} =3D "disable"
+@@ -26,22 +22,25 @@ RRECOMENDS_${PN} +=3D "adwaita-icon-theme"
+ RDEPENDS:${PN} +=3D " \
+     python3-core \
+     python3-dbus \
++    python3-pygobject \
++    python3-terminal \
+     packagegroup-tools-bluetooth \
+ "
+=20
+-PACKAGECONFIG ??=3D "thunar"
+-PACKAGECONFIG[thunar] =3D "--enable-thunar-sendto,--disable-thunar-sendt=
+o"
++PACKAGECONFIG ??=3D " \
++    ${@bb.utils.filter('DISTRO_FEATURES', 'polkit pulseaudio ', d)} \
++    thunar \
++"
++PACKAGECONFIG[thunar] =3D "-Dthunar-sendto=3Dtrue,-Dthunar-sendto=3Dfals=
+e"
++PACKAGECONFIG[pulseaudio] =3D "-Dpulseaudio=3Dtrue,-Dpulseaudio=3Dfalse"
++PACKAGECONFIG[polkit] =3D "-Dpolicykit=3Dtrue,-Dpolicykit=3Dfalse"
+=20
+ FILES:${PN} +=3D " \
+-    ${datadir}/dbus-1 \
+-    ${datadir}/Thunar \
++    ${datadir} \
+     ${systemd_user_unitdir} \
+-    ${exec_prefix}${systemd_system_unitdir} \
+     ${PYTHON_SITEPACKAGES_DIR} \
+ "
+=20
+-FILES:${PN}-staticdev +=3D "${PYTHON_SITEPACKAGES_DIR}/_blueman.a"
+-
+ # In code, path to python is a variable that is replaced with path to na=
+tive version of it
+ # during the configure stage, e.g ../recipe-sysroot-native/usr/bin/pytho=
+n3-native/python3.
+ # Replace it with #!/usr/bin/env python3
+@@ -55,3 +54,4 @@ do_install:append() {
+                                               ${D}${bindir}/blueman-serv=
+ices \
+                                               ${D}${bindir}/blueman-tray
+ }
++
 --=20
-2.30.2
+2.25.1
 
 
