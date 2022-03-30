@@ -2,16 +2,16 @@ Return-Path: <crg7475@mailbox.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E5E7C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D913C433F5
 	for <webhook@archiver.kernel.org>; Wed, 30 Mar 2022 19:11:33 +0000 (UTC)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- by mx.groups.io with SMTP id smtpd.web12.2366.1648667492203576084
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ by mx.groups.io with SMTP id smtpd.web12.2364.1648667491761100140
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Mar 2022 12:11:33 -0700
+ Wed, 30 Mar 2022 12:11:32 -0700
 Authentication-Results: mx.groups.io;
  dkim=fail reason="body hash did not verify" header.i=@mailbox.org
- header.s=mail20150812 header.b=b/OjLYPD;
- spf=pass (domain: mailbox.org, ip: 80.241.56.171,
+ header.s=mail20150812 header.b=V7S+OjqZ;
+ spf=pass (domain: mailbox.org, ip: 80.241.56.152,
  mailfrom: crg7475@mailbox.org)
 Received: from smtp102.mailbox.org (smtp102.mailbox.org
  [IPv6:2001:67c:2050:105:465:1:3:0])
@@ -19,9 +19,9 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org
 	 key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits)
  server-digest SHA256)
 	(No client certificate requested)
-	by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4KTGJ22h6fz9sSF
+	by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4KTGJ05Hvtz9sW6
 	for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Mar 2022 21:11:30 +0200 (CEST)
+ Wed, 30 Mar 2022 21:11:28 +0200 (CEST)
 From: Carlos Rafael Giani <crg7475@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812;
@@ -30,16 +30,16 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
 	 to:to:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Fnmv8Pwnz/TuMISrr3bcwXcd6hmPXLhDHPs7DL991bQ=;
-	b=b/OjLYPD2aZLvgUPpVoERqyRYCjJXCsG+hLrVbl+41sZHNJrv/CUsoLrqLhXSIEnFUuPsM
-	IJVETab9FAUAeODuipUHjwubX14vjr0VN8OsHO73igNDtSlNtleYq4KpOWudz89UoJ9f+1
-	kg+Rco3on0W5HkoLCl4a3VIYCLotQvJ3D196dDd8j/zZheTJbDJ56AxY46nDs9jXFYocBz
-	p3tXh7LJoIFB2KKbcfqPSMMOWAj1LN3597+ozY6VYyZFDULU2QmCZAjGWTQuhM0MxYgsE3
-	9z9yUnm65QCUpo1GLOq0J3U8x+5gmv2wQZrBguNUsAC9t34sHIF+sjI+EPNhCA==
+	bh=HKCoJvtJj1GJdvh9vLwKT9GzvAbBQhcXevez++aFa3A=;
+	b=V7S+OjqZXiEgDwJGzMyrWBVZOcXvompjevIy1SGLERzYu61R08EzLBulCxhiq01eCgqKSE
+	XaHDM/YYtsiK+3SoELW43d/3UpX2/Z1SRWCWVvcvKLB9Tdog3pvzEcYF2i6/lf6Txw7a3Z
+	yzBFfX4eDF61n97r49XUfNwkBduq+br9dJSPdJD0XIaEJqiwbRSRt/LaSheX6RNxfHCyAU
+	DXGjFNvdu5SD1d38eGCyuNPm2Yx5pKwn1HSl5QUAjRHOXN/Uyppa91n3D15yF8ceEh2gJi
+	JMiVvrK/39ofeu1qt+BjFHEHLTdJSaVs+gyNtyJkFJoYwdntWTQCyjz+7gErqA==
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] pipewire: Upgrade to version 0.3.49
-Date: Wed, 30 Mar 2022 21:11:14 +0200
-Message-Id: <20220330191115.112414-2-crg7475@mailbox.org>
+Subject: [meta-multimedia][PATCH] wireplumber: Upgrade to version 0.4.9
+Date: Wed, 30 Mar 2022 21:11:15 +0200
+Message-Id: <20220330191115.112414-3-crg7475@mailbox.org>
 In-Reply-To: <20220330191115.112414-1-crg7475@mailbox.org>
 References: <20220330191115.112414-1-crg7475@mailbox.org>
 MIME-Version: 1.0
@@ -49,142 +49,354 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 30 Mar 2022 19:11:33 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96270
+ https://lists.openembedded.org/g/openembedded-devel/message/96269
 
-ChangeLogs can be found here:
+ChangeLog can be found here:
 
-https://gitlab.freedesktop.org/pipewire/pipewire/-/releases/0.3.46
-https://gitlab.freedesktop.org/pipewire/pipewire/-/releases/0.3.47
-https://gitlab.freedesktop.org/pipewire/pipewire/-/releases/0.3.48
-https://gitlab.freedesktop.org/pipewire/pipewire/-/releases/0.3.49
+https://gitlab.freedesktop.org/pipewire/wireplumber/-/releases/0.4.9
 
-Main recipe change is about the RTKit module, which was deprecated and
-replaced by the new RT module. The recipe disables the legacy rtkit
-module (which exists for backwards compatibility with older existing
-PipeWire installations that use rtkit in their configuration files).
+Remove backported fix that is already included in this version.
 
 Signed-off-by: Carlos Rafael Giani <crg7475@mailbox.org>
 ---
- ...-to-enable-disable-legacy-RTKit-modu.patch | 44 +++++++++++++++++++
- ...{pipewire_0.3.45.bb =3D> pipewire_0.3.49.bb} | 15 +++++--
- 2 files changed, 55 insertions(+), 4 deletions(-)
- create mode 100644 meta-multimedia/recipes-multimedia/pipewire/files/000=
-1-meson-Add-option-to-enable-disable-legacy-RTKit-modu.patch
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.45.bb =3D=
-> pipewire_0.3.49.bb} (96%)
+ ...list-APIs-for-different-architecture.patch | 217 ------------------
+ ...eplumber_0.4.8.bb =3D> wireplumber_0.4.9.bb} |   5 +-
+ 2 files changed, 2 insertions(+), 220 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-multimedia/wireplumber/files/=
+0001-spa-json-fix-va_list-APIs-for-different-architecture.patch
+ rename meta-multimedia/recipes-multimedia/wireplumber/{wireplumber_0.4.8=
+.bb =3D> wireplumber_0.4.9.bb} (97%)
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/files/0001-meson=
--Add-option-to-enable-disable-legacy-RTKit-modu.patch b/meta-multimedia/r=
-ecipes-multimedia/pipewire/files/0001-meson-Add-option-to-enable-disable-=
-legacy-RTKit-modu.patch
-new file mode 100644
-index 000000000..61bcdb3dd
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/pipewire/files/0001-meson-Add-op=
-tion-to-enable-disable-legacy-RTKit-modu.patch
-@@ -0,0 +1,44 @@
-+From b311f9e75f13205fd0738f7e89fd2062b9e7b237 Mon Sep 17 00:00:00 2001
-+From: Carlos Rafael Giani <crg7475@mailbox.org>
-+Date: Wed, 30 Mar 2022 19:44:38 +0200
-+Subject: [PATCH] meson: Add option to enable/disable legacy RTKit module
-+
-+The RTKit module is being replaced by the RT module. Currently, it is
-+always built if D-Bus is present. For packagers, it can be beneficial to
-+be able to disable the legacy module. Add a Meson option to allow for
-+exactly that. Make it enabled by default to not change default behavior.
-+
-+Upstream-Status: Submitted [https://gitlab.freedesktop.org/pipewire/pipe=
-wire/-/merge_requests/1204]
-+---
-+ meson_options.txt       | 4 ++++
-+ src/modules/meson.build | 2 +-
-+ 2 files changed, 5 insertions(+), 1 deletion(-)
-+
-+diff --git a/meson_options.txt b/meson_options.txt
-+index 49d5b2203..2687bfe7e 100644
-+--- a/meson_options.txt
-++++ b/meson_options.txt
-+@@ -237,3 +237,7 @@ option('libcanberra',
-+        description: 'Enable code that depends on libcanberra',
-+        type: 'feature',
-+        value: 'auto')
-++option('legacy-rtkit',
-++       description: 'Build legacy rtkit module',
-++       type: 'boolean',
-++       value: 'true')
-+diff --git a/src/modules/meson.build b/src/modules/meson.build
-+index ee724bf52..2d26cc459 100644
-+--- a/src/modules/meson.build
-++++ b/src/modules/meson.build
-+@@ -139,7 +139,7 @@ pipewire_module_rt =3D shared_library('pipewire-modu=
-le-rt', [ 'module-rt.c' ],
-+   dependencies : [dbus_dep, mathlib, dl_lib, pipewire_dep],
-+ )
-+=20
-+-build_module_rtkit =3D dbus_dep.found()
-++build_module_rtkit =3D dbus_dep.found() and (get_option('legacy-rtkit')=
- =3D=3D true)
-+ if build_module_rtkit
-+ # TODO: This serves as a temporary alias to prevent breaking existing s=
-etups
-+ #       while `module-rtkit` is being migrated to `module-rt`
-+--=20
-+2.32.0
-+
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.45.=
-bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.49.bb
-similarity index 96%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.45.b=
-b
-rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.49.bb
-index 6ba312484..b821f4400 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.45.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.49.bb
-@@ -13,8 +13,10 @@ LIC_FILES_CHKSUM =3D " \
+diff --git a/meta-multimedia/recipes-multimedia/wireplumber/files/0001-sp=
+a-json-fix-va_list-APIs-for-different-architecture.patch b/meta-multimedi=
+a/recipes-multimedia/wireplumber/files/0001-spa-json-fix-va_list-APIs-for=
+-different-architecture.patch
+deleted file mode 100644
+index 75c7b850f..000000000
+--- a/meta-multimedia/recipes-multimedia/wireplumber/files/0001-spa-json-=
+fix-va_list-APIs-for-different-architecture.patch
++++ /dev/null
+@@ -1,217 +0,0 @@
+-From e429db7e8c266045aee25e153fb2308bd61fe233 Mon Sep 17 00:00:00 2001
+-From: Julian Bouzas <julian.bouzas@collabora.com>
+-Date: Wed, 9 Feb 2022 07:59:59 -0500
+-Subject: [PATCH] spa-json: fix va_list APIs for different architectures
+-
+-The va_list type might not always be a pointer in some architectures, so=
+ we
+-cannot guarantee it will be modified after using it for a second time in=
+ another
+-function. This fixes the issue by using macros so args does not get copi=
+ed, and
+-always gets modified when using it more than once.
+-
+-Upstream-Status: Backport [https://gitlab.freedesktop.org/pipewire/wirep=
+lumber/-/commit/e429db7e8c266045aee25e153fb2308bd61fe233]
+-
+-Signed-off-by: Peter Bergin <peter@berginkonsult.se>
+-
+----
+- lib/wp/spa-json.c | 156 ++++++++++++++++++++++++----------------------
+- 1 file changed, 80 insertions(+), 76 deletions(-)
+-
+-diff --git a/lib/wp/spa-json.c b/lib/wp/spa-json.c
+-index f14f395..c5e59a3 100644
+---- a/lib/wp/spa-json.c
+-+++ b/lib/wp/spa-json.c
+-@@ -363,33 +363,33 @@ wp_spa_json_new_string (const gchar *value)
+-       wp_spa_json_builder_new_formatted ("\"%s\"", value));
+- }
+-=20
+--static void
+--wp_spa_json_builder_add_value (WpSpaJsonBuilder *self, const gchar *fmt=
+,
+--    va_list args)
+--{
+--  switch (*fmt) {
+--    case 'n':
+--      wp_spa_json_builder_add_null (self);
+--      break;
+--    case 'b':
+--      wp_spa_json_builder_add_boolean (self, va_arg(args, gboolean));
+--      break;
+--    case 'i':
+--      wp_spa_json_builder_add_int (self, va_arg(args, gint));
+--      break;
+--    case 'f':
+--      wp_spa_json_builder_add_float (self, (float)va_arg(args, double))=
+;
+--      break;
+--    case 's':
+--      wp_spa_json_builder_add_string (self, va_arg(args, const gchar *)=
+);
+--      break;
+--    case 'J':
+--      wp_spa_json_builder_add_json (self, va_arg(args, WpSpaJson *));
+--      break;
+--    default:
+--      return;
+--  }
+--}
+-+/* Args is not a pointer in some architectures, so this needs to be a m=
+acro to
+-+ * avoid args being copied */
+-+#define wp_spa_json_builder_add_value(self,fmt,args)                   =
+        \
+-+do {                                                                   =
+        \
+-+  switch (*fmt) {                                                      =
+        \
+-+    case 'n':                                                          =
+        \
+-+      wp_spa_json_builder_add_null (self);                             =
+        \
+-+      break;                                                           =
+        \
+-+    case 'b':                                                          =
+        \
+-+      wp_spa_json_builder_add_boolean (self, va_arg(args, gboolean));  =
+        \
+-+      break;                                                           =
+        \
+-+    case 'i':                                                          =
+        \
+-+      wp_spa_json_builder_add_int (self, va_arg(args, gint));          =
+        \
+-+      break;                                                           =
+        \
+-+    case 'f':                                                          =
+        \
+-+      wp_spa_json_builder_add_float (self, (float)va_arg(args, double))=
+;       \
+-+      break;                                                           =
+        \
+-+    case 's':                                                          =
+        \
+-+      wp_spa_json_builder_add_string (self, va_arg(args, const gchar *)=
+);      \
+-+      break;                                                           =
+        \
+-+    case 'J':                                                          =
+        \
+-+      wp_spa_json_builder_add_json (self, va_arg(args, WpSpaJson *));  =
+        \
+-+      break;                                                           =
+        \
+-+    default:                                                           =
+        \
+-+      break;                                                           =
+        \
+-+  }								               \
+-+} while(false)
+-=20
+- /*!
+-  * \brief Creates a spa json of type array
+-@@ -724,48 +724,46 @@ wp_spa_json_parse_object_valist (WpSpaJson *self, =
+va_list args)
+-   return res;
+- }
+-=20
+--static gboolean
+--wp_spa_json_parse_value (const gchar *data, int len, const gchar *fmt,
+--    va_list args)
+--{
+--  switch (*fmt) {
+--    case 'n':
+--      if (!spa_json_is_null (data, len))
+--        return FALSE;
+--      break;
+--    case 'b':
+--      if (!wp_spa_json_parse_boolean_internal (data, len,
+--          va_arg(args, gboolean *)))
+--        return FALSE;
+--      break;
+--    case 'i':
+--      if (spa_json_parse_int (data, len, va_arg(args, gint *)) < 0)
+--        return FALSE;
+--      break;
+--    case 'f':
+--      if (spa_json_parse_float (data, len,
+--          (float *)va_arg(args, double *)) < 0)
+--        return FALSE;
+--      break;
+--    case 's': {
+--      gchar *str =3D wp_spa_json_parse_string_internal (data, len);
+--      if (!str)
+--        return FALSE;
+--      *va_arg(args, gchar **) =3D str;
+--      break;
+--    }
+--    case 'J': {
+--      WpSpaJson *j =3D wp_spa_json_new (data, len);
+--      if (!j)
+--        return FALSE;
+--      *va_arg(args, WpSpaJson **) =3D j;
+--      break;
+--    }
+--    default:
+--      return FALSE;
+--  }
+--  return TRUE;
+--}
+-+/* Args is not a pointer in some architectures, so this needs to be a m=
+acro to
+-+ * avoid args being copied */
+-+#define wp_spa_json_parse_value(data,len,fmt,args)                     =
+        \
+-+do {                                                                   =
+        \
+-+  switch (*fmt) {                                                      =
+        \
+-+    case 'n':                                                          =
+        \
+-+      if (!spa_json_is_null (data, len))                               =
+        \
+-+        return FALSE;                                                  =
+        \
+-+      break;                                                           =
+        \
+-+    case 'b':                                                          =
+        \
+-+      if (!wp_spa_json_parse_boolean_internal (data, len,              =
+        \
+-+          va_arg(args, gboolean *)))                                   =
+        \
+-+        return FALSE;                                                  =
+        \
+-+      break;                                                           =
+        \
+-+    case 'i':                                                          =
+        \
+-+      if (spa_json_parse_int (data, len, va_arg(args, gint *)) < 0)    =
+        \
+-+        return FALSE;                                                  =
+        \
+-+      break;                                                           =
+        \
+-+    case 'f':                                                          =
+        \
+-+      if (spa_json_parse_float (data, len, va_arg(args, float *)) < 0) =
+        \
+-+        return FALSE;                                                  =
+        \
+-+      break;                                                           =
+        \
+-+    case 's': {                                                        =
+        \
+-+      gchar *str =3D wp_spa_json_parse_string_internal (data, len);    =
+          \
+-+      if (!str)                                                        =
+        \
+-+        return FALSE;                                                  =
+        \
+-+      *va_arg(args, gchar **) =3D str;                                 =
+          \
+-+      break;                                                           =
+        \
+-+    }                                                                  =
+        \
+-+    case 'J': {                                                        =
+        \
+-+      WpSpaJson *j =3D wp_spa_json_new (data, len);                    =
+          \
+-+      if (!j)                                                          =
+        \
+-+        return FALSE;                                                  =
+        \
+-+      *va_arg(args, WpSpaJson **) =3D j;                               =
+          \
+-+      break;                                                           =
+        \
+-+    }                                                                  =
+        \
+-+    default:                                                           =
+        \
+-+      return FALSE;                                                    =
+        \
+-+  }                                                                    =
+        \
+-+} while(false)
+-=20
+- /*!
+-  * \brief Parses the object property values of a spa json object
+-@@ -827,8 +825,7 @@ wp_spa_json_object_get_valist (WpSpaJson *self, va_l=
+ist args)
+-     value =3D g_value_get_boxed (&item);
+-=20
+-     if (g_strcmp0 (key_str, lookup_key) =3D=3D 0) {
+--      if (!wp_spa_json_parse_value (value->data, value->size, lookup_fm=
+t, args))
+--        return FALSE;
+-+      wp_spa_json_parse_value (value->data, value->size, lookup_fmt, ar=
+gs);
+-       lookup_key =3D va_arg(args, const gchar *);
+-       if (!lookup_key)
+-         return TRUE;
+-@@ -1366,9 +1363,12 @@ gboolean
+- wp_spa_json_parser_get_value (WpSpaJsonParser *self, const gchar *fmt,
+-     va_list args)
+- {
+--  return wp_spa_json_parser_advance (self) &&
+--      wp_spa_json_parse_value (self->curr.cur,
+--          self->curr.end - self->curr.cur, fmt, args);
+-+  if (wp_spa_json_parser_advance (self)) {
+-+    wp_spa_json_parse_value (self->curr.cur, self->curr.end - self->cur=
+r.cur,
+-+        fmt, args);
+-+    return TRUE;
+-+  }
+-+  return FALSE;
+- }
+-=20
+- /*!
+-@@ -1419,9 +1419,13 @@ wp_spa_json_parser_get_valist (WpSpaJsonParser *s=
+elf, va_list args)
+-     if (!format)
+-       return TRUE;
+-=20
+--    /* parse value */
+--    if (!wp_spa_json_parser_get_value (self, format, args))
+-+    /* advance */
+-+    if (!wp_spa_json_parser_advance (self))
+-       return FALSE;
+-+
+-+    /* parse value */
+-+    wp_spa_json_parse_value (self->curr.cur, self->curr.end - self->cur=
+r.cur,
+-+        format, args);
+-   } while (TRUE);
+-=20
+-   return FALSE;
+---=20
+-2.32.0
+-
+diff --git a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0=
+.4.8.bb b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.=
+9.bb
+similarity index 97%
+rename from meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.=
+4.8.bb
+rename to meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.=
+9.bb
+index ed7417c28..0a2ca3b6f 100644
+--- a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.8.bb
++++ b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.9.bb
+@@ -11,11 +11,10 @@ DEPENDS =3D "glib-2.0 glib-2.0-native lua pipewire \
+     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data"=
+, "python3-native python3-lxml-native doxygen-native", "", d)} \
+ "
 =20
- DEPENDS =3D "dbus ncurses"
-=20
--SRCREV =3D "bdd407fe66cc9e46d4bc4dcc989d50679000482b"
--SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
-master;protocol=3Dhttps"
-+SRCREV =3D "075e7b266876802eab0077afd13ea8e1cee5e1fd"
-+SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
-master;protocol=3Dhttps \
-+           file://0001-meson-Add-option-to-enable-disable-legacy-RTKit-m=
-odu.patch \
+-SRCREV =3D "e14bb72dcc85e2130d0ea96768e5ae3b375a041e"
++SRCREV =3D "8b97b40c4467951fbd4181afb47e4175361365a6"
+ SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/wireplumber.git;branc=
+h=3Dmaster;protocol=3Dhttps \
+            file://90-OE-disable-session-dbus-dependent-features.lua \
+-           file://0001-spa-json-fix-va_list-APIs-for-different-architect=
+ure.patch \
+-          "
 +           "
 =20
  S =3D "${WORKDIR}/git"
-=20
-@@ -49,6 +51,10 @@ SYSTEMD_PACKAGES =3D "${PN}"
- #
- # AptX and LDAC are not available in OE. Currently, neither
- # are lv2 and ROC.
-+#
-+# The RTKit module is deprecated in favor of the newer RT module.
-+# It still exists for legacy setups that still include it in
-+# their PipeWire configuration files.
- EXTRA_OEMESON +=3D " \
-     -Devl=3Ddisabled \
-     -Dtests=3Ddisabled \
-@@ -62,6 +68,7 @@ EXTRA_OEMESON +=3D " \
-     -Droc=3Ddisabled \
-     -Dbluez5-codec-aptx=3Ddisabled \
-     -Dbluez5-codec-ldac=3Ddisabled \
-+    -Dlegacy-rtkit=3Dfalse \
- "
-=20
- PACKAGECONFIG ??=3D "\
-@@ -306,8 +313,8 @@ FILES:${PN}-spa-tools =3D " \
- FILES:${PN}-modules =3D ""
- RRECOMMENDS:${PN}-modules +=3D "${PN}-modules-meta"
-=20
--CONFFILES:${PN}-modules-rtkit =3D "${datadir}/pipewire/client-rt.conf"
--FILES:${PN}-modules-rtkit +=3D " \
-+CONFFILES:${PN}-modules-rt =3D "${datadir}/pipewire/client-rt.conf"
-+FILES:${PN}-modules-rt +=3D " \
-     ${datadir}/pipewire/client-rt.conf \
-     "
 =20
 --=20
 2.32.0
