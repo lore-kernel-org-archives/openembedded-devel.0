@@ -2,240 +2,274 @@ Return-Path: <kai.kang@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8282EC433F5
-	for <webhook@archiver.kernel.org>; Wed, 30 Mar 2022 09:39:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F097C433EF
+	for <webhook@archiver.kernel.org>; Wed, 30 Mar 2022 09:39:40 +0000 (UTC)
 Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web10.5192.1648633178680888368
+ by mx.groups.io with SMTP id smtpd.web11.5302.1648633179535032644
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Mar 2022 02:39:38 -0700
+ Wed, 30 Mar 2022 02:39:39 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=permerror,
  err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
  domain name (domain: windriver.com, ip: 147.11.3.146,
  mailfrom: kai.kang@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 22U9dbOT026171
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 22U9db0Z026170
+	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
  Wed, 30 Mar 2022 02:39:37 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 22U9daUk024268
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 30 Mar 2022 02:39:37 -0700 (PDT)
 Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Wed, 30 Mar 2022 02:39:37 -0700
+ 15.1.2242.12; Wed, 30 Mar 2022 02:39:36 -0700
 Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
  ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27; Wed, 30 Mar 2022 02:39:37 -0700
+ 15.1.2308.27; Wed, 30 Mar 2022 02:39:36 -0700
 Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Wed, 30 Mar 2022 02:39:36 -0700
+ 15.1.2242.12 via Frontend Transport; Wed, 30 Mar 2022 02:39:35 -0700
 From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH 2/2] python3-wxgtk4: add recipe
-Date: Wed, 30 Mar 2022 17:39:33 +0800
-Message-ID: <20220330093933.12701-2-kai.kang@windriver.com>
+Subject: [meta-oe][PATCH 1/2] wxwidgets: 3.1.4 -> 3.1.5
+Date: Wed, 30 Mar 2022 17:39:32 +0800
+Message-ID: <20220330093933.12701-1-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220330093933.12701-1-kai.kang@windriver.com>
-References: <20220330093933.12701-1-kai.kang@windriver.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 30 Mar 2022 09:39:39 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 30 Mar 2022 09:39:40 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96266
+ https://lists.openembedded.org/g/openembedded-devel/message/96267
 
 From: Kai Kang <kai.kang@windriver.com>
 
-Add recipe for python3-wxgtk4 which is a python3 interface to the
-wxWidgets Cross-platform C++ GUI toolkit.
-
-Add patches to
-* add back build options for oe
-* fixup build scripts for cross compile
-* fix sip oevrride functions compile errors
+* correct LICENSE name which should be 'WXWindows' according to
+  https://www.wxwidgets.org/about/licence/
+  remove the 'wxWidgets' license file and use the one in oe-core
+* native wx-conf from wxwidgets is required by python3-wxgtk4, so extend
+  wxwidgets-native and remove packageconfig opengl for -native.
+* add patch to correct library names
+* add packageconfig 'curl'
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../add-back-option-build-base.patch          | 22 ++++++++
- .../sip-fix-override-functions.patch          | 35 ++++++++++++
- .../wxgtk-fixup-build-scripts.patch           | 53 +++++++++++++++++++
- .../python3-wxgtk4/python3-wxgtk4_4.1.1.bb    | 32 +++++++++++
- 4 files changed, 142 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/add-back-option-build-base.patch
- create mode 100644 meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/sip-fix-override-functions.patch
- create mode 100644 meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/wxgtk-fixup-build-scripts.patch
- create mode 100644 meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.1.1.bb
+ meta-oe/licenses/wxWidgets                    | 54 -------------------
+ .../wxwidgets/fix-libdir-for-multilib.patch   | 10 ++--
+ .../not-append-system-name-to-lib-name.patch  | 28 ++++++++++
+ .../{wxwidgets_git.bb => wxwidgets_3.1.5.bb}  | 15 ++++--
+ 4 files changed, 43 insertions(+), 64 deletions(-)
+ delete mode 100644 meta-oe/licenses/wxWidgets
+ create mode 100644 meta-oe/recipes-extended/wxwidgets/wxwidgets/not-append-system-name-to-lib-name.patch
+ rename meta-oe/recipes-extended/wxwidgets/{wxwidgets_git.bb => wxwidgets_3.1.5.bb} (90%)
 
-diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/add-back-option-build-base.patch b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/add-back-option-build-base.patch
+diff --git a/meta-oe/licenses/wxWidgets b/meta-oe/licenses/wxWidgets
+deleted file mode 100644
+index 0f6b9d6a8..000000000
+--- a/meta-oe/licenses/wxWidgets
++++ /dev/null
+@@ -1,54 +0,0 @@
+-                wxWindows Library Licence, Version 3.1
+-                ======================================
+-
+-  Copyright (c) 1998-2005 Julian Smart, Robert Roebling et al
+-
+-  Everyone is permitted to copy and distribute verbatim copies
+-  of this licence document, but changing it is not allowed.
+-
+-                       WXWINDOWS LIBRARY LICENCE
+-     TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+-
+-  This library is free software; you can redistribute it and/or modify it
+-  under the terms of the GNU Library General Public Licence as published by
+-  the Free Software Foundation; either version 2 of the Licence, or (at
+-  your option) any later version.
+-
+-  This library is distributed in the hope that it will be useful, but
+-  WITHOUT ANY WARRANTY; without even the implied warranty of
+-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library
+-  General Public Licence for more details.
+-
+-  You should have received a copy of the GNU Library General Public Licence
+-  along with this software, usually in a file named COPYING.LIB.  If not,
+-  write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+-  Boston, MA 02110-1301 USA.
+-
+-  EXCEPTION NOTICE
+-
+-  1. As a special exception, the copyright holders of this library give
+-  permission for additional uses of the text contained in this release of
+-  the library as licenced under the wxWindows Library Licence, applying
+-  either version 3.1 of the Licence, or (at your option) any later version of
+-  the Licence as published by the copyright holders of version
+-  3.1 of the Licence document.
+-
+-  2. The exception is that you may use, copy, link, modify and distribute
+-  under your own terms, binary object code versions of works based
+-  on the Library.
+-
+-  3. If you copy code from files distributed under the terms of the GNU
+-  General Public Licence or the GNU Library General Public Licence into a
+-  copy of this library, as this licence permits, the exception does not
+-  apply to the code that you add in this way.  To avoid misleading anyone as
+-  to the status of such modified files, you must delete this exception
+-  notice from such code and/or adjust the licensing conditions notice
+-  accordingly.
+-
+-  4. If you write modifications of your own for this library, it is your
+-  choice whether to permit this exception to apply to your modifications.
+-  If you do not wish that, you must delete the exception notice from such
+-  code and/or adjust the licensing conditions notice accordingly.
+-
+-
+-
+diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets/fix-libdir-for-multilib.patch b/meta-oe/recipes-extended/wxwidgets/wxwidgets/fix-libdir-for-multilib.patch
+index 637e54b2b..555ed47ad 100644
+--- a/meta-oe/recipes-extended/wxwidgets/wxwidgets/fix-libdir-for-multilib.patch
++++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets/fix-libdir-for-multilib.patch
+@@ -12,10 +12,10 @@ Signed-off-by: Kai Kang <kai.kang@windriver.com>
+  4 files changed, 8 insertions(+), 8 deletions(-)
+ 
+ diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index e30d3db934..8f93c57108 100644
++index 4063020552..253d415210 100644
+ --- a/CMakeLists.txt
+ +++ b/CMakeLists.txt
+-@@ -37,7 +37,7 @@ include(build/cmake/policies.cmake NO_POLICY_SCOPE)
++@@ -43,7 +43,7 @@ include(build/cmake/policies.cmake NO_POLICY_SCOPE)
+  # Initialize variables for quick access to wx root dir in sub dirs
+  set(wxSOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+  set(wxBINARY_DIR ${CMAKE_BINARY_DIR})
+@@ -25,10 +25,10 @@ index e30d3db934..8f93c57108 100644
+  # parse the version number from wx/version.h and include in wxMAJOR_VERSION and wxMINOR_VERSION
+  file(READ include/wx/version.h WX_VERSION_H_CONTENTS)
+ diff --git a/build/cmake/config.cmake b/build/cmake/config.cmake
+-index 6978cc2725..ed16ee5635 100644
++index 91d11acba2..f361d50a27 100644
+ --- a/build/cmake/config.cmake
+ +++ b/build/cmake/config.cmake
+-@@ -52,7 +52,7 @@ function(wx_write_config_inplace)
++@@ -57,7 +57,7 @@ function(wx_write_config_inplace)
+      execute_process(
+          COMMAND
+          ${CMAKE_COMMAND} -E create_symlink
+@@ -53,7 +53,7 @@ index c33dd3946c..51e47e05b3 100644
+ +        RUNTIME_OUTPUT_DIRECTORY "${wxOUTPUT_DIR}"
+          )
+  
+-     if(MSVC)
++     if(wxBUILD_PIC)
+ diff --git a/build/cmake/install.cmake b/build/cmake/install.cmake
+ index 968dff859e..c850c51844 100644
+ --- a/build/cmake/install.cmake
+diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets/not-append-system-name-to-lib-name.patch b/meta-oe/recipes-extended/wxwidgets/wxwidgets/not-append-system-name-to-lib-name.patch
 new file mode 100644
-index 000000000..a46f3f870
+index 000000000..ef6963375
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/add-back-option-build-base.patch
-@@ -0,0 +1,22 @@
-+Add back default user options for cross build.
++++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets/not-append-system-name-to-lib-name.patch
+@@ -0,0 +1,28 @@
++It appends system name to library names for cross compile. For example, the
++library name is libwx_baseu-3.1-Linux.so rather than libwx_baseu-3.1.so. It is
++not appropriate for oe.
 +
-+Upstream-Status: Pending [oe specific]
++Upsteam-Status: Pending [oe specific]
 +
 +Signed-off-by: Kai Kang <kai.kang@windriver.com>
 +---
-+ setup.py | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ build/cmake/functions.cmake | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
 +
-+diff --git a/setup.py b/setup.py
-+index a215da7..dccfeb3 100644
-+--- a/setup.py
-++++ b/setup.py
-+@@ -105,7 +105,7 @@ class wx_build(orig_build):
-+     Delegate to build.py for doing the actual build, (including wxWidgets)
-+     instead of letting distutils do it all.
-+     """
-+-    user_options = [
-++    user_options = orig_build.user_options + [
-+         ('skip-build', None, 'skip building the C/C++ code (assumes it has already been done)'),
-+         ]
-+     boolean_options = ['skip-build']
-diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/sip-fix-override-functions.patch b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/sip-fix-override-functions.patch
-new file mode 100644
-index 000000000..51b9a462b
---- /dev/null
-+++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/sip-fix-override-functions.patch
-@@ -0,0 +1,35 @@
-+It fails to compile with errors:
-+
-+| ../../../../sip/cpp/sip_gridwxGridEvent.cpp:35:9: error: 'int sipwxGridEvent::GetRow()'
-+  marked 'override', but does not override
-+|    35 |     int GetRow() SIP_OVERRIDE;
-+|       |         ^~~~~~
-+| ../../../../sip/cpp/sip_gridwxGridEvent.cpp:36:9: error: 'int sipwxGridEvent::GetCol()'
-+  marked 'override', but does not over      ride
-+|    36 |     int GetCol() SIP_OVERRIDE;
-+|       |         ^~~~~~
-+
-+Make these functions non-override.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+ sip/cpp/sip_gridwxGridEvent.cpp | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/sip/cpp/sip_gridwxGridEvent.cpp b/sip/cpp/sip_gridwxGridEvent.cpp
-+index 0830b677..314aec94 100644
-+--- a/sip/cpp/sip_gridwxGridEvent.cpp
-++++ b/sip/cpp/sip_gridwxGridEvent.cpp
-+@@ -32,8 +32,8 @@ public:
-+      * this class.
-+      */
-+ protected:
-+-    int GetRow() SIP_OVERRIDE;
-+-    int GetCol() SIP_OVERRIDE;
-++    int GetRow() ;
-++    int GetCol() ;
-+      ::wxEvent* Clone() const SIP_OVERRIDE;
-+      ::wxEventCategory GetEventCategory() const SIP_OVERRIDE;
++diff --git a/build/cmake/functions.cmake b/build/cmake/functions.cmake
++index 53cd6a1ace..95efa17fe4 100644
++--- a/build/cmake/functions.cmake
+++++ b/build/cmake/functions.cmake
++@@ -211,9 +211,9 @@ function(wx_set_target_properties target_name is_base)
++         endif()
++     else()
++         set(cross_target "")
++-        if (CMAKE_CROSSCOMPILING)
++-            set(cross_target "-${CMAKE_SYSTEM_NAME}")
++-        endif ()
+++        #if (CMAKE_CROSSCOMPILING)
+++        #    set(cross_target "-${CMAKE_SYSTEM_NAME}")
+++        #endif ()
 + 
-diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/wxgtk-fixup-build-scripts.patch b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/wxgtk-fixup-build-scripts.patch
-new file mode 100644
-index 000000000..0d65ebb59
---- /dev/null
-+++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/wxgtk-fixup-build-scripts.patch
-@@ -0,0 +1,53 @@
-+Fix issues in build scripts:
-+
-+* remove hardcode lib path from buildtools/config.py which is not suitable for
-+  cross build
-+* only build target 'build_py' in setup.py
-+* do not override self.install_lib with self.install_platlib which causes
-+  package issue when multilib is enabled.
-+
-+Upstream-Status: Pending [cross build specific]
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+ buildtools/config.py | 4 ++--
-+ setup.py             | 4 ++--
-+ 2 files changed, 4 insertions(+), 4 deletions(-)
-+
-+diff --git a/buildtools/config.py b/buildtools/config.py
-+index c837e5d..d426005 100644
-+--- a/buildtools/config.py
-++++ b/buildtools/config.py
-+@@ -312,8 +312,8 @@ class Configuration(object):
-+                 # wx-config doesn't output that for some reason.  For now, just
-+                 # add it unconditionally but we should really check if the lib is
-+                 # really found there or wx-config should be fixed.
-+-                if self.WXPORT != 'msw':
-+-                    self.libdirs.append("/usr/X11R6/lib")
-++                #if self.WXPORT != 'msw':
-++                #    self.libdirs.append("/usr/X11R6/lib")
-+ 
-+             # Move the various -I, -D, etc. flags we got from the config scripts
-+             # into the distutils lists.
-+diff --git a/setup.py b/setup.py
-+index 64bec4b..fb29253 100644
-+--- a/setup.py
-++++ b/setup.py
-+@@ -130,7 +130,7 @@ class wx_build(orig_build):
-+                 'message and the wxWidgets and Phoenix build steps in the future.\n')
-+ 
-+             # Use the same Python that is running this script.
-+-            cmd = ['"{}"'.format(sys.executable), '-u', 'build.py', 'build']
-++            cmd = ['"{}"'.format(sys.executable), '-u', 'build.py', 'build_py']
-+             cmd = ' '.join(cmd)
-+             runcmd(cmd)
-+ 
-+@@ -233,7 +233,7 @@ if haveWheel:
-+ class wx_install(orig_install):
-+     def finalize_options(self):
-+         orig_install.finalize_options(self)
-+-        self.install_lib = self.install_platlib
-++        #self.install_lib = self.install_platlib
-+ 
-+     def run(self):
-+         self.run_command("build")
-diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.1.1.bb b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.1.1.bb
-new file mode 100644
-index 000000000..af7b51d83
---- /dev/null
-+++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.1.1.bb
-@@ -0,0 +1,32 @@
-+DESCRIPTION = "Python3 interface to the wxWidgets Cross-platform C++ GUI toolkit."
-+HOMEPAGE = "http://www.wxpython.org"
-+
++         set_target_properties(${target_name}
++             PROPERTIES
+diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
+similarity index 90%
+rename from meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb
+rename to meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
+index b4420a18e..f9349b02a 100644
+--- a/meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb
++++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
+@@ -3,10 +3,10 @@ DESCRIPTION = "wxWidgets is a free and open source cross-platform C++ framework
+ HOMEPAGE = "https://www.wxwidgets.org/"
+ BUGTRACKER = "https://trac.wxwidgets.org/"
+ 
+-# wxWidgets licence is a modified version of LGPL explicitly allowing not
++# WXwindows licence is a modified version of LGPL explicitly allowing not
+ # distributing the sources of an application using the library even in the
+ # case of static linking.
+-LICENSE = "wxWidgets"
 +LICENSE = "WXwindows"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fce1d18e2d633d41786c0a8dfbc80917"
+ LIC_FILES_CHKSUM = "file://docs/licence.txt;md5=981f50a934828620b08f44d75db557c6"
+ 
+ inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt', 'cmake_qt5', 'cmake', d)}
+@@ -26,15 +26,16 @@ SRC_URI = " \
+     file://0001-wx-config.in-Disable-cross-magic-it-does-not-work-fo.patch \
+     file://fix-libdir-for-multilib.patch \
+     file://respect-DESTDIR-when-create-link.patch \
++    file://not-append-system-name-to-lib-name.patch \
+ "
+-PV = "3.1.4"
+-SRCREV= "6cdaedd42ba59331b3dc4ead50e0bac76ae14c19"
++SRCREV= "9c0a8be1dc32063d91ed1901fd5fcd54f4f955a1"
+ S = "${WORKDIR}/git"
+ 
+ # These can be either 'builtin' or 'sys' and builtin means cloned soures are
+ # build. So these cannot be PACKAGECONFIGs and let's use libs where we can (see
+ # DEPENDS)
+ EXTRA_OECMAKE += " \
++    -DwxUSE_GLCANVAS_EGL=OFF \
+     -DwxUSE_LIBJPEG=sys \
+     -DwxUSE_LIBPNG=sys \
+     -DwxUSE_LIBTIFF=sys \
+@@ -46,6 +47,7 @@ EXTRA_OECMAKE:append:libc-musl = " \
+ "
+ 
+ PACKAGECONFIG ?= "gtk ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)}"
++PACKAGECONFIG:remove:class-native = "opengl"
+ 
+ # Note on toolkit-PACKAGECONFIGs: select exactly one of 'no_gui' / 'gtk' / 'qt'
+ PACKAGECONFIG[no_gui] = "-DwxUSE_GUI=OFF,,,,,qt gtk opengl"
+@@ -69,9 +71,10 @@ PACKAGECONFIG[gstreamer] = "-DwxUSE_MEDIACTRL=ON,-DwxUSE_MEDIACTRL=OFF,gstreamer
+ PACKAGECONFIG[libsecret] = "-DwxUSE_SECRETSTORE=ON,-DwxUSE_SECRETSTORE=OFF,libsecret,,,no_gui"
+ PACKAGECONFIG[lzma] = "-DwxUSE_LIBLZMA=ON,-DwxUSE_LIBLZMA=OFF,xz"
+ PACKAGECONFIG[mspack] = "-DwxUSE_LIBMSPACK=ON,-DwxUSE_LIBMSPACK=OFF,libmspack"
+-PACKAGECONFIG[opengl] = ",,libglu"
++PACKAGECONFIG[opengl] = "-DwxUSE_OPENGL=ON,-DwxUSE_OPENGL=OFF,libglu"
+ PACKAGECONFIG[sdl_audio] = "-DwxUSE_LIBSDL=ON,-DwxUSE_LIBSDL=OFF,libsdl2"
+ PACKAGECONFIG[webkit] = "-DwxUSE_WEBVIEW_WEBKIT=ON,-DwxUSE_WEBVIEW_WEBKIT=OFF,webkitgtk,,,no_gui"
++PACKAGECONFIG[curl] = "-DwxUSE_WEBREQUEST_CURL=ON,-DwxUSE_WEBREQUEST_CURL=OFF,curl"
+ 
+ do_compile:append() {
+     # if not at re-compile
+@@ -108,3 +111,5 @@ FILES:${PN}-dev += " \
+     ${libdir}/wx/include/ \
+     ${libdir}/wx/config/ \
+ "
 +
-+DEPENDS = "wxwidgets-native wxwidgets"
-+
-+PYPI_PACKAGE = "wxPython"
-+
-+SRC_URI += "file://add-back-option-build-base.patch \
-+            file://wxgtk-fixup-build-scripts.patch \
-+            file://sip-fix-override-functions.patch \
-+            "
-+SRC_URI[sha256sum] = "00e5e3180ac7f2852f342ad341d57c44e7e4326de0b550b9a5c4a8361b6c3528"
-+
-+S = "${WORKDIR}/wxPython-${PV}"
-+
-+inherit pypi setuptools3 pkgconfig
-+
-+export WX_CONFIG = "${RECIPE_SYSROOT_NATIVE}${bindir}/wx-config"
-+
-+RDEPENDS:${PN} = "\
-+    python3-difflib \
-+    python3-image \
-+    python3-numpy \
-+    python3-pillow \
-+    python3-pprint \
-+    python3-pycairo \
-+    python3-six \
-+    python3-xml \
-+"
++BBCLASSEXTEND = "native"
 -- 
 2.17.1
 
