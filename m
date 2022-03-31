@@ -2,52 +2,52 @@ Return-Path: <potin.lai@quantatw.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 34B08C4332F
-	for <webhook@archiver.kernel.org>; Thu, 31 Mar 2022 02:17:07 +0000 (UTC)
-Received: from APC01-PSA-obe.outbound.protection.outlook.com
- (APC01-PSA-obe.outbound.protection.outlook.com [40.107.255.110])
- by mx.groups.io with SMTP id smtpd.web08.2372.1648693024501356116
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 30BF2C433FE
+	for <webhook@archiver.kernel.org>; Thu, 31 Mar 2022 02:17:09 +0000 (UTC)
+Received: from APC01-TYZ-obe.outbound.protection.outlook.com
+ (APC01-TYZ-obe.outbound.protection.outlook.com [40.107.117.97])
+ by mx.groups.io with SMTP id smtpd.web11.2397.1648693026246624368
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Mar 2022 19:17:06 -0700
+ Wed, 30 Mar 2022 19:17:08 -0700
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@quantacorp.onmicrosoft.com
- header.s=selector2-quantacorp-onmicrosoft-com header.b=WUD8RaBW;
- spf=pass (domain: quantatw.com, ip: 40.107.255.110,
+ header.s=selector2-quantacorp-onmicrosoft-com header.b=zZe8yy+d;
+ spf=pass (domain: quantatw.com, ip: 40.107.117.97,
  mailfrom: potin.lai@quantatw.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=MFtvtLGeVEpkL9IA9NIbbFbfM1PR6dK2XXKed9NiIX4PuKndsOgeOyeXCC5q9M3OMoSdbrLRXTIqt11z6NqTrKpuaBEcuQZ5yN5MlbrbUg9SHxOVE4PCW0D8xaR5GGE7mRMYYL/3ZxwMdxm9t489Khk+HeMSpCaKL/qe/my/9GnQONZT7hU3vHz++miL/uHVrPOg/qCA67KQUczMxtAg12SVlgxdULxRrk+V82YNDXOqoEDGnfWTRXI3cAQCpFlm5Xq8PbaHagldp5j2FR6DNP0RgNJqiOQO7aGS2Gmiwd9gPqDQzNpw894n3Jmc+UMvUGNKfWTpY/bgJw8S1rVL7g==
+ b=mUUPJ4vX2mAna5wgySWKiA4SzUekfcG7j0UTrxZcs/8ObFfzhQ29P1cfdnf7157a+L6vmSEWaxu5kk/Z9avvnxXM7NjTvU6YMJcijIrsMI7gyirhZbl1sfTE2sODQ9ICaDlr1Ed2NwfG981+Uz+Habk+5kLPYJtQd5WYt8g2PJ1widoZQ/UQfmapU8XcNyfo1eJmmXI5sxzglvMEztcfb/ULkKdQmxqDtO/Uv78HUg4szGux4tw0CL0tHpviWUbdiUkPXIRSh6TiJ2MVMP+MJPLLAjlq+kCgH94in6R79F/HJvp8DBnPSZ0EHp5errRzbBKpdYKwdcpqd0aole4Wpg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=akVZ8Tweyaur0/sGXr4NrL/eWk25+uNg0XdMzFnKpwc=;
- b=WK7Yb+zU4Ue08046adWxaoeh1EfqwjbdJSwxGz4a+o28m3UzUCfh5knjsyATNVJI90IsPKsRwvhjBybcJjwD0UnP/a4fTqUipqA8JfhPAuqtv6G4Hlhx8i5UUKDaDRV4+BQ4GTOBLoUNm5vV7cO/qnwkdL+/IiqURUeVPPTK5yv977LZhHTtz/pf3aYEbE7T4GKHYX7XJQTH2BRP/GYK5xsdAex+51/17V84yLY9ZqjKwG0x/fHudrh08OT3EqmcbHeK8FCbj19EGx4wvIk8qUpP4uCFQWvu22hJ59zq11gtCVcb5PUO0SYxplpvOuYH8ePuCC3gxIbvFlEV1P7kuQ==
+ bh=x9rM1tm6PSUt4Ww8AzmfY2wF2cE4fC5AqaaV+eXSdyM=;
+ b=Jqn36ONc/1UXvns+4bR6AH91HUcoWtLUf/goOMMBksssE0qUokC4lA0wybqhVM/w3B9iImoCVkBsZx6whITjc43qqoV9DaRYSlunIK0gvrgGYEWeNKZrE76ToGSerUBloiYee6pRMZnmGRsF9gK2YLpc0QY0DA0ZIIZoXQi/BFJmp+u8+WSgBC5j1QmFuCaxmf65/T6OUbK+Sc1QQ20RV3ck2E2bDfuMZ3j1lnM8UO+kEGlmibjmn0+UnS3z+XZamdd+NJBfjsqjQuuYyVuYWiHTuIL2/uiUnOXixFQqshBLTrbK5B4HxwuuAfRfe9nQubBBkmSkQhOCLV6yFLg3jA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=quantatw.com; dmarc=pass action=none header.from=quantatw.com;
  dkim=pass header.d=quantatw.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=quantacorp.onmicrosoft.com; s=selector2-quantacorp-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=akVZ8Tweyaur0/sGXr4NrL/eWk25+uNg0XdMzFnKpwc=;
- b=WUD8RaBWkapZFcfR6sp5pwlgIRVRLI91LT152iefFzr0uXTAO6vmOGc6J7hiph4UArjqNY+SBLx2iEvtvGRwxXywnLgKy2Fkebv6qP1eIMMHlXSUnvzRd3tKRLaUHWr1B4HaY+mRTKTJGm322Xv35+SqnpXkIo0hHMs+EOkfQMY=
+ bh=x9rM1tm6PSUt4Ww8AzmfY2wF2cE4fC5AqaaV+eXSdyM=;
+ b=zZe8yy+dcqk1w+wQ9ghRjzsVM902HKBcL9RiFWUAavMZL6HrbNY/JQ8WZZrZSxsfYsuqSoWrwlVgs+TcL/1wSZXkoX0m6jwA0+K4P35c7MLk26KRHr3huse/pEfRlJmSv0+JIw8IV+Q90uMnOe76ML7uS6ktQ11q9b7L2gkmwZk=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=quantatw.com;
 Received: from HK0PR04MB3282.apcprd04.prod.outlook.com (2603:1096:203:89::17)
- by PS2PR04MB2694.apcprd04.prod.outlook.com (2603:1096:300:46::16) with
+ by TY2PR04MB3984.apcprd04.prod.outlook.com (2603:1096:404:8002::12) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5123.20; Thu, 31 Mar
- 2022 02:17:01 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5123.21; Thu, 31 Mar
+ 2022 02:17:03 +0000
 Received: from HK0PR04MB3282.apcprd04.prod.outlook.com
  ([fe80::7cfe:c9ba:7793:f42]) by HK0PR04MB3282.apcprd04.prod.outlook.com
  ([fe80::7cfe:c9ba:7793:f42%7]) with mapi id 15.20.5102.023; Thu, 31 Mar 2022
- 02:17:01 +0000
+ 02:17:03 +0000
 From: Potin Lai <potin.lai@quantatw.com>
 To: openembedded-devel@lists.openembedded.org,
 	raj.khem@gmail.com
 Cc: patrick@stwcx.xyz,
 	Potin Lai <potin.lai@quantatw.com>
-Subject: [meta-oe][PATCH v2 1/4] libimobiledevice-glue: add recipe
-Date: Thu, 31 Mar 2022 10:16:45 +0800
-Message-Id: <20220331021648.16582-2-potin.lai@quantatw.com>
+Subject: [meta-oe][PATCH v2 4/4] idevicerestore: add recipe
+Date: Thu, 31 Mar 2022 10:16:48 +0800
+Message-Id: <20220331021648.16582-5-potin.lai@quantatw.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220331021648.16582-1-potin.lai@quantatw.com>
 References: <20220331021648.16582-1-potin.lai@quantatw.com>
@@ -57,96 +57,95 @@ X-ClientProxiedBy: HK2PR02CA0150.apcprd02.prod.outlook.com
  (2603:1096:203:89::17)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 1f1a2f13-11bb-4f3c-5de6-08da12bc8a2b
-X-MS-TrafficTypeDiagnostic: PS2PR04MB2694:EE_
+X-MS-Office365-Filtering-Correlation-Id: e1062b02-04ea-415a-14fc-08da12bc8b09
+X-MS-TrafficTypeDiagnostic: TY2PR04MB3984:EE_
 X-Microsoft-Antispam-PRVS: 
-	<PS2PR04MB26947B3330EF21035ACA54738EE19@PS2PR04MB2694.apcprd04.prod.outlook.com>
+	<TY2PR04MB39843DC9CA21B8F51465FDBE8EE19@TY2PR04MB3984.apcprd04.prod.outlook.com>
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	jZDAtHlsYMoOpCD4+8GYSxDIMre0VoDucarYtnXzZns1A591gs45bF5z1P8uHYfr5LTHJidMkllvWxCoFraExz7I3IoWy8e2QH8TxvnxUays6sv8EC3dT3Ckix3SKn0tM95jNb4j7xzSQvGuEAuLJWi36eLSN+yixJVUOl5NZb3m2mchudm/4Ic9kBq4P9vc6p73WqxdfLFWElVSQnkaRC3QnnTFyv1vPQLSKWdLKq8VldIuHK/3NLDQbhA6rMjY9VD8SQWKeKINBMqDX5dG/UD6jbnaTHtDkNSv2QokeCnwlRxYX8t101vrfLG8HBh+f9IiUc/WK/a+1pGmFR8aE7MTg7epYUjmZd6y5Jfkemg6arW+G7jFZPljxYSgA8fgDIJNaUnZaheo9Hol0mFeBjxGuVzxpJOJJ08ZUZj1dp7IB9Ei/oQ7V+B2sU13RoPh8j4/XQHM6Ucll2bJhqoGesv9nOkZGhAJRSEjUY1lTbNHbuDA4JziDWTvSrGZ16hK/bmW152HXe4AeMnqidCaqc+h+GQ9064XctK5jmaEaW6tRpSnPw1rCchF/McOF/Sq27tSA98HKrt9WTk7l0D1CRXWk30kqflwIFu7thR9mXUxUvpu6NaPNoXZ2pUwOM7vL30OknFNHpGo4O179TlZ6MyU8EJf/qGoLm766oMGfO2Y/OGj5cdDIe6dOIQzoH4nDLiSgod3H9DOrsd9EAczwmeNaT3B/BNR1iic3OVbtsDsCH8rgpxoh6TJh1gBiS0OvjznCHC1CdP2iAVo7GjA2uo4TAwx7I+5Qgb3l77YAWw=
+	tFTqnLBFjmnmrniOj8heE1dyr1qbngg7qItUYDdjtK2IMJnI1ayuFkTI3Islz2yr/Jd63ZWNUy33zQnODxR9ACSrhhPonpvA8Hke4nmdspbBaDvMhYcnvMcWAJDEqMvYIQ7DSo6ctjaoNV8uTS/Z12XQ3IOswIIU/1FavryafdPlObOZzhdrqpcChkv5pMw0xXLIq61XzTI2lBy1gntm58eiEgyf1M7uFsbq5fxLW/5+06pcI+WBWPBIqaNioeCcZF7xERdypGpyVteefLJegZDvqGbGR3F59Nj6cAEPACKhQkYh7qknaBu+UHgK7XQTn9CmKHlkalUDDUpwxnpQqlQGFCLW/jwPtTTZa5nNXMtnRGb55LybZrFdTUEgrx4fe0clQYIJkkBiM08PA0hGoiFStileCbEZ/TcTRVnTw62ZIpOr7wPd//c3q7g5chT0pbiGsSE85B2dLvokXBjGRLlv+Cc62aplLLsoMQKbwApY8J7Zmew0Cpdo4iM0hlEc3w9GLCR0ADNtclQpnPJm0oeGk7G8u16yhIFyzEzW0zi+5b/1sBVguepwAqGp4Uw500n5mUQA1PwV+fgZRUFRA8UvCmYQOVLrVMcUjNcMg3wGZxfKtaggj9CLtEPFV9dvekZ8i0qBZJBnZHkzDH4x//1O5AN7p4Kn85OXJmvmERGrJXN22e1LfgtJZXR4iTwtnTtW/jmWHkH+iLvijvJcv4LNvYEeaq1WorXoPsbadj8AdybDSQ+vf2IlGsOP0+b8AG2SVRE7ssayrwk8o82TNAzJ30VIxVtTB5q+FHja8Vw=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:HK0PR04MB3282.apcprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(1076003)(2616005)(6506007)(6512007)(26005)(6666004)(5660300002)(186003)(107886003)(38350700002)(38100700002)(8936002)(86362001)(6486002)(508600001)(44832011)(66476007)(316002)(66556008)(36756003)(66946007)(2906002)(52116002)(8676002)(4326008);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:HK0PR04MB3282.apcprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(2906002)(52116002)(316002)(86362001)(6506007)(6666004)(6512007)(38100700002)(66476007)(38350700002)(2616005)(83380400001)(26005)(4326008)(107886003)(1076003)(186003)(8936002)(44832011)(8676002)(66946007)(5660300002)(66556008)(6486002)(508600001)(36756003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?saudiKBeiae3qSeJQG2w6gZU9G3rRhVq3Ww3JD3IqxK5UPUYXltb5z3txUe1?=
- =?us-ascii?Q?VFJKA/E4T9tyFfirJVX0Jfr6HEK0GNOZ/zzhu291E8AJhTuaogVeTezmWDXx?=
- =?us-ascii?Q?9OY5ggBR4/VXZnBEjfYmmnvN2vTI7wF7Er0444fuYa1Row65xsEkQf8QpNjc?=
- =?us-ascii?Q?lseJMsrsOzwsuPRc42gQul8D2DNehfqLx5ckGiuNm1mI8n57flqi6hUMPy6X?=
- =?us-ascii?Q?sNN87mXSIf323nwci4NGj5WlA4UQVK/z2zYw1YpppuChI2zEvSPvQ0uveEGk?=
- =?us-ascii?Q?T4KqSLX49xLtjrIwcPpPTItM3HIvZ8LPYQ2XFw7s73LpzULbT4zVRLONDd2u?=
- =?us-ascii?Q?Urvsmof7fj3eOZYjF97SE/wKt4I5lqSxbrj1/1kjYJ3J5qRrxiUbXUEQr7XN?=
- =?us-ascii?Q?4ffHHlDJsY5GfTbs+WERjhMW4ylykoLLPC+iG+4EulcZC+AivzpWGOdySS/i?=
- =?us-ascii?Q?CJboEAuiHArfB/0DWSFttA4A0aTeUyES/dS9NY2ZmIq5/FoLwWMt9K7g1jAC?=
- =?us-ascii?Q?8QNkHtc+JGqoqGUVec+q+0cAgEsEJTmbvcuelA0QQz2rSHktnI7MxwfGq1jt?=
- =?us-ascii?Q?d0i0o3J3qbo/Ks1fQLgSxCZ/gb44oDRGuAFzVZ6weFg8oTNEwtiMSg5BubOS?=
- =?us-ascii?Q?c7Wet4E24c6LW9pytMWSLBD2bGYKAjgsu6cgBMg4BZcmeJz8SdZa7ack2+VP?=
- =?us-ascii?Q?Fy8G5bg6PklbVm5Tq5bMIkQNo5vfraAnj0+PFBdIp0SiaC+QF1Y5xHnOJbvH?=
- =?us-ascii?Q?BmWublw3Ru8E0J90vk5NWihs993V5skB/60X44AtwnVj9VDvaJ+sYohLebRP?=
- =?us-ascii?Q?feoII/XRL2Q4bnFUeMmhPs/7TwjMkL1QF5if6XwQO+lBG7IYPVh6LGGPENbB?=
- =?us-ascii?Q?f2JlXHG8/gQMDADxrjuSa4jMkVCmdDHWqTiLQvFtylkFVQNhNg3/uMf88EON?=
- =?us-ascii?Q?rwPC5ejAHTDCyLdwoPmdgTVaIGAyyz/kjKK05lJc51tzFl+HjA85drBxoc03?=
- =?us-ascii?Q?p1kdpD1Y5gHDg3s6dKHTtVYqlfPV7AvLn2UqBuBkaqBfExZNKT1Zby0cu8Gg?=
- =?us-ascii?Q?Xk7ZYCSEVZ9R7tpXJ6IxBHWhQzp4bOg7nCC2u9VtKZZk5WOSpz3+DCRZcY/q?=
- =?us-ascii?Q?962Hw6Rcqsvu7L0etfZpOll+I6ItNXgfg5bxZ7FJFTxLdGxEeqhsXg3xl3n4?=
- =?us-ascii?Q?wZZ8amnsywDTLI9CKR2U0tM47S+hdbzdrHGXIW/MwouqlCApKhkALPRf2snp?=
- =?us-ascii?Q?FjSy0jvRiF1pqD3+ahUgu/K6A44AswjbKKkhr5DrxAwfgSFxf30A/+9p5D8j?=
- =?us-ascii?Q?eHgbbKPpngYdwUBNMhGDoV392xRK5wkSAWhHYinHclJRDYAJY67UpZcmrtGZ?=
- =?us-ascii?Q?Sf0EAeSq5qz4uRZXhMI1pOE8UoxSDuhOtH9YmWt9ERMOFzMacZxEY6jCbckV?=
- =?us-ascii?Q?4dhMovn66yhucYAUqdQIIhEoTtd5fx3FxU9LSy+WqrAaaqy5bj5cApRxlybd?=
- =?us-ascii?Q?3iA65QLTJlP6uiJMJrYmq8ZgtQZF+4PIaThx4QoMAquA2a3/n4bZ3LKnJfKq?=
- =?us-ascii?Q?Xve3LE37Kcz/74RBQME/UK2gJ+kyYrUX/hc1Rs9Svp6rIyxCN+UCFr1t+B1o?=
- =?us-ascii?Q?UPFg/LMF2zPqQLqjNlnYmCfk9E/J8NI0EEN49ozgWuWqIWTBdOteT8S+1cVP?=
- =?us-ascii?Q?YjGJbl2mj8eZMsfwVsHxe/EZ6p8PUeRm7unXSxoiBhvJkuuGPyZl3I/je+7H?=
- =?us-ascii?Q?JANGdGAIbA+hDu1m/C/PVKpnf4tHaH4=3D?=
+	=?us-ascii?Q?OYqM94pEVFAArz0P++dVLuFr/NQk0+wh+FXJHBaxV0YFZiU2xKPF+VVRHEZk?=
+ =?us-ascii?Q?kSg73RJwD5qnkEGqBu4Iw6/DBJ7kCf9O6cOGQEg+6FHADonXnkhYBVudu8h9?=
+ =?us-ascii?Q?sHvi4yA+AJSDWQyvXzjwRg6m2ewLAUTWgut+8SJPelO4SQ04UFvC+6YuTXqo?=
+ =?us-ascii?Q?5KvL9SJ6iNI30XwDSUR968q7wRhwXpHS1Dc0vDAeV0Y9RnO1iXBgbSJjXkZR?=
+ =?us-ascii?Q?PsvYq/JVXbwf9yMD/U/gUiCVibZBNTn/JXXU86Ns921bht31gFKG9vZVqLek?=
+ =?us-ascii?Q?m0U5UJx0yeISm/lzPYxITSwveq7Sn3d7kkhYO5UDD9eTMmInremke5EAWAzD?=
+ =?us-ascii?Q?UgNT9kNooSiIX4RhbVS1sRflEUrZMynsmtU2b6XhBBKbgUnnoHXVb/fsQg5S?=
+ =?us-ascii?Q?z356c47gAgaajbwwhL1QVb4xmiz8os9sGL0s4F7BB/CnFzqjDg9tYbkoP1RV?=
+ =?us-ascii?Q?Z5cxj5J1zF/5dGYHndckUlfHMlXFQQeRlbnuL5D+RTieq37Yyn1nO/AKTYRi?=
+ =?us-ascii?Q?q2EhbEBpwMc9vaOsebc2RF1ZZGyiY6/0wTN+MwO91e1pVrAresjC91RrtLHo?=
+ =?us-ascii?Q?XhpnKBwvVJakrXrS/BEiwHHQSmAhBcjHwFwHxm2V/0o/DWYzWBZXBoaV21+w?=
+ =?us-ascii?Q?jlU7Z7nktvGUPeU9Qb9F3uExPGTsTUaNS5XWGwGluDANMqOiwIW4dGIflp2n?=
+ =?us-ascii?Q?l1W7vw56f3QGMaERYGPefidW5iXmEdWAia0c/17EwQ97swTzsFgzd6OF5Tgr?=
+ =?us-ascii?Q?9ITjG7PE03LVtWlAtyLquaEE39T4LpS4CT10jn8Z2iBuZwYyO1CVZ9TGcmWm?=
+ =?us-ascii?Q?yyBlvWyC/T46jMrd3hrTld8eAsB86yMXSvM8PNixxNa57Et68/bO67B2iW81?=
+ =?us-ascii?Q?je+25RN3fvU6OZAjc+644cEUgUfGaSI/kwxtrpsUmowWzXUH41PNW/LJsWlC?=
+ =?us-ascii?Q?d8BUPD2TeJ677r4zT4f/QcCvCKmYV36d88SdXD2lpxff/RfM+lgjurtRelap?=
+ =?us-ascii?Q?KdJtrdNdrGFZFOud/Bfjorfq4s9+sWcfjM1M7VkC/EBung5oA8cdGF9sFLBX?=
+ =?us-ascii?Q?pEP4DGW97YWMUh+udAYn2QoQtc5Ir7PigGLUpMLlQUdi5nismVqdfYkxes/V?=
+ =?us-ascii?Q?4enxfur8DrxOUkUBlX/fdccYjQYtHlbzbfqv2sWCBpKOl2ncBbQsd69H/teN?=
+ =?us-ascii?Q?IrzA+OWy0WeuiCrsggl8DnOIIagCpW2KFWLv7uWquaQiKe3lWgd4xjkYdq3c?=
+ =?us-ascii?Q?JeuDkAcGNDLIjrqiOQsmkBoxZXQmVfjBEbIRM5QmP9REgvRf7a0okmR/3hZW?=
+ =?us-ascii?Q?9y99VY55p0lfCvu9iMetpufgJ8kWtjVqscvX9H/xWZuruENCIABvtENS0Jhq?=
+ =?us-ascii?Q?x8R5982E6yzsCnaZwbbrsAjJp6dhfIE7ehOHzmPx4xhRIP3zDsL2mNxsHYMy?=
+ =?us-ascii?Q?qp0qY3QrJ1+V3jEEVT3hwznXFhLgGKUTlfer961GJEQ6QyY3tm9FXlOp1SgH?=
+ =?us-ascii?Q?tGWxRJVSoS64oGy9PTpPii/pOAGTSm0peQeshMykHmnsIYwOKCLuwhKmrrB6?=
+ =?us-ascii?Q?kuUJFQcbRY1tPjLmJsJQLbnLUVSHzXGcwuRkTjFVEHnzzri7h9mQomrGn6JM?=
+ =?us-ascii?Q?23w+r1cJvwUdJRrC9wCyq7ZVFKB3wz/oxsHePPpZ7DUfxUq+0Xqs8/2JdycD?=
+ =?us-ascii?Q?OzayNl+CT03craFQAheGy/B9xORjC0BV6SIcz2UObwzvVFXxo3Y1aEEUmrdg?=
+ =?us-ascii?Q?9g/Z5I93sBbLMZQQ192ZUFQzLI84gSQ=3D?=
 X-OriginatorOrg: quantatw.com
 X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 1f1a2f13-11bb-4f3c-5de6-08da12bc8a2b
+ e1062b02-04ea-415a-14fc-08da12bc8b09
 X-MS-Exchange-CrossTenant-AuthSource: HK0PR04MB3282.apcprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2022 02:17:00.9314
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2022 02:17:02.3844
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 179b0327-07fc-4973-ac73-8de7313561b2
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
 X-MS-Exchange-CrossTenant-UserPrincipalName: 
- PirBF7QAUjx0D2x6DTEmL9GjMCbru6/Q+oGRNRAmMITkn1TiFqcAX0rKDPKJtswLC40v2hbWZ5DjI6kgrIYTeg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PS2PR04MB2694
+ TW30aAvyWe7MyhKasxpB71SmJoUGpFXPz4jObQ0EJVX5JYBPZ6ZkuunzTC861T8URf/plPm/Os/O+IdUOHNOyQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY2PR04MB3984
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 31 Mar 2022 02:17:07 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 31 Mar 2022 02:17:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96276
+ https://lists.openembedded.org/g/openembedded-devel/message/96279
 
-libimobiledevice-glue is the library with common code used by the
-libraries and tools around the libimobiledevice project.
+A command-line application to restore firmware files to iOS devices.
 
 Signed-off-by: Potin Lai <potin.lai@quantatw.com>
 ---
- .../libimobiledevice-glue_git.bb                  | 15 +++++++++++++++
+ .../idevicerestore/idevicerestore_git.bb          | 15 +++++++++++++++
  1 file changed, 15 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_git.bb
+ create mode 100644 meta-oe/recipes-support/idevicerestore/idevicerestore_git.bb
 
-diff --git a/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_git.bb b/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_git.bb
+diff --git a/meta-oe/recipes-support/idevicerestore/idevicerestore_git.bb b/meta-oe/recipes-support/idevicerestore/idevicerestore_git.bb
 new file mode 100644
-index 000000000..28303d082
+index 000000000..8fedb6447
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_git.bb
++++ b/meta-oe/recipes-support/idevicerestore/idevicerestore_git.bb
 @@ -0,0 +1,15 @@
-+SUMMARY = "Library with common code used by the libraries and tools around the libimobiledevice project"
-+LICENSE = "LGPL-2.1"
++SUMMARY = "A command-line application to restore firmware files to iOS devices"
++LICENSE = "LGPL-3.0"
 +LIC_FILES_CHKSUM = "\
-+    file://COPYING;md5=6ab17b41640564434dda85c06b7124f7 \
++    file://COPYING;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 +"
 +
 +HOMEPAGE = "http://www.libimobiledevice.org/"
 +
-+DEPENDS = "libplist"
++DEPENDS = "libirecovery libimobiledevice libzip curl"
 +
-+SRCREV = "ecb0996fd2a3b0539153dd3ef901d137bf498ffe"
-+SRC_URI = "git://github.com/libimobiledevice/libimobiledevice-glue;protocol=https;branch=master"
++SRCREV = "280575bb95977241e240ed081a2602d68746443e"
++SRC_URI = "git://github.com/libimobiledevice/idevicerestore;protocol=https;branch=master"
 +
 +S = "${WORKDIR}/git"
 +inherit autotools pkgconfig
