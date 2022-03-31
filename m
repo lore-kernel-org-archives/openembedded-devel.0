@@ -1,157 +1,176 @@
-Return-Path: <potin.lai@quantatw.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF617C4332F
-	for <webhook@archiver.kernel.org>; Thu, 31 Mar 2022 15:49:44 +0000 (UTC)
-Received: from APC01-SG2-obe.outbound.protection.outlook.com
- (APC01-SG2-obe.outbound.protection.outlook.com [40.107.215.102])
- by mx.groups.io with SMTP id smtpd.web08.8976.1648741778396103384
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 144D8C433F5
+	for <webhook@archiver.kernel.org>; Thu, 31 Mar 2022 16:00:16 +0000 (UTC)
+Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com
+ [209.85.160.178])
+ by mx.groups.io with SMTP id smtpd.web12.9005.1648742410173628057
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 31 Mar 2022 08:49:44 -0700
+ Thu, 31 Mar 2022 09:00:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@quantacorp.onmicrosoft.com
- header.s=selector2-quantacorp-onmicrosoft-com header.b=L7lzfTCv;
- spf=pass (domain: quantatw.com, ip: 40.107.215.102,
- mailfrom: potin.lai@quantatw.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=LXFaqRpl02ptPREODRAuJH0OsnfPk0sioJBn+ZbJG6ZDB17W7ROtvWbDADQS4fyFIZf2mT9/A9xgQgIiN5fEYnYTcXIj5LlMk5yuYGf7j4TSor9Rbj7FQ0r81PcsJJWGudRnugOmQtyJrBlkv5E8Q288SMOiLuhP7/Sos7CtVyVrMrV8PqHEJMR1+VramnWOi/24zhe9jpADOsuPS+zZeBoWA0PiIyyUjpKLil+fJVCh3Sar5qFRbkIKbavaN6jSDAJ82Mc+y1+dO5rjp92CVCwa1ZWBpAd82ADNhTDOkqydggrqgkNpvY5Fx7QbbqcEx0CxREHn8Hi8Q2ev35cB3w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gmQcNDyL9w7Z73JFmMBOU3dkfSP6PqwZkpbmw7XxF+8=;
- b=WDJWqg9Mf3yBHNmRWfOK72gT3ZGIwdmz0abGnwR8YqXUdBKmTQz9j9MZ2ZowjqnVdF9gF5M9x7D0VvLHW/MspLHw48qrkQIptl2wrdxey/+1u+HfAQ0J2T8KpzL5PX0Q4LFa2OcHVzYGJ+flWxO8stQRBcDapkmNBETj4s75uX3knv9kGv0uaxt3D5Gg8+J6PBXY9CWLT4hCICApYLIMMOKlh4SdS5Oe19gU5n8R1Ft6JuljX9cAzypnVaavhwxZMO86mzqk9ei4Bf3PTXc+vLc5L3NNTP+sl3XsiuXKd/r7vMOYmurxN3AfAWkQi0jzTKfUO9m2Ti3qcDWDT+soMg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=quantatw.com; dmarc=pass action=none header.from=quantatw.com;
- dkim=pass header.d=quantatw.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=V289DhC8;
+ spf=pass (domain: gmail.com, ip: 209.85.160.178,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f178.google.com with SMTP id t2so21762071qtw.9
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 31 Mar 2022 09:00:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=quantacorp.onmicrosoft.com; s=selector2-quantacorp-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gmQcNDyL9w7Z73JFmMBOU3dkfSP6PqwZkpbmw7XxF+8=;
- b=L7lzfTCvmtunKvBnqtB9d9TBXPJuhmzwuazI0AIOVuXPPAmTUtrkDGdGwdbHjEDhYsnGXxstXcCpHIikccu2wtphG5V5DJFoaZv7erNvmhzFuIQWcRlsdjtjvgtan3O9vvr11xs99yXSapyLhxuBf1f4/zfQftttZl3z7IrrI+o=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=quantatw.com;
-Received: from HK0PR04MB3282.apcprd04.prod.outlook.com (2603:1096:203:89::17)
- by HK0PR04MB2785.apcprd04.prod.outlook.com (2603:1096:203:5f::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5123.24; Thu, 31 Mar
- 2022 15:49:34 +0000
-Received: from HK0PR04MB3282.apcprd04.prod.outlook.com
- ([fe80::7cfe:c9ba:7793:f42]) by HK0PR04MB3282.apcprd04.prod.outlook.com
- ([fe80::7cfe:c9ba:7793:f42%7]) with mapi id 15.20.5102.023; Thu, 31 Mar 2022
- 15:49:34 +0000
-From: Potin Lai <potin.lai@quantatw.com>
-To: openembedded-devel@lists.openembedded.org,
-	Khem Raj <raj.khem@gmail.com>
-Cc: Patrick Williams <patrick@stwcx.xyz>,
-	Potin Lai <potin.lai@quantatw.com>
-Subject: [meta-oe][PATCH v3 4/4] idevicerestore: add recipe
-Date: Thu, 31 Mar 2022 23:49:12 +0800
-Message-Id: <20220331154912.1456-5-potin.lai@quantatw.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220331154912.1456-1-potin.lai@quantatw.com>
-References: <20220331154912.1456-1-potin.lai@quantatw.com>
-Content-Type: text/plain
-X-ClientProxiedBy: HK2PR02CA0148.apcprd02.prod.outlook.com
- (2603:1096:202:16::32) To HK0PR04MB3282.apcprd04.prod.outlook.com
- (2603:1096:203:89::17)
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=DTD5vWqGYK9x6B4UgHB5xMu44Uzl3QEl9BunJmMjyAk=;
+        b=V289DhC8wkVyWkTlDN8/NwrRT6YUtgD60Iwwqi5WSMmZR3qKMnNphKzKtyoZTAoUlB
+         3ueQhQynKma4xFIpL36x0RbGdswR0Stja5lO7qoNFgvPZlA2G69hW9a7X0a5clh7g0w2
+         3KBCt164Hz2u1Sym4rJl4zVeFzV/QjnTeTvOKSU5GOi50Z+kNQdMEfsKYFBEUMBwNE1j
+         c6PI86JSgTINqo+lI8NToAAB4IZ3HbK7AkeHanRkcSZP/FHRIa7ybySEfnh5biQVoE3y
+         FQQ5qJiAj9h7c+pUIRQDv5Jdl+9ySTml0WLHxzZExQQ5l6IJTBYRmtayZ9gUTWgvxQ9U
+         jgCg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=DTD5vWqGYK9x6B4UgHB5xMu44Uzl3QEl9BunJmMjyAk=;
+        b=2fPMlaHAUoQTja7Sa0nvDHelgWSX+4xzvsirmg/Tww1xtzCqnLKLZ05U/DSGH3CO6w
+         pGTws/Sia0SR91KypP9YTYfe0+HlsHA9Ni+BJxIBHEE/fnsYnvYVkpi01AW+AoL2ZfIk
+         I5gLzDB6mFfJI/5G5aZjdwhQVUDd7ccsKN4swMoo/a8TKUiTq+ltGI/ulw0MeHwa5Qvt
+         +iqzWoCcWhHwihbcp++1j1D9Wh1LZqxKD4gV3q9H4RCm2DK/WMAcdkm4fWQRbnf0Was5
+         KrNQKCF+5MLZ45Jgc7u2V0V5ldj0umV1BibdMoZ84c9n4j409bf73uabACEx9n6HOe4N
+         1QTw==
+X-Gm-Message-State: AOAM530h8C6hKTsMyDlvt1dfzIwy++zFWKrnNhmg0No2P4c2uTMWxG+1
+	ffLwFngsQ3uTz8I/5bFAFgdk9dgx9R8s5mLYpgA=
+X-Google-Smtp-Source: 
+ ABdhPJzbJa0nlgJer0ZEPpHGW7ZqOvbt+X6Gu8CQfHyM9TBIMMpjIT8pGiQZb26GFiTUqqEvnT98zvbIDunNsJ90Czs=
+X-Received: by 2002:ac8:5a84:0:b0:2e1:4f1d:36fb with SMTP id
+ c4-20020ac85a84000000b002e14f1d36fbmr4878816qtc.54.1648742406970; Thu, 31 Mar
+ 2022 09:00:06 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 4aaa2a8e-6916-4b94-5e27-08da132e0d1a
-X-MS-TrafficTypeDiagnostic: HK0PR04MB2785:EE_
-X-Microsoft-Antispam-PRVS: 
-	<HK0PR04MB278542BCAF47A59CCBE9041B8EE19@HK0PR04MB2785.apcprd04.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	COsNOLX+0vvP2KCMBGN3+/awZH7gbzD2rdIhpJ1IUnnDq2xGjKDPc+qUxrDigFWWJ72690s0Wol6VNAvkbyiK1AaCBTxw952X7XQKUefB8JdGMMunBchxWhrmqgoLZzk4GI2+9nDfYL0hKlm7yuaDykL4xAVIodUi40xVX6l/jFY4qTXz+94Ow9N8OMm0t1+ZqPdpxD6puJAiC5IziMg9kBqXbjcii91airP4Bh8p384vb19qz0oWymBpG8YL+rr61NSFa3G4sFbAvYCA3zjxcv38zxfFKW3V4CGajm3S2mz0KM8tci/M87vr1WJUpxSBZXeBjdo8DJfKIk2so7jtFecJiiUh83AO9ar8/k8Ns+4bh4fQj0zHwfBN6eAxBVy2i4K+r4oypzykZl5AmXnuaTX1jaEXcdhvM8N2MX7O256c90ZQMcGEiH4yCP3g4GRFH4hSmxdO5knBVJMiJG0TVi58ROPRl+wiMgXH+AiP9hGA6NkfbL5C850ucXAki5KC/vQmt6HPaw8zSSasZtEmI/sGGhVj9Y2e6h6Tu0tcdNinF/TuC/taDsW8rxlB1yS4HB4E4NMK1YaJWanbYutfCmEZxPFwN19HxOLWphK7577ps1RC3oSyibRISAYZO2yxUdkULS20Ps4YmUObtPH7uxIlz2+oGqQGXuOCjXi9Wb/D3LcrfVEEbpAZC97YvU28UV05shWDvIUWO50OaPBolTQOgVcx7cfUN3J/BpEW/U7ffsK2PQ/vbpqyyvNji487AEVBfHdRu3MLB+lU0QN5UjWHIXvmdWWR9sCfMFVr/8=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:HK0PR04MB3282.apcprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(316002)(6916009)(54906003)(186003)(2616005)(26005)(107886003)(1076003)(86362001)(83380400001)(508600001)(6666004)(6512007)(6506007)(52116002)(8936002)(36756003)(44832011)(4326008)(6486002)(8676002)(5660300002)(38100700002)(38350700002)(2906002)(66476007)(66556008)(66946007);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?7Igwr1SbPhKHE0zdezXUNYppvImCDZrqehvhGaoGxtq9x9hcYB40/mqQu4KK?=
- =?us-ascii?Q?7SAFUD4k4g52QVdQzs2XXDggcnJ3CA8CK0rGRYtRx4/gVvuz/uRn3q/ZvbnB?=
- =?us-ascii?Q?YJWTfubAXAqqBSvRzPeHBOKSqbxZl7nylmiHhLA82Q5pnQnSU73IzXqT6WoD?=
- =?us-ascii?Q?zMj/kmBWxP/mVKvo0hoIOqmapSU++wMzEKPViQ/fDuBCSojLwErirFNiAfXw?=
- =?us-ascii?Q?WxWfUfnhZr0dO0BTyBEVyziCxwVXrQlhzG9qMXlIolrMlcDU3YCYKAE4FzA4?=
- =?us-ascii?Q?bol+F0s+7JzoRZSAUwgkO/MWWURfdIW0N8jN85NUEF+sPTktg2QFYPYpvutT?=
- =?us-ascii?Q?L4+GI532qLAdSp1h2/tpJQzHXIPlIJfzi+CL08/7kxA7LAUoWOczs/AVtTDU?=
- =?us-ascii?Q?WyEad/jJTZbyEyPPSBZJ9+PNb1HWROS+zqHWY0gELQ6+O0IhKVmoLNG6Te4e?=
- =?us-ascii?Q?8fEbWi7isjZCRx34sNOViflBHSPrJ0ptGb7Q9HWXqb9DPAtv1cEjUE5s8tEl?=
- =?us-ascii?Q?dvsFqfJBZu21TCHHQX5ZZAb/8WPZc4PuIWBLlXdCmDs3xpjJL4D5UIzO718a?=
- =?us-ascii?Q?Ebrl41993MX6n1NC2XfaYcYADh/f63gTDJ2H0Az4qJPaODVQ0E8/tqhnhdIB?=
- =?us-ascii?Q?7Hs0qubK7xpP0RIVxzqUSh0KzEi4P67qZtXpz+a3m2lFr5bl8xcv+NMBBT34?=
- =?us-ascii?Q?Cq8Ep5lp9LoeEiw/YdkmT3E22T1IFfDyfhgXp33mxEDGkZgqPc7zSdbjP57e?=
- =?us-ascii?Q?/REDlP2jmLC6xH89UoMj2EhRarfRSTuKQA2Ea3+rW9/2o4ffR5N52AsFdrPB?=
- =?us-ascii?Q?5CvZueiNBmpT1sdBEeKmfcFZxYaTSujlfLICaqL7dydLjS5lynD8ekgAUXea?=
- =?us-ascii?Q?IrX/HjPuI9QdcoGMTGOaaitBi8xD2/XlZJjUQ/8OVlkShdgDRplFU/s31JU0?=
- =?us-ascii?Q?qVx2UcKIdTspr5DBnE1lXkEQzscn8lh6kBEut+9unX1lkJFXjKBvYT2JVCgA?=
- =?us-ascii?Q?jz65n2q3IKD7YzsgitIC2aoRUabDXZR2Bc7o0ETnGmIawcvmtS968T7Hu3OG?=
- =?us-ascii?Q?go9KXEUMx/oh5S43DeyRV1x9HDe7BXgnm+J1/RPuO2u/3CVohmRXvLNl9S9I?=
- =?us-ascii?Q?akRxy2RGwSTijj9NaspyD2iwBufS1JXYkPfJAv23YDA1fyRstiZ6HQp3SXiV?=
- =?us-ascii?Q?DgP0A0u3/murAldWGbLr4hPZxiUcFKKR9nZMHtCC+n+ybTVpiNt8fp/EbYE8?=
- =?us-ascii?Q?5MN6LKYQzNF9OBao0nG492GFE0Ga5JLvYEJ721rCzyl52jjaScaMJGdNbxg8?=
- =?us-ascii?Q?PbnaBwJN6XEC2H2s50aggHR/M1jyogJqspcX565D+Encx1JRYeunD+m8c9Z4?=
- =?us-ascii?Q?AuumbGBLvPb3tQDY/uXfFB/xuuiXaUdr9ymVA9TzbGo9tttqD/ccniaZF11k?=
- =?us-ascii?Q?Ib/VeDMOArEwO+WnXnma6VfTVAzkS3yXZdEqL3vK2QLzUT2GFygQVurHWdX4?=
- =?us-ascii?Q?ROtI01jJyPTceYic7ZWP5A7PFoFW4k4Rq2y9+wUa/KidXiI+qTYu+YzmSemC?=
- =?us-ascii?Q?G9uEQLJgia3nIew8Q7eumpT5fTE5aHqyeseTtf2RUzulnl14HPgjQhwnMfYJ?=
- =?us-ascii?Q?huC1Jv1VR+++84MQjrgLgskPQKhvo3DsD8jXTVObSDCYrKraPTIKiMznNtfY?=
- =?us-ascii?Q?b5maJI6vuOwAteSrUayNbfCY+OfExu3Mwvew+xVVyBMgMcCpy8Xw5EOafA+u?=
- =?us-ascii?Q?JAL7yTuJe8wKx6BqXC1Y7hrZR9bSihw=3D?=
-X-OriginatorOrg: quantatw.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 4aaa2a8e-6916-4b94-5e27-08da132e0d1a
-X-MS-Exchange-CrossTenant-AuthSource: HK0PR04MB3282.apcprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2022 15:49:33.6382
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 179b0327-07fc-4973-ac73-8de7313561b2
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 
- T+nYQ9b1PE82D5LhJk0bOBHppKWS+AjBPai4V7nxVYUjADPgnsiuYzSOUVuOmxajLagnyDYUrmuRz9t2hUquUw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: HK0PR04MB2785
+References: <20220331064935.2763629-1-schnitzeltony@gmail.com>
+ <20220331064935.2763629-6-schnitzeltony@gmail.com>
+In-Reply-To: <20220331064935.2763629-6-schnitzeltony@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 31 Mar 2022 08:59:40 -0700
+Message-ID: 
+ <CAMKF1sr2BuF6+XEa5YG5Ezp4fq=oNYt6FFhzO8ByBH_XV5Y4jg@mail.gmail.com>
+Subject: Re: [oe] [PATCH 6/6] gnome-text-editor: initial add 42.0
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 31 Mar 2022 15:49:44 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 31 Mar 2022 16:00:16 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96297
+ https://lists.openembedded.org/g/openembedded-devel/message/96298
 
-A command-line application to restore firmware files to iOS devices.
+getting this error
 
-Signed-off-by: Potin Lai <potin.lai@quantatw.com>
----
- .../idevicerestore/idevicerestore_git.bb        | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 meta-oe/recipes-support/idevicerestore/idevicerestore_git.bb
+Build started at 2022-03-31T15:52:29.098624
+Main binary: /mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/gnome-tex=
+t-editor/42.0-r0/recipe-sysroot-native/usr/bin/nativepython3
+Build Options: -Dprefix=3D/usr -Dbindir=3Dbin -Ddatadir=3Dshare
+-Dincludedir=3Dinclude -Dinfodir=3Dshare/info -Dlibdir=3Dlib
+-Dlibexecdir=3Dlibexec -Dlocalstatedir=3D/var -Dmandir=3Dshare/man
+-Dsbindir=3Dsbin -Dsharedstatedir=3D/com -Dsysconfdir=3D/etc
+-Dbuildtype=3Dplain -Dwrap_mode=3Dnodownload '--cross-file
+/mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/gnome-text-editor/42.0=
+-r0/meson.cross'
+'--native-file /mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/gnome-t=
+ext-editor/42.0-r0/meson.native'
+Python system: Linux
+The Meson build system
+Version: 0.61.3
+Source dir: /mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/gnome-text=
+-editor/42.0-r0/gnome-text-editor-42.0
+Build dir: /mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/gnome-text-=
+editor/42.0-r0/build
+Build type: cross build
+Project name: gnome-text-editor
+Project version: 42.0
 
-diff --git a/meta-oe/recipes-support/idevicerestore/idevicerestore_git.bb b/meta-oe/recipes-support/idevicerestore/idevicerestore_git.bb
-new file mode 100644
-index 000000000..fc07c6e69
---- /dev/null
-+++ b/meta-oe/recipes-support/idevicerestore/idevicerestore_git.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "A command-line application to restore firmware files to iOS devices"
-+LICENSE = "LGPL-3.0-or-later"
-+LIC_FILES_CHKSUM = "\
-+    file://COPYING;md5=e6a600fd5e1d9cbde2d983680233ad02 \
-+"
-+
-+HOMEPAGE = "http://www.libimobiledevice.org/"
-+
-+DEPENDS = "libirecovery libimobiledevice libzip curl"
-+
-+PV = "1.0.1+git${SRCPV}"
-+
-+SRCREV = "280575bb95977241e240ed081a2602d68746443e"
-+SRC_URI = "git://github.com/libimobiledevice/idevicerestore;protocol=https;branch=master"
-+
-+S = "${WORKDIR}/git"
-+inherit autotools pkgconfig
--- 
-2.17.1
+../gnome-text-editor-42.0/meson.build:1:0: ERROR: Value "gnu17" (of
+type "string") for combo option "C language standard to use" is not
+one of the choices. Possible choices are (as string): "none", "c89",
+"c99", "c11", "gnu89", "gnu99", "gnu11".
 
+On Wed, Mar 30, 2022 at 11:50 PM Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om> wrote:
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> ---
+>  .../gnome-text-editor_42.0.bb                 | 27 +++++++++++++++++++
+>  .../packagegroups/packagegroup-gnome-apps.bb  |  1 +
+>  2 files changed, 28 insertions(+)
+>  create mode 100644 meta-gnome/recipes-gnome/gnome-text-editor/gnome-text=
+-editor_42.0.bb
+>
+> diff --git a/meta-gnome/recipes-gnome/gnome-text-editor/gnome-text-editor=
+_42.0.bb b/meta-gnome/recipes-gnome/gnome-text-editor/gnome-text-editor_42.=
+0.bb
+> new file mode 100644
+> index 000000000..01504b1cb
+> --- /dev/null
+> +++ b/meta-gnome/recipes-gnome/gnome-text-editor/gnome-text-editor_42.0.b=
+b
+> @@ -0,0 +1,27 @@
+> +SUMMARY =3D "A simple text editor"
+> +LICENSE =3D "GPL-3.0-only"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8f0e2cd40e05189ec81232da84bd6=
+e1a"
+> +
+> +GNOMEBASEBUILDCLASS =3D "meson"
+> +
+> +DEPENDS =3D " \
+> +    desktop-file-utils-native \
+> +    libadwaita \
+> +    gtk4 \
+> +    gtksourceview5 \
+> +    enchant2 \
+> +"
+> +
+> +GTKIC_VERSION =3D "4"
+> +
+> +inherit gnomebase gtk-icon-cache itstool gnome-help mime-xdg features_ch=
+eck
+> +
+> +ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
+> +REQUIRED_DISTRO_FEATURES =3D "opengl"
+> +
+> +SRC_URI[archive.sha256sum] =3D "0e32140ee1c13428563bcd5f784e61ee22ffd1ad=
+27d8c02283b4358a81dfab50"
+> +
+> +FILES:${PN} +=3D " \
+> +    ${datadir}/metainfo \
+> +    ${datadir}/dbus-1 \
+> +"
+> diff --git a/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-=
+apps.bb b/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.=
+bb
+> index dc446237b..7151f9326 100644
+> --- a/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
+> +++ b/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
+> @@ -20,6 +20,7 @@ RDEPENDS:${PN} =3D " \
+>      gnome-photos \
+>      gnome-screenshot \
+>      gnome-terminal \
+> +    gnome-text-editor \
+>      gthumb \
+>      libwnck3 \
+>      nautilus \
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#96286): https://lists.openembedded.org/g/openembedded=
+-devel/message/96286
+> Mute This Topic: https://lists.openembedded.org/mt/90150031/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
