@@ -1,114 +1,125 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <xuhuan.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F51BC433F5
-	for <webhook@archiver.kernel.org>; Thu, 31 Mar 2022 02:42:21 +0000 (UTC)
-Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com
- [209.85.222.177])
- by mx.groups.io with SMTP id smtpd.web12.2600.1648694540878091387
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F143C433EF
+	for <webhook@archiver.kernel.org>; Thu, 31 Mar 2022 08:13:17 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.65])
+ by mx.groups.io with SMTP id smtpd.web10.4605.1648714396230540460
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Mar 2022 19:42:21 -0700
+ Thu, 31 Mar 2022 01:13:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=FgEHXQZM;
- spf=pass (domain: gmail.com, ip: 209.85.222.177,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f177.google.com with SMTP id g8so18737466qke.2
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Mar 2022 19:42:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=MCRIVVXklKks/49Xt4np+9D1+s8H3W4ES/U5ChjscJ8=;
-        b=FgEHXQZMx4oxB2DsqXvav2CiuSeoL+66WGWFE/K8Gw4w/xGIuhh7BLN9m9YvUMKmzP
-         7rQ3uHlPEDjXmLXfPHBj81s/aBkSQfrKkT+fYvW/Ymwwte80DkiyJzBYieTDmk/FJPUp
-         +RrzmawX2eVJ4TFFQkHHD3PDILsvQzk2jYeezZQkUB9dKxzfFZ4VSw6ou2XlI5+syGkI
-         BFfiokF3s52zoVsxUrYTAXgUr8B8MelGZ84ObD5qFJcd/Sy6UHXOY5IpkPALEcbPST5l
-         9Z3ar5SVwensTgFI/oYk6ZevwyKgi1bZuY8HHOnj9Kv9S0V3m48mmxHmx2s8MrK3rDV6
-         QJdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=MCRIVVXklKks/49Xt4np+9D1+s8H3W4ES/U5ChjscJ8=;
-        b=OtsGsI7eBCYd/GRowaS+l2rIWBKcZqQRo97bNFGK/GgitrlQmW4iUyfgae03nD695A
-         Pit7GmEewXqzTSt4QsIqL0qdOmGULEajKqmdYGoY2K1uT5G4awAolgNxGZslUfoT2Wk9
-         DDOBq9f9ZvNvVcUCSk0kyXYE2YUrra+abv4AV5foH4GuKhIS7rFgmVEkkT62bw1hJaUv
-         PU+bm0549Vh1hmj0jPRSfjrymFw+gxUtwI8SXKdPNf3hissCSSyQ3VVOniICD4W6rGVP
-         c5g8uggR0Pq6q8fEc1WSHgyJrAPQPgjYXDBtFjTjy72io54mPtooY1C4nSJAFAonTeeh
-         t/bA==
-X-Gm-Message-State: AOAM530fZcwU9R67da8RU9vQcbWetuWwpodLUxVPv37OZ36eHczp/4ME
-	6JJXwb+iaxVTSNBi6DCu3EKyfYzUKP+m/sBtIf/gt7diG+0=
-X-Google-Smtp-Source: 
- ABdhPJy6UIYuEA+XT05/YVF1oihq27guJmrlcr93vFc80Xbvq5hohpNyIR+TRNNr7X9bkfBm/QXmzTrcFIlSX+D84dM=
-X-Received: by 2002:a05:620a:29ce:b0:67e:d7be:3491 with SMTP id
- s14-20020a05620a29ce00b0067ed7be3491mr1906601qkp.463.1648694539718; Wed, 30
- Mar 2022 19:42:19 -0700 (PDT)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=hzw2yPMP;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.65,
+ mailfrom: xuhuan.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1648714394; i=@fujitsu.com;
+	bh=hU395VkltBmxCaw+Y+qBQWrJm2g2b8LtyJExkZmDqZo=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=hzw2yPMPCV/p1e9zL2WASCM8EPoatsgPPU7LpC+v/0lBaoRYje5Yv8UxuUj3CevKU
+	 YNtbA3gAkXXbb4ftw2NmwdcCYOe6kBmhF0+6U61C8PhjUhZvFt97Tx9Q8SI0KTAYj1
+	 Rf1EL7SYjzxa/0yb6DlzariJSjeBOZvj5gt5vnHQYKo8gdWJomL6okO2TBBF0wLP1M
+	 BhIdYfXnO11YCpdpFa6afsJLidrrffZGGWxH3e6wmEuvA0CGSAM9KtgJsZDG2a3BGD
+	 JSqWENITNDsDU7z5M+iO+aMFgEupftI0ZTPhq2Zmgx0busJ89+hwrFu7E6jshu2P6M
+	 H3SdHYlysQXOQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrJIsWRWlGSWpSXmKPExsViZ8MxSXdmkmu
+  Swa9uTYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaN/yVOmgp08FUfOtbI3MK7j7mLk4hASeMIo
+  setQOxuEc4FJYtPFj+wQzklGiZM/JzB3MXJysAmoSzy++ZoRxBYR0JdYOnsPWJxZQFWi++Iad
+  hBbWCBUoufOFqA4BwcLUHzNGm6QMK+Au0TjqnWsILaEgILElIfvwUo4BTwktrQ4g4SFgEqm/d
+  nGDFEuKHFy5hMWiOkSEgdfvGCGaFWSOLHiIxOEXSHx+vAlqLiaxNVzm5gnMArOQtI+C0n7Aka
+  mVYxWSUWZ6RkluYmZObqGBga6hoamuqa6RkameolVuol6qaW65anFJbqGeonlxXqpxcV6xZW5
+  yTkpenmpJZsYgSGcUsz6cAfj4r6feocYJTmYlER5nQJck4T4kvJTKjMSizPii0pzUosPMcpwc
+  ChJ8GbEAeUEi1LTUyvSMnOA8QSTluDgURLhnRcDlOYtLkjMLc5Mh0idYlSUEuednACUEABJZJ
+  TmwbXBYvgSo6yUMC8jAwODEE9BalFuZgmq/CtGcQ5GJWHeIyBTeDLzSuCmvwJazAS0uO6xI8j
+  ikkSElFQDk2XGo2Dv/XIFEx5ePGD/zsPw+MrE7XL7u/z4tp1seF12UsPF5dTjU+/0Pn3redxu
+  Xrhfirm0yZtB4PO1hcUezKErcnL+RAVOfLA6qdmv/nyMH2dsyBmGwh/X5RjYeswKLEX/n3/FW
+  X2zeErtuieM/RqTzAI685OXqjR2HJxVI6Jpd3GB2u5dvoUs06/WGBSfVZ8dtY3zaByPfu4jW5
+  13uhNu5jPKr7wt5WRsHrzWeZ9LC9+Wa4sPMv5evSZU5urKjZ/tq2OSNoRE8+/UvqP9YdktmVM
+  TJIvn/X1gYzat6eP/cPFIBv1NM3xKRGdbfGS2P7l6i1fB77duvMeiV67deazkha+30XbjlNNf
+  7gm/UGIpzkg01GIuKk4EAIXvaJNcAwAA
+X-Env-Sender: xuhuan.fnst@fujitsu.com
+X-Msg-Ref: server-11.tower-587.messagelabs.com!1648714393!126056!1
+X-Originating-IP: [62.60.8.146]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.85.5; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 31404 invoked from network); 31 Mar 2022 08:13:13 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-11.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 31 Mar 2022 08:13:13 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 3DA9D100451
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 31 Mar 2022 09:13:13 +0100 (BST)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 3148A100354
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 31 Mar 2022 09:13:13 +0100 (BST)
+Received: from localhost.localdomain.localdomain (10.167.225.131) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Thu, 31 Mar 2022 09:12:58 +0100
+From: XU Huan <xuhuan.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Xu Huan <xuhuan.fnst@fujitsu.com>
+Subject: [PATCH 2/5] [oe] [meta-python] [PATCH] python3-evdev: upgrade 1.4.0
+ -> 1.5.0
+Date: Thu, 31 Mar 2022 16:13:25 +0800
+Message-ID: <1648714408-12048-2-git-send-email-xuhuan.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1648714408-12048-1-git-send-email-xuhuan.fnst@fujitsu.com>
+References: <1648714408-12048-1-git-send-email-xuhuan.fnst@fujitsu.com>
 MIME-Version: 1.0
-References: <20220331021648.16582-1-potin.lai@quantatw.com>
- <20220331021648.16582-2-potin.lai@quantatw.com>
-In-Reply-To: <20220331021648.16582-2-potin.lai@quantatw.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 30 Mar 2022 19:41:53 -0700
-Message-ID: 
- <CAMKF1so_bU3MeLOjmtYBgTGg0Wo-_sRPWi2KsObge-7Tzpj_7g@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH v2 1/4] libimobiledevice-glue: add recipe
-To: Potin Lai <potin.lai@quantatw.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Patrick Williams <patrick@stwcx.xyz>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.131]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 31 Mar 2022 02:42:21 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 31 Mar 2022 08:13:17 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96280
+ https://lists.openembedded.org/g/openembedded-devel/message/96287
 
-On Wed, Mar 30, 2022 at 7:17 PM Potin Lai <potin.lai@quantatw.com> wrote:
->
-> libimobiledevice-glue is the library with common code used by the
-> libraries and tools around the libimobiledevice project.
->
-> Signed-off-by: Potin Lai <potin.lai@quantatw.com>
-> ---
->  .../libimobiledevice-glue_git.bb                  | 15 +++++++++++++++
->  1 file changed, 15 insertions(+)
->  create mode 100644 meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_git.bb
->
-> diff --git a/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_git.bb b/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_git.bb
-> new file mode 100644
-> index 000000000..28303d082
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_git.bb
-> @@ -0,0 +1,15 @@
-> +SUMMARY = "Library with common code used by the libraries and tools around the libimobiledevice project"
-> +LICENSE = "LGPL-2.1"
+From: Xu Huan <xuhuan.fnst@fujitsu.com>
 
-can we use SPDX notation here please this would be LGPL-2.1-or-later
+changelog:
+===============================================================================
+-Fix documentation.
+-Re-enable TTY echo at evtest exit.
+-Fix ImportError: sys.meta_path is None, Python is likely shutting down.
+-Closing the input device file descriptor in InputDevice.close() now happens in
+the main thread, instead of in a new thread.
+-Fix util.find_ecodes_by_regex not working across all supported Python versions.
 
-> +LIC_FILES_CHKSUM = "\
-> +    file://COPYING;md5=6ab17b41640564434dda85c06b7124f7 \
-> +"
-> +
-> +HOMEPAGE = "http://www.libimobiledevice.org/"
-> +
-> +DEPENDS = "libplist"
-> +
-> +SRCREV = "ecb0996fd2a3b0539153dd3ef901d137bf498ffe"
-> +SRC_URI = "git://github.com/libimobiledevice/libimobiledevice-glue;protocol=https;branch=master"
-> +
-> +S = "${WORKDIR}/git"
-> +inherit autotools pkgconfig
+Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
+---
+ .../python/{python3-evdev_1.4.0.bb => python3-evdev_1.5.0.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-evdev_1.4.0.bb => python3-evdev_1.5.0.bb} (86%)
 
-I also set PV to something definitive I see that its using 1.0.0 in AC_INIT see
-https://github.com/libimobiledevice/libimobiledevice-glue/blob/master/configure.ac#L5
+diff --git a/meta-python/recipes-devtools/python/python3-evdev_1.4.0.bb b/meta-python/recipes-devtools/python/python3-evdev_1.5.0.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-evdev_1.4.0.bb
+rename to meta-python/recipes-devtools/python/python3-evdev_1.5.0.bb
+index 97a8aedd79..e17920ba1d 100644
+--- a/meta-python/recipes-devtools/python/python3-evdev_1.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-evdev_1.5.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/gvalkov/python-evdev"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=18debddbb3f52c661a129724a883a8e2"
+ 
+-SRC_URI[sha256sum] = "8782740eb1a86b187334c07feb5127d3faa0b236e113206dfe3ae8f77fb1aaf1"
++SRC_URI[sha256sum] = "5b33b174f7c84576e7dd6071e438bf5ad227da95efd4356a39fe4c8355412fe6"
+ 
+ inherit pypi setuptools3
+ 
+-- 
+2.25.1
 
-so perhaps use
-
-PV = "1.0.0+git${SRCPV}"
-
-> --
-> 2.17.1
->
 
