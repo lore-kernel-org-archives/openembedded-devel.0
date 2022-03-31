@@ -1,177 +1,99 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <schnitzeltony@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 68209C433EF
-	for <webhook@archiver.kernel.org>; Thu, 31 Mar 2022 16:09:27 +0000 (UTC)
-Received: from mail-qv1-f42.google.com (mail-qv1-f42.google.com
- [209.85.219.42])
- by mx.groups.io with SMTP id smtpd.web12.9143.1648742966044004441
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 06913C433F5
+	for <webhook@archiver.kernel.org>; Thu, 31 Mar 2022 17:00:34 +0000 (UTC)
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com
+ [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.web10.309.1648746033436408052
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 31 Mar 2022 09:09:26 -0700
+ Thu, 31 Mar 2022 10:00:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ip+ogB80;
- spf=pass (domain: gmail.com, ip: 209.85.219.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f42.google.com with SMTP id k7so20077876qvc.4
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=DnPgOmZe;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49,
+ mailfrom: schnitzeltony@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id
+ h23-20020a17090a051700b001c9c1dd3acbso23558pjh.3
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 31 Mar 2022 09:09:25 -0700 (PDT)
+ Thu, 31 Mar 2022 10:00:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=4HOzqpJ+QQu13gdzKNX/1yIrzizOqvRduWHF+SAnD6Q=;
-        b=ip+ogB80dYg0s1maf0vknrkOhkeaQjgPHJ8kK55D/Q7Iu4OjRcglkaZ9Il0FIiKffo
-         0B3uUD4vq6tIs55ATWhrfedspbzZ9x7mureXKilkKpdrjpTQFbIjSKu+BLbPLmckFrvc
-         4BcddxC4b+7WQqCwKCOc0ww5/GzZknLMQemS6/AyD/br6Kx6YhM9ksE3PoKFaPrJzoRE
-         owIkBczJNMuEwde4BDFrr/AvjqeQa08rynVImJW+fXB28dxk7B1JSi30P0s8UXcGf2V2
-         AZrQ98nG8QU5Qa7VYA+QeK8tCYCTnf97jE67BrHrSUsOONZ5HSTarD3ssRA4x3TZ06W6
-         1wGg==
+         :cc;
+        bh=gyWMiSQGiajFsofp1ci/UoB6o4b05/qF/1Ew7W+C6Jg=;
+        b=DnPgOmZe286/x+qee1MRZ8gJtqICYdLNBe+ojV4VZLoZvNvVkSatzflOJt4Rk7sRNY
+         qApvbfVpotl69UfXIbESw3aYxxAZ5XYeis3irh29VvreFTwpnBw/K3zuxRsTKk0ZRMkG
+         kyI03BJK5sUJpyzIh+H+Yoyt8DlnLG+FpxCz+8JwUJUjNiwP684BvM9LUzyuITbs4dGd
+         t3p5Ck9eqDYac5ibWvwmnQ/+b8FFpYO9M9o2E11Vr1ITjWUAmcTVh6VEmwirgqHXe4cz
+         N2v87U6mxmSPjlen8mTAiVsDY4YDbsRCglcH7s2oCY/R623qEtPUE6ACsunC4Q5ePwXN
+         7xwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=4HOzqpJ+QQu13gdzKNX/1yIrzizOqvRduWHF+SAnD6Q=;
-        b=ocxzAELzqR0hb1ek+X9qQU5C/Sb/N1bwC/I/uDRqJd4q+kEh1s4abAHOlYxPHpvtRt
-         JVe0nZeJQc1kdDx1FYcheSxeoQ0zKw10SdUwa8ui5VrU4RDCHS40Og1KAJgcpMs3F5g7
-         PgXrx81EUrUGKLOhPbPZVp6m/6d9Lk6nKvLNnrJIEP9h+4ZJrrwawEuklEmvQjrw53bz
-         bXz8ZH2R0Od5KFzkXxQ0YgfO8nUSAI0AJF22vZJyWAKI1itTef9ePpV8umZ2XBrAqjIL
-         ji9ElSahMPru6HCwZk3Z1Hcw2OvEXEY7AY+3+L6Q6ATz1DnJpfhH/DA6Y5lOFaU0Ru37
-         cytg==
-X-Gm-Message-State: AOAM533RzsZKOzbfHteWSNlYvWRV83F0mz9fPRERDpXjwF5yAbYrVijB
-	1x3xSDMMlJKOrfWr//pacplE2u487JvQiqcEBe5qTbqkHgY=
+         :message-id:subject:to:cc;
+        bh=gyWMiSQGiajFsofp1ci/UoB6o4b05/qF/1Ew7W+C6Jg=;
+        b=nSpD9NYVE03J2U+xERv0ltkrhCedWe5mD20j0lRytJucWkT/vU0oObkFKwbbXSQ4BR
+         Rsrnoj9IQa9EUegcU0S1gkiDHTna+fFDC5jTlPVsWJhGakCs0G3vt/zoJGQmzFzgJA9G
+         FM3Mm15+6TwJPWiwziQFuQIqpsvMNxCLRHuIHv3g1do+KbrY5B+EjC8DYzze54mIAQdM
+         PCm9nSY/2+eviY7J0rMEbQ3ZcVpk46qqDH11Xgdhw2oIb0u7ZXbUS4uFXnSoIsTMgmwR
+         vc10TID5awfwDfRK564p9tpCouhWDmDgPsFgNfrXLvCrTywUIuy7bTxvrY3p8ArjdbrA
+         9FTw==
+X-Gm-Message-State: AOAM5332e8IuWU4AwgGP2Z1AOGmN9HR28tSjtOBYfSAUVRLjS4RuLBJ+
+	knmbKULLq/iXtWoXEXNwr9gySPdLIGXxp47lrEk=
 X-Google-Smtp-Source: 
- ABdhPJxTdCLxPX9bKJnJbeKJQZiVnIWZbPo5cZWur26fRlQEoCdcqX143xgVZ4f40JGPLCWdXG4TkVVG52+RWynuw/M=
-X-Received: by 2002:ad4:5aa3:0:b0:443:9ba7:3f27 with SMTP id
- u3-20020ad45aa3000000b004439ba73f27mr3441227qvg.63.1648742965026; Thu, 31 Mar
- 2022 09:09:25 -0700 (PDT)
+ ABdhPJw5535cqoF+p69QAevNJNtjP6bGI4rPefyJTNqTOzkeBW4D/UjC1OaqvHjf+qQu6g24YLD4Hw+NPt++7ahaKDg=
+X-Received: by 2002:a17:902:f787:b0:14f:43ba:55fc with SMTP id
+ q7-20020a170902f78700b0014f43ba55fcmr42339770pln.3.1648746032766; Thu, 31 Mar
+ 2022 10:00:32 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220331064935.2763629-1-schnitzeltony@gmail.com>
- <20220331064935.2763629-2-schnitzeltony@gmail.com>
-In-Reply-To: <20220331064935.2763629-2-schnitzeltony@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 31 Mar 2022 09:08:58 -0700
+ <20220331064935.2763629-6-schnitzeltony@gmail.com>
+ <CAMKF1sr2BuF6+XEa5YG5Ezp4fq=oNYt6FFhzO8ByBH_XV5Y4jg@mail.gmail.com>
+In-Reply-To: 
+ <CAMKF1sr2BuF6+XEa5YG5Ezp4fq=oNYt6FFhzO8ByBH_XV5Y4jg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 31 Mar 2022 19:00:20 +0200
 Message-ID: 
- <CAMKF1soHzWsBnGVWH4ZPmbb=C=_KSD-b_1xFOq7u30eS4D09NA@mail.gmail.com>
-Subject: Re: [oe] [PATCH 2/6] gnome-commander: initial add 1.14.2
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+ <CALbNGRTw-HJ9KapN0q4ezGn35TPcOtUv_RGRG=di2bL1XrSegQ@mail.gmail.com>
+Subject: Re: [oe] [PATCH 6/6] gnome-text-editor: initial add 42.0
+To: Khem Raj <raj.khem@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 31 Mar 2022 16:09:27 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 31 Mar 2022 17:00:34 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96299
+ https://lists.openembedded.org/g/openembedded-devel/message/96300
 
-seeing this build failure on arm64 ( I use clang )
+On Thu, Mar 31, 2022 at 6:00 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> getting this error
+>
+> Build started at 2022-03-31T15:52:29.098624
+> Main binary: /mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/gnome-text-editor/42.0-r0/recipe-sysroot-native/usr/bin/nativepython3
+> Build Options: -Dprefix=/usr -Dbindir=bin -Ddatadir=share
+> -Dincludedir=include -Dinfodir=share/info -Dlibdir=lib
+> -Dlibexecdir=libexec -Dlocalstatedir=/var -Dmandir=share/man
+> -Dsbindir=sbin -Dsharedstatedir=/com -Dsysconfdir=/etc
+> -Dbuildtype=plain -Dwrap_mode=nodownload '--cross-file
+> /mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/gnome-text-editor/42.0-r0/meson.cross'
+> '--native-file /mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/gnome-text-editor/42.0-r0/meson.native'
+> Python system: Linux
+> The Meson build system
+> Version: 0.61.3
+> Source dir: /mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/gnome-text-editor/42.0-r0/gnome-text-editor-42.0
+> Build dir: /mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/gnome-text-editor/42.0-r0/build
+> Build type: cross build
+> Project name: gnome-text-editor
+> Project version: 42.0
+>
+> ../gnome-text-editor-42.0/meson.build:1:0: ERROR: Value "gnu17" (of
+> type "string") for combo option "C language standard to use" is not
+> one of the choices. Possible choices are (as string): "none", "c89",
+> "c99", "c11", "gnu89", "gnu99", "gnu11".
+Which compiler do you use?
 
-| In file included from
-../../../gnome-commander-1.14.2/src/intviewer/searcher.cc:27:
-| In file included from
-../../../gnome-commander-1.14.2/src/intviewer/libgviewer.h:40:
-| In file included from
-../../../gnome-commander-1.14.2/src/intviewer/viewer-window.h:27:
-| In file included from
-../../../gnome-commander-1.14.2/src/intviewer/../gnome-cmd-includes.h:24:
-
-             | In file included from
-../../../gnome-commander-1.14.2/libgcmd/libgcmd.h:26:
-| ../../../gnome-commander-1.14.2/libgcmd/libgcmd-widget-factory.h:167:70:
-warning: 'format' attribute argument not supported: gnu_printf
-[-Wignored-attributes]
-|     void create_error_dialog (const gchar *msg, ...) __attribute__
-((format (gnu_printf, 1, 2)));
-|                                                                      ^
-| ../../../gnome-commander-1.14.2/src/intviewer/searcher.cc:303:5:
-error: cannot initialize a parameter of type 'gint *' (aka 'int *')
-with an rvalue of type 'void *'
-|     g_atomic_int_compare_and_exchange (&src->priv->progress_value,
-oldval, (gint)d);
-|     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
-~~~~~~~~~~
-| /mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/gnome-commander/1.14=
-.2-r0/recipe-sysroot/usr/include/glib-2.0/glib/gatomic.h:160:44:
-note: expanded from macro 'g_atomic_int_co
-mpare_and_exchange'
-|     __atomic_compare_exchange_n ((atomic), (void *)
-(&(gaicae_oldval)), (newval), FALSE, __ATOMIC_SEQ_CST,
-__ATOMIC_SEQ_CST) ? TRUE : FALSE; \
-|                                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-| 1 warning and 1 error generated.
-| make[3]: *** [Makefile:521: searcher.o] Error 1
-| make[3]: Leaving directory
-'/mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/gnome-commander/1.14.=
-2-r0/build/src/intviewer'
-
-On Wed, Mar 30, 2022 at 11:50 PM Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om> wrote:
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> ---
->  .../gnome-commander/gnome-commander_1.14.2.bb | 22 +++++++++++++++++++
->  .../packagegroups/packagegroup-gnome-apps.bb  |  1 +
->  2 files changed, 23 insertions(+)
->  create mode 100644 meta-gnome/recipes-gnome/gnome-commander/gnome-comman=
-der_1.14.2.bb
->
-> diff --git a/meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.1=
-4.2.bb b/meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.14.2.bb
-> new file mode 100644
-> index 000000000..c67242299
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.14.2.bb
-> @@ -0,0 +1,22 @@
-> +SUMMARY =3D "A light and fast file manager"
-> +LICENSE =3D "GPL-2.0-only"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D59530bdf33659b29e73d4adb9f9f6=
-552"
-> +
-> +DEPENDS =3D " \
-> +    glib-2.0-native \
-> +    gtk+ \
-> +"
-> +
-> +inherit gnomebase itstool gettext gnome-help features_check
-> +ANY_OF_DISTRO_FEATURES =3D "${GTK2DISTROFEATURES}"
-> +
-> +SRC_URI[archive.sha256sum] =3D "1378efd24f8af18a09031d83d918f9662a3f5eba=
-5a6f9df9fc55870f2e6f0ee9"
-> +
-> +PACKAGECONFIG ??=3D "exiv2 taglib libgsf poppler"
-> +PACKAGECONFIG[exiv2] =3D "--with-exiv2,--without-exiv2,exiv2"
-> +PACKAGECONFIG[taglib] =3D "--with-taglib,--without-taglib,taglib"
-> +PACKAGECONFIG[libgsf] =3D "--with-libgsf,--without-libgsf,libgsf"
-> +PACKAGECONFIG[poppler] =3D "--with-poppler,--without-poppler,poppler"
-> +
-> +FILES:${PN} +=3D "${datadir}/metainfo"
-> +FILES:${PN}-dev +=3D "${libdir}/${BPN}/lib*${SOLIBSDEV}"
-> diff --git a/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-=
-apps.bb b/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.=
-bb
-> index 481dd727d..dc446237b 100644
-> --- a/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
-> +++ b/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.bb
-> @@ -15,6 +15,7 @@ RDEPENDS:${PN} =3D " \
->      ghex \
->      gnome-calculator \
->      gnome-calendar \
-> +    gnome-commander \
->      gnome-font-viewer \
->      gnome-photos \
->      gnome-screenshot \
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#96282): https://lists.openembedded.org/g/openembedded=
--devel/message/96282
-> Mute This Topic: https://lists.openembedded.org/mt/90150027/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Andreas
 
