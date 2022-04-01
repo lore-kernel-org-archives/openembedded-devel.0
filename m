@@ -1,77 +1,116 @@
-Return-Path: <schnitzeltony@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE2DFC433EF
-	for <webhook@archiver.kernel.org>; Fri,  1 Apr 2022 05:36:43 +0000 (UTC)
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
- [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web12.7005.1648791402934349202
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B5418C433F5
+	for <webhook@archiver.kernel.org>; Fri,  1 Apr 2022 05:59:47 +0000 (UTC)
+Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
+ [209.85.222.179])
+ by mx.groups.io with SMTP id smtpd.web08.7319.1648792787132026477
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 31 Mar 2022 22:36:43 -0700
+ Thu, 31 Mar 2022 22:59:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=E6nPIjzV;
- spf=pass (domain: gmail.com, ip: 209.85.210.180,
- mailfrom: schnitzeltony@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id w7so1613654pfu.11
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=cSuWZgty;
+ spf=pass (domain: gmail.com, ip: 209.85.222.179,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f179.google.com with SMTP id p25so1326640qkj.10
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 31 Mar 2022 22:36:42 -0700 (PDT)
+ Thu, 31 Mar 2022 22:59:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=056tMZNtOVxZ/tgy7T98vECKkqz+99qmI2ZbwV6SaL0=;
-        b=E6nPIjzVGEXMZDWKCGHO0F4Q67smT/NPnjaH8+AknGdnZxc4nuRM7a1/GQsHvvcJJN
-         lQq4Mhh9eGeYVq33b0CwYvXPVg7RzhpAPhKjxDUk7cYC0RZsDZzAGJvffBqOiy7aWUBR
-         LDUQXqDOMH9gAu6XuFw589JXXISqDVedqB3FUdVG9wNOg5nn7nHsxXvNuJkyc7TAtE/W
-         gkJC/0GETIoJDISwcu8L9/Gs/brHmya8bZXCueC8kyfq6dGRYRARbEl57NuVYVccWhes
-         oAU1ovh373ygMX49XVnsPaSLOOiNI1Kimp0SpFnMgDo8u9umxymMKDye2WxfhfMCyvwZ
-         1BFw==
+         :cc;
+        bh=CZctSnA2Wt52SCvyby8c2KHiIWZnRIhvDp0SXb2pOWk=;
+        b=cSuWZgtyyXzAMUPj2CpOWDmmyXHiiH8RmCXc96WuqZb24QwFpWGZD22QT9ODowIU11
+         V+jekPbexQzK3VHCGismb+oivJvIva7BmcjY31VLS14dJZMAp90TJRfq8jxcBWXBVn/a
+         dmEDpU4rWhqw4NeanPh09PxFi4ZEcXGsg7ablV8ACHNh1tnXP+4XTiaVKSb2p/1cc26y
+         AeDnOPzioBg9AV1XT1JlZvSArlubc8Xjak+A2kLJ5PYi3mWGATkRhwiyuBL7e4i6FHyL
+         t4F+XviQRoE9WUFJ2rdX/8t9ct/UsQFJa/WOymz6itYmXO7SjMQCLoMsAJq8QOsMHXq9
+         eAHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=056tMZNtOVxZ/tgy7T98vECKkqz+99qmI2ZbwV6SaL0=;
-        b=WvOV0Q41EHTo0zRzR6uhR9W4hF5FybJ1Zr6NEieyj+WwAhVSQZo5ej7aY+gRV9+8lB
-         zq2CCGTAG2oXaBECOvOHDA5s4oKIDBxtYNJXsW1zT8YVKVybVt4nxnsS7Ba44HIAe8kT
-         zeAcG+Ci1tgUOgGWHBx1CQ9k377FZHIrEZhHgDKetOTnn+cjIWn1Sa2LVOr/Q4PAfUTj
-         Z9HyuRX5e/BvStZAef/7pbSt2hOKiKXPbdb4ba7bePemnJAzfLGt2ac//aje4lEIJZY8
-         7dmHt+BzL6jWHyfR6VXcYw59s1UuPw7jZvTZQp7WZU1F4l7DZQbiOhHUcgyziQvEutxf
-         IOSg==
-X-Gm-Message-State: AOAM530Z/rANvI7kcoVopcb9YLRgqJ9gJI4zLnI/2caJAZ08n0QG/T1Z
-	3Pez/Zfq4IH16mGQhOFs3zJTu63ksurV1j2MPmk=
+         :message-id:subject:to:cc;
+        bh=CZctSnA2Wt52SCvyby8c2KHiIWZnRIhvDp0SXb2pOWk=;
+        b=023xUA06+Kdf+6r/B+nY7ups/92AjD5QuKXwidzYxwGJbcZHdRCSXj1xPQKKeUHl4h
+         WuliIbVf7LqJdFCGf30jppnCUlHywF2GTH8RpGGumMbDCrjv0jcqdFtUC5Cq/T6QDLOT
+         RCg1fqqDP+W7cxTElKG8ljD62G5DoAQjwK4g801eRYdeVA7Zy3LMl1PRS3eIiyguaoRc
+         iBN+P2a56n3VLIjXn25yGgqj6v7Idm+pkLKj1Ih9QzVA1f0Bnzl8MDx/b0YumKkyMCrM
+         kt9ftb9mArfnPmnMpUmD1uGBpX0nuVTDF04RbO/+/clvK8KFra5amq/PGjA8pFeEDyeF
+         28TA==
+X-Gm-Message-State: AOAM531hijDKa46v4mU0WbSumJ9yaSp5ATvTljmZ3+OtbYcEUCBGCOOO
+	TDmOTSdsCdKHypsmuzaXZheUWp3MXZGYBNO3Dfo=
 X-Google-Smtp-Source: 
- ABdhPJw5F40lcCM8FWTDGwXoTaAQpFIgb1R92C+xExaNEJpcGQhNTn+zQ/6DUBb9F5Gxg4r0LfKteiSdtk6xddu29Lg=
-X-Received: by 2002:a05:6a00:1ac8:b0:4fa:917f:c1aa with SMTP id
- f8-20020a056a001ac800b004fa917fc1aamr42922191pfv.2.1648791402461; Thu, 31 Mar
- 2022 22:36:42 -0700 (PDT)
+ ABdhPJwuwX5oDC+aBlBC8wco6a8Btgwsj5Whytky+VYZLmOrW3Zh5VkQtD7maI7qhgUOEw1CABJ231rBBQIDDt/afIY=
+X-Received: by 2002:a05:620a:460e:b0:680:9d1c:2493 with SMTP id
+ br14-20020a05620a460e00b006809d1c2493mr5603142qkb.227.1648792786087; Thu, 31
+ Mar 2022 22:59:46 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220401042203.1491670-1-raj.khem@gmail.com>
-In-Reply-To: <20220401042203.1491670-1-raj.khem@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Fri, 1 Apr 2022 07:36:29 +0200
-Message-ID: 
  <CALbNGRSU2DQOkEc9-H=Q2Kgo4JYxoAdoHqQT216oR9d6JX5oew@mail.gmail.com>
+In-Reply-To: 
+ <CALbNGRSU2DQOkEc9-H=Q2Kgo4JYxoAdoHqQT216oR9d6JX5oew@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 31 Mar 2022 22:59:35 -0700
+Message-ID: 
+ <CAMKF1squxgUVG9n0QAzB+OA7BcqiLzJENU=05jUiKJS=LVfDYg@mail.gmail.com>
 Subject: Re: [meta-gnome][PATCH] gnome-commander: Fix build with clang
-To: Khem Raj <raj.khem@gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/alternative; boundary="00000000000052b2fb05db917c8f"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 01 Apr 2022 05:36:43 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 01 Apr 2022 05:59:47 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96321
+ https://lists.openembedded.org/g/openembedded-devel/message/96322
 
-On Fri, Apr 1, 2022 at 6:22 AM Khem Raj <raj.khem@gmail.com> wrote:
->
-> Add a patch to fix it while glib-2.0 is resolving the issue
-Thanks for this. Does this build for clang/gnu? I had thought that the
-glib2/atomic issue was not the only one...
+--00000000000052b2fb05db917c8f
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Andreas
+Yes, it does.
+
+On Thu, Mar 31, 2022 at 10:36 PM Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om>
+wrote:
+
+> On Fri, Apr 1, 2022 at 6:22 AM Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > Add a patch to fix it while glib-2.0 is resolving the issue
+> Thanks for this. Does this build for clang/gnu? I had thought that the
+> glib2/atomic issue was not the only one...
 >
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Cc: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> Andreas
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > Cc: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+>
+
+--00000000000052b2fb05db917c8f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div>Yes, it does.</div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr=
+" class=3D"gmail_attr">On Thu, Mar 31, 2022 at 10:36 PM Andreas M=C3=BCller=
+ &lt;<a href=3D"mailto:schnitzeltony@gmail.com">schnitzeltony@gmail.com</a>=
+&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
+0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;padding-left:1e=
+x;border-left-color:rgb(204,204,204)">On Fri, Apr 1, 2022 at 6:22 AM Khem R=
+aj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@gma=
+il.com</a>&gt; wrote:<br>
+&gt;<br>
+&gt; Add a patch to fix it while glib-2.0 is resolving the issue<br>
+Thanks for this. Does this build for clang/gnu? I had thought that the<br>
+glib2/atomic issue was not the only one...<br>
+<br>
+Andreas<br>
+&gt;<br>
+&gt; Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
+&gt; Cc: Andreas M=C3=BCller &lt;<a href=3D"mailto:schnitzeltony@gmail.com"=
+ target=3D"_blank">schnitzeltony@gmail.com</a>&gt;<br>
+</blockquote></div></div>
+
+--00000000000052b2fb05db917c8f--
 
