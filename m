@@ -1,116 +1,115 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 34178C433F5
-	for <webhook@archiver.kernel.org>; Fri,  1 Apr 2022 03:00:27 +0000 (UTC)
-Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com
- [209.85.222.173])
- by mx.groups.io with SMTP id smtpd.web10.6179.1648782026493734285
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B22AC433EF
+	for <webhook@archiver.kernel.org>; Fri,  1 Apr 2022 03:42:04 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.65])
+ by mx.groups.io with SMTP id smtpd.web10.6468.1648784522613052273
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 31 Mar 2022 20:00:26 -0700
+ Thu, 31 Mar 2022 20:42:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=MbRNKlhS;
- spf=pass (domain: gmail.com, ip: 209.85.222.173,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f173.google.com with SMTP id p25so1119725qkj.10
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 31 Mar 2022 20:00:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=lY2XKFiunydP7G4oMDtxmeuMJWAePwX93xrzU59dbD4=;
-        b=MbRNKlhSMRxC5TKO4moFLAHSX9+PiErT8GcqZh3wF1tkQ/VGkp7tIBK6dNWGC6GOEB
-         xC5/slB6QndJurXDyDSjMyWzb+wId7krtB/r9g+ErTtNItD6JY23uMsmXUqYTlkQAnRm
-         ULunw0G6LmgeJHywk9y2hcR1byLi+C5Ryjo/iIPoyM/R6ircqehIrPHei03jpJzPhBTk
-         rGpICjRVd+p4U173zNKCOrmRCE6027Vivxr2CFNAoVciB8PhKIauoybmgA2Mmx7xc8v7
-         gr+VUEJsdNBdi9Rn10VWlG5zUjL85h/f5WW0UHtdR1uopG1uIHVFCHwOVpcuoTNAQbO0
-         uVJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=lY2XKFiunydP7G4oMDtxmeuMJWAePwX93xrzU59dbD4=;
-        b=scyViAqYlMYUl5G7ln9CLPKnthWNXXnJ8s9NN9UP4E2/JpPlCwQoQQiCHCwSJ7kATy
-         Q9nKDBdnyhSDnmjnc3h0XN9/NYVFPfwUKxOztPfjHvhjHQATvYSs1LzwH+vI/PjRPRY0
-         kijyUEJ3xuc6mWVQa04Ds0sAZTlEi/MhPsyM4Vo+lDOWdwtZUDuTDJrC/5NcaQNP4b9N
-         UMk3kDAfU5tgqUrfIi2pYofK7/Q3+E4aQipBFcwrC1wQMsnJ8LNx0tqVUrpAsKWTAs/Y
-         59XlVr9HkNcUKsB0Rj9tkAPFNVBUXi/jeIOKGLbrIJ3mbsceIt5ms3oNDmXnknC0y5At
-         hR0g==
-X-Gm-Message-State: AOAM532eT57Vtuz4Lk9Gm48vZaqdX0qrHMB3Y/Ws7MjKD6ClHEBL7QON
-	vqw2L8h43QJfoP7jozeZVWgE4fDv2+p2UQo6kUI=
-X-Google-Smtp-Source: 
- ABdhPJxkeJPjhuFH/kXhvGkVHjeZn5PhhRYATTYZPibUaxvYnSkEes8Obv3/RsBIgveH3X68t+TVUOdpRpuAXvqUQ1c=
-X-Received: by 2002:a05:620a:2993:b0:67d:7116:a642 with SMTP id
- r19-20020a05620a299300b0067d7116a642mr5393383qkp.180.1648782025476; Thu, 31
- Mar 2022 20:00:25 -0700 (PDT)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=mPvvDml5;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.65,
+ mailfrom: zhengrq.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1648784520; i=@fujitsu.com;
+	bh=/pEvmuVZ5bDAMcwQYZevAnH2kqmEdi2xZe40xVkdOfA=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=mPvvDml57kOVV1AVTFUeW12wDzI5gnLT+/AE4V/nBbMRD0jPfdrJnY+BQmHpClPlS
+	 38z66A9BoTCJ7FK9VrSetTOED5AHuzcDVjb5nbPBk7+JMp1xQSlL+6ykmsHDN5Jy54
+	 33V7hD4P127LUB2R3BIxbep2QbYJQYTC4/fxVqcx9/J+/zv+sV5AoV8pJ95hkojkgi
+	 Ua8EvyfbvouKiu8fQW+yTP1JzKmDXDTJmS8Zk2S+b3twqazbKhkiFz0m8WYOYHuPtU
+	 wWm0Emtt29yJP9NKN2gtUW/w58480On0lzdzJbzGNiPLFNqQ2MEIb6Wkpm/I2om6te
+	 2ejwkzgR9LkIw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrGIsWRWlGSWpSXmKPExsViZ8ORqNte4pZ
+  kMLXP0uLi4aXMDowe5zauYAxgjGLNzEvKr0hgzbjz5jl7wWyuit9ntrA0MG7l7GLk4hASeMIo
+  cejxGiYI5wKTxIUDZxghnP2MEu27r7N2MXJysAnoSrz4sZgFxBYR0JdYOnsPM4gtLOArsWLaS
+  bA4i4CKxJul09hBbF4BD4mbfdPBeiUEFCSmPHzPDBEXlDg58wlYPbOAhMTBFy+A4hxANYoSs6
+  fLQ5RXSLw+fIkZwlaTuHpuE/MERr5ZSLpnIelewMi0itEqqSgzPaMkNzEzR9fQwEDX0NBU11D
+  XyMBYL7FKN1EvtVS3PLW4RNdQL7G8WC+1uFivuDI3OSdFLy+1ZBMjMPhSihlP72Dc1PdT7xCj
+  JAeTkiivwyHXJCG+pPyUyozE4oz4otKc1OJDjDIcHEoSvB05bklCgkWp6akVaZk5wEiASUtw8
+  CiJ8AYXA6V5iwsSc4sz0yFSpxgVpcR5JUESAiCJjNI8uDZY9F1ilJUS5mVkYGAQ4ilILcrNLE
+  GVf8UozsGoJMxbCjKFJzOvBG76K6DFTECL9W+4giwuSURISTUwKT30nbSyeoVn8EObkIdf5sd
+  /mZFcEbedr+JSxtVbR4xvz1FjmJrNsal6Zxhnjvz9xgxrdyfZSXYTp52ZdXKyuvxM7dcMGo/z
+  7tffDV60tcawuNld/Kms2/L9L66d25Mt4WS9wXCOgNX+1FfvjO6E92/hWezEEVg8PSGFw2by2
+  a9ni6+8WXUw/bpUb6pPR43v36oCjnf3/wooWUyunPRivdC5kp5tbU+q/iRKyN32C+4+mrGtp2
+  ax7l+1qZOXseT72Gct4vlUp+jafre6TXNOzZyzGpWNO+ekhb6axfP+5RmxBzMlFvKe0mfolNr
+  55Pn984HKIrxPv2yWyTvAMHf1i/3dU8QyFjoxeVa78mfOUWIpzkg01GIuKk4EAORbKjo5AwAA
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-11.tower-587.messagelabs.com!1648784519!209221!1
+X-Originating-IP: [62.60.8.97]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.85.5; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 28045 invoked from network); 1 Apr 2022 03:41:59 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-11.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 1 Apr 2022 03:41:59 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 7C8BA1001A0
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri,  1 Apr 2022 04:41:59 +0100 (BST)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 70865100180
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri,  1 Apr 2022 04:41:59 +0100 (BST)
+Received: from CentOS7.g08.fujitsu.local (10.167.225.35) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Fri, 1 Apr 2022 04:41:23 +0100
+From: zhengrq.fnst <zhengrq.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-python] [PATCH] python3-jdatetime: upgrade 4.0.0 -> 4.1.0
+Date: Fri, 1 Apr 2022 11:41:14 +0800
+Message-ID: <1648784474-10200-1-git-send-email-zhengrq.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <20220331195826.2578886-1-schnitzeltony@gmail.com>
- <20220331195826.2578886-2-schnitzeltony@gmail.com>
-In-Reply-To: <20220331195826.2578886-2-schnitzeltony@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 31 Mar 2022 19:59:59 -0700
-Message-ID: 
- <CAMKF1srRu3HgDFct0=BP2wQM-9H0xTnC+mRhFVKEihzoYVzrVw@mail.gmail.com>
-Subject: Re: [oe] [PATCH 2/2] gnome-commander: Force gcc(-runtime)
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 01 Apr 2022 03:00:27 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 01 Apr 2022 03:42:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96313
+ https://lists.openembedded.org/g/openembedded-devel/message/96314
 
-This is due to a regression introduced in glib-2.0 via
-https://gitlab.gnome.org/GNOME/glib/-/merge_requests/2114
- see
-https://gitlab.gnome.org/GNOME/glib/-/issues/2625
+Changelog:
+===========
+ feat(strptime):handle %b and %B directive.
+ Improve README.
+ ZWNJ Replacement.
+ feat(strptime):handle %z directive.
 
-for details. So I guess until the above issue is resolved we can
-disable clang for it.
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+---
+ .../{python3-jdatetime_4.0.0.bb => python3-jdatetime_4.1.0.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-jdatetime_4.0.0.bb => python3-jdatetime_4.1.0.bb} (79%)
 
-On Thu, Mar 31, 2022 at 12:58 PM Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om> wrote:
->
-> clang/llvm cause multiple issues and it is not upon us to fix them
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> ---
->  .../recipes-gnome/gnome-commander/gnome-commander_1.14.2.bb   | 4 ++++
->  1 file changed, 4 insertions(+)
->
-> diff --git a/meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.1=
-4.2.bb b/meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.14.2.bb
-> index c67242299..f0f47fd53 100644
-> --- a/meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.14.2.bb
-> +++ b/meta-gnome/recipes-gnome/gnome-commander/gnome-commander_1.14.2.bb
-> @@ -18,5 +18,9 @@ PACKAGECONFIG[taglib] =3D "--with-taglib,--without-tagl=
-ib,taglib"
->  PACKAGECONFIG[libgsf] =3D "--with-libgsf,--without-libgsf,libgsf"
->  PACKAGECONFIG[poppler] =3D "--with-poppler,--without-poppler,poppler"
->
-> +# gnome commander has several issues with clang/llvm
-> +TOOLCHAIN =3D "gcc"
-> +RUNTIME =3D "gnu"
-> +
->  FILES:${PN} +=3D "${datadir}/metainfo"
->  FILES:${PN}-dev +=3D "${libdir}/${BPN}/lib*${SOLIBSDEV}"
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#96307): https://lists.openembedded.org/g/openembedded=
--devel/message/96307
-> Mute This Topic: https://lists.openembedded.org/mt/90163236/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-python/recipes-devtools/python/python3-jdatetime_4.0.0.bb b/meta-python/recipes-devtools/python/python3-jdatetime_4.1.0.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-jdatetime_4.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-jdatetime_4.1.0.bb
+index f76f275036..c96e5c39ed 100644
+--- a/meta-python/recipes-devtools/python/python3-jdatetime_4.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-jdatetime_4.1.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/slashmili/python-jalali"
+ LICENSE = "Python-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c80be45b33471b4a23cf53d06a8172be"
+ 
+-SRC_URI[sha256sum] = "d35baea2ed213e4e87bb840c61637001540bd21e8e4454bd12352b06591ec08e"
++SRC_URI[sha256sum] = "4a67a82ee57e35b5f6f9f7fbe6a0eda63f56ce1dd8af409b4c2a26a3340457db"
+ 
+ PYPI_PACKAGE = "jdatetime"
+ 
+-- 
+2.25.1
+
 
