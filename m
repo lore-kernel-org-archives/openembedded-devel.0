@@ -1,102 +1,92 @@
-Return-Path: <schnitzeltony@gmail.com>
+Return-Path: <liezhi.yang@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB224C636F8
-	for <webhook@archiver.kernel.org>; Mon,  4 Apr 2022 18:46:45 +0000 (UTC)
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
- [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.web10.10424.1648893401870543448
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 79C2DC63703
+	for <webhook@archiver.kernel.org>; Mon,  4 Apr 2022 18:46:46 +0000 (UTC)
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
+ by mx.groups.io with SMTP id smtpd.web12.8172.1648870004667837718
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 02 Apr 2022 02:56:42 -0700
+ Fri, 01 Apr 2022 20:26:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=UYEFIE2a;
- spf=pass (domain: gmail.com, ip: 209.85.215.169,
- mailfrom: schnitzeltony@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id c11so4212985pgu.11
-        for <openembedded-devel@lists.openembedded.org>;
- Sat, 02 Apr 2022 02:56:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=aLLOe+Ja1rpkZ1/Q0FXk12ocs3hwZLquOyhRv4cBeoE=;
-        b=UYEFIE2azqaV2UF33riLxeQpgXv3hzcooW6YQyLXu3suszHb7UqUJwsaPyFaJ9RLTD
-         FqS70Uckw82nFWyt/kY5i1w7cCjJ8hFe+pPURBa/r18jqSgbFvsXVqyV4h3SL6wLk/T9
-         hFTD3fim0pQ8yQvP27tdN3ClBYqlkUzFdbtM+RlMauP7O5C0X95JLJ6BWjBBZ3eQy/Oy
-         TJbyHryzvf7F4iuQkkAfY2BssywjkKu3Oy121/kyaPW9kgavaSsVP8l06ETWnXLDFiwZ
-         8v/xocZiwZQ0Z8XE/FFJvZfWmTwuZxWUhEguiISja4XaUIsdYs39nhGB9fcAQ0Jq6phS
-         YaTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=aLLOe+Ja1rpkZ1/Q0FXk12ocs3hwZLquOyhRv4cBeoE=;
-        b=dGidANnRKbGZGhXd0y2MqmWUOyJb5CaJHvhw2zfT4rBgE/20mODNllLOW/FEy2t7rg
-         XJOZ3rsssTM2zCn9bd8FhArp6OJkfdJ36eHOHGRMig6aPEwYF3s5Rkt352wog745eLZz
-         BRYtQjudwMpH49AtOQrt07vx+2BjJIiyIq1GdMpOqPz9zJS9EVGb+CJp7kOkecayWbg7
-         28Dy1AMNEqXOxP7M0A7tQqZ5x2Dc257Vnj7oFxdZABDMn/X/KulJ/AVhyp7F8lQdyh3B
-         6vg6tCplpgr9pf4mmNSBCuN4Hfdnie/tc6UvWExbTx9P3ApScX9xn0XtsjZ14ks2cGTV
-         yflQ==
-X-Gm-Message-State: AOAM533xqkiJ1kSLJtHQaoeihT+Nat16QenZnH/6JGDWR3FlLnyJinQF
-	adLJa2PQifhoKbqT8ZZrhaTikxhwjc8p5scfRDM=
-X-Google-Smtp-Source: 
- ABdhPJwBvNSWc+dOW6V0OcawvGfkUX8mwDm6cBEZFEqQCo5sc0ThMmr4umYnfDqDiqPGAfIlD/gMEUQah4LghjVl7+o=
-X-Received: by 2002:a63:6e48:0:b0:397:fb23:794f with SMTP id
- j69-20020a636e48000000b00397fb23794fmr18200909pgc.338.1648893401324; Sat, 02
- Apr 2022 02:56:41 -0700 (PDT)
+ dkim=missing;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
+ domain name (domain: windriver.com, ip: 147.11.3.146,
+ mailfrom: liezhi.yang@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 2323QggI014676
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Fri, 1 Apr 2022 20:26:42 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Fri, 1 Apr 2022 20:26:42 -0700
+Received: from ala-lpggp3.wrs.com (147.11.105.124) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Fri, 1 Apr 2022 20:26:42 -0700
+From: Robert Yang <liezhi.yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] wxwidgets: Fix checking for PACKAGECONFIG and
+ DISTRO_FEATURES
+Date: Fri, 1 Apr 2022 20:26:42 -0700
+Message-ID: <20220402032642.107153-1-liezhi.yang@windriver.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-References: <20220401223705.1818622-1-schnitzeltony@gmail.com>
- <20220401223705.1818622-5-schnitzeltony@gmail.com>
- <de5e673c-4c74-3223-f4c7-0216e0fa8ec5@gmail.com>
-In-Reply-To: <de5e673c-4c74-3223-f4c7-0216e0fa8ec5@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Sat, 2 Apr 2022 11:56:29 +0200
-Message-ID: 
- <CALbNGRRUbr6MoMWWwYW6io100=KfGGJe5Nce5nvRTR-MjqfE8g@mail.gmail.com>
-Subject: Re: [oe] [PATCH 05/15] orage: enable notify PACKAGECONFIG by default
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 04 Apr 2022 18:46:45 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Apr 2022 18:46:46 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96345
+ https://lists.openembedded.org/g/openembedded-devel/message/96342
 
-On Sat, Apr 2, 2022 at 2:30 AM Khem Raj <raj.khem@gmail.com> wrote:
->
->
->
-> On 4/1/22 3:36 PM, Andreas M=C3=BCller wrote:
-> > Trying to eliminate libnotify does not make sense: XFCE images should c=
-ontain
-> > xfce4-notifyd which depend upon libnotify unconditionally
-> >
-> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> > ---
-> >   meta-xfce/recipes-apps/orage/orage_4.16.0.bb | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-xfce/recipes-apps/orage/orage_4.16.0.bb b/meta-xfce/r=
-ecipes-apps/orage/orage_4.16.0.bb
-> > index f56050018..d10cdaac4 100644
-> > --- a/meta-xfce/recipes-apps/orage/orage_4.16.0.bb
-> > +++ b/meta-xfce/recipes-apps/orage/orage_4.16.0.bb
-> > @@ -8,7 +8,7 @@ inherit xfce-app mime-xdg
-> >
-> >   SRC_URI[sha256sum] =3D "26111a3b6a2007c82f1e0a1e0591b774a0b132f3a7f1c=
-de53d9be661b2f11700"
-> >
-> > -PACKAGECONFIG ??=3D ""
-> > +PACKAGECONFIG ??=3D "notify"
->
-> If it is must have then does it make sense to have it as a packageconfig =
-?
-It is not a must have - users looking for minimalistic images can
-override. It is just a default offering best out of the box experience
+The PACKAGECONFIG depends on DISTRO_FEATURES, not DISTRO_FEATURES depends on
+PACKAGECONFIG. And the REQUIRED_DISTRO_FEATURES is not needed since it can work
+with gtk or x11.
 
-Andreas
+Fixed when x11 is not in DISTRO_FEATURES:
+$ bitbake wxwidgets
+ERROR: Nothing PROVIDES 'wxwidgets'
+wxwidgets was skipped: missing required distro feature 'x11' (not in DISTRO_FEATURES)
+
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+---
+ meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
+index f9349b02a..b10742eac 100644
+--- a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
++++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
+@@ -10,10 +10,7 @@ LICENSE = "WXwindows"
+ LIC_FILES_CHKSUM = "file://docs/licence.txt;md5=981f50a934828620b08f44d75db557c6"
+ 
+ inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt', 'cmake_qt5', 'cmake', d)}
+-inherit features_check lib_package binconfig pkgconfig
+-
+-# All toolkit-configs except 'no_gui' require x11 explicitly (see toolkit.cmake)
+-REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG', 'no_gui', '', 'x11', d)}"
++inherit lib_package binconfig pkgconfig
+ 
+ DEPENDS += " \
+     jpeg \
+@@ -46,7 +43,11 @@ EXTRA_OECMAKE:append:libc-musl = " \
+     -DHAVE_LOCALE_T=OFF \
+ "
+ 
+-PACKAGECONFIG ?= "gtk ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)}"
++# All toolkit-configs except 'no_gui' require x11 explicitly (see toolkit.cmake)
++PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', 'no_gui', d)} \
++    ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)} \
++"
++
+ PACKAGECONFIG:remove:class-native = "opengl"
+ 
+ # Note on toolkit-PACKAGECONFIGs: select exactly one of 'no_gui' / 'gtk' / 'qt'
+-- 
+2.31.1
+
 
