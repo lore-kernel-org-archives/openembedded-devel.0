@@ -2,64 +2,61 @@ Return-Path: <quaresma.jose@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AC4DDC49EA5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CEA8C49EA2
 	for <webhook@archiver.kernel.org>; Mon,  4 Apr 2022 18:46:43 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
- [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.web12.25567.1649008871719030088
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com
+ [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.web10.25886.1649008869613613721
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 03 Apr 2022 11:01:12 -0700
+ Sun, 03 Apr 2022 11:01:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ouABc4/C;
- spf=pass (domain: gmail.com, ip: 209.85.128.54,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=VE9oGpVj;
+ spf=pass (domain: gmail.com, ip: 209.85.221.52,
  mailfrom: quaresma.jose@gmail.com)
-Received: by mail-wm1-f54.google.com with SMTP id
- 123-20020a1c1981000000b0038b3616a71aso4319962wmz.4
+Received: by mail-wr1-f52.google.com with SMTP id w4so11212007wrg.12
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 03 Apr 2022 11:01:11 -0700 (PDT)
+ Sun, 03 Apr 2022 11:01:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=lZW+157u3w1F3m1SBWyxfbDaq/iq2ZU7NdmTIkYFovo=;
-        b=ouABc4/CMFA2DBneNNQmYeJvR9cMdlkBr0DTTDEF7JLghPrdxfN0kv/HILzSoFithu
-         YnV56gbrKcFi0I34FCiTdo0GUxEnJwyJLdeRimHegY6qIoypNizJACln9EKzcYkmx6qL
-         jTpgIz+s5NXQ/Yfyn2G+y1EFICiRlMDqUqmKoPbTIJCngSxrYnv1E66T+vZIaDFUpXuX
-         sE9bAg8aNuYdrJeEGjh9fNYgp6+TaYs8Ne5PAfH45uDEV3+OdFyb15utrtzXpr43ZaZ0
-         mwhIA8KCsJwMCsgJdAOjkdFrcyxSEKW/GkIIoMzbM9pZjm6m3U3lMq7R6mraULt0n1A8
-         RzFg==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=jLjNg4zTuTpRSkPoxq30AeUz86Op8UMDE6adzho1YXM=;
+        b=VE9oGpVjZfsk2V7OXXQboO+QWSQpWImJ36/j4dX0zheTVexj4wEHq9knpdClTXkxOH
+         17AOvUsFsH1fLi8HX5CEloLZJJyrO9qG5GVBTJ9BbNPjjCgOxVB4XkG7d7VwbN/bndXr
+         3JIq1NIM5GEvtU1aTLJh+IQGbZarf2BngNVkYPxV+n2L3moZ8/8TLPE/VOif3qD7wF0p
+         vwxXU02eMLoRCxUKfwV6W2lnZ0YD5/xuvf9HzOA0PKyqVzckisiH8pILVJGsg5yz5jPr
+         rbJk7Kv8PNn8aquOYRdExN/CAh0JhrcZ3189Kb0JkhWPxx8nPtU6mYeM8JLX4Qdny1UW
+         ju6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=lZW+157u3w1F3m1SBWyxfbDaq/iq2ZU7NdmTIkYFovo=;
-        b=K8yeHSy0ntalbB+hxlQSWh6sr8x/BcOW7i8+KNZxebrg0dve91nDKaBwBWp1JljB+q
-         KM0oPsPIH64M/Yq33oVV/e5QCXqhGnt1iLLlYj0mGiFuFZCF6aerCJMtvCVLo9tNyarE
-         4PeVdYs7Uh0yfjKCYkN6/bsg1I6Wdvy0I1rMLQ3wB9vluIaQ08iIE7oEdqQz1o2hkSKQ
-         91nV6/IBhJbIm6Vav/m6Lg4fQfgq3d07pbzEkjvtQbD0fVomizbEezCgOwJgCh4zAQoV
-         dUET9LEPgcuffQrcMNz6+Pa1kAxsORwKizChx97r+udujJQsQewsKg6HwNsudZkqfYAu
-         c7gQ==
-X-Gm-Message-State: AOAM5327SuxXSlMf2+N82QGkVdpUoq6XvNTj1Gr0n1+PxR0t6TC41Zyu
-	eAMSxW79zpAmuzI8ZwP2IP3fDJAbNonZmw==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=jLjNg4zTuTpRSkPoxq30AeUz86Op8UMDE6adzho1YXM=;
+        b=wUO6q3x8zQ7R6tZstyeI3BLL0Shqr/LV071YzyNFhmOGuqrKYbL8NgMSmvCd9QVS9f
+         DARcH9O9nwiQGvWyUq2AVwZTcxhV8d3DeVUIGx9mUA1HRu9uu6eAGonfqh/Vo8ixM3iX
+         TnPH45SM3WQe0YLhlSKXoGTuCTFASxUcTYWzs49nCE5ortQWnhh6TN/dHn3mFuawNRNb
+         YJKSF9EwOCWAtpzF4gow+GXJFKZMp7dhEHifKnXn+0uY80wJFl1oQb6wyuldakQNaTmK
+         4QCUDvio2eFV5TU9WjgijVsTKhS/i/KFi8jLiN3GnVKAHdtKE+nZTd3O9ZLhw4Xzylvy
+         ukSQ==
+X-Gm-Message-State: AOAM532FXdfOF6FioKzDMajYNB3YB4Kx+PopDpFTl8iua+XN0WJCkwBG
+	1m8dJG+hQBSzYQt1devyNs+zyGWjPZRfww==
 X-Google-Smtp-Source: 
- ABdhPJzM4Svlca4HUEejHRbkRw4eQo5CGlqN4cTxJh9V7MDA9bEUvwIN9bvZI10liaaIoggVmS5SjQ==
-X-Received: by 2002:a05:600c:4f86:b0:38c:bd13:e074 with SMTP id
- n6-20020a05600c4f8600b0038cbd13e074mr16606524wmq.97.1649008870083;
-        Sun, 03 Apr 2022 11:01:10 -0700 (PDT)
+ ABdhPJzTemqVbSbNplRYhL/zA2BEvF25c8X1K8L7dNSzqv3wv4TU0RlTp79ozmK2WJqp76KkTJ9BiQ==
+X-Received: by 2002:adf:ef11:0:b0:205:b266:68eb with SMTP id
+ e17-20020adfef11000000b00205b26668ebmr14875448wro.310.1649008867770;
+        Sun, 03 Apr 2022 11:01:07 -0700 (PDT)
 Received: from CTW-01195.lan (176.57.115.89.rev.vodafone.pt. [89.115.57.176])
         by smtp.gmail.com with ESMTPSA id
- k23-20020a7bc417000000b0038ccada7566sm14492298wmi.11.2022.04.03.11.01.09
+ k23-20020a7bc417000000b0038ccada7566sm14492298wmi.11.2022.04.03.11.01.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 03 Apr 2022 11:01:09 -0700 (PDT)
+        Sun, 03 Apr 2022 11:01:06 -0700 (PDT)
 From: Jose Quaresma <quaresma.jose@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jose Quaresma <quaresma.jose@gmail.com>
-Subject: [meta-oe][PATCH 2/2] srt: 1.4.3 -> 1.4.4
-Date: Sun,  3 Apr 2022 19:01:03 +0100
-Message-Id: <20220403180103.2147606-2-quaresma.jose@gmail.com>
+Subject: [meta-oe][PATCH 1/2] srt: 1.4.2 -> 1.4.3
+Date: Sun,  3 Apr 2022 19:01:02 +0100
+Message-Id: <20220403180103.2147606-1-quaresma.jose@gmail.com>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220403180103.2147606-1-quaresma.jose@gmail.com>
-References: <20220403180103.2147606-1-quaresma.jose@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
@@ -67,30 +64,67 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 04 Apr 2022 18:46:43 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96371
+ https://lists.openembedded.org/g/openembedded-devel/message/96370
 
 Signed-off-by: Jose Quaresma <quaresma.jose@gmail.com>
 ---
- .../recipes-support/srt/{srt_1.4.3.bb => srt_1.4.4.bb}          | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-support/srt/{srt_1.4.3.bb => srt_1.4.4.bb} (95%)
+ ...001-core-Fix-build-with-GCC-11.-1806.patch | 26 -------------------
+ .../srt/{srt_1.4.2.bb => srt_1.4.3.bb}        |  3 +--
+ 2 files changed, 1 insertion(+), 28 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-support/srt/srt/0001-core-Fix-build-with-GCC-11.-1806.patch
+ rename meta-multimedia/recipes-support/srt/{srt_1.4.2.bb => srt_1.4.3.bb} (90%)
 
-diff --git a/meta-multimedia/recipes-support/srt/srt_1.4.3.bb b/meta-multimedia/recipes-support/srt/srt_1.4.4.bb
-similarity index 95%
-rename from meta-multimedia/recipes-support/srt/srt_1.4.3.bb
-rename to meta-multimedia/recipes-support/srt/srt_1.4.4.bb
-index 9dc862c57b..d6cf36dfbe 100644
---- a/meta-multimedia/recipes-support/srt/srt_1.4.3.bb
-+++ b/meta-multimedia/recipes-support/srt/srt_1.4.4.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/Haivision/srt"
+diff --git a/meta-multimedia/recipes-support/srt/srt/0001-core-Fix-build-with-GCC-11.-1806.patch b/meta-multimedia/recipes-support/srt/srt/0001-core-Fix-build-with-GCC-11.-1806.patch
+deleted file mode 100644
+index 0cb6943ccb..0000000000
+--- a/meta-multimedia/recipes-support/srt/srt/0001-core-Fix-build-with-GCC-11.-1806.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From f1b35cbf5b9b42b031e9b119e4c802b5f744468c Mon Sep 17 00:00:00 2001
+-From: Christophe Giboudeaux <krop@users.noreply.github.com>
+-Date: Wed, 10 Feb 2021 12:42:45 +0000
+-Subject: [PATCH] [core] Fix build with GCC 11. (#1806)
+-
+-The 'limits' header must be included explicitly.
+----
+-Upstream-Status: Backport [https://github.com/haivision/srt/commit/f1b35cbf5b9b42b031e9b119e4c802b5f744468c]
+- srtcore/sync.h | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/srtcore/sync.h b/srtcore/sync.h
+-index 59c125a7..9f01ca91 100644
+---- a/srtcore/sync.h
+-+++ b/srtcore/sync.h
+-@@ -15,6 +15,7 @@
+- //#define ENABLE_CXX17
+- 
+- #include <cstdlib>
+-+#include <limits>
+- #ifdef ENABLE_STDCXX_SYNC
+- #include <chrono>
+- #include <thread>
+--- 
+-2.30.1
+-
+diff --git a/meta-multimedia/recipes-support/srt/srt_1.4.2.bb b/meta-multimedia/recipes-support/srt/srt_1.4.3.bb
+similarity index 90%
+rename from meta-multimedia/recipes-support/srt/srt_1.4.2.bb
+rename to meta-multimedia/recipes-support/srt/srt_1.4.3.bb
+index 5b5c1f24d9..9dc862c57b 100644
+--- a/meta-multimedia/recipes-support/srt/srt_1.4.2.bb
++++ b/meta-multimedia/recipes-support/srt/srt_1.4.3.bb
+@@ -6,10 +6,9 @@ HOMEPAGE = "https://github.com/Haivision/srt"
  LICENSE = "MPL-2.0"
  LIC_FILES_CHKSUM = "file://LICENSE;md5=815ca599c9df247a0c7f619bab123dad"
  
--SRCREV = "291e010fbf91b13b92e1cde5dcb824a9d7f4e353"
-+SRCREV = "8b32f3734ff6af7cc7b0fef272591cb80a2d1aae"
+-SRCREV = "50b7af06f3a0a456c172b4cb3aceafa8a5cc0036"
++SRCREV = "291e010fbf91b13b92e1cde5dcb824a9d7f4e353"
  SRC_URI = "git://github.com/Haivision/srt;protocol=https;branch=master \
             file://0001-don-t-install-srt-ffplay.patch \
+-           file://0001-core-Fix-build-with-GCC-11.-1806.patch \
             "
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ S = "${WORKDIR}/git"
 -- 
 2.35.1
 
