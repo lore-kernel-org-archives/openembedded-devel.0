@@ -1,92 +1,107 @@
-Return-Path: <liezhi.yang@windriver.com>
+Return-Path: <stefan@datenfreihafen.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 79C2DC63703
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C216DC6370B
 	for <webhook@archiver.kernel.org>; Mon,  4 Apr 2022 18:46:46 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web12.8172.1648870004667837718
+Received: from proxima.lasnet.de (proxima.lasnet.de [78.47.171.185])
+ by mx.groups.io with SMTP id smtpd.web09.34764.1649077454045226078
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 Apr 2022 20:26:44 -0700
+ Mon, 04 Apr 2022 06:04:14 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.3.146,
- mailfrom: liezhi.yang@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 2323QggI014676
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 1 Apr 2022 20:26:42 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Fri, 1 Apr 2022 20:26:42 -0700
-Received: from ala-lpggp3.wrs.com (147.11.105.124) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Fri, 1 Apr 2022 20:26:42 -0700
-From: Robert Yang <liezhi.yang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] wxwidgets: Fix checking for PACKAGECONFIG and
- DISTRO_FEATURES
-Date: Fri, 1 Apr 2022 20:26:42 -0700
-Message-ID: <20220402032642.107153-1-liezhi.yang@windriver.com>
-X-Mailer: git-send-email 2.31.1
+ spf=pass (domain: datenfreihafen.org, ip: 78.47.171.185,
+ mailfrom: stefan@datenfreihafen.org)
+Received: from localhost.localdomain.datenfreihafen.local
+ (p200300e9d74ad0b328e5b57aaa094595.dip0.t-ipconnect.de
+ [IPv6:2003:e9:d74a:d0b3:28e5:b57a:aa09:4595])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest
+ SHA256)
+	(No client certificate requested)
+	(Authenticated sender: stefan@sostec.de)
+	by proxima.lasnet.de (Postfix) with ESMTPSA id DCF07C0DDB;
+	Mon,  4 Apr 2022 15:04:11 +0200 (CEST)
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-devel@lists.openembedded.org
+Cc: Stefan Schmidt <stefan@datenfreihafen.org>,
+	Stefan Schmidt <stefan.schmidt@huawei.com>
+Subject: [meta-networking][PATCH 3/4] wpantund: add new recipe
+Date: Mon,  4 Apr 2022 15:03:53 +0200
+Message-Id: <20220404130354.2131131-3-stefan@datenfreihafen.org>
+X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220404130354.2131131-1-stefan@datenfreihafen.org>
+References: <20220404130354.2131131-1-stefan@datenfreihafen.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 04 Apr 2022 18:46:46 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96342
+ https://lists.openembedded.org/g/openembedded-devel/message/96380
 
-The PACKAGECONFIG depends on DISTRO_FEATURES, not DISTRO_FEATURES depends on
-PACKAGECONFIG. And the REQUIRED_DISTRO_FEATURES is not needed since it can work
-with gtk or x11.
+From: Stefan Schmidt <stefan.schmidt@huawei.com>
 
-Fixed when x11 is not in DISTRO_FEATURES:
-$ bitbake wxwidgets
-ERROR: Nothing PROVIDES 'wxwidgets'
-wxwidgets was skipped: missing required distro feature 'x11' (not in DISTRO_FEATURES)
+Wpantund is part of the OpenThread project. It is used in a scenario
+where the Thread radio operates as a network co-processor (NCP) that is
+connected over SPI/UART/USB to the host.
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+The project itself is in maintenance-only mode right now as the NCP
+architecture has been replaced with radio co-processor (RCP) which is
+implemented directly in openthread and ot-br-posix. None the less there
+might still be project and products out there using it.
+
+Signed-off-by: Stefan Schmidt <stefan.schmidt@huawei.com>
 ---
- meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ .../openthread/wpantund_git.bb                | 27 +++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/openthread/wpant=
+und_git.bb
 
-diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
-index f9349b02a..b10742eac 100644
---- a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
-+++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
-@@ -10,10 +10,7 @@ LICENSE = "WXwindows"
- LIC_FILES_CHKSUM = "file://docs/licence.txt;md5=981f50a934828620b08f44d75db557c6"
- 
- inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt', 'cmake_qt5', 'cmake', d)}
--inherit features_check lib_package binconfig pkgconfig
--
--# All toolkit-configs except 'no_gui' require x11 explicitly (see toolkit.cmake)
--REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG', 'no_gui', '', 'x11', d)}"
-+inherit lib_package binconfig pkgconfig
- 
- DEPENDS += " \
-     jpeg \
-@@ -46,7 +43,11 @@ EXTRA_OECMAKE:append:libc-musl = " \
-     -DHAVE_LOCALE_T=OFF \
- "
- 
--PACKAGECONFIG ?= "gtk ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)}"
-+# All toolkit-configs except 'no_gui' require x11 explicitly (see toolkit.cmake)
-+PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', 'no_gui', d)} \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)} \
-+"
+diff --git a/meta-networking/recipes-connectivity/openthread/wpantund_git=
+.bb b/meta-networking/recipes-connectivity/openthread/wpantund_git.bb
+new file mode 100644
+index 000000000..d8baacbb3
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/openthread/wpantund_git.bb
+@@ -0,0 +1,27 @@
++# SPDX-FileCopyrightText: Huawei Inc.
++#
++# SPDX-License-Identifier: Apache-2.0
++SUMMARY =3D "wpantund, Userspace WPAN Network Daemon"
++SECTION =3D "net"
++LICENSE =3D "Apache-2.0 & MIT & BSL-1.0 & BSD-3-Clause"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3De7820bc7f7d1638a6b54fc2e8d7fb=
+103 \
++                    file://third_party/assert-macros/LICENSE;md5=3Dcbf35=
+ecdc8161026afe4da2906fab204 \
++                    file://third_party/boost/LICENSE;md5=3De4224ccaecb14=
+d942c71d31bef20d78c \
++                    file://third_party/fgetln/LICENSE;md5=3D389e03d2254e=
+cad45d0d9bbdefef7129 \
++                    file://third_party/openthread/LICENSE;md5=3D543b6fe9=
+0ec5901a683320a36390c65f \
++                    file://third_party/pt/LICENSE;md5=3Ddcd598b69cad786b=
+eea33da7b1ae14b7 \
++                    "
++DEPENDS =3D "autoconf-archive dbus readline"
++SRCREV =3D "0fb1f57e4224e2df3e630e146702bfcf63fbf07a"
++PV =3D "0.07.01+git${SRCPV}"
 +
- PACKAGECONFIG:remove:class-native = "opengl"
- 
- # Note on toolkit-PACKAGECONFIGs: select exactly one of 'no_gui' / 'gtk' / 'qt'
--- 
-2.31.1
++SRC_URI =3D "gitsm://github.com/openthread/wpantund.git;protocol=3Dhttps=
+;branch=3Dmaster \
++           "
++
++S =3D "${WORKDIR}/git"
++
++inherit pkgconfig perlnative autotools
++
++# CVE-2020-8916 has been fixed in commit
++# 3f108441e23e033b936e85be5b6877dd0a1fbf1c which is included in the SRCR=
+EV
++CVE_CHECK_IGNORE =3D "CVE-2020-8916"
+--=20
+2.35.1
 
 
