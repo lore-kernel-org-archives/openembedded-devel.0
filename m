@@ -1,108 +1,95 @@
-Return-Path: <stefan@datenfreihafen.org>
+Return-Path: <davidegarde2000@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 92416C35280
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A6CEEC35296
 	for <webhook@archiver.kernel.org>; Mon,  4 Apr 2022 18:46:41 +0000 (UTC)
-Received: from proxima.lasnet.de (proxima.lasnet.de [78.47.171.185])
- by mx.groups.io with SMTP id smtpd.web12.34808.1649077452618164954
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com
+ [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web09.34513.1649076141213894293
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Apr 2022 06:04:13 -0700
+ Mon, 04 Apr 2022 05:42:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=pass (domain: datenfreihafen.org, ip: 78.47.171.185,
- mailfrom: stefan@datenfreihafen.org)
-Received: from localhost.localdomain.datenfreihafen.local
- (p200300e9d74ad0b328e5b57aaa094595.dip0.t-ipconnect.de
- [IPv6:2003:e9:d74a:d0b3:28e5:b57a:aa09:4595])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest
- SHA256)
-	(No client certificate requested)
-	(Authenticated sender: stefan@sostec.de)
-	by proxima.lasnet.de (Postfix) with ESMTPSA id 7417BC08B2;
-	Mon,  4 Apr 2022 15:04:10 +0200 (CEST)
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=cH2skvZ8;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48,
+ mailfrom: davidegarde2000@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id n6so5582214ejc.13
+        for <openembedded-devel@lists.openembedded.org>;
+ Mon, 04 Apr 2022 05:42:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=cfkr914LoLxdXv0w2Tqfi7XRost6wo23COIVRkSV+KM=;
+        b=cH2skvZ8NExjDqQOgR9MyZP62E4ZrlaxiRNHfsfS5avlFEY73/yTQOmzwNiiHW40mF
+         YRzLgFUUbuc0QsX4xo7dkS3MvF0277mZI9Newzftgy7pnOZd/uoV9IHpEa+aZaLe8LVa
+         9MKN4hbfXuMrUeLMMsYj1NhG0UsEp7qhXvwO6a/woha7yUaugJR0AfRVXsloUPJQpPMO
+         CtAjqqsL6SS8fy3xeLjD15a5bhMcVuE1TY2hSyJKb8G4aGbFgn9L9p4TwG4KS6f4h/Vb
+         ZFPX2jCSUHRCNJu9qFkHtzduGuZ0LrvE1AnUxWA1yOkgDiqadrPiwEG+avKaWt0yStpf
+         OZLw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=cfkr914LoLxdXv0w2Tqfi7XRost6wo23COIVRkSV+KM=;
+        b=wQSiE52AnBmTA/IenGMUhrvlJw3nLbTqG5zjHYMNqJOUWZb2hQ4OyZc2dO1eRZcIZ9
+         tKp03dGKooqYeKB89L6N5LKfi2aFzpOQSfr4TbNo7X04rRNgrnEalBH+EyMtPZ7SGaKj
+         DqDc8As4SBsYHDhsrPmGjYO2AzWkj2kdCTmDxDUKG+2Cl7qW1FZeJOOA6gSKwx2Puu0j
+         /m7vIRFQXHitVRJeydi5paH65bom4aS9wsL2xqZ/Jz4XMUBIfUBw0dZPYxZyqyxsgW/G
+         NDJdmXSj4P9/RDuZoOK7PlaJfnmB87uU8sm2QEdzv5Iwd0Nl6QH0vuVuBQzxL4qSPiNP
+         Veog==
+X-Gm-Message-State: AOAM531wXtM9/vdh1unOjgv0tLsIKD4wOC6kuWFU3rHMC+Pb/aHrTSdc
+	ImtO1MNk9HDFP67R1GBs4CKwCeUXuoN/9Z7C
+X-Google-Smtp-Source: 
+ ABdhPJyzlSDDbbWUOHpw0I61+ROfnSvdnieQF+HBagYax7etk8NDuKqGkpvizvgJl0T5kkyfZQCD2A==
+X-Received: by 2002:a17:906:7316:b0:6d7:16be:b584 with SMTP id
+ di22-20020a170906731600b006d716beb584mr10531857ejc.759.1649076139455;
+        Mon, 04 Apr 2022 05:42:19 -0700 (PDT)
+Received: from tony3oo3-XPS-13-9370.home
+ (host-82-60-178-52.retail.telecomitalia.it. [82.60.178.52])
+        by smtp.gmail.com with ESMTPSA id
+ e6-20020a056402190600b00413d03ac4a2sm5377894edz.69.2022.04.04.05.42.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 04 Apr 2022 05:42:19 -0700 (PDT)
+From: Davide Gardenal <davidegarde2000@gmail.com>
+X-Google-Original-From: Davide Gardenal <davide.gardenal@huawei.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Stefan Schmidt <stefan@datenfreihafen.org>,
-	Stefan Schmidt <stefan.schmidt@huawei.com>
-Subject: [meta-networking][PATCH 2/4] ot-daemon: add recipe for OpenThread
- daemon
-Date: Mon,  4 Apr 2022 15:03:52 +0200
-Message-Id: <20220404130354.2131131-2-stefan@datenfreihafen.org>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220404130354.2131131-1-stefan@datenfreihafen.org>
-References: <20220404130354.2131131-1-stefan@datenfreihafen.org>
+Cc: Davide Gardenal <davide.gardenal@huawei.com>
+Subject: [meta-or][PATCH] fwupd: add COMPATIBLE_HOST to match dependency
+Date: Mon,  4 Apr 2022 14:42:14 +0200
+Message-Id: <20220404124215.42358-1-davide.gardenal@huawei.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 04 Apr 2022 18:46:41 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96379
+ https://lists.openembedded.org/g/openembedded-devel/message/96376
 
-From: Stefan Schmidt <stefan.schmidt@huawei.com>
+Add COMPATIBLE_HOST to fix build error when musl is enabled,
+this will match efivar requirements.
 
-The OpenThread daemon allows Linuxes devices to participate in a Thread
-mesh network without acting as a full border router. The device
-participates like any other child or router devices within the network.
-
-This same repo is used for range of different modes to run the
-OpenThread code. From bare metal over vendor SDKs to posix platforms.
-For this recipe the focus is on the Linux posix implementation and we do
-not pull in all the git submodules on purpose.
-
-There are openthread enabled recipes in meta-zephyr for people who want
-to also use OpenThread on MCU based platforms on top of Zephyr.
-
-Signed-off-by: Stefan Schmidt <stefan.schmidt@huawei.com>
+Signed-off-by: Davide Gardenal <davide.gardenal@huawei.com>
 ---
- .../openthread/ot-daemon_git.bb               | 27 +++++++++++++++++++
- 1 file changed, 27 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/openthread/ot-da=
-emon_git.bb
+ meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-connectivity/openthread/ot-daemon_gi=
-t.bb b/meta-networking/recipes-connectivity/openthread/ot-daemon_git.bb
-new file mode 100644
-index 000000000..7bce46e22
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/openthread/ot-daemon_git.bb
-@@ -0,0 +1,27 @@
-+# SPDX-FileCopyrightText: Huawei Inc.
-+#
-+# SPDX-License-Identifier: Apache-2.0
-+SUMMARY =3D "OpenThread Daemon is an OpenThread POSIX build mode that ru=
-ns OpenThread as a service."
-+SECTION =3D "net"
-+LICENSE =3D "BSD-3-Clause"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D543b6fe90ec5901a683320a36390c=
-65f"
-+DEPENDS =3D "readline"
-+SRCREV =3D "7dfde1f12923f03c9680be4d838b94b7a2320324"
-+PV =3D "0.1+git${SRCPV}"
+diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb b/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb
+index 53f1720b0..20dccc235 100644
+--- a/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb
++++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb
+@@ -4,6 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+ 
+ DEPENDS = "glib-2.0 libxmlb json-glib sqlite3 libjcat gcab vala-native"
+ 
++COMPATIBLE_HOST:libc-musl = 'null'
 +
-+# We are not using the git submodules fetch on purpose. None the third_p=
-arty
-+# components are needed for the plain posix build and we can avoid all t=
-he
-+# differently licensed code.
-+SRC_URI =3D "git://github.com/openthread/openthread.git;protocol=3Dhttps=
-;branch=3Dmain \
-+           "
-+
-+S =3D "${WORKDIR}/git"
-+
-+inherit cmake
-+
-+EXTRA_OECMAKE =3D "-DOT_DAEMON=3DON \
-+                 -DOT_SPINEL_RESET_CONNECTION=3DON \
-+                 -DOT_THREAD_VERSION=3D1.2 \
-+                 -DOT_COVERAGE=3DOFF \
-+                 -DOT_PLATFORM=3Dposix \
-+                 "
---=20
-2.35.1
+ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
+            file://run-ptest"
+ SRC_URI[sha256sum] = "7ebe1514acb688d2649cecc392db929094da3f03cfc98a9c0faccabb084912fa"
+-- 
+2.32.0
 
 
