@@ -2,63 +2,65 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1551C43219
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A6BEC433FE
 	for <webhook@archiver.kernel.org>; Mon,  4 Apr 2022 18:46:40 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
- [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web12.39419.1649096298630209099
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com
+ [209.85.210.172])
+ by mx.groups.io with SMTP id smtpd.web12.39435.1649096382752797972
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Apr 2022 11:18:18 -0700
+ Mon, 04 Apr 2022 11:19:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=mwQfiqC+;
- spf=pass (domain: gmail.com, ip: 209.85.216.43,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=eDfULB1x;
+ spf=pass (domain: gmail.com, ip: 209.85.210.172,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id kw18so3300694pjb.5
+Received: by mail-pf1-f172.google.com with SMTP id b15so9742460pfm.5
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Apr 2022 11:18:18 -0700 (PDT)
+ Mon, 04 Apr 2022 11:19:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=pXAPTNq0ktLcpl+fBsyEMLY07iFZ4OuHsZA6mm9zgj8=;
-        b=mwQfiqC+x9T8TCaktSHVi34rMXEIzBfECxVdX9iz0b/wHhjBLwjuDhtFKrSbJt4jao
-         smStuBRwdvNJP9UlprEZdGVPnbkTp/Ug+w7zSFWjKXFGfO8UDwTwehGo7YoQORpJO9qy
-         0gsGPhfQYs8NYlxk3hKCtYbcDuZPNv07yXy68y5q/+pO5jsBnPMCWZ9fz8mzP+A1Wkzy
-         Hmi/DRy8fX9ksqAxwfNH2969NTNi1LOK4rdV2fi4TCO0g+pFTumz5vwsygqHf/B26D3W
-         D6qFeKKLMZYchXOD27bfJhvoHMRhMpLOdl4K5V95hF4ZD8vE061dYbYQs6fO5Gv/Bn9I
-         yb1w==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=3V9s4EUm2n1pISmpLcxnUsNKqC03AYCFYyR6eO3+GTo=;
+        b=eDfULB1xdILGINoKBIIgFIW75WVwCF4Xa8vhnHvOy5LK+idw0cLc42bHh9ifACPE0v
+         GR9IDnl8U4qJ0H9q4umN3lKTTsv77LjDKFz7TzlOROJnvcGtNFD1UDMz1MeMnZ+DAZ4l
+         0P3ECfrBMsmNI1hF+21CZ8lQuMNV7bluG3ck3u/Hod+Gh9WvELWPDCic1z3pnCm04iJZ
+         OsJCDOwxLg1TkjTmEyZYj9qvN8TjoXla7JDaYAY8RW1DLCd20GEMe2RsymJu01Uth9xA
+         GbKukJ/ocZOKtmsEMLz0k8mRlYsOYQZE+/YmYNf0xoBsOP3Vx1YGsECgPArjZ3Ub41v7
+         Nx8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=pXAPTNq0ktLcpl+fBsyEMLY07iFZ4OuHsZA6mm9zgj8=;
-        b=ZF4IP2oAv7JTx7tDZRDXPBYTudFVkRuJ9i7vQe3gmzJgjm6Zz6PeczYmdHs67uun69
-         ouFxfcbTjuSEeHxmY9Ac+WPphsMnfRvrNzvL3ktU2TlBqpvuZqGvQcnLTEqfNWXnwcbr
-         a6UtZIM+AgW3f4EhqSXEPCqyAI/WbJ/3v3TnPqs/K7MZqYxowNl5LEqKVmsFjZmDzYqc
-         I8y2uoGoT8MHcsQSFPk1lZW5j8RO9EkL6MgIq3tBbPV6HnjiywEdcvFgkxf+48p5dUUA
-         VAxCBCb9YnC5xm08AzK/7LuHnAMhxNcMmPFPJN9paT+3hyT0F/cgcy/umkSrPoAM6qhC
-         CdZg==
-X-Gm-Message-State: AOAM533lhA9geFHyEZSJHSEMFEnHGFDGV803N5q3L6r3QZoGJW0BBZfn
-	QfBdoLoD22IuOZsaqCMp0dn+uC3TneI=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=3V9s4EUm2n1pISmpLcxnUsNKqC03AYCFYyR6eO3+GTo=;
+        b=ZuPa9jNvL1trgEMrzd14xYQ/P92ImBdJsTpWY3ZTfWnOG8qj9Lhvl5lTC2ygkuSFe6
+         7GW7C3ZsmXGMEs29zXpqyqV7b+udrPlnkNMldA00/sYNe/BRx9K8/Y2IOH0QFyXD2mWv
+         84QgiCZGByAjF5irxQNgBOqJHbSayx3f8+k1rx7+y87FfKkhWmp8Qd+n25hqvKrq8733
+         ldNN7YCjzkxmZ9BtPGL2QzjJr3ufUBI4315s1AQvc1m7mWFIJCM5dbmhLFd7pYoD3eyq
+         kDW1R06a6+xOJ+MQeVk04bLUf42DeKfHX64JiP7T2EFFExbsWZihT7OfbqcNEgXUMqSt
+         kvRw==
+X-Gm-Message-State: AOAM533SaNrV/GRI91Mmnd4UzHyVBcTwTirVXkiIAKhpXfoftNeDuqNA
+	OYwPJnVDZyBW6cc9mAanr0X57AmBbhM=
 X-Google-Smtp-Source: 
- ABdhPJzA7aWyYV435q0NMDWpT5JkBAZy4XWuWW2sv2GPqpbybp5varNZ44nRB1BHG3LDKRei1DTRkg==
-X-Received: by 2002:a17:902:f708:b0:153:839f:bf2c with SMTP id
- h8-20020a170902f70800b00153839fbf2cmr920945plo.113.1649096297746;
-        Mon, 04 Apr 2022 11:18:17 -0700 (PDT)
+ ABdhPJx+Y0oNacmpF6tGrJ9HZKTgoy42/WzMDkFBpK5iXsJAHg7PbD5vMlVZebqwx0AggtNkP1gkGw==
+X-Received: by 2002:a65:6e0e:0:b0:399:26d7:a224 with SMTP id
+ bd14-20020a656e0e000000b0039926d7a224mr945435pgb.437.1649096381997;
+        Mon, 04 Apr 2022 11:19:41 -0700 (PDT)
 Received: from keaua.caveonetworks.com
  ([2601:202:4180:a5c0:12d7:1906:ff25:5c6d])
         by smtp.gmail.com with ESMTPSA id
- u126-20020a637984000000b0038147b4f53esm11059216pgc.93.2022.04.04.11.18.16
+ f4-20020a056a0022c400b004fb2292cd74sm12767883pfj.206.2022.04.04.11.19.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 04 Apr 2022 11:18:17 -0700 (PDT)
+        Mon, 04 Apr 2022 11:19:41 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Thomas Perrot <thomas.perrot@bootlin.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][hardknott][PATCH] breakpad: fix branch for gtest in SRC_URI
-Date: Mon,  4 Apr 2022 11:18:15 -0700
-Message-Id: <20220404181815.2893388-1-akuster808@gmail.com>
+Cc: Christian Ege <christian.ege@ifm.com>
+Subject: [meta-oe][dunfell][PATCH 2/2] cli11: switch from default master
+ branch to main to fix do_fetch failure
+Date: Mon,  4 Apr 2022 11:19:38 -0700
+Message-Id: <20220404181938.2893521-2-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220404181938.2893521-1-akuster808@gmail.com>
+References: <20220404181938.2893521-1-akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
@@ -66,33 +68,31 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 04 Apr 2022 18:46:40 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96387
+ https://lists.openembedded.org/g/openembedded-devel/message/96389
 
-From: Thomas Perrot <thomas.perrot@bootlin.com>
+From: Christian Ege <christian.ege@ifm.com>
 
-The commit 4fe018038f87 is in the main branch, so the do_fetch task failed.
+The branch was renamed in the upstream repository
 
-Signed-off-by: Thomas Perrot <thomas.perrot@bootlin.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit b8bb7dc157b248802218fcf80215f80a6c7cd6f3)
+Signed-off-by: Christian Ege <christian.ege@ifm.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-devtools/breakpad/breakpad_git.bb | 2 +-
+ meta-oe/recipes-support/cli11/cli11_1.8.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
-index d85e51ba81..1434e4fee6 100644
---- a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
-+++ b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
-@@ -29,7 +29,7 @@ SRCREV_lss = "fd00dbbd0c06a309c657d89e9430143b179ff6db"
- SRCREV_gyp = "324dd166b7c0b39d513026fa52d6280ac6d56770"
+diff --git a/meta-oe/recipes-support/cli11/cli11_1.8.0.bb b/meta-oe/recipes-support/cli11/cli11_1.8.0.bb
+index 9e1c2d6214..a49eab72fd 100644
+--- a/meta-oe/recipes-support/cli11/cli11_1.8.0.bb
++++ b/meta-oe/recipes-support/cli11/cli11_1.8.0.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b73927b18d5c6cd8d2ed28a6ad539733"
+ SRCREV = "13becaddb657eacd090537719a669d66d393b8b2"
+ PV .= "+git${SRCPV}"
  
- SRC_URI = "git://github.com/google/breakpad;name=breakpad;branch=main;protocol=https \
--           git://github.com/google/googletest.git;destsuffix=git/src/testing/gtest;name=gtest;branch=master;protocol=https \
-+           git://github.com/google/googletest.git;destsuffix=git/src/testing/gtest;name=gtest;branch=main;protocol=https \
-            git://github.com/protocolbuffers/protobuf.git;destsuffix=git/src/third_party/protobuf/protobuf;name=protobuf;branch=master;protocol=https \
-            git://chromium.googlesource.com/linux-syscall-support;protocol=https;branch=main;destsuffix=git/src/third_party/lss;name=lss \
-            git://chromium.googlesource.com/external/gyp;protocol=https;destsuffix=git/src/tools/gyp;name=gyp;branch=master \
+-SRC_URI += "gitsm://github.com/CLIUtils/CLI11;branch=master;protocol=https \
++SRC_URI += "gitsm://github.com/CLIUtils/CLI11;branch=main;protocol=https \
+             file://0001-Add-CLANG_TIDY-check.patch \
+             file://0001-Use-GNUInstallDirs-instead-of-hard-coded-path.patch \
+            "
 -- 
 2.25.1
 
