@@ -1,95 +1,145 @@
-Return-Path: <davidegarde2000@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A6CEEC35296
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D2BBCC47082
 	for <webhook@archiver.kernel.org>; Mon,  4 Apr 2022 18:46:41 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com
- [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web09.34513.1649076141213894293
+Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
+ by mx.groups.io with SMTP id smtpd.web09.35775.1649082001530487695
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Apr 2022 05:42:21 -0700
+ Mon, 04 Apr 2022 07:20:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=cH2skvZ8;
- spf=pass (domain: gmail.com, ip: 209.85.218.48,
- mailfrom: davidegarde2000@gmail.com)
-Received: by mail-ej1-f48.google.com with SMTP id n6so5582214ejc.13
-        for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Apr 2022 05:42:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=cfkr914LoLxdXv0w2Tqfi7XRost6wo23COIVRkSV+KM=;
-        b=cH2skvZ8NExjDqQOgR9MyZP62E4ZrlaxiRNHfsfS5avlFEY73/yTQOmzwNiiHW40mF
-         YRzLgFUUbuc0QsX4xo7dkS3MvF0277mZI9Newzftgy7pnOZd/uoV9IHpEa+aZaLe8LVa
-         9MKN4hbfXuMrUeLMMsYj1NhG0UsEp7qhXvwO6a/woha7yUaugJR0AfRVXsloUPJQpPMO
-         CtAjqqsL6SS8fy3xeLjD15a5bhMcVuE1TY2hSyJKb8G4aGbFgn9L9p4TwG4KS6f4h/Vb
-         ZFPX2jCSUHRCNJu9qFkHtzduGuZ0LrvE1AnUxWA1yOkgDiqadrPiwEG+avKaWt0yStpf
-         OZLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=cfkr914LoLxdXv0w2Tqfi7XRost6wo23COIVRkSV+KM=;
-        b=wQSiE52AnBmTA/IenGMUhrvlJw3nLbTqG5zjHYMNqJOUWZb2hQ4OyZc2dO1eRZcIZ9
-         tKp03dGKooqYeKB89L6N5LKfi2aFzpOQSfr4TbNo7X04rRNgrnEalBH+EyMtPZ7SGaKj
-         DqDc8As4SBsYHDhsrPmGjYO2AzWkj2kdCTmDxDUKG+2Cl7qW1FZeJOOA6gSKwx2Puu0j
-         /m7vIRFQXHitVRJeydi5paH65bom4aS9wsL2xqZ/Jz4XMUBIfUBw0dZPYxZyqyxsgW/G
-         NDJdmXSj4P9/RDuZoOK7PlaJfnmB87uU8sm2QEdzv5Iwd0Nl6QH0vuVuBQzxL4qSPiNP
-         Veog==
-X-Gm-Message-State: AOAM531wXtM9/vdh1unOjgv0tLsIKD4wOC6kuWFU3rHMC+Pb/aHrTSdc
-	ImtO1MNk9HDFP67R1GBs4CKwCeUXuoN/9Z7C
-X-Google-Smtp-Source: 
- ABdhPJyzlSDDbbWUOHpw0I61+ROfnSvdnieQF+HBagYax7etk8NDuKqGkpvizvgJl0T5kkyfZQCD2A==
-X-Received: by 2002:a17:906:7316:b0:6d7:16be:b584 with SMTP id
- di22-20020a170906731600b006d716beb584mr10531857ejc.759.1649076139455;
-        Mon, 04 Apr 2022 05:42:19 -0700 (PDT)
-Received: from tony3oo3-XPS-13-9370.home
- (host-82-60-178-52.retail.telecomitalia.it. [82.60.178.52])
-        by smtp.gmail.com with ESMTPSA id
- e6-20020a056402190600b00413d03ac4a2sm5377894edz.69.2022.04.04.05.42.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 04 Apr 2022 05:42:19 -0700 (PDT)
-From: Davide Gardenal <davidegarde2000@gmail.com>
-X-Google-Original-From: Davide Gardenal <davide.gardenal@huawei.com>
+ dkim=missing;
+ spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.83,
+ mailfrom: f_l_k@t-online.de)
+Received: from fwd88.dcpf.telekom.de (fwd88.aul.t-online.de [10.223.144.114])
+	by mailout07.t-online.de (Postfix) with SMTP id 77D18146F1
+	for <openembedded-devel@lists.openembedded.org>;
+ Mon,  4 Apr 2022 16:19:59 +0200 (CEST)
+Received: from flk-MS-7C91.fritz.box ([84.163.46.79]) by fwd88.t-online.de
+	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
+	esmtp id 1nbNYl-1AhEdl0; Mon, 4 Apr 2022 16:19:59 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Davide Gardenal <davide.gardenal@huawei.com>
-Subject: [meta-or][PATCH] fwupd: add COMPATIBLE_HOST to match dependency
-Date: Mon,  4 Apr 2022 14:42:14 +0200
-Message-Id: <20220404124215.42358-1-davide.gardenal@huawei.com>
-X-Mailer: git-send-email 2.32.0
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH] gparted: update to v1.4.0
+Date: Mon,  4 Apr 2022 16:19:48 +0200
+Message-Id: <20220404141948.3373-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1649081999-00013579-0638AE69/0/0 CLEAN NORMAL
+X-TOI-MSGID: 2ab71959-8775-45ee-a3b6-88836dc866bc
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 04 Apr 2022 18:46:41 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96376
+ https://lists.openembedded.org/g/openembedded-devel/message/96382
 
-Add COMPATIBLE_HOST to fix build error when musl is enabled,
-this will match efivar requirements.
+- remove x11 features-check because there aren't dependencies that would
+  explicilty require x11 as a DISTRO_FEATURE
 
-Signed-off-by: Davide Gardenal <davide.gardenal@huawei.com>
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+GParted 1.4.0   (2022-03-28)
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+
+Release Notes
+-------------
+  This release of GParted includes enhancements, bug fixes and
+  language translation updates.
+
+  * Add labelling of mounted btrfs, ext2/3/4 and xfs file systems
+  * Fix detection of mount points for encrypted file systems
+  * Fix crash scrolling quickly in the drive selection combobox
+  * Add bcache detection
+  * Add JBD external EXT3/4 journal detection
+
+Bug Fixes
+---------
+  * Add labelling of mounted btrfs, ext2/3/4 and xfs file systems (#163, =
+!87)
+  * Fix detection of mount points for encrypted file systems (#162, !88)
+  * Fix unmount error when unmounting below a bind mount point (!89)
+  * Fix crash scrolling quickly in the drive selection combobox (#165, !9=
+1)
+  * Add initial Indonesian translation of help (!90)
+  * Add accessibility relations for screen readers like Orca (!92)
+  * Fix partition creation at sector 2048 if partition before it (#172, !=
+93)
+  * Make more getter methods use return-by-constant-reference (!94)
+  * Check copy destination instead of source (!95)
+  * Add bcache detection (#183, !96)
+  * Add JBD external EXT3/4 journal detection (#89, !97)
+  * Fix translation of DocBook markup tag of the GParted Manual (!98)
+
+Code Credits
+------------
+  Code enhancements are courtesy of Movie Ma, Pascal Eng=C3=A9libert, and
+  Mike Fleetwood.
+
+Translations (new/updated)
+--------------------------
+  cs(Marek =C4=8Cernock=C3=BD), da(Alan Mortensen), eu(Asier Sarasua Garm=
+endia),
+  fur(Fabio Tomat), he(Yaron Shahrabani), hr(Goran Vidovi=C4=87),
+  hu(Bal=C3=A1zs =C3=9Ar), id(Andika Triwidada), it(Milo Casagrande),
+  ko(Seong-ho Cho), lt(Aurimas =C4=8Cernius), lv(R=C5=ABdolfs Mazurs),
+  nb(Kjell Cato Heskjestad), nl(Nathan Follens), pa(A S Alam),
+  pt(Hugo Carvalho), ru(Aleksandr Melman, Sergej A), sk(Du=C5=A1an Kazik)=
+,
+  sl(Matej Urban=C4=8Di=C4=8D), sr(=D0=9C=D0=B8=D1=80=D0=BE=D1=81=D0=BB=D0=
+=B0=D0=B2 =D0=9D=D0=B8=D0=BA=D0=BE=D0=BB=D0=B8=D1=9B), zh_CN(Luming Zh)
+
+Dependencies (new/updated)
+--------------------------
+  * n/a
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../gparted/{gparted_1.3.1.bb =3D> gparted_1.4.0.bb}           | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-gnome/recipes-extended/gparted/{gparted_1.3.1.bb =3D> gparte=
+d_1.4.0.bb} (83%)
 
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb b/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb
-index 53f1720b0..20dccc235 100644
---- a/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb
-+++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb
-@@ -4,6 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- 
- DEPENDS = "glib-2.0 libxmlb json-glib sqlite3 libjcat gcab vala-native"
- 
-+COMPATIBLE_HOST:libc-musl = 'null'
-+
- SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
-            file://run-ptest"
- SRC_URI[sha256sum] = "7ebe1514acb688d2649cecc392db929094da3f03cfc98a9c0faccabb084912fa"
--- 
-2.32.0
+diff --git a/meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb b/meta-=
+gnome/recipes-extended/gparted/gparted_1.4.0.bb
+similarity index 83%
+rename from meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb
+rename to meta-gnome/recipes-extended/gparted/gparted_1.4.0.bb
+index d1a975930..d1297b5a2 100644
+--- a/meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb
++++ b/meta-gnome/recipes-extended/gparted/gparted_1.4.0.bb
+@@ -3,16 +3,15 @@ HOMEPAGE =3D "http://gparted.org/index.php"
+ LICENSE =3D "GPL-2.0-only"
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
+19f"
+=20
+-inherit features_check autotools pkgconfig python3native gnome-help gtk-=
+icon-cache
++inherit autotools pkgconfig python3native gnome-help gtk-icon-cache
+=20
+-REQUIRED_DISTRO_FEATURES =3D "x11"
+=20
+ SRC_URI =3D " \
+     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BPN}-${PV}/${BPN}-${PV=
+}.tar.gz \
+     file://0001-Install-polkit-action-unconditionally-executable-pke.pat=
+ch \
+     file://0001-Do-not-use-NULL-where-boolean-is-expected.patch \
+ "
+-SRC_URI[sha256sum] =3D "5eee2e6d74b15ef96b13b3a2310c868ed2298e03341021e7=
+d12a5a98a1d1e109"
++SRC_URI[sha256sum] =3D "e5293a792e53fdbeba29c4a834113cd9603d0d639330da93=
+1a468bf3687887be"
+=20
+ UPSTREAM_CHECK_URI =3D "https://sourceforge.net/projects/gparted/files/g=
+parted/"
+ UPSTREAM_CHECK_REGEX =3D "gparted-(?P<pver>\d+\.(\d+)+(\.\d+)+)"
+--=20
+2.25.1
 
 
