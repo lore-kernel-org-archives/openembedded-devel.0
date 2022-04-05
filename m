@@ -2,65 +2,65 @@ Return-Path: <flowergom@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1480BC41535
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 144ECC3527B
 	for <webhook@archiver.kernel.org>; Tue,  5 Apr 2022 19:49:24 +0000 (UTC)
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com
- [209.85.215.177])
- by mx.groups.io with SMTP id smtpd.web10.1852.1649188017108746056
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
+ [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web12.1821.1649187951324799334
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Apr 2022 12:46:57 -0700
+ Tue, 05 Apr 2022 12:45:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=dGel0ffu;
- spf=pass (domain: gmail.com, ip: 209.85.215.177,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=cznbXett;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179,
  mailfrom: flowergom@gmail.com)
-Received: by mail-pg1-f177.google.com with SMTP id t13so273730pgn.8
+Received: by mail-pl1-f179.google.com with SMTP id p17so21994plo.9
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Apr 2022 12:47:03 -0700 (PDT)
+ Tue, 05 Apr 2022 12:45:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id;
-        bh=mirnXLH1fN34Ks5in3P2hcMCiBDpN+hK00y7Cw6qUrk=;
-        b=dGel0ffuyWZ0i/dxUHa5NfrXimD8X7/ofdXarF2Hs1S1QenCCg2OHdQfCp5n95wIkn
-         CVQeBH00lf085zqbL3ZqvDg8oPK9jueFiVv26lHkn+GY3txK1v9LVSx0KN1XRLsnqvff
-         QCzTnXlFOZS5Db60bHflxbTMts8HxFuEtBrU2ZsRN96wKe+LN9GDBd6k7E8jq3X7TwOK
-         zjg4ympkcoRcJQwJabToEZAEtXCAo71Ubr5ZLOi+QlfKJUUaHt7giiqs7HjSGg+nxAR0
-         o0T+Y7Lqzbpx8lWrnH3M1mDpFPcojafgItTAXpGrgG14ixwP79H/KCLiJlaYR04eg7OQ
-         ubCA==
+        bh=KFRNk+v1fj9GzvieqdbpBpCGn8rV0PIzkwN0y/xzuuQ=;
+        b=cznbXettB21TDJS24tOunj+sRwGCeVcJJ3T5zwcKYEn5idrP8XwPTq1lKt2yCNxSfU
+         AV4hmCRkluV50pAXpxL2T4UR4Hpfd77BhCAbET9s31krrzTDM/k5kIAv2yT4lDbQyxjJ
+         PDZa1B3im7WKcUg2x0Pq/o7tEzMZKyF098PZzRciouS+8uLeLf2HyPDvvBnmtUxWam9Q
+         mIftGe6ORfJBCppOu+ekyZjn/mjErOp73ZKRN8MqG0gtaPMGdsB4Abu4me4KGT55P2m9
+         v835U60jolhOGmzDOCjpBaqpqk/ihPbB9hPr6vFwzHo5w/1VVBrjZQDInK5lNLPj1EGV
+         WeTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=mirnXLH1fN34Ks5in3P2hcMCiBDpN+hK00y7Cw6qUrk=;
-        b=ARGDd6UFnhf5zZIPmnPWzaQ4yoSEV9o0f/5O2/qFznbO3LEuPXuU+zDpYmYbsIXYg8
-         wDgHkFxBvpVgNZVbVm4tql7KdC78L1Ck2EIKqjB70bo+fA/OrrWvGVe7YtHjHo3odg2U
-         YG8QhAccBq3Um7omz9hnMGMNhj33YeYGylvEuQuHO9DA3rISZu7seib37OJt4wyAagtG
-         SIoLi9zUfWImJjVBj2N9KML+O2X9Zz5Kru7nkuE+nmcB0dx/H83I4LVtj1zZVRUEURe2
-         Y7VWHupqT/IBrPOaOiMTXc7ouYibwC+igspPODQjnfJm8U76/upDPn5033bCAuFHB/oA
-         NNlg==
-X-Gm-Message-State: AOAM531tecMRVDnZYdbEsrXEmsxjJ2WpBvrJVCVOVR4giDc69XcOLqJL
-	qpazyj9cJ7UbU3PtxBmAnH8z8DdT0IUlvg==
+        bh=KFRNk+v1fj9GzvieqdbpBpCGn8rV0PIzkwN0y/xzuuQ=;
+        b=WiFw0YfXo2TdShXiAsu6ftQemWRYPejTbrPgA8RqqOYefRnltnH6ocs5Wtibhckulf
+         KMz7t8+S6fphBqtF9wuZHuM3nUZW0JReZwqiiDMqiO4ZD0VbaWrG9kiBG5yDSNhnqQ7F
+         GBFuuYKuImWBQ8aDSTKN4ZhiKHLpQotCxYa51wpDiXH4tDs13Z7KNsNXlv/5ziD4yTDi
+         xdAX6l17EnXg4q0w5bGqv+38zNCgY00E9ynbOz5UCdbxnZ41v6fARBMKEiJ7qTa2GEyF
+         cwcoGSg0wLaEqzv41N7vycJ2+PFQ9v8edEeu88E5eeGWPZ7FhzpdZRCwT4/dt78lhpLs
+         u9ZA==
+X-Gm-Message-State: AOAM532xuKGMrddCyx/yJiLqW+gxtas+pUauu+mLoj3He1IZ1rcjSxrs
+	ptRKBP7BFx+jS4AFb+y/VcRMebg3KXTc7Q==
 X-Google-Smtp-Source: 
- ABdhPJwidxuMY+uHyO/mjWG8IV+iw5cdSDCPvAtDWuan+ULNdmLw6YlJOlGizxDXCaDDvB9z6LOLiA==
-X-Received: by 2002:a05:6a00:b51:b0:4fa:ece9:15e4 with SMTP id
- p17-20020a056a000b5100b004faece915e4mr5161007pfo.27.1649188022418;
-        Tue, 05 Apr 2022 12:47:02 -0700 (PDT)
+ ABdhPJzmfzgYN39bGT/r5riGr8RGexvWNj/bxevLZUZtdKPzfh5yC0ZVCwQ1ExU+CVFnZVF8FBoygg==
+X-Received: by 2002:a17:90b:1c88:b0:1b8:a77e:c9cb with SMTP id
+ oo8-20020a17090b1c8800b001b8a77ec9cbmr5889695pjb.205.1649187950281;
+        Tue, 05 Apr 2022 12:45:50 -0700 (PDT)
 Received: from localhost.localdomain ([121.168.114.144])
         by smtp.gmail.com with ESMTPSA id
- p10-20020a056a0026ca00b004fb44e0cb17sm16821665pfw.116.2022.04.05.12.46.59
+ br2-20020a17090b0f0200b001caa0db90d3sm3238878pjb.13.2022.04.05.12.45.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Apr 2022 12:47:01 -0700 (PDT)
+        Tue, 05 Apr 2022 12:45:49 -0700 (PDT)
 From: Minjae Kim <flowergom@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Minjae Kim <flowergom@gmail.com>
-Subject: [meta-oe][PATCH] multipath-tools: update SRC_URI
-Date: Tue,  5 Apr 2022 19:46:42 +0000
-Message-Id: <20220405194642.494-1-flowergom@gmail.com>
+Subject: [meta-oe][dunfell][PATCH] multipath-tools: update SRC_URI
+Date: Tue,  5 Apr 2022 19:45:25 +0000
+Message-Id: <20220405194525.251-1-flowergom@gmail.com>
 X-Mailer: git-send-email 2.17.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Apr 2022 19:49:24 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96432
+ https://lists.openembedded.org/g/openembedded-devel/message/96431
 
 The git repo for multipath-tools was changed, so update the
 SRC_URI accordingly with the new link.
@@ -71,12 +71,12 @@ Signed-off-by:Minjae Kim <flowergom@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-index c0c4412c7..5a8db0877 100644
+index 3cff3b90e..90cfd7d20 100644
 --- a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
 +++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
 @@ -29,7 +29,7 @@ DEPENDS = "libdevmapper \
  
- LICENSE = "GPL-2.0-only"
+ LICENSE = "GPLv2"
  
 -SRC_URI = "git://git.opensvc.com/multipath-tools/.git;protocol=http;branch=master \
 +SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=http;branch=master \
