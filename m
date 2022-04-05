@@ -1,117 +1,96 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <samuli.piippo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 45FC5C54F3B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C1B9C5518D
 	for <webhook@archiver.kernel.org>; Tue,  5 Apr 2022 17:24:49 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.1])
- by mx.groups.io with SMTP id smtpd.web11.2654.1649137340917418866
+Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com
+ [209.85.167.54])
+ by mx.groups.io with SMTP id smtpd.web11.3561.1649147510977452776
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Apr 2022 22:42:21 -0700
+ Tue, 05 Apr 2022 01:31:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=PPENg/mV;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1649137339; i=@fujitsu.com;
-	bh=aahRx6Dutbr0y9WrOl4vvrdwIvHy/yGaskbEDS65fIw=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=PPENg/mVcshE3aQBg9M458GFPhBAPEwGaAZCeGZ5+NyVtvX8oC1WnST+2UhDjSGa/
-	 fvKwHsbztwbez2cMprPsNUDEAvtoxDA0nUZ1hWz9L3CMUoaq0z+SSEKpyhhGZrm9of
-	 fkS6tf4kJyyb+6JFdKqsTvdUjcowDNR1d3eU1WDZ6f4LQ/0zZOtdMiAZbPNhcl7tGr
-	 NNd58j+pOJssdbgUQ2CJf5Xe47kEpSpccnXFrnp+b3jfQopy+DMNLC4QfUHJQoAUzM
-	 Zmx03JR7/A2+IzWoJMosuY+7cWUnIYI+2OOKlayec4aF5UirrHGxZOSS69TizCrGkC
-	 supHxEz3j6Opg==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrKIsWRWlGSWpSXmKPExsViZ8ORqLvrmne
-  SwYJ2TYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePky7lMBUc4K5raF7A3MD7l6GLk5BASeMIo
-  cX6pTxcjF5B9gUli98Id7BCJ3YwSE/fagthsAmoS02/dYAWxRQT0JZbO3sMMYjMLqEi8+N0DV
-  i8s4CFx68xJMJsFKP5hQisjiM0r4CTx6sNUsLiEgILElIfvwXo5BZwlXh98xgqxy0ni8Y8ONo
-  h6QYmTM5+wQMyXkDj44gUzRK+ixOzLzSwQdoXErFltTBC2msTVc5uYJzAKzkLSPgtJ+wJGplW
-  MVklFmekZJbmJmTm6hgYGuoaGprrGlroWRnqJVbqJeqmluuWpxSW6QG55sV5qcbFecWVuck6K
-  Xl5qySZGYAinFKsH7WD8tuKn3iFGSQ4mJVHeM67eSUJ8SfkplRmJxRnxRaU5qcWHGGU4OJQke
-  E+eBcoJFqWmp1akZeYA4wkmLcHBoyTCe+QiUJq3uCAxtzgzHSJ1ilGXY23Dgb3MQix5+XmpUu
-  K8N68AFQmAFGWU5sGNgMX2JUZZKWFeRgYGBiGegtSi3MwSVPlXjOIcjErCvFZXgabwZOaVwG1
-  6BXQEE9AR7854ghxRkoiQkmpgOtbI/WH1XC3raPbTHNpMuxNupM5bKzdf6PU2vRrtaNtFy5N5
-  H2WczA1doDPvc4/8Wb6G7UoXe6Z+nb1760lvS807R45OW+7CtHdByHWdul2mkveMrWTsTFLlJ
-  /1Q8+do3yhk/SHDTO7DPe7yfqENCw//+myRvSwi78CVSjeTmtye+XYZNTVbfwsUln9I2qDmtG
-  32mR0n9gg9d+S6b814s9Oj8fq6vxdObvt44KCiRTZHtWBJUFHwDSFnLWn3jTGJFrfv5/WufPl
-  TgpHLqfjPcr/j3PaFYbfDIy7Vmye7KhRMOu354O7HQ1dCWLrVOq4FJK8+5cBducT04W5vac/3
-  H73PqkmLp8jP2lR4PG+hEktxRqKhFnNRcSIA29HEhWgDAAA=
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-8.tower-548.messagelabs.com!1649137338!247126!1
-X-Originating-IP: [62.60.8.97]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.85.5; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 19128 invoked from network); 5 Apr 2022 05:42:18 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-8.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 5 Apr 2022 05:42:18 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 362F010019E
-	for <openembedded-devel@lists.openembedded.org>;
- Tue,  5 Apr 2022 06:42:18 +0100 (BST)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id E42771001B0
-	for <openembedded-devel@lists.openembedded.org>;
- Tue,  5 Apr 2022 06:42:17 +0100 (BST)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Tue, 5 Apr 2022 06:42:16 +0100
-From: Wang Mingyu <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] xorg-sgml-doctools: upgrade 1.11 -> 1.12
-Date: Sat, 2 Apr 2022 20:38:35 +0800
-Message-ID: <1648903115-19946-5-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1648903115-19946-1-git-send-email-wangmy@fujitsu.com>
-References: <1648903115-19946-1-git-send-email-wangmy@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=IHbrQPWx;
+ spf=pass (domain: gmail.com, ip: 209.85.167.54,
+ mailfrom: samuli.piippo@gmail.com)
+Received: by mail-lf1-f54.google.com with SMTP id 5so21915753lfp.1
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 05 Apr 2022 01:31:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=d+OyXdfdWuxHtPEqqfsKa0r6hYMnzKPSCGRVH68GWws=;
+        b=IHbrQPWxR2zb4XC8DU06OngU3a6ndluvhkPzRGvDMD0D4ggSQZww2fjlDhBwef3R5O
+         I8fADHY+P6xr0h+KldCrWxylxDNgQdAX/sRup4jFblOeXzcMXpV7dw7bxIFnlCgm7UQA
+         TSW+bSk6A8U6Bsic6D6Tb3W+jZqRSQI/hn60w1VXseWjbFJzdn1E3weKdkkzoJFZcHJQ
+         Sk/fdomAEZCUg9wtI4M69ftdax4kUM8l8el/uVtU6i+XkV74t7nPOHKS6+MlG8FNpmCG
+         J8nrTOopZ8MUNkSEDRHBUdGf1r3YnnGbIRnPdBsKON/C4buaRzcF76wKpL+wJ1puufiP
+         RNbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=d+OyXdfdWuxHtPEqqfsKa0r6hYMnzKPSCGRVH68GWws=;
+        b=h1UGB36yMV0ukalOL/EqhukltjYK5hTz9/D8Pa1MNpG2/qCRahW1YXpFWNxelI9hB7
+         FSzn036v+/vVKQNiYf8++46hkEjFeCx28q+w6S1oTKhzEN77pZNXH5xiSgAzl7age0ZL
+         tw3DxsxbXTomMPkU4NOqAthGmI3YpW4e7azjWW/fF1efHHmPci5AzwzUtRygaLAmY6TD
+         zcnoPsmUXaNNM8oFSNVkjgJfKF489+0MRW0ptgaJPZcgeIKd3zse03RCx3A0TDhTIkZy
+         N629CBEqj+t8ntqqZLormzsZ9Md7LfTElqTSdXTy5aZYnNPPhGFeTV847kehVUNrmJL/
+         bkzQ==
+X-Gm-Message-State: AOAM5312vnPuz/vafHdIFHuH5fLvhr5SzNa+iT/iHVAF2rkcP/Pi+2+J
+	CgUwnU6wSnpy46pwC0MHWmvK0GsxBvQ=
+X-Google-Smtp-Source: 
+ ABdhPJxd5HGRN1ZllXcCguZ49s0JbbjAz8im3P2ZGr1Yeb4e0UzwW8+8f5zmULbULqA1XmWsEEnIdA==
+X-Received: by 2002:a05:6512:2827:b0:44a:8de0:15ae with SMTP id
+ cf39-20020a056512282700b0044a8de015aemr1879977lfb.682.1649147508394;
+        Tue, 05 Apr 2022 01:31:48 -0700 (PDT)
+Received: from dcbuildsrv.ci.qt.io ([192.89.120.62])
+        by smtp.gmail.com with ESMTPSA id
+ p18-20020a19f112000000b0044b04bbd7acsm679567lfh.58.2022.04.05.01.31.47
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 05 Apr 2022 01:31:47 -0700 (PDT)
+From: Samuli Piippo <samuli.piippo@gmail.com>
+X-Google-Original-From: Samuli Piippo <samuli.piippo@qt.io>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH] python3-qface: upgrade 2.0.6 -> 2.0.7
+Date: Tue,  5 Apr 2022 08:31:27 +0000
+Message-Id: <20220405083127.815361-1-samuli.piippo@qt.io>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Apr 2022 17:24:49 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96414
+ https://lists.openembedded.org/g/openembedded-devel/message/96419
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Adds compatibility with jinja 3.1.1
+
+Signed-off-by: Samuli Piippo <samuli.piippo@qt.io>
 ---
- ...{xorg-sgml-doctools_1.11.bb => xorg-sgml-doctools_1.12.bb} | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
- rename meta-oe/recipes-graphics/xorg-doc/{xorg-sgml-doctools_1.11.bb => xorg-sgml-doctools_1.12.bb} (52%)
+ .../python/{python3-qface_2.0.6.bb => python3-qface_2.0.7.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-qface_2.0.6.bb => python3-qface_2.0.7.bb} (85%)
 
-diff --git a/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.11.bb b/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.12.bb
-similarity index 52%
-rename from meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.11.bb
-rename to meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.12.bb
-index c9da9f5a1e..050cb29824 100644
---- a/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.11.bb
-+++ b/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.12.bb
-@@ -1,12 +1,10 @@
- require xorg-doc-common.inc
- PE = "1"
--PR = "${INC_PR}.0"
+diff --git a/meta-python/recipes-devtools/python/python3-qface_2.0.6.bb b/meta-python/recipes-devtools/python/python3-qface_2.0.7.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-qface_2.0.6.bb
+rename to meta-python/recipes-devtools/python/python3-qface_2.0.7.bb
+index 63453517e..c42b91fcd 100644
+--- a/meta-python/recipes-devtools/python/python3-qface_2.0.6.bb
++++ b/meta-python/recipes-devtools/python/python3-qface_2.0.7.bb
+@@ -2,7 +2,7 @@ SUMMARY = "A generator framework based on a common modern IDL"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=eee61e10a40b0e3045ee5965bcd9a8b5"
  
- DEPENDS += "util-macros"
+-SRC_URI[sha256sum] = "87ce8ce7123ae57d91ac903c6c330a99273e7f4665a0ab88e6a17f9c98143a68"
++SRC_URI[sha256sum] = "fae48ba129c55da8445580eb711905c03911c4250761c0cd53c67e33495b0cee"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=c8c6c808cd3c797a07b24e443af1c449"
+ inherit pypi python_setuptools_build_meta
  
--SRC_URI[md5sum] = "ee6dc0a8a693a908857af328b2462661"
--SRC_URI[sha256sum] = "e71ce1df82dcc51eb14be6f42171dcc6bdd11ef46c0c605d6da8af12bd73b74c"
-+SRC_URI[sha256sum] = "65a9fdddedc17bd5e9c0b00d904960f03f047c3a62de5458989d493c29fec806"
- 
- FILES:${PN} += " /usr/share/sgml/X11"
 -- 
 2.25.1
 
