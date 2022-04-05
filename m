@@ -2,82 +2,109 @@ Return-Path: <stefan@datenfreihafen.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 91BFCC5519F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A866C5DF62
 	for <webhook@archiver.kernel.org>; Tue,  5 Apr 2022 17:24:49 +0000 (UTC)
 Received: from proxima.lasnet.de (proxima.lasnet.de [78.47.171.185])
- by mx.groups.io with SMTP id smtpd.web11.3615.1649147997656375851
+ by mx.groups.io with SMTP id smtpd.web08.3849.1649149956191532461
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Apr 2022 01:40:00 -0700
+ Tue, 05 Apr 2022 02:12:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@datenfreihafen.org header.s=2021 header.b=CG6Ch9Vr;
+ dkim=missing;
  spf=pass (domain: datenfreihafen.org, ip: 78.47.171.185,
  mailfrom: stefan@datenfreihafen.org)
-Received: from [IPV6:2003:e9:d721:c707:f462:96cc:47f6:1c47]
- (p200300e9d721c707f46296cc47f61c47.dip0.t-ipconnect.de
- [IPv6:2003:e9:d721:c707:f462:96cc:47f6:1c47])
+Received: from localhost.localdomain.datenfreihafen.local
+ (p200300e9d721c7079954505100d3e401.dip0.t-ipconnect.de
+ [IPv6:2003:e9:d721:c707:9954:5051:d3:e401])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest
  SHA256)
 	(No client certificate requested)
-	(Authenticated sender: stefan@datenfreihafen.org)
-	by proxima.lasnet.de (Postfix) with ESMTPSA id CBB4FC0A49;
-	Tue,  5 Apr 2022 10:39:54 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=datenfreihafen.org;
-	s=2021; t=1649147994;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=wzKA0cmuBMgaV0m7rkSAVA5D+uWHQkr5H5TF3+xcR/I=;
-	b=CG6Ch9VrGCbihjRo2BNxtDIJ2gYU0S/8AtQh2iZhRwOTX5yQHZeoOhEZnMPIyhZirANPNs
-	gwRrIhfwbHYYWM9KedGgxkcmj2oAoksfBBxUqhe0QogDrQ58HaUsU55hQ1XC9JfZOP5Vqa
-	IcqY/Yc6Tu6s2hWBOSVoysZ+mmBrnwzPC/zSMPiOlSYJqWvtYPhgaO2OmSArvpAYFfLimR
-	9EPP5E4Wwb3KxZTh46MdbXcH7QuylBE0mlOjghR3fu+EU7pnIhzqgX0kUhOzJIxf8PwDYC
-	FwQSMY/ALb9Hpu0tsnOcgq9XKj4OOaB8BhGD/hRtorS9wO4uw7KbSQnxGX/h8g==
-Message-ID: <0dffc397-22be-a6b1-0fb2-8792c6c93dd8@datenfreihafen.org>
-Date: Tue, 5 Apr 2022 10:39:54 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [oe] [meta-networking][PATCH 2/4] ot-daemon: add recipe for
- OpenThread daemon
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
- Stefan Schmidt <stefan.schmidt@huawei.com>
-References: <20220404130354.2131131-1-stefan@datenfreihafen.org>
- <20220404130354.2131131-2-stefan@datenfreihafen.org>
- <CAMKF1soas80msGDvw7zB7S=8rXuz2ni4L2FwbffXw=BJ1xNygA@mail.gmail.com>
+	(Authenticated sender: stefan@sostec.de)
+	by proxima.lasnet.de (Postfix) with ESMTPSA id 0CEC0C0DE8;
+	Tue,  5 Apr 2022 11:12:34 +0200 (CEST)
 From: Stefan Schmidt <stefan@datenfreihafen.org>
-In-Reply-To: 
- <CAMKF1soas80msGDvw7zB7S=8rXuz2ni4L2FwbffXw=BJ1xNygA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: openembedded-devel@lists.openembedded.org
+Cc: Stefan Schmidt <stefan@datenfreihafen.org>,
+	Stefan Schmidt <stefan.schmidt@huawei.com>
+Subject: [meta-networking][PATCH v2 2/4] ot-daemon: add recipe for OpenThread
+ daemon
+Date: Tue,  5 Apr 2022 11:12:17 +0200
+Message-Id: <20220405091219.1593707-2-stefan@datenfreihafen.org>
+X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220405091219.1593707-1-stefan@datenfreihafen.org>
+References: <20220405091219.1593707-1-stefan@datenfreihafen.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 05 Apr 2022 17:24:49 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96420
+ https://lists.openembedded.org/g/openembedded-devel/message/96422
 
+From: Stefan Schmidt <stefan.schmidt@huawei.com>
 
-Hello Khem.
+The OpenThread daemon allows Linuxes devices to participate in a Thread
+mesh network without acting as a full border router. The device
+participates like any other child or router devices within the network.
 
-On 05.04.22 05:16, Khem Raj wrote:
-> fails on x86_64/glibc see
-> https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1610
+This same repo is used for range of different modes to run the
+OpenThread code. From bare metal over vendor SDKs to posix platforms.
+For this recipe the focus is on the Linux posix implementation and we do
+not pull in all the git submodules on purpose.
 
-Ah, its not x86_64/glibc (I tested this) but the fact that the 
-autobuilder uses poky and I tested here without DISTRO in openembedded core.
+There are openthread enabled recipes in meta-zephyr for people who want
+to also use OpenThread on MCU based platforms on top of Zephyr.
 
-Seems the code base it not happy about the gcc changes to warn on the 
-combination of _FORTIFY_SOURCE and non-optimized code:
+Signed-off-by: Stefan Schmidt <stefan.schmidt@huawei.com>
+---
+v2:
+- Switched to release build
+- Ensure we list the license for mbedtls as third_party
+ .../openthread/ot-daemon_git.bb               | 27 +++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/openthread/ot-da=
+emon_git.bb
 
-error: #warning _FORTIFY_SOURCE requires compiling with optimization 
-(-O) [-Werror=cpp]
+diff --git a/meta-networking/recipes-connectivity/openthread/ot-daemon_gi=
+t.bb b/meta-networking/recipes-connectivity/openthread/ot-daemon_git.bb
+new file mode 100644
+index 000000000..f3f4c70fa
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/openthread/ot-daemon_git.bb
+@@ -0,0 +1,27 @@
++# SPDX-FileCopyrightText: Huawei Inc.
++#
++# SPDX-License-Identifier: Apache-2.0
++SUMMARY =3D "OpenThread Daemon is an OpenThread POSIX build mode that ru=
+ns OpenThread as a service."
++SECTION =3D "net"
++LICENSE =3D "BSD-3-Clause & Apache-2.0"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D543b6fe90ec5901a683320a36390c=
+65f \
++                    file://third_party/mbedtls/repo/LICENSE;md5=3D3b83ef=
+96387f14655fc854ddc3c6bd57 \
++                    "
++DEPENDS =3D "readline"
++SRCREV =3D "7dfde1f12923f03c9680be4d838b94b7a2320324"
++PV =3D "0.1+git${SRCPV}"
++
++SRC_URI =3D "git://github.com/openthread/openthread.git;protocol=3Dhttps=
+;branch=3Dmain \
++           "
++
++S =3D "${WORKDIR}/git"
++
++inherit cmake
++
++EXTRA_OECMAKE =3D "-DOT_DAEMON=3DON \
++                 -DOT_SPINEL_RESET_CONNECTION=3DON \
++                 -DOT_THREAD_VERSION=3D1.2 \
++                 -DOT_COVERAGE=3DOFF \
++                 -DOT_PLATFORM=3Dposix \
++                 -DCMAKE_BUILD_TYPE=3DRelease \
++                 "
+--=20
+2.35.1
 
-Will fix and resend.
-
-regards
-Stefan Schmidt
 
