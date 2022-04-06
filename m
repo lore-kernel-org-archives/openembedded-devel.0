@@ -1,285 +1,154 @@
-Return-Path: <sakib.sajal@windriver.com>
+Return-Path: <ralph.siemsen@linaro.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66E7DC433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EDFDC4321E
 	for <webhook@archiver.kernel.org>; Wed,  6 Apr 2022 18:41:41 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web11.45.1649262973511090501
+Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
+ [209.85.160.172])
+ by mx.groups.io with SMTP id smtpd.web11.1482.1649269069239206114
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Apr 2022 09:36:13 -0700
+ Wed, 06 Apr 2022 11:17:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.3.146,
- mailfrom: sakib.sajal@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 236GZwma021519
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 6 Apr 2022 09:35:58 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 236GZwxZ004635
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 6 Apr 2022 09:35:58 -0700 (PDT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Wed, 6 Apr 2022 09:35:58 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27; Wed, 6 Apr 2022 09:35:57 -0700
-Received: from yow-lpggp3.wrs.com (128.224.137.13) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Wed, 6 Apr 2022 09:35:57 -0700
-From: Sakib Sajal <sakib.sajal@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][PATCH] drbd-utils: update 9.13.1 -> 9.20.2
-Date: Wed, 6 Apr 2022 12:35:57 -0400
-Message-ID: <20220406163557.12606-1-sakib.sajal@windriver.com>
-X-Mailer: git-send-email 2.33.0
+ dkim=pass header.i=@linaro.org header.s=google header.b=B0M8Mutr;
+ spf=pass (domain: linaro.org, ip: 209.85.160.172,
+ mailfrom: ralph.siemsen@linaro.org)
+Received: by mail-qt1-f172.google.com with SMTP id t2so5786533qtw.9
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 06 Apr 2022 11:17:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=iGMPZvA3UN2qv+N+Aj52LIlKyiOZurx9JJyAvXFfCa0=;
+        b=B0M8MutrKOzEfmO3yVqeUjej+to7MjKRiZj0gswSoYHObWj1oZrjw4UsspTVFODquU
+         RDcPYl12BCDtEOQ+tYJ1/5L0XXxA0h+CzUuro0IyI+offam9pOryU22Z6sly6xhJzWjQ
+         Hkv2xsgYG/RhC+A9FeIAWsYcW4gUBxxNcfW7ck7U3Pr0jptTXB64oiCV2iM74PYGcy9b
+         E4Y1NVOddlwAk7CXQLNTze5miNAabjCwEk1U85/IE3lGu80k8kNmo3lNwLqZLqFTQVFe
+         MFZZsPcdUnYTIuQIlobUWsYavaeDrp/YA+umBbVe771X7nkYqnBVvW01aJIGVncBYeHY
+         08zg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=iGMPZvA3UN2qv+N+Aj52LIlKyiOZurx9JJyAvXFfCa0=;
+        b=UMvw4w+6vkSxPNolv6KI2uX2iO/RV35q15eXHGWiAXDDRmNN3PJZoY/KArhhL9Z4P7
+         eaMf3bkz90RzK08PV+CS4nwn8v5sMwIgxS+ZS8cVQ9kSbqbJyhfZEaKgzzIGnsYeoFe4
+         kZWFmxUnnL15GZ8tLOAcJhaDEYm6EKGWCx8gB48cairS8DEubmvoLGgJgM7M6rvZqNQM
+         oee4f9xqe9R8yz4t7kwFFXW40i84IfoIdTH3QdBo0vpQFaUOusPYq7ZpOc/sMHZKmbI3
+         E+mGNCWiQIs6ewYIr2ribd1dPAiasLrHM9RGzSf50V0zbF0ZQleN2NQqp3WfPAmBRN8D
+         4Rpw==
+X-Gm-Message-State: AOAM530jcOImUN9jznJD0XKRcpzmL8Z2uHv4NeO1+IYBpwl1YxaEQJCz
+	SkXMoMAbSpwLnrjnOtQ9/IOnywbP4lR8rw==
+X-Google-Smtp-Source: 
+ ABdhPJyaT7Fz/qDaugOVIOczW8F3c331AjQgFM9euWLkOKHG1fmlsHlpM0tGFb16UGNn8XKSxYETaA==
+X-Received: by 2002:a05:622a:15c7:b0:2eb:9af4:cdf4 with SMTP id
+ d7-20020a05622a15c700b002eb9af4cdf4mr8433444qty.241.1649269068330;
+        Wed, 06 Apr 2022 11:17:48 -0700 (PDT)
+Received: from maple.netwinder.org (rfs.netwinder.org. [206.248.184.2])
+        by smtp.gmail.com with ESMTPSA id
+ f18-20020a05622a105200b002e1eb06ece3sm13447831qte.31.2022.04.06.11.17.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 06 Apr 2022 11:17:47 -0700 (PDT)
+From: Ralph Siemsen <ralph.siemsen@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Cc: ranjitsinhrathod1991@gmail.com,
+	Ralph Siemsen <ralph.siemsen@linaro.org>
+Subject: [dunfell][PATCH] polkit: fix overlapping changes in recent CVE
+ patches
+Date: Wed,  6 Apr 2022 14:17:39 -0400
+Message-Id: <20220406181739.1403657-1-ralph.siemsen@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 06 Apr 2022 18:41:41 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96439
+ https://lists.openembedded.org/g/openembedded-devel/message/96440
 
-Dropped patch which is merged upstream:
-	0001-v84-Make-setup_options-definitions-as-extern.patch
+Commit 17e931e77 ("polkit: fix CVE-2021-3560") contains
+- upstream commit a04d13affe0fa53ff618e07aa8f57f4c0e3b9b81
 
-Refreshed patch:
-	0001-drbd-utils-support-usrmerge.patch
+Commit 67ec3e049 ("polkit: Fix for CVE-2021-4115") contains both:
+- upstream commit a04d13affe0fa53ff618e07aa8f57f4c0e3b9b81 (CVE-2021-3560)
+- upstream commit 41cb093f554da8772362654a128a84dd8a5542a7 (CVE-2021-4115)
 
-The compiled binaries are not linked to LDFLAGS options provided
-by the build system cause QA issue:
-	do_package_qa: QA Issue: File /usr/sbin/drbdmon in package
-	drbd-utils doesn't have GNU_HASH (didn't pass LDFLAGS?)
-Add LDFLAGS when linking drmdmon binary.
+Thus the fix for CVE-2021-3560 is applied twice, resulting in warnings
+during do_patch. Curiously it neither fails nor complains about patch
+already applied. Also devtool silently discards the duplicate patch.
 
-Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
+Drop the duplicate patch, to resolve following warnings:
+
+WARNING: polkit-0.116-r0 do_patch: Fuzz detected:
+
+Applying patch 0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch
+patching file src/polkit/polkitsystembusname.c
+Hunk #1 succeeded at 438 with fuzz 2 (offset 3 lines).
+
+Applying patch CVE-2021-4115.patch
+patching file src/polkit/polkitsystembusname.c
+Hunk #4 succeeded at 439 with fuzz 2.
+
+Signed-off-by: Ralph Siemsen <ralph.siemsen@linaro.org>
 ---
- .../0001-drbd-utils-support-usrmerge.patch    | 39 +++++++++++--------
- ...001-drbdmon-add-LDFLAGS-when-linking.patch | 26 +++++++++++++
- ...-setup_options-definitions-as-extern.patch | 32 ---------------
- ...d-utils_9.13.1.bb => drbd-utils_9.20.2.bb} | 13 +++++--
- 4 files changed, 58 insertions(+), 52 deletions(-)
- create mode 100644 meta-networking/recipes-support/drbd/drbd-utils/0001-drbdmon-add-LDFLAGS-when-linking.patch
- delete mode 100644 meta-networking/recipes-support/drbd/drbd-utils/0001-v84-Make-setup_options-definitions-as-extern.patch
- rename meta-networking/recipes-support/drbd/{drbd-utils_9.13.1.bb => drbd-utils_9.20.2.bb} (85%)
+ ...thentication-bypass-vulnerability-in.patch | 32 -------------------
+ .../recipes-extended/polkit/polkit_0.116.bb   |  1 -
+ 2 files changed, 33 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/polkit/files/0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch
 
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch b/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch
-index 5e128727d..d976680e3 100644
---- a/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch
-+++ b/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch
-@@ -1,4 +1,4 @@
--From 642b5823abeee27a0fdc2d12d0e1235461ace9ed Mon Sep 17 00:00:00 2001
-+From 83764f5d57b3370e0b04a70f814ca49237a66eea Mon Sep 17 00:00:00 2001
- From: Changqing Li <changqing.li@windriver.com>
- Date: Thu, 5 Sep 2019 18:57:39 +0800
- Subject: [PATCH] drbd-utils: support usrmerge
-@@ -6,18 +6,19 @@ Subject: [PATCH] drbd-utils: support usrmerge
- Upstream-Status: Inappropriate[oe-specific]
- 
- Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
- ---
-  configure.ac         |  2 +-
-- scripts/Makefile.in  |  4 ++--
-+ scripts/Makefile.in  | 10 +++++-----
-  user/v83/Makefile.in | 14 +++++++-------
-  user/v84/Makefile.in | 14 +++++++-------
-- 4 files changed, 17 insertions(+), 17 deletions(-)
-+ 4 files changed, 20 insertions(+), 20 deletions(-)
- 
- diff --git a/configure.ac b/configure.ac
--index 4df1b4d..c4ef1bc 100644
-+index ae575586..3d7deeae 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -176,7 +176,7 @@ AC_ARG_WITH(tmpfilesdir,
-+@@ -180,7 +180,7 @@ AC_ARG_WITH(tmpfilesdir,
-  AC_SUBST(tmpfilesdir)
-  
-  # set default early
-@@ -27,22 +28,28 @@ index 4df1b4d..c4ef1bc 100644
-     test x"$with_udev" = xyes ; then
-  	if test x"$PKG_CONFIG" != x; then
- diff --git a/scripts/Makefile.in b/scripts/Makefile.in
--index fbb0beb..da701a1 100644
-+index fcd298e9..2521fb08 100644
- --- a/scripts/Makefile.in
- +++ b/scripts/Makefile.in
--@@ -75,8 +75,8 @@ endif
-- ifeq ($(subst both,systemd,$(initscripttype)),systemd)
-+@@ -88,11 +88,11 @@ ifeq ($(subst both,systemd,$(initscripttype)),systemd)
-  	install -d $(DESTDIR)$(systemdunitdir)
-  	install -m 644 drbd.service $(DESTDIR)$(systemdunitdir)/
---	install -d $(DESTDIR)/lib/drbd/
---	install -m 755 drbd $(DESTDIR)/lib/drbd/
--+	install -d $(DESTDIR)/${nonarch_libdir}/drbd
--+	install -m 755 drbd $(DESTDIR)/${nonarch_libdir}/drbd
-+ 	install -m 644 $(SYSTEMD_TEMPLATES) $(DESTDIR)$(systemdunitdir)/
-+-	install -d $(DESTDIR)/lib/drbd/scripts
-+-	install -m 755 drbd $(DESTDIR)/lib/drbd/scripts
-+-	install -m 755 drbd-service-shim.sh $(DESTDIR)/lib/drbd/scripts
-+-	install -m 755 drbd-wait-promotable.sh $(DESTDIR)/lib/drbd/scripts
-+-	install -m 755 ocf.ra.wrapper.sh $(DESTDIR)/lib/drbd/scripts
-++	install -d $(DESTDIR)/${nonarch_libdir}/drbdscripts
-++	install -m 755 drbd $(DESTDIR)/${nonarch_libdir}/drbdscripts
-++	install -m 755 drbd-service-shim.sh $(DESTDIR)/${nonarch_libdir}/drbdscripts
-++	install -m 755 drbd-wait-promotable.sh $(DESTDIR)/${nonarch_libdir}/drbdscripts
-++	install -m 755 ocf.ra.wrapper.sh $(DESTDIR)/${nonarch_libdir}/drbdscripts
-  	install -d $(DESTDIR)$(tmpfilesdir)/
-  	install -m 444 drbd.tmpfiles.conf $(DESTDIR)$(tmpfilesdir)/drbd.conf
-  endif
- diff --git a/user/v83/Makefile.in b/user/v83/Makefile.in
--index 27516de..b301376 100644
-+index 08cfe574..4c4971b6 100644
- --- a/user/v83/Makefile.in
- +++ b/user/v83/Makefile.in
- @@ -96,19 +96,19 @@ install:
-@@ -73,10 +80,10 @@ index 27516de..b301376 100644
-  .PHONY: install uninstall clean distclean
-  ../../configure:
- diff --git a/user/v84/Makefile.in b/user/v84/Makefile.in
--index 38977c6..05ef060 100644
-+index 0fcefc5f..81f7d5ec 100644
- --- a/user/v84/Makefile.in
- +++ b/user/v84/Makefile.in
--@@ -109,19 +109,19 @@ ifeq ($(WITH_84_SUPPORT),yes)
-+@@ -110,19 +110,19 @@ ifeq ($(WITH_84_SUPPORT),yes)
-  	install -d $(DESTDIR)$(localstatedir)/lib/drbd
-  	install -d $(DESTDIR)$(localstatedir)/run/drbd
-  	install -d $(DESTDIR)$(localstatedir)/lock
-@@ -104,5 +111,5 @@ index 38977c6..05ef060 100644
-  spell:
-  	for f in drbdadm_adjust.c drbdadm_main.c drbdadm_parser.c drbdadm_usage_cnt.c drbdsetup.c drbdtool_common.c; do \
- -- 
--2.7.4
-+2.33.0
- 
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils/0001-drbdmon-add-LDFLAGS-when-linking.patch b/meta-networking/recipes-support/drbd/drbd-utils/0001-drbdmon-add-LDFLAGS-when-linking.patch
-new file mode 100644
-index 000000000..bdc173fa9
---- /dev/null
-+++ b/meta-networking/recipes-support/drbd/drbd-utils/0001-drbdmon-add-LDFLAGS-when-linking.patch
-@@ -0,0 +1,26 @@
-+From a61b9ff2d2cb7387a5cd347b2201535ee45a46ee Mon Sep 17 00:00:00 2001
-+From: Sakib Sajal <sakib.sajal@windriver.com>
-+Date: Thu, 31 Mar 2022 15:09:58 -0400
-+Subject: [PATCH] drbdmon: add LDFLAGS when linking
-+
-+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
-+---
-+ user/drbdmon/Makefile.in | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/user/drbdmon/Makefile.in b/user/drbdmon/Makefile.in
-+index e07eb772..17166098 100644
-+--- a/user/drbdmon/Makefile.in
-++++ b/user/drbdmon/Makefile.in
-+@@ -51,7 +51,7 @@ $(dsaext-obj): $(basename $(dsaext-obj)).cpp $(basename $(dsaext-obj)).h
-+ $(integerparse-obj): $(basename $(integerparse-obj)).cpp $(basename $(integerparse-obj)).h
-+ 
-+ drbdmon: $(ls-obj)
-+-	$(CXX) -o $@ $(CPPFLAGS) $(CXXFLAGS) $^ $(LIBS)
-++	$(CXX) -o $@ $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) $^ $(LIBS)
-+ 
-+ # do not try to rebuild Makefile itself
-+ Makefile: ;
-+-- 
-+2.33.0
-+
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils/0001-v84-Make-setup_options-definitions-as-extern.patch b/meta-networking/recipes-support/drbd/drbd-utils/0001-v84-Make-setup_options-definitions-as-extern.patch
+diff --git a/meta-oe/recipes-extended/polkit/files/0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch b/meta-oe/recipes-extended/polkit/files/0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch
 deleted file mode 100644
-index 6702f3bde..000000000
---- a/meta-networking/recipes-support/drbd/drbd-utils/0001-v84-Make-setup_options-definitions-as-extern.patch
+index 2a2373ed5..000000000
+--- a/meta-oe/recipes-extended/polkit/files/0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch
 +++ /dev/null
 @@ -1,32 +0,0 @@
--From d095caf6f8f77fe056fb90ccd5d89c207a7f346d Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 12 Aug 2020 12:59:38 -0700
--Subject: [PATCH] v84: Make setup_options definitions as extern
+-From a04d13affe0fa53ff618e07aa8f57f4c0e3b9b81 Mon Sep 17 00:00:00 2001
+-From: Jan Rybar <jrybar@redhat.com>
+-Date: Wed, 2 Jun 2021 15:43:38 +0200
+-Subject: [PATCH] GHSL-2021-074: authentication bypass vulnerability in polkit
 -
--This is already defined in drbdadm_main.c, therefore make this
--declaration to be extern for other modules
+-initial values returned if error caught
 -
--Fixes compatibility with gcc-10 which uses -fno-common by default
+-Upstream-Status: Backport [https://gitlab.freedesktop.org/polkit/polkit/-/commit/a04d13affe0fa53ff618e07aa8f57f4c0e3b9b81.patch]
+-CVE: CVE-2021-4115
+-Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
 -
--Upstream-Status: Submitted [https://github.com/LINBIT/drbd-utils/pull/7]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- user/v84/drbdadm.h | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
+- src/polkit/polkitsystembusname.c | 3 +++
+- 1 file changed, 3 insertions(+)
 -
--diff --git a/user/v84/drbdadm.h b/user/v84/drbdadm.h
--index ed63d78c..8469f1c4 100644
----- a/user/v84/drbdadm.h
--+++ b/user/v84/drbdadm.h
--@@ -251,7 +251,7 @@ struct setup_option {
-- 	bool explicit;
-- 	char *option;
-- };
---struct setup_option *setup_options;
--+extern struct setup_option *setup_options;
+-diff --git a/src/polkit/polkitsystembusname.c b/src/polkit/polkitsystembusname.c
+-index 8daa12c..8ed1363 100644
+---- a/src/polkit/polkitsystembusname.c
+-+++ b/src/polkit/polkitsystembusname.c
+-@@ -435,6 +435,9 @@ polkit_system_bus_name_get_creds_sync (PolkitSystemBusName           *system_bus
+-   while (!((data.retrieved_uid && data.retrieved_pid) || data.caught_error))
+-     g_main_context_iteration (tmp_context, TRUE);
 - 
-- extern void add_setup_option(bool explicit, char *option);
-- 
+-+  if (data.caught_error)
+-+    goto out;
+-+
+-   if (out_uid)
+-     *out_uid = data.uid;
+-   if (out_pid)
 --- 
--2.28.0
+-GitLab
 -
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.13.1.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.20.2.bb
-similarity index 85%
-rename from meta-networking/recipes-support/drbd/drbd-utils_9.13.1.bb
-rename to meta-networking/recipes-support/drbd/drbd-utils_9.20.2.bb
-index a246464b2..d9cd94c04 100644
---- a/meta-networking/recipes-support/drbd/drbd-utils_9.13.1.bb
-+++ b/meta-networking/recipes-support/drbd/drbd-utils_9.20.2.bb
-@@ -10,11 +10,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
- 
- SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils;branch=${PV};protocol=https \
-            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers;branch=master;protocol=https \
--           file://0001-v84-Make-setup_options-definitions-as-extern.patch \
-            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
-+           file://0001-drbdmon-add-LDFLAGS-when-linking.patch \
-           "
--SRCREV_drbd-utils = "b24b0f7e42d500d3538d7eeffa017ec78d08f918"
--SRCREV_drbd-headers = "c757cf357edef67751b8f45a6ea894d287180087"
-+SRCREV_drbd-utils = "087ee6b4961ca154d76e4211223b03149373bed8"
-+SRCREV_drbd-headers = "f1529aa84e9d2f66c96ad283a1bbb708aabf03f7"
- 
- SRCREV_FORMAT = "drbd-utils_drbd-headers"
- 
-@@ -40,6 +40,8 @@ EXTRA_OECONF = " \
-                 --without-manual \
-                "
- 
-+CXXFLAGS:append:toolchain-clang = " -Wno-error"
-+
- # If we have inherited reproducible_build, we want to use it.
- export WANT_DRBD_REPRODUCIBLE_BUILD = "yes"
- 
-@@ -56,7 +58,10 @@ RDEPENDS:${PN} += "bash perl-module-getopt-long perl-module-exporter perl-module
- FILES:${PN} += "/run"
- FILES:${PN} += "${nonarch_base_libdir}/drbd \
-                 ${nonarch_libdir}/drbd \
--                ${nonarch_libdir}/tmpfiles.d"
-+                ${nonarch_libdir}/tmpfiles.d \
-+                ${nonarch_libdir}/drbdscripts/* \
-+                ${systemd_unitdir}/system/* \
-+"
- FILES:${PN}-dbg += "${nonarch_base_libdir}/drbd/.debug"
- 
- CLEANBROKEN = "1"
+diff --git a/meta-oe/recipes-extended/polkit/polkit_0.116.bb b/meta-oe/recipes-extended/polkit/polkit_0.116.bb
+index ac48cf6c2..dd8e20861 100644
+--- a/meta-oe/recipes-extended/polkit/polkit_0.116.bb
++++ b/meta-oe/recipes-extended/polkit/polkit_0.116.bb
+@@ -27,7 +27,6 @@ SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.
+            file://0003-make-netgroup-support-optional.patch \
+            file://CVE-2021-3560.patch \
+            file://CVE-2021-4034.patch \
+-           file://0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch \
+            file://CVE-2021-4115.patch \
+            "
+ SRC_URI[md5sum] = "4b37258583393e83069a0e2e89c0162a"
 -- 
-2.33.0
+2.25.1
 
 
