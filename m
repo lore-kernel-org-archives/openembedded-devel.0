@@ -1,259 +1,183 @@
-Return-Path: <stefan@datenfreihafen.org>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A748C35280
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B5377C35295
 	for <webhook@archiver.kernel.org>; Thu,  7 Apr 2022 15:41:14 +0000 (UTC)
-Received: from proxima.lasnet.de (proxima.lasnet.de [78.47.171.185])
- by mx.groups.io with SMTP id smtpd.web10.3646.1649315035039986726
+Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
+ by mx.groups.io with SMTP id smtpd.web09.4446.1649321783654231988
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Apr 2022 00:03:57 -0700
+ Thu, 07 Apr 2022 01:56:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@datenfreihafen.org header.s=2021 header.b=FdjZrJ6E;
- spf=pass (domain: datenfreihafen.org, ip: 78.47.171.185,
- mailfrom: stefan@datenfreihafen.org)
-Received: from [IPV6:2003:e9:d71c:2746:5cff:fb2d:7c4f:9]
- (p200300e9d71c27465cfffb2d7c4f0009.dip0.t-ipconnect.de
- [IPv6:2003:e9:d71c:2746:5cff:fb2d:7c4f:9])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest
- SHA256)
-	(No client certificate requested)
-	(Authenticated sender: stefan@datenfreihafen.org)
-	by proxima.lasnet.de (Postfix) with ESMTPSA id 7060BC05DE;
-	Thu,  7 Apr 2022 09:03:51 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=datenfreihafen.org;
-	s=2021; t=1649315031;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=fd7Q8hL983RpFxyrMMCkjCJIuk72urO3w6URZvnWD/k=;
-	b=FdjZrJ6EDBucCkwzhvM/U5NRAFFLjPYHa/bn3Xb1tZaIuu1dUg4uPhvMDyJTIWUJE98k9u
-	NyKNBwrmt1zhPRkP3f8B71PJXWvKZtVARGyA17h+fNBC2C+Mh0RXXnusRWTPMQvSdxesIm
-	iCb9lmWOA7/rh/z6zgiAxY3I1HPKcoIh8kwTiFpg+4dIEqCGs6FYUyBo/d8U7tr5M+p14q
-	J7Kg7SLPbohk2Mz0ZPXKDN5S3MTrhacivUXT6qpjaO7UP+5fKI6vv4u83xE0cRX3BBGn3L
-	malsxpfSsI8ZbE9ZD03l+5GkDcn27l7GtitpRjTKlAcqgelzTvTjeK3jEOu85w==
-Message-ID: <d436dd22-671d-abc7-e44f-94329f1d7014@datenfreihafen.org>
-Date: Thu, 7 Apr 2022 09:03:50 +0200
+ dkim=missing;
+ spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.19,
+ mailfrom: f_l_k@t-online.de)
+Received: from fwd82.dcpf.telekom.de (fwd82.aul.t-online.de [10.223.144.108])
+	by mailout06.t-online.de (Postfix) with SMTP id B466912462;
+	Thu,  7 Apr 2022 10:56:21 +0200 (CEST)
+Received: from [192.168.178.83] ([84.163.46.130]) by fwd82.t-online.de
+	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
+	esmtp id 1ncNwD-0D46530; Thu, 7 Apr 2022 10:56:21 +0200
+Message-ID: <0923b514-1823-6a8f-c495-6dce9c904698@t-online.de>
+Date: Thu, 7 Apr 2022 10:56:21 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [oe] [meta-networking][PATCH v2 1/4] ot-br-posix: add recipe for
- an OpenThread Border Router
+ Thunderbird/91.7.0
+Subject: Re: [oe] [meta-gnome][PATCH] gparted: update to v1.4.0
 Content-Language: en-US
 To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
- Stefan Schmidt <stefan.schmidt@huawei.com>
-References: <20220405091219.1593707-1-stefan@datenfreihafen.org>
- <CAMKF1sqXOTFTJiNTg5zYebfFDm8JL=OeorNQDY+N_hBo=TAn-Q@mail.gmail.com>
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <20220404141948.3373-1-f_l_k@t-online.de>
+ <CAMKF1srnu9-T4id=oC0wAvGVXtAu3AzaXPjj3_B=crcOtT12qg@mail.gmail.com>
+From: Markus Volk <f_l_k@t-online.de>
 In-Reply-To: 
- <CAMKF1sqXOTFTJiNTg5zYebfFDm8JL=OeorNQDY+N_hBo=TAn-Q@mail.gmail.com>
+ <CAMKF1srnu9-T4id=oC0wAvGVXtAu3AzaXPjj3_B=crcOtT12qg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-TOI-EXPURGATEID: 150726::1649321781-0000B8A1-8963D8F1/0/0 CLEAN NORMAL
+X-TOI-MSGID: 69748405-6bca-45d6-9cc5-77e6a22a6e99
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 07 Apr 2022 15:41:14 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96447
+ https://lists.openembedded.org/g/openembedded-devel/message/96448
 
-Hello Khem.
+I have had a look at this. To me it looks like musl string.h does not=20
+define basename() for cplusplus. I'm not really an expert on musl or=20
+c/c++ and don't know the difference between these two functions in=20
+detail, but I was able to fix the problem for musl by replacing gnu=20
+basename with glib's variant.
 
-On 07.04.22 02:20, Khem Raj wrote:
-> still fails to build
-> 
-> https://errors.yoctoproject.org/Errors/Details/654012/
+I'll send a v2, but since this is security related stuff, I have to=20
+admit that I'm not the one to say "this is a proper solution".
 
-Sigh, sorry for this.
 
-Its a different recipe than the first one that failed.
-I will sit down and try to figure out why I am not seeing any of the 
-problems in my local builds. Need to check the autobuilder configs.
-
-regards
-Stefan Schmidt
-
-> 
-> On Tue, Apr 5, 2022 at 5:12 AM Stefan Schmidt <stefan@datenfreihafen.org> wrote:
+Am 07.04.22 um 02:17 schrieb Khem Raj:
+> fails on musl
+>
+> https://errors.yoctoproject.org/Errors/Details/654013/
+>
+> On Mon, Apr 4, 2022 at 10:20 AM Markus Volk <f_l_k@t-online.de> wrote:
+>> - remove x11 features-check because there aren't dependencies that wou=
+ld
+>>    explicilty require x11 as a DISTRO_FEATURE
 >>
->> From: Stefan Schmidt <stefan.schmidt@huawei.com>
+>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D
+>> GParted 1.4.0   (2022-03-28)
+>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D
 >>
->> The OpenThread project is an open source implementation of the Thread
->> low-power mesh network protocol. In a Thread network devices can have
->> different roles, and of of these roles is a Border Router that allows a
->> Thread network to be connected with other IP networks.
+>> Release Notes
+>> -------------
+>>    This release of GParted includes enhancements, bug fixes and
+>>    language translation updates.
 >>
->> Ot-br-posix runs as a systemd service on a standard Linux system to
->> handle the connection to a Thread network.
+>>    * Add labelling of mounted btrfs, ext2/3/4 and xfs file systems
+>>    * Fix detection of mount points for encrypted file systems
+>>    * Fix crash scrolling quickly in the drive selection combobox
+>>    * Add bcache detection
+>>    * Add JBD external EXT3/4 journal detection
 >>
->> The small musl compile fix has been submitted upstream and is pending
->> while the systemd unit file change is OE specific and avoids having
->> service dependencies implemented as pre exec hooks.
+>> Bug Fixes
+>> ---------
+>>    * Add labelling of mounted btrfs, ext2/3/4 and xfs file systems (#1=
+63, !87)
+>>    * Fix detection of mount points for encrypted file systems (#162, !=
+88)
+>>    * Fix unmount error when unmounting below a bind mount point (!89)
+>>    * Fix crash scrolling quickly in the drive selection combobox (#165=
+, !91)
+>>    * Add initial Indonesian translation of help (!90)
+>>    * Add accessibility relations for screen readers like Orca (!92)
+>>    * Fix partition creation at sector 2048 if partition before it (#17=
+2, !93)
+>>    * Make more getter methods use return-by-constant-reference (!94)
+>>    * Check copy destination instead of source (!95)
+>>    * Add bcache detection (#183, !96)
+>>    * Add JBD external EXT3/4 journal detection (#89, !97)
+>>    * Fix translation of DocBook markup tag of the GParted Manual (!98)
 >>
->> Signed-off-by: Stefan Schmidt <stefan.schmidt@huawei.com>
+>> Code Credits
+>> ------------
+>>    Code enhancements are courtesy of Movie Ma, Pascal Eng=C3=A9libert,=
+ and
+>>    Mike Fleetwood.
+>>
+>> Translations (new/updated)
+>> --------------------------
+>>    cs(Marek =C4=8Cernock=C3=BD), da(Alan Mortensen), eu(Asier Sarasua =
+Garmendia),
+>>    fur(Fabio Tomat), he(Yaron Shahrabani), hr(Goran Vidovi=C4=87),
+>>    hu(Bal=C3=A1zs =C3=9Ar), id(Andika Triwidada), it(Milo Casagrande),
+>>    ko(Seong-ho Cho), lt(Aurimas =C4=8Cernius), lv(R=C5=ABdolfs Mazurs)=
+,
+>>    nb(Kjell Cato Heskjestad), nl(Nathan Follens), pa(A S Alam),
+>>    pt(Hugo Carvalho), ru(Aleksandr Melman, Sergej A), sk(Du=C5=A1an Ka=
+zik),
+>>    sl(Matej Urban=C4=8Di=C4=8D), sr(=D0=9C=D0=B8=D1=80=D0=BE=D1=81=D0=BB=
+=D0=B0=D0=B2 =D0=9D=D0=B8=D0=BA=D0=BE=D0=BB=D0=B8=D1=9B), zh_CN(Luming Zh=
+)
+>>
+>> Dependencies (new/updated)
+>> --------------------------
+>>    * n/a
+>>
+>> Signed-off-by: Markus Volk <f_l_k@t-online.de>
 >> ---
->> v2:
->> - Upstream status of one patch changed from pending to submitted
+>>   .../gparted/{gparted_1.3.1.bb =3D> gparted_1.4.0.bb}           | 5 +=
++---
+>>   1 file changed, 2 insertions(+), 3 deletions(-)
+>>   rename meta-gnome/recipes-extended/gparted/{gparted_1.3.1.bb =3D> gp=
+arted_1.4.0.bb} (83%)
 >>
->>   ...ce.in-remove-pre-exec-hook-for-mdns-.patch | 35 +++++++++++
->>   ...lient-add-needed-header-for-fd_set-c.patch | 27 +++++++++
->>   .../openthread/ot-br-posix_git.bb             | 59 +++++++++++++++++++
->>   3 files changed, 121 insertions(+)
->>   create mode 100644 meta-networking/recipes-connectivity/openthread/ot-br-posix/0001-otbr-agent.service.in-remove-pre-exec-hook-for-mdns-.patch
->>   create mode 100644 meta-networking/recipes-connectivity/openthread/ot-br-posix/0001-web-service-ot-client-add-needed-header-for-fd_set-c.patch
->>   create mode 100644 meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
+>> diff --git a/meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb b/me=
+ta-gnome/recipes-extended/gparted/gparted_1.4.0.bb
+>> similarity index 83%
+>> rename from meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb
+>> rename to meta-gnome/recipes-extended/gparted/gparted_1.4.0.bb
+>> index d1a975930..d1297b5a2 100644
+>> --- a/meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb
+>> +++ b/meta-gnome/recipes-extended/gparted/gparted_1.4.0.bb
+>> @@ -3,16 +3,15 @@ HOMEPAGE =3D "http://gparted.org/index.php"
+>>   LICENSE =3D "GPL-2.0-only"
+>>   LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df07=
+9bae19f"
 >>
->> diff --git a/meta-networking/recipes-connectivity/openthread/ot-br-posix/0001-otbr-agent.service.in-remove-pre-exec-hook-for-mdns-.patch b/meta-networking/recipes-connectivity/openthread/ot-br-posix/0001-otbr-agent.service.in-remove-pre-exec-hook-for-mdns-.patch
->> new file mode 100644
->> index 000000000..250de4bdd
->> --- /dev/null
->> +++ b/meta-networking/recipes-connectivity/openthread/ot-br-posix/0001-otbr-agent.service.in-remove-pre-exec-hook-for-mdns-.patch
->> @@ -0,0 +1,35 @@
->> +From ed60d4605b81c43b9ba9504a37835109c247c6f8 Mon Sep 17 00:00:00 2001
->> +From: Stefan Schmidt <stefan.schmidt@huawei.com>
->> +Date: Fri, 1 Apr 2022 21:46:03 +0200
->> +Subject: [PATCH] otbr-agent.service.in: remove pre exec hook for mdns service
->> +
->> +It uses the service command which is not available in all cases under
->> +Yocto/OE. The upstream project uses this mainly with Ubuntu and Raspian
->> +as testbeds.
->> +
->> +In our case we simply ensure that avahi-daemon is installed on the
->> +system inside the recipe.
->> +
->> +Upstream-Status: Inappropriate [OE specific]
->> +
->> +Signed-off-by: Stefan Schmidt <stefan.schmidt@huawei.com>
->> +---
->> + src/agent/otbr-agent.service.in | 2 +-
->> + 1 file changed, 1 insertion(+), 1 deletion(-)
->> +
->> +diff --git a/src/agent/otbr-agent.service.in b/src/agent/otbr-agent.service.in
->> +index 8314121347..4c97869def 100644
->> +--- a/src/agent/otbr-agent.service.in
->> ++++ b/src/agent/otbr-agent.service.in
->> +@@ -6,7 +6,7 @@ After=dbus.socket
->> +
->> + [Service]
->> + EnvironmentFile=-@CMAKE_INSTALL_FULL_SYSCONFDIR@/default/otbr-agent
->> +-@EXEC_START_PRE@ExecStart=@CMAKE_INSTALL_FULL_SBINDIR@/otbr-agent $OTBR_AGENT_OPTS
->> ++ExecStart=@CMAKE_INSTALL_FULL_SBINDIR@/otbr-agent $OTBR_AGENT_OPTS
->> + KillMode=mixed
->> + Restart=on-failure
->> + RestartSec=5
->> +--
->> +2.35.1
->> +
->> diff --git a/meta-networking/recipes-connectivity/openthread/ot-br-posix/0001-web-service-ot-client-add-needed-header-for-fd_set-c.patch b/meta-networking/recipes-connectivity/openthread/ot-br-posix/0001-web-service-ot-client-add-needed-header-for-fd_set-c.patch
->> new file mode 100644
->> index 000000000..29f2af849
->> --- /dev/null
->> +++ b/meta-networking/recipes-connectivity/openthread/ot-br-posix/0001-web-service-ot-client-add-needed-header-for-fd_set-c.patch
->> @@ -0,0 +1,27 @@
->> +From 596eb2b582609794d87f2dbefa4b2e839faf52c8 Mon Sep 17 00:00:00 2001
->> +From: Stefan Schmidt <stefan.schmidt@huawei.com>
->> +Date: Fri, 28 May 2021 14:19:53 +0200
->> +Subject: [PATCH] web-service/ot-client: add needed header for fd_set() call
->> +
->> +The select.h header file is needed for fd_set(). Depending on the
->> +compiler and settings this will result in an error when not included.
->> +
->> +Upstream-Status: Submitted [https://github.com/openthread/ot-br-posix/pull/1326]
->> +
->> +Signed-off-by: Stefan Schmidt <stefan.schmidt@huawei.com>
->> +---
->> + src/web/web-service/ot_client.cpp | 1 +
->> + 1 file changed, 1 insertion(+)
->> +
->> +diff --git a/src/web/web-service/ot_client.cpp b/src/web/web-service/ot_client.cpp
->> +index f151a0126..173cc48e1 100644
->> +--- a/src/web/web-service/ot_client.cpp
->> ++++ b/src/web/web-service/ot_client.cpp
->> +@@ -39,6 +39,7 @@
->> + #include <string.h>
->> + #include <sys/socket.h>
->> + #include <sys/un.h>
->> ++#include <sys/select.h>
->> + #include <unistd.h>
->> +
->> + #include "common/code_utils.hpp"
->> diff --git a/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb b/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
->> new file mode 100644
->> index 000000000..5247ad4db
->> --- /dev/null
->> +++ b/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
->> @@ -0,0 +1,59 @@
->> +# SPDX-FileCopyrightText: Huawei Inc.
->> +#
->> +# SPDX-License-Identifier: Apache-2.0
->> +SUMMARY = "OpenThread Border Router"
->> +SECTION = "net"
->> +LICENSE = "BSD-3-Clause & MIT"
->> +LIC_FILES_CHKSUM = "file://LICENSE;md5=87109e44b2fda96a8991f27684a7349c \
->> +                    file://third_party/Simple-web-server/repo/LICENSE;md5=852b3f7f320b19f6431487b8b2fb1d74 \
->> +                    file://third_party/cJSON/repo/LICENSE;md5=218947f77e8cb8e2fa02918dc41c50d0 \
->> +                    file://third_party/http-parser/repo/LICENSE-MIT;md5=9bfa835d048c194ab30487af8d7b3778 \
->> +                    file://third_party/openthread/repo/LICENSE;md5=543b6fe90ec5901a683320a36390c65f \
->> +                    "
->> +DEPENDS = "autoconf-archive dbus readline avahi jsoncpp boost libnetfilter-queue"
->> +SRCREV = "9ef4e310b05ca0dbecb549e92ce7caa9d7461f19"
->> +PV = "0.3.0+git${SRCPV}"
->> +
->> +SRC_URI = "gitsm://github.com/openthread/ot-br-posix.git;protocol=https;branch=main \
->> +           file://0001-web-service-ot-client-add-needed-header-for-fd_set-c.patch \
->> +           file://0001-otbr-agent.service.in-remove-pre-exec-hook-for-mdns-.patch \
->> +           "
->> +
->> +S = "${WORKDIR}/git"
->> +SYSTEMD_SERVICE:${PN} = "otbr-agent.service"
->> +
->> +inherit pkgconfig cmake systemd
->> +
->> +EXTRA_OECMAKE = "-DBUILD_TESTING=OFF \
->> +                 -DOTBR_DBUS=ON \
->> +                 -DOTBR_REST=ON \
->> +                 -DOTBR_WEB=OFF \
->> +                 -DCMAKE_LIBRARY_PATH=${libdir} \
->> +                 -DOTBR_MDNS=avahi \
->> +                 -DOTBR_BACKBONE_ROUTER=ON \
->> +                 -DOTBR_BORDER_ROUTING=ON \
->> +                 -DOTBR_SRP_ADVERTISING_PROXY=ON \
->> +                 -DOTBR_BORDER_AGENT=ON \
->> +                 -DOT_SPINEL_RESET_CONNECTION=ON \
->> +                 -DOT_TREL=ON \
->> +                 -DOT_MLR=ON \
->> +                 -DOT_SRP_SERVER=ON \
->> +                 -DOT_ECDSA=ON \
->> +                 -DOT_SERVICE=ON \
->> +                 -DOTBR_DUA_ROUTING=ON \
->> +                 -DOT_DUA=ON \
->> +                 -DOT_BORDER_ROUTING_NAT64=ON \
->> +                 -DOTBR_DNSSD_DISCOVERY_PROXY=ON \
->> +                 -DOTBR_INFRA_IF_NAME=eth0 \
->> +                 -DOTBR_NO_AUTO_ATTACH=1 \
->> +                 -DOT_REFERENCE_DEVICE=ON \
->> +                 -DOT_DHCP6_CLIENT=ON \
->> +                 -DOT_DHCP6_SERVER=ON \
->> +                 "
->> +
->> +RDEPENDS:${PN} = "iproute2 avahi-daemon"
->> +
->> +RCONFLICTS:${PN} = "ot-daemon"
->> +
->> +FILES:${PN} += "${systemd_unitdir}/*"
->> +FILES:${PN} += "${datadir}/*"
+>> -inherit features_check autotools pkgconfig python3native gnome-help g=
+tk-icon-cache
+>> +inherit autotools pkgconfig python3native gnome-help gtk-icon-cache
+>>
+>> -REQUIRED_DISTRO_FEATURES =3D "x11"
+>>
+>>   SRC_URI =3D " \
+>>       ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BPN}-${PV}/${BPN}-=
+${PV}.tar.gz \
+>>       file://0001-Install-polkit-action-unconditionally-executable-pke=
+.patch \
+>>       file://0001-Do-not-use-NULL-where-boolean-is-expected.patch \
+>>   "
+>> -SRC_URI[sha256sum] =3D "5eee2e6d74b15ef96b13b3a2310c868ed2298e0334102=
+1e7d12a5a98a1d1e109"
+>> +SRC_URI[sha256sum] =3D "e5293a792e53fdbeba29c4a834113cd9603d0d639330d=
+a931a468bf3687887be"
+>>
+>>   UPSTREAM_CHECK_URI =3D "https://sourceforge.net/projects/gparted/fil=
+es/gparted/"
+>>   UPSTREAM_CHECK_REGEX =3D "gparted-(?P<pver>\d+\.(\d+)+(\.\d+)+)"
 >> --
->> 2.35.1
+>> 2.25.1
 >>
 >>
->> -=-=-=-=-=-=-=-=-=-=-=-
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >> Links: You receive all messages sent to this group.
->> View/Reply Online (#96421): https://lists.openembedded.org/g/openembedded-devel/message/96421
->> Mute This Topic: https://lists.openembedded.org/mt/90261621/1997914
+>> View/Reply Online (#96382): https://lists.openembedded.org/g/openembed=
+ded-devel/message/96382
+>> Mute This Topic: https://lists.openembedded.org/mt/90242693/1997914
 >> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
->> -=-=-=-=-=-=-=-=-=-=-=-
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub=
+ [raj.khem@gmail.com]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >>
 
