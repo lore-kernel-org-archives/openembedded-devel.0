@@ -1,550 +1,233 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B41F2C3527C
-	for <webhook@archiver.kernel.org>; Fri,  8 Apr 2022 17:09:35 +0000 (UTC)
-Received: from mail-ua1-f52.google.com (mail-ua1-f52.google.com
- [209.85.222.52])
- by mx.groups.io with SMTP id smtpd.web11.320.1649377695624961070
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 16D40C47082
+	for <webhook@archiver.kernel.org>; Fri,  8 Apr 2022 17:09:36 +0000 (UTC)
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com
+ [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web09.79.1649375863213365767
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Apr 2022 17:28:15 -0700
+ Thu, 07 Apr 2022 16:57:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=DbEAyX9I;
- spf=pass (domain: gmail.com, ip: 209.85.222.52,
- mailfrom: martin.jansa@gmail.com)
-Received: by mail-ua1-f52.google.com with SMTP id i26so4040327uap.6
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=hHi4z0eZ;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id t4so6345668pgc.1
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Apr 2022 17:28:15 -0700 (PDT)
+ Thu, 07 Apr 2022 16:57:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=Rya2dlsrPPYDddTamKEEx2rlmC/hN7XDF8v8Iv9swRM=;
-        b=DbEAyX9IZQolWxhm3Nb6SvhXGeA22Fnt8+f4Eh3jIIcdCVSC20OGMQSZcL4K/vIs5N
-         LTWuLTLOBlHeDbZd5gkMau9wIa0xYGbxX8qa4/+SktQNq1BGBzHqLF6RuM0deVEO5/z9
-         mrFyQ7duPm4/S2ZYarfF7dXwJxSV12hf7YqTxd65jxG3ZgUlJTfa1how79KLZpn1/59F
-         rkYHNgpdOQ9h6x6z0FLJoRL2jNxdFWZBvizMmI6WenyFMCljxHKQfAKMLsrDWLumSkdh
-         bvSPEuatZxHaiPUktkOUekhh9iaV3kuPtonxqbORF8EY3n1FirrGjBhMaEuqtWC6T39S
-         167w==
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :cc:references:from:in-reply-to:content-transfer-encoding;
+        bh=yRY9aZRh57mECqt/VDlcgjfS6wALV/NNxr74/m+p0PI=;
+        b=hHi4z0eZkd76O93opmyG4LOrjcprbz0vlwe2cTEUKE6UTdTBHjQ1LJ33RBfZHDyu4n
+         5WDgdoR0bwe8bwKYHjdJo3zYfPzNvI95kCBvUEkDXtKppO0ZtQ63qfMMYVGhVxyDDbcM
+         U0ROiFJiF4ujqc7B+UDfxBFOGo/T8Rhs8jKPp7yAsVujD6Tc6XzffHHgqH5gxjun1KAh
+         3YhJ7WN4FwRo0N3jUnszdCiE2pK3olvwIupa5xDY7J0k9xsCZcrAwomTNdN9OQfQBLRo
+         bUzv5w0t2r7rwIhFtQgN1Xwa9D5Cl76YqfwT608oRFHEJvrgdhjBiRU42NzP8a2X6k1A
+         oCrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=Rya2dlsrPPYDddTamKEEx2rlmC/hN7XDF8v8Iv9swRM=;
-        b=H6bVMi8inOoKZPNfwgxuLMJR2OIHG6Pkh/1A7qfZ7quGiHU7iSscuWxp7VynCxPUQl
-         nYDeNm1V3Tam7V9jZdYG+pz2EuOhdDcSc/zlnwyLLJ9LIte5Py5ykrQjKdBhzgKd85TL
-         bLGm3yfZMwte6mJ89wacCG/+/vbO977P2st4e8r06RuzUKGMPKn65L16bBGT0pJUW69u
-         UhL83gKWCIL3jz6vGcmoGfXbbzsQHsiMn5BBmGoVdJCZ947NgCMWctuiPaVHJp6JeKLu
-         NJdZ0riKtNrJSx7drjagQ9Zo6IbnoPPwo6NZHEAEKevC8OJCM3C8h1HhuH9T5KQan4su
-         MQCg==
-X-Gm-Message-State: AOAM531aqX6dNvcpeE0Urd+UmhtcNq8F42+Cv+ktfve0EbrWEdrPmGU9
-	8n4BegB72VgQiskTKb5LVmUCsXq/qpUMZrHt+BE=
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:cc:references:from:in-reply-to
+         :content-transfer-encoding;
+        bh=yRY9aZRh57mECqt/VDlcgjfS6wALV/NNxr74/m+p0PI=;
+        b=OpHeFEhyQUw/p6tQU9thsoX36GhiVDTas0uLIJ5xXzswp3e9kxU2HsKwouHqOYbKM7
+         vkvyr7sLfaselaOEqJoYBQMZ8mcSq1xaWoO69mBr0/KpkiNYJVtu1133XHTyNIgF100i
+         fh64vB70FYofy1sxdFQhDKquJBu+3mCds1XKbULv2aC7ssWWAmph6CUCr+L/ZTq/pwiG
+         8ZHpgq/q5QxWuXOMOOUkdkflyQArnT6GChKT5kmBlGKBApRn3o7MNleXSjla2ITGzA9/
+         m32RjVu1+WFJ54Y5NVspfS0F+JqwkCb/fvcfRAWlRlWgCk5rWoZJ+iPKzZZYZAslak0o
+         irWw==
+X-Gm-Message-State: AOAM531XUgsZxHaqqJblsoaISunf61F08FeD+I+4fyJ2UNXtueYa/8LL
+	fp8lhWIk5vI//yXyMWUaHS8=
 X-Google-Smtp-Source: 
- ABdhPJzV9u/IlyrX32VKsUJ2rrEUwdUfkmUwj7vh3STtuX9mk08f9D2wE2eXXKfZEq9AQpQ0G/HHFdGWpxsGREK+e/c=
-X-Received: by 2002:ab0:76d8:0:b0:33c:9bea:fa2c with SMTP id
- w24-20020ab076d8000000b0033c9beafa2cmr4761805uaq.44.1649377694652; Thu, 07
- Apr 2022 17:28:14 -0700 (PDT)
+ ABdhPJzmVl4emI7KKMRar+v+/3QEGQl2TYWdMF1/xqmiteT37coFYSxjK02pE36EmfzT9LAxnQH8AQ==
+X-Received: by 2002:a65:4647:0:b0:399:11b1:810b with SMTP id
+ k7-20020a654647000000b0039911b1810bmr13131052pgr.449.1649375862740;
+        Thu, 07 Apr 2022 16:57:42 -0700 (PDT)
+Received: from ?IPV6:2601:202:4180:a5c0:f960:814a:2a3:de54?
+ ([2601:202:4180:a5c0:f960:814a:2a3:de54])
+        by smtp.gmail.com with ESMTPSA id
+ a9-20020aa78649000000b004fe3d6c1731sm10809013pfo.175.2022.04.07.16.57.41
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 07 Apr 2022 16:57:42 -0700 (PDT)
+Message-ID: <a591a53a-636d-d582-2375-61599e3ffe53@gmail.com>
+Date: Thu, 7 Apr 2022 16:57:41 -0700
 MIME-Version: 1.0
-References: <20220405104123.1371786-1-Martin.Jansa@gmail.com>
- <20220405104123.1371786-2-Martin.Jansa@gmail.com>
- <a591a53a-636d-d582-2375-61599e3ffe53@gmail.com>
-In-Reply-To: <a591a53a-636d-d582-2375-61599e3ffe53@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 8 Apr 2022 02:28:01 +0200
-Message-ID: 
- <CA+chaQd-FiHD+8+iUVHGwMBm4C5g2ixdEW02xVuOZAW6Yosxhw@mail.gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
 Subject: Re: [oe] [meta-oe][hardknott][PATCH 2/3] abseil-cpp: Fix build with
  glibc 2.34
-To: akuster808 <akuster808@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
-Content-Type: multipart/alternative; boundary="000000000000971e2705dc19ab49"
+Content-Language: en-US
+To: Martin Jansa <Martin.Jansa@gmail.com>,
+ openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+References: <20220405104123.1371786-1-Martin.Jansa@gmail.com>
+ <20220405104123.1371786-2-Martin.Jansa@gmail.com>
+From: akuster808 <akuster808@gmail.com>
+In-Reply-To: <20220405104123.1371786-2-Martin.Jansa@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 08 Apr 2022 17:09:35 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 08 Apr 2022 17:09:36 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96466
+ https://lists.openembedded.org/g/openembedded-devel/message/96465
 
---000000000000971e2705dc19ab49
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Just like the .patch file in master branch, does hardknott have stricter
-rules than master branch?
-
-On Fri, Apr 8, 2022 at 1:57 AM akuster808 <akuster808@gmail.com> wrote:
-
->
->
-> On 4/5/22 03:41, Martin Jansa wrote:
-> > From: Khem Raj <raj.khem@gmail.com>
-> >
-> > * based on commit from honister, but without the upgrade:
-> >    commit 8691de2580dd872e3d001d67c8455108b3bd627c
-> >    Author: Khem Raj <raj.khem@gmail.com>
-> >    Date:   Sat May 8 14:38:52 2021 -0700
-> >
-> >      abseil-cpp: Upgrade to lts_2021_03_24
-> >
-> >      Fix build with glibc 2.34 while here
-> >      Forward patches to this version
-> >      Let system package the libraries
-> >
-> >    to fix abseil-cpp-native build on e.g. Ubuntu-22.04 with glibc-2.34
-> to fix:
-> >
-> >    | FAILED:
-> absl/debugging/CMakeFiles/failure_signal_handler.dir/failure_signal_handl=
-er.cc.o
-> >    | /OE/lge/build/webosose/hardknott/BUILD/hosttools/g++
-> -Dfailure_signal_handler_EXPORTS
-> -I/OE/lge/build/webosose/hardknott/BUILD/work/x86_64-linux/abseil-cpp-nat=
-ive/20200923+gitAUTOINC+6f9d96a1f4-r0/git
-> -isystem/OE/lge/build/webosose/hardknott/BUILD/work/x86_64-linux/abseil-c=
-pp-native/20200923+gitAUTOINC+6f9d96a1f4-r0/recipe-sysroot-native/usr/inclu=
-de
-> -O2 -pipe -fPIC -Wall -Wextra -Wcast-qual -Wconversion-null
-> -Wmissing-declarations -Woverlength-strings -Wpointer-arith -Wundef
-> -Wunused-local-typedefs -Wunused-result -Wvarargs -Wvla -Wwrite-strings
-> -Wno-missing-field-initializers -Wno-sign-compare -DNOMINMAX -std=3Dgnu++=
-14
-> -MD -MT
-> absl/debugging/CMakeFiles/failure_signal_handler.dir/failure_signal_handl=
-er.cc.o
-> -MF
-> absl/debugging/CMakeFiles/failure_signal_handler.dir/failure_signal_handl=
-er.cc.o.d
-> -o
-> absl/debugging/CMakeFiles/failure_signal_handler.dir/failure_signal_handl=
-er.cc.o
-> -c
-> /OE/lge/build/webosose/hardknott/BUILD/work/x86_64-linux/abseil-cpp-nativ=
-e/20200923+gitAUTOINC+6f9d96a1f4-r0/git/absl/debugging/failure_signal_handl=
-er.cc
-> >    |
-> /OE/lge/build/webosose/hardknott/BUILD/work/x86_64-linux/abseil-cpp-nativ=
-e/20200923+gitAUTOINC+6f9d96a1f4-r0/git/absl/debugging/failure_signal_handl=
-er.cc:
-> In function =E2=80=98bool absl::lts_2020_09_23::SetupAlternateStackOnce()=
-=E2=80=99:
-> >    |
-> /OE/lge/build/webosose/hardknott/BUILD/work/x86_64-linux/abseil-cpp-nativ=
-e/20200923+gitAUTOINC+6f9d96a1f4-r0/git/absl/debugging/failure_signal_handl=
-er.cc:138:32:
-> error: no matching function for call to =E2=80=98max(long int, int)=E2=80=
-=99
-> >    |   138 |   size_t stack_size =3D (std::max(SIGSTKSZ, 65536) +
-> page_mask) & ~page_mask;
-> >    |       |                        ~~~~~~~~^~~~~~~~~~~~~~~~~
-> >
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> >   ...01-Export-of-internal-Abseil-changes.patch | 82 ++++++++++++++++++=
-+
-> >   .../abseil-cpp/abseil-cpp_git.bb              |  1 +
-> >   2 files changed, 83 insertions(+)
-> >   create mode 100644
-> meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Export-of-internal-Ab=
-seil-changes.patch
-> >
-> > diff --git
-> a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Export-of-internal-=
-Abseil-changes.patch
-> b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Export-of-internal-=
-Abseil-changes.patch
-> > new file mode 100644
-> > index 0000000000..c0fb0571f7
-> > --- /dev/null
-> > +++
-> b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Export-of-internal-=
-Abseil-changes.patch
-> > @@ -0,0 +1,82 @@
-> > +From d3424201a73f29ab533121b1821a76e1b4313beb Mon Sep 17 00:00:00 2001
-> > +From: Abseil Team <absl-team@google.com>
-> > +Date: Mon, 3 May 2021 07:37:39 -0700
-> > +Subject: [PATCH] Export of internal Abseil changes
-> > +
-> > +--
-> > +cf88f9cf40eab54c06bca7f20795352ec23bb583 by Derek Mauro <
-> dmauro@google.com>:
-> > +
-> > +Fixes build with latest glibc
-> > +Fixes #952
-> > +
-> > +PiperOrigin-RevId: 371693908
-> > +
-> > +--
-> > +99bcd0f4a747ce7a401e23c745adf34d0ec5131b by Samuel Benzaquen <
-> sbenza@google.com>:
-> > +
-> > +Add support for std::string_view in StrFormat even when
-> > +absl::string_view !=3D std::string_view.
-> > +
-> > +PiperOrigin-RevId: 371693633
-> > +
-> > +--
-> > +e35463572149a6c2d4a0d439b9300ce03fd6b96d by Abseil Team <
-> absl-team@google.com>:
-> > +
-> > +Cmake builds should only install pkg-config when explicitly requested.
-> > +
-> > +PiperOrigin-RevId: 371403419
-> > +GitOrigin-RevId: cf88f9cf40eab54c06bca7f20795352ec23bb583
-> > +Change-Id: I4360a18c638a4d901ff44ab1e0a9d8f321c302ea
->
-> Patch missing "Upstream-Status" and "Signed-off-by"
->
-> - armin
-> > +---
-> > + absl/debugging/failure_signal_handler.cc         | 3 ++-
-> > + absl/strings/internal/str_format/arg.h           | 8 ++++++++
-> > + absl/strings/internal/str_format/convert_test.cc | 3 +++
-> > + 3 files changed, 13 insertions(+), 1 deletion(-)
-> > +
-> > +diff --git a/absl/debugging/failure_signal_handler.cc
-> b/absl/debugging/failure_signal_handler.cc
-> > +index 5d13bdbb..2ed137b5 100644
-> > +--- a/absl/debugging/failure_signal_handler.cc
-> > ++++ b/absl/debugging/failure_signal_handler.cc
-> > +@@ -135,7 +135,8 @@ static bool SetupAlternateStackOnce() {
-> > + #else
-> > +   const size_t page_mask =3D sysconf(_SC_PAGESIZE) - 1;
-> > + #endif
-> > +-  size_t stack_size =3D (std::max(SIGSTKSZ, 65536) + page_mask) &
-> ~page_mask;
-> > ++  size_t stack_size =3D
-> > ++      (std::max<size_t>(SIGSTKSZ, 65536) + page_mask) & ~page_mask;
-> > + #if defined(ABSL_HAVE_ADDRESS_SANITIZER) || \
-> > +     defined(ABSL_HAVE_MEMORY_SANITIZER) ||
-> defined(ABSL_HAVE_THREAD_SANITIZER)
-> > +   // Account for sanitizer instrumentation requiring additional stack
-> space.
-> > +diff --git a/absl/strings/internal/str_format/arg.h
-> b/absl/strings/internal/str_format/arg.h
-> > +index 3dbc1526..f9d89d12 100644
-> > +--- a/absl/strings/internal/str_format/arg.h
-> > ++++ b/absl/strings/internal/str_format/arg.h
-> > +@@ -108,6 +108,14 @@ StringConvertResult FormatConvertImpl(const
-> std::string& v,
-> > + StringConvertResult FormatConvertImpl(string_view v,
-> > +                                       FormatConversionSpecImpl conv,
-> > +                                       FormatSinkImpl* sink);
-> > ++#if defined(ABSL_HAVE_STD_STRING_VIEW) &&
-> !defined(ABSL_USES_STD_STRING_VIEW)
-> > ++inline StringConvertResult FormatConvertImpl(std::string_view v,
-> > ++                                             FormatConversionSpecImpl
-> conv,
-> > ++                                             FormatSinkImpl* sink) {
-> > ++  return FormatConvertImpl(absl::string_view(v.data(), v.size()),
-> conv, sink);
-> > ++}
-> > ++#endif  // ABSL_HAVE_STD_STRING_VIEW && !ABSL_USES_STD_STRING_VIEW
-> > ++
-> > + ArgConvertResult<FormatConversionCharSetUnion(
-> > +     FormatConversionCharSetInternal::s,
-> FormatConversionCharSetInternal::p)>
-> > + FormatConvertImpl(const char* v, const FormatConversionSpecImpl conv,
-> > +diff --git a/absl/strings/internal/str_format/convert_test.cc
-> b/absl/strings/internal/str_format/convert_test.cc
-> > +index 634ee78b..cc789530 100644
-> > +--- a/absl/strings/internal/str_format/convert_test.cc
-> > ++++ b/absl/strings/internal/str_format/convert_test.cc
-> > +@@ -215,6 +215,9 @@ TEST_F(FormatConvertTest, BasicString) {
-> > +   TestStringConvert(static_cast<const char*>("hello"));
-> > +   TestStringConvert(std::string("hello"));
-> > +   TestStringConvert(string_view("hello"));
-> > ++#if defined(ABSL_HAVE_STD_STRING_VIEW)
-> > ++  TestStringConvert(std::string_view("hello"));
-> > ++#endif  // ABSL_HAVE_STD_STRING_VIEW
-> > + }
-> > +
-> > + TEST_F(FormatConvertTest, NullString) {
-> > diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-> b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-> > index 569bb13993..a49fe672e8 100644
-> > --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-> > +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-> > @@ -14,6 +14,7 @@ SRC_URI =3D "git://
-> github.com/abseil/abseil-cpp;branch=3D${BRANCH};protocol=3Dhttps
-> <http://github.com/abseil/abseil-cpp;branch=3D$%7BBRANCH%7D;protocol=3Dht=
-tps>
-> \
-> >              file://0001-absl-always-use-asm-sgidefs.h.patch
->  \
-> >              file://0002-Remove-maes-option-from-cross-compilation.patc=
-h
-> \
-> >              file://abseil-ppc-fixes.patch \
-> > +           file://0001-Export-of-internal-Abseil-changes.patch \
-> >             "
-> >
-> >   S =3D "${WORKDIR}/git"
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#96426):
-> https://lists.openembedded.org/g/openembedded-devel/message/96426
-> > Mute This Topic: https://lists.openembedded.org/mt/90262400/3616698
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[
-> akuster808@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
->
->
-
---000000000000971e2705dc19ab49
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Just like the .patch file in master branch, does hardknott=
- have stricter rules than master branch?</div><br><div class=3D"gmail_quote=
-"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Apr 8, 2022 at 1:57 AM akus=
-ter808 &lt;<a href=3D"mailto:akuster808@gmail.com">akuster808@gmail.com</a>=
-&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
-0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><br>
-<br>
-On 4/5/22 03:41, Martin Jansa wrote:<br>
-&gt; From: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_bl=
-ank">raj.khem@gmail.com</a>&gt;<br>
-&gt;<br>
-&gt; * based on commit from honister, but without the upgrade:<br>
-&gt;=C2=A0 =C2=A0 commit 8691de2580dd872e3d001d67c8455108b3bd627c<br>
-&gt;=C2=A0 =C2=A0 Author: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com=
-" target=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 Date:=C2=A0 =C2=A0Sat May 8 14:38:52 2021 -0700<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 abseil-cpp: Upgrade to lts_2021_03_24<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 Fix build with glibc 2.34 while here<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 Forward patches to this version<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 Let system package the libraries<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 to fix abseil-cpp-native build on e.g. Ubuntu-22.04 with =
-glibc-2.34 to fix:<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 | FAILED: absl/debugging/CMakeFiles/failure_signal_handle=
-r.dir/failure_signal_handler.cc.o<br>
-&gt;=C2=A0 =C2=A0 | /OE/lge/build/webosose/hardknott/BUILD/hosttools/g++ -D=
-failure_signal_handler_EXPORTS -I/OE/lge/build/webosose/hardknott/BUILD/wor=
-k/x86_64-linux/abseil-cpp-native/20200923+gitAUTOINC+6f9d96a1f4-r0/git -isy=
-stem/OE/lge/build/webosose/hardknott/BUILD/work/x86_64-linux/abseil-cpp-nat=
-ive/20200923+gitAUTOINC+6f9d96a1f4-r0/recipe-sysroot-native/usr/include -O2=
- -pipe -fPIC -Wall -Wextra -Wcast-qual -Wconversion-null -Wmissing-declarat=
-ions -Woverlength-strings -Wpointer-arith -Wundef -Wunused-local-typedefs -=
-Wunused-result -Wvarargs -Wvla -Wwrite-strings -Wno-missing-field-initializ=
-ers -Wno-sign-compare -DNOMINMAX -std=3Dgnu++14 -MD -MT absl/debugging/CMak=
-eFiles/failure_signal_handler.dir/failure_signal_handler.cc.o -MF absl/debu=
-gging/CMakeFiles/failure_signal_handler.dir/failure_signal_handler.cc.o.d -=
-o absl/debugging/CMakeFiles/failure_signal_handler.dir/failure_signal_handl=
-er.cc.o -c /OE/lge/build/webosose/hardknott/BUILD/work/x86_64-linux/abseil-=
-cpp-native/20200923+gitAUTOINC+6f9d96a1f4-r0/git/absl/debugging/failure_sig=
-nal_handler.cc<br>
-&gt;=C2=A0 =C2=A0 | /OE/lge/build/webosose/hardknott/BUILD/work/x86_64-linu=
-x/abseil-cpp-native/20200923+gitAUTOINC+6f9d96a1f4-r0/git/absl/debugging/fa=
-ilure_signal_handler.cc: In function =E2=80=98bool absl::lts_2020_09_23::Se=
-tupAlternateStackOnce()=E2=80=99:<br>
-&gt;=C2=A0 =C2=A0 | /OE/lge/build/webosose/hardknott/BUILD/work/x86_64-linu=
-x/abseil-cpp-native/20200923+gitAUTOINC+6f9d96a1f4-r0/git/absl/debugging/fa=
-ilure_signal_handler.cc:138:32: error: no matching function for call to =E2=
-=80=98max(long int, int)=E2=80=99<br>
-&gt;=C2=A0 =C2=A0 |=C2=A0 =C2=A0138 |=C2=A0 =C2=A0size_t stack_size =3D (st=
-d::max(SIGSTKSZ, 65536) + page_mask) &amp; ~page_mask;<br>
-&gt;=C2=A0 =C2=A0 |=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ~~~~~~~~^~~~~~~~~~~=
-~~~~~~<br>
-&gt;<br>
-&gt; Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
-&gt; Signed-off-by: Martin Jansa &lt;<a href=3D"mailto:Martin.Jansa@gmail.c=
-om" target=3D"_blank">Martin.Jansa@gmail.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 =C2=A0...01-Export-of-internal-Abseil-changes.patch | 82 +++++++=
-++++++++++++<br>
-&gt;=C2=A0 =C2=A0.../abseil-cpp/<a href=3D"http://abseil-cpp_git.bb" rel=3D=
-"noreferrer" target=3D"_blank">abseil-cpp_git.bb</a>=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 1 +<br>
-&gt;=C2=A0 =C2=A02 files changed, 83 insertions(+)<br>
-&gt;=C2=A0 =C2=A0create mode 100644 meta-oe/recipes-devtools/abseil-cpp/abs=
-eil-cpp/0001-Export-of-internal-Abseil-changes.patch<br>
-&gt;<br>
-&gt; diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Expor=
-t-of-internal-Abseil-changes.patch b/meta-oe/recipes-devtools/abseil-cpp/ab=
-seil-cpp/0001-Export-of-internal-Abseil-changes.patch<br>
-&gt; new file mode 100644<br>
-&gt; index 0000000000..c0fb0571f7<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Export-of-in=
-ternal-Abseil-changes.patch<br>
-&gt; @@ -0,0 +1,82 @@<br>
-&gt; +From d3424201a73f29ab533121b1821a76e1b4313beb Mon Sep 17 00:00:00 200=
-1<br>
-&gt; +From: Abseil Team &lt;<a href=3D"mailto:absl-team@google.com" target=
-=3D"_blank">absl-team@google.com</a>&gt;<br>
-&gt; +Date: Mon, 3 May 2021 07:37:39 -0700<br>
-&gt; +Subject: [PATCH] Export of internal Abseil changes<br>
-&gt; +<br>
-&gt; +--<br>
-&gt; +cf88f9cf40eab54c06bca7f20795352ec23bb583 by Derek Mauro &lt;<a href=
-=3D"mailto:dmauro@google.com" target=3D"_blank">dmauro@google.com</a>&gt;:<=
-br>
-&gt; +<br>
-&gt; +Fixes build with latest glibc<br>
-&gt; +Fixes #952<br>
-&gt; +<br>
-&gt; +PiperOrigin-RevId: 371693908<br>
-&gt; +<br>
-&gt; +--<br>
-&gt; +99bcd0f4a747ce7a401e23c745adf34d0ec5131b by Samuel Benzaquen &lt;<a h=
-ref=3D"mailto:sbenza@google.com" target=3D"_blank">sbenza@google.com</a>&gt=
-;:<br>
-&gt; +<br>
-&gt; +Add support for std::string_view in StrFormat even when<br>
-&gt; +absl::string_view !=3D std::string_view.<br>
-&gt; +<br>
-&gt; +PiperOrigin-RevId: 371693633<br>
-&gt; +<br>
-&gt; +--<br>
-&gt; +e35463572149a6c2d4a0d439b9300ce03fd6b96d by Abseil Team &lt;<a href=
-=3D"mailto:absl-team@google.com" target=3D"_blank">absl-team@google.com</a>=
-&gt;:<br>
-&gt; +<br>
-&gt; +Cmake builds should only install pkg-config when explicitly requested=
-.<br>
-&gt; +<br>
-&gt; +PiperOrigin-RevId: 371403419<br>
-&gt; +GitOrigin-RevId: cf88f9cf40eab54c06bca7f20795352ec23bb583<br>
-&gt; +Change-Id: I4360a18c638a4d901ff44ab1e0a9d8f321c302ea<br>
-<br>
-Patch missing &quot;Upstream-Status&quot; and &quot;Signed-off-by&quot;<br>
-<br>
-- armin<br>
-&gt; +---<br>
-&gt; + absl/debugging/failure_signal_handler.cc=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0| 3 ++-<br>
-&gt; + absl/strings/internal/str_format/arg.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0| 8 ++++++++<br>
-&gt; + absl/strings/internal/str_format/convert_test.cc | 3 +++<br>
-&gt; + 3 files changed, 13 insertions(+), 1 deletion(-)<br>
-&gt; +<br>
-&gt; +diff --git a/absl/debugging/failure_signal_handler.cc b/absl/debuggin=
-g/failure_signal_handler.cc<br>
-&gt; +index 5d13bdbb..2ed137b5 100644<br>
-&gt; +--- a/absl/debugging/failure_signal_handler.cc<br>
-&gt; ++++ b/absl/debugging/failure_signal_handler.cc<br>
-&gt; +@@ -135,7 +135,8 @@ static bool SetupAlternateStackOnce() {<br>
-&gt; + #else<br>
-&gt; +=C2=A0 =C2=A0const size_t page_mask =3D sysconf(_SC_PAGESIZE) - 1;<br=
->
-&gt; + #endif<br>
-&gt; +-=C2=A0 size_t stack_size =3D (std::max(SIGSTKSZ, 65536) + page_mask)=
- &amp; ~page_mask;<br>
-&gt; ++=C2=A0 size_t stack_size =3D<br>
-&gt; ++=C2=A0 =C2=A0 =C2=A0 (std::max&lt;size_t&gt;(SIGSTKSZ, 65536) + page=
-_mask) &amp; ~page_mask;<br>
-&gt; + #if defined(ABSL_HAVE_ADDRESS_SANITIZER) || \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0defined(ABSL_HAVE_MEMORY_SANITIZER) || defined(AB=
-SL_HAVE_THREAD_SANITIZER)<br>
-&gt; +=C2=A0 =C2=A0// Account for sanitizer instrumentation requiring addit=
-ional stack space.<br>
-&gt; +diff --git a/absl/strings/internal/str_format/arg.h b/absl/strings/in=
-ternal/str_format/arg.h<br>
-&gt; +index 3dbc1526..f9d89d12 100644<br>
-&gt; +--- a/absl/strings/internal/str_format/arg.h<br>
-&gt; ++++ b/absl/strings/internal/str_format/arg.h<br>
-&gt; +@@ -108,6 +108,14 @@ StringConvertResult FormatConvertImpl(const std:=
-:string&amp; v,<br>
-&gt; + StringConvertResult FormatConvertImpl(string_view v,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Forma=
-tConversionSpecImpl conv,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Forma=
-tSinkImpl* sink);<br>
-&gt; ++#if defined(ABSL_HAVE_STD_STRING_VIEW) &amp;&amp; !defined(ABSL_USES=
-_STD_STRING_VIEW)<br>
-&gt; ++inline StringConvertResult FormatConvertImpl(std::string_view v,<br>
-&gt; ++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0FormatConversionSpecImpl conv,<br>
-&gt; ++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0FormatSinkImpl* sink) {<br>
-&gt; ++=C2=A0 return FormatConvertImpl(absl::string_view(v.data(), v.size()=
-), conv, sink);<br>
-&gt; ++}<br>
-&gt; ++#endif=C2=A0 // ABSL_HAVE_STD_STRING_VIEW &amp;&amp; !ABSL_USES_STD_=
-STRING_VIEW<br>
-&gt; ++<br>
-&gt; + ArgConvertResult&lt;FormatConversionCharSetUnion(<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0FormatConversionCharSetInternal::s, FormatConvers=
-ionCharSetInternal::p)&gt;<br>
-&gt; + FormatConvertImpl(const char* v, const FormatConversionSpecImpl conv=
-,<br>
-&gt; +diff --git a/absl/strings/internal/str_format/convert_test.cc b/absl/=
-strings/internal/str_format/convert_test.cc<br>
-&gt; +index 634ee78b..cc789530 100644<br>
-&gt; +--- a/absl/strings/internal/str_format/convert_test.cc<br>
-&gt; ++++ b/absl/strings/internal/str_format/convert_test.cc<br>
-&gt; +@@ -215,6 +215,9 @@ TEST_F(FormatConvertTest, BasicString) {<br>
-&gt; +=C2=A0 =C2=A0TestStringConvert(static_cast&lt;const char*&gt;(&quot;h=
-ello&quot;));<br>
-&gt; +=C2=A0 =C2=A0TestStringConvert(std::string(&quot;hello&quot;));<br>
-&gt; +=C2=A0 =C2=A0TestStringConvert(string_view(&quot;hello&quot;));<br>
-&gt; ++#if defined(ABSL_HAVE_STD_STRING_VIEW)<br>
-&gt; ++=C2=A0 TestStringConvert(std::string_view(&quot;hello&quot;));<br>
-&gt; ++#endif=C2=A0 // ABSL_HAVE_STD_STRING_VIEW<br>
-&gt; + }<br>
-&gt; +<br>
-&gt; + TEST_F(FormatConvertTest, NullString) {<br>
-&gt; diff --git a/meta-oe/recipes-devtools/abseil-cpp/<a href=3D"http://abs=
-eil-cpp_git.bb" rel=3D"noreferrer" target=3D"_blank">abseil-cpp_git.bb</a> =
-b/meta-oe/recipes-devtools/abseil-cpp/<a href=3D"http://abseil-cpp_git.bb" =
-rel=3D"noreferrer" target=3D"_blank">abseil-cpp_git.bb</a><br>
-&gt; index 569bb13993..a49fe672e8 100644<br>
-&gt; --- a/meta-oe/recipes-devtools/abseil-cpp/<a href=3D"http://abseil-cpp=
-_git.bb" rel=3D"noreferrer" target=3D"_blank">abseil-cpp_git.bb</a><br>
-&gt; +++ b/meta-oe/recipes-devtools/abseil-cpp/<a href=3D"http://abseil-cpp=
-_git.bb" rel=3D"noreferrer" target=3D"_blank">abseil-cpp_git.bb</a><br>
-&gt; @@ -14,6 +14,7 @@ SRC_URI =3D &quot;git://<a href=3D"http://github.com=
-/abseil/abseil-cpp;branch=3D$%7BBRANCH%7D;protocol=3Dhttps" rel=3D"noreferr=
-er" target=3D"_blank">github.com/abseil/abseil-cpp;branch=3D${BRANCH};proto=
-col=3Dhttps</a> \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-absl-alway=
-s-use-asm-sgidefs.h.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<=
-br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0002-Remove-mae=
-s-option-from-cross-compilation.patch \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://abseil-ppc-fixe=
-s.patch \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-Export-of-intern=
-al-Abseil-changes.patch \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0S =3D &quot;${WORKDIR}/git&quot;<br>
-&gt;<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; Links: You receive all messages sent to this group.<br>
-&gt; View/Reply Online (#96426): <a href=3D"https://lists.openembedded.org/=
-g/openembedded-devel/message/96426" rel=3D"noreferrer" target=3D"_blank">ht=
-tps://lists.openembedded.org/g/openembedded-devel/message/96426</a><br>
-&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/90262400=
-/3616698" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.o=
-rg/mt/90262400/3616698</a><br>
-&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
-bedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.o=
-rg</a><br>
-&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
-devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedde=
-d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:akuster808@gmail.co=
-m" target=3D"_blank">akuster808@gmail.com</a>]<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt;<br>
-<br>
-</blockquote></div>
-
---000000000000971e2705dc19ab49--
+DQoNCk9uIDQvNS8yMiAwMzo0MSwgTWFydGluIEphbnNhIHdyb3RlOg0KPiBGcm9tOiBLaGVt
+IFJhaiA8cmFqLmtoZW1AZ21haWwuY29tPg0KPg0KPiAqIGJhc2VkIG9uIGNvbW1pdCBmcm9t
+IGhvbmlzdGVyLCBidXQgd2l0aG91dCB0aGUgdXBncmFkZToNCj4gICAgY29tbWl0IDg2OTFk
+ZTI1ODBkZDg3MmUzZDAwMWQ2N2M4NDU1MTA4YjNiZDYyN2MNCj4gICAgQXV0aG9yOiBLaGVt
+IFJhaiA8cmFqLmtoZW1AZ21haWwuY29tPg0KPiAgICBEYXRlOiAgIFNhdCBNYXkgOCAxNDoz
+ODo1MiAyMDIxIC0wNzAwDQo+DQo+ICAgICAgYWJzZWlsLWNwcDogVXBncmFkZSB0byBsdHNf
+MjAyMV8wM18yNA0KPg0KPiAgICAgIEZpeCBidWlsZCB3aXRoIGdsaWJjIDIuMzQgd2hpbGUg
+aGVyZQ0KPiAgICAgIEZvcndhcmQgcGF0Y2hlcyB0byB0aGlzIHZlcnNpb24NCj4gICAgICBM
+ZXQgc3lzdGVtIHBhY2thZ2UgdGhlIGxpYnJhcmllcw0KPg0KPiAgICB0byBmaXggYWJzZWls
+LWNwcC1uYXRpdmUgYnVpbGQgb24gZS5nLiBVYnVudHUtMjIuMDQgd2l0aCBnbGliYy0yLjM0
+IHRvIGZpeDoNCj4NCj4gICAgfCBGQUlMRUQ6IGFic2wvZGVidWdnaW5nL0NNYWtlRmlsZXMv
+ZmFpbHVyZV9zaWduYWxfaGFuZGxlci5kaXIvZmFpbHVyZV9zaWduYWxfaGFuZGxlci5jYy5v
+DQo+ICAgIHwgL09FL2xnZS9idWlsZC93ZWJvc29zZS9oYXJka25vdHQvQlVJTEQvaG9zdHRv
+b2xzL2crKyAtRGZhaWx1cmVfc2lnbmFsX2hhbmRsZXJfRVhQT1JUUyAtSS9PRS9sZ2UvYnVp
+bGQvd2Vib3Nvc2UvaGFyZGtub3R0L0JVSUxEL3dvcmsveDg2XzY0LWxpbnV4L2Fic2VpbC1j
+cHAtbmF0aXZlLzIwMjAwOTIzK2dpdEFVVE9JTkMrNmY5ZDk2YTFmNC1yMC9naXQgLWlzeXN0
+ZW0vT0UvbGdlL2J1aWxkL3dlYm9zb3NlL2hhcmRrbm90dC9CVUlMRC93b3JrL3g4Nl82NC1s
+aW51eC9hYnNlaWwtY3BwLW5hdGl2ZS8yMDIwMDkyMytnaXRBVVRPSU5DKzZmOWQ5NmExZjQt
+cjAvcmVjaXBlLXN5c3Jvb3QtbmF0aXZlL3Vzci9pbmNsdWRlIC1PMiAtcGlwZSAtZlBJQyAt
+V2FsbCAtV2V4dHJhIC1XY2FzdC1xdWFsIC1XY29udmVyc2lvbi1udWxsIC1XbWlzc2luZy1k
+ZWNsYXJhdGlvbnMgLVdvdmVybGVuZ3RoLXN0cmluZ3MgLVdwb2ludGVyLWFyaXRoIC1XdW5k
+ZWYgLVd1bnVzZWQtbG9jYWwtdHlwZWRlZnMgLVd1bnVzZWQtcmVzdWx0IC1XdmFyYXJncyAt
+V3ZsYSAtV3dyaXRlLXN0cmluZ3MgLVduby1taXNzaW5nLWZpZWxkLWluaXRpYWxpemVycyAt
+V25vLXNpZ24tY29tcGFyZSAtRE5PTUlOTUFYIC1zdGQ9Z251KysxNCAtTUQgLU1UIGFic2wv
+ZGVidWdnaW5nL0NNYWtlRmlsZXMvZmFpbHVyZV9zaWduYWxfaGFuZGxlci5kaXIvZmFpbHVy
+ZV9zaWduYWxfaGFuZGxlci5jYy5vIC1NRiBhYnNsL2RlYnVnZ2luZy9DTWFrZUZpbGVzL2Zh
+aWx1cmVfc2lnbmFsX2hhbmRsZXIuZGlyL2ZhaWx1cmVfc2lnbmFsX2hhbmRsZXIuY2Muby5k
+IC1vIGFic2wvZGVidWdnaW5nL0NNYWtlRmlsZXMvZmFpbHVyZV9zaWduYWxfaGFuZGxlci5k
+aXIvZmFpbHVyZV9zaWduYWxfaGFuZGxlci5jYy5vIC1jIC9PRS9sZ2UvYnVpbGQvd2Vib3Nv
+c2UvaGFyZGtub3R0L0JVSUxEL3dvcmsveDg2XzY0LWxpbnV4L2Fic2VpbC1jcHAtbmF0aXZl
+LzIwMjAwOTIzK2dpdEFVVE9JTkMrNmY5ZDk2YTFmNC1yMC9naXQvYWJzbC9kZWJ1Z2dpbmcv
+ZmFpbHVyZV9zaWduYWxfaGFuZGxlci5jYw0KPiAgICB8IC9PRS9sZ2UvYnVpbGQvd2Vib3Nv
+c2UvaGFyZGtub3R0L0JVSUxEL3dvcmsveDg2XzY0LWxpbnV4L2Fic2VpbC1jcHAtbmF0aXZl
+LzIwMjAwOTIzK2dpdEFVVE9JTkMrNmY5ZDk2YTFmNC1yMC9naXQvYWJzbC9kZWJ1Z2dpbmcv
+ZmFpbHVyZV9zaWduYWxfaGFuZGxlci5jYzogSW4gZnVuY3Rpb24g4oCYYm9vbCBhYnNsOjps
+dHNfMjAyMF8wOV8yMzo6U2V0dXBBbHRlcm5hdGVTdGFja09uY2UoKeKAmToNCj4gICAgfCAv
+T0UvbGdlL2J1aWxkL3dlYm9zb3NlL2hhcmRrbm90dC9CVUlMRC93b3JrL3g4Nl82NC1saW51
+eC9hYnNlaWwtY3BwLW5hdGl2ZS8yMDIwMDkyMytnaXRBVVRPSU5DKzZmOWQ5NmExZjQtcjAv
+Z2l0L2Fic2wvZGVidWdnaW5nL2ZhaWx1cmVfc2lnbmFsX2hhbmRsZXIuY2M6MTM4OjMyOiBl
+cnJvcjogbm8gbWF0Y2hpbmcgZnVuY3Rpb24gZm9yIGNhbGwgdG8g4oCYbWF4KGxvbmcgaW50
+LCBpbnQp4oCZDQo+ICAgIHwgICAxMzggfCAgIHNpemVfdCBzdGFja19zaXplID0gKHN0ZDo6
+bWF4KFNJR1NUS1NaLCA2NTUzNikgKyBwYWdlX21hc2spICYgfnBhZ2VfbWFzazsNCj4gICAg
+fCAgICAgICB8ICAgICAgICAgICAgICAgICAgICAgICAgfn5+fn5+fn5efn5+fn5+fn5+fn5+
+fn5+fg0KPg0KPiBTaWduZWQtb2ZmLWJ5OiBLaGVtIFJhaiA8cmFqLmtoZW1AZ21haWwuY29t
+Pg0KPiBTaWduZWQtb2ZmLWJ5OiBNYXJ0aW4gSmFuc2EgPE1hcnRpbi5KYW5zYUBnbWFpbC5j
+b20+DQo+IC0tLQ0KPiAgIC4uLjAxLUV4cG9ydC1vZi1pbnRlcm5hbC1BYnNlaWwtY2hhbmdl
+cy5wYXRjaCB8IDgyICsrKysrKysrKysrKysrKysrKysNCj4gICAuLi4vYWJzZWlsLWNwcC9h
+YnNlaWwtY3BwX2dpdC5iYiAgICAgICAgICAgICAgfCAgMSArDQo+ICAgMiBmaWxlcyBjaGFu
+Z2VkLCA4MyBpbnNlcnRpb25zKCspDQo+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2Uv
+cmVjaXBlcy1kZXZ0b29scy9hYnNlaWwtY3BwL2Fic2VpbC1jcHAvMDAwMS1FeHBvcnQtb2Yt
+aW50ZXJuYWwtQWJzZWlsLWNoYW5nZXMucGF0Y2gNCj4NCj4gZGlmZiAtLWdpdCBhL21ldGEt
+b2UvcmVjaXBlcy1kZXZ0b29scy9hYnNlaWwtY3BwL2Fic2VpbC1jcHAvMDAwMS1FeHBvcnQt
+b2YtaW50ZXJuYWwtQWJzZWlsLWNoYW5nZXMucGF0Y2ggYi9tZXRhLW9lL3JlY2lwZXMtZGV2
+dG9vbHMvYWJzZWlsLWNwcC9hYnNlaWwtY3BwLzAwMDEtRXhwb3J0LW9mLWludGVybmFsLUFi
+c2VpbC1jaGFuZ2VzLnBhdGNoDQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+IGluZGV4IDAw
+MDAwMDAwMDAuLmMwZmIwNTcxZjcNCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9tZXRhLW9l
+L3JlY2lwZXMtZGV2dG9vbHMvYWJzZWlsLWNwcC9hYnNlaWwtY3BwLzAwMDEtRXhwb3J0LW9m
+LWludGVybmFsLUFic2VpbC1jaGFuZ2VzLnBhdGNoDQo+IEBAIC0wLDAgKzEsODIgQEANCj4g
+K0Zyb20gZDM0MjQyMDFhNzNmMjlhYjUzMzEyMWIxODIxYTc2ZTFiNDMxM2JlYiBNb24gU2Vw
+IDE3IDAwOjAwOjAwIDIwMDENCj4gK0Zyb206IEFic2VpbCBUZWFtIDxhYnNsLXRlYW1AZ29v
+Z2xlLmNvbT4NCj4gK0RhdGU6IE1vbiwgMyBNYXkgMjAyMSAwNzozNzozOSAtMDcwMA0KPiAr
+U3ViamVjdDogW1BBVENIXSBFeHBvcnQgb2YgaW50ZXJuYWwgQWJzZWlsIGNoYW5nZXMNCj4g
+Kw0KPiArLS0NCj4gK2NmODhmOWNmNDBlYWI1NGMwNmJjYTdmMjA3OTUzNTJlYzIzYmI1ODMg
+YnkgRGVyZWsgTWF1cm8gPGRtYXVyb0Bnb29nbGUuY29tPjoNCj4gKw0KPiArRml4ZXMgYnVp
+bGQgd2l0aCBsYXRlc3QgZ2xpYmMNCj4gK0ZpeGVzICM5NTINCj4gKw0KPiArUGlwZXJPcmln
+aW4tUmV2SWQ6IDM3MTY5MzkwOA0KPiArDQo+ICstLQ0KPiArOTliY2QwZjRhNzQ3Y2U3YTQw
+MWUyM2M3NDVhZGYzNGQwZWM1MTMxYiBieSBTYW11ZWwgQmVuemFxdWVuIDxzYmVuemFAZ29v
+Z2xlLmNvbT46DQo+ICsNCj4gK0FkZCBzdXBwb3J0IGZvciBzdGQ6OnN0cmluZ192aWV3IGlu
+IFN0ckZvcm1hdCBldmVuIHdoZW4NCj4gK2Fic2w6OnN0cmluZ192aWV3ICE9IHN0ZDo6c3Ry
+aW5nX3ZpZXcuDQo+ICsNCj4gK1BpcGVyT3JpZ2luLVJldklkOiAzNzE2OTM2MzMNCj4gKw0K
+PiArLS0NCj4gK2UzNTQ2MzU3MjE0OWE2YzJkNGEwZDQzOWI5MzAwY2UwM2ZkNmI5NmQgYnkg
+QWJzZWlsIFRlYW0gPGFic2wtdGVhbUBnb29nbGUuY29tPjoNCj4gKw0KPiArQ21ha2UgYnVp
+bGRzIHNob3VsZCBvbmx5IGluc3RhbGwgcGtnLWNvbmZpZyB3aGVuIGV4cGxpY2l0bHkgcmVx
+dWVzdGVkLg0KPiArDQo+ICtQaXBlck9yaWdpbi1SZXZJZDogMzcxNDAzNDE5DQo+ICtHaXRP
+cmlnaW4tUmV2SWQ6IGNmODhmOWNmNDBlYWI1NGMwNmJjYTdmMjA3OTUzNTJlYzIzYmI1ODMN
+Cj4gK0NoYW5nZS1JZDogSTQzNjBhMThjNjM4YTRkOTAxZmY0NGFiMWUwYTlkOGYzMjFjMzAy
+ZWENCg0KUGF0Y2ggbWlzc2luZyAiVXBzdHJlYW0tU3RhdHVzIiBhbmQgIlNpZ25lZC1vZmYt
+YnkiDQoNCi0gYXJtaW4NCj4gKy0tLQ0KPiArIGFic2wvZGVidWdnaW5nL2ZhaWx1cmVfc2ln
+bmFsX2hhbmRsZXIuY2MgICAgICAgICB8IDMgKystDQo+ICsgYWJzbC9zdHJpbmdzL2ludGVy
+bmFsL3N0cl9mb3JtYXQvYXJnLmggICAgICAgICAgIHwgOCArKysrKysrKw0KPiArIGFic2wv
+c3RyaW5ncy9pbnRlcm5hbC9zdHJfZm9ybWF0L2NvbnZlcnRfdGVzdC5jYyB8IDMgKysrDQo+
+ICsgMyBmaWxlcyBjaGFuZ2VkLCAxMyBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pDQo+
+ICsNCj4gK2RpZmYgLS1naXQgYS9hYnNsL2RlYnVnZ2luZy9mYWlsdXJlX3NpZ25hbF9oYW5k
+bGVyLmNjIGIvYWJzbC9kZWJ1Z2dpbmcvZmFpbHVyZV9zaWduYWxfaGFuZGxlci5jYw0KPiAr
+aW5kZXggNWQxM2JkYmIuLjJlZDEzN2I1IDEwMDY0NA0KPiArLS0tIGEvYWJzbC9kZWJ1Z2dp
+bmcvZmFpbHVyZV9zaWduYWxfaGFuZGxlci5jYw0KPiArKysrIGIvYWJzbC9kZWJ1Z2dpbmcv
+ZmFpbHVyZV9zaWduYWxfaGFuZGxlci5jYw0KPiArQEAgLTEzNSw3ICsxMzUsOCBAQCBzdGF0
+aWMgYm9vbCBTZXR1cEFsdGVybmF0ZVN0YWNrT25jZSgpIHsNCj4gKyAjZWxzZQ0KPiArICAg
+Y29uc3Qgc2l6ZV90IHBhZ2VfbWFzayA9IHN5c2NvbmYoX1NDX1BBR0VTSVpFKSAtIDE7DQo+
+ICsgI2VuZGlmDQo+ICstICBzaXplX3Qgc3RhY2tfc2l6ZSA9IChzdGQ6Om1heChTSUdTVEtT
+WiwgNjU1MzYpICsgcGFnZV9tYXNrKSAmIH5wYWdlX21hc2s7DQo+ICsrICBzaXplX3Qgc3Rh
+Y2tfc2l6ZSA9DQo+ICsrICAgICAgKHN0ZDo6bWF4PHNpemVfdD4oU0lHU1RLU1osIDY1NTM2
+KSArIHBhZ2VfbWFzaykgJiB+cGFnZV9tYXNrOw0KPiArICNpZiBkZWZpbmVkKEFCU0xfSEFW
+RV9BRERSRVNTX1NBTklUSVpFUikgfHwgXA0KPiArICAgICBkZWZpbmVkKEFCU0xfSEFWRV9N
+RU1PUllfU0FOSVRJWkVSKSB8fCBkZWZpbmVkKEFCU0xfSEFWRV9USFJFQURfU0FOSVRJWkVS
+KQ0KPiArICAgLy8gQWNjb3VudCBmb3Igc2FuaXRpemVyIGluc3RydW1lbnRhdGlvbiByZXF1
+aXJpbmcgYWRkaXRpb25hbCBzdGFjayBzcGFjZS4NCj4gK2RpZmYgLS1naXQgYS9hYnNsL3N0
+cmluZ3MvaW50ZXJuYWwvc3RyX2Zvcm1hdC9hcmcuaCBiL2Fic2wvc3RyaW5ncy9pbnRlcm5h
+bC9zdHJfZm9ybWF0L2FyZy5oDQo+ICtpbmRleCAzZGJjMTUyNi4uZjlkODlkMTIgMTAwNjQ0
+DQo+ICstLS0gYS9hYnNsL3N0cmluZ3MvaW50ZXJuYWwvc3RyX2Zvcm1hdC9hcmcuaA0KPiAr
+KysrIGIvYWJzbC9zdHJpbmdzL2ludGVybmFsL3N0cl9mb3JtYXQvYXJnLmgNCj4gK0BAIC0x
+MDgsNiArMTA4LDE0IEBAIFN0cmluZ0NvbnZlcnRSZXN1bHQgRm9ybWF0Q29udmVydEltcGwo
+Y29uc3Qgc3RkOjpzdHJpbmcmIHYsDQo+ICsgU3RyaW5nQ29udmVydFJlc3VsdCBGb3JtYXRD
+b252ZXJ0SW1wbChzdHJpbmdfdmlldyB2LA0KPiArICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgRm9ybWF0Q29udmVyc2lvblNwZWNJbXBsIGNvbnYsDQo+ICsgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBGb3JtYXRTaW5rSW1wbCogc2lu
+ayk7DQo+ICsrI2lmIGRlZmluZWQoQUJTTF9IQVZFX1NURF9TVFJJTkdfVklFVykgJiYgIWRl
+ZmluZWQoQUJTTF9VU0VTX1NURF9TVFJJTkdfVklFVykNCj4gKytpbmxpbmUgU3RyaW5nQ29u
+dmVydFJlc3VsdCBGb3JtYXRDb252ZXJ0SW1wbChzdGQ6OnN0cmluZ192aWV3IHYsDQo+ICsr
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgRm9ybWF0Q29u
+dmVyc2lvblNwZWNJbXBsIGNvbnYsDQo+ICsrICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgRm9ybWF0U2lua0ltcGwqIHNpbmspIHsNCj4gKysgIHJldHVy
+biBGb3JtYXRDb252ZXJ0SW1wbChhYnNsOjpzdHJpbmdfdmlldyh2LmRhdGEoKSwgdi5zaXpl
+KCkpLCBjb252LCBzaW5rKTsNCj4gKyt9DQo+ICsrI2VuZGlmICAvLyBBQlNMX0hBVkVfU1RE
+X1NUUklOR19WSUVXICYmICFBQlNMX1VTRVNfU1REX1NUUklOR19WSUVXDQo+ICsrDQo+ICsg
+QXJnQ29udmVydFJlc3VsdDxGb3JtYXRDb252ZXJzaW9uQ2hhclNldFVuaW9uKA0KPiArICAg
+ICBGb3JtYXRDb252ZXJzaW9uQ2hhclNldEludGVybmFsOjpzLCBGb3JtYXRDb252ZXJzaW9u
+Q2hhclNldEludGVybmFsOjpwKT4NCj4gKyBGb3JtYXRDb252ZXJ0SW1wbChjb25zdCBjaGFy
+KiB2LCBjb25zdCBGb3JtYXRDb252ZXJzaW9uU3BlY0ltcGwgY29udiwNCj4gK2RpZmYgLS1n
+aXQgYS9hYnNsL3N0cmluZ3MvaW50ZXJuYWwvc3RyX2Zvcm1hdC9jb252ZXJ0X3Rlc3QuY2Mg
+Yi9hYnNsL3N0cmluZ3MvaW50ZXJuYWwvc3RyX2Zvcm1hdC9jb252ZXJ0X3Rlc3QuY2MNCj4g
+K2luZGV4IDYzNGVlNzhiLi5jYzc4OTUzMCAxMDA2NDQNCj4gKy0tLSBhL2Fic2wvc3RyaW5n
+cy9pbnRlcm5hbC9zdHJfZm9ybWF0L2NvbnZlcnRfdGVzdC5jYw0KPiArKysrIGIvYWJzbC9z
+dHJpbmdzL2ludGVybmFsL3N0cl9mb3JtYXQvY29udmVydF90ZXN0LmNjDQo+ICtAQCAtMjE1
+LDYgKzIxNSw5IEBAIFRFU1RfRihGb3JtYXRDb252ZXJ0VGVzdCwgQmFzaWNTdHJpbmcpIHsN
+Cj4gKyAgIFRlc3RTdHJpbmdDb252ZXJ0KHN0YXRpY19jYXN0PGNvbnN0IGNoYXIqPigiaGVs
+bG8iKSk7DQo+ICsgICBUZXN0U3RyaW5nQ29udmVydChzdGQ6OnN0cmluZygiaGVsbG8iKSk7
+DQo+ICsgICBUZXN0U3RyaW5nQ29udmVydChzdHJpbmdfdmlldygiaGVsbG8iKSk7DQo+ICsr
+I2lmIGRlZmluZWQoQUJTTF9IQVZFX1NURF9TVFJJTkdfVklFVykNCj4gKysgIFRlc3RTdHJp
+bmdDb252ZXJ0KHN0ZDo6c3RyaW5nX3ZpZXcoImhlbGxvIikpOw0KPiArKyNlbmRpZiAgLy8g
+QUJTTF9IQVZFX1NURF9TVFJJTkdfVklFVw0KPiArIH0NCj4gKw0KPiArIFRFU1RfRihGb3Jt
+YXRDb252ZXJ0VGVzdCwgTnVsbFN0cmluZykgew0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9y
+ZWNpcGVzLWRldnRvb2xzL2Fic2VpbC1jcHAvYWJzZWlsLWNwcF9naXQuYmIgYi9tZXRhLW9l
+L3JlY2lwZXMtZGV2dG9vbHMvYWJzZWlsLWNwcC9hYnNlaWwtY3BwX2dpdC5iYg0KPiBpbmRl
+eCA1NjliYjEzOTkzLi5hNDlmZTY3MmU4IDEwMDY0NA0KPiAtLS0gYS9tZXRhLW9lL3JlY2lw
+ZXMtZGV2dG9vbHMvYWJzZWlsLWNwcC9hYnNlaWwtY3BwX2dpdC5iYg0KPiArKysgYi9tZXRh
+LW9lL3JlY2lwZXMtZGV2dG9vbHMvYWJzZWlsLWNwcC9hYnNlaWwtY3BwX2dpdC5iYg0KPiBA
+QCAtMTQsNiArMTQsNyBAQCBTUkNfVVJJID0gImdpdDovL2dpdGh1Yi5jb20vYWJzZWlsL2Fi
+c2VpbC1jcHA7YnJhbmNoPSR7QlJBTkNIfTtwcm90b2NvbD1odHRwcyBcDQo+ICAgICAgICAg
+ICAgICBmaWxlOi8vMDAwMS1hYnNsLWFsd2F5cy11c2UtYXNtLXNnaWRlZnMuaC5wYXRjaCAg
+ICAgICAgICAgICBcDQo+ICAgICAgICAgICAgICBmaWxlOi8vMDAwMi1SZW1vdmUtbWFlcy1v
+cHRpb24tZnJvbS1jcm9zcy1jb21waWxhdGlvbi5wYXRjaCBcDQo+ICAgICAgICAgICAgICBm
+aWxlOi8vYWJzZWlsLXBwYy1maXhlcy5wYXRjaCBcDQo+ICsgICAgICAgICAgIGZpbGU6Ly8w
+MDAxLUV4cG9ydC1vZi1pbnRlcm5hbC1BYnNlaWwtY2hhbmdlcy5wYXRjaCBcDQo+ICAgICAg
+ICAgICAgICINCj4gICANCj4gICBTID0gIiR7V09SS0RJUn0vZ2l0Ig0KPg0KPiAtPS09LT0t
+PS09LT0tPS09LT0tPS09LQ0KPiBMaW5rczogWW91IHJlY2VpdmUgYWxsIG1lc3NhZ2VzIHNl
+bnQgdG8gdGhpcyBncm91cC4NCj4gVmlldy9SZXBseSBPbmxpbmUgKCM5NjQyNik6IGh0dHBz
+Oi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC9tZXNzYWdl
+Lzk2NDI2DQo+IE11dGUgVGhpcyBUb3BpYzogaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQu
+b3JnL210LzkwMjYyNDAwLzM2MTY2OTgNCj4gR3JvdXAgT3duZXI6IG9wZW5lbWJlZGRlZC1k
+ZXZlbCtvd25lckBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFVuc3Vic2NyaWJlOiBodHRw
+czovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvdW5zdWIg
+W2FrdXN0ZXI4MDhAZ21haWwuY29tXQ0KPiAtPS09LT0tPS09LT0tPS09LT0tPS09LQ0KPg0K
+DQo=
 
