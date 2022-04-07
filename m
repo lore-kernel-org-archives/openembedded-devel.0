@@ -1,369 +1,228 @@
-Return-Path: <stefan@datenfreihafen.org>
+Return-Path: <raj.khem@gmail.com>
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3EF41C4708B
-	for <webhook@archiver.kernel.org>; Thu,  7 Apr 2022 20:36:09 +0000 (UTC)
-Received: from proxima.lasnet.de (proxima.lasnet.de [78.47.171.185])
- by mx.groups.io with SMTP id smtpd.web10.2687.1649358904540701955
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 21958C433EF
+	for <webhook@archiver.kernel.org>; Thu,  7 Apr 2022 23:49:46 +0000 (UTC)
+Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com
+ [209.85.160.173])
+ by mx.groups.io with SMTP id smtpd.web10.204.1649367557009422416
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Apr 2022 12:15:06 -0700
+ Thu, 07 Apr 2022 14:39:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=pass (domain: datenfreihafen.org, ip: 78.47.171.185,
- mailfrom: stefan@datenfreihafen.org)
-Received: from localhost.localdomain
- (p200300e9d723f1e7c71adfef8e3f23e4.dip0.t-ipconnect.de
- [IPv6:2003:e9:d723:f1e7:c71a:dfef:8e3f:23e4])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest
- SHA256)
-	(No client certificate requested)
-	(Authenticated sender: stefan@sostec.de)
-	by proxima.lasnet.de (Postfix) with ESMTPSA id E1A22C01D4;
-	Thu,  7 Apr 2022 21:15:00 +0200 (CEST)
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: Stefan Schmidt <stefan@datenfreihafen.org>,
-	Stefan Schmidt <stefan.schmidt@huawei.com>
-Subject: [meta-networking][PATCH v3 1/4] ot-br-posix: add recipe for an
- OpenThread Border Router
-Date: Thu,  7 Apr 2022 21:14:35 +0200
-Message-Id: <20220407191438.3696227-1-stefan@datenfreihafen.org>
-X-Mailer: git-send-email 2.35.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Ayo4UORA;
+ spf=pass (domain: gmail.com, ip: 209.85.160.173,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f173.google.com with SMTP id s11so9282545qtc.3
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 07 Apr 2022 14:39:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :cc:references:from:organization:in-reply-to
+         :content-transfer-encoding;
+        bh=sRLSiPI6ZuFtz0LqZ5O1KHBtF4D735t6dus8+U6XlVA=;
+        b=Ayo4UORAXFx8dIFevA8nNlsYMo5szLUKZgjD5SvBCKryZSXwWIPurtDMelyp4KX1UO
+         CMG/QZbk4Nv9J7IU5xr/EZ9RT9fIRX+Iwb+HZV6ekaWUFHXW8BpQDGrXMdXfZs5MFoVe
+         FCOqWoio8tTVmlsqj1z2hOiCqYIWyPkceTtmq0JOotQizaT0r9lDxqIEn3lN1/u7KJOs
+         TAXiVo4DFA3xyKh8yw9kEVDz078Shy4rMeebptyTic19ibTe5GZW126P19Sa19xDLr3i
+         p1S8BSVhmY07ruU/AvK+iQ12ecpqfUv5Nf84SzRPkz1o7QrXSl/oW465t5ada9mRvfUg
+         ClAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:cc:references:from:organization:in-reply-to
+         :content-transfer-encoding;
+        bh=sRLSiPI6ZuFtz0LqZ5O1KHBtF4D735t6dus8+U6XlVA=;
+        b=iKhdeWZM0TrtokQRxIq8EG42plawg/50N9RsJnYpLeftjhpXJ/OQUk/1erIm2nUU0c
+         CuJapMGNZC9qnA5euFy5LSoFmAAENFG2lw3mjAxFHseOHcsJ1FJhp3DosC6zIvwNGJeE
+         XI/zoWQzOu7DRmYOsFGZa/4qRuhBmK1QGmLeSsA4Dt+Zw4J9UtU/FXqMAZL6Og/p9DJN
+         IGEcB9P1Pjo/tabpGkBppaatmXYRUaOjh7FV2qe5gDStyijM6H97gJYtV+3voeo4Nwdb
+         UItq9prH8wBkT7qtWG3GKxTy9B+RerFR/bevPfORAbijWBdfZL44MXSMRItzHWubIBdM
+         /QPQ==
+X-Gm-Message-State: AOAM530W1BA5fmH7vFeJL9K6rT+1Gjtfjeakr5gmnyHApX1Y23AAhN72
+	NQsBW4CL8h/dBlImBxEnsyc=
+X-Google-Smtp-Source: 
+ ABdhPJx1bvSDEGBVcY5hHTXL0IP8MAohUNrY9lJoYfj8GXyLkHC2BuYwtVcX2v8sL35mjfOJL126ug==
+X-Received: by 2002:a05:622a:24f:b0:2e1:d658:a595 with SMTP id
+ c15-20020a05622a024f00b002e1d658a595mr13602720qtx.657.1649367555956;
+        Thu, 07 Apr 2022 14:39:15 -0700 (PDT)
+Received: from [10.44.189.203] ([12.161.6.169])
+        by smtp.gmail.com with ESMTPSA id
+ t3-20020a05620a0b0300b00699c6a9b2d1sm7742045qkg.32.2022.04.07.14.39.13
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 07 Apr 2022 14:39:15 -0700 (PDT)
+Message-ID: <93edb444-4030-12f2-a156-2c752c8edd5f@gmail.com>
+Date: Thu, 7 Apr 2022 17:39:09 -0400
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.7.0
+Subject: Re: [oe] [meta-oe][ PATCH 1/2] grpc: add cmake support for target
+Content-Language: en-US
+To: Stefan Herbrechtsmeier <stefan.herbrechtsmeier-oss@weidmueller.com>,
+ openembedded-devel@lists.openembedded.org
+Cc: Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+References: <20220407114406.6828-1-stefan.herbrechtsmeier-oss@weidmueller.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+In-Reply-To: 
+ <20220407114406.6828-1-stefan.herbrechtsmeier-oss@weidmueller.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 07 Apr 2022 20:36:09 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 07 Apr 2022 23:49:46 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96455
+ https://lists.openembedded.org/g/openembedded-devel/message/96463
 
-From: Stefan Schmidt <stefan.schmidt@huawei.com>
+can you rebase it on top of latest master or master-next and resend, we 
+now have grpc 1.45.1 in master.
 
-The OpenThread project is an open source implementation of the Thread
-low-power mesh network protocol. In a Thread network devices can have
-different roles, and of of these roles is a Border Router that allows a
-Thread network to be connected with other IP networks.
-
-Ot-br-posix runs as a systemd service on a standard Linux system to
-handle the connection to a Thread network.
-
-In terms of patches we need a fix to allow building on musl + clang
-(CMSG_NXTHDR macro triggers a -Wsign-compare warning) and a systemd
-unit file change is OE specific and avoids having service dependencies
-implemented as pre exec hooks.
-
-Signed-off-by: Stefan Schmidt <stefan.schmidt@huawei.com>
----
-v3:
-- Dropped the musl include fixed which was merged upstream and we bumped =
-the
-  version
-- Version bump also fixed a C++ deprecated-copy error I saw
-- Included new patch to fix CMSG_NXTHDR macro usage on musl+clang
-
- ...ce.in-remove-pre-exec-hook-for-mdns-.patch |  35 +++++
- .../Turn-off-sign-compare-for-musl-libc.patch | 131 ++++++++++++++++++
- .../openthread/ot-br-posix_git.bb             |  59 ++++++++
- 3 files changed, 225 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/openthread/ot-br=
--posix/0001-otbr-agent.service.in-remove-pre-exec-hook-for-mdns-.patch
- create mode 100644 meta-networking/recipes-connectivity/openthread/ot-br=
--posix/Turn-off-sign-compare-for-musl-libc.patch
- create mode 100644 meta-networking/recipes-connectivity/openthread/ot-br=
--posix_git.bb
-
-diff --git a/meta-networking/recipes-connectivity/openthread/ot-br-posix/=
-0001-otbr-agent.service.in-remove-pre-exec-hook-for-mdns-.patch b/meta-ne=
-tworking/recipes-connectivity/openthread/ot-br-posix/0001-otbr-agent.serv=
-ice.in-remove-pre-exec-hook-for-mdns-.patch
-new file mode 100644
-index 000000000..250de4bdd
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/openthread/ot-br-posix/0001-ot=
-br-agent.service.in-remove-pre-exec-hook-for-mdns-.patch
-@@ -0,0 +1,35 @@
-+From ed60d4605b81c43b9ba9504a37835109c247c6f8 Mon Sep 17 00:00:00 2001
-+From: Stefan Schmidt <stefan.schmidt@huawei.com>
-+Date: Fri, 1 Apr 2022 21:46:03 +0200
-+Subject: [PATCH] otbr-agent.service.in: remove pre exec hook for mdns se=
-rvice
-+
-+It uses the service command which is not available in all cases under
-+Yocto/OE. The upstream project uses this mainly with Ubuntu and Raspian
-+as testbeds.
-+
-+In our case we simply ensure that avahi-daemon is installed on the
-+system inside the recipe.
-+
-+Upstream-Status: Inappropriate [OE specific]
-+
-+Signed-off-by: Stefan Schmidt <stefan.schmidt@huawei.com>
-+---
-+ src/agent/otbr-agent.service.in | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/agent/otbr-agent.service.in b/src/agent/otbr-agent.serv=
-ice.in
-+index 8314121347..4c97869def 100644
-+--- a/src/agent/otbr-agent.service.in
-++++ b/src/agent/otbr-agent.service.in
-+@@ -6,7 +6,7 @@ After=3Ddbus.socket
-+=20
-+ [Service]
-+ EnvironmentFile=3D-@CMAKE_INSTALL_FULL_SYSCONFDIR@/default/otbr-agent
-+-@EXEC_START_PRE@ExecStart=3D@CMAKE_INSTALL_FULL_SBINDIR@/otbr-agent $OT=
-BR_AGENT_OPTS
-++ExecStart=3D@CMAKE_INSTALL_FULL_SBINDIR@/otbr-agent $OTBR_AGENT_OPTS
-+ KillMode=3Dmixed
-+ Restart=3Don-failure
-+ RestartSec=3D5
-+--=20
-+2.35.1
-+
-diff --git a/meta-networking/recipes-connectivity/openthread/ot-br-posix/=
-Turn-off-sign-compare-for-musl-libc.patch b/meta-networking/recipes-conne=
-ctivity/openthread/ot-br-posix/Turn-off-sign-compare-for-musl-libc.patch
-new file mode 100644
-index 000000000..df84550be
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/openthread/ot-br-posix/Turn-of=
-f-sign-compare-for-musl-libc.patch
-@@ -0,0 +1,131 @@
-+From: Stefan Schmidt <stefan.schmidt@huawei.com>
-+Subject: Turn off sign compare for musl libc
-+
-+When building with musl and clang the usage of CMSG_NXTHDR results in
-+sign-compare error. Disable the check only in this specific part of the
-+code with a #pragma.
-+
-+| /home/stefan/huawei/yocto-upstream/yoe/workspace/sources/ot-br-posix/t=
-hird_party/openthread/repo/src/posix/platform/udp.cpp:147:28: fatal error=
-: comparison of integers of different signs: 'unsigned long' and 'long' [=
--Wsign-compare]
-+|         cmsg             =3D CMSG_NXTHDR(&msg, cmsg);
-+|                            ^~~~~~~~~~~~~~~~~~~~~~~
-+| /home/stefan/huawei/yocto-upstream/yoe/build/tmp/work/cortexa57-yoe-li=
-nux-musl/ot-br-posix/0.3.0+git999-r0/recipe-sysroot/usr/include/sys/socke=
-t.h:358:44: note: expanded from macro 'CMSG_NXTHDR'
-+|         __CMSG_LEN(cmsg) + sizeof(struct cmsghdr) >=3D __MHDR_END(mhdr=
-) - (unsigned char *)(cmsg) \
-+|         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^  ~~~~~~~~~~~~~~~~~=
-~~~~~~~~~~~~~~~~~~~~~~~~~
-+| 1 error generated.
-+
-+Idea and fix taken from
-+recipes-devtools/breakpad/breakpad/0001-Turn-off-sign-compare-for-musl-l=
-ibc.patch
-+by Khem Raj.
-+
-+Upstream-Status: Inappropriate [OE specific]
-+
-+Signed-off-by: Stefan Schmidt <stefan.schmidt@huawei.com>
-+
-+diff --git a/src/backbone_router/nd_proxy.cpp b/src/backbone_router/nd_p=
-roxy.cpp
-+index 7136878c3d..8a223c95c7 100644
-+--- a/src/backbone_router/nd_proxy.cpp
-++++ b/src/backbone_router/nd_proxy.cpp
-+@@ -185,9 +185,18 @@ void NdProxyManager::ProcessMulticastNeighborSolici=
-tion()
-+         VerifyOrExit(icmp6header->icmp6_type =3D=3D ND_NEIGHBOR_SOLICIT=
-, error =3D OTBR_ERROR_PARSE);
-+=20
-+         otbrLogDebug("NdProxyManager: Received ND-NS from %s", src.ToSt=
-ring().c_str());
-+-
-++#ifndef __GLIBC__
-++  // In musl-libc, CMSG_NXTHDR typecasts char* to cmsghdr* which causes
-++  // clang to throw sign-compare warning. This is to suppress the warni=
-ng
-++  // inline.
-++  #pragma clang diagnostic push
-++  #pragma clang diagnostic ignored "-Wsign-compare"
-++#endif
-+         for (cmsghdr =3D CMSG_FIRSTHDR(&msghdr); cmsghdr; cmsghdr =3D C=
-MSG_NXTHDR(&msghdr, cmsghdr))
-+-        {
-++#ifndef __GLIBC__
-++  #pragma clang diagnostic pop
-++#endif
-++	{
-+             if (cmsghdr->cmsg_level !=3D IPPROTO_IPV6)
-+             {
-+                 continue;
-+Submodule third_party/openthread/repo contains modified content
-+diff --git a/third_party/openthread/repo/src/posix/platform/infra_if.cpp=
- b/third_party/openthread/repo/src/posix/platform/infra_if.cpp
-+index 9f93d2b1c..1ed40fe50 100644
-+--- a/third_party/openthread/repo/src/posix/platform/infra_if.cpp
-++++ b/third_party/openthread/repo/src/posix/platform/infra_if.cpp
-+@@ -228,7 +228,17 @@ otError InfraNetif::SendIcmp6Nd(uint32_t           =
- aInfraIfIndex,
-+     packetInfo->ipi6_ifindex =3D mInfraIfIndex;
-+=20
-+     // Per section 6.1.2 of RFC 4861, we need to send the ICMPv6 messag=
-e with IP Hop Limit 255.
-++#ifndef __GLIBC__
-++  // In musl-libc, CMSG_NXTHDR typecasts char* to cmsghdr* which causes
-++  // clang to throw sign-compare warning. This is to suppress the warni=
-ng
-++  // inline.
-++  #pragma clang diagnostic push
-++  #pragma clang diagnostic ignored "-Wsign-compare"
-++#endif
-+     cmsgPointer             =3D CMSG_NXTHDR(&msgHeader, cmsgPointer);
-++#ifndef __GLIBC__
-++  #pragma clang diagnostic pop
-++#endif
-+     cmsgPointer->cmsg_level =3D IPPROTO_IPV6;
-+     cmsgPointer->cmsg_type  =3D IPV6_HOPLIMIT;
-+     cmsgPointer->cmsg_len   =3D CMSG_LEN(sizeof(hopLimit));
-+@@ -481,7 +491,17 @@ void InfraNetif::ReceiveIcmp6Message(void)
-+=20
-+     bufferLength =3D static_cast<uint16_t>(rval);
-+=20
-++#ifndef __GLIBC__
-++  // In musl-libc, CMSG_NXTHDR typecasts char* to cmsghdr* which causes
-++  // clang to throw sign-compare warning. This is to suppress the warni=
-ng
-++  // inline.
-++  #pragma clang diagnostic push
-++  #pragma clang diagnostic ignored "-Wsign-compare"
-++#endif
-+     for (cmh =3D CMSG_FIRSTHDR(&msg); cmh; cmh =3D CMSG_NXTHDR(&msg, cm=
-h))
-++#ifndef __GLIBC__
-++  #pragma clang diagnostic pop
-++#endif
-+     {
-+         if (cmh->cmsg_level =3D=3D IPPROTO_IPV6 && cmh->cmsg_type =3D=3D=
- IPV6_PKTINFO &&
-+             cmh->cmsg_len =3D=3D CMSG_LEN(sizeof(struct in6_pktinfo)))
-+diff --git a/third_party/openthread/repo/src/posix/platform/udp.cpp b/th=
-ird_party/openthread/repo/src/posix/platform/udp.cpp
-+index b7aacc5fa..a814fea70 100644
-+--- a/third_party/openthread/repo/src/posix/platform/udp.cpp
-++++ b/third_party/openthread/repo/src/posix/platform/udp.cpp
-+@@ -144,8 +144,18 @@ otError transmitPacket(int aFd, uint8_t *aPayload, =
-uint16_t aLength, const otMes
-+     {
-+         struct in6_pktinfo pktinfo;
-+=20
-++#ifndef __GLIBC__
-++  // In musl-libc, CMSG_NXTHDR typecasts char* to cmsghdr* which causes
-++  // clang to throw sign-compare warning. This is to suppress the warni=
-ng
-++  // inline.
-++  #pragma clang diagnostic push
-++  #pragma clang diagnostic ignored "-Wsign-compare"
-++#endif
-+         cmsg             =3D CMSG_NXTHDR(&msg, cmsg);
-+-        cmsg->cmsg_level =3D IPPROTO_IPV6;
-++#ifndef __GLIBC__
-++  #pragma clang diagnostic pop
-++#endif
-++	cmsg->cmsg_level =3D IPPROTO_IPV6;
-+         cmsg->cmsg_type  =3D IPV6_PKTINFO;
-+         cmsg->cmsg_len   =3D CMSG_LEN(sizeof(pktinfo));
-+=20
-+@@ -200,7 +210,17 @@ otError receivePacket(int aFd, uint8_t *aPayload, u=
-int16_t &aLength, otMessageIn
-+     VerifyOrExit(rval > 0, perror("recvmsg"));
-+     aLength =3D static_cast<uint16_t>(rval);
-+=20
-++#ifndef __GLIBC__
-++  // In musl-libc, CMSG_NXTHDR typecasts char* to cmsghdr* which causes
-++  // clang to throw sign-compare warning. This is to suppress the warni=
-ng
-++  // inline.
-++  #pragma clang diagnostic push
-++  #pragma clang diagnostic ignored "-Wsign-compare"
-++#endif
-+     for (struct cmsghdr *cmsg =3D CMSG_FIRSTHDR(&msg); cmsg !=3D nullpt=
-r; cmsg =3D CMSG_NXTHDR(&msg, cmsg))
-++#ifndef __GLIBC__
-++  #pragma clang diagnostic pop
-++#endif
-+     {
-+         if (cmsg->cmsg_level =3D=3D IPPROTO_IPV6)
-+         {
-diff --git a/meta-networking/recipes-connectivity/openthread/ot-br-posix_=
-git.bb b/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.=
-bb
-new file mode 100644
-index 000000000..d9f558d79
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
-@@ -0,0 +1,59 @@
-+# SPDX-FileCopyrightText: Huawei Inc.
-+#
-+# SPDX-License-Identifier: Apache-2.0
-+SUMMARY =3D "OpenThread Border Router"
-+SECTION =3D "net"
-+LICENSE =3D "BSD-3-Clause & MIT"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D87109e44b2fda96a8991f27684a73=
-49c \
-+                    file://third_party/Simple-web-server/repo/LICENSE;md=
-5=3D852b3f7f320b19f6431487b8b2fb1d74 \
-+                    file://third_party/cJSON/repo/LICENSE;md5=3D218947f7=
-7e8cb8e2fa02918dc41c50d0 \
-+                    file://third_party/http-parser/repo/LICENSE-MIT;md5=3D=
-9bfa835d048c194ab30487af8d7b3778 \
-+                    file://third_party/openthread/repo/LICENSE;md5=3D543=
-b6fe90ec5901a683320a36390c65f \
-+                    "
-+DEPENDS =3D "autoconf-archive dbus readline avahi jsoncpp boost libnetfi=
-lter-queue"
-+SRCREV =3D "ad6822257ffddbac295db97186e4ab449a2ed32a"
-+PV =3D "0.3.0+git${SRCPV}"
-+
-+SRC_URI =3D "gitsm://github.com/openthread/ot-br-posix.git;protocol=3Dht=
-tps;branch=3Dmain \
-+           file://0001-otbr-agent.service.in-remove-pre-exec-hook-for-md=
-ns-.patch \
-+           file://Turn-off-sign-compare-for-musl-libc.patch \
-+           "
-+
-+S =3D "${WORKDIR}/git"
-+SYSTEMD_SERVICE:${PN} =3D "otbr-agent.service"
-+
-+inherit pkgconfig cmake systemd
-+
-+EXTRA_OECMAKE =3D "-DBUILD_TESTING=3DOFF \
-+                 -DOTBR_DBUS=3DON \
-+                 -DOTBR_REST=3DON \
-+                 -DOTBR_WEB=3DOFF \
-+                 -DCMAKE_LIBRARY_PATH=3D${libdir} \
-+                 -DOTBR_MDNS=3Davahi \
-+                 -DOTBR_BACKBONE_ROUTER=3DON \
-+                 -DOTBR_BORDER_ROUTING=3DON \
-+                 -DOTBR_SRP_ADVERTISING_PROXY=3DON \
-+                 -DOTBR_BORDER_AGENT=3DON \
-+                 -DOT_SPINEL_RESET_CONNECTION=3DON \
-+                 -DOT_TREL=3DON \
-+                 -DOT_MLR=3DON \
-+                 -DOT_SRP_SERVER=3DON \
-+                 -DOT_ECDSA=3DON \
-+                 -DOT_SERVICE=3DON \
-+                 -DOTBR_DUA_ROUTING=3DON \
-+                 -DOT_DUA=3DON \
-+                 -DOT_BORDER_ROUTING_NAT64=3DON \
-+                 -DOTBR_DNSSD_DISCOVERY_PROXY=3DON \
-+                 -DOTBR_INFRA_IF_NAME=3Deth0 \
-+                 -DOTBR_NO_AUTO_ATTACH=3D1 \
-+                 -DOT_REFERENCE_DEVICE=3DON \
-+                 -DOT_DHCP6_CLIENT=3DON \
-+                 -DOT_DHCP6_SERVER=3DON \
-+                 "
-+
-+RDEPENDS:${PN} =3D "iproute2 avahi-daemon"
-+
-+RCONFLICTS:${PN} =3D "ot-daemon"
-+
-+FILES:${PN} +=3D "${systemd_unitdir}/*"
-+FILES:${PN} +=3D "${datadir}/*"
---=20
-2.35.1
-
+On 4/7/22 7:44 AM, Stefan Herbrechtsmeier wrote:
+> From: Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+> 
+> The CMake gRPC config checks for binaries and fails if a binary (plugin)
+> is missing. Fix the problem in the code and add the CMake gRPC config
+> back to the target package.
+> 
+> Signed-off-by: Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+> ---
+> 
+>   ...d-separate-export-for-plugin-targets.patch | 93 +++++++++++++++++++
+>   meta-oe/recipes-devtools/grpc/grpc_1.45.0.bb  |  3 +-
+>   2 files changed, 94 insertions(+), 2 deletions(-)
+>   create mode 100644 meta-oe/recipes-devtools/grpc/grpc/0001-cmake-add-separate-export-for-plugin-targets.patch
+> 
+> diff --git a/meta-oe/recipes-devtools/grpc/grpc/0001-cmake-add-separate-export-for-plugin-targets.patch b/meta-oe/recipes-devtools/grpc/grpc/0001-cmake-add-separate-export-for-plugin-targets.patch
+> new file mode 100644
+> index 000000000..679bd3882
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/grpc/grpc/0001-cmake-add-separate-export-for-plugin-targets.patch
+> @@ -0,0 +1,93 @@
+> +From 3150cb043363e05588062dd392b940be25594713 Mon Sep 17 00:00:00 2001
+> +From: Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+> +Date: Tue, 18 Feb 2020 14:17:07 +0100
+> +Subject: [PATCH] cmake: add separate export for plugin targets
+> +
+> +Upstream-Status: Submitted [https://github.com/grpc/grpc/pull/29328]
+> +
+> +
+> +---
+> + CMakeLists.txt | 18 +++++++++++-------
+> + 1 file changed, 11 insertions(+), 7 deletions(-)
+> +
+> +diff --git a/CMakeLists.txt b/CMakeLists.txt
+> +index efdaf8936d..6608b1b00c 100644
+> +--- a/CMakeLists.txt
+> ++++ b/CMakeLists.txt
+> +@@ -10935,7 +10935,7 @@ target_link_libraries(grpc_cpp_plugin
+> +
+> +
+> + if(gRPC_INSTALL)
+> +-  install(TARGETS grpc_cpp_plugin EXPORT gRPCTargets
+> ++  install(TARGETS grpc_cpp_plugin EXPORT gRPCPluginTargets
+> +     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+> +     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+> +     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+> +@@ -10975,7 +10975,7 @@ target_link_libraries(grpc_csharp_plugin
+> +
+> +
+> + if(gRPC_INSTALL)
+> +-  install(TARGETS grpc_csharp_plugin EXPORT gRPCTargets
+> ++  install(TARGETS grpc_csharp_plugin EXPORT gRPCPluginTargets
+> +     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+> +     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+> +     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+> +@@ -11015,7 +11015,7 @@ target_link_libraries(grpc_node_plugin
+> +
+> +
+> + if(gRPC_INSTALL)
+> +-  install(TARGETS grpc_node_plugin EXPORT gRPCTargets
+> ++  install(TARGETS grpc_node_plugin EXPORT gRPCPluginTargets
+> +     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+> +     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+> +     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+> +@@ -11055,7 +11055,7 @@ target_link_libraries(grpc_objective_c_plugin
+> +
+> +
+> + if(gRPC_INSTALL)
+> +-  install(TARGETS grpc_objective_c_plugin EXPORT gRPCTargets
+> ++  install(TARGETS grpc_objective_c_plugin EXPORT gRPCPluginTargets
+> +     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+> +     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+> +     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+> +@@ -11095,7 +11095,7 @@ target_link_libraries(grpc_php_plugin
+> +
+> +
+> + if(gRPC_INSTALL)
+> +-  install(TARGETS grpc_php_plugin EXPORT gRPCTargets
+> ++  install(TARGETS grpc_php_plugin EXPORT gRPCPluginTargets
+> +     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+> +     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+> +     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+> +@@ -11135,7 +11135,7 @@ target_link_libraries(grpc_python_plugin
+> +
+> +
+> + if(gRPC_INSTALL)
+> +-  install(TARGETS grpc_python_plugin EXPORT gRPCTargets
+> ++  install(TARGETS grpc_python_plugin EXPORT gRPCPluginTargets
+> +     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+> +     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+> +     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+> +@@ -11175,7 +11175,7 @@ target_link_libraries(grpc_ruby_plugin
+> +
+> +
+> + if(gRPC_INSTALL)
+> +-  install(TARGETS grpc_ruby_plugin EXPORT gRPCTargets
+> ++  install(TARGETS grpc_ruby_plugin EXPORT gRPCPluginTargets
+> +     RUNTIME DESTINATION ${gRPC_INSTALL_BINDIR}
+> +     BUNDLE DESTINATION  ${gRPC_INSTALL_BINDIR}
+> +     LIBRARY DESTINATION ${gRPC_INSTALL_LIBDIR}
+> +@@ -17349,6 +17349,10 @@ if(gRPC_INSTALL)
+> +     DESTINATION ${gRPC_INSTALL_CMAKEDIR}
+> +     NAMESPACE gRPC::
+> +   )
+> ++  install(EXPORT gRPCPluginTargets
+> ++    DESTINATION ${gRPC_INSTALL_CMAKEDIR}
+> ++    NAMESPACE gRPC::
+> ++  )
+> + endif()
+> +
+> + include(CMakePackageConfigHelpers)
+> +--
+> +2.30.2
+> +
+> diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.45.0.bb b/meta-oe/recipes-devtools/grpc/grpc_1.45.0.bb
+> index d25a01cf3..d50fd2727 100644
+> --- a/meta-oe/recipes-devtools/grpc/grpc_1.45.0.bb
+> +++ b/meta-oe/recipes-devtools/grpc/grpc_1.45.0.bb
+> @@ -24,6 +24,7 @@ SRCREV_grpc = "494b08ada4009ead0d0b70e44d354be72f9c283a"
+>   BRANCH = "v1.45.x"
+>   SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
+>              file://0001-Revert-Changed-GRPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch \
+> +           file://0001-cmake-add-separate-export-for-plugin-targets.patch \
+>              "
+>   # Fixes build with older compilers 4.8 especially on ubuntu 14.04
+>   CXXFLAGS:append:class-native = " -Wl,--no-as-needed"
+> @@ -80,8 +81,6 @@ do_configure:prepend:toolchain-clang:x86() {
+>   
+>   BBCLASSEXTEND = "native nativesdk"
+>   
+> -SYSROOT_DIRS_IGNORE:append:class-target = " ${baselib}/cmake/grpc"
+> -
+>   FILES:${PN}-compiler += " \
+>       ${bindir} \
+>       ${libdir}/libgrpc_plugin_support${SOLIBS} \
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#96451): https://lists.openembedded.org/g/openembedded-devel/message/96451
+> Mute This Topic: https://lists.openembedded.org/mt/90310753/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
