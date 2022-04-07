@@ -1,154 +1,110 @@
-Return-Path: <ralph.siemsen@linaro.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EDFDC4321E
-	for <webhook@archiver.kernel.org>; Wed,  6 Apr 2022 18:41:41 +0000 (UTC)
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
- [209.85.160.172])
- by mx.groups.io with SMTP id smtpd.web11.1482.1649269069239206114
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3EEAC43217
+	for <webhook@archiver.kernel.org>; Thu,  7 Apr 2022 15:41:13 +0000 (UTC)
+Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com
+ [209.85.219.41])
+ by mx.groups.io with SMTP id smtpd.web11.835.1649290739436861740
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Apr 2022 11:17:49 -0700
+ Wed, 06 Apr 2022 17:18:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=B0M8Mutr;
- spf=pass (domain: linaro.org, ip: 209.85.160.172,
- mailfrom: ralph.siemsen@linaro.org)
-Received: by mail-qt1-f172.google.com with SMTP id t2so5786533qtw.9
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=mEjilFCJ;
+ spf=pass (domain: gmail.com, ip: 209.85.219.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f41.google.com with SMTP id x5so3809688qvk.4
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Apr 2022 11:17:49 -0700 (PDT)
+ Wed, 06 Apr 2022 17:18:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=iGMPZvA3UN2qv+N+Aj52LIlKyiOZurx9JJyAvXFfCa0=;
-        b=B0M8MutrKOzEfmO3yVqeUjej+to7MjKRiZj0gswSoYHObWj1oZrjw4UsspTVFODquU
-         RDcPYl12BCDtEOQ+tYJ1/5L0XXxA0h+CzUuro0IyI+offam9pOryU22Z6sly6xhJzWjQ
-         Hkv2xsgYG/RhC+A9FeIAWsYcW4gUBxxNcfW7ck7U3Pr0jptTXB64oiCV2iM74PYGcy9b
-         E4Y1NVOddlwAk7CXQLNTze5miNAabjCwEk1U85/IE3lGu80k8kNmo3lNwLqZLqFTQVFe
-         MFZZsPcdUnYTIuQIlobUWsYavaeDrp/YA+umBbVe771X7nkYqnBVvW01aJIGVncBYeHY
-         08zg==
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=GtlVupAZaZIjS6I2milZf0J2Tt7htfcmInY0zKgDdbI=;
+        b=mEjilFCJD8jNYHxEYEcc636paKt4aQTxNKIhM4dYoTy1dEv6QZy9zkSyW3Xn8q1Kc+
+         yNmQ3kjc6UjFyCjVuvlmEa5exGJRT5s1UDRkANU8EQmKfQfOetQdAvxspUUTUX08LIrt
+         vO9LFdDxFtZkeET7ruJ8qvYDmlyU9zWP0oxsLliZT02ffw635RT4yV9+yGKiVXpUCTlC
+         oVhZ5yCumdfjxc6WGnqy5UeWhdgTpc98vlZ2mmKJp5wKwuUaz3hV7Ao43j2WQxvvHt28
+         yZXkdTiAhLrSeLVs071Rx93l4FgD0ry8yg3ylwww+iT0yxXi01UO7jvRYb96Cj7tVuub
+         NukQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=iGMPZvA3UN2qv+N+Aj52LIlKyiOZurx9JJyAvXFfCa0=;
-        b=UMvw4w+6vkSxPNolv6KI2uX2iO/RV35q15eXHGWiAXDDRmNN3PJZoY/KArhhL9Z4P7
-         eaMf3bkz90RzK08PV+CS4nwn8v5sMwIgxS+ZS8cVQ9kSbqbJyhfZEaKgzzIGnsYeoFe4
-         kZWFmxUnnL15GZ8tLOAcJhaDEYm6EKGWCx8gB48cairS8DEubmvoLGgJgM7M6rvZqNQM
-         oee4f9xqe9R8yz4t7kwFFXW40i84IfoIdTH3QdBo0vpQFaUOusPYq7ZpOc/sMHZKmbI3
-         E+mGNCWiQIs6ewYIr2ribd1dPAiasLrHM9RGzSf50V0zbF0ZQleN2NQqp3WfPAmBRN8D
-         4Rpw==
-X-Gm-Message-State: AOAM530jcOImUN9jznJD0XKRcpzmL8Z2uHv4NeO1+IYBpwl1YxaEQJCz
-	SkXMoMAbSpwLnrjnOtQ9/IOnywbP4lR8rw==
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=GtlVupAZaZIjS6I2milZf0J2Tt7htfcmInY0zKgDdbI=;
+        b=vHQTKfJfL7WGY2LYKbr2YBFZQSxorGYBCOR0vcVggtnKvpG0tOUPITMIiGVlWunrSb
+         SEnWRaTizVFhlxZIDnFIXHFWdnpZpVO/FITDQSsrfkSmWbaJ6+eO6ZPLvA5v0gnwcDTN
+         lalSxLONICQeYCs33x3Js7NoygZky6gm1JBwu0lqNOlyCR+fBgWLuGAzjXea7NGtAdVk
+         4uYHrfcQjl0n1o4QbFakPTma+LWBoMaL9r3VA2HSLWmNVp6Ln4srG7chZlPGPDGieM3M
+         pp10ThqS5LOUZuZbo05VB7s+u/cz1bfxxR6BUcdqWFCHASnTPuO8og8gcaYjPBrSkpB1
+         22Mw==
+X-Gm-Message-State: AOAM533Q+0DT/biDiuMkmjBAABK0iKp8GyVUHfAroUtGK06Jo2SlW1jU
+	mpZueIrnFDjDV1bl2KrnL+qA1iatiySEiGZl3iU=
 X-Google-Smtp-Source: 
- ABdhPJyaT7Fz/qDaugOVIOczW8F3c331AjQgFM9euWLkOKHG1fmlsHlpM0tGFb16UGNn8XKSxYETaA==
-X-Received: by 2002:a05:622a:15c7:b0:2eb:9af4:cdf4 with SMTP id
- d7-20020a05622a15c700b002eb9af4cdf4mr8433444qty.241.1649269068330;
-        Wed, 06 Apr 2022 11:17:48 -0700 (PDT)
-Received: from maple.netwinder.org (rfs.netwinder.org. [206.248.184.2])
-        by smtp.gmail.com with ESMTPSA id
- f18-20020a05622a105200b002e1eb06ece3sm13447831qte.31.2022.04.06.11.17.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 06 Apr 2022 11:17:47 -0700 (PDT)
-From: Ralph Siemsen <ralph.siemsen@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: ranjitsinhrathod1991@gmail.com,
-	Ralph Siemsen <ralph.siemsen@linaro.org>
-Subject: [dunfell][PATCH] polkit: fix overlapping changes in recent CVE
- patches
-Date: Wed,  6 Apr 2022 14:17:39 -0400
-Message-Id: <20220406181739.1403657-1-ralph.siemsen@linaro.org>
-X-Mailer: git-send-email 2.25.1
+ ABdhPJx7tXoEQeRW4QxhXbSYNVKuKlcox+8Kq2axl8MObxgNj5SaA93ZgUIaBr0hVbb+fYiJ4RDZBctSulpEa/q2+1I=
+X-Received: by 2002:a0c:f9cc:0:b0:443:cec3:c9b5 with SMTP id
+ j12-20020a0cf9cc000000b00443cec3c9b5mr9726262qvo.36.1649290738463; Wed, 06
+ Apr 2022 17:18:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <1648784524-10262-1-git-send-email-zhengrq.fnst@fujitsu.com>
+In-Reply-To: <1648784524-10262-1-git-send-email-zhengrq.fnst@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 6 Apr 2022 20:18:32 -0400
+Message-ID: 
+ <CAMKF1sqaFVhYfKZ5JQML0qKxmWwCnktARuGPJ=YBmEEtJHeimA@mail.gmail.com>
+Subject: Re: [oe] [meta-python] [PATCH] python3-kiwisolver: upgrade 1.4.0 ->
+ 1.4.2
+To: zhengruoqin <zhengrq.fnst@fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Apr 2022 18:41:41 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 07 Apr 2022 15:41:13 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96440
+ https://lists.openembedded.org/g/openembedded-devel/message/96442
 
-Commit 17e931e77 ("polkit: fix CVE-2021-3560") contains
-- upstream commit a04d13affe0fa53ff618e07aa8f57f4c0e3b9b81
+fails to build
 
-Commit 67ec3e049 ("polkit: Fix for CVE-2021-4115") contains both:
-- upstream commit a04d13affe0fa53ff618e07aa8f57f4c0e3b9b81 (CVE-2021-3560)
-- upstream commit 41cb093f554da8772362654a128a84dd8a5542a7 (CVE-2021-4115)
+https://errors.yoctoproject.org/Errors/Details/654011/
 
-Thus the fix for CVE-2021-3560 is applied twice, resulting in warnings
-during do_patch. Curiously it neither fails nor complains about patch
-already applied. Also devtool silently discards the duplicate patch.
-
-Drop the duplicate patch, to resolve following warnings:
-
-WARNING: polkit-0.116-r0 do_patch: Fuzz detected:
-
-Applying patch 0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch
-patching file src/polkit/polkitsystembusname.c
-Hunk #1 succeeded at 438 with fuzz 2 (offset 3 lines).
-
-Applying patch CVE-2021-4115.patch
-patching file src/polkit/polkitsystembusname.c
-Hunk #4 succeeded at 439 with fuzz 2.
-
-Signed-off-by: Ralph Siemsen <ralph.siemsen@linaro.org>
----
- ...thentication-bypass-vulnerability-in.patch | 32 -------------------
- .../recipes-extended/polkit/polkit_0.116.bb   |  1 -
- 2 files changed, 33 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/polkit/files/0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch
-
-diff --git a/meta-oe/recipes-extended/polkit/files/0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch b/meta-oe/recipes-extended/polkit/files/0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch
-deleted file mode 100644
-index 2a2373ed5..000000000
---- a/meta-oe/recipes-extended/polkit/files/0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From a04d13affe0fa53ff618e07aa8f57f4c0e3b9b81 Mon Sep 17 00:00:00 2001
--From: Jan Rybar <jrybar@redhat.com>
--Date: Wed, 2 Jun 2021 15:43:38 +0200
--Subject: [PATCH] GHSL-2021-074: authentication bypass vulnerability in polkit
--
--initial values returned if error caught
--
--Upstream-Status: Backport [https://gitlab.freedesktop.org/polkit/polkit/-/commit/a04d13affe0fa53ff618e07aa8f57f4c0e3b9b81.patch]
--CVE: CVE-2021-4115
--Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
--
-----
-- src/polkit/polkitsystembusname.c | 3 +++
-- 1 file changed, 3 insertions(+)
--
--diff --git a/src/polkit/polkitsystembusname.c b/src/polkit/polkitsystembusname.c
--index 8daa12c..8ed1363 100644
----- a/src/polkit/polkitsystembusname.c
--+++ b/src/polkit/polkitsystembusname.c
--@@ -435,6 +435,9 @@ polkit_system_bus_name_get_creds_sync (PolkitSystemBusName           *system_bus
--   while (!((data.retrieved_uid && data.retrieved_pid) || data.caught_error))
--     g_main_context_iteration (tmp_context, TRUE);
-- 
--+  if (data.caught_error)
--+    goto out;
--+
--   if (out_uid)
--     *out_uid = data.uid;
--   if (out_pid)
---- 
--GitLab
--
-diff --git a/meta-oe/recipes-extended/polkit/polkit_0.116.bb b/meta-oe/recipes-extended/polkit/polkit_0.116.bb
-index ac48cf6c2..dd8e20861 100644
---- a/meta-oe/recipes-extended/polkit/polkit_0.116.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_0.116.bb
-@@ -27,7 +27,6 @@ SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.
-            file://0003-make-netgroup-support-optional.patch \
-            file://CVE-2021-3560.patch \
-            file://CVE-2021-4034.patch \
--           file://0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch \
-            file://CVE-2021-4115.patch \
-            "
- SRC_URI[md5sum] = "4b37258583393e83069a0e2e89c0162a"
--- 
-2.25.1
-
+On Thu, Mar 31, 2022 at 11:42 PM zhengruoqin <zhengrq.fnst@fujitsu.com> wrote:
+>
+> Changelog:
+> =========
+> This allows to buil with setuptools >= 61.2
+>
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+> ---
+>  ...{python3-kiwisolver_1.4.0.bb => python3-kiwisolver_1.4.2.bb} | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-python/recipes-devtools/python/{python3-kiwisolver_1.4.0.bb => python3-kiwisolver_1.4.2.bb} (82%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-kiwisolver_1.4.0.bb b/meta-python/recipes-devtools/python/python3-kiwisolver_1.4.2.bb
+> similarity index 82%
+> rename from meta-python/recipes-devtools/python/python3-kiwisolver_1.4.0.bb
+> rename to meta-python/recipes-devtools/python/python3-kiwisolver_1.4.2.bb
+> index ab1ad717b4..48ff7df52d 100644
+> --- a/meta-python/recipes-devtools/python/python3-kiwisolver_1.4.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-kiwisolver_1.4.2.bb
+> @@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/nucleic/kiwi"
+>  LICENSE = "BSD-3-Clause"
+>  LIC_FILES_CHKSUM = "file://LICENSE;md5=f137eeae9cf8004d06830f6ab25b2d52"
+>
+> -SRC_URI[sha256sum] = "7508b01e211178a85d21f1f87029846b77b2404a4c68cbd14748d4d4142fa3b8"
+> +SRC_URI[sha256sum] = "7f606d91b8a8816be476513a77fd30abe66227039bd6f8b406c348cb0247dcc9"
+>
+>  inherit pypi python_setuptools_build_meta
+>
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#96315): https://lists.openembedded.org/g/openembedded-devel/message/96315
+> Mute This Topic: https://lists.openembedded.org/mt/90170580/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
