@@ -1,122 +1,189 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <peron.clem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 367C4C4332F
-	for <webhook@archiver.kernel.org>; Fri,  8 Apr 2022 17:51:27 +0000 (UTC)
-Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com
- [209.85.160.182])
- by mx.groups.io with SMTP id smtpd.web10.183.1649439735571760442
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F347C433EF
+	for <webhook@archiver.kernel.org>; Fri,  8 Apr 2022 20:12:14 +0000 (UTC)
+Received: from mail-oa1-f52.google.com (mail-oa1-f52.google.com
+ [209.85.160.52])
+ by mx.groups.io with SMTP id smtpd.web08.915.1649445158149556979
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 08 Apr 2022 10:42:15 -0700
+ Fri, 08 Apr 2022 12:12:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=hYNroFmQ;
- spf=pass (domain: gmail.com, ip: 209.85.160.182,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f182.google.com with SMTP id a11so11156803qtb.12
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=E//CD2RV;
+ spf=pass (domain: gmail.com, ip: 209.85.160.52,
+ mailfrom: peron.clem@gmail.com)
+Received: by mail-oa1-f52.google.com with SMTP id
+ 586e51a60fabf-df22f50e0cso10725571fac.3
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 08 Apr 2022 10:42:15 -0700 (PDT)
+ Fri, 08 Apr 2022 12:12:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=47ft6p1qxRKyCUIJT+Np370EalSHki26RUZLUBJuvzA=;
-        b=hYNroFmQlhAzCHr0FaACjzM8wW33OO2FTsbHmN+0nY7pQuZZP2JKm4+0l3nVn/od+g
-         Tzz6GsnADbKGzY9nV3la06Nw+yC0bGK1GCCPKYIS9yoDrpcnqhaG6J05lkNJyZa5qiRc
-         sb0Pu9cYac74jqrf/zEKFb72YgTZfzYlVnzJsGe8VWjk/divAJg7GwSHOyVouDnbcseA
-         B7JILf8uHoX7yVmaSM0ArEAMVlwbMwqF6COBINzGHtXsfBZpBWi72GU6mWL1vG7FqRGw
-         /2+79RkRAazeLOJryPw/7BVSgl6diKhKYj2LQX9rwFMrEARj2xZvtPg+Idvdpch1cwmX
-         Bw/Q==
+         :cc:content-transfer-encoding;
+        bh=nKS1ijOLwC3wrBvnuqLCwxlSj+4bfWn/qYXZBvkT030=;
+        b=E//CD2RVGSKViaqpJAjIQxj3vXy9+oqIQEQxjq9kVUFIboM9Han4q7focNacNoeP/K
+         9X2W2F6GTHXqrLOWX6QjIDSD4y5XZ7vVjgCpPPkEcPygxLI0TMosLFUSI7k8C2Yn+9R3
+         9Jf8YuQBNpMOAkzB7fOODHH0hKCJTEw2Y1sUFGCEAiLdpRp67SpwEMypNMSY1PXK4NFX
+         hQ65HkcPelbrCj+jolgA0piBfMdeiwKsq8wbAL+4hTzRBwoxjIrW4I8hHH5Lid8JagPc
+         dV+Iu4IgY/aLZh185hOa6LOpl2eX+FQ4TM5/bZgz8IzO2LPW7I4PFikehDyM8pDpPwfm
+         AX5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=47ft6p1qxRKyCUIJT+Np370EalSHki26RUZLUBJuvzA=;
-        b=xXOA72GuMbiXppipXelCR8d7dEJExMMkELUn3WCw5qv5CxRF859to0korbZoSwLpqU
-         w6NfWiM/j13zSaE3KNkclzvN6p5So4gi21cEbsWjAsqtYMb/xxsl9Ev0+g4TStrrFRMj
-         k7lONFTLoJvCzmT/TIdJNAakpZnF/nW4qXHbxTGa+QC/QBrE0sFbFBq8B3VbYcvtEtYs
-         jgB9syb2kASxOi2zA4foSVEPzvEkzcKlzb64etevB/gWIjfMTt4vysyOn/MIQVRh2Lsf
-         KlFRlZqaxcRZu6reoLM1suMppCPvyrTVqCgjRITxDxiA0eTXDSjVQ+BFmqySe4+3Ix+o
-         RhQA==
-X-Gm-Message-State: AOAM530aCghnuSG/jAfLATxW7s8Er5/lujKBlALch/5D9AoijzK2hLml
-	GldcWNo7wpxhWXKvig51TPUROT51q5kCLprq7XQ=
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=nKS1ijOLwC3wrBvnuqLCwxlSj+4bfWn/qYXZBvkT030=;
+        b=k33m0rpUXMTieJKsRNtG9YkYeQ0OuufU5AM8OgpG57bQpNIQQCvxm4HJT2RnGzKYsr
+         BKJXLc4qwJJJlLbqd/t4ZLS/Dz80cjrKgxQutqa2uT2WJJolxnIcMsfezE+E726FH8EC
+         4ENlnGygEHEK45BAuzChWsPwqV4V/LYKzZqqPIpFGd8srfDSYAwda7PMiVh2ZhlVgqRh
+         dib+XVj7hGS45KVm9WpZCB0GFIxG+8WbQgAWBussrRdjp0cgY6KYS2IEXLozkRn/KMUm
+         NHenjgKKFZ9jK5gz4L40KUrzsJ0U8/qVKoh5lCfWllKVElF2z2NsXNi9xEjE2aK6LjEH
+         zacw==
+X-Gm-Message-State: AOAM5309LviuJ5Wv1Ho2fi4n/wy8pa/2G5JotMHXAdDFIc4pLmJd02vZ
+	RzoCVMEW/MpYwW3yz2B9Qk0IA5bb3drtHMTsNww=
 X-Google-Smtp-Source: 
- ABdhPJxebHervRZcKn1Hh0+OdZVjMpzDbh1czQwSY2YbyLCsPm+f0oQYWGsBLaSipgDVajaRJ+CtndrvEku1sTfjX+8=
-X-Received: by 2002:ac8:7dd1:0:b0:2e1:c708:12fa with SMTP id
- c17-20020ac87dd1000000b002e1c70812famr16521039qte.532.1649439734582; Fri, 08
- Apr 2022 10:42:14 -0700 (PDT)
+ ABdhPJxBpHSlJBjZssvPRK/hV1QIaSjTaM8mSoiEQyOkysxt1+xd7lQmhrDFsvbO+vjN0zQw6DASi5fTukxnT7bhwLs=
+X-Received: by 2002:a05:6870:f149:b0:de:e873:4a46 with SMTP id
+ l9-20020a056870f14900b000dee8734a46mr9031791oac.286.1649445157256; Fri, 08
+ Apr 2022 12:12:37 -0700 (PDT)
 MIME-Version: 1.0
-References: <16E3F6217A8A56EC.6461@lists.openembedded.org>
- <1ae383-3355-e547-def-e61659ebd42@spiteful.org>
-In-Reply-To: <1ae383-3355-e547-def-e61659ebd42@spiteful.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 8 Apr 2022 10:41:48 -0700
+References: 
+ <20220408073004.20207-1-stefan.herbrechtsmeier-oss@weidmueller.com>
+ <CAJiuCccdcaYf19Qx8-p7uO5TRPxwiAuwJwhw=AmCR=45DZpVRw@mail.gmail.com>
+ <568f92fd-be75-f0d3-5e3d-c4be0e4b6b76@weidmueller.com>
+In-Reply-To: <568f92fd-be75-f0d3-5e3d-c4be0e4b6b76@weidmueller.com>
+From: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
+Date: Fri, 8 Apr 2022 21:12:26 +0200
 Message-ID: 
- <CAMKF1srAwURgiKSrMyvJ-feu=4yCBDwzu3e_cSZK2jPh354s5g@mail.gmail.com>
-Subject: Re: [oe] [PATCH] wxwidgets: Fix building without x11
-To: Scott Murray <scott.murray@konsulko.com>
+ <CAJiuCce=b-bX54gSxSsmLtQEgLdON0GSrVB3gSYCHQmULnynoA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v2 1/2] grpc: add cmake support for target
+To: Stefan Herbrechtsmeier <stefan.herbrechtsmeier-oss@weidmueller.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Robert Yang <liezhi.yang@windriver.com>
+	Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 08 Apr 2022 17:51:27 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 08 Apr 2022 20:12:14 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96484
+ https://lists.openembedded.org/g/openembedded-devel/message/96485
 
-On Fri, Apr 8, 2022 at 10:36 AM Scott Murray <scott.murray@konsulko.com> wrote:
->
-> On Fri, 8 Apr 2022, Scott Murray via lists.openembedded.org wrote:
->
-> > Building with wayland and opengl in DISTRO_FEATURES without x11 as
-> > well was giving the error:
-> >
-> > wxwidgets: PACKAGECONFIG[no_gui] Conflict package config 'opengl' set in PACKAGECONFIG.
-> >
-> > Upon some investigation, it looks like wxwidgets now supports building
-> > against Gtk's Wayland support, so we can also enable it if wayland is
-> > in DISTRO_FEATURES.  For OpenGL, however, wxwidgets seems to have a
-> > dependency on libglu, so the DISTRO_FEATURES check has been changed
-> > to only enable it by default if both x11 and opengl are configured.
-> >
-> > Signed-off-by: Scott Murray <scott.murray@konsulko.com>
-> > ---
-> >  meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb | 6 +++---
-> >  1 file changed, 3 insertions(+), 3 deletions(-)
->
-> I hadn't checked the list before sending this, I'd be okay with Robert's
-> similar fix instead, though enabling building with wayland support seems
-> like it potentially could be useful to somebody.
+Hi Stefan,
 
-I have taken the latter fix since it was fixing wayland too.
+On Fri, 8 Apr 2022 at 14:47, Stefan Herbrechtsmeier
+<stefan.herbrechtsmeier-oss@weidmueller.com> wrote:
+>
+> Hi Clement,
+>
+> Am 08.04.2022 um 14:25 schrieb Cl=C3=A9ment P=C3=A9ron:
+> > Hi Stefan,
+> >
+> > On Fri, 8 Apr 2022 at 09:30, Stefan Herbrechtsmeier
+> > <stefan.herbrechtsmeier-oss@weidmueller.com> wrote:
+> >>
+> >> From: Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+> >>
+> >> The CMake gRPC config checks for binaries and fails if a binary (plugi=
+n)
+> >> is missing. Fix the problem in the code and add the CMake gRPC config
+> >> back to the target package.
+> >
+> > Thanks for your patch, I'm still using gRPC 1.35 + your previous simila=
+r patch.
+> > I'm trying to bump to gRPC 1.45.1 + these patches.
+> >
+> > My recipe use CMake and depends on grpc and grpc-native:
+> > PACKAGECONFIG[grpc] =3D "-DCONFIG_GRPC=3DON,-DCONFIG_GRPC=3DOFF,grpc gr=
+pc-native"
+> >
+> > But unfortunately CMake doesn't find the grpc_cpp_plugin.
+>
+> This is the correct behavior of my patch because the grpc_cpp_plugin
+> from the cross build isn't usable during cross build. You need the
+> grpc_cpp_plugin from the host and therefore have to search the
+> grpc_cpp_plugin by yourself during cross compile [1].
+>
+> My first patch was rejected and therefore I create a minimal patch which
+> only make the CMake gRPC config usable.
+>
+> >
+> > | -- Using gRPC 1.45.1
+> > ....
+> > | CMake Error at modules/grpc/CMakeLists.txt:37 (add_custom_command):
+> > |   Error evaluating generator expression:
+> > |
+> > |     $<TARGET_FILE:gRPC::grpc_cpp_plugin>
+> > |
+> > |   No target "gRPC::grpc_cpp_plugin"
+> > |
+> > |
+> > | CMake Error at modules/grpc/CMakeLists.txt:37 (add_custom_command):
+> > |   Error evaluating generator expression:
+> > |
+> > |     $<TARGET_FILE:gRPC::grpc_cpp_plugin>
+> > |
+> > |   No target "gRPC::grpc_cpp_plugin"
+> > |
+> > |
+> > | CMake Error at modules/grpc/CMakeLists.txt:37 (add_custom_command):
+> > |   Error evaluating generator expression:
+> > |
+> > |     $<TARGET_FILE:gRPC::grpc_cpp_plugin>
+> > |
+> > |   No target "gRPC::grpc_cpp_plugin"
+> >
+> > Here is my CMake source file:
+> >
+> > # Find Protobuf installation Yocto SDK doensn't support protobuf-config=
+.cmake
+> > # for the moment
+> > set(protobuf_MODULE_COMPATIBLE TRUE)
+> > find_package(Protobuf REQUIRED)
+> > message(STATUS "Using protobuf ${Protobuf_VERSION}")
+> > set(_PROTOBUF_LIBPROTOBUF protobuf::libprotobuf)
+> >
+> > # Find gRPC installation Looks for gRPCConfig.cmake file installed by g=
+RPC's
+> > # cmake installation.
+> > find_package(gRPC CONFIG REQUIRED)
+> > message(STATUS "Using gRPC ${gRPC_VERSION}")
+> > set(_REFLECTION gRPC::grpc++_reflection)
+> > set(_GRPC_GRPCPP gRPC::grpc++)
+> >
+> > # Get full path of protobuf/gRPC compiler
+> > set(_PROTOBUF_PROTOC $<TARGET_FILE:protobuf::protoc>)
+> > set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:gRPC::grpc_cpp_plugin>)
+>
+> You have to search the binaries if you cross compile [1]:
+>
+> if(CMAKE_CROSSCOMPILING)
+>    find_program(_GRPC_CPP_PLUGIN_EXECUTABLE grpc_cpp_plugin)
+> else()
+>    set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:gRPC::grpc_cpp_plugin>)
+> endif()
+
+Thanks this fix my issue
+
+Tested-by: Cl=C3=A9ment P=C3=A9ron <peron.clem@gmail.com>
 
 >
-> > diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
-> > index e82143040..e7e89d64a 100644
-> > --- a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
-> > +++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
-> > @@ -43,9 +43,9 @@ EXTRA_OECMAKE:append:libc-musl = " \
-> >      -DHAVE_LOCALE_T=OFF \
-> >  "
 > >
-> > -# All toolkit-configs except 'no_gui' require x11 explicitly (see toolkit.cmake)
-> > -PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', 'no_gui', d)} \
-> > -    ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)} \
-> > +# OpenGL support currently seems tied to using libglu, which requires x11
-> > +PACKAGECONFIG ?= "${@bb.utils.contains_any('DISTRO_FEATURES', 'x11 wayland', 'gtk', 'no_gui', d)} \
-> > +    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'opengl', '', d)} \
-> >  "
-> >
-> >  PACKAGECONFIG:remove:class-native = "opengl"
-> >
+> > Do you have an example of how you look for gRPC in your recipe?
 >
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#96483): https://lists.openembedded.org/g/openembedded-devel/message/96483
-> Mute This Topic: https://lists.openembedded.org/mt/90338460/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
+> This isn't possible because you use a target and not a variable.
+
+Maybe a dumb question but how protobuf-compiler handle this?
+
+Thanks,
+Clement
+
+
+
 >
+> [1] https://github.com/grpc/grpc/blob/master/examples/cpp/cmake/common.cm=
+ake
+>
+> Regards
+>    Stefan
 
