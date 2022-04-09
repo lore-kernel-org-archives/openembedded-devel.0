@@ -1,104 +1,86 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <marex@denx.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 56D2CC64E65
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31822C6371A
 	for <webhook@archiver.kernel.org>; Mon, 11 Apr 2022 17:18:02 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com
- [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web12.11019.1649538653594255675
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by mx.groups.io with SMTP id smtpd.web09.10019.1649533618376837603
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 09 Apr 2022 14:10:53 -0700
+ Sat, 09 Apr 2022 12:47:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=lsuuMMS3;
- spf=pass (domain: gmail.com, ip: 209.85.210.176,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id y8so6191759pfw.0
-        for <openembedded-devel@lists.openembedded.org>;
- Sat, 09 Apr 2022 14:10:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=t02bOdAbM05AMpvKitB129poNozAC+pLnIoaaDpDpRA=;
-        b=lsuuMMS3VLeDniqG9Xe/ronCPU4+vkBKqnHbyop0JhS6GpMax5Y5e0bPTE4FiV9pfS
-         fJ/WANQRgCPjdLle6XcuarLbO/8AQ+lFXXjv/uuPYZSSbYjR5qgzi0NZXDPksIvuRBX3
-         +mTlxgyvgZeMXrRtjL/u2G52Y8ALOlic6JIF4Dm38iO79ZMhH83KeTAnFtjy3TudiWj/
-         B2urhkEUW9gvrIXiKFGdMjUkpo6kgOOpOcelizfXYXm2FdeWyHMg/oVXAWMXyDXJQs1g
-         JvXMs8moEsF1go8fpsdHdbaRIW3pRpV3ABqOFJh41Nz0QhHc+fMyTDl3SU3odAuT3TyK
-         qxoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=t02bOdAbM05AMpvKitB129poNozAC+pLnIoaaDpDpRA=;
-        b=1wQR7oTtuuEBU+kI+QETx5uFXei98YVyF3G1SF5jCur5YRXKoiM/OJ2OQSnP+ZQ0dr
-         RcYF5gvs5xkzm3lcwpE2mbBftKAi+H/CFRc2OQD93d5MXqTFvzOi766Acy84neCMRFLB
-         /HdVb/zy6wo+z9pk58UihvTdxoYo+Hnecj8xm9RNmDNddIxMWUEjgyQzmE2AMAVUuD0+
-         M4aW7o5RJgEai1gfseyez+O3fH/d7qvqXy6qRWoJGA2lPa4IQKddAJchWktqfuU2DRwQ
-         Iowvw1zB9J7NXZNRudpRu3xqsya6p0yqWapVPPEcw9Ou9EL1SoJhsdrHBI4qs7DWHqdR
-         s/sw==
-X-Gm-Message-State: AOAM533wMD3tcjG5PS+1G9eqKbJdas3kC+Jri6BFFaisQdCAVHZn1H9H
-	3Jl0apRe7iYdb9ta3anYZjnMVVcyul+gFg==
-X-Google-Smtp-Source: 
- ABdhPJy+c7dQVxBfNC/ZGQYt7kulyih8L72R3QCb43DIl9HpqscHLqWaTOKXnMmbVHdwaSPw4Ty0Yw==
-X-Received: by 2002:aa7:8154:0:b0:505:68a6:600d with SMTP id
- d20-20020aa78154000000b0050568a6600dmr14254032pfn.35.1649538652822;
-        Sat, 09 Apr 2022 14:10:52 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::94ca])
-        by smtp.gmail.com with ESMTPSA id
- a16-20020a17090a6d9000b001c9c3e2a177sm15521499pjk.27.2022.04.09.14.10.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 09 Apr 2022 14:10:52 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=fail reason="body hash did not verify" header.i=@denx.de
+ header.s=phobos-20191101 header.b=dlZU05SS;
+ spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: marex@denx.de)
+Received: from tr.lan (ip-89-176-112-137.net.upcbroadband.cz [89.176.112.137])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: marex@denx.de)
+	by phobos.denx.de (Postfix) with ESMTPSA id C2335820A3;
+	Sat,  9 Apr 2022 21:46:55 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1649533615;
+	bh=4JzkuiRJNxg8DnRumd/a5nxfj0fDLQonmWWwO5YloDg=;
+	h=From:To:Cc:Subject:Date:From;
+	b=dlZU05SSCwXmiHnacrPWC0+yg7MrX1EsM0RtCzRxFsJVQ7dYIp5krIjpR093suHAN
+	 TVRv4iXL1pIKMilxbF4AO+8acwMVOXYhCeLv6OvbAMzpeOMs1XcvS07mJaL8B3SdDj
+	 W8JvjBAPI1p73CFuRqQOU8iGT259SKrfS5FPerK7wf36uKOyMV13txb7cvNITXEfUT
+	 3CQETS4c/NrKmC5bnTmA/sC4friZWMMiGqsPn3nxNYlLji6htlrLY8eI6rS6vGwa1u
+	 qpiInyYX2qZzqUqESmj/9///Zs+UoUQTbTcCUjYu8Gd0zTbGeWK+0aUDvzhDkNePVt
+	 syGXIq27LQT7A==
+From: Marek Vasut <marex@denx.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] libcereal: Disable on ppc64
-Date: Sat,  9 Apr 2022 14:10:50 -0700
-Message-Id: <20220409211050.281341-1-raj.khem@gmail.com>
+Cc: raj.khem@gmail.com,
+	Marek Vasut <marex@denx.de>
+Subject: [meta-oe][PATCH] wxwidgets: Fix build without x11 and with opengl
+ DISTRO_FEATURES
+Date: Sat,  9 Apr 2022 21:46:44 +0200
+Message-Id: <20220409194644.78969-1-marex@denx.de>
 X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Virus-Scanned: clamav-milter 0.103.5 at phobos.denx.de
+X-Virus-Status: Clean
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 11 Apr 2022 17:18:02 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96503
+ https://lists.openembedded.org/g/openembedded-devel/message/96501
 
-It does not support 128-bit long doubles
+In case DISTRO_FEATURES contains both 'x11' and 'opengl', which is a
+valid use case for systems using e.g. WL instead, the PACKAGECONFIG
+of this recipe is expanded to 'no_gui opengl', and the 'no_gui' option
+conflicts with 'opengl'.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Adjust the default PACKAGECONFIG such that 'opengl' is added only in
+case the 'gtk' GUI option is added, and not when the 'no_gui' option
+is added.
+
+Signed-off-by: Marek Vasut <marex@denx.de>
 ---
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 2 +-
- meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb       | 3 +++
- 2 files changed, 4 insertions(+), 1 deletion(-)
+ meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 08d9e91704..bdd62eadfd 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -949,7 +949,7 @@ RDEPENDS:packagegroup-meta-oe-support:remove:mipsarch = "gperftools"
- RDEPENDS:packagegroup-meta-oe-support:remove:riscv64 = "gperftools uim"
- RDEPENDS:packagegroup-meta-oe-support:remove:riscv32 = "gperftools uim"
- RDEPENDS:packagegroup-meta-oe-support:remove:powerpc = "ssiapi tbb"
--RDEPENDS:packagegroup-meta-oe-support:remove:powerpc64le = "ssiapi"
-+RDEPENDS:packagegroup-meta-oe-support:remove:powerpc64le = "libcereal ssiapi"
- RDEPENDS:packagegroup-meta-oe-support:remove:libc-musl = "pcp"
- RDEPENDS:packagegroup-meta-oe-support:remove:libc-musl:powerpc = "gsl"
- 
-diff --git a/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb b/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
-index b76cd2eb60..fbd0ce1aad 100644
---- a/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
-+++ b/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
-@@ -44,3 +44,6 @@ ALLOW_EMPTY:${PN} = "1"
- RDEPENDS:${PN}-dev = ""
- 
- BBCLASSEXTEND = "native nativesdk"
-+
-+#it needs to work with CXXFLAGS += " -mlong-double-64" but ppc64 only supports 128bit long double
-+COMPATIBLE_HOST:powerpc64le = "null"
--- 
+diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb b/meta=
+-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
+index e82143040..0c0c8417b 100644
+--- a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
++++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
+@@ -44,8 +44,7 @@ EXTRA_OECMAKE:append:libc-musl =3D " \
+ "
+=20
+ # All toolkit-configs except 'no_gui' require x11 explicitly (see toolki=
+t.cmake)
+-PACKAGECONFIG ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk'=
+, 'no_gui', d)} \
+-    ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)} \
++PACKAGECONFIG ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk =
+' + bb.utils.filter('DISTRO_FEATURES', 'opengl', d), 'no_gui', d)} \
+ "
+=20
+ PACKAGECONFIG:remove:class-native =3D "opengl"
+--=20
 2.35.1
 
 
