@@ -1,181 +1,105 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 12670C63715
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 38A44C6371D
 	for <webhook@archiver.kernel.org>; Mon, 11 Apr 2022 17:18:02 +0000 (UTC)
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com
- [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.web08.31847.1649696371362208541
+Received: from mail-qv1-f46.google.com (mail-qv1-f46.google.com
+ [209.85.219.46])
+ by mx.groups.io with SMTP id smtpd.web09.10082.1649534036680109669
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Apr 2022 09:59:31 -0700
+ Sat, 09 Apr 2022 12:53:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=JFkvkTwn;
- spf=pass (domain: gmail.com, ip: 209.85.215.180,
- mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f180.google.com with SMTP id t13so14705854pgn.8
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=nBrJRsKZ;
+ spf=pass (domain: gmail.com, ip: 209.85.219.46, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f46.google.com with SMTP id x20so846202qvl.10
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Apr 2022 09:59:31 -0700 (PDT)
+ Sat, 09 Apr 2022 12:53:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=nhrvfJW5o9UPYjzrZcB5iaaimFGzVBGE+tI9HmJ4QZU=;
-        b=JFkvkTwnA8PUEbI8n2rXuW79wxZEmuyRntkK6QUwe2kUxMPPtetK0isl/4dWBW9Zif
-         +WlL3CH/OrsZu1/tTGAc52U+8GqY7aP6FRB+qBLXv2RFHiUvxQ50iN0K6k3WvVVoh1Q7
-         32mDHprKEQF49yjdbxIhkhCrR79/U4oJRBQ/ts8cw6UDjvXb+XIHtHI2jOKMyQVJEqM3
-         P7JhYO2tiCnR+vCQGUoDGtg8cNq8ieyEDqHq12wlOWZMjI7EjQCxMLOohOikAUPG3CGK
-         /dOz+/tZO9UyHIWPzG2N01p+EfL7cPVM8OuMGpOqtT9mN13Uj6CHNTAs69bn3iRqN6Xh
-         hv5g==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=uvHMZ9HMp6iMaV8IRHhsEBDNKFCmcrbUm4jxxcblZGs=;
+        b=nBrJRsKZZ0B9r8zGJNwQxVxf6kreJp18IJErW14EzLPcFihyMexC4FOHase9zjIT2H
+         8nJKmGlpWNhYsxK3+lVhaBirxFIG13yU9oL7Uk2d3KqxiiK9Cqd8BNN02GcOYRi2C/Bl
+         4vz4eSODOevoKKKau8y4VSM4PJR2vZX8hpYBbNgeEjkOtL4R2wp4puRcUud3wO85vp1r
+         Jl6I+vUQWQyN6wqyAV3IJ/qO68j5a238IPtMR9ufvEMiMuMsXqwRaXrkvju/SxCatfhK
+         hcOZYI5EBj5pPHWmRrkJh5BgDmsalT8IzbY0PJ1e5mtt9C0LgawMcCWVr0EZYTUNoru4
+         Y3Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=nhrvfJW5o9UPYjzrZcB5iaaimFGzVBGE+tI9HmJ4QZU=;
-        b=HLxYsywx2qYpQJCOaoXDdbpJ2c1g13pK18bjQmttJo1aDz5mGjuyQDYmlsacSNf8Ez
-         BwKTm5dbz7JXb8Kk5rT9TBmJK0uB1i0gv4t2oGuU7O5CEYHu1seYYxPsC6EKpoTbboyc
-         5dS2uFZGKSBTGzwMs9Dzh1TLnSYMPdb71RT2cRdA9re6/XSih7lbS7BEulqJecat5iWS
-         mJ40M24n+StAfFOctv7l5mv++fmSom+bnm11qQ+HfPbyO75W/6+/qgMp7oiAv/4/iWba
-         2KP1LQBkgnDQ5i4h8cz3MvxJv4knq6i01cRaYII1wkym0KHbD1RfKaz/JiwkNqgu5ZQG
-         5xqw==
-X-Gm-Message-State: AOAM531iff9tqbKU/5iaGvHOddCQEat8DpI3LutP5nB5s8imup+c1jKH
-	Cta+UO4BGcHWlrPC51cVV3zHZk2n2lQ=
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=uvHMZ9HMp6iMaV8IRHhsEBDNKFCmcrbUm4jxxcblZGs=;
+        b=HCI6/jEo7Y0I6ySX2zK1oCi6syTxr07etwg4c+RXeAkqzzHKH+geX8dwkBHTjyxw7K
+         vbwweiFomkcWhcSfLaWCl/uZbkTDAJ1ZVyb/h9onXCdc7z+A2O7uL55GJf974EAIMxJh
+         aoTbhp4+MgKM09QIkgchEIo1Q2aXc2JyZD7qKTOkiUgQCM9VwBe/CT/XTrIrPixsaRSE
+         XzdMWzArwn+NyHVn0GMevGGpLkHJDrp8amPGpORkH8F1VH6m0XDqxu0neLFxF0Y90EcI
+         Rwyt+dQ0ScIKOISQRoXtOif1kf4t639wGfrNyW2l/8Lc8si/cK2moWZkW/QJyjAoiIb+
+         IQ7g==
+X-Gm-Message-State: AOAM5313XRB706DkxdtfaMIyru9KwsdPV4IhKpsF+CaOTYAv0zmD++iw
+	2B2IU+Bg1YW68jOGB/Sf090XLQ2n/+xHzag0QFJ+1Dzho/ojOA==
 X-Google-Smtp-Source: 
- ABdhPJwYERRQv05mbNbo2u+a2e+hA7DWwBRHVxx/jcLJ5HO8EJtRR26xlAs41XRzu1FnCpQugQQnQQ==
-X-Received: by 2002:a63:e557:0:b0:39d:2965:a7f0 with SMTP id
- z23-20020a63e557000000b0039d2965a7f0mr8548714pgj.158.1649696370681;
-        Mon, 11 Apr 2022 09:59:30 -0700 (PDT)
-Received: from ?IPV6:2601:202:4180:a5c0:70d5:c5c2:9136:2337?
- ([2601:202:4180:a5c0:70d5:c5c2:9136:2337])
-        by smtp.gmail.com with ESMTPSA id
- w13-20020a17090a5e0d00b001c7d4099670sm43266pjf.28.2022.04.11.09.59.29
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 11 Apr 2022 09:59:30 -0700 (PDT)
-Message-ID: <1e8b3bfa-fa3f-dbab-9e10-b74e849bd925@gmail.com>
-Date: Mon, 11 Apr 2022 09:59:28 -0700
+ ABdhPJz0gbytpDqGvXluvRtoBUGgrvz6kAGImyaOIrjZcCUh5iipPyZGj+5BADP2rpxr8XANyEBRZd83xIh5EEED6fE=
+X-Received: by 2002:ad4:4186:0:b0:444:1732:d48d with SMTP id
+ e6-20020ad44186000000b004441732d48dmr10802304qvp.24.1649534035669; Sat, 09
+ Apr 2022 12:53:55 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: Re: [oe] [meta-oe][hardknott][PATCH] sdbus-c++-libsystemd: Avoid hard
- dependency on rsync
-Content-Language: en-US
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-References: <16E4E5FA997EC5EE.17061@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <16E4E5FA997EC5EE.17061@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20220409194644.78969-1-marex@denx.de>
+In-Reply-To: <20220409194644.78969-1-marex@denx.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 9 Apr 2022 12:53:29 -0700
+Message-ID: 
+ <CAMKF1sord5m4Ne_P+QJ=K4AM3=SvAbJbO2UMT1HaeVuk3G1auw@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH] wxwidgets: Fix build without x11 and with opengl
+ DISTRO_FEATURES
+To: Marek Vasut <marex@denx.de>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 11 Apr 2022 17:18:02 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96556
+ https://lists.openembedded.org/g/openembedded-devel/message/96502
 
-ignore this one. wrong branch
+There is already a patch staged in master-next
 
--armin
+https://lists.openembedded.org/g/openembedded-devel/message/96479
 
-On 4/11/22 09:57, Armin Kuster via lists.openembedded.org wrote:
-> From: Khem Raj <raj.khem@gmail.com>
+does that solve the problem?
+
+On Sat, Apr 9, 2022 at 12:46 PM Marek Vasut <marex@denx.de> wrote:
 >
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> (cherry picked from commit dcb8ab6169bd93440137bbd4703171987ecd3a15)
-> [Fixup for hardknott context]
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> In case DISTRO_FEATURES contains both 'x11' and 'opengl', which is a
+> valid use case for systems using e.g. WL instead, the PACKAGECONFIG
+> of this recipe is expanded to 'no_gui opengl', and the 'no_gui' option
+> conflicts with 'opengl'.
+>
+> Adjust the default PACKAGECONFIG such that 'opengl' is added only in
+> case the 'gtk' GUI option is added, and not when the 'no_gui' option
+> is added.
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 > ---
->   ...d25119a495009ea62f79e5daec34cc464628.patch | 53 +++++++++++++++++++
->   .../sdbus-c++/sdbus-c++-libsystemd_243.bb     |  7 +--
->   2 files changed, 57 insertions(+), 3 deletions(-)
->   create mode 100644 meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd-243/7c5fd25119a495009ea62f79e5daec34cc464628.patch
+>  meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
 >
-> diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd-243/7c5fd25119a495009ea62f79e5daec34cc464628.patch b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd-243/7c5fd25119a495009ea62f79e5daec34cc464628.patch
-> new file mode 100644
-> index 0000000000..ae449791f1
-> --- /dev/null
-> +++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd-243/7c5fd25119a495009ea62f79e5daec34cc464628.patch
-> @@ -0,0 +1,53 @@
-> +From 7c5fd25119a495009ea62f79e5daec34cc464628 Mon Sep 17 00:00:00 2001
-> +From: =?UTF-8?q?Zbigniew=20J=C4=99drzejewski-Szmek?= <zbyszek@in.waw.pl>
-> +Date: Mon, 12 Apr 2021 14:03:32 +0200
-> +Subject: [PATCH] meson: do not fail if rsync is not installed with meson
-> + 0.57.2
-> +
-> +https://github.com/mesonbuild/meson/issues/8641
-> +
-> +Our CI started to fail. Even if the change is reverted in meson,
-> +we need a quick workaround here.
-> +
-> +Upstream-Status: Backport
-> +Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
-> +---
-> + man/meson.build | 25 ++++++++++++++-----------
-> + 1 file changed, 14 insertions(+), 11 deletions(-)
-> +
-> +diff --git a/man/meson.build b/man/meson.build
-> +index 3cae8446cda..f9c4b83dc81 100644
-> +--- a/man/meson.build
-> ++++ b/man/meson.build
-> +@@ -184,17 +184,20 @@ html = custom_target(
-> +         depends : html_pages,
-> +         command : ['echo'])
-> +
-> +-run_target(
-> +-        'doc-sync',
-> +-        depends : man_pages + html_pages,
-> +-        command : ['rsync', '-rlv',
-> +-                   '--delete-excluded',
-> +-                   '--include=man',
-> +-                   '--include=*.html',
-> +-                   '--exclude=*',
-> +-                   '--omit-dir-times',
-> +-                   meson.current_build_dir(),
-> +-                   get_option('www-target')])
-> ++rsync = find_program('rsync', required : false)
-> ++if rsync.found()
-> ++        run_target(
-> ++                'doc-sync',
-> ++                depends : man_pages + html_pages,
-> ++                command : [rsync, '-rlv',
-> ++                           '--delete-excluded',
-> ++                           '--include=man',
-> ++                           '--include=*.html',
-> ++                           '--exclude=*',
-> ++                           '--omit-dir-times',
-> ++                           meson.current_build_dir(),
-> ++                           get_option('www-target')])
-> ++endif
-> +
-> + ############################################################
-> +
-> diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_243.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_243.bb
-> index c52024130e..59d6f352c8 100644
-> --- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_243.bb
-> +++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_243.bb
-> @@ -12,9 +12,10 @@ DEPENDS += "gperf-native gettext-native util-linux libcap"
->   
->   SRCREV = "efb536d0cbe2e58f80e501d19999928c75e08f6a"
->   SRCBRANCH = "v243-stable"
-> -SRC_URI = "git://github.com/systemd/systemd-stable.git;protocol=https;branch=${SRCBRANCH}"
-> -
-> -SRC_URI += "file://static-libsystemd-pkgconfig.patch"
-> +SRC_URI = "git://github.com/systemd/systemd-stable.git;protocol=https;branch=${SRCBRANCH} \
-> +           file://static-libsystemd-pkgconfig.patch \
-> +           file://7c5fd25119a495009ea62f79e5daec34cc464628.patch \
-> +           "
->   
->   # patches needed by musl
->   SRC_URI_append_libc-musl = " ${SRC_URI_MUSL}"
+> diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
+> index e82143040..0c0c8417b 100644
+> --- a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
+> +++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
+> @@ -44,8 +44,7 @@ EXTRA_OECMAKE:append:libc-musl = " \
+>  "
 >
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#96554): https://lists.openembedded.org/g/openembedded-devel/message/96554
-> Mute This Topic: https://lists.openembedded.org/mt/90399667/3616698
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
+>  # All toolkit-configs except 'no_gui' require x11 explicitly (see toolkit.cmake)
+> -PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', 'no_gui', d)} \
+> -    ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)} \
+> +PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk ' + bb.utils.filter('DISTRO_FEATURES', 'opengl', d), 'no_gui', d)} \
+>  "
 >
-
+>  PACKAGECONFIG:remove:class-native = "opengl"
+> --
+> 2.35.1
+>
 
