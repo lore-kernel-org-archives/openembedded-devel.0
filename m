@@ -2,62 +2,62 @@ Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C95B6C38A06
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BE170C4708A
 	for <webhook@archiver.kernel.org>; Mon, 11 Apr 2022 17:17:58 +0000 (UTC)
-Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com
- [209.85.167.43])
- by mx.groups.io with SMTP id smtpd.web10.21341.1649623477038653638
+Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com
+ [209.85.167.51])
+ by mx.groups.io with SMTP id smtpd.web08.21493.1649623411519009510
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 10 Apr 2022 13:44:37 -0700
+ Sun, 10 Apr 2022 13:43:31 -0700
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=ZVdqyWT9;
+ header.s=20210112 header.b=LaWHT2Hw;
  spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.167.43, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f43.google.com with SMTP id x33so16932884lfu.1
+ ip: 209.85.167.51, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f51.google.com with SMTP id o2so1731499lfu.13
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 10 Apr 2022 13:44:36 -0700 (PDT)
+ Sun, 10 Apr 2022 13:43:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=/G81XrRJY6Cko/yd9izjAIvkR5GAfIC/QfpYEGOzYl4=;
-        b=ZVdqyWT9Q6URk2+3qhsvOk8r2TdnejStu3pdz2F0DQF9TYaazhKVC2DoMSFnWSNpUy
-         Ex0G3zue07uObu3qnoBNeUgyr+7JhB5RRDgLdSpMey6Q21VjMf6lCnZYYon3AJmVUC9Y
-         X/64qZCmK2macCr/M8/LSNPIUssJW7kzB/x7XYejBtveSdmB0U3FMBnqF1ifqWH/KJG+
-         OGb9v8+10g4RH2bim3On4di16k0Wr0e1J+MjwS8lWUKVIjzeyqnVNtdA73vMvi6/er5f
-         8zVoU6qhtdnW0mHTfTYVZ8oSbGnpOLNK8SJmkbcQS+M/Z1/OCb/e0OO4Oud8n7xFJaWI
-         6rYg==
+        bh=HjFDHcbp3HQcOGMRg9q8/J4MYwUQDH1d6xCETgR7E98=;
+        b=LaWHT2HwcJ49C7+WQ1mzn39hpp7QaRVahS/n59lC9+YIg8hLUpLyZrBHCvPWu5hkDl
+         ChXNqs/Yr7olYU/onHPnOYRapkzkzw8oVHKt2j9+6ogjWIh4qXMZt+zhTmrp/v2lCIKx
+         0KK/12Y/N8JuUiGnXDDx/2PNbNg3XV9O4B1Xf4zpgtj6dogKSPW6oV2Z1mIQzswFfDaA
+         KrH7BwyCyeZ+195LJkQ9DJ/ghg/hvrtfI07bWtp4CZbdls2EKonOHRyQqdWI34vI5AGM
+         s1/L2I9SfVR9uXzvcpTPJ09EpIbb9ZzZcPWjvi8CakGAvHAUME6bCTe6XqM13FN5rfKQ
+         JEDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=/G81XrRJY6Cko/yd9izjAIvkR5GAfIC/QfpYEGOzYl4=;
-        b=JWO5scJXl1pNURjN7hd9CWrOkwqZ0H++14R9uO7D7pR65n0xNM4Nfk6jZZ9xx2UqUu
-         07S8wHbKEitPbSaYSNvTo605A2CQi1PNu9fgMJwanhMVgshRHkGy23k7pxd7zoYNIEDf
-         kYDyC4FgudD7O25Atqm/LNHwgrv5esSjpwCPTBhoOOInp4WYruqgncyYd63B+yEhmm8u
-         8o+Ee5ZE+Q9QPrmxjfjlUsFpgksS47dJDY2jB0XPAinfJ5TuqdhHRLuRBU3NvF29VcjS
-         k08Ah8nhRr1S5I2KWTLAfndZKyqN8b20FSDElszmx6vqsz/hPT+h5jAfbfbavL/ZAo9k
-         37BQ==
-X-Gm-Message-State: AOAM530mDw/YIGjhIjPSdbl5V2hi3XFLWsrh5vueFSFjHaGKHbQQ6+ub
-	1yw6C8+4TX5PMcDAkPJqzZ3K1XtSo0RdYdVB
+        bh=HjFDHcbp3HQcOGMRg9q8/J4MYwUQDH1d6xCETgR7E98=;
+        b=KPb1B0BS+ez4MR7f1EwlSJ/naMgAvzOxenCKswgKitORURejgNlO3+PgR+X3yv/IG+
+         g5uVQXYyMpZA8BOwoX3RvdAQXCLWFMKhrdoVU93hslMdDVJSMAq6Q6qEQmg8ofK8BXiN
+         XOnOPOAvSbBMYz57FaXC4mRbikueNNRbZf1S3gmoyXR4Pg0OEAZHFC7+UOu0HWE/ztNY
+         S2iVHLIskqx+fa3u8XqZplYpLaak9tLstnrbc+oKYkHbEzuc+d8SlVCf0PdIjF/OorEj
+         tL9VHKLq3zxprc5QJn6WxNRD8x+xx0B35Afh9xR0E5iqvv7BTZ5/HgxGaJB4n3vBdwls
+         Ccxg==
+X-Gm-Message-State: AOAM531T5x7s+ihqzd/Mx/gjPaVD4Aq+701/9g4uofZlFkVt3Vkc4VoK
+	Bx8jAsboI3dvKMkp/RgbRjQGGt/1l6g1Khep
 X-Google-Smtp-Source: 
- ABdhPJzuJ7wS5EAGWDLwTkhPucHp4WB952ZRjjv74OZLGrj6lZqa0mO9iRh+pg0aUk6mkEhKusO8bA==
-X-Received: by 2002:a05:6512:1148:b0:44a:6c26:e5a9 with SMTP id
- m8-20020a056512114800b0044a6c26e5a9mr18830242lfg.491.1649623475000;
-        Sun, 10 Apr 2022 13:44:35 -0700 (PDT)
+ ABdhPJw4yMBpfuoN4asEdEcyjH6qMfbTDbE3Nu3hhOxBAyQQ6An0X/7Mmt2cjHIp7EfN+vVbxfR0mQ==
+X-Received: by 2002:a05:6512:1116:b0:46b:8d74:26ef with SMTP id
+ l22-20020a056512111600b0046b8d7426efmr7063310lfg.546.1649623409357;
+        Sun, 10 Apr 2022 13:43:29 -0700 (PDT)
 Received: from localhost.localdomain
  (c-7918524e.023-160-67626725.bbcust.telenor.se. [78.82.24.121])
         by smtp.gmail.com with ESMTPSA id
- s30-20020a195e1e000000b0046ba5a4a75esm190310lfb.148.2022.04.10.13.44.34
+ f16-20020a05651201d000b00464f22b4242sm1173994lfp.159.2022.04.10.13.43.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 10 Apr 2022 13:44:34 -0700 (PDT)
+        Sun, 10 Apr 2022 13:43:29 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python][PATCH] python3-google-api-core: update to 2.7.1
-Date: Sun, 10 Apr 2022 22:44:32 +0200
-Message-Id: <20220410204432.4047253-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-python][PATCH] python3-google-auth: update to 2.6.3
+Date: Sun, 10 Apr 2022 22:43:27 +0200
+Message-Id: <20220410204327.4046638-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -66,27 +66,27 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 11 Apr 2022 17:17:58 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96527
+ https://lists.openembedded.org/g/openembedded-devel/message/96526
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- ...oogle-api-core_2.3.2.bb => python3-google-api-core_2.7.1.bb} | 2 +-
+ ...ython3-google-auth_2.3.0.bb => python3-google-auth_2.6.3.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-google-api-core_2.3.2.bb => python3-google-api-core_2.7.1.bb} (87%)
+ rename meta-python/recipes-devtools/python/{python3-google-auth_2.3.0.bb => python3-google-auth_2.6.3.bb} (87%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-google-api-core_2.3.2.bb b/meta-python/recipes-devtools/python/python3-google-api-core_2.7.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-google-auth_2.3.0.bb b/meta-python/recipes-devtools/python/python3-google-auth_2.6.3.bb
 similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-google-api-core_2.3.2.bb
-rename to meta-python/recipes-devtools/python/python3-google-api-core_2.7.1.bb
-index c43fa4c58..55884e99c 100644
---- a/meta-python/recipes-devtools/python/python3-google-api-core_2.3.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-google-api-core_2.7.1.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+rename from meta-python/recipes-devtools/python/python3-google-auth_2.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-google-auth_2.6.3.bb
+index 9d192c15e..ee5311f4f 100644
+--- a/meta-python/recipes-devtools/python/python3-google-auth_2.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-google-auth_2.6.3.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
  
  inherit pypi setuptools3
  
--SRC_URI[sha256sum] = "c8889f45cf58deca522888ae1d39b2a25e93e7d1b019ae8cee6456d5c726a40c"
-+SRC_URI[sha256sum] = "b0fa577e512f0c8e063386b974718b8614586a798c5894ed34bedf256d9dae24"
+-SRC_URI[sha256sum] = "2800f6dfad29c6ced5faf9ca0c38ea8ba1ebe2559b10c029bd021e3de3301627"
++SRC_URI[sha256sum] = "d65bb0e3701eaaa64fd2aa85e1325580524b0bddc6dc5db3ab89c481b6a20141"
  
  RDEPENDS:${PN} += "\
      ${PYTHON_PN}-asyncio \
