@@ -1,47 +1,63 @@
-Return-Path: <preeti.sachan@intel.com>
+Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3955BC46467
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7761EC35296
 	for <webhook@archiver.kernel.org>; Mon, 11 Apr 2022 17:17:58 +0000 (UTC)
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
- by mx.groups.io with SMTP id smtpd.web10.19125.1649610407460577117
- for <Openembedded-devel@lists.openembedded.org>;
- Sun, 10 Apr 2022 10:06:47 -0700
+Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com
+ [209.85.167.44])
+ by mx.groups.io with SMTP id smtpd.web11.21899.1649623227991502042
+ for <openembedded-devel@lists.openembedded.org>;
+ Sun, 10 Apr 2022 13:40:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel
- header.b=RrDf0un7;
- spf=pass (domain: intel.com, ip: 192.55.52.151,
- mailfrom: preeti.sachan@intel.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1649610407; x=1681146407;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=Ebf6wUyDSA1gJc8duJ3tgQi/zdK7tuRfafAjG2tQXIw=;
-  b=RrDf0un7GpPQO7cPf5xxt5QuoBSUaI4Q0q4srJD+ix3bmGkNEJuk71Fb
-   fFasWOiRZo5qdC/KsKEUrCTbJCuGqQESmlUcjUaRW2XcKxFW2l5jjR46o
-   ZwUBaBrZYV617kNz0gpL2bW+H4ATn4fOeCoSbsMOn3G2/Tm32zgBztBuh
-   bx4MPyruee8xa7hwlqE9FCJJQsI8SwG02hQzS2nHi3H9Hdp3kXlcDHlrG
-   cvUukUvSlVOCbKMkQAeyCTA1EDpsvSzTWsOx+WpJKBTmiEzLmmM6bcalN
-   p0AWqUzF9NZhdH1m/WcimksLYtZxvjcYkA8uXStOxMA9znbszVqRJ6v/d
-   g==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10313"; a="242573761"
-X-IronPort-AV: E=Sophos;i="5.90,250,1643702400";
-   d="scan'208";a="242573761"
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
-  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Apr 2022 10:06:46 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.90,250,1643702400";
-   d="scan'208";a="801201570"
-Received: from preeti-ilbpg12.png.intel.com ([10.88.227.75])
-  by fmsmga006.fm.intel.com with ESMTP; 10 Apr 2022 10:06:45 -0700
-From: preeti.sachan@intel.com
-To: Openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] wxwidgets: fix pkgconfig no_gui conflict with opengl
-Date: Sun, 10 Apr 2022 13:06:33 -0400
-Message-Id: <20220410170633.1399502-1-preeti.sachan@intel.com>
+ dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
+ header.s=20210112 header.b=KQ6Ojjk4;
+ spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
+ ip: 209.85.167.44, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lf1-f44.google.com with SMTP id bu29so23472797lfb.0
+        for <openembedded-devel@lists.openembedded.org>;
+ Sun, 10 Apr 2022 13:40:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=sWTslur7MlIkehxZf2O8OKOQl2d4/PVjJKNuBDTp+8s=;
+        b=KQ6Ojjk4/DYCVbpxFubJFHkEiFUDZHMC8rIykySnlKgwX9cAiADlQx6o+lztsQT6Pf
+         RUfVUPia8MvjrRyjwiXfIok0En0sqDnn6iBAzWYkpm3Ri/qRv/USZPQxLDdQYZlpgK7D
+         a+nZEkq6fj5EuTSA7XBSjvkAyaBcJA6fun3rDCqP1b0i2un8uXpUv1peiN2UWlrutwSV
+         CUmYkR/o72jeqUz1p7FAVUBJ1T878c0xvFUSfowcrCQCkD0dLYiEYd/uV8kvfaNP0Fus
+         4SlK2YLTnIK1BKryKXM9g8FrePXZV7txVvO7bb/e5il0FFvysAe5hpkccrvD/1EoTy8B
+         UzTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=sWTslur7MlIkehxZf2O8OKOQl2d4/PVjJKNuBDTp+8s=;
+        b=Qt8DySEmdu6PPELlQyiKzpQdcbWV+qsu48EQic9VlYKqzQtZ+eKvFUZX4HReptUykz
+         P6eatqmZ6wr1rtcsvSCJvFsWaCfHs1a9Kz92SmTrSeizuIYWoue/DjIJ5qWBQkeWlX2C
+         n4GKjKrQIiQNcD7MQKIzD+fOwpoRtyimANsH2K91vY/kUFZuU3Tx9QjG/p98UIPd5eEP
+         iu7lkEfn7uwJ2dbyBVaQX/2PcyxmHbpmAKOXfJVQjXZndi2i+YuXE30V8N5f79nNEWaN
+         grPACXeUlU4hTtoPbLxtZ4Wq6JkhVwqAofmGq7qPUcST//WLTrjLiGgZ2QE96LE735Fk
+         syiA==
+X-Gm-Message-State: AOAM530JdC7WYmniXx/OiaNI5XcfUM0GvMo0LcjOv0V7tz61Ur24FQad
+	AaNWPNOLkrTAwDuucKeYM9lpvVco7cCOuHOG
+X-Google-Smtp-Source: 
+ ABdhPJxZnr3nB+pzOQL2F0zQ+paNloV8xddHAyRiMOvLYPZYGZQbIiL3n0fMTyCaVuTXnscBFqZtbQ==
+X-Received: by 2002:a05:6512:b28:b0:44a:9b62:3212 with SMTP id
+ w40-20020a0565120b2800b0044a9b623212mr19544379lfu.320.1649623225640;
+        Sun, 10 Apr 2022 13:40:25 -0700 (PDT)
+Received: from localhost.localdomain
+ (c-7918524e.023-160-67626725.bbcust.telenor.se. [78.82.24.121])
+        by smtp.gmail.com with ESMTPSA id
+ q17-20020a05651232b100b0044a211622aesm3109021lfe.282.2022.04.10.13.40.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 10 Apr 2022 13:40:25 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [meta-python][PATCH] python3-portalocker: update to 2.4.0
+Date: Sun, 10 Apr 2022 22:40:23 +0200
+Message-Id: <20220410204023.4043165-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -50,31 +66,31 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 11 Apr 2022 17:17:58 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96505
+ https://lists.openembedded.org/g/openembedded-devel/message/96508
 
-From: Preeti Sachan <preeti.sachan@intel.com>
-
-PACKAGECONFIG can not have both 'no_gui' and 'opengl'.
-This fixes parsing error: PACKAGECONFIG[no_gui] Conflict package
-config 'opengl' set in PACKAGECONFIG.
-
-Signed-off-by: Preeti Sachan <preeti.sachan@intel.com>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb | 1 +
- 1 file changed, 1 insertion(+)
+ ...thon3-portalocker_2.3.2.bb => python3-portalocker_2.4.0.bb} | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-python/recipes-extended/python3-portalocker/{python3-portalocker_2.3.2.bb => python3-portalocker_2.4.0.bb} (66%)
 
-diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
-index e82143040..c14179386 100644
---- a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
-+++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
-@@ -48,6 +48,7 @@ PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', 'no_gui'
-     ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)} \
- "
+diff --git a/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.3.2.bb b/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.4.0.bb
+similarity index 66%
+rename from meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.3.2.bb
+rename to meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.4.0.bb
+index 2d23017c8..e3b55a7ea 100644
+--- a/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.3.2.bb
++++ b/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.4.0.bb
+@@ -4,8 +4,7 @@ LICENSE = "PSF-2.0"
  
-+PACKAGECONFIG:remove:class-target = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', 'opengl', d)}"
- PACKAGECONFIG:remove:class-native = "opengl"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f9273424c73af966635d66eb53487e14"
  
- # Note on toolkit-PACKAGECONFIGs: select exactly one of 'no_gui' / 'gtk' / 'qt'
+-SRC_URI[md5sum] = "bd4908d035464aa440dd7f262ef78345"
+-SRC_URI[sha256sum] = "75cfe02f702737f1726d83e04eedfa0bda2cc5b974b1ceafb8d6b42377efbd5f"
++SRC_URI[sha256sum] = "a648ad761b8ea27370cb5915350122cd807b820d2193ed5c9cc28f163df637f4"
+ 
+ inherit pypi setuptools3
+ 
 -- 
 2.25.1
 
