@@ -1,184 +1,110 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E771C41535
-	for <webhook@archiver.kernel.org>; Wed, 13 Apr 2022 15:48:06 +0000 (UTC)
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
- [209.85.210.169])
- by mx.groups.io with SMTP id smtpd.web10.2983.1649828098785517221
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 23E6EC38A02
+	for <webhook@archiver.kernel.org>; Wed, 13 Apr 2022 15:48:07 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.1])
+ by mx.groups.io with SMTP id smtpd.web11.3740.1649837434207649059
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Apr 2022 22:34:58 -0700
+ Wed, 13 Apr 2022 01:10:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=WmvTrT2m;
- spf=pass (domain: gmail.com, ip: 209.85.210.169,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f169.google.com with SMTP id n22so709902pfa.0
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Apr 2022 22:34:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=/3+sZgGY5kI0Pu2JNRQMnGNJ8L+i0VlL52YasqvgDVU=;
-        b=WmvTrT2mZoM6Oq5pDl04XH3rnu8PtzjgXqeqUYjPHMTin9YEyTBS3SoFaj6pAnMdUR
-         bTljTiBL13kIJnkpCJ5g+J9phfzpNTFtvati2/RqVf9r7UnszXsVbJbRL6qZzzgHOTzf
-         +8FsUa99vRDidBMQIuxAfjd6lp4V5e5kLiLbp4omO3SNUrt3XQ1RUGNKzyimaV7HnkHl
-         00V7797RFQJoar1RCSIQyF5mvInr4FSLv5M5z7SYK6GhyaRzSGQF522KryiWcCZFmyuY
-         PQ9OeNylW7qdCstC5Cp4MGRMCZO6ctCx0bQFKcQHr5uFEjLHj0bB9aV8h7Hp7s5/Yse+
-         f9MQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=/3+sZgGY5kI0Pu2JNRQMnGNJ8L+i0VlL52YasqvgDVU=;
-        b=zDXu2Md47cFrPXOrAJaUQ3pINkmP7D9VgfwEf2wqOgTh7wAdFg5twQreBqLlQawr3G
-         CMbSWGwjh4X9PQJ9h9i8cTUcDS0IqPeY7fs2MGgbCl3142Grm14FWbRt86OafL6xRFx8
-         M36+S7zEpBeuqu37YnTS13OZIXBeBlK0mXkJQJkBG4DGazwdJDHNC1fuhheYZzWun2AH
-         tX/AMyXaqIt3MpUtNBW/RIM2yXhuHeGVnJw3/Ypf725fDzTsrC6+s9CaLm5lRyGMom+6
-         dSjW5/xJJZ1eHAJtFMKbAPdSornxGr4LRtp7zHBi7a/1vwYfL0eWLSpZtNE+T87bdkDE
-         wplQ==
-X-Gm-Message-State: AOAM532cugzB2dNyk3C6pFzRcGdeQaQEwWux4lzxlbUJtcJyHOvaa8eo
-	K1A1D0xn5zWn+VcBWepDK10btMLsVRa3Sg==
-X-Google-Smtp-Source: 
- ABdhPJymniXs4qF+q/cwgc76D9fMFpMjSEzGPk9PpU11R1g8H0j7M+m31llCh42aHiZzLWLLmdEIAA==
-X-Received: by 2002:a05:6a00:a0e:b0:4fd:fa6e:95fc with SMTP id
- p14-20020a056a000a0e00b004fdfa6e95fcmr41535262pfh.17.1649828097838;
-        Tue, 12 Apr 2022 22:34:57 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::94ca])
-        by smtp.gmail.com with ESMTPSA id
- j18-20020a633c12000000b0038204629cc9sm4733992pga.10.2022.04.12.22.34.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Apr 2022 22:34:57 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 1/2] opensaf: Fix build with gcc 12
-Date: Tue, 12 Apr 2022 22:34:54 -0700
-Message-Id: <20220413053455.1460109-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.35.2
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=i9Z2s0xN;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
+ mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1649837432; i=@fujitsu.com;
+	bh=NMbSuvqDJhkRO/MqU8U/Ru0k4190HoFmfkywrDR5zFg=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=i9Z2s0xN3V6GDSBoJpTYl0cd5GBVmQIawrLVRoBM72AJmUChF91ZhmLZZRDkyTbBe
+	 geB13aS4vA+28DnEKspx4hBSSBjAMKBIWYaIkNpBCi8SIEGjWQyF9xeY2SYMEq+AOg
+	 7qdXgwVIItChcMyByfuJntUd4Hhcco1aPao4QFf0xrGJVNMSGtT4zIH1VBmlYZh/jv
+	 ods2klsDC/GL2wmFC8QIQdKaokmABeqkUpNG9Uv6F8pgUvctjbzYj742ShIkdrAaa6
+	 KlKyNn4oon8yoR/dWxNAaM22SAtJgdE8VjUw1CkDiMUjpJLJ/9YTCvWCdkKn/yfntv
+	 u4T7Q+6yFYNJA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprFIsWRWlGSWpSXmKPExsViZ8MRolvRGpZ
+  k8HMOm8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnHm+k2Wgn1cFccmXGNuYFzD2cXIxSEkMJtJ
+  4v7yq0wQzh5GiYcnfgM5nBxsAmoS02/dYAWxRQT0JZbO3sMMYjMLqEi8+N3DDmILC9hLzP97H
+  CzOIqAqMf97CyOIzSvgJDHt/UewORICChJTHr5nhogLSpyc+YQFYo6ExMEXL5ghahQlZl9uZo
+  GwKyRmzWpjmsDIOwtJyywkLQsYmVYxWiUVZaZnlOQmZuboGhoY6BoamuoaG+kamuglVukm6qW
+  W6panFpfoGukllhfrpRYX6xVX5ibnpOjlpZZsYgQGWUqxAt8OxuZVP/UOMUpyMCmJ8l6vCU0S
+  4kvKT6nMSCzOiC8qzUktPsQow8GhJMF7siksSUiwKDU9tSItMwcY8DBpCQ4eJRFe9wagNG9xQ
+  WJucWY6ROoUo6KUOK95C1BCACSRUZoH1waLskuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhH
+  n7QKbwZOaVwE1/BbSYCWjxt1WhIItLEhFSUg1MQSwmqetbOHsmbrpweLGM8JeTNb1TioWc5hr
+  8v9mmvknnYoXayUXHWk7Ya/i5S3u94p0/u9K8Nn9PhMDh5dceXpdTv/NoXjNT0fbFd10lOrqf
+  peh6tTwt7T/yJp/ZWuVD+1lGlqQnBcWlN88duV6jdMkrspA3uerca3mVo3wch3t0NCas55u88
+  5Lhzrfnav/ZO3QeCa3c/sdSTjd4xglGg/vZSQ93MSRt95/T23dCrW7q/trdp6Ouv1t4rn5FgV
+  Rp7qfTfz7WGK1/ytKvEuP1ZN/quXOXMcivadMMs9ef9KhpVVhzsYDgP2Hv64s+338x72bHqmf
+  Xtsxqj5lrbed3xrBIgeNEe59VYmDZZYNNSizFGYmGWsxFxYkA/3K5aS0DAAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-7.tower-548.messagelabs.com!1649837431!89692!1
+X-Originating-IP: [62.60.8.84]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.85.8; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 24267 invoked from network); 13 Apr 2022 08:10:32 -0000
+Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
+  by server-7.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 13 Apr 2022 08:10:32 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 23D8AOt6018439
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 13 Apr 2022 09:10:31 +0100
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Wed, 13 Apr 2022 09:10:23 +0100
+From: Wang Mingyu <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libvpx: upgrade 1.8.2 -> 1.11.0
+Date: Sun, 10 Apr 2022 23:06:57 +0800
+Message-ID: <1649603220-12209-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 Apr 2022 15:48:06 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 Apr 2022 15:48:07 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96606
+ https://lists.openembedded.org/g/openembedded-devel/message/96610
 
-Use configure logic to disable certain warnings if compiler supports
-them
+Changelog from 1.8.2 to 1.11.0:
+https://chromium.googlesource.com/webm/libvpx/+/refs/heads/main/CHANGELOG
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../0001-include-missing-array-header.patch   | 32 +++++++++++++++++++
- ...-configure-Disable-selected-warnings.patch | 32 +++++++++++++++++++
- .../opensaf/opensaf_5.22.01.bb                |  6 ++--
- 3 files changed, 68 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0001-include-missing-array-header.patch
- create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0002-configure-Disable-selected-warnings.patch
+ .../webm/{libvpx_1.8.2.bb => libvpx_1.11.0.bb}              | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-multimedia/webm/{libvpx_1.8.2.bb => libvpx_1.11.0.bb} (90%)
 
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-include-missing-array-header.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-include-missing-array-header.patch
-new file mode 100644
-index 0000000000..e735d432a7
---- /dev/null
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-include-missing-array-header.patch
-@@ -0,0 +1,32 @@
-+From 6168d43ddd353b92ad8bcd5c49dc68f18caa8a00 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 12 Apr 2022 17:07:49 -0700
-+Subject: [PATCH 1/2] include missing <array> header
-+
-+Fixes
-+src/osaf/consensus/key_value.cc:25:30: error: aggregate 'std::array<char, 128> buffer' has incomplete type and cannot be defined
-+   25 |   std::array<char, buf_size> buffer;
-+      |                              ^~~~~~
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/osaf/consensus/key_value.cc | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/osaf/consensus/key_value.cc b/src/osaf/consensus/key_value.cc
-+index 692dd3f..6e16cbf 100644
-+--- a/src/osaf/consensus/key_value.cc
-++++ b/src/osaf/consensus/key_value.cc
-+@@ -18,7 +18,7 @@
-+ #include "base/getenv.h"
-+ #include "base/logtrace.h"
-+ #include "osaf/consensus/consensus.h"
-+-
-++#include <array>
-+ int KeyValue::Execute(const std::string& command, std::string& output) {
-+   TRACE_ENTER();
-+   constexpr size_t buf_size = 128;
-+-- 
-+2.35.1
-+
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0002-configure-Disable-selected-warnings.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0002-configure-Disable-selected-warnings.patch
-new file mode 100644
-index 0000000000..8bb659743d
---- /dev/null
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/0002-configure-Disable-selected-warnings.patch
-@@ -0,0 +1,32 @@
-+From fe654d5340d18f04e4689ba19f843554909a0c00 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 12 Apr 2022 17:16:37 -0700
-+Subject: [PATCH 2/2] configure: Disable selected warnings
-+
-+These warnings are emitted when compiling with gcc 11 and gcc 12
-+Do not treat them as errors
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac | 4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index c28d2d9..2846175 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -601,7 +601,9 @@ if test -z "$OSAF_HARDEN_FLAGS"; then
-+ fi
-+ AC_SUBST(OSAF_HARDEN_FLAGS)
-+ 
-+-AX_CHECK_COMPILE_FLAG([-Werror=format-overflow],[NOWARNINGS=-Wno-error=format-overflow])
-++AX_CHECK_COMPILE_FLAG([-Werror=format-overflow],[NOWARNINGS='-Wno-error=format-overflow'])
-++AX_CHECK_COMPILE_FLAG([-Wuse-after-free],[NOWARNINGS+=' -Wno-error=use-after-free'])
-++AX_CHECK_COMPILE_FLAG([-Wstringop-truncation],[NOWARNINGS+=' -Wno-error=stringop-truncation'])
-+ AC_SUBST(NOWARNINGS)
-+ #############################################
-+ # List the output Makefiles
-+-- 
-+2.35.1
-+
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.22.01.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.22.01.bb
-index 8ce324d306..930755d624 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf_5.22.01.bb
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.22.01.bb
-@@ -28,6 +28,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
-            file://0001-immom_python-convert-to-python3.patch \
-            file://0001-Fix-build-with-fno-common.patch \
-            file://0001-Use-correct-printf-format-for-__fsblkcnt_t.patch \
-+           file://0001-include-missing-array-header.patch \
-+           file://0002-configure-Disable-selected-warnings.patch \
+diff --git a/meta-oe/recipes-multimedia/webm/libvpx_1.8.2.bb b/meta-oe/recipes-multimedia/webm/libvpx_1.11.0.bb
+similarity index 90%
+rename from meta-oe/recipes-multimedia/webm/libvpx_1.8.2.bb
+rename to meta-oe/recipes-multimedia/webm/libvpx_1.11.0.bb
+index 0e12587a20..8fd4f698d7 100644
+--- a/meta-oe/recipes-multimedia/webm/libvpx_1.8.2.bb
++++ b/meta-oe/recipes-multimedia/webm/libvpx_1.11.0.bb
+@@ -7,9 +7,9 @@ LICENSE = "BSD-3-Clause"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d5b04755015be901744a78cc30d390d4"
+ 
+-SRCREV = "7ec7a33a081aeeb53fed1a8d87e4cbd189152527"
+-SRC_URI += "git://chromium.googlesource.com/webm/libvpx;protocol=https;branch=master \
+-            file://libvpx-configure-support-blank-prefix.patch \
++SRCREV = "626ff35955c2c35b806b3e0ecf551a1a8611cdbf"
++SRC_URI += "git://chromium.googlesource.com/webm/libvpx;protocol=https;branch=main \
++           file://libvpx-configure-support-blank-prefix.patch \
             "
- SRC_URI[sha256sum] = "f008d53c83087ce2014c6089bc4ef08e14c1b4091298b943f4ceade1aa6bf61e"
  
-@@ -48,8 +50,8 @@ PACKAGECONFIG[plm] = "--enable-ais-plm,--disable-ais-plm,libvirt openhpi"
- 
- PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd', '', d)}"
- 
--CPPFLAGS += "-Wno-error=stringop-overflow= -Wno-error=stringop-truncation"
--CXXFLAGS += "-Wno-error=stringop-overflow= -Wno-error=stringop-truncation -Wno-error=format-truncation="
-+CPPFLAGS += "-Wno-error"
-+CXXFLAGS += "-Wno-error"
- LDFLAGS += "-Wl,--as-needed -latomic -Wl,--no-as-needed"
- 
- do_install:append() {
+ S = "${WORKDIR}/git"
 -- 
-2.35.2
+2.25.1
 
 
