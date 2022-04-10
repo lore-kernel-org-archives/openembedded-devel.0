@@ -2,62 +2,62 @@ Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EF26C38161
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A4A03C352B6
 	for <webhook@archiver.kernel.org>; Mon, 11 Apr 2022 17:17:58 +0000 (UTC)
-Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com
- [209.85.167.54])
- by mx.groups.io with SMTP id smtpd.web11.21910.1649623271228469433
+Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com
+ [209.85.208.177])
+ by mx.groups.io with SMTP id smtpd.web08.21477.1649623325544693482
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 10 Apr 2022 13:41:11 -0700
+ Sun, 10 Apr 2022 13:42:05 -0700
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=fp0FX3uX;
+ header.s=20210112 header.b=yA1NvwZr;
  spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.167.54, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f54.google.com with SMTP id o2so1726199lfu.13
+ ip: 209.85.208.177, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f177.google.com with SMTP id q189so1241488ljb.13
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 10 Apr 2022 13:41:10 -0700 (PDT)
+ Sun, 10 Apr 2022 13:42:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=ettN1lpICKpyMeSOlj2q4t9Zb8On/qdW9kILkWnC+8M=;
-        b=fp0FX3uXzTJiFhIbwLJ/XEEr6gj2omsChe3g48CYjwY5shoIRwTZJgIVfkEa+SNafO
-         hXXO/xOpLP3/n2oQx98xrLCAFarsRqaDtmhM38aTuLd0UsZ8SNQJaYNzdulmWIgH8rxr
-         Q4VSB2zfVMBmHPZWT5mRohikL8DFSO5YCcXMgxOuc+7rlTCcSpiOSTU7c+dNftvxgb/s
-         ck2wfU07r8+Del7Tfy6HgsKPzKrFQC3pTp88MOfh1WWisnO7/zwR11VOXJOOkZ2Ysrl2
-         62/kxQrn7DtH6NysuVzapkp2IW5WvEVF39P9LNevblQ6rn9zt97iyFhfY8wm4NaIwa4+
-         wcAQ==
+        bh=Jfh3y2Fyob7CbMI5JdBVpyI+1W5eUqzrO0JOn7UcMMQ=;
+        b=yA1NvwZrKJrdWz8AJmRJ+AGxk4Dfe/sKaW78Pozbemlu0SKxx9PSft5NtJ0GFCwcaH
+         00PHFjXZ2nYRNvhNVeAes2UEOyuCxnSluF3Zan4wKT8IMip00Xi7pb/Gp32T4E9o45Zw
+         /Of29Qoeunwut5r77jKBY6BCetMlY1Q5Bl5F2hFwkudMnsQmR+ZnGcgwU5TEyDknpsL6
+         e6JRZW8vc0wvoc6c+HQ3bjvgeQ7oNF1M34vLCvI3M2fwzdLNFCWQnlNGCdzCqpNfzgop
+         +tQbgT6mqtQsGVXIjnXv3KxKaStJvVVIglSC5L7B8iP/MjyTVIJsGG3YIIlBIdz7O1U8
+         ps/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=ettN1lpICKpyMeSOlj2q4t9Zb8On/qdW9kILkWnC+8M=;
-        b=Eck4hLYPHxLgnSR+3eq/pi4ymr8q4huVWvmc0znSz69Gsgbr0jZejWJ9ShmSIITl7Z
-         X0CvoixPZDE3dhkc6HPwX2GpyfA36tOipDGtN4JPvJvcbIUyLK7l6uq0/DVSB3bXjnQH
-         DQ1q5IVaie6okc+dhzjU8j02y/KCQBFZ6dlA/sasFOgllYyEUtfCxxWOJBQm/zKhkzAj
-         gh8axnmIvSz442tqgRGswz22ysyXU9LFf3tALFjMsY3+aZrWSXwl8IctZwlEQw7iOycw
-         oymoR2/l3afwUl6jr8vpUzpNFr/ccTLQ5AI0Bfs84pDProKTug8x+IXiu+ocKYO0Bqny
-         IEHw==
-X-Gm-Message-State: AOAM532yUV/Sa1Jsrp3c271BXG/Jv86giKEaoA51/Y25b2/le3YqdFrq
-	jZlGChKvGXl9X5oeJDL/reoC5J76wukQME/0
+        bh=Jfh3y2Fyob7CbMI5JdBVpyI+1W5eUqzrO0JOn7UcMMQ=;
+        b=aMrjOXADv+V6qmPV/7TWfquPAKlh3ss5CMjHPJjApvzxDQWw9VMzRTARxyc5ksWokE
+         D5iImLIw5P/k/fyscT1L1kDZFcM5zmNREIB4jY+FvcS30K3fyEBFZmeXamsKv8J0urh+
+         AOCYoy+geN3QuIxYtLTMNmnAk06k6RdQjUVa5rBP8fcoRrhKbX/MhRVqrMmZNGi44jB2
+         iPo2iG/FXgBSfl6N+OHYHuSsmfThx9kcCnMspen2i5V/fC+SCgXhrfX6AQgyjRWr54FA
+         lB3oBcZSRZcfA+lzN8eoDN4+cGtOUFSB1fB64gtaOE6Bw15cL7k+wtCQFdALgJCIYb/p
+         UL2Q==
+X-Gm-Message-State: AOAM533x3WAieKWi+Lh5Br6E5DjWN4Y8wu00IOzkyrit5OIQ+ZnynQTW
+	9cadQTRev1XUltFOvbabTnay+YhZyxczV7yy
 X-Google-Smtp-Source: 
- ABdhPJxuskPh61X8QnXpGp1js/TB9tgqDD+x7V8bd36yHE3IApcgFk1y5Hudq0mk7Vo4MWQ71kP7Bg==
-X-Received: by 2002:a05:6512:3d24:b0:46b:9f95:9e57 with SMTP id
- d36-20020a0565123d2400b0046b9f959e57mr3590501lfv.246.1649623269075;
-        Sun, 10 Apr 2022 13:41:09 -0700 (PDT)
+ ABdhPJy9PxNxfZxmoVWK94ez5aiTQbr9HeadZANFBNv/LVg1PyiWNTqWqOZFjRLbY3F10DKXS7CSRw==
+X-Received: by 2002:a05:651c:311:b0:246:1250:d6f with SMTP id
+ a17-20020a05651c031100b0024612500d6fmr17582052ljp.455.1649623323409;
+        Sun, 10 Apr 2022 13:42:03 -0700 (PDT)
 Received: from localhost.localdomain
  (c-7918524e.023-160-67626725.bbcust.telenor.se. [78.82.24.121])
         by smtp.gmail.com with ESMTPSA id
- s15-20020a19770f000000b0046b9d3796c5sm412967lfc.226.2022.04.10.13.41.08
+ m4-20020a0565120a8400b00450abeb42b3sm2076645lfu.235.2022.04.10.13.42.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 10 Apr 2022 13:41:08 -0700 (PDT)
+        Sun, 10 Apr 2022 13:42:03 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python][PATCH] python3-pyscaffold: update to 4.2.1
-Date: Sun, 10 Apr 2022 22:41:07 +0200
-Message-Id: <20220410204107.4044450-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-python][PATCH] python3-pycurl: update to 7.45.1
+Date: Sun, 10 Apr 2022 22:42:01 +0200
+Message-Id: <20220410204201.4045023-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -66,30 +66,36 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 11 Apr 2022 17:17:58 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96516
+ https://lists.openembedded.org/g/openembedded-devel/message/96518
+
+License-Update: copyright years updated.
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- ...{python3-pyscaffold_4.1.5.bb => python3-pyscaffold_4.2.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pyscaffold_4.1.5.bb => python3-pyscaffold_4.2.1.bb} (88%)
+ .../{python3-pycurl_7.44.1.bb => python3-pycurl_7.45.1.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pycurl_7.44.1.bb => python3-pycurl_7.45.1.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyscaffold_4.1.5.bb b/meta-python/recipes-devtools/python/python3-pyscaffold_4.2.1.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-pyscaffold_4.1.5.bb
-rename to meta-python/recipes-devtools/python/python3-pyscaffold_4.2.1.bb
-index 7826d89ad..724bbd7f7 100644
---- a/meta-python/recipes-devtools/python/python3-pyscaffold_4.1.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyscaffold_4.2.1.bb
-@@ -9,7 +9,7 @@ LICENSE = "0BSD & MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=14a49c74a1d91829908ac756c07e6b91"
- DEPENDS += "python3-setuptools-scm-native"
+diff --git a/meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb b/meta-python/recipes-devtools/python/python3-pycurl_7.45.1.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb
+rename to meta-python/recipes-devtools/python/python3-pycurl_7.45.1.bb
+index c9b3b7187..407c26484 100644
+--- a/meta-python/recipes-devtools/python/python3-pycurl_7.44.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pycurl_7.45.1.bb
+@@ -9,10 +9,10 @@ HOMEPAGE = "http://pycurl.io/"
  
--SRC_URI[sha256sum] = "55f6532fd6d62b3b698d604257f7a7eda6a87557bbec22760f8c0d9549454802"
-+SRC_URI[sha256sum] = "c8cfa9983503f31b301f4b0bec0a8f41518f9a3a3853471ce94f9f9dc770a3e2"
+ LICENSE = "LGPL-2.0-only | MIT"
+ LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=4fbd65380cdd255951079008b364516c \
+-                    file://COPYING-MIT;md5=75f131c591546fd1277ca49c9a81ab1b \
++                    file://COPYING-MIT;md5=be42e1b1e58c8d59c2901fd747bfc55d \
+                     "
  
- inherit pypi python_setuptools_build_meta
- PYPI_PACKAGE = "PyScaffold"
+-SRC_URI[sha256sum] = "5bcef4d988b74b99653602101e17d8401338d596b9234d263c728a0c3df003e8"
++SRC_URI[sha256sum] = "a863ad18ff478f5545924057887cdae422e1b2746e41674615f687498ea5b88a"
+ 
+ DEPENDS = "curl"
+ 
 -- 
 2.25.1
 
