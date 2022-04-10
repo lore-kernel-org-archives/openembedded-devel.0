@@ -2,62 +2,62 @@ Return-Path: <open.source@oleksandr-kravchuk.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B4395C47089
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B42D8C38A02
 	for <webhook@archiver.kernel.org>; Mon, 11 Apr 2022 17:17:58 +0000 (UTC)
-Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com
- [209.85.208.174])
- by mx.groups.io with SMTP id smtpd.web10.21319.1649623389932283070
+Received: from mail-lj1-f176.google.com (mail-lj1-f176.google.com
+ [209.85.208.176])
+ by mx.groups.io with SMTP id smtpd.web12.21858.1649623396083910659
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 10 Apr 2022 13:43:10 -0700
+ Sun, 10 Apr 2022 13:43:16 -0700
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=F2efGPff;
+ header.s=20210112 header.b=qfJiZ8LM;
  spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.208.174, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lj1-f174.google.com with SMTP id 15so3005411ljw.8
+ ip: 209.85.208.176, mailfrom: open.source@oleksandr-kravchuk.com)
+Received: by mail-lj1-f176.google.com with SMTP id h11so17846386ljb.2
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 10 Apr 2022 13:43:09 -0700 (PDT)
+ Sun, 10 Apr 2022 13:43:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=GwJHM66x8ZntVvw9qumO7wk2aCMznv3/yNzk6taNfvc=;
-        b=F2efGPffHtEat9M3gO7a2GeJ8opKrvtH5Sn4Ytx04KpmhsBjyInzRPByEy4B86hpBw
-         gaDTuVZ5crqBT/dOa1AbCazLre5QdpXzfGWUqWR+oROElPQ8qEH2G1v+aF3CFBGEBiS7
-         HM/ltDxn1M7wC1l5zoEQlMoDmyPpqJ7UE5sYTNjN39Ka0nhi0OH4nv1I6Pz+WlR6ShwD
-         JoamSRwRv7eFHAgZwDUK672pOsS006Y9xGct7sZdZcbUOAmvetTYo7yA46qpb5b6/U+v
-         63S/OAqkTxQVJrxcG5pLtYNyyt4ipPQFcnPEkwDlVlNBO0TjkUjG9dlPuME4nODRg3DN
-         srLg==
+        bh=yW2ib/oH4FD9urnrhnxqJIH4YfhB6C5BOtN+Z7ipAbg=;
+        b=qfJiZ8LMTG4cwz9taDj0tm5506GzgJE6RzDPHgFIEGCRHaRVVo21ehvEG0HLmrKhJ6
+         tbGeOr1nhyY9jVBi+YVH1eZwaDa/G00A1WE6ItNDNBeWAEbzMNyfVxWS2zwgDuXIGcA7
+         OWLlskxpFTtt3kobYdXXVMZqOXr5I/bwZOL4YPURovJNot2VChrvMvVzfXHg1tWX+GdJ
+         birZaDJfMf1ddDxHTLEJ+liUG2nsdITW28KBXqEmKW1xJt71HmurVY+hs5Ac99rvlP0Q
+         jmVXtRExTxgEwT4r9J7d5PS1+Kf0EbksCPZEZbW74/wuqeu2QosFGMpqkR2XGfhA2IIQ
+         EETQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=GwJHM66x8ZntVvw9qumO7wk2aCMznv3/yNzk6taNfvc=;
-        b=em6bGfEGJdT3Eu6Y3Ifd+JD3k4FemQpeUczjWr1ifOVbC9jdhfkbbRDo+uArmwsMrV
-         pFm72Il6OV3DtoJBcfAd/PbGy/B/tvL3eN8fnLwOFcwmt/1ewyF4euXOoIK/KG6aBTbR
-         gtD8vKMnZwcPHJoKtCKTm/jIio0E/9zaivZqRtWCtI14QZl2RKA5auNLNER6+4sdbPux
-         E7OPrqopeHpBzGHHvPQB2Nf4jQnoR2KRoRHzN4eU/+B+oL6mJGHkm4ULC57wh+V2jMbP
-         4fjLgYmcjIkIHWpSN1pDf1Mq7evx6xU+gjDxi7NSHxK6EUmeH47NZByD8VyClhi6XKpC
-         9myw==
-X-Gm-Message-State: AOAM532EmKJ+PJqo6BY7YeyJ7FQYtsE9L1kCxn5cxThXhN9AJ4WmD4F3
-	FMKMxfUj3oNVkOh3sAnZcSpxetfUxWqgvvRj
+        bh=yW2ib/oH4FD9urnrhnxqJIH4YfhB6C5BOtN+Z7ipAbg=;
+        b=aiLfpKPyTOqYuvcRXzTJFKRYvbwfsnLLraMmey4XX8Ds8bQH44RAfU2sVFCgCXmtbz
+         NQig4PzYIC/C/FscqjIYJKKIQj4RYdxfxMW9An+PPjHwHcHIjvrlWJbGloe9F/H/K3ZH
+         cnTLdRbA5PSqYfvdVvVTZRzVphY+tPvYvgV3FdJx8Fl807uzkHTVTZPzwBIwWQ/v6Y+e
+         239NVrNsNQ2nRRW8Xl5KdzyagwOxUoGy52gcmHnHeuLRcRg9VV/7zB3IcpPTI9n0bYIg
+         FYRgIg/s6p9XiCmvUyWGjxt0qsxXdlzFc4GrnBoyN2JhRkfMh9DRzjhBp25Lbel64bxd
+         4uuw==
+X-Gm-Message-State: AOAM533trLR1sm1hq2ZXgWCkGsi2E5ZGesqiLD32MgiGInmRsvH7WKz4
+	zXclu2reXXekxXhhmiK7yPH9W0szJrL5AxKq
 X-Google-Smtp-Source: 
- ABdhPJyz8xjpyJYTFNuLcV/Fwr4JoRnYp8vPGPZRZFjigfh3th/MzOEaMumsc2K8YrBG6OuxFGZoAQ==
-X-Received: by 2002:a2e:9e43:0:b0:24b:3c6:3832 with SMTP id
- g3-20020a2e9e43000000b0024b03c63832mr17892703ljk.63.1649623387874;
-        Sun, 10 Apr 2022 13:43:07 -0700 (PDT)
+ ABdhPJyuxX6/Sbq/Syug9slixadg/5DZW2MZyWe8GSz1jIquNcSw0MmckLIoZlyIlrX3m/Yw01IMKw==
+X-Received: by 2002:a2e:8186:0:b0:249:9dc2:9ed7 with SMTP id
+ e6-20020a2e8186000000b002499dc29ed7mr18478607ljg.406.1649623393916;
+        Sun, 10 Apr 2022 13:43:13 -0700 (PDT)
 Received: from localhost.localdomain
  (c-7918524e.023-160-67626725.bbcust.telenor.se. [78.82.24.121])
         by smtp.gmail.com with ESMTPSA id
- n23-20020a056512311700b0046b926fd343sm549418lfb.142.2022.04.10.13.43.07
+ k16-20020a192d10000000b0046ba99878a6sm28751lfj.17.2022.04.10.13.43.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 10 Apr 2022 13:43:07 -0700 (PDT)
+        Sun, 10 Apr 2022 13:43:13 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-python][PATCH] python3-jmespath: update to 1.0.0
-Date: Sun, 10 Apr 2022 22:43:05 +0200
-Message-Id: <20220410204305.4046078-1-open.source@oleksandr-kravchuk.com>
+Subject: [meta-python][PATCH] python3-ipython: update to 8.2.0
+Date: Sun, 10 Apr 2022 22:43:11 +0200
+Message-Id: <20220410204311.4046215-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -66,31 +66,30 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 11 Apr 2022 17:17:58 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96522
+ https://lists.openembedded.org/g/openembedded-devel/message/96523
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../{python3-jmespath_0.10.0.bb => python3-jmespath_1.0.0.bb}  | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-jmespath_0.10.0.bb => python3-jmespath_1.0.0.bb} (73%)
+ .../{python3-ipython_7.30.1.bb => python3-ipython_8.2.0.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-ipython_7.30.1.bb => python3-ipython_8.2.0.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-jmespath_0.10.0.bb b/meta-python/recipes-devtools/python/python3-jmespath_1.0.0.bb
-similarity index 73%
-rename from meta-python/recipes-devtools/python/python3-jmespath_0.10.0.bb
-rename to meta-python/recipes-devtools/python/python3-jmespath_1.0.0.bb
-index c395143cc..f454d6462 100644
---- a/meta-python/recipes-devtools/python/python3-jmespath_0.10.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-jmespath_1.0.0.bb
-@@ -4,8 +4,7 @@ SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2683790f5fabb41a3f75b70558799eb4"
+diff --git a/meta-python/recipes-devtools/python/python3-ipython_7.30.1.bb b/meta-python/recipes-devtools/python/python3-ipython_8.2.0.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-ipython_7.30.1.bb
+rename to meta-python/recipes-devtools/python/python3-ipython_8.2.0.bb
+index 6b829811f..35af7dd4d 100644
+--- a/meta-python/recipes-devtools/python/python3-ipython_7.30.1.bb
++++ b/meta-python/recipes-devtools/python/python3-ipython_8.2.0.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
  
--SRC_URI[md5sum] = "65bdcb5fa5bcf1cc710ffa508e78e408"
--SRC_URI[sha256sum] = "b85d0567b8666149a93172712e68920734333c0ce7e89b78b3e987f71e5ed4f9"
-+SRC_URI[sha256sum] = "a490e280edd1f57d6de88636992d05b71e97d69a26a19f058ecf7d304474bf5e"
+ PYPI_PACKAGE = "ipython"
  
- inherit pypi setuptools3
+-SRC_URI[sha256sum] = "cb6aef731bf708a7727ab6cde8df87f0281b1427d41e65d62d4b68934fa54e97"
++SRC_URI[sha256sum] = "70e5eb132cac594a34b5f799bd252589009905f05104728aea6a403ec2519dc1"
  
+ RDEPENDS:${PN} = "\
+     ${PYTHON_PN}-setuptools \
 -- 
 2.25.1
 
