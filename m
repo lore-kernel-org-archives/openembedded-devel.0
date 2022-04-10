@@ -2,68 +2,73 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2733BC38A05
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F28FC38A04
 	for <webhook@archiver.kernel.org>; Wed, 13 Apr 2022 15:48:07 +0000 (UTC)
-Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.2])
- by mx.groups.io with SMTP id smtpd.web11.3741.1649837434645688069
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.1])
+ by mx.groups.io with SMTP id smtpd.web11.3745.1649837454813693068
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Apr 2022 01:10:35 -0700
+ Wed, 13 Apr 2022 01:10:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Zt+zzHgE;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.2,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=a1CEnGHi;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1649837432; i=@fujitsu.com;
-	bh=thsrl3TKGMBrD7I9vKZyoSZ3Ss862WxEZUwEcDGOKtk=;
+	s=170520fj; t=1649837453; i=@fujitsu.com;
+	bh=1mloo3tngCDzgFc5bwZlvycBoGEkZlZuvFlJETkgunw=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=Zt+zzHgEPpJYuJhH8wv290my/bPMYBvpo8AjLg6qHh/eC6oVrOT0OJTqAsbjnc3s8
-	 24JmLkjZeEeI8f61l+Hlp5MCMaGI10S5MV/vT3XT6TKfMCwLpCDzq3RNVAEvIbJgww
-	 kzxlZ/O/P+Ex91wvwVTJgp8L8/uzkyyFCdkOlBzprwGUDHB42VAsZnWaxcrvRtYwfQ
-	 juXzX1kOCnhQfuDAvqnD8bYxVog10wJZjphz9AqLoFzxLqdO8eHRambspUVDBAQCvA
-	 V8g9FCD1uLPUQ3v6m/SoK2agiDI3Fim2aT7sSBz0fyUoYCIrJlEEYA76i+lip/N1S/
-	 zkxSRYDQAJkkw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrOIsWRWlGSWpSXmKPExsViZ8MRolvRGpZ
-  kcLJPyOLi4aXMDowe5zauYAxgjGLNzEvKr0hgzfg8pZGpYCZHxeOfPxgbGDezdzFycQgJzGaS
-  OHOykwnC2cMoseRII2sXIycHm4CaxPRbN8BsEQF9iaWz9zCD2MwCKhIvfvewg9jCAvYS5+b2g
-  NWwCKhKHNuwD6yGV8BJ4s3qDWwgtoSAgsSUh+/B4pwCzhINk04xgdhCQDWLZ7xnhagXlDg58w
-  kLxHwJiYMvXjBD9CpKzL7czAJhV0jMmtXGNIGRfxaSlllIWhYwMq1itE0qykzPKMlNzMzRNTQ
-  w0DU0NNU1s9Q1NtZLrNJN1Est1U1OzSspSgTK6iWWF+ulFhfrFVfmJuek6OWllmxiBIZmSrGr
-  4g7Ga30/9Q4xSnIwKYnyXq8JTRLiS8pPqcxILM6ILyrNSS0+xCjDwaEkwXuyKSxJSLAoNT21I
-  i0zBxgnMGkJDh4lEV73BqA0b3FBYm5xZjpE6hSjMcfVK1f2MnPcAJFCLHn5ealS4rzmLUClAi
-  ClGaV5cINg8XuJUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjBvH8gUnsy8Erh9r4BOYQI65du
-  qUJBTShIRUlINTLP5fl6SEw2d23SD97Kf1UpmveCnV9fFPRQR418wyc1yyn7eh1r7o7t23/9w
-  ZtXKxZUx9xOlDoY5bvk9Y/v+95ts3Pd3LmxJ1tv7uV96afLL15yKYZu0JybXZC3P1JBnPD9N4
-  d/0G6vrT7Bv2KZfHOl6cs+xizw2E5ROC8p5bf70gnt396G33e47/Fpdpe59Wlz97fw1353VOo
-  kGgqs1P/8/6qG8qbLe/DObdGFJXv6ZkDd203ucS3s3vXRtNJFUXd3Y03a90M0je9WHrTdS5h5
-  Od6v34Is5HF9cqxjpwqxySMnlcvnlyUt27Fh2ZF5au0bPmdneDYGm/KV31lwPkeBdqL6RYcmM
-  mx3S11QcZyixFGckGmoxFxUnAgCKDtIRWgMAAA==
+	b=a1CEnGHiSWI92JDBT8qsC+f/y+wIe2kcWEtYNzUguK1Z7gRYDDlVZdsta8b/VfgWw
+	 CjUMSbfnvhvRTOnLT50FRejwQO36+ilJJoR5qsg3l4EQBMPNYQNidYH4ssfZOUA7l2
+	 5PEx5vH/So6jb7S6Dv/1UmzR9kiFaYqCPT/ZzruHuc5sdoH4imddgWDsau7IYD/9Jf
+	 SdTIHE7V8mLrwFkR8C1YcjsBll+WC03BUmYF38ypFvFNcJWYdPgHz7KKA44d3HaKwA
+	 ao8lMlP8wDJrIHIFfpfjFQRlErA5CpZbsI797a0te7hZ91u5CJdt/KVQ2NRe8LnNkr
+	 tv8gIUOSoYk4A==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrNIsWRWlGSWpSXmKPExsViZ8ORqNvTGpZ
+  k0H/MwuLi4aXMDowe5zauYAxgjGLNzEvKr0hgzfi39ANjwQ3OirvNS5kaGD9xdDFycQgJPGGU
+  uNzQywzhXGCSWHi2iw3C2cMosejLYaAMJwebgJrE9Fs3WEFsEQF9iaWz94DFmQVUJF787mEHs
+  YUFbCXO7rzDAmKzCKhKfJl1nhHE5hVwkpj0+jhYvYSAgsSUh+/BbE4BZ4mGSaeYQGwhoJrFM9
+  6zQtQLSpyc+YQFYr6ExMEXL6B6FSVmX25mgbArJGbNamOCsNUkrp7bxDyBUXAWkvZZSNoXMDK
+  tYrRKKspMzyjJTczM0TU0MNA1NDTVNbbUNTXSS6zSTdRLLdUtTy0u0QVyy4v1UouL9Yorc5Nz
+  UvTyUks2MQLDOKVY3WQHY/fKn3qHGCU5mJREea/XhCYJ8SXlp1RmJBZnxBeV5qQWH2KU4eBQk
+  uA92RSWJCRYlJqeWpGWmQOMKZi0BAePkgivewNQmre4IDG3ODMdInWKUVFKnNe8BSghAJLIKM
+  2Da4PF8SVGWSlhXkYGBgYhnoLUotzMElT5V4ziHIxKwrx9IFN4MvNK4Ka/AlrMBLT426pQkMU
+  liQgpqQam8KaO/Y3LPDdO3FhRmLuKf6PMOa+kyvKqyy8vbN0Y4MF6puTUO/G8jqifMr+XJJ5K
+  +hUgE265+ESM448Cifusup/W3N74YKnt7pZOuZOzA27c32i7cNGFudnlgTtM3oVL3ryafs1nn
+  6gvr23Ygf7Cli3PdPqelX72uihfMiHyuWDQq10lAqzaXUcd17UZX9HbI3FrcmnJrEsZryfq7U
+  xXZ+2Qf/HURuSBrM6Vh+Z1/GttlR6df27AfTVk2uxXl7fHCR3dlyz4vLjDUI7L0u19HWvDXMf
+  c5ycd1RadXDj/ft6v2SqFXVFzg1n03z9SnqdyOeWk23G1J/FdKzd7LtlVevN72fTPJ8wsGGIu
+  HZ5trMRSnJFoqMVcVJwIAMR2c6heAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-17.tower-545.messagelabs.com!1649837431!141307!1
-X-Originating-IP: [62.60.8.84]
+X-Msg-Ref: server-5.tower-565.messagelabs.com!1649837452!174!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
-X-StarScan-Version: 9.85.5; banners=-,-,-
+X-StarScan-Version: 9.85.8; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 19317 invoked from network); 13 Apr 2022 08:10:32 -0000
-Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-17.tower-545.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 13 Apr 2022 08:10:32 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 23D8AOt8018439
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+Received: (qmail 3846 invoked from network); 13 Apr 2022 08:10:52 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-5.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 13 Apr 2022 08:10:52 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 56480100189
 	for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Apr 2022 09:10:31 +0100
+ Wed, 13 Apr 2022 09:10:52 +0100 (BST)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 395CD100180
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 13 Apr 2022 09:10:52 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Wed, 13 Apr 2022 09:10:28 +0100
+ (TLS) id 15.0.1497.32; Wed, 13 Apr 2022 09:10:30 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] ocl-icd: upgrade 2.3.0 -> 2.3.1
-Date: Sun, 10 Apr 2022 23:06:59 +0800
-Message-ID: <1649603220-12209-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] mercurial: upgrade 5.5 -> 6.1
+Date: Sun, 10 Apr 2022 23:07:00 +0800
+Message-ID: <1649603220-12209-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1649603220-12209-1-git-send-email-wangmy@fujitsu.com>
 References: <1649603220-12209-1-git-send-email-wangmy@fujitsu.com>
@@ -72,40 +77,39 @@ Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
 X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 13 Apr 2022 15:48:07 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96611
+ https://lists.openembedded.org/g/openembedded-devel/message/96612
 
-Changelog:
-==========
-  Updated OpenCL Headers
-  Add support for MacOS
-  Add CI through GitHub Actions
+Changelog from 5.5 to 6.1:
+https://www.mercurial-scm.org/wiki/WhatsNew#Mercurial_6.1_.282022-03-01.29_to_6.1.1_.282022-04-05.29
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-core/opencl/{ocl-icd_2.3.0.bb => ocl-icd_2.3.1.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-core/opencl/{ocl-icd_2.3.0.bb => ocl-icd_2.3.1.bb} (89%)
+ .../mercurial/{mercurial_5.5.bb => mercurial_6.1.bb}           | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/mercurial/{mercurial_5.5.bb => mercurial_6.1.bb} (87%)
 
-diff --git a/meta-oe/recipes-core/opencl/ocl-icd_2.3.0.bb b/meta-oe/recipes-core/opencl/ocl-icd_2.3.1.bb
-similarity index 89%
-rename from meta-oe/recipes-core/opencl/ocl-icd_2.3.0.bb
-rename to meta-oe/recipes-core/opencl/ocl-icd_2.3.1.bb
-index 1746e21dbf..ae9c5bc811 100644
---- a/meta-oe/recipes-core/opencl/ocl-icd_2.3.0.bb
-+++ b/meta-oe/recipes-core/opencl/ocl-icd_2.3.1.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1238d5bccbb6bda30654e48dcc0a554b"
+diff --git a/meta-oe/recipes-devtools/mercurial/mercurial_5.5.bb b/meta-oe/recipes-devtools/mercurial/mercurial_6.1.bb
+similarity index 87%
+rename from meta-oe/recipes-devtools/mercurial/mercurial_5.5.bb
+rename to meta-oe/recipes-devtools/mercurial/mercurial_6.1.bb
+index 8049434109..3abecc3054 100644
+--- a/meta-oe/recipes-devtools/mercurial/mercurial_5.5.bb
++++ b/meta-oe/recipes-devtools/mercurial/mercurial_6.1.bb
+@@ -10,8 +10,7 @@ RDEPENDS:${PN} = "python3 python3-modules"
+ inherit python3native
  
- SRC_URI = "git://github.com/OCL-dev/ocl-icd.git;protocol=https;branch=master"
+ SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz"
+-SRC_URI[md5sum] = "17b21729cbc61dda80b2e3dfc046319f"
+-SRC_URI[sha256sum] = "c1ed28e1534304a7a4981ed59905286d1c56acd5b75755eedd184171a4a782b4"
++SRC_URI[sha256sum] = "86f98645e4565a9256991dcde22b77b8e7d22ca6fbb60c1f4cdbd8469a38cc1f"
  
--SRCREV = "59c098b6b1f97a339e3e5308499aee6538ecea40"
-+SRCREV = "1165deedb2ae741cd76e60986f7c2cb5023059d9"
- 
- S = "${WORKDIR}/git"
+ S = "${WORKDIR}/mercurial-${PV}"
  
 -- 
 2.25.1
