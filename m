@@ -1,194 +1,130 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D49BC63700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DFC8C63708
 	for <webhook@archiver.kernel.org>; Mon, 11 Apr 2022 17:18:01 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.web08.6703.1649513816616216102
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
+ [209.85.215.169])
+ by mx.groups.io with SMTP id smtpd.web10.30720.1649692330989768945
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 09 Apr 2022 07:16:57 -0700
+ Mon, 11 Apr 2022 08:52:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.20,
- mailfrom: f_l_k@t-online.de)
-Received: from fwd78.dcpf.telekom.de (fwd78.aul.t-online.de [10.223.144.104])
-	by mailout08.t-online.de (Postfix) with SMTP id 75A04866E
-	for <openembedded-devel@lists.openembedded.org>;
- Sat,  9 Apr 2022 16:16:54 +0200 (CEST)
-Received: from flk-MS-7C91.fritz.box ([79.219.227.42]) by fwd78.t-online.de
-	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
-	esmtp id 1ndBtV-0RJcDh0; Sat, 9 Apr 2022 16:16:53 +0200
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-gnome][PATCHv4] gparted: update to v1.4.0
-Date: Sat,  9 Apr 2022 16:16:42 +0200
-Message-Id: <20220409141642.2469608-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=QDOHfy2R;
+ spf=pass (domain: gmail.com, ip: 209.85.215.169,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f169.google.com with SMTP id s137so11826120pgs.5
+        for <openembedded-devel@lists.openembedded.org>;
+ Mon, 11 Apr 2022 08:52:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :references:from:organization:in-reply-to:content-transfer-encoding;
+        bh=K1wNOFRP9ksS2pRkb2uk06YjGqO1m1P/r3JrbrpUXF8=;
+        b=QDOHfy2RI5pZopayVsOm+uhbUBqKXi3I2+yItwOwi0jSrEw+6gqV9CXGenTHxb9VNT
+         00jAyAqpDzQ4IEdFZfcXEYSN76lyjr5Sj2UHoeW3kVhRTcAoGcZ8Q8eLpPvuoKvv5IzI
+         r2/euKE8Wlh41oQQms4E+z2s1oJcR8BX8LRJcv1OQdHsJY87NfvOueUV0xGzcHd0ThQI
+         H9XtRF0ZSruQG1Zomo44lrdqJiz/lPZkdfoqBR0nU4ClyBiSOtWIyVxiNKeekUIHCbqs
+         BXvgFFqGlGOCUl1GXBy0Iv+cz8uhCMXrrDyJYWwn68jjhsfbeiwGZema7/ijSJ4J2SLw
+         GuQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:references:from:organization:in-reply-to
+         :content-transfer-encoding;
+        bh=K1wNOFRP9ksS2pRkb2uk06YjGqO1m1P/r3JrbrpUXF8=;
+        b=wOZjeduuzP2YRpCOI7uWZL5w+AFRTa8aGbvEudinh3si1o0DGMTQGCcoTELSADMnpy
+         WJn3zV1LusNXNawTV8EhDCxRWrdYYLg0cb+M3VuychUeTElv5HoHQE/KfOERKOwVPdGS
+         uVrVxGVoIBKuHu5M4RnbmyRivs8T2o8BNYmmq49blCR8CIP9UZCyhkLT6acRWDTr5sPV
+         gcvzmSqGoowyQ7EfeI+IbFefGTJKIRuws+JQyo+i6a8i/0jwWxejz9dGdN7Zj7SLf9k3
+         azRlVc9nkBPf6kzwtIXWZuNawFi62quycenvPmN3D91quJx89rBiRJ2Ia4YWZ/p7XXoW
+         QyHQ==
+X-Gm-Message-State: AOAM533Qo4xQNMXKSn60OaDJFpkWE+PwIe1goQlvyKfG4vU8whjig0Gw
+	MDuJExpeHG+5jCFP2Wy/5So=
+X-Google-Smtp-Source: 
+ ABdhPJwYHcutl0IkvcAnspi9OI+b5JI5SLG5o60EySHtCYrk72n2559LkcEQ/fKCiB/XEKq8DN/SVw==
+X-Received: by 2002:a63:b542:0:b0:399:40fd:3ac3 with SMTP id
+ u2-20020a63b542000000b0039940fd3ac3mr26665848pgo.564.1649692329963;
+        Mon, 11 Apr 2022 08:52:09 -0700 (PDT)
+Received: from ?IPV6:2601:646:9200:a0f0:317a:73f1:795b:d96a?
+ ([2601:646:9200:a0f0:317a:73f1:795b:d96a])
+        by smtp.gmail.com with ESMTPSA id
+ n8-20020a056a000d4800b005059b08a2ecsm8404410pfv.139.2022.04.11.08.52.09
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 11 Apr 2022 08:52:09 -0700 (PDT)
+Message-ID: <7080173b-b85f-b0d0-237e-54e7e37cd30f@gmail.com>
+Date: Mon, 11 Apr 2022 08:52:08 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-TOI-EXPURGATEID: 150726::1649513813-0000AD4E-9FE6EB24/0/0 CLEAN NORMAL
-X-TOI-MSGID: 46f53ea6-cf09-49ea-9764-1ff790c564f0
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.8.0
+Subject: Re: [oe] [meta-oe] [PATCH] byacc: upgrade 20211224 -> 20220128
+Content-Language: en-US
+To: wangmy <wangmy@fujitsu.com>, openembedded-devel@lists.openembedded.org
+References: <1649423791-29819-1-git-send-email-wangmy@fujitsu.com>
+ <1649423791-29819-2-git-send-email-wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+In-Reply-To: <1649423791-29819-2-git-send-email-wangmy@fujitsu.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 11 Apr 2022 17:18:01 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96497
+ https://lists.openembedded.org/g/openembedded-devel/message/96552
 
-- remove x11 features-check because there aren't dependencies that would
-  explicilty require x11 as a DISTRO_FEATURE
-- use POSIX basename() to fix up musl build
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D
-GParted 1.4.0   (2022-03-28)
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D
 
-Release Notes
--------------
-  This release of GParted includes enhancements, bug fixes and
-  language translation updates.
+On 4/8/22 6:16 AM, wangmy wrote:
+> All changes from 20211224 to 20220128 included in
+> https://invisible-island.net/byacc/CHANGES.html
+> 
+> License-Update:
+> ----------------
+> - Add Format, Upstream-Name, Upstream-Contact to byacc.
+> - Add "Copyright:  2001-2021,2022 by Thomas E. Dickey" to all files of
+>    byacc.
+> - Copyright of aclocal.m4 and package/debian/* updated to 2022.
+> - Modify Licence to License.
+> - Add "Copyright: 1992-2021 Free Software Foundation, Inc." and "License: GPL-3"
+>    to config.guess config.sub
 
-  * Add labelling of mounted btrfs, ext2/3/4 and xfs file systems
-  * Fix detection of mount points for encrypted file systems
-  * Fix crash scrolling quickly in the drive selection combobox
-  * Add bcache detection
-  * Add JBD external EXT3/4 journal detection
+Is the overall license still 'PD' after all these changes? Can you check
 
-Bug Fixes
----------
-  * Add labelling of mounted btrfs, ext2/3/4 and xfs file systems (#163, =
-!87)
-  * Fix detection of mount points for encrypted file systems (#162, !88)
-  * Fix unmount error when unmounting below a bind mount point (!89)
-  * Fix crash scrolling quickly in the drive selection combobox (#165, !9=
-1)
-  * Add initial Indonesian translation of help (!90)
-  * Add accessibility relations for screen readers like Orca (!92)
-  * Fix partition creation at sector 2048 if partition before it (#172, !=
-93)
-  * Make more getter methods use return-by-constant-reference (!94)
-  * Check copy destination instead of source (!95)
-  * Add bcache detection (#183, !96)
-  * Add JBD external EXT3/4 journal detection (#89, !97)
-  * Fix translation of DocBook markup tag of the GParted Manual (!98)
-
-Code Credits
-------------
-  Code enhancements are courtesy of Movie Ma, Pascal Eng=C3=A9libert, and
-  Mike Fleetwood.
-
-Translations (new/updated)
---------------------------
-  cs(Marek =C4=8Cernock=C3=BD), da(Alan Mortensen), eu(Asier Sarasua Garm=
-endia),
-  fur(Fabio Tomat), he(Yaron Shahrabani), hr(Goran Vidovi=C4=87),
-  hu(Bal=C3=A1zs =C3=9Ar), id(Andika Triwidada), it(Milo Casagrande),
-  ko(Seong-ho Cho), lt(Aurimas =C4=8Cernius), lv(R=C5=ABdolfs Mazurs),
-  nb(Kjell Cato Heskjestad), nl(Nathan Follens), pa(A S Alam),
-  pt(Hugo Carvalho), ru(Aleksandr Melman, Sergej A), sk(Du=C5=A1an Kazik)=
-,
-  sl(Matej Urban=C4=8Di=C4=8D), sr(=D0=9C=D0=B8=D1=80=D0=BE=D1=81=D0=BB=D0=
-=B0=D0=B2 =D0=9D=D0=B8=D0=BA=D0=BE=D0=BB=D0=B8=D1=9B), zh_CN(Luming Zh)
-
-Dependencies (new/updated)
---------------------------
-  * n/a
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../files/0001-use-posix-basename.patch       | 30 +++++++++++++++++++
- .../{gparted_1.3.1.bb =3D> gparted_1.4.0.bb}    |  6 ++--
- 2 files changed, 33 insertions(+), 3 deletions(-)
- create mode 100644 meta-gnome/recipes-extended/gparted/files/0001-use-po=
-six-basename.patch
- rename meta-gnome/recipes-extended/gparted/{gparted_1.3.1.bb =3D> gparte=
-d_1.4.0.bb} (83%)
-
-diff --git a/meta-gnome/recipes-extended/gparted/files/0001-use-posix-bas=
-ename.patch b/meta-gnome/recipes-extended/gparted/files/0001-use-posix-ba=
-sename.patch
-new file mode 100644
-index 000000000..aae200e27
---- /dev/null
-+++ b/meta-gnome/recipes-extended/gparted/files/0001-use-posix-basename.p=
-atch
-@@ -0,0 +1,30 @@
-+Subject: [PATCH] BCache_Info.cc: use posix basename
-+
-+gnu 'basename' is undeclared for cplusplus if using musl. Use posix base=
-name instead.
-+
-+fdebug-prefix-map=3DTOPDIR/build/tmp/work/cortexa57-yoe-linux-musl/gpart=
-ed/1.4.0-r0/
-+recipe-sysroot-native=3D-fvisibility-inlines-hidden  -c -o Dialog_Diskla=
-bel.o ../../
-+gparted-1.4.0/src/Dialog_Disklabel.cc ../../gparted-1.4.0/src/BCache_Inf=
-o.cc:52:33:
-+
-+error: use of undeclared identifier 'basename'; did you mean 'g_basename=
-'?
-+        return "/dev/" + Glib::ustring(basename(buf));
-+                                       ^~~~~~~~
-+                                       g_basename
-+
-+Signed-off-by: Markus Volk <f_l_k@t-online.de>
-+
-+Upstream-Status: Submitted
-+
-+https://gitlab.gnome.org/GNOME/gparted/-/merge_requests/99
-+
-+--- a/src/BCache_Info.cc	2022-03-02 22:04:17.000000000 +0100
-++++ b/src/BCache_Info.cc	2022-04-09 15:02:56.932218665 +0200
-+@@ -17,7 +17,7 @@
-+=20
-+ #include "BCache_Info.h"
-+=20
-+-#include <string.h>  // GNU version of basename()
-++#include <libgen.h>  // POSIX version of basename()
-+ #include <unistd.h>
-+ #include <glibmm/ustring.h>
-+ #include <glibmm/fileutils.h>
-diff --git a/meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb b/meta-=
-gnome/recipes-extended/gparted/gparted_1.4.0.bb
-similarity index 83%
-rename from meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb
-rename to meta-gnome/recipes-extended/gparted/gparted_1.4.0.bb
-index d1a975930..6f774904b 100644
---- a/meta-gnome/recipes-extended/gparted/gparted_1.3.1.bb
-+++ b/meta-gnome/recipes-extended/gparted/gparted_1.4.0.bb
-@@ -3,16 +3,16 @@ HOMEPAGE =3D "http://gparted.org/index.php"
- LICENSE =3D "GPL-2.0-only"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
-=20
--inherit features_check autotools pkgconfig python3native gnome-help gtk-=
-icon-cache
-+inherit autotools pkgconfig python3native gnome-help gtk-icon-cache
-=20
--REQUIRED_DISTRO_FEATURES =3D "x11"
-=20
- SRC_URI =3D " \
-     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BPN}-${PV}/${BPN}-${PV=
-}.tar.gz \
-     file://0001-Install-polkit-action-unconditionally-executable-pke.pat=
-ch \
-     file://0001-Do-not-use-NULL-where-boolean-is-expected.patch \
-+    file://0001-use-posix-basename.patch \
- "
--SRC_URI[sha256sum] =3D "5eee2e6d74b15ef96b13b3a2310c868ed2298e03341021e7=
-d12a5a98a1d1e109"
-+SRC_URI[sha256sum] =3D "e5293a792e53fdbeba29c4a834113cd9603d0d639330da93=
-1a468bf3687887be"
-=20
- UPSTREAM_CHECK_URI =3D "https://sourceforge.net/projects/gparted/files/g=
-parted/"
- UPSTREAM_CHECK_REGEX =3D "gparted-(?P<pver>\d+\.(\d+)+(\.\d+)+)"
---=20
-2.25.1
-
+> 
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>   .../byacc/{byacc_20211224.bb => byacc_20220128.bb}            | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-oe/recipes-extended/byacc/{byacc_20211224.bb => byacc_20220128.bb} (65%)
+> 
+> diff --git a/meta-oe/recipes-extended/byacc/byacc_20211224.bb b/meta-oe/recipes-extended/byacc/byacc_20220128.bb
+> similarity index 65%
+> rename from meta-oe/recipes-extended/byacc/byacc_20211224.bb
+> rename to meta-oe/recipes-extended/byacc/byacc_20220128.bb
+> index 85e5072716..8aa8767d37 100644
+> --- a/meta-oe/recipes-extended/byacc/byacc_20211224.bb
+> +++ b/meta-oe/recipes-extended/byacc/byacc_20220128.bb
+> @@ -4,7 +4,7 @@
+>   # Setting to PD as this is what the upstream has it as.
+>   
+>   LICENSE = "PD"
+> -LIC_FILES_CHKSUM = "file://package/debian/copyright;md5=e13dd32663e3159031608d536530a080"
+> +LIC_FILES_CHKSUM = "file://package/debian/copyright;md5=62c37a10a2faf90235ee64280ad72737"
+>   require byacc.inc
+>   
+> -SRC_URI[sha256sum] = "7bc42867a095df2189618b64497016298818e88e513fca792cb5adc9a68ebfb8"
+> +SRC_URI[sha256sum] = "42c1805cc529314e6a76326fe1b33e80c70862a44b01474da362e2f7db2d749c"
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#96544): https://lists.openembedded.org/g/openembedded-devel/message/96544
+> Mute This Topic: https://lists.openembedded.org/mt/90389513/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
