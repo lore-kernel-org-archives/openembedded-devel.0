@@ -2,62 +2,63 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F36FDC63714
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F2687C433FE
 	for <webhook@archiver.kernel.org>; Mon, 11 Apr 2022 17:18:01 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com
- [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web09.31952.1649696199940906099
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com
+ [209.85.216.46])
+ by mx.groups.io with SMTP id smtpd.web10.31623.1649696345053212511
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Apr 2022 09:56:40 -0700
+ Mon, 11 Apr 2022 09:59:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=nydnTJMx;
- spf=pass (domain: gmail.com, ip: 209.85.214.173,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=CSU3RAKe;
+ spf=pass (domain: gmail.com, ip: 209.85.216.46,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id q3so3139793plg.3
+Received: by mail-pj1-f46.google.com with SMTP id
+ b2-20020a17090a010200b001cb0c78db57so14295596pjb.2
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Apr 2022 09:56:39 -0700 (PDT)
+ Mon, 11 Apr 2022 09:59:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=LgYM2l/C0J/A5wxucwd7ai6AskToynP5wGnF+t8/y1Y=;
-        b=nydnTJMxgLDiOMajcsklTErrqbdzRoQbWhl4XrXpakX39y3bMaaRvdY3GZr8w1vjKP
-         SGWAtK+p+zYM9vAsuyCfpowZxEveWmrXao3w+H2MYL6OCzD7uEzpzCICGjhrRSJOJpPk
-         DN4LtAx7mQhL189crup1bLgmAkb6WQOMu1ERiljD8lnnskIhWyh0TWWFj37OD6hg8sf5
-         SIBiNFS6Z6HyNKUF22vDqnFlLZIKJiQfY+CbyLGCal3E+c0p2LPGYybhHpnfuhW8rJMB
-         e+Vm+4BQGEC1Er8cNN7bgHQWVzXweNR6JV982CO8ypvcHN8gAtDFC0uvwit3E8akq1wt
-         PDAg==
+        bh=1m0wiaywAWvh+0b1jAL0UbRmvxZpwmVw9xM8R5RvOYw=;
+        b=CSU3RAKeaDDitfeNktGh+U2T721QNuGv5yqECLF6sGwTXE0DBb7YyL/3sGq8M++0Js
+         G/qWhsfhwp6493ZeWfBP3frpSZaf7igbcP6rvDZlqfgstyWdlU9DIAP7g/fziVeXS3nd
+         NUvZ1oW8Cio5KxtJirwBtB2KB97DDsek8KzRzyq/zwAdaNPvkwzMOJlODrfZuPtq2Q3F
+         ugWX/Xu12evtN/mh4FNgvKyZBMzuH/RUGSebbjj/MQWwiO50vI2Tir+To+/kdGkVD9X6
+         SzWQvBm+oVhVmj2Wu/8OcK1zcaVVbYbRAwvRmXNpvNlRibKC4JKONZb7QVfVwjjExkRe
+         41yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=LgYM2l/C0J/A5wxucwd7ai6AskToynP5wGnF+t8/y1Y=;
-        b=Wg6gglkMOH9FVTh/OjWor6wWB6E6kg491OvhQY72LULtcyvmC0+EMAG9MgKwmEwqNW
-         mYlc/yGvT26KoNihUx/HFWgOCL5ld+Jj362A0nnmMWCuEWalYqk+6462KKIGHO28FFat
-         wc440LXWc3Z/K3BJC6C5KzKqzqWa4QncSCJ03Z+31R9FI24/yarDk2VuEyk3NStNIvH2
-         IjzYx8WbKcMktK2hEGPjEnTweDiQQP8dFedda/WmftktTRl+cQM+8InjnliMuJWP5oEd
-         8IMBUtq3/XolNbnCLBT38q2vFLA+i0CAuUMWpKTVS6v2t9a2cm50eOivq5qw8dNb2P5w
-         F/Ew==
-X-Gm-Message-State: AOAM531/Jmcz4oaVVa+sRoyFzHJnoo9izlh3OKcnuh4fFsQWRPr5eJIF
-	+0z+kWHKcIyYGGX8xF5C/ciqs5q2lIk=
+        bh=1m0wiaywAWvh+0b1jAL0UbRmvxZpwmVw9xM8R5RvOYw=;
+        b=s/SZ13y7pesdy8dmrxfc00eDTnflv8ABuqM+/X+EeKq6vf7j+qnjGSWugv0i6CqYgt
+         zXdwMpoizyFjAMpxTgmRXLvGYzzRFnQDVUEOpjEjNbdFwZayOZEp0Tzsvxg3kmu6e6i4
+         i4mG0jaGb3UPN3UYRn7QP6F2HHJP6zbkDsYor9Ud0kyU28RL4JkpwbD+4oGyC6fg2qx5
+         NaE/ZErSKdUehodMqQv4oZL+rIsL6JSRsopBQxiJgLEdS/vMidHX52YmfZAn3Trssddu
+         Xi/J1QoDitKYgT6Xs/BjKxs6VJKPXN/g4iV8vpWlPtNyWEPcyQp9S+XWfyhYSfm26TBq
+         gZkQ==
+X-Gm-Message-State: AOAM532k7IXuYbYhF5DXPd+Ri6g+xchdSbdFIM68/ZTM1I6LCWGrEUZj
+	NNQqd0QDJ2SFMXyJsBMgPWj4IpmRT7E=
 X-Google-Smtp-Source: 
- ABdhPJwRT4t46mnEk9Ald93huRrjWFSGX9FLBYsSC+K6I/irqqJndXz+APD5dmX0VolZnmTJutk3dA==
-X-Received: by 2002:a17:90a:4203:b0:1cb:6ba1:fcba with SMTP id
- o3-20020a17090a420300b001cb6ba1fcbamr141778pjg.20.1649696198912;
-        Mon, 11 Apr 2022 09:56:38 -0700 (PDT)
+ ABdhPJw3VjrGyDVgS913jdN6hkYSWXab5rhxrlxIZaqUjK0ltcmQ0XjZOd+P6y4EORr6zPYIsQi9WQ==
+X-Received: by 2002:a17:902:d2c6:b0:156:2b2c:ab54 with SMTP id
+ n6-20020a170902d2c600b001562b2cab54mr33892694plc.52.1649696344163;
+        Mon, 11 Apr 2022 09:59:04 -0700 (PDT)
 Received: from keaua.hsd1.ca.comcast.net
  ([2601:202:4180:a5c0:70d5:c5c2:9136:2337])
         by smtp.gmail.com with ESMTPSA id
- v4-20020a17090a00c400b001cb4f242c92sm42107pjd.26.2022.04.11.09.56.37
+ v5-20020a655685000000b0039d519701a9sm275457pgs.27.2022.04.11.09.59.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 11 Apr 2022 09:56:38 -0700 (PDT)
+        Mon, 11 Apr 2022 09:59:03 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Yi Zhao <yi.zhao@windriver.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][honister][PATCH] apache2: upgrade 2.4.52 -> 2.4.53
-Date: Mon, 11 Apr 2022 09:56:36 -0700
-Message-Id: <20220411165636.1829924-1-akuster808@gmail.com>
+Subject: [meta-oe][hardknott][PATCH] apache2: upgrade 2.4.52 -> 2.4.53
+Date: Mon, 11 Apr 2022 09:59:02 -0700
+Message-Id: <20220411165902.1830357-1-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -66,7 +67,7 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 11 Apr 2022 17:18:01 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96553
+ https://lists.openembedded.org/g/openembedded-devel/message/96555
 
 From: Yi Zhao <yi.zhao@windriver.com>
 
@@ -85,6 +86,9 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 (cherry picked from commit 81bbe65791459538ab578ac13e612f7dc6f692f0)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
+(cherry picked from commit d6c8d3a1bad2276001c3bdc09de4dee107357a1d)
+[Fixup for hardknott context, overrides]
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
  ...re-use-pkg-config-for-PCRE-detection.patch | 37 +++++++++----------
  ...the-core-size-limit-if-CoreDumpDirec.patch | 13 +++----
@@ -96,8 +100,8 @@ Signed-off-by: Armin Kuster <akuster808@gmail.com>
  ...x-perl-install-directory-to-usr-bin.patch} | 10 +++--
  ...in-force-destdir-to-be-empty-string.patch} | 10 ++---
  ...use-relative-path-for-gen_test_char.patch} |  7 ++--
- .../{apache2_2.4.52.bb => apache2_2.4.53.bb}  |  8 ++--
- 11 files changed, 62 insertions(+), 65 deletions(-)
+ .../{apache2_2.4.52.bb => apache2_2.4.53.bb}  |  6 +--
+ 11 files changed, 61 insertions(+), 64 deletions(-)
  rename meta-webserver/recipes-httpd/apache2/apache2/{apache-configure_perlbin.patch => 0008-Fix-perl-install-directory-to-usr-bin.patch} (85%)
  rename meta-webserver/recipes-httpd/apache2/apache2/{0001-support-apxs.in-force-destdir-to-be-empty-string.patch => 0009-support-apxs.in-force-destdir-to-be-empty-string.patch} (90%)
  rename meta-webserver/recipes-httpd/apache2/apache2/{0008-apache2-do-not-use-relative-path-for-gen_test_char.patch => 0010-apache2-do-not-use-relative-path-for-gen_test_char.patch} (86%)
@@ -492,10 +496,10 @@ diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.52.bb b/meta-webse
 similarity index 97%
 rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.52.bb
 rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.53.bb
-index 0bf29a744e..bac012ea56 100644
+index 10123aa2bb..e5063142c3 100644
 --- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.52.bb
 +++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.53.bb
-@@ -13,12 +13,12 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
+@@ -13,8 +13,8 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
             file://0005-replace-lynx-to-curl-in-apachectl-script.patch \
             file://0006-apache2-fix-the-race-issue-of-parallel-installation.patch \
             file://0007-apache2-allow-to-disable-selinux-support.patch \
@@ -505,13 +509,8 @@ index 0bf29a744e..bac012ea56 100644
 +           file://0009-support-apxs.in-force-destdir-to-be-empty-string.patch \
            "
  
- SRC_URI:append:class-target = " \
--           file://0008-apache2-do-not-use-relative-path-for-gen_test_char.patch \
-+           file://0010-apache2-do-not-use-relative-path-for-gen_test_char.patch \
-            file://init \
-            file://apache2-volatile.conf \
-            file://apache2.service \
-@@ -26,7 +26,7 @@ SRC_URI:append:class-target = " \
+ SRC_URI_append_class-target = " \
+@@ -26,7 +26,7 @@ SRC_URI_append_class-target = " \
             "
  
  LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
