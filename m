@@ -1,131 +1,249 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jpuhlman@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AB330C4167B
-	for <webhook@archiver.kernel.org>; Tue, 12 Apr 2022 16:46:38 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com
- [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web10.12901.1649781043503174072
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90372C47087
+	for <webhook@archiver.kernel.org>; Tue, 12 Apr 2022 16:46:39 +0000 (UTC)
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com
+ [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.web08.3965.1649716008231801375
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Apr 2022 09:30:43 -0700
+ Mon, 11 Apr 2022 15:26:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=AlaDK7JP;
- spf=pass (domain: gmail.com, ip: 209.85.214.180,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id be5so11272601plb.13
+ dkim=pass header.i=@mvista.com header.s=google header.b=dvn935ix;
+ spf=pass (domain: mvista.com, ip: 209.85.216.52,
+ mailfrom: jpuhlman@mvista.com)
+Received: by mail-pj1-f52.google.com with SMTP id 2so16555937pjw.2
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Apr 2022 09:30:43 -0700 (PDT)
+ Mon, 11 Apr 2022 15:26:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
+        d=mvista.com; s=google;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=qsOPi3Pa3bnQiIM55kRFcJgzOODX0MSpeeHytnmKsAk=;
-        b=AlaDK7JPlGasLu666mY4kFxsL12//t4LSAY/uxvglkvlT1hVxJn+ux9EtkHBiSAjcv
-         YyQPxVru/aY0nD51SucynuqxMj22x4HkSWqRgPoyaqfh8utMYxTK55f32RmwcFA4z50h
-         MkaW6ZXjzLUbPUr90o4J2fMxzMudJscSyPZIQLp2RQgNWljOFd7RXH3Y4VlpAkspb/zV
-         tz32GrR+PyyPpLOkbOMn8322ii4ztV/zdyYdvjjNFrUoauq34G23IOWO0Ms0O3tpBhSv
-         bFY9YxwRsjyTybj/uDrelegPBcyVgv4hqh73vDPjB4Hjj19N5QfXUm7Q/7Cg+MFSk0+5
-         8Zeg==
+        bh=Y84Dagp1JvsI//eXRdzEVqi0IucE4AyqylwKJ1Gvfr0=;
+        b=dvn935ix7YTexet99ZOlG4bRYZiJsO6t+e5vi2J/aNqaCkewImaU9AX2IKRc9kfL24
+         CUi2wOO+ENiuM8USOSbbaOh0vn1P67AYdEakEastXQLrh8ixFDF3CNqGYEi2Apy1WKw1
+         8mvbn/ueyY6RvK+amq9Cn1GCfKBTgPGXvoVBU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=qsOPi3Pa3bnQiIM55kRFcJgzOODX0MSpeeHytnmKsAk=;
-        b=VB2wjidTWMsKa5lQJHdJhxWmTdDd5ETiROtohLfFHLDQNYlld/N91nPEafUYF4fXOT
-         +wibsi91kPtTiEYj/ZTBc3P2G/9Q8dFLIbkDmTt04DLT2pKaU9LYdbpSf3B4AI9KlgRk
-         TrKBw2d7TgLGP5/pDT/c1ey8DipOMfaGKwljdWOp2TvNhaGUv7QIIBQj0cTU33hZixiR
-         yQZvRgR8B2Tp/jRBkwf19rGxvftdujvF1IT+KOj4fEnAjmdXzgzB/XaoxJC7Br+XY07X
-         oUveBxm3EqwzSXfZkzU/7nJohgZQTGF9o8XmcmkqB+ra2ObOlrsNrn1voDvLxOyuayv0
-         BF7Q==
-X-Gm-Message-State: AOAM532i5oVVt/AbX3XF0M0ANZ+hC6YaCGeQoRkoJXT2+Yc7e5B5T2Qo
-	scp0+V0bdkWrv35OwQIdUb1YfmOVfnqlOg==
+        bh=Y84Dagp1JvsI//eXRdzEVqi0IucE4AyqylwKJ1Gvfr0=;
+        b=QrAGffRSQ95EOA9zzPPV+OmKU8NnhCqmwpi7PVi/6pNTkTorgYSNEGkrwGkxzZajMe
+         T7sAgfiUZbi+PCNVcxfXyBU5yL8a1dMk809Vit+4SwmDr5nDaDircyo2WdkrwfdyBfWe
+         oB86FN21bXQZvpullexAI93W1C/l7XYhqemoT7y0HiATN6lDSynE2goA28NchoUD51CL
+         u7krwKKU93eDXnPetVRWLQB06EudHBwESVIkvBBenr/Nbp4IZc3QWsaq42TwQVr9S1QX
+         EFIbPXY2yqCWdu3xBnqwfTnQPHkUvwi7q+L63GO3WfO1CgTh2AKb+St9RIRfol518a1f
+         k1TA==
+X-Gm-Message-State: AOAM533xhq+Zq9zkmjqe0I/mdiZ1jjqcwd5s3/vIkyXAiFUfkdCiUTyr
+	hce+GRFvo2XUHxT877ynP2FQkanNVinnzQ==
 X-Google-Smtp-Source: 
- ABdhPJxKhIXD4hP7bYdf2bpHh0xeaduF6xyMgV7CxHn1KhPPEcd41q1ozHoGjXRkMJ2df/zSrAQZ6g==
-X-Received: by 2002:a17:902:bcc4:b0:157:333:e512 with SMTP id
- o4-20020a170902bcc400b001570333e512mr27592344pls.9.1649781042613;
-        Tue, 12 Apr 2022 09:30:42 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::94ca])
+ ABdhPJxPwSASUPn3k1WVdZF/fSLSXD48d8gWkGsp8fB94EfKQLXkmyZSO0ppdwmTTPqsbSNhTAdcWA==
+X-Received: by 2002:a17:902:f612:b0:14c:e978:f99e with SMTP id
+ n18-20020a170902f61200b0014ce978f99emr34805102plg.23.1649716007440;
+        Mon, 11 Apr 2022 15:26:47 -0700 (PDT)
+Received: from brown (99-14-97-149.lightspeed.frokca.sbcglobal.net.
+ [99.14.97.149])
         by smtp.gmail.com with ESMTPSA id
- i7-20020a628707000000b004fa6eb33b02sm38796263pfe.49.2022.04.12.09.30.41
+ b4-20020a17090a550400b001ca38abb248sm457026pji.53.2022.04.11.15.26.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Apr 2022 09:30:42 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Mon, 11 Apr 2022 15:26:47 -0700 (PDT)
+Received: by brown (sSMTP sendmail emulation); Mon, 11 Apr 2022 15:26:42 -0700
+From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] dbus-cxx: Include missing <utility> header
-Date: Tue, 12 Apr 2022 09:30:39 -0700
-Message-Id: <20220412163039.3157555-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.35.1
+Cc: Anand Je Sypureddy <anandje@mvista.com>,
+	Sam Kappen <skappen@mvista.com>,
+	Jeremy Puhlman <jpuhlman@mvista.com>
+Subject: [meta-networking][dunfell][PATCH] net-snmp: Traps/Notifications
+ aren't sent when configured by snmpNotifyTable
+Date: Mon, 11 Apr 2022 15:26:40 -0700
+Message-Id: <20220411222640.3211000-1-jpuhlman@mvista.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 12 Apr 2022 16:46:38 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 12 Apr 2022 16:46:39 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96590
+ https://lists.openembedded.org/g/openembedded-devel/message/96557
 
-gcc-12 does error about this explicitly.
+From: Anand Je Sypureddy <anandje@mvista.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Source: https://github.com/net-snmp/net-snmp.git
+MR: 114066
+Type: Defect Fix
+Disposition: Backport from https://github.com/net-snmp/net-snmp/commit/951fd2d9b07e29455ff0251b0f44ed76d935ff00
+ChangeID: af87abf2aeefdac65fcd57b7faaaa0e3679fe57f
+Description:
+
+snmpd: Restore SNMPD_CALLBACK_SEND_TRAP[12] behavior
+
+Instead of only invoking the SNMPD_CALLBACK_SEND_TRAP[12] callbacks if one
+or more sessions with the corresponding SNMP version exist, invoke these
+callbacks unconditionally.
+
+Signed-off-by: Anand Je Sypureddy <anandje@mvista.com>
+Reviewed-by: Sam Kappen <skappen@mvista.com>
+Signed-off-by: Jeremy Puhlman <jpuhlman@mvista.com>
 ---
- .../recipes-core/dbus-cxx/dbus-cxx_2.1.0.bb   |  1 +
- .../files/0001-include-utility-header.patch   | 32 +++++++++++++++++++
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-oe/recipes-core/dbus-cxx/files/0001-include-utility-header.patch
+ ...SNMPD_CALLBACK_SEND_TRAP-12-behavior.patch | 133 ++++++++++++++++++
+ .../net-snmp/net-snmp_5.8.bb                  |   1 +
+ 2 files changed, 134 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0001-snmpd-Restore-SNMPD_CALLBACK_SEND_TRAP-12-behavior.patch
 
-diff --git a/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.1.0.bb b/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.1.0.bb
-index 487681c92d..c8dabc5ead 100644
---- a/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.1.0.bb
-+++ b/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.1.0.bb
-@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4cf0188f02184e1e84b9586ac53c3f83"
- 
- SRC_URI = "git://github.com/dbus-cxx/dbus-cxx.git;branch=master;protocol=https \
-            file://0001-Include-typeinfo-for-typeid.patch \
-+           file://0001-include-utility-header.patch \
- "
- SRC_URI:append:libc-musl = "file://fix_build_musl.patch"
- SRCREV = "73532d6a5faae9c721c2cc9535b8ef32d4d18264"
-diff --git a/meta-oe/recipes-core/dbus-cxx/files/0001-include-utility-header.patch b/meta-oe/recipes-core/dbus-cxx/files/0001-include-utility-header.patch
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-snmpd-Restore-SNMPD_CALLBACK_SEND_TRAP-12-behavior.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-snmpd-Restore-SNMPD_CALLBACK_SEND_TRAP-12-behavior.patch
 new file mode 100644
-index 0000000000..0c8262af75
+index 000000000..8279aff32
 --- /dev/null
-+++ b/meta-oe/recipes-core/dbus-cxx/files/0001-include-utility-header.patch
-@@ -0,0 +1,32 @@
-+From 63170cfcfbf483716ce2599e165db80713fc2706 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 12 Apr 2022 06:47:19 -0700
-+Subject: [PATCH] include utility header
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-snmpd-Restore-SNMPD_CALLBACK_SEND_TRAP-12-behavior.patch
+@@ -0,0 +1,133 @@
++From 6be94cf81d56f9395b85848bbf7129eb9f992d96 Mon Sep 17 00:00:00 2001
++From: Bart Van Assche <bvanassche@acm.org>
++Date: Tue, 29 Dec 2020 15:22:42 -0800
++Subject: [PATCH] snmpd: Restore SNMPD_CALLBACK_SEND_TRAP[12] behavior
 +
-+Needed for exchange from std namespace
++Instead of only invoking the SNMPD_CALLBACK_SEND_TRAP[12] callbacks if one
++or more sessions with the corresponding SNMP version exist, invoke these
++callbacks unconditionally.
 +
-+Fixes
-+dbus-cxx/variant.cpp:135:25: error: 'exchange' is not a member of 'std'
++Fixes: f770e0f74932 ("skip send_trap callbacks if no sessions for version")
++Fixes: https://github.com/net-snmp/net-snmp/issues/247
 +
-+Upstream-Status: Submitted [https://github.com/dbus-cxx/dbus-cxx/pull/98]
++Upstream Status: Backport https://github.com/net-snmp/net-snmp/commit/951fd2d9b07e29455ff0251b0f44ed76d935ff00
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Anand Je Sypureddy <anandje@mvista.com>
 +---
-+ dbus-cxx/variant.cpp | 1 +
-+ 1 file changed, 1 insertion(+)
++ agent/agent_trap.c | 62 ++--------------------------------------------
++ 1 file changed, 2 insertions(+), 60 deletions(-)
 +
-+diff --git a/dbus-cxx/variant.cpp b/dbus-cxx/variant.cpp
-+index bcf2684..97b622c 100644
-+--- a/dbus-cxx/variant.cpp
-++++ b/dbus-cxx/variant.cpp
-+@@ -11,6 +11,7 @@
-+ #include <dbus-cxx/dbus-cxx-private.h>
-+ #include <dbus-cxx/signatureiterator.h>
-+ #include <stdint.h>
-++#include <utility>
-+ #include "enums.h"
-+ #include "path.h"
-+ #include "signature.h"
++diff --git a/agent/agent_trap.c b/agent/agent_trap.c
++index d49c2dc..0289901 100644
++--- a/agent/agent_trap.c
+++++ b/agent/agent_trap.c
++@@ -92,11 +92,6 @@ struct trap_sink {
++ 
++ struct trap_sink *sinks = NULL;
++ 
++-#ifndef NETSNMP_DISABLE_SNMPV1
++-static int _v1_sessions = 0;
++-#endif /* NETSNMP_DISABLE_SNMPV1 */
++-static int _v2_sessions = 0;
++-
++ const oid       objid_enterprisetrap[] = { NETSNMP_NOTIFICATION_MIB };
++ const oid       trap_version_id[] = { NETSNMP_SYSTEM_MIB };
++ const int       enterprisetrap_len = OID_LENGTH(objid_enterprisetrap);
++@@ -159,55 +154,6 @@ free_trap_session(struct trap_sink *sp)
++     free(sp);
++ }
++ 
++-static void
++-_trap_version_incr(int version)
++-{
++-    switch (version) {
++-#ifndef NETSNMP_DISABLE_SNMPV1
++-        case SNMP_VERSION_1:
++-            ++_v1_sessions;
++-            break;
++-#endif
++-#ifndef NETSNMP_DISABLE_SNMPV2C
++-        case SNMP_VERSION_2c:
++-#endif
++-        case SNMP_VERSION_3:
++-            ++_v2_sessions;
++-            break;
++-        default:
++-            snmp_log(LOG_ERR, "unknown snmp version %d\n", version);
++-    }
++-    return;
++-}
++-
++-static void
++-_trap_version_decr(int version)
++-{
++-    switch (version) {
++-#ifndef NETSNMP_DISABLE_SNMPV1
++-        case SNMP_VERSION_1:
++-            if (--_v1_sessions < 0) {
++-                snmp_log(LOG_ERR,"v1 session count < 0! fixed.\n");
++-                _v1_sessions = 0;
++-            }
++-            break;
++-#endif
++-#ifndef NETSNMP_DISABLE_SNMPV2C
++-        case SNMP_VERSION_2c:
++-#endif
++-        case SNMP_VERSION_3:
++-            if (--_v2_sessions < 0) {
++-                snmp_log(LOG_ERR,"v2 session count < 0! fixed.\n");
++-                _v2_sessions = 0;
++-            }
++-            break;
++-        default:
++-            snmp_log(LOG_ERR, "unknown snmp version %d\n", version);
++-    }
++-    return;
++-}
++-
++-
++ #ifndef NETSNMP_NO_TRAP_STATS
++ static void
++ _dump_trap_stats(netsnmp_session *sess)
++@@ -285,8 +231,6 @@ netsnmp_add_notification_session(netsnmp_session * ss, int pdutype,
++         sinks = new_sink;
++     }
++ 
++-    _trap_version_incr(version);
++-
++     return 1;
++ }
++ 
++@@ -338,7 +282,6 @@ remove_trap_session(netsnmp_session * ss)
++             } else {
++                 sinks = sp->next;
++             }
++-            _trap_version_decr(ss->version);
++             /*
++              * I don't believe you *really* want to close the session here;
++              * it may still be in use for other purposes.  In particular this
++@@ -490,7 +433,6 @@ snmpd_free_trapsinks(void)
++     DEBUGMSGTL(("trap", "freeing trap sessions\n"));
++     while (sp) {
++         sinks = sinks->next;
++-        _trap_version_decr(sp->version);
++         free_trap_session(sp);
++         sp = sinks;
++     }
++@@ -1025,11 +967,11 @@ netsnmp_send_traps(int trap, int specific,
++         }
++     }
++ #ifndef NETSNMP_DISABLE_SNMPV1
++-    if (template_v1pdu && _v1_sessions)
+++    if (template_v1pdu)
++         snmp_call_callbacks(SNMP_CALLBACK_APPLICATION,
++                         SNMPD_CALLBACK_SEND_TRAP1, template_v1pdu);
++ #endif
++-    if (template_v2pdu && _v2_sessions)
+++    if (template_v2pdu)
++         snmp_call_callbacks(SNMP_CALLBACK_APPLICATION,
++                         SNMPD_CALLBACK_SEND_TRAP2, template_v2pdu);
++     snmp_free_pdu(template_v1pdu);
 +-- 
-+2.35.1
++2.25.1
 +
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+index 6b4b6ce8e..b28e71890 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+@@ -35,6 +35,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
+            file://CVE-2020-15861-0004.patch \
+            file://CVE-2020-15861-0005.patch \
+            file://CVE-2020-15862.patch \
++	   file://0001-snmpd-Restore-SNMPD_CALLBACK_SEND_TRAP-12-behavior.patch \
+            "
+ SRC_URI[md5sum] = "63bfc65fbb86cdb616598df1aff6458a"
+ SRC_URI[sha256sum] = "b2fc3500840ebe532734c4786b0da4ef0a5f67e51ef4c86b3345d697e4976adf"
 -- 
-2.35.1
+2.31.1
 
 
