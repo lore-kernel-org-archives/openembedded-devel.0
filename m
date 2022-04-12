@@ -1,96 +1,100 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 82517C433FE
-	for <webhook@archiver.kernel.org>; Tue, 12 Apr 2022 23:50:13 +0000 (UTC)
-Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com
- [209.85.167.48])
- by mx.groups.io with SMTP id smtpd.web11.929.1649797000131271251
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D8FBC3525B
+	for <webhook@archiver.kernel.org>; Tue, 12 Apr 2022 23:50:14 +0000 (UTC)
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com
+ [209.85.214.175])
+ by mx.groups.io with SMTP id smtpd.web11.2476.1649801000448394960
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Apr 2022 13:56:40 -0700
+ Tue, 12 Apr 2022 15:03:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@oleksandr-kravchuk-com.20210112.gappssmtp.com
- header.s=20210112 header.b=VIOXdvcl;
- spf=none, err=permanent DNS error (domain: oleksandr-kravchuk.com,
- ip: 209.85.167.48, mailfrom: open.source@oleksandr-kravchuk.com)
-Received: by mail-lf1-f48.google.com with SMTP id p10so34230385lfa.12
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=iR2q10WU;
+ spf=pass (domain: gmail.com, ip: 209.85.214.175,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f175.google.com with SMTP id d15so225618pll.10
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Apr 2022 13:56:39 -0700 (PDT)
+ Tue, 12 Apr 2022 15:03:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oleksandr-kravchuk-com.20210112.gappssmtp.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=5nqpuKVNWfdUVHx9zDJpR8tpcO4erEdh9zddCTD5tZk=;
-        b=VIOXdvclp9lPBZZdCacg7peMOYa2uqUWKQSYDyEsnsFESb3mNxFJTZToCezC/2QAhP
-         PN6WgLTnvK6ft9Lw3bs3iYMAq/9BeVqHkhX8JJyMEYcaU/Qoj3ldbzHmiotTJq7TYJWR
-         VvJFrWuLSut3NsXykCoDk90kXAZyIcOVD1gWEsCZtQSwDHMfGd2I28ibB6f5qJqjTRbs
-         AadpEZzcaj0ciECRjTuGPR1MAnh/KfMzkLjhStpvn6Jme9f8vfFMtsfiBkfJDt+Gfp4U
-         1wkD6CZKi72FnuHHFzRy1Vhg+p4M2HlNgSYMHeDo+waVSznfi9vAidp+nahv+okW3ojY
-         zrhQ==
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=NW/2CIBreGlzvdGWyXz9X6F5DfpJ2N+wigkjA9T4Sqw=;
+        b=iR2q10WUqz+4gAkzFG91I87KRd0SVmDDR1dbvfggm7ndp+4ZEnkBJbhcR2YVkdQL9m
+         i+635rlJ6FxFnCrtt0RvZPSsGefPtUA6OfNnkqnnnh/y0hLMTAf/GPFN3mcBhHeKEqcM
+         eaSTcphFGCcAfwJAPQJI0rOC0+O0bTxNQNatoWr/vWXvmB1qosAkCxjndEApNcLfBz1W
+         Vygt497j1JJThBMconesP3fA4zV8cdGQV053QDlbQQY5+kug2He8EDLAs5TKAJuo8Wmx
+         /yQYJEtAA62JpTyy6ld4k5dGwcSxho1LfuJTJZTpC31TudHGVafX4tGXpVeI1tuXNLI9
+         ZpHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=5nqpuKVNWfdUVHx9zDJpR8tpcO4erEdh9zddCTD5tZk=;
-        b=5U6/PDn+XC1qiJGsqIGHox8C0v55MBUT+hPaZYkkSSGDsBomS2KHB5UqD8PGB5ut37
-         4V7yE+qHtyFRgBwtINw96argKMxQby+VZw6yTo8Nh/X8KGg1JUdJ0XUKBScMJFx2wePI
-         yH9FNRRz/eokl10glrh7niIIeRkc0o/RQXCGNfz8KdgpYRMWH90mPKFKLagRz6hdLjWh
-         TY6QFi8JRFGWcAYp3BjHxXMCUlzOuuc0thZ1vRqgjMfYioAY4izMFvyhgNcLAaz6QuU5
-         N/PlNDO6P+1dm0H0bJpis/a8nAQq7tteYZ2P2Y3VvWHMu+RVvE2UT8UcqjXd3zqoxU5X
-         MOWQ==
-X-Gm-Message-State: AOAM532J5u8PkNVf15Jtx5FNVPzkuvnTgrdlirRmWmuJk3qKjp6/uad0
-	jA+dYMzFAD6fjCgE1xB7tUFIoId04OWo7lpsh6I=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=NW/2CIBreGlzvdGWyXz9X6F5DfpJ2N+wigkjA9T4Sqw=;
+        b=Q5enA+Ugo11tQV4eemH7Sdeh4GoQ/jDOWBbJjtB2z/Vwo0VuqSkfUqXWHw+hleb7C9
+         6VoB4E67fNrKlbaOmqVIGsQyT6gS5ch9BYkRp6uSoGhYgKhuS7TK3lce3xHViA6sWJnr
+         EeGhmVdJfIe/0S4+wH/2u7G/GkJFBw2WY+z2hu+L+fUX/YkHdrc59OrMQOvcbjyXCYrW
+         +MNqKjQHo5COV9icdgy5vYQo6uXG7FcmadU9zix3qMDJ3OOoP54QrCxLmpuhBHa5uJpd
+         lJcUobxKd5drJwrZopmV5eZGBtt7UCEBBi/1pWKEEVuknQtWqwXa2yVu707dBJXzSswH
+         AaBg==
+X-Gm-Message-State: AOAM533UiOfshTlzBfozFU9ftN7EgaFS/3ERhB8W/3UybhzDewuMLwyE
+	pdilIPTarIqVSxdJ3wt6LIC1jqw7sfj/vQ==
 X-Google-Smtp-Source: 
- ABdhPJzAHwnPg4ZL+/wWWmzn5Qvi/ytOHy+a8SQLh9tlAGQ8ZQbpGfMgZWmoDKKDI+p/LNtv96m3yA==
-X-Received: by 2002:a05:6512:3d01:b0:46b:a5ba:3b7f with SMTP id
- d1-20020a0565123d0100b0046ba5ba3b7fmr8893555lfv.454.1649796997742;
-        Tue, 12 Apr 2022 13:56:37 -0700 (PDT)
-Received: from localhost.localdomain
- (c-7918524e.023-160-67626725.bbcust.telenor.se. [78.82.24.121])
+ ABdhPJy6NF7AXGTK4pK5ec1sa0yjOWWKzoKZskcfCnYAOnlZ8kGlD/hBEwuwFCPtDD7UFl+DP9nr1A==
+X-Received: by 2002:a17:902:cccf:b0:156:31a:736e with SMTP id
+ z15-20020a170902cccf00b00156031a736emr39369530ple.76.1649800999734;
+        Tue, 12 Apr 2022 15:03:19 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::94ca])
         by smtp.gmail.com with ESMTPSA id
- 2-20020a05651c00c200b0024b5eb11f92sm953766ljr.19.2022.04.12.13.56.36
+ v8-20020a17090a7c0800b001cb63a477eesm502881pjf.12.2022.04.12.15.03.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Apr 2022 13:56:37 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+        Tue, 12 Apr 2022 15:03:19 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [meta-extended][PATCH] redis: upgrade to 7.0-rc3
-Date: Tue, 12 Apr 2022 22:56:34 +0200
-Message-Id: <20220412205634.165379-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/7] libpfm4: Remove -Werror from compiler flags
+Date: Tue, 12 Apr 2022 15:03:11 -0700
+Message-Id: <20220412220316.3876985-2-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220412220316.3876985-1-raj.khem@gmail.com>
+References: <20220412220316.3876985-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 12 Apr 2022 23:50:13 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 12 Apr 2022 23:50:14 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96593
+ https://lists.openembedded.org/g/openembedded-devel/message/96595
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Newer versions of compilers get stricter and add new diagnostics which
+cause build failures that upstream should address not distros
+
+Fixes
+| In function 'perf_table_alloc_umask',
+|     inlined from 'gen_tracepoint_table' at pfmlib_perf_event_pmu.c:434:10:
+| pfmlib_perf_event_pmu.c:304:47: error: pointer may be used after 'realloc' [-Werror=use-after-free]
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../redis/{redis_7.0-rc1.bb => redis_7.0-rc3.bb}                | 2 +-
+ meta-oe/recipes-kernel/libpfm/libpfm4_4.11.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/redis/{redis_7.0-rc1.bb => redis_7.0-rc3.bb} (96%)
 
-diff --git a/meta-oe/recipes-extended/redis/redis_7.0-rc1.bb b/meta-oe/recipes-extended/redis/redis_7.0-rc3.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/redis/redis_7.0-rc1.bb
-rename to meta-oe/recipes-extended/redis/redis_7.0-rc3.bb
-index 1a9577154..e977d67f6 100644
---- a/meta-oe/recipes-extended/redis/redis_7.0-rc1.bb
-+++ b/meta-oe/recipes-extended/redis/redis_7.0-rc3.bb
-@@ -19,7 +19,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://GNU_SOURCE.patch \
-            file://0006-Define-correct-gregs-for-RISCV32.patch \
-            "
--SRC_URI[sha256sum] = "9bd57d3c9ebba9dbbd6cd14b0c263ce151b0044fb6620b556449c2d82e06ef3d"
-+SRC_URI[sha256sum] = "66b2ecc2e4b53c62940589434ea8af3a85546df131001680ed294028cd84ecdc"
+diff --git a/meta-oe/recipes-kernel/libpfm/libpfm4_4.11.0.bb b/meta-oe/recipes-kernel/libpfm/libpfm4_4.11.0.bb
+index e476370e05..d2d2512b2c 100644
+--- a/meta-oe/recipes-kernel/libpfm/libpfm4_4.11.0.bb
++++ b/meta-oe/recipes-kernel/libpfm/libpfm4_4.11.0.bb
+@@ -20,7 +20,7 @@ SRC_URI[sha256sum] = "5da5f8872bde14b3634c9688d980f68bda28b510268723cc12973eedba
  
- inherit autotools-brokensep update-rc.d systemd useradd
+ UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/perfmon2/files/libpfm4/"
  
+-EXTRA_OEMAKE = "DESTDIR=\"${D}\" PREFIX=\"${prefix}\" LIBDIR=\"${libdir}\" LDCONFIG=\"true\""
++EXTRA_OEMAKE = "DESTDIR=\"${D}\" PREFIX=\"${prefix}\" LIBDIR=\"${libdir}\" LDCONFIG=\"true\" DBG='-g -Wall -Wextra -Wno-unused-parameter'"
+ EXTRA_OEMAKE:append:powerpc = " ARCH=\"powerpc\""
+ EXTRA_OEMAKE:append:powerpc64 = " ARCH=\"powerpc\" BITMODE=\"64\""
+ EXTRA_OEMAKE:append:powerpc64le = " ARCH=\"powerpc\" BITMODE=\"64\""
 -- 
-2.25.1
+2.35.1
 
 
