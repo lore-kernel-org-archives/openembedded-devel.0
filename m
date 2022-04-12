@@ -2,61 +2,63 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E695C46467
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 28B02C4707A
 	for <webhook@archiver.kernel.org>; Tue, 12 Apr 2022 23:50:14 +0000 (UTC)
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
- [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.web11.2475.1649800999339431980
+Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com
+ [209.85.215.177])
+ by mx.groups.io with SMTP id smtpd.web12.2459.1649801003816575758
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Apr 2022 15:03:19 -0700
+ Tue, 12 Apr 2022 15:03:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=CTsUvSmO;
- spf=pass (domain: gmail.com, ip: 209.85.210.170,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=M4W36NqC;
+ spf=pass (domain: gmail.com, ip: 209.85.215.177,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id j17so241471pfi.9
+Received: by mail-pg1-f177.google.com with SMTP id s137so15746148pgs.5
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Apr 2022 15:03:19 -0700 (PDT)
+ Tue, 12 Apr 2022 15:03:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=CR9qAfuwL0AEXWkCp7hu+ongZkjK7cUDBn0Y739m8SQ=;
-        b=CTsUvSmO66BGf7klKqKBe565A2DUR/opVuE/i6zgYb9LjH9GI08vsqLDbZa+WYIHn0
-         Iv/WhXWLE/zV7+WCis0GEr2iXIzKf7iPlk7E8Mu4Z2rz61RGgo/i//BQVXvp8CZMkZ3x
-         z+T2aZNU3AoRdbRzIkElElKkqCL96FDWZyLpECUb2oe6C2H3vbUeQs79G+9HT2fwZyfr
-         Nbv1tU312+YbERrbE3wughd8KT+QjlGGBpOlyJUY4dDuMfRTjMYjaEHQs0eBhjjghWOv
-         5znK1/l0ewCyMQ9txe2bg3WjolOByRu9Wpkez28hWjv4IgZst+Rartz9tcK/Ao/Ft3gB
-         V/tA==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=JcJHhXPuJWsGq2LPlmmKRfNFTz2mwWeQM9M927ptGl4=;
+        b=M4W36NqC4SHnE7Aj+2MdMjvlYQk6pqMHFo7UbpITt1hG+5c+VwvvDWdX4YHDge0DOM
+         yprchGK5Her6YkgdR5JH+jzeWx0MewCmlTnYnEvCVyiF8c1E0MvmVibd9JqPRz9UKRfb
+         mdZw/FnuMOwftLi9/UIcI0V2jnlex/v1IiHTfh2i8K01g0tcAhuHv0q9WGxn2bWnErn+
+         kChnsuuyk1rOGYYvE66hYhRg1vaKMXTo5DZAy7S3tLciGSdoHg6XdoBU0OV+F5+bl3Em
+         2VMGGk26Prn85kFGLEfupMZFnBHIh6LM++8o5LGIPCXr2HRaRqD0Bree81LA+JXFTRy1
+         tQzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=CR9qAfuwL0AEXWkCp7hu+ongZkjK7cUDBn0Y739m8SQ=;
-        b=vniIaUW0ZZ13kjU3hvGxYDy4lYIUkxhBosjCV/Ec7aNn7jxWCvOUaPXhEn0m8ucTP5
-         DW7GELt17v4JGhKp6xjEhohAH7vTJUErFX6t1WRT2Fu92kG+VLXS5hHwG9YaoBgrIwH3
-         xzvr8SWq+L96K2vL6uPNw1COmkSk4PJK5yIHl7VhpC9jmcHXV+W9Bt+7xDocJOgj+jLN
-         /cX6dCyx/d1S6kKnHtjJMr7HbSbMdlYp5WTxUeUXkwN7NefDrCBlKsBjBssGOmp8Z8IH
-         MOZgFjKwTdgCpsUbmBzdQWrBnv/cGYvBXvQv3YEnDHpS6v5E5gm+uJdTMdCyMh3iOuuc
-         2Cyg==
-X-Gm-Message-State: AOAM532nxzGTts4ri2BQgbc4HfBEZIzbMLgD8FLoAgmCPvKgynxVui2y
-	T5V7idc4q4TbVoK6/ISqwR/3DdLiXHSaZg==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=JcJHhXPuJWsGq2LPlmmKRfNFTz2mwWeQM9M927ptGl4=;
+        b=NouC/zrdyva6jeP7kebCAfDH5hckUtdw2YsjRrlgBgE/5DZUvlAs4PBSkJ90NC20SB
+         v4y7QQCyH3edi4upqoueSvUgAzrlculNxLmPW49AKCDdosrRBDrI6m7F1kuExY/R2J9F
+         t3ADVok0rZEUu4ngINPT2Jlj3lw3Y2qU8ZRBd3mOU9GOBhbEwnuEINh041lBCh1+g0um
+         6sf5F28Zk7orEoH+jbXynLsJoKsHF1cRA3VlpGdoCUJ6t0NBYvV0qb/L7LzNzVHo8iMj
+         Oq6V8ooaQa1jc8QFl50WBF3OvwmvjCwefHBRHyOs7HsT0B1X0aOH14s8woKN31YpP4T7
+         0Cng==
+X-Gm-Message-State: AOAM533fV3ECWxzdj+TUzyFyX6gPcePicQ8E7y0KQE9OmHuGHaxqA4Mh
+	1TavAJP8jzup8cE9px1Fu3neXyrN6/SQew==
 X-Google-Smtp-Source: 
- ABdhPJwqNf2aW8BGBJXdDhW3xbgDwjY+2jjEWVMijWZgghAxFICC5ioefclUZsigcQYz1PRJE4AViw==
-X-Received: by 2002:a63:6809:0:b0:37c:68d3:1224 with SMTP id
- d9-20020a636809000000b0037c68d31224mr31725010pgc.287.1649800998597;
-        Tue, 12 Apr 2022 15:03:18 -0700 (PDT)
+ ABdhPJyAW1vwSkfsvHcV84k3c7c9QuqB7VDZKh9t+jKgTvd81Cbbyc4uIy5eVn9lljbCJHVguX/53w==
+X-Received: by 2002:a63:18f:0:b0:37c:4671:a2ce with SMTP id
+ 137-20020a63018f000000b0037c4671a2cemr33107802pgb.429.1649801003061;
+        Tue, 12 Apr 2022 15:03:23 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::94ca])
         by smtp.gmail.com with ESMTPSA id
- v8-20020a17090a7c0800b001cb63a477eesm502881pjf.12.2022.04.12.15.03.17
+ v8-20020a17090a7c0800b001cb63a477eesm502881pjf.12.2022.04.12.15.03.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Apr 2022 15:03:18 -0700 (PDT)
+        Tue, 12 Apr 2022 15:03:22 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/7] libkcapi: Upgrade to 1.4.0
-Date: Tue, 12 Apr 2022 15:03:10 -0700
-Message-Id: <20220412220316.3876985-1-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 5/7] memcached: Upgrade to 1.6.15
+Date: Tue, 12 Apr 2022 15:03:14 -0700
+Message-Id: <20220412220316.3876985-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220412220316.3876985-1-raj.khem@gmail.com>
+References: <20220412220316.3876985-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
@@ -64,136 +66,90 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 12 Apr 2022 23:50:14 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96594
+ https://lists.openembedded.org/g/openembedded-devel/message/96598
 
 Drop upstreamed patch
-Disable new warnings seen with gcc 12
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...Adjust-for-musl-msghdr-struct-compat.patch | 81 -------------------
- .../{libkcapi_1.3.1.bb => libkcapi_1.4.0.bb}  |  7 +-
- 2 files changed, 4 insertions(+), 84 deletions(-)
- delete mode 100644 meta-oe/recipes-crypto/libkcapi/libkcapi/0001-kcapi-kernel-if-Adjust-for-musl-msghdr-struct-compat.patch
- rename meta-oe/recipes-crypto/libkcapi/{libkcapi_1.3.1.bb => libkcapi_1.4.0.bb} (80%)
+ ...heck-for-NDEBUG-before-using-total_w.patch | 48 -------------------
+ ...memcached_1.6.9.bb => memcached_1.6.15.bb} |  3 +-
+ 2 files changed, 1 insertion(+), 50 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/memcached/memcached/0002-stats_prefix.c-Check-for-NDEBUG-before-using-total_w.patch
+ rename meta-networking/recipes-support/memcached/{memcached_1.6.9.bb => memcached_1.6.15.bb} (91%)
 
-diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-kcapi-kernel-if-Adjust-for-musl-msghdr-struct-compat.patch b/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-kcapi-kernel-if-Adjust-for-musl-msghdr-struct-compat.patch
+diff --git a/meta-networking/recipes-support/memcached/memcached/0002-stats_prefix.c-Check-for-NDEBUG-before-using-total_w.patch b/meta-networking/recipes-support/memcached/memcached/0002-stats_prefix.c-Check-for-NDEBUG-before-using-total_w.patch
 deleted file mode 100644
-index 687eb359cf..0000000000
---- a/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-kcapi-kernel-if-Adjust-for-musl-msghdr-struct-compat.patch
+index 2979552a34..0000000000
+--- a/meta-networking/recipes-support/memcached/memcached/0002-stats_prefix.c-Check-for-NDEBUG-before-using-total_w.patch
 +++ /dev/null
-@@ -1,81 +0,0 @@
--From d54e532821d40f8094a49742831d32ec7e76caed Mon Sep 17 00:00:00 2001
+@@ -1,48 +0,0 @@
+-From d6294e9166e4875a0572349aabcc5e51acbd2e3c Mon Sep 17 00:00:00 2001
 -From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 16 Dec 2021 15:18:21 -0800
--Subject: [PATCH] kcapi-kernel-if: Adjust for musl  msghdr struct compatibility
+-Date: Fri, 4 Jun 2021 11:33:12 -0700
+-Subject: [PATCH] stats_prefix.c: Check for NDEBUG before using total_written
+- variable
 -
--musl sticks to POSIX and defines msg_iovlen and msg_controllen as int
--and socklen_t types respectively whereas glibc and kernel mark them as
--size_t which is them assumed as such in the code here as well, Make the
--needed conversions to get it going on musl/linux also see [1] for more
--info
+-When using NDEBUG assert macro is ineffective which is caught by latest
+-clang and reports that total_written is set but unused. Therefore check
+-for NDEBUG to make sure assert is used only when its effective
 -
--[1] https://git.musl-libc.org/cgit/musl/commit/?id=7168790763cdeb794df52be6e3b39fbb021c5a64
--
--Upstream-Status: Submitted [https://github.com/smuellerDD/libkcapi/pull/131]
+-Fixes
+-error: variable 'total_written' set but not used [-Werror,-Wunused-but-set-variable]
+-    size_t size = 0, written = 0, total_written = 0;
+-                                  ^
+-Upstream-Status: Submitted [https://github.com/memcached/memcached/pull/792]
 -Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- lib/kcapi-kernel-if.c | 22 ++++++++++++++++++----
-- 1 file changed, 18 insertions(+), 4 deletions(-)
+- stats_prefix.c | 8 ++++++--
+- 1 file changed, 6 insertions(+), 2 deletions(-)
 -
--diff --git a/lib/kcapi-kernel-if.c b/lib/kcapi-kernel-if.c
--index 739841e..e5d15d4 100644
----- a/lib/kcapi-kernel-if.c
--+++ b/lib/kcapi-kernel-if.c
--@@ -168,10 +168,14 @@ ssize_t _kcapi_common_send_meta(struct kcapi_handle *handle,
-- 	}
+-diff --git a/stats_prefix.c b/stats_prefix.c
+-index 62f0d04..d72e514 100644
+---- a/stats_prefix.c
+-+++ b/stats_prefix.c
+-@@ -127,8 +127,10 @@ char *stats_prefix_dump(int *length) {
+-     PREFIX_STATS *pfs;
+-     char *buf;
+-     int i, pos;
+--    size_t size = 0, written = 0, total_written = 0;
+--
+-+    size_t size = 0, written = 0;
+-+#ifndef NDEBUG
+-+    size_t total_written = 0;
+-+#endif
+-     /*
+-      * Figure out how big the buffer needs to be. This is the sum of the
+-      * lengths of the prefixes themselves, plus the size of one copy of
+-@@ -154,8 +156,10 @@ char *stats_prefix_dump(int *length) {
+-                            pfs->prefix, pfs->num_gets, pfs->num_hits,
+-                            pfs->num_sets, pfs->num_deletes);
+-             pos += written;
+-+#ifndef NDEBUG
+-             total_written += written;
+-             assert(total_written < size);
+-+#endif
+-         }
+-     }
 - 
-- 	msg.msg_control = buffer_p;
---	msg.msg_controllen = bufferlen;
-- 	msg.msg_iov = iov;
--+#ifdef __GLIBC__
-- 	msg.msg_iovlen = iovlen;
---
--+	msg.msg_controllen = bufferlen;
--+#else
--+	msg.msg_iovlen = (int)iovlen;
--+	msg.msg_controllen = (socklen_t)bufferlen;
--+#endif
-- 	/* encrypt/decrypt operation */
-- 	header = CMSG_FIRSTHDR(&msg);
-- 	if (!header) {
--@@ -193,7 +197,11 @@ ssize_t _kcapi_common_send_meta(struct kcapi_handle *handle,
-- 		}
-- 		header->cmsg_level = SOL_ALG;
-- 		header->cmsg_type = ALG_SET_IV;
--+#ifdef __GLIBC__
-- 		header->cmsg_len = iv_msg_size;
--+#else
--+		header->cmsg_len = (socklen_t)iv_msg_size;
--+#endif
-- 		alg_iv = (void*)CMSG_DATA(header);
-- 		alg_iv->ivlen = tfm->info.ivsize;
-- 		memcpy(alg_iv->iv, handle->cipher.iv, tfm->info.ivsize);
--@@ -244,8 +252,11 @@ ssize_t _kcapi_common_send_data(struct kcapi_handle *handle,
-- 	msg.msg_controllen = 0;
-- 	msg.msg_flags = 0;
-- 	msg.msg_iov = iov;
--+#ifdef __GLIBC__
-- 	msg.msg_iovlen = iovlen;
---
--+#else
--+	msg.msg_iovlen = (int)iovlen;
--+#endif
-- 	ret = sendmsg(*_kcapi_get_opfd(handle), &msg, (int)flags);
-- 	if (ret < 0)
-- 		ret = -errno;
--@@ -542,8 +553,11 @@ ssize_t _kcapi_common_recv_data(struct kcapi_handle *handle,
-- 	msg.msg_controllen = 0;
-- 	msg.msg_flags = 0;
-- 	msg.msg_iov = iov;
--+#ifdef __GLIBC__
-- 	msg.msg_iovlen = iovlen;
---
--+#else
--+	msg.msg_iovlen = (int)iovlen;
--+#endif
-- 	ret = recvmsg(*_kcapi_get_opfd(handle), &msg, 0);
-- 	if (ret < 0)
-- 		ret = -errno;
---- 
--2.34.1
--
-diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi_1.3.1.bb b/meta-oe/recipes-crypto/libkcapi/libkcapi_1.4.0.bb
-similarity index 80%
-rename from meta-oe/recipes-crypto/libkcapi/libkcapi_1.3.1.bb
-rename to meta-oe/recipes-crypto/libkcapi/libkcapi_1.4.0.bb
-index 8ff5ddd175..3be8c76b54 100644
---- a/meta-oe/recipes-crypto/libkcapi/libkcapi_1.3.1.bb
-+++ b/meta-oe/recipes-crypto/libkcapi/libkcapi_1.4.0.bb
-@@ -1,12 +1,11 @@
- SUMMARY = "Linux Kernel Crypto API User Space Interface Library"
- HOMEPAGE = "http://www.chronox.de/libkcapi.html"
- LICENSE = "BSD-3-Clause | GPL-2.0-only"
--LIC_FILES_CHKSUM = "file://COPYING;md5=80c467906eb826339c7f09e61808ed23"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=a2562899bc38f1735868f0bf0c1dd1a5"
+diff --git a/meta-networking/recipes-support/memcached/memcached_1.6.9.bb b/meta-networking/recipes-support/memcached/memcached_1.6.15.bb
+similarity index 91%
+rename from meta-networking/recipes-support/memcached/memcached_1.6.9.bb
+rename to meta-networking/recipes-support/memcached/memcached_1.6.15.bb
+index adf3c34e11..b28bfe72b7 100644
+--- a/meta-networking/recipes-support/memcached/memcached_1.6.9.bb
++++ b/meta-networking/recipes-support/memcached/memcached_1.6.15.bb
+@@ -21,9 +21,8 @@ RDEPENDS:${PN} += "perl perl-module-posix perl-module-autoloader \
  
- S = "${WORKDIR}/git"
--SRCREV = "2936ecd060c299157ac880650ba2c9fd94d27bb1"
-+SRCREV = "1429ab42d48123cc8f73b96c69a87fb9c6d8a7c9"
- SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https \
--           file://0001-kcapi-kernel-if-Adjust-for-musl-msghdr-struct-compat.patch \
-           "
+ SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz \
+            file://memcached-add-hugetlbfs-check.patch \
+-           file://0002-stats_prefix.c-Check-for-NDEBUG-before-using-total_w.patch \
+            "
+-SRC_URI[sha256sum] = "d5a62ce377314dbffdb37c4467e7763e3abae376a16171e613cbe69956f092d1"
++SRC_URI[sha256sum] = "8d7abe3d649378edbba16f42ef1d66ca3f2ac075f2eb97145ce164388e6ed515"
  
- inherit autotools
-@@ -27,5 +26,7 @@ do_install:append() {
- }
- 
- CPPFLAGS:append:libc-musl:toolchain-clang = " -Wno-error=sign-compare"
-+CPPFLAGS:remove:libc-musl:toolchain-clang = "-Wno-error=sign-conversion"
-+CPPFLAGS:append:libc-musl = " -Wno-error=sign-conversion"
- 
- BBCLASSEXTEND = "native"
+ # set the same COMPATIBLE_HOST as libhugetlbfs
+ COMPATIBLE_HOST = "(i.86|x86_64|powerpc|powerpc64|aarch64|arm).*-linux*"
 -- 
 2.35.1
 
