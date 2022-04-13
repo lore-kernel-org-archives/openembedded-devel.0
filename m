@@ -1,242 +1,168 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yi.zhao@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 32F33C35280
-	for <webhook@archiver.kernel.org>; Tue, 12 Apr 2022 23:50:14 +0000 (UTC)
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
- [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web08.2459.1649801006278276290
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 296ACC43217
+	for <webhook@archiver.kernel.org>; Wed, 13 Apr 2022 15:48:06 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com
+ [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.1256.1649814191113343345
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Apr 2022 15:03:26 -0700
+ Tue, 12 Apr 2022 18:43:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ZzKAMZjX;
- spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id
- a16-20020a17090a6d9000b001c7d6c1bb13so43654pjk.4
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Apr 2022 15:03:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=zR8KeN7EPPh0pfVF9C6AhTOh/JSB2yyUHWU24YhzvnQ=;
-        b=ZzKAMZjXgbnIBw94BzvpknXaOhfB8PXzULtOeXm8F+GwWqRFKqHzbt7OkCRg6Vyiig
-         Wq8lv1vns/+mUFbiEGus5Yo8XfzdcI1tRN6KwzGcEBZCMmaje5puDsJMpxueCpE5eq3j
-         97VJFnnORMnMpZI+FNrciEV/3tZQyhHYO9GZcJEmwQlfP7TEBXXtZVFKkYf603cr1N7W
-         6tZYVVmmRNJmx199+RCCMdZZGLLTnCI4mek9r2WGPImAVgKBdxpk7JcWTJWOfwcuM3XQ
-         zEXNJWIMdaCRAKNQoy6uaBG70O5nKHlNKALhTsdr3TvkD9bfszEsGe+ILFAczGyMh+GD
-         Nidg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=zR8KeN7EPPh0pfVF9C6AhTOh/JSB2yyUHWU24YhzvnQ=;
-        b=e/7jgdgFcsiBX0Ezy8OcHPDxmaaN2CWCPeVCTynEs6SkGlMXa2WdFIiSjOkWSXwesN
-         Hb1Qygphn1F22KdSFNaVTyZYIZ6zNPP6K2tO2uVInEuG0Y7a4mM+YkdE+3F5I2fk8XIH
-         UueBeujxLI+/Otcn34beE8j4wi4Zj+BtjUms5LptYpMxCRgZZFFNJJJ37agPJuqGfJo2
-         XERYrRF0Rdjyd/5y0WwAJrTmNrzuEeKGLy6ugFVbX5ox/ioAg4yiYMUxNsVz+CDS3S6I
-         Cev4Bs/TasNU/uxSZSC+ntTOCo5lhvHZV+ySXfVGuxAwl4S0VRicLYU4tMgTHxYIsZ28
-         haYA==
-X-Gm-Message-State: AOAM532yjhD+UxsNpF9s9BwwK99gbWkXDtYpWqpp1Bx4+yKHLWh7q1Ew
-	Qc7Tz3FvtfNgCUCbRUrYSKLuIs5RE1GYXw==
-X-Google-Smtp-Source: 
- ABdhPJxHGXrudWAjdwx4ewm4urSvqrjqiC5TjJ5v3JoMlbj7W2foPas7r3IDUgLF2ASmJvux5S9bWg==
-X-Received: by 2002:a17:90b:4b11:b0:1cb:2a65:f275 with SMTP id
- lx17-20020a17090b4b1100b001cb2a65f275mr7329277pjb.33.1649801005439;
-        Tue, 12 Apr 2022 15:03:25 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::94ca])
-        by smtp.gmail.com with ESMTPSA id
- v8-20020a17090a7c0800b001cb63a477eesm502881pjf.12.2022.04.12.15.03.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Apr 2022 15:03:24 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=NPDE5uIv;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
+ invalid domain name (domain: windriver.com, ip: 205.220.178.238,
+ mailfrom: prvs=11025416ed=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
+ 23D1aSOc015002
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 13 Apr 2022 01:43:10 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+ h=from : to :
+ subject : date : message-id : content-transfer-encoding : content-type :
+ mime-version; s=PPS06212021;
+ bh=6ssnoemDFFnCw3ac5C6MGoeDvIA4rCo7Y7h3Y03Tu0c=;
+ b=NPDE5uIvT4JM6OFMTSdMh4qhh3hpdeAMLB2vrQOreUNe4CG2OV+tJYZoUrPHNrXBAcuv
+ nRYvar6unnWrTeckJPaJjWYUeby1/vP75dZeF/ACyPpj67tXwE0F6Cz6LaEqEcPY0BhK
+ V9exXA9JjG5yu9cvIGRg1lU6spVJqlU9qs2g7dF8T7BHgYYjcJ1zEQezRaAmFu3nt+gV
+ ed98MUZG32dBE76m+JNcKN7LhRylCgYu9q2yAoyCZKSl/dCiIv5ofQKgop6/J0jW1dhf
+ v0Oi2xHkVVe0Pt8dq3FDMaKnK6+jUFaDOI85WCaysl6rZI1hadqqMLpBWNwGnOItWeBk kA==
+Received: from nam04-bn8-obe.outbound.protection.outlook.com
+ (mail-bn8nam08lp2046.outbound.protection.outlook.com [104.47.74.46])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3fb6fwaqk9-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 13 Apr 2022 01:43:10 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Wdhk9jLo2bKXQI6YUbxadDnxfjNdD+aAFOxUyAncgt2jWwYwhCIBL1pxHk/OXrvM0eChrQh6nhxFU/6saGVplhPsKp1qtShy0su/9rFOAIa5v73upSqW7NGqFYQUEGjnP9Gz0z7ebJzBMSUE8tE3K6R/fxdDnVIRNA0VMyfpRPHlzlYRZzwp44jJhOYeYgPsvzwtyr2OpQHk9DHJ7Fov7qEntye4N2rCTp/LdOP6ZG2HRp9fY4oxQAQzfsl8+E68MXMBYEWUJ8aPk6gnYPvlKmUobQsrsA0js5TB8pco94IhcyEaRrdUJXYnX990DZaqiHh6knWjsBg9Zb62PVOp3Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=6ssnoemDFFnCw3ac5C6MGoeDvIA4rCo7Y7h3Y03Tu0c=;
+ b=j+H1e53Wk3RTNHKifQB6erBYh/VOSWXRHYSsFrnhtWmwFCO5i/FbosCwNZCMrH5ESbFV78dHi2XALbJZtWc+8CtTOqcshh5PNJXWp8uYjDQqswSp9XlEA21I6wLAFpOgQuEZzvNth0LMse1zwd3LjUMSfXgSU9QrqfhsDmC0RgHUkOGoDTzrYPux+g+gFD11du3FTqrVcA673UGFAncW2qEHk07ong2IvtV6jAj0XV5aum+aTGxc0BdVsGO5JRjA6JNcxwoQ0lHkr4PaHbMRBCmtchSU6EDhrhPeAOBamVzZQhqmFs1RO+1TV1/uknuWyKyipp8unC+lZt8n9qfkAw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from SA2PR11MB4875.namprd11.prod.outlook.com (2603:10b6:806:11a::6)
+ by DM6PR11MB4011.namprd11.prod.outlook.com (2603:10b6:5:19d::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5144.29; Wed, 13 Apr
+ 2022 01:43:08 +0000
+Received: from SA2PR11MB4875.namprd11.prod.outlook.com
+ ([fe80::18fb:1525:3574:8501]) by SA2PR11MB4875.namprd11.prod.outlook.com
+ ([fe80::18fb:1525:3574:8501%4]) with mapi id 15.20.5164.018; Wed, 13 Apr 2022
+ 01:43:08 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 7/7] ot-br-posix: Disable Wsign-compare for
- clang
-Date: Tue, 12 Apr 2022 15:03:16 -0700
-Message-Id: <20220412220316.3876985-7-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220412220316.3876985-1-raj.khem@gmail.com>
-References: <20220412220316.3876985-1-raj.khem@gmail.com>
-MIME-Version: 1.0
+Subject: [meta-networking][PATCH] frr: install correct initscript
+Date: Wed, 13 Apr 2022 09:42:56 +0800
+Message-Id: <20220413014256.991092-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.25.1
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TY2PR0101CA0015.apcprd01.prod.exchangelabs.com
+ (2603:1096:404:92::27) To SA2PR11MB4875.namprd11.prod.outlook.com
+ (2603:10b6:806:11a::6)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: e0c88f9e-4a9a-481c-b8ba-08da1ceef5db
+X-MS-TrafficTypeDiagnostic: DM6PR11MB4011:EE_
+X-Microsoft-Antispam-PRVS: 
+	<DM6PR11MB40118B218CEFEA6046AD99E6F9EC9@DM6PR11MB4011.namprd11.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	+ZhKnrTLcJevGBDhehCmC2JD80jQZCxU7vHkwKIw+7jW2aa2juYRR14tp6cIVhSYQmsZXNC6YGHirQqKPTCiikavpbswfiIJQ2sXNwzUeHVPaKrqtC3YlF8Xwr+dgijMgC5OczvIe/p841b+6hLaM6D7j7edmdo6nR1eMniWGfa0CK5WP4eNRVAgozINk/S/KUaqytYb36XRKihFr8OXe0NDYh7lQ27g6pT/QN06Az5Z/sKnKumQy4GUPNTtger89V9FU+NUnvbunDdemWLgr5Drs2IcDVtPoeX1QVGOb7RDjlAFV5L3BUoSuBVg8yUMC71BknESmtR9K5gnn042nFsb/leIQiy6tiBGvxhUmdFwEhnghjQ1PIU8xTuaPIwYt20JDUdh/a4GPeuOhoBK4O7PtOfu96A+OAqd/qhxsO6fHH9z575kLaSnXJA1j6vc3wuSEe5hdfaINgU8HenAtxaG7s9of3v5K5T5B126nd0l/FQG/bbVdMlwAnxRhHe6I4f1qbTY7mmMhzQHBJ94Swy2q98AI/RsK9MDlmYP46WQxPdAwBZtf2xYS8C+Arr1sLPefMnJKDitSomIHcl6hSOGV0ttLCu/RXnRi/smbGnwV04cAkGdbEyn2CsEMNTbdvZXQTKYOwR4kr3VKRyDXaoGj6j8iEk5ol+sCNEvLxBfArrdaI2zibLrFdtIHig2TohtBW7B10plBHkW4WNc6Q==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA2PR11MB4875.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(6512007)(52116002)(6506007)(6666004)(83380400001)(26005)(186003)(1076003)(8936002)(2616005)(38100700002)(38350700002)(5660300002)(6486002)(508600001)(4744005)(44832011)(36756003)(316002)(6916009)(86362001)(8676002)(2906002)(66946007)(66556008)(66476007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?Pgel6DjTbIO9xtRmvJgW1/ggqkwjsQdCxaiHnYnb+QPxq19NDv3+KMDS2Owi?=
+ =?us-ascii?Q?iIxWBCeWhi1j+XM+HKBRFNHG4tSw+B/74CGV4WhvluVcB4MZ3D1Ni2LsQS+j?=
+ =?us-ascii?Q?maqAlyP0p7MiyNiCyckaB/KINjx6ToMSD6COm/1NTg6hLMxoyYVPhV+2DyaO?=
+ =?us-ascii?Q?9SLvMW28yFsScSUZnQe5JwhOa11beRbehRb+Q9CDmsrmEwo7l2qu4u3H5qjZ?=
+ =?us-ascii?Q?QmtfEpvxh/bRDuc4fzcX9Zg8hal03nKuDAUpSFpBWAlgBoimsqE7yrQeOSVr?=
+ =?us-ascii?Q?uIqDeMGbhk6QF11eMPcWrU4/kOKV980ttzBZJk4ei0bVZkvkZQih+GpyXhm4?=
+ =?us-ascii?Q?0F+Y7AdffE7CEgq3qVdSt4bVp51iZ6NvO24NRVrLKvRNzJqkpucNJboVyV8d?=
+ =?us-ascii?Q?5si/+zEWsxpI6ljoaElrQlLlqDtBmK9dmr8x7MWr+pF87hJfkDFjdvvVHxyw?=
+ =?us-ascii?Q?G8jrw2WyhJJ6urEf91UZJ2xlG/yzFcE3pxTKCLEiztUjPIF1MM8yHuF7a7uQ?=
+ =?us-ascii?Q?+oVPuIyvAKdKxwpQac4Q5ifolBAc90NQ3+MsBFjCd5l6cXsIZ9FzwjnTdmtR?=
+ =?us-ascii?Q?531HVlW8rCH2ggC+q6JTYdow0hhj8z9ajgIUkOXi/XxYVphED91EOUiQS+mn?=
+ =?us-ascii?Q?2ZS6dUzoSIQAF4hkeYvmpLlgZY7ZZ7i/6axTvUtETRkmbz+NC60195z8fOap?=
+ =?us-ascii?Q?B9Sd7Vmai5ZOLc5nRoMrdAs5fGyAEKXR9sGSo/Ok8/nfdPmG94jH4nzHjfDS?=
+ =?us-ascii?Q?+K+MwVL9MgMHKuQsx92TNkJRoKE7fJmAohKzmRtSF3ekl8et5v6QgVmSXFPQ?=
+ =?us-ascii?Q?D1aE5sUYgTmuzIW4JiPl0WupbvwV/Rfo6zH1ae/mUrtFWcOk5l5TSlzOmBq5?=
+ =?us-ascii?Q?4oI4FJWDHkiwPu4kCsBiNeZbstLp9D8og+oVWKwppGUrXQRgSlJqvDIFWj2z?=
+ =?us-ascii?Q?p85ADfREDht0Cao1Wn1MN9GP9kguRhp2DQOf1bo6odmtgu+9JfsQoRGqEDmT?=
+ =?us-ascii?Q?QqEoEwqW3Ty6KSpvL8FBsJexGN2w5EC/1ehCsqq6HaeMrN59ktKQNdo6kj+x?=
+ =?us-ascii?Q?e0d6nR7WbhjH7oE94Q7nRUiYSgAb5CWcZaLeLONdMByjFnnRkE1mb4dwOg1O?=
+ =?us-ascii?Q?r0xhiPUuHX9nnYlWsotuk0MEPVG9FZNGmo5TvnzG/3UhmJ+/Ze6j0UxDShDs?=
+ =?us-ascii?Q?KJEMkr1rK8Rz14kVjEeufOhP4YcR4rWmd9fH818iwpaczHOt7Un0xPJtItJp?=
+ =?us-ascii?Q?AcdIjaTPqc6F1rruS71oAwBlYViKjLIFPG/7HviNO6R5h7zmsBsgCK96uDZv?=
+ =?us-ascii?Q?nbIpMbHSObaVkj7J8lysBM6vu5G8fR6m/7o8MVdUgxXraCQKvsSDUpUJbMlo?=
+ =?us-ascii?Q?kzHAJa2oDWi9XG26bihNr1D21oMELcyt39d1dD4dBOWRxjlitEkHkcbHoN+m?=
+ =?us-ascii?Q?CbzmnToWSAv23Ry4CE4kzLP6sYEHsbF75Gs47EeiH6nC8JUV4bj+/UQo+8vN?=
+ =?us-ascii?Q?+e/BtXKu8Pt12vxOFfkmLoB2A9dtcOUp9pxzu+zYcuVqtq0OVOFUYUm7mBhA?=
+ =?us-ascii?Q?Stiu3tuNwvvz7Sqo0U9a/vu2KWchZzzqyYv35c/M1SAt/wvyAcNJ5RCk80T2?=
+ =?us-ascii?Q?BJfHVcomCXizyHsgjS7RZ+qNxyoVIBOZZK9vq1kTCq5slvRG+lylcDaBNIMr?=
+ =?us-ascii?Q?El01hScvjV2sy41W0y+tuAaSy9lB2+GtDKosRWY94k2hZWoFJ6/qYucoSr3H?=
+ =?us-ascii?Q?8HA8VTBNTA=3D=3D?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ e0c88f9e-4a9a-481c-b8ba-08da1ceef5db
+X-MS-Exchange-CrossTenant-AuthSource: SA2PR11MB4875.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Apr 2022 01:43:08.1291
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 
+ sqfE3YtaZvpctLn+cmFJOOAXd+2f6G72xrZe7sPM1+xW49B8UkTmpZRX2ePIuqAAMi/3gWL3Da1sW5W4W1nPJA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB4011
+X-Proofpoint-ORIG-GUID: 0RSnsTJLMHdcvZ6CyzRTU_zW4sSaTihF
+X-Proofpoint-GUID: 0RSnsTJLMHdcvZ6CyzRTU_zW4sSaTihF
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.858,Hydra:6.0.486,FMLib:17.11.64.514
+ definitions=2022-04-12_06,2022-04-12_02,2022-02-23_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ mlxlogscore=834
+ malwarescore=0 spamscore=0 impostorscore=0 adultscore=0 priorityscore=1501
+ lowpriorityscore=0 bulkscore=0 mlxscore=0 phishscore=0 clxscore=1015
+ suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2202240000 definitions=main-2204130008
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 12 Apr 2022 23:50:14 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 Apr 2022 15:48:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96600
+ https://lists.openembedded.org/g/openembedded-devel/message/96604
 
-Specify is via CXXFLAGS instead of pragma dance.
+Install frrinit.sh as initscript rather than frr.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../Turn-off-sign-compare-for-musl-libc.patch | 131 ------------------
- .../openthread/ot-br-posix_git.bb             |   3 +-
- 2 files changed, 2 insertions(+), 132 deletions(-)
- delete mode 100644 meta-networking/recipes-connectivity/openthread/ot-br-posix/Turn-off-sign-compare-for-musl-libc.patch
+ meta-networking/recipes-protocols/frr/frr_8.2.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/openthread/ot-br-posix/Turn-off-sign-compare-for-musl-libc.patch b/meta-networking/recipes-connectivity/openthread/ot-br-posix/Turn-off-sign-compare-for-musl-libc.patch
-deleted file mode 100644
-index df84550be0..0000000000
---- a/meta-networking/recipes-connectivity/openthread/ot-br-posix/Turn-off-sign-compare-for-musl-libc.patch
-+++ /dev/null
-@@ -1,131 +0,0 @@
--From: Stefan Schmidt <stefan.schmidt@huawei.com>
--Subject: Turn off sign compare for musl libc
--
--When building with musl and clang the usage of CMSG_NXTHDR results in
--sign-compare error. Disable the check only in this specific part of the
--code with a #pragma.
--
--| /home/stefan/huawei/yocto-upstream/yoe/workspace/sources/ot-br-posix/third_party/openthread/repo/src/posix/platform/udp.cpp:147:28: fatal error: comparison of integers of different signs: 'unsigned long' and 'long' [-Wsign-compare]
--|         cmsg             = CMSG_NXTHDR(&msg, cmsg);
--|                            ^~~~~~~~~~~~~~~~~~~~~~~
--| /home/stefan/huawei/yocto-upstream/yoe/build/tmp/work/cortexa57-yoe-linux-musl/ot-br-posix/0.3.0+git999-r0/recipe-sysroot/usr/include/sys/socket.h:358:44: note: expanded from macro 'CMSG_NXTHDR'
--|         __CMSG_LEN(cmsg) + sizeof(struct cmsghdr) >= __MHDR_END(mhdr) - (unsigned char *)(cmsg) \
--|         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--| 1 error generated.
--
--Idea and fix taken from
--recipes-devtools/breakpad/breakpad/0001-Turn-off-sign-compare-for-musl-libc.patch
--by Khem Raj.
--
--Upstream-Status: Inappropriate [OE specific]
--
--Signed-off-by: Stefan Schmidt <stefan.schmidt@huawei.com>
--
--diff --git a/src/backbone_router/nd_proxy.cpp b/src/backbone_router/nd_proxy.cpp
--index 7136878c3d..8a223c95c7 100644
----- a/src/backbone_router/nd_proxy.cpp
--+++ b/src/backbone_router/nd_proxy.cpp
--@@ -185,9 +185,18 @@ void NdProxyManager::ProcessMulticastNeighborSolicition()
--         VerifyOrExit(icmp6header->icmp6_type == ND_NEIGHBOR_SOLICIT, error = OTBR_ERROR_PARSE);
-- 
--         otbrLogDebug("NdProxyManager: Received ND-NS from %s", src.ToString().c_str());
---
--+#ifndef __GLIBC__
--+  // In musl-libc, CMSG_NXTHDR typecasts char* to cmsghdr* which causes
--+  // clang to throw sign-compare warning. This is to suppress the warning
--+  // inline.
--+  #pragma clang diagnostic push
--+  #pragma clang diagnostic ignored "-Wsign-compare"
--+#endif
--         for (cmsghdr = CMSG_FIRSTHDR(&msghdr); cmsghdr; cmsghdr = CMSG_NXTHDR(&msghdr, cmsghdr))
---        {
--+#ifndef __GLIBC__
--+  #pragma clang diagnostic pop
--+#endif
--+	{
--             if (cmsghdr->cmsg_level != IPPROTO_IPV6)
--             {
--                 continue;
--Submodule third_party/openthread/repo contains modified content
--diff --git a/third_party/openthread/repo/src/posix/platform/infra_if.cpp b/third_party/openthread/repo/src/posix/platform/infra_if.cpp
--index 9f93d2b1c..1ed40fe50 100644
----- a/third_party/openthread/repo/src/posix/platform/infra_if.cpp
--+++ b/third_party/openthread/repo/src/posix/platform/infra_if.cpp
--@@ -228,7 +228,17 @@ otError InfraNetif::SendIcmp6Nd(uint32_t            aInfraIfIndex,
--     packetInfo->ipi6_ifindex = mInfraIfIndex;
-- 
--     // Per section 6.1.2 of RFC 4861, we need to send the ICMPv6 message with IP Hop Limit 255.
--+#ifndef __GLIBC__
--+  // In musl-libc, CMSG_NXTHDR typecasts char* to cmsghdr* which causes
--+  // clang to throw sign-compare warning. This is to suppress the warning
--+  // inline.
--+  #pragma clang diagnostic push
--+  #pragma clang diagnostic ignored "-Wsign-compare"
--+#endif
--     cmsgPointer             = CMSG_NXTHDR(&msgHeader, cmsgPointer);
--+#ifndef __GLIBC__
--+  #pragma clang diagnostic pop
--+#endif
--     cmsgPointer->cmsg_level = IPPROTO_IPV6;
--     cmsgPointer->cmsg_type  = IPV6_HOPLIMIT;
--     cmsgPointer->cmsg_len   = CMSG_LEN(sizeof(hopLimit));
--@@ -481,7 +491,17 @@ void InfraNetif::ReceiveIcmp6Message(void)
-- 
--     bufferLength = static_cast<uint16_t>(rval);
-- 
--+#ifndef __GLIBC__
--+  // In musl-libc, CMSG_NXTHDR typecasts char* to cmsghdr* which causes
--+  // clang to throw sign-compare warning. This is to suppress the warning
--+  // inline.
--+  #pragma clang diagnostic push
--+  #pragma clang diagnostic ignored "-Wsign-compare"
--+#endif
--     for (cmh = CMSG_FIRSTHDR(&msg); cmh; cmh = CMSG_NXTHDR(&msg, cmh))
--+#ifndef __GLIBC__
--+  #pragma clang diagnostic pop
--+#endif
--     {
--         if (cmh->cmsg_level == IPPROTO_IPV6 && cmh->cmsg_type == IPV6_PKTINFO &&
--             cmh->cmsg_len == CMSG_LEN(sizeof(struct in6_pktinfo)))
--diff --git a/third_party/openthread/repo/src/posix/platform/udp.cpp b/third_party/openthread/repo/src/posix/platform/udp.cpp
--index b7aacc5fa..a814fea70 100644
----- a/third_party/openthread/repo/src/posix/platform/udp.cpp
--+++ b/third_party/openthread/repo/src/posix/platform/udp.cpp
--@@ -144,8 +144,18 @@ otError transmitPacket(int aFd, uint8_t *aPayload, uint16_t aLength, const otMes
--     {
--         struct in6_pktinfo pktinfo;
-- 
--+#ifndef __GLIBC__
--+  // In musl-libc, CMSG_NXTHDR typecasts char* to cmsghdr* which causes
--+  // clang to throw sign-compare warning. This is to suppress the warning
--+  // inline.
--+  #pragma clang diagnostic push
--+  #pragma clang diagnostic ignored "-Wsign-compare"
--+#endif
--         cmsg             = CMSG_NXTHDR(&msg, cmsg);
---        cmsg->cmsg_level = IPPROTO_IPV6;
--+#ifndef __GLIBC__
--+  #pragma clang diagnostic pop
--+#endif
--+	cmsg->cmsg_level = IPPROTO_IPV6;
--         cmsg->cmsg_type  = IPV6_PKTINFO;
--         cmsg->cmsg_len   = CMSG_LEN(sizeof(pktinfo));
-- 
--@@ -200,7 +210,17 @@ otError receivePacket(int aFd, uint8_t *aPayload, uint16_t &aLength, otMessageIn
--     VerifyOrExit(rval > 0, perror("recvmsg"));
--     aLength = static_cast<uint16_t>(rval);
-- 
--+#ifndef __GLIBC__
--+  // In musl-libc, CMSG_NXTHDR typecasts char* to cmsghdr* which causes
--+  // clang to throw sign-compare warning. This is to suppress the warning
--+  // inline.
--+  #pragma clang diagnostic push
--+  #pragma clang diagnostic ignored "-Wsign-compare"
--+#endif
--     for (struct cmsghdr *cmsg = CMSG_FIRSTHDR(&msg); cmsg != nullptr; cmsg = CMSG_NXTHDR(&msg, cmsg))
--+#ifndef __GLIBC__
--+  #pragma clang diagnostic pop
--+#endif
--     {
--         if (cmsg->cmsg_level == IPPROTO_IPV6)
--         {
-diff --git a/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb b/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
-index d9f558d792..c1af388627 100644
---- a/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
-+++ b/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
-@@ -16,7 +16,6 @@ PV = "0.3.0+git${SRCPV}"
+diff --git a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
+index b1e2e55b5..91e306f08 100644
+--- a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
++++ b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
+@@ -95,7 +95,7 @@ do_install:append:class-target () {
  
- SRC_URI = "gitsm://github.com/openthread/ot-br-posix.git;protocol=https;branch=main \
-            file://0001-otbr-agent.service.in-remove-pre-exec-hook-for-mdns-.patch \
--           file://Turn-off-sign-compare-for-musl-libc.patch \
-            "
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+         install -d ${D}${sysconfdir}/init.d
+-        install -m 0755 ${B}/tools/frr ${D}${sysconfdir}/init.d
++        install -m 0755 ${B}/tools/frrinit.sh ${D}${sysconfdir}/init.d/frr
  
- S = "${WORKDIR}/git"
-@@ -24,6 +23,8 @@ SYSTEMD_SERVICE:${PN} = "otbr-agent.service"
- 
- inherit pkgconfig cmake systemd
- 
-+CXXFLAGS:append:libc-musl:toolchain-clang = " -Wno-error=sign-compare"
-+
- EXTRA_OECMAKE = "-DBUILD_TESTING=OFF \
-                  -DOTBR_DBUS=ON \
-                  -DOTBR_REST=ON \
+         install -d ${D}${sysconfdir}/default/volatiles
+         echo "d frr frr 0755 ${localstatedir}/run/frr none" \
 -- 
-2.35.1
+2.25.1
 
 
