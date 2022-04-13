@@ -1,95 +1,160 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E677C4167D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 89E72C3526F
 	for <webhook@archiver.kernel.org>; Wed, 13 Apr 2022 15:48:06 +0000 (UTC)
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com
- [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web08.2916.1649828099766761455
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
+ by mx.groups.io with SMTP id smtpd.web08.3063.1649829686654054905
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Apr 2022 22:34:59 -0700
+ Tue, 12 Apr 2022 23:01:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=kNhKUEyK;
- spf=pass (domain: gmail.com, ip: 209.85.214.172,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id c23so1080932plo.0
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Apr 2022 22:34:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=RIDIwCV8JtbZDS9tiNBIx8cv8XMTb/MzVKeAXWTfTIo=;
-        b=kNhKUEyKc/bBK9savBqHKEA7S/zlSjDboo59+Zk0aFACm0bzDN7wHKoC+r96y7RuUz
-         nbsodyiaLltA6ofg1PaD8ln6SaFMbT8RhBLvbcSCpFj0wMgkHSYf8mhWl56X9/gAX4Cx
-         zbNvZSjH3KNNqNjd6EQPu0Q0YFSWZMa5InkeH97I03j1XgasP2NL6G5uAcqKNpalspEE
-         BAhNRgmMel3mr9Fr2JzMqyTJ37JTv+1KZC6dnZH10fGpFc1o89v3aHoUurN6RrF4/oMg
-         Uq7ZUU4VH8ikjeq76BloYrrfGbVPT8+EohKl6zGOyqG0vXE70bDyN0hWojRXxQQPnjGE
-         aQQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=RIDIwCV8JtbZDS9tiNBIx8cv8XMTb/MzVKeAXWTfTIo=;
-        b=0toOyCNGgTsQj96rQkMI48pQw56oEqJCB+Wwj/dxa7NjwOlsQYEikG5bhh8E9pqJJL
-         9bwrigbM0XxUynHnbGmIZxi+5kfgUt+5aFGqsCqrO+QHNte9QDC7TIQelSqieB+QLfpI
-         oJnXTF318rBzNPw9Dbcc84o1LHl2WmGaG0X95/it8aWKWCEmCbJcpda/2yGNSCXkgKkF
-         JTzuKWmWA0sdeYXoELAFyBjzXbwkQYks0DmWUfCk5rq4UFOAcuN0Z83RBbdrW3Nf/mP9
-         Vxj8BG/nCWatBwDWQ2UG1zBbFnVzE+FExV/9bJiOR3X7IdwBdSxKcgC34G1BkFiu/QVa
-         FcDg==
-X-Gm-Message-State: AOAM531znmy3bwmYJzfyNTMn03MMnwFyES/L9deuaUkF0DPHHsEritB4
-	VEfi/3TeUnrf0cKPILpiXClFXewBtIZtNw==
-X-Google-Smtp-Source: 
- ABdhPJy8qMaSP+5I73rO2K8ULqC/IgdPO2gbvOalMAfmATm7yu32vk2RVmceIbkl5vQgoZgci6U55w==
-X-Received: by 2002:a17:90b:1d0e:b0:1c9:b74e:494 with SMTP id
- on14-20020a17090b1d0e00b001c9b74e0494mr8860716pjb.238.1649828099057;
-        Tue, 12 Apr 2022 22:34:59 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::94ca])
-        by smtp.gmail.com with ESMTPSA id
- j18-20020a633c12000000b0038204629cc9sm4733992pga.10.2022.04.12.22.34.58
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Apr 2022 22:34:58 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] boost-sml: Disable examples
-Date: Tue, 12 Apr 2022 22:34:55 -0700
-Message-Id: <20220413053455.1460109-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.35.2
-In-Reply-To: <20220413053455.1460109-1-raj.khem@gmail.com>
-References: <20220413053455.1460109-1-raj.khem@gmail.com>
+ dkim=missing;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
+ domain name (domain: windriver.com, ip: 147.11.3.146,
+ mailfrom: changqing.li@windriver.com)
+Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 23D61OWY018963
+	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 12 Apr 2022 23:01:25 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 23D61FKx007373
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 12 Apr 2022 23:01:24 -0700 (PDT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Tue, 12 Apr 2022 23:01:14 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.27; Tue, 12 Apr 2022 23:01:13 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Tue, 12 Apr 2022 23:01:13 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [hardknott][meta-webserver][PATCH] apache2: upgrade 2.4.52 -> 2.4.53
+Date: Wed, 13 Apr 2022 14:01:12 +0800
+Message-ID: <20220413060112.66500-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 13 Apr 2022 15:48:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96607
+ https://lists.openembedded.org/g/openembedded-devel/message/96608
 
-They fail to build with gcc 12
+From: Changqing Li <changqing.li@windriver.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+This upgarde fix sereval CVEs:
+CVE-2022-22719
+CVE-2022-22720
+CVE-2022-22721
+CVE-2022-23943
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- meta-oe/recipes-support/boost-sml/boost-sml_git.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ ...re-use-pkg-config-for-PCRE-detection.patch | 35 +++++++++----------
+ .../{apache2_2.4.52.bb => apache2_2.4.53.bb}  |  2 +-
+ 2 files changed, 18 insertions(+), 19 deletions(-)
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.52.bb => apache2_2.4.53.bb} (99%)
 
-diff --git a/meta-oe/recipes-support/boost-sml/boost-sml_git.bb b/meta-oe/recipes-support/boost-sml/boost-sml_git.bb
-index 97c04899bf..e22eddb72d 100644
---- a/meta-oe/recipes-support/boost-sml/boost-sml_git.bb
-+++ b/meta-oe/recipes-support/boost-sml/boost-sml_git.bb
-@@ -19,7 +19,8 @@ S = "${WORKDIR}/git"
- inherit cmake
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/0001-configure-use-pkg-config-for-PCRE-detection.patch b/meta-webserver/recipes-httpd/apache2/apache2/0001-configure-use-pkg-config-for-PCRE-detection.patch
+index 6c0286457..60154f029 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2/0001-configure-use-pkg-config-for-PCRE-detection.patch
++++ b/meta-webserver/recipes-httpd/apache2/apache2/0001-configure-use-pkg-config-for-PCRE-detection.patch
+@@ -1,4 +1,4 @@
+-From d2cedfa3394365689a3f7c8cfe8e0dd56b29bed9 Mon Sep 17 00:00:00 2001
++From f30e98867031ce0b01a35607af1ac7a2ff9c4925 Mon Sep 17 00:00:00 2001
+ From: Koen Kooi <koen.kooi@linaro.org>
+ Date: Tue, 17 Jun 2014 09:10:57 +0200
+ Subject: [PATCH] configure: use pkg-config for PCRE detection
+@@ -7,38 +7,37 @@ Upstream-Status: Pending
  
- # Building benchmarks takes a lot of time and requires additional headers (euml2.hpp)
--EXTRA_OECMAKE:append = " -DSML_BUILD_BENCHMARKS:bool=OFF"
-+# Building examples fail with gcc-12
-+EXTRA_OECMAKE:append = " -DSML_BUILD_BENCHMARKS:bool=OFF -DSML_BUILD_EXAMPLES=OFF"
+ Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+ ---
+- configure.in | 27 +++++----------------------
+- 1 file changed, 5 insertions(+), 22 deletions(-)
++ configure.in | 26 +++++---------------------
++ 1 file changed, 5 insertions(+), 21 deletions(-)
  
- # [boost::ext].XML is a header only C++ library, so the main package will be empty.
- ALLOW_EMPTY:${PN} = "1"
+ diff --git a/configure.in b/configure.in
+-index 9feaceb..dc6ea15 100644
++index 38c1d0a..c799aec 100644
+ --- a/configure.in
+ +++ b/configure.in
+-@@ -215,28 +215,11 @@ fi
+- AC_ARG_WITH(pcre,
+- APACHE_HELP_STRING(--with-pcre=PATH,Use external PCRE library))
++@@ -221,27 +221,11 @@ else if which $with_pcre 2>/dev/null; then :; else
++ fi
++ fi
+  
+--AC_PATH_PROG(PCRE_CONFIG, pcre-config, false)
+--if test -d "$with_pcre" && test -x "$with_pcre/bin/pcre-config"; then
+--   PCRE_CONFIG=$with_pcre/bin/pcre-config
+--elif test -x "$with_pcre"; then
+--   PCRE_CONFIG=$with_pcre
+--fi
++-AC_CHECK_TARGET_TOOLS(PCRE_CONFIG, [pcre2-config pcre-config],
++-                      [`which $with_pcre 2>/dev/null`], $with_pcre)
+ -
+--if test "$PCRE_CONFIG" != "false"; then
++-if test "x$PCRE_CONFIG" != "x"; then
+ -  if $PCRE_CONFIG --version >/dev/null 2>&1; then :; else
+--    AC_MSG_ERROR([Did not find pcre-config script at $PCRE_CONFIG])
++-    AC_MSG_ERROR([Did not find working script at $PCRE_CONFIG])
+ -  fi
+ -  case `$PCRE_CONFIG --version` in
++-  [1[0-9].*])
++-    AC_DEFINE(HAVE_PCRE2, 1, [Detected PCRE2]) 
++-    ;;
+ -  [[1-5].*])
+ -    AC_MSG_ERROR([Need at least pcre version 6.0])
+ -    ;;
+ -  esac
+ -  AC_MSG_NOTICE([Using external PCRE library from $PCRE_CONFIG])
+ -  APR_ADDTO(PCRE_INCLUDES, [`$PCRE_CONFIG --cflags`])
+--  APR_ADDTO(PCRE_LIBS, [`$PCRE_CONFIG --libs`])
++-  APR_ADDTO(PCRE_LIBS, [`$PCRE_CONFIG --libs8 2>/dev/null || $PCRE_CONFIG --libs`])
+ -else
+--  AC_MSG_ERROR([pcre-config for libpcre not found. PCRE is required and available from http://pcre.org/])
++-  AC_MSG_ERROR([pcre(2)-config for libpcre not found. PCRE is required and available from http://pcre.org/])
+ -fi
+ +PKG_CHECK_MODULES([PCRE], [libpcre], [
+ +  AC_DEFINE([HAVE_PCRE], [1], [Define if you have PCRE library])
+@@ -49,5 +48,5 @@ index 9feaceb..dc6ea15 100644
+  
+  AC_MSG_NOTICE([])
+ -- 
+-2.7.4
++2.25.1
+ 
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.52.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.53.bb
+similarity index 99%
+rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.52.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.53.bb
+index 10123aa2b..719185150 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.52.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.53.bb
+@@ -26,7 +26,7 @@ SRC_URI_append_class-target = " \
+            "
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
+-SRC_URI[sha256sum] = "0127f7dc497e9983e9c51474bed75e45607f2f870a7675a86dc90af6d572f5c9"
++SRC_URI[sha256sum] = "d0bbd1121a57b5f2a6ff92d7b96f8050c5a45d3f14db118f64979d525858db63"
+ 
+ S = "${WORKDIR}/httpd-${PV}"
+ 
 -- 
-2.35.2
+2.25.1
 
 
