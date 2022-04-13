@@ -1,160 +1,184 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 89E72C3526F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E771C41535
 	for <webhook@archiver.kernel.org>; Wed, 13 Apr 2022 15:48:06 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web08.3063.1649829686654054905
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
+ [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.web10.2983.1649828098785517221
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Apr 2022 23:01:27 -0700
+ Tue, 12 Apr 2022 22:34:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.3.146,
- mailfrom: changqing.li@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 23D61OWY018963
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Apr 2022 23:01:25 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 23D61FKx007373
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Apr 2022 23:01:24 -0700 (PDT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Tue, 12 Apr 2022 23:01:14 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27; Tue, 12 Apr 2022 23:01:13 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Tue, 12 Apr 2022 23:01:13 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [hardknott][meta-webserver][PATCH] apache2: upgrade 2.4.52 -> 2.4.53
-Date: Wed, 13 Apr 2022 14:01:12 +0800
-Message-ID: <20220413060112.66500-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=WmvTrT2m;
+ spf=pass (domain: gmail.com, ip: 209.85.210.169,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f169.google.com with SMTP id n22so709902pfa.0
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 12 Apr 2022 22:34:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=/3+sZgGY5kI0Pu2JNRQMnGNJ8L+i0VlL52YasqvgDVU=;
+        b=WmvTrT2mZoM6Oq5pDl04XH3rnu8PtzjgXqeqUYjPHMTin9YEyTBS3SoFaj6pAnMdUR
+         bTljTiBL13kIJnkpCJ5g+J9phfzpNTFtvati2/RqVf9r7UnszXsVbJbRL6qZzzgHOTzf
+         +8FsUa99vRDidBMQIuxAfjd6lp4V5e5kLiLbp4omO3SNUrt3XQ1RUGNKzyimaV7HnkHl
+         00V7797RFQJoar1RCSIQyF5mvInr4FSLv5M5z7SYK6GhyaRzSGQF522KryiWcCZFmyuY
+         PQ9OeNylW7qdCstC5Cp4MGRMCZO6ctCx0bQFKcQHr5uFEjLHj0bB9aV8h7Hp7s5/Yse+
+         f9MQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=/3+sZgGY5kI0Pu2JNRQMnGNJ8L+i0VlL52YasqvgDVU=;
+        b=zDXu2Md47cFrPXOrAJaUQ3pINkmP7D9VgfwEf2wqOgTh7wAdFg5twQreBqLlQawr3G
+         CMbSWGwjh4X9PQJ9h9i8cTUcDS0IqPeY7fs2MGgbCl3142Grm14FWbRt86OafL6xRFx8
+         M36+S7zEpBeuqu37YnTS13OZIXBeBlK0mXkJQJkBG4DGazwdJDHNC1fuhheYZzWun2AH
+         tX/AMyXaqIt3MpUtNBW/RIM2yXhuHeGVnJw3/Ypf725fDzTsrC6+s9CaLm5lRyGMom+6
+         dSjW5/xJJZ1eHAJtFMKbAPdSornxGr4LRtp7zHBi7a/1vwYfL0eWLSpZtNE+T87bdkDE
+         wplQ==
+X-Gm-Message-State: AOAM532cugzB2dNyk3C6pFzRcGdeQaQEwWux4lzxlbUJtcJyHOvaa8eo
+	K1A1D0xn5zWn+VcBWepDK10btMLsVRa3Sg==
+X-Google-Smtp-Source: 
+ ABdhPJymniXs4qF+q/cwgc76D9fMFpMjSEzGPk9PpU11R1g8H0j7M+m31llCh42aHiZzLWLLmdEIAA==
+X-Received: by 2002:a05:6a00:a0e:b0:4fd:fa6e:95fc with SMTP id
+ p14-20020a056a000a0e00b004fdfa6e95fcmr41535262pfh.17.1649828097838;
+        Tue, 12 Apr 2022 22:34:57 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::94ca])
+        by smtp.gmail.com with ESMTPSA id
+ j18-20020a633c12000000b0038204629cc9sm4733992pga.10.2022.04.12.22.34.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 12 Apr 2022 22:34:57 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 1/2] opensaf: Fix build with gcc 12
+Date: Tue, 12 Apr 2022 22:34:54 -0700
+Message-Id: <20220413053455.1460109-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.35.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 13 Apr 2022 15:48:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96608
+ https://lists.openembedded.org/g/openembedded-devel/message/96606
 
-From: Changqing Li <changqing.li@windriver.com>
+Use configure logic to disable certain warnings if compiler supports
+them
 
-This upgarde fix sereval CVEs:
-CVE-2022-22719
-CVE-2022-22720
-CVE-2022-22721
-CVE-2022-23943
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...re-use-pkg-config-for-PCRE-detection.patch | 35 +++++++++----------
- .../{apache2_2.4.52.bb => apache2_2.4.53.bb}  |  2 +-
- 2 files changed, 18 insertions(+), 19 deletions(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.52.bb => apache2_2.4.53.bb} (99%)
+ .../0001-include-missing-array-header.patch   | 32 +++++++++++++++++++
+ ...-configure-Disable-selected-warnings.patch | 32 +++++++++++++++++++
+ .../opensaf/opensaf_5.22.01.bb                |  6 ++--
+ 3 files changed, 68 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0001-include-missing-array-header.patch
+ create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0002-configure-Disable-selected-warnings.patch
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2/0001-configure-use-pkg-config-for-PCRE-detection.patch b/meta-webserver/recipes-httpd/apache2/apache2/0001-configure-use-pkg-config-for-PCRE-detection.patch
-index 6c0286457..60154f029 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2/0001-configure-use-pkg-config-for-PCRE-detection.patch
-+++ b/meta-webserver/recipes-httpd/apache2/apache2/0001-configure-use-pkg-config-for-PCRE-detection.patch
-@@ -1,4 +1,4 @@
--From d2cedfa3394365689a3f7c8cfe8e0dd56b29bed9 Mon Sep 17 00:00:00 2001
-+From f30e98867031ce0b01a35607af1ac7a2ff9c4925 Mon Sep 17 00:00:00 2001
- From: Koen Kooi <koen.kooi@linaro.org>
- Date: Tue, 17 Jun 2014 09:10:57 +0200
- Subject: [PATCH] configure: use pkg-config for PCRE detection
-@@ -7,38 +7,37 @@ Upstream-Status: Pending
- 
- Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
- ---
-- configure.in | 27 +++++----------------------
-- 1 file changed, 5 insertions(+), 22 deletions(-)
-+ configure.in | 26 +++++---------------------
-+ 1 file changed, 5 insertions(+), 21 deletions(-)
- 
- diff --git a/configure.in b/configure.in
--index 9feaceb..dc6ea15 100644
-+index 38c1d0a..c799aec 100644
- --- a/configure.in
- +++ b/configure.in
--@@ -215,28 +215,11 @@ fi
-- AC_ARG_WITH(pcre,
-- APACHE_HELP_STRING(--with-pcre=PATH,Use external PCRE library))
-+@@ -221,27 +221,11 @@ else if which $with_pcre 2>/dev/null; then :; else
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-include-missing-array-header.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-include-missing-array-header.patch
+new file mode 100644
+index 0000000000..e735d432a7
+--- /dev/null
++++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-include-missing-array-header.patch
+@@ -0,0 +1,32 @@
++From 6168d43ddd353b92ad8bcd5c49dc68f18caa8a00 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 12 Apr 2022 17:07:49 -0700
++Subject: [PATCH 1/2] include missing <array> header
++
++Fixes
++src/osaf/consensus/key_value.cc:25:30: error: aggregate 'std::array<char, 128> buffer' has incomplete type and cannot be defined
++   25 |   std::array<char, buf_size> buffer;
++      |                              ^~~~~~
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/osaf/consensus/key_value.cc | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/osaf/consensus/key_value.cc b/src/osaf/consensus/key_value.cc
++index 692dd3f..6e16cbf 100644
++--- a/src/osaf/consensus/key_value.cc
+++++ b/src/osaf/consensus/key_value.cc
++@@ -18,7 +18,7 @@
++ #include "base/getenv.h"
++ #include "base/logtrace.h"
++ #include "osaf/consensus/consensus.h"
++-
+++#include <array>
++ int KeyValue::Execute(const std::string& command, std::string& output) {
++   TRACE_ENTER();
++   constexpr size_t buf_size = 128;
++-- 
++2.35.1
++
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0002-configure-Disable-selected-warnings.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0002-configure-Disable-selected-warnings.patch
+new file mode 100644
+index 0000000000..8bb659743d
+--- /dev/null
++++ b/meta-networking/recipes-daemons/opensaf/opensaf/0002-configure-Disable-selected-warnings.patch
+@@ -0,0 +1,32 @@
++From fe654d5340d18f04e4689ba19f843554909a0c00 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 12 Apr 2022 17:16:37 -0700
++Subject: [PATCH 2/2] configure: Disable selected warnings
++
++These warnings are emitted when compiling with gcc 11 and gcc 12
++Do not treat them as errors
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ configure.ac | 4 +++-
++ 1 file changed, 3 insertions(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index c28d2d9..2846175 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -601,7 +601,9 @@ if test -z "$OSAF_HARDEN_FLAGS"; then
 + fi
-+ fi
-  
---AC_PATH_PROG(PCRE_CONFIG, pcre-config, false)
---if test -d "$with_pcre" && test -x "$with_pcre/bin/pcre-config"; then
---   PCRE_CONFIG=$with_pcre/bin/pcre-config
---elif test -x "$with_pcre"; then
---   PCRE_CONFIG=$with_pcre
---fi
-+-AC_CHECK_TARGET_TOOLS(PCRE_CONFIG, [pcre2-config pcre-config],
-+-                      [`which $with_pcre 2>/dev/null`], $with_pcre)
- -
---if test "$PCRE_CONFIG" != "false"; then
-+-if test "x$PCRE_CONFIG" != "x"; then
- -  if $PCRE_CONFIG --version >/dev/null 2>&1; then :; else
---    AC_MSG_ERROR([Did not find pcre-config script at $PCRE_CONFIG])
-+-    AC_MSG_ERROR([Did not find working script at $PCRE_CONFIG])
- -  fi
- -  case `$PCRE_CONFIG --version` in
-+-  [1[0-9].*])
-+-    AC_DEFINE(HAVE_PCRE2, 1, [Detected PCRE2]) 
-+-    ;;
- -  [[1-5].*])
- -    AC_MSG_ERROR([Need at least pcre version 6.0])
- -    ;;
- -  esac
- -  AC_MSG_NOTICE([Using external PCRE library from $PCRE_CONFIG])
- -  APR_ADDTO(PCRE_INCLUDES, [`$PCRE_CONFIG --cflags`])
---  APR_ADDTO(PCRE_LIBS, [`$PCRE_CONFIG --libs`])
-+-  APR_ADDTO(PCRE_LIBS, [`$PCRE_CONFIG --libs8 2>/dev/null || $PCRE_CONFIG --libs`])
- -else
---  AC_MSG_ERROR([pcre-config for libpcre not found. PCRE is required and available from http://pcre.org/])
-+-  AC_MSG_ERROR([pcre(2)-config for libpcre not found. PCRE is required and available from http://pcre.org/])
- -fi
- +PKG_CHECK_MODULES([PCRE], [libpcre], [
- +  AC_DEFINE([HAVE_PCRE], [1], [Define if you have PCRE library])
-@@ -49,5 +48,5 @@ index 9feaceb..dc6ea15 100644
-  
-  AC_MSG_NOTICE([])
- -- 
--2.7.4
-+2.25.1
- 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.52.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.53.bb
-similarity index 99%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.52.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.53.bb
-index 10123aa2b..719185150 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.52.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.53.bb
-@@ -26,7 +26,7 @@ SRC_URI_append_class-target = " \
++ AC_SUBST(OSAF_HARDEN_FLAGS)
++ 
++-AX_CHECK_COMPILE_FLAG([-Werror=format-overflow],[NOWARNINGS=-Wno-error=format-overflow])
+++AX_CHECK_COMPILE_FLAG([-Werror=format-overflow],[NOWARNINGS='-Wno-error=format-overflow'])
+++AX_CHECK_COMPILE_FLAG([-Wuse-after-free],[NOWARNINGS+=' -Wno-error=use-after-free'])
+++AX_CHECK_COMPILE_FLAG([-Wstringop-truncation],[NOWARNINGS+=' -Wno-error=stringop-truncation'])
++ AC_SUBST(NOWARNINGS)
++ #############################################
++ # List the output Makefiles
++-- 
++2.35.1
++
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.22.01.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.22.01.bb
+index 8ce324d306..930755d624 100644
+--- a/meta-networking/recipes-daemons/opensaf/opensaf_5.22.01.bb
++++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.22.01.bb
+@@ -28,6 +28,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
+            file://0001-immom_python-convert-to-python3.patch \
+            file://0001-Fix-build-with-fno-common.patch \
+            file://0001-Use-correct-printf-format-for-__fsblkcnt_t.patch \
++           file://0001-include-missing-array-header.patch \
++           file://0002-configure-Disable-selected-warnings.patch \
             "
+ SRC_URI[sha256sum] = "f008d53c83087ce2014c6089bc4ef08e14c1b4091298b943f4ceade1aa6bf61e"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
--SRC_URI[sha256sum] = "0127f7dc497e9983e9c51474bed75e45607f2f870a7675a86dc90af6d572f5c9"
-+SRC_URI[sha256sum] = "d0bbd1121a57b5f2a6ff92d7b96f8050c5a45d3f14db118f64979d525858db63"
+@@ -48,8 +50,8 @@ PACKAGECONFIG[plm] = "--enable-ais-plm,--disable-ais-plm,libvirt openhpi"
  
- S = "${WORKDIR}/httpd-${PV}"
+ PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd', '', d)}"
  
+-CPPFLAGS += "-Wno-error=stringop-overflow= -Wno-error=stringop-truncation"
+-CXXFLAGS += "-Wno-error=stringop-overflow= -Wno-error=stringop-truncation -Wno-error=format-truncation="
++CPPFLAGS += "-Wno-error"
++CXXFLAGS += "-Wno-error"
+ LDFLAGS += "-Wl,--as-needed -latomic -Wl,--no-as-needed"
+ 
+ do_install:append() {
 -- 
-2.25.1
+2.35.2
 
 
