@@ -1,114 +1,113 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <nicolas.marguet@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C023C4743E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4342C48BE6
 	for <webhook@archiver.kernel.org>; Thu, 14 Apr 2022 16:03:54 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.2])
- by mx.groups.io with SMTP id smtpd.web12.7049.1649903584273780913
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
+ by mx.groups.io with SMTP id smtpd.web11.7242.1649905128486532039
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Apr 2022 19:33:04 -0700
+ Wed, 13 Apr 2022 19:58:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=I4X3OcNV;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.2,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1649903582; i=@fujitsu.com;
-	bh=R6N0meQGuqtErF9O2OIEo0YmRbltuEgkp8CWZWkRZj0=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=I4X3OcNVTsREwA09Q/Q/IQvO9IeW7vhdaYrlaQ+vJqbptieD/hcTK1jH8Mxzn614y
-	 cR3e+5IrQHUpunt/UmSU1tIMg4dfF5LoU77mTMPGo20b1Y+rG8PakoRVLls+oB8198
-	 +6fdbGbmBzF+jsjJNxpcOrMM1jR1WyYp/cAxCFubRt8Wa4Vj7JEtY7Erk6em1BOptf
-	 ulEyZy/70UlJRvESW4IC4kdB195Krp3U6IkyM1LjbDUwNyrZ5hg1L+aq845xLgTErj
-	 SNkYvryuyDARdGhD1WUtf+iEi9knXOHwjBpbrCxVptszN+qKY6An5omaOPyTkfw11o
-	 XUhJ3VTUlr8IA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrBIsWRWlGSWpSXmKPExsViZ8MxSfdue3i
-  Swb65+hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bl9uyCLs6KllufmBoY13N0MXJxCAk8YZRY
-  cvoVC4RzgUli8prfzBDOHkaJV7MPsHYxcnKwCahJTL91A8wWEdCXWDp7DzOIzSygIvHidw97F
-  yMHh7CAo8SbmRIgJouAqsSXTd4gFbwCThJ/7/4C65QQUJCY8vA9M0gJp4CzxIPNGSBhIaCSjx
-  tOsEKUC0qcnPmEBWK4hMTBFy+YIVoVJWZfbmaBsCskZs1qY4Kw1SSuntvEPIFRcBaS9llI2hc
-  wMq1itE4qykzPKMlNzMzRNTQw0DU0NNU1NtU1tDDRS6zSTdRLLdUtTy0u0TXSSywv1kstLtYr
-  rsxNzknRy0st2cQIDOCUYuUdOxjbVv3UO8QoycGkJMqbZRieJMSXlJ9SmZFYnBFfVJqTWnyIU
-  YaDQ0mC16sVKCdYlJqeWpGWmQOMJpi0BAePkghvUw1Qmre4IDG3ODMdInWKUVFKnPdzG1BCAC
-  SRUZoH1waL4EuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHmngkzhycwrgZv+CmgxE9Dib6t
-  CQRaXJCKkpBqYFryznXQw4Mb6ylUe53VWH4ty6TobH/NbNSdZ3f78g7VfY0IE73y5ePv4z8pJ
-  /NPT9WcWiF1dE3HubWFYGEMiz+4mlapGl3i90vmvnhZdZZ/9vnq51Cpvnc0c7ILr2o6cOx1id
-  v/SZKnYmwGH95n9VZlkxTC3jnNewATjIzlaV8xr+ZV+mF/eM/lya2RA1UevxREz4pP6Z3tfFB
-  ItVOHxPuL2coPJ9L/z2Jifz5Z9rWvEwllfc9gzZVH9zOzf4ddkFIvDjtgUfXg4TzqdX6qE9XV
-  A4wSZvOcvHQ/92r5W48zUnqvfl1arnTez/iKtd/nappUFX/u2NNUz+W8QcHtUf2XJVMazzwq/
-  OoTkbPSNUmIpzkg01GIuKk4EAAYsQxVbAwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-4.tower-565.messagelabs.com!1649903581!209831!1
-X-Originating-IP: [62.60.8.146]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.85.8; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 21127 invoked from network); 14 Apr 2022 02:33:01 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-4.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 14 Apr 2022 02:33:01 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 699D010046F
+ dkim=missing;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
+ domain name (domain: windriver.com, ip: 147.11.3.146,
+ mailfrom: nicolas.marguet@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 23E2wkDr011277
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Apr 2022 03:33:01 +0100 (BST)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 5C2E5100466
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Apr 2022 03:33:01 +0100 (BST)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Thu, 14 Apr 2022 03:32:40 +0100
-From: Wang Mingyu <wangmy@fujitsu.com>
+ Wed, 13 Apr 2022 19:58:47 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Wed, 13 Apr 2022 19:58:46 -0700
+Received: from ala-lpggp6.wrs.com (147.11.105.170) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Wed, 13 Apr 2022 19:58:46 -0700
+From: Nicolas Marguet <nicolas.marguet@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] pax-utils: upgrade 1.2.2 -> 1.3.3
-Date: Thu, 14 Apr 2022 10:32:28 +0800
-Message-ID: <1649903550-17752-2-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1649903550-17752-1-git-send-email-wangmy@fujitsu.com>
-References: <1649903550-17752-1-git-send-email-wangmy@fujitsu.com>
+CC: Nicolas Marguet <nicolas.marguet@windriver.com>
+Subject: [PATCH] openjpeg: fix CVE-2022-1122
+Date: Wed, 13 Apr 2022 19:58:19 -0700
+Message-ID: <20220414025819.1245989-1-nicolas.marguet@windriver.com>
+X-Mailer: git-send-email 2.34.0
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 14 Apr 2022 16:03:54 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96636
+ https://lists.openembedded.org/g/openembedded-devel/message/96641
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+CVE: CVE-2022-1122
+
+The defect is undergoing reanalysis and there may be follow-up commits.
+
+Ref:
+* https://github.com/uclouvain/openjpeg/issues/1368
+
+Signed-off-by: Nicolas Marguet <nicolas.marguet@windriver.com>
 ---
- .../pax-utils/{pax-utils_1.2.2.bb => pax-utils_1.3.3.bb}       | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/pax-utils/{pax-utils_1.2.2.bb => pax-utils_1.3.3.bb} (88%)
+ .../openjpeg/openjpeg/CVE-2022-1122.patch     | 31 +++++++++++++++++++
+ .../openjpeg/openjpeg_2.4.0.bb                |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2022-1122.patch
 
-diff --git a/meta-oe/recipes-devtools/pax-utils/pax-utils_1.2.2.bb b/meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.3.bb
-similarity index 88%
-rename from meta-oe/recipes-devtools/pax-utils/pax-utils_1.2.2.bb
-rename to meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.3.bb
-index 0eb2146265..d512c85704 100644
---- a/meta-oe/recipes-devtools/pax-utils/pax-utils_1.2.2.bb
-+++ b/meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.3.bb
-@@ -8,8 +8,7 @@ LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
- 
- SRC_URI = "https://dev.gentoo.org/~vapier/dist/pax-utils-${PV}.tar.xz"
--SRC_URI[md5sum] = "a580468318f0ff42edf4a8cd314cc942"
--SRC_URI[sha256sum] = "7f4a7f8db6b4743adde7582fa48992ad01776796fcde030683732f56221337d9"
-+SRC_URI[sha256sum] = "eeca7fbd98bc66bead4a77000c2025d9f17ea8201b84245882406ce00b9b6b14"
- 
- RDEPENDS:${PN} += "bash"
- 
+diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2022-1122.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2022-1122.patch
+new file mode 100644
+index 000000000..8aa9c15e3
+--- /dev/null
++++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2022-1122.patch
+@@ -0,0 +1,31 @@
++Upstream-Status: Backport [https://github.com/uclouvain/openjpeg/commit/0afbdcf3e6d0d2bd2e16a0c4d513ee3cf86e460d]
++CVE: CVE-2022-1122
++
++While this patch improves things re-CVE-2022-1122, the defect is undergoing re-analysis and there may be follow-up commits.
++
++From 0afbdcf3e6d0d2bd2e16a0c4d513ee3cf86e460d Mon Sep 17 00:00:00 2001
++From: xiaoxiaoafeifei <lliangliang2007@163.com>
++Date: Wed, 14 Jul 2021 09:35:13 +0800
++Subject: [PATCH] Fix segfault in src/bin/jp2/opj_decompress.c due to
++ uninitialized pointer (fixes #1368) (#1369)
++
++---
++ src/bin/jp2/opj_decompress.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/bin/jp2/opj_decompress.c b/src/bin/jp2/opj_decompress.c
++index 0e028735..18ead672 100644
++--- a/src/bin/jp2/opj_decompress.c
+++++ b/src/bin/jp2/opj_decompress.c
++@@ -1356,7 +1356,7 @@ int main(int argc, char **argv)
++         int it_image;
++         num_images = get_num_images(img_fol.imgdirpath);
++ 
++-        dirptr = (dircnt_t*)malloc(sizeof(dircnt_t));
+++        dirptr = (dircnt_t*)calloc(1, sizeof(dircnt_t));
++         if (!dirptr) {
++             destroy_parameters(&parameters);
++             return EXIT_FAILURE;
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb
+index b41bb9eb8..f248619ec 100644
+--- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb
++++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb
+@@ -10,6 +10,7 @@ SRC_URI = " \
+     file://0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
+     file://0001-This-patch-fixed-include-dir-to-usr-include-.-Obviou.patch \
+     file://CVE-2021-29338.patch \
++    file://CVE-2022-1122.patch \
+ "
+ SRCREV = "37ac30ceff6640bbab502388c5e0fa0bff23f505"
+ S = "${WORKDIR}/git"
 -- 
-2.25.1
+2.34.0
 
 
