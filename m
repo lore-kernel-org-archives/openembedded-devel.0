@@ -1,135 +1,143 @@
-Return-Path: <zhengrq.fnst@fujitsu.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 69F81C3A5A7
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C3FBC3E8A8
 	for <webhook@archiver.kernel.org>; Thu, 14 Apr 2022 16:03:54 +0000 (UTC)
-Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.2])
- by mx.groups.io with SMTP id smtpd.web10.6876.1649901631315710627
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.4])
+ by mx.groups.io with SMTP id smtpd.web10.7138.1649903564330767705
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Apr 2022 19:00:31 -0700
+ Wed, 13 Apr 2022 19:32:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=GI4/DYCq;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.2,
- mailfrom: zhengrq.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=k3ehNghP;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
+ mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1649901628; i=@fujitsu.com;
-	bh=qo1Cr1XPV5xJnY3OlC4IEjEF0eQDcysi7CeZSyarNE4=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=GI4/DYCq8zKWlDr3oPZj2uHe7+lrKvjnVAVPivR9ISTTddisxs5P5Z2KXYauX16wB
-	 dLj70+BLMdOHJF5UPZYJftiK/jrP4fnPRC9xHqfEf2ZOaWQJ8FjUfDS6bn/Gdp8xWU
-	 NqJtrh7OINO0rr+whI4mTyOtUuwMQkEoR6f5pocXA5X51tzs4zx0bG3s7gcRpD8fDB
-	 9kGHWZ9ikx22VVmaXinFUd3wzEYZEgQoa1ULuoFaMYKtFfDDc5HlyJRe1lJ6uApJ8P
-	 2SglUVDbkNlirZQM/Sad9uwuxOL+kfUo68wGxYIMFLnxGvAwh2Zk4IG7/1nCCmgw+T
-	 bHueOnfl42K/A==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprIIsWRWlGSWpSXmKPExsViZ8MxRdemITz
-  JYNIifouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPd0Ta2gm7RilOztjE3MN4R6mLk4hASmM0k
-  cevMdBYI5wCjxPUfq5i6GDk52AT0JTau+wRmiwDZS2fvYQaxhQUCJba/OMYCYrMIqEpsPH6OF
-  cTmFfCQONlxjh3ElhBQkJjy8D0zRFxQ4uTMJ2D1zAISEgdfvACKcwDVKErMni4PUV4h8frwJe
-  YJjDyzkHTMQtKxgJFpFaNdUlFmekZJbmJmjq6hgYGuoaGprpmZrqGpqV5ilW6iXmqpbnJqXkl
-  RIlBaL7G8WC+1uFivuDI3OSdFLy+1ZBMjMKRSip1m72Dc0fdT7xCjJAeTkihvlmF4khBfUn5K
-  ZUZicUZ8UWlOavEhRhkODiUJ3pQ6oJxgUWp6akVaZg4wvGHSEhw8SiK8TTVAad7igsTc4sx0i
-  NQpRkUpcd6dIH0CIImM0jy4NlhMXWKUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzDsdZApPZl
-  4J3PRXQIuZgBZ/WxUKsrgkESEl1cA0k7Et/IQPx5Uzy5t8jzIeXpCWK3J/Vp5RgGksj4luucc
-  vg6iJcd2GM861hv2x7PLfm7DO+bpq5uII1qm7VT14/67dbqmofHDCj7TZEVs9uduk5mknaexP
-  nHf735uuwxMYbh9S+pWZu0nGqTDsusqTdf9Lr7xXY+adu8Krae7pjV8jOpWXrp8UPI2nXrXsQ
-  e670zapTaVrF6S7fhQL0FurGvqc5Y//kj9SazpuRYnKr/ScblWfd/jpTzWD73rb+B8o7+jm2/
-  JFelLxlefyfnXMwk2Hpr+tTC2otn15rGXJlmtLQ4Ii/8cHHq6VvNnUE9JjPevPipb9a5omftr
-  +fuUl9oSCi5Pe5uySXxOmUqWqxFKckWioxVxUnAgAivGk7SQDAAA=
-X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-7.tower-532.messagelabs.com!1649901627!18788!1
+	s=170520fj; t=1649903562; i=@fujitsu.com;
+	bh=nlXCNrtXM5+eyA3gAP58OLNIXv03SnLkSIJMKvE9t5w=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=k3ehNghPXK1h+yAAlfT/T0LD7PrjAYOytNVRcXL6qW7k04PmMmUg9lXY+1i8NmUv7
+	 h/FMzWSyVoNYc5aCy7OaoWkVtbCeDwF3frweAidPlKhfiqjzRY7MjmYlCBEU5kw/7E
+	 14naqNW5V+LlLcbH89xkLC6LZvqd8wAUNU4+qb0tPb5hxUXtwRMuSUGbL0CfnVjx6n
+	 JpigTS6zSwnxU9RIvh12DcQeTiFrUC3Fwm3/AQ8efmaIK10xUqilYCxpV4ZDtEbRIV
+	 35nQwkjojrlVpoxRL7RY2CrYlAlGV7y704ZkFB22jaOcxaiAhW/QVHykbXSwTm7Shr
+	 is9L2NRErlaRg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrOIsWRWlGSWpSXmKPExsViZ8MxRfdEe3i
+  SwaPHkhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8b/abfYC34IVyycf4+tgXG2UBcjF4eQwGwm
+  iceL7rJDOHsYJXafXs/YxcjJwSagJjH91g1WEFtEQF9i6ew9zCA2s4CKxIvfPewgtrCAu8TBx
+  bfBalgEVCU+3JoGVsMr4CSxYeczNhBbQkBBYsrD91BxQYmTM5+wQMyRkDj44gUzRI2ixOzLzS
+  wQdoXErFltTBMYeWchaZmFpGUBI9MqRuukosz0jJLcxMwcXUMDA11DQ1NdY1NdQwsTvcQq3US
+  91FLd8tTiEl0jvcTyYr3U4mK94src5JwUvbzUkk2MwDBLKVbesYOxbdVPvUOMkhxMSqK8WYbh
+  SUJ8SfkplRmJxRnxRaU5qcWHGGU4OJQkeL1agXKCRanpqRVpmTnAkIdJS3DwKInwNtUApXmLC
+  xJzizPTIVKnGHU5dm65vJdZiCUvPy9VSpz3cxtQkQBIUUZpHtwIWPxdYpSVEuZlZGBgEOIpSC
+  3KzSxBlX/FKM7BqCTMOxVkCk9mXgncpldARzABHfFtVSjIESWJCCmpBibDuEj36JXyfyrdGJa
+  8nd16sZ55urh++jTmIrEXdstPzlYO/dHftGj2zA8GkiftPeUXGyjY/phRfG39yg3NuxrnVi1d
+  sOKP0dlbLTH/9WMvOifv+sndoue1SGdbe/bFjcsUl/vE7yqOlZn2YcaMFE3hp2F/FpS8WVeRy
+  ll34MVzm15VplsfXfcu2brOLKHJaFGvsVB0fFTxrys3FuQdL/0y9zRziul+PmYu55+av6UKzU
+  VZOW1D71meX17fb1yp81+F+Q/Tw+t2e3wak/+td147VWvqVtXdkj++H9R5YHl5V15Vnr2b3/t
+  74RfSP+7YliCf8X1228TSDYxpB5dxyD9dMU9h68qNC8NeL/Lxad+mxFKckWioxVxUnAgA5cmh
+  4ToDAAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-9.tower-571.messagelabs.com!1649903560!118579!1
 X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.85.8; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 2767 invoked from network); 14 Apr 2022 02:00:28 -0000
+Received: (qmail 14048 invoked from network); 14 Apr 2022 02:32:40 -0000
 Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-7.tower-532.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 14 Apr 2022 02:00:28 -0000
+  by server-9.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 14 Apr 2022 02:32:40 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 23E20Rwj021554
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 23E2Wa1f020812
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Apr 2022 03:00:27 +0100
-Received: from CentOS7.g08.fujitsu.local (10.167.225.35) by
+ Thu, 14 Apr 2022 03:32:40 +0100
+Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Thu, 14 Apr 2022 03:00:26 +0100
-From: "zhengrq.fnst" <zhengrq.fnst@fujitsu.com>
+ (TLS) id 15.0.1497.32; Thu, 14 Apr 2022 03:32:35 +0100
+From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH v2] python3-nocasedict: upgrade 1.0.2 ->
- 1.0.3
-Date: Thu, 14 Apr 2022 10:00:06 +0800
-Message-ID: <1649901606-14024-1-git-send-email-zhengrq.fnst@fujitsu.com>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] pam-plugin-ldapdb: upgrade 1.3 -> 1.3.1
+Date: Thu, 14 Apr 2022 10:32:27 +0800
+Message-ID: <1649903550-17752-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 14 Apr 2022 16:03:54 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96632
+ https://lists.openembedded.org/g/openembedded-devel/message/96634
 
-License-Update: type of file changed 
- "ASCII text, with CRLF line terminators" -> "ASCII text"
+0001-include-stdexcept-for-std-invalid_argument.patch
+removed since it's included in 1.3.1
 
-changelog:
-===============================================================================
-Bug fixes:
-
--Mitigated the coveralls HTTP status 422 by pinning coveralls-python to <3.0.0 .
--Fixed issues raised by new Pylint 2.9 and 2.10.
--Fixed a dependency error that caused importlib-metadata to be installed on
-Python 3.8, while it is included in the Python base.
--Disabled new Pylint issue 'consider-using-f-string', since f-strings were
-introduced only in Python 3.6.
--Fixed install error of wrapt 1.13.0 on Python 2.7 on Windows due to lack of
-MS Visual C++ 9.0 on GitHub Actions, by pinning it to <1.13.
--Fixed potential issue with Sphinx/docutils versions on Python 2.7.
--Fixed error when installing virtualenv in install test on Python 2.7.
--Fixed that the added setup.py commands (test, leaktest, installtest) were not
-displayed. They are now displayed at verbosity level 1 (using '-v').
-
-Enhancements:
-
--Enhanced test matrix on GitHub Actions to always include Python 2.7 and
-Python 3.4 on Ubuntu and Windows, and Python 2.7 and Python 3.5 on macOS.
--Support for Python 3.10: Added Python 3.10 in GitHub Actions tests, and in
-package metadata.
-
-Cleanup:
--Removed old tools that were needed for travis and Appveyor but no longer on
-GitHub Actions: remove_duplicate_setuptools.py, retry.bat
-
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ython3-nocasedict_1.0.2.bb => python3-nocasedict_1.0.3.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-nocasedict_1.0.2.bb => python3-nocasedict_1.0.3.bb} (50%)
+ ...e-stdexcept-for-std-invalid_argument.patch | 25 -------------------
+ ...apdb_1.3.bb => pam-plugin-ldapdb_1.3.1.bb} |  6 ++---
+ 2 files changed, 2 insertions(+), 29 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/pam/pam-plugin-ldapdb/0001-include-stdexcept-for-std-invalid_argument.patch
+ rename meta-oe/recipes-extended/pam/{pam-plugin-ldapdb_1.3.bb => pam-plugin-ldapdb_1.3.1.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-nocasedict_1.0.2.bb b/meta-python/recipes-devtools/python/python3-nocasedict_1.0.3.bb
-similarity index 50%
-rename from meta-python/recipes-devtools/python/python3-nocasedict_1.0.2.bb
-rename to meta-python/recipes-devtools/python/python3-nocasedict_1.0.3.bb
-index 591b9c6b8d..a47c4a455f 100644
---- a/meta-python/recipes-devtools/python/python3-nocasedict_1.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-nocasedict_1.0.3.bb
-@@ -1,8 +1,8 @@
- SUMMARY = "A case-insensitive ordered dictionary for Python"
- HOMEPAGE = "https://github.com/pywbem/nocasedict"
- LICENSE = "LGPL-2.1-only"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=a87a7059d580c45495c1218f53e3610d"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=1803fa9c2c3ce8cb06b4861d75310742"
+diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ldapdb/0001-include-stdexcept-for-std-invalid_argument.patch b/meta-oe/recipes-extended/pam/pam-plugin-ldapdb/0001-include-stdexcept-for-std-invalid_argument.patch
+deleted file mode 100644
+index 0a93411533..0000000000
+--- a/meta-oe/recipes-extended/pam/pam-plugin-ldapdb/0001-include-stdexcept-for-std-invalid_argument.patch
++++ /dev/null
+@@ -1,25 +0,0 @@
+-From 3e97c9004f4ec58ca3696ee6298f91e6eeb76e04 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Mon, 23 Dec 2019 14:46:25 -0800
+-Subject: [PATCH] include <stdexcept> for std::invalid_argument
+-
+-Upstream-Status: Submitted [https://github.com/rmbreak/pam_ldapdb/pull/11]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- pam_ldapdb.cpp | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/pam_ldapdb.cpp b/pam_ldapdb.cpp
+-index 9baf1e6..be5d85c 100644
+---- a/pam_ldapdb.cpp
+-+++ b/pam_ldapdb.cpp
+-@@ -1,5 +1,6 @@
+- #include <map>
+- #include <string>
+-+#include <stdexcept>
+- #include <utility>
+- #include <syslog.h>
+- #include <pwd.h>
+--- 
+-2.24.1
+-
+diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.bb b/meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.1.bb
+similarity index 80%
+rename from meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.bb
+rename to meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.1.bb
+index 6985590068..d5137f80af 100644
+--- a/meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.bb
++++ b/meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.1.bb
+@@ -10,10 +10,8 @@ DEPENDS = "libpam openldap"
+ inherit features_check
+ REQUIRED_DISTRO_FEATURES = "pam"
  
--SRC_URI[sha256sum] = "86e2dae49e34de7c31b65b486c8f9aa58b66dc2e8ee9b34c390c6c58885c85a0"
-+SRC_URI[sha256sum] = "8220b97ba06b08eb2deded774c406c77e0ca0d5352ae71249f6f9d1f2a17bd7b"
+-SRCREV = "84d7b260f1ae6857ae36e014c9a5968e8aa1cbe8"
+-SRC_URI = "git://github.com/rmbreak/pam_ldapdb;branch=master;protocol=https \
+-           file://0001-include-stdexcept-for-std-invalid_argument.patch \
+-"
++SRCREV = "3e026863cad1fd45c760ee1bc93ef4f0606cc852"
++SRC_URI = "git://github.com/rmbreak/pam_ldapdb;branch=master;protocol=https"
  
- inherit pypi setuptools3
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.25.1
 
