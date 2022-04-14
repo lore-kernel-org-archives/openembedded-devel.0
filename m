@@ -2,68 +2,71 @@ Return-Path: <xuhuan.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B24CCC5AC75
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B28FCC5DF62
 	for <webhook@archiver.kernel.org>; Thu, 14 Apr 2022 16:03:55 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com
- [195.245.230.18])
- by mx.groups.io with SMTP id smtpd.web10.8835.1649919705418771456
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.65])
+ by mx.groups.io with SMTP id smtpd.web12.8752.1649919705362613169
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 14 Apr 2022 00:01:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=BC9qPg3I;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.18,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=F8615gie;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.65,
  mailfrom: xuhuan.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1649919703; i=@fujitsu.com;
-	bh=frywpGmiT3/cWSMwfSrk2jMdTSu0AVlw1KLRpfwS9qk=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=BC9qPg3IrZVQaCsu56UxyGVMe96mVyVBwBCH4eoNQ72f/BHUPIELsjSLGXyvirmij
-	 zXvgIvk3UTL4iLxsOD4qUKNb3fOfT2E95A+AgTeWnrM5YdrRqsmPp8ALN55vI+Vbkx
-	 1sa/W+if+kAOG4lPPFdxwz5miKKXfEwncRcc5enp1eKTBArjX7eqxqXVUHF4e6PvcC
-	 VyDLjKAhhTcPPc+f4BeVic2Gtfoa8CGV2OgO6x/N/rC07Whwm5Tda5TggLc2PvUXVE
-	 Zyj6wEVT4xNXfoDGB6N+nwTFhXH7pGWcamSPvMmcLEHoHjwb44bGBV2QgqnarY2vAt
-	 9H2ZyHjUqselQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprBIsWRWlGSWpSXmKPExsViZ8MRonv9WHi
-  SwcT9zBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bfq3tZCq5xVex62szWwPiBs4uRi0NIYDaT
-  xKprG9i7GDmBnJOMErcvG4HYbALqEo9vvmYEsUUE9CWWzt7DDGIzC6hKdF9cA1YvLBAo8fDtL
-  SYQmwUofmr1KjYQm1fATWLf+7tgcQkBBYkpD98zQ8QFJU7OfMICMUdC4uCLF8wQNUoSJ1Z8hK
-  qvkHh9+BLzBEbeWUhaZiFpWcDItIrRMqkoMz2jJDcxM0fX0MBA19DQVNdE19JYL7FKN1EvtVS
-  3PLW4RNdQL7G8WC+1uFivuDI3OSdFLy+1ZBMjMMBSillidzBu7fupd4hRkoNJSZS36Wh4khBf
-  Un5KZUZicUZ8UWlOavEhRhkODiUJ3v9HgHKCRanpqRVpmTnAYIdJS3DwKInw+oG08hYXJOYWZ
-  6ZDpE4xKkqJ88aAJARAEhmleXBtsAi7xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmYtxVkCk
-  9mXgnc9FdAi5mAFn9bFQqyuCQRISXVwJTxrmVigUjaT323d7Ghk7Y8abeYHCjJEHC2WExsyaG
-  117j3a8SbWZ/f8bhIeUWjacW0dJZFcbNbpBcVrSuy3fVuNudphvS7svvmp1vff3u4x6FR80Tw
-  VofZBpI/31506uSs+qQjtTYwtuwH1z6n5woimh985ht8urhpwl5G3ZceWneX8W2d/l9EJ/d70
-  fS7O3W+xpgucGGayzZx56upomImLOtLf+6pal/y+qFazeekhKd9/5J8VDZrL557YJ36s17dWe
-  qT21dzTHbNeq4mGSfoL3CxdOd3M1UuWcP/ZfxeHHObld9+nnLfb/bR1XmH5t47Zq2vevv8Eu1
-  Si4y9fhcfv9diWCyQJLVedDtP7TslluKMREMt5qLiRABfIwt0KwMAAA==
+	bh=2RMooCAr+o6d5lBQ0zeO7XBPUgXPcH+6eQBmSlW2LgE=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=F8615giecoJesjVMkyDiMpOMKHoDZu9wrN3dgmJFUPxYcQ+4yKzYQ+33j1WrLz2fI
+	 VwYd27KwNqnJ8tbS/sXIyKNaPnJaNsgL3LI4kBXUOoYCcwbVQbdqsEhX46Zc8tY6cg
+	 cAQEVDWuJKc8RwG2XViBhFUvlZdMoeWUKM2tY8ZcDCMASTlkeewgeM9vNpXmwd0sLh
+	 9c2hzIDpGaGrobKE+GBkYC1Z7u5P3fLwu65zmEQ703z3RczJ0XWOQxpeX0GhMmJiDt
+	 Fbf6b95EXN736TNwra5mp99Jn17m2uTtemgo7WVZZPRWhmDU3vMTNaQdm8WLc3ZoPS
+	 ivb1gNiS4ZLQA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrAIsWRWlGSWpSXmKPExsViZ8MRonv9WHi
+  SwZv7rBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8biS4fZCu5wV3w+5NHAeJCri5GLQ0hgNpPE
+  rafzWCGck4wSH3dNZOxi5ORgE1CXeHzzNZgtIqAvsXT2HmYQm1lAVaL74hr2LkYODmEBb4nuj
+  QkgYRagcOeae6wgNq+Am8Sa1cvAWiUEFCSmPHwP1sop4C6xaflZJhBbCKhm5/+3TBD1ghInZz
+  5hgRgvIXHwxQtmiF4liRMrPjJB2BUSrw9fYp7AyD8LScssJC0LGJlWMVolFWWmZ5TkJmbm6Bo
+  aGOgaGprqGugamRjrJVbpJuqlluqWpxaX6BrqJZYX66UWF+sVV+Ym56To5aWWbGIEBmRKMcPn
+  HYwL+n7qHWKU5GBSEuVtOhqeJMSXlJ9SmZFYnBFfVJqTWnyIUYaDQ0mC9/8RoJxgUWp6akVaZ
+  g4wOmDSEhw8SiK8fiCtvMUFibnFmekQqVOMilLivDEgCQGQREZpHlwbLCIvMcpKCfMyMjAwCP
+  EUpBblZpagyr9iFOdgVBLmbQWZwpOZVwI3/RXQYiagxd9WhYIsLklESEk1MAUkRp28bGjzWPO
+  IXcqDuazLTdhnc4vn1XQknUq3L3w57Q/71XVZu+yyei+d3t609+v/Cw4Ct9ZO2XvehWH781Sb
+  sxNOvXKYq6fnoTIz2yGm5f60mjNbuzV6vu56EbbsekpV4oln64zfnLHmeJ9/Ze8Pgy3zZr1+7
+  sbXkfhz9v/Md5rL/89ftfjipyqOsGUefE4XUgS2dnTMu7mo56+BkVGFWvem8sWWQp/jbnznaZ
+  yeHZi7QDjS1sLptsqkhdoVt2clrO+yvHfM1e/enqSgvyvOX6tao7lvfdKjzRGtbxnmR9zN2Le
+  DMTJt5flflofqPzC9jGjZUp/K42hhoB3dt8dU9eu5RYo7YhmsjnFcO26sxFKckWioxVxUnAgA
+  MK28tEMDAAA=
 X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-7.tower-585.messagelabs.com!1649919702!65269!1
+X-Msg-Ref: server-19.tower-587.messagelabs.com!1649919702!98781!1
 X-Originating-IP: [62.60.8.84]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.85.8; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 20789 invoked from network); 14 Apr 2022 07:01:43 -0000
+Received: (qmail 30604 invoked from network); 14 Apr 2022 07:01:43 -0000
 Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-7.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-19.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 14 Apr 2022 07:01:43 -0000
 Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 23E71alW002687
+	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 23E71alX002687
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
  Thu, 14 Apr 2022 08:01:42 +0100
 Received: from localhost.localdomain.localdomain (10.167.225.131) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Thu, 14 Apr 2022 08:01:34 +0100
+ (TLS) id 15.0.1497.32; Thu, 14 Apr 2022 08:01:37 +0100
 From: XU Huan <xuhuan.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH v2] python3-graphviz: upgrade 0.19.1 ->
- 0.19.2
-Date: Thu, 14 Apr 2022 15:02:04 +0800
-Message-ID: <1649919725-9565-1-git-send-email-xuhuan.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH v2] python3-kivy: upgrade 2.0.0 -> 2.1.0
+Date: Thu, 14 Apr 2022 15:02:05 +0800
+Message-ID: <1649919725-9565-2-git-send-email-xuhuan.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1649919725-9565-1-git-send-email-xuhuan.fnst@fujitsu.com>
+References: <1649919725-9565-1-git-send-email-xuhuan.fnst@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.131]
@@ -74,7 +77,7 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 14 Apr 2022 16:03:55 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96648
+ https://lists.openembedded.org/g/openembedded-devel/message/96647
 
 From: Xu Huan <xuhuan.fnst@fujitsu.com>
 
@@ -83,28 +86,34 @@ years update to 2022
 
 Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
 ---
- ...{python3-graphviz_0.19.1.bb => python3-graphviz_0.19.2.bb} | 4 ++--
+ .../python/{python3-kivy_2.0.0.bb => python3-kivy_2.1.0..bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-graphviz_0.19.1.bb => python3-graphviz_0.19.2.bb} (61%)
+ rename meta-python/recipes-devtools/python/{python3-kivy_2.0.0.bb => python3-kivy_2.1.0..bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-graphviz_0.19.1.bb b/meta-python/recipes-devtools/python/python3-graphviz_0.19.2.bb
-similarity index 61%
-rename from meta-python/recipes-devtools/python/python3-graphviz_0.19.1.bb
-rename to meta-python/recipes-devtools/python/python3-graphviz_0.19.2.bb
-index f1246b4b21..3cae19673f 100644
---- a/meta-python/recipes-devtools/python/python3-graphviz_0.19.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-graphviz_0.19.2.bb
-@@ -1,9 +1,9 @@
- DESCRIPTION = "Graphviz protocol implementation"
- HOMEPAGE = "https://graphviz.readthedocs.io/en/stable/"
+diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.0.0.bb b/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
+similarity index 93%
+rename from meta-python/recipes-devtools/python/python3-kivy_2.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
+index 38f5216f56..684bca03e1 100644
+--- a/meta-python/recipes-devtools/python/python3-kivy_2.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-kivy_2.1.0..bb
+@@ -2,7 +2,7 @@ SUMMARY = "Open source Python library for rapid development of applications \
+     that make use of innovative user interfaces, such as multi-touch apps."
+ HOMEPAGE = "https://kivy.org/"
  LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=87cd8818b7e63c6a9c580034e80d7521"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=951dd0868a9606c867ffda0ea3ea6da2"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=f0c851d60495c7e27225a819e179208a"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=22e7b4dd8140eec57fd7edfd9fa23dfc"
  
--SRC_URI[sha256sum] = "09ed0cde452d015fe77c4845a210eb642f28d245f5bc250d4b97808cb8f49078"
-+SRC_URI[sha256sum] = "7c90cebc147c18bcdffcd3c76db58cbface5d45fe0247a2f3bfb144d32a8c77c"
+ inherit setuptools3 pkgconfig features_check
+ PIP_INSTALL_PACKAGE = "Kivy"
+@@ -18,7 +18,7 @@ SRC_URI = "\
+ SRC_URI += " \
+     file://0001-add-support-for-glesv2.patch \
+ "
+-SRCREV = "dedcb6bcabe3d8d6758dcee607e8c33b174d782b"
++SRCREV = "960b95dc666753f59eff1b449124490fbec10184"
  
- inherit pypi setuptools3
+ S = "${WORKDIR}/git"
  
 -- 
 2.25.1
