@@ -2,73 +2,73 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A4F8C48BCD
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A082C4743F
 	for <webhook@archiver.kernel.org>; Thu, 14 Apr 2022 16:03:54 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com
- [195.245.230.81])
- by mx.groups.io with SMTP id smtpd.web10.7151.1649903652237735852
+Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
+ [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web08.7256.1649903652305436040
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 13 Apr 2022 19:34:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=HMQoDTiH;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.81,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=bA30334o;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1649903650; i=@fujitsu.com;
-	bh=10Ss3IYR8wA/CRGnlx90K4jJW1R7npdWCyaF9EJkOsA=;
+	bh=FCMjtBJUC+I91OJJ6Zn7a6Kjhl+a9ANtMOB7Ux+A/Ys=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=HMQoDTiHtrsHmgEDHPQt4QCKAA10ncdsLUCoNz1o/kGl/6R+DEgaQ85XB90kimOdQ
-	 ufg0ESTMzTeVwFM5/YCW9gZHmPbKl5n/tqxb67NAkznz6IER4xKwlLqLgPnGC/iHQx
-	 aU352hrsIq4mTwcljt0oX1ZXNL3jnYewU8UTlQLQaN3/YVYln+RxXkU+vDDzQV1Qqj
-	 lLhfGACcbb/NslJu4ij87QTlY4V9vO6R10cuDYnGLMqiWxj3iiuR+OroRI8LjAbbP/
-	 Q+t8J4RP0+yYkoMH9bKl92MyW9oJvvwkH4MP6ZzcH+/Hcvqh8jyZhkyL4y+cYr31lo
-	 zAzjylE6WNFXQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrBIsWRWlGSWpSXmKPExsViZ8ORqKvYEZ5
-  k8PCLqsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnH4fEDBV56K+XOqGhhXcHcxcnEICTxhlPi1
-  pZcJwrnAJLGgu4MVwtnDKLH46GKgDCcHm4CaxPRbN1hBbBEBfYmls/cwg9jMAioSL373sIPYw
-  gJOEle6u8DqWQRUJR623QKr5wWKH71/ig3ElhBQkJjy8D1QLwcHp4CzROdSFZCwEFDJ4rsT2C
-  DKBSVOznzCAjFeQuLgixfMEK2KErMvN7NA2BUSs2a1MUHYahJXz21insAoOAtJ+ywk7QsYmVY
-  xWiUVZaZnlOQmZuboGhoY6Boamuoa6hoZGOslVukm6qWW6panFpfoGuollhfrpRYX6xVX5ibn
-  pOjlpZZsYgQGcEox4+kdjJv6fuodYpTkYFIS5c0yDE8S4kvKT6nMSCzOiC8qzUktPsQow8GhJ
-  MHr1QqUEyxKTU+tSMvMAUYTTFqCg0dJhLepBijNW1yQmFucmQ6ROsWoKCXOm98OlBAASWSU5s
-  G1wSL4EqOslDAvIwMDgxBPQWpRbmYJqvwrRnEORiVhXm+QKTyZeSVw018BLWYCWvxtVSjI4pJ
-  EhJRUA5MBmxOP4+G+xy+uRidb/UlN/L9s4y/t05MXXHcoaP+bZO79zKlywZIwm5j6i+45lpdk
-  I7xebywJn9S6Sy+xS6K17vPk4ORujwffwnuX9eRqrHTfa1tqn+f3Yn2zi8KaLwf11A40LslYX
-  3//smWA1KNDzD1T/rdsuffLcM3T78In1gn/D42oveRdo+elmnV8X1NaiftRHWfDfL95r3Pb98
-  pHrZbX+H1P2Owv2+yHDafWc2v53d7BtG3qwfP5vdXa4XdT2P+vv/Fc4HyBjsHy5+mf/j/QaJS
-  KF71wYPEpdjOT/EPKoe8sllqpXBBd47yMyT7f2GtTUHjni6Qr2iyGl7bV/tNxWNR++ZZJAM/y
-  d0osxRmJhlrMRcWJANWHpzxbAwAA
+	b=bA30334oVpW7Q5DY2qgQjbUWUKc9xo8u/9RQCC1//AtV3zbAQ6oSBYrEWsIkdq0ON
+	 3HnJ59h7nQQgyj6CNGK+2zrDQ66T9lluQxtroq4ScONuwNrDYvqNfPX5uG37GDO/hH
+	 6k4t2KzFTJ6K8pqDSHv037b8w5NnXpPBiAq980Z6Keqzymfhj1vcqFLkw6aBWXnex6
+	 bO8/Suq91EK/5leAngKYgMIGyTIfdrSAgG7lGSmiP3vph0+iC+Wi8JDJB48CVEPGAL
+	 wsuYvWp5AodkRcSFeyzZkvcxHGNjQ9ViG/tBzv299+yvp0+OajsiwOM5XrDf5baokL
+	 yRi7Gu/tX0zSw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrFIsWRWlGSWpSXmKPExsViZ8ORqKvYEZ5
+  ksPqBqsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnHi5Qv2ggWcFe+v3mFpYNzH0cXIxSEk8IRR
+  YueZaawQzgUmiRnbVzNCOHsYJZpa97F1MXJysAmoSUy/dYMVxBYR0JdYOnsPM4jNLKAi8eJ3D
+  zuILSzgLvH79hkwm0VAVeLH1gVgNq+Ak8TirUfB6iUEFCSmPHwPZHNwcAo4S3QuVQEJC4GU3J
+  3ABlEuKHFy5hMWiPESEgdfvIBqVZSYfbmZBcKukJg1q40JwlaTuHpuE/MERsFZSNpnIWlfwMi
+  0itEuqSgzPaMkNzEzR9fQwEDX0NBU1xxImZnpJVbpJuqlluomp+aVFCUCpfUSy4v1UouL9Yor
+  c5NzUvTyUks2MQKDOaXYbdkOxn19P/UOMUpyMCmJ8mYZhicJ8SXlp1RmJBZnxBeV5qQWH2KU4
+  eBQkuD1agXKCRalpqdWpGXmACMLJi3BwaMkwttUA5TmLS5IzC3OTIdInWLU5bh65cpeZiGWvP
+  y8VClx3vx2oCIBkKKM0jy4EbAov8QoKyXMy8jAwCDEU5BalJtZgir/ilGcg1FJmNcbZApPZl4
+  J3KZXQEcwAR3xbVUoyBEliQgpqQamOFeLO3b5Ezyf3M+WthFzK61hEF09793eJPltcVbL36ao
+  /HheJ8ursZmR62x8Q8xZPc1vk0uXm2621LRbdIHDYraMYsK+2iRxreM5cx48VFCb37mJUUmQ1
+  an62xGvYwJlqcXfNnxdfT63837vxj/df1wfX3vx7Pqek+9d9ZWvZdRNedcSr818OmX7Vk3/5u
+  fcDT8eWofdrdr0o8UrT4WxvU6wdsWkPpWzfs839RvGGM6/sMJv70TRV/92n+xtPhFYzSJr9b1
+  oqry4tV7f+89Lq4WXvpNlnR9Zlfd96dSpT29nr1+s2K23sWjVtNqpGWvl1fpyZN7qxry0DC+s
+  +d0rFDq/p+2N4fvnLzTfbjqpxFKckWioxVxUnAgAaN24pW0DAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-11.tower-585.messagelabs.com!1649903649!50407!1
+X-Msg-Ref: server-14.tower-545.messagelabs.com!1649903649!215807!1
 X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
-X-StarScan-Version: 9.85.8; banners=-,-,-
+X-StarScan-Version: 9.85.5; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 12518 invoked from network); 14 Apr 2022 02:34:09 -0000
+Received: (qmail 2605 invoked from network); 14 Apr 2022 02:34:09 -0000
 Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-11.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-14.tower-545.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 14 Apr 2022 02:34:09 -0000
 Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 2C70E100199
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 23FB1100197
 	for <openembedded-devel@lists.openembedded.org>;
  Thu, 14 Apr 2022 03:34:09 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 1928610018E
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 17DD2100183
 	for <openembedded-devel@lists.openembedded.org>;
  Thu, 14 Apr 2022 03:34:09 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Thu, 14 Apr 2022 03:34:02 +0100
+ (TLS) id 15.0.1497.32; Thu, 14 Apr 2022 03:33:50 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] s-nail: upgrade 14.9.23 -> 14.9.24
-Date: Thu, 14 Apr 2022 10:33:44 +0800
-Message-ID: <1649903624-17790-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] rdma-core: upgrade 39.0 -> 40.0
+Date: Thu, 14 Apr 2022 10:33:43 +0800
+Message-ID: <1649903624-17790-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1649903624-17790-1-git-send-email-wangmy@fujitsu.com>
 References: <1649903624-17790-1-git-send-email-wangmy@fujitsu.com>
@@ -83,44 +83,33 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 14 Apr 2022 16:03:54 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96639
+ https://lists.openembedded.org/g/openembedded-devel/message/96640
 
 Changelog:
-=========
-- Release tarball might be in --format=pax.
-- Again honour MTA arguments passed after the "--" command line
-  "option" in non-send-only mode (broken since at least v14.9.12).
-- support Microsoft IMAP servers.
-- Fix crash due to crafted emails.
-- Fix *expandargv*#419=restrict (broken since v14.9.0).
-- Fix a bug from nail 10.08 as of 2004-06-28 that leads to
-  crashes when some file cannot be loaded.
-  And while here fix one file-close overshoot of mine in since
-  v14.9.16, that would cause panics in debug-enabled code.
-- deal with argc==0 aka CVE-2021-4034.
+https://github.com/linux-rdma/rdma-core/releases/tag/v40.0
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../s-nail/{s-nail_14.9.23.bb => s-nail_14.9.24.bb}             | 2 +-
+ .../rdma-core/{rdma-core_39.0.bb => rdma-core_40.0.bb}          | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/s-nail/{s-nail_14.9.23.bb => s-nail_14.9.24.bb} (92%)
+ rename meta-networking/recipes-support/rdma-core/{rdma-core_39.0.bb => rdma-core_40.0.bb} (95%)
 
-diff --git a/meta-oe/recipes-extended/s-nail/s-nail_14.9.23.bb b/meta-oe/recipes-extended/s-nail/s-nail_14.9.24.bb
-similarity index 92%
-rename from meta-oe/recipes-extended/s-nail/s-nail_14.9.23.bb
-rename to meta-oe/recipes-extended/s-nail/s-nail_14.9.24.bb
-index 4dbb99b3d5..bc514b577a 100644
---- a/meta-oe/recipes-extended/s-nail/s-nail_14.9.23.bb
-+++ b/meta-oe/recipes-extended/s-nail/s-nail_14.9.24.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=87266591c81260f10221f1f38872d023"
+diff --git a/meta-networking/recipes-support/rdma-core/rdma-core_39.0.bb b/meta-networking/recipes-support/rdma-core/rdma-core_40.0.bb
+similarity index 95%
+rename from meta-networking/recipes-support/rdma-core/rdma-core_39.0.bb
+rename to meta-networking/recipes-support/rdma-core/rdma-core_40.0.bb
+index 5fb72c7acb..c567e3314b 100644
+--- a/meta-networking/recipes-support/rdma-core/rdma-core_39.0.bb
++++ b/meta-networking/recipes-support/rdma-core/rdma-core_40.0.bb
+@@ -6,7 +6,7 @@ DEPENDS = "libnl"
+ RDEPENDS:${PN} = "bash perl"
  
- SRC_URI = "https://ftp.sdaoden.eu/${BP}.tar.xz \
-            file://make-errors.patch"
--SRC_URI[sha256sum] = "2c717b22f4cd8719b82b6618640da6031382d2bf8eb51283bca2c6266957bca8"
-+SRC_URI[sha256sum] = "2714d6b8fb2af3b363fc7c79b76d058753716345d1b6ebcd8870ecd0e4f7ef8c"
+ SRC_URI = "git://github.com/linux-rdma/rdma-core.git;branch=master;protocol=https"
+-SRCREV = "b2fedc4b1b891afd2c26ebfd21f9e440e83c28ff"
++SRCREV = "a3e69268892bbd5ab30123748e89a26509a25ac5"
+ S = "${WORKDIR}/git"
  
- DEPENDS = "coreutils-native"
- 
+ #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
 -- 
 2.25.1
 
