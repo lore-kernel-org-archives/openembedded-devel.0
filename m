@@ -1,149 +1,196 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 970FDC64EB6
-	for <webhook@archiver.kernel.org>; Mon, 18 Apr 2022 14:26:01 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web11.38047.1650281362272997416
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 74B32C3527E
+	for <webhook@archiver.kernel.org>; Mon, 18 Apr 2022 14:26:02 +0000 (UTC)
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
+ [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.web11.1586.1649979708428839658
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Apr 2022 04:29:23 -0700
+ Thu, 14 Apr 2022 16:41:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Vt9JNuza;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1650281360; i=@fujitsu.com;
-	bh=P4CQFd1Om0/L/0/bdq9Rp/hF8gvOB87jOvECtb/wcNs=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=Vt9JNuza+bktjTDVOtV4do3pkx44tCAuOM1EJTb9+uOpAlu4V2W0op2rlBSr45tEu
-	 b9OMxVFq4Ma8Starl3LNJ8JJhrpA190RvsVTq6cgZTfs0AKl0tcAZZvcOEK6OZpeFz
-	 PGaoLCeqkFEVLTgIGLB49Ad7YFJf5xNT1ZeYDKUNtCCf6CQqUjPOcaK+Yqx2lN+cYL
-	 tkKhNEcqv/e9UnQIxxeMV9LYAUPRzGslWr3VFQ1FG0vcx1E8fjExvIOMlUDoMJBsWX
-	 XICUf+5kq0LiOjCPXbhLjHSxx1uWPUuSQsYZgsMFHWHRsWV8zU0rC4q9QuyXNyX2Tz
-	 Ma3RHes+ODcGQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprFIsWRWlGSWpSXmKPExsViZ8MxRbffOzb
-  JYGKPnsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmrHjWhtrwRbRiq+3/7M0MK4W7mLk5BASmM0k
-  MXFfShcjF5C9h1Hi9fV3LCAJNgE1iem3brCC2CIC+hJLZ+9hBrGZBVQkXvzuYQexhQW8JR537
-  wGrZxFQlZi24wgTiM0r4CSxcecFsHoJAQWJKQ/fM0PEBSVOznzCAjFHQuLgixdQNYoSsy83s0
-  DYFRKzZrUxTWDknYWkZRaSlgWMTKsYrZOKMtMzSnITM3N0DQ0MdA0NTXWNjYBME73EKt1EvdR
-  S3fLU4hJdI73E8mK91OJiveLK3OScFL281JJNjMAgSylWyNjB+H3lT71DjJIcTEqivCv+xCQJ
-  8SXlp1RmJBZnxBeV5qQWH2KU4eBQkuCN94hNEhIsSk1PrUjLzAEGPExagoNHSYR3iTtQmre4I
-  DG3ODMdInWKUVFKnHeCJ1BCACSRUZoH1waLskuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhH
-  nNvICm8GTmlcBNfwW0mAlo8fb5kSCLSxIRUlINTKnHN/88NJfhjpPgMuk9J+9MkxOQ3DlJXo0
-  h6r75J6nr1SJHM4tFGa5Jr0m12Kh+tZGtJviCrGTolT3Ja+IKvz/wtDkmeK7mmI3sSUY9RfF5
-  EUdTDm+6IfhSaHe7Z8rmf0rKM6abBDL+TX0XwdU8c89yG2+1yytb3h/lP1N3Qrbt2pJ5QqYXV
-  cpr22Z2vfV50bNlVfARK1v94LmnLJfvsLjy5aW9uvn22bYWRyT2tsz7d22Lofu1HfHSPaETdk
-  5vUhfo+15d+Pn4td9tDftfXl0S178rLdGk1u1TaZq7dxHLeicbsXDv7xdiXniXHNzwrvjK1Ir
-  zc6S62Lj/7lf89u28npz07Gu9EoVtbrP2z1ZiKc5INNRiLipOBACy/7JGLQMAAA==
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-21.tower-548.messagelabs.com!1650281359!199998!1
-X-Originating-IP: [62.60.8.148]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.85.8; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 30633 invoked from network); 18 Apr 2022 11:29:19 -0000
-Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
-  by server-21.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 18 Apr 2022 11:29:19 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 23IBTDbV020593
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Apr 2022 12:29:19 +0100
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 18 Apr 2022 12:29:11 +0100
-From: Wang Mingyu <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH v3] python3-cppy: upgrade 1.2.0 -> 1.2.1
-Date: Mon, 18 Apr 2022 19:28:56 +0800
-Message-ID: <1650281336-16196-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=dIFE98dn;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id
+ e8-20020a17090a118800b001cb13402ea2so7135984pja.0
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 14 Apr 2022 16:41:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=EQkbLfHf56l7IpMq0G3ZhuUHxinJDSDv4QlwiFOANuU=;
+        b=dIFE98dnosXN53mj401KCqT3Tu9scM8doZjx9oax2qQMeOzGvpkwEYV98W5gtbYiNS
+         gLBLq/RotI3A2VyB2rQz6UMpO74J9L56hu3RJbgVWxRzK2utzdoNOcC7GfBIoiY8jvwW
+         cgfC1JcJotzETCLPUIsoqPN9tLvr9zQFKE3Bogrn2HayGv1jyqsb/8OdN1lIqsn8b96x
+         ZxgFu8+fz6qLyn/TegNxIA0zDvx1UKs3Fa2dMYW6zJ4qDDa+tPOC4vfXbLkexcolAbaA
+         w6WLm04CzXFRVWqIItsumbgCUHTXmHIUsXR0tS3CSGNFMqEDgLxHz6PkKiVgC10/uXvy
+         0z6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=EQkbLfHf56l7IpMq0G3ZhuUHxinJDSDv4QlwiFOANuU=;
+        b=YkGGtvRUR6IKpUQQgTUHbxXdiQ105I4d6edtygmMruLupfEvK3+m4dW9+0o5Z+EJ8D
+         qGv952VBCqJPelmxnDj2rbscbBU5Vk+u9JCMaG0Xx6JNYx8kVB1htutmaImaUzGFKUJU
+         pbDkVYRPuHrkCHpNbFnnBTBVwDVLyFjsZVGxXJNtfpKQPa5+EGp4z0/yaNoJGNtf1wiS
+         xOhfG1c1VhAVwoSx/sc/X2ktEzkOEkOl4tD4BxgluFYcQQx+YocHRppQLfZhl3cOmQw5
+         xa/yZvwvGUStJsDeE07NBvHINP5nvc9u6Lp94zSSoEc6qsT2okDVQfqhgOgYCRpmMkoZ
+         jX3w==
+X-Gm-Message-State: AOAM530jwUb9zsRaFjtRP+To9AzHjlIHKPnXCiKxZZtKvsZWD9lrDYbD
+	AwupdcpZYA5eTIVjI/tUbkZiRgjzpAo=
+X-Google-Smtp-Source: 
+ ABdhPJy5rrczTtgCxSX6vDrXPMF3Brtx97sIEPeysSqY+WMhR7ESzHZI/V8W6cQ1DOpd1F5x3K1ocw==
+X-Received: by 2002:a17:902:7c94:b0:14d:77d2:a72e with SMTP id
+ y20-20020a1709027c9400b0014d77d2a72emr49687478pll.153.1649979707496;
+        Thu, 14 Apr 2022 16:41:47 -0700 (PDT)
+Received: from keaua.hsd1.ca.comcast.net
+ ([2601:202:4180:a5c0:8ba4:faed:21bc:f7bd])
+        by smtp.gmail.com with ESMTPSA id
+ y26-20020a056a00181a00b004fe3a6f02cesm904025pfa.85.2022.04.14.16.41.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 14 Apr 2022 16:41:47 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Changqing Li <changqing.li@windriver.com>
+Subject: [meta-oe][honister][PATCH] zabbix: Fix sereval CVEs
+Date: Thu, 14 Apr 2022 16:41:46 -0700
+Message-Id: <20220414234146.2228085-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Apr 2022 14:26:01 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Apr 2022 14:26:02 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96683
+ https://lists.openembedded.org/g/openembedded-devel/message/96657
 
-Add patch 0001-Fix-build-error-as-following.patch to fix build bug.
+From: Changqing Li <changqing.li@windriver.com>
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+fix CVE-2022-24349,CVE-2022-24917,CVE-2022-24918,CVE-2022-24919
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../0001-Fix-build-error-as-following.patch   | 28 +++++++++++++++++++
- ...n3-cppy_1.2.0.bb => python3-cppy_1.2.1.bb} |  9 ++++--
- 2 files changed, 35 insertions(+), 2 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-cppy/0001-Fix-build-error-as-following.patch
- rename meta-python/recipes-devtools/python/{python3-cppy_1.2.0.bb => python3-cppy_1.2.1.bb} (55%)
+ ...-DEV-2077-fixed-reflected-XSS-issues.patch | 93 +++++++++++++++++++
+ .../zabbix/zabbix_5.2.6.bb                    |  1 +
+ 2 files changed, 94 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/zabbix/zabbix/0001-.F.-DEV-2077-fixed-reflected-XSS-issues.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-cppy/0001-Fix-build-error-as-following.patch b/meta-python/recipes-devtools/python/python3-cppy/0001-Fix-build-error-as-following.patch
+diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix/0001-.F.-DEV-2077-fixed-reflected-XSS-issues.patch b/meta-oe/recipes-connectivity/zabbix/zabbix/0001-.F.-DEV-2077-fixed-reflected-XSS-issues.patch
 new file mode 100644
-index 0000000000..5a613c827a
+index 0000000000..1d32a9cfdd
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-cppy/0001-Fix-build-error-as-following.patch
-@@ -0,0 +1,28 @@
-+From a6ba15048bbb660abfa094b581862b4936ac4005 Mon Sep 17 00:00:00 2001
-+From: Lei Maohui <leimaohui@fujitsu.com>
-+Date: Mon, 18 Apr 2022 12:19:35 +0900
-+Subject: [PATCH] Fix build error as following:
++++ b/meta-oe/recipes-connectivity/zabbix/zabbix/0001-.F.-DEV-2077-fixed-reflected-XSS-issues.patch
+@@ -0,0 +1,93 @@
++From fe3e2c2deeef568ec7e961340487497e31eb1a81 Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Wed, 13 Apr 2022 10:19:39 +0800
++Subject: [PATCH] ..F....... [DEV-2077] fixed reflected XSS issues
 +
-+flit_core.config.ConfigError: description must be specified under [project] or listed as a dynamic field.
++Merge in ZBX/zabbix from feature/DEV-2077-5.4 to release/5.4
 +
-+Upstream-Status: Pending
-+Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
++* commit '5986cdf2572acaaaac1fc113d6407d5f0cd00c35':
++  ..F....... [DEV-2077] fixed service actions #3
++  ..F....... [DEV-2077] fixed service actions #2
++  ..F....... [DEV-2077] reverted unnecessary changes
++  ..F....... [DEV-2077] reverted tests
++  ..F....... [DEV-2077] fixed service actions
++  ..F....... [DEV-2077] fixed reflected XSS issue in service configuration form
++  ..F....... [DEV-2077] fixed reflected XSS issues in uncheckTableRows function
++  ..F....... [DEV-2077] fixed reflected XSS issues in graph configuration
++  ..F....... [DEV-2077] fixed reflected XSS issues in action configuration
++
++Upstream_Status: Backport [https://git.zabbix.com/projects/ZBX/repos/zabbix/commits/05976188fcca518c029e1af9ed03fd331786d77d]
++CVE: CVE-2022-24349,CVE-2022-24917,CVE-2022-24918,CVE-2022-24919
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
 +---
-+ pyproject.toml | 1 +
-+ 1 file changed, 1 insertion(+)
++ ui/actionconf.php                                | 2 +-
++ ui/graphs.php                                    | 2 +-
++ ui/include/func.inc.php                          | 5 ++---
++ ui/include/views/configuration.services.edit.php | 5 +++--
++ 4 files changed, 7 insertions(+), 7 deletions(-)
 +
-+diff --git a/pyproject.toml b/pyproject.toml
-+index 2d2ac74..66fcee0 100644
-+--- a/pyproject.toml
-++++ b/pyproject.toml
-+@@ -8,6 +8,7 @@
++diff --git a/ui/actionconf.php b/ui/actionconf.php
++index 5b67f72..8cda3fc 100644
++--- a/ui/actionconf.php
+++++ b/ui/actionconf.php
++@@ -37,7 +37,7 @@ $fields = [
++ 	'name' =>							[T_ZBX_STR, O_OPT, null,	NOT_EMPTY,	'isset({add}) || isset({update})',
++ 											_('Name')
++ 										],
++-	'eventsource' =>					[T_ZBX_INT, O_OPT, null,
+++	'eventsource' =>					[T_ZBX_INT, O_OPT, P_SYS,
++ 											IN([EVENT_SOURCE_TRIGGERS, EVENT_SOURCE_DISCOVERY,
++ 												EVENT_SOURCE_AUTOREGISTRATION, EVENT_SOURCE_INTERNAL
++ 											]),
++diff --git a/ui/graphs.php b/ui/graphs.php
++index 79bb195..1d10803 100644
++--- a/ui/graphs.php
+++++ b/ui/graphs.php
++@@ -43,7 +43,7 @@ $fields = [
++ 	'name' =>				[T_ZBX_STR, O_OPT, null,		NOT_EMPTY,		'isset({add}) || isset({update})', _('Name')],
++ 	'width' =>				[T_ZBX_INT, O_OPT, null,		BETWEEN(20, 65535), 'isset({add}) || isset({update})', _('Width')],
++ 	'height' =>				[T_ZBX_INT, O_OPT, null,		BETWEEN(20, 65535), 'isset({add}) || isset({update})', _('Height')],
++-	'graphtype' =>			[T_ZBX_INT, O_OPT, null,		IN('0,1,2,3'),	'isset({add}) || isset({update})'],
+++	'graphtype' =>			[T_ZBX_INT, O_OPT, P_SYS,		IN('0,1,2,3'),	'isset({add}) || isset({update})'],
++ 	'show_3d' =>			[T_ZBX_INT, O_OPT, P_NZERO,	IN('0,1'),		null],
++ 	'show_legend' =>		[T_ZBX_INT, O_OPT, P_NZERO,	IN('0,1'),		null],
++ 	'ymin_type' =>			[T_ZBX_INT, O_OPT, null,		IN('0,1,2'),	null],
++diff --git a/ui/include/func.inc.php b/ui/include/func.inc.php
++index 359fdfb..43c1a41 100644
++--- a/ui/include/func.inc.php
+++++ b/ui/include/func.inc.php
++@@ -2175,11 +2175,10 @@ function uncheckTableRows($parentid = null, $keepids = []) {
++ 	if ($keepids) {
++ 		// If $keepids will not have same key as value, it will create mess, when new checkbox will be checked.
++ 		$keepids = array_combine($keepids, $keepids);
++-
++-		insert_js('sessionStorage.setItem("'.$key.'", JSON.stringify('.json_encode($keepids).'))');
+++		insert_js('sessionStorage.setItem('.json_encode($key).', JSON.stringify('.json_encode($keepids).'));');
++ 	}
++ 	else {
++-		insert_js('sessionStorage.removeItem("'.$key.'")');
+++		insert_js('sessionStorage.removeItem('.json_encode($key).');');
++ 	}
++ }
 + 
-+ [project]
-+ name = "cppy"
-++description = "A small C++ header library"
-+ readme = "README.rst"
-+ requires-python = ">=3.7"
-+ license = {file = "LICENSE"}
++diff --git a/ui/include/views/configuration.services.edit.php b/ui/include/views/configuration.services.edit.php
++index a12385b..625fba9 100644
++--- a/ui/include/views/configuration.services.edit.php
+++++ b/ui/include/views/configuration.services.edit.php
++@@ -141,9 +141,10 @@ foreach ($this->data['children'] as $child) {
++ 			!empty($child['trigger']) ? $child['trigger'] : '',
++ 			(new CCol(
++ 				(new CButton('remove', _('Remove')))
++-					->onClick('javascript: removeDependentChild(\''.$child['serviceid'].'\');')
++-					->addClass(ZBX_STYLE_BTN_LINK)
++ 					->removeId()
+++					->addClass(ZBX_STYLE_BTN_LINK)
+++					->setAttribute('data-serviceid', $child['serviceid'])
+++					->onClick('removeDependentChild(this.dataset.serviceid);')
++ 			))->addClass(ZBX_STYLE_NOWRAP)
++ 		]))->setId('children_'.$child['serviceid'])
++ 	);
 +-- 
 +2.25.1
 +
-diff --git a/meta-python/recipes-devtools/python/python3-cppy_1.2.0.bb b/meta-python/recipes-devtools/python/python3-cppy_1.2.1.bb
-similarity index 55%
-rename from meta-python/recipes-devtools/python/python3-cppy_1.2.0.bb
-rename to meta-python/recipes-devtools/python/python3-cppy_1.2.1.bb
-index f86f571938..57ef3b2776 100644
---- a/meta-python/recipes-devtools/python/python3-cppy_1.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-cppy_1.2.1.bb
-@@ -3,10 +3,15 @@ HOMEPAGE = "https://cppy.readthedocs.io/en/latest/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0bfb3e39b13587f0028f17baf0e42371"
+diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_5.2.6.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_5.2.6.bb
+index b5ab15df48..9d2a06c5ea 100644
+--- a/meta-oe/recipes-connectivity/zabbix/zabbix_5.2.6.bb
++++ b/meta-oe/recipes-connectivity/zabbix/zabbix_5.2.6.bb
+@@ -26,6 +26,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/5.2/${BPN}-${PV}.tar.gz \
+     file://0001-Fix-configure.ac.patch \
+     file://zabbix-agent.service \
++    file://0001-.F.-DEV-2077-fixed-reflected-XSS-issues.patch \
+ "
  
--SRC_URI[sha256sum] = "95e8862e4f826c3f2a6b7b658333b162f80cbe9f943aa0d0a7a6b2ef850aeffc"
-+SRC_URI[sha256sum] = "83b43bf17b1085ac15c5debdb42154f138b928234b21447358981f69d0d6fe1b"
- 
- RDEPENDS:${PN} += "python3-setuptools python3-distutils"
- 
--inherit pypi setuptools3
-+inherit pypi python_flit_core 
-+
-+SRC_URI += " file://0001-Fix-build-error-as-following.patch \
-+           "
-+
-+DEPENDS += "python3-setuptools-native"
- 
- BBCLASSEXTEND = "native nativesdk"
+ SRC_URI[md5sum] = "31dab3535a1fa212f5724902727f6d4d"
 -- 
 2.25.1
 
