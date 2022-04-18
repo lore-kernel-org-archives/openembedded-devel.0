@@ -1,480 +1,149 @@
-Return-Path: <mingli.yu@windriver.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 422C0C4707A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 970FDC64EB6
 	for <webhook@archiver.kernel.org>; Mon, 18 Apr 2022 14:26:01 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web08.37043.1650266775042098897
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.4])
+ by mx.groups.io with SMTP id smtpd.web11.38047.1650281362272997416
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Apr 2022 00:26:15 -0700
+ Mon, 18 Apr 2022 04:29:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.3.146,
- mailfrom: mingli.yu@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 23I7QCnO023406
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 18 Apr 2022 00:26:12 -0700
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Mon, 18 Apr 2022 00:26:12 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27; Mon, 18 Apr 2022 00:26:12 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Mon, 18 Apr 2022 00:26:10 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH v2 1/2] tgt: move from meta-openstack
-Date: Mon, 18 Apr 2022 15:26:09 +0800
-Message-ID: <20220418072610.991233-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: 
- <CAMKF1srNUtTXo2JkX4qF58PdZr1NnF7D3ssutUQ8DyX3A4FtBA@mail.gmail.com>
-References: 
- <CAMKF1srNUtTXo2JkX4qF58PdZr1NnF7D3ssutUQ8DyX3A4FtBA@mail.gmail.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Vt9JNuza;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
+ mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1650281360; i=@fujitsu.com;
+	bh=P4CQFd1Om0/L/0/bdq9Rp/hF8gvOB87jOvECtb/wcNs=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=Vt9JNuza+bktjTDVOtV4do3pkx44tCAuOM1EJTb9+uOpAlu4V2W0op2rlBSr45tEu
+	 b9OMxVFq4Ma8Starl3LNJ8JJhrpA190RvsVTq6cgZTfs0AKl0tcAZZvcOEK6OZpeFz
+	 PGaoLCeqkFEVLTgIGLB49Ad7YFJf5xNT1ZeYDKUNtCCf6CQqUjPOcaK+Yqx2lN+cYL
+	 tkKhNEcqv/e9UnQIxxeMV9LYAUPRzGslWr3VFQ1FG0vcx1E8fjExvIOMlUDoMJBsWX
+	 XICUf+5kq0LiOjCPXbhLjHSxx1uWPUuSQsYZgsMFHWHRsWV8zU0rC4q9QuyXNyX2Tz
+	 Ma3RHes+ODcGQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprFIsWRWlGSWpSXmKPExsViZ8MxRbffOzb
+  JYGKPnsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmrHjWhtrwRbRiq+3/7M0MK4W7mLk5BASmM0k
+  MXFfShcjF5C9h1Hi9fV3LCAJNgE1iem3brCC2CIC+hJLZ+9hBrGZBVQkXvzuYQexhQW8JR537
+  wGrZxFQlZi24wgTiM0r4CSxcecFsHoJAQWJKQ/fM0PEBSVOznzCAjFHQuLgixdQNYoSsy83s0
+  DYFRKzZrUxTWDknYWkZRaSlgWMTKsYrZOKMtMzSnITM3N0DQ0MdA0NTXWNjYBME73EKt1EvdR
+  S3fLU4hJdI73E8mK91OJiveLK3OScFL281JJNjMAgSylWyNjB+H3lT71DjJIcTEqivCv+xCQJ
+  8SXlp1RmJBZnxBeV5qQWH2KU4eBQkuCN94hNEhIsSk1PrUjLzAEGPExagoNHSYR3iTtQmre4I
+  DG3ODMdInWKUVFKnHeCJ1BCACSRUZoH1waLskuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhH
+  nNvICm8GTmlcBNfwW0mAlo8fb5kSCLSxIRUlINTKnHN/88NJfhjpPgMuk9J+9MkxOQ3DlJXo0
+  h6r75J6nr1SJHM4tFGa5Jr0m12Kh+tZGtJviCrGTolT3Ja+IKvz/wtDkmeK7mmI3sSUY9RfF5
+  EUdTDm+6IfhSaHe7Z8rmf0rKM6abBDL+TX0XwdU8c89yG2+1yytb3h/lP1N3Qrbt2pJ5QqYXV
+  cpr22Z2vfV50bNlVfARK1v94LmnLJfvsLjy5aW9uvn22bYWRyT2tsz7d22Lofu1HfHSPaETdk
+  5vUhfo+15d+Pn4td9tDftfXl0S178rLdGk1u1TaZq7dxHLeicbsXDv7xdiXniXHNzwrvjK1Ir
+  zc6S62Lj/7lf89u28npz07Gu9EoVtbrP2z1ZiKc5INNRiLipOBACy/7JGLQMAAA==
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-21.tower-548.messagelabs.com!1650281359!199998!1
+X-Originating-IP: [62.60.8.148]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.85.8; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 30633 invoked from network); 18 Apr 2022 11:29:19 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-21.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 18 Apr 2022 11:29:19 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 23IBTDbV020593
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Mon, 18 Apr 2022 12:29:19 +0100
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Mon, 18 Apr 2022 12:29:11 +0100
+From: Wang Mingyu <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH v3] python3-cppy: upgrade 1.2.0 -> 1.2.1
+Date: Mon, 18 Apr 2022 19:28:56 +0800
+Message-ID: <1650281336-16196-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 18 Apr 2022 14:26:01 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96681
+ https://lists.openembedded.org/g/openembedded-devel/message/96683
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Add patch 0001-Fix-build-error-as-following.patch to fix build bug.
 
-tgt is a substitute to iscsitarget [1].
-
-[1] https://git.openembedded.org/meta-openembedded/commit/?id=1e7e4e91817b272b7685406f8d9ef58fe8c65e29
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...-of-header-files-check-in-Yocto-buil.patch |  47 +++++++
- .../files/0001-usr-Makefile-WARNING-fix.patch |  29 +++++
- .../recipes-extended/tgt/files/tgtd           |   5 +
- .../recipes-extended/tgt/files/tgtd.init      | 116 ++++++++++++++++++
- .../recipes-extended/tgt/files/tgtd.service   |  33 +++++
- ...ile-apply-LDFLAGS-to-all-executables.patch |  35 ++++++
- .../recipes-extended/tgt/tgt_git.bb           |  94 ++++++++++++++
- 7 files changed, 359 insertions(+)
- create mode 100644 meta-networking/recipes-extended/tgt/files/0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch
- create mode 100644 meta-networking/recipes-extended/tgt/files/0001-usr-Makefile-WARNING-fix.patch
- create mode 100644 meta-networking/recipes-extended/tgt/files/tgtd
- create mode 100644 meta-networking/recipes-extended/tgt/files/tgtd.init
- create mode 100755 meta-networking/recipes-extended/tgt/files/tgtd.service
- create mode 100644 meta-networking/recipes-extended/tgt/files/usr-Makefile-apply-LDFLAGS-to-all-executables.patch
- create mode 100644 meta-networking/recipes-extended/tgt/tgt_git.bb
+ .../0001-Fix-build-error-as-following.patch   | 28 +++++++++++++++++++
+ ...n3-cppy_1.2.0.bb => python3-cppy_1.2.1.bb} |  9 ++++--
+ 2 files changed, 35 insertions(+), 2 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-cppy/0001-Fix-build-error-as-following.patch
+ rename meta-python/recipes-devtools/python/{python3-cppy_1.2.0.bb => python3-cppy_1.2.1.bb} (55%)
 
-diff --git a/meta-networking/recipes-extended/tgt/files/0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch b/meta-networking/recipes-extended/tgt/files/0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch
+diff --git a/meta-python/recipes-devtools/python/python3-cppy/0001-Fix-build-error-as-following.patch b/meta-python/recipes-devtools/python/python3-cppy/0001-Fix-build-error-as-following.patch
 new file mode 100644
-index 000000000..173ecb620
+index 0000000000..5a613c827a
 --- /dev/null
-+++ b/meta-networking/recipes-extended/tgt/files/0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch
-@@ -0,0 +1,47 @@
-+From 93fea40915d01be6d02587a0b8be85a642e6a8d5 Mon Sep 17 00:00:00 2001
-+From: Zhenhua Luo <zhenhua.luo@freescale.com>
-+Date: Thu, 10 Apr 2014 11:26:39 +0800
-+Subject: [PATCH] Correct the path of header files check in Yocto build env
++++ b/meta-python/recipes-devtools/python/python3-cppy/0001-Fix-build-error-as-following.patch
+@@ -0,0 +1,28 @@
++From a6ba15048bbb660abfa094b581862b4936ac4005 Mon Sep 17 00:00:00 2001
++From: Lei Maohui <leimaohui@fujitsu.com>
++Date: Mon, 18 Apr 2022 12:19:35 +0900
++Subject: [PATCH] Fix build error as following:
 +
-+Upstream-Status: Inappropriate [the fix is specific to Yocto build env]
++flit_core.config.ConfigError: description must be specified under [project] or listed as a dynamic field.
 +
-+Current Makefile will check headers on host instead of Yocto sysroot, following
-+error appears. Change the path of header check.
-+| bs_aio.c:34:20: fatal error: libaio.h: No such file or directory
-+| #include <libaio.h>
-+|                     ^
-+| compilation terminated.
-+
-+Signed-off-by: Zhenhua Luo <zhenhua.luo@freescale.com>
-+
++Upstream-Status: Pending
++Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
 +---
-+ usr/Makefile | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
++ pyproject.toml | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+diff --git a/usr/Makefile b/usr/Makefile
-+index decf13c..9ff8f15 100644
-+--- a/usr/Makefile
-++++ b/usr/Makefile
-+@@ -1,11 +1,11 @@
-+ sbindir ?= $(PREFIX)/sbin
-+ libdir ?= $(PREFIX)/lib/tgt
++diff --git a/pyproject.toml b/pyproject.toml
++index 2d2ac74..66fcee0 100644
++--- a/pyproject.toml
+++++ b/pyproject.toml
++@@ -8,6 +8,7 @@
 + 
-+-ifneq ($(shell test -e /usr/include/linux/signalfd.h && echo 1),)
-++ifneq ($(shell test -e $(SYSROOT)/usr/include/linux/signalfd.h && echo 1),)
-+ CFLAGS += -DUSE_SIGNALFD
-+ endif
-+ 
-+-ifneq ($(shell test -n $(shell find /usr/include -name "timerfd.h" | head -n1) && echo 1),)
-++ifneq ($(shell test -n $(shell find $(SYSROOT)/usr/include -name "timerfd.h" | head -n1) && echo 1),)
-+ CFLAGS += -DUSE_TIMERFD
-+ endif
-+ 
-+@@ -25,7 +25,7 @@ ifneq ($(SD_NOTIFY),)
-+ CFLAGS += -DUSE_SYSTEMD
-+ endif
-+ 
-+-ifneq ($(shell test -e /usr/include/sys/eventfd.h && test -e /usr/include/libaio.h && echo 1),)
-++ifneq ($(shell test -e $(SYSROOT)/usr/include/sys/eventfd.h && test -e $(SYSROOT)/usr/include/libaio.h && echo 1),)
-+ CFLAGS += -DUSE_EVENTFD
-+ TGTD_OBJS += bs_aio.o
-+ LIBS += -laio
-diff --git a/meta-networking/recipes-extended/tgt/files/0001-usr-Makefile-WARNING-fix.patch b/meta-networking/recipes-extended/tgt/files/0001-usr-Makefile-WARNING-fix.patch
-new file mode 100644
-index 000000000..078ba9ef5
---- /dev/null
-+++ b/meta-networking/recipes-extended/tgt/files/0001-usr-Makefile-WARNING-fix.patch
-@@ -0,0 +1,29 @@
-+From 6f4e3b11c7dccf83e2d18635c84837b212dfcc1c Mon Sep 17 00:00:00 2001
-+From: Li xin <lixin.fnst@cn.fujitsu.com>
-+Date: Sun, 26 Jul 2015 04:23:51 +0900
-+Subject: [PATCH] usr/Makefile: WARNING fix WARNING: QA Issue: tgt:
-+ /work/i586-oe-linux/tgt/1.0.60+gitAUTOINC+ab51727a36-r0/
-+ packages-split/tgt/usr/sbin/tgtd contains probably-redundant RPATH /usr/lib
-+ [useless-rpaths]
-+
-+Upstream-Status: pending
-+
-+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-+
-+---
-+ usr/Makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/usr/Makefile b/usr/Makefile
-+index 9ff8f15..cc8df11 100644
-+--- a/usr/Makefile
-++++ b/usr/Makefile
-+@@ -63,7 +63,7 @@ TGTD_OBJS += tgtd.o mgmt.o target.o scsi.o log.o driver.o util.o work.o \
-+ 
-+ TGTD_DEP = $(TGTD_OBJS:.o=.d)
-+ 
-+-LDFLAGS = -Wl,-E,-rpath=$(libdir)
-++LDFLAGS += -Wl,-E
-+ 
-+ .PHONY:all
-+ all: $(PROGRAMS) $(MODULES)
-diff --git a/meta-networking/recipes-extended/tgt/files/tgtd b/meta-networking/recipes-extended/tgt/files/tgtd
-new file mode 100644
-index 000000000..64df6a3eb
---- /dev/null
-+++ b/meta-networking/recipes-extended/tgt/files/tgtd
-@@ -0,0 +1,5 @@
-+# options for tgtd
-+TGTD_OPTS=""
-+
-+# configuration file
-+TGTD_CONFIG=/etc/tgt/targets.conf
-diff --git a/meta-networking/recipes-extended/tgt/files/tgtd.init b/meta-networking/recipes-extended/tgt/files/tgtd.init
-new file mode 100644
-index 000000000..4b0ce9443
---- /dev/null
-+++ b/meta-networking/recipes-extended/tgt/files/tgtd.init
-@@ -0,0 +1,116 @@
-+#!/bin/sh
-+
-+### BEGIN INIT INFO
-+# Provides: tgtd
-+# Required-Start: $remote_fs $network $syslog
-+# Required-Stop: $remote_fs $syslog
-+# Default-Start:     3 5
-+# Default-Stop:      0 1 2 6
-+# Short-Description: SCSI target daemon
-+# Description: Linux SCSI target framework (tgt)
-+### END INIT INFO
-+
-+DESC="tgtd"
-+DAEMON="/usr/sbin/tgtd"
-+TGTD_CONFIG=/etc/tgt/targets.conf
-+
-+start ()
-+{
-+    echo -n "Starting $DESC..."
-+
-+    # Ensure service isn't running
-+    tgt-admin -s >/dev/null 2>&1
-+    RETVAL=$?
-+    if [ "$RETVAL" -ne 107 ] ; then
-+        echo "$DESC is already running."
-+        exit 1
-+    fi
-+
-+    # Start tgtd first
-+    $DAEMON &>/dev/null
-+    RETVAL=$?
-+    if [ "$RETVAL" -ne 0 ]; then
-+        echo "failed."
-+        exit 1
-+    fi
-+
-+    # Put tgtd into "offline" state until all the targets are configured.
-+    # We don't want initiators to (re)connect and fail the connection
-+    # if it's not ready.
-+    tgtadm --op update --mode sys --name State -v offline
-+    # Configure the targets.
-+    tgt-admin -f -e -c $TGTD_CONFIG
-+    # Put tgtd into "ready" state.
-+    tgtadm --op update --mode sys --name State -v ready
-+
-+    echo "done."
-+}
-+
-+stop ()
-+{
-+    echo -n "Stopping $DESC..."
-+
-+    # Remove all targets. It only removes targets which are not in use.
-+    tgt-admin --update ALL -c /dev/null &>/dev/null
-+    # tgtd will exit if all targets were removed
-+    tgtadm --op delete --mode system &>/dev/null
-+    RETVAL=$?
-+    if [ "$RETVAL" -eq 107 ] ; then
-+        if [ "$TASK" != "restart" ] ; then
-+            return 1
-+        fi
-+    elif [ "$RETVAL" -ne 0 ] ; then
-+        echo "Some initiators are still connected - could not stop tgtd"
-+        return 2
-+    fi
-+    echo -n
-+}
-+
-+reload()
-+{
-+        echo "Reloading configuration of $DESC" "$NAME"
-+        # Update configuration for targets. Only targets which
-+        # are not in use will be updated.
-+        tgt-admin --update ALL -c $TGTD_CONFIG &>/dev/null
-+        RETVAL=$?
-+        if [ "$RETVAL" -eq 107 ] ; then
-+                echo "tgtd is not running"
-+                exit 1
-+        fi
-+}
-+
-+status()
-+{
-+        tgt-admin -s >/dev/null 2>&1
-+	RETVAL=$?
-+        if [ "$RETVAL" -eq 107 ] ; then
-+                echo "tgtd is not running"
-+        else
-+                echo "tgtd is running"
-+        fi
-+}
-+
-+case "$1" in
-+    start)
-+        start
-+        ;;
-+    stop)
-+        stop
-+        ;;
-+    restart|force-reload)
-+        stop
-+        start
-+        ;;
-+    reload)
-+        reload
-+        ;;
-+    status)
-+        status
-+        ;;
-+    *)
-+        echo "Usage: $0 {start|stop|force-reload|restart|status|reload}"
-+        exit 1
-+        ;;
-+esac
-+
-+exit 0
-diff --git a/meta-networking/recipes-extended/tgt/files/tgtd.service b/meta-networking/recipes-extended/tgt/files/tgtd.service
-new file mode 100755
-index 000000000..afbd4b4ea
---- /dev/null
-+++ b/meta-networking/recipes-extended/tgt/files/tgtd.service
-@@ -0,0 +1,33 @@
-+[Unit]
-+Description=tgtd iSCSI target daemon
-+After=network.target
-+
-+[Service]
-+EnvironmentFile=@SYSCONFDIR@/sysconfig/tgtd
-+
-+ExecStart=@SBINDIR@/tgtd -f $TGTD_OPTS
-+# see bz 848942. workaround for a race for now.
-+ExecStartPost=@BASE_BINDIR@/sleep 5
-+# Put tgtd into "offline" state until all the targets are configured.
-+# We don't want initiators to (re)connect and fail the connection
-+# if it's not ready.
-+ExecStartPost=@SBINDIR@/tgtadm --op update --mode sys --name State -v offline
-+# Configure the targets.
-+ExecStartPost=@SBINDIR@/tgt-admin -e -c $TGTD_CONFIG
-+# Put tgtd into "ready" state.
-+ExecStartPost=@SBINDIR@/tgtadm --op update --mode sys --name State -v ready
-+
-+# Update configuration for targets. Only targets which
-+# are not in use will be updated.
-+ExecReload=@SBINDIR@/tgt-admin --update ALL -c $TGTD_CONFIG
-+
-+# NOTE: Shutdown of the iscsi target may cause data corruption
-+# for initiators that are connected.
-+ExecStop=@SBINDIR@/tgtadm --op update --mode sys --name State -v offline
-+# Remove all targets. It only removes targets which are not in use.
-+ExecStop=@SBINDIR@/tgt-admin --update ALL -c /dev/null
-+# tgtd will exit if all targets were removed
-+ExecStop=@SBINDIR@/tgtadm --op delete --mode system
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-extended/tgt/files/usr-Makefile-apply-LDFLAGS-to-all-executables.patch b/meta-networking/recipes-extended/tgt/files/usr-Makefile-apply-LDFLAGS-to-all-executables.patch
-new file mode 100644
-index 000000000..d480ef786
---- /dev/null
-+++ b/meta-networking/recipes-extended/tgt/files/usr-Makefile-apply-LDFLAGS-to-all-executables.patch
-@@ -0,0 +1,35 @@
-+From a815ac8ee16b344d9e24b445957f32bf2aafa532 Mon Sep 17 00:00:00 2001
-+From: Mark Asselstine <mark.asselstine@windriver.com>
-+Date: Thu, 5 Jan 2017 11:07:51 -0500
-+Subject: [PATCH] usr/Makefile: apply LDFLAGS to all executables
-+
-+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
-+---
-+ usr/Makefile | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/usr/Makefile b/usr/Makefile
-+index cc8df11..c55fd68 100644
-+--- a/usr/Makefile
-++++ b/usr/Makefile
-+@@ -78,7 +78,7 @@ TGTADM_OBJS = tgtadm.o concat_buf.o
-+ TGTADM_DEP = $(TGTADM_OBJS:.o=.d)
-+ 
-+ tgtadm: $(TGTADM_OBJS)
-+-	$(CC) $^ -o $@
-++	$(CC) $^ -o $@ $(LDFLAGS)
-+ 
-+ -include $(TGTADM_DEP)
-+ 
-+@@ -86,7 +86,7 @@ TGTIMG_OBJS = tgtimg.o libssc.o libcrc32c.o
-+ TGTIMG_DEP = $(TGTIMG_OBJS:.o=.d)
-+ 
-+ tgtimg: $(TGTIMG_OBJS)
-+-	$(CC) $^ -o $@
-++	$(CC) $^ -o $@ $(LDFLAGS)
-+ 
-+ -include $(TGTIMG_DEP)
-+ 
++ [project]
++ name = "cppy"
+++description = "A small C++ header library"
++ readme = "README.rst"
++ requires-python = ">=3.7"
++ license = {file = "LICENSE"}
 +-- 
-+2.7.4
++2.25.1
 +
-diff --git a/meta-networking/recipes-extended/tgt/tgt_git.bb b/meta-networking/recipes-extended/tgt/tgt_git.bb
-new file mode 100644
-index 000000000..42141cb72
---- /dev/null
-+++ b/meta-networking/recipes-extended/tgt/tgt_git.bb
-@@ -0,0 +1,94 @@
-+DESCRIPTION = "Linux SCSI target framework (tgt)"
-+HOMEPAGE = "http://stgt.sourceforge.net"
-+LICENSE = "GPL-2.0-only"
-+LIC_FILES_CHKSUM = "file://scripts/tgtd.spec;beginline=7;endline=7;md5=21c19ea7dad04648b9c2f791b6e29b4c"
-+DEPENDS = "sg3-utils libaio"
+diff --git a/meta-python/recipes-devtools/python/python3-cppy_1.2.0.bb b/meta-python/recipes-devtools/python/python3-cppy_1.2.1.bb
+similarity index 55%
+rename from meta-python/recipes-devtools/python/python3-cppy_1.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-cppy_1.2.1.bb
+index f86f571938..57ef3b2776 100644
+--- a/meta-python/recipes-devtools/python/python3-cppy_1.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-cppy_1.2.1.bb
+@@ -3,10 +3,15 @@ HOMEPAGE = "https://cppy.readthedocs.io/en/latest/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0bfb3e39b13587f0028f17baf0e42371"
+ 
+-SRC_URI[sha256sum] = "95e8862e4f826c3f2a6b7b658333b162f80cbe9f943aa0d0a7a6b2ef850aeffc"
++SRC_URI[sha256sum] = "83b43bf17b1085ac15c5debdb42154f138b928234b21447358981f69d0d6fe1b"
+ 
+ RDEPENDS:${PN} += "python3-setuptools python3-distutils"
+ 
+-inherit pypi setuptools3
++inherit pypi python_flit_core 
 +
-+SRCREV = "b43dbc6711e43c0a32cc4d9df22884841d911d51"
-+PV = "1.0.79+git${SRCPV}"
++SRC_URI += " file://0001-Fix-build-error-as-following.patch \
++           "
 +
-+SRC_URI = "git://github.com/fujita/tgt.git;branch=master;protocol=https \
-+	file://0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch \
-+        file://0001-usr-Makefile-WARNING-fix.patch \
-+        file://usr-Makefile-apply-LDFLAGS-to-all-executables.patch \
-+"
-+SRC_URI += "file://tgtd.init \
-+            file://tgtd.service \
-+            file://tgtd \
-+"
-+
-+S = "${WORKDIR}/git"
-+
-+COMPATIBLE_HOST:libc-musl = "null"
-+
-+CONFFILES:${PN} += "${sysconfdir}/tgt/targets.conf"
-+
-+inherit update-rc.d systemd
-+
-+SYSTEMD_SERVICE:${PN} = "tgtd.service"
-+SYSTEMD_AUTO_ENABLE:${PN} = "disable"
-+
-+CFLAGS += ' -I. -DUSE_SIGNALFD -DUSE_TIMERFD -D_GNU_SOURCE -DTGT_VERSION=\\"1.0.63\\" -DBSDIR=\\"${libdir}/backing-store\\"'
-+
-+#do_compile() {
-+#    oe_runmake SYSROOT="${STAGING_DIR_TARGET}" -e programs conf scripts
-+#}
-+EXTRA_OEMAKE = "-e programs conf scripts"
-+
-+do_install() {
-+    oe_runmake -e DESTDIR="${D}" install-programs install-conf install-scripts
-+
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-+        install -d ${D}${sysconfdir}/init.d
-+        install -m 0755 ${WORKDIR}/tgtd.init ${D}${sysconfdir}/init.d/tgtd
-+    elif ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-+        install -d ${D}${systemd_unitdir}/system
-+        install -m 0644 ${WORKDIR}/tgtd.service ${D}${systemd_unitdir}/system/tgtd.service
-+        install -d ${D}${sysconfdir}/sysconfig
-+        install -m 0644 ${WORKDIR}/tgtd ${D}${sysconfdir}/sysconfig/tgtd
-+        sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/tgtd.service
-+        sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' ${D}${systemd_unitdir}/system/tgtd.service
-+        sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir}/system/tgtd.service
-+    fi
-+}
-+
-+FILES:${PN} += "${systemd_unitdir}/system/tgtd.service \
-+                ${sysconfdir}/sysconfig/tgtd \
-+"
-+
-+RDEPENDS:${PN} = " \
-+    bash \
-+    libaio \
-+    libconfig-general-perl \
-+    perl \
-+    perl-module-english \
-+    perl-module-tie-hash-namedcapture \
-+    perl-module-xsloader \
-+    perl-module-carp \
-+    perl-module-exporter \
-+    perl-module-errno \
-+    perl-module-exporter-heavy \
-+    perl-module-symbol \
-+    perl-module-selectsaver \
-+    perl-module-dynaloader \
-+    perl-module-carp-heavy \
-+    perl-module-filehandle \
-+    perl-module-feature \
-+    perl-module-overload \
-+    perl-module-fcntl \
-+    perl-module-io \
-+    perl-module-io-file \
-+    perl-module-io-handle \
-+    perl-module-io-seekable \
-+    perl-module-file-glob \
-+    perl-module-base \
-+    perl-module-encoding-warnings \
-+    perl-module-file-spec-unix \
-+    perl-module-file-spec \
-+    perl-module-file-spec-functions \
-+    perl-module-getopt-long \
-+    perl-module-constant \
-+    "
-+INITSCRIPT_PACKAGES = "${PN}"
-+INITSCRIPT_NAME:${PN} = "tgtd"
-+
++DEPENDS += "python3-setuptools-native"
+ 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.25.1
 
