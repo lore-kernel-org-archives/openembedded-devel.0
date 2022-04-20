@@ -1,160 +1,95 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D8F8AC636FF
-	for <webhook@archiver.kernel.org>; Thu, 21 Apr 2022 16:46:08 +0000 (UTC)
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com
- [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web11.8791.1650466430733407374
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A8DD5C64E66
+	for <webhook@archiver.kernel.org>; Thu, 21 Apr 2022 16:46:09 +0000 (UTC)
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com
+ [209.85.218.45])
+ by mx.groups.io with SMTP id smtpd.web12.10571.1650474970558879332
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Apr 2022 07:53:50 -0700
+ Wed, 20 Apr 2022 10:16:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=UJZV/rqu;
- spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id
- n11-20020a17090a73cb00b001d1d3a7116bso3922958pjk.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=l1fXlE99;
+ spf=pass (domain: gmail.com, ip: 209.85.218.45,
+ mailfrom: jan.vermaete@gmail.com)
+Received: by mail-ej1-f45.google.com with SMTP id r13so4914118ejd.5
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Apr 2022 07:53:50 -0700 (PDT)
+ Wed, 20 Apr 2022 10:16:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :references:from:organization:in-reply-to:content-transfer-encoding;
-        bh=CmzR85cIhwvj+rDWzPoHIoi+Y8O0NeWf9SY+dmKSXSE=;
-        b=UJZV/rqu8FnwD4ZaHmO/EFgRSdEALiRM+Znus6MzDn3msnqRbIljJ03oVW58RIG9aS
-         BkgWl3TZBYG/MygmKf5U8Gk1KCTYTmHKdQmc2DtJ9XrM+SgK3r5ZyhAPjCQBSJagvLar
-         LMkKdYXIWGimpz0D/ffEd4WfOf3Brw1Tv5VtNhQofrMcOVji+uj4xdxPLdaxIMVcCcER
-         o9LB1gsry+w0ORq2k5wX6m/LbMw8YjmLpEhPqQF/SeggBPWmXmYyK0lOv084NIsUO7Xj
-         OlRVqWm0reKsVBMFB6F8SFlY3z6RHNMkVZ1N2TYh0EjBG55Jhlfo2JqmMiT5Pn4zsFDQ
-         /BAA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=RymliMD8+GAtfaGAx/R1OKSyu7oGTijB/NaE4BiMtAo=;
+        b=l1fXlE99xnc3IBRZ0Lc3QVjc+1qkBv9muWFHH7b6U19iJ9/fxnnPuzgk0iJOXz0shI
+         TE4R8H7SYZ/9lE42ryFcB2VQnxKBzS0qnYCiS9fx5P5jLzBLeOVarPgTtrWG0O+SFbLW
+         b11Cof+fOYSXX9O4XrecL+xjTKNnbcg7CbFGoR3GaCK9v1Rw1nQzgE4x9niCsAerlB63
+         hCaMi6i0472lyFX14UeehGUCRieALb0rPcLo57B6dlhyaoHIJDDJxT+cs/KhhW88/TLH
+         JyjaI99QZYMsVvjrSy/mRySax1gSmjSAtdgeS4WFLZrdIKGnXyzldJfT4wjIQ1rP3GCj
+         3AiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:references:from:organization:in-reply-to
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=CmzR85cIhwvj+rDWzPoHIoi+Y8O0NeWf9SY+dmKSXSE=;
-        b=yqZw/raStFAfCF6+nGroKx1Hsv3ycRLSlKAro1jZxcaU4eizRyyeIpTg3B0aahs1wO
-         5AqAgKNE55MZAs8qVCmkWXpuxbQhFNVojsX+cTO7wHocxQ4fEtiADltc1xer+ScaMDK+
-         +5zDF4PgmtVKbv9hyHKAF4vswFG1ovfmfqMEa3/41sJwgCseo7h2uQMTRbqBXwjDbCkv
-         qIVZPsoHSDlV08LGralm4SM2fWQagbx4HL7MLVgpWI8vc6ubkPKMdABMaE9X7du01X4V
-         AogMh4vHOQDsav+7Um1W3GPBUkBcJLCZ58kV15eiiKoqSy6vlaZFrBzOqkot0FuzHcr4
-         SJXg==
-X-Gm-Message-State: AOAM532f36q05yyRLEABiZQ+COv7o6XOOkvmwXh+QusIKiWEXJ/lm0tD
-	TuAH1QoslwWnvIMnmDnKKbU=
+        bh=RymliMD8+GAtfaGAx/R1OKSyu7oGTijB/NaE4BiMtAo=;
+        b=myA/ssPVJ4FJp4qgnQ9dXAXLyCN9FIGkbvmVuheVJbcu7S8JfNco6IhLecElL6gGhe
+         QslJlzgy83UnGLAIMTjxM246bOeN5YggnqVoPU4p864pAI1DCL9J9DuSFDg8wfRG+3XG
+         zMjwvFCuQ8LeRYA0qpUzBcg0z+cIpw1GkB2rAsEZas3j3d3/3UrMgIcPV1Lh2tLolNPn
+         9FnvbvDMVgAKP1K4hcERAd+3aVcH5LjIh3B0vagMOITfo3dTG8Lfa3NNzHq5Qt5N3jbr
+         pO9AucY0HYQO739VaD1f/Nq5yTC12mUQbNUaSZ8cby7a7yOOiQn2E2Tarj6eJ2qYZbkq
+         uZIQ==
+X-Gm-Message-State: AOAM530cFnCQ78U5EF6EHX+ZDAxNU9LUMFucbexzPYuvGzlGul5It+va
+	nnmwjR3xHV3n5meRQfPy2xcFf3kdSmTV0A==
 X-Google-Smtp-Source: 
- ABdhPJzXbxxACaZFXBYrGlV9p8I0r0FnkbfJZWiis/APvasF+KLdBatMAPkltrESbehbJTvhsnDNPA==
-X-Received: by 2002:a17:902:c215:b0:153:8d90:a108 with SMTP id
- 21-20020a170902c21500b001538d90a108mr21538481pll.172.1650466430046;
-        Wed, 20 Apr 2022 07:53:50 -0700 (PDT)
-Received: from ?IPV6:2601:646:9200:a0f0::309e? ([2601:646:9200:a0f0::309e])
-        by smtp.gmail.com with ESMTPSA id
- 23-20020a621917000000b0050ab87c15e7sm3801374pfz.53.2022.04.20.07.53.49
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 20 Apr 2022 07:53:49 -0700 (PDT)
-Message-ID: <97a9dad0-fb8a-3bf0-8ee7-f45494e37cf4@gmail.com>
-Date: Wed, 20 Apr 2022 07:53:47 -0700
+ ABdhPJxV7Dn3utI/4WJ01v/Znve7oWCCLqH1/fzMnLP84bC/sBd8J5e3LQit/qBcz/m/Rbt51s0yiA==
+X-Received: by 2002:a17:906:4c93:b0:6f0:2de:f42d with SMTP id
+ q19-20020a1709064c9300b006f002def42dmr3820416eju.648.1650474968807;
+        Wed, 20 Apr 2022 10:16:08 -0700 (PDT)
+Received: from localhost.localdomain (78-20-160-86.access.telenet.be.
+ [78.20.160.86])
+        by smtp.googlemail.com with ESMTPSA id
+ s11-20020a170906284b00b006e108693850sm6839551ejc.28.2022.04.20.10.16.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 20 Apr 2022 10:16:08 -0700 (PDT)
+From: Jan Vermaete <jan.vermaete@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jan Vermaete <jan.vermaete@gmail.com>
+Subject: [meta-webserver][PATCH] netdata: version bump 1.33.1 -> 1.34.1
+Date: Wed, 20 Apr 2022 19:15:44 +0200
+Message-Id: <20220420171544.1840507-1-jan.vermaete@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Subject: Re: [oe] [meta-oe][PATCH] gpsd: split python utils from gps-utils
-Content-Language: en-US
-To: Dmitry Baryshkov <dbaryshkov@gmail.com>,
- openembedded-devel@lists.openembedded.org
-References: <20220420094227.2826875-1-dmitry.baryshkov@linaro.org>
-From: Khem Raj <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-In-Reply-To: <20220420094227.2826875-1-dmitry.baryshkov@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 21 Apr 2022 16:46:08 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 21 Apr 2022 16:46:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96714
+ https://lists.openembedded.org/g/openembedded-devel/message/96715
 
-It does not apply on top of master-next, can you rebase
-and resend please.
+Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+---
+ .../netdata/{netdata_1.33.1.bb => netdata_1.34.1.bb}            | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-webserver/recipes-webadmin/netdata/{netdata_1.33.1.bb => netdata_1.34.1.bb} (97%)
 
-On 4/20/22 02:42, Dmitry Baryshkov wrote:
-> Neither gpsd nor significant part of gps-utils depend on python. However
-> installing gps-utils package would require installing python, which adds
-> about 17 MB to the image size. Split away gps-utils-python to allow
-> using gpsd/gps-utils in the systems with limited resources (or in the
-> initramfs).
-> 
-> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-> ---
->   .../recipes-navigation/gpsd/gpsd_3.23.1.bb    | 23 +++++++++++--------
->   1 file changed, 14 insertions(+), 9 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb
-> index c11d4c76d64e..9ed94f7487e0 100644
-> --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb
-> +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb
-> @@ -77,7 +77,7 @@ do_install:append() {
->       install -m 755 ${D}${libdir}/gps/*.py ${D}${PYTHON_SITEPACKAGES_DIR}/gps
->   }
->   
-> -PACKAGES =+ "libgps python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
-> +PACKAGES =+ "libgps python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils gps-utils-python"
->   
->   RPROVIDES:${PN}-dbg += "python-pygps-dbg"
->   
-> @@ -106,31 +106,36 @@ SUMMARY:gps-utils = "Utils used for simulating, monitoring,... a GPS"
->   # Python files are required for gps/fake, required for gpsfake.
->   FILES:gps-utils = "\
->       ${bindir}/cgps         \
-> -    ${bindir}/gegps        \
->       ${bindir}/gps2udp      \
-> -    ${bindir}/gpscat       \
-> -    ${bindir}/gpscsv       \
->       ${bindir}/gpsctl       \
->       ${bindir}/gpsdebuginfo \
->       ${bindir}/gpsdecode    \
-> -    ${bindir}/gpsfake      \
->       ${bindir}/gpsmon       \
->       ${bindir}/gpspipe      \
-> -    ${bindir}/gpsplot      \
-> -    ${bindir}/gpsprof      \
->       ${bindir}/gpsrinex     \
->       ${bindir}/gpssnmp      \
-> -    ${bindir}/gpssubframe  \
->       ${bindir}/gpxlogger    \
->       ${bindir}/lcdgps       \
->       ${bindir}/ntpshmmon    \
->       ${bindir}/ppscheck     \
->       ${bindir}/ubxtool      \
-> +"
-> +RRECOMMENDS:gps-utils = "gps-utils-python"
-> +
-> +SUMMARY:gps-utils-python = "Python utils used for simulating, monitoring,... a GPS"
-> +FILES:gps-utils-python = "\
-> +    ${bindir}/gegps        \
-> +    ${bindir}/gpscat       \
-> +    ${bindir}/gpscsv       \
-> +    ${bindir}/gpsfake      \
-> +    ${bindir}/gpsplot      \
-> +    ${bindir}/gpsprof      \
-> +    ${bindir}/gpssubframe  \
->       ${bindir}/xgps         \
->       ${bindir}/xgpsspeed    \
->       ${bindir}/zerk         \
->   "
-> -RDEPENDS:gps-utils = "python3-pygps"
-> +RDEPENDS:gps-utils-python = "python3-pygps"
->   
->   SUMMARY:python3-pygps = "Python bindings to gpsd"
->   FILES:python3-pygps = "${PYTHON_SITEPACKAGES_DIR}/* ${libdir}/gps/*.py ${libdir}/*.egg-info"
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#96713): https://lists.openembedded.org/g/openembedded-devel/message/96713
-> Mute This Topic: https://lists.openembedded.org/mt/90580511/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
+diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_1.33.1.bb b/meta-webserver/recipes-webadmin/netdata/netdata_1.34.1.bb
+similarity index 97%
+rename from meta-webserver/recipes-webadmin/netdata/netdata_1.33.1.bb
+rename to meta-webserver/recipes-webadmin/netdata/netdata_1.34.1.bb
+index f575a4cba..71fb0783b 100644
+--- a/meta-webserver/recipes-webadmin/netdata/netdata_1.33.1.bb
++++ b/meta-webserver/recipes-webadmin/netdata/netdata_1.34.1.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
+ DEPENDS += "libuv util-linux zlib"
+ 
+ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz"
+-SRC_URI[sha256sum] = "20ba8695d87187787b27128ac3aab9b09aa29ca6b508c48542e0f7d50ec9322b"
++SRC_URI[sha256sum] = "8ea0786df0e952209c14efeb02e25339a0769aa3edc029e12816b8ead24a82d7"
+ 
+ # default netdata.conf for netdata configuration
+ SRC_URI += "file://netdata.conf"
+-- 
+2.25.1
+
 
