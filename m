@@ -1,100 +1,91 @@
-Return-Path: <dbaryshkov@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B5704C64E7E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2698C64E94
 	for <webhook@archiver.kernel.org>; Thu, 21 Apr 2022 16:46:09 +0000 (UTC)
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com
- [209.85.208.46])
- by mx.groups.io with SMTP id smtpd.web12.10911.1650476585253723965
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
+ [209.85.215.175])
+ by mx.groups.io with SMTP id smtpd.web09.11311.1650478802942972717
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Apr 2022 10:43:05 -0700
+ Wed, 20 Apr 2022 11:20:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=AEadqY1p;
- spf=pass (domain: gmail.com, ip: 209.85.208.46,
- mailfrom: dbaryshkov@gmail.com)
-Received: by mail-ed1-f46.google.com with SMTP id b24so3254281edu.10
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=XzrjyiHT;
+ spf=pass (domain: gmail.com, ip: 209.85.215.175,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f175.google.com with SMTP id h5so2355322pgc.7
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Apr 2022 10:43:05 -0700 (PDT)
+ Wed, 20 Apr 2022 11:20:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=LJoSu59AH3/HieHaB4l2cPulWEAEe3gu+6XM+5ZhnBo=;
-        b=AEadqY1pd2Z55bH9aM2TaYTqal4TwJQ0Wt9Ew1ZyaARmljQYUkLcKIPpf8s8mWz2iq
-         z9NQSbK6IL6vbK2cq7v+nCIF+Ah2zVL8N/AzjXuvOvXFdaFICsE0B/n7BY54f5phfcbU
-         o1tivFFDn79uJJMa3PQe2nHGFhEeWNDqRTvIgx0iatu6PuOZRpPeaHdfIqK9CSMiRetY
-         W3tvOhP1UReomp61Vz1M30e3UDM4CWWwpPdQic3I+S0A9IhQhaG6t29mjA2YbIylrXIz
-         Z5AHf4aGnY+wzfbFjS1M3GAiZEXpGVOLZ+u48cUgjXlTMLAIsiD1V8SnMV0GylGQrs02
-         Kqzw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=keRQhn/Ziih4yAzkRhK2wnEVj4NjnPTJ3ZfdOMCR/4U=;
+        b=XzrjyiHT+lW0z2xcw8d6/MeOoMkKgdPokhdWF1KkNd4M05INSVEVnFJXQKrrvSMYBQ
+         CLOqVrHOh5u4HmVVP1vTqGyDcIiIBADqiOt5lNORzKhhR441Ejzz+Qtnown63QrRAUi/
+         RrmG9yRSclMH2Q8+L5cHSfwjseylQ3ORTnIU07fb7Am0ddWycwZLLLSarvoys+Mz/Flo
+         6vIEZmGMYyrwDWZ5JDvZbwjg2RLGDO16c6go/Uu8cbqUnjLP8rJFdOWH8f5T/pnvepv/
+         km6Q9ltCeUEE5J21wTokksareCjRXcOke8vv4IWlus1qgKkb1FbQbH+rcOFAozwG919S
+         3zQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=LJoSu59AH3/HieHaB4l2cPulWEAEe3gu+6XM+5ZhnBo=;
-        b=rYcNz8ZJ+7xolMC3Vdr+L6KeYFBXmMHgOnOWbOw/RI+WdRBRXwCn5t7PbxGOS1L3D6
-         uzh/vMvhy5FcAl81I28rTg0R4Tccc70k074JMfUFeXixDR4kWd3R8iaMpuZq2MqOIZku
-         NxF3p7TJovZnd+hA11DxxVOsgJzeV0kM6/ti7Gb6rOdfsGHS6FFIZcqit6/MFnFl/Cua
-         pQ0YwU79dgyU4AiqDDcdKNt0bmMNbUpYj2tsUJDOWgoiQeCXtPgkrDSG0sPqCocYEOj+
-         YeIl+gmwJjghRu4Twoc2kvkXROvvxB+clefpirg4uzqkHy5LVTw2gTZdCtWWrWlip/66
-         /hiA==
-X-Gm-Message-State: AOAM533LvC9ycHKQfXvAzavy1MwyVYcxocy6EoVkn4Rs5LrbMvQsTsST
-	2PQPr0r5tEgs0hv0oB9WQYrLZOHbptXEdA0kYbE=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=keRQhn/Ziih4yAzkRhK2wnEVj4NjnPTJ3ZfdOMCR/4U=;
+        b=McCSn+bdTsRZqc/lxcxo/oDNtZmBDoW4Zwrxjvz121BqjRMhbnkOIDQ5l6eGbq0Ct3
+         ksUian1E8QoOY3PLl7qcFByg7fqTSgH4d5g1t5Sh9BPb/FACiGnbmdkB7TSji4FwNO3X
+         5lHKeRAgFwjRC9UfoJvWIIF6lp427+W0ERYA9kKGpN24/HoXGPC2GTh1+3w/DuoJwrES
+         IKgINS26IKVBwG5yk+6vZRe1eBfuUuXqIQr3yzO9qFvbub/D9xc0HHaikvoXHaZCUWP8
+         93DDoSCmYrziwkmOR/gHr3a5n/10QMuBqvWdwjeHjaGynzPcln/ApnndB1Y4bYEA4mGR
+         i3IA==
+X-Gm-Message-State: AOAM533mjl0bd5P8zqVNHOLlepPZK4piHGxPswr6bczSOzAVmeauh02r
+	fqiiZMArrhRcJWtCojdQ7PXWHWTTtBmU5Q==
 X-Google-Smtp-Source: 
- ABdhPJyslQpIA2/cFOOVf3IU0WreQiWWMW4n5i0M1uHUTXlrdml8d+Vg34uYmKgapH/EQhxBAHbQosGcW5ZoRE2hiUg=
-X-Received: by 2002:a50:baa8:0:b0:415:b0bc:6353 with SMTP id
- x37-20020a50baa8000000b00415b0bc6353mr25019536ede.220.1650476583745; Wed, 20
- Apr 2022 10:43:03 -0700 (PDT)
+ ABdhPJz3svjJRN1EV0RN2KxAk0K9T5gM2Fl3mgMcuqk9J2EMIAcfKwGwoqwA07dK5bj60b4kjwOZgw==
+X-Received: by 2002:a65:530b:0:b0:382:b21d:82eb with SMTP id
+ m11-20020a65530b000000b00382b21d82ebmr20651567pgq.215.1650478802049;
+        Wed, 20 Apr 2022 11:20:02 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::3ee6])
+        by smtp.gmail.com with ESMTPSA id
+ 124-20020a621982000000b0050a73577a37sm12859312pfz.45.2022.04.20.11.20.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 20 Apr 2022 11:20:01 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] mozjs-91: Disable strip
+Date: Wed, 20 Apr 2022 11:19:59 -0700
+Message-Id: <20220420181959.2435611-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.36.0
 MIME-Version: 1.0
-References: <20220420094227.2826875-1-dmitry.baryshkov@linaro.org>
- <97a9dad0-fb8a-3bf0-8ee7-f45494e37cf4@gmail.com>
-In-Reply-To: <97a9dad0-fb8a-3bf0-8ee7-f45494e37cf4@gmail.com>
-From: Dmitry Baryshkov <dbaryshkov@gmail.com>
-Date: Wed, 20 Apr 2022 20:42:52 +0300
-Message-ID: 
- <CALT56yOZ=jr48+-9-Ko2AdqoK73_+KtG53yJRWgx25dSjQhuVw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] gpsd: split python utils from gps-utils
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 21 Apr 2022 16:46:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96716
+ https://lists.openembedded.org/g/openembedded-devel/message/96717
 
-Hi,
+OE build takes care of this during packaging anyway
 
-=D1=81=D1=80, 20 =D0=B0=D0=BF=D1=80. 2022 =D0=B3. =D0=B2 17:53, Khem Raj <r=
-aj.khem@gmail.com>:
->
-> It does not apply on top of master-next, can you rebase
-> and resend please.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-extended/mozjs/mozjs-91_91.8.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-I have rechecked, it applies on top of master-next w/o any issues. Did
-you push your master-next branch?
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-91_91.8.0.bb b/meta-oe/recipes-extended/mozjs/mozjs-91_91.8.0.bb
+index 9025e4159a..d0accfaae4 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-91_91.8.0.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs-91_91.8.0.bb
+@@ -51,6 +51,7 @@ do_configure() {
+         --prefix=${prefix} \
+         --libdir=${libdir} \
+         --disable-jemalloc \
++        --disable-strip \
+         ${JIT}
+ 
+ }
+-- 
+2.36.0
 
->
-> On 4/20/22 02:42, Dmitry Baryshkov wrote:
-> > Neither gpsd nor significant part of gps-utils depend on python. Howeve=
-r
-> > installing gps-utils package would require installing python, which add=
-s
-> > about 17 MB to the image size. Split away gps-utils-python to allow
-> > using gpsd/gps-utils in the systems with limited resources (or in the
-> > initramfs).
-> >
-> > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-> > ---
-> >   .../recipes-navigation/gpsd/gpsd_3.23.1.bb    | 23 +++++++++++-------=
--
-> >   1 file changed, 14 insertions(+), 9 deletions(-)
-
-[skipped]
-
---=20
-With best wishes
-Dmitry
 
