@@ -1,134 +1,141 @@
-Return-Path: <xuhuan.fnst@fujitsu.com>
+Return-Path: <dbaryshkov@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EEB14C38A2D
-	for <webhook@archiver.kernel.org>; Thu, 21 Apr 2022 16:46:06 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.2])
- by mx.groups.io with SMTP id smtpd.web11.19070.1650531615626658179
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33B53C3A59E
+	for <webhook@archiver.kernel.org>; Thu, 21 Apr 2022 16:46:07 +0000 (UTC)
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com
+ [209.85.167.47])
+ by mx.groups.io with SMTP id smtpd.web10.5681.1650447750878541053
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Apr 2022 02:00:16 -0700
+ Wed, 20 Apr 2022 02:42:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=lBwgW8wS;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.2,
- mailfrom: xuhuan.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1650531613; i=@fujitsu.com;
-	bh=TBC1tVufJTWRDpPwHRiOXOwk80vuBXA+UwWzHXA+UlI=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=lBwgW8wSXIVIxoWMfqHUY/YtYs3UkNS+GjlACKmfNtwJbC9ork4jvcNOBZ9dqE3dI
-	 e6TvzmzxSfONWr+ThRF3Ze6g2Ik4ks74HmgWNRWAGK9OMwBvjJBsTmWVCAf2YcVgxQ
-	 D5LoHJy2M1NSdvh5Yiu9YI0/tlZxqSDvcbMthLidF/J8QoJ+wchhJkUES2vRMP+ug7
-	 qWjkfEf3SkInV6ZaD06EJ5x8BQJPsau0lCWoMceB4tuqfDQxmXGGLYiKyu4JKUaonr
-	 tjO2ANLWI5ZMXEdrAMFAUQ0A/ZUR7a2fro69/nxohG0oyilmI00wT9STFFbbE9iRDm
-	 0Vo7MQpByJ4Vw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrOIsWRWlGSWpSXmKPExsViZ8MxSVdWNjH
-  JYFGnjMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnFjwXK2gi88FT9Xr2JvYHzI3cXIxSEk8IRR
-  4sOmFSwQzgUmiavPf7NDOCcZJaZe+ACU4eRgE1CXeHzzNSOILSKgL7F09h5mEJtZQFWi++Iad
-  hBbWCBQ4uTJL2A2C1B87px7YDavgLvEs3XfweZICChITHn4HqiXg4NTwENi3UsfkLAQUMnpP1
-  1sEOWCEidnPmGBGC8hcfDFC2aIViWJEys+MkHYFRKvD1+CiqtJXD23iXkCo+AsJO2zkLQvYGR
-  axWidVJSZnlGSm5iZo2toYKBraGiqa2yka2hhqZdYpZuol1qqW55aXKJrpJdYXqyXWlysV1yZ
-  m5yTopeXWrKJERjGKcUKe3cwXl75U+8QoyQHk5Iob75EYpIQX1J+SmVGYnFGfFFpTmrxIUYZD
-  g4lCd65UkA5waLU9NSKtMwcYEzBpCU4eJREeOulgdK8xQWJucWZ6RCpU4y6HJcOXdnLLMSSl5
-  +XKiXOqy4OVCQAUpRRmgc3AhbflxhlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ8y6SAZrCk5l
-  XArfpFdARTEBHVE+JBTmiJBEhJdXAlK/ObaVndvfPwX3PU3qW6UoKi6XJJp03Vq1yMVu29k/x
-  ty9bIicIflzO8u5r4YTSpZNk2E/nxIrzf/VIytrfKpxq+P73P8H+Oamc5wo0lq+Rm57++VPxr
-  gdM7zd6nnw8sdlUauq/rNrld4NthK9Znvgiony2WHWXusK7Dmev2x7hX7r3b8vRe8I2P2rRb9
-  coz+8V/DMED1R/m1Q+Y/rM60vKD+4O+ykr0ff30uH8x1Jr02ZW3tPf8fi0QcykX5vfme62+B8
-  V8OU8X0qfx6SQWfPid8tP/3DXvkon4Mx0q0W/CgKezXFctHve8WY77x5/W+s6g/w/M50NJvNe
-  XvxebjMTd8SlSt6uKY8nK8UqNyuxFGckGmoxFxUnAgA8ceL5agMAAA==
-X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-2.tower-565.messagelabs.com!1650531613!5072!1
-X-Originating-IP: [62.60.8.146]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.85.8; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 29984 invoked from network); 21 Apr 2022 09:00:13 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-2.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 21 Apr 2022 09:00:13 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 00A1B1009B2
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Apr 2022 10:00:13 +0100 (BST)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id E8E011009A8
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Apr 2022 10:00:12 +0100 (BST)
-Received: from localhost.localdomain.localdomain (10.167.225.131) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Thu, 21 Apr 2022 09:59:55 +0100
-From: XU Huan <xuhuan.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 5/5] python3-imageio: upgrade 2.16.1 ->
- 2.17.0
-Date: Thu, 21 Apr 2022 16:59:24 +0800
-Message-ID: <1650531564-26234-5-git-send-email-xuhuan.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1650531564-26234-1-git-send-email-xuhuan.fnst@fujitsu.com>
-References: <1650531564-26234-1-git-send-email-xuhuan.fnst@fujitsu.com>
+ dkim=pass header.i=@linaro.org header.s=google header.b=suL8ZSZn;
+ spf=pass (domain: linaro.org, ip: 209.85.167.47,
+ mailfrom: dmitry.baryshkov@linaro.org)
+Received: by mail-lf1-f47.google.com with SMTP id bu29so1887801lfb.0
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 20 Apr 2022 02:42:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=1qUnLiwIjv69/S4PXxbAWMvfEbG9J/WG3TkM0jMFlFc=;
+        b=suL8ZSZnp/PxunifvTyybWJ22f7oA3qTTSGFaZBWavIjqrzJiO8tv+AxdalLgQzmCz
+         DyNg/pFu1tnw7cSm65eNESQ0NlyegSQc/HGO0eF/abP/pzJhox/crCi1t87j6G/7w9tH
+         3sEFfRNaYBss2T1tjawi4L2yAV73ev+eL7pFXQYRkfvqjfdDdnphdE6zkduDXvYFBf+V
+         aSVg+XlSUTkBbNsPYi2k4MugCP+ZHyK0r2SCRYe6l2Gly8EusYr5HCO+aYkU823ZuSDv
+         Js9qsq3qhdDXGBSizaZ0bCoSnh6XCD7fB5jN774PcT80ZO8HU6TfzkU/SzBQENnCD1RF
+         cLPw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=1qUnLiwIjv69/S4PXxbAWMvfEbG9J/WG3TkM0jMFlFc=;
+        b=n2Tg4rcghodcAU/eGDBjVCfbT8XCgfUuBZw+lGqO6bzai6ErYQB7SvoVe/8ZspLpiz
+         4naYwJEgf6luF/ktCLP/e703QgPutmQ2G2IQanl3IWyV04sixroXgpmUUL6ftYLkXgm3
+         1Xdm3KcmryPiqFgFT8zzpNAC6Vt6uX9pv3zv1rN0dX/yPG/w1+ded9iBdmDqZC5RHk0n
+         hhzAL4wx5kvTq70rwGE4q3CXAyQ3YxM6AdR62C0ELp323LkP9egu5YlzLX7jHHeY/p8C
+         mYxt62lzKT3Ecfry3+g1S1RNWetObZOoZkANH1ufuKhsHUv4ZmifFE9KbUOxFli4fp1Q
+         DRwQ==
+X-Gm-Message-State: AOAM530Fqzoy8zo+kHkinMiVM80IwXWfmuUiVRJT5aG1mJqYiVQCrOLB
+	eCEph/7sUaB74ORQ3xNOu+yDxNdiNfirDw==
+X-Google-Smtp-Source: 
+ ABdhPJxRf37pP2PHpmXdiohygXZnoJO0Zpv8ywm1bpMJ5zFuLgAZlCqu5uXF66toAZ0fuatOnrgW1Q==
+X-Received: by 2002:a2e:8617:0:b0:24d:a185:76c9 with SMTP id
+ a23-20020a2e8617000000b0024da18576c9mr12853837lji.312.1650447748742;
+        Wed, 20 Apr 2022 02:42:28 -0700 (PDT)
+Received: from umbar.lan ([37.153.55.125])
+        by smtp.gmail.com with ESMTPSA id
+ w23-20020a197b17000000b0046d1729e7d9sm1767031lfc.294.2022.04.20.02.42.28
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 20 Apr 2022 02:42:28 -0700 (PDT)
+From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] gpsd: split python utils from gps-utils
+Date: Wed, 20 Apr 2022 12:42:27 +0300
+Message-Id: <20220420094227.2826875-1-dmitry.baryshkov@linaro.org>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.131]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 21 Apr 2022 16:46:06 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 21 Apr 2022 16:46:07 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96723
+ https://lists.openembedded.org/g/openembedded-devel/message/96713
 
-From: Xu Huan <xuhuan.fnst@fujitsu.com>
+Neither gpsd nor significant part of gps-utils depend on python. However
+installing gps-utils package would require installing python, which adds
+about 17 MB to the image size. Split away gps-utils-python to allow
+using gpsd/gps-utils in the systems with limited resources (or in the
+initramfs).
 
-License-Updated:
-years update to 2022
-
-changelog:
-================================================================
-Feature:
--New Plugin for pyAV
--Add plugin default sentinel
-
-Other:
--Better Type Annotations + mypy support
--Add fast-paths for pyav formats
--Update readme
--Fix docs on standard images
-
-Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 ---
- .../{python3-imageio_2.16.1.bb => python3-imageio_2.17.0.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-imageio_2.16.1.bb => python3-imageio_2.17.0.bb} (65%)
+ .../recipes-navigation/gpsd/gpsd_3.23.1.bb    | 23 +++++++++++--------
+ 1 file changed, 14 insertions(+), 9 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-imageio_2.16.1.bb b/meta-python/recipes-devtools/python/python3-imageio_2.17.0.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-imageio_2.16.1.bb
-rename to meta-python/recipes-devtools/python/python3-imageio_2.17.0.bb
-index d1d318d5ae..53f61e8827 100644
---- a/meta-python/recipes-devtools/python/python3-imageio_2.16.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-imageio_2.17.0.bb
-@@ -3,9 +3,9 @@ write a wide range of image data, including animated images, video, \
- volumetric data, and scientific formats."
- SECTION = "devel/python"
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=7b9bbbb543b6af3e6b53f9b7fb68f71d"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=24cb9a367a9e641b459a01c4d15256ba"
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb
+index c11d4c76d64e..9ed94f7487e0 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb
+@@ -77,7 +77,7 @@ do_install:append() {
+     install -m 755 ${D}${libdir}/gps/*.py ${D}${PYTHON_SITEPACKAGES_DIR}/gps
+ }
  
--SRC_URI[sha256sum] = "7f123cb23a77ac5abe8ed4e7ad6a60831a82de2c5d123463dcf1d4278c4779d2"
-+SRC_URI[sha256sum] = "b21f009e52eb22b02b839f3bf2ae5374aaf0886317313c1358c6014e5383b539"
+-PACKAGES =+ "libgps python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
++PACKAGES =+ "libgps python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils gps-utils-python"
  
- inherit pypi setuptools3
+ RPROVIDES:${PN}-dbg += "python-pygps-dbg"
  
+@@ -106,31 +106,36 @@ SUMMARY:gps-utils = "Utils used for simulating, monitoring,... a GPS"
+ # Python files are required for gps/fake, required for gpsfake.
+ FILES:gps-utils = "\
+     ${bindir}/cgps         \
+-    ${bindir}/gegps        \
+     ${bindir}/gps2udp      \
+-    ${bindir}/gpscat       \
+-    ${bindir}/gpscsv       \
+     ${bindir}/gpsctl       \
+     ${bindir}/gpsdebuginfo \
+     ${bindir}/gpsdecode    \
+-    ${bindir}/gpsfake      \
+     ${bindir}/gpsmon       \
+     ${bindir}/gpspipe      \
+-    ${bindir}/gpsplot      \
+-    ${bindir}/gpsprof      \
+     ${bindir}/gpsrinex     \
+     ${bindir}/gpssnmp      \
+-    ${bindir}/gpssubframe  \
+     ${bindir}/gpxlogger    \
+     ${bindir}/lcdgps       \
+     ${bindir}/ntpshmmon    \
+     ${bindir}/ppscheck     \
+     ${bindir}/ubxtool      \
++"
++RRECOMMENDS:gps-utils = "gps-utils-python"
++
++SUMMARY:gps-utils-python = "Python utils used for simulating, monitoring,... a GPS"
++FILES:gps-utils-python = "\
++    ${bindir}/gegps        \
++    ${bindir}/gpscat       \
++    ${bindir}/gpscsv       \
++    ${bindir}/gpsfake      \
++    ${bindir}/gpsplot      \
++    ${bindir}/gpsprof      \
++    ${bindir}/gpssubframe  \
+     ${bindir}/xgps         \
+     ${bindir}/xgpsspeed    \
+     ${bindir}/zerk         \
+ "
+-RDEPENDS:gps-utils = "python3-pygps"
++RDEPENDS:gps-utils-python = "python3-pygps"
+ 
+ SUMMARY:python3-pygps = "Python bindings to gpsd"
+ FILES:python3-pygps = "${PYTHON_SITEPACKAGES_DIR}/* ${libdir}/gps/*.py ${libdir}/*.egg-info"
 -- 
-2.25.1
+2.30.2
 
 
