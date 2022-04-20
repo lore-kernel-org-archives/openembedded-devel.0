@@ -1,132 +1,93 @@
-Return-Path: <stefan@datenfreihafen.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AEE30C47088
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6675C38A2C
 	for <webhook@archiver.kernel.org>; Thu, 21 Apr 2022 16:46:06 +0000 (UTC)
-Received: from proxima.lasnet.de (proxima.lasnet.de [78.47.171.185])
- by mx.groups.io with SMTP id smtpd.web08.20126.1650539860630242205
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com
+ [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web08.4599.1650434494579962965
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Apr 2022 04:17:42 -0700
+ Tue, 19 Apr 2022 23:01:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@datenfreihafen.org header.s=2021 header.b=jdic+ytm;
- spf=pass (domain: datenfreihafen.org, ip: 78.47.171.185,
- mailfrom: stefan@datenfreihafen.org)
-Received: from [IPV6:2003:e9:d729:f54f:8837:7fe7:f862:a69e]
- (p200300e9d729f54f88377fe7f862a69e.dip0.t-ipconnect.de
- [IPv6:2003:e9:d729:f54f:8837:7fe7:f862:a69e])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits))
-	(No client certificate requested)
-	(Authenticated sender: stefan@datenfreihafen.org)
-	by proxima.lasnet.de (Postfix) with ESMTPSA id 09D6BC09B3;
-	Thu, 21 Apr 2022 13:17:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=datenfreihafen.org;
-	s=2021; t=1650539858;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=R8kdnPyXBGcLbcXCcTr1ZNTZ+3J/GIfdIxhzBdSrjlw=;
-	b=jdic+ytmtL3wMZjoKn7FjDBfpJVUlaltZ3uJ/EZN4lRcIrxScCGlYb36KcVXNKFpN/DQ0h
-	1cKOA+iXRgtLADjOmpkB0MGiz3EFuzqKq6F4FKV9ID7UyfTPlC0I7Hn7xIbXKvOPSbwD4P
-	lK1Zeu896PmxhZQYNHQhD9QsiaScew0JnOymn5PVTT8SeHJRjA4mnY8XJFvOSxd1i7tU75
-	7Q30n200p+Z9QpsUWbMoNlIjwWxnBrkmbgEsZJiaZ6WJx6w+a1+Y4C32I8KzWFiM2omuiR
-	tRYx/ipLMHOmI+Nzzm7S+qKwlK6awjKJIdfV6lVML5Y1DKYlpRB2tVqOieXHLw==
-Message-ID: <ffd74e27-c68d-c86c-00e8-bdebeab7f2dd@datenfreihafen.org>
-Date: Thu, 21 Apr 2022 13:17:37 +0200
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=S5cXrv/O;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id t12so872902pll.7
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 19 Apr 2022 23:01:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=pIVVFIXcTR6GC+vHrFk47C6oNkYRvwmHlRxyxqCXEeg=;
+        b=S5cXrv/OxsJg8YRFuxXaZ/7R4W7qyfXHZNWfUKx0NfUkh0cj9UQxhrnRN8vX0PwJsG
+         0rchVD+UG4jTn8p1SSjbkjoK+T0GP8Vh6eJ9I6+WqU6fGQCTLrU9ixV0aqnlqd2jOFv/
+         5AVOVVOTEBuW+SQIrLUDBC4DFV2LPoWCoI/2GY9STjuTjpsYcVTNS9bidVunjH3PSp4N
+         0jLZiwHfZLpYfh7OuHTJFnEb+afQ+WlvMl8BMxrb3QvKqZDDYdmOI9yLAopHSXN2i7is
+         umSOV3+KFn23YAnCq9ecDPdMxHflU/0P7uclO7RfKYnKNNffs+NZGVZkXAI4cUfbpPaK
+         j5fA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=pIVVFIXcTR6GC+vHrFk47C6oNkYRvwmHlRxyxqCXEeg=;
+        b=S9Q8/RDx0PoGCudQjsUyPinQ1LSMrUjAxnYghzgUaUQUz0+7omPQ+86TKAt4+JvxFK
+         PiJdgwJWWugljhZele+eqyOF3xQB2MyslG19YxwCtl96fOa8HaAnRNjg3s/ytUzdIx9I
+         jjTjB9x+KZ2AEZ39H/vvs2nIG10Ns0GK9TWZpiXUQ9ZuPnvkPxHvTpaGhrDCFJxg6uBK
+         cSd0t9vHSr9JqDLbtfs7q4ffsXEiWBumPaiThqvAmBSBqJqebb/FUXH/yy84XqoyveGl
+         dn+zeEtd/I3tEycZdIxRP99Ojr6XO2ZQ31zOCx9UWIBJoo/y4ZpUJ3iBqB5cu/oaoxJw
+         f+rQ==
+X-Gm-Message-State: AOAM5329omtFywYm4P+OQO0nhNZIHXS+c7J3kuziVqZB8zH0yzQSTxet
+	cXXOWoxf/fei+UEHUwpMLiwhxhrJtOWMeg==
+X-Google-Smtp-Source: 
+ ABdhPJzp+U6ARdyLRrYDV6XzRVMcDFR0ArbQ1vHPzC2OdwY1rdPgl3+fI3GSSo49GxjN193gXB5YyQ==
+X-Received: by 2002:a17:902:e94e:b0:158:91e6:501 with SMTP id
+ b14-20020a170902e94e00b0015891e60501mr19067562pll.29.1650434493669;
+        Tue, 19 Apr 2022 23:01:33 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::3ee6])
+        by smtp.gmail.com with ESMTPSA id
+ u8-20020a62ed08000000b0050a90fd59d5sm5789269pfh.50.2022.04.19.23.01.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 19 Apr 2022 23:01:33 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH] sysprof: Remove libunwind on rv32 with gcc
+Date: Tue, 19 Apr 2022 23:01:31 -0700
+Message-Id: <20220420060131.4170633-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.36.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Subject: Re: [oe] [meta-networking][PATCH] ot-br-posix: Fix build with gcc
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-Cc: Stefan Schmidt <stefan.schmidt@huawei.com>
-References: <20220419210846.3638856-1-raj.khem@gmail.com>
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-In-Reply-To: <20220419210846.3638856-1-raj.khem@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 21 Apr 2022 16:46:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96727
+ https://lists.openembedded.org/g/openembedded-devel/message/96711
 
-Hello Khem.
+LLVM libunwind works ok on rv32 but libunwind is not yet ported
 
-On 19.04.22 23:08, Khem Raj wrote:
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Cc: Stefan Schmidt <stefan.schmidt@huawei.com>
-> ---
->   ...sable-nonnull-compare-warning-on-gcc.patch | 40 +++++++++++++++++++
->   .../openthread/ot-br-posix_git.bb             |  1 +
->   2 files changed, 41 insertions(+)
->   create mode 100644 meta-networking/recipes-connectivity/openthread/ot-br-posix/0001-cmake-Disable-nonnull-compare-warning-on-gcc.patch
-> 
-> diff --git a/meta-networking/recipes-connectivity/openthread/ot-br-posix/0001-cmake-Disable-nonnull-compare-warning-on-gcc.patch b/meta-networking/recipes-connectivity/openthread/ot-br-posix/0001-cmake-Disable-nonnull-compare-warning-on-gcc.patch
-> new file mode 100644
-> index 0000000000..f0bb392a9f
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/openthread/ot-br-posix/0001-cmake-Disable-nonnull-compare-warning-on-gcc.patch
-> @@ -0,0 +1,40 @@
-> +From aa706d714294b83db696de2beca9a722a512796f Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Tue, 19 Apr 2022 14:04:40 -0700
-> +Subject: [PATCH] cmake: Disable nonnull-compare warning on gcc
-> +
-> +GCC finds a legit warning which clang does not on code like this
-> +
-> +class Message;
-> +void SendResponse(Message & aMessage)
-> +{
-> +    if ((&aMessage) != nullptr) { return; }
-> +}
-> +
-> +Perhaps it should be fixed upstream but for now disable treating this
-> +warning as error when using gcc
-> +
-> +Upstream-Status: Pending
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> + CMakeLists.txt | 4 ++++
-> + 1 file changed, 4 insertions(+)
-> +
-> +diff --git a/CMakeLists.txt b/CMakeLists.txt
-> +index 59a567e729..3134740ff6 100644
-> +--- a/CMakeLists.txt
-> ++++ b/CMakeLists.txt
-> +@@ -57,6 +57,10 @@ endif()
-> +
-> + set(CMAKE_CXX_EXTENSIONS OFF)
-> +
-> ++if (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-> ++	add_compile_options(-Wno-error=nonnull-compare)
-> ++endif()
-> ++
-> + if (OTBR_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-> +     message(STATUS "Coverage: ON")
-> +     target_compile_options(otbr-config INTERFACE -g -O0 --coverage)
-> +--
-> +2.36.0
-> +
-> diff --git a/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb b/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
-> index c1af388627..a16b77849e 100644
-> --- a/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
-> +++ b/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
-> @@ -16,6 +16,7 @@ PV = "0.3.0+git${SRCPV}"
->   
->   SRC_URI = "gitsm://github.com/openthread/ot-br-posix.git;protocol=https;branch=main \
->              file://0001-otbr-agent.service.in-remove-pre-exec-hook-for-mdns-.patch \
-> +           file://0001-cmake-Disable-nonnull-compare-warning-on-gcc.patch \
->              "
->   
->   S = "${WORKDIR}/git"
-> 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-gnome/recipes-gnome/sysprof/sysprof_3.44.0.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-LGTM
+diff --git a/meta-gnome/recipes-gnome/sysprof/sysprof_3.44.0.bb b/meta-gnome/recipes-gnome/sysprof/sysprof_3.44.0.bb
+index 3606ca9707..383dd9328e 100644
+--- a/meta-gnome/recipes-gnome/sysprof/sysprof_3.44.0.bb
++++ b/meta-gnome/recipes-gnome/sysprof/sysprof_3.44.0.bb
+@@ -15,6 +15,9 @@ DEPENDS += " \
+     json-glib \
+     libunwind \
+ "
++# nongnu libunwind needs porting to RV32
++DEPENDS:remove:riscv32:toolchain-gcc = "libunwind"
++
+ SRC_URI += "file://0001-meson-Check-for-libunwind-instead-of-libunwind-gener.patch"
+ SRC_URI[archive.sha256sum] = "ab5d9f5b71973b3088d58a1bfdf1dc23c39a02f5fce4e5e9c73e034b178b005b"
+ 
+-- 
+2.36.0
 
-regards
-Stefan Schmidt
 
