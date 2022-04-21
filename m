@@ -1,93 +1,134 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <xuhuan.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C6675C38A2C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EEB14C38A2D
 	for <webhook@archiver.kernel.org>; Thu, 21 Apr 2022 16:46:06 +0000 (UTC)
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com
- [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web08.4599.1650434494579962965
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web11.19070.1650531615626658179
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Apr 2022 23:01:34 -0700
+ Thu, 21 Apr 2022 02:00:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=S5cXrv/O;
- spf=pass (domain: gmail.com, ip: 209.85.214.177,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id t12so872902pll.7
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Apr 2022 23:01:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=pIVVFIXcTR6GC+vHrFk47C6oNkYRvwmHlRxyxqCXEeg=;
-        b=S5cXrv/OxsJg8YRFuxXaZ/7R4W7qyfXHZNWfUKx0NfUkh0cj9UQxhrnRN8vX0PwJsG
-         0rchVD+UG4jTn8p1SSjbkjoK+T0GP8Vh6eJ9I6+WqU6fGQCTLrU9ixV0aqnlqd2jOFv/
-         5AVOVVOTEBuW+SQIrLUDBC4DFV2LPoWCoI/2GY9STjuTjpsYcVTNS9bidVunjH3PSp4N
-         0jLZiwHfZLpYfh7OuHTJFnEb+afQ+WlvMl8BMxrb3QvKqZDDYdmOI9yLAopHSXN2i7is
-         umSOV3+KFn23YAnCq9ecDPdMxHflU/0P7uclO7RfKYnKNNffs+NZGVZkXAI4cUfbpPaK
-         j5fA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=pIVVFIXcTR6GC+vHrFk47C6oNkYRvwmHlRxyxqCXEeg=;
-        b=S9Q8/RDx0PoGCudQjsUyPinQ1LSMrUjAxnYghzgUaUQUz0+7omPQ+86TKAt4+JvxFK
-         PiJdgwJWWugljhZele+eqyOF3xQB2MyslG19YxwCtl96fOa8HaAnRNjg3s/ytUzdIx9I
-         jjTjB9x+KZ2AEZ39H/vvs2nIG10Ns0GK9TWZpiXUQ9ZuPnvkPxHvTpaGhrDCFJxg6uBK
-         cSd0t9vHSr9JqDLbtfs7q4ffsXEiWBumPaiThqvAmBSBqJqebb/FUXH/yy84XqoyveGl
-         dn+zeEtd/I3tEycZdIxRP99Ojr6XO2ZQ31zOCx9UWIBJoo/y4ZpUJ3iBqB5cu/oaoxJw
-         f+rQ==
-X-Gm-Message-State: AOAM5329omtFywYm4P+OQO0nhNZIHXS+c7J3kuziVqZB8zH0yzQSTxet
-	cXXOWoxf/fei+UEHUwpMLiwhxhrJtOWMeg==
-X-Google-Smtp-Source: 
- ABdhPJzp+U6ARdyLRrYDV6XzRVMcDFR0ArbQ1vHPzC2OdwY1rdPgl3+fI3GSSo49GxjN193gXB5YyQ==
-X-Received: by 2002:a17:902:e94e:b0:158:91e6:501 with SMTP id
- b14-20020a170902e94e00b0015891e60501mr19067562pll.29.1650434493669;
-        Tue, 19 Apr 2022 23:01:33 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::3ee6])
-        by smtp.gmail.com with ESMTPSA id
- u8-20020a62ed08000000b0050a90fd59d5sm5789269pfh.50.2022.04.19.23.01.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 19 Apr 2022 23:01:33 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH] sysprof: Remove libunwind on rv32 with gcc
-Date: Tue, 19 Apr 2022 23:01:31 -0700
-Message-Id: <20220420060131.4170633-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.36.0
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=lBwgW8wS;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2,
+ mailfrom: xuhuan.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1650531613; i=@fujitsu.com;
+	bh=TBC1tVufJTWRDpPwHRiOXOwk80vuBXA+UwWzHXA+UlI=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=lBwgW8wSXIVIxoWMfqHUY/YtYs3UkNS+GjlACKmfNtwJbC9ork4jvcNOBZ9dqE3dI
+	 e6TvzmzxSfONWr+ThRF3Ze6g2Ik4ks74HmgWNRWAGK9OMwBvjJBsTmWVCAf2YcVgxQ
+	 D5LoHJy2M1NSdvh5Yiu9YI0/tlZxqSDvcbMthLidF/J8QoJ+wchhJkUES2vRMP+ug7
+	 qWjkfEf3SkInV6ZaD06EJ5x8BQJPsau0lCWoMceB4tuqfDQxmXGGLYiKyu4JKUaonr
+	 tjO2ANLWI5ZMXEdrAMFAUQ0A/ZUR7a2fro69/nxohG0oyilmI00wT9STFFbbE9iRDm
+	 0Vo7MQpByJ4Vw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrOIsWRWlGSWpSXmKPExsViZ8MxSVdWNjH
+  JYFGnjMXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnFjwXK2gi88FT9Xr2JvYHzI3cXIxSEk8IRR
+  4sOmFSwQzgUmiavPf7NDOCcZJaZe+ACU4eRgE1CXeHzzNSOILSKgL7F09h5mEJtZQFWi++Iad
+  hBbWCBQ4uTJL2A2C1B87px7YDavgLvEs3XfweZICChITHn4HqiXg4NTwENi3UsfkLAQUMnpP1
+  1sEOWCEidnPmGBGC8hcfDFC2aIViWJEys+MkHYFRKvD1+CiqtJXD23iXkCo+AsJO2zkLQvYGR
+  axWidVJSZnlGSm5iZo2toYKBraGiqa2yka2hhqZdYpZuol1qqW55aXKJrpJdYXqyXWlysV1yZ
+  m5yTopeXWrKJERjGKcUKe3cwXl75U+8QoyQHk5Iob75EYpIQX1J+SmVGYnFGfFFpTmrxIUYZD
+  g4lCd65UkA5waLU9NSKtMwcYEzBpCU4eJREeOulgdK8xQWJucWZ6RCpU4y6HJcOXdnLLMSSl5
+  +XKiXOqy4OVCQAUpRRmgc3AhbflxhlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ8y6SAZrCk5l
+  XArfpFdARTEBHVE+JBTmiJBEhJdXAlK/ObaVndvfPwX3PU3qW6UoKi6XJJp03Vq1yMVu29k/x
+  ty9bIicIflzO8u5r4YTSpZNk2E/nxIrzf/VIytrfKpxq+P73P8H+Oamc5wo0lq+Rm57++VPxr
+  gdM7zd6nnw8sdlUauq/rNrld4NthK9Znvgiony2WHWXusK7Dmev2x7hX7r3b8vRe8I2P2rRb9
+  coz+8V/DMED1R/m1Q+Y/rM60vKD+4O+ykr0ff30uH8x1Jr02ZW3tPf8fi0QcykX5vfme62+B8
+  V8OU8X0qfx6SQWfPid8tP/3DXvkon4Mx0q0W/CgKezXFctHve8WY77x5/W+s6g/w/M50NJvNe
+  XvxebjMTd8SlSt6uKY8nK8UqNyuxFGckGmoxFxUnAgA8ceL5agMAAA==
+X-Env-Sender: xuhuan.fnst@fujitsu.com
+X-Msg-Ref: server-2.tower-565.messagelabs.com!1650531613!5072!1
+X-Originating-IP: [62.60.8.146]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.85.8; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 29984 invoked from network); 21 Apr 2022 09:00:13 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-2.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 21 Apr 2022 09:00:13 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 00A1B1009B2
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 21 Apr 2022 10:00:13 +0100 (BST)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id E8E011009A8
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 21 Apr 2022 10:00:12 +0100 (BST)
+Received: from localhost.localdomain.localdomain (10.167.225.131) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Thu, 21 Apr 2022 09:59:55 +0100
+From: XU Huan <xuhuan.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Xu Huan <xuhuan.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 5/5] python3-imageio: upgrade 2.16.1 ->
+ 2.17.0
+Date: Thu, 21 Apr 2022 16:59:24 +0800
+Message-ID: <1650531564-26234-5-git-send-email-xuhuan.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1650531564-26234-1-git-send-email-xuhuan.fnst@fujitsu.com>
+References: <1650531564-26234-1-git-send-email-xuhuan.fnst@fujitsu.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.131]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 21 Apr 2022 16:46:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96711
+ https://lists.openembedded.org/g/openembedded-devel/message/96723
 
-LLVM libunwind works ok on rv32 but libunwind is not yet ported
+From: Xu Huan <xuhuan.fnst@fujitsu.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+License-Updated:
+years update to 2022
+
+changelog:
+================================================================
+Feature:
+-New Plugin for pyAV
+-Add plugin default sentinel
+
+Other:
+-Better Type Annotations + mypy support
+-Add fast-paths for pyav formats
+-Update readme
+-Fix docs on standard images
+
+Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
 ---
- meta-gnome/recipes-gnome/sysprof/sysprof_3.44.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../{python3-imageio_2.16.1.bb => python3-imageio_2.17.0.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-imageio_2.16.1.bb => python3-imageio_2.17.0.bb} (65%)
 
-diff --git a/meta-gnome/recipes-gnome/sysprof/sysprof_3.44.0.bb b/meta-gnome/recipes-gnome/sysprof/sysprof_3.44.0.bb
-index 3606ca9707..383dd9328e 100644
---- a/meta-gnome/recipes-gnome/sysprof/sysprof_3.44.0.bb
-+++ b/meta-gnome/recipes-gnome/sysprof/sysprof_3.44.0.bb
-@@ -15,6 +15,9 @@ DEPENDS += " \
-     json-glib \
-     libunwind \
- "
-+# nongnu libunwind needs porting to RV32
-+DEPENDS:remove:riscv32:toolchain-gcc = "libunwind"
-+
- SRC_URI += "file://0001-meson-Check-for-libunwind-instead-of-libunwind-gener.patch"
- SRC_URI[archive.sha256sum] = "ab5d9f5b71973b3088d58a1bfdf1dc23c39a02f5fce4e5e9c73e034b178b005b"
+diff --git a/meta-python/recipes-devtools/python/python3-imageio_2.16.1.bb b/meta-python/recipes-devtools/python/python3-imageio_2.17.0.bb
+similarity index 65%
+rename from meta-python/recipes-devtools/python/python3-imageio_2.16.1.bb
+rename to meta-python/recipes-devtools/python/python3-imageio_2.17.0.bb
+index d1d318d5ae..53f61e8827 100644
+--- a/meta-python/recipes-devtools/python/python3-imageio_2.16.1.bb
++++ b/meta-python/recipes-devtools/python/python3-imageio_2.17.0.bb
+@@ -3,9 +3,9 @@ write a wide range of image data, including animated images, video, \
+ volumetric data, and scientific formats."
+ SECTION = "devel/python"
+ LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=7b9bbbb543b6af3e6b53f9b7fb68f71d"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=24cb9a367a9e641b459a01c4d15256ba"
+ 
+-SRC_URI[sha256sum] = "7f123cb23a77ac5abe8ed4e7ad6a60831a82de2c5d123463dcf1d4278c4779d2"
++SRC_URI[sha256sum] = "b21f009e52eb22b02b839f3bf2ae5374aaf0886317313c1358c6014e5383b539"
+ 
+ inherit pypi setuptools3
  
 -- 
-2.36.0
+2.25.1
 
 
