@@ -2,72 +2,71 @@ Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B4AE1C433FE
-	for <webhook@archiver.kernel.org>; Thu, 28 Apr 2022 07:15:04 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.3])
- by mx.groups.io with SMTP id smtpd.web08.7093.1651130101379085909
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B651BC433EF
+	for <webhook@archiver.kernel.org>; Thu, 28 Apr 2022 07:15:34 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.1])
+ by mx.groups.io with SMTP id smtpd.web09.6995.1651130128793627877
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Apr 2022 00:15:01 -0700
+ Thu, 28 Apr 2022 00:15:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=AiCDrcdE;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=slvRsILP;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.1,
  mailfrom: zhengrq.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1651130099; i=@fujitsu.com;
-	bh=cmGdoT4DKnmqgfRjchCrVtUYlUPY9Za5keskYzUYoDU=;
+	s=170520fj; t=1651130127; i=@fujitsu.com;
+	bh=QgJ4AQmKHpN5+5Fgev9ogo6H5XK03yjDTeNcWwyCX4Y=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=AiCDrcdE0AtY64Fizx1drNO3LqKkD8Ar9Ba68lLDXjsT8/CMkke4dHGhSerlSI7R3
-	 lKRX76MfBSyWC/sBzv4tW+3bI4PvNsnTJQFY2SU6iRPQgICT7k9PvFwFSB+ba4gwU2
-	 gCMge4N2LfT04MzLWUM8Q9kYTvshH8LLnesdAgD/UnJAZu2XIkQeDC1QjbdSsQqlrj
-	 OLhrwZ/ZDsiwtFjfPo6Ik/t836qIHCd3sgXHn9qc13IeOj80vz/NvCKp89LrVRWSJh
-	 GoiME/T94b8MvvDR0maq782i7PEp8T5DXwVvsm8r9ogSs+698Qfs7A5+vs0YWPawLn
-	 t8ReuXj3ze0GQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrAIsWRWlGSWpSXmKPExsViZ8ORqPvZLiv
-  JoHkjn8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmrFnwW+WgjccFdN3b2ZtYJzB0cXIySEk8IRR
-  ov2SA4R9gUni6j2xLkYuIPsAo0Tjq+msIAk2AV2JFz8Ws4DYIgL6Ektn72HuYuTgEBYIlLjVp
-  wcSZhFQlXjb9hisnFfAQ+LNtLVMILaEgILElIfvmSHighInZz4BG8MsICFx8MULsDESAooSs6
-  fLQ5RXSLw+fIkZwlaTuHpuE/MERr5ZSLpnIelewMi0itE6qSgzPaMkNzEzR9fQwEDX0NBU19h
-  C19DEQC+xSjdRL7VUtzy1uETXSC+xvFgvtbhYr7gyNzknRS8vtWQTIzDwUorVenYwnlj1U+8Q
-  oyQHk5Ior5VpVpIQX1J+SmVGYnFGfFFpTmrxIUYZDg4lCV4Fa6CcYFFqempFWmYOMApg0hIcP
-  EoivDLGQGne4oLE3OLMdIjUKUZdjrsL9+5lFmLJy89LlRLnTbcFKhIAKcoozYMbAYvIS4yyUs
-  K8jAwMDEI8BalFuZklqPKvGMU5GJWEeUNBpvBk5pXAbXoFdAQT0BErizJBjihJREhJNTBlfrG
-  4kdd1uYf7rvzjjv2bl2ox/vrdm2VcwDg56oDFVp1jm7i/zZD4K2FhePXJpzeLGD/8MF+3xb3v
-  jLCGnfKGk9tswqOuN3dP//j1cTGPkmi9957TX36lBy4NNnnz0/zGpr8n47g/+XlN1XqXcTDf5
-  8Ha3ev1l9ys3N32y3N/taEm18yXBqd2nGtQLdY5c+/argcHfJ5tm7fVnG9t4pwrHfGRWj9uBp
-  2dpHHgaOYym0tvp+6KC1W7/X+ft3moT5TGuRJ9wYkx9+wW5pvM8NlQt8eUXVxYfY+PzMr9oSr
-  /f7HV1D64leCaxTfnxOogddlgm5asoGfB/2r5GeoaX68o21zmudc2c0ZUd2Ny2a8NSizFGYmG
-  WsxFxYkA6YDRDEMDAAA=
+	b=slvRsILPjbV+iaFTH59iTSvhBJzIFW541v8p4kAMocMBImgzZyDqGAslaMY+Bz5rd
+	 btghIzrat7zy1wzyths/efr/3fX5BFXQLISEIxK80N446Q35PnB8KR4g4bRvs7emXn
+	 TukH8nOZBrqENyL8Stl6h/ylmPWCEcHJ9qQIbemWlaFGJ0RS7RHzZtK+vY4p/vLYev
+	 lyZo9KCN+mr+fsTAUKcnMcqjyNop3HumZVruXPuDjxisd6F62bU/Qvl02evo26M+KH
+	 R+Rry66VtsG89KkPef2yQKs2oHiLdvqxzfv+3gFvTHf+PK5ot1RFmg21hRoxrF0Zu2
+	 hmzlo6OhLmKNQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrIIsWRWlGSWpSXmKPExsViZ8MxSZfPPiv
+  JYMc0I4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePpvY8sBW+5K97MmsLUwHibq4uRi0NI4Amj
+  xIy5q9ggnAtMEgvaHzN1MXICOQcYJd7etwGx2QR0JV78WMwCYosI6Essnb2HGcQWFvCT+Lp8H
+  SOIzSKgKrFoxxqwXl4BD4nn97aC1UsIKEhMefieGSIuKHFy5hOwOLOAhMTBFy+A4hxANYoSs6
+  fLQ5RXSLw+fIkZwlaTuHpuE/MERr5ZSLpnIelewMi0itEqqSgzPaMkNzEzR9fQwEDX0NBU11D
+  XyNBcL7FKN1EvtVS3PLW4RNdQL7G8WC+1uFivuDI3OSdFLy+1ZBMjMPRSihlv7mBs7fupd4hR
+  koNJSZTXyjQrSYgvKT+lMiOxOCO+qDQntfgQowwHh5IEr5MdUE6wKDU9tSItMwcYBzBpCQ4eJ
+  RFeGWOgNG9xQWJucWY6ROoUoy7H3YV79zILseTl56VKifPeswUqEgApyijNgxsBi8lLjLJSwr
+  yMDAwMQjwFqUW5mSWo8q8YxTkYlYR5W0Au4cnMK4Hb9AroCCagI1YWZYIcUZKIkJJqYFKQFJ0
+  y3S8tIYP/hMddS8kcsbSPge3NH/vcOs/VTUownK1+i319kMjp4AkrTHv5djwpiFz59XrQli/n
+  D+5Ov5JjWvxjxaX51zZ9POffKtf8m++Cfr3urAeWj3f+KFySvcjQeZ6uoHRT+pHfPJlFj1Zf1
+  xXY1h//7JrOtRUBbGUZ93MfXZJJz9SScO2yfXTDKGC5WG2a+utYc63UrSXH2RcfP8kqVTl/Da
+  uWoueHd84SSr8Uf7JnF1VOuHZXuov98raIyASzw0sDje+eqxfN+lNwffcahlJP33PTdwRHJdU
+  8/rrkbLTjBQbz+4dO1//k/ZHAVeW+Imqv/noPRfXT02wf5x6QCDQxbNpo3252VomlOCPRUIu5
+  qDgRAJ9gm6ZEAwAA
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-11.tower-571.messagelabs.com!1651130099!10642!1
-X-Originating-IP: [62.60.8.97]
+X-Msg-Ref: server-2.tower-587.messagelabs.com!1651130126!7887!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.86.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 12484 invoked from network); 28 Apr 2022 07:14:59 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-11.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 28 Apr 2022 07:14:59 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id A3785100183
+Received: (qmail 22886 invoked from network); 28 Apr 2022 07:15:26 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-2.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 28 Apr 2022 07:15:26 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 5A03110044A
 	for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Apr 2022 08:14:58 +0100 (BST)
+ Thu, 28 Apr 2022 08:15:26 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 48F39100190
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 4CEDC1000FD
 	for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Apr 2022 08:14:58 +0100 (BST)
+ Thu, 28 Apr 2022 08:15:26 +0100 (BST)
 Received: from CentOS7.g08.fujitsu.local (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Thu, 28 Apr 2022 08:14:41 +0100
+ (TLS) id 15.0.1497.32; Thu, 28 Apr 2022 08:15:20 +0100
 From: zhengrq.fnst <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-regex: upgrade 2022.3.15 ->
- 2022.4.24
-Date: Thu, 21 Apr 2022 17:59:41 +0800
-Message-ID: <1650535181-15387-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-protobuf: upgrade 3.20.0 -> 3.20.1
+Date: Thu, 21 Apr 2022 18:00:26 +0800
+Message-ID: <1650535226-15491-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -78,32 +77,48 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 28 Apr 2022 07:15:04 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Apr 2022 07:15:34 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96834
+ https://lists.openembedded.org/g/openembedded-devel/message/96836
+
+Changelog:
+=========
+PHP
+-------
+    Fix building packaged PHP extension (#9727)
+    Fixed composer.json to only advertise compatibility with PHP 7.0+. (#9819)
+
+Ruby
+----------
+    Disable the aarch64 build on macOS until it can be fixed. (#9816)
+
+Other
+-------
+    Fix versioning issues in 3.20.0
+
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../{python3-regex_2022.3.15.bb => python3-regex_2022.4.24.bb}  | 2 +-
+ .../{python3-protobuf_3.20.0.bb => python3-protobuf_3.20.1.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-regex_2022.3.15.bb => python3-regex_2022.4.24.bb} (79%)
+ rename meta-python/recipes-devtools/python/{python3-protobuf_3.20.0.bb => python3-protobuf_3.20.1.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-regex_2022.3.15.bb b/meta-python/recipes-devtools/python/python3-regex_2022.4.24.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-regex_2022.3.15.bb
-rename to meta-python/recipes-devtools/python/python3-regex_2022.4.24.bb
-index 9633385f60..28e16001a1 100644
---- a/meta-python/recipes-devtools/python/python3-regex_2022.3.15.bb
-+++ b/meta-python/recipes-devtools/python/python3-regex_2022.4.24.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7b5751ddd6b643203c31ff873051d069"
+diff --git a/meta-python/recipes-devtools/python/python3-protobuf_3.20.0.bb b/meta-python/recipes-devtools/python/python3-protobuf_3.20.1.bb
+similarity index 92%
+rename from meta-python/recipes-devtools/python/python3-protobuf_3.20.0.bb
+rename to meta-python/recipes-devtools/python/python3-protobuf_3.20.1.bb
+index 5c4de4ac2b..976d2aa9b4 100644
+--- a/meta-python/recipes-devtools/python/python3-protobuf_3.20.0.bb
++++ b/meta-python/recipes-devtools/python/python3-protobuf_3.20.1.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=53dbfa56f61b90215a
  
  inherit pypi setuptools3
  
--SRC_URI[sha256sum] = "0a7b75cc7bb4cc0334380053e4671c560e31272c9d2d5a6c4b8e9ae2c9bd0f82"
-+SRC_URI[sha256sum] = "92183e9180c392371079262879c6532ccf55f808e6900df5d9f03c9ca8807255"
+-SRC_URI[sha256sum] = "71b2c3d1cd26ed1ec7c8196834143258b2ad7f444efff26fdc366c6f5e752702"
++SRC_URI[sha256sum] = "adc31566d027f45efe3f44eeb5b1f329da43891634d61c75a5944e9be6dd42c9"
  
- RDEPENDS:${PN} += " \
- 	python3-stringold \
+ # http://errors.yoctoproject.org/Errors/Details/184715/
+ # Can't find required file: ../src/google/protobuf/descriptor.proto
 -- 
 2.25.1
 
