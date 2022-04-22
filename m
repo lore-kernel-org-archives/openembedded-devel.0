@@ -1,93 +1,138 @@
-Return-Path: <dbaryshkov@gmail.com>
+Return-Path: <rybczynska@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B799CC3A59F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7C91C3A5A7
 	for <webhook@archiver.kernel.org>; Fri, 22 Apr 2022 16:52:00 +0000 (UTC)
-Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com
- [209.85.167.49])
- by mx.groups.io with SMTP id smtpd.web10.6187.1650618272117558099
+Received: from mail-io1-f49.google.com (mail-io1-f49.google.com
+ [209.85.166.49])
+ by mx.groups.io with SMTP id smtpd.web12.6428.1650618441626057522
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Apr 2022 02:04:32 -0700
+ Fri, 22 Apr 2022 02:07:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=HmsNMnQY;
- spf=pass (domain: linaro.org, ip: 209.85.167.49,
- mailfrom: dmitry.baryshkov@linaro.org)
-Received: by mail-lf1-f49.google.com with SMTP id w19so13145486lfu.11
-        for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Apr 2022 02:04:31 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=CYOra791;
+ spf=pass (domain: gmail.com, ip: 209.85.166.49,
+ mailfrom: rybczynska@gmail.com)
+Received: by mail-io1-f49.google.com with SMTP id h83so7952131iof.8;
+        Fri, 22 Apr 2022 02:07:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=psgVzb7CE2Rjuh4dmGK1/3GmhC+DO9yzrDV4/kc8kb0=;
-        b=HmsNMnQYZDZmJ5XjMlXOl436CElamPJuqzi37+QKGeNwg4OC7QtBbI3PHutmWTj3N9
-         0UYt4JBaN8FrWnhC8A9+DjghNZsaUUtoOmO2D+R95tI1eprisXamD78C/6cqC8c4lMhq
-         YUyw699g//FSG4eJ/87IK8Azo556unc25/FgtMiDQGsMAArDEtqaeo2RVFEvych6XhWX
-         PXKZdiLSKb7m8BBDRMoxhgsElq8h1QkTUQbq/lizkLLFdVtdDI8/215W8lmVDx3GwfLk
-         gVsNj8inKY/ICsPU24n7s8Wha90RStqplzlCbEBLjCH/xDwEKsUmimztu4nA1MVKjoou
-         4XhQ==
+        d=gmail.com; s=20210112;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=MH94ousu1M8QjpxS3JaF8Qnk+PEGqZFxN/qt2Phy72w=;
+        b=CYOra791mqZIBHCsSEfbR0aAGaHIchorDeTrxGfh0gqyE4M7n+PfRLzeCBgfJaGFUo
+         ehEIodTcJCCdJ69j/JyYdg2agpYJ80j7zGH+Y4NKeIpxvRCoSM5CNwUc3Hq7bVzgHcT0
+         dPZXPbftEstlI1W2d7Kr5veQGX70Zl3Qv6e5RrixggFjNW2HYhkZngjRaXSlRYO2vYnl
+         gAzn7I6yq5H3gBqmCP+Q+jTTHLnNJMkcfn3bUpihLuH2JMZZKvfOr5/YcVaw/3Q1C2nH
+         E4RU4kZ7+lnxc3IRZwmYZHYtB6UVKW9E4Z/p9KRDmz7lEnSQ0tAX5IFDc/mDg0/bbNar
+         UHGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=psgVzb7CE2Rjuh4dmGK1/3GmhC+DO9yzrDV4/kc8kb0=;
-        b=ec8ems57YI8Vbl8/XmWcXockN+0602IIM+GSCDpUzoV8FHQ8OEH2UtzSUKOYYex5y9
-         gi5F2A7KXSdmKesG8J6rCBj8Z0t+PPCIZZZk+SG2zvDVqZ1xbpS3vbgWLQ/g8z6Sfe8r
-         F6mf+/SAfcO/vzsiBaNUT8qGFUFPxIhQ9lFdMJ/bVZC7B+kawuneT3rUSM9ZNJQhPdOX
-         FBdQBnGG9uJgWtfDKMS465DwDIktd1+Wo1pDzPKj9yNevZ1F45lBSjqLcDNd2A9gStDh
-         J+XLp2TpnTkbelO+7dwdxv8SLFdryJy3ptG24f50/JIindYrmDgghtq/z9y6DO2o0bTl
-         Spcg==
-X-Gm-Message-State: AOAM532fBxrd7J5bKoc7kMKbC1kiCicKzbzYM6foxBGsJeJepwad5bg8
-	8OAX4D86jth1CULtZUFNVSVi4acffrYyVg==
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=MH94ousu1M8QjpxS3JaF8Qnk+PEGqZFxN/qt2Phy72w=;
+        b=mHgsAJnWox5dCvbgwXZMrhYJb9YnQRG2lupvAzNE8NvV/zWERirJf7nEpwUcSmYm2H
+         eEjERjUx2k10wdB6EHwAlrx15/iGIYznlDern2i9Umu+xldRRuAaGUUeuqLSIWupcZ71
+         yM3rBmLDKRL9AMC1IUI44uvewmbq0Axw6cC64kCWalNiInqx6LycjLKMHyaFx89Dzsa8
+         pQWGnn3QiFJPLHD+lJAQfmrg0pfBQQfKqrvl5/2UGbZu3ECz5iH9HYwrcdpy9LIWVHgN
+         9YIhgjHbz2jpuLCAb0bnbltpIwDgxRrS4BgPkFpG05YCV6xwVuLsjjur5NIEUIzpur91
+         //zA==
+X-Gm-Message-State: AOAM532l7Teq61O/zBkhbLIBFXu6P9Jf2bX3aP/h0DJhTtZF8dLg4r6o
+	jErAgibtUQ6z7Z3SXg7xUiG5yIpCV0lh/RY20IaPgr+wvvc=
 X-Google-Smtp-Source: 
- ABdhPJz4MxQR5c7WWSGQCvfNHDvqDHN1tFW56tnFRaWUFixIt0qK3voVdNF7CuStIcwGoG23Oz4IMw==
-X-Received: by 2002:a05:6512:2241:b0:471:b984:12f4 with SMTP id
- i1-20020a056512224100b00471b98412f4mr2375420lfu.577.1650618269969;
-        Fri, 22 Apr 2022 02:04:29 -0700 (PDT)
-Received: from umbar.lan ([37.153.55.125])
-        by smtp.gmail.com with ESMTPSA id
- o24-20020a2e9b58000000b0024db34e3df6sm150802ljj.97.2022.04.22.02.04.29
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 22 Apr 2022 02:04:29 -0700 (PDT)
-From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] gpsd: add gps-utils-python to PACKAGES
-Date: Fri, 22 Apr 2022 12:04:29 +0300
-Message-Id: <20220422090429.454510-1-dmitry.baryshkov@linaro.org>
-X-Mailer: git-send-email 2.30.2
+ ABdhPJzt/Eldr3KK70EakY6nivgtIC71NZQDfBbciXiEbjS8L3ftGA+5uZ8zql4ElWMYuyZ7hHcOFvZ14kWlLzvPGJU=
+X-Received: by 2002:a05:6638:218e:b0:32a:b468:5f36 with SMTP id
+ s14-20020a056638218e00b0032ab4685f36mr756922jaj.169.1650618440305; Fri, 22
+ Apr 2022 02:07:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Marta Rybczynska <rybczynska@gmail.com>
+Date: Fri, 22 Apr 2022 11:07:09 +0200
+Message-ID: 
+ <CAApg2=Q9DOoYVHNSCR_=pEN-x7EQuRw2yhwqWhEG2zaMTONt8w@mail.gmail.com>
+Subject: CVE-check failing on world with meta-openembedded: diff.gz file
+To: OE-core <openembedded-core@lists.openembedded.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000cb4d5605dd3a8df2"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 22 Apr 2022 16:52:00 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96732
+ https://lists.openembedded.org/g/openembedded-devel/message/96733
 
-Manual application of the patch adding gps-utils-python somehow ended up
-with the new package name being missing from PACKAGES. Add it back.
+--000000000000cb4d5605dd3a8df2
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
----
- meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Dear all,
+We're running cve-check on a world build containing oe-core, meta-oe and
+more. We have an issue with the lockdev recipe
+(meta-openembedded/meta-oe/recipes-support/lockdev/lockdev_1.0.3.bb), which
+causes a fail like below:
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb
-index 8d270ec58ff9..98f7511b1d30 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb
-@@ -79,7 +79,7 @@ do_install:append() {
-     fi
- }
- 
--PACKAGES =+ "libgps python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
-+PACKAGES =+ "libgps python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils gps-utils-python"
- 
- RPROVIDES:${PN}-dbg += "python-pygps-dbg"
- 
--- 
-2.30.2
+$ bitbake world --runonly=do_cve_check
+ERROR: lockdev-1_1.0.3-r0 do_cve_check: File Not found:
+<path>lockdev/1_1.0.3-r0/lockdev_1.0.3-1.6.diff
+ERROR: lockdev-1_1.0.3-r0 do_cve_check: Failure in searching patches
+ERROR: Logfile of failure stored in:
+<path>/lockdev/1_1.0.3-r0/temp/log.do_cve_check.8709
+ERROR: Task
+(<path>/meta-openembedded/meta-oe/recipes-support/lockdev/lockdev_1.0.3.bb:do_cve_check)
+failed with exit code '1'
 
+The issue is caused by the fact that lockdev_1.0.3-1.6.diff is missing.
+When we look into the recipe, it is downloading lockdev_1.0.3-1.6.diff.gz
+file Please note the additional extension.
+
+Stripping the extension comes from oe-core/meta/oe/patch.py, from the
+patch_path function, which is figuring out if a file is a patch, and
+returning the local path if it is so. However, at the moment when we
+do_cve_check, the .gz file is not uncompressed.
+
+I'm wondering how to solve it.
+1. Add a dependency to make sure eventual patch files are decompressed
+first?
+2. Do not consider this as a patch file in the scope of cve-check ? (this
+is more a part of the source then an actual patch that might be fixing a
+CVE)
+
+This is the only case like that we have in the build. Please note that
+removing ".diff" from the extension list in patch_path() is solving the
+issue.
+
+Any comments or suggestions?
+
+Kind regards,
+Marta
+
+--000000000000cb4d5605dd3a8df2
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Dear all,</div><div>We&#39;re running cve-check on a =
+world build containing oe-core, meta-oe and more. We have an issue with the=
+ lockdev recipe (meta-openembedded/meta-oe/recipes-support/lockdev/<a href=
+=3D"http://lockdev_1.0.3.bb">lockdev_1.0.3.bb</a>), which causes a fail lik=
+e below:</div><div><br></div><div>$ bitbake world --runonly=3Ddo_cve_check<=
+/div><div>ERROR: lockdev-1_1.0.3-r0 do_cve_check: File Not found: &lt;path&=
+gt;lockdev/1_1.0.3-r0/lockdev_1.0.3-1.6.diff<br>ERROR: lockdev-1_1.0.3-r0 d=
+o_cve_check: Failure in searching patches<br>ERROR: Logfile of failure stor=
+ed in: &lt;path&gt;/lockdev/1_1.0.3-r0/temp/log.do_cve_check.8709<br>ERROR:=
+ Task (&lt;path&gt;/meta-openembedded/meta-oe/recipes-support/lockdev/lockd=
+ev_1.0.3.bb:do_cve_check) failed with exit code &#39;1&#39;</div><div><br><=
+/div><div>The issue is caused by the fact that lockdev_1.0.3-1.6.diff is mi=
+ssing. When we look into the recipe, it is downloading lockdev_1.0.3-1.6.di=
+ff.gz file Please note the additional extension.<br></div><div><br></div><d=
+iv>Stripping the extension comes from oe-core/meta/oe/patch.py, from the pa=
+tch_path function, which is figuring out if a file is a patch, and returnin=
+g the local path if it is so. However, at the moment when we do_cve_check, =
+the .gz file is not uncompressed.</div><div><br></div><div></div><div>I&#39=
+;m wondering how to solve it.<br></div><div>1. Add a dependency to make sur=
+e eventual patch files are decompressed first?</div><div>2. Do not consider=
+ this as a patch file in the scope of cve-check ? (this is more a part of t=
+he source then an actual patch that might be fixing a CVE)<br></div><div><b=
+r></div><div>This is the only case like that we have in the build. Please n=
+ote that removing &quot;.diff&quot; from the extension list in patch_path()=
+ is solving the issue.</div><div><br></div><div>Any comments or suggestions=
+?</div><div><br></div><div>Kind regards,</div><div>Marta<br></div><div><br>=
+</div></div>
+
+--000000000000cb4d5605dd3a8df2--
 
