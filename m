@@ -1,37 +1,46 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <mingli.yu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C70BDC4707F
-	for <webhook@archiver.kernel.org>; Fri, 22 Apr 2022 16:51:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 045B3C47081
+	for <webhook@archiver.kernel.org>; Fri, 22 Apr 2022 16:52:00 +0000 (UTC)
 Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web11.3770.1650593219359022001
+ by mx.groups.io with SMTP id smtpd.web11.4262.1650596860438413210
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Apr 2022 19:07:00 -0700
+ Thu, 21 Apr 2022 20:07:41 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=permerror,
  err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
  domain name (domain: windriver.com, ip: 147.11.3.146,
- mailfrom: changqing.li@windriver.com)
+ mailfrom: mingli.yu@windriver.com)
+Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 23M37XTK008723
+	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 21 Apr 2022 20:07:33 -0700
 Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
  [147.11.82.252])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 23M26vNQ002280
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 23M37Wbp010101
 	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Apr 2022 19:06:57 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ Thu, 21 Apr 2022 20:07:33 -0700 (PDT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Thu, 21 Apr 2022 19:06:57 -0700
+ 15.1.2242.12; Thu, 21 Apr 2022 20:07:32 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.27; Thu, 21 Apr 2022 20:07:32 -0700
 Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Thu, 21 Apr 2022 19:06:56 -0700
-From: <changqing.li@windriver.com>
+ 15.1.2242.12 via Frontend Transport; Thu, 21 Apr 2022 20:07:31 -0700
+From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH] drbd-utils: fix for usrmerge
-Date: Fri, 22 Apr 2022 10:06:55 +0800
-Message-ID: <20220422020655.2131714-1-changqing.li@windriver.com>
+Subject: [meta-oe][PATCH] crash: Upgrade to 8.0.0
+Date: Fri, 22 Apr 2022 11:07:30 +0800
+Message-ID: <20220422030730.2556794-1-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -41,209 +50,312 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 22 Apr 2022 16:51:59 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96729
+ https://lists.openembedded.org/g/openembedded-devel/message/96730
 
-From: Changqing Li <changqing.li@windriver.com>
+From: Mingli Yu <mingli.yu@windriver.com>
 
-* fix following error:
-systemd-analyze --man=false verify /lib/systemd/system/drbd.service
-drbd.service: Command /lib/drbd/scripts/drbd is not executable: No such file or directory
+The bundled gdb upgraded to 10.2 [1] and remove related patches
+against the previous gdb 7.6.
 
-* enhancement for usrmerge
+[1] https://github.com/crash-utility/crash/commit/ec568e2ea515b66343d3488d5d4b9a625d55b7ae
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- .../0001-drbd-utils-support-usrmerge.patch    | 119 +++++++++++++++---
- .../recipes-support/drbd/drbd-utils_9.20.2.bb |  12 +-
- 2 files changed, 114 insertions(+), 17 deletions(-)
+ ...error-unknown-type-name-gdb_fpregset.patch | 36 ---------
+ ...tect-the-sysroot-s-glibc-header-file.patch | 33 --------
+ ...unrecognized-gcc-option-m32-for-mips.patch | 33 --------
+ ...im-arange-fix-extern-inline-handling.patch | 79 -------------------
+ ...m-ppc-drop-LIBS-from-psim-dependency.patch | 37 ---------
+ .../crash/{crash_7.3.0.bb => crash_8.0.0.bb}  | 12 +--
+ 6 files changed, 3 insertions(+), 227 deletions(-)
+ delete mode 100644 meta-oe/recipes-kernel/crash/crash/0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch
+ delete mode 100644 meta-oe/recipes-kernel/crash/crash/0003-crash-detect-the-sysroot-s-glibc-header-file.patch
+ delete mode 100644 meta-oe/recipes-kernel/crash/crash/remove-unrecognized-gcc-option-m32-for-mips.patch
+ delete mode 100644 meta-oe/recipes-kernel/crash/crash/sim-common-sim-arange-fix-extern-inline-handling.patch
+ delete mode 100644 meta-oe/recipes-kernel/crash/crash/sim-ppc-drop-LIBS-from-psim-dependency.patch
+ rename meta-oe/recipes-kernel/crash/{crash_7.3.0.bb => crash_8.0.0.bb} (87%)
 
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch b/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch
-index d976680e3..84e3ad096 100644
---- a/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch
-+++ b/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch
-@@ -1,18 +1,24 @@
--From 83764f5d57b3370e0b04a70f814ca49237a66eea Mon Sep 17 00:00:00 2001
-+From 69011c7227ad1aaf08d5ab28e46f85dac951c597 Mon Sep 17 00:00:00 2001
- From: Changqing Li <changqing.li@windriver.com>
--Date: Thu, 5 Sep 2019 18:57:39 +0800
--Subject: [PATCH] drbd-utils: support usrmerge
-+Date: Thu, 21 Apr 2022 17:22:35 +0800
-+Subject: [PATCH] drbd-utils: support usermerge
+diff --git a/meta-oe/recipes-kernel/crash/crash/0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch b/meta-oe/recipes-kernel/crash/crash/0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch
+deleted file mode 100644
+index 8355fe44e..000000000
+--- a/meta-oe/recipes-kernel/crash/crash/0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch
++++ /dev/null
+@@ -1,36 +0,0 @@
+-From 52fc1a7c17768fd52c3577d21dad84e8babb94b5 Mon Sep 17 00:00:00 2001
+-From: Dengke Du <dengke.du@windriver.com>
+-Date: Thu, 6 Apr 2017 23:01:14 -0400
+-Subject: [PATCH 2/3] crash: fix build error unknown type name 'gdb_fpregset_t'
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Dengke Du <dengke.du@windriver.com>
+----
+- gdb-7.6/gdb/gdb_proc_service.h | 3 +--
+- 1 file changed, 1 insertion(+), 2 deletions(-)
+-
+-diff --git a/gdb-7.6/gdb/gdb_proc_service.h b/gdb-7.6/gdb/gdb_proc_service.h
+-index 8bc6088..99c6496 100644
+---- a/gdb-7.6/gdb/gdb_proc_service.h
+-+++ b/gdb-7.6/gdb/gdb_proc_service.h
+-@@ -20,6 +20,7 @@
+- #define GDB_PROC_SERVICE_H
+- 
+- #include <sys/types.h>
+-+#include "gregset.h"
+- 
+- #ifdef HAVE_PROC_SERVICE_H
+- #include <proc_service.h>
+-@@ -53,8 +54,6 @@
+- #include <sys/procfs.h>
+- #endif
+- 
+--#include "gregset.h"
+--
+- /* Functions in this interface return one of these status codes.  */
+- typedef enum
+- {
+--- 
+-2.8.1
+-
+diff --git a/meta-oe/recipes-kernel/crash/crash/0003-crash-detect-the-sysroot-s-glibc-header-file.patch b/meta-oe/recipes-kernel/crash/crash/0003-crash-detect-the-sysroot-s-glibc-header-file.patch
+deleted file mode 100644
+index 1f4bd01da..000000000
+--- a/meta-oe/recipes-kernel/crash/crash/0003-crash-detect-the-sysroot-s-glibc-header-file.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-From c7950ef5228adc52a500b4fc67d7e48c3c09c1df Mon Sep 17 00:00:00 2001
+-From: Dengke Du <dengke.du@windriver.com>
+-Date: Thu, 6 Apr 2017 23:02:44 -0400
+-Subject: [PATCH 3/3] crash: detect the sysroot's glibc header file
+-
+-This is cross compile, so let the Makefile detect the sysroot's glibc
+-header file, not the host's glibc header file.
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Dengke Du <dengke.du@windriver.com>
+----
+- Makefile | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/Makefile b/Makefile
+-index b6b7e80..94f21a5 100644
+---- a/Makefile
+-+++ b/Makefile
+-@@ -264,8 +264,8 @@ gdb_patch:
+- 	if [ "${ARCH}" = "x86_64" ] && [ "${TARGET}" = "PPC64" ] && [ -f ${GDB}-ppc64le-support.patch ]; then \
+- 		patch -d ${GDB} -p1 -F0 < ${GDB}-ppc64le-support.patch ; \
+- 	fi
+--	if [ -f /usr/include/proc_service.h ]; then \
+--		grep 'extern ps_err_e ps_get_thread_area (struct' /usr/include/proc_service.h; \
+-+	if [ -f ${RECIPE_SYSROOT}/usr/include/proc_service.h ]; then \
+-+		grep 'extern ps_err_e ps_get_thread_area (struct' ${RECIPE_SYSROOT}/usr/include/proc_service.h; \
+- 		if [ $$? -eq 0 ]; then \
+- 			patch -p0 < ${GDB}-proc_service.h.patch; \
+- 		fi; \
+--- 
+-2.8.1
+-
+diff --git a/meta-oe/recipes-kernel/crash/crash/remove-unrecognized-gcc-option-m32-for-mips.patch b/meta-oe/recipes-kernel/crash/crash/remove-unrecognized-gcc-option-m32-for-mips.patch
+deleted file mode 100644
+index 37d43b888..000000000
+--- a/meta-oe/recipes-kernel/crash/crash/remove-unrecognized-gcc-option-m32-for-mips.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-Upstream-Status: Pending
+-
+-It fails to build crash for mips with error:
+-
+-| mips-wrs-linux-gcc: error: unrecognized command line option '-m32'
+-| Makefile:291: recipe for target 'make_build_data' failed
+-
+-So remove the unrecognized option '-m32' for mips.
+-
+-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+----
+-diff --git a/configure.c b/configure.c
+-index cf1973b..71e97b3 100644
+---- a/configure.c
+-+++ b/configure.c
+-@@ -155,7 +155,7 @@ void add_extra_lib(char *);
+- #define TARGET_CFLAGS_PPC64_ON_X86_64  "TARGET_CFLAGS="
+- #define TARGET_CFLAGS_MIPS            "TARGET_CFLAGS=-D_FILE_OFFSET_BITS=64"
+- #define TARGET_CFLAGS_MIPS_ON_X86     "TARGET_CFLAGS=-D_FILE_OFFSET_BITS=64"
+--#define TARGET_CFLAGS_MIPS_ON_X86_64  "TARGET_CFLAGS=-m32 -D_FILE_OFFSET_BITS=64"
+-+#define TARGET_CFLAGS_MIPS_ON_X86_64  "TARGET_CFLAGS=-D_FILE_OFFSET_BITS=64"
+- #define TARGET_CFLAGS_MIPS64          "TARGET_CFLAGS="
+- #define TARGET_CFLAGS_SPARC64         "TARGET_CFLAGS="
+- 
+-@@ -167,7 +167,7 @@ void add_extra_lib(char *);
+- #define GDB_TARGET_ARM64_ON_X86_64  "GDB_CONF_FLAGS=--target=aarch64-elf-linux"   /* TBD */
+- #define GDB_TARGET_PPC64_ON_X86_64  "GDB_CONF_FLAGS=--target=powerpc64le-unknown-linux-gnu"
+- #define GDB_TARGET_MIPS_ON_X86     "GDB_CONF_FLAGS=--target=mipsel-elf-linux"
+--#define GDB_TARGET_MIPS_ON_X86_64  "GDB_CONF_FLAGS=--target=mipsel-elf-linux CFLAGS=-m32"
+-+#define GDB_TARGET_MIPS_ON_X86_64  "GDB_CONF_FLAGS=--target=mipsel-elf-linux"
+-      
+- /*
+-  *  The original plan was to allow the use of a particular version
+diff --git a/meta-oe/recipes-kernel/crash/crash/sim-common-sim-arange-fix-extern-inline-handling.patch b/meta-oe/recipes-kernel/crash/crash/sim-common-sim-arange-fix-extern-inline-handling.patch
+deleted file mode 100644
+index 0185b5704..000000000
+--- a/meta-oe/recipes-kernel/crash/crash/sim-common-sim-arange-fix-extern-inline-handling.patch
++++ /dev/null
+@@ -1,79 +0,0 @@
+-Upstream-Status: Backport
+-
+-https://sourceware.org/git/?p=binutils-gdb.git;a=commit;h=92fc615
+-
+-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+-From 92fc6153a6fdf2a027d9780f5945712aafad4a9e Mon Sep 17 00:00:00 2001
+-From: Mike Frysinger <vapier@gentoo.org>
+-Date: Sun, 29 Mar 2015 15:59:01 -0400
+-Subject: [PATCH] sim: common: sim-arange: fix extern inline handling
+-
+-With newer versions of gcc (5.x), the extern inline we're using with the
+-sim-arange module no longer works.  Since this code really wants the gnu
+-inline semantics, use that attribute explicitly.
+-
+-Reported-by: DJ Delorie <dj@redhat.com>
+-Reported-by: Joel Sherrill <joel.sherrill@oarcorp.com>
+----
+- gdb-7.6/sim/common/sim-arange.h | 20 ++++++++++++--------
+- gdb-7.6/sim/common/sim-inline.h |  4 +++-
+- 2 files changed, 15 insertions(+), 9 deletions(-)
+-
+-diff --git a/gdb-7.6/sim/common/sim-arange.h b/gdb-7.6/sim/common/sim-arange.h
+-index 73117f3..de842c9 100644
+---- a/gdb-7.6/sim/common/sim-arange.h
+-+++ b/gdb-7.6/sim/common/sim-arange.h
+-@@ -60,22 +60,26 @@ extern void sim_addr_range_delete (ADDR_RANGE * /*ar*/,
+- 				   address_word /*start*/,
+- 				   address_word /*end*/);
+- 
+-+/* TODO: This should get moved into sim-inline.h.  */
+-+#ifdef HAVE_INLINE
+-+#ifdef SIM_ARANGE_C
+-+#define SIM_ARANGE_INLINE INLINE
+-+#else
+-+#define SIM_ARANGE_INLINE EXTERN_INLINE
+-+#endif
+-+#else
+-+#define SIM_ARANGE_INLINE EXTERN
+-+#endif
+-+
+- /* Return non-zero if ADDR is in range AR, traversing the entire tree.
+-    If no range is specified, that is defined to mean "everything".  */
+--extern INLINE int
+-+SIM_ARANGE_INLINE int
+- sim_addr_range_hit_p (ADDR_RANGE * /*ar*/, address_word /*addr*/);
+- #define ADDR_RANGE_HIT_P(ar, addr) \
+-   ((ar)->range_tree == NULL || sim_addr_range_hit_p ((ar), (addr)))
+- 
+- #ifdef HAVE_INLINE
+--#ifdef SIM_ARANGE_C
+--#define SIM_ARANGE_INLINE INLINE
+--#else
+--#define SIM_ARANGE_INLINE EXTERN_INLINE
+--#endif
+- #include "sim-arange.c"
+--#else
+--#define SIM_ARANGE_INLINE
+- #endif
+- #define SIM_ARANGE_C_INCLUDED
+- 
+-diff --git a/gdb-7.6/sim/common/sim-inline.h b/gdb-7.6/sim/common/sim-inline.h
+-index af75562..8a9c286 100644
+---- a/gdb-7.6/sim/common/sim-inline.h
+-+++ b/gdb-7.6/sim/common/sim-inline.h
+-@@ -303,7 +303,9 @@
+- /* ??? Temporary, pending decision to always use extern inline and do a vast
+-    cleanup of inline support.  */
+- #ifndef INLINE2
+--#if defined (__GNUC__)
+-+#if defined (__GNUC_GNU_INLINE__) || defined (__GNUC_STDC_INLINE__)
+-+#define INLINE2 __inline__ __attribute__ ((__gnu_inline__))
+-+#elif defined (__GNUC__)
+- #define INLINE2 __inline__
+- #else
+- #define INLINE2 /*inline*/
+--- 
+-2.6.1
+-
+diff --git a/meta-oe/recipes-kernel/crash/crash/sim-ppc-drop-LIBS-from-psim-dependency.patch b/meta-oe/recipes-kernel/crash/crash/sim-ppc-drop-LIBS-from-psim-dependency.patch
+deleted file mode 100644
+index 77a287f14..000000000
+--- a/meta-oe/recipes-kernel/crash/crash/sim-ppc-drop-LIBS-from-psim-dependency.patch
++++ /dev/null
+@@ -1,37 +0,0 @@
+-Upstream-Status: Backport
+-
+-https://sourceware.org/git/?p=binutils-gdb.git;h=0d8a6ab
+-
+-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+----
+-From 0d8a6ab7d39d28fb1557e2a62e9e4b336341ab34 Mon Sep 17 00:00:00 2001
+-From: Aaro Koskinen <aaro.koskinen@iki.fi>
+-Date: Mon, 17 Feb 2014 17:12:59 -0500
+-Subject: [PATCH] sim: ppc: drop $(LIBS) from psim dependency
+-
+-When cross-compiling GDB for PPC, there's a prerequisite "-lz" for psim
+-that results in a build failure. With such prerequisite, GNU Make will
+-try to search the library from build machine's /usr/lib which is wrong.
+-On 64-bit Linux build machines the compilation will fail because of this.
+-
+-URL: https://sourceware.org/bugzilla/show_bug.cgi?id=12202
+----
+- sim/ppc/Makefile.in | 2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/gdb-7.6/sim/ppc/Makefile.in b/gdb-7.6/sim/ppc/Makefile.in
+-index b811f6f..740bdb0 100644
+---- a/gdb-7.6/sim/ppc/Makefile.in
+-+++ b/gdb-7.6/sim/ppc/Makefile.in
+-@@ -552,7 +552,7 @@ PACKAGE_SRC = @sim_pk_src@
+- PACKAGE_OBJ = @sim_pk_obj@
+- 
+- 
+--psim: $(TARGETLIB) main.o $(LIBIBERTY_LIB) $(BFD_LIB) $(LIBS) $(LIBINTL_DEP)
+-+psim: $(TARGETLIB) main.o $(LIBIBERTY_LIB) $(BFD_LIB) $(LIBINTL_DEP)
+- 	$(CC) $(CFLAGS) $(SIM_CFLAGS) $(LDFLAGS) -o psim$(EXEEXT) main.o $(TARGETLIB) $(BFD_LIB) $(LIBINTL) $(LIBIBERTY_LIB) $(LIBS)
+- 
+- run: psim
+--- 
+-1.9.4
+-
+diff --git a/meta-oe/recipes-kernel/crash/crash_7.3.0.bb b/meta-oe/recipes-kernel/crash/crash_8.0.0.bb
+similarity index 87%
+rename from meta-oe/recipes-kernel/crash/crash_7.3.0.bb
+rename to meta-oe/recipes-kernel/crash/crash_8.0.0.bb
+index d4aa0d52b..4ea5b67de 100644
+--- a/meta-oe/recipes-kernel/crash/crash_7.3.0.bb
++++ b/meta-oe/recipes-kernel/crash/crash_8.0.0.bb
+@@ -14,22 +14,16 @@ DEPENDS = "zlib readline coreutils-native ncurses-native"
  
- Upstream-Status: Inappropriate[oe-specific]
+ S = "${WORKDIR}/git"
+ SRC_URI = "git://github.com/crash-utility/${BPN}.git;branch=master;protocol=https \
+-           ${GNU_MIRROR}/gdb/gdb-7.6.tar.gz;name=gdb;subdir=git \
++           ${GNU_MIRROR}/gdb/gdb-10.2.tar.gz;name=gdb;subdir=git \
+            file://7001force_define_architecture.patch \
+            file://7003cross_ranlib.patch \
+            file://0001-cross_add_configure_option.patch \
+-           file://sim-ppc-drop-LIBS-from-psim-dependency.patch \
+-           file://sim-common-sim-arange-fix-extern-inline-handling.patch \
+            file://donnot-extract-gdb-during-do-compile.patch \
+            file://gdb_build_jobs_and_not_write_crash_target.patch \
+-           file://remove-unrecognized-gcc-option-m32-for-mips.patch \
+-           file://0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch \
+-           file://0003-crash-detect-the-sysroot-s-glibc-header-file.patch \
+            "
+-SRCREV = "2a3e546942ab560f050ab77e8c7828b06513b3f0"
++SRCREV = "ec568e2ea515b66343d3488d5d4b9a625d55b7ae"
  
- Signed-off-by: Changqing Li <changqing.li@windriver.com>
- Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
- ---
-- configure.ac         |  2 +-
-- scripts/Makefile.in  | 10 +++++-----
-- user/v83/Makefile.in | 14 +++++++-------
-- user/v84/Makefile.in | 14 +++++++-------
-- 4 files changed, 20 insertions(+), 20 deletions(-)
-+ configure.ac                             |  2 +-
-+ scripts/Makefile.in                      | 10 +++++-----
-+ scripts/drbd-demote-or-escalate@.service |  2 +-
-+ scripts/drbd-promote@.service            |  4 ++--
-+ scripts/drbd-wait-promotable@.service    |  2 +-
-+ scripts/drbd.service                     |  6 +++---
-+ scripts/drbd@.service                    |  6 +++---
-+ scripts/ocf.ra@.service                  |  4 ++--
-+ user/v83/Makefile.in                     | 14 +++++++-------
-+ user/v84/Makefile.in                     | 14 +++++++-------
-+ 10 files changed, 32 insertions(+), 32 deletions(-)
+-SRC_URI[gdb.md5sum] = "a9836707337e5f7bf76a009a8904f470"
+-SRC_URI[gdb.sha256sum] = "8070389a5dcc104eb0be483d582729f98ed4d761ad19cedd3f17b5d2502faa36"
++SRC_URI[gdb.sha256sum] = "b33ad58d687487a821ec8d878daab0f716be60d0936f2e3ac5cf08419ce70350"
  
- diff --git a/configure.ac b/configure.ac
- index ae575586..3d7deeae 100644
-@@ -28,7 +34,7 @@ index ae575586..3d7deeae 100644
-     test x"$with_udev" = xyes ; then
-  	if test x"$PKG_CONFIG" != x; then
- diff --git a/scripts/Makefile.in b/scripts/Makefile.in
--index fcd298e9..2521fb08 100644
-+index fcd298e9..bab441a5 100644
- --- a/scripts/Makefile.in
- +++ b/scripts/Makefile.in
- @@ -88,11 +88,11 @@ ifeq ($(subst both,systemd,$(initscripttype)),systemd)
-@@ -40,14 +46,97 @@ index fcd298e9..2521fb08 100644
- -	install -m 755 drbd-service-shim.sh $(DESTDIR)/lib/drbd/scripts
- -	install -m 755 drbd-wait-promotable.sh $(DESTDIR)/lib/drbd/scripts
- -	install -m 755 ocf.ra.wrapper.sh $(DESTDIR)/lib/drbd/scripts
--+	install -d $(DESTDIR)/${nonarch_libdir}/drbdscripts
--+	install -m 755 drbd $(DESTDIR)/${nonarch_libdir}/drbdscripts
--+	install -m 755 drbd-service-shim.sh $(DESTDIR)/${nonarch_libdir}/drbdscripts
--+	install -m 755 drbd-wait-promotable.sh $(DESTDIR)/${nonarch_libdir}/drbdscripts
--+	install -m 755 ocf.ra.wrapper.sh $(DESTDIR)/${nonarch_libdir}/drbdscripts
-++	install -d $(DESTDIR)/${nonarch_libdir}/drbd/scripts
-++	install -m 755 drbd $(DESTDIR)/${nonarch_libdir}/drbd/scripts
-++	install -m 755 drbd-service-shim.sh $(DESTDIR)/${nonarch_libdir}/drbd/scripts
-++	install -m 755 drbd-wait-promotable.sh $(DESTDIR)/${nonarch_libdir}/drbd/scripts
-++	install -m 755 ocf.ra.wrapper.sh $(DESTDIR)/${nonarch_libdir}/drbd/scripts
-  	install -d $(DESTDIR)$(tmpfilesdir)/
-  	install -m 444 drbd.tmpfiles.conf $(DESTDIR)$(tmpfilesdir)/drbd.conf
-  endif
-+diff --git a/scripts/drbd-demote-or-escalate@.service b/scripts/drbd-demote-or-escalate@.service
-+index 20932238..8b5ce4a2 100644
-+--- a/scripts/drbd-demote-or-escalate@.service
-++++ b/scripts/drbd-demote-or-escalate@.service
-+@@ -28,5 +28,5 @@ TimeoutSec=60
-+ # "Type=forking" would be an option to have it retry a number of times,
-+ # and then only escalate to FailureAction if that did not help.
-+ Type=oneshot
-+-ExecStart=/lib/drbd/scripts/drbd-service-shim.sh secondary-or-escalate %I
-++ExecStart=@nonarch_libdir@/drbd/scripts/drbd-service-shim.sh secondary-or-escalate %I
-+ ExecStopPost=-/bin/journalctl --sync
-+diff --git a/scripts/drbd-promote@.service b/scripts/drbd-promote@.service
-+index 71345d9b..678e0703 100644
-+--- a/scripts/drbd-promote@.service
-++++ b/scripts/drbd-promote@.service
-+@@ -24,5 +24,5 @@ RemainAfterExit=yes
-+ # (ab)using systemd features
-+ # if we cannot configure and promote, that's a condition, not a failure
-+ # See the comment above wrt. FailureAction vs OnFailure
-+-ExecCondition=/lib/drbd/scripts/drbd-service-shim.sh primary %I
-+-ExecStop=/lib/drbd/scripts/drbd-service-shim.sh secondary %I
-++ExecCondition=@nonarch_libdir@/drbd/scripts/drbd-service-shim.sh primary %I
-++ExecStop=@nonarch_libdir@/drbd/scripts/drbd-service-shim.sh secondary %I
-+diff --git a/scripts/drbd-wait-promotable@.service b/scripts/drbd-wait-promotable@.service
-+index 81c3789f..3416abc6 100644
-+--- a/scripts/drbd-wait-promotable@.service
-++++ b/scripts/drbd-wait-promotable@.service
-+@@ -10,7 +10,7 @@ Type=oneshot
-+ 
-+ # on first start, wait for access to "good data"
-+ # let systemd handle timeouts
-+-ExecStart=/lib/drbd/scripts/drbd-wait-promotable.sh %I
-++ExecStart=@nonarch_libdir@/drbd/scripts/drbd-wait-promotable.sh %I
-+ RemainAfterExit=yes
-+ 
-+ [Install]
-+diff --git a/scripts/drbd.service b/scripts/drbd.service
-+index 96c599e7..c81e95a6 100644
-+--- a/scripts/drbd.service
-++++ b/scripts/drbd.service
-+@@ -12,11 +12,11 @@ RemainAfterExit=yes
-+ # A check for INIT_VERSION already exists, just set it to something.
-+ Environment=INIT_VERSION=systemd
-+ 
-+-ExecStart=/lib/drbd/scripts/drbd start
-+-ExecStop=/lib/drbd/scripts/drbd stop
-++ExecStart=@nonarch_libdir@/drbd/scripts/drbd start
-++ExecStop=@nonarch_libdir@/drbd/scripts/drbd stop
-+ 
-+ # Re-adjust everything on reload
-+-ExecReload=/lib/drbd/scripts/drbd reload
-++ExecReload=@nonarch_libdir@/drbd/scripts/drbd reload
-+ 
-+ [Install]
-+ WantedBy=multi-user.target
-+diff --git a/scripts/drbd@.service b/scripts/drbd@.service
-+index 76514c5b..e2e500ba 100644
-+--- a/scripts/drbd@.service
-++++ b/scripts/drbd@.service
-+@@ -35,8 +35,8 @@ RemainAfterExit=yes
-+ 
-+ # depends... do we want this as ExecCondition or as ExecStart
-+ # failed start is "failed", failed condition is just "not startable yet"
-+-ExecStart=/lib/drbd/scripts/drbd-service-shim.sh adjust %I
-+-ExecReload=/lib/drbd/scripts/drbd-service-shim.sh adjust %I
-++ExecStart=@nonarch_libdir@/drbd/scripts/drbd-service-shim.sh adjust %I
-++ExecReload=@nonarch_libdir@/drbd/scripts/drbd-service-shim.sh adjust %I
-+ 
-+ # can only succeed, if you first stop all depending services
-+-ExecStopPost=/lib/drbd/scripts/drbd-service-shim.sh down %I
-++ExecStopPost=@nonarch_libdir@/drbd/scripts/drbd-service-shim.sh down %I
-+diff --git a/scripts/ocf.ra@.service b/scripts/ocf.ra@.service
-+index 9c2268a6..1666c482 100644
-+--- a/scripts/ocf.ra@.service
-++++ b/scripts/ocf.ra@.service
-+@@ -22,5 +22,5 @@ Environment=monitor_inverval=30
-+ # Only the first argument is used by the wrapper,
-+ # the %n is just to identify which is which in the process list.
-+ # All parameterization is done via Environment= in per instance override.conf
-+-ExecStart=/lib/drbd/scripts/ocf.ra.wrapper.sh start-and-monitor %n
-+-ExecStopPost=/lib/drbd/scripts/ocf.ra.wrapper.sh stop %n
-++ExecStart=@nonarch_libdir@/drbd/scripts/ocf.ra.wrapper.sh start-and-monitor %n
-++ExecStopPost=@nonarch_libdir@/drbd/scripts/ocf.ra.wrapper.sh stop %n
- diff --git a/user/v83/Makefile.in b/user/v83/Makefile.in
- index 08cfe574..4c4971b6 100644
- --- a/user/v83/Makefile.in
-@@ -111,5 +200,5 @@ index 0fcefc5f..81f7d5ec 100644
-  spell:
-  	for f in drbdadm_adjust.c drbdadm_main.c drbdadm_parser.c drbdadm_usage_cnt.c drbdsetup.c drbdtool_common.c; do \
- -- 
--2.33.0
-+2.25.1
+ UPSTREAM_CHECK_URI = "https://github.com/crash-utility/crash/releases"
  
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.20.2.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.20.2.bb
-index 640e4e785..deaab641e 100644
---- a/meta-networking/recipes-support/drbd/drbd-utils_9.20.2.bb
-+++ b/meta-networking/recipes-support/drbd/drbd-utils_9.20.2.bb
-@@ -10,9 +10,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
- 
- SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils;branch=${PV};protocol=https \
-            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers;branch=master;protocol=https \
--           ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
-            file://0001-drbdmon-add-LDFLAGS-when-linking.patch \
--          "
-+           ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
-+           "
-+
- SRCREV_drbd-utils = "087ee6b4961ca154d76e4211223b03149373bed8"
- SRCREV_drbd-headers = "f1529aa84e9d2f66c96ad283a1bbb708aabf03f7"
- 
-@@ -47,6 +48,13 @@ do_install:append() {
-     # don't install empty /var/lock and /var/run to avoid conflict with base-files
-     rm -rf ${D}${localstatedir}/lock
-     rm -rf ${D}${localstatedir}/run
-+
-+    sed -i -e 's#@nonarch_libdir@#${nonarch_libdir}#g' ${D}${systemd_unitdir}/system/drbd-demote-or-escalate@.service
-+    sed -i -e 's#@nonarch_libdir@#${nonarch_libdir}#g' ${D}${systemd_unitdir}/system/drbd-promote@.service
-+    sed -i -e 's#@nonarch_libdir@#${nonarch_libdir}#g' ${D}${systemd_unitdir}/system/drbd-wait-promotable@.service
-+    sed -i -e 's#@nonarch_libdir@#${nonarch_libdir}#g' ${D}${systemd_unitdir}/system/drbd.service
-+    sed -i -e 's#@nonarch_libdir@#${nonarch_libdir}#g' ${D}${systemd_unitdir}/system/drbd@.service
-+    sed -i -e 's#@nonarch_libdir@#${nonarch_libdir}#g' ${D}${systemd_unitdir}/system/ocf.ra@.service
- }
- 
- RDEPENDS:${PN} += "bash perl-module-getopt-long perl-module-exporter perl-module-constant perl-module-overloading perl-module-exporter-heavy"
 -- 
 2.25.1
 
