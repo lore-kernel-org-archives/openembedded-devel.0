@@ -1,138 +1,93 @@
-Return-Path: <rybczynska@gmail.com>
+Return-Path: <matthias@extraklein.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C7C91C3A5A7
-	for <webhook@archiver.kernel.org>; Fri, 22 Apr 2022 16:52:00 +0000 (UTC)
-Received: from mail-io1-f49.google.com (mail-io1-f49.google.com
- [209.85.166.49])
- by mx.groups.io with SMTP id smtpd.web12.6428.1650618441626057522
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53B9CC48BDF
+	for <webhook@archiver.kernel.org>; Fri, 22 Apr 2022 16:52:01 +0000 (UTC)
+Received: from relay.yourmailgateway.de (relay.yourmailgateway.de
+ [188.68.63.161])
+ by mx.groups.io with SMTP id smtpd.web11.7200.1650625666549222738
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Apr 2022 02:07:22 -0700
+ Fri, 22 Apr 2022 04:07:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=CYOra791;
- spf=pass (domain: gmail.com, ip: 209.85.166.49,
- mailfrom: rybczynska@gmail.com)
-Received: by mail-io1-f49.google.com with SMTP id h83so7952131iof.8;
-        Fri, 22 Apr 2022 02:07:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=MH94ousu1M8QjpxS3JaF8Qnk+PEGqZFxN/qt2Phy72w=;
-        b=CYOra791mqZIBHCsSEfbR0aAGaHIchorDeTrxGfh0gqyE4M7n+PfRLzeCBgfJaGFUo
-         ehEIodTcJCCdJ69j/JyYdg2agpYJ80j7zGH+Y4NKeIpxvRCoSM5CNwUc3Hq7bVzgHcT0
-         dPZXPbftEstlI1W2d7Kr5veQGX70Zl3Qv6e5RrixggFjNW2HYhkZngjRaXSlRYO2vYnl
-         gAzn7I6yq5H3gBqmCP+Q+jTTHLnNJMkcfn3bUpihLuH2JMZZKvfOr5/YcVaw/3Q1C2nH
-         E4RU4kZ7+lnxc3IRZwmYZHYtB6UVKW9E4Z/p9KRDmz7lEnSQ0tAX5IFDc/mDg0/bbNar
-         UHGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=MH94ousu1M8QjpxS3JaF8Qnk+PEGqZFxN/qt2Phy72w=;
-        b=mHgsAJnWox5dCvbgwXZMrhYJb9YnQRG2lupvAzNE8NvV/zWERirJf7nEpwUcSmYm2H
-         eEjERjUx2k10wdB6EHwAlrx15/iGIYznlDern2i9Umu+xldRRuAaGUUeuqLSIWupcZ71
-         yM3rBmLDKRL9AMC1IUI44uvewmbq0Axw6cC64kCWalNiInqx6LycjLKMHyaFx89Dzsa8
-         pQWGnn3QiFJPLHD+lJAQfmrg0pfBQQfKqrvl5/2UGbZu3ECz5iH9HYwrcdpy9LIWVHgN
-         9YIhgjHbz2jpuLCAb0bnbltpIwDgxRrS4BgPkFpG05YCV6xwVuLsjjur5NIEUIzpur91
-         //zA==
-X-Gm-Message-State: AOAM532l7Teq61O/zBkhbLIBFXu6P9Jf2bX3aP/h0DJhTtZF8dLg4r6o
-	jErAgibtUQ6z7Z3SXg7xUiG5yIpCV0lh/RY20IaPgr+wvvc=
-X-Google-Smtp-Source: 
- ABdhPJzt/Eldr3KK70EakY6nivgtIC71NZQDfBbciXiEbjS8L3ftGA+5uZ8zql4ElWMYuyZ7hHcOFvZ14kWlLzvPGJU=
-X-Received: by 2002:a05:6638:218e:b0:32a:b468:5f36 with SMTP id
- s14-20020a056638218e00b0032ab4685f36mr756922jaj.169.1650618440305; Fri, 22
- Apr 2022 02:07:20 -0700 (PDT)
+ dkim=fail reason="body hash did not verify" header.i=@extraklein.de
+ header.s=key2 header.b=gg56VniJ;
+ spf=pass (domain: extraklein.de, ip: 188.68.63.161,
+ mailfrom: matthias@extraklein.de)
+Received: from mors-relay-8201.netcup.net (localhost [127.0.0.1])
+	by mors-relay-8201.netcup.net (Postfix) with ESMTPS id 4KlBTC3rNfz3pqV
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri, 22 Apr 2022 13:07:43 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=extraklein.de;
+	s=key2; t=1650625663;
+	bh=rasvXyGMJ/U8kaNp21xO8onXfykdziipcqApj5Rt4Ds=;
+	h=From:To:Cc:Subject:Date:From;
+	b=gg56VniJ4+x9RAlUHRvje+LqASQGvdMrveVhRvfPsxewcOJa52CWw3qZlw6uZuUlL
+	 V9kE1I+bgaaP8HSmlpdBjQ1+psVlKyug8XaQ1SviRBVUEmGHhNWipgp86qkt3mb4xf
+	 z6+u3pcL1BT30ffIxraJgouUFuhObCQAF/1eENrZ4F7QOzgP5pvupkXD8egs9QQgrc
+	 E1fEtnRzhrsbFDWbVYZ42G6pn+H61PUy2ttYjRRRwe3zgp0wDWg6/KOw8+dbefCDZW
+	 Z/TQ/ycId49QeRIVLyD6Wtud1o/Utqga/qDKdqhITSFlTYx18kjQRRbI5KscoYqyKB
+	 mtNmGqR6y2HJA==
+Received: from policy02-mors.netcup.net (unknown [46.38.225.53])
+	by mors-relay-8201.netcup.net (Postfix) with ESMTPS id 4KlBTC3S7Sz3pqT
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri, 22 Apr 2022 13:07:43 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at policy02-mors.netcup.net
+Received: from mx2fa3.netcup.net (unknown [10.243.12.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by policy02-mors.netcup.net (Postfix) with ESMTPS id 4KlBTB1pr7z8svP
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri, 22 Apr 2022 13:07:42 +0200 (CEST)
+Received: from localhost (ip-062-143-218-156.um16.pools.vodafone-ip.de
+ [62.143.218.156])
+	by mx2fa3.netcup.net (Postfix) with ESMTPSA id 45114140050;
+	Fri, 22 Apr 2022 13:07:41 +0200 (CEST)
+Authentication-Results: mx2fa3;
+        spf=pass (sender IP is 62.143.218.156)
+ smtp.mailfrom=matthias@extraklein.de smtp.helo=localhost
+Received-SPF: pass (mx2fa3: connection is authenticated)
+From: Matthias Klein <matthias@extraklein.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Matthias Klein <matthias@extraklein.de>
+Subject: [meta-oe][PATCH] gpsd: bugfix: add gps-utils-python to PACKAGES
+Date: Fri, 22 Apr 2022 13:06:58 +0200
+Message-Id: <20220422110658.5639-1-matthias@extraklein.de>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-From: Marta Rybczynska <rybczynska@gmail.com>
-Date: Fri, 22 Apr 2022 11:07:09 +0200
-Message-ID: 
- <CAApg2=Q9DOoYVHNSCR_=pEN-x7EQuRw2yhwqWhEG2zaMTONt8w@mail.gmail.com>
-Subject: CVE-check failing on world with meta-openembedded: diff.gz file
-To: OE-core <openembedded-core@lists.openembedded.org>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000cb4d5605dd3a8df2"
+X-PPP-Message-ID: <165062566157.11641.3660236674337337926@mx2fa3.netcup.net>
+X-PPP-Vhost: extraklein.de
+X-NC-CID: 1sO+jLGXaxZMu25cwwg92TjbsEYQL++IOAY+51p9neINIptKfJ4=
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 22 Apr 2022 16:52:00 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 22 Apr 2022 16:52:01 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96733
+ https://lists.openembedded.org/g/openembedded-devel/message/96734
 
---000000000000cb4d5605dd3a8df2
-Content-Type: text/plain; charset="UTF-8"
+Signed-off-by: Matthias Klein <matthias@extraklein.de>
+---
+ meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Dear all,
-We're running cve-check on a world build containing oe-core, meta-oe and
-more. We have an issue with the lockdev recipe
-(meta-openembedded/meta-oe/recipes-support/lockdev/lockdev_1.0.3.bb), which
-causes a fail like below:
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb b/meta-oe/rec=
+ipes-navigation/gpsd/gpsd_3.23.1.bb
+index 8d270ec58..98f7511b1 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb
+@@ -79,7 +79,7 @@ do_install:append() {
+     fi
+ }
+=20
+-PACKAGES =3D+ "libgps python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-=
+utils"
++PACKAGES =3D+ "libgps python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-=
+utils gps-utils-python"
+=20
+ RPROVIDES:${PN}-dbg +=3D "python-pygps-dbg"
+=20
+--=20
+2.30.2
 
-$ bitbake world --runonly=do_cve_check
-ERROR: lockdev-1_1.0.3-r0 do_cve_check: File Not found:
-<path>lockdev/1_1.0.3-r0/lockdev_1.0.3-1.6.diff
-ERROR: lockdev-1_1.0.3-r0 do_cve_check: Failure in searching patches
-ERROR: Logfile of failure stored in:
-<path>/lockdev/1_1.0.3-r0/temp/log.do_cve_check.8709
-ERROR: Task
-(<path>/meta-openembedded/meta-oe/recipes-support/lockdev/lockdev_1.0.3.bb:do_cve_check)
-failed with exit code '1'
-
-The issue is caused by the fact that lockdev_1.0.3-1.6.diff is missing.
-When we look into the recipe, it is downloading lockdev_1.0.3-1.6.diff.gz
-file Please note the additional extension.
-
-Stripping the extension comes from oe-core/meta/oe/patch.py, from the
-patch_path function, which is figuring out if a file is a patch, and
-returning the local path if it is so. However, at the moment when we
-do_cve_check, the .gz file is not uncompressed.
-
-I'm wondering how to solve it.
-1. Add a dependency to make sure eventual patch files are decompressed
-first?
-2. Do not consider this as a patch file in the scope of cve-check ? (this
-is more a part of the source then an actual patch that might be fixing a
-CVE)
-
-This is the only case like that we have in the build. Please note that
-removing ".diff" from the extension list in patch_path() is solving the
-issue.
-
-Any comments or suggestions?
-
-Kind regards,
-Marta
-
---000000000000cb4d5605dd3a8df2
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Dear all,</div><div>We&#39;re running cve-check on a =
-world build containing oe-core, meta-oe and more. We have an issue with the=
- lockdev recipe (meta-openembedded/meta-oe/recipes-support/lockdev/<a href=
-=3D"http://lockdev_1.0.3.bb">lockdev_1.0.3.bb</a>), which causes a fail lik=
-e below:</div><div><br></div><div>$ bitbake world --runonly=3Ddo_cve_check<=
-/div><div>ERROR: lockdev-1_1.0.3-r0 do_cve_check: File Not found: &lt;path&=
-gt;lockdev/1_1.0.3-r0/lockdev_1.0.3-1.6.diff<br>ERROR: lockdev-1_1.0.3-r0 d=
-o_cve_check: Failure in searching patches<br>ERROR: Logfile of failure stor=
-ed in: &lt;path&gt;/lockdev/1_1.0.3-r0/temp/log.do_cve_check.8709<br>ERROR:=
- Task (&lt;path&gt;/meta-openembedded/meta-oe/recipes-support/lockdev/lockd=
-ev_1.0.3.bb:do_cve_check) failed with exit code &#39;1&#39;</div><div><br><=
-/div><div>The issue is caused by the fact that lockdev_1.0.3-1.6.diff is mi=
-ssing. When we look into the recipe, it is downloading lockdev_1.0.3-1.6.di=
-ff.gz file Please note the additional extension.<br></div><div><br></div><d=
-iv>Stripping the extension comes from oe-core/meta/oe/patch.py, from the pa=
-tch_path function, which is figuring out if a file is a patch, and returnin=
-g the local path if it is so. However, at the moment when we do_cve_check, =
-the .gz file is not uncompressed.</div><div><br></div><div></div><div>I&#39=
-;m wondering how to solve it.<br></div><div>1. Add a dependency to make sur=
-e eventual patch files are decompressed first?</div><div>2. Do not consider=
- this as a patch file in the scope of cve-check ? (this is more a part of t=
-he source then an actual patch that might be fixing a CVE)<br></div><div><b=
-r></div><div>This is the only case like that we have in the build. Please n=
-ote that removing &quot;.diff&quot; from the extension list in patch_path()=
- is solving the issue.</div><div><br></div><div>Any comments or suggestions=
-?</div><div><br></div><div>Kind regards,</div><div>Marta<br></div><div><br>=
-</div></div>
-
---000000000000cb4d5605dd3a8df2--
 
