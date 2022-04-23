@@ -1,93 +1,94 @@
-Return-Path: <matthias@extraklein.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53B9CC48BDF
-	for <webhook@archiver.kernel.org>; Fri, 22 Apr 2022 16:52:01 +0000 (UTC)
-Received: from relay.yourmailgateway.de (relay.yourmailgateway.de
- [188.68.63.161])
- by mx.groups.io with SMTP id smtpd.web11.7200.1650625666549222738
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25CF7C4167B
+	for <webhook@archiver.kernel.org>; Mon, 25 Apr 2022 19:26:11 +0000 (UTC)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
+ [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.web09.2024.1650675480479974990
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Apr 2022 04:07:49 -0700
+ Fri, 22 Apr 2022 17:58:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@extraklein.de
- header.s=key2 header.b=gg56VniJ;
- spf=pass (domain: extraklein.de, ip: 188.68.63.161,
- mailfrom: matthias@extraklein.de)
-Received: from mors-relay-8201.netcup.net (localhost [127.0.0.1])
-	by mors-relay-8201.netcup.net (Postfix) with ESMTPS id 4KlBTC3rNfz3pqV
-	for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Apr 2022 13:07:43 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=extraklein.de;
-	s=key2; t=1650625663;
-	bh=rasvXyGMJ/U8kaNp21xO8onXfykdziipcqApj5Rt4Ds=;
-	h=From:To:Cc:Subject:Date:From;
-	b=gg56VniJ4+x9RAlUHRvje+LqASQGvdMrveVhRvfPsxewcOJa52CWw3qZlw6uZuUlL
-	 V9kE1I+bgaaP8HSmlpdBjQ1+psVlKyug8XaQ1SviRBVUEmGHhNWipgp86qkt3mb4xf
-	 z6+u3pcL1BT30ffIxraJgouUFuhObCQAF/1eENrZ4F7QOzgP5pvupkXD8egs9QQgrc
-	 E1fEtnRzhrsbFDWbVYZ42G6pn+H61PUy2ttYjRRRwe3zgp0wDWg6/KOw8+dbefCDZW
-	 Z/TQ/ycId49QeRIVLyD6Wtud1o/Utqga/qDKdqhITSFlTYx18kjQRRbI5KscoYqyKB
-	 mtNmGqR6y2HJA==
-Received: from policy02-mors.netcup.net (unknown [46.38.225.53])
-	by mors-relay-8201.netcup.net (Postfix) with ESMTPS id 4KlBTC3S7Sz3pqT
-	for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Apr 2022 13:07:43 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at policy02-mors.netcup.net
-Received: from mx2fa3.netcup.net (unknown [10.243.12.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by policy02-mors.netcup.net (Postfix) with ESMTPS id 4KlBTB1pr7z8svP
-	for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Apr 2022 13:07:42 +0200 (CEST)
-Received: from localhost (ip-062-143-218-156.um16.pools.vodafone-ip.de
- [62.143.218.156])
-	by mx2fa3.netcup.net (Postfix) with ESMTPSA id 45114140050;
-	Fri, 22 Apr 2022 13:07:41 +0200 (CEST)
-Authentication-Results: mx2fa3;
-        spf=pass (sender IP is 62.143.218.156)
- smtp.mailfrom=matthias@extraklein.de smtp.helo=localhost
-Received-SPF: pass (mx2fa3: connection is authenticated)
-From: Matthias Klein <matthias@extraklein.de>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=KssRfSXg;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f178.google.com with SMTP id h12so10671720plf.12
+        for <openembedded-devel@lists.openembedded.org>;
+ Fri, 22 Apr 2022 17:58:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=CJQfDfSY7OZ69KS9Iul8NUg1mH7jqb1LC9wzagec0mc=;
+        b=KssRfSXgKr0l8gHTNeyq2EaZwjMCzh8YSwEHSZ76vmYzNtiXWCLxDnc6FLaU0KjwvA
+         YAs9EFRI+Qb2aIb2fx7hlD3Y4s4TxILUFhL9g2Pbh8Oy3RCA5mTVPywzCXoS4Si7+sDH
+         HIcAVk9wn//Re82QdANcopb0P1z7W5JtRs7uFyL/kGq7t2yp3DuoYVJ1L7hS3HsI6zG5
+         XBYdxm3xQ42rpKL6BIfzwh14H2v5NIPaEG0zaMgKOdvRMgDG7GINt8kbRnbEGh2fQZCu
+         /mxIJkJ4q9HwWEV7dK/VCFbIIlEpMpKn55IowIW/TFr+b0HXpIQmx0KOU0Iy6KVZYiDd
+         LtZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=CJQfDfSY7OZ69KS9Iul8NUg1mH7jqb1LC9wzagec0mc=;
+        b=mq/xdsMCPEwlBZpLwsaRBPwVBo+UL+OdnmMl8aYSl6HRl2NCf5MvZivTmH1sqKRPgx
+         3l72Nd9/tTqxu/9j7YWH5BgpA5724rkY0924dcR2wtyJhf3txW5N68Nm2qOg23FX8e6k
+         OKVDbhUSjj4BmkGcoKAn6LSBXTItODXfBwFokCNBQPDavGMjvUwfKhfOdFYbJrcM7IV0
+         i0fzzRKV2sh2qoEfxCyA43HBbYCzhmuhkhyaYKOWyJHl2OWKXN+yrXLFSc4Y1r0tAmfc
+         moLkJpOXarTkai46OFrVqQnbqfz8T64m0pNVAKO/XQZ8dKo+AB89bQJZFcfd44i7mXmw
+         ctmg==
+X-Gm-Message-State: AOAM531IHeAmX6RJN3bQk75brKJ4/m/H9b+he6gqocTEeYSNsWSeXxCV
+	kXd7orkREJ43USuEmhVbGquFBzYUuJXofg==
+X-Google-Smtp-Source: 
+ ABdhPJwM0hxWrYD0d8MIdZ9p/DVWiXzb2AqDzKTEwfcKVzkabHrcNqPEeNfFdEplla03DnGBfeQHew==
+X-Received: by 2002:a17:90b:1d82:b0:1d0:5679:b96c with SMTP id
+ pf2-20020a17090b1d8200b001d05679b96cmr19235608pjb.167.1650675479659;
+        Fri, 22 Apr 2022 17:57:59 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::2ca3])
+        by smtp.gmail.com with ESMTPSA id
+ j29-20020a63231d000000b003aaee8ccba7sm497178pgj.64.2022.04.22.17.57.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 22 Apr 2022 17:57:59 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Matthias Klein <matthias@extraklein.de>
-Subject: [meta-oe][PATCH] gpsd: bugfix: add gps-utils-python to PACKAGES
-Date: Fri, 22 Apr 2022 13:06:58 +0200
-Message-Id: <20220422110658.5639-1-matthias@extraklein.de>
-X-Mailer: git-send-email 2.30.2
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Mingli Yu <mingli.yu@windriver.com>
+Subject: [meta-oe][PATCH] crash: Fix build for mips target
+Date: Fri, 22 Apr 2022 17:57:56 -0700
+Message-Id: <20220423005756.2857106-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.36.0
 MIME-Version: 1.0
-X-PPP-Message-ID: <165062566157.11641.3660236674337337926@mx2fa3.netcup.net>
-X-PPP-Vhost: extraklein.de
-X-NC-CID: 1sO+jLGXaxZMu25cwwg92TjbsEYQL++IOAY+51p9neINIptKfJ4=
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 22 Apr 2022 16:52:01 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Apr 2022 19:26:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96734
+ https://lists.openembedded.org/g/openembedded-devel/message/96736
 
-Signed-off-by: Matthias Klein <matthias@extraklein.de>
+The patch to remove these options is removed therefore instrument them
+via sed operations
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Mingli Yu <mingli.yu@windriver.com>
 ---
- meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-kernel/crash/crash_8.0.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb b/meta-oe/rec=
-ipes-navigation/gpsd/gpsd_3.23.1.bb
-index 8d270ec58..98f7511b1 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb
-@@ -79,7 +79,7 @@ do_install:append() {
-     fi
+diff --git a/meta-oe/recipes-kernel/crash/crash_8.0.0.bb b/meta-oe/recipes-kernel/crash/crash_8.0.0.bb
+index 4ea5b67de1..55de6a604b 100644
+--- a/meta-oe/recipes-kernel/crash/crash_8.0.0.bb
++++ b/meta-oe/recipes-kernel/crash/crash_8.0.0.bb
+@@ -72,6 +72,7 @@ do_compile:prepend() {
+ 
+     sed -i s/FORCE_DEFINE_ARCH/"${ARCH}"/g ${S}/configure.c
+     sed -i -e 's/#define TARGET_CFLAGS_ARM_ON_X86_64.*/#define TARGET_CFLAGS_ARM_ON_X86_64\t\"TARGET_CFLAGS=-D_FILE_OFFSET_BITS=64\"/g' ${S}/configure.c
++    sed -i -e 's/#define TARGET_CFLAGS_MIPS_ON_X86_64.*/#define TARGET_CFLAGS_MIPS_ON_X86_64\t\"TARGET_CFLAGS=-D_FILE_OFFSET_BITS=64\"/g' ${S}/configure.c
+     sed -i 's/&gt;/>/g' ${S}/Makefile
  }
-=20
--PACKAGES =3D+ "libgps python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-=
-utils"
-+PACKAGES =3D+ "libgps python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-=
-utils gps-utils-python"
-=20
- RPROVIDES:${PN}-dbg +=3D "python-pygps-dbg"
-=20
---=20
-2.30.2
+ 
+-- 
+2.36.0
 
 
