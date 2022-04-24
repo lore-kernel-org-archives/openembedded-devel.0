@@ -2,63 +2,62 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6739FC38A2D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 64BC4C4708E
 	for <webhook@archiver.kernel.org>; Mon, 25 Apr 2022 19:26:12 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com
- [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web09.20221.1650820938524505016
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com
+ [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web08.19935.1650820937713826004
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 24 Apr 2022 10:22:18 -0700
+ Sun, 24 Apr 2022 10:22:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Sx7yhQ4e;
- spf=pass (domain: gmail.com, ip: 209.85.214.180,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=fb5oYpum;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id c23so22105437plo.0
+Received: by mail-pg1-f181.google.com with SMTP id g9so11503551pgc.10
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 24 Apr 2022 10:22:18 -0700 (PDT)
+ Sun, 24 Apr 2022 10:22:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=enUIih9aii1Zy+9s5dzB8AxIGEfe4UDoYYlEExEO/NA=;
-        b=Sx7yhQ4eKE7G8dwMKdvIiidgi4RetP9hV9lSFrlnxtOTij0pQ9ZPp02lk/tH4CTbDj
-         2idi8L3hj9C+lzmGqHKCc8DRcoZPI/9R6XzPjrRdSwRe2Dv6vsKEEsqynxQFBDmSRIKc
-         1Nj02SqfjvoXFF8i+j86sVuVOP/+TYxylVh3FqUHJuPfSWxM78s/rB5Y5BQX3zFQKHiV
-         SEqNy9GridEuTZlJ7rR7TsOPMfGBJfVDpeM2NYBJFvyzfwYowXV29Ub0Z6iay8qG0MVF
-         upjNtkSXLr2zmaLlxd1gVmmHR6sKYZyL7mxv2bHr7ePKqFkrgufqUjVqLDdKBrCUwdXZ
-         LaSw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=VpspRbYDScQ2SGmS/kf95tbtLb08Z11L5OpGRQl7JKo=;
+        b=fb5oYpumEtslmBHWouNBlB+GOxpsFfPAn2AMqFIr3YC4aHAPccwiDZ6yFnM+f/ioC1
+         NKeQWaj6B6zCoxt927f5hdI7B162Nr04E0rowFoG2On5SxdNgJ9eApbjAqRVwEFscARr
+         HCSep2bmS1nng7dgyideBpbssENgcowyfJgjDQTvYSw1qRDyc6zwMFayPoBK5+OPngq6
+         1kmOcVCGHKzOnWeydQbgqc58HTo5B+xL7Z9/icvTeymLi8ouk7t5a/xTt9nL1ZFLuiWh
+         12E1C7nIncJW5yG5GoPfZgxX5HtCmqXb8xNguuUo3eMy70eNDi1P0VxgwBoc9J0+0vPC
+         BoXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=enUIih9aii1Zy+9s5dzB8AxIGEfe4UDoYYlEExEO/NA=;
-        b=HwkEMvA/OYZicVem81euFPl1v6LxNoZTseYsiNP+T55cHytxtg1I142K+MTsJTTA55
-         LYkj9XRFJNb2IX4sjl0CNH5Rh7URFzF/sbmisL5DWjrNBJgF75fiDFYHsxpyP+iZtFYE
-         YYNnwCu0Eunp3ymGxM/tdXVVuEkOqfblmg0EdC/XXr6etUpVJlUgBap/WupBsiD9iTBJ
-         jpDSqTP+t6Z6Etc5CSQGuybey0poSGOZzG9qdKWXL3V4ocJbS//lPlpXeUIdvRb/YHV0
-         v4Pvq9ebMIpz2EiXw1xPNmM6elcDx6sQh+s3Faf+AOuxX1bpnBAEQvjUmqBozpDQOuiT
-         5IBA==
-X-Gm-Message-State: AOAM531McW3js34I8gKswdSeZQ6J4PEb6LhIPROuVRiR60ihN24/ZuNy
-	tSf0T86KBPgdgQ+MVNyTaDImw4h3TfwnBA==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=VpspRbYDScQ2SGmS/kf95tbtLb08Z11L5OpGRQl7JKo=;
+        b=QpXxbCNv5mRO1urwvCiZwYzdDh3xHk/PJ+4zUwMhumiaAy32LTnmUAY7hHcNpcXVNN
+         rurpAW+CvXKcoaoHXyqUWmPXYIG8EMMIL/bH6o1nBcImHi+yPaSpt+gEHZsB2g2szAiQ
+         Xtm5g/p1ofhsih1Swb/DDWnCT0KtpG7uTXcIqCJNAxOH0KEsjU6tSlVwguo0a3KkQp6Y
+         sAoaDUB7WLu70WaFBI5iLTGA+Kwb9zRqVLoaEWyP6MPUzWUNYwg7uJdDNBUiAPF7NrPx
+         Irv9Mr678Ju3SGrdL9bt5MDetEzOSOaU4F6ukwrSj28vdvHoeb8je5c2Gyg49SRsclU/
+         z0PQ==
+X-Gm-Message-State: AOAM532LboxrevgxmU+anNFNoHXBz0VU8q4zCLnYbWMH9spXc2Rldsuu
+	dM4E56E15P+T0DiOAs0+EyOzXfuYwbIoug==
 X-Google-Smtp-Source: 
- ABdhPJwLiBSZ0XemP8gZAM38quN09GpBSx+oEwgUF2WoQ+yR6qW5B2PWxymb+a0nQhGLmj+v5DLYNw==
-X-Received: by 2002:a17:902:c40b:b0:15d:1361:f0f5 with SMTP id
- k11-20020a170902c40b00b0015d1361f0f5mr1580951plk.172.1650820937833;
-        Sun, 24 Apr 2022 10:22:17 -0700 (PDT)
+ ABdhPJxg/SDdooeFVv9tzr4MAzidAnk7tjnfdW9sMZXfzK0m7moQHVPS2131fadpocVOh8G+QihO/w==
+X-Received: by 2002:a63:9141:0:b0:3ab:ea6:694d with SMTP id
+ l62-20020a639141000000b003ab0ea6694dmr4861051pge.49.1650820936970;
+        Sun, 24 Apr 2022 10:22:16 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::2ca3])
         by smtp.gmail.com with ESMTPSA id
- e13-20020a63370d000000b003810782e0cdsm7253160pga.56.2022.04.24.10.22.17
+ e13-20020a63370d000000b003810782e0cdsm7253160pga.56.2022.04.24.10.22.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 24 Apr 2022 10:22:17 -0700 (PDT)
+        Sun, 24 Apr 2022 10:22:16 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] mozjs: Use vendored icu on ppc/clang
-Date: Sun, 24 Apr 2022 10:22:14 -0700
-Message-Id: <20220424172214.324878-2-raj.khem@gmail.com>
+Subject: [meta-initramfs][PATCH 1/2] klibc: Recognise --dyld-prefix clang
+ option
+Date: Sun, 24 Apr 2022 10:22:13 -0700
+Message-Id: <20220424172214.324878-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.36.0
-In-Reply-To: <20220424172214.324878-1-raj.khem@gmail.com>
-References: <20220424172214.324878-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
@@ -66,36 +65,38 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 25 Apr 2022 19:26:12 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96755
+ https://lists.openembedded.org/g/openembedded-devel/message/96754
 
-This helps compile gjs, external icu is needed with gcc-12 but not with
-clang
+This is added when usrmerge is enabled in distro
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/mozjs/mozjs-91_91.8.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../klibc/files/klcc-cross-accept-clang-options.patch        | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-91_91.8.0.bb b/meta-oe/recipes-extended/mozjs/mozjs-91_91.8.0.bb
-index af9256860c..9b990ecdf3 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs-91_91.8.0.bb
-+++ b/meta-oe/recipes-extended/mozjs/mozjs-91_91.8.0.bb
-@@ -24,6 +24,7 @@ inherit pkgconfig perlnative python3native rust
+diff --git a/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch b/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch
+index 431c75e3af..a3a0695637 100644
+--- a/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch
++++ b/meta-initramfs/recipes-devtools/klibc/files/klcc-cross-accept-clang-options.patch
+@@ -5,7 +5,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  
- DEPENDS += "zlib cargo-native python3 icu"
- DEPENDS:remove:mipsarch = "icu"
-+DEPENDS:remove:powerpc:toolchain-clang = "icu"
- 
- B = "${WORKDIR}/build"
- 
-@@ -43,6 +44,7 @@ JIT ?= ""
- JIT:mipsarch = "--disable-jit"
- ICU ?= "--with-system-icu"
- ICU:mipsarch = ""
-+ICU:powerpc:toolchain-clang = ""
- 
- do_configure() {
-     cd ${B}
+ --- a/klcc/klcc.in
+ +++ b/klcc/klcc.in
+-@@ -207,6 +207,27 @@ while ( defined($a = shift(@ARGV)) ) {
++@@ -207,6 +207,30 @@ while ( defined($a = shift(@ARGV)) ) {
+      } elsif ( $a =~ /^--([sysroot=])(.*)$/ ) {
+  	# Override gcc encoded sysroot
+  	push(@ccopt, $a);
+@@ -29,6 +29,9 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ +	push(@ccopt, $a);
+ +    } elsif ( $a =~ '-rtlib=.*' ) {
+ +	# Allow clang options
+++	push(@ccopt, $a);
+++    } elsif ( $a =~ '--dyld-prefix=.*' ) {
+++	# Allow clang options
+ +	push(@ccopt, $a);
+      } else {
+  	die "$0: unknown option: $a\n";
 -- 
 2.36.0
 
