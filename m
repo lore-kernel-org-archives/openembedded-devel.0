@@ -1,140 +1,91 @@
-Return-Path: <mingli.yu@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 202D1C4707E
-	for <webhook@archiver.kernel.org>; Mon, 25 Apr 2022 19:26:12 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web10.15569.1650789946136989965
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1EBAC352A7
+	for <webhook@archiver.kernel.org>; Mon, 25 Apr 2022 19:26:11 +0000 (UTC)
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com
+ [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.web11.13887.1650769811971140392
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 24 Apr 2022 01:45:46 -0700
+ Sat, 23 Apr 2022 20:10:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.3.146,
- mailfrom: mingli.yu@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 23O8jeBA027558
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Sun, 24 Apr 2022 01:45:40 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Sun, 24 Apr 2022 01:45:39 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Sun, 24 Apr 2022 01:45:39 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <akuster808@gmail.com>
-Subject: [meta-oe][hardknott][PATCH] makedumpfile: Upgrade to 1.6.9
-Date: Sun, 24 Apr 2022 16:45:38 +0800
-Message-ID: <20220424084538.2940999-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=hQ3QMwKy;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f173.google.com with SMTP id c23so19603128plo.0
+        for <openembedded-devel@lists.openembedded.org>;
+ Sat, 23 Apr 2022 20:10:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=yJetwtPLbsw4QzF0XmgLTPoB/gh4RnPYzykVNWXGur0=;
+        b=hQ3QMwKytcOOHABVDYe0S6F1ChwQYoWs7x/95X8YqhyO1BTKBBrO034CovDM2Gudqe
+         bBAR50jQO/6oK/dX96tShFzMeYw7EZD8L3wO/VNKU1BFgyJ/y6J66aUvC6QqeUlMFAmH
+         fVRsTlfVrOUQoMmTgnxtNgEAVfEUtK0u/6c/X+p7qg0gnxHi/aksYEli16w/A0C+VHOU
+         JPDCeVkl6S6MuD0SC152lahpO3v5zW6OJWCI1Ak/gN32YfR7xfsUu4yrwciiNZCExEok
+         d5BbR9trHKbYtji6udscmkoPgrKGD08tG/OSF+cVNVXmHzcTaKo41Uv8F/ELUT2vlnkm
+         GQGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=yJetwtPLbsw4QzF0XmgLTPoB/gh4RnPYzykVNWXGur0=;
+        b=iCr8VF0ohFXfPcW0sl6BpbFKxKMx2Y14obXIxBJCHIHSneoDEpyKZ0BlVQCOZj+Onk
+         uUd34gTszr+uMfScDgr03whEFB1fBu+8Kk8zBDQrY+14JfKeGfNU1bj8QA6dXrjD+ByA
+         AYJ7sKmaPaD23nud9h9FeWRWURgem0muTh+JfKKqyQb5hSwd0D3dpVV/AUS0D9LEHwws
+         owFbfEpfIHhaxvAbWSgCCPefXJwmpTLxd6IA6FGOOMv4/3ouQS9dtBwP/V/B3iZvPXpi
+         egqEAYZLa8+l6ZtAT5xpZRN5He31LYjJnvZdJdpm6DdXkde2Byi39o2E6HlAGTBt7xbP
+         BxeA==
+X-Gm-Message-State: AOAM530PhMJm0jeWwolKQO5SbN8whY6ZZvauht70x5dxC7s3hEyihwSQ
+	8KGWLwcHK4gcdUCkW2Vk7fHAvc8xiuWetQ==
+X-Google-Smtp-Source: 
+ ABdhPJzxeuXExgDzbCErZ20FYrjohAiTDNjxa/yNytKOp+59BZVuwDE+9/GQ/W0LvONaLZ3dKJ4rtA==
+X-Received: by 2002:a17:903:124a:b0:154:c860:6d52 with SMTP id
+ u10-20020a170903124a00b00154c8606d52mr11788441plh.159.1650769811335;
+        Sat, 23 Apr 2022 20:10:11 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::2ca3])
+        by smtp.gmail.com with ESMTPSA id
+ q13-20020a17090a2e0d00b001cd4989feebsm10630987pjd.55.2022.04.23.20.10.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 23 Apr 2022 20:10:10 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 06/12] tomoyo-tools: Drop md5sum
+Date: Sat, 23 Apr 2022 20:09:58 -0700
+Message-Id: <20220424031004.3209576-6-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.36.0
+In-Reply-To: <20220424031004.3209576-1-raj.khem@gmail.com>
+References: <20220424031004.3209576-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Apr 2022 19:26:12 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Apr 2022 19:26:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96751
+ https://lists.openembedded.org/g/openembedded-devel/message/96743
 
-From: Mingli Yu <mingli.yu@windriver.com>
-
-* Linux 5.10 introduces a new lockless ringbuffer. The new ringbuffer
-  is structured completely different to the previous iterations.
-  Add support for retrieving the ringbuffer from debug information
-  and/or using vmcoreinfo. The new ringbuffer is detected based on
-  the availability of the "prb" symbol.
-
-* Support newer kernels as follows:
-
-  - 5.10, 5.11, 5.12  (x86_64 SPARSEMEM)
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...1-makedumpfile-replace-hardcode-CFLAGS.patch | 17 +++++++++--------
- ...edumpfile_1.6.8.bb => makedumpfile_1.6.9.bb} |  2 +-
- 2 files changed, 10 insertions(+), 9 deletions(-)
- rename meta-oe/recipes-kernel/makedumpfile/{makedumpfile_1.6.8.bb => makedumpfile_1.6.9.bb} (97%)
+ meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.5.0.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
-index 270cc3562..94eac931e 100644
---- a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
-+++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
-@@ -1,4 +1,4 @@
--From af97e2ad643334b4c7c3d66f971ce9ebb2b596af Mon Sep 17 00:00:00 2001
-+From 1053cf25be28b266ba264705e11179cf4f04aa91 Mon Sep 17 00:00:00 2001
- From: Mingli Yu <mingli.yu@windriver.com>
- Date: Thu, 21 Jul 2016 18:06:21 +0800
- Subject: [PATCH] makedumpfile: replace hardcode CFLAGS
-@@ -13,14 +13,15 @@ Subject: [PATCH] makedumpfile: replace hardcode CFLAGS
- Upstream-Status: Inappropriate[oe specific]
+diff --git a/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.5.0.bb b/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.5.0.bb
+index d9f09d1744..2fcdb6bd61 100644
+--- a/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.5.0.bb
++++ b/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.5.0.bb
+@@ -6,7 +6,6 @@ HOMEPAGE = "http://tomoyo.sourceforge.jp/"
+ SECTION = "System Environment/Kernel"
  
- Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+
- ---
-  Makefile | 45 +++++++++++++++++++++++----------------------
-  1 file changed, 23 insertions(+), 22 deletions(-)
+ SRC_URI = "http://jaist.dl.sourceforge.jp/tomoyo/53357/${BP}-20170102.tar.gz"
+-SRC_URI[md5sum] = "888804d58742452fe213a68f7eadd0ad"
+ SRC_URI[sha256sum] = "00fedfac5e514321250bbe69eaccc732c8a8158596f77a785c2e3ae9f9968283"
  
--Index: git/Makefile
--===================================================================
----- git.orig/Makefile
--+++ git/Makefile
-+diff --git a/Makefile b/Makefile
-+index 6fa00bc..7aa7ae2 100644
-+--- a/Makefile
-++++ b/Makefile
- @@ -8,12 +8,6 @@ ifeq ($(strip $CC),)
-  CC	= gcc
-  endif
-@@ -79,7 +80,7 @@ Index: git/Makefile
- +              -DRELEASE_DATE='"$(DATE)"'
- +
-  SRC_BASE = makedumpfile.c makedumpfile.h diskdump_mod.h sadump_mod.h sadump_info.h
-- SRC_PART = print_info.c dwarf_info.c elf_info.c erase_info.c sadump_info.c cache.c tools.c
-+ SRC_PART = print_info.c dwarf_info.c elf_info.c erase_info.c sadump_info.c cache.c tools.c printk.c
-  OBJ_PART=$(patsubst %.c,%.o,$(SRC_PART))
- @@ -52,12 +53,12 @@ OBJ_ARCH=$(patsubst %.c,%.o,$(SRC_ARCH))
-  
-@@ -104,7 +105,7 @@ Index: git/Makefile
- +CFLAGS_COMMON += -DUSESNAPPY
-  endif
-  
-- LIBS := -lpthread $(LIBS)
-+ LIBS := $(LIBS) -lpthread
- @@ -90,14 +91,14 @@ LIBS := $(LIBS) $(call try-run,\
-  all: makedumpfile
-  
-@@ -122,7 +123,7 @@ Index: git/Makefile
-  	echo .TH MAKEDUMPFILE 8 \"$(DATE)\" \"makedumpfile v$(VERSION)\" \"Linux System Administrator\'s Manual\" > temp.8
-  	grep -v "^.TH MAKEDUMPFILE 8" $(VPATH)makedumpfile.8 >> temp.8
-  	mv temp.8 makedumpfile.8
--@@ -108,7 +109,7 @@ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(
-+@@ -108,7 +109,7 @@ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(OBJ_ARCH)
-  	gzip -c ./makedumpfile.conf.5 > ./makedumpfile.conf.5.gz
-  
-  eppic_makedumpfile.so: extension_eppic.c
-diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.8.bb b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.9.bb
-similarity index 97%
-rename from meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.8.bb
-rename to meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.9.bb
-index 6f87db177..4350ea126 100644
---- a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.8.bb
-+++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.9.bb
-@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- LICENSE = "GPLv2.0"
- 
- SRCBRANCH ?= "master"
--SRCREV = "18e0cdba48feeccea2429b3b0b2691f4314d1062"
-+SRCREV = "a9ad811c15e769c8e6d8d915a05cebc32f2ea2f5"
- 
- DEPENDS = "bzip2 zlib elfutils xz"
- RDEPENDS_${PN}-tools = "perl ${PN}"
+ S = "${WORKDIR}/${BPN}"
 -- 
-2.25.1
+2.36.0
 
 
