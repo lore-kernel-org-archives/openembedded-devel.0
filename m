@@ -2,60 +2,60 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D28F9C47082
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DCCC0C47085
 	for <webhook@archiver.kernel.org>; Mon, 25 Apr 2022 19:26:11 +0000 (UTC)
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
- [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web10.13950.1650769811202870441
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com
+ [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web08.14008.1650769814792109878
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 23 Apr 2022 20:10:11 -0700
+ Sat, 23 Apr 2022 20:10:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=mhnUP2gC;
- spf=pass (domain: gmail.com, ip: 209.85.210.180,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=cSmhcovM;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id a15so11718187pfv.11
+Received: by mail-pl1-f172.google.com with SMTP id n18so19594096plg.5
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 23 Apr 2022 20:10:11 -0700 (PDT)
+ Sat, 23 Apr 2022 20:10:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=derKOZKQRFIOOyOR83RT98ddZQNhk1wQafq9UdHV3x4=;
-        b=mhnUP2gC44B/Prrf0dNtZy5nN8q9HwJq4We0SWLAZ0xznyCc9pAkeHs0g//pEyESPY
-         V9TztmyUWZP7bvsDzFsKD38AAQTVWxG1a75gF1tTv2X34p/t7v9+rer1nRsglvjITg1V
-         LUbF2iItRzlLvrYFwklTqSnFmQI0wa9tyw/Op+N9sX3BUspInQqmx2/wlEPqmOOQWZUz
-         ISPIzV/D9FVcVzKMc82rl0qXNZW6Vyc0HgwNp+3Sjs1nOxY+SVrJwrPC63V72gi2XM0q
-         K0KAMiMsh6y4g/riL+XrgpVf/SC/ourlEvIyPYsm7EWe6lhFth0bDnyiBdYCSog2cgpq
-         AsRw==
+        bh=k3k9RHpq9jsoQP1LX188xnl5NvNzT+oNdVEwSCLJbGQ=;
+        b=cSmhcovMrVVOmSCAhzJcvIkHQDzaQhq5kZRNrChyaXL5iFrGuctRuoI4t5iKi1yjgl
+         OlEDF7BVfWiH6yJZg50MubGaLIvL6tugISjfE13RAKDTQ0qp+pyNwMeC7QzJZZgtoP51
+         ykx19jHxWNVqt2OrnzKWkXkpN3ftrAscE9rRnLLnw4ErVkY0jcLFaCURRJ+4zmy/bO1N
+         a4Of7YKGth5B0PyXSwVyOce5s5AfEutlDaTmLCW/4V2yhWmVBfHn2NALdfjpuhPXPlgb
+         PzFTAZT7ttSgAGt6wB/cDBq+BIEJ9pdOqkXUM6c7m8QuMylK3DCv+BohoHCuJdxC25nM
+         XyHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=derKOZKQRFIOOyOR83RT98ddZQNhk1wQafq9UdHV3x4=;
-        b=lhvN/BC39ug4SA5kTHt964cZ2kqkP5CooFP+XUUC4Pk/82l5Lb9OyegCGHdmkmwZTY
-         PodWNux9JsaHp2EzUIcGqZi4GuTCzB+i++/p2zkdKzoZmShYc50LBu1FJZbMFfHPSvFb
-         Oy4+KT2ZQZq9ByuAcewo2aDHcw14wkARE64SmglbxPtXbq506jD5m/yUzP6OF53T3We1
-         RGbQrVxgGRYjC95FdYNChMaAHKRI8z7X0HgGJH+1Xor0DNRBL+g/kkdb4IIsgN6skYR9
-         vMhu5C6Bi93bArFYvqQaEvxLZ8MeL1JQMrQJi7SC7cU8mef3DfFCKM4fpFKy2GiQuPBp
-         Auug==
-X-Gm-Message-State: AOAM532gB1uFbCcocIWsvHdxvNOqkEcb8E04Tledkl946mSMPX+xz5f/
-	iui5ShoQg3s7heZZhflzaAc3B0NmYaLGbQ==
+        bh=k3k9RHpq9jsoQP1LX188xnl5NvNzT+oNdVEwSCLJbGQ=;
+        b=h4RIc7Q5yYVuFczrP1TPtB3oNc3ICzrPA6fOE5JD1UFDIj5KddsQDmiWdNvlDWBp1m
+         pGIH4i9nwKPz/T0kGGYTn+0oMcQhyEFJkVxsdB9jXq+v3+2s8Jn1MXzOA7KJXyvASETV
+         MgWKyM1nvnGSasrHjn+w1HiPGIS63V2SR0ZeFM23u/5K1DTdRfEvdsijuCOdYNVeJOUO
+         FaUh/SDVC03t8iGXnW6dt3XmDagLXHA7zizXkhKyjUL3P4fQKWB1pGNqyOFr97qahkWL
+         CriHoX+PWp8dCJzHJI2Nt0PeR+CAEkJXKxnOMutFheXMBKGM6hArBNSxllOaycy5MiWk
+         sv4A==
+X-Gm-Message-State: AOAM531J2HF5EH1f9ZYDVHjGMYclJ3USAFOz7lseJc1dAOmGXs4Gz1br
+	9vQOztUWTht/Dk7skLoYCf+OH+7Il18+XQ==
 X-Google-Smtp-Source: 
- ABdhPJwVdcWIb9LF2/9DyONN2BGrOaNGUaouT2qtepzB0WMjUa6ENiwJuqBmvxlXkuEhJGVMKMLQAQ==
-X-Received: by 2002:a63:6886:0:b0:3aa:9204:d1eb with SMTP id
- d128-20020a636886000000b003aa9204d1ebmr10036015pgc.63.1650769810456;
-        Sat, 23 Apr 2022 20:10:10 -0700 (PDT)
+ ABdhPJw+ltaYrEjnGHnTpv1xsqSPqH2khlgBGjHSRkahoW2PWFC0w+/TCW/wE3t5lcynCh1Lz1PwXg==
+X-Received: by 2002:a17:903:240c:b0:153:c452:f282 with SMTP id
+ e12-20020a170903240c00b00153c452f282mr11584014plo.88.1650769814127;
+        Sat, 23 Apr 2022 20:10:14 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::2ca3])
         by smtp.gmail.com with ESMTPSA id
- q13-20020a17090a2e0d00b001cd4989feebsm10630987pjd.55.2022.04.23.20.10.09
+ q13-20020a17090a2e0d00b001cd4989feebsm10630987pjd.55.2022.04.23.20.10.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 23 Apr 2022 20:10:10 -0700 (PDT)
+        Sat, 23 Apr 2022 20:10:13 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 05/12] tomoyo-tools: Define SBINDIR
-Date: Sat, 23 Apr 2022 20:09:57 -0700
-Message-Id: <20220424031004.3209576-5-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 09/12] scsirastools: Fix build with usrmerge
+Date: Sat, 23 Apr 2022 20:10:01 -0700
+Message-Id: <20220424031004.3209576-9-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.36.0
 In-Reply-To: <20220424031004.3209576-1-raj.khem@gmail.com>
 References: <20220424031004.3209576-1-raj.khem@gmail.com>
@@ -66,27 +66,26 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 25 Apr 2022 19:26:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96742
-
-default SBINDIR is hardcoded to /sbin which does not work when using
-usrmerge
+ https://lists.openembedded.org/g/openembedded-devel/message/96746
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.5.0.bb | 2 +-
+ meta-oe/recipes-extended/scsirastools/scsirastools_1.6.6.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.5.0.bb b/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.5.0.bb
-index a1c4cc9eb9..d9f09d1744 100644
---- a/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.5.0.bb
-+++ b/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.5.0.bb
-@@ -26,5 +26,5 @@ do_compile () {
- }
+diff --git a/meta-oe/recipes-extended/scsirastools/scsirastools_1.6.6.bb b/meta-oe/recipes-extended/scsirastools/scsirastools_1.6.6.bb
+index 66620ea5ff..d3f2bd678d 100644
+--- a/meta-oe/recipes-extended/scsirastools/scsirastools_1.6.6.bb
++++ b/meta-oe/recipes-extended/scsirastools/scsirastools_1.6.6.bb
+@@ -20,7 +20,7 @@ SRC_URI[sha256sum] = "e7b997e75decb06a650c42c35cd63d0c94c34e39cf133c723337b0eeab
+ inherit autotools update-rc.d
  
- do_install() {
--    oe_runmake install INSTALLDIR=${D}
-+    oe_runmake install SBINDIR=${base_sbindir} INSTALLDIR=${D}
- }
+ # mdadm Makefile has CC set to gcc, hence override CC to ${CC}
+-EXTRA_OEMAKE += "CC='${CC}'"
++EXTRA_OEMAKE += "CC='${CC}' sbindir=${base_sbindir}"
+ 
+ 
+ do_configure:append() {
 -- 
 2.36.0
 
