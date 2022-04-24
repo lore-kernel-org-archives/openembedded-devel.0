@@ -1,131 +1,102 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F13DC38A06
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6739FC38A2D
 	for <webhook@archiver.kernel.org>; Mon, 25 Apr 2022 19:26:12 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.65])
- by mx.groups.io with SMTP id smtpd.web10.26525.1650871901099133074
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com
+ [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.web09.20221.1650820938524505016
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Apr 2022 00:31:41 -0700
+ Sun, 24 Apr 2022 10:22:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=XYRQQZxU;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.65,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1650871899; i=@fujitsu.com;
-	bh=TGvGSDXW6v7M2RnpLBKKl9G3kuWtYA158Yc0625DIGs=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=XYRQQZxUP3nluAFsFWf0fTNdVXqedcUCTTTj7XWdTGaqN4lRNir5OSPGADT+rhW0n
-	 aTChFA6aqp91Ur9JMTVK6akfTNgSl90Ox1CJXVa0nV9VHsU5+9cCybRKsCMNMwf7pg
-	 JfSUpRKl1zrwDXSKl7g6hQwuCRjFyCzYmt6UEkzmmFn9MaXo9sy5G7YToj6h/JZWRt
-	 +cV3yQHuCev0kpUpQAf2NoHMoHEZoyy+Yi44BdxWBz3+foGONEQ0JyRft0zyc78ZJ/
-	 fh34ENyGqKixFsBugA2E0VsEqNlouGDMERcKwTmBoYUVJBnv2xHJuw/PTSsTqDbPor
-	 /f29nl+Gpbwdw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrGIsWRWlGSWpSXmKPExsViZ8ORqBvtl5Z
-  ksGE1q8XFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnFi5S/mgq18Fef717I0MLbwdjFycggJPGGU
-  +LqJBcK+wCQxcx0XhL2HUWLa/nwQm01ATWL6rRusILaIgL7E0tl7mEFsZgEViRe/e9i7GDk4h
-  AXcJM79VQYxWQRUJc7skwOp4BVwkui6+YQNxJYQUJCY8vA9WCengLPExeUP2SA2OUnsbXjNAl
-  EvKHFy5hMWiOkSEgdfvGCG6FWUmH25mQXCrpCYNauNCcJWk7h6bhPzBEbBWUjaZyFpX8DItIr
-  RKqkoMz2jJDcxM0fX0MBA19DQVNdM18jQQC+xSjdRL7VUtzy1uETXUC+xvFgvtbhYr7gyNzkn
-  RS8vtWQTIzB4U4rZLu1gnNv3U+8QoyQHk5Io7z2TtCQhvqT8lMqMxOKM+KLSnNTiQ4wyHBxKE
-  ry7fYFygkWp6akVaZk5wEiCSUtw8CiJ8KZ7A6V5iwsSc4sz0yFSpxgVpcR5H4L0CYAkMkrz4N
-  pg0XuJUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjBvug/QFJ7MvBK46a+AFjMBLf5UmwqyuCQ
-  RISXVwLT1QPS9hW0mVdMC9pmeURMMectQ3r3OZvX7F9WdmUc0fA+ZXSr2OdVcfslyulbcbtNz
-  6Q3uT9rWSl2qzpK9vDQ0Y6mpAPfRM8luLz0XxB21vC61uk7SdMqva99UqjfJlW66fLPwidvOO
-  ye/GbbEF0yefebP7J3FO3emp17acyT28An7MJ8rWrIbbKJM/m3+1fh41j4uR8+la/hW7SiR/n
-  e98qPDr0wNJ63qI3N3rJ3r/WLqjOm3ruXtM9f8u1g9bKtx1c2f7qkRzVLKB9+/3ZZz772jm/w
-  c+zg+9tvZfvcZRNcws0ieKJx29LHsjDbRHxc+znT+HZ3BeDFJ+t8p8VnT9xnnN18IyorYxlAZ
-  L75RiaU4I9FQi7moOBEAVWgaOVkDAAA=
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-23.tower-587.messagelabs.com!1650871898!131251!1
-X-Originating-IP: [62.60.8.97]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.85.8; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 30612 invoked from network); 25 Apr 2022 07:31:39 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-23.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 25 Apr 2022 07:31:39 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 5FFAC10018F
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Apr 2022 08:31:38 +0100 (BST)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 3543E10019B
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Apr 2022 08:31:38 +0100 (BST)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 25 Apr 2022 08:31:31 +0100
-From: Wang Mingyu <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-perl] [PATCH] libencode-perl: upgrade 3.16 -> 3.17
-Date: Mon, 25 Apr 2022 15:31:16 +0800
-Message-ID: <1650871876-31392-5-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1650871876-31392-1-git-send-email-wangmy@fujitsu.com>
-References: <1650871876-31392-1-git-send-email-wangmy@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Sx7yhQ4e;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id c23so22105437plo.0
+        for <openembedded-devel@lists.openembedded.org>;
+ Sun, 24 Apr 2022 10:22:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=enUIih9aii1Zy+9s5dzB8AxIGEfe4UDoYYlEExEO/NA=;
+        b=Sx7yhQ4eKE7G8dwMKdvIiidgi4RetP9hV9lSFrlnxtOTij0pQ9ZPp02lk/tH4CTbDj
+         2idi8L3hj9C+lzmGqHKCc8DRcoZPI/9R6XzPjrRdSwRe2Dv6vsKEEsqynxQFBDmSRIKc
+         1Nj02SqfjvoXFF8i+j86sVuVOP/+TYxylVh3FqUHJuPfSWxM78s/rB5Y5BQX3zFQKHiV
+         SEqNy9GridEuTZlJ7rR7TsOPMfGBJfVDpeM2NYBJFvyzfwYowXV29Ub0Z6iay8qG0MVF
+         upjNtkSXLr2zmaLlxd1gVmmHR6sKYZyL7mxv2bHr7ePKqFkrgufqUjVqLDdKBrCUwdXZ
+         LaSw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=enUIih9aii1Zy+9s5dzB8AxIGEfe4UDoYYlEExEO/NA=;
+        b=HwkEMvA/OYZicVem81euFPl1v6LxNoZTseYsiNP+T55cHytxtg1I142K+MTsJTTA55
+         LYkj9XRFJNb2IX4sjl0CNH5Rh7URFzF/sbmisL5DWjrNBJgF75fiDFYHsxpyP+iZtFYE
+         YYNnwCu0Eunp3ymGxM/tdXVVuEkOqfblmg0EdC/XXr6etUpVJlUgBap/WupBsiD9iTBJ
+         jpDSqTP+t6Z6Etc5CSQGuybey0poSGOZzG9qdKWXL3V4ocJbS//lPlpXeUIdvRb/YHV0
+         v4Pvq9ebMIpz2EiXw1xPNmM6elcDx6sQh+s3Faf+AOuxX1bpnBAEQvjUmqBozpDQOuiT
+         5IBA==
+X-Gm-Message-State: AOAM531McW3js34I8gKswdSeZQ6J4PEb6LhIPROuVRiR60ihN24/ZuNy
+	tSf0T86KBPgdgQ+MVNyTaDImw4h3TfwnBA==
+X-Google-Smtp-Source: 
+ ABdhPJwLiBSZ0XemP8gZAM38quN09GpBSx+oEwgUF2WoQ+yR6qW5B2PWxymb+a0nQhGLmj+v5DLYNw==
+X-Received: by 2002:a17:902:c40b:b0:15d:1361:f0f5 with SMTP id
+ k11-20020a170902c40b00b0015d1361f0f5mr1580951plk.172.1650820937833;
+        Sun, 24 Apr 2022 10:22:17 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::2ca3])
+        by smtp.gmail.com with ESMTPSA id
+ e13-20020a63370d000000b003810782e0cdsm7253160pga.56.2022.04.24.10.22.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 24 Apr 2022 10:22:17 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/2] mozjs: Use vendored icu on ppc/clang
+Date: Sun, 24 Apr 2022 10:22:14 -0700
+Message-Id: <20220424172214.324878-2-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.36.0
+In-Reply-To: <20220424172214.324878-1-raj.khem@gmail.com>
+References: <20220424172214.324878-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 25 Apr 2022 19:26:12 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96769
+ https://lists.openembedded.org/g/openembedded-devel/message/96755
 
-Changelog:
-==========
-! bin/enc2xs t/enc_data.t t/enc_module.t t/encoding.t t/jperl.t
-  Pulled: Fix Issue #144, spurious warnings from -Wc++-compate,
-   and a few related nits
-  https://github.com/dankogai/p5-encode/pull/168
-! MANIFEST
-  add t/utf32warnings.t which was missing
-! t/taint.t
-  Pulled: Skip taint tests if your perl was built without taint support
-  https://github.com/dankogai/p5-encode/pull/167
-! Unicode/Unicode.pm
-  Pulled: fix link to Unicode standard
-  https://github.com/dankogai/p5-encode/pull/165
-! t/Unicode_trailing_nul.t
-  Pulled: Use note() instead of diag()
-  https://github.com/dankogai/p5-encode/pull/164
+This helps compile gjs, external icu is needed with gcc-12 but not with
+clang
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../{libencode-perl_3.16.bb => libencode-perl_3.17.bb}          | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libencode/{libencode-perl_3.16.bb => libencode-perl_3.17.bb} (97%)
+ meta-oe/recipes-extended/mozjs/mozjs-91_91.8.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-perl/recipes-perl/libencode/libencode-perl_3.16.bb b/meta-perl/recipes-perl/libencode/libencode-perl_3.17.bb
-similarity index 97%
-rename from meta-perl/recipes-perl/libencode/libencode-perl_3.16.bb
-rename to meta-perl/recipes-perl/libencode/libencode-perl_3.17.bb
-index 8d239e7e2e..8b4f292a35 100644
---- a/meta-perl/recipes-perl/libencode/libencode-perl_3.16.bb
-+++ b/meta-perl/recipes-perl/libencode/libencode-perl_3.17.bb
-@@ -15,7 +15,7 @@ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM = "file://META.json;beginline=8;endline=10;md5=b12e3be1e17a7e99ca4f429ff32c28b5"
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-91_91.8.0.bb b/meta-oe/recipes-extended/mozjs/mozjs-91_91.8.0.bb
+index af9256860c..9b990ecdf3 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-91_91.8.0.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs-91_91.8.0.bb
+@@ -24,6 +24,7 @@ inherit pkgconfig perlnative python3native rust
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/DANKOGAI/Encode-${PV}.tar.gz"
--SRC_URI[sha256sum] = "e5e91d98a97de70dccecc2a25d049a0b5f5f12228c618680020d73043355294c"
-+SRC_URI[sha256sum] = "b44cbf7dd60ec6128ec575dd348484975086522611bc7580cfd305a095faa6d2"
+ DEPENDS += "zlib cargo-native python3 icu"
+ DEPENDS:remove:mipsarch = "icu"
++DEPENDS:remove:powerpc:toolchain-clang = "icu"
  
- UPSTREAM_CHECK_REGEX = "Encode\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
+ B = "${WORKDIR}/build"
  
+@@ -43,6 +44,7 @@ JIT ?= ""
+ JIT:mipsarch = "--disable-jit"
+ ICU ?= "--with-system-icu"
+ ICU:mipsarch = ""
++ICU:powerpc:toolchain-clang = ""
+ 
+ do_configure() {
+     cd ${B}
 -- 
-2.25.1
+2.36.0
 
 
