@@ -2,61 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C94EEC47080
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E630DC47086
 	for <webhook@archiver.kernel.org>; Mon, 25 Apr 2022 19:26:11 +0000 (UTC)
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
- [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web09.14270.1650769809247807235
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com
+ [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web09.14273.1650769817410895740
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 23 Apr 2022 20:10:09 -0700
+ Sat, 23 Apr 2022 20:10:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=FR/6Ju0R;
- spf=pass (domain: gmail.com, ip: 209.85.210.180,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=mbdn3xlY;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id j17so11727131pfi.9
+Received: by mail-pl1-f172.google.com with SMTP id d15so5116442plh.2
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 23 Apr 2022 20:10:09 -0700 (PDT)
+ Sat, 23 Apr 2022 20:10:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=1iZTeCrHE9SocaQ61F7S0u3gTxC6HxMZ2UxL9wziKDo=;
-        b=FR/6Ju0RPRuAixBcgabZTs0Et7T0BA5BKADpkZ66c8nuiDVgiYeD7hFrPoybbLM+8P
-         50Ygn8qS361k1otHgDUelAuvCygun7xJNPypaMGea2ZmOSposkQdaaugrpVhjLkWFlcM
-         0twi1SuFuFMv6z5Y3Unydb94YcE1/+l1C5ccd4MNYZ2fyQhixQdWoIKBh163JjJFC020
-         dwORYhk2td3OjTQ8nxa5iYGoy7U4QfncM2Zn4QilQjIAGxSPaxTB7LxeZO8MwqdyUCHf
-         FBT9YstUFVmpSRzjp/81qlkImjBbsBGiL6D8gzjF0augr+VxFxSDUP5OqB/H3P1tZkAe
-         C9+A==
+        bh=ZHcQiTqXlYcMin9/KxM7R45cIEapfcEgi7LoTaqyDOo=;
+        b=mbdn3xlYfhPVY8k8KVrBJeG5LshYMn0O5ocFwO6T6eqakUAASsiEDkBctjKS1aU2BZ
+         ktPPfoXjHHzHISTZ/cFlBkki45QWO+qFLx08Cv+keBTNVEfLDyqnmsfRYoYnScjpbSNU
+         5JxgwL/h2I/TvngRL2XHIo2PL/+WuvvzkWh/JAIOcrOxTd7v0TyOj/vphbz+wW8pwMjM
+         BhsAPkrkK+CMX/A2bjvkf9xsTkEMGHa+2tXXSeFzWVRlr4fwh51twknwlou7Qs1OADvC
+         xc4QL87DAwbk3ivzLKTjUHJyB62Bw0wITZ3pWvanJu31Vp985WsGzKnX8KzxMBKiPnX1
+         e6Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=1iZTeCrHE9SocaQ61F7S0u3gTxC6HxMZ2UxL9wziKDo=;
-        b=79rvB4CP+Qyi5I9SxMZLiN0sy4iteiBntlyvPuK5xiAPZTpBBpdGjXQbqxfrDqEkab
-         H1K8DgfDFyIRiAYrQV/PfdeKtIsUjTGM8KebfCYCplO9Ir6JyCdwz/hlwygjz46dU2Re
-         XSOigJzuMBBhWmnKXYZxVjlXVt9PLc2Y7ciWn6aimv+bmys4dwJZ0hIReQKgOjKLU9I1
-         aWIMY80OFwqE4u6gD5EL9r3Iur5K3bKR0GxSRuiR6eGKhQ9C7l/4cKMAgT2o1Oaa0z3N
-         fF2zutxePi706ZImt+qtTfKIaHK6z+eJVrk7P7C/me6kx1/wCH7QYzRNlxnZeoOSVQzq
-         caWQ==
-X-Gm-Message-State: AOAM533ynydrPLc5y7yStuvOWhENz0cEIiRedrKmHLMUxQmTaIDVMrXO
-	7bLQn3JfsRp4AzWhmagKA8/wqkBNyz1BOQ==
+        bh=ZHcQiTqXlYcMin9/KxM7R45cIEapfcEgi7LoTaqyDOo=;
+        b=KGef+XCV4OaWatjLFPM2VF2vs23KUv7h8L0JM/rsIXRZ+n1AH0QZizTyLtpk3MxZYs
+         8y5E/unVfKBhLYFYOnHc/srcLFM5yuG8wYGU8dL2tQRwyZaeA8nkfRxME50sQYZmMZhg
+         /29GhuC82KZJMhPmJyqUA+FsLytahNo35vUfCaxfXVExkk3Kc2lC7biMU4kjmpx4FNkv
+         dMSkXiiYcTROY118CgfCvLGzHocyqpc8DXyuRnUOY9vgKUxQSCsLNjHolQN39v/1H+hn
+         HmHNr6jbyqD4LtobHxWzfVljeyG7ypCCYUpaLC8BP79uMB55+FNs07u6Brl8GyJk65Np
+         Qwlg==
+X-Gm-Message-State: AOAM5337fufGQ7BG0Ih+VmK6ERVkXBtEunoJxEOHSOudJw4NOkl3eWng
+	ZuGZ4ms/k84MdrF75hAeQe9m+GoyBiA28g==
 X-Google-Smtp-Source: 
- ABdhPJxtwxUPSNsEgLY5POHlao5YAuGWWtZnIOC4mO5xr2KaUSzdVavOS5O0VlcKknh0GbmRGDn1Ug==
-X-Received: by 2002:a63:101:0:b0:3aa:b7e9:6708 with SMTP id
- 1-20020a630101000000b003aab7e96708mr9992310pgb.111.1650769808528;
-        Sat, 23 Apr 2022 20:10:08 -0700 (PDT)
+ ABdhPJwNIesaTwdbyUtrNXVSDadaLO91TXZ0Ax0ZM6jZv+3cwSqyf+BSd7Ev0SJ0Vr9LAuWN+JYhug==
+X-Received: by 2002:a17:902:b189:b0:14d:6f87:7c25 with SMTP id
+ s9-20020a170902b18900b0014d6f877c25mr12023127plr.31.1650769816755;
+        Sat, 23 Apr 2022 20:10:16 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::2ca3])
         by smtp.gmail.com with ESMTPSA id
- q13-20020a17090a2e0d00b001cd4989feebsm10630987pjd.55.2022.04.23.20.10.07
+ q13-20020a17090a2e0d00b001cd4989feebsm10630987pjd.55.2022.04.23.20.10.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 23 Apr 2022 20:10:07 -0700 (PDT)
+        Sat, 23 Apr 2022 20:10:16 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 03/12] boinc-client: Do not overwrite same file when
- using usrmerge
-Date: Sat, 23 Apr 2022 20:09:55 -0700
-Message-Id: <20220424031004.3209576-3-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 12/12] ufw: Fix build with usrmerge distro
+ feature
+Date: Sat, 23 Apr 2022 20:10:04 -0700
+Message-Id: <20220424031004.3209576-12-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.36.0
 In-Reply-To: <20220424031004.3209576-1-raj.khem@gmail.com>
 References: <20220424031004.3209576-1-raj.khem@gmail.com>
@@ -67,29 +67,31 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 25 Apr 2022 19:26:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96740
-
-in case usrmerge is enabled, unit file is already in expected location
+ https://lists.openembedded.org/g/openembedded-devel/message/96749
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/boinc/boinc-client_7.18.1.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-networking/recipes-connectivity/ufw/ufw_0.36.1.bb | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/boinc/boinc-client_7.18.1.bb b/meta-oe/recipes-extended/boinc/boinc-client_7.18.1.bb
-index 5e991d3099..abcb304d30 100644
---- a/meta-oe/recipes-extended/boinc/boinc-client_7.18.1.bb
-+++ b/meta-oe/recipes-extended/boinc/boinc-client_7.18.1.bb
-@@ -76,7 +76,8 @@ do_compile:prepend () {
- }
+diff --git a/meta-networking/recipes-connectivity/ufw/ufw_0.36.1.bb b/meta-networking/recipes-connectivity/ufw/ufw_0.36.1.bb
+index 70216a85e3..6dca784bf4 100644
+--- a/meta-networking/recipes-connectivity/ufw/ufw_0.36.1.bb
++++ b/meta-networking/recipes-connectivity/ufw/ufw_0.36.1.bb
+@@ -38,6 +38,13 @@ RRECOMMENDS:${PN} = " \
+                      kernel-module-nf-recent \
+ "
  
++
++do_configure:prepend() {
++    if ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','true','false',d)}; then
++        sed -i -e 's|/lib|${nonarch_base_libdir}|' ${S}/setup.py
++    fi
++}
++
  do_install:append() {
--	if [ -e ${D}${nonarch_libdir}/systemd/system/boinc-client.service ]; then
-+	if ! ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','true','false',d)} -a \
-+            -e ${D}${nonarch_libdir}/systemd/system/boinc-client.service; then
- 		install -d ${D}${systemd_system_unitdir}
- 		mv \
- 		${D}${nonarch_libdir}/systemd/system/boinc-client.service \
+     install -d ${D}${systemd_unitdir}/system/
+     install -m 0644 ${S}/doc/systemd.example ${D}${systemd_unitdir}/system/ufw.service
 -- 
 2.36.0
 
