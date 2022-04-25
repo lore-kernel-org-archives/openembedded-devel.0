@@ -2,73 +2,73 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17508C47096
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 28923C4743F
 	for <webhook@archiver.kernel.org>; Mon, 25 Apr 2022 19:26:13 +0000 (UTC)
-Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web12.26609.1650871900946510812
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.1])
+ by mx.groups.io with SMTP id smtpd.web09.26839.1650871900705342317
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 25 Apr 2022 00:31:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=f7T3jBvO;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=S7dM6R5Y;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1650871899; i=@fujitsu.com;
-	bh=hX87dVICjM+TPkrdMDGNLO8TD6re/+YMMw3UAkOhRPk=;
+	bh=pXxUsE4vVqxvlzZtEdkjtEHrpiYgIS7o9wd5NFYHmak=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=f7T3jBvOQZ2JkIko6xvbdMWuAxVsiW6MsGsg3VKP6XmZyLJElu3XW1rGUScqrTsn3
-	 z/WpKK1uCLhCkrmLIdW12FP+10oJ8iPFaboKjWADYguxFyWDOkgciqkGL7B3OL4sjX
-	 JUzYZABZrPfm/M9EPzWj91ZnbnTgBM5nbFwXq+PHukrA4w4B2GLKtj7RKwe1Y1KQO7
-	 aVvg3NIXhb/DhhPUOvraioGgvdLcTOxVaioniGfGYtQ+dV5ZgYfsNX0TD0beSV4srW
-	 idskYMSJwBRT/Gv4lIYR9Fw4brKvaybc7fVp+x/gXjnnoxN9gZgVLou4ltYU15wUt2
-	 j+ayQzv0QUUYw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrFIsWRWlGSWpSXmKPExsViZ8ORqBvll5Z
-  ksOmHicXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmtE+4RFTwTPeik8vu1kbGKfwdDFycggJPGGU
-  eH5Qv4uRC8i+wCRxedlzVghnD6PE3D972EGq2ATUJKbfusEKYosI6Essnb2HGcRmFlCRePG7B
-  6xGWMBV4nvPdbA4i4CqxNT/CxhBbF4BJ4md39+xgNgSAgoSUx6+B6vhFHCWuLj8IRvEFU4Sex
-  tes0DUC0qcnPmEBWK+hMTBFy+YIXoVJWZfboaaUyExa1YbE4StJnH13CbmCYyCs5C0z0LSvoC
-  RaRWjXVJRZnpGSW5iZo6uoYGBrqGhqa6Zua6hmZleYpVuol5qqW5yal5JUSJQWi+xvFgvtbhY
-  r7gyNzknRS8vtWQTIzCYU4qdl+1gfNf3U+8QoyQHk5Io7z2TtCQhvqT8lMqMxOKM+KLSnNTiQ
-  4wyHBxKEry7fYFygkWp6akVaZk5wMiCSUtw8CiJ8KZ7A6V5iwsSc4sz0yFSpxh1Of5++ruXWY
-  glLz8vVUqc970PUJEASFFGaR7cCFiUX2KUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzJsOMoU
-  nM68EbtMroCOYgI74VJsKckRJIkJKqoFp7apbsolPjV6pzOHTuvj7FYdm1L9ye8YP7Q0tVuFf
-  woOl7lfxztNT37uX7e329fvrL+yxezG3w6p9yXWdfQoGM+aKX1nwOPrVE4+vOb+q00x0S09Wf
-  dJ0eLM4MWeOlee8+DjTC0GMyoyiP8UeL9+4X776aPUkzhm8N/q5ktVTTcRr1vxMKRPYmy+xeV
-  eZylI2J8PZph5hjw5O7fs9y3GNx/eyC0u5k8PXHec+pv1XVG5eUegRtbnPA6NL+optHu9Rzbq
-  SuVBcxfBwmN+R5TnejN95BTee6vmjd/1Uaoj6wmUN75ddux/27YnRdn5nbbmn3DZz113c/cZm
-  8We7dTs2se51dGpfF1A6L9/QmLlCiaU4I9FQi7moOBEAr/uGxW0DAAA=
+	b=S7dM6R5YPoJPIpmsF+J3vANO7aIfkTbOor/R/COWVcBq0hAOTukCMmRvv6khEJZWv
+	 ZE3KP/JQQySHxhuausajgWh1tidVv1VzAmdgUgX6hM0ZtP4/kgUaQ23DrH2SLaar3D
+	 ISDgSh42cRkOqTwmEosvU3jl5qvExkuY0TFPMqF3qZ6b2R+ot6HJb8M4RjXMgRCuLD
+	 L7kgyTdZMmEXhnOKpl8Dyt5LWgJtgB7RqHnCwp2ZtsHX0Nwvh9BDNs6EJfqtRiXEuI
+	 AJUKDAHrrNhCTPzSOJRb9VEaIx4e7LdiiJ0fLF7LkSurRsWYPo9WI3bHbDG3W6tWq+
+	 Q20Ea8GKGCxcQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrNIsWRWlGSWpSXmKPExsViZ8ORqBvll5Z
+  kcHOfnsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmjH7zxbmgifcFSd+b2FpYNzA1cXIxSEk8IRR
+  YvOmtawQzgUmid1rW1kgnD2MEs8/vGbuYuTkYBNQk5h+6wYriC0ioC+xdPYesDizgIrEi9897
+  CC2sICXxN3dV1lAbBYBVYmOMwcYuxg5OHgFnCSmtNqBhCUEFCSmPHwP1sop4CxxcflDNhBbCK
+  hkb8NrsFZeAUGJkzOfsECMl5A4+OIFM0SvosTsy80sEHaFxKxZbUwQtprE1XObmCcwCs5C0j4
+  LSfsCRqZVjNZJRZnpGSW5iZk5uoYGBrqGhqa6xua6hmZGeolVuol6qaW65anFJbpAbnmxXmpx
+  sV5xZW5yTopeXmrJJkZgGKcUqy7awbh/1U+9Q4ySHExKorz3TNKShPiS8lMqMxKLM+KLSnNSi
+  w8xynBwKEnw7vYFygkWpaanVqRl5gBjCiYtwcGjJMKb7g2U5i0uSMwtzkyHSJ1iVJQS533vA5
+  QQAElklObBtcHi+BKjrJQwLyMDA4MQT0FqUW5mCar8K0ZxDkYlYd50kCk8mXklcNNfAS1mAlr
+  8qTYVZHFJIkJKqoHJ23tt4SxuH3vb8Amp32MsK5L27NNyk+9fsyiRW0Lyp4XXpc2zjkoet7ly
+  udNw3bmTwQ+mSroe3auddycv0t97sXyP5tNeOauUmwrSu3on6pXwV24r3vb7psDsvgU9L1sf/
+  Z97V3KBcjPX0bezVSX2sOWe+LZB1vVPvjGT2stj59rCxR55X7cJPBee9vDowxChhWL3H2///Y
+  zP8JeTlN1lzU/XF3vENHBmFkzf1H7u6Hk+g+6y4i4tC5a9upruagKPJqbIKfxWbrJW0nshcn3
+  up8Yg0yA5Mc4gPuYmBg5drdadH6qdbnQu8kmsM+T/UFjQVJp9NE3G//xrnZezE3yvzchbOzGH
+  q89qSrFrgxJLcUaioRZzUXEiAG4KMkJeAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-7.tower-532.messagelabs.com!1650871898!131776!1
+X-Msg-Ref: server-13.tower-565.messagelabs.com!1650871898!70149!1
 X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.85.8; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 32419 invoked from network); 25 Apr 2022 07:31:38 -0000
+Received: (qmail 15926 invoked from network); 25 Apr 2022 07:31:38 -0000
 Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-7.tower-532.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-13.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 25 Apr 2022 07:31:38 -0000
 Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 43E931001A3
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 4AC771001A4
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 25 Apr 2022 08:31:38 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 2B48F100192
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 31448100198
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 25 Apr 2022 08:31:38 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 25 Apr 2022 08:31:27 +0100
+ (TLS) id 15.0.1497.32; Mon, 25 Apr 2022 08:31:29 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH] libadwaita: upgrade 1.1.0 -> 1.1.1
-Date: Mon, 25 Apr 2022 15:31:14 +0800
-Message-ID: <1650871876-31392-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-perl] [PATCH] libdbd-sqlite-perl: upgrade 1.68 -> 1.70
+Date: Mon, 25 Apr 2022 15:31:15 +0800
+Message-ID: <1650871876-31392-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1650871876-31392-1-git-send-email-wangmy@fujitsu.com>
 References: <1650871876-31392-1-git-send-email-wangmy@fujitsu.com>
@@ -83,55 +83,40 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 25 Apr 2022 19:26:13 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96768
+ https://lists.openembedded.org/g/openembedded-devel/message/96767
 
 Changelog:
 ==========
-- AdwAvatar
-  - Fix initials not updating after setting custom-image
-- AdwSplitButton:
-  - Avoid state changes during dispose
-- AdwViewSwitcherTitle
-  - Clear pending idle callback on unrealize
-- AdwPreferencesGroup
-  - Annotation fixes
-- AdwPreferencesGroup
-  - Annotation fixes
-- AdwTabBar
-  - Ensure indicators are clickable with inverted=true
-  - Fix resize deferring with non-expanded tabs
-  - Fix scroll animation stopping too early
-- Mention AdwComboRow:selected type in migration guide
-- Fix a Meson error when using as a subproject
-- Translation updates:
-  - Abkhazian
-  - British English
-  - Bulgarian
-  - Catalan
-  - Dutch
+    - Fix doc to use the correct attribute with sqlite_ (GH#86, eekboek++)
+    - Modify the fix to silence the sqlite_unicode warning not to check
+      the attribute twice
+    - Fix an encoding issue of naive (GH#83, HaraldJoerg++)
+    - Typo (GH#85, grr++)
+    - Silenced deprecation warning of sqlite_unicode not to break
+      tests of existing applications
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libadwaita/{libadwaita_1.1.0.bb => libadwaita_1.1.1.bb}     | 2 +-
+ .../{libdbd-sqlite-perl_1.68.bb => libdbd-sqlite-perl_1.70.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/libadwaita/{libadwaita_1.1.0.bb => libadwaita_1.1.1.bb} (86%)
+ rename meta-perl/recipes-perl/libdb/{libdbd-sqlite-perl_1.68.bb => libdbd-sqlite-perl_1.70.bb} (94%)
 
-diff --git a/meta-gnome/recipes-gnome/libadwaita/libadwaita_1.1.0.bb b/meta-gnome/recipes-gnome/libadwaita/libadwaita_1.1.1.bb
-similarity index 86%
-rename from meta-gnome/recipes-gnome/libadwaita/libadwaita_1.1.0.bb
-rename to meta-gnome/recipes-gnome/libadwaita/libadwaita_1.1.1.bb
-index d4820d1244..8ca3be352e 100644
---- a/meta-gnome/recipes-gnome/libadwaita/libadwaita_1.1.0.bb
-+++ b/meta-gnome/recipes-gnome/libadwaita/libadwaita_1.1.1.bb
-@@ -11,7 +11,7 @@ DEPENDS = " \
+diff --git a/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.68.bb b/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.70.bb
+similarity index 94%
+rename from meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.68.bb
+rename to meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.70.bb
+index c7baeab6be..17ec3298c8 100644
+--- a/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.68.bb
++++ b/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.70.bb
+@@ -14,7 +14,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/I/IS/ISHIGAKI/DBD-SQLite-${PV}.tar.gz \
+            file://sqlite-perl-test.pl \
+ "
  
- inherit gnomebase gobject-introspection gtk-doc vala features_check
+-SRC_URI[sha256sum] = "0e84e831a50d547d2e634b66650455f1791f223495c9138db82d42360c691e61"
++SRC_URI[sha256sum] = "40fd8ddf539e0e773a7a4e6d376794c3301459f9ab0050978bdcf97113dafe3e"
  
--SRC_URI[archive.sha256sum] = "aff598803e810cc28266472cf5bf65e5ed5b90bb3523e206b06b14527325010e"
-+SRC_URI[archive.sha256sum] = "491169d4f6a11765328996bc088272d05c7235453bc0ee73c20dfd4bd67b401c"
+ UPSTREAM_CHECK_REGEX = "DBD\-SQLite\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
  
- ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
- REQUIRED_DISTRO_FEATURES = "opengl"
 -- 
 2.25.1
 
