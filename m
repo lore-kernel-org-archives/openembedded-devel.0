@@ -2,74 +2,76 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EDE50C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1204C3E8A8
 	for <webhook@archiver.kernel.org>; Mon, 25 Apr 2022 19:26:12 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com
- [195.245.230.17])
- by mx.groups.io with SMTP id smtpd.web08.26658.1650871805636247062
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.66])
+ by mx.groups.io with SMTP id smtpd.web12.26602.1650871805576951685
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 25 Apr 2022 00:30:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=NZ/Q0YYS;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.17,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=JonEHkxF;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.66,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1650871803; i=@fujitsu.com;
-	bh=BKl/6R0eaRUjhco28UvU2Fr5ynSLqJCs+YCLLi+y1Bg=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=NZ/Q0YYSK6IWkKtYSINNW4qpKo6zqknMMl1o7cHRSpTScqk1+27I21PbmHrB9VszM
-	 /L9TQO4oxmv4oQk9thq0KeZD9xqG1XKmjsBpwwHbaCPHbGpoWymtQRDdajyueBbwDi
-	 yKq75Ae4ET5aLCP7RFQLbf1tgdbLNNWC3ZF8Jw+1NVgu8OkoVGnKFg6LAV9rF9j9Uq
-	 tFBriCK2wH+YPolf0Ky/M3arzFwmG7+0a89Pzpr859I0mXHrk9kjQd7yUdaCIfl+FT
-	 HGsLeKrf2kKAUcl3RszIwXoCt8P3JFKBtLZj0pTbX7FSv/F2GoSQOu/UhNZDmF/ICO
-	 kgbJ/Z2PtGCww==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrMIsWRWlGSWpSXmKPExsViZ8MxSfe3b1q
-  SwaLF7BYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0b3M8+CDRwVPfMOsjcw3mHvYuTkEBJ4wijx
-  6zJ3FyMXkH2BSeL/tw42CGcPo8TOc20sIFVsAmoS02/dYAWxRQT0JZbO3sMMYjMLqEi8+N0DN
-  klYwF/i/oONTCA2i4CqxJJ7KxlBbF4BJ4nHUy6AxSUEFCSmPHzPDBEXlDg58wkLxBwJiYMvXj
-  BD1ChKzL7czAJhV0jMmtUG1asmcfXcJuYJjPyzkLTPQtK+gJFpFaNVUlFmekZJbmJmjq6hgYG
-  uoaGprpmukaGBXmKVbqJeaqlueWpxia6hXmJ5sV5qcbFecWVuck6KXl5qySZGYEimFLNd2sE4
-  t++n3iFGSQ4mJVHeeyZpSUJ8SfkplRmJxRnxRaU5qcWHGGU4OJQkeLm8gHKCRanpqRVpmTnA+
-  IBJS3DwKInwpnsDpXmLCxJzizPTIVKnGI05rl65speZ4waIFGLJy89LlRLnLfQBKhUAKc0ozY
-  MbBIvbS4yyUsK8jAwMDEI8BalFuZklqPKvGMU5GJWEedNBpvBk5pXA7XsFdAoT0CmfalNBTil
-  JREhJNTD59l9Keau4VmPpy62Gry6X/dxXxX1D8M7za2Up+eq83xfyfis7/ZCPPSXAvEqKQ2Dy
-  /BtH6+yVSphaZq3d1X3V/eHurJsz/VMa9rrteXpZKPWL8MbrT87mKU9t/7L+zEqLkD/BzNMa5
-  m22e/wySain5rB3Zb3B1hWMAnZFyzYItzGLOeuVd5zmLn5j/ezx/gfedn0al8ISL+tKr0v/oS
-  xeqsvzPPbCh/kcmpXXG4+VfYhu/rEv4n1bwpTlN6KsHM+ktgkf0a023OiTFRWhZFy/4sXMcDa
-  327c41XIDnpX7d0vlxC1xvfTdt80qZSF7ghBXXOuUBCfrWq8bux9eaM0O/LA8p2r/lmXvXuw5
-  oKTEUpyRaKjFXFScCABpeezyVgMAAA==
+	bh=O66kSEckeuGVbf8q1rZzzAbLtV+ohTNhahuUUz7rdY4=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=JonEHkxFpKW42ysE51J0SPCJJu4xAvngi0U/YHcWbZYTKlGzxxOyC4uXtGDZT3Jr5
+	 UHR3JGamwSnrWQ/7jnPWesNHQ6c9LXoNcxKxzjxo60VtrM5Y+LUq5lZF77IDcOwHD8
+	 /gI6TpXLKm48ONeW65u6Yt9Z6k4VXkoIsgaIeRFexNWQJI3kLoyKHheNNzXRzN6rlU
+	 hLvsKZVpkkAj2SJxWZQF2uzdP+3CGttpv67vXgiuMz5ViLDIOp472IESKoQ2hmBT4A
+	 7Xo8EKhyM/9+CKftWpVStLmGRlGskIG2fdULOEC3rc7ldokNTovpWLxNZwmVsMDTkN
+	 oW8Nuk9JUlZxg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrFIsWRWlGSWpSXmKPExsViZ8MxSfe3b1q
+  SwbUeTouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPSrNVsBVc5KtrXLWJpYHzL3sXIxSEk8IRR
+  4sOv9WxdjJxAzgUmib9bWCASexglprZcYgJJsAmoSUy/dYMVxBYR0JdYOnsPM4jNLKAi8eJ3D
+  zuILSxgL3HzxWYWEJtFQFXi6qtdYEN5BZwkNh87xAhiSwgoSEx5+B6sl1PAWWJC4xUWiMVOEj
+  9m/YCqF5Q4OfMJC8R8CYmDL14wQ/QqSsy+3MwCYVdIzJrVxgRhq0lcPbeJeQKj4Cwk7bOQtC9
+  gZFrFaJVUlJmeUZKbmJmja2hgoGtoaKprqGtkaK6XWKWbqJdaqlueWlyia6iXWF6sl1pcrFdc
+  mZuck6KXl1qyiREYxCnFjDd3MLb2/dQ7xCjJwaQkynvPJC1JiC8pP6UyI7E4I76oNCe1+BCjD
+  AeHkgQvlxdQTrAoNT21Ii0zBxhRMGkJDh4lEd50b6A0b3FBYm5xZjpE6hSjopQ4b6EPUEIAJJ
+  FRmgfXBoviS4yyUsK8jAwMDEI8BalFuZklqPKvGMU5GJWEedNBpvBk5pXATX8FtJgJaPGn2lS
+  QxSWJCCmpBqbkHSu3J8l0Ja2OqV5VdTshU8mroKk3NHvl8r55mg/ubH2vXzvljBjLAd52wblP
+  Wzc1f/PT4IjPDVhc4ysQI6wfYr0/cNXd3/8+Xr+6YNMLYYU1kgcUjCt5mRxSKlbL3Qlm5FyX1
+  Hfl77/pQVc+GnQvkMtuzHvpsTHeuCE/w2vhdIEfAgKBhzetPHfE7EpwrsmX6Z++eixY+XLVae
+  PVETEXvcUl+TfFmy7J6/bbJea8eZPWJf95DSW3t006M8HczvNTitCzpTw/uyqOGC1oX7j2e0V
+  t6NJ+hz8pqy+86fi9UHwqg1nHJO61L/++/CEz21R6vmL8gTML1h0ti5+Vtq6/7qNK4aM710VU
+  bdevsV2rxFKckWioxVxUnAgAH9up710DAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-17.tower-585.messagelabs.com!1650871802!131345!1
+X-Msg-Ref: server-11.tower-587.messagelabs.com!1650871802!131031!1
 X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.85.8; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 1618 invoked from network); 25 Apr 2022 07:30:03 -0000
+Received: (qmail 9709 invoked from network); 25 Apr 2022 07:30:03 -0000
 Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-17.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-11.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 25 Apr 2022 07:30:03 -0000
 Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 7C4C2100441
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 9505E10034F
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 25 Apr 2022 08:30:02 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 6D9C610033A
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 7E9C710044D
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 25 Apr 2022 08:30:02 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 25 Apr 2022 08:29:45 +0100
+ (TLS) id 15.0.1497.32; Mon, 25 Apr 2022 08:29:47 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] ctags: upgrade 5.9.20220410.0 ->
- 5.9.20220417.0
-Date: Mon, 25 Apr 2022 15:29:32 +0800
-Message-ID: <1650871776-31335-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] evince: upgrade 42.1 -> 42.2
+Date: Mon, 25 Apr 2022 15:29:33 +0800
+Message-ID: <1650871776-31335-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1650871776-31335-1-git-send-email-wangmy@fujitsu.com>
+References: <1650871776-31335-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -81,30 +83,35 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 25 Apr 2022 19:26:12 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96761
+ https://lists.openembedded.org/g/openembedded-devel/message/96762
+
+Changelog:
+==========
+comics:
+  * Fix use-after-free (#1776)
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../ctags/{ctags_5.9.20220410.0.bb => ctags_5.9.20220417.0.bb}  | 2 +-
+ .../recipes-gnome/evince/{evince_42.1.bb => evince_42.2.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/ctags/{ctags_5.9.20220410.0.bb => ctags_5.9.20220417.0.bb} (95%)
+ rename meta-gnome/recipes-gnome/evince/{evince_42.1.bb => evince_42.2.bb} (92%)
 
-diff --git a/meta-oe/recipes-devtools/ctags/ctags_5.9.20220410.0.bb b/meta-oe/recipes-devtools/ctags/ctags_5.9.20220417.0.bb
-similarity index 95%
-rename from meta-oe/recipes-devtools/ctags/ctags_5.9.20220410.0.bb
-rename to meta-oe/recipes-devtools/ctags/ctags_5.9.20220417.0.bb
-index 96be4e3ffd..0d32861c8b 100644
---- a/meta-oe/recipes-devtools/ctags/ctags_5.9.20220410.0.bb
-+++ b/meta-oe/recipes-devtools/ctags/ctags_5.9.20220417.0.bb
-@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+diff --git a/meta-gnome/recipes-gnome/evince/evince_42.1.bb b/meta-gnome/recipes-gnome/evince/evince_42.2.bb
+similarity index 92%
+rename from meta-gnome/recipes-gnome/evince/evince_42.1.bb
+rename to meta-gnome/recipes-gnome/evince/evince_42.2.bb
+index 2e22f2e703..af6d74c1a0 100644
+--- a/meta-gnome/recipes-gnome/evince/evince_42.1.bb
++++ b/meta-gnome/recipes-gnome/evince/evince_42.2.bb
+@@ -24,7 +24,7 @@ inherit gnomebase itstool gnome-help pkgconfig gsettings gobject-introspection g
+ def gnome_verdir(v):
+     return oe.utils.trim_version(v, 1)
  
- inherit autotools-brokensep pkgconfig manpages
+-SRC_URI[archive.sha256sum] = "b24767bb3d5103b4e35b0e15cf033dbe2488f88700cdd882d22a43adeec2e80a"
++SRC_URI[archive.sha256sum] = "ff7f81f308cf8d4956ed97fb724a7e49448c214beeab998812ef9efbb38df8ae"
  
--SRCREV = "c4e384715bfa95c7eaf0de99ce2498d54bed182e"
-+SRCREV = "0d63a383b7b21a94d849ed01116cde0a628e95a9"
- SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https"
+ GTKDOC_MESON_OPTION = "gtk_doc"
  
- S = "${WORKDIR}/git"
 -- 
 2.25.1
 
