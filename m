@@ -1,236 +1,397 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E269C6371A
-	for <webhook@archiver.kernel.org>; Mon, 25 Apr 2022 19:26:15 +0000 (UTC)
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com
- [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web11.34014.1650912517972877735
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B24B7C433EF
+	for <webhook@archiver.kernel.org>; Mon, 25 Apr 2022 23:31:54 +0000 (UTC)
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com
+ [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.web10.37556.1650929513834520050
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Apr 2022 11:48:38 -0700
+ Mon, 25 Apr 2022 16:31:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=qcwt2EAU;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id 2so6455180pjw.2
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=eM3v4YXw;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id u5so3906630pjr.5
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Apr 2022 11:48:37 -0700 (PDT)
+ Mon, 25 Apr 2022 16:31:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=lCLk15/roejrt9SARFqdnjGDjuibjMW2pnyxxfHDRAA=;
-        b=qcwt2EAUr0Zrmb4AQthoOS0wJ1vlrSHjX09vdeINhixY5Dh4u/JeqrlloiyUMq8okC
-         Se57U+MG7O+vd+kJy27v8guBXp1MaXIsaOExwNVxcdxHB5D1axOI3QEKY7FHRqDnJGHy
-         uTIigU0AufW7NO3Ii8nmkSRXyavHkrE2jD5aNtRs54XxpeZKIiQfdpcPZb5rl3NAkYbY
-         hI88r5cfStGams5/kZKF8zC5rv2REzGP71mya90CnCmI5Y1Y38jC0sNk5alS2VW4Cyun
-         YfvORINvH7ayuv3d5E0W4I7m6J8DsMKxPqnifUdnIDHwJF3cbDPQ6WmQjdXLhQ6dKJ6m
-         QZQg==
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :references:from:in-reply-to:content-transfer-encoding;
+        bh=55ESAJMfilGKuLM0zOa64l77kaWA0NFTbFJoJhh+dlA=;
+        b=eM3v4YXw5N1Al6RUdo1qp0BiNT2SN42C8zAY0Yk4wUImgQ1CAoj26mxZIHymtPIhuv
+         my03pAUM6jsK3of3Ora1o16L8+kyZ2tlbROnqMMqmqv8vzMGsNKfxAvx0LmbojJJiiTM
+         JNAG61tlBZF/TQxwKd/iQHPIyWAOJ8mkyj2oZrLhK25FN8aH0B9XOSBq+l5PD490vfdm
+         95HLuEMVIShxHiH3mOI/gznNHnajIKjf/5B0Ihrf4U7Dk3TeBEsF4Vosv14tWooF7iiG
+         R3eC5l5iQf0O+4FUY93RRQI94DZ0oZggiua5bbIampTXGzG8FpPT9bjsDa1wrCWfSuaI
+         SEhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:references:from:in-reply-to
          :content-transfer-encoding;
-        bh=lCLk15/roejrt9SARFqdnjGDjuibjMW2pnyxxfHDRAA=;
-        b=ctl5I7Xl2XIKM5jekKDjU3X25GzCAvoCeHNWB08dErpmk+2CNrDhOL++Y9qkmxfZIR
-         oA99yM6aG0wPlACe2mNJZXQoOqzSZ33UCq9zmrA1Yc1xd1em5aqFJdvA4VoxyNqhUOzf
-         4562ZdiRH/R2gozLGpI3kPsdJhE3BnNxM8NuDdStTlpPi4Mtix8O1aHq86AKJr5b21lU
-         Jd74w0RDVlO9F1vLoALbOGRg1pzFOcB4BlR2Q4e/WcFAukJjtypqzjkvW2ToZ7Penakx
-         bCYlup+NSxRJFGl9GaIceepyllQo40SA/D+y/9POLExwO6Snynhboa0+GJmH9xwdOPrd
-         7wFg==
-X-Gm-Message-State: AOAM532z8Xa1QJrCXcYTfzLveFuLd/lEyHa2FadPBo+GHyDD73+yS4FD
-	7HJwa7xdL5YjDr6G/OVPHz+JKE5PbRW3GA==
+        bh=55ESAJMfilGKuLM0zOa64l77kaWA0NFTbFJoJhh+dlA=;
+        b=sUAtQe/41TfPxRICYMSA2NMkpDIk5B5ZmLYbdXPwxVGb0mz5h+WluemPgOCbVaSmrd
+         DyjZGn3Smh1JNyP6/fflD8+Jtu3rYSjFyUfeWr73F/smT8Ofn7B1XGLhuhqHTs1MN8aw
+         olJM6baCak/Rivoc7c5i8OcKxeBwp8o3LGeduEiSXBUZ2GaQxu30bdkFxol+osDmQi0b
+         ialBp8oU7w2soJGUae7aBJDitF1R5/26gJP6Br2YbtyQ9oZPEV1Er4KyTue5cQ0M1KCe
+         cBK9wWBDsPN88YL5mSSKcAfypcaggQAhDDYlMPXl6Vf3MRWVK9lFpFEHqmrqMv+4UgOK
+         yKEg==
+X-Gm-Message-State: AOAM533NedpPrXMGzjFl1J4HpEY/r+VfYE09DFg9UzPgOafGmJC/TFwy
+	Jb8ITJPfTEIJ4JyTnCZeqRY=
 X-Google-Smtp-Source: 
- ABdhPJxv8ddLWjTFnDSi+2Bo0QFKiZXUKzE3TrDgM7Td/FG9PXnh8UXTsK6TIiwa9UflNekz2dfTKA==
-X-Received: by 2002:a17:902:ce81:b0:15d:29ba:7808 with SMTP id
- f1-20020a170902ce8100b0015d29ba7808mr2558189plg.153.1650912517056;
-        Mon, 25 Apr 2022 11:48:37 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::2ca3])
+ ABdhPJwOapgVAMGdTiUCGPrWRc+oq/O01w07xgJ5SxshxIw2zC2VlIuUJxsovW8Pws1CqoKpax/w2w==
+X-Received: by 2002:a17:902:6a8a:b0:156:8ff6:daf0 with SMTP id
+ n10-20020a1709026a8a00b001568ff6daf0mr20516359plk.117.1650929513031;
+        Mon, 25 Apr 2022 16:31:53 -0700 (PDT)
+Received: from ?IPV6:2601:202:4180:a5c0:5a47:377:c988:edd?
+ ([2601:202:4180:a5c0:5a47:377:c988:edd])
         by smtp.gmail.com with ESMTPSA id
- k15-20020a63ab4f000000b00381eef69bfbsm10403213pgp.3.2022.04.25.11.48.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 25 Apr 2022 11:48:36 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Mingli Yu <mingli.yu@windriver.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH v2] makedumpfile: Upgrade to 1.7.1
-Date: Mon, 25 Apr 2022 11:48:34 -0700
-Message-Id: <20220425184834.1955021-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.36.0
+ d18-20020a056a0010d200b004fa2e13ce80sm13442835pfu.76.2022.04.25.16.31.51
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 25 Apr 2022 16:31:52 -0700 (PDT)
+Message-ID: <f07a5c7a-40ac-177f-eaa9-bb0d3d23c922@gmail.com>
+Date: Mon, 25 Apr 2022 16:31:51 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
+Subject: Re: [oe] [meta-oe][PATCH] crash: Upgrade to 8.0.0
+Content-Language: en-US
+To: "Yu, Mingli" <mingli.yu@windriver.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20220422030730.2556794-1-mingli.yu@windriver.com>
+From: akuster808 <akuster808@gmail.com>
+In-Reply-To: <20220422030730.2556794-1-mingli.yu@windriver.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Apr 2022 19:26:15 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Apr 2022 23:31:54 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96782
+ https://lists.openembedded.org/g/openembedded-devel/message/96785
 
-From: Mingli Yu <mingli.yu@windriver.com>
 
-Remove related man pages gz logic as it's removed in new version [1].
 
-[1] https://github.com/makedumpfile/makedumpfile/commit/2169de66ecd4504a3e69e0be0330f492f966ce5e
+On 4/21/22 20:07, Yu, Mingli wrote:
+> From: Mingli Yu <mingli.yu@windriver.com>
+>
+> The bundled gdb upgraded to 10.2 [1] and remove related patches
+> against the previous gdb 7.6.
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
-v2: Fix a typo -D$(ARCH) should be -D__$(ARCH)__
+Do we need to be in-sync with the GDB in core?
 
- ...makedumpfile-replace-hardcode-CFLAGS.patch | 53 +++++++++----------
- ...umpfile_1.7.0.bb => makedumpfile_1.7.1.bb} |  8 +--
- 2 files changed, 26 insertions(+), 35 deletions(-)
- rename meta-oe/recipes-kernel/makedumpfile/{makedumpfile_1.7.0.bb => makedumpfile_1.7.1.bb} (85%)
-
-diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
-index 1dd87c8b11..f3dc8a466a 100644
---- a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
-+++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
-@@ -1,6 +1,6 @@
--From af97e2ad643334b4c7c3d66f971ce9ebb2b596af Mon Sep 17 00:00:00 2001
-+From 71b5a3905d5cd0feca88a0d61d7657ba5296a052 Mon Sep 17 00:00:00 2001
- From: Mingli Yu <mingli.yu@windriver.com>
--Date: Thu, 21 Jul 2016 18:06:21 +0800
-+Date: Sun, 24 Apr 2022 17:25:33 +0800
- Subject: [PATCH] makedumpfile: replace hardcode CFLAGS
- 
- * Create alias for target such as powerpc as powerpc32
-@@ -16,9 +16,12 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
- 
- [2021-11-18] Patch updated to use CFLAGS_COMMON for zstd
- Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
-+
-+Rebase to 1.7.1
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
- ---
-- Makefile |   47 ++++++++++++++++++++++++-----------------------
-- 1 file changed, 24 insertions(+), 23 deletions(-)
-+ Makefile | 42 ++++++++++++++++++++++--------------------
-+ 1 file changed, 22 insertions(+), 20 deletions(-)
- 
- --- a/Makefile
- +++ b/Makefile
-@@ -35,19 +38,13 @@ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
-  HOST_ARCH := $(shell uname -m)
-  # Use TARGET as the target architecture if specified.
-  # Defaults to uname -m
--@@ -21,29 +15,36 @@ ifeq ($(strip($TARGET)),)
-- TARGET := $(HOST_ARCH)
-- endif
-- 
---ARCH := $(shell echo ${TARGET}  | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ \
---			       -e s/arm.*/arm/ -e s/sa110/arm/ \
---			       -e s/s390x/s390/ -e s/parisc64/parisc/ \
-+@@ -24,26 +18,34 @@ endif
-+ ARCH := $(shell echo ${TARGET}  | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ \
-+ 			       -e s/arm.*/arm/ -e s/sa110/arm/ \
-+ 			       -e s/s390x/s390/ -e s/parisc64/parisc/ \
- -			       -e s/ppc64/powerpc64/ -e s/ppc/powerpc32/)
--+ARCH := $(shell echo __${TARGET}__  | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ \
--+		       -e s/arm.*/arm/ -e s/sa110/arm/ \
--+		       -e s/s390x/s390/ -e s/parisc64/parisc/ \
--+		       -e s/ppc64/powerpc64/ -e s/ppc/powerpc32/ \
--+		       -e s/_powerpc_/_powerpc32_/)
-++			       -e s/ppc64/powerpc64/ -e s/ppc/powerpc32/ \
-++			       -e s/_powerpc_/_powerpc32_/)
-  
-  CROSS :=
-  ifneq ($(TARGET), $(HOST_ARCH))
-@@ -55,8 +52,7 @@ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
-  endif
-  
- -CFLAGS += -D__$(ARCH)__ $(CROSS)
---CFLAGS_ARCH += -D__$(ARCH)__ $(CROSS)
--+CFLAGS_ARCH += -D$(ARCH) $(CROSS)
-+ CFLAGS_ARCH += -D__$(ARCH)__ $(CROSS)
-  
- -ifeq ($(ARCH), powerpc64)
- -CFLAGS += -m64
-@@ -78,11 +74,12 @@ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
- +CFLAGS_COMMON = $(CFLAGS_ARCH) \
- +              -DVERSION='"$(VERSION)"' \
- +              -DRELEASE_DATE='"$(DATE)"'
-++
- +
-  SRC_BASE = makedumpfile.c makedumpfile.h diskdump_mod.h sadump_mod.h sadump_info.h
-- SRC_PART = print_info.c dwarf_info.c elf_info.c erase_info.c sadump_info.c cache.c tools.c printk.c
-+ SRC_PART = print_info.c dwarf_info.c elf_info.c erase_info.c sadump_info.c cache.c tools.c printk.c detect_cycle.c
-  OBJ_PART=$(patsubst %.c,%.o,$(SRC_PART))
--@@ -52,12 +53,12 @@ OBJ_ARCH=$(patsubst %.c,%.o,$(SRC_ARCH))
-+@@ -52,12 +54,12 @@ OBJ_ARCH=$(patsubst %.c,%.o,$(SRC_ARCH))
-  
-  LIBS = -ldw -lbz2 -ldl -lelf -lz
-  ifneq ($(LINKTYPE), dynamic)
-@@ -97,7 +94,7 @@ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
-  endif
-  
-  ifeq ($(USESNAPPY), on)
--@@ -65,12 +66,12 @@ LIBS := -lsnappy $(LIBS)
-+@@ -65,12 +67,12 @@ LIBS := -lsnappy $(LIBS)
-  ifneq ($(LINKTYPE), dynamic)
-  LIBS := $(LIBS) -lstdc++
-  endif
-@@ -112,7 +109,7 @@ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
-  endif
-  
-  ifeq ($(DEBUG), on)
--@@ -104,14 +105,14 @@ LIBS := $(LIBS) $(call try-run,\
-+@@ -104,14 +106,14 @@ LIBS := $(LIBS) $(call try-run,\
-  all: makedumpfile
-  
-  $(OBJ_PART): $(SRC_PART)
-@@ -126,15 +123,15 @@ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
-  makedumpfile: $(SRC_BASE) $(OBJ_PART) $(OBJ_ARCH)
- -	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ_PART) $(OBJ_ARCH) -rdynamic -o $@ $< $(LIBS)
- +	$(CC) $(CFLAGS_COMMON) $(LDFLAGS) $(OBJ_PART) $(OBJ_ARCH) -rdynamic -o $@ $< $(LIBS)
-- 	echo .TH MAKEDUMPFILE 8 \"$(DATE)\" \"makedumpfile v$(VERSION)\" \"Linux System Administrator\'s Manual\" > temp.8
-- 	grep -v "^.TH MAKEDUMPFILE 8" $(VPATH)makedumpfile.8 >> temp.8
-- 	mv temp.8 makedumpfile.8
--@@ -122,7 +123,7 @@ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(
-- 	gzip -c ./makedumpfile.conf.5 > ./makedumpfile.conf.5.gz
-+ 	@sed -e "s/@DATE@/$(DATE)/" \
-+ 	     -e "s/@VERSION@/$(VERSION)/" \
-+ 	     $(VPATH)makedumpfile.8.in > $(VPATH)makedumpfile.8
-+@@ -120,7 +122,7 @@ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(
-+ 	     $(VPATH)makedumpfile.conf.5.in > $(VPATH)makedumpfile.conf.5
-  
-  eppic_makedumpfile.so: extension_eppic.c
- -	$(CC) $(CFLAGS) $(LDFLAGS) -shared -rdynamic -o $@ extension_eppic.c -fPIC -leppic -ltinfo
- +	$(CC) $(CFLAGS_COMMON) $(LDFLAGS) -shared -rdynamic -o $@ extension_eppic.c -fPIC -leppic -ltinfo
-  
-  clean:
-- 	rm -f $(OBJ) $(OBJ_PART) $(OBJ_ARCH) makedumpfile makedumpfile.8.gz makedumpfile.conf.5.gz
-+ 	rm -f $(OBJ) $(OBJ_PART) $(OBJ_ARCH) makedumpfile makedumpfile.8 makedumpfile.conf.5
-diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.0.bb b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.1.bb
-similarity index 85%
-rename from meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.0.bb
-rename to meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.1.bb
-index d4da031866..c3f965b041 100644
---- a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.0.bb
-+++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.1.bb
-@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- LICENSE = "GPL-2.0-only"
- 
- SRCBRANCH ?= "master"
--SRCREV = "06ef8e2b814feb08a668b7a3783c86674e49a7b1"
-+SRCREV = "74bbdd14ec861552ace1ca63953eb2ef73e1f965"
- 
- DEPENDS = "bzip2 zlib elfutils xz"
- RDEPENDS:${PN}-tools = "perl ${PN}"
-@@ -52,12 +52,6 @@ do_install () {
-     install -m 755 ${S}/makedumpfile ${D}/usr/bin
-     install -m 755 ${S}/makedumpfile-R.pl ${D}/usr/bin
- 
--    mkdir -p ${D}/usr/share/man/man8
--    install -m 644 ${S}/makedumpfile.8.gz ${D}/usr/share/man/man8
--
--    mkdir -p ${D}/usr/share/man/man5
--    install -m 644 ${S}/makedumpfile.conf.5.gz ${D}/usr/share/man/man5
--
-     mkdir -p ${D}/etc/
-     install -m 644 ${S}/makedumpfile.conf ${D}/etc/makedumpfile.conf.sample
- }
--- 
-2.36.0
+- armin
+>
+> [1] https://github.com/crash-utility/crash/commit/ec568e2ea515b66343d3488d5d4b9a625d55b7ae
+>
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> ---
+>   ...error-unknown-type-name-gdb_fpregset.patch | 36 ---------
+>   ...tect-the-sysroot-s-glibc-header-file.patch | 33 --------
+>   ...unrecognized-gcc-option-m32-for-mips.patch | 33 --------
+>   ...im-arange-fix-extern-inline-handling.patch | 79 -------------------
+>   ...m-ppc-drop-LIBS-from-psim-dependency.patch | 37 ---------
+>   .../crash/{crash_7.3.0.bb => crash_8.0.0.bb}  | 12 +--
+>   6 files changed, 3 insertions(+), 227 deletions(-)
+>   delete mode 100644 meta-oe/recipes-kernel/crash/crash/0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch
+>   delete mode 100644 meta-oe/recipes-kernel/crash/crash/0003-crash-detect-the-sysroot-s-glibc-header-file.patch
+>   delete mode 100644 meta-oe/recipes-kernel/crash/crash/remove-unrecognized-gcc-option-m32-for-mips.patch
+>   delete mode 100644 meta-oe/recipes-kernel/crash/crash/sim-common-sim-arange-fix-extern-inline-handling.patch
+>   delete mode 100644 meta-oe/recipes-kernel/crash/crash/sim-ppc-drop-LIBS-from-psim-dependency.patch
+>   rename meta-oe/recipes-kernel/crash/{crash_7.3.0.bb => crash_8.0.0.bb} (87%)
+>
+> diff --git a/meta-oe/recipes-kernel/crash/crash/0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch b/meta-oe/recipes-kernel/crash/crash/0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch
+> deleted file mode 100644
+> index 8355fe44e..000000000
+> --- a/meta-oe/recipes-kernel/crash/crash/0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch
+> +++ /dev/null
+> @@ -1,36 +0,0 @@
+> -From 52fc1a7c17768fd52c3577d21dad84e8babb94b5 Mon Sep 17 00:00:00 2001
+> -From: Dengke Du <dengke.du@windriver.com>
+> -Date: Thu, 6 Apr 2017 23:01:14 -0400
+> -Subject: [PATCH 2/3] crash: fix build error unknown type name 'gdb_fpregset_t'
+> -
+> -Upstream-Status: Pending
+> -
+> -Signed-off-by: Dengke Du <dengke.du@windriver.com>
+> ----
+> - gdb-7.6/gdb/gdb_proc_service.h | 3 +--
+> - 1 file changed, 1 insertion(+), 2 deletions(-)
+> -
+> -diff --git a/gdb-7.6/gdb/gdb_proc_service.h b/gdb-7.6/gdb/gdb_proc_service.h
+> -index 8bc6088..99c6496 100644
+> ---- a/gdb-7.6/gdb/gdb_proc_service.h
+> -+++ b/gdb-7.6/gdb/gdb_proc_service.h
+> -@@ -20,6 +20,7 @@
+> - #define GDB_PROC_SERVICE_H
+> -
+> - #include <sys/types.h>
+> -+#include "gregset.h"
+> -
+> - #ifdef HAVE_PROC_SERVICE_H
+> - #include <proc_service.h>
+> -@@ -53,8 +54,6 @@
+> - #include <sys/procfs.h>
+> - #endif
+> -
+> --#include "gregset.h"
+> --
+> - /* Functions in this interface return one of these status codes.  */
+> - typedef enum
+> - {
+> ---
+> -2.8.1
+> -
+> diff --git a/meta-oe/recipes-kernel/crash/crash/0003-crash-detect-the-sysroot-s-glibc-header-file.patch b/meta-oe/recipes-kernel/crash/crash/0003-crash-detect-the-sysroot-s-glibc-header-file.patch
+> deleted file mode 100644
+> index 1f4bd01da..000000000
+> --- a/meta-oe/recipes-kernel/crash/crash/0003-crash-detect-the-sysroot-s-glibc-header-file.patch
+> +++ /dev/null
+> @@ -1,33 +0,0 @@
+> -From c7950ef5228adc52a500b4fc67d7e48c3c09c1df Mon Sep 17 00:00:00 2001
+> -From: Dengke Du <dengke.du@windriver.com>
+> -Date: Thu, 6 Apr 2017 23:02:44 -0400
+> -Subject: [PATCH 3/3] crash: detect the sysroot's glibc header file
+> -
+> -This is cross compile, so let the Makefile detect the sysroot's glibc
+> -header file, not the host's glibc header file.
+> -
+> -Upstream-Status: Pending
+> -
+> -Signed-off-by: Dengke Du <dengke.du@windriver.com>
+> ----
+> - Makefile | 4 ++--
+> - 1 file changed, 2 insertions(+), 2 deletions(-)
+> -
+> -diff --git a/Makefile b/Makefile
+> -index b6b7e80..94f21a5 100644
+> ---- a/Makefile
+> -+++ b/Makefile
+> -@@ -264,8 +264,8 @@ gdb_patch:
+> - 	if [ "${ARCH}" = "x86_64" ] && [ "${TARGET}" = "PPC64" ] && [ -f ${GDB}-ppc64le-support.patch ]; then \
+> - 		patch -d ${GDB} -p1 -F0 < ${GDB}-ppc64le-support.patch ; \
+> - 	fi
+> --	if [ -f /usr/include/proc_service.h ]; then \
+> --		grep 'extern ps_err_e ps_get_thread_area (struct' /usr/include/proc_service.h; \
+> -+	if [ -f ${RECIPE_SYSROOT}/usr/include/proc_service.h ]; then \
+> -+		grep 'extern ps_err_e ps_get_thread_area (struct' ${RECIPE_SYSROOT}/usr/include/proc_service.h; \
+> - 		if [ $$? -eq 0 ]; then \
+> - 			patch -p0 < ${GDB}-proc_service.h.patch; \
+> - 		fi; \
+> ---
+> -2.8.1
+> -
+> diff --git a/meta-oe/recipes-kernel/crash/crash/remove-unrecognized-gcc-option-m32-for-mips.patch b/meta-oe/recipes-kernel/crash/crash/remove-unrecognized-gcc-option-m32-for-mips.patch
+> deleted file mode 100644
+> index 37d43b888..000000000
+> --- a/meta-oe/recipes-kernel/crash/crash/remove-unrecognized-gcc-option-m32-for-mips.patch
+> +++ /dev/null
+> @@ -1,33 +0,0 @@
+> -Upstream-Status: Pending
+> -
+> -It fails to build crash for mips with error:
+> -
+> -| mips-wrs-linux-gcc: error: unrecognized command line option '-m32'
+> -| Makefile:291: recipe for target 'make_build_data' failed
+> -
+> -So remove the unrecognized option '-m32' for mips.
+> -
+> -Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> ----
+> -diff --git a/configure.c b/configure.c
+> -index cf1973b..71e97b3 100644
+> ---- a/configure.c
+> -+++ b/configure.c
+> -@@ -155,7 +155,7 @@ void add_extra_lib(char *);
+> - #define TARGET_CFLAGS_PPC64_ON_X86_64  "TARGET_CFLAGS="
+> - #define TARGET_CFLAGS_MIPS            "TARGET_CFLAGS=-D_FILE_OFFSET_BITS=64"
+> - #define TARGET_CFLAGS_MIPS_ON_X86     "TARGET_CFLAGS=-D_FILE_OFFSET_BITS=64"
+> --#define TARGET_CFLAGS_MIPS_ON_X86_64  "TARGET_CFLAGS=-m32 -D_FILE_OFFSET_BITS=64"
+> -+#define TARGET_CFLAGS_MIPS_ON_X86_64  "TARGET_CFLAGS=-D_FILE_OFFSET_BITS=64"
+> - #define TARGET_CFLAGS_MIPS64          "TARGET_CFLAGS="
+> - #define TARGET_CFLAGS_SPARC64         "TARGET_CFLAGS="
+> -
+> -@@ -167,7 +167,7 @@ void add_extra_lib(char *);
+> - #define GDB_TARGET_ARM64_ON_X86_64  "GDB_CONF_FLAGS=--target=aarch64-elf-linux"   /* TBD */
+> - #define GDB_TARGET_PPC64_ON_X86_64  "GDB_CONF_FLAGS=--target=powerpc64le-unknown-linux-gnu"
+> - #define GDB_TARGET_MIPS_ON_X86     "GDB_CONF_FLAGS=--target=mipsel-elf-linux"
+> --#define GDB_TARGET_MIPS_ON_X86_64  "GDB_CONF_FLAGS=--target=mipsel-elf-linux CFLAGS=-m32"
+> -+#define GDB_TARGET_MIPS_ON_X86_64  "GDB_CONF_FLAGS=--target=mipsel-elf-linux"
+> -
+> - /*
+> -  *  The original plan was to allow the use of a particular version
+> diff --git a/meta-oe/recipes-kernel/crash/crash/sim-common-sim-arange-fix-extern-inline-handling.patch b/meta-oe/recipes-kernel/crash/crash/sim-common-sim-arange-fix-extern-inline-handling.patch
+> deleted file mode 100644
+> index 0185b5704..000000000
+> --- a/meta-oe/recipes-kernel/crash/crash/sim-common-sim-arange-fix-extern-inline-handling.patch
+> +++ /dev/null
+> @@ -1,79 +0,0 @@
+> -Upstream-Status: Backport
+> -
+> -https://sourceware.org/git/?p=binutils-gdb.git;a=commit;h=92fc615
+> -
+> -Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> ---
+> -From 92fc6153a6fdf2a027d9780f5945712aafad4a9e Mon Sep 17 00:00:00 2001
+> -From: Mike Frysinger <vapier@gentoo.org>
+> -Date: Sun, 29 Mar 2015 15:59:01 -0400
+> -Subject: [PATCH] sim: common: sim-arange: fix extern inline handling
+> -
+> -With newer versions of gcc (5.x), the extern inline we're using with the
+> -sim-arange module no longer works.  Since this code really wants the gnu
+> -inline semantics, use that attribute explicitly.
+> -
+> -Reported-by: DJ Delorie <dj@redhat.com>
+> -Reported-by: Joel Sherrill <joel.sherrill@oarcorp.com>
+> ----
+> - gdb-7.6/sim/common/sim-arange.h | 20 ++++++++++++--------
+> - gdb-7.6/sim/common/sim-inline.h |  4 +++-
+> - 2 files changed, 15 insertions(+), 9 deletions(-)
+> -
+> -diff --git a/gdb-7.6/sim/common/sim-arange.h b/gdb-7.6/sim/common/sim-arange.h
+> -index 73117f3..de842c9 100644
+> ---- a/gdb-7.6/sim/common/sim-arange.h
+> -+++ b/gdb-7.6/sim/common/sim-arange.h
+> -@@ -60,22 +60,26 @@ extern void sim_addr_range_delete (ADDR_RANGE * /*ar*/,
+> - 				   address_word /*start*/,
+> - 				   address_word /*end*/);
+> -
+> -+/* TODO: This should get moved into sim-inline.h.  */
+> -+#ifdef HAVE_INLINE
+> -+#ifdef SIM_ARANGE_C
+> -+#define SIM_ARANGE_INLINE INLINE
+> -+#else
+> -+#define SIM_ARANGE_INLINE EXTERN_INLINE
+> -+#endif
+> -+#else
+> -+#define SIM_ARANGE_INLINE EXTERN
+> -+#endif
+> -+
+> - /* Return non-zero if ADDR is in range AR, traversing the entire tree.
+> -    If no range is specified, that is defined to mean "everything".  */
+> --extern INLINE int
+> -+SIM_ARANGE_INLINE int
+> - sim_addr_range_hit_p (ADDR_RANGE * /*ar*/, address_word /*addr*/);
+> - #define ADDR_RANGE_HIT_P(ar, addr) \
+> -   ((ar)->range_tree == NULL || sim_addr_range_hit_p ((ar), (addr)))
+> -
+> - #ifdef HAVE_INLINE
+> --#ifdef SIM_ARANGE_C
+> --#define SIM_ARANGE_INLINE INLINE
+> --#else
+> --#define SIM_ARANGE_INLINE EXTERN_INLINE
+> --#endif
+> - #include "sim-arange.c"
+> --#else
+> --#define SIM_ARANGE_INLINE
+> - #endif
+> - #define SIM_ARANGE_C_INCLUDED
+> -
+> -diff --git a/gdb-7.6/sim/common/sim-inline.h b/gdb-7.6/sim/common/sim-inline.h
+> -index af75562..8a9c286 100644
+> ---- a/gdb-7.6/sim/common/sim-inline.h
+> -+++ b/gdb-7.6/sim/common/sim-inline.h
+> -@@ -303,7 +303,9 @@
+> - /* ??? Temporary, pending decision to always use extern inline and do a vast
+> -    cleanup of inline support.  */
+> - #ifndef INLINE2
+> --#if defined (__GNUC__)
+> -+#if defined (__GNUC_GNU_INLINE__) || defined (__GNUC_STDC_INLINE__)
+> -+#define INLINE2 __inline__ __attribute__ ((__gnu_inline__))
+> -+#elif defined (__GNUC__)
+> - #define INLINE2 __inline__
+> - #else
+> - #define INLINE2 /*inline*/
+> ---
+> -2.6.1
+> -
+> diff --git a/meta-oe/recipes-kernel/crash/crash/sim-ppc-drop-LIBS-from-psim-dependency.patch b/meta-oe/recipes-kernel/crash/crash/sim-ppc-drop-LIBS-from-psim-dependency.patch
+> deleted file mode 100644
+> index 77a287f14..000000000
+> --- a/meta-oe/recipes-kernel/crash/crash/sim-ppc-drop-LIBS-from-psim-dependency.patch
+> +++ /dev/null
+> @@ -1,37 +0,0 @@
+> -Upstream-Status: Backport
+> -
+> -https://sourceware.org/git/?p=binutils-gdb.git;h=0d8a6ab
+> -
+> -Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> ----
+> -From 0d8a6ab7d39d28fb1557e2a62e9e4b336341ab34 Mon Sep 17 00:00:00 2001
+> -From: Aaro Koskinen <aaro.koskinen@iki.fi>
+> -Date: Mon, 17 Feb 2014 17:12:59 -0500
+> -Subject: [PATCH] sim: ppc: drop $(LIBS) from psim dependency
+> -
+> -When cross-compiling GDB for PPC, there's a prerequisite "-lz" for psim
+> -that results in a build failure. With such prerequisite, GNU Make will
+> -try to search the library from build machine's /usr/lib which is wrong.
+> -On 64-bit Linux build machines the compilation will fail because of this.
+> -
+> -URL: https://sourceware.org/bugzilla/show_bug.cgi?id=12202
+> ----
+> - sim/ppc/Makefile.in | 2 +-
+> - 1 files changed, 1 insertions(+), 1 deletions(-)
+> -
+> -diff --git a/gdb-7.6/sim/ppc/Makefile.in b/gdb-7.6/sim/ppc/Makefile.in
+> -index b811f6f..740bdb0 100644
+> ---- a/gdb-7.6/sim/ppc/Makefile.in
+> -+++ b/gdb-7.6/sim/ppc/Makefile.in
+> -@@ -552,7 +552,7 @@ PACKAGE_SRC = @sim_pk_src@
+> - PACKAGE_OBJ = @sim_pk_obj@
+> -
+> -
+> --psim: $(TARGETLIB) main.o $(LIBIBERTY_LIB) $(BFD_LIB) $(LIBS) $(LIBINTL_DEP)
+> -+psim: $(TARGETLIB) main.o $(LIBIBERTY_LIB) $(BFD_LIB) $(LIBINTL_DEP)
+> - 	$(CC) $(CFLAGS) $(SIM_CFLAGS) $(LDFLAGS) -o psim$(EXEEXT) main.o $(TARGETLIB) $(BFD_LIB) $(LIBINTL) $(LIBIBERTY_LIB) $(LIBS)
+> -
+> - run: psim
+> ---
+> -1.9.4
+> -
+> diff --git a/meta-oe/recipes-kernel/crash/crash_7.3.0.bb b/meta-oe/recipes-kernel/crash/crash_8.0.0.bb
+> similarity index 87%
+> rename from meta-oe/recipes-kernel/crash/crash_7.3.0.bb
+> rename to meta-oe/recipes-kernel/crash/crash_8.0.0.bb
+> index d4aa0d52b..4ea5b67de 100644
+> --- a/meta-oe/recipes-kernel/crash/crash_7.3.0.bb
+> +++ b/meta-oe/recipes-kernel/crash/crash_8.0.0.bb
+> @@ -14,22 +14,16 @@ DEPENDS = "zlib readline coreutils-native ncurses-native"
+>   
+>   S = "${WORKDIR}/git"
+>   SRC_URI = "git://github.com/crash-utility/${BPN}.git;branch=master;protocol=https \
+> -           ${GNU_MIRROR}/gdb/gdb-7.6.tar.gz;name=gdb;subdir=git \
+> +           ${GNU_MIRROR}/gdb/gdb-10.2.tar.gz;name=gdb;subdir=git \
+>              file://7001force_define_architecture.patch \
+>              file://7003cross_ranlib.patch \
+>              file://0001-cross_add_configure_option.patch \
+> -           file://sim-ppc-drop-LIBS-from-psim-dependency.patch \
+> -           file://sim-common-sim-arange-fix-extern-inline-handling.patch \
+>              file://donnot-extract-gdb-during-do-compile.patch \
+>              file://gdb_build_jobs_and_not_write_crash_target.patch \
+> -           file://remove-unrecognized-gcc-option-m32-for-mips.patch \
+> -           file://0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch \
+> -           file://0003-crash-detect-the-sysroot-s-glibc-header-file.patch \
+>              "
+> -SRCREV = "2a3e546942ab560f050ab77e8c7828b06513b3f0"
+> +SRCREV = "ec568e2ea515b66343d3488d5d4b9a625d55b7ae"
+>   
+> -SRC_URI[gdb.md5sum] = "a9836707337e5f7bf76a009a8904f470"
+> -SRC_URI[gdb.sha256sum] = "8070389a5dcc104eb0be483d582729f98ed4d761ad19cedd3f17b5d2502faa36"
+> +SRC_URI[gdb.sha256sum] = "b33ad58d687487a821ec8d878daab0f716be60d0936f2e3ac5cf08419ce70350"
+>   
+>   UPSTREAM_CHECK_URI = "https://github.com/crash-utility/crash/releases"
+>   
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#96730): https://lists.openembedded.org/g/openembedded-devel/message/96730
+> Mute This Topic: https://lists.openembedded.org/mt/90620887/3616698
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
