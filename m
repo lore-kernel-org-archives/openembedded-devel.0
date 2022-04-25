@@ -2,73 +2,73 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F1204C3E8A8
-	for <webhook@archiver.kernel.org>; Mon, 25 Apr 2022 19:26:12 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.66])
- by mx.groups.io with SMTP id smtpd.web12.26602.1650871805576951685
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D12CC3A5A1
+	for <webhook@archiver.kernel.org>; Mon, 25 Apr 2022 19:26:13 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.3])
+ by mx.groups.io with SMTP id smtpd.web09.26829.1650871805677791798
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 25 Apr 2022 00:30:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=JonEHkxF;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.66,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=SMjEoISN;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1650871803; i=@fujitsu.com;
-	bh=O66kSEckeuGVbf8q1rZzzAbLtV+ohTNhahuUUz7rdY4=;
+	bh=y156V/OkD/h8dwDlHtB6C0IAL4cRSjXsh1e4UXn1XHk=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=JonEHkxFpKW42ysE51J0SPCJJu4xAvngi0U/YHcWbZYTKlGzxxOyC4uXtGDZT3Jr5
-	 UHR3JGamwSnrWQ/7jnPWesNHQ6c9LXoNcxKxzjxo60VtrM5Y+LUq5lZF77IDcOwHD8
-	 /gI6TpXLKm48ONeW65u6Yt9Z6k4VXkoIsgaIeRFexNWQJI3kLoyKHheNNzXRzN6rlU
-	 hLvsKZVpkkAj2SJxWZQF2uzdP+3CGttpv67vXgiuMz5ViLDIOp472IESKoQ2hmBT4A
-	 7Xo8EKhyM/9+CKftWpVStLmGRlGskIG2fdULOEC3rc7ldokNTovpWLxNZwmVsMDTkN
-	 oW8Nuk9JUlZxg==
+	b=SMjEoISN5lvHsYorjDODqx1c0BNtej1Rdwqik2OUqC4JMRxJaM+xggsZl/zD58MlU
+	 dRanNfEcZJUpEVhuAw0Qr5Di2ykDKv4wcSgzGhuHVu8HOz+DS5xF9qebrkiE22sr75
+	 STL+4RhM/FxEaDM4BZ0rXSrKXh4XSmdmWrNtJXEJUAESU3FdP6FtVJbsq02Napb8Nb
+	 WRL0MT/HsGkw1kz/5r/7K9C+LrxpWI++SiyIDqtdJYVigBFdY4hy6L6gW15jWFDWlx
+	 93/EYlRY879vvpxCtVto++wZwwnkHHlOYsWsDe/kXBgpFZ1hMLrAg/5jS3cWIcSyrF
+	 OhT68ZfvHXM1Q==
 X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrFIsWRWlGSWpSXmKPExsViZ8MxSfe3b1q
-  SwbUeTouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPSrNVsBVc5KtrXLWJpYHzL3sXIxSEk8IRR
-  4sOv9WxdjJxAzgUmib9bWCASexglprZcYgJJsAmoSUy/dYMVxBYR0JdYOnsPM4jNLKAi8eJ3D
-  zuILSxgL3HzxWYWEJtFQFXi6qtdYEN5BZwkNh87xAhiSwgoSEx5+B6sl1PAWWJC4xUWiMVOEj
-  9m/YCqF5Q4OfMJC8R8CYmDL14wQ/QqSsy+3MwCYVdIzJrVxgRhq0lcPbeJeQKj4Cwk7bOQtC9
-  gZFrFaJVUlJmeUZKbmJmja2hgoGtoaKprqGtkaK6XWKWbqJdaqlueWlyia6iXWF6sl1pcrFdc
-  mZuck6KXl1qyiREYxCnFjDd3MLb2/dQ7xCjJwaQkynvPJC1JiC8pP6UyI7E4I76oNCe1+BCjD
-  AeHkgQvlxdQTrAoNT21Ii0zBxhRMGkJDh4lEd50b6A0b3FBYm5xZjpE6hSjopQ4b6EPUEIAJJ
-  FRmgfXBoviS4yyUsK8jAwMDEI8BalFuZklqPKvGMU5GJWEedNBpvBk5pXATX8FtJgJaPGn2lS
-  QxSWJCCmpBqbkHSu3J8l0Ja2OqV5VdTshU8mroKk3NHvl8r55mg/ubH2vXzvljBjLAd52wblP
-  Wzc1f/PT4IjPDVhc4ysQI6wfYr0/cNXd3/8+Xr+6YNMLYYU1kgcUjCt5mRxSKlbL3Qlm5FyX1
-  Hfl77/pQVc+GnQvkMtuzHvpsTHeuCE/w2vhdIEfAgKBhzetPHfE7EpwrsmX6Z++eixY+XLVae
-  PVETEXvcUl+TfFmy7J6/bbJea8eZPWJf95DSW3t006M8HczvNTitCzpTw/uyqOGC1oX7j2e0V
-  t6NJ+hz8pqy+86fi9UHwqg1nHJO61L/++/CEz21R6vmL8gTML1h0ti5+Vtq6/7qNK4aM710VU
-  bdevsV2rxFKckWioxVxUnAgAH9up710DAAA=
+  SwY9N8hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bhlhtsBas4K9ZNX8DYwLifo4uRi0NI4Amj
+  xMz+DlYI5wKTxP8984AcTiBnD6NEx2omEJtNQE1i+q0bYHERAX2JpbP3MIPYzAIqEi9+97CD2
+  MICThIf1y8Hs1kEVCWerDzOBmLzAsVfrP8HNkdCQEFiysP3YL2cAs4SExqvsEDscpL4MesHVL
+  2gxMmZT1gg5ktIHHzxghmiV1Fi9uVmFgi7QmLWrDaomWoSV89tYp7AKDgLSfssJO0LGJlWMVo
+  lFWWmZ5TkJmbm6BoaGOgaGprqGlvqWhjpJVbpJuqlluqWpxaX6AK55cV6qcXFesWVuck5KXp5
+  qSWbGIFBnFKsHrSD8duKn3qHGCU5mJREee+ZpCUJ8SXlp1RmJBZnxBeV5qQWH2KU4eBQkuDl8
+  gLKCRalpqdWpGXmACMKJi3BwaMkwpvuDZTmLS5IzC3OTIdInWJUlBLnLfQBSgiAJDJK8+DaYF
+  F8iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5IwbzrIFJ7MvBK46a+AFjMBLf5UmwqyuCQRISX
+  VwNQj98Wl7+uByPkuOVK5Pcy3gvaqNsxi2iUs2K/zOlOe4cUm3ixJxoK+L4vY+Pjn23Usk19f
+  bP1gz5I1X4/vs4s0S2KJapPyZA768NKnoOxp7IHbC9TOiokvEun03fT56S62Y7tYt+nI/ilo5
+  g/L8Wz4LZVbsFqRtyX+OvNBwbVeezasEL1WY59tl7O9/UFOyeq4x8dDPocmrfcNLfIOytrJbu
+  1dvMhCbR43zzfnyDd80kYtPqpu61L2bdmpLn6zOFtXwPH+Wr+/M0+e2yT6edff/+82CZ+uNrk
+  V0lt3+E5cwgYXp4fOKZEPbsf//W3kPk80aZ5H7ZeQRyfX84lKfukSX6Zza/ZvlgPnJ7cuUGIp
+  zkg01GIuKk4EAD6koTtdAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-11.tower-587.messagelabs.com!1650871802!131031!1
+X-Msg-Ref: server-21.tower-548.messagelabs.com!1650871803!82952!1
 X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.85.8; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 9709 invoked from network); 25 Apr 2022 07:30:03 -0000
+Received: (qmail 7766 invoked from network); 25 Apr 2022 07:30:03 -0000
 Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-11.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-21.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 25 Apr 2022 07:30:03 -0000
 Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 9505E10034F
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id C2787100470
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 25 Apr 2022 08:30:02 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 7E9C710044D
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 8AA75100458
 	for <openembedded-devel@lists.openembedded.org>;
  Mon, 25 Apr 2022 08:30:02 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 25 Apr 2022 08:29:47 +0100
+ (TLS) id 15.0.1497.32; Mon, 25 Apr 2022 08:29:53 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH] evince: upgrade 42.1 -> 42.2
-Date: Mon, 25 Apr 2022 15:29:33 +0800
-Message-ID: <1650871776-31335-2-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] gspell: upgrade 1.9.1 -> 1.10.0
+Date: Mon, 25 Apr 2022 15:29:35 +0800
+Message-ID: <1650871776-31335-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1650871776-31335-1-git-send-email-wangmy@fujitsu.com>
 References: <1650871776-31335-1-git-send-email-wangmy@fujitsu.com>
@@ -81,37 +81,36 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Apr 2022 19:26:12 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Apr 2022 19:26:13 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96762
+ https://lists.openembedded.org/g/openembedded-devel/message/96765
 
-Changelog:
-==========
-comics:
-  * Fix use-after-free (#1776)
+News in 1.10.0, 2022-04-16
+--------------------------
+* Build from git: some updates, take newer version of autoconf-archive.
+* Build: distribute more files in tarballs.
+* Documentation improvements.
+* Translation updates.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-gnome/evince/{evince_42.1.bb => evince_42.2.bb}     | 2 +-
+ .../recipes-gnome/gspell/{gspell_1.9.1.bb => gspell_1.10.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/evince/{evince_42.1.bb => evince_42.2.bb} (92%)
+ rename meta-gnome/recipes-gnome/gspell/{gspell_1.9.1.bb => gspell_1.10.0.bb} (76%)
 
-diff --git a/meta-gnome/recipes-gnome/evince/evince_42.1.bb b/meta-gnome/recipes-gnome/evince/evince_42.2.bb
-similarity index 92%
-rename from meta-gnome/recipes-gnome/evince/evince_42.1.bb
-rename to meta-gnome/recipes-gnome/evince/evince_42.2.bb
-index 2e22f2e703..af6d74c1a0 100644
---- a/meta-gnome/recipes-gnome/evince/evince_42.1.bb
-+++ b/meta-gnome/recipes-gnome/evince/evince_42.2.bb
-@@ -24,7 +24,7 @@ inherit gnomebase itstool gnome-help pkgconfig gsettings gobject-introspection g
- def gnome_verdir(v):
-     return oe.utils.trim_version(v, 1)
+diff --git a/meta-gnome/recipes-gnome/gspell/gspell_1.9.1.bb b/meta-gnome/recipes-gnome/gspell/gspell_1.10.0.bb
+similarity index 76%
+rename from meta-gnome/recipes-gnome/gspell/gspell_1.9.1.bb
+rename to meta-gnome/recipes-gnome/gspell/gspell_1.10.0.bb
+index 15f1cadbab..fe1b3ea67c 100644
+--- a/meta-gnome/recipes-gnome/gspell/gspell_1.9.1.bb
++++ b/meta-gnome/recipes-gnome/gspell/gspell_1.10.0.bb
+@@ -7,4 +7,4 @@ DEPENDS = "gtk+3 iso-codes enchant2"
  
--SRC_URI[archive.sha256sum] = "b24767bb3d5103b4e35b0e15cf033dbe2488f88700cdd882d22a43adeec2e80a"
-+SRC_URI[archive.sha256sum] = "ff7f81f308cf8d4956ed97fb724a7e49448c214beeab998812ef9efbb38df8ae"
+ inherit gnomebase gettext gobject-introspection vala
  
- GTKDOC_MESON_OPTION = "gtk_doc"
- 
+-SRC_URI[archive.sha256sum] = "dcbb769dfdde8e3c0a8ed3102ce7e661abbf7ddf85df08b29915e92cd723abdd"
++SRC_URI[archive.sha256sum] = "803bb884c0215d3fd22a85d7f30423aff88d9792f05a5199d8a489a2ffaae1da"
 -- 
 2.25.1
 
