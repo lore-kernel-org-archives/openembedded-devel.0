@@ -1,144 +1,210 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <mingli.yu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 60AACC38A2B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 79941C38A2C
 	for <webhook@archiver.kernel.org>; Mon, 25 Apr 2022 19:26:12 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com
- [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web10.19606.1650819518043533237
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
+ by mx.groups.io with SMTP id smtpd.web10.25458.1650859205307246086
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 24 Apr 2022 09:58:38 -0700
+ Sun, 24 Apr 2022 21:00:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=nvg73Ofb;
- spf=pass (domain: gmail.com, ip: 209.85.214.175,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id c12so21976449plr.6
-        for <openembedded-devel@lists.openembedded.org>;
- Sun, 24 Apr 2022 09:58:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=VybriwTWTlGPDpvZMQpyM6eJImW2JC9RadK/5u3Js3s=;
-        b=nvg73OfbBaY4ZL1dpS8kkvAn3E7ASBAaLhlml23V8e2QVmHJ1a2NhZ1R5WwaYcrp4O
-         h3qi1oqfobQuJRx3rbLi8kwcbKgHoQmnFY7gPPHWgD/FwduQ4TNP2F7qpTEFh4NLxFFF
-         g3eKFMhIIpgV16BKGc2GPnT3oZnFW/0eyaeiutczMeho3jJuDJWDVY1PxtAIRu+J8AkS
-         5IJcFTOPDbFq/P1DJUAn/CsK1gt0qWPPayumXa8+Yw4DODevTvA0raGzm4mql4frvJVW
-         mXUX4+is03rCEhbsojtGcYgYzwW+DujxKwSZQZg5KvGpw8DozHmJvGWe+/hLArfYoF8a
-         OQ5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=VybriwTWTlGPDpvZMQpyM6eJImW2JC9RadK/5u3Js3s=;
-        b=OA6Yh2JmlM9MtF4OLCWphZfbvQ5DgVd/pGBYq5HCUH1aN0mSL79VP8VulclKxICr4a
-         CDCLf/bLFYjFdVeojVaveuUjoumYRJ0BVxKfMWexNdEwv1YTqCGUwySS+qOmAMLTBgL5
-         B6s8cYin5IqZoXQEfKkyV4Zc3fiIJ5It80sJ+ytoQhYBU7xYRAi5ImAkFB0iREfKj+78
-         NRUL26evKwUle73+cv7eUpPEb6c2+uEss03TjaMJKwuAbErJxy8gDjT8qYqhhMpHZ6EP
-         p9EzsPUz8INBmENvqUXTMBwMeBwwhCPtpBLZr8CfP0hAAePCWkgSqAErSNiGK5LywRyT
-         r6Lw==
-X-Gm-Message-State: AOAM530l9jUaHPnrOIo6egxhNWYz1Wjl3R7ucPIe+1cZh7GMyJRXLF0f
-	xMP3HTTMsuckXgDSN4cp73Hx0B0fwJq1iw==
-X-Google-Smtp-Source: 
- ABdhPJzH+WhXP6tkPl7ZsMm0oM8/7JIM2zz6GcFtWskrNjKOIhhYNHlPLArBPWbcaw/Vsb3+5bWbig==
-X-Received: by 2002:a17:902:aa8e:b0:158:e94b:7c92 with SMTP id
- d14-20020a170902aa8e00b00158e94b7c92mr14334609plr.126.1650819517290;
-        Sun, 24 Apr 2022 09:58:37 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::2ca3])
-        by smtp.gmail.com with ESMTPSA id
- f15-20020a17090a9b0f00b001cd4989fee6sm12097355pjp.50.2022.04.24.09.58.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 24 Apr 2022 09:58:37 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-webserver][PATCH] netdata: Fix build errors with clang
-Date: Sun, 24 Apr 2022 09:58:34 -0700
-Message-Id: <20220424165834.4071907-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.36.0
+ dkim=missing;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
+ domain name (domain: windriver.com, ip: 147.11.3.146,
+ mailfrom: mingli.yu@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 23P402Zv009098
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Sun, 24 Apr 2022 21:00:03 -0700
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Sun, 24 Apr 2022 21:00:02 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.27; Sun, 24 Apr 2022 21:00:02 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Sun, 24 Apr 2022 21:00:01 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] makedumpfile: Upgrade to 1.7.1
+Date: Mon, 25 Apr 2022 12:00:01 +0800
+Message-ID: <20220425040001.1314913-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 25 Apr 2022 19:26:12 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96753
+ https://lists.openembedded.org/g/openembedded-devel/message/96758
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+From: Mingli Yu <mingli.yu@windriver.com>
+
+Remove related man pages gz logic as it's removed in new version [1].
+
+[1] https://github.com/makedumpfile/makedumpfile/commit/2169de66ecd4504a3e69e0be0330f492f966ce5e
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- ...plicit-typecast-to-enum-rrdset_flags.patch | 44 +++++++++++++++++++
- .../netdata/netdata_1.34.1.bb                 |  4 +-
- 2 files changed, 47 insertions(+), 1 deletion(-)
- create mode 100644 meta-webserver/recipes-webadmin/netdata/netdata/0001-Use-explicit-typecast-to-enum-rrdset_flags.patch
+ ...makedumpfile-replace-hardcode-CFLAGS.patch | 55 ++++++++++---------
+ ...umpfile_1.7.0.bb => makedumpfile_1.7.1.bb} |  8 +--
+ 2 files changed, 30 insertions(+), 33 deletions(-)
+ rename meta-oe/recipes-kernel/makedumpfile/{makedumpfile_1.7.0.bb => makedumpfile_1.7.1.bb} (85%)
 
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata/0001-Use-explicit-typecast-to-enum-rrdset_flags.patch b/meta-webserver/recipes-webadmin/netdata/netdata/0001-Use-explicit-typecast-to-enum-rrdset_flags.patch
-new file mode 100644
-index 0000000000..d0002887e1
---- /dev/null
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata/0001-Use-explicit-typecast-to-enum-rrdset_flags.patch
-@@ -0,0 +1,44 @@
-+From e8ec0a0f3a353a8167687a8fdb26773e45927aac Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 24 Apr 2022 09:49:12 -0700
-+Subject: [PATCH] Use explicit typecast to enum rrdset_flags
+diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
+index 1dd87c8b1..ab68d5c0e 100644
+--- a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
++++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
+@@ -1,6 +1,6 @@
+-From af97e2ad643334b4c7c3d66f971ce9ebb2b596af Mon Sep 17 00:00:00 2001
++From 71b5a3905d5cd0feca88a0d61d7657ba5296a052 Mon Sep 17 00:00:00 2001
+ From: Mingli Yu <mingli.yu@windriver.com>
+-Date: Thu, 21 Jul 2016 18:06:21 +0800
++Date: Sun, 24 Apr 2022 17:25:33 +0800
+ Subject: [PATCH] makedumpfile: replace hardcode CFLAGS
+ 
+ * Create alias for target such as powerpc as powerpc32
+@@ -16,10 +16,15 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+ 
+ [2021-11-18] Patch updated to use CFLAGS_COMMON for zstd
+ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
 +
-+specifications say
-+An enumerator can be promoted to an integer value. However,
-+converting an integer to an enumerator requires an explicit
-+cast, and the results are not defined.
-+
-+Therefore The bitwise OR operation you are performing results
-+in an int, which you then attempt to assign to a variable of
-+type rrdset_flags without a cast.
-+
-+Fixes
-+| ml/Host.cc:167:9: error: assigning to 'RRDSET_FLAGS' (aka 'rrdset_flags') from incompatible type 'int'
-+|         rrdset_flag_set(RS, RRDSET_FLAG_ANOMALY_DETECTION);
-+|         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+Upstream-Status: Submitted [https://github.com/netdata/netdata/pull/12750]
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ database/rrd.h | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/database/rrd.h b/database/rrd.h
-+index 071e1d0..dc8e39f 100644
-+--- a/database/rrd.h
-++++ b/database/rrd.h
-+@@ -489,8 +489,8 @@ typedef enum rrdset_flags {
-+ #define rrdset_flag_clear(st, flag) __atomic_and_fetch(&((st)->flags), ~flag, __ATOMIC_SEQ_CST)
-+ #else
-+ #define rrdset_flag_check(st, flag) ((st)->flags & (flag))
-+-#define rrdset_flag_set(st, flag)   (st)->flags |= (flag)
-+-#define rrdset_flag_clear(st, flag) (st)->flags &= ~(flag)
-++#define rrdset_flag_set(st, flag)   (st)->flags = (rrdset_flags)((st)->flags | flag)
-++#define rrdset_flag_clear(st, flag) (st)->flags = (rrdset_flags)((st)->flags & ~(flag))
-+ #endif
-+ #define rrdset_flag_check_noatomic(st, flag) ((st)->flags & (flag))
-+ 
++Rebase to 1.7.1
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+ ---
+- Makefile |   47 ++++++++++++++++++++++++-----------------------
+- 1 file changed, 24 insertions(+), 23 deletions(-)
++ Makefile | 42 ++++++++++++++++++++++--------------------
++ 1 file changed, 22 insertions(+), 20 deletions(-)
+ 
++diff --git a/Makefile b/Makefile
++index 537359d..7d07bdc 100644
+ --- a/Makefile
+ +++ b/Makefile
+ @@ -8,12 +8,6 @@ ifeq ($(strip $CC),)
+@@ -35,19 +40,13 @@ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+  HOST_ARCH := $(shell uname -m)
+  # Use TARGET as the target architecture if specified.
+  # Defaults to uname -m
+-@@ -21,29 +15,36 @@ ifeq ($(strip($TARGET)),)
+- TARGET := $(HOST_ARCH)
+- endif
+- 
+--ARCH := $(shell echo ${TARGET}  | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ \
+--			       -e s/arm.*/arm/ -e s/sa110/arm/ \
+--			       -e s/s390x/s390/ -e s/parisc64/parisc/ \
++@@ -24,26 +18,34 @@ endif
++ ARCH := $(shell echo ${TARGET}  | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ \
++ 			       -e s/arm.*/arm/ -e s/sa110/arm/ \
++ 			       -e s/s390x/s390/ -e s/parisc64/parisc/ \
+ -			       -e s/ppc64/powerpc64/ -e s/ppc/powerpc32/)
+-+ARCH := $(shell echo __${TARGET}__  | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ \
+-+		       -e s/arm.*/arm/ -e s/sa110/arm/ \
+-+		       -e s/s390x/s390/ -e s/parisc64/parisc/ \
+-+		       -e s/ppc64/powerpc64/ -e s/ppc/powerpc32/ \
+-+		       -e s/_powerpc_/_powerpc32_/)
+++			       -e s/ppc64/powerpc64/ -e s/ppc/powerpc32/ \
+++			       -e s/_powerpc_/_powerpc32_/)
+  
+  CROSS :=
+  ifneq ($(TARGET), $(HOST_ARCH))
+@@ -78,11 +77,12 @@ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+ +CFLAGS_COMMON = $(CFLAGS_ARCH) \
+ +              -DVERSION='"$(VERSION)"' \
+ +              -DRELEASE_DATE='"$(DATE)"'
+++
+ +
+  SRC_BASE = makedumpfile.c makedumpfile.h diskdump_mod.h sadump_mod.h sadump_info.h
+- SRC_PART = print_info.c dwarf_info.c elf_info.c erase_info.c sadump_info.c cache.c tools.c printk.c
++ SRC_PART = print_info.c dwarf_info.c elf_info.c erase_info.c sadump_info.c cache.c tools.c printk.c detect_cycle.c
+  OBJ_PART=$(patsubst %.c,%.o,$(SRC_PART))
+-@@ -52,12 +53,12 @@ OBJ_ARCH=$(patsubst %.c,%.o,$(SRC_ARCH))
++@@ -52,12 +54,12 @@ OBJ_ARCH=$(patsubst %.c,%.o,$(SRC_ARCH))
+  
+  LIBS = -ldw -lbz2 -ldl -lelf -lz
+  ifneq ($(LINKTYPE), dynamic)
+@@ -97,7 +97,7 @@ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+  endif
+  
+  ifeq ($(USESNAPPY), on)
+-@@ -65,12 +66,12 @@ LIBS := -lsnappy $(LIBS)
++@@ -65,12 +67,12 @@ LIBS := -lsnappy $(LIBS)
+  ifneq ($(LINKTYPE), dynamic)
+  LIBS := $(LIBS) -lstdc++
+  endif
+@@ -112,7 +112,7 @@ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+  endif
+  
+  ifeq ($(DEBUG), on)
+-@@ -104,14 +105,14 @@ LIBS := $(LIBS) $(call try-run,\
++@@ -104,14 +106,14 @@ LIBS := $(LIBS) $(call try-run,\
+  all: makedumpfile
+  
+  $(OBJ_PART): $(SRC_PART)
+@@ -126,15 +126,18 @@ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+  makedumpfile: $(SRC_BASE) $(OBJ_PART) $(OBJ_ARCH)
+ -	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ_PART) $(OBJ_ARCH) -rdynamic -o $@ $< $(LIBS)
+ +	$(CC) $(CFLAGS_COMMON) $(LDFLAGS) $(OBJ_PART) $(OBJ_ARCH) -rdynamic -o $@ $< $(LIBS)
+- 	echo .TH MAKEDUMPFILE 8 \"$(DATE)\" \"makedumpfile v$(VERSION)\" \"Linux System Administrator\'s Manual\" > temp.8
+- 	grep -v "^.TH MAKEDUMPFILE 8" $(VPATH)makedumpfile.8 >> temp.8
+- 	mv temp.8 makedumpfile.8
+-@@ -122,7 +123,7 @@ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(
+- 	gzip -c ./makedumpfile.conf.5 > ./makedumpfile.conf.5.gz
++ 	@sed -e "s/@DATE@/$(DATE)/" \
++ 	     -e "s/@VERSION@/$(VERSION)/" \
++ 	     $(VPATH)makedumpfile.8.in > $(VPATH)makedumpfile.8
++@@ -120,7 +122,7 @@ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(OBJ_ARCH)
++ 	     $(VPATH)makedumpfile.conf.5.in > $(VPATH)makedumpfile.conf.5
+  
+  eppic_makedumpfile.so: extension_eppic.c
+ -	$(CC) $(CFLAGS) $(LDFLAGS) -shared -rdynamic -o $@ extension_eppic.c -fPIC -leppic -ltinfo
+ +	$(CC) $(CFLAGS_COMMON) $(LDFLAGS) -shared -rdynamic -o $@ extension_eppic.c -fPIC -leppic -ltinfo
+  
+  clean:
+- 	rm -f $(OBJ) $(OBJ_PART) $(OBJ_ARCH) makedumpfile makedumpfile.8.gz makedumpfile.conf.5.gz
++ 	rm -f $(OBJ) $(OBJ_PART) $(OBJ_ARCH) makedumpfile makedumpfile.8 makedumpfile.conf.5
 +-- 
-+2.36.0
++2.25.1
 +
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_1.34.1.bb b/meta-webserver/recipes-webadmin/netdata/netdata_1.34.1.bb
-index 71fb0783b6..b777d20897 100644
---- a/meta-webserver/recipes-webadmin/netdata/netdata_1.34.1.bb
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata_1.34.1.bb
-@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
+diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.0.bb b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.1.bb
+similarity index 85%
+rename from meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.0.bb
+rename to meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.1.bb
+index d4da03186..c3f965b04 100644
+--- a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.0.bb
++++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.1.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ LICENSE = "GPL-2.0-only"
  
- DEPENDS += "libuv util-linux zlib"
+ SRCBRANCH ?= "master"
+-SRCREV = "06ef8e2b814feb08a668b7a3783c86674e49a7b1"
++SRCREV = "74bbdd14ec861552ace1ca63953eb2ef73e1f965"
  
--SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz"
-+SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz \
-+           file://0001-Use-explicit-typecast-to-enum-rrdset_flags.patch \
-+"
- SRC_URI[sha256sum] = "8ea0786df0e952209c14efeb02e25339a0769aa3edc029e12816b8ead24a82d7"
+ DEPENDS = "bzip2 zlib elfutils xz"
+ RDEPENDS:${PN}-tools = "perl ${PN}"
+@@ -52,12 +52,6 @@ do_install () {
+     install -m 755 ${S}/makedumpfile ${D}/usr/bin
+     install -m 755 ${S}/makedumpfile-R.pl ${D}/usr/bin
  
- # default netdata.conf for netdata configuration
+-    mkdir -p ${D}/usr/share/man/man8
+-    install -m 644 ${S}/makedumpfile.8.gz ${D}/usr/share/man/man8
+-
+-    mkdir -p ${D}/usr/share/man/man5
+-    install -m 644 ${S}/makedumpfile.conf.5.gz ${D}/usr/share/man/man5
+-
+     mkdir -p ${D}/etc/
+     install -m 644 ${S}/makedumpfile.conf ${D}/etc/makedumpfile.conf.sample
+ }
 -- 
-2.36.0
+2.25.1
 
 
