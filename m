@@ -1,160 +1,159 @@
-Return-Path: <crg7475@mailbox.org>
+Return-Path: <rybczynska@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B353C433EF
-	for <webhook@archiver.kernel.org>; Tue, 26 Apr 2022 09:44:15 +0000 (UTC)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- by mx.groups.io with SMTP id smtpd.web08.4200.1650966244950186786
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73CC4C433FE
+	for <webhook@archiver.kernel.org>; Tue, 26 Apr 2022 12:21:07 +0000 (UTC)
+Received: from mail-io1-f45.google.com (mail-io1-f45.google.com
+ [209.85.166.45])
+ by mx.groups.io with SMTP id smtpd.web08.5466.1650975659878808601
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Apr 2022 02:44:06 -0700
+ Tue, 26 Apr 2022 05:21:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@mailbox.org
- header.s=mail20150812 header.b=mSRfam6s;
- spf=pass (domain: mailbox.org, ip: 80.241.56.172,
- mailfrom: crg7475@mailbox.org)
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:105:465:1:3:0])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits)
- server-digest SHA256)
-	(No client certificate requested)
-	by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4KncQn4bW7z9sbv
-	for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Apr 2022 11:44:01 +0200 (CEST)
-From: Carlos Rafael Giani <crg7475@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812;
-	t=1650966240;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=axskNZ6PaSzVBLHGp5LEo0o4NnH8npGcHsYmvijZK/8=;
-	b=mSRfam6sxz9MW7vzCW9dD6Yea7SFlLISvORvtqKZa/Go+2o6Aqr2tFfPxau3TyrJki3epl
-	gUXuZjPzoQv0FXtJwAq9RPMN4Zb6a9I5ZY0DpsAXVYGOVKVTuKzkSRd3RgsXr9GcYGsmXu
-	fHp1MUjnkW/OyixafEC1KZeAJ8h8u9fusJlzPEPE9vwDXP0eeIkeSWWwEXPGhW4YrrReGB
-	h9U8kIgDWRSokhFEa6kZ3qcPvURixvzE7VyduCKk464bW5wpVXosfMioRbT7+4Wy/sxyEE
-	LIh9LwWK8UNDlZDThZdje8x5yPeBctCSiifQNcF87A+ETfGBfSSnkjn0AiZI9w==
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] pipewire: Upgrade to version 0.3.50
-Date: Tue, 26 Apr 2022 11:43:47 +0200
-Message-Id: <20220426094347.15196-1-crg7475@mailbox.org>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=WhekpkaE;
+ spf=pass (domain: gmail.com, ip: 209.85.166.45,
+ mailfrom: rybczynska@gmail.com)
+Received: by mail-io1-f45.google.com with SMTP id n134so19301193iod.5;
+        Tue, 26 Apr 2022 05:20:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=K6Zc1L4fqPTotPNqyWtGvlT/fFYH8v9nGanP5sra5NY=;
+        b=WhekpkaElPBzhlLj4noRjW8KchZTs0bsETvjekTMZstRb/Nh5Qi+vkK2rcIMnJaJTt
+         TVwOq/VWcHFclYwwRuwyb7jQopMpqDy9WfyMnj5GJ6Ew1dnKwIB2aHDre4/k6odWX/DL
+         nckRXAxwFfmr5Yz7g5gqKKZh4D1QddB8MaqNYIGCiAQkbq9abJcCGkh5gBvgxHvYkafd
+         DPA2Yo/vlXvSKQd6BBMDcsHZOBJZ0p1l9NEuO9fzUR7PNAq8o4cTHQLW4HpSRvwBqiF4
+         KzI0YLDYc2VgQHDNO/AkRBYO9qaF3cDK6bZTxDlXkVxup4k10g08f4Ud6Cuo/GAwJkXi
+         Yzjg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=K6Zc1L4fqPTotPNqyWtGvlT/fFYH8v9nGanP5sra5NY=;
+        b=az3l6bGltibPK3xTS6eKwbrjjrHTOBIpd+lym24iDCKsFDW0Op9APpglfKQgDHSKMm
+         I7ynIScdTDR5ImJSwYC++2vbQlkpvCjRD6bMuqz6afZCFRKhuHeY2uMcscGkGDymII99
+         ENiXjl3YLQYz6BSjXKGrE8FnKJGUJ1Z1UasMWAEq1PKdXIAJp5HVPTA/uTTGC02xaWoX
+         GRfuBfcCmdZJPHwvuLpCFTlkGsMM+vFSFuF9Tyneq7+X6se096MCDQjzbUcj+WM+OGYu
+         Ec23MmXRx+gcG1u2AhFPKKy44JdfBUHfdsl+uaN92Palhcq33Z/5ECjMmZ4rGWg3pGRC
+         woDQ==
+X-Gm-Message-State: AOAM530ewq2TjYhdFcyb2exJ4qLkMtkueDhCMc7bR+DI0UCefE1Oa1Dn
+	/ene+O39Hpvkkd78CrLI6U6AF7/zK6NVkvBGWiNtfcAX
+X-Google-Smtp-Source: 
+ ABdhPJwG/zwgXi8DZ2Vz0f+MwYMj2tbjm9YC1g0QWz0AChnD6f8vwboFKtJZ6VJy28jWPd1ROY5TqrVHNvoGi3CS0nU=
+X-Received: by 2002:a05:6602:2408:b0:657:9a8e:4c76 with SMTP id
+ s8-20020a056602240800b006579a8e4c76mr2195222ioa.190.1650975659147; Tue, 26
+ Apr 2022 05:20:59 -0700 (PDT)
 MIME-Version: 1.0
-X-MBO-RS-ID: 50a6c16cd4787918fe4
-X-MBO-RS-META: ij9st8r1ankgthmmzk5ghbuu1ps9zkp4
-Content-Transfer-Encoding: quoted-printable
+References: 
+ <CAApg2=Q9DOoYVHNSCR_=pEN-x7EQuRw2yhwqWhEG2zaMTONt8w@mail.gmail.com>
+In-Reply-To: 
+ <CAApg2=Q9DOoYVHNSCR_=pEN-x7EQuRw2yhwqWhEG2zaMTONt8w@mail.gmail.com>
+From: Marta Rybczynska <rybczynska@gmail.com>
+Date: Tue, 26 Apr 2022 14:20:47 +0200
+Message-ID: 
+ <CAApg2=TjNwub9WsLfh1ZAA8hfMVDPgTYVCELotUfGRGpO9gu8Q@mail.gmail.com>
+Subject: Re: CVE-check failing on world with meta-openembedded: diff.gz file
+To: OE-core <openembedded-core@lists.openembedded.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+ raj.khem@gmail.com
+Content-Type: multipart/alternative; boundary="000000000000b2455f05dd8db9bf"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Apr 2022 09:44:15 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Apr 2022 12:21:07 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96797
+ https://lists.openembedded.org/g/openembedded-devel/message/96798
 
-This is a bugfix release. Notably, this makes pw-dot work again - it
-required workarounds via pw-dump to output a non-empty dot graph in 0.3.4=
-9.
+--000000000000b2455f05dd8db9bf
+Content-Type: text/plain; charset="UTF-8"
 
-Full changelog:
+On Fri, Apr 22, 2022 at 11:07 AM Marta Rybczynska <rybczynska@gmail.com>
+wrote:
 
-https://gitlab.freedesktop.org/pipewire/pipewire/-/releases/0.3.50
+> Dear all,
+> We're running cve-check on a world build containing oe-core, meta-oe and
+> more. We have an issue with the lockdev recipe
+> (meta-openembedded/meta-oe/recipes-support/lockdev/lockdev_1.0.3.bb),
+> which causes a fail like below:
+>
+> $ bitbake world --runonly=do_cve_check
+> ERROR: lockdev-1_1.0.3-r0 do_cve_check: File Not found:
+> <path>lockdev/1_1.0.3-r0/lockdev_1.0.3-1.6.diff
+> ERROR: lockdev-1_1.0.3-r0 do_cve_check: Failure in searching patches
+> ERROR: Logfile of failure stored in:
+> <path>/lockdev/1_1.0.3-r0/temp/log.do_cve_check.8709
+> ERROR: Task
+> (<path>/meta-openembedded/meta-oe/recipes-support/lockdev/lockdev_1.0.3.bb:do_cve_check)
+> failed with exit code '1'
+>
+> The issue is caused by the fact that lockdev_1.0.3-1.6.diff is missing.
+> When we look into the recipe, it is downloading lockdev_1.0.3-1.6.diff.gz
+> file Please note the additional extension.
+>
+> Stripping the extension comes from oe-core/meta/oe/patch.py, from the
+> patch_path function, which is figuring out if a file is a patch, and
+> returning the local path if it is so. However, at the moment when we
+> do_cve_check, the .gz file is not uncompressed.
+>
+> I'm wondering how to solve it.
+> 1. Add a dependency to make sure eventual patch files are decompressed
+> first?
+> 2. Do not consider this as a patch file in the scope of cve-check ? (this
+> is more a part of the source then an actual patch that might be fixing a
+> CVE)
+>
+> This is the only case like that we have in the build. Please note that
+> removing ".diff" from the extension list in patch_path() is solving the
+> issue.
+>
+> Any comments or suggestions?
+>
+>
+Khem,
+Any feedback about this? From the history it looks like it was you who
+changed the recipe to use the .diff.gz file.
 
-0001-meson-Add-option-to-enable-disable-legacy-RTKit-modu.patch
-is no no longer needed since it has been merged and is part of 0.3.50.
+Thanks in advance,
+Marta
 
-Signed-off-by: Carlos Rafael Giani <crg7475@mailbox.org>
----
- ...-to-enable-disable-legacy-RTKit-modu.patch | 44 -------------------
- ...{pipewire_0.3.49.bb =3D> pipewire_0.3.50.bb} |  6 +--
- 2 files changed, 2 insertions(+), 48 deletions(-)
- delete mode 100644 meta-multimedia/recipes-multimedia/pipewire/files/000=
-1-meson-Add-option-to-enable-disable-legacy-RTKit-modu.patch
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.49.bb =3D=
-> pipewire_0.3.50.bb} (98%)
+--000000000000b2455f05dd8db9bf
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/files/0001-meson=
--Add-option-to-enable-disable-legacy-RTKit-modu.patch b/meta-multimedia/r=
-ecipes-multimedia/pipewire/files/0001-meson-Add-option-to-enable-disable-=
-legacy-RTKit-modu.patch
-deleted file mode 100644
-index 61bcdb3dd..000000000
---- a/meta-multimedia/recipes-multimedia/pipewire/files/0001-meson-Add-op=
-tion-to-enable-disable-legacy-RTKit-modu.patch
-+++ /dev/null
-@@ -1,44 +0,0 @@
--From b311f9e75f13205fd0738f7e89fd2062b9e7b237 Mon Sep 17 00:00:00 2001
--From: Carlos Rafael Giani <crg7475@mailbox.org>
--Date: Wed, 30 Mar 2022 19:44:38 +0200
--Subject: [PATCH] meson: Add option to enable/disable legacy RTKit module
--
--The RTKit module is being replaced by the RT module. Currently, it is
--always built if D-Bus is present. For packagers, it can be beneficial to
--be able to disable the legacy module. Add a Meson option to allow for
--exactly that. Make it enabled by default to not change default behavior.
--
--Upstream-Status: Submitted [https://gitlab.freedesktop.org/pipewire/pipe=
-wire/-/merge_requests/1204]
-----
-- meson_options.txt       | 4 ++++
-- src/modules/meson.build | 2 +-
-- 2 files changed, 5 insertions(+), 1 deletion(-)
--
--diff --git a/meson_options.txt b/meson_options.txt
--index 49d5b2203..2687bfe7e 100644
----- a/meson_options.txt
--+++ b/meson_options.txt
--@@ -237,3 +237,7 @@ option('libcanberra',
--        description: 'Enable code that depends on libcanberra',
--        type: 'feature',
--        value: 'auto')
--+option('legacy-rtkit',
--+       description: 'Build legacy rtkit module',
--+       type: 'boolean',
--+       value: 'true')
--diff --git a/src/modules/meson.build b/src/modules/meson.build
--index ee724bf52..2d26cc459 100644
----- a/src/modules/meson.build
--+++ b/src/modules/meson.build
--@@ -139,7 +139,7 @@ pipewire_module_rt =3D shared_library('pipewire-modu=
-le-rt', [ 'module-rt.c' ],
--   dependencies : [dbus_dep, mathlib, dl_lib, pipewire_dep],
-- )
--=20
---build_module_rtkit =3D dbus_dep.found()
--+build_module_rtkit =3D dbus_dep.found() and (get_option('legacy-rtkit')=
- =3D=3D true)
-- if build_module_rtkit
-- # TODO: This serves as a temporary alias to prevent breaking existing s=
-etups
-- #       while `module-rtkit` is being migrated to `module-rt`
----=20
--2.32.0
--
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.49.=
-bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb
-similarity index 98%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.49.b=
-b
-rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb
-index b821f4400..0d725b9ee 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.49.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb
-@@ -13,10 +13,8 @@ LIC_FILES_CHKSUM =3D " \
-=20
- DEPENDS =3D "dbus ncurses"
-=20
--SRCREV =3D "075e7b266876802eab0077afd13ea8e1cee5e1fd"
--SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
-master;protocol=3Dhttps \
--           file://0001-meson-Add-option-to-enable-disable-legacy-RTKit-m=
-odu.patch \
--           "
-+SRCREV =3D "64cf5e80e6240284e6b757907b900507fe56f1b5"
-+SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
-master;protocol=3Dhttps"
-=20
- S =3D "${WORKDIR}/git"
-=20
---=20
-2.32.0
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Fri, Apr 22, 2022 at 11:07 AM Mart=
+a Rybczynska &lt;<a href=3D"mailto:rybczynska@gmail.com">rybczynska@gmail.c=
+om</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margi=
+n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
+"><div dir=3D"ltr"><div>Dear all,</div><div>We&#39;re running cve-check on =
+a world build containing oe-core, meta-oe and more. We have an issue with t=
+he lockdev recipe (meta-openembedded/meta-oe/recipes-support/lockdev/<a hre=
+f=3D"http://lockdev_1.0.3.bb" target=3D"_blank">lockdev_1.0.3.bb</a>), whic=
+h causes a fail like below:</div><div><br></div><div>$ bitbake world --runo=
+nly=3Ddo_cve_check</div><div>ERROR: lockdev-1_1.0.3-r0 do_cve_check: File N=
+ot found: &lt;path&gt;lockdev/1_1.0.3-r0/lockdev_1.0.3-1.6.diff<br>ERROR: l=
+ockdev-1_1.0.3-r0 do_cve_check: Failure in searching patches<br>ERROR: Logf=
+ile of failure stored in: &lt;path&gt;/lockdev/1_1.0.3-r0/temp/log.do_cve_c=
+heck.8709<br>ERROR: Task (&lt;path&gt;/meta-openembedded/meta-oe/recipes-su=
+pport/lockdev/lockdev_1.0.3.bb:do_cve_check) failed with exit code &#39;1&#=
+39;</div><div><br></div><div>The issue is caused by the fact that lockdev_1=
+.0.3-1.6.diff is missing. When we look into the recipe, it is downloading l=
+ockdev_1.0.3-1.6.diff.gz file Please note the additional extension.<br></di=
+v><div><br></div><div>Stripping the extension comes from oe-core/meta/oe/pa=
+tch.py, from the patch_path function, which is figuring out if a file is a =
+patch, and returning the local path if it is so. However, at the moment whe=
+n we do_cve_check, the .gz file is not uncompressed.</div><div><br></div><d=
+iv></div><div>I&#39;m wondering how to solve it.<br></div><div>1. Add a dep=
+endency to make sure eventual patch files are decompressed first?</div><div=
+>2. Do not consider this as a patch file in the scope of cve-check ? (this =
+is more a part of the source then an actual patch that might be fixing a CV=
+E)<br></div><div><br></div><div>This is the only case like that we have in =
+the build. Please note that removing &quot;.diff&quot; from the extension l=
+ist in patch_path() is solving the issue.</div><div><br></div><div>Any comm=
+ents or suggestions?</div><br></div></blockquote><div><br></div><div>Khem,<=
+/div><div>Any feedback about this? From the history it looks like it was yo=
+u who changed the recipe to use the .diff.gz file.</div><div><br></div><div=
+>Thanks in advance,</div><div>Marta<br></div></div></div>
 
+--000000000000b2455f05dd8db9bf--
 
