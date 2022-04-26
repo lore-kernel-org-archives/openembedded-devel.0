@@ -1,115 +1,143 @@
-Return-Path: <schnitzeltony@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88544C433F5
-	for <webhook@archiver.kernel.org>; Tue, 26 Apr 2022 15:45:50 +0000 (UTC)
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com
- [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.web10.8514.1650987946811179545
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A7D46C433F5
+	for <webhook@archiver.kernel.org>; Tue, 26 Apr 2022 16:09:10 +0000 (UTC)
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com
+ [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web08.8851.1650989349904356218
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Apr 2022 08:45:46 -0700
+ Tue, 26 Apr 2022 09:09:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=AsbbWOHU;
- spf=pass (domain: gmail.com, ip: 209.85.216.45,
- mailfrom: schnitzeltony@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id bx5so9147215pjb.3
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Apr 2022 08:45:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Wlg/EcwE;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id
+ d23-20020a17090a115700b001d2bde6c234so2064193pje.1;
+        Tue, 26 Apr 2022 09:09:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=9JQW8PAMyixOI6AO/ZKrN6AgT/8iKJrBpEKrZWZ7IZY=;
-        b=AsbbWOHUU9kqNqhuDWDeXrOyFNehQt0Hjn+hwCQ4qiU59ZcNK4lCfx2g6F6i5d0vYk
-         sstpNrrEWE/M6XGcMgZZlNxj4PzPBk2fRl0lfiqVvs6wLsByv1PJfHNTMWpNQ4m+xqY8
-         zjXnGuU1rmE1Ez8ImTlX+ZVP/tQjfc2/Zp/YbMbwnskmqIFwotz1jtO0W+jVa197nzKq
-         VvVGhpIhxr2qivciMI+n4M5AlChNCJP2fXaWt6KiThZvWykiY1CU7d6AkVm5mhJ533LY
-         9kI4vOngNcvSekvDxukMAPCXI2igt7C/ZLQgurAyopCoQMcFBhrrJ2l+1Pw725ww14V0
-         0K/g==
+        h=message-id:date:mime-version:user-agent:content-language:to
+         :references:from:organization:subject:in-reply-to
+         :content-transfer-encoding;
+        bh=kaRBE2itETDdzN5OkMt3+NYvSCediYYkd9zBR4S3rp8=;
+        b=Wlg/EcwEAHLiOP+XBBnvzSVp43GXEviCWhdVp/IQyTrursv+5Y7p6uYjH9yS0yJruh
+         hqkM6OCHEswUFPqaSMVTnRLmoVBX6jJa5PzbIuiNiMY+d8jYVYtqE+fCBu+cjQEkuY3a
+         hW6pvPvG6334NXYd4wWhDVGS+crYhmOJf4szQFoizarnT6+BK2BIZSgvSNPpFQy/VEph
+         I7JFOaIx8fOGZwDPLLs2io1bKyBdRrknFFQQJ93MPMUJt3CukfTryAqrYayRjHzE5rv3
+         JSfLQqSMj1/o4H55O27v8fX9BOceoZH/cpPprcrUhBXoH3iS9KUBvhJNJAEzTmjqtCk5
+         7qrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=9JQW8PAMyixOI6AO/ZKrN6AgT/8iKJrBpEKrZWZ7IZY=;
-        b=yj9ZNNaPz7kjrtfoDz5h0YGByy96pKTwp2heNoXw/yv1g1h4W04nl7B6WbvcBVfgiE
-         cLYFByr4FYtQeuRMZeCCehTV8KujJlMLbRDHcneTWb1EXvzZd/gULVDJNWhYluPTCzWu
-         InKnA9L6ZJzhofW6YZwfV3WPRezA0e+GhAGN6Q7/r8PsMZvzKvKLBFN0sivzsiUzKmaa
-         I/USY7eXD9ImV9wv8O3oCXx8XpJ+jxq9h2XvypUwxYlxxrJ7+KK0viW4pn3puMip4H2F
-         WNQioAYgwMjdHR93FNp+l/MqD+qlAScduPCOr3pfztrpzCt0loUYhAcWkjzHF4EYbEkj
-         EzQQ==
-X-Gm-Message-State: AOAM5313Zxwdu/UuGrY7JaVsg5suVkQ1UGt7JreIGBv1r4R4JwirVz5B
-	WVnCklwm5aKGMeI5VNtKh0kmefeeQTDPJgCN0zQ=
+        h=x-gm-message-state:message-id:date:mime-version:user-agent
+         :content-language:to:references:from:organization:subject
+         :in-reply-to:content-transfer-encoding;
+        bh=kaRBE2itETDdzN5OkMt3+NYvSCediYYkd9zBR4S3rp8=;
+        b=YzWXHGTHqNa/EVkf0YoyWoARxIN5kTX+5tg9VI+CZDtsDITevnfZkt+URKvLY+10VA
+         2LOj99VMh74vHAHjWvHp4PlY0JY3l+NplowKJpoA9TnqD31oXubR6LLnq5VGo307j7gF
+         Rs3SMbKkA8UpLUzpbsssuSzTOQJHR10WJjV6SvcXKE3QMvBXdpDRCFswGu5eW5VgWSAU
+         GiliYwVqRSUAkisWZMyd1WPdGxHEN7kkIPau+hPgd4fGCbXHzykmrJgaWxRhJ2BMFaRO
+         RZ+N7UtjkApzWYp55MKz8IwRItSM+x6IMRJ27B8EC+3ksrSqYHCeEyb74gdjLNYe/jxB
+         XFJg==
+X-Gm-Message-State: AOAM532e/AMlMBib30tz+AtT6r62nJeVMzidx5DNPQ4zOHo6F2q6VE2T
+	jN6QHC0mCOGcsHgg4/XqUgA=
 X-Google-Smtp-Source: 
- ABdhPJwKTWin3Mzh/McLLZehwnuPhN1/2HI/nDpenxbHnDWRmyYFQDsxfTiX0UWkdP5M0dC6C8wKUlsUHpl9LwQ1pdg=
-X-Received: by 2002:a17:90b:314a:b0:1d9:5ccf:baab with SMTP id
- ip10-20020a17090b314a00b001d95ccfbaabmr15140533pjb.110.1650987946314; Tue, 26
- Apr 2022 08:45:46 -0700 (PDT)
+ ABdhPJzCwfqD9ZiM7u1ej3uxGVFC39qZZVG7StiI/dMP1Q5JhaXCZRU4g8Ub+UABK7n9i2JGxchjnQ==
+X-Received: by 2002:a17:902:bb90:b0:156:2c05:b34f with SMTP id
+ m16-20020a170902bb9000b001562c05b34fmr24546317pls.53.1650989349176;
+        Tue, 26 Apr 2022 09:09:09 -0700 (PDT)
+Received: from ?IPV6:2601:646:9200:a0f0:7cd2:3e2e:157d:406?
+ ([2601:646:9200:a0f0:7cd2:3e2e:157d:406])
+        by smtp.gmail.com with ESMTPSA id
+ e6-20020a056a001a8600b004fac74c8382sm15948247pfv.47.2022.04.26.09.09.08
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 26 Apr 2022 09:09:08 -0700 (PDT)
+Message-ID: <5e82785b-14bc-5a4d-a807-fdaa58afee5d@gmail.com>
+Date: Tue, 26 Apr 2022 09:09:06 -0700
 MIME-Version: 1.0
-References: <20220426151236.2924998-1-raj.khem@gmail.com>
-In-Reply-To: <20220426151236.2924998-1-raj.khem@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Tue, 26 Apr 2022 17:45:35 +0200
-Message-ID: 
- <CALbNGRTabnNuk5UKpAB__zPx=ewq4s-Jc-4Y=3PSJ2K=dD+WYg@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH 1/2] atkmm: Allow build with wayland
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.8.1
+Content-Language: en-US
+To: Marta Rybczynska <rybczynska@gmail.com>,
+ OE-core <openembedded-core@lists.openembedded.org>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+References: 
+ <CAApg2=Q9DOoYVHNSCR_=pEN-x7EQuRw2yhwqWhEG2zaMTONt8w@mail.gmail.com>
+ <CAApg2=TjNwub9WsLfh1ZAA8hfMVDPgTYVCELotUfGRGpO9gu8Q@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Subject: Re: CVE-check failing on world with meta-openembedded: diff.gz file
+In-Reply-To: 
+ <CAApg2=TjNwub9WsLfh1ZAA8hfMVDPgTYVCELotUfGRGpO9gu8Q@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Apr 2022 15:45:50 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Apr 2022 16:09:10 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96805
+ https://lists.openembedded.org/g/openembedded-devel/message/96806
 
-On Tue, Apr 26, 2022 at 5:12 PM Khem Raj <raj.khem@gmail.com> wrote:
+Hi Marta
 
-Thanks. Just a minor nit: Could you change commit message to 'atkmm:
-Allow build with wayland only' because it builds fine with wayland &
-x11
+On 4/26/22 5:20 AM, Marta Rybczynska wrote:
+> 
+> 
+> On Fri, Apr 22, 2022 at 11:07 AM Marta Rybczynska <rybczynska@gmail.com 
+> <mailto:rybczynska@gmail.com>> wrote:
+> 
+>     Dear all,
+>     We're running cve-check on a world build containing oe-core, meta-oe
+>     and more. We have an issue with the lockdev recipe
+>     (meta-openembedded/meta-oe/recipes-support/lockdev/lockdev_1.0.3.bb
+>     <http://lockdev_1.0.3.bb>), which causes a fail like below:
+> 
+>     $ bitbake world --runonly=do_cve_check
+>     ERROR: lockdev-1_1.0.3-r0 do_cve_check: File Not found:
+>     <path>lockdev/1_1.0.3-r0/lockdev_1.0.3-1.6.diff
+>     ERROR: lockdev-1_1.0.3-r0 do_cve_check: Failure in searching patches
+>     ERROR: Logfile of failure stored in:
+>     <path>/lockdev/1_1.0.3-r0/temp/log.do_cve_check.8709
+>     ERROR: Task
+>     (<path>/meta-openembedded/meta-oe/recipes-support/lockdev/lockdev_1.0.3.bb:do_cve_check)
+>     failed with exit code '1'
+> 
+>     The issue is caused by the fact that lockdev_1.0.3-1.6.diff is
+>     missing. When we look into the recipe, it is downloading
+>     lockdev_1.0.3-1.6.diff.gz file Please note the additional extension.
+> 
+>     Stripping the extension comes from oe-core/meta/oe/patch.py, from
+>     the patch_path function, which is figuring out if a file is a patch,
+>     and returning the local path if it is so. However, at the moment
+>     when we do_cve_check, the .gz file is not uncompressed.
+> 
+>     I'm wondering how to solve it.
+>     1. Add a dependency to make sure eventual patch files are
+>     decompressed first?
 
-Andreas
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Cc: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> ---
->  meta-oe/recipes-gnome/atk/atkmm-2.36_2.36.1.bb | 2 +-
->  meta-oe/recipes-gnome/atk/atkmm_2.28.2.bb      | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-gnome/atk/atkmm-2.36_2.36.1.bb b/meta-oe/rec=
-ipes-gnome/atk/atkmm-2.36_2.36.1.bb
-> index 9a5b1a1b83..0342b8a9f8 100644
-> --- a/meta-oe/recipes-gnome/atk/atkmm-2.36_2.36.1.bb
-> +++ b/meta-oe/recipes-gnome/atk/atkmm-2.36_2.36.1.bb
-> @@ -12,7 +12,7 @@ GNOMEBN =3D "atkmm"
->
->  inherit gnomebase features_check
->
-> -REQUIRED_DISTRO_FEATURES =3D "x11"
-> +ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
->
->  SRC_URI[archive.sha256sum] =3D "e11324bfed1b6e330a02db25cecc145dca03fb0d=
-ff47f0710c85e317687da458"
->
-> diff --git a/meta-oe/recipes-gnome/atk/atkmm_2.28.2.bb b/meta-oe/recipes-=
-gnome/atk/atkmm_2.28.2.bb
-> index 1f9c28e530..f6cb0a1e15 100644
-> --- a/meta-oe/recipes-gnome/atk/atkmm_2.28.2.bb
-> +++ b/meta-oe/recipes-gnome/atk/atkmm_2.28.2.bb
-> @@ -11,7 +11,7 @@ GNOMEBASEBUILDCLASS =3D "meson"
->
->  inherit gnomebase features_check
->
-> -REQUIRED_DISTRO_FEATURES =3D "x11"
-> +ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
->
->  SRC_URI[archive.sha256sum] =3D "a0bb49765ceccc293ab2c6735ba100431807d384=
-ffa14c2ebd30e07993fd2fa4"
->
-> --
-> 2.36.0
->
+
+I think this option looks best or perhaps we should drop applying debian 
+diff entirely since debian seems to have dropped this package
+
+I think regardless of what we do with this package it seems to be a 
+limitation of cve-check process which perhaps should either be fixed or 
+documented.
+
+>     2. Do not consider this as a patch file in the scope of cve-check ?
+>     (this is more a part of the source then an actual patch that might
+>     be fixing a CVE)
+> 
+>     This is the only case like that we have in the build. Please note
+>     that removing ".diff" from the extension list in patch_path() is
+>     solving the issue.
+> 
+>     Any comments or suggestions?
+> 
+> 
+> Khem,
+> Any feedback about this? From the history it looks like it was you who 
+> changed the recipe to use the .diff.gz file.
+> 
+> Thanks in advance,
+> Marta
 
