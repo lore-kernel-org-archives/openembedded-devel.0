@@ -1,191 +1,240 @@
-Return-Path: <ross.burton@arm.com>
+Return-Path: <hongxu.jia@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AF925C433EF
-	for <webhook@archiver.kernel.org>; Tue, 26 Apr 2022 08:28:13 +0000 (UTC)
-Received: from EUR03-DBA-obe.outbound.protection.outlook.com
- (EUR03-DBA-obe.outbound.protection.outlook.com [40.107.104.80])
- by mx.groups.io with SMTP id smtpd.web09.3812.1650961686505199848
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CF5BEC433F5
+	for <webhook@archiver.kernel.org>; Tue, 26 Apr 2022 08:50:23 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com
+ [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web12.3861.1650963015901563021
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Apr 2022 01:28:07 -0700
+ Tue, 26 Apr 2022 01:50:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@armh.onmicrosoft.com
- header.s=selector2-armh-onmicrosoft-com header.b=d8secVPm;
- spf=pass (domain: arm.com, ip: 40.107.104.80, mailfrom: ross.burton@arm.com)
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
- b=MuNgdpFGqW/2G8KZol42S0Z8jqAaBI0HwH3lSUkca6wGiTeydXoNqGfsDLNtBJ2OF9W5PaBbcU4gm3Bd3/HiZUvNChTM5zmmiSLugf6AjEoWl9Cbh+mdzdUDXENGw5FqyMtpIv0e8rX8+GOMp1VvkSZy9TqbWvjnv3m3fR2zOiGjUutyj7/Iu5aIfjwS4vtfNPpasImZwAJwi9rizcnko2SQ4Iuxz4g7Sb49hqZg7pJ3QqP2mCc0JdsDchPAIHZ9WntD6nGEA8+wVuKt/2NyhHOgzklx++FcT1SC8Vxin7KH6cOqUUCq9FyYWJWRlFD79RYBULDkki/S784sH0kNFQ==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sKVW8XurymRAEulkoSaB29O2DsAIFOp20we8KY0utBI=;
- b=ZvUlv99BPS0a8AxcXoHBhk+mcVW4Yn3/305PYkMp5dLmE+N1v9vdl5W329rC1diHUNRnDlaYtA4XmNS3X4d1pvgo+VmGgmXBsBfCMTd60OTXDt43VtK5H/OOgRwByZVD7um0h00Ytks3mJl95h98K1UGPhl9upjgDzmVV8e66zJmApi40j6DZODGHVi69HJwUO+kc3jkG3CEp91mHaQkc4LeN6SssaECxcL3H2x+8MRkoEF5T5Xjq25Fy1rPj/4PJ1dT0s8Nh16jSov38moQY1UVBrayYl7H92IDGO+0H6h7BtJ7d8Wogt7mN0Tw2pvXttTV28/8A/JF6LOjfbzfAA==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 63.35.35.123) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=armh.onmicrosoft.com; arc=pass (0
- oda=1 ltdi=1 spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sKVW8XurymRAEulkoSaB29O2DsAIFOp20we8KY0utBI=;
- b=d8secVPmD30u4LnQ6HrpHX5mA1PwIAPuIuPCjITYHNqQJAAW7QYFnRdnHwwrELhE6JTaphYuFE2NeHas2XHXXb2sqTj++j55iZ+vzwLMN2KXHy7X0QlSAgWZMKl+BiL2zIBGrMkiFCT8qY5CGMcacyR02cllu1XYVZO5RrMJR7c=
-Received: from AM6P195CA0059.EURP195.PROD.OUTLOOK.COM (2603:10a6:209:87::36)
- by PR3PR08MB5770.eurprd08.prod.outlook.com (2603:10a6:102:87::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5186.14; Tue, 26 Apr
- 2022 08:28:02 +0000
-Received: from VE1EUR03FT049.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:209:87:cafe::7b) by AM6P195CA0059.outlook.office365.com
- (2603:10a6:209:87::36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5186.14 via Frontend
- Transport; Tue, 26 Apr 2022 08:28:02 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- VE1EUR03FT049.mail.protection.outlook.com (10.152.19.216) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5186.14 via Frontend Transport; Tue, 26 Apr 2022 08:28:02 +0000
-Received: ("Tessian outbound 2d401af10eb3:v118");
- Tue, 26 Apr 2022 08:28:01 +0000
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: 11085dbbcd0413f5
-X-CR-MTA-TID: 64aa7808
-Received: from f5bd9fdf16f6.1
-	by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- B789EBD3-CE1D-47F6-A1F3-6A4885F1C7BA.1;
-	Tue, 26 Apr 2022 08:27:55 +0000
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
-    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id
- f5bd9fdf16f6.1
-    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
-    Tue, 26 Apr 2022 08:27:55 +0000
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=r6+mlmzo;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
+ invalid domain name (domain: windriver.com, ip: 205.220.166.238,
+ mailfrom: prvs=11152360f4=hongxu.jia@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
+ 23Q8nEF6020556
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 26 Apr 2022 01:50:15 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+ h=from : to : cc :
+ subject : date : message-id : references : in-reply-to : content-type :
+ mime-version; s=PPS06212021;
+ bh=sDftBc923mGovDHW2Zu62SJ+86lCNevuAEDtbX4f+BM=;
+ b=r6+mlmzooEpNkY/jLpTZ9xnIuoQMWHQo+KB8iz9amyVxskB8BNZkxcaOqVOzuBe6snZZ
+ PAMmTVwPVmaCX3tYF44Smc+bdD+kQVBo4KVYCKL6W6O9BvZgp/b+QEXUR3xcuYGK6Lh8
+ 01GAb17HB89xSMomJTdliSJ+jn2PRj6G8CVRrcIbQ+HvuMksgWTKKU99GTFw2ll7Qh31
+ q7ztf1Ur7+AQPBLIF2mSFQvnyKZ7bPInBuHahIbuc9p+7yEUkq+QE1ZCPMqzyfWk1uHF
+ LXlYUG+SZFIe60z6eu69EBU+/j+S7K8TvM7W5Mq/Dz0IZirHO6TdDXmkeelx9R1ZqRQh uQ==
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3fmcr4a4s5-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 26 Apr 2022 01:50:14 -0700
+Received: from m0250810.ppops.net (m0250810.ppops.net [127.0.0.1])
+	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 23Q8oEmZ023239
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 26 Apr 2022 01:50:14 -0700
+Received: from nam11-bn8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11lp2170.outbound.protection.outlook.com [104.47.58.170])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3fmcr4a4s4-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 26 Apr 2022 01:50:14 -0700
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=VApIUobJAmA4PBH0jiyT6kxzl+c3RRfkziZ1PxtxntMEqDOCtCfmqHrd2DWHU1+o7nly3OPV6TVtL0Feb7EhFYAO/eQxLiMN5Ny4GVzxP8tKCOyNNRAd2HAkAaHfwgWFcpB8DP3QxB6QEL0ChXZBY90NHQ9fZZvS+rDW1hCIeV88Ai1bNRCJLuxnPe9NEVfFhh71g+T7RQwQP9aOICvgOUgyLKUoZ2Ml1OWQ4Vs/z/WjavFyXtXHr2hISdzitsIscinuKJd8aPJxPLdVs8rVl1bEebp6s01gKv5FjAs1XPjlF8RWrZp4k+BveS9lDuIbfy8qlgFr6/v25dFc1RRvjQ==
+ b=k1T5tUsl0DY+naf01FMDUG0E6VUxp2Z2WPaOWVxjks1H87eOeAak1UwxLH9vm1Dau+15PxJWoGwNQY9mx+ot7X7x2NQt9djOqlGvwWHESqKQYGgrOGleRS5mCRG+vl51tvknwwK9F5Cwh/vO+t/Y+C9tuXKzVGXCcMZHQ2Qe38b3L9LvIu4qbAGuGtUwUZXSIlcwceiFm2MjcMvyw4jd4wNgIJDrHYubEceZFlCwEC8L2p8iq6YEJS/lhvH4s0ufyMoI3qNPJQvXhTJidu2OwKDXBP4lpJpfT3qJflBvJkzmR2/AX+5w1JVDozzSa0EXsQlDwEcsgbLHXeuz49dphw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sKVW8XurymRAEulkoSaB29O2DsAIFOp20we8KY0utBI=;
- b=iQYSPV7vchmsk7b3I/5XKuhy9PvCBlWnhPg4sFymSGErREJj13a5TywH3FB51QYUT0/tX0lctDUeHasuaIE1xSKrfLPSoRklpirop3r72w/gLJMz1gXNjhbKpAUlkGYnZJt63hOu0SeDTCrXhk87wnejllCFT0qnP5x/hzD99Y/+Rrp9INUztxZZJwEOXe37XIB+vy2aRmM/9+tlIV1uE1WOw0IP6IuU280wutzi9E6/uHt7r2u07WdC1uIbiA89WikvdQwMPFcFTkWZ/Y95YlV5A1nItHC5KsYnZp6vTUa1C0xgadi6WLrwWE46y97sqQziFxo+6jFcySQue9skwg==
+ bh=sDftBc923mGovDHW2Zu62SJ+86lCNevuAEDtbX4f+BM=;
+ b=Z3QSvxNKhRZTCm6ENUANmONtKmDZTz76mntP+cJcyMdeuNKGT5wffcv1902AtZJZPD5xcBYYg1Yz9dZaRpNDo+YAokMSU/rVoej0kXE5phdTbUjBzActf1Nf1DIg7H0a5o6nkWC9zokFq1HZGCqQq2q2Xh188YcfisyqQdAaF1efrn+ZlN7fmOgW5yeICuMJqlSLfw9z88njGD6UAE+OY7k0c6E1ePqahxMjupNH6/R3mFy4IkB8kwfRFrR9VSXljoANoPxDTfdKBjJV6zeDtouBvkaduNv3mRakgjqbvOPPSDJfhuxzwOhE7ApRL+r037zTJOvN2H9KMbyPYu+v/Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sKVW8XurymRAEulkoSaB29O2DsAIFOp20we8KY0utBI=;
- b=d8secVPmD30u4LnQ6HrpHX5mA1PwIAPuIuPCjITYHNqQJAAW7QYFnRdnHwwrELhE6JTaphYuFE2NeHas2XHXXb2sqTj++j55iZ+vzwLMN2KXHy7X0QlSAgWZMKl+BiL2zIBGrMkiFCT8qY5CGMcacyR02cllu1XYVZO5RrMJR7c=
-Received: from PA4PR08MB7411.eurprd08.prod.outlook.com (2603:10a6:102:2a3::12)
- by AM6PR08MB4615.eurprd08.prod.outlook.com (2603:10a6:20b:90::32) with
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from MW3PR11MB4633.namprd11.prod.outlook.com (2603:10b6:303:5b::9)
+ by MWHPR11MB1695.namprd11.prod.outlook.com (2603:10b6:300:22::23) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5186.14; Tue, 26 Apr
- 2022 08:27:52 +0000
-Received: from PA4PR08MB7411.eurprd08.prod.outlook.com
- ([fe80::8af:d35b:6628:5013]) by PA4PR08MB7411.eurprd08.prod.outlook.com
- ([fe80::8af:d35b:6628:5013%5]) with mapi id 15.20.5186.021; Tue, 26 Apr 2022
- 08:27:52 +0000
-From: Ross Burton <Ross.Burton@arm.com>
-To: "hongxu.jia@windriver.com" <hongxu.jia@windriver.com>,
-	"raj.khem@gmail.com" <raj.khem@gmail.com>
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5186.20; Tue, 26 Apr
+ 2022 08:50:11 +0000
+Received: from MW3PR11MB4633.namprd11.prod.outlook.com
+ ([fe80::2151:8727:290d:b39b]) by MW3PR11MB4633.namprd11.prod.outlook.com
+ ([fe80::2151:8727:290d:b39b%4]) with mapi id 15.20.5186.021; Tue, 26 Apr 2022
+ 08:50:11 +0000
+From: "Jia, Hongxu" <Hongxu.Jia@windriver.com>
+To: Ross Burton <ross.burton@arm.com>,
+        "raj.khem@gmail.com"
+	<raj.khem@gmail.com>
 CC: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [oe] [meta-oe][PATCH V2] cdrkit: add new option
  -eltorito-platform for genimageiso
 Thread-Topic: [oe] [meta-oe][PATCH V2] cdrkit: add new option
  -eltorito-platform for genimageiso
-Thread-Index: AQHYWUEy5swNNBSd50Cmjd8x36YIY60B28mR
-Date: Tue, 26 Apr 2022 08:27:52 +0000
+Thread-Index: AQHYWUeVDaz8G6gPMUu1iN5Jx3As2K0B4T5x
+Date: Tue, 26 Apr 2022 08:50:11 +0000
 Message-ID: 
- <PA4PR08MB7411247A4FC9C44AD8947FA0E8FB9@PA4PR08MB7411.eurprd08.prod.outlook.com>
+ <MW3PR11MB463301A653E2FD41B0D2B01794FB9@MW3PR11MB4633.namprd11.prod.outlook.com>
 References: 
  <CAMKF1soPGSypVZQav130t6HDdpobvomzf2XLQcVpKy2o6ZJDmw@mail.gmail.com>
  <20220426074207.451383-1-hongxu.jia@windriver.com>
-In-Reply-To: <20220426074207.451383-1-hongxu.jia@windriver.com>
+ <PA4PR08MB7411247A4FC9C44AD8947FA0E8FB9@PA4PR08MB7411.eurprd08.prod.outlook.com>
+In-Reply-To: 
+ <PA4PR08MB7411247A4FC9C44AD8947FA0E8FB9@PA4PR08MB7411.eurprd08.prod.outlook.com>
 Accept-Language: en-US
-Content-Language: en-GB
+Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-MS-Office365-Filtering-Correlation-Id: 9151d078-2bf1-4215-952c-08da275eade5
-x-ms-traffictypediagnostic: 
-	AM6PR08MB4615:EE_|VE1EUR03FT049:EE_|PR3PR08MB5770:EE_
-X-Microsoft-Antispam-PRVS: 
-	<PR3PR08MB57703B4FEC6182BCF5ABAB88E8FB9@PR3PR08MB5770.eurprd08.prod.outlook.com>
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original: 
- Mwvv0YgEXo8g09ASgHOCnD0hXTEYGpHKOTGPQbGALVd+CN2h67qpia0EF2PwXomY5ZzMumxBoYa/W4v9WDAa6PsOXPgHB5D/dgLMdRCsA7q/nQ4YQR50fbJfa/oAkA7CsD+Zv+31ttOp1RiWgyiDedP6RVVajOykh1menSDfEkveG6MW6Wtwv8596E9TEmG+/gJljXSyri1A1cZ1PeYRZBh8TWJqSbb0S4p44FUym4NczS0Z/rEY9FHEMP9Ed8l/UlBVbTpKK5T1pB14djau0FD5vOyJC6Zk1xCHLnSaoLILq2ym1r4HkSqAqF/gjKe8zGQN3cFduR1hU3i5rmuenoWg6PnHgBe4YJQLXC7+BKXqbhApn39arzy49DBAwo7Lk6iFE2pFmLQ7luu6HEAMk+NraedZ8r5rSYs6v0HwfRqh5qBdJzGcXyhihb7iNNwWWdQ56EHbgtXYJyEZKCcbOn7F1WwTAWQ0wRcLkwQIKoYhCk6r7FjBm1WVitQrj396Nzyj7qW0p1m/k7XI0u9OmZQstk2mUbkWWPdZ38EhjkIzG7FC8Nzhx8sFtbDxCxjNz1QXQqo55YoERRUDW2wVohayJZaJ7kGvsGaJ+yEcXzvu0FRBUSUQLozpBeeTAzlJ16t+QTxzdzHOVnljSMuS2AxG0WS8ooxTCjldC+IrQt5l9amuaqR4z6fiRGK2Cmfdzc9gx/RR4J5mTSpsNymSsheCY/ROMpq38cRMdvOIDaPikY2XG4VTAvumlqwy8JaFg4kRrVHVD0TuIgaQYgqHjQ9wH4YNph5biY7qsl5hUVuSBpAYgCT0lRy/fwKAQvUgTYbPtQhD28jqfWP3vBn/hQbNvsyZxdWIWW834YiActo=
-X-Forefront-Antispam-Report-Untrusted: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR08MB7411.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(66946007)(166002)(2906002)(64756008)(122000001)(38070700005)(55016003)(38100700002)(71200400001)(52536014)(966005)(33656002)(110136005)(8936002)(8676002)(4326008)(66446008)(66476007)(30864003)(76116006)(66556008)(91956017)(316002)(186003)(86362001)(7696005)(6506007)(26005)(83380400001)(9686003)(508600001)(5660300002)(21314003);DIR:OUT;SFP:1101;
+suggested_attachment_session_id: 52b32399-7b80-51b7-b4ee-64a24a572c0e
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 009cf84f-b770-4a2f-03e0-08da2761c5f6
+x-ms-traffictypediagnostic: MWHPR11MB1695:EE_
+x-microsoft-antispam-prvs: 
+ <MWHPR11MB169540C48B63FA0A5BF7DE3594FB9@MWHPR11MB1695.namprd11.prod.outlook.com>
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ xQjxDD9VK1BHYw1M1mJe5YQ6YipqlVtIMwwKbORW9etwSTeg3QLYao+wEKo3mpGRRcD8qFWpEGOJvKaYzvF6ul4A21mE2zeHL3+HoM0kmNdNMT4GB119037O/wX/E6kQYZdUobJOyKQRe3cdmfLgzp5BDfb+PbH9BDhMCJVfmPFInV9sSmHbWuT7QYaDfAEyEyAVMMHjhvNsUdrHi8Mupn5fwE82AM1ihwJOxwnWiM1JQT4sN53vLZHY1Tntu1J6ZFk0YIHV1pR5h4aZGqcB15NXZVWK6Jv4VhzYQFMVNtgiv6FR8pAzIMIxckKE4ivcI8+fOROgscMBAogrqom+Fe1d9BbBVTzpHYqUhQvhRlY6pofspP8fMV1XC27GJPwrl5U8WneAA7mCdGxZ6H0djsLlxBR4H/UNFlsplIN1AqVsPwHGoWqy3m6Sh50v5IHoks/8trOcSos+zc5rqcC9ObH3GjoUQrpetGSofEOlvhOZ1WFJo7SeRGKP46qXWHmU1cIrQWddaj8WDZBf1Vh5ixvCzWipAfQlyRo71LjOnWB6w/+XliXAwfsW61lz4UJhzOe4UXw3VJIcZWo2cMrh/5a6EDScKpH1RjbJoT4dCe6ii3KzneZVS5o13R4iXAnIxoN+9MjsUPRnlVWMIUA2KIrIIEcwq19Jp5pcZ54jHe3Nt+ucHL1lgKKaJhU2ptMJ6LtPb0D+1WHIoAWsd/pa4FBDKM/GWUignhMVRN/wH4diVGmfNcAY0OUHYNWEimguSyB0A8PqN2oEvwwRyZIuVzeczkhd5NTI/RhmegkrRPoRH8pAnIaf5WS1/NHk5TDKKk5kIlANHJr7aOtHqMFbdcrOMiugB3C1KGfrGbNkuo8=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW3PR11MB4633.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(83380400001)(38100700002)(38070700005)(186003)(53546011)(7696005)(26005)(6506007)(86362001)(91956017)(508600001)(110136005)(5660300002)(52536014)(8936002)(30864003)(19627405001)(2906002)(55016003)(33656002)(122000001)(66446008)(66476007)(4326008)(64756008)(19627235002)(9686003)(66556008)(8676002)(76116006)(66946007)(166002)(316002)(966005)(71200400001)(21314003)(579004);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?Windows-1252?Q?VAzGuCpMlENhYWgOkJ3KwOB9gJZha7iQjojch7twisGCVvuTipXR1KPV?=
+ =?Windows-1252?Q?941k7gN5XxyPitWblaLQA8WmV2avPLL2gdZ2ZEADGnqwU9gHlowXYdDH?=
+ =?Windows-1252?Q?Ua1ZK+rzDffL8AhfBuyfNUXTlu0+WqedeWDMMxnHMgMjbrCw8g+WAg9j?=
+ =?Windows-1252?Q?pUd5YE+ptGyOg2mpCopebwcuo6F/6UfEwrAt78xE6fLfIRtKGvVD3lx9?=
+ =?Windows-1252?Q?PxWws4EbmSbUwyyhwZai3W2x40z0bNodpIWIDEsA6/L0ynW4JL+VrC5W?=
+ =?Windows-1252?Q?Fx+/nldE6S3h+N5KecrH43fVSnBWNZ+UNH0wRcF8oFXzVMHpFiNEdyl+?=
+ =?Windows-1252?Q?lAUoKOCO5M+Jrbxz8rflVyWkhXPE8QFTHD4JHGhVq+RlEJ5HpuVFrDpl?=
+ =?Windows-1252?Q?9F9GXvUMAfjkFuuKoxID8jwcLwpy0nF22noxzzlu7MiLJN/+gZaWvFmP?=
+ =?Windows-1252?Q?5S9KqFgHTvYIpuVkuDU+2rHIc/qXpHpmnGuKdWzHo5AejMAJUGS4dl7E?=
+ =?Windows-1252?Q?DUNHzwFq5B577ZCgp3/I6wHpkYocyXQPejugNMcBPmE+9dlcfrPq7uc2?=
+ =?Windows-1252?Q?rjQBWGVkbJPg6q78b/SJ7yY+NNM7zj3TU3IW4y6qanrXCWRiqUDyac4O?=
+ =?Windows-1252?Q?1rmEimHMUoY/6l7Q5HqgDOwrU6FnxTRFC8WWKL8BsyGbKmZklplijUL8?=
+ =?Windows-1252?Q?1Hosqa5GWyJWPfuWAbaf4TKpcKF6pptCQUvYTnt5mz/dbH5d9OOca2/+?=
+ =?Windows-1252?Q?eG+GoxKVVu+HVg7Xrl2PoC8x+T2EGQVpAcRjSWzkUqxFbjiu2pt/2laL?=
+ =?Windows-1252?Q?3M1Xs3WY6VuLWo0b/3c5fSp9/gZQ6z03ONKN288+PpbnRVqnKFOUrZza?=
+ =?Windows-1252?Q?PWZ1MvCM4EYsOZlrAXW5T+kgxx4/TlcRRlWfaGG+2CaSGaRjKL2UIx/q?=
+ =?Windows-1252?Q?IIx+REGAG9/ehs0qk5T9rMvpmjc9d0wS6kRl/j13wCOu8/aDM0/UizWP?=
+ =?Windows-1252?Q?KN3T2EKAVgAX2RQ0hjQBdzF63oC8uNMQFVwej/cpkjNLjUioOWijAfdh?=
+ =?Windows-1252?Q?bcyeKdm9ormfYyPl3VhuciNBchknLNCdszAa0nRv+wC6CKgq3W9K5y5Y?=
+ =?Windows-1252?Q?TypCzDRF88UuAeaaWikUdTHFqh3fkiS2fpFZ2t/uRPo1hCb1DIX+DPHu?=
+ =?Windows-1252?Q?qz+M7PoVy6PMNZd3lYjlbtmiOalkExY0BU6+vcQw0BSYBScjlO05sC5o?=
+ =?Windows-1252?Q?dySEE4xtf9MO7pWV5oITNSdTC5t952+LIRKanPDSeVVy5IhxU3+3BiZH?=
+ =?Windows-1252?Q?JUBDLU8j5wqnEGSWoyrsTYUMV89/7MqOjntFav72UBRvmkBnYOPKfJzc?=
+ =?Windows-1252?Q?pliIAMNOk7enXP09+vkDlw5T/SA/7TPNMEtffGGK/s5DQ9eXWRum7OGn?=
+ =?Windows-1252?Q?nTDTWC3zIOYZRPnDo1e2cCcNIU8kAND13pUcQX6sWEc+fRpn+AF2x/63?=
+ =?Windows-1252?Q?BalejIV+fh2qZFbj0d4kbc4Gj/2XoUt/HlHtrCqJyCHmtJn52jU+C1D1?=
+ =?Windows-1252?Q?Srsm50qDcr6TKVGYgZX5OY2xa1zQw666UX4V2KHtFaTDOwbVKLdAn7UJ?=
+ =?Windows-1252?Q?YqqEyFuHfpUlmBI7qpu0UT3J8ZA00DmxsTCw8fhA41Ve0KLrKFzI4U2J?=
+ =?Windows-1252?Q?FHjS6fnss9DJv/XeFjkY/8Jd1oK5HFX/zZmsG04m0jLlw8hRtkvpkegF?=
+ =?Windows-1252?Q?ejNo4JyApYwQ3k2EzoJpz1kfOi4z1GnlnbYWsdtmClKM4N4kAo2L8B6L?=
+ =?Windows-1252?Q?zhbfl3r942ewMyPrwcMnbS69YJBsM/UNpyriZCJBpZpj9SFSL6T034IG?=
+ =?Windows-1252?Q?xGKF+2uKNWbfwg=3D=3D?=
 Content-Type: multipart/alternative;
-	boundary="_000_PA4PR08MB7411247A4FC9C44AD8947FA0E8FB9PA4PR08MB7411eurp_"
+	boundary="_000_MW3PR11MB463301A653E2FD41B0D2B01794FB9MW3PR11MB4633namp_"
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR08MB4615
-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
- VE1EUR03FT049.eop-EUR03.prod.protection.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 
-	73396344-9df4-4b2f-a617-08da275ea80c
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	jMKOE6XSBa5zYTMGxDKHCI3fIp5LA5ldkT9QvKpPSOoc3GNtjYNBSNMW1dSsqCyb8ECVRLSmHOzcb9JxjlA6iVI32vx98iZl0gd7kF5L3u8IT9Jn6HHvFXyyx62XKH1EdWMKUVuYK3YoP3OH5RuT9Hv6AvVmlcYDHh7YwtApPUtN2yO5S9Er7DIZuJB9UGZHZ9Kk4sZOqR34K1hKbEfhogGa93sa/LkLGQMH5utBjQM10SBxjV1T0dicpHFVd41QY5xh3JhiwfndGHDToBbzJ+kMK2N9PdpF/MoKbcxioMKDnjAKQVx66aHf8QMdgApmCjQt35TPCc9EgQuf1sjUCq0RJEPg1+MSMPGsY5dxOJBb18VCz+vzN07Njgqtkz8cU2UBt235BzyRMBRWwE5R+XCH4sdv/i4UCBRxRO7+YL8DTCUvUyCyeEWlk66g9ebNVzx/EODJThatiYhgMyth+ywGwMCMP3lxpwwm37mb/i2jP6Hzv+q5vQnltZSwEb9AM1yGSvK3CD+o3RaFFhQlqmTAjiFLEC0SfXni3JFaW1fcQ13z1Rohy1PFqMXJSKAsYx5Sm4VGPt/H0hiYMflVkQqYyxgn1meuQaxgLgBeAJIKUaIjc2C26Mq90CIx8IK5AiPfsuIWM28+b2P1yxPe2xV0n8OM69QwyS2PlURFgIiquz9HLk2tuqIVcooR8KPPWrPVbC55PdY16EJwhl8V3JRM8SQ0K2edXnTDB0ZIaCuuAwynVGwhvfB0fg7FajHuPwmule7pnOjz/1cR4X5lwfXOCjS8EW6WO37SkckDJDyYQFmq4jrNTHvw8pMYi1/e0bvzZq2+i3/fPfFUAwu67Q==
-X-Forefront-Antispam-Report: 
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230001)(4636009)(36840700001)(46966006)(40470700004)(186003)(47076005)(83380400001)(508600001)(110136005)(86362001)(6506007)(336012)(7696005)(5660300002)(52536014)(8936002)(2906002)(30864003)(55016003)(33656002)(356005)(81166007)(26005)(4326008)(70206006)(9686003)(8676002)(70586007)(166002)(36860700001)(40460700003)(316002)(966005)(82310400005)(21314003)(559001)(579004);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Apr 2022 08:28:02.2853
- (UTC)
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: MW3PR11MB4633.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 9151d078-2bf1-4215-952c-08da275eade5
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: 
- TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	VE1EUR03FT049.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR08MB5770
+ 009cf84f-b770-4a2f-03e0-08da2761c5f6
+X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Apr 2022 08:50:11.2735
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 
+ qfTje8maprWFIpq63Ln3pzYHuUmDPoxcMKDzafkkZv/COCVik6bsZ00vP97Q8yLafIYWu03z5muJwOaoEK2bkcODQGVY9qht3tEunlQ+nx4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR11MB1695
+X-Proofpoint-GUID: 01NqIHvswk9U91cPviEdlRZNoplAZhvN
+X-Proofpoint-ORIG-GUID: fKWD8a0UzQD-WLGAtc8Jvwiw81EvvQQ0
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.858,Hydra:6.0.486,FMLib:17.11.64.514
+ definitions=2022-04-26_02,2022-04-25_03,2022-02-23_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0
+ suspectscore=0 mlxlogscore=999 phishscore=0 clxscore=1015 malwarescore=0
+ spamscore=0 priorityscore=1501 lowpriorityscore=0 mlxscore=0 adultscore=0
+ bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2202240000 definitions=main-2204260058
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Apr 2022 08:28:13 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Apr 2022 08:50:23 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96795
+ https://lists.openembedded.org/g/openembedded-devel/message/96796
 
---_000_PA4PR08MB7411247A4FC9C44AD8947FA0E8FB9PA4PR08MB7411eurp_
+--_000_MW3PR11MB463301A653E2FD41B0D2B01794FB9MW3PR11MB4633namp_
 Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
+
+Thanks for pointing out the license issue, this patch ports from 4 source f=
+iles of cdrtools,
+and both of them are `either GPL version 2, or (at your option) any later v=
+ersion.'
+
+https://github.com/jobermayr/cdrtools/blob/master/mkisofs/mkisofs.c#L16
+https://github.com/jobermayr/cdrtools/blob/master/mkisofs/mkisofs.h#L10
+https://github.com/jobermayr/cdrtools/blob/master/mkisofs/iso9660.h#L11
+https://github.com/jobermayr/cdrtools/blob/master/mkisofs/eltorito.c#L17
+
+Both of cdrtools(2013)[1] and cdrkit(2010)[2] are not alive, I do not plan =
+to send it to upstream cdrkit
+
+[1] https://github.com/Distrotech/cdrtools.git
+[2] https://github.com/Distrotech/cdrkit.git
+
+
+//Hongxu
+________________________________
+From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.o=
+penembedded.org> on behalf of Ross Burton <ross.burton@arm.com>
+Sent: Tuesday, April 26, 2022 4:27 PM
+To: Jia, Hongxu <Hongxu.Jia@windriver.com>; raj.khem@gmail.com <raj.khem@gm=
+ail.com>
+Cc: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.ope=
+nembedded.org>
+Subject: Re: [oe] [meta-oe][PATCH V2] cdrkit: add new option -eltorito-plat=
+form for genimageiso
+
+
+[Please note: This e-mail is from an EXTERNAL e-mail address]
 
 Have you carefully examined the license of the files that you=92re copying =
 from mkisofs: the cdrkit fork exists specifically because cdrtools relicens=
 ed to CDDL[1] which is GPL-incompatible.
 
+
+
 Also, are we going to be carrying this forever, or is upstream cdrkit going=
  to merge the same code?
 
+
+
 Ross
-[1] https://lwn.net/Articles/195167/
+
+[1] https://lwn.net/Articles/195167/<https://urldefense.com/v3/__https://lw=
+n.net/Articles/195167/__;!!AjveYdw8EvQ!btpKzzhENE4MTn-5IpQis-5o7h92q8WlvESx=
+Iau6EPwQSyrNeleP0hpqJFcs5okmS4UKhLzN4LGIssjsAhuucWI$>
+
+
 
 From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.o=
-penembedded.org> on behalf of hongxu via lists.openembedded.org <hongxu.jia=
-=3Dwindriver.com@lists.openembedded.org>
+penembedded.org> on behalf of hongxu via lists.openembedded.org<https://url=
+defense.com/v3/__http://lists.openembedded.org__;!!AjveYdw8EvQ!btpKzzhENE4M=
+Tn-5IpQis-5o7h92q8WlvESxIau6EPwQSyrNeleP0hpqJFcs5okmS4UKhLzN4LGIssjsOMyxYoc=
+$> <hongxu.jia=3Dwindriver.com@lists.openembedded.org>
 Date: Tuesday, 26 April 2022 at 08:42
 To: raj.khem@gmail.com <raj.khem@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.ope=
 nembedded.org>
 Subject: [oe] [meta-oe][PATCH V2] cdrkit: add new option -eltorito-platform=
  for genimageiso
+
 Mkisofs/genimageiso now correctly supports El Torito multi boot entries by
 introducing a Boot Dection Header before a list of alternate boot entries.
 
@@ -200,7 +249,10 @@ the parameter are:
 
 Port implement from cdrtools:
 https://github.com/jobermayr/cdrtools/commit/a50804fd61d75eb689a515dbfca696=
-8ca2296fd7
+8ca2296fd7<https://urldefense.com/v3/__https://github.com/jobermayr/cdrtool=
+s/commit/a50804fd61d75eb689a515dbfca6968ca2296fd7__;!!AjveYdw8EvQ!btpKzzhEN=
+E4MTn-5IpQis-5o7h92q8WlvESxIau6EPwQSyrNeleP0hpqJFcs5okmS4UKhLzN4LGIssjsnFq2=
+zSQ$>
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
@@ -210,11 +262,19 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
  create mode 100644 meta-oe/recipes-multimedia/cdrkit/files/0001-add-new-op=
 tion-eltorito-platform.patch
 
-diff --git a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb b/meta-oe/r=
-ecipes-multimedia/cdrkit/cdrkit_1.1.11.bb
+diff --git a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb<https://url=
+defense.com/v3/__http://cdrkit_1.1.11.bb__;!!AjveYdw8EvQ!btpKzzhENE4MTn-5Ip=
+Qis-5o7h92q8WlvESxIau6EPwQSyrNeleP0hpqJFcs5okmS4UKhLzN4LGIssjs18XBY54$> b/m=
+eta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb<https://urldefense.com/v3=
+/__http://cdrkit_1.1.11.bb__;!!AjveYdw8EvQ!btpKzzhENE4MTn-5IpQis-5o7h92q8Wl=
+vESxIau6EPwQSyrNeleP0hpqJFcs5okmS4UKhLzN4LGIssjs18XBY54$>
 index dd0405c95..757f99d1f 100644
---- a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
-+++ b/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
+--- a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb<https://urldefense=
+.com/v3/__http://cdrkit_1.1.11.bb__;!!AjveYdw8EvQ!btpKzzhENE4MTn-5IpQis-5o7=
+h92q8WlvESxIau6EPwQSyrNeleP0hpqJFcs5okmS4UKhLzN4LGIssjs18XBY54$>
++++ b/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb<https://urldefense=
+.com/v3/__http://cdrkit_1.1.11.bb__;!!AjveYdw8EvQ!btpKzzhENE4MTn-5IpQis-5o7=
+h92q8WlvESxIau6EPwQSyrNeleP0hpqJFcs5okmS4UKhLzN4LGIssjs18XBY54$>
 @@ -11,6 +11,7 @@ SRC_URI =3D "${DEBIAN_MIRROR}/main/c/${BPN}/${BPN}_${PV}.=
 orig.tar.gz \
             file://0001-define-__THROW-to-avoid-build-issue-with-musl.patch=
@@ -257,7 +317,10 @@ platform.patch
 +
 +Upstream-Status: Inappropriate [port from cdrtools]
 +https://github.com/jobermayr/cdrtools/commit/a50804fd61d75eb689a515dbfca69=
-68ca2296fd7
+68ca2296fd7<https://urldefense.com/v3/__https://github.com/jobermayr/cdrtoo=
+ls/commit/a50804fd61d75eb689a515dbfca6968ca2296fd7__;!!AjveYdw8EvQ!btpKzzhE=
+NE4MTn-5IpQis-5o7h92q8WlvESxIau6EPwQSyrNeleP0hpqJFcs5okmS4UKhLzN4LGIssjsnFq=
+2zSQ$>
 +
 +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 +---
@@ -603,93 +666,163 @@ th.
 +
 --
 2.27.0
+
 IMPORTANT NOTICE: The contents of this email and any attachments are confid=
 ential and may also be privileged. If you are not the intended recipient, p=
 lease notify the sender immediately and do not disclose the contents to any=
  other person, use it for any purpose, or store or copy the information in =
 any medium. Thank you.
 
---_000_PA4PR08MB7411247A4FC9C44AD8947FA0E8FB9PA4PR08MB7411eurp_
+--_000_MW3PR11MB463301A653E2FD41B0D2B01794FB9MW3PR11MB4633namp_
 Content-Type: text/html; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
-<html xmlns:o=3D"urn:schemas-microsoft-com:office:office" xmlns:w=3D"urn:sc=
-hemas-microsoft-com:office:word" xmlns:m=3D"http://schemas.microsoft.com/of=
-fice/2004/12/omml" xmlns=3D"http://www.w3.org/TR/REC-html40">
+<html>
 <head>
 <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
 252">
-<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
-<style><!--
-/* Font Definitions */
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+Thanks for pointing out the license issue, t<span style=3D"color: rgb(0, 0,=
+ 0); font-family: Calibri, Arial, Helvetica, sans-serif; font-size: 12pt;">=
+his patch ports from 4 source files of cdrtools,</span></div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<span style=3D"color: rgb(0, 0, 0); font-family: Calibri, Arial, Helvetica,=
+ sans-serif; font-size: 12pt;">and both of them are `either GPL version 2, =
+or (at your option) any later version.'</span></div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<div><br>
+</div>
+<div>https://github.com/jobermayr/cdrtools/blob/master/mkisofs/mkisofs.c#L1=
+6</div>
+<div>https://github.com/jobermayr/cdrtools/blob/master/mkisofs/mkisofs.h#L1=
+0</div>
+<div>https://github.com/jobermayr/cdrtools/blob/master/mkisofs/iso9660.h#L1=
+1</div>
+<div>https://github.com/jobermayr/cdrtools/blob/master/mkisofs/eltorito.c#L=
+17</div>
+<div><br>
+</div>
+Both of cdrtools(2013)[1] and cdrkit(2010)[2] are not alive, I do not plan =
+to send it to upstream cdrkit<br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+[1]&nbsp;<a href=3D"https://github.com/Distrotech/cdrtools.git" id=3D"LPlnk=
+733827">https://github.com/Distrotech/cdrtools.git</a></div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+[2]&nbsp;<a href=3D"https://github.com/Distrotech/cdrkit.git" id=3D"LPNoLPO=
+WALinkPreview">https://github.com/Distrotech/cdrkit.git</a></div>
+<div class=3D"_Entity _EType_OWALinkPreview _EId_OWALinkPreview _EReadonly_=
+1"></div>
+<br>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+//Hongxu</div>
+<div id=3D"appendonsend"></div>
+<hr style=3D"display:inline-block;width:98%" tabindex=3D"-1">
+<div id=3D"divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" st=
+yle=3D"font-size:11pt" color=3D"#000000"><b>From:</b> openembedded-devel@li=
+sts.openembedded.org &lt;openembedded-devel@lists.openembedded.org&gt; on b=
+ehalf of Ross Burton &lt;ross.burton@arm.com&gt;<br>
+<b>Sent:</b> Tuesday, April 26, 2022 4:27 PM<br>
+<b>To:</b> Jia, Hongxu &lt;Hongxu.Jia@windriver.com&gt;; raj.khem@gmail.com=
+ &lt;raj.khem@gmail.com&gt;<br>
+<b>Cc:</b> openembedded-devel@lists.openembedded.org &lt;openembedded-devel=
+@lists.openembedded.org&gt;<br>
+<b>Subject:</b> Re: [oe] [meta-oe][PATCH V2] cdrkit: add new option -eltori=
+to-platform for genimageiso</font>
+<div>&nbsp;</div>
+</div>
+<style>
+<!--
 @font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
+	{font-family:"Cambria Math"}
 @font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{font-family:Calibri}
+p.x_MsoNormal, li.x_MsoNormal, div.x_MsoNormal
 	{margin:0cm;
 	font-size:10.0pt;
-	font-family:"Calibri",sans-serif;}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:blue;
-	text-decoration:underline;}
-span.EmailStyle19
-	{mso-style-type:personal-reply;
-	font-family:"Calibri",sans-serif;
-	color:windowtext;}
-.MsoChpDefault
-	{mso-style-type:export-only;
-	font-size:10.0pt;}
+	font-family:"Calibri",sans-serif}
+a:link, span.x_MsoHyperlink
+	{color:blue;
+	text-decoration:underline}
+span.x_EmailStyle19
+	{font-family:"Calibri",sans-serif;
+	color:windowtext}
+.x_MsoChpDefault
+	{font-size:10.0pt}
 @page WordSection1
-	{size:612.0pt 792.0pt;
-	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
-div.WordSection1
-	{page:WordSection1;}
---></style>
-</head>
-<body lang=3D"EN-GB" link=3D"blue" vlink=3D"purple" style=3D"word-wrap:brea=
-k-word">
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;mso-fareast-language=
-:EN-US">Have you carefully examined the license of the files that you=92re =
-copying from mkisofs: the cdrkit fork exists specifically because cdrtools =
-relicensed to CDDL[1] which is GPL-incompatible.<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;mso-fareast-language=
-:EN-US"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;mso-fareast-language=
-:EN-US">Also, are we going to be carrying this forever, or is upstream cdrk=
-it going to merge the same code?<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;mso-fareast-language=
-:EN-US"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;mso-fareast-language=
-:EN-US">Ross<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;mso-fareast-language=
-:EN-US">[1] https://lwn.net/Articles/195167/<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt;mso-fareast-language=
-:EN-US"><o:p>&nbsp;</o:p></span></p>
-<div style=3D"border:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt 0cm =
-0cm 0cm">
-<p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt"><b><span style=3D"fon=
-t-size:12.0pt;color:black">From:
-</span></b><span style=3D"font-size:12.0pt;color:black">openembedded-devel@=
-lists.openembedded.org &lt;openembedded-devel@lists.openembedded.org&gt; on=
- behalf of hongxu via lists.openembedded.org &lt;hongxu.jia=3Dwindriver.com=
-@lists.openembedded.org&gt;<br>
+	{margin:72.0pt 72.0pt 72.0pt 72.0pt}
+div.x_WordSection1
+	{}
+-->
+</style>
+<div lang=3D"EN-GB" link=3D"blue" vlink=3D"purple" style=3D"word-wrap:break=
+-word">
+<p></p>
+<div style=3D"border:solid #9C6500 1.0pt; padding:2.0pt 2.0pt 2.0pt 2.0pt">
+<p class=3D"x_MsoNormal" style=3D"line-height:12.0pt; background:#FFEB9C"><=
+b><span style=3D"font-size:10.0pt; color:#9C6500"></span></b><span style=3D=
+"font-size:10.0pt; color:red">[Please note: This e-mail is from an EXTERNAL=
+ e-mail address]</span></p>
+</div>
+<div>
+<div class=3D"x_WordSection1">
+<p class=3D"x_MsoNormal"><span style=3D"font-size:11.0pt">Have you carefull=
+y examined the license of the files that you=92re copying from mkisofs: the=
+ cdrkit fork exists specifically because cdrtools relicensed to CDDL[1] whi=
+ch is GPL-incompatible.</span></p>
+<p class=3D"x_MsoNormal"><span style=3D"font-size:11.0pt">&nbsp;</span></p>
+<p class=3D"x_MsoNormal"><span style=3D"font-size:11.0pt">Also, are we goin=
+g to be carrying this forever, or is upstream cdrkit going to merge the sam=
+e code?</span></p>
+<p class=3D"x_MsoNormal"><span style=3D"font-size:11.0pt">&nbsp;</span></p>
+<p class=3D"x_MsoNormal"><span style=3D"font-size:11.0pt">Ross</span></p>
+<p class=3D"x_MsoNormal"><span style=3D"font-size:11.0pt">[1] <a href=3D"ht=
+tps://urldefense.com/v3/__https://lwn.net/Articles/195167/__;!!AjveYdw8EvQ!=
+btpKzzhENE4MTn-5IpQis-5o7h92q8WlvESxIau6EPwQSyrNeleP0hpqJFcs5okmS4UKhLzN4LG=
+IssjsAhuucWI$">
+https://lwn.net/Articles/195167/</a></span></p>
+<p class=3D"x_MsoNormal"><span style=3D"font-size:11.0pt">&nbsp;</span></p>
+<div style=3D"border:none; border-top:solid #B5C4DF 1.0pt; padding:3.0pt 0c=
+m 0cm 0cm">
+<p class=3D"x_MsoNormal" style=3D"margin-bottom:12.0pt"><b><span style=3D"f=
+ont-size:12.0pt; color:black">From:
+</span></b><span style=3D"font-size:12.0pt; color:black">openembedded-devel=
+@lists.openembedded.org &lt;openembedded-devel@lists.openembedded.org&gt; o=
+n behalf of hongxu via
+<a href=3D"https://urldefense.com/v3/__http://lists.openembedded.org__;!!Aj=
+veYdw8EvQ!btpKzzhENE4MTn-5IpQis-5o7h92q8WlvESxIau6EPwQSyrNeleP0hpqJFcs5okmS=
+4UKhLzN4LGIssjsOMyxYoc$">
+lists.openembedded.org</a> &lt;hongxu.jia=3Dwindriver.com@lists.openembedde=
+d.org&gt;<br>
 <b>Date: </b>Tuesday, 26 April 2022 at 08:42<br>
 <b>To: </b>raj.khem@gmail.com &lt;raj.khem@gmail.com&gt;<br>
 <b>Cc: </b>openembedded-devel@lists.openembedded.org &lt;openembedded-devel=
 @lists.openembedded.org&gt;<br>
 <b>Subject: </b>[oe] [meta-oe][PATCH V2] cdrkit: add new option -eltorito-p=
-latform for genimageiso<o:p></o:p></span></p>
+latform for genimageiso</span></p>
 </div>
 <div>
-<p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt"><span style=3D"font-s=
-ize:11.0pt">Mkisofs/genimageiso now correctly supports El Torito multi boot=
- entries by<br>
+<p class=3D"x_MsoNormal" style=3D"margin-bottom:12.0pt"><span style=3D"font=
+-size:11.0pt">Mkisofs/genimageiso now correctly supports El Torito multi bo=
+ot entries by<br>
 introducing a Boot Dection Header before a list of alternate boot entries.<=
 br>
 <br>
@@ -703,9 +836,11 @@ the parameter are:<br>
 -&nbsp;&nbsp; #&nbsp;&nbsp; an arbitrary numerical value<br>
 <br>
 Port implement from cdrtools:<br>
-<a href=3D"https://github.com/jobermayr/cdrtools/commit/a50804fd61d75eb689a=
-515dbfca6968ca2296fd7">https://github.com/jobermayr/cdrtools/commit/a50804f=
-d61d75eb689a515dbfca6968ca2296fd7</a><br>
+<a href=3D"https://urldefense.com/v3/__https://github.com/jobermayr/cdrtool=
+s/commit/a50804fd61d75eb689a515dbfca6968ca2296fd7__;!!AjveYdw8EvQ!btpKzzhEN=
+E4MTn-5IpQis-5o7h92q8WlvESxIau6EPwQSyrNeleP0hpqJFcs5okmS4UKhLzN4LGIssjsnFq2=
+zSQ$">https://github.com/jobermayr/cdrtools/commit/a50804fd61d75eb689a515db=
+fca6968ca2296fd7</a><br>
 <br>
 Signed-off-by: Hongxu Jia &lt;hongxu.jia@windriver.com&gt;<br>
 ---<br>
@@ -718,11 +853,22 @@ nbsp; 1 +<br>
 &nbsp;create mode 100644 meta-oe/recipes-multimedia/cdrkit/files/0001-add-n=
 ew-option-eltorito-platform.patch<br>
 <br>
-diff --git a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb b/meta-oe/r=
-ecipes-multimedia/cdrkit/cdrkit_1.1.11.bb<br>
+diff --git a/meta-oe/recipes-multimedia/cdrkit/<a href=3D"https://urldefens=
+e.com/v3/__http://cdrkit_1.1.11.bb__;!!AjveYdw8EvQ!btpKzzhENE4MTn-5IpQis-5o=
+7h92q8WlvESxIau6EPwQSyrNeleP0hpqJFcs5okmS4UKhLzN4LGIssjs18XBY54$">cdrkit_1.=
+1.11.bb</a> b/meta-oe/recipes-multimedia/cdrkit/<a href=3D"https://urldefen=
+se.com/v3/__http://cdrkit_1.1.11.bb__;!!AjveYdw8EvQ!btpKzzhENE4MTn-5IpQis-5=
+o7h92q8WlvESxIau6EPwQSyrNeleP0hpqJFcs5okmS4UKhLzN4LGIssjs18XBY54$">cdrkit_1=
+.1.11.bb</a><br>
 index dd0405c95..757f99d1f 100644<br>
---- a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb<br>
-+++ b/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb<br>
+--- a/meta-oe/recipes-multimedia/cdrkit/<a href=3D"https://urldefense.com/v=
+3/__http://cdrkit_1.1.11.bb__;!!AjveYdw8EvQ!btpKzzhENE4MTn-5IpQis-5o7h92q8W=
+lvESxIau6EPwQSyrNeleP0hpqJFcs5okmS4UKhLzN4LGIssjs18XBY54$">cdrkit_1.1.11.bb=
+</a><br>
++++ b/meta-oe/recipes-multimedia/cdrkit/<a href=3D"https://urldefense.com/v=
+3/__http://cdrkit_1.1.11.bb__;!!AjveYdw8EvQ!btpKzzhENE4MTn-5IpQis-5o7h92q8W=
+lvESxIau6EPwQSyrNeleP0hpqJFcs5okmS4UKhLzN4LGIssjs18XBY54$">cdrkit_1.1.11.bb=
+</a><br>
 @@ -11,6 +11,7 @@ SRC_URI =3D &quot;${DEBIAN_MIRROR}/main/c/${BPN}/${BPN}_$=
 {PV}.orig.tar.gz \<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=
@@ -771,8 +917,11 @@ platform.patch<br>
 +-&nbsp;&nbsp; #&nbsp;&nbsp; an arbitrary numerical value<br>
 +<br>
 +Upstream-Status: Inappropriate [port from cdrtools]<br>
-+https://github.com/jobermayr/cdrtools/commit/a50804fd61d75eb689a515dbfca69=
-68ca2296fd7<br>
++<a href=3D"https://urldefense.com/v3/__https://github.com/jobermayr/cdrtoo=
+ls/commit/a50804fd61d75eb689a515dbfca6968ca2296fd7__;!!AjveYdw8EvQ!btpKzzhE=
+NE4MTn-5IpQis-5o7h92q8WlvESxIau6EPwQSyrNeleP0hpqJFcs5okmS4UKhLzN4LGIssjsnFq=
+2zSQ$">https://github.com/jobermayr/cdrtools/commit/a50804fd61d75eb689a515d=
+bfca6968ca2296fd7</a><br>
 +<br>
 +Signed-off-by: Hongxu Jia &lt;hongxu.jia@windriver.com&gt;<br>
 +---<br>
@@ -1334,16 +1483,17 @@ nbsp;&nbsp; [ISODCL(13,&nbsp; 13)];<br>
 +2.27.0<br>
 +<br>
 -- <br>
-2.27.0<o:p></o:p></span></p>
+2.27.0</span></p>
 </div>
 </div>
 IMPORTANT NOTICE: The contents of this email and any attachments are confid=
 ential and may also be privileged. If you are not the intended recipient, p=
 lease notify the sender immediately and do not disclose the contents to any=
  other person, use it for any purpose,
- or store or copy the information in any medium. Thank you.
+ or store or copy the information in any medium. Thank you. </div>
+</div>
 </body>
 </html>
 
---_000_PA4PR08MB7411247A4FC9C44AD8947FA0E8FB9PA4PR08MB7411eurp_--
+--_000_MW3PR11MB463301A653E2FD41B0D2B01794FB9MW3PR11MB4633namp_--
 
