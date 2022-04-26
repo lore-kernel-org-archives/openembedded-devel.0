@@ -2,450 +2,126 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41444C433EF
-	for <webhook@archiver.kernel.org>; Tue, 26 Apr 2022 05:48:11 +0000 (UTC)
-Received: from mail-qv1-f45.google.com (mail-qv1-f45.google.com
- [209.85.219.45])
- by mx.groups.io with SMTP id smtpd.web11.2863.1650952089311221258
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 945C5C433EF
+	for <webhook@archiver.kernel.org>; Tue, 26 Apr 2022 06:19:11 +0000 (UTC)
+Received: from mail-qv1-f52.google.com (mail-qv1-f52.google.com
+ [209.85.219.52])
+ by mx.groups.io with SMTP id smtpd.web11.3058.1650953946364770934
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Apr 2022 22:48:09 -0700
+ Mon, 25 Apr 2022 23:19:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ivJOwKTC;
- spf=pass (domain: gmail.com, ip: 209.85.219.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f45.google.com with SMTP id a5so13411392qvx.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=p8RGsqow;
+ spf=pass (domain: gmail.com, ip: 209.85.219.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f52.google.com with SMTP id q13so4498466qvk.3
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Apr 2022 22:48:09 -0700 (PDT)
+ Mon, 25 Apr 2022 23:19:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=UbZoW8KwFI6tmHv+mBEL2Msn+dRRpRZSroRyIE4FsBY=;
-        b=ivJOwKTCd+WNRtWYCVepD68nuWFqiHWld0Dt3LWCkfiGryy0mVX6b8xQPY9JB2BIj8
-         XdvgvSegMZcC5lBheCY2MU6sUZ1u8M5dO3CWSQuTqmaYSd6nQNUficw1VxwKRT6kUar7
-         IZS2o+aSgjnFCSeM+PsIJN6isXXgy1tjodq40jf1yDxDOfxMbznc4+x9hDKzIg7ouFgu
-         CNtrI+1k8szgmETkKYzRc4TShEnLsAeEp2qhZoMVjw1OgEcxDJ/S0DSn6w2RivnRBuxy
-         d8yN9zQLv8Yjl0/1o52FpNs7RdIugRUxY5Q6wmkHdLIY+yUfwi2rw0SlJC23FC6ByA3u
-         KDiA==
+        bh=vC1XMH2albF64CuDVudFofJiNIR5SHx1qEcMjTTQNB0=;
+        b=p8RGsqowJtcnJl4RO5e2BjiQGX0nPusf6bQT32V6Ec+mJqoPl7SoAwXeKCLUSStlYE
+         HqfllTBZxEe5Z1+Wsn2lJwfalTH69Jg+T6440f3bsDrAm+cSDMnwS5YJGYE1zOlpM5qa
+         iiRF2/w99wztzpra73cUSZYzJwbJp3Dc5e//K/JirCQ+I32DixxdljqgifPDhAaQtc50
+         WrmyJIUrW+u4/FjZa3TtnrE2VXpoWI0v8gwWVg/Dv0jwHnyAwqClvv9TON6Xv0q/M1fZ
+         vcLqyRsLh1apqJh4P1JUllmoO/Jl0SNvjIrcSrWiGSL95RD8sL6eoM6mLDghjbEjS4Sv
+         JbNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=UbZoW8KwFI6tmHv+mBEL2Msn+dRRpRZSroRyIE4FsBY=;
-        b=r9nlV0qy/QcOXvmLjHpc0d/x9voDS12Gz9BKqcyanhGNoz2WkUBHQPCIugI+lIcv5R
-         7BRtpxIzJFYfj9iZB0M3dmaT8Dt3v4PZCPIN3Oo/5G6hYkTk/EDucVXp0psCD2JMJ1OY
-         V4nLrkoInSDVeu7MLKnWPFcGic8UgEtCH5sUJ1UMZop8QX6ygEdHraRRRoHms5lV2vTE
-         W8+r3+zk5zh/rEKeTqjRLtZbk0wK1TqZ4rD15zAj2fNsCTOHxjIK3pPn/AOZ9iCzW8pl
-         Tp5acRjmStor4YGxXeIbsPGxmzmmgeS0Ny09yf1uq3U5VWojIGLcVl5HxVutFrI9UCW/
-         6f1g==
-X-Gm-Message-State: AOAM5338UwokERrefoD/R7OVNMKk8ZNuyzz76lfrgt5khTxh44o+Mz6O
-	aH8pGtBUzScEnZJ+n1zRifNA5nv5funGdV8ejKQ=
+        bh=vC1XMH2albF64CuDVudFofJiNIR5SHx1qEcMjTTQNB0=;
+        b=R9hRE0VRpw7y7Eem9CGGux14KpCZLUTNnoC9Lb5Q72GBM6L0+Zdo3M7iBcOTY47XNQ
+         CcS1gsoAHsgpNrS59dXRU1qmg2S4oTQzSkxq7lvSNNiVs5iscLD9nF3luJqV+tGfUxJq
+         4yuRKL9RYaBeJUFsBkxFDnItQBVVNT/u4SCPg1pcDif59dPqSCkn3cg+gnxQU8rXcdJj
+         fMsGf0rdkXRQty2PXqR6Drpp6BaGnfC2s+ur5RNjD72UtWOIBgOQOBOoAJrNdOw8Ul0j
+         q2+5Fc9Y7DHSXLuWGDa2mT+TIW7RMeOygZhUFADvq/VdXYwcm49zh+rQawofV2DxdU55
+         rFFw==
+X-Gm-Message-State: AOAM533NVNSQNtIyoYXpxqIshzbWlNhDZz9i8qo6qdDcGzR1mVGYAVaf
+	3Dv8DZFCpUYsTNFMK1bT2pJc0AWfl8wQ/ph/Gkf7qP6CDm9tRw==
 X-Google-Smtp-Source: 
- ABdhPJysChxCe5youEsT4yv9Phwtazu5lNqu9qEFSfw5g22aWrhMsJ1BfXT0uZZdwb80+zK0DZ/AP8vi2lHmtepdCdA=
-X-Received: by 2002:ad4:5ba6:0:b0:456:4896:f519 with SMTP id
- 6-20020ad45ba6000000b004564896f519mr235096qvq.16.1650952088151; Mon, 25 Apr
- 2022 22:48:08 -0700 (PDT)
+ ABdhPJxRWo4E3SwwcoqkFM2YcjObnaQX4eySzzpSq2+5c5x3N9GG7XXj8RGEXC4brgauN0B6rdYG1QeRyjkFVa/RhiQ=
+X-Received: by 2002:a05:6214:519b:b0:456:47e8:f04e with SMTP id
+ kl27-20020a056214519b00b0045647e8f04emr362860qvb.110.1650953945385; Mon, 25
+ Apr 2022 23:19:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220426031713.3146450-1-hongxu.jia@windriver.com>
-In-Reply-To: <20220426031713.3146450-1-hongxu.jia@windriver.com>
+References: <20220425063030.814264-1-yi.zhao@windriver.com>
+In-Reply-To: <20220425063030.814264-1-yi.zhao@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 25 Apr 2022 22:47:41 -0700
+Date: Mon, 25 Apr 2022 23:18:39 -0700
 Message-ID: 
- <CAMKF1soPGSypVZQav130t6HDdpobvomzf2XLQcVpKy2o6ZJDmw@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH] cdrkit: add new option -eltorito-platform for
- genimageiso
-To: Hongxu Jia <hongxu.jia@windriver.com>
+ <CAMKF1spsLvzBJQrvmVZX3ZKK9a8=-UpcVm54AEqM-PHRgqm-FA@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH] frr: add PACKAGECONFIG for fpm
+To: Yi Zhao <yi.zhao@windriver.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Apr 2022 05:48:11 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Apr 2022 06:19:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96791
+ https://lists.openembedded.org/g/openembedded-devel/message/96792
 
-fails to build on clang/mips
+I am seeing
 
-https://errors.yoctoproject.org/Errors/Details/655476/
+https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1681
 
-On Mon, Apr 25, 2022 at 8:17 PM Hongxu Jia <hongxu.jia@windriver.com> wrote:
+This could be an intermittent failure due to build time race or
+related to this change perhaps, I have seen this before too. Can you
+look into it ?
+
+On Sun, Apr 24, 2022 at 11:30 PM Yi Zhao <yi.zhao@windriver.com> wrote:
 >
-> Mkisofs/genimageiso now correctly supports El Torito multi boot entries by
-> introducing a Boot Dection Header before a list of alternate boot entries.
+> The Forwarding Plane Manager support is optional, make it as
+> PACKAGECONFIG.
 >
-> New option -eltorito-platform allows to set the El Torito platform id
-> for a boot entry or for a list of boot entries. Supported values for
-> the parameter are:
-> -   x86 the standard value vor x86 based PCs
-> -   PPC the Power PC platform
-> -   Mac The Apple Mac platform
-> -   efi EFI based boot for PCs
-> -   #   an arbitrary numerical value
->
-> Port implement from cdrtools:
-> https://github.com/jobermayr/cdrtools/commit/a50804fd61d75eb689a515dbfca6968ca2296fd7
->
-> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 > ---
->  .../cdrkit/cdrkit_1.1.11.bb                   |   1 +
->  ...001-add-new-option-eltorito-platform.patch | 336 ++++++++++++++++++
->  2 files changed, 337 insertions(+)
->  create mode 100644 meta-oe/recipes-multimedia/cdrkit/files/0001-add-new-option-eltorito-platform.patch
+>  meta-networking/recipes-protocols/frr/frr/frr.pam  | 2 +-
+>  meta-networking/recipes-protocols/frr/frr_8.2.2.bb | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb b/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
-> index dd0405c95..757f99d1f 100644
-> --- a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
-> +++ b/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
-> @@ -11,6 +11,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/c/${BPN}/${BPN}_${PV}.orig.tar.gz \
->             file://0001-define-__THROW-to-avoid-build-issue-with-musl.patch \
->             file://0002-Do-not-use-rcmd-on-build-with-musl.patch \
->             file://0001-genisoimage-Add-missing-extern-definition.patch \
-> +           file://0001-add-new-option-eltorito-platform.patch \
->             "
->  SRC_URI:append:class-nativesdk = " \
->             file://0001-install-netscsid-to-bin-for-nativesdk.patch \
-> diff --git a/meta-oe/recipes-multimedia/cdrkit/files/0001-add-new-option-eltorito-platform.patch b/meta-oe/recipes-multimedia/cdrkit/files/0001-add-new-option-eltorito-platform.patch
-> new file mode 100644
-> index 000000000..c0b0364bb
-> --- /dev/null
-> +++ b/meta-oe/recipes-multimedia/cdrkit/files/0001-add-new-option-eltorito-platform.patch
-> @@ -0,0 +1,336 @@
-> +From 34de1b83f8000d95a10afcfdb7ec814cd75b12b2 Mon Sep 17 00:00:00 2001
-> +From: Hongxu Jia <hongxu.jia@windriver.com>
-> +Date: Mon, 25 Apr 2022 18:18:00 +0800
-> +Subject: [PATCH] add new option -eltorito-platform
-> +
-> +Mkisofs now correctly supports El Torito multi boot entries by introducing
-> +a Boot Dection Header before a list of alternate boot entries.
-> +
-> +New option -eltorito-platform allows to set the El Torito platform id
-> +for a boot entry or for a list of boot entries. Supported values for
-> +the parameter are:
-> +-   x86 the standard value vor x86 based PCs
-> +-   PPC the Power PC platform
-> +-   Mac The Apple Mac platform
-> +-   efi EFI based boot for PCs
-> +-   #   an arbitrary numerical value
-> +
-> +Upstream-Status: Inappropriate [port from cdrtools]
-> +https://github.com/jobermayr/cdrtools/commit/a50804fd61d75eb689a515dbfca6968ca2296fd7
-> +
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + genisoimage/eltorito.c    | 73 +++++++++++++++++++++++++++++++++++++--
-> + genisoimage/genisoimage.c | 48 +++++++++++++++++++++++++
-> + genisoimage/genisoimage.h |  8 +++++
-> + genisoimage/iso9660.h     | 33 ++++++++++++++++--
-> + 4 files changed, 158 insertions(+), 4 deletions(-)
-> +
-> +diff --git a/genisoimage/eltorito.c b/genisoimage/eltorito.c
-> +index d52e17e..a804988 100644
-> +--- a/genisoimage/eltorito.c
-> ++++ b/genisoimage/eltorito.c
-> +@@ -56,6 +56,7 @@ static unsigned int bcat_de_flags;
-> + void  init_boot_catalog(const char *path);
-> + void  insert_boot_cat(void);
-> + static        void    get_torito_desc(struct eltorito_boot_descriptor *boot_desc);
-> ++static        void    fill_boot_shdr(struct eltorito_sectionheader_entry *boot_shdr_entry, int arch);
-> + static        void    fill_boot_desc(struct eltorito_defaultboot_entry *boot_desc_entry,
-> +                                                                               struct eltorito_boot_entry_info *boot_entry);
-> + void  get_boot_entry(void);
-> +@@ -282,7 +283,14 @@ get_torito_desc(struct eltorito_boot_descriptor *boot_desc)
-> +       struct directory_entry  *de2;   /* Boot catalog */
-> +       int                     i;
-> +       int                     offset;
-> ++      int                     arch = 0;
-> ++      int                     nentries = 0;
-> +       struct eltorito_defaultboot_entry boot_desc_record;
-> ++      struct eltorito_sectionheader_entry boot_shdr_record;
-> ++#ifdef __needed__
-> ++      struct eltorito_section_entry boot_section_record;
-> ++#endif
-> ++      struct eltorito_sectionheader_entry *last_section_header = 0;
-> +
-> +       memset(boot_desc, 0, sizeof (*boot_desc));
-> +       boot_desc->type[0] = 0;
-> +@@ -311,13 +319,22 @@ get_torito_desc(struct eltorito_boot_descriptor *boot_desc)
-> +       set_731(boot_desc->bootcat_ptr,
-> +               (unsigned int) get_733(de2->isorec.extent));
-> +
-> ++      /*
-> ++       * If the platform id for the first (default) boot entry has not been
-> ++       * explicitly set, we default to EL_TORITO_ARCH_x86
-> ++       */
-> ++      if ((first_boot_entry->type & ELTORITO_BOOT_ID) == 0) {
-> ++              first_boot_entry->boot_platform = EL_TORITO_ARCH_x86;
-> ++      }
-> ++      arch = first_boot_entry->boot_platform;
-> ++
-> +       /*
-> +        * we have the boot image, so write boot catalog information
-> +        * Next we write out the primary descriptor for the disc
-> +        */
-> +       memset(&valid_desc, 0, sizeof (valid_desc));
-> +       valid_desc.headerid[0] = 1;
-> +-      valid_desc.arch[0] = EL_TORITO_ARCH_x86;
-> ++      valid_desc.arch[0] = arch;  /* Platform id for the default boot */
-> +
-> +       /*
-> +        * we'll shove start of publisher id into id field,
-> +@@ -351,8 +368,17 @@ get_torito_desc(struct eltorito_boot_descriptor *boot_desc)
-> +               current_boot_entry != NULL;
-> +               current_boot_entry = current_boot_entry->next,
-> +               offset += sizeof (boot_desc_record)) {
-> ++              int newarch = arch;
-> +
-> +-              if (offset >= SECTOR_SIZE) {
-> ++              if (current_boot_entry->type & ELTORITO_BOOT_ID)
-> ++                      newarch = current_boot_entry->boot_platform;
-> ++              else
-> ++                      current_boot_entry->boot_platform = arch;
-> ++
-> ++              /*
-> ++               * El Torito has no such limitation but we currently have...
-> ++               */
-> ++              if (offset >= (SECTOR_SIZE - sizeof (boot_desc_record))) {
-> + #ifdef        USE_LIBSCHILY
-> +                       comerrno(EX_BAD,
-> +                       "Too many El Torito boot entries\n");
-> +@@ -362,12 +388,53 @@ get_torito_desc(struct eltorito_boot_descriptor *boot_desc)
-> +                       exit(1);
-> + #endif
-> +               }
-> ++
-> ++              if (current_boot_entry == first_boot_entry) {
-> ++                      ;
-> ++                      /* EMPTY */
-> ++              } else if ((current_boot_entry == first_boot_entry->next) ||
-> ++                          (arch != newarch) ||
-> ++                          (current_boot_entry->type & ELTORITO_SECTION_HEADER)) {
-> ++                      if (last_section_header)
-> ++                              set_721(&last_section_header->entry_count, nentries);
-> ++                      nentries = 1;
-> ++                      last_section_header = (struct eltorito_sectionheader_entry *)
-> ++                                                      (de2->table + offset);
-> ++                      fill_boot_shdr(&boot_shdr_record, newarch);
-> ++                      memcpy(de2->table + offset, &boot_shdr_record,
-> ++                                              sizeof (boot_shdr_record));
-> ++                      offset += sizeof (boot_desc_record);
-> ++              } else {
-> ++                      nentries++; /* Add entry to this section header */
-> ++              }
-> ++              /*
-> ++               * This works because a section entry has the same essential
-> ++               * layout as a default entry (and we do not populate the
-> ++               * selection criteria fields).
-> ++               */
-> ++
-> +               fill_boot_desc(&boot_desc_record, current_boot_entry);
-> +               memcpy(de2->table + offset, &boot_desc_record,
-> +                                       sizeof (boot_desc_record));
-> +       }
-> ++
-> ++      if (last_section_header) {
-> ++              set_721(&last_section_header->entry_count, nentries);
-> ++              last_section_header->header_id[0] = EL_TORITO_SHDR_ID_LAST_SHDR;
-> ++      }
-> ++
-> + }/* get_torito_desc(... */
-> +
-> ++static void
-> ++fill_boot_shdr(boot_shdr_entry, arch)
-> ++      struct eltorito_sectionheader_entry *boot_shdr_entry;
-> ++      int                 arch;
-> ++{
-> ++      memset(boot_shdr_entry, 0, sizeof(struct eltorito_sectionheader_entry));
-> ++      boot_shdr_entry->header_id[0] = EL_TORITO_SHDR_ID_SHDR;
-> ++      boot_shdr_entry->platform_id[0] = arch;
-> ++}
-> ++
-> + static void
-> + fill_boot_desc(struct eltorito_defaultboot_entry *boot_desc_entry,
-> +                                       struct eltorito_boot_entry_info *boot_entry)
-> +@@ -678,7 +745,9 @@ get_boot_entry()
-> +       if (!first_boot_entry) {
-> +               first_boot_entry = current_boot_entry;
-> +               last_boot_entry = current_boot_entry;
-> ++              current_boot_entry->boot_platform = EL_TORITO_ARCH_x86;
-> +       } else {
-> ++              current_boot_entry->boot_platform = last_boot_entry->boot_platform;
-> +               last_boot_entry->next = current_boot_entry;
-> +               last_boot_entry = current_boot_entry;
-> +       }
-> +diff --git a/genisoimage/genisoimage.c b/genisoimage/genisoimage.c
-> +index 46f0cb7..bfa920e 100644
-> +--- a/genisoimage/genisoimage.c
-> ++++ b/genisoimage/genisoimage.c
-> +@@ -271,6 +271,8 @@ struct rcopts {
-> +       char            **variable;
-> + };
-> +
-> ++static int get_boot_platid(opt_arg);
-> ++
-> + struct rcopts rcopt[] = {
-> +       {"PREP", &preparer},
-> +       {"PUBL", &publisher},
-> +@@ -404,6 +406,7 @@ struct ld_option {
-> +
-> + #define       OPTION_ALLOW_LEADING_DOTS       1070
-> + #define       OPTION_PUBLISHER                1071
-> ++#define       OPTION_PLATFORM                 1072
-> +
-> + #ifdef                JIGDO_TEMPLATE
-> + #define       OPTION_JTT_OUTPUT               1101
-> +@@ -528,6 +531,8 @@ static const struct ld_option ld_options[] =
-> +       'b', "FILE", "Set El Torito boot image name", ONE_DASH},
-> +       {{"eltorito-alt-boot", no_argument, NULL, OPTION_ALT_BOOT},
-> +       '\0', NULL, "Start specifying alternative El Torito boot parameters", ONE_DASH},
-> ++      {{"eltorito-platform", required_argument, NULL, OPTION_PLATFORM},
-> ++      '\0', "ID", "Set El Torito platform id for the next boot entry", ONE_DASH},
-> +       {{"sparc-boot", required_argument, NULL, 'B'},
-> +       'B', "FILES", "Set sparc boot image names", ONE_DASH},
-> +       {{"sunx86-boot", required_argument, NULL, OPTION_SUNX86BOOT},
-> +@@ -1558,6 +1563,9 @@ int main(int argc, char *argv[])
-> +                        */
-> +                       new_boot_entry();
-> +                       break;
-> ++              case OPTION_PLATFORM:
-> ++                      get_boot_platid(optarg);
-> ++                      break;
-> +               case OPTION_BOOTALPHA:
-> +                       use_alphaboot++;
-> +                       /* list of pathnames of boot images */
-> +@@ -3829,3 +3837,43 @@ e_malloc(size_t size)
-> +      memset(pt, 0, size);
-> +       return (pt);
-> + }
-> ++
-> ++static int
-> ++get_boot_platid(opt_arg)
-> ++      char    *opt_arg;
-> ++{
-> ++      long    val;
-> ++      char    *ptr;
-> ++
-> ++      use_eltorito++;
-> ++      if (streql(opt_arg, "x86")) {
-> ++              val = EL_TORITO_ARCH_x86;
-> ++      } else if (streql(opt_arg, "PPC")) {
-> ++              val = EL_TORITO_ARCH_PPC;
-> ++      } else if (streql(opt_arg, "Mac")) {
-> ++              val = EL_TORITO_ARCH_PPC;
-> ++      } else if (streql(opt_arg, "efi")) {
-> ++              val = EL_TORITO_ARCH_EFI;
-> ++      } else {
-> ++              val = strtol(opt_arg, &ptr, 0);
-> ++              if (*ptr || val < 0 || val >= 0x100) {
-> ++                      comerrno(EX_BAD, "Bad boot system ID.\n");
-> ++              }
-> ++      }
-> ++
-> ++      /*
-> ++       * If there is already a boot entry and the boot file name has been set
-> ++       * for this boot entry and the new platform id differs from the
-> ++       * previous value, we start a new boot section.
-> ++       */
-> ++      if (current_boot_entry &&
-> ++          current_boot_entry->boot_image != NULL &&
-> ++          current_boot_entry->boot_platform != val) {
-> ++          new_boot_entry();
-> ++      }
-> ++      get_boot_entry();
-> ++      current_boot_entry->type |= ELTORITO_BOOT_ID;
-> ++      current_boot_entry->boot_platform = val;
-> ++      return (1);
-> ++}
-> ++
-> +diff --git a/genisoimage/genisoimage.h b/genisoimage/genisoimage.h
-> +index bbedfb0..4dae1e8 100644
-> +--- a/genisoimage/genisoimage.h
-> ++++ b/genisoimage/genisoimage.h
-> +@@ -299,6 +299,14 @@ struct eltorito_boot_entry_info {
-> +       int             boot_info_table;
-> +       int             load_size;
-> +       int             load_addr;
-> ++
-> ++#define       ELTORITO_BOOT_ID    1
-> ++#define       ELTORITO_SECTION_HEADER 2
-> ++      int     type;
-> ++      /*
-> ++       * Valid if (type & ELTORITO_BOOT_ID) != 0
-> ++       */
-> ++      int     boot_platform;
-> + };
-> +
-> + extern int    goof;
-> +diff --git a/genisoimage/iso9660.h b/genisoimage/iso9660.h
-> +index c74c2a9..61b6fc0 100644
-> +--- a/genisoimage/iso9660.h
-> ++++ b/genisoimage/iso9660.h
-> +@@ -62,6 +62,7 @@ struct iso_volume_descriptor {
-> + #define       EL_TORITO_ARCH_x86      0
-> + #define       EL_TORITO_ARCH_PPC      1
-> + #define       EL_TORITO_ARCH_MAC      2
-> ++#define       EL_TORITO_ARCH_EFI      0xEF
-> +
-> + #define       EL_TORITO_BOOTABLE      0x88
-> + #define       EL_TORITO_NOT_BOOTABLE  0
-> +@@ -159,10 +160,15 @@ struct eltorito_boot_descriptor {
-> + };
-> +
-> + /* Validation entry for El Torito */
-> ++/*
-> ++ * headerid must be 1
-> ++ * id is the manufacturer ID
-> ++ * cksum to make the sum of all shorts in this record 0
-> ++ */
-> + struct eltorito_validation_entry {
-> +       char headerid                   [ISODCL(1,    1)]; /* 711 */
-> +       char arch                       [ISODCL(2,    2)];
-> +-      char pad1                       [ISODCL(3,    4)]; /* 711 */
-> ++      char pad1                       [ISODCL(3,    4)]; /* 721 */
-> +       char id                         [ISODCL(5,   28)]; /* CD devel/man*/
-> +       char cksum                      [ISODCL(29,  30)];
-> +       char key1                       [ISODCL(31,  31)];
-> +@@ -173,7 +179,7 @@ struct eltorito_validation_entry {
-> + struct eltorito_defaultboot_entry {
-> +       char boot_id                    [ISODCL(1,    1)]; /* 711 */
-> +       char boot_media                 [ISODCL(2,    2)];
-> +-      char loadseg                    [ISODCL(3,    4)]; /* 711 */
-> ++      char loadseg                    [ISODCL(3,    4)]; /* 721 */
-> +       char sys_type                   [ISODCL(5,    5)];
-> +       char pad1                       [ISODCL(6,    6)];
-> +       char nsect                      [ISODCL(7,    8)];
-> +@@ -181,6 +187,29 @@ struct eltorito_defaultboot_entry {
-> +       char pad2                       [ISODCL(13,  32)];
-> + };
-> +
-> ++/* El Torito section header entry in boot catalog */
-> ++struct eltorito_sectionheader_entry {
-> ++#define    EL_TORITO_SHDR_ID_SHDR      0x90
-> ++#define    EL_TORITO_SHDR_ID_LAST_SHDR 0x91
-> ++      char header_id          [ISODCL(1,    1)]; /* 711 */
-> ++      char platform_id        [ISODCL(2,    2)];
-> ++      char entry_count        [ISODCL(3,    4)]; /* 721 */
-> ++      char id             [ISODCL(5,   32)];
-> ++};
-> ++
-> ++/* El Torito section entry in boot catalog */
-> ++struct eltorito_section_entry {
-> ++      char boot_id            [ISODCL(1,    1)]; /* 711 */
-> ++      char boot_media         [ISODCL(2,    2)];
-> ++      char loadseg            [ISODCL(3,    4)]; /* 721 */
-> ++      char sys_type           [ISODCL(5,    5)];
-> ++      char pad1           [ISODCL(6,    6)];
-> ++      char nsect          [ISODCL(7,    8)];
-> ++      char bootoff            [ISODCL(9,   12)];
-> ++      char sel_criteria       [ISODCL(13,  13)];
-> ++      char vendor_sel_criteria    [ISODCL(14,  32)];
-> ++};
-> ++
-> + /*
-> +  * XXX JS: The next two structures have odd lengths!
-> +  * Some compilers (e.g. on Sun3/mc68020) padd the structures to even length.
-> +--
-> +2.27.0
-> +
+> diff --git a/meta-networking/recipes-protocols/frr/frr/frr.pam b/meta-networking/recipes-protocols/frr/frr/frr.pam
+> index 3541a975a..83c403c2b 100644
+> --- a/meta-networking/recipes-protocols/frr/frr/frr.pam
+> +++ b/meta-networking/recipes-protocols/frr/frr/frr.pam
+> @@ -1,5 +1,5 @@
+>  #
+> -# The PAM configuration file for the quagga `vtysh' service
+> +# The PAM configuration file for the frr `vtysh' service
+>  #
+>
+>  # This allows root to change user infomation without being
+> diff --git a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
+> index 91e306f08..b6e180e2c 100644
+> --- a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
+> +++ b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
+> @@ -36,6 +36,7 @@ RDEPENDS:${PN}:class-target = "iproute2 python3-core bash"
+>  PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
+>  PACKAGECONFIG:class-native = ""
+>
+> +PACKAGECONFIG[fpm] = "--enable-fpm,--disable-fpm"
+>  PACKAGECONFIG[pam] = "--with-libpam,--without-libpam,libpam"
+>  PACKAGECONFIG[grpc] = "--enable-grpc,--disable-grpc,grpc-native grpc"
+>  PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp,net-snmp"
+> @@ -52,7 +53,6 @@ EXTRA_OECONF:class-target = "--sbindir=${libdir}/frr \
+>                               --sysconfdir=${sysconfdir}/frr \
+>                               --localstatedir=${localstatedir}/run/frr \
+>                               --enable-vtysh \
+> -                             --enable-fpm \
+>                               --enable-multipath=64 \
+>                               --enable-user=frr \
+>                               --enable-group=frr \
 > --
-> 2.27.0
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#96760): https://lists.openembedded.org/g/openembedded-devel/message/96760
+> Mute This Topic: https://lists.openembedded.org/mt/90679546/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
 >
 
