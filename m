@@ -1,209 +1,111 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <jupiter.hce@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9620DC433F5
-	for <webhook@archiver.kernel.org>; Wed, 27 Apr 2022 22:07:40 +0000 (UTC)
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
- [209.85.215.170])
- by mx.groups.io with SMTP id smtpd.web08.2884.1651097259564959558
- for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Apr 2022 15:07:39 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5C82C433FE
+	for <webhook@archiver.kernel.org>; Wed, 27 Apr 2022 22:09:20 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
+ [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.web11.2863.1651097350849888725
+ for <Openembedded-devel@lists.openembedded.org>;
+ Wed, 27 Apr 2022 15:09:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=iMXCRZdD;
- spf=pass (domain: gmail.com, ip: 209.85.215.170,
- mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f170.google.com with SMTP id z21so2471058pgj.1
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Apr 2022 15:07:39 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=R19fKexP;
+ spf=pass (domain: gmail.com, ip: 209.85.221.48,
+ mailfrom: jupiter.hce@gmail.com)
+Received: by mail-wr1-f48.google.com with SMTP id w4so4272411wrg.12;
+        Wed, 27 Apr 2022 15:09:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ayPyK8V9kTO7T+w1N3bpSs27q7xQ4zo9pbBrJTV98Ig=;
-        b=iMXCRZdDWgjzHTKKPwProOt3+Ef9LZTwdKf/PknKVMtaVIMvuuMhlHhBA166dawW9f
-         2lhMruKJB/RAHUE2fbuwkH+4ZDEeNZZ/cg2P4tYc9bNdVk/XXVVJUQrCdq5mNfA+MZfU
-         5oSKPy6MNFtz9odncqyVWC98Vk9GNVVmy0gE2xpZ8gAu+LHykvYqf71U/0f/Kj9vzBGj
-         JZ3QyPjdpL5Rt0QfABxk2eL/eETsD1CHu/gttTNL7VpZXbgKxBhKrahG7MoZ5CKcnf2d
-         c0iZ8FXFrBosbhjBauln9wVkOI3sLfCy561HpcuFsQrnkeEMHdKYHGu60y11KwSjHtZO
-         EHcw==
+        h=mime-version:from:date:message-id:subject:to:cc;
+        bh=XNtcz0rXpid6NVRrG6mNduP0hPhzfSNSV247HBxd8sk=;
+        b=R19fKexPXhHI87OhcmPeiaQwZuolqT9TaIwmHSxgWSHYC81iI7T6BnZRIwLHtDt4sf
+         6+P0LQIlNy98ZWPE9p3YFRG1Dmon6yOqNX3hggisRKLvQtyps5xFSNCybSuU5z0MX4Ax
+         vmNnBiWOqBQ1XLGcqXSzwlAYF223Mir+KdeebWH2YJbUauxtMiJM892jsgeVEHcR1buW
+         GuGfWi2XnG0vl7x++hL2UJUoMafzn8h/a779pvF479tyDdy6JjxJZxdeT+MMysYt7SeE
+         jsV65yS4sZA/pASmJVf8HASeB2XWDnfjloab38w4AcMSMflcDnA8WlEyHiYeGJCSfAWl
+         NHIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ayPyK8V9kTO7T+w1N3bpSs27q7xQ4zo9pbBrJTV98Ig=;
-        b=DjvCZ/BJtgVKKig9zvmiVR31CTVM79u+v7+cMc5Zi9Mll2sUboy//tIfDtfADwf2Vo
-         IeBD4A5xqAgTYruere3Zj2wnf1ruOuHhcXcPWmrIeVWvwVU/zVONdarnPZ/r8ucc6glD
-         0NHFHZmXSUSZKa6W/gn1zRgEdQdLL5djRvUdEMzmi76pPM1hbCHSBOLsPZqr2lgmDzIz
-         Prr1/pwMPHdN66oS1Js8K5/9Fe+YwPUx5eaAOikzKblfOms0lVTdT12O8MWI7rRbjovB
-         FiIpHSyWFWLyjmJoeQ1xB6s+EpPGLKggTiX56LvZQPjqmqEPURYn61U1Arw6mF3lXDLg
-         NVSQ==
-X-Gm-Message-State: AOAM530naCJDHNV5DQr0wi/rsmPlZFnGJ+Q2foOkT54ZvUf3+bD6kD3n
-	EZ5yjQiIKq/TU8k9PA6docn146IxNgg=
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+        bh=XNtcz0rXpid6NVRrG6mNduP0hPhzfSNSV247HBxd8sk=;
+        b=bUfvZtNDCa66UvxRWn4yyfkqVenouElBqV8nR7FfftLPzB1ubOIEluBvnPwe/ZMeGD
+         h6rU8PGHXoiMnbYyHjN1608U7WybpjElr2MZew5UnRhLRJn6itMlu5s6P+7pD3Uhi81J
+         kTxQ475X94VMdAENVjvCvScSuy7tnm5shSAeApN7A3hPoWZitUKxLYWj7S786IDoahTe
+         osVsKdNHvMFTCv1Sdzw6VAIzu45Q/XPkaPtSI/N2Sps5cCVqZlNXqkf26YXP/tdUTrVw
+         k0Z1BhtpbseK07oR6NwkAVxyNPD3gBeh2hJ0YmNv5LcghVvZuhubc7Ix8KILVfEHXeUS
+         BAMQ==
+X-Gm-Message-State: AOAM533MtzQhTyFzVvmjd7Xu2t4Vqjek8anH3TfA9lfmE9Z2tgnPr45E
+	gMSAYDr952CbRJyACjIttoKy+E7A5X9L55sU9z+lgVck
 X-Google-Smtp-Source: 
- ABdhPJxRtiVF3/DeNC8v12rBnEz/s9x14nZko6nTfo8V9TOxu24RBa+C6Wo93D6DyqfQX3ouvSoFdA==
-X-Received: by 2002:a63:4:0:b0:3ab:17c6:e0ce with SMTP id
- 4-20020a630004000000b003ab17c6e0cemr18035973pga.511.1651097258651;
-        Wed, 27 Apr 2022 15:07:38 -0700 (PDT)
-Received: from keaua.hsd1.ca.comcast.net
- ([2601:202:4180:a5c0:b03c:3cc:dc2d:de8e])
-        by smtp.gmail.com with ESMTPSA id
- o3-20020a63f143000000b003c14af5062asm289229pgk.66.2022.04.27.15.07.37
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 27 Apr 2022 15:07:38 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] layer.conf: Post release codename changes
-Date: Wed, 27 Apr 2022 15:07:37 -0700
-Message-Id: <20220427220737.3807846-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ ABdhPJz4Bzqc0YOc6G7VW+YkMHkWXajN1xXF7vl/8OEUWYARRa0qmnehLbTvHWuyfQqKpG/CNgrEWZtLYn1ne6dBCSU=
+X-Received: by 2002:a5d:4e08:0:b0:20a:f065:7024 with SMTP id
+ p8-20020a5d4e08000000b0020af0657024mr3924006wrt.598.1651097348023; Wed, 27
+ Apr 2022 15:09:08 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Jupiter <jupiter.hce@gmail.com>
+Date: Thu, 28 Apr 2022 08:08:30 +1000
+Message-ID: 
+ <CAA=hcWQDJ19JkCL-SMhkkzSJ_1ZqnP+JfFE1uzFOyTta-HpBZw@mail.gmail.com>
+Subject: Honister customer defconfig replacement doesn't work
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Cc: bitbake-devel <bitbake-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Apr 2022 22:07:40 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 Apr 2022 22:09:20 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96813
+ https://lists.openembedded.org/g/openembedded-devel/message/96814
 
-Post release add langdale to match core
+Hello,
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-filesystems/conf/layer.conf | 2 +-
- meta-gnome/conf/layer.conf       | 2 +-
- meta-initramfs/conf/layer.conf   | 2 +-
- meta-multimedia/conf/layer.conf  | 2 +-
- meta-networking/conf/layer.conf  | 2 +-
- meta-oe/conf/layer.conf          | 2 +-
- meta-perl/conf/layer.conf        | 2 +-
- meta-python/conf/layer.conf      | 2 +-
- meta-webserver/conf/layer.conf   | 2 +-
- meta-xfce/conf/layer.conf        | 2 +-
- 10 files changed, 10 insertions(+), 10 deletions(-)
+My apology, I am not sure which group is working on defconfig syntax
+for version 3.4 Honister branch. I posted the question to Yocto list
+without response, let me rephrase it again:
 
-diff --git a/meta-filesystems/conf/layer.conf b/meta-filesystems/conf/layer.conf
-index 75a27d665..205768e63 100644
---- a/meta-filesystems/conf/layer.conf
-+++ b/meta-filesystems/conf/layer.conf
-@@ -15,4 +15,4 @@ LAYERVERSION_filesystems-layer = "1"
- 
- LAYERDEPENDS_filesystems-layer = "core openembedded-layer"
- 
--LAYERSERIES_COMPAT_filesystems-layer = "kirkstone"
-+LAYERSERIES_COMPAT_filesystems-layer = "kirkstone langdale"
-diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
-index 2fb348515..bf4834aa2 100644
---- a/meta-gnome/conf/layer.conf
-+++ b/meta-gnome/conf/layer.conf
-@@ -17,7 +17,7 @@ LAYERVERSION_gnome-layer = "1"
- 
- LAYERDEPENDS_gnome-layer = "core openembedded-layer networking-layer"
- 
--LAYERSERIES_COMPAT_gnome-layer = "kirkstone"
-+LAYERSERIES_COMPAT_gnome-layer = "kirkstone langdale"
- 
- SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += "\
-   faenza-icon-theme->gdk-pixbuf \
-diff --git a/meta-initramfs/conf/layer.conf b/meta-initramfs/conf/layer.conf
-index c63383faf..6aa64f1e1 100644
---- a/meta-initramfs/conf/layer.conf
-+++ b/meta-initramfs/conf/layer.conf
-@@ -16,7 +16,7 @@ BBFILE_PATTERN_meta-initramfs := "^${LAYERDIR}/"
- BBFILE_PRIORITY_meta-initramfs = "5"
- LAYERDEPENDS_meta-initramfs = "core"
- 
--LAYERSERIES_COMPAT_meta-initramfs = "kirkstone"
-+LAYERSERIES_COMPAT_meta-initramfs = "kirkstone langdale"
- 
- SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
-   dracut->virtual/kernel \
-diff --git a/meta-multimedia/conf/layer.conf b/meta-multimedia/conf/layer.conf
-index b5120bb53..ee6694cdf 100644
---- a/meta-multimedia/conf/layer.conf
-+++ b/meta-multimedia/conf/layer.conf
-@@ -31,4 +31,4 @@ LAYERVERSION_multimedia-layer = "1"
- 
- LAYERDEPENDS_multimedia-layer = "core openembedded-layer meta-python"
- 
--LAYERSERIES_COMPAT_multimedia-layer = "kirkstone"
-+LAYERSERIES_COMPAT_multimedia-layer = "kirkstone langdale"
-diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
-index 3f9699ad1..a4f622a8c 100644
---- a/meta-networking/conf/layer.conf
-+++ b/meta-networking/conf/layer.conf
-@@ -17,7 +17,7 @@ LAYERDEPENDS_networking-layer = "core"
- LAYERDEPENDS_networking-layer += "openembedded-layer"
- LAYERDEPENDS_networking-layer += "meta-python"
- 
--LAYERSERIES_COMPAT_networking-layer = "kirkstone"
-+LAYERSERIES_COMPAT_networking-layer = "kirkstone langdale"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
- 
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index 88715d5e8..34aa29561 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -42,7 +42,7 @@ LAYERVERSION_openembedded-layer = "1"
- 
- LAYERDEPENDS_openembedded-layer = "core"
- 
--LAYERSERIES_COMPAT_openembedded-layer = "kirkstone"
-+LAYERSERIES_COMPAT_openembedded-layer = "kirkstone langdale"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
- 
-diff --git a/meta-perl/conf/layer.conf b/meta-perl/conf/layer.conf
-index 3cb9571d4..007ae2fbd 100644
---- a/meta-perl/conf/layer.conf
-+++ b/meta-perl/conf/layer.conf
-@@ -15,4 +15,4 @@ LAYERVERSION_perl-layer = "1"
- 
- LAYERDEPENDS_perl-layer = "core openembedded-layer"
- 
--LAYERSERIES_COMPAT_perl-layer = "kirkstone"
-+LAYERSERIES_COMPAT_perl-layer = "kirkstone langdale"
-diff --git a/meta-python/conf/layer.conf b/meta-python/conf/layer.conf
-index e444498ff..481e4ea2c 100644
---- a/meta-python/conf/layer.conf
-+++ b/meta-python/conf/layer.conf
-@@ -14,6 +14,6 @@ LAYERVERSION_meta-python = "1"
- 
- LAYERDEPENDS_meta-python = "core (>= 12) openembedded-layer"
- 
--LAYERSERIES_COMPAT_meta-python = "kirkstone"
-+LAYERSERIES_COMPAT_meta-python = "kirkstone langdale"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
-diff --git a/meta-webserver/conf/layer.conf b/meta-webserver/conf/layer.conf
-index 5ae5e796a..bfcd9681c 100644
---- a/meta-webserver/conf/layer.conf
-+++ b/meta-webserver/conf/layer.conf
-@@ -17,7 +17,7 @@ LAYERVERSION_webserver = "1"
- 
- LAYERDEPENDS_webserver = "core openembedded-layer"
- 
--LAYERSERIES_COMPAT_webserver = "kirkstone"
-+LAYERSERIES_COMPAT_webserver = "kirkstone langdale"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
- 
-diff --git a/meta-xfce/conf/layer.conf b/meta-xfce/conf/layer.conf
-index 28dfc5b34..5785421aa 100644
---- a/meta-xfce/conf/layer.conf
-+++ b/meta-xfce/conf/layer.conf
-@@ -19,7 +19,7 @@ LAYERDEPENDS_xfce-layer += "multimedia-layer"
- LAYERDEPENDS_xfce-layer += "meta-python"
- LAYERDEPENDS_xfce-layer += "networking-layer"
- 
--LAYERSERIES_COMPAT_xfce-layer = "kirkstone"
-+LAYERSERIES_COMPAT_xfce-layer = "kirkstone langdale"
- 
- SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += "\
-   openzone->gdk-pixbuf \
--- 
-2.25.1
+According to the Yocto document 3.4, out tree customer defconfig can
+be used to replace the build/.config, I used a working kernel
+defconfig to disable configures, I tried many tricks found from the
+mailing lists, but none of works for 3.4 and branch Honister in a
+kernel build bbappend file to add KCONFIG_MODE = "allnoconfig" or
+KCONFIG_MODE = "alldefconfig":
 
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+SRC_URI:append = " file://defconfig"
+KCONFIG_MODE = "allnoconfig"
+do_configure:prepend () {
+    cp ${WORKDIR}/defconfig ${B}/.config
+}
+
+It still generated build/.config in do_configure
+
+#
+# configuration written to .config
+#
+
+I changed to:
+
+do_compile:prepend () {
+    cp ${WORKDIR}/defconfig ${B}/.config
+}
+
+It still restarted config to generate build/.config
+
+*
+* Restart config...
+*
+*
+* Kernel Features
+*
+
+I added unset KBUILD_DEFCONFIG,
+
+Is it possible to disable KBUILD_DEFCONFIG and to use customer defconfig?
+
+Thank you very much.
+
+Kind regards,
+
+- jupiter
 
