@@ -1,179 +1,209 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DF44C433EF
-	for <webhook@archiver.kernel.org>; Wed, 27 Apr 2022 16:25:53 +0000 (UTC)
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
- [209.85.215.175])
- by mx.groups.io with SMTP id smtpd.web11.10504.1651076743958288944
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9620DC433F5
+	for <webhook@archiver.kernel.org>; Wed, 27 Apr 2022 22:07:40 +0000 (UTC)
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
+ [209.85.215.170])
+ by mx.groups.io with SMTP id smtpd.web08.2884.1651097259564959558
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Apr 2022 09:25:44 -0700
+ Wed, 27 Apr 2022 15:07:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=S/cvVrQd;
- spf=pass (domain: gmail.com, ip: 209.85.215.175,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f175.google.com with SMTP id t13so1837039pgn.8
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=iMXCRZdD;
+ spf=pass (domain: gmail.com, ip: 209.85.215.170,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f170.google.com with SMTP id z21so2471058pgj.1
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Apr 2022 09:25:43 -0700 (PDT)
+ Wed, 27 Apr 2022 15:07:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=DxtnCx2TzVzl1Wl/RMQ7iFQMzKvDmge0jIr/ifpPQTQ=;
-        b=S/cvVrQd4RJfArB1uoPuh2RidRN/1/pZ/zDx4QCL6I3HvpMU7xghL8d/lQRGdqHkDM
-         z+waXOZYXFOcGH+HB/6HaCJI9jrnrVP9roT86/v85TILhOCUgHYQOPapzYmlUXfMDCms
-         6MyC9QdbfpCi+jMPxGoGlnr1py90eFpM5bzFvVMjF1zFXmvZlzAaJ3dFzs3yCVLrYn9Y
-         sEgEsBbNLpzGntw/CtOh0Hv/EBJyiy7ROa4l6HSWw/yP/6jYqqVsOlevdIVvUenli3sj
-         9P60H2rxuHdejs0g2c4ScN1s/IJflMxTivZVqQzKwkLa2f9LadGyOldiXdE3iRSAjBQc
-         cHGw==
+        bh=ayPyK8V9kTO7T+w1N3bpSs27q7xQ4zo9pbBrJTV98Ig=;
+        b=iMXCRZdDWgjzHTKKPwProOt3+Ef9LZTwdKf/PknKVMtaVIMvuuMhlHhBA166dawW9f
+         2lhMruKJB/RAHUE2fbuwkH+4ZDEeNZZ/cg2P4tYc9bNdVk/XXVVJUQrCdq5mNfA+MZfU
+         5oSKPy6MNFtz9odncqyVWC98Vk9GNVVmy0gE2xpZ8gAu+LHykvYqf71U/0f/Kj9vzBGj
+         JZ3QyPjdpL5Rt0QfABxk2eL/eETsD1CHu/gttTNL7VpZXbgKxBhKrahG7MoZ5CKcnf2d
+         c0iZ8FXFrBosbhjBauln9wVkOI3sLfCy561HpcuFsQrnkeEMHdKYHGu60y11KwSjHtZO
+         EHcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=DxtnCx2TzVzl1Wl/RMQ7iFQMzKvDmge0jIr/ifpPQTQ=;
-        b=kOAca1twJ9y9jRxJYWuN8fRcfLmaVHylHmae3U1qMJHyF0ns0xsc8FZcaKcDAKfaGD
-         FBR3vxSLLUmoXyGXxoa0h3ilqXTaTxLcdCoQVOYAHc1pszsJ9CKAEzn+2BUtr7eHc7D9
-         Oe5Vlt4vCttjCqIiEyEhxAvJs1Tc2DlmDfdD24cvUwVi64mLMXV9Fw9c2d+eq3oK0PeZ
-         PR8MIYw+SqWlT3IdRR1BteN8tPG2zJJgCbmBHAV0IrOQjdCACg0oz0n4JjCsToM2g1Hb
-         /DURd7d9pnykbtDxmzvIQd4maXlcoanHIh6hwWp0oO4E+V3QHkfC66T0hmC5GtXovvmS
-         IARg==
-X-Gm-Message-State: AOAM533YPZ4XYioiifSzrsu1JY/8Byn7LT4zXrExVUEzcjlgVYIFIorE
-	TFU5sxnHPvXTrrigb0QEy5w/U7/D1WC24Q==
+        bh=ayPyK8V9kTO7T+w1N3bpSs27q7xQ4zo9pbBrJTV98Ig=;
+        b=DjvCZ/BJtgVKKig9zvmiVR31CTVM79u+v7+cMc5Zi9Mll2sUboy//tIfDtfADwf2Vo
+         IeBD4A5xqAgTYruere3Zj2wnf1ruOuHhcXcPWmrIeVWvwVU/zVONdarnPZ/r8ucc6glD
+         0NHFHZmXSUSZKa6W/gn1zRgEdQdLL5djRvUdEMzmi76pPM1hbCHSBOLsPZqr2lgmDzIz
+         Prr1/pwMPHdN66oS1Js8K5/9Fe+YwPUx5eaAOikzKblfOms0lVTdT12O8MWI7rRbjovB
+         FiIpHSyWFWLyjmJoeQ1xB6s+EpPGLKggTiX56LvZQPjqmqEPURYn61U1Arw6mF3lXDLg
+         NVSQ==
+X-Gm-Message-State: AOAM530naCJDHNV5DQr0wi/rsmPlZFnGJ+Q2foOkT54ZvUf3+bD6kD3n
+	EZ5yjQiIKq/TU8k9PA6docn146IxNgg=
 X-Google-Smtp-Source: 
- ABdhPJyfFHhAGytazPEUCSxHLqqkbeRIARXz7JDg0gGSyAV4mPhIZ6fTI/rLO7pUSZhos1cPJRkVJQ==
-X-Received: by 2002:a05:6a00:1a49:b0:505:7ab3:e5c7 with SMTP id
- h9-20020a056a001a4900b005057ab3e5c7mr30813337pfv.62.1651076743029;
-        Wed, 27 Apr 2022 09:25:43 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::2ca3])
+ ABdhPJxRtiVF3/DeNC8v12rBnEz/s9x14nZko6nTfo8V9TOxu24RBa+C6Wo93D6DyqfQX3ouvSoFdA==
+X-Received: by 2002:a63:4:0:b0:3ab:17c6:e0ce with SMTP id
+ 4-20020a630004000000b003ab17c6e0cemr18035973pga.511.1651097258651;
+        Wed, 27 Apr 2022 15:07:38 -0700 (PDT)
+Received: from keaua.hsd1.ca.comcast.net
+ ([2601:202:4180:a5c0:b03c:3cc:dc2d:de8e])
         by smtp.gmail.com with ESMTPSA id
- 9-20020a17090a034900b001d7e6226b3csm3520858pjf.27.2022.04.27.09.25.41
+ o3-20020a63f143000000b003c14af5062asm289229pgk.66.2022.04.27.15.07.37
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 27 Apr 2022 09:25:42 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Wed, 27 Apr 2022 15:07:38 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] boinc-client: Make script install not depend on host
- install paths
-Date: Wed, 27 Apr 2022 09:25:39 -0700
-Message-Id: <20220427162539.2428673-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.36.0
+Subject: [meta-oe][PATCH] layer.conf: Post release codename changes
+Date: Wed, 27 Apr 2022 15:07:37 -0700
+Message-Id: <20220427220737.3807846-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Apr 2022 16:25:53 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 Apr 2022 22:07:40 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96812
+ https://lists.openembedded.org/g/openembedded-devel/message/96813
 
-The install target is checking for install paths on build host assuming
-thats where it will run too, which breaks cross builds. Add a patch to
-aide the install from recipe.
+Post release add langdale to match core
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...Do-not-check-for-files-on-build-host.patch | 52 +++++++++++++++++++
- .../boinc/boinc-client_7.18.1.bb              | 18 +++----
- 2 files changed, 60 insertions(+), 10 deletions(-)
- create mode 100644 meta-oe/recipes-extended/boinc/boinc-client/0001-scripts-Do-not-check-for-files-on-build-host.patch
+ meta-filesystems/conf/layer.conf | 2 +-
+ meta-gnome/conf/layer.conf       | 2 +-
+ meta-initramfs/conf/layer.conf   | 2 +-
+ meta-multimedia/conf/layer.conf  | 2 +-
+ meta-networking/conf/layer.conf  | 2 +-
+ meta-oe/conf/layer.conf          | 2 +-
+ meta-perl/conf/layer.conf        | 2 +-
+ meta-python/conf/layer.conf      | 2 +-
+ meta-webserver/conf/layer.conf   | 2 +-
+ meta-xfce/conf/layer.conf        | 2 +-
+ 10 files changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/boinc/boinc-client/0001-scripts-Do-not-check-for-files-on-build-host.patch b/meta-oe/recipes-extended/boinc/boinc-client/0001-scripts-Do-not-check-for-files-on-build-host.patch
-new file mode 100644
-index 0000000000..6d9e94cb8a
---- /dev/null
-+++ b/meta-oe/recipes-extended/boinc/boinc-client/0001-scripts-Do-not-check-for-files-on-build-host.patch
-@@ -0,0 +1,52 @@
-+From 8a8305c78143438e2bd497d55188a0da3442db08 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 27 Apr 2022 09:11:38 -0700
-+Subject: [PATCH] scripts: Do not check for files on build host
-+
-+This will result in varied behaviour depending upon what kind of host is
-+used to build it. We dont want that. Instead check for these files and
-+dirs in staging area and create these markers in recipe via a
-+do_install_prepend to aide install piece a bit here ( systemd vs
-+sysvinit ) etc.
-+
-+Upstream-Status: Inappropriate [OE-Specific]
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ client/scripts/Makefile.am | 10 +++++-----
-+ 1 file changed, 5 insertions(+), 5 deletions(-)
-+
-+diff --git a/client/scripts/Makefile.am b/client/scripts/Makefile.am
-+index 2a53203d84..62a0defa93 100644
-+--- a/client/scripts/Makefile.am
-++++ b/client/scripts/Makefile.am
-+@@ -2,21 +2,21 @@
-+ 
-+ install-exec-hook:
-+ 	chmod +x boinc-client
-+-	if [ -d /etc/init.d ] ; then \
-++	if [ -d $(DESTDIR)/etc/init.d ] ; then \
-+ 		$(INSTALL) -d $(DESTDIR)$(sysconfdir)/init.d ; \
-+ 		$(INSTALL) -b boinc-client $(DESTDIR)$(sysconfdir)/init.d/boinc-client ; \
-+ 	fi
-+-	if [ -d /usr/lib/systemd/system ] ; then \
-++	if [ -d $(DESTDIR)/usr/lib/systemd/system ] ; then \
-+ 		$(INSTALL) -d $(DESTDIR)/usr/lib/systemd/system/ ; \
-+ 		$(INSTALL_DATA) boinc-client.service $(DESTDIR)/usr/lib/systemd/system/boinc-client.service ; \
-+-	elif [ -d /lib/systemd/system ] ; then \
-++	elif [ -d $(DESTDIR)/lib/systemd/system ] ; then \
-+ 		$(INSTALL) -d $(DESTDIR)/lib/systemd/system/ ; \
-+ 		$(INSTALL_DATA) boinc-client.service $(DESTDIR)/lib/systemd/system/boinc-client.service ; \
-+ 	fi
-+-	if [ -d /etc/sysconfig ] ; then \
-++	if [ -d $(DESTDIR)/etc/sysconfig ] ; then \
-+ 	  $(INSTALL) -d $(DESTDIR)$(sysconfdir)/sysconfig ; \
-+ 	  $(INSTALL_DATA) $(srcdir)/boinc-client.conf $(DESTDIR)$(sysconfdir)/sysconfig/boinc-client ; \
-+-	elif [ -d /etc/default ] ; then \
-++	elif [ -d $(DESTDIR)/etc/default ] ; then \
-+ 	  $(INSTALL) -d $(DESTDIR)$(sysconfdir)/default ; \
-+ 	  $(INSTALL_DATA) $(srcdir)/boinc-client.conf $(DESTDIR)$(sysconfdir)/default/boinc-client ; \
-+ 	else \
-+-- 
-+2.36.0
-+
-diff --git a/meta-oe/recipes-extended/boinc/boinc-client_7.18.1.bb b/meta-oe/recipes-extended/boinc/boinc-client_7.18.1.bb
-index abcb304d30..8f85a508e7 100644
---- a/meta-oe/recipes-extended/boinc/boinc-client_7.18.1.bb
-+++ b/meta-oe/recipes-extended/boinc/boinc-client_7.18.1.bb
-@@ -35,6 +35,7 @@ SRC_URI = "git://github.com/BOINC/boinc;protocol=https;branch=${BRANCH} \
-            file://boinc-AM_CONDITIONAL.patch \
-            file://gtk-configure.patch \
-            file://4563.patch \
-+           file://0001-scripts-Do-not-check-for-files-on-build-host.patch \
- "
+diff --git a/meta-filesystems/conf/layer.conf b/meta-filesystems/conf/layer.conf
+index 75a27d665..205768e63 100644
+--- a/meta-filesystems/conf/layer.conf
++++ b/meta-filesystems/conf/layer.conf
+@@ -15,4 +15,4 @@ LAYERVERSION_filesystems-layer = "1"
  
- inherit gettext autotools pkgconfig features_check systemd
-@@ -75,17 +76,14 @@ do_compile:prepend () {
- 	sed -i -e 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' ${B}/libtool
- }
+ LAYERDEPENDS_filesystems-layer = "core openembedded-layer"
  
--do_install:append() {
--	if ! ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','true','false',d)} -a \
--            -e ${D}${nonarch_libdir}/systemd/system/boinc-client.service; then
--		install -d ${D}${systemd_system_unitdir}
--		mv \
--		${D}${nonarch_libdir}/systemd/system/boinc-client.service \
--		${D}${systemd_system_unitdir}/boinc-client.service
--		rmdir --ignore-fail-on-non-empty ${D}${nonarch_libdir}/systemd/system \
--		${D}${nonarch_libdir}/systemd \
--		${D}${nonarch_libdir}
-+do_install:prepend() {
-+	# help script install a bit to do right thing for OE
-+	if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+		mkdir -p ${D}${systemd_system_unitdir}
-+	else
-+		mkdir -p ${D}${sysconfdir}/init.d
- 	fi
-+	mkdir -p ${D}${sysconfdir}/default
- }
+-LAYERSERIES_COMPAT_filesystems-layer = "kirkstone"
++LAYERSERIES_COMPAT_filesystems-layer = "kirkstone langdale"
+diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
+index 2fb348515..bf4834aa2 100644
+--- a/meta-gnome/conf/layer.conf
++++ b/meta-gnome/conf/layer.conf
+@@ -17,7 +17,7 @@ LAYERVERSION_gnome-layer = "1"
  
- SYSTEMD_SERVICE:${PN} = "boinc-client.service"
+ LAYERDEPENDS_gnome-layer = "core openembedded-layer networking-layer"
+ 
+-LAYERSERIES_COMPAT_gnome-layer = "kirkstone"
++LAYERSERIES_COMPAT_gnome-layer = "kirkstone langdale"
+ 
+ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += "\
+   faenza-icon-theme->gdk-pixbuf \
+diff --git a/meta-initramfs/conf/layer.conf b/meta-initramfs/conf/layer.conf
+index c63383faf..6aa64f1e1 100644
+--- a/meta-initramfs/conf/layer.conf
++++ b/meta-initramfs/conf/layer.conf
+@@ -16,7 +16,7 @@ BBFILE_PATTERN_meta-initramfs := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_meta-initramfs = "5"
+ LAYERDEPENDS_meta-initramfs = "core"
+ 
+-LAYERSERIES_COMPAT_meta-initramfs = "kirkstone"
++LAYERSERIES_COMPAT_meta-initramfs = "kirkstone langdale"
+ 
+ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
+   dracut->virtual/kernel \
+diff --git a/meta-multimedia/conf/layer.conf b/meta-multimedia/conf/layer.conf
+index b5120bb53..ee6694cdf 100644
+--- a/meta-multimedia/conf/layer.conf
++++ b/meta-multimedia/conf/layer.conf
+@@ -31,4 +31,4 @@ LAYERVERSION_multimedia-layer = "1"
+ 
+ LAYERDEPENDS_multimedia-layer = "core openembedded-layer meta-python"
+ 
+-LAYERSERIES_COMPAT_multimedia-layer = "kirkstone"
++LAYERSERIES_COMPAT_multimedia-layer = "kirkstone langdale"
+diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
+index 3f9699ad1..a4f622a8c 100644
+--- a/meta-networking/conf/layer.conf
++++ b/meta-networking/conf/layer.conf
+@@ -17,7 +17,7 @@ LAYERDEPENDS_networking-layer = "core"
+ LAYERDEPENDS_networking-layer += "openembedded-layer"
+ LAYERDEPENDS_networking-layer += "meta-python"
+ 
+-LAYERSERIES_COMPAT_networking-layer = "kirkstone"
++LAYERSERIES_COMPAT_networking-layer = "kirkstone langdale"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index 88715d5e8..34aa29561 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -42,7 +42,7 @@ LAYERVERSION_openembedded-layer = "1"
+ 
+ LAYERDEPENDS_openembedded-layer = "core"
+ 
+-LAYERSERIES_COMPAT_openembedded-layer = "kirkstone"
++LAYERSERIES_COMPAT_openembedded-layer = "kirkstone langdale"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
+diff --git a/meta-perl/conf/layer.conf b/meta-perl/conf/layer.conf
+index 3cb9571d4..007ae2fbd 100644
+--- a/meta-perl/conf/layer.conf
++++ b/meta-perl/conf/layer.conf
+@@ -15,4 +15,4 @@ LAYERVERSION_perl-layer = "1"
+ 
+ LAYERDEPENDS_perl-layer = "core openembedded-layer"
+ 
+-LAYERSERIES_COMPAT_perl-layer = "kirkstone"
++LAYERSERIES_COMPAT_perl-layer = "kirkstone langdale"
+diff --git a/meta-python/conf/layer.conf b/meta-python/conf/layer.conf
+index e444498ff..481e4ea2c 100644
+--- a/meta-python/conf/layer.conf
++++ b/meta-python/conf/layer.conf
+@@ -14,6 +14,6 @@ LAYERVERSION_meta-python = "1"
+ 
+ LAYERDEPENDS_meta-python = "core (>= 12) openembedded-layer"
+ 
+-LAYERSERIES_COMPAT_meta-python = "kirkstone"
++LAYERSERIES_COMPAT_meta-python = "kirkstone langdale"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+diff --git a/meta-webserver/conf/layer.conf b/meta-webserver/conf/layer.conf
+index 5ae5e796a..bfcd9681c 100644
+--- a/meta-webserver/conf/layer.conf
++++ b/meta-webserver/conf/layer.conf
+@@ -17,7 +17,7 @@ LAYERVERSION_webserver = "1"
+ 
+ LAYERDEPENDS_webserver = "core openembedded-layer"
+ 
+-LAYERSERIES_COMPAT_webserver = "kirkstone"
++LAYERSERIES_COMPAT_webserver = "kirkstone langdale"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
+diff --git a/meta-xfce/conf/layer.conf b/meta-xfce/conf/layer.conf
+index 28dfc5b34..5785421aa 100644
+--- a/meta-xfce/conf/layer.conf
++++ b/meta-xfce/conf/layer.conf
+@@ -19,7 +19,7 @@ LAYERDEPENDS_xfce-layer += "multimedia-layer"
+ LAYERDEPENDS_xfce-layer += "meta-python"
+ LAYERDEPENDS_xfce-layer += "networking-layer"
+ 
+-LAYERSERIES_COMPAT_xfce-layer = "kirkstone"
++LAYERSERIES_COMPAT_xfce-layer = "kirkstone langdale"
+ 
+ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += "\
+   openzone->gdk-pixbuf \
 -- 
-2.36.0
+2.25.1
 
 
