@@ -2,74 +2,74 @@ Return-Path: <xuhuan.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A3639C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A79C4C433F5
 	for <webhook@archiver.kernel.org>; Thu, 28 Apr 2022 07:03:54 +0000 (UTC)
 Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.113])
- by mx.groups.io with SMTP id smtpd.web12.7140.1651129424623196363
+ [85.158.142.2])
+ by mx.groups.io with SMTP id smtpd.web10.6999.1651129424465155981
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 28 Apr 2022 00:03:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=YyDJgNxw;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.113,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=sgZ9LtIF;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.2,
  mailfrom: xuhuan.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1651129422; i=@fujitsu.com;
-	bh=5mOTBaxqJMQK/UefB9e1TAzwxjqQlqTJt/1y+apWbuU=;
+	bh=HexSMJXChHSaQqKCDmKekpdPqWk9z1emsimNF3q1bag=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=YyDJgNxwuH0ZfHIuo8TF6gqFmsaulXod/XJ1essOcJBEvCGzL3NYlMvXm47Ej6fyE
-	 NYR1GcSSpN/4NQjkVuvQ2zX8wR7ln+Rhur8094Tg3iKIrR3ksVstTZ5j3zfgiTBP56
-	 1Ea5A1tEhvwmHcZC3bJcIBZKyVncEiA+VCe0fzuKNUFNLOb5mvjb2dQBNR/dAzhkFn
-	 XuiGuLKRXWlLjn+sDW6TixldX1rVsadf7xnhBy4YmbYN8lfrakdck2WI/pkfzv19jt
-	 LNyggaHUjmXu2PsFnhT/A3a/bgI9uVFKzNnloifh3Bp99udyJY271PJzFFTVP6CHG+
-	 /TPPpHKxiLJdw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrLIsWRWlGSWpSXmKPExsViZ8MxSdfPJiv
-  JYPZxcYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeNXTwNrwU/uitkb9jA2MF7j6mLk4hASeMIo
-  8eJ2KyOEc4FJom9rFyuEc5JR4u79D8xdjJwcbALqEo9vvmYEsUUE9CWWzt4DFmcWUJXovriGv
-  YuRg0NYIEji838NkDALUPhs1zMWEJtXwE1i6/o1YLaEgILElIfvwVo5BdwlWm6uYAWxhYBqVl
-  y+zwZRLyhxcuYTFojxEhIHX7xghuhVkjix4iMThF0h8frwJai4msTVc5uYJzAKzkLSPgtJ+wJ
-  GplWMtklFmekZJbmJmTm6hgYGuoaGprpmZrqWZnqJVbqJeqmlusmpeSVFiUBZvcTyYr3U4mK9
-  4src5JwUvbzUkk2MwFBOKXZK2MH4qO+n3iFGSQ4mJVFeK9OsJCG+pPyUyozE4oz4otKc1OJDj
-  DIcHEoSvArWQDnBotT01Iq0zBxgXMGkJTh4lER4ZYyB0rzFBYm5xZnpEKlTjIpS4ryuIH0CII
-  mM0jy4NlgsX2KUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzGsGMoUnM68EbvoroMVMQItXFmW
-  CLC5JREhJNTDNreNS6djezSsyc8fk71rH9/80ZXe/IK9nbCJ0slLh0+q/5V/enQ8uea2oxvXm
-  Z++6iOUOEiLzXxx+pHxDIHVPl93v74nMMrEiElUPvLWVX/9qWLjbm/l+qPz3R0/3LwxqeWNVe
-  DA7gqPtqrVPhK7HwdiAnbbPIg/qzPIuubneIXnFup4p1TFOxSzhxmsF3vekbm04YPbrxJGcee
-  6/WI3WT30wpSti0ZmZevrOcS/u/FCYkH4q6t63rKLzjbfU1rxu4JtW4GBbrvJkrVDni9VHDyp
-  OSbpXWxzx74J2ms2lghNiAhsiJu94HcG91G3lE//LGcy237/euZrnKMe6dLW70cXeed0G/g79
-  G3/5umUrsRRnJBpqMRcVJwIAL6Vc82ADAAA=
+	b=sgZ9LtIFTC9pYyyaPLKDU2gGq082TeGFDWCSTZniE+GER4d5cHAeyJf+l/sAuJUD/
+	 R5iRRppo909A4bECvxdMsFLdLOazNw7iDNXZR+Gl7UIKx7sQQkB+tcFSIkXKm0qb4X
+	 4EB1hCr92g23YcYkJV7/jPsc2wDjSkA3c60TlmJStbpYOXR/GX+lx4/dLeXqcEs/On
+	 q54JJULA3WadN/9NPz5rYrBTRXh5cmEfQ4CT8la69NB5gKunI4NzeNSXX+LLfPO8dh
+	 dicGI3mZt/VOxyu8n56aFgU95NnqgOQAkjpLsJdBRev3MV9rOO+RyWUgYNha0n6o+X
+	 SyvWCxa6Mswww==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrHIsWRWlGSWpSXmKPExsViZ8MxSdfPJiv
+  JYO0icYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPF8vWMBfOFK07dXM3ewPhSoIuRi0NI4Amj
+  xOlNM5kgnAtMEm/avrN2MXICOScZJb60cIHYbALqEo9vvmYEsUUE9CWWzt7DDGIzC6hKdF9cw
+  w5iCwvESVzYvwjMZgGKb758kA3E5hVwkzj4fiFYXEJAQWLKw/dgvZwC7hItN1dA7XKTWHH5Pl
+  S9oMTJmU9YIOZLSBx88YIZoldJ4sSKj0wQdoXE68OXoOJqElfPbWKewCg4C0n7LCTtCxiZVjH
+  aJRVlpmeU5CZm5ugaGhjoGhqa6pqZ6RpaGuolVukm6qWW6ian5pUUJQKl9RLLi/VSi4v1iitz
+  k3NS9PJSSzYxAoM5pdhp/w7Gp30/9Q4xSnIwKYnyWplmJQnxJeWnVGYkFmfEF5XmpBYfYpTh4
+  FCS4FWwBsoJFqWmp1akZeYAIwsmLcHBoyTCK2MMlOYtLkjMLc5Mh0idYlSUEud1BekTAElklO
+  bBtcGi+RKjrJQwLyMDA4MQT0FqUW5mCar8K0ZxDkYlYV4zkCk8mXklcNNfAS1mAlq8sigTZHF
+  JIkJKqoGJ6WZevtSHM3tTL7/u8zzc4FyXyCJ0oukI/2mhWW4Fp5+sPLOibYb8sryJ2yMEXmx/
+  W6cS5OnjN7c+IPjq/MZbUxbzLXu381chn+fmgFSB/06fFjmki4e3pf7d/fHsHZc5MkpHTtbO/
+  9vlrzhT1u29rZ4k67l4p5oV54+GRnw8Lbssf2LU7lj37fNM57dMsijr+drUEdqx58rp+Elm9w
+  LF6v4psJYuMzox6TyDU31g/fodus63N3BynZn0hGet6c7YGP6fhvuN704OKo82UJpT5PNVRna
+  bZeKG2uzpjvfZZjQkpbSUBIhybD7+6uG6hfdfSArOLrs6I9043Tj2K9vPtTJ76x7dCcq5fe9/
+  QmCWEktxRqKhFnNRcSIADc4trmEDAAA=
 X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-3.tower-545.messagelabs.com!1651129422!34096!1
+X-Msg-Ref: server-15.tower-532.messagelabs.com!1651129422!52147!1
 X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.85.8; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 15839 invoked from network); 28 Apr 2022 07:03:42 -0000
+Received: (qmail 24090 invoked from network); 28 Apr 2022 07:03:42 -0000
 Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-3.tower-545.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-15.tower-532.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 28 Apr 2022 07:03:42 -0000
 Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id D8F4E1000F5
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id DBAD9100354
 	for <openembedded-devel@lists.openembedded.org>;
  Thu, 28 Apr 2022 08:03:41 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id CB4971000E9
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id CF6E81000FB
 	for <openembedded-devel@lists.openembedded.org>;
  Thu, 28 Apr 2022 08:03:41 +0100 (BST)
 Received: from localhost.localdomain.localdomain (10.167.225.131) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Thu, 28 Apr 2022 08:03:19 +0100
+ (TLS) id 15.0.1497.32; Thu, 28 Apr 2022 08:03:21 +0100
 From: XU Huan <xuhuan.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-flask-socketio: upgrade 5.1.1 ->
- 5.1.2
-Date: Thu, 28 Apr 2022 15:03:34 +0800
-Message-ID: <1651129416-8432-4-git-send-email-xuhuan.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-google-api-python-client: upgrade
+ 2.43.0 -> 2.45.0
+Date: Thu, 28 Apr 2022 15:03:35 +0800
+Message-ID: <1651129416-8432-5-git-send-email-xuhuan.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1651129416-8432-1-git-send-email-xuhuan.fnst@fujitsu.com>
 References: <1651129416-8432-1-git-send-email-xuhuan.fnst@fujitsu.com>
@@ -84,41 +84,57 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 28 Apr 2022 07:03:54 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96829
+ https://lists.openembedded.org/g/openembedded-devel/message/96827
 
 From: Xu Huan <xuhuan.fnst@fujitsu.com>
 
-Changelog:
-==========
-    No need to push a new app context in the test client #1669
-    Remove 3.6 and pypy-3.6 builds, add 3.10 and pypy-3.8
-    Improve documentation on start_background_task() function
-    changed room argument to to in documentation examples #1665
-    Fix documentation typo #1793
-    Fix example code in documentation #1787
+Features
+========
+    androidmanagement: update the api 3d37600 (e691ed3)
+    apigee: update the api aa29053 (e691ed3)
+    baremetalsolution: update the api 629a968 (e691ed3)
+    bigtableadmin: update the api 2d50872 (e691ed3)
+    certificatemanager: update the api 40bf958 (e691ed3)
+    civicinfo: update the api 95321d9 (e691ed3)
+    cloudasset: update the api 3eee9ca (e691ed3)
+    clouddeploy: update the api acd6b20 (e691ed3)
+    container: update the api 7c592ee (e691ed3)
+    dataflow: update the api 53c9c70 (e691ed3)
+    dataproc: update the api 3119767 (e691ed3)
+    datastream: update the api aea557f (e691ed3)
+    documentai: update the api 9a6bad2 (e691ed3)
+    file: update the api b527c56 (e691ed3)
+    firebaseappcheck: update the api 3be993a (e691ed3)
+    gkehub: update the api a77aded (e691ed3)
+    logging: update the api cc08e8e (e691ed3)
+    policytroubleshooter: update the api 3f20c2e (e691ed3)
+    prod_tt_sasportal: update the api bacc9ef (e691ed3)
+    run: update the api 1b566dc (e691ed3)
+    servicemanagement: update the api 6d783b7 (e691ed3)
+    vmmigration: update the api a0b42c2 (e691ed3)
 
 Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
 ---
- ...-flask-socketio_5.1.1.bb => python3-flask-socketio_5.1.2.bb} | 2 +-
+ ...ent_2.43.0.bb => python3-google-api-python-client_2.45.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-flask-socketio_5.1.1.bb => python3-flask-socketio_5.1.2.bb} (81%)
+ rename meta-python/recipes-devtools/python/{python3-google-api-python-client_2.43.0.bb => python3-google-api-python-client_2.45.0.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-flask-socketio_5.1.1.bb b/meta-python/recipes-devtools/python/python3-flask-socketio_5.1.2.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-flask-socketio_5.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-flask-socketio_5.1.2.bb
-index 00e958022a..1e5d775b60 100644
---- a/meta-python/recipes-devtools/python/python3-flask-socketio_5.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask-socketio_5.1.2.bb
-@@ -9,7 +9,7 @@ inherit pypi python_setuptools_build_meta
+diff --git a/meta-python/recipes-devtools/python/python3-google-api-python-client_2.43.0.bb b/meta-python/recipes-devtools/python/python3-google-api-python-client_2.45.0.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-google-api-python-client_2.43.0.bb
+rename to meta-python/recipes-devtools/python/python3-google-api-python-client_2.45.0.bb
+index b6456869f2..070a5b5308 100644
+--- a/meta-python/recipes-devtools/python/python3-google-api-python-client_2.43.0.bb
++++ b/meta-python/recipes-devtools/python/python3-google-api-python-client_2.45.0.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/googleapis/google-api-python-client"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
  
- PYPI_PACKAGE = "Flask-SocketIO"
+-SRC_URI[sha256sum] = "ccd16b3aa92070d3777c4b188669820aacdd70695a87cfc8dbb330f6be9578f7"
++SRC_URI[sha256sum] = "375ce07994fdc187b25cc86788048ad30f8d55ff077d5e34cfcd6cbbea697128"
  
--SRC_URI[sha256sum] = "1efdaacc7a26e94f2b197a80079b1058f6aa644a6094c0a322349e2b9c41f6b1"
-+SRC_URI[sha256sum] = "933bcc887ef463a9b78d76f8f86174f63a32d12a5406b99f452cdf3b129ebba3"
+ inherit pypi setuptools3
  
- RDEPENDS:${PN} += "\
-     ${PYTHON_PN}-flask \
 -- 
 2.25.1
 
