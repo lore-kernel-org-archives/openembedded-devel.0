@@ -1,101 +1,185 @@
-Return-Path: <jupiter.hce@gmail.com>
+Return-Path: <jiaqing.zhao@linux.intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C6E63C433FE
-	for <webhook@archiver.kernel.org>; Thu, 28 Apr 2022 09:39:55 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
- [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.web09.7763.1651138790667713099
- for <Openembedded-devel@lists.openembedded.org>;
- Thu, 28 Apr 2022 02:39:51 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DEA2C433EF
+	for <webhook@archiver.kernel.org>; Thu, 28 Apr 2022 10:18:56 +0000 (UTC)
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+ by mx.groups.io with SMTP id smtpd.web09.8071.1651141118997457868
+ for <openembedded-devel@lists.openembedded.org>;
+ Thu, 28 Apr 2022 03:18:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Eu9QPKJN;
- spf=pass (domain: gmail.com, ip: 209.85.221.41,
- mailfrom: jupiter.hce@gmail.com)
-Received: by mail-wr1-f41.google.com with SMTP id e2so5947676wrh.7
-        for <Openembedded-devel@lists.openembedded.org>;
- Thu, 28 Apr 2022 02:39:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=Elg0PXsYsw8YAWMoWnwgB1sObyFlLp7Pvoz/CgqlE/w=;
-        b=Eu9QPKJNuoCTUblOB4Rq537154MbPEXZbSR4Q2SWJG1hM/FrMxdijZdoHlZLTnEs7w
-         vj6QpTHlXpnJkdvn25qfTwFXQUuu0jAu+BiS/+P/DJ/K5KMJEsB4O+0ilKun0anPkFc0
-         DcnmSAxpG1mlFSgZIKIXLgdPwFHHaFUjAxtTku8FJVG5iyWDXmIdSybu6fUcqHGDbj0v
-         ykaWLuBAT0brh3K/m9/H8OMUU1JQ/jl7Ff4BaM4NUoKhHA9grPkl044S6BPp0tDdx1BH
-         f8oNXQblAzrx197otiGLPol5ba2Lz7i6qtM9qpsbM3xvg4p4f6rjohW1HzJF3iK1w/2M
-         sRKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=Elg0PXsYsw8YAWMoWnwgB1sObyFlLp7Pvoz/CgqlE/w=;
-        b=BBK3FtpeONsY1cgn8lElGLOrzWk7+iVdqOk88OJSi+oatX8hA1wXzJSwq0GcnHnHY2
-         VoJ8UDC6bw56SimbuX+QWUX1+7wg38YH/VvVJNShmudcD+w/QxPaXCSmjeqd22moV2bB
-         L4pSRQ4uqL5eGhT1IoqRKvEo2nHAhHfkayM5iLF6V7NtepK9+9VgF9gTu3/fgvNHsSNN
-         +tAmp6cNLr6c+e1aJNl/C3A9Z/ivyeJGGSiq7nXQ4+I2Z7V3lMjPyKFDtPYoXGFXslci
-         LjBvJearRGZLMq/3PBjTUMMvMqdn36Z3NbEFE09aMCrSEAG1bf8rzJnBhDBUGpqF5hOo
-         dUrg==
-X-Gm-Message-State: AOAM5334hfUZUASvLMGuxjnkFqC/ep7GwQNyWy9jnugdAth2FunV0VOs
-	gKctqEvOmhrAnBQGJMmGHPcYUMYot+VhiuqajFg=
-X-Google-Smtp-Source: 
- ABdhPJxlcciiLBZJit2M3H9mmpkcwH2YCLmr/nbZK3LYk3nZYtWNsdlbuwUIEKuzzOZu4jI4WO+ZnxLbmuFpLkcc8kM=
-X-Received: by 2002:a5d:4e08:0:b0:20a:f065:7024 with SMTP id
- p8-20020a5d4e08000000b0020af0657024mr5684084wrt.598.1651138788935; Thu, 28
- Apr 2022 02:39:48 -0700 (PDT)
+ dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel
+ header.b=hCZq/N/n;
+ spf=none, err=permanent DNS error (domain: linux.intel.com,
+ ip: 134.134.136.100, mailfrom: jiaqing.zhao@linux.intel.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1651141119; x=1682677119;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=QmpDI5lkINjaASzXGYaDMrKYlewW5W6ekIDym6q9YFY=;
+  b=hCZq/N/n30hGDGIgn4kuDFfDwrGqhmKVhRNM9GJgFaC7SO5zTH1K1QBa
+   +eWb+xju0Qd0OdaPP1+IBVnaIGRmEX1GAdF/6r2h9Ha/dgInt/4bJJjJG
+   nDS4TELCMwDIi+dZRgxLMXQJ4RbFHI6qJhw2vYfZXZ3x9bbJFDf2CUIRa
+   brhX74hmjFdf3QcCzAPYYBE5jQYvRSeMZNPvXqI1gPYZm7ciZldaDAqVM
+   GDgfddqT5W3QpiUELUSH3ZFLXdKuixhWBKN/MJ/mXWbLPoGL6JY9HCJ6N
+   mmHtKChbnV8JdvyPQ69YtzYrJlFbM9r+LnwlHChJMS4BnUbRe7aNTgEnc
+   g==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10330"; a="329180592"
+X-IronPort-AV: E=Sophos;i="5.90,295,1643702400";
+   d="scan'208";a="329180592"
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 28 Apr 2022 03:18:38 -0700
+X-IronPort-AV: E=Sophos;i="5.90,295,1643702400";
+   d="scan'208";a="559588361"
+Received: from unknown (HELO jiaqingz-bmcdev-container.sh.intel.com)
+ ([10.239.138.232])
+  by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 28 Apr 2022 03:18:37 -0700
+From: Jiaqing Zhao <jiaqing.zhao@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jiaqing Zhao <jiaqing.zhao@linux.intel.com>
+Subject: [meta-networking] [PATCH] libesmtp: Disable NTLM support by default
+Date: Thu, 28 Apr 2022 18:18:03 +0800
+Message-Id: <20220428101803.2347766-1-jiaqing.zhao@linux.intel.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: 
- <CAA=hcWSv7=gctvWYXSaJTqi=y=G9Zr8Jr01+5vVUcGSsPJM9vA@mail.gmail.com>
- <CADkTA4McF0vDHBX+gtFnFXLHF5+eyfFZCjPs4DP2B5C0zcSsVw@mail.gmail.com>
-In-Reply-To: 
- <CADkTA4McF0vDHBX+gtFnFXLHF5+eyfFZCjPs4DP2B5C0zcSsVw@mail.gmail.com>
-From: Jupiter <jupiter.hce@gmail.com>
-Date: Thu, 28 Apr 2022 19:39:10 +1000
-Message-ID: 
- <CAA=hcWTrEkw+xPDFzKqNMM264aOoqiJXvyU9209m5xhEBEts+A@mail.gmail.com>
-Subject: Re: [yocto] How to force build system to use a working kernel
- defconfig?
-To: Bruce Ashfield <bruce.ashfield@gmail.com>
-Cc: yocto <yocto@lists.yoctoproject.org>,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 28 Apr 2022 09:39:55 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Apr 2022 10:18:56 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96838
+ https://lists.openembedded.org/g/openembedded-devel/message/96839
 
-Hi Bruce,
+NTLM authentication uses MD4 algorithm which is considered to be
+insecure, and some modern systems may drop MD4 support. This patch
+adds an 'ntlm' option to this feature, which is disabled by default.
 
-Thanks for your response.
+Upstream-Status: Accepted [https://github.com/libesmtp/libESMTP/commit/1c304e7886a08fb56485e41614ff3f8685afb59d]
+Signed-off-by: Jiaqing Zhao <jiaqing.zhao@linux.intel.com>
+---
+ ...01-Add-build-option-for-NTLM-support.patch | 85 +++++++++++++++++++
+ .../libesmtp/libesmtp_1.1.0.bb                |  4 +-
+ 2 files changed, 88 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/libesmtp/libesmtp/0001-Add-build-option-for-NTLM-support.patch
 
-> You can't suppress the kernel's config step, it is always going to
-> run. You can't just copy over .config and have the kernel build.
+diff --git a/meta-networking/recipes-support/libesmtp/libesmtp/0001-Add-build-option-for-NTLM-support.patch b/meta-networking/recipes-support/libesmtp/libesmtp/0001-Add-build-option-for-NTLM-support.patch
+new file mode 100644
+index 000000000..64938a482
+--- /dev/null
++++ b/meta-networking/recipes-support/libesmtp/libesmtp/0001-Add-build-option-for-NTLM-support.patch
+@@ -0,0 +1,85 @@
++From 1c304e7886a08fb56485e41614ff3f8685afb59d Mon Sep 17 00:00:00 2001
++From: Jiaqing Zhao <jiaqing.zhao@intel.com>
++Date: Tue, 8 Mar 2022 15:05:32 +0000
++Subject: [PATCH] Add build option for NTLM support
++
++Currently, NTLM plugin is built by default when openssl is available
++and STARTTLS is enabled. But in libesmtp 1.0.6, there is a separate
++build option. This commits adds the 'ntlm' option back. It's also
++disabled by default.
++
++Like 1.0.6, it will check openssl MD4 algorithm support as MD4 is
++insecure and modern systems may drop MD4 support.
++
++Upstream-Status: Accepted [https://github.com/libesmtp/libESMTP/commit/1c304e7886a08fb56485e41614ff3f8685afb59d]
++Signed-off-by: Jiaqing Zhao <jiaqing.zhao@intel.com>
++---
++ meson.build       | 13 ++++++++++---
++ meson_options.txt |  1 +
++ ntlm/meson.build  |  2 +-
++ 3 files changed, 12 insertions(+), 4 deletions(-)
++
++diff --git a/meson.build b/meson.build
++index 11d6ed8..d2a0e06 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -61,6 +61,7 @@ add_project_arguments(cc.get_supported_arguments(cflags), language: 'c')
++ ################################################################################
++ dldep = cc.find_library('dl')
++ ssldep = dependency('openssl', version : '>=1.1.0', required : get_option('tls'))
+++ntlmdep = dependency('openssl', version : '>=1.1.0', required : get_option('ntlm'))
++ threaddep = dependency('threads', required : get_option('pthreads'))
++ 
++ #XXX add test for libbind9.so
++@@ -69,6 +70,7 @@ lwresdep = cc.find_library('lwres', required : get_option('lwres'))
++ deps = [
++   dldep,
++   ssldep,
+++  ntlmdep,
++   threaddep,
++   lwresdep,
++ ]
++@@ -237,8 +239,12 @@ include_dir = include_directories('.')
++ subdir('login')
++ subdir('plain')
++ subdir('crammd5')
++-if ssldep.found()
++-  subdir('ntlm')
+++if ntlmdep.found()
+++  if cc.has_header('openssl/md4.h') and cc.has_function('MD4_Init', dependencies : ntlmdep)
+++    subdir('ntlm')
+++  else
+++    error('MD4 is not supported in current openssl, unable to build NTLM plugin')
+++  endif
++ endif
++ 
++ ################################################################################
++@@ -264,4 +270,5 @@ summary({'current:revision:age': libesmtp_cra,
++ 	 'STARTTLS': ssldep.found(),
++ 	 'CHUNKING': get_option('bdat'),
++ 	 'ETRN': get_option('etrn'),
++-	 'XUSR': get_option('xusr')})
+++	 'XUSR': get_option('xusr'),
+++	 'NTLM': ntlmdep.found()})
++diff --git a/meson_options.txt b/meson_options.txt
++index 8375e2c..158f38f 100644
++--- a/meson_options.txt
+++++ b/meson_options.txt
++@@ -5,3 +5,4 @@ option('lwres', type : 'feature', value : 'disabled', description : 'use lwres l
++ option('bdat', type : 'boolean', value : 'true', description : 'enable SMTP BDAT extension')
++ option('etrn', type : 'boolean', value : 'true', description : 'enable SMTP ETRN extension')
++ option('xusr', type : 'boolean', value : 'true', description : 'enable sendmail XUSR extension')
+++option('ntlm', type : 'feature', value : 'disabled', description : 'build with support for NTLM authentication')
++diff --git a/ntlm/meson.build b/ntlm/meson.build
++index e0eef58..11d7f58 100644
++--- a/ntlm/meson.build
+++++ b/ntlm/meson.build
++@@ -5,7 +5,7 @@ sasl_ntlm_sources = [
++   'ntlmstruct.c',
++ ]
++ 
++-ntlm_deps = [ ssldep, ]
+++ntlm_deps = [ ntlmdep, ]
++ 
++ sasl_ntlm = shared_module('ntlm', sasl_ntlm_sources,
++ 			  name_prefix : 'sasl-',
+diff --git a/meta-networking/recipes-support/libesmtp/libesmtp_1.1.0.bb b/meta-networking/recipes-support/libesmtp/libesmtp_1.1.0.bb
+index 231c57260..bf1a12d48 100644
+--- a/meta-networking/recipes-support/libesmtp/libesmtp_1.1.0.bb
++++ b/meta-networking/recipes-support/libesmtp/libesmtp_1.1.0.bb
+@@ -8,7 +8,8 @@ SECTION = "libs"
+ 
+ DEPENDS = "openssl"
+ 
+-SRC_URI = "git://github.com/libesmtp/libESMTP.git;branch=master;protocol=https"
++SRC_URI = "git://github.com/libesmtp/libESMTP.git;branch=master;protocol=https \
++           file://0001-Add-build-option-for-NTLM-support.patch"
+ SRCREV = "1d0af244310a66943ab400be56b15a9087f181eb"
+ 
+ S = "${WORKDIR}/git"
+@@ -26,6 +27,7 @@ EXTRA_OEMESON = " \
+     -Dbdat=true \
+     -Detrn=true \
+     -Dxusr=true \
++    -Dntlm=disabled \
+ "
+ 
+ FILES:${PN} = "${libdir}/lib*${SOLIBS} \
+-- 
+2.34.1
 
-If the OE build kernel config step can be disabled to compile kernel
-using customer defconfig, that will make users life much easier to
-disable unwanted kernel drivers and features.
-
-The customer defconfig can be certainly generated from bitbake -c
-menuconfig, but honestly, the kernel configure selection is not easier
-to understand, we have to use defconfig to disable unwanted the
-configures and tested it, inadvertently disable some configures could
-cause kernel panic regardless if the OE build system config step is
-running or not.
-
-I have searched the internet, it is not just me, there are many others
-who requested to run customer defconfig without OE build kernel config
-step.
-
-Are you a contributor in the OE dev team? Are there any reasons why
-the OE dev team won't consider this feature?
-
-Thank you very much.
-
-Kind regards,
-
-jupiter
 
