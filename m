@@ -1,322 +1,536 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <alex.kiernan@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DE22C433EF
-	for <webhook@archiver.kernel.org>; Thu, 28 Apr 2022 14:42:18 +0000 (UTC)
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com
- [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web08.11397.1651156933803516585
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3119AC433F5
+	for <webhook@archiver.kernel.org>; Thu, 28 Apr 2022 16:15:29 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
+ [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.web10.12860.1651162525510143403
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Apr 2022 07:42:13 -0700
+ Thu, 28 Apr 2022 09:15:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=TPIggDTI;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id iq10so4548006pjb.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=oCeaNcba;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47,
+ mailfrom: alex.kiernan@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id e24so7418990wrc.9
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Apr 2022 07:42:13 -0700 (PDT)
+ Thu, 28 Apr 2022 09:15:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=PHftLtRd4gshY6Nd+Wg3bs+UmAIdS2SSrYNAsVGG+us=;
-        b=TPIggDTIETqmbxOlB52c97qfQTjoopObYt7+Lk+IvZ3Ca74JbCXZp/DVAqNO8MkTL7
-         xrScbQcyfXBln7zM/Smsrdtu7N6qz1egIFKdqPxiTIsac9LXir1Y6uGTjP8cBtNPhxJs
-         taVaw1c/Z50NI/aj+eSq7fnFqWtxT8bfZZIEFqdlewfj3tBN1YzRW7/NP7wrHz/3nxtD
-         A66zaM7rChZbuk50Um7yY4VL/6WBjqbcrICG8uOaIWDfPfpyEMtmVaA2SDoz4LoIS4Id
-         yMecvHHqEPK/muGPpFCvGG/pfEg0c30mo+JLAcHPr2lCsucKBwS9zgrKDJSAtvLikQC1
-         8saA==
+        bh=HOO2YeU7nEBxSw7Q9Mv0XqlMT43u2ZmtDFVQduU9cEs=;
+        b=oCeaNcbaTvfUe8YTbwwfEpN68LPwDNf1iWda6ONiUup4Dk+xPhzXc0M1n0NsCGkaMR
+         cnG1mWWyzrYB3op09icXLs1mulTrQGqLW+HcebQgkbLsTWhZrkJXDUR4pSo1GPuCLl9/
+         4jlYD70+VZ1mqf43bpGb9nA9S93ATAq52mU4WEqIQqs6eCav590J9wAsbyFq/XZTGWQe
+         kJvB030jcuuBd9l7NE7UINrWmSQPHZbZQpZsLlznp/TE0dGIOHx5ktXX8AtsH+8sZ7+p
+         4F1zp0BulwZVWwYze0YzOUF8i9xgvguwrC8LqqXGRJIFs+fPwiaOvuGP2BTis4UggdPc
+         Z7NQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=PHftLtRd4gshY6Nd+Wg3bs+UmAIdS2SSrYNAsVGG+us=;
-        b=SUPvrITXLlsOPZVos6AaL7M/OZglAw5kHiMO2Gscu9u2Kcg4ObcCoxnrBr+xgk91Fa
-         FoDKgXrO/Jb2RgaNN03C5pvPLEDeoSB6G7ik40fopJSUD/G0plq71LjArpjRx3+5tsYB
-         Oi9cf8w+3JE5VicxIGPhU3ucQ6/llbIWOm5pBaEeXx/UGkoglCsRDn1w0y8fW3d+MAYd
-         RpuFri/+5qR6r6NfSL2iNxVMm0aboZOOgiiqk/mHc/z3dO0i2QLBUnLIa2SCVXZ09q+m
-         idguOECEoGINeXpQumOAceOfHZReZAm5U9sal/J/7M5ZQ/JkWvlaL6iu3U0UVY4dV6BR
-         Y6mA==
-X-Gm-Message-State: AOAM533HQRh/dhkO4rTlU4OlzFYsR7IqLn7UkOxFuBOIO7uWgqLMZe8b
-	l6bogH7QOTpAbkkGiFYUCou2coZzURfpww==
+        bh=HOO2YeU7nEBxSw7Q9Mv0XqlMT43u2ZmtDFVQduU9cEs=;
+        b=Og0T54IrKAuPpnmADHtpya92dj789zeLq1Ah+xG5btx/6nY+2dLx2Ui47NObxy4NoW
+         Oro2+9olm4b8bHKro5sz9Ary95Ub3VZ2y3mGRZsAB5BhyYU1IH849eLgucXrkiGqCkix
+         mWanWmJgmC75QHmYjhVK9KNRRbScVNMTcNqcIQesk1aQttPiIqycSqfcnR0EwrN3WjSP
+         4v5HDjNxbxtg2b0WnOLZEkLtuDIpZbfV+lZnou3/kWmNM1vTvHn+XUrkh6a04wTD/tyi
+         laCkl2mr9EcD4ItDDpJylFIZ+q9FqPmXejyw2N3xk1jRtAx72VcVZWmGbwr2Qp+MdRcI
+         kuQw==
+X-Gm-Message-State: AOAM533jF4p8KGOjPtY8whMwzUtYRe/cXEFtmcKGqYEZYX40ya/cAh2y
+	17Bvo1qTNAwGHEo/SQ6RW+BNcg0Rw64=
 X-Google-Smtp-Source: 
- ABdhPJzA+5JEMBPIjRY9Ujr46OfFOuJLcouXBF6jaIrHPaIiAxrBGzANDyFLJIPdzPxmb/BRmR9YIA==
-X-Received: by 2002:a17:903:28c:b0:15d:1fc6:8fcd with SMTP id
- j12-20020a170903028c00b0015d1fc68fcdmr18890431plr.20.1651156932781;
-        Thu, 28 Apr 2022 07:42:12 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::2ca3])
+ ABdhPJwGV6TkzBHbuNSns2M1UiQBc6WLUhu9cLj0XU3ubMfQBffxyFrWTDa3vgMxv+n9b9v7eTlFLg==
+X-Received: by 2002:a5d:4b12:0:b0:20c:412e:1e2d with SMTP id
+ v18-20020a5d4b12000000b0020c412e1e2dmr1539528wrq.396.1651162522807;
+        Thu, 28 Apr 2022 09:15:22 -0700 (PDT)
+Received: from localhost.localdomain (92.40.186.235.threembb.co.uk.
+ [92.40.186.235])
         by smtp.gmail.com with ESMTPSA id
- k17-20020a628e11000000b0050d8d373331sm82292pfe.214.2022.04.28.07.42.11
+ e9-20020a056000178900b0020a9f995a3csm270501wrg.24.2022.04.28.09.15.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 28 Apr 2022 07:42:12 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Thu, 28 Apr 2022 09:15:22 -0700 (PDT)
+From: Alex Kiernan <alex.kiernan@gmail.com>
+X-Google-Original-From: Alex Kiernan <alexk@zuma.ai>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH] babl: Fix build with meson 0.62+
-Date: Thu, 28 Apr 2022 07:42:06 -0700
-Message-Id: <20220428144206.1934684-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.36.0
+Cc: Alex Kiernan <alex.kiernan@gmail.com>,
+	Alex Kiernan <alexk@zuma.ai>
+Subject: [OE-Core][PATCH] eudev: Remove unused files
+Date: Thu, 28 Apr 2022 17:15:10 +0100
+Message-Id: <20220428161510.1167-1-alexk@zuma.ai>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 28 Apr 2022 14:42:18 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Apr 2022 16:15:29 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96842
+ https://lists.openembedded.org/g/openembedded-devel/message/96843
 
-backport needed patches to get it going with newer meson
+From: Alex Kiernan <alex.kiernan@gmail.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+These files appear to have been first commented out from do_install in
+14cba802f2dd ("udev: Add 141") and then removed completely in
+54daad852fc3 ("udev: remove commented code from init script (no code
+changes)").
+
+Signed-off-by: Alex Kiernan <alexk@zuma.ai>
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
- ...t-run-git-rev-parse-during-configure.patch |  35 +++++
- ...0001-meson-fix-misspelled-kwarg-name.patch |  36 +++++
- .../babl/babl/0002-meson-Various-fixes.patch  | 132 ++++++++++++++++++
- meta-gnome/recipes-gimp/babl/babl_0.1.92.bb   |   6 +-
- 4 files changed, 208 insertions(+), 1 deletion(-)
- create mode 100644 meta-gnome/recipes-gimp/babl/babl/0001-meson-Do-not-run-git-rev-parse-during-configure.patch
- create mode 100644 meta-gnome/recipes-gimp/babl/babl/0001-meson-fix-misspelled-kwarg-name.patch
- create mode 100644 meta-gnome/recipes-gimp/babl/babl/0002-meson-Various-fixes.patch
+ meta/recipes-core/udev/eudev/devfs-udev.rules | 108 ---------------
+ meta/recipes-core/udev/eudev/links.conf       |  21 ---
+ .../recipes-core/udev/eudev/permissions.rules | 131 ------------------
+ meta/recipes-core/udev/eudev/run.rules        |  14 --
+ meta/recipes-core/udev/eudev/udev.rules       | 116 ----------------
+ meta/recipes-core/udev/eudev_3.2.10.bb        |   5 -
+ 6 files changed, 395 deletions(-)
+ delete mode 100644 meta/recipes-core/udev/eudev/devfs-udev.rules
+ delete mode 100644 meta/recipes-core/udev/eudev/links.conf
+ delete mode 100644 meta/recipes-core/udev/eudev/permissions.rules
+ delete mode 100644 meta/recipes-core/udev/eudev/run.rules
+ delete mode 100644 meta/recipes-core/udev/eudev/udev.rules
 
-diff --git a/meta-gnome/recipes-gimp/babl/babl/0001-meson-Do-not-run-git-rev-parse-during-configure.patch b/meta-gnome/recipes-gimp/babl/babl/0001-meson-Do-not-run-git-rev-parse-during-configure.patch
-new file mode 100644
-index 0000000000..bb129a4178
---- /dev/null
-+++ b/meta-gnome/recipes-gimp/babl/babl/0001-meson-Do-not-run-git-rev-parse-during-configure.patch
-@@ -0,0 +1,35 @@
-+From 0e41b11b23c91293d1b39a8ec4cb80c68fb26ad7 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 28 Apr 2022 07:35:31 -0700
-+Subject: [PATCH] meson: Do not run git rev-parse during configure
-+
-+This option will try to deduce if babl is being built from git tree or
-+release tarball, there should be a better way like checking for .git
-+directory etc. instead of doing git operations needing network
-+
-+see
-+https://gitlab.gnome.org/GNOME/babl/-/commit/2dc7fc403fe427a889913ef0cfb71de85b4326ec#note_1439732
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ meson.build | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/meson.build b/meson.build
-+index 7e7a935..649b456 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -451,7 +451,7 @@ if git_bin.found() and run_command(
-+     git_bin,
-+     'rev-parse',
-+     '--is-inside-work-tree',
-+-    check: true,
-++    check: false,
-+ ).returncode() == 0
-+   git_version_h = vcs_tag(
-+     input : 'git-version.h.in',
-+-- 
-+2.36.0
-+
-diff --git a/meta-gnome/recipes-gimp/babl/babl/0001-meson-fix-misspelled-kwarg-name.patch b/meta-gnome/recipes-gimp/babl/babl/0001-meson-fix-misspelled-kwarg-name.patch
-new file mode 100644
-index 0000000000..111dac6484
---- /dev/null
-+++ b/meta-gnome/recipes-gimp/babl/babl/0001-meson-fix-misspelled-kwarg-name.patch
-@@ -0,0 +1,36 @@
-+From ebcf4795f1132c5124d73a5ae2ca5c01319e584d Mon Sep 17 00:00:00 2001
-+From: Eli Schwartz <eschwartz@archlinux.org>
-+Date: Sun, 13 Mar 2022 20:26:05 -0400
-+Subject: [PATCH 1/2] meson: fix misspelled kwarg name
-+
-+set10 doesn't have a `Description` kwarg, it does have a `description`
-+kwarg though.
-+
-+This caused the conf variable to not have a description when it should
-+have one, and newer versions of Meson with better argument validation
-+error out with:
-+
-+meson.build:58:5: ERROR: configuration_data.set10 got unknown keyword arguments "Description"
-+
-+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/babl/-/commit/b05b2826365a7dbc6ca1bf0977b848055cd0cbb6]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ meson.build | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/meson.build b/meson.build
-+index 487e470..2623e93 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -55,7 +55,7 @@ lib_name    = meson.project_name() + '-' + api_version
-+ stability_version_number = (major_version != 0 ? minor_version : micro_version)
-+ stable = (stability_version_number % 2 == 0)
-+ 
-+-conf.set10('BABL_UNSTABLE', not stable, Description:
-++conf.set10('BABL_UNSTABLE', not stable, description:
-+   'Define to 1 if this is an unstable version of BABL.')
-+ 
-+ conf.set       ('BABL_MAJOR_VERSION',    '@0@'.format(major_version))
-+-- 
-+2.36.0
-+
-diff --git a/meta-gnome/recipes-gimp/babl/babl/0002-meson-Various-fixes.patch b/meta-gnome/recipes-gimp/babl/babl/0002-meson-Various-fixes.patch
-new file mode 100644
-index 0000000000..919653bf22
---- /dev/null
-+++ b/meta-gnome/recipes-gimp/babl/babl/0002-meson-Various-fixes.patch
-@@ -0,0 +1,132 @@
-+From 06e16da32dfaad02434fd9937d298ea1ece256ce Mon Sep 17 00:00:00 2001
-+From: Xavier Claessens <xavier.claessens@collabora.com>
-+Date: Sat, 23 Apr 2022 10:33:17 -0400
-+Subject: [PATCH 2/2] meson: Various fixes
-+
-+- Add missing lcms dependencies. That's needed when lcms is a subproject
-+  otherwise those targets does not find its headers.
-+- Add lcms2 wrap so meson can build it as subproject in case the
-+  dependency is not found on system.
-+- Fix couple meson warnings
-+- Use meson.override_dependency() so babl can be used as subproject
-+  without hardcoding "babl_dep" variable name in main project.
-+
-+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/babl/-/commit/2dc7fc403fe427a889913ef0cfb71de85b4326ec]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ babl/meson.build       |  4 +++-
-+ extensions/meson.build |  1 +
-+ meson.build            |  4 +++-
-+ subprojects/lcms2.wrap | 12 ++++++++++++
-+ tests/meson.build      |  2 +-
-+ tools/meson.build      |  2 +-
-+ 6 files changed, 21 insertions(+), 4 deletions(-)
-+ create mode 100644 subprojects/lcms2.wrap
-+
-+diff --git a/babl/meson.build b/babl/meson.build
-+index d432dca..70fb131 100644
-+--- a/babl/meson.build
-++++ b/babl/meson.build
-+@@ -138,7 +138,7 @@ babl = library(
-+   link_args: babl_link_args,
-+   link_with: simd_extra,
-+   dependencies: babl_deps,
-+-  link_depends: version_script,
-++  link_depends: version_script[0],
-+   version: so_version,
-+   install: true,
-+ )
-+@@ -165,4 +165,6 @@ if build_gir
-+       install: true,
-+     )
-+   endif
-++else
-++  babl_gir = []
-+ endif
-+diff --git a/extensions/meson.build b/extensions/meson.build
-+index 23672bb..9935f29 100644
-+--- a/extensions/meson.build
-++++ b/extensions/meson.build
-+@@ -6,6 +6,7 @@ no_cflags = []
-+ babl_ext_dep = [
-+   math,
-+   thread,
-++  lcms,
-+ ]
-+ 
-+ # Include directories
-+diff --git a/meson.build b/meson.build
-+index 2623e93..7e7a935 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -451,6 +451,7 @@ if git_bin.found() and run_command(
-+     git_bin,
-+     'rev-parse',
-+     '--is-inside-work-tree',
-++    check: true,
-+ ).returncode() == 0
-+   git_version_h = vcs_tag(
-+     input : 'git-version.h.in',
-+@@ -531,13 +532,14 @@ babl_dep = declare_dependency(
-+   link_with : babl,
-+   sources: [
-+     babl_version_h,
-+-    is_variable('babl_gir') ? babl_gir : []
-++    build_gir ? babl_gir : []
-+   ],
-+   variables: {
-+     'babl_path'   : babl_extensions_build_dir,
-+     'babl_libdir' : babl_library_build_dir,
-+   },
-+ )
-++meson.override_dependency('babl', babl_dep)
-+ 
-+ ################################################################################
-+ # Build summary
-+diff --git a/subprojects/lcms2.wrap b/subprojects/lcms2.wrap
-+new file mode 100644
-+index 0000000..2cc69df
-+--- /dev/null
-++++ b/subprojects/lcms2.wrap
-+@@ -0,0 +1,12 @@
-++[wrap-file]
-++directory = Little-CMS-2.12
-++source_url = https://github.com/mm2/Little-CMS/archive/refs/tags/2.12.tar.gz
-++source_filename = lcms2-2.12.tar.gz
-++source_hash = e501f1482fc424550ef3abbf86bf1c66090e1661249e89552d39ed5bf935df66
-++patch_filename = lcms2_2.12-2_patch.zip
-++patch_url = https://wrapdb.mesonbuild.com/v2/lcms2_2.12-2/get_patch
-++patch_hash = 3ac6944ac4b8d8507b85961d98cb287532945183d0e8f094c77810e793b6bebe
-++
-++[provide]
-++lcms2 = liblcms2_dep
-++
-+diff --git a/tests/meson.build b/tests/meson.build
-+index eee8895..7c67e70 100644
-+--- a/tests/meson.build
-++++ b/tests/meson.build
-+@@ -42,7 +42,7 @@ foreach test_name : test_names
-+     test_name + '.c',
-+     include_directories: [rootInclude, bablInclude],
-+     link_with: babl,
-+-    dependencies: thread,
-++    dependencies: [thread, lcms],
-+     export_dynamic: true,
-+     install: false,
-+   )
-+diff --git a/tools/meson.build b/tools/meson.build
-+index 2719335..89ccf40 100644
-+--- a/tools/meson.build
-++++ b/tools/meson.build
-+@@ -18,7 +18,7 @@ foreach tool_name : tool_names
-+     tool_name + '.c',
-+     include_directories: [rootInclude, bablInclude],
-+     link_with: babl,
-+-    dependencies: [math, thread],
-++    dependencies: [math, thread, lcms],
-+     install: false,
-+   )
-+ 
-+-- 
-+2.36.0
-+
-diff --git a/meta-gnome/recipes-gimp/babl/babl_0.1.92.bb b/meta-gnome/recipes-gimp/babl/babl_0.1.92.bb
-index 156c91bcbd..f2e11c1117 100644
---- a/meta-gnome/recipes-gimp/babl/babl_0.1.92.bb
-+++ b/meta-gnome/recipes-gimp/babl/babl_0.1.92.bb
-@@ -14,7 +14,11 @@ DEPENDS += "lcms"
- CFLAGS:append:toolchain-clang:mipsarch = " -ffp-exception-behavior=ignore "
- CFLAGS:append:toolchain-clang:riscv64 = " -ffp-exception-behavior=ignore "
+diff --git a/meta/recipes-core/udev/eudev/devfs-udev.rules b/meta/recipes-core/udev/eudev/devfs-udev.rules
+deleted file mode 100644
+index 0ba1ad4e7f0e..000000000000
+--- a/meta/recipes-core/udev/eudev/devfs-udev.rules
++++ /dev/null
+@@ -1,108 +0,0 @@
+-# The use of these rules is not recommended or supported.
+-# In a world where devices can come and go at any time, the devfs scheme
+-# of simple device enumeration does not help _anything_. Just forget about
+-# it. Use custom rules to name your device or look at the persistent device
+-# naming scheme, which is implemented for disks and add your subsystem.
+-
+-# ide block devices
+-BUS="ide", KERNEL="hd*", PROGRAM="/etc/udev/ide-devfs.sh %k %b %n", NAME="%k", SYMLINK="%c{1} %c{2}"
+-
+-# md block devices
+-KERNEL="md[0-9]*", NAME="md/%n"
+-
+-# floppy devices
+-KERNEL="fd[0-9]*", NAME="floppy/%n"
+-
+-# tty devices
+-KERNEL="tty[0-9]*",    NAME="vc/%n", SYMLINK="%k"
+-KERNEL="ttyS[0-9]*",   NAME="tts/%n", SYMLINK="%k"
+-KERNEL="ttyUSB[0-9]*", NAME="tts/USB%n"
+-
+-# vc devices
+-KERNEL="vcs",        NAME="vcc/0"
+-KERNEL="vcs[0-9]*",  NAME="vcc/%n"
+-KERNEL="vcsa",       NAME="vcc/a0"
+-KERNEL="vcsa[0-9]*", NAME="vcc/a%n"
+-
+-# v4l devices
+-KERNEL="video[0-9]*", NAME="v4l/video%n"
+-KERNEL="radio[0-9]*", NAME="v4l/radio%n"
+-KERNEL="vbi[0-9]*",   NAME="v4l/vbi%n"
+-KERNEL="vtx[0-9]*",   NAME="v4l/vtx%n"
+-
+-# dm devices (ignore them)
+-KERNEL="dm-[0-9]*", NAME=""
+-
+-# i2c devices
+-KERNEL="i2c-[0-9]*", NAME="i2c/%n", SYMLINK="%k"
+-
+-# loop devices
+-KERNEL="loop[0-9]*", NAME="loop/%n", SYMLINK="%k"
+-
+-# ramdisks
+-KERNEL="ram[0-9]*", NAME="rd/%n", SYMLINK="%k"
+-
+-# framebuffer devices
+-KERNEL="fb[0-9]*", NAME="fb/%n", SYMLINK="%k"
+-
+-# misc
+-KERNEL="rtc",     NAME="misc/%k", SYMLINK="%k"
+-KERNEL="psaux",   NAME="misc/%k", SYMLINK="%k"
+-KERNEL="agpgart", NAME="misc/%k", SYMLINK="%k"
+-KERNEL="rtc",     NAME="misc/%k", SYMLINK="%k"
+-KERNEL="psaux",   NAME="misc/%k", SYMLINK="%k"
+-KERNEL="uinput",  NAME="misc/%k", SYMLINK="%k"
+-
+-# alsa devices
+-KERNEL="controlC[0-9]*", NAME="snd/%k"
+-KERNEL="hw[CD0-9]*",     NAME="snd/%k"
+-KERNEL="pcm[CD0-9cp]*",  NAME="snd/%k"
+-KERNEL="midi[CD0-9]*",   NAME="snd/%k"
+-KERNEL="timer",          NAME="snd/%k"
+-KERNEL="seq",            NAME="snd/%k"
+-
+-# oss devices
+-KERNEL="audio*",     NAME="sound/%k", SYMLINK="%k"
+-KERNEL="dmmidi",     NAME="sound/%k", SYMLINK="%k"
+-KERNEL="dsp*",       NAME="sound/%k", SYMLINK="%k"
+-KERNEL="midi*",      NAME="sound/%k", SYMLINK="%k"
+-KERNEL="mixer*",     NAME="sound/%k", SYMLINK="%k"
+-KERNEL="sequencer*", NAME="sound/%k", SYMLINK="%k"
+-
+-# input devices
+-KERNEL="mice",   NAME="input/%k"
+-KERNEL="mouse*", NAME="input/%k"
+-KERNEL="event*", NAME="input/%k"
+-KERNEL="js*",    NAME="input/%k"
+-KERNEL="ts*",	 NAME="input/%k"
+-
+-# USB devices
+-KERNEL="hiddev*",	NAME="usb/%k"
+-KERNEL="auer*",		NAME="usb/%k"
+-KERNEL="legousbtower*",	NAME="usb/%k"
+-KERNEL="dabusb*",	NAME="usb/%k"
+-BUS="usb", KERNEL="lp[0-9]*",	NAME="usb/%k"
+-
+-# netlink devices
+-KERNEL="route",		NAME="netlink/%k"
+-KERNEL="skip",		NAME="netlink/%k"
+-KERNEL="usersock",	NAME="netlink/%k"
+-KERNEL="fwmonitor",	NAME="netlink/%k"
+-KERNEL="tcpdiag",	NAME="netlink/%k"
+-KERNEL="nflog",		NAME="netlink/%k"
+-KERNEL="xfrm",		NAME="netlink/%k"
+-KERNEL="arpd",		NAME="netlink/%k"
+-KERNEL="route6",	NAME="netlink/%k"
+-KERNEL="ip6_fw",	NAME="netlink/%k"
+-KERNEL="dnrtmsg",	NAME="netlink/%k"
+-KERNEL="tap*",		NAME="netlink/%k"
+-
+-# CAPI devices
+-KERNEL="capi",		NAME="capi20", SYMLINK="isdn/capi20"
+-KERNEL="capi*",		NAME="capi/%n"
+-
+-# Network devices
+-KERNEL="tun",		NAME="net/%k"
+-
+-# raw devices
+-KERNEL="raw[0-9]*",     NAME="raw/%k" 
+diff --git a/meta/recipes-core/udev/eudev/links.conf b/meta/recipes-core/udev/eudev/links.conf
+deleted file mode 100644
+index 8fff922db6c0..000000000000
+--- a/meta/recipes-core/udev/eudev/links.conf
++++ /dev/null
+@@ -1,21 +0,0 @@
+-# This file does not exist. Please do not ask the debian maintainer about it.
+-# You may use it to do strange and wonderful things, at your risk.
+-
+-L fd		/proc/self/fd
+-L stdin		/proc/self/fd/0
+-L stdout	/proc/self/fd/1
+-L stderr	/proc/self/fd/2
+-L core		/proc/kcore
+-L sndstat	/proc/asound/oss/sndstat
+-L MAKEDEV	/sbin/MAKEDEV
+-
+-D pts
+-D shm
+-
+-# Hic sunt leones.
+-M ppp		c 108 0
+-D loop
+-M loop/0	b 7 0
+-D net
+-M net/tun	c 10 200
+-
+diff --git a/meta/recipes-core/udev/eudev/permissions.rules b/meta/recipes-core/udev/eudev/permissions.rules
+deleted file mode 100644
+index bfdff4f8ce05..000000000000
+--- a/meta/recipes-core/udev/eudev/permissions.rules
++++ /dev/null
+@@ -1,131 +0,0 @@
+-ACTION!="add", GOTO="permissions_end"
+-
+-# workarounds needed to synchronize with sysfs
+-# only needed for kernels < v2.6.18-rc1
+-ENV{PHYSDEVPATH}!="?*", ENV{PHYSDEVBUS}=="?*",	WAIT_FOR_SYSFS="bus"
+-SUBSYSTEM=="scsi", KERNEL=="[0-9]*:[0-9]*",	WAIT_FOR_SYSFS="ioerr_cnt"
+-# only needed for kernels < 2.6.16
+-SUBSYSTEM=="net",				WAIT_FOR_SYSFS="address"
+-# only needed for kernels < 2.6.17
+-SUBSYSTEM=="net", ENV{DRIVER}=="?*",		WAIT_FOR_SYSFS="device/driver"
+-
+-# devices needed to load the drivers providing them
+-KERNEL=="tun",					OPTIONS+="ignore:remove"
+-KERNEL=="ppp",					OPTIONS+="ignore:remove"
+-KERNEL=="loop[0-9]*",				OPTIONS+="ignore:remove"
+-
+-# default permissions for block devices
+-SUBSYSTEM=="block",				GROUP="disk"
+-# the aacraid driver is broken and reports that disks removable (see #404927)
+-SUBSYSTEM=="block", ATTRS{removable}=="1", \
+-	DRIVERS!="aacraid",			GROUP="floppy"
+-# all block devices on these buses are "removable"
+-SUBSYSTEM=="block", SUBSYSTEMS=="usb|ieee1394|mmc|pcmcia", GROUP="floppy"
+-
+-# IDE devices
+-KERNEL=="hd[a-z]|pcd[0-9]*", 			DRIVERS=="ide-cdrom|pcd", \
+-	IMPORT{program}="cdrom_id --export $tempnode"
+-ENV{ID_CDROM}=="?*",				GROUP="cdrom"
+-KERNEL=="ht[0-9]*", 				GROUP="tape"
+-KERNEL=="nht[0-9]*", 				GROUP="tape"
+-
+-# SCSI devices
+-KERNEL=="sr[0-9]*", IMPORT{program}="cdrom_id --export $tempnode"
+-SUBSYSTEMS=="scsi", ATTRS{type}=="1",				GROUP="tape"
+-SUBSYSTEMS=="scsi", ATTRS{type}=="3", ATTRS{vendor}=="HP",	GROUP="scanner"
+-SUBSYSTEMS=="scsi", ATTRS{type}=="3", ATTRS{vendor}=="Epson",	GROUP="scanner"
+-SUBSYSTEMS=="scsi", ATTRS{type}=="3", ATTRS{vendor}=="EPSON",	GROUP="scanner"
+-SUBSYSTEMS=="scsi", ATTRS{type}=="4",				GROUP="cdrom"
+-SUBSYSTEMS=="scsi", ATTRS{type}=="5",				GROUP="cdrom"
+-SUBSYSTEMS=="scsi", ATTRS{type}=="6",				GROUP="scanner"
+-SUBSYSTEMS=="scsi", ATTRS{type}=="8",				GROUP="tape"
+-
+-# USB devices
+-KERNEL=="legousbtower*",	MODE="0666"
+-KERNEL=="lp[0-9]*", SUBSYSTEMS=="usb",		GROUP="lp"
+-
+-# usbfs-like devices
+-SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", \
+-				MODE="0664"
+-
+-# iRiver music players
+-SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device",	GROUP="plugdev", \
+-	ATTRS{idVendor}=="4102", ATTRS{idProduct}=="10[01][135789]"
+-
+-# serial devices
+-SUBSYSTEM=="tty",				GROUP="dialout"
+-SUBSYSTEM=="capi",				GROUP="dialout"
+-SUBSYSTEM=="slamr",				GROUP="dialout"
+-SUBSYSTEM=="zaptel",				GROUP="dialout"
+-
+-# vc devices (all members of the tty subsystem)
+-KERNEL=="ptmx",			MODE="0666",	GROUP="root"
+-KERNEL=="console",		MODE="0600",	GROUP="root"
+-KERNEL=="tty",			MODE="0666",	GROUP="root"
+-KERNEL=="tty[0-9]*",				GROUP="root"
+-KERNEL=="pty*",			MODE="0666",	GROUP="tty"
+-
+-# video devices
+-SUBSYSTEM=="video4linux",			GROUP="video"
+-SUBSYSTEM=="drm",				GROUP="video"
+-SUBSYSTEM=="dvb",				GROUP="video"
+-SUBSYSTEM=="em8300",				GROUP="video"
+-SUBSYSTEM=="graphics",				GROUP="video"
+-SUBSYSTEM=="nvidia",				GROUP="video"
+-
+-# misc devices
+-KERNEL=="random",		MODE="0666"
+-KERNEL=="urandom",		MODE="0666"
+-KERNEL=="mem",			MODE="0640",	GROUP="kmem"
+-KERNEL=="kmem",			MODE="0640",	GROUP="kmem"
+-KERNEL=="port",			MODE="0640",	GROUP="kmem"
+-KERNEL=="full",			MODE="0666"
+-KERNEL=="null",			MODE="0666"
+-KERNEL=="zero",			MODE="0666"
+-KERNEL=="inotify",		MODE="0666"
+-KERNEL=="sgi_fetchop",		MODE="0666"
+-KERNEL=="sonypi",		MODE="0666"
+-KERNEL=="agpgart",				GROUP="video"
+-KERNEL=="nvram",				GROUP="nvram"
+-KERNEL=="rtc|rtc[0-9]*",			GROUP="audio"
+-KERNEL=="tpm*",			MODE="0600",	OWNER="tss", GROUP="tss"
+-KERNEL=="fuse",					GROUP="fuse"
+-KERNEL=="kqemu",		MODE="0666"
+-KERNEL=="kvm",					GROUP="kvm"
+-KERNEL=="tun",			MODE="0666",
+-
+-KERNEL=="cdemu[0-9]*",				GROUP="cdrom"
+-KERNEL=="pktcdvd[0-9]*",			GROUP="cdrom"
+-KERNEL=="pktcdvd",		MODE="0644"
+-
+-KERNEL=="uverbs*",				GROUP="rdma"
+-KERNEL=="ucm*",					GROUP="rdma"
+-KERNEL=="rdma_ucm",				GROUP="rdma"
+-
+-# printers and parallel devices
+-SUBSYSTEM=="printer",				GROUP="lp"
+-SUBSYSTEM=="ppdev",				GROUP="lp"
+-KERNEL=="irlpt*",				GROUP="lp"
+-KERNEL=="pt[0-9]*",				GROUP="tape"
+-KERNEL=="pht[0-9]*",				GROUP="tape"
+-
+-# sound devices
+-SUBSYSTEM=="sound",				GROUP="audio"
+-
+-# ieee1394 devices       
+-KERNEL=="raw1394",				GROUP="disk"
+-KERNEL=="dv1394*",				GROUP="video"
+-KERNEL=="video1394*",				GROUP="video"
+-
+-# input devices
+-KERNEL=="event[0-9]*", ATTRS{name}=="*dvb*|*DVB*|* IR *" \
+-				MODE="0664",	GROUP="video"
+-KERNEL=="js[0-9]*",		MODE="0664"
+-KERNEL=="lirc[0-9]*",				GROUP="video"
+-
+-# AOE character devices
+-SUBSYSTEM=="aoe",		MODE="0220",	GROUP="disk"
+-SUBSYSTEM=="aoe", KERNEL=="err", MODE="0440"
+-
+-LABEL="permissions_end"
+-
+diff --git a/meta/recipes-core/udev/eudev/run.rules b/meta/recipes-core/udev/eudev/run.rules
+deleted file mode 100644
+index 75d71375bb02..000000000000
+--- a/meta/recipes-core/udev/eudev/run.rules
++++ /dev/null
+@@ -1,14 +0,0 @@
+-# debugging monitor
+-RUN+="socket:/org/kernel/udev/monitor"
+-
+-# run a command on remove events
+-ACTION=="remove", ENV{REMOVE_CMD}!="", RUN+="$env{REMOVE_CMD}"
+-
+-# ignore the events generated by virtual consoles
+-KERNEL=="ptmx",		OPTIONS+="last_rule"
+-KERNEL=="console",	OPTIONS+="last_rule"
+-KERNEL=="tty"	,	OPTIONS+="last_rule"
+-KERNEL=="tty[0-9]*",	OPTIONS+="last_rule"
+-KERNEL=="pty*",		OPTIONS+="last_rule"
+-SUBSYSTEM=="vc",	OPTIONS+="last_rule"
+-
+diff --git a/meta/recipes-core/udev/eudev/udev.rules b/meta/recipes-core/udev/eudev/udev.rules
+deleted file mode 100644
+index a19d4a0bf65d..000000000000
+--- a/meta/recipes-core/udev/eudev/udev.rules
++++ /dev/null
+@@ -1,116 +0,0 @@
+-# There are a number of modifiers that are allowed to be used in some
+-# of the different fields. They provide the following subsitutions:
+-#
+-# %n the "kernel number" of the device.
+-#    For example, 'sda3' has a "kernel number" of '3'
+-# %e the smallest number for that name which does not matches an existing node
+-# %k the kernel name for the device
+-# %M the kernel major number for the device
+-# %m the kernel minor number for the device
+-# %b the bus id for the device
+-# %c the string returned by the PROGRAM
+-# %s{filename} the content of a sysfs attribute
+-# %% the '%' char itself
+-#
+-
+-# workaround for devices which do not report media changes
+-SUBSYSTEMS=="ide", KERNEL=="hd[a-z]", ATTR{removable}=="1", \
+-	ENV{ID_MODEL}=="IOMEGA_ZIP*",	NAME="%k", OPTIONS+="all_partitions"
+-SUBSYSTEMS=="ide", KERNEL=="hd[a-z]", ATTRS{media}=="floppy", \
+-	OPTIONS+="all_partitions"
+-
+-# SCSI devices
+-SUBSYSTEMS=="scsi", KERNEL=="sr[0-9]*",	NAME="scd%n", SYMLINK+="sr%n"
+-
+-# USB devices
+-SUBSYSTEMS=="usb", KERNEL=="auer[0-9]*",	NAME="usb/%k"
+-SUBSYSTEMS=="usb", KERNEL=="cpad[0-9]*",	NAME="usb/%k"
+-SUBSYSTEMS=="usb", KERNEL=="dabusb*",		NAME="usb/%k"
+-SUBSYSTEMS=="usb", KERNEL=="hiddev*",		NAME="usb/%k"
+-SUBSYSTEMS=="usb", KERNEL=="legousbtower*",	NAME="usb/%k"
+-SUBSYSTEMS=="usb", KERNEL=="lp[0-9]*",		NAME="usb/%k"
+-SUBSYSTEMS=="usb", KERNEL=="ttyUSB*", \
+-	ATTRS{product}=="Palm Handheld*|Handspring Visor|palmOne Handheld", \
+-					SYMLINK+="pilot"
+-
+-# usbfs-like devices
+-SUBSYSTEM=="usb_device",	PROGRAM="/bin/sh -c 'K=%k; K=$${K#usbdev}; printf bus/usb/%%03i/%%03i $${K%%%%.*} $${K#*.}'", ACTION=="add", \
+-				NAME="%c"
+-SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device",	NAME="bus/usb/$env{BUSNUM}/$env{DEVNUM}"
+-
+-# serial devices
+-KERNEL=="capi",			NAME="capi20", SYMLINK+="isdn/capi20"
+-KERNEL=="capi[0-9]*",		NAME="capi/%n"
+-
+-# video devices
+-KERNEL=="dvb*",			PROGRAM="/bin/sh -c 'K=%k; K=$${K#dvb}; printf dvb/adapter%%i/%%s $${K%%%%.*} $${K#*.}", ACTION=="add", \
+-				NAME="%c"
+-KERNEL=="card[0-9]*",		NAME="dri/%k"
+-
+-# misc devices
+-KERNEL=="hw_random",		NAME="hwrng"
+-KERNEL=="tun",			NAME="net/%k"
+-KERNEL=="evtchn",		NAME="xen/%k"
+-
+-KERNEL=="cdemu[0-9]*",		NAME="cdemu/%n"
+-KERNEL=="pktcdvd[0-9]*",	NAME="pktcdvd/%n"
+-KERNEL=="pktcdvd",		NAME="pktcdvd/control"
+-
+-KERNEL=="cpu[0-9]*",		NAME="cpu/%n/cpuid"
+-KERNEL=="msr[0-9]*",		NAME="cpu/%n/msr"
+-KERNEL=="microcode",		NAME="cpu/microcode"
+-
+-KERNEL=="umad*",		NAME="infiniband/%k"
+-KERNEL=="issm*",		NAME="infiniband/%k"
+-KERNEL=="uverbs*",		NAME="infiniband/%k"
+-KERNEL=="ucm*",			NAME="infiniband/%k"
+-KERNEL=="rdma_ucm",		NAME="infiniband/%k"
+-
+-# ALSA devices
+-KERNEL=="controlC[0-9]*",	NAME="snd/%k"
+-KERNEL=="hwC[D0-9]*",		NAME="snd/%k"
+-KERNEL=="pcmC[D0-9cp]*",	NAME="snd/%k"
+-KERNEL=="midiC[D0-9]*",		NAME="snd/%k"
+-KERNEL=="timer",		NAME="snd/%k"
+-KERNEL=="seq",			NAME="snd/%k"
+-
+-# ieee1394 devices       
+-KERNEL=="dv1394*",		NAME="dv1394/%n"
+-KERNEL=="video1394*",		NAME="video1394/%n"
+-
+-# input devices
+-KERNEL=="mice",			NAME="input/%k"
+-KERNEL=="mouse[0-9]*",		NAME="input/%k"
+-KERNEL=="event[0-9]*",		NAME="input/%k"
+-KERNEL=="js[0-9]*",		NAME="input/%k"
+-KERNEL=="ts[0-9]*",		NAME="input/%k"
+-KERNEL=="uinput",		NAME="input/%k"
+-
+-# Zaptel
+-KERNEL=="zapctl",		NAME="zap/ctl"
+-KERNEL=="zaptimer",		NAME="zap/timer"
+-KERNEL=="zapchannel",		NAME="zap/channel"
+-KERNEL=="zappseudo",		NAME="zap/pseudo"
+-KERNEL=="zap[0-9]*",		NAME="zap/%n"
+-
+-# AOE character devices
+-SUBSYSTEM=="aoe", KERNEL=="discover",	NAME="etherd/%k"
+-SUBSYSTEM=="aoe", KERNEL=="err",	NAME="etherd/%k"
+-SUBSYSTEM=="aoe", KERNEL=="interfaces",	NAME="etherd/%k"
+-SUBSYSTEM=="aoe", KERNEL=="revalidate",	NAME="etherd/%k"
+-
+-# device mapper creates its own device nodes, so ignore these
+-KERNEL=="dm-[0-9]*",		OPTIONS+="ignore_device"
+-KERNEL=="device-mapper",	NAME="mapper/control"
+-
+-KERNEL=="rfcomm[0-9]*", NAME="%k", GROUP="users", MODE="0660"
+-
+-# Firmware Helper
+-ACTION=="add", SUBSYSTEM=="firmware", RUN+="/lib/udev/firmware.sh"
+-
+-# Samsung UARTS
+-KERNEL=="s3c2410_serial[0-9]",   NAME="ttySAC%n"
+-
+-# MXC UARTs
+-KERNEL=="ttymxc[0-4]",   NAME="ttymxc%n"
+-
+diff --git a/meta/recipes-core/udev/eudev_3.2.10.bb b/meta/recipes-core/udev/eudev_3.2.10.bb
+index ccc66ae13131..b0536124920a 100644
+--- a/meta/recipes-core/udev/eudev_3.2.10.bb
++++ b/meta/recipes-core/udev/eudev_3.2.10.bb
+@@ -12,13 +12,8 @@ PROVIDES = "udev"
+ SRC_URI = "https://dev.gentoo.org/~blueness/${BPN}/${BP}.tar.gz \
+            file://0014-Revert-rules-remove-firmware-loading-rules.patch \
+            file://Revert-udev-remove-userspace-firmware-loading-suppor.patch \
+-           file://devfs-udev.rules \
+            file://init \
+-           file://links.conf \
+            file://local.rules \
+-           file://permissions.rules \
+-           file://run.rules \
+-           file://udev.rules \
+ "
  
--SRC_URI = "https://download.gimp.org/pub/${BPN}/0.1/${BP}.tar.xz"
-+SRC_URI = "https://download.gimp.org/pub/${BPN}/0.1/${BP}.tar.xz \
-+           file://0001-meson-fix-misspelled-kwarg-name.patch \
-+           file://0002-meson-Various-fixes.patch \
-+           file://0001-meson-Do-not-run-git-rev-parse-during-configure.patch \
-+"
- SRC_URI[sha256sum] = "f667735028944b6375ad18f160a64ceb93f5c7dccaa9d8751de359777488a2c1"
- 
- BBCLASSEXTEND = "native"
+ SRC_URI[md5sum] = "60b135a189523f333cea5f71a3345c8d"
 -- 
-2.36.0
+2.35.1
 
 
