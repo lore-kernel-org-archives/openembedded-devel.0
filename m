@@ -1,435 +1,133 @@
-Return-Path: <ovidiu.panait@windriver.com>
+Return-Path: <bruce.ashfield@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D5A8C433F5
-	for <webhook@archiver.kernel.org>; Thu, 28 Apr 2022 11:07:16 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web08.8489.1651144032135316103
- for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Apr 2022 04:07:12 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B234FC433F5
+	for <webhook@archiver.kernel.org>; Thu, 28 Apr 2022 11:44:46 +0000 (UTC)
+Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com
+ [209.85.128.176])
+ by mx.groups.io with SMTP id smtpd.web11.8893.1651146279352086948
+ for <Openembedded-devel@lists.openembedded.org>;
+ Thu, 28 Apr 2022 04:44:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.3.146,
- mailfrom: ovidiu.panait@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 23SB73Vi006297
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
-	Thu, 28 Apr 2022 04:07:09 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 23SB6w94006998
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Thu, 28 Apr 2022 04:07:03 -0700 (PDT)
-Received: from [128.224.125.152] (128.224.125.152) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Thu, 28 Apr 2022 04:06:57 -0700
-Message-ID: <a78420fc-3797-6fad-c48e-4a281c7d67d2@windriver.com>
-Date: Thu, 28 Apr 2022 14:06:48 +0300
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=cpAqZN/t;
+ spf=pass (domain: gmail.com, ip: 209.85.128.176,
+ mailfrom: bruce.ashfield@gmail.com)
+Received: by mail-yw1-f176.google.com with SMTP id
+ 00721157ae682-2f16645872fso49785397b3.4
+        for <Openembedded-devel@lists.openembedded.org>;
+ Thu, 28 Apr 2022 04:44:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=tEhojiAn1sYgtSQnQao3W4PPYmAiVsYOYIvz/3YbhdY=;
+        b=cpAqZN/tYasLSv0P5mJ5h4lD/09FMp2gyPofEXCpHb6LK7vUI3GcJijp/csU6Ntur/
+         3P0DdN0HIwrJbvqiFgoBe4dCrdJdmk2mOQRyVge+8EnrwteiWvt7aEZa7RxHeHSaHz/B
+         yRt8d+DIcHc/STu4OoCOPt2dX0cSsJn2fsdkHhuRhA3RNbmm8QWPWngt3U2XODJJGZoC
+         5JFyrFb+9fZdA+VNx8eRW2Gomgew7UBo8e8eKLtVR8AzUVEbTHcPcflnsnLUXrDVkyLF
+         D7q2rpKjBA8Yeo6MNQQO0u8B5c/MAuZ/wGtYccn6+rv5C3X/2VArLdkOj2cqNuexCeOF
+         CA2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=tEhojiAn1sYgtSQnQao3W4PPYmAiVsYOYIvz/3YbhdY=;
+        b=LP/ubDJjZUYJAiO5tA/Ivd7a5es+2fAt+VIAcuDlyWrM/3HHqDf6QaM2KZvFaEyYw4
+         Ex8maSIHtc1ZsjlR7WLqkqxPxpxGNjR+h92tAdmLyPuANV/swoZYGUlgySMWKjd53s6M
+         KhqIWM+Oe2ma0ssgcOdNfRz7JYB7foEmGrRsjeK79jeMBpgvHtrXVIbSEtlEBbOeDIbi
+         anfPomEyAvoVhtutZGcKkAeCvF8g0AU9wlCnmDdFs+l2c2zM4q07y1TcN4PMbQrLRc3g
+         9XYkLiKbicMeHCCCYHacpCHAlrdXzgD0qcRlLINKzknAdt4dJQjSLCpQnq1lE6o8ffkl
+         pfAA==
+X-Gm-Message-State: AOAM533F+qj+M+0uHBgozExzUs6uZGbbsl6sYzNFYDmMF5Fd21t6bJLa
+	eeafEV9N7ZYL3KaLWoPQ1B6ddjoQQy7TeDqGxVMqNRjNYoE=
+X-Google-Smtp-Source: 
+ ABdhPJwkZBCAAGSmpgUq89h/LMCGc8kuEsuHXHTT0931h8RDXHBO93Gxh45ysYfdd72uhhndT2qeJ6NDjvZwXBAXCoQ=
+X-Received: by 2002:a0d:df08:0:b0:2f7:d206:1f75 with SMTP id
+ i8-20020a0ddf08000000b002f7d2061f75mr23250719ywe.182.1651146278476; Thu, 28
+ Apr 2022 04:44:38 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: Re: [oe] [meta-oe][PATCH] syzkaller: add recipe and selftest for
- syzkaller fuzzer
-Content-Language: en-US
-From: Ovidiu Panait <ovidiu.panait@windriver.com>
-To: <raj.khem@gmail.com>
-References: <16E5CE6BC5F9CE8C.8845@lists.openembedded.org>
-CC: <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <16E5CE6BC5F9CE8C.8845@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [128.224.125.152]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+References: 
+ <CAA=hcWSv7=gctvWYXSaJTqi=y=G9Zr8Jr01+5vVUcGSsPJM9vA@mail.gmail.com>
+ <CADkTA4McF0vDHBX+gtFnFXLHF5+eyfFZCjPs4DP2B5C0zcSsVw@mail.gmail.com>
+ <CAA=hcWTrEkw+xPDFzKqNMM264aOoqiJXvyU9209m5xhEBEts+A@mail.gmail.com>
+In-Reply-To: 
+ <CAA=hcWTrEkw+xPDFzKqNMM264aOoqiJXvyU9209m5xhEBEts+A@mail.gmail.com>
+From: Bruce Ashfield <bruce.ashfield@gmail.com>
+Date: Thu, 28 Apr 2022 07:44:26 -0400
+Message-ID: 
+ <CADkTA4M7_+X06P3ahtt4edRiMTUNXS7-dVKTkRknAD2MtNtSOA@mail.gmail.com>
+Subject: Re: [yocto] How to force build system to use a working kernel
+ defconfig?
+To: Jupiter <jupiter.hce@gmail.com>
+Cc: yocto <yocto@lists.yoctoproject.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 28 Apr 2022 11:07:16 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Apr 2022 11:44:46 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96840
+ https://lists.openembedded.org/g/openembedded-devel/message/96841
 
-Hi Khem,
+On Thu, Apr 28, 2022 at 5:39 AM Jupiter <jupiter.hce@gmail.com> wrote:
+>
+> Hi Bruce,
+>
+> Thanks for your response.
+>
+> > You can't suppress the kernel's config step, it is always going to
+> > run. You can't just copy over .config and have the kernel build.
+>
+> If the OE build kernel config step can be disabled to compile kernel
+> using customer defconfig, that will make users life much easier to
+> disable unwanted kernel drivers and features.
 
-Any feedback for this patch?
+This has nothing to do with OE, that's what the kernel would do
+no matter how you build it.
 
-Thanks!
-Ovidiu
+>
+> The customer defconfig can be certainly generated from bitbake -c
+> menuconfig, but honestly, the kernel configure selection is not easier
+> to understand, we have to use defconfig to disable unwanted the
+> configures and tested it, inadvertently disable some configures could
+> cause kernel panic regardless if the OE build system config step is
+> running or not.
+>
 
-On 14.04.2022 18:56, Ovidiu Panait wrote:
-> Syzkaller is a coverage-guided fuzzer that is widely used to find bugs in
-> the Linux kernel:
-> https://github.com/google/syzkaller
+There's a reason why kernel-yocto (and other frameworks) provide
+things like configuration fragments, kernel types, etc, This is a well
+explored topic. Check out my (and others) presentations about this
+throughout the years of yocto summits, etc. They can all be found
+online in various formats.
+
+> I have searched the internet, it is not just me, there are many others
+> who requested to run customer defconfig without OE build kernel config
+> step.
+
+It can already do that, just as I described in my previous response.
+The defconfig is copied in, and then the kernel *will* run its configuration
+process over it, not OE's, the kernel.
+
 >
-> Add the recipe and a selftest for running the fuzzer in a qemux86-64
-> kvm environment. The following steps can be used to start the test:
-> """
-> cat >> conf/local.conf <<EOF
-> SYZ_WORKDIR="<path>"
-> SYZ_FUZZTIME="30"
-> SYZ_QEMU_VM_COUNT="2"
-> SYZ_QEMU_MEM="2048"
-> SYZ_QEMU_CPUS="2"
-> EOF
+> Are you a contributor in the OE dev team? Are there any reasons why
+> the OE dev team won't consider this feature?
+
+See above,
+
+Bruce
+
 >
-> oe-selftest -r syzkaller
-> ...
-> loading corpus...
-> serving http on http://127.0.0.1:49605
-> serving rpc on tcp://[::]:46475
-> booting test machines...
-> wait for the connection from test machine...
-> vm-0: crash: KCSAN: data-race in poll_schedule_timeout.constprop.NUM / pollwake
-> vm-1: crash: KCSAN: data-race in mutex_spin_on_owner
-> machine check:
-> syscalls                : 2227/4223
-> code coverage           : enabled
-> comparison tracing      : enabled
-> extra coverage          : enabled
-> delay kcov mmap         : mmap returned an invalid pointer
-> setuid sandbox          : enabled
-> namespace sandbox       : enabled
-> Android sandbox         : /sys/fs/selinux/policy does not exist
-> fault injection         : enabled
-> leak checking           : enabled
-> net packet injection    : enabled
-> net device setup        : enabled
-> concurrency sanitizer   : enabled
-> devlink PCI setup       : PCI device 0000:00:10.0 is not available
-> USB emulation           : enabled
-> hci packet injection    : enabled
-> wifi device emulation   : enabled
-> 802.15.4 emulation      : enabled
-> corpus                  : 0 (deleted 0 broken)
-> seeds                   : 0/0
-> VMs 2, executed 1, cover 0, signal 0/0, crashes 2, repro 0
-> vm-1: crash: KCSAN: data-race in mutex_spin_on_owner
-> """
+> Thank you very much.
 >
-> This will fuzz the yocto kernel for 30 minutes using 2 qemu VMs, each VM
-> getting 2048MB of memory and 2 CPUs.
+> Kind regards,
 >
-> The path in SYZ_WORKDIR must be an absolute path that is persistent across
-> oe-selftest runs, so that fuzzing does not start all over again on each
-> invocation. Syzkaller will save the corpus database in that directory and will
-> use the database to keep track of the interfaces already fuzzed.
->
-> After the test is done, <workdir>/crashes directory will contain the report
-> files for all the bugs found.
->
-> Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
-> ---
->   meta-oe/lib/oeqa/selftest/cases/syzkaller.py  | 123 ++++++++++++++++++
->   ...ets.go-allow-users-to-override-hardc.patch |  67 ++++++++++
->   .../recipes-test/syzkaller/syzkaller_git.bb   |  85 ++++++++++++
->   3 files changed, 275 insertions(+)
->   create mode 100644 meta-oe/lib/oeqa/selftest/cases/syzkaller.py
->   create mode 100644 meta-oe/recipes-test/syzkaller/syzkaller/0001-sys-targets-targets.go-allow-users-to-override-hardc.patch
->   create mode 100644 meta-oe/recipes-test/syzkaller/syzkaller_git.bb
->
-> diff --git a/meta-oe/lib/oeqa/selftest/cases/syzkaller.py b/meta-oe/lib/oeqa/selftest/cases/syzkaller.py
-> new file mode 100644
-> index 000000000..c11cadddb
-> --- /dev/null
-> +++ b/meta-oe/lib/oeqa/selftest/cases/syzkaller.py
-> @@ -0,0 +1,123 @@
-> +#
-> +# SPDX-License-Identifier: MIT
-> +#
-> +
-> +from oeqa.selftest.case import OESelftestTestCase
-> +from oeqa.utils.commands import runCmd, bitbake, get_bb_var, get_bb_vars
-> +from oeqa.utils.network import get_free_port
-> +
-> +class TestSyzkaller(OESelftestTestCase):
-> +    def setUpSyzkallerConfig(self, os_arch, qemu_postfix):
-> +        syz_target_sysroot = get_bb_var('PKGD', 'syzkaller')
-> +        syz_target = os.path.join(syz_target_sysroot, 'usr')
-> +
-> +        qemu_native_bin = os.path.join(self.syz_native_sysroot, 'usr/bin/qemu-system-' + qemu_postfix)
-> +        kernel_cmdline = "ip=dhcp rootfs=/dev/sda dummy_hcd.num=%s" % (self.dummy_hcd_num)
-> +        kernel_objdir = self.deploy_dir_image
-> +        port = get_free_port()
-> +
-> +        if not os.path.exists(self.syz_workdir):
-> +            os.mkdir(self.syz_workdir)
-> +
-> +        with open(self.syz_cfg, 'w') as f:
-> +            f.write(
-> +"""
-> +{
-> +	"target": "%s",
-> +	"http": "127.0.0.1:%s",
-> +	"workdir": "%s",
-> +	"kernel_obj": "%s",
-> +	"kernel_src": "%s",
-> +	"image": "%s",
-> +	"syzkaller": "%s",
-> +	"type": "qemu",
-> +	"reproduce" : false,
-> +	"sandbox": "none",
-> +	"vm": {
-> +		"count": %s,
-> +		"kernel": "%s",
-> +		"cmdline": "%s",
-> +		"cpu": %s,
-> +		"mem": %s,
-> +		"qemu": "%s",
-> +		"qemu_args": "-device virtio-scsi-pci,id=scsi -device scsi-hd,drive=rootfs -enable-kvm -cpu host,migratable=off",
-> +		"image_device": "drive index=0,id=rootfs,if=none,media=disk,file="
-> +	}
-> +}
-> +"""
-> +% (os_arch, port, self.syz_workdir, kernel_objdir, self.kernel_src,
-> +   self.rootfs, syz_target, self.syz_qemu_vms, self.kernel, kernel_cmdline,
-> +   self.syz_qemu_cpus, self.syz_qemu_mem, qemu_native_bin))
-> +
-> +    def test_syzkallerFuzzingQemux86_64(self):
-> +        self.image = 'core-image-minimal'
-> +        self.machine = 'qemux86-64'
-> +        self.fstype = "ext4"
-> +
-> +        self.write_config(
-> +"""
-> +MACHINE = "%s"
-> +IMAGE_FSTYPES = "%s"
-> +KERNEL_IMAGETYPES += "vmlinux"
-> +EXTRA_IMAGE_FEATURES += " ssh-server-openssh"
-> +IMAGE_ROOTFS_EXTRA_SPACE = "512000"
-> +KERNEL_EXTRA_FEATURES += " \
-> +    cfg/debug/syzkaller/debug-syzkaller.scc \
-> +"
-> +"""
-> +% (self.machine, self.fstype))
-> +
-> +        build_vars = ['TOPDIR', 'DEPLOY_DIR_IMAGE', 'STAGING_KERNEL_DIR']
-> +        syz_fuzz_vars = ['SYZ_WORKDIR', 'SYZ_FUZZTIME', 'SYZ_QEMU_MEM', 'SYZ_QEMU_CPUS', 'SYZ_QEMU_VM_COUNT']
-> +        syz_aux_vars = ['SYZ_DUMMY_HCD_NUM']
-> +
-> +        needed_vars = build_vars + syz_fuzz_vars + syz_aux_vars
-> +        bb_vars = get_bb_vars(needed_vars)
-> +
-> +        for var in syz_fuzz_vars:
-> +                if not bb_vars[var]:
-> +                    self.skipTest(
-> +"""
-> +%s variable not set.
-> +Please configure %s fuzzing parameters to run this test.
-> +
-> +Example local.conf config:
-> +SYZ_WORKDIR="<path>"  # syzkaller workdir location (must be persistent across os-selftest runs)
-> +SYZ_FUZZTIME="30"     # fuzzing time in minutes
-> +SYZ_QEMU_VM_COUNT="1" # number of qemu VMs to be used for fuzzing
-> +SYZ_QEMU_MEM="2048"'  # memory used by each qemu VM
-> +SYZ_QEMU_CPUS="2"'    # number of cpus used by each qemu VM
-> +"""
-> +% (var, ', '.join(syz_fuzz_vars)))
-> +
-> +        self.topdir = bb_vars['TOPDIR']
-> +        self.deploy_dir_image = bb_vars['DEPLOY_DIR_IMAGE']
-> +        self.kernel_src = bb_vars['STAGING_KERNEL_DIR']
-> +
-> +        """
-> +        SYZ_WORKDIR must be set to an absolute path where syzkaller will store
-> +        the corpus database, config, runtime and crash data generated during
-> +        fuzzing. It must be persistent between oe-selftest runs, so the fuzzer
-> +        does not start over again on each run.
-> +        """
-> +        self.syz_workdir = bb_vars['SYZ_WORKDIR']
-> +        self.syz_fuzztime = int(bb_vars['SYZ_FUZZTIME']) * 60
-> +        self.syz_qemu_mem = int(bb_vars['SYZ_QEMU_MEM'])
-> +        self.syz_qemu_cpus = int(bb_vars['SYZ_QEMU_CPUS'])
-> +        self.syz_qemu_vms = int(bb_vars['SYZ_QEMU_VM_COUNT'])
-> +        self.dummy_hcd_num = int(bb_vars['SYZ_DUMMY_HCD_NUM'] or 8)
-> +
-> +        self.syz_cfg = os.path.join(self.syz_workdir, 'syzkaller.cfg')
-> +        self.kernel = os.path.join(self.deploy_dir_image, 'bzImage')
-> +        self.rootfs = os.path.join(self.deploy_dir_image, '%s-%s.%s' % (self.image, self.machine, self.fstype))
-> +
-> +        self.syz_native_sysroot = get_bb_var('RECIPE_SYSROOT_NATIVE', 'syzkaller-native')
-> +
-> +        self.setUpSyzkallerConfig("linux/amd64", "x86_64")
-> +
-> +        bitbake(self.image)
-> +        bitbake('syzkaller')
-> +        bitbake('syzkaller-native -c addto_recipe_sysroot')
-> +
-> +        cmd = "syz-manager -config %s" % self.syz_cfg
-> +        runCmd(cmd, native_sysroot = self.syz_native_sysroot, timeout=self.syz_fuzztime, output_log=self.logger, ignore_status=True, shell=True)
-> diff --git a/meta-oe/recipes-test/syzkaller/syzkaller/0001-sys-targets-targets.go-allow-users-to-override-hardc.patch b/meta-oe/recipes-test/syzkaller/syzkaller/0001-sys-targets-targets.go-allow-users-to-override-hardc.patch
-> new file mode 100644
-> index 000000000..d647b8d4a
-> --- /dev/null
-> +++ b/meta-oe/recipes-test/syzkaller/syzkaller/0001-sys-targets-targets.go-allow-users-to-override-hardc.patch
-> @@ -0,0 +1,67 @@
-> +From aca1030d29f627314d13884ebc7b2c313d718df7 Mon Sep 17 00:00:00 2001
-> +From: Ovidiu Panait <ovidiu.panait@windriver.com>
-> +Date: Wed, 13 Apr 2022 17:17:54 +0300
-> +Subject: [PATCH] sys/targets/targets.go: allow users to override hardcoded
-> + cross-compilers
-> +
-> +Currently, cross compiler names are hardcoded for each os/arch combo. However,
-> +toolchain tuples differ, especially when using vendor provided toolchains.
-> +Allow users to specify the cross compiler for an os/arch combo using
-> +SYZ_CC_<os>_<arch> environment variables.
-> +
-> +Also, remove hardcoded "-march=armv6" flag to fix compilation on arm.
-> +
-> +Upstream-Status: Inappropriate [embedded specific]
-> +
-> +Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
-> +---
-> + sys/targets/targets.go | 19 +++++++++++--------
-> + 1 file changed, 11 insertions(+), 8 deletions(-)
-> +
-> +diff --git a/sys/targets/targets.go b/sys/targets/targets.go
-> +index f3be708f3..19a8bb681 100644
-> +--- a/sys/targets/targets.go
-> ++++ b/sys/targets/targets.go
-> +@@ -258,7 +258,6 @@ var List = map[string]map[string]*Target{
-> + 			PtrSize:          4,
-> + 			PageSize:         4 << 10,
-> + 			LittleEndian:     true,
-> +-			CFlags:           []string{"-D__LINUX_ARM_ARCH__=6", "-march=armv6"},
-> + 			Triple:           "arm-linux-gnueabi",
-> + 			KernelArch:       "arm",
-> + 			KernelHeaderArch: "arm",
-> +@@ -670,12 +669,16 @@ func initTarget(target *Target, OS, arch string) {
-> + 	for i := range target.CFlags {
-> + 		target.replaceSourceDir(&target.CFlags[i], sourceDir)
-> + 	}
-> +-	if OS == Linux && arch == runtime.GOARCH {
-> +-		// Don't use cross-compiler for native compilation, there are cases when this does not work:
-> +-		// https://github.com/google/syzkaller/pull/619
-> +-		// https://github.com/google/syzkaller/issues/387
-> +-		// https://github.com/google/syzkaller/commit/06db3cec94c54e1cf720cdd5db72761514569d56
-> +-		target.Triple = ""
-> ++	if OS == Linux {
-> ++		if cc := os.Getenv("SYZ_CC_" + OS + "_" + arch); cc != "" {
-> ++			target.CCompiler = cc
-> ++		} else if arch == runtime.GOARCH {
-> ++			// Don't use cross-compiler for native compilation, there are cases when this does not work:
-> ++			// https://github.com/google/syzkaller/pull/619
-> ++			// https://github.com/google/syzkaller/issues/387
-> ++			// https://github.com/google/syzkaller/commit/06db3cec94c54e1cf720cdd5db72761514569d56
-> ++			target.Triple = ""
-> ++		}
-> + 	}
-> + 	if target.CCompiler == "" {
-> + 		target.setCompiler(useClang)
-> +@@ -803,7 +806,7 @@ func (target *Target) lazyInit() {
-> + 	// On CI we want to fail loudly if cross-compilation breaks.
-> + 	// Also fail if SOURCEDIR_GOOS is set b/c in that case user probably assumes it will work.
-> + 	if (target.OS != runtime.GOOS || !runningOnCI) && os.Getenv("SOURCEDIR_"+strings.ToUpper(target.OS)) == "" {
-> +-		if _, err := exec.LookPath(target.CCompiler); err != nil {
-> ++		if _, err := exec.LookPath(strings.Fields(target.CCompiler)[0]); err != nil {
-> + 			target.BrokenCompiler = fmt.Sprintf("%v is missing (%v)", target.CCompiler, err)
-> + 			return
-> + 		}
-> +--
-> +2.25.1
-> +
-> diff --git a/meta-oe/recipes-test/syzkaller/syzkaller_git.bb b/meta-oe/recipes-test/syzkaller/syzkaller_git.bb
-> new file mode 100644
-> index 000000000..240e8f7cd
-> --- /dev/null
-> +++ b/meta-oe/recipes-test/syzkaller/syzkaller_git.bb
-> @@ -0,0 +1,85 @@
-> +DESCRIPTION = "syzkaller is an unsupervised coverage-guided kernel fuzzer"
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=5335066555b14d832335aa4660d6c376"
-> +
-> +inherit go-mod
-> +
-> +GO_IMPORT = "github.com/google/syzkaller"
-> +
-> +SRC_URI = "git://${GO_IMPORT};protocol=https;destsuffix=${BPN}-${PV}/src/${GO_IMPORT};branch=master \
-> +           file://0001-sys-targets-targets.go-allow-users-to-override-hardc.patch;patchdir=src/${GO_IMPORT} \
-> +           "
-> +SRCREV = "af01ee7dda3c1b644f43230ae466b6dc7ceb97c3"
-> +
-> +COMPATIBLE_HOST = "(x86_64|i.86|arm|aarch64).*-linux"
-> +
-> +B = "${S}/src/${GO_IMPORT}/bin"
-> +
-> +GO_EXTRA_LDFLAGS += ' -X ${GO_IMPORT}/prog.GitRevision=${SRCREV}'
-> +
-> +export GOHOSTFLAGS="${GO_LINKSHARED} ${GOBUILDFLAGS}"
-> +export GOTARGETFLAGS="${GO_LINKSHARED} ${GOBUILDFLAGS}"
-> +export TARGETOS = '${GOOS}'
-> +export TARGETARCH = '${GOARCH}'
-> +export TARGETVMARCH = '${GOARCH}'
-> +
-> +CGO_ENABLED = "0"
-> +
-> +DEPENDS:class-native += "qemu-system-native"
-> +
-> +do_compile:class-native() {
-> +    export HOSTOS="${GOHOSTOS}"
-> +    export HOSTARCH="${GOHOSTARCH}"
-> +
-> +    oe_runmake host
-> +}
-> +
-> +do_compile:class-target() {
-> +    export HOSTOS="${GOOS}"
-> +    export HOSTARCH="${GOARCH}"
-> +    export SYZ_CC_${TARGETOS}_${TARGETARCH}="${CC}"
-> +
-> +    # Unset GOOS and GOARCH so that the correct syz-sysgen binary can be
-> +    # generated. Fixes:
-> +    # go install: cannot install cross-compiled binaries when GOBIN is set
-> +    unset GOOS
-> +    unset GOARCH
-> +
-> +    oe_runmake CC="${CC}" CFLAGS="${CFLAGS} ${LDFLAGS}" REV=${SRCREV} target
-> +}
-> +
-> +do_install:class-native() {
-> +    SYZ_BINS_NATIVE="\
-> +        syz-manager \
-> +        syz-runtest \
-> +        syz-repro \
-> +        syz-mutate \
-> +        syz-prog2c \
-> +        syz-db \
-> +        syz-upgrade \
-> +    "
-> +
-> +    install -d ${D}${bindir}
-> +
-> +    for i in ${SYZ_BINS_NATIVE}; do
-> +        install -m 0755 ${B}/${i} ${D}${bindir}
-> +    done
-> +}
-> +
-> +do_install:class-target() {
-> +    SYZ_TARGET_DIR="${TARGETOS}_${TARGETARCH}"
-> +    SYZ_BINS_TARGET=" \
-> +        syz-fuzzer \
-> +        syz-execprog \
-> +        syz-stress \
-> +        syz-executor \
-> +    "
-> +
-> +    install -d ${D}${bindir}/${SYZ_TARGET_DIR}
-> +
-> +    for i in ${SYZ_BINS_TARGET}; do
-> +        install -m 0755 ${B}/${SYZ_TARGET_DIR}/${i} ${D}${bindir}/${SYZ_TARGET_DIR}
-> +    done
-> +}
-> +
-> +BBCLASSEXTEND += "native"
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#96653): https://lists.openembedded.org/g/openembedded-devel/message/96653
-> Mute This Topic: https://lists.openembedded.org/mt/90467655/3616968
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [ovidiu.panait@windriver.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+> jupiter
+
+
+
+-- 
+- Thou shalt not follow the NULL pointer, for chaos and madness await
+thee at its end
+- "Use the force Harry" - Gandalf, Star Trek II
 
