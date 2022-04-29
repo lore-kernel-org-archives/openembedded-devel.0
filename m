@@ -1,121 +1,93 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <boubaker.bassem.1991@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E4586C433EF
-	for <webhook@archiver.kernel.org>; Fri, 29 Apr 2022 13:54:28 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
- [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web08.10257.1651240467102417652
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6590AC433F5
+	for <webhook@archiver.kernel.org>; Fri, 29 Apr 2022 15:18:19 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
+ [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.web10.11546.1651245491597581284
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Apr 2022 06:54:27 -0700
+ Fri, 29 Apr 2022 08:18:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=nE3upQlq;
- spf=pass (domain: gmail.com, ip: 209.85.216.43,
- mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id
- m14-20020a17090a34ce00b001d5fe250e23so7339744pjf.3
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Q8QIpen0;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47,
+ mailfrom: boubaker.bassem.1991@gmail.com)
+Received: by mail-wm1-f47.google.com with SMTP id
+ bi24-20020a05600c3d9800b00393ff664705so4937433wmb.4
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Apr 2022 06:54:27 -0700 (PDT)
+ Fri, 29 Apr 2022 08:18:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:subject:date:message-id:mime-version
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=i6e8AyZxjUi+uuCL5Wru2qQaH3gs2saXroCIutG/JQM=;
-        b=nE3upQlqw2pbiqnSv7FCAU44RQz+Fvajr+VgaecXavuo/qUZPaFwLjVhiM3fIakisT
-         B+6Qj2VfOQZ5zGudKdcyhYc6VYv8J+O9kqy37VCwH3g2iZfAClBS3Gk6yNvIxI4MA5Z/
-         mWGliJoRK8UXL1hZkQ0Bw+V9gPJuM002pVxLsTZEKBBX4ppa6RFKG+olHn+WBrfHByZW
-         fkpYf2J7ynH+Cu9A3zsGftykPp+Bcyhno7G1+RVcy1Iy2zZJPBkTemOaJI1/g8MPNbeQ
-         qt50uKme0m6JwJdhpvbHIAAr/Yd2wA9aFdXy7v3oLIDRAoKsenNGGT1DqWKbPF5m5ZGc
-         nLJQ==
+        bh=uEQycQnaDUoFpHHF7FXt1JivJU1BbY8Me0KpONF32wU=;
+        b=Q8QIpen0R8lB6IgWCuBx/VoNE4567lOxm3S2+HOaPLdQihtNQC8u67znTYXBmBhU1R
+         1VQJXUXtvv8/48qFu24motkFE6vryPuO+DGuifkkJYiQG+HbGs/+I19/tMJp8zyVYd3z
+         9mkGAyQvWzAEhXoiPp0++xZgrQHF14EYOSpGgOUBeV144pXfl9jcYTO85Nj9g2pnX1uT
+         o6x9RaX+rRJVaX/LLa1bk0zEEhMQ+RHrRxPHnM5LrFBmexPML6ZTJbVi/DPwxyqHTfum
+         jHySemIE4tSyf3KRAqb7vEzrgDempY0C29q6CBTIFETq+MQr40nsG5YY+XFdKTzSnATZ
+         Ht6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=i6e8AyZxjUi+uuCL5Wru2qQaH3gs2saXroCIutG/JQM=;
-        b=vIfCyiLVpQBss66QuA9zFSbB9hk2WMiUOhy9alFI0Ma6zSHQogAHfycpQUYhawBWls
-         QFr6WAW9TfqqfDd2dMmNaLiScP7v0Gltlo5V/I772rZdK4LW1jC6bHKYxsSX/oEy8jH1
-         mJ2SO1bFe4/EhSb+LmGfaMbuSyqLl+BSnEIZtQaCD4rLDT5xmvyv6eOhUeVaxJfrF2Qd
-         SCZ9VMrnUE+MmoDg0/PSEDrDPk67wJstPvLWmqA0Nc676fPULPGJpwNyXhGDJQuGNI3C
-         68rMXa07QjpYarq2SJuU/jQ0HdJg2HYg7faSxWiDKrPK8MhuxnfWbtAkvZxGu5RUnbXp
-         mb0A==
-X-Gm-Message-State: AOAM533EYr+ovFoPmA2ETEsg+nBSPKKTeNv31EUAjrty7oeLjqTexZdt
-	3pm8nfOMKgrmbgSEhogyAN7Luol1JOY=
+        bh=uEQycQnaDUoFpHHF7FXt1JivJU1BbY8Me0KpONF32wU=;
+        b=LTatQAuUtXHExnrebS0Qb3stxRWp5bCffXW/Zl2L9Lf2AKRZjrB1hnRbQdDw3R/wTK
+         cmUd8LQLwbcyaJDi9dR79jL8v5CUxtJ+NqpAWgePiUOT4FnqMUFKcwvQxJ3hnUwv9YLo
+         BHQsc/4tIatpwUO52rz/UoTn45EgNihj2fcP5pXg14Nxa7pDCnSm6HLnMwiDautUCrQo
+         h2btiL6Px7nOCGYAA8Osq7zsezDFLI6sfYGGE2uqqa4SXPMr6o0Ce+gn0HxVPQBpEQ7N
+         FdzkTOjj0wHmSPtGRGnGCO8b8KUR7UoWEj96QeiP8993Te9wDndiyJ73ASh/zHi81693
+         xvNg==
+X-Gm-Message-State: AOAM530GpSBVQpl4/7bdtlG1FOF4Vdv1lyTZc8hqy78e2QDSsnZNMTD+
+	B8RTaNXOfQD6ho3ZJ2yRjwL32mG8ThZr+w==
 X-Google-Smtp-Source: 
- ABdhPJwxUTVb46LFQFgJZ8xAfyZ8icpPD2H3qgqT7kIFKg9x9/JqpRLdVfXRD80aH0KRQQyH9IQUsQ==
-X-Received: by 2002:a17:90b:4f91:b0:1cd:3a73:3a5d with SMTP id
- qe17-20020a17090b4f9100b001cd3a733a5dmr4093722pjb.98.1651240466405;
-        Fri, 29 Apr 2022 06:54:26 -0700 (PDT)
-Received: from keaua.caveonetworks.com
- ([2601:202:4180:a5c0:bfea:e64:b39d:fb6e])
+ ABdhPJyw0A7HbCCRxgx2WMRPADZ+xkpfHdK3LZAi6stQUhi162ShSswPNCnIrAdYVjcJlqfB2RnTJw==
+X-Received: by 2002:a05:600c:4f50:b0:393:f258:46ed with SMTP id
+ m16-20020a05600c4f5000b00393f25846edmr3715290wmq.35.1651245489834;
+        Fri, 29 Apr 2022 08:18:09 -0700 (PDT)
+Received: from localhost.localdomain ([2a01:e0a:282:c80:b19b:acc9:f49f:1142])
         by smtp.gmail.com with ESMTPSA id
- 123-20020a620681000000b004fa7c20d732sm3230333pfg.133.2022.04.29.06.54.25
-        for <openembedded-devel@lists.openembedded.org>
+ y8-20020adfc7c8000000b0020c4d02e541sm1085861wrg.75.2022.04.29.08.18.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 29 Apr 2022 06:54:25 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
+        Fri, 29 Apr 2022 08:18:09 -0700 (PDT)
+From: Bassem Boubaker <boubaker.bassem.1991@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH] meta-python-image: Fix build depends
-Date: Fri, 29 Apr 2022 06:54:24 -0700
-Message-Id: <20220429135424.1658353-1-akuster808@gmail.com>
+Cc: Bassem Boubaker <boubaker.bassem.1991l@gmail.com>
+Subject: [PATCH] conntrack-tools: Fix missing capability
+Date: Fri, 29 Apr 2022 17:17:56 +0200
+Message-Id: <20220429151756.641345-1-boubaker.bassem.1991@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 29 Apr 2022 13:54:28 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 29 Apr 2022 15:18:19 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96857
+ https://lists.openembedded.org/g/openembedded-devel/message/96858
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+From: Bassem Boubaker <boubaker.bassem.1991l@gmail.com>
+
+The commit fix this error message: Do not forget that you need *root* or CAP_NET_ADMIN capabilities ;-)
 ---
- .../packagegroups/packagegroup-meta-python.bb          | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ .../recipes-filter/conntrack-tools/conntrack-tools_1.4.6.bb  | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index d2d9dcd185..20492e9522 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -12,9 +12,9 @@ PACKAGES = ' \
- # FORTRAN:forcevariable = ",fortran"
- RDEPENDS:packagegroup-meta-python3 = "\
-     ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "python3-systemd", "", d)} \
--    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "python3-blivetgui", "", d)} \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "x11 systemd", "python3-blivetgui", "", d)} \
-     gyp \
--    pamela \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "pam", "pamela", "", d)} \
-     pyrtm \
-     python3-absl \
-     python3-aenum \
-@@ -52,7 +52,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
-     python3-bitstring \
-     python3-bitstruct \
-     python3-blinker \
--    python3-blivet \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "python3-blivet", "", d)} \
-     python3-booleanpy \
-     python3-cachecontrol \
-     python3-cached-property \
-@@ -84,7 +84,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
-     python3-croniter \
-     python3-cson \
-     python3-custom-inherit \
--    python3-cvxopt \
-+    ${@bb.utils.contains_any('FORTRAN', [',fortran',',f77'], 'python3-cvxopt', '', d)} \
-     python3-cycler \
-     python3-dateparser \
-     python3-dateutil \
-@@ -328,7 +328,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
-     python3-pyscaffold \
-     python3-pyserial \
-     python3-pysonos \
--    python3-pystemd \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "python3-pystemd", "", d)} \
-     python3-pytest-asyncio \
-     python3-pytest-benchmark \
-     python3-pytest-cache \
+diff --git a/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.6.bb b/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.6.bb
+index de6a72e78..e76238fe0 100644
+--- a/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.6.bb
++++ b/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.6.bb
+@@ -32,3 +32,8 @@ do_install:append() {
+     sed -i 's!/var/!${localstatedir}/!g' ${D}/${sysconfdir}/init.d/conntrack-failover ${D}/${sysconfdir}/init.d/conntrackd ${D}/${sysconfdir}/conntrackd/conntrackd.conf.sample
+     sed -i 's!^export PATH=.*!export PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}/${sysconfdir}/init.d/conntrackd
+ }
++
++# fix error message: Do not forget that you need *root* or CAP_NET_ADMIN capabilities ;-)
++pkg_postinst:${PN} () {
++    setcap cap_net_admin+ep $D/${sbindir}/conntrack"
++}
+\ No newline at end of file
 -- 
 2.25.1
 
