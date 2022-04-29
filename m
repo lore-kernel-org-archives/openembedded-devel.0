@@ -1,360 +1,270 @@
-Return-Path: <alejandro@enedino.org>
+Return-Path: <ranjitsinhrathod1991@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E9510C433F5
-	for <webhook@archiver.kernel.org>; Fri, 29 Apr 2022 02:59:43 +0000 (UTC)
-Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com
- [209.85.160.169])
- by mx.groups.io with SMTP id smtpd.web09.5871.1651201178894924571
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DA2AC433EF
+	for <webhook@archiver.kernel.org>; Fri, 29 Apr 2022 09:03:56 +0000 (UTC)
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com
+ [209.85.210.172])
+ by mx.groups.io with SMTP id smtpd.web08.7812.1651223032941723013
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Apr 2022 19:59:39 -0700
+ Fri, 29 Apr 2022 02:03:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=pass (domain: gmail.com, ip: 209.85.160.169, mailfrom: aehs29@gmail.com)
-Received: by mail-qt1-f169.google.com with SMTP id hf18so4908780qtb.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=enBSnADR;
+ spf=pass (domain: gmail.com, ip: 209.85.210.172,
+ mailfrom: ranjitsinhrathod1991@gmail.com)
+Received: by mail-pf1-f172.google.com with SMTP id y14so6398605pfe.10
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Apr 2022 19:59:38 -0700 (PDT)
+ Fri, 29 Apr 2022 02:03:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id;
+        bh=7VlJ6iMEXb7nzbZIjQk6pi1KYbt7ozRCs/BFjaq9CCo=;
+        b=enBSnADRg/r8rOTEIG9pEKeOb0DMwINQz/4gzQUs08U+aL7yxU6CGHNB8WFVUu9JG1
+         eSxpsDEB+OYb6/0RIn42CMwLu5AVMHufmWJxa0N4edoD7ogj28IIPcG/8VPzL/7MOYLU
+         CtkwDacXaXOiXt1qiHTOxdbJAdmhi2BJ8rXApElztc5XvYSZ/riSDMaUuoPOQoNM06bF
+         V55tfmgKm3+1Y/jbZwZkPNYAou3CoeYKvESRjO4NOFL5kxPUjW9z/5akP0RKdrbKEnVX
+         GlulufzC3J7hEi+pya4KvKNtVh/YdS6esKBIEnd0thTcpg/JBC1x1O/DrOyKzKPLVOKa
+         bPJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=0TpMsPKlH+qOkTVY1ZWVeB/JAjE3IbPlp5KSyS18Q9c=;
-        b=w6D9gxhttHa1jXoGY+qiZbyTlEW2l9Wvy1dMMk3xuKC8VDuimbPY3PRIBcNtJz6wnY
-         WrKGPV/g8FtwcHVQelW+I3zThoYKobpJmEcv2HP2awa9ZVxz6PMp4yyLT+Ve28F2KTX5
-         rRsITjkF4ec3/fqa7A824QR8nrQ8GzYGuP86wSsNCJ9R/kItHHV6dqakzffCqIgV/mmC
-         tRmRN94A/mh2Ai856LEkM77LOtgEGxsrAk46WxJQLp5975KyZDVxRm2xtg2sl/Yqeeli
-         GYg/aq0a0tlJOxNiPy4FjqBOdFNIlrqx9N6hsr/+mYb7ioNOvvxAaqFwxXDLdIzqJD/y
-         Q34Q==
-X-Gm-Message-State: AOAM5303HuXKp2WA1jWIrcrz9aK5JGAsgedLrpxIW5kVbt8ozOLw2a7H
-	RrApfmUOn+7POlTypGR92JGuCrVVXMyKkQ==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=7VlJ6iMEXb7nzbZIjQk6pi1KYbt7ozRCs/BFjaq9CCo=;
+        b=xWbpwKe50UZVMRFIJInMFDNpqnqZzySLQHfA2SqTI2fLeP2lN7upnNkme6SMxKr7ii
+         9CFk7N2bgkZlx9zFlqCHln7WQ1wAPahY8ly2amWq8w+qVZrk6VcOI73U/Dpo78we0U87
+         YBLWi1tf4rYWevFF8sGAdpz0LTisp5YXqdjX+vmsn5zPN5aEsn85icRw69Y7opK6cgNS
+         TyYv3jY3Vs/s0tL1cQmjHbKBbFYrAodVJ7nlFyOPBhYoD60NyZh5leHTdHeA3NRJCnSm
+         GqbTI1bF0Wlmx1tpFQJurLl9a+0bR+CGWPSINytW56c8jj/QL3d7YNAgFriN2ZyrcYJ8
+         uKAA==
+X-Gm-Message-State: AOAM531v03BnefQjsztNcFA2444z3+ExEX9+Dijie3e/6ZFY5HGPViKP
+	bHp/38QTGkKKMgeXq7nH2isSTb/+yjI=
 X-Google-Smtp-Source: 
- ABdhPJwMMOcL59h82F12Hik7aFJPSj8XTvZNyPx5OjsdDlztz3mi+nlovjrhGrNWuupKT+uEw1wgpw==
-X-Received: by 2002:a05:622a:14cd:b0:2e1:d83a:6fdd with SMTP id
- u13-20020a05622a14cd00b002e1d83a6fddmr25249537qtx.401.1651201177839;
-        Thu, 28 Apr 2022 19:59:37 -0700 (PDT)
-Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com.
- [209.85.222.176])
+ ABdhPJwI1WPNURGxgkR0UIuRdVXBYToCBQ1P+/GCXu6ifqbT5D+t4OsnZ3rx4mioWNzRuIFuaDwIKA==
+X-Received: by 2002:a65:48c6:0:b0:398:b858:e332 with SMTP id
+ o6-20020a6548c6000000b00398b858e332mr31107711pgs.291.1651223031621;
+        Fri, 29 Apr 2022 02:03:51 -0700 (PDT)
+Received: from localhost.localdomain ([150.129.206.198])
         by smtp.gmail.com with ESMTPSA id
- p4-20020ae9f304000000b0069f92b78b16sm814352qkg.58.2022.04.28.19.59.37
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 28 Apr 2022 19:59:37 -0700 (PDT)
-Received: by mail-qk1-f176.google.com with SMTP id x77so4250619qkb.3
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Apr 2022 19:59:37 -0700 (PDT)
-X-Received: by 2002:a05:620a:40d6:b0:69f:2d4b:4236 with SMTP id
- g22-20020a05620a40d600b0069f2d4b4236mr18176976qko.197.1651201177244; Thu, 28
- Apr 2022 19:59:37 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220428230012.3467800-1-alejandro@enedino.org>
- <66219d6d-9a8e-e4c9-5d88-a4a37ca9115e@gmail.com>
- <CAHMutrb-XosSSouvUQenKdcOd_Bcbeg9nLd89=BPX7Pj5shEMA@mail.gmail.com>
- <CAMKF1srQgTo6Up6DD3VAvkA1MTqF147gP0y+V1qeerWqqn_0ZA@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1srQgTo6Up6DD3VAvkA1MTqF147gP0y+V1qeerWqqn_0ZA@mail.gmail.com>
-From: Alejandro Enedino Hernandez Samaniego <alejandro@enedino.org>
-Date: Thu, 28 Apr 2022 20:59:25 -0600
-X-Gmail-Original-Message-ID: 
- <CAHMutrZ5ESsE_93qH0SO_8CViewmh9b5_5wP8jU=KnHJf+CywA@mail.gmail.com>
-Message-ID: 
- <CAHMutrZ5ESsE_93qH0SO_8CViewmh9b5_5wP8jU=KnHJf+CywA@mail.gmail.com>
-Subject: Re: [oe] [PATCH] cryptsetup: Add luks2 related PACKAGECONFIGs
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="0000000000009f5b4b05ddc23bf1"
+ k1-20020a63ff01000000b003c14af505f5sm5102312pgi.13.2022.04.29.02.03.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 29 Apr 2022 02:03:50 -0700 (PDT)
+From: Ranjitsinh Rathod <ranjitsinhrathod1991@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: akuster808@gmail.com,
+	Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
+Subject: [meta-networking][dunfell][PATCH] atftp: Add fix for CVE-2021-41054
+ and CVE-2021-46671
+Date: Fri, 29 Apr 2022 14:33:21 +0530
+Message-Id: <20220429090321.1466-1-ranjitsinhrathod1991@gmail.com>
+X-Mailer: git-send-email 2.17.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 29 Apr 2022 02:59:43 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 29 Apr 2022 09:03:56 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96854
+ https://lists.openembedded.org/g/openembedded-devel/message/96855
 
---0000000000009f5b4b05ddc23bf1
-Content-Type: text/plain; charset="UTF-8"
+From: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
 
-On Thu, Apr 28, 2022, 6:52 PM Khem Raj <raj.khem@gmail.com> wrote:
+Add patches to fix CVE-2021-41054 and CVE-2021-46671 issues
+Link: https://nvd.nist.gov/vuln/detail/CVE-2021-41054
+Link: https://nvd.nist.gov/vuln/detail/CVE-2021-46671
 
-> On Thu, Apr 28, 2022 at 5:39 PM Alejandro Enedino Hernandez Samaniego
-> <alejandro@enedino.org> wrote:
-> >
-> >
-> >
-> > On Thu, Apr 28, 2022, 6:30 PM Khem Raj <raj.khem@gmail.com> wrote:
-> >>
-> >>
-> >>
-> >> On 4/28/22 16:00, Alejandro Hernandez Samaniego wrote:
-> >> > Cryptsetup allows for certain luks2 related defaults to be
-> >> > set for libcryptsetup, these include the default PBKDF
-> >> > algorithm, memory limit for PBKDF2, parallel threads and
-> >> > iteration time.
-> >> >
-> >> > Add these options as PACKAGECONFIGs to cryptsetup while
-> >> > setting variables defined as the current cryptsetup
-> >> > defaults, making this change transparent for the user but
-> >> > allow these knobs to be customized.
-> >> >
-> >> > Signed-off-by: Alejandro Enedino Hernandez Samaniego <
-> alejandro@enedino.org>
-> >> > ---
-> >> >   .../recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb    | 12
-> ++++++++++++
-> >> >   1 file changed, 12 insertions(+)
-> >> >
-> >> > diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
-> b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
-> >> > index 8f9f663a3..7baca98cb 100644
-> >> > --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
-> >> > +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
-> >> > @@ -44,6 +44,14 @@ PACKAGECONFIG:append:class-target = " \
-> >> >       udev \
-> >> >   "
-> >> >
-> >> > +
-> >> > +# libcryptsetup default PBKDF algorithm, Argon2 memory cost (KB),
-> parallel threads and iteration time (ms)
-> >> > +LUKS2_PBKDF ?= "argon2i"
-> >> > +LUKS2_MEMORYKB ?= "1048576"
-> >> > +LUKS2_PARALLEL_THREADS ?= "4"
-> >> > +LUKS2_ITERTIME ?= "2000"
-> >> > +
-> >>
-> >> is this something that can be selected at runtime too ?
-> >
-> >
-> >
-> > Hi Khem,
-> >
-> > Yes, if using cryptsetup directly these can be changed at runtime
-> regardless of the default set here.
-> >
->
-> in current settings, it will need to set two knobs and it seems a bit
-> off from what packageconfigs are for.
-> so perhaps we can enable the default configure options unconditionally
-> with default values and make the values a weak assigment.
->
+Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
+Signed-off-by: Ranjitsinh Rathod <ranjitsinhrathod1991@gmail.com>
+---
+ .../0001-fix-buffer-overflow-in-atftpd.patch  | 111 ++++++++++++++++++
+ ...r-fix-for-the-read-past-end-of-array.patch |  48 ++++++++
+ .../recipes-daemons/atftp/atftp_0.7.2.bb      |   2 +
+ 3 files changed, 161 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/atftp/atftp/0001-fix-buffer-overflow-in-atftpd.patch
+ create mode 100644 meta-networking/recipes-daemons/atftp/atftp/0001-options.c-Proper-fix-for-the-read-past-end-of-array.patch
 
-I'd be fine with that too, the only thing worth mentioning is that some of
-these are only valid as a combination, for example:
+diff --git a/meta-networking/recipes-daemons/atftp/atftp/0001-fix-buffer-overflow-in-atftpd.patch b/meta-networking/recipes-daemons/atftp/atftp/0001-fix-buffer-overflow-in-atftpd.patch
+new file mode 100644
+index 0000000000..88794aa7ab
+--- /dev/null
++++ b/meta-networking/recipes-daemons/atftp/atftp/0001-fix-buffer-overflow-in-atftpd.patch
+@@ -0,0 +1,111 @@
++From d255bf90834fb45be52decf9bc0b4fb46c90f205 Mon Sep 17 00:00:00 2001
++From: Martin Dummer <md11@users.sourceforge.net>
++Date: Sun, 12 Sep 2021 22:52:26 +0200
++Subject: [PATCH] fix buffer overflow in atftpd
++
++Andreas B. Mundt <andi@debian.org> reports:
++
++I've found a problem in atftpd that might be relevant for security.
++The daemon can be crashed by any client sending a crafted combination
++of TFTP options to the server.  As TFTP is usually only used in the LAN,
++it's probably not too dramatic.
++
++Observations and how to reproduce the issue
++===========================================
++
++Install bullseye packages and prepare tftp-root:
++  sudo apt install atftp atftpd
++  mkdir tmp
++  touch tmp/file.txt
++
++Run server:
++  /usr/sbin/atftpd --user=$(id -un) --group=$(id -gn) --daemon --no-fork --trace \
++                    --logfile=/dev/stdout --verbose=7 --port 2000 tmp
++
++Fetch file from client:
++  /usr/bin/atftp -g --trace --option "blksize 8" \
++                  --remote-file file.txt -l /dev/null 127.0.0.1 2000
++
++Crash server by adding another option to the tiny blksize:
++   /usr/bin/atftp -g --trace --option "blksize 8" --option "timeout 3" \
++                   --remote-file file.txt -l /dev/null 127.0.0.1 2000
++
++Analysis
++========
++
++The reason for the crash is a buffer overflow.  The size of the buffer keeping the data
++to be sent with every segment is calculated by adding 4 bytes to the blksize (for opcode
++and block number).  However, the same buffer is used for the OACK, which for a blksize=8
++overflows as soon as another option is set.
++
++Signed-off-by: Martin Dummer <md11@users.sourceforge.net>
++
++CVE: CVE-2021-41054
++Upstream-Status: Backport [https://github.com/madmartin/atftp/commit/d255bf90834fb45be52decf9bc0b4fb46c90f205.patch]
++Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
++
++---
++ tftpd_file.c | 34 ++++++++++++++++++++++++++++++----
++ 1 file changed, 30 insertions(+), 4 deletions(-)
++
++diff --git a/tftpd_file.c b/tftpd_file.c
++index ff40e8d..37a0906 100644
++--- a/tftpd_file.c
+++++ b/tftpd_file.c
++@@ -168,11 +168,24 @@ int tftpd_receive_file(struct thread_data *data)
++           logger(LOG_DEBUG, "timeout option -> %d", timeout);
++      }
++ 
++-     /* blksize options */
+++     /*
+++      *  blksize option, must be the last option evaluated,
+++      *  because data->data_buffer_size may be modified here,
+++      *  and may be smaller than the buffer containing options
+++      */
++      if ((result = opt_get_blksize(data->tftp_options)) > -1)
++      {
++-          if ((result < 8) || (result > 65464))
+++          /*
+++           *  If we receive more options, we have to make sure our buffer for
+++           *  the OACK is not too small.  Use the string representation of
+++           *  the options here for simplicity, which puts us on the save side.
+++           *  FIXME: Use independent buffers for OACK and data.
+++           */
+++          opt_options_to_string(data->tftp_options, string, MAXLEN);
+++          if ((result < strlen(string)-2) || (result > 65464))
++           {
+++               logger(LOG_NOTICE, "options <%s> require roughly a blksize of %d for the OACK.",
+++                      string, strlen(string)-2);
++                tftp_send_error(sockfd, sa, EOPTNEG, data->data_buffer, data->data_buffer_size);
++                if (data->trace)
++                     logger(LOG_DEBUG, "sent ERROR <code: %d, msg: %s>", EOPTNEG,
++@@ -531,11 +544,24 @@ int tftpd_send_file(struct thread_data *data)
++           logger(LOG_INFO, "timeout option -> %d", timeout);
++      }
++ 
++-     /* blksize options */
+++     /*
+++      *  blksize option, must be the last option evaluated,
+++      *  because data->data_buffer_size may be modified here,
+++      *  and may be smaller than the buffer containing options
+++      */
++      if ((result = opt_get_blksize(data->tftp_options)) > -1)
++      {
++-          if ((result < 8) || (result > 65464))
+++          /*
+++           *  If we receive more options, we have to make sure our buffer for
+++           *  the OACK is not too small.  Use the string representation of
+++           *  the options here for simplicity, which puts us on the save side.
+++           *  FIXME: Use independent buffers for OACK and data.
+++           */
+++          opt_options_to_string(data->tftp_options, string, MAXLEN);
+++          if ((result < strlen(string)-2) || (result > 65464))
++           {
+++               logger(LOG_NOTICE, "options <%s> require roughly a blksize of %d for the OACK.",
+++                      string, strlen(string)-2);
++                tftp_send_error(sockfd, sa, EOPTNEG, data->data_buffer, data->data_buffer_size);
++                if (data->trace)
++                     logger(LOG_DEBUG, "sent ERROR <code: %d, msg: %s>", EOPTNEG,
++-- 
++2.17.1
++
+diff --git a/meta-networking/recipes-daemons/atftp/atftp/0001-options.c-Proper-fix-for-the-read-past-end-of-array.patch b/meta-networking/recipes-daemons/atftp/atftp/0001-options.c-Proper-fix-for-the-read-past-end-of-array.patch
+new file mode 100644
+index 0000000000..310728aaca
+--- /dev/null
++++ b/meta-networking/recipes-daemons/atftp/atftp/0001-options.c-Proper-fix-for-the-read-past-end-of-array.patch
+@@ -0,0 +1,48 @@
++From 9cf799c40738722001552618518279e9f0ef62e5 Mon Sep 17 00:00:00 2001
++From: Simon Rettberg <simon.rettberg@rz.uni-freiburg.de>
++Date: Wed, 10 Jan 2018 17:01:20 +0100
++Subject: [PATCH] options.c: Proper fix for the read-past-end-of-array
++
++This properly fixes what commit:b3e36dd tried to do.
++
++CVE: CVE-2021-46671
++Upstream-Status: Backport [https://github.com/madmartin/atftp/commit/9cf799c40738722001552618518279e9f0ef62e5.patch]
++Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
++
++---
++ options.c | 12 ++++++++++++
++ 1 file changed, 12 insertions(+)
++
++diff --git a/options.c b/options.c
++index ee419c6..c716994 100644
++--- a/options.c
+++++ b/options.c
++@@ -43,6 +43,12 @@ int opt_parse_request(char *data, int data_size, struct tftp_opt *options)
++      struct tftphdr *tftp_data = (struct tftphdr *)data;
++      size_t size = data_size - sizeof(tftp_data->th_opcode);
++ 
+++     /* sanity check - requests always end in a null byte,
+++      * check to prevent argz_next from reading past the end of
+++      * data, as it doesn't do bounds checks */
+++     if (data_size == 0 || data[data_size-1] != '\0')
+++          return ERR;
+++
++      /* read filename */
++      entry = argz_next(tftp_data->th_stuff, size, entry);
++      if (!entry)
++@@ -79,6 +85,12 @@ int opt_parse_options(char *data, int data_size, struct tftp_opt *options)
++      struct tftphdr *tftp_data = (struct tftphdr *)data;
++      size_t size = data_size - sizeof(tftp_data->th_opcode);
++ 
+++     /* sanity check - options always end in a null byte,
+++      * check to prevent argz_next from reading past the end of
+++      * data, as it doesn't do bounds checks */
+++     if (data_size == 0 || data[data_size-1] != '\0')
+++          return ERR;
+++
++      while ((entry = argz_next(tftp_data->th_stuff, size, entry)))
++      {
++           tmp = entry;
++-- 
++2.17.1
++
+diff --git a/meta-networking/recipes-daemons/atftp/atftp_0.7.2.bb b/meta-networking/recipes-daemons/atftp/atftp_0.7.2.bb
+index ddddb1b07a..32b776e578 100644
+--- a/meta-networking/recipes-daemons/atftp/atftp_0.7.2.bb
++++ b/meta-networking/recipes-daemons/atftp/atftp_0.7.2.bb
+@@ -9,6 +9,8 @@ SRCREV = "52b71f0831dcbde508bd3a961d84abb80a62480f"
+ SRC_URI = "git://git.code.sf.net/p/atftp/code;branch=master \
+            file://atftpd.init \
+            file://atftpd.service \
++           file://0001-options.c-Proper-fix-for-the-read-past-end-of-array.patch \
++           file://0001-fix-buffer-overflow-in-atftpd.patch \
+ "
+ SRC_URI_append_libc-musl = " file://0001-argz.h-fix-musl-compile-add-missing-defines.patch \
+                              file://0002-tftp.h-tftpd.h-fix-musl-compile-missing-include.patch \
+-- 
+2.17.1
 
-Luks2-memorykb is only valid when luks2-pbkdf="argon2<foo>", if
-luks2-pbkdf="pbkdf2" the luks header doesn't contain a memory field, also
-all these are only valid when the type=luks2
-
-I believe we can just set them all as you say, as long as they don't
-conflict with one another and cause an error during do_configure.
-
-I can check if these are okay to set and discarded if not compatible and we
-can go with that, performing checks for compatibility with anonymous python
-is another solution but seems a bit of an overkill.
-
-
-
-> > Being able to change these at build time becomes useful when relying on
-> the libcryptsetup API.
-> >
-> >
-> > Cheers,
-> > Alejandro
-> >
-> >
-> >>
-> >> > +
-> >> >   PACKAGECONFIG[keyring] = "--enable-keyring,--disable-keyring"
-> >> >   PACKAGECONFIG[fips] = "--enable-fips,--disable-fips"
-> >> >   PACKAGECONFIG[pwquality] =
-> "--enable-pwquality,--disable-pwquality,libpwquality"
-> >> > @@ -69,6 +77,10 @@ PACKAGECONFIG[nss] =
-> "--with-crypto_backend=nss,,nss"
-> >> >   PACKAGECONFIG[kernel] = "--with-crypto_backend=kernel"
-> >> >   PACKAGECONFIG[nettle] = "--with-crypto_backend=nettle,,nettle"
-> >> >   PACKAGECONFIG[luks2] =
-> "--with-default-luks-format=LUKS2,--with-default-luks-format=LUKS1"
-> >> > +PACKAGECONFIG[luks2-pbkdf] = "--with-luks2-pbkdf=${LUKS2_PBKDF}"
-> >> > +PACKAGECONFIG[luks2-memorykb] =
-> "--with-luks2-memory-kb=${LUKS2_MEMORYKB}"
-> >> > +PACKAGECONFIG[luks2-parallel-threads] =
-> "--with-luks2-parallel-threads=${LUKS2_PARALLEL_THREADS}"
-> >> > +PACKAGECONFIG[luks2-itertime] =
-> "--with-luks2-iter-time=${LUKS2_ITERTIME}"
-> >> >
-> >> >   EXTRA_OECONF = "--enable-static"
-> >> >   # Building without largefile is not supported by upstream
-> >> >
-> >> >
-> >> >
-> >> > -=-=-=-=-=-=-=-=-=-=-=-
-> >> > Links: You receive all messages sent to this group.
-> >> > View/Reply Online (#96850):
-> https://lists.openembedded.org/g/openembedded-devel/message/96850
-> >> > Mute This Topic: https://lists.openembedded.org/mt/90765285/1997914
-> >> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> >> > Unsubscribe:
-> https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> >> > -=-=-=-=-=-=-=-=-=-=-=-
-> >> >
->
-
---0000000000009f5b4b05ddc23bf1
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
-class=3D"gmail_attr">On Thu, Apr 28, 2022, 6:52 PM Khem Raj &lt;<a href=3D"=
-mailto:raj.khem@gmail.com" target=3D"_blank" rel=3D"noreferrer">raj.khem@gm=
-ail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"=
-margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">On Thu, Apr =
-28, 2022 at 5:39 PM Alejandro Enedino Hernandez Samaniego<br>
-&lt;<a href=3D"mailto:alejandro@enedino.org" rel=3D"noreferrer noreferrer" =
-target=3D"_blank">alejandro@enedino.org</a>&gt; wrote:<br>
-&gt;<br>
-&gt;<br>
-&gt;<br>
-&gt; On Thu, Apr 28, 2022, 6:30 PM Khem Raj &lt;<a href=3D"mailto:raj.khem@=
-gmail.com" rel=3D"noreferrer noreferrer" target=3D"_blank">raj.khem@gmail.c=
-om</a>&gt; wrote:<br>
-&gt;&gt;<br>
-&gt;&gt;<br>
-&gt;&gt;<br>
-&gt;&gt; On 4/28/22 16:00, Alejandro Hernandez Samaniego wrote:<br>
-&gt;&gt; &gt; Cryptsetup allows for certain luks2 related defaults to be<br=
->
-&gt;&gt; &gt; set for libcryptsetup, these include the default PBKDF<br>
-&gt;&gt; &gt; algorithm, memory limit for PBKDF2, parallel threads and<br>
-&gt;&gt; &gt; iteration time.<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; Add these options as PACKAGECONFIGs to cryptsetup while<br>
-&gt;&gt; &gt; setting variables defined as the current cryptsetup<br>
-&gt;&gt; &gt; defaults, making this change transparent for the user but<br>
-&gt;&gt; &gt; allow these knobs to be customized.<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; Signed-off-by: Alejandro Enedino Hernandez Samaniego &lt;<a h=
-ref=3D"mailto:alejandro@enedino.org" rel=3D"noreferrer noreferrer" target=
-=3D"_blank">alejandro@enedino.org</a>&gt;<br>
-&gt;&gt; &gt; ---<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0.../recipes-crypto/cryptsetup/<a href=3D"http://c=
-ryptsetup_2.4.3.bb" rel=3D"noreferrer noreferrer noreferrer" target=3D"_bla=
-nk">cryptsetup_2.4.3.bb</a>=C2=A0 =C2=A0 | 12 ++++++++++++<br>
-&gt;&gt; &gt;=C2=A0 =C2=A01 file changed, 12 insertions(+)<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; diff --git a/meta-oe/recipes-crypto/cryptsetup/<a href=3D"htt=
-p://cryptsetup_2.4.3.bb" rel=3D"noreferrer noreferrer noreferrer" target=3D=
-"_blank">cryptsetup_2.4.3.bb</a> b/meta-oe/recipes-crypto/cryptsetup/<a hre=
-f=3D"http://cryptsetup_2.4.3.bb" rel=3D"noreferrer noreferrer noreferrer" t=
-arget=3D"_blank">cryptsetup_2.4.3.bb</a><br>
-&gt;&gt; &gt; index 8f9f663a3..7baca98cb 100644<br>
-&gt;&gt; &gt; --- a/meta-oe/recipes-crypto/cryptsetup/<a href=3D"http://cry=
-ptsetup_2.4.3.bb" rel=3D"noreferrer noreferrer noreferrer" target=3D"_blank=
-">cryptsetup_2.4.3.bb</a><br>
-&gt;&gt; &gt; +++ b/meta-oe/recipes-crypto/cryptsetup/<a href=3D"http://cry=
-ptsetup_2.4.3.bb" rel=3D"noreferrer noreferrer noreferrer" target=3D"_blank=
-">cryptsetup_2.4.3.bb</a><br>
-&gt;&gt; &gt; @@ -44,6 +44,14 @@ PACKAGECONFIG:append:class-target =3D &quo=
-t; \<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0udev \<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0&quot;<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt; +# libcryptsetup default PBKDF algorithm, Argon2 memory cost =
-(KB), parallel threads and iteration time (ms)<br>
-&gt;&gt; &gt; +LUKS2_PBKDF ?=3D &quot;argon2i&quot;<br>
-&gt;&gt; &gt; +LUKS2_MEMORYKB ?=3D &quot;1048576&quot;<br>
-&gt;&gt; &gt; +LUKS2_PARALLEL_THREADS ?=3D &quot;4&quot;<br>
-&gt;&gt; &gt; +LUKS2_ITERTIME ?=3D &quot;2000&quot;<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt;<br>
-&gt;&gt; is this something that can be selected at runtime too ?<br>
-&gt;<br>
-&gt;<br>
-&gt;<br>
-&gt; Hi Khem,<br>
-&gt;<br>
-&gt; Yes, if using cryptsetup directly these can be changed at runtime rega=
-rdless of the default set here.<br>
-&gt;<br>
-<br>
-in current settings, it will need to set two knobs and it seems a bit<br>
-off from what packageconfigs are for.<br>
-so perhaps we can enable the default configure options unconditionally<br>
-with default values and make the values a weak assigment.<br></blockquote><=
-/div></div><div dir=3D"auto"><br></div><div dir=3D"auto">I&#39;d be fine wi=
-th that too, the only thing worth mentioning is that some of these are only=
- valid as a combination, for example:</div><div dir=3D"auto"><br></div><div=
- dir=3D"auto">Luks2-memorykb is only valid when luks2-pbkdf=3D&quot;argon2&=
-lt;foo&gt;&quot;, if luks2-pbkdf=3D&quot;pbkdf2&quot; the luks header doesn=
-&#39;t contain a memory field, also all these are only valid when the type=
-=3Dluks2</div><div dir=3D"auto"><br></div><div dir=3D"auto">I believe we ca=
-n just set them all as you say, as long as they don&#39;t conflict with one=
- another and cause an error during do_configure.</div><div dir=3D"auto"><br=
-></div><div dir=3D"auto">I can check if these are okay to set and discarded=
- if not compatible and we can go with that, performing checks for compatibi=
-lity with anonymous python is another solution but seems a bit of an overki=
-ll.</div><div dir=3D"auto"><br></div><div dir=3D"auto"><br></div><div dir=
-=3D"auto"><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" styl=
-e=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
-<br>
-&gt; Being able to change these at build time becomes useful when relying o=
-n the libcryptsetup API.<br>
-&gt;<br>
-&gt;<br>
-&gt; Cheers,<br>
-&gt; Alejandro<br>
-&gt;<br>
-&gt;<br>
-&gt;&gt;<br>
-&gt;&gt; &gt; +<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0PACKAGECONFIG[keyring] =3D &quot;--enable-keyring=
-,--disable-keyring&quot;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0PACKAGECONFIG[fips] =3D &quot;--enable-fips,--dis=
-able-fips&quot;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0PACKAGECONFIG[pwquality] =3D &quot;--enable-pwqua=
-lity,--disable-pwquality,libpwquality&quot;<br>
-&gt;&gt; &gt; @@ -69,6 +77,10 @@ PACKAGECONFIG[nss] =3D &quot;--with-crypto=
-_backend=3Dnss,,nss&quot;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0PACKAGECONFIG[kernel] =3D &quot;--with-crypto_bac=
-kend=3Dkernel&quot;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0PACKAGECONFIG[nettle] =3D &quot;--with-crypto_bac=
-kend=3Dnettle,,nettle&quot;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0PACKAGECONFIG[luks2] =3D &quot;--with-default-luk=
-s-format=3DLUKS2,--with-default-luks-format=3DLUKS1&quot;<br>
-&gt;&gt; &gt; +PACKAGECONFIG[luks2-pbkdf] =3D &quot;--with-luks2-pbkdf=3D${=
-LUKS2_PBKDF}&quot;<br>
-&gt;&gt; &gt; +PACKAGECONFIG[luks2-memorykb] =3D &quot;--with-luks2-memory-=
-kb=3D${LUKS2_MEMORYKB}&quot;<br>
-&gt;&gt; &gt; +PACKAGECONFIG[luks2-parallel-threads] =3D &quot;--with-luks2=
--parallel-threads=3D${LUKS2_PARALLEL_THREADS}&quot;<br>
-&gt;&gt; &gt; +PACKAGECONFIG[luks2-itertime] =3D &quot;--with-luks2-iter-ti=
-me=3D${LUKS2_ITERTIME}&quot;<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0EXTRA_OECONF =3D &quot;--enable-static&quot;<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0# Building without largefile is not supported by =
-upstream<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt;&gt; &gt; Links: You receive all messages sent to this group.<br>
-&gt;&gt; &gt; View/Reply Online (#96850): <a href=3D"https://lists.openembe=
-dded.org/g/openembedded-devel/message/96850" rel=3D"noreferrer noreferrer n=
-oreferrer" target=3D"_blank">https://lists.openembedded.org/g/openembedded-=
-devel/message/96850</a><br>
-&gt;&gt; &gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt=
-/90765285/1997914" rel=3D"noreferrer noreferrer noreferrer" target=3D"_blan=
-k">https://lists.openembedded.org/mt/90765285/1997914</a><br>
-&gt;&gt; &gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lis=
-ts.openembedded.org" rel=3D"noreferrer noreferrer" target=3D"_blank">openem=
-bedded-devel+owner@lists.openembedded.org</a><br>
-&gt;&gt; &gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/open=
-embedded-devel/unsub" rel=3D"noreferrer noreferrer noreferrer" target=3D"_b=
-lank">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a hre=
-f=3D"mailto:raj.khem@gmail.com" rel=3D"noreferrer noreferrer" target=3D"_bl=
-ank">raj.khem@gmail.com</a>]<br>
-&gt;&gt; &gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt;&gt; &gt;<br>
-</blockquote></div></div></div>
-
---0000000000009f5b4b05ddc23bf1--
 
