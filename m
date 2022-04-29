@@ -2,115 +2,111 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 22923C433EF
-	for <webhook@archiver.kernel.org>; Mon,  9 May 2022 08:31:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 09E01C433FE
+	for <webhook@archiver.kernel.org>; Mon,  9 May 2022 08:31:23 +0000 (UTC)
 Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web09.29555.1652085065015072629
+ [195.245.231.1])
+ by mx.groups.io with SMTP id smtpd.web08.29416.1652085075675662442
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 May 2022 01:31:05 -0700
+ Mon, 09 May 2022 01:31:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=iLlIuSng;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=OfuoAU0m;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1652085063; i=@fujitsu.com;
-	bh=YDSS0CKO1gEa1TyRcl39ABQwmZRrWCU1W9WTNM7Bgp0=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=iLlIuSngJuaVVJBDhWhKqtNFAk+v0Q1v1RczS4e5BxlSuOFepoSXaY0ev1RuRPgMH
-	 VrabnrwKfiLruQJT0RzD3CWtuRuVyDRPLH3dtklhyLKjpgA2VwXc0D8Qrtn89aej1I
-	 Z2kO+n9O8NGT2D5SVr1m5JIB496FWE08B74SIcEOINadxC1QqKdkt5UeXdkxxtZHk+
-	 j0W57LO9/zSlym82PJR9Dts5f53Hc9kpUPWxzT0PHQS/8W6kiHyhKsNBhXmtihl8tu
-	 BUyBfwZG88A5J94px/hH/JbMLo+PYR+qcYdmCGdXY4/49IjIThbhgDtYoK/kyhBLoz
-	 vrzfJ7IyatnWA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrAIsWRWlGSWpSXmKPExsViZ8ORqOt2sSL
-  J4MwnfYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePSmn9MBTN5KnZv3MLawLiUu4uRi0NI4Amj
-  xJ6dU5ghnAtMEocvz2KCcHYzSiw+9Iiti5GTg01ATWL6rRusILaIgL7E0tl7mEFsZgEViRe/e
-  9hBbGEBX4lrKyeD1bMIqEocfLWIEcTmFXCSuNgzG6xeQkBBYsrD98wQcUGJkzOfsEDMkZA4+O
-  IFVI2ixOzLzSwQdoXErFltTBC2msTVc5uYJzDyz0LSPgtJ+wJGplWM1klFmekZJbmJmTm6hgY
-  GuoaGprrG5rqGZkZ6iVW6iXqppbrlqcUlukBuebFeanGxXnFlbnJOil5easkmRmBgphSrLtrB
-  uH/VT71DjJIcTEqivJVNFUlCfEn5KZUZicUZ8UWlOanFhxhlODiUJHhDzgHlBItS01Mr0jJzg
-  FECk5bg4FES4b17AijNW1yQmFucmQ6ROsWoy3F34d69zEIsefl5qVLivLfOAxUJgBRllObBjY
-  BF7CVGWSlhXkYGBgYhnoLUotzMElT5V4ziHIxKwry+F4Cm8GTmlcBtegV0BBPQER8DSkGOKEl
-  ESEk1MPHm+/HVV7l4H730y22bZifP8cnXHT/61N4RcW71CeFI8b1fe3jn1biJ2VOY0s157n+5
-  fV7XZ2dN1kmZifvftq+NPKOok7Dl8sLvP4tuuurO2vKggoMhplJ3X1wgM9/d5dv939aW/hEPM
-  /5Ut47vybvAw9obW2Jfzv25I3CL2kaNyls3F/8SS5xw9Nghs509TaqbtYqecn8X5l+wf83NGy
-  kXtr39v+fD2eX/OpyqAxmeKl52mshiXn3bwG3JxIe1JfGl1SsZfn5N5dAr+/lFS5qxwmD7uap
-  Z959+0Di6IWKrdNmhQ9yzr1/tv9oRu5D9954jLjd361V+T7qxa2/bvC+5yyJYznFL7Zr5x2OF
-  zMU2JZbijERDLeai4kQA0AOX61MDAAA=
+	s=170520fj; t=1652085074; i=@fujitsu.com;
+	bh=yqQ6imlx0y1HUc1Jcg/j7V5V6ExeOKPGixldGhdMlLA=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=OfuoAU0mWN31Nhq8xAbMVUMrC06EmCwFMyrZWvLk+eixW+zkdflSbCwsDI5+RVYKZ
+	 ivTkuv1F4KArYMYoBFVEGQz99KVsgKRFcNMB/9Ef+EDWFpuUpOzRlP5Y3gWFHMbx0I
+	 6CZrtwJUXN3EmTY7rQE6sbXFVi/dAVfgVIXNzFJKUtsMS05uvKLTPXV11lyZox8wR9
+	 1X9txLJeQx0KWtcSGx1RIU0hKBGG6gciYgwteeDO9DuN9op++fOJjsKbbsiviHeNJc
+	 vMchqomomz8wlRcA6SZLX4+bI/Ph8kCr3yh0lW6E2f48k4x3EeeYKvBis787wYxNRR
+	 IEhsns+1O2Gzg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrEIsWRWlGSWpSXmKPExsViZ8MxRTfwYkW
+  SQWerhsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnF4Qm3BEq6K24tdGhincXYxcnEICcxikjg2
+  +QA7hLObUeL4uWtADicHm4CaxPRbN1hBbBEBfYmls/cwg9jMAioSL373gNUIC7hLfFt8lqWLk
+  YODRUBVYu8UXpAwr4CTxIU5jSwgtoSAgsSUh+/BWjkFnCUWN/eCtQoB1fS3NDFD1AtKnJz5hA
+  VivITEwRcvmCF6FSVmX26GmlMhMWtWG9MERv5ZSFpmIWlZwMi0itE6qSgzPaMkNzEzR9fQwED
+  X0NBU19hE18jQQi+xSjdRL7VUtzy1uETXSC+xvFgvtbhYr7gyNzknRS8vtWQTIzAgU4qVbu1g
+  3LDqp94hRkkOJiVR3sqmiiQhvqT8lMqMxOKM+KLSnNTiQ4wyHBxKErwh54BygkWp6akVaZk5w
+  OiASUtw8CiJ8N49AZTmLS5IzC3OTIdInWI05ri7cO9eZo4Ph67sZRZiycvPS5US5711HqhUAK
+  Q0ozQPbhAsai8xykoJ8zIyMDAI8RSkFuVmlqDKv2IU52BUEub1vQA0hSczrwRu3yugU5iATvk
+  YUApySkkiQkqqgUnx+K2Q0IRa41eFWWteWOSbnix3bLh3Uc8m/lr5qU3JtrM2fJA5sCyqo7w8
+  qLpggf2Utf2bix2FQl+7/nzGdvyrHkPY3D/379+2PG81vSdTz/rCB4Vm9Y60bzc92r/t2f4ws
+  mmx1sXQO/3srEyT2I4c/ma4/sCCkI9zT+Wd3Lh79zrNzRM05JXyD5dPnztx2vz9q95yG5s8TF
+  zen5z99olc8u05O1fsdv/5uD4kuVRrzU6GVd1n7+xwcpRM8t14s/nsZ4u3VlPkNkz2Vk1RUY7
+  NOue8dl3Er/K0I3FFp31XCc/p3FTMG7Dtq08mZ8fkkrPHVi25Oqn+f3deasVVyTf7+bZ1vf54
+  rzSg6sH3pYbSSizFGYmGWsxFxYkAcm8NJFUDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-14.tower-565.messagelabs.com!1652085062!174072!1
-X-Originating-IP: [62.60.8.97]
+X-Msg-Ref: server-3.tower-571.messagelabs.com!1652085073!422762!1
+X-Originating-IP: [62.60.8.148]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.86.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 26417 invoked from network); 9 May 2022 08:31:02 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-14.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 9 May 2022 08:31:02 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 53B87100195
+Received: (qmail 30374 invoked from network); 9 May 2022 08:31:13 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+  by server-3.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 9 May 2022 08:31:13 -0000
+Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 2498VDD5005190
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Mon,  9 May 2022 09:31:02 +0100 (BST)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 45E5F10018C
-	for <openembedded-devel@lists.openembedded.org>;
- Mon,  9 May 2022 09:31:02 +0100 (BST)
+ Mon, 9 May 2022 09:31:13 +0100
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 9 May 2022 09:30:55 +0100
+ (TLS) id 15.0.1497.32; Mon, 9 May 2022 09:31:11 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] phoronix-test-suite: upgrade 10.8.2 -> 10.8.3
-Date: Fri, 29 Apr 2022 16:13:09 +0800
-Message-ID: <1651219993-27514-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] pkcs11-helper: upgrade 1.28.0 -> 1.29.0
+Date: Fri, 29 Apr 2022 16:13:11 +0800
+Message-ID: <1651219993-27514-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1651219993-27514-1-git-send-email-wangmy@fujitsu.com>
+References: <1651219993-27514-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
 X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 May 2022 08:31:13 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 May 2022 08:31:23 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97002
+ https://lists.openembedded.org/g/openembedded-devel/message/97004
 
-Changelog:
-==========
-pts-core: Workaround Ubuntu 22.04 apt-get crashing the entire process on dependency installation
-pts-core: Improved TTF font file detection
-pts-core: Minor random fixes
-phodevi: Apple M1 detection on Linux
+2020-04-21 - Version 1.29.0
+
+    build: do not fail if slot evnets are disabled, thanks to Fabrice Fontaine.
+    core: do not assume standard objects supported by provider.
+    openssl: set back key into EVP for openssl-3 to work, thanks to apollo13.
+
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...onix-test-suite_10.8.2.bb => phoronix-test-suite_10.8.3.bb} | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-oe/recipes-benchmark/phoronix-test-suite/{phoronix-test-suite_10.8.2.bb => phoronix-test-suite_10.8.3.bb} (91%)
+ .../{pkcs11-helper_1.28.0.bb => pkcs11-helper_1.29.0.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-crypto/pkcs11-helper/{pkcs11-helper_1.28.0.bb => pkcs11-helper_1.29.0.bb} (95%)
 
-diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_10.8.2.bb b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_10.8.3.bb
-similarity index 91%
-rename from meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_10.8.2.bb
-rename to meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_10.8.3.bb
-index 825f7024e..a4d586ebc 100644
---- a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_10.8.2.bb
-+++ b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_10.8.3.bb
-@@ -6,8 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- SECTION = "console/tests"
+diff --git a/meta-oe/recipes-crypto/pkcs11-helper/pkcs11-helper_1.28.0.bb b/meta-oe/recipes-crypto/pkcs11-helper/pkcs11-helper_1.29.0.bb
+similarity index 95%
+rename from meta-oe/recipes-crypto/pkcs11-helper/pkcs11-helper_1.28.0.bb
+rename to meta-oe/recipes-crypto/pkcs11-helper/pkcs11-helper_1.29.0.bb
+index 68ae94bdb..a34a4b914 100644
+--- a/meta-oe/recipes-crypto/pkcs11-helper/pkcs11-helper_1.28.0.bb
++++ b/meta-oe/recipes-crypto/pkcs11-helper/pkcs11-helper_1.29.0.bb
+@@ -19,7 +19,7 @@ SRC_URI = "git://github.com/OpenSC/${BPN}.git;branch=master;protocol=https"
  
- SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz"
--SRC_URI[md5sum] = "459c3c45b39bb3d720ddc8ba5f944332"
--SRC_URI[sha256sum] = "86681343d20415831ab16ef6c3d1c317e2345e771925e0698ae920a03a9eaab6"
-+SRC_URI[sha256sum] = "4b742e28a9542fe2b57aacb691159d69d3e1c77d95da6d24b7867889ce84ba80"
+ S = "${WORKDIR}/git"
+ # v1.27
+-SRCREV = "a4b46d545c33459610d4b4ae85a43a76e03a8c5e"
++SRCREV = "2306f896c2f3c147792300155316fd65825aabad"
  
- S = "${WORKDIR}/phoronix-test-suite"
+ UPSTREAM_CHECK_GITTAGREGEX = "pkcs11-helper-(?P<pver>\d+(\.\d+)+)"
  
 -- 
 2.25.1
