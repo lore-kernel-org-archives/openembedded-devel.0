@@ -2,73 +2,76 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3055AC433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3052CC433EF
 	for <webhook@archiver.kernel.org>; Mon,  9 May 2022 08:34:43 +0000 (UTC)
 Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.3])
- by mx.groups.io with SMTP id smtpd.web10.29271.1652085279554071425
+ [195.245.231.4])
+ by mx.groups.io with SMTP id smtpd.web08.29432.1652085279453870778
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 May 2022 01:34:39 -0700
+ Mon, 09 May 2022 01:34:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=FYnloV8D;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Lpoh291B;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1652085277; i=@fujitsu.com;
-	bh=Yn8hj/SkY7ruUMqygHz0F+S7GlLIYwc5HWWd8wxMin8=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=FYnloV8DJ8LyLeEsqQRcyE+f5TCHRrzm+HaL/GWbW5196VPgm+sYQh7OMqiDTIaD4
-	 +h0uurmV3PxBrKtYLihJNvlbbsQYJrAAzZHakI6EpilE36DlQQDjTxXstCHQJRXiKs
-	 SnT0hCJnsYkYTBsUfcAfkVTXFpMGTz1wH0opktB/UrKK7yLPPG2p0TvJJ6YcPOdvSc
-	 1ToJb825spsjhe1H2qw8Lb/XL7n28EXHC89cHRu9aHYp31V2r/kyr2mG3wvV8x7KGs
-	 SlZDWhE0JjHLvRvBB3IZDEO2TScT5gTAsJ5kxERbPVu8s8KlPtu314qDL3AsdccLir
-	 R4PW69Z0Bn6vg==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrKIsWRWlGSWpSXmKPExsViZ8MxSVf2UkW
-  Swb9bchYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0b7rCtMBR3sFZ1/T7A0MO5l62Lk4hASeMIo
-  8fbySWYI5wKTxJQbX5ggnN2MEudubAcq4+RgE1CTmH7rBiuILSKgL7F09h5mEJtZQEXixe8ed
-  hBbWMBVYumeHrA4i4CqxIn3u4HiHBy8Ak4S35otQcISAgoSUx6+ByvhFRCUODnzCQvEGAmJgy
-  9eMEPUKErMvtzMAmFXSMya1cYEYatJXD23iXkCI/8sJO2zkLQvYGRaxWidVJSZnlGSm5iZo2t
-  oYKBraGiqa2ypa2RgoJdYpZuol1qqW55aXKJrpJdYXqyXWlysV1yZm5yTopeXWrKJERiWKcXq
-  J3YwPl35U+8QoyQHk5Iob2VTRZIQX1J+SmVGYnFGfFFpTmrxIUYZDg4lCd6Qc0A5waLU9NSKt
-  MwcYIzApCU4eJREeO+eAErzFhck5hZnpkOkTjEac9xduHcvM8fVK1f2Mgux5OXnpUqJ8566AF
-  QqAFKaUZoHNwgWu5cYZaWEeRkZGBiEeApSi3IzS1DlXzGKczAqCfPWXASawpOZVwK37xXQKUx
-  Ap3wMKAU5pSQRISXVwKRx6+DWE8kCd+8od2scX/7x0I2+DJnN9aICJaEyN2W/5UQ/Z54x4Y23
-  +e/lzx+lBXrt23XgKp/lpdj6lcIpItN1bSZ/NVum6yzx5v1uv+9yU6QnXjnxRopXp/9/ZYeXR
-  +zEFo8fduLBeZf4t08uE3gmOFX2gceyQ3nOqVOLF3TNyctx1pDiyG/VOBsVZ9cXlpEsGDFru+
-  HOTP6XtgH5n5ddED5xLC1AxFOLZRbDo80Ndn8cNb94OlZW3v/22+aERXY49422XMPqG+F/7iz
-  +oVVlrfZNW4rzp3H71ifxd3Xf2Pl0n3MVC8iKzpjjcLwvYcb0YycvRRRt85h3oEn6eaTwxb0N
-  rzTv37zZMl1umxJLcUaioRZzUXEiAGohRChYAwAA
+	bh=BLNm+nH6P8sSS5y9mwB0R5d0bO9L9QTqzN0pYqNxc1U=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=Lpoh291BH/aTKH2fV5LY06ijlmvtCUZqJXOpLA9N1DXnVCd9lVItjpq9N0AMwZJHX
+	 LfGkUQnQF8fXW1Z07IKrWIe1yb64R6HqUUO26p1GCqzv/Wo+kkplfOBFd1dI1lUpxF
+	 CfcD2ySJjWFvrHvDZtt+PslPDjn8fnVEFQ1Sz8i3a1mqMMPxdPQSbqZPhvaeCd4rhc
+	 1sRK1A01GTvjtOEHkaVAvVZv8mDMRdUchciK6fG5bAKkpiChmbmyGS/FU6ODsBdLQb
+	 z+SJ89SlFSKoP0OshxcddCSm8/Ym9fizae/oTWuCceO+CTTkEHxhrlfCMnWQcd8tGv
+	 Uab1EVksmYtvA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrLIsWRWlGSWpSXmKPExsViZ8MxSVf2UkW
+  Swb3TihYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8b+xdfYC/byVkyaYtvAeJK7i5GLQ0jgCaPE
+  8jUH2CGcC0wSHx9tZYJwdjNKnGw6ydzFyMnBJqAmMf3WDVYQW0RAX2Lp7D1gcWYBFYkXv3vYQ
+  WxhAUeJl/ungsVZBFQlbvWsYwSxeQWcJA693gcWlxBQkJjy8D2YzSngLHH79kawmUJANddaVr
+  BC1AtKnJz5hAVivoTEwRcvoHoVJWZfbmaBsCskZs1qY4Kw1SSuntvEPIFRcBaS9llI2hcwMq1
+  itE4qykzPKMlNzMzRNTQw0DU0NNU1ttA1NDLXS6zSTdRLLdUtTy0u0TXSSywv1kstLtYrrsxN
+  zknRy0st2cQIDOOUYrX6HYwvVv7UO8QoycGkJMpb2VSRJMSXlJ9SmZFYnBFfVJqTWnyIUYaDQ
+  0mCN+QcUE6wKDU9tSItMwcYUzBpCQ4eJRHeuyeA0rzFBYm5xZnpEKlTjMYcdxfu3cvMsebVxb
+  3MQix5+XmpUuK8py4AlQqAlGaU5sENgsX6JUZZKWFeRgYGBiGegtSi3MwSVPlXjOIcjErCvDU
+  XgabwZOaVwO17BXQKE9ApHwNKQU4pSURISTUwlT2au2ju+bICMd6PWzu4D5y+saR5XnXMEnux
+  M9EHGiudv4TXfu2rDNS56t978c7PfzdsrvovKmfpfjf3Vdsy09P/5xhde9gV9Jhz6o6/YkcrR
+  NorV7/mec0waxYH1/NTJZ4XPzBJy3+QC+O/ru97nFvlz6mo828lPh61VL6U6pLa+flC1Qfm2f
+  naHlFrL/53+1x46kbLsRNKKxV1mituLZg266eTfet0mV+zlVo+LfzaLBOgblf90uu/9rYr3dn
+  pjxxXc34pOxB3t2521m72O+xNgdvYDvPzzD5Yu/7nnsW32DbVr60Rmv5QOnmq+Y/MfzeYmXok
+  4u6G8O/RtfWKfOv3oSh8yydtISm5yGVn3imxFGckGmoxFxUnAgBM5LU4cAMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-31.tower-548.messagelabs.com!1652085277!206194!1
+X-Msg-Ref: server-11.tower-571.messagelabs.com!1652085277!421274!1
 X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.86.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 21941 invoked from network); 9 May 2022 08:34:37 -0000
+Received: (qmail 1210 invoked from network); 9 May 2022 08:34:37 -0000
 Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-31.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-11.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 9 May 2022 08:34:37 -0000
 Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 26E27100446
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 30736100451
 	for <openembedded-devel@lists.openembedded.org>;
  Mon,  9 May 2022 09:34:37 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 1A6011000EE
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 23CC1100353
 	for <openembedded-devel@lists.openembedded.org>;
  Mon,  9 May 2022 09:34:37 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 9 May 2022 09:34:15 +0100
+ (TLS) id 15.0.1497.32; Mon, 9 May 2022 09:34:26 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] tgt: upgrade 1.0.79 -> 1.0.82
-Date: Fri, 29 Apr 2022 16:16:31 +0800
-Message-ID: <1651220195-27553-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] unixodbc: upgrade 2.3.9 -> 2.3.11
+Date: Fri, 29 Apr 2022 16:16:33 +0800
+Message-ID: <1651220195-27553-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1651220195-27553-1-git-send-email-wangmy@fujitsu.com>
+References: <1651220195-27553-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -80,28 +83,45 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 09 May 2022 08:34:43 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97007
+ https://lists.openembedded.org/g/openembedded-devel/message/97008
+
+Changelog:
+==========
+    * Add connection pooling via wide connection functions
+    * Remove "#define VERSION" from unixodbc_conf.h
+    * Call driver functions through prototypes 
+    * Add connection pool limit option
+    * Add fseeko support in cursor lib
+    * Try and prevent logging buffer overflow
+    * Add 'echo' option to isql/iusql
+    * Alter isql/iusql buffering
+    * Alter unicode to ascii conversion in SQLGetDiagField
+    * Fix pooling problem when user name and or password is not provided
+    * Fix a couple of reported buffer overflow conditions
+    * Fix iconv leak with timeout in pooled connection
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-networking/recipes-extended/tgt/tgt_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../unixodbc/{unixodbc_2.3.9.bb => unixodbc_2.3.11.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/unixodbc/{unixodbc_2.3.9.bb => unixodbc_2.3.11.bb} (89%)
 
-diff --git a/meta-networking/recipes-extended/tgt/tgt_git.bb b/meta-networking/recipes-extended/tgt/tgt_git.bb
-index 42141cb72..ada0fd174 100644
---- a/meta-networking/recipes-extended/tgt/tgt_git.bb
-+++ b/meta-networking/recipes-extended/tgt/tgt_git.bb
-@@ -4,8 +4,8 @@ LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://scripts/tgtd.spec;beginline=7;endline=7;md5=21c19ea7dad04648b9c2f791b6e29b4c"
- DEPENDS = "sg3-utils libaio"
+diff --git a/meta-oe/recipes-support/unixodbc/unixodbc_2.3.9.bb b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.11.bb
+similarity index 89%
+rename from meta-oe/recipes-support/unixodbc/unixodbc_2.3.9.bb
+rename to meta-oe/recipes-support/unixodbc/unixodbc_2.3.11.bb
+index c194739cb..c7d23d120 100644
+--- a/meta-oe/recipes-support/unixodbc/unixodbc_2.3.9.bb
++++ b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.11.bb
+@@ -11,7 +11,7 @@ DEPENDS = "libtool readline"
+ SRC_URI = "http://ftp.unixodbc.org/unixODBC-${PV}.tar.gz \
+            file://do-not-use-libltdl-source-directory.patch \
+ "
+-SRC_URI[sha256sum] = "52833eac3d681c8b0c9a5a65f2ebd745b3a964f208fc748f977e44015a31b207"
++SRC_URI[sha256sum] = "d9e55c8e7118347e3c66c87338856dad1516b490fb7c756c1562a2c267c73b5c"
  
--SRCREV = "b43dbc6711e43c0a32cc4d9df22884841d911d51"
--PV = "1.0.79+git${SRCPV}"
-+SRCREV = "fd4ca0546aa20fa9627c41ca2028db26e11f8d56"
-+PV = "1.0.82"
+ UPSTREAM_CHECK_REGEX = "unixODBC-(?P<pver>\d+(\.\d+)+)\.tar"
  
- SRC_URI = "git://github.com/fujita/tgt.git;branch=master;protocol=https \
- 	file://0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch \
 -- 
 2.25.1
 
