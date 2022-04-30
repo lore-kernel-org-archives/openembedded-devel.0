@@ -2,64 +2,62 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 197F6C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 197D0C433EF
 	for <webhook@archiver.kernel.org>; Sat, 30 Apr 2022 19:19:21 +0000 (UTC)
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com
- [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.web11.25729.1651346354821487680
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com
+ [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web08.25976.1651346351335048593
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Apr 2022 12:19:14 -0700
+ Sat, 30 Apr 2022 12:19:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=bMrUszyD;
- spf=pass (domain: gmail.com, ip: 209.85.216.54,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Tlz2I2j6;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id
- z5-20020a17090a468500b001d2bc2743c4so9894488pjf.0
+Received: by mail-pl1-f172.google.com with SMTP id k1so1096466pll.4
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Apr 2022 12:19:14 -0700 (PDT)
+ Sat, 30 Apr 2022 12:19:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=6JAKtIAyRP9bUwAd61kMKoPxwUsWfGt1x3f9JOzLwCY=;
-        b=bMrUszyDFcAatS1iZO/xCJb9CH1bvZjNjOvXTRcUNcVkgJROAftjuPlCNAN7HW95FB
-         XEayjzvE/Uc7zKVxkfa2xGxn3s0HfnhQicClWG1RhPoKpYZKX5kImjgcC4REQpRv+ZKD
-         FKdJ0edOfjHcZUO196nXAQK208uDPZthPwsEjE+GZINZUX8gk4PlBZ2/KqobzdVCQb8K
-         g9X+52k5YYhRMktbcfSH0gRalb4tWkxqT3i9N0yw5COYz4HaaTsXrQ7IupOJ/wdiUrGR
-         K/EJOd6rX92vy5Z0ttSrhfjSREUgdbpuB2uCZbIWc13G8rvcQCLqUJUpkKGAVu9FvlVj
-         wgiw==
+        bh=hoqL8oeKzwbPLpPnHeZ7uIiaoSufSw6O6FP7OY/DQsk=;
+        b=Tlz2I2j6AeOjnK1Uudo1w4XnEXsyj1BAl/P44Vp2hpr2CwMOGOzovuEhpzbRmKga9O
+         sjokoQZFgzJ9jV1HwR8xZhDv0O8G0/H/xQnu1YVGQyO43NrCnnVK5dGYToO4VTcCgsgq
+         MH7k6lnRa5604yNOV1ethwHuCW+2q3pRNoFRhRrZtDqAPlquRvBzWmYwtewQFnKysvpm
+         9HuRqokkXNB3xdMzSFdGan5FE5rkn3MDsMp/MIYu0Blbu9BBMKhsmdN6vsVaCsPOG486
+         QeHG6Su7us1bXnYQU2j2UWvMItO70+DNRteh0SkIv26nKNz5F7Tsi8Ai2uEIjpFy3ixY
+         +Ouw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=6JAKtIAyRP9bUwAd61kMKoPxwUsWfGt1x3f9JOzLwCY=;
-        b=6Jtzn402rrzTUGnQpzDX65PLTUTJloKrZLn8xoiPx1UrDAPFu36hpbtX2a4dVXdY8W
-         tDiiR6/zDERX6Kb8Pc8f0M3LB0kds+fPQRFRy34iyltGSJJoZLBNaqIDx9XLPztJSCgT
-         TcxuduyOn3QEYTIhBpz3FUbySff0ZIBit3Jap+yLdh6DqyJ8W3qj4AnJaKt6I+QW5zQf
-         KL1eRSiEORkISvzJNJUFvquvKXmAubG2YELnWVC5dP37Wx4mXcEdCO7mKSAuvVnr2a4/
-         N7wrViDH/yya8J9sKX01o4j8e/kC2O+LDlafukKkXvFpkFpeqCaTp1N2h44p/MD2KNWo
-         ujWA==
-X-Gm-Message-State: AOAM530KyC63GP3pK59wJUnDFOpQxyjjmKGpONFa2Xw/K1mO2VJJB2yq
-	bUgX2hCJh048wrDc6Ermv3JftkYlUzQYgQ==
+        bh=hoqL8oeKzwbPLpPnHeZ7uIiaoSufSw6O6FP7OY/DQsk=;
+        b=EESL9JsnheC6/bN1zpv1yANkUYAHQfNMn/hJuIdWQX1AWiiBuCLsxvCK6j2YQ1oPzJ
+         IZTonLJ5O56t/pi0FTRenw91FOxRONOqs67TPBlKeMhHNPp38tlsOwbxX0s8mFds08Mz
+         Fk8xhitkQRb4uPLw9SaUQb8BFEHUqhRze8tz5Igv4OMgATw3vggvFYpgUi5W4gOp/TPq
+         OaXH+2y7WpbL9soDUHYNU3v6Qw9kKwmXUbBPVYMw8HCKkt5G66RSi1TqsIXRJkid7XI0
+         gDm1M33kBJiyV7EgUXPM2fxdA16WWDyLQ4w6qrk6mcYorkuLjnMbYEvdWMxzvcsNBUKj
+         q20A==
+X-Gm-Message-State: AOAM532f2+r0y99Txk77ikCl0TGT0ARZvXjqoVwF++GudrpaRIDmuwxC
+	k7DZn6/zRE20IGY7ZzC9YFi2efuVkH9YvA==
 X-Google-Smtp-Source: 
- ABdhPJwDXIglejVBVObAOYyChBscWewlz8bSFhg/mOhQiVBvqJJFtgYdu7ORZoAxTLJBEoqGUHI9WQ==
-X-Received: by 2002:a17:902:e054:b0:15c:ed0d:f13f with SMTP id
- x20-20020a170902e05400b0015ced0df13fmr4824967plx.76.1651346353881;
-        Sat, 30 Apr 2022 12:19:13 -0700 (PDT)
+ ABdhPJxJpT1ELfjWECuCrvNYkoRFtSlKbrOlU4Cw5Ex+YrCmBIHMrDqbAdh30/YctiGLc8nnlpqw8w==
+X-Received: by 2002:a17:90a:7acb:b0:1d9:85a5:e1e3 with SMTP id
+ b11-20020a17090a7acb00b001d985a5e1e3mr10155542pjl.172.1651346349859;
+        Sat, 30 Apr 2022 12:19:09 -0700 (PDT)
 Received: from keaua.caveonetworks.com
  ([2601:202:4180:a5c0:8e62:e537:ba7a:ce43])
         by smtp.gmail.com with ESMTPSA id
- h10-20020a170902b94a00b0015e8d4eb28bsm1810756pls.213.2022.04.30.12.19.12
+ h10-20020a170902b94a00b0015e8d4eb28bsm1810756pls.213.2022.04.30.12.19.08
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 30 Apr 2022 12:19:12 -0700 (PDT)
+        Sat, 30 Apr 2022 12:19:09 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [kirkstone 30/39] fluentbit: Disable systemd support when systemd
- distro feature is disabled
-Date: Sat, 30 Apr 2022 12:18:10 -0700
+Subject: [kirkstone 28/39] makedumpfile: Upgrade to 1.7.1
+Date: Sat, 30 Apr 2022 12:18:08 -0700
 Message-Id: 
- <fbed7036c492f5ec4a29580cee8844386aaaeedc.1651346200.git.akuster808@gmail.com>
+ <6b161909ebe1db75882cc3bfe9de266a28dc6bc2.1651346200.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1651346200.git.akuster808@gmail.com>
 References: <cover.1651346200.git.akuster808@gmail.com>
@@ -70,66 +68,172 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 30 Apr 2022 19:19:21 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96897
+ https://lists.openembedded.org/g/openembedded-devel/message/96895
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Mingli Yu <mingli.yu@windriver.com>
 
+Remove related man pages gz logic as it's removed in new version [1].
+
+[1] https://github.com/makedumpfile/makedumpfile/commit/2169de66ecd4504a3e69e0be0330f492f966ce5e
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit f9a935ac8e0129fa91279ec8bff9f8ced93734f2)
+(cherry picked from commit f2748082e84b70c0a73d7d494b0f02338fedded1)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch | 2 +-
- .../fluentbit/cross-build-init-system-detection.patch         | 4 ++--
- meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb         | 3 ++-
- 3 files changed, 5 insertions(+), 4 deletions(-)
+ ...makedumpfile-replace-hardcode-CFLAGS.patch | 53 +++++++++----------
+ ...umpfile_1.7.0.bb => makedumpfile_1.7.1.bb} |  8 +--
+ 2 files changed, 26 insertions(+), 35 deletions(-)
+ rename meta-oe/recipes-kernel/makedumpfile/{makedumpfile_1.7.0.bb => makedumpfile_1.7.1.bb} (85%)
 
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch
-index b90a62ef19..bf4cda08f0 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch
-@@ -24,5 +24,5 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
- +        install(FILES ${FLB_SYSTEMD_SCRIPT} DESTINATION /lib/systemd/system)
- +    endif()
-      install(DIRECTORY DESTINATION ${FLB_INSTALL_CONFDIR})
--   elseif(IS_DIRECTORY /usr/share/upstart OR FLB_UPSTART)
-+   elseif(FLB_UPSTART)
-      set(FLB_UPSTART_SCRIPT "${PROJECT_SOURCE_DIR}/init/${FLB_OUT_NAME}.conf")
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/cross-build-init-system-detection.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/cross-build-init-system-detection.patch
-index a185789992..d3822fc8da 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/cross-build-init-system-detection.patch
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/cross-build-init-system-detection.patch
-@@ -12,7 +12,7 @@ Signed-off-by: Khem Raj <raj.kheem@gmail.com>
+diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
+index 1dd87c8b11..f3dc8a466a 100644
+--- a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
++++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
+@@ -1,6 +1,6 @@
+-From af97e2ad643334b4c7c3d66f971ce9ebb2b596af Mon Sep 17 00:00:00 2001
++From 71b5a3905d5cd0feca88a0d61d7657ba5296a052 Mon Sep 17 00:00:00 2001
+ From: Mingli Yu <mingli.yu@windriver.com>
+-Date: Thu, 21 Jul 2016 18:06:21 +0800
++Date: Sun, 24 Apr 2022 17:25:33 +0800
+ Subject: [PATCH] makedumpfile: replace hardcode CFLAGS
+ 
+ * Create alias for target such as powerpc as powerpc32
+@@ -16,9 +16,12 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+ 
+ [2021-11-18] Patch updated to use CFLAGS_COMMON for zstd
+ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
++
++Rebase to 1.7.1
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+ ---
+- Makefile |   47 ++++++++++++++++++++++++-----------------------
+- 1 file changed, 24 insertions(+), 23 deletions(-)
++ Makefile | 42 ++++++++++++++++++++++--------------------
++ 1 file changed, 22 insertions(+), 20 deletions(-)
+ 
+ --- a/Makefile
+ +++ b/Makefile
+@@ -35,19 +38,13 @@ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+  HOST_ARCH := $(shell uname -m)
+  # Use TARGET as the target architecture if specified.
+  # Defaults to uname -m
+-@@ -21,29 +15,36 @@ ifeq ($(strip($TARGET)),)
+- TARGET := $(HOST_ARCH)
+- endif
+- 
+--ARCH := $(shell echo ${TARGET}  | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ \
+--			       -e s/arm.*/arm/ -e s/sa110/arm/ \
+--			       -e s/s390x/s390/ -e s/parisc64/parisc/ \
++@@ -24,26 +18,34 @@ endif
++ ARCH := $(shell echo ${TARGET}  | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ \
++ 			       -e s/arm.*/arm/ -e s/sa110/arm/ \
++ 			       -e s/s390x/s390/ -e s/parisc64/parisc/ \
+ -			       -e s/ppc64/powerpc64/ -e s/ppc/powerpc32/)
+-+ARCH := $(shell echo __${TARGET}__  | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ \
+-+		       -e s/arm.*/arm/ -e s/sa110/arm/ \
+-+		       -e s/s390x/s390/ -e s/parisc64/parisc/ \
+-+		       -e s/ppc64/powerpc64/ -e s/ppc/powerpc32/ \
+-+		       -e s/_powerpc_/_powerpc32_/)
+++			       -e s/ppc64/powerpc64/ -e s/ppc/powerpc32/ \
+++			       -e s/_powerpc_/_powerpc32_/)
   
-    # Detect init system, install upstart, systemd or init.d script
- -  if(IS_DIRECTORY /lib/systemd/system)
--+  if(IS_DIRECTORY /lib/systemd/system OR FLB_SYSTEMD)
-++  if(FLB_SYSTEMD)
-      set(FLB_SYSTEMD_SCRIPT "${PROJECT_SOURCE_DIR}/init/${FLB_OUT_NAME}.service")
-      configure_file(
-        "${PROJECT_SOURCE_DIR}/init/systemd.in"
-@@ -21,7 +21,7 @@ Signed-off-by: Khem Raj <raj.kheem@gmail.com>
-      install(FILES ${FLB_SYSTEMD_SCRIPT} DESTINATION /lib/systemd/system)
-      install(DIRECTORY DESTINATION ${FLB_INSTALL_CONFDIR})
- -  elseif(IS_DIRECTORY /usr/share/upstart)
--+  elseif(IS_DIRECTORY /usr/share/upstart OR FLB_UPSTART)
-++  elseif(FLB_UPSTART)
-      set(FLB_UPSTART_SCRIPT "${PROJECT_SOURCE_DIR}/init/${FLB_OUT_NAME}.conf")
-      configure_file(
-        "${PROJECT_SOURCE_DIR}/init/upstart.in"
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
-index e586262a60..b231cc2878 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
-@@ -48,7 +48,8 @@ EXTRA_OECMAKE += "-DFLB_LUAJIT=Off -DFLB_FILTER_LUA=Off "
- # Disable Library and examples
- EXTRA_OECMAKE += "-DFLB_SHARED_LIB=Off -DFLB_EXAMPLES=Off "
+  CROSS :=
+  ifneq ($(TARGET), $(HOST_ARCH))
+@@ -55,8 +52,7 @@ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+  endif
+  
+ -CFLAGS += -D__$(ARCH)__ $(CROSS)
+--CFLAGS_ARCH += -D__$(ARCH)__ $(CROSS)
+-+CFLAGS_ARCH += -D$(ARCH) $(CROSS)
++ CFLAGS_ARCH += -D__$(ARCH)__ $(CROSS)
+  
+ -ifeq ($(ARCH), powerpc64)
+ -CFLAGS += -m64
+@@ -78,11 +74,12 @@ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+ +CFLAGS_COMMON = $(CFLAGS_ARCH) \
+ +              -DVERSION='"$(VERSION)"' \
+ +              -DRELEASE_DATE='"$(DATE)"'
+++
+ +
+  SRC_BASE = makedumpfile.c makedumpfile.h diskdump_mod.h sadump_mod.h sadump_info.h
+- SRC_PART = print_info.c dwarf_info.c elf_info.c erase_info.c sadump_info.c cache.c tools.c printk.c
++ SRC_PART = print_info.c dwarf_info.c elf_info.c erase_info.c sadump_info.c cache.c tools.c printk.c detect_cycle.c
+  OBJ_PART=$(patsubst %.c,%.o,$(SRC_PART))
+-@@ -52,12 +53,12 @@ OBJ_ARCH=$(patsubst %.c,%.o,$(SRC_ARCH))
++@@ -52,12 +54,12 @@ OBJ_ARCH=$(patsubst %.c,%.o,$(SRC_ARCH))
+  
+  LIBS = -ldw -lbz2 -ldl -lelf -lz
+  ifneq ($(LINKTYPE), dynamic)
+@@ -97,7 +94,7 @@ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+  endif
+  
+  ifeq ($(USESNAPPY), on)
+-@@ -65,12 +66,12 @@ LIBS := -lsnappy $(LIBS)
++@@ -65,12 +67,12 @@ LIBS := -lsnappy $(LIBS)
+  ifneq ($(LINKTYPE), dynamic)
+  LIBS := $(LIBS) -lstdc++
+  endif
+@@ -112,7 +109,7 @@ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+  endif
+  
+  ifeq ($(DEBUG), on)
+-@@ -104,14 +105,14 @@ LIBS := $(LIBS) $(call try-run,\
++@@ -104,14 +106,14 @@ LIBS := $(LIBS) $(call try-run,\
+  all: makedumpfile
+  
+  $(OBJ_PART): $(SRC_PART)
+@@ -126,15 +123,15 @@ Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+  makedumpfile: $(SRC_BASE) $(OBJ_PART) $(OBJ_ARCH)
+ -	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ_PART) $(OBJ_ARCH) -rdynamic -o $@ $< $(LIBS)
+ +	$(CC) $(CFLAGS_COMMON) $(LDFLAGS) $(OBJ_PART) $(OBJ_ARCH) -rdynamic -o $@ $< $(LIBS)
+- 	echo .TH MAKEDUMPFILE 8 \"$(DATE)\" \"makedumpfile v$(VERSION)\" \"Linux System Administrator\'s Manual\" > temp.8
+- 	grep -v "^.TH MAKEDUMPFILE 8" $(VPATH)makedumpfile.8 >> temp.8
+- 	mv temp.8 makedumpfile.8
+-@@ -122,7 +123,7 @@ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(
+- 	gzip -c ./makedumpfile.conf.5 > ./makedumpfile.conf.5.gz
++ 	@sed -e "s/@DATE@/$(DATE)/" \
++ 	     -e "s/@VERSION@/$(VERSION)/" \
++ 	     $(VPATH)makedumpfile.8.in > $(VPATH)makedumpfile.8
++@@ -120,7 +122,7 @@ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(
++ 	     $(VPATH)makedumpfile.conf.5.in > $(VPATH)makedumpfile.conf.5
+  
+  eppic_makedumpfile.so: extension_eppic.c
+ -	$(CC) $(CFLAGS) $(LDFLAGS) -shared -rdynamic -o $@ extension_eppic.c -fPIC -leppic -ltinfo
+ +	$(CC) $(CFLAGS_COMMON) $(LDFLAGS) -shared -rdynamic -o $@ extension_eppic.c -fPIC -leppic -ltinfo
+  
+  clean:
+- 	rm -f $(OBJ) $(OBJ_PART) $(OBJ_ARCH) makedumpfile makedumpfile.8.gz makedumpfile.conf.5.gz
++ 	rm -f $(OBJ) $(OBJ_PART) $(OBJ_ARCH) makedumpfile makedumpfile.8 makedumpfile.conf.5
+diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.0.bb b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.1.bb
+similarity index 85%
+rename from meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.0.bb
+rename to meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.1.bb
+index d4da031866..c3f965b041 100644
+--- a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.0.bb
++++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.1.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ LICENSE = "GPL-2.0-only"
  
--EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES','systemd','-DFLB_SYSTEMD=On -DSYSTEMD_DIR=${systemd_system_unitdir}','',d)}"
-+# Enable systemd iff systemd is in DISTRO_FEATURES
-+EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES','systemd','-DFLB_SYSTEMD=On -DSYSTEMD_DIR=${systemd_system_unitdir}','-DFLB_SYSTEMD=Off',d)}"
+ SRCBRANCH ?= "master"
+-SRCREV = "06ef8e2b814feb08a668b7a3783c86674e49a7b1"
++SRCREV = "74bbdd14ec861552ace1ca63953eb2ef73e1f965"
  
- EXTRA_OECMAKE:append:riscv64 = " -DFLB_DEPS='atomic'"
- EXTRA_OECMAKE:append:riscv32 = " -DFLB_DEPS='atomic'"
+ DEPENDS = "bzip2 zlib elfutils xz"
+ RDEPENDS:${PN}-tools = "perl ${PN}"
+@@ -52,12 +52,6 @@ do_install () {
+     install -m 755 ${S}/makedumpfile ${D}/usr/bin
+     install -m 755 ${S}/makedumpfile-R.pl ${D}/usr/bin
+ 
+-    mkdir -p ${D}/usr/share/man/man8
+-    install -m 644 ${S}/makedumpfile.8.gz ${D}/usr/share/man/man8
+-
+-    mkdir -p ${D}/usr/share/man/man5
+-    install -m 644 ${S}/makedumpfile.conf.5.gz ${D}/usr/share/man/man5
+-
+     mkdir -p ${D}/etc/
+     install -m 644 ${S}/makedumpfile.conf ${D}/etc/makedumpfile.conf.sample
+ }
 -- 
 2.25.1
 
