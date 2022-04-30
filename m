@@ -2,63 +2,62 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F1861C4332F
-	for <webhook@archiver.kernel.org>; Sat, 30 Apr 2022 19:19:00 +0000 (UTC)
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com
- [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web08.25967.1651346334832618907
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0999FC43219
+	for <webhook@archiver.kernel.org>; Sat, 30 Apr 2022 19:19:01 +0000 (UTC)
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com
+ [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.web08.25969.1651346339865696515
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Apr 2022 12:18:54 -0700
+ Sat, 30 Apr 2022 12:18:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=eqeDrc/j;
- spf=pass (domain: gmail.com, ip: 209.85.216.53,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=mih0vESi;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id
- a15-20020a17090ad80f00b001dc2e23ad84so1182364pjv.4
+Received: by mail-pg1-f180.google.com with SMTP id q12so8876662pgj.13
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Apr 2022 12:18:54 -0700 (PDT)
+ Sat, 30 Apr 2022 12:18:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=IFgI4DLjJjGekj1/spm+VaGS+TO5olMNJgms1DTv9yU=;
-        b=eqeDrc/j2ZwI449rywiN09lS5TXUyXTWQt2ECqUvLEgPGZJb5zWKlfXtnClrDS0Cip
-         2mLetBcF9XE1eTN6CKzWH4lvLu/t6n/v+TC7nF7jan5dbpOaUhsO62HDmeGdgvSzWi0i
-         5Y5loHcz4IgGST3jdLrTyyFizb1RYbPV2yO+RjKuv0UXfpa9D97YrXcKBGRs2mHq+I5l
-         wM+50u5GqrZBFp7OkXIPEwlH9J8LjJJ0hZby7kDedzZ8yVZstxGS0wnxvMuopQhtwkAc
-         HEHNz+eVWWpMwDbop/lxGjYg5x0PE60JmxoaXiqp2NoRI3Fyva2Ut+b76VQ8K89ZzpL+
-         aw5w==
+        bh=IdTMq3lIJJg0afBSQCtu4OY+nTbkUJlxBC0dw2F/rEY=;
+        b=mih0vESiqcLwSYj07l4sLLODNO5dko2E5CrTR7tv4fERb2VguKdfwvYj1FARn6ufTB
+         HhG2Q+2Qo1csBBpGxd7TNRGWfEgmF/SrtL1+l/DO+T7S90SnNDAimmgfXtbLnPcis5Mw
+         d0sy9PSXC8hKfcE3nfio3+XFr/sBeetU4JKR6P/iIBchJCmKo/h6fYKNKdHP8ofRKgnC
+         tpDVXwkl5hKpUTknwryG6cFN1qv1ale3Jvl/oupHhK5XeW4MAz9yjTZ9JPFujEdRqO4r
+         qKc5QOsFInqSabGu2oUKxV4qbxuaymSnCD3pNfja7iSfMwmvrNq62+doPJIllSTB29LP
+         JbZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=IFgI4DLjJjGekj1/spm+VaGS+TO5olMNJgms1DTv9yU=;
-        b=nBEs7AkDTFyk23jPlGJtrPwT9KPEhrWRl/VdtjFzB3mNKogbZZhClzycTJAAPQg2rq
-         FXiGrtHxXpHfspPeL17MGdoLHbwpHag4YgWcNUfowtVNmBDQkawGtDNRqAkgn3oZxHUn
-         9WP1wSET+/wSeGJGHwLB5Jo9ctvk7cTw/x4TPFC2JFncmUcdIphfzCjp/3W2JdODB8Cl
-         gK7Ly1PVfNIyild1mpjZhxdoE5MuxfaatmeJSTrLIyEaoHDk2zjesCD2x3WI7xxTq7vg
-         jD4CPMxjGETWpQ5Gi7X2fTzyFLZzpYWOY5gHlgDPRtUHshFfH0qSPUFkasE1OQq8SJOq
-         X7sQ==
-X-Gm-Message-State: AOAM531Sj90LYi9qJCAp3tNTphEhi/I/BnnLSNncAgsQVP9aTw3+QAUT
-	Rp6W1AkKtaEx7Ez5pQO4hxqJAIW6YqCQBA==
+        bh=IdTMq3lIJJg0afBSQCtu4OY+nTbkUJlxBC0dw2F/rEY=;
+        b=vpDYXahlv1nakiedm6gzeF5pTThhb0sz5nHAj9HzmQUrP+eJ0OXANUgxfY9So/tnp/
+         eRWIU1kaIlnKK2iOoR8qb+wllZIaksUdy81iavDC8cp/Cbbq7llJ/q/vrIThqDW4rSZr
+         JjAVhJvzOdqJTipAOrmHbe7p/MCoZjnO2Jrd/XCopbAOhFHgy79ndjTc6OFN2BjFhfe8
+         doQgbVpou1GAuuvLIaSQi25qRL42/fSDDwJ2e2RhNgrBFlKSMLN4d7PBxPTvbV66TZU3
+         893VULYUYJmnJBkAXORAhp56XAoHRQOkFi6jf+YiXHHCwyPhP9kq7HK3zfIYGe/M38uo
+         h4fQ==
+X-Gm-Message-State: AOAM530PGdMPRTjTRwQlQo9+T0VEETZ6gYR3RodwMP6LUT21TVNBcSOH
+	BpoX8J773dP013W8IG6FEdaQn1uVuwz0Sw==
 X-Google-Smtp-Source: 
- ABdhPJykonbkAoYRVUTed4n5tFdnfcA8+Tr4KS1/7YT9RdvyaLZPI/Hk0RdfH0zAkbnNGW39xcJ63g==
-X-Received: by 2002:a17:90a:cc6:b0:1d2:9a04:d29e with SMTP id
- 6-20020a17090a0cc600b001d29a04d29emr5329802pjt.136.1651346334057;
-        Sat, 30 Apr 2022 12:18:54 -0700 (PDT)
+ ABdhPJxuvRgVyPu3EuGnxjdhI2ndH7Dgfi1jg7uaD2eGImPnE6Cz/1fuYudopHmF7tJj0fge2ODYJg==
+X-Received: by 2002:a63:101:0:b0:3aa:b7e9:6708 with SMTP id
+ 1-20020a630101000000b003aab7e96708mr4008295pgb.111.1651346339103;
+        Sat, 30 Apr 2022 12:18:59 -0700 (PDT)
 Received: from keaua.caveonetworks.com
  ([2601:202:4180:a5c0:8e62:e537:ba7a:ce43])
         by smtp.gmail.com with ESMTPSA id
- h10-20020a170902b94a00b0015e8d4eb28bsm1810756pls.213.2022.04.30.12.18.52
+ h10-20020a170902b94a00b0015e8d4eb28bsm1810756pls.213.2022.04.30.12.18.57
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 30 Apr 2022 12:18:53 -0700 (PDT)
+        Sat, 30 Apr 2022 12:18:58 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [kirkstone 18/39] gspell: upgrade 1.9.1 -> 1.10.0
-Date: Sat, 30 Apr 2022 12:17:58 -0700
+Subject: [kirkstone 21/39] nautilus: upgrade 42.0 -> 42.1.1
+Date: Sat, 30 Apr 2022 12:18:01 -0700
 Message-Id: 
- <78311ad8e01cba0aef1be7d97e05a08a02f4a1f2.1651346200.git.akuster808@gmail.com>
+ <c083c8954725b62ebe4bf05f232ae44846fa99e3.1651346200.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1651346200.git.akuster808@gmail.com>
 References: <cover.1651346200.git.akuster808@gmail.com>
@@ -67,41 +66,41 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 30 Apr 2022 19:19:00 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 30 Apr 2022 19:19:01 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96885
+ https://lists.openembedded.org/g/openembedded-devel/message/96888
 
 From: wangmy <wangmy@fujitsu.com>
 
-News in 1.10.0, 2022-04-16
---------------------------
-* Build from git: some updates, take newer version of autoconf-archive.
-* Build: distribute more files in tarballs.
-* Documentation improvements.
-* Translation updates.
+Major changes in 42.1.1
+=========================
+ Revert wrongly introduced dependency on unstable gnome-desktop.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 2e84305baaf951caf84a31834a7ce0cf06890745)
+(cherry picked from commit 2ff1569067ceb4fb9e16d0b03db0d01475731c34)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-gnome/gspell/{gspell_1.9.1.bb => gspell_1.10.0.bb}  | 2 +-
+ .../nautilus/{nautilus_42.0.bb => nautilus_42.1.1.bb}           | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gspell/{gspell_1.9.1.bb => gspell_1.10.0.bb} (76%)
+ rename meta-gnome/recipes-gnome/nautilus/{nautilus_42.0.bb => nautilus_42.1.1.bb} (92%)
 
-diff --git a/meta-gnome/recipes-gnome/gspell/gspell_1.9.1.bb b/meta-gnome/recipes-gnome/gspell/gspell_1.10.0.bb
-similarity index 76%
-rename from meta-gnome/recipes-gnome/gspell/gspell_1.9.1.bb
-rename to meta-gnome/recipes-gnome/gspell/gspell_1.10.0.bb
-index 15f1cadbab..fe1b3ea67c 100644
---- a/meta-gnome/recipes-gnome/gspell/gspell_1.9.1.bb
-+++ b/meta-gnome/recipes-gnome/gspell/gspell_1.10.0.bb
-@@ -7,4 +7,4 @@ DEPENDS = "gtk+3 iso-codes enchant2"
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_42.0.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_42.1.1.bb
+similarity index 92%
+rename from meta-gnome/recipes-gnome/nautilus/nautilus_42.0.bb
+rename to meta-gnome/recipes-gnome/nautilus/nautilus_42.1.1.bb
+index 08277416f3..6d942204f6 100644
+--- a/meta-gnome/recipes-gnome/nautilus/nautilus_42.0.bb
++++ b/meta-gnome/recipes-gnome/nautilus/nautilus_42.1.1.bb
+@@ -21,7 +21,7 @@ inherit gnomebase gsettings gobject-introspection gtk-doc gettext features_check
+ def gnome_verdir(v):
+     return oe.utils.trim_version(v, 1)
  
- inherit gnomebase gettext gobject-introspection vala
+-SRC_URI[archive.sha256sum] = "3c904f33ba2d2a078892bee2af71484cd608923cd78ec7e8a1517bc2155113d5"
++SRC_URI[archive.sha256sum] = "8519d4565e842aa3d31d0fe39b21d48ac54edc0f0658fe1d8ea2da4e704c1b66"
  
--SRC_URI[archive.sha256sum] = "dcbb769dfdde8e3c0a8ed3102ce7e661abbf7ddf85df08b29915e92cd723abdd"
-+SRC_URI[archive.sha256sum] = "803bb884c0215d3fd22a85d7f30423aff88d9792f05a5199d8a489a2ffaae1da"
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
 -- 
 2.25.1
 
