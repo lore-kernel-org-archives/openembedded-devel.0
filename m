@@ -2,64 +2,62 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E56AAC4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E5166C433FE
 	for <webhook@archiver.kernel.org>; Sat, 30 Apr 2022 19:18:40 +0000 (UTC)
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com
- [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.web11.25721.1651346311988248288
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com
+ [209.85.214.174])
+ by mx.groups.io with SMTP id smtpd.web09.25679.1651346313783431476
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Apr 2022 12:18:32 -0700
+ Sat, 30 Apr 2022 12:18:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=RWNVQI+S;
- spf=pass (domain: gmail.com, ip: 209.85.216.45,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=DjqZZhJt;
+ spf=pass (domain: gmail.com, ip: 209.85.214.174,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id
- w5-20020a17090aaf8500b001d74c754128so13195951pjq.0
+Received: by mail-pl1-f174.google.com with SMTP id n18so9699595plg.5
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Apr 2022 12:18:31 -0700 (PDT)
+ Sat, 30 Apr 2022 12:18:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=GbY4gWhh1fvvQaw6B2gkyWVdMKFxsX+lkrPyfIZ39oo=;
-        b=RWNVQI+S2Yaf7nCS+CrQ+lja65j+27POFyCuMP4w1L1MYfgs9+CjxbvAxCBpb0mY5m
-         ujCuz8i+BJrSg+5CvDGKPhYamH6Q+hMrtPHCSQdL0ygqPxxIu42tehVk42cR2FlxxcPT
-         OyKVG0h5tyC+WdxwcBRJyHU5nJZCHy48+bBNxXh5cboKzTVHy8xBfTHWF9LGJ9+v6Eif
-         YT6UPe92yo1SRvgdrPjJ/nGxGn0AO0wxDGii0utr0jV+hs/37kDFRDYICRFjfHMD9CgE
-         Ygh3M39tkuOCWhacuPh/xpI4p0mv6GOdE5yTalm7+kEw+K3DGFJv9SxmecTWFebNrY7T
-         8+2A==
+        bh=UBLL50NctMqbYNTdqnVB3LcrHXNTKTf6RJCVojTJo6E=;
+        b=DjqZZhJtz20xKPeUUO4yt6XRyBLy/yHQRPoE1wC/5bkOzCCKLJioYNsdyb60mW6dtY
+         19O2TrauLxsztAL49rlwIvud5ifDhyAkTkolhM+Fv0ZNWAbe4RYB/6sbmkxaQUyI6HnT
+         z3d0k51WrFmr7Q0V1REcAIVEYlMbUZAgqBL0jwDRtY4IaKAVYbEKsju3CUlNkRRKbbdk
+         JrcDaARHUzNe/FERK5Blsh0Z0hgoKaN9kZHDprNx9xN/ugSOPhrCjdLzsgUX1rqKUl3f
+         Kct8PrFzoZgQu6qetZ1f7q2/kui5MV4DxWmmj5tgRq+3KwBc3JiAcEY4wnKkQNdkwIZ0
+         kFig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=GbY4gWhh1fvvQaw6B2gkyWVdMKFxsX+lkrPyfIZ39oo=;
-        b=EIYZW1JBE36dSIe89WnbKhsdrHrm0dLEy7mB2Sw/f732fUnDPRYvyXR7LvN3QmEUUn
-         8hjVf4Wm2PXn5WCffvUcoF5o+7vxUe69nh55oFu+CWauwN+V8Y9OzQ6P6XQr4/hZieyF
-         d7vX4uUgynldQGB02833N37SuMOtofcHYuclvePgstO5KXZuCf9Dt/aoK6aRcbp7UhmZ
-         fgzv/sp6R11mtExvHT1uCXfQjFBoOKgtT18E52x7Zs739YUGcgFE/yVzz26l6QtT5MGn
-         Wq8cE9EabIIMaoGhFL5Rom0EZAfFBMt8pQl+puvvyoOiGG5LVlg2BV2XItNvi/m5E1Iw
-         242Q==
-X-Gm-Message-State: AOAM530nmPi5EtYsULkXiWOVH1nXmPehL+lrXhGuB/Qdu1iDcNteTrzS
-	IcDI4ptcI4CUhPr3UP4pmzAlyn78PIX1ZA==
+        bh=UBLL50NctMqbYNTdqnVB3LcrHXNTKTf6RJCVojTJo6E=;
+        b=weFW/MVPFqRTsSzXPchC/594Kv/t7iAYJmMw+iowrHmtPlhxzpeFY6NDK4pBmJdQWR
+         ZgUZf3tJN3q/i7Ke9rqlQ9+KC3QmMELqo27eh+49AXr0DCXiob1PYlizx+qxgELZWv7K
+         gSowYJWcfNK7tAu8uz5LoQgjvK3YiEUxztDBwZFDxdqnTjO+zxxD7D3kWO0vwyfTa9zv
+         6Cj0xrZ6spPlL95qE1ZqBrbVNRxMfkrcDuA+pU8+hDMKQnIOgRKZAA5iPfSdIhXq3fwN
+         HUs2etmxlRQRuw/Hw1Y8Qjob3oY0snYoOEsuqTyJD8KfLlc51Dv45q43je+yDbyT6pdT
+         nCdg==
+X-Gm-Message-State: AOAM533DNxjuuS0nNl2TTALpUhF3LWLx79viCcSINZcxZU7vxv1iWnHc
+	DdUjD/oM8P0dnoxS94c44BUzA7Kf4ZO6hA==
 X-Google-Smtp-Source: 
- ABdhPJz1YjL2RhI8nRN8Y6cn48TeeZd1pouiUimz2SBxo4vtw+TViugRerh/DsF7DdAp7YS5AucSTQ==
-X-Received: by 2002:a17:90b:1e4e:b0:1da:3936:dc2e with SMTP id
- pi14-20020a17090b1e4e00b001da3936dc2emr5335096pjb.20.1651346311137;
-        Sat, 30 Apr 2022 12:18:31 -0700 (PDT)
+ ABdhPJxBS1Ss/pmsL43V6Mf/NryBtyRlvw8FjsI+w/Ha/SjSqCYZ+EXyCmCOEOb+fT5EjLksBgDdgw==
+X-Received: by 2002:a17:902:b682:b0:15d:29:9820 with SMTP id
+ c2-20020a170902b68200b0015d00299820mr4710907pls.134.1651346312880;
+        Sat, 30 Apr 2022 12:18:32 -0700 (PDT)
 Received: from keaua.caveonetworks.com
  ([2601:202:4180:a5c0:8e62:e537:ba7a:ce43])
         by smtp.gmail.com with ESMTPSA id
- h10-20020a170902b94a00b0015e8d4eb28bsm1810756pls.213.2022.04.30.12.18.29
+ h10-20020a170902b94a00b0015e8d4eb28bsm1810756pls.213.2022.04.30.12.18.31
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 30 Apr 2022 12:18:30 -0700 (PDT)
+        Sat, 30 Apr 2022 12:18:32 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [kirkstone 04/39] arno-iptables-firewall: Do not use bitbake variable
- inside S
-Date: Sat, 30 Apr 2022 12:17:44 -0700
+Subject: [kirkstone 05/39] fluentbit: Fix build with usrmerge distro feature
+Date: Sat, 30 Apr 2022 12:17:45 -0700
 Message-Id: 
- <5d5e26bd227cb7919ba7a501c7a072defc39e1bb.1651346200.git.akuster808@gmail.com>
+ <19c20340f313a10b825c413c6459aa77017c88fa.1651346200.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1651346200.git.akuster808@gmail.com>
 References: <cover.1651346200.git.akuster808@gmail.com>
@@ -70,34 +68,74 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 30 Apr 2022 19:18:40 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96871
+ https://lists.openembedded.org/g/openembedded-devel/message/96872
 
 From: Khem Raj <raj.khem@gmail.com>
 
-Location of file inside sourcedir fixed but bitbake variable
-systemd_unitdir varies depending on usrmerge feature
-hence can not be used here
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 2b643dcefe8ae4ef0cd3066bd31bae41e322b84c)
+(cherry picked from commit ae8e0ae77f74d966d687fef38bc1bccc76268f8f)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../arno-iptables-firewall/arno-iptables-firewall_2.1.1.bb      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...nit-install-location-with-SYSTEM_DIR.patch | 28 +++++++++++++++++++
+ .../fluentbit/fluentbit_1.3.5.bb              |  3 +-
+ 2 files changed, 30 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch
 
-diff --git a/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.1.bb b/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.1.bb
-index bba11a8c64..e124fd2906 100644
---- a/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.1.bb
-+++ b/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.1.bb
-@@ -20,7 +20,7 @@ do_install() {
- 	install -m 0755 ${S}/bin/arno-fwfilter ${D}${bindir}
- 	cp -r ${S}/share/arno-iptables-firewall/* ${D}${datadir}/arno-iptables-firewall
- 	cp -r ${S}/etc/arno-iptables-firewall/* ${D}${sysconfdir}/arno-iptables-firewall
--	install -m 0644 ${S}/${systemd_unitdir}/system/arno-iptables-firewall.service ${D}${systemd_unitdir}/system
-+	install -m 0644 ${S}/lib/systemd/system/arno-iptables-firewall.service ${D}${systemd_unitdir}/system
- 	sed -i -e 's%/usr/local/sbin%${bindir}%g' ${D}${systemd_unitdir}/system/arno-iptables-firewall.service
- 	sed -i -e 's%/usr/local/sbin%${sbindir}%g' ${D}${bindir}/arno-iptables-firewall
- 	sed -i -e 's%/usr/local%${exec_prefix}%g' ${D}${sysconfdir}/arno-iptables-firewall/firewall.conf
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch
+new file mode 100644
+index 0000000000..b90a62ef19
+--- /dev/null
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch
+@@ -0,0 +1,28 @@
++From 5571f949fa2048b79c197b5b10a11ecb1891cbe9 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 23 Apr 2022 08:24:34 -0700
++Subject: [PATCH] Control sytemd unit install location with SYSTEM_DIR
++
++This helps building when usrmerge is on
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/CMakeLists.txt | 6 +++++-
++ 1 file changed, 5 insertions(+), 1 deletion(-)
++
++--- a/src/CMakeLists.txt
+++++ b/src/CMakeLists.txt
++@@ -323,7 +323,11 @@ if(FLB_BINARY)
++       "${PROJECT_SOURCE_DIR}/init/systemd.in"
++       ${FLB_SYSTEMD_SCRIPT}
++       )
++-    install(FILES ${FLB_SYSTEMD_SCRIPT} DESTINATION /lib/systemd/system)
+++    if(SYSTEMD_DIR)
+++        install(FILES ${FLB_SYSTEMD_SCRIPT} DESTINATION ${SYSTEMD_DIR})
+++    else()
+++        install(FILES ${FLB_SYSTEMD_SCRIPT} DESTINATION /lib/systemd/system)
+++    endif()
++     install(DIRECTORY DESTINATION ${FLB_INSTALL_CONFDIR})
++   elseif(IS_DIRECTORY /usr/share/upstart OR FLB_UPSTART)
++     set(FLB_UPSTART_SCRIPT "${PROJECT_SOURCE_DIR}/init/${FLB_OUT_NAME}.conf")
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
+index 670d596cad..e586262a60 100644
+--- a/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
+@@ -18,6 +18,7 @@ SRC_URI = "http://fluentbit.io/releases/1.3/fluent-bit-${PV}.tar.gz \
+            file://0001-ppc-Fix-signature-for-co_create-API.patch \
+            file://0001-bin-fix-SIGSEGV-caused-by-using-flb_free-instead-of-.patch \
+            file://0002-parser-Fix-SIGSEGV-caused-by-using-flb_free-instead-.patch \
++           file://0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch \
+            "
+ SRC_URI[md5sum] = "6eae6dfd0a874e5dd270c36e9c68f747"
+ SRC_URI[sha256sum] = "e037c76c89269c8dc4027a08e442fefd2751b0f1e0f9c38f9a4b12d781a9c789"
+@@ -47,7 +48,7 @@ EXTRA_OECMAKE += "-DFLB_LUAJIT=Off -DFLB_FILTER_LUA=Off "
+ # Disable Library and examples
+ EXTRA_OECMAKE += "-DFLB_SHARED_LIB=Off -DFLB_EXAMPLES=Off "
+ 
+-EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES','systemd','-DFLB_SYSTEMD=On','',d)}"
++EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES','systemd','-DFLB_SYSTEMD=On -DSYSTEMD_DIR=${systemd_system_unitdir}','',d)}"
+ 
+ EXTRA_OECMAKE:append:riscv64 = " -DFLB_DEPS='atomic'"
+ EXTRA_OECMAKE:append:riscv32 = " -DFLB_DEPS='atomic'"
 -- 
 2.25.1
 
