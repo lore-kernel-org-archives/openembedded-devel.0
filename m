@@ -1,94 +1,94 @@
-Return-Path: <boubaker.bassem.1991@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6590AC433F5
-	for <webhook@archiver.kernel.org>; Fri, 29 Apr 2022 15:18:19 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
- [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.web10.11546.1651245491597581284
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A773C433F5
+	for <webhook@archiver.kernel.org>; Sat, 30 Apr 2022 02:31:04 +0000 (UTC)
+Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com
+ [209.85.222.177])
+ by mx.groups.io with SMTP id smtpd.web11.18424.1651285859755484475
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Apr 2022 08:18:11 -0700
+ Fri, 29 Apr 2022 19:30:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Q8QIpen0;
- spf=pass (domain: gmail.com, ip: 209.85.128.47,
- mailfrom: boubaker.bassem.1991@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id
- bi24-20020a05600c3d9800b00393ff664705so4937433wmb.4
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=XOyx8V70;
+ spf=pass (domain: gmail.com, ip: 209.85.222.177,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f177.google.com with SMTP id f186so7201041qke.8
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Apr 2022 08:18:11 -0700 (PDT)
+ Fri, 29 Apr 2022 19:30:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=uEQycQnaDUoFpHHF7FXt1JivJU1BbY8Me0KpONF32wU=;
-        b=Q8QIpen0R8lB6IgWCuBx/VoNE4567lOxm3S2+HOaPLdQihtNQC8u67znTYXBmBhU1R
-         1VQJXUXtvv8/48qFu24motkFE6vryPuO+DGuifkkJYiQG+HbGs/+I19/tMJp8zyVYd3z
-         9mkGAyQvWzAEhXoiPp0++xZgrQHF14EYOSpGgOUBeV144pXfl9jcYTO85Nj9g2pnX1uT
-         o6x9RaX+rRJVaX/LLa1bk0zEEhMQ+RHrRxPHnM5LrFBmexPML6ZTJbVi/DPwxyqHTfum
-         jHySemIE4tSyf3KRAqb7vEzrgDempY0C29q6CBTIFETq+MQr40nsG5YY+XFdKTzSnATZ
-         Ht6Q==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=hL+jsGTMcTGYsZ77k1SOhv/3knDknls7vbmlhmXnnYc=;
+        b=XOyx8V70E5WRg+5i4DbG8xg3vEj1xOhfSLbXJ4z14GLMRFFuy6fCv5vANDY3q1zilo
+         9iepbsdSJvNyO1NQuqc72dI/NCooe5hJ0jEO49PpYzB0wDCYl8qtbPLURlGxGfzEuLlt
+         P1Nkf/RvjusOmJbXYxn6frpPM1cHFZDwWYfUWR6bL2U4p/vLRm3O/6WnrvqRBf5JNJnu
+         bcHAsoXCB/CGgaPtoCw6eE0dxPCknsSBJetMDxDv8O+JixCoUIGDpipk9jEE0OYMWKGr
+         4quI1FMEDBpaqHVEn3Ts0zDdB3ThjufK1nFsiahhFLoqLmCX650Au9Vwbt15RsR4TePi
+         NPnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=uEQycQnaDUoFpHHF7FXt1JivJU1BbY8Me0KpONF32wU=;
-        b=LTatQAuUtXHExnrebS0Qb3stxRWp5bCffXW/Zl2L9Lf2AKRZjrB1hnRbQdDw3R/wTK
-         cmUd8LQLwbcyaJDi9dR79jL8v5CUxtJ+NqpAWgePiUOT4FnqMUFKcwvQxJ3hnUwv9YLo
-         BHQsc/4tIatpwUO52rz/UoTn45EgNihj2fcP5pXg14Nxa7pDCnSm6HLnMwiDautUCrQo
-         h2btiL6Px7nOCGYAA8Osq7zsezDFLI6sfYGGE2uqqa4SXPMr6o0Ce+gn0HxVPQBpEQ7N
-         FdzkTOjj0wHmSPtGRGnGCO8b8KUR7UoWEj96QeiP8993Te9wDndiyJ73ASh/zHi81693
-         xvNg==
-X-Gm-Message-State: AOAM530GpSBVQpl4/7bdtlG1FOF4Vdv1lyTZc8hqy78e2QDSsnZNMTD+
-	B8RTaNXOfQD6ho3ZJ2yRjwL32mG8ThZr+w==
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=hL+jsGTMcTGYsZ77k1SOhv/3knDknls7vbmlhmXnnYc=;
+        b=vGxMhDvXTuU2sTXDf8zye7xyeUVTaOVKC8e7XBirGf6/V1NMHR+0ClszuZZwPqr5s3
+         h3Jgq+ZDmVedTr4TwdAsOJbFpwIf1opcOSue4N4VdTv4CAbacw5Aq1V1bjOnG12hnDAD
+         YtmSQK2dzHhfMb7E1OXeT0eIkUeCh5S/LtgVmqjyDjMZlvwno1aB/ZphyKkZ7/+QGq1C
+         u9kRySG7G7aqpkvuqc/DsAXtvHX0L1ftPxT4pWOxEka9I2PLltVVsrSCp9YgzReDwwyn
+         IQqJri7WQU9nfxjuxgovr0+unzNTE0wywkYMiTUZP1QsS3kqyaMQauLFkjdFaGE9/2RH
+         YbZQ==
+X-Gm-Message-State: AOAM531q/4mwMlGUd8F310ItxQ6/h9xNCXRlBZZZj4K0o6DZF8CTkCY+
+	SMlD1SRxyIFZPyCEWiKeHnYOM17dh0wbAZjvjC0=
 X-Google-Smtp-Source: 
- ABdhPJyw0A7HbCCRxgx2WMRPADZ+xkpfHdK3LZAi6stQUhi162ShSswPNCnIrAdYVjcJlqfB2RnTJw==
-X-Received: by 2002:a05:600c:4f50:b0:393:f258:46ed with SMTP id
- m16-20020a05600c4f5000b00393f25846edmr3715290wmq.35.1651245489834;
-        Fri, 29 Apr 2022 08:18:09 -0700 (PDT)
-Received: from localhost.localdomain ([2a01:e0a:282:c80:b19b:acc9:f49f:1142])
-        by smtp.gmail.com with ESMTPSA id
- y8-20020adfc7c8000000b0020c4d02e541sm1085861wrg.75.2022.04.29.08.18.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 29 Apr 2022 08:18:09 -0700 (PDT)
-From: Bassem Boubaker <boubaker.bassem.1991@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Bassem Boubaker <boubaker.bassem.1991l@gmail.com>
-Subject: [PATCH] conntrack-tools: Fix missing capability
-Date: Fri, 29 Apr 2022 17:17:56 +0200
-Message-Id: <20220429151756.641345-1-boubaker.bassem.1991@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ ABdhPJx8D0d3v3CFLSJ9ZH1iXZMqL/SNrkg+xzqCUJqagHWFgyi4A7WGVwkEPb+/wzPR/tHE3cUCfdRSgcJwe9L0EMo=
+X-Received: by 2002:a05:620a:17ac:b0:69e:b8d5:3fd2 with SMTP id
+ ay44-20020a05620a17ac00b0069eb8d53fd2mr1494833qkb.227.1651285858794; Fri, 29
+ Apr 2022 19:30:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <2263ff4b-de14-730d-56fb-03da92a32a4b@gmail.com>
+In-Reply-To: <2263ff4b-de14-730d-56fb-03da92a32a4b@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 29 Apr 2022 19:30:32 -0700
+Message-ID: 
+ <CAMKF1so8QdBrM63-vXBn+JqPqMemMr909Ax78wGggz0Fkra71A@mail.gmail.com>
+Subject: Re: dunfell merge request: April 29
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 29 Apr 2022 15:18:19 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 30 Apr 2022 02:31:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96858
+ https://lists.openembedded.org/g/openembedded-devel/message/96862
 
-From: Bassem Boubaker <boubaker.bassem.1991l@gmail.com>
+merged thanks
 
-The commit fix this error message: Do not forget that you need *root* or CAP_NET_ADMIN capabilities ;-)
----
- .../recipes-filter/conntrack-tools/conntrack-tools_1.4.6.bb  | 5 +++++
- 1 file changed, 5 insertions(+)
-
-diff --git a/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.6.bb b/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.6.bb
-index de6a72e78..e76238fe0 100644
---- a/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.6.bb
-+++ b/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.6.bb
-@@ -32,3 +32,8 @@ do_install:append() {
-     sed -i 's!/var/!${localstatedir}/!g' ${D}/${sysconfdir}/init.d/conntrack-failover ${D}/${sysconfdir}/init.d/conntrackd ${D}/${sysconfdir}/conntrackd/conntrackd.conf.sample
-     sed -i 's!^export PATH=.*!export PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}/${sysconfdir}/init.d/conntrackd
- }
-+
-+# fix error message: Do not forget that you need *root* or CAP_NET_ADMIN capabilities ;-)
-+pkg_postinst:${PN} () {
-+    setcap cap_net_admin+ep $D/${sbindir}/conntrack"
-+}
-\ No newline at end of file
--- 
-2.25.1
-
+On Fri, Apr 29, 2022 at 6:51 PM akuster808 <akuster808@gmail.com> wrote:
+>
+> The following changes since commit fdd1dfe6b4b2412cc536c26450ce126c960d8107:
+>
+>    mongodb: Pass OBJCOPY to scons so it does not use it from host
+> (2022-04-18 07:37:42 -0700)
+>
+> are available in the Git repository at:
+>
+>    https://git.openembedded.org/meta-openembedded dunfell-next
+>
+> for you to fetch changes up to 8ff12bfffcf0840d5518788a53d88d708ad3aae0:
+>
+>    postgresql: Fix build on riscv (2022-04-19 10:15:37 -0700)
+>
+> ----------------------------------------------------------------
+> Khem Raj (1):
+>        postgresql: Fix build on riscv
+>
+>   meta-oe/recipes-dbs/postgresql/files/remove_duplicate.patch | 38
+> +++++++++++++++++++++++++++++++++
+>   meta-oe/recipes-dbs/postgresql/postgresql_12.9.bb           |  1 +
+>   2 files changed, 39 insertions(+)
+>   create mode 100644
+> meta-oe/recipes-dbs/postgresql/files/remove_duplicate.patch
+>
 
