@@ -2,62 +2,63 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ED864C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1841C433EF
 	for <webhook@archiver.kernel.org>; Sat, 30 Apr 2022 19:19:00 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com
- [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web12.26119.1651346331928460276
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com
+ [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.web10.26011.1651346333251250450
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Apr 2022 12:18:52 -0700
+ Sat, 30 Apr 2022 12:18:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=k8WRSkVA;
- spf=pass (domain: gmail.com, ip: 209.85.214.175,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=CQCAl6V1;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id h12so9674197plf.12
+Received: by mail-pj1-f47.google.com with SMTP id
+ gj17-20020a17090b109100b001d8b390f77bso13166320pjb.1
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Apr 2022 12:18:51 -0700 (PDT)
+ Sat, 30 Apr 2022 12:18:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=TBHf2domq20kOjiqU/iAGRvjOmya4D00sNisPnM4N74=;
-        b=k8WRSkVA9k4obR26utrm9mgPxNT1darIdRmiN7K1gp7cUbBIVfPS61ImK0Cw3x7H3F
-         JU00MMocThH6ychJnIAwem1FriA4RX+EjWxzSTi+B+axpqKJG3oLOvj3kjFt42u9YnoG
-         +M8q1UOHnFBG0F09JyrfDG2hI53gQp8aFDcfTaPWrjZEUVssKK0PLoN4cox63DhZSUQq
-         Km7sjS+YFHV0V/dvxP503xZxITNZRAxXHmZuvBeZ7P4GjE+GlKgG7SXw6xxYjKoRnCP+
-         JK35Eg3gxtLCJxlK5ng8zBCCmkG0mIY0oPKlc6XhJ0cpJmpyPXDQ+g8HG7CQYXdZJndc
-         cnOA==
+        bh=vZdNANg4RWBwhUxgNvFIrWggetKdjmMg3eUv3a2IEyY=;
+        b=CQCAl6V1cw1YVXpO+igt+uDX5z6UCOA0eycnCTkKA5rjXkCdKzWhSHKz9CV9E3ua4+
+         tGEzfR+qlPlajjYjT8UoDbhTZr4ZCKXtF9ocdRg5Gw74eqAvQ+s+WIli26nmickyknTT
+         IENDgmDXUaDvcfxdD6DS27znvnDn3h5VVC34e+Z+tyn+IvKMjB+TGEbs3pTmmXZSSMwr
+         niHATUy2IfU3R1xEMi5Rybv3jYQ6QRUD8XO1l6UZLe3sntR9Q5SbPNwQvNPXVVHoQgnD
+         uxiZTO0Xtyee2T7WNrjC5QPkWlisSZm1k9pU9eb42ve3ulHaa0WHK+K7Cv1x+z6Kt3uM
+         pQmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=TBHf2domq20kOjiqU/iAGRvjOmya4D00sNisPnM4N74=;
-        b=WeO9PReOD4JTVpoJZAagkXqbOfWjWzARt+n3SgEcDTOWC4oOvzkLveZKRL7IsemG1j
-         5KRkXWqH2PaixEODJf5EO8PaMXqDc6FjEtsMrjd9VWHiPc33WzwRNzIMUYQusM+2PYPa
-         yttmvJ4u7SZbJnm9mDrku6X8q0oAmUnOT21wY3dVMwsNaC8yr5T5bkkxCfHfVzae5hkp
-         cJGFkbmka2dVlXe+SOcPaKSmmxCKdChzFMc71THJl8NcASx5VA0l6UZ2yAuSgq+pRUhO
-         Kvvuho3oaROwOL0ytR+ghB1Ycv7u14fA36+ahpayxxvtSzKRESLhAAWAg3nVXthhLIob
-         nbqg==
-X-Gm-Message-State: AOAM531wa7V2pOyQzXHaRPt6zwuu862jl0SObqNyLiVgAzWtZ5A98ALA
-	mbH9FQNIb5W1cTfQIqGQFI+h30ZM3TFrnA==
+        bh=vZdNANg4RWBwhUxgNvFIrWggetKdjmMg3eUv3a2IEyY=;
+        b=klbIY800fq5HVC4pAJRKXEPnrRtCxovxuyHKU/5srX5TUhTFIrbBRibEP/Xes86ENp
+         n98F1iS275Ohm4dDvXL21PNXu/Je/lW/k0LtaI4C/GSWoFFA230AtWIOx+bC+6/Ibi9A
+         UwCSjWuQiB7jVQ1L9cYD7UrSxT1oINDGzZ4hWd6anG6PmQI4gsfXGSBdSP2TEqJGoFsc
+         h+YGyANmiKdqNALG8oeshDBNf9qGPYM7NIU0ULZxZJwGL6jk5DkqlmFc+SuUCPtWrIjr
+         1YnkP9Q9j1usuLhlPzUNnVwg2P1aR7STsc/rOBXF/7i7b9y59+5bXDmt2pLgX2iGxAkO
+         X24g==
+X-Gm-Message-State: AOAM5323qoRELXeB3iOLCXJsEBH+nP87Oh+AUXNHm4lAbs53SPYyRGAb
+	KLlUQnfRJ5quzleN74WFEeigA7dcWhgVaQ==
 X-Google-Smtp-Source: 
- ABdhPJzhJa38mjfgkybrLHDD/o4o4Es64ahEC3uflrSJs0/hlgYqULMTFXMZLApL9CAGV0bLBb+ggg==
-X-Received: by 2002:a17:902:aa46:b0:159:6cb:163 with SMTP id
- c6-20020a170902aa4600b0015906cb0163mr4645511plr.83.1651346331168;
-        Sat, 30 Apr 2022 12:18:51 -0700 (PDT)
+ ABdhPJwo6pdNZH0K7HDWOdoZ5Th4iQInESC8kU3xvNjozN6K6Q1KY1XU5HiYVZXzesCX3ANH03T19Q==
+X-Received: by 2002:a17:90b:4c88:b0:1d9:7158:876b with SMTP id
+ my8-20020a17090b4c8800b001d97158876bmr5372570pjb.54.1651346332511;
+        Sat, 30 Apr 2022 12:18:52 -0700 (PDT)
 Received: from keaua.caveonetworks.com
  ([2601:202:4180:a5c0:8e62:e537:ba7a:ce43])
         by smtp.gmail.com with ESMTPSA id
- h10-20020a170902b94a00b0015e8d4eb28bsm1810756pls.213.2022.04.30.12.18.49
+ h10-20020a170902b94a00b0015e8d4eb28bsm1810756pls.213.2022.04.30.12.18.51
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 30 Apr 2022 12:18:50 -0700 (PDT)
+        Sat, 30 Apr 2022 12:18:51 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [kirkstone 16/39] fwupd: Enable build with musl
-Date: Sat, 30 Apr 2022 12:17:56 -0700
+Subject: [kirkstone 17/39] evince: upgrade 42.1 -> 42.2
+Date: Sat, 30 Apr 2022 12:17:57 -0700
 Message-Id: 
- <0bf5d0fcf0df4ad109e538795a1509a802d7ac61.1651346200.git.akuster808@gmail.com>
+ <06c6d83a1878072a4e96b18ad6a284a8d806855d.1651346200.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1651346200.git.akuster808@gmail.com>
 References: <cover.1651346200.git.akuster808@gmail.com>
@@ -68,32 +69,40 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 30 Apr 2022 19:19:00 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96883
+ https://lists.openembedded.org/g/openembedded-devel/message/96884
 
-From: Khem Raj <raj.khem@gmail.com>
+From: wangmy <wangmy@fujitsu.com>
 
-It does not fail anymore as the qemu options has been sorted
+Changelog:
+==========
+comics:
+  * Fix use-after-free (#1776)
 
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 1fa927eba97561d00e3a249c41356a482d68b402)
+(cherry picked from commit 4aa174ef75aa363d2ca6a45e433bbb51a5c53ef8)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb | 2 --
- 1 file changed, 2 deletions(-)
+ .../recipes-gnome/evince/{evince_42.1.bb => evince_42.2.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/evince/{evince_42.1.bb => evince_42.2.bb} (92%)
 
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb b/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb
-index 20dccc2356..53f1720b04 100644
---- a/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb
-+++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb
-@@ -4,8 +4,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+diff --git a/meta-gnome/recipes-gnome/evince/evince_42.1.bb b/meta-gnome/recipes-gnome/evince/evince_42.2.bb
+similarity index 92%
+rename from meta-gnome/recipes-gnome/evince/evince_42.1.bb
+rename to meta-gnome/recipes-gnome/evince/evince_42.2.bb
+index 2e22f2e703..af6d74c1a0 100644
+--- a/meta-gnome/recipes-gnome/evince/evince_42.1.bb
++++ b/meta-gnome/recipes-gnome/evince/evince_42.2.bb
+@@ -24,7 +24,7 @@ inherit gnomebase itstool gnome-help pkgconfig gsettings gobject-introspection g
+ def gnome_verdir(v):
+     return oe.utils.trim_version(v, 1)
  
- DEPENDS = "glib-2.0 libxmlb json-glib sqlite3 libjcat gcab vala-native"
+-SRC_URI[archive.sha256sum] = "b24767bb3d5103b4e35b0e15cf033dbe2488f88700cdd882d22a43adeec2e80a"
++SRC_URI[archive.sha256sum] = "ff7f81f308cf8d4956ed97fb724a7e49448c214beeab998812ef9efbb38df8ae"
  
--COMPATIBLE_HOST:libc-musl = 'null'
--
- SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
-            file://run-ptest"
- SRC_URI[sha256sum] = "7ebe1514acb688d2649cecc392db929094da3f03cfc98a9c0faccabb084912fa"
+ GTKDOC_MESON_OPTION = "gtk_doc"
+ 
 -- 
 2.25.1
 
