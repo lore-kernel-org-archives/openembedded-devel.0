@@ -1,187 +1,215 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 343CBC433EF
-	for <webhook@archiver.kernel.org>; Sat, 30 Apr 2022 19:19:31 +0000 (UTC)
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com
- [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web08.25983.1651346370185193581
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DE959C433F5
+	for <webhook@archiver.kernel.org>; Sat, 30 Apr 2022 20:59:31 +0000 (UTC)
+Received: from mail-qv1-f43.google.com (mail-qv1-f43.google.com
+ [209.85.219.43])
+ by mx.groups.io with SMTP id smtpd.web11.26771.1651352362808122855
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Apr 2022 12:19:30 -0700
+ Sat, 30 Apr 2022 13:59:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=S++6fu3p;
- spf=pass (domain: gmail.com, ip: 209.85.210.179,
- mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id j6so9447053pfe.13
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=kYRoAZvz;
+ spf=pass (domain: gmail.com, ip: 209.85.219.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f43.google.com with SMTP id iy15so7857135qvb.9
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Apr 2022 12:19:30 -0700 (PDT)
+ Sat, 30 Apr 2022 13:59:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=02Zll4jES9SLzF4+ZKpO8hfJzsfWeol1G3hMuLnljdU=;
-        b=S++6fu3p8vcPR/ZB0C9jjSyOYML/iHJHqorW+Iu6DsKmxTiB1r1TvyPJLRwOFNOIMV
-         rcsx2nPJKavaYPt62GxlbGjqkKu8tl+HZRIqRprAq7bSxcYgZA4VBwhjKkF1HaR2XpFi
-         Wc+T3cZt5fk8tivy4/U5NHcWtlPXfgrPM+VRS33bjrzXyvq3bUQeXDb4pqylG2vnLLSw
-         eIqqE/2ASUExT5VTDD9cQ4nPH7ixvUYoYZyJjYU/bLDDP4E1PyJdh10Do4LC15pyuOPh
-         AoBU+mVL+oPpGkLlKMAbsQCc0UI5wpGPodRNI6OgT4K7WEeUePpBvE9rA+XIalVfCaoj
-         BC3A==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=kToQQ/sL3bs1nCPHl6ckP+qmNQUOjNIFlhTzclGCV2s=;
+        b=kYRoAZvzq9wZafe20yraSGeiTlsKEgnwEQR7UBlyLvdxrLq/9hkm9VuhqZXvtvE6l9
+         nu2F+iEZpDjxxn7bkPes7W61G9em8G7Nlu4d122QDt/yx0VGBv3GFD9yCFdL0ZEaDSQp
+         v1OJUT9XTgIc1zYYsfYNnkcLiuaA0nn8vWm6uU3oLYr0X49DVpeIJq4woqVmLMW1E/3S
+         /v4tkOe8TsXS49Tsy++50UL2PrKnLQpPeKz0HvnH6jgIXfLLojTkiu7L2tWl6bwTxvKS
+         ZwL14Li9e6vMHbFAP0kFMpqF2ad2f05/erj4AL+UOIFYf7AaVdjRTnZjNsi4621z/6gr
+         uxJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=02Zll4jES9SLzF4+ZKpO8hfJzsfWeol1G3hMuLnljdU=;
-        b=W1GMVRE1wkh3n0LTQQtY+LchsOZdpgdAa4rlCeUwA2X4GzhuEr/GXpUGuAfp+bEKrD
-         EvI1U0hLNQWcPrgAuv49GfGNARl+12W4NmFBoiVj/sNqbAH4mqIGt6Zpt1pK+GV9JCSv
-         AEK2qEAhl4b194oIFmWAH/xU9aetFUUD+pZ6wO3bWWgjj4tWEgTYAzGUOQ41hVEBueuT
-         3AteRe6p+YfeOpuzxP7Bph+XQwygySrL/yuTMU6GvOhhrHbSSQcDTVTZhWCHNhOOsEPg
-         TqUHo9Ors8lw6WFtqTsoWtuwl1M69UfaMCkfgCLGtQKy3gGQkK68c9lFTjZHge7B0j7k
-         gxsQ==
-X-Gm-Message-State: AOAM5301ifTcpDcaqOrn3xvFUQ+ypYUlpbCBNMbPWWgXDSz19mzBbyqI
-	0mO2Y2sommMcYDeE1Fs1CZpmCcBMZalqOw==
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=kToQQ/sL3bs1nCPHl6ckP+qmNQUOjNIFlhTzclGCV2s=;
+        b=CdqXCRx/pYefPai2hlOpSl/W418Uk2/imAuQjUS1r5MU9zvYhTc7svgutpYfJr/5aR
+         t5e82SNYQ8nesI5J95/heJmPBQPKqf3sb47VQ91xknKVOusbWS6YRJ00y2gYgQ3sD+Ta
+         45eBoaHsKm1C9p5jBbvj9yO8TRYZvwY6V22xNwSQmb7p0WCTsBh2CfMnG6VLfDvVpsC3
+         JJixVJXdEfHb3+e69C02Jra9T8Gk2C6gYtcixx7B/wf1OK0PEIj0draRbdSjRo4Nh/o4
+         jNvC+fNZJyQWapoLWfJqcX0Fipjm40CfTFgEImraa4LtmeWrGvnM9O/FlmzfBE0dy/rC
+         GuLg==
+X-Gm-Message-State: AOAM532uUV4MWE5W/r6ZFTSPJa0a01HFpUkn/uN8MamGyreNE445jsq9
+	vUueZScuh0QsDp2WrYiQpiojYT0cBoAbEGt2K68=
 X-Google-Smtp-Source: 
- ABdhPJyunXcVGNn632eEs+P0ddxrn7nrD2PdQKxeUx44QEz5hW5t9Xo6+QbWcH/4c8/eLHE8W1dLnw==
-X-Received: by 2002:a63:d908:0:b0:3c1:f140:c1a4 with SMTP id
- r8-20020a63d908000000b003c1f140c1a4mr1107896pgg.393.1651346369358;
-        Sat, 30 Apr 2022 12:19:29 -0700 (PDT)
-Received: from keaua.caveonetworks.com
- ([2601:202:4180:a5c0:8e62:e537:ba7a:ce43])
-        by smtp.gmail.com with ESMTPSA id
- h10-20020a170902b94a00b0015e8d4eb28bsm1810756pls.213.2022.04.30.12.19.27
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 30 Apr 2022 12:19:28 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [kirkstone 39/39] boinc-client: Make script install not depend on
- host install paths
-Date: Sat, 30 Apr 2022 12:18:19 -0700
-Message-Id: 
- <3b4da37a947c6ea244061929e7c457d02f34f748.1651346200.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1651346200.git.akuster808@gmail.com>
-References: <cover.1651346200.git.akuster808@gmail.com>
+ ABdhPJyei2wkXJR3tfFP45Lue7G9+Dk4EcB0reqJYxSEpJJyNwqDQDvnefOy12bitmJtkrPVvF2cmbdUxaUvWqcJstg=
+X-Received: by 2002:a0c:b2d3:0:b0:45a:8430:1735 with SMTP id
+ d19-20020a0cb2d3000000b0045a84301735mr1258121qvf.110.1651352361776; Sat, 30
+ Apr 2022 13:59:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <cover.1651346200.git.akuster808@gmail.com>
+In-Reply-To: <cover.1651346200.git.akuster808@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 30 Apr 2022 13:58:55 -0700
+Message-ID: 
+ <CAMKF1sot=47n6c5JX5901kzynEMGGq-wbtjMsEgJ80eXqo-hMw@mail.gmail.com>
+Subject: Re: [oe] [kirkstone 00/39] Patch review
+To: Armin Kuster <akuster808@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 30 Apr 2022 19:19:31 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 30 Apr 2022 20:59:31 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96906
+ https://lists.openembedded.org/g/openembedded-devel/message/96907
 
-From: Khem Raj <raj.khem@gmail.com>
+lgtm
 
-The install target is checking for install paths on build host assuming
-thats where it will run too, which breaks cross builds. Add a patch to
-aide the install from recipe.
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit bbc6fa72c378c792bdae35cae9b6ff165ee196c9)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- ...Do-not-check-for-files-on-build-host.patch | 52 +++++++++++++++++++
- .../boinc/boinc-client_7.18.1.bb              | 18 +++----
- 2 files changed, 60 insertions(+), 10 deletions(-)
- create mode 100644 meta-oe/recipes-extended/boinc/boinc-client/0001-scripts-Do-not-check-for-files-on-build-host.patch
-
-diff --git a/meta-oe/recipes-extended/boinc/boinc-client/0001-scripts-Do-not-check-for-files-on-build-host.patch b/meta-oe/recipes-extended/boinc/boinc-client/0001-scripts-Do-not-check-for-files-on-build-host.patch
-new file mode 100644
-index 0000000000..6d9e94cb8a
---- /dev/null
-+++ b/meta-oe/recipes-extended/boinc/boinc-client/0001-scripts-Do-not-check-for-files-on-build-host.patch
-@@ -0,0 +1,52 @@
-+From 8a8305c78143438e2bd497d55188a0da3442db08 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 27 Apr 2022 09:11:38 -0700
-+Subject: [PATCH] scripts: Do not check for files on build host
-+
-+This will result in varied behaviour depending upon what kind of host is
-+used to build it. We dont want that. Instead check for these files and
-+dirs in staging area and create these markers in recipe via a
-+do_install_prepend to aide install piece a bit here ( systemd vs
-+sysvinit ) etc.
-+
-+Upstream-Status: Inappropriate [OE-Specific]
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ client/scripts/Makefile.am | 10 +++++-----
-+ 1 file changed, 5 insertions(+), 5 deletions(-)
-+
-+diff --git a/client/scripts/Makefile.am b/client/scripts/Makefile.am
-+index 2a53203d84..62a0defa93 100644
-+--- a/client/scripts/Makefile.am
-++++ b/client/scripts/Makefile.am
-+@@ -2,21 +2,21 @@
-+ 
-+ install-exec-hook:
-+ 	chmod +x boinc-client
-+-	if [ -d /etc/init.d ] ; then \
-++	if [ -d $(DESTDIR)/etc/init.d ] ; then \
-+ 		$(INSTALL) -d $(DESTDIR)$(sysconfdir)/init.d ; \
-+ 		$(INSTALL) -b boinc-client $(DESTDIR)$(sysconfdir)/init.d/boinc-client ; \
-+ 	fi
-+-	if [ -d /usr/lib/systemd/system ] ; then \
-++	if [ -d $(DESTDIR)/usr/lib/systemd/system ] ; then \
-+ 		$(INSTALL) -d $(DESTDIR)/usr/lib/systemd/system/ ; \
-+ 		$(INSTALL_DATA) boinc-client.service $(DESTDIR)/usr/lib/systemd/system/boinc-client.service ; \
-+-	elif [ -d /lib/systemd/system ] ; then \
-++	elif [ -d $(DESTDIR)/lib/systemd/system ] ; then \
-+ 		$(INSTALL) -d $(DESTDIR)/lib/systemd/system/ ; \
-+ 		$(INSTALL_DATA) boinc-client.service $(DESTDIR)/lib/systemd/system/boinc-client.service ; \
-+ 	fi
-+-	if [ -d /etc/sysconfig ] ; then \
-++	if [ -d $(DESTDIR)/etc/sysconfig ] ; then \
-+ 	  $(INSTALL) -d $(DESTDIR)$(sysconfdir)/sysconfig ; \
-+ 	  $(INSTALL_DATA) $(srcdir)/boinc-client.conf $(DESTDIR)$(sysconfdir)/sysconfig/boinc-client ; \
-+-	elif [ -d /etc/default ] ; then \
-++	elif [ -d $(DESTDIR)/etc/default ] ; then \
-+ 	  $(INSTALL) -d $(DESTDIR)$(sysconfdir)/default ; \
-+ 	  $(INSTALL_DATA) $(srcdir)/boinc-client.conf $(DESTDIR)$(sysconfdir)/default/boinc-client ; \
-+ 	else \
-+-- 
-+2.36.0
-+
-diff --git a/meta-oe/recipes-extended/boinc/boinc-client_7.18.1.bb b/meta-oe/recipes-extended/boinc/boinc-client_7.18.1.bb
-index abcb304d30..8f85a508e7 100644
---- a/meta-oe/recipes-extended/boinc/boinc-client_7.18.1.bb
-+++ b/meta-oe/recipes-extended/boinc/boinc-client_7.18.1.bb
-@@ -35,6 +35,7 @@ SRC_URI = "git://github.com/BOINC/boinc;protocol=https;branch=${BRANCH} \
-            file://boinc-AM_CONDITIONAL.patch \
-            file://gtk-configure.patch \
-            file://4563.patch \
-+           file://0001-scripts-Do-not-check-for-files-on-build-host.patch \
- "
- 
- inherit gettext autotools pkgconfig features_check systemd
-@@ -75,17 +76,14 @@ do_compile:prepend () {
- 	sed -i -e 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' ${B}/libtool
- }
- 
--do_install:append() {
--	if ! ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','true','false',d)} -a \
--            -e ${D}${nonarch_libdir}/systemd/system/boinc-client.service; then
--		install -d ${D}${systemd_system_unitdir}
--		mv \
--		${D}${nonarch_libdir}/systemd/system/boinc-client.service \
--		${D}${systemd_system_unitdir}/boinc-client.service
--		rmdir --ignore-fail-on-non-empty ${D}${nonarch_libdir}/systemd/system \
--		${D}${nonarch_libdir}/systemd \
--		${D}${nonarch_libdir}
-+do_install:prepend() {
-+	# help script install a bit to do right thing for OE
-+	if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+		mkdir -p ${D}${systemd_system_unitdir}
-+	else
-+		mkdir -p ${D}${sysconfdir}/init.d
- 	fi
-+	mkdir -p ${D}${sysconfdir}/default
- }
- 
- SYSTEMD_SERVICE:${PN} = "boinc-client.service"
--- 
-2.25.1
-
+On Sat, Apr 30, 2022 at 12:18 PM Armin Kuster <akuster808@gmail.com> wrote:
+>
+> Please have comments back my Tuesday
+>
+> The following changes since commit 7e05822fe85a77ea7e9fdfa61f300334ed76e294:
+>
+>   meta-openemnedded: Add myself as kirkstone maintainer (2022-04-23 06:50:42 -0700)
+>
+> are available in the Git repository at:
+>
+>   git://git.openembedded.org/meta-openembedded-contrib stable/kirkstone-nut
+>   http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/kirkstone-nut
+>
+> Carlos Rafael Giani (1):
+>   pipewire: Upgrade to version 0.3.50
+>
+> Khem Raj (23):
+>   crash: Fix build for mips target
+>   tcsh: Do not install symlinks into /bin with usrmerge
+>   arno-iptables-firewall: Do not use bitbake variable inside S
+>   fluentbit: Fix build with usrmerge distro feature
+>   tomoyo-tools: Define SBINDIR
+>   tomoyo-tools: Drop md5sum
+>   dietsplash: specify install rootdir
+>   linux-atm: Add knob to root prefix
+>   ufw: Fix build with usrmerge distro feature
+>   klibc: Recognise --dyld-prefix clang option
+>   mozjs: Use vendored icu on ppc/clang
+>   boinc-client: Do not overwrite same file when using usrmerge
+>   pam-ssh-agent-auth: Use specific versions of BSD licenses
+>   fwupd: Enable build with musl
+>   lirc: install systemd units only when using systemd distro feature
+>   fluentbit: Disable systemd support when systemd distro feature is
+>     disabled
+>   gtksourceview5: Allow wayland or x11
+>   gtkmm3: Allow wayland or x11 in distro features
+>   gparted: Allow wayland or x11 distro features
+>   lirc: Delete systemd unit files on non systemd distros
+>   atkmm: Allow build with wayland
+>   pangomm: Allow building with wayland
+>   boinc-client: Make script install not depend on host install paths
+>
+> Mingli Yu (2):
+>   crash: Upgrade to 8.0.0
+>   makedumpfile: Upgrade to 1.7.1
+>
+> Robert Yang (1):
+>   libldb: Fix installed-vs-shipped and rebuild error
+>
+> Willy Tu (1):
+>   absil-cpp: Update SRC_URI to to the latest google internal sync
+>
+> wangmy (11):
+>   evince: upgrade 42.1 -> 42.2
+>   gspell: upgrade 1.9.1 -> 1.10.0
+>   gtksourceview5: upgrade 5.4.0 -> 5.4.1
+>   libadwaita: upgrade 1.1.0 -> 1.1.1
+>   nautilus: upgrade 42.0 -> 42.1.1
+>   htpdate: upgrade 1.3.3 -> 1.3.4
+>   hexedit: upgrade 1.5 -> 1.6
+>   lsscsi: upgrade 0.31 -> 0.32
+>   libencode-perl: upgrade 3.16 -> 3.17
+>   libextutils-cppguess-perl: upgrade 0.23 -> 0.26
+>   libtest-harness-perl: upgrade 3.42 -> 3.44
+>
+>  .../recipes-extended/gparted/gparted_1.4.0.bb |  3 +-
+>  .../evince/{evince_42.1.bb => evince_42.2.bb} |  2 +-
+>  .../{gspell_1.9.1.bb => gspell_1.10.0.bb}     |  2 +-
+>  ...view5_5.4.0.bb => gtksourceview5_5.4.1.bb} |  4 +-
+>  ...ibadwaita_1.1.0.bb => libadwaita_1.1.1.bb} |  2 +-
+>  .../{nautilus_42.0.bb => nautilus_42.1.1.bb}  |  2 +-
+>  .../klcc-cross-accept-clang-options.patch     |  5 +-
+>  ...-to-enable-disable-legacy-RTKit-modu.patch | 44 -----------
+>  ...{pipewire_0.3.49.bb => pipewire_0.3.50.bb} |  6 +-
+>  .../recipes-connectivity/ufw/ufw_0.36.1.bb    |  7 ++
+>  .../arno-iptables-firewall_2.1.1.bb           |  2 +-
+>  .../{htpdate_1.3.3.bb => htpdate_1.3.4.bb}    |  2 +-
+>  .../recipes-support/libldb/libldb_2.3.3.bb    | 11 +++
+>  .../linux-atm/0001-make-Add-PREFIX-knob.patch | 31 ++++++++
+>  .../linux-atm/linux-atm_2.5.2.bb              |  7 +-
+>  .../recipes-connectivity/lirc/lirc_0.10.1.bb  | 13 +--
+>  meta-oe/recipes-bsp/fwupd/fwupd_1.7.6.bb      |  2 -
+>  .../lsscsi/{lsscsi_0.31.bb => lsscsi_0.32.bb} |  3 +-
+>  .../abseil-cpp/abseil-ppc-fixes.patch         | 20 ++---
+>  .../abseil-cpp/abseil-cpp_git.bb              |  4 +-
+>  ...Do-not-check-for-files-on-build-host.patch | 52 ++++++++++++
+>  .../boinc/boinc-client_7.18.1.bb              | 17 ++--
+>  ...nit-install-location-with-SYSTEM_DIR.patch | 28 +++++++
+>  .../cross-build-init-system-detection.patch   |  4 +-
+>  .../fluentbit/fluentbit_1.3.5.bb              |  4 +-
+>  .../{hexedit_1.5.bb => hexedit_1.6.bb}        |  2 +-
+>  .../recipes-extended/mozjs/mozjs-91_91.8.0.bb |  2 +
+>  .../pam/pam-ssh-agent-auth_0.10.3.bb          |  2 +-
+>  .../recipes-gnome/atk/atkmm-2.36_2.36.1.bb    |  2 +-
+>  meta-oe/recipes-gnome/atk/atkmm_2.28.2.bb     |  2 +-
+>  meta-oe/recipes-gnome/gtk+/gtkmm3_3.24.5.bb   |  2 +-
+>  .../dietsplash/dietsplash_git.bb              |  2 +-
+>  .../recipes-graphics/pango/pangomm_2.46.2.bb  |  3 +-
+>  ...error-unknown-type-name-gdb_fpregset.patch | 36 ---------
+>  ...tect-the-sysroot-s-glibc-header-file.patch | 33 --------
+>  ...unrecognized-gcc-option-m32-for-mips.patch | 33 --------
+>  ...im-arange-fix-extern-inline-handling.patch | 79 -------------------
+>  ...m-ppc-drop-LIBS-from-psim-dependency.patch | 37 ---------
+>  .../crash/{crash_7.3.0.bb => crash_8.0.0.bb}  | 13 +--
+>  ...makedumpfile-replace-hardcode-CFLAGS.patch | 53 ++++++-------
+>  ...umpfile_1.7.0.bb => makedumpfile_1.7.1.bb} |  8 +-
+>  .../tomoyo-tools/tomoyo-tools_2.5.0.bb        |  3 +-
+>  meta-oe/recipes-shells/tcsh/tcsh_6.22.04.bb   |  6 +-
+>  ...de-perl_3.16.bb => libencode-perl_3.17.bb} |  2 +-
+>  ...3.bb => libextutils-cppguess-perl_0.26.bb} |  2 +-
+>  ...l_3.42.bb => libtest-harness-perl_3.44.bb} |  5 +-
+>  46 files changed, 231 insertions(+), 373 deletions(-)
+>  rename meta-gnome/recipes-gnome/evince/{evince_42.1.bb => evince_42.2.bb} (92%)
+>  rename meta-gnome/recipes-gnome/gspell/{gspell_1.9.1.bb => gspell_1.10.0.bb} (76%)
+>  rename meta-gnome/recipes-gnome/gtksourceview/{gtksourceview5_5.4.0.bb => gtksourceview5_5.4.1.bb} (85%)
+>  rename meta-gnome/recipes-gnome/libadwaita/{libadwaita_1.1.0.bb => libadwaita_1.1.1.bb} (86%)
+>  rename meta-gnome/recipes-gnome/nautilus/{nautilus_42.0.bb => nautilus_42.1.1.bb} (92%)
+>  delete mode 100644 meta-multimedia/recipes-multimedia/pipewire/files/0001-meson-Add-option-to-enable-disable-legacy-RTKit-modu.patch
+>  rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.49.bb => pipewire_0.3.50.bb} (98%)
+>  rename meta-networking/recipes-support/htpdate/{htpdate_1.3.3.bb => htpdate_1.3.4.bb} (92%)
+>  create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/0001-make-Add-PREFIX-knob.patch
+>  rename meta-oe/recipes-bsp/lsscsi/{lsscsi_0.31.bb => lsscsi_0.32.bb} (70%)
+>  create mode 100644 meta-oe/recipes-extended/boinc/boinc-client/0001-scripts-Do-not-check-for-files-on-build-host.patch
+>  create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch
+>  rename meta-oe/recipes-extended/hexedit/{hexedit_1.5.bb => hexedit_1.6.bb} (90%)
+>  delete mode 100644 meta-oe/recipes-kernel/crash/crash/0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch
+>  delete mode 100644 meta-oe/recipes-kernel/crash/crash/0003-crash-detect-the-sysroot-s-glibc-header-file.patch
+>  delete mode 100644 meta-oe/recipes-kernel/crash/crash/remove-unrecognized-gcc-option-m32-for-mips.patch
+>  delete mode 100644 meta-oe/recipes-kernel/crash/crash/sim-common-sim-arange-fix-extern-inline-handling.patch
+>  delete mode 100644 meta-oe/recipes-kernel/crash/crash/sim-ppc-drop-LIBS-from-psim-dependency.patch
+>  rename meta-oe/recipes-kernel/crash/{crash_7.3.0.bb => crash_8.0.0.bb} (87%)
+>  rename meta-oe/recipes-kernel/makedumpfile/{makedumpfile_1.7.0.bb => makedumpfile_1.7.1.bb} (85%)
+>  rename meta-perl/recipes-perl/libencode/{libencode-perl_3.16.bb => libencode-perl_3.17.bb} (97%)
+>  rename meta-perl/recipes-perl/libextutils/{libextutils-cppguess-perl_0.23.bb => libextutils-cppguess-perl_0.26.bb} (92%)
+>  rename meta-perl/recipes-perl/libtest/{libtest-harness-perl_3.42.bb => libtest-harness-perl_3.44.bb} (95%)
+>
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#96867): https://lists.openembedded.org/g/openembedded-devel/message/96867
+> Mute This Topic: https://lists.openembedded.org/mt/90801826/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
