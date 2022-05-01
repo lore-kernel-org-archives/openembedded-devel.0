@@ -1,191 +1,96 @@
-Return-Path: <stephensportia@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DF96C433F5
-	for <webhook@archiver.kernel.org>; Sun,  1 May 2022 03:46:14 +0000 (UTC)
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com
- [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web11.29960.1651376771859263134
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 872D8C433F5
+	for <webhook@archiver.kernel.org>; Sun,  1 May 2022 14:59:38 +0000 (UTC)
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
+ [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.web08.34682.1651417161544886013
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Apr 2022 20:46:12 -0700
+ Sun, 01 May 2022 07:59:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=No8HVFGh;
- spf=pass (domain: gmail.com, ip: 209.85.214.172,
- mailfrom: stephensportia@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id i1so4040728plg.7
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=DUn0MpMP;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f170.google.com with SMTP id g8so8171201pfh.5
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Apr 2022 20:46:11 -0700 (PDT)
+ Sun, 01 May 2022 07:59:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=XOVyS3hw5w7DZEsulbFcKQhLpOB7DJiQcidjC2SebH4=;
-        b=No8HVFGhfnYNPaTffQe8W2BWRWCqksSKdKlfmGCGkilzRnnCAgpbxrplVchGK6OR+1
-         jAJNTVmpiD+fw98MXX/8JnEmC0UC/uH8ZMt5wCI7M4xvukc8fTwd7jiSQFByCrcKNk6c
-         aQnMv4X8zKA2g0Zl93P4xqnVDM5xpGzFaKBmumQzjQKLdca2Z5YVck4uJ8LfNyD1CBtP
-         tayYHClN55ADeH9GC9hb4+3kAGqUepnxwpsO3qPgyjd/UHxAByaxL3k0MPWNAiUdhrll
-         S37O9TNQtpYf2g5IjRixExCfLB/+5BHOgmbCKNrfqAlzXcN/lTjEWDTsd+RQ4vWE62u7
-         jikQ==
+        bh=plLrVNbbcDePRufSpw68Bf7qdMrmR7U7Jj25jRPTUwc=;
+        b=DUn0MpMPHJSJXwdkoY2nsa+jl6PqqYrC/ejzOTo65k6BGjj6v+3VwBk5S8VBdJGFEh
+         AibjnkaydJuFDwsx7V7NTOyIix1eutOIuFXZ8jpApW9dW4YLCAtP7EoDvd/5+FSS8XJR
+         bOaPhrl3I48wMjxaZ9FY/yTFyVNh877MTQpzchKgrzJRlkikY2Ndx5Ew3tAr4ydUlDvz
+         srOn23R9cWYMymQc4hfhMeFtofbrZQy2Bp3gyolN7kf9xtyerCIRPN9MXMkwMWtSBUt5
+         lh6Zx6r76xwrFwzXOBhdC9+5irgB2eMQVm4JpfK87u6NaeaqH4Ewxsh6X2a/IADaMTsW
+         43bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=XOVyS3hw5w7DZEsulbFcKQhLpOB7DJiQcidjC2SebH4=;
-        b=bCHuaoinpWchft3OKTgsFbVahl1oM0FFgYeZm8ST9Ec/FRhKlx5bXUFeyqvvKKNmW7
-         DoexJ9SGeRcpZASDR4nNoc7f59IC5ObSCfPz+OeIXrWCxohhPOouAe3EZmZOqHS/lSSP
-         SakrBG02CyRTFQ23JkroD2cqS+i10xDgeDfWYasri79nx1i8pFxnlh7B3Fbdk3SXnm0+
-         KE8HAI/jDOCfDUVAaW+kLkKieALTR/T7ds5b2YKj3u0mIzjA3y+PXWo0EBq9p5hSTvbg
-         cgBHMV4ajnqWpnYCEgeVKaygn2wowa0VgvoYBu7oNRitqZWM915+HMYAOeU7yADBLbhu
-         3HZw==
-X-Gm-Message-State: AOAM53110FB1V6E1MzJyF3PiSPs3Sr8Q9T5O3Ko8e1ZA7SKIKRc8Ibvu
-	b3Aoq1S1CA477cS02rOlBxC8E7zgRhI=
+        bh=plLrVNbbcDePRufSpw68Bf7qdMrmR7U7Jj25jRPTUwc=;
+        b=OqbiTAKMkdGDHnTvDFFRISLBFkldfiKXXJSPqv+wYV6G6GnTo5M+7OeAS1J9ozcUna
+         BODRAqq/7q84tX1c6BpaT/GPcyxgbzMexn8mU36kI5NrH/ft+UuRqZKAFhDxCq7Nl0Ut
+         +QX6C92cPVVJu1yVv/q/s9vZyATXrqnwCnSBT7Mv/xhF0Mw/4OyuZYHH9D6vFdYm8ec7
+         /WOzEtgxN6u+091S7Kup89EaZVcmQwLOTZogS43vCnt7HvFjUF+oPHYvRK9Q+vueOa7y
+         RoCiYOMMkKyPYWo97/6/ph43vFJ521EsXAmdTfmTlplFFOU0C8ek6260pbmtqHHqrN77
+         YjRg==
+X-Gm-Message-State: AOAM530CpMcFqnmCKLao5xL4i7CFbHzZ6rM2J8LGOPr/Q+BJjeR0bgTy
+	1L6XNqFrM9EjuVe5WWKq1r0OI6eMIRURMA==
 X-Google-Smtp-Source: 
- ABdhPJx4yM/RzPAwyYG4QSyTZ0n7uWH1siyJ49qIgKxXE+LIdwx4A3UgxPzJ2mMYzRmV0EoYxdBi/g==
-X-Received: by 2002:a17:902:a583:b0:15d:197b:9259 with SMTP id
- az3-20020a170902a58300b0015d197b9259mr6322676plb.51.1651376770969;
-        Sat, 30 Apr 2022 20:46:10 -0700 (PDT)
-Received: from fembot.alistair23.me
- (2403-580b-97e8--3fb3-217a-1f80-90f1.ip6.aussiebb.net.
- [2403:580b:97e8:0:3fb3:217a:1f80:90f1])
+ ABdhPJzgtImE4HKbXRgXBzbU+bkX2I1Y2B11HCD5ESY1vux5We1HskSAoNE5kHs5jm0ENiGbgJG6OQ==
+X-Received: by 2002:aa7:970f:0:b0:50d:301e:e6ce with SMTP id
+ a15-20020aa7970f000000b0050d301ee6cemr7143168pfg.61.1651417160756;
+        Sun, 01 May 2022 07:59:20 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::2ca3])
         by smtp.gmail.com with ESMTPSA id
- a37-20020a634d25000000b003c14af505ecsm9010130pgb.4.2022.04.30.20.46.08
+ x16-20020a170902b41000b0015e8d4eb253sm2973764plr.157.2022.05.01.07.59.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 30 Apr 2022 20:46:10 -0700 (PDT)
-From: Portia <stephensportia@gmail.com>
+        Sun, 01 May 2022 07:59:20 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Portia <stephensportia@gmail.com>,
-	Bassem Boubaker <bassem.boubaker@actia.fr>
-Subject: [meta-oe][PATCH] cpulimit: introduce support for this package
-Date: Sun,  1 May 2022 13:45:33 +1000
-Message-Id: <20220501034533.8342-1-stephensportia@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] makedumpfile: Use right TARGET for ppc32
+Date: Sun,  1 May 2022 07:59:18 -0700
+Message-Id: <20220501145918.2352072-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.36.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 01 May 2022 03:46:14 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 01 May 2022 14:59:38 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96908
+ https://lists.openembedded.org/g/openembedded-devel/message/96909
 
-Now, cpulimit recipe is put under recipes-support. Binary will be
-installed  by the recipe under /usr/sbin
-
-         # cpulimit -h
-         Usage: cpulimit [OPTIONS...] TARGET
-                 OPTIONS
-                 -l, --limit=N          percentage of cpu allowed from 0
-to 100
-(required)
-                 -v, --verbose          show control statistics
-                 -z, --lazy             exit if there is no target
-process, or
-if it dies
-                 -i, --include-children limit also the children
-processes
-                 -h, --help             display this help and exit
-                 TARGET must be exactly one of these:
-                 -p, --pid=N            pid of the process (implies -z)
-                 -e, --exe=FILE         name of the executable program
-file or
-path name
-                 COMMAND [ARGS]         run this command and limit it
-(implies
--z)
-
-                 Report bugs to <marlon...@hotmail.com>.
-
-Signed-off-by: Bassem Boubaker <bassem.boubaker@actia.fr>
-[ Changes by Portia
- - Fix build issue, deprecated and missing includes
- - Add branch to git repo in SRC_URI
- - Update LICENSE to GPL-2.0-or-later
-]
-Signed-off-by: Portia <stephensportia@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...l.h-and-add-missing-libgen.h-include.patch | 41 +++++++++++++++++++
- .../recipes-support/cpulimit/cpulimit_0.2.bb  | 22 ++++++++++
- 2 files changed, 63 insertions(+)
- create mode 100644 meta-oe/recipes-support/cpulimit/cpulimit/0001-Remove-sys-sysctl.h-and-add-missing-libgen.h-include.patch
- create mode 100644 meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
+ meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.1.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/cpulimit/cpulimit/0001-Remove-sys-sysctl.h-and-add-missing-libgen.h-include.patch b/meta-oe/recipes-support/cpulimit/cpulimit/0001-Remove-sys-sysctl.h-and-add-missing-libgen.h-include.patch
-new file mode 100644
-index 000000000..50d0342ec
---- /dev/null
-+++ b/meta-oe/recipes-support/cpulimit/cpulimit/0001-Remove-sys-sysctl.h-and-add-missing-libgen.h-include.patch
-@@ -0,0 +1,41 @@
-+From 41cfba0840f58555593fd4bee07db77221043e0b Mon Sep 17 00:00:00 2001
-+From: Portia <stephensportia@gmail.com>
-+Date: Sun, 1 May 2022 12:43:35 +1000
-+Subject: [PATCH] Remove sys/sysctl.h and add missing libgen.h include
+diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.1.bb b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.1.bb
+index c3f965b041..eb004c2ed5 100644
+--- a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.1.bb
++++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.7.1.bb
+@@ -36,9 +36,13 @@ SECTION = "base"
+ # If we do not specify TARGET, makedumpfile will build for the host but use the
+ # target gcc.
+ #
 +
-+- sys/sysctl.h has been deprecated and should be removed
-+- Adds missing libgen.h include when calling basename()
++MAKEDUMPFILE_TARGET ?= "${TARGET_ARCH}"
++MAKEDUMPFILE_TARGET:powerpc = "ppc"
 +
-+Upstream-Status: Inactive-Upstream [2015]
-+Signed-off-by: Portia <stephensportia@gmail.com>
-+---
-+ src/cpulimit.c      | 1 -
-+ src/process_group.c | 1 +
-+ 2 files changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/cpulimit.c b/src/cpulimit.c
-+index 50eabea..5b0ec49 100644
-+--- a/src/cpulimit.c
-++++ b/src/cpulimit.c
-+@@ -38,7 +38,6 @@
-+ #include <string.h>
-+ #include <sys/stat.h>
-+ #include <sys/time.h>
-+-#include <sys/sysctl.h>
-+ #include <sys/resource.h>
-+ #include <sys/types.h>
-+ #include <sys/wait.h>
-+diff --git a/src/process_group.c b/src/process_group.c
-+index 06d73a6..d4f6fab 100644
-+--- a/src/process_group.c
-++++ b/src/process_group.c
-+@@ -24,6 +24,7 @@
-+ #include <limits.h>
-+ #include <sys/time.h>
-+ #include <signal.h>
-++#include <libgen.h>
-+
-+ #include <assert.h>
-+
-+--
-+2.25.1
-diff --git a/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb b/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
-new file mode 100644
-index 000000000..3ee2b5c23
---- /dev/null
-+++ b/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "cpulimit is a tool which limits the CPU usage of a process"
-+HOMEPAGE = "http://cpulimit.sourceforge.net"
-+LICENSE = "GPL-2.0-or-later"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=86c1c0d961a437e529db93aa3bb32dc4"
-+SRCREV ?= "f4d2682804931e7aea02a869137344bb5452a3cd"
-+
-+SRC_URI = "git://g...@github.com/opsengine/cpulimit.git;protocol=https;branch=master \
-+           file://0001-Remove-sys-sysctl.h-and-add-missing-libgen.h-include.patch \
-+           "
-+
-+S = "${WORKDIR}/git"
-+
-+do_compile() {
-+    oe_runmake all
-+}
-+do_install() {
-+    install -d ${D}${sbindir}
-+    install -m 0755 ${B}/src/${PN} ${D}${sbindir}/
-+}
-+
-+CFLAGS += "${LDFLAGS}"
-+
+ EXTRA_OEMAKE = "\
+     LINKTYPE=static \
+-    TARGET=${TARGET_ARCH} \
++    TARGET=${MAKEDUMPFILE_TARGET} \
+     ${PACKAGECONFIG_CONFARGS} \
+ "
+ 
 -- 
-2.25.1
+2.36.0
 
 
