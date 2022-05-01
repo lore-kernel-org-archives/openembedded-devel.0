@@ -1,108 +1,146 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C95F5C433F5
-	for <webhook@archiver.kernel.org>; Sun,  1 May 2022 16:21:49 +0000 (UTC)
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
- [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web08.102.1651422101789484131
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C669FC433EF
+	for <webhook@archiver.kernel.org>; Sun,  1 May 2022 16:26:49 +0000 (UTC)
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com
+ [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web08.158.1651422406704686841
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 01 May 2022 09:21:41 -0700
+ Sun, 01 May 2022 09:26:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=H6JsinLl;
- spf=pass (domain: gmail.com, ip: 209.85.214.178,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id c11so629753plg.13
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=fa/XPNt+;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id i24so10660878pfa.7
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 01 May 2022 09:21:41 -0700 (PDT)
+ Sun, 01 May 2022 09:26:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=xM3FdXQ7COwafLKs/ae7QCcbdQe9lCP+9pyHBpMR2QM=;
-        b=H6JsinLlwmbMUJCTB56R7e4bZDXW7BX7hi8b7xwzT1+0gE92sicnKVaBIqF8VEzyqJ
-         PAwxtMPlpIf4UBpjuS1jZNuWxsNi8wtNJ5RSuWkVKfY8WODaeMW7McKU+AoHmhxuZFG0
-         SCmTO/3KoPqL7+PNcgmwSNtdtUp0kCmNV0BG0jo6XI+XKtTTiSN70EvQoANKEGNv6YlJ
-         0xVnAghn/htwEm87hRAcZkazXxcgxjJJor3tB9xuJCuvkW7HQ+h1dh7iUe70kFsW8fTO
-         Q3PEkTYPQR8um/sOZvHPzE4LK98n8wirrD7vutJvz+t35GsEWDIuu4VzGoQadqdl2x7N
-         qYcw==
+        bh=Xxp4N5sQm34od6G4r2bzggvtdjkFRVOSoW9ON//I8cg=;
+        b=fa/XPNt+NGlMDZVKqTgHMGQjEAcbjV9BqKzpeq/UVX0rfEvDXWZ2YE85Hf8+e+kns7
+         /qkuXhyf3oQlPeYZGsgKIprD6dzQTEAJg0U4k5Kl6Z/VvlrF2A5/Fy8+tEbevLZb8fCg
+         jz3QFkhBK/nJ1S72nPSnyT55gOXTW7AUBYL3eNOtqspKT37+RIvLWKXu1eSuoIwD2IRJ
+         Wm8pAi17/25DETdHN10xqsuUUZxP6SCo8C6PX6Xg90h7OPdId+xc3px6pfhCpOM23OJN
+         VnZ5GfZDmjnrbshyc+lsYSy8J1hQ4cKul/2/7O1Dqk43HbnGRxZBk17oG5uYPJeN+JbG
+         64hQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=xM3FdXQ7COwafLKs/ae7QCcbdQe9lCP+9pyHBpMR2QM=;
-        b=esR/Xr3AZo41dklT26ezmeuhDjFlCdwENARCGa4nCHDMcR6Lz5JwD4LC9mwy0lFroZ
-         D/rEicYECnuaia0+EkxeQowwcEVvd+0LEVGxBSlUGgZwmfuSxJUD5i1Ufl/GD04SY38G
-         1MTsUTy+725WorqzpfJLhzS/f4EUaS6XHOzAPY6Z5PkW9b2U7K8K+NzqEYJ4zPP0dDM/
-         42s4KSvrwTUqAf/Supw/YSsdXG3/zkVazEG5wKivZd2g2gN4aslCVM3KPag4BWFRdmsB
-         bKm+YDHrhNfbqzKPoc5wCLMjjX3Tk/jlE3x2nYoEZ2aoO4pDeuO0FhPwDL9SxYapo1lW
-         Rhsg==
-X-Gm-Message-State: AOAM531Y2fw/8pl7Vv9EU5VirWSeNiTQ75ogpB0oUUdfPbM7yKMwkN2d
-	EDO99hhwKH94oHnBkzOuAJBRJYtgALh2WA==
+        bh=Xxp4N5sQm34od6G4r2bzggvtdjkFRVOSoW9ON//I8cg=;
+        b=7nTGiNWiMVe9Vdt3QafRyY4HrX+0vlkcA7a5JPHs+TtAkHGKS/mKG2uvEdqGfnOhaM
+         /X2rcngXEA+PQwcsBmbt8Z7hobccRfboDQcTbvbHrDQVABKValNW8RE8ME3QYc6KvpCR
+         WETH1aysK/voVBk2K81PeoRIqgAUW2DKSgHi6lC7k2Da6h73a3o9ja7MUdr9TInrgvVg
+         cDAm2a6InaA2/6uRgoD+YOcHTRTwnkQxp9UBF6Qdkro3gemLPrrGPpyCYo7370Fw5MFZ
+         8rHbnNtp1g/JDst1RVLbA+YQ3bpMGZgH3fBdrnPyyvqreOa6aLppTkWDROzWg8HCjRCO
+         QUjg==
+X-Gm-Message-State: AOAM530d9r8XjShOUEdh437Fgi2QRbIdQxx6hSerGRIlOf2pDaRh+qL5
+	vQjxa09PDptUD9aihTGNF66pqsKlHJz/UA==
 X-Google-Smtp-Source: 
- ABdhPJxG3tdMW430OBaQQuxFJqYqT12EapJoGYcZZIsZYMUgZxZFawTHHxjdizel6Re0hSMvclhVhQ==
-X-Received: by 2002:a17:90b:694:b0:1d9:6a2e:bc9 with SMTP id
- m20-20020a17090b069400b001d96a2e0bc9mr13851287pjz.169.1651422101058;
-        Sun, 01 May 2022 09:21:41 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::2ca3])
+ ABdhPJxyaTXBjqyNLTbvaSTkanWOvKhnQ8gIaDxl+EudBCnrk8Q0z3Zwv/aLqjhQXOixwX8waACGDw==
+X-Received: by 2002:a05:6a00:230d:b0:4f6:ec4f:35ff with SMTP id
+ h13-20020a056a00230d00b004f6ec4f35ffmr7777546pfh.53.1651422405712;
+        Sun, 01 May 2022 09:26:45 -0700 (PDT)
+Received: from keaua.caveonetworks.com
+ ([2601:202:4180:a5c0:9a0c:5968:29f0:efcf])
         by smtp.gmail.com with ESMTPSA id
- y15-20020a1709027c8f00b0015e8d4eb221sm3048522pll.107.2022.05.01.09.21.40
+ h19-20020a170902f2d300b0015e8d4eb243sm3063569plc.141.2022.05.01.09.26.44
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 01 May 2022 09:21:40 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Sun, 01 May 2022 09:26:45 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Robert Yang <liezhi.yang@windriver.com>
-Subject: [meta-python][PATCH] python3-wxgtk4: Needs x11 for sip module
-Date: Sun,  1 May 2022 09:21:37 -0700
-Message-Id: <20220501162137.2438749-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.36.0
+Subject: [meta-oe][PATCH 00/10] re-org layers
+Date: Sun,  1 May 2022 09:26:33 -0700
+Message-Id: <20220501162643.513646-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 01 May 2022 16:21:49 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 01 May 2022 16:26:49 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96911
+ https://lists.openembedded.org/g/openembedded-devel/message/96912
 
-sip/cpp/sip_corewxWindow.cpp requires gdk/gdkx.h which wont be built
-when gtk is built without x11, therefore require x11 when building this
-recipe, if gdkx.h is removed form includes then it fails
+This series enables meta-networking to drop the layer depends
+on meta-python.
 
-../../../../sip/cpp/sip_corewxWindow.cpp:56:16: error: unknown type name 'XID'
-        static XID GetXWindow(const wxWindow* wxwin) {
-               ^
-../../../../sip/cpp/sip_corewxWindow.cpp:59:28: error: use of undeclared identifier 'GDK_WINDOW_XID'
-                    return GDK_WINDOW_XID(gtk_widget_get_window((wxwin)->m_wxwindow));
-                           ^
-../../../../sip/cpp/sip_corewxWindow.cpp:64:28: error: use of undeclared identifier 'GDK_WINDOW_XID'
-                    return GDK_WINDOW_XID(gtk_widget_get_window((wxwin)->m_widget));
-                           ^
-so it is using it and will need some work to get it going without x11
-until then disable building it on non-x11 distros
+Armin Kuster (10):
+  crda: move to a dynamic-layer for python
+  cyrus-sasl: move from meta-networking to meta-oe
+  netplan: move from meta-networking to meta-oe
+  nvmetcli: move recipe to meta-oe
+  packagegroup-meta-oe: update pkg group
+  python3-ldap: move to meta-python
+  packagegroup-meta-python.bb: update pkg group
+  firewalld: move to dynamic meta-python layer
+  packagegroup-meta-networking: update pkg group
+  meta-networking: drop meta-python layer depends
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Robert Yang <liezhi.yang@windriver.com>
----
- .../recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.1.1.bb     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/conf/layer.conf                            | 1 -
+ .../crda/0001-Make-alpha2-to-be-3-characters-long.patch    | 0
+ .../crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch    | 0
+ .../crda/crda/crda-4.14-python-3.patch                     | 0
+ .../crda/crda/do-not-run-ldconfig-if-destdir-is-set.patch  | 0
+ .../crda/crda/fix-gcc-6-unused-variables.patch             | 0
+ .../crda/crda/fix-issues-when-USE_OPENSSL-1.patch          | 0
+ .../crda/fix-linking-of-libraries-used-by-reglib.patch     | 0
+ .../meta-python}/recipes-connectivity/crda/crda/make.patch | 0
+ .../crda/crda/use-target-word-size-instead-of-host-s.patch | 0
+ .../meta-python}/recipes-connectivity/crda/crda_3.18.bb    | 0
+ .../recipes-connectivity/firewalld/files/firewalld.init    | 0
+ .../recipes-connectivity/firewalld/firewalld_0.9.4.bb      | 0
+ .../packagegroups/packagegroup-meta-networking.bb          | 6 +-----
+ .../netplan/netplan/0001-Makefile-do-not-use-Werror.patch  | 0
+ .../netplan/0001-Makefile-fix-parallel-build-failure.patch | 0
+ .../0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch     | 0
+ .../recipes-connectivity/netplan/netplan_0.104.bb          | 0
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 7 +++++++
+ .../0001-sample-Rename-dprintf-to-cyrus_dprintf.patch      | 0
+ .../cyrus-sasl/cyrus-sasl/CVE-2019-19906.patch             | 0
+ .../cyrus-sasl/cyrus-sasl/Fix-hardcoded-libdir.patch       | 0
+ .../cyrus-sasl/cyrus-sasl/avoid-to-call-AC_TRY_RUN.patch   | 0
+ .../debian_patches_0014_avoid_pic_overwrite.diff           | 0
+ .../cyrus-sasl/cyrus-sasl/saslauthd.conf                   | 0
+ .../cyrus-sasl/cyrus-sasl/saslauthd.service                | 0
+ .../recipes-networking}/cyrus-sasl/cyrus-sasl_2.1.28.bb    | 0
+ .../recipes-support/nvmetcli/nvmetcli_0.7.bb               | 0
+ .../recipes-core/packagegroups/packagegroup-meta-python.bb | 1 +
+ .../recipes-networking}/python/python3-ldap_3.4.0.bb       | 0
+ 30 files changed, 9 insertions(+), 6 deletions(-)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda/crda-4.14-python-3.patch (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda/do-not-run-ldconfig-if-destdir-is-set.patch (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda/fix-gcc-6-unused-variables.patch (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda/fix-issues-when-USE_OPENSSL-1.patch (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda/make.patch (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda/use-target-word-size-instead-of-host-s.patch (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda_3.18.bb (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/firewalld/files/firewalld.init (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/firewalld/firewalld_0.9.4.bb (100%)
+ rename {meta-networking => meta-oe/dynamic-layers/meta-python}/recipes-connectivity/netplan/netplan/0001-Makefile-do-not-use-Werror.patch (100%)
+ rename {meta-networking => meta-oe/dynamic-layers/meta-python}/recipes-connectivity/netplan/netplan/0001-Makefile-fix-parallel-build-failure.patch (100%)
+ rename {meta-networking => meta-oe/dynamic-layers/meta-python}/recipes-connectivity/netplan/netplan/0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch (100%)
+ rename {meta-networking => meta-oe/dynamic-layers/meta-python}/recipes-connectivity/netplan/netplan_0.104.bb (100%)
+ rename {meta-networking/recipes-daemons => meta-oe/recipes-networking}/cyrus-sasl/cyrus-sasl/0001-sample-Rename-dprintf-to-cyrus_dprintf.patch (100%)
+ rename {meta-networking/recipes-daemons => meta-oe/recipes-networking}/cyrus-sasl/cyrus-sasl/CVE-2019-19906.patch (100%)
+ rename {meta-networking/recipes-daemons => meta-oe/recipes-networking}/cyrus-sasl/cyrus-sasl/Fix-hardcoded-libdir.patch (100%)
+ rename {meta-networking/recipes-daemons => meta-oe/recipes-networking}/cyrus-sasl/cyrus-sasl/avoid-to-call-AC_TRY_RUN.patch (100%)
+ rename {meta-networking/recipes-daemons => meta-oe/recipes-networking}/cyrus-sasl/cyrus-sasl/debian_patches_0014_avoid_pic_overwrite.diff (100%)
+ rename {meta-networking/recipes-daemons => meta-oe/recipes-networking}/cyrus-sasl/cyrus-sasl/saslauthd.conf (100%)
+ rename {meta-networking/recipes-daemons => meta-oe/recipes-networking}/cyrus-sasl/cyrus-sasl/saslauthd.service (100%)
+ rename {meta-networking/recipes-daemons => meta-oe/recipes-networking}/cyrus-sasl/cyrus-sasl_2.1.28.bb (100%)
+ rename {meta-networking => meta-oe}/recipes-support/nvmetcli/nvmetcli_0.7.bb (100%)
+ rename {meta-networking/recipes-devtools => meta-python/recipes-networking}/python/python3-ldap_3.4.0.bb (100%)
 
-diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.1.1.bb b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.1.1.bb
-index 3583acc9cd..6ec92c2cec 100644
---- a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.1.1.bb
-+++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.1.1.bb
-@@ -18,7 +18,7 @@ S = "${WORKDIR}/wxPython-${PV}"
- 
- inherit pypi setuptools3 pkgconfig features_check
- 
--ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
-+REQUIRED_DISTRO_FEATURES = "x11"
- 
- export WX_CONFIG = "'${RECIPE_SYSROOT_NATIVE}${bindir}/wx-config --prefix=${STAGING_EXECPREFIXDIR} --baselib=${baselib}'"
- 
 -- 
-2.36.0
+2.25.1
 
 
