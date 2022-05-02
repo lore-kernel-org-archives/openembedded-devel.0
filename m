@@ -1,131 +1,136 @@
-Return-Path: <windel.bouwman@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B967DC433EF
-	for <webhook@archiver.kernel.org>; Mon,  2 May 2022 14:14:59 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com
- [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web09.11098.1651500898822198583
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7AEDC433F5
+	for <webhook@archiver.kernel.org>; Mon,  2 May 2022 14:33:49 +0000 (UTC)
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com
+ [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.web08.11428.1651502029042986027
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 May 2022 07:14:59 -0700
+ Mon, 02 May 2022 07:33:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Fbi3wUGJ;
- spf=pass (domain: gmail.com, ip: 209.85.218.53,
- mailfrom: windel.bouwman@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id l18so27991116ejc.7
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=dQ6tTbCN;
+ spf=pass (domain: gmail.com, ip: 209.85.215.182,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f182.google.com with SMTP id r83so11843603pgr.2
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 May 2022 07:14:58 -0700 (PDT)
+ Mon, 02 May 2022 07:33:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
+        h=from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=p1IocPm+x1zVdTbRtLSJXu75dvz+bRE1Uykh5IF6bs4=;
-        b=Fbi3wUGJjBCtulkI+5U2zXAdKLeltwqF7F5caxQdu38uhKWZMKRfaS/ddjNjXAxUmA
-         GjbshMAYEfw5zd6bG/ntRUlSVkyZa03EHW/lJq1htw9AWcCq8epDd7HHJhfX6XQ2Hrap
-         aRS1ThLuk5VfMmsBTSqFBSuPwoiYtlu4wH21JFaQ+H3CRexa/Flj1GOhD62HGBiOBKJ1
-         ZqAfUFlIYG2UuhQPH5kFk88q+BGf/QhbxZQT9iPL8UeXmfBO15G+mRUQk3Mj6WuBYpyB
-         TqFREefOP87KuJdHeXkFj2VKQgfT/UnwnDRpE6B3lirPOHNt2gfIsMoCFICJNO0W/P4+
-         VyMA==
+        bh=4e7KU2SL0wMXQyXib3zr0XKx+4oh/E5Kou1gemAEUU8=;
+        b=dQ6tTbCNNe2qRbtcUnPzT1KzGBJcI8U6taK0t2Llb1/ABMx+s6ka8WH/BBYINS+sCr
+         ysYTzYJE1BXRnkIY4VhFZuma1ruJ94oo3zsFmawt26QMYVSy2spJ3zjoSLCGsJUFmztz
+         nw7Sv7HtEWOWtK78RaXe2YBXtguuIshxuMHcF+nvZyNIXRILyk3OTcwPjs1Tn1wn+H3s
+         PkwKJuftTQuRt8BjYVahujSiUrGa1cXLq03j/BqOjTELineOP55w4xowV+Obtxx4dzBL
+         UiHq1qedU1UWQSs8PczxVzuIsZdq9wj3zkuWXbMbxU5Mn5cq8KIK+m7wkibHmdpAwH2h
+         kJgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=p1IocPm+x1zVdTbRtLSJXu75dvz+bRE1Uykh5IF6bs4=;
-        b=EVFLWzggAZ8LN9nRXFG+ZF4BZO36/LbWHDN8Q8k9RjKhkNlg2liKtmap+9ow+PM6No
-         D/zMh8ncIgQBHmq8MGIfzDBMFtCgewrxwKwgH4o3U3IJYVmAarwnA9zl9Fd5I56kAsRx
-         CekP6hwhysoJ+Lej33DviI/M9lN71eaFq7Ub0sNdgR0V7u/78IvmJIJWV5SJHIdDIRaU
-         GHjZDrsvOA8CgbrxYI8fNDwHblGsYFiwx0OzeKjmM1F91/WTc3t6kLuPhA0Jpp12v0eB
-         TqOw/aIIxY/V9BSUKaTGsV7ck6blDwOrj5Ptd97D1cfaPCnubOaFxvynciBOVO2Cnn1I
-         FJgA==
-X-Gm-Message-State: AOAM530NNZK6yM2BZKZ77d2zBa3tbYU7qYCFNS1D2yPG2ld7H5DV66xA
-	DeVJEAdiMg88ONTMmeJt9YxZ+j8aMrQ=
+        bh=4e7KU2SL0wMXQyXib3zr0XKx+4oh/E5Kou1gemAEUU8=;
+        b=MAH7Nxz9L/4RDLqu3/in+Fu2N0aURbnND6DzbhCOjqQj+eM+VY+/f3Jg6d8H8sY4HN
+         eksojVQnIF6ijihFddUCeWUQjmFmtbmd59JmrWMvwPQKZvRp/iWCldHvfWfTPEghx60F
+         KazOMFFw6yt38/M81JQXpyq8icnHxYSy6JHLBeJPLUdgkpmXgqqApCp7kz/rl753/yp6
+         BHDhV8vF6DtUV7q83K4leXt25w24Z5PBpHoVIbFs9v0EzPiQwOsZM/ktTs+U6Oj5o8DB
+         ACIS/ZqNestSa4mxEsgkpHAZc4m63t2lHm6jheD8s+tezUN9H5NhfQQlt8gY776Lrutz
+         tqKg==
+X-Gm-Message-State: AOAM5333eWULDhGkXYtgDbhiMSRV8uZEkyqX0qVM+2BlGG303J/P1buI
+	mDzr1PFp23PleSR9bZo8ZNyStYkOJhUWHw==
 X-Google-Smtp-Source: 
- ABdhPJyROdEvtUqu5n2j0hQ6kIFoZTpvHFCDMx9bBGAjPedYsSKBAw4Pg+4goQ3Ob/FP+USHdxuRdA==
-X-Received: by 2002:a17:906:c145:b0:6f3:9ea7:1d41 with SMTP id
- dp5-20020a170906c14500b006f39ea71d41mr11252121ejc.269.1651500896982;
-        Mon, 02 May 2022 07:14:56 -0700 (PDT)
-Received: from PC882.demcon.local (77-174-125-73.fixed.kpn.net.
- [77.174.125.73])
+ ABdhPJzX228T6fGrYkkw72sa1kbVcJfR2iL+ehbXCmX/RD5vF/jS+FIrsEnmSYryNHM9E6X2WBYfvA==
+X-Received: by 2002:a63:de12:0:b0:3ab:7c33:2894 with SMTP id
+ f18-20020a63de12000000b003ab7c332894mr9971467pgg.187.1651502028038;
+        Mon, 02 May 2022 07:33:48 -0700 (PDT)
+Received: from keaua.caveonetworks.com
+ ([2601:202:4180:a5c0:33c6:b9d3:2a7b:1418])
         by smtp.gmail.com with ESMTPSA id
- gv1-20020a1709072bc100b006f3ef214dd2sm3650949ejc.56.2022.05.02.07.14.56
+ i14-20020a17090332ce00b0015e8d4eb1f0sm4785518plr.58.2022.05.02.07.33.46
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 May 2022 07:14:56 -0700 (PDT)
-From: Windel Bouwman <windel.bouwman@gmail.com>
-X-Google-Original-From: Windel Bouwman <windel@windel.nl>
+        Mon, 02 May 2022 07:33:46 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Windel Bouwman <windel@windel.nl>
-Subject: [meta-filesystems][PATCH] Add zfs recipe
-Date: Mon,  2 May 2022 16:14:41 +0200
-Message-Id: <20220502141441.26320-1-windel@windel.nl>
+Subject: [meta-oe][v2][PATCH 01/10] crda: move to a dynamic-layer for python
+Date: Mon,  2 May 2022 07:33:36 -0700
+Message-Id: <20220502143345.1500852-1-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 May 2022 14:14:59 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 May 2022 14:33:49 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96929
+ https://lists.openembedded.org/g/openembedded-devel/message/96930
 
-Signed-off-by: Windel Bouwman <windel@windel.nl>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-filesystems/zfs/zfs_2.1.4.bb      | 46 +++++++++++++++++++
- 1 file changed, 46 insertions(+)
- create mode 100644 meta-filesystems/recipes-filesystems/zfs/zfs_2.1.4.bb
+ .../crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch      | 0
+ .../crda/crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch      | 0
+ .../recipes-connectivity/crda/crda/crda-4.14-python-3.patch       | 0
+ .../crda/crda/do-not-run-ldconfig-if-destdir-is-set.patch         | 0
+ .../crda/crda/fix-gcc-6-unused-variables.patch                    | 0
+ .../crda/crda/fix-issues-when-USE_OPENSSL-1.patch                 | 0
+ .../crda/crda/fix-linking-of-libraries-used-by-reglib.patch       | 0
+ .../meta-python}/recipes-connectivity/crda/crda/make.patch        | 0
+ .../crda/crda/use-target-word-size-instead-of-host-s.patch        | 0
+ .../meta-python}/recipes-connectivity/crda/crda_3.18.bb           | 0
+ 10 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda/crda-4.14-python-3.patch (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda/do-not-run-ldconfig-if-destdir-is-set.patch (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda/fix-gcc-6-unused-variables.patch (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda/fix-issues-when-USE_OPENSSL-1.patch (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda/make.patch (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda/use-target-word-size-instead-of-host-s.patch (100%)
+ rename meta-networking/{ => dynamic-layers/meta-python}/recipes-connectivity/crda/crda_3.18.bb (100%)
 
-diff --git a/meta-filesystems/recipes-filesystems/zfs/zfs_2.1.4.bb b/meta-filesystems/recipes-filesystems/zfs/zfs_2.1.4.bb
-new file mode 100644
-index 000000000..01a64cc95
---- /dev/null
-+++ b/meta-filesystems/recipes-filesystems/zfs/zfs_2.1.4.bb
-@@ -0,0 +1,46 @@
-+
-+SUMMARY = "OpenZFS on Linux and FreeBSD"
-+DESCRIPTION = "OpenZFS on Linux and FreeBSD"
-+LICENSE = "CDDL-1.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=7087caaf1dc8a2856585619f4a787faa"
-+HOMEPAGE ="https://github.com/openzfs/zfs"
-+
-+SRC_URI = "https://github.com/openzfs/zfs/releases/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz"
-+SRC_URI[sha256sum] = "3b52c0d493f806f638dca87dde809f53861cd318c1ebb0e60daeaa061cf1acf6"
-+
-+# Using both 'module' and 'autotools' classes seems a bit odd, they both
-+# define a do_compile function.
-+# That's why we opt for module-base, also this prevents module splitting.
-+inherit module-base pkgconfig autotools
-+
-+DEPENDS = "virtual/kernel zlib util-linux libtirpc openssl"
-+
-+EXTRA_OECONF:append = " \
-+    --disable-pyzfs \
-+    --with-linux=${STAGING_KERNEL_DIR} --with-linux-obj=${STAGING_KERNEL_BUILDDIR} \
-+    --enable-systemd \
-+    --disable-sysvinit \
-+    --without-dracutdir \
-+    "
-+
-+do_install:append() {
-+    # /usr/share/zfs contains the zfs-tests folder which we do not need:
-+    rm -rf ${D}${datadir}/zfs
-+
-+    rm -rf ${D}${datadir}/initramfs-tools
-+}
-+
-+FILES:${PN} += "\
-+    ${base_sbindir}/* \
-+    ${base_libdir}/* \
-+    ${sysconfdir}/* \
-+    ${sbindir}/* \
-+    ${bindir}/* \
-+    ${libexecdir}/${BPN}/* \
-+    ${libdir}/* \
-+    "
-+
-+FILES:${PN}-dev += "\
-+    ${prefix}/src/zfs-${PV}/* \
-+    ${prefix}/src/spl-${PV}/* \
-+    "
+diff --git a/meta-networking/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch
+similarity index 100%
+rename from meta-networking/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch
+rename to meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch
+diff --git a/meta-networking/recipes-connectivity/crda/crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch
+similarity index 100%
+rename from meta-networking/recipes-connectivity/crda/crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch
+rename to meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch
+diff --git a/meta-networking/recipes-connectivity/crda/crda/crda-4.14-python-3.patch b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/crda-4.14-python-3.patch
+similarity index 100%
+rename from meta-networking/recipes-connectivity/crda/crda/crda-4.14-python-3.patch
+rename to meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/crda-4.14-python-3.patch
+diff --git a/meta-networking/recipes-connectivity/crda/crda/do-not-run-ldconfig-if-destdir-is-set.patch b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/do-not-run-ldconfig-if-destdir-is-set.patch
+similarity index 100%
+rename from meta-networking/recipes-connectivity/crda/crda/do-not-run-ldconfig-if-destdir-is-set.patch
+rename to meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/do-not-run-ldconfig-if-destdir-is-set.patch
+diff --git a/meta-networking/recipes-connectivity/crda/crda/fix-gcc-6-unused-variables.patch b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/fix-gcc-6-unused-variables.patch
+similarity index 100%
+rename from meta-networking/recipes-connectivity/crda/crda/fix-gcc-6-unused-variables.patch
+rename to meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/fix-gcc-6-unused-variables.patch
+diff --git a/meta-networking/recipes-connectivity/crda/crda/fix-issues-when-USE_OPENSSL-1.patch b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/fix-issues-when-USE_OPENSSL-1.patch
+similarity index 100%
+rename from meta-networking/recipes-connectivity/crda/crda/fix-issues-when-USE_OPENSSL-1.patch
+rename to meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/fix-issues-when-USE_OPENSSL-1.patch
+diff --git a/meta-networking/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch
+similarity index 100%
+rename from meta-networking/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch
+rename to meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch
+diff --git a/meta-networking/recipes-connectivity/crda/crda/make.patch b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/make.patch
+similarity index 100%
+rename from meta-networking/recipes-connectivity/crda/crda/make.patch
+rename to meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/make.patch
+diff --git a/meta-networking/recipes-connectivity/crda/crda/use-target-word-size-instead-of-host-s.patch b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/use-target-word-size-instead-of-host-s.patch
+similarity index 100%
+rename from meta-networking/recipes-connectivity/crda/crda/use-target-word-size-instead-of-host-s.patch
+rename to meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/use-target-word-size-instead-of-host-s.patch
+diff --git a/meta-networking/recipes-connectivity/crda/crda_3.18.bb b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda_3.18.bb
+similarity index 100%
+rename from meta-networking/recipes-connectivity/crda/crda_3.18.bb
+rename to meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda_3.18.bb
 -- 
 2.25.1
 
