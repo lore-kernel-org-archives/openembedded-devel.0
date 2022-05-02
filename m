@@ -1,240 +1,177 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <windel.bouwman@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ADDE1C433F5
-	for <webhook@archiver.kernel.org>; Mon,  2 May 2022 00:07:34 +0000 (UTC)
-Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com
- [209.85.222.170])
- by mx.groups.io with SMTP id smtpd.web11.4783.1651450050851521405
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 14129C433F5
+	for <webhook@archiver.kernel.org>; Mon,  2 May 2022 12:02:09 +0000 (UTC)
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
+ [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web12.9393.1651492926744905596
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 01 May 2022 17:07:31 -0700
+ Mon, 02 May 2022 05:02:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=CQyCn3DK;
- spf=pass (domain: gmail.com, ip: 209.85.222.170,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f170.google.com with SMTP id 126so9466206qkm.4
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=qhGkQifD;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174,
+ mailfrom: windel.bouwman@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id x52so10563987pfu.11
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 01 May 2022 17:07:30 -0700 (PDT)
+ Mon, 02 May 2022 05:02:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=/IvawCGHx9Vk1RAI6h7+v0XBo/rJ7gnSOgxnqN3Ahqs=;
-        b=CQyCn3DKnsnrrGmqO9OnEH5MuCeDpI2A4a1fSCb5HQVV5jaQE/BT8VViamTax0Sxc0
-         P+Exa10+bMiq5wKHwiW3Iwc/Asb0OzifbNqEY0q3iK2LFItK32jEkWSpqyLg9YYu/iGC
-         4gk6U5rO9i++NKQS1Y/BIbfDFvYjZnd90qUR9Rg9hbZGIv/BX1QmXBVOwah3FRKad5hL
-         SHbrD3FM+0BHdf73qraOJS1AuZiYZxoKbjahkfLBE7foyqYM/NOPOzz5lK5Fw4coTad4
-         61ZLUoej1gqGCo3dDj6uQpbZeN0+KKVG/HsBx6AEOkZ5vSDz/iQEQ8ad4t1gwNOsi6nM
-         ZJHQ==
+        h=mime-version:from:date:message-id:subject:to;
+        bh=t0loc1mTY7zzzC5/i1Yo7L6sRNmWyO4ZIX0yv6lE7L0=;
+        b=qhGkQifDNeiPQRe1Ajonz15dSdnQRXSlC803K0su9MASqP93QQIlE2EewDYA1OvkdX
+         au0Mp1dpssuqOf61Ag4feLiPLx7KqzknVGogYrYD+St9qorFFnIracXBBBh0Q2rrjAoi
+         dgHwza5ky9O+SW1Pce/+jLJVJuDR3zLASx5hWf5bO33xi/vZr6uPmIWYAuAG7NfmPCQB
+         9xGdPqQHRe5QwBIjO2JJGOPnyfDVwXAyw3j0KrDmT+6tbtNavHXZRIhPLuppc9/733By
+         2eBYOh1qFKYwed39gd+xDXM5zQovGSJIg75zpkB6C5K0dCpNoaHvY3s9QJqN0pteoBqO
+         StDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=/IvawCGHx9Vk1RAI6h7+v0XBo/rJ7gnSOgxnqN3Ahqs=;
-        b=W/uzpJtzhXEiKZ3VOOHfYFti8ys9F7XcJqisnKWQ4YLCKrV2GbHi89WYSf6FLqjzKH
-         IszaJVRKwWF8elxpKgfHxAJ+xcy99ZnTkVf4dJvifgsMKVkaF5QfLdLXbrnxvS508xVi
-         71hV/PIEuS8uaVdqWkC05PuYorZmPVmU+RGKsAns9gfkt6M96+nosAc0j+rGsocXig/K
-         Tu4vISlTU+pWFC6zh7GS92HH9maFaj2sOpsw0NVsu6G8GEahTtMgrwNjthmdi1sIs3W3
-         2zOD1VrtzQNP26jWJH2Z3j4v7VMPbccDrt/5fSPDYMuPjrS7Ks5zxXXJS1auNYnV9jME
-         x2cg==
-X-Gm-Message-State: AOAM532jCZ+6dCLcxjK+o1RJ3+BMUWVwepHDrokwshq1sWrdKhizAnYF
-	2TdRNPxl0pxDw70OdXFvPwGWErX65Wl2hh7iUQ4=
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=t0loc1mTY7zzzC5/i1Yo7L6sRNmWyO4ZIX0yv6lE7L0=;
+        b=7egmQmsah1SkW4iiBzrGYUB7NLu3pAyZe0H9xsATTetz4BhkqD0FzZpVJvMhCSBX5T
+         ynSzvoqu5n8AMSRZYKawqvo4uM+UrbmvG2iRD73sfG2Fjn07lDuphSMLR/og0jqf10mN
+         mmPRvxnkfjaonMF04cMn8r6dMCa6KKC7DjGPfLrkeNZS1JmS/SCn5TcYxoC4diJlMcm3
+         u8u/GW280cx4iejYB7vdYy+Iks9T3gwrl7BKHKbGTZO0gEenNue3dbLSrfeUroWxHH5m
+         lKdOl4+Ckq0JCEkYg1K2olG9SSv11fPv8kQZaecIcB3EH4SH8zdRwSoxVPQrDBlQnM59
+         kJyw==
+X-Gm-Message-State: AOAM530nyt13HLk8hqgHdp0xkfwpKy1YGXcVR2apUQygn5DLzJNGNChB
+	pPirsK54/Q94grkXJVyrn78D/DTssdiVUjd/hKxvmE1GnJc=
 X-Google-Smtp-Source: 
- ABdhPJxhwLzRpSqUUSXHoMXKRMrq/ZdinEoVnJX2Ux78W2DufaM+o3nTKbwBsk3vxJZmrsdgg0vLBR8Hv6QawVTBZnU=
-X-Received: by 2002:a05:620a:17ac:b0:69e:b8d5:3fd2 with SMTP id
- ay44-20020a05620a17ac00b0069eb8d53fd2mr6970418qkb.227.1651450049810; Sun, 01
- May 2022 17:07:29 -0700 (PDT)
+ ABdhPJxIxyaVQNreY3Tg8NYSUOTcQZo+mVO0XUIPlPf4cBEnrFXgEae95PYftI8tDwHBNtyhbs4MfJilskCIHOxak8M=
+X-Received: by 2002:a63:78c3:0:b0:398:2d6d:c275 with SMTP id
+ t186-20020a6378c3000000b003982d6dc275mr9645448pgc.565.1651492925950; Mon, 02
+ May 2022 05:02:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220501162643.513646-1-akuster808@gmail.com>
- <CAMKF1sptoL8Zy8o2EK9KwCJBGMNZfBMAXGO0DykLV10u54QzFA@mail.gmail.com>
- <16EB2058F2FC98CA.29626@lists.openembedded.org>
- <50050b02-e0f3-dbb9-fed9-ad479227328f@gmail.com>
-In-Reply-To: <50050b02-e0f3-dbb9-fed9-ad479227328f@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 1 May 2022 17:07:03 -0700
+From: Windel Bouwman <windel.bouwman@gmail.com>
+Date: Mon, 2 May 2022 14:01:57 +0200
 Message-ID: 
- <CAMKF1sqxpppR=C5ukzofc40oWLyEeuJVTEy3Rmdf9iyTFzfQ9Q@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 00/10] re-org layers
-To: akuster808 <akuster808@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+ <CAHMaQtDzj=eJrhrBfQjHLSZvw9GqPkRoyAVca4mSxzBfXDssww@mail.gmail.com>
+Subject: [meta-filesystems][PATCH] Add zfs recipe
+To: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000334f3305de06299c"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 May 2022 00:07:34 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 May 2022 12:02:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96926
+ https://lists.openembedded.org/g/openembedded-devel/message/96927
 
-On Sun, May 1, 2022 at 5:03 PM akuster808 <akuster808@gmail.com> wrote:
->
-> Forgot to ask,
->
-> Did you a new series or just V2 patches?
+--000000000000334f3305de06299c
+Content-Type: text/plain; charset="UTF-8"
 
-yes I picked the series from this morning.
+Add zfs recipe
 
->
-> I changes two patches.
->
-> -armin
->
-> On 5/1/22 16:54, Armin Kuster via lists.openembedded.org wrote:
-> >
-> >
-> > On 5/1/22 15:48, Khem Raj wrote:
-> >> I think there are some indirect dependencies in nvmetcli dragging now
-> >> into meta-oe take a look
-> > Thanks for the info.
-> >
-> >  I thought building with only meta-oe included would have caught
-> > everything.... guess I missed something.
-> >
-> > I guess putting it in dynamic-layers/meta-python would address this.
-> >
-> > -armin
-> >>
-> >> https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1706
-> >>
-> >> On Sun, May 1, 2022 at 9:26 AM Armin Kuster <akuster808@gmail.com>
-> >> wrote:
-> >>> This series enables meta-networking to drop the layer depends
-> >>> on meta-python.
-> >>>
-> >>> Armin Kuster (10):
-> >>>    crda: move to a dynamic-layer for python
-> >>>    cyrus-sasl: move from meta-networking to meta-oe
-> >>>    netplan: move from meta-networking to meta-oe
-> >>>    nvmetcli: move recipe to meta-oe
-> >>>    packagegroup-meta-oe: update pkg group
-> >>>    python3-ldap: move to meta-python
-> >>>    packagegroup-meta-python.bb: update pkg group
-> >>>    firewalld: move to dynamic meta-python layer
-> >>>    packagegroup-meta-networking: update pkg group
-> >>>    meta-networking: drop meta-python layer depends
-> >>>
-> >>>   meta-networking/conf/layer.conf                            | 1 -
-> >>>   .../crda/0001-Make-alpha2-to-be-3-characters-long.patch    | 0
-> >>>   .../crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch    | 0
-> >>>   .../crda/crda/crda-4.14-python-3.patch                     | 0
-> >>>   .../crda/crda/do-not-run-ldconfig-if-destdir-is-set.patch  | 0
-> >>>   .../crda/crda/fix-gcc-6-unused-variables.patch             | 0
-> >>>   .../crda/crda/fix-issues-when-USE_OPENSSL-1.patch          | 0
-> >>>   .../crda/fix-linking-of-libraries-used-by-reglib.patch     | 0
-> >>>   .../meta-python}/recipes-connectivity/crda/crda/make.patch | 0
-> >>>   .../crda/crda/use-target-word-size-instead-of-host-s.patch | 0
-> >>>   .../meta-python}/recipes-connectivity/crda/crda_3.18.bb    | 0
-> >>>   .../recipes-connectivity/firewalld/files/firewalld.init    | 0
-> >>>   .../recipes-connectivity/firewalld/firewalld_0.9.4.bb      | 0
-> >>>   .../packagegroups/packagegroup-meta-networking.bb          | 6 +-----
-> >>>   .../netplan/netplan/0001-Makefile-do-not-use-Werror.patch  | 0
-> >>>   .../netplan/0001-Makefile-fix-parallel-build-failure.patch | 0
-> >>>   .../0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch     | 0
-> >>>   .../recipes-connectivity/netplan/netplan_0.104.bb          | 0
-> >>>   meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 7
-> >>> +++++++
-> >>>   .../0001-sample-Rename-dprintf-to-cyrus_dprintf.patch      | 0
-> >>>   .../cyrus-sasl/cyrus-sasl/CVE-2019-19906.patch             | 0
-> >>>   .../cyrus-sasl/cyrus-sasl/Fix-hardcoded-libdir.patch       | 0
-> >>>   .../cyrus-sasl/cyrus-sasl/avoid-to-call-AC_TRY_RUN.patch   | 0
-> >>>   .../debian_patches_0014_avoid_pic_overwrite.diff           | 0
-> >>>   .../cyrus-sasl/cyrus-sasl/saslauthd.conf                   | 0
-> >>>   .../cyrus-sasl/cyrus-sasl/saslauthd.service                | 0
-> >>>   .../recipes-networking}/cyrus-sasl/cyrus-sasl_2.1.28.bb    | 0
-> >>>   .../recipes-support/nvmetcli/nvmetcli_0.7.bb               | 0
-> >>>   .../recipes-core/packagegroups/packagegroup-meta-python.bb | 1 +
-> >>>   .../recipes-networking}/python/python3-ldap_3.4.0.bb       | 0
-> >>>   30 files changed, 9 insertions(+), 6 deletions(-)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda/crda-4.14-python-3.patch
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda/do-not-run-ldconfig-if-destdir-is-set.patch
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda/fix-gcc-6-unused-variables.patch
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda/fix-issues-when-USE_OPENSSL-1.patch
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda/make.patch
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda/use-target-word-size-instead-of-host-s.patch
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda_3.18.bb
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/firewalld/files/firewalld.init
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/firewalld/firewalld_0.9.4.bb
-> >>> (100%)
-> >>>   rename {meta-networking =>
-> >>> meta-oe/dynamic-layers/meta-python}/recipes-connectivity/netplan/netplan/0001-Makefile-do-not-use-Werror.patch
-> >>> (100%)
-> >>>   rename {meta-networking =>
-> >>> meta-oe/dynamic-layers/meta-python}/recipes-connectivity/netplan/netplan/0001-Makefile-fix-parallel-build-failure.patch
-> >>> (100%)
-> >>>   rename {meta-networking =>
-> >>> meta-oe/dynamic-layers/meta-python}/recipes-connectivity/netplan/netplan/0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch
-> >>> (100%)
-> >>>   rename {meta-networking =>
-> >>> meta-oe/dynamic-layers/meta-python}/recipes-connectivity/netplan/netplan_0.104.bb
-> >>> (100%)
-> >>>   rename {meta-networking/recipes-daemons =>
-> >>> meta-oe/recipes-networking}/cyrus-sasl/cyrus-sasl/0001-sample-Rename-dprintf-to-cyrus_dprintf.patch
-> >>> (100%)
-> >>>   rename {meta-networking/recipes-daemons =>
-> >>> meta-oe/recipes-networking}/cyrus-sasl/cyrus-sasl/CVE-2019-19906.patch
-> >>> (100%)
-> >>>   rename {meta-networking/recipes-daemons =>
-> >>> meta-oe/recipes-networking}/cyrus-sasl/cyrus-sasl/Fix-hardcoded-libdir.patch
-> >>> (100%)
-> >>>   rename {meta-networking/recipes-daemons =>
-> >>> meta-oe/recipes-networking}/cyrus-sasl/cyrus-sasl/avoid-to-call-AC_TRY_RUN.patch
-> >>> (100%)
-> >>>   rename {meta-networking/recipes-daemons =>
-> >>> meta-oe/recipes-networking}/cyrus-sasl/cyrus-sasl/debian_patches_0014_avoid_pic_overwrite.diff
-> >>> (100%)
-> >>>   rename {meta-networking/recipes-daemons =>
-> >>> meta-oe/recipes-networking}/cyrus-sasl/cyrus-sasl/saslauthd.conf (100%)
-> >>>   rename {meta-networking/recipes-daemons =>
-> >>> meta-oe/recipes-networking}/cyrus-sasl/cyrus-sasl/saslauthd.service
-> >>> (100%)
-> >>>   rename {meta-networking/recipes-daemons =>
-> >>> meta-oe/recipes-networking}/cyrus-sasl/cyrus-sasl_2.1.28.bb (100%)
-> >>>   rename {meta-networking =>
-> >>> meta-oe}/recipes-support/nvmetcli/nvmetcli_0.7.bb (100%)
-> >>>   rename {meta-networking/recipes-devtools =>
-> >>> meta-python/recipes-networking}/python/python3-ldap_3.4.0.bb (100%)
-> >>>
-> >>> --
-> >>> 2.25.1
-> >>>
-> >>>
-> >>>
-> >>>
-> >
-> >
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#96924): https://lists.openembedded.org/g/openembedded-devel/message/96924
-> > Mute This Topic: https://lists.openembedded.org/mt/90817643/3616698
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> >
->
+Signed-off-by: Windel Bouwman <windel@windel.nl>
+---
+ .../recipes-filesystems/zfs/zfs_2.1.4.bb      | 46 +++++++++++++++++++
+ 1 file changed, 46 insertions(+)
+ create mode 100644 meta-filesystems/recipes-filesystems/zfs/zfs_2.1.4.bb
+
+diff --git a/meta-filesystems/recipes-filesystems/zfs/zfs_2.1.4.bb
+b/meta-filesystems/recipes-filesystems/zfs/zfs_2.1.4.bb
+new file mode 100644
+index 000000000..01a64cc95
+--- /dev/null
++++ b/meta-filesystems/recipes-filesystems/zfs/zfs_2.1.4.bb
+@@ -0,0 +1,46 @@
++
++SUMMARY = "OpenZFS on Linux and FreeBSD"
++DESCRIPTION = "OpenZFS on Linux and FreeBSD"
++LICENSE = "CDDL-1.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=7087caaf1dc8a2856585619f4a787faa"
++HOMEPAGE ="https://github.com/openzfs/zfs"
++
++SRC_URI = "
+https://github.com/openzfs/zfs/releases/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz
+"
++SRC_URI[sha256sum] =
+"3b52c0d493f806f638dca87dde809f53861cd318c1ebb0e60daeaa061cf1acf6"
++
++# Using both 'module' and 'autotools' classes seems a bit odd, they both
++# define a do_compile function.
++# That's why we opt for module-base, also this prevents module splitting.
++inherit module-base pkgconfig autotools
++
++DEPENDS = "virtual/kernel zlib util-linux libtirpc openssl"
++
++EXTRA_OECONF:append = " \
++    --disable-pyzfs \
++    --with-linux=${STAGING_KERNEL_DIR}
+--with-linux-obj=${STAGING_KERNEL_BUILDDIR} \
++    --enable-systemd \
++    --disable-sysvinit \
++    --without-dracutdir \
++    "
++
++do_install:append() {
++    # /usr/share/zfs contains the zfs-tests folder which we do not need:
++    rm -rf ${D}${datadir}/zfs
++
++    rm -rf ${D}${datadir}/initramfs-tools
++}
++
++FILES:${PN} += "\
++    ${base_sbindir}/* \
++    ${base_libdir}/* \
++    ${sysconfdir}/* \
++    ${sbindir}/* \
++    ${bindir}/* \
++    ${libexecdir}/${BPN}/* \
++    ${libdir}/* \
++    "
++
++FILES:${PN}-dev += "\
++    ${prefix}/src/zfs-${PV}/* \
++    ${prefix}/src/spl-${PV}/* \
++    "
+--
+2.25.1
+
+--000000000000334f3305de06299c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Add zfs recipe<br><br>Signed-off-by: Windel Bouwman &lt;<a=
+ href=3D"mailto:windel@windel.nl">windel@windel.nl</a>&gt;<br>---<br>=C2=A0=
+.../recipes-filesystems/zfs/<a href=3D"http://zfs_2.1.4.bb">zfs_2.1.4.bb</a=
+> =C2=A0 =C2=A0 =C2=A0| 46 +++++++++++++++++++<br>=C2=A01 file changed, 46 =
+insertions(+)<br>=C2=A0create mode 100644 meta-filesystems/recipes-filesyst=
+ems/zfs/<a href=3D"http://zfs_2.1.4.bb">zfs_2.1.4.bb</a><br><br>diff --git =
+a/meta-filesystems/recipes-filesystems/zfs/<a href=3D"http://zfs_2.1.4.bb">=
+zfs_2.1.4.bb</a> b/meta-filesystems/recipes-filesystems/zfs/<a href=3D"http=
+://zfs_2.1.4.bb">zfs_2.1.4.bb</a><br>new file mode 100644<br>index 00000000=
+0..01a64cc95<br>--- /dev/null<br>+++ b/meta-filesystems/recipes-filesystems=
+/zfs/<a href=3D"http://zfs_2.1.4.bb">zfs_2.1.4.bb</a><br>@@ -0,0 +1,46 @@<b=
+r>+<br>+SUMMARY =3D &quot;OpenZFS on Linux and FreeBSD&quot;<br>+DESCRIPTIO=
+N =3D &quot;OpenZFS on Linux and FreeBSD&quot;<br>+LICENSE =3D &quot;CDDL-1=
+.0&quot;<br>+LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D7087caaf1dc8a2=
+856585619f4a787faa&quot;<br>+HOMEPAGE =3D&quot;<a href=3D"https://github.co=
+m/openzfs/zfs">https://github.com/openzfs/zfs</a>&quot;<br>+<br>+SRC_URI =
+=3D &quot;<a href=3D"https://github.com/openzfs/zfs/releases/download/${BPN=
+}-${PV}/${BPN}-${PV}.tar.gz">https://github.com/openzfs/zfs/releases/downlo=
+ad/${BPN}-${PV}/${BPN}-${PV}.tar.gz</a>&quot;<br>+SRC_URI[sha256sum] =3D &q=
+uot;3b52c0d493f806f638dca87dde809f53861cd318c1ebb0e60daeaa061cf1acf6&quot;<=
+br>+<br>+# Using both &#39;module&#39; and &#39;autotools&#39; classes seem=
+s a bit odd, they both<br>+# define a do_compile function.<br>+# That&#39;s=
+ why we opt for module-base, also this prevents module splitting.<br>+inher=
+it module-base pkgconfig autotools<br>+<br>+DEPENDS =3D &quot;virtual/kerne=
+l zlib util-linux libtirpc openssl&quot;<br>+<br>+EXTRA_OECONF:append =3D &=
+quot; \<br>+ =C2=A0 =C2=A0--disable-pyzfs \<br>+ =C2=A0 =C2=A0--with-linux=
+=3D${STAGING_KERNEL_DIR} --with-linux-obj=3D${STAGING_KERNEL_BUILDDIR} \<br=
+>+ =C2=A0 =C2=A0--enable-systemd \<br>+ =C2=A0 =C2=A0--disable-sysvinit \<b=
+r>+ =C2=A0 =C2=A0--without-dracutdir \<br>+ =C2=A0 =C2=A0&quot;<br>+<br>+do=
+_install:append() {<br>+ =C2=A0 =C2=A0# /usr/share/zfs contains the zfs-tes=
+ts folder which we do not need:<br>+ =C2=A0 =C2=A0rm -rf ${D}${datadir}/zfs=
+<br>+<br>+ =C2=A0 =C2=A0rm -rf ${D}${datadir}/initramfs-tools<br>+}<br>+<br=
+>+FILES:${PN} +=3D &quot;\<br>+ =C2=A0 =C2=A0${base_sbindir}/* \<br>+ =C2=
+=A0 =C2=A0${base_libdir}/* \<br>+ =C2=A0 =C2=A0${sysconfdir}/* \<br>+ =C2=
+=A0 =C2=A0${sbindir}/* \<br>+ =C2=A0 =C2=A0${bindir}/* \<br>+ =C2=A0 =C2=A0=
+${libexecdir}/${BPN}/* \<br>+ =C2=A0 =C2=A0${libdir}/* \<br>+ =C2=A0 =C2=A0=
+&quot;<br>+<br>+FILES:${PN}-dev +=3D &quot;\<br>+ =C2=A0 =C2=A0${prefix}/sr=
+c/zfs-${PV}/* \<br>+ =C2=A0 =C2=A0${prefix}/src/spl-${PV}/* \<br>+ =C2=A0 =
+=C2=A0&quot;<br>--<br>2.25.1<br></div>
+
+--000000000000334f3305de06299c--
 
