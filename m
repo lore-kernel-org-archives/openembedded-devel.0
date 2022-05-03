@@ -1,121 +1,89 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <alejandro@enedino.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 81871C433F5
-	for <webhook@archiver.kernel.org>; Tue,  3 May 2022 15:56:45 +0000 (UTC)
-Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com
- [209.85.219.41])
- by mx.groups.io with SMTP id smtpd.web10.928.1651593403091601148
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE354C433F5
+	for <webhook@archiver.kernel.org>; Tue,  3 May 2022 17:53:45 +0000 (UTC)
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+ by mx.groups.io with SMTP id smtpd.web08.86.1651600417664239962
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 May 2022 08:56:43 -0700
+ Tue, 03 May 2022 10:53:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=arkCOD0U;
- spf=pass (domain: gmail.com, ip: 209.85.219.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f41.google.com with SMTP id kd11so12495411qvb.2
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 May 2022 08:56:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=ZUM4kBfaKr4qGXOEEk3mrom7T+VAb0ezkdH7QULiN+Y=;
-        b=arkCOD0Uv3fL1/YpxbkicPtN2gMILsVeGAhiEicXqpmzOnWJV3HCzi1FK5tBXyThbi
-         f3A/X1FP+IDGerxWCNVx26Oz/KAFfurR7AxEmRtkfg9BNXvyS4vdcQ2rrG5s1/DQM89F
-         Bq0xiAe2kKdfdn7YUZ4/s/bweCu7iFdg35lD+2ATZxKFFWcs7gM60KpUHREaXBeeUDhM
-         3y2Wb1+ZGCcTHQmKS/CpkBCnoTUoe9JKRxlWXmJbVf48bkj+hnhuSiiiniVWC4wmSXSu
-         IzP+bWZ6T/5PcdWf80qCHRTFHJfgyUHVmZhGRYfccucdhKjSIJ1Dp2rDhC86wJyZTubm
-         LuGA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=ZUM4kBfaKr4qGXOEEk3mrom7T+VAb0ezkdH7QULiN+Y=;
-        b=0ZpVyUh+uP7DucRz7nIwhF4z74XPxcR17oicoDXuz4UXXCC7CyX+c2W+iGWuhhBQ1B
-         phZ8hYA/T7v4aFgbvgttmTZi4lObQUUB8xPG4eRmVc/kk2plhdHsm4mkRfQv3GZNrl+z
-         PQmmncxBGhFz6pwmgpwVrFeoC/v+xAhvXjT9eYv8sJ4JyYFSEUX4JPqLunezTcJGbjPA
-         lhgAdNZrXHj8LH30N3HXAbNGltLhDaIbEQOYsxVT0wsl0IKUUt7Yv+PX/PliKVsdwqlM
-         Zu+pdXFpBwlFAz9+LGk5IaFjKuVBsSPiYz/rrYlQ43+fxigpTtNPQtSTA97mCf22a2vY
-         6R3A==
-X-Gm-Message-State: AOAM531hcuT7/5DgrGFF0fb31KPe8BcsTAhhaW+1gVG7rKBF5WX5KmfK
-	omexRL6RtErMSxNML4bCPfqDbrqvC9eAGdN90+8=
-X-Google-Smtp-Source: 
- ABdhPJxUCeQfUQL6Tt47PAP4CVjxUX7h2wMU+HD8TzPJBZXgOJcsHGhTCfS0Mo56gT9b3HiyefV28Ap4I/qTmWTd9i8=
-X-Received: by 2002:a05:6214:c2f:b0:45a:88d5:32e1 with SMTP id
- a15-20020a0562140c2f00b0045a88d532e1mr9128802qvd.36.1651593402100; Tue, 03
- May 2022 08:56:42 -0700 (PDT)
+ dkim=missing;
+ spf=none, err=permanent DNS error (domain: enedino.org, ip: 13.77.154.182,
+ mailfrom: alejandro@enedino.org)
+Received: from alsamon-xub.lan (cpe-70-112-59-126.austin.res.rr.com
+ [70.112.59.126])
+	by linux.microsoft.com (Postfix) with ESMTPSA id 6BB0020EB0C3;
+	Tue,  3 May 2022 10:53:36 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 6BB0020EB0C3
+From: Alejandro Enedino Hernandez Samaniego <alejandro@enedino.org>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alejandro Enedino Hernandez Samaniego <alejandro@enedino.org>
+Subject: [PATCH v2] cryptsetup: Add luks2 configure options defaults
+Date: Tue,  3 May 2022 11:53:30 -0600
+Message-Id: <20220503175330.4086295-1-alejandro@enedino.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20220503091644.2507658-1-jiaqing.zhao@linux.intel.com>
- <20220503091644.2507658-2-jiaqing.zhao@linux.intel.com>
-In-Reply-To: <20220503091644.2507658-2-jiaqing.zhao@linux.intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 3 May 2022 08:56:15 -0700
-Message-ID: 
- <CAMKF1spFGXX9p6dZmdZUxEeSvQ1R=cg6=0VA814kExH+m1h8pw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH 2/2] openldap: Upgrade 2.5.9 -> 2.5.11
-To: Jiaqing Zhao <jiaqing.zhao@linux.intel.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 03 May 2022 15:56:45 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 03 May 2022 17:53:45 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96953
+ https://lists.openembedded.org/g/openembedded-devel/message/96954
 
-On Tue, May 3, 2022 at 2:17 AM Jiaqing Zhao
-<jiaqing.zhao@linux.intel.com> wrote:
->
-> Signed-off-by: Jiaqing Zhao <jiaqing.zhao@linux.intel.com>
-> ---
->  .../openldap/{openldap_2.5.9.bb => openldap_2.5.11.bb}      | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->  rename meta-oe/recipes-support/openldap/{openldap_2.5.9.bb => openldap_2.5.11.bb} (97%)
->
-> diff --git a/meta-oe/recipes-support/openldap/openldap_2.5.9.bb b/meta-oe/recipes-support/openldap/openldap_2.5.11.bb
-> similarity index 97%
-> rename from meta-oe/recipes-support/openldap/openldap_2.5.9.bb
-> rename to meta-oe/recipes-support/openldap/openldap_2.5.11.bb
-> index 958a21b9c..cc84d8d86 100644
-> --- a/meta-oe/recipes-support/openldap/openldap_2.5.9.bb
-> +++ b/meta-oe/recipes-support/openldap/openldap_2.5.11.bb
-> @@ -7,7 +7,7 @@ HOMEPAGE = "http://www.OpenLDAP.org/license.html"
->  # basically BSD.  opensource.org does not record this license
->  # at present (so it is apparently not OSI certified).
->  LICENSE = "OpenLDAP"
-> -LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=5cc6ef74da4ad25d707c4f5903d64975 \
-> +LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=beceb5ac7100b6430640c61655b25c1f \
+Cryptsetup allows for certain luks2 related defaults to be
+set for libcryptsetup, these include the default PBKDF
+algorithm, memory limit for Argon2, parallel threads and
+iteration time.
 
-Describe need for this checksum update under License-update: section
-in commit message.
+Set default variables defined to the same values currently
+coming from cryptsetup upstream, making this change transparent
+for the user but allow these values to be customized.
 
->                      file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972 \
->                      "
->  SECTION = "libs"
-> @@ -25,8 +25,8 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
->      file://0001-librewrite-include-ldap_pvt_thread.h-before-redefini.patch \
->  "
->
-> -SRC_URI[md5sum] = "237fc2d881c27f8dd5d9f396e2865c11"
-> -SRC_URI[sha256sum] = "c08e12f4ca5803d5d9f9948c70ad3491282cda3c17ec8b655dcbcb2364e6fb9e"
-> +SRC_URI[md5sum] = "c7205085cd4192cf95d0df6f5afa510a"
+Signed-off-by: Alejandro Enedino Hernandez Samaniego <alejandro@enedino.o=
+rg>
+---
+ .../recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb    | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-you might as well drop md5sum while here. Its no longer needed.
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb b/meta=
+-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
+index 8f9f663a3..435b55477 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
+@@ -70,6 +70,7 @@ PACKAGECONFIG[kernel] =3D "--with-crypto_backend=3Dkern=
+el"
+ PACKAGECONFIG[nettle] =3D "--with-crypto_backend=3Dnettle,,nettle"
+ PACKAGECONFIG[luks2] =3D "--with-default-luks-format=3DLUKS2,--with-defa=
+ult-luks-format=3DLUKS1"
+=20
++
+ EXTRA_OECONF =3D "--enable-static"
+ # Building without largefile is not supported by upstream
+ EXTRA_OECONF +=3D "--enable-largefile"
+@@ -78,6 +79,17 @@ EXTRA_OECONF +=3D "--disable-static-cryptsetup"
+ # There's no recipe for libargon2 yet
+ EXTRA_OECONF +=3D "--disable-libargon2"
+=20
++# libcryptsetup default PBKDF algorithm, Argon2 memory cost (KB), parall=
+el threads and iteration time (ms)
++LUKS2_PBKDF ?=3D "argon2i"
++LUKS2_MEMORYKB ?=3D "1048576"
++LUKS2_PARALLEL_THREADS ?=3D "4"
++LUKS2_ITERTIME ?=3D "2000"
++
++EXTRA_OECONF +=3D "--with-luks2-pbkdf=3D${LUKS2_PBKDF} \
++    --with-luks2-memory-kb=3D${LUKS2_MEMORYKB} \
++    --with-luks2-parallel-threads=3D${LUKS2_PARALLEL_THREADS} \
++    --with-luks2-iter-time=3D${LUKS2_ITERTIME}"
++
+ FILES:${PN} +=3D "${@bb.utils.contains('DISTRO_FEATURES','systemd','${ex=
+ec_prefix}/lib/tmpfiles.d/cryptsetup.conf', '', d)}"
+=20
+ RDEPENDS:${PN} =3D " \
+--=20
+2.25.1
 
-> +SRC_URI[sha256sum] = "9514b07776d09f2e39aa75857395cd5634dafc209b526adb2abcb6f1c611d7f1"
->
->  DEPENDS = "util-linux groff-native"
->
-> --
-> 2.34.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#96948): https://lists.openembedded.org/g/openembedded-devel/message/96948
-> Mute This Topic: https://lists.openembedded.org/mt/90855525/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
 
