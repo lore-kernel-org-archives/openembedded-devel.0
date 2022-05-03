@@ -1,277 +1,95 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jiaqing.zhao@linux.intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D441EC433EF
-	for <webhook@archiver.kernel.org>; Tue,  3 May 2022 02:30:30 +0000 (UTC)
-Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com
- [209.85.160.169])
- by mx.groups.io with SMTP id smtpd.web11.6344.1651545024856972018
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 89006C433FE
+	for <webhook@archiver.kernel.org>; Tue,  3 May 2022 09:17:13 +0000 (UTC)
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+ by mx.groups.io with SMTP id smtpd.web12.8841.1651569427599219807
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 May 2022 19:30:25 -0700
+ Tue, 03 May 2022 02:17:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=WMxWOvG6;
- spf=pass (domain: gmail.com, ip: 209.85.160.169,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f169.google.com with SMTP id fu47so12511941qtb.5
-        for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 May 2022 19:30:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=gddp5+MJpian26QRXBeixUxkSFP+uMai831x6aM9+cU=;
-        b=WMxWOvG697GX0WLpvRdjyYIFh8yfHLD+SxhnX/Hu+eqJUHxw1sgdXmy39vT5cXHykn
-         aBLjHBBQ1bNakWooBoeChSBDqlmuYPcie1Yei8Js9jBW+mppFXo1OfNi9KVf2R2OyYHz
-         7+uUIvufwhdm21sqcu3b2pn7DLobQaVGXDhnVUdAdsJiD71OWxz2rZcGT8Ik34oX64p8
-         YLvndfsMk78mVJKFw0QnOp8vU1522J6a/efsFfCp611QLCLdYEF8jMYGGRophzW0xHhD
-         V8cxyv9enFJVHmGIYnD4P9t18n5BQufCDdedIcM4BcbOkSaPy0PXVfFB+rHmqnGftwNU
-         VMFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=gddp5+MJpian26QRXBeixUxkSFP+uMai831x6aM9+cU=;
-        b=sV91laqnXJDSejiD4iBbCUp+VCh+ugD0CiA1Q4xa+ARfFuRxWBTDSkm+x5FjF4Kbn6
-         boJ4i3rp/OeFTl6r3qHWPX8s2+Y6aArEsWWzxPKjvi14EwT3Z5QhyNpwuGjDjSL9yfVk
-         JSyfRcmDYAV2cRHswoZcEu7y2p7FjXrCOhy7CPf/4nX0LkFieSHoDBMwfrm3j2ZoTQZe
-         Ov5+tD+2zENgGyzspKMzSqlgxKxTbgrI+WoQivWZgessSTPP8MvH0bygp1UrzwTTRDif
-         0TqEMX+jHumZyJIRpSMFNY8veFufgUpnZVoDTtxHovsHGpFx2lowKRBfoxiDtIM9RVii
-         2QOw==
-X-Gm-Message-State: AOAM531xy3jxe8mgRH/2URkFG90eJifiSysOL9LwemAHwibJkljKk2NO
-	6C5AbG0aMJChFu4I6BIwlBNX4NgiTJA3pC0YVOEP/NMStK8TPQ==
-X-Google-Smtp-Source: 
- ABdhPJwjQDbUsIgeLoMy2lRXdB1nA+mRZB1sboNAOVPGfZlEZDG3p5Ak6384AbctCpY/gq8dDUmJLjNRg3LTsKrPZas=
-X-Received: by 2002:ac8:5894:0:b0:2f3:a7e6:84b with SMTP id
- t20-20020ac85894000000b002f3a7e6084bmr5032647qta.229.1651545023886; Mon, 02
- May 2022 19:30:23 -0700 (PDT)
+ dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel
+ header.b=K6OOc8fP;
+ spf=none, err=permanent DNS error (domain: linux.intel.com,
+ ip: 134.134.136.20, mailfrom: jiaqing.zhao@linux.intel.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1651569427; x=1683105427;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=jy/+pKNgzMzMnZkb/2FEcb8gdzZ/qvTJ4BxVslryzqs=;
+  b=K6OOc8fPJ2MatXiwvIo04WE7NtCIbB6h0iN8MA/g8aafwoplwrF7CYjf
+   XlBsuhfPM9naFKVzpXZQr7zDXoLAItn/vlteYnSxnTNqEUfsaWpB2NCAW
+   BdtcuGkISjjBaIv6CEf3zERzYwj1v/egl8SXvj+PYupi+vuqOyqCuM4u1
+   DUKp5QtzIYF2p/bkQvG6ViNqzCmKkyvsYYNBvt+h1t2FjOquoXRDa6cU4
+   3IXurYKD2TgS/yAuJfOU6SVEfXeEQ3fR2XSUlaRqPoTKRWJFSaHya6oce
+   FQu6RAwDJt9Gif2TJkj1fRQeRtZnHzZdR3t+cF9fh9BlTpBfIhw28I73K
+   A==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10335"; a="254897493"
+X-IronPort-AV: E=Sophos;i="5.91,194,1647327600";
+   d="scan'208";a="254897493"
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 03 May 2022 02:17:07 -0700
+X-IronPort-AV: E=Sophos;i="5.91,194,1647327600";
+   d="scan'208";a="562140521"
+Received: from unknown (HELO jiaqingz-bmcdev-container.sh.intel.com)
+ ([10.239.138.232])
+  by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 03 May 2022 02:17:06 -0700
+From: Jiaqing Zhao <jiaqing.zhao@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jiaqing Zhao <jiaqing.zhao@linux.intel.com>
+Subject: [meta-oe] [PATCH 2/2] openldap: Upgrade 2.5.9 -> 2.5.11
+Date: Tue,  3 May 2022 17:16:44 +0800
+Message-Id: <20220503091644.2507658-2-jiaqing.zhao@linux.intel.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220503091644.2507658-1-jiaqing.zhao@linux.intel.com>
+References: <20220503091644.2507658-1-jiaqing.zhao@linux.intel.com>
 MIME-Version: 1.0
-References: <20220502143345.1500852-1-akuster808@gmail.com>
- <CAMKF1soiTT-UvMVbekXAAojAO5AgRiP2YOiTt8T0ZSgF_qTvzA@mail.gmail.com>
- <16EB5F931C852606.3245@lists.openembedded.org>
- <07f6dad4-a8b2-9be1-f9d5-d8931d7fc15a@gmail.com>
-In-Reply-To: <07f6dad4-a8b2-9be1-f9d5-d8931d7fc15a@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 2 May 2022 19:29:57 -0700
-Message-ID: 
- <CAMKF1spqXz0tC-Qt4u6b4F=rf+=Vw5BY1qjPXdZcCnJnGXupqg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][v2][PATCH 01/10] crda: move to a dynamic-layer for
- python
-To: akuster808 <akuster808@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 03 May 2022 02:30:30 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 03 May 2022 09:17:13 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96946
+ https://lists.openembedded.org/g/openembedded-devel/message/96948
 
-On Mon, May 2, 2022 at 3:00 PM akuster808 <akuster808@gmail.com> wrote:
->
->
-> On 5/2/22 12:12, Armin Kuster via lists.openembedded.org wrote:
-> >
-> >
-> > On 5/2/22 10:53, Khem Raj wrote:
-> >> still no luck see
-> >> https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1712/steps/12/logs/stdio
-> >>
-> >
-> > So what am I not seeing?
->
-> I will tell you what I am  not seeing.
->
->
-> meta-gnome does not have a layer depends on meta-python which contains
-> the python3-lxml
-> <http://cgit.openembedded.org/meta-openembedded/tree/meta-python/recipes-devtools/python/python3-lxml_4.8.0.bb>
-> but it did included meta-networking. Now that meta-networking no long
-> has a dependency to meta-python, I broke that chain.  There was an
-> assumed layer dependency.
->
-> I will send a patch to fix meta-gnome to fix its layer dependency.
->
+Signed-off-by: Jiaqing Zhao <jiaqing.zhao@linux.intel.com>
+---
+ .../openldap/{openldap_2.5.9.bb => openldap_2.5.11.bb}      | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/openldap/{openldap_2.5.9.bb => openldap_2.5.11.bb} (97%)
 
-Thanks yes that was the problem. I can see this is working ok now on AB
+diff --git a/meta-oe/recipes-support/openldap/openldap_2.5.9.bb b/meta-oe/recipes-support/openldap/openldap_2.5.11.bb
+similarity index 97%
+rename from meta-oe/recipes-support/openldap/openldap_2.5.9.bb
+rename to meta-oe/recipes-support/openldap/openldap_2.5.11.bb
+index 958a21b9c..cc84d8d86 100644
+--- a/meta-oe/recipes-support/openldap/openldap_2.5.9.bb
++++ b/meta-oe/recipes-support/openldap/openldap_2.5.11.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "http://www.OpenLDAP.org/license.html"
+ # basically BSD.  opensource.org does not record this license
+ # at present (so it is apparently not OSI certified).
+ LICENSE = "OpenLDAP"
+-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=5cc6ef74da4ad25d707c4f5903d64975 \
++LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=beceb5ac7100b6430640c61655b25c1f \
+                     file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972 \
+                     "
+ SECTION = "libs"
+@@ -25,8 +25,8 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
+     file://0001-librewrite-include-ldap_pvt_thread.h-before-redefini.patch \
+ "
+ 
+-SRC_URI[md5sum] = "237fc2d881c27f8dd5d9f396e2865c11"
+-SRC_URI[sha256sum] = "c08e12f4ca5803d5d9f9948c70ad3491282cda3c17ec8b655dcbcb2364e6fb9e"
++SRC_URI[md5sum] = "c7205085cd4192cf95d0df6f5afa510a"
++SRC_URI[sha256sum] = "9514b07776d09f2e39aa75857395cd5634dafc209b526adb2abcb6f1c611d7f1"
+ 
+ DEPENDS = "util-linux groff-native"
+ 
+-- 
+2.34.1
 
-https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1716
-
-> -armin
->
-> >
-> >
-> > INFO: Summary of results:
-> > INFO:
-> > INFO: meta-oe ... PASS
-> > INFO: meta-multimedia ... PASS
-> > INFO: meta-python ... PASS
-> > INFO: meta-xfce ... PASS
-> > INFO: meta-gnome ... FAIL
-> >
-> > Nothing PROVIDES 'python3-lxml-native' (but
-> > /home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-gnome/recipes-gnome/yelp/yelp-tools_42.0.bb
-> > DEPENDS on or otherwise requires it). Close matches:
-> >
-> > INFO: meta-filesystems ... PASS
-> > INFO: meta-initramfs ... PASS
-> > INFO: meta-perl ... PASS
-> > INFO: meta-webserver ... PASS
-> > INFO: meta-networking ... PASS
-> >
-> > Did I slip in a change for meta-gnome?
-> >
-> > -armin
-> >
-> >
-> >>
-> >>
-> >> On Mon, May 2, 2022 at 7:33 AM Armin Kuster <akuster808@gmail.com>
-> >> wrote:
-> >>> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> >>> ---
-> >>> .../crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch | 0
-> >>> .../crda/crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch | 0
-> >>> .../recipes-connectivity/crda/crda/crda-4.14-python-3.patch | 0
-> >>> .../crda/crda/do-not-run-ldconfig-if-destdir-is-set.patch | 0
-> >>> .../crda/crda/fix-gcc-6-unused-variables.patch | 0
-> >>> .../crda/crda/fix-issues-when-USE_OPENSSL-1.patch | 0
-> >>> .../crda/crda/fix-linking-of-libraries-used-by-reglib.patch | 0
-> >>> .../meta-python}/recipes-connectivity/crda/crda/make.patch | 0
-> >>> .../crda/crda/use-target-word-size-instead-of-host-s.patch | 0
-> >>> .../meta-python}/recipes-connectivity/crda/crda_3.18.bb | 0
-> >>>   10 files changed, 0 insertions(+), 0 deletions(-)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda/crda-4.14-python-3.patch
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda/do-not-run-ldconfig-if-destdir-is-set.patch
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda/fix-gcc-6-unused-variables.patch
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda/fix-issues-when-USE_OPENSSL-1.patch
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda/make.patch
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda/use-target-word-size-instead-of-host-s.patch
-> >>> (100%)
-> >>>   rename meta-networking/{ =>
-> >>> dynamic-layers/meta-python}/recipes-connectivity/crda/crda_3.18.bb
-> >>> (100%)
-> >>>
-> >>> diff --git
-> >>> a/meta-networking/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch
-> >>> b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch
-> >>>
-> >>> similarity index 100%
-> >>> rename from
-> >>> meta-networking/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch
-> >>> rename to
-> >>> meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/0001-Make-alpha2-to-be-3-characters-long.patch
-> >>> diff --git
-> >>> a/meta-networking/recipes-connectivity/crda/crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch
-> >>> b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch
-> >>>
-> >>> similarity index 100%
-> >>> rename from
-> >>> meta-networking/recipes-connectivity/crda/crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch
-> >>> rename to
-> >>> meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/0001-Makefile-respect-LDFLAGS-for-libreg.patch
-> >>> diff --git
-> >>> a/meta-networking/recipes-connectivity/crda/crda/crda-4.14-python-3.patch
-> >>> b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/crda-4.14-python-3.patch
-> >>>
-> >>> similarity index 100%
-> >>> rename from
-> >>> meta-networking/recipes-connectivity/crda/crda/crda-4.14-python-3.patch
-> >>> rename to
-> >>> meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/crda-4.14-python-3.patch
-> >>> diff --git
-> >>> a/meta-networking/recipes-connectivity/crda/crda/do-not-run-ldconfig-if-destdir-is-set.patch
-> >>> b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/do-not-run-ldconfig-if-destdir-is-set.patch
-> >>>
-> >>> similarity index 100%
-> >>> rename from
-> >>> meta-networking/recipes-connectivity/crda/crda/do-not-run-ldconfig-if-destdir-is-set.patch
-> >>> rename to
-> >>> meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/do-not-run-ldconfig-if-destdir-is-set.patch
-> >>> diff --git
-> >>> a/meta-networking/recipes-connectivity/crda/crda/fix-gcc-6-unused-variables.patch
-> >>> b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/fix-gcc-6-unused-variables.patch
-> >>>
-> >>> similarity index 100%
-> >>> rename from
-> >>> meta-networking/recipes-connectivity/crda/crda/fix-gcc-6-unused-variables.patch
-> >>> rename to
-> >>> meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/fix-gcc-6-unused-variables.patch
-> >>> diff --git
-> >>> a/meta-networking/recipes-connectivity/crda/crda/fix-issues-when-USE_OPENSSL-1.patch
-> >>> b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/fix-issues-when-USE_OPENSSL-1.patch
-> >>>
-> >>> similarity index 100%
-> >>> rename from
-> >>> meta-networking/recipes-connectivity/crda/crda/fix-issues-when-USE_OPENSSL-1.patch
-> >>> rename to
-> >>> meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/fix-issues-when-USE_OPENSSL-1.patch
-> >>> diff --git
-> >>> a/meta-networking/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch
-> >>> b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch
-> >>>
-> >>> similarity index 100%
-> >>> rename from
-> >>> meta-networking/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch
-> >>> rename to
-> >>> meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch
-> >>> diff --git
-> >>> a/meta-networking/recipes-connectivity/crda/crda/make.patch
-> >>> b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/make.patch
-> >>> similarity index 100%
-> >>> rename from meta-networking/recipes-connectivity/crda/crda/make.patch
-> >>> rename to
-> >>> meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/make.patch
-> >>> diff --git
-> >>> a/meta-networking/recipes-connectivity/crda/crda/use-target-word-size-instead-of-host-s.patch
-> >>> b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/use-target-word-size-instead-of-host-s.patch
-> >>>
-> >>> similarity index 100%
-> >>> rename from
-> >>> meta-networking/recipes-connectivity/crda/crda/use-target-word-size-instead-of-host-s.patch
-> >>> rename to
-> >>> meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda/use-target-word-size-instead-of-host-s.patch
-> >>> diff --git a/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-> >>> b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda_3.18.bb
-> >>> similarity index 100%
-> >>> rename from meta-networking/recipes-connectivity/crda/crda_3.18.bb
-> >>> rename to
-> >>> meta-networking/dynamic-layers/meta-python/recipes-connectivity/crda/crda_3.18.bb
-> >>> --
-> >>> 2.25.1
-> >>>
-> >>>
-> >>>
-> >>>
-> >
-> >
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#96942): https://lists.openembedded.org/g/openembedded-devel/message/96942
-> > Mute This Topic: https://lists.openembedded.org/mt/90836456/3616698
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> >
->
 
