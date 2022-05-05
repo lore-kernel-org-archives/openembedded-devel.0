@@ -1,172 +1,97 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jester@theyoctojester.info>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B395DC433F5
-	for <webhook@archiver.kernel.org>; Thu,  5 May 2022 18:40:09 +0000 (UTC)
-Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com
- [209.85.160.178])
- by mx.groups.io with SMTP id smtpd.web09.334.1651776002066259815
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E37AC433F5
+	for <webhook@archiver.kernel.org>; Thu,  5 May 2022 20:03:10 +0000 (UTC)
+Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com
+ [209.85.167.42])
+ by mx.groups.io with SMTP id smtpd.web09.1293.1651780985430482397
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 May 2022 11:40:02 -0700
+ Thu, 05 May 2022 13:03:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Eth10kU8;
- spf=pass (domain: gmail.com, ip: 209.85.160.178,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f178.google.com with SMTP id p4so3826864qtq.12
+ dkim=pass header.i=@theyoctojester-info.20210112.gappssmtp.com
+ header.s=20210112 header.b=MP33By30;
+ spf=none, err=permanent DNS error (domain: theyoctojester.info,
+ ip: 209.85.167.42, mailfrom: jester@theyoctojester.info)
+Received: by mail-lf1-f42.google.com with SMTP id bq30so9247079lfb.3
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 May 2022 11:40:01 -0700 (PDT)
+ Thu, 05 May 2022 13:03:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=z6OkDQkzu8sN35oA7qgemidoQxd582KSXlcw3pvRCPA=;
-        b=Eth10kU8rJWxejQuuy6zCAOExWZzoguDC3FEz+bRvMuYLquJRAE8B1WaAfUcttmLlN
-         wrteHNrx/u9rUfNiQ077rQegkdy2SYmBcXmNKwkzq5TjxBZLL/j+4qsaIuCYwrNPC7Ty
-         i5i0RxH8aKkvSNAzY4z8gfT92TX/750u673miBSRguGtZcn6OCCC48WCQMc7C5NCbCyK
-         X9692gR7Gw0ip+odboyreJlxwHBI4ttXVisVq53R2P3n55+kvmXjFGN27TltkDuWnUeh
-         zLXcZ8yp4XzmZ8ZiS5NLIRRvtPuUZX71H+1XhGuqWoNW7I+RssEBu1pkqoWakisEu7ay
-         NVOA==
+        d=theyoctojester-info.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:from:date:message-id:subject:to:cc
+         :content-transfer-encoding;
+        bh=i/DsmikAqm3Am1WxZmFfMVhprng8W9HLFHgozuGDcwA=;
+        b=MP33By30Rf+4fNd6C8CQZmtMmDLS3UgTPngDZPx6bYZ7Fe2ATunGsIBtawfF+/2XEa
+         zAW3MoaFXEcsayR2Ad00QzR/nEy9/yFR9TnsGf+Hmu/bC5f5TMCBA7Eg3QXBEZ7NxoQz
+         d2po4W88or2FJ4MZl0rt1GQonsrK1tsqQx+c0Mf4SzbSsEDlFsiqBuPxeXRJSBNxHtAC
+         CEfkwFe8qaq0AgLnrj7OpyhHGD3jryXL6I8s4NEa6GLyFCGyMzy9oM3Ro17d4TqJC8fX
+         5gV08A+5BfbIfIvdJIxd5t8FaSjpyYbkcIo4TvXVvI0slD/Fc+ZJ3RHP6NV4+B5GkTUg
+         p0QQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=z6OkDQkzu8sN35oA7qgemidoQxd582KSXlcw3pvRCPA=;
-        b=5I+85AN5O2pr9kv3rqKszAiKfESIF5wNWQEhlwYcZENH9+1l8vq5WF0q818mrYLbzi
-         gXzAVrK9IXcbXHtsBoeTPxPDpvtBdS24r896gFHAdBG3bCsAKMFSnEfiLHjQDV5/ZqRV
-         NTDX/qixDEtEMLBD6r1koW+m60WfAuxLXzDMYPqkhenyv9HHHUU9XXKks1Vz45CyNZFj
-         T6cMo2NeBHqyYVTPLal6KPDJ0RNxaoz4VLkXFzVEBLhswDf7+sIemp5n3LEnMDZIe2yX
-         Y0kXOVAWRqQuV148OX//YbfAQYxHwJvXsrEGDnNWsoZEOTPor+4ggYahiIRpPIcSolvN
-         bpqw==
-X-Gm-Message-State: AOAM5330J7thz8jI36IkZiqFmW3VynkD73hAcWHqhuD4Er2t2BTL9kGu
-	iesUGdwHu4u0sEPa8+Tx1ujKmPKPkBjnZKQJrnI=
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc
+         :content-transfer-encoding;
+        bh=i/DsmikAqm3Am1WxZmFfMVhprng8W9HLFHgozuGDcwA=;
+        b=ot9K6ebjfurwKiP58znkjYfGn3XUTxTZMXVxA/ggauHd2QNfdO07wg48WK7Mbs93y7
+         zdfUqx3DoAznT8i2thULZSeZ4gH1mJOaKy/659lr84fABnTSHnEy4aA4/I0pcBRqDGWU
+         RPloO22yv+soxa/J4EIcOrlqWBVL5MtWuacgSsexC8mgIK7OelFq41IdD3QVhc9xHYxg
+         k/Vuvmfg1CHr4h3vm58vJINnkgRNO4nguYSFGZ/iLtSEWJVB6fVV5ePgoW7P6T6NLwKf
+         nxe8GDTiuqIQDRXnXkWOSTQ86E/8haW8k2C35PbhTCCAunPY3ERMYxh9kgBcLeqqcw7a
+         FU8A==
+X-Gm-Message-State: AOAM530CXl/1JZoVavh0xtljTfKN2k18NShW+hED/URck0TQI7gOWXsx
+	Y9PASIy1oIIx3z9gYg47G2OHRh4bnLN+shFz49AeRA==
 X-Google-Smtp-Source: 
- ABdhPJw05uaX1wdkxaRCFG/+OFCOw3h9YrVsvSGeHAaCMyA2HMa1S6bpvdHpTcH3KBSRy1keL+4dsRRjQe1/Sgq83S8=
-X-Received: by 2002:ac8:7f86:0:b0:2f3:953f:6036 with SMTP id
- z6-20020ac87f86000000b002f3953f6036mr25145790qtj.330.1651776000991; Thu, 05
- May 2022 11:40:00 -0700 (PDT)
+ ABdhPJwZ3HdISYh6ggvoOXW/CS3N1ScGVAUeB7VR3SpwS7nYReq6VOVIxDrQYqBlGVfV7IaxR+tUQfOcD/QFzQC+jwY=
+X-Received: by 2002:a05:6512:322a:b0:472:7d2:1114 with SMTP id
+ f10-20020a056512322a00b0047207d21114mr6680lfe.105.1651780983459; Thu, 05 May
+ 2022 13:03:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220505093308.824156-1-mingli.yu@windriver.com>
-In-Reply-To: <20220505093308.824156-1-mingli.yu@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 5 May 2022 11:39:34 -0700
+From: Josef Holzmayr <jester@theyoctojester.info>
+Date: Thu, 5 May 2022 22:02:37 +0200
 Message-ID: 
- <CAMKF1sqczzPwThyAhNuDRQSyUMFNyCTbfHmT=yESKi67X-vVyQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] s-nail: Set VAL_MTA
-To: "Yu, Mingli" <mingli.yu@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+ <CAEt6NwqjJEPLbo289eLzRq9541cvDiutGTKdbmOrE-vOtinR+A@mail.gmail.com>
+Subject: OEDvM 2022.05
+To: openembedded-core@lists.openembedded.org,
+	openembedded-architecture <openembedded-architecture@lists.openembedded.org>,
+	openembedded-devel@lists.openembedded.org
+Cc: board <board@openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 May 2022 18:40:09 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 May 2022 20:03:10 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96964
+ https://lists.openembedded.org/g/openembedded-devel/message/96965
 
-Can we pass VAL_MTA from recipe via EXTRA_OEMAKE or something ?
+There will be an OpenEmbedded Developer Virtual Meeting (OEDVM) held
+on Friday, 20 May 2022.  This will be the day after the Yocto
+Project=C2=AE Summit 2022.05 concludes.  The scheduled time will match the
+YP Summit's start at 12 UTC/7AM Eastern, and run until 20 UTC/3PM (or
+earlier if we run out of topics, but then will most likely turn into a
+happy hour).
 
-On Thu, May 5, 2022 at 2:33 AM Yu, Mingli <mingli.yu@windriver.com> wrote:
->
-> From: Mingli Yu <mingli.yu@windriver.com>
->
-> Some build server may provide sendmail like /usr/lib/sendmail which
-> may result the VAL_MTA to be /usr/lib/sendmail during do_configure,
-> but the sendmail is actually /usr/sbin/sendmail on the target.
->
-> Fixes:
->   # echo "invalide address email" | s-nail -s "test mail" -r test@test.com tester@test.com
->   s-nail: Cannot start /usr/lib/sendmail: executable not found (adjust *mta* variable)
->   /home/root/dead.letter 10/234
->   s-nail: ... message not sent
->
->   # which sendmail
->   /usr/sbin/sendmail
->
-> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-> ---
->  .../files/0001-make.rc-set-VAL_MTA.patch      | 48 +++++++++++++++++++
->  .../recipes-extended/s-nail/s-nail_14.9.24.bb |  3 +-
->  2 files changed, 50 insertions(+), 1 deletion(-)
->  create mode 100644 meta-oe/recipes-extended/s-nail/files/0001-make.rc-set-VAL_MTA.patch
->
-> diff --git a/meta-oe/recipes-extended/s-nail/files/0001-make.rc-set-VAL_MTA.patch b/meta-oe/recipes-extended/s-nail/files/0001-make.rc-set-VAL_MTA.patch
-> new file mode 100644
-> index 000000000..f4decda14
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/s-nail/files/0001-make.rc-set-VAL_MTA.patch
-> @@ -0,0 +1,48 @@
-> +From da8c7a027390de7828d4272a3c8bcdbffbac25ad Mon Sep 17 00:00:00 2001
-> +From: Mingli Yu <mingli.yu@windriver.com>
-> +Date: Thu, 5 May 2022 16:57:48 +0800
-> +Subject: [PATCH] make.rc: set VAL_MTA
-> +
-> +Some build server may provide sendmail like /usr/lib/sendmail which
-> +may result the VAL_MTA to be /usr/lib/sendmail, but the sendmail
-> +is actually /usr/sbin/sendmail on the target.
-> +
-> +Fixes:
-> +  # echo "invalide address email" | s-nail -s "test mail" -r test@test.com tester@test.com
-> +  s-nail: Cannot start /usr/lib/sendmail: executable not found (adjust *mta* variable)
-> +  /home/root/dead.letter 10/234
-> +  s-nail: ... message not sent
-> +
-> +  # which sendmail
-> +  /usr/sbin/sendmail
-> +
-> +Upstream-Status: Inappropriate[oe-specific]
-> +
-> +Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-> +---
-> + make.rc | 9 +--------
-> + 1 file changed, 1 insertion(+), 8 deletions(-)
-> +
-> +diff --git a/make.rc b/make.rc
-> +index 98bd968..45ac0d4 100644
-> +--- a/make.rc
-> ++++ b/make.rc
-> +@@ -96,14 +96,7 @@ VAL_MAIL=`\
-> +
-> + # Path to the local MTA (Mail-Transfer-Agent).
-> + # MTA aliases (aliases(5)) are optionally supported via OPT_MTA_ALIASES.
-> +-VAL_MTA=`\
-> +-   if [ -x /usr/bin/sendmail ]; then \
-> +-      echo /usr/bin/sendmail;\
-> +-   elif [ -x /usr/lib/sendmail ]; then \
-> +-      echo /usr/lib/sendmail;\
-> +-   else \
-> +-      echo /usr/sbin/sendmail;\
-> +-   fi`
-> ++VAL_MTA=/usr/sbin/sendmail
-> +
-> + # Today a lot of systems no longer use sendmail(1), but a different MTA.
-> + # To ensure compatibility with sendmail(1), a system called
-> +--
-> +2.25.1
-> +
-> diff --git a/meta-oe/recipes-extended/s-nail/s-nail_14.9.24.bb b/meta-oe/recipes-extended/s-nail/s-nail_14.9.24.bb
-> index bc514b577..539f9c3c8 100644
-> --- a/meta-oe/recipes-extended/s-nail/s-nail_14.9.24.bb
-> +++ b/meta-oe/recipes-extended/s-nail/s-nail_14.9.24.bb
-> @@ -6,7 +6,8 @@ LICENSE = "ISC & BSD-3-Clause & BSD-4-Clause"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=87266591c81260f10221f1f38872d023"
->
->  SRC_URI = "https://ftp.sdaoden.eu/${BP}.tar.xz \
-> -           file://make-errors.patch"
-> +           file://make-errors.patch \
-> +           file://0001-make.rc-set-VAL_MTA.patch"
->  SRC_URI[sha256sum] = "2714d6b8fb2af3b363fc7c79b76d058753716345d1b6ebcd8870ecd0e4f7ef8c"
->
->  DEPENDS = "coreutils-native"
-> --
-> 2.25.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#96959): https://lists.openembedded.org/g/openembedded-devel/message/96959
-> Mute This Topic: https://lists.openembedded.org/mt/90907417/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+The event has been added to the OE Calendar
+https://www.openembedded.org/wiki/Calendar
+
+We have added some topics that should be interesting to the larger audience=
+ at:
+https://www.openembedded.org/wiki/OEDVM_2022_05
+
+We are looking for "moderators" for the currently listed topics.  This
+entails helping to get the discussion started by presenting 1-5 slides
+on the topic and problems currently being experienced.
+
+If you do not see something listed you would like to discuss, please
+add it and put yourself as the "moderator" (and a rough time estimate
+for discussion).
+
+As always, if you are not an OpenEmbedded Member (but are interested
+in joining), please attend OEDVM and you can be voted in.
+
+If there are any questions, please feel free to email me and/or the
+entire OE board (board@openembedded.org).
+
+Josef, on behalf of the OpenEmbedded Board
 
