@@ -1,266 +1,97 @@
-Return-Path: <denis@denix.org>
+Return-Path: <costamagna.gianfranco@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20AA5C433EF
-	for <webhook@archiver.kernel.org>; Thu,  5 May 2022 21:51:31 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web08.2637.1651787488871576643
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10C03C433F5
+	for <webhook@archiver.kernel.org>; Fri,  6 May 2022 06:08:55 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com
+ [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.web11.6252.1651817325529433399
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 May 2022 14:51:29 -0700
+ Thu, 05 May 2022 23:08:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64,
- mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id B9B0140BE9
-	for <openembedded-devel@lists.openembedded.org>;
- Thu,  5 May 2022 21:51:27 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id IA4fm2I-ziLo
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 May 2022 21:51:27 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
- [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 9BE5F40A3D
-	for <openembedded-devel@lists.openembedded.org>;
- Thu,  5 May 2022 21:51:27 +0000 (UTC)
-Received: from thorin.denix (thorin.denix [192.168.30.9])
-	by mail.denix.org (Postfix) with ESMTP id 49ACE17491C;
-	Thu,  5 May 2022 17:51:27 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=NcH3vpDi;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44,
+ mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id e24so8612032wrc.9
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 05 May 2022 23:08:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=e5dMxMXLo/tbBxwT9RynX6PNuvSObpkc/L8/eCAp9hc=;
+        b=NcH3vpDiJW7sxoPFShKBj5CRBpsRaYHpbNnNmoBRMLJ59pIKcYf1qXHSaXBe61fRjR
+         80KPk4dPGv80tMhErw6oCJ7ACgMyAMCHFxL4/lVw4cx63BI0Q0X3qYgr5cvqDc2fw8mo
+         PxTTrvFY732bL3TTivwxEqJzsinajgfsDwwqldymom1niDS7fj8cbJ58CSJi3GKoR1Qj
+         HGHdZdR7f97GkGgI8WlPORnMcO5SYPKGBOKYaG6tlkX8RB88Ft9jRFm+GC1uanVWC1kR
+         OuaHTUlXaNNC5xFl9HcW0XDs3gF2JrxW4QmWgj5EgfOVSTw79BZ4qwPh6TIRXTAQjY8C
+         HLEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=e5dMxMXLo/tbBxwT9RynX6PNuvSObpkc/L8/eCAp9hc=;
+        b=rhA6Xlqv4fJ6R+WP0EazdLIg7zug42RikZQjGwmNHOYQiVIc+cKd8FLlzDy6B5uNaB
+         vib7mutCvWsaWzgER15a+z8dO7MZonGQ3A7Bp5vmUgFln93VTWlcyLszE/P6XlGGUu7e
+         aiYNtei+uTbFKTV/+MUq4wlgfspfqSkhpVU/UPBbnX77Vm1WTFQl4WPA8lHK3ySd/Y8h
+         wRlDqbFSfWw0AYHq0HjB2UEyZt8YkW0uG/1j+IJb74xub9r6NzuJDYShgHr6L9K9+nmY
+         aV5Dycm0SrsJzjJoAKZAkWlH3QV5DmsrswzriPer2+xQ8YzFYyuJSujytTmMuBw1Ido2
+         bPUg==
+X-Gm-Message-State: AOAM530v8V0b2IZBG+2fx1gIBRGSNwwbsRgY+DPF5EHgY/Q2HygtAL67
+	w5fuFgf6w11JqZVq7yliMdZP/N4WABc=
+X-Google-Smtp-Source: 
+ ABdhPJyl6PBPjBCvK2c4cvKyV30I8ZDiNUyBStiGmF5BcaGubI0KMIShiyUhVMC6XD8NUpCRnbOykw==
+X-Received: by 2002:a5d:6949:0:b0:20a:e021:f8e0 with SMTP id
+ r9-20020a5d6949000000b0020ae021f8e0mr1310362wrw.231.1651817323513;
+        Thu, 05 May 2022 23:08:43 -0700 (PDT)
+Received: from Unimatrix08-Focal.lan ([62.18.178.29])
+        by smtp.gmail.com with ESMTPSA id
+ n7-20020a05600c500700b003942a244ee1sm3100859wmr.38.2022.05.05.23.08.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 05 May 2022 23:08:43 -0700 (PDT)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Cc: Denys Dmytriyenko <denis@denix.org>
-Subject: [PATCH 1/2] devmem2: reinstate previous patches, removed by mistake
-Date: Thu,  5 May 2022 21:51:25 +0000
-Message-Id: <20220505215126.342916-1-denis@denix.org>
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	Gianfranco Costamagna <locutusofborg@debian.org>
+Subject: [meta-oe][PATCH] vboxguestdrivers: upgrade 6.1.32 -> 6.1.34
+Date: Fri,  6 May 2022 08:01:39 +0200
+Message-Id: <20220506060139.801474-1-costamagnagianfranco@yahoo.it>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 May 2022 21:51:31 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 06 May 2022 06:08:55 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96967
+ https://lists.openembedded.org/g/openembedded-devel/message/96969
 
-This reverts commit 5e8f4720aaa3da7350ead06959cae0492133cd61.
-
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 ---
- meta-oe/recipes-support/devmem2/devmem2.bb    |  3 +-
- ...word-is-32-bit-and-add-support-for-6.patch | 70 ++++++++++++++
- .../devmem2/devmem2/devmem2-fixups-2.patch    | 91 +++++++++++++++++++
- 3 files changed, 163 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c=
--ensure-word-is-32-bit-and-add-support-for-6.patch
- create mode 100644 meta-oe/recipes-support/devmem2/devmem2/devmem2-fixup=
-s-2.patch
+ .../{vboxguestdrivers_6.1.32.bb => vboxguestdrivers_6.1.34.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_6.1.32.bb => vboxguestdrivers_6.1.34.bb} (97%)
 
-diff --git a/meta-oe/recipes-support/devmem2/devmem2.bb b/meta-oe/recipes=
--support/devmem2/devmem2.bb
-index 92c05fe06..c6b8df5e4 100644
---- a/meta-oe/recipes-support/devmem2/devmem2.bb
-+++ b/meta-oe/recipes-support/devmem2/devmem2.bb
-@@ -4,7 +4,8 @@ LIC_FILES_CHKSUM =3D "file://devmem2.c;endline=3D38;md5=3D=
-a9eb9f3890384519f435aedf9862
- PR =3D "r7"
-=20
- SRC_URI =3D "http://www.free-electrons.com/pub/mirror/devmem2.c;download=
-filename=3Ddevmem2-new.c \
--          "=20
-+           file://devmem2-fixups-2.patch;apply=3Dyes;striplevel=3D0 \
-+           file://0001-devmem.c-ensure-word-is-32-bit-and-add-support-fo=
-r-6.patch"
-=20
- S =3D "${WORKDIR}"
-=20
-diff --git a/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure=
--word-is-32-bit-and-add-support-for-6.patch b/meta-oe/recipes-support/dev=
-mem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.pa=
-tch
-new file mode 100644
-index 000000000..2a57f2989
---- /dev/null
-+++ b/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-i=
-s-32-bit-and-add-support-for-6.patch
-@@ -0,0 +1,70 @@
-+From 1360a907879dd24041797a3b709d49aeac2ab444 Mon Sep 17 00:00:00 2001
-+From: Denys Dmytriyenko <denys@ti.com>
-+Date: Tue, 29 May 2018 16:55:42 -0400
-+Subject: [PATCH] devmem.c: ensure word is 32-bit and add support for 64-=
-bit
-+ long
-+
-+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-+---
-+ devmem2.c | 23 +++++++++++++++++------
-+ 1 file changed, 17 insertions(+), 6 deletions(-)
-+
-+diff --git a/devmem2.c b/devmem2.c
-+index 5845381..68131b2 100644
-+--- a/devmem2.c
-++++ b/devmem2.c
-+@@ -39,6 +39,7 @@
-+=20
-+ #include <stdio.h>
-+ #include <stdlib.h>
-++#include <stdint.h>
-+ #include <unistd.h>
-+ #include <string.h>
-+ #include <errno.h>
-+@@ -69,7 +70,7 @@ int main(int argc, char **argv) {
-+ 	if(argc < 2) {
-+ 		fprintf(stderr, "\nUsage:\t%s { address } [ type [ data ] ]\n"
-+ 			"\taddress : memory address to act upon\n"
-+-			"\ttype    : access operation type : [b]yte, [h]alfword, [w]ord\n"
-++			"\ttype    : access operation type : [b]yte, [h]alfword, [w]ord, [l]=
-ong\n"
-+ 			"\tdata    : data to be written\n\n",
-+ 			argv[0]);
-+ 		exit(1);
-+@@ -103,9 +104,14 @@ int main(int argc, char **argv) {
-+ 			read_result =3D *((unsigned short *) virt_addr);
-+ 			break;
-+ 		case 'w':
-+-			data_size =3D sizeof(unsigned long);
-++			data_size =3D sizeof(uint32_t);
-+ 			virt_addr =3D fixup_addr(virt_addr, data_size);
-+-			read_result =3D *((unsigned long *) virt_addr);
-++			read_result =3D *((uint32_t *) virt_addr);
-++			break;
-++		case 'l':
-++			data_size =3D sizeof(uint64_t);
-++			virt_addr =3D fixup_addr(virt_addr, data_size);
-++			read_result =3D *((uint64_t *) virt_addr);
-+ 			break;
-+ 		default:
-+ 			fprintf(stderr, "Illegal data type '%c'.\n", access_type);
-+@@ -129,9 +135,14 @@ int main(int argc, char **argv) {
-+ 				read_result =3D *((unsigned short *) virt_addr);
-+ 				break;
-+ 			case 'w':
-+-				virt_addr =3D fixup_addr(virt_addr, sizeof(unsigned long));
-+-				*((unsigned long *) virt_addr) =3D write_val;
-+-				read_result =3D *((unsigned long *) virt_addr);
-++				virt_addr =3D fixup_addr(virt_addr, sizeof(uint32_t));
-++				*((uint32_t *) virt_addr) =3D write_val;
-++				read_result =3D *((uint32_t *) virt_addr);
-++				break;
-++			case 'l':
-++				virt_addr =3D fixup_addr(virt_addr, sizeof(uint64_t));
-++				*((uint64_t *) virt_addr) =3D write_val;
-++				read_result =3D *((uint64_t *) virt_addr);
-+ 				break;
-+ 		}
-+ 		sprintf(fmt_str, "Write at address 0x%%08lX (%%p): 0x%%0%dlX, "
-+--=20
-+2.7.4
-+
-diff --git a/meta-oe/recipes-support/devmem2/devmem2/devmem2-fixups-2.pat=
-ch b/meta-oe/recipes-support/devmem2/devmem2/devmem2-fixups-2.patch
-new file mode 100644
-index 000000000..4517797fc
---- /dev/null
-+++ b/meta-oe/recipes-support/devmem2/devmem2/devmem2-fixups-2.patch
-@@ -0,0 +1,91 @@
-+--- devmem2.c	2004-08-05 01:55:25.000000000 +0200
-++++ devmem2_modif.c	2011-01-13 15:48:37.798799784 +0100
-+@@ -45,12 +45,16 @@
-+ #define MAP_SIZE 4096UL
-+ #define MAP_MASK (MAP_SIZE - 1)
-+=20
-++static inline void *fixup_addr(void *addr, size_t size);
-++
-+ int main(int argc, char **argv) {
-+     int fd;
-+     void *map_base, *virt_addr;=20
-+-	unsigned long read_result, writeval;
-++	unsigned long read_result, write_val;
-+ 	off_t target;
-+ 	int access_type =3D 'w';
-++	char fmt_str[128];
-++	size_t data_size;
-+ =09
-+ 	if(argc < 2) {
-+ 		fprintf(stderr, "\nUsage:\t%s { address } [ type [ data ] ]\n"
-+@@ -79,38 +83,51 @@
-+     virt_addr =3D map_base + (target & MAP_MASK);
-+     switch(access_type) {
-+ 		case 'b':
-++			data_size =3D sizeof(unsigned char);
-++			virt_addr =3D fixup_addr(virt_addr, data_size);
-+ 			read_result =3D *((unsigned char *) virt_addr);
-+ 			break;
-+ 		case 'h':
-++			data_size =3D sizeof(unsigned short);
-++			virt_addr =3D fixup_addr(virt_addr, data_size);
-+ 			read_result =3D *((unsigned short *) virt_addr);
-+ 			break;
-+ 		case 'w':
-++			data_size =3D sizeof(unsigned long);
-++			virt_addr =3D fixup_addr(virt_addr, data_size);
-+ 			read_result =3D *((unsigned long *) virt_addr);
-+ 			break;
-+ 		default:
-+ 			fprintf(stderr, "Illegal data type '%c'.\n", access_type);
-+ 			exit(2);
-+ 	}
-+-    printf("Value at address 0x%X (%p): 0x%X\n", target, virt_addr, rea=
-d_result);=20
-++	sprintf(fmt_str, "Read at address  0x%%08lX (%%p): 0x%%0%dlX\n", 2*dat=
-a_size);
-++    printf(fmt_str, (unsigned long)target, virt_addr, read_result);
-+     fflush(stdout);
-+=20
-+ 	if(argc > 3) {
-+-		writeval =3D strtoul(argv[3], 0, 0);
-++		write_val =3D strtoul(argv[3], 0, 0);
-+ 		switch(access_type) {
-+ 			case 'b':
-+-				*((unsigned char *) virt_addr) =3D writeval;
-++				virt_addr =3D fixup_addr(virt_addr, sizeof(unsigned char));
-++				*((unsigned char *) virt_addr) =3D write_val;
-+ 				read_result =3D *((unsigned char *) virt_addr);
-+ 				break;
-+ 			case 'h':
-+-				*((unsigned short *) virt_addr) =3D writeval;
-++				virt_addr =3D fixup_addr(virt_addr, sizeof(unsigned short));
-++				*((unsigned short *) virt_addr) =3D write_val;
-+ 				read_result =3D *((unsigned short *) virt_addr);
-+ 				break;
-+ 			case 'w':
-+-				*((unsigned long *) virt_addr) =3D writeval;
-++				virt_addr =3D fixup_addr(virt_addr, sizeof(unsigned long));
-++				*((unsigned long *) virt_addr) =3D write_val;
-+ 				read_result =3D *((unsigned long *) virt_addr);
-+ 				break;
-+ 		}
-+-		printf("Written 0x%X; readback 0x%X\n", writeval, read_result);=20
-++		sprintf(fmt_str, "Write at address 0x%%08lX (%%p): 0x%%0%dlX, "
-++			"readback 0x%%0%dlX\n",	2*data_size, 2*data_size);
-++		printf(fmt_str, (unsigned long)target, virt_addr,
-++			write_val, read_result);
-+ 		fflush(stdout);
-+ 	}
-+ =09
-+@@ -119,3 +136,12 @@
-+     return 0;
-+ }
-+=20
-++static inline void *fixup_addr(void *addr, size_t size)
-++{
-++#ifdef FORCE_STRICT_ALIGNMENT
-++	unsigned long aligned_addr =3D (unsigned long)addr;
-++	aligned_addr &=3D ~(size - 1);
-++	addr =3D (void *)aligned_addr;
-++#endif
-++	return addr;
-++}
---=20
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.32.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.34.bb
+similarity index 97%
+rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.32.bb
+rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.34.bb
+index a8cf32658..5e0accb23 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.32.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.34.bb
+@@ -16,7 +16,7 @@ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2
+     file://0001-utils-fix-build-against-5.15-libc-headers-headers.patch \
+ "
+ 
+-SRC_URI[sha256sum] = "5d11384200b4e943ad0056d2cf75980ae4bee852c89650e2914e1b34eedc2d2c"
++SRC_URI[sha256sum] = "9c3ce1829432e5b8374f950698587038f45fb0492147dc200e59edb9bb75eb49"
+ 
+ S ?= "${WORKDIR}/vbox_module"
+ S:task-patch = "${WORKDIR}/${VBOX_NAME}"
+-- 
 2.25.1
 
 
