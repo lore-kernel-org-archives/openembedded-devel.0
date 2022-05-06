@@ -2,103 +2,123 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DDC6CC433F5
-	for <webhook@archiver.kernel.org>; Mon, 16 May 2022 15:06:51 +0000 (UTC)
-Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web09.30207.1652713601054051943
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3289C433FE
+	for <webhook@archiver.kernel.org>; Mon, 16 May 2022 15:07:11 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.65])
+ by mx.groups.io with SMTP id smtpd.web11.30054.1652713621426201203
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 May 2022 08:06:42 -0700
+ Mon, 16 May 2022 08:07:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=RnU49NJ4;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=hVz4oxgW;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.65,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1652713599; i=@fujitsu.com;
-	bh=86Ecm6hby/yc4r0nkpfdvO5HpbxstBi7kpK2xUfrgSg=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=RnU49NJ42pD4G8mhSboVIWrRQSbhNr5rL9yvuGxEuwBlUwIQP8hBmOPocGC7JNrnh
-	 rxtaCktp5PTAMTEZTn3lo4Vh1fR178asXdi7ed8d5QIGcSnLDacLtV5G0AxTgeLtXp
-	 6mehBgS4Bn0aZYyR+ULOPIKAAzRaJ8RjxsDiu1PvKSqmCGpvXhW4gJbhVnEw8PlZG+
-	 ZyNQ3bZjN29S4x7/4I3ZCCLBe3Bp1meo7dxW/D9BRTfMKjWx3TSNF+1MqDdgOSUu2G
-	 IVIsZqb92/2In63uT2zxLwJgJq8bs/RTPOUugvRLuUz2NfqZ/m3fGjI+dDTRe6waw4
-	 NomCwVnz0jfLQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrBIsWRWlGSWpSXmKPExsViZ8MRoluX0ZR
-  k0NqoZnHx8FJmB0aPcxtXMAYwRrFm5iXlVySwZjxoeMVesI6j4vab6gbGW+xdjJwcQgKzmSQ2
-  /LbpYuQCsvcwSsw5vRgswSagJjH91g1WEFtEQF9i6ew9zCA2s4CKxIvfPWA1wgL+Er86loHVs
-  ADFz0/eAVbDK+Ak8WXHVbC4hICCxJSH76HighInZz5hgZgjIXHwxQtmiBpFidmXm1kg7AqJGT
-  O2sU1g5J2FpGUWkpYFjEyrGO2SijLTM0pyEzNzdA0NDHQNDU11zcx1Dc3M9BKrdBP1Ukt1k1P
-  zSooSgdJ6ieXFeqnFxXrFlbnJOSl6eaklmxiBgZZS7LxsB+O7vp96hxglOZiURHnXJDclCfEl
-  5adUZiQWZ8QXleakFh9ilOHgUJLgbUgDygkWpaanVqRl5gCDHiYtwcGjJMJ7PB4ozVtckJhbn
-  JkOkTrFqMtxd+HevcxCLHn5ealS4rwnE4CKBECKMkrz4EbAIvASo6yUMC8jAwODEE9BalFuZg
-  mq/CtGcQ5GJWFe03SgKTyZeSVwm14BHcEEdISIfiPIESWJCCmpBqaUZ5kfMoQeJLw53NfIwWS
-  vnHi5+1P/9mkr50UaxhSeOnM4s70jILP0z5326X47avdZ+Bw8Vx6a/fnz+8bp+WdKShPLN9cL
-  LVvVP/9Spux3lZ71snfXp1z4nr28Snxtk+KGpReXZL69we5rueC645ObUR5zd1ZdLdRsC3frD
-  HwpMsX00uVU0QnVj6d782oyv3q/u1XrfW7TYrZg9oKHtVvSI7iU1kQs5ww32Ci97px1ltL2jU
-  H/b3jlv3VZIlL58K1NW/+SElmxHm+nqg+ab/ZOcPf9/TP6F7v6ec//UVvO76pmklM7+UpfRlR
-  jX+oVyRzWSNXMz9xhZS9Z3q+xOqvxRmLjZQ7pop+rt326l67EUpyRaKjFXFScCADfEy7iOwMA
-  AA==
+	s=170520fj; t=1652713619; i=@fujitsu.com;
+	bh=8NqWucu4SNv34/vlUDgFS5EHT5bG/RQK9U8Wm6ozif8=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=hVz4oxgWGyfvu7otxMzHqllRz20TIcqnmgFjYA5nZFT3eSn8UM1VIzncKMOCIdHK0
+	 RvP+PwRgty5u+waWIYYr+DLJ5AkBF74mPErMDT9ipGdqDMEZjiDVbNRdEPWalM4lT9
+	 S7izPaTFTquDhHmFWIMjBhaAMYyr9qqMGzjTYk1ZeDQsetKUW+8g8MpWyshNL2Jq//
+	 zaHbX9Nrpwn5yzlVaAvFxVPcVrk459YTO4RK6iwfxlr3RSE6XJolM6tDhgNtFXL6uN
+	 ABps6GNIjuR2fOiUVOwoHfOQd5OrHv/7aOSjig/DBctvYVdXlaR+wuyKosxvtQzNOo
+	 uEQn41xBwhhUA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrOIsWRWlGSWpSXmKPExsViZ8ORqDspoyn
+  JYNsnQ4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWP78m7mgm88FfPv7WFuYDzF3cXIxSEk8IRR
+  4sORu0wQzgUmiUkNv1ghnD2MEr/e32LsYuTkYBNQk5h+6wYriC0ioC+xdPYeZhCbWUBF4sXvH
+  nYQW1jAU6K/8QBYPQtQfNXyXrB6XgEniUXTfoHVSwgoSEx5+B7M5hRwljh0bydYvRBQze6PU5
+  kg6gUlTs58wgIxX0Li4IsXUL2KErMvN7NA2BUSM2ZsY4Ow1SSuntvEPIFRcBaS9llI2hcwMq1
+  itEoqykzPKMlNzMzRNTQw0DU0NNU11TUyNdVLrNJN1Est1S1PLS7RNdRLLC/WSy0u1iuuzE3O
+  SdHLSy3ZxAgM45Ri1v87GLv7fuodYpTkYFIS5V2T3JQkxJeUn1KZkVicEV9UmpNafIhRhoNDS
+  YK3IQ0oJ1iUmp5akZaZA4wpmLQEB4+SCO/xeKA0b3FBYm5xZjpE6hSjLsfdhXv3Mgux5OXnpU
+  qJ855MACoSACnKKM2DGwGL70uMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHlN04Gm8GTmlcB
+  tegV0BBPQESL6jSBHlCQipKQamI76C4tO3Jflsug1R3LEzv2VM2sPSK6tKHyn9mwac4fCnk8O
+  J4uvihbZnNpxXGLVw1cMR6bI3GZwTIxyrJlbZJ6SEJoWGSYiYNF97OaxCUtdhKuSPt05+/D4m
+  dlZjcznecND3EpPZ12u65x1Zv1bySze6jtLefjYLl21n/up38rtQusrd8tcl42SXM8mHX3K8D
+  i0vyhp9qee5MwHy/8yXu49ciG+ziGjdmvId91toerZvWlCMfP2/nuT6XI+Uf/ejmcbc4VPvrj
+  1aMfBySmJE0Tel1hdP2n2bepUpz5hy7AZ3hXxFWnJiloRPalBQqZ+K+TfuBZelZae8/LP56xN
+  9+4k6R1K+lIVyeD93pZjoRJLcUaioRZzUXEiAP1n8WlqAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-2.tower-528.messagelabs.com!1652713598!16943!1
-X-Originating-IP: [62.60.8.84]
+X-Msg-Ref: server-10.tower-587.messagelabs.com!1652713618!181801!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.86.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 15560 invoked from network); 16 May 2022 15:06:38 -0000
-Received: from unknown (HELO mailhost3.uk.fujitsu.com) (62.60.8.84)
-  by server-2.tower-528.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 16 May 2022 15:06:38 -0000
-Received: from R01UKEXCASM126.r01.fujitsu.local ([10.183.43.178])
-	by mailhost3.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id 24GF6I1I008900
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+Received: (qmail 18578 invoked from network); 16 May 2022 15:06:58 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-10.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 16 May 2022 15:06:58 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 39872100192
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 May 2022 16:06:38 +0100
+ Mon, 16 May 2022 16:06:58 +0100 (BST)
+Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 1BDAB10018B
+	for <openembedded-devel@lists.openembedded.org>;
+ Mon, 16 May 2022 16:06:58 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 16 May 2022 16:06:16 +0100
+ (TLS) id 15.0.1497.32; Mon, 16 May 2022 16:06:26 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] ctags: upgrade 5.9.20220501.0 ->
- 5.9.20220508.0
-Date: Fri, 6 May 2022 22:48:27 +0800
-Message-ID: <1651848510-13012-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-webserver] [PATCH] phpmyadmin: upgrade 5.1.3 -> 5.2.0
+Date: Fri, 6 May 2022 22:48:30 +0800
+Message-ID: <1651848510-13012-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1651848510-13012-1-git-send-email-wangmy@fujitsu.com>
+References: <1651848510-13012-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
 X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 16 May 2022 15:06:51 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 16 May 2022 15:07:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97127
+ https://lists.openembedded.org/g/openembedded-devel/message/97128
+
+Changelog:
+=========
+* Removed support for Microsoft Internet Explorer
+* Requires PHP 7.2 or newer
+* Requires the openssl PHP extension
+* Improved handling of system CA bundle and cacert.pem, falling back to Mozilla CA if needed
+* Replace "master/slave" terms with "primary/replica"
+* Add "NOT LIKE %...%" operator to Table search
+* Add support for the Mroonga engine
+* Add support for account locking
+* Several fixes and improvements to the SQL parser library
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../ctags/{ctags_5.9.20220501.0.bb => ctags_5.9.20220508.0.bb}  | 2 +-
+ .../phpmyadmin/{phpmyadmin_5.1.3.bb => phpmyadmin_5.2.0.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/ctags/{ctags_5.9.20220501.0.bb => ctags_5.9.20220508.0.bb} (95%)
+ rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_5.1.3.bb => phpmyadmin_5.2.0.bb} (94%)
 
-diff --git a/meta-oe/recipes-devtools/ctags/ctags_5.9.20220501.0.bb b/meta-oe/recipes-devtools/ctags/ctags_5.9.20220508.0.bb
-similarity index 95%
-rename from meta-oe/recipes-devtools/ctags/ctags_5.9.20220501.0.bb
-rename to meta-oe/recipes-devtools/ctags/ctags_5.9.20220508.0.bb
-index dd8a163b0..02f01cc60 100644
---- a/meta-oe/recipes-devtools/ctags/ctags_5.9.20220501.0.bb
-+++ b/meta-oe/recipes-devtools/ctags/ctags_5.9.20220508.0.bb
-@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.1.3.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.2.0.bb
+similarity index 94%
+rename from meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.1.3.bb
+rename to meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.2.0.bb
+index 7ccc05ec3..45de45564 100644
+--- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.1.3.bb
++++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.2.0.bb
+@@ -11,7 +11,7 @@ SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-la
+            file://apache.conf \
+ "
  
- inherit autotools-brokensep pkgconfig manpages
+-SRC_URI[sha256sum] = "c562feddc0f8ff5e69629113f273a0d024a65fb928c48e89ce614744d478296f"
++SRC_URI[sha256sum] = "66da31ca295f06182ac3f2e6e96057dc824c459baedf4b29de6ed0d3be039230"
  
--SRCREV = "364032bec335e92ccb25b8b2bfee25012609688f"
-+SRCREV = "3f9e162a2a2d49920550bddb6de9da46a8340a41"
- SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https"
- 
- S = "${WORKDIR}/git"
+ UPSTREAM_CHECK_URI = "https://www.phpmyadmin.net/downloads/"
+ UPSTREAM_CHECK_REGEX = "phpMyAdmin-(?P<pver>\d+(\.\d+)+)-all-languages.tar.xz"
 -- 
 2.25.1
 
