@@ -1,88 +1,62 @@
-Return-Path: <t.remmet@phytec.de>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CE6EDC433F5
-	for <webhook@archiver.kernel.org>; Fri,  6 May 2022 12:12:27 +0000 (UTC)
-Received: from mickerik.phytec.de (mickerik.phytec.de [195.145.39.210])
- by mx.groups.io with SMTP id smtpd.web11.8529.1651839140531740787
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D3A0C433FE
+	for <webhook@archiver.kernel.org>; Fri,  6 May 2022 17:23:58 +0000 (UTC)
+Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
+ by mx.groups.io with SMTP id smtpd.web12.753.1651857828392647200
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 06 May 2022 05:12:22 -0700
+ Fri, 06 May 2022 10:23:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@phytec.de header.s=a4
- header.b=jfUNCLzb;
- spf=pass (domain: phytec.de, ip: 195.145.39.210,
- mailfrom: t.remmet@phytec.de)
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
-	q=dns/txt; i=@phytec.de; t=1651839137; x=1654431137;
-	h=From:Sender:Reply-To:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:
-	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
-	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=2U/ODDfR0iWx6It8IH0mmG+b2FpHnKjefuhaKr71Gfg=;
-	b=jfUNCLzbDr/8969Vxd+lCUz5HZef+E8ep0X4CpjloE6YzK8s4XWQoS94qsSL5Nml
-	FLtb3R/ooE8Ft8Ja4pfKpVGPPyvfu4ds1Q2BuCRpTZ9liqfpUzDK8p6JgxqavYRy
-	Rg7ekx1A0dedTcC/DfwiCzJKvPkjDn4eJJtjoPFeADY=;
-X-AuditID: c39127d2-077d9700000060c5-a5-627510a06420
-Received: from idefix.phytec.de (Unknown_Domain [172.16.0.10])
-	by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id
- D5.BA.24773.0A015726; Fri,  6 May 2022 14:12:16 +0200 (CEST)
-Received: from augenblix2.phytec.de ([172.16.0.56])
-          by idefix.phytec.de (IBM Domino Release 9.0.1FP7)
-          with ESMTP id 2022050614121664-853695 ;
-          Fri, 6 May 2022 14:12:16 +0200
-From: Teresa Remmet <t.remmet@phytec.de>
+ dkim=missing;
+ spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.84,
+ mailfrom: f_l_k@t-online.de)
+Received: from fwd79.dcpf.telekom.de (fwd79.aul.t-online.de [10.223.144.105])
+	by mailout09.t-online.de (Postfix) with SMTP id B25881DF56
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri,  6 May 2022 19:23:46 +0200 (CEST)
+Received: from flk-MS-7C91.fritz.box ([79.219.224.120]) by fwd79.t-online.de
+	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
+	esmtp id 1nn1g9-0wtDOL0; Fri, 6 May 2022 19:23:45 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] meta-networking: Add meta-phython to
- BBFILES_DYNAMIC
-Date: Fri, 6 May 2022 14:12:16 +0200
-Message-Id: <20220506121216.3099707-1-t.remmet@phytec.de>
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-multimedia][PATCH] minidlna: fix obsolete license warning
+Date: Fri,  6 May 2022 19:23:27 +0200
+Message-Id: <20220506172327.1214402-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MIMETrack: Itemize by SMTP Server on Idefix/Phytec(Release 9.0.1FP7|August
-  17, 2016) at
- 06.05.2022 14:12:16,
-	Serialize by Router on Idefix/Phytec(Release 9.0.1FP7|August  17, 2016) at
- 06.05.2022 14:12:16
-X-TNEFEvaluated: 1
+X-TOI-EXPURGATEID: 150726::1651857825-00010BFA-8A37122A/0/0 CLEAN NORMAL
+X-TOI-MSGID: 2b94d79a-1df3-4bec-b9cb-209b16ebf510
 Content-Transfer-Encoding: quoted-printable
-X-Brightmail-Tracker: 
- H4sIAAAAAAAAA+NgFnrFJMWRmVeSWpSXmKPExsWyRoCBS3eBQGmSwc2nNhYXDy9ldmD0OLdx
-	BWMAYxSXTUpqTmZZapG+XQJXRt/CdqaCyawVv75vZWxg3M7SxcjJISFgInFn4h3mLkYuDiGB
-	bYwSC7t6GCGcc4wSxxqXs4JUsQloSDxdcZoJxBYR0JX4+GEuI4gtLBAm8fxHA1ANBweLgIrE
-	6lt2IGFeAUuJ7e9Ps0MskJeYeek7O0RcUOLkzCcsIPMlBK4wSrxfPBPqCiGJ04vPMoPYzALa
-	EssWvmaewMg7C0nPLCSpBYxMqxiFcjOTs1OLMrP1CjIqS1KT9VJSNzECw+PwRPVLOxj75ngc
-	YmTiYDzEKMHBrCTCKzyrJEmINyWxsiq1KD++qDQntfgQozQHi5I47/0epkQhgfTEktTs1NSC
-	1CKYLBMHp1QD4/o4FfYY95qNuhfKpfnkA3a/UoqsL5jM/Od/3cnZIlobfm0wFyrgeC+/63xX
-	cKPNQ/4SMzefqTsvfv7gfmjN3XmZ8rvEnPVTD60/8sApb0lcm6JfslLwt19dLQ/5W+bmz54Z
-	Y3b7wDdP5ec+3uzPVn3ccer0Z20FXb/TVt53xXjnx3169Uw8QYmlOCPRUIu5qDgRABILjvb9
-	AQAA
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 06 May 2022 12:12:27 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 06 May 2022 17:23:58 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/96973
+ https://lists.openembedded.org/g/openembedded-devel/message/96974
 
-Activate recipes in dynamic-layers of meta-networking.
-
-Signed-off-by: Teresa Remmet <t.remmet@phytec.de>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-networking/conf/layer.conf | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-multimedia/recipes-multimedia/minidlna/minidlna.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.c=
-onf
-index 3069cfb6a39d..a7d6da8fd7d7 100644
---- a/meta-networking/conf/layer.conf
-+++ b/meta-networking/conf/layer.conf
-@@ -24,3 +24,6 @@ SIGGEN=5FEXCLUDE=5FSAFE=5FRECIPE=5FDEPS +=3D " \
-   wireguard-tools->wireguard-module \
-   wireless-regdb->crda \
- "
-+BBFILES=5FDYNAMIC +=3D " \
-+    meta-python:${LAYERDIR}/dynamic-layers/meta-python/recipes-*/*/*.bb \
-+"
+diff --git a/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc b/m=
+eta-multimedia/recipes-multimedia/minidlna/minidlna.inc
+index b913a8393..4959a3c8d 100644
+--- a/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
++++ b/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
+@@ -1,6 +1,6 @@
+ DESCRIPTION =3D "MiniDLNA (aka ReadyDLNA) is server software with the ai=
+m of \
+ being fully compliant with DLNA/UPnP-AV clients."
+-LICENSE =3D "GPL-2.0|BSD-3-Clause"
++LICENSE =3D "GPL-2.0-only|BSD-3-Clause"
+ DEPENDS =3D "ffmpeg flac libav jpeg sqlite3 libexif libogg libid3tag lib=
+vorbis"
+=20
+ # because it depends on libav which has commercial flag
 --=20
 2.25.1
 
