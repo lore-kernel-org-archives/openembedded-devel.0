@@ -2,70 +2,71 @@ Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 69A89C433F5
-	for <webhook@archiver.kernel.org>; Mon,  9 May 2022 09:02:23 +0000 (UTC)
-Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
- [85.158.142.2])
- by mx.groups.io with SMTP id smtpd.web12.29792.1652086935734425023
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C789C433EF
+	for <webhook@archiver.kernel.org>; Mon,  9 May 2022 09:02:53 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web09.29734.1652086964788237535
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 May 2022 02:02:16 -0700
+ Mon, 09 May 2022 02:02:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=MWq0BKe/;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.2,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=kK057gxV;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2,
  mailfrom: zhengrq.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1652086934; i=@fujitsu.com;
-	bh=jpIvr0LHazqFgPU1JaNB0Aknsu+O5m+Jrf2WVuwL7Dk=;
+	s=170520fj; t=1652086962; i=@fujitsu.com;
+	bh=fROu78q/9im9NskStkjDfcLsDH9V22APeVmm+VPsvl8=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=MWq0BKe/39B0/3xs0fm3iKTbn0BOvSDf1rsHNU777r3qdX/Hsbrz405SoQi69m0tQ
-	 4AYEH/3g5vhzJdIabpgkhmkfJZD+MiCqzN+9Ildniz9lC+fmwQ0JVnW7vvsck66yxa
-	 /kVVqfmQ43il3ix7Bvz0POJM/gfeYGDUXPTqGtjtGSn9uyR5QBjwL2OLEkQihRiEVA
-	 RnwFtW8BM59XULHf4RxFNAY3DXWHf9A6NtH//9Oy0K3mA0XNscmlpI53H1K2H9Bq8T
-	 iMahYPnQXTgnaFHNtVADYmhhu3w1DVGn0AsbzUxJBEAK5shZPUxY9gTH9n9D2SXeGT
-	 oC714aU6tw/6Q==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrJIsWRWlGSWpSXmKPExsViZ8ORqDv1RkW
-  SwerjhhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8a1yaeZCvZyVExr3srUwHiZvYuRi0NI4Amj
-  xJdvqxkhnAtMEq8X72TuYuQEcvYzSnS/Ygex2QR0JV78WMwCYosI6Essnb0HrEZYwFxi//O9Y
-  HEWARWJ7y+OMYHYvALuEh1n+8BqJAQUJKY8fM8MEReUODnzCVg9s4CExMEXL4DiHEA1ihKzp8
-  tDlFdIvD58CapVTeLquU3MExj5ZiHpnoWkewEj0ypGu6SizPSMktzEzBxdQwMDXUNDU11zIGV
-  mppdYpZuol1qqm5yaV1KUCJTWSywv1kstLtYrrsxNzknRy0st2cQIDMGUYrdlOxj39f3UO8Qo
-  ycGkJMq7/mpFkhBfUn5KZUZicUZ8UWlOavEhRhkODiUJ3o8gOcGi1PTUirTMHGA8wKQlOHiUR
-  Hi7QNK8xQWJucWZ6RCpU4yKUuK8ideBEgIgiYzSPLg2WAxeYpSVEuZlZGBgEOIpSC3KzSxBlX
-  /FKM7BqCTMGw4yhSczrwRu+iugxUxAiz8GlIIsLklESEk1MC2avOasnteD72++zciwYdW75LF
-  LRL/QR/XgYiXDhE+Pw5eIH76bZjWTbaX0oR61LfwRvQsalogeDRAqLTDTmPT828NKa5VbERGr
-  5y2aqvo6eF/DPOtb2Y/492en87/Y+XOl8J400c6seDl/rducE+bvDY1h/Raoty5aM84/+Py9F
-  vNVM77+bPfbypW0/s2hPTu0fi5dpL98wXKeTZYsrTN7Iv4+u3tl+up1Thd9rB5Yrni7RMZN8/
-  pfjeXG+r4TfP4+ua/9/LCE8Tsn47uxeStaxIWV9rIaSNp17XrQK7/Br/9cn+lsebnsitS/EuL
-  3rtctN45yv5Qy6dmSi+K5T80/todWms7bdoVHvqDj/VklluKMREMt5qLiRADviayvPAMAAA==
+	b=kK057gxVa2gCGJZWMECv7RLRLcRkuwxRASJ26lJQf9Vez/O59+KW2AzYiePUxIAuH
+	 RshqlzqO8F314aaRwiSYbxIIXadzZUvyqGScwEss8lH2Rl9Sqb+7MDoZK/YWHfYjSu
+	 l4oBQ5lFog9L+9mPx1J/+c+9+VVkRb0FFhK27lt74FBbir1qe+F0dLbr6ny5izG3Gd
+	 OsB62e449gkLYaQdpn9jWKpfea30bHAVxHBhIjBO0M+03kq3SxqFvPRb+Fgmo0gMSU
+	 JdwayeBcPOwKz16H5IiZNQ0kPF3lajl1NzD2DwFv0qruBE17+4a0/G9RTl+FAjks5M
+	 AXKAyOwWronKQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrEIsWRWlGSWpSXmKPExsViZ8MxSXfTjYo
+  kg+9XRC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oxr19ezFvwWqFgyXaWB8SFfFyMXh5DAE0aJ
+  rUf/MkE4F5gkZmydxQLh7GeUaHj3gr2LkZODTUBX4sWPxSwgtoiAvsTS2XuYQWxhAXuJo1vWM
+  YHYLAIqEqdfzgKL8wq4S6z4egIsLiGgIDHl4XuouKDEyZlPwOYwC0hIHHzxAijOAVSjKDF7uj
+  xEeYXE68OXmCFsNYmr5zYxT2Dkm4WkexaS7gWMTKsYrZOKMtMzSnITM3N0DQ0MdA0NTXWNjXQ
+  Njcz0Eqt0E/VSS3XLU4tLdI30EsuL9VKLi/WKK3OTc1L08lJLNjECgy+lWKFuB+O1lT/1DjFK
+  cjApifKuv1qRJMSXlJ9SmZFYnBFfVJqTWnyIUYaDQ0mC9yNITrAoNT21Ii0zBxgJMGkJDh4lE
+  d4ukDRvcUFibnFmOkTqFKMux99Pf/cyC7Hk5eelSonzJl4HKhIAKcoozYMbAYvKS4yyUsK8jA
+  wMDEI8BalFuZklqPKvGMU5GJWEecNBpvBk5pXAbXoFdAQT0BEfA0pBjihJREhJNTBtmH3ssON
+  W/5WT//BfE7u8NFuMgfP5lUrR3pZJdR3CsdaZT79cvN05ObvshVXuXDHnHZ0TFaZXn5bU5bvN
+  Oost7/aCJbIsE71y7fjlTzGz+vdecll9cr1IOgfjnmP3zf44PvUJKp/uWftO+f+CJdn6chP6p
+  /YmGlyd9WKuJeOE9CNqEaGPj/G3v5DK7D9+N7qV3V6EjU9KgOWCT+Ul2W0Hcj1rIlt/fptRYL
+  NFoNbyYfHJ3wpil9u9GNYmu83lb+Noc/FsWxhQ/bKxIMl68qRs/sKp25dJ+i7b46uwgPG6OJf
+  mgd2pbQ/Myh1Wqs/TXVJuH1CTo7hHv/hc+nelnZ2T7hldf7j5qWWbFm9iqxJLcUaioRZzUXEi
+  AAoNGJhFAwAA
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-13.tower-545.messagelabs.com!1652086933!252134!1
-X-Originating-IP: [62.60.8.97]
+X-Msg-Ref: server-3.tower-565.messagelabs.com!1652086962!158425!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.86.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 8346 invoked from network); 9 May 2022 09:02:13 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-13.tower-545.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 9 May 2022 09:02:13 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 3BE9810019F
+Received: (qmail 30304 invoked from network); 9 May 2022 09:02:42 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-3.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 9 May 2022 09:02:42 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id EE7DD100331
 	for <openembedded-devel@lists.openembedded.org>;
- Mon,  9 May 2022 10:02:13 +0100 (BST)
+ Mon,  9 May 2022 10:02:41 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 2802B100196
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id E16281000FE
 	for <openembedded-devel@lists.openembedded.org>;
- Mon,  9 May 2022 10:02:13 +0100 (BST)
+ Mon,  9 May 2022 10:02:41 +0100 (BST)
 Received: from CentOS7.g08.fujitsu.local (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 9 May 2022 10:02:10 +0100
+ (TLS) id 15.0.1497.32; Mon, 9 May 2022 10:02:20 +0100
 From: zhengrq.fnst <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] mbw: upgrade 1.4 -> 1.5
-Date: Mon, 9 May 2022 17:02:02 +0800
-Message-ID: <1652086922-2820-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] gtk4: upgrade 4.6.2 -> 4.6.3
+Date: Mon, 9 May 2022 17:02:12 +0800
+Message-ID: <1652086932-2858-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -76,37 +77,81 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 May 2022 09:02:23 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 May 2022 09:02:53 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97018
+ https://lists.openembedded.org/g/openembedded-devel/message/97019
 
-License-Update: Version of mbw updated to 1.5
+Overview of Changes in 4.6.3, 21-04-2022
+========================================
+
+* GtkOverlay:
+ - Bring back positional style classes
+
+* GtkFileChooser:
+ - Prevent unwanted completion popups
+ - Fix small problems in save mode
+ - Fix buildable suport of GtkFileFilter
+
+* GtkPopover:
+ - Fix button positions in right-to-left locales
+
+* GtkLabel:
+ - Fix small issues with link handling
+
+* Tooltips:
+ - Don't restrict the minimum tooltip length
+
+* Theme:
+ - Don't use opacity for overlay scrollbars
+ - Fix selection text color in  vertical spin buttons
+
+* GSK:
+ - Accept textures that are generated by webkit
+ - Align offscreen rendering to the pixel grid
+
+* Accessibility
+ - Fix a crash in startup when orca is running
+
+* Input:
+ - Fix display changes in GtkIMMultiContext
+ - Fix activating on-screen keyboards
+ - Always propagate hold events in GtkEventControllerScroll
+
+* Windows:
+ - Fix a critical warning in clipboard handling
+ - Report serial numbers for events
+
+* MacOS:
+ - Prevent fullscreen transition reentrancy
+
+* Translation updates
+ British English
+ Czech
+ German
+ Indonesian
+ Latvian
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- meta-oe/recipes-benchmark/mbw/mbw_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-gnome/recipes-gnome/gtk4/{gtk4_4.6.2.bb => gtk4_4.6.3.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gtk4/{gtk4_4.6.2.bb => gtk4_4.6.3.bb} (98%)
 
-diff --git a/meta-oe/recipes-benchmark/mbw/mbw_git.bb b/meta-oe/recipes-benchmark/mbw/mbw_git.bb
-index 52b939950..cfdcfeb9b 100644
---- a/meta-oe/recipes-benchmark/mbw/mbw_git.bb
-+++ b/meta-oe/recipes-benchmark/mbw/mbw_git.bb
-@@ -2,13 +2,13 @@ SUMMARY = "MBW determines the copy memory bandwidth available to userspace progr
- HOMEPAGE = "http://github.com/raas/mbw"
- SECTION = "console/tests"
- LICENSE = "LGPL-2.1-only"
--LIC_FILES_CHKSUM = "file://mbw.spec;beginline=1;endline=10;md5=bbb77813272134a5c461f71abe945bef"
-+LIC_FILES_CHKSUM = "file://mbw.spec;beginline=1;endline=10;md5=34d71e08e6337a8411d82d7dd0c54fe2"
+diff --git a/meta-gnome/recipes-gnome/gtk4/gtk4_4.6.2.bb b/meta-gnome/recipes-gnome/gtk4/gtk4_4.6.3.bb
+similarity index 98%
+rename from meta-gnome/recipes-gnome/gtk4/gtk4_4.6.2.bb
+rename to meta-gnome/recipes-gnome/gtk4/gtk4_4.6.3.bb
+index fdfe3635c..a0a60fd45 100644
+--- a/meta-gnome/recipes-gnome/gtk4/gtk4_4.6.2.bb
++++ b/meta-gnome/recipes-gnome/gtk4/gtk4_4.6.3.bb
+@@ -33,7 +33,7 @@ MAJ_VER = "${@oe.utils.trim_version("${PV}", 2)}"
+ UPSTREAM_CHECK_REGEX = "gtk-(?P<pver>\d+\.(\d*[02468])+(\.\d+)+)\.tar.xz"
  
- SRC_URI = "git://github.com/raas/${BPN}.git;branch=master;protocol=https"
+ SRC_URI = "http://ftp.gnome.org/pub/gnome/sources/gtk/${MAJ_VER}/gtk-${PV}.tar.xz"
+-SRC_URI[sha256sum] = "ff263af609a50eb76056653592d929459aef4819a444c436f6d52c6f63c1faec"
++SRC_URI[sha256sum] = "a57acd0e4482981700fdf86596c7413cb61ef47f75e4747fda809e8231b8d96c"
  
--SRCREV = "2a15026ff65160127204881263464b1740a57198"
-+SRCREV = "d2cd3d36c353fee578f752c4e65a8c1efcee002c"
- 
--PV = "1.4+git${SRCPV}"
-+PV = "1.5"
- 
- S = "${WORKDIR}/git"
+ S = "${WORKDIR}/gtk-${PV}"
  
 -- 
 2.25.1
