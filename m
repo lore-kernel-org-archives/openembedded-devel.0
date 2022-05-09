@@ -2,70 +2,71 @@ Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6735EC4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 67330C433F5
 	for <webhook@archiver.kernel.org>; Mon,  9 May 2022 09:01:53 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.2])
- by mx.groups.io with SMTP id smtpd.web08.29590.1652086906819965263
+Received: from mail1.bemta36.messagelabs.com (mail1.bemta36.messagelabs.com
+ [85.158.142.2])
+ by mx.groups.io with SMTP id smtpd.web12.29785.1652086906839911158
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 09 May 2022 02:01:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=K7A4I2CE;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.2,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=GeiTp9vr;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.2,
  mailfrom: zhengrq.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1652086905; i=@fujitsu.com;
-	bh=0x+B7GE/LAP44DJKN3vWsEozPelgFpQn/rSZH6KHJUE=;
+	bh=tw3V6N6p/JzI0uwccFAJUHCeBjjhejH3KRQYvJ+KwCk=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=K7A4I2CE+05OkAotThPHz2pqGVKXgYXx2dHTtqr+licLspMrYUGs8xLEtRO+MgM0j
-	 1/Wah6QU6+NvKslGIPz8BS3Ki+bF9rtoyq064yO8uEvQnTJ5eoZhrcy3EJXJqaAGIP
-	 PmPxWcpmDE7vJUbPzBfJ8v+Y31efKlzJtCF5JtPI2P/uNib+lFxdXfJpru20eE0nGe
-	 +/qpIUxCE5xAtXRrSleLG4N7KFNb9HDZnpF07tA6TBipg9IdY7yawzwAx3VF+tmTz4
-	 9PRTKQ3MIQS98qYSvg1Bw5noIXDoWF8q10PwqVYbZw3oUKA0atoYcKK4gqTWwQZwPa
-	 1DT4XTwa9UcAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrKIsWRWlGSWpSXmKPExsViZ8MxSbfiRkW
-  SQf9SfYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPqjE6mgns8FXunL2duYHzC3cXIxSEk8IRR
-  4nX/EkYI5wKTxORlfWxdjJxAzn5GibsnzEBsNgFdiRc/FrOA2CIC+hJLZ+9hBrGFBXwkLkzcC
-  BZnEVCRaLq8lh3E5hVwl/jx6gBYjYSAgsSUh++ZIeKCEidnPgGrZxaQkDj44gVQnAOoRlFi9n
-  R5iPIKideHL0G1qklcPbeJeQIj3ywk3bOQdC9gZFrFaJVUlJmeUZKbmJmja2hgoGtoaKoLJE1
-  N9BKrdBP1Ukt1y1OLS3QN9RLLi/VSi4v1iitzk3NS9PJSSzYxAkMvpZhh1g7GWX0/9Q4xSnIw
-  KYnyrr9akSTEl5SfUpmRWJwRX1Sak1p8iFGGg0NJgvcjSE6wKDU9tSItMwcYBzBpCQ4eJRHeL
-  pA0b3FBYm5xZjpE6hSjopQ4b+J1oIQASCKjNA+uDRZ7lxhlpYR5GRkYGIR4ClKLcjNLUOVfMY
-  pzMCoJ84aDTOHJzCuBm/4KaDET0OKPAaUgi0sSEVJSDUz8kxpXqb345uudU/5mtU7xnMbix2c
-  +BV68dozj8InNYgfieZ8ef932u+3R1MiVGbPt7uj9qT4yyULn1Or8iDIPsdsLX5ycMyd0jrlP
-  yo9Jx376vWnN2/gk51J40+oNzpKFc9x5SpIYf1/Td9HS/mjv/VbNme+TpaKiQEWzQcw798jVQ
-  rtDm84KfBNcvM5149btG6YplU15dDbnYoIZT/MTP9dTEtKpJrlb1kbUB3oI60lu5s8XX78/+J
-  pqyOqGi3qPI4q8lhcF6LqdW8/AO3d+BvunqGMcR2c841bpZUqcmxnfnjGzv17pyW+W9sw6qaf
-  7xLaLp4f83PDw/Jdtp3+k7jPYOH8G6+pq6TmZdb1KLMUZiYZazEXFiQBu+uw8OAMAAA==
+	b=GeiTp9vrWpzTC/lifmc1M7mTNKRXM58niD9f/8NnQ7cM2xISUMeRwvVzicjdQSPGr
+	 g52bhB8UFsf+K6eKMlYa+d1h+MeZS6SCCeXSiFFFCIuEcj3zdQk2eS6LEsiZLAtjVU
+	 ePXRGzWCKURrsr77xR7gGX6mTSjVR5zHbNdR77YefUjAEil2908ubCtujueaLi0Ing
+	 3fuXJ32cqkzP6EfhrCm4BPmq7JcbaV/dv5uiEPaaB57WsFdhQYL7g0X/kpPfr0j4xq
+	 362vyXeHYkUtQt+JZavYNUhUj8AThae8+j+az8gzZkQPFfnSUoJnukClfZqY49dbku
+	 c5phtqsQSTP5w==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrDIsWRWlGSWpSXmKPExsViZ8MxSbfiRkW
+  SwdNtxhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bz2qPsBS/4KtZ0f2VsYHzA08XIxSEk8IRR
+  4uaC/0wQzgUmia27jjBCOPsZJc7cWcjaxcjJwSagK/Hix2IWEFtEQF9i6ew9zCC2sICNxLpr3
+  5lAbBYBFYk9X7aAxXkF3CUuzNkAFpcQUJCY8vA9VFxQ4uTMJ2BzmAUkJA6+eAEU5wCqUZSYPV
+  0eorxC4vXhS8wQtprE1XObmCcw8s1C0j0LSfcCRqZVjHZJRZnpGSW5iZk5uoYGBrqGhqa6Zma
+  6hpaGeolVuol6qaW6yal5JUWJQGm9xPJivdTiYr3iytzknBS9vNSSTYzAIEwpdtq/g/Fp30+9
+  Q4ySHExKorzrr1YkCfEl5adUZiQWZ8QXleakFh9ilOHgUJLg/QiSEyxKTU+tSMvMAUYETFqCg
+  0dJhLcLJM1bXJCYW5yZDpE6xWjM8fHPxb3MHH8//d3LLMSSl5+XKiXOm3gdqFQApDSjNA9uEC
+  xSLzHKSgnzMjIwMAjxFKQW5WaWoMq/YhTnYFQS5g0HmcKTmVcCt+8V0ClMQKd8DCgFOaUkESE
+  l1cCk9Gb9bOn5KzTDbePtTnFFB9ltNlboENsZPfURtyWPee5fcdb8i2FH1ctckpU9TMOKUmbN
+  nHgkYNr/BUeMfy1v3j5/kwszx8fGFTUvjl4x/2jxI72gT6LrxuzkcDGxMIFdZanT/76b95Tz9
+  VfLzkO7BNlE/rsov/udWNZU+XN257+W6r26f/cUWMxaf+BYfk6a48ybdmuMJHgudM6fNmkJ2z
+  63cyevnziV+28h65/0VxanVq0UVNF6U5oULd/ev/NRf2rmtw+Ct/7475c59/2DevfqJ1oCKT9
+  0UxL7ltvFVzz8brvqyYW0lctL1k3ap57+86j1hWvlCn57r6351/KtzJvxzswNjl6hzu/kXZj+
+  KbEUZyQaajEXFScCAB1b9dZPAwAA
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-20.tower-591.messagelabs.com!1652086904!320880!1
+X-Msg-Ref: server-8.tower-528.messagelabs.com!1652086904!6683!1
 X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.86.4; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 7262 invoked from network); 9 May 2022 09:01:44 -0000
+Received: (qmail 24328 invoked from network); 9 May 2022 09:01:44 -0000
 Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-20.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-8.tower-528.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 9 May 2022 09:01:44 -0000
 Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 4742E100441
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 5402E10044F
 	for <openembedded-devel@lists.openembedded.org>;
  Mon,  9 May 2022 10:01:44 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 393C310032A
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 462EC1000FF
 	for <openembedded-devel@lists.openembedded.org>;
  Mon,  9 May 2022 10:01:44 +0100 (BST)
 Received: from CentOS7.g08.fujitsu.local (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 9 May 2022 10:01:24 +0100
+ (TLS) id 15.0.1497.32; Mon, 9 May 2022 10:01:39 +0100
 From: zhengrq.fnst <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-oe] [PATCH] libconfig-general-perl: upgrade 2.63 -> 2.65
-Date: Mon, 9 May 2022 17:01:09 +0800
-Message-ID: <1652086869-2735-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] gpsd: upgrade 3.23.1 -> 3.24
+Date: Mon, 9 May 2022 17:01:30 +0800
+Message-ID: <1652086890-2773-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -78,41 +79,47 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 09 May 2022 09:01:53 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97017
+ https://lists.openembedded.org/g/openembedded-devel/message/97016
 
-License-Update: updated to Artistic-2.0
+3.24: 2022-04-22
+  NTRIP 2.0 now works.  But still only plain HTML, not RTP, etc.
+  Remove ntrip option and NTRIP_ENABLE.  Always build.
+  Remove passthrough option and PASSTHROUGH_ENABLE.  Always build.
+  Remove nmea0183 option and NMEA0183_ENABLE.  Always build.
+  Remove netfeed option and NETFEED_ENABLE.  Always build.
+  gpsd will retry ntrip:// and tcp:// connections
+  cgps can expand to show more sats. Added --rtk option.
+  maidenhead() checks for input errors.
+  Better SHM logs.
+  PPS and TOFF JSON now include shm used, and real precision.
+  Add initial, untested, TSIPv1 support
+  split debug messages into different syslog() levels.
+  New ppscheck options, and can use /dev/ppsX devices.
+  First try at TSIPv1 protocol decodes.
+  Decode Quectel $PQVERNO for firmware version
+  Decode Skytrak PX1172RH_DS messages.
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- ...general-perl_2.63.bb => libconfig-general-perl_2.65.bb} | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-devtools/perl/{libconfig-general-perl_2.63.bb => libconfig-general-perl_2.65.bb} (65%)
+ .../recipes-navigation/gpsd/{gpsd_3.23.1.bb => gpsd_3.24.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-navigation/gpsd/{gpsd_3.23.1.bb => gpsd_3.24.bb} (98%)
 
-diff --git a/meta-oe/recipes-devtools/perl/libconfig-general-perl_2.63.bb b/meta-oe/recipes-devtools/perl/libconfig-general-perl_2.65.bb
-similarity index 65%
-rename from meta-oe/recipes-devtools/perl/libconfig-general-perl_2.63.bb
-rename to meta-oe/recipes-devtools/perl/libconfig-general-perl_2.65.bb
-index b12e2e4ba..ecc89d075 100644
---- a/meta-oe/recipes-devtools/perl/libconfig-general-perl_2.63.bb
-+++ b/meta-oe/recipes-devtools/perl/libconfig-general-perl_2.65.bb
-@@ -1,15 +1,14 @@
- DESCRIPTION = "Config file parser module"
- HOMEPAGE = "http://search.cpan.org/dist/Config-General/"
--LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
-+LICENSE = "Artistic-2.0 | GPL-1.0-or-later"
- SECTION = "libs"
--LIC_FILES_CHKSUM = "file://README;beginline=90;endline=90;md5=3ba4bbac1e79a08332688196f637d2b2"
-+LIC_FILES_CHKSUM = "file://README;beginline=90;endline=90;md5=53fe13727e61798809ec5c160dc93e6e"
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.24.bb
+similarity index 98%
+rename from meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb
+rename to meta-oe/recipes-navigation/gpsd/gpsd_3.24.bb
+index 410db92bd..245f8728c 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.23.1.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.24.bb
+@@ -8,7 +8,7 @@ PROVIDES = "virtual/gpsd"
+ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+            file://gpsd.init \
+            "
+-SRC_URI[sha256sum] = "0b991ce9a46538c4ea450f7a8ee428ff44fb4f8d665fddf2ffe40fe0ae9a6c09"
++SRC_URI[sha256sum] = "00ee13f615655284874a661be13553abe66128e6deb5cd648af9bc0cb345fe5c"
  
- SRCNAME = "Config-General"
- 
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TL/TLINDEN/${SRCNAME}-${PV}.tar.gz"
- 
--SRC_URI[md5sum] = "e3ea2a6dc76931cf638b5227aceabf60"
--SRC_URI[sha256sum] = "0a9bf977b8aabe76343e88095d2296c8a422410fd2a05a1901f2b20e2e1f6fad"
-+SRC_URI[sha256sum] = "4d6d5754be3a9f30906836f0cc10e554c8832e14e7a1341efb15b05d706fc58f"
- 
- S = "${WORKDIR}/${SRCNAME}-${PV}"
+ inherit scons update-rc.d python3-dir python3native systemd update-alternatives pkgconfig
  
 -- 
 2.25.1
