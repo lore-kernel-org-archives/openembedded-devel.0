@@ -1,74 +1,115 @@
-Return-Path: <kai.kang@windriver.com>
+Return-Path: <jstephan@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A2E4C433F5
-	for <webhook@archiver.kernel.org>; Wed, 11 May 2022 07:45:30 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.3.146])
- by mx.groups.io with SMTP id smtpd.web11.8657.1652255128197775456
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90678C433F5
+	for <webhook@archiver.kernel.org>; Wed, 11 May 2022 08:16:00 +0000 (UTC)
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+ [209.85.221.67])
+ by mx.groups.io with SMTP id smtpd.web11.8873.1652256959329231214
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 May 2022 00:45:28 -0700
+ Wed, 11 May 2022 01:15:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.3.146,
- mailfrom: kai.kang@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 24B7jRd6002259
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 May 2022 00:45:27 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Wed, 11 May 2022 00:45:26 -0700
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Wed, 11 May 2022 00:45:26 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH v2] wxwidgets: enable to use private fonts
-Date: Wed, 11 May 2022 15:45:22 +0800
-Message-ID: <20220511074522.28499-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@baylibre-com.20210112.gappssmtp.com header.s=20210112
+ header.b=u6+DDYrX;
+ spf=pass (domain: baylibre.com, ip: 209.85.221.67,
+ mailfrom: jstephan@baylibre.com)
+Received: by mail-wr1-f67.google.com with SMTP id s15so512550wrb.7
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 11 May 2022 01:15:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20210112.gappssmtp.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=iQNkOSfu/76gRPGDfoLxxYT4PBDRWfv5jTRY6m+3yOc=;
+        b=u6+DDYrX5qNH+hBbJi08ZYE5cZ0KtOgEO8a8uyzNOsH+XM2cMVjxwHmCuBI+QZ9TdK
+         Tibyzitda7zHTPUEhbiYBxlYMlKdpyvN6MiqM4wvrwmDtr/pEAhsnfPlJam43JNhXgAV
+         5ynOGjoDR9zAh4MHH28NQzABfZp/rf8dnVL18gErYHDD3MWjcFE8N5FxgQ509wySg/Fs
+         BWC3ylZYPF87ha2oh1OyNkDS2DV2yW3U1/cUyCD8qrEERdxgLRLZIRnod90id34afV+s
+         u0WNXZh+SJilqHTsdc4bb4/w9O/k0flhUFBZato8vkSODdaK/u2Ne3/6w13v8OfRe1oH
+         Y46w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=iQNkOSfu/76gRPGDfoLxxYT4PBDRWfv5jTRY6m+3yOc=;
+        b=DESrN2VeFJWGpdgJlYCW6ilx0cAR6NmJIJE7BgR0n4+N4tBAn/khO5TXoIWkaP+0AM
+         N4UIdVZdcBo8Dkp3MpBBWqAoFIIS3vtJteSCJ5Reo0CEqc6Xooeh+R3mXjwa4dmCI9+C
+         1ut5Rdr/k1Y0vAKXmbLGf78UhsksTIMbNaYKJTxHpSM298uNGoS0/xPTOaaKTHVLhqYb
+         t1E7HRUTkTlwu733ZCCs/IMDUQRPAW0GlGhByalwplPflgVypWqQGXCbZ6D3StBTR0G9
+         OqnXd/un6yEWmR+6jEH7IUTu9XYuqYbYfaTLM1TFP7XhlTqiduDqoQLFZBvxNs+lWDyz
+         s1lg==
+X-Gm-Message-State: AOAM531iWXT+cg4jWOCKjWGCvEU637YHaMLUTpd3VTSgcEHbWRo0J1jE
+	XIuNumHnqsk9bW1nzwq2ST+9f6bM3k/dk995
+X-Google-Smtp-Source: 
+ ABdhPJz+TQnKYSg4V2/rZFDeQHpLeb/kELZCDdwRnqI1M4hTha/C+DfcNMjjcAmlIaBU/nzdAUFRfA==
+X-Received: by 2002:a5d:6c65:0:b0:20c:5230:f145 with SMTP id
+ r5-20020a5d6c65000000b0020c5230f145mr21057027wrz.337.1652256957608;
+        Wed, 11 May 2022 01:15:57 -0700 (PDT)
+Received: from localhost.localdomain (179.160.117.78.rev.sfr.net.
+ [78.117.160.179])
+        by smtp.gmail.com with ESMTPSA id
+ bg5-20020a05600c3c8500b003942a244eebsm1356453wmb.48.2022.05.11.01.15.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 11 May 2022 01:15:57 -0700 (PDT)
+From: Julien STEPHAN <jstephan@baylibre.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Julien STEPHAN <jstephan@baylibre.com>
+Subject: [meta-multimedia][kirkstone][PATCH] libcamera: fix packaging
+Date: Wed, 11 May 2022 10:14:09 +0200
+Message-Id: <20220511081409.3437145-1-jstephan@baylibre.com>
+X-Mailer: git-send-email 2.35.2
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 11 May 2022 07:45:30 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 11 May 2022 08:16:00 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97033
+ https://lists.openembedded.org/g/openembedded-devel/message/97034
 
-From: Kai Kang <kai.kang@windriver.com>
+libcamera.so.0 and libcamera-base.so.0 are packaged in ${PN}-dev although
+they should be packaged in ${PN}. See poky/meta/conf/bitbake.conf.
+This trigger the following error when trying to run the `cam` utility
+(packaged inside ${PN}):
 
-Enable option wxUSE_PRIVATE_FONTS of wxwidgets if build with gtk. It
-allows application to use the font from the given file even if it is
-not globally installed on the system.
+$ cam -l
+cam: error while loading shared libraries: libcamera.so.0: cannot open shared object file: No such file or directory
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+$ read-elf -d /usr/bin/cam
+Dynamic section at offset 0x2c740 contains 37 entries:
+  Tag        Type                         Name/Value
+ 0x0000000000000001 (NEEDED)             Shared library: [libcamera.so.0]
+ 0x0000000000000001 (NEEDED)             Shared library: [libcamera-base.so.0]
+[...]
+
+So package libcamera is broken and need to be installed along with
+libcamera-dev to be functionnal. Fix it by packaging libcamera.so.0 and
+libcamera-base.so.0 into ${PN}
+
+Signed-off-by: Julien STEPHAN <jstephan@baylibre.com>
 ---
-v2:
-* use upper case 'ON' to align with others in oe
+ meta-multimedia/recipes-multimedia/libcamera/libcamera.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
-index 6b57cb54c..b9b1dcf0d 100644
---- a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
-+++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.1.5.bb
-@@ -39,6 +39,7 @@ EXTRA_OECMAKE += " \
-     -DwxUSE_LIBTIFF=sys \
-     -DwxUSE_REGEX=builtin \
-     -DwxPLATFORM_LIB_DIR=${@d.getVar('baselib').replace('lib', '')} \
-+    ${@bb.utils.contains('PACKAGECONFIG', 'gtk', '-DwxUSE_PRIVATE_FONTS=ON', '', d)} \
- "
- EXTRA_OECMAKE:append:libc-musl = " \
-     -DHAVE_LOCALE_T=OFF \
+diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
+index 713626069..0b9f3f7a5 100644
+--- a/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
++++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera.bb
+@@ -64,10 +64,10 @@ do_recalculate_ipa_signatures_package() {
+ 
+ FILES:${PN}-dev = "${includedir} ${libdir}/pkgconfig"
+ FILES:${PN}-dev += " ${libdir}/libcamera.so"
+-FILES:${PN}-dev += " ${libdir}/libcamera.so.0"
++FILES:${PN} += " ${libdir}/libcamera.so.0"
+ FILES:${PN} += " ${libdir}/libcamera.so.0.0.0"
+ FILES:${PN}-dev += " ${libdir}/libcamera-base.so"
+-FILES:${PN}-dev += " ${libdir}/libcamera-base.so.0"
++FILES:${PN} += " ${libdir}/libcamera-base.so.0"
+ FILES:${PN} += " ${libdir}/libcamera-base.so.0.0.0"
+ FILES:${PN} += " ${libdir}/v4l2-compat.so"
+ FILES:${PN}-gst = "${libdir}/gstreamer-1.0/libgstlibcamera.so"
 -- 
-2.17.1
+2.35.2
 
 
