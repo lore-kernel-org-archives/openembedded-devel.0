@@ -2,53 +2,53 @@ Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B5789C4321E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3B91C4167B
 	for <webhook@archiver.kernel.org>; Thu, 12 May 2022 08:42:11 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
- [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.web08.1861.1652344924795774067
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
+ [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.web11.1830.1652344925701048531
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 May 2022 01:42:05 -0700
+ Thu, 12 May 2022 01:42:06 -0700
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@bgdev-pl.20210112.gappssmtp.com header.s=20210112
- header.b=V94eQdxR;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.48,
+ header.b=cN0GONHg;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.42,
  mailfrom: brgl@bgdev.pl)
-Received: by mail-wr1-f48.google.com with SMTP id w4so6170628wrg.12
+Received: by mail-wr1-f42.google.com with SMTP id m1so6199643wrb.8
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 May 2022 01:42:04 -0700 (PDT)
+ Thu, 12 May 2022 01:42:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=bgdev-pl.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=ha6zPouw+TOAZiVer7xOSurqEo8YC53bsDENimXV0Gw=;
-        b=V94eQdxRaPAOJLjzS//1vmHlXIG+oYcpMxP74bM7S4UvzLrYernOLUKMovzIwBiI2e
-         e8g8WfV+AGSRh9pjYOBsOvRoHAtXKZODeVETEIn4in4nf2ioMLEbIHeBKebJpAFjryl6
-         P+yMgGYHQymLoqdtaLj+lXEmGZ0o36xCl1ZC3VUYobfGmG2fJFQsRVET1bp0naoUKVlg
-         yUSvP3ZrjJgpFKi/Jufa1EiSRodXRuUkK2w0zQH9mp1H4OTjaHztVGQjPjpMa8ajcaSE
-         9ZWz9hK/OxxYRA0QKJ4YpnQlx9mvA97W+ZDnpt4p+YTJA8HrzL8VLJRtCb44VsH9jIEx
-         GESA==
+        bh=ERCZ46hNJ2Qv8amlcLGPoW6UeiO5kXNz9i2G2sGxL18=;
+        b=cN0GONHguSLeuP5Ad0UDJCNFEy4Uy2lSog3nCZpsfXoLKB7FBr4totpnT84SnfE14d
+         eXxsdpTQ706rM5ioRLKHZXxRxZnGEl+uY+SKQMKC56OFydxJCTpScgShxLhGQ95/gx5/
+         TY3YNdVGNgZv8ZzS9/sbYRFelT8PBWSo4NHMWIOXYcUrG0V1p9+BJVGJFZCD1BOPC+PH
+         VQEhI9quUrvbWTHEZPdT+nx+Y8DQtfhOV4wmEiEoPLIY7QJmcxmeQQgPM1dBR30sByzm
+         Ri2UMXBlQ63rPQNkBh9TNpujtIPPHatnxtyFJiWRZwiC5Y6dbNR17OrEEuHmuc11FU7D
+         uFqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=ha6zPouw+TOAZiVer7xOSurqEo8YC53bsDENimXV0Gw=;
-        b=1uUeRGdJT98galwzvICoV+lcDALqQLu7KaECmB7BcyB4umLEUC4Rrr8XL5/jCYyh1b
-         XgE1luLW3eaiI7ePraXY+jKA5xQQ89Ec1mUPtDAZOYF+XzWckBuqwclesRJQ17g0rASG
-         s18Y2Su/w6jUySF/JkO8bbA43eLZVmzdA7btsXXMzd4nm3SBd6WlEIFzDjxGfJhh8Zj1
-         T9Q1rh0hiqis797B+8PDeMKJ88AeMdI1zDmjg31oPJClPCa1ey+uexaZsHVWo3nxS28I
-         zPYxlVsSO+QaOpNAInjHaETrmqdT+RfQ1abnkeRm/x8Yk/tX9NYWKoFFXW1DK9aWJ/v6
-         rOgw==
-X-Gm-Message-State: AOAM530TKADrWz4SbJiqkDnvFl5BKizQwdoCUlXku9LG0g/1RQVpitsD
-	HB6D80D1RkhNMnF8Rt204rjnAxc2cVNy3zvI
+        bh=ERCZ46hNJ2Qv8amlcLGPoW6UeiO5kXNz9i2G2sGxL18=;
+        b=T9ryLDqYa7kX02Y61DXIgXRNYBlKbZZ7SKBZoUfjtzgHv53mge/E9dofjoRIQEtwAb
+         ESipgAIP632WPuRaHlvLsqHRqdxJM19SQsQ23KDNgJIDysIwyGGQNa+GD0Y/K64Xsp3W
+         f3a9BvEHM5Ax9b2ZF0xYyBz8Mf7Qot7QNbGJytRElXo4pOAuw9cO6DWHMg6iInNiKHah
+         fJbYjfhFD4EnBrqe/G7oauOFGrVI2eUFNCTW5rc9aewQXNm4/ZfNBykdU57OnqBhJJmZ
+         WTCRfaF4XRjqGvkUl+vwkrg05kRIf9hozzUiMk0e2L+W2INmUF2cK2z4S1Xxub7S9ay6
+         5z+Q==
+X-Gm-Message-State: AOAM531yN1CMTMa6fL84gmkLm+CQEqkqSzfpLbBy+6GEXEnV4Rf7WGFC
+	piU04NsV2hhFP3Df8qgp7S0fyQ==
 X-Google-Smtp-Source: 
- ABdhPJxUxnRrTS4fl8evDn4BQCnjpSpA0LJsS4M4CE+iPl/gZz8cFvfUScOtZmhpVbhwr7eXF3K31g==
-X-Received: by 2002:a05:6000:2cd:b0:20c:5ff6:1816 with SMTP id
- o13-20020a05600002cd00b0020c5ff61816mr25444898wry.336.1652344923328;
-        Thu, 12 May 2022 01:42:03 -0700 (PDT)
+ ABdhPJy1HHSGVe5Mask1uuCNvyu2kbLudFduO3SFLWgEYBvN4JKtA5nr5Uo9NBZ+Fh7YkRu+2FdE3g==
+X-Received: by 2002:adf:dd4f:0:b0:20a:ce22:909 with SMTP id
+ u15-20020adfdd4f000000b0020ace220909mr25223852wrm.374.1652344924268;
+        Thu, 12 May 2022 01:42:04 -0700 (PDT)
 Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:167a:c5b3:9ce9:8648])
         by smtp.gmail.com with ESMTPSA id
- m7-20020a5d6247000000b0020c5253d914sm3531898wrv.96.2022.05.12.01.42.02
+ m7-20020a5d6247000000b0020c5253d914sm3531898wrv.96.2022.05.12.01.42.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Thu, 12 May 2022 01:42:03 -0700 (PDT)
 From: Bartosz Golaszewski <brgl@bgdev.pl>
@@ -56,9 +56,9 @@ To: Khem Raj <raj.khem@gmail.com>,
 	Bruce Ashfield <bruce.ashfield@gmail.com>,
 	openembedded-devel@lists.openembedded.org
 Cc: Bartosz Golaszewski <brgl@bgdev.pl>
-Subject: [meta-python][PATCH 05/16] python3-eth-typing: new package
-Date: Thu, 12 May 2022 10:41:41 +0200
-Message-Id: <20220512084152.1388464-6-brgl@bgdev.pl>
+Subject: [meta-python][PATCH 06/16] python3-eth-utils: new package
+Date: Thu, 12 May 2022 10:41:42 +0200
+Message-Id: <20220512084152.1388464-7-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220512084152.1388464-1-brgl@bgdev.pl>
 References: <20220512084152.1388464-1-brgl@bgdev.pl>
@@ -69,45 +69,97 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 12 May 2022 08:42:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97053
+ https://lists.openembedded.org/g/openembedded-devel/message/97054
 
-Add a recipe for eth-typing: common type annotations for ethereum
-python packages.
+Add a recipe for eth-utils: utility functions for codebases
+which interact with ethereum.
 
 Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
 ---
- .../packagegroups/packagegroup-meta-python.bb            | 1 +
- .../recipes-devtools/python/python3-eth-typing_3.0.0.bb  | 9 +++++++++
- 2 files changed, 10 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-eth-typing_3.0.0.bb
+ .../packagegroups/packagegroup-meta-python.bb |  1 +
+ ...-setup-don-t-use-setuptools-markdown.patch | 37 +++++++++++++++++++
+ .../python/python3-eth-utils_2.0.0.bb         | 16 ++++++++
+ 3 files changed, 54 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-eth-utils/0001-setup-don-t-use-setuptools-markdown.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-eth-utils_2.0.0.bb
 
 diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index 4b32c7db2..d8cc9c0a5 100644
+index d8cc9c0a5..11de569a9 100644
 --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
 +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -111,6 +111,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
-     python3-engineio \
+@@ -112,6 +112,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
      python3-et-xmlfile \
      python3-eth-hash \
-+    python3-eth-typing \
+     python3-eth-typing \
++    python3-eth-utils \
      python3-evdev \
      python3-execnet \
      python3-fann2 \
-diff --git a/meta-python/recipes-devtools/python/python3-eth-typing_3.0.0.bb b/meta-python/recipes-devtools/python/python3-eth-typing_3.0.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-eth-utils/0001-setup-don-t-use-setuptools-markdown.patch b/meta-python/recipes-devtools/python/python3-eth-utils/0001-setup-don-t-use-setuptools-markdown.patch
 new file mode 100644
-index 000000000..a500d5b52
+index 000000000..3c3c5270a
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-eth-typing_3.0.0.bb
-@@ -0,0 +1,9 @@
-+SUMMARY = "Common type annotations for ethereum python packages."
-+HOMEPAGE = "https://github.com/ethereum/eth-typing"
++++ b/meta-python/recipes-devtools/python/python3-eth-utils/0001-setup-don-t-use-setuptools-markdown.patch
+@@ -0,0 +1,37 @@
++From bc86d603e632ce61de4ae7a5d4bcef080cbdb160 Mon Sep 17 00:00:00 2001
++From: Bartosz Golaszewski <brgl@bgdev.pl>
++Date: Wed, 11 May 2022 13:45:06 +0200
++Subject: [PATCH] setup: don't use setuptools-markdown
++
++This project is deprecated and irrelevant for the functionality of
++eth-utils. We don't support it in meta-python so just drop it from
++the dependencies.
++
++Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
++---
++ setup.py | 2 --
++ 1 file changed, 2 deletions(-)
++
++diff --git a/setup.py b/setup.py
++index 5717d5b..cb62132 100644
++--- a/setup.py
+++++ b/setup.py
++@@ -37,7 +37,6 @@ setup(
++     # *IMPORTANT*: Don't manually change the version here. Use the 'bumpversion' utility.
++     version='1.1.2',
++     description="""Common utility functions for ethereum codebases.""",
++-    long_description_markdown_filename='README.md',
++     author='Piper Merriam',
++     author_email='pipermerriam@gmail.com',
++     url='https://github.com/ethereum/eth_utils',
++@@ -48,7 +47,6 @@ setup(
++         "toolz>0.8.2,<1;implementation_name=='pypy'",
++         "cytoolz>=0.8.2,<1.0.0;implementation_name=='cpython'",
++     ],
++-    setup_requires=['setuptools-markdown'],
++     extras_require=extras_require,
++     py_modules=['eth_utils'],
++     license="MIT",
++-- 
++2.34.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-eth-utils_2.0.0.bb b/meta-python/recipes-devtools/python/python3-eth-utils_2.0.0.bb
+new file mode 100644
+index 000000000..ff7caf5bf
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-eth-utils_2.0.0.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "Common utility functions for codebases which interact with ethereum."
++HOMEPAGE = "https://github.com/ethereum/eth-utils"
 +SECTION = "devel/python"
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=bf9691ead96f1163622689e47ce3f366"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=287820ad3553117aa2f92bf84c219324"
 +
-+SRC_URI[sha256sum] = "079e4c41e98cf2635d3830a99f3cbd7b1d73d2368464d4493c002bece545184a"
++SRC_URI[sha256sum] = "32f50edb14c5be0c4f0e8c2e6117286ccc5dfda21d170f358add554a048398e3"
 +
 +inherit pypi setuptools3
++
++RDEPENDS:${PN} += " \
++    python3-eth-hash \
++    python3-eth-typing \
++    python3-setuptools \
++    python3-toolz \
++"
 -- 
 2.34.1
 
