@@ -1,120 +1,253 @@
-Return-Path: <xuhuan.fnst@fujitsu.com>
+Return-Path: <ch@denx.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DDBBC4332F
-	for <webhook@archiver.kernel.org>; Thu, 12 May 2022 09:21:22 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web08.2091.1652347273155137779
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92266C433F5
+	for <webhook@archiver.kernel.org>; Thu, 12 May 2022 09:27:32 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by mx.groups.io with SMTP id smtpd.web11.2100.1652347648965640717
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 May 2022 02:21:13 -0700
+ Thu, 12 May 2022 02:27:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=NVT3Yum3;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
- mailfrom: xuhuan.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1652347271; i=@fujitsu.com;
-	bh=PZcnz6JhGMRSOux2XgfOYGjTK0cRYslHuIt80L3QoAw=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=NVT3Yum3VRMmENYkDd28DH+lWLFraUxI3a9EybXKvq6Q5ZFOJhdAgduCrjZTYB/vn
-	 mvCynGq65GYZlHoaWAAnDCDT3H4rD0lXFpbV7lSoTXoHJEe77/wsb5z0p9BD16oUP1
-	 iToJtzgonfSFKtNP1BKrrPdS8xJ+oPLJhL8wU3d9n2aTH1N3UwzSHYx2j3lzmI9OzJ
-	 9n6NUc87bVZAJvQjg1H5wFokuTBW7id8x+qzSyAs7R+yydRaSTzpPRbOww6mj7fp/+
-	 f7G2ktHfJMaVp69HjBjbvoXCFfDda2bki6hN2Pmz3A7VpZONuNcRwPetmygE3GSA8l
-	 kPDWctjptdxbA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrNIsWRWlGSWpSXmKPExsViZ8ORqNt+sSb
-  J4NsLVouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeP7Y9uCZVwVmzc+ZG1g3MTZxcjFISTwhFHi
-  /KqvTBDOBSaJf58esEE4Jxklpjw6wNLFyMnBJqAu8fjma0YQW0RAX2Lp7D3MIDazgKpE98U17
-  CC2sICnRNeqXrA4C1D87YaFTCA2r4CbxNaGu2C2hICCxJSH78FqOAXcJW5fbQDrFQKqOfzjGg
-  tEvaDEyZlPWCDmS0gcfPGCGaJXSeLEio9QcyokXh++BBVXk7h6bhPzBEbBWUjaZyFpX8DItIr
-  ROqkoMz2jJDcxM0fX0MBA19DQVNfYAsi01Eus0k3USy3VLU8tLtE10kssL9ZLLS7WK67MTc5J
-  0ctLLdnECAzjlGK13B2MU1b+1DvEKMnBpCTKe+58TZIQX1J+SmVGYnFGfFFpTmrxIUYZDg4lC
-  d6d54BygkWp6akVaZk5wJiCSUtw8CiJ8BaDpHmLCxJzizPTIVKnGBWlxHm9gJEoJACSyCjNg2
-  uDxfElRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSsK8uy8ATeHJzCuBm/4KaDET0OL9rpUgi0s
-  SEVJSDUxrFTtczN9t8jnx0UZH3DNOJfDHWxebh5f73uQlzuBXmqb2d53yrlnVZ30fSDnHW650
-  6Jw/+ZonA8d/secsM9vKRcr0dMqSdS4/Ork9+n0Ec6fjLb0/J1eXxC6LUlyy/ajNlrvpyX2/n
-  qZ5SgfJ5ddsj84q9Dj+un92V1OgW8Latn1Gu1V83awPSYR/NVDRj636sNTz/7Mog1KxctmDp3
-  +tCK/YrGvwR9zjrKXiqfy+xOrId4tdHaX1Qg+tuzZhkzpbzSGPFy67pX+nOL9K+Bw/OVZpyfT
-  y+AkNsukX+q8tPZu3gy1pxnnDDJ6nPbnaPFHT/4var9ijfvPDt6ACraUa9f4iKlrOF3bEF1tU
-  KLEUZyQaajEXFScCAFgt8dNeAwAA
-X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-3.tower-565.messagelabs.com!1652347270!445339!1
-X-Originating-IP: [62.60.8.97]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.86.4; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 21555 invoked from network); 12 May 2022 09:21:11 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-3.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 12 May 2022 09:21:11 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id A1DB21001A7
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 May 2022 10:21:10 +0100 (BST)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+ dkim=fail reason="body hash did not verify" header.i=@denx.de
+ header.s=phobos-20191101 header.b=LTeVmDco;
+ spf=pass (domain: denx.de, ip: 85.214.62.61, mailfrom: ch@denx.de)
+Received: from localhost (dslb-092-072-083-181.092.072.pools.vodafone-ip.de
+ [92.72.83.181])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 940A4100199
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 May 2022 10:21:10 +0100 (BST)
-Received: from localhost.localdomain.localdomain (10.167.225.131) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Thu, 12 May 2022 10:20:52 +0100
-From: XU Huan <xuhuan.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-flask: upgrade 2.1.1 -> 2.1.2
-Date: Thu, 12 May 2022 17:20:33 +0800
-Message-ID: <1652347241-2533-3-git-send-email-xuhuan.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1652347241-2533-1-git-send-email-xuhuan.fnst@fujitsu.com>
-References: <1652347241-2533-1-git-send-email-xuhuan.fnst@fujitsu.com>
+	(Authenticated sender: ch@denx.de)
+	by phobos.denx.de (Postfix) with ESMTPSA id EB66183B74;
+	Thu, 12 May 2022 11:27:25 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1652347646;
+	bh=skTgmxYsVAP5p71k5sY9IqYlvCvM0XsQIF3IwU4H+uc=;
+	h=From:To:Cc:Subject:Date:From;
+	b=LTeVmDcoVbreArT7spKIdIFd5U7fv/Os8cuqxCk4/dnN9oHbFvQyCoI34uk8/OOR8
+	 TT8ugOVU2X1BL+DMbkcvA5aTCm3iqietjEqWLoBCu6+fSQT0b4Nzl1sG0kt7GyC8Lk
+	 QMwszob0OrD9Q72sWQPOY9uaw/yWOXJMhFove0k3LMT3YagQZsFN0HuRLaChg/lus9
+	 DRRjnm71wSXZE4R449wPC+CIZZ66ii6THhpfX9BGI2SM2E0CXFlXkYXFJEtck3djP3
+	 s/hn6d2wSkDQZWJ7s/vXTLCaTK0C0zQKb5oI/l2T92/r31t2Azs/BIgTI5T3uTMdQ/
+	 j30Lu6G9gupfA==
+From: Claudius Heine <ch@denx.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Claudius Heine <ch@denx.de>
+Subject: [meta-filesystems][PATCH] btrfsmaintenance: add recipe for
+ btrfsmaintenance scripts
+Date: Thu, 12 May 2022 11:27:21 +0200
+Message-Id: <20220512092721.745694-1-ch@denx.de>
+X-Mailer: git-send-email 2.33.3
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.131]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+X-Virus-Scanned: clamav-milter 0.103.5 at phobos.denx.de
+X-Virus-Status: Clean
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 12 May 2022 09:21:22 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 12 May 2022 09:27:32 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97073
+ https://lists.openembedded.org/g/openembedded-devel/message/97076
 
-From: Xu Huan <xuhuan.fnst@fujitsu.com>
+Btrfs requires regular maintenance in order to self-heal. Other
+distributions like OpenSUSE, Debian and Fedora use these scripts to
+perform those.
 
-Changelog:
-==========
-Fix type annotation for json.loads, it accepts str or bytes.
-The --cert and --key options on flask run can be given in either order.
-
-Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
+Signed-off-by: Claudius Heine <ch@denx.de>
 ---
- .../python/{python3-flask_2.1.1.bb => python3-flask_2.1.2.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-flask_2.1.1.bb => python3-flask_2.1.2.bb} (87%)
+ .../btrfsmaintenance/btrfsmaintenance_0.5.bb  | 62 +++++++++++++++++++
+ ...change-sysconfig-path-to-etc-default.patch | 47 ++++++++++++++
+ ...ective-to-btrfsmaintenance-refresh.s.patch | 33 ++++++++++
+ 3 files changed, 142 insertions(+)
+ create mode 100644 meta-filesystems/recipes-utils/btrfsmaintenance/btrfs=
+maintenance_0.5.bb
+ create mode 100644 meta-filesystems/recipes-utils/btrfsmaintenance/files=
+/0001-change-sysconfig-path-to-etc-default.patch
+ create mode 100644 meta-filesystems/recipes-utils/btrfsmaintenance/files=
+/0002-add-WantedBy-directive-to-btrfsmaintenance-refresh.s.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-flask_2.1.1.bb b/meta-python/recipes-devtools/python/python3-flask_2.1.2.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-flask_2.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-flask_2.1.2.bb
-index 24a704770..7d290a4fe 100644
---- a/meta-python/recipes-devtools/python/python3-flask_2.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask_2.1.2.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/mitsuhiko/flask/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
- 
--SRC_URI[sha256sum] = "a8c9bd3e558ec99646d177a9739c41df1ded0629480b4c8d2975412f3c9519c8"
-+SRC_URI[sha256sum] = "315ded2ddf8a6281567edb27393010fe3406188bafbfe65a3339d5787d89e477"
- 
- PYPI_PACKAGE = "Flask"
- 
--- 
-2.25.1
+diff --git a/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmainten=
+ance_0.5.bb b/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmainte=
+nance_0.5.bb
+new file mode 100644
+index 000000000..a4573cf59
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.=
+5.bb
+@@ -0,0 +1,62 @@
++
++SUMMARY =3D "Services for periodic btrfs maintenance tasks"
++DESCRIPTION =3D "A set of scripts supplementing the btrfs filesystem and=
+ aims \
++    to automate a few maintenance tasks. This means the scrub, balance, =
+trim \
++    or defragmentation."
++HOMEPAGE =3D "https://github.com/kdave/btrfsmaintenance"
++LICENSE =3D "GPL-2.0-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D892f569a555ba9c07a568a7c0c4fa=
+63a"
++
++SECTION =3D "base"
++
++DEPENDS =3D "btrfs-tools"
++
++SRC_URI =3D "git://github.com/kdave/${BPN};branch=3Dmaster;protocol=3Dht=
+tps \
++    file://0001-change-sysconfig-path-to-etc-default.patch \
++    file://0002-add-WantedBy-directive-to-btrfsmaintenance-refresh.s.pat=
+ch \
++"
++SRCREV =3D "be42cb6267055d125994abd6927cf3a26deab74c"
++
++UPSTREAM_CHECK_URI =3D "https://github.com/kdave/${BPN}/tags"
++UPSTREAM_CHECK_REGEX =3D "${BPN}/releases/tag/v(?P<pver>\d+(?:\.\d+)*)"
++
++RDEPENDS:${PN} =3D "bash"
++
++S=3D"${WORKDIR}/git"
++
++inherit allarch
++
++do_configure[noexec] =3D "1"
++do_compile[noexec] =3D "1"
++
++do_install() {
++    install -Dm0644 ${S}/btrfsmaintenance-refresh.path \
++        ${D}${systemd_system_unitdir}/btrfsmaintenance-refresh.path
++    install -Dm0644 ${S}/*.timer \
++        ${D}${systemd_system_unitdir}
++    install -Dm0644 ${S}/*.service \
++        ${D}${systemd_system_unitdir}
++
++    install -Dm0644 ${S}/btrfsmaintenance-functions \
++        ${D}${datadir}/${PN}/btrfsmaintenance-functions
++    install -Dm0755 ${S}/*.sh \
++        ${D}${datadir}/${PN}
++
++    install -Dm0644 ${S}/sysconfig.btrfsmaintenance \
++        ${D}${sysconfdir}/default/btrfsmaintenance
++}
++
++inherit systemd
++SYSTEMD_PACKAGES =3D "${PN}"
++SYSTEMD_SERVICE:${PN} =3D " \
++    btrfs-scrub.timer \
++    btrfs-scrub.service \
++    btrfs-trim.timer \
++    btrfs-trim.service \
++    btrfs-balance.timer \
++    btrfs-balance.service \
++    btrfs-defrag.timer \
++    btrfs-defrag.service \
++    btrfsmaintenance-refresh.service \
++    btrfsmaintenance-refresh.path \
++"
+diff --git a/meta-filesystems/recipes-utils/btrfsmaintenance/files/0001-c=
+hange-sysconfig-path-to-etc-default.patch b/meta-filesystems/recipes-util=
+s/btrfsmaintenance/files/0001-change-sysconfig-path-to-etc-default.patch
+new file mode 100644
+index 000000000..d425206f0
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/btrfsmaintenance/files/0001-change-s=
+ysconfig-path-to-etc-default.patch
+@@ -0,0 +1,47 @@
++From b49dbe17e0d9ae463e5a34e6991aa2d3c70d2fb1 Mon Sep 17 00:00:00 2001
++From: Claudius Heine <ch@denx.de>
++Date: Wed, 11 May 2022 14:33:13 +0200
++Subject: [PATCH] change sysconfig path to /etc/default
++
++OE uses /etc/default for service configuration, not /etc/sysconfig which
++is used by SUSE and RedHat based distributions.
++
++Change the files accordingly
++
++Upstream-Status: Inappropriate [OE specific]
++
++Signed-off-by: Claudius Heine <ch@denx.de>
++---
++ btrfsmaintenance-refresh.path    | 4 ++--
++ btrfsmaintenance-refresh.service | 2 +-
++ 2 files changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/btrfsmaintenance-refresh.path b/btrfsmaintenance-refresh.pa=
+th
++index d56ad11..f0b4132 100644
++--- a/btrfsmaintenance-refresh.path
+++++ b/btrfsmaintenance-refresh.path
++@@ -1,8 +1,8 @@
++ [Unit]
++-Description=3DWatch /etc/sysconfig/btrfsmaintenance
+++Description=3DWatch /etc/default/btrfsmaintenance
++=20
++ [Path]
++-PathChanged=3D/etc/sysconfig/btrfsmaintenance
+++PathChanged=3D/etc/default/btrfsmaintenance
++=20
++ [Install]
++ WantedBy=3Dmulti-user.target
++diff --git a/btrfsmaintenance-refresh.service b/btrfsmaintenance-refresh=
+.service
++index 4ed1eb4..d6225a6 100644
++--- a/btrfsmaintenance-refresh.service
+++++ b/btrfsmaintenance-refresh.service
++@@ -1,5 +1,5 @@
++ [Unit]
++-Description=3DUpdate cron periods from /etc/sysconfig/btrfsmaintenance
+++Description=3DUpdate cron periods from /etc/default/btrfsmaintenance
++=20
++ [Service]
++ ExecStart=3D/usr/share/btrfsmaintenance/btrfsmaintenance-refresh-cron.s=
+h systemd-timer
++--=20
++2.33.3
++
+diff --git a/meta-filesystems/recipes-utils/btrfsmaintenance/files/0002-a=
+dd-WantedBy-directive-to-btrfsmaintenance-refresh.s.patch b/meta-filesyst=
+ems/recipes-utils/btrfsmaintenance/files/0002-add-WantedBy-directive-to-b=
+trfsmaintenance-refresh.s.patch
+new file mode 100644
+index 000000000..0da7992a0
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/btrfsmaintenance/files/0002-add-Want=
+edBy-directive-to-btrfsmaintenance-refresh.s.patch
+@@ -0,0 +1,33 @@
++From 420ae0f395838b852ae8b8fe5528056c36dc0919 Mon Sep 17 00:00:00 2001
++From: Claudius Heine <ch@denx.de>
++Date: Wed, 11 May 2022 15:14:22 +0200
++Subject: [PATCH] add WantedBy directive to btrfsmaintenance-refresh.serv=
+ice
++
++Just trigger the service on the first boot, to configure services to the
++configuration file deployed in the package, afterwards disable the
++service, so that is only triggered when the configuration file has
++changed.
++
++Upstream-Status: Inappropriate [OE specific]
++
++Signed-off-by: Claudius Heine <ch@denx.de>
++---
++ btrfsmaintenance-refresh.service | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/btrfsmaintenance-refresh.service b/btrfsmaintenance-refresh=
+.service
++index d6225a6..58d0e09 100644
++--- a/btrfsmaintenance-refresh.service
+++++ b/btrfsmaintenance-refresh.service
++@@ -3,4 +3,8 @@ Description=3DUpdate cron periods from /etc/default/btrf=
+smaintenance
++=20
++ [Service]
++ ExecStart=3D/usr/share/btrfsmaintenance/btrfsmaintenance-refresh-cron.s=
+h systemd-timer
+++ExecStart=3Dsystemctl disable btrfsmaintenance-refresh.service
++ Type=3Doneshot
+++
+++[Install]
+++WantedBy=3Dmulti-user.target
++--=20
++2.33.3
++
+--=20
+2.33.3
 
 
