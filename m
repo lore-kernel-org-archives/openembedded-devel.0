@@ -1,138 +1,120 @@
-Return-Path: <uvv.mail@gmail.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4141FC433F5
-	for <webhook@archiver.kernel.org>; Thu, 12 May 2022 07:36:21 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
- [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.web10.1531.1652340980124802068
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5523C4332F
+	for <webhook@archiver.kernel.org>; Thu, 12 May 2022 08:42:11 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
+ [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.web09.1832.1652344921868276804
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 May 2022 00:36:20 -0700
+ Thu, 12 May 2022 01:42:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=WK//pEaf;
- spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: uvv.mail@gmail.com)
-Received: by mail-wr1-f49.google.com with SMTP id h16so5284346wrb.2
+ dkim=pass header.i=@bgdev-pl.20210112.gappssmtp.com header.s=20210112
+ header.b=3fwnOdHz;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.45,
+ mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f45.google.com with SMTP id
+ r188-20020a1c44c5000000b003946c466c17so2034044wma.4
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 May 2022 00:36:19 -0700 (PDT)
+ Thu, 12 May 2022 01:42:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=gnW2/2cpLZpuZ9bmGGf6vA2HU1aKm1z/KOdzIzcgB8k=;
-        b=WK//pEafjt0XrRjQfN5uMEmCNHSPfQjjrqi00cGaF8qtsO02KTyhcq27xExeK1qn+O
-         xgh/+6VUk3jvflgzmGlw2lr4nvy6SNCl4VEnl492qrPd9CTzYHjF6LfjhiOMaqM0vb+w
-         xaUyG56AcP+Hn9d6/c4QBiVRs4P3OnTZgo2iR8WU/tOqFkD5gZPXyoVLRutbOK6DsFnS
-         NStnGaC00B3c641paN+gV2r0AYC9/IYuTcrLPP60M1j0i2jAEkWULMTeC9iKC38lWwft
-         TGO/AhwgxORhPQm/eTj517AymPq8J13ytJjy8dK4uQ7zhDJFGH82O2XDpTuIIRyU3FSZ
-         MmCQ==
+        d=bgdev-pl.20210112.gappssmtp.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=lP8L4Zoxl3JVJoU3sA6TK2Hy1UJh6HYyh1XVbB5SzeQ=;
+        b=3fwnOdHzMe7DXxQ/fu4xKEk0mQTsqcpZ/VpakKWnIZATmGRr6XDZrmy4ZNASwlLPP8
+         9wBevvU9nkNuxC3OYp01Im7CxLRetTav3anm+QprKyFOoc/SQ2JwL5dCLNX5HwcHGyYa
+         N2EQKzzsCQT5DIHZ31jB8lM7/TL1JEU9p+lU0lyTUG0SXae5giNcl92F63oa5jLlGpnG
+         Yuaqcq4XwGCZIxmgkrIn6EYUB+8a6bsSF37dTYyzIAu19mDFwATbFvOgd8l6oTIApyby
+         VowIFd1Ppt/ZtkK1GlpGU+8p3ImRzXSzVNTWyits/KW6aSeVuqSQMwUTZWotAPy99B8j
+         JIEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=gnW2/2cpLZpuZ9bmGGf6vA2HU1aKm1z/KOdzIzcgB8k=;
-        b=cjXLPoNRCXzd4py8kYGT6ogPUl2KCPr3gDGMC+1LuLSXkqkNf/7y1ozJlpoAb5a+Ji
-         q8QJV3rBzXx+k/zQD1p0kDadNqIg9a5+7pnkT7z12e/fNmrsYoMdCo3tCX2lPknrzyJV
-         UOJfvZ9WP2F/lgdOb6+GeWQ/hMncHmT0yYSo8dge/nLKj+dcVCGpE55HYKeiSwJVMRTj
-         j8sv2uVcW7++RAcNYfefXyRlhT51F3F49Cjy55FDp5E9QFiMVn/o+01rvXAnRUia6vWU
-         euCgRd+IsQ05oSQogUaD6+6ZaVrsWrmNrk17kXtsDdWmi6gUPCk/gsVSPtDSfY7pBBuw
-         PUag==
-X-Gm-Message-State: AOAM531kfxQUQQVsO+507Jc85YJBYUq4DF4kF2qUDVDuzkj7N3j342Ev
-	WjeDaMM6eDodxOEkq9/AbchBaXfHSwqsEQ==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=lP8L4Zoxl3JVJoU3sA6TK2Hy1UJh6HYyh1XVbB5SzeQ=;
+        b=fM6Lq3U27LNlLRcWxVcnpfkgyW4MdEp94rNcNxO69JmRbqwiLkhCiQfY/MsATAHTyy
+         D+ZM6P9PPGwcbiNURZdeSycr6kxnt9RcAHneF3f8alW58L8sO1sbAKXpO4xZ59ws7k0M
+         6rIoOtbwKw+WpRjdUg2H3P6UvxJaEVx6CBJBtSWiwenISHo/IDi0F1x4Mo4lK9xN7ihG
+         fHCnjfhXnQqprJfhrRrH5BkNJCuXMmDHRD6DZTFiBieF/0miWvfz7F8SSsnA5/kgaPGn
+         OrwUQ+hlNp1LMf/VEYXxuj34JO0tkGK5O+0pJHSV8n56px82AQIPvx3vZtesf4bQEUcJ
+         Tw1g==
+X-Gm-Message-State: AOAM530fqR5zCQycHuXMKTNKLE+JLDVJgc2C0xwHhU0i7HeguMKXjRc/
+	wxaVJMSIkBl6ff92r7rwpzuexg==
 X-Google-Smtp-Source: 
- ABdhPJxOwRFeCjcEAe7l8wF1y/1NfKt15+KgUJHe13589Z/QtcXMzw3KsC6pWfaIjbGo9zyQSDInyg==
-X-Received: by 2002:a5d:4ed0:0:b0:20c:dfe2:6e2e with SMTP id
- s16-20020a5d4ed0000000b0020cdfe26e2emr5184811wrv.523.1652340978011;
-        Thu, 12 May 2022 00:36:18 -0700 (PDT)
-Received: from developer.localdomain
- (dslb-002-205-242-181.002.205.pools.vodafone-ip.de. [2.205.242.181])
+ ABdhPJzsRaroKtrWZtWHS6KdJWyGLEA2nUoElIRkXuoqytiLSncDbJAxpLfrodF6zHsFkh88xnBu3A==
+X-Received: by 2002:a7b:c5d1:0:b0:37f:a8a3:9e17 with SMTP id
+ n17-20020a7bc5d1000000b0037fa8a39e17mr8751091wmk.109.1652344920120;
+        Thu, 12 May 2022 01:42:00 -0700 (PDT)
+Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:167a:c5b3:9ce9:8648])
         by smtp.gmail.com with ESMTPSA id
- j5-20020a05600c1c0500b003947e11c3ecsm2101073wms.17.2022.05.12.00.36.17
+ m7-20020a5d6247000000b0020c5253d914sm3531898wrv.96.2022.05.12.01.41.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 May 2022 00:36:17 -0700 (PDT)
-From: Vyacheslav Yurkov <uvv.mail@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Vyacheslav Yurkov <v.yurkov@precitec.de>
-Subject: [meta-oe][PATCH] polkit: add udisks2 rule
-Date: Thu, 12 May 2022 09:35:40 +0200
-Message-Id: <20220512073540.3020016-1-uvv.mail@gmail.com>
-X-Mailer: git-send-email 2.30.2
+        Thu, 12 May 2022 01:41:59 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <brgl@bgdev.pl>
+Subject: [meta-python][PATCH 01/16] python3-toolz: new package
+Date: Thu, 12 May 2022 10:41:37 +0200
+Message-Id: <20220512084152.1388464-2-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220512084152.1388464-1-brgl@bgdev.pl>
+References: <20220512084152.1388464-1-brgl@bgdev.pl>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 12 May 2022 07:36:21 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 12 May 2022 08:42:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97047
+ https://lists.openembedded.org/g/openembedded-devel/message/97049
 
-From: Vyacheslav Yurkov <v.yurkov@precitec.de>
+Add a recipe for toolz: a set of utility functions for iterators,
+functions, and dictionaries.
 
-The rule allows non-priviledged users from plugdev group to
-mount/unmount block devices
-
-Signed-off-by: Vyacheslav Yurkov <v.yurkov@precitec.de>
+Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
 ---
- .../files/50-org.freedesktop.udiskie.rules    | 24 +++++++++++++++++++
- .../polkit/polkit-group-rule-udisks2.bb       | 17 +++++++++++++
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-oe/recipes-extended/polkit/files/50-org.freedesktop.udiskie.rules
- create mode 100644 meta-oe/recipes-extended/polkit/polkit-group-rule-udisks2.bb
+ .../packagegroups/packagegroup-meta-python.bb      |  1 +
+ .../python/python3-toolz_0.11.2.bb                 | 14 ++++++++++++++
+ 2 files changed, 15 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-toolz_0.11.2.bb
 
-diff --git a/meta-oe/recipes-extended/polkit/files/50-org.freedesktop.udiskie.rules b/meta-oe/recipes-extended/polkit/files/50-org.freedesktop.udiskie.rules
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index bee529805..5edec8f68 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -405,6 +405,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
+     python3-thrift \
+     python3-tinyrecord \
+     python3-tornado \
++    python3-toolz \
+     python3-tqdm \
+     python3-trafaret \
+     python3-trafaret-config \
+diff --git a/meta-python/recipes-devtools/python/python3-toolz_0.11.2.bb b/meta-python/recipes-devtools/python/python3-toolz_0.11.2.bb
 new file mode 100644
-index 0000000000..2ffa4087a8
+index 000000000..a597641e5
 --- /dev/null
-+++ b/meta-oe/recipes-extended/polkit/files/50-org.freedesktop.udiskie.rules
-@@ -0,0 +1,24 @@
-+polkit.addRule(function(action, subject) {
-+  var YES = polkit.Result.YES;
-+  var permission = {
-+    // required for udisks1:
-+    "org.freedesktop.udisks.filesystem-mount": YES,
-+    "org.freedesktop.udisks.luks-unlock": YES,
-+    "org.freedesktop.udisks.drive-eject": YES,
-+    "org.freedesktop.udisks.drive-detach": YES,
-+    // required for udisks2:
-+    "org.freedesktop.udisks2.filesystem-mount": YES,
-+    "org.freedesktop.udisks2.encrypted-unlock": YES,
-+    "org.freedesktop.udisks2.eject-media": YES,
-+    "org.freedesktop.udisks2.power-off-drive": YES,
-+    // required for udisks2 if using udiskie from another seat (e.g. systemd):
-+    "org.freedesktop.udisks2.filesystem-mount-other-seat": YES,
-+    "org.freedesktop.udisks2.filesystem-unmount-others": YES,
-+    "org.freedesktop.udisks2.encrypted-unlock-other-seat": YES,
-+    "org.freedesktop.udisks2.eject-media-other-seat": YES,
-+    "org.freedesktop.udisks2.power-off-drive-other-seat": YES
-+  };
-+  if (subject.isInGroup("plugdev")) {
-+    return permission[action.id];
-+  }
-+});
-diff --git a/meta-oe/recipes-extended/polkit/polkit-group-rule-udisks2.bb b/meta-oe/recipes-extended/polkit/polkit-group-rule-udisks2.bb
-new file mode 100644
-index 0000000000..ae024d0328
---- /dev/null
-+++ b/meta-oe/recipes-extended/polkit/polkit-group-rule-udisks2.bb
-@@ -0,0 +1,17 @@
-+DESCRIPTION = "Polkit rule to allow non-priviledged users mount/umount block devices via udisks2"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
++++ b/meta-python/recipes-devtools/python/python3-toolz_0.11.2.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "A set of utility functions for iterators, functions, and dictionaries."
++HOMEPAGE = "https://github.com/pytoolz/toolz"
++SECTION = "devel/python"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ca09cab178326d18433aae982d1edf5d"
 +
-+require polkit-group-rule.inc
++SRC_URI[sha256sum] = "6b312d5e15138552f1bda8a4e66c30e236c831b612b2bf0005f8a1df10a4bc33"
 +
-+# The file originates from https://github.com/coldfix/udiskie/wiki/Permissions
-+SRC_URI = "file://50-org.freedesktop.udiskie.rules"
++inherit pypi setuptools3
 +
-+RDEPENDS_${PN} += "udisks2"
-+
-+do_install() {
-+    install -m 0755 ${WORKDIR}/50-org.freedesktop.udiskie.rules ${D}${sysconfdir}/polkit-1/rules.d
-+}
-+
-+USERADD_PACKAGES = "${PN}"
-+GROUPADD_PARAM:${PN} = "--system plugdev"
++RDEPENDS:${PN} += " \
++    python3-json \
++    python3-math \
++"
 -- 
-2.30.2
+2.34.1
 
 
