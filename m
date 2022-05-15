@@ -2,63 +2,62 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 59C5CC433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6822BC43219
 	for <webhook@archiver.kernel.org>; Sun, 15 May 2022 13:50:00 +0000 (UTC)
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com
- [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.web12.16978.1652622590826246546
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
+ [209.85.215.169])
+ by mx.groups.io with SMTP id smtpd.web09.17040.1652622597084101797
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 May 2022 06:49:50 -0700
+ Sun, 15 May 2022 06:49:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=PqRxnTG2;
- spf=pass (domain: gmail.com, ip: 209.85.210.181,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=C4kOWjHT;
+ spf=pass (domain: gmail.com, ip: 209.85.215.169,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id bo5so11774012pfb.4
+Received: by mail-pg1-f169.google.com with SMTP id a19so11579797pgw.6
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 May 2022 06:49:50 -0700 (PDT)
+ Sun, 15 May 2022 06:49:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=o19hEw1BJO51eGYL9sVBdTO7JJz40Ne+hqzvh9D9UL0=;
-        b=PqRxnTG2nT7GGenhFc3Ids+ppiYqhdeZtqBJKaUMZgIAZmFogZePWXsXiGmkFiw1x2
-         RkLCSnJAWmUQxTuiuBiv8D9XDC0n/OS1BjniN+42HfJsc9mxLEMDjrLXW60QiZYJhpdr
-         FpVKyPNC6bmc8K7n5+quSrDxWGAIgDJ8Sdgyqfhn8hj3ArUHPbPifSDwtdLJH5Rbv8xa
-         8tvXZCLdZLmorlmDJnboWtyQYCCumicWzWSKXi2vEg/zJtYsSyC8CujJPoPkRxP9tw6a
-         1yUwFa/c7ER9r9SNEwH/4uP7PKn4kkou3B7f6YEWBXrEcc6YmX1vC3YPc1pSsn+Rctzf
-         TvdA==
+        bh=kzttu7y1XmLmIV54l2bAbg0tQbdlqYW1LYNF2McoSPE=;
+        b=C4kOWjHTQh5Y362Pb9oAPEkTBL4Ry+SAkH6Mcr/BUMogjo37OKKwv14E8yfUhl8tOu
+         wVRSIlE7WeEtOKQTj7ek3pQQ/Fn1qql3H357EUJHLjHT3hl1u5iyy+EOxUniymxmjkd7
+         aej+a8OuunZpeg3Mddnomgj60hdh2wQYHpKxAuDSBFzhobPggTEpfT719WXD9GxiD9rR
+         2X7pWvWfi6AQKCGNwahoil3lGiKmtdZZELXYcWcmWHngfyfvhJNEIxKtM5wzprb7FLiM
+         Ohdop1cbldbqYIDpGP0rgbuA9ddMpFsyUWVpmpX2owROj07YR4zGK9gDR3pEpxn4rs2h
+         6y9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=o19hEw1BJO51eGYL9sVBdTO7JJz40Ne+hqzvh9D9UL0=;
-        b=LMAUXDlnzEneSaOcD9OdxI4ssLPy+KBamhdesT7QM5feBRucuq9GKK1fJASYLgSHj4
-         PbGgL8GBBqTTl44+0Fuxhh/DmI5tKEZkuKaOUT75TVA/Z0yuWwNXPtupb4DxqdjILa15
-         Egzsx9eoW+suaYkRNcqjxUpk6FC1usk4f8stYWFpQXyTFv4SH1P9z49oW674NgQW0S//
-         svwhD11Z5EHJrthY0b/3xv2VkBIX7HBQ7/6XLHeUNUI2zUDQWKr+O5y1Qt8Aawn1b1jN
-         TxgApai0ETfi+pCH4R07AQMBVnngVdJTqys2Iq/pLQ2OIJ3yK3kRTy7i0+uydZg6K13E
-         1dlg==
-X-Gm-Message-State: AOAM531RMDo4BcLODaEVTV4Io492WaZo1ko2RE6dWvJRwTRjkgVmzZMs
-	DRdbJmbVX3jAf3sb63VCafYfh25JpteU4w==
+        bh=kzttu7y1XmLmIV54l2bAbg0tQbdlqYW1LYNF2McoSPE=;
+        b=s68zrHDFXIq+PEM0D0+TACw/lX1+6gY9qyAVlu9esVaYWcN8kLI0VUWo/VFbA7sCZ2
+         O9oFknizAQAUSUodP/hh2Hb0qFoG+jJ4d+auu+X5/oxxTbGjHUE26xcjXmZYe9O7g2Fc
+         Vvw9eVScBZV5wtQIQg6KCezeCEOQLea9z9Cty7HVyHEUzaMG7jzpipViH5k7dkIKroY9
+         IpxAOWPydDQqSF6WXL6ew3xgMZ0+xRfDA2k/dFY2S6kLI4HZ7yCwv6UGw6AQlz89ue6F
+         kwZGDqdXBHtNTghP0vt2F7tF4SSupN6bdGmquwfGdbUC6xAg097EkVKegFrAHDzC7hH2
+         1g5w==
+X-Gm-Message-State: AOAM531yoKPdYf/OK937I5Ze3tIprrhnTnzpt2peT00m7Iw1fCstvFj/
+	ig9eQxjBRw0/O6jUw/vxcO4pz7lev8gz9g==
 X-Google-Smtp-Source: 
- ABdhPJyyIliaJKFOjEItV+COr+aqcxXFqRq0+WCiJapaQIbwRStXjLDntv3OjIZUpJTehj2sn6bdmg==
-X-Received: by 2002:a05:6a00:1a86:b0:50f:f4fd:c9a7 with SMTP id
- e6-20020a056a001a8600b0050ff4fdc9a7mr13081336pfv.46.1652622589875;
-        Sun, 15 May 2022 06:49:49 -0700 (PDT)
+ ABdhPJxA/LyG9G5KJvnLyyR5x6IzX3TCMO0suFaKLVb7BEmpQkhQ7Uox49Klstw773p9Z4I2TFrPcQ==
+X-Received: by 2002:a65:6b95:0:b0:3f2:638f:db1d with SMTP id
+ d21-20020a656b95000000b003f2638fdb1dmr2172080pgw.604.1652622596323;
+        Sun, 15 May 2022 06:49:56 -0700 (PDT)
 Received: from keaua.caveonetworks.com
  ([2601:202:4180:a5c0:48be:3d3d:c26:7949])
         by smtp.gmail.com with ESMTPSA id
- z22-20020a63e556000000b003c644b2180asm4961650pgj.77.2022.05.15.06.49.48
+ z22-20020a63e556000000b003c644b2180asm4961650pgj.77.2022.05.15.06.49.54
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 May 2022 06:49:49 -0700 (PDT)
+        Sun, 15 May 2022 06:49:55 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [kirkstone 18/22] devmem2: reinstate previous patches,
- removed by mistake
-Date: Sun, 15 May 2022 06:49:18 -0700
+Subject: [kirkstone 22/22] minidlna: fix obsolete license warning
+Date: Sun, 15 May 2022 06:49:22 -0700
 Message-Id: 
- <43cc4a2bfe1d63427f62a2af8e7c8f08ffc46785.1652622481.git.akuster808@gmail.com>
+ <80aa238913a0c41bc0f823a0f141023313c3105f.1652622481.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1652622481.git.akuster808@gmail.com>
 References: <cover.1652622481.git.akuster808@gmail.com>
@@ -69,211 +68,30 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 15 May 2022 13:50:00 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97115
+ https://lists.openembedded.org/g/openembedded-devel/message/97119
 
-From: Denys Dmytriyenko <denis@denix.org>
+From: Markus Volk <f_l_k@t-online.de>
 
-This reverts commit 5e8f4720aaa3da7350ead06959cae0492133cd61.
-
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e192bd13ff2f39cc9762ca73d65a1c5537a70335)
+(cherry picked from commit f26d0085d7bbbffd5fcfe6a1bb67cc338ebd1cbb)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/devmem2/devmem2.bb    |  3 +-
- ...word-is-32-bit-and-add-support-for-6.patch | 70 ++++++++++++++
- .../devmem2/devmem2/devmem2-fixups-2.patch    | 91 +++++++++++++++++++
- 3 files changed, 163 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
- create mode 100644 meta-oe/recipes-support/devmem2/devmem2/devmem2-fixups-2.patch
+ meta-multimedia/recipes-multimedia/minidlna/minidlna.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/devmem2/devmem2.bb b/meta-oe/recipes-support/devmem2/devmem2.bb
-index 92c05fe065..c6b8df5e47 100644
---- a/meta-oe/recipes-support/devmem2/devmem2.bb
-+++ b/meta-oe/recipes-support/devmem2/devmem2.bb
-@@ -4,7 +4,8 @@ LIC_FILES_CHKSUM = "file://devmem2.c;endline=38;md5=a9eb9f3890384519f435aedf9862
- PR = "r7"
+diff --git a/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc b/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
+index b913a83931..4959a3c8d7 100644
+--- a/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
++++ b/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "MiniDLNA (aka ReadyDLNA) is server software with the aim of \
+ being fully compliant with DLNA/UPnP-AV clients."
+-LICENSE = "GPL-2.0|BSD-3-Clause"
++LICENSE = "GPL-2.0-only|BSD-3-Clause"
+ DEPENDS = "ffmpeg flac libav jpeg sqlite3 libexif libogg libid3tag libvorbis"
  
- SRC_URI = "http://www.free-electrons.com/pub/mirror/devmem2.c;downloadfilename=devmem2-new.c \
--          " 
-+           file://devmem2-fixups-2.patch;apply=yes;striplevel=0 \
-+           file://0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch"
- 
- S = "${WORKDIR}"
- 
-diff --git a/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch b/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
-new file mode 100644
-index 0000000000..2a57f29891
---- /dev/null
-+++ b/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
-@@ -0,0 +1,70 @@
-+From 1360a907879dd24041797a3b709d49aeac2ab444 Mon Sep 17 00:00:00 2001
-+From: Denys Dmytriyenko <denys@ti.com>
-+Date: Tue, 29 May 2018 16:55:42 -0400
-+Subject: [PATCH] devmem.c: ensure word is 32-bit and add support for 64-bit
-+ long
-+
-+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-+---
-+ devmem2.c | 23 +++++++++++++++++------
-+ 1 file changed, 17 insertions(+), 6 deletions(-)
-+
-+diff --git a/devmem2.c b/devmem2.c
-+index 5845381..68131b2 100644
-+--- a/devmem2.c
-++++ b/devmem2.c
-+@@ -39,6 +39,7 @@
-+ 
-+ #include <stdio.h>
-+ #include <stdlib.h>
-++#include <stdint.h>
-+ #include <unistd.h>
-+ #include <string.h>
-+ #include <errno.h>
-+@@ -69,7 +70,7 @@ int main(int argc, char **argv) {
-+ 	if(argc < 2) {
-+ 		fprintf(stderr, "\nUsage:\t%s { address } [ type [ data ] ]\n"
-+ 			"\taddress : memory address to act upon\n"
-+-			"\ttype    : access operation type : [b]yte, [h]alfword, [w]ord\n"
-++			"\ttype    : access operation type : [b]yte, [h]alfword, [w]ord, [l]ong\n"
-+ 			"\tdata    : data to be written\n\n",
-+ 			argv[0]);
-+ 		exit(1);
-+@@ -103,9 +104,14 @@ int main(int argc, char **argv) {
-+ 			read_result = *((unsigned short *) virt_addr);
-+ 			break;
-+ 		case 'w':
-+-			data_size = sizeof(unsigned long);
-++			data_size = sizeof(uint32_t);
-+ 			virt_addr = fixup_addr(virt_addr, data_size);
-+-			read_result = *((unsigned long *) virt_addr);
-++			read_result = *((uint32_t *) virt_addr);
-++			break;
-++		case 'l':
-++			data_size = sizeof(uint64_t);
-++			virt_addr = fixup_addr(virt_addr, data_size);
-++			read_result = *((uint64_t *) virt_addr);
-+ 			break;
-+ 		default:
-+ 			fprintf(stderr, "Illegal data type '%c'.\n", access_type);
-+@@ -129,9 +135,14 @@ int main(int argc, char **argv) {
-+ 				read_result = *((unsigned short *) virt_addr);
-+ 				break;
-+ 			case 'w':
-+-				virt_addr = fixup_addr(virt_addr, sizeof(unsigned long));
-+-				*((unsigned long *) virt_addr) = write_val;
-+-				read_result = *((unsigned long *) virt_addr);
-++				virt_addr = fixup_addr(virt_addr, sizeof(uint32_t));
-++				*((uint32_t *) virt_addr) = write_val;
-++				read_result = *((uint32_t *) virt_addr);
-++				break;
-++			case 'l':
-++				virt_addr = fixup_addr(virt_addr, sizeof(uint64_t));
-++				*((uint64_t *) virt_addr) = write_val;
-++				read_result = *((uint64_t *) virt_addr);
-+ 				break;
-+ 		}
-+ 		sprintf(fmt_str, "Write at address 0x%%08lX (%%p): 0x%%0%dlX, "
-+-- 
-+2.7.4
-+
-diff --git a/meta-oe/recipes-support/devmem2/devmem2/devmem2-fixups-2.patch b/meta-oe/recipes-support/devmem2/devmem2/devmem2-fixups-2.patch
-new file mode 100644
-index 0000000000..4517797fc7
---- /dev/null
-+++ b/meta-oe/recipes-support/devmem2/devmem2/devmem2-fixups-2.patch
-@@ -0,0 +1,91 @@
-+--- devmem2.c	2004-08-05 01:55:25.000000000 +0200
-++++ devmem2_modif.c	2011-01-13 15:48:37.798799784 +0100
-+@@ -45,12 +45,16 @@
-+ #define MAP_SIZE 4096UL
-+ #define MAP_MASK (MAP_SIZE - 1)
-+ 
-++static inline void *fixup_addr(void *addr, size_t size);
-++
-+ int main(int argc, char **argv) {
-+     int fd;
-+     void *map_base, *virt_addr; 
-+-	unsigned long read_result, writeval;
-++	unsigned long read_result, write_val;
-+ 	off_t target;
-+ 	int access_type = 'w';
-++	char fmt_str[128];
-++	size_t data_size;
-+ 	
-+ 	if(argc < 2) {
-+ 		fprintf(stderr, "\nUsage:\t%s { address } [ type [ data ] ]\n"
-+@@ -79,38 +83,51 @@
-+     virt_addr = map_base + (target & MAP_MASK);
-+     switch(access_type) {
-+ 		case 'b':
-++			data_size = sizeof(unsigned char);
-++			virt_addr = fixup_addr(virt_addr, data_size);
-+ 			read_result = *((unsigned char *) virt_addr);
-+ 			break;
-+ 		case 'h':
-++			data_size = sizeof(unsigned short);
-++			virt_addr = fixup_addr(virt_addr, data_size);
-+ 			read_result = *((unsigned short *) virt_addr);
-+ 			break;
-+ 		case 'w':
-++			data_size = sizeof(unsigned long);
-++			virt_addr = fixup_addr(virt_addr, data_size);
-+ 			read_result = *((unsigned long *) virt_addr);
-+ 			break;
-+ 		default:
-+ 			fprintf(stderr, "Illegal data type '%c'.\n", access_type);
-+ 			exit(2);
-+ 	}
-+-    printf("Value at address 0x%X (%p): 0x%X\n", target, virt_addr, read_result); 
-++	sprintf(fmt_str, "Read at address  0x%%08lX (%%p): 0x%%0%dlX\n", 2*data_size);
-++    printf(fmt_str, (unsigned long)target, virt_addr, read_result);
-+     fflush(stdout);
-+ 
-+ 	if(argc > 3) {
-+-		writeval = strtoul(argv[3], 0, 0);
-++		write_val = strtoul(argv[3], 0, 0);
-+ 		switch(access_type) {
-+ 			case 'b':
-+-				*((unsigned char *) virt_addr) = writeval;
-++				virt_addr = fixup_addr(virt_addr, sizeof(unsigned char));
-++				*((unsigned char *) virt_addr) = write_val;
-+ 				read_result = *((unsigned char *) virt_addr);
-+ 				break;
-+ 			case 'h':
-+-				*((unsigned short *) virt_addr) = writeval;
-++				virt_addr = fixup_addr(virt_addr, sizeof(unsigned short));
-++				*((unsigned short *) virt_addr) = write_val;
-+ 				read_result = *((unsigned short *) virt_addr);
-+ 				break;
-+ 			case 'w':
-+-				*((unsigned long *) virt_addr) = writeval;
-++				virt_addr = fixup_addr(virt_addr, sizeof(unsigned long));
-++				*((unsigned long *) virt_addr) = write_val;
-+ 				read_result = *((unsigned long *) virt_addr);
-+ 				break;
-+ 		}
-+-		printf("Written 0x%X; readback 0x%X\n", writeval, read_result); 
-++		sprintf(fmt_str, "Write at address 0x%%08lX (%%p): 0x%%0%dlX, "
-++			"readback 0x%%0%dlX\n",	2*data_size, 2*data_size);
-++		printf(fmt_str, (unsigned long)target, virt_addr,
-++			write_val, read_result);
-+ 		fflush(stdout);
-+ 	}
-+ 	
-+@@ -119,3 +136,12 @@
-+     return 0;
-+ }
-+ 
-++static inline void *fixup_addr(void *addr, size_t size)
-++{
-++#ifdef FORCE_STRICT_ALIGNMENT
-++	unsigned long aligned_addr = (unsigned long)addr;
-++	aligned_addr &= ~(size - 1);
-++	addr = (void *)aligned_addr;
-++#endif
-++	return addr;
-++}
+ # because it depends on libav which has commercial flag
 -- 
 2.25.1
 
