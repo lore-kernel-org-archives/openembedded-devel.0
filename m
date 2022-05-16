@@ -1,167 +1,186 @@
-Return-Path: <nicolas.dechesne@linaro.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D966C433EF
-	for <webhook@archiver.kernel.org>; Mon, 16 May 2022 17:45:39 +0000 (UTC)
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com
- [209.85.208.47])
- by mx.groups.io with SMTP id smtpd.web10.676.1652723137696429844
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A9E61C433F5
+	for <webhook@archiver.kernel.org>; Mon, 16 May 2022 17:59:09 +0000 (UTC)
+Received: from mail-qv1-f54.google.com (mail-qv1-f54.google.com
+ [209.85.219.54])
+ by mx.groups.io with SMTP id smtpd.web10.851.1652723945809683967
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 May 2022 10:45:38 -0700
+ Mon, 16 May 2022 10:59:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=dCkVF0nn;
- spf=pass (domain: linaro.org, ip: 209.85.208.47,
- mailfrom: nicolas.dechesne@linaro.org)
-Received: by mail-ed1-f47.google.com with SMTP id fd25so6733538edb.3
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=YjeeSHHG;
+ spf=pass (domain: gmail.com, ip: 209.85.219.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f54.google.com with SMTP id kl21so12684557qvb.9
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 May 2022 10:45:37 -0700 (PDT)
+ Mon, 16 May 2022 10:59:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
+        d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=cfoAs4AVdeMt7YHZIsvl+l+ixLNBDCi0YUKu/5lrdUQ=;
-        b=dCkVF0nn2TErbtoCJoF9wE+4iGd07zo/G4KCyC39Qui99hMyZUQ18k02eSYJYQGZUL
-         wsOdtA+Zh3ZxjQEHT4ENC2vUspG5PbcAsDcStkG4YFcvn9WGjaUFXg7LeDs+rso4EdF5
-         ZvI38Q7gimddcJFhhOcDG+jQf9+HZmie6kuDAqQ18GCaW9U7Kxv3tGY1mOPM0W8709rA
-         bP+nVX1ADtuVNAKov70kyzwHPnU2q6CDieD2gFk+KDEqxMlssn5I+Wv1Jw6G530Es9tQ
-         gXJdGMAvoHCQ5qlZOzUTdmkL/99CRKBM+Fze97yhKdALQCtIRdg7cEUGn9qtXpxduahT
-         KpKA==
+        bh=ogBAI3ahQZt8cQO4HOiti7luBnz90xGbpQ3xPly4/XE=;
+        b=YjeeSHHG6eJmJXFcP6t79L7HG/d2+Qx4Co8wjJFWY+uQ5s35PeJQacaKL32zglHb5r
+         RhsotP1YPqbSbNrW5hl/Rk7Ri02Xvzxqcv6iojmlFQloHAGNxqhksvUSFpnpEsrAvNzR
+         /FvGbQCd5aeRogxhMt7L19lLNWjATG3WxJgnUPeDYoZRGuFoxu9r6zhAi46uLj191V/a
+         dL9aVYZCu0WOIVBpadJrZ2uh3CBErQtsgduWlDr4sjSJNB9Lfu6eyScjftff9dMsaObD
+         sENpoQIKdoR12hr4XXdzLiJqm3l8hWd9a7hqBpNyC/AQCWN+aMocvK8uTX2c8gNwo56D
+         X7Zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=cfoAs4AVdeMt7YHZIsvl+l+ixLNBDCi0YUKu/5lrdUQ=;
-        b=VCbqCibdvEkKmXdNmwp2jt+K+7xpnTxCj3j3J+uVyiBB+fjnOevk8wZ6jAK7azZSOq
-         MGhH7EWsowv1x4ZH3X+LybAmqjlkieuQQcjGQBBMoOuiIlYYAGw1iYwdwWszd9D5XovU
-         I4Pjf0D7ZDZfgAsW6BOZUE27RzMGl3FFmFUKDlJRc4Ftx30C4hfWzcdsnWrvdSJtUj+3
-         Vi0T3SNQH2xl0SAMPi67x5U5LNELhWyMipNmvhKj3b9uAkMwMzANFY/NEcIU+K6rcuYI
-         Z1gnJYmZxUh2ywH59WoErtqBFJY5RPhUWTGSzRWNocS4NtgykqIHkV37Gi/V5tNCW3zY
-         UstQ==
-X-Gm-Message-State: AOAM533zV7J6UKXqMrVT/IqbiJkwoIikcsDt1U0OIrKZwGJcYxoD3/LC
-	4zSrM/48h/B6/+t2w49SpdPO6EbIEXT1d1FNYp/FtQ==
+        bh=ogBAI3ahQZt8cQO4HOiti7luBnz90xGbpQ3xPly4/XE=;
+        b=I4+HbaE4Gi10eMDRLeGzCdiKDe+qUCz2/EEc4/53C46deVRv4nJ3PIqc3qLWwClQbM
+         pjdMtixsmGYhK/3LqhMOC+HKinNzd+c3uOCoxt2JG0bq/uKfCv7YdQ4w4mQoflFq8m/T
+         GpTde2qiN4ZvwfQnQE91dAHAjrlUqYl2rPYGDuiOn+eHjG2eJS8G7Sw8cGJ5+coNpzka
+         EtppGewLMYDCipNV4HL6keLm2BcKB37LrEtj8Kdq9VIhUWpvPWFCLFOVdWvECvp51+CV
+         Vc4MmVM/r1JGz07DDyYxg6sDfBAOgm5xW1nu0M31LDVEFhGkXJN1ivd3r8Gp2cC6LsAi
+         jHZQ==
+X-Gm-Message-State: AOAM532tux611+/HBJf27k64jh0u9vqunInlH6x1M9/Lcif/YKx0UKY6
+	OHx89xNvVGHgCIlWKK2G5GA4G7c5t3H2orbFOCw=
 X-Google-Smtp-Source: 
- ABdhPJz2fGKvcFCkVlLhOqVfHjB9Y7mYpGeyLHGnr7GQzJ4aecWMUZUsDYDDy1U4EaxNnJ/+Hf8Qssr251HBhH9bBKE=
-X-Received: by 2002:aa7:da08:0:b0:425:af3c:196a with SMTP id
- r8-20020aa7da08000000b00425af3c196amr14507785eds.69.1652723136063; Mon, 16
- May 2022 10:45:36 -0700 (PDT)
+ ABdhPJz3l+vXok6gtPiUROb3Q76h+ATB850HNB54djJzJ0miVZYQEghVaZY3z4fdODk4ViAi1XzwzjHh2qe9lejxj1Q=
+X-Received: by 2002:a05:6214:21aa:b0:461:b0d9:b265 with SMTP id
+ t10-20020a05621421aa00b00461b0d9b265mr13352148qvc.110.1652723944789; Mon, 16
+ May 2022 10:59:04 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220510092824.2033312-1-nicolas.dechesne@linaro.org>
  <796b97a3-27d8-7c87-19fb-0ad96540028b@pr.hu>
  <a9997892-f4e1-cfcd-1a68-df3312d9a1d7@gmail.com>
-In-Reply-To: <a9997892-f4e1-cfcd-1a68-df3312d9a1d7@gmail.com>
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Mon, 16 May 2022 19:45:25 +0200
-Message-ID: 
  <CAP71WjxRyDy4kOVydX7rfLxrw63jKOp+DEg1KF+VegrogOCX=g@mail.gmail.com>
+In-Reply-To: 
+ <CAP71WjxRyDy4kOVydX7rfLxrw63jKOp+DEg1KF+VegrogOCX=g@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 16 May 2022 10:58:54 -0700
+Message-ID: 
+ <CAMKF1sqD3n-Wf4WiBjbRBaF65Tc7v_yox6s06Fi7mXRAHchwCg@mail.gmail.com>
 Subject: Re: [oe] [meta-oe][PATCH] imlib2: update SRC_URI
-To: Khem Raj <raj.khem@gmail.com>
-Cc: zboszor@pr.hu, openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000006ffdc105df2497f0"
+To: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Cc: openembedded-devel@lists.openembedded.org, zboszor@pr.hu
+Content-Type: multipart/alternative; boundary="000000000000a41b2705df24c7bd"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 16 May 2022 17:45:39 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 16 May 2022 17:59:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97140
+ https://lists.openembedded.org/g/openembedded-devel/message/97141
 
---0000000000006ffdc105df2497f0
+--000000000000a41b2705df24c7bd
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, May 16, 2022 at 6:09 PM Khem Raj <raj.khem@gmail.com> wrote:
+On Mon, May 16, 2022 at 10:45 AM Nicolas Dechesne <
+nicolas.dechesne@linaro.org> wrote:
 
 >
 >
-> On 5/16/22 8:28 AM, Zoltan Boszormenyi via lists.openembedded.org wrote:
-> > 2022. 05. 10. 11:28 keltez=C3=A9ssel, Nicolas Dechesne =C3=ADrta:
-> >> The upstream repo location has changed, it's now
-> >> https://git.enlightenment.org/old/legacy-imlib2
-> >
-> > This hits every branch in meta-openembedded, not only master.
-> >
+> On Mon, May 16, 2022 at 6:09 PM Khem Raj <raj.khem@gmail.com> wrote:
 >
-> A different patch fixing same thing is already in master.
+>>
+>>
+>> On 5/16/22 8:28 AM, Zoltan Boszormenyi via lists.openembedded.org wrote:
+>> > 2022. 05. 10. 11:28 keltez=C3=A9ssel, Nicolas Dechesne =C3=ADrta:
+>> >> The upstream repo location has changed, it's now
+>> >> https://git.enlightenment.org/old/legacy-imlib2
+>> >
+>> > This hits every branch in meta-openembedded, not only master.
+>> >
+>>
+>> A different patch fixing same thing is already in master.
+>>
 >
-
-This is the merged patch, e.g.
-62becef1091d (imlib2: update SRC_URI)
-
-Not sure what you meant. And yes, it's needed in all branches. Do you
-want/need a patch for this, or can you backport/apply directly?
-
+> This is the merged patch, e.g.
+> 62becef1091d (imlib2: update SRC_URI)
 >
-> >>
-> >> It's not clear when or why it happened, but the the commit hash we use
-> >> in SRCREV exists in the 'new' location, so let's at least update the
-> >> SRC_URI for now, and fix this warning:
-> >>
-> >> WARNING: imlib2-1.7.1-r0 do_fetch: Failed to fetch URL
-> >> git://
-> git.enlightenment.org/legacy/imlib2.git;protocol=3Dhttps;branch=3Dmaster,
-> >> attempting MIRRORS if available
-> >>
-> >> Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-> >> ---
-> >>   meta-oe/recipes-graphics/imlib2/imlib2_git.bb | 2 +-
-> >>   1 file changed, 1 insertion(+), 1 deletion(-)
-> >>
-> >> diff --git a/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
-> >> b/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
-> >> index 56d41cd39..869f8123d 100644
-> >> --- a/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
-> >> +++ b/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
-> >> @@ -14,7 +14,7 @@ inherit autotools pkgconfig lib_package
-> >>   AUTO_LIBNAME_PKGS =3D ""
-> >> -SRC_URI =3D
-> >> "git://
-> git.enlightenment.org/legacy/${BPN}.git;protocol=3Dhttps;branch=3Dmaster
-> <http://git.enlightenment.org/legacy/$%7BBPN%7D.git;protocol=3Dhttps;bran=
-ch=3Dmaster>"
->
-> >>
-> >> +SRC_URI =3D
-> >> "git://
-> git.enlightenment.org/old/legacy-${BPN}.git;protocol=3Dhttps;branch=3Dmas=
-ter
-> <http://git.enlightenment.org/old/legacy-$%7BBPN%7D.git;protocol=3Dhttps;=
-branch=3Dmaster>"
->
-> >>
-> >>   S =3D "${WORKDIR}/git"
-> >>   PACKAGECONFIG ??=3D "jpeg png zlib
-> >> ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
-> >>
-> >>
-> >>
-> >>
-> >>
-> >
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#97134):
-> https://lists.openembedded.org/g/openembedded-devel/message/97134
-> > Mute This Topic: https://lists.openembedded.org/mt/91008939/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[
-> raj.khem@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
+> Not sure what you meant.
 >
 
---0000000000006ffdc105df2497f0
+
+I had the thread broken I should have said this patch is upstream in master
+already if needed send backport request for respective release branches
+
+> And yes, it's needed in all branches. Do you want/need a patch for this,
+> or can you backport/apply directly?
+>
+>>
+>> >>
+>> >> It's not clear when or why it happened, but the the commit hash we us=
+e
+>> >> in SRCREV exists in the 'new' location, so let's at least update the
+>> >> SRC_URI for now, and fix this warning:
+>> >>
+>> >> WARNING: imlib2-1.7.1-r0 do_fetch: Failed to fetch URL
+>> >> git://
+>> git.enlightenment.org/legacy/imlib2.git;protocol=3Dhttps;branch=3Dmaster=
+,
+>> >> attempting MIRRORS if available
+>> >>
+>> >> Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+>> >> ---
+>> >>   meta-oe/recipes-graphics/imlib2/imlib2_git.bb | 2 +-
+>> >>   1 file changed, 1 insertion(+), 1 deletion(-)
+>> >>
+>> >> diff --git a/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
+>> >> b/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
+>> >> index 56d41cd39..869f8123d 100644
+>> >> --- a/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
+>> >> +++ b/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
+>> >> @@ -14,7 +14,7 @@ inherit autotools pkgconfig lib_package
+>> >>   AUTO_LIBNAME_PKGS =3D ""
+>> >> -SRC_URI =3D
+>> >> "git://
+>> git.enlightenment.org/legacy/${BPN}.git;protocol=3Dhttps;branch=3Dmaster
+>> <http://git.enlightenment.org/legacy/$%7BBPN%7D.git;protocol=3Dhttps;bra=
+nch=3Dmaster>"
+>>
+>> >>
+>> >> +SRC_URI =3D
+>> >> "git://
+>> git.enlightenment.org/old/legacy-${BPN}.git;protocol=3Dhttps;branch=3Dma=
+ster
+>> <http://git.enlightenment.org/old/legacy-$%7BBPN%7D.git;protocol=3Dhttps=
+;branch=3Dmaster>"
+>>
+>> >>
+>> >>   S =3D "${WORKDIR}/git"
+>> >>   PACKAGECONFIG ??=3D "jpeg png zlib
+>> >> ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
+>> >>
+>> >>
+>> >>
+>> >>
+>> >>
+>> >
+>> >
+>> >
+>> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> > Links: You receive all messages sent to this group.
+>> > View/Reply Online (#97134):
+>> https://lists.openembedded.org/g/openembedded-devel/message/97134
+>> > Mute This Topic: https://lists.openembedded.org/mt/91008939/1997914
+>> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub
+>> [raj.khem@gmail.com]
+>> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> >
+>>
+>
+
+--000000000000a41b2705df24c7bd
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Mon, May 16, 2022 at 6:09 PM Khem =
-Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@gm=
-ail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"=
-margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-lef=
-t:1ex"><br>
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Mon, May 16, 2022 at 10:45 AM Nicolas Dechesne &lt;<a hr=
+ef=3D"mailto:nicolas.dechesne@linaro.org">nicolas.dechesne@linaro.org</a>&g=
+t; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 =
+.8ex;border-left:1px #ccc solid;padding-left:1ex"><div dir=3D"ltr"><div dir=
+=3D"ltr"><br></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D=
+"gmail_attr">On Mon, May 16, 2022 at 6:09 PM Khem Raj &lt;<a href=3D"mailto=
+:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>&gt; wrote:<br=
+></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;=
+border-left:1px solid rgb(204,204,204);padding-left:1ex"><br>
 <br>
 On 5/16/22 8:28 AM, Zoltan Boszormenyi via <a href=3D"http://lists.openembe=
 dded.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.org</a> w=
@@ -178,10 +197,17 @@ ib2</a><br>
 A different patch fixing same thing is already in master.<br></blockquote><=
 div><br></div><div class=3D"gmail_quote">This is the merged patch, e.g.=C2=
 =A0</div>62becef1091d (imlib2: update SRC_URI)<br><div>=C2=A0</div><div>Not=
- sure what you meant. And yes, it&#39;s needed in all branches. Do you want=
-/need a patch for=C2=A0this, or can you backport/apply directly?</div><bloc=
-kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:=
-1px solid rgb(204,204,204);padding-left:1ex">
+ sure what you meant. </div></div></div></blockquote><div dir=3D"auto"><br>=
+</div><div dir=3D"auto"><br></div><div dir=3D"auto">I had the thread broken=
+ I should have said this patch is upstream in master already if needed send=
+ backport request for respective release branches=C2=A0</div><blockquote cl=
+ass=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;p=
+adding-left:1ex"><div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"au=
+to">And yes, it&#39;s needed in all branches. Do you want/need a patch for=
+=C2=A0this, or can you backport/apply directly?</div></div></div><div dir=
+=3D"ltr"><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">
 <br>
 &gt;&gt;<br>
 &gt;&gt; It&#39;s not clear when or why it happened, but the the commit has=
@@ -257,6 +283,7 @@ d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com"=
 &gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 &gt; <br>
 </blockquote></div></div>
+</blockquote></div></div>
 
---0000000000006ffdc105df2497f0--
+--000000000000a41b2705df24c7bd--
 
