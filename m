@@ -1,233 +1,235 @@
-Return-Path: <jaskij@gmail.com>
+Return-Path: <steve@sakoman.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 592EEC433F5
-	for <webhook@archiver.kernel.org>; Wed, 18 May 2022 17:14:48 +0000 (UTC)
-Received: from mail-oa1-f43.google.com (mail-oa1-f43.google.com
- [209.85.160.43])
- by mx.groups.io with SMTP id smtpd.web08.7717.1652894082276281095
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 85257C433EF
+	for <webhook@archiver.kernel.org>; Wed, 18 May 2022 21:28:54 +0000 (UTC)
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com
+ [209.85.218.42])
+ by mx.groups.io with SMTP id smtpd.web09.148.1652909329591448044
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 May 2022 10:14:42 -0700
+ Wed, 18 May 2022 14:28:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=IaAC0xR8;
- spf=pass (domain: gmail.com, ip: 209.85.160.43, mailfrom: jaskij@gmail.com)
-Received: by mail-oa1-f43.google.com with SMTP id
- 586e51a60fabf-d6e29fb3d7so3552731fac.7
+ dkim=pass header.i=@sakoman-com.20210112.gappssmtp.com header.s=20210112
+ header.b=Yh/AjyVZ;
+ spf=softfail (domain: sakoman.com, ip: 209.85.218.42,
+ mailfrom: steve@sakoman.com)
+Received: by mail-ej1-f42.google.com with SMTP id n13so4374008ejv.1
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 May 2022 10:14:42 -0700 (PDT)
+ Wed, 18 May 2022 14:28:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
-        bh=F0l63g5kycC7LY2QLDmAtSBL5EJGYG/pR36utLdno5Q=;
-        b=IaAC0xR8yGoO3VVqa+vfqQHpMqL/ybikpbY2Ad7BEoLj67sJ+aFr/IeBq4CvGi0i7W
-         bpzXQ8XcUVm//SnK42s6BxKEI/kV+v+4SvHRPSC5oS7886CDYm1zAa8B4Zx7sT2BW0jG
-         Qahdsnxep/2o7Znuwe+mOPCCotDfQY4+sMjYzv80DJEv+mImWEoVw3V2RrgBJepeJeUk
-         dA+l58ZQvNd70k54ieZ6E6VRnqyBDDD78BGwoQH+rlyXmLyfOwCHj8rR6vFF8CzwBp/f
-         e9shQNcfNsfjHlicn3I+sFt8c4PM5kjHaJ9E1hmYc49aSO3MHZPsFp0IYhB5hvYJxJMZ
-         kaIw==
+        d=sakoman-com.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=UQTBCdGeRv/uJW5Wi9lrKg4+MJ7O6hJ0n0PkvN3RvsQ=;
+        b=Yh/AjyVZKZNIbK9LbhjYxiF1R32sfsJRmlbPS9DcAzgyOTGlZy+slcY0Sg8n/YV44q
+         jU3RZYBtiuLE6DQcY34NrJEajeQGekYG5kexy678dPzBav/r1BW/MAY/A4LiGU7oAf+G
+         TK1tmo6oiFQv8x3KNRQ48NAblhL1P+DZtKScrEBfpXVwZlVfAZvl58t0HXyHO7mh+pFE
+         i/h+f9Gy/rJE2d4sT6qsDuWwdjrLQhFUq0ZsYFCCXLvAq7FKEvycELGA9vEzN1bg0rAa
+         IgroYn+XJyTcIqVbXsadD49y/puLoEAKWmJKs2bXDEHkvPl9MxfaXgO/z+SHJYRfK2iF
+         PhFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to;
-        bh=F0l63g5kycC7LY2QLDmAtSBL5EJGYG/pR36utLdno5Q=;
-        b=ja2AnRb3YGPmfn/7O9ujE5clwM66xyLaERTePgstV59ESaq09gPKi76Ug29I/29GLg
-         rpCvzB/5GQFwVJdUNE4YdEtJD+GSlg9ySdmoJcxFj9LH3JZy/WNHthsQ/7cR0lgZrafm
-         yaWUDXoKdS7v1wpcEQLY24OJVfdMPlS93EaO/ejRJ5P3io2Y4h96qg7LSnTQ4T7+M3x8
-         VeMT5FYZRg4sYRVkFUVUUCnxKnBW0Apr+yg5dJHHUSNxLz19UyC8ZxKo1djmenYBNrf4
-         RD22tG1ehaOF5UmKtESOrZJmvskihl8u9ywsLvFQz6oCR87Ql3hgWxZIceZytUR1IIPA
-         R8yg==
-X-Gm-Message-State: AOAM531aZzNXCqvWR04jytLYDLlx3s0PzwPsLH4lL7wz/7n0JCle2hxp
-	3FEzjQHsUZ2EGXh8/pKq5Bc11fNpLfXg06yras1N0xx27JM=
+         :message-id:subject:to:cc;
+        bh=UQTBCdGeRv/uJW5Wi9lrKg4+MJ7O6hJ0n0PkvN3RvsQ=;
+        b=5ekRZrWaLElHzkea+/AaU3gjSL1XIBbgnsFM4CQhqaBwd8O14W1lmKWF3DeGwqXXRS
+         DTlz88wcy0cCuZuf2yPfXXK565ZK12GdhIJKJUilTOCuZN7WuYfhaNFF3azR484g3hWO
+         LeyzV2gQGvi7ZfxRYjTnNT56Idirpnpkjd6p/Wp5sOdFD5+Mz7qeXNEQ02ZiiZPMSY/e
+         AnEW2LnnPUm5/yYLLFG8r6iSt9tNqNl8Sic3lHwmfCWhdSF3E6GTxp6bLfW/TKgyb79U
+         HJ2Cwc7QVuCRwRr+cG+m12biB8kiQBlHUHt6BTwErDk/lHSJzZkrx2onIbA6IHN5dv3b
+         E+Ig==
+X-Gm-Message-State: AOAM530z3sWvi1A3Q/We3tPOEUdWrZCAT5+zH2XYq/piwNv5AX+ncYZS
+	8Ff+3cpjpSx7dWerUeC/U1bM/sWo7z0L5iGKetbk1Q==
 X-Google-Smtp-Source: 
- ABdhPJyST/rvgKIYiXFxJujnXYXfTsSW9vjN/YRO/oildp8/tSWHIpccucIZnvAtqB3hVBtYThD8230Wv/MhE7g2wLs=
-X-Received: by 2002:a05:6870:330d:b0:f1:c7e5:1ab3 with SMTP id
- x13-20020a056870330d00b000f1c7e51ab3mr640687oae.262.1652894081390; Wed, 18
- May 2022 10:14:41 -0700 (PDT)
+ ABdhPJygQDWWAlpaX1UzLQsi7Ko0C1mVPw1cnQxkypRfjqSG8oM0k8bgGpsY1moxojHrAb0cdAM76CoVaShfJkqI21c=
+X-Received: by 2002:a17:907:2da0:b0:6f4:e536:3771 with SMTP id
+ gt32-20020a1709072da000b006f4e5363771mr1428852ejc.55.1652909327719; Wed, 18
+ May 2022 14:28:47 -0700 (PDT)
 MIME-Version: 1.0
-References: 
- <CAGRymWUFaGpqbw769Vr_N7--6B8uRj8A5wCvc01nDfudk5FZfQ@mail.gmail.com>
- <2d54f700-7f32-5a4a-bdd3-19f3786d591a@gmail.com>
-In-Reply-To: <2d54f700-7f32-5a4a-bdd3-19f3786d591a@gmail.com>
-From: jaskij <jaskij@gmail.com>
-Date: Wed, 18 May 2022 19:14:30 +0200
+References: <20220509074009.12239-1-omkarpatil10.93@gmail.com>
+In-Reply-To: <20220509074009.12239-1-omkarpatil10.93@gmail.com>
+From: Steve Sakoman <steve@sakoman.com>
+Date: Wed, 18 May 2022 11:28:36 -1000
 Message-ID: 
- <CAGRymWV0B1Lijh7sU87bkGnP+BW7X7GjcznawfaXeP6gqyCfKg@mail.gmail.com>
-Subject: Re: [oe] [BUG] python3-protobuf performance regression
-To: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000929f2305df4c6433"
+ <CAOSpxdbh9KVmTUnXw5hQMzvx58qUHQUresp4TxrTnXDj0vDTOA@mail.gmail.com>
+Subject: Re: [oe][meta-oe][dunfell][PATCH] lua: fix CVE-2022-28805
+To: omkar <omkarpatil10.93@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, ranjitsinh.rathod@kpit.com,
+	Sana Kazi <sana.kazi@kpit.com>,
+ Richard Purdie <richard.purdie@linuxfoundation.org>,
+	Omkar Patil <omkar.patil@kpit.com>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 18 May 2022 17:14:48 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 18 May 2022 21:28:54 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97164
+ https://lists.openembedded.org/g/openembedded-devel/message/97165
 
---000000000000929f2305df4c6433
-Content-Type: text/plain; charset="UTF-8"
-
-On Wed, May 18, 2022 at 5:30 PM Khem Raj <raj.khem@gmail.com> wrote:
-
+On Sun, May 8, 2022 at 9:40 PM omkar <omkarpatil10.93@gmail.com> wrote:
 >
+> From: Steve Sakoman <steve@sakoman.com>
+
+I'm not the maintainer for meta-openembedded, but this appears to be a
+patch that I originally submitted for the lua recipe in oe-core master
+branch.  This recipe was moved to oe-core post dunfell release, so it
+does make sense to patch the lua version on meta-openembedded.
+
+Perhaps this patch wasn't taken because it has at least one issue, see below.
+
+> singlevar in lparser.c in Lua through 5.4.4 lacks a certain luaK_exp2anyregup
+> call, leading to a heap-based buffer over-read that might affect a system that
+> compiles untrusted Lua code.
 >
-> On 5/18/22 5:48 AM, jaskij wrote:
-> > Hello everyone,
-> >
-> > After updating from Hardknott to Kirkstone, we have noticed a massive
-> > performance regression in python3-protobuf.
-> >
-> > The regression is caused by the package not building (and thus not
-> > using) the native implementation. What seems to have happened is that
-> > `DISTUTILS_BUILD_ARGS` in the python3-protobuf recipe was not updated to
-> > `SETUPTOOLS_BUILD_ARGS`. This would be a simple fix - just update the
-> > recipe and set the flag, if not for one thing: protobuf in meta-oe is in
-> > version 3.19.4, and python3-protobuf 3.20.0 in meta-python is not able
-> > to link against it.
-> >
-> > Internally, I have rolled back python3-protobuf to 3.19.4 and built it
-> > with `SETUPTOOLS_BUILD_ARGS += "--cpp_implementation"`. The difference
-> > is... massive.
-> >
-> > For 2000 samples with our test code we get (all times in microseconds):
-> >
-> > python3-protobuf 3.20
-> > parse      mean: 28713us percentiles: {5: 26623, 25: 27343, 50: 28943,
-> > 75: 29663, 95: 30687}
-> > python3-protobuf 3.19
-> > parse      mean:   939us percentiles: {5: 756, 25: 944, 50: 950, 75:
-> > 956, 95: 1008}
-> >
-> > Changing the variable in python3-protobuf is simple, the problem is the
-> > version mismatch. It's either roll back python3-protobuf or update
-> protobuf.
-> >
+> https://nvd.nist.gov/vuln/detail/CVE-2022-28805
 >
-> Can you test the updated protobuf scenario ? if that works I would think
-> thats a preferred aproach.
+> (From OE-Core rev: d2ba3b8850d461bc7b773240cdf15b22b31a3f9e)
 >
-> Some of the current patches fail to apply to 3.20.1, and I am not familiar
-with the codebase, otherwise I'd be happy to.
-
-> > Jan
-> >
-> > --
-> > Jan Dorniak
-> > e-mail:jaskij@gmail.com <mailto:e-mail%3Ajaskij@gmail.com>
-> >
-> >
-> >
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#97160):
-> https://lists.openembedded.org/g/openembedded-devel/message/97160
-> > Mute This Topic: https://lists.openembedded.org/mt/91185173/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> >
+> Signed-off-by: Sana Kazi <sana.kazi@kpit.com>
+> Signed-off-by: Steve Sakoman <steve@sakoman.com>
+> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+> (cherry picked from commit 91e14d3a8e6e67267047473f5c449f266b44f354)
+> Signed-off-by: Omkar Patil <omkar.patil@kpit.com>
+> Signed-off-by: Omkar Patil <omkarpatil10.93@gmail.com>
+> ---
+>  .../lua/lua/0001-lua-fix-CVE-2022-28805.patch | 73 +++++++++++++++++++
+>  .../lua/lua/CVE-2022-28805.patch              | 28 +++++++
+>  meta-oe/recipes-devtools/lua/lua_5.3.6.bb     |  1 +
+>  3 files changed, 102 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/lua/lua/0001-lua-fix-CVE-2022-28805.patch
+>  create mode 100644 meta-oe/recipes-devtools/lua/lua/CVE-2022-28805.patch
 >
+> diff --git a/meta-oe/recipes-devtools/lua/lua/0001-lua-fix-CVE-2022-28805.patch b/meta-oe/recipes-devtools/lua/lua/0001-lua-fix-CVE-2022-28805.patch
+> new file mode 100644
+> index 000000000..606c9ea98
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/lua/lua/0001-lua-fix-CVE-2022-28805.patch
 
+This seems to be adding a file that is an edited version of my
+original patch.  This seems to have no purpose!
 
--- 
-Jan Dorniak
-e-mail:jaskij@gmail.com
-
---000000000000929f2305df4c6433
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"></div><br><div class=3D"gmail_quote"><div=
- dir=3D"ltr" class=3D"gmail_attr">On Wed, May 18, 2022 at 5:30 PM Khem Raj =
-&lt;<a href=3D"mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt; wrote:=
-<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
-ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><br>
-<br>
-On 5/18/22 5:48 AM, jaskij wrote:<br>
-&gt; Hello everyone,<br>
-&gt; <br>
-&gt; After updating from Hardknott to Kirkstone, we have noticed a massive =
-<br>
-&gt; performance regression in python3-protobuf.<br>
-&gt; <br>
-&gt; The regression is caused by the package not building (and thus not <br=
+> @@ -0,0 +1,73 @@
+> +From a38684e4cb4e1439e5f2f7370724496d5b363b32 Mon Sep 17 00:00:00 2001
+> +From: Steve Sakoman <steve@sakoman.com>
+> +Date: Mon, 18 Apr 2022 09:04:08 -1000
+> +Subject: [PATCH] lua: fix CVE-2022-28805
+> +
+> +singlevar in lparser.c in Lua through 5.4.4 lacks a certain luaK_exp2anyregup
+> +call, leading to a heap-based buffer over-read that might affect a system that
+> +compiles untrusted Lua code.
+> +
+> +https://nvd.nist.gov/vuln/detail/CVE-2022-28805
+> +
+> +(From OE-Core rev: d2ba3b8850d461bc7b773240cdf15b22b31a3f9e)
+> +
+> +Signed-off-by: Sana Kazi <sana.kazi@kpit.com>
+> +Signed-off-by: Steve Sakoman <steve@sakoman.com>
+> +Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+> +(cherry picked from commit 91e14d3a8e6e67267047473f5c449f266b44f354)
+> +Signed-off-by: Omkar Patil <omkar.patil@kpit.com>
+> +---
+> + .../lua/lua/CVE-2022-28805.patch              | 28 +++++++++++++++++++
+> + meta-oe/recipes-devtools/lua/lua_5.3.6.bb     |  1 +
+> + 2 files changed, 29 insertions(+)
+> + create mode 100644 meta-oe/recipes-devtools/lua/lua/CVE-2022-28805.patch
+> +
+> +diff --git a/meta-oe/recipes-devtools/lua/lua/CVE-2022-28805.patch b/meta-oe/recipes-devtools/lua/lua/CVE-2022-28805.patch
+> +new file mode 100644
+> +index 000000000..0a21d1ce7
+> +--- /dev/null
+> ++++ b/meta-oe/recipes-devtools/lua/lua/CVE-2022-28805.patch
+> +@@ -0,0 +1,28 @@
+> ++From 1f3c6f4534c6411313361697d98d1145a1f030fa Mon Sep 17 00:00:00 2001
+> ++From: Roberto Ierusalimschy <roberto@inf.puc-rio.br>
+> ++Date: Tue, 15 Feb 2022 12:28:46 -0300
+> ++Subject: [PATCH] Bug: Lua can generate wrong code when _ENV is <const>
+> ++
+> ++CVE: CVE-2022-28805
+> ++
+> ++Upstream-Status: Backport [https://github.com/lua/lua/commit/1f3c6f4534c6411313361697d98d1145a1f030fa]
+> ++
+> ++Signed-off-by: Sana Kazi <sana.kazi@kpit.com>
+> ++Signed-off-by: Steve Sakoman <steve@sakoman.com>
+> ++---
+> ++ src/lparser.c         |  1 +
+> ++ 1 files changed, 1 insertions(+)
+> ++
+> ++diff --git a/src/lparser.c b/src/lparser.c
+> ++index 3abe3d751..a5cd55257 100644
+> ++--- a/src/lparser.c
+> +++++ b/src/lparser.c
+> ++@@ -300,6 +300,7 @@
+> ++     expdesc key;
+> ++     singlevaraux(fs, ls->envn, var, 1);  /* get environment variable */
+> ++     lua_assert(var->k != VVOID);  /* this one must exist */
+> +++    luaK_exp2anyregup(fs, var);  /* but could be a constant */
+> ++     codestring(ls, &key, varname);  /* key is variable name */
+> ++     luaK_indexed(fs, var, &key);  /* env[varname] */
+> ++   }
+> ++
+> +diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.6.bb b/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
+> +index 342ed1b54..0137cc3c5 100644
+> +--- a/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
+> ++++ b/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
+> +@@ -10,6 +10,7 @@ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
+> +            file://CVE-2020-15888.patch \
+> +            file://CVE-2020-15945.patch \
+> +            file://0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch \
+> ++           file://CVE-2022-28805.patch \
+> +            "
+> +
+> + # if no test suite matches PV release of Lua exactly, download the suite for the closest Lua release.
+> +--
+> +2.17.1
+> +
+> diff --git a/meta-oe/recipes-devtools/lua/lua/CVE-2022-28805.patch b/meta-oe/recipes-devtools/lua/lua/CVE-2022-28805.patch
+> new file mode 100644
+> index 000000000..0a21d1ce7
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/lua/lua/CVE-2022-28805.patch
+> @@ -0,0 +1,28 @@
+> +From 1f3c6f4534c6411313361697d98d1145a1f030fa Mon Sep 17 00:00:00 2001
+> +From: Roberto Ierusalimschy <roberto@inf.puc-rio.br>
+> +Date: Tue, 15 Feb 2022 12:28:46 -0300
+> +Subject: [PATCH] Bug: Lua can generate wrong code when _ENV is <const>
+> +
+> +CVE: CVE-2022-28805
+> +
+> +Upstream-Status: Backport [https://github.com/lua/lua/commit/1f3c6f4534c6411313361697d98d1145a1f030fa]
+> +
+> +Signed-off-by: Sana Kazi <sana.kazi@kpit.com>
+> +Signed-off-by: Steve Sakoman <steve@sakoman.com>
+> +---
+> + src/lparser.c         |  1 +
+> + 1 files changed, 1 insertions(+)
+> +
+> +diff --git a/src/lparser.c b/src/lparser.c
+> +index 3abe3d751..a5cd55257 100644
+> +--- a/src/lparser.c
+> ++++ b/src/lparser.c
+> +@@ -300,6 +300,7 @@
+> +     expdesc key;
+> +     singlevaraux(fs, ls->envn, var, 1);  /* get environment variable */
+> +     lua_assert(var->k != VVOID);  /* this one must exist */
+> ++    luaK_exp2anyregup(fs, var);  /* but could be a constant */
+> +     codestring(ls, &key, varname);  /* key is variable name */
+> +     luaK_indexed(fs, var, &key);  /* env[varname] */
+> +   }
+> +
+> diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.6.bb b/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
+> index 342ed1b54..0137cc3c5 100644
+> --- a/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
+> +++ b/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
+> @@ -10,6 +10,7 @@ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
+>             file://CVE-2020-15888.patch \
+>             file://CVE-2020-15945.patch \
+>             file://0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch \
+> +           file://CVE-2022-28805.patch \
+>             "
 >
-&gt; using) the native implementation. What seems to have happened is that =
-<br>
-&gt; `DISTUTILS_BUILD_ARGS` in the python3-protobuf recipe was not updated =
-to <br>
-&gt; `SETUPTOOLS_BUILD_ARGS`. This would be a simple fix - just update the =
-<br>
-&gt; recipe and set the flag, if not for one thing: protobuf in meta-oe is =
-in <br>
-&gt; version 3.19.4, and python3-protobuf 3.20.0 in meta-python is not able=
- <br>
-&gt; to link against it.<br>
-&gt; <br>
-&gt; Internally, I have rolled back python3-protobuf to 3.19.4 and built it=
- <br>
-&gt; with `SETUPTOOLS_BUILD_ARGS +=3D &quot;--cpp_implementation&quot;`. Th=
-e difference <br>
-&gt; is... massive.<br>
-&gt; <br>
-&gt; For 2000 samples with our test code we get (all times in microseconds)=
-:<br>
-&gt; <br>
-&gt; python3-protobuf 3.20<br>
-&gt; parse =C2=A0 =C2=A0 =C2=A0mean: 28713us percentiles: {5: 26623, 25: 27=
-343, 50: 28943, <br>
-&gt; 75: 29663, 95: 30687}<br>
-&gt; python3-protobuf 3.19<br>
-&gt; parse =C2=A0 =C2=A0 =C2=A0mean: =C2=A0 939us percentiles: {5: 756, 25:=
- 944, 50: 950, 75: <br>
-&gt; 956, 95: 1008}<br>
-&gt; <br>
-&gt; Changing the variable in python3-protobuf is simple, the problem is th=
-e <br>
-&gt; version mismatch. It&#39;s either roll back python3-protobuf or update=
- protobuf.<br>
-&gt; <br>
-<br>
-Can you test the updated protobuf scenario ? if that works I would think <b=
-r>
-thats a preferred aproach.<br>
-<br></blockquote><div>Some of the current patches fail to apply to 3.20.1, =
-and I am not familiar with the codebase, otherwise I&#39;d be happy to. <br=
-></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;=
-border-left:1px solid rgb(204,204,204);padding-left:1ex">
-&gt; Jan<br>
-&gt; <br>
-&gt; -- <br>
-&gt; Jan Dorniak<br>
-&gt; <a href=3D"mailto:e-mail%3Ajaskij@gmail.com" target=3D"_blank">e-mail:=
-jaskij@gmail.com</a> &lt;mailto:<a href=3D"mailto:e-mail%253Ajaskij@gmail.c=
-om" target=3D"_blank">e-mail%3Ajaskij@gmail.com</a>&gt;<br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; Links: You receive all messages sent to this group.<br>
-&gt; View/Reply Online (#97160): <a href=3D"https://lists.openembedded.org/=
-g/openembedded-devel/message/97160" rel=3D"noreferrer" target=3D"_blank">ht=
-tps://lists.openembedded.org/g/openembedded-devel/message/97160</a><br>
-&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/91185173=
-/1997914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.o=
-rg/mt/91185173/1997914</a><br>
-&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
-bedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.o=
-rg</a><br>
-&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
-devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedde=
-d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com"=
- target=3D"_blank">raj.khem@gmail.com</a>]<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; <br>
-</blockquote></div><br clear=3D"all"><br>-- <br><div dir=3D"ltr" class=3D"g=
-mail_signature"><div dir=3D"ltr"><span style=3D"color:rgb(102,102,102)">Jan=
- Dorniak</span><br style=3D"color:rgb(102,102,102)"><a style=3D"color:rgb(1=
-02,102,102)" href=3D"mailto:e-mail%3Ajaskij@gmail.com" target=3D"_blank">e-=
-mail:jaskij@gmail.com</a><font color=3D"#666666"><br></font><br><div></div>=
-</div></div></div>
-
---000000000000929f2305df4c6433--
+>  # if no test suite matches PV release of Lua exactly, download the suite for the closest Lua release.
+> --
+> 2.17.1
+>
 
