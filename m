@@ -1,235 +1,125 @@
-Return-Path: <steve@sakoman.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 85257C433EF
-	for <webhook@archiver.kernel.org>; Wed, 18 May 2022 21:28:54 +0000 (UTC)
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com
- [209.85.218.42])
- by mx.groups.io with SMTP id smtpd.web09.148.1652909329591448044
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2572C433F5
+	for <webhook@archiver.kernel.org>; Thu, 19 May 2022 01:43:45 +0000 (UTC)
+Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com
+ [209.85.160.169])
+ by mx.groups.io with SMTP id smtpd.web09.2558.1652924622461217153
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 May 2022 14:28:50 -0700
+ Wed, 18 May 2022 18:43:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@sakoman-com.20210112.gappssmtp.com header.s=20210112
- header.b=Yh/AjyVZ;
- spf=softfail (domain: sakoman.com, ip: 209.85.218.42,
- mailfrom: steve@sakoman.com)
-Received: by mail-ej1-f42.google.com with SMTP id n13so4374008ejv.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=mtFeIbxy;
+ spf=pass (domain: gmail.com, ip: 209.85.160.169,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f169.google.com with SMTP id s22so3960264qta.0
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 May 2022 14:28:49 -0700 (PDT)
+ Wed, 18 May 2022 18:43:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=sakoman-com.20210112.gappssmtp.com; s=20210112;
+        d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=UQTBCdGeRv/uJW5Wi9lrKg4+MJ7O6hJ0n0PkvN3RvsQ=;
-        b=Yh/AjyVZKZNIbK9LbhjYxiF1R32sfsJRmlbPS9DcAzgyOTGlZy+slcY0Sg8n/YV44q
-         jU3RZYBtiuLE6DQcY34NrJEajeQGekYG5kexy678dPzBav/r1BW/MAY/A4LiGU7oAf+G
-         TK1tmo6oiFQv8x3KNRQ48NAblhL1P+DZtKScrEBfpXVwZlVfAZvl58t0HXyHO7mh+pFE
-         i/h+f9Gy/rJE2d4sT6qsDuWwdjrLQhFUq0ZsYFCCXLvAq7FKEvycELGA9vEzN1bg0rAa
-         IgroYn+XJyTcIqVbXsadD49y/puLoEAKWmJKs2bXDEHkvPl9MxfaXgO/z+SHJYRfK2iF
-         PhFA==
+         :cc:content-transfer-encoding;
+        bh=U3BnZ4BVKoS+ysqwkNlvu2I6txZE/uVqbeGfgtQRULM=;
+        b=mtFeIbxymBelzgovkiDEs71PnbofGu5vKcSMuDoQuP6DM1lbFSyNXBSwW0FblMGGU1
+         BKKKOmlmNuys27SfSpwBkJHMFX0vGM6o7oQ6pWUU59fI+CrcTBuIkEbccyKBmOIA5WQ6
+         4Byk41sWQH2xXXMeyAPh6mmqk0oAg93GzSKfR3lG4GgKidm60Zxz1Vb7wICYlzucMyU+
+         jYW3Ustrj3pSY5B1HOTSueC4LTv2M268uAsbkqnYPO5ypy1lehLDen0tMzldE4I64nR3
+         SKWNEEqX5VzdC4MeVmyDs/aSgfR3x+pl8u8PcFYIgmviIC6m+xU4yar92waxLT4Bi4Ry
+         P5wg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=UQTBCdGeRv/uJW5Wi9lrKg4+MJ7O6hJ0n0PkvN3RvsQ=;
-        b=5ekRZrWaLElHzkea+/AaU3gjSL1XIBbgnsFM4CQhqaBwd8O14W1lmKWF3DeGwqXXRS
-         DTlz88wcy0cCuZuf2yPfXXK565ZK12GdhIJKJUilTOCuZN7WuYfhaNFF3azR484g3hWO
-         LeyzV2gQGvi7ZfxRYjTnNT56Idirpnpkjd6p/Wp5sOdFD5+Mz7qeXNEQ02ZiiZPMSY/e
-         AnEW2LnnPUm5/yYLLFG8r6iSt9tNqNl8Sic3lHwmfCWhdSF3E6GTxp6bLfW/TKgyb79U
-         HJ2Cwc7QVuCRwRr+cG+m12biB8kiQBlHUHt6BTwErDk/lHSJzZkrx2onIbA6IHN5dv3b
-         E+Ig==
-X-Gm-Message-State: AOAM530z3sWvi1A3Q/We3tPOEUdWrZCAT5+zH2XYq/piwNv5AX+ncYZS
-	8Ff+3cpjpSx7dWerUeC/U1bM/sWo7z0L5iGKetbk1Q==
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=U3BnZ4BVKoS+ysqwkNlvu2I6txZE/uVqbeGfgtQRULM=;
+        b=FPpeVgzFhaDgeMaPQeLAhY0LS+sEyDYPSmaoyU0nWbyjGcyVlf3KtgbeR7F1LCh1go
+         fFfbJKv76Bey6+X2rHrOwkaRlM1x6/4UjwysicB2GBny/rB9qgapWmlHhpuDyV7bS94p
+         pbdILvbNXQ+k2Tkzg38yZNodKvioPX80ZMRLeGK9kYjHnStSaPSbTRfQehg2EXbkHfQ7
+         ekgFHzVsRwV+RksK6z3HIzgMmKr72W9p1yZlrrxwSFuNpaqFza99WL0uLje7D7tAUTe4
+         IC4E6dVqWdhCT4EAG5IR5Sdf6/uFicPOXS9O50PQsJ56bSZuHU7XexbiwoDIJQpckTQw
+         vdbQ==
+X-Gm-Message-State: AOAM530wM0NnM2kjSDjN/xmNeEuVUmjgM7ZjX4iAADav8HCggMWCcvV8
+	8zkBVir6A9vbg974oqQM2bfLDugeR1A6jitt5x4=
 X-Google-Smtp-Source: 
- ABdhPJygQDWWAlpaX1UzLQsi7Ko0C1mVPw1cnQxkypRfjqSG8oM0k8bgGpsY1moxojHrAb0cdAM76CoVaShfJkqI21c=
-X-Received: by 2002:a17:907:2da0:b0:6f4:e536:3771 with SMTP id
- gt32-20020a1709072da000b006f4e5363771mr1428852ejc.55.1652909327719; Wed, 18
- May 2022 14:28:47 -0700 (PDT)
+ ABdhPJzp7Z5eQ/EDIMn+cUrLT5YQjt/YORiz2Xqn4WEhh3yiYc5as2SLGptuI7UNamGozmr0CFHmVZg4RJTbQF+i74Y=
+X-Received: by 2002:a05:622a:18aa:b0:2f3:badf:beae with SMTP id
+ v42-20020a05622a18aa00b002f3badfbeaemr2241936qtc.229.1652924621457; Wed, 18
+ May 2022 18:43:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220509074009.12239-1-omkarpatil10.93@gmail.com>
-In-Reply-To: <20220509074009.12239-1-omkarpatil10.93@gmail.com>
-From: Steve Sakoman <steve@sakoman.com>
-Date: Wed, 18 May 2022 11:28:36 -1000
+References: <20220518071915.113319-1-zboszor@pr.hu>
+ <20220518071915.113319-2-zboszor@pr.hu>
+In-Reply-To: <20220518071915.113319-2-zboszor@pr.hu>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 18 May 2022 18:43:15 -0700
 Message-ID: 
- <CAOSpxdbh9KVmTUnXw5hQMzvx58qUHQUresp4TxrTnXDj0vDTOA@mail.gmail.com>
-Subject: Re: [oe][meta-oe][dunfell][PATCH] lua: fix CVE-2022-28805
-To: omkar <omkarpatil10.93@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, ranjitsinh.rathod@kpit.com,
-	Sana Kazi <sana.kazi@kpit.com>,
- Richard Purdie <richard.purdie@linuxfoundation.org>,
-	Omkar Patil <omkar.patil@kpit.com>
+ <CAMKF1srW+SjvZ+=wC+ZxPdMUsNDce5O4kcv=i3Sx0zHw-64kyQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 2/2] python3-pyproj: New recipe for pyproj
+ version 3.3.1
+To: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@pr.hu>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	=?UTF-8?B?Wm9sdMOhbiBCw7ZzesO2cm3DqW55aQ==?= <zboszor@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 18 May 2022 21:28:54 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 19 May 2022 01:43:45 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97165
+ https://lists.openembedded.org/g/openembedded-devel/message/97166
 
-On Sun, May 8, 2022 at 9:40 PM omkar <omkarpatil10.93@gmail.com> wrote:
->
-> From: Steve Sakoman <steve@sakoman.com>
+I am seeing this
 
-I'm not the maintainer for meta-openembedded, but this appears to be a
-patch that I originally submitted for the lua recipe in oe-core master
-branch.  This recipe was moved to oe-core post dunfell release, so it
-does make sense to patch the lua version on meta-openembedded.
+https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1766
 
-Perhaps this patch wasn't taken because it has at least one issue, see below.
-
-> singlevar in lparser.c in Lua through 5.4.4 lacks a certain luaK_exp2anyregup
-> call, leading to a heap-based buffer over-read that might affect a system that
-> compiles untrusted Lua code.
+On Wed, May 18, 2022 at 12:19 AM Zoltan Boszormenyi via
+lists.openembedded.org <zboszor=3Dpr.hu@lists.openembedded.org> wrote:
 >
-> https://nvd.nist.gov/vuln/detail/CVE-2022-28805
+> From: Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi <zboszor@gmail.com>
 >
-> (From OE-Core rev: d2ba3b8850d461bc7b773240cdf15b22b31a3f9e)
+> It needs PROJ.4 >=3D 8.x and the fix for setuptools in oe-core.
 >
-> Signed-off-by: Sana Kazi <sana.kazi@kpit.com>
-> Signed-off-by: Steve Sakoman <steve@sakoman.com>
-> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-> (cherry picked from commit 91e14d3a8e6e67267047473f5c449f266b44f354)
-> Signed-off-by: Omkar Patil <omkar.patil@kpit.com>
-> Signed-off-by: Omkar Patil <omkarpatil10.93@gmail.com>
+> Signed-off-by: Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi <zboszor@gmail.com>
 > ---
->  .../lua/lua/0001-lua-fix-CVE-2022-28805.patch | 73 +++++++++++++++++++
->  .../lua/lua/CVE-2022-28805.patch              | 28 +++++++
->  meta-oe/recipes-devtools/lua/lua_5.3.6.bb     |  1 +
->  3 files changed, 102 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/lua/lua/0001-lua-fix-CVE-2022-28805.patch
->  create mode 100644 meta-oe/recipes-devtools/lua/lua/CVE-2022-28805.patch
+>  .../recipes-devtools/python/python3-pyproj_3.3.1.bb | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-pyproj_3.=
+3.1.bb
 >
-> diff --git a/meta-oe/recipes-devtools/lua/lua/0001-lua-fix-CVE-2022-28805.patch b/meta-oe/recipes-devtools/lua/lua/0001-lua-fix-CVE-2022-28805.patch
+> diff --git a/meta-python/recipes-devtools/python/python3-pyproj_3.3.1.bb =
+b/meta-python/recipes-devtools/python/python3-pyproj_3.3.1.bb
 > new file mode 100644
-> index 000000000..606c9ea98
+> index 000000000..ebef1e74c
 > --- /dev/null
-> +++ b/meta-oe/recipes-devtools/lua/lua/0001-lua-fix-CVE-2022-28805.patch
-
-This seems to be adding a file that is an edited version of my
-original patch.  This seems to have no purpose!
-
-> @@ -0,0 +1,73 @@
-> +From a38684e4cb4e1439e5f2f7370724496d5b363b32 Mon Sep 17 00:00:00 2001
-> +From: Steve Sakoman <steve@sakoman.com>
-> +Date: Mon, 18 Apr 2022 09:04:08 -1000
-> +Subject: [PATCH] lua: fix CVE-2022-28805
+> +++ b/meta-python/recipes-devtools/python/python3-pyproj_3.3.1.bb
+> @@ -0,0 +1,13 @@
+> +SUMMARY =3D "Python interface to PROJ (cartographic projections and coor=
+dinate transformations library)"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddc4bb2668871655e24030dfe8d2a7=
+ce7"
+> +DEPENDS =3D "python3-cython proj"
+> +DEPENDS:append:class-target =3D " proj-native python3-cython-native"
 > +
-> +singlevar in lparser.c in Lua through 5.4.4 lacks a certain luaK_exp2anyregup
-> +call, leading to a heap-based buffer over-read that might affect a system that
-> +compiles untrusted Lua code.
+> +PYPI_PACKAGE =3D "pyproj"
 > +
-> +https://nvd.nist.gov/vuln/detail/CVE-2022-28805
+> +inherit pypi setuptools3
 > +
-> +(From OE-Core rev: d2ba3b8850d461bc7b773240cdf15b22b31a3f9e)
+> +SRC_URI[sha256sum] =3D "b3d8e14d91cc95fb3dbc03a9d0588ac58326803eefa5bbb0=
+978d109de3304fbe"
 > +
-> +Signed-off-by: Sana Kazi <sana.kazi@kpit.com>
-> +Signed-off-by: Steve Sakoman <steve@sakoman.com>
-> +Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-> +(cherry picked from commit 91e14d3a8e6e67267047473f5c449f266b44f354)
-> +Signed-off-by: Omkar Patil <omkar.patil@kpit.com>
-> +---
-> + .../lua/lua/CVE-2022-28805.patch              | 28 +++++++++++++++++++
-> + meta-oe/recipes-devtools/lua/lua_5.3.6.bb     |  1 +
-> + 2 files changed, 29 insertions(+)
-> + create mode 100644 meta-oe/recipes-devtools/lua/lua/CVE-2022-28805.patch
-> +
-> +diff --git a/meta-oe/recipes-devtools/lua/lua/CVE-2022-28805.patch b/meta-oe/recipes-devtools/lua/lua/CVE-2022-28805.patch
-> +new file mode 100644
-> +index 000000000..0a21d1ce7
-> +--- /dev/null
-> ++++ b/meta-oe/recipes-devtools/lua/lua/CVE-2022-28805.patch
-> +@@ -0,0 +1,28 @@
-> ++From 1f3c6f4534c6411313361697d98d1145a1f030fa Mon Sep 17 00:00:00 2001
-> ++From: Roberto Ierusalimschy <roberto@inf.puc-rio.br>
-> ++Date: Tue, 15 Feb 2022 12:28:46 -0300
-> ++Subject: [PATCH] Bug: Lua can generate wrong code when _ENV is <const>
-> ++
-> ++CVE: CVE-2022-28805
-> ++
-> ++Upstream-Status: Backport [https://github.com/lua/lua/commit/1f3c6f4534c6411313361697d98d1145a1f030fa]
-> ++
-> ++Signed-off-by: Sana Kazi <sana.kazi@kpit.com>
-> ++Signed-off-by: Steve Sakoman <steve@sakoman.com>
-> ++---
-> ++ src/lparser.c         |  1 +
-> ++ 1 files changed, 1 insertions(+)
-> ++
-> ++diff --git a/src/lparser.c b/src/lparser.c
-> ++index 3abe3d751..a5cd55257 100644
-> ++--- a/src/lparser.c
-> +++++ b/src/lparser.c
-> ++@@ -300,6 +300,7 @@
-> ++     expdesc key;
-> ++     singlevaraux(fs, ls->envn, var, 1);  /* get environment variable */
-> ++     lua_assert(var->k != VVOID);  /* this one must exist */
-> +++    luaK_exp2anyregup(fs, var);  /* but could be a constant */
-> ++     codestring(ls, &key, varname);  /* key is variable name */
-> ++     luaK_indexed(fs, var, &key);  /* env[varname] */
-> ++   }
-> ++
-> +diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.6.bb b/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
-> +index 342ed1b54..0137cc3c5 100644
-> +--- a/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
-> ++++ b/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
-> +@@ -10,6 +10,7 @@ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
-> +            file://CVE-2020-15888.patch \
-> +            file://CVE-2020-15945.patch \
-> +            file://0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch \
-> ++           file://CVE-2022-28805.patch \
-> +            "
-> +
-> + # if no test suite matches PV release of Lua exactly, download the suite for the closest Lua release.
-> +--
-> +2.17.1
-> +
-> diff --git a/meta-oe/recipes-devtools/lua/lua/CVE-2022-28805.patch b/meta-oe/recipes-devtools/lua/lua/CVE-2022-28805.patch
-> new file mode 100644
-> index 000000000..0a21d1ce7
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/lua/lua/CVE-2022-28805.patch
-> @@ -0,0 +1,28 @@
-> +From 1f3c6f4534c6411313361697d98d1145a1f030fa Mon Sep 17 00:00:00 2001
-> +From: Roberto Ierusalimschy <roberto@inf.puc-rio.br>
-> +Date: Tue, 15 Feb 2022 12:28:46 -0300
-> +Subject: [PATCH] Bug: Lua can generate wrong code when _ENV is <const>
-> +
-> +CVE: CVE-2022-28805
-> +
-> +Upstream-Status: Backport [https://github.com/lua/lua/commit/1f3c6f4534c6411313361697d98d1145a1f030fa]
-> +
-> +Signed-off-by: Sana Kazi <sana.kazi@kpit.com>
-> +Signed-off-by: Steve Sakoman <steve@sakoman.com>
-> +---
-> + src/lparser.c         |  1 +
-> + 1 files changed, 1 insertions(+)
-> +
-> +diff --git a/src/lparser.c b/src/lparser.c
-> +index 3abe3d751..a5cd55257 100644
-> +--- a/src/lparser.c
-> ++++ b/src/lparser.c
-> +@@ -300,6 +300,7 @@
-> +     expdesc key;
-> +     singlevaraux(fs, ls->envn, var, 1);  /* get environment variable */
-> +     lua_assert(var->k != VVOID);  /* this one must exist */
-> ++    luaK_exp2anyregup(fs, var);  /* but could be a constant */
-> +     codestring(ls, &key, varname);  /* key is variable name */
-> +     luaK_indexed(fs, var, &key);  /* env[varname] */
-> +   }
-> +
-> diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.6.bb b/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
-> index 342ed1b54..0137cc3c5 100644
-> --- a/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
-> +++ b/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
-> @@ -10,6 +10,7 @@ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
->             file://CVE-2020-15888.patch \
->             file://CVE-2020-15945.patch \
->             file://0001-Fixed-bug-barriers-cannot-be-active-during-sweep.patch \
-> +           file://CVE-2022-28805.patch \
->             "
->
->  # if no test suite matches PV release of Lua exactly, download the suite for the closest Lua release.
+> +RDEPENDS:${PN} =3D "${PYTHON_PN}-cython proj"
 > --
-> 2.17.1
+> 2.36.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#97155): https://lists.openembedded.org/g/openembedded=
+-devel/message/97155
+> Mute This Topic: https://lists.openembedded.org/mt/91181351/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 
