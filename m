@@ -1,307 +1,351 @@
-Return-Path: <zboszor@pr.hu>
+Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20CADC433EF
-	for <webhook@archiver.kernel.org>; Thu, 19 May 2022 09:37:48 +0000 (UTC)
-Received: from mail6.pr.hu (mail6.pr.hu [87.242.0.6])
- by mx.groups.io with SMTP id smtpd.web08.5575.1652953059515015391
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2252AC433F5
+	for <webhook@archiver.kernel.org>; Thu, 19 May 2022 09:44:18 +0000 (UTC)
+Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com
+ [209.85.208.174])
+ by mx.groups.io with SMTP id smtpd.web10.5671.1652953455636296263
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 May 2022 02:37:40 -0700
+ Thu, 19 May 2022 02:44:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@pr.hu header.s=pr20170203 header.b=L+1AUIiL;
- spf=pass (domain: pr.hu, ip: 87.242.0.6, mailfrom: zboszor@pr.hu)
-Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
-	by frontdoor.pr.hu with esmtps  (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94.2)
-	(envelope-from <zboszor@pr.hu>)
-	id 1nrcbA-0004ZN-0i; Thu, 19 May 2022 11:37:36 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
-	s=pr20170203; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=2279ILbo9c+0dzU53EXggGg93NeZ4/dMqlzsrO/EyQ0=; b=L+1AUIiLseN5OB8lyBjEJpuM7T
-	yLI1YqHx9h+NvpyiXy5QHGGTr/vlv+2yuxXAmZtSSNtbL9LEf2URRwZXPHdT8EaQBNPuovWKDCwDL
-	JZMCrna2womd3BMy3EAYFsEYegVbBpb176aIND/CxyVJ+mlXZ874stl2+UwPw4wV3XxJWqmM+zhNF
-	MNXYwoburcFQ9NqA6StE/aRj0LpQ9DgqAjnWwUfC3aLNwIv0zC4nCfxnlwQPuQ+kPI7M3ZG3j7F8J
-	evcYK0CNuD2Cydfg/iV47esL0EoM1gVvIzAFGgL2i8QNNVRYm+5k1zsIsJ3uV5oaU75PndzOjH3Yp
-	LZgiVf/g==;
-Received: from host-87-242-32-154.prtelecom.hu ([87.242.32.154]
- helo=[192.168.1.2])
-	by mail.pr.hu with esmtpsa  (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.94.2)
-	(envelope-from <zboszor@pr.hu>)
-	id 1nrcb4-0001df-67; Thu, 19 May 2022 11:37:33 +0200
-Message-ID: <ea4e7ed5-d922-9196-b566-94a9a06f96ec@pr.hu>
-Date: Thu, 19 May 2022 11:37:27 +0200
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=GYAlusFQ;
+ spf=pass (domain: gmail.com, ip: 209.85.208.174,
+ mailfrom: alex.kanavin@gmail.com)
+Received: by mail-lj1-f174.google.com with SMTP id g16so5584172lja.3
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 19 May 2022 02:44:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=Jbk+dc+U3GmEhvUK+/WZMWdvhm8mIHCyMBiephaF6eE=;
+        b=GYAlusFQiA6UvuNw3wPnQcOypgKv/dlM0yAGR/PlCoe4zHfuQqcpXTo4CIH6Vs+0JW
+         5SVQ/l2rVpatK2Py38NEgYp2+XpmC4bp1GUIwgXMxTxRnZ2DwUzAxM/icJPVtoHruYHW
+         gYyx6qpIS44D+gHIZDjBopJCbP3KTPtFMFRGP5Z07ZZ73ToAsQcmCPz9+n2WFLtAH5rG
+         /GuhbFLSY8uV7ySGY/yjYp2LL1ZkQvoPmcs4Q8l+tRg0IJBskGUxJXPNxxicGUGV1zMM
+         vJCIk9S2nUoKtuaPOnwlEtggHlLL/10Wc4RzDejsy7+GfkK+yi3/7YZmj0cy4AFR/34t
+         97cA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=Jbk+dc+U3GmEhvUK+/WZMWdvhm8mIHCyMBiephaF6eE=;
+        b=woR0wulaR6aAYPRoXG4vbWkexqzcWmvpanRMM395FZhYDj50Z1PoDlnjmhRUxmA8G9
+         wtOIQO7cxxRhvHGqBGR0FcBjtVQJbASOz9XmPelbogrv5+Q0WNzDo1ai/y8mhiLjIO0p
+         jvCR5j42Bg6kfYjH7x6p8g25tRgJJIm9x8JKMF1AzJuRc+iQMn6PNiItyrlPptMf9n8F
+         pmEWSt86cnbR4M0a7lM9ZgD/5rVQEoNzC/DJ3Yl3bNXDbW7MbqrudDKjNc9gAgVFBOmw
+         v45niJzydYSfMCDXVZtkI60sztO+hAqlkBub7MzrpfwlFIP27QntkNO0/xT+u5ZEAiyN
+         y5+w==
+X-Gm-Message-State: AOAM530Bap6b9iVu9UvF14BaHKrPkW4F4P0zmITptVBviKJJHqK8tGEF
+	NQF1XEggtJ33fF1g7IRGgeQ3f+QoL5lvnH3F2YU=
+X-Google-Smtp-Source: 
+ ABdhPJy0RhDSIB1QUaAhrIob7VT2nWN53WhSCLTD+GBbcyh5M3bFFQTd2Wrm6WKHhQeC9CXCItALFhffB9Nlf3V/OEI=
+X-Received: by 2002:a2e:9410:0:b0:253:c996:59fd with SMTP id
+ i16-20020a2e9410000000b00253c99659fdmr2154574ljh.41.1652953453660; Thu, 19
+ May 2022 02:44:13 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Subject: Re: [oe] [PATCH 4/4] opencv: update 4.5.2 -> 4.5.5
-Content-Language: en-US
-To: Alexander Kanavin <alex.kanavin@gmail.com>,
- openembedded-devel@lists.openembedded.org
-Cc: Alexander Kanavin <alex@linutronix.de>,
- Martin Jansa <Martin.Jansa@gmail.com>
 References: <20220122214652.929263-1-alex@linutronix.de>
  <20220122214652.929263-4-alex@linutronix.de>
-From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@pr.hu>
-In-Reply-To: <20220122214652.929263-4-alex@linutronix.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-X-Scan-Signature: 0ae377d8b7aaaeb3f1ade626926e700b
+ <ea4e7ed5-d922-9196-b566-94a9a06f96ec@pr.hu>
+In-Reply-To: <ea4e7ed5-d922-9196-b566-94a9a06f96ec@pr.hu>
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+Date: Thu, 19 May 2022 11:44:02 +0200
+Message-ID: 
+ <CANNYZj9J7xw_3gGSvAsve2p+2XzDbgrW9-r=_iLyjZwk179BtQ@mail.gmail.com>
+Subject: Re: [oe] [PATCH 4/4] opencv: update 4.5.2 -> 4.5.5
+To: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@pr.hu>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Alexander Kanavin <alex@linutronix.de>, Martin Jansa <Martin.Jansa@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 May 2022 09:37:48 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 19 May 2022 09:44:18 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97183
+ https://lists.openembedded.org/g/openembedded-devel/message/97184
 
-MjAyMi4gMDEuIDIyLiAyMjo0NiBrZWx0ZXrDqXNzZWwsIEFsZXhhbmRlciBLYW5hdmluIMOt
-cnRhOg0KPiBEcm9wIGJhY2twb3J0cy4NCj4gDQo+IERpc2FibGUgZmZtcGVnLCBhcyBvcGVu
-Y3YgaXMgbm90IHlldCBjb21wYXRpYmxlIHdpdGggZmZtcGVnIDUuMC4NCg0KUGxlYXNlIGJh
-Y2twb3J0IHRoZSBmZm1wZWcgNS4wIHN1cHBvcnQgcGF0Y2ggcGx1cw0KdGhlIHN1cHBsZW1l
-bnRhbCBtZW1vcnkgbGVhayBmaXhlcyBpbnRyb2R1Y2VkIGJ5IGl0DQpmcm9tIHRoZSB1cGNv
-bWluZyBvcGVuY3YgNC42LjAsIHRoZW4gcmUtZW5hYmxlIHRoZQ0KZmZtcGVnIHBhY2thZ2Vj
-b25maWcgc2V0dGluZzoNCg0KaHR0cHM6Ly9naXRodWIuY29tL29wZW5jdi9vcGVuY3YvcHVs
-bC8yMTc1NA0KaHR0cHM6Ly9naXRodWIuY29tL29wZW5jdi9vcGVuY3YvcHVsbC8yMTgxOQ0K
-DQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBBbGV4YW5kZXIgS2FuYXZpbiA8YWxleEBsaW51dHJv
-bml4LmRlPg0KPiAtLS0NCj4gICAuLi5ndW1lbnQtdmVyc2lvbi1vZi1TZXRUb3RhbEJ5dGVz
-TGltaXQucGF0Y2ggfCA0MSAtLS0tLS0tLS0tLS0tLS0tLQ0KPiAgIC4uLi9vcGVuY3YvMDAw
-MS1zZm0tbGluay13aXRoLUdsb2dfTElCUy5wYXRjaCB8IDQ0IC0tLS0tLS0tLS0tLS0tLS0t
-LS0NCj4gICAuLi4ve29wZW5jdl80LjUuMi5iYiA9PiBvcGVuY3ZfNC41LjUuYmJ9ICAgICAg
-fCAgNiArLS0NCj4gICAzIGZpbGVzIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgODkgZGVs
-ZXRpb25zKC0pDQo+ICAgZGVsZXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1zdXBw
-b3J0L29wZW5jdi9vcGVuY3YvMDAwMS1Vc2UtdGhlLW9uZS1hcmd1bWVudC12ZXJzaW9uLW9m
-LVNldFRvdGFsQnl0ZXNMaW1pdC5wYXRjaA0KPiAgIGRlbGV0ZSBtb2RlIDEwMDY0NCBtZXRh
-LW9lL3JlY2lwZXMtc3VwcG9ydC9vcGVuY3Yvb3BlbmN2LzAwMDEtc2ZtLWxpbmstd2l0aC1H
-bG9nX0xJQlMucGF0Y2gNCj4gICByZW5hbWUgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvb3Bl
-bmN2L3tvcGVuY3ZfNC41LjIuYmIgPT4gb3BlbmN2XzQuNS41LmJifSAoOTclKQ0KPiANCj4g
-ZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L29wZW5jdi9vcGVuY3YvMDAw
-MS1Vc2UtdGhlLW9uZS1hcmd1bWVudC12ZXJzaW9uLW9mLVNldFRvdGFsQnl0ZXNMaW1pdC5w
-YXRjaCBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L29wZW5jdi9vcGVuY3YvMDAwMS1Vc2Ut
-dGhlLW9uZS1hcmd1bWVudC12ZXJzaW9uLW9mLVNldFRvdGFsQnl0ZXNMaW1pdC5wYXRjaA0K
-PiBkZWxldGVkIGZpbGUgbW9kZSAxMDA2NDQNCj4gaW5kZXggNWQ4OGQxYTZhLi4wMDAwMDAw
-MDANCj4gLS0tIGEvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvb3BlbmN2L29wZW5jdi8wMDAx
-LVVzZS10aGUtb25lLWFyZ3VtZW50LXZlcnNpb24tb2YtU2V0VG90YWxCeXRlc0xpbWl0LnBh
-dGNoDQo+ICsrKyAvZGV2L251bGwNCj4gQEAgLTEsNDEgKzAsMCBAQA0KPiAtRnJvbSA5Y2Zh
-ODQzMTNjNTgzM2Q3Mjk1ZmNmNTdiZTkzZDVkMmFhYWRmZDg4IE1vbiBTZXAgMTcgMDA6MDA6
-MDAgMjAwMQ0KPiAtRnJvbTogVmluY2VudCBSYWJhdWQgPHZyYWJhdWRAZ29vZ2xlLmNvbT4N
-Cj4gLURhdGU6IFNhdCwgMTAgSnVsIDIwMjEgMDA6MjE6NTIgKzAyMDANCj4gLVN1YmplY3Q6
-IFtQQVRDSF0gVXNlIHRoZSBvbmUgYXJndW1lbnQgdmVyc2lvbiBvZiBTZXRUb3RhbEJ5dGVz
-TGltaXQuDQo+IC0NCj4gLVRoZSB0d28gYXJndW1lbnQgdmVyc2lvbnMgaGFzIGJlZW4gZGVw
-cmVjYXRlZCwgY2YNCj4gLWh0dHBzOi8vZGV2ZWxvcGVycy5nb29nbGUuY29tL3Byb3RvY29s
-LWJ1ZmZlcnMvZG9jcy9yZWZlcmVuY2UvY3BwL2dvb2dsZS5wcm90b2J1Zi5pby5jb2RlZF9z
-dHJlYW0NCj4gLQ0KPiAtVXBzdHJlYW0tU3RhdHVzOiBCYWNrcG9ydCBbOWNmYTg0MzEzYzU4
-MzNkNzI5NWZjZjU3YmU5M2Q1ZDJhYWFkZmQ4OCAtIGZyb20gbWFzdGVyIGFmdGVyIDQuNS4z
-IHRhZ10NCj4gLVNpZ25lZC1vZmYtYnk6IE1hcnRpbiBKYW5zYSA8TWFydGluLkphbnNhQGdt
-YWlsLmNvbT4NCj4gLS0tLQ0KPiAtIG1vZHVsZXMvZG5uL3NyYy9jYWZmZS9jYWZmZV9pby5j
-cHAgfCA1ICsrKysrDQo+IC0gMSBmaWxlIGNoYW5nZWQsIDUgaW5zZXJ0aW9ucygrKQ0KPiAt
-DQo+IC1kaWZmIC0tZ2l0IGEvbW9kdWxlcy9kbm4vc3JjL2NhZmZlL2NhZmZlX2lvLmNwcCBi
-L21vZHVsZXMvZG5uL3NyYy9jYWZmZS9jYWZmZV9pby5jcHANCj4gLWluZGV4IDJmYzRkODRm
-NDYuLmViZWNmOTVlZWEgMTAwNjQ0DQo+IC0tLS0gYS9tb2R1bGVzL2Rubi9zcmMvY2FmZmUv
-Y2FmZmVfaW8uY3BwDQo+IC0rKysgYi9tb2R1bGVzL2Rubi9zcmMvY2FmZmUvY2FmZmVfaW8u
-Y3BwDQo+IC1AQCAtOTIsNiArOTIsNyBAQA0KPiAtICNpZmRlZiBIQVZFX1BST1RPQlVGDQo+
-IC0gI2luY2x1ZGUgPGdvb2dsZS9wcm90b2J1Zi9pby9jb2RlZF9zdHJlYW0uaD4NCj4gLSAj
-aW5jbHVkZSA8Z29vZ2xlL3Byb3RvYnVmL2lvL3plcm9fY29weV9zdHJlYW1faW1wbC5oPg0K
-PiAtKyNpbmNsdWRlIDxnb29nbGUvcHJvdG9idWYvc3R1YnMvY29tbW9uLmg+DQo+IC0gI2lu
-Y2x1ZGUgPGdvb2dsZS9wcm90b2J1Zi90ZXh0X2Zvcm1hdC5oPg0KPiAtDQo+IC0gI2luY2x1
-ZGUgPG9wZW5jdjIvY29yZS5ocHA+DQo+IC1AQCAtMTExMSw3ICsxMTEyLDExIEBAIHN0YXRp
-YyBjb25zdCBpbnQga1Byb3RvUmVhZEJ5dGVzTGltaXQgPSBJTlRfTUFYOyAgLy8gTWF4IHNp
-emUgb2YgMiBHQiBtaW51cyAxIGJ5DQo+IC0NCj4gLSBib29sIFJlYWRQcm90b0Zyb21CaW5h
-cnkoWmVyb0NvcHlJbnB1dFN0cmVhbSogaW5wdXQsIE1lc3NhZ2UgKnByb3RvKSB7DQo+IC0g
-ICAgIENvZGVkSW5wdXRTdHJlYW0gY29kZWRfaW5wdXQoaW5wdXQpOw0KPiAtKyNpZiBHT09H
-TEVfUFJPVE9CVUZfVkVSU0lPTiA+PSAzMDA2MDAwDQo+IC0rICAgIGNvZGVkX2lucHV0LlNl
-dFRvdGFsQnl0ZXNMaW1pdChrUHJvdG9SZWFkQnl0ZXNMaW1pdCk7DQo+IC0rI2Vsc2UNCj4g
-LSAgICAgY29kZWRfaW5wdXQuU2V0VG90YWxCeXRlc0xpbWl0KGtQcm90b1JlYWRCeXRlc0xp
-bWl0LCA1MzY4NzA5MTIpOw0KPiAtKyNlbmRpZg0KPiAtDQo+IC0gICAgIHJldHVybiBwcm90
-by0+UGFyc2VGcm9tQ29kZWRTdHJlYW0oJmNvZGVkX2lucHV0KTsNCj4gLSB9DQo+IC0tLQ0K
-PiAtMi4zMi4wDQo+IC0NCj4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0
-L29wZW5jdi9vcGVuY3YvMDAwMS1zZm0tbGluay13aXRoLUdsb2dfTElCUy5wYXRjaCBiL21l
-dGEtb2UvcmVjaXBlcy1zdXBwb3J0L29wZW5jdi9vcGVuY3YvMDAwMS1zZm0tbGluay13aXRo
-LUdsb2dfTElCUy5wYXRjaA0KPiBkZWxldGVkIGZpbGUgbW9kZSAxMDA2NDQNCj4gaW5kZXgg
-N2IyYzQxMDBhLi4wMDAwMDAwMDANCj4gLS0tIGEvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQv
-b3BlbmN2L29wZW5jdi8wMDAxLXNmbS1saW5rLXdpdGgtR2xvZ19MSUJTLnBhdGNoDQo+ICsr
-KyAvZGV2L251bGwNCj4gQEAgLTEsNDQgKzAsMCBAQA0KPiAtRnJvbSBmZmUyMGZjNGVjNDZj
-NmI0OTFlZmYyOWEzOGY5MDY4NmQ0ZDAzNWY2IE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQ0K
-PiAtRnJvbTogTWFydGluIEphbnNhIDxNYXJ0aW4uSmFuc2FAZ21haWwuY29tPg0KPiAtRGF0
-ZTogTW9uLCAxMiBBcHIgMjAyMSAyMDozNzo0MCArMDAwMA0KPiAtU3ViamVjdDogW1BBVENI
-XSBzZm06IGxpbmsgd2l0aCBHbG9nX0xJQlMNCj4gLQ0KPiAtKiBpbiA0LjUuMCB0aGVyZSB3
-YXMgZXhwbGljaXQgbGlua2FnZSB3aXRoIEdMT0dfTElCUkFSWSwgYnV0IHNpbmNlIDQuNS4x
-IHdpdGg6DQo+IC0gIGh0dHBzOi8vZ2l0aHViLmNvbS9vcGVuY3Yvb3BlbmN2X2NvbnRyaWIv
-Y29tbWl0LzIzZWU2MmExOWI3YTNlNTBkNmRiZjI5NTM1OWQ4YjFhZmYyZTAzZmQNCj4gLQ0K
-PiAtICBpdCdzIGdvbmUsIHByb2JhYmx5IGJlY2F1c2UgR2xvZ19GT1VORCBpcyBhbHJlYWR5
-IHNldCBmcm9tIENlcmVzLA0KPiAtICBidXQgdGhlbiBHTE9HX0xJQlJBUklFUyBpcyBlbXB0
-eSBpbiBMSUJNVl9MSUdIVF9MSUJTIGFuZCBidWlsZCB3aXRoIGdvbGQgZmFpbHM6DQo+IC0N
-Cj4gLUZBSUxFRDogYmluL2V4YW1wbGVfdHV0b3JpYWxfcGVyc3BlY3RpdmVfY29ycmVjdGlv
-bg0KPiAtOiAmJiBUT1BESVIvdG1wLWdsaWJjL3dvcmsvY29yZTItNjQtb2UtbGludXgvb3Bl
-bmN2LzQuNS4yLXIwL3JlY2lwZS1zeXNyb290LW5hdGl2ZS91c3IvYmluL3g4Nl82NC1vZS1s
-aW51eC94ODZfNjQtb2UtbGludXgtZysrIC1tNjQgLW1hcmNoPWNvcmUyIC1tdHVuZT1jb3Jl
-MiAtbXNzZTMgLW1mcG1hdGg9c3NlIC1JVE9QRElSL3RtcC1nbGliYy93b3JrL2NvcmUyLTY0
-LW9lLWxpbnV4L29wZW5jdi80LjUuMi1yMC9naXQvaW5jbHVkZSAgLWZzdGFjay1wcm90ZWN0
-b3Itc3Ryb25nICAtTzIgLURfRk9SVElGWV9TT1VSQ0U9MiAtV2Zvcm1hdCAtV2Zvcm1hdC1z
-ZWN1cml0eSAtV2Vycm9yPWZvcm1hdC1zZWN1cml0eSAgLS1zeXNyb290PVRPUERJUi90bXAt
-Z2xpYmMvd29yay9jb3JlMi02NC1vZS1saW51eC9vcGVuY3YvNC41LjItcjAvcmVjaXBlLXN5
-c3Jvb3QgIC1PMiAtcGlwZSAtZyAtZmVsaW1pbmF0ZS11bnVzZWQtZGVidWctdHlwZXMgLWZt
-YWNyby1wcmVmaXgtbWFwPVRPUERJUi90bXAtZ2xpYmMvd29yay9jb3JlMi02NC1vZS1saW51
-eC9vcGVuY3YvNC41LjItcjA9L3Vzci9zcmMvZGVidWcvb3BlbmN2LzQuNS4yLXIwICAgICAg
-ICAgICAgICAgICAgICAgIC1mZGVidWctcHJlZml4LW1hcD1UT1BESVIvdG1wLWdsaWJjL3dv
-cmsvY29yZTItNjQtb2UtbGludXgvb3BlbmN2LzQuNS4yLXIwPS91c3Ivc3JjL2RlYnVnL29w
-ZW5jdi80LjUuMi1yMCAgICAgICAgICAgICAgICAgICAgICAtZmRlYnVnLXByZWZpeC1tYXA9
-VE9QRElSL3RtcC1nbGliYy93b3JrL2NvcmUyLTY0LW9lLWxpbnV4L29wZW5jdi80LjUuMi1y
-MC9yZWNpcGUtc3lzcm9vdD0gICAgICAgICAgICAgICAgICAgICAgLWZkZWJ1Zy1wcmVmaXgt
-bWFwPVRPUERJUi90bXAtZ2xpYmMvd29yay9jb3JlMi02NC1vZS1saW51eC9vcGVuY3YvNC41
-LjItcjAvcmVjaXBlLXN5c3Jvb3QtbmF0aXZlPSAgLWZ2aXNpYmlsaXR5LWlubGluZXMtaGlk
-ZGVuICAtbTY0IC1tYXJjaD1jb3JlMiAtbXR1bmU9Y29yZTIgLW1zc2UzIC1tZnBtYXRoPXNz
-ZSAtSVRPUERJUi90bXAtZ2xpYmMvd29yay9jb3JlMi02NC1vZS1saW51eC9vcGVuY3YvNC41
-LjItcjAvZ2l0L2luY2x1ZGUgIC1mc3RhY2stcHJvdGVjdG9yLXN0cm9uZyAgLU8yIC1EX0ZP
-UlRJRllfU09VUkNFPTIgLVdmb3JtYXQgLVdmb3JtYXQtc2VjdXJpdHkgLVdlcnJvcj1mb3Jt
-YXQtc2VjdXJpdHkgIC0tc3lzcm9vdD1UT1BESVIvdG1wLWdsaWJjL3dvcmsvY29yZTItNjQt
-b2UtbGludXgvb3BlbmN2LzQuNS4yLXIwL3JlY2lwZS1zeXNyb290ICAgLWZzaWduZWQtY2hh
-ciAtVyAtV2FsbCAtV2Vycm9yPXJldHVybi10eXBlIC1XZXJyb3I9bm9uLXZpcnR1YWwtZHRv
-ciAtV2Vycm9yPWFkZHJlc3MgLVdlcnJvcj1zZXF1ZW5jZS1wb2ludCAtV2Zvcm1hdCAtV2Vy
-cm9yPWZvcm1hdC1zZWN1cml0eSAtV21pc3NpbmctZGVjbGFyYXRpb25zIC1XdW5kZWYgLVdp
-bml0LXNlbGYgLVdwb2ludGVyLWFyaXRoIC1Xc2hhZG93IC1Xc2lnbi1wcm9tbyAtV3VuaW5p
-dGlhbGl6ZWQgLVdzdWdnZXN0LW92ZXJyaWRlIC1Xbm8tZGVsZXRlLW5vbi12aXJ0dWFsLWR0
-b3IgLVduby1jb21tZW50IC1XaW1wbGljaXQtZmFsbHRocm91Z2g9MyAtV25vLXN0cmljdC1v
-dmVyZmxvdyAtZmRpYWdub3N0aWNzLXNob3ctb3B0aW9uIC1Xbm8tbG9uZy1sb25nIC1wdGhy
-ZWFkIC1mb21pdC1mcmFtZS1wb2ludGVyIC1mZnVuY3Rpb24tc2VjdGlvbnMgLWZkYXRhLXNl
-Y3Rpb25zICAtbXNzZSAtbXNzZTIgLW1zc2UzIC1tc3NzZTMgLUROREVCVUcgIC1ETkRFQlVH
-ICAtbTY0IC1tYXJjaD1jb3JlMiAtbXR1bmU9Y29yZTIgLW1zc2UzIC1tZnBtYXRoPXNzZSAt
-SVRPUERJUi90bXAtZ2xpYmMvd29yay9jb3JlMi02NC1vZS1saW51eC9vcGVuY3YvNC41LjIt
-cjAvZ2l0L2luY2x1ZGUgIC1mc3RhY2stcHJvdGVjdG9yLXN0cm9uZyAgLU8yIC1EX0ZPUlRJ
-RllfU09VUkNFPTIgLVdmb3JtYXQgLVdmb3JtYXQtc2VjdXJpdHkgLVdlcnJvcj1mb3JtYXQt
-c2VjdXJpdHkgIC0tc3lzcm9vdD1UT1BESVIvdG1wLWdsaWJjL3dvcmsvY29yZTItNjQtb2Ut
-bGludXgvb3BlbmN2LzQuNS4yLXIwL3JlY2lwZS1zeXNyb290ICAtTzIgLXBpcGUgLWcgLWZl
-bGltaW5hdGUtdW51c2VkLWRlYnVnLXR5cGVzIC1mbWFjcm8tcHJlZml4LW1hcD1UT1BESVIv
-dG1wLWdsaWJjL3dvcmsvY29yZTItNjQtb2UtbGludXgvb3BlbmN2LzQuNS4yLXIwPS91c3Iv
-c3JjL2RlYnVnL29wZW5jdi80LjUuMi1yMCAgICAgICAgICAgICAgICAgICAgICAtZmRlYnVn
-LXByZWZpeC1tYXA9VE9QRElSL3RtcC1nbGliYy93b3JrL2NvcmUyLTY0LW9lLWxpbnV4L29w
-ZW5jdi80LjUuMi1yMD0vdXNyL3NyYy9kZWJ1Zy9vcGVuY3YvNC41LjItcjAgICAgICAgICAg
-ICAgICAgICAgICAgLWZkZWJ1Zy1wcmVmaXgtbWFwPVRPUERJUi90bXAtZ2xpYmMvd29yay9j
-b3JlMi02NC1vZS1saW51eC9vcGVuY3YvNC41LjItcjAvcmVjaXBlLXN5c3Jvb3Q9ICAgICAg
-ICAgICAgICAgICAgICAgIC1mZGVidWctcHJlZml4LW1hcD1UT1BESVIvdG1wLWdsaWJjL3dv
-cmsvY29yZTItNjQtb2UtbGludXgvb3BlbmN2LzQuNS4yLXIwL3JlY2lwZS1zeXNyb290LW5h
-dGl2ZT0gIC1mdmlzaWJpbGl0eS1pbmxpbmVzLWhpZGRlbiAgLW02NCAtbWFyY2g9Y29yZTIg
-LW10dW5lPWNvcmUyIC1tc3NlMyAtbWZwbWF0aD1zc2UgLUlUT1BESVIvdG1wLWdsaWJjL3dv
-cmsvY29yZTItNjQtb2UtbGludXgvb3BlbmN2LzQuNS4yLXIwL2dpdC9pbmNsdWRlICAtZnN0
-YWNrLXByb3RlY3Rvci1zdHJvbmcgIC1PMiAtRF9GT1JUSUZZX1NPVVJDRT0yIC1XZm9ybWF0
-IC1XZm9ybWF0LXNlY3VyaXR5IC1XZXJyb3I9Zm9ybWF0LXNlY3VyaXR5ICAtLXN5c3Jvb3Q9
-VE9QRElSL3RtcC1nbGliYy93b3JrL2NvcmUyLTY0LW9lLWxpbnV4L29wZW5jdi80LjUuMi1y
-MC9yZWNpcGUtc3lzcm9vdCAtV2wsLU8xIC1XbCwtLWhhc2gtc3R5bGU9Z251IC1XbCwtLWFz
-LW5lZWRlZCAtV2wsLXoscmVscm8sLXosbm93IC1XbCwtTzEgLVdsLC0taGFzaC1zdHlsZT1n
-bnUgLVdsLC0tYXMtbmVlZGVkIC1XbCwteixyZWxybywteixub3cgIC1XbCwtLWdjLXNlY3Rp
-b25zIC1XbCwtLWFzLW5lZWRlZCBzYW1wbGVzL2NwcC9DTWFrZUZpbGVzL2V4YW1wbGVfdHV0
-b3JpYWxfcGVyc3BlY3RpdmVfY29ycmVjdGlvbi5kaXIvdHV0b3JpYWxfY29kZS9mZWF0dXJl
-czJEL0hvbW9ncmFwaHkvcGVyc3BlY3RpdmVfY29ycmVjdGlvbi5jcHAubyAtbyBiaW4vZXhh
-bXBsZV90dXRvcmlhbF9wZXJzcGVjdGl2ZV9jb3JyZWN0aW9uICAtbGRsICAtbG0gIC1scHRo
-cmVhZCAgLWxydCAgbGliL2xpYm9wZW5jdl9nYXBpLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2
-X3N0aXRjaGluZy5zby40LjUuMiAgbGliL2xpYm9wZW5jdl90cy5zby40LjUuMiAgbGliL2xp
-Ym9wZW5jdl9hbHBoYW1hdC5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9hcnVjby5zby40LjUu
-MiAgbGliL2xpYm9wZW5jdl9iZ3NlZ20uc28uNC41LjIgIGxpYi9saWJvcGVuY3ZfYmlvaW5z
-cGlyZWQuc28uNC41LjIgIGxpYi9saWJvcGVuY3ZfY2NhbGliLnNvLjQuNS4yICBsaWIvbGli
-b3BlbmN2X2Rubl9vYmpkZXRlY3Quc28uNC41LjIgIGxpYi9saWJvcGVuY3ZfZG5uX3N1cGVy
-cmVzLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X2RwbS5zby40LjUuMiAgbGliL2xpYm9wZW5j
-dl9mYWNlLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X2Z1enp5LnNvLjQuNS4yICBsaWIvbGli
-b3BlbmN2X2hmcy5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9pbWdfaGFzaC5zby40LjUuMiAg
-bGliL2xpYm9wZW5jdl9pbnRlbnNpdHlfdHJhbnNmb3JtLnNvLjQuNS4yICBsaWIvbGlib3Bl
-bmN2X2xpbmVfZGVzY3JpcHRvci5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9tY2Muc28uNC41
-LjIgIGxpYi9saWJvcGVuY3ZfcXVhbGl0eS5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9yYXBp
-ZC5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9yZWcuc28uNC41LjIgIGxpYi9saWJvcGVuY3Zf
-cmdiZC5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9zYWxpZW5jeS5zby40LjUuMiAgbGliL2xp
-Ym9wZW5jdl9zZm0uc28uNC41LjIgIGxpYi9saWJvcGVuY3Zfc3RlcmVvLnNvLjQuNS4yICBs
-aWIvbGlib3BlbmN2X3N0cnVjdHVyZWRfbGlnaHQuc28uNC41LjIgIGxpYi9saWJvcGVuY3Zf
-c3VwZXJyZXMuc28uNC41LjIgIGxpYi9saWJvcGVuY3Zfc3VyZmFjZV9tYXRjaGluZy5zby40
-LjUuMiAgbGliL2xpYm9wZW5jdl90cmFja2luZy5zby40LjUuMiAgbGliL2xpYm9wZW5jdl92
-aWRlb3N0YWIuc28uNC41LjIgIGxpYi9saWJvcGVuY3Zfd2VjaGF0X3FyY29kZS5zby40LjUu
-MiAgbGliL2xpYm9wZW5jdl94ZmVhdHVyZXMyZC5zby40LjUuMiAgbGliL2xpYm9wZW5jdl94
-b2JqZGV0ZWN0LnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X3hwaG90by5zby40LjUuMiAgbGli
-L2xpYm9wZW5jdl9zaGFwZS5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9oaWdoZ3VpLnNvLjQu
-NS4yICBsaWIvbGlib3BlbmN2X2RhdGFzZXRzLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X21s
-LnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X3Bsb3Quc28uNC41LjIgIGxpYi9saWJvcGVuY3Zf
-cGhhc2VfdW53cmFwcGluZy5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9vcHRmbG93LnNvLjQu
-NS4yICBsaWIvbGlib3BlbmN2X3hpbWdwcm9jLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X3Zp
-ZGVvaW8uc28uNC41LjIgIGxpYi9saWJvcGVuY3ZfdmlkZW8uc28uNC41LjIgIGxpYi9saWJv
-cGVuY3ZfZG5uLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X2ltZ2NvZGVjcy5zby40LjUuMiAg
-bGliL2xpYm9wZW5jdl9vYmpkZXRlY3Quc28uNC41LjIgIGxpYi9saWJvcGVuY3ZfY2FsaWIz
-ZC5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9mZWF0dXJlczJkLnNvLjQuNS4yICBsaWIvbGli
-b3BlbmN2X2ZsYW5uLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X3Bob3RvLnNvLjQuNS4yICBs
-aWIvbGlib3BlbmN2X2ltZ3Byb2Muc28uNC41LjIgIGxpYi9saWJvcGVuY3ZfY29yZS5zby40
-LjUuMiAgLVdsLC1ycGF0aC1saW5rLFRPUERJUi90bXAtZ2xpYmMvd29yay9jb3JlMi02NC1v
-ZS1saW51eC9vcGVuY3YvNC41LjItcjAvYnVpbGQvbGliICYmIDoNCj4gLWxpYi9saWJvcGVu
-Y3Zfc2ZtLnNvLjQuNS4yOiBlcnJvcjogdW5kZWZpbmVkIHJlZmVyZW5jZSB0byAnZ29vZ2xl
-OjpMb2dNZXNzYWdlOjpMb2dNZXNzYWdlKGNoYXIgY29uc3QqLCBpbnQpJw0KPiAtbGliL2xp
-Ym9wZW5jdl9zZm0uc28uNC41LjI6IGVycm9yOiB1bmRlZmluZWQgcmVmZXJlbmNlIHRvICdn
-b29nbGU6OkxvZ01lc3NhZ2U6OnN0cmVhbSgpJw0KPiAtbGliL2xpYm9wZW5jdl9zZm0uc28u
-NC41LjI6IGVycm9yOiB1bmRlZmluZWQgcmVmZXJlbmNlIHRvICdnb29nbGU6OkxvZ01lc3Nh
-Z2U6On5Mb2dNZXNzYWdlKCknDQo+IC1saWIvbGlib3BlbmN2X3NmbS5zby40LjUuMjogZXJy
-b3I6IHVuZGVmaW5lZCByZWZlcmVuY2UgdG8gJ2dvb2dsZTo6a0xvZ1NpdGVVbmluaXRpYWxp
-emVkJw0KPiAtbGliL2xpYm9wZW5jdl9zZm0uc28uNC41LjI6IGVycm9yOiB1bmRlZmluZWQg
-cmVmZXJlbmNlIHRvICdmTEk6OkZMQUdTX3YnDQo+IC1saWIvbGlib3BlbmN2X3NmbS5zby40
-LjUuMjogZXJyb3I6IHVuZGVmaW5lZCByZWZlcmVuY2UgdG8gJ2dvb2dsZTo6SW5pdFZMT0cz
-X18oaW50KiosIGludCosIGNoYXIgY29uc3QqLCBpbnQpJw0KPiAtbGliL2xpYm9wZW5jdl9z
-Zm0uc28uNC41LjI6IGVycm9yOiB1bmRlZmluZWQgcmVmZXJlbmNlIHRvICdnb29nbGU6Okxv
-Z01lc3NhZ2VGYXRhbDo6TG9nTWVzc2FnZUZhdGFsKGNoYXIgY29uc3QqLCBpbnQpJw0KPiAt
-bGliL2xpYm9wZW5jdl9zZm0uc28uNC41LjI6IGVycm9yOiB1bmRlZmluZWQgcmVmZXJlbmNl
-IHRvICdnb29nbGU6OkxvZ01lc3NhZ2VGYXRhbDo6fkxvZ01lc3NhZ2VGYXRhbCgpJw0KPiAt
-Y29sbGVjdDI6IGVycm9yOiBsZCByZXR1cm5lZCAxIGV4aXQgc3RhdHVzDQo+IC0NCj4gLSAg
-QWRkIEdsb2dfTElCUyB3aGljaCBpcyBzZXQgdG8gdGhlIHNhbWUgdmFsdWUgYXMgR0xPR19M
-SUJSQVJJRVMgdXNlZCB0byBiZS4NCj4gLQ0KPiAtVXBzdHJlYW0tU3RhdHVzOiBTdWJtaXR0
-ZWQgW2h0dHBzOi8vZ2l0aHViLmNvbS9vcGVuY3Yvb3BlbmN2X2NvbnRyaWIvcHVsbC8yOTIz
-XQ0KPiAtDQo+IC1TaWduZWQtb2ZmLWJ5OiBNYXJ0aW4gSmFuc2EgPE1hcnRpbi5KYW5zYUBn
-bWFpbC5jb20+DQo+IC0tLS0NCj4gLSBtb2R1bGVzL3NmbS9DTWFrZUxpc3RzLnR4dCB8IDEg
-Kw0KPiAtIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKQ0KPiAtDQo+IC1kaWZmIC0t
-Z2l0IGEvbW9kdWxlcy9zZm0vQ01ha2VMaXN0cy50eHQgYi9tb2R1bGVzL3NmbS9DTWFrZUxp
-c3RzLnR4dA0KPiAtaW5kZXggMDQ1YTFmZTZlLi5lZTdjZWNkYWMgMTAwNjQ0DQo+IC0tLS0g
-YS9tb2R1bGVzL3NmbS9DTWFrZUxpc3RzLnR4dA0KPiAtKysrIGIvbW9kdWxlcy9zZm0vQ01h
-a2VMaXN0cy50eHQNCj4gLUBAIC04NCw2ICs4NCw3IEBAIHNldChMSUJNVl9MSUdIVF9MSUJT
-DQo+IC0gICBtdWx0aXZpZXcNCj4gLSAgIG51bWVyaWMNCj4gLSAgICR7R0xPR19MSUJSQVJJ
-RVN9DQo+IC0rICAke0dsb2dfTElCU30NCj4gLSAgICR7R0ZMQUdTX0xJQlJBUklFU30NCj4g
-LSApDQo+IC0NCj4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L29wZW5j
-di9vcGVuY3ZfNC41LjIuYmIgYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9vcGVuY3Yvb3Bl
-bmN2XzQuNS41LmJiDQo+IHNpbWlsYXJpdHkgaW5kZXggOTclDQo+IHJlbmFtZSBmcm9tIG1l
-dGEtb2UvcmVjaXBlcy1zdXBwb3J0L29wZW5jdi9vcGVuY3ZfNC41LjIuYmINCj4gcmVuYW1l
-IHRvIG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L29wZW5jdi9vcGVuY3ZfNC41LjUuYmINCj4g
-aW5kZXggMmYyYTUwNWVkLi5jYTUwZTgwYjAgMTAwNjQ0DQo+IC0tLSBhL21ldGEtb2UvcmVj
-aXBlcy1zdXBwb3J0L29wZW5jdi9vcGVuY3ZfNC41LjIuYmINCj4gKysrIGIvbWV0YS1vZS9y
-ZWNpcGVzLXN1cHBvcnQvb3BlbmN2L29wZW5jdl80LjUuNS5iYg0KPiBAQCAtMTAsNyArMTAs
-NyBAQCBBUk1fSU5TVFJVQ1RJT05fU0VUOmFybXY1ID0gImFybSINCj4gICANCj4gICBERVBF
-TkRTID0gImxpYnRvb2wgc3dpZy1uYXRpdmUgYnppcDIgemxpYiBnbGliLTIuMCBsaWJ3ZWJw
-Ig0KPiAgIA0KPiAtU1JDUkVWX29wZW5jdiA9ICI2OTM1N2IxZTg4NjgwNjU4YTA3Y2ZmZGU3
-Njc4YTRkNjk3NDY5ZjAzIg0KPiArU1JDUkVWX29wZW5jdiA9ICJkYWQyNjMzOWE5NzViNDlj
-ZmI2YzdkYmU0YmQ1Mjc2YzlkY2IzNmUyIg0KPiAgIFNSQ1JFVl9jb250cmliID0gImY1ZDdm
-NjcxMmQ0ZmYyMjliYTRmNDVjZjc5ZGZkMTFjNTU3ZDU2ZmQiDQo+ICAgU1JDUkVWX2lwcCA9
-ICJhNTZiNmFjNmYwMzBjMzEyYjJkY2UxNzQzMGVlZjEzYWVkOWFmMjc0Ig0KPiAgIFNSQ1JF
-Vl9ib29zdGRlc2MgPSAiMzRlNDIwNmFlZjQ0ZDUwZTZiYmNkMGFiMDYzNTRiNTJlNzQ2NmQy
-NiINCj4gQEAgLTUxLDggKzUxLDYgQEAgU1JDX1VSSSA9ICJnaXQ6Ly9naXRodWIuY29tL29w
-ZW5jdi9vcGVuY3YuZ2l0O25hbWU9b3BlbmN2O2JyYW5jaD1tYXN0ZXI7cHJvdG9jb2wNCj4g
-ICAgICAgICAgICAgIGZpbGU6Ly8wMDAxLURvbnQtdXNlLWlzeXN0ZW0ucGF0Y2ggXA0KPiAg
-ICAgICAgICAgICAgZmlsZTovL2Rvd25sb2FkLnBhdGNoIFwNCj4gICAgICAgICAgICAgIGZp
-bGU6Ly8wMDAxLU1ha2UtdHMtbW9kdWxlLWV4dGVybmFsLnBhdGNoIFwNCj4gLSAgICAgICAg
-ICAgZmlsZTovLzAwMDEtc2ZtLWxpbmstd2l0aC1HbG9nX0xJQlMucGF0Y2g7cGF0Y2hkaXI9
-Li4vY29udHJpYiBcDQo+IC0gICAgICAgICAgIGZpbGU6Ly8wMDAxLVVzZS10aGUtb25lLWFy
-Z3VtZW50LXZlcnNpb24tb2YtU2V0VG90YWxCeXRlc0xpbWl0LnBhdGNoIFwNCj4gICAgICAg
-ICAgICAgICINCj4gICBTUkNfVVJJOmFwcGVuZDpyaXNjdjY0ID0gIiBmaWxlOi8vMDAwMS1V
-c2UtT3MtdG8tY29tcGlsZS10aW55eG1sMi5jcHAucGF0Y2g7cGF0Y2hkaXI9Li4vY29udHJp
-YiINCj4gICANCj4gQEAgLTEwNSw3ICsxMDMsNyBAQCBFWFRSQV9PRUNNQUtFOmFwcGVuZDp4
-ODYgPSAiIC1EWDg2PU9OIg0KPiAgIA0KPiAgIFBBQ0tBR0VDT05GSUcgPz89ICJnYXBpIHB5
-dGhvbjMgZWlnZW4ganBlZyBwbmcgdGlmZiB2NGwgbGlidjRsIGdzdHJlYW1lciBzYW1wbGVz
-IHRiYiBncGhvdG8yIFwNCj4gICAgICAgJHtAYmIudXRpbHMuY29udGFpbnMoIkRJU1RST19G
-RUFUVVJFUyIsICJ4MTEiLCAiZ3RrIiwgIiIsIGQpfSBcDQo+IC0gICAgJHtAYmIudXRpbHMu
-Y29udGFpbnMoIkxJQ0VOU0VfRkxBR1NfV0hJVEVMSVNUIiwgImNvbW1lcmNpYWwiLCAibGli
-YXYiLCAiIiwgZCl9Ig0KPiArICAgICINCj4gICANCj4gICAjIFRCQiBkb2VzIG5vdCBidWls
-ZCBmb3IgcG93ZXJwYyBzbyBkaXNhYmxlIHRoYXQgcGFja2FnZSBjb25maWcNCj4gICBQQUNL
-QUdFQ09ORklHOnJlbW92ZTpwb3dlcnBjID0gInRiYiINCj4gDQo+IA0KPiANCj4gLT0tPS09
-LT0tPS09LT0tPS09LT0tPS0NCj4gTGlua3M6IFlvdSByZWNlaXZlIGFsbCBtZXNzYWdlcyBz
-ZW50IHRvIHRoaXMgZ3JvdXAuDQo+IFZpZXcvUmVwbHkgT25saW5lICgjOTUwMTEpOiBodHRw
-czovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvbWVzc2Fn
-ZS85NTAxMQ0KPiBNdXRlIFRoaXMgVG9waWM6IGh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVk
-Lm9yZy9tdC84ODYxNDAxNS8zNjE3NzI4DQo+IEdyb3VwIE93bmVyOiBvcGVuZW1iZWRkZWQt
-ZGV2ZWwrb3duZXJAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBVbnN1YnNjcmliZTogaHR0
-cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL3Vuc3Vi
-IFt6Ym9zem9yQHByLmh1XQ0KPiAtPS09LT0tPS09LT0tPS09LT0tPS09LQ0KPiANCg0K
+Thanks for the heads up, I think the standard policy is to simply wait
+for 4.6.0.
+
+Alex
+
+On Thu, 19 May 2022 at 11:37, B=C3=B6sz=C3=B6rm=C3=A9nyi Zolt=C3=A1n <zbosz=
+or@pr.hu> wrote:
+>
+> 2022. 01. 22. 22:46 keltez=C3=A9ssel, Alexander Kanavin =C3=ADrta:
+> > Drop backports.
+> >
+> > Disable ffmpeg, as opencv is not yet compatible with ffmpeg 5.0.
+>
+> Please backport the ffmpeg 5.0 support patch plus
+> the supplemental memory leak fixes introduced by it
+> from the upcoming opencv 4.6.0, then re-enable the
+> ffmpeg packageconfig setting:
+>
+> https://github.com/opencv/opencv/pull/21754
+> https://github.com/opencv/opencv/pull/21819
+>
+> >
+> > Signed-off-by: Alexander Kanavin <alex@linutronix.de>
+> > ---
+> >   ...gument-version-of-SetTotalBytesLimit.patch | 41 -----------------
+> >   .../opencv/0001-sfm-link-with-Glog_LIBS.patch | 44 ------------------=
+-
+> >   .../{opencv_4.5.2.bb =3D> opencv_4.5.5.bb}      |  6 +--
+> >   3 files changed, 2 insertions(+), 89 deletions(-)
+> >   delete mode 100644 meta-oe/recipes-support/opencv/opencv/0001-Use-the=
+-one-argument-version-of-SetTotalBytesLimit.patch
+> >   delete mode 100644 meta-oe/recipes-support/opencv/opencv/0001-sfm-lin=
+k-with-Glog_LIBS.patch
+> >   rename meta-oe/recipes-support/opencv/{opencv_4.5.2.bb =3D> opencv_4.=
+5.5.bb} (97%)
+> >
+> > diff --git a/meta-oe/recipes-support/opencv/opencv/0001-Use-the-one-arg=
+ument-version-of-SetTotalBytesLimit.patch b/meta-oe/recipes-support/opencv/=
+opencv/0001-Use-the-one-argument-version-of-SetTotalBytesLimit.patch
+> > deleted file mode 100644
+> > index 5d88d1a6a..000000000
+> > --- a/meta-oe/recipes-support/opencv/opencv/0001-Use-the-one-argument-v=
+ersion-of-SetTotalBytesLimit.patch
+> > +++ /dev/null
+> > @@ -1,41 +0,0 @@
+> > -From 9cfa84313c5833d7295fcf57be93d5d2aaadfd88 Mon Sep 17 00:00:00 2001
+> > -From: Vincent Rabaud <vrabaud@google.com>
+> > -Date: Sat, 10 Jul 2021 00:21:52 +0200
+> > -Subject: [PATCH] Use the one argument version of SetTotalBytesLimit.
+> > -
+> > -The two argument versions has been deprecated, cf
+> > -https://developers.google.com/protocol-buffers/docs/reference/cpp/goog=
+le.protobuf.io.coded_stream
+> > -
+> > -Upstream-Status: Backport [9cfa84313c5833d7295fcf57be93d5d2aaadfd88 - =
+from master after 4.5.3 tag]
+> > -Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > ----
+> > - modules/dnn/src/caffe/caffe_io.cpp | 5 +++++
+> > - 1 file changed, 5 insertions(+)
+> > -
+> > -diff --git a/modules/dnn/src/caffe/caffe_io.cpp b/modules/dnn/src/caff=
+e/caffe_io.cpp
+> > -index 2fc4d84f46..ebecf95eea 100644
+> > ---- a/modules/dnn/src/caffe/caffe_io.cpp
+> > -+++ b/modules/dnn/src/caffe/caffe_io.cpp
+> > -@@ -92,6 +92,7 @@
+> > - #ifdef HAVE_PROTOBUF
+> > - #include <google/protobuf/io/coded_stream.h>
+> > - #include <google/protobuf/io/zero_copy_stream_impl.h>
+> > -+#include <google/protobuf/stubs/common.h>
+> > - #include <google/protobuf/text_format.h>
+> > -
+> > - #include <opencv2/core.hpp>
+> > -@@ -1111,7 +1112,11 @@ static const int kProtoReadBytesLimit =3D INT_M=
+AX;  // Max size of 2 GB minus 1 by
+> > -
+> > - bool ReadProtoFromBinary(ZeroCopyInputStream* input, Message *proto) =
+{
+> > -     CodedInputStream coded_input(input);
+> > -+#if GOOGLE_PROTOBUF_VERSION >=3D 3006000
+> > -+    coded_input.SetTotalBytesLimit(kProtoReadBytesLimit);
+> > -+#else
+> > -     coded_input.SetTotalBytesLimit(kProtoReadBytesLimit, 536870912);
+> > -+#endif
+> > -
+> > -     return proto->ParseFromCodedStream(&coded_input);
+> > - }
+> > ---
+> > -2.32.0
+> > -
+> > diff --git a/meta-oe/recipes-support/opencv/opencv/0001-sfm-link-with-G=
+log_LIBS.patch b/meta-oe/recipes-support/opencv/opencv/0001-sfm-link-with-G=
+log_LIBS.patch
+> > deleted file mode 100644
+> > index 7b2c4100a..000000000
+> > --- a/meta-oe/recipes-support/opencv/opencv/0001-sfm-link-with-Glog_LIB=
+S.patch
+> > +++ /dev/null
+> > @@ -1,44 +0,0 @@
+> > -From ffe20fc4ec46c6b491eff29a38f90686d4d035f6 Mon Sep 17 00:00:00 2001
+> > -From: Martin Jansa <Martin.Jansa@gmail.com>
+> > -Date: Mon, 12 Apr 2021 20:37:40 +0000
+> > -Subject: [PATCH] sfm: link with Glog_LIBS
+> > -
+> > -* in 4.5.0 there was explicit linkage with GLOG_LIBRARY, but since 4.5=
+.1 with:
+> > -  https://github.com/opencv/opencv_contrib/commit/23ee62a19b7a3e50d6db=
+f295359d8b1aff2e03fd
+> > -
+> > -  it's gone, probably because Glog_FOUND is already set from Ceres,
+> > -  but then GLOG_LIBRARIES is empty in LIBMV_LIGHT_LIBS and build with =
+gold fails:
+> > -
+> > -FAILED: bin/example_tutorial_perspective_correction
+> > -: && TOPDIR/tmp-glibc/work/core2-64-oe-linux/opencv/4.5.2-r0/recipe-sy=
+sroot-native/usr/bin/x86_64-oe-linux/x86_64-oe-linux-g++ -m64 -march=3Dcore=
+2 -mtune=3Dcore2 -msse3 -mfpmath=3Dsse -ITOPDIR/tmp-glibc/work/core2-64-oe-=
+linux/opencv/4.5.2-r0/git/include  -fstack-protector-strong  -O2 -D_FORTIFY=
+_SOURCE=3D2 -Wformat -Wformat-security -Werror=3Dformat-security  --sysroot=
+=3DTOPDIR/tmp-glibc/work/core2-64-oe-linux/opencv/4.5.2-r0/recipe-sysroot  =
+-O2 -pipe -g -feliminate-unused-debug-types -fmacro-prefix-map=3DTOPDIR/tmp=
+-glibc/work/core2-64-oe-linux/opencv/4.5.2-r0=3D/usr/src/debug/opencv/4.5.2=
+-r0                      -fdebug-prefix-map=3DTOPDIR/tmp-glibc/work/core2-6=
+4-oe-linux/opencv/4.5.2-r0=3D/usr/src/debug/opencv/4.5.2-r0                =
+      -fdebug-prefix-map=3DTOPDIR/tmp-glibc/work/core2-64-oe-linux/opencv/4=
+.5.2-r0/recipe-sysroot=3D                      -fdebug-prefix-map=3DTOPDIR/=
+tmp-glibc/work/core2-64-oe-linux/opencv/4.5.2-r0/recipe-sysroot-native=3D  =
+-fvisibility-inlines-hidden  -m64 -march=3Dcore2 -mtune=3Dcore2 -msse3 -mfp=
+math=3Dsse -ITOPDIR/tmp-glibc/work/core2-64-oe-linux/opencv/4.5.2-r0/git/in=
+clude  -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=3D2 -Wformat -Wforma=
+t-security -Werror=3Dformat-security  --sysroot=3DTOPDIR/tmp-glibc/work/cor=
+e2-64-oe-linux/opencv/4.5.2-r0/recipe-sysroot   -fsigned-char -W -Wall -Wer=
+ror=3Dreturn-type -Werror=3Dnon-virtual-dtor -Werror=3Daddress -Werror=3Dse=
+quence-point -Wformat -Werror=3Dformat-security -Wmissing-declarations -Wun=
+def -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Wsug=
+gest-override -Wno-delete-non-virtual-dtor -Wno-comment -Wimplicit-fallthro=
+ugh=3D3 -Wno-strict-overflow -fdiagnostics-show-option -Wno-long-long -pthr=
+ead -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse -msse2 =
+-msse3 -mssse3 -DNDEBUG  -DNDEBUG  -m64 -march=3Dcore2 -mtune=3Dcore2 -msse=
+3 -mfpmath=3Dsse -ITOPDIR/tmp-glibc/work/core2-64-oe-linux/opencv/4.5.2-r0/=
+git/include  -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=3D2 -Wformat -=
+Wformat-security -Werror=3Dformat-security  --sysroot=3DTOPDIR/tmp-glibc/wo=
+rk/core2-64-oe-linux/opencv/4.5.2-r0/recipe-sysroot  -O2 -pipe -g -felimina=
+te-unused-debug-types -fmacro-prefix-map=3DTOPDIR/tmp-glibc/work/core2-64-o=
+e-linux/opencv/4.5.2-r0=3D/usr/src/debug/opencv/4.5.2-r0                   =
+   -fdebug-prefix-map=3DTOPDIR/tmp-glibc/work/core2-64-oe-linux/opencv/4.5.=
+2-r0=3D/usr/src/debug/opencv/4.5.2-r0                      -fdebug-prefix-m=
+ap=3DTOPDIR/tmp-glibc/work/core2-64-oe-linux/opencv/4.5.2-r0/recipe-sysroot=
+=3D                      -fdebug-prefix-map=3DTOPDIR/tmp-glibc/work/core2-6=
+4-oe-linux/opencv/4.5.2-r0/recipe-sysroot-native=3D  -fvisibility-inlines-h=
+idden  -m64 -march=3Dcore2 -mtune=3Dcore2 -msse3 -mfpmath=3Dsse -ITOPDIR/tm=
+p-glibc/work/core2-64-oe-linux/opencv/4.5.2-r0/git/include  -fstack-protect=
+or-strong  -O2 -D_FORTIFY_SOURCE=3D2 -Wformat -Wformat-security -Werror=3Df=
+ormat-security  --sysroot=3DTOPDIR/tmp-glibc/work/core2-64-oe-linux/opencv/=
+4.5.2-r0/recipe-sysroot -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -Wl,=
+-z,relro,-z,now -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -Wl,-z,relro=
+,-z,now  -Wl,--gc-sections -Wl,--as-needed samples/cpp/CMakeFiles/example_t=
+utorial_perspective_correction.dir/tutorial_code/features2D/Homography/pers=
+pective_correction.cpp.o -o bin/example_tutorial_perspective_correction  -l=
+dl  -lm  -lpthread  -lrt  lib/libopencv_gapi.so.4.5.2  lib/libopencv_stitch=
+ing.so.4.5.2  lib/libopencv_ts.so.4.5.2  lib/libopencv_alphamat.so.4.5.2  l=
+ib/libopencv_aruco.so.4.5.2  lib/libopencv_bgsegm.so.4.5.2  lib/libopencv_b=
+ioinspired.so.4.5.2  lib/libopencv_ccalib.so.4.5.2  lib/libopencv_dnn_objde=
+tect.so.4.5.2  lib/libopencv_dnn_superres.so.4.5.2  lib/libopencv_dpm.so.4.=
+5.2  lib/libopencv_face.so.4.5.2  lib/libopencv_fuzzy.so.4.5.2  lib/libopen=
+cv_hfs.so.4.5.2  lib/libopencv_img_hash.so.4.5.2  lib/libopencv_intensity_t=
+ransform.so.4.5.2  lib/libopencv_line_descriptor.so.4.5.2  lib/libopencv_mc=
+c.so.4.5.2  lib/libopencv_quality.so.4.5.2  lib/libopencv_rapid.so.4.5.2  l=
+ib/libopencv_reg.so.4.5.2  lib/libopencv_rgbd.so.4.5.2  lib/libopencv_salie=
+ncy.so.4.5.2  lib/libopencv_sfm.so.4.5.2  lib/libopencv_stereo.so.4.5.2  li=
+b/libopencv_structured_light.so.4.5.2  lib/libopencv_superres.so.4.5.2  lib=
+/libopencv_surface_matching.so.4.5.2  lib/libopencv_tracking.so.4.5.2  lib/=
+libopencv_videostab.so.4.5.2  lib/libopencv_wechat_qrcode.so.4.5.2  lib/lib=
+opencv_xfeatures2d.so.4.5.2  lib/libopencv_xobjdetect.so.4.5.2  lib/libopen=
+cv_xphoto.so.4.5.2  lib/libopencv_shape.so.4.5.2  lib/libopencv_highgui.so.=
+4.5.2  lib/libopencv_datasets.so.4.5.2  lib/libopencv_ml.so.4.5.2  lib/libo=
+pencv_plot.so.4.5.2  lib/libopencv_phase_unwrapping.so.4.5.2  lib/libopencv=
+_optflow.so.4.5.2  lib/libopencv_ximgproc.so.4.5.2  lib/libopencv_videoio.s=
+o.4.5.2  lib/libopencv_video.so.4.5.2  lib/libopencv_dnn.so.4.5.2  lib/libo=
+pencv_imgcodecs.so.4.5.2  lib/libopencv_objdetect.so.4.5.2  lib/libopencv_c=
+alib3d.so.4.5.2  lib/libopencv_features2d.so.4.5.2  lib/libopencv_flann.so.=
+4.5.2  lib/libopencv_photo.so.4.5.2  lib/libopencv_imgproc.so.4.5.2  lib/li=
+bopencv_core.so.4.5.2  -Wl,-rpath-link,TOPDIR/tmp-glibc/work/core2-64-oe-li=
+nux/opencv/4.5.2-r0/build/lib && :
+> > -lib/libopencv_sfm.so.4.5.2: error: undefined reference to 'google::Log=
+Message::LogMessage(char const*, int)'
+> > -lib/libopencv_sfm.so.4.5.2: error: undefined reference to 'google::Log=
+Message::stream()'
+> > -lib/libopencv_sfm.so.4.5.2: error: undefined reference to 'google::Log=
+Message::~LogMessage()'
+> > -lib/libopencv_sfm.so.4.5.2: error: undefined reference to 'google::kLo=
+gSiteUninitialized'
+> > -lib/libopencv_sfm.so.4.5.2: error: undefined reference to 'fLI::FLAGS_=
+v'
+> > -lib/libopencv_sfm.so.4.5.2: error: undefined reference to 'google::Ini=
+tVLOG3__(int**, int*, char const*, int)'
+> > -lib/libopencv_sfm.so.4.5.2: error: undefined reference to 'google::Log=
+MessageFatal::LogMessageFatal(char const*, int)'
+> > -lib/libopencv_sfm.so.4.5.2: error: undefined reference to 'google::Log=
+MessageFatal::~LogMessageFatal()'
+> > -collect2: error: ld returned 1 exit status
+> > -
+> > -  Add Glog_LIBS which is set to the same value as GLOG_LIBRARIES used =
+to be.
+> > -
+> > -Upstream-Status: Submitted [https://github.com/opencv/opencv_contrib/p=
+ull/2923]
+> > -
+> > -Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > ----
+> > - modules/sfm/CMakeLists.txt | 1 +
+> > - 1 file changed, 1 insertion(+)
+> > -
+> > -diff --git a/modules/sfm/CMakeLists.txt b/modules/sfm/CMakeLists.txt
+> > -index 045a1fe6e..ee7cecdac 100644
+> > ---- a/modules/sfm/CMakeLists.txt
+> > -+++ b/modules/sfm/CMakeLists.txt
+> > -@@ -84,6 +84,7 @@ set(LIBMV_LIGHT_LIBS
+> > -   multiview
+> > -   numeric
+> > -   ${GLOG_LIBRARIES}
+> > -+  ${Glog_LIBS}
+> > -   ${GFLAGS_LIBRARIES}
+> > - )
+> > -
+> > diff --git a/meta-oe/recipes-support/opencv/opencv_4.5.2.bb b/meta-oe/r=
+ecipes-support/opencv/opencv_4.5.5.bb
+> > similarity index 97%
+> > rename from meta-oe/recipes-support/opencv/opencv_4.5.2.bb
+> > rename to meta-oe/recipes-support/opencv/opencv_4.5.5.bb
+> > index 2f2a505ed..ca50e80b0 100644
+> > --- a/meta-oe/recipes-support/opencv/opencv_4.5.2.bb
+> > +++ b/meta-oe/recipes-support/opencv/opencv_4.5.5.bb
+> > @@ -10,7 +10,7 @@ ARM_INSTRUCTION_SET:armv5 =3D "arm"
+> >
+> >   DEPENDS =3D "libtool swig-native bzip2 zlib glib-2.0 libwebp"
+> >
+> > -SRCREV_opencv =3D "69357b1e88680658a07cffde7678a4d697469f03"
+> > +SRCREV_opencv =3D "dad26339a975b49cfb6c7dbe4bd5276c9dcb36e2"
+> >   SRCREV_contrib =3D "f5d7f6712d4ff229ba4f45cf79dfd11c557d56fd"
+> >   SRCREV_ipp =3D "a56b6ac6f030c312b2dce17430eef13aed9af274"
+> >   SRCREV_boostdesc =3D "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
+> > @@ -51,8 +51,6 @@ SRC_URI =3D "git://github.com/opencv/opencv.git;name=
+=3Dopencv;branch=3Dmaster;protocol
+> >              file://0001-Dont-use-isystem.patch \
+> >              file://download.patch \
+> >              file://0001-Make-ts-module-external.patch \
+> > -           file://0001-sfm-link-with-Glog_LIBS.patch;patchdir=3D../con=
+trib \
+> > -           file://0001-Use-the-one-argument-version-of-SetTotalBytesLi=
+mit.patch \
+> >              "
+> >   SRC_URI:append:riscv64 =3D " file://0001-Use-Os-to-compile-tinyxml2.c=
+pp.patch;patchdir=3D../contrib"
+> >
+> > @@ -105,7 +103,7 @@ EXTRA_OECMAKE:append:x86 =3D " -DX86=3DON"
+> >
+> >   PACKAGECONFIG ??=3D "gapi python3 eigen jpeg png tiff v4l libv4l gstr=
+eamer samples tbb gphoto2 \
+> >       ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)} \
+> > -    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "lib=
+av", "", d)}"
+> > +    "
+> >
+> >   # TBB does not build for powerpc so disable that package config
+> >   PACKAGECONFIG:remove:powerpc =3D "tbb"
+> >
+> >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#95011): https://lists.openembedded.org/g/openembedd=
+ed-devel/message/95011
+> > Mute This Topic: https://lists.openembedded.org/mt/88614015/3617728
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[zboszor@pr.hu]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
+>
 
