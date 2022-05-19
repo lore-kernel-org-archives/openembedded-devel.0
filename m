@@ -1,197 +1,100 @@
-Return-Path: <enrico.scholz@sigma-chemnitz.de>
+Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2758C433EF
-	for <webhook@archiver.kernel.org>; Thu, 19 May 2022 10:23:28 +0000 (UTC)
-Received: from smtpout.cvg.de (smtpout.cvg.de [87.128.211.67])
- by mx.groups.io with SMTP id smtpd.web12.5899.1652955797254527310
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A0FFC433EF
+	for <webhook@archiver.kernel.org>; Thu, 19 May 2022 12:07:49 +0000 (UTC)
+Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com
+ [209.85.167.41])
+ by mx.groups.io with SMTP id smtpd.web10.6730.1652962058704718186
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 May 2022 03:23:18 -0700
+ Thu, 19 May 2022 05:07:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@sigma-chemnitz.de header.s=v2022040800 header.b=Bp19ueiN;
- spf=pass (domain: sigma-chemnitz.de, ip: 87.128.211.67,
- mailfrom: enrico.scholz@sigma-chemnitz.de)
-Received: from mail-mta-3.intern.sigma-chemnitz.de
- (mail-mta-3.intern.sigma-chemnitz.de [192.168.12.71])
-	by mail-out-2.intern.sigma-chemnitz.de (8.16.1/8.16.1) with ESMTPS id
- 24JANFtm621511
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 May 2022 12:23:15 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sigma-chemnitz.de;
-	s=v2022040800; t=1652955795;
-	bh=LZ7r9p8OmG9Wn9gY39XzaYdYGMNpljmvGvgOX9jF4z0=; l=3579;
-	h=From:To:Cc:Subject:Date;
-	b=Bp19ueiN0rP0+gSvV/9LAgc19NA/NOXihVwWm5cis6JP5PDIOFq6FGRzvqMENxfUF
-	 DHmyt2PuVIScf6FnaSB+qi7uzF886Y2fV6XwPHxNWbHas+2RTaobQ0xt2K/Dn0jW6i
-	 PHPAI/1lwIqYDTR34kTmovC3PlwYTpmP+RZa/dFhgpYdjEGyd2knUEsvfIYt10KfXw
-	 VSXBxUAJuKotU4T7IOlC9E7vJJm7QwyN8dAf1NkEed000QnyNzxg0vZRwbB4mEzi8+
-	 p5roUH2h69BoLLrBB2HIM82vSDgfdbKDIZ5ocjSJSMhRS+lB7PKiFgXN3Pn/aTGZlk
-	 HNTZBz0aky3Qw==
-Received: from reddoxx.intern.sigma-chemnitz.de (reddoxx.sigma.local
- [192.168.16.32])
-	by mail-mta-3.intern.sigma-chemnitz.de (8.16.1/8.16.1) with ESMTP id
- 24JANDo72314393
-	for <openembedded-devel@lists.openembedded.org> from
- enrico.scholz@sigma-chemnitz.de; Thu, 19 May 2022 12:23:13 +0200
-Received: from mail-msa-3.intern.sigma-chemnitz.de ( [192.168.12.73]) by
- reddoxx.intern.sigma-chemnitz.de
-	(Reddoxx engine) with SMTP id 30CE2D430B6; Thu, 19 May 2022 12:23:11 +0200
-Received: from ensc-pc.intern.sigma-chemnitz.de
- (ensc-pc.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail-msa-3.intern.sigma-chemnitz.de (8.15.2/8.15.2) with ESMTPS id
- 24JANAtD856628
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
-	Thu, 19 May 2022 12:23:11 +0200
-Received: from ensc by ensc-pc.intern.sigma-chemnitz.de with local (Exim 4.95)
-	(envelope-from <ensc@sigma-chemnitz.de>)
-	id 1nrdJG-004MdC-Sb;
-	Thu, 19 May 2022 12:23:10 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: [meta-oe] nodejs-oe-cache-native: initial checkin
-Date: Thu, 19 May 2022 12:23:07 +0200
-Message-Id: <20220519102307.1040263-1-enrico.scholz@sigma-chemnitz.de>
-X-Mailer: git-send-email 2.36.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=DC6+IYsU;
+ spf=pass (domain: gmail.com, ip: 209.85.167.41,
+ mailfrom: alex.kanavin@gmail.com)
+Received: by mail-lf1-f41.google.com with SMTP id h29so8763469lfj.2;
+        Thu, 19 May 2022 05:07:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=/XBRn3AIfxz5pw7DJiJgMrLrK0y0OTdpPFrwDtkXQk4=;
+        b=DC6+IYsUjqk9jT+aD/30KeiuINgRSWrFyKvhg8rlJRXBcDu8FCq9+bg4PQgZO7R7+w
+         ZIQiOp213MLYGqxNVlINZP6wwJoLYJ+5BDsqTjgStEpdl96Nx5VzEe04yBjbdnDo9U0o
+         VDh5NUGVzNBWn31gTFVSmKq+w/BHzshdmiUCYBlDxI5m7F8/rl/dwIvZmcMJdKzV6n3D
+         DEU+SjquvqZmKzp80LAv036Upb1LnZeJ/iV/4FssbXoaNJLSUx1RJL7JETtlIBW/57pC
+         JyfBmNKtsP4Ux7FglLMKq5+104Q9EeaQt2Ah/cvvmxaLszlydr9ydk4GDcZPVCN+a+Uo
+         uIXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=/XBRn3AIfxz5pw7DJiJgMrLrK0y0OTdpPFrwDtkXQk4=;
+        b=6LU4sxfcPPoUEPX3uAPz+0brfJ6OEAzTVC2YefYTu5oChV2JIp5K0ym1UtXa48c1ur
+         MZVPaAd0vOfszkz5hmYibIWX0cUroRKIf6Sg4yNk65sr6bEll/+iWJ5rHeDXY+0l1hAb
+         VOukdIWwJ79sTwiVFzl/PV1iVJFpCFLzZKCcOEju9y36NAg6qWymNgAURyi3u5FxX134
+         FpEc6NxSRVCoj8VJYCd7mlR/oyXLmJ2rFDR9Ona5yv1cS0OpxKv3tYU/NxrNkARQZVkn
+         /ee5t+Cj6bIcO4qC2G5I7SoNXCsJnIZWdJ40t84UKGFiTGvWlCNyXVGjba/ekISt7qW2
+         DQxw==
+X-Gm-Message-State: AOAM532+Ct2Pamb4pXM7GciS8GTPicV5AAYjHKhG9ZZQkoAgTHg1vZRL
+	s37DOKDM/9eMLmjvrFvdQViqVT4DvOiGYBjvOu4=
+X-Google-Smtp-Source: 
+ ABdhPJwPmS/rmxuL00kQpZCcdPHQ8bZs1rDxTek7uvMxkM27yR5Wzlf/tdl9n3ZpEkvhFxUYKb1IufXaxmRW/0ltXLI=
+X-Received: by 2002:a05:6512:3047:b0:473:cf43:6d8f with SMTP id
+ b7-20020a056512304700b00473cf436d8fmr3272718lfb.380.1652962056606; Thu, 19
+ May 2022 05:07:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+References: <b9999975-f517-eb6e-e0f0-881558fa38ae@balister.org>
+In-Reply-To: <b9999975-f517-eb6e-e0f0-881558fa38ae@balister.org>
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+Date: Thu, 19 May 2022 14:07:25 +0200
+Message-ID: 
+ <CANNYZj97fyH=5BLGc5yRJnZOkteOsWpbh2m7RkAL83GQH8tfkA@mail.gmail.com>
+Subject: Re: [Openembedded-architecture] OpenEmbedded Developer meeting
+ reminder
+To: Philip Balister <philip@balister.org>
+Cc: "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>,
+	openembedded-architecture <openembedded-architecture@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>,
+	"yocto@lists.yoctoproject.org" <yocto@lists.yoctoproject.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 May 2022 10:23:28 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 19 May 2022 12:07:49 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97186
+ https://lists.openembedded.org/g/openembedded-devel/message/97192
 
-This implements an 'npm cache add' like functionality but allows to
-specify the key of the data and sets metadata which are required to
-find the data.
+Hello Philip,
 
-It is used to cache information as done during 'npm install'.
+when would the time slots be allocated? It doesn't look optimal to
+leave this to the last minute, as people need to plan their day.
 
-Keyformat and metadata are nodejs version specific.
+Alex
 
-Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
----
- .../nodejs/nodejs-oe-cache-16.14/oe-npm-cache | 77 +++++++++++++++++++
- .../nodejs/nodejs-oe-cache-native_16.14.bb    | 21 +++++
- 2 files changed, 98 insertions(+)
- create mode 100755 meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.14.bb
-
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
-new file mode 100755
-index 000000000..f59620764
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
-@@ -0,0 +1,77 @@
-+#!/usr/bin/env node
-+
-+/// Usage: oe-npm-cache <cache-dir> <type> <key> <file-name>
-+///    <type> ... meta - metainformation about package
-+///               tgz  - tarball
-+
-+const process = require("node:process");
-+
-+module.paths.unshift("@@libdir@@/node_modules/npm/node_modules");
-+
-+const cacache = require('cacache')
-+const fs = require('fs')
-+
-+// argv[0] is 'node', argv[1] is this script
-+const cache_dir = process.argv[2]
-+const type      = process.argv[3]
-+const key       = process.argv[4]
-+const file      = process.argv[5]
-+
-+const data = fs.readFileSync(file)
-+
-+// metadata content is highly nodejs dependent; when cache entries are not
-+// found, place debug statements in 'make-fetch-happen/lib/cache/policy.js'
-+// (CachePolicy::satisfies())
-+const xlate = {
-+    'meta': {
-+	'key_prefix': 'make-fetch-happen:request-cache:',
-+	'metadata': function() {
-+	    return {
-+		time: Date.now(),
-+		url:  key,
-+		reqHeaders: {
-+		    'accept': 'application/vnd.npm.install-v1+json; q=1.0, application/json; q=0.8, */*',
-+		},
-+		resHeaders: {
-+		    "content-type": "application/json",
-+		    "status": 200,
-+		},
-+		options: {
-+		    compress: true,
-+		}
-+	    };
-+	},
-+    },
-+
-+    'tgz': {
-+	'key_prefix': 'make-fetch-happen:request-cache:',
-+	'metadata': function() {
-+	    return {
-+		time: Date.now(),
-+		url:  key,
-+		reqHeaders: {
-+		    'accept': '*/*',
-+		},
-+		resHeaders: {
-+		    "content-type": "application/octet-stream",
-+		    "status": 200,
-+		},
-+		options: {
-+		    compress: true,
-+		},
-+	    };
-+	},
-+    },
-+};
-+
-+const info = xlate[type];
-+let opts = {}
-+
-+if (info.metadata) {
-+    opts['metadata'] = info.metadata();
-+}
-+
-+cacache.put(cache_dir, info.key_prefix + key, data, opts)
-+    .then(integrity => {
-+	console.log(`Saved content of ${key} (${file}).`);
-+})
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.14.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.14.bb
-new file mode 100644
-index 000000000..a61dd5018
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.14.bb
-@@ -0,0 +1,21 @@
-+DESCRIPTION = "OE helper for manipulating npm cache"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
-+
-+SRC_URI = "\
-+    file://oe-npm-cache \
-+"
-+
-+inherit native
-+
-+B = "${WORKDIR}/build"
-+
-+do_configure() {
-+    sed -e 's!@@libdir@@!${libdir}!g' < '${WORKDIR}/oe-npm-cache' > '${B}/oe-npm-cache'
-+}
-+
-+do_install() {
-+    install -D -p -m 0755 ${B}/oe-npm-cache ${D}${bindir}/oe-npm-cache
-+}
-+
-+RDEPENDS:${PN} = "nodejs-native"
--- 
-2.36.1
-
+On Tue, 17 May 2022 at 03:53, Philip Balister <philip@balister.org> wrote:
+>
+> We are finalizing the agenda for the developer meeting this Friday (May
+> 20). The agenda has some topics carried from prior meetings and some new
+> ideas we will cover at the bottom. We would like to get additional
+> topics that matter to users and developers. Please review:
+>
+> https://www.openembedded.org/wiki/OEDVM_2022_05
+>
+> and add your ideas for topics we should discuss. Members of the
+> OpenEmbedded board and Technical steering committee will be around on
+> irc in #oe on libera.chat.
+>
+> Philip
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#1545): https://lists.openembedded.org/g/openembedded-architecture/message/1545
+> Mute This Topic: https://lists.openembedded.org/mt/91155434/1686489
+> Group Owner: openembedded-architecture+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-architecture/unsub [alex.kanavin@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
