@@ -1,82 +1,125 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <jiaqing.zhao@linux.intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7BE6DC433EF
-	for <webhook@archiver.kernel.org>; Fri, 20 May 2022 08:59:01 +0000 (UTC)
-Received: from mta-64-226.siemens.flowmailer.net
- (mta-64-226.siemens.flowmailer.net [185.136.64.226])
- by mx.groups.io with SMTP id smtpd.web10.6633.1653037139903367463
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 916F3C433F5
+	for <webhook@archiver.kernel.org>; Fri, 20 May 2022 09:43:11 +0000 (UTC)
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+ by mx.groups.io with SMTP id smtpd.web11.6762.1653039790622017002
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 May 2022 01:59:00 -0700
+ Fri, 20 May 2022 02:43:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=StzbJhWy;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.226,
- mailfrom: fm-256628-20220520085856b9dd99b5db11354058-b2kds0@rts-flowmailer.siemens.com)
-Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id
- 20220520085856b9dd99b5db11354058
-        for <openembedded-devel@lists.openembedded.org>;
-        Fri, 20 May 2022 10:58:56 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=OHyGq0MzfpEdTiy2F1ekyqCrhKcBpSf1bIaZJ2keyZI=;
- b=StzbJhWy9sxnx+2//Z/Sfz+x2op8LEW/JCSmA4HxnRTMA8lQGavSEUs6mkKjPUKREe6gmZ
- 5xDbU285po8i8Mv61liiRv4UtGjPN+79Jp2EQWY3k+N/CbH3q1I2YO6lYsyLLIfzoEJVawIE
- k3x/4VWlgW92Pfq/LOIqfHc86aBAc=;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel
+ header.b=GdqjHkpR;
+ spf=none, err=permanent DNS error (domain: linux.intel.com,
+ ip: 192.55.52.115, mailfrom: jiaqing.zhao@linux.intel.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1653039790; x=1684575790;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=V5Wtlqc1sfAqgA08CTPnfsbcYBM4dzThW2Y0IEmpBsE=;
+  b=GdqjHkpRtbLLBrK5695CS3V8TEC3CAodl2toiMzGRr7fIosDv5KP8DLR
+   uBAX8LGSiQgSFPhUiEonVaieF+QsIVJMUqL7EgZzp3lx20PM6tDrvbQaB
+   81yQZI+c8OLlMFy09E2Yh+HDIL3tnPjsuViMyNItpuB4BKllhBZ0GbfGN
+   bn3EbhqCojVkaJUI93C91aIJ5rEYSjy/7XhukEndXzI0Pm8/RejluT/js
+   5iy+Vx8J1R5+qNC8mIzBnvxK651bAD0FHlTY9MSlNNHWPWz5dLtu1MqmO
+   N6xcwM1Scm4YJtskNue4tAbhX+Tg2omUCRD6y3nLZJ/QWEz1ZEs3N8FIs
+   w==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10352"; a="272682475"
+X-IronPort-AV: E=Sophos;i="5.91,238,1647327600";
+   d="scan'208";a="272682475"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 20 May 2022 02:43:09 -0700
+X-IronPort-AV: E=Sophos;i="5.91,238,1647327600";
+   d="scan'208";a="599130394"
+Received: from unknown (HELO jiaqingz-bmcdev-container.sh.intel.com)
+ ([10.239.138.232])
+  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 20 May 2022 02:43:08 -0700
+From: Jiaqing Zhao <jiaqing.zhao@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: brgl@bgdev.pl,
-	Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][master][kirkstone][PATCH] libgpiod: move test dependencies
- to ptest package
-Date: Fri, 20 May 2022 10:58:43 +0200
-Message-Id: <20220520085843.11735-1-peter.marko@siemens.com>
+Cc: Jiaqing Zhao <jiaqing.zhao@linux.intel.com>
+Subject: [meta-oe] [PATCH] openldap: Remove unnecessary use-urandom.patch
+Date: Fri, 20 May 2022 17:42:57 +0800
+Message-Id: <20220520094257.2906304-1-jiaqing.zhao@linux.intel.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 20 May 2022 08:59:01 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 May 2022 09:43:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97210
+ https://lists.openembedded.org/g/openembedded-devel/message/97211
 
-This reverts and reworks commit e75cc87c4f944dff766c426fafafd48c378544fe
+use-urandom.patch sets URANDOM_DEVICE to /dev/urandom when cross
+compiling, but the same value is also defined in the recipe's compile
+flags. This patch removes that unnecessary patch and resolves the
+redefinition warning.
 
-These tools are needed by test-suites, not the package itself.
-I do not want bash (gpl3) or python (big/lot of dependencies)
-in my release image when I have ptest enabled in my distro for
-sdk/testing image.
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Jiaqing Zhao <jiaqing.zhao@linux.intel.com>
 ---
- meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../openldap/openldap/use-urandom.patch       | 35 -------------------
+ .../openldap/openldap_2.5.12.bb               |  1 -
+ 2 files changed, 36 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/openldap/openldap/use-urandom.patch
 
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
-index 35e68b7e2..2cccf93bd 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.3.bb
-@@ -14,7 +14,7 @@ SRC_URI[sha256sum] = "841be9d788f00bab08ef22c4be5c39866f0e46cb100a3ae49ed816ac9c
+diff --git a/meta-oe/recipes-support/openldap/openldap/use-urandom.patch b/meta-oe/recipes-support/openldap/openldap/use-urandom.patch
+deleted file mode 100644
+index 0b7e3a28a..000000000
+--- a/meta-oe/recipes-support/openldap/openldap/use-urandom.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-openldap: assume /dev/urandom exists
+-
+-When we are cross-compiling, we want to assume
+-that /dev/urandom exists.  We could change the source
+-code to look for it, but this is the easy way out.
+-
+-Upstream-Status: Inappropriate [embedded specific]
+-
+-Signed-off-by: Joe Slater <jslater@windriver.com>
+-
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -2117,6 +2117,7 @@ AC_SUBST(systemdsystemunitdir)
+- 
+- dnl ----------------------------------------------------------------
+- dnl Check for entropy sources
+-+dev=no
+- if test $cross_compiling != yes && test "$ac_cv_mingw32" != yes ; then
+- 	dev=no
+- 	if test -r /dev/urandom ; then
+-@@ -2131,9 +2132,11 @@ if test $cross_compiling != yes && test "$ac_cv_mingw32" != yes ; then
+- 		dev="/idev/random";
+- 	fi
+- 
+--	if test $dev != no ; then
+--		AC_DEFINE_UNQUOTED(URANDOM_DEVICE,"$dev",[set to urandom device])
+--	fi
+-+elif test $cross_compiling == yes ; then
+-+       dev="/dev/urandom";
+-+fi
+-+if test $dev != no ; then
+-+	AC_DEFINE_UNQUOTED(URANDOM_DEVICE,"$dev",[set to urandom device])
+- fi
+- 
+- dnl ----------------------------------------------------------------
+diff --git a/meta-oe/recipes-support/openldap/openldap_2.5.12.bb b/meta-oe/recipes-support/openldap/openldap_2.5.12.bb
+index e4475e506..a0ca2b5d3 100644
+--- a/meta-oe/recipes-support/openldap/openldap_2.5.12.bb
++++ b/meta-oe/recipes-support/openldap/openldap_2.5.12.bb
+@@ -15,7 +15,6 @@ SECTION = "libs"
+ LDAP_VER = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
  
- inherit autotools pkgconfig python3native ptest
- 
--PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev glib-2.0 catch2,bats python3-packaging"
-+PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev glib-2.0 catch2"
- PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
- PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3"
- 
-@@ -54,6 +54,7 @@ RRECOMMENDS:${PN}-ptest += " \
-     coreutils \
-     ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3-unittest', '', d)} \
- "
-+RDEPENDS:${PN}-ptest += "bats python3-packaging"
- 
- PACKAGECONFIG:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'tests', '', d)}"
- 
+ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/${BP}.tgz \
+-    file://use-urandom.patch \
+     file://initscript \
+     file://slapd.service \
+     file://remove-user-host-pwd-from-version.patch \
 -- 
-2.30.2
+2.34.1
 
 
