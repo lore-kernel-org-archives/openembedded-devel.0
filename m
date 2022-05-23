@@ -1,111 +1,178 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0309EC433EF
-	for <webhook@archiver.kernel.org>; Mon, 23 May 2022 09:44:34 +0000 (UTC)
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com
- [209.85.208.41])
- by mx.groups.io with SMTP id smtpd.web09.25830.1653299070891900709
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8EF1CC433EF
+	for <webhook@archiver.kernel.org>; Mon, 23 May 2022 15:12:35 +0000 (UTC)
+Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com
+ [209.85.222.180])
+ by mx.groups.io with SMTP id smtpd.web08.28814.1653318745318881552
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 May 2022 02:44:31 -0700
+ Mon, 23 May 2022 08:12:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=fVhCGpin;
- spf=pass (domain: gmail.com, ip: 209.85.208.41,
- mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f41.google.com with SMTP id en5so18381506edb.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=cV3FJKxg;
+ spf=pass (domain: gmail.com, ip: 209.85.222.180,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f180.google.com with SMTP id p123so2841994qke.5
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 May 2022 02:44:30 -0700 (PDT)
+ Mon, 23 May 2022 08:12:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=IfCYCSPVwoe6EAuO+t7GmR1Ahq6oBw3os/ANxj49vcI=;
-        b=fVhCGpinAyYUZfVjTSUpJhDNN0B/2PAwPVovz/Ze/OkQtnJbtPcMUiLChtvtEX9CUe
-         YR3VjchBc0GWMpCItaoV5SWPgBIHVF6uoCWqTpsfR60ONnXrabozUmG/KLdMpAx3kFTj
-         Og+72mpZZENRm29gu1daQNeQwH5b1nCcn3kzooPmi9yeYRiOJfPmd7LvxDzTqUfazfv7
-         f5MWF7wPQ+WdQFWs6pbDCgCiWc45M/J7yjti+vCGDTTW6wFdYsrCjoMmoTDp9qFufMnl
-         s/ZsJyKsM2i/K9P1JxNh9Zx6hRLMvKXpItZBHOUiLGDYBSRgSeuPY6FHPZXft40hhdlu
-         KbVQ==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=nST6xYoZa9rOhxW1UxpE5dHOhOSKByfWQfHuceknu20=;
+        b=cV3FJKxgZN7lWsT/LsB1+OY+ofqti0yrCxqYG3R8vnH38Y+71W6BqqEYJZohHoiD/a
+         B6SfcE0sWJSyK5T+jx5EVc2pmIpxxg/Uln1sFhaqil8+V6MHW8WoOSmU3LQPNpULTtq+
+         M/MSdNyg+8ye5Dv2mxtYbiiVvXhgRhUzP5v8LtF+pi2kff3wObjtqcmcgn08o7UBdm5K
+         ux7JwEHP3P6l4tb9w8n84uQ7iB5gifr6EwKxHz+sNtqOpt1CFjKIP0+EMZMQP4XUhjt0
+         xE8AfBhR+eOIYFv4Bp8rWnI+QZy/f9OLVLxWY6YodZaXj0/UvM3hIy1lmXOdsmyu3jnW
+         4UUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=IfCYCSPVwoe6EAuO+t7GmR1Ahq6oBw3os/ANxj49vcI=;
-        b=cTvDZf3XgQ85IcH1JVB9D2Agg47Qn3pakMAm8B9cLhvi1AsOjDU25nt1VAjtpajJN9
-         LMMwJC5pZ4KkR7n2LZO8A9uXs2ZjSM7fjDcgSHKwBOybks2+LzU8Tr9QXg9ryDbmMlr7
-         ymKQ99UOUC/4+fkfKg7UtHfN4IUdDWdQPsSoa7UQipwYdUhdJ49bOInq+3kiiZ/5K0rF
-         AaVyem9CIzxP6/MRNxMlXCNGhjS0XMRwMfPa8s0vPzEf3FPq/GhC1LRVBVWEB3up7FfZ
-         M58zdU9Ei2msbQEMZSydhE4OXN2J5h/Jiuyl0+psJ/4DMAcMTLOB9HrQPw7QR4RkjpZu
-         5rBg==
-X-Gm-Message-State: AOAM531KOYjW623w4q9FScge2PFGE6wMVtZ2heDK81f9pTzGEwYmp4J3
-	26fm/RWHi26UQvtqtWmjbVg4H/IsNBs=
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=nST6xYoZa9rOhxW1UxpE5dHOhOSKByfWQfHuceknu20=;
+        b=BScYatikhcai9lfylcBuVdl5fCejyoyVZdp+vifcHS9dBB9tIxuojhwfr4PnV+SPXt
+         P/nKnISBbhHinGcYWP5WaskMaFdwlgXP1IUQ0iwD8v3KzKzXUEAgKyjC6/UzUT8qZ3kk
+         xBwet9D1qTKmChbQr7gzeWdv0otPW99fqXsoUlsYa7hq/JdtwQlgF5YKpqP2+Cfx9EYs
+         P72Zp0tMi/2QqS0NBjsfc7vzgKTqfCyugf0i032kBBpV51A7spP4k9Fw+Doh/b+DQPk7
+         5rT4bcRBlWhT0+UJ3kONqcsuePxpb/OJsMHg2IlToBkkyco6TWQ3Q/Un4rA+vLS371QQ
+         0dOA==
+X-Gm-Message-State: AOAM531+S8yrZRSZZxX6OZ3f/aViphqmuk9l38JNwuwww6WXPJ8uKBM2
+	Nlbmj7CvPm9nA7nvuq46JrMA+7Nfwv6CBV3y1LA=
 X-Google-Smtp-Source: 
- ABdhPJx9edIp7NqCtuXjECsJp4G0fm6UptNEc9+9AIdwo7+0bRrIVTa3aZcGh7OJ83IBWveTq+y8Sw==
-X-Received: by 2002:a05:6402:5193:b0:428:414d:e20d with SMTP id
- q19-20020a056402519300b00428414de20dmr22623125edd.173.1653299069224;
-        Mon, 23 May 2022 02:44:29 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id
- i2-20020aa7c702000000b0042617ba6380sm7959177edq.10.2022.05.23.02.44.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 May 2022 02:44:28 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH] mm-common: package the files from ${PN} in ${PN}-dev
- and use allarch
-Date: Mon, 23 May 2022 11:44:14 +0200
-Message-Id: <20220523094414.503671-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.35.1
+ ABdhPJyPYrvcQ1fTmX2KWNHU4thjoBA5uqTbiR4o0eUqqnWOuKGOZajnfkolLL+nJuw5BAZGjpJnsTmkpMRRqUFR620=
+X-Received: by 2002:a05:620a:cc8:b0:6a3:9b4b:dde6 with SMTP id
+ b8-20020a05620a0cc800b006a39b4bdde6mr2669140qkj.463.1653318744279; Mon, 23
+ May 2022 08:12:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20220522204207.2323510-1-uvv.mail@gmail.com>
+In-Reply-To: <20220522204207.2323510-1-uvv.mail@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 23 May 2022 08:11:58 -0700
+Message-ID: 
+ <CAMKF1soVO4qeVF+24FxD-GTbC57Sk=u4=itXQyoT-vq2pRmc2A@mail.gmail.com>
+Subject: Re: [oe] [meta-filesystems][PATCH] overlayfs-tools: add new recipe
+To: Vyacheslav Yurkov <uvv.mail@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 23 May 2022 09:44:34 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 23 May 2022 15:12:35 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97230
+ https://lists.openembedded.org/g/openembedded-devel/message/97232
 
-* based on this bbappend from 2012:
-  https://github.com/openwebos/meta-webos/commit/f4745112438a5ba1913708b6b6ac30234ec8076e
-  time to finally get rid of it
+needs some patching on musl see
+https://errors.yoctoproject.org/Errors/Details/657137/
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../recipes-core/mm-common/mm-common_1.0.4.bb    | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
-
-diff --git a/meta-oe/recipes-core/mm-common/mm-common_1.0.4.bb b/meta-oe/recipes-core/mm-common/mm-common_1.0.4.bb
-index 33969ff7a2..1ffdcfd045 100644
---- a/meta-oe/recipes-core/mm-common/mm-common_1.0.4.bb
-+++ b/meta-oe/recipes-core/mm-common/mm-common_1.0.4.bb
-@@ -6,7 +6,23 @@ GNOMEBASEBUILDCLASS = "meson"
- 
- inherit gnomebase
- 
-+# All the recipe does is stage python and shell script, some autotools files; nothing is compiled.
-+inherit allarch
-+
- SRC_URI[archive.sha256sum] = "e954c09b4309a7ef93e13b69260acdc5738c907477eb381b78bb1e414ee6dbd8"
- SRC_URI += "file://0001-meson.build-do-not-ask-for-python-installation-versi.patch"
- 
- BBCLASSEXTEND = "native"
-+
-+# These files aren't very usefull on target image, package them all in nnPN-dev
-+FILES:${PN} = ""
-+
-+FILES:${PN}-dev += " \
-+    ${datadir}/${BPN}/build \
-+    ${datadir}/${BPN}/doctags \
-+    ${datadir}/${BPN}/doctool \
-+    ${bindir}/mm-common-get \
-+    ${bindir}/mm-common-prepare \
-+"
-+# ${PN} package is empty, remove the default dependency on it
-+RDEPENDS:${PN}-dev = ""
--- 
-2.35.1
-
+On Sun, May 22, 2022 at 1:42 PM Vyacheslav Yurkov <uvv.mail@gmail.com> wrote:
+>
+> From: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+>
+> This package provides maintenance tools for OverlayFS, such as vacuum,
+> diff, merge, and deref
+>
+> Signed-off-by: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+> ---
+>  ...-so-that-it-compiles-on-Ubuntu-20.04.patch | 41 +++++++++++++++++++
+>  .../overlayfs/overlayfs-tools_git.bb          | 28 +++++++++++++
+>  2 files changed, 69 insertions(+)
+>  create mode 100644 meta-filesystems/recipes-utils/overlayfs/files/0001-Fixed-includes-so-that-it-compiles-on-Ubuntu-20.04.patch
+>  create mode 100644 meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_git.bb
+>
+> diff --git a/meta-filesystems/recipes-utils/overlayfs/files/0001-Fixed-includes-so-that-it-compiles-on-Ubuntu-20.04.patch b/meta-filesystems/recipes-utils/overlayfs/files/0001-Fixed-includes-so-that-it-compiles-on-Ubuntu-20.04.patch
+> new file mode 100644
+> index 000000000..f7490ebce
+> --- /dev/null
+> +++ b/meta-filesystems/recipes-utils/overlayfs/files/0001-Fixed-includes-so-that-it-compiles-on-Ubuntu-20.04.patch
+> @@ -0,0 +1,41 @@
+> +From 81b4fbb5f52044cb348534c23f10b3884972b09b Mon Sep 17 00:00:00 2001
+> +From: Beat Schaer <beat.schaer@wabtec.com>
+> +Date: Fri, 19 Mar 2021 08:18:58 +0100
+> +Subject: [PATCH] Fixed includes so that it compiles on Ubuntu 20.04
+> +
+> +---
+> + logic.c | 3 +--
+> + main.c  | 3 ++-
+> + 2 files changed, 3 insertions(+), 3 deletions(-)
+> +
+> +diff --git a/logic.c b/logic.c
+> +index 97767f5..47ebfaa 100644
+> +--- a/logic.c
+> ++++ b/logic.c
+> +@@ -7,8 +7,7 @@
+> + #include <string.h>
+> + #include <errno.h>
+> + #include <unistd.h>
+> +-#include <attr/xattr.h>
+> +-#include <attr/attributes.h>
+> ++#include <sys/xattr.h>
+> + #include <fts.h>
+> + #include <libgen.h>
+> + #include "logic.h"
+> +diff --git a/main.c b/main.c
+> +index aa11239..f462b98 100644
+> +--- a/main.c
+> ++++ b/main.c
+> +@@ -12,7 +12,8 @@
+> + #include <linux/limits.h>
+> + #include <stdbool.h>
+> + #include <sys/stat.h>
+> +-#include <attr/xattr.h>
+> ++#include <sys/xattr.h>
+> ++#include <errno.h>
+> + #ifndef _SYS_STAT_H
+> +   #include <linux/stat.h>
+> + #endif
+> +--
+> +2.25.1
+> +
+> diff --git a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_git.bb b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_git.bb
+> new file mode 100644
+> index 000000000..b0406fbae
+> --- /dev/null
+> +++ b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_git.bb
+> @@ -0,0 +1,28 @@
+> +DESCRIPTION = "Maintenance tools for OverlayFS"
+> +HOMEPAGE = "https://github.com/kmxz/overlayfs-tools"
+> +LICENSE = "WTFPL"
+> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f312a7c4d02230e8f2b537295d375c69"
+> +
+> +SRC_URI = "\
+> +    git://github.com/kmxz/overlayfs-tools.git;protocol=https;branch=master \
+> +    file://0001-Fixed-includes-so-that-it-compiles-on-Ubuntu-20.04.patch \
+> +"
+> +
+> +PV = "1.0+git${SRCPV}"
+> +SRCREV = "291c7f4a3fb548d06c572700650c2e3bccb0cd27"
+> +
+> +S = "${WORKDIR}/git"
+> +B = "${S}"
+> +
+> +DEPENDS += "attr"
+> +EXTRA_OEMAKE += "'CC=${CC} -O2'"
+> +TARGET_CC_ARCH += "${LDFLAGS}"
+> +
+> +do_compile () {
+> +    oe_runmake
+> +}
+> +
+> +do_install () {
+> +    install -d ${D}${bindir}
+> +    install -m 0755 ${B}/overlay ${D}${bindir}
+> +}
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#97220): https://lists.openembedded.org/g/openembedded-devel/message/97220
+> Mute This Topic: https://lists.openembedded.org/mt/91275863/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
