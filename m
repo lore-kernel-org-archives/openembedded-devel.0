@@ -2,57 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8EF1CC433EF
-	for <webhook@archiver.kernel.org>; Mon, 23 May 2022 15:12:35 +0000 (UTC)
-Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com
- [209.85.222.180])
- by mx.groups.io with SMTP id smtpd.web08.28814.1653318745318881552
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 640B3C433F5
+	for <webhook@archiver.kernel.org>; Mon, 23 May 2022 15:13:35 +0000 (UTC)
+Received: from mail-qv1-f50.google.com (mail-qv1-f50.google.com
+ [209.85.219.50])
+ by mx.groups.io with SMTP id smtpd.web12.28873.1653318810760809607
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 May 2022 08:12:25 -0700
+ Mon, 23 May 2022 08:13:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=cV3FJKxg;
- spf=pass (domain: gmail.com, ip: 209.85.222.180,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f180.google.com with SMTP id p123so2841994qke.5
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=dcd3wj03;
+ spf=pass (domain: gmail.com, ip: 209.85.219.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f50.google.com with SMTP id ej7so12279030qvb.13
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 May 2022 08:12:25 -0700 (PDT)
+ Mon, 23 May 2022 08:13:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=nST6xYoZa9rOhxW1UxpE5dHOhOSKByfWQfHuceknu20=;
-        b=cV3FJKxgZN7lWsT/LsB1+OY+ofqti0yrCxqYG3R8vnH38Y+71W6BqqEYJZohHoiD/a
-         B6SfcE0sWJSyK5T+jx5EVc2pmIpxxg/Uln1sFhaqil8+V6MHW8WoOSmU3LQPNpULTtq+
-         M/MSdNyg+8ye5Dv2mxtYbiiVvXhgRhUzP5v8LtF+pi2kff3wObjtqcmcgn08o7UBdm5K
-         ux7JwEHP3P6l4tb9w8n84uQ7iB5gifr6EwKxHz+sNtqOpt1CFjKIP0+EMZMQP4XUhjt0
-         xE8AfBhR+eOIYFv4Bp8rWnI+QZy/f9OLVLxWY6YodZaXj0/UvM3hIy1lmXOdsmyu3jnW
-         4UUA==
+        bh=IiYm8Z6pszLRfg/mddCk+doFhtd+sF4xDVikQxsQbRc=;
+        b=dcd3wj03JywcfoVY5AjNPT3fHo2CjJaaoLQiZ6EWQmpEDn8PBtWsRMkZ1+oJISdr1M
+         o4MzlfQu1VxS8KEOP6G3nWMXhlF8Lf6Q13Q74nYyyq0F2/aJpyFompJ3mwMdmB7m4Y0G
+         BDuekZfGPb1cL96/o7wbIfASwocGX+FNtfPgSqHneQRVfED4kfqIN+TiZtx9xbtOo1Yj
+         +omhQuiQ4OD+R7ngy+bxSKOj2cETtWmnld/Cjd1T+BplwlJrniFs2QZ9gxvnCYlwmBV1
+         nmSyOA2y030Xzlp1H0ob4GQxFfHZin6shla1Yb+yWqemjs4nZ4btuxSZFbv2SvOY2/3o
+         Hu+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=nST6xYoZa9rOhxW1UxpE5dHOhOSKByfWQfHuceknu20=;
-        b=BScYatikhcai9lfylcBuVdl5fCejyoyVZdp+vifcHS9dBB9tIxuojhwfr4PnV+SPXt
-         P/nKnISBbhHinGcYWP5WaskMaFdwlgXP1IUQ0iwD8v3KzKzXUEAgKyjC6/UzUT8qZ3kk
-         xBwet9D1qTKmChbQr7gzeWdv0otPW99fqXsoUlsYa7hq/JdtwQlgF5YKpqP2+Cfx9EYs
-         P72Zp0tMi/2QqS0NBjsfc7vzgKTqfCyugf0i032kBBpV51A7spP4k9Fw+Doh/b+DQPk7
-         5rT4bcRBlWhT0+UJ3kONqcsuePxpb/OJsMHg2IlToBkkyco6TWQ3Q/Un4rA+vLS371QQ
-         0dOA==
-X-Gm-Message-State: AOAM531+S8yrZRSZZxX6OZ3f/aViphqmuk9l38JNwuwww6WXPJ8uKBM2
-	Nlbmj7CvPm9nA7nvuq46JrMA+7Nfwv6CBV3y1LA=
+        bh=IiYm8Z6pszLRfg/mddCk+doFhtd+sF4xDVikQxsQbRc=;
+        b=JtGZJa6gTACZI/qlRI8s+UX2PzbBWh5U3HOOdM8YzPgBRVlb6noZE5O7o3eKQs4zxn
+         C5McaWxA4s55mjUX/EbFIHx67z2afB4TZe6R5DKgbOLZSm8otjQy0y5bN7fztHbD9EdK
+         yapKJXanz7mODgUFwK0N+DYXr0V7NaugsWXUBOauKYIhXmF1bJ/TuHpcMxh8R+F/attO
+         iIbe67seRHaVEyPijSQ70uFW5PaJINhcMLHWVdm7N1tHG9Pk16W8jbdl1/r62jDZielD
+         yqOGsdLSMDS92vILR/t1/hmdFXJdhD5xoAbiAf5gyayTeX4WXQ7hgWQhjwq9T/9RdV9R
+         AckQ==
+X-Gm-Message-State: AOAM532suTQQXC6C3g1fAt0f5Q1UsSfgYvWqWN9Y8Hr+GJFBsq4GFDP3
+	GI/mbiZUXJyocbaNXys+mYVhhxlIlZ52t61tVFA=
 X-Google-Smtp-Source: 
- ABdhPJyPYrvcQ1fTmX2KWNHU4thjoBA5uqTbiR4o0eUqqnWOuKGOZajnfkolLL+nJuw5BAZGjpJnsTmkpMRRqUFR620=
-X-Received: by 2002:a05:620a:cc8:b0:6a3:9b4b:dde6 with SMTP id
- b8-20020a05620a0cc800b006a39b4bdde6mr2669140qkj.463.1653318744279; Mon, 23
- May 2022 08:12:24 -0700 (PDT)
+ ABdhPJwXHbzrj1szduyPEzW9SDtevtbnd/J6csxafeepfugqzbKd76msNEpH96sN3Bcc/5hb9Y0ZuD0U9axQxL8oliE=
+X-Received: by 2002:a05:6214:500b:b0:461:e282:181 with SMTP id
+ jo11-20020a056214500b00b00461e2820181mr17547409qvb.24.1653318809722; Mon, 23
+ May 2022 08:13:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220522204207.2323510-1-uvv.mail@gmail.com>
-In-Reply-To: <20220522204207.2323510-1-uvv.mail@gmail.com>
+References: <20220522204440.2323651-1-uvv.mail@gmail.com>
+In-Reply-To: <20220522204440.2323651-1-uvv.mail@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 23 May 2022 08:11:58 -0700
+Date: Mon, 23 May 2022 08:13:03 -0700
 Message-ID: 
- <CAMKF1soVO4qeVF+24FxD-GTbC57Sk=u4=itXQyoT-vq2pRmc2A@mail.gmail.com>
-Subject: Re: [oe] [meta-filesystems][PATCH] overlayfs-tools: add new recipe
+ <CAMKF1spzX4n4RoSYVgw78d52v+xkn4kvDYXtUqgDgKCYBoNPqw@mail.gmail.com>
+Subject: Re: [oe] [meta-filesystems][PATCH] overlayfs-progs: add new recipe
 To: Vyacheslav Yurkov <uvv.mail@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
 	Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
@@ -60,98 +59,46 @@ Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 23 May 2022 15:12:35 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 23 May 2022 15:13:35 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97232
+ https://lists.openembedded.org/g/openembedded-devel/message/97233
 
-needs some patching on musl see
-https://errors.yoctoproject.org/Errors/Details/657137/
+Fails to build on musl
 
-On Sun, May 22, 2022 at 1:42 PM Vyacheslav Yurkov <uvv.mail@gmail.com> wrote:
+https://errors.yoctoproject.org/Errors/Details/657139/
+
+On Sun, May 22, 2022 at 1:45 PM Vyacheslav Yurkov <uvv.mail@gmail.com> wrote:
 >
 > From: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
 >
-> This package provides maintenance tools for OverlayFS, such as vacuum,
-> diff, merge, and deref
+> overlayfs-progs contains fsck.overlay, which is used to check and optionally
+> repair underlying directories of overlay-filesystem.
 >
 > Signed-off-by: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
 > ---
->  ...-so-that-it-compiles-on-Ubuntu-20.04.patch | 41 +++++++++++++++++++
->  .../overlayfs/overlayfs-tools_git.bb          | 28 +++++++++++++
->  2 files changed, 69 insertions(+)
->  create mode 100644 meta-filesystems/recipes-utils/overlayfs/files/0001-Fixed-includes-so-that-it-compiles-on-Ubuntu-20.04.patch
->  create mode 100644 meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_git.bb
+>  .../overlayfs/overlayfs-progs_git.bb          | 24 +++++++++++++++++++
+>  1 file changed, 24 insertions(+)
+>  create mode 100644 meta-filesystems/recipes-utils/overlayfs/overlayfs-progs_git.bb
 >
-> diff --git a/meta-filesystems/recipes-utils/overlayfs/files/0001-Fixed-includes-so-that-it-compiles-on-Ubuntu-20.04.patch b/meta-filesystems/recipes-utils/overlayfs/files/0001-Fixed-includes-so-that-it-compiles-on-Ubuntu-20.04.patch
+> diff --git a/meta-filesystems/recipes-utils/overlayfs/overlayfs-progs_git.bb b/meta-filesystems/recipes-utils/overlayfs/overlayfs-progs_git.bb
 > new file mode 100644
-> index 000000000..f7490ebce
+> index 000000000..2f173b259
 > --- /dev/null
-> +++ b/meta-filesystems/recipes-utils/overlayfs/files/0001-Fixed-includes-so-that-it-compiles-on-Ubuntu-20.04.patch
-> @@ -0,0 +1,41 @@
-> +From 81b4fbb5f52044cb348534c23f10b3884972b09b Mon Sep 17 00:00:00 2001
-> +From: Beat Schaer <beat.schaer@wabtec.com>
-> +Date: Fri, 19 Mar 2021 08:18:58 +0100
-> +Subject: [PATCH] Fixed includes so that it compiles on Ubuntu 20.04
+> +++ b/meta-filesystems/recipes-utils/overlayfs/overlayfs-progs_git.bb
+> @@ -0,0 +1,24 @@
+> +SUMMARY = "File system check utility for OverlayFS"
+> +HOMEPAGE = "https://github.com/hisilicon/overlayfs-progs"
+> +LICENSE = "PD"
+> +LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/PD;md5=b3597d12946881e13cb3b548d1173851"
 > +
-> +---
-> + logic.c | 3 +--
-> + main.c  | 3 ++-
-> + 2 files changed, 3 insertions(+), 3 deletions(-)
-> +
-> +diff --git a/logic.c b/logic.c
-> +index 97767f5..47ebfaa 100644
-> +--- a/logic.c
-> ++++ b/logic.c
-> +@@ -7,8 +7,7 @@
-> + #include <string.h>
-> + #include <errno.h>
-> + #include <unistd.h>
-> +-#include <attr/xattr.h>
-> +-#include <attr/attributes.h>
-> ++#include <sys/xattr.h>
-> + #include <fts.h>
-> + #include <libgen.h>
-> + #include "logic.h"
-> +diff --git a/main.c b/main.c
-> +index aa11239..f462b98 100644
-> +--- a/main.c
-> ++++ b/main.c
-> +@@ -12,7 +12,8 @@
-> + #include <linux/limits.h>
-> + #include <stdbool.h>
-> + #include <sys/stat.h>
-> +-#include <attr/xattr.h>
-> ++#include <sys/xattr.h>
-> ++#include <errno.h>
-> + #ifndef _SYS_STAT_H
-> +   #include <linux/stat.h>
-> + #endif
-> +--
-> +2.25.1
-> +
-> diff --git a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_git.bb b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_git.bb
-> new file mode 100644
-> index 000000000..b0406fbae
-> --- /dev/null
-> +++ b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_git.bb
-> @@ -0,0 +1,28 @@
-> +DESCRIPTION = "Maintenance tools for OverlayFS"
-> +HOMEPAGE = "https://github.com/kmxz/overlayfs-tools"
-> +LICENSE = "WTFPL"
-> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f312a7c4d02230e8f2b537295d375c69"
-> +
-> +SRC_URI = "\
-> +    git://github.com/kmxz/overlayfs-tools.git;protocol=https;branch=master \
-> +    file://0001-Fixed-includes-so-that-it-compiles-on-Ubuntu-20.04.patch \
-> +"
+> +SRC_URI = "git://github.com/hisilicon/overlayfs-progs.git;protocol=https;branch=master"
 > +
 > +PV = "1.0+git${SRCPV}"
-> +SRCREV = "291c7f4a3fb548d06c572700650c2e3bccb0cd27"
+> +SRCREV = "e10ef686570d9c7eff42f52461593a5c15da56bd"
 > +
 > +S = "${WORKDIR}/git"
 > +B = "${S}"
 > +
-> +DEPENDS += "attr"
 > +EXTRA_OEMAKE += "'CC=${CC} -O2'"
 > +TARGET_CC_ARCH += "${LDFLAGS}"
 > +
@@ -161,7 +108,7 @@ On Sun, May 22, 2022 at 1:42 PM Vyacheslav Yurkov <uvv.mail@gmail.com> wrote:
 > +
 > +do_install () {
 > +    install -d ${D}${bindir}
-> +    install -m 0755 ${B}/overlay ${D}${bindir}
+> +    install -m 0755 ${B}/fsck.overlay ${D}${bindir}
 > +}
 > --
 > 2.25.1
@@ -169,8 +116,8 @@ On Sun, May 22, 2022 at 1:42 PM Vyacheslav Yurkov <uvv.mail@gmail.com> wrote:
 >
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#97220): https://lists.openembedded.org/g/openembedded-devel/message/97220
-> Mute This Topic: https://lists.openembedded.org/mt/91275863/1997914
+> View/Reply Online (#97221): https://lists.openembedded.org/g/openembedded-devel/message/97221
+> Mute This Topic: https://lists.openembedded.org/mt/91275909/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
