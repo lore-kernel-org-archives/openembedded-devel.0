@@ -1,158 +1,149 @@
-Return-Path: <brgl@bgdev.pl>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 26570C433F5
-	for <webhook@archiver.kernel.org>; Tue, 24 May 2022 19:46:49 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
- [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.web08.14112.1653421605691348254
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6327FC433EF
+	for <webhook@archiver.kernel.org>; Tue, 24 May 2022 20:32:39 +0000 (UTC)
+Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com
+ [209.85.160.177])
+ by mx.groups.io with SMTP id smtpd.web08.14671.1653424357155484588
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 May 2022 12:46:46 -0700
+ Tue, 24 May 2022 13:32:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20210112.gappssmtp.com header.s=20210112
- header.b=wKNnsAKj;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.44,
- mailfrom: brgl@bgdev.pl)
-Received: by mail-wm1-f44.google.com with SMTP id
- i81-20020a1c3b54000000b003974edd7c56so434791wma.2
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=dSRerxpW;
+ spf=pass (domain: gmail.com, ip: 209.85.160.177,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f177.google.com with SMTP id g3so15606613qtb.7
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 May 2022 12:46:45 -0700 (PDT)
+ Tue, 24 May 2022 13:32:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20210112.gappssmtp.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=skaFG6jKerONT23BDAe+wT6yQ3/SDHizA4aBbsuNe9M=;
-        b=wKNnsAKj6qGP5dSs/dtwMTroPQpd9IUbsxcvNvuYOyfyUjCiGcSGroGTRlM7eNDN/o
-         PWHAt6KN/KzNhXtKZqumoQKZhlCr4alKW9AJvgtJq9HWRPpbUsmEL7UAJF825raCXBdI
-         mjRQbDfckB9u4VC61+XcPbFnyA3u3m08I4xhLHpJPz1JhiVSkA/HLsfv8IHU0xWXWg3f
-         6rOZHurzF2f0gwFcrGj5UTt/nvC0pS1xMrvRywpdNGJYFxyAGdasonCUoU/DrRP4MMmw
-         EiX2A1ZqeexHQ8Rzq1nCev+0bUqR4ksAVT4fzj3WgQ5OvIn6wCNct2nIlbb09P1B26rc
-         nq0g==
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=/h6VV1pcEgU4bjPVpueA0BsNoU4SHt29v9XMR8uoJgo=;
+        b=dSRerxpWMtV93cbp+K84GpsI/Ef4RXo50OxwAlYjaVZQ8FSWGrtA6r/8sEH4PAHyUj
+         pypkf89LZxYvk0h2yS3w+O2mFXIqrJ7fGDZ4M/7yuX574NZ+M6+LsdD5fq9egjnK6zeU
+         EPdtF46aD66LJJm7UxrMQscFEFqKHs3XJNenb9JDJMLdX9LLSJloCdNSAD8kVgJI1QqB
+         Vkf7781V78FJZ8y3P7LN9/SYtMKbWXCd+MJNGZ8AIn+r9vjvmPecvUwAwnovtv+hYTGT
+         gSWOJrplxetCKlbqcuJAeUdPgJTiNJcxLtfGMjdQw2x2EKdqwlzyRC3JXb9ejk0FJhFO
+         AAHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=skaFG6jKerONT23BDAe+wT6yQ3/SDHizA4aBbsuNe9M=;
-        b=Vqu592t7oK+39Ln5248XzZUbDdZLuj9KxHC/QVJrDUVMN22ALROied0jDLN0AzmIQT
-         c+XghUsRnFUval+uXx4Tf4ZJg9eBmN4tJNknqiz/iTE41eLn+5PDWP7Uu/6TkY6BdPG6
-         aCb4OmxxuaCEmXPL9gA6UHqBf2CbBkcQznPPPJ2w3AXqnlOlzLiXhLhWYObBCTUiD4W0
-         91amKC/TwRGcfVhIgPah/oCq/056pL3CLYrYhTYBiZcnCmdTgvaYP8YIn22E1i7hhRyI
-         A/PKwGH3yO2TnwYGM84Q59mgUU5ewtFU0k/8P5YJKWRuCm5Ync8tAIz3eiuvixgbZdB1
-         ns+g==
-X-Gm-Message-State: AOAM533i0uWUdbyA+7Ny8DyuosFJQrhBRVcB6kDsjcXLbN9mDuj8c/Hz
-	q9Yt6DXtIOOzoMT6thrIkTkaSA==
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=/h6VV1pcEgU4bjPVpueA0BsNoU4SHt29v9XMR8uoJgo=;
+        b=S2B0plbvUJ5d9Rb8EosVIkJwF3GcdDTByhX5pz4Z5bpH3C8U1sTJKEWZlXFmvdHKqP
+         J8PAsUDB1WB/PqljTfIXmW1amnrglKzjrXQqYjJk/JNII2Uf5FkGxtJxHBR+Vr40RQTt
+         s77Kj4AL8KsrGyZQgIf9eV6hqDBtvrlySwJi6bPnG38ddqxMQyyMiYn70+1yFl1VOwXM
+         Wo15luLE8yzf99eg2MKBgSC4nHn36x6/q6RIkdeIwvi+NGygXP9d69PYeo2s2mnQQuWi
+         Z0iq4WiWysznIZdEPTqq8E+zfkb6vBGHUD7m4Dl1DZFavyP1LsIHddMNZ+DFaMm4pcW8
+         zXfQ==
+X-Gm-Message-State: AOAM532EBzQC+NUUKfKPFnEkCXy/vqGqN+UlraHCFUdGJxTEN7XVC8ww
+	pqs22RQnP5nG82LqihE8Pi/BZVcTC4m8JfYgi2I=
 X-Google-Smtp-Source: 
- ABdhPJzQ6FEh3AQ7OyNk/ThOvvSjP9fn5Zv+ZfnYQ1ZCzNobuj0ops6/r62m0Vj6Za5Ft7mqsAHw/Q==
-X-Received: by 2002:a05:600c:2254:b0:397:581d:34fa with SMTP id
- a20-20020a05600c225400b00397581d34famr5171048wmm.181.1653421603874;
-        Tue, 24 May 2022 12:46:43 -0700 (PDT)
-Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:87ef:963:27b6:d03b])
-        by smtp.gmail.com with ESMTPSA id
- c17-20020a7bc011000000b003973e8a227dsm231998wmb.46.2022.05.24.12.46.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 May 2022 12:46:43 -0700 (PDT)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>,
-	Bruce Ashfield <bruce.ashfield@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Cc: Bartosz Golaszewski <brgl@bgdev.pl>
-Subject: [meta-python][PATCH] python3-uinput: new package
-Date: Tue, 24 May 2022 21:46:42 +0200
-Message-Id: <20220524194642.203911-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.34.1
+ ABdhPJyUrCgOqmXhmlI/IgnRR6utCt82aS6W55H6W8r3ZwKmAV9r6HBElFH/Wkh4oeM943BWP1nOqY9hU1lSqNj1e+s=
+X-Received: by 2002:ac8:7f94:0:b0:2f9:2a3f:5fcd with SMTP id
+ z20-20020ac87f94000000b002f92a3f5fcdmr14278755qtj.330.1653424356176; Tue, 24
+ May 2022 13:32:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20220524121153.1175133-1-ross.burton@arm.com>
+ <20220524121153.1175133-5-ross.burton@arm.com>
+In-Reply-To: <20220524121153.1175133-5-ross.burton@arm.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 24 May 2022 13:32:10 -0700
+Message-ID: 
+ <CAMKF1soJ-jkyxf-uGNvWK4YANcoMdk-H5VHoHpOr3WXtuB4Z4w@mail.gmail.com>
+Subject: Re: [oe] [PATCH 5/7] python3-hatchling: add new recipe and build
+ class
+To: Ross Burton <ross.burton@arm.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+ nd <nd@arm.com>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 May 2022 19:46:49 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 May 2022 20:32:39 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97262
+ https://lists.openembedded.org/g/openembedded-devel/message/97264
 
-Add a recipe for python3-uinput: a python module for controlling the
-virtual input devices on linux.
+Its failing YP compat checks see
 
-Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
----
- .../packagegroups/packagegroup-meta-python.bb |  1 +
- ...-use-setuptools-instead-of-distutils.patch | 28 +++++++++++++++++++
- .../python/python3-uinput_0.11.2.bb           | 18 ++++++++++++
- 3 files changed, 47 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-uinput/0001-setup-use-setuptools-instead-of-distutils.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-uinput_0.11.2.bb
+https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1778
 
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index 6ca652e12..e3ae050ec 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -436,6 +436,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
-     python3-typeguard \
-     python3-tzlocal \
-     python3-u-msgpack-python \
-+    python3-uinput \
-     python3-ujson \
-     python3-unidiff \
-     python3-uritemplate \
-diff --git a/meta-python/recipes-devtools/python/python3-uinput/0001-setup-use-setuptools-instead-of-distutils.patch b/meta-python/recipes-devtools/python/python3-uinput/0001-setup-use-setuptools-instead-of-distutils.patch
-new file mode 100644
-index 000000000..54a3c1867
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-uinput/0001-setup-use-setuptools-instead-of-distutils.patch
-@@ -0,0 +1,28 @@
-+From 7a4dde83a9584adb42c7f810d882b1fbf5767e2c Mon Sep 17 00:00:00 2001
-+From: Bartosz Golaszewski <brgl@bgdev.pl>
-+Date: Tue, 24 May 2022 21:43:35 +0200
-+Subject: [PATCH] setup: use setuptools instead of distutils
-+
-+The latter is deprecated, use setuptools instead.
-+
-+Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
-+---
-+ setup.py | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/setup.py b/setup.py
-+index 3fa3343..4900b8b 100644
-+--- a/setup.py
-++++ b/setup.py
-+@@ -3,7 +3,7 @@
-+ import errno
-+ import subprocess
-+ 
-+-from distutils.core import setup, Extension
-++from setuptools import setup, Extension
-+ 
-+ libudev_so = "libudev.so.1"
-+ 
-+-- 
-+2.34.1
-+
-diff --git a/meta-python/recipes-devtools/python/python3-uinput_0.11.2.bb b/meta-python/recipes-devtools/python/python3-uinput_0.11.2.bb
-new file mode 100644
-index 000000000..737bbfe2c
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-uinput_0.11.2.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "Python interface to Linux uinput kernel module."
-+HOMEPAGE = "https://pypi.org/project/python-uinput/"
-+LICENSE = "GPL-3.0-only"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
-+
-+SRC_URI[sha256sum] = "99392b676c77b5795b86b7d75274db33fe754fd1e06fb3d58b167c797dc47f0c"
-+SRC_URI += "file://0001-setup-use-setuptools-instead-of-distutils.patch"
-+
-+PYPI_PACKAGE = "python-uinput"
-+
-+inherit pypi setuptools3
-+
-+DEPENDS += "udev"
-+RDEPENDS:${PN} += " \
-+    python3-ctypes \
-+    python3-distutils \
-+"
-+RRECOMMENDS:${PN} += "kernel-module-uinput"
--- 
-2.34.1
-
+On Tue, May 24, 2022 at 5:12 AM Ross Burton <ross.burton@arm.com> wrote:
+>
+> Hatchling is the build backend used by the Hatch tool.  Add the recipe
+> and a pep517 build class.
+>
+> Signed-off-by: Ross Burton <ross.burton@arm.com>
+> ---
+>  meta-python/classes/python_hatchling.bbclass  |  5 +++++
+>  .../packagegroups/packagegroup-meta-python.bb |  1 +
+>  .../python/python3-hatchling_1.3.0.bb         | 21 +++++++++++++++++++
+>  3 files changed, 27 insertions(+)
+>  create mode 100644 meta-python/classes/python_hatchling.bbclass
+>  create mode 100644 meta-python/recipes-devtools/python/python3-hatchling_1.3.0.bb
+>
+> diff --git a/meta-python/classes/python_hatchling.bbclass b/meta-python/classes/python_hatchling.bbclass
+> new file mode 100644
+> index 0000000000..b3cbe23601
+> --- /dev/null
+> +++ b/meta-python/classes/python_hatchling.bbclass
+> @@ -0,0 +1,5 @@
+> +inherit python_pep517 python3native python3-dir setuptools3-base
+> +
+> +DEPENDS += "python3-hatchling-native"
+> +
+> +PEP517_BUILD_API = "hatchling.build"
+> diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> index 2fcf34260c..80ec0720fd 100644
+> --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+> @@ -168,6 +168,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
+>      python3-h11 \
+>      python3-h2 \
+>      python3-h5py \
+> +    python3-hatchling \
+>      python3-haversine \
+>      python3-hpack \
+>      python3-html2text \
+> diff --git a/meta-python/recipes-devtools/python/python3-hatchling_1.3.0.bb b/meta-python/recipes-devtools/python/python3-hatchling_1.3.0.bb
+> new file mode 100644
+> index 0000000000..a6550a9732
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-hatchling_1.3.0.bb
+> @@ -0,0 +1,21 @@
+> +SUMMARY = "The extensible, standards compliant build backend used by Hatch"
+> +HOMEPAGE = "https://hatch.pypa.io/latest/"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=cbe2fd33fc9297692812fc94b7d27fd9"
+> +
+> +inherit pypi python_hatchling
+> +
+> +DEPENDS += "python3-pluggy-native python3-tomli-native python3-pathspec-native python3-packaging-native python3-editables-native"
+> +DEPENDS:remove:class-native = "python3-hatchling-native"
+> +
+> +SRC_URI[sha256sum] = "1401d45d3dd6a5910f64d539acaa943486d5e8b7dda1a97f2b0040fdddc5b85e"
+> +
+> +# Until we have a proper tool to invoke PEP517 builds, hatchling can't
+> +# bootstrap itself automatically.
+> +PEP517_BUILD_API = "hatchling.ouroboros"
+> +
+> +do_compile:prepend() {
+> +    export PYTHONPATH=src
+> +}
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#97246): https://lists.openembedded.org/g/openembedded-devel/message/97246
+> Mute This Topic: https://lists.openembedded.org/mt/91309500/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
