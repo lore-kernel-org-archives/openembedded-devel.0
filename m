@@ -1,179 +1,210 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E21E2C433EF
-	for <webhook@archiver.kernel.org>; Wed, 25 May 2022 15:09:16 +0000 (UTC)
-Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com
- [209.85.222.182])
- by mx.groups.io with SMTP id smtpd.web08.8039.1653491353068440500
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B48E0C433F5
+	for <webhook@archiver.kernel.org>; Wed, 25 May 2022 18:04:27 +0000 (UTC)
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
+ [209.85.128.41])
+ by mx.groups.io with SMTP id smtpd.web09.10212.1653501860859832362
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 May 2022 08:09:13 -0700
+ Wed, 25 May 2022 11:04:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=i4yL5m4g;
- spf=pass (domain: gmail.com, ip: 209.85.222.182,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f182.google.com with SMTP id c1so17597002qkf.13
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=dQf3F/HB;
+ spf=pass (domain: gmail.com, ip: 209.85.128.41,
+ mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f41.google.com with SMTP id
+ 67-20020a1c1946000000b00397382b44f4so3822732wmz.2
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 May 2022 08:09:12 -0700 (PDT)
+ Wed, 25 May 2022 11:04:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=CiNMAxHjA5MQA4W8Ft1Y2EIkSXGOc7Cg92PdGV3Ybvg=;
-        b=i4yL5m4gg5lNGwtSzBIUqjDaQPS/xc0WDppy66Vp9nFvcYOLxkSX0h+Oduqo+71rAz
-         VZ5Yv89OdtjuQa1BQXMa2v973DnpFHf3c6qSj8DFOxWS4Bv89M0lRenK3VqreWyMT6+k
-         I1xrmPFv0jijgoV0hMbWmybTbueTp6SKlXWe8nrAvdBeQVJZpZ/yGXDI0lTFe8ToWBpC
-         yLfOjQrosnFuUqnniC+lPYNLuOJI9ocRTwsYqh8MP277I/qZs0n3axKEEoK92kpcByD9
-         B2t3wvaEVin74cTdHABMdoMGtWcCYshoAQGp56MwMIns1qAaipj0IP9HgAIKdS0VkWeO
-         lIvQ==
+         :cc;
+        bh=iRBqCEmkMH9+ReasrkfEb/088fGxwCWeZBgmcKdfKL8=;
+        b=dQf3F/HBUzbyKnQTw/YzyzBZHFonPEXvnSSe0heTr/mZrcbqrbEY/8nXObIBYofLyV
+         SI0N782Cp3uV5g+hhTcLg/QQA6lDP/B10FVyvApZKFSjCqKUSqf6c18cLzuZVd6W6hVL
+         jQ0oOUisVFpcEUXC9FMsqRHuydU06vWVxO8cxXX7JtyiiLuFX1zDc+rHOtlBu0WyEufe
+         S1R/m3dlMstcKojAcAdtAbtI8GleZHEUEqkT6u3Lu1DJhMcEQgC9YWFeUEMb7RapR8Ro
+         djhYwOhkpIfkI6GHQRORWxbTWt5mkOI1yWm/vGUhSGoTzuPbtso6ZkAqyyB3DY6mqXCz
+         ypiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=CiNMAxHjA5MQA4W8Ft1Y2EIkSXGOc7Cg92PdGV3Ybvg=;
-        b=WAhUBdiGpJDvqucxWPFBpVOgHz/MtZ9pSTMN7H6Y/RkeCX52fqg1s7cKnKNPwwqJ/r
-         +xKJNdSBw70KE9qwyKq12cg1ag/N/RR2zXegVSjpJk2torRC7Pl+PvQDaeGtDZ3xnsyW
-         5JNFNFUXMAnwp+0T/htpuMFlrW1MQFQnD7h4KyZSUsqyZSK+h1ZS77Pr3mHuLyxn3C9h
-         21cxaB+MbRZGSjbNjQR9lV++RfwmCgZcQbOiIbfBRPVI9X/Ito/lRxeSbUBaAeOun4kJ
-         2JomlMrgRObN2faUoYg9Bm34O2V48mcxFtys1KXmlho77Z9inWa/+DJse0N4mKsZCxg+
-         BAjA==
-X-Gm-Message-State: AOAM5311/tPb+Vt3DcnDrM18oBh4j+Ichv7F/dBaFs1OWWgNgTlcsQ+W
-	7SQlKg5uzSrNFiPxpQeW+/CyqMXi4cnIFy1iUgg=
+         :message-id:subject:to:cc;
+        bh=iRBqCEmkMH9+ReasrkfEb/088fGxwCWeZBgmcKdfKL8=;
+        b=vF4dpIVUbVhopKKBpSng8EY8vOZnDv9HUwpDFSt0yIc2jwWfe5mqQD2EdH8f5x4aDZ
+         PIqIiGOUoPqvsW3G+WnOGOBhO53zbRA51bBKqQ6J+BybBRZanaK5xEmXcXVo3ttmO3NX
+         y+nv2yUsPHxEzAMKvfZzUAfQoJicYR3QD/QaO7cCZTurKt5y71TlhAFSMsqCFhirzxtm
+         38WGiU9YHNA27cKK5LLbAzV261ARvTfZVgtFNZa3IWjwleNNmODT8wn4PNRMPQjX+8H0
+         gCbuOLME+o+N8girDuBMeYikgvqggM9DzDlSuq3h0gHQfMNay3dpASH6WTrB58qpdBmK
+         CNUQ==
+X-Gm-Message-State: AOAM533q1vzORYEyVFBrvHfg+r4f/UTnMiGRqPsmqHgmhqs1PZ02J8TJ
+	SQTzNEgIiWps1h65kmop1QWFwQYiAVa2DMFBsbA=
 X-Google-Smtp-Source: 
- ABdhPJw3X89fe6K93pp+76gQ/nJbCYGuo4Hb1xIIAVMohFJClj5Z14F1oUW5m6J8cG9b4jRuAFBNzPHQWleVKCNTWU4=
-X-Received: by 2002:a37:660a:0:b0:6a3:4868:c730 with SMTP id
- a10-20020a37660a000000b006a34868c730mr18180763qkc.180.1653491351763; Wed, 25
- May 2022 08:09:11 -0700 (PDT)
+ ABdhPJxvjiqroioEu0ki6e7hRCbe6J/r17rLvgzxZS9IpI5pJhTxxDZj/ChLyeYzEKHGUciAgQGfv9kUVyR/hygEBmw=
+X-Received: by 2002:a7b:ce04:0:b0:394:1f46:213 with SMTP id
+ m4-20020a7bce04000000b003941f460213mr9001775wmc.157.1653501859284; Wed, 25
+ May 2022 11:04:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220524121153.1175133-1-ross.burton@arm.com>
- <20220524121153.1175133-5-ross.burton@arm.com>
- <CAMKF1soJ-jkyxf-uGNvWK4YANcoMdk-H5VHoHpOr3WXtuB4Z4w@mail.gmail.com>
- <62ECDE0E-7D6D-4C49-A07C-DA29DA148BA7@arm.com>
-In-Reply-To: <62ECDE0E-7D6D-4C49-A07C-DA29DA148BA7@arm.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 25 May 2022 08:08:45 -0700
+References: <20220512234307.1189721-1-denis@denix.org>
+ <20220512234307.1189721-3-denis@denix.org>
+In-Reply-To: <20220512234307.1189721-3-denis@denix.org>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 25 May 2022 20:03:58 +0200
 Message-ID: 
- <CAMKF1sp63nr3huSSjxGvYB1rOeuDu31VLuJLXiKqLT6VosyHMA@mail.gmail.com>
-Subject: Re: [oe] [PATCH 5/7] python3-hatchling: add new recipe and build
- class
-To: Ross Burton <Ross.Burton@arm.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
- nd <nd@arm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CA+chaQfKJDOyRQ=Y3GwK5X_XVrSdNoNe5VpBLMdyncooMeHOPA@mail.gmail.com>
+Subject: Re: [oe] [kirkstone][PATCH 3/3] devmem2: update SRC_URI according to
+ redirect
+To: Denys Dmytriyenko <denis@denix.org>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000f54bfc05dfd9e6b3"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 25 May 2022 15:09:16 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 25 May 2022 18:04:27 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97269
+ https://lists.openembedded.org/g/openembedded-devel/message/97270
 
-On Wed, May 25, 2022 at 3:37 AM Ross Burton <Ross.Burton@arm.com> wrote:
+--000000000000f54bfc05dfd9e6b3
+Content-Type: text/plain; charset="UTF-8"
+
+Anyone willing to create a repo for this on github instead of patching this
+in metadata?
+
+This is another reproducer for do_patch issue described here
+https://lists.yoctoproject.org/g/yocto/message/56602
+
+On Fri, May 13, 2022 at 1:43 AM Denys Dmytriyenko <denis@denix.org> wrote:
+
+> From: Michael Opdenacker <michael.opdenacker@bootlin.com>
 >
-> Sorry, forgot to say that this series depends on a patch I=E2=80=99ve sen=
-t for oe-core (to add pluggy-native).
+> http://www.free-electrons.com now redirects to https://bootlin.com
+>
+> Signed-off-by: Michael Opdenacker <michael.opdenacker@bootlin.com>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+> ---
+>  meta-oe/recipes-support/devmem2/devmem2.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-support/devmem2/devmem2.bb
+> b/meta-oe/recipes-support/devmem2/devmem2.bb
+> index ba7aad8ab..70d413521 100644
+> --- a/meta-oe/recipes-support/devmem2/devmem2.bb
+> +++ b/meta-oe/recipes-support/devmem2/devmem2.bb
+> @@ -3,7 +3,7 @@ LICENSE = "GPL-2.0-or-later"
+>  LIC_FILES_CHKSUM =
+> "file://devmem2.c;endline=38;md5=a9eb9f3890384519f435aedf986297cf"
+>  PR = "r7"
+>
+> -SRC_URI = "
+> http://www.free-electrons.com/pub/mirror/devmem2.c;downloadfilename=devmem2-new.c
+> \
+> +SRC_URI = "
+> https://bootlin.com/pub/mirror/devmem2.c;downloadfilename=devmem2-new.c \
+>             file://devmem2-fixups-2.patch;apply=yes;striplevel=0 \
+>
+> file://0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch \
+>
+> file://0001-devmem2-support-different-page-sizes-at-run-time.patch \
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#97085):
+> https://lists.openembedded.org/g/openembedded-devel/message/97085
+> Mute This Topic: https://lists.openembedded.org/mt/91070560/3617156
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> Martin.Jansa@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 >
 
-yeah figured
+--000000000000f54bfc05dfd9e6b3
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> Ross
+<div dir=3D"ltr">Anyone willing to create a repo for this on github instead=
+ of patching this in metadata?<div><br></div><div>This is another reproduce=
+r for do_patch issue described here=C2=A0<a href=3D"https://lists.yoctoproj=
+ect.org/g/yocto/message/56602">https://lists.yoctoproject.org/g/yocto/messa=
+ge/56602</a></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" cla=
+ss=3D"gmail_attr">On Fri, May 13, 2022 at 1:43 AM Denys Dmytriyenko &lt;<a =
+href=3D"mailto:denis@denix.org">denis@denix.org</a>&gt; wrote:<br></div><bl=
+ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
+t:1px solid rgb(204,204,204);padding-left:1ex">From: Michael Opdenacker &lt=
+;<a href=3D"mailto:michael.opdenacker@bootlin.com" target=3D"_blank">michae=
+l.opdenacker@bootlin.com</a>&gt;<br>
+<br>
+<a href=3D"http://www.free-electrons.com" rel=3D"noreferrer" target=3D"_bla=
+nk">http://www.free-electrons.com</a> now redirects to <a href=3D"https://b=
+ootlin.com" rel=3D"noreferrer" target=3D"_blank">https://bootlin.com</a><br=
 >
-> > On 24 May 2022, at 21:32, Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > Its failing YP compat checks see
-> >
-> > https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1778
-> >
-> > On Tue, May 24, 2022 at 5:12 AM Ross Burton <ross.burton@arm.com> wrote=
-:
-> >>
-> >> Hatchling is the build backend used by the Hatch tool.  Add the recipe
-> >> and a pep517 build class.
-> >>
-> >> Signed-off-by: Ross Burton <ross.burton@arm.com>
-> >> ---
-> >> meta-python/classes/python_hatchling.bbclass  |  5 +++++
-> >> .../packagegroups/packagegroup-meta-python.bb |  1 +
-> >> .../python/python3-hatchling_1.3.0.bb         | 21 +++++++++++++++++++
-> >> 3 files changed, 27 insertions(+)
-> >> create mode 100644 meta-python/classes/python_hatchling.bbclass
-> >> create mode 100644 meta-python/recipes-devtools/python/python3-hatchli=
-ng_1.3.0.bb
-> >>
-> >> diff --git a/meta-python/classes/python_hatchling.bbclass b/meta-pytho=
-n/classes/python_hatchling.bbclass
-> >> new file mode 100644
-> >> index 0000000000..b3cbe23601
-> >> --- /dev/null
-> >> +++ b/meta-python/classes/python_hatchling.bbclass
-> >> @@ -0,0 +1,5 @@
-> >> +inherit python_pep517 python3native python3-dir setuptools3-base
-> >> +
-> >> +DEPENDS +=3D "python3-hatchling-native"
-> >> +
-> >> +PEP517_BUILD_API =3D "hatchling.build"
-> >> diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-=
-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python=
-.bb
-> >> index 2fcf34260c..80ec0720fd 100644
-> >> --- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.=
-bb
-> >> +++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.=
-bb
-> >> @@ -168,6 +168,7 @@ RDEPENDS:packagegroup-meta-python3 =3D "\
-> >>     python3-h11 \
-> >>     python3-h2 \
-> >>     python3-h5py \
-> >> +    python3-hatchling \
-> >>     python3-haversine \
-> >>     python3-hpack \
-> >>     python3-html2text \
-> >> diff --git a/meta-python/recipes-devtools/python/python3-hatchling_1.3=
-.0.bb b/meta-python/recipes-devtools/python/python3-hatchling_1.3.0.bb
-> >> new file mode 100644
-> >> index 0000000000..a6550a9732
-> >> --- /dev/null
-> >> +++ b/meta-python/recipes-devtools/python/python3-hatchling_1.3.0.bb
-> >> @@ -0,0 +1,21 @@
-> >> +SUMMARY =3D "The extensible, standards compliant build backend used b=
-y Hatch"
-> >> +HOMEPAGE =3D "https://hatch.pypa.io/latest/"
-> >> +LICENSE =3D "MIT"
-> >> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Dcbe2fd33fc9297692812fc=
-94b7d27fd9"
-> >> +
-> >> +inherit pypi python_hatchling
-> >> +
-> >> +DEPENDS +=3D "python3-pluggy-native python3-tomli-native python3-path=
-spec-native python3-packaging-native python3-editables-native"
-> >> +DEPENDS:remove:class-native =3D "python3-hatchling-native"
-> >> +
-> >> +SRC_URI[sha256sum] =3D "1401d45d3dd6a5910f64d539acaa943486d5e8b7dda1a=
-97f2b0040fdddc5b85e"
-> >> +
-> >> +# Until we have a proper tool to invoke PEP517 builds, hatchling can'=
-t
-> >> +# bootstrap itself automatically.
-> >> +PEP517_BUILD_API =3D "hatchling.ouroboros"
-> >> +
-> >> +do_compile:prepend() {
-> >> +    export PYTHONPATH=3Dsrc
-> >> +}
-> >> +
-> >> +BBCLASSEXTEND =3D "native nativesdk"
-> >> --
-> >> 2.25.1
-> >>
-> >>
-> >> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >> Links: You receive all messages sent to this group.
-> >> View/Reply Online (#97246): https://lists.openembedded.org/g/openembed=
-ded-devel/message/97246
-> >> Mute This Topic: https://lists.openembedded.org/mt/91309500/1997914
-> >> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> >> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub=
- [raj.khem@gmail.com]
-> >> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+<br>
+Signed-off-by: Michael Opdenacker &lt;<a href=3D"mailto:michael.opdenacker@=
+bootlin.com" target=3D"_blank">michael.opdenacker@bootlin.com</a>&gt;<br>
+Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D=
+"_blank">raj.khem@gmail.com</a>&gt;<br>
+Signed-off-by: Denys Dmytriyenko &lt;<a href=3D"mailto:denis@denix.org" tar=
+get=3D"_blank">denis@denix.org</a>&gt;<br>
+---<br>
+=C2=A0meta-oe/recipes-support/devmem2/<a href=3D"http://devmem2.bb" rel=3D"=
+noreferrer" target=3D"_blank">devmem2.bb</a> | 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+<br>
+diff --git a/meta-oe/recipes-support/devmem2/<a href=3D"http://devmem2.bb" =
+rel=3D"noreferrer" target=3D"_blank">devmem2.bb</a> b/meta-oe/recipes-suppo=
+rt/devmem2/<a href=3D"http://devmem2.bb" rel=3D"noreferrer" target=3D"_blan=
+k">devmem2.bb</a><br>
+index ba7aad8ab..70d413521 100644<br>
+--- a/meta-oe/recipes-support/devmem2/<a href=3D"http://devmem2.bb" rel=3D"=
+noreferrer" target=3D"_blank">devmem2.bb</a><br>
++++ b/meta-oe/recipes-support/devmem2/<a href=3D"http://devmem2.bb" rel=3D"=
+noreferrer" target=3D"_blank">devmem2.bb</a><br>
+@@ -3,7 +3,7 @@ LICENSE =3D &quot;GPL-2.0-or-later&quot;<br>
+=C2=A0LIC_FILES_CHKSUM =3D &quot;file://devmem2.c;endline=3D38;md5=3Da9eb9f=
+3890384519f435aedf986297cf&quot;<br>
+=C2=A0PR =3D &quot;r7&quot;<br>
+<br>
+-SRC_URI =3D &quot;<a href=3D"http://www.free-electrons.com/pub/mirror/devm=
+em2.c;downloadfilename=3Ddevmem2-new.c" rel=3D"noreferrer" target=3D"_blank=
+">http://www.free-electrons.com/pub/mirror/devmem2.c;downloadfilename=3Ddev=
+mem2-new.c</a> \<br>
++SRC_URI =3D &quot;<a href=3D"https://bootlin.com/pub/mirror/devmem2.c;down=
+loadfilename=3Ddevmem2-new.c" rel=3D"noreferrer" target=3D"_blank">https://=
+bootlin.com/pub/mirror/devmem2.c;downloadfilename=3Ddevmem2-new.c</a> \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://devmem2-fixups-2.patch;app=
+ly=3Dyes;striplevel=3D0 \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-devmem.c-ensure-word-=
+is-32-bit-and-add-support-for-6.patch \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-devmem2-support-diffe=
+rent-page-sizes-at-run-time.patch \<br>
+-- <br>
+2.25.1<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#97085): <a href=3D"https://lists.openembedded.org/g/ope=
+nembedded-devel/message/97085" rel=3D"noreferrer" target=3D"_blank">https:/=
+/lists.openembedded.org/g/openembedded-devel/message/97085</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/91070560/3617=
+156" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/91070560/3617156</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:Martin.Jansa@gmail.com" =
+target=3D"_blank">Martin.Jansa@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+
+--000000000000f54bfc05dfd9e6b3--
 
