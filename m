@@ -1,853 +1,469 @@
-Return-Path: <ranjitsinh.rathod@kpit.com>
+Return-Path: <Martin.Jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F07BC433EF
-	for <webhook@archiver.kernel.org>; Thu, 26 May 2022 09:54:42 +0000 (UTC)
-Received: from IND01-MA1-obe.outbound.protection.outlook.com
- (IND01-MA1-obe.outbound.protection.outlook.com [40.107.138.54])
- by mx.groups.io with SMTP id smtpd.web12.17786.1653558879246372887
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F2A86C433FE
+	for <webhook@archiver.kernel.org>; Thu, 26 May 2022 12:03:22 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
+ [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.web11.18726.1653566600044058145
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 May 2022 02:54:40 -0700
+ Thu, 26 May 2022 05:03:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kpit.com header.s=selector1 header.b=St6SR3LI;
- spf=pass (domain: kpit.com, ip: 40.107.138.54,
- mailfrom: ranjitsinh.rathod@kpit.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gdmQZ3EJXcIZUEeaz0U6/a/Sx3fXVmju3RGJK0dgx2D236ssk8sI+DkrmBXjBncS3tPHwtUAHD+CyYvnXCAK4rE/B2geQkd5J75duyecCdDLR5z6cgmIBf1OtvwQ+N30TRzc9C/RB8M1/PMgi9QT9ruFkm0KT/tMvd3L3lMUh/bJOmgMd6jmbTlT9cUk0KyYCEiOVv5N8X5Sig7/mCE000pRnQ3Q9fAYDoQp1oVgIqBC0DS32jqQ5e5r760Bkc+RdOTkFr1ndjeEKXLSew72gFldIhx4FZQ3N8hMMVgYa2IZ2d0mOeXnSANt+kUaUjZzxK3y+IbZmpU1oRczwpycUw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wKKpdOjMA2u5tPSiauPy4th9XWR+WHEjmhzxyhdKrfQ=;
- b=l2mlueDhT8MhWZyHg1BANRBqeP/5LnDe7JZamesLq+CsRytcmkp4Na974ha94FvPKfONL5fWpOL4BtZxyGBegWzog4otxMLSQvGWRB2gLymbpN8I5zFosLfV+uXq9oawtWKU1sVPCskooo9iHQ9h2bK7ZvOX7eKUS4W25iliKy1BaDdGelKp8qsIIPZcP0Nz1Z2ookhtaWrO4yqAIjbA+5pDK2arJDqgNRNnLHjEYtoYWOPwBuCw1AK6fFiviHsd/WaeCsSXkK1doB56t2Oi604bmch1vUm2EX/Vv5Ooj9AJa9QqVmXYEXsP95h4B9xazSjedufAN9fyPdHhpQEXHg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=kpit.com; dmarc=pass action=none header.from=kpit.com;
- dkim=pass header.d=kpit.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wKKpdOjMA2u5tPSiauPy4th9XWR+WHEjmhzxyhdKrfQ=;
- b=St6SR3LIH3SXzb0yrym2VS3dq0Mk0vkfgJscZfM4Q3uZvHWN4gvO7wTFyU+RlUk+z+fUr+Qab0TQ/ZbfF/js9bAwY24l99XcTLo/grDWzN6ph2ndcykjg7zpdcyN2r9BKUuOaXj+HZIzA60/KwPBGAjxLFxRdojOdfDaf563P7g=
-Received: from PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:8d::14)
- by PNZPR01MB4526.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:2a::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5273.18; Thu, 26 May
- 2022 09:54:30 +0000
-Received: from PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::59c0:9987:811:323d]) by PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::59c0:9987:811:323d%4]) with mapi id 15.20.5293.013; Thu, 26 May 2022
- 09:54:29 +0000
-From: Ranjitsinh Rathod <Ranjitsinh.Rathod@kpit.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, "omkarpatil10.93@gmail.com"
-	<omkarpatil10.93@gmail.com>
-CC: Omkar Patil <Omkar.Patil@kpit.com>
-Subject: Re: [oe][meta-filesystems][dunfell][PATCH] fuse: Set CVE_PRODUCT
-Thread-Topic: [oe][meta-filesystems][dunfell][PATCH] fuse: Set CVE_PRODUCT
-Thread-Index: AQHYcOVzwkfmCvYylkWsegqVKgY7f60w6xyo
-Date: Thu, 26 May 2022 09:54:29 +0000
-Message-ID: 
- <PN3PR01MB73821ADA1C19291A9F9F9AC98FD99@PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM>
-References: <20220526094431.19582-1-omkarpatil10.93@gmail.com>
-In-Reply-To: <20220526094431.19582-1-omkarpatil10.93@gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-msip_labels: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=kpit.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 7f2b499a-eccd-4fc7-a4c9-08da3efdba3a
-x-ms-traffictypediagnostic: PNZPR01MB4526:EE_
-x-microsoft-antispam-prvs: 
- <PNZPR01MB4526EE8377682CC9D7CDBC788FD99@PNZPR01MB4526.INDPRD01.PROD.OUTLOOK.COM>
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- mur2MnVeevExeGGRYzv8S7h/X0GqQ9CLs2upHvMu5H2+Imrr1K0cklLEoh7sEzJA9Nf4Vs1APu1eM7S22JH6BPyqdRFBTR+jeMoxXFhjMqoM+r97yzadaiSpJyzFzu1oP7ZXxaJXg/+OWxsWNmSyfyDVElM9g+rxua3e47G8T1OP71uNKNuU3HPPO0OVynf9tQZfCJTbDBPCjWA8diXNBDWI8C57c9nXPInKX3rCT7P+/arfcEeJ3DDaItbkt+VUjkv09DPHFHwAbv7EflF+Qpc8TZ3u1eNvjV6gCJu7u2dqV9+QReJRdgQK0u0gNwxjDRME4EnGwGb5nM/ficywxgHeJYsjofnzY3TR06tRqpwczeP8z4LgziiAsaY9Moyg5fQaFtoah7r/ooroyE0Miv16DThpNqcjH853vvk5rWFhYWMbN/7FBCOYntAs1SAPf8TU+DT1+M2VrSIdXpLTHhETxYS0yvdepOM3WAQiREWYVHkI24KTaROfpmhEFEsB4RofTwL3HAR9WaNGC8vX6mlL62Zx34ICGb64lDMzeqUwui+UsPYtbL4wVtULRk37XqUO76HGeUG3xLziyE0LtMTC3ePWrSbhbLJrBrbX+My4OydUJMxc4a5cjh+1wxkuQqgg7V2AQQWL2tGNAf7ZqAOin/yG5PNTP4+Fpp3qxRxj8ere+OodI3645bnyjQfiVABDmBVkw8DnDdG+Y3dL4A9ACLp7MqhYhakrIjPbFoBLmfTFpGSSeXZ4oLcOrPMGI+/ObenDuymS7pn7EPDdd4d/QGUNAnU1quWAkOJMgN8cXsICC5F4d9uirYR+wzzsb47gCacsVb7v07XFReikiTAdoHylNBXxgd6cwZqsXk0=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(2906002)(18265965005)(71200400001)(5660300002)(9686003)(8676002)(66476007)(26005)(186003)(83380400001)(45080400002)(7696005)(86362001)(66574015)(52536014)(6506007)(33656002)(508600001)(107886003)(64756008)(7066003)(4326008)(66946007)(76116006)(19627405001)(110136005)(38070700005)(316002)(99936003)(166002)(38100700002)(55016003)(122000001)(66446008)(66556008)(8936002);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?us-ascii?Q?syr2geVWXWmehl1oKumjF1amuEv+0u9BJJ/0Aulo4+Cjr1pEt2BRlBpEO3Dz?=
- =?us-ascii?Q?bFt71ltEg+fx3PFTF01ATecLNE1wPggFQHjWxXNR1rMi7uCusdoM0SfaZJ/1?=
- =?us-ascii?Q?iELMkXEVhFtS190tM8zM/l9ffkWa5d/AvLuzqD+uTmlpzo56k9TPRfQk3giA?=
- =?us-ascii?Q?YunEIDtT3qwLE3Ja/G+6CkYV+ko9cExg0DtDggZL5EoVEc92TFAsz3tvzKTQ?=
- =?us-ascii?Q?zO/jg8SKvLOnv1TNeYXiOaPAtqh9IxN2aB0J8+fcDjChBzFsG/emNsS6PRIv?=
- =?us-ascii?Q?ZvvGskUo8U7E0ZO5GToLD8uUduEYZv1e0fTp0JS7b+b9EFbK9SxLYVffj+DT?=
- =?us-ascii?Q?1qaZWZpDTXdY+MCSBN6MBlFymiCJsM64gVSjiplfOMuwQom7iGbc0dRkD1qP?=
- =?us-ascii?Q?IWYosBjQJXj/gxB5S62woUpnkBepoRLbnpSuki24vyPozzZpt/YTWxwWbb56?=
- =?us-ascii?Q?Ri5qNBvn+TZl/wcFNNFNV8BMDb80ccMfNHput/H3HegXFc46i2mr++21X+G3?=
- =?us-ascii?Q?lFYvIAtA7/jvffRY9mNwqfnGqXcf9OQ1PM1lMZn1DW2Q+aeh490+TiBm+eie?=
- =?us-ascii?Q?aatbCVCxL22ILKXHxhdUaaBuG6LwiTWFsvmQP+VNVwj9Kyq8X6YQaiy6GJuo?=
- =?us-ascii?Q?2GQjLn3lhlxaGiQha+ZybWrv/A/HOnCA0evjKE9oFTXJ6mQewK31BmtR5Oyx?=
- =?us-ascii?Q?/FIaqkojxu9aMK16XGcTHVLotU+Rjnz/iG4XhkBQkfyXQSZ+UMH9qQM3Wtlq?=
- =?us-ascii?Q?eE59Bky/Il5OIm0kCiu1BCndF4CnIJGuXasAMrBeQMVyBSSf63zPehtthIbd?=
- =?us-ascii?Q?V8Z+oacWqA8yp3CmHbTZbE7sY10q7qfzxEkRcujsgqHwbe1lPD49yIzWgvn8?=
- =?us-ascii?Q?YxTEkrf5rSnbIqBWGFE6ZbBwyl1V8Fbt5giS3pXbC7kA0BK5QlrxsxO4eD/4?=
- =?us-ascii?Q?7InRGQ8AiVGjnFNI183NS5MRVRIdzFxMgFsqmKsyWWozzhKXYZ7OPOAwRI0V?=
- =?us-ascii?Q?CYiWtLrFxMT7uIu4ypAwxiHUdl9r+ATV99fJ2I5Hj3gGSHDB8Nd/IvJlm47A?=
- =?us-ascii?Q?Jgs++qopVWqtd3LKblfOqmXqCJ0WWYtDmgXyaSnOT0CsGH85RJpHkMbBnyfr?=
- =?us-ascii?Q?HXDFchdXgEybwL+DeoLAUN/4+TTfjkFzPPitHPMtpTwJAnX6i/73diif8Ju0?=
- =?us-ascii?Q?rfCd3CnsDvR0uQH7fesSsOEz8I9USXG5fFNUIw+VevVh+7/L3/9oEuUADEh0?=
- =?us-ascii?Q?GmOKFQBN6cTarkkO0IiQMTPMAf8z0wEMmcjqnRI8FSf/IEmkV8IWd9E61LkR?=
- =?us-ascii?Q?JaWPgr1WuPEZPz1IdqBYHRZyQ5Aok9PlCe1vGdymrVf8kbo5r8IY8vYA1LOj?=
- =?us-ascii?Q?WS8dqFHrijBNcl+OxlXp9mpuCRDysDwBQkJvlehrAmz9ZjvmB4f/prxE4mhi?=
- =?us-ascii?Q?VB0LqNsjDdS0Spy00wLRW5hH2SO2xYRGqiUlUOQsl/xeoRnenBW14W43kit+?=
- =?us-ascii?Q?DSThVSD1AGa8GOccJq7BiN/cnEXpmfMIQgPP9avJvlPqjLxC13Ow41yV11CX?=
- =?us-ascii?Q?zZOPKG4+Wwfn7Ubv/njySNRzUjUGGNDpAYt4G/wDuGNCTkuxNmXkZos7HdjU?=
- =?us-ascii?Q?7vNcATBR6hYErgHWoepYs/QP6qe42IkvhP/bm1iQrLvdXpFmOF+kRHFblm+1?=
- =?us-ascii?Q?YOhAeSuR6q0tCyGtWriKeBUcgJH1cGoLineqlOKP9iAoAKPkEZG5satYBEE6?=
- =?us-ascii?Q?63xb8ekF5A=3D=3D?=
-Content-Type: multipart/related;
-	boundary="_004_PN3PR01MB73821ADA1C19291A9F9F9AC98FD99PN3PR01MB7382INDP_";
-	type="multipart/alternative"
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=pFL5N2Lf;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47,
+ mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id t6so1893138wra.4
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 26 May 2022 05:03:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=UUESAyDE+hSUkOWr7Kg+llf2lsQ1mVQ1TNVjIKxWeJg=;
+        b=pFL5N2LfOc3o4DkNjS5Ov7g+0PiUNoFJc4IwjNkuiQXsSe353Iq/sCbmP6wftmQ0rf
+         9gvZJDuXy+kBAb6I53c97B6Kp12Ra+eClGYwtOZ4K312gJX4DMJiXQrRvMV4ORRnA57R
+         wfjlxmnrWxbDnbeR+WaTCUR43w0w/XMkjUzb3GC3uKmXPzNbh4WyaufT+TcC0o+GH+k/
+         EqRFuIai8BoIKZvi4tYSMh/NHtdbPxyK6d89lr0jygucNEMEPHsfX7DYrRNP4sk5+9L8
+         eRAD+imLamTHBNMr7IiLuZRPFQRZ6e4qJn/BxB4T5kDgwZmbX5QVuEZozc1QxxzgClbI
+         i9Vg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=UUESAyDE+hSUkOWr7Kg+llf2lsQ1mVQ1TNVjIKxWeJg=;
+        b=ikanZYUZdgeTQfsKJRukcUwayGkZ8vx+ejtua1HvbZ1tm8lAdm6j19SSCwCF/v1tLR
+         lH6x/K4qTWgQH4tQgsLnRZ3YGmMwhGAQY+9h/Qj588FSmZ4v6Mm51MnsDtdFmF7V+TxB
+         FHKOZUaQcmZVX6ed4Qbu3NtjMPEpA3AIUgQjV2rW3wCyUSe559IvMlidNnjcRJhZwQNH
+         Z8kwSUIZXW6rd5bRaPuxgu12VwD5XMgHDbSUtgOzIToSsguCgKtdYtslQpYSEIulidmP
+         EgZwig9e5Alps9gk6Hk2v9nWitj8Tk/eU41KRf3TY+d2TaSSKF8VOXv6g32RamZEc1ZF
+         0YIQ==
+X-Gm-Message-State: AOAM531gTjBMdR8liF2uX5lyjS6ih7xg0kKWi8+KfCTxyzPJVuZxoN4W
+	hK7XWD4rXnQVhb4loXzmSGVJyF3ISrTfiDYKqHQ=
+X-Google-Smtp-Source: 
+ ABdhPJyKBl56MtIolEKLTR/8oumttlSHOLz46MBhb5uyYeiYmqmXnmMs9Zp8Q7UUxXD4HmK7xL/kga4jbB9UeHbG9cQ=
+X-Received: by 2002:adf:d1a8:0:b0:20f:f808:2ac8 with SMTP id
+ w8-20020adfd1a8000000b0020ff8082ac8mr9731591wrc.495.1653566593402; Thu, 26
+ May 2022 05:03:13 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: kpit.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 7f2b499a-eccd-4fc7-a4c9-08da3efdba3a
-X-MS-Exchange-CrossTenant-originalarrivaltime: 26 May 2022 09:54:29.8243
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3539451e-b46e-4a26-a242-ff61502855c7
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 
- Muh+zPiCDoj+tOJvgvQgD3GwJei0R7LZR1c/9KTRNHRtfDMpaMetjYmZbZARsGO2C6Fz0Q9Z2ywIlQI+j0EXwA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PNZPR01MB4526
+References: 
+ <AM0PR10MB3107136C7FF2137D2614E56A99179@AM0PR10MB3107.EURPRD10.PROD.OUTLOOK.COM>
+ <CANNYZj85noGs9H4A4pYqOO6Rng5MtEMMtVAgOpcBb7AUfeMy4w@mail.gmail.com>
+ <AM0PR10MB3107C0F557337A41057CB81299199@AM0PR10MB3107.EURPRD10.PROD.OUTLOOK.COM>
+ <CANNYZj-U3ur+h3USCsxa+DEy7cEowB-ZTpx4JetiMsmNVdJBxw@mail.gmail.com>
+ <20220329162248.GA5565@localhost>
+ <AM6PR10MB31095749082F8D8A5C834F8D991F9@AM6PR10MB3109.EURPRD10.PROD.OUTLOOK.COM>
+ <20220330134021.GA37593@localhost>
+ <45259bd7552252f4b649806913141faf1389c38a.camel@linuxfoundation.org>
+ <20220330212855.GA35568@localhost>
+In-Reply-To: <20220330212855.GA35568@localhost>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 26 May 2022 14:02:50 +0200
+Message-ID: 
+ <CA+chaQd329P4PZpVL7yTCoTBCEqZHpz6b5sJ_jBZFNGNuZNr4A@mail.gmail.com>
+Subject: do_patch failing when executed multiple times in the same S=WORKDIR
+ Was: [yocto] Strange sporadic build issues (incremental builds in docker
+ container)
+To: Trevor Woerner <twoerner@gmail.com>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>,
+	Matthias Klein <matthias.klein@optimeas.de>,
+ Alexander Kanavin <alex.kanavin@gmail.com>,
+	"yocto@lists.yoctoproject.org" <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="000000000000698c5105dfe8f951"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 May 2022 09:54:42 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 May 2022 12:03:22 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97278
+ https://lists.openembedded.org/g/openembedded-devel/message/97279
 
---_004_PN3PR01MB73821ADA1C19291A9F9F9AC98FD99PN3PR01MB7382INDP_
-Content-Type: multipart/alternative;
-	boundary="_000_PN3PR01MB73821ADA1C19291A9F9F9AC98FD99PN3PR01MB7382INDP_"
-
---_000_PN3PR01MB73821ADA1C19291A9F9F9AC98FD99PN3PR01MB7382INDP_
-Content-Type: text/plain; charset="us-ascii"
+--000000000000698c5105dfe8f951
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Armin,
+On Wed, Mar 30, 2022 at 11:29 PM Trevor Woerner <twoerner@gmail.com> wrote:
 
-We have sent this patch for dunfell so you can take this.
-This will get applied without any conflicts.
-
-
-Thanks,
-
-Best Regards,
-
-Ranjitsinh Rathod
-Technical Leader |  | KPIT Technologies Ltd.
-Cellphone: +91-84606 92403
-__________________________________________
-KPIT<http://www.kpit.com/> | Follow us on LinkedIn<http://www.kpit.com/link=
-edin>
-
-[cid:b6e2bcdd-50e6-4e46-9a5e-3b937bdb5793]<https://www.kpit.com/TheNewBrand=
+> On Wed 2022-03-30 @ 04:08:31 PM, Richard Purdie wrote:
+> > On Wed, 2022-03-30 at 09:40 -0400, Trevor Woerner wrote:
+> > > Hi Matthias,
+> > >
+> > > On Wed 2022-03-30 @ 06:32:00 AM, Matthias Klein wrote:
+> > > > Yes, you are right, it is mostly the same recipes that fail. But
+> they also change from time to time.
+> > > > Today it happened to me even without Jenkins and Docker, normally i=
+n
+> the console with the recipe keymaps_1.0.bb.
+> > >
+> > > And keymaps follows the exact same pattern as modutils-initscripts an=
+d
+> > > initscripts; namely that their sources are entirely contained in-tree=
+:
+> > >
+> > >     keymaps/
+> > >     =E2=94=9C=E2=94=80=E2=94=80 files
+> > >     =E2=94=82   =E2=94=9C=E2=94=80=E2=94=80 GPLv2.patch
+> > >     =E2=94=82   =E2=94=94=E2=94=80=E2=94=80 keymap.sh
+> > >     =E2=94=94=E2=94=80=E2=94=80 keymaps_1.0.bb
+> > >
+> > >     keymaps/keymaps_1.0.bb
+> > >      23 SRC_URI =3D "file://keymap.sh \
+> > >      24            file://GPLv2.patch"
+> > >
+> > > Any recipe that follows this pattern is susceptible, it's probably
+> just a
+> > > coincidence that most of my failures happened to be with the two
+> recipes I
+> > > mentioned.
+> > >
+> > > This issue has revealed a bug, and fixing that bug would be great.
+> However,
+> > > the thing is, keymap.sh is a shell program written 12 years ago which
+> hasn't
+> > > changed since. The GPL/COPYING file is only there for "reasons". The
+> license
+> > > file doesn't *need* to be moved into the build area for this recipe t=
+o
+> get its
+> > > job done (namely installing keymap.sh into the image's sysvinit).
+> >
+> > The "good" news is I did work out how to reproduce this.
+> >
+> > bitbake keymaps -c clean
+> > bitbake keymaps
+> > bitbake keymaps -c unpack -f
+> > bitbake keymaps -c patch
+> > bitbake keymaps -c unpack -f
+> > bitbake keymaps -c patch
+>
+> Awesome! That is a very simple and quick reproducer!
+>
+> > I haven't looked at why but hopefully that helps us more forward with
+> looking at
+> > the issue.
+> >
+> > The complications with S =3D=3D WORKDIR were one of the reasons I did s=
+tart
+> work on
+> > patches to make it work better and maybe move fetching into a dedicated
+> > direction rather than WORKDIR and then symlink things. I never got that
+> patch to
+> > work well enough to submit though (and it is too late for a major chang=
+e
+> like
+> > that in this release).
+>
+> As per our conversation I quickly tried the following (not that I expecte=
+d
+> this to be a final solution, but just a poking-around kind of thing):
+>
+>         diff --git a/meta/classes/base.bbclass b/meta/classes/base.bbclas=
+s
+>         index cc81461473..503da61b3d 100644
+>         --- a/meta/classes/base.bbclass
+>         +++ b/meta/classes/base.bbclass
+>         @@ -170,6 +170,7 @@ do_unpack[dirs] =3D "${WORKDIR}"
+>          do_unpack[cleandirs] =3D "${@d.getVar('S') if
+> os.path.normpath(d.getVar('S')) !=3D os.path.normpath(d.getVar('WORKDIR')=
+)
+> else os.path.join('${S}', 'patches')}"
+>
+>          python base_do_unpack() {
+>         +    bb.utils.remove(d.getVar('B') + "/.pc", recurse=3DTrue)
+>              src_uri =3D (d.getVar('SRC_URI') or "").split()
+>              if not src_uri:
+>                  return
+>
+> And it changed the error message from:
+>
+>         $ bitbake keymaps -c patch
+>         ...
+>         ERROR: keymaps-1.0-r31 do_patch: Applying patch 'GPLv2.patch' on
+> target directory
+> '/z/build-master/quilt-fix/qemux86/nodistro/build/tmp-glibc/work/qemux86-=
+oe-linux/keymaps/1.0-r31'
+>         CmdError('quilt --quiltrc
+> /z/build-master/quilt-fix/qemux86/nodistro/build/tmp-glibc/work/qemux86-o=
+e-linux/keymaps/1.0-r31/recipe-sysroot-native/etc/quiltrc
+> push', 0, 'stdout:
+>         stderr: File series fully applied, ends at patch GPLv2.patch
+>         ')
+>
+> to:
+>
+>         $ bitbake keymaps -c patch
+>         ...
+>         ERROR: keymaps-1.0-r31 do_patch: Applying patch 'GPLv2.patch' on
+> target directory
+> '/z/build-master/quilt-fix/qemux86/nodistro/build/tmp-glibc/work/qemux86-=
+oe-linux/keymaps/1.0-r31'
+>         CmdError('quilt --quiltrc
+> /z/build-master/quilt-fix/qemux86/nodistro/build/tmp-glibc/work/qemux86-o=
+e-linux/keymaps/1.0-r31/recipe-sysroot-native/etc/quiltrc
+> push', 0, 'stdout: Applying patch GPLv2.patch
+>         The next patch would create the file COPYING,
+>         which already exists!  Applying it anyway.
+>         patching file COPYING
+>         Hunk #1 FAILED at 1.
+>         1 out of 1 hunk FAILED -- rejects in file COPYING
+>         Patch GPLv2.patch can be reverse-applied
+>
+>         stderr: ')
+>
+> progress?
+> https://www.reddit.com/r/ProgrammerHumor/comments/8j5qim/progress/
 >
 
-________________________________
-From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.o=
-penembedded.org> on behalf of omkar via lists.openembedded.org <omkarpatil1=
-0.93=3Dgmail.com@lists.openembedded.org>
-Sent: Thursday, May 26, 2022 3:14 PM
-To: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.ope=
-nembedded.org>; omkarpatil10.93@gmail.com <omkarpatil10.93@gmail.com>
-Cc: Ranjitsinh Rathod <Ranjitsinh.Rathod@kpit.com>; Omkar Patil <Omkar.Pati=
-l@kpit.com>
-Subject: [oe][meta-filesystems][dunfell][PATCH] fuse: Set CVE_PRODUCT
++oe-core ML as it isn't poky/yocto specific
 
-Caution: This email originated from outside of the KPIT. Do not click links=
- or open attachments unless you recognize the sender and know the content i=
-s safe.
+Just small update as multiple people mentioned this (in case I don't send
+the final fix later today).
 
-From: Omkar Patil <omkar.patil@kpit.com>
+There are couple recipes affected by this e.g. keymaps (.patch already
+removed in oe-core), makedevs (.patch removal sent to ML yesterday
+https://lists.openembedded.org/g/openembedded-core/message/166172), devmem2
+(https://lists.openembedded.org/g/openembedded-devel/message/97270), but
+there are other recipes with S =3D "${WORKDIR}" where you can trigger this
+e.g. by having a .patch file in DISTRO layer .bbappend (e.g. tzdata with
+webOS
+https://github.com/webosose/meta-webosose/blob/06e5298d9f5c47679b679081d993=
+0f8d1c776142/meta-webos/recipes-extended/tzdata/tzdata.bbappend#L10
+)
 
-set CVE_PRODUCT to avoid wrongly reported CVEs
+This do_patch issue is caused by:
+https://git.savannah.nongnu.org/cgit/quilt.git/commit/?id=3D8b39a960afcf45c=
+d4f5804ae62b6b0656bdb191d
+introduced in kirkstone with:
+https://git.openembedded.org/openembedded-core/commit/?h=3Dkirkstone&id=3Df=
+a71afcee9ab42198c619333b77a15bd2ae02b20
 
-Signed-off-by: Omkar Patil <omkar.patil@kpit.com>
-Signed-off-by: Omkar Patil <omkarpatil10.93@gmail.com>
----
- meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb | 3 +++
- meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb  | 6 ++----
- 2 files changed, 5 insertions(+), 4 deletions(-)
+I'm still looking how to fix this properly, but the shortest sequence to
+reproduce this is just
+bitbake keymaps -c patch
+bitbake keymaps -c unpack -f
+bitbake keymaps -c patch
+with
+https://git.openembedded.org/openembedded-core/commit/?id=3D17d981005a0c0c9=
+7702ad88602b7181b69bcc9eb
+reverted.
 
-diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb b/meta-fi=
-lesystems/recipes-support/fuse/fuse3_3.9.2.bb
-index 24b17fc93..b15bcd228 100644
---- a/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb
-+++ b/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb
-@@ -22,6 +22,9 @@ UPSTREAM_CHECK_REGEX =3D "fuse\-(?P<pver>3(\.\d+)+).tar.x=
-z"
+And the change in quilt behavior is causing QuiltTree.Clean (quilt pop -a
+-f) in:
+https://git.openembedded.org/openembedded-core/tree/meta/lib/oe/patch.py?id=
+=3D17d981005a0c0c97702ad88602b7181b69bcc9eb#n601
 
- inherit meson pkgconfig
+to fail with "No series file found" before undoing the patches in WORKDIR.
 
-+# set vendor along with fuse to fix wrongly reported CVEs
-+CVE_PRODUCT =3D "fuse_project:fuse"
-+
- DEPENDS =3D "udev"
+Removing ".pc" as Trevor tried above doesn't help, because we really need
+quilt's help to undo the patches (in this case to delete COPYING file from
+WORKDIR before applying the .patch which tries to add it again), because
+do_unpack cannot just wipe S and start over (because S =3D=3D WORKDIR) - no=
+t
+selectively removing the files listed in SRC_URI, because COPYING file
+isn't listed there.
 
- PACKAGES =3D+ "fuse3-utils"
-diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb b/meta-fil=
-esystems/recipes-support/fuse/fuse_2.9.9.bb
-index 49682b3cd..cfd9650c9 100644
---- a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
-+++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
-@@ -19,10 +19,8 @@ SRC_URI =3D "https://apc01.safelinks.protection.outlook.=
-com/?url=3Dhttps%3A%2F%2Fgithub.com%2Flibfuse%2Flibfuse%2Freleases%2Fdownlo=
-ad%2F%24&amp;data=3D05%7C01%7Cranjitsinh.rathod%40kpit.com%7C83b651494f5444=
-d27b7408da3efc9091%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C63789155178=
-9489516%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI=
-6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=3D8ioNpnZj3C%2BoQR0JYG3ug=
-7T23KvkRXMX9ST3YUwhzQM%3D&amp;reserved=3D0{BP}/${BP}.tar.
- SRC_URI[md5sum] =3D "8000410aadc9231fd48495f7642f3312"
- SRC_URI[sha256sum] =3D "d0e69d5d608cc22ff4843791ad097f554dd32540ddc9bed763=
-8cc6fea7c1b4b5"
+Using skip_series_check in 'quilt pop' (partially reverting the change from
+upstream) helps a bit, but might be difficult to upstream.
 
--# CVE-2019-14860 is a REDHAT specific issue and was addressed for REDHAT F=
-use products on Red Hat Fuse 7.4.1 and Red Hat Fuse 7.5.0.
--# REDHAT has also released the fix and updated their security advisories a=
-fter significant releases.
--CVE_PRODUCT =3D "fuse"
--CVE_CHECK_WHITELIST +=3D "CVE-2019-14860"
-+# set vendor along with fuse to fix wrongly reported CVEs
-+CVE_PRODUCT =3D "fuse_project:fuse"
+Will send a fix later today or next week.
 
- UPSTREAM_CHECK_URI =3D "https://apc01.safelinks.protection.outlook.com/?ur=
-l=3Dhttps%3A%2F%2Fgithub.com%2Flibfuse%2Flibfuse%2Freleases&amp;data=3D05%7=
-C01%7Cranjitsinh.rathod%40kpit.com%7C83b651494f5444d27b7408da3efc9091%7C353=
-9451eb46e4a26a242ff61502855c7%7C0%7C0%7C637891551789489516%7CUnknown%7CTWFp=
-bGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%=
-7C3000%7C%7C%7C&amp;sdata=3Do2sHG5VW6H%2BXEqkBThXg81ziwC6%2FaTFcbSYtVSpxrQ4=
-%3D&amp;reserved=3D0"
- UPSTREAM_CHECK_REGEX =3D "fuse\-(?P<pver>2(\.\d+)+).tar.gz"
---
-2.17.1
+Cheers,
 
-This message contains information that may be privileged or confidential an=
-d is the property of the KPIT Technologies Ltd. It is intended only for the=
- person to whom it is addressed. If you are not the intended recipient, you=
- are not authorized to read, print, retain copy, disseminate, distribute, o=
-r use this message or any part thereof. If you receive this message in erro=
-r, please notify the sender immediately and delete all copies of this messa=
-ge. KPIT Technologies Ltd. does not accept any liability for virus infected=
- mails.
-
---_000_PN3PR01MB73821ADA1C19291A9F9F9AC98FD99PN3PR01MB7382INDP_
-Content-Type: text/html; charset="us-ascii"
+--000000000000698c5105dfe8f951
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
-ttom:0;} </style>
-</head>
-<body dir=3D"ltr">
-<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
-: 12pt; color: rgb(0, 0, 0);">
-Hi Armin,</div>
-<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
-: 12pt; color: rgb(0, 0, 0);">
+<div dir=3D"ltr"><div dir=3D"ltr">On Wed, Mar 30, 2022 at 11:29 PM Trevor W=
+oerner &lt;<a href=3D"mailto:twoerner@gmail.com">twoerner@gmail.com</a>&gt;=
+ wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quot=
+e" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204)=
+;padding-left:1ex">On Wed 2022-03-30 @ 04:08:31 PM, Richard Purdie wrote:<b=
+r>
+&gt; On Wed, 2022-03-30 at 09:40 -0400, Trevor Woerner wrote:<br>
+&gt; &gt; Hi Matthias,<br>
+&gt; &gt; <br>
+&gt; &gt; On Wed 2022-03-30 @ 06:32:00 AM, Matthias Klein wrote:<br>
+&gt; &gt; &gt; Yes, you are right, it is mostly the same recipes that fail.=
+ But they also change from time to time.<br>
+&gt; &gt; &gt; Today it happened to me even without Jenkins and Docker, nor=
+mally in the console with the recipe <a href=3D"http://keymaps_1.0.bb" rel=
+=3D"noreferrer" target=3D"_blank">keymaps_1.0.bb</a>.<br>
+&gt; &gt; <br>
+&gt; &gt; And keymaps follows the exact same pattern as modutils-initscript=
+s and<br>
+&gt; &gt; initscripts; namely that their sources are entirely contained in-=
+tree:<br>
+&gt; &gt; <br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0keymaps/<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0=E2=94=9C=E2=94=80=E2=94=80 files<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0=E2=94=82=C2=A0=C2=A0 =E2=94=9C=E2=94=80=E2=94=
+=80 GPLv2.patch<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0=E2=94=82=C2=A0=C2=A0 =E2=94=94=E2=94=80=E2=94=
+=80 keymap.sh<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0=E2=94=94=E2=94=80=E2=94=80 <a href=3D"http://=
+keymaps_1.0.bb" rel=3D"noreferrer" target=3D"_blank">keymaps_1.0.bb</a><br>
+&gt; &gt; <br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0keymaps/<a href=3D"http://keymaps_1.0.bb" rel=
+=3D"noreferrer" target=3D"_blank">keymaps_1.0.bb</a><br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 23 SRC_URI =3D &quot;file://keymap.sh \<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 24=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 f=
+ile://GPLv2.patch&quot;<br>
+&gt; &gt; <br>
+&gt; &gt; Any recipe that follows this pattern is susceptible, it&#39;s pro=
+bably just a<br>
+&gt; &gt; coincidence that most of my failures happened to be with the two =
+recipes I<br>
+&gt; &gt; mentioned.<br>
+&gt; &gt; <br>
+&gt; &gt; This issue has revealed a bug, and fixing that bug would be great=
+. However,<br>
+&gt; &gt; the thing is, keymap.sh is a shell program written 12 years ago w=
+hich hasn&#39;t<br>
+&gt; &gt; changed since. The GPL/COPYING file is only there for &quot;reaso=
+ns&quot;. The license<br>
+&gt; &gt; file doesn&#39;t *need* to be moved into the build area for this =
+recipe to get its<br>
+&gt; &gt; job done (namely installing keymap.sh into the image&#39;s sysvin=
+it).<br>
+&gt; <br>
+&gt; The &quot;good&quot; news is I did work out how to reproduce this.<br>
+&gt; <br>
+&gt; bitbake keymaps -c clean<br>
+&gt; bitbake keymaps<br>
+&gt; bitbake keymaps -c unpack -f<br>
+&gt; bitbake keymaps -c patch<br>
+&gt; bitbake keymaps -c unpack -f<br>
+&gt; bitbake keymaps -c patch<br>
 <br>
-</div>
-<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
-: 12pt; color: rgb(0, 0, 0);">
-We have sent this patch for dunfell so you can take this.</div>
-<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
-: 12pt; color: rgb(0, 0, 0);">
-This will get applied without any conflicts.</div>
-<div>
-<div id=3D"Signature">
-<div>
-<div></div>
-<div></div>
-<div style=3D"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12p=
-t; color:rgb(0,0,0)">
-<p style=3D"margin:0in; font-size:11pt; font-family:Calibri,sans-serif; col=
-or:rgb(32,31,30); text-align:start; background-color:rgb(255,255,255)">
-<span style=3D"color:rgb(89,89,89); font-family:&quot;Work Sans&quot;; font=
--size:10pt"><span style=3D"color:rgb(0,0,0); font-family:Calibri,Arial,Helv=
-etica,sans-serif; font-size:16px; background-color:rgb(255,255,255); displa=
-y:inline!important"><br>
-</span></span></p>
-<p style=3D"margin:0in; font-size:11pt; font-family:Calibri,sans-serif; col=
-or:rgb(32,31,30); text-align:start; background-color:rgb(255,255,255)">
-<span style=3D"color:rgb(89,89,89); font-family:&quot;Work Sans&quot;; font=
--size:10pt"><span style=3D"color:rgb(0,0,0); font-family:Calibri,Arial,Helv=
-etica,sans-serif; font-size:16px; background-color:rgb(255,255,255); displa=
-y:inline!important">Thanks,</span><br>
-</span></p>
-<p style=3D"margin:0in; font-size:11pt; font-family:Calibri,sans-serif; col=
-or:rgb(32,31,30); text-align:start; background-color:rgb(255,255,255)">
-<span style=3D"color:rgb(89,89,89); font-family:&quot;Work Sans&quot;; font=
--size:10pt">Best Regards,</span><br>
-</p>
-<p style=3D"margin:0in 0in 12pt; font-size:11pt; font-family:Calibri,sans-s=
-erif; color:rgb(32,31,30); text-align:start; background-color:rgb(255,255,2=
-55)">
-<span lang=3D"EN-IN" style=3D"margin:0px; font-family:&quot;Work Sans Mediu=
-m&quot;; color:rgb(89,89,89)"><b>Ranjitsinh Rathod</b></span><span lang=3D"=
-EN-IN" style=3D"margin:0px; font-size:14pt; font-family:&quot;Work Sans&quo=
-t;; color:rgb(0,137,207)"><br>
-</span><span lang=3D"EN-IN" style=3D"margin:0px; font-size:9pt; font-family=
-:&quot;Work Sans&quot;; color:rgb(127,127,127)">Technical Leader |&nbsp;&nb=
-sp;| KPIT Technologies Ltd.<br>
-Cellphone: +91-84606 92403<br>
-</span><b><sup><span lang=3D"EN-IN" style=3D"margin:0px; font-size:14pt; fo=
-nt-family:&quot;Work Sans&quot;; color:rgb(176,255,69)">___________________=
-_______________________<br>
-</span></sup></b><span style=3D"margin:0px; color:rgb(31,73,125)"><a href=
-=3D"http://www.kpit.com/" target=3D"_blank" rel=3D"noopener noreferrer" sty=
-le=3D"margin:0px"><span lang=3D"EN-IN" style=3D"margin:0px; font-size:12pt;=
- font-family:&quot;Work Sans Medium&quot;; color:gray">KPIT</span></a></spa=
-n><span style=3D"margin:0px; font-family:&quot;Work Sans&quot;; color:gray"=
-><span>&nbsp;</span></span><span lang=3D"EN-IN" style=3D"margin:0px; font-s=
-ize:12pt; font-family:&quot;Work Sans&quot;; color:gray">|</span><span lang=
-=3D"EN-IN" style=3D"margin:0px; font-size:9pt; font-family:&quot;Work Sans&=
-quot;; color:gray"><span>&nbsp;</span></span><span style=3D"margin:0px; col=
-or:rgb(31,73,125)"><a href=3D"http://www.kpit.com/linkedin" target=3D"_blan=
-k" rel=3D"noopener noreferrer" style=3D"margin:0px"><span lang=3D"EN-IN" st=
-yle=3D"margin:0px; font-size:9pt; font-family:&quot;Work Sans&quot;; color:=
-gray">Follow
- us on LinkedIn</span></a></span><span style=3D"margin:0px; font-size:9pt; =
-font-family:&quot;Work Sans&quot;; color:rgb(89,89,89)"></span><span style=
-=3D"margin:0px; font-size:12pt; font-family:&quot;Times New Roman&quot;,ser=
-if"></span></p>
-<p style=3D"margin:0in; font-size:11pt; font-family:Calibri,sans-serif; col=
-or:rgb(32,31,30); text-align:start; background-color:rgb(255,255,255)">
-<a href=3D"https://www.kpit.com/TheNewBrand" target=3D"_blank" rel=3D"noope=
-ner noreferrer" style=3D"margin:0px"><span style=3D"margin:0px; color:rgb(3=
-1,73,125)"><img class=3D"EmojiInsert" width=3D"621" height=3D"120" style=3D=
-"margin:0px; width:6.4687in; height:1.25in" data-outlook-trace=3D"F:1|T:1" =
-src=3D"cid:b6e2bcdd-50e6-4e46-9a5e-3b937bdb5793"></span></a></p>
-</div>
-</div>
-</div>
-</div>
-<div id=3D"appendonsend"></div>
-<hr style=3D"display:inline-block;width:98%" tabindex=3D"-1">
-<div id=3D"divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" st=
-yle=3D"font-size:11pt" color=3D"#000000"><b>From:</b> openembedded-devel@li=
-sts.openembedded.org &lt;openembedded-devel@lists.openembedded.org&gt; on b=
-ehalf of omkar via lists.openembedded.org &lt;omkarpatil10.93=3Dgmail.com@l=
-ists.openembedded.org&gt;<br>
-<b>Sent:</b> Thursday, May 26, 2022 3:14 PM<br>
-<b>To:</b> openembedded-devel@lists.openembedded.org &lt;openembedded-devel=
-@lists.openembedded.org&gt;; omkarpatil10.93@gmail.com &lt;omkarpatil10.93@=
-gmail.com&gt;<br>
-<b>Cc:</b> Ranjitsinh Rathod &lt;Ranjitsinh.Rathod@kpit.com&gt;; Omkar Pati=
-l &lt;Omkar.Patil@kpit.com&gt;<br>
-<b>Subject:</b> [oe][meta-filesystems][dunfell][PATCH] fuse: Set CVE_PRODUC=
-T</font>
-<div>&nbsp;</div>
-</div>
-<div class=3D"BodyFragment"><font size=3D"2"><span style=3D"font-size:11pt;=
-">
-<div class=3D"PlainText">Caution: This email originated from outside of the=
- KPIT. Do not click links or open attachments unless you recognize the send=
-er and know the content is safe.<br>
+Awesome! That is a very simple and quick reproducer!<br>
 <br>
-From: Omkar Patil &lt;omkar.patil@kpit.com&gt;<br>
+&gt; I haven&#39;t looked at why but hopefully that helps us more forward w=
+ith looking at<br>
+&gt; the issue.<br>
+&gt; <br>
+&gt; The complications with S =3D=3D WORKDIR were one of the reasons I did =
+start work on<br>
+&gt; patches to make it work better and maybe move fetching into a dedicate=
+d<br>
+&gt; direction rather than WORKDIR and then symlink things. I never got tha=
+t patch to<br>
+&gt; work well enough to submit though (and it is too late for a major chan=
+ge like<br>
+&gt; that in this release).<br>
 <br>
-set CVE_PRODUCT to avoid wrongly reported CVEs<br>
-<br>
-Signed-off-by: Omkar Patil &lt;omkar.patil@kpit.com&gt;<br>
-Signed-off-by: Omkar Patil &lt;omkarpatil10.93@gmail.com&gt;<br>
----<br>
-&nbsp;meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb | 3 +++<br>
-&nbsp;meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb&nbsp; | 6 ++----<=
+As per our conversation I quickly tried the following (not that I expected<=
 br>
-&nbsp;2 files changed, 5 insertions(+), 4 deletions(-)<br>
+this to be a final solution, but just a poking-around kind of thing):<br>
 <br>
-diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb b/meta-fi=
-lesystems/recipes-support/fuse/fuse3_3.9.2.bb<br>
-index 24b17fc93..b15bcd228 100644<br>
---- a/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb<br>
-+++ b/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb<br>
-@@ -22,6 +22,9 @@ UPSTREAM_CHECK_REGEX =3D &quot;fuse\-(?P&lt;pver&gt;3(\.\=
-d+)+).tar.xz&quot;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 diff --git a/meta/classes/base.bbclass b/meta/c=
+lasses/base.bbclass<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 index cc81461473..503da61b3d 100644<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 --- a/meta/classes/base.bbclass<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 +++ b/meta/classes/base.bbclass<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 @@ -170,6 +170,7 @@ do_unpack[dirs] =3D &quot;$=
+{WORKDIR}&quot;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0do_unpack[cleandirs] =3D &quot;${@d.getVa=
+r(&#39;S&#39;) if os.path.normpath(d.getVar(&#39;S&#39;)) !=3D os.path.norm=
+path(d.getVar(&#39;WORKDIR&#39;)) else os.path.join(&#39;${S}&#39;, &#39;pa=
+tches&#39;)}&quot;<br>
 <br>
-&nbsp;inherit meson pkgconfig<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0python base_do_unpack() {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 +=C2=A0 =C2=A0 bb.utils.remove(d.getVar(&#39;B&=
+#39;) + &quot;/.pc&quot;, recurse=3DTrue)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0src_uri =3D (d.getVar(&#39;=
+SRC_URI&#39;) or &quot;&quot;).split()<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if not src_uri:<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return<br>
 <br>
-+# set vendor along with fuse to fix wrongly reported CVEs<br>
-+CVE_PRODUCT =3D &quot;fuse_project:fuse&quot;<br>
-+<br>
-&nbsp;DEPENDS =3D &quot;udev&quot;<br>
+And it changed the error message from:<br>
 <br>
-&nbsp;PACKAGES =3D+ &quot;fuse3-utils&quot;<br>
-diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb b/meta-fil=
-esystems/recipes-support/fuse/fuse_2.9.9.bb<br>
-index 49682b3cd..cfd9650c9 100644<br>
---- a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb<br>
-+++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb<br>
-@@ -19,10 +19,8 @@ SRC_URI =3D &quot;<a href=3D""></a>https://apc01.safelin=
-ks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fgithub.com%2Flibfuse%2Flibfu=
-se%2Freleases%2Fdownload%2F%24&amp;amp;data=3D05%7C01%7Cranjitsinh.rathod%4=
-0kpit.com%7C83b651494f5444d27b7408da3efc9091%7C3539451eb46e4a26a242ff615028=
-55c7%7C0%7C0%7C637891551789489516%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwM=
-DAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;amp;s=
-data=3D8ioNpnZj3C%2BoQR0JYG3ug7T23KvkRXMX9ST3YUwhzQM%3D&amp;amp;reserved=3D=
-0{BP}/${BP}.tar.<br>
-&nbsp;SRC_URI[md5sum] =3D &quot;8000410aadc9231fd48495f7642f3312&quot;<br>
-&nbsp;SRC_URI[sha256sum] =3D &quot;d0e69d5d608cc22ff4843791ad097f554dd32540=
-ddc9bed7638cc6fea7c1b4b5&quot;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 $ bitbake keymaps -c patch<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ...<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ERROR: keymaps-1.0-r31 do_patch: Applying patch=
+ &#39;GPLv2.patch&#39; on target directory &#39;/z/build-master/quilt-fix/q=
+emux86/nodistro/build/tmp-glibc/work/qemux86-oe-linux/keymaps/1.0-r31&#39;<=
+br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 CmdError(&#39;quilt --quiltrc /z/build-master/q=
+uilt-fix/qemux86/nodistro/build/tmp-glibc/work/qemux86-oe-linux/keymaps/1.0=
+-r31/recipe-sysroot-native/etc/quiltrc push&#39;, 0, &#39;stdout:<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 stderr: File series fully applied, ends at patc=
+h GPLv2.patch<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 &#39;)<br>
 <br>
--# CVE-2019-14860 is a REDHAT specific issue and was addressed for REDHAT F=
-use products on Red Hat Fuse 7.4.1 and Red Hat Fuse 7.5.0.<br>
--# REDHAT has also released the fix and updated their security advisories a=
-fter significant releases.<br>
--CVE_PRODUCT =3D &quot;fuse&quot;<br>
--CVE_CHECK_WHITELIST +=3D &quot;CVE-2019-14860&quot;<br>
-+# set vendor along with fuse to fix wrongly reported CVEs<br>
-+CVE_PRODUCT =3D &quot;fuse_project:fuse&quot;<br>
+to:<br>
 <br>
-&nbsp;UPSTREAM_CHECK_URI =3D &quot;<a href=3D"https://apc01.safelinks.prote=
-ction.outlook.com/?url=3Dhttps%3A%2F%2Fgithub.com%2Flibfuse%2Flibfuse%2Frel=
-eases&amp;amp;data=3D05%7C01%7Cranjitsinh.rathod%40kpit.com%7C83b651494f544=
-4d27b7408da3efc9091%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C6378915517=
-89489516%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTi=
-I6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;amp;sdata=3Do2sHG5VW6H%2BXEqkB=
-ThXg81ziwC6%2FaTFcbSYtVSpxrQ4%3D&amp;amp;reserved=3D0">https://apc01.safeli=
-nks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fgithub.com%2Flibfuse%2Flibf=
-use%2Freleases&amp;amp;data=3D05%7C01%7Cranjitsinh.rathod%40kpit.com%7C83b6=
-51494f5444d27b7408da3efc9091%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C6=
-37891551789489516%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luM=
-zIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;amp;sdata=3Do2sHG5VW6=
-H%2BXEqkBThXg81ziwC6%2FaTFcbSYtVSpxrQ4%3D&amp;amp;reserved=3D0</a>&quot;<br=
->
-&nbsp;UPSTREAM_CHECK_REGEX =3D &quot;fuse\-(?P&lt;pver&gt;2(\.\d+)+).tar.gz=
-&quot;<br>
---<br>
-2.17.1<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 $ bitbake keymaps -c patch<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ...<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 ERROR: keymaps-1.0-r31 do_patch: Applying patch=
+ &#39;GPLv2.patch&#39; on target directory &#39;/z/build-master/quilt-fix/q=
+emux86/nodistro/build/tmp-glibc/work/qemux86-oe-linux/keymaps/1.0-r31&#39;<=
+br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 CmdError(&#39;quilt --quiltrc /z/build-master/q=
+uilt-fix/qemux86/nodistro/build/tmp-glibc/work/qemux86-oe-linux/keymaps/1.0=
+-r31/recipe-sysroot-native/etc/quiltrc push&#39;, 0, &#39;stdout: Applying =
+patch GPLv2.patch<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 The next patch would create the file COPYING,<b=
+r>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 which already exists!=C2=A0 Applying it anyway.=
 <br>
-</div>
-</span></font></div>
-This message contains information that may be privileged or confidential an=
-d is the property of the KPIT Technologies Ltd. It is intended only for the=
- person to whom it is addressed. If you are not the intended recipient, you=
- are not authorized to read, print,
- retain copy, disseminate, distribute, or use this message or any part ther=
-eof. If you receive this message in error, please notify the sender immedia=
-tely and delete all copies of this message. KPIT Technologies Ltd. does not=
- accept any liability for virus
- infected mails.
-</body>
-</html>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 patching file COPYING<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 Hunk #1 FAILED at 1.<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 1 out of 1 hunk FAILED -- rejects in file COPYI=
+NG<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 Patch GPLv2.patch can be reverse-applied<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 stderr: &#39;)<br>
+<br>
+progress? <a href=3D"https://www.reddit.com/r/ProgrammerHumor/comments/8j5q=
+im/progress/" rel=3D"noreferrer" target=3D"_blank">https://www.reddit.com/r=
+/ProgrammerHumor/comments/8j5qim/progress/</a><br>
+</blockquote><div><br></div><div>+oe-core ML as it isn&#39;t poky/yocto spe=
+cific<br></div><div><br></div><div>Just small update as multiple people men=
+tioned this (in case I don&#39;t send the final fix later today).</div><div=
+><br></div><div>There are couple recipes affected by this e.g. keymaps (.pa=
+tch already removed in oe-core), makedevs (.patch removal sent to ML yester=
+day <a href=3D"https://lists.openembedded.org/g/openembedded-core/message/1=
+66172">https://lists.openembedded.org/g/openembedded-core/message/166172</a=
+>), devmem2 (<a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/message/97270">https://lists.openembedded.org/g/openembedded-devel/message=
+/97270</a>), but there are other recipes with S =3D &quot;${WORKDIR}&quot; =
+where you can trigger this e.g. by having a .patch file in DISTRO layer .bb=
+append (e.g. tzdata with webOS=C2=A0<a href=3D"https://github.com/webosose/=
+meta-webosose/blob/06e5298d9f5c47679b679081d9930f8d1c776142/meta-webos/reci=
+pes-extended/tzdata/tzdata.bbappend#L10">https://github.com/webosose/meta-w=
+ebosose/blob/06e5298d9f5c47679b679081d9930f8d1c776142/meta-webos/recipes-ex=
+tended/tzdata/tzdata.bbappend#L10</a>)</div><div><br></div><div>This do_pat=
+ch issue is caused by:</div><div><a href=3D"https://git.savannah.nongnu.org=
+/cgit/quilt.git/commit/?id=3D8b39a960afcf45cd4f5804ae62b6b0656bdb191d">http=
+s://git.savannah.nongnu.org/cgit/quilt.git/commit/?id=3D8b39a960afcf45cd4f5=
+804ae62b6b0656bdb191d</a></div><div>introduced in kirkstone with:</div><div=
+><a href=3D"https://git.openembedded.org/openembedded-core/commit/?h=3Dkirk=
+stone&amp;id=3Dfa71afcee9ab42198c619333b77a15bd2ae02b20">https://git.openem=
+bedded.org/openembedded-core/commit/?h=3Dkirkstone&amp;id=3Dfa71afcee9ab421=
+98c619333b77a15bd2ae02b20</a></div><div><br></div><div>I&#39;m still lookin=
+g how to fix this properly, but the shortest sequence to reproduce this is =
+just</div><div>bitbake keymaps -c patch<br>bitbake keymaps -c unpack -f<br>=
+bitbake keymaps -c patch<br></div><div>with=C2=A0<a href=3D"https://git.ope=
+nembedded.org/openembedded-core/commit/?id=3D17d981005a0c0c97702ad88602b718=
+1b69bcc9eb">https://git.openembedded.org/openembedded-core/commit/?id=3D17d=
+981005a0c0c97702ad88602b7181b69bcc9eb</a> reverted.</div><div><br></div><di=
+v>And the change in quilt behavior is causing=C2=A0QuiltTree.Clean (quilt p=
+op -a -f) in:</div><div><a href=3D"https://git.openembedded.org/openembedde=
+d-core/tree/meta/lib/oe/patch.py?id=3D17d981005a0c0c97702ad88602b7181b69bcc=
+9eb#n601">https://git.openembedded.org/openembedded-core/tree/meta/lib/oe/p=
+atch.py?id=3D17d981005a0c0c97702ad88602b7181b69bcc9eb#n601</a><br></div><di=
+v><br></div><div>to fail with &quot;No series file found&quot; before undoi=
+ng the patches in WORKDIR.</div><div><br></div><div>Removing &quot;.pc&quot=
+; as Trevor tried above doesn&#39;t help, because we really need quilt&#39;=
+s help to undo the patches (in this case to delete COPYING file from WORKDI=
+R before applying the .patch which tries to add it again), because do_unpac=
+k cannot just wipe S and start over (because S =3D=3D WORKDIR) - not select=
+ively removing the files listed in SRC_URI, because COPYING file isn&#39;t =
+listed there.</div><div><br></div><div>Using skip_series_check in &#39;quil=
+t pop&#39; (partially reverting the change from upstream) helps a bit, but =
+might be difficult to upstream.<br></div><div><br></div><div>Will send a fi=
+x later today or next week.</div><div><br></div><div>Cheers,</div></div></d=
+iv>
 
---_000_PN3PR01MB73821ADA1C19291A9F9F9AC98FD99PN3PR01MB7382INDP_--
-
---_004_PN3PR01MB73821ADA1C19291A9F9F9AC98FD99PN3PR01MB7382INDP_
-Content-Type: image/png; name="Outlook-zkxw2ldb.png"
-Content-Description: Outlook-zkxw2ldb.png
-Content-Disposition: inline; filename="Outlook-zkxw2ldb.png"; size=22485;
-	creation-date="Thu, 26 May 2022 09:54:29 GMT";
-	modification-date="Thu, 26 May 2022 09:54:29 GMT"
-Content-ID: <b6e2bcdd-50e6-4e46-9a5e-3b937bdb5793>
-Content-Transfer-Encoding: base64
-
-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
-t73vjsD/DzX/H827ae66AAAAAElFTkSuQmCC
-
---_004_PN3PR01MB73821ADA1C19291A9F9F9AC98FD99PN3PR01MB7382INDP_--
+--000000000000698c5105dfe8f951--
 
