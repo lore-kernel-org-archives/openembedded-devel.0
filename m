@@ -1,94 +1,113 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <omkarpatil10.93@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D044C433EF
-	for <webhook@archiver.kernel.org>; Thu, 26 May 2022 04:05:50 +0000 (UTC)
-Received: from mail-qv1-f43.google.com (mail-qv1-f43.google.com
- [209.85.219.43])
- by mx.groups.io with SMTP id smtpd.web11.15890.1653537942334152259
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 408E7C433EF
+	for <webhook@archiver.kernel.org>; Thu, 26 May 2022 09:46:12 +0000 (UTC)
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com
+ [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web12.17731.1653558364005716735
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 May 2022 21:05:42 -0700
+ Thu, 26 May 2022 02:46:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=n1xPzzNF;
- spf=pass (domain: gmail.com, ip: 209.85.219.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f43.google.com with SMTP id e2so807628qvq.13
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=PKeLJYLG;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181,
+ mailfrom: omkarpatil10.93@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id h186so926044pgc.3
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 May 2022 21:05:42 -0700 (PDT)
+ Thu, 26 May 2022 02:46:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=5H9ZJQk4v3GbRsrYi/FdcmpdhTpKh31aShfQjTtXgWM=;
-        b=n1xPzzNFo28R+ihvDg6BESiplg6JrFeD/wFyaF28LLakOsqGlmpl6dblU/g57CzHaK
-         NfDOzqEbNh0brI/mkBKBfNIJBZWVBDU/ZZJQ3WupgeA/PSE+m/vGa+DKlgKPU6D+0XY6
-         47a/B6aTrAkqxMLw4zeN+9eIRuvwCyo5nErWZiwO0sjkxQA9o1MpRLpP25nUzNHO9qZZ
-         e38oUrDGhAGJ2OvPLQEvxIQYs06+S4WULl9NHoCobm2psRMNWAGSqOYZaD5n1Dwwmjj8
-         apSPGj2L7npq8d0Olo24vtK7AHlb7th1grOjE/vkzfewwlqQyrkcf02CrzDpWigg7PJK
-         3Oow==
+        h=from:to:cc:subject:date:message-id;
+        bh=r3pdAUG2oV5P8Z180rAoJWzhJwkS3p/n5uC4Ub9rOKg=;
+        b=PKeLJYLGfy9UQRHonIZwKy5MvWfExVajJFh2t5JaV1S1ngRi7I2pJpObXtz4noSTRK
+         4Gw0lamN1U3QUYPsHz7EMYw1BeKZq0fHaIlsm+V0Mj3jOYJozej37+2AY9bT7ilxNIFX
+         +3t2VgqEddHc1iTXEMY4XcJfQVLkVxyzulxp0R3Xr7hGqVNpEixbjyFvOzBzZX5+9onY
+         TmAOuQQwNdceLmuBuvqZqCznpIU+T5hfTHWYqEg8BM+auLSttzShrsNi26/sqHCbXSTd
+         S3OB6UODA/VW+3bPNE342ZbwpFrcSoLM7996MZAC079TxRUQsygiCnDId7x3Yzu2PeW1
+         DvTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=5H9ZJQk4v3GbRsrYi/FdcmpdhTpKh31aShfQjTtXgWM=;
-        b=5nwKbvs9lSHjmGpCz2FxdVWibEBF0QltZMIDV7mzPbmo2PJWs/dIra7ujs453g+KRo
-         0xCvm+KNWLihxfsLJdQdMBKl+Ykgakr0/vU09JXDrvjS1jKOcd93SLi0RHpqseidcQxS
-         et8vZGyYNx7Gf38CSZ9lblQApokWixiRdyUqDOf/wjwaawq5X+oSVyqn4D1VC/L/Zo0R
-         Y10i0/ZnsaA1o0b8hniSRIBnVUDK5mxKRJY2LsI9+oM3mpnCfNnyolLJx2OXfikkc9q6
-         7gi8Fh0b+0z8l05ZZ2RUaFgY+ISXm96mbDln9TRHO5NaTGIDMV75TPZ5am5PDbor1z0K
-         fqTw==
-X-Gm-Message-State: AOAM533pQTzl+CcUy9OyPAq4NHzdJi4ZIt5E0KTUth/qy5hHDU7ezC1k
-	cgMrFUtA6nOGhCiRVKLV0hAB0jyb7+q7nuuEC+w=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=r3pdAUG2oV5P8Z180rAoJWzhJwkS3p/n5uC4Ub9rOKg=;
+        b=mNvYk/UfzaKsPEf0fY8KMQBwdWWe6UVYnimWByWxEjKHMmA9H4RleqtZayX/moeEr+
+         h1LF/7jChMmJR0Mj0gAeeaLRWzePfK2MBMPzKHmlPvzxE4mAwurwKrzfrDm8nfzcUv7W
+         lMhIwsCi9AERoaDzJrTD3Wcm9Mhl9ff6q6x9v0qYnqnLSp5dWAB7mt6gtcEeXL+tynSj
+         +4UL4zIuq3h1IjSqjO2BSNqigdh54qfBhAkC3/4bkYwpuxLr/4WmWPGe/TiWMyd4TjAs
+         1CvW/IRLUB6CbLVY1/CaaS/AJTZzPKIfO2wGwxmMJQW/0rxX+FzhH1z4AQtVzLBBuOLW
+         JKRA==
+X-Gm-Message-State: AOAM530OSpXnEm+T1Z9f65ryh4tNDJcfE+Rx5+X4+DlyZ4sGPLLostrW
+	uzHu2txqJdYhuQrm26+TGFizIJQZtWdWtQ==
 X-Google-Smtp-Source: 
- ABdhPJyeeCybN3aYy3aXi7AlGXmx3Rqs0XSzc+mTJAW7eUAtz4/JQh8yktZaoHd9Kb+0migaMZbQGuSMrmDh+3q5WLE=
-X-Received: by 2002:a05:6214:500b:b0:461:e282:181 with SMTP id
- jo11-20020a056214500b00b00461e2820181mr29005731qvb.24.1653537941331; Wed, 25
- May 2022 21:05:41 -0700 (PDT)
-MIME-Version: 1.0
-References: <5ddded5e-ce0b-2ab1-d72f-8e7842420fe2@gmail.com>
-In-Reply-To: <5ddded5e-ce0b-2ab1-d72f-8e7842420fe2@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 25 May 2022 21:05:14 -0700
-Message-ID: 
- <CAMKF1sq+asPKOhdA-i+-=rE-aj7mXuvY9oBCpj5O7fzCQphZZw@mail.gmail.com>
-Subject: Re: Honister merge request: May 25th
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+ ABdhPJzZdxnUe3B+Z0i4CKk9tRi2EaRWB2Yq7UVAFhvr53A47MKYDk7h+nffHdlxhaub6ckE4ZYZbA==
+X-Received: by 2002:a63:d508:0:b0:3f5:e6b5:20f with SMTP id
+ c8-20020a63d508000000b003f5e6b5020fmr32284849pgg.520.1653558363306;
+        Thu, 26 May 2022 02:46:03 -0700 (PDT)
+Received: from localhost.localdomain
+ ([2409:4042:2101:95b4:acdb:cf08:7a5c:1177])
+        by smtp.gmail.com with ESMTPSA id
+ cd21-20020a056a00421500b0050dc7628175sm952953pfb.79.2022.05.26.02.46.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 26 May 2022 02:46:02 -0700 (PDT)
+From: Omkar Patil <omkarpatil10.93@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	omkarpatil10.93@gmail.com
+Cc: ranjitsinh.rathod@kpit.com,
+	Omkar Patil <omkar.patil@kpit.com>
+Subject: [oe][meta-filesystems][dunfell][PATCH] fuse: Set CVE_PRODUCT
+Date: Thu, 26 May 2022 15:14:31 +0530
+Message-Id: <20220526094431.19582-1-omkarpatil10.93@gmail.com>
+X-Mailer: git-send-email 2.17.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 May 2022 04:05:50 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 May 2022 09:46:12 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97276
+ https://lists.openembedded.org/g/openembedded-devel/message/97277
 
-merged thanks
+From: Omkar Patil <omkar.patil@kpit.com>
 
-On Wed, May 25, 2022 at 7:20 PM akuster808 <akuster808@gmail.com> wrote:
->
-> The following changes since commit 9a0caf5b09e14a28a54c3f8524d97530aeb8152c:
->
->    zabbix: Fix sereval CVEs (2022-04-16 09:48:15 -0700)
->
-> are available in the Git repository at:
->
->    https://git.openembedded.org/meta-openembedded honister-next
->
-> for you to fetch changes up to 0e6c34f82ca4d43cbca3754c5fe37c5b3bdd0f37:
->
->    ostree: prevent ostree-native depending on target virtual/kernel to
-> provide kernel-module-overlay (2022-05-23 07:43:39 -0700)
->
-> ----------------------------------------------------------------
-> Martin Jansa (1):
->        ostree: prevent ostree-native depending on target virtual/kernel
-> to provide kernel-module-overlay
->
-> Nicolas Dechesne (1):
->        imlib2: update SRC_URI
->
->   meta-oe/recipes-extended/ostree/ostree_2021.3.bb | 2 +-
->   meta-oe/recipes-graphics/imlib2/imlib2_git.bb    | 2 +-
->   2 files changed, 2 insertions(+), 2 deletions(-)
->
+set CVE_PRODUCT to avoid wrongly reported CVEs
+
+Signed-off-by: Omkar Patil <omkar.patil@kpit.com>
+Signed-off-by: Omkar Patil <omkarpatil10.93@gmail.com>
+---
+ meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb | 3 +++
+ meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb  | 6 ++----
+ 2 files changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb b/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb
+index 24b17fc93..b15bcd228 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse3_3.9.2.bb
+@@ -22,6 +22,9 @@ UPSTREAM_CHECK_REGEX = "fuse\-(?P<pver>3(\.\d+)+).tar.xz"
+ 
+ inherit meson pkgconfig
+ 
++# set vendor along with fuse to fix wrongly reported CVEs
++CVE_PRODUCT = "fuse_project:fuse"
++
+ DEPENDS = "udev"
+ 
+ PACKAGES =+ "fuse3-utils"
+diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
+index 49682b3cd..cfd9650c9 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
+@@ -19,10 +19,8 @@ SRC_URI = "https://github.com/libfuse/libfuse/releases/download/${BP}/${BP}.tar.
+ SRC_URI[md5sum] = "8000410aadc9231fd48495f7642f3312"
+ SRC_URI[sha256sum] = "d0e69d5d608cc22ff4843791ad097f554dd32540ddc9bed7638cc6fea7c1b4b5"
+ 
+-# CVE-2019-14860 is a REDHAT specific issue and was addressed for REDHAT Fuse products on Red Hat Fuse 7.4.1 and Red Hat Fuse 7.5.0.
+-# REDHAT has also released the fix and updated their security advisories after significant releases.
+-CVE_PRODUCT = "fuse"
+-CVE_CHECK_WHITELIST += "CVE-2019-14860"
++# set vendor along with fuse to fix wrongly reported CVEs
++CVE_PRODUCT = "fuse_project:fuse"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/libfuse/libfuse/releases"
+ UPSTREAM_CHECK_REGEX = "fuse\-(?P<pver>2(\.\d+)+).tar.gz"
+-- 
+2.17.1
+
 
