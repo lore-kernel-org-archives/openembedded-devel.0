@@ -2,161 +2,91 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D8856C433EF
-	for <webhook@archiver.kernel.org>; Sat, 28 May 2022 22:16:59 +0000 (UTC)
-Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com
- [209.85.219.41])
- by mx.groups.io with SMTP id smtpd.web11.19663.1653776216702750792
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C4CDC433F5
+	for <webhook@archiver.kernel.org>; Sat, 28 May 2022 22:55:39 +0000 (UTC)
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com
+ [209.85.210.182])
+ by mx.groups.io with SMTP id smtpd.web09.19947.1653778532026008993
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 28 May 2022 15:16:56 -0700
+ Sat, 28 May 2022 15:55:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=YxtLytPg;
- spf=pass (domain: gmail.com, ip: 209.85.219.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f41.google.com with SMTP id i19so1374538qvu.13
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=iFdtaO9S;
+ spf=pass (domain: gmail.com, ip: 209.85.210.182,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f182.google.com with SMTP id 202so7449673pfu.0
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 28 May 2022 15:16:56 -0700 (PDT)
+ Sat, 28 May 2022 15:55:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=+rdkdErIUYoMM8+M8ZoAKSENrs6P+svbVV+P+dspg68=;
-        b=YxtLytPgOXN5SuVhy/Fm5HrkA/GbIE/gKACQ4ET+72cCaeHfPqylncnr9VM15iuEP4
-         Ke5SF082pmGbYRv5Mv6IU2CBj2gn/NTdTHjMHrXh+sPFa6eD0M3aCAAi9geUUScerddm
-         /pwi2LdstoanqAP/C64Uq5hQIWohji8mXZ8WVI+D3xBCA3kNMp+uDDx+FHznEGDj5DDt
-         kvwyineXFzAecbDBAEggRZ7JdRrWcIhJ4RuG8ibkhrnVUAHrGcRlRq1vAbH1Myqv9WZq
-         e9nVFDmrq8iPcu3h2UuhLPz2bdcpfCjZpV7wT9JAohHONSvbrH6ukd2yw/wA2Trpm6aS
-         bYmA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=NMeVboaVZIEOfuRXTZR1/uSvWTuqDr0rDCpfX7oezrg=;
+        b=iFdtaO9SUnMaI0ErBknn0yusD9sWJbTOALCb6cMTmSae/Lw9vgK4XlArPIlrNOxNdx
+         ocMhOku2bsisoTOlAz8ffAfV5+9MyPE8f3PnCUZOUkAOBBEiPQCjCcX1w3qZ8Z/ugJ5R
+         ssnZPeWdancst06kNWeSpVsHvTFznD/YeSw1FkxRfJn7HJWhGifmaBGK8OkKBnulQND3
+         P4U84DrxorHXYd4pxsvtk9gUS0BL3sDoeK9CantgXDGnZZp++q+OYh5ToUyXxwEVbGTR
+         PWeVIG57HKQwbJmUZOaE40JYyo36AT4hrxwtmQ4RFqQcT2DOYCyWxqz21oH40LRwgf92
+         3Mog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=+rdkdErIUYoMM8+M8ZoAKSENrs6P+svbVV+P+dspg68=;
-        b=XGizFup1IcVy9dyMfh4mC5y5TMNh9QYcvOtZ9XX3aE5FF6nikq0b4duYC+2Wjsno+9
-         uoZEdX7YFm1mo5xI0z/r6LgK0xFUGwgsgu4B0nZ9RDfyh5zTNFpFSdJ5+E7ayaz0gBqB
-         hWm8/Idpzdja3IgJWefq1AHQhkWe/CkDZwZy1Q/VYtGDZtHvxTZGMvSNdbbW65+vBK1z
-         WJyX4qFy979nyE7f2CQShmBu1txT8lFzZi/eK0oplCfQ+bJdhgTNoRF1xeoga1aCbgPr
-         sGnZLDhu/pSVwJOrKHEAbyQHYOHIgzbRhr76EgZRS1/v/GsocgOyYl3rPvSbKoXDNExj
-         e1DQ==
-X-Gm-Message-State: AOAM530Mp1dAelh0L/v/68a9r5LYD/gKA+KuTEy88mwSBDzqxwAWq5FH
-	5LvyDpWUSjihkkGJLpTeAUen0jtnEAQQdpTVM6w=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=NMeVboaVZIEOfuRXTZR1/uSvWTuqDr0rDCpfX7oezrg=;
+        b=VSiWgnX7naagwHstcrSBBkiM8zLClmozE2sAaEFqXzWkbT5aLs+WCfh5bC8iqsG4ep
+         NI16C9b8ujDt1LjzVEjp22v4Y5w569NWJl5/Vxvpuc6ZqdbnswTClGYVQno+aVE9aKYr
+         p9/Ij4+xxT1Pq32lXA41KWJ/RXrw5QHHlJSSrrSeYN3UPIbKZn0elEWAwIhgr15j8Sa8
+         y7+fkI0zu1mdn+4b+NFu/l+VWs0M0R1guyb74G638ii4Nc0pyaXmISn9XBjRoXCNL7O6
+         fK05A24cDHTe2Hcj2dlQEeEF5xaVlXXy9oMas+e/KV90duj6QDUSVlcjeFgqCPNUvPLH
+         3Ubg==
+X-Gm-Message-State: AOAM531y1XZEo/NLjqMoundJxu3BG0RjhqzI3yOELk4NeyreXAoYtmbf
+	7KplFb1Up9ztEDjQXSDuvidjlzwKvTpS8Q==
 X-Google-Smtp-Source: 
- ABdhPJz2DX53riDdXlNIa9A0YsxVQ+79x4F5wlVGWcYsoFeDAnv74iWWKeP3fYpO3srbYMRbL7UFVzZeHKeldCdCvvA=
-X-Received: by 2002:ad4:4ee1:0:b0:462:7725:e59a with SMTP id
- dv1-20020ad44ee1000000b004627725e59amr11509191qvb.24.1653776215746; Sat, 28
- May 2022 15:16:55 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220528084648.3641611-1-uvv.mail@gmail.com>
-In-Reply-To: <20220528084648.3641611-1-uvv.mail@gmail.com>
+ ABdhPJxH16xh6gh+mnA80cvQlDR3gkHIDMiuKJgVmeqtiNurv1rm7Sg9+4NzEXpg7Aw3OdjtCfgWGQ==
+X-Received: by 2002:a63:8048:0:b0:3fb:d725:977b with SMTP id
+ j69-20020a638048000000b003fbd725977bmr3867591pgd.579.1653778531143;
+        Sat, 28 May 2022 15:55:31 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::47b1])
+        by smtp.gmail.com with ESMTPSA id
+ w20-20020a170902a71400b0016232dbd01fsm6117818plq.292.2022.05.28.15.55.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 28 May 2022 15:55:30 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 28 May 2022 15:16:29 -0700
-Message-ID: 
- <CAMKF1spqsYBfFxd107PwcbHnNdzQ82CY3mL4GEdpC6xMOt0iMg@mail.gmail.com>
-Subject: Re: [oe] [meta-filesystems][PATCH] xfstests: add new recipe
-To: Vyacheslav Yurkov <uvv.mail@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/2] sdbus-c++: Link with libatomic for rv32
+Date: Sat, 28 May 2022 15:55:27 -0700
+Message-Id: <20220528225528.985788-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.36.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 28 May 2022 22:16:59 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 28 May 2022 22:55:39 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97313
+ https://lists.openembedded.org/g/openembedded-devel/message/97314
 
-Please address this warning
+Fixes
+libsdbus-c++.so.1.1.0: undefined reference to `__atomic_load_8'
 
-stdio: WARNING: xfstests-git-r0 do_package_qa: QA Issue: Recipe
-LICENSE includes obsolete licenses GPL-2.0 [obsolete-license]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.1.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-On Sat, May 28, 2022 at 1:47 AM Vyacheslav Yurkov <uvv.mail@gmail.com> wrote:
->
-> From: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
->
-> File system QA test suite
->
-> Signed-off-by: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
-> ---
->  .../recipes-utils/xfstests/xfstests_git.bb    | 61 +++++++++++++++++++
->  1 file changed, 61 insertions(+)
->  create mode 100644 meta-filesystems/recipes-utils/xfstests/xfstests_git.bb
->
-> diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests_git.bb b/meta-filesystems/recipes-utils/xfstests/xfstests_git.bb
-> new file mode 100644
-> index 000000000..238dbf889
-> --- /dev/null
-> +++ b/meta-filesystems/recipes-utils/xfstests/xfstests_git.bb
-> @@ -0,0 +1,61 @@
-> +SUMMARY = "File system QA test suite"
-> +LICENSE = "GPL-2.0"
-> +LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=74274e8a218423e49eefdea80bc55038"
-> +
-> +SRCREV_FORMAT = "xfstests_unionmount"
-> +
-> +SRC_URI = "\
-> +    git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master;name=xfstests \
-> +    git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
-> +"
-> +
-> +SRCREV_xfstests = "37881397f1aa62df3c63468049c80b301b0e89eb"
-> +SRCREV_unionmount = "cec4c51a3bf8ba80bb99fc74b302749d4e3d2f1d"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit autotools-brokensep useradd
-> +
-> +DEPENDS += "xfsprogs acl"
-> +RDEPENDS:${PN} += "\
-> +    bash \
-> +    bc \
-> +    coreutils \
-> +    e2fsprogs \
-> +    e2fsprogs-tune2fs \
-> +    e2fsprogs-resize2fs \
-> +    libcap-bin \
-> +    overlayfs-progs \
-> +    perl \
-> +    python3 \
-> +    python3-core \
-> +    xfsprogs \
-> +    acl \
-> +"
-> +
-> +USERADD_PACKAGES = "${PN}"
-> +# these users are necessary to run the tests
-> +USERADD_PARAM:${PN} = "-U -m fsgqa; -N 123456-fsgqa; -N fsgqa2"
-> +
-> +EXTRA_OECONF = "INSTALL_USER=root INSTALL_GROUP=root"
-> +
-> +# install-sh script in the project is outdated
-> +# we use the one from the latest libtool to solve installation issues
-> +# It looks like the upstream is not interested in having it fixed :(
-> +# https://www.spinics.net/lists/fstests/msg16981.html
-> +do_configure:prepend() {
-> +    cp ${STAGING_DIR_NATIVE}${datadir}/libtool/build-aux/install-sh ${B}
-> +}
-> +
-> +do_install:append() {
-> +    unionmount_target_dir=${D}/usr/xfstests/unionmount-testsuite
-> +    install -d ${D}/usr/xfstests/unionmount-testsuite/tests
-> +    install -D ${WORKDIR}/unionmount-testsuite/tests/* -t $unionmount_target_dir/tests
-> +    install ${WORKDIR}/unionmount-testsuite/*.py -t $unionmount_target_dir
-> +    install ${WORKDIR}/unionmount-testsuite/run -t $unionmount_target_dir
-> +    install ${WORKDIR}/unionmount-testsuite/README -t $unionmount_target_dir
-> +}
-> +
-> +FILES:${PN} += "\
-> +    /usr/xfstests \
-> +"
-> --
-> 2.25.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#97311): https://lists.openembedded.org/g/openembedded-devel/message/97311
-> Mute This Topic: https://lists.openembedded.org/mt/91392360/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.1.0.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.1.0.bb
+index 03d1356042..107dbc6c9d 100644
+--- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.1.0.bb
++++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.1.0.bb
+@@ -32,6 +32,7 @@ S = "${WORKDIR}/git"
+ # libsdbus-c++.so.1.1.0: undefined reference to `__atomic_load_8'
+ LDFLAGS:append:mips = " -Wl,--no-as-needed -latomic -Wl,--as-needed"
+ LDFLAGS:append:powerpc = " -Wl,--no-as-needed -latomic -Wl,--as-needed"
++LDFLAGS:append:riscv32 = " -Wl,--no-as-needed -latomic -Wl,--as-needed"
+ 
+ do_install:append() {
+     if ! ${@bb.utils.contains('PTEST_ENABLED', '1', 'true', 'false', d)}; then
+-- 
+2.36.1
+
 
