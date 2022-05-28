@@ -1,91 +1,84 @@
-Return-Path: <uvv.mail@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 175AEC433F5
-	for <webhook@archiver.kernel.org>; Sat, 28 May 2022 08:49:35 +0000 (UTC)
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com
- [209.85.167.53])
- by mx.groups.io with SMTP id smtpd.web09.13183.1653727766974099477
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D8856C433EF
+	for <webhook@archiver.kernel.org>; Sat, 28 May 2022 22:16:59 +0000 (UTC)
+Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com
+ [209.85.219.41])
+ by mx.groups.io with SMTP id smtpd.web11.19663.1653776216702750792
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 28 May 2022 01:49:27 -0700
+ Sat, 28 May 2022 15:16:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=E0v3jqQ+;
- spf=pass (domain: gmail.com, ip: 209.85.167.53, mailfrom: uvv.mail@gmail.com)
-Received: by mail-lf1-f53.google.com with SMTP id l30so4881554lfj.3
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=YxtLytPg;
+ spf=pass (domain: gmail.com, ip: 209.85.219.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f41.google.com with SMTP id i19so1374538qvu.13
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 28 May 2022 01:49:26 -0700 (PDT)
+ Sat, 28 May 2022 15:16:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=/Ty5si3XDvqYBzh2lfQKajg0cjjqwCPjzLuJpa/B2JE=;
-        b=E0v3jqQ+wFQNq3lvoMIs290kyjj3cEBJlLfvNIB9EswVBOlgflN6ovTtT29B6MY17V
-         xUyOE9+LUbVvPVbr2OPwzLMuWg2iX03c3grFtJa8CKeex7CB3V6bvX3b8qzJ8Ye5GNCb
-         2rr0Bz1XweAjorxrjqFLxCb/BclmFQeX9vpYIm8BUwY7z0dQ96LmeCzqdx+XFOMYcnvC
-         mTUMHSnrCFx53nXIVq8zLmjIv/1NcEyeNKCzakE//I6ziwWBlbfgr2jcR97DdjH3qqbM
-         KMGx8Zcwqwa0FtHKVuKYTWLZUDWbcL2QfsopmempgSsFR8DmrMlR0ehrMHX6Od8mBOcL
-         fUiQ==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=+rdkdErIUYoMM8+M8ZoAKSENrs6P+svbVV+P+dspg68=;
+        b=YxtLytPgOXN5SuVhy/Fm5HrkA/GbIE/gKACQ4ET+72cCaeHfPqylncnr9VM15iuEP4
+         Ke5SF082pmGbYRv5Mv6IU2CBj2gn/NTdTHjMHrXh+sPFa6eD0M3aCAAi9geUUScerddm
+         /pwi2LdstoanqAP/C64Uq5hQIWohji8mXZ8WVI+D3xBCA3kNMp+uDDx+FHznEGDj5DDt
+         kvwyineXFzAecbDBAEggRZ7JdRrWcIhJ4RuG8ibkhrnVUAHrGcRlRq1vAbH1Myqv9WZq
+         e9nVFDmrq8iPcu3h2UuhLPz2bdcpfCjZpV7wT9JAohHONSvbrH6ukd2yw/wA2Trpm6aS
+         bYmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=/Ty5si3XDvqYBzh2lfQKajg0cjjqwCPjzLuJpa/B2JE=;
-        b=wW8L9vkaesg52lVt9yH4hOQCOQVih/QfMt+1VSD0rFJ3Na/UKArcn8fsFc8Yixt1Yu
-         iLiwoLScBiD75T3ODJLfp3fSfSc8ZZA66M6TlRx84ogOUlyDw5KEIKyYtXU6GiHDB8X/
-         M6k6jeqx5PMRpK+zakZk7Vb67URP3Y9toygmpB3jmpfDxLYhz8g98uuaErMPZIXTCBVd
-         HN7mETyz0oyPIaAPn+/O7pcMbVFRHDycCz0++oy5x6BiIROpvWhUdOXrA0L9MbdReY4u
-         vla4MkJKPECgsmzevaOpxCV9zVuqsRB8NcWxFY62kXxRYsIe74iWtQg1dOK/QY9Vidhe
-         PSSA==
-X-Gm-Message-State: AOAM533EntkZYFBzzFpabOKzhj3pIixuYgHgjlcpTF2qtVPdw+a96iv6
-	NqVn8hiI0pWj2qmFfYZCUQcaQa/i381hJj01
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=+rdkdErIUYoMM8+M8ZoAKSENrs6P+svbVV+P+dspg68=;
+        b=XGizFup1IcVy9dyMfh4mC5y5TMNh9QYcvOtZ9XX3aE5FF6nikq0b4duYC+2Wjsno+9
+         uoZEdX7YFm1mo5xI0z/r6LgK0xFUGwgsgu4B0nZ9RDfyh5zTNFpFSdJ5+E7ayaz0gBqB
+         hWm8/Idpzdja3IgJWefq1AHQhkWe/CkDZwZy1Q/VYtGDZtHvxTZGMvSNdbbW65+vBK1z
+         WJyX4qFy979nyE7f2CQShmBu1txT8lFzZi/eK0oplCfQ+bJdhgTNoRF1xeoga1aCbgPr
+         sGnZLDhu/pSVwJOrKHEAbyQHYOHIgzbRhr76EgZRS1/v/GsocgOyYl3rPvSbKoXDNExj
+         e1DQ==
+X-Gm-Message-State: AOAM530Mp1dAelh0L/v/68a9r5LYD/gKA+KuTEy88mwSBDzqxwAWq5FH
+	5LvyDpWUSjihkkGJLpTeAUen0jtnEAQQdpTVM6w=
 X-Google-Smtp-Source: 
- ABdhPJzBrwbFDSyK0gVv0/ruU23TjNZFo58BzttP6jueLNe7KqTwzi3p15cgUnIx9xwnaSNW9wnBTg==
-X-Received: by 2002:a05:6512:2205:b0:478:53d5:bdb1 with SMTP id
- h5-20020a056512220500b0047853d5bdb1mr28013407lfu.561.1653727764605;
-        Sat, 28 May 2022 01:49:24 -0700 (PDT)
-Received: from [10.133.219.60] ([185.253.97.11])
-        by smtp.gmail.com with ESMTPSA id
- u22-20020a197916000000b0047255d210d6sm1238536lfc.5.2022.05.28.01.49.23
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 28 May 2022 01:49:24 -0700 (PDT)
-Message-ID: <a86d219a-ab40-8bcb-c518-2856f6fda73a@gmail.com>
-Date: Sat, 28 May 2022 10:49:22 +0200
+ ABdhPJz2DX53riDdXlNIa9A0YsxVQ+79x4F5wlVGWcYsoFeDAnv74iWWKeP3fYpO3srbYMRbL7UFVzZeHKeldCdCvvA=
+X-Received: by 2002:ad4:4ee1:0:b0:462:7725:e59a with SMTP id
+ dv1-20020ad44ee1000000b004627725e59amr11509191qvb.24.1653776215746; Sat, 28
+ May 2022 15:16:55 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.9.1
+References: <20220528084648.3641611-1-uvv.mail@gmail.com>
+In-Reply-To: <20220528084648.3641611-1-uvv.mail@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 28 May 2022 15:16:29 -0700
+Message-ID: 
+ <CAMKF1spqsYBfFxd107PwcbHnNdzQ82CY3mL4GEdpC6xMOt0iMg@mail.gmail.com>
 Subject: Re: [oe] [meta-filesystems][PATCH] xfstests: add new recipe
-Content-Language: en-US
-To: openembedded-devel@lists.openembedded.org
-Cc: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
-References: <16F33883D5579ABC.21867@lists.openembedded.org>
-From: Vyacheslav Yurkov <uvv.mail@gmail.com>
-In-Reply-To: <16F33883D5579ABC.21867@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: Vyacheslav Yurkov <uvv.mail@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 28 May 2022 08:49:35 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 28 May 2022 22:16:59 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97312
+ https://lists.openembedded.org/g/openembedded-devel/message/97313
 
-Requires a recipe from master-next, so should be queued respectively.
+Please address this warning
 
-Thanks,
-Vyacheslav
+stdio: WARNING: xfstests-git-r0 do_package_qa: QA Issue: Recipe
+LICENSE includes obsolete licenses GPL-2.0 [obsolete-license]
 
-On 28.05.2022 10:46, Vyacheslav Yurkov via lists.openembedded.org wrote:
+On Sat, May 28, 2022 at 1:47 AM Vyacheslav Yurkov <uvv.mail@gmail.com> wrote:
+>
 > From: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
 >
 > File system QA test suite
 >
 > Signed-off-by: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
 > ---
->   .../recipes-utils/xfstests/xfstests_git.bb    | 61 +++++++++++++++++++
->   1 file changed, 61 insertions(+)
->   create mode 100644 meta-filesystems/recipes-utils/xfstests/xfstests_git.bb
+>  .../recipes-utils/xfstests/xfstests_git.bb    | 61 +++++++++++++++++++
+>  1 file changed, 61 insertions(+)
+>  create mode 100644 meta-filesystems/recipes-utils/xfstests/xfstests_git.bb
 >
 > diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests_git.bb b/meta-filesystems/recipes-utils/xfstests/xfstests_git.bb
 > new file mode 100644
@@ -154,13 +147,16 @@ On 28.05.2022 10:46, Vyacheslav Yurkov via lists.openembedded.org wrote:
 > +FILES:${PN} += "\
 > +    /usr/xfstests \
 > +"
+> --
+> 2.25.1
+>
 >
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
 > View/Reply Online (#97311): https://lists.openembedded.org/g/openembedded-devel/message/97311
-> Mute This Topic: https://lists.openembedded.org/mt/91392360/4455192
+> Mute This Topic: https://lists.openembedded.org/mt/91392360/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [uvv.mail@gmail.com]
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
 >
 
