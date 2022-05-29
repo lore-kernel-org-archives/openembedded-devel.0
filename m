@@ -1,231 +1,92 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 57E53C4332F
-	for <webhook@archiver.kernel.org>; Sun, 29 May 2022 12:44:03 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web12.24945.1653828232970678217
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 918F0C433EF
+	for <webhook@archiver.kernel.org>; Sun, 29 May 2022 13:38:13 +0000 (UTC)
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com
+ [209.85.210.178])
+ by mx.groups.io with SMTP id smtpd.web09.25108.1653831491656576412
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 29 May 2022 05:43:53 -0700
+ Sun, 29 May 2022 06:38:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.81,
- mailfrom: f_l_k@t-online.de)
-Received: from fwd85.dcpf.telekom.de (fwd85.aul.t-online.de [10.223.144.111])
-	by mailout03.t-online.de (Postfix) with SMTP id 13E44500E
-	for <openembedded-devel@lists.openembedded.org>;
- Sun, 29 May 2022 14:43:51 +0200 (CEST)
-Received: from localhost.localdomain ([84.163.37.187]) by fwd85.t-online.de
-	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
-	esmtp id 1nvIGn-1a7Qyf0; Sun, 29 May 2022 14:43:45 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=D3p5VZfI;
+ spf=pass (domain: gmail.com, ip: 209.85.210.178,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f178.google.com with SMTP id f21so8360250pfa.3
+        for <openembedded-devel@lists.openembedded.org>;
+ Sun, 29 May 2022 06:38:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=voK1wHEbq9Iy2cMkGVP8GtANRFTnjQVuuqY6xQOgSBo=;
+        b=D3p5VZfI5ud5shBN1+JbE/M35YbhUezuB3TO+BAARylmP9KqG2CshB9+HILnqrSITI
+         PUuJCgtPyZ7oP9CDn0ZWTmpCb+BEIvD1MkTGEYs+r0zu1W/edvw3HYJfWqQr7zg+EFHK
+         mlZc7C6JCYKGUXEMUZtB7llXi8f0ufP/jtuO4QZwCysKUMU+JcgQZkOgkkjE0X4bkMst
+         GOsJ+rppazBe4zJjiGwnwoIOT7RHurc5E5mcQlfiqXrVdaN6rt97HxQJ9Lr6CQ3XpQns
+         cGYVBLplOs1HO2LxOnSSlCtu83p78d2WyEUSsa9DutaZSjhSL6T0jWjxuyLIAIaxlKuy
+         xskA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=voK1wHEbq9Iy2cMkGVP8GtANRFTnjQVuuqY6xQOgSBo=;
+        b=dk2WCGSUNuF0aneoko/fbJ67PQHbSVGS+ajIqbckWR336Yt8Xz9tDNsdlo99+1RqD9
+         cRDmAXX8h/oE+OAvOlipt5ANVBApQ0nnpQ7sCHSrf0gBhEPwyNKb4hztNkO2aiIMjz6I
+         K17T/egUKDr/r2riaouMFS15Dl4BrQ51nLFAITCBS89EnrJgUB3ipLT39PhJwL5RTGUd
+         Ivm+YrfMvOxO4C/Famq8TwZutr9keVW9VLB23+8+lp0Heg3+YT2iRAf2w8iAFBijKFuX
+         y1TGEYUmY09l8AR8ZTRUF6MxsrpUrggFe8Db0A1RSHn3hY17BYEUBglh5q+vm3DROzbR
+         wnZQ==
+X-Gm-Message-State: AOAM533k0k3q8eRSB4yLMKk6FkZC5d6Q8tGQIsUtGakc8/Gda53sWW7u
+	WrT0eoF9a3/fttUpG4Z+zLu0J5QIX8Ebsw==
+X-Google-Smtp-Source: 
+ ABdhPJziKVzILXv3KGR8RRsF69Yg5kn5CSXvtlpoagrqB2BTGYCUuR4KuBlNdWtJXo70ycP2OUNo6g==
+X-Received: by 2002:a63:8048:0:b0:3fb:d725:977b with SMTP id
+ j69-20020a638048000000b003fbd725977bmr6011705pgd.579.1653831490852;
+        Sun, 29 May 2022 06:38:10 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::47b1])
+        by smtp.gmail.com with ESMTPSA id
+ r7-20020a17090a4dc700b001e08461ceaesm4838721pjl.37.2022.05.29.06.38.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 29 May 2022 06:38:10 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-oe][PATCH 1/2] pavucontrol: update; fix build for wayland only
-Date: Sun, 29 May 2022 14:43:31 +0200
-Message-Id: <20220529124332.28817-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.25.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] sdbus-c++-libsystemd: Fix patch fuzz
+Date: Sun, 29 May 2022 06:38:08 -0700
+Message-Id: <20220529133808.2977117-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1653828225-01421A9A-2C75C990/0/0 CLEAN NORMAL
-X-TOI-MSGID: 2d66702e-5115-4ebf-abbf-c339deda67bb
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 29 May 2022 12:44:03 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 29 May 2022 13:38:13 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97317
+ https://lists.openembedded.org/g/openembedded-devel/message/97319
 
-- Update to v5.0
-- Add a patch for wayland builds that removes canberra dependency. Since =
-the
-  canberra-gtk+3 module paradoxically depends on gtk+2 it is unbuildable =
-for
-  wayland.
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ucontrol-remove-canberra-gtk-support.patch | 112 ++++++++++++++++++
- ...{pavucontrol_4.0.bb =3D> pavucontrol_5.0.bb} |  15 ++-
- 2 files changed, 121 insertions(+), 6 deletions(-)
- create mode 100644 meta-oe/recipes-multimedia/pulseaudio/pavucontrol/000=
-1-pavucontrol-remove-canberra-gtk-support.patch
- rename meta-oe/recipes-multimedia/pulseaudio/{pavucontrol_4.0.bb =3D> pa=
-vucontrol_5.0.bb} (66%)
+ .../0005-src-basic-missing.h-check-for-missing-strndupa.patch | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol/0001-pavuc=
-ontrol-remove-canberra-gtk-support.patch b/meta-oe/recipes-multimedia/pul=
-seaudio/pavucontrol/0001-pavucontrol-remove-canberra-gtk-support.patch
-new file mode 100644
-index 000000000..44169240c
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol/0001-pavucontrol-=
-remove-canberra-gtk-support.patch
-@@ -0,0 +1,112 @@
-+From 87992a57e5f517d5ceb5dfabaea662ac64983720 Mon Sep 17 00:00:00 2001
-+From: Markus Volk <f_l_k@t-online.de>
-+Date: Fri, 27 May 2022 18:37:53 +0200
-+Subject: [PATCH] pavucontrol: remove canberra-gtk support
-+
-+libcanberra-gtk3 module isn't buildable for wayland.
-+Remove its dpendency.
-+
-+Signed-off-by: Markus Volk <f_l_k@t-online.de>
-+
-+Upstream-Status: Inappropriate
-+---
-+ configure.ac           |  2 +-
-+ src/pavuapplication.cc |  2 --
-+ src/pavucontrol.cc     |  4 ----
-+ src/sinkwidget.cc      | 17 -----------------
-+ 4 files changed, 1 insertion(+), 24 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 056ba5e..e857563 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -41,7 +41,7 @@ AC_TYPE_SIGNAL
-+ AC_HEADER_STDC
-+ AX_CXX_COMPILE_STDCXX_11
-+=20
-+-PKG_CHECK_MODULES(GUILIBS, [ gtkmm-3.0 >=3D 3.22 sigc++-2.0 libcanberra=
--gtk3 >=3D 0.16 json-glib-1.0 ])
-++PKG_CHECK_MODULES(GUILIBS, [ gtkmm-3.0 >=3D 3.22 sigc++-2.0 json-glib-1=
-.0 ])
-+ AC_SUBST(GUILIBS_CFLAGS)
-+ AC_SUBST(GUILIBS_LIBS)
-+=20
-+diff --git a/src/pavuapplication.cc b/src/pavuapplication.cc
-+index 6773b53..60c016c 100644
-+--- a/src/pavuapplication.cc
-++++ b/src/pavuapplication.cc
-+@@ -24,8 +24,6 @@
-+=20
-+ #include "i18n.h"
-+=20
-+-#include <canberra-gtk.h>
-+-
-+ #include "pavuapplication.h"
-+ #include "pavucontrol.h"
-+ #include "mainwindow.h"
-+diff --git a/src/pavucontrol.cc b/src/pavucontrol.cc
-+index 18d5400..10ab646 100644
-+--- a/src/pavucontrol.cc
-++++ b/src/pavucontrol.cc
-+@@ -29,8 +29,6 @@
-+ #include <json-glib/json-glib.h>
-+ #endif
-+=20
-+-#include <canberra-gtk.h>
-+-
-+ #include "pavucontrol.h"
-+ #include "i18n.h"
-+ #include "minimalstreamwidget.h"
-+@@ -916,8 +914,6 @@ MainWindow* pavucontrol_get_window(pa_glib_mainloop =
-*m, bool maximize, bool _ret
-+     tab_number =3D _tab_number;
-+     retry =3D _retry;
-+=20
-+-    ca_context_set_driver(ca_gtk_context_get(), "pulse");
-+-
-+     mainWindow =3D MainWindow::create(maximize);
-+=20
-+     api =3D pa_glib_mainloop_get_api(m);
-+diff --git a/src/sinkwidget.cc b/src/sinkwidget.cc
-+index f30bd37..482fd1f 100644
-+--- a/src/sinkwidget.cc
-++++ b/src/sinkwidget.cc
-+@@ -24,7 +24,6 @@
-+=20
-+ #include "sinkwidget.h"
-+=20
-+-#include <canberra-gtk.h>
-+ #if HAVE_EXT_DEVICE_RESTORE_API
-+ #  include <pulse/format.h>
-+ #  include <pulse/ext-device-restore.h>
-+@@ -111,7 +110,6 @@ SinkWidget* SinkWidget::create(MainWindow* mainWindo=
-w) {
-+ void SinkWidget::executeVolumeUpdate() {
-+     pa_operation* o;
-+     char dev[64];
-+-    int playing =3D 0;
-+=20
-+     if (!(o =3D pa_context_set_sink_volume_by_index(get_context(), inde=
-x, &volume, NULL, NULL))) {
-+         show_error(_("pa_context_set_sink_volume_by_index() failed"));
-+@@ -120,22 +118,7 @@ void SinkWidget::executeVolumeUpdate() {
-+=20
-+     pa_operation_unref(o);
-+=20
-+-    ca_context_playing(ca_gtk_context_get(), 2, &playing);
-+-    if (playing)
-+-        return;
-+-
-+     snprintf(dev, sizeof(dev), "%lu", (unsigned long) index);
-+-    ca_context_change_device(ca_gtk_context_get(), dev);
-+-
-+-    ca_gtk_play_for_widget(GTK_WIDGET(gobj()),
-+-                           2,
-+-                           CA_PROP_EVENT_DESCRIPTION, _("Volume Control=
- Feedback Sound"),
-+-                           CA_PROP_EVENT_ID, "audio-volume-change",
-+-                           CA_PROP_CANBERRA_CACHE_CONTROL, "permanent",
-+-                           CA_PROP_CANBERRA_ENABLE, "1",
-+-                           NULL);
-+-
-+-    ca_context_change_device(ca_gtk_context_get(), NULL);
-+ }
-+=20
-+ void SinkWidget::onMuteToggleButton() {
-+--=20
-+2.25.1
-+
-diff --git a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb b/m=
-eta-oe/recipes-multimedia/pulseaudio/pavucontrol_5.0.bb
-similarity index 66%
-rename from meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb
-rename to meta-oe/recipes-multimedia/pulseaudio/pavucontrol_5.0.bb
-index 5f9d7a6ba..012fc3a94 100644
---- a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_4.0.bb
-+++ b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_5.0.bb
-@@ -8,16 +8,19 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D751419260aa9=
-54499f7abaabaa882bbe"
- # AM_GLIB_GNU_GETTEXT macro in configure.ac. That macro is deprecated, s=
-o the
- # glib-2.0-native dependency may go away at some point (something to kee=
-p in
- # mind when doing version upgrades).
--DEPENDS =3D "libxml-parser-perl-native intltool-native glib-2.0-native g=
-tkmm3 libcanberra pulseaudio"
-+DEPENDS =3D "libxml-parser-perl-native intltool-native glib-2.0-native g=
-tkmm3 pulseaudio json-glib"
-=20
- inherit autotools features_check perlnative pkgconfig
-=20
--REQUIRED_DISTRO_FEATURES =3D "x11"
-+ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
-=20
--SRC_URI =3D "http://freedesktop.org/software/pulseaudio/${BPN}/${BP}.tar=
-.xz \
--          "
--SRC_URI[md5sum] =3D "9dcc2c76292e7e5e075d51b8dcb20202"
--SRC_URI[sha256sum] =3D "8fc45bac9722aefa6f022999cbb76242d143c31b314e2dbb=
-38f034f4069d14e2"
-+SRC_URI =3D "http://freedesktop.org/software/pulseaudio/${BPN}/${BP}.tar=
-.xz"
-+SRC_URI:append =3D " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', =
-'file://0001-pavucontrol-remove-canberra-gtk-support.patch', '', d)}"
-+
-+SRC_URI[sha256sum] =3D "ce2b72c3b5f1a70ad0df19dd81750f9455bd20870d1d3a36=
-d20536af2e8f4e7a"
-+
-+PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
-+PACKAGECONFIG[x11] =3D ",,libcanberra"
-=20
- EXTRA_OECONF =3D "--disable-lynx "
-=20
---=20
-2.25.1
+diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd/0005-src-basic-missing.h-check-for-missing-strndupa.patch b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd/0005-src-basic-missing.h-check-for-missing-strndupa.patch
+index 36545c2f60..005ef022fd 100644
+--- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd/0005-src-basic-missing.h-check-for-missing-strndupa.patch
++++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd/0005-src-basic-missing.h-check-for-missing-strndupa.patch
+@@ -322,8 +322,8 @@ Signed-off-by: Luca Boccassi <luca.boccassi@microsoft.com>
+  
+ --- a/src/libsystemd/sd-bus/bus-objects.c
+ +++ b/src/libsystemd/sd-bus/bus-objects.c
+-@@ -12,6 +12,7 @@
+- #include "set.h"
++@@ -11,6 +11,7 @@
++ #include "missing_capability.h"
+  #include "string-util.h"
+  #include "strv.h"
+ +#include "missing_stdlib.h"
+-- 
+2.36.1
 
 
