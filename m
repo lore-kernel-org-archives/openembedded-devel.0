@@ -1,149 +1,150 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <uvv.mail@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D0A5C433EF
-	for <webhook@archiver.kernel.org>; Sat, 28 May 2022 22:55:39 +0000 (UTC)
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
- [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.web09.19948.1653778532794295374
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3155AC433EF
+	for <webhook@archiver.kernel.org>; Sun, 29 May 2022 08:41:32 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
+ [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.web11.23291.1653813686530338434
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 28 May 2022 15:55:32 -0700
+ Sun, 29 May 2022 01:41:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Sc8ReB5O;
- spf=pass (domain: gmail.com, ip: 209.85.210.174,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id y1so7405747pfr.6
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=fuH6QMb0;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: uvv.mail@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id
+ c9-20020a7bc009000000b0039750ec5774so4890670wmb.5
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 28 May 2022 15:55:32 -0700 (PDT)
+ Sun, 29 May 2022 01:41:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=AIfr/YP98TvZfPq711tHpUQdrXq4L8cpfOts31jsN0k=;
-        b=Sc8ReB5Ow+h1kANXD/ruzX0dcGxXszUieRoh2KTadstubJ/bntQOgkvk971XdnJgHs
-         LZxD8COrlMKLWLx98jxIIzOqiCgrGC3pGZ+hF7c5cLjaGj6+/Yv3UOmyb6N26VdbR33I
-         AP8CwdSFQDeaiBEk7cUmS4+1/EIIUlinQA+f012PmZByi8lc3QMIoOH8Mor0nKmwE39c
-         9F5srXrRnl6jzutjwvcqKU1roaOZSjOlVUxOzMT8QP4xejehWtgBl8x7BMJuqBayf/p3
-         RAUstXGgjo0/UD5CJs1ea+orNnjyiQXW9gqKXnw460+muBYFMKVYHt1SLVZAhaOE6Y0N
-         FAHQ==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=YczZfvjZE9yKil98jGctnL9ni5bh5vcQIkBmGEsiJRI=;
+        b=fuH6QMb08/ZbYo2O+0f3WjB6udCsSchhezTAXNLWppXvUW1C7PcetGahZNRsZVgDx2
+         ZaY+O1y4ainyOawgr5XJPuvKcTn7KjAtk3qP8DrY29LGtVKRBLFERkTKm7ttA0v6r3UD
+         wwL5MieSGg6TiiR+C8AGX9xMzo7VGX26lQp7yxd5Xs8FdxX7aDB+No/2tT1dPshN15yR
+         UArWuMVTXLRTJLK4WGDGxb2+Je13FTDEbQM5qRWWOP2lsamq2WywE5uL29RpZqBBmHen
+         DhklqXWuJPsIfcAc6BV2WiKCMDWvWZGtHbrXMyOhSStQlNJI67Ent/jqNs5np3reE4Sw
+         dZcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=AIfr/YP98TvZfPq711tHpUQdrXq4L8cpfOts31jsN0k=;
-        b=t2RgQA35PrWgqIjAcGsuslyzHabqSl7jb8509Vr0Z5jHtJMjRv8Ruy2v0Jntjq7RUw
-         NJQV1hiYtgRod+Rr81W3nqY/P5J4U/SZ6uUYSKbtxn5ZTtdbz3J8D+zogLM5PsPKBwO6
-         kpmY9IQ+jJZT0UtKnY2/kK5r5jfnUTxivLc+HBBPU9cLlpjI7rzj1r6o62yx879xL8it
-         qECF+JA4XnjE+/JeliStr9Z7vqPKkFSoU7nBFJiS9F8JaUSyDabJB3paBQd26OS5jiVB
-         NNPKlvdJXZXYdPmFNNIIHUeelrGAeECpNu7Au6ZKg41KUFppUi1yNMl1WwpgukuzCmap
-         2stw==
-X-Gm-Message-State: AOAM530DpIjDx5n3obyDLoYK1SnNmF71HFKLZiZXCo7xga70rcKiWzDO
-	hRUyXSyC6nVkLEoA6Cmb4jvOJ+QF9U5JYA==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=YczZfvjZE9yKil98jGctnL9ni5bh5vcQIkBmGEsiJRI=;
+        b=N/NVQ9alBvGQbPmm6MC0VEMys6Fg/jdxBGB3vlaBFELxaWo8qwg+tqmG4YvhHTPpkb
+         +W8LkDOyfRtmeQIETbtwJUT2dFVvBZpqjEUmxoI8KvYHY41sFaw4aOTowa2eY9tJRGAz
+         0pNOCsdqFttSeVOU0J0bcMvWgBPKirAoBGe7Qqzh0U5u9JEPNtKt8t7SEOPMio1tLmMb
+         3KPAoAowiid8LPc734l8gMJgThrWP42T4qCxH6LLmKLfZMD4A9ccMcX31+Ka+BFc6cPF
+         uJbhA9x50R21alvAtooKyc2RRgOebm9mXvhI4o7ATCY7rHS2YLjsKS5jSCehJ5LLUmf3
+         6YWg==
+X-Gm-Message-State: AOAM533VJCkmgicy3qdxCyV41FnnosaZlSkn82jJ9Rx1PJSkQI7fqMYH
+	Pgm5FFfTPmIIlfxS07vGVcWKTuZsbHgLDg==
 X-Google-Smtp-Source: 
- ABdhPJzZ5V5V8pybwOj5/TqsYC8COtKnDk16YM++N1IlhqeGVZSzsSifb50lAjxNza6NgQn8uN0whA==
-X-Received: by 2002:a63:f003:0:b0:3db:84d3:743d with SMTP id
- k3-20020a63f003000000b003db84d3743dmr42884340pgh.97.1653778532076;
-        Sat, 28 May 2022 15:55:32 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::47b1])
+ ABdhPJzSSMnfaYeQ0bXlvosCKnmi0f+tyEMWwc85mdY5WHWU5s6ojELH990xiOxtihNamm8iUedhYQ==
+X-Received: by 2002:a7b:c8c5:0:b0:397:6bd7:c967 with SMTP id
+ f5-20020a7bc8c5000000b003976bd7c967mr14086989wml.106.1653813684597;
+        Sun, 29 May 2022 01:41:24 -0700 (PDT)
+Received: from uvv-2004-vm.localdomain
+ (dslb-002-205-007-234.002.205.pools.vodafone-ip.de. [2.205.7.234])
         by smtp.gmail.com with ESMTPSA id
- w20-20020a170902a71400b0016232dbd01fsm6117818plq.292.2022.05.28.15.55.31
+ x15-20020a1c7c0f000000b0039756cdc8e1sm6831593wmc.37.2022.05.29.01.41.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 28 May 2022 15:55:31 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Sun, 29 May 2022 01:41:24 -0700 (PDT)
+From: Vyacheslav Yurkov <uvv.mail@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Bartosz Golaszewski <brgl@bgdev.pl>
-Subject: [meta-python][PATCH 2/2] python3-uinput: Fix build on 32bit arches
- using 64bit times_t
-Date: Sat, 28 May 2022 15:55:28 -0700
-Message-Id: <20220528225528.985788-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.36.1
-In-Reply-To: <20220528225528.985788-1-raj.khem@gmail.com>
-References: <20220528225528.985788-1-raj.khem@gmail.com>
+Cc: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+Subject: [meta-filesystems][PATCH v2] xfstests: add new recipe
+Date: Sun, 29 May 2022 10:40:50 +0200
+Message-Id: <20220529084050.3660792-1-uvv.mail@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 28 May 2022 22:55:39 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 29 May 2022 08:41:32 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97315
+ https://lists.openembedded.org/g/openembedded-devel/message/97316
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Bartosz Golaszewski <brgl@bgdev.pl>
+From: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+
+File system QA test suite
+
+Signed-off-by: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
 ---
- ...time_t-default-on-32bit-architecture.patch | 43 +++++++++++++++++++
- .../python/python3-uinput_0.11.2.bb           |  4 +-
- 2 files changed, 46 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-uinput/0001-Deal-with-64bit-time_t-default-on-32bit-architecture.patch
+ .../recipes-utils/xfstests/xfstests_git.bb    | 61 +++++++++++++++++++
+ 1 file changed, 61 insertions(+)
+ create mode 100644 meta-filesystems/recipes-utils/xfstests/xfstests_git.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-uinput/0001-Deal-with-64bit-time_t-default-on-32bit-architecture.patch b/meta-python/recipes-devtools/python/python3-uinput/0001-Deal-with-64bit-time_t-default-on-32bit-architecture.patch
+diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests_git.bb b/meta-filesystems/recipes-utils/xfstests/xfstests_git.bb
 new file mode 100644
-index 0000000000..4095fc9095
+index 000000000..868fa0330
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-uinput/0001-Deal-with-64bit-time_t-default-on-32bit-architecture.patch
-@@ -0,0 +1,43 @@
-+From 69adf9e32f5b11e15c0cbe17f9331c77fed65bf8 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 28 May 2022 15:50:50 -0700
-+Subject: [PATCH] Deal with 64bit time_t default on 32bit architectures
++++ b/meta-filesystems/recipes-utils/xfstests/xfstests_git.bb
+@@ -0,0 +1,61 @@
++SUMMARY = "File system QA test suite"
++LICENSE = "GPL-2.0-only"
++LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=74274e8a218423e49eefdea80bc55038"
 +
-+Deal with Y2K38 concerns related to Linux input events on more recent
-+kernels and libcs on 32-bit systems
++SRCREV_FORMAT = "xfstests_unionmount"
 +
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ libsuinput/src/suinput.c | 11 ++++++++++-
-+ 1 file changed, 10 insertions(+), 1 deletion(-)
-+
-+diff --git a/libsuinput/src/suinput.c b/libsuinput/src/suinput.c
-+index 8d5fb71..13ff16a 100644
-+--- a/libsuinput/src/suinput.c
-++++ b/libsuinput/src/suinput.c
-+@@ -45,11 +45,20 @@ int suinput_emit(int uinput_fd, uint16_t ev_type, uint16_t ev_code,
-+         struct input_event event;
-+ 
-+         memset(&event, 0, sizeof(event));
-+-        gettimeofday(&event.time, 0);
-+         event.type = ev_type;
-+         event.code = ev_code;
-+         event.value = ev_value;
-+ 
-++/* attempt to deal with 64-bit time keeping on recent 32-bit systems */
-++#if (__BITS_PER_LONG != 32 || !defined(__USE_TIME_BITS64))
-++	gettimeofday(&event.time, 0);
-++#else
-++        struct timeval now;
-++        memset(&now, 0, sizeof(now));
-++        gettimeofday(&now, 0);
-++        event.input_event_sec  = now.tv_sec;
-++        event.input_event_usec = now.tv_usec;
-++#endif
-+         return suinput_write_event(uinput_fd, &event);
-+ }
-+ 
-+-- 
-+2.36.1
-+
-diff --git a/meta-python/recipes-devtools/python/python3-uinput_0.11.2.bb b/meta-python/recipes-devtools/python/python3-uinput_0.11.2.bb
-index 737bbfe2c8..ef466539bd 100644
---- a/meta-python/recipes-devtools/python/python3-uinput_0.11.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-uinput_0.11.2.bb
-@@ -3,8 +3,10 @@ HOMEPAGE = "https://pypi.org/project/python-uinput/"
- LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
- 
-+SRC_URI += "file://0001-setup-use-setuptools-instead-of-distutils.patch \
-+            file://0001-Deal-with-64bit-time_t-default-on-32bit-architecture.patch \
++SRC_URI = "\
++    git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master;name=xfstests \
++    git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
 +"
- SRC_URI[sha256sum] = "99392b676c77b5795b86b7d75274db33fe754fd1e06fb3d58b167c797dc47f0c"
--SRC_URI += "file://0001-setup-use-setuptools-instead-of-distutils.patch"
- 
- PYPI_PACKAGE = "python-uinput"
- 
++
++SRCREV_xfstests = "37881397f1aa62df3c63468049c80b301b0e89eb"
++SRCREV_unionmount = "cec4c51a3bf8ba80bb99fc74b302749d4e3d2f1d"
++
++S = "${WORKDIR}/git"
++
++inherit autotools-brokensep useradd
++
++DEPENDS += "xfsprogs acl"
++RDEPENDS:${PN} += "\
++    bash \
++    bc \
++    coreutils \
++    e2fsprogs \
++    e2fsprogs-tune2fs \
++    e2fsprogs-resize2fs \
++    libcap-bin \
++    overlayfs-progs \
++    perl \
++    python3 \
++    python3-core \
++    xfsprogs \
++    acl \
++"
++
++USERADD_PACKAGES = "${PN}"
++# these users are necessary to run the tests
++USERADD_PARAM:${PN} = "-U -m fsgqa; -N 123456-fsgqa; -N fsgqa2"
++
++EXTRA_OECONF = "INSTALL_USER=root INSTALL_GROUP=root"
++
++# install-sh script in the project is outdated
++# we use the one from the latest libtool to solve installation issues
++# It looks like the upstream is not interested in having it fixed :(
++# https://www.spinics.net/lists/fstests/msg16981.html
++do_configure:prepend() {
++    cp ${STAGING_DIR_NATIVE}${datadir}/libtool/build-aux/install-sh ${B}
++}
++
++do_install:append() {
++    unionmount_target_dir=${D}/usr/xfstests/unionmount-testsuite
++    install -d ${D}/usr/xfstests/unionmount-testsuite/tests
++    install -D ${WORKDIR}/unionmount-testsuite/tests/* -t $unionmount_target_dir/tests
++    install ${WORKDIR}/unionmount-testsuite/*.py -t $unionmount_target_dir
++    install ${WORKDIR}/unionmount-testsuite/run -t $unionmount_target_dir
++    install ${WORKDIR}/unionmount-testsuite/README -t $unionmount_target_dir
++}
++
++FILES:${PN} += "\
++    /usr/xfstests \
++"
 -- 
-2.36.1
+2.25.1
 
 
