@@ -1,108 +1,73 @@
-Return-Path: <samuli.piippo@gmail.com>
+Return-Path: <jubalh@iodoru.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53E92C433EF
-	for <webhook@archiver.kernel.org>; Mon, 30 May 2022 12:30:40 +0000 (UTC)
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com
- [209.85.167.50])
- by mx.groups.io with SMTP id smtpd.web10.36092.1653913828675242381
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 598CAC433FE
+	for <webhook@archiver.kernel.org>; Mon, 30 May 2022 12:39:50 +0000 (UTC)
+Received: from mail.desaster-games.net (mail.desaster-games.net
+ [176.9.84.136])
+ by mx.groups.io with SMTP id smtpd.web12.36536.1653914389319198835
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 May 2022 05:30:29 -0700
+ Mon, 30 May 2022 05:39:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=MT001q/O;
- spf=pass (domain: gmail.com, ip: 209.85.167.50,
- mailfrom: samuli.piippo@gmail.com)
-Received: by mail-lf1-f50.google.com with SMTP id s6so557834lfo.13
-        for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 May 2022 05:30:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=UNdcnDRWedw0lH1RN0NYuyu7ZooCnRSJk9z5C5IfBfI=;
-        b=MT001q/ONwSN/b5d8Y/s0V0A0m3OfnbwsqbbdlfbhadxNATXftdco8cWKQ0tS50v9d
-         e7KgeuXf3fEBmIwIQyjnlYVPQli4KZZLDFZZ2bN4dLD4bSx9BVqlxiw9mVOkPoDaJskR
-         Z6a4FxVviy+zvJHOqzaSEdJpqr+BovwlcuYPctYMB5WgeK3lAk07jBOlvF8ZQtxAuokm
-         1bG6LfgESkLjySx1Rw4fhQUN5tHTzJkxvvshReam+c7EPf7DQVOPTuDDbi+sFsiKx+0l
-         A7eQXgnI/gnrHIjxXNrmjMWVRljSUuiozwpj0dbPJmn/k4sL+hyZSnE0SNl4OXmKa76l
-         a6Og==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=UNdcnDRWedw0lH1RN0NYuyu7ZooCnRSJk9z5C5IfBfI=;
-        b=6jChtNw7pdH0aQkQDpyFfJbhq/8tYvjQ3/xQiVQRdX00Uvo9BnPEc6hi4Pv3O7cua8
-         /2L7B7+NG+XFY1ZDOKIG+tHE3FUW3tqjLCK9dkuZvzyB/WrtcpuvWYvGf1GmBrRQdMcb
-         GVPrAFnakFwSTPqu2/5ngFPK7pjD69VcZVq61k7WXfGN5TWwWfhRYOataEQQxQWToQYg
-         T01l3A+hHdzjcHngE4jF6fFuuWcYutCjfSK344KTNW2rCZ3dqY59wSoNScSn7DY9+3F0
-         Ti5R/iqg/fFlAur1d0CmgJlhx0MspYCjvyNITzDOksLHGH+fQ07J2xygtZvliGMhKBh0
-         5hMA==
-X-Gm-Message-State: AOAM53095ky8XBToQJIpabbPc+E/W3PkOpevZuqtGhU52rT7IL57aI7u
-	IJ4Bq9KTFCaPSn/vViYOWP+OLHOAdqw=
-X-Google-Smtp-Source: 
- ABdhPJy7YuIgpZaBoMHGBrC55lWrLnhJ1Nwg26ingIlFLZ1lbRg1LK6n8S0yQbnoZe2iHnl3Vj0jHg==
-X-Received: by 2002:ac2:53a5:0:b0:477:b080:f59f with SMTP id
- j5-20020ac253a5000000b00477b080f59fmr40245830lfh.241.1653913826465;
-        Mon, 30 May 2022 05:30:26 -0700 (PDT)
-Received: from dcbuildsrv.ci.qt.io ([192.89.120.62])
-        by smtp.gmail.com with ESMTPSA id
- x28-20020a056512131c00b0047255d21197sm2281521lfu.198.2022.05.30.05.30.25
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 30 May 2022 05:30:26 -0700 (PDT)
-From: Samuli Piippo <samuli.piippo@gmail.com>
-X-Google-Original-From: Samuli Piippo <samuli.piippo@qt.io>
+ dkim=missing;
+ spf=none, err=permanent DNS error (domain: iodoru.org, ip: 176.9.84.136,
+ mailfrom: jubalh@iodoru.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.desaster-games.net (Postfix) with ESMTP id BD2B920006;
+	Mon, 30 May 2022 14:39:46 +0200 (CEST)
+X-Virus-Scanned: Amavis at mail.desaster-games.com
+Received: from mail.desaster-games.net ([127.0.0.1])
+	by localhost (mail.desaster-games.net [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id U814wYPCc+zk; Mon, 30 May 2022 14:39:33 +0200 (CEST)
+Received: from linux-es2v.dns1.suse.de (unknown [81.95.8.244])
+	by mail.desaster-games.net (Postfix) with ESMTPSA id 3415D95A3;
+	Mon, 30 May 2022 14:39:24 +0200 (CEST)
+From: Michael Vetter <jubalh@iodoru.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] flite: add recipe
-Date: Mon, 30 May 2022 12:29:52 +0000
-Message-Id: <20220530122952.2715776-1-samuli.piippo@qt.io>
-X-Mailer: git-send-email 2.25.1
+Cc: Michael Vetter <jubalh@iodoru.org>
+Subject: [meta-oe][PATCH] jasper: upgrade 2.0.33 -> 3.0.3
+Date: Mon, 30 May 2022 14:39:22 +0200
+Message-Id: <20220530123922.7311-2-jubalh@iodoru.org>
+X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20220530123922.7311-1-jubalh@iodoru.org>
+References: <20220530123922.7311-1-jubalh@iodoru.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 30 May 2022 12:30:40 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 30 May 2022 12:39:50 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97328
+ https://lists.openembedded.org/g/openembedded-devel/message/97330
 
-CMU Flite (festival-lite) is a small, fast run-time open source
-text to speech synthesis engine developed at CMU and primarily
-designed for small embedded machines.
-
-Signed-off-by: Samuli Piippo <samuli.piippo@qt.io>
+Signed-off-by: Michael Vetter <jubalh@iodoru.org>
 ---
- .../recipes-multimedia/flite/flite_2.2.bb     | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/flite/flite_2.2.bb
+ .../jasper/{jasper_2.0.33.bb =3D> jasper_3.0.33.bb}               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-graphics/jasper/{jasper_2.0.33.bb =3D> jasper_3.0=
+.33.bb} (93%)
 
-diff --git a/meta-multimedia/recipes-multimedia/flite/flite_2.2.bb b/meta-multimedia/recipes-multimedia/flite/flite_2.2.bb
-new file mode 100644
-index 000000000..9ab9c0208
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/flite/flite_2.2.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "Flite: a small run-time speech synthesis engine"
-+HOMEPAGE = "http://cmuflite.org"
-+SECTION = "libs/multimedia"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b3b732d1349633a53e69356607fd2d6c"
-+
-+inherit autotools-brokensep
-+
-+SRC_URI = "git://github.com/festvox/flite.git;protocol=https;branch=master"
-+
-+SRCREV = "e9e2e37c329dbe98bfeb27a1828ef9a71fa84f88"
-+
-+S = "${WORKDIR}/git"
-+
-+EXTRA_OECONF += "--enable-shared"
-+
-+do_install:append() {
-+    chown -R root:root ${D}${libdir}/*
-+}
--- 
-2.25.1
+diff --git a/meta-oe/recipes-graphics/jasper/jasper_2.0.33.bb b/meta-oe/r=
+ecipes-graphics/jasper/jasper_3.0.33.bb
+similarity index 93%
+rename from meta-oe/recipes-graphics/jasper/jasper_2.0.33.bb
+rename to meta-oe/recipes-graphics/jasper/jasper_3.0.33.bb
+index 4c17105a9..87608b231 100644
+--- a/meta-oe/recipes-graphics/jasper/jasper_2.0.33.bb
++++ b/meta-oe/recipes-graphics/jasper/jasper_3.0.33.bb
+@@ -4,7 +4,7 @@ LICENSE =3D "MIT"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Da80440d1d8f17d041c71c7271d6e0=
+6eb"
+=20
+ SRC_URI =3D "git://github.com/jasper-software/jasper.git;protocol=3Dhttp=
+s;branch=3Dmaster"
+-SRCREV =3D "fe00207dc10db1d7cc6f2757961c5c6bdfd10973"
++SRCREV =3D "020ec588d59d6ef13aef73aa0d86343ddda600b5"
+=20
+ S =3D "${WORKDIR}/git"
+=20
+--=20
+2.31.1
 
 
