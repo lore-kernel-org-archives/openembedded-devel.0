@@ -1,111 +1,235 @@
-Return-Path: <samuli.piippo@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 82C61C433EF
-	for <webhook@archiver.kernel.org>; Mon, 30 May 2022 13:08:20 +0000 (UTC)
-Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com
- [209.85.208.169])
- by mx.groups.io with SMTP id smtpd.web08.36367.1653916091094023840
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C89F7C433EF
+	for <webhook@archiver.kernel.org>; Mon, 30 May 2022 14:10:10 +0000 (UTC)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
+ [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web12.37419.1653919801206915773
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 May 2022 06:08:11 -0700
+ Mon, 30 May 2022 07:10:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=UmZVhocN;
- spf=pass (domain: gmail.com, ip: 209.85.208.169,
- mailfrom: samuli.piippo@gmail.com)
-Received: by mail-lj1-f169.google.com with SMTP id 5so2941415lju.10
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=CI41aFuU;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id n8so10440501plh.1
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 May 2022 06:08:10 -0700 (PDT)
+ Mon, 30 May 2022 07:10:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=zMx6BYolvwGFnLAz2/KaByA2sOyu36oOnJa7SOMAxW4=;
-        b=UmZVhocNpmmcJQHULchF4YfDJOYJUlVb+uvjTVE2SkTrsUNYhZSNUfpquQ1hUV/7oJ
-         BE2JNY69l95Xw5dVUrlfQSoi8PVgtdcEci4N3RDSLxa6Z1w8MXywrvNkroN/HbpkOU76
-         Tah7o0lViKfFATHiNYvlIK+QsJ22izCAQfMrs7c3JtLK9SEGn3eY7uXcnaFq6/B/Ey/M
-         7ZIuU2goS0roou2XknA2E4B7P6o/T0Guutl7YU4Qdno/IZSPhpRlmRI1g2CFQUoFvOK1
-         Jjv+qpBsIR5KO4V13f3JWtqTq79wES1w9K7YE0/gfHdq2opy8R9r8GNxNbEmILi1Zf5a
-         ybOg==
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :cc:references:from:in-reply-to:content-transfer-encoding;
+        bh=XGeeoVeQslKJvD1YzyKaIwkGQsiHhuTP2Ius6CXmlOM=;
+        b=CI41aFuU1pH7OzmrAP278U8nII4G8/3Yg2Xxn8PLZ2Twz++F9wWUkBE4qEYLeQwdti
+         7/IxEllf4qjzGdTIHzRGBblyUXSpsGv7UuCTUYH40LJG9cwMkrYxp2wW+aVwkwNMbb3i
+         bVArxRkDy1IyYMVpYyUCCcf8v4yyFxVS3YXaktDAqs/68jYUpAgFg8qm+r6MAUlhLkw5
+         vFgoF+ISxGWpPEeMnmxEH/nsi3RLy0GaqQW/wuZK57Iyx6Qh2Itdrae6T72BYJJ7/HeR
+         ScAnyJ+Po3A5fNrcZ2WkumvR3bFYL0ouHe26BglbwgbyqubewROl6pXVV06BYnUXiEZ2
+         29oQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:cc:references:from:in-reply-to
          :content-transfer-encoding;
-        bh=zMx6BYolvwGFnLAz2/KaByA2sOyu36oOnJa7SOMAxW4=;
-        b=UP9WS9F3Ujt0jnyRsAv71wA0dW4QrLxkhpVubf2tnT+DBGucqZrUPNLk3lGFxw/jVF
-         hhbmNOmrZtZMkYYT82FDIM0ohQ/FD3RnNHTElImBydRyXtJ+utWlZ08MYh6+ZlGutBwX
-         u5FnSGu2x8/lUHe8/tLq8eyKWAghavKJYkbUOfb0yEAAId5vQpYfgD0p87y0/dPVLJ7W
-         CtOBx2mBpLQcl1fnSKN5vYeC8ynZIay9eSMwrFMo2MGKU253ERCTBqhOvdz9eiP2AH70
-         rmfflvurAnW4YQW0LBX3rkJk0QhxPGaRiPMYvskHlJUTc+uDCla+n+abhm+eNarPUKhp
-         wZ8Q==
-X-Gm-Message-State: AOAM532FJo/u5aa+x6kVYIL4BC64jPrITwkt3A1vNGv1lNcRGhOz6OP/
-	ad+REepIlBPSXaTSAp2q+yuUCdo/7fw=
+        bh=XGeeoVeQslKJvD1YzyKaIwkGQsiHhuTP2Ius6CXmlOM=;
+        b=ZfXfKv54zeVP5nj6MBkx/WqGQ0HIq293T9ADEcjfbzO94Ry2BKH9TwYs9iPWHEBfhB
+         D/6WUxf8o2Tcj2Juci2o7hVQizQZAC/U64BpPr3/+B1yt2lojf7SkJiu5KYAGaKZutfv
+         dyBz3I2fqp8nOplTWS5mjRjrjNoiIt5v409mEsI+fAxbNO2XNgwJ2ijFdzvxMNHgJqpy
+         Sb9kAyeXqD46mysWFaRgZKqUavCH0ojjar2Cisk1r9PfYYp1PoxsV3jyN9JPFCLhr/qR
+         2i0u4SlDq2PV8tAysiuPwwRxQdqrE/07FIyWpKqyqILRUO4HkpFysLX3Ubb9l2vx8waE
+         NWIw==
+X-Gm-Message-State: AOAM531wH67kYHWivvKLLTrONoF775UgDrV/BDJPYH85iYHZRsET+Fba
+	DtsAs+9woXpe6EnpKZbk8KjPIWSGbUo=
 X-Google-Smtp-Source: 
- ABdhPJzZbEVLKc7jc4gQCipF/2/Y9erjXJ59cqYcNnarxCBlUqcBCV37Xyix+VrO3nqTv9gIm3ptCQ==
-X-Received: by 2002:a2e:9ec5:0:b0:24b:536b:7e28 with SMTP id
- h5-20020a2e9ec5000000b0024b536b7e28mr34363891ljk.120.1653916089020;
-        Mon, 30 May 2022 06:08:09 -0700 (PDT)
-Received: from dcbuildsrv.ci.qt.io ([192.89.120.62])
+ ABdhPJzYR2vDQEsIFPiwZkWixbyUcHifIVvskGdizZxPN2JZv6+GqkpVPZ4fMMNGA0hZsbKFYk8riw==
+X-Received: by 2002:a17:902:d653:b0:163:78e0:552f with SMTP id
+ y19-20020a170902d65300b0016378e0552fmr21850682plh.63.1653919800686;
+        Mon, 30 May 2022 07:10:00 -0700 (PDT)
+Received: from ?IPV6:2601:202:4180:a5c0:20f:7584:1252:397c?
+ ([2601:202:4180:a5c0:20f:7584:1252:397c])
         by smtp.gmail.com with ESMTPSA id
- t18-20020a2e4612000000b00253e1833e8bsm2521127lja.117.2022.05.30.06.08.07
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 30 May 2022 06:08:08 -0700 (PDT)
-From: Samuli Piippo <samuli.piippo@gmail.com>
-X-Google-Original-From: Samuli Piippo <samuli.piippo@qt.io>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] libtomcrypt: add recipe
-Date: Mon, 30 May 2022 13:08:05 +0000
-Message-Id: <20220530130805.2716465-1-samuli.piippo@qt.io>
-X-Mailer: git-send-email 2.25.1
+ z8-20020a17090a014800b001d92e2e5694sm7094777pje.1.2022.05.30.07.09.59
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 30 May 2022 07:10:00 -0700 (PDT)
+Message-ID: <18e187ea-cfdd-8a30-1901-c67c481c28e8@gmail.com>
+Date: Mon, 30 May 2022 07:09:59 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.1
+Subject: Re: [oe] [meta-oe][dunfell][PATCH v2]] tcpdump: Add fix for
+ CVE-2018-16301
+Content-Language: en-US
+To: Riyaz Ahmed Khan <rak3033@gmail.com>,
+ openembedded-devel@lists.openembedded.org, Riyaz.Khan@kpit.com
+Cc: Ranjitsinh.Rathod@kpit.com
+References: <20220530120418.21892-1-rak3033@gmail.com>
+From: akuster808 <akuster808@gmail.com>
+In-Reply-To: <20220530120418.21892-1-rak3033@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 30 May 2022 13:08:20 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 30 May 2022 14:10:10 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97332
+ https://lists.openembedded.org/g/openembedded-devel/message/97335
 
-LibTomCrypt is a fairly comprehensive, modular and portable cryptographic
-toolkit that provides developers with a vast array of well known published
-block ciphers, one-way hash functions, chaining modes, pseudo-random number
-generators, public key cryptography and a plethora of other routines.
+What is wrong with the one that has been sitting in dunfell-next for a 
+few days?
 
-Signed-off-by: Samuli Piippo <samuli.piippo@qt.io>
----
- .../libtomcrypt/libtomcrypt_1.18.2.bb         | 21 +++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb
+-armin
 
-diff --git a/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb b/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb
-new file mode 100644
-index 000000000..357fd0ab8
---- /dev/null
-+++ b/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "LibTomCrypt is a public domain open source cryptographic toolkit"
-+HOMEPAGE = "https://www.libtom.net/LibTomCrypt"
-+SECTION = "libs"
-+LICENSE = "Unlicense"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=71baacc459522324ef3e2b9e052e8180"
-+
-+DEPENDS += "libtool-cross"
-+
-+SRC_URI = "git://github.com/libtom/libtomcrypt.git;protocol=https;branch=master"
-+
-+SRCREV = "7e7eb695d581782f04b24dc444cbfde86af59853"
-+
-+S = "${WORKDIR}/git"
-+
-+do_compile() {
-+    oe_runmake -f makefile.shared
-+}
-+
-+do_install() {
-+    oe_runmake -f makefile.shared 'PREFIX=${prefix}' 'DESTDIR=${D}' install
-+}
--- 
-2.25.1
+On 5/30/22 05:04, Riyaz Ahmed Khan wrote:
+> From: Riyaz Ahmed Khan <Riyaz.Khan@kpit.com>
+>
+> Add patch for CVE issue: CVE-2018-16301
+> Link: https://github.com/the-tcpdump-group/tcpdump/commit/8ab211a7ec728bb0ad8c766c8eeb12deb0a13b86
+>
+> Signed-off-by: Riyaz Ahmed Khan <Riyaz.Khan@kpit.com>
+> ---
+>   .../tcpdump/tcpdump/CVE-2018-16301.patch      | 111 ++++++++++++++++++
+>   .../recipes-support/tcpdump/tcpdump_4.9.3.bb  |   1 +
+>   2 files changed, 112 insertions(+)
+>   create mode 100644 meta-networking/recipes-support/tcpdump/tcpdump/CVE-2018-16301.patch
+>
+> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2018-16301.patch b/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2018-16301.patch
+> new file mode 100644
+> index 000000000..5f5c68ccd
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2018-16301.patch
+> @@ -0,0 +1,111 @@
+> +From 8ab211a7ec728bb0ad8c766c8eeb12deb0a13b86 Mon Sep 17 00:00:00 2001
+> +From: Guy Harris <gharris@sonic.net>
+> +Date: Wed, 30 Sep 2020 11:37:30 -0700
+> +Subject: [PATCH] Handle very large -f files by rejecting them.
+> +
+> +_read(), on Windows, has a 32-bit size argument and a 32-bit return
+> +value, so reject -f files that have more than 2^31-1 characters.
+> +
+> +Add some #defines so that, on Windows, we use _fstati64 to get the size
+> +of that file, to handle large files.
+> +
+> +Don't assume that our definition for ssize_t is the same size as size_t;
+> +by the time we want to print the return value of the read, we know it'll
+> +fit into an int, so just cast it to int and print it with %d.
+> +
+> +(cherry picked from commit faf8fb70af3a013e5d662b8283dec742fd6b1a77)
+> +
+> +CVE: CVE-2022-25308
+> +Upstream-Status: Backport [https://github.com/the-tcpdump-group/tcpdump/commit/8ab211a7ec728bb0ad8c766c8eeb12deb0a13b86]
+> +
+> +Signed-off-by: Riyaz Ahmed Khan <Riyaz.Khan@kpit.com>
+> +
+> +---
+> + netdissect-stdinc.h | 16 +++++++++++++++-
+> + tcpdump.c           | 15 ++++++++++++---
+> + 2 files changed, 27 insertions(+), 4 deletions(-)
+> +
+> +diff --git a/netdissect-stdinc.h b/netdissect-stdinc.h
+> +index 8282c5846..9941c2a16 100644
+> +--- a/netdissect-stdinc.h
+> ++++ b/netdissect-stdinc.h
+> +@@ -149,10 +149,17 @@
+> + #ifdef _MSC_VER
+> + #define stat _stat
+> + #define open _open
+> +-#define fstat _fstat
+> + #define read _read
+> + #define close _close
+> + #define O_RDONLY _O_RDONLY
+> ++
+> ++/*
+> ++ * We define our_fstat64 as _fstati64, and define our_statb as
+> ++ * struct _stati64, so we get 64-bit file sizes.
+> ++ */
+> ++#define our_fstat _fstati64
+> ++#define our_statb struct _stati64
+> ++
+> + #endif  /* _MSC_VER */
+> +
+> + /*
+> +@@ -211,6 +218,13 @@ typedef char* caddr_t;
+> +
+> + #include <arpa/inet.h>
+> +
+> ++/*
+> ++ * We should have large file support enabled, if it's available,
+> ++ * so just use fstat as our_fstat and struct stat as our_statb.
+> ++ */
+> ++#define our_fstat fstat
+> ++#define our_statb struct stat
+> ++
+> + #endif /* _WIN32 */
+> +
+> + #ifndef HAVE___ATTRIBUTE__
+> +diff --git a/tcpdump.c b/tcpdump.c
+> +index 043bda1d7..8f27ba2a4 100644
+> +--- a/tcpdump.c
+> ++++ b/tcpdump.c
+> +@@ -108,6 +108,7 @@ The Regents of the University of California.  All rights reserved.\n";
+> + #endif /* HAVE_CAP_NG_H */
+> + #endif /* HAVE_LIBCAP_NG */
+> +
+> ++#include "netdissect-stdinc.h"
+> + #include "netdissect.h"
+> + #include "interface.h"
+> + #include "addrtoname.h"
+> +@@ -861,15 +862,22 @@ read_infile(char *fname)
+> + {
+> + 	register int i, fd, cc;
+> + 	register char *cp;
+> +-	struct stat buf;
+> ++	our_statb buf;
+> +
+> + 	fd = open(fname, O_RDONLY|O_BINARY);
+> + 	if (fd < 0)
+> + 		error("can't open %s: %s", fname, pcap_strerror(errno));
+> +
+> +-	if (fstat(fd, &buf) < 0)
+> ++	if (our_fstat(fd, &buf) < 0)
+> + 		error("can't stat %s: %s", fname, pcap_strerror(errno));
+> +
+> ++	/*
+> ++	 * Reject files whose size doesn't fit into an int; a filter
+> ++	 * *that* large will probably be too big.
+> ++	 */
+> ++	if (buf.st_size > INT_MAX)
+> ++		error("%s is too large", fname);
+> ++
+> + 	cp = malloc((u_int)buf.st_size + 1);
+> + 	if (cp == NULL)
+> + 		error("malloc(%d) for %s: %s", (u_int)buf.st_size + 1,
+> +@@ -878,7 +886,8 @@ read_infile(char *fname)
+> + 	if (cc < 0)
+> + 		error("read %s: %s", fname, pcap_strerror(errno));
+> + 	if (cc != buf.st_size)
+> +-		error("short read %s (%d != %d)", fname, cc, (int)buf.st_size);
+> ++		error("short read %s (%d != %d)", fname, (int) cc,
+> ++		    (int)buf.st_size);
+> +
+> + 	close(fd);
+> + 	/* replace "# comment" with spaces */
+> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
+> index 2ea493863..66bf21775 100644
+> --- a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
+> +++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
+> @@ -18,6 +18,7 @@ SRC_URI = " \
+>       file://add-ptest.patch \
+>       file://run-ptest \
+>       file://0001-PPP-When-un-escaping-don-t-allocate-a-too-large-buff.patch \
+> +    file://CVE-2018-16301.patch \
+>   "
+>   
+>   SRC_URI[md5sum] = "a4ead41d371f91aa0a2287f589958bae"
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#97331): https://lists.openembedded.org/g/openembedded-devel/message/97331
+> Mute This Topic: https://lists.openembedded.org/mt/91429070/3616698
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
