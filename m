@@ -2,36 +2,34 @@ Return-Path: <jubalh@iodoru.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 598CAC433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D739C4332F
 	for <webhook@archiver.kernel.org>; Mon, 30 May 2022 12:39:50 +0000 (UTC)
 Received: from mail.desaster-games.net (mail.desaster-games.net
  [176.9.84.136])
- by mx.groups.io with SMTP id smtpd.web12.36536.1653914389319198835
+ by mx.groups.io with SMTP id smtpd.web12.36533.1653914379779122017
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 May 2022 05:39:49 -0700
+ Mon, 30 May 2022 05:39:40 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
  spf=none, err=permanent DNS error (domain: iodoru.org, ip: 176.9.84.136,
  mailfrom: jubalh@iodoru.org)
 Received: from localhost (localhost [127.0.0.1])
-	by mail.desaster-games.net (Postfix) with ESMTP id BD2B920006;
-	Mon, 30 May 2022 14:39:46 +0200 (CEST)
+	by mail.desaster-games.net (Postfix) with ESMTP id 4F86420007;
+	Mon, 30 May 2022 14:39:36 +0200 (CEST)
 X-Virus-Scanned: Amavis at mail.desaster-games.com
 Received: from mail.desaster-games.net ([127.0.0.1])
 	by localhost (mail.desaster-games.net [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id U814wYPCc+zk; Mon, 30 May 2022 14:39:33 +0200 (CEST)
+	with ESMTP id Og-utK5VB3QO; Mon, 30 May 2022 14:39:23 +0200 (CEST)
 Received: from linux-es2v.dns1.suse.de (unknown [81.95.8.244])
-	by mail.desaster-games.net (Postfix) with ESMTPSA id 3415D95A3;
-	Mon, 30 May 2022 14:39:24 +0200 (CEST)
+	by mail.desaster-games.net (Postfix) with ESMTPSA id 04C7395A2;
+	Mon, 30 May 2022 14:39:23 +0200 (CEST)
 From: Michael Vetter <jubalh@iodoru.org>
 To: openembedded-devel@lists.openembedded.org
 Cc: Michael Vetter <jubalh@iodoru.org>
-Subject: [meta-oe][PATCH] jasper: upgrade 2.0.33 -> 3.0.3
-Date: Mon, 30 May 2022 14:39:22 +0200
-Message-Id: <20220530123922.7311-2-jubalh@iodoru.org>
+Subject: [PATCH 1/1] jasper: upgrade 2.0.33 -> 3.0.3
+Date: Mon, 30 May 2022 14:39:21 +0200
+Message-Id: <20220530123922.7311-1-jubalh@iodoru.org>
 X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20220530123922.7311-1-jubalh@iodoru.org>
-References: <20220530123922.7311-1-jubalh@iodoru.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
@@ -39,7 +37,7 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 30 May 2022 12:39:50 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97330
+ https://lists.openembedded.org/g/openembedded-devel/message/97329
 
 Signed-off-by: Michael Vetter <jubalh@iodoru.org>
 ---
