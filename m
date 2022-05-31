@@ -2,156 +2,115 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7778DC433EF
-	for <webhook@archiver.kernel.org>; Tue, 31 May 2022 15:44:08 +0000 (UTC)
-Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com
- [209.85.160.170])
- by mx.groups.io with SMTP id smtpd.web12.51458.1654011843548738737
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6165BC433F5
+	for <webhook@archiver.kernel.org>; Tue, 31 May 2022 15:45:38 +0000 (UTC)
+Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com
+ [209.85.160.178])
+ by mx.groups.io with SMTP id smtpd.web10.50978.1654011933130028654
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 31 May 2022 08:44:03 -0700
+ Tue, 31 May 2022 08:45:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=fWqTrt0N;
- spf=pass (domain: gmail.com, ip: 209.85.160.170,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=dv/UCWVU;
+ spf=pass (domain: gmail.com, ip: 209.85.160.178,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f170.google.com with SMTP id k6so4027659qtq.3
+Received: by mail-qt1-f178.google.com with SMTP id ew15so2804931qtb.2
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 31 May 2022 08:44:03 -0700 (PDT)
+ Tue, 31 May 2022 08:45:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=soozeyLDyrvjoGgm+63pRt4cgBmOMJ5o8RMsf3cAlsU=;
-        b=fWqTrt0NCASqukKlJlfKF5hrmEInTEier4V/sOPoyNVCr4FtnIapjiaL8uuqZULTU5
-         iA4n4IHzvzatepsnsom6cktvqNHin3mYoaTl4qO5Wa6MfC1b1qZLiF+8mqLqfRziAxhO
-         SdF6mYHH4icUCrGEXoRCEFAhUs5+n8d2mmbUm2Hr4/41t2dSHP8xsya7TBWx3Ys6yc2q
-         0uauAqQJcm/hxVIFK1EtpjBnp085k2oyCtpsU7aIDrBZtlBAQOj9ZmJe6hRabOZmOS17
-         jkOrpYzA6dNWOyB8ucgzcVS4HITnM74x17ATf8pOWk0sPWzB9hJdLYYexzEjy63LqwkZ
-         HJxQ==
+        bh=zN+NGCYigwnw8V7ujDCIpF6oY9L9n3Hx5DAB0PmNet4=;
+        b=dv/UCWVUc/jHgbAWUK2qf+AmHWff7Soa9/HoBuzcyDKQkHsKFtztZUtptqDUcfYGQt
+         Kk8A/1G4dORqCpcoo5UB3As1TAOWWAQJdHF9KU39q0Or4xWVwEhug68cTOUB0NvxzqH5
+         w7hstILxSUhEbVIGenIH6GzIB0xpeYxdNSieWvgmsR+3gi4mKpxtQ+CwUluLN+vnwnUN
+         XhhBBaL07hbu8h22uju6FLJQS43gKYvvSiTBJ7HXg6uY1rpeEotUoNg2Giy0YRzNJf72
+         6x9auaQ0h8skKmveImxb70It9xxreG9S8bHJM/4ed7WY+Xo5Nq/kAvr2TFuegV9WN41X
+         TBIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=soozeyLDyrvjoGgm+63pRt4cgBmOMJ5o8RMsf3cAlsU=;
-        b=Z5HW+LLnqPp+vlHTXM4C4zyHgkNvMEILKJR3dGdYedc4ni4Fclu8O7hqaa9xqwwhDB
-         YSzNKhvdzdkyLJfRxy5/c5Dz9yLQLwc+T7j4Ap2gOG3tlURf8kU1JYK0IUFzFms3QoPi
-         +9pJsFqi7mnDRxL7fwJwnxuUjEUEO7h6qNoTVT9kko2llh90jenEGc4LU7zRakewYETa
-         wc2of4pRNqatC94ENPdcrm5nWIyHruLilsWrtmKXGS2RsCNcfnhuhe690ktKvNDtw2bL
-         vVNhSIdB4xURt2SdUDXM+6zapR9wgakSzP+CX1c8PW0qz42X4g7oiJGhJ/r2UBtdEWxK
-         VtNg==
-X-Gm-Message-State: AOAM533HJqcrDldJ8TmzjjmeU+BGtFqJ3NG1WcAFjnpyuDFrhIKG7b3d
-	T7lnMsP7wVx/fQIJQ9bj30EjuFk5Dzbq07XYL0o=
+        bh=zN+NGCYigwnw8V7ujDCIpF6oY9L9n3Hx5DAB0PmNet4=;
+        b=QJLMI8iF7xlKZ2nwGQJPeyiP7c4vCge2p/5aFwt5q1QjaU/Sp1DPnbPQ83buBLe8jH
+         Qp4g1pcIriKZkRdvSTtqpDkLRXYfR5cLthoYSj337FAIJGtgxfwZ9+gTb/8lrC913+VJ
+         SPbYSIYFHQqK5U/IgL95Aeeg+oUSG9VGARXPJDrGEVYljGa/H46XBUM+ap0LS+3fx7d7
+         uLmpjAp5VDdfFf1pQ4BCLsm/BqHOiSeYFR5taM5iM4t+p1XCrJowqY2h08k+XAJB2uWA
+         Os9BgZveOL3oPfI0k2bpgCrBcvw4egHpy2/pjlg1TZox3PdoCOCTgvzUE96LxjqRzk4U
+         9x+Q==
+X-Gm-Message-State: AOAM531iyjBAMXCnhwIWgNgdVyo3pa4/VObArQIPRvBpuGJL+6tVaqo5
+	dvqEGLqRW5MqCPSpsRULND03DmU996rf1qvsvgw=
 X-Google-Smtp-Source: 
- ABdhPJzoDvxovZkmxZh6UoESDKF8nonYwefBJTaIOrC3JDCTv3IapKZ7i/DZ7LrPEsYOaJgt2nhY63f57DWGGxCGCoQ=
-X-Received: by 2002:a05:622a:4c9:b0:304:b650:683d with SMTP id
- q9-20020a05622a04c900b00304b650683dmr5883431qtx.229.1654011842479; Tue, 31
- May 2022 08:44:02 -0700 (PDT)
+ ABdhPJx4Z2ecu0nYLND5fVr91GPNy6OHx7vq/uLyyETsUqKgGrfLADO61dUuOOhY6EqLQjh87PZW9Oq3qrEnAtV2o+c=
+X-Received: by 2002:ac8:7f08:0:b0:304:b3cb:8f5d with SMTP id
+ f8-20020ac87f08000000b00304b3cb8f5dmr7119433qtk.532.1654011932208; Tue, 31
+ May 2022 08:45:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220530122952.2715776-1-samuli.piippo@qt.io>
- <9881391e-a6d9-beb4-14a4-de636795c22@spiteful.org>
- <CABXoSoVEMV4xPWmftuJcX63QCV5ZPcxObLzmF+kzY7kH1F=h2A@mail.gmail.com>
- <ca74cd1d-f065-9e29-8445-242f917e6d8@spiteful.org>
-In-Reply-To: <ca74cd1d-f065-9e29-8445-242f917e6d8@spiteful.org>
+References: <1653990320-31470-1-git-send-email-wangmy@fujitsu.com>
+ <1653990320-31470-2-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1653990320-31470-2-git-send-email-wangmy@fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 31 May 2022 08:43:36 -0700
+Date: Tue, 31 May 2022 08:45:06 -0700
 Message-ID: 
- <CAMKF1sqXUJUth0Ap0a=fqrUJTsrx8+koMUMDpykDXuKc=yxCLQ@mail.gmail.com>
-Subject: Re: [oe] [meta-multimedia][PATCH] flite: add recipe
-To: Scott Murray <scott.murray@konsulko.com>
-Cc: Samuli Piippo <samuli.piippo@gmail.com>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
+ <CAMKF1srEjAuud9ux17vN0EyXVBvMNxP99eGja_oTc2d-ztKN7Q@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] hidapi: upgrade 0.11.2 -> 0.12.0
+To: wangmy <wangmy@fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 31 May 2022 15:44:08 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 31 May 2022 15:45:38 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97354
+ https://lists.openembedded.org/g/openembedded-devel/message/97355
 
-On Tue, May 31, 2022 at 8:35 AM Scott Murray <scott.murray@konsulko.com> wrote:
+On Tue, May 31, 2022 at 2:45 AM wangmy <wangmy@fujitsu.com> wrote:
 >
-> On Tue, 31 May 2022, Samuli Piippo wrote:
+> Changelog:
+> ==========
+>   Windows: migrate from SetupApi to CfgMgr32 (#362) - as per recommendation from Microsoft;
+>   Windows: add hid_winapi_get_container_id WinAPI-specific function (#379);
+>   Windows: improved error messages (#388);
+>   Windows: fixed out-of-boundary memory access for some of the function (#418);
+>   windows: Add .rc (#415);
+>   macOS: add hid_darwin_get_location_id macOS-specific function (#378);
+>   macOS: add macOS-specific function(s) to open device(s) in non-exclusive mode (#397);
+>   libusb: improved CMake dependency on Iconv (#405) - as a result, better support for NetBSD;
+>   general: documentation improvements;
+>   general: small code cleanups/improvements;
 >
-> > On Mon, 30 May 2022 at 17:43, Scott Murray <scott.murray@konsulko.com>
-> > wrote:
-> >
-> > > On Mon, 30 May 2022, Samuli Piippo wrote:
-> > >
-> > > > CMU Flite (festival-lite) is a small, fast run-time open source
-> > > > text to speech synthesis engine developed at CMU and primarily
-> > > > designed for small embedded machines.
-> > > >
-> > > > Signed-off-by: Samuli Piippo <samuli.piippo@qt.io>
-> > > > ---
-> > > >  .../recipes-multimedia/flite/flite_2.2.bb     | 19 +++++++++++++++++++
-> > > >  1 file changed, 19 insertions(+)
-> > > >  create mode 100644 meta-multimedia/recipes-multimedia/flite/
-> > > flite_2.2.bb
-> > > >
-> > > > diff --git a/meta-multimedia/recipes-multimedia/flite/flite_2.2.bb
-> > > b/meta-multimedia/recipes-multimedia/flite/flite_2.2.bb
-> > > > new file mode 100644
-> > > > index 000000000..9ab9c0208
-> > > > --- /dev/null
-> > > > +++ b/meta-multimedia/recipes-multimedia/flite/flite_2.2.bb
-> > > > @@ -0,0 +1,19 @@
-> > > > +SUMMARY = "Flite: a small run-time speech synthesis engine"
-> > > > +HOMEPAGE = "http://cmuflite.org"
-> > > > +SECTION = "libs/multimedia"
-> > > > +LICENSE = "BSD-3-Clause"
-> > > > +LIC_FILES_CHKSUM = "file://COPYING;md5=b3b732d1349633a53e69356607fd2d6c"
-> > > > +
-> > > > +inherit autotools-brokensep
-> > > > +
-> > > > +SRC_URI = "git://
-> > > github.com/festvox/flite.git;protocol=https;branch=master"
-> > > > +
-> > > > +SRCREV = "e9e2e37c329dbe98bfeb27a1828ef9a71fa84f88"
-> > > [snip]
-> > >
-> > > There's no 2.3 tag, but the README.md and Makefile imply that 2.3 was
-> > > released in March 2022 (see commit 530060de), and the current voice files
-> > > on http://festvox.org/flite/packed/ are "flite-2.3".  So perhaps this
-> > > should be building that instead of the ~2 years old 2.2?
-> >
-> > Hard to say if there's a specific revision that was meant to be the
-> > release, but I could update this to 2.3 and just use the latest revision?
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  meta-oe/recipes-support/hidapi/hidapi_git.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> I'd be in favor of a _git recipe that set PV = "2.3+git${SRCPV}", but Khem
-> might have a different opinion.
+> diff --git a/meta-oe/recipes-support/hidapi/hidapi_git.bb b/meta-oe/recipes-support/hidapi/hidapi_git.bb
+> index 1c57a1d83..4aa58ec7f 100644
+> --- a/meta-oe/recipes-support/hidapi/hidapi_git.bb
+> +++ b/meta-oe/recipes-support/hidapi/hidapi_git.bb
+> @@ -12,6 +12,6 @@ RDEPENDS:${PN}:append:libc-glibc = " glibc-gconv-utf-16"
+>  inherit autotools pkgconfig
+>
+>  SRC_URI = "git://github.com/libusb/hidapi.git;protocol=https;branch=master"
+> -PV = "0.11.2"
+> -SRCREV = "31bde69a1f08c880ef1622f2586eea0daf3b0857"
+> +PV = "0.12.0"
 
-yeah if there is no tag then this is a better approach.
+if its bumping from version to version, then perhaps its better to
+rename the recipe to hidapi_0.12.0.bb and drop setting PV inside the
+recipe
+it's easy to manage bbappends that way
 
->
-> > > > +
-> > > > +S = "${WORKDIR}/git"
-> > > > +
-> > > > +EXTRA_OECONF += "--enable-shared"
-> > > > +
-> > > > +do_install:append() {
-> > > > +    chown -R root:root ${D}${libdir}/*
-> > >
-> > > This seems a bit odd, I'm curious what prompted adding it?
-> >
-> > The installed files had local user and group IDs that caused host
-> > contamination error.
->
-> Hrm, that suggests upstream have a broken Makefile using "cp -p", it could
-> be worthwhile to poke them about it.  We have had a recipe for an older
-> version in AGL for quite a while and didn't see it, so it seems like
-> something changed.
-
-right, its perhaps in install target of makefile where it maybe the
-better place to fix
-it and also upstream it.
-
->
-> Scott
+> +SRCREV = "76108294092c023a4ece99eb3219559cea0d5066"
+>  S = "${WORKDIR}/git"
+> --
+> 2.25.1
 >
 >
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#97353): https://lists.openembedded.org/g/openembedded-devel/message/97353
-> Mute This Topic: https://lists.openembedded.org/mt/91429478/1997914
+> View/Reply Online (#97345): https://lists.openembedded.org/g/openembedded-devel/message/97345
+> Mute This Topic: https://lists.openembedded.org/mt/91447919/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
