@@ -1,176 +1,304 @@
-Return-Path: <marcel@ziswiler.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F72EC43334
-	for <webhook@archiver.kernel.org>; Thu,  2 Jun 2022 09:42:19 +0000 (UTC)
-Received: from mout.perfora.net (mout.perfora.net [74.208.4.194])
- by mx.groups.io with SMTP id smtpd.web09.4679.1654162936983592352
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E2D5C43334
+	for <webhook@archiver.kernel.org>; Thu,  2 Jun 2022 14:47:11 +0000 (UTC)
+Received: from mail-qv1-f49.google.com (mail-qv1-f49.google.com
+ [209.85.219.49])
+ by mx.groups.io with SMTP id smtpd.web11.7468.1654181228513435582
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Jun 2022 02:42:17 -0700
+ Thu, 02 Jun 2022 07:47:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=permanent DNS error (domain: ziswiler.com, ip: 74.208.4.194,
- mailfrom: marcel@ziswiler.com)
-Received: from toolbox.int.toradex.com ([81.221.243.92]) by mrelay.perfora.net
- (mreueus002 [74.208.5.2]) with ESMTPSA (Nemesis) id 0MPn4m-1nsrrI0ZIg-0054Zf;
- Thu, 02 Jun 2022 11:42:06 +0200
-From: Marcel Ziswiler <marcel@ziswiler.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Alexander Kanavin <alex.kanavin@gmail.com>,
-	Quentin Schulz <quentin.schulz@theobroma-systems.com>,
-	Max Krummenacher <max.oss.09@gmail.com>,
-	Luca Ceresoli <luca.ceresoli@bootlin.com>,
-	Peter Bergin <peter@berginkonsult.se>,
-	Marcel Ziswiler <marcel.ziswiler@toradex.com>
-Subject: [oe][PATCH v4] libavtp: add recipe for audio video transport protocol
- (avtp)
-Date: Thu,  2 Jun 2022 11:40:55 +0200
-Message-Id: <20220602094056.303118-1-marcel@ziswiler.com>
-X-Mailer: git-send-email 2.36.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=NcVA1A4v;
+ spf=pass (domain: gmail.com, ip: 209.85.219.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f49.google.com with SMTP id s10so535130qvt.8
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 02 Jun 2022 07:47:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=WaZm92bZSugVaAwL5WQ15vvbwrWlbC503XBZrXejnFw=;
+        b=NcVA1A4vtai7dTCrNxM+ba5oO/yo1972s0p0ak0/OA0R0s6VNTtFxBUzG/KQlhR+XF
+         lZpAly6eVv3edV0+rGerP2FQlDn7j46LEj4pjb3Rwvllg+AfeCqaPvD3iSHHK51g03vd
+         xSgfogeP7df75nKrkHH5XpMRGRhgP0HpzFE9gPgsHzC8tRguNsI06QjHf3ki/4DYxlPF
+         mgStTbGcnNSivaHCRsbtejbLGTauNtWUZt8kXXcVY1Og2jYpZCE7zqbrKszagwmr3Swh
+         zUKRElJm+RRbTgjeIuYjU7SltQIRVpLGeS+7zb9u8cd+GsvOZV0L5UFxlI9ekwRp3qiR
+         4jgQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=WaZm92bZSugVaAwL5WQ15vvbwrWlbC503XBZrXejnFw=;
+        b=fA6vy/EVnvL0fmUxIy+dw9ajGahTWqsK/4iHrzpoSlH81+x2xecyVk5cBeUq4AcL/x
+         XEa1vtPH87nzvEZYiyXqwGur6cTPx9nQb4nSUNEm+hMxHkpPOFqTTao40PcddGnsDeJ5
+         0RUTQqlo8pvI9jRYP1/YuCWsf80VaRcjDTpXl4wGCqKzcCRI2F0QJeSRmCaYvEsJNcUQ
+         WEmjlN900nVG2rttNkgGmC4qUcHa3gXkS7tQLcmRODfyqusXtRH5ijfuWwzJziLD268H
+         hO/vxhn7N5Tn3TON3XcMkt7jb4GILO08ZggrLxmn4W2S8F5WYXmszfhApcUpgdfd3Hsd
+         jG+Q==
+X-Gm-Message-State: AOAM533tiFiTuLrngHTdQEJmqkLaxUDYUuIwM+3bKYgAYRaPCbbajYTX
+	VVcMocmR6KTLB3wbNOkn4yND1GdYfRHXK3ufZWw=
+X-Google-Smtp-Source: 
+ ABdhPJzkpcZeoULxTIiJmdpXw+/NVSCAWxG6zUl4yfVd7mEHIFXk49jDmiy3zSSwgAi5g8LsQsn1CsCZE6wh3RYR0oE=
+X-Received: by 2002:ad4:5de6:0:b0:462:180d:7038 with SMTP id
+ jn6-20020ad45de6000000b00462180d7038mr53062411qvb.16.1654181227504; Thu, 02
+ Jun 2022 07:47:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Provags-ID: V03:K1:mMV20Ds2Qe+gfgmsJbd3Mo+blsGgH2DKFGT9cjAmkulphokqK22
- SC81s4j+toLatbmvCr2V8V+QHI7cQSOC/5iO1gADZEmVhNZMtRqx2mpo9CTdjWVPpMZTYD0
- 4KVwXs4WqlyiJOeF7pLnQiyj3mSdVn6Z0cvfXSHqcRmbrPGmj91sDhSMtQXAcWuTQ7is/40
- YPukBPRtxpSLWqVnV5+oQ==
-X-UI-Out-Filterresults: notjunk:1;V03:K0:W9mJiu5Rj6g=:/BJ0OLTO6vwEhazb71fbt/
- n7pYpo7pM14XhWs4Fa9S19y3LxQH+eaGhFX/NYP4OvasF8mHxDAu2AE/tA6yQGVm6Ryn/mFV9
- itrwFhLx0l891P64nrvWZRWLnOfIEePVCsSdmPKbRFpMYwfSbHFmhLDudU2daYv71Pu1TE0i8
- tzYyWp/ArKCsqaJiGmknLB/gpH+JkcrNrOax/tZJGpZFxRZkYlleYubN503jXyk8CHYOvl1e8
- WzX/IqIZQQp46FSLwiyLnpoczBF97OcNSc5h/Tu/BxoMQsFTl/QX3NQRPQB5kBThBuh5dMpGe
- ChlL1zd0/6X9kfuN+uYedzrJp5nBaRkqOoIqfvQWFWRf7Ztkpjc/WZCWQAWu8R1RyTKFxBAZw
- 5PVfuMuhZehEKiFPgoAS8zCLLesvnYHrcjFXSy0NYKfZojqhshEgbUUStxVFIPcyH6H9qztbC
- nN5ECssZfgdsheGVzjembUSPOArQw77aeOpBKHoT5bXKZl0YrAkU5b4M89E7qOHDG+d4sZ1q3
- N50VDI4wh9Ym2F0WBc+Wjh/1UKdEKoDzrAo9dBFU8TwvFUKzK57Zd4ABS6kdprHiPD7PRweqI
- QRWi5e0HY22tXJ3EaDkT+uolriO3Qbvh6WnbpXZuXyTrnRCUEbVXqBSWd7UwOHyKILbjShBVf
- IolAEBO360ryCFqH42VoNf2q8DHQ+zGeORfW4PWZzuvHCA5pwaLd7uOCNDeD/arBCil09kNOw
- MEVRf5IB5IanpVXMECkQOXvxWfwPAHyzav46rw==
+References: <6bdffec7-eb98-b2ba-a89a-a13cf4ac5a85@gmail.com>
+ <29102.1654151443160260957@lists.openembedded.org>
+In-Reply-To: <29102.1654151443160260957@lists.openembedded.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 2 Jun 2022 07:46:56 -0700
+Message-ID: 
+ <CAMKF1sq+qqh7ZqedWrEeRKiKVMFGpKfbrs=OY5dREfQJadv7_A@mail.gmail.com>
+Subject: Re: [oe] [meta-python][dunfell][PATCH 1/9] python3-pillow: Upgrade
+ 6.2.1 -> 7.2.0
+To: Ranjitsinh Rathod <ranjitsinhrathod1991@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000075a85b05e078142b"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Jun 2022 09:42:19 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Jun 2022 14:47:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97384
+ https://lists.openembedded.org/g/openembedded-devel/message/97385
 
-From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+--00000000000075a85b05e078142b
+Content-Type: text/plain; charset="UTF-8"
 
-This is Avnu's implementation of the Audio Video Transport Protocol
-(AVTP). It may be used in order to enable the configuration option aaf
-(AVTP Audio Format) for the alsa-plugins. While the library libavtp is a
-dependency no recipe for this library was present. The aaf support for
-the alsa-plugins was introduced in the openembedded-core commit
-ddf542133118 ("alsa-plugins: 1.1.6 -> 1.1.8"). It may further be used in
-order to enable the configuration option avtp for the
-gstreamer1.0-plugins-bad once a separate patch enabling such
-PACKAGECONFIG makes it into openembedded-core.
+What changes are there in new version is there anything of concern ?
+Sometimes we may be fine to bump a revision of it only contains smaller
+fixes
 
-Signed-off-by: Peter Bergin <peter@berginkonsult.se>
-Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+On Wed, Jun 1, 2022 at 11:30 PM Ranjitsinh Rathod <
+ranjitsinhrathod1991@gmail.com> wrote:
 
----
-Resurrect from mailing list [1] as this is still not upstream.
-End-to-end tested on Verdin iMX8M Plus.
-Will talk about it at the Embedded World Conference in the TSN & Linux
-track next month [2].
+> Hi Armin,
+>
+> I understand that we are not upgrading versions on the LTS branch, but
+> this series of upgrades fixing the below CVEs.
+> CVE-2019 <https://asc.bmwgroup.net/mgujira/browse/CVE-2019>-19911 CVE-2020
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2020>-10177 CVE-2020
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2020>-10378 CVE-2020
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2020>-10379 CVE-2020
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2020>-10994 CVE-2020
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2020>-11538 CVE-2020
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2020>-35653 CVE-2020
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2020>-35654 CVE-2020
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2020>-35655 CVE-2020
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2020>-5310 CVE-2020
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2020>-5311 CVE-2020
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2020>-5312 CVE-2020
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2020>-5313 CVE-2021
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2021>-23437 CVE-2021
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2021>-25287 CVE-2021
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2021>-25288 CVE-2021
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2021>-25289 CVE-2021
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2021>-25290 CVE-2021
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2021>-25291 CVE-2021
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2021>-25292 CVE-2021
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2021>-25293 CVE-2021
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2021>-27921 CVE-2021
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2021>-27922 CVE-2021
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2021>-27923 CVE-2021
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2021>-28675 CVE-2021
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2021>-28676 CVE-2021
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2021>-28677 CVE-2021
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2021>-28678 CVE-2021
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2021>-34552 CVE-2022
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2022>-22815 CVE-2022
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2022>-22816 CVE-2022
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2022>-22817 CVE-2022
+> <https://asc.bmwgroup.net/mgujira/browse/CVE-2022>-24303
+>
+> To solve these many CVEs by applying a patch would be really tough and
+> maintaining patches too. What is your opinion here?
+>
+> Thanks,
+> Ranjitsinh Rathod
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#97380):
+> https://lists.openembedded.org/g/openembedded-devel/message/97380
+> Mute This Topic: https://lists.openembedded.org/mt/91473921/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
+>
 
-[1] https://lore.kernel.org/all/20210604090216.553285-1-peter@berginkonsult.se/
-[2] https://events.weka-fachmedien.de/embedded-world-conference/program/
-[3] https://lore.kernel.org/all/20220531213206.7119-2-marcel@ziswiler.com/
+--00000000000075a85b05e078142b
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Changes in v4:
-- Moved from openembedded-core as suggested by Alex [3].
-- Relying on git hash instead of tag as suggested by Quentin.
-- Fixing musl build issue as reported by Luca curtsey Max.
+<div dir=3D"auto">What changes are there in new version is there anything o=
+f concern ? Sometimes we may be fine to bump a revision of it only contains=
+ smaller fixes=C2=A0</div><div><br><div class=3D"gmail_quote"><div dir=3D"l=
+tr" class=3D"gmail_attr">On Wed, Jun 1, 2022 at 11:30 PM Ranjitsinh Rathod =
+&lt;<a href=3D"mailto:ranjitsinhrathod1991@gmail.com">ranjitsinhrathod1991@=
+gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">Hi Armin=
+,<br><br>I understand that we are not upgrading versions on the LTS branch,=
+ but this series of upgrades fixing the below CVEs.<br><a style=3D"color:#0=
+654ac;font-family:monospace;font-size:small;white-space:pre-wrap;background=
+-color:#ffffff" href=3D"https://asc.bmwgroup.net/mgujira/browse/CVE-2019" t=
+arget=3D"_blank">CVE-2019</a><span style=3D"color:#353535;font-family:monos=
+pace;font-size:small;white-space:pre-wrap">-19911 </span><a style=3D"color:=
+#0654ac;font-family:monospace;font-size:small;white-space:pre-wrap;backgrou=
+nd-color:#ffffff" href=3D"https://asc.bmwgroup.net/mgujira/browse/CVE-2020"=
+ target=3D"_blank">CVE-2020</a><span style=3D"color:#353535;font-family:mon=
+ospace;font-size:small;white-space:pre-wrap">-10177 </span><a style=3D"colo=
+r:#0654ac;font-family:monospace;font-size:small;white-space:pre-wrap;backgr=
+ound-color:#ffffff" href=3D"https://asc.bmwgroup.net/mgujira/browse/CVE-202=
+0" target=3D"_blank">CVE-2020</a><span style=3D"color:#353535;font-family:m=
+onospace;font-size:small;white-space:pre-wrap">-10378 </span><a style=3D"co=
+lor:#0654ac;font-family:monospace;font-size:small;white-space:pre-wrap;back=
+ground-color:#ffffff" href=3D"https://asc.bmwgroup.net/mgujira/browse/CVE-2=
+020" target=3D"_blank">CVE-2020</a><span style=3D"color:#353535;font-family=
+:monospace;font-size:small;white-space:pre-wrap">-10379 </span><a style=3D"=
+color:#0654ac;font-family:monospace;font-size:small;white-space:pre-wrap;ba=
+ckground-color:#ffffff" href=3D"https://asc.bmwgroup.net/mgujira/browse/CVE=
+-2020" target=3D"_blank">CVE-2020</a><span style=3D"color:#353535;font-fami=
+ly:monospace;font-size:small;white-space:pre-wrap">-10994 </span><a style=
+=3D"color:#0654ac;font-family:monospace;font-size:small;white-space:pre-wra=
+p;background-color:#ffffff" href=3D"https://asc.bmwgroup.net/mgujira/browse=
+/CVE-2020" target=3D"_blank">CVE-2020</a><span style=3D"color:#353535;font-=
+family:monospace;font-size:small;white-space:pre-wrap">-11538 </span><a sty=
+le=3D"color:#0654ac;font-family:monospace;font-size:small;white-space:pre-w=
+rap;background-color:#ffffff" href=3D"https://asc.bmwgroup.net/mgujira/brow=
+se/CVE-2020" target=3D"_blank">CVE-2020</a><span style=3D"color:#353535;fon=
+t-family:monospace;font-size:small;white-space:pre-wrap">-35653 </span><a s=
+tyle=3D"color:#0654ac;font-family:monospace;font-size:small;white-space:pre=
+-wrap;background-color:#ffffff" href=3D"https://asc.bmwgroup.net/mgujira/br=
+owse/CVE-2020" target=3D"_blank">CVE-2020</a><span style=3D"color:#353535;f=
+ont-family:monospace;font-size:small;white-space:pre-wrap">-35654 </span><a=
+ style=3D"color:#0654ac;font-family:monospace;font-size:small;white-space:p=
+re-wrap;background-color:#ffffff" href=3D"https://asc.bmwgroup.net/mgujira/=
+browse/CVE-2020" target=3D"_blank">CVE-2020</a><span style=3D"color:#353535=
+;font-family:monospace;font-size:small;white-space:pre-wrap">-35655 </span>=
+<a style=3D"color:#0654ac;font-family:monospace;font-size:small;white-space=
+:pre-wrap;background-color:#ffffff" href=3D"https://asc.bmwgroup.net/mgujir=
+a/browse/CVE-2020" target=3D"_blank">CVE-2020</a><span style=3D"color:#3535=
+35;font-family:monospace;font-size:small;white-space:pre-wrap">-5310 </span=
+><a style=3D"color:#0654ac;font-family:monospace;font-size:small;white-spac=
+e:pre-wrap;background-color:#ffffff" href=3D"https://asc.bmwgroup.net/mguji=
+ra/browse/CVE-2020" target=3D"_blank">CVE-2020</a><span style=3D"color:#353=
+535;font-family:monospace;font-size:small;white-space:pre-wrap">-5311 </spa=
+n><a style=3D"color:#0654ac;font-family:monospace;font-size:small;white-spa=
+ce:pre-wrap;background-color:#ffffff" href=3D"https://asc.bmwgroup.net/mguj=
+ira/browse/CVE-2020" target=3D"_blank">CVE-2020</a><span style=3D"color:#35=
+3535;font-family:monospace;font-size:small;white-space:pre-wrap">-5312 </sp=
+an><a style=3D"color:#0654ac;font-family:monospace;font-size:small;white-sp=
+ace:pre-wrap;background-color:#ffffff" href=3D"https://asc.bmwgroup.net/mgu=
+jira/browse/CVE-2020" target=3D"_blank">CVE-2020</a><span style=3D"color:#3=
+53535;font-family:monospace;font-size:small;white-space:pre-wrap">-5313 </s=
+pan><a style=3D"color:#0654ac;font-family:monospace;font-size:small;white-s=
+pace:pre-wrap;background-color:#ffffff" href=3D"https://asc.bmwgroup.net/mg=
+ujira/browse/CVE-2021" target=3D"_blank">CVE-2021</a><span style=3D"color:#=
+353535;font-family:monospace;font-size:small;white-space:pre-wrap">-23437 <=
+/span><a style=3D"color:#0654ac;font-family:monospace;font-size:small;white=
+-space:pre-wrap;background-color:#ffffff" href=3D"https://asc.bmwgroup.net/=
+mgujira/browse/CVE-2021" target=3D"_blank">CVE-2021</a><span style=3D"color=
+:#353535;font-family:monospace;font-size:small;white-space:pre-wrap">-25287=
+ </span><a style=3D"color:#0654ac;font-family:monospace;font-size:small;whi=
+te-space:pre-wrap;background-color:#ffffff" href=3D"https://asc.bmwgroup.ne=
+t/mgujira/browse/CVE-2021" target=3D"_blank">CVE-2021</a><span style=3D"col=
+or:#353535;font-family:monospace;font-size:small;white-space:pre-wrap">-252=
+88 </span><a style=3D"color:#0654ac;font-family:monospace;font-size:small;w=
+hite-space:pre-wrap;background-color:#ffffff" href=3D"https://asc.bmwgroup.=
+net/mgujira/browse/CVE-2021" target=3D"_blank">CVE-2021</a><span style=3D"c=
+olor:#353535;font-family:monospace;font-size:small;white-space:pre-wrap">-2=
+5289 </span><a style=3D"color:#0654ac;font-family:monospace;font-size:small=
+;white-space:pre-wrap;background-color:#ffffff" href=3D"https://asc.bmwgrou=
+p.net/mgujira/browse/CVE-2021" target=3D"_blank">CVE-2021</a><span style=3D=
+"color:#353535;font-family:monospace;font-size:small;white-space:pre-wrap">=
+-25290 </span><a style=3D"color:#0654ac;font-family:monospace;font-size:sma=
+ll;white-space:pre-wrap;background-color:#ffffff" href=3D"https://asc.bmwgr=
+oup.net/mgujira/browse/CVE-2021" target=3D"_blank">CVE-2021</a><span style=
+=3D"color:#353535;font-family:monospace;font-size:small;white-space:pre-wra=
+p">-25291 </span><a style=3D"color:#0654ac;font-family:monospace;font-size:=
+small;white-space:pre-wrap;background-color:#ffffff" href=3D"https://asc.bm=
+wgroup.net/mgujira/browse/CVE-2021" target=3D"_blank">CVE-2021</a><span sty=
+le=3D"color:#353535;font-family:monospace;font-size:small;white-space:pre-w=
+rap">-25292 </span><a style=3D"color:#0654ac;font-family:monospace;font-siz=
+e:small;white-space:pre-wrap;background-color:#ffffff" href=3D"https://asc.=
+bmwgroup.net/mgujira/browse/CVE-2021" target=3D"_blank">CVE-2021</a><span s=
+tyle=3D"color:#353535;font-family:monospace;font-size:small;white-space:pre=
+-wrap">-25293 </span><a style=3D"color:#0654ac;font-family:monospace;font-s=
+ize:small;white-space:pre-wrap;background-color:#ffffff" href=3D"https://as=
+c.bmwgroup.net/mgujira/browse/CVE-2021" target=3D"_blank">CVE-2021</a><span=
+ style=3D"color:#353535;font-family:monospace;font-size:small;white-space:p=
+re-wrap">-27921 </span><a style=3D"color:#0654ac;font-family:monospace;font=
+-size:small;white-space:pre-wrap;background-color:#ffffff" href=3D"https://=
+asc.bmwgroup.net/mgujira/browse/CVE-2021" target=3D"_blank">CVE-2021</a><sp=
+an style=3D"color:#353535;font-family:monospace;font-size:small;white-space=
+:pre-wrap">-27922 </span><a style=3D"color:#0654ac;font-family:monospace;fo=
+nt-size:small;white-space:pre-wrap;background-color:#ffffff" href=3D"https:=
+//asc.bmwgroup.net/mgujira/browse/CVE-2021" target=3D"_blank">CVE-2021</a><=
+span style=3D"color:#353535;font-family:monospace;font-size:small;white-spa=
+ce:pre-wrap">-27923 </span><a style=3D"color:#0654ac;font-family:monospace;=
+font-size:small;white-space:pre-wrap;background-color:#ffffff" href=3D"http=
+s://asc.bmwgroup.net/mgujira/browse/CVE-2021" target=3D"_blank">CVE-2021</a=
+><span style=3D"color:#353535;font-family:monospace;font-size:small;white-s=
+pace:pre-wrap">-28675 </span><a style=3D"color:#0654ac;font-family:monospac=
+e;font-size:small;white-space:pre-wrap;background-color:#ffffff" href=3D"ht=
+tps://asc.bmwgroup.net/mgujira/browse/CVE-2021" target=3D"_blank">CVE-2021<=
+/a><span style=3D"color:#353535;font-family:monospace;font-size:small;white=
+-space:pre-wrap">-28676 </span><a style=3D"color:#0654ac;font-family:monosp=
+ace;font-size:small;white-space:pre-wrap;background-color:#ffffff" href=3D"=
+https://asc.bmwgroup.net/mgujira/browse/CVE-2021" target=3D"_blank">CVE-202=
+1</a><span style=3D"color:#353535;font-family:monospace;font-size:small;whi=
+te-space:pre-wrap">-28677 </span><a style=3D"color:#0654ac;font-family:mono=
+space;font-size:small;white-space:pre-wrap;background-color:#ffffff" href=
+=3D"https://asc.bmwgroup.net/mgujira/browse/CVE-2021" target=3D"_blank">CVE=
+-2021</a><span style=3D"color:#353535;font-family:monospace;font-size:small=
+;white-space:pre-wrap">-28678 </span><a style=3D"color:#0654ac;font-family:=
+monospace;font-size:small;white-space:pre-wrap;background-color:#ffffff" hr=
+ef=3D"https://asc.bmwgroup.net/mgujira/browse/CVE-2021" target=3D"_blank">C=
+VE-2021</a><span style=3D"color:#353535;font-family:monospace;font-size:sma=
+ll;white-space:pre-wrap">-34552 </span><a style=3D"color:#0654ac;font-famil=
+y:monospace;font-size:small;white-space:pre-wrap;background-color:#ffffff" =
+href=3D"https://asc.bmwgroup.net/mgujira/browse/CVE-2022" target=3D"_blank"=
+>CVE-2022</a><span style=3D"color:#353535;font-family:monospace;font-size:s=
+mall;white-space:pre-wrap">-22815 </span><a style=3D"color:#0654ac;font-fam=
+ily:monospace;font-size:small;white-space:pre-wrap;background-color:#ffffff=
+" href=3D"https://asc.bmwgroup.net/mgujira/browse/CVE-2022" target=3D"_blan=
+k">CVE-2022</a><span style=3D"color:#353535;font-family:monospace;font-size=
+:small;white-space:pre-wrap">-22816 </span><a style=3D"color:#0654ac;font-f=
+amily:monospace;font-size:small;white-space:pre-wrap;background-color:#ffff=
+ff" href=3D"https://asc.bmwgroup.net/mgujira/browse/CVE-2022" target=3D"_bl=
+ank">CVE-2022</a><span style=3D"color:#353535;font-family:monospace;font-si=
+ze:small;white-space:pre-wrap">-22817 </span><a style=3D"color:#0654ac;font=
+-family:monospace;font-size:small;white-space:pre-wrap;background-color:#ff=
+ffff" href=3D"https://asc.bmwgroup.net/mgujira/browse/CVE-2022" target=3D"_=
+blank">CVE-2022</a><span style=3D"color:#353535;font-family:monospace;font-=
+size:small;white-space:pre-wrap">-24303<br><br>To solve these many CVEs by =
+applying a patch would be really tough and maintaining patches too. What is=
+ your opinion here? </span>
+<div><span style=3D"color:#353535;font-family:monospace;font-size:small;whi=
+te-space:pre-wrap"><br>Thanks,<br>Ranjitsinh Rathod</span></div>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#97380): <a href=3D"https://lists.openembedded.org/g/ope=
+nembedded-devel/message/97380" rel=3D"noreferrer" target=3D"_blank">https:/=
+/lists.openembedded.org/g/openembedded-devel/message/97380</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/91473921/1997=
+914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/91473921/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
 
-Changes in v3:
-- Rename recipe to officially released PV of 0.2.0.
-- Drop PROVIDES of avtp which just works around alsa-plugins referring
-  to it as such instead of libavtp. Will update PACKAGECONFIG in
-  alsa-plugins instead.
-
-Changes in v2:
-- Updated SRC_URI specifying mandatory protocol as https.
-- Updated SRCREV to latest.
-
- ...it-host-to-network-conversion-macros.patch | 43 +++++++++++++++++++
- .../libavtp/libavtp_0.2.0.bb                  | 16 +++++++
- 2 files changed, 59 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/libavtp/libavtp/0001-provide-64bit-host-to-network-conversion-macros.patch
- create mode 100644 meta-multimedia/recipes-multimedia/libavtp/libavtp_0.2.0.bb
-
-diff --git a/meta-multimedia/recipes-multimedia/libavtp/libavtp/0001-provide-64bit-host-to-network-conversion-macros.patch b/meta-multimedia/recipes-multimedia/libavtp/libavtp/0001-provide-64bit-host-to-network-conversion-macros.patch
-new file mode 100644
-index 000000000..e432ccca4
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libavtp/libavtp/0001-provide-64bit-host-to-network-conversion-macros.patch
-@@ -0,0 +1,43 @@
-+From cdbbe227594665145e9309a9ecb7d90aad070aab Mon Sep 17 00:00:00 2001
-+From: Max Krummenacher <max.krummenacher@toradex.com>
-+Date: Wed, 1 Jun 2022 15:53:55 +0000
-+Subject: [PATCH] provide 64bit host to network conversion macros
-+
-+musl dosn't include the macros which convert 64-bit integers
-+between host and network endianness from arpa/inet.h as glibc does.
-+
-+Use this patch to include endian.h in util.h if compiling for musl.
-+
-+Prevents:
-+| [2/8] aarch64-tdx-linux-musl-gcc ... -o libavtp.so.0.2.0.p/src_avtp_stream.c.o -c ../git/src/avtp_stream.c
-+| ../git/src/avtp_stream.c: In function 'avtp_stream_pdu_get':
-+| ../git/src/avtp_stream.c:116:24: warning: implicit declaration of function 'be64toh' [-Wimplicit-function-declaration]
-+|   116 |                 *val = be64toh(pdu->stream_id);
-+|       |                        ^~~~~~~
-+| ../git/src/avtp_stream.c: In function 'avtp_stream_pdu_set':
-+| ../git/src/avtp_stream.c:199:34: warning: implicit declaration of function 'htobe64' [-Wimplicit-function-declaration]
-+|   199 |                 pdu->stream_id = htobe64(value);
-+
-+Upstream-Status: Inappropriate [musl specific]
-+
-+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
-+---
-+ src/util.h | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/src/util.h b/src/util.h
-+index 8b50625..e6fd2ef 100644
-+--- a/src/util.h
-++++ b/src/util.h
-+@@ -27,6 +27,8 @@
-+ 
-+ #pragma once
-+ 
-++#include <endian.h>
-++
-+ #define BIT(n)				(1ULL << n)
-+ 
-+ #define BITMASK(len)			(BIT(len) - 1)
-+-- 
-+2.20.1
-+
-diff --git a/meta-multimedia/recipes-multimedia/libavtp/libavtp_0.2.0.bb b/meta-multimedia/recipes-multimedia/libavtp/libavtp_0.2.0.bb
-new file mode 100644
-index 000000000..98f8e5b84
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libavtp/libavtp_0.2.0.bb
-@@ -0,0 +1,16 @@
-+SUMMARY = "Implements Audio Video Transport Protocol (AVTP)"
-+DESCRIPTION = "Open source implementation of Audio Video Transport Protocol (AVTP) \
-+               specified in IEEE 1722-2016 spec."
-+HOMEPAGE = "https://github.com/Avnu/libavtp"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=7fcb4331e23e45e171cd5693c1ff7d3e"
-+
-+SRC_URI = "git://github.com/Avnu/libavtp.git;branch=master;protocol=https"
-+SRC_URI:append:libc-musl = " file://0001-provide-64bit-host-to-network-conversion-macros.patch"
-+SRCREV = "3599a5bf2d18fc3ae89b64f208d8380e6ee3a866"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit meson pkgconfig
-+
-+EXTRA_OEMESON = "-Dtests=disabled"
--- 
-2.36.1
-
+--00000000000075a85b05e078142b--
 
