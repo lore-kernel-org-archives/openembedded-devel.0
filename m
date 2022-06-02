@@ -1,120 +1,209 @@
-Return-Path: <zhengrq.fnst@fujitsu.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C232C433EF
-	for <webhook@archiver.kernel.org>; Thu,  2 Jun 2022 01:39:07 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
- [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web09.1726.1654133940740970211
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DAA6C433EF
+	for <webhook@archiver.kernel.org>; Thu,  2 Jun 2022 01:44:47 +0000 (UTC)
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
+ [209.85.215.176])
+ by mx.groups.io with SMTP id smtpd.web12.1706.1654134285851531402
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Jun 2022 18:39:01 -0700
+ Wed, 01 Jun 2022 18:44:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=v7vWsQLI;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
- mailfrom: zhengrq.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1654133938; i=@fujitsu.com;
-	bh=ZJmKa3npcbhZ+9AHGeo/53ElPXvebox43EBAp7WSaPk=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=v7vWsQLIfMCZYkyPHv4rmcGbhDzo8zwUWZa2+kaf/hT7DMVxNqqPAW05TRpwqHVT0
-	 dErdGI2zbGXRPDmnaDciivrByevDZoeDf4UifPp2I58bP8YVTEE4X/MB6h9+FfFsS4
-	 IFNeODXsisDAqgqfzI1EqoaoarXqlwmYfheuoT3sgNj4thy/bA22nWV2dHKbTiIARu
-	 OgVko08XLiMDhhaEXAEY0vlX/TEf7d1DFkexGj65xXw/aJhGaqA/CQgsd+9H9AR7Of
-	 IC4PopM/UzZ8+cNdD81NgmLyPZpDBmC59YrykV50mmmi2s70bcmVEpG1QejrRlX56B
-	 JQWccWD5X9oaw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8ORqLtJZEa
-  Swad+XouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWP5x6lMBXO4KhY8mszcwLiAs4uRi0NI4Amj
-  ROPPVmYI5wKTxLPGLrYuRk4gZz+jxITF8iA2m4CuxIsfi1lAbBEBfYmls/cwg9jCAr4Sz7pfs
-  4PYLAIqEntfTAOzeQU8JOY0fQOrkRBQkJjy8D0zRFxQ4uTMJ2BzmAUkJA6+eAEU5wCqUZSYPV
-  0eorxC4vXhS1CtahJXz21insDINwtJ9ywk3QsYmVYx2iQVZaZnlOQmZuboGhoY6Boamupamuk
-  aGRroJVbpJuqllurm5ReVZOga6iWWF+ulFhfrFVfmJuek6OWllmxiBIZfSnHCpR2M6/b90jvE
-  KMnBpCTKu9NxepIQX1J+SmVGYnFGfFFpTmrxIUYZDg4lCV4P4RlJQoJFqempFWmZOcBYgElLc
-  PAoifDmMQKleYsLEnOLM9MhUqcYdTlmfm07wCzEkpeflyolznsJZIYASFFGaR7cCFhcXmKUlR
-  LmZWRgYBDiKUgtys0sQZV/xSjOwagkzMsLjHIhnsy8ErhNr4COYAI64tq3KSBHlCQipKQamNr
-  yZs1NExT1KC75yFX6Re7KkiTPdPF1Vyd+PnfUPm7/tCKVer767IT8tEnha0WD13nV6Nw5LTuR
-  VeNGSNOWMF997V9rnteZb+u3nlZ04ZmA34MPIaaTqg9LxTuYJzDPri+XqPvdk/V27v8VkQG/L
-  s5JaN5w4PEWprvTzpm0zYlbf+OfXekF//UGxk5XhGO293OaL/tubXIw/Zz1jMuqtouanG2zgo
-  +u6rqqpZIckLDuY/CRtlT71x8uLl0378PpEsck/zj3bdfD/4QxNttsZ7EQXdlm4KLwKObHxkk
-  x7yLWhoW/Ct0wcbNwdfjjV84yrkZlRufLjgq+XumzqCDrjFvDm3W8idWTlS5ZvVTapcRSnJFo
-  qMVcVJwIAEkrK+RGAwAA
-X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-23.tower-728.messagelabs.com!1654133937!432324!1
-X-Originating-IP: [62.60.8.97]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.86.7; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 11011 invoked from network); 2 Jun 2022 01:38:58 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-23.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 2 Jun 2022 01:38:58 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 99D94100183
-	for <openembedded-devel@lists.openembedded.org>;
- Thu,  2 Jun 2022 02:38:57 +0100 (BST)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 8DC11100180
-	for <openembedded-devel@lists.openembedded.org>;
- Thu,  2 Jun 2022 02:38:57 +0100 (BST)
-Received: from CentOS7.g08.fujitsu.local (10.167.225.35) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Thu, 2 Jun 2022 02:38:41 +0100
-From: zhengrq.fnst <zhengrq.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-imageio: upgrade 2.19.2 -> 2.19.3
-Date: Thu, 2 Jun 2022 09:38:32 +0800
-Message-ID: <1654133912-29532-1-git-send-email-zhengrq.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=FLEL+bdW;
+ spf=pass (domain: gmail.com, ip: 209.85.215.176,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-pg1-f176.google.com with SMTP id e66so3454080pgc.8
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 01 Jun 2022 18:44:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :cc:references:from:in-reply-to:content-transfer-encoding;
+        bh=jS3izeiWKed9fJC82eJ4fjJS8P2ksJJPuyUnseyb4LY=;
+        b=FLEL+bdWTP9bOegv64HFh0uNtF9jZ7mIaPQRi8OdQ3lxKA1b8J3Guy1sgF3yHMa0S5
+         rUGsQ1n74SieaLQB2fFp8zh8EFIBDydKunXO4fi2bn/LkxyMlMPgoyflgqBvrCdVX14c
+         bvSWVhBE+RMSaEiJ1HfHab+yRlm9jBJ8ijQQ6jSD9f2Jot1+lP3wqQZAOSqvwvn13BXG
+         6d5qSLUeHCsF77hirb3d7fbNonyJ6EXIOOssYZo492e/+iEkw9vq1zUY7F0siXHYlIsJ
+         ILamLtbLem/xQXseGMWy8nbHRdVnOwotGRthminqvN9l5lg03rtunzR8w6Bgcf3xRFLK
+         oD3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:cc:references:from:in-reply-to
+         :content-transfer-encoding;
+        bh=jS3izeiWKed9fJC82eJ4fjJS8P2ksJJPuyUnseyb4LY=;
+        b=BZv/+TM6ktqIC1GFHXxdGU6+vKU1dlvEakczwPwUEJtjR74Iq8l1feMFFNNyyEZNNx
+         Nhz37u50ugnWppUYUVCjOvaAwaUEWZ1TIA6S5dlM9U+HR2RK0R3Vfg1ljsWSZAFu68s0
+         LerjaYC8Fq+yZl7K9RqrtM2nH4TgQedKg2gijVop5oXlk26QZnew62vwPdcIMozOxX4L
+         geo0RdWeV8RdpOqOLErFOslwj1ZJNiGZfEREgltu7iCzj4YvlPm2/aYyMLC602lKkkHC
+         pZP/A7t8TlVRDvTs+3zPCt4vBAJEu8ja1fOEKaM+0lg/lYES8OkDUP42WEiPJh4gCcA7
+         jFWg==
+X-Gm-Message-State: AOAM5301a9dHfcypWT9G+Qer4BsXLv1ARA9kA5j+PLLxqNxPEglr7iAb
+	bPV0MDMv7YOUGGoniPVOb1o=
+X-Google-Smtp-Source: 
+ ABdhPJyhwsex4xfiVJEIZjecjaabt5AhIHTL85nupY45I/QZgpSfz0fS/KSTiPs0pv4Kq2QB47dfLQ==
+X-Received: by 2002:a62:6411:0:b0:50a:81df:bfa6 with SMTP id
+ y17-20020a626411000000b0050a81dfbfa6mr2546625pfb.26.1654134285333;
+        Wed, 01 Jun 2022 18:44:45 -0700 (PDT)
+Received: from ?IPV6:2601:202:4180:a5c0:e8e8:b71d:2c05:ffc8?
+ ([2601:202:4180:a5c0:e8e8:b71d:2c05:ffc8])
+        by smtp.gmail.com with ESMTPSA id
+ x3-20020aa793a3000000b0051b560b0a98sm2061073pff.159.2022.06.01.18.44.44
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 01 Jun 2022 18:44:44 -0700 (PDT)
+Message-ID: <6bdffec7-eb98-b2ba-a89a-a13cf4ac5a85@gmail.com>
+Date: Wed, 1 Jun 2022 18:44:43 -0700
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.1
+Subject: Re: [meta-python][dunfell][PATCH 1/9] python3-pillow: Upgrade 6.2.1
+ -> 7.2.0
+Content-Language: en-US
+To: Ranjitsinh Rathod <ranjitsinhrathod1991@gmail.com>,
+ openembedded-devel@lists.openembedded.org
+Cc: raj.khem@gmail.com, Leon Anavi <leon.anavi@konsulko.com>,
+ Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
+References: <20220601122527.19987-1-ranjitsinhrathod1991@gmail.com>
+From: akuster808 <akuster808@gmail.com>
+In-Reply-To: <20220601122527.19987-1-ranjitsinhrathod1991@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Jun 2022 01:39:07 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Jun 2022 01:44:47 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97377
+ https://lists.openembedded.org/g/openembedded-devel/message/97378
 
-Changelog:
-===========
-Fix
-----
-    Correctly read STK volumes in v3 (#805) (9b739ab)
 
-Other
------
-    Include py.typed in package (#815) (ba63485)
-    Add GA token (#814) (c9a2852)
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
----
- .../{python3-imageio_2.19.2.bb => python3-imageio_2.19.3.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-imageio_2.19.2.bb => python3-imageio_2.19.3.bb} (81%)
+On 6/1/22 05:25, Ranjitsinh Rathod wrote:
+> From: Leon Anavi <leon.anavi@konsulko.com>
+>
+> Upgrade to release 7.2.0:
+>
+> - Do not convert I;16 images when showing PNGs
+> - Fixed ICNS file pointer saving
+> - Fixed loading non-RGBA mode APNGs with dispose background
+> - Deprecated _showxv
+> - Deprecate Image.show(command="...")
+> - Updated JPEG magic number
+> - Change STRIPBYTECOUNTS to LONG if necessary when saving
+> - Write JFIF header when saving JPEG
+> - Replaced tiff_jpeg with jpeg compression when saving TIFF images
+> - Writing TIFF tags: improved BYTE, added UNDEFINED
+> - Consider transparency when pasting text on an RGBA image
+> - Added method argument to single frame WebP saving
+> - Use ImageFileDirectory_v2 in Image.Exif
+> - Corrected reading EXIF metadata without prefix
+> - Fixed drawing a jointed line with a sequence of numeric values
+> - Added support for 1-D NumPy arrays
+> - Parse orientation from XMP tags
+> - Speed up text layout by not rendering glyphs
+> - Fixed ZeroDivisionError in Image.thumbnail
+> - Replaced TiffImagePlugin DEBUG with logging
+> - Fix repeatedly loading .gbr
+> - JPEG: Truncate icclist instead of setting to None
+> - Fixes default offset for Exif
+> - Fixed bug when unpickling TIFF images
+> - Fix pickling WebP
+> - Replace IOError and WindowsError aliases with OSError
 
-diff --git a/meta-python/recipes-devtools/python/python3-imageio_2.19.2.bb b/meta-python/recipes-devtools/python/python3-imageio_2.19.3.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-imageio_2.19.2.bb
-rename to meta-python/recipes-devtools/python/python3-imageio_2.19.3.bb
-index b792b9885..86229322b 100644
---- a/meta-python/recipes-devtools/python/python3-imageio_2.19.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-imageio_2.19.3.bb
-@@ -5,7 +5,7 @@ SECTION = "devel/python"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=24cb9a367a9e641b459a01c4d15256ba"
- 
--SRC_URI[sha256sum] = "46e1e74128837d2a1ebc87476b7f73978b69a128fa238bc989b625a9819bd9b3"
-+SRC_URI[sha256sum] = "0c9df80e42f2ee68bea92001e7fcf612aa149910efe040eb757f5ce323250ae1"
- 
- inherit pypi setuptools3
- 
--- 
-2.25.1
+This appears to be more than a bug fix only update. This series of 
+changes are not suited for a stable release.
+
+Thanks for thinking about this LTS release.
+
+-armin
+>
+> License-Update: Word wrap and updated copyright year.
+>
+> Conflicts:
+> 	meta-python/recipes-devtools/python/python3-pillow_7.2.0.bb
+> Conflicts due to extra parameter protocol=https in SRC_URI
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> Acked-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> (cherry picked from commit 995fc86b298d5b09fdd6288b9e9f4211feea3b18)
+> Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
+> Signed-off-by: Ranjitsinh Rathod <ranjitsinhrathod1991@gmail.com>
+> ---
+>   .../0001-explicitly-set-compile-options.patch | 19 +++++++++++--------
+>   ...illow_6.2.1.bb => python3-pillow_7.2.0.bb} |  6 +++---
+>   2 files changed, 14 insertions(+), 11 deletions(-)
+>   rename meta-python/recipes-devtools/python/{python3-pillow_6.2.1.bb => python3-pillow_7.2.0.bb} (78%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-pillow/0001-explicitly-set-compile-options.patch b/meta-python/recipes-devtools/python/python3-pillow/0001-explicitly-set-compile-options.patch
+> index 35aee42145..005fea5c66 100644
+> --- a/meta-python/recipes-devtools/python/python3-pillow/0001-explicitly-set-compile-options.patch
+> +++ b/meta-python/recipes-devtools/python/python3-pillow/0001-explicitly-set-compile-options.patch
+> @@ -1,6 +1,6 @@
+> -From 862a981ce462cd83a99e3db9faeeda1f8c64983f Mon Sep 17 00:00:00 2001
+> -From: Hongxu Jia <hongxu.jia@windriver.com>
+> -Date: Mon, 18 Mar 2019 23:23:55 -0400
+> +From 27bfa4028453dc79a72569823e97da8fd1994ffc Mon Sep 17 00:00:00 2001
+> +From: Leon Anavi <leon.anavi@konsulko.com>
+> +Date: Tue, 1 Sep 2020 11:53:53 +0000
+>   Subject: [PATCH] explicitly set compile options
+>   
+>   OE does not support to install egg package, so
+> @@ -10,19 +10,19 @@ explicitly set build_ext options for oe-core's
+>   Upstream-Status: Inappropriate [oe specific]
+>   
+>   Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> -
+> +Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+>   ---
+>    setup.cfg | 12 ++++++++++++
+>    1 file changed, 12 insertions(+)
+>   
+>   diff --git a/setup.cfg b/setup.cfg
+> -index 1c6ebc84..1ccc3d69 100644
+> +index 19979cf7..ed27dfe1 100644
+>   --- a/setup.cfg
+>   +++ b/setup.cfg
+> -@@ -13,3 +13,15 @@ multi_line_output = 3
+> -
+> +@@ -11,3 +11,15 @@ multi_line_output = 3
+>    [tool:pytest]
+> - addopts = -rs
+> + addopts = -ra --color=yes
+> + testpaths = Tests
+>   +
+>   +[build_ext]
+>   +disable-platform-guessing = 1
+> @@ -35,3 +35,6 @@ index 1c6ebc84..1ccc3d69 100644
+>   +disable-webp = 1
+>   +disable-webpmux = 1
+>   +disable-imagequant = 1
+> +--
+> +2.17.1
+> +
+> diff --git a/meta-python/recipes-devtools/python/python3-pillow_6.2.1.bb b/meta-python/recipes-devtools/python/python3-pillow_7.2.0.bb
+> similarity index 78%
+> rename from meta-python/recipes-devtools/python/python3-pillow_6.2.1.bb
+> rename to meta-python/recipes-devtools/python/python3-pillow_7.2.0.bb
+> index 80b7e941ae..28aaff8060 100644
+> --- a/meta-python/recipes-devtools/python/python3-pillow_6.2.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pillow_7.2.0.bb
+> @@ -3,13 +3,13 @@ Clark and Contributors. PIL is the Python Imaging Library by Fredrik Lundh and \
+>   Contributors."
+>   HOMEPAGE = "https://pillow.readthedocs.io"
+>   LICENSE = "MIT"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=55c0f320370091249c1755c0d2b48e89"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=ea2dc3f5611e69058503d4b940049d03"
+>   
+> -SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=6.2.x;protocol=https \
+> +SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=7.2.x;protocol=https \
+>              file://0001-support-cross-compiling.patch \
+>              file://0001-explicitly-set-compile-options.patch \
+>   "
+> -SRCREV ?= "6e0f07bbe38def22d36ee176b2efd9ea74b453a6"
+> +SRCREV ?= "2bd74943fb9f320def6c066e732b701d1c15f677"
+>   
+>   
+>   inherit setuptools3
 
 
