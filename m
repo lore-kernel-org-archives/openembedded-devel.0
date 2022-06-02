@@ -1,62 +1,70 @@
-Return-Path: <ranjitsinhrathod1991@gmail.com>
+Return-Path: <aurelienbertron@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0362C43334
-	for <webhook@archiver.kernel.org>; Thu,  2 Jun 2022 06:51:58 +0000 (UTC)
-Subject: Re: [meta-python][dunfell][PATCH 1/9] python3-pillow: Upgrade 6.2.1
- -> 7.2.0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F016C43334
+	for <webhook@archiver.kernel.org>; Thu,  2 Jun 2022 08:59:09 +0000 (UTC)
+Subject: [meta-networking] Incorrect src branch for http-parser
 To: openembedded-devel@lists.openembedded.org
-From: "Ranjitsinh Rathod" <ranjitsinhrathod1991@gmail.com>
-X-Originating-Location: Pune, Maharashtra, IN (165.225.120.241)
-X-Originating-Platform: Linux Chrome 102
+From: =?UTF-8?B?QXVyw6lsaWVuIEJlcnRyb24=?= <aurelienbertron@gmail.com>
+X-Originating-Location: Albigny-sur-Saone, Auvergne-Rhone-Alpes,
+ FR (37.58.149.117)
+X-Originating-Platform: Linux Firefox 100
 User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Date: Wed, 01 Jun 2022 23:51:53 -0700
-References: <29102.1654151443160260957@lists.openembedded.org>
-In-Reply-To: <29102.1654151443160260957@lists.openembedded.org>
-Message-ID: <26746.1654152713581053066@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="t94xvCV9jVgbWXhQU0jn"
+Date: Thu, 02 Jun 2022 01:59:04 -0700
+Message-ID: <01L6.1654160344794307311.ZD0a@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="1InpxdbJihRpOGjP5x63"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Jun 2022 06:51:58 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Jun 2022 08:59:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97381
+ https://lists.openembedded.org/g/openembedded-devel/message/97382
 
---t94xvCV9jVgbWXhQU0jn
+--1InpxdbJihRpOGjP5x63
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-CVE-2019-19911 CVE-2020-10177 CVE-2020-10378 CVE-2020-10379
-CVE-2020-10994 CVE-2020-11538 CVE-2020-35653 CVE-2020-35654
-CVE-2020-35655 CVE-2020-5310 CVE-2020-5311 CVE-2020-5312
-CVE-2020-5313 CVE-2021-23437 CVE-2021-25287 CVE-2021-25288
-CVE-2021-25289 CVE-2021-25290 CVE-2021-25291 CVE-2021-25292
-CVE-2021-25293 CVE-2021-27921 CVE-2021-27922 CVE-2021-27923
-CVE-2021-28675 CVE-2021-28676 CVE-2021-28677 CVE-2021-28678
-CVE-2021-34552 CVE-2022-22815 CVE-2022-22816 CVE-2022-22817
-CVE-2022-24303
+Hello,
 
-above is the exact CVE list.
+I am experiencing a bug on kirkstone branch: the http-parser recipe fetches=
+ its sources from github.com/nodejs/http-parser ( http://github.com/nodejs/=
+http-parser ) repo :
 
-Thanks,
-Ranjitsinh Rathod
+>=20
+> SRC_URI =3D "git://github.com/nodejs/http- parser.git;branch=3Dmaster;pro=
+to col=3Dhttps"
+>=20
+> SRCREV =3D "2343fd6b5214b2ded2cdcf76de2bf60903bb90cd"
 
---t94xvCV9jVgbWXhQU0jn
+Problem: the branch is set to *master* but it does not exist on
+upstream repo, the default branch is *main*. This makes the fetch step
+to fail.
+
+A possible workaround is to extend the recipe to change the SRC_URI.
+
+Aur=C3=A9lien.
+
+--1InpxdbJihRpOGjP5x63
 Content-Type: text/html; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div>CVE-2019-19911 CVE-2020-10177 CVE-2020-10378 CVE-2020-10379</div>
-<div>CVE-2020-10994 CVE-2020-11538 CVE-2020-35653 CVE-2020-35654</div>
-<div>CVE-2020-35655 CVE-2020-5310 CVE-2020-5311 CVE-2020-5312</div>
-<div>CVE-2020-5313 CVE-2021-23437 CVE-2021-25287 CVE-2021-25288</div>
-<div>CVE-2021-25289 CVE-2021-25290 CVE-2021-25291 CVE-2021-25292</div>
-<div>CVE-2021-25293 CVE-2021-27921 CVE-2021-27922 CVE-2021-27923</div>
-<div>CVE-2021-28675 CVE-2021-28676 CVE-2021-28677 CVE-2021-28678</div>
-<div>CVE-2021-34552 CVE-2022-22815 CVE-2022-22816 CVE-2022-22817</div>
-<div>CVE-2022-24303<br /><br />above is the exact CVE list.<br /><br />Than=
-ks,<br />Ranjitsinh Rathod</div>
+Hello,<br /><br />I am experiencing a bug on kirkstone branch: the <em>http=
+-parser</em> recipe fetches its sources from<em> <a href=3D"http://github.c=
+om/nodejs/http-parser" target=3D"_blank" rel=3D"noopener noreferrer" data-s=
+aferedirecturl=3D"https://www.google.com/url?q=3Dhttp://github.com/nodejs/h=
+ttp-parser&amp;source=3Dgmail&amp;ust=3D1654246401116000&amp;usg=3DAOvVaw0M=
+RkI2C1N3e3tFsmr4Sxw4">github.com/nodejs/http-parser</a></em> repo :<br />
+<blockquote>SRC_URI =3D "git://github.com/nodejs/http-<wbr />parser.git;bra=
+nch=3Dmaster;proto<wbr />col=3Dhttps"<br />SRCREV =3D "2343fd6b5214b2ded2cd=
+cf76de2bf60903bb90cd"</blockquote>
+Problem: the branch is set to <strong>master</strong> but it does not exist=
+ on<br />upstream repo, the default branch is <strong>main</strong>. This m=
+akes the fetch step<br />to fail.
+<p>A possible workaround is to extend the recipe to change the SRC_URI.<br =
+/><br />Aur&eacute;lien.</p>
+<span style=3D"color: #888888;"></span>
 
---t94xvCV9jVgbWXhQU0jn--
+--1InpxdbJihRpOGjP5x63--
 
