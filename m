@@ -2,63 +2,63 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FC16CCA480
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D473CCA481
 	for <webhook@archiver.kernel.org>; Fri,  3 Jun 2022 19:19:35 +0000 (UTC)
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com
- [209.85.216.53])
- by mx.groups.io with SMTP id smtpd.web10.2396.1654283969981571913
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
+ [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.web11.2356.1654283968726392720
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Jun 2022 12:19:30 -0700
+ Fri, 03 Jun 2022 12:19:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=VYaHudsa;
- spf=pass (domain: gmail.com, ip: 209.85.216.53,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=cThnFnVF;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f53.google.com with SMTP id
- 3-20020a17090a174300b001e426a02ac5so9641198pjm.2
+Received: by mail-pj1-f42.google.com with SMTP id
+ w2-20020a17090ac98200b001e0519fe5a8so7803762pjt.4
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Jun 2022 12:19:29 -0700 (PDT)
+ Fri, 03 Jun 2022 12:19:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=3Cw22w7karlVxJCF98y5sFYc9Chpryca052GfbQ7q+E=;
-        b=VYaHudsaG9QQBlj7/nGYk+3PCtwIOupkeD797k+Z8AXnyM4iDmsMJK/th8JuMC3MpS
-         ypQ1si8bcnN53AOmjIb2LBHVWA73lb4sBNydvTq8D8Ku4NZ8+WAiI0pJC9icf5bXwo3H
-         iD2a1CMnlNV2l/HqMu/foBTjxIxKIIXwWT6l3+HSkXHNk4gkCRjzAP1EXPOdz0bY9MRU
-         P0wZr/fCyM1Pw2N77FJJF2WLY8RoIURhczFzEnBarrS2Fr+eOuR0DZrYKSsoezto717/
-         jBjPygBE9jWccUQLQUmGMTzFGS0yf88AeTF6Zb61fzeryRQC0lJ49saELlL9B3jAL5OG
-         vCsQ==
+        bh=GHbGE9cqUDsmSl1fLaafaxCPuZPaMeKTHJMaVxziJaU=;
+        b=cThnFnVFPkzTTa940B4dLucWAAl76l55uuYAJD5ycWIlPtorJXxJMl1aHmFT1GxTxK
+         9F8VrUzKtSf4Hq05+Z9saq0bbCCrfDkuFUmwXKM7DuWUQVEY83aWzvci8+ATQYizWHjK
+         7iVQtlQqe4C0JX/KKxNZ8tiSP3vD0G1Hgr4Xn5YwCPDt94PbsJFoekBBLE6VBia0acXI
+         W3G/zB3cH7hA9/OjxZksh0D8Qroq/GoA9o2anjrJkTxXb02pnwj3Dxve8+Y6MUWIx9Ep
+         yEcw2UtFWojbYHo5Yr6QTgEKe82MJ+r+KARi94uIXLYWG99CvAkALfjBhOoLENc+l4ar
+         kPaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=3Cw22w7karlVxJCF98y5sFYc9Chpryca052GfbQ7q+E=;
-        b=zpNHu6cNy4XDSG9o1hIBpOt9Xnjxge5P+FXbSITlhRIP767mGhCdnIN+kxKk2VfiXH
-         sGj5FlT8XxsCgLElZ5Gqlr1ERWCqS7dyE2zBCWQUe0n1VhCNUKNxRKO+RTh5NxPB/Kz4
-         6H1CNSraKNnYJVsvitXcitbAkbqJMuFEXSoqSatPP5FXvn8Ygtz8FNruecAr2ZN0l75X
-         AU0603PAOYAcLLGcRILd5R0h7TXcTpdC3fwd/16YsRRhxK7ab1jNDtRasyJotj3uxsR2
-         C3Gx3pk9cdCDQYVZez0jvdv6NpO13BmpvqEfT9AwHlQWYnBK5o5OidvLqFdgPxLUXkGT
-         xqYA==
-X-Gm-Message-State: AOAM530WXz6JEHfp7KxG1BXmnqQ5v/UcteOE7UOujplRGvvVkPmDMVZP
-	t3PzNqODFo1sEgsupKTPYvDUZGPa2K0=
+        bh=GHbGE9cqUDsmSl1fLaafaxCPuZPaMeKTHJMaVxziJaU=;
+        b=3iN059VDTH0eJ69Kqe3IgxjwFP/QIfezO3lPabua4rulXSKIYI+hbcIf4GFs7NQvo4
+         Ow0FnZd/lckcBy56RnGLzhQBd/yQIzwDYWx8No8iHVx2DLOOVRUzuIoNRSqaASBRsKUX
+         As602dWtpPDls2aIlBJtfUitA3PiLZC+7r8huba3dBv10Qy9Zihpyksl90bak+PT8Rre
+         suCqF1RQZXEIzMADBYEXviwyQhwln3uKoqb+1lkPOtV/cbgEBFHdPssNrAaJkRyIaaJh
+         8Gy4jx8WVX2CsHChMkPF4MfC0ldvzuMOvbXyWv9eJtRFFshBgM8J0+Ftkbe66j5EStBg
+         8B3Q==
+X-Gm-Message-State: AOAM533phoxfaO3NOHgsuo/Qb2YJbdp/v0VBwRO3sGRr/w5imQswMpII
+	ULPbXM0zhDP/GhxEZvLIYtNKIEcu6AM=
 X-Google-Smtp-Source: 
- ABdhPJxdlVutILEyufF9OXKHyJecc3Q/MuMSOj2QNAC1kcRjWnLCgQJGGT9HeI5ls5Ti4uORAm90Qg==
-X-Received: by 2002:a17:902:bb83:b0:161:fdc3:3b8f with SMTP id
- m3-20020a170902bb8300b00161fdc33b8fmr11351666pls.45.1654283969185;
-        Fri, 03 Jun 2022 12:19:29 -0700 (PDT)
+ ABdhPJywKMK9glBzKGp5GpBRiGQu1QhFhR0Ox5T0g9aMGZPlBdIAHY5CDQ9IGRPH4S1PXpDSubaaPA==
+X-Received: by 2002:a17:90a:6284:b0:1df:4595:57af with SMTP id
+ d4-20020a17090a628400b001df459557afmr12303312pjj.188.1654283967423;
+        Fri, 03 Jun 2022 12:19:27 -0700 (PDT)
 Received: from keaua.caveonetworks.com (c-67-181-203-136.hsd1.ca.comcast.net.
  [67.181.203.136])
         by smtp.gmail.com with ESMTPSA id
- p2-20020a170902c70200b001617541c94fsm5770620plp.60.2022.06.03.12.19.27
+ p2-20020a170902c70200b001617541c94fsm5770620plp.60.2022.06.03.12.19.25
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 03 Jun 2022 12:19:28 -0700 (PDT)
+        Fri, 03 Jun 2022 12:19:26 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [kirkstone 04/20] php: upgrade 8.1.4 -> 8.1.5
-Date: Fri,  3 Jun 2022 12:17:03 -0700
+Subject: [kirkstone 03/20] python3-wxgtk4: backport patch to fix svg issue
+Date: Fri,  3 Jun 2022 12:17:02 -0700
 Message-Id: 
- <7566c789da7850a2a35d1a8aa0f3e0b721e2cb1d.1654282423.git.akuster808@gmail.com>
+ <a104444d2bc037b3b1044021ff34b10d66a56e9b.1654282423.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1654282423.git.akuster808@gmail.com>
 References: <cover.1654282423.git.akuster808@gmail.com>
@@ -69,34 +69,905 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 03 Jun 2022 19:19:35 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97393
+ https://lists.openembedded.org/g/openembedded-devel/message/97392
 
-From: wangmy <wangmy@fujitsu.com>
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Backport patch to fix import svg issue:
+
+| $ python3 -c 'from wx.svg import SVGimage'
+|
+| ImportError: /usr/lib64/python3.10/site-packages/wx/svg/_nanosvg.cpython-310-x86_64-linux-gnu.so:
+    undefined symbol: _PyGen_Send
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 412638c21b09ecc6dbe4bd480fbc8a0a83d05da5)
+(cherry picked from commit 8246a9cef2956c66772b23f00d3feedec43ab1f7)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-devtools/php/{php_8.1.4.bb => php_8.1.5.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/php/{php_8.1.4.bb => php_8.1.5.bb} (99%)
+ ...rsion-to-fix-NanoSVG-issues-with-Pyt.patch | 861 ++++++++++++++++++
+ .../python3-wxgtk4/python3-wxgtk4_4.1.1.bb    |   1 +
+ 2 files changed, 862 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-Update-Cython-version-to-fix-NanoSVG-issues-with-Pyt.patch
 
-diff --git a/meta-oe/recipes-devtools/php/php_8.1.4.bb b/meta-oe/recipes-devtools/php/php_8.1.5.bb
-similarity index 99%
-rename from meta-oe/recipes-devtools/php/php_8.1.4.bb
-rename to meta-oe/recipes-devtools/php/php_8.1.5.bb
-index bf6c543097..e3af9f6984 100644
---- a/meta-oe/recipes-devtools/php/php_8.1.4.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.1.5.bb
-@@ -33,7 +33,7 @@ SRC_URI:append:class-target = " \
-           "
- 
- S = "${WORKDIR}/php-${PV}"
--SRC_URI[sha256sum] = "b3f688cb69758523838b8e7f509aaef0152133d9b84a84a0b7cf68eeafc1df76"
-+SRC_URI[sha256sum] = "827de56771c3ab8313a069812f15f6ec49989d510aebd0dce180839c6d8d6ff3"
- 
- inherit autotools pkgconfig python3native gettext
+diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-Update-Cython-version-to-fix-NanoSVG-issues-with-Pyt.patch b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-Update-Cython-version-to-fix-NanoSVG-issues-with-Pyt.patch
+new file mode 100644
+index 0000000000..6be56cb908
+--- /dev/null
++++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4/0001-Update-Cython-version-to-fix-NanoSVG-issues-with-Pyt.patch
+@@ -0,0 +1,861 @@
++Upstream-Status: Backport [https://github.com/wxWidgets/Phoenix/commit/b40ab0f8]
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++
++From b40ab0f806bdf7aa0c0a51a8c4876ac47754515d Mon Sep 17 00:00:00 2001
++From: Scott Talbert <swt@techie.net>
++Date: Thu, 7 Oct 2021 17:53:05 -0400
++Subject: [PATCH] Update Cython version to fix NanoSVG issues with Python 3.10
++
++---
++ requirements/devel.txt |   2 +-
++ wx/svg/_nanosvg.c      | 554 ++++++++++++++++++++++++++---------------
++ 2 files changed, 359 insertions(+), 197 deletions(-)
++
++diff --git a/requirements/devel.txt b/requirements/devel.txt
++index 1d427be0..18164bdc 100644
++--- a/requirements/devel.txt
+++++ b/requirements/devel.txt
++@@ -9,7 +9,7 @@ wheel
++ twine
++ requests
++ requests[security]
++-cython==0.29.21
+++cython==0.29.24
++ pytest
++ pytest-xdist
++ pytest-forked
++diff --git a/wx/svg/_nanosvg.c b/wx/svg/_nanosvg.c
++index d8f1e158..fd4a5a67 100644
++--- a/wx/svg/_nanosvg.c
+++++ b/wx/svg/_nanosvg.c
++@@ -1,4 +1,4 @@
++-/* Generated by Cython 0.29.21 */
+++/* Generated by Cython 0.29.24 */
++ 
++ /* BEGIN: Cython Metadata
++ {
++@@ -33,15 +33,17 @@
++ }
++ END: Cython Metadata */
++ 
+++#ifndef PY_SSIZE_T_CLEAN
++ #define PY_SSIZE_T_CLEAN
+++#endif /* PY_SSIZE_T_CLEAN */
++ #include "Python.h"
++ #ifndef Py_PYTHON_H
++     #error Python headers needed to compile C extensions, please install development version of Python.
++ #elif PY_VERSION_HEX < 0x02060000 || (0x03000000 <= PY_VERSION_HEX && PY_VERSION_HEX < 0x03030000)
++     #error Cython requires Python 2.6+ or Python 3.3+.
++ #else
++-#define CYTHON_ABI "0_29_21"
++-#define CYTHON_HEX_VERSION 0x001D15F0
+++#define CYTHON_ABI "0_29_24"
+++#define CYTHON_HEX_VERSION 0x001D18F0
++ #define CYTHON_FUTURE_DIVISION 0
++ #include <stddef.h>
++ #ifndef offsetof
++@@ -459,8 +461,12 @@ static CYTHON_INLINE void * PyThread_tss_get(Py_tss_t *key) {
++ #endif
++ #if PY_VERSION_HEX > 0x03030000 && defined(PyUnicode_KIND)
++   #define CYTHON_PEP393_ENABLED 1
+++  #if defined(PyUnicode_IS_READY)
++   #define __Pyx_PyUnicode_READY(op)       (likely(PyUnicode_IS_READY(op)) ?\
++                                               0 : _PyUnicode_Ready((PyObject *)(op)))
+++  #else
+++  #define __Pyx_PyUnicode_READY(op)       (0)
+++  #endif
++   #define __Pyx_PyUnicode_GET_LENGTH(u)   PyUnicode_GET_LENGTH(u)
++   #define __Pyx_PyUnicode_READ_CHAR(u, i) PyUnicode_READ_CHAR(u, i)
++   #define __Pyx_PyUnicode_MAX_CHAR_VALUE(u)   PyUnicode_MAX_CHAR_VALUE(u)
++@@ -469,7 +475,11 @@ static CYTHON_INLINE void * PyThread_tss_get(Py_tss_t *key) {
++   #define __Pyx_PyUnicode_READ(k, d, i)   PyUnicode_READ(k, d, i)
++   #define __Pyx_PyUnicode_WRITE(k, d, i, ch)  PyUnicode_WRITE(k, d, i, ch)
++   #if defined(PyUnicode_IS_READY) && defined(PyUnicode_GET_SIZE)
+++  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x03090000
+++  #define __Pyx_PyUnicode_IS_TRUE(u)      (0 != (likely(PyUnicode_IS_READY(u)) ? PyUnicode_GET_LENGTH(u) : ((PyCompactUnicodeObject *)(u))->wstr_length))
+++  #else
++   #define __Pyx_PyUnicode_IS_TRUE(u)      (0 != (likely(PyUnicode_IS_READY(u)) ? PyUnicode_GET_LENGTH(u) : PyUnicode_GET_SIZE(u)))
+++  #endif
++   #else
++   #define __Pyx_PyUnicode_IS_TRUE(u)      (0 != PyUnicode_GET_LENGTH(u))
++   #endif
++@@ -1736,33 +1746,38 @@ static void __pyx_insert_code_object(int code_line, PyCodeObject* code_object);
++ static void __Pyx_AddTraceback(const char *funcname, int c_line,
++                                int py_line, const char *filename);
++ 
+++/* GCCDiagnostics.proto */
+++#if defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6))
+++#define __Pyx_HAS_GCC_DIAGNOSTIC
+++#endif
+++
++ /* CIntToPy.proto */
++ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
++ 
+++/* CIntFromPy.proto */
+++static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
+++
++ /* CIntToPy.proto */
++ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
++ 
++ /* CIntToPy.proto */
++ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_char(char value);
++ 
+++/* CIntFromPy.proto */
+++static CYTHON_INLINE char __Pyx_PyInt_As_char(PyObject *);
+++
++ /* CIntToPy.proto */
++ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_char(unsigned char value);
++ 
+++/* CIntFromPy.proto */
+++static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
+++
++ /* CIntToPy.proto */
++ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_enum____pyx_t_2wx_3svg_8_nanosvg_SVGpaintType(enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType value);
++ 
++ /* CIntToPy.proto */
++ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_int(unsigned int value);
++ 
++-/* CIntFromPy.proto */
++-static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
++-
++-/* CIntFromPy.proto */
++-static CYTHON_INLINE char __Pyx_PyInt_As_char(PyObject *);
++-
++-/* CIntFromPy.proto */
++-static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
++-
++ /* CIntToPy.proto */
++ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_enum____pyx_t_2wx_3svg_8_nanosvg_SVGfillRule(enum __pyx_t_2wx_3svg_8_nanosvg_SVGfillRule value);
++ 
++@@ -1844,6 +1859,7 @@ typedef struct {
++     PyObject *gi_qualname;
++     PyObject *gi_modulename;
++     PyObject *gi_code;
+++    PyObject *gi_frame;
++     int resume_label;
++     char is_running;
++ } __pyx_CoroutineObject;
++@@ -14641,11 +14657,9 @@ if (!__Pyx_RefNanny) {
++   #endif
++   /*--- Library function declarations ---*/
++   /*--- Threads initialization code ---*/
++-  #if defined(__PYX_FORCE_INIT_THREADS) && __PYX_FORCE_INIT_THREADS
++-  #ifdef WITH_THREAD /* Python build with threading support? */
+++  #if defined(WITH_THREAD) && PY_VERSION_HEX < 0x030700F0 && defined(__PYX_FORCE_INIT_THREADS) && __PYX_FORCE_INIT_THREADS
++   PyEval_InitThreads();
++   #endif
++-  #endif
++   /*--- Module creation code ---*/
++   #if CYTHON_PEP489_MULTI_PHASE_INIT
++   __pyx_m = __pyx_pyinit_module;
++@@ -16766,7 +16780,7 @@ invalid_keyword:
++ #if CYTHON_COMPILING_IN_CPYTHON
++ static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
++     PyObject *result;
++-    ternaryfunc call = func->ob_type->tp_call;
+++    ternaryfunc call = Py_TYPE(func)->tp_call;
++     if (unlikely(!call))
++         return PyObject_Call(func, arg, kw);
++     if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
++@@ -17149,7 +17163,7 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObjec
++         if (likely(PyCFunction_GET_FLAGS(func) & METH_O)) {
++             return __Pyx_PyObject_CallMethO(func, arg);
++ #if CYTHON_FAST_PYCCALL
++-        } else if (PyCFunction_GET_FLAGS(func) & METH_FASTCALL) {
+++        } else if (__Pyx_PyFastCFunction_Check(func)) {
++             return __Pyx_PyCFunction_FastCall(func, &arg, 1);
++ #endif
++         }
++@@ -18800,7 +18814,8 @@ static PyObject *
++ __Pyx_CyFunction_reduce(__pyx_CyFunctionObject *m, CYTHON_UNUSED PyObject *args)
++ {
++ #if PY_MAJOR_VERSION >= 3
++-    return PyUnicode_FromString(m->func.m_ml->ml_name);
+++    Py_INCREF(m->func_qualname);
+++    return m->func_qualname;
++ #else
++     return PyString_FromString(m->func.m_ml->ml_name);
++ #endif
++@@ -19443,37 +19458,6 @@ bad:
++     Py_XDECREF(py_frame);
++ }
++ 
++-/* CIntToPy */
++-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
++-    const long neg_one = (long) ((long) 0 - (long) 1), const_zero = (long) 0;
++-    const int is_unsigned = neg_one > const_zero;
++-    if (is_unsigned) {
++-        if (sizeof(long) < sizeof(long)) {
++-            return PyInt_FromLong((long) value);
++-        } else if (sizeof(long) <= sizeof(unsigned long)) {
++-            return PyLong_FromUnsignedLong((unsigned long) value);
++-#ifdef HAVE_LONG_LONG
++-        } else if (sizeof(long) <= sizeof(unsigned PY_LONG_LONG)) {
++-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
++-#endif
++-        }
++-    } else {
++-        if (sizeof(long) <= sizeof(long)) {
++-            return PyInt_FromLong((long) value);
++-#ifdef HAVE_LONG_LONG
++-        } else if (sizeof(long) <= sizeof(PY_LONG_LONG)) {
++-            return PyLong_FromLongLong((PY_LONG_LONG) value);
++-#endif
++-        }
++-    }
++-    {
++-        int one = 1; int little = (int)*(unsigned char *)&one;
++-        unsigned char *bytes = (unsigned char *)&value;
++-        return _PyLong_FromByteArray(bytes, sizeof(long),
++-                                     little, !is_unsigned);
++-    }
++-}
++-
++ /* CIntFromPyVerify */
++ #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
++     __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 0)
++@@ -19497,148 +19481,31 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
++     }
++ 
++ /* CIntToPy */
++-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
++-    const int neg_one = (int) ((int) 0 - (int) 1), const_zero = (int) 0;
++-    const int is_unsigned = neg_one > const_zero;
++-    if (is_unsigned) {
++-        if (sizeof(int) < sizeof(long)) {
++-            return PyInt_FromLong((long) value);
++-        } else if (sizeof(int) <= sizeof(unsigned long)) {
++-            return PyLong_FromUnsignedLong((unsigned long) value);
++-#ifdef HAVE_LONG_LONG
++-        } else if (sizeof(int) <= sizeof(unsigned PY_LONG_LONG)) {
++-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
++-#endif
++-        }
++-    } else {
++-        if (sizeof(int) <= sizeof(long)) {
++-            return PyInt_FromLong((long) value);
++-#ifdef HAVE_LONG_LONG
++-        } else if (sizeof(int) <= sizeof(PY_LONG_LONG)) {
++-            return PyLong_FromLongLong((PY_LONG_LONG) value);
++-#endif
++-        }
++-    }
++-    {
++-        int one = 1; int little = (int)*(unsigned char *)&one;
++-        unsigned char *bytes = (unsigned char *)&value;
++-        return _PyLong_FromByteArray(bytes, sizeof(int),
++-                                     little, !is_unsigned);
++-    }
++-}
++-
++-/* CIntToPy */
++-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_char(char value) {
++-    const char neg_one = (char) ((char) 0 - (char) 1), const_zero = (char) 0;
++-    const int is_unsigned = neg_one > const_zero;
++-    if (is_unsigned) {
++-        if (sizeof(char) < sizeof(long)) {
++-            return PyInt_FromLong((long) value);
++-        } else if (sizeof(char) <= sizeof(unsigned long)) {
++-            return PyLong_FromUnsignedLong((unsigned long) value);
++-#ifdef HAVE_LONG_LONG
++-        } else if (sizeof(char) <= sizeof(unsigned PY_LONG_LONG)) {
++-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
++-#endif
++-        }
++-    } else {
++-        if (sizeof(char) <= sizeof(long)) {
++-            return PyInt_FromLong((long) value);
++-#ifdef HAVE_LONG_LONG
++-        } else if (sizeof(char) <= sizeof(PY_LONG_LONG)) {
++-            return PyLong_FromLongLong((PY_LONG_LONG) value);
++-#endif
++-        }
++-    }
++-    {
++-        int one = 1; int little = (int)*(unsigned char *)&one;
++-        unsigned char *bytes = (unsigned char *)&value;
++-        return _PyLong_FromByteArray(bytes, sizeof(char),
++-                                     little, !is_unsigned);
++-    }
++-}
++-
++-/* CIntToPy */
++-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_char(unsigned char value) {
++-    const unsigned char neg_one = (unsigned char) ((unsigned char) 0 - (unsigned char) 1), const_zero = (unsigned char) 0;
++-    const int is_unsigned = neg_one > const_zero;
++-    if (is_unsigned) {
++-        if (sizeof(unsigned char) < sizeof(long)) {
++-            return PyInt_FromLong((long) value);
++-        } else if (sizeof(unsigned char) <= sizeof(unsigned long)) {
++-            return PyLong_FromUnsignedLong((unsigned long) value);
++-#ifdef HAVE_LONG_LONG
++-        } else if (sizeof(unsigned char) <= sizeof(unsigned PY_LONG_LONG)) {
++-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
++-#endif
++-        }
++-    } else {
++-        if (sizeof(unsigned char) <= sizeof(long)) {
++-            return PyInt_FromLong((long) value);
++-#ifdef HAVE_LONG_LONG
++-        } else if (sizeof(unsigned char) <= sizeof(PY_LONG_LONG)) {
++-            return PyLong_FromLongLong((PY_LONG_LONG) value);
++-#endif
++-        }
++-    }
++-    {
++-        int one = 1; int little = (int)*(unsigned char *)&one;
++-        unsigned char *bytes = (unsigned char *)&value;
++-        return _PyLong_FromByteArray(bytes, sizeof(unsigned char),
++-                                     little, !is_unsigned);
++-    }
++-}
++-
++-/* CIntToPy */
++-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_enum____pyx_t_2wx_3svg_8_nanosvg_SVGpaintType(enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType value) {
++-    const enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType neg_one = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType) ((enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType) 0 - (enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType) 1), const_zero = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType) 0;
++-    const int is_unsigned = neg_one > const_zero;
++-    if (is_unsigned) {
++-        if (sizeof(enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType) < sizeof(long)) {
++-            return PyInt_FromLong((long) value);
++-        } else if (sizeof(enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType) <= sizeof(unsigned long)) {
++-            return PyLong_FromUnsignedLong((unsigned long) value);
++-#ifdef HAVE_LONG_LONG
++-        } else if (sizeof(enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType) <= sizeof(unsigned PY_LONG_LONG)) {
++-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+++static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic ignored "-Wconversion"
++ #endif
++-        }
++-    } else {
++-        if (sizeof(enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType) <= sizeof(long)) {
++-            return PyInt_FromLong((long) value);
++-#ifdef HAVE_LONG_LONG
++-        } else if (sizeof(enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType) <= sizeof(PY_LONG_LONG)) {
++-            return PyLong_FromLongLong((PY_LONG_LONG) value);
+++    const long neg_one = (long) -1, const_zero = (long) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic pop
++ #endif
++-        }
++-    }
++-    {
++-        int one = 1; int little = (int)*(unsigned char *)&one;
++-        unsigned char *bytes = (unsigned char *)&value;
++-        return _PyLong_FromByteArray(bytes, sizeof(enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType),
++-                                     little, !is_unsigned);
++-    }
++-}
++-
++-/* CIntToPy */
++-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_int(unsigned int value) {
++-    const unsigned int neg_one = (unsigned int) ((unsigned int) 0 - (unsigned int) 1), const_zero = (unsigned int) 0;
++     const int is_unsigned = neg_one > const_zero;
++     if (is_unsigned) {
++-        if (sizeof(unsigned int) < sizeof(long)) {
+++        if (sizeof(long) < sizeof(long)) {
++             return PyInt_FromLong((long) value);
++-        } else if (sizeof(unsigned int) <= sizeof(unsigned long)) {
+++        } else if (sizeof(long) <= sizeof(unsigned long)) {
++             return PyLong_FromUnsignedLong((unsigned long) value);
++ #ifdef HAVE_LONG_LONG
++-        } else if (sizeof(unsigned int) <= sizeof(unsigned PY_LONG_LONG)) {
+++        } else if (sizeof(long) <= sizeof(unsigned PY_LONG_LONG)) {
++             return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
++ #endif
++         }
++     } else {
++-        if (sizeof(unsigned int) <= sizeof(long)) {
+++        if (sizeof(long) <= sizeof(long)) {
++             return PyInt_FromLong((long) value);
++ #ifdef HAVE_LONG_LONG
++-        } else if (sizeof(unsigned int) <= sizeof(PY_LONG_LONG)) {
+++        } else if (sizeof(long) <= sizeof(PY_LONG_LONG)) {
++             return PyLong_FromLongLong((PY_LONG_LONG) value);
++ #endif
++         }
++@@ -19646,14 +19513,21 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_int(unsigned int value)
++     {
++         int one = 1; int little = (int)*(unsigned char *)&one;
++         unsigned char *bytes = (unsigned char *)&value;
++-        return _PyLong_FromByteArray(bytes, sizeof(unsigned int),
+++        return _PyLong_FromByteArray(bytes, sizeof(long),
++                                      little, !is_unsigned);
++     }
++ }
++ 
++ /* CIntFromPy */
++ static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
++-    const int neg_one = (int) ((int) 0 - (int) 1), const_zero = (int) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic ignored "-Wconversion"
+++#endif
+++    const int neg_one = (int) -1, const_zero = (int) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic pop
+++#endif
++     const int is_unsigned = neg_one > const_zero;
++ #if PY_MAJOR_VERSION < 3
++     if (likely(PyInt_Check(x))) {
++@@ -19840,9 +19714,92 @@ raise_neg_overflow:
++     return (int) -1;
++ }
++ 
+++/* CIntToPy */
+++static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic ignored "-Wconversion"
+++#endif
+++    const int neg_one = (int) -1, const_zero = (int) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic pop
+++#endif
+++    const int is_unsigned = neg_one > const_zero;
+++    if (is_unsigned) {
+++        if (sizeof(int) < sizeof(long)) {
+++            return PyInt_FromLong((long) value);
+++        } else if (sizeof(int) <= sizeof(unsigned long)) {
+++            return PyLong_FromUnsignedLong((unsigned long) value);
+++#ifdef HAVE_LONG_LONG
+++        } else if (sizeof(int) <= sizeof(unsigned PY_LONG_LONG)) {
+++            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+++#endif
+++        }
+++    } else {
+++        if (sizeof(int) <= sizeof(long)) {
+++            return PyInt_FromLong((long) value);
+++#ifdef HAVE_LONG_LONG
+++        } else if (sizeof(int) <= sizeof(PY_LONG_LONG)) {
+++            return PyLong_FromLongLong((PY_LONG_LONG) value);
+++#endif
+++        }
+++    }
+++    {
+++        int one = 1; int little = (int)*(unsigned char *)&one;
+++        unsigned char *bytes = (unsigned char *)&value;
+++        return _PyLong_FromByteArray(bytes, sizeof(int),
+++                                     little, !is_unsigned);
+++    }
+++}
+++
+++/* CIntToPy */
+++static CYTHON_INLINE PyObject* __Pyx_PyInt_From_char(char value) {
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic ignored "-Wconversion"
+++#endif
+++    const char neg_one = (char) -1, const_zero = (char) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic pop
+++#endif
+++    const int is_unsigned = neg_one > const_zero;
+++    if (is_unsigned) {
+++        if (sizeof(char) < sizeof(long)) {
+++            return PyInt_FromLong((long) value);
+++        } else if (sizeof(char) <= sizeof(unsigned long)) {
+++            return PyLong_FromUnsignedLong((unsigned long) value);
+++#ifdef HAVE_LONG_LONG
+++        } else if (sizeof(char) <= sizeof(unsigned PY_LONG_LONG)) {
+++            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+++#endif
+++        }
+++    } else {
+++        if (sizeof(char) <= sizeof(long)) {
+++            return PyInt_FromLong((long) value);
+++#ifdef HAVE_LONG_LONG
+++        } else if (sizeof(char) <= sizeof(PY_LONG_LONG)) {
+++            return PyLong_FromLongLong((PY_LONG_LONG) value);
+++#endif
+++        }
+++    }
+++    {
+++        int one = 1; int little = (int)*(unsigned char *)&one;
+++        unsigned char *bytes = (unsigned char *)&value;
+++        return _PyLong_FromByteArray(bytes, sizeof(char),
+++                                     little, !is_unsigned);
+++    }
+++}
+++
++ /* CIntFromPy */
++ static CYTHON_INLINE char __Pyx_PyInt_As_char(PyObject *x) {
++-    const char neg_one = (char) ((char) 0 - (char) 1), const_zero = (char) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic ignored "-Wconversion"
+++#endif
+++    const char neg_one = (char) -1, const_zero = (char) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic pop
+++#endif
++     const int is_unsigned = neg_one > const_zero;
++ #if PY_MAJOR_VERSION < 3
++     if (likely(PyInt_Check(x))) {
++@@ -20029,9 +19986,54 @@ raise_neg_overflow:
++     return (char) -1;
++ }
++ 
+++/* CIntToPy */
+++static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_char(unsigned char value) {
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic ignored "-Wconversion"
+++#endif
+++    const unsigned char neg_one = (unsigned char) -1, const_zero = (unsigned char) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic pop
+++#endif
+++    const int is_unsigned = neg_one > const_zero;
+++    if (is_unsigned) {
+++        if (sizeof(unsigned char) < sizeof(long)) {
+++            return PyInt_FromLong((long) value);
+++        } else if (sizeof(unsigned char) <= sizeof(unsigned long)) {
+++            return PyLong_FromUnsignedLong((unsigned long) value);
+++#ifdef HAVE_LONG_LONG
+++        } else if (sizeof(unsigned char) <= sizeof(unsigned PY_LONG_LONG)) {
+++            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+++#endif
+++        }
+++    } else {
+++        if (sizeof(unsigned char) <= sizeof(long)) {
+++            return PyInt_FromLong((long) value);
+++#ifdef HAVE_LONG_LONG
+++        } else if (sizeof(unsigned char) <= sizeof(PY_LONG_LONG)) {
+++            return PyLong_FromLongLong((PY_LONG_LONG) value);
+++#endif
+++        }
+++    }
+++    {
+++        int one = 1; int little = (int)*(unsigned char *)&one;
+++        unsigned char *bytes = (unsigned char *)&value;
+++        return _PyLong_FromByteArray(bytes, sizeof(unsigned char),
+++                                     little, !is_unsigned);
+++    }
+++}
+++
++ /* CIntFromPy */
++ static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
++-    const long neg_one = (long) ((long) 0 - (long) 1), const_zero = (long) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic ignored "-Wconversion"
+++#endif
+++    const long neg_one = (long) -1, const_zero = (long) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic pop
+++#endif
++     const int is_unsigned = neg_one > const_zero;
++ #if PY_MAJOR_VERSION < 3
++     if (likely(PyInt_Check(x))) {
++@@ -20218,9 +20220,92 @@ raise_neg_overflow:
++     return (long) -1;
++ }
++ 
+++/* CIntToPy */
+++static CYTHON_INLINE PyObject* __Pyx_PyInt_From_enum____pyx_t_2wx_3svg_8_nanosvg_SVGpaintType(enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType value) {
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic ignored "-Wconversion"
+++#endif
+++    const enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType neg_one = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType) -1, const_zero = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic pop
+++#endif
+++    const int is_unsigned = neg_one > const_zero;
+++    if (is_unsigned) {
+++        if (sizeof(enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType) < sizeof(long)) {
+++            return PyInt_FromLong((long) value);
+++        } else if (sizeof(enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType) <= sizeof(unsigned long)) {
+++            return PyLong_FromUnsignedLong((unsigned long) value);
+++#ifdef HAVE_LONG_LONG
+++        } else if (sizeof(enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType) <= sizeof(unsigned PY_LONG_LONG)) {
+++            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+++#endif
+++        }
+++    } else {
+++        if (sizeof(enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType) <= sizeof(long)) {
+++            return PyInt_FromLong((long) value);
+++#ifdef HAVE_LONG_LONG
+++        } else if (sizeof(enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType) <= sizeof(PY_LONG_LONG)) {
+++            return PyLong_FromLongLong((PY_LONG_LONG) value);
+++#endif
+++        }
+++    }
+++    {
+++        int one = 1; int little = (int)*(unsigned char *)&one;
+++        unsigned char *bytes = (unsigned char *)&value;
+++        return _PyLong_FromByteArray(bytes, sizeof(enum __pyx_t_2wx_3svg_8_nanosvg_SVGpaintType),
+++                                     little, !is_unsigned);
+++    }
+++}
+++
+++/* CIntToPy */
+++static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_int(unsigned int value) {
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic ignored "-Wconversion"
+++#endif
+++    const unsigned int neg_one = (unsigned int) -1, const_zero = (unsigned int) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic pop
+++#endif
+++    const int is_unsigned = neg_one > const_zero;
+++    if (is_unsigned) {
+++        if (sizeof(unsigned int) < sizeof(long)) {
+++            return PyInt_FromLong((long) value);
+++        } else if (sizeof(unsigned int) <= sizeof(unsigned long)) {
+++            return PyLong_FromUnsignedLong((unsigned long) value);
+++#ifdef HAVE_LONG_LONG
+++        } else if (sizeof(unsigned int) <= sizeof(unsigned PY_LONG_LONG)) {
+++            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+++#endif
+++        }
+++    } else {
+++        if (sizeof(unsigned int) <= sizeof(long)) {
+++            return PyInt_FromLong((long) value);
+++#ifdef HAVE_LONG_LONG
+++        } else if (sizeof(unsigned int) <= sizeof(PY_LONG_LONG)) {
+++            return PyLong_FromLongLong((PY_LONG_LONG) value);
+++#endif
+++        }
+++    }
+++    {
+++        int one = 1; int little = (int)*(unsigned char *)&one;
+++        unsigned char *bytes = (unsigned char *)&value;
+++        return _PyLong_FromByteArray(bytes, sizeof(unsigned int),
+++                                     little, !is_unsigned);
+++    }
+++}
+++
++ /* CIntToPy */
++ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_enum____pyx_t_2wx_3svg_8_nanosvg_SVGfillRule(enum __pyx_t_2wx_3svg_8_nanosvg_SVGfillRule value) {
++-    const enum __pyx_t_2wx_3svg_8_nanosvg_SVGfillRule neg_one = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGfillRule) ((enum __pyx_t_2wx_3svg_8_nanosvg_SVGfillRule) 0 - (enum __pyx_t_2wx_3svg_8_nanosvg_SVGfillRule) 1), const_zero = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGfillRule) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic ignored "-Wconversion"
+++#endif
+++    const enum __pyx_t_2wx_3svg_8_nanosvg_SVGfillRule neg_one = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGfillRule) -1, const_zero = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGfillRule) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic pop
+++#endif
++     const int is_unsigned = neg_one > const_zero;
++     if (is_unsigned) {
++         if (sizeof(enum __pyx_t_2wx_3svg_8_nanosvg_SVGfillRule) < sizeof(long)) {
++@@ -20251,7 +20336,14 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_enum____pyx_t_2wx_3svg_8_nanosvg
++ 
++ /* CIntToPy */
++ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_enum____pyx_t_2wx_3svg_8_nanosvg_SVGflags(enum __pyx_t_2wx_3svg_8_nanosvg_SVGflags value) {
++-    const enum __pyx_t_2wx_3svg_8_nanosvg_SVGflags neg_one = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGflags) ((enum __pyx_t_2wx_3svg_8_nanosvg_SVGflags) 0 - (enum __pyx_t_2wx_3svg_8_nanosvg_SVGflags) 1), const_zero = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGflags) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic ignored "-Wconversion"
+++#endif
+++    const enum __pyx_t_2wx_3svg_8_nanosvg_SVGflags neg_one = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGflags) -1, const_zero = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGflags) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic pop
+++#endif
++     const int is_unsigned = neg_one > const_zero;
++     if (is_unsigned) {
++         if (sizeof(enum __pyx_t_2wx_3svg_8_nanosvg_SVGflags) < sizeof(long)) {
++@@ -20282,7 +20374,14 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_enum____pyx_t_2wx_3svg_8_nanosvg
++ 
++ /* CIntToPy */
++ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_enum____pyx_t_2wx_3svg_8_nanosvg_SVGlineCap(enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineCap value) {
++-    const enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineCap neg_one = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineCap) ((enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineCap) 0 - (enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineCap) 1), const_zero = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineCap) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic ignored "-Wconversion"
+++#endif
+++    const enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineCap neg_one = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineCap) -1, const_zero = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineCap) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic pop
+++#endif
++     const int is_unsigned = neg_one > const_zero;
++     if (is_unsigned) {
++         if (sizeof(enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineCap) < sizeof(long)) {
++@@ -20313,7 +20412,14 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_enum____pyx_t_2wx_3svg_8_nanosvg
++ 
++ /* CIntToPy */
++ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_enum____pyx_t_2wx_3svg_8_nanosvg_SVGlineJoin(enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineJoin value) {
++-    const enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineJoin neg_one = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineJoin) ((enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineJoin) 0 - (enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineJoin) 1), const_zero = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineJoin) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic ignored "-Wconversion"
+++#endif
+++    const enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineJoin neg_one = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineJoin) -1, const_zero = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineJoin) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic pop
+++#endif
++     const int is_unsigned = neg_one > const_zero;
++     if (is_unsigned) {
++         if (sizeof(enum __pyx_t_2wx_3svg_8_nanosvg_SVGlineJoin) < sizeof(long)) {
++@@ -20344,7 +20450,14 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_enum____pyx_t_2wx_3svg_8_nanosvg
++ 
++ /* CIntToPy */
++ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_enum____pyx_t_2wx_3svg_8_nanosvg_SVGspreadType(enum __pyx_t_2wx_3svg_8_nanosvg_SVGspreadType value) {
++-    const enum __pyx_t_2wx_3svg_8_nanosvg_SVGspreadType neg_one = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGspreadType) ((enum __pyx_t_2wx_3svg_8_nanosvg_SVGspreadType) 0 - (enum __pyx_t_2wx_3svg_8_nanosvg_SVGspreadType) 1), const_zero = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGspreadType) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic ignored "-Wconversion"
+++#endif
+++    const enum __pyx_t_2wx_3svg_8_nanosvg_SVGspreadType neg_one = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGspreadType) -1, const_zero = (enum __pyx_t_2wx_3svg_8_nanosvg_SVGspreadType) 0;
+++#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+++#pragma GCC diagnostic pop
+++#endif
++     const int is_unsigned = neg_one > const_zero;
++     if (is_unsigned) {
++         if (sizeof(enum __pyx_t_2wx_3svg_8_nanosvg_SVGspreadType) < sizeof(long)) {
++@@ -20907,6 +21020,30 @@ PyObject *__Pyx_Coroutine_MethodReturn(CYTHON_UNUSED PyObject* gen, PyObject *re
++     }
++     return retval;
++ }
+++#if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x03030000 && (defined(__linux__) || PY_VERSION_HEX >= 0x030600B3)
+++static CYTHON_INLINE
+++PyObject *__Pyx_PyGen_Send(PyGenObject *gen, PyObject *arg) {
+++#if PY_VERSION_HEX <= 0x030A00A1
+++    return _PyGen_Send(gen, arg);
+++#else
+++    PyObject *result;
+++    if (PyIter_Send((PyObject*)gen, arg ? arg : Py_None, &result) == PYGEN_RETURN) {
+++        if (PyAsyncGen_CheckExact(gen)) {
+++            assert(result == Py_None);
+++            PyErr_SetNone(PyExc_StopAsyncIteration);
+++        }
+++        else if (result == Py_None) {
+++            PyErr_SetNone(PyExc_StopIteration);
+++        }
+++        else {
+++            _PyGen_SetStopIterationValue(result);
+++        }
+++        Py_CLEAR(result);
+++    }
+++    return result;
+++#endif
+++}
+++#endif
++ static CYTHON_INLINE
++ PyObject *__Pyx_Coroutine_FinishDelegation(__pyx_CoroutineObject *gen) {
++     PyObject *ret;
++@@ -20943,12 +21080,12 @@ static PyObject *__Pyx_Coroutine_Send(PyObject *self, PyObject *value) {
++         #endif
++         #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x03030000 && (defined(__linux__) || PY_VERSION_HEX >= 0x030600B3)
++         if (PyGen_CheckExact(yf)) {
++-            ret = _PyGen_Send((PyGenObject*)yf, value == Py_None ? NULL : value);
+++            ret = __Pyx_PyGen_Send((PyGenObject*)yf, value == Py_None ? NULL : value);
++         } else
++         #endif
++         #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x03050000 && defined(PyCoro_CheckExact) && (defined(__linux__) || PY_VERSION_HEX >= 0x030600B3)
++         if (PyCoro_CheckExact(yf)) {
++-            ret = _PyGen_Send((PyGenObject*)yf, value == Py_None ? NULL : value);
+++            ret = __Pyx_PyGen_Send((PyGenObject*)yf, value == Py_None ? NULL : value);
++         } else
++         #endif
++         {
++@@ -21032,7 +21169,7 @@ static PyObject *__Pyx_Generator_Next(PyObject *self) {
++         #endif
++         #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x03030000 && (defined(__linux__) || PY_VERSION_HEX >= 0x030600B3)
++         if (PyGen_CheckExact(yf)) {
++-            ret = _PyGen_Send((PyGenObject*)yf, NULL);
+++            ret = __Pyx_PyGen_Send((PyGenObject*)yf, NULL);
++         } else
++         #endif
++         #ifdef __Pyx_Coroutine_USED
++@@ -21192,6 +21329,7 @@ static int __Pyx_Coroutine_clear(PyObject *self) {
++     }
++ #endif
++     Py_CLEAR(gen->gi_code);
+++    Py_CLEAR(gen->gi_frame);
++     Py_CLEAR(gen->gi_name);
++     Py_CLEAR(gen->gi_qualname);
++     Py_CLEAR(gen->gi_modulename);
++@@ -21208,7 +21346,7 @@ static void __Pyx_Coroutine_dealloc(PyObject *self) {
++         if (PyObject_CallFinalizerFromDealloc(self))
++ #else
++         Py_TYPE(gen)->tp_del(self);
++-        if (self->ob_refcnt > 0)
+++        if (Py_REFCNT(self) > 0)
++ #endif
++         {
++             return;
++@@ -21235,7 +21373,7 @@ static void __Pyx_Coroutine_del(PyObject *self) {
++     }
++ #if !CYTHON_USE_TP_FINALIZE
++     assert(self->ob_refcnt == 0);
++-    self->ob_refcnt = 1;
+++    __Pyx_SET_REFCNT(self, 1);
++ #endif
++     __Pyx_PyThreadState_assign
++     __Pyx_ErrFetch(&error_type, &error_value, &error_traceback);
++@@ -21302,17 +21440,17 @@ static void __Pyx_Coroutine_del(PyObject *self) {
++     }
++     __Pyx_ErrRestore(error_type, error_value, error_traceback);
++ #if !CYTHON_USE_TP_FINALIZE
++-    assert(self->ob_refcnt > 0);
+++    assert(Py_REFCNT(self) > 0);
++     if (--self->ob_refcnt == 0) {
++         return;
++     }
++     {
++-        Py_ssize_t refcnt = self->ob_refcnt;
+++        Py_ssize_t refcnt = Py_REFCNT(self);
++         _Py_NewReference(self);
++-        self->ob_refcnt = refcnt;
+++        __Pyx_SET_REFCNT(self, refcnt);
++     }
++ #if CYTHON_COMPILING_IN_CPYTHON
++-    assert(PyType_IS_GC(self->ob_type) &&
+++    assert(PyType_IS_GC(Py_TYPE(self)) &&
++            _Py_AS_GC(self)->gc.gc_refs != _PyGC_REFS_UNTRACKED);
++     _Py_DEC_REFTOTAL;
++ #endif
++@@ -21378,6 +21516,27 @@ __Pyx_Coroutine_set_qualname(__pyx_CoroutineObject *self, PyObject *value, CYTHO
++     Py_XDECREF(tmp);
++     return 0;
++ }
+++static PyObject *
+++__Pyx_Coroutine_get_frame(__pyx_CoroutineObject *self, CYTHON_UNUSED void *context)
+++{
+++    PyObject *frame = self->gi_frame;
+++    if (!frame) {
+++        if (unlikely(!self->gi_code)) {
+++            Py_RETURN_NONE;
+++        }
+++        frame = (PyObject *) PyFrame_New(
+++            PyThreadState_Get(),            /*PyThreadState *tstate,*/
+++            (PyCodeObject*) self->gi_code,  /*PyCodeObject *code,*/
+++            __pyx_d,                 /*PyObject *globals,*/
+++            0                               /*PyObject *locals*/
+++        );
+++        if (unlikely(!frame))
+++            return NULL;
+++        self->gi_frame = frame;
+++    }
+++    Py_INCREF(frame);
+++    return frame;
+++}
++ static __pyx_CoroutineObject *__Pyx__Coroutine_New(
++             PyTypeObject* type, __pyx_coroutine_body_t body, PyObject *code, PyObject *closure,
++             PyObject *name, PyObject *qualname, PyObject *module_name) {
++@@ -21411,6 +21570,7 @@ static __pyx_CoroutineObject *__Pyx__Coroutine_NewInit(
++     gen->gi_modulename = module_name;
++     Py_XINCREF(code);
++     gen->gi_code = code;
+++    gen->gi_frame = NULL;
++     PyObject_GC_Track(gen);
++     return gen;
++ }
++@@ -21534,6 +21694,8 @@ static PyGetSetDef __pyx_Generator_getsets[] = {
++      (char*) PyDoc_STR("name of the generator"), 0},
++     {(char *) "__qualname__", (getter)__Pyx_Coroutine_get_qualname, (setter)__Pyx_Coroutine_set_qualname,
++      (char*) PyDoc_STR("qualified name of the generator"), 0},
+++    {(char *) "gi_frame", (getter)__Pyx_Coroutine_get_frame, NULL,
+++     (char*) PyDoc_STR("Frame of the generator"), 0},
++     {0, 0, 0, 0, 0}
++ };
++ static PyTypeObject __pyx_GeneratorType_type = {
++-- 
++2.33.0
++
+diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.1.1.bb b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.1.1.bb
+index 6ec92c2cec..4d739b86f7 100644
+--- a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.1.1.bb
++++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.1.1.bb
+@@ -11,6 +11,7 @@ PYPI_PACKAGE = "wxPython"
+ SRC_URI += "file://add-back-option-build-base.patch \
+             file://wxgtk-fixup-build-scripts.patch \
+             file://sip-fix-override-functions.patch \
++            file://0001-Update-Cython-version-to-fix-NanoSVG-issues-with-Pyt.patch \
+             "
+ SRC_URI[sha256sum] = "00e5e3180ac7f2852f342ad341d57c44e7e4326de0b550b9a5c4a8361b6c3528"
  
 -- 
 2.25.1
