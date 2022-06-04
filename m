@@ -1,182 +1,79 @@
-Return-Path: <liu.ming50@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 71F69C43334
-	for <webhook@archiver.kernel.org>; Sat,  4 Jun 2022 09:35:29 +0000 (UTC)
-Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com
- [209.85.208.181])
- by mx.groups.io with SMTP id smtpd.web11.8403.1654335328338248283
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B405FC433EF
+	for <webhook@archiver.kernel.org>; Sat,  4 Jun 2022 16:53:11 +0000 (UTC)
+Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
+ by mx.groups.io with SMTP id smtpd.web12.11985.1654361587949929246
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Jun 2022 02:35:28 -0700
+ Sat, 04 Jun 2022 09:53:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=JxCG5Sii;
- spf=pass (domain: gmail.com, ip: 209.85.208.181,
- mailfrom: liu.ming50@gmail.com)
-Received: by mail-lj1-f181.google.com with SMTP id r8so10283711ljp.1
-        for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Jun 2022 02:35:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=oT9kSWqWe15Sj1nOTYfZYApdvKDKMjHPK4D07Z7Ns7A=;
-        b=JxCG5SiiD6NvyQxMmUfFf4+UPuSEmwrjv/X3DbbA3ijteHEXQ2nPO+HinB2lcOjyLa
-         VqmmhKyo+yYvredt1l7SupGFAdI+ZYRc2sUW0yB8RiSTpUD3OXdNwC1bRKQLB9Gz6L3e
-         Gk+pKbT0W2IJsIJNiKEZ01oCTSMc+KCa6hIK6Urruno/nohRQnTB/rZqBRJ10bMBoVvV
-         gLisVMbzVlbfFgezDCZnLlGN/dSQ9FxrwotZVD+yHeZgvcn3THI10kxYDe7cnn0B8rjF
-         SV3UuCWHd1XZZuPnab6YO4pVdJOM9kBdUtTYH+O5f1v2Zxmss7UC+GtbKauradg/Xo+K
-         OCTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=oT9kSWqWe15Sj1nOTYfZYApdvKDKMjHPK4D07Z7Ns7A=;
-        b=0N5AiPDH/0WeEKVetv1hwSW/u86cJP+/DPudfsE/GbwGahITOjO6Wc0iI4Mr9if2aM
-         1AT9EJEFsun6MwtfI+pRzKYyf92i2IMTcV8Idpe7GyOfiatgvTXXD8cHHX2kdUTn184X
-         pnfSXvfa7Z/Tbrw8QmETDrcduV+vNJwI1SkNgaCLWapvKawp4DnH6tVZFnCl1AJxQdux
-         CwPRule4cBibNZGVygMaqMvJm78x6pYMzR+o9BkynEZDLOxga2ntC/LL8B7b6IuriixG
-         JwzbmpTw67YqtGTEmymOnPZAVBs/ENPD8lI99sTkgxYJnCwbSggcBVp9IIZEp86vcRrx
-         aBCA==
-X-Gm-Message-State: AOAM533cjd0YypJcNWEVQ+TfUSFJsk8zpW5r0lHY2jaCslPoRBJ0xOGb
-	5LV+781KWUrVwKgdXza0td7m2SKGrd4=
-X-Google-Smtp-Source: 
- ABdhPJz4PrQhV5jl+wvU7rMijqAletDnvmGf+6vBDrmjfVaJfpAyrmeF3e190fc9PohxfqXUDjsUow==
-X-Received: by 2002:a2e:6a10:0:b0:253:e02a:94c6 with SMTP id
- f16-20020a2e6a10000000b00253e02a94c6mr40236837ljc.460.1654335326014;
-        Sat, 04 Jun 2022 02:35:26 -0700 (PDT)
-Received: from peterliu-Precision-7530.emea.group.atlascopco.com
- ([2a00:801:230:9439:bc15:d6de:b236:e4dc])
-        by smtp.gmail.com with ESMTPSA id
- a12-20020a19ca0c000000b0047915250d98sm1099755lfg.272.2022.06.04.02.35.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Jun 2022 02:35:25 -0700 (PDT)
-From: liu.ming50@gmail.com
+ dkim=missing;
+ spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.85,
+ mailfrom: f_l_k@t-online.de)
+Received: from fwd72.dcpf.telekom.de (fwd72.aul.t-online.de [10.223.144.98])
+	by mailout11.t-online.de (Postfix) with SMTP id 1D73E16769
+	for <openembedded-devel@lists.openembedded.org>;
+ Sat,  4 Jun 2022 18:53:06 +0200 (CEST)
+Received: from localhost.localdomain ([84.163.41.60]) by fwd72.t-online.de
+	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
+	esmtp id 1nxX1H-0Unkf30; Sat, 4 Jun 2022 18:52:59 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ming Liu <liu.ming50@gmail.com>
-Subject: [meta-multimedia] [PATCH] bluealsa: uprev to 4.0.0
-Date: Sat,  4 Jun 2022 11:35:18 +0200
-Message-Id: <20220604093518.30749-1-liu.ming50@gmail.com>
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-mingw][PATCH] libsdl2: disable gles2 support for
+ class-nativesdk
+Date: Sat,  4 Jun 2022 18:52:51 +0200
+Message-Id: <20220604165251.369796-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1654361579-01439E5E-00C349DB/0/0 CLEAN NORMAL
+X-TOI-MSGID: 287a78fa-04af-4594-affa-00d2efe892f9
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 04 Jun 2022 09:35:29 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 04 Jun 2022 16:53:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97410
+ https://lists.openembedded.org/g/openembedded-devel/message/97411
 
-From: Ming Liu <liu.ming50@gmail.com>
+this fixes:
+| Has header "sys/select.h" : NO
+| Checking whether type "fd_set" has member "fds_bits" : NO
+| Checking whether type "fd_set" has member "__fds_bits" : NO
+|
+| ../xorgproto-2022.1/include/X11/meson.build:19:4: ERROR: Problem encoun=
+tered: Your fd_set is too weird.
+|
+| A full log can be found at /home/flk/build/poky/build/tmp/work/x86_64-n=
+ativesdk-mingw32-w64-mingw32/nativesdk-xorgproto/2022.1-r0/build/meson-lo=
+gs/meson-log.txt
 
-Some recipe changes have been made as well as follows:
-- Dont install bluealsa.service from recipe, use the bluealsa.service
-  from bluez-alsa source. In bluez-alsa 4.0.0, two more autoconf
-  options have been added: --with-systemdbluealsaaplayargs and
-  --with-systemdbluealsaargs that could be used to pass bluealsa
-  and bluealsa-aplay arguments to systemd services.
-- Drop some useless FILES varialbes.
-- Add more PACKAGECONFIGs, explicitly disable the codecs that not
-  supported by Yocto, this is to get a predictible build.
-- Split out bluealsa-aplay to its own package and disable
-  bluealsa-aplay.service by default, since bluez-alas can be used
-  in many different ways, there is no default usage for it, like sink
-  (BT speaker).
-
-Signed-off-by: Ming Liu <liu.ming50@gmail.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../bluealsa/bluealsa_git.bb                  | 69 +++++++++++++------
- 1 file changed, 48 insertions(+), 21 deletions(-)
+ recipes-graphics/libsdl2/libsdl2_%.bbappend | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
-index 674017606..edd97afe0 100644
---- a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
-+++ b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
-@@ -5,35 +5,62 @@ SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=72d868d66bdd5bf51fe67734431de057"
- 
--DEPENDS += "alsa-lib bluez5 glib-2.0 sbc"
-+SRC_URI = "git://github.com/Arkq/bluez-alsa.git;protocol=https;branch=master"
- 
--SRCREV = "aac8742a9e7dd12a1fead9cbce7d2dc8b961999c"
--
--SRC_URI = " \
--    git://github.com/Arkq/bluez-alsa.git;protocol=https;branch=master \
--    file://bluealsa.service \
--"
-+SRCREV = "dd05a1baa261b94da9ba977b5e3392c8b4dc7a5e"
-+PV = "4.0.0+git${SRCPV}"
- 
- S  = "${WORKDIR}/git"
- 
--PACKAGECONFIG[aac]  = "--enable-aac, --disable-aac,"
--PACKAGECONFIG[aptx] = "--enable-aptx,--disable-aptx,"
--PACKAGECONFIG[hcitop]   = "--enable-hcitop, --disable-hcitop, libbsd ncurses"
--PACKAGECONFIG[systemd]   = "--enable-systemd, --disable-systemd, systemd"
-+DEPENDS += "alsa-lib bluez5 dbus glib-2.0 sbc"
- 
--PACKAGECONFIG += "hcitop ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-+PACKAGECONFIG ??= "aplay cli hcitop ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-+PACKAGECONFIG[a2dpconf]  = "--enable-a2dpconf,--disable-a2dpconf"
-+PACKAGECONFIG[aac]  = "--enable-aac,--disable-aac,fdk-aac"
-+PACKAGECONFIG[aplay] = "--enable-aplay,--disable-aplay"
-+PACKAGECONFIG[cli] = "--enable-cli,--disable-cli"
-+PACKAGECONFIG[coverage] = "--with-coverage,--without-coverage,lcov-native"
-+PACKAGECONFIG[debug] = "--enable-debug,--disable-debug"
-+PACKAGECONFIG[debug-time] = "--enable-debug-time,--disable-debug-time"
-+PACKAGECONFIG[faststream] = "--enable-faststream,--disable-faststream"
-+PACKAGECONFIG[hcitop] = "--enable-hcitop,--disable-hcitop,libbsd ncurses"
-+PACKAGECONFIG[libunwind] = "--with-libunwind,--without-libunwind,libunwind"
-+PACKAGECONFIG[mp3lame] = "--enable-mp3lame,--disable-mp3lame,lame"
-+PACKAGECONFIG[mpg123] = "--enable-mpg123,--disable-mpg123,mpg123,mpg123"
-+PACKAGECONFIG[ofono] = "--enable-ofono,--disable-ofono,ofono"
-+PACKAGECONFIG[payloadcheck] = "--enable-payloadcheck,--disable-payloadcheck"
-+PACKAGECONFIG[rfcomm] = "--enable-rfcomm,--disable-rfcomm"
-+PACKAGECONFIG[systemd] = "--enable-systemd --with-systemdsystemunitdir=${systemd_system_unitdir} \
-+                          --with-systemdbluealsaargs='${SYSTEMD_BLUEALSA_ARGS}' --with-systemdbluealsaaplayargs='${SYSTEMD_BLUEALSA_APLAY_ARGS}',--disable-systemd,systemd"
-+PACKAGECONFIG[test] = "--enable-test,--disable-test,libcheck libsndfile1"
-+PACKAGECONFIG[upower] = "--enable-upower,--disable-upower,,upower"
- 
- inherit autotools pkgconfig systemd
- 
--FILES:${PN} += "\
--    ${datadir}/alsa/alsa.conf.d/20-bluealsa.conf\
--    ${libdir}/alsa-lib/libasound_module_ctl_bluealsa.so\
--    ${libdir}/alsa-lib/libasound_module_pcm_bluealsa.so\
-+EXTRA_OECONF = " \
-+    --disable-aptx \
-+    --disable-lc3plus \
-+    --disable-ldac \
-+    --disable-manpages \
- "
- 
--FILES:${PN}-staticdev += "\
--    ${libdir}/alsa-lib/libasound_module_ctl_bluealsa.a\
--    ${libdir}/alsa-lib/libasound_module_pcm_bluealsa.a\
--"
-+PACKAGE_BEFORE_PN = "${PN}-aplay"
-+RRECOMMENDS:${PN} = "${PN}-aplay"
-+
-+FILES:${PN}-aplay = "${bindir}/bluealsa-aplay"
-+FILES:${PN} += "${libdir}/alsa-lib/*"
-+
-+SYSTEMD_PACKAGES += "${PN}-aplay"
-+SYSTEMD_SERVICE:${PN} = "bluealsa.service"
-+SYSTEMD_SERVICE:${PN}-aplay = "bluealsa-aplay.service"
-+
-+SYSTEMD_AUTO_ENABLE:${PN}-aplay = "disable"
-+
-+# Choose bluez-alsa arguments to be used in bluealsa systemd service
-+# Usually could choose profiles with it: a2dp-source a2dp-sink hfp-hf hfp-ag hsp-hs hsp-ag hfp-ofono
-+# Enable bluez-alsa arguments by default:
-+SYSTEMD_BLUEALSA_ARGS ?= "-p a2dp-source -p a2dp-sink"
- 
--SYSTEMD_SERVICE:${PN} = "bluealsa.service bluealsa-aplay.service"
-+# Choose bluealsa-aplay arguments to be used in bluealsa-aplay systemd service
-+# Defaults to be empty:
-+SYSTEMD_BLUEALSA_APLAY_ARGS ?= ""
--- 
+diff --git a/recipes-graphics/libsdl2/libsdl2_%.bbappend b/recipes-graphi=
+cs/libsdl2/libsdl2_%.bbappend
+index 89532d6..4f9cde1 100644
+--- a/recipes-graphics/libsdl2/libsdl2_%.bbappend
++++ b/recipes-graphics/libsdl2/libsdl2_%.bbappend
+@@ -1,7 +1,7 @@
+ # Need to disable X11 explictly as nativesdk-libxdmcp fails:
+ # .libs/Fill.o:Fill.c:(.text+0x48): undefined reference to `_imp__recvfr=
+om@24'
+ # .libs/Flush.o:Flush.c:(.text+0x36): undefined reference to `_imp__send=
+to@24'
+-PACKAGECONFIG:remove:mingw32:class-nativesdk =3D "x11 opengl"
++PACKAGECONFIG:remove:mingw32:class-nativesdk =3D "x11 opengl gles2"
+=20
+ # libtool doesn't think it can link windres output (COFF) with libtool o=
+bjects
+ # (COFF) , but it can.  This might be because file misidentifies version=
+.o:
+--=20
 2.25.1
 
 
