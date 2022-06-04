@@ -1,354 +1,181 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <liu.ming50@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 104FDC43334
-	for <webhook@archiver.kernel.org>; Fri,  3 Jun 2022 19:19:55 +0000 (UTC)
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
- [209.85.215.169])
- by mx.groups.io with SMTP id smtpd.web12.2413.1654283989749368446
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 71F69C43334
+	for <webhook@archiver.kernel.org>; Sat,  4 Jun 2022 09:35:29 +0000 (UTC)
+Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com
+ [209.85.208.181])
+ by mx.groups.io with SMTP id smtpd.web11.8403.1654335328338248283
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Jun 2022 12:19:49 -0700
+ Sat, 04 Jun 2022 02:35:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=WRqci4Oz;
- spf=pass (domain: gmail.com, ip: 209.85.215.169,
- mailfrom: akuster808@gmail.com)
-Received: by mail-pg1-f169.google.com with SMTP id g184so7945808pgc.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=JxCG5Sii;
+ spf=pass (domain: gmail.com, ip: 209.85.208.181,
+ mailfrom: liu.ming50@gmail.com)
+Received: by mail-lj1-f181.google.com with SMTP id r8so10283711ljp.1
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Jun 2022 12:19:49 -0700 (PDT)
+ Sat, 04 Jun 2022 02:35:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=SdR19qocfp0tYoWxdAqvGqdPRIK9CqfVWzNBQJxkJr8=;
-        b=WRqci4OzI7sraNeT5mA/vbFc1dssQodzlhZFbT6MCrsU25IRuTVHqnJnFp15CXkhl7
-         zpHqDRvtS0Jwe6taTT47pPPEnG+50P4KWvZBkyq3aBzPLU3jYg2nyj4AW5tQd1v7AJLb
-         RegmEQxYYZWQXF92j4K+UeV5CzBzLH1lWcfcvyXjvpoP/eViP7QykOdiDPdF52ZLifAd
-         6R/s2fDKlSJ5G3D07eLLQ5LMg5QenWjHnUa6MqEWGpphZz6VwNZag0C9XR8YyTWkAzLz
-         Ge3LsAQforMzpWzDMzV+KnzgLXxqkAYh2ZBkkm5qso2yReoG3pSj5l56Pk0jyRrsQLm0
-         Feww==
+        bh=oT9kSWqWe15Sj1nOTYfZYApdvKDKMjHPK4D07Z7Ns7A=;
+        b=JxCG5SiiD6NvyQxMmUfFf4+UPuSEmwrjv/X3DbbA3ijteHEXQ2nPO+HinB2lcOjyLa
+         VqmmhKyo+yYvredt1l7SupGFAdI+ZYRc2sUW0yB8RiSTpUD3OXdNwC1bRKQLB9Gz6L3e
+         Gk+pKbT0W2IJsIJNiKEZ01oCTSMc+KCa6hIK6Urruno/nohRQnTB/rZqBRJ10bMBoVvV
+         gLisVMbzVlbfFgezDCZnLlGN/dSQ9FxrwotZVD+yHeZgvcn3THI10kxYDe7cnn0B8rjF
+         SV3UuCWHd1XZZuPnab6YO4pVdJOM9kBdUtTYH+O5f1v2Zxmss7UC+GtbKauradg/Xo+K
+         OCTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=SdR19qocfp0tYoWxdAqvGqdPRIK9CqfVWzNBQJxkJr8=;
-        b=NtlkH0ck4pxHR+rTfeefmiJMjj7ijSNdD8RqWQIeGD5oqfbYskWknHxZvAwby/EBgC
-         mhyfVa8LZpcRSBQ8wZVZNPV+rnBoHA6OBacT/RbcHUt37eqZdKO+PW3Y3WNBfEJpGLIT
-         2ZucUBUj83qpX3e7URZHAdFp0ZE5m2fPU99zkBsQD3RmEMX1dRk4UPemWruL4/5RqRXZ
-         K8Nb7F1cDQN8pQT10mSR9OFGA4pvpFE1P5St4BGI1iU/LmngWEcTMcWYeC0SH4CAynOO
-         vxvCMl9HcENIXqNwxkpn4f+N3R880M55KAuVakhAcuMTZ4GodGcI7KnOCuQG9weqpJ6p
-         pcgQ==
-X-Gm-Message-State: AOAM533d/gFLC7rnIkzdCEAhNVGR1G7jyEH8kMQkp8IwaH37GJLLXdkS
-	EJfJB3nzm9R50SDqxdS2QRspVZinFGM=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=oT9kSWqWe15Sj1nOTYfZYApdvKDKMjHPK4D07Z7Ns7A=;
+        b=0N5AiPDH/0WeEKVetv1hwSW/u86cJP+/DPudfsE/GbwGahITOjO6Wc0iI4Mr9if2aM
+         1AT9EJEFsun6MwtfI+pRzKYyf92i2IMTcV8Idpe7GyOfiatgvTXXD8cHHX2kdUTn184X
+         pnfSXvfa7Z/Tbrw8QmETDrcduV+vNJwI1SkNgaCLWapvKawp4DnH6tVZFnCl1AJxQdux
+         CwPRule4cBibNZGVygMaqMvJm78x6pYMzR+o9BkynEZDLOxga2ntC/LL8B7b6IuriixG
+         JwzbmpTw67YqtGTEmymOnPZAVBs/ENPD8lI99sTkgxYJnCwbSggcBVp9IIZEp86vcRrx
+         aBCA==
+X-Gm-Message-State: AOAM533cjd0YypJcNWEVQ+TfUSFJsk8zpW5r0lHY2jaCslPoRBJ0xOGb
+	5LV+781KWUrVwKgdXza0td7m2SKGrd4=
 X-Google-Smtp-Source: 
- ABdhPJwHUDUXszC2wBzSb6miwqkPimotbGbfWinnXcffNAeGjITi36HyRVFa92kx+WAla2ltlZynAw==
-X-Received: by 2002:a63:797:0:b0:3fc:da19:45a7 with SMTP id
- 145-20020a630797000000b003fcda1945a7mr9157910pgh.326.1654283988781;
-        Fri, 03 Jun 2022 12:19:48 -0700 (PDT)
-Received: from keaua.caveonetworks.com (c-67-181-203-136.hsd1.ca.comcast.net.
- [67.181.203.136])
+ ABdhPJz4PrQhV5jl+wvU7rMijqAletDnvmGf+6vBDrmjfVaJfpAyrmeF3e190fc9PohxfqXUDjsUow==
+X-Received: by 2002:a2e:6a10:0:b0:253:e02a:94c6 with SMTP id
+ f16-20020a2e6a10000000b00253e02a94c6mr40236837ljc.460.1654335326014;
+        Sat, 04 Jun 2022 02:35:26 -0700 (PDT)
+Received: from peterliu-Precision-7530.emea.group.atlascopco.com
+ ([2a00:801:230:9439:bc15:d6de:b236:e4dc])
         by smtp.gmail.com with ESMTPSA id
- p2-20020a170902c70200b001617541c94fsm5770620plp.60.2022.06.03.12.19.47
-        for <openembedded-devel@lists.openembedded.org>
+ a12-20020a19ca0c000000b0047915250d98sm1099755lfg.272.2022.06.04.02.35.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 03 Jun 2022 12:19:48 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
+        Sat, 04 Jun 2022 02:35:25 -0700 (PDT)
+From: liu.ming50@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [kirkstone 19/20] devmem2: the source and patches moved to github
- repo
-Date: Fri,  3 Jun 2022 12:17:18 -0700
-Message-Id: 
- <4e66373fe9653317400098cf4ce8d29ec1a99026.1654282423.git.akuster808@gmail.com>
+Cc: Ming Liu <liu.ming50@gmail.com>
+Subject: [meta-multimedia] [PATCH] bluealsa: uprev to 4.0.0
+Date: Sat,  4 Jun 2022 11:35:18 +0200
+Message-Id: <20220604093518.30749-1-liu.ming50@gmail.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1654282423.git.akuster808@gmail.com>
-References: <cover.1654282423.git.akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Jun 2022 19:19:55 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 04 Jun 2022 09:35:29 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97408
+ https://lists.openembedded.org/g/openembedded-devel/message/97410
 
-From: Denys Dmytriyenko <denis@denix.org>
+From: Ming Liu <liu.ming50@gmail.com>
 
-To cleanup metadata and improve source code management, github repo was
-created here with all patches integrated:
-https://github.com/denix0/devmem2
+Some recipe changes have been made as well as follows:
+- Dont install bluealsa.service from recipe, use the bluealsa.service
+  from bluez-alsa source. In bluez-alsa 4.0.0, two more autoconf
+  options have been added: --with-systemdbluealsaaplayargs and
+  --with-systemdbluealsaargs that could be used to pass bluealsa
+  and bluealsa-aplay arguments to systemd services.
+- Drop some useless FILES varialbes.
+- Add more PACKAGECONFIGs, explicitly disable the codecs that not
+  supported by Yocto, this is to get a predictible build.
+- Split out bluealsa-aplay to its own package and disable
+  bluealsa-aplay.service by default, since bluez-alas can be used
+  in many different ways, there is no default usage for it, like sink
+  (BT speaker).
 
-Update recipe accordingly, bump the version while at it to distinguish
-from the original.
-
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 356b488fb06bcacb0aa553518442b2d9574f16af)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Ming Liu <liu.ming50@gmail.com>
 ---
- ...word-is-32-bit-and-add-support-for-6.patch | 70 --------------
- ...ort-different-page-sizes-at-run-time.patch | 35 -------
- .../devmem2/devmem2/devmem2-fixups-2.patch    | 91 -------------------
- .../devmem2/{devmem2.bb => devmem2_2.0.bb}    | 17 +---
- 4 files changed, 3 insertions(+), 210 deletions(-)
- delete mode 100644 meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
- delete mode 100644 meta-oe/recipes-support/devmem2/devmem2/0001-devmem2-support-different-page-sizes-at-run-time.patch
- delete mode 100644 meta-oe/recipes-support/devmem2/devmem2/devmem2-fixups-2.patch
- rename meta-oe/recipes-support/devmem2/{devmem2.bb => devmem2_2.0.bb} (40%)
+ .../bluealsa/bluealsa_git.bb                  | 69 +++++++++++++------
+ 1 file changed, 48 insertions(+), 21 deletions(-)
 
-diff --git a/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch b/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
-deleted file mode 100644
-index 2a57f29891..0000000000
---- a/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
-+++ /dev/null
-@@ -1,70 +0,0 @@
--From 1360a907879dd24041797a3b709d49aeac2ab444 Mon Sep 17 00:00:00 2001
--From: Denys Dmytriyenko <denys@ti.com>
--Date: Tue, 29 May 2018 16:55:42 -0400
--Subject: [PATCH] devmem.c: ensure word is 32-bit and add support for 64-bit
-- long
--
--Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-----
-- devmem2.c | 23 +++++++++++++++++------
-- 1 file changed, 17 insertions(+), 6 deletions(-)
--
--diff --git a/devmem2.c b/devmem2.c
--index 5845381..68131b2 100644
----- a/devmem2.c
--+++ b/devmem2.c
--@@ -39,6 +39,7 @@
-- 
-- #include <stdio.h>
-- #include <stdlib.h>
--+#include <stdint.h>
-- #include <unistd.h>
-- #include <string.h>
-- #include <errno.h>
--@@ -69,7 +70,7 @@ int main(int argc, char **argv) {
-- 	if(argc < 2) {
-- 		fprintf(stderr, "\nUsage:\t%s { address } [ type [ data ] ]\n"
-- 			"\taddress : memory address to act upon\n"
---			"\ttype    : access operation type : [b]yte, [h]alfword, [w]ord\n"
--+			"\ttype    : access operation type : [b]yte, [h]alfword, [w]ord, [l]ong\n"
-- 			"\tdata    : data to be written\n\n",
-- 			argv[0]);
-- 		exit(1);
--@@ -103,9 +104,14 @@ int main(int argc, char **argv) {
-- 			read_result = *((unsigned short *) virt_addr);
-- 			break;
-- 		case 'w':
---			data_size = sizeof(unsigned long);
--+			data_size = sizeof(uint32_t);
-- 			virt_addr = fixup_addr(virt_addr, data_size);
---			read_result = *((unsigned long *) virt_addr);
--+			read_result = *((uint32_t *) virt_addr);
--+			break;
--+		case 'l':
--+			data_size = sizeof(uint64_t);
--+			virt_addr = fixup_addr(virt_addr, data_size);
--+			read_result = *((uint64_t *) virt_addr);
-- 			break;
-- 		default:
-- 			fprintf(stderr, "Illegal data type '%c'.\n", access_type);
--@@ -129,9 +135,14 @@ int main(int argc, char **argv) {
-- 				read_result = *((unsigned short *) virt_addr);
-- 				break;
-- 			case 'w':
---				virt_addr = fixup_addr(virt_addr, sizeof(unsigned long));
---				*((unsigned long *) virt_addr) = write_val;
---				read_result = *((unsigned long *) virt_addr);
--+				virt_addr = fixup_addr(virt_addr, sizeof(uint32_t));
--+				*((uint32_t *) virt_addr) = write_val;
--+				read_result = *((uint32_t *) virt_addr);
--+				break;
--+			case 'l':
--+				virt_addr = fixup_addr(virt_addr, sizeof(uint64_t));
--+				*((uint64_t *) virt_addr) = write_val;
--+				read_result = *((uint64_t *) virt_addr);
-- 				break;
-- 		}
-- 		sprintf(fmt_str, "Write at address 0x%%08lX (%%p): 0x%%0%dlX, "
---- 
--2.7.4
--
-diff --git a/meta-oe/recipes-support/devmem2/devmem2/0001-devmem2-support-different-page-sizes-at-run-time.patch b/meta-oe/recipes-support/devmem2/devmem2/0001-devmem2-support-different-page-sizes-at-run-time.patch
-deleted file mode 100644
-index 0da0732c57..0000000000
---- a/meta-oe/recipes-support/devmem2/devmem2/0001-devmem2-support-different-page-sizes-at-run-time.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From 0f6af48b2fbc71ec8abe862d3e9eb6da7b03538b Mon Sep 17 00:00:00 2001
--From: Denys Dmytriyenko <denys@ti.com>
--Date: Wed, 8 Aug 2018 14:38:00 -0400
--Subject: [PATCH] devmem2: support different page sizes at run-time
--
--Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-----
-- devmem2.c | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/devmem2.c b/devmem2.c
--index 68131b2..76af2d6 100644
----- a/devmem2.c
--+++ b/devmem2.c
--@@ -53,8 +53,6 @@
-- #define FATAL do { fprintf(stderr, "Error at line %d, file %s (%d) [%s]\n", \
--   __LINE__, __FILE__, errno, strerror(errno)); exit(1); } while(0)
--  
---#define MAP_SIZE 4096UL
---#define MAP_MASK (MAP_SIZE - 1)
-- 
-- static inline void *fixup_addr(void *addr, size_t size);
-- 
--@@ -66,6 +64,8 @@ int main(int argc, char **argv) {
-- 	int access_type = 'w';
-- 	char fmt_str[128];
-- 	size_t data_size;
--+	unsigned long MAP_SIZE = sysconf(_SC_PAGE_SIZE);
--+	unsigned long MAP_MASK = (MAP_SIZE - 1);
-- 	
-- 	if(argc < 2) {
-- 		fprintf(stderr, "\nUsage:\t%s { address } [ type [ data ] ]\n"
---- 
--2.7.4
--
-diff --git a/meta-oe/recipes-support/devmem2/devmem2/devmem2-fixups-2.patch b/meta-oe/recipes-support/devmem2/devmem2/devmem2-fixups-2.patch
-deleted file mode 100644
-index 4517797fc7..0000000000
---- a/meta-oe/recipes-support/devmem2/devmem2/devmem2-fixups-2.patch
-+++ /dev/null
-@@ -1,91 +0,0 @@
----- devmem2.c	2004-08-05 01:55:25.000000000 +0200
--+++ devmem2_modif.c	2011-01-13 15:48:37.798799784 +0100
--@@ -45,12 +45,16 @@
-- #define MAP_SIZE 4096UL
-- #define MAP_MASK (MAP_SIZE - 1)
-- 
--+static inline void *fixup_addr(void *addr, size_t size);
--+
-- int main(int argc, char **argv) {
--     int fd;
--     void *map_base, *virt_addr; 
---	unsigned long read_result, writeval;
--+	unsigned long read_result, write_val;
-- 	off_t target;
-- 	int access_type = 'w';
--+	char fmt_str[128];
--+	size_t data_size;
-- 	
-- 	if(argc < 2) {
-- 		fprintf(stderr, "\nUsage:\t%s { address } [ type [ data ] ]\n"
--@@ -79,38 +83,51 @@
--     virt_addr = map_base + (target & MAP_MASK);
--     switch(access_type) {
-- 		case 'b':
--+			data_size = sizeof(unsigned char);
--+			virt_addr = fixup_addr(virt_addr, data_size);
-- 			read_result = *((unsigned char *) virt_addr);
-- 			break;
-- 		case 'h':
--+			data_size = sizeof(unsigned short);
--+			virt_addr = fixup_addr(virt_addr, data_size);
-- 			read_result = *((unsigned short *) virt_addr);
-- 			break;
-- 		case 'w':
--+			data_size = sizeof(unsigned long);
--+			virt_addr = fixup_addr(virt_addr, data_size);
-- 			read_result = *((unsigned long *) virt_addr);
-- 			break;
-- 		default:
-- 			fprintf(stderr, "Illegal data type '%c'.\n", access_type);
-- 			exit(2);
-- 	}
---    printf("Value at address 0x%X (%p): 0x%X\n", target, virt_addr, read_result); 
--+	sprintf(fmt_str, "Read at address  0x%%08lX (%%p): 0x%%0%dlX\n", 2*data_size);
--+    printf(fmt_str, (unsigned long)target, virt_addr, read_result);
--     fflush(stdout);
-- 
-- 	if(argc > 3) {
---		writeval = strtoul(argv[3], 0, 0);
--+		write_val = strtoul(argv[3], 0, 0);
-- 		switch(access_type) {
-- 			case 'b':
---				*((unsigned char *) virt_addr) = writeval;
--+				virt_addr = fixup_addr(virt_addr, sizeof(unsigned char));
--+				*((unsigned char *) virt_addr) = write_val;
-- 				read_result = *((unsigned char *) virt_addr);
-- 				break;
-- 			case 'h':
---				*((unsigned short *) virt_addr) = writeval;
--+				virt_addr = fixup_addr(virt_addr, sizeof(unsigned short));
--+				*((unsigned short *) virt_addr) = write_val;
-- 				read_result = *((unsigned short *) virt_addr);
-- 				break;
-- 			case 'w':
---				*((unsigned long *) virt_addr) = writeval;
--+				virt_addr = fixup_addr(virt_addr, sizeof(unsigned long));
--+				*((unsigned long *) virt_addr) = write_val;
-- 				read_result = *((unsigned long *) virt_addr);
-- 				break;
-- 		}
---		printf("Written 0x%X; readback 0x%X\n", writeval, read_result); 
--+		sprintf(fmt_str, "Write at address 0x%%08lX (%%p): 0x%%0%dlX, "
--+			"readback 0x%%0%dlX\n",	2*data_size, 2*data_size);
--+		printf(fmt_str, (unsigned long)target, virt_addr,
--+			write_val, read_result);
-- 		fflush(stdout);
-- 	}
-- 	
--@@ -119,3 +136,12 @@
--     return 0;
-- }
-- 
--+static inline void *fixup_addr(void *addr, size_t size)
--+{
--+#ifdef FORCE_STRICT_ALIGNMENT
--+	unsigned long aligned_addr = (unsigned long)addr;
--+	aligned_addr &= ~(size - 1);
--+	addr = (void *)aligned_addr;
--+#endif
--+	return addr;
--+}
-diff --git a/meta-oe/recipes-support/devmem2/devmem2.bb b/meta-oe/recipes-support/devmem2/devmem2_2.0.bb
-similarity index 40%
-rename from meta-oe/recipes-support/devmem2/devmem2.bb
-rename to meta-oe/recipes-support/devmem2/devmem2_2.0.bb
-index 70d4135216..aee6bfe3da 100644
---- a/meta-oe/recipes-support/devmem2/devmem2.bb
-+++ b/meta-oe/recipes-support/devmem2/devmem2_2.0.bb
-@@ -1,22 +1,14 @@
- SUMMARY = "Simple program to read/write from/to any location in memory"
- LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://devmem2.c;endline=38;md5=a9eb9f3890384519f435aedf986297cf"
--PR = "r7"
+diff --git a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
+index 674017606..edd97afe0 100644
+--- a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
++++ b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_git.bb
+@@ -5,35 +5,62 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=72d868d66bdd5bf51fe67734431de057"
  
--SRC_URI = "https://bootlin.com/pub/mirror/devmem2.c;downloadfilename=devmem2-new.c \
--           file://devmem2-fixups-2.patch;apply=yes;striplevel=0 \
--           file://0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch \
--           file://0001-devmem2-support-different-page-sizes-at-run-time.patch \
+-DEPENDS += "alsa-lib bluez5 glib-2.0 sbc"
++SRC_URI = "git://github.com/Arkq/bluez-alsa.git;protocol=https;branch=master"
+ 
+-SRCREV = "aac8742a9e7dd12a1fead9cbce7d2dc8b961999c"
+-
+-SRC_URI = " \
+-    git://github.com/Arkq/bluez-alsa.git;protocol=https;branch=master \
+-    file://bluealsa.service \
 -"
-+SRC_URI = "git://github.com/denix0/devmem2.git;protocol=https;branch=main"
-+SRCREV = "5b395a946894eb4f4ef5d07c80a50a88573a541e"
++SRCREV = "dd05a1baa261b94da9ba977b5e3392c8b4dc7a5e"
++PV = "4.0.0+git${SRCPV}"
  
--S = "${WORKDIR}"
-+S = "${WORKDIR}/git"
+ S  = "${WORKDIR}/git"
  
- CFLAGS += "-DFORCE_STRICT_ALIGNMENT"
+-PACKAGECONFIG[aac]  = "--enable-aac, --disable-aac,"
+-PACKAGECONFIG[aptx] = "--enable-aptx,--disable-aptx,"
+-PACKAGECONFIG[hcitop]   = "--enable-hcitop, --disable-hcitop, libbsd ncurses"
+-PACKAGECONFIG[systemd]   = "--enable-systemd, --disable-systemd, systemd"
++DEPENDS += "alsa-lib bluez5 dbus glib-2.0 sbc"
  
--python do_unpack:append() {
--    os.rename("devmem2-new.c", "devmem2.c")
--}
--
- do_compile() {
-     ${CC} -o devmem2 devmem2.c ${CFLAGS} ${LDFLAGS}
- }
-@@ -25,6 +17,3 @@ do_install() {
-     install -d ${D}${bindir}
-     install devmem2 ${D}${bindir}
- }
--
--SRC_URI[md5sum] = "e23f236e94be4c429aa1ceac0f01544b"
--SRC_URI[sha256sum] = "3b15515693bae1ebd14d914e46d388edfec2175829ea1576a7a0c8606ebbe639"
+-PACKAGECONFIG += "hcitop ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
++PACKAGECONFIG ??= "aplay cli hcitop ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
++PACKAGECONFIG[a2dpconf]  = "--enable-a2dpconf,--disable-a2dpconf"
++PACKAGECONFIG[aac]  = "--enable-aac,--disable-aac,fdk-aac"
++PACKAGECONFIG[aplay] = "--enable-aplay,--disable-aplay"
++PACKAGECONFIG[cli] = "--enable-cli,--disable-cli"
++PACKAGECONFIG[coverage] = "--with-coverage,--without-coverage,lcov-native"
++PACKAGECONFIG[debug] = "--enable-debug,--disable-debug"
++PACKAGECONFIG[debug-time] = "--enable-debug-time,--disable-debug-time"
++PACKAGECONFIG[faststream] = "--enable-faststream,--disable-faststream"
++PACKAGECONFIG[hcitop] = "--enable-hcitop,--disable-hcitop,libbsd ncurses"
++PACKAGECONFIG[libunwind] = "--with-libunwind,--without-libunwind,libunwind"
++PACKAGECONFIG[mp3lame] = "--enable-mp3lame,--disable-mp3lame,lame"
++PACKAGECONFIG[mpg123] = "--enable-mpg123,--disable-mpg123,mpg123,mpg123"
++PACKAGECONFIG[ofono] = "--enable-ofono,--disable-ofono,ofono"
++PACKAGECONFIG[payloadcheck] = "--enable-payloadcheck,--disable-payloadcheck"
++PACKAGECONFIG[rfcomm] = "--enable-rfcomm,--disable-rfcomm"
++PACKAGECONFIG[systemd] = "--enable-systemd --with-systemdsystemunitdir=${systemd_system_unitdir} \
++                          --with-systemdbluealsaargs='${SYSTEMD_BLUEALSA_ARGS}' --with-systemdbluealsaaplayargs='${SYSTEMD_BLUEALSA_APLAY_ARGS}',--disable-systemd,systemd"
++PACKAGECONFIG[test] = "--enable-test,--disable-test,libcheck libsndfile1"
++PACKAGECONFIG[upower] = "--enable-upower,--disable-upower,,upower"
+ 
+ inherit autotools pkgconfig systemd
+ 
+-FILES:${PN} += "\
+-    ${datadir}/alsa/alsa.conf.d/20-bluealsa.conf\
+-    ${libdir}/alsa-lib/libasound_module_ctl_bluealsa.so\
+-    ${libdir}/alsa-lib/libasound_module_pcm_bluealsa.so\
++EXTRA_OECONF = " \
++    --disable-aptx \
++    --disable-lc3plus \
++    --disable-ldac \
++    --disable-manpages \
+ "
+ 
+-FILES:${PN}-staticdev += "\
+-    ${libdir}/alsa-lib/libasound_module_ctl_bluealsa.a\
+-    ${libdir}/alsa-lib/libasound_module_pcm_bluealsa.a\
+-"
++PACKAGE_BEFORE_PN = "${PN}-aplay"
++RRECOMMENDS:${PN} = "${PN}-aplay"
++
++FILES:${PN}-aplay = "${bindir}/bluealsa-aplay"
++FILES:${PN} += "${libdir}/alsa-lib/*"
++
++SYSTEMD_PACKAGES += "${PN}-aplay"
++SYSTEMD_SERVICE:${PN} = "bluealsa.service"
++SYSTEMD_SERVICE:${PN}-aplay = "bluealsa-aplay.service"
++
++SYSTEMD_AUTO_ENABLE:${PN}-aplay = "disable"
++
++# Choose bluez-alsa arguments to be used in bluealsa systemd service
++# Usually could choose profiles with it: a2dp-source a2dp-sink hfp-hf hfp-ag hsp-hs hsp-ag hfp-ofono
++# Enable bluez-alsa arguments by default:
++SYSTEMD_BLUEALSA_ARGS ?= "-p a2dp-source -p a2dp-sink"
+ 
+-SYSTEMD_SERVICE:${PN} = "bluealsa.service bluealsa-aplay.service"
++# Choose bluealsa-aplay arguments to be used in bluealsa-aplay systemd service
++# Defaults to be empty:
++SYSTEMD_BLUEALSA_APLAY_ARGS ?= ""
 -- 
 2.25.1
 
