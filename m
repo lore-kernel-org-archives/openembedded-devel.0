@@ -1,79 +1,85 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <liu.ming50@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B405FC433EF
-	for <webhook@archiver.kernel.org>; Sat,  4 Jun 2022 16:53:11 +0000 (UTC)
-Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
- by mx.groups.io with SMTP id smtpd.web12.11985.1654361587949929246
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F2AFC43334
+	for <webhook@archiver.kernel.org>; Sun,  5 Jun 2022 09:35:36 +0000 (UTC)
+Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com
+ [209.85.167.51])
+ by mx.groups.io with SMTP id smtpd.web12.19046.1654421730589191893
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Jun 2022 09:53:08 -0700
+ Sun, 05 Jun 2022 02:35:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.85,
- mailfrom: f_l_k@t-online.de)
-Received: from fwd72.dcpf.telekom.de (fwd72.aul.t-online.de [10.223.144.98])
-	by mailout11.t-online.de (Postfix) with SMTP id 1D73E16769
-	for <openembedded-devel@lists.openembedded.org>;
- Sat,  4 Jun 2022 18:53:06 +0200 (CEST)
-Received: from localhost.localdomain ([84.163.41.60]) by fwd72.t-online.de
-	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
-	esmtp id 1nxX1H-0Unkf30; Sat, 4 Jun 2022 18:52:59 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=m218wY00;
+ spf=pass (domain: gmail.com, ip: 209.85.167.51,
+ mailfrom: liu.ming50@gmail.com)
+Received: by mail-lf1-f51.google.com with SMTP id u26so18351719lfd.8
+        for <openembedded-devel@lists.openembedded.org>;
+ Sun, 05 Jun 2022 02:35:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=augf61dd5rJlGUOsZNa7t06Kqm4ViwASRR6qpIlJ1NA=;
+        b=m218wY00fuFVTC8EK8gpRS8IsJrCCVPNg145uZEwwL14UcOcM/sbU2kxL60AG7O/vB
+         OsnvGaJVGdW1lT/49ASGT05qPkuUAe5lyCOcsgnEvb6H0Ru6/RWr+TWloJcNqsrgCUh8
+         yMHxancAtS0+5jyGKhuk31d+hO8WdrqQM1ar3LHAzjdhY9quymc6wEoErwFzu9GiOJgz
+         aaZepfEXbmLXWqCgIoFNS9yq+gU9SvQT9kOLVEfvjXHh+GO6ZShXy3UjAC9yZ9Fx6O6J
+         opVJiOgqeKSAMlC8mLPGnwvM+gNGksf5SI8DZz/GxKHnbWkVTP4BHeqE/JaUgcgQp4kO
+         RFKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=augf61dd5rJlGUOsZNa7t06Kqm4ViwASRR6qpIlJ1NA=;
+        b=6uRCbG6Bgb+jJfurRjLD30akCE2KDjPLDW/f2tMPX+HdGHvaSewXggq+lPuu+h94lf
+         WJpO8cRyO5lEMJKtjKQ17W9Ci2d/OZBAka6TWy1FuDbsYHIFv3MKwtB0y3gQw1mM7oxA
+         UDWBPbtUwb/UyqAVJ7qtWohzqj48QQTHjeXK4QnAM8rsAMIVWfmFnh3Evjz6w8WYjoU0
+         iRw2rC9XSHdxJQGTXrtzAaYUz8lq+hVpM3umAmXT4NWtCN2TxoFnRfoyiWVTGi+tpwq1
+         Sh+6TxanKlWQmr18WAGChUvJ+dE08GoGfSldfouWGlCzthov+7LGidRHswiP03rah/gJ
+         ChrA==
+X-Gm-Message-State: AOAM531BJI06IGVCvfJ3tr3vBbfy6lC/niFFINNLerzAsE9m6MoAe0GR
+	TrRKmMCYfMhEcUZeKMG7IQd1BamnSCI=
+X-Google-Smtp-Source: 
+ ABdhPJyhoV+P+hlTOYpD0JKsyTcQupDdkPuZAsGxwFPh4alQR2pBTW0s+LP7wSdYhM0Xppi0UzKo/A==
+X-Received: by 2002:a05:6512:1047:b0:479:2308:ac0b with SMTP id
+ c7-20020a056512104700b004792308ac0bmr4726265lfb.167.1654421727942;
+        Sun, 05 Jun 2022 02:35:27 -0700 (PDT)
+Received: from peterliu-Precision-7530.emea.group.atlascopco.com
+ ([2a00:801:230:9439:c99c:5ab4:c8e9:1c0a])
+        by smtp.gmail.com with ESMTPSA id
+ g28-20020a2eb5dc000000b00253dfbe2522sm2015349ljn.100.2022.06.05.02.35.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 05 Jun 2022 02:35:27 -0700 (PDT)
+From: liu.ming50@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-mingw][PATCH] libsdl2: disable gles2 support for
- class-nativesdk
-Date: Sat,  4 Jun 2022 18:52:51 +0200
-Message-Id: <20220604165251.369796-1-f_l_k@t-online.de>
+Cc: Ming Liu <liu.ming50@gmail.com>
+Subject: [meta-multimedia] [PATCH V1 0/1] bluealsa: uprev to 4.0.0
+Date: Sun,  5 Jun 2022 11:35:21 +0200
+Message-Id: <20220605093522.30964-1-liu.ming50@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1654361579-01439E5E-00C349DB/0/0 CLEAN NORMAL
-X-TOI-MSGID: 287a78fa-04af-4594-affa-00d2efe892f9
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 04 Jun 2022 16:53:11 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 05 Jun 2022 09:35:36 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97411
+ https://lists.openembedded.org/g/openembedded-devel/message/97412
 
-this fixes:
-| Has header "sys/select.h" : NO
-| Checking whether type "fd_set" has member "fds_bits" : NO
-| Checking whether type "fd_set" has member "__fds_bits" : NO
-|
-| ../xorgproto-2022.1/include/X11/meson.build:19:4: ERROR: Problem encoun=
-tered: Your fd_set is too weird.
-|
-| A full log can be found at /home/flk/build/poky/build/tmp/work/x86_64-n=
-ativesdk-mingw32-w64-mingw32/nativesdk-xorgproto/2022.1-r0/build/meson-lo=
-gs/meson-log.txt
+From: Ming Liu <liu.ming50@gmail.com>
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- recipes-graphics/libsdl2/libsdl2_%.bbappend | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes in V1:
 
-diff --git a/recipes-graphics/libsdl2/libsdl2_%.bbappend b/recipes-graphi=
-cs/libsdl2/libsdl2_%.bbappend
-index 89532d6..4f9cde1 100644
---- a/recipes-graphics/libsdl2/libsdl2_%.bbappend
-+++ b/recipes-graphics/libsdl2/libsdl2_%.bbappend
-@@ -1,7 +1,7 @@
- # Need to disable X11 explictly as nativesdk-libxdmcp fails:
- # .libs/Fill.o:Fill.c:(.text+0x48): undefined reference to `_imp__recvfr=
-om@24'
- # .libs/Flush.o:Flush.c:(.text+0x36): undefined reference to `_imp__send=
-to@24'
--PACKAGECONFIG:remove:mingw32:class-nativesdk =3D "x11 opengl"
-+PACKAGECONFIG:remove:mingw32:class-nativesdk =3D "x11 opengl gles2"
-=20
- # libtool doesn't think it can link windres output (COFF) with libtool o=
-bjects
- # (COFF) , but it can.  This might be because file misidentifies version=
-.o:
---=20
+1 Fix a license file checksum issue
+
+Ming Liu (1):
+  bluealsa: uprev to 4.0.0
+
+ .../bluealsa/bluealsa_git.bb                  | 69 +++++++++++++------
+ 1 file changed, 48 insertions(+), 21 deletions(-)
+
+-- 
 2.25.1
 
 
