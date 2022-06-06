@@ -2,76 +2,73 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ACE26CCA473
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BCC4ACCA481
 	for <webhook@archiver.kernel.org>; Mon,  6 Jun 2022 12:19:54 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
- [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web11.31140.1654517990113120457
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web12.31157.1654517989619762439
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 06 Jun 2022 05:19:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=HCa0ds7i;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=pS2DgLEz;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1654517988; i=@fujitsu.com;
-	bh=zbQpv7brqIZlhXpON7sS02VfF5SWk85dlz4pDMcTtYY=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=HCa0ds7iA7usIOqWSaphYkuak7oD0s92qULLHlnnm4wA5I4hOXDvjSql+Gzq70RaM
-	 Civ4CqPj/P/VOPOpI0F+y07MS1ke98ktTs9HZ4Bm1JZdr1yLQb1AgobB/3GfLQa0//
-	 /2Ax5I/BiS5qxp51N/3ALAhbhDkSWXp9U4mLcOWGkP3LlM/JBoQoYr5Wz99Q2NCETC
-	 imCNKKs8OrLL46Z4+9pKRkGGP33mtx41F8EW+YOX8MYHFQvz+EwFvncmoJi2jhm67R
-	 Q5QyIbmjCix4m9VUmQkIFCTYLrRW2ZzfMgYaiA2eXqQESY1yIRGqEEJIwjlYjv4n8D
-	 vCq70kmxmpTKQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrJIsWRWlGSWpSXmKPExsViZ8ORqPv4w9w
-  kg+mXNC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1owZ32exFGzmrOhZPJ2xgfEKRxcjF4eQwBNG
-  ib+nrjBDOBeYJHYumM8E4exmlPi09DKQw8nBJqAmMf3WDVYQW0RAX2Lp7D3MIDazgIrEi9897
-  CC2sIC7xOoZW8BqWIDiT6/3g/XyCjhK3Jh4FqxGQkBBYsrD92C9nAJOEjvmrQaLCwHVbP96hA
-  2iXlDi5MwnLBDzJSQOvnjBDNGrKDH7cjMLhF0hMWPGNjYIW03i6rlNzBMYBWchaZ+FpH0BI9M
-  qRpukosz0jJLcxMwcXUMDA11DQ1NdSzNdQxMLvcQq3US91FLdvPyikgxdQ73E8mK91OJiveLK
-  3OScFL281JJNjMBQTilOmLKD8fC+X3qHGCU5mJREee2vzU0S4kvKT6nMSCzOiC8qzUktPsQow
-  8GhJMF7/A1QTrAoNT21Ii0zBxhXMGkJDh4lEV7rd0Bp3uKCxNzizHSI1ClGXY6ZX9sOMAux5O
-  XnpUqJ8wa9ByoSACnKKM2DGwGL8UuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHmLQabwZOa
-  VwG16BXQEE9ARPg/mgBxRkoiQkmpg4jhd990r8tv5mfPlOEKchNR53C/2KT2OlTqwbz0LQ8G5
-  iNpcjrk7SlLN5x4IOybyQW2ywxLjZxMMHWdvbt472VcgcIN1z0/tk/UXt2eb3X7Ae/229b942
-  dv/X9uF/Pu9c3LX9msSgrKFSrNNbBqfheuvUeJ9eDhlbq+e5C7mJX+43cPytws3TrwyK1HLoj
-  hE9oVwRk7wqTwb3Sm1sdJyYftU1z08HXNH/oZw/Uajpefl3BZ+q2vMluW0lUtumpgyTWjJ1Ox
-  rFpZ6H5nKfLMEKvRMs3b8Ohfin/vo6mSf6L6eBiPLgok7vyZ8M7CPTVNv2N9/eL10TUTrLbPg
-  P11v1umv4tzjdzjd2CU1OlKJpTgj0VCLuag4EQD9SJTEbAMAAA==
+	s=170520fj; t=1654517987; i=@fujitsu.com;
+	bh=Zog+yombK1FL+v2sDwaAVv1z2vRfdQVPx4WlxmA+lXY=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=pS2DgLEzL9Byu7y6izGq8rVcAQjx8Fxu66obGkwbdAGrzFvCDxRBie26ywvpVQoWH
+	 3CMRr1Of/VgekdEpICN1W9vvAE7Pj4uOgOTp7sTmpb2egZ7txTDTcXLF9REWBDutbt
+	 umrV8M3juR9jjuTG5+iOn2ZRxNF9sysdNyCqmtxv4MDnRcON4F07DHtof3N7YkgVBh
+	 nt9u0yctW9KL2NIAU/tcC8KKamc7Nv0pk7PcTp/N6bDuVtDizmOq22s+A8jf+9Hu7m
+	 Z1g8eed9aNcrV78KutJX6n9h+QAMalx8hvAKFGsUj5jta5seYf/GRKZ3ISnYmjCiZ8
+	 TpVuMngTeZytg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrPIsWRWlGSWpSXmKPExsViZ8ORqPv4w9w
+  kg+/7hC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1owdb5+wFExir9hx+RdLA+NWti5GLg4hgSeM
+  Eke/PGDqYuQEci4wSVy7qA2R2M0ocebTP2aQBJuAmsT0WzdYQWwRAX2JpbP3gMWZBVQkXvzuY
+  QexhQVsJJou/AYbxAIUX7DoIJjNK+Ao8brlLhuILSGgIDHl4XtmiLigxMmZT1gg5khIHHzxgh
+  miRlFi9uVmFgi7QmLGjG1QvWoSV89tYp7AyD8LSfssJO0LGJlWMVonFWWmZ5TkJmbm6BoaGOg
+  aGprqGhsBmSZ6iVW6iXqppbrlqcUlukZ6ieXFeqnFxXrFlbnJOSl6eaklmxiBYZlSrJCxg/H7
+  yp96hxglOZiURHntr81NEuJLyk+pzEgszogvKs1JLT7EKMPBoSTBWwcMdCHBotT01Iq0zBxgj
+  MCkJTh4lER4rd8BpXmLCxJzizPTIVKnGHU5rl65spdZiCUvPy9VSpz31nugIgGQoozSPLgRsH
+  i9xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmYtxhkCk9mXgncpldARzABHeHzYA7IESWJCCm
+  pBqYzsq+PS7iILv/X2vPgdER+l+PEmZcnxS6rm2f66oXvvttfNwodDDx05M4DxsieJI/lIrUd
+  Rucj+uL6onIZdz3rrl2bZlMzo0FHlJO5/+P+FWUxbj+8g0XSC+6+XfhQVe/AbL3PF6LWykmsW
+  nKg6vNhzqWSrl7Nr6/LBKm4BC9/VJFSdX3iEuXDoRdSvynpzPC1OXyiLeWxdeHWqgusxc/zw9
+  0CzltPcze/UfvuXvARJ2/2Bbsk3xjvU+nL0Zgu5Dv934Gs//XiNhNjojkCWW64lode2rKnwbs
+  kJYzry6Xw289+lxwBpjfWadOfdaz7Jr6mcIa/rsrJEu+Zfg7MGZEN5U6MIkLV83dyP9P5pMRS
+  nJFoqMVcVJwIAHT4k65SAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-17.tower-745.messagelabs.com!1654517987!628841!1
+X-Msg-Ref: server-17.tower-571.messagelabs.com!1654517987!344141!1
 X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.86.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 26894 invoked from network); 6 Jun 2022 12:19:47 -0000
+Received: (qmail 31254 invoked from network); 6 Jun 2022 12:19:47 -0000
 Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-17.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+  by server-17.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 6 Jun 2022 12:19:47 -0000
 Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 15B22100191
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id D67C010018D
 	for <openembedded-devel@lists.openembedded.org>;
- Mon,  6 Jun 2022 13:19:47 +0100 (BST)
+ Mon,  6 Jun 2022 13:19:46 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id DE15A1001B4
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id BBA2E100184
 	for <openembedded-devel@lists.openembedded.org>;
  Mon,  6 Jun 2022 13:19:46 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 6 Jun 2022 13:19:40 +0100
+ (TLS) id 15.0.1497.32; Mon, 6 Jun 2022 13:19:25 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-perl] [PATCH] libnet-dns-perl: upgrade 1.33 -> 1.34
-Date: Mon, 6 Jun 2022 20:19:07 +0800
-Message-ID: <1654517949-9033-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] htop: upgrade 3.2.0 -> 3.2.1
+Date: Mon, 6 Jun 2022 20:19:05 +0800
+Message-ID: <1654517949-9033-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1654517949-9033-1-git-send-email-wangmy@fujitsu.com>
-References: <1654517949-9033-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -83,35 +80,29 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 06 Jun 2022 12:19:54 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97420
-
-Changelog:
-==========
-Improve robustness of EDNS option compose/decompose functions.
-
-Simplify code in Makefile.PL.
+ https://lists.openembedded.org/g/openembedded-devel/message/97418
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libnet/{libnet-dns-perl_1.33.bb => libnet-dns-perl_1.34.bb} | 2 +-
+ meta-oe/recipes-support/htop/{htop_3.2.0.bb => htop_3.2.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libnet/{libnet-dns-perl_1.33.bb => libnet-dns-perl_1.34.bb} (95%)
+ rename meta-oe/recipes-support/htop/{htop_3.2.0.bb => htop_3.2.1.bb} (96%)
 
-diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.33.bb b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.34.bb
-similarity index 95%
-rename from meta-perl/recipes-perl/libnet/libnet-dns-perl_1.33.bb
-rename to meta-perl/recipes-perl/libnet/libnet-dns-perl_1.34.bb
-index 2c7d793a7..69afe6eef 100644
---- a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.33.bb
-+++ b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.34.bb
-@@ -9,7 +9,7 @@ DEPENDS += "perl"
+diff --git a/meta-oe/recipes-support/htop/htop_3.2.0.bb b/meta-oe/recipes-support/htop/htop_3.2.1.bb
+similarity index 96%
+rename from meta-oe/recipes-support/htop/htop_3.2.0.bb
+rename to meta-oe/recipes-support/htop/htop_3.2.1.bb
+index 12b110ead..233a1eeb5 100644
+--- a/meta-oe/recipes-support/htop/htop_3.2.0.bb
++++ b/meta-oe/recipes-support/htop/htop_3.2.1.bb
+@@ -9,7 +9,7 @@ DEPENDS = "ncurses"
+ SRC_URI = "git://github.com/htop-dev/htop.git;branch=main;protocol=https \
+            file://0001-Use-pkg-config.patch \
+ "
+-SRCREV = "c7413fd6771b65388bea14ef42863444c6eaa419"
++SRCREV = "4e6ec4a0873c56ca9de63eadf730c5bd677bd8da"
  
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
- 
--SRC_URI[sha256sum] = "5a40e7cf524e4bd2c33cf03b82b47d5308b712083aa5ee180b0b5af54c71fbd2"
-+SRC_URI[sha256sum] = "de756e3fb6addbd32beafc869c4dd1c6a0b3783c5ef56dbefc6809443a4b1d15"
- 
- UPSTREAM_CHECK_REGEX = "Net\-DNS\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
+ S = "${WORKDIR}/git"
  
 -- 
 2.25.1
