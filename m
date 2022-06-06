@@ -2,73 +2,73 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B7551CCA473
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB872CCA484
 	for <webhook@archiver.kernel.org>; Mon,  6 Jun 2022 12:23:24 +0000 (UTC)
 Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web12.31189.1654518196131836242
+ [195.245.231.3])
+ by mx.groups.io with SMTP id smtpd.web11.31167.1654518196561429644
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 06 Jun 2022 05:23:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=oTwQ+xi6;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=kCg9StsM;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
 	s=170520fj; t=1654518194; i=@fujitsu.com;
-	bh=/eTTKlnzVd7ZTIulXWsKQln1XtGx1wAoxnB/AlOKXnw=;
+	bh=PRHpEhNc2VPidbu079Z6hmH92n8Pjuhe+CEavroGT+c=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=oTwQ+xi6LigG0bv2IrLmQW+KuU8i1xfx/MudIZ9rlVrJoo6F74WNYwv7Cd3zcxnvg
-	 mysO6+Nl0gNQcXltnwjFe4juTwc6MZ99KsGHGwF7eu7TnaTaoNRk37CPNLIwRUnTTp
-	 +2yG71UPCGFYZGuXt3tItMJtgJMfK5eY0o4P93Pjfy9Bih3irhAAZYy/UCkEZ+mKpq
-	 TKe9RmplWBw7cZRzTNS+d2STWDf1yV7OVqwEaKeRMTn7ZEJymmqXikYRaUSeKVCAO/
-	 J3vse6p4usPknwRefg1WJ0HmD0uxnemFZFMHTb20ot4t6PrSE+Xsih+3/mDvI4V2lS
-	 XvAHJXsEPtkzQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrOIsWRWlGSWpSXmKPExsViZ8MxSXfTx7l
-  JBuc3MllcPLyU2YHR49zGFYwBjFGsmXlJ+RUJrBkTPj1iK7jBXTFj0SrGBsYuri5GLg4hgSeM
-  Eu2rvrFAOBeYJF5N+wPl7GaUeLlqAWMXIycHm4CaxPRbN1hBbBEBfYmls/cwg9jMAioSL373s
-  IPYwgLOEnsP/QWrYQGK737fxARi8wo4SkyZtghsjoSAgsSUh+/BejkFnCT2rf8IViMEVHNqwn
-  JGiHpBiZMzn7BAzJeQOPjiBTNEr6LE7MvNLBB2hcSMGdvYIGw1iavnNjFPYBSchaR9FpL2BYx
-  Mqxitkooy0zNKchMzc3QNDQx0DQ1NdY2Ndc1N9BKrdBP1Ukt1y1OLS3SN9BLLi/VSi4v1iitz
-  k3NS9PJSSzYxAsM4pVjRawfjqxU/9Q4xSnIwKYny2l+bmyTEl5SfUpmRWJwRX1Sak1p8iFGGg
-  0NJgrfuA1BOsCg1PbUiLTMHGFMwaQkOHiURXut3QGne4oLE3OLMdIjUKUZdjplf2w4wC7Hk5e
-  elSonz3noPVCQAUpRRmgc3AhbflxhlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ8y4GuYQnM68
-  EbtMroCOYgI7weTAH5IiSRISUVANTovWqkJW5pexZlxJ23rD/Nfd08+OHi157nmM/PO/DvPlL
-  5y/eZsayuWT9b87jdRahVnrrZCwbcgJiWhp0bbwCJoQdW/PJw3rmBInH2/0/v5hz5aPXrp07P
-  l7uljNrXVC2wo5bYYevIHPow5Xffrz7/fhc5vt3Iifak3jX69ruKptRbFx6vbOt0+2u/LOIHW
-  V+4v/WTOVObc4U+TFHvfLxWU7rBWtPPtmw82CNhqfcv9T91/8/eOe359jxySyV1sGXZa2V+65
-  5/WfmbvvwsUjYk9lF7FtSqVXeh7evEnm5Tk+5xzH7PHfQYpOVKY8tP7mV6f9jfLLsxJWsjpgp
-  STvPL751NeDc2et8QZb/P15bIq7EUpyRaKjFXFScCAAXg1DWagMAAA==
+	b=kCg9StsM0wuEIn6+S3oIzNVsuhsIJiQMxl7ULLhvrm0lxprt0bo01ggwUfg+Yw5iM
+	 WJTHYaoZZdfsvjc5brsrImzOnhmkOmIKtXtiELEQq7+H7CCchb/NAZoliWer6LucSZ
+	 DzbMBxxaMAecQh9lieGDDtAF0JoT4l7GyPS7J2Z8q9sh7NFJ9k7lnC6GEIHdFQyXyy
+	 jOT4O0N8fTkZpLuK1mMKiZtJbCQGgWXlod3SjZ4M1AaceMGUbt6fp5nXGa1FSggP3W
+	 VzLq0SXEx982sthUui76DSfQbtfXH59ZFqmyOO+2PES37ZZ7j2H63JAR9qc/LCbz0j
+	 0oOn9gzzRm34A==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrGIsWRWlGSWpSXmKPExsViZ8MxSXfTx7l
+  JBhPOy1lcPLyU2YHR49zGFYwBjFGsmXlJ+RUJrBkn9+5nKZjOU7Fz1mvWBsY7XF2MnBxCAk8Y
+  JSYfTO1i5AKyLzBJzJp5nRnC2c0osbznMitIFZuAmsT0WzfAbBEBfYmls/cwg9jMAioSL373s
+  IPYwgJOEs+fLQOrYQGKH3x0kaWLkYODV8BR4s0xd5CwhICCxJSH78FaOYHK963/yARxhKPEqQ
+  nLGUFsXgFBiZMzn7BAjJeQOPjiBTNEr6LE7MvNLBB2hcSMGdvYIGw1iavnNjFPYBSchaR9FpL
+  2BYxMqxitk4oy0zNKchMzc3QNDQx0DQ1NdY2NdA2NzPQSq3QT9VJLdctTi0t0jfQSy4v1UouL
+  9Yorc5NzUvTyUks2MQKDOKVYoW4H47WVP/UOMUpyMCmJ8tpfm5skxJeUn1KZkVicEV9UmpNaf
+  IhRhoNDSYK37gNQTrAoNT21Ii0zBxhRMGkJDh4lEV7rd0Bp3uKCxNzizHSI1ClGXY6ZX9sOMA
+  ux5OXnpUqJ8956D1QkAFKUUZoHNwIW3ZcYZaWEeRkZGBiEeApSi3IzS1DlXzGKczAqCfMuBrm
+  EJzOvBG7TK6AjmICO8HkwB+SIkkSElFQD0yyOnhUfY9jOOczanLYxttP0+grD7pX35j/X725X
+  LDHUZ3dM75iR63NX5LfzjP8My/jct+q9la61Yjf+5bq/4W18m3TCOi5n09nNJ59d2LRceNZd9
+  yVcWdyfj0m2H+ZlZ20wO7rJMmVzLKuH39nrzwr7D1/IPLvluujBN/rmnDPfv/yhZP5Q7Pzssq
+  ZfVRdm/AiurnhwszL+3W+eKTEub7kPvS7z/8FcxHOFweDiPfa1bcdETrmsMFWK1vrvWOZZqx/
+  4e66l4eE0kz0X07uc2HnbZI+eT/j6/6zB08R65kMuBW8io3TW7WK2eV2o6BRRNrlRxE5ZI7A0
+  2/jm7+Y4BtFZrMa3Su5qmpaHmlsrsRRnJBpqMRcVJwIA7xKBaWkDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-18.tower-565.messagelabs.com!1654518193!629202!1
+X-Msg-Ref: server-18.tower-565.messagelabs.com!1654518194!629204!1
 X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.86.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 10007 invoked from network); 6 Jun 2022 12:23:14 -0000
+Received: (qmail 10107 invoked from network); 6 Jun 2022 12:23:14 -0000
 Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
   by server-18.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
  encrypted SMTP; 6 Jun 2022 12:23:14 -0000
 Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 9AE3C1009C1
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id D7EAE1009B8
 	for <openembedded-devel@lists.openembedded.org>;
  Mon,  6 Jun 2022 13:23:13 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 8D40D1009B8
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id A4B241009C7
 	for <openembedded-devel@lists.openembedded.org>;
  Mon,  6 Jun 2022 13:23:13 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 6 Jun 2022 13:22:57 +0100
+ (TLS) id 15.0.1497.32; Mon, 6 Jun 2022 13:23:09 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] poppler: upgrade 22.05.0 -> 22.06.0
-Date: Mon, 6 Jun 2022 20:22:41 +0800
-Message-ID: <1654518164-9091-2-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] tracker: upgrade 3.3.0 -> 3.3.1
+Date: Mon, 6 Jun 2022 20:22:44 +0800
+Message-ID: <1654518164-9091-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1654518164-9091-1-git-send-email-wangmy@fujitsu.com>
 References: <1654518164-9091-1-git-send-email-wangmy@fujitsu.com>
@@ -83,46 +83,42 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 06 Jun 2022 12:23:24 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97422
+ https://lists.openembedded.org/g/openembedded-devel/message/97423
 
 Changelog:
-==========
- core:
-  * Forms: Fix crash in forms with their own DR
-  * Refactor CairoFontEngine caching
-  * CairoOutputDev: preserve text color when drawing type 3 glyphs
-  * Windows: font code simplification
-  * Minor code improvements
-
- cpp:
-  * Add missing header
-
- utils:
-  * pdfattach: Assume filename is utf8 encoded
-  * pdftohtml: Fix type 3 font size calculation
+=========
+  * Fixed blank nodes to return the correct identifier in certain
+    queries.
+  * Fixes to FTS consistency after updates
+  * Fixes to HTTP module linking
+  * Fix handling of STRING_LITERAL_LONG1/2 terminals
+  * Fix handling of negated property paths
+  * Use .so suffix for modules on all platforms
+  * Added code examples in JS/Python
+  * Developer documentation improvements
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../poppler/{poppler_22.05.0.bb => poppler_22.06.0.bb}          | 2 +-
+ .../tracker/{tracker_3.3.0.bb => tracker_3.3.1.bb}              | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/poppler/{poppler_22.05.0.bb => poppler_22.06.0.bb} (96%)
+ rename meta-gnome/recipes-gnome/tracker/{tracker_3.3.0.bb => tracker_3.3.1.bb} (93%)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler_22.05.0.bb b/meta-oe/recipes-support/poppler/poppler_22.06.0.bb
-similarity index 96%
-rename from meta-oe/recipes-support/poppler/poppler_22.05.0.bb
-rename to meta-oe/recipes-support/poppler/poppler_22.06.0.bb
-index 9a7d9ef00..989b35a5b 100644
---- a/meta-oe/recipes-support/poppler/poppler_22.05.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_22.06.0.bb
-@@ -7,7 +7,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            file://0001-Do-not-overwrite-all-our-build-flags.patch \
-            file://basename-include.patch \
-            "
--SRC_URI[sha256sum] = "a969ced458e050d6202367bd7427054e2bd19bae39e8f969910d3b9151abf958"
-+SRC_URI[sha256sum] = "a0f9aaa3918bad781039fc307a635652a14d1b391cd559b66edec4bedba3c5d7"
+diff --git a/meta-gnome/recipes-gnome/tracker/tracker_3.3.0.bb b/meta-gnome/recipes-gnome/tracker/tracker_3.3.1.bb
+similarity index 93%
+rename from meta-gnome/recipes-gnome/tracker/tracker_3.3.0.bb
+rename to meta-gnome/recipes-gnome/tracker/tracker_3.3.1.bb
+index bb2396af7..42f44863b 100644
+--- a/meta-gnome/recipes-gnome/tracker/tracker_3.3.0.bb
++++ b/meta-gnome/recipes-gnome/tracker/tracker_3.3.1.bb
+@@ -22,7 +22,7 @@ GNOMEBASEBUILDCLASS = "meson"
  
- DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
+ inherit gnomebase gsettings gobject-introspection vala gtk-doc manpages bash-completion features_check python3native
  
+-SRC_URI[archive.sha256sum] = "0706f96fe7f95df42acec812c1de7b4593a0d648321ca83506a9d71e22417bda"
++SRC_URI[archive.sha256sum] = "5ad6f5bc97781ebf55ecd6947cd4ae7ff4192516580d10bd8380f1dd47196ed2"
+ 
+ # gobject-introspection is mandatory and cannot be configured
+ REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 -- 
 2.25.1
 
