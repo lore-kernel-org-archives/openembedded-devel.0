@@ -2,61 +2,61 @@ Return-Path: <adrian.freihofer@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B4E32CCA473
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4D59C43334
 	for <webhook@archiver.kernel.org>; Mon,  6 Jun 2022 22:02:06 +0000 (UTC)
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com
- [209.85.218.42])
- by mx.groups.io with SMTP id smtpd.web12.4619.1654552916288979040
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com
+ [209.85.208.44])
+ by mx.groups.io with SMTP id smtpd.web08.4705.1654552915129654187
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Jun 2022 15:01:56 -0700
+ Mon, 06 Jun 2022 15:01:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=UYfu+THO;
- spf=pass (domain: gmail.com, ip: 209.85.218.42,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=B5DnGesh;
+ spf=pass (domain: gmail.com, ip: 209.85.208.44,
  mailfrom: adrian.freihofer@gmail.com)
-Received: by mail-ej1-f42.google.com with SMTP id s12so24341091ejx.3
+Received: by mail-ed1-f44.google.com with SMTP id x5so15491186edi.2
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Jun 2022 15:01:56 -0700 (PDT)
+ Mon, 06 Jun 2022 15:01:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=y6NekRg5lnJxHHKXVUHPzcSdLy07zRNBkJxgsTfnwl8=;
-        b=UYfu+THOUB9n0vCWcuagYuyNo4RB7yMn31fnbp4N4oCRFiyJGuh44UFuORy/C3UTH/
-         Aus0EJw17bTdsCOBje0Gx0RjZD39iN5Iblx5njM2n8aFNqTF8M4hmH2wrFZhNBqgLhdI
-         TFsUNjnJKwSiln69FqmxhpLj+lhpFX1BvUoatYCZoxkte7fdT2EGaol4hwxVGDzX4gdm
-         hjukOh4wEWvuuKlgu7A8MSsGyDF9yMvydUu4GnKY0DIIC8ZewnfId5XPPqWqs1PoKLb4
-         gYM6+YtdXzcvPeLnP0muz8s1m9B7kvmVxX/1YqyhbIFY7xJPdFI16ChJv9WbVGhO4ALc
-         KAxA==
+        bh=hqfN0Jck7k5aqESZIi40y75kFXqMEXit63YX3djMMRs=;
+        b=B5DnGeshX5+4+V46tHqM0r9MtoO6fGDA8XOm2cfptdfvHgi8kgIk+KdRWFOUDU7BRT
+         LBH28NzLPxWuqzWMyb0bb6dZBF9eRuSsk1MyLGjzPn1FDgeUXSDkSEYoYik34XMYpJO1
+         6nkoFcBvsbyLvmRnOlTUzwLJLPxrvOznE4ZB+LZBVUqzYuVgqV15ujaHzAnhCBRfjT6i
+         jAXqVBL6sQJSyTmeWStcTKogNOlLnZeC4QRhfBHHwvyQS23FejiHj69VVSKDQlJr9CUM
+         IFoiIRUwTd7wC/dH6e39MCUI+xaT5faR3ovYMqSZmD1ulxImqm2IxLtoxslhXAF5zURj
+         auAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=y6NekRg5lnJxHHKXVUHPzcSdLy07zRNBkJxgsTfnwl8=;
-        b=aiVq8QegHtwRtuX26ERd9s8sWhIhxpjH1kifbbdmh1azU3gqERFf7ayvZjfHf/yD6X
-         hLn8Mpl+h8B8+EHzthDiOmmS/glLD5T5177oUNxgOEtrMex/jEd4KtNJqq7x3oiT/g0W
-         Hp4vF4TE+AljwEOptndlYiOW4m1A751tqCnehHUUq5NxlB68jJpal1bC/MpCCoEGZ6a7
-         I9jzJGChG5i6yobmmKhuuE0emtbnfa+7wKZdP6EwESfb8CR479FjMYaiKCZ3s2cg1jNI
-         5FsyDj1xXxlA4hTKYT75kVT3i244SBH3ok9Zl45f8OsNp2hQ7jlNESoODVRhXjXea2Op
-         kv9g==
-X-Gm-Message-State: AOAM533AAj59srSrdPJVVVzKuqKfCbAI0JsphhnOe2kwLrA/RaphuhBP
-	Y5kSh49ltdlPJ2MHId/cfG6Dqxce1j6aGQ==
+        bh=hqfN0Jck7k5aqESZIi40y75kFXqMEXit63YX3djMMRs=;
+        b=h481e/XkEnEg6ulkazMeU0Ha76LOQNs7xbHTxf3ZJfjMESDavyGeEl52Hn7TZRlEF4
+         /xDgYLfKywhPneneLBUGu8E73qmpwx8HtS6m3VpouOiqwa8Qp0F0ZpcfzQ1B8PNicaVJ
+         fgQ7UIVaImYbScpZP87G/kjPZzLuW4XYbW3GMbwiToThwT31e9F2UB3ILsRzVtNLSy7H
+         BVPjynk9TPRh5/88rLF8jKdbnElYIQ4gewHi1zPcnGdUdUa5TCWMqsEqbiMmbdOt1O/A
+         LJzn0fWXK1o4V6KyVL9d8kho+EzwJKPTcf9W+3YNUJVMg9hyfg2tnI9rw+dLltIJyIS+
+         yq3Q==
+X-Gm-Message-State: AOAM533RsyhrnfsTGfwkPYUa5wh54Pq/r0vggExNq3A047ivEIXC0hJR
+	r1pdtRfhJRu2LImoO43J8vfvTocLcfIYgw==
 X-Google-Smtp-Source: 
- ABdhPJz4TIDsTzuKmpemX6tFgx8jMygGerI6vhuAlQ7j0BPfYcGXS3P0CCHTESDzpHaZvshvS910Bg==
-X-Received: by 2002:a17:906:7949:b0:6ff:27a9:f024 with SMTP id
- l9-20020a170906794900b006ff27a9f024mr23474963ejo.277.1654552914471;
-        Mon, 06 Jun 2022 15:01:54 -0700 (PDT)
+ ABdhPJy3XxOT24E0sAVw7gxRLIOyW0Eo7fSWr4cxofcsLCBRZTw2YiYtk0M1PDcbuZ/2+BiGJDbGLg==
+X-Received: by 2002:aa7:d052:0:b0:42d:d114:43f7 with SMTP id
+ n18-20020aa7d052000000b0042dd11443f7mr28944917edo.320.1654552913498;
+        Mon, 06 Jun 2022 15:01:53 -0700 (PDT)
 Received: from md2ramxc.ad001.siemens.net ([62.32.0.69])
         by smtp.gmail.com with ESMTPSA id
- d20-20020aa7ce14000000b0042dd4ccccf5sm9134826edv.82.2022.06.06.15.01.53
+ d20-20020aa7ce14000000b0042dd4ccccf5sm9134826edv.82.2022.06.06.15.01.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Mon, 06 Jun 2022 15:01:53 -0700 (PDT)
 From: Adrian Freihofer <adrian.freihofer@gmail.com>
 X-Google-Original-From: Adrian Freihofer <adrian.freihofer@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Adrian Freihofer <adrian.freihofer@siemens.com>
-Subject: [meta-networking][PATCH 5/5] modemmanager: update to 1.18.8
-Date: Tue,  7 Jun 2022 00:01:37 +0200
-Message-Id: <20220606220137.1887491-6-adrian.freihofer@siemens.com>
+Subject: [meta-networking][PATCH 4/5] networkmanager: udpate to 1.38.0
+Date: Tue,  7 Jun 2022 00:01:36 +0200
+Message-Id: <20220606220137.1887491-5-adrian.freihofer@siemens.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20220606220137.1887491-1-adrian.freihofer@siemens.com>
 References: <20220606220137.1887491-1-adrian.freihofer@siemens.com>
@@ -67,272 +67,124 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 06 Jun 2022 22:02:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97436
+ https://lists.openembedded.org/g/openembedded-devel/message/97435
 
-* A new connection status dispatcher setup is provided, where users can
-   provide custom scripts that will be called on bearer connect/disconnect
-   events. This dispatcher will make the netifd integration in openwrt work
-   much better, as we'll be able to report network-initiated disconnections
-   cleanly to netifd.
-
-   There are no default connection status dispatcher scripts installed, but
-   it's suggested distributions make sure the following directories exist:
-     - ${sysconfdir}/ModemManager/connection.d/
-     - ${libdir}/ModemManager/connection.d/
-
- * API:
-   ** Add missing Simple interface definitions in ModemManager-names.h.
-
- * Build:
-   ** meson: fix daemon enums dependencies.
-   ** meson: fix port enums includes.
-   ** meson: fix 'export_packages' in GIR setup.
-   ** meson: fix simtech plugin module name.
-   ** systemd: don't run ModemManager in containers.
-
- * Core:
-   ** serial: ensure the port object is valid after BUFFER_FULL handling.
-   ** netlink: use unaligned netlink attribute length.
-   ** netlink: only change IFF_UP flag.
-   ** bearer: match unknown auth to chap in loose comparisons.
-   ** charsets: return error if UTF-8 validation fails.
-   ** fcc-unlock: make scripts POSIX shell compatible.
-   ** modem-helpers: consider minimum ID when choosing best profile.
-   ** modem-helpers: fix reading <Act> given in COPS=? responses.
-   ** sms: prevent crash if date is out of range.
-   ** profile-manager: fix copy-paste error on tags for quarks.
-
- * QMI:
-   ** Ignore slot status indications until initial status is known.
-   ** Return error when loading capabilities if none is found.
-
- * MBIM:
-   ** Default initial EPS bearer's auth to chap when unknown.
-   ** Update default error when network error is out of range.
-
- * mmcli:
-   ** Fix key length when printing list of items.
-
- * Plugins:
-   ** linktop: new port type hints.
-   ** cinterion: add support for PLSx3w modems
-   ** huawei: disable +CPOL based features in Huawei E226
-
- * Several other minor improvements and fixes.
+* Add support for route type "throw".
+* Fix bug setting priority for IP addresses.
+* Static IPv6 addresses from "ipv6.addresses" are now preferred over
+  addresses from DHCPv6, which are preferred over addresses from autoconf.
+  This affects IPv6 source address selection, if the rules from
+  RFC 6724, section 5 don't give a exhaustive match.
+* Static IPv6 addresses from "ipv6.addresses" are now interpreted with
+  first address being preferred. Their order got inverted. This is now
+  consistent with IPv4.
+* Wi-Fi hotspots will use a (stable) random channel number unless one is
+  chosen manually.
+* Don't use unsupported SAE/WPA3 mode for AP mode.
+* NetworkManager will no longer advertise frequencies as supported when
+  they're disallowed in configured regulatory domain.
+* Attempt to connect to WEP-encrypted Wi-Fi network will now fail
+  gracefully with a recent version of wpa_supplicant when built
+  without WEP support. As long as wpa_supplicant supports WEP,
+  NetworkManager will continue to work.
+* Disable WPA3 transition mode for wifi.key-mgmt=wpa-psk if the NIC
+  does not support PMF. This is known to cause problems in some setups. It
+  is still possible to explicitly configure wifi.key-mgmt=sae for WPA3.
+* Add new dummy crypto backend "null" that does nothing. NetworkManager
+  uses the crypto library when handling certificates for 802.1x profiles.
+* Veth devices with name "eth*" are now managed by default via the
+  udev rule. This is to support managing the network in LXD containers.
+* The hostname received from DHCP is now shortened to the first dot
+  (or to 64 characters, whatever comes first) if it's too long.
+* As the insecure WEP encryption for Wi-Fi network is phased out,
+  nmcli now discourages its use when activating or modifying a
+  profile.
+* Fix connectivity checks in case the check endpoint address resolves to
+  multiple addresses.
+* Workaround libcurl blocking NetworkManager while resolving DNS names.
+* nmcli: indicate missing Wi-Fi hardware when showing rfkill setting.
+* nmcli: add connection migrate command to move a profile to a specified
+  settings plugin. This allows to convert profiles in the deprecated ifcfg-rh
+  format to keyfile.
+* Set "src" attribute for routes from DHCPv4 to the leased address. This
+  helps with source address selection.
+* Updated translations.
+* Various bugfixes and internal improvements.
 
 Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
 ---
- ...-shell-scripts-to-use-bin-sh-for-use.patch |  42 ++++----
- ...-Make-scripts-POSIX-shell-compatible.patch | 100 ------------------
- ...nager_1.18.6.bb => modemmanager_1.18.8.bb} |   5 +-
- 3 files changed, 24 insertions(+), 123 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/modemmanager/files/0002-fcc-unlock-Make-scripts-POSIX-shell-compatible.patch
- rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.18.6.bb => modemmanager_1.18.8.bb} (92%)
+ ...t-add-dependency-libnm_client_public.patch | 34 -------------------
+ ...ger_1.36.2.bb => networkmanager_1.38.0.bb} |  4 +--
+ 2 files changed, 2 insertions(+), 36 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-libnm-client-test-add-dependency-libnm_client_public.patch
+ rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.36.2.bb => networkmanager_1.38.0.bb} (98%)
 
-diff --git a/meta-oe/recipes-connectivity/modemmanager/files/0001-core-switch-bash-shell-scripts-to-use-bin-sh-for-use.patch b/meta-oe/recipes-connectivity/modemmanager/files/0001-core-switch-bash-shell-scripts-to-use-bin-sh-for-use.patch
-index 7c3e7750af..914760512a 100644
---- a/meta-oe/recipes-connectivity/modemmanager/files/0001-core-switch-bash-shell-scripts-to-use-bin-sh-for-use.patch
-+++ b/meta-oe/recipes-connectivity/modemmanager/files/0001-core-switch-bash-shell-scripts-to-use-bin-sh-for-use.patch
-@@ -1,42 +1,44 @@
--From f7a3292c1c753b29384e216693f51a4213fea7d0 Mon Sep 17 00:00:00 2001
-+From 35173fa04d0116ba30a86dc1a19f859f2be14a24 Mon Sep 17 00:00:00 2001
- From: "Bruce A. Johnson" <waterfordtrack@gmail.com>
- Date: Wed, 22 Dec 2021 14:24:02 -0500
--Subject: [PATCH 1/2] core: switch bash shell scripts to use /bin/sh for use
-+Subject: [PATCH] core: switch bash shell scripts to use /bin/sh for use
-  w/Busybox.
- 
- Fixes https://gitlab.freedesktop.org/mobile-broadband/ModemManager/-/issues/483
-+
-+%% original patch: 0001-core-switch-bash-shell-scripts-to-use-bin-sh-for-use.patch
- ---
-- data/fcc-unlock/105b           | 2 +-
-- data/fcc-unlock/1199           | 2 +-
-- data/fcc-unlock/1eac           | 2 +-
-- test/mmcli-test-sms            | 2 +-
-- tools/tests/test-wrapper.sh.in | 2 +-
-+ data/dispatcher-fcc-unlock/105b | 2 +-
-+ data/dispatcher-fcc-unlock/1199 | 2 +-
-+ data/dispatcher-fcc-unlock/1eac | 2 +-
-+ test/mmcli-test-sms             | 2 +-
-+ tools/tests/test-wrapper.sh.in  | 2 +-
-  5 files changed, 5 insertions(+), 5 deletions(-)
- 
--diff --git a/data/fcc-unlock/105b b/data/fcc-unlock/105b
--index 21fe5329..f276050f 100644
----- a/data/fcc-unlock/105b
--+++ b/data/fcc-unlock/105b
-+diff --git a/data/dispatcher-fcc-unlock/105b b/data/dispatcher-fcc-unlock/105b
-+index 444bd51f..772c90f4 100644
-+--- a/data/dispatcher-fcc-unlock/105b
-++++ b/data/dispatcher-fcc-unlock/105b
- @@ -1,4 +1,4 @@
- -#!/bin/bash
- +#!/bin/sh
-  
-  # SPDX-License-Identifier: CC0-1.0
-  # 2021 Aleksander Morgado <aleksander@aleksander.es>
--diff --git a/data/fcc-unlock/1199 b/data/fcc-unlock/1199
--index 0109c6ab..e1d3804c 100644
----- a/data/fcc-unlock/1199
--+++ b/data/fcc-unlock/1199
-+diff --git a/data/dispatcher-fcc-unlock/1199 b/data/dispatcher-fcc-unlock/1199
-+index 83ab2c9e..6dbf8d1b 100644
-+--- a/data/dispatcher-fcc-unlock/1199
-++++ b/data/dispatcher-fcc-unlock/1199
- @@ -1,4 +1,4 @@
- -#!/bin/bash
- +#!/bin/sh
-  
-  # SPDX-License-Identifier: CC0-1.0
-  # 2021 Aleksander Morgado <aleksander@aleksander.es>
--diff --git a/data/fcc-unlock/1eac b/data/fcc-unlock/1eac
--index 1068d9c2..d9342852 100644
----- a/data/fcc-unlock/1eac
--+++ b/data/fcc-unlock/1eac
-+diff --git a/data/dispatcher-fcc-unlock/1eac b/data/dispatcher-fcc-unlock/1eac
-+index 1a048dc8..44ce46d7 100644
-+--- a/data/dispatcher-fcc-unlock/1eac
-++++ b/data/dispatcher-fcc-unlock/1eac
- @@ -1,4 +1,4 @@
- -#!/bin/bash
- +#!/bin/sh
-@@ -64,5 +66,5 @@ index d64ea4cb..fcdb56de 100644
-  # For debugging behavior of test-modemmanager-service.py, you can modify
-  # this line to add --log-file option
- -- 
--2.34.1
-+2.35.3
- 
-diff --git a/meta-oe/recipes-connectivity/modemmanager/files/0002-fcc-unlock-Make-scripts-POSIX-shell-compatible.patch b/meta-oe/recipes-connectivity/modemmanager/files/0002-fcc-unlock-Make-scripts-POSIX-shell-compatible.patch
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-libnm-client-test-add-dependency-libnm_client_public.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-libnm-client-test-add-dependency-libnm_client_public.patch
 deleted file mode 100644
-index d911d54ce4..0000000000
---- a/meta-oe/recipes-connectivity/modemmanager/files/0002-fcc-unlock-Make-scripts-POSIX-shell-compatible.patch
+index 6be2d4bed1..0000000000
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-libnm-client-test-add-dependency-libnm_client_public.patch
 +++ /dev/null
-@@ -1,100 +0,0 @@
--From ddf634b92bf96b35f521db6da329628b4525c2eb Mon Sep 17 00:00:00 2001
--From: Sven Schwermer <sven.schwermer@disruptive-technologies.com>
--Date: Fri, 25 Feb 2022 21:37:13 +0100
--Subject: [PATCH 2/2] fcc-unlock: Make scripts POSIX shell compatible
+@@ -1,34 +0,0 @@
+-From 7b5dc04e1fcc28dc653fb7bf0e9dda3700d93218 Mon Sep 17 00:00:00 2001
+-From: Yi Zhao <yi.zhao@windriver.com>
+-Date: Tue, 3 May 2022 15:30:37 +0800
+-Subject: [PATCH] libnm-client-test: add dependency libnm_client_public_dep
 -
--This allows us to not rely on bash which may not be available on
--constrained systems, e.g. Yocto-built embedded systems. The scripts now
--pass shellcheck.
+-Fix parallel build error:
+-| In file included from ../NetworkManager-1.36.0/src/libnm-client-test/nm-test-utils-impl.c:10:
+-| ../NetworkManager-1.36.0/src/libnm-client-public/NetworkManager.h:47:10: fatal error: nm-enum-types.h: No such file or directory
+-|    47 | #include "nm-enum-types.h"
+-|       |          ^~~~~~~~~~~~~~~~~
 -
--Signed-off-by: Sven Schwermer <sven.schwermer@disruptive-technologies.com>
+-Upstream-Status: Submitted
+-[https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/merge_requests/1206]
+-
+-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ----
-- data/fcc-unlock/105b | 8 ++++----
-- data/fcc-unlock/1199 | 6 +++---
-- data/fcc-unlock/1eac | 8 ++++----
-- 3 files changed, 11 insertions(+), 11 deletions(-)
+- src/libnm-client-test/meson.build | 1 +
+- 1 file changed, 1 insertion(+)
 -
--diff --git a/data/fcc-unlock/105b b/data/fcc-unlock/105b
--index f276050f..772c90f4 100644
----- a/data/fcc-unlock/105b
--+++ b/data/fcc-unlock/105b
--@@ -15,20 +15,20 @@ shift
-- # second and next arguments are control port names
-- for PORT in "$@"; do
--   # match port type in Linux 5.14 and newer
---  grep -q MBIM /sys/class/wwan/${PORT}/type 2>/dev/null && {
--+  grep -q MBIM "/sys/class/wwan/$PORT/type" 2>/dev/null && {
--     MBIM_PORT=$PORT
--     break
--   }
--   # match port name in Linux 5.13
---  [[ $PORT == *"MBIM"* ]] && {
--+  echo "$PORT" | grep -q MBIM && {
--     MBIM_PORT=$PORT
--     break
--   }
-- done
-- 
-- # fail if no MBIM port exposed
---[ -n "${MBIM_PORT}" ] || exit 2
--+[ -n "$MBIM_PORT" ] || exit 2
-- 
-- # run qmicli operation over MBIM
---qmicli --device-open-proxy --device=/dev/${MBIM_PORT} --dms-foxconn-set-fcc-authentication=0
--+qmicli --device-open-proxy --device="/dev/$MBIM_PORT" --dms-foxconn-set-fcc-authentication=0
-- exit $?
--diff --git a/data/fcc-unlock/1199 b/data/fcc-unlock/1199
--index e1d3804c..6dbf8d1b 100644
----- a/data/fcc-unlock/1199
--+++ b/data/fcc-unlock/1199
--@@ -19,15 +19,15 @@ shift
-- # second and next arguments are control port names
-- for PORT in "$@"; do
--   # match port name
---  [[ $PORT == *"cdc-wdm"* ]] && {
--+  echo "$PORT" | grep -q cdc-wdm && {
--     CDC_WDM_PORT=$PORT
--     break
--   }
-- done
-- 
-- # fail if no cdc-wdm port exposed
---[ -n "${CDC_WDM_PORT}" ] || exit 2
--+[ -n "$CDC_WDM_PORT" ] || exit 2
-- 
-- # run qmicli operation
---qmicli --device-open-proxy --device=/dev/${CDC_WDM_PORT} --dms-set-fcc-authentication
--+qmicli --device-open-proxy --device="/dev/$CDC_WDM_PORT" --dms-set-fcc-authentication
-- exit $?
--diff --git a/data/fcc-unlock/1eac b/data/fcc-unlock/1eac
--index d9342852..44ce46d7 100644
----- a/data/fcc-unlock/1eac
--+++ b/data/fcc-unlock/1eac
--@@ -15,20 +15,20 @@ shift
-- # second and next arguments are control port names
-- for PORT in "$@"; do
--   # match port type in Linux 5.14 and newer
---  grep -q MBIM /sys/class/wwan/${PORT}/type 2>/dev/null && {
--+  grep -q MBIM "/sys/class/wwan/$PORT/type" 2>/dev/null && {
--     MBIM_PORT=$PORT
--     break
--   }
--   # match port name in Linux 5.13
---  [[ $PORT == *"MBIM"* ]] && {
--+  echo "$PORT" | grep -q MBIM && {
--     MBIM_PORT=$PORT
--     break
--   }
-- done
-- 
-- # fail if no MBIM port exposed
---[ -n "${MBIM_PORT}" ] || exit 2
--+[ -n "$MBIM_PORT" ] || exit 2
-- 
-- # run mbimcli operation
---mbimcli --device-open-proxy --device=/dev/${MBIM_PORT} --quectel-set-radio-state=on
--+mbimcli --device-open-proxy --device="/dev/$MBIM_PORT" --quectel-set-radio-state=on
-- exit $?
+-diff --git a/src/libnm-client-test/meson.build b/src/libnm-client-test/meson.build
+-index 8e2fba1130..bcac437702 100644
+---- a/src/libnm-client-test/meson.build
+-+++ b/src/libnm-client-test/meson.build
+-@@ -13,6 +13,7 @@ libnm_client_test = static_library(
+-   ],
+-   dependencies: [
+-     libnm_core_public_dep,
+-+    libnm_client_public_dep,
+-     glib_dep,
+-   ],
+- )
 --- 
--2.34.1
+-2.25.1
 -
-diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.6.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.8.bb
-similarity index 92%
-rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.6.bb
-rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.8.bb
-index 14d9942c02..28f81ba6e5 100644
---- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.6.bb
-+++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.8.bb
-@@ -12,13 +12,12 @@ inherit gnomebase gettext systemd gobject-introspection bash-completion
- 
- DEPENDS = "glib-2.0 libgudev libxslt-native dbus"
- 
--SRCREV ?= "a7bcf2036b34d5043dbc33fee7d98bae5859c4d3"
-+SRCREV ?= "0d8b5e93fc62eb0f41e18a2d9d845331d7af36ec"
- 
--# Patches 0001, 0002 will be in ModemManager > 1.18.6
-+# Patch 0001 will be in ModemManager > 1.19
- SRC_URI = " \
-     git://gitlab.freedesktop.org/mobile-broadband/ModemManager.git;protocol=https;branch=mm-1-18 \
-     file://0001-core-switch-bash-shell-scripts-to-use-bin-sh-for-use.patch \
--    file://0002-fcc-unlock-Make-scripts-POSIX-shell-compatible.patch \
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.36.2.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.38.0.bb
+similarity index 98%
+rename from meta-networking/recipes-connectivity/networkmanager/networkmanager_1.36.2.bb
+rename to meta-networking/recipes-connectivity/networkmanager/networkmanager_1.38.0.bb
+index 55eb3e7024..d52ad6e6ce 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.36.2.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.38.0.bb
+@@ -30,9 +30,8 @@ SRC_URI = " \
+     file://enable-dhcpcd.conf \
+     file://enable-iwd.conf \
+     file://0001-do-not-ask-host-for-ifcfg-defaults.patch \
+-    file://0001-libnm-client-test-add-dependency-libnm_client_public.patch \
  "
+-SRC_URI[sha256sum] = "ab855cbe3b41832e9a3b003810e7c7313dfe19e630d29806d14d87fdd1470cab"
++SRC_URI[sha256sum] = "82a4cf07ddfeb0816787b67c0f5058ae6c50d6259c0b0541a24e35156062b2ef"
  
- S = "${WORKDIR}/git"
+ S = "${WORKDIR}/NetworkManager-${PV}"
+ 
+@@ -92,6 +91,7 @@ PACKAGECONFIG[dnsmasq] = "-Ddnsmasq=${bindir}/dnsmasq"
+ PACKAGECONFIG[nss] = "-Dcrypto=nss,,nss"
+ PACKAGECONFIG[resolvconf] = "-Dresolvconf=${base_sbindir}/resolvconf,-Dresolvconf=no,,resolvconf"
+ PACKAGECONFIG[gnutls] = "-Dcrypto=gnutls,,gnutls"
++PACKAGECONFIG[crypto-null] = "-Dcrypto=null"
+ PACKAGECONFIG[wifi] = "-Dwext=true -Dwifi=true,-Dwext=false -Dwifi=false"
+ PACKAGECONFIG[iwd] = "-Diwd=true,-Diwd=false"
+ PACKAGECONFIG[ifupdown] = "-Difupdown=true,-Difupdown=false"
 -- 
 2.35.3
 
