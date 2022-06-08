@@ -1,214 +1,98 @@
-Return-Path: <sakib.sajal@windriver.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44D18C433EF
-	for <webhook@archiver.kernel.org>; Wed,  8 Jun 2022 18:25:17 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web12.940.1654712712316768026
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 36541C433EF
+	for <webhook@archiver.kernel.org>; Wed,  8 Jun 2022 18:27:07 +0000 (UTC)
+Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
+ by mx.groups.io with SMTP id smtpd.web12.957.1654712819641654757
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Jun 2022 11:25:12 -0700
+ Wed, 08 Jun 2022 11:27:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.146.13,
- mailfrom: sakib.sajal@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 258IP9N2032186
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 8 Jun 2022 11:25:09 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 258IP8SJ024099
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 8 Jun 2022 11:25:09 -0700 (PDT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Wed, 8 Jun 2022 11:25:08 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27; Wed, 8 Jun 2022 11:25:08 -0700
-Received: from yow-lpggp3.wrs.com (128.224.137.13) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Wed, 8 Jun 2022 11:25:08 -0700
-From: Sakib Sajal <sakib.sajal@windriver.com>
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=Xr3le14L;
+ spf=pass (domain: axis.com, ip: 195.60.68.17,
+ mailfrom: peter.kjellerstedt@axis.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=axis.com; q=dns/txt; s=axis-central1; t=1654712820;
+  x=1686248820;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=QNGwv6x2QYGgMWceeY0RNOXYlNLDf4K6sEwC9ZZfaoQ=;
+  b=Xr3le14LfBJffyHTXGUVkI5gVFvi1DJqs4F8QveOpZ6UHKDXn4EyOaCj
+   KXgV2pz+a+xCrht/YY9XuW5wKDQJsIG8byRJLgArToFMAq6SD1LIKO6J5
+   xPAV4OhW37E4BrVvGmWaYuIbLwmV90UJoh+ky2l79TgdHA7SAYwqmyIHm
+   VA1TL+M9Mqx6lOS8t3L0KxVDVQkgl7NNEjcoMOKO4flcSwju2RcREGtZS
+   yhLB/ZICJA0UnwJ8pHJ5aGdh76/1qpWDRdTpjvzC/2oBXrxW4UZSO1nBL
+   jI/KK/fvQrUfIx2lze5s52ILe8y9rHIbWYhklklkLrE5XuMuDvEGmO1IG
+   g==;
+From: Peter Kjellerstedt <pkj@axis.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] minicoredumper: retry elf parsing as long as needed
-Date: Wed, 8 Jun 2022 14:25:07 -0400
-Message-ID: <20220608182507.9479-1-sakib.sajal@windriver.com>
-X-Mailer: git-send-email 2.33.0
+Subject: [meta-oe][PATCH] cryptsetup: Add support for building without SSH
+ tokens
+Date: Wed, 8 Jun 2022 20:26:54 +0200
+Message-ID: <20220608182655.10267-1-pkj@axis.com>
+X-Mailer: git-send-email 2.21.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Jun 2022 18:25:17 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Jun 2022 18:27:07 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97445
+ https://lists.openembedded.org/g/openembedded-devel/message/97446
 
-Maximum number of tries, in rare cases, is insufficient for
-elf parse. Backport patch that fixes the issue.
+Cryptsetup SSH tokens is the only feature that has a dependency on
+libssh. Add a packageconfig to control this dependency.
 
-Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
+Change-Id: Iac4f91e099ad2e3a79aab183734108f8bfbff57f
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
- ...-retry-elf-parsing-as-long-as-needed.patch | 128 ++++++++++++++++++
- .../minicoredumper/minicoredumper_2.0.1.bb    |   1 +
- 2 files changed, 129 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-retry-elf-parsing-as-long-as-needed.patch
+ .../recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb    | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-retry-elf-parsing-as-long-as-needed.patch b/meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-retry-elf-parsing-as-long-as-needed.patch
-new file mode 100644
-index 000000000..8d5b8b6cb
---- /dev/null
-+++ b/meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-retry-elf-parsing-as-long-as-needed.patch
-@@ -0,0 +1,128 @@
-+From 7a8c6a06c86e133e4346b1dc66483bd8d0d3c716 Mon Sep 17 00:00:00 2001
-+From: John Ogness <john.ogness@linutronix.de>
-+Date: Tue, 24 Aug 2021 21:10:43 +0200
-+Subject: [PATCH] minicoredumper: retry elf parsing as long as needed
-+
-+As was reported in github issue #2 ("maximum number of tries
-+insufficient, in rare cases, for elf parse"), the number of retries
-+for parsing a process may be insufficient. Rather than setting an
-+upper limit on the maximum number of retries, track the number of
-+headers seen. As long as the number of seen headers is greater than
-+the previous try, try again.
-+
-+In order to avoid introducing any new issues, preserve the behavior
-+of retrying at least 10 times, even if no new headers are seen.
-+
-+Reported-by: github.com/ssajal-wr
-+Signed-off-by: John Ogness <john.ogness@linutronix.de>
-+
-+Upstream-Status: Backport [7a8c6a06c86e133e4346b1dc66483bd8d0d3c716]
-+
-+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
-+---
-+ src/minicoredumper/corestripper.c | 30 +++++++++++++++++++++++-------
-+ 1 file changed, 23 insertions(+), 7 deletions(-)
-+
-+diff --git a/src/minicoredumper/corestripper.c b/src/minicoredumper/corestripper.c
-+index d96d1df..c96b350 100644
-+--- a/src/minicoredumper/corestripper.c
-++++ b/src/minicoredumper/corestripper.c
-+@@ -761,7 +761,7 @@ static int init_log(struct dump_info *di)
-+ typedef int elf_parse_cb(struct dump_info *di, Elf *elf, GElf_Phdr *phdr);
-+ 
-+ static int do_elf_ph_parse(struct dump_info *di, GElf_Phdr *type,
-+-			   elf_parse_cb *callback)
-++			   elf_parse_cb *callback, size_t *phnum_found)
-+ {
-+ 	GElf_Ehdr ehdr_mem;
-+ 	GElf_Ehdr *ehdr;
-+@@ -770,6 +770,9 @@ static int do_elf_ph_parse(struct dump_info *di, GElf_Phdr *type,
-+ 	size_t phnum;
-+ 	size_t cnt;
-+ 
-++	if (phnum_found)
-++		*phnum_found = 0;
-++
-+ 	/* start from beginning of core */
-+ 	if (lseek64(di->elf_fd, 0, SEEK_SET) == -1) {
-+ 		info("lseek failed: %s", strerror(errno));
-+@@ -809,6 +812,9 @@ static int do_elf_ph_parse(struct dump_info *di, GElf_Phdr *type,
-+ 		goto out;
-+ 	}
-+ 
-++	if (phnum_found)
-++		*phnum_found = phnum;
-++
-+ 	for (cnt = 0; cnt < phnum; cnt++) {
-+ 		GElf_Phdr phdr_mem;
-+ 		GElf_Phdr *phdr;
-+@@ -891,7 +897,7 @@ static int vma_cb(struct dump_info *di, Elf *elf, GElf_Phdr *phdr)
-+ /*
-+  * Tries to parse the found ELF headers and reads all vmas from it.
-+  */
-+-static int parse_vma_info(struct dump_info *di)
-++static int parse_vma_info(struct dump_info *di, size_t *phnum_found)
-+ {
-+ 	unsigned long min_off = ULONG_MAX;
-+ 	unsigned long max_len = 0;
-+@@ -911,7 +917,7 @@ static int parse_vma_info(struct dump_info *di)
-+ 	memset(&type, 0, sizeof(type));
-+ 	type.p_type = PT_LOAD;
-+ 	type.p_flags = PF_R;
-+-	if (do_elf_ph_parse(di, &type, vma_cb) != 0)
-++	if (do_elf_ph_parse(di, &type, vma_cb, phnum_found) != 0)
-+ 		return -1;
-+ 
-+ 	for (v = di->vma; v; v = v->next) {
-+@@ -1614,8 +1620,10 @@ int add_core_data(struct dump_info *di, off64_t dest_offset, size_t len,
-+  */
-+ static int init_src_core(struct dump_info *di, int src)
-+ {
-++	size_t last_phnum = 0;
-+ 	int tries = 0;
-+ 	int ret = -1;
-++	size_t phnum;
-+ 	size_t len;
-+ 	char *buf;
-+ 	long pos;
-+@@ -1642,7 +1650,7 @@ again:
-+ 		goto out;
-+ 
-+ 	/* try to elf-parse the core to read vma info */
-+-	ret = parse_vma_info(di);
-++	ret = parse_vma_info(di, &phnum);
-+ 
-+ 	/* restore our position */
-+ 	if (lseek64(di->elf_fd, pos, SEEK_SET) == -1)
-+@@ -1653,9 +1661,17 @@ again:
-+ 
-+ 		tries++;
-+ 
-+-		/* maybe try again */
-+-		if (tries < 10)
-++		if (phnum > last_phnum) {
-++			/* new headers found, keep trying */
-++			last_phnum = phnum;
-+ 			goto again;
-++		} else if (tries < 10) {
-++			/*
-++			 * even if no new headers are found,
-++			 * retry at least 10 times
-++			 */
-++			goto again;
-++		}
-+ 
-+ 		goto out;
-+ 	}
-+@@ -2106,7 +2122,7 @@ static int dump_stacks(struct dump_info *di)
-+ 		/* find and set the first task */
-+ 		memset(&type, 0, sizeof(type));
-+ 		type.p_type = PT_NOTE;
-+-		do_elf_ph_parse(di, &type, note_cb);
-++		do_elf_ph_parse(di, &type, note_cb, NULL);
-+ 	}
-+ 
-+ 	if (di->first_pid)
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-index bf9915294..0b934ee2d 100644
---- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-+++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/diamon/minicoredumper;protocol=https;branch=master \
-            file://0001-replace-pthread_mutexattr_setrobust_np-with-pthread_.patch \
-            file://minicoredumper.service \
-            file://minicoredumper.init \
-+           file://0001-minicoredumper-retry-elf-parsing-as-long-as-needed.patch \
-            "
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
+index 435b55477..652fd6661 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
+@@ -14,7 +14,6 @@ DEPENDS = " \
+     libdevmapper \
+     popt \
+     util-linux-libuuid \
+-    libssh \
+ "
  
- S = "${WORKDIR}/git"
--- 
-2.33.0
-
+ DEPENDS:append:libc-musl = " argp-standalone"
+@@ -39,6 +38,7 @@ PACKAGECONFIG ??= " \
+     blkid \
+     luks-adjust-xts-keysize \
+     openssl \
++    ssh-token \
+ "
+ PACKAGECONFIG:append:class-target = " \
+     udev \
+@@ -69,7 +69,7 @@ PACKAGECONFIG[nss] = "--with-crypto_backend=nss,,nss"
+ PACKAGECONFIG[kernel] = "--with-crypto_backend=kernel"
+ PACKAGECONFIG[nettle] = "--with-crypto_backend=nettle,,nettle"
+ PACKAGECONFIG[luks2] = "--with-default-luks-format=LUKS2,--with-default-luks-format=LUKS1"
+-
++PACKAGECONFIG[ssh-token] = "--enable-ssh-token,--disable-ssh-token,libssh"
+ 
+ EXTRA_OECONF = "--enable-static"
+ # Building without largefile is not supported by upstream
+@@ -90,6 +90,14 @@ EXTRA_OECONF += "--with-luks2-pbkdf=${LUKS2_PBKDF} \
+     --with-luks2-parallel-threads=${LUKS2_PARALLEL_THREADS} \
+     --with-luks2-iter-time=${LUKS2_ITERTIME}"
+ 
++do_install:append() {
++    # The /usr/lib/cryptsetup directory is always created, even when ssh-token
++    # is disabled. In that case it is empty and causes a packaging error. Since
++    # there is no reason to distribute the empty directory, the easiest solution
++    # is to remove it if it is empty.
++    rmdir -p --ignore-fail-on-non-empty ${D}${libdir}/${BPN}
++}
++
+ FILES:${PN} += "${@bb.utils.contains('DISTRO_FEATURES','systemd','${exec_prefix}/lib/tmpfiles.d/cryptsetup.conf', '', d)}"
+ 
+ RDEPENDS:${PN} = " \
 
