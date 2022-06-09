@@ -1,135 +1,126 @@
-Return-Path: <mingli.yu@windriver.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 83E07C43334
-	for <webhook@archiver.kernel.org>; Thu,  9 Jun 2022 08:51:31 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web11.8273.1654764686129857365
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F128C43334
+	for <webhook@archiver.kernel.org>; Thu,  9 Jun 2022 09:28:31 +0000 (UTC)
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com
+ [209.85.218.52])
+ by mx.groups.io with SMTP id smtpd.web09.8390.1654766904933417027
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Jun 2022 01:51:26 -0700
+ Thu, 09 Jun 2022 02:28:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.146.13,
- mailfrom: mingli.yu@windriver.com)
-Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 2598pE4g007642
-	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 9 Jun 2022 01:51:15 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 2598p9WC014376
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 9 Jun 2022 01:51:14 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Thu, 9 Jun 2022 01:51:09 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Thu, 9 Jun 2022 01:51:08 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][PATCH] kronosnet: Fix build with gcc-12
-Date: Thu, 9 Jun 2022 16:51:08 +0800
-Message-ID: <20220609085108.4173615-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@bgdev-pl.20210112.gappssmtp.com header.s=20210112
+ header.b=00bg7oC8;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.218.52,
+ mailfrom: brgl@bgdev.pl)
+Received: by mail-ej1-f52.google.com with SMTP id kq6so33233875ejb.11
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 09 Jun 2022 02:28:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=+FqWEZk7JmCzDYMdNg6E+gPnpMcUkQJhWHRZAebKpVQ=;
+        b=00bg7oC84p0qYALmuOgaAY4d4FlcaKJl1dGQM8LtIlJEsbUiTy0B28HqEW1JmGu+3D
+         r5paymPkJJil1jS7oDlQ2zCRWJdMl+3X0npq0BhOCf+jxde60MPRSwxlqhtTZ8JRx8lP
+         3JHK1UE7TwjMLvzOLQOFt7WqCnolllZU3q8QX86kgsI1REEf3e+D8tTsdIa/CUfc74ZG
+         7Hg8pkno5hYrJALNdaJm+eWsilJpP4hRraO1uLKVFxFtBFSk8O0BfBGPEOo4d+02Jh+u
+         1Eg/6exUnSB5M+B04awf7ALeKO03Qs+C7qTVC0f2kywYTV+JLeC7DspR2qEMLMTVMhEP
+         DkiA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=+FqWEZk7JmCzDYMdNg6E+gPnpMcUkQJhWHRZAebKpVQ=;
+        b=O+lN6FfFBRuKHloYBOxxB+8t9fQCwgVa1frAD4ZNB2+l7c2RNneKH7U/1aGhzFGQi6
+         8rdz9g0TtxtN1rMPzIYiwz34/NV4X3HuetOTZ0dduB65YdFa46x+Iosa6JpBL8KnvxKw
+         iCXIpLaWOyqj91pF9HtAmCOdg7zRKmc+jhDvp/zvRe2dvlu9vJeL3C/lQkxumFUaVxsn
+         NIhC37OaPfxCxFeJ6cb0NFIvDvz+SZ9tok6pLgkBmpMg+4qfaxkMvcgXHaFugIxbWQ7F
+         SgT9pXWp+Kv63YPLX240TBmvRaKVt2wwJSXi76sw/ffxdiqUODakuYORT0CctHr8qMJp
+         moWw==
+X-Gm-Message-State: AOAM531ifeiHCUbw6Eh/9kTl98+3go5GfO41mXUJvlsv5Ax1/PH+FCQG
+	WejHpe4Ycxx8iOrR6o4er1CFsxoE9Zb4Y3LLPr+CoQ==
+X-Google-Smtp-Source: 
+ ABdhPJwgvR0da0hA5GjeuO8Su6fM31OUnb375JbG4gspJqwmZi0vGrUNeUtvRUhY/EP6JIH0/zQynDSliKYgfGZdNZQ=
+X-Received: by 2002:a17:906:fc12:b0:711:d2e9:99d9 with SMTP id
+ ov18-20020a170906fc1200b00711d2e999d9mr17355487ejb.734.1654766903226; Thu, 09
+ Jun 2022 02:28:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Thu, 9 Jun 2022 11:28:12 +0200
+Message-ID: 
+ <CAMRc=Md3LRW3OZ-AOkG5g1iNrH_k_gQdP3y03cKahgMN7aXF0A@mail.gmail.com>
+Subject: [meta-java] icedtea7-native build fails on kirkstone and in master
+To: Patches and discussions about the oe-core layer
+ <openembedded-core@lists.openembedded.org>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Henning Heinold <henning@itconsulting-heinold.de>,
+ Otavio Salvador <otavio@ossystems.com.br>,
+	Richard Leitner <richard.leitner@skidata.com>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Jun 2022 08:51:31 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Jun 2022 09:28:31 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97462
+ https://lists.openembedded.org/g/openembedded-devel/message/97463
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Hi!
 
-Fix the build failure when debug build is enabled.
-Add DEBUG_BUILD = "1" in conf/local.conf.
- $ bitbake kronosnet
-  | /build/tmp-glibc/work/corei7-64-wrs-linux/kronosnet/1.22-r0/recipe-sysroot/usr/include/bits/string_fortified.h:59:10: error: 'link' may be used uninitialized [-Werror=maybe-uninitialized]
-  |    59 |   return __builtin___memset_chk (__dest, __ch, __len,
-  |       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  |    60 |                                  __glibc_objsize0 (__dest));
-  |       |                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~
-  | ../../git/libknet/links.c: In function 'knet_link_set_config':
-  | ../../git/libknet/links.c:108:27: note: 'link' was declared here
-  |   108 |         struct knet_link *link;
-  |       |                           ^~~~
-  | cc1: all warnings being treated as errors
+I'm trying to build java support with the following configuration:
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Build Configuration:
+BB_VERSION           = "2.0.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.0.1"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta
+meta-poky            = "kirkstone:45d7615dfef8093a2467d52ca1130e62db6a1187"
+meta-oe              = "kirkstone:fcc7d7eae82be4c180f2e8fa3db90a8ab3be07b7"
+meta-java            = "kirkstone:1a8059f6b257ebe6fcae6416e499784d976afd24"
+
 ---
- .../0001-links.c-Fix-build-with-gcc-12.patch  | 40 +++++++++++++++++++
- .../kronosnet/kronosnet_1.22.bb               |  1 +
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-networking/recipes-extended/kronosnet/kronosnet/0001-links.c-Fix-build-with-gcc-12.patch
 
-diff --git a/meta-networking/recipes-extended/kronosnet/kronosnet/0001-links.c-Fix-build-with-gcc-12.patch b/meta-networking/recipes-extended/kronosnet/kronosnet/0001-links.c-Fix-build-with-gcc-12.patch
-new file mode 100644
-index 000000000..e59501cc4
---- /dev/null
-+++ b/meta-networking/recipes-extended/kronosnet/kronosnet/0001-links.c-Fix-build-with-gcc-12.patch
-@@ -0,0 +1,40 @@
-+From a8aac8f3fd8b07fde8f5dc0aa9ece54a46d24425 Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Thu, 9 Jun 2022 16:03:06 +0800
-+Subject: [PATCH] links.c: Fix build with gcc-12
-+
-+Fixes:
-+  | /build/tmp-glibc/work/corei7-64-wrs-linux/kronosnet/1.22-r0/recipe-sysroot/usr/include/bits/string_fortified.h:59:10: error: 'link' may be used uninitialized [-Werror=maybe-uninitialized]
-+  |    59 |   return __builtin___memset_chk (__dest, __ch, __len,
-+  |       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+  |    60 |                                  __glibc_objsize0 (__dest));
-+  |       |                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~
-+  | ../../git/libknet/links.c: In function 'knet_link_set_config':
-+  | ../../git/libknet/links.c:108:27: note: 'link' was declared here
-+  |   108 |         struct knet_link *link;
-+  |       |                           ^~~~
-+  | cc1: all warnings being treated as errors
-+
-+Upstream-Status: Submitted[https://github.com/kronosnet/kronosnet/pull/382]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ libknet/links.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/libknet/links.c b/libknet/links.c
-+index 8cb1621b..0ef42b79 100644
-+--- a/libknet/links.c
-++++ b/libknet/links.c
-+@@ -105,7 +105,7 @@ int knet_link_set_config(knet_handle_t knet_h, knet_node_id_t host_id, uint8_t l
-+ {
-+ 	int savederrno = 0, err = 0, i, wipelink = 0, link_idx;
-+ 	struct knet_host *host, *tmp_host;
-+-	struct knet_link *link;
-++	struct knet_link *link = NULL;
-+ 
-+ 	if (!_is_valid_handle(knet_h)) {
-+ 		return -1;
-+-- 
-+2.25.1
-+
-diff --git a/meta-networking/recipes-extended/kronosnet/kronosnet_1.22.bb b/meta-networking/recipes-extended/kronosnet/kronosnet_1.22.bb
-index ad0a00e78..0b0bc2945 100644
---- a/meta-networking/recipes-extended/kronosnet/kronosnet_1.22.bb
-+++ b/meta-networking/recipes-extended/kronosnet/kronosnet_1.22.bb
-@@ -14,6 +14,7 @@ DEPENDS = "doxygen-native libqb-native libxml2-native bzip2 libqb libxml2 libnl
- SRCREV = "0123ecebce0ad6aba3cdb320027192e15fd71e23"
- SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1 \
-            file://0001-libknet-tests-Correct-include-path-for-poll.h.patch \
-+           file://0001-links.c-Fix-build-with-gcc-12.patch \
-            "
- 
- UPSTREAM_CHECK_URI = "https://github.com/kronosnet/kronosnet/releases"
--- 
-2.25.1
+PREFERRED_PROVIDER_virtual/java-initial-native = "cacao-initial-native"
+PREFERRED_PROVIDER_virtual/java-native = "jamvm-native"
+PREFERRED_PROVIDER_virtual/javac-native = "ecj-bootstrap-native"
 
+---
+
+The build fails for icedtea7-native but it's hard to tell why exactly
+from the logs. Here is the full output: https://pastebin.com/3dRt6J0Y
+
+It seems to be failing here:
+
+| Checking for mapfile use in:
+/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build-boot/lib/amd64/libmanagement.so
+| Library loads for:
+/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build-boot/lib/amd64/libmanagement.so
+| make[5]: Leaving directory
+'/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/jdk/make/java/management'
+| make[5]: *** [../../common/Library.gmk:225:
+/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build-boot/lib/amd64/libmanagement.so]
+Error 1
+| make[4]: Leaving directory
+'/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/jdk/make/java'
+| make[4]: *** [Makefile:63: all] Error 1
+| make[3]: Leaving directory
+'/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/jdk/make'
+| make[3]: *** [Makefile:247: all] Error 1
+| make[2]: Leaving directory
+'/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot'
+| make[2]: *** [make/jdk-rules.gmk:79: jdk-build] Error 2
+| make[1]: Leaving directory
+'/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot'
+| make[1]: *** [Makefile:244: build_product_image] Error 2
+| make: *** [Makefile:2252: stamps/icedtea-boot.stamp] Error 2
+
+But not sure why.
+
+Thanks in advance for any help.
+Bart
 
