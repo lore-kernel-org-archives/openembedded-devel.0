@@ -1,118 +1,134 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <mingli.yu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36DB2C433EF
-	for <webhook@archiver.kernel.org>; Thu,  9 Jun 2022 07:59:01 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com
- [195.245.230.17])
- by mx.groups.io with SMTP id smtpd.web09.7890.1654761535231637361
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83E07C43334
+	for <webhook@archiver.kernel.org>; Thu,  9 Jun 2022 08:51:31 +0000 (UTC)
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web11.8273.1654764686129857365
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Jun 2022 00:58:55 -0700
+ Thu, 09 Jun 2022 01:51:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=jci8s7ne;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.17,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1654761533; i=@fujitsu.com;
-	bh=KCTlju0U02450amivaKvGJoOCE2aJLtTGv2bHejBMlo=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=jci8s7neSWh2Jmde8H10gIxX+2G/QdoNZdnGUM9fpkjqKq08oj9JA2UktWYu1G9f8
-	 ZZ5DAT2Zai6vj8efta0ucWjlTWJSHaJlqF/CLWtpCbL8mnYiuoB3wu8vLuWx/uN0nq
-	 XZWdAtdhTRPS3vZBvW4jBc6bpTWU5Icec6v/WjdW0fZ83pd7SkIwjLRpt5ngZslxeM
-	 4VxBW6Q0g4gJGQiLjlNXIvpkGduxCmHF+/WDhji54GRBbUA5UKdK5sNbmP99m4gxUG
-	 MzobVCpCUcXqaIcaTe0FaMV23UOzcanSCs2NWZpnlABx0mgUXIcPkeFDspxbuyVDwz
-	 ICTQGvvw+6azw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrNIsWRWlGSWpSXmKPExsViZ8ORqGu7YmG
-  SwfsHrBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bEn5sYCxZwVXxt72NvYNzK2cXIxSEk8IRR
-  4tONFkYI5wKTxK6Tx9ggnN2MEtt2NrF3MXJysAmoSUy/dYMVxBYR0JdYOnsPM4jNLKAi8eJ3D
-  1iNsIC/xPIFvxhBbBag+IoHG9hAbF4BJ4nfF7rB6iUEFCSmPHwPZnMKOEvMf70HrFcIqGbFyk
-  5GiHpBiZMzn7BAzJeQOPjiBVSvosTsy80sEHaFxIwZ29ggbDWJq+c2MU9gFJyFpH0WkvYFjEy
-  rGK2SijLTM0pyEzNzdA0NDHQNDU11TYAsQ73EKt1EvdRS3fLU4hJdILe8WC+1uFivuDI3OSdF
-  Ly+1ZBMjMIxTillSdzD29f3UO8QoycGkJMp7cuHCJCG+pPyUyozE4oz4otKc1OJDjDIcHEoSv
-  GuXA+UEi1LTUyvSMnOAMQWTluDgURLhtV0GlOYtLkjMLc5Mh0idYlSUEuedAdInAJLIKM2Da4
-  PF8SVGWSlhXkYGBgYhnoLUotzMElT5V4ziHIxKwrw8IFN4MvNK4Ka/AlrMBLT415UFIItLEhF
-  SUg1MCZ8+df5+et4y3XDdEo3ib1sZKr9XuQbt3TqbhcPydQxzWoG9UkFywIS38+LK59q17tGt
-  /cV821lf+fCHyLn9GwQa1vjvErdZavOl8kdI3awqH3XnZ4uei7fOvdfgbekQnnYmeJu7x691S
-  o/ShJxdu5O8T3xb8/BophHj5ohkKR5uzr+3frWbftj2x1xBQvbXOYkI1dIVe/eHmj/K9drxea
-  L+I0lFQ0nN+74edSfdnJqCstkPsK/N3c2n8VZyYa1j6LTCuoDXpaeqw8OY3rPzNWfWVc3vmtn
-  T9GLd9j6Xy2ukyi22LTZQmyurJ3kz68TBh3/jiyPCZjf9vhyiGjyDMyr9875eRhuryaov1JRY
-  ijMSDbWYi4oTAaolJFdeAwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-13.tower-585.messagelabs.com!1654761532!77430!1
-X-Originating-IP: [62.60.8.97]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.86.7; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 6366 invoked from network); 9 Jun 2022 07:58:53 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-13.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 9 Jun 2022 07:58:53 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 9D5D7100183
+ dkim=missing;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
+ domain name (domain: windriver.com, ip: 147.11.146.13,
+ mailfrom: mingli.yu@windriver.com)
+Received: from mail.windriver.com (mail.wrs.com [147.11.1.11])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 2598pE4g007642
+	(version=TLSv1.1 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Thu,  9 Jun 2022 08:58:52 +0100 (BST)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 9049110018E
+ Thu, 9 Jun 2022 01:51:15 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 2598p9WC014376
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
- Thu,  9 Jun 2022 08:58:52 +0100 (BST)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Thu, 9 Jun 2022 08:58:45 +0100
-From: Wang Mingyu <wangmy@fujitsu.com>
+ Thu, 9 Jun 2022 01:51:14 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Thu, 9 Jun 2022 01:51:09 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Thu, 9 Jun 2022 01:51:08 -0700
+From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-xmlschema: upgrade 1.11.0 ->
- 1.11.1
-Date: Thu, 9 Jun 2022 15:58:30 +0800
-Message-ID: <1654761510-29680-2-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1654761510-29680-1-git-send-email-wangmy@fujitsu.com>
-References: <1654761510-29680-1-git-send-email-wangmy@fujitsu.com>
+Subject: [meta-networking][PATCH] kronosnet: Fix build with gcc-12
+Date: Thu, 9 Jun 2022 16:51:08 +0800
+Message-ID: <20220609085108.4173615-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Jun 2022 07:59:01 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Jun 2022 08:51:31 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97460
+ https://lists.openembedded.org/g/openembedded-devel/message/97462
 
-Changelog:
-===========
-    Protect converter calls in iter_decode()/iter_encode()
-    Extend XSD type matching for code generators
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Fix the build failure when debug build is enabled.
+Add DEBUG_BUILD = "1" in conf/local.conf.
+ $ bitbake kronosnet
+  | /build/tmp-glibc/work/corei7-64-wrs-linux/kronosnet/1.22-r0/recipe-sysroot/usr/include/bits/string_fortified.h:59:10: error: 'link' may be used uninitialized [-Werror=maybe-uninitialized]
+  |    59 |   return __builtin___memset_chk (__dest, __ch, __len,
+  |       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  |    60 |                                  __glibc_objsize0 (__dest));
+  |       |                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~
+  | ../../git/libknet/links.c: In function 'knet_link_set_config':
+  | ../../git/libknet/links.c:108:27: note: 'link' was declared here
+  |   108 |         struct knet_link *link;
+  |       |                           ^~~~
+  | cc1: all warnings being treated as errors
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- ...{python3-xmlschema_1.11.0.bb => python3-xmlschema_1.11.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-xmlschema_1.11.0.bb => python3-xmlschema_1.11.1.bb} (84%)
+ .../0001-links.c-Fix-build-with-gcc-12.patch  | 40 +++++++++++++++++++
+ .../kronosnet/kronosnet_1.22.bb               |  1 +
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-networking/recipes-extended/kronosnet/kronosnet/0001-links.c-Fix-build-with-gcc-12.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-xmlschema_1.11.0.bb b/meta-python/recipes-devtools/python/python3-xmlschema_1.11.1.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-xmlschema_1.11.0.bb
-rename to meta-python/recipes-devtools/python/python3-xmlschema_1.11.1.bb
-index 759cf029c..9f0944a9f 100644
---- a/meta-python/recipes-devtools/python/python3-xmlschema_1.11.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-xmlschema_1.11.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/xmlschema"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=47489cb18c469474afeb259ed1d4832f"
+diff --git a/meta-networking/recipes-extended/kronosnet/kronosnet/0001-links.c-Fix-build-with-gcc-12.patch b/meta-networking/recipes-extended/kronosnet/kronosnet/0001-links.c-Fix-build-with-gcc-12.patch
+new file mode 100644
+index 000000000..e59501cc4
+--- /dev/null
++++ b/meta-networking/recipes-extended/kronosnet/kronosnet/0001-links.c-Fix-build-with-gcc-12.patch
+@@ -0,0 +1,40 @@
++From a8aac8f3fd8b07fde8f5dc0aa9ece54a46d24425 Mon Sep 17 00:00:00 2001
++From: Mingli Yu <mingli.yu@windriver.com>
++Date: Thu, 9 Jun 2022 16:03:06 +0800
++Subject: [PATCH] links.c: Fix build with gcc-12
++
++Fixes:
++  | /build/tmp-glibc/work/corei7-64-wrs-linux/kronosnet/1.22-r0/recipe-sysroot/usr/include/bits/string_fortified.h:59:10: error: 'link' may be used uninitialized [-Werror=maybe-uninitialized]
++  |    59 |   return __builtin___memset_chk (__dest, __ch, __len,
++  |       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++  |    60 |                                  __glibc_objsize0 (__dest));
++  |       |                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~
++  | ../../git/libknet/links.c: In function 'knet_link_set_config':
++  | ../../git/libknet/links.c:108:27: note: 'link' was declared here
++  |   108 |         struct knet_link *link;
++  |       |                           ^~~~
++  | cc1: all warnings being treated as errors
++
++Upstream-Status: Submitted[https://github.com/kronosnet/kronosnet/pull/382]
++
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++---
++ libknet/links.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/libknet/links.c b/libknet/links.c
++index 8cb1621b..0ef42b79 100644
++--- a/libknet/links.c
+++++ b/libknet/links.c
++@@ -105,7 +105,7 @@ int knet_link_set_config(knet_handle_t knet_h, knet_node_id_t host_id, uint8_t l
++ {
++ 	int savederrno = 0, err = 0, i, wipelink = 0, link_idx;
++ 	struct knet_host *host, *tmp_host;
++-	struct knet_link *link;
+++	struct knet_link *link = NULL;
++ 
++ 	if (!_is_valid_handle(knet_h)) {
++ 		return -1;
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-extended/kronosnet/kronosnet_1.22.bb b/meta-networking/recipes-extended/kronosnet/kronosnet_1.22.bb
+index ad0a00e78..0b0bc2945 100644
+--- a/meta-networking/recipes-extended/kronosnet/kronosnet_1.22.bb
++++ b/meta-networking/recipes-extended/kronosnet/kronosnet_1.22.bb
+@@ -14,6 +14,7 @@ DEPENDS = "doxygen-native libqb-native libxml2-native bzip2 libqb libxml2 libnl
+ SRCREV = "0123ecebce0ad6aba3cdb320027192e15fd71e23"
+ SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1 \
+            file://0001-libknet-tests-Correct-include-path-for-poll.h.patch \
++           file://0001-links.c-Fix-build-with-gcc-12.patch \
+            "
  
--SRC_URI[sha256sum] = "319f5e3e77beb6ab3b4166f699d9dafd59141487bd1a07675fd01af6483211a4"
-+SRC_URI[sha256sum] = "9232b3e3d967b956c5f96f3dcd82f1157f88aad18939d1b8f26c870bc15c5938"
- 
- PYPI_PACKAGE = "xmlschema"
- inherit pypi setuptools3
+ UPSTREAM_CHECK_URI = "https://github.com/kronosnet/kronosnet/releases"
 -- 
 2.25.1
 
