@@ -1,89 +1,83 @@
-Return-Path: <jacob.kroon@gmail.com>
+Return-Path: <matt@madison.systems>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CBB6FC43334
-	for <webhook@archiver.kernel.org>; Thu,  9 Jun 2022 10:03:11 +0000 (UTC)
-Received: from mail-lj1-f179.google.com (mail-lj1-f179.google.com
- [209.85.208.179])
- by mx.groups.io with SMTP id smtpd.web11.9351.1654768984231291813
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D50FFC433EF
+	for <webhook@archiver.kernel.org>; Thu,  9 Jun 2022 10:14:11 +0000 (UTC)
+Received: from mail-lj1-f175.google.com (mail-lj1-f175.google.com
+ [209.85.208.175])
+ by mx.groups.io with SMTP id smtpd.web10.9339.1654769641506205086
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Jun 2022 03:03:04 -0700
+ Thu, 09 Jun 2022 03:14:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=lgKfZq/6;
- spf=pass (domain: gmail.com, ip: 209.85.208.179,
- mailfrom: jacob.kroon@gmail.com)
-Received: by mail-lj1-f179.google.com with SMTP id y15so20153343ljc.0
+ dkim=pass header.i=@madison.systems header.s=google header.b=ZeMl2F5p;
+ spf=pass (domain: madison.systems, ip: 209.85.208.175,
+ mailfrom: matt@madison.systems)
+Received: by mail-lj1-f175.google.com with SMTP id c30so9010774ljr.9
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Jun 2022 03:03:03 -0700 (PDT)
+ Thu, 09 Jun 2022 03:14:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :references:from:in-reply-to:content-transfer-encoding;
-        bh=jIWS/sN/DVgUXn0KpdZoaZybY6e+O5OuSVrxknby1bg=;
-        b=lgKfZq/6iq4X2n1IITP6cUF7+T5BmODQ10l6SLoyLS5HJ1KWizADl9pd35+kgy6AeM
-         +MT3WzJa/pxaQg3PXBMlx53ClTlTj/6He8VaZs5G3QUN6JKC2b2tMDRAbWXjzIpXHxnM
-         Q6QFOS1h4wUakr0k3gYSLcYJydrFDciYgMqgqOuRbp+xQAbrTFq2MRm38TEe8GRHUbn3
-         I8vGZxnz2qDz8sJP651deWYe9/+DwlAsDGls1BJdsjSHeb3XyxOjC5ZyBnhT4n1eaJCn
-         F1MSlr2q6FBSOp9HnygQt4VWfGclOb42yueqpoMctUyhdrRzvDmyMFien3EcZu+KtLII
-         5IVg==
+        d=madison.systems; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=j313MVm+1Q79YdvTv1UDyJZ+GprcsL5X35EU7xYu9rM=;
+        b=ZeMl2F5pLxY3sw1z5b0B7qUOvhi6knIbIQrKFf3fVD1PIaoR1ymg2HpJTuA1knscUm
+         Ff9PRWjWGlLL+5smiMbgqAPTxqSKPiLRlX+Bj4KP4xIdSkbooigNs1A2QngK5+A7jZ/2
+         hZK8rBpjJDat/45OltNFqBP+uB8pbzXeLSHUhA0+Hxq6zieNcSaI/Cc9RBiR7mko0Y8T
+         JqwpGUIPAPFwseEw6AlXgpHC6RI+VXewORPYSEZWlUcTbhoIxli2Mc2cHhb/1ofvmZ0z
+         1HUYuwZXL+DjX/fd77C8NMC5tCePmuA0atv65GeuZRUfN/xf1SULudgA6A27CoT4K9q1
+         76nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=jIWS/sN/DVgUXn0KpdZoaZybY6e+O5OuSVrxknby1bg=;
-        b=HbWUpIV3gcUL1eTSlPZweUB6uQoXktlYEx4XyWgMt6IAAZzb/k4MJ3MVAwLF9eBb0Z
-         jB6vmzTDu9gNQl0022J/DRJSdZhrbzdNPjIVgVUx5nnfdPMRcjXHqOv2vaYmI/zymszC
-         4febPtyn7SfMp6xwlyA+44nBbyLvZeXz+yu/buoopUN8i/3biguzAjvVrIuvpis2sDVT
-         bMEo8ZVyziOK5ku6r/s7tTkOl5gHnNQu03+7BPpQJlemACzeNnItxFWk9KcuEPL/R9zB
-         5N3Io2rN2hElBrHfr5dqlfYPq+qQWm5QAKKAfQUbL104Tlfa36JZOyIW/NpoNLtR8D1x
-         3ubw==
-X-Gm-Message-State: AOAM5302thqxqp51b4vkOgKVVDu3kiWzOkkWi0K7REmlvuZcrs3+R39v
-	YFa5KeaPtLQLIw3VVA+jjdmWV6rdopsHJA==
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=j313MVm+1Q79YdvTv1UDyJZ+GprcsL5X35EU7xYu9rM=;
+        b=BmmBueUYDjRCTQi2EANoLrrBGZNHQ1wM4PQf4V6nJZN2MluGvff+QW+mgghlP3h1Ou
+         JfSmWl53/n+1zDt7cXfPiLwwTNAObh/YQ8+8wlzV759VWfA6E52oW1nDjwZfZsSqRRAo
+         fdHIdqq/z47VzjVCN0Q621XyMMdfHGpKr42+Sa5RUTiSbCbzW2vcdfAkLBFn/JdiX0we
+         C8TIpFkbPqMtbSEM2UYmvYQzZjF4orroP9RkR/2sdzKtIw0YKNottzt2GbSLB8zMfkYi
+         m75ufUA8pdgsRvSp2kV/mHFl3zc+MRVM6LHgH/PxrtgM4kc/zoccNh9LlqeMmxQjdPXH
+         HteA==
+X-Gm-Message-State: AOAM5322rrVL50t82SSOorhNGL6fOKx/V/haoamB713ABuELfvlW4zPq
+	sOgjWLxFIuN+Zps5bC81rNvlwZX6E2RlD+8GDa8Dzg==
 X-Google-Smtp-Source: 
- ABdhPJxthVsXjxJAJMbzf6g80OhONpkHOapD1s8rqYOUROl4oWsAv04EA4uOiQLBrIVOCP9Am1zarA==
-X-Received: by 2002:a2e:9d09:0:b0:253:e189:5a44 with SMTP id
- t9-20020a2e9d09000000b00253e1895a44mr53776597lji.225.1654768982272;
-        Thu, 09 Jun 2022 03:03:02 -0700 (PDT)
-Received: from [192.168.10.102] (89-253-118-72.customers.ownit.se.
- [89.253.118.72])
-        by smtp.gmail.com with ESMTPSA id
- t28-20020a05651c205c00b00253b24a90b6sm3659380ljo.17.2022.06.09.03.03.01
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 09 Jun 2022 03:03:01 -0700 (PDT)
-Message-ID: <bd2ba09c-82f3-dd29-c839-ad6926abe42b@gmail.com>
-Date: Thu, 9 Jun 2022 12:03:00 +0200
+ ABdhPJxzaVkNTZ6nbTltAcf3c8GZO0pokSesB6+UVBag9aeJMi+3QXt7oSjZl5rezn9YssSdGTU7sJ62cgTf+VG36CM=
+X-Received: by 2002:a2e:9941:0:b0:247:dce8:b0ec with SMTP id
+ r1-20020a2e9941000000b00247dce8b0ecmr60422013ljj.404.1654769639464; Thu, 09
+ Jun 2022 03:13:59 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.10.0
-Subject: Re: [OE-core] [meta-java] icedtea7-native build fails on kirkstone
- and in master
-Content-Language: en-US
-To: Bartosz Golaszewski <brgl@bgdev.pl>,
- openembedded-devel <openembedded-devel@lists.openembedded.org>,
- Henning Heinold <henning@itconsulting-heinold.de>,
- Otavio Salvador <otavio@ossystems.com.br>,
- Richard Leitner <richard.leitner@skidata.com>
 References: 
  <CAMRc=Md3LRW3OZ-AOkG5g1iNrH_k_gQdP3y03cKahgMN7aXF0A@mail.gmail.com>
-From: Jacob Kroon <jacob.kroon@gmail.com>
 In-Reply-To: 
  <CAMRc=Md3LRW3OZ-AOkG5g1iNrH_k_gQdP3y03cKahgMN7aXF0A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+From: Matt Madison <matt@madison.systems>
+Date: Thu, 9 Jun 2022 03:13:48 -0700
+Message-ID: 
+ <CAGgRHJqubBN6mq6PxVMre98Xj5x_WnKZJywYwhM-0HA1ZdbiAA@mail.gmail.com>
+Subject: Re: [OE-core] [meta-java] icedtea7-native build fails on kirkstone
+ and in master
+To: Bartosz Golaszewski <brgl@bgdev.pl>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Henning Heinold <henning@itconsulting-heinold.de>,
+ Otavio Salvador <otavio@ossystems.com.br>,
+	Richard Leitner <richard.leitner@skidata.com>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Jun 2022 10:03:11 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Jun 2022 10:14:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97464
+ https://lists.openembedded.org/g/openembedded-devel/message/97465
 
-On 6/9/22 11:28, Bartosz Golaszewski wrote:
+(Dropping oe-core and leaving openembedded-devel, as that's the right
+list for this)
+
+On Thu, Jun 9, 2022 at 2:28 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+>
 > Hi!
-> 
+>
 > I'm trying to build java support with the following configuration:
-> 
+>
 > Build Configuration:
 > BB_VERSION           = "2.0.0"
 > BUILD_SYS            = "x86_64-linux"
@@ -98,20 +92,44 @@ On 6/9/22 11:28, Bartosz Golaszewski wrote:
 > meta-poky            = "kirkstone:45d7615dfef8093a2467d52ca1130e62db6a1187"
 > meta-oe              = "kirkstone:fcc7d7eae82be4c180f2e8fa3db90a8ab3be07b7"
 > meta-java            = "kirkstone:1a8059f6b257ebe6fcae6416e499784d976afd24"
-> 
+>
 > ---
-> 
+>
 > PREFERRED_PROVIDER_virtual/java-initial-native = "cacao-initial-native"
 > PREFERRED_PROVIDER_virtual/java-native = "jamvm-native"
 > PREFERRED_PROVIDER_virtual/javac-native = "ecj-bootstrap-native"
-> 
+>
 > ---
-> 
+>
 > The build fails for icedtea7-native but it's hard to tell why exactly
 > from the logs. Here is the full output: https://pastebin.com/3dRt6J0Y
-> 
+
+I ran into this recently, too, after upgrading Ubuntu to 22.04.  Near
+as I can tell, there's a bug in the dynamic linker in glibc 2.35 that
+causes a segfault when it's invoked through ldd in some cases. One of
+my colleagues that uses Manjaro for his development host also saw
+this, and it, too, had glibc 2.35, so I think that's the common
+factor.
+
+I worked around the problem by disabling the ldd checks with
+
+EXTRA_OEMAKE:append = " LDD=:"
+
+in a bbappend.  This isn't specific to kirkstone, btw; my builds have
+been dunfell-based.
+
+The ldd checks in the makefiles don't seem particularly useful except
+to the JDK developers, so turning them off didn't seem too terrible.
+
+I see at least one bug open in the glibc bugzilla for something that
+looks similar to this problem, but apparently not easily reproducible
+with a small test case. I haven't had time to look into it further.
+
+-Matt
+
+>
 > It seems to be failing here:
-> 
+>
 > | Checking for mapfile use in:
 > /home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build-boot/lib/amd64/libmanagement.so
 > | Library loads for:
@@ -134,33 +152,18 @@ On 6/9/22 11:28, Bartosz Golaszewski wrote:
 > '/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot'
 > | make[1]: *** [Makefile:244: build_product_image] Error 2
 > | make: *** [Makefile:2252: stamps/icedtea-boot.stamp] Error 2
-> 
+>
 > But not sure why.
-> 
+>
 > Thanks in advance for any help.
-
 > Bart
-> 
-> 
-> 
+>
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
 > View/Reply Online (#166766): https://lists.openembedded.org/g/openembedded-core/message/166766
-> Mute This Topic: https://lists.openembedded.org/mt/91641852/4454410
+> Mute This Topic: https://lists.openembedded.org/mt/91641852/3618418
 > Group Owner: openembedded-core+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-core/unsub [jacob.kroon@gmail.com]
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-core/unsub [matt@madison.systems]
 > -=-=-=-=-=-=-=-=-=-=-=-
-> 
-
-I gave up building icedtea7-native on my Fedora 36 system due to first:
-
-https://sourceware.org/bugzilla/show_bug.cgi?id=28868
-
-That one is fixed now, but then I ran into:
-
-https://mail.openjdk.java.net/pipermail/distro-pkg-dev/2022-May/042638.html
-
-so for now I'm using podman for building in a Fedora 35 container image.
-
-Jacob
+>
 
