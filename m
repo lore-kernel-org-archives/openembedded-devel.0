@@ -1,211 +1,184 @@
-Return-Path: <mingli.yu@windriver.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 109BEC433EF
-	for <webhook@archiver.kernel.org>; Thu,  9 Jun 2022 10:58:52 +0000 (UTC)
-Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web09.11779.1654772324044790186
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 144F9C433EF
+	for <webhook@archiver.kernel.org>; Thu,  9 Jun 2022 14:14:03 +0000 (UTC)
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com
+ [209.85.218.42])
+ by mx.groups.io with SMTP id smtpd.web09.13846.1654784034129620320
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Jun 2022 03:58:44 -0700
+ Thu, 09 Jun 2022 07:13:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
- domain name (domain: windriver.com, ip: 147.11.146.13,
- mailfrom: mingli.yu@windriver.com)
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
- [147.11.82.252])
-	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 259AwgMf019629
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 9 Jun 2022 03:58:42 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Thu, 9 Jun 2022 03:58:41 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Thu, 9 Jun 2022 03:58:41 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] s-nail: Fix build with gcc-12
-Date: Thu, 9 Jun 2022 18:58:40 +0800
-Message-ID: <20220609105840.2259201-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@bgdev-pl.20210112.gappssmtp.com header.s=20210112
+ header.b=osjiOPqS;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.218.42,
+ mailfrom: brgl@bgdev.pl)
+Received: by mail-ej1-f42.google.com with SMTP id n10so47779082ejk.5
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 09 Jun 2022 07:13:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=b0b6aR1q34+6252+UytqVv8KoUF6tr0xlZ3hsGbpRyA=;
+        b=osjiOPqS79VRRcVBMpSipA6xFnISpHsp1wcIKN+2Dw/JwiKIjWvvI9j/j9jaDiswPv
+         P3dfN/Fg3bN8Xf1aSJkzUblQYOKsIqsSunTnBrSkH/lAk4eMMKLyJnriPE9lcN2t4v1K
+         KeBJ6YAcpXfHgGG5Hp6XRH/OBeiPe3PpIsTpVZW2ApUaseZlCUjP0FIITfN7SC1quCG0
+         xvQdGO/bmfDA/JvXy56bjiv1uHVK8bi9jRoFblYrFTsh01pyA8aWsA9h9rJctAoB7Ae0
+         SkljOVuAoF5GkdDpYANthV8vPKiKkHTeO6Ky8hfUONZV/uuDOenQnO8YUAVPOoB0j5TM
+         fNYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=b0b6aR1q34+6252+UytqVv8KoUF6tr0xlZ3hsGbpRyA=;
+        b=rPlhLjN89K6mmOPILECLH0Md4Hy8Qrduw3E6jaacqvQyw9p3UwkiRRyV/SQe8bk6b2
+         krIoRXQf3+h8O5EndjhJWOgjS6Mfx8cSlBJ1A36Dq9dkq+SWJJxzz4qTh6c1KJ0f5gzQ
+         Te+6WPoBDqtl60haNhakYwZkkAd1VVIE9Xp+HhkA0j2D9u60sHVCdM9ljigp/9+F6jk6
+         xhmdoah+Nxd7+VcdMq+ifKPkkGARejj++GWOQtRXZ9w8jR7aOgrnZowsZ4LLm11vRxmQ
+         shhB6+JYKbeJ2PFNe/ZhL2RJFtuxpdWDFijT/6k5PBsKPZXUHvFu656PyLYLm/8EXCpF
+         VBIA==
+X-Gm-Message-State: AOAM533oG+OgjK2BxPZnWTGTnoP6Q2jEqO4Keefcr9Fm+4bGNS2/vkpq
+	W9iQh43E+1UhIFQskqvea4pZmTT34jcw4qFtbs4BBw==
+X-Google-Smtp-Source: 
+ ABdhPJxGHcvLOD6CAS330oG0hTLmaZoIwootI1wZu7+xTbA6NhVBfcwfsIhDb74alaPaZ0C21ttjCEfJDElJSVNAczY=
+X-Received: by 2002:a17:906:434f:b0:711:eb76:c320 with SMTP id
+ z15-20020a170906434f00b00711eb76c320mr10634647ejm.636.1654784032005; Thu, 09
+ Jun 2022 07:13:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+References: 
+ <CAMRc=Md3LRW3OZ-AOkG5g1iNrH_k_gQdP3y03cKahgMN7aXF0A@mail.gmail.com>
+ <CAGgRHJqubBN6mq6PxVMre98Xj5x_WnKZJywYwhM-0HA1ZdbiAA@mail.gmail.com>
+In-Reply-To: 
+ <CAGgRHJqubBN6mq6PxVMre98Xj5x_WnKZJywYwhM-0HA1ZdbiAA@mail.gmail.com>
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Thu, 9 Jun 2022 16:13:41 +0200
+Message-ID: 
+ <CAMRc=Mf9rbSTNHrx7SLJv-ZX1_ePSA65e-+o_an4NoNmtmZ0tQ@mail.gmail.com>
+Subject: Re: [OE-core] [meta-java] icedtea7-native build fails on kirkstone
+ and in master
+To: matt@madison.systems
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Henning Heinold <henning@itconsulting-heinold.de>,
+ Otavio Salvador <otavio@ossystems.com.br>,
+	Richard Leitner <richard.leitner@skidata.com>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Jun 2022 10:58:52 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Jun 2022 14:14:03 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97466
+ https://lists.openembedded.org/g/openembedded-devel/message/97467
 
-From: Mingli Yu <mingli.yu@windriver.com>
+On Thu, Jun 9, 2022 at 12:14 PM Matt Madison <matt@madison.systems> wrote:
+>
+> (Dropping oe-core and leaving openembedded-devel, as that's the right
+> list for this)
+>
+> On Thu, Jun 9, 2022 at 2:28 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+> >
+> > Hi!
+> >
+> > I'm trying to build java support with the following configuration:
+> >
+> > Build Configuration:
+> > BB_VERSION           = "2.0.0"
+> > BUILD_SYS            = "x86_64-linux"
+> > NATIVELSBSTRING      = "universal"
+> > TARGET_SYS           = "x86_64-poky-linux"
+> > MACHINE              = "qemux86-64"
+> > DISTRO               = "poky"
+> > DISTRO_VERSION       = "4.0.1"
+> > TUNE_FEATURES        = "m64 core2"
+> > TARGET_FPU           = ""
+> > meta
+> > meta-poky            = "kirkstone:45d7615dfef8093a2467d52ca1130e62db6a1187"
+> > meta-oe              = "kirkstone:fcc7d7eae82be4c180f2e8fa3db90a8ab3be07b7"
+> > meta-java            = "kirkstone:1a8059f6b257ebe6fcae6416e499784d976afd24"
+> >
+> > ---
+> >
+> > PREFERRED_PROVIDER_virtual/java-initial-native = "cacao-initial-native"
+> > PREFERRED_PROVIDER_virtual/java-native = "jamvm-native"
+> > PREFERRED_PROVIDER_virtual/javac-native = "ecj-bootstrap-native"
+> >
+> > ---
+> >
+> > The build fails for icedtea7-native but it's hard to tell why exactly
+> > from the logs. Here is the full output: https://pastebin.com/3dRt6J0Y
+>
+> I ran into this recently, too, after upgrading Ubuntu to 22.04.  Near
+> as I can tell, there's a bug in the dynamic linker in glibc 2.35 that
+> causes a segfault when it's invoked through ldd in some cases. One of
+> my colleagues that uses Manjaro for his development host also saw
+> this, and it, too, had glibc 2.35, so I think that's the common
+> factor.
+>
+> I worked around the problem by disabling the ldd checks with
+>
+> EXTRA_OEMAKE:append = " LDD=:"
+>
+> in a bbappend.  This isn't specific to kirkstone, btw; my builds have
+> been dunfell-based.
+>
+> The ldd checks in the makefiles don't seem particularly useful except
+> to the JDK developers, so turning them off didn't seem too terrible.
+>
+> I see at least one bug open in the glibc bugzilla for something that
+> looks similar to this problem, but apparently not easily reproducible
+> with a small test case. I haven't had time to look into it further.
+>
 
-Backport 2 patches to fix the below build failure when
-debug build is enabled.
-Add DEBUG_BUILD = "1" in conf/local.conf.
- $ bitbake s-nail
-  | /build/tmp-glibc/work/corei7-64-wrs-linux/s-nail/14.9.24-r0/recipe-sysroot-native/usr/bin/x86_64-wrs-linux/../../libexec/x86_64-wrs-linux/gcc/x86_64-wrs-linux/12.1.0/ld: mx-047.o: in function `a_nm_alias_expand':
-  | /usr/src/debug/s-nail/14.9.24-r0/s-nail-14.9.24/src/mx/names.c:308: undefined reference to `su_cs_dict_lookup'
-  | /build/tmp-glibc/work/corei7-64-wrs-linux/s-nail/14.9.24-r0/recipe-sysroot-native/usr/bin/x86_64-wrs-linux/../../libexec/x86_64-wrs-linux/gcc/x86_64-wrs-linux/12.1.0/ld: mx-028.o: in function `mx_fs_linepool_book':
-  | /usr/src/debug/s-nail/14.9.24-r0/s-nail-14.9.24/src/mx/file-streams.c:1036: undefined reference to `su_mem_get_can_book'
-  collect2: error: ld returned 1 exit status
+Thanks! It does indeed help with this specific issue.
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- ...INLINE-eh-no-give-up-share-detection.patch | 68 +++++++++++++++++++
- ...LINE-gcc-only-GNU-specifics-after-Og.patch | 45 ++++++++++++
- .../recipes-extended/s-nail/s-nail_14.9.24.bb |  5 +-
- 3 files changed, 117 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-extended/s-nail/files/0001-su_INLINE-eh-no-give-up-share-detection.patch
- create mode 100644 meta-oe/recipes-extended/s-nail/files/0001-su_INLINE-gcc-only-GNU-specifics-after-Og.patch
+Unfortunately, it still fails in a different way for me:
 
-diff --git a/meta-oe/recipes-extended/s-nail/files/0001-su_INLINE-eh-no-give-up-share-detection.patch b/meta-oe/recipes-extended/s-nail/files/0001-su_INLINE-eh-no-give-up-share-detection.patch
-new file mode 100644
-index 000000000..2afaaac01
---- /dev/null
-+++ b/meta-oe/recipes-extended/s-nail/files/0001-su_INLINE-eh-no-give-up-share-detection.patch
-@@ -0,0 +1,68 @@
-+From 9db4c0f6bc0dd11c77b54296fce6b8afe18f4325 Mon Sep 17 00:00:00 2001
-+From: Steffen Nurpmeso <steffen@sdaoden.eu> 
-+Date: Thu, 9 Jun 2022 18:26:38 +0800
-+Subject: [PATCH] su_INLINE: eh no; give up, share detection with clang but for
-+ a thing
-+
-+Upstream-Status: Backport[https://git.sdaoden.eu/browse/s-nail.git/commit/?id=de2a44c393a39d80ddf12154aec94cace84b19c1]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ include/su/code.h | 34 +++++++++-------------------------
-+ 1 file changed, 9 insertions(+), 25 deletions(-)
-+
-+diff --git a/include/su/code.h b/include/su/code.h
-+index 9683f4a..c7a2af3 100644
-+--- a/include/su/code.h
-++++ b/include/su/code.h
-+@@ -308,29 +308,8 @@ do{\
-+ # ifdef DOXYGEN
-+ #  define su_INLINE inline
-+ #  define su_SINLINE inline
-+-# elif su_CC_GCC
-+-#  if !su_CC_VCHECK_GCC(3, 1)
-+-#   define su_INLINE extern __inline__
-+-#   define su_SINLINE static __inline__
-+-#  elif !defined __GNUC_GNU_INLINE__  /*4.1.3; !su_CC_VCHECK_GCC(4, 2)*/
-+-#   define su_INLINE extern __inline __attribute__((always_inline))
-+-#   define su_SINLINE static __inline __attribute__((always_inline))
-+-   /* gcc 8.3.0 bug: does not gracefully inline with -Os
-+-    * gcc 12.1.0 bug: ditto, -Og
-+-    * Thus: always gcc-specific! */
-+-#  elif 1 /*!defined __OPTIMIZE__ || \
-+-      !defined __STDC_VERSION__ || __STDC_VERSION__ +0 < 199901L*/
-+-#   define su_INLINE extern __inline __attribute__((gnu_inline))
-+-#   define su_SINLINE static __inline __attribute__((gnu_inline))
-+-#  elif !defined NDEBUG || !defined __OPTIMIZE__
-+-#   define su_INLINE static inline
-+-#   define su_SINLINE static inline
-+-#  else
-+-#   define su_INLINE inline
-+-#   define su_SINLINE static inline
-+-#  endif
-+-# elif su_CC_CLANG || su_CC_PCC
-+-#  if defined __STDC_VERSION__ && __STDC_VERSION__ +0 >= 199901L
-++# elif su_CC_CLANG || su_CC_GCC || su_CC_PCC
-++#  if defined __STDC_VERSION__ && __STDC_VERSION__ +0 >= 199901l
-+ #   if !defined NDEBUG || !defined __OPTIMIZE__
-+ #    define su_INLINE static inline
-+ #    define su_SINLINE static inline
-+@@ -340,8 +319,13 @@ do{\
-+ #    define su_SINLINE static inline __attribute__((always_inline))
-+ #   endif
-+ #  else
-+-#   define su_INLINE static __inline
-+-#   define su_SINLINE static __inline
-++#   if su_CC_VCHECK_GCC(3, 1)
-++#    define su_INLINE static __inline __attribute__((always_inline))
-++#    define su_SINLINE static __inline __attribute__((always_inline))
-++#   else
-++#    define su_INLINE static __inline
-++#    define su_SINLINE static __inline
-++#   endif
-+ #  endif
-+ # else
-+ #  define su_INLINE static /* TODO __attribute__((unused)) alike? */
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-extended/s-nail/files/0001-su_INLINE-gcc-only-GNU-specifics-after-Og.patch b/meta-oe/recipes-extended/s-nail/files/0001-su_INLINE-gcc-only-GNU-specifics-after-Og.patch
-new file mode 100644
-index 000000000..e011f5c71
---- /dev/null
-+++ b/meta-oe/recipes-extended/s-nail/files/0001-su_INLINE-gcc-only-GNU-specifics-after-Og.patch
-@@ -0,0 +1,45 @@
-+From 5429b9e343c808951b1418d8626e544c9dcb28de Mon Sep 17 00:00:00 2001
-+From: Steffen Nurpmeso <steffen@sdaoden.eu>
-+Date: Thu, 9 Jun 2022 18:06:04 +0800
-+Subject: [PATCH] su_INLINE: gcc: only GNU specifics after -Og
-+
-+Upstream-Status: Backport[https://git.sdaoden.eu/browse/s-nail.git/commit/?id=c5544b66c3b4b2e161166562349908a07e324b38]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ include/su/code.h | 17 +++++++++--------
-+ 1 file changed, 9 insertions(+), 8 deletions(-)
-+
-+diff --git a/include/su/code.h b/include/su/code.h
-+index 4d552c1..9683f4a 100644
-+--- a/include/su/code.h
-++++ b/include/su/code.h
-+@@ -309,16 +309,17 @@ do{\
-+ #  define su_INLINE inline
-+ #  define su_SINLINE inline
-+ # elif su_CC_GCC
-+-   /* After lots of trouble with OpenBSD/gcc 4.2.1 and SunOS/gcc 3.4.3 */
-+-#  if !su_CC_VCHECK_GCC(3, 2) /* Unsure: only used C++ at that time */
-+-#   define su_INLINE extern __inline
-+-#   define su_SINLINE static __inline
-+-#  elif !su_CC_VCHECK_GCC(4, 3)
-++#  if !su_CC_VCHECK_GCC(3, 1)
-++#   define su_INLINE extern __inline__
-++#   define su_SINLINE static __inline__
-++#  elif !defined __GNUC_GNU_INLINE__  /*4.1.3; !su_CC_VCHECK_GCC(4, 2)*/
-+ #   define su_INLINE extern __inline __attribute__((always_inline))
-+ #   define su_SINLINE static __inline __attribute__((always_inline))
-+-   /* xxx gcc 8.3.0 bug: does not truly inline with -Os */
-+-#  elif !su_CC_VCHECK_GCC(8, 3) || !defined __OPTIMIZE__ ||\
-+-      !defined __STDC_VERSION__ || __STDC_VERSION__ +0 < 199901L
-++   /* gcc 8.3.0 bug: does not gracefully inline with -Os
-++    * gcc 12.1.0 bug: ditto, -Og
-++    * Thus: always gcc-specific! */
-++#  elif 1 /*!defined __OPTIMIZE__ || \
-++      !defined __STDC_VERSION__ || __STDC_VERSION__ +0 < 199901L*/
-+ #   define su_INLINE extern __inline __attribute__((gnu_inline))
-+ #   define su_SINLINE static __inline __attribute__((gnu_inline))
-+ #  elif !defined NDEBUG || !defined __OPTIMIZE__
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-extended/s-nail/s-nail_14.9.24.bb b/meta-oe/recipes-extended/s-nail/s-nail_14.9.24.bb
-index 539f9c3c8..6e004fc90 100644
---- a/meta-oe/recipes-extended/s-nail/s-nail_14.9.24.bb
-+++ b/meta-oe/recipes-extended/s-nail/s-nail_14.9.24.bb
-@@ -7,7 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=87266591c81260f10221f1f38872d023"
- 
- SRC_URI = "https://ftp.sdaoden.eu/${BP}.tar.xz \
-            file://make-errors.patch \
--           file://0001-make.rc-set-VAL_MTA.patch"
-+           file://0001-make.rc-set-VAL_MTA.patch \
-+           file://0001-su_INLINE-gcc-only-GNU-specifics-after-Og.patch \
-+           file://0001-su_INLINE-eh-no-give-up-share-detection.patch \
-+"
- SRC_URI[sha256sum] = "2714d6b8fb2af3b363fc7c79b76d058753716345d1b6ebcd8870ecd0e4f7ef8c"
- 
- DEPENDS = "coreutils-native"
--- 
-2.25.1
+| make[5]: Leaving directory
+'/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/jdk/make/sun/awt'
+| make[5]: Entering directory
+'/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/jdk/make/sun/xawt'
+| /bin/sh: 1: free: not found
+| /bin/mkdir -p
+/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build-boot/tmp/sun/sun.awt.X11/xawt/sun/awt/X11/generator
+| rm -f /home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build-boot/tmp/sun/sun.awt.X11/xawt/sun/awt/X11/generator/WrapperGenerator.class
+| /home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/bootstrap/jdk1.6.0/bin/javac
+-J-XX:ThreadStackSize=1536 -J-XX:-PrintVMOptions
+-J-XX:+UnlockDiagnosticVMOptions -J-XX:-LogVMOutput -J-Xmx384m
+-Xlint:-path -encoding ascii -source 6 -target 6
+-XDignore.symbol.file=true -bootclasspath
+/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/bootstrap/jdk1.6.0/jre/lib/rt.jar
+-d /home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build-boot/tmp/sun/sun.awt.X11/xawt/sun/awt/X11/generator
+../../../src/solaris/classes/sun/awt/X11/generator/WrapperGenerator.java
+| Annotation processing got disabled, since it requires a 1.6 compliant JVM
+| ----------
+| 1. ERROR in ../../../src/solaris/classes/sun/awt/X11/generator/WrapperGenerator.java
+(at line 0)
+| /*
+| ^
+| Inconsistent classfile encountered: The undefined type parameter E
+is referenced from within Collection
+| ----------
+| 1 problem (1 error)make[5]: Leaving directory
+'/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/jdk/make/sun/xawt'
+| make[5]: *** [Makefile:280:
+/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build-boot/tmp/sun/sun.awt.X11/xawt/sun/awt/X11/generator/WrapperGenerator.class]
+Error 255
+| make[4]: Leaving directory
+'/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/jdk/make/sun'
+| make[4]: *** [Makefile:94: all] Error 1
+| make[3]: Leaving directory
+'/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/jdk/make'
+| make[3]: *** [Makefile:247: all] Error 1
+| make[2]: Leaving directory
+'/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot'
+| make[2]: *** [make/jdk-rules.gmk:79: jdk-build] Error 2
+| make[1]: Leaving directory
+'/home/brgl/workspace/target-build-yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot'
+| make[1]: *** [Makefile:244: build_product_image] Error 2
+| make: *** [Makefile:2252: stamps/icedtea-boot.stamp] Error 2
+| ERROR: oe_runmake failed
+| WARNING: exit code 1 from a shell command.
 
+Bart
 
