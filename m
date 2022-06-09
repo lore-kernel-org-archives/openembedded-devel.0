@@ -2,72 +2,72 @@ Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF32FC43334
-	for <webhook@archiver.kernel.org>; Thu,  9 Jun 2022 20:39:44 +0000 (UTC)
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com
- [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web09.18789.1654807181586507035
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A791C43334
+	for <webhook@archiver.kernel.org>; Thu,  9 Jun 2022 20:42:05 +0000 (UTC)
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com
+ [209.85.218.45])
+ by mx.groups.io with SMTP id smtpd.web09.18812.1654807316647830786
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Jun 2022 13:39:41 -0700
+ Thu, 09 Jun 2022 13:41:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Ph26ocDa;
- spf=pass (domain: gmail.com, ip: 209.85.218.51,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=WhjOhcVF;
+ spf=pass (domain: gmail.com, ip: 209.85.218.45,
  mailfrom: jan.vermaete@gmail.com)
-Received: by mail-ej1-f51.google.com with SMTP id bg6so29938749ejb.0
+Received: by mail-ej1-f45.google.com with SMTP id gl15so35879640ejb.4
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Jun 2022 13:39:41 -0700 (PDT)
+ Thu, 09 Jun 2022 13:41:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=6V6P1UtXBwYHTVB/QIXud/VMzd+LY1L/Ig0h/9C6jg4=;
-        b=Ph26ocDaDzqxFM7QtvQJ/x0MaZv5Pxetpb1oPFzTJ94fqLaALs0GL9cWZdoNavXqvP
-         XeAxgE1RvPRTcPGcJWa93b0uwLo0VcLzGKgStRAq+d7sYCwNqZsRVrx+kOvzxvKFKYFU
-         cbNngt5JjpLOpAfJqZ4qaJRgm5yagXifyQN00aH7vtYnLT8iEVjM7qyEFKk9GBrqn5Hy
-         vJKe4BnqUCLRIEjzqG5uRxeEB3twvURMMKFDlDXQBzpVp9qg6s8GLUVuJpszriHCgqDs
-         tlIc+iR4dMjVr1k/4h7xMA6/iDgjsys9ku6MG+Mmnpzu+oNXO06NNhy8aH52jhdsR8d1
-         c+2A==
+        bh=tGWEnLcsmhHugUeJIZPeTJNgijfSdFr/XEqb9sQdbJo=;
+        b=WhjOhcVFX4jy5mOG8o125LugUMF6/0QixyG2/VTZhry9JRqYoSaxLmXop+etqW/w6M
+         2gpvXPQxCjlcpB2v0BTo6gxG/AXrHxK+qNsKnYLihnTlBx7ZkmoNELgS6Xc0mum9b5Kw
+         PN6rV7v1UsaR2pEjzOI4ow6qGWZHRQefamDhDj/3Pra+5RUBy/YfBpFgLfK9NbrX/fSo
+         kYRIZ8I+Yrh3clk9Wgz1tu8Ml1bccuai3kY7iAhRe7PmpxGmhO2fFVsN7EZ0WAuoH7P8
+         vRIoELBH0EFQlCJZVb9pZWtZeEDOmp01v3Aid+5pWBxDPE0hqC1X3TnIsroimLK2Yw2e
+         ebtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=6V6P1UtXBwYHTVB/QIXud/VMzd+LY1L/Ig0h/9C6jg4=;
-        b=sW8X7KFQk2Cf2iDE/CdilmG1lx76z4B954pHzHq+RkvXC1DsuXr0HVDwsGRwiR/K2Y
-         eiD65d6//A8HaWNYDAPpHPasPZ3jdgp7mC+zeKbwx1xWYqrzYxjpxPQusB78W7TB0Kf1
-         kGSm9gKp59jwAuwCR5+Q+6KUkvywt1jlpdAFai8/xHyPzzEf1fmVyDR4qijAsMwj2rxL
-         X+AkJyVeqpXhm685kMbXvE2A8/Q1raJ81/KeA2msODhkSkGxJ8yZqV7t5uSc86387XxD
-         FRONTU2BPmhUQVFgcCFyh1kTg/YjiykuRJM5mEOCuMcpJ4FbiGGiOtBIsxvJD1S6c3Aj
-         epDQ==
-X-Gm-Message-State: AOAM531SLdTFlhCXWL4KQD2BsKrZC5A099fXpBb4a6PQSPNE2fNbPnZB
-	opOz+lQXZuFdiC8yt/Jo02ggCsYVK0pQLA==
+        bh=tGWEnLcsmhHugUeJIZPeTJNgijfSdFr/XEqb9sQdbJo=;
+        b=ZYdNU9NT4TVzuezWCwqlfpJ+tpN7TQgjF08IFVVFYaA7O6Izz7L8DCQVRMO2U+T9zu
+         aYrvOm0vSMuGdBBtD9cW0iAfHQNnOxsdxhOzTi/68iBZN1GDce61ScOzTwCc2KdC0maA
+         CA6WF9mFbw0wXVGHUBFEgjFFp3d9z+fKyKFeYP0sAibU+fkvzY/FNNrk2ifn01+MI/Pf
+         ijd8CzPdr8J/x+iIUbGd6U6Q+3JIm6y4Y0DhuAPo388PtnIMVfy98v7okfK3grWyxutf
+         gKAeQqvdsHkmhqtdCQlsIMmkr/YJK0OiIkACBmJOrT+Z/6GKRQlLXrD3rBJoFp3n4Dg5
+         k4ag==
+X-Gm-Message-State: AOAM532W6sKz8waICOzNhBR1oRj3NkyWePk7XE4z14u/QX89hpIxM2KC
+	4wByKxzfpL3iQ77/HGfiTW2vtNI+3Mr+GQ==
 X-Google-Smtp-Source: 
- ABdhPJwjSb4t+vic0Xnuhus3gTtnhll2XecyHhzb16F+AfBMMFDijzpJeOBGSPFzmxr8ihYV6204EA==
-X-Received: by 2002:a17:907:1c8d:b0:6f2:eb2:1cd6 with SMTP id
- nb13-20020a1709071c8d00b006f20eb21cd6mr36777486ejc.568.1654807179790;
-        Thu, 09 Jun 2022 13:39:39 -0700 (PDT)
+ ABdhPJzkkU+q6Zamkf5KW2nVGd9llx5mSaDrQ+UpIBnTN9P/d81NmVgIsF+dXZcqtbNND4+rLBv2rw==
+X-Received: by 2002:a17:907:6d15:b0:711:d2d8:4818 with SMTP id
+ sa21-20020a1709076d1500b00711d2d84818mr19291223ejc.336.1654807314915;
+        Thu, 09 Jun 2022 13:41:54 -0700 (PDT)
 Received: from localhost.localdomain (78-20-160-86.access.telenet.be.
  [78.20.160.86])
         by smtp.gmail.com with ESMTPSA id
- gi5-20020a1709070c8500b006feb8cebbbfsm11113868ejc.6.2022.06.09.13.39.39
+ m11-20020a056402050b00b0042dd7e13391sm14977582edv.45.2022.06.09.13.41.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Jun 2022 13:39:39 -0700 (PDT)
+        Thu, 09 Jun 2022 13:41:54 -0700 (PDT)
 From: Jan Vermaete <jan.vermaete@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-webserver][PATCH] netdata: version bump 1.34.1 -> 1.35.0
-Date: Thu,  9 Jun 2022 22:39:21 +0200
-Message-Id: <20220609203921.499175-1-jan.vermaete@gmail.com>
+Subject: [meta-webserver][PATCH v2] netdata: version bump 1.34.1 -> 1.35.0
+Date: Thu,  9 Jun 2022 22:41:41 +0200
+Message-Id: <20220609204141.499283-1-jan.vermaete@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Jun 2022 20:39:44 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Jun 2022 20:42:05 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97468
+ https://lists.openembedded.org/g/openembedded-devel/message/97469
 
-Do not that some collectors (a.k.a. plugins) moved from Python to
+Do note that some collectors (a.k.a. plugins) moved from Python to
 Go.  And Go is not (yet) part of this recipe.
 More info at https://github.com/netdata/netdata/releases/tag/v1.35.0
 under 'Deprecated in this release'
