@@ -2,72 +2,72 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C8516C3F2D4
-	for <webhook@archiver.kernel.org>; Mon, 13 Jun 2022 08:52:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DA2EAC43334
+	for <webhook@archiver.kernel.org>; Mon, 13 Jun 2022 09:00:45 +0000 (UTC)
 Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
  [195.245.230.65])
- by mx.groups.io with SMTP id smtpd.web08.3657.1655110351292744139
+ by mx.groups.io with SMTP id smtpd.web12.3637.1655110843907031198
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Jun 2022 01:52:32 -0700
+ Mon, 13 Jun 2022 02:00:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=gdnJ9pUs;
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=wA9NOtZi;
  spf=pass (domain: fujitsu.com, ip: 195.245.230.65,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1655110349; i=@fujitsu.com;
-	bh=h3/JRpOP+NjaBMmg//BR0/qFdGwH2flOdTcYmQEykEY=;
+	s=170520fj; t=1655110842; i=@fujitsu.com;
+	bh=YeGGbOM2NEcP9QmfeRfCPI4L7d7diSftPGVTA/KMCnU=;
 	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=gdnJ9pUsUoZC08lRGhHIToCcJ7n246i5zoZqyWC0SXZUnXwg/Fgjr6sa8ZesAFQVi
-	 Hwm6kEgnixwG8riJp5VXha4g04zJnLIQZ27/XGOLhXOgSkA58HgyCsJxJycYsu+oUn
-	 lDsIuq/a3QQI0p9qSsK1ildqeu9NQwVDN02T/bi0A38qE0ETZULS0/cjioFP4cl5U6
-	 4wwQYAHFKEtnrk4PBOOVC8RoovkVteN7IXmsIUMAN0ct20RpGnZn3PMaGshYNx3i9I
-	 BHtX3CyygJAk5fkfYwPBIi2ttfiPKhAsWGk6Tf809nTk/4LJW1PgWPRON/8cVKTREk
-	 KpzZ01ZvpifLw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrHIsWRWlGSWpSXmKPExsViZ8ORqHv217I
-  kg+WVFhcPL2V2YPQ4t3EFYwBjFGtmXlJ+RQJrxpG3N1gLFklW3J62k7GBcZ1YFyMXh5DAE0aJ
-  9d8OMkI4F5gkLj29zQbh7GGUeHn2JpDDycEmoCYx/dYNVhBbREBfYunsPcwgNrOAisSL3z3sI
-  LawgIfEuxUHmUBsFgFViZ+9D8B6eQWcJO4/PQ8WlxBQkJjy8D0zRFxQ4uTMJywQcyQkDr54wQ
-  xRoygx+3IzC4RdITFjxjY2CFtN4uq5TcwTGPlnIWmfhaR9ASPTKkarpKLM9IyS3MTMHF1DAwN
-  dQ0NTXWNdQ0tLvcQq3US91FLd8tTiEl1DvcTyYr3U4mK94src5JwUvbzUkk2MwKBMKWY+voNx
-  St9PvUOMkhxMSqK8e78sSxLiS8pPqcxILM6ILyrNSS0+xCjDwaEkwfvoK1BOsCg1PbUiLTMHG
-  CEwaQkOHiURXr/vQGne4oLE3OLMdIjUKUZdjplf2w4wC7Hk5eelSonz2vwEKhIAKcoozYMbAY
-  vWS4yyUsK8jAwMDEI8BalFuZklqPKvGMU5GJWEeT+CTOHJzCuB2/QK6AgmoCM2nlwCckRJIkJ
-  KqoFJ+N3xheXfW8PlFzLt/OfTE/FB+bHI3OB74V8XntUMbRItcb+8f+vrg5tb97v0Cvxre7bx
-  VPrK4NwDnSdKixPvBs8W/F7a+3BlfmZBeYOIkEtLcGDcrn8rz101e3Hp58/7W8JaamIMlHKKN
-  Dm4L95b8sPoiNBkRzUx26VBbsk9U6df3jpVgG3N5RsGQRXuryd/ey477ciiv3fYbCfNTN9v//
-  e88HWWULO7a9XjtZqnPOP6VtnN4vn7Ru3Hz0ofXkmzb70cxM3AZ7blW3OyM9/ugFZm5yOtBx/
-  zMZ/KF33eKsvevmKrCRu7cszKWatKHhSaT7q78abV41tzj603/TurgLdxn4T/noM1U6xL9dyE
-  lFiKMxINtZiLihMB9YFrRVEDAAA=
+	b=wA9NOtZiXx0heZGcSzqHihK44t6Xo87ogcJSXXu+mwS0fTfvoV0BGOLDWd/cT/blh
+	 V6p75vpMnDdakoIXOPX8SbEn92da7CTxiNcbWfq7DC442MiRslv2dOlr5JVc34LQX6
+	 tUSa9xLuFDyk39s3MgDmmvV9yEMATxZMPbFD7C/DDLwHnMfkjJ7xdfSfz6vet1k54z
+	 kBIJj/sKYk5E7R1Cw4ms3ThFU2m/x38nKqL/UAV1SVmRjxcJNcyUNV4wNdKhbi0Dge
+	 e4xcF+cNTD5pqQiHvycxVWU5vkCLlaK063L9s0ndkiY5ypRgK9iBDsG9s0IgE55/de
+	 hd86V5CC0cWtg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrLIsWRWlGSWpSXmKPExsViZ8OxWXfnn2V
+  JBgcWaVlcPLyU2YHR49zGFYwBjFGsmXlJ+RUJrBkt80oKHnJWzN6o3sD4laOLkYtDSOAho8Si
+  fc/YIZyzTBKnJ6xhhHD2MEpc6nwMlOHkYBNQk5h+6wYriC0ioC+xdPYeZhCbWUBF4sXvHrAaY
+  QFbiSPzbjKB2CwCqhIrO/czgti8Ak4SL97dZQGxJQQUJKY8fM8MEReUODnzCQvEHAmJgy9eME
+  PUKErMvtwMVV8hMWPGNjYIW03i6rlNzBMY+WchaZ+FpH0BI9MqRqukosz0jJLcxMwcXUMDA11
+  DQ1NdQ10jA2O9xCrdRL3UUt3y1OISXUO9xPJivdTiYr3iytzknBS9vNSSTYzAkEwpZjy9g3FT
+  30+9Q4ySHExKorx7vyxLEuJLyk+pzEgszogvKs1JLT7EKMPBoSTB6/ALKCdYlJqeWpGWmQOMD
+  5i0BAePkgivHTBGhHiLCxJzizPTIVKnGHU5Zn5tO8AsxJKXn5cqJc677jdQkQBIUUZpHtwIWK
+  xeYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCTMexVkCk9mXgncpldARzABHbHx5BKQI0oSEVJ
+  SDUz6pjOdt+W8f/Pj2LniBA61urzlr5iuxli//n9dIPHOnYzMnF2V304Vr92WtCflVWP15E1m
+  PZnxv2XOLlgRs2Hb6e6Nbrsd+Znv/yvlTo0/s/DZjuWZq7eHT+6YcXmJ43tzhcL/5g7ddvUZk
+  +ZvmsjV63pT92vHi95NNf533h1Zv6fKRHdn3JWn30Ui7BQ5b+/4yhbwIevr/WP35uRs7y2Pvr
+  WW71ar3YL5MlMuHpqyNELz1qktPQZewSr++1c7lBStbPG0CF1QVpO7gi0nbM71M0dKrkdtmzc
+  7bGdYb9Ot90zqIYeuntX7cHWjHLPNXGWGuWG/FT9uWPRW6EiZq5J35dGjNQdsfm3t/dJ957eO
+  ixJLcUaioRZzUXEiAKjL4dxQAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-9.tower-587.messagelabs.com!1655110348!279408!1
-X-Originating-IP: [62.60.8.97]
+X-Msg-Ref: server-19.tower-587.messagelabs.com!1655110841!183482!1
+X-Originating-IP: [62.60.8.179]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.86.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 19867 invoked from network); 13 Jun 2022 08:52:28 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-9.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 13 Jun 2022 08:52:28 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 7A05110019C
+Received: (qmail 27613 invoked from network); 13 Jun 2022 09:00:41 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-19.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 13 Jun 2022 09:00:41 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 0DC4B159
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Jun 2022 09:52:28 +0100 (BST)
+ Mon, 13 Jun 2022 10:00:41 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 6C1A110004E
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id D4FE714C
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Jun 2022 09:52:28 +0100 (BST)
+ Mon, 13 Jun 2022 10:00:40 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 13 Jun 2022 09:52:10 +0100
+ (TLS) id 15.0.1497.32; Mon, 13 Jun 2022 10:00:36 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-webserver] [PATCH] apache2: upgrade 2.4.53 -> 2.4.54
-Date: Mon, 13 Jun 2022 16:51:51 +0800
-Message-ID: <1655110315-25174-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] irssi: upgrade 1.2.3 -> 1.4.1
+Date: Mon, 13 Jun 2022 17:00:16 +0800
+Message-ID: <1655110819-25250-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -78,89 +78,35 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Jun 2022 08:52:35 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Jun 2022 09:00:45 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97480
-
-0004-apache2-log-the-SELinux-context-at-startup.patch
-refresh for new version.
+ https://lists.openembedded.org/g/openembedded-devel/message/97485
 
 Changelog:
-https://downloads.apache.org/httpd/CHANGES_2.4.54
+https://github.com/irssi/irssi/releases/tag/1.4.1
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...-apache2-log-the-SELinux-context-at-startup.patch | 12 +++++-------
- .../apache2/{apache2_2.4.53.bb => apache2_2.4.54.bb} |  2 +-
- 2 files changed, 6 insertions(+), 8 deletions(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.53.bb => apache2_2.4.54.bb} (99%)
+ .../irssi/{irssi_1.2.3.bb => irssi_1.4.1.bb}                   | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/irssi/{irssi_1.2.3.bb => irssi_1.4.1.bb} (81%)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2/0004-apache2-log-the-SELinux-context-at-startup.patch b/meta-webserver/recipes-httpd/apache2/apache2/0004-apache2-log-the-SELinux-context-at-startup.patch
-index 5d8291968..3b080f54f 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2/0004-apache2-log-the-SELinux-context-at-startup.patch
-+++ b/meta-webserver/recipes-httpd/apache2/apache2/0004-apache2-log-the-SELinux-context-at-startup.patch
-@@ -1,4 +1,4 @@
--From 37699e9be04d83c5923644e298f400e077f76e85 Mon Sep 17 00:00:00 2001
-+From e47cc405eadcbe37a579c375e824e20a5c53bfad Mon Sep 17 00:00:00 2001
- From: Paul Eggleton <paul.eggleton@linux.intel.com>
- Date: Tue, 17 Jul 2012 11:27:39 +0100
- Subject: [PATCH] Log the SELinux context at startup.
-@@ -8,13 +8,14 @@ Log the SELinux context at startup.
- Upstream-Status: Inappropriate [other]
+diff --git a/meta-oe/recipes-connectivity/irssi/irssi_1.2.3.bb b/meta-oe/recipes-connectivity/irssi/irssi_1.4.1.bb
+similarity index 81%
+rename from meta-oe/recipes-connectivity/irssi/irssi_1.2.3.bb
+rename to meta-oe/recipes-connectivity/irssi/irssi_1.4.1.bb
+index b0fde5ed1..40ce935ad 100644
+--- a/meta-oe/recipes-connectivity/irssi/irssi_1.2.3.bb
++++ b/meta-oe/recipes-connectivity/irssi/irssi_1.4.1.bb
+@@ -6,8 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=55fdc1113306167d6ea2561404ce02f8"
+ DEPENDS = "glib-2.0 ncurses openssl"
  
- Note: unlikely to be any interest in this upstream
-+
- ---
-  configure.in  |  5 +++++
-  server/core.c | 26 ++++++++++++++++++++++++++
-  2 files changed, 31 insertions(+)
+ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz"
+-SRC_URI[md5sum] = "381d3af259ad15d658be50c0a01f0c28"
+-SRC_URI[sha256sum] = "a647bfefed14d2221fa77b6edac594934dc672c4a560417b1abcbbc6b88d769f"
++SRC_URI[sha256sum] = "6a7692741bba16f3ba6f97cf7246421ac57055dcedcca9a4d21663f8efe47501"
  
- diff --git a/configure.in b/configure.in
--index c799aec..76811e7 100644
-+index ea6cec3..92b74b7 100644
- --- a/configure.in
- +++ b/configure.in
- @@ -491,6 +491,11 @@ getloadavg
-@@ -30,7 +31,7 @@ index c799aec..76811e7 100644
-  [AC_TRY_RUN(#define _GNU_SOURCE
-  #include <unistd.h>
- diff --git a/server/core.c b/server/core.c
--index 3020090..8fef5fd 100644
-+index 4da7209..d3ca25b 100644
- --- a/server/core.c
- +++ b/server/core.c
- @@ -65,6 +65,10 @@
-@@ -43,7 +44,7 @@ index 3020090..8fef5fd 100644
- +
-  /* LimitRequestBody handling */
-  #define AP_LIMIT_REQ_BODY_UNSET         ((apr_off_t) -1)
-- #define AP_DEFAULT_LIMIT_REQ_BODY       ((apr_off_t) 0)
-+ #define AP_DEFAULT_LIMIT_REQ_BODY       ((apr_off_t) 1<<30) /* 1GB */
- @@ -5126,6 +5130,28 @@ static int core_post_config(apr_pool_t *pconf, apr_pool_t *plog, apr_pool_t *pte
-      }
-  #endif
-@@ -73,6 +74,3 @@ index 3020090..8fef5fd 100644
-      return OK;
-  }
-  
---- 
--2.25.1
--
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.53.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.54.bb
-similarity index 99%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.53.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.54.bb
-index 8413f5379..4b0ed2f62 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.53.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.54.bb
-@@ -26,7 +26,7 @@ SRC_URI:append:class-target = " \
-            "
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
--SRC_URI[sha256sum] = "d0bbd1121a57b5f2a6ff92d7b96f8050c5a45d3f14db118f64979d525858db63"
-+SRC_URI[sha256sum] = "eb397feeefccaf254f8d45de3768d9d68e8e73851c49afd5b7176d1ecf80c340"
- 
- S = "${WORKDIR}/httpd-${PV}"
+ UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
  
 -- 
 2.25.1
