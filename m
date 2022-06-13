@@ -2,73 +2,76 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DA2EAC43334
-	for <webhook@archiver.kernel.org>; Mon, 13 Jun 2022 09:00:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B46E6C433EF
+	for <webhook@archiver.kernel.org>; Mon, 13 Jun 2022 09:01:05 +0000 (UTC)
 Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
  [195.245.230.65])
- by mx.groups.io with SMTP id smtpd.web12.3637.1655110843907031198
+ by mx.groups.io with SMTP id smtpd.web12.3640.1655110863013412519
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Jun 2022 02:00:44 -0700
+ Mon, 13 Jun 2022 02:01:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=wA9NOtZi;
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WiN5DDg5;
  spf=pass (domain: fujitsu.com, ip: 195.245.230.65,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1655110842; i=@fujitsu.com;
-	bh=YeGGbOM2NEcP9QmfeRfCPI4L7d7diSftPGVTA/KMCnU=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=wA9NOtZiXx0heZGcSzqHihK44t6Xo87ogcJSXXu+mwS0fTfvoV0BGOLDWd/cT/blh
-	 V6p75vpMnDdakoIXOPX8SbEn92da7CTxiNcbWfq7DC442MiRslv2dOlr5JVc34LQX6
-	 tUSa9xLuFDyk39s3MgDmmvV9yEMATxZMPbFD7C/DDLwHnMfkjJ7xdfSfz6vet1k54z
-	 kBIJj/sKYk5E7R1Cw4ms3ThFU2m/x38nKqL/UAV1SVmRjxcJNcyUNV4wNdKhbi0Dge
-	 e4xcF+cNTD5pqQiHvycxVWU5vkCLlaK063L9s0ndkiY5ypRgK9iBDsG9s0IgE55/de
-	 hd86V5CC0cWtg==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrLIsWRWlGSWpSXmKPExsViZ8OxWXfnn2V
-  JBgcWaVlcPLyU2YHR49zGFYwBjFGsmXlJ+RUJrBkt80oKHnJWzN6o3sD4laOLkYtDSOAho8Si
-  fc/YIZyzTBKnJ6xhhHD2MEpc6nwMlOHkYBNQk5h+6wYriC0ioC+xdPYeZhCbWUBF4sXvHrAaY
-  QFbiSPzbjKB2CwCqhIrO/czgti8Ak4SL97dZQGxJQQUJKY8fM8MEReUODnzCQvEHAmJgy9eME
-  PUKErMvtwMVV8hMWPGNjYIW03i6rlNzBMY+WchaZ+FpH0BI9MqRqukosz0jJLcxMwcXUMDA11
-  DQ1NdQ10jA2O9xCrdRL3UUt3y1OISXUO9xPJivdTiYr3iytzknBS9vNSSTYzAkEwpZjy9g3FT
-  30+9Q4ySHExKorx7vyxLEuJLyk+pzEgszogvKs1JLT7EKMPBoSTB6/ALKCdYlJqeWpGWmQOMD
-  5i0BAePkgivHTBGhHiLCxJzizPTIVKnGHU5Zn5tO8AsxJKXn5cqJc677jdQkQBIUUZpHtwIWK
-  xeYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCTMexVkCk9mXgncpldARzABHbHx5BKQI0oSEVJ
-  SDUz6pjOdt+W8f/Pj2LniBA61urzlr5iuxli//n9dIPHOnYzMnF2V304Vr92WtCflVWP15E1m
-  PZnxv2XOLlgRs2Hb6e6Nbrsd+Znv/yvlTo0/s/DZjuWZq7eHT+6YcXmJ43tzhcL/5g7ddvUZk
-  +ZvmsjV63pT92vHi95NNf533h1Zv6fKRHdn3JWn30Ui7BQ5b+/4yhbwIevr/WP35uRs7y2Pvr
-  WW71ar3YL5MlMuHpqyNELz1qktPQZewSr++1c7lBStbPG0CF1QVpO7gi0nbM71M0dKrkdtmzc
-  7bGdYb9Ot90zqIYeuntX7cHWjHLPNXGWGuWG/FT9uWPRW6EiZq5J35dGjNQdsfm3t/dJ957eO
-  ixJLcUaioRZzUXEiAKjL4dxQAwAA
+	s=170520fj; t=1655110861; i=@fujitsu.com;
+	bh=O/QQqWHzI+dyK25x/tkJ2Q4YdCtTwNm2j7XXvOeebwA=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=WiN5DDg5U1FdkEl06N7mCc+8z+Yz77tH9bCm1mXZ4hpB9QkFnj5RrTUijr3psfjdE
+	 lgBpO7gqcn3pqrsEtMJI0TITcn5snpUoFv2eOi3nH3TXno/ZNnJnBFoTIgV79l8Vnp
+	 oQGuPJFkV6jfX6Jh0YKMdJcZnuuPvp0Eibmtelx89tZRBsvDN9qzc2oHTQWZwr/2g/
+	 inpE5fgeBKX9+1T5gtCv/oKpcskzdYd8M9XXVoRaR7GUairEZolXFDgA2TO/lwfVTZ
+	 vmJha4RVDCd1o2dXxzxX7bYIYyV7uf4ywdR7wgqHJcs0bEqcIEDPO4Z0znPldttI8J
+	 i/CRe6k7QK0ww==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrGIsWRWlGSWpSXmKPExsViZ8ORpHvmz7I
+  kgwnbbCwuHl7K7MDocW7jCsYAxijWzLyk/IoE1ozTSzewFkzlrFjz9iB7A+MCji5GLg4hgYeM
+  El2PHjFDOGeZJPp7tjFBOHsYJT5++AaU4eRgE1CTmH7rBiuILSKgL7F09h6wOLOAisSL3z3sI
+  LawgIfEiu1vwGwWAVWJgxs/MILYvAJOEou2/QOzJQQUJKY8fA/WyyngLHF1+2o2EFsIqOb/3R
+  0sEPWCEidnPmGBmC8hcfDFC2aIXkWJ2ZebWSDsCokZM7axQdhqElfPbWKewCg4C0n7LCTtCxi
+  ZVjFaJhVlpmeU5CZm5ugaGhjoGhqa6hrrGlroJVbpJuqlluqWpxaX6BrqJZYX66UWF+sVV+Ym
+  56To5aWWbGIEBnFKMbPQDsb1fT/1DjFKcjApifLu/bIsSYgvKT+lMiOxOCO+qDQntfgQowwHh
+  5IEr8MvoJxgUWp6akVaZg4womDSEhw8SiK8dsCoEuItLkjMLc5Mh0idYtTlmPm17QCzEEtefl
+  6qlDjvut9ARQIgRRmleXAjYNF9iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5Iw71WQKTyZeSV
+  wm14BHcEEdMTGk0tAjihJREhJNTC5WH1J6MxN+a5VMmuZ5fz2oAUTFT45Hi00ujSro0N0kdwZ
+  jQsPjzzelvvnU/Saz7snhh7ra2U1+NJaenp/iHjFKaFDZ7JSvWfv+iOWfYqjN1upSGi2y0Pnf
+  KUr81iVFqgvy3poURz/oolv96SWhdwxrZydU06wudeZ7N6stNtrOd/MRUwMHYVcLa8FHH3PiJ
+  R5X3sterB2Rm9LWO4STxmVJJdPi5h8715+nnXtl+bvn/bJ5l8ZT1TZpXVV6Pdazlxwunp1w5Y
+  d+6ZNrXXbpDTjXP4q18XP3a8tS70srbh91pdj9x+3uHyUTGb93N4qkRcT3J+7YGKgwaLEw2EX
+  zxXc1tls8Y/pjworf7r0lF9KLMUZiYZazEXFiQDVRuJSaQMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-19.tower-587.messagelabs.com!1655110841!183482!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-9.tower-587.messagelabs.com!1655110860!280591!1
+X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.86.7; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 27613 invoked from network); 13 Jun 2022 09:00:41 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-19.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 13 Jun 2022 09:00:41 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 0DC4B159
+Received: (qmail 13981 invoked from network); 13 Jun 2022 09:01:00 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-9.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 13 Jun 2022 09:01:00 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 8137C1B4
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Jun 2022 10:00:41 +0100 (BST)
+ Mon, 13 Jun 2022 10:01:00 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id D4FE714C
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 758601A4
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Jun 2022 10:00:40 +0100 (BST)
+ Mon, 13 Jun 2022 10:01:00 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 13 Jun 2022 10:00:36 +0100
+ (TLS) id 15.0.1497.32; Mon, 13 Jun 2022 10:00:41 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] irssi: upgrade 1.2.3 -> 1.4.1
-Date: Mon, 13 Jun 2022 17:00:16 +0800
-Message-ID: <1655110819-25250-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] libnftnl: upgrade 1.2.1 -> 1.2.2
+Date: Mon, 13 Jun 2022 17:00:17 +0800
+Message-ID: <1655110819-25250-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1655110819-25250-1-git-send-email-wangmy@fujitsu.com>
+References: <1655110819-25250-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -78,36 +81,32 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Jun 2022 09:00:45 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Jun 2022 09:01:05 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97485
-
-Changelog:
-https://github.com/irssi/irssi/releases/tag/1.4.1
+ https://lists.openembedded.org/g/openembedded-devel/message/97486
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../irssi/{irssi_1.2.3.bb => irssi_1.4.1.bb}                   | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/irssi/{irssi_1.2.3.bb => irssi_1.4.1.bb} (81%)
+ .../libnftnl/{libnftnl_1.2.1.bb => libnftnl_1.2.2.bb}           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-filter/libnftnl/{libnftnl_1.2.1.bb => libnftnl_1.2.2.bb} (96%)
 
-diff --git a/meta-oe/recipes-connectivity/irssi/irssi_1.2.3.bb b/meta-oe/recipes-connectivity/irssi/irssi_1.4.1.bb
-similarity index 81%
-rename from meta-oe/recipes-connectivity/irssi/irssi_1.2.3.bb
-rename to meta-oe/recipes-connectivity/irssi/irssi_1.4.1.bb
-index b0fde5ed1..40ce935ad 100644
---- a/meta-oe/recipes-connectivity/irssi/irssi_1.2.3.bb
-+++ b/meta-oe/recipes-connectivity/irssi/irssi_1.4.1.bb
-@@ -6,8 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=55fdc1113306167d6ea2561404ce02f8"
- DEPENDS = "glib-2.0 ncurses openssl"
+diff --git a/meta-networking/recipes-filter/libnftnl/libnftnl_1.2.1.bb b/meta-networking/recipes-filter/libnftnl/libnftnl_1.2.2.bb
+similarity index 96%
+rename from meta-networking/recipes-filter/libnftnl/libnftnl_1.2.1.bb
+rename to meta-networking/recipes-filter/libnftnl/libnftnl_1.2.2.bb
+index 44479638f..3eca92dce 100644
+--- a/meta-networking/recipes-filter/libnftnl/libnftnl_1.2.1.bb
++++ b/meta-networking/recipes-filter/libnftnl/libnftnl_1.2.2.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=79808397c3355f163c012616125c9e26"
+ SECTION = "libs"
+ DEPENDS = "libmnl"
  
- SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz"
--SRC_URI[md5sum] = "381d3af259ad15d658be50c0a01f0c28"
--SRC_URI[sha256sum] = "a647bfefed14d2221fa77b6edac594934dc672c4a560417b1abcbbc6b88d769f"
-+SRC_URI[sha256sum] = "6a7692741bba16f3ba6f97cf7246421ac57055dcedcca9a4d21663f8efe47501"
- 
- UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
- 
+-SRCREV = "09456c720e9c00eecc08e41ac6b7c291b3821ee5"
++SRCREV = "f6575131e60ab10f131ea3ff36f69af2b6c3f614"
+ SRC_URI = "git://git.netfilter.org/libnftnl;branch=master \
+            file://0001-avoid-naming-local-function-as-one-of-printf-family.patch \
+            file://0001-configure.ac-Add-serial-tests.patch \
 -- 
 2.25.1
 
