@@ -2,156 +2,144 @@ Return-Path: <akash.hadke@kpit.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D8CE6C43334
-	for <webhook@archiver.kernel.org>; Tue, 14 Jun 2022 14:49:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EA86CC43334
+	for <webhook@archiver.kernel.org>; Tue, 14 Jun 2022 14:55:45 +0000 (UTC)
 Received: from IND01-BMX-obe.outbound.protection.outlook.com
- (IND01-BMX-obe.outbound.protection.outlook.com [40.107.239.75])
- by mx.groups.io with SMTP id smtpd.web11.7033.1655218180614469923
+ (IND01-BMX-obe.outbound.protection.outlook.com [40.107.239.79])
+ by mx.groups.io with SMTP id smtpd.web11.7109.1655218535555870832
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Jun 2022 07:49:41 -0700
+ Tue, 14 Jun 2022 07:55:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kpit.com header.s=selector1 header.b=A+x0n28M;
- spf=pass (domain: kpit.com, ip: 40.107.239.75,
+ dkim=pass header.i=@kpit.com header.s=selector1 header.b=CwAjPisl;
+ spf=pass (domain: kpit.com, ip: 40.107.239.79,
  mailfrom: akash.hadke@kpit.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=BlH0O8MZkg4fPipxN0nbPXqhGxyR8KrWlCbv/bZRQnHYiXelx2rcgXD93hN+UFNT4/MB6K8q43EqzRL9/0l0A5t4kYhtHDOuR/MVUY3jcQ3oZzQMcEl0kpSv/MQKcSFawL3wG1ZNQfa1VE46xOLggiPlO7hs6HpEwAwrUHq0NhbOETxMH/TT0w7oCBKwBfROT9Ql/joVqQiWjCcZl06f4+NnXpt2373gedJeNHfybIwqNFCM0bIiCvi9rL9EwmYn/hf6cuBRmPfJPli+rHzrr2RiQBAQkQOYdyUC2hUyXFGXraEUHk6aeFDX1mMOmD89vfhaGlFDZvmBc8CzVF6nIg==
+ b=VSwL4Cfm16x3oKH5TqEoJNvHQiHFrNZiwcOqrquhEfwhU8TAnRZAAEHpZ0zVJ0rw1sfxQsVhuhXPEBuxShsLyM2tlSRy03f46hZ6w5tfWvwAQgb8LTt4BfElttHQbXUBXJb6BBfvQSCs1wU6BSZj++cTnbMzqBa06uybpdv5TbmOiO4K3Bz7bIMzjurMe2KLv1pUSj85wjHREJTes0MDTHnbWR8XDNjcinTrqsGVSZK6G4UBkNvru5jdTaw1E90VZUlTQXbWhFUfkvOEvXr2aiqVPQJyQecLFJhGgTo2bnoSfi+oThVexf2emaTvJl+OVDHSl0+gpJIHVfVP9qQTuA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DdNOi0JpfPKO/TrNvK8bw0lD7Xtm82CBjzZx+34eMPQ=;
- b=J0b+JLuP17pWY9yC0Tcb4MjJn+MBLVUzgSTpxSHXUo+KqnYPeWYm74cOcHpHHBWUTu5NtDZMORpFtClsS+DZJI9VAhug6lxa4lXs0/8e5IgHy2uDfIvSwNcd2Yxljd7hYZMax4MuD/kDO/01uwy1OBo6Yg8eQEhquh/iYFijqNHG5Slgj/yB4RV+dvTm1OUAcoQyMr4yvpLC//bWt8tIsrNZUbGxsvTSze3GeKbJRkvwa3XFJuqJzVCgKfyXJC713wKfZYsterjCuSs+egdjJB/BJRkv4xdgnV9o98BDGimR7gIGFnNccUaE3kFdQkzFhU3qVBC01kNvvf63LH/3Rg==
+ bh=FwhiMxn2wwEFbjgE2aq4LVTSDJIdFthQwiy95VIF1PA=;
+ b=G2HNl5RDQp1DIUpnpJiHHFTL8K0BvR4HPDl0o58vyOAZBrVjMh/l6cqSiAsuBPTUmDilfXKpKMEAdtxuUt6AfQsDhG/SMsTrsIf/3erVmAw2g6OERENeUTI+tiHPu0ybCyOfd6NNwgaLZwtBef5V/35THmz14h4baOk+Z44n3Sa5FKh31a1VLbiMYUtHfh87v78btYiBIrUUCD8CO1LnKNnMB5yVqIzLDWalsx/KSIvrJexix/eQEveicc/tUDuPzGAR1QqNWnNVRRp7zBwIN12EGRboi8x1MbXvoAumA6KgrYAfI4Gv6JvtVgxCQhYeiSxRc5pnpxwgAzQVMBrSsQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=kpit.com; dmarc=pass action=none header.from=kpit.com;
  dkim=pass header.d=kpit.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DdNOi0JpfPKO/TrNvK8bw0lD7Xtm82CBjzZx+34eMPQ=;
- b=A+x0n28MQ9rMOny6vcROAhUW0T5r0grOhjP0o0mH9a6ivHIij1xX4LD66Qz8kPOKqts4eXXy6apeSf0/QvjMzzYuaFdvrcmSl1FWvzpERKGxc5uFlyBNsuw/VckkFObSPNHSZSLDX7WaXYzXi9l9eBx/HazArd7Ns1c7H2jTn0c=
+ bh=FwhiMxn2wwEFbjgE2aq4LVTSDJIdFthQwiy95VIF1PA=;
+ b=CwAjPislvO4rHF+RpzUlwRuoPYuiXIWJkTYemLCJVCRkdFt8mo/WHOZNI3Ir6YQmBKaAGxao8wCU1SCUhgpjOM2SK2c4P632v4udT2IUlZaqHuaKyoz49X4h4in1oTzGW4NGh63ZN/rjZlmPMhbmzjkx7BFXlJyxiRUwPdu+u5A=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=kpit.com;
 Received: from PN3PR01MB6712.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:89::13)
  by PN3PR01MB6792.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:a7::11) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5332.11; Tue, 14 Jun
- 2022 14:49:32 +0000
+ 2022 14:55:30 +0000
 Received: from PN3PR01MB6712.INDPRD01.PROD.OUTLOOK.COM
  ([fe80::8119:8287:2cf2:7125]) by PN3PR01MB6712.INDPRD01.PROD.OUTLOOK.COM
  ([fe80::8119:8287:2cf2:7125%7]) with mapi id 15.20.5332.022; Tue, 14 Jun 2022
- 14:49:32 +0000
+ 14:55:30 +0000
 From: Akash Hadke <akash.hadke@kpit.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: ranjitsinh.rathod@kpit.com,
 	Akash Hadke <hadkeakash4@gmail.com>
-Subject: [oe][meta-oe][master][kirkstone][PATCH] iperf: Set CVE_PRODUCT to
- "iperf_project:iperf"
-Date: Tue, 14 Jun 2022 16:47:47 +0200
-Message-Id: <20220614144747.17514-1-akash.hadke@kpit.com>
+Subject: [oe][meta-filesystems][master][kirkstone][PATCH] ntfs-3g-ntfsprogs:
+ Set CVE_PRODUCT to "tuxera:ntfs-3g"
+Date: Tue, 14 Jun 2022 16:54:57 +0200
+Message-Id: <20220614145457.18046-1-akash.hadke@kpit.com>
 X-Mailer: git-send-email 2.17.1
 Content-Type: text/plain
-X-ClientProxiedBy: VI1P18901CA0013.EURP189.PROD.OUTLOOK.COM
- (2603:10a6:801::23) To PN3PR01MB6712.INDPRD01.PROD.OUTLOOK.COM
+X-ClientProxiedBy: AM5PR0502CA0005.eurprd05.prod.outlook.com
+ (2603:10a6:203:91::15) To PN3PR01MB6712.INDPRD01.PROD.OUTLOOK.COM
  (2603:1096:c01:89::13)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 79c7b800-1deb-4d65-98bc-08da4e151761
+X-MS-Office365-Filtering-Correlation-Id: 82877dff-4a8d-4048-b366-08da4e15ecc7
 X-MS-TrafficTypeDiagnostic: PN3PR01MB6792:EE_
 X-Microsoft-Antispam-PRVS: 
-	<PN3PR01MB6792F48976CD8780222D7E038EAA9@PN3PR01MB6792.INDPRD01.PROD.OUTLOOK.COM>
+	<PN3PR01MB679234247FC1AFA273F651AE8EAA9@PN3PR01MB6792.INDPRD01.PROD.OUTLOOK.COM>
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	1etL0eAgAfub7BBvVHyszSEMljVdeZKkymdSuu64RIRQeoNF1fsJjviY8xAKX1zSSWR8XcmcB5DaU1HN+EdLmRBq11r+GJJv1JzisPzZH49IOuhe94TemieHy5IsLf/wahre8a1X9U5dpA4s5gvSvZMiQdQ63DDTXnojCl3QA2J3s+Ve8XUI45olDDZjrqiSOxC32jbpPiYQ5TC0kBMzyFFrqHL07+lmMp4kjCW4tcn4LLf1n85OyRD67zu9YXrsdMLm9WPC8JX+Krk4RKCcNPgf65iiBgHlfgNKKxajB0U3U6i0EA7Wr5l/N/wJr1pMsJjT/RQb1ouSn3K11nlNxVpqVzPoxocRmpjm3c63T7oBVHMvohPQ/TQcHzHCAqHESD/Xgq69Atikii4YWfYbkmBsLtO5e6gOmuRmHEwKHSMs85L0f1Wcc20DOMdHiPORHtbdolCYLqR0vpO6UPzL/ASWCgJU4+LvJai3H74IDj2veYzthrciW4XOmPVp59VWOql2tFG1ibbm/S+V8YlXEw7lvCsbVb11BLqO6SF5z04yqfUhuNT1m8kNSicz2PpXCEqENxqTNd/wJ+oNRg2m+Zt61DDRYs9sQRXO662vR0ZmTXU79toUUlAY2Gyikg3w4cHD25A33lyBECfkIhje7EAvV35l64NSmATnBbFTLdtZHax2pWCEUkjIteMtGRGt96liWh7sFb3b925D9jFCOqkvndJeIiC9CkP08YZ1IylD+d8N1xgdvw5PP+DDMqnRCHzQGzEMTs+eZJzitQZPrg8GsL5CxUvrjagPqhzjj7w=
+	HJw1/iknGQhgLbRNI2KhdkxGQoqg5DQeb4e05PqrDrAy3FNiEH9Mh9eGhHQpZUFHcU40xtJGcnhi9dZvABdjkKktGS7W0Mzt//Bt0KwsGlzn/UqmzO1kKKL9Nbm0jSMmN0sG++8kosTF3I5hzVfJVwQ+wwu7lNTJjeXzSQSvpJqaCOuahKREF7Z7fo1FL9uVvN39Gn716oVrfWAyRSIGz7EETg1JXyatmrt0HFzxeX+zPqNDpGD3MXB609HKDnBITUxz3TD7Hv5SZHRlZwzgDwLtKnS8VtlazzmFtAyzQ5J8JMeYPW7FCR/13DAdfLCuLA9Zl8YXlX9do5vUORIlsg+8pUvCCvDM8awWi5DckHGzDFjaKSnOiIdPiB6AyqDd0M//h5mFj4/uOlhGLN0rz9UE9dVsnJLTLpDENhOFiyEdKm1UhBH1mFV/GMY+S2NfSqg1WC247AGuufx/MGz1hh0I+4xtQ2x5jsUjNo5lN5UsOp1qWaNbveVb2oRo8C8e2HvUV7IuXGnsjnxZr6igqO+IMiu4ntG6IUEUfXObf6n5ceZi3SU7HMM1erLoXyfSumw4UMfPq2ADAz7pUZx83hZR82xIsF4/lVyBdt714q4WIj1DwuzpZdNyy4GchqJGhyI1bGBaengb03a/1J/mIKFl9wHSrVJnp3vPJWPMqxBfO3RMX+KNE/ldqgvP4ZHX6XLcEHxC6TMbO6sMmWdHjtWHuCFd6QVYR4Vvl0uu/Sa/wtwVtJepPbNCNy+2tqszvG0LxUVvqPsSLoMXvLZ27pbJ6d6pOkc6rVfpLjQWfMM=
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PR01MB6712.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230016)(4636009)(366004)(5660300002)(44832011)(66476007)(6666004)(966005)(2906002)(6506007)(86362001)(38100700002)(66556008)(66946007)(8936002)(8676002)(4326008)(38350700002)(6512007)(26005)(6916009)(316002)(36756003)(508600001)(52116002)(2616005)(186003)(1076003)(6486002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?Q9fFC3aPtXiEp7IqJaRx+fuK6hIudazon+8yOa+sHcUZ5tkfeqXN+mB8z+uy?=
- =?us-ascii?Q?oudUAW4lT46tbuFzBDTeV1+f4AHVUmM3PoDEAEOY/CC5fP7yHHwtWx9/1bb4?=
- =?us-ascii?Q?Vf0PyOmKrznOGSoOxN4jNvJdB9lsiatbb3ITW7/3j3Z/TuSqD1NJ6nMAFi8w?=
- =?us-ascii?Q?lid05RIWa9q4vgW/n4vR3nJOupbMbPyhT7W1+UmKDZx8BNjsb1dhNpWKYgx/?=
- =?us-ascii?Q?Z5+AWrzreos9p95cpwUzKYTA5RRPyL7c1AV9T5p91KutMk8bSUE0PEbRl7Uz?=
- =?us-ascii?Q?x+Vo5blXSLerxTcdScV5ZcvhCs+zy8QA+4cgizeZy1ncjEUAUYXMYQ+E6W7J?=
- =?us-ascii?Q?6PO0sU0LZJeTgS068JG8yLVagEN1eUHyMrSV7quXJ2qgoARbL7eQFN7JQWcS?=
- =?us-ascii?Q?JhYK6GQ2E36YEkU3WfmXaVk3dnFWCQCbhRPAuoPwf2uCGce1RRAtxMoPU+WA?=
- =?us-ascii?Q?8+VOTl/P99BPWYdFQRJrLAPImYfFTIODMvOwNH/urqn0ZP3n5xrFzVJH8fUl?=
- =?us-ascii?Q?y4kN5c0aluTBgOjLmuj/TbojrGXcfJ0X1fgehkE4/E7bGtuuiq7s3WzzNjD2?=
- =?us-ascii?Q?SvgC0qwoEoq90gSrWF42ATP5pFk+NyfjBrEflo42afpfWsA0TrJuEYoe1zUR?=
- =?us-ascii?Q?FZuh+5cbD/z/EUfwLX9M2hcYjLFDDPp9hnpzcZ+QUyEqTlDq0+DbDhuvN/kn?=
- =?us-ascii?Q?3TOA6DnRC9yKjKROcRpVouUQBVWFHFlv5l/9gRmqJ5Gs8I/FSPKmo7JIMX8U?=
- =?us-ascii?Q?yqs+QEFitNKHZrd0jk4U17Vuq2NRfwaK4j38t/cZyNtCiJwRxICIZmzL6dLL?=
- =?us-ascii?Q?ObKRcxEwyqewvmTVZIVuNKLkG47BIzeVXMrEXXn5kTtAfQwsJRE4HSSbrw2C?=
- =?us-ascii?Q?esQRw7PND9mSMN68bEJ8x//CQ7NtIlm2h1PSO8LjgPLAleK/QCYI6ghN/9Ge?=
- =?us-ascii?Q?WN3BfHzha0opOqUah7Fbp6H6DLuwqRJ9uL6BmfyHuffAVGkYUxRInYe57ckS?=
- =?us-ascii?Q?5N3K3QvoogpuE7B08PYxqlKBf0J5cp2UdKBW7+JzxxEp0g2oKW5e9K+acImn?=
- =?us-ascii?Q?X1RCJvXQgYcvD5S26o23uf/TXhlmGRx6CR0Hy4wiaf6wKTr9ej8bpbpD7Scw?=
- =?us-ascii?Q?OGQMf6GDw0tn3OOvKuQq29HRllTT8GEq+aKT73QE+vaut1m+yTqFyICndKrJ?=
- =?us-ascii?Q?zK5luKmoyEQCjBgh+rg4bxbooJqn7YFrhKSHOp/KzKehZ+n0yrYOPVivRp04?=
- =?us-ascii?Q?dAgfdXVPgxD4lYfIiEbeIIlTYDRZByXWf1a1Wt6G9sMzE9lebpUujXsu0wmp?=
- =?us-ascii?Q?Wmu00ghZvnVQKOHWmAY0lnzuqOrZEGICzLKHsNp5Z4wSit7LRjOb3DbGqTas?=
- =?us-ascii?Q?9HBF3CVuUaKCYSDqs7lWGmmgFQQm08W6Amstro7h0bcbs2BkDrae0W9wD3EL?=
- =?us-ascii?Q?zyRpvZXvc37BULsoCe5t1Jm76voK9tEwo+6mbv2EtYSyMDdJqOYs4lDAeoFj?=
- =?us-ascii?Q?ujBQQKbbEwfs3hpwydP3hW4tG8TyEOi1LrmDs4bGc/33WVO+yFWVHISnUWqo?=
- =?us-ascii?Q?a+9j3ne4wvlmKofIa+ywa0hQkPXk6A5rRKdyc7WDmOfAyH1lec0jJTUlGs3K?=
- =?us-ascii?Q?tLixbgXya9I2ynUiXjlZWTP0hJQT/TGKROM/Lj1hl8+XNeRpygj7wJNyjg2Z?=
- =?us-ascii?Q?TLP/N7C9oy7eK6cvhI/WxeRi58dYRAl8RedQowUYDXTc3ilZX7JJkrTmVWDS?=
- =?us-ascii?Q?X1rTzCmyYw=3D=3D?=
+	=?us-ascii?Q?MeQyUqu0VPLAVg4lSijPo5pe5+mvqcetkzExSDJdLWiB1JunxoluK8OrPDR+?=
+ =?us-ascii?Q?oy5MGGIQdziy89XBt2UxyWeEJF/vWoaX0IhkUmL9PbApa0WqlTgH+gwK9jiC?=
+ =?us-ascii?Q?IJ5NGzUBaBi2Bt5mgYNEHQ0MUn8idA5IOE4acpEOigXs9/kv+4/9Zg7Hn0f6?=
+ =?us-ascii?Q?L7dolDT+VX0gsXZAJoa8wzgkH8Fur5xrCTN+S3U9WEBal799wwyK/H/DY6HK?=
+ =?us-ascii?Q?wRiKCfek3ox6WNHQfxUnaHHHzseI5tK/uua3xI32c2jtK3bDhMqhR3RZcpn3?=
+ =?us-ascii?Q?c71Hj1ZwFBhO374JtjPbCdxJ3LiyMShSBGK4qGywJbB1Int++bXCMcnXSP7K?=
+ =?us-ascii?Q?lcnlVm3zgW7PM+tcZv+0qL3c3K1RUuzQlL2el357+B3wrSifKMp/sWZwNYRF?=
+ =?us-ascii?Q?VKyt8ftorgX5U4PqKFi8NUpbZ2bSWNVKlp0NLwX5dPCGO8Rs326xTXQt7Ni2?=
+ =?us-ascii?Q?uLeVAhL4u5lAHLju8gLhqQYBzgkdaQ25kF+MzYqsOmLgfeJl802+afmiBfX3?=
+ =?us-ascii?Q?DLaD+HRkALIJokxmctTWGZFhVQREkv09o+D9ILYXTRNp45VKWDmkXng3Pnod?=
+ =?us-ascii?Q?zx4OPh6tHTO2btGGkrKU18aYNf743VdNdUjoC71HsP8hvjrqxiggTO/ZoEnO?=
+ =?us-ascii?Q?xozE6l/HQm493cGs4q5BZUrs61pACbzkiP6cOQjAHdZOeNP1XkJqmukIv5WM?=
+ =?us-ascii?Q?0fxNRtOrn1uVqbQvVVeEs97TGF4paR3aI/ubYePfgMvM9nV3ShQzkG7g9BIc?=
+ =?us-ascii?Q?sqX667eLeVAQNqSrOU9AGk+0A/tkmingXGDoF5ydVjWpYIM9fCZXkvZB91fU?=
+ =?us-ascii?Q?eHfuN+C+8eWd+7xzan0qGUNFNWT1R2JyE6erdnH2VuBNcmKfVxzh1eJ3y9bh?=
+ =?us-ascii?Q?E7LDZ+E6pc8jdKIcWx6wF6aqeizWTbtKBfEVVj06nzE3Ed2VahGryHTo9FHL?=
+ =?us-ascii?Q?3JR2uCIG9CuzH2JFzkYVEp/+OofTkI8v9VyALhwjFWVQ2Fu85dG1rJ5ZnuwC?=
+ =?us-ascii?Q?piefIguZiUv6qmKPaYCFA0HJE6QAKwr2fE5e/O7zl6Ob5MkN5Zu50lCb5o8K?=
+ =?us-ascii?Q?hJ7pND3EOIFcQ419eQb3ZBRdU4GUv9801s50B9dxc9qQRuzeTS95pzIRfKcE?=
+ =?us-ascii?Q?9Hz/pyqyI1W8lcCquh7BUmtgOkc72VfuAJJjFe2usIpMm6uaUlWJXTJVqst6?=
+ =?us-ascii?Q?5pTHlFv3ob2ZUAN1xhCNZbmq+x/BkZ4A2t98fddjrbocRz/Im6cfQwxtmWRl?=
+ =?us-ascii?Q?Zw3zwAji6+FzDfrFk1hb5X5HcWzRvIm37bThIZvKaKv52z2iA4NqBsxObwVq?=
+ =?us-ascii?Q?ukB5ldU5/andbG47+qOH7mZ94qGP1IqgMvRIM491Al9nt/9W+d/706fOEev1?=
+ =?us-ascii?Q?p0C3IJGMuch6QN0Iz15FVw72bgf8Im99teqdQeN46fnb2CVYCqIkCFwfPUF3?=
+ =?us-ascii?Q?NkwV6ix2ABSs52eSWoOh6lelm9T1DNhCgIocbodkvq5j5NYVTJcj3u7YfwR3?=
+ =?us-ascii?Q?5961qu+lSE+7qr7C1bg8BpSa2HxCir7n+7lfymJYj2Xqi0C8p1gTj77tvn4K?=
+ =?us-ascii?Q?w1gJPWWLW0Blh7kg+nN7AIenWiLMOcgzqc7XCPl7Rr4tqijbnruAxJEGZ1Wv?=
+ =?us-ascii?Q?Cjauh9AqMLM3VSNVgodCqxGrqzoS+3bYqJW/0YRXYhXlIeTAN+KXBSMKSWVf?=
+ =?us-ascii?Q?DOjJo/6qkt3RDr51MkhjBizjohA+RYG9UlckewZtswOW052rv6y3jJE7ZHzq?=
+ =?us-ascii?Q?JwPyWODS2g=3D=3D?=
 X-OriginatorOrg: kpit.com
 X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 79c7b800-1deb-4d65-98bc-08da4e151761
+ 82877dff-4a8d-4048-b366-08da4e15ecc7
 X-MS-Exchange-CrossTenant-AuthSource: PN3PR01MB6712.INDPRD01.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jun 2022 14:49:32.4428
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jun 2022 14:55:30.2960
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3539451e-b46e-4a26-a242-ff61502855c7
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
 X-MS-Exchange-CrossTenant-UserPrincipalName: 
- 83zbHHD7lCVQ3JIG/Zw6atdHfZoeYAIg4CdeN59M27kILy9XT0sURlHFBbSxL8Ci8BwtT8Yk/8Yg8MRC0u78nQ==
+ xuahgfXK1OrAgpN5sshnCpD4fKhHExqJeB3oBzwr1eJok/hHyj3FN4nCyWVbwSthiBNIVSeJmisXJflYFXa7Cg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN3PR01MB6792
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 14 Jun 2022 14:49:45 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 14 Jun 2022 14:55:45 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97514
+ https://lists.openembedded.org/g/openembedded-devel/message/97515
 
-Set CVE_PRODUCT as 'iperf_project:iperf' for iperf2 and iperf3
-recipes, cve-check class is setting default CVE_PRODUCT to
-'iperf2' and 'iperf3' respectively which ignores the iperf
-CVEs from NVD Database.
+Set CVE_PRODUCT to 'tuxera:ntfs-3g' for ntfs-3g-ntfsprogs recipe,
+cve-check class is setting default CVE_PRODUCT to 'ntfs-3g-ntfsprogs'
+which ignores the ntfs-3g-ntfsprogs CVEs from NVD Database.
 
 Reference:
-CVE-2016-4303
-Link: https://nvd.nist.gov/vuln/detail/CVE-2016-4303
+CVE-2019-9755
+Link: https://nvd.nist.gov/vuln/detail/CVE-2019-9755
 
 Signed-off-by: Akash Hadke <akash.hadke@kpit.com>
 Signed-off-by: Akash Hadke <hadkeakash4@gmail.com>
 ---
- meta-oe/recipes-benchmark/iperf2/iperf2_2.0.13.bb | 2 ++
- meta-oe/recipes-benchmark/iperf3/iperf3_3.11.bb   | 2 ++
- 2 files changed, 4 insertions(+)
+ .../ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2021.8.22.bb            | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-benchmark/iperf2/iperf2_2.0.13.bb b/meta-oe/recipes-benchmark/iperf2/iperf2_2.0.13.bb
-index 4a520e3be..86e5fef53 100644
---- a/meta-oe/recipes-benchmark/iperf2/iperf2_2.0.13.bb
-+++ b/meta-oe/recipes-benchmark/iperf2/iperf2_2.0.13.bb
-@@ -19,3 +19,5 @@ EXTRA_OECONF = "--exec-prefix=${STAGING_DIR_HOST}${layout_exec_prefix}"
+diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2021.8.22.bb b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2021.8.22.bb
+index aa1b4c2e9..c77028785 100644
+--- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2021.8.22.bb
++++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2021.8.22.bb
+@@ -50,3 +50,5 @@ do_install:append() {
  
- PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)}"
- PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+ # Satisfy the -dev runtime dependency
+ ALLOW_EMPTY:${PN} = "1"
 +
-+CVE_PRODUCT = "iperf_project:iperf"
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.11.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.11.bb
-index a6af23aec..2142a8ef1 100644
---- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.11.bb
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.11.bb
-@@ -30,3 +30,5 @@ PACKAGECONFIG[lksctp] = "ac_cv_header_netinet_sctp_h=yes,ac_cv_header_netinet_sc
- PACKAGECONFIG[openssl] = "--with-openssl=${RECIPE_SYSROOT}${prefix},--without-openssl,openssl"
- 
- CFLAGS += "-D_GNU_SOURCE"
-+
-+CVE_PRODUCT = "iperf_project:iperf"
++CVE_PRODUCT = "tuxera:ntfs-3g"
 -- 
 2.17.1
 
