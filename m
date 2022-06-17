@@ -1,122 +1,130 @@
-Return-Path: <xuhuan.fnst@fujitsu.com>
+Return-Path: <dai-de.li@leica-geosystems.com.cn>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 59343CCA47A
-	for <webhook@archiver.kernel.org>; Fri, 17 Jun 2022 01:34:07 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web08.25467.1655429640278794984
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 99FD1C433EF
+	for <webhook@archiver.kernel.org>; Fri, 17 Jun 2022 02:31:37 +0000 (UTC)
+Received: from EUR04-DB3-obe.outbound.protection.outlook.com
+ (EUR04-DB3-obe.outbound.protection.outlook.com [40.107.6.118])
+ by mx.groups.io with SMTP id smtpd.web11.26009.1655433088150010484
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Jun 2022 18:34:00 -0700
+ Thu, 16 Jun 2022 19:31:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=gbujQ42c;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
- mailfrom: xuhuan.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1655429638; i=@fujitsu.com;
-	bh=jDBCOHKlZrK4yx7qsBA4HumeStzEHeoFFCR/fPywMW4=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=gbujQ42cYOq8fANCszUr+INJ/w1cXWZKtojQyJfe+Xze4DYj0CzJHkXgMM/3LZiDO
-	 sPnxC1kCxSrMjKL1wFcJYO4UAsUusrUqngSZHv9raAcqRxCHMkg0h+iK88nXXtQWNP
-	 JzeeQx82o01g4bR3g+9CCyGqsKYWhzfSYEHO8vslx45Ag+Ucg+o/DhO6qY7O9y9Z2S
-	 AbDJ2nh0GZTDESW2rAK4+JrxkIwMyzSyG1LZUVX4PnEPEnqnUF2D5iho73ZAennKQT
-	 0LD+T5SWJTF+bSC0+tgsS2ZZ0xcDs0UG9XeQJmaAxodazQhrF6BoO5sygHjtLfLrIc
-	 K+mWbr9cdwZjA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrGIsWRWlGSWpSXmKPExsViZ8OxWZf11uo
-  kg6czTC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oyeU8UFjVwVr459Ym5g7OHsYuTkEBJ4wCjR
-  +Cesi5ELyD7LJHH1cicbhHOSUeLGhecsIFVsAuoSj2++ZgSxRQT0JZbO3sMMYjMLqEp0X1zDD
-  mILC3hJ3Oo9ARZnAYo3HmkEi/MKuEs0XrwEZksIKEhMefgerIZTwENi17yz7BBXuEu8/LCQBa
-  JeUOLkzCcsEPMlJA6+eMEM0askcWLFRyYIu0Li9eFLUHE1iavnNjFPYBSchaR9FpL2BYxMqxi
-  tk4oy0zNKchMzc3QNDQx0DQ1NdY2NdA0tLPUSq3QT9VJLdctTi0t0jfQSy4v1UouL9Yorc5Nz
-  UvTyUks2MQKDOKVYYe8Oxssrf+odYpTkYFIS5dU6vjpJiC8pP6UyI7E4I76oNCe1+BCjDAeHk
-  gSvw1WgnGBRanpqRVpmDjCiYNISHDxKIrz2l4HSvMUFibnFmekQqVOMuhwzv7YdYBZiycvPS5
-  US5828AVQkAFKUUZoHNwIW3ZcYZaWEeRkZGBiEeApSi3IzS1DlXzGKczAqCfP2gkzhycwrgdv
-  0CugIJqAjGvetADmiJBEhJdXA5L/Y9C2n99JLsXmMj52qp3cXii3teFHiETNB0M75zsWz1bO2
-  hWtYcp68IXTmypUJS98b/r33OMQsVVZC6u+BbbcFmpuMEk7v1hVWWxm+65vnsjqufU5r/F/pe
-  i+baKP5wYVNpUjiQpGWj4aY2wLPKxd99885lPWsYs6ON3tzBOrE50iKfLL7p/NO18bKL/u2R2
-  pUSYtjQfoeJVnraMv4OZFeFquEyq5s+X6Gm32P2vQn7ZJy/z3Dr3z0Z0gyW53mXnvAuKo4X+j
-  KhCmWxXt8pl3OYW3J3vLQJ0zqzf8m3oyHKfNePTiVdUzKXuiMwxmdL4fOf3gkX8Q7/cD8s0HH
-  WQMutO4L++F8b9YaT+ZdSizFGYmGWsxFxYkAhndB3mkDAAA=
-X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-11.tower-571.messagelabs.com!1655429637!304902!1
-X-Originating-IP: [62.60.8.179]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.86.7; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 316 invoked from network); 17 Jun 2022 01:33:57 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-11.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 17 Jun 2022 01:33:57 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 84CFF75
-	for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Jun 2022 02:33:57 +0100 (BST)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 62107152
-	for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Jun 2022 02:33:57 +0100 (BST)
-Received: from localhost.localdomain.localdomain (10.167.225.131) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Fri, 17 Jun 2022 02:33:45 +0100
-From: XU Huan <xuhuan.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-smbus2: upgrade 0.4.1 -> 0.4.2
-Date: Fri, 17 Jun 2022 09:33:32 +0800
-Message-ID: <1655429612-19310-3-git-send-email-xuhuan.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1655429612-19310-1-git-send-email-xuhuan.fnst@fujitsu.com>
-References: <1655429612-19310-1-git-send-email-xuhuan.fnst@fujitsu.com>
+ dkim=fail reason="body hash did not verify" header.i=@leica-geosystems.com.cn
+ header.s=selector1 header.b=Zrwad5Zx;
+ spf=permerror,
+ err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}:
+ invalid domain name (domain: leica-geosystems.com.cn, ip: 40.107.6.118,
+ mailfrom: dai-de.li@leica-geosystems.com.cn)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=WeyeMPfA6BDGRxDD0V3a7WgEHEaDITUxkVONWRx5I9N0/Nvnb1ksg4g/Cml5mKZo91eAGcdC9a/6WNW/ZBBkKzcnX1i4Y5wtBLUCi7bb+LlPF+iqwwMXpqHVwJH18AqJIXlFf65soXWDyk3oVXsfZijkL4FPGhZaPjdRmGelszD/HRakhHNlG1uz7TrtOau9lmTVMtqiCQUCl8jXw5GMkUcm2dLYiaEO8VdFA5M9f/TErc/MN0GctpxfIL6n35ate4pyFg1LybdkxHQ/J2H3eiBPpMBNZN6zK/XEje6G2Hlql5AY0fkS2AS3nemwGIsSFYXmq9kzk2KoADoELaPXyA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=dEv4QYvZe2wrHXw0lOU2MdYAZozUIUamSoA9wDwwZ5U=;
+ b=V2j46v7AiE9XDbQBbqWiRfVi04bt3F418C/7lWu0C+wYHCnVjW2w/v216OyVWJA71DO+TAEYEWMA+o2yTRF87Fb33jdE0qr06OsyrAyxdUfq7RgrhhUJldE2vwtKvkPSn54werF4pPMU7z9XW5n4pjbSyZO+UzvGcxisVRcT5mFgSIo/aIqupW+GlQ0HjdiDEKucBjetElU6iwyK+MMoa1A5Qat9RrSH7DKdhvcDAAnal3C584+YcnZlyFgQjIDx3J1wvTfd/EuDFeOuKp28cVoSu6mvJZHyz0jyX/AVTdl3RHrO+XJOj2mB9rVAz+BEAEXerri29thrP3W0BpZJ0A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 193.8.40.94) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=leica-geosystems.com.cn; dmarc=pass (p=quarantine sp=quarantine
+ pct=100) action=none header.from=leica-geosystems.com.cn; dkim=none (message
+ not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=leica-geosystems.com.cn; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=dEv4QYvZe2wrHXw0lOU2MdYAZozUIUamSoA9wDwwZ5U=;
+ b=Zrwad5ZxIUrB+Q/ek1ZM1E5y9o3ew7WDVP+UEygS3bcZ67DuNG0mdxQ2VBgG1gb5Jxz8VxTxNEn++3nbjv/h92rQkLpNCxrGSLKrC7c12W8sPWytkPPSxxZ28K0emrl7LLvNJz6W7nkaa2gzzv1zVCnrHecKoJ1jEHkTMgduzIc=
+Received: from AM5PR1001CA0062.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:206:15::39) by AM8PR06MB7057.eurprd06.prod.outlook.com
+ (2603:10a6:20b:1d9::5) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5353.15; Fri, 17 Jun
+ 2022 02:31:24 +0000
+Received: from VE1EUR02FT031.eop-EUR02.prod.protection.outlook.com
+ (2603:10a6:206:15:cafe::72) by AM5PR1001CA0062.outlook.office365.com
+ (2603:10a6:206:15::39) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5353.14 via Frontend
+ Transport; Fri, 17 Jun 2022 02:31:24 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 193.8.40.94)
+ smtp.mailfrom=leica-geosystems.com.cn; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=leica-geosystems.com.cn;
+Received-SPF: Pass (protection.outlook.com: domain of leica-geosystems.com.cn
+ designates 193.8.40.94 as permitted sender) receiver=protection.outlook.com;
+ client-ip=193.8.40.94; helo=aherlnxbspsrv01.lgs-net.com; pr=C
+Received: from aherlnxbspsrv01.lgs-net.com (193.8.40.94) by
+ VE1EUR02FT031.mail.protection.outlook.com (10.152.12.135) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5353.14 via Frontend Transport; Fri, 17 Jun 2022 02:31:24 +0000
+From: Daide Li <dai-de.li@leica-geosystems.com.cn>
+To: openembedded-devel@lists.openembedded.org
+CC: ldd428@126.com,
+	Daide Li <dai-de.li@leica-geosystems.com.cn>
+Subject: [meta-python][kirkstone][PATCH V1] python3-iperf: initial add 0.1.11
+Date: Fri, 17 Jun 2022 02:31:21 +0000
+Message-ID: <20220617023121.1403528-1-dai-de.li@leica-geosystems.com.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
 Content-Type: text/plain
-X-Originating-IP: [10.167.225.131]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+X-MS-Office365-Filtering-Correlation-Id: d4dd9897-e8b5-429d-8612-08da50097900
+X-MS-TrafficTypeDiagnostic: AM8PR06MB7057:EE_
+X-Microsoft-Antispam-PRVS: 
+	<AM8PR06MB7057F899EDF02DAA085A520EA9AF9@AM8PR06MB7057.eurprd06.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	Yz70sqpi2EobySiI4f72/ObfKiOpJ7zFHSFsiinpdOOfwzPq6ZPQqdwjagD44+43FMwKUPuRIcaxE0PQXtuBSPLC2pr73uV95W18DaStA2taI/JDFJ73iO3jZTyWOkSad0VCQnjbQ+/2tqoKe9FSLWfJ5Ik0YKy6R5pXb/VyEScLolmzD/+oqlxVsyE0FhTEJX1wjeK2QDYUnvHUjevvZ11GuxpliqpVwJysmqclZEa88Sn+0QwamxJI3+mBOY/R9T1dZjHXUzWio9v4x2s8JtLqylE87m0I9bgwUR0AqwP8UQNNuduklsorbSYgLUScYl+LSJBEM7Kx09ccATizoYxMr40knkb8Og10CZ8n0GAoClVIAjhrEP6ef2FrkrgFb3xLyUWzNf2DHhHOdonH14Juf75WP2WNmOWLSXoKt6GZg0izkyEpptYMq9NidTvwds00EAJPTGNkgk/mIEzlwfcA8sLjym8ZRhZFWZnfQFeRT5I3NKGPF8GRoJSud+IqUd8Lxl0MPbpkuGPzALZKn4piRsUaT838hETyNuLJXl8ydEWpxnSjy38jwLSViDBBkURwWjFpm8rKsBL8jPnRpVj1HQCWU1LC/N8ijgC94DYGO9rv840rdie4msLqrCbJDHzAL1qmXHY0HZD5l5qYohuwK9+NfTPZ2CNpV0aOI7c3Xtb9aScRu5MeCdbISDmf1vltK1pYK8Z0DxljxljUAsMjoHz84vNUHBGlTj8jHrtkR6SDZW0yILkZ3+cy8NR/3wi07Y6EM+uiD56G2fZO1Q==
+X-Forefront-Antispam-Report: 
+	CIP:193.8.40.94;CTRY:CH;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:aherlnxbspsrv01.lgs-net.com;PTR:ahersrvdom50.leica-geosystems.com;CAT:NONE;SFS:(13230016)(4636009)(46966006)(40470700004)(36840700001)(316002)(118246002)(6916009)(36736006)(8936002)(82310400005)(81166007)(5660300002)(6506007)(336012)(6512007)(6666004)(47076005)(26005)(4744005)(186003)(1076003)(2906002)(107886003)(6486002)(40460700003)(36756003)(36860700001)(70586007)(8676002)(356005)(4326008)(70206006)(956004)(498600001)(86362001)(2616005);DIR:OUT;SFP:1102;
+X-OriginatorOrg: leica-geosystems.com.cn
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2022 02:31:24.0414
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ d4dd9897-e8b5-429d-8612-08da50097900
+X-MS-Exchange-CrossTenant-Id: 1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: 
+ TenantId=1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a;Ip=[193.8.40.94];Helo=[aherlnxbspsrv01.lgs-net.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+ VE1EUR02FT031.eop-EUR02.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR06MB7057
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Jun 2022 01:34:07 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Jun 2022 02:31:37 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97531
+ https://lists.openembedded.org/g/openembedded-devel/message/97532
 
-From: Xu Huan <xuhuan.fnst@fujitsu.com>
-
-Changelog:
-=========
-*  Explicitly export from top level of package #69.
-*  Transitioned pipelines from Travis-CI to GitHub Actions.
-      Python 3.10 added.
-
-
-Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
+Signed-off-by: Daide Li <dai-de.li@leica-geosystems.com.cn>
 ---
- .../python/{python3-smbus2_0.4.1.bb => python3-smbus2_0.4.2.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-smbus2_0.4.1.bb => python3-smbus2_0.4.2.bb} (84%)
+ .../recipes-devtools/python/python3-iperf_0.1.11.bb   | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-iperf_0.1.1=
+1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-smbus2_0.4.1.bb b/meta-python/recipes-devtools/python/python3-smbus2_0.4.2.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-smbus2_0.4.1.bb
-rename to meta-python/recipes-devtools/python/python3-smbus2_0.4.2.bb
-index a27793012..f22a402df 100644
---- a/meta-python/recipes-devtools/python/python3-smbus2_0.4.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-smbus2_0.4.2.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
- 
- inherit pypi setuptools3
- 
--SRC_URI[sha256sum] = "6276eb599b76c4e74372f2582d2282f03b4398f0da16bc996608e4f21557ca9b"
-+SRC_URI[sha256sum] = "634541ed794068a822fe7499f1577468b9d4641b68dd9bfb6d0eb7270f4d2a32"
- 
- CLEANBROKEN = "1"
- 
--- 
+diff --git a/meta-python/recipes-devtools/python/python3-iperf_0.1.11.bb b/=
+meta-python/recipes-devtools/python/python3-iperf_0.1.11.bb
+new file mode 100644
+index 000000000..36d646305
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-iperf_0.1.11.bb
+@@ -0,0 +1,11 @@
++SUMMARY =3D "Python wrapper around iperf3"
++HOMEPAGE =3D "https://github.com/thiezn/iperf3-python"
++AUTHOR =3D "Mathijs Mortimer <mathijs@mortimer.nl>"
++LICENSE =3D "MIT"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Df7d0900b3d30647cdda002c9549ca40=
+f"
++
++PYPI_PACKAGE =3D "iperf3"
++
++SRC_URI[sha256sum] =3D "d50eebbf2dcf445a173f98a82f9c433e0302d3dfb7987e1f21=
+b86b35ef63ce26"
++
++inherit setuptools3 pypi
+--=20
 2.25.1
 
 
