@@ -1,337 +1,958 @@
-Return-Path: <zboszor@pr.hu>
+Return-Path: <sakib.sajal@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 01E65C43334
-	for <webhook@archiver.kernel.org>; Fri, 17 Jun 2022 14:45:11 +0000 (UTC)
-Received: from mail6.pr.hu (mail6.pr.hu [87.242.0.6])
- by mx.groups.io with SMTP id smtpd.web08.30908.1655477100892812773
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4399CC43334
+	for <webhook@archiver.kernel.org>; Fri, 17 Jun 2022 16:53:23 +0000 (UTC)
+Received: from mail1.wrs.com (mail1.wrs.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web12.13.1655484798369102499
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Jun 2022 07:45:03 -0700
+ Fri, 17 Jun 2022 09:53:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@pr.hu header.s=pr20170203 header.b=mAXolrhK;
- spf=pass (domain: pr.hu, ip: 87.242.0.6, mailfrom: zboszor@pr.hu)
-Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
-	by frontdoor.pr.hu with esmtps  (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.94.2)
-	(envelope-from <zboszor@pr.hu>)
-	id 1o2DDW-0008Gs-CR; Fri, 17 Jun 2022 16:44:58 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
-	s=pr20170203; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=gQn9tpCzpmlM/yVAEZBOPoG9ZOakCfqU3Sj63+4bN+Y=; b=mAXolrhKkxyIBXCUd7Fowr7f0O
-	LF/aWKrrOwQ7J+hrR0b4NgK3XXk9jXtq/JQQ4uFlVukQdIfJg6lZr4ui3DdrmgtFVcKuCd3GjirAT
-	2+tSPKams/+4oX5u9s0e8b9Nyq5Y6x2f4tnIaPII1V73Mk2vkTNu3DBVXdspY10gdhINr1s/74dPJ
-	X2gOSatt/yX44j9MbKAnHgSAttxZgiAq4gf/jpNCr9FfnTCDLOf/KO7yYk7iLI4irgC0csCQ3chY7
-	42vB5qYhj0L4AcR6tVsejhWYtSYrtUayVGIAdGqybgYjF5FNUJVvSx7tpNvSCCNtsOrh48O6Qj4vY
-	H/IhX0EQ==;
-Received: from host-87-242-32-154.prtelecom.hu ([87.242.32.154]
- helo=[192.168.1.143])
-	by mail.pr.hu with esmtpsa  (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.94.2)
-	(envelope-from <zboszor@pr.hu>)
-	id 1o2DDN-00022U-Pm; Fri, 17 Jun 2022 16:44:56 +0200
-Message-ID: <2898777d-45f3-87a6-10c2-4feaaacc16c7@pr.hu>
-Date: Fri, 17 Jun 2022 16:44:47 +0200
+ dkim=missing;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid
+ domain name (domain: windriver.com, ip: 147.11.146.13,
+ mailfrom: sakib.sajal@windriver.com)
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.corp.ad.wrs.com
+ [147.11.82.252])
+	by mail1.wrs.com (8.15.2/8.15.2) with ESMTPS id 25HGrCL3015975
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri, 17 Jun 2022 09:53:17 -0700
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Fri, 17 Jun 2022 09:53:12 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.27; Fri, 17 Jun 2022 09:53:11 -0700
+Received: from yow-lpggp3.wrs.com (128.224.137.13) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Fri, 17 Jun 2022 09:53:11 -0700
+From: Sakib Sajal <sakib.sajal@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] minio: add recipe for minio client
+Date: Fri, 17 Jun 2022 12:53:11 -0400
+Message-ID: <20220617165311.5069-1-sakib.sajal@windriver.com>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.10.0
-Subject: Re: [oe] [PATCH 4/4] opencv: update 4.5.2 -> 4.5.5
-Content-Language: en-US
-To: Alexander Kanavin <alex.kanavin@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
- Alexander Kanavin <alex@linutronix.de>, Martin Jansa <Martin.Jansa@gmail.com>
-References: <20220122214652.929263-1-alex@linutronix.de>
- <20220122214652.929263-4-alex@linutronix.de>
- <ea4e7ed5-d922-9196-b566-94a9a06f96ec@pr.hu>
- <CANNYZj9J7xw_3gGSvAsve2p+2XzDbgrW9-r=_iLyjZwk179BtQ@mail.gmail.com>
- <9e65731e-66c9-1340-ac5e-e07e8979707b@pr.hu>
- <CANNYZj9ZgunqnQoT==c-O57huse465K970Gv_ssztRekvyjE5w@mail.gmail.com>
-From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@pr.hu>
-In-Reply-To: 
- <CANNYZj9ZgunqnQoT==c-O57huse465K970Gv_ssztRekvyjE5w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-X-Scan-Signature: 64a79119570279ccf86f0f2c97a274bb
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Jun 2022 14:45:11 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Jun 2022 16:53:23 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97536
+ https://lists.openembedded.org/g/openembedded-devel/message/97537
 
-SGksDQoNCkkganVzdCBzZW50IHRoZSBwYXRjaC4gUGxlYXNlIGJhY2twb3J0IGl0IHRvIEtp
-cmtzdG9uZS4NCg0KMjAyMi4gMDYuIDE3LiAxMToxNiBrZWx0ZXrDqXNzZWwsIEFsZXhhbmRl
-ciBLYW5hdmluIMOtcnRhOg0KPiBSaWdodCwgdGhlbiBwYXRjaGVzIHRvIHVwZGF0ZSB0byB0
-aGF0IHZlcnNpb24gd291bGQgYmUgYXBwcmVjaWF0ZWQgOikNCj4gDQo+IEFsZXgNCj4gDQo+
-IE9uIEZyaSwgMTcgSnVuIDIwMjIgYXQgMDc6MzUsIELDtnN6w7ZybcOpbnlpIFpvbHTDoW4g
-PHpib3N6b3JAcHIuaHU+IHdyb3RlOg0KPj4NCj4+IDIwMjIuIDA1LiAxOS4gMTE6NDQga2Vs
-dGV6w6lzc2VsLCBBbGV4YW5kZXIgS2FuYXZpbiDDrXJ0YToNCj4+PiBUaGFua3MgZm9yIHRo
-ZSBoZWFkcyB1cCwgSSB0aGluayB0aGUgc3RhbmRhcmQgcG9saWN5IGlzIHRvIHNpbXBseSB3
-YWl0DQo+Pj4gZm9yIDQuNi4wLg0KPj4NCj4+IEZZSSwgT3BlbkNWIDQuNi4wIHdhcyByZWxl
-YXNlZC4NCj4+IGh0dHBzOi8vZ2l0aHViLmNvbS9vcGVuY3Yvb3BlbmN2L3JlbGVhc2VzL3Rh
-Zy80LjYuMA0KPj4NCj4+Pg0KPj4+IEFsZXgNCj4+Pg0KPj4+IE9uIFRodSwgMTkgTWF5IDIw
-MjIgYXQgMTE6MzcsIELDtnN6w7ZybcOpbnlpIFpvbHTDoW4gPHpib3N6b3JAcHIuaHU+IHdy
-b3RlOg0KPj4+Pg0KPj4+PiAyMDIyLiAwMS4gMjIuIDIyOjQ2IGtlbHRlesOpc3NlbCwgQWxl
-eGFuZGVyIEthbmF2aW4gw61ydGE6DQo+Pj4+PiBEcm9wIGJhY2twb3J0cy4NCj4+Pj4+DQo+
-Pj4+PiBEaXNhYmxlIGZmbXBlZywgYXMgb3BlbmN2IGlzIG5vdCB5ZXQgY29tcGF0aWJsZSB3
-aXRoIGZmbXBlZyA1LjAuDQo+Pj4+DQo+Pj4+IFBsZWFzZSBiYWNrcG9ydCB0aGUgZmZtcGVn
-IDUuMCBzdXBwb3J0IHBhdGNoIHBsdXMNCj4+Pj4gdGhlIHN1cHBsZW1lbnRhbCBtZW1vcnkg
-bGVhayBmaXhlcyBpbnRyb2R1Y2VkIGJ5IGl0DQo+Pj4+IGZyb20gdGhlIHVwY29taW5nIG9w
-ZW5jdiA0LjYuMCwgdGhlbiByZS1lbmFibGUgdGhlDQo+Pj4+IGZmbXBlZyBwYWNrYWdlY29u
-ZmlnIHNldHRpbmc6DQo+Pj4+DQo+Pj4+IGh0dHBzOi8vZ2l0aHViLmNvbS9vcGVuY3Yvb3Bl
-bmN2L3B1bGwvMjE3NTQNCj4+Pj4gaHR0cHM6Ly9naXRodWIuY29tL29wZW5jdi9vcGVuY3Yv
-cHVsbC8yMTgxOQ0KPj4+Pg0KPj4+Pj4NCj4+Pj4+IFNpZ25lZC1vZmYtYnk6IEFsZXhhbmRl
-ciBLYW5hdmluIDxhbGV4QGxpbnV0cm9uaXguZGU+DQo+Pj4+PiAtLS0NCj4+Pj4+ICAgICAu
-Li5ndW1lbnQtdmVyc2lvbi1vZi1TZXRUb3RhbEJ5dGVzTGltaXQucGF0Y2ggfCA0MSAtLS0t
-LS0tLS0tLS0tLS0tLQ0KPj4+Pj4gICAgIC4uLi9vcGVuY3YvMDAwMS1zZm0tbGluay13aXRo
-LUdsb2dfTElCUy5wYXRjaCB8IDQ0IC0tLS0tLS0tLS0tLS0tLS0tLS0NCj4+Pj4+ICAgICAu
-Li4ve29wZW5jdl80LjUuMi5iYiA9PiBvcGVuY3ZfNC41LjUuYmJ9ICAgICAgfCAgNiArLS0N
-Cj4+Pj4+ICAgICAzIGZpbGVzIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgODkgZGVsZXRp
-b25zKC0pDQo+Pj4+PiAgICAgZGVsZXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1z
-dXBwb3J0L29wZW5jdi9vcGVuY3YvMDAwMS1Vc2UtdGhlLW9uZS1hcmd1bWVudC12ZXJzaW9u
-LW9mLVNldFRvdGFsQnl0ZXNMaW1pdC5wYXRjaA0KPj4+Pj4gICAgIGRlbGV0ZSBtb2RlIDEw
-MDY0NCBtZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9vcGVuY3Yvb3BlbmN2LzAwMDEtc2ZtLWxp
-bmstd2l0aC1HbG9nX0xJQlMucGF0Y2gNCj4+Pj4+ICAgICByZW5hbWUgbWV0YS1vZS9yZWNp
-cGVzLXN1cHBvcnQvb3BlbmN2L3tvcGVuY3ZfNC41LjIuYmIgPT4gb3BlbmN2XzQuNS41LmJi
-fSAoOTclKQ0KPj4+Pj4NCj4+Pj4+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3Vw
-cG9ydC9vcGVuY3Yvb3BlbmN2LzAwMDEtVXNlLXRoZS1vbmUtYXJndW1lbnQtdmVyc2lvbi1v
-Zi1TZXRUb3RhbEJ5dGVzTGltaXQucGF0Y2ggYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9v
-cGVuY3Yvb3BlbmN2LzAwMDEtVXNlLXRoZS1vbmUtYXJndW1lbnQtdmVyc2lvbi1vZi1TZXRU
-b3RhbEJ5dGVzTGltaXQucGF0Y2gNCj4+Pj4+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0K
-Pj4+Pj4gaW5kZXggNWQ4OGQxYTZhLi4wMDAwMDAwMDANCj4+Pj4+IC0tLSBhL21ldGEtb2Uv
-cmVjaXBlcy1zdXBwb3J0L29wZW5jdi9vcGVuY3YvMDAwMS1Vc2UtdGhlLW9uZS1hcmd1bWVu
-dC12ZXJzaW9uLW9mLVNldFRvdGFsQnl0ZXNMaW1pdC5wYXRjaA0KPj4+Pj4gKysrIC9kZXYv
-bnVsbA0KPj4+Pj4gQEAgLTEsNDEgKzAsMCBAQA0KPj4+Pj4gLUZyb20gOWNmYTg0MzEzYzU4
-MzNkNzI5NWZjZjU3YmU5M2Q1ZDJhYWFkZmQ4OCBNb24gU2VwIDE3IDAwOjAwOjAwIDIwMDEN
-Cj4+Pj4+IC1Gcm9tOiBWaW5jZW50IFJhYmF1ZCA8dnJhYmF1ZEBnb29nbGUuY29tPg0KPj4+
-Pj4gLURhdGU6IFNhdCwgMTAgSnVsIDIwMjEgMDA6MjE6NTIgKzAyMDANCj4+Pj4+IC1TdWJq
-ZWN0OiBbUEFUQ0hdIFVzZSB0aGUgb25lIGFyZ3VtZW50IHZlcnNpb24gb2YgU2V0VG90YWxC
-eXRlc0xpbWl0Lg0KPj4+Pj4gLQ0KPj4+Pj4gLVRoZSB0d28gYXJndW1lbnQgdmVyc2lvbnMg
-aGFzIGJlZW4gZGVwcmVjYXRlZCwgY2YNCj4+Pj4+IC1odHRwczovL2RldmVsb3BlcnMuZ29v
-Z2xlLmNvbS9wcm90b2NvbC1idWZmZXJzL2RvY3MvcmVmZXJlbmNlL2NwcC9nb29nbGUucHJv
-dG9idWYuaW8uY29kZWRfc3RyZWFtDQo+Pj4+PiAtDQo+Pj4+PiAtVXBzdHJlYW0tU3RhdHVz
-OiBCYWNrcG9ydCBbOWNmYTg0MzEzYzU4MzNkNzI5NWZjZjU3YmU5M2Q1ZDJhYWFkZmQ4OCAt
-IGZyb20gbWFzdGVyIGFmdGVyIDQuNS4zIHRhZ10NCj4+Pj4+IC1TaWduZWQtb2ZmLWJ5OiBN
-YXJ0aW4gSmFuc2EgPE1hcnRpbi5KYW5zYUBnbWFpbC5jb20+DQo+Pj4+PiAtLS0tDQo+Pj4+
-PiAtIG1vZHVsZXMvZG5uL3NyYy9jYWZmZS9jYWZmZV9pby5jcHAgfCA1ICsrKysrDQo+Pj4+
-PiAtIDEgZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKykNCj4+Pj4+IC0NCj4+Pj4+IC1k
-aWZmIC0tZ2l0IGEvbW9kdWxlcy9kbm4vc3JjL2NhZmZlL2NhZmZlX2lvLmNwcCBiL21vZHVs
-ZXMvZG5uL3NyYy9jYWZmZS9jYWZmZV9pby5jcHANCj4+Pj4+IC1pbmRleCAyZmM0ZDg0ZjQ2
-Li5lYmVjZjk1ZWVhIDEwMDY0NA0KPj4+Pj4gLS0tLSBhL21vZHVsZXMvZG5uL3NyYy9jYWZm
-ZS9jYWZmZV9pby5jcHANCj4+Pj4+IC0rKysgYi9tb2R1bGVzL2Rubi9zcmMvY2FmZmUvY2Fm
-ZmVfaW8uY3BwDQo+Pj4+PiAtQEAgLTkyLDYgKzkyLDcgQEANCj4+Pj4+IC0gI2lmZGVmIEhB
-VkVfUFJPVE9CVUYNCj4+Pj4+IC0gI2luY2x1ZGUgPGdvb2dsZS9wcm90b2J1Zi9pby9jb2Rl
-ZF9zdHJlYW0uaD4NCj4+Pj4+IC0gI2luY2x1ZGUgPGdvb2dsZS9wcm90b2J1Zi9pby96ZXJv
-X2NvcHlfc3RyZWFtX2ltcGwuaD4NCj4+Pj4+IC0rI2luY2x1ZGUgPGdvb2dsZS9wcm90b2J1
-Zi9zdHVicy9jb21tb24uaD4NCj4+Pj4+IC0gI2luY2x1ZGUgPGdvb2dsZS9wcm90b2J1Zi90
-ZXh0X2Zvcm1hdC5oPg0KPj4+Pj4gLQ0KPj4+Pj4gLSAjaW5jbHVkZSA8b3BlbmN2Mi9jb3Jl
-LmhwcD4NCj4+Pj4+IC1AQCAtMTExMSw3ICsxMTEyLDExIEBAIHN0YXRpYyBjb25zdCBpbnQg
-a1Byb3RvUmVhZEJ5dGVzTGltaXQgPSBJTlRfTUFYOyAgLy8gTWF4IHNpemUgb2YgMiBHQiBt
-aW51cyAxIGJ5DQo+Pj4+PiAtDQo+Pj4+PiAtIGJvb2wgUmVhZFByb3RvRnJvbUJpbmFyeSha
-ZXJvQ29weUlucHV0U3RyZWFtKiBpbnB1dCwgTWVzc2FnZSAqcHJvdG8pIHsNCj4+Pj4+IC0g
-ICAgIENvZGVkSW5wdXRTdHJlYW0gY29kZWRfaW5wdXQoaW5wdXQpOw0KPj4+Pj4gLSsjaWYg
-R09PR0xFX1BST1RPQlVGX1ZFUlNJT04gPj0gMzAwNjAwMA0KPj4+Pj4gLSsgICAgY29kZWRf
-aW5wdXQuU2V0VG90YWxCeXRlc0xpbWl0KGtQcm90b1JlYWRCeXRlc0xpbWl0KTsNCj4+Pj4+
-IC0rI2Vsc2UNCj4+Pj4+IC0gICAgIGNvZGVkX2lucHV0LlNldFRvdGFsQnl0ZXNMaW1pdChr
-UHJvdG9SZWFkQnl0ZXNMaW1pdCwgNTM2ODcwOTEyKTsNCj4+Pj4+IC0rI2VuZGlmDQo+Pj4+
-PiAtDQo+Pj4+PiAtICAgICByZXR1cm4gcHJvdG8tPlBhcnNlRnJvbUNvZGVkU3RyZWFtKCZj
-b2RlZF9pbnB1dCk7DQo+Pj4+PiAtIH0NCj4+Pj4+IC0tLQ0KPj4+Pj4gLTIuMzIuMA0KPj4+
-Pj4gLQ0KPj4+Pj4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L29wZW5j
-di9vcGVuY3YvMDAwMS1zZm0tbGluay13aXRoLUdsb2dfTElCUy5wYXRjaCBiL21ldGEtb2Uv
-cmVjaXBlcy1zdXBwb3J0L29wZW5jdi9vcGVuY3YvMDAwMS1zZm0tbGluay13aXRoLUdsb2df
-TElCUy5wYXRjaA0KPj4+Pj4gZGVsZXRlZCBmaWxlIG1vZGUgMTAwNjQ0DQo+Pj4+PiBpbmRl
-eCA3YjJjNDEwMGEuLjAwMDAwMDAwMA0KPj4+Pj4gLS0tIGEvbWV0YS1vZS9yZWNpcGVzLXN1
-cHBvcnQvb3BlbmN2L29wZW5jdi8wMDAxLXNmbS1saW5rLXdpdGgtR2xvZ19MSUJTLnBhdGNo
-DQo+Pj4+PiArKysgL2Rldi9udWxsDQo+Pj4+PiBAQCAtMSw0NCArMCwwIEBADQo+Pj4+PiAt
-RnJvbSBmZmUyMGZjNGVjNDZjNmI0OTFlZmYyOWEzOGY5MDY4NmQ0ZDAzNWY2IE1vbiBTZXAg
-MTcgMDA6MDA6MDAgMjAwMQ0KPj4+Pj4gLUZyb206IE1hcnRpbiBKYW5zYSA8TWFydGluLkph
-bnNhQGdtYWlsLmNvbT4NCj4+Pj4+IC1EYXRlOiBNb24sIDEyIEFwciAyMDIxIDIwOjM3OjQw
-ICswMDAwDQo+Pj4+PiAtU3ViamVjdDogW1BBVENIXSBzZm06IGxpbmsgd2l0aCBHbG9nX0xJ
-QlMNCj4+Pj4+IC0NCj4+Pj4+IC0qIGluIDQuNS4wIHRoZXJlIHdhcyBleHBsaWNpdCBsaW5r
-YWdlIHdpdGggR0xPR19MSUJSQVJZLCBidXQgc2luY2UgNC41LjEgd2l0aDoNCj4+Pj4+IC0g
-IGh0dHBzOi8vZ2l0aHViLmNvbS9vcGVuY3Yvb3BlbmN2X2NvbnRyaWIvY29tbWl0LzIzZWU2
-MmExOWI3YTNlNTBkNmRiZjI5NTM1OWQ4YjFhZmYyZTAzZmQNCj4+Pj4+IC0NCj4+Pj4+IC0g
-IGl0J3MgZ29uZSwgcHJvYmFibHkgYmVjYXVzZSBHbG9nX0ZPVU5EIGlzIGFscmVhZHkgc2V0
-IGZyb20gQ2VyZXMsDQo+Pj4+PiAtICBidXQgdGhlbiBHTE9HX0xJQlJBUklFUyBpcyBlbXB0
-eSBpbiBMSUJNVl9MSUdIVF9MSUJTIGFuZCBidWlsZCB3aXRoIGdvbGQgZmFpbHM6DQo+Pj4+
-PiAtDQo+Pj4+PiAtRkFJTEVEOiBiaW4vZXhhbXBsZV90dXRvcmlhbF9wZXJzcGVjdGl2ZV9j
-b3JyZWN0aW9uDQo+Pj4+PiAtOiAmJiBUT1BESVIvdG1wLWdsaWJjL3dvcmsvY29yZTItNjQt
-b2UtbGludXgvb3BlbmN2LzQuNS4yLXIwL3JlY2lwZS1zeXNyb290LW5hdGl2ZS91c3IvYmlu
-L3g4Nl82NC1vZS1saW51eC94ODZfNjQtb2UtbGludXgtZysrIC1tNjQgLW1hcmNoPWNvcmUy
-IC1tdHVuZT1jb3JlMiAtbXNzZTMgLW1mcG1hdGg9c3NlIC1JVE9QRElSL3RtcC1nbGliYy93
-b3JrL2NvcmUyLTY0LW9lLWxpbnV4L29wZW5jdi80LjUuMi1yMC9naXQvaW5jbHVkZSAgLWZz
-dGFjay1wcm90ZWN0b3Itc3Ryb25nICAtTzIgLURfRk9SVElGWV9TT1VSQ0U9MiAtV2Zvcm1h
-dCAtV2Zvcm1hdC1zZWN1cml0eSAtV2Vycm9yPWZvcm1hdC1zZWN1cml0eSAgLS1zeXNyb290
-PVRPUERJUi90bXAtZ2xpYmMvd29yay9jb3JlMi02NC1vZS1saW51eC9vcGVuY3YvNC41LjIt
-cjAvcmVjaXBlLXN5c3Jvb3QgIC1PMiAtcGlwZSAtZyAtZmVsaW1pbmF0ZS11bnVzZWQtZGVi
-dWctdHlwZXMgLWZtYWNyby1wcmVmaXgtbWFwPVRPUERJUi90bXAtZ2xpYmMvd29yay9jb3Jl
-Mi02NC1vZS1saW51eC9vcGVuY3YvNC41LjItcjA9L3Vzci9zcmMvZGVidWcvb3BlbmN2LzQu
-NS4yLXIwICAgICAgICAgICAgICAgICAgICAgIC1mZGVidWctcHJlZml4LW1hcD1UT1BESVIv
-dG1wLWdsaWJjL3dvcmsvY29yZTItNjQtb2UtbGludXgvb3BlbmN2LzQuNS4yLXIwPS91c3Iv
-c3JjL2RlYnVnL29wZW5jdi80LjUuMi1yMCAgICAgICAgICAgICAgICAgICAgICAtZmRlYnVn
-LXByZWZpeC1tYXA9VE9QRElSL3RtcC1nbGliYy93b3JrL2NvcmUyLTY0LW9lLWxpbnV4L29w
-ZW5jdi80LjUuMi1yMC9yZWNpcGUtc3lzcm9vdD0gICAgICAgICAgICAgICAgICAgICAgLWZk
-ZWJ1Zy1wcmVmaXgtbWFwPVRPUERJUi90bXAtZ2xpYmMvd29yay9jb3JlMi02NC1vZS1saW51
-eC9vcGVuY3YvNC41LjItcjAvcmVjaXBlLXN5c3Jvb3QtbmF0aXZlPSAgLWZ2aXNpYmlsaXR5
-LWlubGluZXMtaGlkZGVuICAtbTY0IC1tYXJjaD1jb3JlMiAtbXR1bmU9Y29yZTIgLW1zc2Uz
-IC1tZnBtYXRoPXNzZSAtSVRPUERJUi90bXAtZ2xpYmMvd29yay9jb3JlMi02NC1vZS1saW51
-eC9vcGVuY3YvNC41LjItcjAvZ2l0L2luY2x1ZGUgIC1mc3RhY2stcHJvdGVjdG9yLXN0cm9u
-ZyAgLU8yIC1EX0ZPUlRJRllfU09VUkNFPTIgLVdmb3JtYXQgLVdmb3JtYXQtc2VjdXJpdHkg
-LVdlcnJvcj1mb3JtYXQtc2VjdXJpdHkgIC0tc3lzcm9vdD1UT1BESVIvdG1wLWdsaWJjL3dv
-cmsvY29yZTItNjQtb2UtbGludXgvb3BlbmN2LzQuNS4yLXIwL3JlY2lwZS1zeXNyb290ICAg
-LWZzaWduZWQtY2hhciAtVyAtV2FsbCAtV2Vycm9yPXJldHVybi10eXBlIC1XZXJyb3I9bm9u
-LXZpcnR1YWwtZHRvciAtV2Vycm9yPWFkZHJlc3MgLVdlcnJvcj1zZXF1ZW5jZS1wb2ludCAt
-V2Zvcm1hdCAtV2Vycm9yPWZvcm1hdC1zZWN1cml0eSAtV21pc3NpbmctZGVjbGFyYXRpb25z
-IC1XdW5kZWYgLVdpbml0LXNlbGYgLVdwb2ludGVyLWFyaXRoIC1Xc2hhZG93IC1Xc2lnbi1w
-cm9tbyAtV3VuaW5pdGlhbGl6ZWQgLVdzdWdnZXN0LW92ZXJyaWRlIC1Xbm8tZGVsZXRlLW5v
-bi12aXJ0dWFsLWR0b3IgLVduby1jb21tZW50IC1XaW1wbGljaXQtZmFsbHRocm91Z2g9MyAt
-V25vLXN0cmljdC1vdmVyZmxvdyAtZmRpYWdub3N0aWNzLXNob3ctb3B0aW9uIC1Xbm8tbG9u
-Zy1sb25nIC1wdGhyZWFkIC1mb21pdC1mcmFtZS1wb2ludGVyIC1mZnVuY3Rpb24tc2VjdGlv
-bnMgLWZkYXRhLXNlY3Rpb25zICAtbXNzZSAtbXNzZTIgLW1zc2UzIC1tc3NzZTMgLUROREVC
-VUcgIC1ETkRFQlVHICAtbTY0IC1tYXJjaD1jb3JlMiAtbXR1bmU9Y29yZTIgLW1zc2UzIC1t
-ZnBtYXRoPXNzZSAtSVRPUERJUi90bXAtZ2xpYmMvd29yay9jb3JlMi02NC1vZS1saW51eC9v
-cGVuY3YvNC41LjItcjAvZ2l0L2luY2x1ZGUgIC1mc3RhY2stcHJvdGVjdG9yLXN0cm9uZyAg
-LU8yIC1EX0ZPUlRJRllfU09VUkNFPTIgLVdmb3JtYXQgLVdmb3JtYXQtc2VjdXJpdHkgLVdl
-cnJvcj1mb3JtYXQtc2VjdXJpdHkgIC0tc3lzcm9vdD1UT1BESVIvdG1wLWdsaWJjL3dvcmsv
-Y29yZTItNjQtb2UtbGludXgvb3BlbmN2LzQuNS4yLXIwL3JlY2lwZS1zeXNyb290ICAtTzIg
-LXBpcGUgLWcgLWZlbGltaW5hdGUtdW51c2VkLWRlYnVnLXR5cGVzIC1mbWFjcm8tcHJlZml4
-LW1hcD1UT1BESVIvdG1wLWdsaWJjL3dvcmsvY29yZTItNjQtb2UtbGludXgvb3BlbmN2LzQu
-NS4yLXIwPS91c3Ivc3JjL2RlYnVnL29wZW5jdi80LjUuMi1yMCAgICAgICAgICAgICAgICAg
-ICAgICAtZmRlYnVnLXByZWZpeC1tYXA9VE9QRElSL3RtcC1nbGliYy93b3JrL2NvcmUyLTY0
-LW9lLWxpbnV4L29wZW5jdi80LjUuMi1yMD0vdXNyL3NyYy9kZWJ1Zy9vcGVuY3YvNC41LjIt
-cjAgICAgICAgICAgICAgICAgICAgICAgLWZkZWJ1Zy1wcmVmaXgtbWFwPVRPUERJUi90bXAt
-Z2xpYmMvd29yay9jb3JlMi02NC1vZS1saW51eC9vcGVuY3YvNC41LjItcjAvcmVjaXBlLXN5
-c3Jvb3Q9ICAgICAgICAgICAgICAgICAgICAgIC1mZGVidWctcHJlZml4LW1hcD1UT1BESVIv
-dG1wLWdsaWJjL3dvcmsvY29yZTItNjQtb2UtbGludXgvb3BlbmN2LzQuNS4yLXIwL3JlY2lw
-ZS1zeXNyb290LW5hdGl2ZT0gIC1mdmlzaWJpbGl0eS1pbmxpbmVzLWhpZGRlbiAgLW02NCAt
-bWFyY2g9Y29yZTIgLW10dW5lPWNvcmUyIC1tc3NlMyAtbWZwbWF0aD1zc2UgLUlUT1BESVIv
-dG1wLWdsaWJjL3dvcmsvY29yZTItNjQtb2UtbGludXgvb3BlbmN2LzQuNS4yLXIwL2dpdC9p
-bmNsdWRlICAtZnN0YWNrLXByb3RlY3Rvci1zdHJvbmcgIC1PMiAtRF9GT1JUSUZZX1NPVVJD
-RT0yIC1XZm9ybWF0IC1XZm9ybWF0LXNlY3VyaXR5IC1XZXJyb3I9Zm9ybWF0LXNlY3VyaXR5
-ICAtLXN5c3Jvb3Q9VE9QRElSL3RtcC1nbGliYy93b3JrL2NvcmUyLTY0LW9lLWxpbnV4L29w
-ZW5jdi80LjUuMi1yMC9yZWNpcGUtc3lzcm9vdCAtV2wsLU8xIC1XbCwtLWhhc2gtc3R5bGU9
-Z251IC1XbCwtLWFzLW5lZWRlZCAtV2wsLXoscmVscm8sLXosbm93IC1XbCwtTzEgLVdsLC0t
-aGFzaC1zdHlsZT1nbnUgLVdsLC0tYXMtbmVlZGVkIC1XbCwteixyZWxybywteixub3cgIC1X
-bCwtLWdjLXNlY3Rpb25zIC1XbCwtLWFzLW5lZWRlZCBzYW1wbGVzL2NwcC9DTWFrZUZpbGVz
-L2V4YW1wbGVfdHV0b3JpYWxfcGVyc3BlY3RpdmVfY29ycmVjdGlvbi5kaXIvdHV0b3JpYWxf
-Y29kZS9mZWF0dXJlczJEL0hvbW9ncmFwaHkvcGVyc3BlY3RpdmVfY29ycmVjdGlvbi5jcHAu
-byAtbyBiaW4vZXhhbXBsZV90dXRvcmlhbF9wZXJzcGVjdGl2ZV9jb3JyZWN0aW9uICAtbGRs
-ICAtbG0gIC1scHRocmVhZCAgLWxydCAgbGliL2xpYm9wZW5jdl9nYXBpLnNvLjQuNS4yICBs
-aWIvbGlib3BlbmN2X3N0aXRjaGluZy5zby40LjUuMiAgbGliL2xpYm9wZW5jdl90cy5zby40
-LjUuMiAgbGliL2xpYm9wZW5jdl9hbHBoYW1hdC5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9h
-cnVjby5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9iZ3NlZ20uc28uNC41LjIgIGxpYi9saWJv
-cGVuY3ZfYmlvaW5zcGlyZWQuc28uNC41LjIgIGxpYi9saWJvcGVuY3ZfY2NhbGliLnNvLjQu
-NS4yICBsaWIvbGlib3BlbmN2X2Rubl9vYmpkZXRlY3Quc28uNC41LjIgIGxpYi9saWJvcGVu
-Y3ZfZG5uX3N1cGVycmVzLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X2RwbS5zby40LjUuMiAg
-bGliL2xpYm9wZW5jdl9mYWNlLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X2Z1enp5LnNvLjQu
-NS4yICBsaWIvbGlib3BlbmN2X2hmcy5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9pbWdfaGFz
-aC5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9pbnRlbnNpdHlfdHJhbnNmb3JtLnNvLjQuNS4y
-ICBsaWIvbGlib3BlbmN2X2xpbmVfZGVzY3JpcHRvci5zby40LjUuMiAgbGliL2xpYm9wZW5j
-dl9tY2Muc28uNC41LjIgIGxpYi9saWJvcGVuY3ZfcXVhbGl0eS5zby40LjUuMiAgbGliL2xp
-Ym9wZW5jdl9yYXBpZC5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9yZWcuc28uNC41LjIgIGxp
-Yi9saWJvcGVuY3ZfcmdiZC5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9zYWxpZW5jeS5zby40
-LjUuMiAgbGliL2xpYm9wZW5jdl9zZm0uc28uNC41LjIgIGxpYi9saWJvcGVuY3Zfc3RlcmVv
-LnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X3N0cnVjdHVyZWRfbGlnaHQuc28uNC41LjIgIGxp
-Yi9saWJvcGVuY3Zfc3VwZXJyZXMuc28uNC41LjIgIGxpYi9saWJvcGVuY3Zfc3VyZmFjZV9t
-YXRjaGluZy5zby40LjUuMiAgbGliL2xpYm9wZW5jdl90cmFja2luZy5zby40LjUuMiAgbGli
-L2xpYm9wZW5jdl92aWRlb3N0YWIuc28uNC41LjIgIGxpYi9saWJvcGVuY3Zfd2VjaGF0X3Fy
-Y29kZS5zby40LjUuMiAgbGliL2xpYm9wZW5jdl94ZmVhdHVyZXMyZC5zby40LjUuMiAgbGli
-L2xpYm9wZW5jdl94b2JqZGV0ZWN0LnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X3hwaG90by5z
-by40LjUuMiAgbGliL2xpYm9wZW5jdl9zaGFwZS5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9o
-aWdoZ3VpLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X2RhdGFzZXRzLnNvLjQuNS4yICBsaWIv
-bGlib3BlbmN2X21sLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X3Bsb3Quc28uNC41LjIgIGxp
-Yi9saWJvcGVuY3ZfcGhhc2VfdW53cmFwcGluZy5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9v
-cHRmbG93LnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X3hpbWdwcm9jLnNvLjQuNS4yICBsaWIv
-bGlib3BlbmN2X3ZpZGVvaW8uc28uNC41LjIgIGxpYi9saWJvcGVuY3ZfdmlkZW8uc28uNC41
-LjIgIGxpYi9saWJvcGVuY3ZfZG5uLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X2ltZ2NvZGVj
-cy5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9vYmpkZXRlY3Quc28uNC41LjIgIGxpYi9saWJv
-cGVuY3ZfY2FsaWIzZC5zby40LjUuMiAgbGliL2xpYm9wZW5jdl9mZWF0dXJlczJkLnNvLjQu
-NS4yICBsaWIvbGlib3BlbmN2X2ZsYW5uLnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X3Bob3Rv
-LnNvLjQuNS4yICBsaWIvbGlib3BlbmN2X2ltZ3Byb2Muc28uNC41LjIgIGxpYi9saWJvcGVu
-Y3ZfY29yZS5zby40LjUuMiAgLVdsLC1ycGF0aC1saW5rLFRPUERJUi90bXAtZ2xpYmMvd29y
-ay9jb3JlMi02NC1vZS1saW51eC9vcGVuY3YvNC41LjItcjAvYnVpbGQvbGliICYmIDoNCj4+
-Pj4+IC1saWIvbGlib3BlbmN2X3NmbS5zby40LjUuMjogZXJyb3I6IHVuZGVmaW5lZCByZWZl
-cmVuY2UgdG8gJ2dvb2dsZTo6TG9nTWVzc2FnZTo6TG9nTWVzc2FnZShjaGFyIGNvbnN0Kiwg
-aW50KScNCj4+Pj4+IC1saWIvbGlib3BlbmN2X3NmbS5zby40LjUuMjogZXJyb3I6IHVuZGVm
-aW5lZCByZWZlcmVuY2UgdG8gJ2dvb2dsZTo6TG9nTWVzc2FnZTo6c3RyZWFtKCknDQo+Pj4+
-PiAtbGliL2xpYm9wZW5jdl9zZm0uc28uNC41LjI6IGVycm9yOiB1bmRlZmluZWQgcmVmZXJl
-bmNlIHRvICdnb29nbGU6OkxvZ01lc3NhZ2U6On5Mb2dNZXNzYWdlKCknDQo+Pj4+PiAtbGli
-L2xpYm9wZW5jdl9zZm0uc28uNC41LjI6IGVycm9yOiB1bmRlZmluZWQgcmVmZXJlbmNlIHRv
-ICdnb29nbGU6OmtMb2dTaXRlVW5pbml0aWFsaXplZCcNCj4+Pj4+IC1saWIvbGlib3BlbmN2
-X3NmbS5zby40LjUuMjogZXJyb3I6IHVuZGVmaW5lZCByZWZlcmVuY2UgdG8gJ2ZMSTo6RkxB
-R1NfdicNCj4+Pj4+IC1saWIvbGlib3BlbmN2X3NmbS5zby40LjUuMjogZXJyb3I6IHVuZGVm
-aW5lZCByZWZlcmVuY2UgdG8gJ2dvb2dsZTo6SW5pdFZMT0czX18oaW50KiosIGludCosIGNo
-YXIgY29uc3QqLCBpbnQpJw0KPj4+Pj4gLWxpYi9saWJvcGVuY3Zfc2ZtLnNvLjQuNS4yOiBl
-cnJvcjogdW5kZWZpbmVkIHJlZmVyZW5jZSB0byAnZ29vZ2xlOjpMb2dNZXNzYWdlRmF0YWw6
-OkxvZ01lc3NhZ2VGYXRhbChjaGFyIGNvbnN0KiwgaW50KScNCj4+Pj4+IC1saWIvbGlib3Bl
-bmN2X3NmbS5zby40LjUuMjogZXJyb3I6IHVuZGVmaW5lZCByZWZlcmVuY2UgdG8gJ2dvb2ds
-ZTo6TG9nTWVzc2FnZUZhdGFsOjp+TG9nTWVzc2FnZUZhdGFsKCknDQo+Pj4+PiAtY29sbGVj
-dDI6IGVycm9yOiBsZCByZXR1cm5lZCAxIGV4aXQgc3RhdHVzDQo+Pj4+PiAtDQo+Pj4+PiAt
-ICBBZGQgR2xvZ19MSUJTIHdoaWNoIGlzIHNldCB0byB0aGUgc2FtZSB2YWx1ZSBhcyBHTE9H
-X0xJQlJBUklFUyB1c2VkIHRvIGJlLg0KPj4+Pj4gLQ0KPj4+Pj4gLVVwc3RyZWFtLVN0YXR1
-czogU3VibWl0dGVkIFtodHRwczovL2dpdGh1Yi5jb20vb3BlbmN2L29wZW5jdl9jb250cmli
-L3B1bGwvMjkyM10NCj4+Pj4+IC0NCj4+Pj4+IC1TaWduZWQtb2ZmLWJ5OiBNYXJ0aW4gSmFu
-c2EgPE1hcnRpbi5KYW5zYUBnbWFpbC5jb20+DQo+Pj4+PiAtLS0tDQo+Pj4+PiAtIG1vZHVs
-ZXMvc2ZtL0NNYWtlTGlzdHMudHh0IHwgMSArDQo+Pj4+PiAtIDEgZmlsZSBjaGFuZ2VkLCAx
-IGluc2VydGlvbigrKQ0KPj4+Pj4gLQ0KPj4+Pj4gLWRpZmYgLS1naXQgYS9tb2R1bGVzL3Nm
-bS9DTWFrZUxpc3RzLnR4dCBiL21vZHVsZXMvc2ZtL0NNYWtlTGlzdHMudHh0DQo+Pj4+PiAt
-aW5kZXggMDQ1YTFmZTZlLi5lZTdjZWNkYWMgMTAwNjQ0DQo+Pj4+PiAtLS0tIGEvbW9kdWxl
-cy9zZm0vQ01ha2VMaXN0cy50eHQNCj4+Pj4+IC0rKysgYi9tb2R1bGVzL3NmbS9DTWFrZUxp
-c3RzLnR4dA0KPj4+Pj4gLUBAIC04NCw2ICs4NCw3IEBAIHNldChMSUJNVl9MSUdIVF9MSUJT
-DQo+Pj4+PiAtICAgbXVsdGl2aWV3DQo+Pj4+PiAtICAgbnVtZXJpYw0KPj4+Pj4gLSAgICR7
-R0xPR19MSUJSQVJJRVN9DQo+Pj4+PiAtKyAgJHtHbG9nX0xJQlN9DQo+Pj4+PiAtICAgJHtH
-RkxBR1NfTElCUkFSSUVTfQ0KPj4+Pj4gLSApDQo+Pj4+PiAtDQo+Pj4+PiBkaWZmIC0tZ2l0
-IGEvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvb3BlbmN2L29wZW5jdl80LjUuMi5iYiBiL21l
-dGEtb2UvcmVjaXBlcy1zdXBwb3J0L29wZW5jdi9vcGVuY3ZfNC41LjUuYmINCj4+Pj4+IHNp
-bWlsYXJpdHkgaW5kZXggOTclDQo+Pj4+PiByZW5hbWUgZnJvbSBtZXRhLW9lL3JlY2lwZXMt
-c3VwcG9ydC9vcGVuY3Yvb3BlbmN2XzQuNS4yLmJiDQo+Pj4+PiByZW5hbWUgdG8gbWV0YS1v
-ZS9yZWNpcGVzLXN1cHBvcnQvb3BlbmN2L29wZW5jdl80LjUuNS5iYg0KPj4+Pj4gaW5kZXgg
-MmYyYTUwNWVkLi5jYTUwZTgwYjAgMTAwNjQ0DQo+Pj4+PiAtLS0gYS9tZXRhLW9lL3JlY2lw
-ZXMtc3VwcG9ydC9vcGVuY3Yvb3BlbmN2XzQuNS4yLmJiDQo+Pj4+PiArKysgYi9tZXRhLW9l
-L3JlY2lwZXMtc3VwcG9ydC9vcGVuY3Yvb3BlbmN2XzQuNS41LmJiDQo+Pj4+PiBAQCAtMTAs
-NyArMTAsNyBAQCBBUk1fSU5TVFJVQ1RJT05fU0VUOmFybXY1ID0gImFybSINCj4+Pj4+DQo+
-Pj4+PiAgICAgREVQRU5EUyA9ICJsaWJ0b29sIHN3aWctbmF0aXZlIGJ6aXAyIHpsaWIgZ2xp
-Yi0yLjAgbGlid2VicCINCj4+Pj4+DQo+Pj4+PiAtU1JDUkVWX29wZW5jdiA9ICI2OTM1N2Ix
-ZTg4NjgwNjU4YTA3Y2ZmZGU3Njc4YTRkNjk3NDY5ZjAzIg0KPj4+Pj4gK1NSQ1JFVl9vcGVu
-Y3YgPSAiZGFkMjYzMzlhOTc1YjQ5Y2ZiNmM3ZGJlNGJkNTI3NmM5ZGNiMzZlMiINCj4+Pj4+
-ICAgICBTUkNSRVZfY29udHJpYiA9ICJmNWQ3ZjY3MTJkNGZmMjI5YmE0ZjQ1Y2Y3OWRmZDEx
-YzU1N2Q1NmZkIg0KPj4+Pj4gICAgIFNSQ1JFVl9pcHAgPSAiYTU2YjZhYzZmMDMwYzMxMmIy
-ZGNlMTc0MzBlZWYxM2FlZDlhZjI3NCINCj4+Pj4+ICAgICBTUkNSRVZfYm9vc3RkZXNjID0g
-IjM0ZTQyMDZhZWY0NGQ1MGU2YmJjZDBhYjA2MzU0YjUyZTc0NjZkMjYiDQo+Pj4+PiBAQCAt
-NTEsOCArNTEsNiBAQCBTUkNfVVJJID0gImdpdDovL2dpdGh1Yi5jb20vb3BlbmN2L29wZW5j
-di5naXQ7bmFtZT1vcGVuY3Y7YnJhbmNoPW1hc3Rlcjtwcm90b2NvbA0KPj4+Pj4gICAgICAg
-ICAgICAgICAgZmlsZTovLzAwMDEtRG9udC11c2UtaXN5c3RlbS5wYXRjaCBcDQo+Pj4+PiAg
-ICAgICAgICAgICAgICBmaWxlOi8vZG93bmxvYWQucGF0Y2ggXA0KPj4+Pj4gICAgICAgICAg
-ICAgICAgZmlsZTovLzAwMDEtTWFrZS10cy1tb2R1bGUtZXh0ZXJuYWwucGF0Y2ggXA0KPj4+
-Pj4gLSAgICAgICAgICAgZmlsZTovLzAwMDEtc2ZtLWxpbmstd2l0aC1HbG9nX0xJQlMucGF0
-Y2g7cGF0Y2hkaXI9Li4vY29udHJpYiBcDQo+Pj4+PiAtICAgICAgICAgICBmaWxlOi8vMDAw
-MS1Vc2UtdGhlLW9uZS1hcmd1bWVudC12ZXJzaW9uLW9mLVNldFRvdGFsQnl0ZXNMaW1pdC5w
-YXRjaCBcDQo+Pj4+PiAgICAgICAgICAgICAgICAiDQo+Pj4+PiAgICAgU1JDX1VSSTphcHBl
-bmQ6cmlzY3Y2NCA9ICIgZmlsZTovLzAwMDEtVXNlLU9zLXRvLWNvbXBpbGUtdGlueXhtbDIu
-Y3BwLnBhdGNoO3BhdGNoZGlyPS4uL2NvbnRyaWIiDQo+Pj4+Pg0KPj4+Pj4gQEAgLTEwNSw3
-ICsxMDMsNyBAQCBFWFRSQV9PRUNNQUtFOmFwcGVuZDp4ODYgPSAiIC1EWDg2PU9OIg0KPj4+
-Pj4NCj4+Pj4+ICAgICBQQUNLQUdFQ09ORklHID8/PSAiZ2FwaSBweXRob24zIGVpZ2VuIGpw
-ZWcgcG5nIHRpZmYgdjRsIGxpYnY0bCBnc3RyZWFtZXIgc2FtcGxlcyB0YmIgZ3Bob3RvMiBc
-DQo+Pj4+PiAgICAgICAgICR7QGJiLnV0aWxzLmNvbnRhaW5zKCJESVNUUk9fRkVBVFVSRVMi
-LCAieDExIiwgImd0ayIsICIiLCBkKX0gXA0KPj4+Pj4gLSAgICAke0BiYi51dGlscy5jb250
-YWlucygiTElDRU5TRV9GTEFHU19XSElURUxJU1QiLCAiY29tbWVyY2lhbCIsICJsaWJhdiIs
-ICIiLCBkKX0iDQo+Pj4+PiArICAgICINCj4+Pj4+DQo+Pj4+PiAgICAgIyBUQkIgZG9lcyBu
-b3QgYnVpbGQgZm9yIHBvd2VycGMgc28gZGlzYWJsZSB0aGF0IHBhY2thZ2UgY29uZmlnDQo+
-Pj4+PiAgICAgUEFDS0FHRUNPTkZJRzpyZW1vdmU6cG93ZXJwYyA9ICJ0YmIiDQo+Pj4+Pg0K
-Pj4+Pj4NCj4+Pj4+DQo+Pj4+PiAtPS09LT0tPS09LT0tPS09LT0tPS09LQ0KPj4+Pj4gTGlu
-a3M6IFlvdSByZWNlaXZlIGFsbCBtZXNzYWdlcyBzZW50IHRvIHRoaXMgZ3JvdXAuDQo+Pj4+
-PiBWaWV3L1JlcGx5IE9ubGluZSAoIzk1MDExKTogaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRk
-ZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL21lc3NhZ2UvOTUwMTENCj4+Pj4+IE11dGUg
-VGhpcyBUb3BpYzogaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL210Lzg4NjE0MDE1
-LzM2MTc3MjgNCj4+Pj4+IEdyb3VwIE93bmVyOiBvcGVuZW1iZWRkZWQtZGV2ZWwrb3duZXJA
-bGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPj4+Pj4gVW5zdWJzY3JpYmU6IGh0dHBzOi8vbGlz
-dHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC91bnN1YiBbemJvc3pv
-ckBwci5odV0NCj4+Pj4+IC09LT0tPS09LT0tPS09LT0tPS09LT0tDQo+Pj4+Pg0KPj4+Pg0K
-Pj4NCg0K
+MinIO Client (mc) provides a modern alternative to UNIX commands like
+ls, cat, cp, mirror, diff, find etc. It supports filesystems and Amazon
+S3 compatible cloud storage service (AWS Signature v2 and v4).
+
+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
+---
+ .../recipes-extended/minio/minio/modules.txt  | 208 ++++++
+ meta-oe/recipes-extended/minio/minio_git.bb   | 673 ++++++++++++++++++
+ 2 files changed, 881 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/minio/minio/modules.txt
+ create mode 100644 meta-oe/recipes-extended/minio/minio_git.bb
+
+diff --git a/meta-oe/recipes-extended/minio/minio/modules.txt b/meta-oe/recipes-extended/minio/minio/modules.txt
+new file mode 100644
+index 000000000..2777dc8dc
+--- /dev/null
++++ b/meta-oe/recipes-extended/minio/minio/modules.txt
+@@ -0,0 +1,208 @@
++# github.com/charmbracelet/bubbletea v0.19.3
++## explicit
++# github.com/cheggaaa/pb v1.0.29
++## explicit
++# github.com/dustin/go-humanize v1.0.0
++## explicit
++# github.com/fatih/color v1.13.0
++## explicit
++# github.com/go-ole/go-ole v1.2.6
++## explicit
++# github.com/goccy/go-json v0.8.1
++## explicit
++# github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510
++## explicit
++# github.com/google/uuid v1.3.0
++## explicit
++# github.com/inconshreveable/mousetrap v1.0.0
++## explicit
++# github.com/json-iterator/go v1.1.12
++## explicit
++# github.com/klauspost/compress v1.13.6
++## explicit
++# github.com/mattn/go-ieproxy v0.0.1
++## explicit
++# github.com/mattn/go-isatty v0.0.14
++## explicit
++# github.com/minio/cli v1.22.0
++## explicit
++# github.com/minio/colorjson v1.0.2
++## explicit
++# github.com/minio/filepath v1.0.0
++## explicit
++# github.com/minio/madmin-go v1.3.11
++## explicit
++# github.com/minio/md5-simd v1.1.2
++## explicit
++# github.com/minio/minio-go/v7 v7.0.24
++## explicit
++# github.com/minio/pkg v1.1.21
++## explicit
++# github.com/minio/selfupdate v0.4.0
++## explicit
++# github.com/minio/sha256-simd v1.0.0
++## explicit
++# github.com/mitchellh/go-homedir v1.1.0
++## explicit
++# github.com/pkg/xattr v0.4.4
++## explicit
++# github.com/posener/complete v1.2.3
++## explicit
++# github.com/prometheus/client_golang v1.11.0
++## explicit
++# github.com/rjeczalik/notify v0.9.2
++## explicit
++# github.com/rs/xid v1.3.0
++## explicit
++# github.com/secure-io/sio-go v0.3.1
++## explicit
++# github.com/shirou/gopsutil/v3 v3.21.12
++## explicit
++# github.com/tidwall/gjson v1.12.1
++## explicit
++# golang.org/x/crypto v0.0.0-20220128200615-198e4374d7ed
++## explicit
++# golang.org/x/net v0.0.0-20220127200216-cd36cc0744dd
++## explicit
++# golang.org/x/text v0.3.7
++## explicit
++# gopkg.in/check.v1 v1.0.0-20200902074654-038fdea0a05b
++## explicit
++# gopkg.in/h2non/filetype.v1 v1.0.5
++## explicit
++# gopkg.in/yaml.v2 v2.4.0
++## explicit
++# maze.io/x/duration v0.0.0-20160924141736-faac084b6075
++## explicit
++# github.com/briandowns/spinner v1.18.1
++## explicit
++# github.com/charmbracelet/bubbles v0.10.0
++## explicit
++# github.com/charmbracelet/lipgloss v0.4.1-0.20220204041308-bf2912e703f6
++## explicit
++# github.com/gdamore/tcell/v2 v2.4.1-0.20210905002822-f057f0a857a1
++## explicit
++# github.com/golang-jwt/jwt/v4 v4.4.1
++## explicit
++# github.com/navidys/tvxwidgets v0.1.0
++## explicit
++# github.com/olekukonko/tablewriter v0.0.5
++## explicit
++# github.com/rivo/tview v0.0.0-20211202162923-2a6de950f73b
++## explicit
++# github.com/tinylib/msgp v1.1.6
++## explicit
++# golang.org/x/term v0.0.0-20210927222741-03fcf44c2211
++## explicit
++# github.com/beorn7/perks v1.0.1
++## explicit
++# github.com/cespare/xxhash/v2 v2.1.2
++## explicit
++# github.com/containerd/console v1.0.2
++## explicit
++# github.com/coreos/go-semver v0.3.0
++## explicit
++# github.com/coreos/go-systemd/v22 v22.3.2
++## explicit
++# github.com/decred/dcrd/dcrec/secp256k1/v4 v4.0.1
++## explicit
++# github.com/fatih/structs v1.1.0
++## explicit
++# github.com/gdamore/encoding v1.0.0
++## explicit
++# github.com/gogo/protobuf v1.3.2
++## explicit
++# github.com/golang/protobuf v1.5.2
++## explicit
++# github.com/hashicorp/errwrap v1.1.0
++## explicit
++# github.com/hashicorp/go-multierror v1.1.1
++## explicit
++# github.com/klauspost/cpuid/v2 v2.0.9
++## explicit
++# github.com/kr/text v0.2.0
++## explicit
++# github.com/lestrrat-go/backoff/v2 v2.0.8
++## explicit
++# github.com/lestrrat-go/blackmagic v1.0.0
++## explicit
++# github.com/lestrrat-go/httpcc v1.0.0
++## explicit
++# github.com/lestrrat-go/iter v1.0.1
++## explicit
++# github.com/lestrrat-go/jwx v1.2.14
++## explicit
++# github.com/lestrrat-go/option v1.0.0
++## explicit
++# github.com/lucasb-eyer/go-colorful v1.2.0
++## explicit
++# github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0
++## explicit
++# github.com/mattn/go-colorable v0.1.12
++## explicit
++# github.com/mattn/go-runewidth v0.0.13
++## explicit
++# github.com/matttproud/golang_protobuf_extensions v1.0.1
++## explicit
++# github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd
++## explicit
++# github.com/modern-go/reflect2 v1.0.2
++## explicit
++# github.com/muesli/ansi v0.0.0-20211018074035-2e021307bc4b
++## explicit
++# github.com/muesli/reflow v0.3.0
++## explicit
++# github.com/muesli/termenv v0.11.1-0.20220204035834-5ac8409525e0
++## explicit
++# github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e
++## explicit
++# github.com/philhofer/fwd v1.1.1
++## explicit
++# github.com/pkg/errors v0.9.1
++## explicit
++# github.com/power-devops/perfstat v0.0.0-20210106213030-5aafc221ea8c
++## explicit
++# github.com/prometheus/client_model v0.2.0
++## explicit
++# github.com/prometheus/common v0.32.1
++## explicit
++# github.com/prometheus/procfs v0.7.3
++## explicit
++# github.com/rivo/uniseg v0.2.0
++## explicit
++# github.com/sirupsen/logrus v1.8.1
++## explicit
++# github.com/tidwall/match v1.1.1
++## explicit
++# github.com/tidwall/pretty v1.2.0
++## explicit
++# github.com/tklauser/go-sysconf v0.3.9
++## explicit
++# github.com/tklauser/numcpus v0.3.0
++## explicit
++# github.com/yusufpapurcu/wmi v1.2.2
++## explicit
++# go.etcd.io/etcd/api/v3 v3.5.2
++## explicit
++# go.etcd.io/etcd/client/pkg/v3 v3.5.2
++## explicit
++# go.etcd.io/etcd/client/v3 v3.5.2
++## explicit
++# go.uber.org/atomic v1.9.0
++## explicit
++# go.uber.org/multierr v1.7.0
++## explicit
++# go.uber.org/zap v1.19.1
++## explicit
++# golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
++## explicit
++# golang.org/x/sys v0.0.0-20220412211240-33da011f77ad
++## explicit
++# google.golang.org/genproto v0.0.0-20211223182754-3ac035c7e7cb
++## explicit
++# google.golang.org/grpc v1.43.0
++## explicit
++# google.golang.org/protobuf v1.27.1
++## explicit
++# gopkg.in/ini.v1 v1.66.3
++## explicit
+diff --git a/meta-oe/recipes-extended/minio/minio_git.bb b/meta-oe/recipes-extended/minio/minio_git.bb
+new file mode 100644
+index 000000000..649051cb3
+--- /dev/null
++++ b/meta-oe/recipes-extended/minio/minio_git.bb
+@@ -0,0 +1,673 @@
++HOMEPAGE = "https://github.com/minio/mc"
++SUMMARY = "MinIO Client is a replacement for ls, cp, mkdir, diff and rsync commands for filesystems and object storage."
++DESCRIPTION = "MinIO Client (mc) provides a modern alternative to \
++               UNIX commands like ls, cat, cp, mirror, diff, find \
++               etc. It supports filesystems and Amazon S3 compatible \
++               cloud storage service (AWS Signature v2 and v4). \
++"
++
++SRC_URI = "git://github.com/minio/mc;nobranch=1;name=mc;protocol=https \
++           file://modules.txt \
++          "
++
++SRCREV_mc = "cc4ff3a0cc82f25d3d8f53e1815aba2160083282"
++
++GO_IMPORT = "import"
++
++LICENSE = "GPL-3.0-only"
++LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=eb1e647870add0502f8f010b19de32af"
++
++# S = "${WORKDIR}/git"
++PV = "${SRCREV_mc}"
++# 	github.com/charmbracelet/bubbletea v0.19.3
++# [1] git ls-remote https://github.com/charmbracelet/bubbletea 3dc51789d11229a1fb00f137d02b50b04cac372b 
++SRCREV_bubbletea="3dc51789d11229a1fb00f137d02b50b04cac372b"
++SRC_URI += "git://github.com/charmbracelet/bubbletea;name=bubbletea;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/charmbracelet/bubbletea"
++
++# 	github.com/cheggaaa/pb v1.0.29
++# [1] git ls-remote https://github.com/cheggaaa/pb e2a33cc368a206516cc95f7bdd9176db0b83f098 
++SRCREV_pb="e2a33cc368a206516cc95f7bdd9176db0b83f098"
++SRC_URI += "git://github.com/cheggaaa/pb;name=pb;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/cheggaaa/pb"
++
++# 	github.com/dustin/go-humanize v1.0.0
++# [1] git ls-remote https://github.com/dustin/go-humanize e673fa1ffc91213297a60d18a6f513aa74bced52 
++SRCREV_go-humanize="e673fa1ffc91213297a60d18a6f513aa74bced52"
++SRC_URI += "git://github.com/dustin/go-humanize;name=go-humanize;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/dustin/go-humanize"
++
++# 	github.com/fatih/color v1.13.0
++# [1] git ls-remote https://github.com/fatih/color a05da93ebe62ca9fc6791d3376ec4dad01196448 
++SRCREV_color="a05da93ebe62ca9fc6791d3376ec4dad01196448"
++SRC_URI += "git://github.com/fatih/color;name=color;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/fatih/color"
++
++# 	github.com/go-ole/go-ole v1.2.6
++# [1] git ls-remote https://github.com/go-ole/go-ole 8b1f7f90f6b1728609c9694f2cff140d34fd91f8 
++SRCREV_go-ole="8b1f7f90f6b1728609c9694f2cff140d34fd91f8"
++SRC_URI += "git://github.com/go-ole/go-ole;name=go-ole;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/go-ole/go-ole"
++
++# 	github.com/goccy/go-json v0.8.1
++# [1] git ls-remote https://github.com/goccy/go-json de89bd3db67f2219c6183ec6febe2b5f7a6b06fb 
++SRCREV_go-json="de89bd3db67f2219c6183ec6febe2b5f7a6b06fb"
++SRC_URI += "git://github.com/goccy/go-json;name=go-json;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/goccy/go-json"
++
++# 	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510
++# [1] git ls-remote https://github.com/google/shlex e7afc7fbc51079733e9468cdfd1efcd7d196cd1d 
++SRCREV_shlex="e7afc7fbc51079733e9468cdfd1efcd7d196cd1d"
++SRC_URI += "git://github.com/google/shlex;name=shlex;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/google/shlex"
++
++# 	github.com/google/uuid v1.3.0
++# [1] git ls-remote https://github.com/google/uuid 44b5fee7c49cf3bcdf723f106b36d56ef13ccc88 
++SRCREV_uuid="44b5fee7c49cf3bcdf723f106b36d56ef13ccc88"
++SRC_URI += "git://github.com/google/uuid;name=uuid;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/google/uuid"
++
++# 	github.com/inconshreveable/mousetrap v1.0.0
++# [1] git ls-remote https://github.com/inconshreveable/mousetrap 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75 
++SRCREV_mousetrap="76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
++SRC_URI += "git://github.com/inconshreveable/mousetrap;name=mousetrap;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/inconshreveable/mousetrap"
++
++# 	github.com/json-iterator/go v1.1.12
++# [1] git ls-remote https://github.com/json-iterator/go 024077e996b048517130b21ea6bf12aa23055d3d 
++SRCREV_go="024077e996b048517130b21ea6bf12aa23055d3d"
++SRC_URI += "git://github.com/json-iterator/go;name=go;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/json-iterator/go"
++
++# 	github.com/klauspost/compress v1.13.6
++# [1] git ls-remote https://github.com/klauspost/compress 38d4ba985ac157cb858763e016645e14e74c13c4 
++SRCREV_compress="38d4ba985ac157cb858763e016645e14e74c13c4"
++SRC_URI += "git://github.com/klauspost/compress;name=compress;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/klauspost/compress"
++
++# 	github.com/mattn/go-ieproxy v0.0.1
++# [1] git ls-remote https://github.com/mattn/go-ieproxy 439dd0581a2a03b415673a2462ad5c21eaabc588 
++SRCREV_go-ieproxy="439dd0581a2a03b415673a2462ad5c21eaabc588"
++SRC_URI += "git://github.com/mattn/go-ieproxy;name=go-ieproxy;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/mattn/go-ieproxy"
++
++# 	github.com/mattn/go-isatty v0.0.14
++# [1] git ls-remote https://github.com/mattn/go-isatty 504425e14f742f1f517c4586048b49b37f829c8e 
++SRCREV_go-isatty="504425e14f742f1f517c4586048b49b37f829c8e"
++SRC_URI += "git://github.com/mattn/go-isatty;name=go-isatty;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/mattn/go-isatty"
++
++# 	github.com/minio/cli v1.22.0
++# [1] git ls-remote https://github.com/minio/cli 735b30120ed7535d13933b0246f8a75cf80b0f74 
++SRCREV_cli="735b30120ed7535d13933b0246f8a75cf80b0f74"
++SRC_URI += "git://github.com/minio/cli;name=cli;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/minio/cli"
++
++# 	github.com/minio/colorjson v1.0.2
++# [1] git ls-remote https://github.com/minio/colorjson f964b335cdb6cd51dff32a726d3d6ab9e1db0633 
++SRCREV_colorjson="f964b335cdb6cd51dff32a726d3d6ab9e1db0633"
++SRC_URI += "git://github.com/minio/colorjson;name=colorjson;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/minio/colorjson"
++
++# 	github.com/minio/filepath v1.0.0
++# [1] git ls-remote https://github.com/minio/filepath a116cb5d2b6396deea35d06389e3e9809c887fcf 
++SRCREV_filepath="a116cb5d2b6396deea35d06389e3e9809c887fcf"
++SRC_URI += "git://github.com/minio/filepath;name=filepath;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/minio/filepath"
++
++# 	github.com/minio/madmin-go v1.3.11
++# [1] git ls-remote https://github.com/minio/madmin-go 2664c729f38dce56bf2551675a33e41e1d5f2373 
++SRCREV_madmin-go="2664c729f38dce56bf2551675a33e41e1d5f2373"
++SRC_URI += "git://github.com/minio/madmin-go;name=madmin-go;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/minio/madmin-go"
++
++# 	github.com/minio/md5-simd v1.1.2
++# [1] git ls-remote https://github.com/minio/md5-simd 776275e0c9a74ceebbd50fe5c1d61b0c80c608df 
++SRCREV_md5-simd="776275e0c9a74ceebbd50fe5c1d61b0c80c608df"
++SRC_URI += "git://github.com/minio/md5-simd;name=md5-simd;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/minio/md5-simd"
++
++# 	github.com/minio/minio-go/v7 v7.0.24
++# [1] git ls-remote https://github.com/minio/minio-go 207899fb50d8584c8e3099dbf4b87b3ee6e0376f 
++SRCREV_v7="207899fb50d8584c8e3099dbf4b87b3ee6e0376f"
++SRC_URI += "git://github.com/minio/minio-go;name=v7;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/minio/minio-go/v7"
++
++# 	github.com/minio/pkg v1.1.21
++# [1] git ls-remote https://github.com/minio/pkg ac4b2bb8640d840b01bd89603f13dac7b9142b31 
++SRCREV_pkg="ac4b2bb8640d840b01bd89603f13dac7b9142b31"
++SRC_URI += "git://github.com/minio/pkg;name=pkg;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/minio/pkg"
++
++# 	github.com/minio/selfupdate v0.4.0
++# [1] git ls-remote https://github.com/minio/selfupdate 9e32fb8d38277355add4fa3983edb0b376d12bb5 
++SRCREV_selfupdate="9e32fb8d38277355add4fa3983edb0b376d12bb5"
++SRC_URI += "git://github.com/minio/selfupdate;name=selfupdate;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/minio/selfupdate"
++
++# 	github.com/minio/sha256-simd v1.0.0
++# [1] git ls-remote https://github.com/minio/sha256-simd 6a57409d8e0fa3ae883aee331b71aaa40d5a7dd9 
++SRCREV_sha256-simd="6a57409d8e0fa3ae883aee331b71aaa40d5a7dd9"
++SRC_URI += "git://github.com/minio/sha256-simd;name=sha256-simd;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/minio/sha256-simd"
++
++# 	github.com/mitchellh/go-homedir v1.1.0
++# [1] git ls-remote https://github.com/mitchellh/go-homedir af06845cf3004701891bf4fdb884bfe4920b3727 
++SRCREV_go-homedir="af06845cf3004701891bf4fdb884bfe4920b3727"
++SRC_URI += "git://github.com/mitchellh/go-homedir;name=go-homedir;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/mitchellh/go-homedir"
++
++# 	github.com/pkg/xattr v0.4.4
++# [1] git ls-remote https://github.com/pkg/xattr 8725d4ccc0fcef59c8d9f0eaf606b3c6f962467a 
++SRCREV_xattr="8725d4ccc0fcef59c8d9f0eaf606b3c6f962467a"
++SRC_URI += "git://github.com/pkg/xattr;name=xattr;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/pkg/xattr"
++
++# 	github.com/posener/complete v1.2.3
++# [1] git ls-remote https://github.com/posener/complete 05b68ffc813dd10c420993cb1cf927b346c057b8 
++SRCREV_complete="05b68ffc813dd10c420993cb1cf927b346c057b8"
++SRC_URI += "git://github.com/posener/complete;name=complete;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/posener/complete"
++
++# 	github.com/prometheus/client_golang v1.11.0
++# [1] git ls-remote https://github.com/prometheus/client_golang 9b6b6df74a146d5e700cd7205818ad6b2f0afec2 
++SRCREV_client_golang="9b6b6df74a146d5e700cd7205818ad6b2f0afec2"
++SRC_URI += "git://github.com/prometheus/client_golang;name=client_golang;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/prometheus/client_golang"
++
++# 	github.com/rjeczalik/notify v0.9.2
++# [1] git ls-remote https://github.com/rjeczalik/notify 69d839f37b13a8cb7a78366f7633a4071cb43be7 
++SRCREV_notify="69d839f37b13a8cb7a78366f7633a4071cb43be7"
++SRC_URI += "git://github.com/rjeczalik/notify;name=notify;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/rjeczalik/notify"
++
++# 	github.com/rs/xid v1.3.0
++# [1] git ls-remote https://github.com/rs/xid efa678f304ab65d6d57eedcb086798381ae22206 
++SRCREV_xid="efa678f304ab65d6d57eedcb086798381ae22206"
++SRC_URI += "git://github.com/rs/xid;name=xid;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/rs/xid"
++
++# 	github.com/secure-io/sio-go v0.3.1
++# [1] git ls-remote https://github.com/secure-io/sio-go a455d2cd8fcacdfe18557d117db15c0629fb7e2c 
++SRCREV_sio-go="a455d2cd8fcacdfe18557d117db15c0629fb7e2c"
++SRC_URI += "git://github.com/secure-io/sio-go;name=sio-go;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/secure-io/sio-go"
++
++# 	github.com/shirou/gopsutil/v3 v3.21.12
++# [1] git ls-remote https://github.com/shirou/gopsutil 2f8da0a39487ceddf44cebe53a1b563b0b7173cc 
++SRCREV_v3="2f8da0a39487ceddf44cebe53a1b563b0b7173cc"
++SRC_URI += "git://github.com/shirou/gopsutil;name=v3;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/shirou/gopsutil/v3"
++
++# 	github.com/tidwall/gjson v1.12.1
++# [1] git ls-remote https://github.com/tidwall/gjson db0033701cccc8e2e43b77d03e4f509a48b6b2f2 
++SRCREV_gjson="db0033701cccc8e2e43b77d03e4f509a48b6b2f2"
++SRC_URI += "git://github.com/tidwall/gjson;name=gjson;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/tidwall/gjson"
++
++# 	golang.org/x/crypto v0.0.0-20220128200615-198e4374d7ed
++# [1] git ls-remote https://go.googlesource.com/crypto 198e4374d7ed0909af956c010c19ee6bae6a1bc9 
++SRCREV_crypto="198e4374d7ed0909af956c010c19ee6bae6a1bc9"
++SRC_URI += "git://go.googlesource.com/crypto;name=crypto;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/go.googlesource.com/crypto"
++
++# 	golang.org/x/net v0.0.0-20220127200216-cd36cc0744dd
++# [1] git ls-remote https://go.googlesource.com/net cd36cc0744dd695657988f15f08446dc81e16efc 
++SRCREV_net="cd36cc0744dd695657988f15f08446dc81e16efc"
++SRC_URI += "git://go.googlesource.com/net;name=net;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/go.googlesource.com/net"
++
++# 	golang.org/x/text v0.3.7
++# [1] git ls-remote https://go.googlesource.com/text 3cd4007149f3f883d229d707172ed356727aae99 
++SRCREV_text="3cd4007149f3f883d229d707172ed356727aae99"
++SRC_URI += "git://go.googlesource.com/text;name=text;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/go.googlesource.com/text"
++
++# 	gopkg.in/check.v1 v1.0.0-20200902074654-038fdea0a05b
++# [1] git ls-remote https://gopkg.in/check.v1 038fdea0a05bc030b0bfda479dc2e08d2220ec74 
++SRCREV_check.v1="038fdea0a05bc030b0bfda479dc2e08d2220ec74"
++SRC_URI += "git://gopkg.in/check.v1;name=check.v1;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/gopkg.in/check.v1"
++
++# 	gopkg.in/h2non/filetype.v1 v1.0.5
++# [1] git ls-remote https://gopkg.in/h2non/filetype.v1 8f3142c797f0413f00dadaf1bf97dd0b7b1f8d8b 
++SRCREV_filetype.v1="8f3142c797f0413f00dadaf1bf97dd0b7b1f8d8b"
++SRC_URI += "git://gopkg.in/h2non/filetype.v1;name=filetype.v1;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/gopkg.in/h2non/filetype.v1"
++
++# 	gopkg.in/yaml.v2 v2.4.0
++# [1] git ls-remote https://gopkg.in/yaml.v2 7649d4548cb53a614db133b2a8ac1f31859dda8c 
++SRCREV_yaml.v2="7649d4548cb53a614db133b2a8ac1f31859dda8c"
++SRC_URI += "git://gopkg.in/yaml.v2;name=yaml.v2;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/gopkg.in/yaml.v2"
++
++# WARNING: unable to reset to revision HEAD
++# 	maze.io/x/duration v0.0.0-20160924141736-faac084b6075
++# [1] git ls-remote https://maze.io/x/duration HEAD 
++# SRCREV_duration="faac084b60750d976faae179bf78124fda0f0b57"
++# SRCREV_duration="faac084b6075"
++SRCREV_duration="faac084b60750d976faae179bf78124fda0f0b57"
++#SRCREV_duration="HEAD"
++SRC_URI += "git://git.maze.io/go/duration;name=duration;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/maze.io/x/duration"
++#SRC_URI += "git://maze.io/x/duration;name=duration;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/maze.io/x/duration"
++
++# 	github.com/briandowns/spinner v1.18.1
++# [1] git ls-remote https://github.com/briandowns/spinner 16b2c08520470d8126885d3833d66bcf76ac5cea 
++SRCREV_spinner="16b2c08520470d8126885d3833d66bcf76ac5cea"
++SRC_URI += "git://github.com/briandowns/spinner;name=spinner;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/briandowns/spinner"
++
++# 	github.com/charmbracelet/bubbles v0.10.0
++# [1] git ls-remote https://github.com/charmbracelet/bubbles 7714089ad7c81898564ebeb7b6876b5844e26ccd 
++SRCREV_bubbles="7714089ad7c81898564ebeb7b6876b5844e26ccd"
++SRC_URI += "git://github.com/charmbracelet/bubbles;name=bubbles;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/charmbracelet/bubbles"
++
++# 	github.com/charmbracelet/lipgloss v0.4.1-0.20220204041308-bf2912e703f6
++# [1] git ls-remote https://github.com/charmbracelet/lipgloss bf2912e703f6ecf88a1b843472afd47ce5002caf 
++SRCREV_lipgloss="bf2912e703f6ecf88a1b843472afd47ce5002caf"
++SRC_URI += "git://github.com/charmbracelet/lipgloss;name=lipgloss;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/charmbracelet/lipgloss"
++
++# 	github.com/gdamore/tcell/v2 v2.4.1-0.20210905002822-f057f0a857a1
++# [1] git ls-remote https://github.com/gdamore/tcell f057f0a857a1b3ac3e4fff8c6cfe8126f8387cd1 
++SRCREV_v2="f057f0a857a1b3ac3e4fff8c6cfe8126f8387cd1"
++SRC_URI += "git://github.com/gdamore/tcell;name=v2;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/gdamore/tcell/v2"
++
++# 	github.com/golang-jwt/jwt/v4 v4.4.1
++# [1] git ls-remote https://github.com/golang-jwt/jwt 0972257eba279bb357882afc11db8218644ad565 
++SRCREV_v4="0972257eba279bb357882afc11db8218644ad565"
++SRC_URI += "git://github.com/golang-jwt/jwt;name=v4;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/golang-jwt/jwt/v4"
++
++# 	github.com/navidys/tvxwidgets v0.1.0
++# [1] git ls-remote https://github.com/navidys/tvxwidgets f017cfd5ce6d4bd7fb22529305d7a438c3f1369d 
++SRCREV_tvxwidgets="f017cfd5ce6d4bd7fb22529305d7a438c3f1369d"
++SRC_URI += "git://github.com/navidys/tvxwidgets;name=tvxwidgets;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/navidys/tvxwidgets"
++
++# 	github.com/olekukonko/tablewriter v0.0.5
++# [1] git ls-remote https://github.com/olekukonko/tablewriter c7d2a8a09b076b70918308a3cd95464b2ae3b5d8 
++SRCREV_tablewriter="c7d2a8a09b076b70918308a3cd95464b2ae3b5d8"
++SRC_URI += "git://github.com/olekukonko/tablewriter;name=tablewriter;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/olekukonko/tablewriter"
++
++# 	github.com/rivo/tview v0.0.0-20211202162923-2a6de950f73b
++# [1] git ls-remote https://github.com/rivo/tview 2a6de950f73bdc70658f7e754d4b5593f15c8408 
++SRCREV_tview="2a6de950f73bdc70658f7e754d4b5593f15c8408"
++SRC_URI += "git://github.com/rivo/tview;name=tview;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/rivo/tview"
++
++# 	github.com/tinylib/msgp v1.1.6
++# [1] git ls-remote https://github.com/tinylib/msgp 205265da651409c54677b486e350b4d105da6d8b 
++SRCREV_msgp="205265da651409c54677b486e350b4d105da6d8b"
++SRC_URI += "git://github.com/tinylib/msgp;name=msgp;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/tinylib/msgp"
++
++# 	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211
++# [1] git ls-remote https://go.googlesource.com/term 03fcf44c2211dcd5eb77510b5f7c1fb02d6ded50 
++SRCREV_term="03fcf44c2211dcd5eb77510b5f7c1fb02d6ded50"
++SRC_URI += "git://go.googlesource.com/term;name=term;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/go.googlesource.com/term"
++
++# 	github.com/beorn7/perks v1.0.1
++# [1] git ls-remote https://github.com/beorn7/perks c49ff274687222a7373c4cd83578f1065cf3e143 
++SRCREV_perks="c49ff274687222a7373c4cd83578f1065cf3e143"
++SRC_URI += "git://github.com/beorn7/perks;name=perks;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/beorn7/perks"
++
++# 	github.com/cespare/xxhash/v2 v2.1.2
++# [1] git ls-remote https://github.com/cespare/xxhash 7ae26c41ed6fb1f8a6c21e05eeff4d91b5e401c4 
++SRCREV_v21="7ae26c41ed6fb1f8a6c21e05eeff4d91b5e401c4"
++SRC_URI += "git://github.com/cespare/xxhash;name=v21;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/cespare/xxhash/v2"
++
++# 	github.com/containerd/console v1.0.2
++# [1] git ls-remote https://github.com/containerd/console d5efa7d56fd239f7f3dad2ab6685db09359a3618 
++SRCREV_console="d5efa7d56fd239f7f3dad2ab6685db09359a3618"
++SRC_URI += "git://github.com/containerd/console;name=console;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/containerd/console"
++
++# 	github.com/coreos/go-semver v0.3.0
++# [1] git ls-remote https://github.com/coreos/go-semver 6e25b691b0ebe9657dd0ee60d73a9f8716f0c6f5 
++SRCREV_go-semver="6e25b691b0ebe9657dd0ee60d73a9f8716f0c6f5"
++SRC_URI += "git://github.com/coreos/go-semver;name=go-semver;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/coreos/go-semver"
++
++# 	github.com/coreos/go-systemd/v22 v22.3.2
++# [1] git ls-remote https://github.com/coreos/go-systemd 0b40357fd65760243a3eceb80a299772c23c8470 
++SRCREV_v22="0b40357fd65760243a3eceb80a299772c23c8470"
++SRC_URI += "git://github.com/coreos/go-systemd;name=v22;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/coreos/go-systemd/v22"
++
++# 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.0.1
++# [1] git ls-remote https://github.com/decred/dcrd 9f8114e53d1ab500886db980fa0d9ddaffa96271 
++SRCREV_v41="9f8114e53d1ab500886db980fa0d9ddaffa96271"
++SRC_URI += "git://github.com/decred/dcrd;name=v41;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/decred/dcrd/dcrec/secp256k1/v4"
++
++# 	github.com/fatih/structs v1.1.0
++# [1] git ls-remote https://github.com/fatih/structs 4966fc68f5b7593aafa6cbbba2d65ec6e1416047 
++SRCREV_structs="4966fc68f5b7593aafa6cbbba2d65ec6e1416047"
++SRC_URI += "git://github.com/fatih/structs;name=structs;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/fatih/structs"
++
++# 	github.com/gdamore/encoding v1.0.0
++# [1] git ls-remote https://github.com/gdamore/encoding 79c592247a6248468805a0e297f43a7cac979903 
++SRCREV_encoding="79c592247a6248468805a0e297f43a7cac979903"
++SRC_URI += "git://github.com/gdamore/encoding;name=encoding;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/gdamore/encoding"
++
++# 	github.com/gogo/protobuf v1.3.2
++# [1] git ls-remote https://github.com/gogo/protobuf b03c65ea87cdc3521ede29f62fe3ce239267c1bc 
++SRCREV_protobuf="b03c65ea87cdc3521ede29f62fe3ce239267c1bc"
++SRC_URI += "git://github.com/gogo/protobuf;name=protobuf;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/gogo/protobuf"
++
++# 	github.com/golang/protobuf v1.5.2
++# [1] git ls-remote https://github.com/golang/protobuf ae97035608a719c7a1c1c41bed0ae0744bdb0c6f 
++SRCREV_protobuf1="ae97035608a719c7a1c1c41bed0ae0744bdb0c6f"
++SRC_URI += "git://github.com/golang/protobuf;name=protobuf1;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/golang/protobuf"
++
++# 	github.com/hashicorp/errwrap v1.1.0
++# [1] git ls-remote https://github.com/hashicorp/errwrap 7b00e5db719c64d14dd0caaacbd13e76254d02c0 
++SRCREV_errwrap="7b00e5db719c64d14dd0caaacbd13e76254d02c0"
++SRC_URI += "git://github.com/hashicorp/errwrap;name=errwrap;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/hashicorp/errwrap"
++
++# 	github.com/hashicorp/go-multierror v1.1.1
++# [1] git ls-remote https://github.com/hashicorp/go-multierror 9974e9ec57696378079ecc3accd3d6f29401b3a0 
++SRCREV_go-multierror="9974e9ec57696378079ecc3accd3d6f29401b3a0"
++SRC_URI += "git://github.com/hashicorp/go-multierror;name=go-multierror;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/hashicorp/go-multierror"
++
++# 	github.com/klauspost/cpuid/v2 v2.0.9
++# [1] git ls-remote https://github.com/klauspost/cpuid 6903d4066801a7d800d4537ee9eebe81ea97000e 
++SRCREV_v212="6903d4066801a7d800d4537ee9eebe81ea97000e"
++SRC_URI += "git://github.com/klauspost/cpuid;name=v212;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/klauspost/cpuid/v2"
++
++# 	github.com/kr/text v0.2.0
++# [1] git ls-remote https://github.com/kr/text 0e5f52c28dd72ab84daeb81b5a51f20fdc35f9c5 
++SRCREV_text1="0e5f52c28dd72ab84daeb81b5a51f20fdc35f9c5"
++SRC_URI += "git://github.com/kr/text;name=text1;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/kr/text"
++
++# 	github.com/lestrrat-go/backoff/v2 v2.0.8
++# [1] git ls-remote https://github.com/lestrrat-go/backoff c3af762cb9d2bc8339e1d5099a4550366a675f60 
++SRCREV_v2123="c3af762cb9d2bc8339e1d5099a4550366a675f60"
++SRC_URI += "git://github.com/lestrrat-go/backoff;name=v2123;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/lestrrat-go/backoff/v2"
++
++# 	github.com/lestrrat-go/blackmagic v1.0.0
++# [1] git ls-remote https://github.com/lestrrat-go/blackmagic 370527f88bbfd5be3192a38af3148dbd64f0976f 
++SRCREV_blackmagic="370527f88bbfd5be3192a38af3148dbd64f0976f"
++SRC_URI += "git://github.com/lestrrat-go/blackmagic;name=blackmagic;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/lestrrat-go/blackmagic"
++
++# 	github.com/lestrrat-go/httpcc v1.0.0
++# [1] git ls-remote https://github.com/lestrrat-go/httpcc e7e8fea419e32f7549252ad15ecf17f3a3c1a268 
++SRCREV_httpcc="e7e8fea419e32f7549252ad15ecf17f3a3c1a268"
++SRC_URI += "git://github.com/lestrrat-go/httpcc;name=httpcc;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/lestrrat-go/httpcc"
++
++# 	github.com/lestrrat-go/iter v1.0.1
++# [1] git ls-remote https://github.com/lestrrat-go/iter 628869e97ee3dcc09033086e547a5cab96b0d708 
++SRCREV_iter="628869e97ee3dcc09033086e547a5cab96b0d708"
++SRC_URI += "git://github.com/lestrrat-go/iter;name=iter;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/lestrrat-go/iter"
++
++# 	github.com/lestrrat-go/jwx v1.2.14
++# [1] git ls-remote https://github.com/lestrrat-go/jwx de7d9bca43812abc4f630320f8632108ccfe34bf 
++SRCREV_jwx="de7d9bca43812abc4f630320f8632108ccfe34bf"
++SRC_URI += "git://github.com/lestrrat-go/jwx;name=jwx;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/lestrrat-go/jwx"
++
++# 	github.com/lestrrat-go/option v1.0.0
++# [1] git ls-remote https://github.com/lestrrat-go/option 7e3467dce320ff45667b138ae503367c92deaa0b 
++SRCREV_option="7e3467dce320ff45667b138ae503367c92deaa0b"
++SRC_URI += "git://github.com/lestrrat-go/option;name=option;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/lestrrat-go/option"
++
++# 	github.com/lucasb-eyer/go-colorful v1.2.0
++# [1] git ls-remote https://github.com/lucasb-eyer/go-colorful d2b05a0d83cca9d610425691c3253d5f36d0ad06 
++SRCREV_go-colorful="d2b05a0d83cca9d610425691c3253d5f36d0ad06"
++SRC_URI += "git://github.com/lucasb-eyer/go-colorful;name=go-colorful;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/lucasb-eyer/go-colorful"
++
++# 	github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0
++# [1] git ls-remote https://github.com/lufia/plan9stats 39d0f177ccd07bdf5eb6f051ab9b09651f05d6f2 
++SRCREV_plan9stats="39d0f177ccd07bdf5eb6f051ab9b09651f05d6f2"
++SRC_URI += "git://github.com/lufia/plan9stats;name=plan9stats;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/lufia/plan9stats"
++
++# 	github.com/mattn/go-colorable v0.1.12
++# [1] git ls-remote https://github.com/mattn/go-colorable e1bb79c8d53c38a60962ad4b8f658226cc983710 
++SRCREV_go-colorable="e1bb79c8d53c38a60962ad4b8f658226cc983710"
++SRC_URI += "git://github.com/mattn/go-colorable;name=go-colorable;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/mattn/go-colorable"
++
++# 	github.com/mattn/go-runewidth v0.0.13
++# [1] git ls-remote https://github.com/mattn/go-runewidth df1ff59654317c1b5a3f860ffc47402931932104 
++SRCREV_go-runewidth="df1ff59654317c1b5a3f860ffc47402931932104"
++SRC_URI += "git://github.com/mattn/go-runewidth;name=go-runewidth;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/mattn/go-runewidth"
++
++# 	github.com/matttproud/golang_protobuf_extensions v1.0.1
++# [1] git ls-remote https://github.com/matttproud/golang_protobuf_extensions c12348ce28de40eed0136aa2b644d0ee0650e56c 
++SRCREV_golang_protobuf_extensions="c12348ce28de40eed0136aa2b644d0ee0650e56c"
++SRC_URI += "git://github.com/matttproud/golang_protobuf_extensions;name=golang_protobuf_extensions;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/matttproud/golang_protobuf_extensions"
++
++# 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd
++# [1] git ls-remote https://github.com/modern-go/concurrent bacd9c7ef1dd9b15be4a9909b8ac7a4e313eec94 
++SRCREV_concurrent="bacd9c7ef1dd9b15be4a9909b8ac7a4e313eec94"
++SRC_URI += "git://github.com/modern-go/concurrent;name=concurrent;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/modern-go/concurrent"
++
++# 	github.com/modern-go/reflect2 v1.0.2
++# [1] git ls-remote https://github.com/modern-go/reflect2 2b33151c9bbc5231aea69b8861c540102b087070 
++SRCREV_reflect2="2b33151c9bbc5231aea69b8861c540102b087070"
++SRC_URI += "git://github.com/modern-go/reflect2;name=reflect2;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/modern-go/reflect2"
++
++# 	github.com/muesli/ansi v0.0.0-20211018074035-2e021307bc4b
++# [1] git ls-remote https://github.com/muesli/ansi 2e021307bc4b4f4766c3fb4faf6030b13dc9ec51 
++SRCREV_ansi="2e021307bc4b4f4766c3fb4faf6030b13dc9ec51"
++SRC_URI += "git://github.com/muesli/ansi;name=ansi;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/muesli/ansi"
++
++# 	github.com/muesli/reflow v0.3.0
++# [1] git ls-remote https://github.com/muesli/reflow 602e329532049c9e33fa8c74e352a46fb9486947 
++SRCREV_reflow="602e329532049c9e33fa8c74e352a46fb9486947"
++SRC_URI += "git://github.com/muesli/reflow;name=reflow;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/muesli/reflow"
++
++# 	github.com/muesli/termenv v0.11.1-0.20220204035834-5ac8409525e0
++# [1] git ls-remote https://github.com/muesli/termenv 5ac8409525e03ee6cd96daeae32d47902b88f32a 
++SRCREV_termenv="5ac8409525e03ee6cd96daeae32d47902b88f32a"
++SRC_URI += "git://github.com/muesli/termenv;name=termenv;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/muesli/termenv"
++
++# 	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e
++# [1] git ls-remote https://github.com/niemeyer/pretty a10e7caefd8e0d600cea437f5c3613aeb1553d56 
++SRCREV_pretty="a10e7caefd8e0d600cea437f5c3613aeb1553d56"
++SRC_URI += "git://github.com/niemeyer/pretty;name=pretty;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/niemeyer/pretty"
++
++# 	github.com/philhofer/fwd v1.1.1
++# [1] git ls-remote https://github.com/philhofer/fwd 9bcb9cab1b0394d8516a132ec243ba944efdb644 
++SRCREV_fwd="9bcb9cab1b0394d8516a132ec243ba944efdb644"
++SRC_URI += "git://github.com/philhofer/fwd;name=fwd;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/philhofer/fwd"
++
++# 	github.com/pkg/errors v0.9.1
++# [1] git ls-remote https://github.com/pkg/errors 614d223910a179a466c1767a985424175c39b465 
++SRCREV_errors="614d223910a179a466c1767a985424175c39b465"
++SRC_URI += "git://github.com/pkg/errors;name=errors;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/pkg/errors"
++
++# 	github.com/power-devops/perfstat v0.0.0-20210106213030-5aafc221ea8c
++# [1] git ls-remote https://github.com/power-devops/perfstat 5aafc221ea8c1ff54b0835cbd5f2386a8410be11 
++SRCREV_perfstat="5aafc221ea8c1ff54b0835cbd5f2386a8410be11"
++SRC_URI += "git://github.com/power-devops/perfstat;name=perfstat;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/power-devops/perfstat"
++
++# 	github.com/prometheus/client_model v0.2.0
++# [1] git ls-remote https://github.com/prometheus/client_model f44e7adcba5ee54c8a94709e6fc300d83245f171 
++SRCREV_client_model="f44e7adcba5ee54c8a94709e6fc300d83245f171"
++SRC_URI += "git://github.com/prometheus/client_model;name=client_model;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/prometheus/client_model"
++
++# 	github.com/prometheus/common v0.32.1
++# [1] git ls-remote https://github.com/prometheus/common a8301e4aa43c56eadd119b45e363a94166508d45 
++SRCREV_common="a8301e4aa43c56eadd119b45e363a94166508d45"
++SRC_URI += "git://github.com/prometheus/common;name=common;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/prometheus/common"
++
++# 	github.com/prometheus/procfs v0.7.3
++# [1] git ls-remote https://github.com/prometheus/procfs f436cbb89ece38bf080d446b3ca27053b305eaac 
++SRCREV_procfs="f436cbb89ece38bf080d446b3ca27053b305eaac"
++SRC_URI += "git://github.com/prometheus/procfs;name=procfs;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/prometheus/procfs"
++
++# 	github.com/rivo/uniseg v0.2.0
++# [1] git ls-remote https://github.com/rivo/uniseg 75711fccf6a3e85bc74c241e2dddd06a9bc9e53d 
++SRCREV_uniseg="75711fccf6a3e85bc74c241e2dddd06a9bc9e53d"
++SRC_URI += "git://github.com/rivo/uniseg;name=uniseg;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/rivo/uniseg"
++
++# 	github.com/sirupsen/logrus v1.8.1
++# [1] git ls-remote https://github.com/sirupsen/logrus bdc0db8ead3853c56b7cd1ac2ba4e11b47d7da6b 
++SRCREV_logrus="bdc0db8ead3853c56b7cd1ac2ba4e11b47d7da6b"
++SRC_URI += "git://github.com/sirupsen/logrus;name=logrus;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/sirupsen/logrus"
++
++# 	github.com/tidwall/match v1.1.1
++# [1] git ls-remote https://github.com/tidwall/match 4c9fc61b493b7aa0a3d347e9190aa78c5bec09cf 
++SRCREV_match="4c9fc61b493b7aa0a3d347e9190aa78c5bec09cf"
++SRC_URI += "git://github.com/tidwall/match;name=match;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/tidwall/match"
++
++# 	github.com/tidwall/pretty v1.2.0
++# [1] git ls-remote https://github.com/tidwall/pretty aaa765e7476acb0028a854b85675801362cbdaa2 
++SRCREV_pretty1="aaa765e7476acb0028a854b85675801362cbdaa2"
++SRC_URI += "git://github.com/tidwall/pretty;name=pretty1;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/tidwall/pretty"
++
++# 	github.com/tklauser/go-sysconf v0.3.9
++# [1] git ls-remote https://github.com/tklauser/go-sysconf 746b19d14e19d242c2daa08e0d645c19832c1939 
++SRCREV_go-sysconf="746b19d14e19d242c2daa08e0d645c19832c1939"
++SRC_URI += "git://github.com/tklauser/go-sysconf;name=go-sysconf;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/tklauser/go-sysconf"
++
++# 	github.com/tklauser/numcpus v0.3.0
++# [1] git ls-remote https://github.com/tklauser/numcpus cc3fdd5f3955d53d50d94380963bddd24bd373e2 
++SRCREV_numcpus="cc3fdd5f3955d53d50d94380963bddd24bd373e2"
++SRC_URI += "git://github.com/tklauser/numcpus;name=numcpus;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/tklauser/numcpus"
++
++# 	github.com/yusufpapurcu/wmi v1.2.2
++# [1] git ls-remote https://github.com/yusufpapurcu/wmi 253c5f0cb35e666c4c0fc42083824e7c89f0cc8d 
++SRCREV_wmi="253c5f0cb35e666c4c0fc42083824e7c89f0cc8d"
++SRC_URI += "git://github.com/yusufpapurcu/wmi;name=wmi;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/yusufpapurcu/wmi"
++
++# 	go.etcd.io/etcd/api/v3 v3.5.2
++# [1] git ls-remote https://github.com/etcd-io/etcd 4591a096d4d3c08e577d7269851938db0c1da3d4 
++SRCREV_v31="4591a096d4d3c08e577d7269851938db0c1da3d4"
++SRC_URI += "git://github.com/etcd-io/etcd;name=v31;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/github.com/etcd-io/etcd/api/v3"
++
++# 	go.uber.org/atomic v1.9.0
++# [1] git ls-remote https://github.com/uber-go/atomic 135466e2d0c8f8adf4d37dc757e3df0ebdd0dfe8 
++SRCREV_atomic="135466e2d0c8f8adf4d37dc757e3df0ebdd0dfe8"
++SRC_URI += "git://github.com/uber-go/atomic;name=atomic;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/go.uber.org/atomic"
++
++# 	go.uber.org/multierr v1.7.0
++# [1] git ls-remote https://github.com/uber-go/multierr 19d9fff1d3b66750a134671435786579bc994737 
++SRCREV_multierr="19d9fff1d3b66750a134671435786579bc994737"
++SRC_URI += "git://github.com/uber-go/multierr;name=multierr;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/go.uber.org/multierr"
++
++# 	go.uber.org/zap v1.19.1
++# [1] git ls-remote https://github.com/uber-go/zap 2f61e97148e69cd2dd1902b03e89ce07cd1218a1 
++SRCREV_zap="2f61e97148e69cd2dd1902b03e89ce07cd1218a1"
++SRC_URI += "git://github.com/uber-go/zap;name=zap;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/go.uber.org/zap"
++
++# 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
++# [1] git ls-remote https://go.googlesource.com/sync 036812b2e83c0ddf193dd5a34e034151da389d09 
++SRCREV_sync="036812b2e83c0ddf193dd5a34e034151da389d09"
++SRC_URI += "git://go.googlesource.com/sync;name=sync;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/go.googlesource.com/sync"
++
++# 	golang.org/x/sys v0.0.0-20220412211240-33da011f77ad
++# [1] git ls-remote https://go.googlesource.com/sys 33da011f77ade50ff5b6a6fb4a9a1e6d6b285809 
++SRCREV_sys="33da011f77ade50ff5b6a6fb4a9a1e6d6b285809"
++SRC_URI += "git://go.googlesource.com/sys;name=sys;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/go.googlesource.com/sys"
++
++# [ERROR]: git operation failed: Command '['git', 'clone', 'https://github.com/googleapis/go-genproto', 'google.golang.org/genproto']' timed out after 30 seconds
++# 	google.golang.org/genproto v0.0.0-20211223182754-3ac035c7e7cb
++# [1] git ls-remote https://github.com/googleapis/go-genproto 3ac035c7e7cb 
++#SRCREV_genproto="3ac035c7e7cb"
++SRCREV_genproto="3ac035c7e7cbd86eb6d8b95be888cf83d73dedd3"
++SRC_URI += "git://github.com/googleapis/go-genproto;name=genproto;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/google.golang.org/genproto"
++
++# 	google.golang.org/grpc v1.43.0
++# [1] git ls-remote https://github.com/grpc/grpc-go 14c11384b76b67f7b1b32a5d18f865762634c0ae 
++SRCREV_grpc="14c11384b76b67f7b1b32a5d18f865762634c0ae"
++SRC_URI += "git://github.com/grpc/grpc-go;name=grpc;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/google.golang.org/grpc"
++
++# 	google.golang.org/protobuf v1.27.1
++# [1] git ls-remote https://github.com/protocolbuffers/protobuf-go b92717ecb630d4a4824b372bf98c729d87311a4d 
++SRCREV_protobuf12="b92717ecb630d4a4824b372bf98c729d87311a4d"
++SRC_URI += "git://github.com/protocolbuffers/protobuf-go;name=protobuf12;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/google.golang.org/protobuf"
++
++# 	gopkg.in/ini.v1 v1.66.3
++# [1] git ls-remote https://gopkg.in/ini.v1 fcd6cc399e588727c1231f4ea187d1b963536bcc 
++SRCREV_ini.v1="fcd6cc399e588727c1231f4ea187d1b963536bcc"
++SRC_URI += "git://gopkg.in/ini.v1;name=ini.v1;protocol=https;nobranch=1;destsuffix=${WORKDIR}/${BP}/src/import/vendor.fetch/gopkg.in/ini.v1"
++
++inherit go
++inherit goarch
++
++DEPENDS += "rsync-native"
++
++do_compile() {
++ 
++    cd ${S}/src/${GO_IMPORT}
++
++    export GOFLAGS="-mod=vendor"
++    export GOPATH="$GOPATH:${S}/src/import/.gopath:${S}/src/import/vendor"
++    sites="github.com/charmbracelet/bubbletea:github.com/charmbracelet/bubbletea \
++           github.com/cheggaaa/pb:github.com/cheggaaa/pb \
++           github.com/dustin/go-humanize:github.com/dustin/go-humanize \
++           github.com/fatih/color:github.com/fatih/color \
++           github.com/go-ole/go-ole:github.com/go-ole/go-ole \
++           github.com/goccy/go-json:github.com/goccy/go-json \
++           github.com/google/shlex:github.com/google/shlex \
++           github.com/google/uuid:github.com/google/uuid \
++           github.com/inconshreveable/mousetrap:github.com/inconshreveable/mousetrap \
++           github.com/json-iterator/go:github.com/json-iterator/go \
++           github.com/klauspost/compress:github.com/klauspost/compress \
++           github.com/mattn/go-ieproxy:github.com/mattn/go-ieproxy \
++           github.com/mattn/go-isatty:github.com/mattn/go-isatty \
++           github.com/minio/cli:github.com/minio/cli \
++           github.com/minio/colorjson:github.com/minio/colorjson \
++           github.com/minio/filepath:github.com/minio/filepath \
++           github.com/minio/madmin-go:github.com/minio/madmin-go \
++           github.com/minio/md5-simd:github.com/minio/md5-simd \
++           github.com/minio/minio-go/v7:github.com/minio/minio-go/v7 \
++           github.com/minio/pkg:github.com/minio/pkg \
++           github.com/minio/selfupdate:github.com/minio/selfupdate \
++           github.com/minio/sha256-simd:github.com/minio/sha256-simd \
++           github.com/mitchellh/go-homedir:github.com/mitchellh/go-homedir \
++           github.com/pkg/xattr:github.com/pkg/xattr \
++           github.com/posener/complete:github.com/posener/complete \
++           github.com/prometheus/client_golang:github.com/prometheus/client_golang \
++           github.com/rjeczalik/notify:github.com/rjeczalik/notify \
++           github.com/rs/xid:github.com/rs/xid \
++           github.com/secure-io/sio-go:github.com/secure-io/sio-go \
++           github.com/shirou/gopsutil/v3:github.com/shirou/gopsutil/v3 \
++           github.com/tidwall/gjson:github.com/tidwall/gjson \
++           golang.org/x/crypto:go.googlesource.com/crypto \
++           golang.org/x/net:go.googlesource.com/net \
++           golang.org/x/text:go.googlesource.com/text \
++           gopkg.in/check.v1:gopkg.in/check.v1 \
++           gopkg.in/h2non/filetype.v1:gopkg.in/h2non/filetype.v1 \
++           gopkg.in/yaml.v2:gopkg.in/yaml.v2 \
++           maze.io/x/duration:maze.io/x/duration \
++           github.com/briandowns/spinner:github.com/briandowns/spinner \
++           github.com/charmbracelet/bubbles:github.com/charmbracelet/bubbles \
++           github.com/charmbracelet/lipgloss:github.com/charmbracelet/lipgloss \
++           github.com/gdamore/tcell/v2:github.com/gdamore/tcell/v2 \
++           github.com/golang-jwt/jwt/v4:github.com/golang-jwt/jwt/v4 \
++           github.com/navidys/tvxwidgets:github.com/navidys/tvxwidgets \
++           github.com/olekukonko/tablewriter:github.com/olekukonko/tablewriter \
++           github.com/rivo/tview:github.com/rivo/tview \
++           github.com/tinylib/msgp:github.com/tinylib/msgp \
++           golang.org/x/term:go.googlesource.com/term \
++           github.com/beorn7/perks:github.com/beorn7/perks \
++           github.com/cespare/xxhash/v2:github.com/cespare/xxhash/v2 \
++           github.com/containerd/console:github.com/containerd/console \
++           github.com/coreos/go-semver:github.com/coreos/go-semver \
++           github.com/coreos/go-systemd/v22:github.com/coreos/go-systemd/v22 \
++           github.com/decred/dcrd/dcrec/secp256k1/v4:github.com/decred/dcrd/dcrec/secp256k1/v4//dcrec/secp256k1 \
++           github.com/fatih/structs:github.com/fatih/structs \
++           github.com/gdamore/encoding:github.com/gdamore/encoding \
++           github.com/gogo/protobuf:github.com/gogo/protobuf \
++           github.com/golang/protobuf:github.com/golang/protobuf \
++           github.com/hashicorp/errwrap:github.com/hashicorp/errwrap \
++           github.com/hashicorp/go-multierror:github.com/hashicorp/go-multierror \
++           github.com/klauspost/cpuid/v2:github.com/klauspost/cpuid/v2 \
++           github.com/kr/text:github.com/kr/text \
++           github.com/lestrrat-go/backoff/v2:github.com/lestrrat-go/backoff/v2 \
++           github.com/lestrrat-go/blackmagic:github.com/lestrrat-go/blackmagic \
++           github.com/lestrrat-go/httpcc:github.com/lestrrat-go/httpcc \
++           github.com/lestrrat-go/iter:github.com/lestrrat-go/iter \
++           github.com/lestrrat-go/jwx:github.com/lestrrat-go/jwx \
++           github.com/lestrrat-go/option:github.com/lestrrat-go/option \
++           github.com/lucasb-eyer/go-colorful:github.com/lucasb-eyer/go-colorful \
++           github.com/lufia/plan9stats:github.com/lufia/plan9stats \
++           github.com/mattn/go-colorable:github.com/mattn/go-colorable \
++           github.com/mattn/go-runewidth:github.com/mattn/go-runewidth \
++           github.com/matttproud/golang_protobuf_extensions:github.com/matttproud/golang_protobuf_extensions \
++           github.com/modern-go/concurrent:github.com/modern-go/concurrent \
++           github.com/modern-go/reflect2:github.com/modern-go/reflect2 \
++           github.com/muesli/ansi:github.com/muesli/ansi \
++           github.com/muesli/reflow:github.com/muesli/reflow \
++           github.com/muesli/termenv:github.com/muesli/termenv \
++           github.com/niemeyer/pretty:github.com/niemeyer/pretty \
++           github.com/philhofer/fwd:github.com/philhofer/fwd \
++           github.com/pkg/errors:github.com/pkg/errors \
++           github.com/power-devops/perfstat:github.com/power-devops/perfstat \
++           github.com/prometheus/client_model:github.com/prometheus/client_model \
++           github.com/prometheus/common:github.com/prometheus/common \
++           github.com/prometheus/procfs:github.com/prometheus/procfs \
++           github.com/rivo/uniseg:github.com/rivo/uniseg \
++           github.com/sirupsen/logrus:github.com/sirupsen/logrus \
++           github.com/tidwall/match:github.com/tidwall/match \
++           github.com/tidwall/pretty:github.com/tidwall/pretty \
++           github.com/tklauser/go-sysconf:github.com/tklauser/go-sysconf \
++           github.com/tklauser/numcpus:github.com/tklauser/numcpus \
++           github.com/yusufpapurcu/wmi:github.com/yusufpapurcu/wmi \
++           go.etcd.io/etcd/api/v3:github.com/etcd-io/etcd/api/v3//api \
++           go.etcd.io/etcd/client/pkg/v3:github.com/etcd-io/etcd/api/v3//client/pkg \
++           go.etcd.io/etcd/client/v3:github.com/etcd-io/etcd/api/v3//client/v3 \
++           go.uber.org/atomic:go.uber.org/atomic \
++           go.uber.org/multierr:go.uber.org/multierr \
++           go.uber.org/zap:go.uber.org/zap \
++           golang.org/x/sync:go.googlesource.com/sync \
++           golang.org/x/sys:go.googlesource.com/sys \
++           google.golang.org/genproto:google.golang.org/genproto/ \
++           google.golang.org/grpc:google.golang.org/grpc \
++           google.golang.org/protobuf:google.golang.org/protobuf \
++           gopkg.in/ini.v1:gopkg.in/ini.v1"
++    for s in $sites; do
++        site_dest=$(echo $s | cut -d: -f1)
++        site_source=$(echo $s | cut -d: -f2)
++        mkdir -p vendor.copy/$site_dest
++        [ -n "$(ls -A vendor.copy/$site_dest/*.go 2> /dev/null)" ] && { echo "[INFO] vendor.fetch/$site_source -> $site_dest: go copy skipped (files present)" ; true ; } || { echo "[INFO] $site_dest: copying .go files" ; rsync -a --exclude='vendor/' --exclude='.git/' vendor.fetch/$site_source/ vendor.copy/$site_dest ; }
++    done
++
++    ln -sf vendor.copy vendor
++    # these are bad symlinks, go validates them and breaks the build if they are present
++    rm -f vendor/go.etcd.io/etcd/client/v3/example_*
++
++    cp ${WORKDIR}/modules.txt vendor/
++
++    ${GO} build
++}
++
++do_install() {
++    install -d ${D}/${sbindir}
++    install ${S}/src/${GO_IMPORT}/mc ${D}/${sbindir}/mc
++}
+-- 
+2.33.0
+
 
