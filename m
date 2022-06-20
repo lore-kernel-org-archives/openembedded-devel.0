@@ -1,143 +1,129 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <dai-de.li@leica-geosystems.com.cn>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C8FC8CCA482
-	for <webhook@archiver.kernel.org>; Mon, 20 Jun 2022 05:12:00 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web11.16407.1655701912983460331
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C672BC43334
+	for <webhook@archiver.kernel.org>; Mon, 20 Jun 2022 05:20:20 +0000 (UTC)
+Received: from EUR03-DBA-obe.outbound.protection.outlook.com
+ (EUR03-DBA-obe.outbound.protection.outlook.com [40.107.104.98])
+ by mx.groups.io with SMTP id smtpd.web10.26557.1655702412305734046
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 19 Jun 2022 22:11:53 -0700
+ Sun, 19 Jun 2022 22:20:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.82,
- mailfrom: f_l_k@t-online.de)
-Received: from fwd89.dcpf.telekom.de (fwd89.aul.t-online.de [10.223.144.115])
-	by mailout05.t-online.de (Postfix) with SMTP id 2C0077498
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Jun 2022 07:11:51 +0200 (CEST)
-Received: from flk-MS-7C91.fritz.box ([84.163.38.235]) by fwd89.t-online.de
-	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
-	esmtp id 1o39hW-18XJp30; Mon, 20 Jun 2022 07:11:50 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=fail reason="body hash did not verify" header.i=@leica-geosystems.com.cn
+ header.s=selector1 header.b=iMi/FW0t;
+ spf=permerror,
+ err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}:
+ invalid domain name (domain: leica-geosystems.com.cn, ip: 40.107.104.98,
+ mailfrom: dai-de.li@leica-geosystems.com.cn)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=g5xYNcr66LM+iJJUAI/UK00iK7x4uLwZ4EU3LWku0dG7EtYpo3/vCE8Z8698w3ZKroZ21XOZVVUoxtH+Ejk5avX4Brn0TdyPEomYxkMnWG1E/BseTd8VRYcE20B7M02NYCwruuGXMHCm8lfSp00VMgJ7A5eZDhAymIDYNJJGpNgq7vqwMH4T7JJW8dF0Hx8fyP6JtIp4uThvH+vW6pqSHxX7jzI06EJUsy3ra9C7UbWvBZMATtOWkpLTEzd0IQAjdeBfsDc8GpsadU36yo0S6P8f3QnRgGZJBjYB+85OLPT3fedKlzdbv6PjvbqybaIZVNxUkQ23bkZ023Gwz6PIlA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=dEv4QYvZe2wrHXw0lOU2MdYAZozUIUamSoA9wDwwZ5U=;
+ b=hAdfowhA2YzOSy6QFhkRJkJqssO3HTcFPdHxgg9qYWJDZ2k9Yb0ldLPIUz1Xfr3Jg5PbVLhDKzf7QDsO7gjr0iEMuLH13794v4dbsg7eMI1tomXjCUpZEH+rRwGDYfpekISk8zIXPUY91eTLgpRJio/OjydF2CzFX/hqqevNwKb5NlP0/hR9fPqEavZ9gXSu3GJxewuVuPti2Q2UJ5Dj7vgLNyu+5NgK/jwzQXqALDPy4+GkyA9UXDOP6sCHTBz1uP8qXjFI1NCr+jVjxSSq2hgfcIXOqS2xT8/Ff++ZOS7FcdOQ68KulcTSZLnULuRhopdScreXVjkc+UpSoYSxrQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 193.8.40.94) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=leica-geosystems.com.cn; dmarc=pass (p=quarantine sp=quarantine
+ pct=100) action=none header.from=leica-geosystems.com.cn; dkim=none (message
+ not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=leica-geosystems.com.cn; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=dEv4QYvZe2wrHXw0lOU2MdYAZozUIUamSoA9wDwwZ5U=;
+ b=iMi/FW0tHZbmcpufMuuUCqsUdhwBp0slc2MiPwFEnUC5UGObAGzyDAutvfxSuv4sCnsGkdLRBbiQar5mpQicHcE8LWlR0Xa/plF7ehd6Wxfr/WEEttQonzRnmwToDUbIUYzUcrhxMpKRKGdymRZc9IEif2t9tueKboUHGvG0oKc=
+Received: from OL1P279CA0028.NORP279.PROD.OUTLOOK.COM (2603:10a6:e10:13::15)
+ by PR3PR06MB6634.eurprd06.prod.outlook.com (2603:10a6:102:6e::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5353.14; Mon, 20 Jun
+ 2022 05:20:08 +0000
+Received: from HE1EUR02FT086.eop-EUR02.prod.protection.outlook.com
+ (2603:10a6:e10:13:cafe::b7) by OL1P279CA0028.outlook.office365.com
+ (2603:10a6:e10:13::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5353.15 via Frontend
+ Transport; Mon, 20 Jun 2022 05:20:08 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 193.8.40.94)
+ smtp.mailfrom=leica-geosystems.com.cn; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=leica-geosystems.com.cn;
+Received-SPF: Pass (protection.outlook.com: domain of leica-geosystems.com.cn
+ designates 193.8.40.94 as permitted sender) receiver=protection.outlook.com;
+ client-ip=193.8.40.94; helo=aherlnxbspsrv01.lgs-net.com; pr=C
+Received: from aherlnxbspsrv01.lgs-net.com (193.8.40.94) by
+ HE1EUR02FT086.mail.protection.outlook.com (10.152.11.240) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5353.14 via Frontend Transport; Mon, 20 Jun 2022 05:20:07 +0000
+From: Daide Li <dai-de.li@leica-geosystems.com.cn>
 To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-oe][PATCHv2] flatbuffers: update to 2.0.6
-Date: Mon, 20 Jun 2022 07:11:41 +0200
-Message-Id: <20220620051141.11987-1-f_l_k@t-online.de>
+CC: bsp-development.geo@leica-geosystems.com,
+	Daide Li <dai-de.li@leica-geosystems.com.cn>
+Subject: [meta-python][PATCH V1] python3-iperf: initial add 0.1.11
+Date: Mon, 20 Jun 2022 05:20:04 +0000
+Message-ID: <20220620052004.2482273-1-dai-de.li@leica-geosystems.com.cn>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1655701910-0143AB67-04CAAD1D/0/0 CLEAN NORMAL
-X-TOI-MSGID: 08aead45-934d-49a2-be32-3feffd2173f0
 Content-Transfer-Encoding: quoted-printable
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: 76be2231-83c9-40ec-5231-08da527c8a3b
+X-MS-TrafficTypeDiagnostic: PR3PR06MB6634:EE_
+X-Microsoft-Antispam-PRVS: 
+	<PR3PR06MB66341A2C24903C39C9A877E2A9B09@PR3PR06MB6634.eurprd06.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	8jV3DbRLFK9lBzTdcC3fCpn2Xg8aXUEJxGOeYGhpVV6Cs47ByT8qdW+BwXxmM721HxG0XVL2xyHr1NpLzTFzGu1eAB2YLM/+i6aIEmVuS4T2jHyGtgbJEy6kHbouTMN6LOyMpkeDT8nRmuyb1AtxslgpNdYt3Y2vMKcUP/KcZ/dhwpR3FvQjdAXJ8q307gqKQaEehVX7EUrr9BEPtI9mJ0wxSsfogpsT3MdHUCPRqffCdIv2yj65WYKM2xdXrKmNYjLcAsLBmoRAyNHr5/UWkLpLpIycUyO9VCGtjdXpuRLvEpg0DpRfz6X27C8ZvE40eoZkyiBFQfz0k8aaLJI1QmnpE6xc4OWVpyuAmWn2U90i12lncpn2kt+D2GnhmGfXtAGBU0mxjPwhkVqFXj32spFQgyoGVEJKJNj4REDKhb7U3ZmO87B6+iUUr+3u0lsR/LZrkhE7uhmPBQ3vRMMQIK/Dd6GE/d91K4QJn/iDlO+NmWTd9944W78jfw2rJcdah7JbCQjD58QEyKYp/+4pvAcYvgygPjPF+i0FrCh6pSddvpHkGaqFvAVjjkJHXnQ1hPl4pgemVgyfGTpCmfO06GP9du44QrlY2U7YWglNL1mrJUANp0lxv2umFyHYdr4Vo0qt3ju2r2CqPUS5J4FkvV8F0nbizSM4zS0dzNm+ga/A6wRLm2eFr2KL+Ncs9y1dXvJY6PyDsFISHQWNFdlYj+ZCOp2b3dH5cEy3s4A6rfYhkO1JMMFWsRBL4zh6IYDDp9WLnk+dKNunbETrziZ+wg==
+X-Forefront-Antispam-Report: 
+	CIP:193.8.40.94;CTRY:CH;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:aherlnxbspsrv01.lgs-net.com;PTR:ahersrvdom50.leica-geosystems.com;CAT:NONE;SFS:(13230016)(4636009)(36840700001)(46966006)(40470700004)(107886003)(47076005)(186003)(336012)(6666004)(6506007)(1076003)(81166007)(86362001)(2616005)(956004)(26005)(6512007)(36860700001)(356005)(5660300002)(8936002)(4744005)(118246002)(82310400005)(36756003)(4326008)(2906002)(40460700003)(316002)(6486002)(8676002)(6916009)(70586007)(498600001)(36736006)(70206006);DIR:OUT;SFP:1102;
+X-OriginatorOrg: leica-geosystems.com.cn
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jun 2022 05:20:07.3037
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ 76be2231-83c9-40ec-5231-08da527c8a3b
+X-MS-Exchange-CrossTenant-Id: 1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: 
+ TenantId=1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a;Ip=[193.8.40.94];Helo=[aherlnxbspsrv01.lgs-net.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+ HE1EUR02FT086.eop-EUR02.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR06MB6634
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Jun 2022 05:12:00 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Jun 2022 05:20:20 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97544
+ https://lists.openembedded.org/g/openembedded-devel/message/97545
 
-- fix flatc not found issue
-- build the python3 module as a separate package to allow proper install
-- remove fpic CXXFLAG as it seems to be unneeded
-- use python3-native
-- remove -DCMAKE_BUILD_TYPE=3DRelease option and its outdated comment.
-  After a long discussion the default behavior was changed:
-  https://github.com/google/flatbuffers/pull/5180
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Daide Li <dai-de.li@leica-geosystems.com.cn>
 ---
- ...tbuffers_2.0.0.bb =3D> flatbuffers_2.0.6.bb} | 24 +++++--------------
- .../flatbuffers/python3-flatbuffers_2.0.6.bb  | 15 ++++++++++++
- 2 files changed, 21 insertions(+), 18 deletions(-)
- rename meta-oe/recipes-devtools/flatbuffers/{flatbuffers_2.0.0.bb =3D> f=
-latbuffers_2.0.6.bb} (52%)
- create mode 100644 meta-oe/recipes-devtools/flatbuffers/python3-flatbuff=
-ers_2.0.6.bb
+ .../recipes-devtools/python/python3-iperf_0.1.11.bb   | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-iperf_0.1.1=
+1.bb
 
-diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb b/=
-meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.6.bb
-similarity index 52%
-rename from meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
-rename to meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.6.bb
-index bf74f1229..a74929ad9 100644
---- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
-+++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.6.bb
-@@ -3,41 +3,29 @@ HOMEPAGE =3D "https://github.com/google/flatbuffers"
- SECTION =3D "console/tools"
- LICENSE =3D "Apache-2.0"
-=20
--inherit python3-dir
-+PACKAGE_BEFORE_PN =3D "${PN}-compiler"
-=20
--PACKAGE_BEFORE_PN =3D "${PN}-compiler ${PN}-${PYTHON_PN}"
-+DEPENDS =3D "flatbuffers-native"
-=20
- RDEPENDS:${PN}-compiler =3D "${PN}"
--RDEPENDS:${PN}-${PYTHON_PN} =3D "${PN}"
- RDEPENDS:${PN}-dev +=3D "${PN}-compiler"
-=20
- LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc=
-3c6bd57"
-=20
--SRCREV =3D "a9a295fecf3fbd5a4f571f53b01f63202a3e2113"
-+SRCREV =3D "615616cb5549a34bdf288c04bc1b94bd7a65c396"
- SRC_URI =3D "git://github.com/google/flatbuffers.git;branch=3Dmaster;pro=
-tocol=3Dhttps"
- S =3D "${WORKDIR}/git"
-=20
- CVE_CHECK_IGNORE +=3D "CVE-2020-35864"
-=20
--CXXFLAGS +=3D "-fPIC"
--BUILD_CXXFLAGS +=3D "-fPIC"
--
--# BUILD_TYPE=3DRelease is required, otherwise flatc is not installed
--EXTRA_OECMAKE +=3D "\
--    -DCMAKE_BUILD_TYPE=3DRelease \
-+EXTRA_OECMAKE +=3D " \
-     -DFLATBUFFERS_BUILD_TESTS=3DOFF \   =20
-     -DFLATBUFFERS_BUILD_SHAREDLIB=3DON \
- "
-+EXTRA_OECMAKE:class-target +=3D "-DFLATBUFFERS_FLATC_EXECUTABLE=3D${STAG=
-ING_BINDIR_NATIVE}/flatc"
-=20
--inherit cmake
--
--do_install:append() {
--    install -d ${D}${PYTHON_SITEPACKAGES_DIR}
--    cp -rf ${S}/python/flatbuffers ${D}${PYTHON_SITEPACKAGES_DIR}
--}
-+inherit cmake python3native
-=20
- FILES:${PN}-compiler =3D "${bindir}"
-=20
--FILES:${PN}-${PYTHON_PN} =3D "${PYTHON_SITEPACKAGES_DIR}"
--
- BBCLASSEXTEND =3D "native nativesdk"
-diff --git a/meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers_2.0=
-.6.bb b/meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers_2.0.6.bb
+diff --git a/meta-python/recipes-devtools/python/python3-iperf_0.1.11.bb b/=
+meta-python/recipes-devtools/python/python3-iperf_0.1.11.bb
 new file mode 100644
-index 000000000..cc453da35
+index 000000000..36d646305
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers_2.0.6.bb
-@@ -0,0 +1,15 @@
-+SUMMARY =3D "Memory Efficient Serialization Library - Python3 Modules"
-+HOMEPAGE =3D "https://github.com/google/flatbuffers"
-+SECTION =3D "console/tools"
-+LICENSE =3D "Apache-2.0"
++++ b/meta-python/recipes-devtools/python/python3-iperf_0.1.11.bb
+@@ -0,0 +1,11 @@
++SUMMARY =3D "Python wrapper around iperf3"
++HOMEPAGE =3D "https://github.com/thiezn/iperf3-python"
++AUTHOR =3D "Mathijs Mortimer <mathijs@mortimer.nl>"
++LICENSE =3D "MIT"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Df7d0900b3d30647cdda002c9549ca40=
+f"
 +
-+LIC_FILES_CHKSUM =3D "file://../LICENSE.txt;md5=3D3b83ef96387f14655fc854=
-ddc3c6bd57"
++PYPI_PACKAGE =3D "iperf3"
 +
-+SRCREV =3D "615616cb5549a34bdf288c04bc1b94bd7a65c396"
-+SRC_URI =3D "git://github.com/google/flatbuffers.git;branch=3Dmaster;pro=
-tocol=3Dhttps"
-+S =3D "${WORKDIR}/git/python"
++SRC_URI[sha256sum] =3D "d50eebbf2dcf445a173f98a82f9c433e0302d3dfb7987e1f21=
+b86b35ef63ce26"
 +
-+RDEPENDS:${PN} =3D "flatbuffers"
-+
-+inherit setuptools3
-+
++inherit setuptools3 pypi
 --=20
 2.25.1
 
