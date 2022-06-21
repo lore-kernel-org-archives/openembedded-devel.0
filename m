@@ -1,384 +1,144 @@
-Return-Path: <hprajapati@mvista.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E6F00C43334
-	for <webhook@archiver.kernel.org>; Tue, 21 Jun 2022 04:25:41 +0000 (UTC)
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com
- [209.85.210.172])
- by mx.groups.io with SMTP id smtpd.web10.39262.1655785536518795250
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E47EC433EF
+	for <webhook@archiver.kernel.org>; Tue, 21 Jun 2022 14:52:45 +0000 (UTC)
+Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
+ by mx.groups.io with SMTP id smtpd.web11.33999.1655823156436948331
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Jun 2022 21:25:37 -0700
+ Tue, 21 Jun 2022 07:52:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=hKiNV0Q5;
- spf=pass (domain: mvista.com, ip: 209.85.210.172,
- mailfrom: hprajapati@mvista.com)
-Received: by mail-pf1-f172.google.com with SMTP id bo5so11972731pfb.4
-        for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Jun 2022 21:25:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=OPJtYl2yezjo7h1lE5wLmiDeJQQL1dkFo3SDrJfO7a4=;
-        b=hKiNV0Q59SCyVCFPbXw3/D/Ca/nwOb7wFzekrTbB1FmuT+WwzXaPRGXfT9DxIr6qVy
-         tqVSvfu7vYHZ95uPReypp7wkxPdoXVIxiv6xcQBjbw4bzVpGoyYfKgsb2rGTs1zOj1zN
-         4UXq029kFBuBeLHtrwZUIhFaAvkB4YelKZAL8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=OPJtYl2yezjo7h1lE5wLmiDeJQQL1dkFo3SDrJfO7a4=;
-        b=MLFbv2z0DBHwT1d+8PjKMDYgJKfsgdG4eB9m4XrQoiwF6SW6idQ2WCjm3IODRLwEuV
-         H9UcxlOPrADK/xBKMJUuwqyQV6OP2zVfpx/32aUgARaiQ+voXdbez5HEpa8Tv+9FaH2g
-         2ITJF3Oi8mbMfHDG4eE+jVT1FZetUS7DuHEZw/Oa9pN1FYTesQfKaek3cf+/oxb3rQU+
-         M8ri3oiEDhQ188/SjnU4pq+jc+5qwiLNjXRhKUcMnJCbWXIAT8XNEVJGWizm1vO1OfeU
-         /SploQqqh5joOvP+x85AU/WB/u3KZO3ULS2tPaP/kpe7NTzhceSV+O/HCqjh5G9KA0TA
-         EFKg==
-X-Gm-Message-State: AJIora87P3uNRcYtMfa74GTsBVrAH3Ur8SYIeOZ+rJ6SWMWecYErtS4g
-	sjGccIO+NbGF6zAZJoerd+315tXIqY8r7Zs6
-X-Google-Smtp-Source: 
- AGRyM1uoP7MmVMpATW8AfVMRtSLWqh9tIB0UpLRgkOZCT1OlQYJGZ22T4nWjXLOo4LypnxJkHlqLag==
-X-Received: by 2002:aa7:910b:0:b0:524:f8d9:a4c4 with SMTP id
- 11-20020aa7910b000000b00524f8d9a4c4mr16031147pfh.5.1655785535811;
-        Mon, 20 Jun 2022 21:25:35 -0700 (PDT)
-Received: from MVIN00024 ([43.249.234.226])
-        by smtp.gmail.com with ESMTPSA id
- js15-20020a17090b148f00b001ec9d45776bsm3644943pjb.42.2022.06.20.21.25.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Jun 2022 21:25:35 -0700 (PDT)
-Received: by MVIN00024 (sSMTP sendmail emulation);
- Tue, 21 Jun 2022 09:55:30 +0530
-From: Hitendra Prajapati <hprajapati@mvista.com>
+ dkim=missing;
+ spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.19,
+ mailfrom: f_l_k@t-online.de)
+Received: from fwd70.dcpf.telekom.de (fwd70.aul.t-online.de [10.223.144.96])
+	by mailout06.t-online.de (Postfix) with SMTP id B1F9F45BC
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 21 Jun 2022 16:52:34 +0200 (CEST)
+Received: from flk-MS-7C91.fritz.box ([84.163.45.237]) by fwd70.t-online.de
+	with (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384 encrypted)
+	esmtp id 1o3fF4-2cGVKD0; Tue, 21 Jun 2022 16:52:34 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-oe][dunfell][PATCH] openldap: CVE-2022-29155 OpenLDAP SQL
- injection
-Date: Tue, 21 Jun 2022 09:55:29 +0530
-Message-Id: <20220621042529.6748-1-hprajapati@mvista.com>
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-oe][PATCHv3] flatbuffers: update to 2.0.6
+Date: Tue, 21 Jun 2022 16:52:11 +0200
+Message-Id: <20220621145211.30258-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1655823154-0143FF0B-9A9BB899/0/0 CLEAN NORMAL
+X-TOI-MSGID: a8e89bd3-6594-4877-850d-9539d7a851db
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 Jun 2022 04:25:41 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Jun 2022 14:52:45 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97549
+ https://lists.openembedded.org/g/openembedded-devel/message/97555
 
-Source: https://git.openldap.org/openldap/openldap
-MR: 117821
-Type: Security Fix
-Disposition: Backport from https://git.openldap.org/openldap/openldap/-/commit/87df6c19915042430540931d199a39105544a134
-ChangeID: d534808c796600ca5994bcda28938d45405bc7b4
-Description:
-	CVE-2022-29155 openldap: OpenLDAP SQL injection
+- fix flatc not found issue
+- build the python3 module as a separate package to allow proper install
+- remove fpic CXXFLAG as it seems to be unneeded
+- use python3-native
+- remove -DCMAKE_BUILD_TYPE=3DRelease option and its outdated comment.
+  After a long discussion the default behavior was changed:
+  https://github.com/google/flatbuffers/pull/5180
 
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../openldap/openldap/CVE-2022-29155.patch    | 277 ++++++++++++++++++
- .../openldap/openldap_2.4.57.bb               |   2 +-
- 2 files changed, 278 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/openldap/openldap/CVE-2022-29155.patch
+ ...tbuffers_2.0.0.bb =3D> flatbuffers_2.0.6.bb} | 24 +++++--------------
+ .../flatbuffers/python3-flatbuffers_2.0.6.bb  | 15 ++++++++++++
+ 2 files changed, 21 insertions(+), 18 deletions(-)
+ rename meta-oe/recipes-devtools/flatbuffers/{flatbuffers_2.0.0.bb =3D> f=
+latbuffers_2.0.6.bb} (52%)
+ create mode 100644 meta-oe/recipes-devtools/flatbuffers/python3-flatbuff=
+ers_2.0.6.bb
 
-diff --git a/meta-oe/recipes-support/openldap/openldap/CVE-2022-29155.patch b/meta-oe/recipes-support/openldap/openldap/CVE-2022-29155.patch
-new file mode 100644
-index 000000000..2860b9522
---- /dev/null
-+++ b/meta-oe/recipes-support/openldap/openldap/CVE-2022-29155.patch
-@@ -0,0 +1,277 @@
-+From 11e136f15085a4bda5701e910988966bed699977 Mon Sep 17 00:00:00 2001
-+From: Hitendra Prajapati <hprajapati@mvista.com>
-+Date: Wed, 18 May 2022 13:57:59 +0530
-+Subject: [PATCH] CVE-2022-29155
-+
-+Upstream-Status: Backport [https://git.openldap.org/openldap/openldap/-/commit/87df6c19915042430540931d199a39105544a134]
-+CVE: CVE-2022-29155
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-+
-+---
-+ servers/slapd/back-sql/search.c | 123 +++++++++++++++++++++++++++-----
-+ 1 file changed, 105 insertions(+), 18 deletions(-)
-+
-+diff --git a/servers/slapd/back-sql/search.c b/servers/slapd/back-sql/search.c
-+index bb0f1e2..1770bde 100644
-+--- a/servers/slapd/back-sql/search.c
-++++ b/servers/slapd/back-sql/search.c
-+@@ -63,6 +63,38 @@ static void send_paged_response(
-+ 	ID  *lastid );
-+ #endif /* ! BACKSQL_ARBITRARY_KEY */
-+ 
-++/* Look for chars that need to be escaped, return count of them.
-++ * If out is non-NULL, copy escape'd val to it.
-++ */
-++static int
-++backsql_val_escape( Operation *op, struct berval *in, struct berval *out )
-++{
-++	char *ptr, *end;
-++	int q = 0;
-++
-++	ptr = in->bv_val;
-++	end = ptr + in->bv_len;
-++	while (ptr < end) {
-++		if ( *ptr == '\'' )
-++			q++;
-++		ptr++;
-++	}
-++	if ( q && out ) {
-++		char *dst;
-++		out->bv_len = in->bv_len + q;
-++		out->bv_val = op->o_tmpalloc( out->bv_len + 1, op->o_tmpmemctx );
-++		ptr = in->bv_val;
-++		dst = out->bv_val;
-++		while (ptr < end ) {
-++			if ( *ptr == '\'' )
-++				*dst++ = '\'';
-++			*dst++ = *ptr++;
-++		}
-++		*dst = '\0';
-++	}
-++	return q;
-++}
-++
-+ static int
-+ backsql_attrlist_add( backsql_srch_info *bsi, AttributeDescription *ad )
-+ {
-+@@ -429,6 +461,8 @@ backsql_process_sub_filter( backsql_srch_info *bsi, Filter *f,
-+ 	backsql_info		*bi = (backsql_info *)bsi->bsi_op->o_bd->be_private;
-+ 	int			i;
-+ 	int			casefold = 0;
-++	int			escaped = 0;
-++	struct berval	escval, *fvalue;
-+ 
-+ 	if ( !f ) {
-+ 		return 0;
-+@@ -462,50 +496,68 @@ backsql_process_sub_filter( backsql_srch_info *bsi, Filter *f,
-+ 
-+ 		BER_BVZERO( &bv );
-+ 		if ( f->f_sub_initial.bv_val ) {
-+-			bv.bv_len += f->f_sub_initial.bv_len;
-++			bv.bv_len += f->f_sub_initial.bv_len + backsql_val_escape( NULL, &f->f_sub_initial, NULL );
-+ 		}
-+ 		if ( f->f_sub_any != NULL ) {
-+ 			for ( a = 0; f->f_sub_any[ a ].bv_val != NULL; a++ ) {
-+-				bv.bv_len += f->f_sub_any[ a ].bv_len;
-++				bv.bv_len += f->f_sub_any[ a ].bv_len + backsql_val_escape( NULL, &f->f_sub_any[ a ], NULL );
-+ 			}
-+ 		}
-+ 		if ( f->f_sub_final.bv_val ) {
-+-			bv.bv_len += f->f_sub_final.bv_len;
-++			bv.bv_len += f->f_sub_final.bv_len + backsql_val_escape( NULL, &f->f_sub_final, NULL );
-+ 		}
-+ 		bv.bv_len = 2 * bv.bv_len - 1;
-+ 		bv.bv_val = ch_malloc( bv.bv_len + 1 );
-+ 
-+ 		s = 0;
-+ 		if ( !BER_BVISNULL( &f->f_sub_initial ) ) {
-+-			bv.bv_val[ s ] = f->f_sub_initial.bv_val[ 0 ];
-+-			for ( i = 1; i < f->f_sub_initial.bv_len; i++ ) {
-++			fvalue = &f->f_sub_initial;
-++			escaped = backsql_val_escape( bsi->bsi_op, fvalue, &escval );
-++			if ( escaped )
-++				fvalue = &escval;
-++			bv.bv_val[ s ] = fvalue->bv_val[ 0 ];
-++			for ( i = 1; i < fvalue->bv_len; i++ ) {
-+ 				bv.bv_val[ s + 2 * i - 1 ] = '%';
-+-				bv.bv_val[ s + 2 * i ] = f->f_sub_initial.bv_val[ i ];
-++				bv.bv_val[ s + 2 * i ] = fvalue->bv_val[ i ];
-+ 			}
-+ 			bv.bv_val[ s + 2 * i - 1 ] = '%';
-+ 			s += 2 * i;
-++			if ( escaped )
-++				bsi->bsi_op->o_tmpfree( escval.bv_val, bsi->bsi_op->o_tmpmemctx );
-+ 		}
-+ 
-+ 		if ( f->f_sub_any != NULL ) {
-+ 			for ( a = 0; !BER_BVISNULL( &f->f_sub_any[ a ] ); a++ ) {
-+-				bv.bv_val[ s ] = f->f_sub_any[ a ].bv_val[ 0 ];
-+-				for ( i = 1; i < f->f_sub_any[ a ].bv_len; i++ ) {
-++				fvalue = &f->f_sub_any[ a ];
-++				escaped = backsql_val_escape( bsi->bsi_op, fvalue, &escval );
-++				if ( escaped )
-++					fvalue = &escval;
-++				bv.bv_val[ s ] = fvalue->bv_val[ 0 ];
-++				for ( i = 1; i < fvalue->bv_len; i++ ) {
-+ 					bv.bv_val[ s + 2 * i - 1 ] = '%';
-+-					bv.bv_val[ s + 2 * i ] = f->f_sub_any[ a ].bv_val[ i ];
-++					bv.bv_val[ s + 2 * i ] = fvalue->bv_val[ i ];
-+ 				}
-+ 				bv.bv_val[ s + 2 * i - 1 ] = '%';
-+ 				s += 2 * i;
-++				if ( escaped )
-++					bsi->bsi_op->o_tmpfree( escval.bv_val, bsi->bsi_op->o_tmpmemctx );
-+ 			}
-+ 		}
-+ 
-+ 		if ( !BER_BVISNULL( &f->f_sub_final ) ) {
-+-			bv.bv_val[ s ] = f->f_sub_final.bv_val[ 0 ];
-+-			for ( i = 1; i < f->f_sub_final.bv_len; i++ ) {
-++			fvalue = &f->f_sub_final;
-++			escaped = backsql_val_escape( bsi->bsi_op, fvalue, &escval );
-++			if ( escaped )
-++				fvalue = &escval;
-++			bv.bv_val[ s ] = fvalue->bv_val[ 0 ];
-++			for ( i = 1; i < fvalue->bv_len; i++ ) {
-+ 				bv.bv_val[ s + 2 * i - 1 ] = '%';
-+-				bv.bv_val[ s + 2 * i ] = f->f_sub_final.bv_val[ i ];
-++				bv.bv_val[ s + 2 * i ] = fvalue->bv_val[ i ];
-+ 			}
-+-				bv.bv_val[ s + 2 * i - 1 ] = '%';
-++			bv.bv_val[ s + 2 * i - 1 ] = '%';
-+ 			s += 2 * i;
-++			if ( escaped )
-++				bsi->bsi_op->o_tmpfree( escval.bv_val, bsi->bsi_op->o_tmpmemctx );
-+ 		}
-+ 
-+ 		bv.bv_val[ s - 1 ] = '\0';
-+@@ -561,11 +613,17 @@ backsql_process_sub_filter( backsql_srch_info *bsi, Filter *f,
-+ 			f->f_sub_initial.bv_val, 0 );
-+ #endif /* BACKSQL_TRACE */
-+ 
-++		fvalue = &f->f_sub_initial;
-++		escaped = backsql_val_escape( bsi->bsi_op, fvalue, &escval );
-++		if ( escaped )
-++			fvalue = &escval;
-+ 		start = bsi->bsi_flt_where.bb_val.bv_len;
-+ 		backsql_strfcat_x( &bsi->bsi_flt_where,
-+ 				bsi->bsi_op->o_tmpmemctx,
-+ 				"b",
-+-				&f->f_sub_initial );
-++				fvalue );
-++		if ( escaped )
-++			bsi->bsi_op->o_tmpfree( escval.bv_val, bsi->bsi_op->o_tmpmemctx );
-+ 		if ( casefold && BACKSQL_AT_CANUPPERCASE( at ) ) {
-+ 			ldap_pvt_str2upper( &bsi->bsi_flt_where.bb_val.bv_val[ start ] );
-+ 		}
-+@@ -586,12 +644,18 @@ backsql_process_sub_filter( backsql_srch_info *bsi, Filter *f,
-+ 				i, f->f_sub_any[ i ].bv_val );
-+ #endif /* BACKSQL_TRACE */
-+ 
-++			fvalue = &f->f_sub_any[ i ];
-++			escaped = backsql_val_escape( bsi->bsi_op, fvalue, &escval );
-++			if ( escaped )
-++				fvalue = &escval;
-+ 			start = bsi->bsi_flt_where.bb_val.bv_len;
-+ 			backsql_strfcat_x( &bsi->bsi_flt_where,
-+ 					bsi->bsi_op->o_tmpmemctx,
-+ 					"bc",
-+-					&f->f_sub_any[ i ],
-++					fvalue,
-+ 					'%' );
-++			if ( escaped )
-++				bsi->bsi_op->o_tmpfree( escval.bv_val, bsi->bsi_op->o_tmpmemctx );
-+ 			if ( casefold && BACKSQL_AT_CANUPPERCASE( at ) ) {
-+ 				/*
-+ 				 * Note: toupper('%') = '%'
-+@@ -611,11 +675,17 @@ backsql_process_sub_filter( backsql_srch_info *bsi, Filter *f,
-+ 			f->f_sub_final.bv_val, 0 );
-+ #endif /* BACKSQL_TRACE */
-+ 
-++		fvalue = &f->f_sub_final;
-++		escaped = backsql_val_escape( bsi->bsi_op, fvalue, &escval );
-++		if ( escaped )
-++			fvalue = &escval;
-+ 		start = bsi->bsi_flt_where.bb_val.bv_len;
-+     		backsql_strfcat_x( &bsi->bsi_flt_where,
-+ 				bsi->bsi_op->o_tmpmemctx,
-+ 				"b",
-+-				&f->f_sub_final );
-++				fvalue );
-++		if ( escaped )
-++			bsi->bsi_op->o_tmpfree( escval.bv_val, bsi->bsi_op->o_tmpmemctx );
-+   		if ( casefold && BACKSQL_AT_CANUPPERCASE( at ) ) {
-+ 			ldap_pvt_str2upper( &bsi->bsi_flt_where.bb_val.bv_val[ start ] );
-+ 		}
-+@@ -1183,6 +1253,8 @@ backsql_process_filter_attr( backsql_srch_info *bsi, Filter *f, backsql_at_map_r
-+ 	struct berval		*filter_value = NULL;
-+ 	MatchingRule		*matching_rule = NULL;
-+ 	struct berval		ordering = BER_BVC("<=");
-++	struct berval		escval;
-++	int					escaped = 0;
-+ 
-+ 	Debug( LDAP_DEBUG_TRACE, "==>backsql_process_filter_attr(%s)\n",
-+ 		at->bam_ad->ad_cname.bv_val, 0, 0 );
-+@@ -1237,6 +1309,10 @@ equality_match:;
-+ 			casefold = 1;
-+ 		}
-+ 
-++		escaped = backsql_val_escape( bsi->bsi_op, filter_value, &escval );
-++		if ( escaped )
-++			filter_value = &escval;
-++
-+ 		/* FIXME: directoryString filtering should use a similar
-+ 		 * approach to deal with non-prettified values like
-+ 		 * " A  non    prettified   value  ", by using a LIKE
-+@@ -1317,6 +1393,10 @@ equality_match:;
-+ 			casefold = 1;
-+ 		}
-+ 
-++		escaped = backsql_val_escape( bsi->bsi_op, filter_value, &escval );
-++		if ( escaped )
-++			filter_value = &escval;
-++
-+ 		/*
-+ 		 * FIXME: should we uppercase the operands?
-+ 		 */
-+@@ -1350,7 +1430,7 @@ equality_match:;
-+ 					&at->bam_sel_expr,
-+ 					&ordering,
-+ 					'\'',
-+-					&f->f_av_value,
-++					filter_value,
-+ 					(ber_len_t)STRLENOF( /* (' */ "')" ),
-+ 						/* ( */ "')" );
-+ 		}
-+@@ -1374,13 +1454,17 @@ equality_match:;
-+ 	case LDAP_FILTER_APPROX:
-+ 		/* we do our best */
-+ 
-++		filter_value = &f->f_av_value;
-++		escaped = backsql_val_escape( bsi->bsi_op, filter_value, &escval );
-++		if ( escaped )
-++			filter_value = &escval;
-+ 		/*
-+ 		 * maybe we should check type of at->sel_expr here somehow,
-+ 		 * to know whether upper_func is applicable, but for now
-+ 		 * upper_func stuff is made for Oracle, where UPPER is
-+ 		 * safely applicable to NUMBER etc.
-+ 		 */
-+-		(void)backsql_process_filter_like( bsi, at, 1, &f->f_av_value );
-++		(void)backsql_process_filter_like( bsi, at, 1, filter_value );
-+ 		break;
-+ 
-+ 	default:
-+@@ -1394,6 +1478,9 @@ equality_match:;
-+ 
-+ 	}
-+ 
-++	if ( escaped )
-++		bsi->bsi_op->o_tmpfree( escval.bv_val, bsi->bsi_op->o_tmpmemctx );
-++
-+ 	Debug( LDAP_DEBUG_TRACE, "<==backsql_process_filter_attr(%s)\n",
-+ 		at->bam_ad->ad_cname.bv_val, 0, 0 );
-+ 
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.57.bb b/meta-oe/recipes-support/openldap/openldap_2.4.57.bb
-index a282523a3..e3e9caa1b 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.57.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.57.bb
-@@ -23,8 +23,8 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
-     file://thread_stub.patch \
-     file://openldap-CVE-2015-3276.patch \
-     file://remove-user-host-pwd-from-version.patch \
-+    file://CVE-2022-29155.patch \
- "
+diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb b/=
+meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.6.bb
+similarity index 52%
+rename from meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
+rename to meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.6.bb
+index bf74f1229..3ca477210 100644
+--- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.0.bb
++++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.6.bb
+@@ -3,41 +3,29 @@ HOMEPAGE =3D "https://github.com/google/flatbuffers"
+ SECTION =3D "console/tools"
+ LICENSE =3D "Apache-2.0"
+=20
+-inherit python3-dir
++PACKAGE_BEFORE_PN =3D "${PN}-compiler"
+=20
+-PACKAGE_BEFORE_PN =3D "${PN}-compiler ${PN}-${PYTHON_PN}"
++DEPENDS =3D "flatbuffers-native"
+=20
+ RDEPENDS:${PN}-compiler =3D "${PN}"
+-RDEPENDS:${PN}-${PYTHON_PN} =3D "${PN}"
+ RDEPENDS:${PN}-dev +=3D "${PN}-compiler"
+=20
+ LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc=
+3c6bd57"
+=20
+-SRCREV =3D "a9a295fecf3fbd5a4f571f53b01f63202a3e2113"
++SRCREV =3D "615616cb5549a34bdf288c04bc1b94bd7a65c396"
+ SRC_URI =3D "git://github.com/google/flatbuffers.git;branch=3Dmaster;pro=
+tocol=3Dhttps"
+ S =3D "${WORKDIR}/git"
+=20
+ CVE_CHECK_IGNORE +=3D "CVE-2020-35864"
+=20
+-CXXFLAGS +=3D "-fPIC"
+-BUILD_CXXFLAGS +=3D "-fPIC"
 -
- SRC_URI[md5sum] = "e3349456c3a66e5e6155be7ddc3f042c"
- SRC_URI[sha256sum] = "c7ba47e1e6ecb5b436f3d43281df57abeffa99262141aec822628bc220f6b45a"
- 
--- 
+-# BUILD_TYPE=3DRelease is required, otherwise flatc is not installed
+-EXTRA_OECMAKE +=3D "\
+-    -DCMAKE_BUILD_TYPE=3DRelease \
++EXTRA_OECMAKE +=3D " \
+     -DFLATBUFFERS_BUILD_TESTS=3DOFF \   =20
+     -DFLATBUFFERS_BUILD_SHAREDLIB=3DON \
+ "
++EXTRA_OECMAKE:append:class-target =3D " -DFLATBUFFERS_FLATC_EXECUTABLE=3D=
+${STAGING_BINDIR_NATIVE}/flatc"
+=20
+-inherit cmake
+-
+-do_install:append() {
+-    install -d ${D}${PYTHON_SITEPACKAGES_DIR}
+-    cp -rf ${S}/python/flatbuffers ${D}${PYTHON_SITEPACKAGES_DIR}
+-}
++inherit cmake python3native
+=20
+ FILES:${PN}-compiler =3D "${bindir}"
+=20
+-FILES:${PN}-${PYTHON_PN} =3D "${PYTHON_SITEPACKAGES_DIR}"
+-
+ BBCLASSEXTEND =3D "native nativesdk"
+diff --git a/meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers_2.0=
+.6.bb b/meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers_2.0.6.bb
+new file mode 100644
+index 000000000..cc453da35
+--- /dev/null
++++ b/meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers_2.0.6.bb
+@@ -0,0 +1,15 @@
++SUMMARY =3D "Memory Efficient Serialization Library - Python3 Modules"
++HOMEPAGE =3D "https://github.com/google/flatbuffers"
++SECTION =3D "console/tools"
++LICENSE =3D "Apache-2.0"
++
++LIC_FILES_CHKSUM =3D "file://../LICENSE.txt;md5=3D3b83ef96387f14655fc854=
+ddc3c6bd57"
++
++SRCREV =3D "615616cb5549a34bdf288c04bc1b94bd7a65c396"
++SRC_URI =3D "git://github.com/google/flatbuffers.git;branch=3Dmaster;pro=
+tocol=3Dhttps"
++S =3D "${WORKDIR}/git/python"
++
++RDEPENDS:${PN} =3D "flatbuffers"
++
++inherit setuptools3
++
+--=20
 2.25.1
 
 
