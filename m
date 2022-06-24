@@ -1,120 +1,190 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E90BBC43334
-	for <webhook@archiver.kernel.org>; Thu, 23 Jun 2022 07:15:16 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web10.4587.1655968506792109647
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 643A6C43334
+	for <webhook@archiver.kernel.org>; Fri, 24 Jun 2022 12:18:17 +0000 (UTC)
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com
+ [209.85.216.45])
+ by mx.groups.io with SMTP id smtpd.web11.6881.1656073093016348504
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Jun 2022 00:15:07 -0700
+ Fri, 24 Jun 2022 05:18:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=NyZjvzLq;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1655968505; i=@fujitsu.com;
-	bh=TQzgi92J2SfG3yL7K6fPxTc28PfvyKD8ogGy9aG11D8=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=NyZjvzLq0V95IHLRoBFH8xrjisagvAP+0VAfy0n62CQJllhkGmZic5FUU06SFad1V
-	 Ed8+lXF5c/DEKi8DTajX8X8gXZsdNNJ4YeoQ174712FZoNAwpfG6fS7MPBmT3t5fd+
-	 jss4l4ep8vMX/aza4FYItzyX+zp/fYv8OTE50iRCpppkkrym3/IIZAKMxB1js8iBos
-	 UN1kk3SalF6abHWqhc9i7X97efm6qqMFix7vmT0R9gweJjqnI2HhaEVtvLm3Zv3idj
-	 qYL8DCFzjY3hpvDSqhqzg3XY/DIkXh+fVHS1NqzNNOnh9DV3MLFfC8suKMOBAYZrjD
-	 1BrekRYusKmYA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrKIsWRWlGSWpSXmKPExsViZ8ORpPtDaEu
-  SwYflRhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8abHcUFt7krlq7dwtrAeISri5GLQ0jgIaPE
-  sZ1dLBDOLSaJ0/tWMkE4exglJqzby9bFyMnBJqAmMf3WDVYQW0RAX2Lp7D3MIDazgIrEi9897
-  CC2sICPxI7VHWA2i4CqxOT1rUwgNq+Ao8TUHX/B5kgIKEhMefgerJdTwEmi5eNRoBoOoGWOEq
-  /fqUOUC0qcnPmEBWK8hMTBFy+YIVoVJWZfbmaBsCskZszYBjVSTeLquU3MExgFZyFpn4WkfQE
-  j0ypGq6SizPSMktzEzBxdQwMDXUNDU11jI11DE73EKt1EvdRS3fLU4hJdI73E8mK91OJiveLK
-  3OScFL281JJNjMAQTilW4NvB2Lzqp94hRkkOJiVR3q0CW5KE+JLyUyozEosz4otKc1KLDzHKc
-  HAoSfBe4gfKCRalpqdWpGXmAOMJJi3BwaMkwjsHJM1bXJCYW5yZDpE6xajLMfNr2wFmIZa8/L
-  xUKXHeBjagIgGQoozSPLgRsNi+xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmY9yPIlTyZeSV
-  wm14BHcEEdMST5RtAjihJREhJNTDNqzO7/tG+8dE58xwW2ZZciz9f32p5xl47fWWKuH/uqdqv
-  2dNiOa+ofLnx+ecvdfF3Ubmf9iQ1zGdZ18AVOXVT5rcTPV35zOJ2Ww69lb12lP2K6dkl218fV
-  56R+fqsth2j/a1bKzbXXb8ebCs5N1nnkw/f+bmct2d/a3c8sqP2+a86mc2lM+a5W806kz5dvq
-  3xwun3Ezy3txgZxze0qCWsFLGpkupcr9rO8IlrY7Ws/lHuWQxP1PgZWycZyAjs+pt457SXQIb
-  rof6ODaV5DDv3zku/81jNfZa24u0kT4aZ8y68ESoz/f5L69fZP8YHA+8IHBazOxT0f3v2UiOb
-  hQf7Ti3XWvxoxzn7bUeYls5ZpsRSnJFoqMVcVJwIAJ6buC5oAwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-19.tower-571.messagelabs.com!1655968504!42566!1
-X-Originating-IP: [62.60.8.98]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.86.7; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 24631 invoked from network); 23 Jun 2022 07:15:04 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-19.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 23 Jun 2022 07:15:04 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 760021AF
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Jun 2022 08:15:04 +0100 (BST)
-Received: from R01UKEXCASM126.r01.fujitsu.local (unknown10-183-43-178
- [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 6AE171AD
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Jun 2022 08:15:04 +0100 (BST)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Thu, 23 Jun 2022 08:15:03 +0100
-From: Wang Mingyu <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-watchdog: upgrade 2.1.8 -> 2.1.9
-Date: Thu, 23 Jun 2022 15:14:46 +0800
-Message-ID: <1655968487-3652-4-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1655968487-3652-1-git-send-email-wangmy@fujitsu.com>
-References: <1655968487-3652-1-git-send-email-wangmy@fujitsu.com>
+ dkim=pass header.i=@mvista.com header.s=google header.b=gfNYKV1k;
+ spf=pass (domain: mvista.com, ip: 209.85.216.45,
+ mailfrom: hprajapati@mvista.com)
+Received: by mail-pj1-f45.google.com with SMTP id w24so2573100pjg.5
+        for <openembedded-devel@lists.openembedded.org>;
+ Fri, 24 Jun 2022 05:18:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=O+IKA7PuTJ90uBhZunGReOiRJeKvB4ZLKo6wCTRLjsw=;
+        b=gfNYKV1kdmuazB6Cr6q2DOe00H5Dnz1zFLrpFSx0byYgjP1HhIzR1IrNsXCxzl9ME8
+         g12LWKcEKHh5zDXnCk4luuuMvmRrSoqMmbBXtC+UdGyUDazxGlVtN8xCbRM5W+2k/uv8
+         fQWRzpUH0bs+8hg03aX87YPMF/leopzdozSsg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=O+IKA7PuTJ90uBhZunGReOiRJeKvB4ZLKo6wCTRLjsw=;
+        b=N9fQ8koFF2oovlg3sBqR+5z8lVMm6+163aS5GsV61fHsC/KJcAbH1iXuGrmFUKwqlw
+         mOTKiF72hSxVT9lcoKesi2C9oGtjC91s2seQC1bOjMrU5Bky1/p2hCwoeryIc9UTgMaX
+         LGGcB9ff8q5tP55uZzMIDWFIcuzkZ725JzQLd0RX/nesDE/BlO0rc7dbZsA96FLZwwYm
+         OSx4l5tZwxN5vj/Wj1DvPmsoSqc1J03cBpGgJysux+HQyzVepj+0dp+Y5xNIHa+P3Z/q
+         1foXED5nY8XMVlQEIWQeakDf/xZ7hRUzsP6Tz1ypuhC8Vz4P3G6tGsRYTG4rGmuamybr
+         TiJA==
+X-Gm-Message-State: AJIora8Is52jYKLDAhlCDsoA0q4s8amqCOc90xQbKyZQ0lI7qT8//U1W
+	n0Jp2dyWeD7SVfw3d5UDUtjYTQi4SvisAQ==
+X-Google-Smtp-Source: 
+ AGRyM1s4e/qgvyOyDdmjjbXgrVPh48hgGDCjdFfPSFqk0tre3TD9YKSgX+bCH1bjy8lZ1+0iIwJcjQ==
+X-Received: by 2002:a17:902:d58d:b0:16a:1aaa:bfad with SMTP id
+ k13-20020a170902d58d00b0016a1aaabfadmr28716686plh.24.1656073092221;
+        Fri, 24 Jun 2022 05:18:12 -0700 (PDT)
+Received: from MVIN00024 ([103.250.136.225])
+        by smtp.gmail.com with ESMTPSA id
+ p21-20020a62ab15000000b0051853e6617fsm1542897pff.89.2022.06.24.05.18.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 24 Jun 2022 05:18:11 -0700 (PDT)
+Received: by MVIN00024 (sSMTP sendmail emulation);
+ Fri, 24 Jun 2022 17:48:07 +0530
+From: Hitendra Prajapati <hprajapati@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-oe][dunfell][PATCH] xterm: CVE-2022-24130 Buffer overflow in
+ set_sixel in graphics_sixel.c
+Date: Fri, 24 Jun 2022 17:48:02 +0530
+Message-Id: <20220624121802.23761-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 23 Jun 2022 07:15:16 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 24 Jun 2022 12:18:17 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97587
+ https://lists.openembedded.org/g/openembedded-devel/message/97589
 
-Changelog:
-=========
-    [fsevents] Fix flakey test to assert that there are no errors when stopping the emitter.
-    [inotify] Suppress occasional OSError: [Errno 9] Bad file descriptor at shutdown. #805
-    [watchmedo] Make auto-restart restart the sub-process if it terminates. #896
-    [watchmedo] Avoid zombie sub-processes when running shell-command without --wait. #405
+Source: https://github.com/ThomasDickey/xterm-snapshots/
+MR: 115675
+Type: Security Fix
+Disposition: Backport from https://github.com/ThomasDickey/xterm-snapshots/commit/1584fc227673264661250d3a8d673c168ac9512d
+ChangeID: 6ad000b744527ae863187b570714792fc29467d9
+Description:
+         CVE-2022-24130 xterm: Buffer overflow in set_sixel in graphics_sixel.c.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
- .../{python3-watchdog_2.1.8.bb => python3-watchdog_2.1.9.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-watchdog_2.1.8.bb => python3-watchdog_2.1.9.bb} (80%)
+ .../xorg-app/xterm/CVE-2022-24130.patch       | 84 +++++++++++++++++++
+ .../recipes-graphics/xorg-app/xterm_353.bb    |  2 +-
+ 2 files changed, 85 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-24130.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-watchdog_2.1.8.bb b/meta-python/recipes-devtools/python/python3-watchdog_2.1.9.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-watchdog_2.1.8.bb
-rename to meta-python/recipes-devtools/python/python3-watchdog_2.1.9.bb
-index 70af95157..8c7c6dd47 100644
---- a/meta-python/recipes-devtools/python/python3-watchdog_2.1.8.bb
-+++ b/meta-python/recipes-devtools/python/python3-watchdog_2.1.9.bb
-@@ -4,7 +4,7 @@ DEPENDS = "${PYTHON_PN}-argh"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
--SRC_URI[sha256sum] = "6d03149126864abd32715d4e9267d2754cede25a69052901399356ad3bc5ecff"
-+SRC_URI[sha256sum] = "43ce20ebb36a51f21fa376f76d1d4692452b2527ccd601950d69ed36b9e21609"
- 
- inherit pypi setuptools3
- 
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-24130.patch b/meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-24130.patch
+new file mode 100644
+index 000000000..b7a5f297a
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xorg-app/xterm/CVE-2022-24130.patch
+@@ -0,0 +1,84 @@
++From 85666286473f2fbb2d4731d4e175f00d7a76e21f Mon Sep 17 00:00:00 2001
++From: Hitendra Prajapati <hprajapati@mvista.com>
++Date: Tue, 21 Jun 2022 10:53:01 +0530
++Subject: [PATCH] CVE-2022-24130
++
++Upstream-Status: Backport [https://github.com/ThomasDickey/xterm-snapshots/commit/1584fc227673264661250d3a8d673c168ac9512d]
++CVE: CVE-2022-24130
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++
++Description: Cherry-pick sixel graphics fixes from xterm 370d and 370f
++ Check for out-of-bounds condition while drawing sixels, and quit that
++ operation (report by Nick Black, CVE-2022-24130).
++Bug-Debian: https://bugs.debian.org/1004689
++
++---
++ graphics_sixel.c | 22 +++++++++++++++++-----
++ 1 file changed, 17 insertions(+), 5 deletions(-)
++
++diff --git a/graphics_sixel.c b/graphics_sixel.c
++index 00ba3ef..6a82295 100644
++--- a/graphics_sixel.c
+++++ b/graphics_sixel.c
++@@ -141,7 +141,7 @@ init_sixel_background(Graphic *graphic, SixelContext const *context)
++     graphic->color_registers_used[context->background] = 1;
++ }
++ 
++-static void
+++static Boolean
++ set_sixel(Graphic *graphic, SixelContext const *context, int sixel)
++ {
++     const int mh = graphic->max_height;
++@@ -162,7 +162,10 @@ set_sixel(Graphic *graphic, SixelContext const *context, int sixel)
++ 	   ((color != COLOR_HOLE)
++ 	    ? (unsigned) graphic->color_registers[color].b : 0U)));
++     for (pix = 0; pix < 6; pix++) {
++-	if (context->col < mw && context->row + pix < mh) {
+++	if (context->col >= 0 &&
+++	    context->col < mw &&
+++	    context->row + pix >= 0 &&
+++	    context->row + pix < mh) {
++ 	    if (sixel & (1 << pix)) {
++ 		if (context->col + 1 > graphic->actual_width) {
++ 		    graphic->actual_width = context->col + 1;
++@@ -175,8 +178,10 @@ set_sixel(Graphic *graphic, SixelContext const *context, int sixel)
++ 	    }
++ 	} else {
++ 	    TRACE(("sixel pixel %d out of bounds\n", pix));
+++	    return False;
++ 	}
++     }
+++    return True;
++ }
++ 
++ static void
++@@ -451,7 +456,10 @@ parse_sixel(XtermWidget xw, ANSI *params, char const *string)
++ 		init_sixel_background(graphic, &context);
++ 		graphic->valid = 1;
++ 	    }
++-	    set_sixel(graphic, &context, sixel);
+++	    if (!set_sixel(graphic, &context, sixel)) {
+++	      context.col = 0;
+++	      break;
+++	    }
++ 	    context.col++;
++ 	} else if (ch == '$') {	/* DECGCR */
++ 	    /* ignore DECCRNLM in sixel mode */
++@@ -529,8 +537,12 @@ parse_sixel(XtermWidget xw, ANSI *params, char const *string)
++ 		graphic->valid = 1;
++ 	    }
++ 	    for (i = 0; i < Pcount; i++) {
++-		set_sixel(graphic, &context, sixel);
++-		context.col++;
+++		if (set_sixel(graphic, &context, sixel)) {
+++		  context.col++;
+++		} else {
+++		  context.col = 0;
+++		  break;
+++		}
++ 	    }
++ 	} else if (ch == '#') {	/* DECGCI */
++ 	    ANSI color_params;
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_353.bb b/meta-oe/recipes-graphics/xorg-app/xterm_353.bb
+index 264320212..1862b250e 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xterm_353.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xterm_353.bb
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=996b1ce0584c0747b1
+ SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz \
+            file://0001-Add-configure-time-check-for-setsid.patch \
+            file://CVE-2021-27135.patch \
++           file://CVE-2022-24130.patch \
+           "
+-
+ SRC_URI[md5sum] = "247c30ebfa44623f3a2d100e0cae5c7f"
+ SRC_URI[sha256sum] = "e521d3ee9def61f5d5c911afc74dd5c3a56ce147c7071c74023ea24cac9bb768"
+ PACKAGECONFIG ?= ""
 -- 
 2.25.1
 
