@@ -1,76 +1,96 @@
-Return-Path: <michael.opdenacker@bootlin.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B371C43334
-	for <webhook@archiver.kernel.org>; Tue, 28 Jun 2022 14:26:45 +0000 (UTC)
-Received: from relay10.mail.gandi.net (relay10.mail.gandi.net
- [217.70.178.230])
- by mx.groups.io with SMTP id smtpd.web10.55790.1656426398021815484
- for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Jun 2022 07:26:38 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E4B0FC433EF
+	for <webhook@archiver.kernel.org>; Tue, 28 Jun 2022 15:29:25 +0000 (UTC)
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
+ [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.web11.56340.1656430163064009049
+ for <Openembedded-devel@lists.openembedded.org>;
+ Tue, 28 Jun 2022 08:29:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bootlin.com header.s=gm1 header.b=L2wdUHfW;
- spf=pass (domain: bootlin.com, ip: 217.70.178.230,
- mailfrom: michael.opdenacker@bootlin.com)
-Received: (Authenticated sender: michael.opdenacker@bootlin.com)
-	by mail.gandi.net (Postfix) with ESMTPSA id A2A01240014;
-	Tue, 28 Jun 2022 14:26:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1656426396;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=mE5xJ3Ci0CXypCyNeEU5QlQvmC3OQlwG2sAzQVZhOrM=;
-	b=L2wdUHfWWzSI6dRYWP74MTSfSWg6i7a/Btas3YD9YEz0CJ0TA52NrZLoWsOf+SG6BAb7gY
-	QPH0lMlNnXImdXiIakjgs5WqL+E17RJ34uB9gwiWVdVTu7rpDiW5dWUSnX78IQukHhBctM
-	JDrSEH9RTbnbK9aclWUVVx4K3GNb4InV6FW3PgQ3/P3hu0p/rnLY0LZ2r1xIRIFQNHJVj7
-	6tljgEnuySVybim+8wtS3D1vujY8mC9C6bOX6CcsuZuP5QU5Qi/qjBkhVrVHT4qhriSjPq
-	Po/wodq1aNsmkHqR058MmQB7iX9BWr+PbgY/+vM0Jili7HpDfIIJxtLZkRsmfw==
-Message-ID: <56828337-19fd-d032-dda8-83ffe7396623@bootlin.com>
-Date: Tue, 28 Jun 2022 16:26:35 +0200
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=aQT5VtGV;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: ticotimo@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id
+ i8-20020a17090aee8800b001ecc929d14dso12549858pjz.0;
+        Tue, 28 Jun 2022 08:29:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=JfMe9wtFIcpOaRbm2IdQFPOEVkrZOfOUIkrQeYTS28Q=;
+        b=aQT5VtGVLeCpQfakTxdGfwHW84lp9vw1LK9ZWIyEqAVmEdgfjSqY+DHONA1mqG0qIc
+         9jiZSMXW7vfw/bjgI8n+Y2HGVoT1dc0GE5VjN+0biJeuK5PPstW25RZ76giWCdN2lmMc
+         Ff3APAN2R1XKk4ky9qzqLNEC4H8ETCa9FytfDad3hMxVlAr2OU7n0I6w51VJeSnSS+3C
+         0+qRupWLCPBLuwRH6nKgqFGqI0f0YwsLlATO+Rhq32RvPeYgwhSzTV2OgMHEAmT7xRqi
+         8BEu9352QJWBhLITZpDdmcfeV1FTLAHLeX86YNtHv8RvI59K73BhW8IMx6IS2c1AOsTX
+         +7Iw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=JfMe9wtFIcpOaRbm2IdQFPOEVkrZOfOUIkrQeYTS28Q=;
+        b=6nKT2nL8qfG9L1WemFcrqHWeKQBxs4ITYdR4VENUbA530r5MafYwqjqKt1K1AG9GWC
+         JOKrb9XnDu7wLy4ezak31OlWUBD16h7UVIo5NLigJB6+/b/hERiMALD5LKVBIhl0aiqC
+         VLlj8ntNhwZ1EbejyeXgu1iAnOjXrNbj+HzUOVHM7CfUKwQzonMpgTxmUbRTdPlD0xoJ
+         zTeyNLaHWuOEJiQQGiFlIZMsrSUVPQsl8lHMPJXX/mTzfkX3jQ/t8c3sMof8LtN4P7fd
+         PfndZWoT5NhRvZ1sKIaoESWjAdaLH9PZdCHqBp4XLNzIPqxv13jU87nZEiXDc+M/LiLH
+         MJ2A==
+X-Gm-Message-State: AJIora/e3K53/wQFOU7nXLHPqcuqdC5AxyVHuzcg0axeNO0NNdGGMlNk
+	Iu5K1jhEj55dnnRq1NmeDrP4BAfJ1MYwZSVHFN8/tJDvIDnP7g==
+X-Google-Smtp-Source: 
+ AGRyM1sdHXije+UMS8HpTaag0L9FgUnEILxrh6xf3COEDUTIRLIQ/Bpma5Fkqu1LeqqaPBR7ONS+OAed7pguZ//Ykm4=
+X-Received: by 2002:a17:90b:19d3:b0:1ed:5596:1ee5 with SMTP id
+ nm19-20020a17090b19d300b001ed55961ee5mr166581pjb.83.1656430161981; Tue, 28
+ Jun 2022 08:29:21 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.1
-Cc: openembedded-core <openembedded-core@lists.openembedded.org>,
- openembeded-devel <openembedded-devel@lists.openembedded.org>,
- Yocto <yocto@lists.yoctoproject.org>
-Subject: Re: [OE-core] Announcing pkgexp
-Content-Language: en-US
-To: Ross Burton <Ross.Burton@arm.com>
-References: <29D9E4D8-7C19-4967-8681-0633D670B1AA@arm.com>
- <3e2f8efd-8bca-425e-065a-33035c0f1632@bootlin.com>
- <CE736DC4-765F-451F-98CB-B486A1AE1221@arm.com>
-From: Michael Opdenacker <michael.opdenacker@bootlin.com>
-Organization: Bootlin
-In-Reply-To: <CE736DC4-765F-451F-98CB-B486A1AE1221@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+From: Tim Orling <ticotimo@gmail.com>
+Date: Tue, 28 Jun 2022 08:29:10 -0700
+Message-ID: 
+ <CANx9H-ATwbp6A4hKjfrMTi92EVhibkW3FSSSR_9Oqh1Qe0oHcg@mail.gmail.com>
+Subject: OpenEmbedded Happy Hour June 29 9pm/2100 UTC
+To: openembedded-core <openembedded-core@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+ <Openembedded-devel@lists.openembedded.org>,
+	"Yocto (yocto@lists.yoctoproject.org)" <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="0000000000006675ec05e283b3fc"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 28 Jun 2022 14:26:45 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 Jun 2022 15:29:25 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97607
+ https://lists.openembedded.org/g/openembedded-devel/message/97608
 
+--0000000000006675ec05e283b3fc
+Content-Type: text/plain; charset="UTF-8"
 
-On 6/28/22 16:24, Ross Burton wrote:
->
->> On 28 Jun 2022, at 15:11, Michael Opdenacker <michael.opdenacker@bootlin.com> wrote:
->> Hey, this looks very nice and very easy to use!
->> One minor complaint, though: the "What Depends on" button didn't immediately catch my eye.
->> Would it be possible to show such reverse dependencies in the same way you show RDEPENDS? The result may look better and everything would be on the same page.
-> The immediate problem with that is that for some packages, like libc, the reverse depends list can be huuuuge.  If the page is redesigned to have scrollable regions then sure.  That would likely involve someone more skilled in web design than me getting involved ;)
+All,
 
+You are cordially invited to the next OpenEmbedded Happy Hour on June 29
+for Europe/Americas time zones @ 2100/9pm UTC (5pm ET / 2pm PT).
 
-Understood, this definitely makes sense. Forget it!
-Cheers
-Michael
+https://www.openembedded.org/wiki/Calendar
+https://www.openembedded.org/wiki/Happy_Hours
+https://www.timeanddate.com/worldclock/fixedtime.html?msg=OpenEmbedded+Happy+Hour+June+29&iso=20220629T21&p1=1440
 
--- 
-Michael Opdenacker, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
+Regards,
+Tim "moto-timo" Orling
 
+--0000000000006675ec05e283b3fc
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">All,<div><br></div><div>You are cordially invited to the n=
+ext OpenEmbedded Happy Hour on June 29</div><div>for Europe/Americas time z=
+ones=C2=A0@ 2100/9pm UTC (5pm ET / 2pm PT).</div><div><br></div><div><a hre=
+f=3D"https://www.openembedded.org/wiki/Calendar" rel=3D"noreferrer" target=
+=3D"_blank">https://www.openembedded.org/wiki/Calendar</a><br></div><div><a=
+ href=3D"https://www.openembedded.org/wiki/Happy_Hours" rel=3D"noreferrer" =
+target=3D"_blank">https://www.openembedded.org/wiki/Happy_Hours</a><br></di=
+v><div><a href=3D"https://www.timeanddate.com/worldclock/fixedtime.html?msg=
+=3DOpenEmbedded+Happy+Hour+June+29&amp;iso=3D20220629T21&amp;p1=3D1440">htt=
+ps://www.timeanddate.com/worldclock/fixedtime.html?msg=3DOpenEmbedded+Happy=
++Hour+June+29&amp;iso=3D20220629T21&amp;p1=3D1440</a><br></div><div><br></d=
+iv><div>Regards,</div><div>Tim &quot;moto-timo&quot; Orling</div></div>
+
+--0000000000006675ec05e283b3fc--
 
