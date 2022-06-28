@@ -1,96 +1,102 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <noah.t.brewer@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E4B0FC433EF
-	for <webhook@archiver.kernel.org>; Tue, 28 Jun 2022 15:29:25 +0000 (UTC)
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
- [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web11.56340.1656430163064009049
- for <Openembedded-devel@lists.openembedded.org>;
- Tue, 28 Jun 2022 08:29:23 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C0DD3C433EF
+	for <webhook@archiver.kernel.org>; Tue, 28 Jun 2022 20:48:29 +0000 (UTC)
+Received: from mail-oa1-f41.google.com (mail-oa1-f41.google.com
+ [209.85.160.41])
+ by mx.groups.io with SMTP id smtpd.web11.3422.1656449304221854982
+ for <openembedded-devel@lists.openembedded.org>;
+ Tue, 28 Jun 2022 13:48:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=aQT5VtGV;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: ticotimo@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id
- i8-20020a17090aee8800b001ecc929d14dso12549858pjz.0;
-        Tue, 28 Jun 2022 08:29:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=WJk5wP32;
+ spf=pass (domain: gmail.com, ip: 209.85.160.41,
+ mailfrom: noah.t.brewer@gmail.com)
+Received: by mail-oa1-f41.google.com with SMTP id
+ 586e51a60fabf-101ec2d6087so18672899fac.3
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 28 Jun 2022 13:48:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=JfMe9wtFIcpOaRbm2IdQFPOEVkrZOfOUIkrQeYTS28Q=;
-        b=aQT5VtGVLeCpQfakTxdGfwHW84lp9vw1LK9ZWIyEqAVmEdgfjSqY+DHONA1mqG0qIc
-         9jiZSMXW7vfw/bjgI8n+Y2HGVoT1dc0GE5VjN+0biJeuK5PPstW25RZ76giWCdN2lmMc
-         Ff3APAN2R1XKk4ky9qzqLNEC4H8ETCa9FytfDad3hMxVlAr2OU7n0I6w51VJeSnSS+3C
-         0+qRupWLCPBLuwRH6nKgqFGqI0f0YwsLlATO+Rhq32RvPeYgwhSzTV2OgMHEAmT7xRqi
-         8BEu9352QJWBhLITZpDdmcfeV1FTLAHLeX86YNtHv8RvI59K73BhW8IMx6IS2c1AOsTX
-         +7Iw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=4BIyjhCeWLji6u7rMxPB5y9rh7A5Wh8DwEwAF2EFSiY=;
+        b=WJk5wP32vlGd3vbWuDc/qzccgIb1U/TLIvf66c6SWUfLlFg2ZiZRBRpLZDKRNC/OuC
+         v7FJ2IMqDpJwQpmDa+MVyalMOWsUezgSn/Nxw53yexwd9d/wJlY3NlVNdRvniwv0XEGz
+         4bn89mUJze+9zvRBBLkWxIkX5e/rLUDx+BGmKCoyeJNJc9+pDuCZSw3jY/2ABGxuCpVH
+         huBqjViPnruUgkTa4Mh8bedj5g39CiEhr2eenRWyvhx4hwvfZzk8yyTo2Pn0Ikg3oJ72
+         ScrzTzsN8EFAniE37IEV/YXvkLmh9qSybTEfG/k9HKhc/ZK1FMmxqOv87MrqWRG6mAp9
+         mjhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=JfMe9wtFIcpOaRbm2IdQFPOEVkrZOfOUIkrQeYTS28Q=;
-        b=6nKT2nL8qfG9L1WemFcrqHWeKQBxs4ITYdR4VENUbA530r5MafYwqjqKt1K1AG9GWC
-         JOKrb9XnDu7wLy4ezak31OlWUBD16h7UVIo5NLigJB6+/b/hERiMALD5LKVBIhl0aiqC
-         VLlj8ntNhwZ1EbejyeXgu1iAnOjXrNbj+HzUOVHM7CfUKwQzonMpgTxmUbRTdPlD0xoJ
-         zTeyNLaHWuOEJiQQGiFlIZMsrSUVPQsl8lHMPJXX/mTzfkX3jQ/t8c3sMof8LtN4P7fd
-         PfndZWoT5NhRvZ1sKIaoESWjAdaLH9PZdCHqBp4XLNzIPqxv13jU87nZEiXDc+M/LiLH
-         MJ2A==
-X-Gm-Message-State: AJIora/e3K53/wQFOU7nXLHPqcuqdC5AxyVHuzcg0axeNO0NNdGGMlNk
-	Iu5K1jhEj55dnnRq1NmeDrP4BAfJ1MYwZSVHFN8/tJDvIDnP7g==
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=4BIyjhCeWLji6u7rMxPB5y9rh7A5Wh8DwEwAF2EFSiY=;
+        b=2o+6qyIIHPJrzgVj6D8u6CWTIqaw3HcnF1ys23pqeN+XsaU2i9P/cuLRDD58UEwORH
+         hjt+6jORRz0H/uYu59TgdLwVZfaDqyGCfoLUiYBoowhMf7iDEv8zpltsmoU5gG3u78mk
+         BZc800VaJUpVlmxwpzPGd3/13W5/HPJcLLv/c+6QAEL7JwHbnD9u8lMpjf+T7VNIekHz
+         YCnt0mYOLlqFN4q/lRrjRwdntJwQdABs8h7+7IHFsJGx+jeQgOjVWihmXodSq4Ij5EVk
+         YD4p/eshr19aJ8fEDGWC2NrllMktRhQV8DuQ7y/zlAQ5dbLryzrpl6DVTomrAIBzoMNU
+         oq6g==
+X-Gm-Message-State: AJIora/BwAZy4A6LE75QWdstlnvoh/f1xNrLCfiYAM991mIbuP4MXgV+
+	irKoGkOsLH/oAV2vdVfUTcvouJoYm5BkT4hm
 X-Google-Smtp-Source: 
- AGRyM1sdHXije+UMS8HpTaag0L9FgUnEILxrh6xf3COEDUTIRLIQ/Bpma5Fkqu1LeqqaPBR7ONS+OAed7pguZ//Ykm4=
-X-Received: by 2002:a17:90b:19d3:b0:1ed:5596:1ee5 with SMTP id
- nm19-20020a17090b19d300b001ed55961ee5mr166581pjb.83.1656430161981; Tue, 28
- Jun 2022 08:29:21 -0700 (PDT)
+ AGRyM1uSr/7Ywyn+OtWz2BaoXCujA4n/xQ9gDSD/u9cd7Now1yTKQGOhF8zW0tfRLPN5N50Efp5cGA==
+X-Received: by 2002:a05:6870:2111:b0:e9:768:f288 with SMTP id
+ f17-20020a056870211100b000e90768f288mr938365oae.45.1656449298578;
+        Tue, 28 Jun 2022 13:48:18 -0700 (PDT)
+Received: from localhost.localdomain (cpe-70-122-13-158.austin.res.rr.com.
+ [70.122.13.158])
+        by smtp.gmail.com with ESMTPSA id
+ l17-20020a05687014d100b000f349108868sm9642825oab.44.2022.06.28.13.47.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 28 Jun 2022 13:48:15 -0700 (PDT)
+From: noah.t.brewer@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Noah Brewer <noah.t.brewer@gmail.com>
+Subject: [PATCH] libpwquality: Add option to disable python bindings
+Date: Tue, 28 Jun 2022 15:47:36 -0500
+Message-Id: <20220628204736.2743017-1-noah.t.brewer@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-From: Tim Orling <ticotimo@gmail.com>
-Date: Tue, 28 Jun 2022 08:29:10 -0700
-Message-ID: 
- <CANx9H-ATwbp6A4hKjfrMTi92EVhibkW3FSSSR_9Oqh1Qe0oHcg@mail.gmail.com>
-Subject: OpenEmbedded Happy Hour June 29 9pm/2100 UTC
-To: openembedded-core <openembedded-core@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
- <Openembedded-devel@lists.openembedded.org>,
-	"Yocto (yocto@lists.yoctoproject.org)" <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="0000000000006675ec05e283b3fc"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 28 Jun 2022 15:29:25 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 Jun 2022 20:48:29 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97608
+ https://lists.openembedded.org/g/openembedded-devel/message/97609
 
---0000000000006675ec05e283b3fc
-Content-Type: text/plain; charset="UTF-8"
+From: Noah Brewer <noah.t.brewer@gmail.com>
 
-All,
+Remove python3-core from RDEPENDS when the appropriate PACKAGECONFIG
+is set using the remove operator. Use bbappend file to set PACKAGECONFIG
+to disable python bindings and to remove python3-core from RDEPENDS.
 
-You are cordially invited to the next OpenEmbedded Happy Hour on June 29
-for Europe/Americas time zones @ 2100/9pm UTC (5pm ET / 2pm PT).
+Signed-off-by: Noah Brewer <noah.t.brewer@gmail.com>
+---
+ meta-oe/recipes-extended/libpwquality/libpwquality_1.4.4.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-https://www.openembedded.org/wiki/Calendar
-https://www.openembedded.org/wiki/Happy_Hours
-https://www.timeanddate.com/worldclock/fixedtime.html?msg=OpenEmbedded+Happy+Hour+June+29&iso=20220629T21&p1=1440
+diff --git a/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.4.bb b/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.4.bb
+index f892cc650..ea3787792 100644
+--- a/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.4.bb
++++ b/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.4.bb
+@@ -32,9 +32,11 @@ EXTRA_OECONF += "--with-python-rev=${PYTHON_BASEVERSION} \
+                  --libdir=${libdir} \
+ "
+ 
+-PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
++PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} python-bindings"
++PACKAGECONFIG[python-bindings] = "--enable-python-bindings=yes, --enable-python-bindings=no"
+ PACKAGECONFIG[pam] = "--enable-pam, --disable-pam, libpam"
+ 
++RDEPENDS:${PN}:remove = "${@bb.utils.contains('PACKAGECONFIG', 'python-bindings', '', '${PYTHON_PN}-core', d)}"
+ FILES:${PN} += "${libdir}/security/pam_pwquality.so"
+ FILES:${PN}-dbg += "${libdir}/security/.debug"
+ FILES:${PN}-staticdev += "${libdir}/security/pam_pwquality.a"
+-- 
+2.25.1
 
-Regards,
-Tim "moto-timo" Orling
-
---0000000000006675ec05e283b3fc
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">All,<div><br></div><div>You are cordially invited to the n=
-ext OpenEmbedded Happy Hour on June 29</div><div>for Europe/Americas time z=
-ones=C2=A0@ 2100/9pm UTC (5pm ET / 2pm PT).</div><div><br></div><div><a hre=
-f=3D"https://www.openembedded.org/wiki/Calendar" rel=3D"noreferrer" target=
-=3D"_blank">https://www.openembedded.org/wiki/Calendar</a><br></div><div><a=
- href=3D"https://www.openembedded.org/wiki/Happy_Hours" rel=3D"noreferrer" =
-target=3D"_blank">https://www.openembedded.org/wiki/Happy_Hours</a><br></di=
-v><div><a href=3D"https://www.timeanddate.com/worldclock/fixedtime.html?msg=
-=3DOpenEmbedded+Happy+Hour+June+29&amp;iso=3D20220629T21&amp;p1=3D1440">htt=
-ps://www.timeanddate.com/worldclock/fixedtime.html?msg=3DOpenEmbedded+Happy=
-+Hour+June+29&amp;iso=3D20220629T21&amp;p1=3D1440</a><br></div><div><br></d=
-iv><div>Regards,</div><div>Tim &quot;moto-timo&quot; Orling</div></div>
-
---0000000000006675ec05e283b3fc--
 
