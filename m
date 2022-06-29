@@ -2,96 +2,118 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 92523C43334
-	for <webhook@archiver.kernel.org>; Wed, 29 Jun 2022 16:59:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A900C433EF
+	for <webhook@archiver.kernel.org>; Wed, 29 Jun 2022 17:05:55 +0000 (UTC)
 Received: from mail-il1-f170.google.com (mail-il1-f170.google.com
  [209.85.166.170])
- by mx.groups.io with SMTP id smtpd.web09.14248.1656521961822826822
+ by mx.groups.io with SMTP id smtpd.web10.14180.1656522351258151053
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Jun 2022 09:59:21 -0700
+ Wed, 29 Jun 2022 10:05:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=OjJHwNIp;
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=TQMAHUf5;
  spf=pass (domain: gmail.com, ip: 209.85.166.170,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-il1-f170.google.com with SMTP id i17so10655037ils.12
+Received: by mail-il1-f170.google.com with SMTP id a7so5615779ilj.2
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Jun 2022 09:59:21 -0700 (PDT)
+ Wed, 29 Jun 2022 10:05:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :references:from:in-reply-to:content-transfer-encoding;
-        bh=JaJ9QkcKHyU2rAMO5oJT6C9KFYVjysS9IaFg9LDYPLw=;
-        b=OjJHwNIp39irzPvYSLA4Lp6zjqj8tllfPlifjHsEmb02su1UgrT2Wyaf59tRfrXVYq
-         17nPyvYXAUm+o+LZCKCbs5gEBeTW6/v43okmfFR2N3GqijY+K/i1Svma2k7xDXwLIX5m
-         7baoUVf/w/a+/lZBoEugObsyJBgHrzgw5l/kOvuHz3tdBn+tQn2DBSTbTAH40Qba7HwH
-         16UvoceLvsqexMFwN3evRE8vl33+LijKglMHiNbhR0H98KoIi5JLt62uDReAS5qqpAbX
-         IF+1Kcn+925/o9O/XGAE3uz/tdzT5LdKnGp2Sd+a+uLon9XtUX9a3bqMk1XlDTTUNyx+
-         mggQ==
+         :cc:references:from:in-reply-to:content-transfer-encoding;
+        bh=Qi1ucf8TMsH0Q+DnI2C/zhEpgbgXg3tCSgHpPJE7wi8=;
+        b=TQMAHUf5VBLE673Cord8jNKY01/pVees26mPga5zfQKqaH4m9og2cWNaNBUSCAQ6lQ
+         pIGWj/g4NqeiLiuRo3t0Hea4wl08HDrub87tUYjs7w4OGNqfb02SCyTHsTwLjHZ4JsSK
+         gTZVYRC6UxLZH67tOBESzYgeTq1+rdZckxG5/5fAbmHn7qi9lnq8XVGjcUon55Xy7t1k
+         TUVcnhHoiR3ZMQZlOCFOSc8F3/Zstt1w6IJGo5dvazq9MqdMTIx31PqUHPtSnPSFLOX6
+         s3vxJKlaofbiVajJjtY89J8pLkkKeMgYAJo8Nm7mXfuDQtgdCV9zDahqzOIUHx9IMZ5f
+         Rv5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:references:from:in-reply-to
+         :content-language:to:cc:references:from:in-reply-to
          :content-transfer-encoding;
-        bh=JaJ9QkcKHyU2rAMO5oJT6C9KFYVjysS9IaFg9LDYPLw=;
-        b=HQNhjPF17CSv3dJaLMqetxGec/FHeyeHe15xPegR4rQvZdt+GhBXnKRBcT/ixmp4yu
-         ne/N95mu/P1j4d26XYX4l7PGZqydLT7BTlHJgcsg6yuJXCjtSZZjPKjW2+1EXItRotpB
-         oEkaGbdwVG8SMc3TOBz43zymyDNrQBNZxFgsQJSZFpy1TGsE+TQQUFNcO/vS9lqLuIAr
-         d/XNWuIWKv1YleGQzNNk1BDSw5iSq5V1lL9cwLaWaMfF6O4QFjuULSjfAnpGNWFTuN7K
-         CFPgOiTkCdkIj25EmWsbtj5JEWG1I6ngKEWApuSo0VJqGrsFWqREvUL+TArN/s8wezrN
-         gJyQ==
-X-Gm-Message-State: AJIora9W0TOVvAb/YljSri+KI0VqF1mRLXjubnEVrHqfrFG8O2eSC0mu
-	irZ3/uqCEi1QLEZIxsQtiE8=
+        bh=Qi1ucf8TMsH0Q+DnI2C/zhEpgbgXg3tCSgHpPJE7wi8=;
+        b=5TnLrxEahyoOfPM01EvS8p7NDjKbD2019YhODtv2daqK3F2S3rNRRO/5G5Cn9NMaiR
+         mI1f8I3FGr9AMXS8XgI1yeevDZzmy7D8FvFQOC4yQ3LjBIEE+nYUgTqMWeWOivt+ofZY
+         LwKqeJVv6pluB8dicfdAdnYxXpsEDU+KFlGB6pDKRIsTg0SokdDlDDFRT8x6ni76aDrB
+         3k1gSXTtjDK38FUUviY2NJe+lB0CeaN7YaNvQ1gwDEbRZmnjhlrxfm3y0eMGXdp4yD+f
+         tIZInR877YkbjYwgyikBrsoZkuQ7/vqwF1aqHu09r8kdK2bag8Xa4UOpNxlzQGiHNn+9
+         Epdw==
+X-Gm-Message-State: AJIora8yvGSqb7piYrzAh1QvnaRrlHbAnYmCDW5S04ihnSPNToSVikgW
+	FNZ1UJPmFW/F8d6JtrHI4Ps=
 X-Google-Smtp-Source: 
- AGRyM1sfE0apOrZw7Klq4dtpr7mYHevXZU5EnNOWZMVmu70mtnlQH/4Qz2NmH6nxVgM1t+S91epdEQ==
-X-Received: by 2002:a92:ddd1:0:b0:2d5:4877:65c8 with SMTP id
- d17-20020a92ddd1000000b002d5487765c8mr2517604ilr.267.1656521961174;
-        Wed, 29 Jun 2022 09:59:21 -0700 (PDT)
+ AGRyM1snKWku/noB7LLr3KQh6UxIQC7L8j96JvuYW669PWiMM2n17/iCThHamel3JgBNPI5u4PbvPw==
+X-Received: by 2002:a92:d849:0:b0:2d5:43c0:f9f6 with SMTP id
+ h9-20020a92d849000000b002d543c0f9f6mr2321424ilq.25.1656522350545;
+        Wed, 29 Jun 2022 10:05:50 -0700 (PDT)
 Received: from ?IPV6:2607:fea8:95df:9730:6119:b422:792f:b68a?
  ([2607:fea8:95df:9730:6119:b422:792f:b68a])
         by smtp.gmail.com with ESMTPSA id
- z6-20020a05660217c600b006692192baf7sm8108608iox.25.2022.06.29.09.59.20
+ b34-20020a0295a5000000b0032b3a7817a7sm7588972jai.107.2022.06.29.10.05.49
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 29 Jun 2022 09:59:20 -0700 (PDT)
-Message-ID: <0419e4ab-b1fb-0fb9-ee81-5c63bde5d469@gmail.com>
-Date: Wed, 29 Jun 2022 12:59:19 -0400
+        Wed, 29 Jun 2022 10:05:49 -0700 (PDT)
+Message-ID: <dbae2f04-a763-9fc4-b4d5-32ed3d6f9dcd@gmail.com>
+Date: Wed, 29 Jun 2022 13:05:48 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
  Gecko/20100101 Thunderbird/91.9.0
-Subject: Re: [PATCH] python3-pybluez: fix a runtime issue with python 3.10
+Subject: Re: [oe] [meta-networking][kirkstone][PATCH] networkmanager: fix
+ build with enabled ppp
 Content-Language: en-US
-To: Bartosz Golaszewski <brgl@bgdev.pl>,
- Bruce Ashfield <bruce.ashfield@gmail.com>,
- openembedded-devel <openembedded-devel@lists.openembedded.org>
-References: <20220614115906.37309-1-brgl@bgdev.pl>
- <CAMRc=MdFa+HK=UbDipA5rZD=0hUd7K6vUXXhdWeNbQo4gY-1Nw@mail.gmail.com>
+To: javier.viguera@digi.com, openembedded-devel@lists.openembedded.org
+Cc: akuster808@gmail.com
+References: <20220627133914.14615-1-javier.viguera@digi.com>
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: 
- <CAMRc=MdFa+HK=UbDipA5rZD=0hUd7K6vUXXhdWeNbQo4gY-1Nw@mail.gmail.com>
+In-Reply-To: <20220627133914.14615-1-javier.viguera@digi.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 29 Jun 2022 16:59:25 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 29 Jun 2022 17:05:55 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97620
+ https://lists.openembedded.org/g/openembedded-devel/message/97621
 
+do we need this patch on master too where we have networkmanager 1.38
 
-On 6/22/22 4:59 PM, Bartosz Golaszewski wrote:
-> On Tue, Jun 14, 2022 at 1:59 PM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
->> Add an upstream patch that's not part of any release yet that addresses
->> an issue with python 3.10 (related to a missing macro).
->>
->> Link: https://github.com/pybluez/pybluez/issues/426
->> Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
->> ---
-> Hey, I think this got lost because I forgot the [meta-python] label.
+On 6/27/22 9:39 AM, Javier Viguera via lists.openembedded.org wrote:
+> If 'ppp' packageconfig option is enabled, but the build system does NOT
+> have pppd binary installed, the build fails with:
 >
-> Should I resend or can you pick it up without it?
-
-
-No need, I took care of it while staging.
-
-
-> Bart
+> | Has header "pppd/pppd.h" : YES
+> | Program pppd /sbin/pppd /usr/sbin/pppd found: NO
+> |
+> | ../NetworkManager-1.36.2/meson.build:570:4: ERROR: Assert failed: pppd required but not found, please provide a valid pppd path or use -Dppp=false to disable it
+>
+> This is due to meson trying to look for the 'pppd' binary in the build
+> system when it should not. If the build system does not contain pppd,
+> the build fails.
+>
+> Signed-off-by: Javier Viguera <javier.viguera@digi.com>
+> ---
+>   .../networkmanager/networkmanager_1.36.2.bb                     | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.36.2.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.36.2.bb
+> index 6c665d53bb50..e3b1296a6bc4 100644
+> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.36.2.bb
+> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.36.2.bb
+> @@ -83,7 +83,7 @@ PACKAGECONFIG[bluez5] = "-Dbluez5_dun=true,-Dbluez5_dun=false,bluez5"
+>   # consolekit is not picked by shlibs, so add it to RDEPENDS too
+>   PACKAGECONFIG[consolekit] = "-Dsession_tracking_consolekit=true,-Dsession_tracking_consolekit=false,consolekit,consolekit"
+>   PACKAGECONFIG[modemmanager] = "-Dmodem_manager=true,-Dmodem_manager=false,modemmanager mobile-broadband-provider-info"
+> -PACKAGECONFIG[ppp] = "-Dppp=true,-Dppp=false,ppp,ppp"
+> +PACKAGECONFIG[ppp] = "-Dppp=true -Dpppd=/usr/sbin/pppd,-Dppp=false,ppp,ppp"
+>   PACKAGECONFIG[dnsmasq] = "-Ddnsmasq=${bindir}/dnsmasq"
+>   PACKAGECONFIG[nss] = "-Dcrypto=nss,,nss"
+>   PACKAGECONFIG[resolvconf] = "-Dresolvconf=${base_sbindir}/resolvconf,-Dresolvconf=no,,resolvconf"
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#97600): https://lists.openembedded.org/g/openembedded-devel/message/97600
+> Mute This Topic: https://lists.openembedded.org/mt/92020681/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
