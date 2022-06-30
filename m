@@ -1,164 +1,573 @@
-Return-Path: <javier.viguera@digi.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 81FD2C43334
-	for <webhook@archiver.kernel.org>; Thu, 30 Jun 2022 10:40:20 +0000 (UTC)
-Received: from outbound-ip23a.ess.barracuda.com
- (outbound-ip23a.ess.barracuda.com [209.222.82.205])
- by mx.groups.io with SMTP id smtpd.web09.23638.1656585613033778577
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BBFDCC433EF
+	for <webhook@archiver.kernel.org>; Thu, 30 Jun 2022 10:57:10 +0000 (UTC)
+Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com
+ [209.85.219.51])
+ by mx.groups.io with SMTP id smtpd.web10.23489.1656586621116383702
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Jun 2022 03:40:14 -0700
+ Thu, 30 Jun 2022 03:57:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@digi.com header.s=selector1 header.b=VnA5Z5NU;
- spf=pass (domain: digi.com, ip: 209.222.82.205,
- mailfrom: javier.viguera@digi.com)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11lp2169.outbound.protection.outlook.com [104.47.58.169]) by
- mx-outbound10-172.us-east-2a.ess.aws.cudaops.com (version=TLSv1.2
- cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Thu, 30 Jun 2022 10:40:11 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=V1nx30qtmlczzuZeEtNcdkG+XXgL61wn7LQlU4Zh6Z23ZjMV3Qzk9g8tQQc+oKHY9/KWzm44geby/1ikH02DLoq+rVawnHpz1/nLms+gSlD3D5Cr3VTtZkR2aBJtxg/onXme0YDoNH5q4gZTP51e12n1S9Q4b7rI0zxdhOIBCjuD0v4AAogHSKK0dC26B3zZ5IczTh/w8kwhzcJLctvYbNCAWO2l4MHAIqOQYbq8RWYCJKM8rtpOEo3sIsb/b/KpDIQ7vqy/4Jx7Z/OL5MlolRY7DbGPhKiKedhEDgSUe10ycyOK5jF1ZQ1qqmpIi56nKUuNuCjwZH67Nd4Tfv2bFg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4suGWuPCGuS/0hcqqOaiZd1U+QGRCQ+xNC8zp4EuNuI=;
- b=dboxxbpkbKoJqsUSOInlnYHpWKDe0qz4PzpfRTScKChXzMH+wBpoEkBfXdF+gFyLttA28lQoeKoUP2hlODHCFkch3kFhj+eN5n4wBLTd0o6JxB0+fdApHGo5v6UcbIBt9IAvTCfIiJsoGQr2QoM9TohcrVKqQtviX75pehcWUB17HPc6IjrO5SnynvreH4mGdD8TvUjNsqPxZHMleYlkXTsQJt1DP17LbthI2R8zI+1RaU2biu9EmUrVESATpLkRXSAqkwAZA+CEAWzVqkh24Wdwv6/MO3YY0OhE62657ZQIdZzCANSLFRpS6f8AII0U02wW9rLah3hzbWfW14CywA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=digi.com; dmarc=pass action=none header.from=digi.com;
- dkim=pass header.d=digi.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=digi.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4suGWuPCGuS/0hcqqOaiZd1U+QGRCQ+xNC8zp4EuNuI=;
- b=VnA5Z5NUqZy3UvjIsWTc0tJesaJD97EFCElbiuz+abMwdwWltDBvnnrAfURNWbtxBAyi0yk6yAmK+CNm+3zRtU9HX/bGc7RNbRcwn1fjch0QOP77yi04kKJhJyOjE76lciLWtw0eSCUAPvJzMKSkjIX4/p4scTgkCHMjHP5GpyEY7LE688q/pzRV8tY7QYuApZz3bJ6qvE/0iwYanKMPUYSR0AIHB4eT/0Lzy5IAMxiX75qtGa9o034+NP3mNPByk8m4XB0DearzKxT521DJDHd427K8hDTlD7bk0SynBu4y0aZd9HnJpb3RCMZ8UbuP4Jes9VLvu0EFxFaCYkJSsw==
-Received: from BLAPR10MB5156.namprd10.prod.outlook.com (2603:10b6:208:321::24)
- by BLAPR10MB4961.namprd10.prod.outlook.com (2603:10b6:208:332::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5395.14; Thu, 30 Jun
- 2022 10:40:09 +0000
-Received: from BLAPR10MB5156.namprd10.prod.outlook.com
- ([fe80::21a2:d9b:70e9:aac1]) by BLAPR10MB5156.namprd10.prod.outlook.com
- ([fe80::21a2:d9b:70e9:aac1%7]) with mapi id 15.20.5395.014; Thu, 30 Jun 2022
- 10:40:09 +0000
-From: "Viguera, Javier" <Javier.Viguera@digi.com>
-To: Khem Raj <raj.khem@gmail.com>, "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-CC: "akuster808@gmail.com" <akuster808@gmail.com>
-Subject: RE: [oe] [meta-networking][kirkstone][PATCH] networkmanager: fix
- build with enabled ppp
-Thread-Topic: [oe] [meta-networking][kirkstone][PATCH] networkmanager: fix
- build with enabled ppp
-Thread-Index: AQHYiitQKFh0vBsNTkmCOfwEvVlvC61moJ4AgAEl5dA=
-Date: Thu, 30 Jun 2022 10:40:09 +0000
-Message-ID: 
- <BLAPR10MB51565170D5103B0EE78637F5E0BA9@BLAPR10MB5156.namprd10.prod.outlook.com>
-References: <20220627133914.14615-1-javier.viguera@digi.com>
- <dbae2f04-a763-9fc4-b4d5-32ed3d6f9dcd@gmail.com>
-In-Reply-To: <dbae2f04-a763-9fc4-b4d5-32ed3d6f9dcd@gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=digi.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: e048c714-5bd8-4e18-767e-08da5a84e7a0
-x-ms-traffictypediagnostic: BLAPR10MB4961:EE_
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- uXyVqQ01GT0uP2NyGX2r1SEFjxJTQMPYVlkEO8wpVrKeNL+ZR54zJDrvRyUg365248jTXxjo09NCohINBsYwlQ5EYKhlUES81enJy+K4yXyZ2WHKI0g4p+0YFLaE2obXNBIUvShHniKJoOKCCF6onwudUEHMmet2VM+5PJm/AuZ47X4ebWx9OQ8UbyNYyH94jra20YHSv8625wz/VWzRK/Ox1CZHoLQZvqNl8d20LGAIkGeyRIMaPvhAjXtas+2273pg1YP95eiAQ2Io28/pbv3v7bm9JTxrS1SIlXdym0jthDzXy+OQa+vN6wDYOwI1u/pXamsCvK2OQUAK/l/oqXVWgUxY+gaxjE+EMK0fGpNPBn0CrBWcHyQyhBh4ja35IjWX/dpfS/M6BlISDo82BM0zqAmtzFPDX8Ogk+e7AbuE93SboEFwCHcB+hHIXz8eSQElYtgmhXqbgzLPSuFrhzf1gzKeqQd2o+6S+2JaD4+KKVZPV8K6yaoZjEP5aGHXsZPK3h1qcr1lm8iJ99WIN9R3xkuyydiTQc4MNF3cGS8F0bUlxg85ZTSVCz02aFF+PDmfe0uTNnz5ApHyy8AYDFMLGYiH3rUDqzKbrN4caiWLWFv0OHhAzHRo9Uzro47CSceUvFrSxZWhnK2JqZNwU8oc+db2AsatnYIbIPmMOJNWuhtFj7DqM4YTQ28IpNASQtrM4shEURTNOExXm2xlyXvh9I7z9AOH110YVNuJ0dyqbosKqDBSUFPMPeGghTaTOu+TnDoqLOuwJl3cAhRg2737yw0SDFPrstaq8IKXOIHiYwc+KyHL+jOO3dI6FEOj
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BLAPR10MB5156.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(376002)(346002)(136003)(366004)(39850400004)(396003)(71200400001)(53546011)(122000001)(478600001)(33656002)(6506007)(9686003)(26005)(316002)(41300700001)(186003)(38070700005)(110136005)(76116006)(7696005)(38100700002)(55016003)(66946007)(83380400001)(8936002)(2906002)(66446008)(52536014)(4744005)(66556008)(8676002)(5660300002)(66476007)(86362001)(64756008)(4326008);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?Z1MrOTJyYTNiRDdBYkdmaElNTWVZaDNlaGU2dWFua1gwbXFSYUxPYi85R0tR?=
- =?utf-8?B?VndFRzBub2RJcm5mV090TkJCS3VQNEZHdTBKNjVSdWxMZVp3NHFRYTdtVUVo?=
- =?utf-8?B?Y0hJTTEwN3JtVEh4dnJJSm1HakpCVkdTK08xL2dUR2tmU2dGYUdxMk1XSEJq?=
- =?utf-8?B?NkJCUTJsNUZFZ0hOa2lqQzdoWm1vRnVUUkhOS2RkRmk5dDhFa2kzbzdrUlRx?=
- =?utf-8?B?eWJWQmR1dU9NRFNjNERjSFZkSUhtekthZXpNVjNLMWtRSTg0ZFpSUDRUcjRh?=
- =?utf-8?B?OWtyMmc2ZmR5QXlCNDNHQ3NScUk1Z3d0eGJ4ZTR1U29EN21FNWFwQzgyK0dR?=
- =?utf-8?B?b2RqR0FuOFRWSEtscUpSM2R4WUVsWHZXRHd0anhkM3ZKc2tqUnJockZqa3hx?=
- =?utf-8?B?WWVKQnM4ejRBSWdGWDgrcjJlNEVSV1FmRFpOMEdZdkZ0WlpteVBvWERKRDdJ?=
- =?utf-8?B?Mnc4VnhCMHQ1VVFNR09rcVNXVm0xOVBkaVMrMUJEUkxoQ2xJUVZ0NXd5SnJl?=
- =?utf-8?B?azhYSGtVMFlHNmVPMXVyVmhJRkQ2QWxaOFp1TmQ1aTFoQzNxWmVxL3NjV3BS?=
- =?utf-8?B?aFFrRUZUUUxuS3BlZk1DYkxSa2R5MmkrN2g2YnBkQWd5elhQYldQVGJxZDJ4?=
- =?utf-8?B?eHh6ZGRnbytITDMzNEliT0pjdkx2OWNUNldNeWV4TWNDb3VGbXF3L29CR1F2?=
- =?utf-8?B?bEdJdHZzbHgwVVBSOTFmMlpOQ0RZb3hQWFFFbDdocko5WE4zVUQrWGFnOFpH?=
- =?utf-8?B?N1ZFK25jT21QZDNDZUVOYVRVMFRoZmhmR0cyM0FjanNaaUJhUm1VUWRvQ2ky?=
- =?utf-8?B?VlFnRHBKQkxDZW41THhVTmRETzdRbkdRaFpteTU0bGc4RklKbEVmTnpBODk1?=
- =?utf-8?B?ZjdvMDRBOFhLVml5TVBoL1ZyWWM0L2djaGJ2V3g2YlJEcnF1aEE1dzBvY0Ey?=
- =?utf-8?B?aEdsVENVMm40eTZucTJaZ2NzbWduOHlCeFMwT0lFQktaa1RtYkdvb0hhdmhv?=
- =?utf-8?B?M3hObmNLeGlleVJIUVBYT083aURLNVZUL3JheFZjMzlmbnh3UmpkUHRWUGg4?=
- =?utf-8?B?Rko1d1NZRGc5eVM3MmdYek9DWUpFRkcyQ3pRb0ViS0FqYUdtU0YvKzNkaXdD?=
- =?utf-8?B?dmdIcEZnL0xMaTUzcG82REk0dW80UU9POTZnV1duYWkxV3pKQmNhTGdOZTZR?=
- =?utf-8?B?TUYrOHFDRHludFo2N0xuVGdPRWMrdEkyN24vamNPaTlDOHlaMDZtbkVBV2NB?=
- =?utf-8?B?eE1Ic2tJRVd0Y0ZHN3luSldoWC8rUW5GTCs3U0ZTNHBiQWVsVDN0dHYvVGRj?=
- =?utf-8?B?dTVjUUk2YUxGdzJsWU5pTlZnaTQwblpQcWlmSjlqYXdEbDJaM3ExTkpHU1Bj?=
- =?utf-8?B?MUVqMzR2b0hPYzBPai81T2YzY0xaZ2dCSFlPZWJ6ZU5uUjh2eTRDRUZDYU9B?=
- =?utf-8?B?aEZ3MmFrMlAvZHpCSXJoOFBIRUpIdXFwSVZtdHRIc2RRN3VXQjFWOTlqWkxI?=
- =?utf-8?B?SkgvNEFiLysvbVNHb1VYd1VFUXNlemJXR3k1S24zcU1KQ01adlhLa0tEckFU?=
- =?utf-8?B?M1YrMFcxMWVBN0l2RmxmUGdaMVlQWllZL3ErSUtwMkwrbk5tcFlSbkdCYlJs?=
- =?utf-8?B?RjZJM1Z5c0U0TVZEQkVBNlNyQUNtczRLdnRFNENFNVlGY0gyY28weURzcTBQ?=
- =?utf-8?B?WXBMVDdRbmNNQzNQZ2VqTVpMZFo4WUkxK0hyNllPM0lNZU9Fc09ZbXArdFZV?=
- =?utf-8?B?dnJxZU1Rc0JpQmF0Sk9SWXVpdVU0V2N6YjUrQmxuZ2tCNk5zTWNFa293K3BI?=
- =?utf-8?B?NkpuYTVRNjJpbkZlM2RXMXFZejRlQ0dicDFrZlJPRFVTWWVtZDk0UXN3UmFi?=
- =?utf-8?B?VVJpQTMraFRTRXlqQSs2OVd5M0JTZ1dDVEh2elRhUlBXZjlLdXM0MEg4Vjlo?=
- =?utf-8?B?ZnNma0srTWxpYzFQeG1OSWRrbStkRjB3NjNVUmdxeTNKV3lRbndrUlhiazda?=
- =?utf-8?B?dHQ1OUZ1MzZ2bWhIMHVZVHRST3pUZFRKVnVuS25rdVhndThvSGIvQUlvVi9M?=
- =?utf-8?B?bGpyaStmWlJIbGJjTEdrUmg4SlFWam1mOVFmRmZVRlF6WDdsdHNQall5ZjAx?=
- =?utf-8?Q?OhUg=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=TjvKInRE;
+ spf=pass (domain: gmail.com, ip: 209.85.219.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f51.google.com with SMTP id cu16so29093224qvb.7
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 30 Jun 2022 03:57:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=h+zwRmqBdz3HMjHz1VC5yHAZn8keHIt/CQQRmbeRLTo=;
+        b=TjvKInREaAKgiF5Zwod/FDyjHSKqM1n3IxqE+OwUYz1NusjAWsy+o5o/+bl2U9txZ0
+         70Cj7WCPXA0oD6waD4kSpmMgUTD2OsWcL5bR2vsaumGLS2NR/TDJTxwv/NY7ACEqqeLy
+         C/S8WB0woEEamWz3net1bs+xUSE9w20ZetrZWbHzUsDD5o940601M1uWooj2JZQWqPL0
+         KT9vYm9rl66hNQyk6pv/4RuFnHtr98w81+uC2VCbnE94ok1et0cHXQFUJm9c/8XUhIRn
+         6g65cQC1FpDxUQsXppRFUL3bGVw95PB90gwN8gzbDsYvXeOuxwao+me7/fYBPOP9Q13g
+         NBOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=h+zwRmqBdz3HMjHz1VC5yHAZn8keHIt/CQQRmbeRLTo=;
+        b=u7/3rk+d1vMZYqLj9J1ebN+WN7z9mynqpnK2yRuw+I7drVkugonETVxuuTLV31dTjL
+         5fjvh4Wz3CEI7NHcFlhKLLPEntO1UOiwY/BeIKWmz2iB4HwnRXzZcUTidTPae5jx6LnO
+         +Zw+mqx5gGHRL2tC1mWAfRSl9DFBtXXjnldZWF6gCEW62lFunKukZf9bjvF+W2JuNv/D
+         iUoy/goMyX4jFD+APOq9O1+Xnr6x+RRA1IbmOMveLJTKGlOJPG9gM+fJwDt6wTGbuxZt
+         dzHqOip6xL2gXobDMkKtUjUe3XR9naYEX5aoPyAoyIPeA+Wc785JAmbCeGamhY3+henI
+         zLlQ==
+X-Gm-Message-State: AJIora/MnC/2qcTvRLl9s0o7e8PDAaHIpVk8pPnyBI7w7nTFvE8c9UPo
+	bAiQRGkJ4aW9Oc45Q3mcaeXSBgOpqAWpP2smI8LYm++edl+/Ag==
+X-Google-Smtp-Source: 
+ AGRyM1ugvh+7+u7AMgyEnRIfXWSfQTcut4cpqbBNouWO50ZtdFFYd5sp5VtxGPIIZ91g4/ttcyEy/YEkcs3lUP6CnI8=
+X-Received: by 2002:a05:622a:13ce:b0:31a:b4ce:1679 with SMTP id
+ p14-20020a05622a13ce00b0031ab4ce1679mr6738055qtk.330.1656586619819; Thu, 30
+ Jun 2022 03:56:59 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: digi.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BLAPR10MB5156.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- e048c714-5bd8-4e18-767e-08da5a84e7a0
-X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Jun 2022 10:40:09.4113
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: abb4cdb7-1b7e-483e-a143-7ebfd1184b9e
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 
- gT5BJooOAoU0jHCKD671wPGIGFedyeWQ7fAH6hktKcFSK20RPDTBIg4RbccYEWZNByLIbLPgSbZ5bl/rNQjyTA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLAPR10MB4961
-X-BESS-ID: 1656585611-102732-5443-60513-1
-X-BESS-VER: 2019.1_20220627.1822
-X-BESS-Apparent-Source-IP: 104.47.58.169
-X-BESS-Outbound-Spam-Score: 0.00
-X-BESS-Outbound-Spam-Report: Code version 3.2,
- rules version 3.2.2.241041 [from
-	cloudscan12-45.us-east-2a.ess.aws.cudaops.com]
-	Rule breakdown below
-	 pts rule name              description
-	---- ---------------------- --------------------------------
-	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound
-X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS112744 scores of
- KILL_LEVEL=7.0 tests=BSF_BESS_OUTBOUND
-X-BESS-BRTS-Status: 1
+References: <20220628093149.3723242-1-mingli.yu@windriver.com>
+In-Reply-To: <20220628093149.3723242-1-mingli.yu@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 30 Jun 2022 06:56:33 -0400
+Message-ID: 
+ <CAMKF1soxrNEMqrLq+Xgt5YKmWrbTUrp+FvaQqTw5wZYQMKRJ5g@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] mariadb: Upgrade to 10.8.3
+To: "Yu, Mingli" <mingli.yu@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Jun 2022 10:40:20 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 Jun 2022 10:57:10 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97635
+ https://lists.openembedded.org/g/openembedded-devel/message/97636
 
-SGkgUmFqLA0KDQpZZXMgaXQgZmFpbGVkIGV4YWN0bHkgdGhlIHNhbWUgaW4gKm1hc3RlciouIEZv
-ciBleGFtcGxlIGJ1aWxkaW5nIG1hc3RlciBmb3IgcWVtdWFybSBmYWlscyB3aXRoOg0KDQp8IEhh
-cyBoZWFkZXIgInBwcGQvcHBwZC5oIiA6IFlFUw0KfCBQcm9ncmFtIHBwcGQgL3NiaW4vcHBwZCAv
-dXNyL3NiaW4vcHBwZCBmb3VuZDogTk8NCnwgDQp8IC4uL05ldHdvcmtNYW5hZ2VyLTEuMzguMC9t
-ZXNvbi5idWlsZDo1NzE6NDogRVJST1I6IEFzc2VydCBmYWlsZWQ6IHBwcGQgcmVxdWlyZWQgYnV0
-IG5vdCBmb3VuZCwgcGxlYXNlIHByb3ZpZGUgYSB2YWxpZCBwcHBkIHBhdGggb3IgdXNlIC1EcHBw
-PWZhbHNlIHRvIGRpc2FibGUgaXQNCg0KLS0ganZpZ3VlcmENCg0KLS0tLS1PcmlnaW5hbCBNZXNz
-YWdlLS0tLS0NCkZyb206IEtoZW0gUmFqIDxyYWoua2hlbUBnbWFpbC5jb20+IA0KU2VudDogV2Vk
-bmVzZGF5LCBKdW5lIDI5LCAyMDIyIDE5OjA2DQpUbzogVmlndWVyYSwgSmF2aWVyIDxKYXZpZXIu
-VmlndWVyYUBkaWdpLmNvbT47IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQu
-b3JnDQpDYzogYWt1c3RlcjgwOEBnbWFpbC5jb20NClN1YmplY3Q6IFJlOiBbb2VdIFttZXRhLW5l
-dHdvcmtpbmddW2tpcmtzdG9uZV1bUEFUQ0hdIG5ldHdvcmttYW5hZ2VyOiBmaXggYnVpbGQgd2l0
-aCBlbmFibGVkIHBwcA0KDQpkbyB3ZSBuZWVkIHRoaXMgcGF0Y2ggb24gbWFzdGVyIHRvbyB3aGVy
-ZSB3ZSBoYXZlIG5ldHdvcmttYW5hZ2VyIDEuMzgNCg0K
+this fails to build where its not finding right zlib see
+
+https://errors.yoctoproject.org/Errors/Details/659134/
+https://errors.yoctoproject.org/Errors/Details/659124/
+
+On Tue, Jun 28, 2022 at 5:31 AM Yu, Mingli <mingli.yu@windriver.com> wrote:
+>
+> From: Mingli Yu <mingli.yu@windriver.com>
+>
+> Remove the backported patch mariadb-openssl3.patch as the logic
+> is included in the new version.
+>
+> Add libzstd to RDEPENDS to fix below qa issue:
+>  mariadb-10.8.3-r0 do_package_qa: QA Issue: /usr/lib64/plugin/zstd.so contained in package mariadb-server requires libzstd.so.1()(64bit), but no providers found in RDEPENDS:mariadb-server? [file-rdeps]
+>
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> ---
+>  ...ive_10.7.4.bb => mariadb-native_10.8.3.bb} |   0
+>  meta-oe/recipes-dbs/mysql/mariadb.inc         |  12 +-
+>  .../mysql/mariadb/mariadb-openssl3.patch      | 416 ------------------
+>  .../{mariadb_10.7.4.bb => mariadb_10.8.3.bb}  |   0
+>  4 files changed, 9 insertions(+), 419 deletions(-)
+>  rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.7.4.bb => mariadb-native_10.8.3.bb} (100%)
+>  delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/mariadb-openssl3.patch
+>  rename meta-oe/recipes-dbs/mysql/{mariadb_10.7.4.bb => mariadb_10.8.3.bb} (100%)
+>
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.7.4.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.8.3.bb
+> similarity index 100%
+> rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.7.4.bb
+> rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.8.3.bb
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+> index 922373b63..4c072dbf7 100644
+> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
+> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+> @@ -19,11 +19,10 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
+>             file://ssize_t.patch \
+>             file://mm_malloc.patch \
+>             file://sys_futex.patch \
+> -           file://mariadb-openssl3.patch \
+>            "
+>  SRC_URI:append:libc-musl = " file://ppc-remove-glibc-dep.patch"
+>
+> -SRC_URI[sha256sum] = "73dd9c9d325520f20ca5e0ef16f94b7be1146bed7e4a78e735c20daebf3a4173"
+> +SRC_URI[sha256sum] = "887eadc55176ac1ead1fccfc89ade4b5990ef192745ad4dcd879acb41c050892"
+>
+>  UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
+>
+> @@ -176,6 +175,13 @@ do_install() {
+>      if [ -f ${D}${datadir}/doc/README ]; then
+>          mv ${D}${datadir}/doc/README ${D}${datadir}/doc/${PN}/
+>      fi
+> +
+> +    # mini-benchmark used for Gitlab-CI to run on every commit to catch
+> +    # if there are severe performance regressions.
+> +    # remove it to avoid introducing bash dependency
+> +    if [ -f ${D}${datadir}/mysql/mini-benchmark ]; then
+> +        rm -rf ${D}${datadir}/mysql/mini-benchmark
+> +    fi
+>      if ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
+>          pam_so=$(find ${D} -name pam_user_map.so)
+>          if [ x"${pam_so}" != x ]; then
+> @@ -206,7 +212,7 @@ RDEPENDS:${PN}-client = "perl perl-module-getopt-long perl-module-file-temp \
+>  RDEPENDS:${PN}-server = "perl perl-module-getopt-long perl-module-data-dumper \
+>      perl-module-file-basename perl-module-file-path perl-module-sys-hostname \
+>      perl-module-file-copy perl-module-file-temp perl-module-posix \
+> -    ${PN}-client ${PN}-setupdb libdbi-perl libdbd-mysql-perl lzo"
+> +    ${PN}-client ${PN}-setupdb libdbi-perl libdbd-mysql-perl lzo libzstd"
+>  RDEPENDS:${PN}-leftovers = "perl perl-module-cwd perl-module-benchmark perl-module-getopt-long \
+>      perl-module-posix perl-module-data-dumper perl-module-sigtrap perl-module-threads \
+>      perl-module-threads-shared perl-module-io-socket perl-module-sys-hostname perl-module-file-copy \
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb/mariadb-openssl3.patch b/meta-oe/recipes-dbs/mysql/mariadb/mariadb-openssl3.patch
+> deleted file mode 100644
+> index 878675f30..000000000
+> --- a/meta-oe/recipes-dbs/mysql/mariadb/mariadb-openssl3.patch
+> +++ /dev/null
+> @@ -1,416 +0,0 @@
+> -From 1626955f3a2107ec4c7fd927ebfa3c6c1d2b09b8 Mon Sep 17 00:00:00 2001
+> -From: Vladislav Vaintroub <wlad@mariadb.com>
+> -Date: Mon, 8 Nov 2021 18:48:19 +0100
+> -Subject: [PATCH] MDEV-25785 Add support for OpenSSL 3.0
+> -
+> -Summary of changes
+> -
+> -- MD_CTX_SIZE is increased
+> -
+> -- EVP_CIPHER_CTX_buf_noconst(ctx) does not work anymore, points
+> -  to nobody knows where. The assumption made previously was that
+> -  (since the function does not seem to be documented)
+> -  was that it points to the last partial source block.
+> -  Add own partial block buffer for NOPAD encryption instead
+> -
+> -- SECLEVEL in CipherString in openssl.cnf
+> -  had been downgraded to 0, from 1, to make TLSv1.0 and TLSv1.1 possible
+> -
+> -- Workaround Ssl_cipher_list issue, it now returns TLSv1.3 ciphers,
+> -  in addition to what was set in --ssl-cipher
+> -
+> -- ctx_buf buffer now must be aligned to 16 bytes with openssl(
+> -  previously with WolfSSL only), ot crashes will happen
+> -
+> -- updated aes-t , to be better debuggable
+> -  using function, rather than a huge multiline macro
+> -  added test that does "nopad" encryption piece-wise, to test
+> -  replacement of EVP_CIPHER_CTX_buf_noconst
+> -
+> -Patch from Fedora https://src.fedoraproject.org/rpms/mariadb/raw/rawhide/f/mariadb-openssl3.patch
+> -
+> -Upstream-Status: Backport [https://github.com/MariaDB/server/commit/d42c2efbaa06a0307c2f0fd8fa87819ff50bbd7e]
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> -Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> ----
+> - cmake/ssl.cmake                   |  21 +++++-
+> - include/mysql/service_my_crypt.h  |   2 +-
+> - include/ssl_compat.h              |   3 +-
+> - mysql-test/lib/openssl.cnf        |   2 +-
+> - mysql-test/main/ssl_cipher.result |   6 +-
+> - mysql-test/main/ssl_cipher.test   |   2 +-
+> - mysys_ssl/my_crypt.cc             |  46 +++++++-----
+> - unittest/mysys/aes-t.c            | 121 ++++++++++++++++++++++--------
+> - 8 files changed, 143 insertions(+), 60 deletions(-)
+> -
+> -diff --git a/cmake/ssl.cmake b/cmake/ssl.cmake
+> -index a6793cf3..64c93ff9 100644
+> ---- a/cmake/ssl.cmake
+> -+++ b/cmake/ssl.cmake
+> -@@ -118,7 +118,7 @@ MACRO (MYSQL_CHECK_SSL)
+> -     ENDIF()
+> -     FIND_PACKAGE(OpenSSL)
+> -     SET_PACKAGE_PROPERTIES(OpenSSL PROPERTIES TYPE RECOMMENDED)
+> --    IF(OPENSSL_FOUND AND OPENSSL_VERSION AND OPENSSL_VERSION VERSION_LESS "3.0.0")
+> -+    IF(OPENSSL_FOUND)
+> -       SET(OPENSSL_LIBRARY ${OPENSSL_SSL_LIBRARY})
+> -       INCLUDE(CheckSymbolExists)
+> -       SET(SSL_SOURCES "")
+> -@@ -139,9 +139,20 @@ MACRO (MYSQL_CHECK_SSL)
+> -       SET(SSL_INTERNAL_INCLUDE_DIRS "")
+> -       SET(SSL_DEFINES "-DHAVE_OPENSSL")
+> -
+> -+      FOREACH(x INCLUDES LIBRARIES DEFINITIONS)
+> -+        SET(SAVE_CMAKE_REQUIRED_${x} ${CMAKE_REQUIRED_${x}})
+> -+      ENDFOREACH()
+> -+
+> -+      # Silence "deprecated in OpenSSL 3.0"
+> -+      IF((NOT OPENSSL_VERSION) # 3.0 not determined by older cmake
+> -+         OR NOT(OPENSSL_VERSION VERSION_LESS "3.0.0"))
+> -+        SET(SSL_DEFINES "${SSL_DEFINES} -DOPENSSL_API_COMPAT=0x10100000L")
+> -+        SET(CMAKE_REQUIRED_DEFINITIONS -DOPENSSL_API_COMPAT=0x10100000L)
+> -+      ENDIF()
+> -+
+> -       SET(CMAKE_REQUIRED_INCLUDES ${OPENSSL_INCLUDE_DIR})
+> -       SET(CMAKE_REQUIRED_LIBRARIES ${SSL_LIBRARIES})
+> --      SET(CMAKE_REQUIRED_INCLUDES ${OPENSSL_INCLUDE_DIR})
+> -+
+> -       CHECK_SYMBOL_EXISTS(ERR_remove_thread_state "openssl/err.h"
+> -                           HAVE_ERR_remove_thread_state)
+> -       CHECK_SYMBOL_EXISTS(EVP_aes_128_ctr "openssl/evp.h"
+> -@@ -150,8 +161,10 @@ MACRO (MYSQL_CHECK_SSL)
+> -                           HAVE_EncryptAes128Gcm)
+> -       CHECK_SYMBOL_EXISTS(X509_check_host "openssl/x509v3.h"
+> -                           HAVE_X509_check_host)
+> --      SET(CMAKE_REQUIRED_INCLUDES)
+> --      SET(CMAKE_REQUIRED_LIBRARIES)
+> -+
+> -+      FOREACH(x INCLUDES LIBRARIES DEFINITIONS)
+> -+        SET(CMAKE_REQUIRED_${x} ${SAVE_CMAKE_REQUIRED_${x}})
+> -+      ENDFOREACH()
+> -     ELSE()
+> -       IF(WITH_SSL STREQUAL "system")
+> -         MESSAGE(FATAL_ERROR "Cannot find appropriate system libraries for SSL. Use WITH_SSL=bundled to enable SSL support")
+> -diff --git a/include/mysql/service_my_crypt.h b/include/mysql/service_my_crypt.h
+> -index 2a232117..bb038aaa 100644
+> ---- a/include/mysql/service_my_crypt.h
+> -+++ b/include/mysql/service_my_crypt.h
+> -@@ -45,7 +45,7 @@ extern "C" {
+> - /* The max key length of all supported algorithms */
+> - #define MY_AES_MAX_KEY_LENGTH 32
+> -
+> --#define MY_AES_CTX_SIZE 656
+> -+#define MY_AES_CTX_SIZE 672
+> -
+> - enum my_aes_mode {
+> -     MY_AES_ECB, MY_AES_CBC
+> -diff --git a/include/ssl_compat.h b/include/ssl_compat.h
+> -index 8dc12254..6db1baab 100644
+> ---- a/include/ssl_compat.h
+> -+++ b/include/ssl_compat.h
+> -@@ -24,7 +24,7 @@
+> - #define SSL_LIBRARY OpenSSL_version(OPENSSL_VERSION)
+> - #define ERR_remove_state(X) ERR_clear_error()
+> - #define EVP_CIPHER_CTX_SIZE 176
+> --#define EVP_MD_CTX_SIZE 48
+> -+#define EVP_MD_CTX_SIZE 72
+> - #undef EVP_MD_CTX_init
+> - #define EVP_MD_CTX_init(X) do { memset((X), 0, EVP_MD_CTX_SIZE); EVP_MD_CTX_reset(X); } while(0)
+> - #undef EVP_CIPHER_CTX_init
+> -@@ -77,7 +77,6 @@
+> - #define DH_set0_pqg(D,P,Q,G)            ((D)->p= (P), (D)->g= (G))
+> - #endif
+> -
+> --#define EVP_CIPHER_CTX_buf_noconst(ctx) ((ctx)->buf)
+> - #define EVP_CIPHER_CTX_encrypting(ctx)  ((ctx)->encrypt)
+> - #define EVP_CIPHER_CTX_SIZE             sizeof(EVP_CIPHER_CTX)
+> -
+> -diff --git a/mysql-test/lib/openssl.cnf b/mysql-test/lib/openssl.cnf
+> -index b9ab37ac..7cd6f748 100644
+> ---- a/mysql-test/lib/openssl.cnf
+> -+++ b/mysql-test/lib/openssl.cnf
+> -@@ -9,4 +9,4 @@ ssl_conf = ssl_section
+> - system_default = system_default_section
+> -
+> - [system_default_section]
+> --CipherString = ALL:@SECLEVEL=1
+> -+CipherString = ALL:@SECLEVEL=0
+> -diff --git a/mysql-test/main/ssl_cipher.result b/mysql-test/main/ssl_cipher.result
+> -index 930d384e..66d817b7 100644
+> ---- a/mysql-test/main/ssl_cipher.result
+> -+++ b/mysql-test/main/ssl_cipher.result
+> -@@ -61,8 +61,8 @@ connect  ssl_con,localhost,root,,,,,SSL;
+> - SHOW STATUS LIKE 'Ssl_cipher';
+> - Variable_name Value
+> - Ssl_cipher    AES128-SHA
+> --SHOW STATUS LIKE 'Ssl_cipher_list';
+> --Variable_name Value
+> --Ssl_cipher_list       AES128-SHA
+> -+SELECT VARIABLE_VALUE like '%AES128-SHA%' FROM INFORMATION_SCHEMA.SESSION_STATUS WHERE VARIABLE_NAME='Ssl_cipher_list';
+> -+VARIABLE_VALUE like '%AES128-SHA%'
+> -+1
+> - disconnect ssl_con;
+> - connection default;
+> -diff --git a/mysql-test/main/ssl_cipher.test b/mysql-test/main/ssl_cipher.test
+> -index 36549d76..d4cdcffb 100644
+> ---- a/mysql-test/main/ssl_cipher.test
+> -+++ b/mysql-test/main/ssl_cipher.test
+> -@@ -98,6 +98,6 @@ let $restart_parameters=--ssl-cipher=AES128-SHA;
+> - source include/restart_mysqld.inc;
+> - connect (ssl_con,localhost,root,,,,,SSL);
+> - SHOW STATUS LIKE 'Ssl_cipher';
+> --SHOW STATUS LIKE 'Ssl_cipher_list';
+> -+SELECT VARIABLE_VALUE like '%AES128-SHA%' FROM INFORMATION_SCHEMA.SESSION_STATUS WHERE VARIABLE_NAME='Ssl_cipher_list';
+> - disconnect ssl_con;
+> - connection default;
+> -diff --git a/mysys_ssl/my_crypt.cc b/mysys_ssl/my_crypt.cc
+> -index e512eee9..4d7ebc7b 100644
+> ---- a/mysys_ssl/my_crypt.cc
+> -+++ b/mysys_ssl/my_crypt.cc
+> -@@ -29,11 +29,7 @@
+> - #include <ssl_compat.h>
+> - #include <cstdint>
+> -
+> --#ifdef HAVE_WOLFSSL
+> - #define CTX_ALIGN 16
+> --#else
+> --#define CTX_ALIGN 0
+> --#endif
+> -
+> - class MyCTX
+> - {
+> -@@ -100,8 +96,9 @@ class MyCTX_nopad : public MyCTX
+> - {
+> - public:
+> -   const uchar *key;
+> --  uint klen, buf_len;
+> -+  uint klen, source_tail_len;
+> -   uchar oiv[MY_AES_BLOCK_SIZE];
+> -+  uchar source_tail[MY_AES_BLOCK_SIZE];
+> -
+> -   MyCTX_nopad() : MyCTX() { }
+> -   ~MyCTX_nopad() { }
+> -@@ -112,7 +109,7 @@ class MyCTX_nopad : public MyCTX
+> -     compile_time_assert(MY_AES_CTX_SIZE >= sizeof(MyCTX_nopad));
+> -     this->key= key;
+> -     this->klen= klen;
+> --    this->buf_len= 0;
+> -+    this->source_tail_len= 0;
+> -     if (ivlen)
+> -       memcpy(oiv, iv, ivlen);
+> -     DBUG_ASSERT(ivlen == 0 || ivlen == sizeof(oiv));
+> -@@ -123,26 +120,41 @@ class MyCTX_nopad : public MyCTX
+> -     return res;
+> -   }
+> -
+> -+  /** Update last partial source block, stored in source_tail array. */
+> -+  void update_source_tail(const uchar* src, uint slen)
+> -+  {
+> -+    if (!slen)
+> -+      return;
+> -+    uint new_tail_len= (source_tail_len + slen) % MY_AES_BLOCK_SIZE;
+> -+    if (new_tail_len)
+> -+    {
+> -+      if (slen + source_tail_len < MY_AES_BLOCK_SIZE)
+> -+      {
+> -+        memcpy(source_tail + source_tail_len, src, slen);
+> -+      }
+> -+      else
+> -+      {
+> -+        DBUG_ASSERT(slen > new_tail_len);
+> -+        memcpy(source_tail, src + slen - new_tail_len, new_tail_len);
+> -+      }
+> -+    }
+> -+    source_tail_len= new_tail_len;
+> -+  }
+> -+
+> -   int update(const uchar *src, uint slen, uchar *dst, uint *dlen)
+> -   {
+> --    buf_len+= slen;
+> -+    update_source_tail(src, slen);
+> -     return MyCTX::update(src, slen, dst, dlen);
+> -   }
+> -
+> -   int finish(uchar *dst, uint *dlen)
+> -   {
+> --    buf_len %= MY_AES_BLOCK_SIZE;
+> --    if (buf_len)
+> -+    if (source_tail_len)
+> -     {
+> --      uchar *buf= EVP_CIPHER_CTX_buf_noconst(ctx);
+> -       /*
+> -         Not much we can do, block ciphers cannot encrypt data that aren't
+> -         a multiple of the block length. At least not without padding.
+> -         Let's do something CTR-like for the last partial block.
+> --
+> --        NOTE this assumes that there are only buf_len bytes in the buf.
+> --        If OpenSSL will change that, we'll need to change the implementation
+> --        of this class too.
+> -       */
+> -       uchar mask[MY_AES_BLOCK_SIZE];
+> -       uint mlen;
+> -@@ -154,10 +166,10 @@ class MyCTX_nopad : public MyCTX
+> -         return rc;
+> -       DBUG_ASSERT(mlen == sizeof(mask));
+> -
+> --      for (uint i=0; i < buf_len; i++)
+> --        dst[i]= buf[i] ^ mask[i];
+> -+      for (uint i=0; i < source_tail_len; i++)
+> -+        dst[i]= source_tail[i] ^ mask[i];
+> -     }
+> --    *dlen= buf_len;
+> -+    *dlen= source_tail_len;
+> -     return MY_AES_OK;
+> -   }
+> - };
+> -diff --git a/unittest/mysys/aes-t.c b/unittest/mysys/aes-t.c
+> -index 34704e06..cbec2760 100644
+> ---- a/unittest/mysys/aes-t.c
+> -+++ b/unittest/mysys/aes-t.c
+> -@@ -21,27 +21,96 @@
+> - #include <string.h>
+> - #include <ctype.h>
+> -
+> --#define DO_TEST(mode, nopad, slen, fill, dlen, hash)                    \
+> --  SKIP_BLOCK_IF(mode == 0xDEADBEAF, nopad ? 4 : 5, #mode " not supported")     \
+> --  {                                                                     \
+> --    memset(src, fill, src_len= slen);                                   \
+> --    ok(my_aes_crypt(mode, nopad | ENCRYPTION_FLAG_ENCRYPT,              \
+> --                    src, src_len, dst, &dst_len,                        \
+> --                    key, sizeof(key), iv, sizeof(iv)) == MY_AES_OK,     \
+> --      "encrypt " #mode " %u %s", src_len, nopad ? "nopad" : "pad");     \
+> --    if (!nopad)                                                         \
+> --      ok (dst_len == my_aes_get_size(mode, src_len), "my_aes_get_size");\
+> --    my_md5(md5, (char*)dst, dst_len);                                   \
+> --    ok(dst_len == dlen && memcmp(md5, hash, sizeof(md5)) == 0, "md5");  \
+> --    ok(my_aes_crypt(mode, nopad | ENCRYPTION_FLAG_DECRYPT,              \
+> --                    dst, dst_len, ddst, &ddst_len,                      \
+> --                    key, sizeof(key), iv, sizeof(iv)) == MY_AES_OK,     \
+> --       "decrypt " #mode " %u", dst_len);                                \
+> --    ok(ddst_len == src_len && memcmp(src, ddst, src_len) == 0, "memcmp"); \
+> -+
+> -+/** Test streaming encryption, bytewise update.*/
+> -+static int aes_crypt_bytewise(enum my_aes_mode mode, int flags, const unsigned char *src,
+> -+                 unsigned int slen, unsigned char *dst, unsigned int *dlen,
+> -+                 const unsigned char *key, unsigned int klen,
+> -+                 const unsigned char *iv, unsigned int ivlen)
+> -+{
+> -+  /* Allocate context on odd address on stack, in order to
+> -+   catch misalignment errors.*/
+> -+  void *ctx= (char *)alloca(MY_AES_CTX_SIZE+1)+1;
+> -+
+> -+  int res1, res2;
+> -+  uint d1= 0, d2;
+> -+  uint i;
+> -+
+> -+  if ((res1= my_aes_crypt_init(ctx, mode, flags, key, klen, iv, ivlen)))
+> -+    return res1;
+> -+  for (i= 0; i < slen; i++)
+> -+  {
+> -+    uint tmp_d1=0;
+> -+    res1= my_aes_crypt_update(ctx, src+i,1, dst, &tmp_d1);
+> -+    if (res1)
+> -+      return res1;
+> -+    d1+= tmp_d1;
+> -+    dst+= tmp_d1;
+> -+  }
+> -+  res2= my_aes_crypt_finish(ctx, dst, &d2);
+> -+  *dlen= d1 + d2;
+> -+  return res1 ? res1 : res2;
+> -+}
+> -+
+> -+
+> -+#ifndef HAVE_EncryptAes128Ctr
+> -+const uint MY_AES_CTR=0xDEADBEAF;
+> -+#endif
+> -+#ifndef HAVE_EncryptAes128Gcm
+> -+const uint MY_AES_GCM=0xDEADBEAF;
+> -+#endif
+> -+
+> -+#define MY_AES_UNSUPPORTED(x)  (x == 0xDEADBEAF)
+> -+
+> -+static void do_test(uint mode, const char *mode_str, int nopad, uint slen,
+> -+                    char fill, size_t dlen, const char *hash)
+> -+{
+> -+  uchar key[16]= {1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6};
+> -+  uchar iv[16]= {2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7};
+> -+  uchar src[1000], dst[1100], dst2[1100], ddst[1000];
+> -+  uchar md5[MY_MD5_HASH_SIZE];
+> -+  uint src_len, dst_len, dst_len2, ddst_len;
+> -+  int result;
+> -+
+> -+  if (MY_AES_UNSUPPORTED(mode))
+> -+  {
+> -+    skip(nopad?7:6, "%s not supported", mode_str);
+> -+    return;
+> -+  }
+> -+  memset(src, fill, src_len= slen);
+> -+  result= my_aes_crypt(mode, nopad | ENCRYPTION_FLAG_ENCRYPT, src, src_len,
+> -+                       dst, &dst_len, key, sizeof(key), iv, sizeof(iv));
+> -+  ok(result == MY_AES_OK, "encrypt %s %u %s", mode_str, src_len,
+> -+     nopad ? "nopad" : "pad");
+> -+
+> -+  if (nopad)
+> -+  {
+> -+    result= aes_crypt_bytewise(mode, nopad | ENCRYPTION_FLAG_ENCRYPT, src,
+> -+                                src_len, dst2, &dst_len2, key, sizeof(key),
+> -+                                iv, sizeof(iv));
+> -+    ok(result == MY_AES_OK, "encrypt bytewise %s %u", mode_str, src_len);
+> -+    /* Compare with non-bytewise encryption result*/
+> -+    ok(dst_len == dst_len2 && memcmp(dst, dst2, dst_len) == 0,
+> -+       "memcmp bytewise  %s %u", mode_str, src_len);
+> -+  }
+> -+  else
+> -+  {
+> -+    int dst_len_real= my_aes_get_size(mode, src_len);
+> -+    ok(dst_len_real= dst_len, "my_aes_get_size");
+> -   }
+> -+  my_md5(md5, (char *) dst, dst_len);
+> -+  ok(dst_len == dlen, "md5 len");
+> -+  ok(memcmp(md5, hash, sizeof(md5)) == 0, "md5");
+> -+  result= my_aes_crypt(mode, nopad | ENCRYPTION_FLAG_DECRYPT,
+> -+                       dst, dst_len, ddst, &ddst_len, key, sizeof(key), iv,
+> -+                       sizeof(iv));
+> -+
+> -+  ok(result == MY_AES_OK, "decrypt %s %u", mode_str, dst_len);
+> -+  ok(ddst_len == src_len && memcmp(src, ddst, src_len) == 0, "memcmp");
+> -+}
+> -
+> --#define DO_TEST_P(M,S,F,D,H) DO_TEST(M,0,S,F,D,H)
+> --#define DO_TEST_N(M,S,F,D,H) DO_TEST(M,ENCRYPTION_FLAG_NOPAD,S,F,D,H)
+> -+#define DO_TEST_P(M, S, F, D, H) do_test(M, #M, 0, S, F, D, H)
+> -+#define DO_TEST_N(M, S, F, D, H) do_test(M, #M, ENCRYPTION_FLAG_NOPAD, S, F, D, H)
+> -
+> - /* useful macro for debugging */
+> - #define PRINT_MD5()                                     \
+> -@@ -53,25 +122,15 @@
+> -     printf("\"\n");                                     \
+> -   } while(0);
+> -
+> --#ifndef HAVE_EncryptAes128Ctr
+> --const uint MY_AES_CTR=0xDEADBEAF;
+> --#endif
+> --#ifndef HAVE_EncryptAes128Gcm
+> --const uint MY_AES_GCM=0xDEADBEAF;
+> --#endif
+> -
+> - int
+> - main(int argc __attribute__((unused)),char *argv[])
+> - {
+> --  uchar key[16]= {1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6};
+> --  uchar iv[16]=  {2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7};
+> --  uchar src[1000], dst[1100], ddst[1000];
+> --  uchar md5[MY_MD5_HASH_SIZE];
+> --  uint src_len, dst_len, ddst_len;
+> -
+> -   MY_INIT(argv[0]);
+> -
+> --  plan(87);
+> -+  plan(122);
+> -+
+> -   DO_TEST_P(MY_AES_ECB, 200, '.', 208, "\xd8\x73\x8e\x3a\xbc\x66\x99\x13\x7f\x90\x23\x52\xee\x97\x6f\x9a");
+> -   DO_TEST_P(MY_AES_ECB, 128, '?', 144, "\x19\x58\x33\x85\x4c\xaa\x7f\x06\xd1\xb2\xec\xd7\xb7\x6a\xa9\x5b");
+> -   DO_TEST_P(MY_AES_CBC, 159, '%', 160, "\x4b\x03\x18\x3d\xf1\xa7\xcd\xa1\x46\xb3\xc6\x8a\x92\xc0\x0f\xc9");
+> ---
+> -2.25.1
+> -
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.7.4.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.8.3.bb
+> similarity index 100%
+> rename from meta-oe/recipes-dbs/mysql/mariadb_10.7.4.bb
+> rename to meta-oe/recipes-dbs/mysql/mariadb_10.8.3.bb
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#97603): https://lists.openembedded.org/g/openembedded-devel/message/97603
+> Mute This Topic: https://lists.openembedded.org/mt/92040462/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
