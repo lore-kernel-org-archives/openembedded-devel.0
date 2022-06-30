@@ -1,109 +1,183 @@
-Return-Path: <zhengrq.fnst@fujitsu.com>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 23125C433EF
-	for <webhook@archiver.kernel.org>; Thu, 30 Jun 2022 02:17:38 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.1])
- by mx.groups.io with SMTP id smtpd.web09.20156.1656555448942259144
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CC451C433EF
+	for <webhook@archiver.kernel.org>; Thu, 30 Jun 2022 04:01:58 +0000 (UTC)
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
+ [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.web11.20611.1656561706748793595
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Jun 2022 19:17:29 -0700
+ Wed, 29 Jun 2022 21:01:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=DKEju6r/;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
- mailfrom: zhengrq.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1656555447; i=@fujitsu.com;
-	bh=HlKIMn8vbm9aVLeCSlo9YhHXw5nf24Ska8000ADbww0=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=DKEju6r//YAZXyGAUuqqZfMTW4jc14/nuPCekF9TqPQ8qv8xxEGHAa4eteAtDWiJJ
-	 b4r9kHNoKCBLHDHxid8CWQ8SY1I/c2WI7urtShay/jkXxPC67rTbKFppALc6oJ4no8
-	 mpKFka+eUNmGr6e5MCicx57f7BTBOCxsm0wkgt+CfQIeJo8QWXYCUHbKsNbBLltFjc
-	 H3Aw20Q7XHkw4SHQA6e93YNZ3dymEAA7QkEAzv9EV9tfGvV5MJf3po2+D40JnvzyS+
-	 m6QfjL7d6qbVrEUrnc9QNjfCVYSiGKZO9c481eMmN/Uh3hcgnSn4v49k5fBOKmNhUy
-	 D1MwlgXCBdV+g==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8ORqLuNfW+
-  SQdNKXYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePq0gVMBfs5K15cWMPcwPiKo4uRi0NI4Amj
-  xJHX39ggnOtMEr+erGeHcA4wStyZdAPI4eRgE9CVePFjMQuILSKgL7F09h5mEFtYwE/iec91s
-  DiLgKrE9j17WEFsXgF3iel7prKB2BICChJTHr5nhogLSpyc+QSsnllAQuLgixdAcQ6gGkWJ2d
-  PlIcorJF4fvsQMYatJXD23iXkCI98sJN2zkHQvYGRaxWidVJSZnlGSm5iZo2toYKBraGiqa2y
-  ka2hhqZdYpZuol1qqW55aXKJrpJdYXqyXWlysV1yZm5yTopeXWrKJERh+KcUKe3cwXl75U+8Q
-  oyQHk5Io79Npe5KE+JLyUyozEosz4otKc1KLDzHKcHAoSfCuZ9ibJCRYlJqeWpGWmQOMBZi0B
-  AePkgjvje9ArbzFBYm5xZnpEKlTjLocM7+2HWAWYsnLz0uVEuddyQI0QwCkKKM0D24ELC4vMc
-  pKCfMyMjAwCPEUpBblZpagyr9iFOdgVBLmZWADmsKTmVcCt+kV0BFMQEfsnAZ2REkiQkqqgSn
-  73mW//J8CnkvTNfi8dulf7Lk9c/7jVS93PLjLrldtofx4XVDvvjo9572Khqxrppywl2jbti7Q
-  vEn/DdeCN/MWSm3QUC9pbZx7cdG5nbVpm+KMtvfnCQT6qi7sP6wyqUDN5+40W/sPk9Xv6zswF
-  GusCHfjuRpXmFdZfFxi//Y9TI/K95pdjo3f7ODMqvH77N62pypnwy62MvI89650iddSLtJUM7
-  j94HoLxxyTvg53z393UzftP7Y859l/rb2Lm+Xbbm52n7r9QuGm14HRnI/TZO4Hvnui+XPHxA3
-  BacXZyTXZF5mtJ617s91xbZ3J73Pzzs6RXXwyhKMrarZ0hsfUTeum31i69WzEAq3gnmolluKM
-  REMt5qLiRACPoH0hRgMAAA==
-X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-23.tower-565.messagelabs.com!1656555446!12407!1
-X-Originating-IP: [62.60.8.97]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.86.8; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 31286 invoked from network); 30 Jun 2022 02:17:26 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-23.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 30 Jun 2022 02:17:26 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 6EAC610018D
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Jun 2022 03:17:26 +0100 (BST)
-Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
- [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 630CE100043
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Jun 2022 03:17:26 +0100 (BST)
-Received: from CentOS7.g08.fujitsu.local (10.167.225.35) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Thu, 30 Jun 2022 03:17:25 +0100
-From: zhengrq.fnst <zhengrq.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-protobuf: upgrade 4.21.1 -> 4.21.2
-Date: Thu, 30 Jun 2022 10:17:18 +0800
-Message-ID: <1656555438-9917-1-git-send-email-zhengrq.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@mvista.com header.s=google header.b=hIG2fkw8;
+ spf=pass (domain: mvista.com, ip: 209.85.210.169,
+ mailfrom: hprajapati@mvista.com)
+Received: by mail-pf1-f169.google.com with SMTP id a15so16914384pfv.13
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 29 Jun 2022 21:01:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=6WB18s2pgOu4lrYOb07tr42L+jmLAuqShNtBzvxWs+w=;
+        b=hIG2fkw8JRGVcxkRqxSPcodS6m1ySBoP3vSNbRWWu6uMnSTA8xT/Yon3KOeRHdQnd8
+         R3GwjRoldHNLVnJLEuAnvzfgk+q6RGpIDG1NjPMB6ri6FH2BcLGm3hhbdLUI2A2Iv2nB
+         3zphiLmpXGP/TiE9jjofKN6QTuq3EvZGycmCM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=6WB18s2pgOu4lrYOb07tr42L+jmLAuqShNtBzvxWs+w=;
+        b=hTSCuBukG6wzlSaOHgsjXudBW/QKAfFv2ahWX3v2ytahrqMJmUT4mRWGAexrTRZo1w
+         zuG9GyaD1AR3z3m1ld9ky862bxGdeS+e4kWTVnggQOgYrsg+NtSfndl8rza4J1/hzQXP
+         68KmbgGk3CcIHbR1SIqFx/dg0JK5/avFamsy2sPoW6sExbJ/dx4J0JoRRzjbGen2EID2
+         Il+4uES469KVJ7wWKQfF/0jh7U1SlRQfy80/gUX2eaVAI14C0dMPI2rjCDVTymVefZB3
+         htIUWyf3UUv+KlOFQOgldQeAiqlSwlx/OfcsfVHk3WIbUh7HhXdPsTPbbMHAK9YcMTuM
+         BpAQ==
+X-Gm-Message-State: AJIora9X/rS3zWqFrMarhU+aj1F2julqc+KZjcc2Zuw+xptF8B4/d2S+
+	NTF2mMHLlRtoePtfLojJUtRjZOhr6QnfPw==
+X-Google-Smtp-Source: 
+ AGRyM1tfPD+LQ6olzcqpDdvPnZK5bIRvDfFMhULs8xBwJb7F0IQWtzMArPXC/uTagnn/J0pGfR6PpA==
+X-Received: by 2002:a05:6a00:16c3:b0:528:1ed:22ef with SMTP id
+ l3-20020a056a0016c300b0052801ed22efmr4550587pfc.0.1656561705842;
+        Wed, 29 Jun 2022 21:01:45 -0700 (PDT)
+Received: from MVIN00024 ([27.121.101.82])
+        by smtp.gmail.com with ESMTPSA id
+ 2-20020a170902e9c200b00168ba5ac8adsm12225637plk.163.2022.06.29.21.01.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 29 Jun 2022 21:01:45 -0700 (PDT)
+Received: by MVIN00024 (sSMTP sendmail emulation);
+ Thu, 30 Jun 2022 09:31:40 +0530
+From: Hitendra Prajapati <hprajapati@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-oe][master][PATCH] cyrus-sasl: CVE-2022-24407 failure to
+ properly escape SQL  input allows an attacker to execute arbitrary SQL
+ commands
+Date: Thu, 30 Jun 2022 09:31:38 +0530
+Message-Id: <20220630040138.6776-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Jun 2022 02:17:38 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 Jun 2022 04:01:58 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97632
+ https://lists.openembedded.org/g/openembedded-devel/message/97633
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+Backport from https://github.com/cyrusimap/cyrus-sasl/commit/9eff746c9daecbcc0041b09a5a51ba30738cdcbc
+CVE-2022-24407 cyrus-sasl: failure to properly escape SQL input allows an attacker to execute arbitrary SQL commands.
+
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
- .../{python3-protobuf_4.21.1.bb => python3-protobuf_4.21.2.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-protobuf_4.21.1.bb => python3-protobuf_4.21.2.bb} (92%)
+ .../cyrus-sasl/CVE-2022-24407.patch           | 83 +++++++++++++++++++
+ .../cyrus-sasl/cyrus-sasl_2.1.28.bb           |  1 +
+ 2 files changed, 84 insertions(+)
+ create mode 100644 meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/CVE-2022-24407.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-protobuf_4.21.1.bb b/meta-python/recipes-devtools/python/python3-protobuf_4.21.2.bb
-similarity index 92%
-rename from meta-python/recipes-devtools/python/python3-protobuf_4.21.1.bb
-rename to meta-python/recipes-devtools/python/python3-protobuf_4.21.2.bb
-index cdce531e8..b8287a88e 100644
---- a/meta-python/recipes-devtools/python/python3-protobuf_4.21.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-protobuf_4.21.2.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=53dbfa56f61b90215a
+diff --git a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/CVE-2022-24407.patch b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/CVE-2022-24407.patch
+new file mode 100644
+index 000000000..0ddea03c6
+--- /dev/null
++++ b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/CVE-2022-24407.patch
+@@ -0,0 +1,83 @@
++From 906b863c5308567086c6437ce17335b1922a78d1 Mon Sep 17 00:00:00 2001
++From: Hitendra Prajapati <hprajapati@mvista.com>
++Date: Wed, 15 Jun 2022 10:44:50 +0530
++Subject: [PATCH] CVE-2022-24407
++
++Upstream-Status: Backport [https://github.com/cyrusimap/cyrus-sasl/commit/9eff746c9daecbcc0041b09a5a51ba30738cdcbc]
++CVE: CVE-2022-24407
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++---
++ plugins/sql.c | 26 +++++++++++++++++++++++---
++ 1 file changed, 23 insertions(+), 3 deletions(-)
++
++diff --git a/plugins/sql.c b/plugins/sql.c
++index 95f5f707..5d20759b 100644
++--- a/plugins/sql.c
+++++ b/plugins/sql.c
++@@ -1150,6 +1150,7 @@ static int sql_auxprop_store(void *glob_context,
++     char *statement = NULL;
++     char *escap_userid = NULL;
++     char *escap_realm = NULL;
+++    char *escap_passwd = NULL;
++     const char *cmd;
++     
++     sql_settings_t *settings;
++@@ -1221,6 +1222,11 @@ static int sql_auxprop_store(void *glob_context,
++ 			    "Unable to begin transaction\n");
++     }
++     for (cur = to_store; ret == SASL_OK && cur->name; cur++) {
+++	/* Free the buffer, current content is from previous loop. */
+++	if (escap_passwd) {
+++	    sparams->utils->free(escap_passwd);
+++	    escap_passwd = NULL;
+++	}
++ 
++ 	if (cur->name[0] == '*') {
++ 	    continue;
++@@ -1242,19 +1248,32 @@ static int sql_auxprop_store(void *glob_context,
++ 	}
++ 	sparams->utils->free(statement);
++ 
+++	if (cur->values[0]) {
+++	    escap_passwd = (char *)sparams->utils->malloc(strlen(cur->values[0])*2+1);
+++	    if (!escap_passwd) {
+++		ret = SASL_NOMEM;
+++		break;
+++	    }
+++	    settings->sql_engine->sql_escape_str(escap_passwd, cur->values[0]);
+++	}
+++
++ 	/* create a statement that we will use */
++ 	statement = sql_create_statement(cmd, cur->name, escap_userid,
++ 					 escap_realm,
++-					 cur->values && cur->values[0] ?
++-					 cur->values[0] : SQL_NULL_VALUE,
+++					 escap_passwd ?
+++					 escap_passwd : SQL_NULL_VALUE,
++ 					 sparams->utils);
+++	if (!statement) {
+++	    ret = SASL_NOMEM;
+++	    break;
+++	}
++ 	
++ 	{
++ 	    char *log_statement =
++ 		sql_create_statement(cmd, cur->name,
++ 				     escap_userid,
++ 				     escap_realm,
++-				     cur->values && cur->values[0] ?
+++				     escap_passwd ?
++ 				     "<omitted>" : SQL_NULL_VALUE,
++ 				     sparams->utils);
++ 	    sparams->utils->log(sparams->utils->conn, SASL_LOG_DEBUG,
++@@ -1287,6 +1306,7 @@ static int sql_auxprop_store(void *glob_context,
++   done:
++     if (escap_userid) sparams->utils->free(escap_userid);
++     if (escap_realm) sparams->utils->free(escap_realm);
+++    if (escap_passwd) sparams->utils->free(escap_passwd);
++     if (conn) settings->sql_engine->sql_close(conn);
++     if (userid) sparams->utils->free(userid);
++     if (realm) sparams->utils->free(realm);
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb
+index 98899dfd5..0b2ce3639 100644
+--- a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb
++++ b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb
+@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/cyrusimap/cyrus-sasl;protocol=https;branch=cyrus-sas
+            file://saslauthd.service \
+            file://saslauthd.conf \
+            file://CVE-2019-19906.patch \
++           file://CVE-2022-24407.patch \
+            "
  
- inherit pypi setuptools3
- 
--SRC_URI[sha256sum] = "5d9b5c8270461706973c3871c6fbdd236b51dfe9dab652f1fb6a36aa88287e47"
-+SRC_URI[sha256sum] = "863f65e137d9de4a76cac39ae731a19bea1c30997f512ecf0dc9348112313401"
- 
- # http://errors.yoctoproject.org/Errors/Details/184715/
- # Can't find required file: ../src/google/protobuf/descriptor.proto
+ UPSTREAM_CHECK_URI = "https://github.com/cyrusimap/cyrus-sasl/archives"
 -- 
 2.25.1
 
