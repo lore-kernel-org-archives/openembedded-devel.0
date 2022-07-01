@@ -1,157 +1,278 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
+Return-Path: <javier.viguera@digi.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C63E5C43334
-	for <webhook@archiver.kernel.org>; Fri,  1 Jul 2022 11:45:17 +0000 (UTC)
-Received: from mail-qv1-f46.google.com (mail-qv1-f46.google.com
- [209.85.219.46])
- by mx.groups.io with SMTP id smtpd.web09.37362.1656675913792724290
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3654C43334
+	for <webhook@archiver.kernel.org>; Fri,  1 Jul 2022 12:10:27 +0000 (UTC)
+Received: from outbound-ip23a.ess.barracuda.com
+ (outbound-ip23a.ess.barracuda.com [209.222.82.205])
+ by mx.groups.io with SMTP id smtpd.web10.37223.1656677425133599227
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 Jul 2022 04:45:14 -0700
+ Fri, 01 Jul 2022 05:10:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20210112.gappssmtp.com header.s=20210112
- header.b=visXeClC;
- spf=pass (domain: ossystems.com.br, ip: 209.85.219.46,
- mailfrom: otavio.salvador@ossystems.com.br)
-Received: by mail-qv1-f46.google.com with SMTP id c1so3835410qvi.11
-        for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 Jul 2022 04:45:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ossystems-com-br.20210112.gappssmtp.com; s=20210112;
-        h=from:mime-version:references:in-reply-to:date:message-id:subject:to
-         :cc;
-        bh=VnC3sQiRQqtCF3ytSwYSgOWjt2r1Urxz1Uq8duDXioc=;
-        b=visXeClC0Z6tUgQRJUSscFRmbzfVoAXulVllPmr9AiFNmEXYr52BROGZ9dwIU3MZ4c
-         Vwt7dPCMgnZT4uvPhWHPyoNKfJGohVZ3Lie6bzxUe2O0BEOR/gKyDCZXyCOaSYLYRG1R
-         Ll8TZ8Rfj9+/nU4AmJC7mrIO9f9+DhB+KCgXAD6Hrlgu3LQVVW1lW4nfQcD2hPmlVKgU
-         AVL7QXZvs63fawIKeURSP3ukOtdLAGcmISKkwLlIL5Mai8lmUhmB/8AYipZY5FBcMqVi
-         Pwslo9ubKDsYkrK9RHMB6yl/wIKePWtTTDHkEU2LhIs0Vscio2UnUPpsugcop4QKK1NG
-         OZfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:mime-version:references:in-reply-to:date
-         :message-id:subject:to:cc;
-        bh=VnC3sQiRQqtCF3ytSwYSgOWjt2r1Urxz1Uq8duDXioc=;
-        b=p6atiDbmcEuzb0Dl32o0PRzHmEUx/iRNd1u99mTGsI4PZNDn2MU2/98DOWKsWF9o77
-         U2iMfO+t2b3C1w1nlaWGGgbu6mSMduof+A5S0qqlxOL2T8BCcYfhpifY4aCtcP88pve1
-         aAUzb/NCqIRrNkElF7y+ak2Ar4+ukBjU3OAOO0zNY6TfQ4nVp8bc+EO3i9y48Lhia4iM
-         O2xJ/Ql0ckV7rFFBFetU2UgM83zDG3HIdMfBzKWfzxErDme0w3BvNkxbcskjGtxsAlSc
-         rbFVAUjz6gYfMbkg+UMupxqshDt/T+mjH97iN3j6powg4E45S0E+1wJtha+LVxxTUSCJ
-         I98Q==
-X-Gm-Message-State: AJIora89Qo10fzMGoT75PyQeSc0Ad3INE/LTu18/La5Dnv/eKIJ8qTAf
-	xypZyCF4oeECcnkB4Bcyq7Pchh+f/lhPjBFv
-X-Google-Smtp-Source: 
- AGRyM1s+uIHg8kZveWyJWDh4aU3jwDDWl7dA38GZd+F4s4TH1a8jdK6pBpAYtNRlaBn3Be0SYLld3w==
-X-Received: by 2002:a05:6214:238b:b0:470:4e6f:af4e with SMTP id
- fw11-20020a056214238b00b004704e6faf4emr15473952qvb.91.1656675912359;
-        Fri, 01 Jul 2022 04:45:12 -0700 (PDT)
-Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com.
- [209.85.222.172])
-        by smtp.gmail.com with ESMTPSA id
- h4-20020a05620a284400b006a787380a5csm18164980qkp.67.2022.07.01.04.45.11
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 01 Jul 2022 04:45:11 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-qk1-f172.google.com with SMTP id n10so1598378qkn.10
-        for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 Jul 2022 04:45:11 -0700 (PDT)
-X-Received: by 2002:a37:8ec3:0:b0:6ae:e5e2:b956 with SMTP id
- q186-20020a378ec3000000b006aee5e2b956mr9901938qkd.280.1656675911463; Fri, 01
- Jul 2022 04:45:11 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220627133914.14615-1-javier.viguera@digi.com>
-In-Reply-To: <20220627133914.14615-1-javier.viguera@digi.com>
-Date: Fri, 1 Jul 2022 08:44:59 -0300
-X-Gmail-Original-Message-ID: 
- <CAP9ODKqZTpwwUP8QiZiRVFPNT-fUhv8zm6sboChC7U72=X9gYw@mail.gmail.com>
-Message-ID: 
- <CAP9ODKqZTpwwUP8QiZiRVFPNT-fUhv8zm6sboChC7U72=X9gYw@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][kirkstone][PATCH] networkmanager: fix
- build with enabled ppp
-To: Javier Viguera <javier.viguera@digi.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+ dkim=pass header.i=@digi.com header.s=selector1 header.b=k3UZ9aIU;
+ spf=pass (domain: digi.com, ip: 209.222.82.205,
+ mailfrom: javier.viguera@digi.com)
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04lp2175.outbound.protection.outlook.com [104.47.73.175]) by
+ mx-outbound11-31.us-east-2a.ess.aws.cudaops.com (version=TLSv1.2
+ cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Fri, 01 Jul 2022 12:10:22 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=HrzQxvj23QkdgbRDtBj1imUWKiY9bOdJbMqDjBpaEicjldM1Xcd78LTrtlpuUmQzgLFUUCFcTJVMgsy5Ez8clQ7DdsCyojN//iNej43hqVoNO0Rn8UO3UbNSRsXN9uq4sQTeGzmIaJz1J0VXDWFxnrxVBzvSBIrhguc+0iQIwuy4e+9XPQ6cuVANhbDLMihls3DBrkXuUfAwBDOGtlBcLOXvnUmspsg7bcsqvgrW9Qzb7/HuhB0YdNxg7QpqcqoAvy8q/tnYnbO3JhTI7WzYzyPL/KIhzVQ8uZWzRm+ZpTaPPB1VyuY5Jgm60YFks9sMfp+DdeNEFm2WuuXW0jAiAg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=46hf+wWy8t+V8SOuO2U0pHjxLqTCRY63M6ZspA5+gkA=;
+ b=P3DCwP/VQXSWXtSa3ZzeQAJ++RPfZCBMo5aLoqcaaygob8zwayHQ/NEH7N8ShKgoDVCjIJjdzGLk16fczQP7E3o9xs1OMBtAtgWwhc+q3Ddav/sTnGlzxWgscLWon4/CXr/GmvFOlvNLo7JGTvoxerRYHAKtKeE87tQwIxEGdo9oXzwVOh55c0i88ZnLr6wWA+tLQJsq4RNtAAf5xAequQsOcl/2XKIHD1N6DIoGWAkqCYyeakwfyzFsoxCfRAMD7dIrDGGJm+8BcHBDiut5pScU2avrTZPwH14l7rdV0V9N0/e1y6v1KRDW9oaOj/MUICuH7eicEha0G9axuCdNJQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=digi.com; dmarc=pass action=none header.from=digi.com;
+ dkim=pass header.d=digi.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=digi.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=46hf+wWy8t+V8SOuO2U0pHjxLqTCRY63M6ZspA5+gkA=;
+ b=k3UZ9aIUmUyp6l9p78dO5GRQa82pOPI6phe3yuG49AsDuefx/Rv+KZ4GoETlqk21f797gQTB4VBT5PvzA+6p11fAvvZRhXDmroUm9fHYD1BAlJlFl1eHPpWdi25CxgxaZ3mb1rEttNB5Kaw33pAzw17pYSo8b1OqHquU7Jo3wkaETY5IFKT6FmNY3RG6p5Nv2k6smCi0oJySVE9lzX7GXgLDAsQpAck2gqkbTZzyOeTHPR9pVUFokKMR4M3DX6/PGBawmEq0CzzaBRzqovsLDjME/kgAxJQIhMHZwu6+Ty9RCCXv4J9+AB18XYHG2RBXU/2uTFdZe4I/HB0ZMYsAlg==
+Received: from BLAPR10MB5156.namprd10.prod.outlook.com (2603:10b6:208:321::24)
+ by SJ0PR10MB4495.namprd10.prod.outlook.com (2603:10b6:a03:2d6::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5395.15; Fri, 1 Jul
+ 2022 12:10:18 +0000
+Received: from BLAPR10MB5156.namprd10.prod.outlook.com
+ ([fe80::21a2:d9b:70e9:aac1]) by BLAPR10MB5156.namprd10.prod.outlook.com
+ ([fe80::21a2:d9b:70e9:aac1%7]) with mapi id 15.20.5395.017; Fri, 1 Jul 2022
+ 12:10:17 +0000
+From: "Viguera, Javier" <Javier.Viguera@digi.com>
+To: Otavio Salvador <otavio.salvador@ossystems.com.br>
+CC: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
 	akuster808 <akuster808@gmail.com>
-Content-Type: multipart/alternative; boundary="00000000000035f7c205e2bceb8a"
+Subject: RE: [oe] [meta-networking][kirkstone][PATCH] networkmanager: fix
+ build with enabled ppp
+Thread-Topic: [oe] [meta-networking][kirkstone][PATCH] networkmanager: fix
+ build with enabled ppp
+Thread-Index: AQHYiitQKFh0vBsNTkmCOfwEvVlvC61pa6WAgAAGxrA=
+Date: Fri, 1 Jul 2022 12:10:17 +0000
+Message-ID: 
+ <BLAPR10MB515619E2EFA6F75FEB06E881E0BD9@BLAPR10MB5156.namprd10.prod.outlook.com>
+References: <20220627133914.14615-1-javier.viguera@digi.com>
+ <CAP9ODKqZTpwwUP8QiZiRVFPNT-fUhv8zm6sboChC7U72=X9gYw@mail.gmail.com>
+In-Reply-To: 
+ <CAP9ODKqZTpwwUP8QiZiRVFPNT-fUhv8zm6sboChC7U72=X9gYw@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=digi.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: a6c73f99-c7c1-4a4b-75cf-08da5b5aa997
+x-ms-traffictypediagnostic: SJ0PR10MB4495:EE_
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ DaB5SRuzf/J5Jq9rdxWf6gn3057lmajv2icnOrhhgFSz8R5m8b6iE4mze5b6wX4VvodPsSEZlHsQ00rGwzcJVCano5fDCpcrlkapgNnD5ETmAeUkvDADaQHcsCsYjCOfYYnjs7p1zlsAvjOX28jKtof4CFG4EPMsztIeyHdgpd4Chwm786gviYkXWZK7Me3pW1nGjhUARtuecuoBzZ11GMw0JtsJLcuMC1daugUgGv0sItDNzO2tgf9f+RsZ+zZLU3N4RyoN3x3iCrRHFMikXzQ3aQnWVebSBll9xHP+Sx26TKWGFsj9h4xgfmn/LL//4RdDJ3qIdpP/epb1kpZ/Iy21SUmRt1EcXqSXjcIXc7soDAhUtMEoB5JjnaDTWQVNMrUHqziCJieu1gWoznDXMWqD4JjlK/YeWYN+u6WE4ZKC0r04Fs/Ju2YwduLB6eos7q0ucmBp+6foNsSsoZkzy40sA1VpBH0i/hpehugD2dDoBCq04kG8fM5et2TA7x4NgAUNDiY+ULoc/YuIa0NORlFzecbQ7k8qEz/gT+KgKvPcz//laZC0zf1/7VUPfz9OOY0RFnbHBXWPzNRF73HuHRUiMSceSnO6t20ilI8P85mjHByyqeBqrKxSO/a9jB0AfrbQnv1W/hY9+7z1ZGqHl5XmZQayCKpHCEsJmmDiWs6ZtpTW5JzzyD4Yw717ox3+IwkKdiyuWqgCVZ1y2f16Ukwrh4gfschgxLHsTgzXT+Pq2UByvby/5tZY8W0u+i4z9KZbaJDIfJ/ZWKXsU8pTuNd2Kawt98dD/Z7uH7NygoSSaggfkaZwo8r78MryPx7J
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BLAPR10MB5156.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(136003)(346002)(396003)(376002)(366004)(39850400004)(26005)(54906003)(6916009)(7696005)(6506007)(122000001)(9686003)(38100700002)(41300700001)(316002)(53546011)(478600001)(33656002)(38070700005)(2906002)(5660300002)(4744005)(64756008)(66446008)(8676002)(4326008)(76116006)(66476007)(66556008)(66946007)(71200400001)(186003)(55016003)(52536014)(86362001)(8936002);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?U2I1ZkgyTGU1am9nRVpjUnREaG5QcVVSTmZSNzR3YmFpNSt5YmRjcHhzN1R0?=
+ =?utf-8?B?aTRIUldab0p1L0tLQ2MwZUJMT3MzR21rSHZZRHpkbnpJdjZPYlJKNnZOSi9W?=
+ =?utf-8?B?NkxrMndUdmYvRWtEQWV0YUsvY29BcVNsU24wZU11U3FTZFE1TVFjQXBSSlpn?=
+ =?utf-8?B?eG1wSS9DdGVXRjRIMGRZdXJaOW50VkgvUG9xYWZFblhvSjBhamFaR2VhMmkx?=
+ =?utf-8?B?aW9NWjJLcE5kU1VQQjFYSStKdDFQdVVOblNnVnJ2eHpHTjY2cGZLUHRHZUhV?=
+ =?utf-8?B?QU1mMjkvdXJPb2M3Smt3Mm9iVklHZ004QUVQbzV6bTNTV0xLVHovc1BXdDd3?=
+ =?utf-8?B?Q0dCY2VyWG44OUJXNDFWcGZkcTBQbG5RZEwzNnhxWENCVXlTOTZTRHZ0aUsy?=
+ =?utf-8?B?ZnEzM2VBMVk5aUx0NEVYTmdsbVZKUWw3cjRNaTJKVWdWVkpzK1owWHh0c3dl?=
+ =?utf-8?B?SjJRTFo2Wll0WmhZWDNtc0J4V0hKSStDekgydTBLZzI0bWc1K2JzUnB0WERQ?=
+ =?utf-8?B?NWJRb2xDV2FHbDBESTVjWWdHbHIyb0MwdUFHZXJqUFR6enYyN21VUWorSWE2?=
+ =?utf-8?B?VElLN3VzM1dqait3WEpJalhzSTY5Q2VtNXAwVG9TRFVBRUxTSzlmWEtsYU1Z?=
+ =?utf-8?B?RTAyQjRZZmpUcEZLNmw2b21YenZvblZDR0VTSWVQNTF1ckI1bG5pWXoxc0ZS?=
+ =?utf-8?B?UHJZQlBTREdSeTNpays0SktWZWhKWjZBNE82RWpDTG5wazhCMS9RL1I4Sisx?=
+ =?utf-8?B?SkszSFhiUXdWWnNSYStRaHlmYUJCR3A5THdoRXZUUk8zTHd2RHNiRFUyWGVt?=
+ =?utf-8?B?Nkg2U1ZjYmF2cXNjL3RkbCtnU0lDSzh4d2VsTndNRHhHNGJTd1RJMlN3c2tw?=
+ =?utf-8?B?UEw3KzlGVHdZMlpNMlMvaFZ4aUt4SXBJUFBwM2E4RTd3eUR2N2pxNVVwWUFW?=
+ =?utf-8?B?ZEZUeitGOUo5ZzRXMGkzN1VKckRTclpnRVRLRjNKdFBPclpvNjZTZkUvOWx1?=
+ =?utf-8?B?SlZWWGZFdGpxTVRhU21PREhscEU1YmtPZ3ZObEpHc2JUR1ZOS3JDdkFuRXBy?=
+ =?utf-8?B?VWgxbE01bnhNZDRRUnpKZmVmOHUza3JKRVpmdzRLVFBCajRKTml4WW91VWxr?=
+ =?utf-8?B?MDBIK2hvMU5LbnZmWkFtTzE5TDQ3WTFmQzdDMUV3V1pwNTlQczJjNWFzNmhn?=
+ =?utf-8?B?ZTVibkozM3FCaExvQXF0K3d3TnFZbU9Xc0NGNXd6b1ZzM20yU1pETDlDb1lV?=
+ =?utf-8?B?MkhIdGhxTWpUSHZFdWFJZVdsdm1lcTdMS3RpOTUwTG90azZpRk5Yb2ZuK3NO?=
+ =?utf-8?B?aFhtWHRnbHRpVWUxWExYaDBYRTNUTnlCckpIaE8zbG05R3BpVHVhS05BZ2VX?=
+ =?utf-8?B?cDhmK3lkemFGb3g0emVwbkxOUjcraGxGYW1mWE1iRVBlNDVNMTNRS3RkemNQ?=
+ =?utf-8?B?cnpYTUZBT0gyMHQrZ1FtYnhVYnNIYkg3bmpQTjdOdU12L2tWeUhXTXZPaVZU?=
+ =?utf-8?B?ZmM2UHNxcjZSLzVNR1dtbXRWeGpIWkZCcUwvaDI2SmsvM3Y0VEJZTzk1NkN4?=
+ =?utf-8?B?L2FpU0EwQ1pCWEkrSkQ4Q0UzT0tNL0UrOE5Ia29lMFhIZ3B1WFdweHBPQmRl?=
+ =?utf-8?B?eUpYdHd0VzBsT2VVdkVnc2dhaldqaWMySU1RL0JiK1VSbHQ0QndjbjVteEtq?=
+ =?utf-8?B?bHcwdTN6MEdnSGtUTHFHSlZBeDliTnR0Q3NYZWlpUnllaHFRYnBUV2lINkQ5?=
+ =?utf-8?B?a0oyQnNtTUt1UVBPeEFLSWlxcTY0dlBHNVVtUzhsVXB6RGVNWE1ycncxOGhz?=
+ =?utf-8?B?MCtjNER0N3JYU3dwUGljaDhpSEhoVEZ0QzdTL1E5NjlacDA2eCtVQS9Rby8x?=
+ =?utf-8?B?MjJLL3puOGRaOEFQUVQzVUFva0g2Y25vWmdmU0RKOENuZXJZc1QrRnVrYmhY?=
+ =?utf-8?B?MitXaVhJZThEWlRkdzZuQ0h1SkIzOENqV242WWxwTktHUVNHN1FVV0xiUS9N?=
+ =?utf-8?B?cGZpRWNzK3FtaEJZSkZaZmc1UlpmbmpNTkhIKzhxa2YzK0lSR3c4VkQxMVlM?=
+ =?utf-8?B?OFI4OGJEV3B2RWpta2kvMkUxZE9JZW9tWUhxSE1wSE9KUEpVR0tKeStGenN0?=
+ =?utf-8?Q?QwTU=3D?=
+Content-Type: multipart/alternative;
+	boundary="_000_BLAPR10MB515619E2EFA6F75FEB06E881E0BD9BLAPR10MB5156namp_"
+MIME-Version: 1.0
+X-OriginatorOrg: digi.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BLAPR10MB5156.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ a6c73f99-c7c1-4a4b-75cf-08da5b5aa997
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Jul 2022 12:10:17.6493
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: abb4cdb7-1b7e-483e-a143-7ebfd1184b9e
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 
+ 5gxCw0PF12f2pB5Kl5Qp22FkoDkvjV4GNbr+0JGL9y53hfq3eV/ZD2vDAlRf535IubVYH3uChLxdkAPhm2nNxw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB4495
+X-BESS-ID: 1656677421-102847-5351-8887-1
+X-BESS-VER: 2019.1_20220627.1822
+X-BESS-Apparent-Source-IP: 104.47.73.175
+X-BESS-Outbound-Spam-Score: 0.00
+X-BESS-Outbound-Spam-Report: Code version 3.2,
+ rules version 3.2.2.241064 [from
+	cloudscan17-193.us-east-2b.ess.aws.cudaops.com]
+	Rule breakdown below
+	 pts rule name              description
+	---- ---------------------- --------------------------------
+	0.00 HTML_MESSAGE           BODY: HTML included in message
+	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound
+X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS112744 scores of
+ KILL_LEVEL=7.0 tests=HTML_MESSAGE, BSF_BESS_OUTBOUND
+X-BESS-BRTS-Status: 1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 01 Jul 2022 11:45:17 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 01 Jul 2022 12:10:27 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97663
+ https://lists.openembedded.org/g/openembedded-devel/message/97664
 
---00000000000035f7c205e2bceb8a
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+--_000_BLAPR10MB515619E2EFA6F75FEB06E881E0BD9BLAPR10MB5156namp_
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Em seg., 27 de jun. de 2022 =C3=A0s 10:39, Javier Viguera via
-lists.openembedded.org <javier.viguera=3Ddigi.com@lists.openembedded.org>
-escreveu:
+DQoNCkZyb206IE90YXZpbyBTYWx2YWRvciA8b3RhdmlvLnNhbHZhZG9yQG9zc3lzdGVtcy5jb20u
+YnI+DQpTZW50OiBGcmlkYXksIEp1bHkgMSwgMjAyMiAxMzo0NQ0KVG86IFZpZ3VlcmEsIEphdmll
+ciA8SmF2aWVyLlZpZ3VlcmFAZGlnaS5jb20+DQpDYzogT3BlbkVtYmVkZGVkIERldmVsIExpc3Qg
+PG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPjsgYWt1c3RlcjgwOCA8
+YWt1c3RlcjgwOEBnbWFpbC5jb20+DQpTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1uZXR3b3JraW5n
+XVtraXJrc3RvbmVdW1BBVENIXSBuZXR3b3JrbWFuYWdlcjogZml4IGJ1aWxkIHdpdGggZW5hYmxl
+ZCBwcHANCg0KUGxlYXNlIHNlbmQgaXQgYWdhaW5zdCBtYXN0ZXIsIGZpcnN0LCB0aGVuIHdlIGNh
+biBhc2sgZm9yIGJhY2twb3J0cy4NCg0KSXTigJlzIGFscmVhZHkgb24gKm1hc3Rlci1uZXh0Kg0K
+DQotLSBqdmlndWVyYQ0KDQo=
 
-> If 'ppp' packageconfig option is enabled, but the build system does NOT
-> have pppd binary installed, the build fails with:
->
-> | Has header "pppd/pppd.h" : YES
-> | Program pppd /sbin/pppd /usr/sbin/pppd found: NO
-> |
-> | ../NetworkManager-1.36.2/meson.build:570:4: ERROR: Assert failed: pppd
-> required but not found, please provide a valid pppd path or use -Dppp=3Df=
-alse
-> to disable it
->
-> This is due to meson trying to look for the 'pppd' binary in the build
-> system when it should not. If the build system does not contain pppd,
-> the build fails.
->
-> Signed-off-by: Javier Viguera <javier.viguera@digi.com>
->
+--_000_BLAPR10MB515619E2EFA6F75FEB06E881E0BD9BLAPR10MB5156namp_
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Please send it against master, first, then we can ask for backports.
+PGh0bWwgeG1sbnM6dj0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp2bWwiIHhtbG5zOm89InVy
+bjpzY2hlbWFzLW1pY3Jvc29mdC1jb206b2ZmaWNlOm9mZmljZSIgeG1sbnM6dz0idXJuOnNjaGVt
+YXMtbWljcm9zb2Z0LWNvbTpvZmZpY2U6d29yZCIgeG1sbnM6bT0iaHR0cDovL3NjaGVtYXMubWlj
+cm9zb2Z0LmNvbS9vZmZpY2UvMjAwNC8xMi9vbW1sIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
+VFIvUkVDLWh0bWw0MCI+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIg
+Y29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxtZXRhIG5hbWU9IkdlbmVyYXRv
+ciIgY29udGVudD0iTWljcm9zb2Z0IFdvcmQgMTUgKGZpbHRlcmVkIG1lZGl1bSkiPg0KPHN0eWxl
+PjwhLS0NCi8qIEZvbnQgRGVmaW5pdGlvbnMgKi8NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6
+V2luZ2RpbmdzOw0KCXBhbm9zZS0xOjUgMCAwIDAgMCAwIDAgMCAwIDA7fQ0KQGZvbnQtZmFjZQ0K
+CXtmb250LWZhbWlseToiQ2FtYnJpYSBNYXRoIjsNCglwYW5vc2UtMToyIDQgNSAzIDUgNCA2IDMg
+MiA0O30NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6Q2FsaWJyaTsNCglwYW5vc2UtMToyIDE1
+IDUgMiAyIDIgNCAzIDIgNDt9DQovKiBTdHlsZSBEZWZpbml0aW9ucyAqLw0KcC5Nc29Ob3JtYWws
+IGxpLk1zb05vcm1hbCwgZGl2Lk1zb05vcm1hbA0KCXttYXJnaW46MGluOw0KCW1hcmdpbi1ib3R0
+b206LjAwMDFwdDsNCglmb250LXNpemU6MTIuMHB0Ow0KCWZvbnQtZmFtaWx5OiJUaW1lcyBOZXcg
+Um9tYW4iLHNlcmlmO30NCmE6bGluaywgc3Bhbi5Nc29IeXBlcmxpbmsNCgl7bXNvLXN0eWxlLXBy
+aW9yaXR5Ojk5Ow0KCWNvbG9yOmJsdWU7DQoJdGV4dC1kZWNvcmF0aW9uOnVuZGVybGluZTt9DQph
+OnZpc2l0ZWQsIHNwYW4uTXNvSHlwZXJsaW5rRm9sbG93ZWQNCgl7bXNvLXN0eWxlLXByaW9yaXR5
+Ojk5Ow0KCWNvbG9yOnB1cnBsZTsNCgl0ZXh0LWRlY29yYXRpb246dW5kZXJsaW5lO30NCnAuTXNv
+TGlzdFBhcmFncmFwaCwgbGkuTXNvTGlzdFBhcmFncmFwaCwgZGl2Lk1zb0xpc3RQYXJhZ3JhcGgN
+Cgl7bXNvLXN0eWxlLXByaW9yaXR5OjM0Ow0KCW1hcmdpbi10b3A6MGluOw0KCW1hcmdpbi1yaWdo
+dDowaW47DQoJbWFyZ2luLWJvdHRvbTowaW47DQoJbWFyZ2luLWxlZnQ6LjVpbjsNCgltYXJnaW4t
+Ym90dG9tOi4wMDAxcHQ7DQoJZm9udC1zaXplOjEyLjBwdDsNCglmb250LWZhbWlseToiVGltZXMg
+TmV3IFJvbWFuIixzZXJpZjt9DQpwLm1zb25vcm1hbDAsIGxpLm1zb25vcm1hbDAsIGRpdi5tc29u
+b3JtYWwwDQoJe21zby1zdHlsZS1uYW1lOm1zb25vcm1hbDsNCgltc28tbWFyZ2luLXRvcC1hbHQ6
+YXV0bzsNCgltYXJnaW4tcmlnaHQ6MGluOw0KCW1zby1tYXJnaW4tYm90dG9tLWFsdDphdXRvOw0K
+CW1hcmdpbi1sZWZ0OjBpbjsNCglmb250LXNpemU6MTIuMHB0Ow0KCWZvbnQtZmFtaWx5OiJUaW1l
+cyBOZXcgUm9tYW4iLHNlcmlmO30NCnNwYW4uRW1haWxTdHlsZTE4DQoJe21zby1zdHlsZS10eXBl
+OnBlcnNvbmFsLXJlcGx5Ow0KCWZvbnQtZmFtaWx5OiJDYWxpYnJpIixzYW5zLXNlcmlmOw0KCWNv
+bG9yOiMxRjQ5N0Q7fQ0KLk1zb0NocERlZmF1bHQNCgl7bXNvLXN0eWxlLXR5cGU6ZXhwb3J0LW9u
+bHk7DQoJZm9udC1zaXplOjEwLjBwdDt9DQpAcGFnZSBXb3JkU2VjdGlvbjENCgl7c2l6ZTo4LjVp
+biAxMS4waW47DQoJbWFyZ2luOjEuMGluIDEuMGluIDEuMGluIDEuMGluO30NCmRpdi5Xb3JkU2Vj
+dGlvbjENCgl7cGFnZTpXb3JkU2VjdGlvbjE7fQ0KLyogTGlzdCBEZWZpbml0aW9ucyAqLw0KQGxp
+c3QgbDANCgl7bXNvLWxpc3QtaWQ6OTAxMzI3OTI2Ow0KCW1zby1saXN0LXR5cGU6aHlicmlkOw0K
+CW1zby1saXN0LXRlbXBsYXRlLWlkczo2NTY1ODY1ODIgMjAwMTM5MTgyMiA2NzY5ODY5MSA2NzY5
+ODY5MyA2NzY5ODY4OSA2NzY5ODY5MSA2NzY5ODY5MyA2NzY5ODY4OSA2NzY5ODY5MSA2NzY5ODY5
+Mzt9DQpAbGlzdCBsMDpsZXZlbDENCgl7bXNvLWxldmVsLXN0YXJ0LWF0OjA7DQoJbXNvLWxldmVs
+LW51bWJlci1mb3JtYXQ6YnVsbGV0Ow0KCW1zby1sZXZlbC10ZXh0Ou+BrjsNCgltc28tbGV2ZWwt
+dGFiLXN0b3A6bm9uZTsNCgltc28tbGV2ZWwtbnVtYmVyLXBvc2l0aW9uOmxlZnQ7DQoJdGV4dC1p
+bmRlbnQ6LS4yNWluOw0KCWZvbnQtZmFtaWx5OldpbmdkaW5nczsNCgltc28tZmFyZWFzdC1mb250
+LWZhbWlseTpDYWxpYnJpOw0KCW1zby1iaWRpLWZvbnQtZmFtaWx5OiJUaW1lcyBOZXcgUm9tYW4i
+O30NCkBsaXN0IGwwOmxldmVsMg0KCXttc28tbGV2ZWwtbnVtYmVyLWZvcm1hdDpidWxsZXQ7DQoJ
+bXNvLWxldmVsLXRleHQ6bzsNCgltc28tbGV2ZWwtdGFiLXN0b3A6bm9uZTsNCgltc28tbGV2ZWwt
+bnVtYmVyLXBvc2l0aW9uOmxlZnQ7DQoJdGV4dC1pbmRlbnQ6LS4yNWluOw0KCWZvbnQtZmFtaWx5
+OiJDb3VyaWVyIE5ldyI7fQ0KQGxpc3QgbDA6bGV2ZWwzDQoJe21zby1sZXZlbC1udW1iZXItZm9y
+bWF0OmJ1bGxldDsNCgltc28tbGV2ZWwtdGV4dDrvgqc7DQoJbXNvLWxldmVsLXRhYi1zdG9wOm5v
+bmU7DQoJbXNvLWxldmVsLW51bWJlci1wb3NpdGlvbjpsZWZ0Ow0KCXRleHQtaW5kZW50Oi0uMjVp
+bjsNCglmb250LWZhbWlseTpXaW5nZGluZ3M7fQ0KQGxpc3QgbDA6bGV2ZWw0DQoJe21zby1sZXZl
+bC1udW1iZXItZm9ybWF0OmJ1bGxldDsNCgltc28tbGV2ZWwtdGV4dDrvgrc7DQoJbXNvLWxldmVs
+LXRhYi1zdG9wOm5vbmU7DQoJbXNvLWxldmVsLW51bWJlci1wb3NpdGlvbjpsZWZ0Ow0KCXRleHQt
+aW5kZW50Oi0uMjVpbjsNCglmb250LWZhbWlseTpTeW1ib2w7fQ0KQGxpc3QgbDA6bGV2ZWw1DQoJ
+e21zby1sZXZlbC1udW1iZXItZm9ybWF0OmJ1bGxldDsNCgltc28tbGV2ZWwtdGV4dDpvOw0KCW1z
+by1sZXZlbC10YWItc3RvcDpub25lOw0KCW1zby1sZXZlbC1udW1iZXItcG9zaXRpb246bGVmdDsN
+Cgl0ZXh0LWluZGVudDotLjI1aW47DQoJZm9udC1mYW1pbHk6IkNvdXJpZXIgTmV3Ijt9DQpAbGlz
+dCBsMDpsZXZlbDYNCgl7bXNvLWxldmVsLW51bWJlci1mb3JtYXQ6YnVsbGV0Ow0KCW1zby1sZXZl
+bC10ZXh0Ou+CpzsNCgltc28tbGV2ZWwtdGFiLXN0b3A6bm9uZTsNCgltc28tbGV2ZWwtbnVtYmVy
+LXBvc2l0aW9uOmxlZnQ7DQoJdGV4dC1pbmRlbnQ6LS4yNWluOw0KCWZvbnQtZmFtaWx5Oldpbmdk
+aW5nczt9DQpAbGlzdCBsMDpsZXZlbDcNCgl7bXNvLWxldmVsLW51bWJlci1mb3JtYXQ6YnVsbGV0
+Ow0KCW1zby1sZXZlbC10ZXh0Ou+CtzsNCgltc28tbGV2ZWwtdGFiLXN0b3A6bm9uZTsNCgltc28t
+bGV2ZWwtbnVtYmVyLXBvc2l0aW9uOmxlZnQ7DQoJdGV4dC1pbmRlbnQ6LS4yNWluOw0KCWZvbnQt
+ZmFtaWx5OlN5bWJvbDt9DQpAbGlzdCBsMDpsZXZlbDgNCgl7bXNvLWxldmVsLW51bWJlci1mb3Jt
+YXQ6YnVsbGV0Ow0KCW1zby1sZXZlbC10ZXh0Om87DQoJbXNvLWxldmVsLXRhYi1zdG9wOm5vbmU7
+DQoJbXNvLWxldmVsLW51bWJlci1wb3NpdGlvbjpsZWZ0Ow0KCXRleHQtaW5kZW50Oi0uMjVpbjsN
+Cglmb250LWZhbWlseToiQ291cmllciBOZXciO30NCkBsaXN0IGwwOmxldmVsOQ0KCXttc28tbGV2
+ZWwtbnVtYmVyLWZvcm1hdDpidWxsZXQ7DQoJbXNvLWxldmVsLXRleHQ674KnOw0KCW1zby1sZXZl
+bC10YWItc3RvcDpub25lOw0KCW1zby1sZXZlbC1udW1iZXItcG9zaXRpb246bGVmdDsNCgl0ZXh0
+LWluZGVudDotLjI1aW47DQoJZm9udC1mYW1pbHk6V2luZ2RpbmdzO30NCm9sDQoJe21hcmdpbi1i
+b3R0b206MGluO30NCnVsDQoJe21hcmdpbi1ib3R0b206MGluO30NCi0tPjwvc3R5bGU+PCEtLVtp
+ZiBndGUgbXNvIDldPjx4bWw+DQo8bzpzaGFwZWRlZmF1bHRzIHY6ZXh0PSJlZGl0IiBzcGlkbWF4
+PSIxMDI2IiAvPg0KPC94bWw+PCFbZW5kaWZdLS0+PCEtLVtpZiBndGUgbXNvIDldPjx4bWw+DQo8
+bzpzaGFwZWxheW91dCB2OmV4dD0iZWRpdCI+DQo8bzppZG1hcCB2OmV4dD0iZWRpdCIgZGF0YT0i
+MSIgLz4NCjwvbzpzaGFwZWxheW91dD48L3htbD48IVtlbmRpZl0tLT4NCjwvaGVhZD4NCjxib2R5
+IGxhbmc9IkVOLVVTIiBsaW5rPSJibHVlIiB2bGluaz0icHVycGxlIj4NCjxkaXYgY2xhc3M9Ildv
+cmRTZWN0aW9uMSI+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBzdHlsZT0iZm9udC1zaXpl
+OjExLjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LHNhbnMtc2VyaWY7Y29sb3I6
+IzFGNDk3RCI+PG86cD4mbmJzcDs8L286cD48L3NwYW4+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1h
+bCI+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZToxMS4wcHQ7Zm9udC1mYW1pbHk6JnF1b3Q7Q2FsaWJy
+aSZxdW90OyxzYW5zLXNlcmlmO2NvbG9yOiMxRjQ5N0QiPjxvOnA+Jm5ic3A7PC9vOnA+PC9zcGFu
+PjwvcD4NCjxkaXY+DQo8ZGl2IHN0eWxlPSJib3JkZXI6bm9uZTtib3JkZXItdG9wOnNvbGlkICNF
+MUUxRTEgMS4wcHQ7cGFkZGluZzozLjBwdCAwaW4gMGluIDBpbiI+DQo8cCBjbGFzcz0iTXNvTm9y
+bWFsIj48Yj48c3BhbiBzdHlsZT0iZm9udC1zaXplOjExLjBwdDtmb250LWZhbWlseTomcXVvdDtD
+YWxpYnJpJnF1b3Q7LHNhbnMtc2VyaWYiPkZyb206PC9zcGFuPjwvYj48c3BhbiBzdHlsZT0iZm9u
+dC1zaXplOjExLjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LHNhbnMtc2VyaWYi
+PiBPdGF2aW8gU2FsdmFkb3IgJmx0O290YXZpby5zYWx2YWRvckBvc3N5c3RlbXMuY29tLmJyJmd0
+Ow0KPGJyPg0KPGI+U2VudDo8L2I+IEZyaWRheSwgSnVseSAxLCAyMDIyIDEzOjQ1PGJyPg0KPGI+
+VG86PC9iPiBWaWd1ZXJhLCBKYXZpZXIgJmx0O0phdmllci5WaWd1ZXJhQGRpZ2kuY29tJmd0Ozxi
+cj4NCjxiPkNjOjwvYj4gT3BlbkVtYmVkZGVkIERldmVsIExpc3QgJmx0O29wZW5lbWJlZGRlZC1k
+ZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnJmd0OzsgYWt1c3RlcjgwOCAmbHQ7YWt1c3Rlcjgw
+OEBnbWFpbC5jb20mZ3Q7PGJyPg0KPGI+U3ViamVjdDo8L2I+IFJlOiBbb2VdIFttZXRhLW5ldHdv
+cmtpbmddW2tpcmtzdG9uZV1bUEFUQ0hdIG5ldHdvcmttYW5hZ2VyOiBmaXggYnVpbGQgd2l0aCBl
+bmFibGVkIHBwcDxvOnA+PC9vOnA+PC9zcGFuPjwvcD4NCjwvZGl2Pg0KPC9kaXY+DQo8ZGl2Pg0K
+PGRpdj4NCjxkaXY+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PG86cD4mbmJzcDs8L286
+cD48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj5QbGVhc2Ugc2VuZCBp
+dCBhZ2FpbnN0IG1hc3RlciwgZmlyc3QsIHRoZW4gd2UgY2FuIGFzayBmb3IgYmFja3BvcnRzLjxv
+OnA+PC9vOnA+PC9wPg0KPC9kaXY+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+Jm5ic3A7
+PG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBzdHlsZT0iZm9udC1z
+aXplOjExLjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LHNhbnMtc2VyaWY7Y29s
+b3I6IzFGNDk3RCI+SXTigJlzIGFscmVhZHkgb24gKjxiPm1hc3Rlci1uZXh0PC9iPio8bzpwPjwv
+bzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBzdHlsZT0iZm9udC1z
+aXplOjExLjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1b3Q7LHNhbnMtc2VyaWY7Y29s
+b3I6IzFGNDk3RCI+PG86cD4mbmJzcDs8L286cD48L3NwYW4+PC9wPg0KPHAgY2xhc3M9Ik1zb05v
+cm1hbCI+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZToxMS4wcHQ7Zm9udC1mYW1pbHk6JnF1b3Q7Q2Fs
+aWJyaSZxdW90OyxzYW5zLXNlcmlmO2NvbG9yOiMxRjQ5N0QiPi0tIGp2aWd1ZXJhPG86cD48L286
+cD48L3NwYW4+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gc3R5bGU9ImZvbnQtc2l6
+ZToxMS4wcHQ7Zm9udC1mYW1pbHk6JnF1b3Q7Q2FsaWJyaSZxdW90OyxzYW5zLXNlcmlmO2NvbG9y
+OiMxRjQ5N0QiPjxvOnA+Jm5ic3A7PC9vOnA+PC9zcGFuPjwvcD4NCjwvZGl2Pg0KPC9kaXY+DQo8
+L2Rpdj4NCjwvZGl2Pg0KPC9kaXY+DQo8L2JvZHk+DQo8L2h0bWw+DQo=
 
---=20
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
-
---00000000000035f7c205e2bceb8a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">Em seg., 27 de jun. de 2022 =C3=A0s 1=
-0:39, Javier Viguera via <a href=3D"http://lists.openembedded.org">lists.op=
-enembedded.org</a> &lt;javier.viguera=3D<a href=3D"mailto:digi.com@lists.op=
-enembedded.org">digi.com@lists.openembedded.org</a>&gt; escreveu:<br></div>=
-<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
-left:1px solid rgb(204,204,204);padding-left:1ex">If &#39;ppp&#39; packagec=
-onfig option is enabled, but the build system does NOT<br>
-have pppd binary installed, the build fails with:<br>
-<br>
-| Has header &quot;pppd/pppd.h&quot; : YES<br>
-| Program pppd /sbin/pppd /usr/sbin/pppd found: NO<br>
-|<br>
-| ../NetworkManager-1.36.2/meson.build:570:4: ERROR: Assert failed: pppd re=
-quired but not found, please provide a valid pppd path or use -Dppp=3Dfalse=
- to disable it<br>
-<br>
-This is due to meson trying to look for the &#39;pppd&#39; binary in the bu=
-ild<br>
-system when it should not. If the build system does not contain pppd,<br>
-the build fails.<br>
-<br>
-Signed-off-by: Javier Viguera &lt;<a href=3D"mailto:javier.viguera@digi.com=
-" target=3D"_blank">javier.viguera@digi.com</a>&gt;<br></blockquote><div><b=
-r></div><div>Please send it against master, first, then we can ask for back=
-ports.</div><div>=C2=A0</div></div>-- <br><div dir=3D"ltr" class=3D"gmail_s=
-ignature">Otavio Salvador =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 O.S. Systems<br><a href=3D=
-"http://www.ossystems.com.br" target=3D"_blank">http://www.ossystems.com.br=
-</a> =C2=A0 =C2=A0 =C2=A0 =C2=A0<a href=3D"http://code.ossystems.com.br" ta=
-rget=3D"_blank">http://code.ossystems.com.br</a><br>Mobile: +55 (53) 9 9981=
--7854 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Mobile: +1 (347) 903-9750</div></di=
-v>
-
---00000000000035f7c205e2bceb8a--
+--_000_BLAPR10MB515619E2EFA6F75FEB06E881E0BD9BLAPR10MB5156namp_--
 
