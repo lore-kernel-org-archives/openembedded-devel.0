@@ -2,182 +2,234 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36BE7C43334
-	for <webhook@archiver.kernel.org>; Fri,  1 Jul 2022 13:21:58 +0000 (UTC)
-Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com
- [209.85.222.180])
- by mx.groups.io with SMTP id smtpd.web09.38396.1656681712989004571
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 30823C433EF
+	for <webhook@archiver.kernel.org>; Fri,  1 Jul 2022 13:22:48 +0000 (UTC)
+Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com
+ [209.85.222.176])
+ by mx.groups.io with SMTP id smtpd.web12.38326.1656681760973579290
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 Jul 2022 06:21:53 -0700
+ Fri, 01 Jul 2022 06:22:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ZUT+ZrBi;
- spf=pass (domain: gmail.com, ip: 209.85.222.180,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=N5WyVHBX;
+ spf=pass (domain: gmail.com, ip: 209.85.222.176,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f180.google.com with SMTP id z7so1779474qko.8
+Received: by mail-qk1-f176.google.com with SMTP id p11so1765611qkg.12
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 Jul 2022 06:21:52 -0700 (PDT)
+ Fri, 01 Jul 2022 06:22:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=0Y1qT2rx/ZT9ru5uQ8OC6fobojFZMR2qxPoIiz8aNs4=;
-        b=ZUT+ZrBiAKEO1pmsFPXLTZqbIOKUq/a3lsJwu5v8FCZJ8Hq+fgi6GYWxuEZ5AkrpTI
-         dmj2tfscOgmpJuky3L+/3c5xtBaB5H/IE51rZC4G4jmuOqpt0AyHA7muj5/COEov+0bY
-         C0iFRiXI6AyOvo8gpMI1DhMfBUlenKEmmB9BbPpoUPeutosX4Hzdiou2hHYksO9U6TZ/
-         zNR4zYve/yiThgsbC7XSQIuLPXnoY0o7LIP8t+FWZAAjgpCh9C/dRoBobyykiCTstamr
-         FHM5WlrW5X4yQw9ehf9+ZT5qjl3EeAcG5la+pyhRdVMKBgMh7/YQBMO4OYz0iEnzhwRG
-         amFw==
+        bh=QdJ9pNoDID7qltbW2jmrJL/xeTLpB0y4izJaL/BAJJA=;
+        b=N5WyVHBX2CVsoj7P9z19ZDROhKfPy2oaKsweBDa+oaH5Lwpogb2eIkJlHMqMz9qGpy
+         oN5hn+Mfd2ZSr+zhdqL9FcdCeyY+3fZRYLzISqKp/sVJbxDwByEKJLzNUuDyYhNVPkpV
+         yFL0TEkCnZoKpbfc8t3D1iWVEEqpN6BQdjBhoCn0E0F9yr0KSF5MymLHwbgwPvvqVzHV
+         lHB1d4XEbmvR5vrrnzwGauGKA35uXbYzK7j9M77UYMLbaIY6p7vBXt3QkCFSeTCIHvUX
+         6Z9yNHfnSCGOHI6irGJ4HVOPzNB9KIvvNcbpQfN/xKEeb5Xp2XHzs0N/Ao6P8ACFh1er
+         gKzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=0Y1qT2rx/ZT9ru5uQ8OC6fobojFZMR2qxPoIiz8aNs4=;
-        b=owPegRXuqpBlPxhHYXBZQnfnEphA9eJYS+YQWMhIpjSN87SkVLKVOm0qwYWamiPZPE
-         GfCAOE7GLXvoGDQrsedULRIrOYdwH3dRtr237QdbxarYhlq4Y0yB4Q1LcQ9bx9MYa1Fo
-         AjXcnmr/PcLPjtsMKfyERTsBLLiPYTzgxsqnndIjGkkO+sCpYoTsjqdJIs639cZoIrxy
-         YDNHB4cfFPVIvioY5qaH4FwQXbaDJQ3myrgX4AdMDC2VGDIwAjNcpk8dbxONZN2GG3pS
-         h/ZstEjbKt9Mus1+nAPQxgeja2f3FWYQU7l8UXfhSyr3/lt8+AeiGIHWlBnW0xE+S3pI
-         jSOA==
-X-Gm-Message-State: AJIora+0Ok0y61P1UPrPR9iUZGzNBbfz/0DgdFHcX1KDoJLCZtpBDANA
-	U0rLZI6fnKvvapnzwt9F56Bn4nfXFqvZS3gaKBnKRnot3jc=
+        bh=QdJ9pNoDID7qltbW2jmrJL/xeTLpB0y4izJaL/BAJJA=;
+        b=kwx7IhjtDSyHDwdPOOpM2Gs4E+c0qnwQKDVH7fUCGIfkjU1iNWDmI5jxaqnytFQG+o
+         /tK76SL8dwMJ9HRKDfgDBYllnO8jdB7YKE9HMUYinxcEeu2cUuc37M5bosomAe3Vgqk7
+         aeGRaY9b0GBlPcYEky9ZBNd1Wli54XTOldVA+HZYzOnpcaSr5MyzvK3gHvixv5aw64OL
+         tauYt2mUtEetduXBBETUCKY/dpfLOqjib+IqvVmDU3lqHrwsh017U74GY+HS7zQZjqHl
+         88g/+8TqLU7EYMu1tU5QHeQAFElhYTiPxAvh7SNnh6vXIGZi5R9XAaJD35HupOHCwReG
+         9UGA==
+X-Gm-Message-State: AJIora8A2x22NCVYyYFmolNbSFLW84Td4+SE6HJgUVoqnhWABHawGOMP
+	hGHRhZGBBzg/5Fftfd682OE1WyUmpDU8224eDMBmjYD/F6I=
 X-Google-Smtp-Source: 
- AGRyM1uPgrtxixGFffZ9wBPrrYpgbogYsYVkleVMkA/AeHBU5FdXqiAtli2aYiWC/cyrRnEF1LaZFtACiYlbo9lIr2k=
-X-Received: by 2002:a37:a215:0:b0:6af:cf8:dda7 with SMTP id
- l21-20020a37a215000000b006af0cf8dda7mr10373161qke.180.1656681711931; Fri, 01
- Jul 2022 06:21:51 -0700 (PDT)
+ AGRyM1uMJmj5GZOlIFWPKGMOD7qIR9WJN1AbOMnvBGYtZqSMQcPX0T5gW5KhHsAGTbEF2tlUBVIHf7ODJBco9bJ4klY=
+X-Received: by 2002:a05:620a:1786:b0:6af:6e0f:596c with SMTP id
+ ay6-20020a05620a178600b006af6e0f596cmr10465660qkb.227.1656681759839; Fri, 01
+ Jul 2022 06:22:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220627133914.14615-1-javier.viguera@digi.com>
- <CAP9ODKqZTpwwUP8QiZiRVFPNT-fUhv8zm6sboChC7U72=X9gYw@mail.gmail.com>
-In-Reply-To: 
- <CAP9ODKqZTpwwUP8QiZiRVFPNT-fUhv8zm6sboChC7U72=X9gYw@mail.gmail.com>
+References: <20220701113559.290350-1-ross.burton@arm.com>
+In-Reply-To: <20220701113559.290350-1-ross.burton@arm.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 1 Jul 2022 09:21:41 -0400
+Date: Fri, 1 Jul 2022 09:22:29 -0400
 Message-ID: 
- <CAMKF1soAZU07jT0+Py=BKXb=QQQJkUSh4N6tY0GvdqH1Bt4GBA@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][kirkstone][PATCH] networkmanager: fix
- build with enabled ppp
-To: Otavio Salvador <otavio.salvador@ossystems.com.br>
-Cc: Javier Viguera <javier.viguera@digi.com>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	akuster808 <akuster808@gmail.com>
-Content-Type: multipart/alternative; boundary="000000000000f2180f05e2be44fc"
+ <CAMKF1sp-1JYgxf-WJcoEBo2qY90fDJf9rjt8BLm=DTBWecy8-A@mail.gmail.com>
+Subject: Re: [oe] [PATCH 1/3] python3-hatchling: remove (now in oe-core)
+To: Ross Burton <ross.burton@arm.com>
+Cc: nd@arm.com, openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000cd1b3405e2be47af"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 01 Jul 2022 13:21:58 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 01 Jul 2022 13:22:48 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97667
+ https://lists.openembedded.org/g/openembedded-devel/message/97668
 
---000000000000f2180f05e2be44fc
+--000000000000cd1b3405e2be47af
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jul 1, 2022 at 7:45 AM Otavio Salvador <
-otavio.salvador@ossystems.com.br> wrote:
+I have staged a patch to remove all these in one patch yesterday
 
->
->
-> Em seg., 27 de jun. de 2022 =C3=A0s 10:39, Javier Viguera via
-> lists.openembedded.org <javier.viguera=3Ddigi.com@lists.openembedded.org>
-> escreveu:
->
->> If 'ppp' packageconfig option is enabled, but the build system does NOT
->> have pppd binary installed, the build fails with:
->>
->> | Has header "pppd/pppd.h" : YES
->> | Program pppd /sbin/pppd /usr/sbin/pppd found: NO
->> |
->> | ../NetworkManager-1.36.2/meson.build:570:4: ERROR: Assert failed: pppd
->> required but not found, please provide a valid pppd path or use -Dppp=3D=
-false
->> to disable it
->>
->> This is due to meson trying to look for the 'pppd' binary in the build
->> system when it should not. If the build system does not contain pppd,
->> the build fails.
->>
->> Signed-off-by: Javier Viguera <javier.viguera@digi.com>
->>
->
-> Please send it against master, first, then we can ask for backports.
->
+On Fri, Jul 1, 2022 at 7:36 AM Ross Burton <ross.burton@arm.com> wrote:
 
-I have staged it with a bit of editing
-
-
+> As of 846e80 this is now in oe-core.
+>
+> Signed-off-by: Ross Burton <ross.burton@arm.com>
+> ---
+>  meta-python/classes/python_hatchling.bbclass  |  5 -----
+>  .../python/python3-hatchling_1.3.0.bb         | 21 -------------------
+>  2 files changed, 26 deletions(-)
+>  delete mode 100644 meta-python/classes/python_hatchling.bbclass
+>  delete mode 100644 meta-python/recipes-devtools/python/
+> python3-hatchling_1.3.0.bb
+>
+> diff --git a/meta-python/classes/python_hatchling.bbclass
+> b/meta-python/classes/python_hatchling.bbclass
+> deleted file mode 100644
+> index b3cbe23601..0000000000
+> --- a/meta-python/classes/python_hatchling.bbclass
+> +++ /dev/null
+> @@ -1,5 +0,0 @@
+> -inherit python_pep517 python3native python3-dir setuptools3-base
+> -
+> -DEPENDS += "python3-hatchling-native"
+> -
+> -PEP517_BUILD_API = "hatchling.build"
+> diff --git a/meta-python/recipes-devtools/python/
+> python3-hatchling_1.3.0.bb b/meta-python/recipes-devtools/python/
+> python3-hatchling_1.3.0.bb
+> deleted file mode 100644
+> index a6550a9732..0000000000
+> --- a/meta-python/recipes-devtools/python/python3-hatchling_1.3.0.bb
+> +++ /dev/null
+> @@ -1,21 +0,0 @@
+> -SUMMARY = "The extensible, standards compliant build backend used by
+> Hatch"
+> -HOMEPAGE = "https://hatch.pypa.io/latest/"
+> -LICENSE = "MIT"
+> -LIC_FILES_CHKSUM =
+> "file://LICENSE.txt;md5=cbe2fd33fc9297692812fc94b7d27fd9"
+> -
+> -inherit pypi python_hatchling
+> -
+> -DEPENDS += "python3-pluggy-native python3-tomli-native
+> python3-pathspec-native python3-packaging-native python3-editables-native"
+> -DEPENDS:remove:class-native = "python3-hatchling-native"
+> -
+> -SRC_URI[sha256sum] =
+> "1401d45d3dd6a5910f64d539acaa943486d5e8b7dda1a97f2b0040fdddc5b85e"
+> -
+> -# Until we have a proper tool to invoke PEP517 builds, hatchling can't
+> -# bootstrap itself automatically.
+> -PEP517_BUILD_API = "hatchling.ouroboros"
+> -
+> -do_compile:prepend() {
+> -    export PYTHONPATH=src
+> -}
+> -
+> -BBCLASSEXTEND = "native nativesdk"
 > --
-> Otavio Salvador                             O.S. Systems
-> http://www.ossystems.com.br        http://code.ossystems.com.br
-> Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
+> 2.25.1
 >
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#97663):
-> https://lists.openembedded.org/g/openembedded-devel/message/97663
-> Mute This Topic: https://lists.openembedded.org/mt/92020681/1997914
+> View/Reply Online (#97660):
+> https://lists.openembedded.org/g/openembedded-devel/message/97660
+> Mute This Topic: https://lists.openembedded.org/mt/92106450/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
 > raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> -=-=-=-=-=-=-=-=-=-=-=-
 >
 >
 
---000000000000f2180f05e2be44fc
+--000000000000cd1b3405e2be47af
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Fri, Jul 1, 2022 at 7:45 AM Otavio Salvador &lt;<a href=
-=3D"mailto:otavio.salvador@ossystems.com.br">otavio.salvador@ossystems.com.=
-br</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margi=
-n:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><div dir=3D"ltr">=
-<div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
-class=3D"gmail_attr">Em seg., 27 de jun. de 2022 =C3=A0s 10:39, Javier Vigu=
-era via <a href=3D"http://lists.openembedded.org" target=3D"_blank">lists.o=
-penembedded.org</a> &lt;javier.viguera=3D<a href=3D"mailto:digi.com@lists.o=
-penembedded.org" target=3D"_blank">digi.com@lists.openembedded.org</a>&gt; =
-escreveu:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0p=
-x 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">If &#3=
-9;ppp&#39; packageconfig option is enabled, but the build system does NOT<b=
-r>
-have pppd binary installed, the build fails with:<br>
+<div dir=3D"auto">I have staged a patch to remove all these in one patch ye=
+sterday=C2=A0</div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" cla=
+ss=3D"gmail_attr">On Fri, Jul 1, 2022 at 7:36 AM Ross Burton &lt;<a href=3D=
+"mailto:ross.burton@arm.com">ross.burton@arm.com</a>&gt; wrote:<br></div><b=
+lockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px =
+#ccc solid;padding-left:1ex">As of 846e80 this is now in oe-core.<br>
 <br>
-| Has header &quot;pppd/pppd.h&quot; : YES<br>
-| Program pppd /sbin/pppd /usr/sbin/pppd found: NO<br>
-|<br>
-| ../NetworkManager-1.36.2/meson.build:570:4: ERROR: Assert failed: pppd re=
-quired but not found, please provide a valid pppd path or use -Dppp=3Dfalse=
- to disable it<br>
+Signed-off-by: Ross Burton &lt;<a href=3D"mailto:ross.burton@arm.com" targe=
+t=3D"_blank">ross.burton@arm.com</a>&gt;<br>
+---<br>
+=C2=A0meta-python/classes/python_hatchling.bbclass=C2=A0 |=C2=A0 5 -----<br=
+>
+=C2=A0.../python/<a href=3D"http://python3-hatchling_1.3.0.bb" rel=3D"noref=
+errer" target=3D"_blank">python3-hatchling_1.3.0.bb</a>=C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0| 21 -------------------<br>
+=C2=A02 files changed, 26 deletions(-)<br>
+=C2=A0delete mode 100644 meta-python/classes/python_hatchling.bbclass<br>
+=C2=A0delete mode 100644 meta-python/recipes-devtools/python/<a href=3D"htt=
+p://python3-hatchling_1.3.0.bb" rel=3D"noreferrer" target=3D"_blank">python=
+3-hatchling_1.3.0.bb</a><br>
 <br>
-This is due to meson trying to look for the &#39;pppd&#39; binary in the bu=
-ild<br>
-system when it should not. If the build system does not contain pppd,<br>
-the build fails.<br>
+diff --git a/meta-python/classes/python_hatchling.bbclass b/meta-python/cla=
+sses/python_hatchling.bbclass<br>
+deleted file mode 100644<br>
+index b3cbe23601..0000000000<br>
+--- a/meta-python/classes/python_hatchling.bbclass<br>
++++ /dev/null<br>
+@@ -1,5 +0,0 @@<br>
+-inherit python_pep517 python3native python3-dir setuptools3-base<br>
+-<br>
+-DEPENDS +=3D &quot;python3-hatchling-native&quot;<br>
+-<br>
+-PEP517_BUILD_API =3D &quot;hatchling.build&quot;<br>
+diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
+hatchling_1.3.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-hatchling_=
+1.3.0.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python=
+3-hatchling_1.3.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-hatchlin=
+g_1.3.0.bb</a><br>
+deleted file mode 100644<br>
+index a6550a9732..0000000000<br>
+--- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-hatchli=
+ng_1.3.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-hatchling_1.3.0.b=
+b</a><br>
++++ /dev/null<br>
+@@ -1,21 +0,0 @@<br>
+-SUMMARY =3D &quot;The extensible, standards compliant build backend used b=
+y Hatch&quot;<br>
+-HOMEPAGE =3D &quot;<a href=3D"https://hatch.pypa.io/latest/" rel=3D"norefe=
+rrer" target=3D"_blank">https://hatch.pypa.io/latest/</a>&quot;<br>
+-LICENSE =3D &quot;MIT&quot;<br>
+-LIC_FILES_CHKSUM =3D &quot;file://LICENSE.txt;md5=3Dcbe2fd33fc9297692812fc=
+94b7d27fd9&quot;<br>
+-<br>
+-inherit pypi python_hatchling<br>
+-<br>
+-DEPENDS +=3D &quot;python3-pluggy-native python3-tomli-native python3-path=
+spec-native python3-packaging-native python3-editables-native&quot;<br>
+-DEPENDS:remove:class-native =3D &quot;python3-hatchling-native&quot;<br>
+-<br>
+-SRC_URI[sha256sum] =3D &quot;1401d45d3dd6a5910f64d539acaa943486d5e8b7dda1a=
+97f2b0040fdddc5b85e&quot;<br>
+-<br>
+-# Until we have a proper tool to invoke PEP517 builds, hatchling can&#39;t=
 <br>
-Signed-off-by: Javier Viguera &lt;<a href=3D"mailto:javier.viguera@digi.com=
-" target=3D"_blank">javier.viguera@digi.com</a>&gt;<br></blockquote><div><b=
-r></div><div>Please send it against master, first, then we can ask for back=
-ports.</div></div></div></blockquote><div dir=3D"auto"><br></div><div dir=
-=3D"auto">I have staged it with a bit of editing=C2=A0</div><div dir=3D"aut=
-o"><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;b=
-order-left:1px #ccc solid;padding-left:1ex"><div dir=3D"ltr"><div class=3D"=
-gmail_quote"><div dir=3D"auto"></div><div>=C2=A0</div></div>-- <br><div dir=
-=3D"ltr">Otavio Salvador =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 O.S. Systems<br><a href=3D=
-"http://www.ossystems.com.br" target=3D"_blank">http://www.ossystems.com.br=
-</a> =C2=A0 =C2=A0 =C2=A0 =C2=A0<a href=3D"http://code.ossystems.com.br" ta=
-rget=3D"_blank">http://code.ossystems.com.br</a><br>Mobile: +55 (53) 9 9981=
--7854 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Mobile: +1 (347) 903-9750</div></di=
-v>
+-# bootstrap itself automatically.<br>
+-PEP517_BUILD_API =3D &quot;hatchling.ouroboros&quot;<br>
+-<br>
+-do_compile:prepend() {<br>
+-=C2=A0 =C2=A0 export PYTHONPATH=3Dsrc<br>
+-}<br>
+-<br>
+-BBCLASSEXTEND =3D &quot;native nativesdk&quot;<br>
+-- <br>
+2.25.1<br>
+<br>
 <br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 Links: You receive all messages sent to this group.<br>
-View/Reply Online (#97663): <a href=3D"https://lists.openembedded.org/g/ope=
-nembedded-devel/message/97663" rel=3D"noreferrer" target=3D"_blank">https:/=
-/lists.openembedded.org/g/openembedded-devel/message/97663</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/92020681/1997=
+View/Reply Online (#97660): <a href=3D"https://lists.openembedded.org/g/ope=
+nembedded-devel/message/97660" rel=3D"noreferrer" target=3D"_blank">https:/=
+/lists.openembedded.org/g/openembedded-devel/message/97660</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/92106450/1997=
 914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/92020681/1997914</a><br>
+/92106450/1997914</a><br>
 Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
 d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
 ><br>
@@ -189,5 +241,5 @@ et=3D"_blank">raj.khem@gmail.com</a>]<br>
 <br>
 </blockquote></div></div>
 
---000000000000f2180f05e2be44fc--
+--000000000000cd1b3405e2be47af--
 
