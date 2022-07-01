@@ -2,50 +2,50 @@ Return-Path: <ranjitsinh.rathod@kpit.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D4013C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF48FCCA483
 	for <webhook@archiver.kernel.org>; Fri,  1 Jul 2022 08:22:16 +0000 (UTC)
 Received: from IND01-BMX-obe.outbound.protection.outlook.com
  (IND01-BMX-obe.outbound.protection.outlook.com [40.107.239.67])
  by mx.groups.io with SMTP id smtpd.web08.35522.1656663731775507795
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 Jul 2022 01:22:14 -0700
+ Fri, 01 Jul 2022 01:22:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kpit.com header.s=selector1 header.b=gytbYcmS;
+ dkim=pass header.i=@kpit.com header.s=selector1 header.b=GZb4CmtL;
  spf=pass (domain: kpit.com, ip: 40.107.239.67,
  mailfrom: ranjitsinh.rathod@kpit.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YBB9Prl7dqGPXiKaQNwebkumDRo+78oi9fwSosCn6YOkD8v+XOuWtfUGaP9p3V7t/aXyntMNN/xpNRCymS35Z2+KllQmFyxhdr2oSt5yrREds24WADR8bcBjDw7zbM9jG9DiPz8ut2LHX/FoTJmQDFqNnJJ2YYq2xMzTMI2CcDi1L1NttH0QKnRopHlD9WIM0WHSSxJJBPfEPJCRv6egZab8LqyDPXUJi7X//nAeR36w2uGFL7dAr6ZtecbC4wZTEeGxXgBMXJ5qfLFAzJO6IzOOhCP8pnUTiox/6aagagX74gTHkEoYHVgJdW3hLQYZKr3/SWeJ+/Ps5H5ztAlptg==
+ b=itnyAKTiUMedEfZwoT2Y8Epyo3TKXD98qiSG7Wfz1S975iJCfRXl/DoKVPze3E4RVrUpImoWzQHODbvLSsVLJct7ILa/yktEwQ/Zfzri8xiXMqCXxceMKoeL9gWOW2sX2urJleKIK3UM/OMN1ov1OF/ek8GShAu8aMyJ3FZ9F/Ow+CQRoq61AwYMCp0Jn20P3Yuob0WcNCIiKqu4gQYYyRnfojbxBmRayvfllPmqw6mC3s4643ODmmWxHkyPO1HNEQ1nhvwyCpZ2tvY9LcKCTIE/23ETRTVjHSFQSfaponGUc6Fb+ishQ9gqrpl9kPMmDZGuS1IoT+rsURZu83sLaw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=C6rJVDMBSj49NUcvYNPIToVQYNO+mZnK3SrFVIdsHPQ=;
- b=KWWxOsV+MwdE0uHxbbBoGnBd/JQu5A4PQX6uKkVZaBQVt8V0ODhuNdrcwBHEk5gQtXeplIqbGXhgLhN914PEEwVIe0UdqnQHOTpY+vfqYkompKdeSBlkm0G7spMA0neiKlBg1BJGI2MCkdZz037aPnTlqzQLtHZOAwa11qhdt/aTyWvBjk7g6j09FpRqV0d4iKiZFm+MCvWniNAWlJXQGjeTDsOrxr5X8IF/suO7xj8WPnIj3Yv9lBN+OHzpHCTgTi8+6aaB+sG/wUfPOcZMJRG1EwVjzFBlaVDHr5Iira/tClgin4JQXsNTSnpSgI+aAcYtyEbYCj1LUN1RDCGbDQ==
+ bh=NEkRju/UjyBkYYsXgjphrRCxZzI993CiZ4Ly0r0y3NU=;
+ b=G+bp8MZMrv5gii1DFc0nY2NOTYRSzyP2cwh8m0X/vGu4vIIe2TY4RXXceWwTOJkolxfhKChRZojBXtFCPwD1rbLIxiG5nnisY4PpQRb3WfkD7i4HtJvmcE6GR6h8MiMIkmLCciJUoDrNhGBt+mpioOwRQ6980xYH6syUVlHLh/wtaoy+Yg0z2VB5y2JfecT5p/zw4jEK+jnJyuqcknVcZ9a5ApeO/xo0njfxKj/47JqEzMgQ8nbg4mlAXmLbFJuZiGpB65LwS17oLj1sTs6IdvBeN2P7LaZkKz3DfxheX7gg1jI7Ks0C/h8ScGMddhcRrvwTBwyOUdopgrBS3ECmlQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=kpit.com; dmarc=pass action=none header.from=kpit.com;
  dkim=pass header.d=kpit.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=C6rJVDMBSj49NUcvYNPIToVQYNO+mZnK3SrFVIdsHPQ=;
- b=gytbYcmSAgIo5PqD2QS+Q20F8nbwt7VM2NSauXC9UOCQ15yPSJ0MXPEfnsIhYrUMRtvH37LZlom4Dmdz588socguoYjuQVCSHUFxoSsw2QKli87CZNFSqybDmUxp9TM/l5GYhXMR0QBwgFPu1Tce2bBt1a6Gj//b6u/IydRWjoA=
+ bh=NEkRju/UjyBkYYsXgjphrRCxZzI993CiZ4Ly0r0y3NU=;
+ b=GZb4CmtLOFUHnqLkfWBr5WWc3yZ/DJpw9PNdTjrNOJkfMPist3eKDm5j7MxsRTutaPAdgYyJid9GY0dFXF9kq3DVeH4Y7WGRBlBKImYSq0SJYbfD3gyuLxC8y9YnuuDoNdkQVs4KMJ6xFyPWoSIWPzqDBwrXcTC+dgxBx1kkWtc=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=kpit.com;
 Received: from PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:8d::14)
  by BM1PR01MB1044.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:8::19) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5395.15; Fri, 1 Jul
- 2022 08:22:07 +0000
+ 2022 08:22:04 +0000
 Received: from PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM
  ([fe80::c183:fc86:d69b:a1e]) by PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM
  ([fe80::c183:fc86:d69b:a1e%4]) with mapi id 15.20.5395.015; Fri, 1 Jul 2022
- 08:22:07 +0000
+ 08:22:04 +0000
 From: Ranjith Rathod <ranjitsinh.rathod@kpit.com>
 To: openembedded-devel@lists.openembedded.org,
 	omkar.patil@kpit.com
 Cc: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
-Subject: [oe][meta-filesystems][dunfell][PATCH 5/8] ntfs-3g-ntfsprogs: Add
- Patch For Multiple CVE
-Date: Fri,  1 Jul 2022 13:50:59 +0530
-Message-Id: <20220701082102.17835-6-ranjitsinh.rathod@kpit.com>
+Subject: [oe][meta-filesystems][dunfell][PATCH 4/8] ntfs-3g-ntfsprogs: Fix
+ CVE-2022-30784
+Date: Fri,  1 Jul 2022 13:50:58 +0530
+Message-Id: <20220701082102.17835-5-ranjitsinh.rathod@kpit.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220701082102.17835-1-ranjitsinh.rathod@kpit.com>
 References: <20220701082102.17835-1-ranjitsinh.rathod@kpit.com>
@@ -55,140 +55,188 @@ X-ClientProxiedBy: PN2PR01CA0120.INDPRD01.PROD.OUTLOOK.COM
  (2603:1096:c01:8d::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: f42de716-e818-4e2f-9294-08da5b3ac940
+X-MS-Office365-Filtering-Correlation-Id: 193ad282-7776-40c3-e55b-08da5b3ac790
 X-MS-TrafficTypeDiagnostic: BM1PR01MB1044:EE_
 Content-Transfer-Encoding: quoted-printable
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	lMKe26p7StmpZrQtaCnkzypp4OhEPSYUvgxCrYXa3U2AVHlyGAe1EhOJGb68vjbJVt1lE/QrrIRT52LORoerFmbu7WnCTEFAqIs0okYBVh2GeaxEFySkC+NkxDIoich60R8BNsM1pR9OrCzsIxGeL5LrLtsD12wkI+8XTE8VS87rs2i637qdQBBz0Ow//K66O7TDS7oG3AsOt+t+nEOd0DunWeiTYn/8OAjdVYWb+WwVWXWNvxGR6YfIynR/XMshP/B9wU81epmmTLYPl9IdEUl/ebbfBYUcRdqj1MO6Q4UQBKR9kVThO2MtivgWpm3GxJ0tw792dcPq4hSGqcSqBy73jh4o7swunsZGqiX1wAyFz+vd/Vkmx+LY8fKMZST/1jzva/6ug/2zs2dGPP2wbJU83wTDVGSY61l7E1BF8TPfP7zCmjtV2pKAVgG9gPnRzbmIVdbeo+uN0/UtjFelzVbZRJNB/Pvr2mM9DBMcBvKTdKNUgMePa4kq7JJr5GDqArlPsL6vvWZOCXofJsCOi+69/JAxgAym37QsmYBIxb+SBqDTDLdmlnPRvLhNQIsfH7Hqd9PHGLluD4QoKBFGszlhtT76fBgf+mpK3n+qiTjHRxVTO/cKk/TKpG5ZjyQIdq+YeKVK1ZB9c4jgZ3TkD72hcx2gcXqLVtHBkDAfklILI3sG0UcJSKi5jBd0cIR86nlW0QboUY/g21ftBrLjl2LO8+WsNvIQ6Z9u5u0wWDelEWcJIwyXPvbzsyj1UJMoDmlhtwuJ9oSUZukRbVEVFg==
+	WmAe9KmGtvVDif3OQNXuvmdtog+e+7sBY18F1oepZz61QHF65BmvzKp+Et1XQMdfvyaOO07+NnuhxOPL2EHFzO5FHwpxmMZ28Bs3yua5UY2Ndo8Rm6KhJyoBnOI5LPrEKDHpeEX3Xm3vwTprCWG7TWNNN11Ka5n2Yo7zH/FG35nAXGWDPlS4KyrXkomdKaBqxFa91gj6LMxOmdUKEAEGtaB/8WsKDiXhDikrWuxEsU2IHg++A3ImmDkInaFOwuUdCrUiN3jxON5279r3hEibRsQ90NZ3gh/kLhjDgN01/n3JR+eOuRBQt1R/21j2c48irzsV6VapXQ0lTx8CpnJNQAVGLa0BH4LSR8Pb27UPXJZ3OtTH/sWmPMFTGsFLDpTaWNv/s8mKw88qzGMmGNE3bbtHbmcookHE1YrTwxYdJ52cfYztE7uhQTklsatKLozyQIh1MUuzfFRJ+zaUjWYH2RM7XLonzRKkJeUAHombBY8F9ua7HK2wYqqCK9dDuhoCKZDPygpMZORsx6v5Wt5mWVsn3ch+KLoCNviAzUi9NdSe4p8xzv79iS1d49tHJFlYS+zN4G6kNlvdfJ4b+A0NnDHNdxl9bLQiA5X7uVczxPyctVNvLI1pf6uIxRHmptGdvdpH22njrkqYoA+ErgMvLbRG5S9qrS3763Z1YyM06NbvgSPAEPDpHN+bmZM90bip93WPHKxkrmgek4pXl1+Gm2RLhVvUboD/+SoW0kdxvI5UHE1kI7MJb8bOIdzcvXnrwsUxkNtN/PFtqVe7zPAgqP+d6LolH4jm74xmAQiXhaU=
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230016)(4636009)(136003)(366004)(39860400002)(396003)(376002)(346002)(186003)(66574015)(83380400001)(1076003)(66946007)(316002)(6636002)(6666004)(66556008)(8676002)(86362001)(36756003)(4326008)(6512007)(52116002)(107886003)(5660300002)(8936002)(2616005)(6506007)(66476007)(478600001)(6486002)(41300700001)(2906002)(38100700002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?hdj1inLyQsHOAwWj8GXcDHzTt/6bHxZB+E0i+Yd/owCL49qxexqvHxc4jGes?=
- =?us-ascii?Q?p6Cp+ybh4M+xekHTvrjCt8KeYWjfBSZmbnWZ96Vy9XB2M5tO/KplLWmvNzRv?=
- =?us-ascii?Q?XEh5OTI7I3VgcBSGrCuPnrkaa6sfcyHQqvtE7hT3cQBK5R6rOpjAZHmVE9ak?=
- =?us-ascii?Q?zt8ji2NmiIBYD68F9Ndj0IcZ/FzAvf7Z+VncaRrjzyBrxvhclcjFTlQvkIRJ?=
- =?us-ascii?Q?+du3f4BlNBGHXBMEq+OECyaLW+2FteDgz1PAzXBDH2FXwcAncm5uN11r4Vfu?=
- =?us-ascii?Q?DyghDtjyu/rPfJOyT5+DqGhV1nwOndx5BL4coy71IIvL8cOnjQ73671t1euj?=
- =?us-ascii?Q?nBE9ggmfLT2U/613eVo+RgPcRzoLVxqfrrsphqkziePT43zKKB+Ob6qYmatZ?=
- =?us-ascii?Q?iVMpuLQ8SyxI1e8F4IwCrW9RskJYmCG7PWrsyzIFWy9wb8FmGQLxze1P80UE?=
- =?us-ascii?Q?ADW1jTsZVaRmKWdrptonStJQPFh+ItMzdnfJ7pYw3B8DEkS/N552hXTrmgbj?=
- =?us-ascii?Q?ZjPeF/Bqf0ggOO7qE5ivJflcPy+mng8L6q9+iw3cyr4KNOtB7osz1xwH1wAI?=
- =?us-ascii?Q?B6hM/o13fcH13a0Yz7Ivfv5bUqyNStubeXE9uPQ8HnBv7Zj6IfhoMlo82htC?=
- =?us-ascii?Q?2gJiG8dTLaRcNKiBSJtCREOICk4kbAkB9GgNFouSDW3qezCoCRhvYb0GzAZz?=
- =?us-ascii?Q?lMb/tvFUIieFBxKYxPtF7qvvxZkY/H+nEKbYsCi3T2MaLNn7DkO+Uz/davCP?=
- =?us-ascii?Q?r2ZWgiuC9CJWYmKtAgGJL436zSb8bMQJdNcZsylhqkK6EH18P1t8FakhzpA6?=
- =?us-ascii?Q?eSJqRpxBbDbfb4j7f+5GLML+GHMOGPxoBC0mesy/Pholc4HIjKmVIfCI9IDn?=
- =?us-ascii?Q?DRRhy30XtMqexmAYevafygHyktUi4l4GQ5tdbNV+R0uH9vBWlftCxPJvZAIi?=
- =?us-ascii?Q?7xufdyAntMkFPV9EUzqQmstK0b3RjEdVm3FCeKTi7z3Gkf/f2b4nVLijozQw?=
- =?us-ascii?Q?CL5BId+MrZua/Rcc3B9lCST0LWc9NcAADv+NWvQ5FNRcdXWCbIieXhXEorC6?=
- =?us-ascii?Q?qGEisEf2blRyBMAdIdAvtckBjzABrQ2JuHSIRkSWnKj0/3Ur49BwBnW2hMYd?=
- =?us-ascii?Q?eZtjoCP0L4DOQiGukdOkNt3Y9UZ/AfEpx45cXVX8IegWX/o1byCBkf6I+WDN?=
- =?us-ascii?Q?q8uNXM2b/Z5mdg3Cix48i5I4as5durALRBk5N1X54HlVjL5lTmz+7NsnnHiQ?=
- =?us-ascii?Q?3vu7IzlBzpZ1u3+V9PYTymxMQIRSoKd99lOx0Zj2T+WlM6UITfvvvdE2HhX7?=
- =?us-ascii?Q?/AzmrI+b6QUd05vVH8sW1dzW8CZeDkzm/m4xRMUig9IxZMPn7xHpaKaRJNk8?=
- =?us-ascii?Q?ZgI8kNMTEFyRQTsr5DzQRq35fEkvDOjvVwxVsxyd17e/PhrPzlSp6tXgYtJm?=
- =?us-ascii?Q?/geWpJw+b6k2h2Ha33ze+rP4TIK+9fxjC7ygtz0Oda88eb1YgUvaEcJCN5wm?=
- =?us-ascii?Q?CJFl9ytEeKaBTeIfuwXSSFWMsXBbniWjT40MGokUVcuJNw6sLJKHjCLeVf3f?=
- =?us-ascii?Q?a/fzY+LWqNRleIL+qMGrfH21JgzcIK4V5sBfnCsURgz7S9ie7tk11EJxu/Bu?=
- =?us-ascii?Q?TFWJpfN+bP3dJx2Ns6KANxUstrZEKu8TijCU5Rvo2e1EkloXXMUMN76iDfG9?=
- =?us-ascii?Q?sDTs2g=3D=3D?=
+	=?us-ascii?Q?VM4lzbn/CJ+iWeErE/r1TBaHEvSEdMUkD8m92k0XQwCxxTIVwH9QzEUr1WWk?=
+ =?us-ascii?Q?hC+o8ZC4s4PVh+O7xU3dUPhVObEaSsWWGC+D9ZxaIf/tp4I0/jiYrWMuXg5V?=
+ =?us-ascii?Q?Ruo5LDrIje33N25GYGZteOomnxSpjCK3gT5tX5xkrSiSIWI1FDIbMOGOo74x?=
+ =?us-ascii?Q?N7OK5dSojyP7UtDhfUT+1PYDyVe1RCuQl88GHu5WR2BN2L7Q0cjld8RG2xZQ?=
+ =?us-ascii?Q?iewpgMR1ic2QCpbmT6tae4xuujSBd9Wrvw1jq2tyKUtjlIkSE1FUpafMru/R?=
+ =?us-ascii?Q?BapdvGpel/haFJEh3oyxJEX+LR3E68KkI/HP2QkGF4Rz1ZII5rNeakTUCsdj?=
+ =?us-ascii?Q?+ewyV1AOP3sa3eLOjwQxGe8gZzy5D1ze9ZcDTBwaMSN7jqe/2Fy6O8155M+x?=
+ =?us-ascii?Q?bxFMG1vtkh8ODks/S1g6Z61nRqClRoszRdwTEbLUdDOQIRPoOBFsr9cb6pGg?=
+ =?us-ascii?Q?zB9pvANNXvjh3dVpHsVZhtWYkxOzbIdfYtEKytUc4i3hKaqKPOJxGZSA9Ge9?=
+ =?us-ascii?Q?swdrt5goa8Qj3yrEYL8uTp2d3i8qcgZ9+R+WJkgI9+UHlKsZz3IL2Oo7v1vY?=
+ =?us-ascii?Q?E5Yr9baGxjCXTMZztedlGAGQFzcrYD61pkXiSuO2pYAkU6c2HLkqg9nbW5U4?=
+ =?us-ascii?Q?hNUE/VGygxX/ccluovNT6s1HynFJyPGV8fqmwXYQGIrOUJ89eDhmXdxnH5Ez?=
+ =?us-ascii?Q?8RIKWkbG6nnaNOTkcwpidwR6ly1ETbe2EyQ0o/V3PRTDBS6NzdzySZgHu6JC?=
+ =?us-ascii?Q?yytXk1nx5BwW4X2Zqh8bmLQgzgRhJMzqvPmHK4dL9PGIPx8BBFX8vEFXS2Gr?=
+ =?us-ascii?Q?kum6bandZ2a/L38COSyW9h70QDNPn89Yko2F1YRp6OVlWaGRfA8AA1gyUfho?=
+ =?us-ascii?Q?41zAAgm7e8iF8UPocvGVUmOakMeLvtxzOsxXj2lAmUzPExOqDdjen0Cs4NHl?=
+ =?us-ascii?Q?FvVKF79VNL6kig6BM1xsoXJIqTGyaFpsGMzT7RdiPBSP/01zrqWziLl+dD0s?=
+ =?us-ascii?Q?+044UCdtHl/p1ZwxWk3CBVj2N2NZNQyNZzcQLvEYpXg5obApfJkYi34jWhym?=
+ =?us-ascii?Q?GTQXrMMWLIJnYUVTJE+VGALHNXpNjpiyi9hDXHz8SWAGc4fMOuqnlzcsuCVz?=
+ =?us-ascii?Q?JiXJ8xp2knI/IXNIlNP30bo2IPxf4BayYVQ0ltPTTmnX/6CNtLVvrof6TLF5?=
+ =?us-ascii?Q?kv6FhkZU0lTnMvwm1R6Xh8GvIz2M5N1WWsMougqXkx5oU7Zm+02QAy6D7GBa?=
+ =?us-ascii?Q?GIpwg/WwHJjeWjdKjAKvHKhZ7UQt9ulwJz8uFoukTkoyLgHpaBaoqrA+3OpM?=
+ =?us-ascii?Q?1PLfUReyd0cHuy+Wu2yXVTVeiZ1yab9FkJjeKQ5Ll9NFAlBOh2efRWJKCXI8?=
+ =?us-ascii?Q?KTHwlwwVYlQPZCvczNl3IVnCnzgEpv9kKlwPJe2Rlp/oxReQc+tuBRupgSLy?=
+ =?us-ascii?Q?yUZ8eAd1R5HPTugVTTXE8RGHPa4m4sGqN/SAtZKKxYSmYgDRLONbaMN1YpPy?=
+ =?us-ascii?Q?1h093H7fHSiQiZUgJmPqgPfrjMo9ch5AKaTjTb7Ybgoep32jHmWAEMHTh5e3?=
+ =?us-ascii?Q?3nyzvOBzShPs5jvkomw+p9x1UE6BGhgMAOr0mqdeGmE4vUYUbGEctwdaunvG?=
+ =?us-ascii?Q?EOSg9Vh9dhBaR4+wU46XQMkyD+8R0o0DOgjk7Ll7FW3PXn6rP86ChU0OOPhk?=
+ =?us-ascii?Q?kbhs2g=3D=3D?=
 X-OriginatorOrg: kpit.com
 X-MS-Exchange-CrossTenant-Network-Message-Id: 
- f42de716-e818-4e2f-9294-08da5b3ac940
+ 193ad282-7776-40c3-e55b-08da5b3ac790
 X-MS-Exchange-CrossTenant-AuthSource: PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2022 08:22:07.1373
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2022 08:22:04.3707
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3539451e-b46e-4a26-a242-ff61502855c7
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
 X-MS-Exchange-CrossTenant-UserPrincipalName: 
- cyspS2sv36iYw+WhHJNc8ZMauyNpOQXxwD3noyLeLizpZMvWOrw3nnN2r8lsdVVJNl7I5/roelLkKwraIgLodQ==
+ uRcG2ggCxg5QoyMFIatqKuvEus8T3WqjTsQrH2zUIRuhmjvffQHrvGiaSU2GsipELaJ6mXOZtPq4GMPcjx5OhQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BM1PR01MB1044
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 01 Jul 2022 08:22:16 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97656
+ https://lists.openembedded.org/g/openembedded-devel/message/97654
 
 From: Omkar Patil <omkar.patil@kpit.com>
 
-Fixed CVE's:
-CVE-2022-30785
-CVE-2022-30787
+CVE: CVE-2022-30784
 
 Signed-off-by: Omkar Patil <omkar.patil@kpit.com>
 Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
 ---
- .../CVE-2022-30785_30787.patch                | 32 +++++++++++++++++++
+ .../ntfs-3g-ntfsprogs/CVE-2022-30784.patch    | 74 +++++++++++++++++++
  .../ntfs-3g-ntfsprogs_2021.8.22.bb            |  1 +
- 2 files changed, 33 insertions(+)
+ 2 files changed, 75 insertions(+)
  create mode 100644 meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/=
-ntfs-3g-ntfsprogs/CVE-2022-30785_30787.patch
+ntfs-3g-ntfsprogs/CVE-2022-30784.patch
 
 diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g=
--ntfsprogs/CVE-2022-30785_30787.patch b/meta-filesystems/recipes-filesystem=
-s/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs/CVE-2022-30785_30787.patch
+-ntfsprogs/CVE-2022-30784.patch b/meta-filesystems/recipes-filesystems/ntfs=
+-3g-ntfsprogs/ntfs-3g-ntfsprogs/CVE-2022-30784.patch
 new file mode 100644
-index 000000000..ae71e8ccf
+index 000000000..ff4ee6df0
 --- /dev/null
 +++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfspr=
-ogs/CVE-2022-30785_30787.patch
-@@ -0,0 +1,32 @@
-+From fb28eef6f1c26170566187c1ab7dc913a13ea43c Mon Sep 17 00:00:00 2001
+ogs/CVE-2022-30784.patch
+@@ -0,0 +1,74 @@
++From 60717a846deaaea47e50ce58872869f7bd1103b5 Mon Sep 17 00:00:00 2001
 +From: =3D?UTF-8?q?Jean-Pierre=3D20Andr=3DC3=3DA9?=3D <jean-pierre.andre@wa=
 nadoo.fr>
-+Date: Tue, 10 May 2022 10:48:18 +0200
-+Subject: [PATCH] Hardened the checking of directory offset requested by a
-+ readdir
++Date: Tue, 21 Sep 2021 10:56:06 +0200
++Subject: [PATCH] Avoided allocating and reading an attribute beyond its fu=
+ll
++ size
 +
-+When asked for the next directory entries, make sure the chunk offset
-+is within valid values, otherwise return no more entries in chunk.
++Before reading a full attribute value for internal use, its expected
++length has been checked to be < 0x40000. However the allocated size
++in the runlist may be much bigger as a consequence of a bug or malice.
++To prevent malloc'ing excessive size, restrict the size of the last
++run to read to the needed length.
 +
-+CVE: CVE-2022-30785
-+CVE: CVE-2022-30787
++CVE: CVE-2022-30784
 +Upstream-Status: Backport [http://archive.ubuntu.com/ubuntu/pool/main/n/nt=
 fs-3g/ntfs-3g_2021.8.22-3ubuntu1.1.debian.tar.xz]
 +Comment: No change in any hunk
 +Signed-off-by: Omkar Patil <Omkar.Patil@kpit.com>
 +
 +---
-+ libfuse-lite/fuse.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ libntfs-3g/attrib.c | 24 ++++++++++++++++++------
++ 1 file changed, 18 insertions(+), 6 deletions(-)
 +
-+diff --git a/libfuse-lite/fuse.c b/libfuse-lite/fuse.c
-+index 6f9242b7..3d653e63 100644
-+--- a/libfuse-lite/fuse.c
-++++ b/libfuse-lite/fuse.c
-+@@ -2223,7 +2223,7 @@ static void fuse_lib_readdir(fuse_req_t req, fuse_in=
-o_t ino, size_t size,
-+         }
-+     }
-+     if (dh->filled) {
-+-        if (off < dh->len) {
-++        if ((off >=3D 0) && (off < dh->len)) {
-+             if (off + size > dh->len)
-+                 size =3D dh->len - off;
-+         } else
++diff --git a/libntfs-3g/attrib.c b/libntfs-3g/attrib.c
++index 00bfca84..51c8536f 100644
++--- a/libntfs-3g/attrib.c
+++++ b/libntfs-3g/attrib.c
++@@ -216,6 +216,7 @@ s64 ntfs_get_attribute_value(const ntfs_volume *vol,
++               if (total + (rl[i].length << vol->cluster_size_bits) >=3D
++                               sle64_to_cpu(a->data_size)) {
++                       unsigned char *intbuf =3D NULL;
+++                      s64 intlth;
++                       /*
++                        * We have reached the last run so we were going to
++                        * overflow when executing the ntfs_pread() which i=
+s
++@@ -229,8 +230,18 @@ s64 ntfs_get_attribute_value(const ntfs_volume *vol,
++                        * We have reached the end of data size so we were
++                        * going to overflow in the same fashion.
++                        * Temporary fix:  same as above.
+++                       *
+++                       * For safety, limit the amount to read to the
+++                       * needed size, knowing that the whole attribute
+++                       * size has been checked to be <=3D 0x40000.
++                        */
++-                      intbuf =3D ntfs_malloc(rl[i].length << vol->cluster=
+_size_bits);
+++                      intlth =3D (sle64_to_cpu(a->data_size) - total
+++                                      + vol->cluster_size - 1)
+++                                      >> vol->cluster_size_bits;
+++                      if (rl[i].length < intlth)
+++                              intlth =3D rl[i].length;
+++                      intbuf =3D (u8*)ntfs_malloc(intlth
+++                                              << vol->cluster_size_bits);
++                       if (!intbuf) {
++                               free(rl);
++                               return 0;
++@@ -246,14 +257,15 @@ s64 ntfs_get_attribute_value(const ntfs_volume *vol,
++                        * - Yes we can, in sparse files! But not necessari=
+ly
++                        * size of 16, just run length.
++                        */
++-                      r =3D ntfs_pread(vol->dev, rl[i].lcn <<
++-                                      vol->cluster_size_bits, rl[i].lengt=
+h <<
++-                                      vol->cluster_size_bits, intbuf);
++-                      if (r !=3D rl[i].length << vol->cluster_size_bits) =
+{
+++                      r =3D ntfs_pread(vol->dev,
+++                                      rl[i].lcn << vol->cluster_size_bits=
+,
+++                                      intlth << vol->cluster_size_bits,
+++                                      intbuf);
+++                      if (r !=3D intlth << vol->cluster_size_bits) {
++ #define ESTR "Error reading attribute value"
++                               if (r =3D=3D -1)
++                                       ntfs_log_perror(ESTR);
++-                              else if (r < rl[i].length <<
+++                              else if (r < intlth <<
++                                               vol->cluster_size_bits) {
++                                       ntfs_log_debug(ESTR ": Ran out of i=
+nput data.\n");
++                                       errno =3D EIO;
 diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g=
 -ntfsprogs_2021.8.22.bb b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfs=
 progs/ntfs-3g-ntfsprogs_2021.8.22.bb
-index 9e233e127..ea8607e6d 100644
+index ccd18f86c..9e233e127 100644
 --- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfspr=
 ogs_2021.8.22.bb
 +++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfspr=
 ogs_2021.8.22.bb
-@@ -11,6 +11,7 @@ SRC_URI =3D "http://tuxera.com/opensource/ntfs-3g_ntfspro=
+@@ -10,6 +10,7 @@ SRC_URI =3D "http://tuxera.com/opensource/ntfs-3g_ntfspro=
 gs-${PV}.tgz \
+            file://0001-libntfs-3g-Makefile.am-fix-install-failed-while-hos=
+t.patch \
             file://CVE-2021-46790.patch \
             file://CVE-2022-30783.patch \
-            file://CVE-2022-30784.patch \
-+           file://CVE-2022-30785_30787.patch \
++           file://CVE-2022-30784.patch \
            "
 
  S =3D "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
