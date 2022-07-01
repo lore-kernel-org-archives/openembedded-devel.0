@@ -2,50 +2,50 @@ Return-Path: <ranjitsinh.rathod@kpit.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1555CCA47F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4013C433EF
 	for <webhook@archiver.kernel.org>; Fri,  1 Jul 2022 08:22:16 +0000 (UTC)
 Received: from IND01-BMX-obe.outbound.protection.outlook.com
  (IND01-BMX-obe.outbound.protection.outlook.com [40.107.239.67])
  by mx.groups.io with SMTP id smtpd.web08.35522.1656663731775507795
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 Jul 2022 01:22:13 -0700
+ Fri, 01 Jul 2022 01:22:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kpit.com header.s=selector1 header.b=K1SK/BEx;
+ dkim=pass header.i=@kpit.com header.s=selector1 header.b=gytbYcmS;
  spf=pass (domain: kpit.com, ip: 40.107.239.67,
  mailfrom: ranjitsinh.rathod@kpit.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=VArJ7Hy01zbOY8Q7GZ2FIjb4pBLrw+YwPULTVjj/XGzMl3LmnNJPRE9jo0y/rpmLUaEB2/vd2LxGSLhuqeDGWzWcQ7CWslWj7czXwW+xTXK4r0kpklHxbNUqoHCPeqSj9L81pO19eYezaq206WUApRiNmPTSd9Gx6LhAjHOCfuF2bPHeo/hvf7HmYYXQ5ReDwxkenR51VpiDf3Uet/aOfTfW8wSwQ2gKpTnivp5U9LC6uXhJAAvo7XMKWDKEj3Y52Z7upkDOduJc6YmX5gggNECgh0lF7DXe2PeXvY4a3XW7kScpjxBUl4KMQpDhpqu9hTFdiuwWwVO6mvvpo+5JDA==
+ b=YBB9Prl7dqGPXiKaQNwebkumDRo+78oi9fwSosCn6YOkD8v+XOuWtfUGaP9p3V7t/aXyntMNN/xpNRCymS35Z2+KllQmFyxhdr2oSt5yrREds24WADR8bcBjDw7zbM9jG9DiPz8ut2LHX/FoTJmQDFqNnJJ2YYq2xMzTMI2CcDi1L1NttH0QKnRopHlD9WIM0WHSSxJJBPfEPJCRv6egZab8LqyDPXUJi7X//nAeR36w2uGFL7dAr6ZtecbC4wZTEeGxXgBMXJ5qfLFAzJO6IzOOhCP8pnUTiox/6aagagX74gTHkEoYHVgJdW3hLQYZKr3/SWeJ+/Ps5H5ztAlptg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sg7/PyijWXR4J6bJ3hNQ7//bntiyA+GWbuQ+YKeb6hk=;
- b=JUvEaNuULatMylpara/0Ee65HI93S5IlDzDyezMP+KP8pbh/jObPJ1YOQwysdvPRJFlfGkFBOurNBPRX7fGnURyZsy3efII0eJBDyJx08B8N+J9Jl0kt/yLyL1t/e8j/bSU+4PBZZiVQEj89WDMka+NI/+BfJEClQvGyHK9Ijjazvbg5ma4W3vk+MRsEPY7VAHgh9g/ZgWzF6KwSYLcJ8ffGo8ZLIADho4KTN1gijFIjG4fO3VLCu42Qs+Vhy2iu/vxxZuMJpY6biFz3QhmS1mrn5R5+GVlcZrOkgaYsHjNZdE6L9V+9S+mmG92UxxcZennO4kHKd2PgKxPRuqz1GQ==
+ bh=C6rJVDMBSj49NUcvYNPIToVQYNO+mZnK3SrFVIdsHPQ=;
+ b=KWWxOsV+MwdE0uHxbbBoGnBd/JQu5A4PQX6uKkVZaBQVt8V0ODhuNdrcwBHEk5gQtXeplIqbGXhgLhN914PEEwVIe0UdqnQHOTpY+vfqYkompKdeSBlkm0G7spMA0neiKlBg1BJGI2MCkdZz037aPnTlqzQLtHZOAwa11qhdt/aTyWvBjk7g6j09FpRqV0d4iKiZFm+MCvWniNAWlJXQGjeTDsOrxr5X8IF/suO7xj8WPnIj3Yv9lBN+OHzpHCTgTi8+6aaB+sG/wUfPOcZMJRG1EwVjzFBlaVDHr5Iira/tClgin4JQXsNTSnpSgI+aAcYtyEbYCj1LUN1RDCGbDQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=kpit.com; dmarc=pass action=none header.from=kpit.com;
  dkim=pass header.d=kpit.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sg7/PyijWXR4J6bJ3hNQ7//bntiyA+GWbuQ+YKeb6hk=;
- b=K1SK/BExTa09botaQeiziFxySIVMxoHtWvt5OJz95CicJ3ZNxusgwON+GUgBAz0xnlENuVEmOAonk5NlD2PXoQVjvqcI1Ts5ebyT8fDIrTbXK+1BtgK9N21UCgQ7LR6TIyppp4wlRXL6FKHu9oIdOxfTsLk5Mkvv+xUWUrG/pNk=
+ bh=C6rJVDMBSj49NUcvYNPIToVQYNO+mZnK3SrFVIdsHPQ=;
+ b=gytbYcmSAgIo5PqD2QS+Q20F8nbwt7VM2NSauXC9UOCQ15yPSJ0MXPEfnsIhYrUMRtvH37LZlom4Dmdz588socguoYjuQVCSHUFxoSsw2QKli87CZNFSqybDmUxp9TM/l5GYhXMR0QBwgFPu1Tce2bBt1a6Gj//b6u/IydRWjoA=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=kpit.com;
 Received: from PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:8d::14)
  by BM1PR01MB1044.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:8::19) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5395.15; Fri, 1 Jul
- 2022 08:22:03 +0000
+ 2022 08:22:07 +0000
 Received: from PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM
  ([fe80::c183:fc86:d69b:a1e]) by PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM
  ([fe80::c183:fc86:d69b:a1e%4]) with mapi id 15.20.5395.015; Fri, 1 Jul 2022
- 08:22:02 +0000
+ 08:22:07 +0000
 From: Ranjith Rathod <ranjitsinh.rathod@kpit.com>
 To: openembedded-devel@lists.openembedded.org,
 	omkar.patil@kpit.com
 Cc: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
-Subject: [oe][meta-filesystems][dunfell][PATCH 3/8] ntfs-3g-ntfsprogs: Fix
- CVE-2022-30783
-Date: Fri,  1 Jul 2022 13:50:57 +0530
-Message-Id: <20220701082102.17835-4-ranjitsinh.rathod@kpit.com>
+Subject: [oe][meta-filesystems][dunfell][PATCH 5/8] ntfs-3g-ntfsprogs: Add
+ Patch For Multiple CVE
+Date: Fri,  1 Jul 2022 13:50:59 +0530
+Message-Id: <20220701082102.17835-6-ranjitsinh.rathod@kpit.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220701082102.17835-1-ranjitsinh.rathod@kpit.com>
 References: <20220701082102.17835-1-ranjitsinh.rathod@kpit.com>
@@ -55,187 +55,140 @@ X-ClientProxiedBy: PN2PR01CA0120.INDPRD01.PROD.OUTLOOK.COM
  (2603:1096:c01:8d::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 3f4757fe-4f68-4a67-b1ad-08da5b3ac6ab
+X-MS-Office365-Filtering-Correlation-Id: f42de716-e818-4e2f-9294-08da5b3ac940
 X-MS-TrafficTypeDiagnostic: BM1PR01MB1044:EE_
 Content-Transfer-Encoding: quoted-printable
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	Rh6p/FTCYvd878rOCRDm/VurVNnd2ETCh4u+xRYiHk7xu6QJyaRhnU/5+70+EwAcUFPvtBE75eDhHJbIjdjPVOa/o5ju2lqoAkrt+WsM4HhQfD8/p+Ma0IMqvZvi42Sc38aMATTVTUiKD2z9cmzvJS8E7YzgDfeo4mZ7D8iplnlC5EgGJPuj73Bl+1hP8CKX/LFL+7XL0mAn8LUNhhgeGTje2EY5QkuSjEu06AyDWOTszO5w8kIFqxlc27zBb6v/hfXDzVs8IfhuHu7/Mz1rzRoEgaig833kW89trVIdy5YwdVNj/MmwAdsClNlKWfeOhCceNyZHmvAV+uWfygU8yxGOyrZgFRiArcDz9Q3//U4DVSg1tRFvOSM0NJSsbSjg6Z29GWWzi+G5mXLRhgWIlWfl34ciz5+Uu6zrHsSFEHh30j6J+JDn9jmjoS5PUvEeBVxDE6ziuJZIQY7ABfWuCJ5ojwd4WVLGwlge56rEiHrnkjZAvqNpX8yTrVK1yoeZncfS33gotw5BljZm0QRZsko52zh2ajRrmEAaxw6hsZ7T5p1SFMbPnjuDNet0VnBzEXhr8eYKVEBkWc9klygOeSs8iBJZHRmhXRdNHZh+Rcgrb7DjBZjloYsr+FW325VLI3dI3aI0rh/SBNEKxSbs7wRrMVtWlEAxBdTQXMkJxjtjEtWWjKBjJI3VgM6w4ftqKO5Q32YVKDGdZy76QpNTlEE+EizMRHRufzkgMcDVef/OnP8szA5UMzQJUl2np9+cY0Ncxn9N+2n+3iV5IJwlOQ==
+	lMKe26p7StmpZrQtaCnkzypp4OhEPSYUvgxCrYXa3U2AVHlyGAe1EhOJGb68vjbJVt1lE/QrrIRT52LORoerFmbu7WnCTEFAqIs0okYBVh2GeaxEFySkC+NkxDIoich60R8BNsM1pR9OrCzsIxGeL5LrLtsD12wkI+8XTE8VS87rs2i637qdQBBz0Ow//K66O7TDS7oG3AsOt+t+nEOd0DunWeiTYn/8OAjdVYWb+WwVWXWNvxGR6YfIynR/XMshP/B9wU81epmmTLYPl9IdEUl/ebbfBYUcRdqj1MO6Q4UQBKR9kVThO2MtivgWpm3GxJ0tw792dcPq4hSGqcSqBy73jh4o7swunsZGqiX1wAyFz+vd/Vkmx+LY8fKMZST/1jzva/6ug/2zs2dGPP2wbJU83wTDVGSY61l7E1BF8TPfP7zCmjtV2pKAVgG9gPnRzbmIVdbeo+uN0/UtjFelzVbZRJNB/Pvr2mM9DBMcBvKTdKNUgMePa4kq7JJr5GDqArlPsL6vvWZOCXofJsCOi+69/JAxgAym37QsmYBIxb+SBqDTDLdmlnPRvLhNQIsfH7Hqd9PHGLluD4QoKBFGszlhtT76fBgf+mpK3n+qiTjHRxVTO/cKk/TKpG5ZjyQIdq+YeKVK1ZB9c4jgZ3TkD72hcx2gcXqLVtHBkDAfklILI3sG0UcJSKi5jBd0cIR86nlW0QboUY/g21ftBrLjl2LO8+WsNvIQ6Z9u5u0wWDelEWcJIwyXPvbzsyj1UJMoDmlhtwuJ9oSUZukRbVEVFg==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230016)(4636009)(136003)(366004)(39860400002)(396003)(376002)(346002)(186003)(66574015)(83380400001)(1076003)(66946007)(316002)(6636002)(6666004)(66556008)(8676002)(86362001)(36756003)(4326008)(6512007)(52116002)(107886003)(5660300002)(8936002)(2616005)(6506007)(66476007)(478600001)(6486002)(41300700001)(2906002)(38100700002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?ThW+Y85uk2KLuIPWtKrPnG9Tk/FNQuAtkKkv1QRJmMaYmSXSuW8s7fSGHbo1?=
- =?us-ascii?Q?6sqcmcKSBvY9ScgCr3rHEzo0768UHUxg4LUX+bEBMafftSlJocQ5AtC9wMDk?=
- =?us-ascii?Q?krWZbsDQTCvX8HJ6H9w7MKsXKVFC6l+SxnFIRQGTEDhmG/qHaFStCWyjxx4t?=
- =?us-ascii?Q?pwUgf+0b2Iq7LTL6Df7LLKhd9KRqb7ZlX208EnDLeMls7SM5i+gUDEfEjMVW?=
- =?us-ascii?Q?Oiq91rz6EosygHRav7wP5IpcMwRqizoAX/dsaFNhdvnVlWKHI7bTf/Aej7U3?=
- =?us-ascii?Q?zQIkon943++qhwFgxmwhnh2TAwy624dvi0PwNIA99UjEHJjeZhx86WtM0X3h?=
- =?us-ascii?Q?K48rkVwXLfFfRzmr8yUMfZaqHTnvt+02BroOaDRH0lL2nyFX1fR9xjWhpH6A?=
- =?us-ascii?Q?RUwltAy2dWt34IWi29eBcofk207c1rf0PcmLDBtdlV/9qlNSjmre4X17w3r/?=
- =?us-ascii?Q?5R7OIpnj7uhl/EDWnxxThSxZJ4cvZPiQFoxnYOK6dsi3JGCD4UDQo82rvSG5?=
- =?us-ascii?Q?K1IYpqwUr/mXxO5344mIOcTNr/k8USQ1d03MI3J2uoFC8YwMh2CaRGeYtmi2?=
- =?us-ascii?Q?YEUYkQ/q6cH/CNf1UzquQAWxI7ZSgpMLNq5NgENU3nydN1pUZJfSa3WxZzxr?=
- =?us-ascii?Q?TYRAXd4FUHebrnD93CFfcXwNzCqQdsuzxu2EgDIy9klQmnRm6cHfpGGCMR0p?=
- =?us-ascii?Q?IGoJKw+dNuK1y/FautUvKGvkKFTuKW6xH9hCpD9FfvaKXvSjQF9ZiIJ4/snK?=
- =?us-ascii?Q?zx/PnTfBpvGEAjR+i1Bh4DNVERh1yl4nzHwlmg9NMU/tP1LmyAX/MdCxjc4X?=
- =?us-ascii?Q?MK/UTe3847o/9VSd6UVOmWKwBXrtXDlUKOeaxmwVj+08Q0wFb8eo8N3874aX?=
- =?us-ascii?Q?uLVkV5pFsX2ApMY6HpEAWzgHImN4DWYLO9RzkaDadEAEkBq/RYEwNivbn19s?=
- =?us-ascii?Q?DEc0evonEKmeBx2868AS4irPoPNF9Fi72tJEIaY7UwC6ojXl+7eoDFDj2OoP?=
- =?us-ascii?Q?4a+9y4OaZz5IRagMQ2msdQJMfSRDoZAafukaCudGOFk78AbiVZGmiaEE47Tb?=
- =?us-ascii?Q?IE2TZEhFTm7DAXYPWtv/9fVKA4XvcbVyea0eMxWfKUU0Q78YCKBacLUDjWAy?=
- =?us-ascii?Q?jlu11IavHF7M6YPPBLGaDilmf9Ymi0t0VAs0KYsyeiHhnv3LZMigYOxqiUnC?=
- =?us-ascii?Q?OG35O6QsAloSJ8Q1HkBzKkEcGFx9X0mHAG5A6ePal5h+mkNSN++apX/rp3BT?=
- =?us-ascii?Q?GyZ+oPLajB9KrMV72BOf1QV8BpC7fJM4/nCOCDO92xlMhdWlnAh9NxpDSorM?=
- =?us-ascii?Q?7pN829X5Q2ElfKgfGpSjKkiAZFtJUvn65TnTSRsIFsAwm5dCkGvihw4UN2bZ?=
- =?us-ascii?Q?wD6lWOtDnPMo+A/60J3q0voPUkbD2UC/QRC9iV9onWCN5DeGS+Bu8Dsec7XU?=
- =?us-ascii?Q?ASlT1+fQkQE9gXNlnObfCt6veQHzy9Cy42g11owzjsBuZ7Ngo+T23ppBJnA4?=
- =?us-ascii?Q?iEOBwKuQlILYS6/nNhQJNY6XefHh6zzKEo55b+yFMjGDxlJEKajVmfHi2DuI?=
- =?us-ascii?Q?NOsR9DmzAxVlfoxSYiZeEf4KGgNqwDWHwfRaAlQFHTYTED5nMF9nnnLKinZr?=
- =?us-ascii?Q?+ISIZsrM8AV+1ZuzFRK96ZLct1qYfYxiTEUnhYh9fMoIwjg/FPbaPfcxrdsH?=
- =?us-ascii?Q?Ms0+7A=3D=3D?=
+	=?us-ascii?Q?hdj1inLyQsHOAwWj8GXcDHzTt/6bHxZB+E0i+Yd/owCL49qxexqvHxc4jGes?=
+ =?us-ascii?Q?p6Cp+ybh4M+xekHTvrjCt8KeYWjfBSZmbnWZ96Vy9XB2M5tO/KplLWmvNzRv?=
+ =?us-ascii?Q?XEh5OTI7I3VgcBSGrCuPnrkaa6sfcyHQqvtE7hT3cQBK5R6rOpjAZHmVE9ak?=
+ =?us-ascii?Q?zt8ji2NmiIBYD68F9Ndj0IcZ/FzAvf7Z+VncaRrjzyBrxvhclcjFTlQvkIRJ?=
+ =?us-ascii?Q?+du3f4BlNBGHXBMEq+OECyaLW+2FteDgz1PAzXBDH2FXwcAncm5uN11r4Vfu?=
+ =?us-ascii?Q?DyghDtjyu/rPfJOyT5+DqGhV1nwOndx5BL4coy71IIvL8cOnjQ73671t1euj?=
+ =?us-ascii?Q?nBE9ggmfLT2U/613eVo+RgPcRzoLVxqfrrsphqkziePT43zKKB+Ob6qYmatZ?=
+ =?us-ascii?Q?iVMpuLQ8SyxI1e8F4IwCrW9RskJYmCG7PWrsyzIFWy9wb8FmGQLxze1P80UE?=
+ =?us-ascii?Q?ADW1jTsZVaRmKWdrptonStJQPFh+ItMzdnfJ7pYw3B8DEkS/N552hXTrmgbj?=
+ =?us-ascii?Q?ZjPeF/Bqf0ggOO7qE5ivJflcPy+mng8L6q9+iw3cyr4KNOtB7osz1xwH1wAI?=
+ =?us-ascii?Q?B6hM/o13fcH13a0Yz7Ivfv5bUqyNStubeXE9uPQ8HnBv7Zj6IfhoMlo82htC?=
+ =?us-ascii?Q?2gJiG8dTLaRcNKiBSJtCREOICk4kbAkB9GgNFouSDW3qezCoCRhvYb0GzAZz?=
+ =?us-ascii?Q?lMb/tvFUIieFBxKYxPtF7qvvxZkY/H+nEKbYsCi3T2MaLNn7DkO+Uz/davCP?=
+ =?us-ascii?Q?r2ZWgiuC9CJWYmKtAgGJL436zSb8bMQJdNcZsylhqkK6EH18P1t8FakhzpA6?=
+ =?us-ascii?Q?eSJqRpxBbDbfb4j7f+5GLML+GHMOGPxoBC0mesy/Pholc4HIjKmVIfCI9IDn?=
+ =?us-ascii?Q?DRRhy30XtMqexmAYevafygHyktUi4l4GQ5tdbNV+R0uH9vBWlftCxPJvZAIi?=
+ =?us-ascii?Q?7xufdyAntMkFPV9EUzqQmstK0b3RjEdVm3FCeKTi7z3Gkf/f2b4nVLijozQw?=
+ =?us-ascii?Q?CL5BId+MrZua/Rcc3B9lCST0LWc9NcAADv+NWvQ5FNRcdXWCbIieXhXEorC6?=
+ =?us-ascii?Q?qGEisEf2blRyBMAdIdAvtckBjzABrQ2JuHSIRkSWnKj0/3Ur49BwBnW2hMYd?=
+ =?us-ascii?Q?eZtjoCP0L4DOQiGukdOkNt3Y9UZ/AfEpx45cXVX8IegWX/o1byCBkf6I+WDN?=
+ =?us-ascii?Q?q8uNXM2b/Z5mdg3Cix48i5I4as5durALRBk5N1X54HlVjL5lTmz+7NsnnHiQ?=
+ =?us-ascii?Q?3vu7IzlBzpZ1u3+V9PYTymxMQIRSoKd99lOx0Zj2T+WlM6UITfvvvdE2HhX7?=
+ =?us-ascii?Q?/AzmrI+b6QUd05vVH8sW1dzW8CZeDkzm/m4xRMUig9IxZMPn7xHpaKaRJNk8?=
+ =?us-ascii?Q?ZgI8kNMTEFyRQTsr5DzQRq35fEkvDOjvVwxVsxyd17e/PhrPzlSp6tXgYtJm?=
+ =?us-ascii?Q?/geWpJw+b6k2h2Ha33ze+rP4TIK+9fxjC7ygtz0Oda88eb1YgUvaEcJCN5wm?=
+ =?us-ascii?Q?CJFl9ytEeKaBTeIfuwXSSFWMsXBbniWjT40MGokUVcuJNw6sLJKHjCLeVf3f?=
+ =?us-ascii?Q?a/fzY+LWqNRleIL+qMGrfH21JgzcIK4V5sBfnCsURgz7S9ie7tk11EJxu/Bu?=
+ =?us-ascii?Q?TFWJpfN+bP3dJx2Ns6KANxUstrZEKu8TijCU5Rvo2e1EkloXXMUMN76iDfG9?=
+ =?us-ascii?Q?sDTs2g=3D=3D?=
 X-OriginatorOrg: kpit.com
 X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 3f4757fe-4f68-4a67-b1ad-08da5b3ac6ab
+ f42de716-e818-4e2f-9294-08da5b3ac940
 X-MS-Exchange-CrossTenant-AuthSource: PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2022 08:22:02.8061
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2022 08:22:07.1373
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3539451e-b46e-4a26-a242-ff61502855c7
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
 X-MS-Exchange-CrossTenant-UserPrincipalName: 
- p8a2XCmKkOUmaqIND9w0qtzEPLhOtaka8HihUpgNYR+z8tBj0MDp/9TERjC0/uS0xdn/gJbkv99HgT1NvXAN7g==
+ cyspS2sv36iYw+WhHJNc8ZMauyNpOQXxwD3noyLeLizpZMvWOrw3nnN2r8lsdVVJNl7I5/roelLkKwraIgLodQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BM1PR01MB1044
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 01 Jul 2022 08:22:16 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97655
+ https://lists.openembedded.org/g/openembedded-devel/message/97656
 
 From: Omkar Patil <omkar.patil@kpit.com>
 
-CVE: CVE-2022-30783
+Fixed CVE's:
+CVE-2022-30785
+CVE-2022-30787
 
 Signed-off-by: Omkar Patil <omkar.patil@kpit.com>
 Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
 ---
- .../ntfs-3g-ntfsprogs/CVE-2022-30783.patch    | 75 +++++++++++++++++++
+ .../CVE-2022-30785_30787.patch                | 32 +++++++++++++++++++
  .../ntfs-3g-ntfsprogs_2021.8.22.bb            |  1 +
- 2 files changed, 76 insertions(+)
+ 2 files changed, 33 insertions(+)
  create mode 100644 meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/=
-ntfs-3g-ntfsprogs/CVE-2022-30783.patch
+ntfs-3g-ntfsprogs/CVE-2022-30785_30787.patch
 
 diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g=
--ntfsprogs/CVE-2022-30783.patch b/meta-filesystems/recipes-filesystems/ntfs=
--3g-ntfsprogs/ntfs-3g-ntfsprogs/CVE-2022-30783.patch
+-ntfsprogs/CVE-2022-30785_30787.patch b/meta-filesystems/recipes-filesystem=
+s/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs/CVE-2022-30785_30787.patch
 new file mode 100644
-index 000000000..41f26503e
+index 000000000..ae71e8ccf
 --- /dev/null
 +++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfspr=
-ogs/CVE-2022-30783.patch
-@@ -0,0 +1,75 @@
-+From 7f81935f32e58e8fec22bc46683b1b067469405f Mon Sep 17 00:00:00 2001
+ogs/CVE-2022-30785_30787.patch
+@@ -0,0 +1,32 @@
++From fb28eef6f1c26170566187c1ab7dc913a13ea43c Mon Sep 17 00:00:00 2001
 +From: =3D?UTF-8?q?Jean-Pierre=3D20Andr=3DC3=3DA9?=3D <jean-pierre.andre@wa=
 nadoo.fr>
-+Date: Tue, 10 May 2022 10:44:34 +0200
-+Subject: [PATCH] Returned an error code when the --help or --version optio=
-ns
-+ are used
++Date: Tue, 10 May 2022 10:48:18 +0200
++Subject: [PATCH] Hardened the checking of directory offset requested by a
++ readdir
 +
-+Accepting --help or --version options may leave the ntfs-3g process in an
-+unclean state, so reject them while processing options. Also reject
-+them in libfuse-lite.
++When asked for the next directory entries, make sure the chunk offset
++is within valid values, otherwise return no more entries in chunk.
 +
-+CVE: CVE-2022-30783
++CVE: CVE-2022-30785
++CVE: CVE-2022-30787
 +Upstream-Status: Backport [http://archive.ubuntu.com/ubuntu/pool/main/n/nt=
 fs-3g/ntfs-3g_2021.8.22-3ubuntu1.1.debian.tar.xz]
 +Comment: No change in any hunk
 +Signed-off-by: Omkar Patil <Omkar.Patil@kpit.com>
 +
 +---
-+ libfuse-lite/mount.c | 3 +--
-+ src/ntfs-3g_common.c | 6 ++++++
-+ src/ntfs-3g_common.h | 2 ++
-+ 3 files changed, 9 insertions(+), 2 deletions(-)
++ libfuse-lite/fuse.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/libfuse-lite/mount.c b/libfuse-lite/mount.c
-+index 64adee7d..6ae29d8c 100644
-+--- a/libfuse-lite/mount.c
-++++ b/libfuse-lite/mount.c
-+@@ -670,11 +670,10 @@ int fuse_kern_mount(const char *mountpoint, struct f=
-use_args *args)
-+         fprintf(stderr, "fuse: 'allow_other' and 'allow_root' options are=
- mutually exclusive\n");
-+         goto out;
++diff --git a/libfuse-lite/fuse.c b/libfuse-lite/fuse.c
++index 6f9242b7..3d653e63 100644
++--- a/libfuse-lite/fuse.c
+++++ b/libfuse-lite/fuse.c
++@@ -2223,7 +2223,7 @@ static void fuse_lib_readdir(fuse_req_t req, fuse_in=
+o_t ino, size_t size,
++         }
 +     }
-+-    res =3D 0;
-++    res =3D -1;
-+     if (mo.ishelp)
-+         goto out;
-+
-+-    res =3D -1;
-+     if (get_mnt_flag_opts(&mnt_opts, mo.flags) =3D=3D -1)
-+         goto out;
-+ #ifndef __SOLARIS__
-+diff --git a/src/ntfs-3g_common.c b/src/ntfs-3g_common.c
-+index 7e3e93d2..29021dfc 100644
-+--- a/src/ntfs-3g_common.c
-++++ b/src/ntfs-3g_common.c
-+@@ -128,6 +128,10 @@ const struct DEFOPTION optionlist[] =3D {
-+       { "efs_raw", OPT_EFS_RAW, FLGOPT_BOGUS },
-+       { "posix_nlink", OPT_POSIX_NLINK, FLGOPT_BOGUS },
-+       { "special_files", OPT_SPECIAL_FILES, FLGOPT_STRING },
-++      { "--help", OPT_HELP, FLGOPT_BOGUS },
-++      { "-h", OPT_HELP, FLGOPT_BOGUS },
-++      { "--version", OPT_VERSION, FLGOPT_BOGUS },
-++      { "-V", OPT_VERSION, FLGOPT_BOGUS },
-+       { (const char*)NULL, 0, 0 } /* end marker */
-+ } ;
-+
-+@@ -521,6 +525,8 @@ char *parse_mount_options(ntfs_fuse_context_t *ctx,
-+                        * mounted or not.
-+                        *      (falling through to default)
-+                        */
-++                      case OPT_HELP : /* Could lead to unclean condition =
-*/
-++                      case OPT_VERSION : /* Could lead to unclean conditi=
-on */
-+                       default :
-+                               ntfs_log_error("'%s' is an unsupported opti=
-on.\n",
-+                                       poptl->name);
-+diff --git a/src/ntfs-3g_common.h b/src/ntfs-3g_common.h
-+index 4ed256a3..8ead5107 100644
-+--- a/src/ntfs-3g_common.h
-++++ b/src/ntfs-3g_common.h
-+@@ -94,6 +94,8 @@ enum {
-+       OPT_EFS_RAW,
-+       OPT_POSIX_NLINK,
-+       OPT_SPECIAL_FILES,
-++      OPT_HELP,
-++      OPT_VERSION,
-+ } ;
-+
-+                       /* Option flags */
++     if (dh->filled) {
++-        if (off < dh->len) {
+++        if ((off >=3D 0) && (off < dh->len)) {
++             if (off + size > dh->len)
++                 size =3D dh->len - off;
++         } else
 diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g=
 -ntfsprogs_2021.8.22.bb b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfs=
 progs/ntfs-3g-ntfsprogs_2021.8.22.bb
-index ca8af163e..ccd18f86c 100644
+index 9e233e127..ea8607e6d 100644
 --- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfspr=
 ogs_2021.8.22.bb
 +++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfspr=
 ogs_2021.8.22.bb
-@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D59530bdf33659b29=
-e73d4adb9f9f6552 \
- SRC_URI =3D "http://tuxera.com/opensource/ntfs-3g_ntfsprogs-${PV}.tgz \
-            file://0001-libntfs-3g-Makefile.am-fix-install-failed-while-hos=
-t.patch \
+@@ -11,6 +11,7 @@ SRC_URI =3D "http://tuxera.com/opensource/ntfs-3g_ntfspro=
+gs-${PV}.tgz \
             file://CVE-2021-46790.patch \
-+           file://CVE-2022-30783.patch \
+            file://CVE-2022-30783.patch \
+            file://CVE-2022-30784.patch \
++           file://CVE-2022-30785_30787.patch \
            "
 
  S =3D "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
