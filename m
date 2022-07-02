@@ -1,295 +1,223 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C07EC43334
-	for <webhook@archiver.kernel.org>; Sat,  2 Jul 2022 04:00:54 +0000 (UTC)
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com
- [209.85.222.181])
- by mx.groups.io with SMTP id smtpd.web10.47040.1656734449848924832
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F410EC43334
+	for <webhook@archiver.kernel.org>; Sat,  2 Jul 2022 13:01:26 +0000 (UTC)
+Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com
+ [209.85.160.177])
+ by mx.groups.io with SMTP id smtpd.web11.49473.1656766883345749332
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 Jul 2022 21:00:50 -0700
+ Sat, 02 Jul 2022 06:01:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=fSfC3dMS;
- spf=pass (domain: gmail.com, ip: 209.85.222.181,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f181.google.com with SMTP id p11so3169336qkg.12
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=msDzA0t8;
+ spf=pass (domain: gmail.com, ip: 209.85.160.177,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-qt1-f177.google.com with SMTP id r2so3406742qta.0
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 Jul 2022 21:00:49 -0700 (PDT)
+ Sat, 02 Jul 2022 06:01:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=166ZRmw6vPoau2M3iINpt/tbTdFa74rJc94l6uMSjtM=;
-        b=fSfC3dMSrZ8Kt9WQ5T9ymKe7/VdVl4UKVty5t1ZPriAKS1YQQZId2HxOcVry4mZ9As
-         JX0LkiYrvNGPSUQ4TKsDVmhEPyMOAoGUoBQdeERhCOCjjirHYKQkGxAV5n7/pV5KecgJ
-         g7oxKg96H1XmZIQgsTICnqf68TKEK0L1/3GC7Dreo6aRIGkMueHmJkJX/JrXaJXEJYV/
-         tL7APh+ZuyGCWcQRbt3XO/OW8tjx+Fkw/c0g3BwhpfnNb65wd3fq9LN9aQlQq4gUHgyU
-         ILfK9JfHWbLoBhEiEduTH5YSmg5Urv5Bi+HVL1xt0pXrsJILqkHqzHipBQ12sn0XagsX
-         soCA==
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :references:from:in-reply-to:content-transfer-encoding;
+        bh=T0Tflluh2k9rzNnNLUFPp92MlbAagHQkXiNUy94EpV0=;
+        b=msDzA0t8KieM6fYGiBm3UWyxlIzx3/nHFoeRTwB9vtXEmnndKwLCw6clJCumMnkZnc
+         ofXEb55uxIIgP10PZAyLyrZmWCQHhVRQZiVagtKuBZcDNZ+L+an40kNDgvcUGodQh4eh
+         lxEJ4T4nxdDH854t7hCWOk99mjWDBpPyQSt15h4dEY+uzID7bSCi7oaYgrsmpmT9+cMH
+         YzyeCO9gF/4fesH/mKW+maaMuDHW+pb2gGqZCw8yQU6scxZlRjrnLjpVBgR8agGXsj0m
+         bTl4E3cYFehuds9MYWufcvtONLUPG8sNXbMir+LK7GrqATD4QXAbEv/d53rvGsrbEaWM
+         HyNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=166ZRmw6vPoau2M3iINpt/tbTdFa74rJc94l6uMSjtM=;
-        b=Wali8StlEBXmmhLpcMwi+xRf6nHWK9i+XoxT7L5JH2CPNf8Z74dmA7WQo4KvHKVduf
-         OVteENalPdcr7g1fTYUjFUxcNfd33cTuiug486UxatMBITxyx/z0qmsawEiQetXb0lNh
-         ti/bB90Y1Qa9W0WALgtAro2mYW/XKsS0Q8QsQhURiPVMgSjb5QgZQISYvAQmI4TrPBI2
-         QNaQnFQsi7FFnDbwTV5VO7wxB/uJVOALioNPNV4vNoXsr5JlYQ/YnqI4TZzX56cEjN9j
-         gQUex+AUCBJ8cbBt6OUGj6Cv8zCPKvKpFXw9Y5X2oHQeKVTmAEezwsXAICYhA3mDX9tO
-         vaEw==
-X-Gm-Message-State: AJIora/oEyH9bVl2pPHAIoVSAA/4P6orLN9N7CivsmexWv1vC/Ot9599
-	1tiOevbfjtFrId1xMahjGBgCT4DKhvCO4Q56qoc=
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:references:from:in-reply-to
+         :content-transfer-encoding;
+        bh=T0Tflluh2k9rzNnNLUFPp92MlbAagHQkXiNUy94EpV0=;
+        b=SbMVPI/R57AF+tef9nRd9HWHomSmsMwmAYiNAptD1yiNSzEoeCyN4umwCgZtUH9tDZ
+         OTpzpsYu8xiVl8bTZOsdC/d1BdnmlaPU7YvRjWPAc3/ofYE3k1k2g5Xu7aKefHXaVIoM
+         4QC8map8OA6sxeYkD/L5ioAFdpd9c/n3tB5f8MvX16aCSFfGqFz99Hu93pz006A376sb
+         yUWvsugZhgKHshT6Hojb5XnGg5lyxDUzsX4eTh3zuhHizHzi7s3S9KgMhWoFoIJrRPKE
+         7stA6MmVwBO5Q2XgiLhpXfcu3ly+Hx7i3+AvWQGieHYnwJjJmP1fLvwZEK0bnpTQVQ50
+         eS7w==
+X-Gm-Message-State: AJIora+711Rrl+L78ggpg4FhOG788w0llYYYklQ9Ky2HXrISBA9oUIh8
+	oiW1rAwxixVh4JUB+Vp+v94=
 X-Google-Smtp-Source: 
- AGRyM1uiNUv3KDGGMJb4xu1lA/whuH2L8odSr7Yq2FwJ90qDqaJV8RVfDppbyeVL9bORrQ9CjJqlb4OzkQRJmfneTXY=
-X-Received: by 2002:a37:68c8:0:b0:6ae:ffb1:8495 with SMTP id
- d191-20020a3768c8000000b006aeffb18495mr13427637qkc.463.1656734448838; Fri, 01
- Jul 2022 21:00:48 -0700 (PDT)
+ AGRyM1vpE0VTwp1sexLlglFuIJPRob3yheVDYQZTDZKbx38SjtOPZA+KA0k45HTEIEfSgFv1F3GSyQ==
+X-Received: by 2002:a0c:d405:0:b0:443:8347:d7a5 with SMTP id
+ t5-20020a0cd405000000b004438347d7a5mr1530847qvh.11.1656766882008;
+        Sat, 02 Jul 2022 06:01:22 -0700 (PDT)
+Received: from ?IPV6:2600:1700:14b1:7390:cd97:e8bf:f94e:be78?
+ ([2600:1700:14b1:7390:cd97:e8bf:f94e:be78])
+        by smtp.gmail.com with ESMTPSA id
+ y9-20020a05620a25c900b006a370031c3esm20725944qko.106.2022.07.02.06.01.21
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 02 Jul 2022 06:01:21 -0700 (PDT)
+Message-ID: <4eeeb395-0e95-e797-abaa-5e0e3a43c89b@gmail.com>
+Date: Sat, 2 Jul 2022 09:01:20 -0400
 MIME-Version: 1.0
-References: <20220622141710.725808-1-zboszor@pr.hu>
- <20220622141710.725808-4-zboszor@pr.hu>
-In-Reply-To: <20220622141710.725808-4-zboszor@pr.hu>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 2 Jul 2022 00:00:22 -0400
-Message-ID: 
- <CAMKF1srP8_Y8-Atfb9i7mQTw3OKz-B1jrYRJoKxrwBPu=RuB-Q@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v4 4/4] libspatialite: Upgrade to 5.0.1
-To: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@pr.hu>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	=?UTF-8?B?Wm9sdMOhbiBCw7ZzesO2cm3DqW55aQ==?= <zboszor@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.1
+Subject: Re: [oe] [meta-networking][kirkstone][PATCH] cyrus-sasl:
+ CVE-2022-24407 failure to properly escape SQL input allows an attacker to
+ execute arbitrary SQL commands
+Content-Language: en-US
+To: Hitendra Prajapati <hprajapati@mvista.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20220628055554.10496-1-hprajapati@mvista.com>
+From: akuster808 <akuster808@gmail.com>
+In-Reply-To: <20220628055554.10496-1-hprajapati@mvista.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 02 Jul 2022 04:00:54 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 02 Jul 2022 13:01:26 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97674
+ https://lists.openembedded.org/g/openembedded-devel/message/97677
 
-does this need some specific version of geos ? seeing this
+I built this on kirkstone and one patch does not apply.
 
-https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1813/step=
-s/14/logs/stdio
+ERROR: cyrus-sasl-2.1.28-r0 do_patch: Applying patch 
+'CVE-2022-24407.patch' on target directory 
+'/builds/54vdLR_9/0/akuster/meta-branch-maint/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/cyrus-sasl/2.1.28-r0/git'
+CmdError('quilt --quiltrc 
+/builds/54vdLR_9/0/akuster/meta-branch-maint/build/tmp/work/cortexa15t2hf-neon-poky-linux-gnueabi/cyrus-sasl/2.1.28-r0/recipe-sysroot-native/etc/quiltrc 
+push', 0, 'stdout: Applying patch CVE-2022-24407.patch
+patching file plugins/sql.c
+Hunk #1 FAILED at 1150.
+Hunk #2 FAILED at 1221.
+Hunk #3 FAILED at 1242.
+Hunk #4 succeeded at 1127 (offset -160 lines).
+3 out of 4 hunks FAILED -- rejects in file plugins/sql.c
+Patch CVE-2022-24407.patch can be reverse-applied
 
-On Wed, Jun 22, 2022 at 10:17 AM Zoltan Boszormenyi via
-lists.openembedded.org <zboszor=3Dpr.hu@lists.openembedded.org> wrote:
+
+
+On 6/28/22 22:55, Hitendra Prajapati wrote:
+> Source: https://github.com/cyrusimap/cyrus-sasl
+> MR: 118497
+> Type: Security Fix
+> Disposition: Backport from https://github.com/cyrusimap/cyrus-sasl/commit/9eff746c9daecbcc0041b09a5a51ba30738cdcbc
+> ChangeID: 4736aae2b7d8986787b1666cfd6eecd590915120
+> Description:
+>         CVE-2022-24407 cyrus-sasl: failure to properly escape SQL input allows an attacker to execute arbitrary SQL commands.
 >
-> From: Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi <zboszor@gmail.com>
->
-> Removed a patch that didn't apply to the new version.
->
-> Added three patches without changes from Fedora that allowed
-> the new version to compile.
-> See https://koji.fedoraproject.org/koji/buildinfo?buildID=3D1924183
->
-> Signed-off-by: Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi <zboszor@gmail.com>
+> Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 > ---
->  .../libspatialite/geos-config.patch           | 17 --------
->  .../libspatialite/libspatialite_geos.patch    | 43 +++++++++++++++++++
->  .../libspatialite/libspatialite_macros.patch  | 12 ++++++
->  .../libspatialite_pkgconfig.patch             | 11 +++++
->  ...alite_4.3.0a.bb =3D> libspatialite_5.0.1.bb} | 14 +++---
->  5 files changed, 74 insertions(+), 23 deletions(-)
->  delete mode 100644 meta-oe/recipes-navigation/libspatialite/libspatialit=
-e/geos-config.patch
->  create mode 100644 meta-oe/recipes-navigation/libspatialite/libspatialit=
-e/libspatialite_geos.patch
->  create mode 100644 meta-oe/recipes-navigation/libspatialite/libspatialit=
-e/libspatialite_macros.patch
->  create mode 100644 meta-oe/recipes-navigation/libspatialite/libspatialit=
-e/libspatialite_pkgconfig.patch
->  rename meta-oe/recipes-navigation/libspatialite/{libspatialite_4.3.0a.bb=
- =3D> libspatialite_5.0.1.bb} (63%)
+>   .../cyrus-sasl/CVE-2022-24407.patch           | 83 +++++++++++++++++++
+>   .../cyrus-sasl/cyrus-sasl_2.1.28.bb           |  1 +
+>   2 files changed, 84 insertions(+)
+>   create mode 100644 meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/CVE-2022-24407.patch
 >
-> diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite/geos-=
-config.patch b/meta-oe/recipes-navigation/libspatialite/libspatialite/geos-=
-config.patch
-> deleted file mode 100644
-> index 28bd7dad8..000000000
-> --- a/meta-oe/recipes-navigation/libspatialite/libspatialite/geos-config.=
-patch
-> +++ /dev/null
-> @@ -1,17 +0,0 @@
-> -https://www.gaia-gis.it/fossil/libspatialite/tktview?name=3Dabeeaad448
-> -
-> -Upstream-Status: Submitted [rpm5-devel@rpm5.org]
-> -
-> -Index: libspatialite-4.2.0/configure.ac
-> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> ---- libspatialite-4.2.0.orig/configure.ac
-> -+++ libspatialite-4.2.0/configure.ac
-> -@@ -260,7 +260,7 @@ if test x"$enable_geos" !=3D "xno"; then
-> -   fi
-> -   # Extract the linker and include flags
-> -   GEOS_LDFLAGS=3D`$GEOSCONFIG --ldflags`
-> --  GEOS_CFLAGS=3D-I`$GEOSCONFIG --includes`
-> -+  GEOS_CFLAGS=3D`$GEOSCONFIG --cflags`
-> -   AC_SUBST([GEOS_LDFLAGS])
-> -   AC_SUBST([GEOS_CFLAGS])
-> -   # Ensure that we can parse geos_c.h
-> diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite/libsp=
-atialite_geos.patch b/meta-oe/recipes-navigation/libspatialite/libspatialit=
-e/libspatialite_geos.patch
+> diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/CVE-2022-24407.patch b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/CVE-2022-24407.patch
 > new file mode 100644
-> index 000000000..7d8d2c2e4
+> index 000000000..0ddea03c6
 > --- /dev/null
-> +++ b/meta-oe/recipes-navigation/libspatialite/libspatialite/libspatialit=
-e_geos.patch
-> @@ -0,0 +1,43 @@
-> +diff -rupN --no-dereference libspatialite-5.0.1/configure.ac libspatiali=
-te-5.0.1-new/configure.ac
-> +--- libspatialite-5.0.1/configure.ac   2021-03-08 08:57:19.015858195 +01=
-00
-> ++++ libspatialite-5.0.1-new/configure.ac       2021-03-08 08:57:19.01785=
-8195 +0100
-> +@@ -312,35 +312,10 @@ AC_ARG_ENABLE(geos, [AS_HELP_STRING(
-> +   [], [enable_geos=3Dyes])
-> + if test x"$enable_geos" !=3D "xno"; then
-> +   #--------------------------------------------------------------------=
----
-> +-  #   --with-geosconfig
-> +-  #
-> +-  AC_ARG_WITH([geosconfig],
-> +-        [AS_HELP_STRING([--with-geosconfig=3DFILE], [specify an alterna=
-tive geos-config file])],
-> +-      [GEOSCONFIG=3D"$withval"], [GEOSCONFIG=3D""])
-> +-  if test "x$GEOSCONFIG" =3D "x"; then
-> +-        # GEOSCONFIG was not specified, so search within the current pa=
-th
-> +-        AC_PATH_PROG([GEOSCONFIG], [geos-config])
-> +-        # If we couldn't find geos-config, display an error
-> +-        if test "x$GEOSCONFIG" =3D "x"; then
-> +-                AC_MSG_ERROR([could not find geos-config within the cur=
-rent path. You may need to try re-running configure with a --with-geosconfi=
-g parameter.])
-> +-        fi
-> +-  else
-> +-        # GEOSCONFIG was specified; display a message to the user
-> +-        if test "x$GEOSCONFIG" =3D "xyes"; then
-> +-                AC_MSG_ERROR([you must specify a parameter to --with-ge=
-osconfig, e.g. --with-geosconfig=3D/path/to/geos-config])
-> +-        else
-> +-                if test -f $GEOSCONFIG; then
-> +-                        AC_MSG_RESULT([Using user-specified geos-config=
- file: $GEOSCONFIG])
-> +-                else
-> +-                        AC_MSG_ERROR([the user-specified geos-config fi=
-le $GEOSCONFIG does not exist])
-> +-                fi
-> +-        fi
-> +-  fi
-> +-  # Extract the linker and include flags
-> +-  GEOS_LDFLAGS=3D`$GEOSCONFIG --ldflags`
-> +-  GEOS_CFLAGS=3D-I`$GEOSCONFIG --includes`
-> +-  AC_SUBST([GEOS_LDFLAGS])
-> +-  AC_SUBST([GEOS_CFLAGS])
-> ++  PKG_CHECK_MODULES([GEOS], [geos], , AC_MSG_ERROR(['geos' is required =
-but it doesn't seem to be installed on this system.]))
-> ++  GEOS_LDFLAGS=3D"$GEOS_LIBS"
-> ++  AC_SUBST(GEOS_CFLAGS)
-> ++  AC_SUBST(GEOS_LDFLAGS)
-> +   # Ensure that we can parse geos_c.h
-> +   CPPFLAGS_SAVE=3D"$CPPFLAGS"
-> +   CPPFLAGS=3D"$GEOS_CFLAGS"
-> diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite/libsp=
-atialite_macros.patch b/meta-oe/recipes-navigation/libspatialite/libspatial=
-ite/libspatialite_macros.patch
-> new file mode 100644
-> index 000000000..9b71ab765
-> --- /dev/null
-> +++ b/meta-oe/recipes-navigation/libspatialite/libspatialite/libspatialit=
-e_macros.patch
-> @@ -0,0 +1,12 @@
-> +diff -rupN --no-dereference libspatialite-5.0.1/configure.ac libspatiali=
-te-5.0.1-new/configure.ac
-> +--- libspatialite-5.0.1/configure.ac   2021-03-08 08:57:18.748858216 +01=
-00
-> ++++ libspatialite-5.0.1-new/configure.ac       2021-03-08 08:57:18.75185=
-8215 +0100
-> +@@ -96,7 +96,7 @@ AC_PROG_INSTALL
-> + AC_PROG_LN_S
-> + AC_PROG_MAKE_SET
-> + AC_LIBTOOL_WIN32_DLL
-> +-AC_PROG_LIBTOOL
-> ++LT_INIT
+> +++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/CVE-2022-24407.patch
+> @@ -0,0 +1,83 @@
+> +From 906b863c5308567086c6437ce17335b1922a78d1 Mon Sep 17 00:00:00 2001
+> +From: Hitendra Prajapati <hprajapati@mvista.com>
+> +Date: Wed, 15 Jun 2022 10:44:50 +0530
+> +Subject: [PATCH] CVE-2022-24407
 > +
-> + # Checks for typedefs, structures, and compiler characteristics.
-> + AC_C_CONST
-> diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite/libsp=
-atialite_pkgconfig.patch b/meta-oe/recipes-navigation/libspatialite/libspat=
-ialite/libspatialite_pkgconfig.patch
-> new file mode 100644
-> index 000000000..149c12676
-> --- /dev/null
-> +++ b/meta-oe/recipes-navigation/libspatialite/libspatialite/libspatialit=
-e_pkgconfig.patch
-> @@ -0,0 +1,11 @@
-> +diff -rupN libspatialite-5.0.1/spatialite.pc.in libspatialite-5.0.1-new/=
-spatialite.pc.in
-> +--- libspatialite-5.0.1/spatialite.pc.in       2021-02-07 16:53:46.00000=
-0000 +0100
-> ++++ libspatialite-5.0.1-new/spatialite.pc.in   2021-02-10 09:54:09.64755=
-2994 +0100
-> +@@ -8,5 +8,6 @@ includedir=3D@includedir@
-> + Name: spatialite
-> + Description: Spatial SQL database engine based on SQLite
-> + Version: @VERSION@
-> +-Libs: -L${libdir} -lspatialite @LIBS@ @LIBXML2_LIBS@ -lm
-> ++Libs.private: -L${libdir} @LIBS@ @LIBXML2_LIBS@ -lm
-> ++Libs: -L${libdir} -lspatialite
-> + Cflags: -I${includedir}
-> diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite_4.3.0=
-a.bb b/meta-oe/recipes-navigation/libspatialite/libspatialite_5.0.1.bb
-> similarity index 63%
-> rename from meta-oe/recipes-navigation/libspatialite/libspatialite_4.3.0a=
-.bb
-> rename to meta-oe/recipes-navigation/libspatialite/libspatialite_5.0.1.bb
-> index f6c765519..f46b1083e 100644
-> --- a/meta-oe/recipes-navigation/libspatialite/libspatialite_4.3.0a.bb
-> +++ b/meta-oe/recipes-navigation/libspatialite/libspatialite_5.0.1.bb
-> @@ -7,14 +7,16 @@ LICENSE =3D "MPL-1.1 & GPL-2.0-or-later & LGPL-2.1-or-l=
-ater"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D0e92e1a36cc384b60f5b31dde0bdd=
-39e"
->
->  SRC_URI =3D "http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libs=
-patialite-${PV}.tar.gz \
-> -           file://geos-config.patch"
-> -SRC_URI[md5sum] =3D "6b380b332c00da6f76f432b10a1a338c"
-> -SRC_URI[sha256sum] =3D "88900030a4762904a7880273f292e5e8ca6b15b7c6c3fb88=
-ffa9e67ee8a5a499"
-> +           file://libspatialite_geos.patch \
-> +           file://libspatialite_macros.patch \
-> +           file://libspatialite_pkgconfig.patch \
-> +"
->
-> -inherit autotools pkgconfig
-> +SRC_URI[sha256sum] =3D "eecbc94311c78012d059ebc0fae86ea5ef6eecb13303e6e8=
-2b3753c1b3409e98"
->
-> -EXTRA_OECONF =3D "--enable-freexl=3Dno"
-> -CFLAGS +=3D "-DACCEPT_USE_OF_DEPRECATED_PROJ_API_H"
-> +inherit autotools-brokensep pkgconfig
+> +Upstream-Status: Backport [https://github.com/cyrusimap/cyrus-sasl/commit/9eff746c9daecbcc0041b09a5a51ba30738cdcbc]
+> +CVE: CVE-2022-24407
+> +Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+> +---
+> + plugins/sql.c | 26 +++++++++++++++++++++++---
+> + 1 file changed, 23 insertions(+), 3 deletions(-)
 > +
-> +EXTRA_OECONF =3D "--enable-freexl=3Dno --disable-rttopo --disable-minizi=
-p"
+> +diff --git a/plugins/sql.c b/plugins/sql.c
+> +index 95f5f707..5d20759b 100644
+> +--- a/plugins/sql.c
+> ++++ b/plugins/sql.c
+> +@@ -1150,6 +1150,7 @@ static int sql_auxprop_store(void *glob_context,
+> +     char *statement = NULL;
+> +     char *escap_userid = NULL;
+> +     char *escap_realm = NULL;
+> ++    char *escap_passwd = NULL;
+> +     const char *cmd;
+> +
+> +     sql_settings_t *settings;
+> +@@ -1221,6 +1222,11 @@ static int sql_auxprop_store(void *glob_context,
+> + 			    "Unable to begin transaction\n");
+> +     }
+> +     for (cur = to_store; ret == SASL_OK && cur->name; cur++) {
+> ++	/* Free the buffer, current content is from previous loop. */
+> ++	if (escap_passwd) {
+> ++	    sparams->utils->free(escap_passwd);
+> ++	    escap_passwd = NULL;
+> ++	}
+> +
+> + 	if (cur->name[0] == '*') {
+> + 	    continue;
+> +@@ -1242,19 +1248,32 @@ static int sql_auxprop_store(void *glob_context,
+> + 	}
+> + 	sparams->utils->free(statement);
+> +
+> ++	if (cur->values[0]) {
+> ++	    escap_passwd = (char *)sparams->utils->malloc(strlen(cur->values[0])*2+1);
+> ++	    if (!escap_passwd) {
+> ++		ret = SASL_NOMEM;
+> ++		break;
+> ++	    }
+> ++	    settings->sql_engine->sql_escape_str(escap_passwd, cur->values[0]);
+> ++	}
+> ++
+> + 	/* create a statement that we will use */
+> + 	statement = sql_create_statement(cmd, cur->name, escap_userid,
+> + 					 escap_realm,
+> +-					 cur->values && cur->values[0] ?
+> +-					 cur->values[0] : SQL_NULL_VALUE,
+> ++					 escap_passwd ?
+> ++					 escap_passwd : SQL_NULL_VALUE,
+> + 					 sparams->utils);
+> ++	if (!statement) {
+> ++	    ret = SASL_NOMEM;
+> ++	    break;
+> ++	}
+> + 	
+> + 	{
+> + 	    char *log_statement =
+> + 		sql_create_statement(cmd, cur->name,
+> + 				     escap_userid,
+> + 				     escap_realm,
+> +-				     cur->values && cur->values[0] ?
+> ++				     escap_passwd ?
+> + 				     "<omitted>" : SQL_NULL_VALUE,
+> + 				     sparams->utils);
+> + 	    sparams->utils->log(sparams->utils->conn, SASL_LOG_DEBUG,
+> +@@ -1287,6 +1306,7 @@ static int sql_auxprop_store(void *glob_context,
+> +   done:
+> +     if (escap_userid) sparams->utils->free(escap_userid);
+> +     if (escap_realm) sparams->utils->free(escap_realm);
+> ++    if (escap_passwd) sparams->utils->free(escap_passwd);
+> +     if (conn) settings->sql_engine->sql_close(conn);
+> +     if (userid) sparams->utils->free(userid);
+> +     if (realm) sparams->utils->free(realm);
+> +--
+> +2.25.1
+> +
+> diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.28.bb b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.28.bb
+> index 98899dfd5..e344733ef 100644
+> --- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.28.bb
+> +++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.28.bb
+> @@ -14,6 +14,7 @@ SRC_URI = "git://github.com/cyrusimap/cyrus-sasl;protocol=https;branch=cyrus-sas
+>              file://saslauthd.service \
+>              file://saslauthd.conf \
+>              file://CVE-2019-19906.patch \
+> +	   file://CVE-2022-24407.patch \
+>              "
+>   
+>   UPSTREAM_CHECK_URI = "https://github.com/cyrusimap/cyrus-sasl/archives"
 >
->  # package plugins for SQLite3
->  PACKAGES +=3D "${PN}-plugin"
-> --
-> 2.36.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#97567): https://lists.openembedded.org/g/openembedded=
--devel/message/97567
-> Mute This Topic: https://lists.openembedded.org/mt/91922737/1997914
+> View/Reply Online (#97602): https://lists.openembedded.org/g/openembedded-devel/message/97602
+> Mute This Topic: https://lists.openembedded.org/mt/92038717/3616698
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
 >
+
 
