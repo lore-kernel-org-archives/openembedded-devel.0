@@ -2,104 +2,94 @@ Return-Path: <davidegarde2000@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A873C43334
-	for <webhook@archiver.kernel.org>; Mon,  4 Jul 2022 09:46:40 +0000 (UTC)
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com
- [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web09.70625.1656927998049170420
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 38E86C433EF
+	for <webhook@archiver.kernel.org>; Mon,  4 Jul 2022 09:59:30 +0000 (UTC)
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com
+ [209.85.218.43])
+ by mx.groups.io with SMTP id smtpd.web10.70569.1656928763359074072
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Jul 2022 02:46:38 -0700
+ Mon, 04 Jul 2022 02:59:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=VJIUSBUg;
- spf=pass (domain: gmail.com, ip: 209.85.218.49,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=M+PVwjRw;
+ spf=pass (domain: gmail.com, ip: 209.85.218.43,
  mailfrom: davidegarde2000@gmail.com)
-Received: by mail-ej1-f49.google.com with SMTP id mf9so15847034ejb.0
+Received: by mail-ej1-f43.google.com with SMTP id o25so15823091ejm.3
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Jul 2022 02:46:37 -0700 (PDT)
+ Mon, 04 Jul 2022 02:59:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=Cc8QZQUCVOrTLrbdWIwwKfjET2vkEojtjwdaWExJg8g=;
-        b=VJIUSBUgPs6Gra8d87zEMsE8BvYLY/8P+Y+3hQ6C7pI6G+yxdta415wM8ga3/4VSuU
-         BVlRSKqD0LJnfsugrs1uZTXGiqiEwgJbq8j9hAozqfvyTeQkHqd1U8VzY2ZwIabVe4Yg
-         9jgKuRdFTXpWsHgC/tLw6dmH3Ke/gI2piq3KSdmeUQeM8nkE3adb6ypnF5msQjbZ0IhH
-         VaDVGulzia04dE/DO6KxfeiKRRJ9ih4B1z+IiKIUrGrckKjK4znk9/lSBsyUGsc70nXu
-         xZuu8RqV/uIlRF/qBHKFjODiFkN7FITzgk9/TRkDfA/PjIFacypWUcQasXCauIXo7Xmo
-         R9rw==
+        bh=G6q6Ilxj1NPp6t8H6AOb1fEcnWFYxe3+tXx34K/PsJQ=;
+        b=M+PVwjRwyiCl17COBTEUi30N1AajG07w1c1i+3CPQQ/AzxZf2ujHC3YL9C+R4KSuAu
+         L4nu0sy3683S0Je/o+zFO/Wlfo1tu3gfECGFCbP0AZsSXdRo3SNwyKMf0cmU2538oOS1
+         iegMGPaoY/FPAi8KQ669j9XIkMJVYSGwGH9VxDkUYP6fcFUu2wxrkDCC8gLl/2FBWRo0
+         GYCE/4nMPeMt9FWjFGybLu+JfwqDYK/FoeMUd2zs7Tan6mqexv44WVxfi/Pu/JghVU+W
+         rXJNjHJruwPjnW3f0DI0avlFhnjQjxI76i6gUn2ieyG3v4cf9YVXIGcz1cp6nto+i+or
+         Hc5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=Cc8QZQUCVOrTLrbdWIwwKfjET2vkEojtjwdaWExJg8g=;
-        b=ZC2whZMOLfEsgzHnzTN13pk5htX0vD1Jg1TKIb9YOnVwBPynjRbjG+w4BG/P9WGylV
-         G7BmGFaXsKPvGFDx+8+VimphVAtxk/5f9givKEXk/R4aY7t3lChMIBGizZBoz/uedi1k
-         mbGsQnNe0fcMEuIXS+TEqKlbW9gM8CiSrhefzYZQpjkoMrLvfWtxzJ3NH6/3PyojO4I8
-         uqFI3OXg88MnIW0erw9byjytSHGJn8ElS35QS943MMoG92mwawvfTyTjqHAkOJznteSk
-         iOtxG5Gx478i6qCzFggF7tGUmKLXQrptYd8L3O2dy3pYlyHyDuwrtXXAiRLIq0WN3C7J
-         T0aA==
-X-Gm-Message-State: AJIora/r744yAGionOoUSLcN+s3+JZJWizFnDExceDWA/HYuGHb0uU8V
-	DVAfmPvovElAvu7NEsrDBQuVA0ORXBM=
+        bh=G6q6Ilxj1NPp6t8H6AOb1fEcnWFYxe3+tXx34K/PsJQ=;
+        b=688JgR6jDjxejxYcYUsP9rEyLEUByLAQVbHpFTVLQjjMbjl669i73psBrAX72e6Fxc
+         sXiBlyEpbyQVu2x80Z83hdzXwoqNY5dSXmMeh5U6VPQV2m7pWeW0kf7eglzvvaTXXgk8
+         +Zvy5KasMI9xzv+fgzSChFDoBPGp6TgtGzEDprkps9VZsFR+hl0aU/bh0ywH4Z8IRalM
+         tfiCrnLRr36is7J3LWsRvh9bRaiNiOxblHTBmXTye8gPW+DfGpP/Vkxto40UJE/j6Qqh
+         gkBBT8xKGV7eMMLjHB5DU8+ZQFjzid/A8Xy0wk6KrFJ3G/4FuYIkXyiPBKQCWknkVJbX
+         1Lvw==
+X-Gm-Message-State: AJIora8z9QKj15OT3PtrPebihyYVlIVo0z0/LAze7OtCFupQfkq4YBpW
+	2fJfUZxIIb6M8IGGn5aR1dyPvP82SdQ=
 X-Google-Smtp-Source: 
- AGRyM1sLR2eFvNkMTLtLSwx8bumUiYDhpk9uuqDM+LXyAWULNRI4cHLgdIDOtWMGJ7SAmnKw/3FVZQ==
-X-Received: by 2002:a17:907:3f88:b0:726:a6a3:750c with SMTP id
- hr8-20020a1709073f8800b00726a6a3750cmr28306509ejc.142.1656927996101;
-        Mon, 04 Jul 2022 02:46:36 -0700 (PDT)
+ AGRyM1ve+ps0Ipoh2mijsK3jDzKiwWjI8PbxxqIvm2+ZLr2YStaqd6xJtJitLKmKzFVX5PDxnhYl9w==
+X-Received: by 2002:a17:907:1dea:b0:72a:6012:7bbc with SMTP id
+ og42-20020a1709071dea00b0072a60127bbcmr21848164ejc.258.1656928761529;
+        Mon, 04 Jul 2022 02:59:21 -0700 (PDT)
 Received: from tony3oo3-XPS-13-9370.home
  (host-82-60-178-162.retail.telecomitalia.it. [82.60.178.162])
         by smtp.gmail.com with ESMTPSA id
- kv12-20020a17090778cc00b0072ac3f06615sm1469707ejc.133.2022.07.04.02.46.35
+ a9-20020a170906244900b00722e50dab2csm13792122ejb.109.2022.07.04.02.59.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 04 Jul 2022 02:46:35 -0700 (PDT)
+        Mon, 04 Jul 2022 02:59:21 -0700 (PDT)
 From: Davide Gardenal <davidegarde2000@gmail.com>
 X-Google-Original-From: Davide Gardenal <davide.gardenal@huawei.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Davide Gardenal <davide.gardenal@huawei.com>
-Subject: [meta-oe][master][kirkstone][PATCH v2] emlog: ignore unrelated CVEs
-Date: Mon,  4 Jul 2022 11:40:55 +0200
-Message-Id: <20220704094055.43185-1-davide.gardenal@huawei.com>
+Subject: [meta-networking][kirkstone][master][PATCH] usrsctp: add CVE_VERSION
+ to correctly check for CVEs
+Date: Mon,  4 Jul 2022 11:59:13 +0200
+Message-Id: <20220704095913.50754-1-davide.gardenal@huawei.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 04 Jul 2022 09:46:40 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Jul 2022 09:59:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97687
+ https://lists.openembedded.org/g/openembedded-devel/message/97688
 
-This product is not present in the NVD database but another
-one with exactly the same name is in fact present. For that
-reason cve-check is outputting CVEs that are unrelated so they
-can be ignored.
+The current version of usrsctp is not a release so cve-check
+is not able to find the product version. CVE_VERSION is now set
+to 0.9.3.0  that is the nearest version in the past starting from
+the revision we have.
+This is done because we don't have the complete 0.9.4.0 release.
 
 Signed-off-by: Davide Gardenal <davide.gardenal@huawei.com>
 ---
-Updates:
-    -v2: fix typo
----
- meta-oe/recipes-core/emlog/emlog_git.bb | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-core/emlog/emlog_git.bb b/meta-oe/recipes-core/emlog/emlog_git.bb
-index be9ae5823..e2dcd4633 100644
---- a/meta-oe/recipes-core/emlog/emlog_git.bb
-+++ b/meta-oe/recipes-core/emlog/emlog_git.bb
-@@ -24,3 +24,14 @@ do_install() {
- }
+diff --git a/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb b/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb
+index 4f8e4d428..dcfa7406d 100644
+--- a/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb
++++ b/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb
+@@ -23,3 +23,5 @@ PACKAGECONFIG[inet] = "--enable-inet,--disable-inet,"
+ PACKAGECONFIG[inet6] = "--enable-inet6,--disable-inet6,"
  
- RRECOMMENDS:${PN} += "kernel-module-emlog"
+ EXTRA_OECONF += "--disable-debug"
 +
-+# The NVD database doesn't have a CPE for this product,
-+# the name of this product is exactly the same as github.com/emlog/emlog
-+# but it's not related in any way. The following CVEs are from that project
-+# so they can be safely ignored
-+CVE_CHECK_IGNORE += "\
-+    CVE-2019-16868 \
-+    CVE-2019-17073 \
-+    CVE-2021-44584 \
-+    CVE-2022-1526 \
-+"
++CVE_VERSION = "0.9.3.0"
 -- 
 2.34.1
 
