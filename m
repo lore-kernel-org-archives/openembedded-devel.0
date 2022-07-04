@@ -2,94 +2,94 @@ Return-Path: <davidegarde2000@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 38E86C433EF
-	for <webhook@archiver.kernel.org>; Mon,  4 Jul 2022 09:59:30 +0000 (UTC)
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com
- [209.85.218.43])
- by mx.groups.io with SMTP id smtpd.web10.70569.1656928763359074072
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 854F1C433EF
+	for <webhook@archiver.kernel.org>; Mon,  4 Jul 2022 10:46:00 +0000 (UTC)
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com
+ [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web09.71006.1656931555917571463
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Jul 2022 02:59:23 -0700
+ Mon, 04 Jul 2022 03:45:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=M+PVwjRw;
- spf=pass (domain: gmail.com, ip: 209.85.218.43,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=i7rWYidd;
+ spf=pass (domain: gmail.com, ip: 209.85.218.51,
  mailfrom: davidegarde2000@gmail.com)
-Received: by mail-ej1-f43.google.com with SMTP id o25so15823091ejm.3
+Received: by mail-ej1-f51.google.com with SMTP id q6so15943802eji.13
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Jul 2022 02:59:23 -0700 (PDT)
+ Mon, 04 Jul 2022 03:45:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=G6q6Ilxj1NPp6t8H6AOb1fEcnWFYxe3+tXx34K/PsJQ=;
-        b=M+PVwjRwyiCl17COBTEUi30N1AajG07w1c1i+3CPQQ/AzxZf2ujHC3YL9C+R4KSuAu
-         L4nu0sy3683S0Je/o+zFO/Wlfo1tu3gfECGFCbP0AZsSXdRo3SNwyKMf0cmU2538oOS1
-         iegMGPaoY/FPAi8KQ669j9XIkMJVYSGwGH9VxDkUYP6fcFUu2wxrkDCC8gLl/2FBWRo0
-         GYCE/4nMPeMt9FWjFGybLu+JfwqDYK/FoeMUd2zs7Tan6mqexv44WVxfi/Pu/JghVU+W
-         rXJNjHJruwPjnW3f0DI0avlFhnjQjxI76i6gUn2ieyG3v4cf9YVXIGcz1cp6nto+i+or
-         Hc5Q==
+        bh=9B5Ss9tv4iHGoWz/sRT491VsXweaMvHcBaPtWe75yVE=;
+        b=i7rWYidddXXTD6Nbdid5M8xTK6wiNOQCfD3nY2LojrLelyzxIm31QKTEc9JyflH7CL
+         0tszx0S4SXJZAwHnxeCIUrIzu6XMH1VuvzWn5NtwHYxAHB8yaz4ZJbxT2V+9qB25LJH3
+         +MVmpfGchrBHBXXec27AtL7M8XC07ZZtVImleX5dwFQgR8QYnhDwMyO4hoo4Ct8RhfrU
+         5VEGQt1lsS0XoxkGAkO7JjMxprUDUeuBSzzEAfCm1RwEJwWPNR30+miaH6WE4sLwZGVv
+         jlpejOzfVA1JPyeiHlM9P9yNKYMxq1NqOlJoM/uqJqAUW9p3bhQnP4nk9cxVX0xAOTIT
+         SrTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=G6q6Ilxj1NPp6t8H6AOb1fEcnWFYxe3+tXx34K/PsJQ=;
-        b=688JgR6jDjxejxYcYUsP9rEyLEUByLAQVbHpFTVLQjjMbjl669i73psBrAX72e6Fxc
-         sXiBlyEpbyQVu2x80Z83hdzXwoqNY5dSXmMeh5U6VPQV2m7pWeW0kf7eglzvvaTXXgk8
-         +Zvy5KasMI9xzv+fgzSChFDoBPGp6TgtGzEDprkps9VZsFR+hl0aU/bh0ywH4Z8IRalM
-         tfiCrnLRr36is7J3LWsRvh9bRaiNiOxblHTBmXTye8gPW+DfGpP/Vkxto40UJE/j6Qqh
-         gkBBT8xKGV7eMMLjHB5DU8+ZQFjzid/A8Xy0wk6KrFJ3G/4FuYIkXyiPBKQCWknkVJbX
-         1Lvw==
-X-Gm-Message-State: AJIora8z9QKj15OT3PtrPebihyYVlIVo0z0/LAze7OtCFupQfkq4YBpW
-	2fJfUZxIIb6M8IGGn5aR1dyPvP82SdQ=
+        bh=9B5Ss9tv4iHGoWz/sRT491VsXweaMvHcBaPtWe75yVE=;
+        b=owfG5JFhLMdmfKdeln1RcmXhdL0kZfWhfdR0QbnJbkDIs0pcFXAi5Uj4wP2716cL3e
+         k4u9vt64n+Iik6/oesOD39Re2i3RoLBLXAQutsSSVnExETXMhunGQsV/x7BD0PiT1cLA
+         lYrtmli+LXebNb5TEZvT4ZFelLjxuUN6A1N4e1RkfKNIrHG7/eMVxuxhYVpH6xwFQb4h
+         v7Z1Vhy9ixnPYS8+RIuhN3K3mRmy9rv/41f8coXiZtg6Xkc6pMNxOxHxnLrfzaTS/jjx
+         BtIERtTOLYinNH+GKHoa0ATpyltrBfIIj1/9zQPQCs/vdbZONIN+e7lnPGHZOreJS7wn
+         H+9A==
+X-Gm-Message-State: AJIora+1v9QuQfE9z8o+1WgNVrnAYZIGLiRB3+ins7HGufcxPsA6jX7Z
+	oSuYotU2f8422uTIGeqiP7kr0W9NUhA=
 X-Google-Smtp-Source: 
- AGRyM1ve+ps0Ipoh2mijsK3jDzKiwWjI8PbxxqIvm2+ZLr2YStaqd6xJtJitLKmKzFVX5PDxnhYl9w==
-X-Received: by 2002:a17:907:1dea:b0:72a:6012:7bbc with SMTP id
- og42-20020a1709071dea00b0072a60127bbcmr21848164ejc.258.1656928761529;
-        Mon, 04 Jul 2022 02:59:21 -0700 (PDT)
+ AGRyM1svBoGcaS3K/E2UqZ74H5EcvtyJmse2T0zs1snFseD9kC77WYQCaLvCcd1hWBX1XhEdBdYPMg==
+X-Received: by 2002:a17:906:7944:b0:6da:b834:2f3e with SMTP id
+ l4-20020a170906794400b006dab8342f3emr27895928ejo.353.1656931554112;
+        Mon, 04 Jul 2022 03:45:54 -0700 (PDT)
 Received: from tony3oo3-XPS-13-9370.home
  (host-82-60-178-162.retail.telecomitalia.it. [82.60.178.162])
         by smtp.gmail.com with ESMTPSA id
- a9-20020a170906244900b00722e50dab2csm13792122ejb.109.2022.07.04.02.59.20
+ s12-20020a1709064d8c00b00722e50e259asm13918377eju.102.2022.07.04.03.45.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 04 Jul 2022 02:59:21 -0700 (PDT)
+        Mon, 04 Jul 2022 03:45:53 -0700 (PDT)
 From: Davide Gardenal <davidegarde2000@gmail.com>
 X-Google-Original-From: Davide Gardenal <davide.gardenal@huawei.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Davide Gardenal <davide.gardenal@huawei.com>
-Subject: [meta-networking][kirkstone][master][PATCH] usrsctp: add CVE_VERSION
- to correctly check for CVEs
-Date: Mon,  4 Jul 2022 11:59:13 +0200
-Message-Id: <20220704095913.50754-1-davide.gardenal@huawei.com>
+Subject: [meta-networking][master][kirkstone][PATCH] openflow: ignore
+ CVE-2018-1078
+Date: Mon,  4 Jul 2022 12:45:48 +0200
+Message-Id: <20220704104548.71523-1-davide.gardenal@huawei.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 04 Jul 2022 09:59:30 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Jul 2022 10:46:00 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97688
+ https://lists.openembedded.org/g/openembedded-devel/message/97689
 
-The current version of usrsctp is not a release so cve-check
-is not able to find the product version. CVE_VERSION is now set
-to 0.9.3.0  that is the nearest version in the past starting from
-the revision we have.
-This is done because we don't have the complete 0.9.4.0 release.
+CVE-2018-1078 is not for openflow but in the NVD database the
+CVE is for a specific implementation that we don't have so we
+can ignore it.
 
 Signed-off-by: Davide Gardenal <davide.gardenal@huawei.com>
 ---
- meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-networking/recipes-protocols/openflow/openflow.inc | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb b/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb
-index 4f8e4d428..dcfa7406d 100644
---- a/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb
-+++ b/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb
-@@ -23,3 +23,5 @@ PACKAGECONFIG[inet] = "--enable-inet,--disable-inet,"
- PACKAGECONFIG[inet6] = "--enable-inet6,--disable-inet6,"
+diff --git a/meta-networking/recipes-protocols/openflow/openflow.inc b/meta-networking/recipes-protocols/openflow/openflow.inc
+index 15eb65ad3..ccafaf0de 100644
+--- a/meta-networking/recipes-protocols/openflow/openflow.inc
++++ b/meta-networking/recipes-protocols/openflow/openflow.inc
+@@ -53,3 +53,7 @@ do_install:append() {
+ }
  
- EXTRA_OECONF += "--disable-debug"
+ FILES:${PN} += "${nonarch_libdir}/tmpfiles.d"
 +
-+CVE_VERSION = "0.9.3.0"
++# This CVE is not for this product but cve-check assumes it is
++# because two CPE collides when checking the NVD database
++CVE_CHECK_IGNORE = "CVE-2018-1078"
 -- 
 2.34.1
 
