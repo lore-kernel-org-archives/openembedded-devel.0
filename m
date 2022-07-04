@@ -2,74 +2,77 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 01389C43334
-	for <webhook@archiver.kernel.org>; Mon,  4 Jul 2022 09:07:50 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
- [85.158.142.112])
- by mx.groups.io with SMTP id smtpd.web12.70017.1656925666590076523
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DD30EC433EF
+	for <webhook@archiver.kernel.org>; Mon,  4 Jul 2022 09:07:59 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.2])
+ by mx.groups.io with SMTP id smtpd.web10.70274.1656925672801604043
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Jul 2022 02:07:47 -0700
+ Mon, 04 Jul 2022 02:07:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ZMnKxShr;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.112,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=XoaCbKiv;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.2,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1656925664; i=@fujitsu.com;
-	bh=hiK79uHg38pK2+ZwLJvv20+ayG8EGvpRwuYIDkL8QHU=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=ZMnKxShrQ6jdMpSIAwrIiKsoq+HgffH5ir1UYPkPYx8AijLsAYcJh8wkjVyi+pXvx
-	 L84znkBNXZqwjckWZkRc2Rvy9wSMHEGDEXWMvSUQRmmM0BI6E5d6JK43hi5Ro3YWEz
-	 lu7ISYiUiXJTUj55H3V608J2wjxd6+ijLxkvxwVfMZUPup4UwBWKAcdftemlSi5oC0
-	 X3QmHArfIFa2IMk0/DLCDT40HCy0u5BVS6q/zxG4X6ZnrPE9g/xXtOczyuyLGP9CkE
-	 4JAv8phlv5kJgH5hdt1FBhVMK0D+RBUcpxSB/g0Sn+U/o+5WihFA2bbmdFC5sEKhYU
-	 PmTkTdWsglfRA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrIIsWRWlGSWpSXmKPExsViZ8MxSffB2kN
-  JBk+3MlpcPLyU2YHR49zGFYwBjFGsmXlJ+RUJrBlXHkxhLtghUrF38zvmBsYOoS5GLg4hgSeM
-  Ekv+fWGFcK4zSVzYepwZwtnNKNHSfpmli5GTg01ATWL6rRusILaIgL7E0tl7mEFsZgEViRe/e
-  9hBbGEBT4kD8/4zgdgsQPEDU9vA6nkFHCXePG1hA7ElBBQkpjx8zwwRF5Q4OfMJC8QcCYmDL1
-  4wQ9QoSsy+3MwCYVdIzJixDapXTeLquU3MExj5ZyFpn4WkfQEj0ypGm6SizPSMktzEzBxdQwM
-  DXUNDUyBtqGtsoJdYpZuol1qqm5dfVJKha6iXWF6sl1pcrFdcmZuck6KXl1qyiREYminFqXI7
-  GA/s+6V3iFGSg0lJlHdq7aEkIb6k/JTKjMTijPii0pzU4kOMMhwcShK8TquBcoJFqempFWmZO
-  cA4gUlLcPAoifB+XQSU5i0uSMwtzkyHSJ1i1OXYdPjKXmYhlrz8vFQpcd61a4CKBECKMkrz4E
-  bAYvYSo6yUMC8jAwODEE9BalFuZgmq/CtGcQ5GJWHeFJApPJl5JXCbXgEdwQR0xI2qAyBHlCQ
-  ipKQamJS3/t6iXZ7a9iiisnviXE0b9qCZXL7VP8sCpRtMdHqmuy8rma7BMY836lmA/bxfKzhE
-  7TXZ7WcYdv4q9rH5b/ddYcPnqFVFuR48+9keV9ruks48wOn36+YzTTafzTd3GZ1W4XtwK130v
-  IKse9c95z3R0xdsbjpsMiFKfl7jrw3/1969s+bDhfMimov0v9gE3z26/V3MN2MNtrSczWon+n
-  uF2O9Ov7bUIu9sYphVxDOPc9ZLn7HUFUn/Upg45ZPLn0tqK5vldsxQrfcM2hti+LC13/jVD/H
-  0x7nFpyP574kt0HHTjg69aG14afZi++SM09P4fZfob4vT59a5+UpI4qjSKdc3f058qNvw7dnP
-  AiWW4oxEQy3mouJEAEZ9JWhUAwAA
+	s=170520fj; t=1656925671; i=@fujitsu.com;
+	bh=nS8+03Ao/w8DRIbc/I8wFBi+WNWiE6q4Rjbci8UYSmo=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=XoaCbKivOD9cI8XfZKQEF9tYH/yE3mrDPznCRzsQtjfZzxfYSVFqEjikjbuwEkkVW
+	 EvR3SaDCtJEaOBYKpk1gzMT9JP+bbj6fPygTieDpmT24tNhLNi3gIC8ghSRPeRoE38
+	 cYu8V2zuecdVNcGYSOO5uGxULzwHAApgkfMdEPhagQ7j64/SqzSLuFc3OKzcq5f0YV
+	 sQrMooikc5IlWruRjIhcUY0IWjiTPTxSFb6f9VRVMl25Yh6UJF7oX+7fr7LF+YAA6V
+	 AkqQk9JeDjkw+8achy+Pfoe7pRJVbCIC03PZg3piuYq9Ta6Twq07omS0Kz1793NHrE
+	 HonM6HM1Czg1w==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrDIsWRWlGSWpSXmKPExsViZ8ORqPts7aE
+  kg4f/ZC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oxla5awFKxjr7iw/gVTA+NVti5GLg4hgSeM
+  EsuPtEE515kkXtyazQzh7GaUuPF4KmMXIycHm4CaxPRbN1hBbBEBfYmls/cwg9jMAioSL373s
+  IPYwgI2Et82PwGrZwGKnzjXwQJi8wo4SnReugzWKyGgIDHl4XuwXk4BJ4mnDVOZuhg5gJY5Sk
+  yfqwhRLihxcuYTFojxEhIHX7xghmhVlJh9uZkFwq6QmDFjGxuErSZx9dwm5gmMgrOQtM9C0r6
+  AkWkVo1VSUWZ6RkluYmaOrqGBga6hoamuqa6RsbFeYpVuol5qqW55anGJrqFeYnmxXmpxsV5x
+  ZW5yTopeXmrJJkZgEKcUs77cwTi976feIUZJDiYlUd6ptYeShPiS8lMqMxKLM+KLSnNSiw8xy
+  nBwKEnwOq0GygkWpaanVqRl5gAjCiYtwcGjJML7dRFQmre4IDG3ODMdInWK0Zjj6pUre5k5Nu
+  3rOsAsxJKXn5cqJc67dg1QqQBIaUZpHtwgWKRfYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCT
+  MmwIyhSczrwRu3yugU5iATrlRdQDklJJEhJRUA9OsZZXvWGdrbjkf0B+xv3Z7gLveTMbMx23/
+  z4qWeM/bsEydYQp7ksCd9deFjTfw8/J/vvzkZ+jDh0nKf8PqE258Nyo4d2mFY9OEFlc//YKMd
+  gl11e328iueZ3a8je1RTuFaHb7g9+TTc18tKuLXTtr+TT9O84brluIv/2vnL4s6sU5s3bnDXI
+  +dniT47f/tXxfLfTCwTTj+1FuPz0/flDrtrHp2+tWfAwszi74Jmi+V/PQ0dLuj06cUuQhGxzk
+  3kw2e26z5cKvVKKdgeVnm8pOMl5v4jX5KBJfGdG0pmBbOpyW8/MH2RUnTVn9lEcoqyW1R6m7f
+  l/xgXw7LtFOlV4Sm3Nz5/VjJRumPVUz1zlVKLMUZiYZazEXFiQAskjEsbwMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-10.tower-728.messagelabs.com!1656925663!20717!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-7.tower-591.messagelabs.com!1656925670!129161!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.86.8; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 23865 invoked from network); 4 Jul 2022 09:07:43 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-10.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 4 Jul 2022 09:07:43 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 697181000C0
+Received: (qmail 20980 invoked from network); 4 Jul 2022 09:07:50 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-7.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 4 Jul 2022 09:07:50 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 1EB51100199
 	for <openembedded-devel@lists.openembedded.org>;
- Mon,  4 Jul 2022 10:07:43 +0100 (BST)
+ Mon,  4 Jul 2022 10:07:50 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
  [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 5CB03100077
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 12F96100043
 	for <openembedded-devel@lists.openembedded.org>;
- Mon,  4 Jul 2022 10:07:43 +0100 (BST)
+ Mon,  4 Jul 2022 10:07:50 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 4 Jul 2022 10:07:41 +0100
+ (TLS) id 15.0.1497.32; Mon, 4 Jul 2022 10:07:48 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] abseil-cpp: upgrade 20211102 ->  20220623
-Date: Mon, 4 Jul 2022 17:07:20 +0800
-Message-ID: <1656925643-8143-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] bats: upgrade 1.6.1 -> 1.7.0
+Date: Mon, 4 Jul 2022 17:07:21 +0800
+Message-ID: <1656925643-8143-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1656925643-8143-1-git-send-email-wangmy@fujitsu.com>
+References: <1656925643-8143-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -79,75 +82,36 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 04 Jul 2022 09:07:49 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Jul 2022 09:07:59 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97682
+ https://lists.openembedded.org/g/openembedded-devel/message/97683
 
-0001-absl-always-use-asm-sgidefs.h.patch
-refreshed for new verion.
+Changelog:https://github.com/bats-core/bats-core/releases/tag/v1.7.0
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../abseil-cpp/0001-absl-always-use-asm-sgidefs.h.patch  | 9 +++++----
- meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb    | 6 +++---
- 2 files changed, 8 insertions(+), 7 deletions(-)
+ meta-oe/recipes-test/bats/{bats_1.6.1.bb => bats_1.7.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-test/bats/{bats_1.6.1.bb => bats_1.7.0.bb} (94%)
 
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-absl-always-use-asm-sgidefs.h.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-absl-always-use-asm-sgidefs.h.patch
-index a5bebf5f0..5242b29e0 100644
---- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-absl-always-use-asm-sgidefs.h.patch
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-absl-always-use-asm-sgidefs.h.patch
-@@ -10,29 +10,30 @@ that makes it portable.
- Upstream-Status: Pending
+diff --git a/meta-oe/recipes-test/bats/bats_1.6.1.bb b/meta-oe/recipes-test/bats/bats_1.7.0.bb
+similarity index 94%
+rename from meta-oe/recipes-test/bats/bats_1.6.1.bb
+rename to meta-oe/recipes-test/bats/bats_1.7.0.bb
+index 7d72a5198..56b47959d 100644
+--- a/meta-oe/recipes-test/bats/bats_1.6.1.bb
++++ b/meta-oe/recipes-test/bats/bats_1.7.0.bb
+@@ -10,8 +10,8 @@ SRC_URI = "\
+   git://github.com/bats-core/bats-core.git;branch=version/1.6.x;protocol=https \
+   "
  
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- ---
-  absl/base/internal/direct_mmap.h | 6 +-----
-  1 file changed, 1 insertion(+), 5 deletions(-)
+-# v1.6.1
+-SRCREV = "1977254c2a7faa2e0af17355856f91dc471d1daa"
++# v1.7.0
++SRCREV = "410dd229a5ed005c68167cc90ed0712ad2a1c909"
  
- diff --git a/absl/base/internal/direct_mmap.h b/absl/base/internal/direct_mmap.h
--index a01d61220376..c8a4fbabbb3a 100644
-+index e492bb0..c8a4fba 100644
- --- a/absl/base/internal/direct_mmap.h
- +++ b/absl/base/internal/direct_mmap.h
- @@ -41,13 +41,9 @@
-  
-  #ifdef __mips__
-  // Include definitions of the ABI currently in use.
---#ifdef __BIONIC__
-+-#if defined(__BIONIC__) || !defined(__GLIBC__)
- -// Android doesn't have sgidefs.h, but does have asm/sgidefs.h, which has the
- +// bionic/musl C libs don't have sgidefs.h, but do have asm/sgidefs.h, which has the
-  // definitions we need.
-  #include <asm/sgidefs.h>
- -#else
- -#include <sgidefs.h>
---#endif  // __BIONIC__
-+-#endif  // __BIONIC__ || !__GLIBC__
-  #endif  // __mips__
-  
-  // SYS_mmap and SYS_munmap are not defined in Android.
- -- 
--2.36.1
-+2.25.1
+ S = "${WORKDIR}/git"
  
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-index b271134fd..b3dc06ca1 100644
---- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-@@ -7,9 +7,9 @@ SECTION = "libs"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=df52c6edb7adc22e533b2bacc3bd3915"
- 
--PV = "20211102.1+git${SRCPV}"
--SRCREV = "7c6608d0dbe43cf9bdf7f77787bc6bc89cc42f8b"
--BRANCH = "master"
-+PV = "20220623.0"
-+SRCREV = "273292d1cfc0a94a65082ee350509af1d113344d"
-+BRANCH = "lts_2022_06_23"
- SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH};protocol=https \
-            file://0001-absl-always-use-asm-sgidefs.h.patch             \
-            file://0002-Remove-maes-option-from-cross-compilation.patch \
 -- 
 2.25.1
 
