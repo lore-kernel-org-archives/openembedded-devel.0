@@ -1,105 +1,131 @@
-Return-Path: <davidegarde2000@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8CAD7C43334
-	for <webhook@archiver.kernel.org>; Tue,  5 Jul 2022 14:59:29 +0000 (UTC)
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com
- [209.85.208.41])
- by mx.groups.io with SMTP id smtpd.web08.85091.1657033166881821334
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0002FC43334
+	for <webhook@archiver.kernel.org>; Tue,  5 Jul 2022 19:34:50 +0000 (UTC)
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+ by mx.groups.io with SMTP id smtpd.web08.88350.1657049689291414459
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Jul 2022 07:59:27 -0700
+ Tue, 05 Jul 2022 12:34:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=m8JvLPsN;
- spf=pass (domain: gmail.com, ip: 209.85.208.41,
- mailfrom: davidegarde2000@gmail.com)
-Received: by mail-ed1-f41.google.com with SMTP id y8so9889954eda.3
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Jul 2022 07:59:26 -0700 (PDT)
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=OQW+H8Aw;
+ spf=pass (domain: axis.com, ip: 195.60.68.18,
+ mailfrom: peter.kjellerstedt@axis.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=7KOUCNwHpIpjaXqGhXIN2QdTfwOk6LBChasB0w50kdM=;
-        b=m8JvLPsNtJWaw7K3Jn18jL46LtgvOOS8AzkRFqKCPCCUSJlkpkEirxOmaGKrhvwYzk
-         jEFaTZ7qR9KAjOWudg9ayHkOl2fO0k8P0snyFEUYnWNJWo9rdfa0gwqqhTcdl/YMnQIk
-         zcCdtd3eHsdFog4OKHPLroBv/PhEnSzX4aWwGCI0WzHQFPlqSFfoFK+S84NLjKSPKtSj
-         WB5GL32YSXvAdO2cOd5a4EfIw/c0jtSeYNCKMN8+iUY2qWO9C5DwaTYBQN/mmxcfd1fx
-         G/gk2MSITjZwXdwcZDDXGdk/tkxCMqGKukizFHli5GwPvW1m81I+aXVGp20pE46BcLjw
-         bDxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=7KOUCNwHpIpjaXqGhXIN2QdTfwOk6LBChasB0w50kdM=;
-        b=UoQtbY7cDLhki+WSJtklvtMVs4cm8XMxh7JKRhJEB7CmhGxbDMiz2xhmPVBgOLPmRL
-         r+hDwEkYt/I0tsfNomb9CzqmheDXu+DQ9mmZtTZIf1FptmlT3cfAHgfPZLcglvhXm7BO
-         fsrEWzjqAfPh49tqpptNZ0cEFFPK30hv3dP5ju0wS4+4hQoeltOaI+Cdy9IeksUEkDbZ
-         EfAbIr0A+1apszyjRyzf+C+4Av+HWPUa2wZ0ZAx29789vMtRqDjCVwHZUYTi63tAjoys
-         uD8vQxfOuPjWSE5nqMzEuTC2fNnZOp2gvXlBQn+Sfcmfd87r3kOau/Rp7fKnaE8jGp2f
-         zdXA==
-X-Gm-Message-State: AJIora/IKH5L/cBsolGUDdGACyK7M30Ca7ebPCuofmae0nq/9ZujNIHU
-	cUMdFAVkjoXis6HSx3WJf9GJu6+G0P4=
-X-Google-Smtp-Source: 
- AGRyM1un2U1nXJ02TnXZoYm9eC6gIvdCny6pw4pemg2HUfUANtEL12nx1l38QuO06SAs4lGHdqvNow==
-X-Received: by 2002:a05:6402:428a:b0:42e:8f7e:1638 with SMTP id
- g10-20020a056402428a00b0042e8f7e1638mr46976709edc.228.1657033164904;
-        Tue, 05 Jul 2022 07:59:24 -0700 (PDT)
-Received: from tony3oo3-XPS-13-9370.home
- (host-82-60-178-162.retail.telecomitalia.it. [82.60.178.162])
-        by smtp.gmail.com with ESMTPSA id
- ej19-20020a056402369300b0043a7293a03dsm2821817edb.7.2022.07.05.07.59.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Jul 2022 07:59:24 -0700 (PDT)
-From: Davide Gardenal <davidegarde2000@gmail.com>
-X-Google-Original-From: Davide Gardenal <davide.gardenal@huawei.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Davide Gardenal <davide.gardenal@huawei.com>
-Subject: [meta-networking][kirkstone][master][PATCH] wireshark: upgrade 3.4.11
- -> 3.4.12
-Date: Tue,  5 Jul 2022 16:59:21 +0200
-Message-Id: <20220705145921.321996-1-davide.gardenal@huawei.com>
-X-Mailer: git-send-email 2.34.1
+  d=axis.com; q=dns/txt; s=axis-central1; t=1657049689;
+  x=1688585689;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=7Cr3HWYjx2KI1pc16U9pgCWYQ3gdJv4uvv1hN5zlTZY=;
+  b=OQW+H8Awu1hT7JC8jMqTpQungmCVinTuTVcadLRyZZL7+Lg/mNOd+eOb
+   f/5k/pPrlE79Rd1YroLWYxnq+oKFZzaYZRdNRompYi79/E+0vpAYZzNPc
+   w9W0vE1WR5eekWyTiY5nD9fNxGEsYeci0PGeNvz/hr6Cb7F2IlWY4oBTG
+   9nZSEGmpXt2DqqKoEl2uZjvB3KoygFbbZZ+Eod5I6j/YhSt5CCsf3i0TE
+   H3t7zDyhSEkQJTedito12NBdwJQ5ATlOlZqBkx5wp6/+YtpY/mfCPelN8
+   sJ+qIc8rsQq2/25umXYrK8qN+l/1AUVtuTPj8zpRVPOvuISub7oTz/Mjk
+   w==;
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Armin Kuster <akuster808@gmail.com>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] [meta-oe][PATCH] cryptsetup: Add support for building
+ without SSH tokens
+Thread-Topic: [oe] [meta-oe][PATCH] cryptsetup: Add support for building
+ without SSH tokens
+Thread-Index: AQHYe2Vaqa//iELw9ke2BLd7SUzIva1wVSHg
+Date: Tue, 5 Jul 2022 19:34:46 +0000
+Message-ID: <c4a80ced5ef343ed85b315389f5d9650@axis.com>
+References: <16F6B88B2671EBED.5223@lists.openembedded.org>
+In-Reply-To: <16F6B88B2671EBED.5223@lists.openembedded.org>
+Accept-Language: en-US, sv-SE
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.0.5.60]
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 05 Jul 2022 14:59:29 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 05 Jul 2022 19:34:50 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97717
+ https://lists.openembedded.org/g/openembedded-devel/message/97718
 
-This upgrade includes the following CVE fixes:
-- CVE-2021-4190
-- CVE-2022-0581
-- CVE-2022-0582
-- CVE-2022-0583
-- CVE-2022-0585
-- CVE-2022-0586
+> -----Original Message-----
+> From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists=
+.openembedded.org> On Behalf Of Peter Kjellerstedt
+> Sent: den 8 juni 2022 20:27
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-oe][PATCH] cryptsetup: Add support for building witho=
+ut SSH tokens
 
-Signed-off-by: Davide Gardenal <davide.gardenal@huawei.com>
----
- .../wireshark/{wireshark_3.4.11.bb => wireshark_3.4.12.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_3.4.11.bb => wireshark_3.4.12.bb} (97%)
+This is now on master. Please backport it to Kirkstone.
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.4.11.bb b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-similarity index 97%
-rename from meta-networking/recipes-support/wireshark/wireshark_3.4.11.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-index f1dba227a..38fdbce89 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_3.4.11.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-@@ -19,7 +19,7 @@ SRC_URI += " \
- 
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
- 
--SRC_URI[sha256sum] = "a0e227bce2cc3a51ef3301891a0243231990b52a39b68a84a6e32f69c4e75279"
-+SRC_URI[sha256sum] = "881a13303e263b7dc7fe337534c8a541d4914552287879bed30bbe76c5bf68ca"
- 
- PE = "1"
- 
--- 
-2.34.1
+//Peter
 
+>=20
+> Cryptsetup SSH tokens is the only feature that has a dependency on
+> libssh. Add a packageconfig to control this dependency.
+>=20
+> Change-Id: Iac4f91e099ad2e3a79aab183734108f8bfbff57f
+> Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+> ---
+>  .../recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb    | 12 ++++++++++--
+>  1 file changed, 10 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb b/meta=
+-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
+> index 435b55477..652fd6661 100644
+> --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
+> +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
+> @@ -14,7 +14,6 @@ DEPENDS =3D " \
+>      libdevmapper \
+>      popt \
+>      util-linux-libuuid \
+> -    libssh \
+>  "
+>=20
+>  DEPENDS:append:libc-musl =3D " argp-standalone"
+> @@ -39,6 +38,7 @@ PACKAGECONFIG ??=3D " \
+>      blkid \
+>      luks-adjust-xts-keysize \
+>      openssl \
+> +    ssh-token \
+>  "
+>  PACKAGECONFIG:append:class-target =3D " \
+>      udev \
+> @@ -69,7 +69,7 @@ PACKAGECONFIG[nss] =3D "--with-crypto_backend=3Dnss,,ns=
+s"
+>  PACKAGECONFIG[kernel] =3D "--with-crypto_backend=3Dkernel"
+>  PACKAGECONFIG[nettle] =3D "--with-crypto_backend=3Dnettle,,nettle"
+>  PACKAGECONFIG[luks2] =3D "--with-default-luks-format=3DLUKS2,--with-defa=
+ult-luks-format=3DLUKS1"
+> -
+> +PACKAGECONFIG[ssh-token] =3D "--enable-ssh-token,--disable-ssh-token,lib=
+ssh"
+>=20
+>  EXTRA_OECONF =3D "--enable-static"
+>  # Building without largefile is not supported by upstream
+> @@ -90,6 +90,14 @@ EXTRA_OECONF +=3D "--with-luks2-pbkdf=3D${LUKS2_PBKDF}=
+ \
+>      --with-luks2-parallel-threads=3D${LUKS2_PARALLEL_THREADS} \
+>      --with-luks2-iter-time=3D${LUKS2_ITERTIME}"
+>=20
+> +do_install:append() {
+> +    # The /usr/lib/cryptsetup directory is always created, even when ssh=
+-token
+> +    # is disabled. In that case it is empty and causes a packaging error=
+. Since
+> +    # there is no reason to distribute the empty directory, the easiest =
+solution
+> +    # is to remove it if it is empty.
+> +    rmdir -p --ignore-fail-on-non-empty ${D}${libdir}/${BPN}
+> +}
+> +
+>  FILES:${PN} +=3D "${@bb.utils.contains('DISTRO_FEATURES','systemd','${ex=
+ec_prefix}/lib/tmpfiles.d/cryptsetup.conf', '', d)}"
+>=20
+>  RDEPENDS:${PN} =3D " \
 
