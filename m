@@ -1,116 +1,97 @@
-Return-Path: <davidegarde2000@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 00116C433EF
-	for <webhook@archiver.kernel.org>; Tue,  5 Jul 2022 08:45:26 +0000 (UTC)
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com
- [209.85.208.53])
- by mx.groups.io with SMTP id smtpd.web10.82106.1657010724727393419
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C08EC433EF
+	for <webhook@archiver.kernel.org>; Tue,  5 Jul 2022 14:24:19 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg
+ [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web08.84659.1657031053232822736
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Jul 2022 01:45:25 -0700
+ Tue, 05 Jul 2022 07:24:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=I9JHRHEa;
- spf=pass (domain: gmail.com, ip: 209.85.208.53,
- mailfrom: davidegarde2000@gmail.com)
-Received: by mail-ed1-f53.google.com with SMTP id k30so6231772edk.8
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Jul 2022 01:45:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=GfY64Cxxok2MOtfO1asaopIgsPCVhtWwwZKF+XOe3sk=;
-        b=I9JHRHEaV9RcxmSMjvyxOoj6GP6C27IFDKJ9jnt3fKwfYh5TBMqZGmO32ndmB+lNZh
-         kRJ7QxhMJqdw6qmmjA+dgnsaPA4dsn0bUm5QEny4ZDHmA+zqP57HmaTfEv5GQZWu+Ze1
-         9jfOHXWDr04u2idpoE4vmzwlvqm4qAmbmDJQS+LuZqUoIv2vlL2z71O+UXpbBzv+tNKW
-         mHGH2vD9mVDr2N9AgshiJJxTR1NQRa4IXnuZY2y6DB6RZWH4rneQrcn7kjGwBB/iyeik
-         yftjxMTatTyNayXHA6FHB0GSouwwpX9ZdFeT4tuUntMpTAPCHItOazJJP/2kn0d2nnyX
-         Nr3g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=GfY64Cxxok2MOtfO1asaopIgsPCVhtWwwZKF+XOe3sk=;
-        b=ApAot+xGebCK7hn00yNbgwbIvWxt7VC8kFD/rgsdeIISjq4u0xg0ggdYnKWeBfhIUX
-         nlrP+AAQLncSyrvqLlYXqrL8BtDoLbag59qTXuqvIEQ3n/iUCxis9/d8Lhp1COsVcFOE
-         o3uDbCdBQA9E1I1Sf8RvF7nZYKV6yDYmyRrR1oLWRTpj+65Z1JOsQBZrUwKVZTW28cjn
-         OGdtFhwvhHVtyyvVWaYPOBIL+cuIsn/m3msO069Ix9iaQ/4b+N2qq5TqaSt2MyBPc6ke
-         GwYs+/qQWIU3/Ouhj0UvmRg2EYV48ETk+CKWDD2+Zk+HShP1HFzJ1K/uPchnqidh5BuG
-         fePg==
-X-Gm-Message-State: AJIora8HQoXiapHdlBBXpiw0Rn95SiJCzJ6xp9gTN7BeVmp+czIn07fk
-	3+RfW+7dbpRpG2bDA8FQoMS36pG2gT8=
-X-Google-Smtp-Source: 
- AGRyM1sHR0ajRNejfugACOo5AMxZpT0l/fb/bqBIrz6J6aD4otX/rDeBbPfbPLFhOAq5QewXyDNMqQ==
-X-Received: by 2002:aa7:c2d1:0:b0:43a:997:c6d8 with SMTP id
- m17-20020aa7c2d1000000b0043a0997c6d8mr19685643edp.161.1657010722897;
-        Tue, 05 Jul 2022 01:45:22 -0700 (PDT)
-Received: from tony3oo3-XPS-13-9370.home
- (host-82-60-178-162.retail.telecomitalia.it. [82.60.178.162])
-        by smtp.gmail.com with ESMTPSA id
- ml22-20020a170906cc1600b006febce7081bsm15483485ejb.163.2022.07.05.01.45.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Jul 2022 01:45:22 -0700 (PDT)
-From: Davide Gardenal <davidegarde2000@gmail.com>
-X-Google-Original-From: Davide Gardenal <davide.gardenal@huawei.com>
+ dkim=pass header.i=@anavi.org header.s=default header.b=tlxU+nQq;
+ spf=permerror,
+ err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
+ for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
+ (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=HEFkyGnjweC8ynQJI4IBNvNqzYeBKawNXqGvorHzEuo=; b=tlxU+nQqSaSLCYQ2vqV35xERQ5
+	uZ2R1nJvJvb+p5SIHFF80hLVtAxmiUdtJWSmkwqjYiZTto7eacLCcPEJ0kQjIY4aAbyiUpFlahvH6
+	sy23CypQlSuvY2hEA6NJrO4CxDZACSzhyqHjCns1NSCG3Gp+T3zTQ76E7DMGlWLGf3z7hpaM7QhDF
+	GiwKtlnVzBG+MT4pXshlHPBvA/gjC9YwfX+pd5SIPPGb/v8znG7iHcqDNVfuNckh0W0WhTcC2MILX
+	Gl3efdYbm9O+9fpcWGp3f43fip8g7y8FE/iaQigpgDkBHnBuGEq2u7cONxjf6EMReR8V8ouEtwTXL
+	+mKCa+6Q==;
+Received: from lan.nucleusys.com ([92.247.61.126]:44750 helo=tone.k.g)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.95)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1o8jUG-00008J-PX;
+	Tue, 05 Jul 2022 17:24:13 +0300
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Davide Gardenal <davide.gardenal@huawei.com>
-Subject: [meta-oe][master][kirkstone][PATCH] imagemagick: upgrade 7.0.10-25 ->
- 7.0.10-62
-Date: Tue,  5 Jul 2022 10:45:14 +0200
-Message-Id: <20220705084514.202324-1-davide.gardenal@huawei.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/2] python3-elementpath: Upgrade 2.5.0 -> 2.5.3
+Date: Tue,  5 Jul 2022 17:23:59 +0300
+Message-Id: <20220705142359.1010195-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20220705142359.1010195-1-leon.anavi@konsulko.com>
+References: <20220705142359.1010195-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
+ leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 05 Jul 2022 08:45:26 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 05 Jul 2022 14:24:19 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97714
+ https://lists.openembedded.org/g/openembedded-devel/message/97716
 
-This upgrade includes patches for the following CVEs:
-- CVE-2020-13902
-- CVE-2020-27829
-- CVE-2020-29599
-- CVE-2021-20176
-- CVE-2021-20241
-- CVE-2021-20243
-- CVE-2021-20244
-- CVE-2021-20245
-- CVE-2021-20246
-- CVE-2021-3596
+Upgrade to release 2.5.3:
 
-Signed-off-by: Davide Gardenal <davide.gardenal@huawei.com>
+- Fix unary path step operator
+- Fix sphinx warnings 'reference target not found'
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ ...ython3-elementpath_2.5.0.bb => python3-elementpath_2.5.3.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-elementpath_2.5.0.bb => python3-elementpath_2.5.3.bb} (83%)
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-index 008a83f46..b8167f5a7 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-@@ -4,15 +4,15 @@ HOMEPAGE = "https://www.imagemagick.org/"
- DESCRIPTION = "ImageMagick is a collection of tools for displaying, converting, and \
- editing raster and vector image files. It can read and write over 200 image file formats."
- LICENSE = "ImageMagick"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=41b4fa9af60c88e61484b02c0561181a \
--                    file://NOTICE;md5=a2aa6e41f8a40700196a9ce301693e34"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b97c12a9213df1499565d69b92c73dd7 \
-+                    file://NOTICE;md5=d8b9d2ccf273687ad12ebd06e5d8478f"
- # FIXME: There are many more checked libraries. All should be added or explicitly disabled to get consistent results.
- DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
+diff --git a/meta-python/recipes-devtools/python/python3-elementpath_2.5.0.bb b/meta-python/recipes-devtools/python/python3-elementpath_2.5.3.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-elementpath_2.5.0.bb
+rename to meta-python/recipes-devtools/python/python3-elementpath_2.5.3.bb
+index e882952ac..22f5aa099 100644
+--- a/meta-python/recipes-devtools/python/python3-elementpath_2.5.0.bb
++++ b/meta-python/recipes-devtools/python/python3-elementpath_2.5.3.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/elementpath"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5dbb7fb7d72da3921202dd7b995d3ecf"
  
- BASE_PV := "${PV}"
--PV .= "_25"
-+PV .= "-62"
- SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https"
--SRCREV = "8b4e00829eb84d4e7b4da11acf1f98f1e8166e5b"
-+SRCREV = "35b4991eb0939a327f3489988c366e21068b0178"
+-SRC_URI[sha256sum] = "3a27aaf3399929fccda013899cb76d3ff111734abf4281e5f9d3721ba0b9ffa3"
++SRC_URI[sha256sum] = "b8aeb6f27dddc10fb9201b62090628a846cbae8577f3544cb1075fa38d0817f6"
  
- S = "${WORKDIR}/git"
- 
+ PYPI_PACKAGE = "elementpath"
+ inherit pypi setuptools3
 -- 
-2.34.1
+2.30.2
 
 
