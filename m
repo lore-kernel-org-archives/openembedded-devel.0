@@ -1,97 +1,97 @@
-Return-Path: <davidegarde2000@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DB11EC43334
-	for <webhook@archiver.kernel.org>; Wed,  6 Jul 2022 08:00:11 +0000 (UTC)
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com
- [209.85.208.53])
- by mx.groups.io with SMTP id smtpd.web10.3629.1657094405763899621
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 355A1CCA473
+	for <webhook@archiver.kernel.org>; Wed,  6 Jul 2022 08:20:02 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg
+ [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web12.3738.1657095595499596747
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Jul 2022 01:00:06 -0700
+ Wed, 06 Jul 2022 01:19:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=KTrJ4BnA;
- spf=pass (domain: gmail.com, ip: 209.85.208.53,
- mailfrom: davidegarde2000@gmail.com)
-Received: by mail-ed1-f53.google.com with SMTP id v12so5578537edc.10
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Jul 2022 01:00:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=sOd5LjKroX5BIf8Gw18Rrr9mITayYfG6E5ZC1HELPM4=;
-        b=KTrJ4BnAP+H1YeTRXIyKOdN5T3ne8SnmDX05pmIV/f2cXMz3pA4WCT4i9WVBuY+9Qs
-         CasaisZAdzIs61H5aScRTNhdSFyWMgctasjqccL6NpS49ll8ZAG6jPb2zhuUalWvHaLK
-         UXS/35Jv+yQKyKeNsJ4SggeN8e7YX68xAaAdfTdxSF9EaFJt0nysaHENMH/FIZEbZ19c
-         sPnrBEXTqVyfbAqbh+6mdZ/lFEPs56FCc7qQqkL75UPPC3qi1lrON+gkSTZVnDzdRUNZ
-         NhcWShOJq/NQo5WzAObzC4y7KSCE2zNifn+1FMHgdToAYqzrgkBPCBVfbPcatj4JIDE7
-         qZng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=sOd5LjKroX5BIf8Gw18Rrr9mITayYfG6E5ZC1HELPM4=;
-        b=XVP7sg3xOaBF08SPVRwNM7rX75VwUJFYj++/sV0UbBO73j0oG/8e715bqAOvRS2fB2
-         GJ3v06eU7ecc2/M2vQug2fYaU05wTUvOcEE4/OYx5Jb5KypZBcD5oxT0GelsGLBoWyIQ
-         VsNNJC92se3A+Zrbx1TiX0+MyLOHLc7L0HqeZ8KWQg72jyuCtcZmu22mcZ1V/aUnlQGZ
-         O2ZR/Bria/d137LadiuAy5JKtnPsmb5MnT+/w96UTzVRbx0t8raAky5yYV2uc77SFhNu
-         jIwnzFa/ZHjdw7cBmGyb/Mtn1GzsVkhWEN3Gds1uUGUtW4VemsI1XxS+UETK4znNLCje
-         TgUQ==
-X-Gm-Message-State: AJIora+6cpMztfjWlY28/ZyK+TbXP8boylxhWhbP9FN1lgH57SGKgfG/
-	CdFFD6w3qxKoLHfbdUx6mMIqkU70FLA=
-X-Google-Smtp-Source: 
- AGRyM1vxAO/ALmdZmQSd+MUbQ3ffM3wXxHI1QCCSQQIBa+ITvSvLvpxBycYGwyWwJwdsqO40Lp19KQ==
-X-Received: by 2002:aa7:c45a:0:b0:435:d7a4:99bc with SMTP id
- n26-20020aa7c45a000000b00435d7a499bcmr51963056edr.158.1657094403787;
-        Wed, 06 Jul 2022 01:00:03 -0700 (PDT)
-Received: from tony3oo3-XPS-13-9370.home
- (host-82-60-178-162.retail.telecomitalia.it. [82.60.178.162])
-        by smtp.gmail.com with ESMTPSA id
- es25-20020a056402381900b0043a6b86f024sm5764788edb.67.2022.07.06.01.00.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 06 Jul 2022 01:00:03 -0700 (PDT)
-From: Davide Gardenal <davidegarde2000@gmail.com>
-X-Google-Original-From: Davide Gardenal <davide.gardenal@huawei.com>
+ dkim=pass header.i=@anavi.org header.s=default header.b=faA+qrwC;
+ spf=permerror,
+ err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
+ for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
+ (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=v9MTubyoKXEs6FguTcbwOKhaG+BjMP8BsJIw6Ds1rwI=; b=faA+qrwCmqiCOlwr80OS00D+oK
+	w2jIhEnpW09dLMSkpPAjd4IF8N8WcRWJoMbFRqsXWtjA0z73UW40oQTNPjyq28JLhmROFaTlQzvnC
+	Mv2zQQmMUnBi3ssrOZZ1P5qtXgbb9xYXwT9y8Vpc+U9JfJslZxnML0l2MksuET66pe/Gu02IEqaZ+
+	v/JmxR9N8LcNDzGLI7WSKSOrZlHXzX1cJ2d+LE66J92J3MysN6opPNAKTwJkf6WWdwxvIlG8j2AwW
+	Vt1a6Uubuk/wccsxLxB+Znk4jj0ZKWWu6h6kPvrOOw0eXsqiepWz3HB68q4BJKDucUrnI7Nu8TDrj
+	phNjQeag==;
+Received: from lan.nucleusys.com ([92.247.61.126]:46700 helo=tone.k.g)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.95)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1o90HL-0000Lq-2G;
+	Wed, 06 Jul 2022 11:19:54 +0300
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Davide Gardenal <davide.gardenal@huawei.com>
-Subject: [meta-oe][kirkstone][master][PATCH] thrift: add CVE_PRODUCT to fix
- CVE reporting
-Date: Wed,  6 Jul 2022 09:59:57 +0200
-Message-Id: <20220706075957.16116-1-davide.gardenal@huawei.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/4] python3-serpent: Upgrade 1.40 -> 1.41
+Date: Wed,  6 Jul 2022 11:19:39 +0300
+Message-Id: <20220706081940.1256838-3-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20220706081940.1256838-1-leon.anavi@konsulko.com>
+References: <20220706081940.1256838-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
+ leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Jul 2022 08:00:11 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Jul 2022 08:20:02 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97723
+ https://lists.openembedded.org/g/openembedded-devel/message/97726
 
-Without CVE_PRODUCT set to apache:thrift cve-check was catching
-CVEs form facebook:thrift that are not related with this product.
-Now the report is correct.
+Upgrade to release 1.41:
 
-Signed-off-by: Davide Gardenal <davide.gardenal@huawei.com>
+- support for python 3.11 added (__getstate__ behavior change)
+- replaced travis CI by Github actions
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-connectivity/thrift/thrift_0.16.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../python/{python3-serpent_1.40.bb => python3-serpent_1.41.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-serpent_1.40.bb => python3-serpent_1.41.bb} (84%)
 
-diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.16.0.bb b/meta-oe/recipes-connectivity/thrift/thrift_0.16.0.bb
-index 2d601a2f9..8141abef5 100644
---- a/meta-oe/recipes-connectivity/thrift/thrift_0.16.0.bb
-+++ b/meta-oe/recipes-connectivity/thrift/thrift_0.16.0.bb
-@@ -15,6 +15,8 @@ SRC_URI[sha256sum] = "f460b5c1ca30d8918ff95ea3eb6291b3951cf518553566088f3f2be898
+diff --git a/meta-python/recipes-devtools/python/python3-serpent_1.40.bb b/meta-python/recipes-devtools/python/python3-serpent_1.41.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-serpent_1.40.bb
+rename to meta-python/recipes-devtools/python/python3-serpent_1.41.bb
+index 935531a85..480e3ab38 100644
+--- a/meta-python/recipes-devtools/python/python3-serpent_1.40.bb
++++ b/meta-python/recipes-devtools/python/python3-serpent_1.41.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Serialization based on ast.literal_eval"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d7c28f460fafe7be454fcdcac0b60263"
  
- BBCLASSEXTEND = "native nativesdk"
+-SRC_URI[sha256sum] = "10b34e7f8e3207ee6fb70dcdc9bce473851ee3daf0b47c58aec1b48032ac11ce"
++SRC_URI[sha256sum] = "0407035fe3c6644387d48cff1467d5aa9feff814d07372b78677ed0ee3ed7095"
  
-+CVE_PRODUCT = "apache:thrift"
-+
- inherit pkgconfig cmake python3native
+ inherit pypi ptest setuptools3
  
- export STAGING_INCDIR
 -- 
-2.34.1
+2.30.2
 
 
