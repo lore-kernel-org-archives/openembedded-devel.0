@@ -1,96 +1,100 @@
-Return-Path: <davidegarde2000@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C8B6AC433EF
-	for <webhook@archiver.kernel.org>; Wed,  6 Jul 2022 10:24:42 +0000 (UTC)
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com
- [209.85.208.43])
- by mx.groups.io with SMTP id smtpd.web12.4531.1657103066332458239
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 54CE4C43334
+	for <webhook@archiver.kernel.org>; Wed,  6 Jul 2022 12:01:03 +0000 (UTC)
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com
+ [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.web09.5350.1657108854427821437
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Jul 2022 03:24:26 -0700
+ Wed, 06 Jul 2022 05:00:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=kOXeo1D7;
- spf=pass (domain: gmail.com, ip: 209.85.208.43,
- mailfrom: davidegarde2000@gmail.com)
-Received: by mail-ed1-f43.google.com with SMTP id eq6so18652378edb.6
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=LTI+w8wE;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id j3so1522672pfb.6
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Jul 2022 03:24:26 -0700 (PDT)
+ Wed, 06 Jul 2022 05:00:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=qeQMC28TeCmCkBWDJprXzHTNjz2BcmuecLQb1/OPTio=;
-        b=kOXeo1D7LQjCSdltRTnJlfHQR3VEZ9+VszMT8A4LE/Lv6JMwZWYl6Kdzz7sHlXJ8tj
-         INS8J8Y79m9D0huMoeHMLx4Oc9ybo0MJnt7JplHMyUDdgWZMZTi+Tp+J7yAR7yCRN1Oc
-         7jEalzbWyTiFw9TmGA9jtVg3Ka3ZmNhCHm4YJy/pJ/HCiufB0/PDBCm2+4U/ETsc8U6s
-         3FUskRLGPCRUSEIVQxoEx9xbFPw2ez9lIUvkyrNC7DwTQWUUotGpvza8yafMZhhnB9or
-         JpzEOZQ+U0DCeVMmw9Fa1CwE71LTTTpGMbCAArbpYICmuEsJnmlH4kcntGLC5sChtlyS
-         fm6Q==
+        bh=SwCiwIpgZXjArj3+Vxges8j6eROaL/Y7Wk/MpYLdMGA=;
+        b=LTI+w8wEhNkMKdg7Adu+jkOb/MC+FvjEzUFlS29sWmQa+o7qLE68yDr3zhVMDlcZxj
+         h/tATAQjREop8QQpPQlwbTvzCG9OJgczGWzAxm+taZ5Kj6q0RQNS7i8UcgIiI2/trML9
+         yg7BH6Nlpufy8E4qIRTio4MIWduNGPSaSg+24+hi3vx9ir48copZqcIEFBio59I1c253
+         fcQYXnxjxnrKAv61DlnZT6wVW0yFxMWsZilkf2Br3jBMnWT3vU9f1Z6GU92E5TTsz6WM
+         c1MZoF+28jkxwnzEB1y4PjNfFNIACqzt43esLbFGtBITsfuzGzZZQAJ7Lfts7joVfmn4
+         9E3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=qeQMC28TeCmCkBWDJprXzHTNjz2BcmuecLQb1/OPTio=;
-        b=Q3hsFXz3fkj0se0riktrhfTmGKJLO4f5Ql+LmlgdHPGCGioYjh1cpD8uqvzlOUnZFR
-         5Ma/sTNx9G9arD5cIlwJz4Z3XilXZgpb4Z2Z6o4fQp7vSqinCp3H6N4ur2XAZoHJ+u/q
-         THEjl5XoGVm6cVNOlBxB+PP47to3RchojZW4MQEbWLUDcMHUx1z5B2Q/rbGPAowBnZyW
-         VmmLvJCgOQNNCIUjtvBJcOabnL7j0/nrJ+RywbdiwdvKSxOioCaJGk61dz1BS6FrZqD/
-         rX2Dx97364SK4/DVc2JHwxTENxUi1zGRHXXaHIM0TSol/HuGQGRLTxjvSta2jkyn+GUk
-         jltQ==
-X-Gm-Message-State: AJIora+XGe29ZWtoOt7nIS4oV7zwo6fGkoNRB/b3WaM/QeF+oH6nawpA
-	X1Hs9teBo91O0s8pTjWm9Srt7PkIgMw=
+        bh=SwCiwIpgZXjArj3+Vxges8j6eROaL/Y7Wk/MpYLdMGA=;
+        b=P8VI+h2VKebh2VL3G8c8TyZoaQi5/Zt3d+6MencQ1Iu3TFeW8rGN6gk7K3M6mtzVE7
+         Xp5hEI5KRS2qKs62DpYZxSRYNTtObecNqVgKkUcDqhixeIqzWbNbG9Vx4tfAvmNgKRXu
+         yLD7oUNsaTlBDJ3+b0kH6/bAZ6z1qOfTFHDRwBzooZnKkuPlHZXqyYJQFDwscwlcPBV6
+         wnepV1O05QNUJG3ohvOqjTZRa0vuohIGBJ9muwp6RiEGqkRpuUc+8OuYOECLmkbY5hVF
+         IjJUEgMOoN1nfg4o4gayUldQRtpZgcE495r3Iskn1kwUYJwUdA5mIWaU/rrEqkDordxK
+         KI8w==
+X-Gm-Message-State: AJIora+KNiHRmDVL47+miBeC58kGyvGnNochsorAJR5Z+KxwYjLTZYTz
+	gGxF/2GygV6NnlMsLhCAvyz5p12M82XxWA==
 X-Google-Smtp-Source: 
- AGRyM1sKeC1/IcmUW7pfr+vSGcAgUZNZ0gGG17p31W+ka2TiT8xhDfaRSTCPjdoDsRDXeFXyOcvmRg==
-X-Received: by 2002:aa7:cd0a:0:b0:43a:8ffd:d8de with SMTP id
- b10-20020aa7cd0a000000b0043a8ffdd8demr1355319edw.5.1657103064185;
-        Wed, 06 Jul 2022 03:24:24 -0700 (PDT)
-Received: from tony3oo3-XPS-13-9370.home
- (host-82-60-178-162.retail.telecomitalia.it. [82.60.178.162])
+ AGRyM1vRN/rndqGSrAOpZHDmne6eqigqvPulsQNS82ILfxj1/3FTx4PKBaUc8e5accYuXdxQZ3upTQ==
+X-Received: by 2002:a05:6a00:8c7:b0:528:1aa1:5283 with SMTP id
+ s7-20020a056a0008c700b005281aa15283mr33557594pfu.81.1657108853396;
+        Wed, 06 Jul 2022 05:00:53 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::3bff])
         by smtp.gmail.com with ESMTPSA id
- bg6-20020a170906a04600b00722e31fcf42sm17107161ejb.184.2022.07.06.03.24.23
+ oa14-20020a17090b1bce00b001efa205dcf2sm2919411pjb.54.2022.07.06.05.00.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 06 Jul 2022 03:24:23 -0700 (PDT)
-From: Davide Gardenal <davidegarde2000@gmail.com>
-X-Google-Original-From: Davide Gardenal <davide.gardenal@huawei.com>
+        Wed, 06 Jul 2022 05:00:52 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Davide Gardenal <davide.gardenal@huawei.com>
-Subject: [meta-networking][kirkstone][master][PATCH] quagga: ignore
- CVE-2016-4049
-Date: Wed,  6 Jul 2022 12:24:19 +0200
-Message-Id: <20220706102419.22553-1-davide.gardenal@huawei.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/2] libspiro: Add recipe
+Date: Wed,  6 Jul 2022 05:00:49 -0700
+Message-Id: <20220706120050.1461724-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.37.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Jul 2022 10:24:42 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Jul 2022 12:01:03 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97729
+ https://lists.openembedded.org/g/openembedded-devel/message/97730
 
-CVE-2016-4049 is not affecting our version, so we can ignore it.
-This is caused because the CPE in the NVD database doesn't specify
-a vulnerable version range.
+Needed by recent fontforge
 
-Signed-off-by: Davide Gardenal <davide.gardenal@huawei.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-networking/recipes-protocols/quagga/quagga_1.2.4.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ .../fontforge/libspiro_20200505.bb                 | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/fontforge/libspiro_20200505.bb
 
-diff --git a/meta-networking/recipes-protocols/quagga/quagga_1.2.4.bb b/meta-networking/recipes-protocols/quagga/quagga_1.2.4.bb
-index a7697a1ae..984264a30 100644
---- a/meta-networking/recipes-protocols/quagga/quagga_1.2.4.bb
-+++ b/meta-networking/recipes-protocols/quagga/quagga_1.2.4.bb
-@@ -2,3 +2,7 @@ require quagga.inc
- 
- SRC_URI[md5sum] = "eced21b054d71c9e1b7c6ac43286a166"
- SRC_URI[sha256sum] = "e364c082c3309910e1eb7b068bf39ee298e2f2f3f31a6431a5c115193bd653d3"
+diff --git a/meta-oe/recipes-graphics/fontforge/libspiro_20200505.bb b/meta-oe/recipes-graphics/fontforge/libspiro_20200505.bb
+new file mode 100644
+index 0000000000..c885a00c5b
+--- /dev/null
++++ b/meta-oe/recipes-graphics/fontforge/libspiro_20200505.bb
+@@ -0,0 +1,14 @@
++# Copyright (C) 2022 Khem Raj <raj.khem@gmail.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
 +
-+CVE_CHECK_IGNORE += "\
-+    CVE-2016-4049 \
-+"
++SUMMARY = "LibSpiro is an adaptation of Spiro formula and functions into a sharable library"
++HOMEPAGE = "https://github.com/fontforge/libspiro"
++LICENSE = "GPL-3.0-or-later"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++
++SRC_URI = "https://github.com/fontforge/libspiro/releases/download/20200505/libspiro-dist-20200505.tar.gz"
++SRC_URI[sha256sum] = "06c69a1e8dcbcabcf009fd96fd90b1a244d0257246e376c2c4d57c4ea4af0e49"
++
++inherit autotools
++
++BBCLASSEXTEND = "native"
 -- 
-2.34.1
+2.37.0
 
 
