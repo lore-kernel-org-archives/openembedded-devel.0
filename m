@@ -2,73 +2,73 @@ Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D48DC43334
-	for <webhook@archiver.kernel.org>; Thu,  7 Jul 2022 07:55:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 32553C43334
+	for <webhook@archiver.kernel.org>; Thu,  7 Jul 2022 07:55:43 +0000 (UTC)
 Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
  [85.158.142.112])
- by mx.groups.io with SMTP id smtpd.web09.3034.1657180517980427071
+ by mx.groups.io with SMTP id smtpd.web09.3036.1657180534964510174
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Jul 2022 00:55:19 -0700
+ Thu, 07 Jul 2022 00:55:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Lk3lTL7+;
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=xG5r8z1B;
  spf=pass (domain: fujitsu.com, ip: 85.158.142.112,
  mailfrom: zhengrq.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1657180516; i=@fujitsu.com;
-	bh=Fn6CvqXVcA7lPbGaaJfH7za4uS4OLmxBsVa9qk77a8Q=;
+	s=170520fj; t=1657180533; i=@fujitsu.com;
+	bh=9I6MEwIgW34xNXmZGYEsziCGdSsH/Zze1l4dGNsNaAU=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=Lk3lTL7+lz4pFO0yurEuU2rvh3bCtK1iuyOU2Jc+frRXxySZeUGQlmlMmCDa2GPmj
-	 xZUxjoI7VxEwYBe9Fxbr4xOWG6j6pUA/0Tv3V8shFDzxNvTJXgqd16UrrnStJqhM3t
-	 SgBQDesJDuQMB5bRl/8OcnXe9NgvBDMntU5ghwyT/YCb4h9wrm8WmqSp24CUGejW1u
-	 wV8HD6XKbq0lumpfU6PFEw6BBAL8wknbimyGkCKrcmKKmes4iHw/0cFdC1mwG1p3Ph
-	 cNNLuRbucxlX6/5CqGdLCZiN9E+8CER5+1iDEdgUU9PH3TrWcicEY7AO0Ejvt+uyYG
-	 BHAZnWVlE66DQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrKIsWRWlGSWpSXmKPExsViZ8ORpJs88Vi
-  SwbvXfBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aCJT8ZC9ZJV9ydc5G1gXGReBcjF4eQwANG
-  iTd/HzFBOFeYJB79PcYI4exnlHjwZQJ7FyMnB5uArsSLH4tZQGwRAX2JpbP3MIPYwgJBEqcuL
-  wGq4eBgEVCR+LHdCcTkFfCQmPdIHqRCQkBBYsrD92DVvAKCEidnPgGbwiwgIXHwxQtmkHIJAU
-  WJ2dOhyiskXh++xAxhq0lcPbeJeQIj3ywk3bOQdC9gZFrFaJ1UlJmeUZKbmJmja2hgoGtoaKp
-  raa5raaKXWKWbqJdaqpuXX1SSoWuol1herJdaXKxXXJmbnJOil5dasokRGHopxYlxOxgf7vul
-  d4hRkoNJSZR3dc+xJCG+pPyUyozE4oz4otKc1OJDjDIcHEoSvIf7gHKCRanpqRVpmTnAOIBJS
-  3DwKInwLgFp5S0uSMwtzkyHSJ1iVJQS55XvB0oIgCQySvPg2mCxd4lRVkqYl5GBgUGIpyC1KD
-  ezBFX+FaM4B6OSMG8TyBSezLwSuOmvgBYzAS1eln8EZHFJIkJKqoHJ+Il7O9M2VwnvT4fOaeW
-  ePNxeuehz3oW2mecYeYt2ekxmZpmYvIZZIf+4VPnkG/rzwqc1yLSL3/G1e8oge4xlqcL8eX9O
-  3p6m+OF+4fvEdW8/3Njqt/NTnvWfQh8/NwVNxqw/MhXP+OTfncxZ1XxM07Kn6/jqhn2GRXtOd
-  yz12WfzImLbmz38vmu2FFqLfb98Yenru3/WsX2bwu67xMjAcdHGJE3D3JZtB+p8opj2J//lnh
-  5p+d7f6GSXkHnjLZOjv1jm27/qbp1kcF/up/iWfj7lJKP+wywyT6OX1X07xXf70yNT1UWe5y9
-  kJpYxfFRNfO21yV1Myl/+Wf2z3WtP7yvfIVTh5Nk9Oej735q9SizFGYmGWsxFxYkAJy9A2TgD
-  AAA=
+	b=xG5r8z1BuSeJjrJBIFxQufN0rZXS4zGTLREvWL7gP2FqbmLLQ2PuQ/hPAGupPI360
+	 RUBcOY7ZoXm/UMsgWfE2oJ+jmSpJtMr7JbN1jzmlMFmWQU2PKx92/6i+vgpTgmg7bk
+	 KQNvh5RfAln2MDPUEsW0sSiWQueVCjG8z11LqXfEdxuv3mK8jVd1DWFGn4YV/aD56k
+	 njeony2c3UJGzIRplBCYg2rxHYDnywNrBs1qH05WI7XEMKStHcVYj3iInYI/yaUM8T
+	 gaDeQEDuYv2qxvFzV0fQtpjGvv3qYxg2dmKb2uizbIoqHQ3M+rnNyUjvZO2rd/nz1n
+	 1qpq87lup5lRQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8OxWbdk4rE
+  kgwvztS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1ow3p3qYCg5xVyx98IKtgXE7VxcjF4eQwENG
+  if/TdjNBOFeYJO7OuMsG4exnlDh4bhZzFyMnB5uArsSLH4tZQGwRAX2JpbP3gMWFBYIlmluuM
+  4HYLAIqEp2774LZvAIeErOO97CB2BICChJTHr5nhogLSpyc+QRsDrOAhMTBFy+A4hxANYoSs6
+  fLQ5RXSLw+fIkZwlaTuHpuE/MERr5ZSLpnIelewMi0itE6qSgzPaMkNzEzR9fQwEDX0NBU19J
+  M19BML7FKN1EvtVQ3L7+oJEPXUC+xvFgvtbhYr7gyNzknRS8vtWQTIzD8UooTBHYw7t33S+8Q
+  oyQHk5Io7+qeY0lCfEn5KZUZicUZ8UWlOanFhxhlODiUJHgP9wHlBItS01Mr0jJzgLEAk5bg4
+  FES4V0C0spbXJCYW5yZDpE6xajLMfNr2wFmIZa8/LxUKXFe+X6gIgGQoozSPLgRsLi8xCgrJc
+  zLyMDAIMRTkFqUm1mCKv+KUZyDUUmYtwlkCk9mXgncpldARzABHbEs/wjIESWJCCmpBqby6ju
+  64lPeLAyx7WvoTzuQoLWjw9W+g6tdYGfto3xnLRmZkLVp4tVpwc6XWEWCUq587/5fpup+6J2R
+  9V0BwZkFv+aXlHs4JLtuMagp51EwZ73EoRfZtijGhPX88Tn/bZ0SzthH8blZxXxmFL9YbXNym
+  p9TcmIKW2HtkRnfPn/erGLlq9jQvPT7EWaXEqN1yn1Pe5xmPFY4vSjh97b8VVM0vp6qZtm9dM
+  WKIxWd154bTPvF+/Nq+EuW/TPa7lzmruFg/cSW0x/r9kU28d6Ux7+vaX3nOB15yH1jodcTVqa
+  Nokdv3mlXjdlxUsK24Vq0wGexBtXkrPBZ9wXNlpa+X9RlbHfusKjbH1vjjxMtlFiKMxINtZiL
+  ihMB2u4kiEYDAAA=
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-19.tower-728.messagelabs.com!1657180514!87338!1
-X-Originating-IP: [62.60.8.98]
+X-Msg-Ref: server-14.tower-732.messagelabs.com!1657180532!65228!1
+X-Originating-IP: [62.60.8.179]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.86.8; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 23062 invoked from network); 7 Jul 2022 07:55:15 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-19.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 7 Jul 2022 07:55:15 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 99E397C
+Received: (qmail 29729 invoked from network); 7 Jul 2022 07:55:32 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-14.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 7 Jul 2022 07:55:32 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 24440150
 	for <openembedded-devel@lists.openembedded.org>;
- Thu,  7 Jul 2022 08:55:14 +0100 (BST)
+ Thu,  7 Jul 2022 08:55:32 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
  [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 8EEB51B2
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 17DA8142
 	for <openembedded-devel@lists.openembedded.org>;
- Thu,  7 Jul 2022 08:55:14 +0100 (BST)
+ Thu,  7 Jul 2022 08:55:32 +0100 (BST)
 Received: from CentOS7.g08.fujitsu.local (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Thu, 7 Jul 2022 08:55:13 +0100
+ (TLS) id 15.0.1497.32; Thu, 7 Jul 2022 08:55:30 +0100
 From: zhengrq.fnst <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-grpcio-tools: upgrade 1.46.3 ->
- 1.47.0
-Date: Thu, 7 Jul 2022 15:55:05 +0800
-Message-ID: <1657180505-23874-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-google-api-core: upgrade 2.8.0 ->
+ 2.8.2
+Date: Thu, 7 Jul 2022 15:55:20 +0800
+Message-ID: <1657180520-23922-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -79,78 +79,44 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 07 Jul 2022 07:55:23 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 07 Jul 2022 07:55:43 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97751
+ https://lists.openembedded.org/g/openembedded-devel/message/97752
 
-0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
-refreshed for new version.
+Changelog:
+=========
+Bug Fixes
+---------
+    deps: allow protobuf < 5.0.0 (#400) (8f73d2e)
+    drop support for grpc-gcp (#401) (5da6733)
+
+Documentation
+-------------
+    fix changelog header to consistent size (#394) (ac266e9)
+    Fix typo in the BackgroundConsumer docstring (#395) (0eb727f)
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- ...tup.py-Do-not-mix-C-and-C-compiler-options.patch | 13 +++++++++----
- ...ols_1.46.3.bb => python3-grpcio-tools_1.47.0.bb} |  2 +-
- 2 files changed, 10 insertions(+), 5 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-grpcio-tools_1.46.3.bb => python3-grpcio-tools_1.47.0.bb} (82%)
+ ...oogle-api-core_2.8.0.bb => python3-google-api-core_2.8.2.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-google-api-core_2.8.0.bb => python3-google-api-core_2.8.2.bb} (87%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch b/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
-index 4713da174..4aa11bd57 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
-+++ b/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
-@@ -26,6 +26,8 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  setup.py | 9 ++++++---
-  1 file changed, 6 insertions(+), 3 deletions(-)
+diff --git a/meta-python/recipes-devtools/python/python3-google-api-core_2.8.0.bb b/meta-python/recipes-devtools/python/python3-google-api-core_2.8.2.bb
+similarity index 87%
+rename from meta-python/recipes-devtools/python/python3-google-api-core_2.8.0.bb
+rename to meta-python/recipes-devtools/python/python3-google-api-core_2.8.2.bb
+index b7ff8bc29..a2df7fb48 100644
+--- a/meta-python/recipes-devtools/python/python3-google-api-core_2.8.0.bb
++++ b/meta-python/recipes-devtools/python/python3-google-api-core_2.8.2.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
-+diff --git a/setup.py b/setup.py
-+index cc53e79..be3bc78 100644
- --- a/setup.py
- +++ b/setup.py
- @@ -87,8 +87,11 @@ def check_linker_need_libatomic():
-@@ -33,12 +35,12 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-      code_test = (b'#include <atomic>\n' +
-                   b'int main() { return std::atomic<int64_t>{}; }')
- -    cxx = os.environ.get('CXX', 'c++')
---    cpp_test = subprocess.Popen([cxx, '-x', 'c++', '-std=c++11', '-'],
-+-    cpp_test = subprocess.Popen([cxx, '-x', 'c++', '-std=c++14', '-'],
- +    cxx, cxx_args = os.environ.get('CXX').split(' ', 1) or 'c++'
- +    if not cxx_args:
- +      cxx_args = "-g"
- +
--+    cpp_test = subprocess.Popen([cxx, cxx_args, '-x', 'c++', '-std=c++11', '-'],
-++    cpp_test = subprocess.Popen([cxx, cxx_args, '-x', 'c++', '-std=c++14', '-'],
-                                  stdin=PIPE,
-                                  stdout=PIPE,
-                                  stderr=PIPE)
-@@ -46,8 +48,11 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-      # Double-check to see if -latomic actually can solve the problem.
-      # https://github.com/grpc/grpc/issues/22491
-      cpp_test = subprocess.Popen(
---        [cxx, '-x', 'c++', '-std=c++11', '-', '-latomic'],
--+        [cxx, cxx_args, '-x', 'c++', '-std=c++11', '-', '-latomic'],
-+-        [cxx, '-x', 'c++', '-std=c++14', '-', '-latomic'],
-++        [cxx, cxx_args, '-x', 'c++', '-std=c++14', '-', '-latomic'],
-          stdin=PIPE,
-          stdout=PIPE,
-          stderr=PIPE)
-+-- 
-+2.25.1
-+
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.46.3.bb b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.47.0.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-grpcio-tools_1.46.3.bb
-rename to meta-python/recipes-devtools/python/python3-grpcio-tools_1.47.0.bb
-index 221a05ef1..90c8efeec 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.46.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.47.0.bb
-@@ -10,7 +10,7 @@ inherit pypi setuptools3
- DEPENDS += "${PYTHON_PN}-grpcio"
+ inherit pypi setuptools3
  
- SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch"
--SRC_URI[sha256sum] = "31fee436ace5b3bd950cc3a8e68d6b84de1d6dc755959db7badc3470cdf22f70"
-+SRC_URI[sha256sum] = "f64b5378484be1d6ce59311f86174be29c8ff98d8d90f589e1c56d5acae67d3c"
+-SRC_URI[sha256sum] = "065bb8e11c605fd232707ae50963dc1c8af5b3c95b4568887515985e6c1156b3"
++SRC_URI[sha256sum] = "06f7244c640322b508b125903bb5701bebabce8832f85aba9335ec00b3d02edc"
  
- RDEPENDS:${PN} = "${PYTHON_PN}-grpcio"
- 
+ RDEPENDS:${PN} += "\
+     ${PYTHON_PN}-asyncio \
 -- 
 2.25.1
 
