@@ -1,76 +1,84 @@
-Return-Path: <pascal.bach@siemens.com>
+Return-Path: <adrian.freihofer@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0CCD9C433EF
-	for <webhook@archiver.kernel.org>; Thu,  7 Jul 2022 10:57:44 +0000 (UTC)
-Received: from mta-64-225.siemens.flowmailer.net
- (mta-64-225.siemens.flowmailer.net [185.136.64.225])
- by mx.groups.io with SMTP id smtpd.web08.4165.1657191454240276121
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FF1DC43334
+	for <webhook@archiver.kernel.org>; Thu,  7 Jul 2022 11:09:04 +0000 (UTC)
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com
+ [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web09.4239.1657192134416118770
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Jul 2022 03:57:35 -0700
+ Thu, 07 Jul 2022 04:08:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=pascal.bach@siemens.com header.s=fm1 header.b=kjFzBPwI;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225,
- mailfrom: fm-402798-20220707105730966463dbc3fb7c8c70-sdlx73@rts-flowmailer.siemens.com)
-Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id
- 20220707105730966463dbc3fb7c8c70
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=gnfOLu3/;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48,
+ mailfrom: adrian.freihofer@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id ez10so1634240ejc.13
         for <openembedded-devel@lists.openembedded.org>;
-        Thu, 07 Jul 2022 12:57:31 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=pascal.bach@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=TzRE1fylOQOQCtO5QfURVRt7T+/Om+3U/mobeEeYlis=;
- b=kjFzBPwIUDoKIFcou3q84se7jMvo13DNQBa+HfvFNgJKOPZ7Q/ln7rPwNfuDdBlRt0XbX4
- HO/BMcf554IWB59l5K1zlFjvZ1qR53KO8NsG4bhoXhDSmGSQh1ug0VVuVKSSatrsWrAfGPzX
- ATWtBFo+pW05G4OHtsWQC5aLdHBMs=;
-From: pascal.bach@siemens.com
+ Thu, 07 Jul 2022 04:08:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=JDuy/6+nZHHqAs5qfuciIvGFQeDEDYZ6WNRc3e/xAYs=;
+        b=gnfOLu3/hr93aVlcDQU1TFkiBFiTtiN1RFm0b5+wgLaMvkG36s7ALu2CUN/jU6bNYl
+         rZ37BBWjWubb1tkyD06l3ENlWPubiA847xxS5er+f7w2lnk6WtGdm7S/TiobFjE9ap3z
+         Bpl1hBsHyUTiMK/6nt3WdwLOZtAARUwVT3xVnTmM4Bh1+jhlCVx2Ynp4H1iX9i4Qdtnm
+         sTSY+UsJA0cHQb/6HLMmdllzeWZ3g2oFeRa4SJtXzQXzG6LSHl2tSkxsBLQmOMOCnmL4
+         Vmvuz3w9/DIVe+b4mavoiQBbrGxOhOAZBiKwxu9VYh0e9gHfwFZqryTgfbdIJaOce9uE
+         lKNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=JDuy/6+nZHHqAs5qfuciIvGFQeDEDYZ6WNRc3e/xAYs=;
+        b=tXJbydrUKqU+4mSP+9y99IbPFTZNoBrsZmj1bfJpYNwhwknFjWR8E2Qa54nWtdQRpn
+         lVvpmC8QaLGRToYbSG7bBkzD6CGP8CtlY4Hx/9BbEXdhIckmYDWSxhjuoRe9qgBW1weF
+         eQqC17uNGT0qsCNdm4Wag8nmgccUT7viGTFM4CpihLmHeLNjDZcabB34QUJi4hXP9ZJD
+         JFXrnpRC7pMdrbzput+V8PPes/4YLDk9/oPVM8v+OMAvC/xDhJI7Ho0FG0gqBHRNjLet
+         gy2ybZn9YMqbQKdvO6I+yobwh+zkPCLOX3Lq9bK+bwfpVEFIO8GCiAqgrsjbAaxg9GPM
+         QfNA==
+X-Gm-Message-State: AJIora8Ovl8vph4nHj1wyqJdbEccXYTJemQ3MdQQ9kYduGWE4UwTEn9n
+	IU936ltRRZ7qi7AXS7dqcSfuHm4JpU2PuI8V
+X-Google-Smtp-Source: 
+ AGRyM1tjLwundmf5DQGTxINRcFJGyF/b+qmPNqItyYJVe6l20fks/S1hgUItEDoL4z/wB2meKJHnyg==
+X-Received: by 2002:a17:906:5a4e:b0:72a:605a:57c3 with SMTP id
+ my14-20020a1709065a4e00b0072a605a57c3mr38089151ejc.301.1657192132536;
+        Thu, 07 Jul 2022 04:08:52 -0700 (PDT)
+Received: from md2ramxc.ad001.siemens.net ([62.32.0.69])
+        by smtp.gmail.com with ESMTPSA id
+ t4-20020a17090605c400b00706242d297fsm18521105ejt.212.2022.07.07.04.08.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 07 Jul 2022 04:08:52 -0700 (PDT)
+From: Adrian Freihofer <adrian.freihofer@gmail.com>
+X-Google-Original-From: Adrian Freihofer <adrian.freihofer@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Pascal Bach <pascal.bach@siemens.com>
-Subject: [meta-oe][PATCH] python3-pybind11: upgrade 2.8.1 -> 2.9.2
-Date: Thu,  7 Jul 2022 12:57:27 +0200
-Message-Id: <20220707105727.1475868-1-pascal.bach@siemens.com>
+Cc: Adrian Freihofer <adrian.freihofer@siemens.com>
+Subject: [meta-networking][master][PATCHv2 0/1] firewalld: upgrade 1.1.1 ->
+ 1.2.0
+Date: Thu,  7 Jul 2022 13:08:20 +0200
+Message-Id: <20220707110821.2571332-1-adrian.freihofer@siemens.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-402798:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 07 Jul 2022 10:57:44 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 07 Jul 2022 11:09:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97777
+ https://lists.openembedded.org/g/openembedded-devel/message/97778
 
-From: Pascal Bach <pascal.bach@siemens.com>
+In comparison to v1: Fix the typo in package summary.
+@Jose Thanks!
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
----
- .../{python3-pybind11_2.8.1.bb => python3-pybind11_2.9.2.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pybind11_2.8.1.bb => python3-pybind11_2.9.2.bb} (86%)
+Adrian Freihofer (1):
+  firewalld: upgrade 1.1.1 -> 1.2.0
 
-diff --git a/meta-python/recipes-devtools/python/python3-pybind11_2.8.1.bb b/meta-python/recipes-devtools/python/python3-pybind11_2.9.2.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-pybind11_2.8.1.bb
-rename to meta-python/recipes-devtools/python/python3-pybind11_2.9.2.bb
-index 4d94e2033..433bfd60e 100644
---- a/meta-python/recipes-devtools/python/python3-pybind11_2.8.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pybind11_2.9.2.bb
-@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=774f65abd8a7fe3124be2cdf766cd06f"
- 
- DEPENDS = "boost"
- 
--SRC_URI = "git://github.com/pybind/pybind11.git;branch=master;protocol=https \
-+SRC_URI = "git://github.com/pybind/pybind11.git;branch=stable;protocol=https \
-            file://0001-Do-not-strip-binaries.patch \
-            file://0001-Do-not-check-pointer-size-when-cross-compiling.patch \
- "
--SRCREV = "f7b499615e14d70ab098a20deb0cdb3889998a1a"
-+SRCREV = "914c06fb252b6cc3727d0eedab6736e88a3fcb01"
- 
- S = "${WORKDIR}/git"
- 
+ .../{firewalld_1.1.1.bb => firewalld_1.2.0.bb}  | 17 +++++++++++++++--
+ 1 file changed, 15 insertions(+), 2 deletions(-)
+ rename meta-networking/dynamic-layers/meta-python/recipes-connectivity/firewalld/{firewalld_1.1.1.bb => firewalld_1.2.0.bb} (93%)
+
 -- 
-2.37.0
+2.35.3
 
 
