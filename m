@@ -1,344 +1,398 @@
-Return-Path: <adrian.freihofer@gmail.com>
+Return-Path: <quaresma.jose@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B150BC433EF
-	for <webhook@archiver.kernel.org>; Thu,  7 Jul 2022 09:49:23 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com
- [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web09.3660.1657187351382919314
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0FF8C43334
+	for <webhook@archiver.kernel.org>; Thu,  7 Jul 2022 10:02:43 +0000 (UTC)
+Received: from mail-lj1-f175.google.com (mail-lj1-f175.google.com
+ [209.85.208.175])
+ by mx.groups.io with SMTP id smtpd.web10.3766.1657188157372698147
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Jul 2022 02:49:17 -0700
+ Thu, 07 Jul 2022 03:02:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=BXdV+nke;
- spf=pass (domain: gmail.com, ip: 209.85.218.48,
- mailfrom: adrian.freihofer@gmail.com)
-Received: by mail-ej1-f48.google.com with SMTP id g26so31462191ejb.5
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=b8YSmRdV;
+ spf=pass (domain: gmail.com, ip: 209.85.208.175,
+ mailfrom: quaresma.jose@gmail.com)
+Received: by mail-lj1-f175.google.com with SMTP id r9so21571974ljp.9
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Jul 2022 02:49:16 -0700 (PDT)
+ Thu, 07 Jul 2022 03:02:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=Lb7QAgN9TBSg3yxNNl5Nj5ZdJXV1yUn8mudcjK2oOV8=;
-        b=BXdV+nkeZNrXV52piJUPH33IZ5gbNDaUTkDyCryxzP0bKQ1ZfqEMXD9w18Ji1bz2XH
-         SfAsZYamiFsC+15qa9jYmUQq5GCz24qxcDmtNbajYci7P6PIyVcYMwAY2sIXuXF4RQNA
-         +g6LJeF6oF9MYJWR3HVj604EBAC8Au6Qsnbj4LruX43sUdZdzy+sETtb/+hD27HT2Sb8
-         gBhww53X4BzR+hBbvoPSsgYoCHSNE8CFgX2NdG49q1jx6UKneX6mpdzBsP8ck+iQCWmk
-         n3G1lNR+TT7HWK2OWLcqIJhWBPjEqRvYFN6j9zfw9x9XLa7RT4Fn0VE5piVUMCYpmwyn
-         GwOQ==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=th0iG3sgd+YN/9EjLQqI5aH9CJa7Xy2G9f0K7KGqwgY=;
+        b=b8YSmRdV39D9WlLXFqG6C8KFGnDf3AGMLkInCGrBMligAF+6PPymtMtol1N5XGzQiH
+         GY0aSzl1xinyom4VUHOe5hhm25px9ixIGaWNYQ9WjG03+Tc0V1xlyqzIdCau4IMy/crk
+         3fRdzF+LZZ88q4DxzfdwlUvhmdrtQ3e68afpL+qV237MKJJfbOpRJXIfN66KOhWVEeMV
+         nRPZ/boiqNJ1/M4T8qgViunDQwYJF/spv3BmAP0N6wJgKN5h63VFu3Aa8+9xrxZ54PIw
+         hFqujvNNZLL0WCHrWBPdwdbv1qqW8LmcdIqWBuz0XDuPV1RED74J1Yenb4cQo8Uif1r8
+         wquw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=Lb7QAgN9TBSg3yxNNl5Nj5ZdJXV1yUn8mudcjK2oOV8=;
-        b=yzlbA+oFcj/qyiJand59amo3kzrRbYrfBpfVw20Tmz7pD5eYW3LSlM53waxQkRzM4E
-         41XwMNUKZoroW/PA86LfLclQfzb2LLcBjIKB+JVPceTVOzO2O3mpoUPTX8CvtsRLPgwa
-         +77Je1rkT8IR92VBrzjTcbPgQVasmd4Yl3c6ZuKqTsCkpnKnRnmBNOYhaUfl3/HKnnYv
-         CTRREBhG7LYIxPZ+TvTFQBN+GDwOuXKxx81Xuje7omIC+nW3duHQfbzofwv8qyE5GQNX
-         L/6UaYagg/3S2SsDr4L9JtVIu7w/3QBDrfJVbCzi8DiIZWMb49+kp0ExtjGdWOIWZJwC
-         mHrQ==
-X-Gm-Message-State: AJIora+QTPcz+rSpjibLbua6FFS3kHhJ4Y42lAgO7LHSPs+oFhptet9t
-	zSQBQ6VbvelgfeYL12hrXAc+4rWAn2ud2jbyQ6Q=
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=th0iG3sgd+YN/9EjLQqI5aH9CJa7Xy2G9f0K7KGqwgY=;
+        b=49ulfi2/qTtfLn98N5FqvDhdttirVNBC1wWfYhkESZgNFToL+1hqUPctW0XN6HKB2P
+         jzV5i1dLi77FiB0jumGCjUDSkauxl0zIynOB/Umie2hOnAOQ8dUZ/LDI7uh7YsPXEHU4
+         F7lHvUHAwdyjX6vngodJrEZ/tUX1McO3ITwWBK4UMRwqyYJTbflTGlo6qEGB9yYBveLh
+         uI7wPGVt6qLw0iJtwZMsQin8Sy/t83r9wpDa6q3ynQtQ4ZybXMreK27j8vZxQjb3ozIY
+         Puo1dVOr87h5smlfz2xCrWaBy6KWDvSKFNxzEKwlzqWgQCWJOu5IgHGnmJTVtrrGqkil
+         Bb1w==
+X-Gm-Message-State: AJIora8644g1QM59ZuTP/Qy+ODvQyCWFz8hDx8jWYrHE7bWWlZIh8Gt6
+	1F37xcXUPgukdt7G7hda/cztRnL+SPVJj7rHvrY=
 X-Google-Smtp-Source: 
- AGRyM1vL/TJxPHVtkaPTyE4ub+WdDznCiFyKI31/GAMY/bNYVzSqRb3ucd8zJ3Yob/H/dvEEO16RQQ==
-X-Received: by 2002:a17:906:149:b0:712:502:bc62 with SMTP id
- 9-20020a170906014900b007120502bc62mr44593346ejh.720.1657187356025;
-        Thu, 07 Jul 2022 02:49:16 -0700 (PDT)
-Received: from md2ramxc.ad001.siemens.net ([62.32.0.69])
-        by smtp.gmail.com with ESMTPSA id
- l10-20020a1709063d2a00b0072ae8fb13e6sm1375835ejf.126.2022.07.07.02.49.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 07 Jul 2022 02:49:15 -0700 (PDT)
-From: Adrian Freihofer <adrian.freihofer@gmail.com>
-X-Google-Original-From: Adrian Freihofer <adrian.freihofer@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Adrian Freihofer <adrian.freihofer@gmail.com>,
-	Adrian Freihofer <adrian.freihofer@siemens.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH 1/1] modemmanager: update to 1.18.8
-Date: Thu,  7 Jul 2022 11:48:48 +0200
-Message-Id: <20220707094848.2519733-2-adrian.freihofer@siemens.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20220707094848.2519733-1-adrian.freihofer@siemens.com>
-References: <20220707094848.2519733-1-adrian.freihofer@siemens.com>
+ AGRyM1sEv6xfkamPPAC2LvEW9bT7pyZhHZoLb8r5zVycmp+/WhOcrQzYQrLgTdgaT1I8qtRSQEiTyrVuRPX3K35vJxw=
+X-Received: by 2002:a2e:9592:0:b0:25a:6df5:5534 with SMTP id
+ w18-20020a2e9592000000b0025a6df55534mr27171211ljh.117.1657188155336; Thu, 07
+ Jul 2022 03:02:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20220707082615.2499743-1-adrian.freihofer@siemens.com>
+In-Reply-To: <20220707082615.2499743-1-adrian.freihofer@siemens.com>
+From: Jose Quaresma <quaresma.jose@gmail.com>
+Date: Thu, 7 Jul 2022 11:02:16 +0100
+Message-ID: 
+ <CANPvuRmjgZ8X+M9OS41JwsdTEH7-s4wMH8SoCYG2_7DBMViUXw@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][master][PATCH] firewalld: upgrade 1.1.1 ->
+ 1.2.0
+To: Adrian Freihofer <adrian.freihofer@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Adrian Freihofer <adrian.freihofer@siemens.com>
+Content-Type: multipart/alternative; boundary="000000000000532c0e05e3342f65"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 07 Jul 2022 09:49:23 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 07 Jul 2022 10:02:43 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97775
+ https://lists.openembedded.org/g/openembedded-devel/message/97776
 
-From: Adrian Freihofer <adrian.freihofer@gmail.com>
+--000000000000532c0e05e3342f65
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-* A new connection status dispatcher setup is provided, where users can
-   provide custom scripts that will be called on bearer connect/disconnect
-   events. This dispatcher will make the netifd integration in openwrt work
-   much better, as we'll be able to report network-initiated disconnections
-   cleanly to netifd.
+Hi Adrian,
 
-   There are no default connection status dispatcher scripts installed, but
-   it's suggested distributions make sure the following directories exist:
-     - ${sysconfdir}/ModemManager/connection.d/
-     - ${libdir}/ModemManager/connection.d/
+Adrian Freihofer <adrian.freihofer@gmail.com> escreveu no dia quinta,
+7/07/2022 =C3=A0(s) 09:26:
 
- * API:
-   ** Add missing Simple interface definitions in ModemManager-names.h.
+> Firewalld:
+> This is a feature release. It also includes all bug fixes since v1.1.0.
+> Details are here: https://firewalld.org/2022/07/firewalld-1-2-0-release
+>
+> Recipe:
+> Firewalld defaults to create a log file for debug messages. This is
+> basically an empty file until firewalld's log level is configured to
+> debug level. Writing log files requies something like log-rotate to
+> prevent full disks. The default for OE is to not create files and send
+> all log messages to syslog (journald).
+>
+> Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
+> ---
+>  .../{firewalld_1.1.1.bb =3D> firewalld_1.2.0.bb}  | 17 +++++++++++++++--
+>  1 file changed, 15 insertions(+), 2 deletions(-)
+>  rename
+> meta-networking/dynamic-layers/meta-python/recipes-connectivity/firewalld=
+/{
+> firewalld_1.1.1.bb =3D> firewalld_1.2.0.bb} (93%)
+>
+> diff --git
+> a/meta-networking/dynamic-layers/meta-python/recipes-connectivity/firewal=
+ld/
+> firewalld_1.1.1.bb
+> b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/firewal=
+ld/
+> firewalld_1.2.0.bb
+> similarity index 93%
+> rename from
+> meta-networking/dynamic-layers/meta-python/recipes-connectivity/firewalld=
+/
+> firewalld_1.1.1.bb
+> rename to
+> meta-networking/dynamic-layers/meta-python/recipes-connectivity/firewalld=
+/
+> firewalld_1.2.0.bb
+> index 00e851f45..58ed2d5bd 100644
+> ---
+> a/meta-networking/dynamic-layers/meta-python/recipes-connectivity/firewal=
+ld/
+> firewalld_1.1.1.bb
+> +++
+> b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/firewal=
+ld/
+> firewalld_1.2.0.bb
+> @@ -10,7 +10,7 @@ SRC_URI =3D "\
+>      file://firewalld.init \
+>      file://run-ptest \
+>  "
+> -SRC_URI[sha256sum] =3D
+> "1dcd314ff836b2ce69f15f60fc7d50bd77ed359d784f9b3c07f2d394ea570e4c"
+> +SRC_URI[sha256sum] =3D
+> "28fd90e88bda0dfd460f370f353474811b2e295d7eb27f0d7d18ffa3d786eeb7"
+>
+>  # glib-2.0-native is needed for GSETTINGS_RULES autoconf macro from
+> gsettings.m4
+>  DEPENDS =3D "intltool-native glib-2.0-native nftables"
+> @@ -23,6 +23,9 @@ PACKAGECONFIG[docs] =3D
+> "--with-xml-catalog=3D${STAGING_ETCDIR_NATIVE}/xml/catalog,-
+>  PACKAGECONFIG[ipset] =3D
+> "--with-ipset=3D${sbindir}/ipset,--without-ipset,,ipset"
+>  PACKAGECONFIG[ebtables] =3D "--with-ebtables=3D${base_sbindir}/ebtables
+> --with-ebtables-restore=3D${sbindir}/ebtables-legacy-restore,--without-eb=
+tables
+> --without-ebtables-restore,,ebtables"
+>
+> +# Default logging configuration: mixed syslog file console
+> +FIREWALLD_DEFAULT_LOG_TARGET ??=3D "syslog"
+> +
+>  # The UIs are not yet tested and the dependencies are probably not quite
+> correct yet.
+>  # Splitting into separate packages is beneficial so that no dead code is
+> transferred
+>  # to the target device.
+> @@ -31,7 +34,7 @@ PACKAGECONFIG[ebtables] =3D
+> "--with-ebtables=3D${base_sbindir}/ebtables --with-ebtab
+>  PACKAGECONFIG[qt5] =3D ""
+>  PACKAGECONFIG[gtk] =3D ""
+>
+> -PACKAGES =3D+ "python3-firewall ${PN}-applet ${PN}-config ${PN}-offline-=
+cmd
+> ${PN}-zsh-completion"
+> +PACKAGES =3D+ "python3-firewall ${PN}-applet ${PN}-config ${PN}-offline-=
+cmd
+> ${PN}-zsh-completion ${PN}-log-rotate"
+>
+>  # iptables, ip6tables, ebtables, and ipset *should* be unnecessary
+>  # when the nftables backend is available, because nftables supersedes al=
+l
+> of them.
+> @@ -132,6 +135,10 @@ FIREWALLD_KERNEL_MODULES ?=3D "\
+>      sch_fq_codel \
+>  "
+>
+> +do_configure:prepend() {
+> +    export DEFAULT_LOG_TARGET=3D${FIREWALLD_DEFAULT_LOG_TARGET}
+> +}
+> +
+>  do_install:append() {
+>      if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'false',
+> 'true', d)}; then
+>          # firewalld ships an init script but it contains Red Hat-isms,
+> replace it with our own
+> @@ -237,6 +244,9 @@ FILES:${PN}-offline-cmd +=3D " \
+>  "
+>  RDEPENDS:${PN}-offline-cmd +=3D "python3-core"
+>
+> +SUMMARY:${PN}-offline-cmd =3D "${SUMMARY} (log-rotate configuration)"
+>
 
- * Build:
-   ** meson: fix daemon enums dependencies.
-   ** meson: fix port enums includes.
-   ** meson: fix 'export_packages' in GIR setup.
-   ** meson: fix simtech plugin module name.
-   ** systemd: don't run ModemManager in containers.
+It seams to me that it should be SUMMARY:${PN}-log-rotate
 
- * Core:
-   ** serial: ensure the port object is valid after BUFFER_FULL handling.
-   ** netlink: use unaligned netlink attribute length.
-   ** netlink: only change IFF_UP flag.
-   ** bearer: match unknown auth to chap in loose comparisons.
-   ** charsets: return error if UTF-8 validation fails.
-   ** fcc-unlock: make scripts POSIX shell compatible.
-   ** modem-helpers: consider minimum ID when choosing best profile.
-   ** modem-helpers: fix reading <Act> given in COPS=? responses.
-   ** sms: prevent crash if date is out of range.
-   ** profile-manager: fix copy-paste error on tags for quarks.
+Jose
 
- * QMI:
-   ** Ignore slot status indications until initial status is known.
-   ** Return error when loading capabilities if none is found.
 
- * MBIM:
-   ** Default initial EPS bearer's auth to chap when unknown.
-   ** Update default error when network error is out of range.
+> +FILES:${PN}-log-rotate +=3D "${sysconfdir}/logrotate.d"
+> +
+>  # To get allmost all tests passing
+>  # - Enable PACKAGECONFIG ipset, ebtable
+>  # - Enough RAM QB_MEM =3D "-m 8192" (used f=C3=BCr fancy ipset tests)
+> @@ -273,6 +283,9 @@ RDEPENDS:${PN} +=3D "\
+>      python3-ctypes \
+>      python3-pprint \
+>  "
+> +# If firewalld writes a log file rotation is needed
+> +RRECOMMENDS:${PN} +=3D
+> "${@bb.utils.contains_any('FIREWALLD_DEFAULT_LOG_TARGET', [ 'mixed', 'fil=
+e'
+> ], '${PN}-log-rotate', '', d)}"
+> +
+>  # Add required kernel modules. With Yocto kernel 5.15 this currently
+> means:
+>  # - features/nf_tables/nf_tables.scc
+>  # - features/netfilter/netfilter.scc
+> --
+> 2.35.3
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#97763):
+> https://lists.openembedded.org/g/openembedded-devel/message/97763
+> Mute This Topic: https://lists.openembedded.org/mt/92224514/5052612
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> quaresma.jose@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
- * mmcli:
-   ** Fix key length when printing list of items.
+--=20
+Best regards,
 
- * Plugins:
-   ** linktop: new port type hints.
-   ** cinterion: add support for PLSx3w modems
-   ** huawei: disable +CPOL based features in Huawei E226
+Jos=C3=A9 Quaresma
 
- * Several other minor improvements and fixes.
+--000000000000532c0e05e3342f65
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...-shell-scripts-to-use-bin-sh-for-use.patch |  42 ++++----
- ...-Make-scripts-POSIX-shell-compatible.patch | 100 ------------------
- ...nager_1.18.6.bb => modemmanager_1.18.8.bb} |   5 +-
- 3 files changed, 24 insertions(+), 123 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/modemmanager/files/0002-fcc-unlock-Make-scripts-POSIX-shell-compatible.patch
- rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.18.6.bb => modemmanager_1.18.8.bb} (92%)
+<div dir=3D"ltr"><div>Hi Adrian,</div><br><div class=3D"gmail_quote"><div d=
+ir=3D"ltr" class=3D"gmail_attr">Adrian Freihofer &lt;<a href=3D"mailto:adri=
+an.freihofer@gmail.com">adrian.freihofer@gmail.com</a>&gt; escreveu no dia =
+quinta, 7/07/2022 =C3=A0(s) 09:26:<br></div><blockquote class=3D"gmail_quot=
+e" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204)=
+;padding-left:1ex">Firewalld:<br>
+This is a feature release. It also includes all bug fixes since v1.1.0.<br>
+Details are here: <a href=3D"https://firewalld.org/2022/07/firewalld-1-2-0-=
+release" rel=3D"noreferrer" target=3D"_blank">https://firewalld.org/2022/07=
+/firewalld-1-2-0-release</a><br>
+<br>
+Recipe:<br>
+Firewalld defaults to create a log file for debug messages. This is<br>
+basically an empty file until firewalld&#39;s log level is configured to<br=
+>
+debug level. Writing log files requies something like log-rotate to<br>
+prevent full disks. The default for OE is to not create files and send<br>
+all log messages to syslog (journald).<br>
+<br>
+Signed-off-by: Adrian Freihofer &lt;<a href=3D"mailto:adrian.freihofer@siem=
+ens.com" target=3D"_blank">adrian.freihofer@siemens.com</a>&gt;<br>
+---<br>
+=C2=A0.../{<a href=3D"http://firewalld_1.1.1.bb" rel=3D"noreferrer" target=
+=3D"_blank">firewalld_1.1.1.bb</a> =3D&gt; <a href=3D"http://firewalld_1.2.=
+0.bb" rel=3D"noreferrer" target=3D"_blank">firewalld_1.2.0.bb</a>}=C2=A0 | =
+17 +++++++++++++++--<br>
+=C2=A01 file changed, 15 insertions(+), 2 deletions(-)<br>
+=C2=A0rename meta-networking/dynamic-layers/meta-python/recipes-connectivit=
+y/firewalld/{<a href=3D"http://firewalld_1.1.1.bb" rel=3D"noreferrer" targe=
+t=3D"_blank">firewalld_1.1.1.bb</a> =3D&gt; <a href=3D"http://firewalld_1.2=
+.0.bb" rel=3D"noreferrer" target=3D"_blank">firewalld_1.2.0.bb</a>} (93%)<b=
+r>
+<br>
+diff --git a/meta-networking/dynamic-layers/meta-python/recipes-connectivit=
+y/firewalld/<a href=3D"http://firewalld_1.1.1.bb" rel=3D"noreferrer" target=
+=3D"_blank">firewalld_1.1.1.bb</a> b/meta-networking/dynamic-layers/meta-py=
+thon/recipes-connectivity/firewalld/<a href=3D"http://firewalld_1.2.0.bb" r=
+el=3D"noreferrer" target=3D"_blank">firewalld_1.2.0.bb</a><br>
+similarity index 93%<br>
+rename from meta-networking/dynamic-layers/meta-python/recipes-connectivity=
+/firewalld/<a href=3D"http://firewalld_1.1.1.bb" rel=3D"noreferrer" target=
+=3D"_blank">firewalld_1.1.1.bb</a><br>
+rename to meta-networking/dynamic-layers/meta-python/recipes-connectivity/f=
+irewalld/<a href=3D"http://firewalld_1.2.0.bb" rel=3D"noreferrer" target=3D=
+"_blank">firewalld_1.2.0.bb</a><br>
+index 00e851f45..58ed2d5bd 100644<br>
+--- a/meta-networking/dynamic-layers/meta-python/recipes-connectivity/firew=
+alld/<a href=3D"http://firewalld_1.1.1.bb" rel=3D"noreferrer" target=3D"_bl=
+ank">firewalld_1.1.1.bb</a><br>
++++ b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/firew=
+alld/<a href=3D"http://firewalld_1.2.0.bb" rel=3D"noreferrer" target=3D"_bl=
+ank">firewalld_1.2.0.bb</a><br>
+@@ -10,7 +10,7 @@ SRC_URI =3D &quot;\<br>
+=C2=A0 =C2=A0 =C2=A0file://firewalld.init \<br>
+=C2=A0 =C2=A0 =C2=A0file://run-ptest \<br>
+=C2=A0&quot;<br>
+-SRC_URI[sha256sum] =3D &quot;1dcd314ff836b2ce69f15f60fc7d50bd77ed359d784f9=
+b3c07f2d394ea570e4c&quot;<br>
++SRC_URI[sha256sum] =3D &quot;28fd90e88bda0dfd460f370f353474811b2e295d7eb27=
+f0d7d18ffa3d786eeb7&quot;<br>
+<br>
+=C2=A0# glib-2.0-native is needed for GSETTINGS_RULES autoconf macro from g=
+settings.m4<br>
+=C2=A0DEPENDS =3D &quot;intltool-native glib-2.0-native nftables&quot;<br>
+@@ -23,6 +23,9 @@ PACKAGECONFIG[docs] =3D &quot;--with-xml-catalog=3D${STAG=
+ING_ETCDIR_NATIVE}/xml/catalog,-<br>
+=C2=A0PACKAGECONFIG[ipset] =3D &quot;--with-ipset=3D${sbindir}/ipset,--with=
+out-ipset,,ipset&quot;<br>
+=C2=A0PACKAGECONFIG[ebtables] =3D &quot;--with-ebtables=3D${base_sbindir}/e=
+btables --with-ebtables-restore=3D${sbindir}/ebtables-legacy-restore,--with=
+out-ebtables --without-ebtables-restore,,ebtables&quot;<br>
+<br>
++# Default logging configuration: mixed syslog file console<br>
++FIREWALLD_DEFAULT_LOG_TARGET ??=3D &quot;syslog&quot;<br>
++<br>
+=C2=A0# The UIs are not yet tested and the dependencies are probably not qu=
+ite correct yet.<br>
+=C2=A0# Splitting into separate packages is beneficial so that no dead code=
+ is transferred<br>
+=C2=A0# to the target device.<br>
+@@ -31,7 +34,7 @@ PACKAGECONFIG[ebtables] =3D &quot;--with-ebtables=3D${bas=
+e_sbindir}/ebtables --with-ebtab<br>
+=C2=A0PACKAGECONFIG[qt5] =3D &quot;&quot;<br>
+=C2=A0PACKAGECONFIG[gtk] =3D &quot;&quot;<br>
+<br>
+-PACKAGES =3D+ &quot;python3-firewall ${PN}-applet ${PN}-config ${PN}-offli=
+ne-cmd ${PN}-zsh-completion&quot;<br>
++PACKAGES =3D+ &quot;python3-firewall ${PN}-applet ${PN}-config ${PN}-offli=
+ne-cmd ${PN}-zsh-completion ${PN}-log-rotate&quot;<br>
+<br>
+=C2=A0# iptables, ip6tables, ebtables, and ipset *should* be unnecessary<br=
+>
+=C2=A0# when the nftables backend is available, because nftables supersedes=
+ all of them.<br>
+@@ -132,6 +135,10 @@ FIREWALLD_KERNEL_MODULES ?=3D &quot;\<br>
+=C2=A0 =C2=A0 =C2=A0sch_fq_codel \<br>
+=C2=A0&quot;<br>
+<br>
++do_configure:prepend() {<br>
++=C2=A0 =C2=A0 export DEFAULT_LOG_TARGET=3D${FIREWALLD_DEFAULT_LOG_TARGET}<=
+br>
++}<br>
++<br>
+=C2=A0do_install:append() {<br>
+=C2=A0 =C2=A0 =C2=A0if ${@bb.utils.contains(&#39;DISTRO_FEATURES&#39;, &#39=
+;systemd&#39;, &#39;false&#39;, &#39;true&#39;, d)}; then<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0# firewalld ships an init script but it c=
+ontains Red Hat-isms, replace it with our own<br>
+@@ -237,6 +244,9 @@ FILES:${PN}-offline-cmd +=3D &quot; \<br>
+=C2=A0&quot;<br>
+=C2=A0RDEPENDS:${PN}-offline-cmd +=3D &quot;python3-core&quot;<br>
+<br>
++SUMMARY:${PN}-offline-cmd =3D &quot;${SUMMARY} (log-rotate configuration)&=
+quot;<br></blockquote><div><br></div><div>It seams=C2=A0to me that it shoul=
+d be SUMMARY:${PN}-log-rotate</div><div><br></div><div>Jose</div><div>=C2=
+=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left:1px solid rgb(204,204,204);padding-left:1ex">
++FILES:${PN}-log-rotate +=3D &quot;${sysconfdir}/logrotate.d&quot;<br>
++<br>
+=C2=A0# To get allmost all tests passing<br>
+=C2=A0# - Enable PACKAGECONFIG ipset, ebtable<br>
+=C2=A0# - Enough RAM QB_MEM =3D &quot;-m 8192&quot; (used f=C3=BCr fancy ip=
+set tests)<br>
+@@ -273,6 +283,9 @@ RDEPENDS:${PN} +=3D &quot;\<br>
+=C2=A0 =C2=A0 =C2=A0python3-ctypes \<br>
+=C2=A0 =C2=A0 =C2=A0python3-pprint \<br>
+=C2=A0&quot;<br>
++# If firewalld writes a log file rotation is needed<br>
++RRECOMMENDS:${PN} +=3D &quot;${@bb.utils.contains_any(&#39;FIREWALLD_DEFAU=
+LT_LOG_TARGET&#39;, [ &#39;mixed&#39;, &#39;file&#39; ], &#39;${PN}-log-rot=
+ate&#39;, &#39;&#39;, d)}&quot;<br>
++<br>
+=C2=A0# Add required kernel modules. With Yocto kernel 5.15 this currently =
+means:<br>
+=C2=A0# - features/nf_tables/nf_tables.scc<br>
+=C2=A0# - features/netfilter/netfilter.scc<br>
+-- <br>
+2.35.3<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#97763): <a href=3D"https://lists.openembedded.org/g/ope=
+nembedded-devel/message/97763" rel=3D"noreferrer" target=3D"_blank">https:/=
+/lists.openembedded.org/g/openembedded-devel/message/97763</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/92224514/5052=
+612" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/92224514/5052612</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:quaresma.jose@gmail.com"=
+ target=3D"_blank">quaresma.jose@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div><br clear=3D"all"><div><br></div>-- <br><div dir=3D"ltr"=
+ class=3D"gmail_signature"><div dir=3D"ltr">Best regards,<div><br>Jos=C3=A9=
+ Quaresma</div></div></div></div>
 
-diff --git a/meta-oe/recipes-connectivity/modemmanager/files/0001-core-switch-bash-shell-scripts-to-use-bin-sh-for-use.patch b/meta-oe/recipes-connectivity/modemmanager/files/0001-core-switch-bash-shell-scripts-to-use-bin-sh-for-use.patch
-index 7c3e7750a..914760512 100644
---- a/meta-oe/recipes-connectivity/modemmanager/files/0001-core-switch-bash-shell-scripts-to-use-bin-sh-for-use.patch
-+++ b/meta-oe/recipes-connectivity/modemmanager/files/0001-core-switch-bash-shell-scripts-to-use-bin-sh-for-use.patch
-@@ -1,42 +1,44 @@
--From f7a3292c1c753b29384e216693f51a4213fea7d0 Mon Sep 17 00:00:00 2001
-+From 35173fa04d0116ba30a86dc1a19f859f2be14a24 Mon Sep 17 00:00:00 2001
- From: "Bruce A. Johnson" <waterfordtrack@gmail.com>
- Date: Wed, 22 Dec 2021 14:24:02 -0500
--Subject: [PATCH 1/2] core: switch bash shell scripts to use /bin/sh for use
-+Subject: [PATCH] core: switch bash shell scripts to use /bin/sh for use
-  w/Busybox.
- 
- Fixes https://gitlab.freedesktop.org/mobile-broadband/ModemManager/-/issues/483
-+
-+%% original patch: 0001-core-switch-bash-shell-scripts-to-use-bin-sh-for-use.patch
- ---
-- data/fcc-unlock/105b           | 2 +-
-- data/fcc-unlock/1199           | 2 +-
-- data/fcc-unlock/1eac           | 2 +-
-- test/mmcli-test-sms            | 2 +-
-- tools/tests/test-wrapper.sh.in | 2 +-
-+ data/dispatcher-fcc-unlock/105b | 2 +-
-+ data/dispatcher-fcc-unlock/1199 | 2 +-
-+ data/dispatcher-fcc-unlock/1eac | 2 +-
-+ test/mmcli-test-sms             | 2 +-
-+ tools/tests/test-wrapper.sh.in  | 2 +-
-  5 files changed, 5 insertions(+), 5 deletions(-)
- 
--diff --git a/data/fcc-unlock/105b b/data/fcc-unlock/105b
--index 21fe5329..f276050f 100644
----- a/data/fcc-unlock/105b
--+++ b/data/fcc-unlock/105b
-+diff --git a/data/dispatcher-fcc-unlock/105b b/data/dispatcher-fcc-unlock/105b
-+index 444bd51f..772c90f4 100644
-+--- a/data/dispatcher-fcc-unlock/105b
-++++ b/data/dispatcher-fcc-unlock/105b
- @@ -1,4 +1,4 @@
- -#!/bin/bash
- +#!/bin/sh
-  
-  # SPDX-License-Identifier: CC0-1.0
-  # 2021 Aleksander Morgado <aleksander@aleksander.es>
--diff --git a/data/fcc-unlock/1199 b/data/fcc-unlock/1199
--index 0109c6ab..e1d3804c 100644
----- a/data/fcc-unlock/1199
--+++ b/data/fcc-unlock/1199
-+diff --git a/data/dispatcher-fcc-unlock/1199 b/data/dispatcher-fcc-unlock/1199
-+index 83ab2c9e..6dbf8d1b 100644
-+--- a/data/dispatcher-fcc-unlock/1199
-++++ b/data/dispatcher-fcc-unlock/1199
- @@ -1,4 +1,4 @@
- -#!/bin/bash
- +#!/bin/sh
-  
-  # SPDX-License-Identifier: CC0-1.0
-  # 2021 Aleksander Morgado <aleksander@aleksander.es>
--diff --git a/data/fcc-unlock/1eac b/data/fcc-unlock/1eac
--index 1068d9c2..d9342852 100644
----- a/data/fcc-unlock/1eac
--+++ b/data/fcc-unlock/1eac
-+diff --git a/data/dispatcher-fcc-unlock/1eac b/data/dispatcher-fcc-unlock/1eac
-+index 1a048dc8..44ce46d7 100644
-+--- a/data/dispatcher-fcc-unlock/1eac
-++++ b/data/dispatcher-fcc-unlock/1eac
- @@ -1,4 +1,4 @@
- -#!/bin/bash
- +#!/bin/sh
-@@ -64,5 +66,5 @@ index d64ea4cb..fcdb56de 100644
-  # For debugging behavior of test-modemmanager-service.py, you can modify
-  # this line to add --log-file option
- -- 
--2.34.1
-+2.35.3
- 
-diff --git a/meta-oe/recipes-connectivity/modemmanager/files/0002-fcc-unlock-Make-scripts-POSIX-shell-compatible.patch b/meta-oe/recipes-connectivity/modemmanager/files/0002-fcc-unlock-Make-scripts-POSIX-shell-compatible.patch
-deleted file mode 100644
-index d911d54ce..000000000
---- a/meta-oe/recipes-connectivity/modemmanager/files/0002-fcc-unlock-Make-scripts-POSIX-shell-compatible.patch
-+++ /dev/null
-@@ -1,100 +0,0 @@
--From ddf634b92bf96b35f521db6da329628b4525c2eb Mon Sep 17 00:00:00 2001
--From: Sven Schwermer <sven.schwermer@disruptive-technologies.com>
--Date: Fri, 25 Feb 2022 21:37:13 +0100
--Subject: [PATCH 2/2] fcc-unlock: Make scripts POSIX shell compatible
--
--This allows us to not rely on bash which may not be available on
--constrained systems, e.g. Yocto-built embedded systems. The scripts now
--pass shellcheck.
--
--Signed-off-by: Sven Schwermer <sven.schwermer@disruptive-technologies.com>
-----
-- data/fcc-unlock/105b | 8 ++++----
-- data/fcc-unlock/1199 | 6 +++---
-- data/fcc-unlock/1eac | 8 ++++----
-- 3 files changed, 11 insertions(+), 11 deletions(-)
--
--diff --git a/data/fcc-unlock/105b b/data/fcc-unlock/105b
--index f276050f..772c90f4 100644
----- a/data/fcc-unlock/105b
--+++ b/data/fcc-unlock/105b
--@@ -15,20 +15,20 @@ shift
-- # second and next arguments are control port names
-- for PORT in "$@"; do
--   # match port type in Linux 5.14 and newer
---  grep -q MBIM /sys/class/wwan/${PORT}/type 2>/dev/null && {
--+  grep -q MBIM "/sys/class/wwan/$PORT/type" 2>/dev/null && {
--     MBIM_PORT=$PORT
--     break
--   }
--   # match port name in Linux 5.13
---  [[ $PORT == *"MBIM"* ]] && {
--+  echo "$PORT" | grep -q MBIM && {
--     MBIM_PORT=$PORT
--     break
--   }
-- done
-- 
-- # fail if no MBIM port exposed
---[ -n "${MBIM_PORT}" ] || exit 2
--+[ -n "$MBIM_PORT" ] || exit 2
-- 
-- # run qmicli operation over MBIM
---qmicli --device-open-proxy --device=/dev/${MBIM_PORT} --dms-foxconn-set-fcc-authentication=0
--+qmicli --device-open-proxy --device="/dev/$MBIM_PORT" --dms-foxconn-set-fcc-authentication=0
-- exit $?
--diff --git a/data/fcc-unlock/1199 b/data/fcc-unlock/1199
--index e1d3804c..6dbf8d1b 100644
----- a/data/fcc-unlock/1199
--+++ b/data/fcc-unlock/1199
--@@ -19,15 +19,15 @@ shift
-- # second and next arguments are control port names
-- for PORT in "$@"; do
--   # match port name
---  [[ $PORT == *"cdc-wdm"* ]] && {
--+  echo "$PORT" | grep -q cdc-wdm && {
--     CDC_WDM_PORT=$PORT
--     break
--   }
-- done
-- 
-- # fail if no cdc-wdm port exposed
---[ -n "${CDC_WDM_PORT}" ] || exit 2
--+[ -n "$CDC_WDM_PORT" ] || exit 2
-- 
-- # run qmicli operation
---qmicli --device-open-proxy --device=/dev/${CDC_WDM_PORT} --dms-set-fcc-authentication
--+qmicli --device-open-proxy --device="/dev/$CDC_WDM_PORT" --dms-set-fcc-authentication
-- exit $?
--diff --git a/data/fcc-unlock/1eac b/data/fcc-unlock/1eac
--index d9342852..44ce46d7 100644
----- a/data/fcc-unlock/1eac
--+++ b/data/fcc-unlock/1eac
--@@ -15,20 +15,20 @@ shift
-- # second and next arguments are control port names
-- for PORT in "$@"; do
--   # match port type in Linux 5.14 and newer
---  grep -q MBIM /sys/class/wwan/${PORT}/type 2>/dev/null && {
--+  grep -q MBIM "/sys/class/wwan/$PORT/type" 2>/dev/null && {
--     MBIM_PORT=$PORT
--     break
--   }
--   # match port name in Linux 5.13
---  [[ $PORT == *"MBIM"* ]] && {
--+  echo "$PORT" | grep -q MBIM && {
--     MBIM_PORT=$PORT
--     break
--   }
-- done
-- 
-- # fail if no MBIM port exposed
---[ -n "${MBIM_PORT}" ] || exit 2
--+[ -n "$MBIM_PORT" ] || exit 2
-- 
-- # run mbimcli operation
---mbimcli --device-open-proxy --device=/dev/${MBIM_PORT} --quectel-set-radio-state=on
--+mbimcli --device-open-proxy --device="/dev/$MBIM_PORT" --quectel-set-radio-state=on
-- exit $?
---- 
--2.34.1
--
-diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.6.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.8.bb
-similarity index 92%
-rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.6.bb
-rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.8.bb
-index 14d9942c0..28f81ba6e 100644
---- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.6.bb
-+++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.8.bb
-@@ -12,13 +12,12 @@ inherit gnomebase gettext systemd gobject-introspection bash-completion
- 
- DEPENDS = "glib-2.0 libgudev libxslt-native dbus"
- 
--SRCREV ?= "a7bcf2036b34d5043dbc33fee7d98bae5859c4d3"
-+SRCREV ?= "0d8b5e93fc62eb0f41e18a2d9d845331d7af36ec"
- 
--# Patches 0001, 0002 will be in ModemManager > 1.18.6
-+# Patch 0001 will be in ModemManager > 1.19
- SRC_URI = " \
-     git://gitlab.freedesktop.org/mobile-broadband/ModemManager.git;protocol=https;branch=mm-1-18 \
-     file://0001-core-switch-bash-shell-scripts-to-use-bin-sh-for-use.patch \
--    file://0002-fcc-unlock-Make-scripts-POSIX-shell-compatible.patch \
- "
- 
- S = "${WORKDIR}/git"
--- 
-2.35.3
-
+--000000000000532c0e05e3342f65--
 
