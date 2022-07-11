@@ -1,85 +1,117 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 74354C43334
-	for <webhook@archiver.kernel.org>; Sun, 10 Jul 2022 15:21:54 +0000 (UTC)
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com
- [209.85.218.41])
- by mx.groups.io with SMTP id smtpd.web12.17807.1657466510115232028
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 779E3C43334
+	for <webhook@archiver.kernel.org>; Mon, 11 Jul 2022 08:45:19 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.1])
+ by mx.groups.io with SMTP id smtpd.web08.26312.1657529117664478698
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 10 Jul 2022 08:21:50 -0700
+ Mon, 11 Jul 2022 01:45:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=RNzKOXSV;
- spf=pass (domain: gmail.com, ip: 209.85.218.41,
- mailfrom: alex.kiernan@gmail.com)
-Received: by mail-ej1-f41.google.com with SMTP id a9so5039285ejf.6
-        for <openembedded-devel@lists.openembedded.org>;
- Sun, 10 Jul 2022 08:21:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=x/IUYnrBxKPYQ/IiZJ7kUkLFrkbnqWi9SdowfRWoiz4=;
-        b=RNzKOXSVHRX8CTIufviMT0k6R590lI5RieQbzhXDzT98QaqG0peI6Lf/p8xdsTjJMa
-         dpitknhqVoGwCIz2NTGeuTUIhqZ1of6jAMmkLW0Hq5SigzcwAOTFr1CbNw7ICrOLbHxD
-         gaF2boOrkbRrujx6+VQeShTaM65slzlPM7duIIumnzgEHPkYSC5uZh9qxPQIOEe+vVfH
-         NdvdGJZmIlZYdl6b74DJZizFGD+73sIORdIg3+GXMnBanpr4EoVGEp8d+HW63ft2z2yH
-         XseH66bh1o0aE2PYM0LHHzD+zDfgVcVQC6yQ0yAYIub8iGAZL2L+syyU6Vq+/mL7IAR0
-         pkiw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=x/IUYnrBxKPYQ/IiZJ7kUkLFrkbnqWi9SdowfRWoiz4=;
-        b=6mTxag7RWvwpIRQ/xkCXB6aK0a8Wd3cKYHiVczThGhV1w5WzR49nP6n/ATipaAniI6
-         vWKoQN9yk15HsCtRrMWsfVH9vgDPzZa9yBDXIzFWHh609cSe84L+krP523wTEaMNhBno
-         88CdGf954fip+/x3jNPOTqzrAqJVtvh35eV4c98l+pDdam6jyVYj3VQv9GjxaziDFxZl
-         d5mAzkK4hpQot1UuvACWCUEUYyxDMLwz4uFAQNsgeuoVqADNJV/ZjfkOYJGJDDoaTOwH
-         LYu1E9joWTH1wmJthA91PLcEZ5KWxU5VoXrpYzeH8szlEFkaMAR/nB0BVRSFiuCauyTn
-         qo0g==
-X-Gm-Message-State: AJIora/yX2o7ugGukvqhCV0JwIjtfEr/rwFenbRR0UuAINI3yV18jKzd
-	mrTPooKt4bnjb/6xuo0mZXNze0MhDMYdLBpRuvs=
-X-Google-Smtp-Source: 
- AGRyM1t+sL1/aVkOMyZro985bVKQF86YEjhUXgkVnO+COewEfpEL9jUa+Q9r/8xwKJ8C8U3tuMP5Vdb+OqmfnKIPLMQ=
-X-Received: by 2002:a17:906:a10e:b0:6f3:e70b:b572 with SMTP id
- t14-20020a170906a10e00b006f3e70bb572mr14161438ejy.546.1657466508538; Sun, 10
- Jul 2022 08:21:48 -0700 (PDT)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=lf0HkYkG;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.1,
+ mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1657529115; i=@fujitsu.com;
+	bh=7KQEQRLlcz/DaLChTpfukdr32OT2HXp0hCHH36nqRg8=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=lf0HkYkGpDgh2wzTsBQeJWkAOh93zgXmnHGcdlmyf01IwsgZaSHmPpfg4voxxx1Hv
+	 YwQi1QRN6LGjPTFJryaCw6j2gUwDVrNa85fnuuU/qfVGdNxkB1Dko9RJGpMEJ7eW16
+	 waZ/q1Ff4/gha2RR5uelsevK0uKFME5wHodXMHuti6JoF2tuqN17y/mjiwNHr8AL8P
+	 8lX6GX6hhNoLBNgcOScjSOowffDdxOO8M6qqe9exmYc852au+8NlRs44a84PWX7n5T
+	 HIXqpv8v/nmKdIUxpItMcipdy23BKY4m5epaGFLPWFhDGI1Ew6Ij8qaGVD3iHEstpm
+	 nbhMbuaU0FSbA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrMIsWRWlGSWpSXmKPExsViZ8ORqCv2+HS
+  Swf9dohYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bFr8+ZC1ZzVdy4JNLAuIWzi5GLQ0jgCaPE
+  lKY/jBDOdSaJEzvmQjl7GCX+TX7H3sXIycEmoCYx/dYNVhBbREBfYunsPcwgNrOAisSL3z1AN
+  RwcwgIeEvdW54GEWQRUJWbvuA3WyivgJPG9/RwjiC0hoCAx5eF7ZpByTgFniYUvwKYIAZW0P2
+  xhgigXlDg58wkLxHQJiYMvIGokBBQlZl9uZoGwKyRmzNjGBmGrSVw9t4l5AqPgLCTts5C0L2B
+  kWsVomVSUmZ5RkpuYmaNraGCga2hoqmusa2Gml1ilm6iXWqpbnlpcomuol1herJdaXKxXXJmb
+  nJOil5dasokRGL4pxcxhOxj/9P7UO8QoycGkJMorfPJ0khBfUn5KZUZicUZ8UWlOavEhRhkOD
+  iUJXpmHQDnBotT01Iq0zBxgLMGkJTh4lER4r54ASvMWFyTmFmemQ6ROMepyfDh0ZS+zEEtefl
+  6qlDjvGZAZAiBFGaV5cCNgcX2JUVZKmJeRgYFBiKcgtSg3swRV/hWjOAejkjBvyCOgKTyZeSV
+  wm14BHcEEdERcygmQI0oSEVJSDUwJFbtfy9za8SvQa0+mmoKmw1vrWvYtLDMibjcddNYvOaJX
+  Lu/pWrxnw57q5qXxoicYim9rcUWu19nUNnv3Oju7c0H7dqZoHLYKLG/YaR32UO+npqb31Yi/1
+  7ZfNZCprrofkhjkLPyZJ32Op+nHSTkcYX/fNAS8Ll1y00z+7euj23rPcb/lPH9SZ9NrD2W78L
+  BdjXukX+tVT7B5XanBbmTxv27Teb3lC9/EGG06Yc3KbnfzevP8TWv2mrGs2RGuHdm3QzX36+M
+  77yWKLx7+fuVTSJpqWfb0b5M664Ia1n0T0/uUOtGVT3FGbLOW5Kpdrr2FDip/5k6u9pwQu+PN
+  Y/PN9m7lxWyigpO2PgjcfUCJpTgj0VCLuag4EQAHfPpZZgMAAA==
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-11.tower-591.messagelabs.com!1657529110!7083!1
+X-Originating-IP: [62.60.8.97]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.87.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 29259 invoked from network); 11 Jul 2022 08:45:10 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-11.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 11 Jul 2022 08:45:10 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id F3D10100192
+	for <openembedded-devel@lists.openembedded.org>;
+ Mon, 11 Jul 2022 09:45:09 +0100 (BST)
+Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
+ [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id E7F65100043
+	for <openembedded-devel@lists.openembedded.org>;
+ Mon, 11 Jul 2022 09:45:09 +0100 (BST)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Mon, 11 Jul 2022 09:45:08 +0100
+From: Wang Mingyu <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] gnome-bluetooth: upgrade 42.1 -> 42.2
+Date: Mon, 11 Jul 2022 16:44:42 +0800
+Message-ID: <1657529083-24142-3-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1657529083-24142-1-git-send-email-wangmy@fujitsu.com>
+References: <1657529083-24142-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
-References: <20220708205048.11990-1-alex.kiernan@gmail.com>
- <20220708205048.11990-2-alex.kiernan@gmail.com>
- <CAO5Uq5QnbkKA9q9bk4xoJj2X4GT7+p3z5_QPLp2Zm1kUPRCVkg@mail.gmail.com>
- <CAMKF1srRvTF4cfxo=Mvqrd3pDRVYzz_hQFX5D52GCEfzQa17uw@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1srRvTF4cfxo=Mvqrd3pDRVYzz_hQFX5D52GCEfzQa17uw@mail.gmail.com>
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Sun, 10 Jul 2022 16:21:36 +0100
-Message-ID: 
- <CAO5Uq5QSDYF9jGs_SNhBU3DFjMeTuVA6G2_VEXFpp3a3ZFndGg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 2/2] nftables: Upgrade 1.0.2 -> 1.0.4
-To: Khem Raj <raj.khem@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 10 Jul 2022 15:21:54 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 11 Jul 2022 08:45:19 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97801
+ https://lists.openembedded.org/g/openembedded-devel/message/97805
 
-On Sat, Jul 9, 2022 at 2:48 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Sat, Jul 9, 2022 at 7:08 AM Alex Kiernan <alex.kiernan@gmail.com> wrote:
-> >
-> > Ignore this, need to send a v2
-> >
->
-> do you want to rework the python packageconfig patch too ?
->
+This version fixes duplicate devices appearing when bluetoothd restarts, as well
+as the discovery not being updated correctly in that same situation.
 
-Yeah, I've had two or three goes at it and struggled to see how to
-make it cooperate...
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ .../{gnome-bluetooth_42.1.bb => gnome-bluetooth_42.2.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gnome-bluetooth/{gnome-bluetooth_42.1.bb => gnome-bluetooth_42.2.bb} (91%)
 
+diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.1.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.2.bb
+similarity index 91%
+rename from meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.1.bb
+rename to meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.2.bb
+index 3cc675ce4..c916aca00 100644
+--- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.2.bb
+@@ -26,7 +26,7 @@ inherit features_check gnomebase gtk-icon-cache gtk-doc gobject-introspection
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+-SRC_URI[archive.sha256sum] = "d9fe5d673f27a40a86a9e23d93cb99367e7b06df51872e8ac5ecc9938e55b5eb"
++SRC_URI[archive.sha256sum] = "8ce8ecfab28272db1830a63f08f9ccb5304734d1be2dbfce795fe4029e629f0c"
+ 
+ BT_PULSE_PACKS = " \
+     pulseaudio-lib-bluez5-util \
 -- 
-Alex Kiernan
+2.25.1
+
 
