@@ -1,111 +1,106 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 70305CCA47B
-	for <webhook@archiver.kernel.org>; Mon, 11 Jul 2022 08:49:19 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.65])
- by mx.groups.io with SMTP id smtpd.web11.26293.1657529348635701810
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 85501CCA47B
+	for <webhook@archiver.kernel.org>; Mon, 11 Jul 2022 09:07:09 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg
+ [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web09.26289.1657530425743246961
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Jul 2022 01:49:09 -0700
+ Mon, 11 Jul 2022 02:07:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=y/GmuLTP;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.65,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1657529346; i=@fujitsu.com;
-	bh=M9cRg3aMOA4IMygqEiZ0X8A2Xy7CYsgQp8xRHZoY/ko=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=y/GmuLTP0cZheTQ2YmGkKU/dBNn28psF5eJUuvXw14SBrDVzRi87kKsaOdD7vrttB
-	 TNB31pNcQuO8kEhPToqWxqKno1JT2a3/0yRkg63mOtlkI5bb2ZIaLC/XJ8TtGFnt7E
-	 UDwSWPQTXgZReBq9UAEPeyNlqBinuoJccqaL53OQWWeNmZfDuS39nS+ZlVvDsrKJeK
-	 fDPeT3g6vRC1lTdadrIca9qWlW90QdvKotcTP4Fc3wPPI0+nAKTpNL1wrgkdDuZbqS
-	 X8W2ZQR+VuxYH+5XBci/iKz3WI5q1jme0vsFf/3wur14UJt9n8wcyM2ws4yV/z1xJJ
-	 S/3m5Gr76HmCQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrNIsWRWlGSWpSXmKPExsViZ8ORqMv05HS
-  Swc5PYhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aUHbUF2zkrbi1oYW5gvMXRxcjJISTwhFFi
-  zuzaLkYuIPs6k8Sk09PYIBJ7GCUO7AsCsdkE1CSm37rBCmKLCOhLLJ29hxnEZhZQkXjxu4e9i
-  5GDQ1jATeJzjyZImEVAVWLBrslgJbwCThL3Ht5iAbElBBQkpjx8DxUXlDg58wkLxBgJiYMvXj
-  BD1ChKzL7cDFVfITFjxjY2CFtN4uq5TcwTGPlnIWmfhaR9ASPTKkarpKLM9IyS3MTMHF1DAwN
-  dQ0NTXSBpZKyXWKWbqJdaqlueWlyia6iXWF6sl1pcrFdcmZuck6KXl1qyiREYjinFDNU7GP/3
-  /tQ7xCjJwaQkyit88nSSEF9SfkplRmJxRnxRaU5q8SFGGQ4OJQneL4+AcoJFqempFWmZOcDYg
-  ElLcPAoifBePQGU5i0uSMwtzkyHSJ1i1OWY+bXtALMQS15+XqqUOO8RkBkCIEUZpXlwI2Bxeo
-  lRVkqYl5GBgUGIpyC1KDezBFX+FaM4B6OSMK/zY6ApPJl5JXCbXgEdwQR0RFzKCZAjShIRUlI
-  NTIuOfbf2MaziDY2YfntFaBVvc3rJKXONcOPI3XZBmqx7fnrfa77mvCrHjO+d/N6qf/s+3TeN
-  dHhTabLsjLRS0Mpg/4K3EjfXmVzP+X8whPGh3vq1Jg+OmG2OYWCbWByTJXLSIOf7zEPBfJNt5
-  Mu+3P1m57X2bXWOxukPnXZvJrxpEO3xe3er5fr7kIdSv2aF6/y/FD+3izPOZK2JTdLe81d8/v
-  f4ObAK7335RlxlCafth01ffMRn7T/3cvL9vKXpDDNPRmYufPji/ey1beUOt847pdoV3rvtJvU
-  j6vESpWWmKtOZ+7P7rKS0Yrkv3ru4S2ZNdd+t9tZTOa2zC2Kz/og3xOrqvRTpNraVXHH8vBJL
-  cUaioRZzUXEiAA7hUZtOAwAA
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-22.tower-591.messagelabs.com!1657529346!7587!1
-X-Originating-IP: [62.60.8.97]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.87.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 18380 invoked from network); 11 Jul 2022 08:49:06 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-22.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 11 Jul 2022 08:49:06 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id F129B100198
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Jul 2022 09:49:05 +0100 (BST)
-Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
- [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id E3601100195
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Jul 2022 09:49:05 +0100 (BST)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 11 Jul 2022 09:49:04 +0100
-From: Wang Mingyu <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-perl] [PATCH] libencode-perl: upgrade 3.17 -> 3.18
-Date: Mon, 11 Jul 2022 16:45:13 +0800
-Message-ID: <1657529116-24181-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@anavi.org header.s=default header.b=jn8fl+dh;
+ spf=permerror,
+ err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
+ for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
+ (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=wFLxBQG8dzu/A6ypb6HEpzH5u4gQTEC5lkhbGGjyR64=; b=jn8fl+dhFLrZhLXHLZ98DwaXgX
+	gBIVkxWTPJ7qYwdpUYQsQaRj3fX1gBZt03GpM6JsAQ1XLEuOpBXroeLnv4xtYSpQLiShD+zDpvQ6u
+	bU5hf1HlzunwsEyJeXYCJhIY+rHuFF1aBKRYWwP5pHYMFErgCpl+/U5+39nCFSOX93Kc/PO9r/Iwv
+	s4OkVTVW1y4ZAlIbmtSWKvTlbXCgy7sPKHLW5cIoeb5c5h8oLBsx7Y8FHK0e72QPznE1B0RWEoTgS
+	wuTnhXcTBaXHc+UVY6AhjBO0spH10oUw4oUGBkFtHSRQHGPT37XuFdZ65LOWa4Lm0+l0QQhXltmvd
+	Y4/8Yq3g==;
+Received: from lan.nucleusys.com ([92.247.61.126]:52702 helo=tone.k.g)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.95)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1oApP5-000Clc-Dq;
+	Mon, 11 Jul 2022 12:07:04 +0300
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/2] python3-ansi2html: Upgrade 1.7.0 -> 1.8.0
+Date: Mon, 11 Jul 2022 12:06:50 +0300
+Message-Id: <20220711090650.2117395-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20220711090650.2117395-1-leon.anavi@konsulko.com>
+References: <20220711090650.2117395-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
+ leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 11 Jul 2022 08:49:19 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 11 Jul 2022 09:07:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97806
+ https://lists.openembedded.org/g/openembedded-devel/message/97811
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Upgrade to release 1.8.0:
+
+- style.py: Drop unused CSS class .bold
+- Bring back putting a rendered man page into release archives
+- Migrate from mock to unittest.mock of Python >=3.3
+- Fix for ANSI color codes that include blank values
+- Added py.typed file
+- style.py: Get CSS class .inv_foreground in sync with
+  .body_foreground
+- Fix --input-encoding= regression added in PR #143 + related
+  tests
+- Add ability to also recognize colons in ANSI escapes
+- Fixes to respect bright colors in palette
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{libencode-perl_3.17.bb => libencode-perl_3.18.bb}          | 2 +-
+ .../{python3-ansi2html_1.7.0.bb => python3-ansi2html_1.8.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libencode/{libencode-perl_3.17.bb => libencode-perl_3.18.bb} (97%)
+ rename meta-python/recipes-devtools/python/{python3-ansi2html_1.7.0.bb => python3-ansi2html_1.8.0.bb} (83%)
 
-diff --git a/meta-perl/recipes-perl/libencode/libencode-perl_3.17.bb b/meta-perl/recipes-perl/libencode/libencode-perl_3.18.bb
-similarity index 97%
-rename from meta-perl/recipes-perl/libencode/libencode-perl_3.17.bb
-rename to meta-perl/recipes-perl/libencode/libencode-perl_3.18.bb
-index 8b4f292a3..999863b1f 100644
---- a/meta-perl/recipes-perl/libencode/libencode-perl_3.17.bb
-+++ b/meta-perl/recipes-perl/libencode/libencode-perl_3.18.bb
-@@ -15,7 +15,7 @@ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM = "file://META.json;beginline=8;endline=10;md5=b12e3be1e17a7e99ca4f429ff32c28b5"
+diff --git a/meta-python/recipes-devtools/python/python3-ansi2html_1.7.0.bb b/meta-python/recipes-devtools/python/python3-ansi2html_1.8.0.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-ansi2html_1.7.0.bb
+rename to meta-python/recipes-devtools/python/python3-ansi2html_1.8.0.bb
+index 0f1804de8..21095cb7d 100644
+--- a/meta-python/recipes-devtools/python/python3-ansi2html_1.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-ansi2html_1.8.0.bb
+@@ -5,7 +5,7 @@ LICENSE = "GPL-3.0-only"
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/DANKOGAI/Encode-${PV}.tar.gz"
--SRC_URI[sha256sum] = "b44cbf7dd60ec6128ec575dd348484975086522611bc7580cfd305a095faa6d2"
-+SRC_URI[sha256sum] = "74dcbd851171a68cf3ef225568ece47b0959b8e3cda887482fde97c1ae1691e2"
+ PYPI_PACKAGE = "ansi2html"
  
- UPSTREAM_CHECK_REGEX = "Encode\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
+-SRC_URI[sha256sum] = "69316be8c68ac91c5582d397c2890e69c993cc7cda52062ac7e45fcb660d8edc"
++SRC_URI[sha256sum] = "38b82a298482a1fa2613f0f9c9beb3db72a8f832eeac58eb2e47bf32cd37f6d5"
+ 
+ inherit pypi python_setuptools_build_meta
  
 -- 
-2.25.1
+2.30.2
 
 
