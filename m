@@ -1,250 +1,293 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <andrej.valek@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9808C43334
-	for <webhook@archiver.kernel.org>; Tue, 12 Jul 2022 20:26:51 +0000 (UTC)
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com
- [209.85.208.48])
- by mx.groups.io with SMTP id smtpd.web10.14084.1657657605446668231
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 66458C433EF
+	for <webhook@archiver.kernel.org>; Wed, 13 Jul 2022 12:30:56 +0000 (UTC)
+Received: from EUR01-HE1-obe.outbound.protection.outlook.com
+ (EUR01-HE1-obe.outbound.protection.outlook.com [40.107.13.79])
+ by mx.groups.io with SMTP id smtpd.web10.21316.1657715447742024877
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Jul 2022 13:26:45 -0700
+ Wed, 13 Jul 2022 05:30:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=AuX3/mvo;
- spf=pass (domain: gmail.com, ip: 209.85.208.48,
- mailfrom: alex.kiernan@gmail.com)
-Received: by mail-ed1-f48.google.com with SMTP id y8so11579682eda.3
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Jul 2022 13:26:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=VqDFNMCcn5TLXfELzH21cpN3XNk58ok9sGMWFMVnKQE=;
-        b=AuX3/mvokrylvJD9Bdpv1GQYqDGhGUXcQ9cBX4jWMu7jsUWt7goym1Y2ZWExEvqyJ+
-         h04wE3Uep722QsROT37KE+yk2h3+W2+1ocjjtxVs4/jVSROM0VrdejhvDPbDPtZ3T0+o
-         18TAtYy8dN2lb4OlRiSavuWV/A85LpCDcEnXTRJwuXo8fAS0Rkw6tRPyJf7qwV1aRWoG
-         tI3Op2K0LuldRYkLMXIlJgf4MdrKPnXBBhWypvLuBjACNY+Mdc5xkW4w8rkXaPOcPJVF
-         zgJdObphtzQvql0WHLELo/hbD34BEFH/AT9xzRKUWCwCJjWow1ORiahlga9+xY4gMR0F
-         6IDg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=VqDFNMCcn5TLXfELzH21cpN3XNk58ok9sGMWFMVnKQE=;
-        b=G1Eyc30QJUs9tc1oSZqjxHD/nE7Ia3Ol+kYvQqVzYGF9F0RhANYjLmiuwz/jk1b80G
-         mmwTSjadZAduRrt4zOfikBiHLArKxmh04eP4zKDew7GrZi/FOkM2633cX9j1xRq02aZU
-         6SiqL0sUqxQZ7+EZXLXkxL53V9PQMZyfIT1I7c5sIelw4+3qRzGJ4ZuPH+PtsfRFZsP/
-         8GgQhur15rtRLlJtM57NdIdHMuOZL8vT8h7Dnv4mZbPJdTduhmk9FJEaQs3jbj+b/kAt
-         GHB63nJ+ZKDPItLA2UcgM64UD94AJwBsoUCGdAKQMG0NTsIx+cUQpvsRmzsxE9okML4T
-         ulPg==
-X-Gm-Message-State: AJIora+YVllu9gCBfFgaV9SAByk0rGr+e0TshefZ65zHI6v9gOeibSYS
-	n+ch22dwLAUZf7MbCx0zKNnL+36DxCk=
-X-Google-Smtp-Source: 
- AGRyM1vRf3uNKKZnL5EEauyd6R/7vc6iWYxBYPEHwTSFuvnzR5/tDCoRXgfbo6DE6hAszinLAf+bVg==
-X-Received: by 2002:a50:fb81:0:b0:43a:7975:c721 with SMTP id
- e1-20020a50fb81000000b0043a7975c721mr34771438edq.381.1657657603470;
-        Tue, 12 Jul 2022 13:26:43 -0700 (PDT)
-Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
- [91.135.6.246])
-        by smtp.gmail.com with ESMTPSA id
- lb16-20020a170907785000b0072b36cbcdaasm4184433ejc.92.2022.07.12.13.26.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Jul 2022 13:26:43 -0700 (PDT)
-From: Alex Kiernan <alex.kiernan@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-networking][PATCH v3] nftables: Upgrade 1.0.2 -> 1.0.4
-Date: Tue, 12 Jul 2022 21:26:39 +0100
-Message-Id: <20220712202639.6265-1-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.35.1
+ dkim=fail reason="body hash did not verify" header.i=@siemens.com
+ header.s=selector2 header.b=Ao03CzFt;
+ spf=pass (domain: siemens.com, ip: 40.107.13.79,
+ mailfrom: andrej.valek@siemens.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=jiJbMU3j/EAftSzxsYPvRiqsigATBkkvh3j9pO4fmbKYQ081HT3UaWKZtj0xEBfhNQA7WctxDoZIxghrArPPKWcYzdMqp0zk1IFwnMOUhMLentGuhNRFNiAkK4Z1MEmmg4bBVXbO1bJLwAtIgRiI8ApnBzWpRBB3B4s1X6H+7Xvr4we6hUv4UfTjgUc56wL+7prYAYUgisU+LfBQySny9zaxmBx4h+sBU1XCcjUWkLcjYAKc57Lp9Ovc+CLXRoWankBdUTpBgTWQAeLP7cqq3rThncSZC2Ye+1wMUqcV9/kIkHMwYs/bz3Vp1bnxt0dQAa7etf52ZaPPNLHGIiw0+Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=yABTRvIeteO5wUle2hnHvZXqWPJymAJ7oOfqYL1TsQo=;
+ b=C4T32rfUWTTKnuabBhMWf2i+LljluiDOkhPpD29OfW+PcpQHEkp1MNnnafw3XpfO1ECtw4A+3HIeH16VCaxoGE00X+qFh3zcTOLGKW8O8wKOLk8YoL3V7eui0flWsjkNQVgGBlap3yW1v1kg97YR9kDxfgMdzbpVEgs6Mcgfis+NSfro9m/WvORIbcd8ZVuK5sJZ8YPKQB7iznQBEVsE6A/JLcO/BZIOryuBh3GvPQE0xI5/4Q8r2z5au87e3kNdtrmpuE/0jD8VvOVd7NSPZFhy8tjMijEdQ4cjWIAXdczYfSMGtA1kbt1swSMCLmWpQqEDyP1pfuJN4ehMU7HP3A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 194.138.21.70) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=siemens.com; dmarc=pass (p=none sp=none pct=100) action=none
+ header.from=siemens.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=yABTRvIeteO5wUle2hnHvZXqWPJymAJ7oOfqYL1TsQo=;
+ b=Ao03CzFtQ7oMGf/yhrpnMADWIiBUqhit3UYd5kMLXxcVipv7fSYW0fWUzYEOnveIJhkfZ6TknZAWlblwO9XVQ52dv37yOLcEeLqn0Sz/Hqt7rN+KuZdvtyUXTvHottbonVSfjRdHLUwGWK9M99usU2Tlnqq/t8byuXsSbPMy1RRhRPfEqKYAot1hkwaXrcWcIO5uLMN+epp3HOg806q9oHselRCZGLbd3K7cvaSePJYFTx/+1DBhqlAm53xe+TgdiDeCwFRTzKLzA/Q4V2qk0tJ0jbaGkyrgWDCcoVdV2FwhoUbOd2Q8gWBmnfAWLt0NkpOvu1zFgs3EpyLG7MbIPw==
+Received: from AM6P194CA0064.EURP194.PROD.OUTLOOK.COM (2603:10a6:209:84::41)
+ by DU2PR10MB5125.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:2d8::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5417.23; Wed, 13 Jul
+ 2022 12:30:44 +0000
+Received: from VE1EUR01FT031.eop-EUR01.prod.protection.outlook.com
+ (2603:10a6:209:84:cafe::15) by AM6P194CA0064.outlook.office365.com
+ (2603:10a6:209:84::41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5438.11 via Frontend
+ Transport; Wed, 13 Jul 2022 12:30:44 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 194.138.21.70)
+ smtp.mailfrom=siemens.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=siemens.com;
+Received-SPF: Pass (protection.outlook.com: domain of siemens.com designates
+ 194.138.21.70 as permitted sender) receiver=protection.outlook.com;
+ client-ip=194.138.21.70; helo=hybrid.siemens.com; pr=C
+Received: from hybrid.siemens.com (194.138.21.70) by
+ VE1EUR01FT031.mail.protection.outlook.com (10.152.2.225) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5438.12 via Frontend Transport; Wed, 13 Jul 2022 12:30:43 +0000
+Received: from DEMCHDC89XA.ad011.siemens.net (139.25.226.103) by
+ DEMCHDC9SJA.ad011.siemens.net (194.138.21.70) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.9; Wed, 13 Jul 2022 14:30:43 +0200
+Received: from md3hr6tc.ad001.siemens.net (139.22.107.153) by
+ DEMCHDC89XA.ad011.siemens.net (139.25.226.103) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.9; Wed, 13 Jul 2022 14:30:42 +0200
+From: Andrej Valek <andrej.valek@siemens.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Andrej Valek <andrej.valek@siemens.com>
+Subject: [meta-oe][PATCH] poco: upgrade 1.11.3 -> 1.12.0
+Date: Wed, 13 Jul 2022 14:30:14 +0200
+Message-ID: <20220713123014.1080802-1-andrej.valek@siemens.com>
+X-Mailer: git-send-email 2.34.3
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-Originating-IP: [139.22.107.153]
+X-ClientProxiedBy: DEMCHDC8A0A.ad011.siemens.net (139.25.226.106) To
+ DEMCHDC89XA.ad011.siemens.net (139.25.226.103)
+X-TM-AS-Product-Ver: SMEX-14.0.0.3080-8.6.1018-26680.007
+X-TM-AS-Result: No-10--12.154600-8.000000
+X-TMASE-MatchedRID: YhWA+FRSwJ77QMAOnss9k53gSv+Cp0LUWcYSOWxqzbJV1zhVw8duYldE
+	Emf6TRVBx6C6dcifNxhQebI43waiIJAY8SiT82yo2wh79NdRsvWVzspOxMC4JX4neC0h7SADaKn
+	8gcxtGeZZtDvk5TYPR0wSeVQnSS/FKtCISd3FwWPf0Wp8F/3nrxTfVlVWxWRBPwKTD1v8YV6i8D
+	/o42y/Sj+FxPbxImzy/J5lotLmVbx/f9A+WZ7w/AuinfgZ2xrH0VtwrmuY87VNo8Hgr5FnYZY4M
+	P/LOm93Slk/UKKlbmOFPEnrwCXZWtkzVQ+l94phdFgaeQUMTlEqXuKH5Jbj7AA+Y0oNaxbQ45oD
+	ENe4eeu0TybP6vL8lEfl+H4+MqTJdXBdJiSZGonXmhOmx9V2wgBGtwWKXLWi/OM51yupOiJlRzZ
+	AkKRGDRvXMhflDraG+/KqneiC8jY81RxOPcqfBuS1MmVMX9wCGA7i8sktz/XdCok3ibXlQX0tCK
+	dnhB589yM15V5aWpj6C0ePs7A07RjOlt1Pi553OMjykkGULobrfJTBK8zgIBuFv8/VBUy8G/NyL
+	K/ho48=
+X-TM-AS-User-Approved-Sender: No
+X-TM-AS-User-Blocked-Sender: No
+X-TMASE-Result: 10--12.154600-8.000000
+X-TMASE-Version: SMEX-14.0.0.3080-8.6.1018-26680.007
+X-TM-SNTS-SMTP: 
+ 38D6610489626EF4084D847B60B5880F758EAAAB4D8FBFAE0566F40CA216FFD32000:8
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 508bc767-44d7-4703-08b5-08da64cb8154
+X-MS-TrafficTypeDiagnostic: DU2PR10MB5125:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	cSCuwsdeGiP3yy1lJbUB9FfmYEEcEmeiBlQ2RP1CmdsvFsR9Ufr+bCPytq7/yI1yUGg09QEov+GOsOqdvi6jJODVTrnwp8G0Lfa+K5mcGb1OowoIgXnw6UyAkEm1/BEMi9h/X5BbxjYZpMJJTjimQZUG3nvfOr+fSqt1tncwslm9XjW1S8oHLvS22OQ81tHOVm5DJ+BvmDUx/suId71tpFhC2EWGuYyl/ryuCDVw3YWbLYxQSK5dZjxEiIyZPGV841InrOGDFpVBBAJJt6WJa2T8EVfB/X1A+cTjdjDD7DDM4odcSuXX42PEGS49/P/BXCobjyrHDekC9wB4ONksgIqOamcE9CrvfNfa9N+KmuQ/fPbeeyleNMCaN4HxQl8WH1It1YlO/fbJ6Ha0pwZJFkA8qdVomwvd2xBXDtrm5rq78RWcLOV+YbOV/T26eLdiu0Na+d/qyogTcvUx+k/F8QwB2HfsEMiTLFzT2xdNGkBJ9szmwGiiGK/rkEgpCpKZ/0/6q+gbrSRcbAhoInjhncL4h5OIeGR+PNVqG+xUtLZupWUaL7ywzxz0SnaJ3WLDdylwa5Zb6kZcc10Pr4dYnHTd0K46KOESrDsERdc1dKLX5UTIHtw/eGLqKuDUUiGqmK20JQWKqCmNQpSbt+L2+jwlMuxkTzJinWUcqQ4mDsGqJ9eYLXIPTWJC96xlJL5El2Jh4xC2+cPL0SssdxVGjLRCOTrJm4CmXjlEblMlkq9diBgvDHuAmZJZoYl5cNFxZOVWY6iAypEVekXTEuWWwoVTteCL+TjPvtRVgJMLIqb0PqlmpAhUR+YUpYc0xQ68CxqRDBwFBbpzZPFVL4/gcmPBGM91boxN2ormwDFYWizosgDfs/N4BSRsx1j1jay5xSd9F07tYRMlXK8zVAZS4A==
+X-Forefront-Antispam-Report: 
+	CIP:194.138.21.70;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:hybrid.siemens.com;PTR:hybrid.siemens.com;CAT:NONE;SFS:(13230016)(4636009)(396003)(39860400002)(376002)(136003)(346002)(40470700004)(46966006)(36840700001)(2906002)(41300700001)(40460700003)(36756003)(316002)(83380400001)(7636003)(7596003)(36860700001)(5660300002)(44832011)(8676002)(6916009)(4326008)(356005)(956004)(82740400003)(16526019)(336012)(6666004)(86362001)(70586007)(47076005)(70206006)(8936002)(2616005)(1076003)(186003)(40480700001)(107886003)(82960400001)(82310400005)(478600001)(26005);DIR:OUT;SFP:1101;
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jul 2022 12:30:43.6784
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ 508bc767-44d7-4703-08b5-08da64cb8154
+X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: 
+ TenantId=38ae3bcd-9579-4fd4-adda-b42e1495d55a;Ip=[194.138.21.70];Helo=[hybrid.siemens.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	VE1EUR01FT031.eop-EUR01.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR10MB5125
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 12 Jul 2022 20:26:51 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 Jul 2022 12:30:56 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97819
+ https://lists.openembedded.org/g/openembedded-devel/message/97820
 
-Drop backported patch, switch PACKAGECONFIG assignment to ?= (matches
-current practice), add in editline, linenoise CLI options and xtables
-option. Switch to --disable-python when building without python to avoid
-a configure time warning.
+ - switch from PCRE -> PCRE2
+ - add Prometheus library
+ - add option to enable/disable ActiveRecord (disabled by default)
 
-We can drop UPSTREAM_CHECK_REGEX as the version no longer gets confused
-by the 0.099 version which exists.
-
-Fix buildpaths warning by switching to setuptools and add dependency on
-${PN}-python to ${PN}-ptest so that the embedded paths in the compiled
-python files are correct.
-
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
 ---
- ...-with-make-check-and-add-AM_CPPFLAGS.patch | 39 ----------------
- ...tables-python-Split-root-from-prefix.patch | 44 +++++++++++++++++++
- .../{nftables_1.0.2.bb => nftables_1.0.4.bb}  | 20 ++++-----
- 3 files changed, 54 insertions(+), 49 deletions(-)
- delete mode 100644 meta-networking/recipes-filter/nftables/nftables/0001-examples-compile-with-make-check-and-add-AM_CPPFLAGS.patch
- create mode 100644 meta-networking/recipes-filter/nftables/nftables/0001-nftables-python-Split-root-from-prefix.patch
- rename meta-networking/recipes-filter/nftables/{nftables_1.0.2.bb => nftables_1.0.4.bb} (69%)
+ .../0001-fix-unbundled-PCRE2-dependency.patch | 25 +++++++++++++
+ ...0002-remove-providers-unitialization.patch | 35 +++++++++++++++++++
+ .../poco/{poco_1.11.3.bb =3D> poco_1.12.0.bb}   | 11 ++++--
+ 3 files changed, 68 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-support/poco/poco/0001-fix-unbundled-PC=
+RE2-dependency.patch
+ create mode 100644 meta-oe/recipes-support/poco/poco/0002-remove-providers=
+-unitialization.patch
+ rename meta-oe/recipes-support/poco/{poco_1.11.3.bb =3D> poco_1.12.0.bb} (=
+89%)
 
-diff --git a/meta-networking/recipes-filter/nftables/nftables/0001-examples-compile-with-make-check-and-add-AM_CPPFLAGS.patch b/meta-networking/recipes-filter/nftables/nftables/0001-examples-compile-with-make-check-and-add-AM_CPPFLAGS.patch
-deleted file mode 100644
-index 65ab2dfd8c49..000000000000
---- a/meta-networking/recipes-filter/nftables/nftables/0001-examples-compile-with-make-check-and-add-AM_CPPFLAGS.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--From 18a08fb7f0443f8bde83393bd6f69e23a04246b3 Mon Sep 17 00:00:00 2001
--From: Pablo Neira Ayuso <pablo@netfilter.org>
--Date: Tue, 22 Feb 2022 00:56:36 +0100
--Subject: [PATCH] examples: compile with `make check' and add AM_CPPFLAGS
--
--Compile examples via `make check' like libnftnl does. Use AM_CPPFLAGS to
--specify local headers via -I.
--
--Unfortunately, `make distcheck' did not catch this compile time error in
--my system, since it was using the nftables/libnftables.h file of the
--previous nftables release.
--
--Fixes: 5b364657a35f ("build: missing SUBIRS update")
--Fixes: caf2a6ad2d22 ("examples: add libnftables example program")
--Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
--
--Upstream-Status: Backport
--[http://git.netfilter.org/nftables/commit/?id=18a08fb7f0443f8bde83393bd6f69e23a04246b3]
--
--Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-----
-- examples/Makefile.am | 4 +++-
-- 1 file changed, 3 insertions(+), 1 deletion(-)
--
--diff --git a/examples/Makefile.am b/examples/Makefile.am
--index c972170d..3b8b0b67 100644
----- a/examples/Makefile.am
--+++ b/examples/Makefile.am
--@@ -1,4 +1,6 @@
---noinst_PROGRAMS	= nft-buffer		\
--+check_PROGRAMS	= nft-buffer		\
-- 		  nft-json-file
-- 
--+AM_CPPFLAGS = -I$(top_srcdir)/include
--+
-- LDADD = $(top_builddir)/src/libnftables.la
---- 
--2.25.1
--
-diff --git a/meta-networking/recipes-filter/nftables/nftables/0001-nftables-python-Split-root-from-prefix.patch b/meta-networking/recipes-filter/nftables/nftables/0001-nftables-python-Split-root-from-prefix.patch
+diff --git a/meta-oe/recipes-support/poco/poco/0001-fix-unbundled-PCRE2-dep=
+endency.patch b/meta-oe/recipes-support/poco/poco/0001-fix-unbundled-PCRE2-=
+dependency.patch
 new file mode 100644
-index 000000000000..377b29fff825
+index 000000000..1a9d23cee
 --- /dev/null
-+++ b/meta-networking/recipes-filter/nftables/nftables/0001-nftables-python-Split-root-from-prefix.patch
-@@ -0,0 +1,44 @@
-+From c7513195a72b2e5be5c9c439cc606eb5dcc3fb7a Mon Sep 17 00:00:00 2001
-+From: Alex Kiernan <alex.kiernan@gmail.com>
-+Date: Tue, 12 Jul 2022 17:44:34 +0100
-+Subject: [PATCH] nftables: python: Split root from prefix
++++ b/meta-oe/recipes-support/poco/poco/0001-fix-unbundled-PCRE2-dependency=
+.patch
+@@ -0,0 +1,25 @@
++From f049898c8bf058ed187de8e5fab20abeaab1f3b6 Mon Sep 17 00:00:00 2001
++From: Alex Fabijanic <alex@pocoproject.org>
++Date: Sat, 9 Jul 2022 19:13:04 +0200
++Subject: [PATCH] fix(cmake): PocoFoundationConfig.cmake should now check f=
+or
++ PCRE2 #3677
 +
-+The buildpaths QA check fails when python is enabled:
++Upstream-Status: Backport [https://github.com/pocoproject/poco/issues/3677=
+]
 +
-+  WARNING: nftables-1.0.4-r0 do_package_qa: QA Issue: File /usr/lib/python3.10/site-packages/nftables/__pycache__/nftables.cpython-310.pyc in package nftables-python contains reference to TMPDIR
-+  File /usr/lib/python3.10/site-packages/nftables/__pycache__/__init__.cpython-310.pyc in package nftables-python contains reference to TMPDIR [buildpaths]
-+
-+Upstream-Status: Pending
-+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 +---
-+ py/Makefile.am | 2 +-
-+ py/setup.py    | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
++ Foundation/cmake/PocoFoundationConfig.cmake | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/py/Makefile.am b/py/Makefile.am
-+index 215ecd9e4751..a827cca10135 100644
-+--- a/py/Makefile.am
-++++ b/py/Makefile.am
-+@@ -7,7 +7,7 @@ all-local:
-+ install-exec-local:
-+ 	cd $(srcdir) && \
-+ 		$(PYTHON_BIN) setup.py build --build-base $(abs_builddir) \
-+-		install --prefix $(DESTDIR)$(prefix)
-++		install --root $(DESTDIR) --prefix $(prefix)
-+ 
-+ uninstall-local:
-+ 	rm -rf $(DESTDIR)$(prefix)/lib*/python*/site-packages/nftables
-+diff --git a/py/setup.py b/py/setup.py
-+index 72fc8fd98b26..976aec583b71 100755
-+--- a/py/setup.py
-++++ b/py/setup.py
-+@@ -1,5 +1,5 @@
-+ #!/usr/bin/env python
-+-from distutils.core import setup
-++from setuptools._distutils.core import setup
-+ from nftables import NFTABLES_VERSION
-+ 
-+ setup(name='nftables',
-+-- 
-+2.35.1
++diff --git a/Foundation/cmake/PocoFoundationConfig.cmake b/Foundation/cmak=
+e/PocoFoundationConfig.cmake
++index 46c2d3fc00..82c5788940 100644
++--- a/Foundation/cmake/PocoFoundationConfig.cmake
+++++ b/Foundation/cmake/PocoFoundationConfig.cmake
++@@ -2,7 +2,7 @@ if(@POCO_UNBUNDLED@)
++ 	include(CMakeFindDependencyMacro)
++ 	list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
++ 	find_dependency(ZLIB REQUIRED)
++-	find_dependency(PCRE REQUIRED)
+++	find_dependency(PCRE2 REQUIRED)
++ endif()
++=20
++ include("${CMAKE_CURRENT_LIST_DIR}/PocoFoundationTargets.cmake")
+diff --git a/meta-oe/recipes-support/poco/poco/0002-remove-providers-unitia=
+lization.patch b/meta-oe/recipes-support/poco/poco/0002-remove-providers-un=
+itialization.patch
+new file mode 100644
+index 000000000..7d24b79f1
+--- /dev/null
++++ b/meta-oe/recipes-support/poco/poco/0002-remove-providers-unitializatio=
+n.patch
+@@ -0,0 +1,35 @@
++From c976c32e5249cb8a2433e7abfa095c1fe8dc4f8e Mon Sep 17 00:00:00 2001
++From: Alex Fabijanic <alex@pocoproject.org>
++Date: Wed, 13 Jul 2022 12:53:52 +0200
++Subject: [PATCH] fix(OpenSSLInitializer): remove providers unitialization
++ #3562 #3567
 +
-diff --git a/meta-networking/recipes-filter/nftables/nftables_1.0.2.bb b/meta-networking/recipes-filter/nftables/nftables_1.0.4.bb
-similarity index 69%
-rename from meta-networking/recipes-filter/nftables/nftables_1.0.2.bb
-rename to meta-networking/recipes-filter/nftables/nftables_1.0.4.bb
-index e078be79a1df..3466e16a62b4 100644
---- a/meta-networking/recipes-filter/nftables/nftables_1.0.2.bb
-+++ b/meta-networking/recipes-filter/nftables/nftables_1.0.4.bb
-@@ -6,26 +6,27 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d1a78fdd879a263a5e0b42d1fc565e79"
- DEPENDS = "libmnl libnftnl bison-native \
-            ${@bb.utils.contains('PACKAGECONFIG', 'mini-gmp', '', 'gmp', d)}"
- 
--# Ensure we reject the 0.099 version by matching at least two dots
--UPSTREAM_CHECK_REGEX = "nftables-(?P<pver>\d+(\.\d+){2,}).tar.bz2"
--
- SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2 \
--           file://0001-examples-compile-with-make-check-and-add-AM_CPPFLAGS.patch \
-+           file://0001-nftables-python-Split-root-from-prefix.patch \
-            file://run-ptest \
-           "
- 
--SRC_URI[sha256sum] = "0b28a36ffcf4567b841de7bd3f37918b1fed27859eb48bdec51e1f7a83954c02"
-+SRC_URI[sha256sum] = "927fb1fea1f685a328c10cf791eb655d7e1ed49d310eea5cb3101dfd8d6cba35"
- 
- inherit autotools manpages pkgconfig ptest
- 
--PACKAGECONFIG ??= "python readline json"
-+PACKAGECONFIG ?= "python readline json"
-+PACKAGECONFIG[editline] = "--with-cli=editline, , libedit, , , linenoise readline"
- PACKAGECONFIG[json] = "--with-json, --without-json, jansson"
-+PACKAGECONFIG[linenoise] = "--with-cli=linenoise, , linenoise, , , editline readline"
- PACKAGECONFIG[manpages] = "--enable-man-doc, --disable-man-doc, asciidoc-native"
- PACKAGECONFIG[mini-gmp] = "--with-mini-gmp, --without-mini-gmp"
--PACKAGECONFIG[python] = "--enable-python --with-python-bin=${PYTHON}, --with-python-bin="", python3"
--PACKAGECONFIG[readline] = "--with-cli=readline, --without-cli, readline"
-+PACKAGECONFIG[python] = "--enable-python --with-python-bin=${PYTHON}, --disable-python, python3-setuptools-native"
-+PACKAGECONFIG[readline] = "--with-cli=readline, , readline, , , editline linenoise"
- PACKAGECONFIG[xtables] = "--with-xtables, --without-xtables, iptables"
- 
-+EXTRA_OECONF = "${@bb.utils.contains_any('PACKAGECONFIG', 'editline linenoise readline', '', '--without-cli', d)}"
++Upstream-Status: Backport [https://github.com/pocoproject/poco/issues/3562=
+]
 +
- inherit ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python3native', '', d)}
- 
- RRECOMMENDS:${PN} += "kernel-module-nf-tables"
-@@ -34,7 +35,7 @@ PACKAGES =+ "${PN}-python"
- FILES:${PN}-python = "${nonarch_libdir}/${PYTHON_DIR}"
- RDEPENDS:${PN}-python = "python3-core python3-json ${PN}"
- 
--RDEPENDS:${PN}-ptest += " make bash python3-core python3-ctypes python3-json python3-misc util-linux"
-+RDEPENDS:${PN}-ptest += " ${PN}-python make bash python3-core python3-ctypes python3-json python3-misc util-linux"
- 
- TESTDIR = "tests"
- 
-@@ -46,7 +47,6 @@ do_install_ptest() {
-     mkdir -p ${D}${PTEST_PATH}/src/.libs
-     cp -rf ${B}/src/.libs/* ${D}${PTEST_PATH}/src/.libs
-     cp -rf ${B}/src/.libs/nft ${D}${PTEST_PATH}/src/
--    cp -rf ${S}/py ${D}${PTEST_PATH}
-     cp -rf ${S}/${TESTDIR} ${D}${PTEST_PATH}/${TESTDIR}
-     sed -i 's#/usr/bin/python#/usr/bin/python3#' ${D}${PTEST_PATH}/${TESTDIR}/json_echo/run-test.py
-     sed -i 's#/usr/bin/env python#/usr/bin/env python3#' ${D}${PTEST_PATH}/${TESTDIR}/py/nft-test.py
--- 
-2.35.1
++---
++ Crypto/src/OpenSSLInitializer.cpp | 12 ------------
++ 1 file changed, 12 deletions(-)
++
++diff --git a/Crypto/src/OpenSSLInitializer.cpp b/Crypto/src/OpenSSLInitial=
+izer.cpp
++index 4678d22299..c537c3f9c2 100644
++--- a/Crypto/src/OpenSSLInitializer.cpp
+++++ b/Crypto/src/OpenSSLInitializer.cpp
++@@ -157,18 +157,6 @@ void OpenSSLInitializer::uninitialize()
++ #endif
++ 		delete [] _mutexes;
++ #endif
++-
++-#if OPENSSL_VERSION_NUMBER >=3D 0x30000000L
++-		OSSL_PROVIDER* provider =3D nullptr;
++-		if ((provider =3D _defaultProvider.exchange(nullptr)))
++-		{
++-			OSSL_PROVIDER_unload(provider);
++-		}
++-		if ((provider =3D _legacyProvider.exchange(nullptr)))
++-		{
++-			OSSL_PROVIDER_unload(provider);
++-		}
++-#endif
++ 	}
++ }
++=20
+diff --git a/meta-oe/recipes-support/poco/poco_1.11.3.bb b/meta-oe/recipes-=
+support/poco/poco_1.12.0.bb
+similarity index 89%
+rename from meta-oe/recipes-support/poco/poco_1.11.3.bb
+rename to meta-oe/recipes-support/poco/poco_1.12.0.bb
+index 757fa8983..6fff0707d 100644
+--- a/meta-oe/recipes-support/poco/poco_1.11.3.bb
++++ b/meta-oe/recipes-support/poco/poco_1.12.0.bb
+@@ -6,13 +6,15 @@ LICENSE =3D "BSL-1.0"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4267f48fc738f50380cbeeb76f95ceb=
+c"
+=20
+ # These dependencies are required by Foundation
+-DEPENDS =3D "libpcre zlib"
++DEPENDS =3D "libpcre2 zlib"
+=20
+ SRC_URI =3D " \
+     git://github.com/pocoproject/poco.git;branch=3Dmaster;protocol=3Dhttps=
+ \
++    file://0001-fix-unbundled-PCRE2-dependency.patch \
++    file://0002-remove-providers-unitialization.patch \
+     file://run-ptest \
+    "
+-SRCREV =3D "191cbdc97e1d9de023b8a65e0dc844911c06f6a8"
++SRCREV =3D "4ba8595ed83841d1fa240716b5652adc3772c36b"
+=20
+ UPSTREAM_CHECK_GITTAGREGEX =3D "poco-(?P<pver>\d+(\.\d+)+)"
+=20
+@@ -23,7 +25,7 @@ inherit cmake ptest
+ # By default the most commonly used poco components are built
+ # Foundation is built anyway and doesn't need to be listed explicitly
+ # these don't have dependencies outside oe-core
+-PACKAGECONFIG ??=3D "XML JSON MongoDB PDF Util Net NetSSL Crypto JWT Data =
+DataSQLite Zip Encodings Redis"
++PACKAGECONFIG ??=3D "XML JSON MongoDB PDF Util Net NetSSL Crypto JWT Data =
+DataSQLite Zip Encodings Redis Prometheus"
+=20
+ PACKAGECONFIG[XML] =3D "-DENABLE_XML=3DON,-DENABLE_XML=3DOFF,expat"
+ PACKAGECONFIG[JSON] =3D "-DENABLE_JSON=3DON,-DENABLE_JSON=3DOFF"
+@@ -39,6 +41,7 @@ PACKAGECONFIG[DataSQLite] =3D "-DENABLE_DATA_SQLITE=3DON =
+-DSQLITE3_LIBRARY:STRING=3Dsq
+ PACKAGECONFIG[Zip] =3D "-DENABLE_ZIP=3DON,-DENABLE_ZIP=3DOFF"
+ PACKAGECONFIG[Encodings] =3D "-DENABLE_ENCODINGS=3DON,-DENABLE_ENCODINGS=
+=3DOFF"
+ PACKAGECONFIG[Redis] =3D "-DENABLE_REDIS=3DON,-DENABLE_REDIS=3DOFF"
++PACKAGECONFIG[Prometheus] =3D "-DENABLE_PROMETHEUS=3DON,-DENABLE_PROMETHEU=
+S=3DOFF"
+=20
+ # Additional components not build by default,
+ # they might have dependencies not included in oe-core
+@@ -47,6 +50,8 @@ PACKAGECONFIG[mod_poco] =3D "-DENABLE_APACHECONNECTOR=3DO=
+N,-DENABLE_APACHECONNECTOR=3D
+ PACKAGECONFIG[CppParser] =3D "-DENABLE_CPPPARSER=3DON,-DENABLE_CPPPARSER=
+=3DOFF"
+ PACKAGECONFIG[DataMySQL] =3D "-DENABLE_DATA_MYSQL=3DON -DMYSQL_LIB:STRING=
+=3Dmysqlclient_r,-DENABLE_DATA_MYSQL=3DOFF,mariadb"
+ PACKAGECONFIG[DataODBC] =3D "-DENABLE_DATA_ODBC=3DON,-DENABLE_DATA_ODBC=3D=
+OFF,libiodbc"
++PACKAGECONFIG[ActiveRecord] =3D "-DENABLE_ACTIVERECORD=3DON,-DENABLE_ACTIV=
+ERECORD=3DOFF"
++PACKAGECONFIG[ActiveRecordCompiler] =3D "-DENABLE_ACTIVERECORD_COMPILER=3D=
+ON,-DENABLE_ACTIVERECORD_COMPILER=3DOFF"
+ PACKAGECONFIG[PageCompiler] =3D "-DENABLE_PAGECOMPILER=3DON,-DENABLE_PAGEC=
+OMPILER=3DOFF"
+ PACKAGECONFIG[PageCompilerFile2Page] =3D "-DENABLE_PAGECOMPILER_FILE2PAGE=
+=3DON,-DENABLE_PAGECOMPILER_FILE2PAGE=3DOFF"
+ PACKAGECONFIG[SevenZip] =3D "-DENABLE_SEVENZIP=3DON,-DENABLE_SEVENZIP=3DOF=
+F"
+--=20
+2.34.3
 
 
