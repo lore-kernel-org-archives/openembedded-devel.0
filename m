@@ -1,261 +1,521 @@
-Return-Path: <andrej.valek@siemens.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D5B65C433EF
-	for <webhook@archiver.kernel.org>; Thu, 14 Jul 2022 05:45:09 +0000 (UTC)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (EUR05-DB8-obe.outbound.protection.outlook.com [40.107.20.77])
- by mx.groups.io with SMTP id smtpd.web11.4432.1657777502002989118
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D72FC433EF
+	for <webhook@archiver.kernel.org>; Thu, 14 Jul 2022 07:02:30 +0000 (UTC)
+Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com
+ [209.85.222.181])
+ by mx.groups.io with SMTP id smtpd.web09.4769.1657782140589991632
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Jul 2022 22:45:02 -0700
+ Thu, 14 Jul 2022 00:02:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@siemens.com header.s=selector2 header.b=h+ooBMUH;
- spf=pass (domain: siemens.com, ip: 40.107.20.77,
- mailfrom: andrej.valek@siemens.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=DeZwMh8KYEi6BAz7UZtkLxvlb7hmUt+tbT84irEo0hb/chPiBK2tvfuNn41KoOxmoQITAPawZq4pRlBx1/IBSSJiXSgLqw3Iqh/U+GF2y4nR8GMaqtu5iyi6neM0JVVrPF7Bdj+BowSGm1qDxhseWIkYXlVF56BHc04wjS//DidK/BOLnf47rNwkI19bv44BZ98uwmU8qEp9CC5IoMhedYWBTlFBx6naspN6sqwoAteuPgsqcZO7ezRsduH+Tnbzg5XQIWsxigVntXf/PzsYOUB8EyZC2QniKKkvlSDKjFI+64KXPcc3PskDju3Vqydl3zfTYrJVakw0TNzt9/aEDA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nlv5PIloTfnWqaL+nEgxSKD6w6OaXdXUWWQ6BDAsiDI=;
- b=TAPiV+abPhuQbvrxrJPDgVVpuRb0xmuJdxLzhGrcP51lg8eAhMISFnskAXsuAb68vRM+2W/mVYeOAL04iDsd20X6M40WJvGToI8/F8r7y2D+dv2I0/EK04ZeIQY1FrjuWqAC5QRu3hKWMAnCXtwtx8buFRt5OfDA6umZAh3aon1+JrArTeNeZYNd2T2iVY+wGV9XSY3X6yqug6Y+G15KpHGRj24GT6ReEFAbMYqH0AoUkXT4CGz/SwRwd7UBZzs9nnGwsBsQhMrhKxlvxXs5xmHtIhmd8ab98AQwaBNk8QCoWWK/YIjScYoKZ9g+ZC9lnpMIjEm27VtMXBX3XEVS8A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nlv5PIloTfnWqaL+nEgxSKD6w6OaXdXUWWQ6BDAsiDI=;
- b=h+ooBMUHoCK+wMWfo8J7dqgFZHeqmwCY5oiB+Idy+hvMaMsG+LRFSPtr5UglRImMZ1FyEGM1ZiqVFiFIGjkJVIj7TB8XE/y8PeE7FoiOXSdH3bf5a0gqc/bt+Fsk6dWHaugNdDzrvweD0J1n2+Gc5C+o1BhXwxZFNjV4GKcSiAJQw/qObTJxg5Gfaz54XGaUx02l0f4z9WHuMDbjjKAYGIdbO1dRc3sGqcaJ0zt7sMuR0EQJWbJCKNMq48u3i8X6Owh52Sm/2C192UpAJHNWHBrlPLYemqyZhIxtw6lWiKn5jNi9yDbi7ThDOlJ1BAXO8HdcGxJiE4FiZ8kKQd67Sg==
-Received: from DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:138::9)
- by AS1PR10MB5724.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:47f::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5438.12; Thu, 14 Jul
- 2022 05:44:58 +0000
-Received: from DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::e5c4:b2fc:cecd:ee75]) by DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::e5c4:b2fc:cecd:ee75%4]) with mapi id 15.20.5417.026; Thu, 14 Jul 2022
- 05:44:58 +0000
-From: "Valek, Andrej" <andrej.valek@siemens.com>
-To: "raj.khem@gmail.com" <raj.khem@gmail.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] poco: upgrade 1.11.3 -> 1.12.0
-Thread-Topic: [meta-oe][PATCH] poco: upgrade 1.11.3 -> 1.12.0
-Thread-Index: AQHYlrRfqrFANvVs7kusnKDMjnG4NK19XEsA
-Date: Thu, 14 Jul 2022 05:44:58 +0000
-Message-ID: <e4a0511cee7e463c624d91f66aca3e3f02c34657.camel@siemens.com>
-References: <20220713123014.1080802-1-andrej.valek@siemens.com>
-In-Reply-To: <20220713123014.1080802-1-andrej.valek@siemens.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.40.4 (3.40.4-5.fc34) 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: ea7059a7-635f-4410-19c3-08da655bfcef
-x-ms-traffictypediagnostic: AS1PR10MB5724:EE_
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- +h6TzMRkjiq04QRObkJQ+Yzr24pXVrqFEfKXta4gdMTZ+FkrdJZZ18WecIhldHRP4D936BO/PjejjxgHEKThHD+qFA5aG9a34bJNUlE8mod2pKdgy4ifLkTpYVYQ55GOc1DZgkc2hf3LkdxyeRYN80R6w0oCzHQW5nzqbSEwmaUMHn1zrL2mWOrd9wWjp7Lb1P+arDOZvO7UKN1ebnsflZ4AcpzYr91XyB5onJuBvN85dRIjaZfxlGN9g7odqcfNx9+WHOePLksGQb5L3aTwWRsiMtTMm2U4tsC5nhqZ0RtnqmNIz0N6tVUh+7MguTjyA3odPzkGikeA2N1wD6Mo3DrJTv5Y4OpZTL3T5pawwQrm1KKRE/0AlY7V+Vn7Q2pY3pmwAdHBMfZ0dHudnhEH+HOFuVPLSmayFDRFFLsOeQkeqYAgbL5D/qUL7BsqS0g34yXeabsQd9QCoIgNOywgitrvPjs+kMGQHJtkWeB8QXhAxG+T6CQzGTjcMlAPVBhyJkr4gcUjEaDxryBo4v0NG0dvzXv3O50T1PIy9sZS99osNvhWTDsFfAncZingdwjVPzDP/RNu9NG2TFK2P41BVfbXOfRGy/3LTzUPwKHagKfiPUBYsR/jPX09aqRQ2jK93hTyWIalqXc89ZdMeJ/yw4HDz/IQEiAlh1j1Qz0IZyc4ib/wGlTnGclz5JHZ3JcQRWs1nu3aMejtPsejJkXTVV3EWgruuDiXCAOGb+qeNAygp2R1kjfp8ODxGLesuUgmBjdYjaUo+io29KiMjYZhWMWpXrtxKxkfoCqCAVySvmm6aZfBfcSWo0laj6oqHu/cBJ+jSsi3glUNiQCJIgdQ4mbpOsNCILOvHvYp6fxI5BHnDCAeVlbMD+sPcK1jCm/6
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230016)(4636009)(366004)(39860400002)(346002)(376002)(136003)(396003)(26005)(76116006)(41300700001)(66556008)(478600001)(6512007)(71200400001)(8676002)(64756008)(66446008)(6486002)(6506007)(91956017)(66946007)(86362001)(6916009)(316002)(66476007)(83380400001)(4326008)(122000001)(2616005)(38070700005)(82960400001)(186003)(36756003)(8936002)(5660300002)(38100700002)(2906002);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?R1ZvMytUMjF2OFF0NFJMYjVGWkNkR1FXMzVES2huQWdWclduN1R5MlkvUzYx?=
- =?utf-8?B?Wk5WTDViTmFOKzk5OG8yZ3ozeVAxbFkrdHJ6UFpNa1d3TWZpcEtpUWNGRjJn?=
- =?utf-8?B?VjBnWFZVWW5iWHh1YkpyOWYxcUtiQ1pGQXVYM2M1WjlLUVB1SGF0RkYxanBz?=
- =?utf-8?B?UHM3aDVmL0JlOVZtV3ZId0hrOWFlY1NLMk5hRFpiTjJTTVBPczRDR3FudDFo?=
- =?utf-8?B?cDdTdWdiQjFDNTQxWjhJWWNGKzJsdVJVMDFJUFpnd3RBek56VUxSeG0yQWYx?=
- =?utf-8?B?MW9JZ3g2U1hBZFFjNlEzaFBxY0RVMk9HT1Vvc0R6REtsZUhDTGlXNUdYQVVH?=
- =?utf-8?B?emFsRVFmYlIyOXRtVmYvUXJ0UUxDUjhCZjMvL0VUSHlQNS91SmFUbFNVTjcr?=
- =?utf-8?B?bUdYUldNQ0RuREFrNUIycVM1R2xnNXp1V1drZjRid0RvVk5hMEsyOUxIU1ph?=
- =?utf-8?B?UDEwSlJ5bFBBY0FNL1ZCYnR6R2RpdWdWalVWS1dSbmUyMDJiL2lZTVd6VE44?=
- =?utf-8?B?TXJVNmt5bEFuSUE3LzVQY296N0FiRFZqaCtybll0M0plV01WTm1jbysrM3Jj?=
- =?utf-8?B?ZnJKQy9BMDNTNTRFSWRuNGVNR09SUmlWOEUwRXN4UEp0R08wNW5zcyt0ei9D?=
- =?utf-8?B?MWxSTE1Ha2FKS3Rub1NhbW9Cei9VMGRjV1BQNmdmMHlydW14anlWVHYyMkto?=
- =?utf-8?B?Y1pCL2I0aGpZa1hKeGJqZ0xIWHlzWEQvOEd1TkNMUitzN3FZYlV0VHYrdHdF?=
- =?utf-8?B?dFRvOGQrNmJzNE9FY2RydTRJbnVmRkhXbDhJN1VwaHp5TkhYL3docm52aTR5?=
- =?utf-8?B?dElLdDNlcWUrM1h4RnFlaDJBcDVHR256d3lmN0Z6U2pLdnFPeEdxanNsOVNr?=
- =?utf-8?B?bUVQTXhDZnQ2OXJ0LzVFeStiSVVoTVVmMitZUFFreHhWc1I3K0JxenBKMVI4?=
- =?utf-8?B?aTVUUjBnVmhlVVp0RENRUm51Y0V2R1F1bTV4TmxYVVd6eGpsa01PVEFRTXZD?=
- =?utf-8?B?aXZjaldic2hoWFpoMWJmTHJXWlg2MzMrblBtemxCZnYzSGZ6T3RTQ1dzY1Rs?=
- =?utf-8?B?SXRrSHZhNG5JUGUwOGdvZStrN3FLQTNKV1pEdWs0UXRsTkFtUFBNa05Kdkxp?=
- =?utf-8?B?WENOOGhYdDd5c3Y3djBsYmpJb1VyV0xOZm8rV21DZWlXeEFaK1lBU2J0VDVT?=
- =?utf-8?B?UUlXMWtWSGxjSE9FV0YreCt6eGRrZm9GSW12WFlXV3FnWHBSbnVzdGE4bDNv?=
- =?utf-8?B?eTdEM04zUnI0bzY2RUt3UkVCTmFPcnY0UGNzRE9La1M4RWFFbUo5YlBlbmxq?=
- =?utf-8?B?RWVVYTFQYmEvNlBsc2EzcDZRaWxodXBwZThyRlVqRVVFaG5xRE52dTJ1VWJ4?=
- =?utf-8?B?WGtLaEdVS2FUS3pHUVQ2bnN0WnNidjdjVFVqMnZvSEMvSVJJUFVxa3Blb2Zz?=
- =?utf-8?B?eHNxcHY0NHhzWm9uMXlrbWUrM3Q0dElGbUdpTDJoY2NnalR6NFJPdmF0cEJk?=
- =?utf-8?B?N05OZ05xNnRPeXZGYysrMEpxL2trZ1lIRitMMlUyTjJ4WXBML0M2RTVzbk9I?=
- =?utf-8?B?SFRQR3d4R0NUcG5sTm1veGpBTDFkMDVuU0ZFWTJBRytMNmE4NDRrbUlneTNw?=
- =?utf-8?B?SXFtQWYwVWJzcFd1R1B1UExwMFE5ZkNXamtXR3RpWjh4VVJ4Mm1xeVh6V3lk?=
- =?utf-8?B?TFBDV0sremNySTJOQ0lhOW1TMm84b09wNUJDOVZBeTAyVHNrcFlVODVZenJn?=
- =?utf-8?B?VUNzNUVrblRKZWhnYnJwQVFobmdqV3VaeElOTW5yc3N3dUVGT3lzdk1ROTho?=
- =?utf-8?B?Zzg5QUN3K3drV1MvV2RDMWJleHo4VXZjcTBDK1NUZS9mRTdtTzN5a0N4dUc4?=
- =?utf-8?B?UldwelBDN1VsMko0dDI5aGlBSEVsOE5DUWlESXdWbzliVXozTCttenVzUTlw?=
- =?utf-8?B?dWdMR3RZWitrcWdVNU1aZkRWSkFGV0p4VUxLTXEzQ2ROejIxRUMxYU5weXNJ?=
- =?utf-8?B?V0lyaG9JcUtiL1lndlFpUWo0NDR0TUFDdmZPWG56ejF2ZHJ3c0hvZnVXSWVY?=
- =?utf-8?B?UzhzT25obVlQMzlKcTZBTWpjT2QzSHI2RXpGTUk5OEtlbHFGU3Z2cmpjYlFY?=
- =?utf-8?B?S2NwN3BUc3BQNTUzclhnaGkwVWNtY2F1S2Z6YTdQZDd1UnN1ODd1RzRIV0Vr?=
- =?utf-8?B?WlE9PQ==?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <983F02D19012934683ACB6E79B1743AE@EURPRD10.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=JdRfi7Ar;
+ spf=pass (domain: gmail.com, ip: 209.85.222.181,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f181.google.com with SMTP id o21so609102qkm.10
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 14 Jul 2022 00:02:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=yKejpE+3v2PxwnnDlvnimninJbksEMd6qSaK59XcXmw=;
+        b=JdRfi7Aroc45g0KNYsb3on+8vjgoS9fzW0U8KkCenWjxuGTU14r2y2NxRVPhrJr3Az
+         ZZn+X6TLFyv11JEoFLp/ycLX3w8rcMCB6t6252MRRwZgESgWLMNx0d3ozOCcpJcF44Cg
+         Q8m/19lXm0vsjLbSIc6PE6RW2yZBaOrfcwb5pUSL5W8+rUzPPSR9FTcGpXSmug/7MA2H
+         N12Zbw6OFxRVOV50tgECwzmOHEtqx86WcyMG/v7LMwXFTohINBsvX5eEgwSRqnjMONYV
+         bwTWQKOKXVsJso/B1IX0t70dv6f+PPVD7r6BA8ia0wrFR3qsVWGvdG4KkdlU7jdysZVn
+         zU6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=yKejpE+3v2PxwnnDlvnimninJbksEMd6qSaK59XcXmw=;
+        b=JssfLRrPqim79brpgcX3C4hc6Q/LhnvdcfDrARPo5B19Kz6WU9LgKrQuOWz2IQRivQ
+         1eaoaUsgwlIdhkvw5KI+Rvi4CUY6rDUEBzCZ9Hz2vPlGjGTDf1Jt5kPhJfjWjCgXfzE/
+         1YqWrAB9WH1lp8R7M8Av4LMBExMJqzLt1neoaI0TkGbqN/Mr99xgnt1toaoOk4/qWNuS
+         iNp0BN6Krhtpd64hwm39zLQaVdWSKFrMSeb6OOC3A8g14UZqvQkflprMX0JD1Q9MIsrf
+         MaYwi9Kw4o9e6PA9tIAJE6xOB+GWyqE8+fX55kDcrHdgPka8GynmqAJvVMl0nr8njeW1
+         fumg==
+X-Gm-Message-State: AJIora9PgP/DDald4k1I0uNLf8hUD1X0TQridM1qrY9JHRkROwfobx8N
+	PV6+Qx0tP0whO71jMpw47Cz31iapzGFUg6M30is=
+X-Google-Smtp-Source: 
+ AGRyM1vUA1A5RPGWDRHALOaBxGH/bdlTF8/+O8TSRQr8/qDTMKZfcA3JUp4LHILR3r5BV1Irh3+6M00De1SxFCEYrJA=
+X-Received: by 2002:a05:620a:112c:b0:6b5:c01b:41e1 with SMTP id
+ p12-20020a05620a112c00b006b5c01b41e1mr2117966qkk.463.1657782139366; Thu, 14
+ Jul 2022 00:02:19 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- ea7059a7-635f-4410-19c3-08da655bfcef
-X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Jul 2022 05:44:58.5836
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 
- WRZpEvZC13m00KtjoCCYg1b145CdJTra7V7lmljqG3Gwj2XtRBKzf42M38OTBXDUwfMFpj0TTTII4aT6LBEqAAxRP1BjP0nDxVYE10Rp1GM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR10MB5724
+References: <20220713123014.1080802-1-andrej.valek@siemens.com>
+ <e4a0511cee7e463c624d91f66aca3e3f02c34657.camel@siemens.com>
+In-Reply-To: <e4a0511cee7e463c624d91f66aca3e3f02c34657.camel@siemens.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 14 Jul 2022 08:02:08 +0100
+Message-ID: 
+ <CAMKF1sqyt1SFgMtGU=vUe2wJuXYKO23=XVyXJkJxdtdwJfiC1w@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH] poco: upgrade 1.11.3 -> 1.12.0
+To: "Valek, Andrej" <andrej.valek@siemens.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="0000000000008832cd05e3be7b53"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 14 Jul 2022 05:45:09 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 14 Jul 2022 07:02:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97821
+ https://lists.openembedded.org/g/openembedded-devel/message/97822
 
-SGVsbG8gUmFqLA0KDQpXb3VsZCBpdCBiZSBwb3NzaWJsZSB0byBwdXQgaXQgaW50byBraXJrc3Rv
-bmUgYXMgd2VsbD8NCg0KVGhhbmtzLA0KQW5kcmVqDQoNCk9uIFdlZCwgMjAyMi0wNy0xMyBhdCAx
-NDozMCArMDIwMCwgQW5kcmVqIFZhbGVrIHdyb3RlOg0KPiDCoC0gc3dpdGNoIGZyb20gUENSRSAt
-PiBQQ1JFMg0KPiDCoC0gYWRkIFByb21ldGhldXMgbGlicmFyeQ0KPiDCoC0gYWRkIG9wdGlvbiB0
-byBlbmFibGUvZGlzYWJsZSBBY3RpdmVSZWNvcmQgKGRpc2FibGVkIGJ5IGRlZmF1bHQpDQo+IA0K
-PiBTaWduZWQtb2ZmLWJ5OiBBbmRyZWogVmFsZWsgPGFuZHJlai52YWxla0BzaWVtZW5zLmNvbT4N
-Cj4gLS0tDQo+IMKgLi4uLzAwMDEtZml4LXVuYnVuZGxlZC1QQ1JFMi1kZXBlbmRlbmN5LnBhdGNo
-IHwgMjUgKysrKysrKysrKysrKw0KPiDCoC4uLjAwMDItcmVtb3ZlLXByb3ZpZGVycy11bml0aWFs
-aXphdGlvbi5wYXRjaCB8IDM1DQo+ICsrKysrKysrKysrKysrKysrKysNCj4gwqAuLi4vcG9jby97
-cG9jb18xLjExLjMuYmIgPT4gcG9jb18xLjEyLjAuYmJ9wqDCoCB8IDExICsrKystLQ0KPiDCoDMg
-ZmlsZXMgY2hhbmdlZCwgNjggaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkNCj4gwqBjcmVh
-dGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvcG9jby9wb2NvLzAwMDEtZml4
-LQ0KPiB1bmJ1bmRsZWQtUENSRTItZGVwZW5kZW5jeS5wYXRjaA0KPiDCoGNyZWF0ZSBtb2RlIDEw
-MDY0NCBtZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wb2NvL3BvY28vMDAwMi1yZW1vdmUtDQo+IHBy
-b3ZpZGVycy11bml0aWFsaXphdGlvbi5wYXRjaA0KPiDCoHJlbmFtZSBtZXRhLW9lL3JlY2lwZXMt
-c3VwcG9ydC9wb2NvL3twb2NvXzEuMTEuMy5iYiA9Pg0KPiBwb2NvXzEuMTIuMC5iYn0gKDg5JSkN
-Cj4gDQo+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wb2NvL3BvY28vMDAw
-MS1maXgtdW5idW5kbGVkLQ0KPiBQQ1JFMi1kZXBlbmRlbmN5LnBhdGNoIGIvbWV0YS1vZS9yZWNp
-cGVzLXN1cHBvcnQvcG9jby9wb2NvLzAwMDEtZml4LQ0KPiB1bmJ1bmRsZWQtUENSRTItZGVwZW5k
-ZW5jeS5wYXRjaA0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAwMDAwMDAuLjFh
-OWQyM2NlZQ0KPiAtLS0gL2Rldi9udWxsDQo+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0
-L3BvY28vcG9jby8wMDAxLWZpeC11bmJ1bmRsZWQtUENSRTItDQo+IGRlcGVuZGVuY3kucGF0Y2gN
-Cj4gQEAgLTAsMCArMSwyNSBAQA0KPiArRnJvbSBmMDQ5ODk4YzhiZjA1OGVkMTg3ZGU4ZTVmYWIy
-MGFiZWFhYjFmM2I2IE1vbiBTZXAgMTcgMDA6MDA6MDANCj4gMjAwMQ0KPiArRnJvbTogQWxleCBG
-YWJpamFuaWMgPGFsZXhAcG9jb3Byb2plY3Qub3JnPg0KPiArRGF0ZTogU2F0LCA5IEp1bCAyMDIy
-IDE5OjEzOjA0ICswMjAwDQo+ICtTdWJqZWN0OiBbUEFUQ0hdIGZpeChjbWFrZSk6IFBvY29Gb3Vu
-ZGF0aW9uQ29uZmlnLmNtYWtlIHNob3VsZCBub3cNCj4gY2hlY2sgZm9yDQo+ICsgUENSRTIgIzM2
-NzcNCj4gKw0KPiArVXBzdHJlYW0tU3RhdHVzOiBCYWNrcG9ydA0KPiBbaHR0cHM6Ly9naXRodWIu
-Y29tL3BvY29wcm9qZWN0L3BvY28vaXNzdWVzLzM2NzddDQo+ICsNCj4gKy0tLQ0KPiArIEZvdW5k
-YXRpb24vY21ha2UvUG9jb0ZvdW5kYXRpb25Db25maWcuY21ha2UgfCAyICstDQo+ICsgMSBmaWxl
-IGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pDQo+ICsNCj4gK2RpZmYgLS1n
-aXQgYS9Gb3VuZGF0aW9uL2NtYWtlL1BvY29Gb3VuZGF0aW9uQ29uZmlnLmNtYWtlDQo+IGIvRm91
-bmRhdGlvbi9jbWFrZS9Qb2NvRm91bmRhdGlvbkNvbmZpZy5jbWFrZQ0KPiAraW5kZXggNDZjMmQz
-ZmMwMC4uODJjNTc4ODk0MCAxMDA2NDQNCj4gKy0tLSBhL0ZvdW5kYXRpb24vY21ha2UvUG9jb0Zv
-dW5kYXRpb25Db25maWcuY21ha2UNCj4gKysrKyBiL0ZvdW5kYXRpb24vY21ha2UvUG9jb0ZvdW5k
-YXRpb25Db25maWcuY21ha2UNCj4gK0BAIC0yLDcgKzIsNyBAQCBpZihAUE9DT19VTkJVTkRMRURA
-KQ0KPiArwqDCoMKgwqDCoMKgwqBpbmNsdWRlKENNYWtlRmluZERlcGVuZGVuY3lNYWNybykNCj4g
-K8KgwqDCoMKgwqDCoMKgbGlzdChBUFBFTkQgQ01BS0VfTU9EVUxFX1BBVEggIiR7Q01BS0VfQ1VS
-UkVOVF9MSVNUX0RJUn0iKQ0KPiArwqDCoMKgwqDCoMKgwqBmaW5kX2RlcGVuZGVuY3koWkxJQiBS
-RVFVSVJFRCkNCj4gKy3CoMKgwqDCoMKgwqBmaW5kX2RlcGVuZGVuY3koUENSRSBSRVFVSVJFRCkN
-Cj4gKyvCoMKgwqDCoMKgwqBmaW5kX2RlcGVuZGVuY3koUENSRTIgUkVRVUlSRUQpDQo+ICsgZW5k
-aWYoKQ0KPiArIA0KPiArIGluY2x1ZGUoIiR7Q01BS0VfQ1VSUkVOVF9MSVNUX0RJUn0vUG9jb0Zv
-dW5kYXRpb25UYXJnZXRzLmNtYWtlIikNCj4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1z
-dXBwb3J0L3BvY28vcG9jby8wMDAyLXJlbW92ZS1wcm92aWRlcnMtDQo+IHVuaXRpYWxpemF0aW9u
-LnBhdGNoIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvcG9jby9wb2NvLzAwMDItcmVtb3ZlLQ0K
-PiBwcm92aWRlcnMtdW5pdGlhbGl6YXRpb24ucGF0Y2gNCj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQN
-Cj4gaW5kZXggMDAwMDAwMDAwLi43ZDI0Yjc5ZjENCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9t
-ZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wb2NvL3BvY28vMDAwMi1yZW1vdmUtcHJvdmlkZXJzLQ0K
-PiB1bml0aWFsaXphdGlvbi5wYXRjaA0KPiBAQCAtMCwwICsxLDM1IEBADQo+ICtGcm9tIGM5NzZj
-MzJlNTI0OWNiOGEyNDMzZTdhYmZhMDk1YzFmZThkYzRmOGUgTW9uIFNlcCAxNyAwMDowMDowMA0K
-PiAyMDAxDQo+ICtGcm9tOiBBbGV4IEZhYmlqYW5pYyA8YWxleEBwb2NvcHJvamVjdC5vcmc+DQo+
-ICtEYXRlOiBXZWQsIDEzIEp1bCAyMDIyIDEyOjUzOjUyICswMjAwDQo+ICtTdWJqZWN0OiBbUEFU
-Q0hdIGZpeChPcGVuU1NMSW5pdGlhbGl6ZXIpOiByZW1vdmUgcHJvdmlkZXJzDQo+IHVuaXRpYWxp
-emF0aW9uDQo+ICsgIzM1NjIgIzM1NjcNCj4gKw0KPiArVXBzdHJlYW0tU3RhdHVzOiBCYWNrcG9y
-dA0KPiBbaHR0cHM6Ly9naXRodWIuY29tL3BvY29wcm9qZWN0L3BvY28vaXNzdWVzLzM1NjJdDQo+
-ICsNCj4gKy0tLQ0KPiArIENyeXB0by9zcmMvT3BlblNTTEluaXRpYWxpemVyLmNwcCB8IDEyIC0t
-LS0tLS0tLS0tLQ0KPiArIDEgZmlsZSBjaGFuZ2VkLCAxMiBkZWxldGlvbnMoLSkNCj4gKw0KPiAr
-ZGlmZiAtLWdpdCBhL0NyeXB0by9zcmMvT3BlblNTTEluaXRpYWxpemVyLmNwcA0KPiBiL0NyeXB0
-by9zcmMvT3BlblNTTEluaXRpYWxpemVyLmNwcA0KPiAraW5kZXggNDY3OGQyMjI5OS4uYzUzN2Mz
-ZjljMiAxMDA2NDQNCj4gKy0tLSBhL0NyeXB0by9zcmMvT3BlblNTTEluaXRpYWxpemVyLmNwcA0K
-PiArKysrIGIvQ3J5cHRvL3NyYy9PcGVuU1NMSW5pdGlhbGl6ZXIuY3BwDQo+ICtAQCAtMTU3LDE4
-ICsxNTcsNiBAQCB2b2lkIE9wZW5TU0xJbml0aWFsaXplcjo6dW5pbml0aWFsaXplKCkNCj4gKyAj
-ZW5kaWYNCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGRlbGV0ZSBbXSBfbXV0ZXhl
-czsNCj4gKyAjZW5kaWYNCj4gKy0NCj4gKy0jaWYgT1BFTlNTTF9WRVJTSU9OX05VTUJFUiA+PSAw
-eDMwMDAwMDAwTA0KPiArLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBPU1NMX1BST1ZJREVS
-KiBwcm92aWRlciA9IG51bGxwdHI7DQo+ICstwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGlm
-ICgocHJvdmlkZXIgPSBfZGVmYXVsdFByb3ZpZGVyLmV4Y2hhbmdlKG51bGxwdHIpKSkNCj4gKy3C
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgew0KPiArLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgT1NTTF9QUk9WSURFUl91bmxvYWQocHJvdmlkZXIpOw0KPiAr
-LcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqB9DQo+ICstwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoGlmICgocHJvdmlkZXIgPSBfbGVnYWN5UHJvdmlkZXIuZXhjaGFuZ2UobnVsbHB0cikp
-KQ0KPiArLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqB7DQo+ICstwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBPU1NMX1BST1ZJREVSX3VubG9hZChwcm92aWRl
-cik7DQo+ICstwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoH0NCj4gKy0jZW5kaWYNCj4gK8Kg
-wqDCoMKgwqDCoMKgfQ0KPiArIH0NCj4gKyANCj4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBl
-cy1zdXBwb3J0L3BvY28vcG9jb18xLjExLjMuYmIgYi9tZXRhLQ0KPiBvZS9yZWNpcGVzLXN1cHBv
-cnQvcG9jby9wb2NvXzEuMTIuMC5iYg0KPiBzaW1pbGFyaXR5IGluZGV4IDg5JQ0KPiByZW5hbWUg
-ZnJvbSBtZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wb2NvL3BvY29fMS4xMS4zLmJiDQo+IHJlbmFt
-ZSB0byBtZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wb2NvL3BvY29fMS4xMi4wLmJiDQo+IGluZGV4
-IDc1N2ZhODk4My4uNmZmZjA3MDdkIDEwMDY0NA0KPiAtLS0gYS9tZXRhLW9lL3JlY2lwZXMtc3Vw
-cG9ydC9wb2NvL3BvY29fMS4xMS4zLmJiDQo+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0
-L3BvY28vcG9jb18xLjEyLjAuYmINCj4gQEAgLTYsMTMgKzYsMTUgQEAgTElDRU5TRSA9ICJCU0wt
-MS4wIg0KPiDCoExJQ19GSUxFU19DSEtTVU0gPQ0KPiAiZmlsZTovL0xJQ0VOU0U7bWQ1PTQyNjdm
-NDhmYzczOGY1MDM4MGNiZWViNzZmOTVjZWJjIg0KPiDCoA0KPiDCoCMgVGhlc2UgZGVwZW5kZW5j
-aWVzIGFyZSByZXF1aXJlZCBieSBGb3VuZGF0aW9uDQo+IC1ERVBFTkRTID0gImxpYnBjcmUgemxp
-YiINCj4gK0RFUEVORFMgPSAibGlicGNyZTIgemxpYiINCj4gwqANCj4gwqBTUkNfVVJJID0gIiBc
-DQo+IMKgwqDCoMKgDQo+IGdpdDovL2dpdGh1Yi5jb20vcG9jb3Byb2plY3QvcG9jby5naXQ7YnJh
-bmNoPW1hc3Rlcjtwcm90b2NvbD1odHRwcyBcDQo+ICvCoMKgwqAgZmlsZTovLzAwMDEtZml4LXVu
-YnVuZGxlZC1QQ1JFMi1kZXBlbmRlbmN5LnBhdGNowqBcDQo+ICvCoMKgwqAgZmlsZTovLzAwMDIt
-cmVtb3ZlLXByb3ZpZGVycy11bml0aWFsaXphdGlvbi5wYXRjaMKgXA0KPiDCoMKgwqDCoCBmaWxl
-Oi8vcnVuLXB0ZXN0wqBcDQo+IMKgwqDCoCAiDQo+IC1TUkNSRVYgPSAiMTkxY2JkYzk3ZTFkOWRl
-MDIzYjhhNjVlMGRjODQ0OTExYzA2ZjZhOCINCj4gK1NSQ1JFViA9ICI0YmE4NTk1ZWQ4Mzg0MWQx
-ZmEyNDA3MTZiNTY1MmFkYzM3NzJjMzZiIg0KPiDCoA0KPiDCoFVQU1RSRUFNX0NIRUNLX0dJVFRB
-R1JFR0VYID0gInBvY28tKD9QPHB2ZXI+XGQrKFwuXGQrKSspIg0KPiDCoA0KPiBAQCAtMjMsNyAr
-MjUsNyBAQCBpbmhlcml0IGNtYWtlIHB0ZXN0DQo+IMKgIyBCeSBkZWZhdWx0IHRoZSBtb3N0IGNv
-bW1vbmx5IHVzZWQgcG9jbyBjb21wb25lbnRzIGFyZSBidWlsdA0KPiDCoCMgRm91bmRhdGlvbiBp
-cyBidWlsdCBhbnl3YXkgYW5kIGRvZXNuJ3QgbmVlZCB0byBiZSBsaXN0ZWQNCj4gZXhwbGljaXRs
-eQ0KPiDCoCMgdGhlc2UgZG9uJ3QgaGF2ZSBkZXBlbmRlbmNpZXMgb3V0c2lkZSBvZS1jb3JlDQo+
-IC1QQUNLQUdFQ09ORklHID8/PSAiWE1MIEpTT04gTW9uZ29EQiBQREYgVXRpbCBOZXQgTmV0U1NM
-IENyeXB0byBKV1QNCj4gRGF0YSBEYXRhU1FMaXRlIFppcCBFbmNvZGluZ3MgUmVkaXMiDQo+ICtQ
-QUNLQUdFQ09ORklHID8/PSAiWE1MIEpTT04gTW9uZ29EQiBQREYgVXRpbCBOZXQgTmV0U1NMIENy
-eXB0byBKV1QNCj4gRGF0YSBEYXRhU1FMaXRlIFppcCBFbmNvZGluZ3MgUmVkaXMgUHJvbWV0aGV1
-cyINCj4gwqANCj4gwqBQQUNLQUdFQ09ORklHW1hNTF0gPSAiLURFTkFCTEVfWE1MPU9OLC1ERU5B
-QkxFX1hNTD1PRkYsZXhwYXQiDQo+IMKgUEFDS0FHRUNPTkZJR1tKU09OXSA9ICItREVOQUJMRV9K
-U09OPU9OLC1ERU5BQkxFX0pTT049T0ZGIg0KPiBAQCAtMzksNiArNDEsNyBAQCBQQUNLQUdFQ09O
-RklHW0RhdGFTUUxpdGVdID0gIi0NCj4gREVOQUJMRV9EQVRBX1NRTElURT1PTiAtRFNRTElURTNf
-TElCUkFSWTpTVFJJTkc9c3ENCj4gwqBQQUNLQUdFQ09ORklHW1ppcF0gPSAiLURFTkFCTEVfWklQ
-PU9OLC1ERU5BQkxFX1pJUD1PRkYiDQo+IMKgUEFDS0FHRUNPTkZJR1tFbmNvZGluZ3NdID0gIi1E
-RU5BQkxFX0VOQ09ESU5HUz1PTiwtDQo+IERFTkFCTEVfRU5DT0RJTkdTPU9GRiINCj4gwqBQQUNL
-QUdFQ09ORklHW1JlZGlzXSA9ICItREVOQUJMRV9SRURJUz1PTiwtREVOQUJMRV9SRURJUz1PRkYi
-DQo+ICtQQUNLQUdFQ09ORklHW1Byb21ldGhldXNdID0gIi1ERU5BQkxFX1BST01FVEhFVVM9T04s
-LQ0KPiBERU5BQkxFX1BST01FVEhFVVM9T0ZGIg0KPiDCoA0KPiDCoCMgQWRkaXRpb25hbCBjb21w
-b25lbnRzIG5vdCBidWlsZCBieSBkZWZhdWx0LA0KPiDCoCMgdGhleSBtaWdodCBoYXZlIGRlcGVu
-ZGVuY2llcyBub3QgaW5jbHVkZWQgaW4gb2UtY29yZQ0KPiBAQCAtNDcsNiArNTAsOCBAQCBQQUNL
-QUdFQ09ORklHW21vZF9wb2NvXSA9ICItDQo+IERFTkFCTEVfQVBBQ0hFQ09OTkVDVE9SPU9OLC1E
-RU5BQkxFX0FQQUNIRUNPTk5FQ1RPUj0NCj4gwqBQQUNLQUdFQ09ORklHW0NwcFBhcnNlcl0gPSAi
-LURFTkFCTEVfQ1BQUEFSU0VSPU9OLC0NCj4gREVOQUJMRV9DUFBQQVJTRVI9T0ZGIg0KPiDCoFBB
-Q0tBR0VDT05GSUdbRGF0YU15U1FMXSA9ICItREVOQUJMRV9EQVRBX01ZU1FMPU9OIC0NCj4gRE1Z
-U1FMX0xJQjpTVFJJTkc9bXlzcWxjbGllbnRfciwtREVOQUJMRV9EQVRBX01ZU1FMPU9GRixtYXJp
-YWRiIg0KPiDCoFBBQ0tBR0VDT05GSUdbRGF0YU9EQkNdID0gIi1ERU5BQkxFX0RBVEFfT0RCQz1P
-TiwtDQo+IERFTkFCTEVfREFUQV9PREJDPU9GRixsaWJpb2RiYyINCj4gK1BBQ0tBR0VDT05GSUdb
-QWN0aXZlUmVjb3JkXSA9ICItREVOQUJMRV9BQ1RJVkVSRUNPUkQ9T04sLQ0KPiBERU5BQkxFX0FD
-VElWRVJFQ09SRD1PRkYiDQo+ICtQQUNLQUdFQ09ORklHW0FjdGl2ZVJlY29yZENvbXBpbGVyXSA9
-ICItDQo+IERFTkFCTEVfQUNUSVZFUkVDT1JEX0NPTVBJTEVSPU9OLC1ERU5BQkxFX0FDVElWRVJF
-Q09SRF9DT01QSUxFUj1PRkYiDQo+IMKgUEFDS0FHRUNPTkZJR1tQYWdlQ29tcGlsZXJdID0gIi1E
-RU5BQkxFX1BBR0VDT01QSUxFUj1PTiwtDQo+IERFTkFCTEVfUEFHRUNPTVBJTEVSPU9GRiINCj4g
-wqBQQUNLQUdFQ09ORklHW1BhZ2VDb21waWxlckZpbGUyUGFnZV0gPSAiLQ0KPiBERU5BQkxFX1BB
-R0VDT01QSUxFUl9GSUxFMlBBR0U9T04sLQ0KPiBERU5BQkxFX1BBR0VDT01QSUxFUl9GSUxFMlBB
-R0U9T0ZGIg0KPiDCoFBBQ0tBR0VDT05GSUdbU2V2ZW5aaXBdID0gIi1ERU5BQkxFX1NFVkVOWklQ
-PU9OLC0NCj4gREVOQUJMRV9TRVZFTlpJUD1PRkYiDQoNCg==
+--0000000000008832cd05e3be7b53
+Content-Type: text/plain; charset="UTF-8"
+
+Major version  upgrades usually are avoided in release backports. Looking
+towards What Armin says
+
+On Thu, Jul 14, 2022 at 6:44 AM Valek, Andrej <andrej.valek@siemens.com>
+wrote:
+
+> Hello Raj,
+>
+> Would it be possible to put it into kirkstone as well?
+>
+> Thanks,
+> Andrej
+>
+> On Wed, 2022-07-13 at 14:30 +0200, Andrej Valek wrote:
+> >  - switch from PCRE -> PCRE2
+> >  - add Prometheus library
+> >  - add option to enable/disable ActiveRecord (disabled by default)
+> >
+> > Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+> > ---
+> >  .../0001-fix-unbundled-PCRE2-dependency.patch | 25 +++++++++++++
+> >  ...0002-remove-providers-unitialization.patch | 35
+> > +++++++++++++++++++
+> >  .../poco/{poco_1.11.3.bb => poco_1.12.0.bb}   | 11 ++++--
+> >  3 files changed, 68 insertions(+), 3 deletions(-)
+> >  create mode 100644 meta-oe/recipes-support/poco/poco/0001-fix-
+> > unbundled-PCRE2-dependency.patch
+> >  create mode 100644 meta-oe/recipes-support/poco/poco/0002-remove-
+> > providers-unitialization.patch
+> >  rename meta-oe/recipes-support/poco/{poco_1.11.3.bb =>
+> > poco_1.12.0.bb} (89%)
+> >
+> > diff --git a/meta-oe/recipes-support/poco/poco/0001-fix-unbundled-
+> > PCRE2-dependency.patch b/meta-oe/recipes-support/poco/poco/0001-fix-
+> > unbundled-PCRE2-dependency.patch
+> > new file mode 100644
+> > index 000000000..1a9d23cee
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-support/poco/poco/0001-fix-unbundled-PCRE2-
+> > dependency.patch
+> > @@ -0,0 +1,25 @@
+> > +From f049898c8bf058ed187de8e5fab20abeaab1f3b6 Mon Sep 17 00:00:00
+> > 2001
+> > +From: Alex Fabijanic <alex@pocoproject.org>
+> > +Date: Sat, 9 Jul 2022 19:13:04 +0200
+> > +Subject: [PATCH] fix(cmake): PocoFoundationConfig.cmake should now
+> > check for
+> > + PCRE2 #3677
+> > +
+> > +Upstream-Status: Backport
+> > [https://github.com/pocoproject/poco/issues/3677]
+> > +
+> > +---
+> > + Foundation/cmake/PocoFoundationConfig.cmake | 2 +-
+> > + 1 file changed, 1 insertion(+), 1 deletion(-)
+> > +
+> > +diff --git a/Foundation/cmake/PocoFoundationConfig.cmake
+> > b/Foundation/cmake/PocoFoundationConfig.cmake
+> > +index 46c2d3fc00..82c5788940 100644
+> > +--- a/Foundation/cmake/PocoFoundationConfig.cmake
+> > ++++ b/Foundation/cmake/PocoFoundationConfig.cmake
+> > +@@ -2,7 +2,7 @@ if(@POCO_UNBUNDLED@)
+> > +       include(CMakeFindDependencyMacro)
+> > +       list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
+> > +       find_dependency(ZLIB REQUIRED)
+> > +-      find_dependency(PCRE REQUIRED)
+> > ++      find_dependency(PCRE2 REQUIRED)
+> > + endif()
+> > +
+> > + include("${CMAKE_CURRENT_LIST_DIR}/PocoFoundationTargets.cmake")
+> > diff --git a/meta-oe/recipes-support/poco/poco/0002-remove-providers-
+> > unitialization.patch b/meta-oe/recipes-support/poco/poco/0002-remove-
+> > providers-unitialization.patch
+> > new file mode 100644
+> > index 000000000..7d24b79f1
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-support/poco/poco/0002-remove-providers-
+> > unitialization.patch
+> > @@ -0,0 +1,35 @@
+> > +From c976c32e5249cb8a2433e7abfa095c1fe8dc4f8e Mon Sep 17 00:00:00
+> > 2001
+> > +From: Alex Fabijanic <alex@pocoproject.org>
+> > +Date: Wed, 13 Jul 2022 12:53:52 +0200
+> > +Subject: [PATCH] fix(OpenSSLInitializer): remove providers
+> > unitialization
+> > + #3562 #3567
+> > +
+> > +Upstream-Status: Backport
+> > [https://github.com/pocoproject/poco/issues/3562]
+> > +
+> > +---
+> > + Crypto/src/OpenSSLInitializer.cpp | 12 ------------
+> > + 1 file changed, 12 deletions(-)
+> > +
+> > +diff --git a/Crypto/src/OpenSSLInitializer.cpp
+> > b/Crypto/src/OpenSSLInitializer.cpp
+> > +index 4678d22299..c537c3f9c2 100644
+> > +--- a/Crypto/src/OpenSSLInitializer.cpp
+> > ++++ b/Crypto/src/OpenSSLInitializer.cpp
+> > +@@ -157,18 +157,6 @@ void OpenSSLInitializer::uninitialize()
+> > + #endif
+> > +               delete [] _mutexes;
+> > + #endif
+> > +-
+> > +-#if OPENSSL_VERSION_NUMBER >= 0x30000000L
+> > +-              OSSL_PROVIDER* provider = nullptr;
+> > +-              if ((provider = _defaultProvider.exchange(nullptr)))
+> > +-              {
+> > +-                      OSSL_PROVIDER_unload(provider);
+> > +-              }
+> > +-              if ((provider = _legacyProvider.exchange(nullptr)))
+> > +-              {
+> > +-                      OSSL_PROVIDER_unload(provider);
+> > +-              }
+> > +-#endif
+> > +       }
+> > + }
+> > +
+> > diff --git a/meta-oe/recipes-support/poco/poco_1.11.3.bb b/meta-
+> > oe/recipes-support/poco/poco_1.12.0.bb
+> > similarity index 89%
+> > rename from meta-oe/recipes-support/poco/poco_1.11.3.bb
+> > rename to meta-oe/recipes-support/poco/poco_1.12.0.bb
+> > index 757fa8983..6fff0707d 100644
+> > --- a/meta-oe/recipes-support/poco/poco_1.11.3.bb
+> > +++ b/meta-oe/recipes-support/poco/poco_1.12.0.bb
+> > @@ -6,13 +6,15 @@ LICENSE = "BSL-1.0"
+> >  LIC_FILES_CHKSUM =
+> > "file://LICENSE;md5=4267f48fc738f50380cbeeb76f95cebc"
+> >
+> >  # These dependencies are required by Foundation
+> > -DEPENDS = "libpcre zlib"
+> > +DEPENDS = "libpcre2 zlib"
+> >
+> >  SRC_URI = " \
+> >
+> > git://github.com/pocoproject/poco.git;branch=master;protocol=https \
+> > +    file://0001-fix-unbundled-PCRE2-dependency.patch \
+> > +    file://0002-remove-providers-unitialization.patch \
+> >      file://run-ptest \
+> >     "
+> > -SRCREV = "191cbdc97e1d9de023b8a65e0dc844911c06f6a8"
+> > +SRCREV = "4ba8595ed83841d1fa240716b5652adc3772c36b"
+> >
+> >  UPSTREAM_CHECK_GITTAGREGEX = "poco-(?P<pver>\d+(\.\d+)+)"
+> >
+> > @@ -23,7 +25,7 @@ inherit cmake ptest
+> >  # By default the most commonly used poco components are built
+> >  # Foundation is built anyway and doesn't need to be listed
+> > explicitly
+> >  # these don't have dependencies outside oe-core
+> > -PACKAGECONFIG ??= "XML JSON MongoDB PDF Util Net NetSSL Crypto JWT
+> > Data DataSQLite Zip Encodings Redis"
+> > +PACKAGECONFIG ??= "XML JSON MongoDB PDF Util Net NetSSL Crypto JWT
+> > Data DataSQLite Zip Encodings Redis Prometheus"
+> >
+> >  PACKAGECONFIG[XML] = "-DENABLE_XML=ON,-DENABLE_XML=OFF,expat"
+> >  PACKAGECONFIG[JSON] = "-DENABLE_JSON=ON,-DENABLE_JSON=OFF"
+> > @@ -39,6 +41,7 @@ PACKAGECONFIG[DataSQLite] = "-
+> > DENABLE_DATA_SQLITE=ON -DSQLITE3_LIBRARY:STRING=sq
+> >  PACKAGECONFIG[Zip] = "-DENABLE_ZIP=ON,-DENABLE_ZIP=OFF"
+> >  PACKAGECONFIG[Encodings] = "-DENABLE_ENCODINGS=ON,-
+> > DENABLE_ENCODINGS=OFF"
+> >  PACKAGECONFIG[Redis] = "-DENABLE_REDIS=ON,-DENABLE_REDIS=OFF"
+> > +PACKAGECONFIG[Prometheus] = "-DENABLE_PROMETHEUS=ON,-
+> > DENABLE_PROMETHEUS=OFF"
+> >
+> >  # Additional components not build by default,
+> >  # they might have dependencies not included in oe-core
+> > @@ -47,6 +50,8 @@ PACKAGECONFIG[mod_poco] = "-
+> > DENABLE_APACHECONNECTOR=ON,-DENABLE_APACHECONNECTOR=
+> >  PACKAGECONFIG[CppParser] = "-DENABLE_CPPPARSER=ON,-
+> > DENABLE_CPPPARSER=OFF"
+> >  PACKAGECONFIG[DataMySQL] = "-DENABLE_DATA_MYSQL=ON -
+> > DMYSQL_LIB:STRING=mysqlclient_r,-DENABLE_DATA_MYSQL=OFF,mariadb"
+> >  PACKAGECONFIG[DataODBC] = "-DENABLE_DATA_ODBC=ON,-
+> > DENABLE_DATA_ODBC=OFF,libiodbc"
+> > +PACKAGECONFIG[ActiveRecord] = "-DENABLE_ACTIVERECORD=ON,-
+> > DENABLE_ACTIVERECORD=OFF"
+> > +PACKAGECONFIG[ActiveRecordCompiler] = "-
+> > DENABLE_ACTIVERECORD_COMPILER=ON,-DENABLE_ACTIVERECORD_COMPILER=OFF"
+> >  PACKAGECONFIG[PageCompiler] = "-DENABLE_PAGECOMPILER=ON,-
+> > DENABLE_PAGECOMPILER=OFF"
+> >  PACKAGECONFIG[PageCompilerFile2Page] = "-
+> > DENABLE_PAGECOMPILER_FILE2PAGE=ON,-
+> > DENABLE_PAGECOMPILER_FILE2PAGE=OFF"
+> >  PACKAGECONFIG[SevenZip] = "-DENABLE_SEVENZIP=ON,-
+> > DENABLE_SEVENZIP=OFF"
+>
+>
+
+--0000000000008832cd05e3be7b53
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto">Major version =C2=A0upgrades usually are avoided in relea=
+se backports. Looking towards What Armin says=C2=A0</div><div><br><div clas=
+s=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Jul 14, 202=
+2 at 6:44 AM Valek, Andrej &lt;<a href=3D"mailto:andrej.valek@siemens.com">=
+andrej.valek@siemens.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail=
+_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:=
+1ex">Hello Raj,<br>
+<br>
+Would it be possible to put it into kirkstone as well?<br>
+<br>
+Thanks,<br>
+Andrej<br>
+<br>
+On Wed, 2022-07-13 at 14:30 +0200, Andrej Valek wrote:<br>
+&gt; =C2=A0- switch from PCRE -&gt; PCRE2<br>
+&gt; =C2=A0- add Prometheus library<br>
+&gt; =C2=A0- add option to enable/disable ActiveRecord (disabled by default=
+)<br>
+&gt; <br>
+&gt; Signed-off-by: Andrej Valek &lt;<a href=3D"mailto:andrej.valek@siemens=
+.com" target=3D"_blank">andrej.valek@siemens.com</a>&gt;<br>
+&gt; ---<br>
+&gt; =C2=A0.../0001-fix-unbundled-PCRE2-dependency.patch | 25 +++++++++++++=
+<br>
+&gt; =C2=A0...0002-remove-providers-unitialization.patch | 35<br>
+&gt; +++++++++++++++++++<br>
+&gt; =C2=A0.../poco/{<a href=3D"http://poco_1.11.3.bb" rel=3D"noreferrer" t=
+arget=3D"_blank">poco_1.11.3.bb</a> =3D&gt; <a href=3D"http://poco_1.12.0.b=
+b" rel=3D"noreferrer" target=3D"_blank">poco_1.12.0.bb</a>}=C2=A0=C2=A0 | 1=
+1 ++++--<br>
+&gt; =C2=A03 files changed, 68 insertions(+), 3 deletions(-)<br>
+&gt; =C2=A0create mode 100644 meta-oe/recipes-support/poco/poco/0001-fix-<b=
+r>
+&gt; unbundled-PCRE2-dependency.patch<br>
+&gt; =C2=A0create mode 100644 meta-oe/recipes-support/poco/poco/0002-remove=
+-<br>
+&gt; providers-unitialization.patch<br>
+&gt; =C2=A0rename meta-oe/recipes-support/poco/{<a href=3D"http://poco_1.11=
+.3.bb" rel=3D"noreferrer" target=3D"_blank">poco_1.11.3.bb</a> =3D&gt;<br>
+&gt; <a href=3D"http://poco_1.12.0.bb" rel=3D"noreferrer" target=3D"_blank"=
+>poco_1.12.0.bb</a>} (89%)<br>
+&gt; <br>
+&gt; diff --git a/meta-oe/recipes-support/poco/poco/0001-fix-unbundled-<br>
+&gt; PCRE2-dependency.patch b/meta-oe/recipes-support/poco/poco/0001-fix-<b=
+r>
+&gt; unbundled-PCRE2-dependency.patch<br>
+&gt; new file mode 100644<br>
+&gt; index 000000000..1a9d23cee<br>
+&gt; --- /dev/null<br>
+&gt; +++ b/meta-oe/recipes-support/poco/poco/0001-fix-unbundled-PCRE2-<br>
+&gt; dependency.patch<br>
+&gt; @@ -0,0 +1,25 @@<br>
+&gt; +From f049898c8bf058ed187de8e5fab20abeaab1f3b6 Mon Sep 17 00:00:00<br>
+&gt; 2001<br>
+&gt; +From: Alex Fabijanic &lt;<a href=3D"mailto:alex@pocoproject.org" targ=
+et=3D"_blank">alex@pocoproject.org</a>&gt;<br>
+&gt; +Date: Sat, 9 Jul 2022 19:13:04 +0200<br>
+&gt; +Subject: [PATCH] fix(cmake): PocoFoundationConfig.cmake should now<br=
+>
+&gt; check for<br>
+&gt; + PCRE2 #3677<br>
+&gt; +<br>
+&gt; +Upstream-Status: Backport<br>
+&gt; [<a href=3D"https://github.com/pocoproject/poco/issues/3677" rel=3D"no=
+referrer" target=3D"_blank">https://github.com/pocoproject/poco/issues/3677=
+</a>]<br>
+&gt; +<br>
+&gt; +---<br>
+&gt; + Foundation/cmake/PocoFoundationConfig.cmake | 2 +-<br>
+&gt; + 1 file changed, 1 insertion(+), 1 deletion(-)<br>
+&gt; +<br>
+&gt; +diff --git a/Foundation/cmake/PocoFoundationConfig.cmake<br>
+&gt; b/Foundation/cmake/PocoFoundationConfig.cmake<br>
+&gt; +index 46c2d3fc00..82c5788940 100644<br>
+&gt; +--- a/Foundation/cmake/PocoFoundationConfig.cmake<br>
+&gt; ++++ b/Foundation/cmake/PocoFoundationConfig.cmake<br>
+&gt; +@@ -2,7 +2,7 @@ if(@POCO_UNBUNDLED@)<br>
+&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0include(CMakeFindDependency=
+Macro)<br>
+&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0list(APPEND CMAKE_MODULE_PA=
+TH &quot;${CMAKE_CURRENT_LIST_DIR}&quot;)<br>
+&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0find_dependency(ZLIB REQUIR=
+ED)<br>
+&gt; +-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0find_dependency(PCRE REQUIRED)<b=
+r>
+&gt; ++=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0find_dependency(PCRE2 REQUIRED)<=
+br>
+&gt; + endif()<br>
+&gt; + <br>
+&gt; + include(&quot;${CMAKE_CURRENT_LIST_DIR}/PocoFoundationTargets.cmake&=
+quot;)<br>
+&gt; diff --git a/meta-oe/recipes-support/poco/poco/0002-remove-providers-<=
+br>
+&gt; unitialization.patch b/meta-oe/recipes-support/poco/poco/0002-remove-<=
+br>
+&gt; providers-unitialization.patch<br>
+&gt; new file mode 100644<br>
+&gt; index 000000000..7d24b79f1<br>
+&gt; --- /dev/null<br>
+&gt; +++ b/meta-oe/recipes-support/poco/poco/0002-remove-providers-<br>
+&gt; unitialization.patch<br>
+&gt; @@ -0,0 +1,35 @@<br>
+&gt; +From c976c32e5249cb8a2433e7abfa095c1fe8dc4f8e Mon Sep 17 00:00:00<br>
+&gt; 2001<br>
+&gt; +From: Alex Fabijanic &lt;<a href=3D"mailto:alex@pocoproject.org" targ=
+et=3D"_blank">alex@pocoproject.org</a>&gt;<br>
+&gt; +Date: Wed, 13 Jul 2022 12:53:52 +0200<br>
+&gt; +Subject: [PATCH] fix(OpenSSLInitializer): remove providers<br>
+&gt; unitialization<br>
+&gt; + #3562 #3567<br>
+&gt; +<br>
+&gt; +Upstream-Status: Backport<br>
+&gt; [<a href=3D"https://github.com/pocoproject/poco/issues/3562" rel=3D"no=
+referrer" target=3D"_blank">https://github.com/pocoproject/poco/issues/3562=
+</a>]<br>
+&gt; +<br>
+&gt; +---<br>
+&gt; + Crypto/src/OpenSSLInitializer.cpp | 12 ------------<br>
+&gt; + 1 file changed, 12 deletions(-)<br>
+&gt; +<br>
+&gt; +diff --git a/Crypto/src/OpenSSLInitializer.cpp<br>
+&gt; b/Crypto/src/OpenSSLInitializer.cpp<br>
+&gt; +index 4678d22299..c537c3f9c2 100644<br>
+&gt; +--- a/Crypto/src/OpenSSLInitializer.cpp<br>
+&gt; ++++ b/Crypto/src/OpenSSLInitializer.cpp<br>
+&gt; +@@ -157,18 +157,6 @@ void OpenSSLInitializer::uninitialize()<br>
+&gt; + #endif<br>
+&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0delete [] _mutexes;<br>
+&gt; + #endif<br>
+&gt; +-<br>
+&gt; +-#if OPENSSL_VERSION_NUMBER &gt;=3D 0x30000000L<br>
+&gt; +-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0OSSL_PROVIDER* provider =3D nullptr;<br>
+&gt; +-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0if ((provider =3D _defaultProvider.exchange(nullptr)))<br=
+>
+&gt; +-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0{<br>
+&gt; +-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0OSSL_PROV=
+IDER_unload(provider);<br>
+&gt; +-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0}<br>
+&gt; +-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0if ((provider =3D _legacyProvider.exchange(nullptr)))<br>
+&gt; +-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0{<br>
+&gt; +-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0OSSL_PROV=
+IDER_unload(provider);<br>
+&gt; +-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0}<br>
+&gt; +-#endif<br>
+&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}<br>
+&gt; + }<br>
+&gt; + <br>
+&gt; diff --git a/meta-oe/recipes-support/poco/<a href=3D"http://poco_1.11.=
+3.bb" rel=3D"noreferrer" target=3D"_blank">poco_1.11.3.bb</a> b/meta-<br>
+&gt; oe/recipes-support/poco/<a href=3D"http://poco_1.12.0.bb" rel=3D"noref=
+errer" target=3D"_blank">poco_1.12.0.bb</a><br>
+&gt; similarity index 89%<br>
+&gt; rename from meta-oe/recipes-support/poco/<a href=3D"http://poco_1.11.3=
+.bb" rel=3D"noreferrer" target=3D"_blank">poco_1.11.3.bb</a><br>
+&gt; rename to meta-oe/recipes-support/poco/<a href=3D"http://poco_1.12.0.b=
+b" rel=3D"noreferrer" target=3D"_blank">poco_1.12.0.bb</a><br>
+&gt; index 757fa8983..6fff0707d 100644<br>
+&gt; --- a/meta-oe/recipes-support/poco/<a href=3D"http://poco_1.11.3.bb" r=
+el=3D"noreferrer" target=3D"_blank">poco_1.11.3.bb</a><br>
+&gt; +++ b/meta-oe/recipes-support/poco/<a href=3D"http://poco_1.12.0.bb" r=
+el=3D"noreferrer" target=3D"_blank">poco_1.12.0.bb</a><br>
+&gt; @@ -6,13 +6,15 @@ LICENSE =3D &quot;BSL-1.0&quot;<br>
+&gt; =C2=A0LIC_FILES_CHKSUM =3D<br>
+&gt; &quot;file://LICENSE;md5=3D4267f48fc738f50380cbeeb76f95cebc&quot;<br>
+&gt; =C2=A0<br>
+&gt; =C2=A0# These dependencies are required by Foundation<br>
+&gt; -DEPENDS =3D &quot;libpcre zlib&quot;<br>
+&gt; +DEPENDS =3D &quot;libpcre2 zlib&quot;<br>
+&gt; =C2=A0<br>
+&gt; =C2=A0SRC_URI =3D &quot; \<br>
+&gt; =C2=A0=C2=A0=C2=A0=C2=A0<br>
+&gt; git://<a href=3D"http://github.com/pocoproject/poco.git;branch=3Dmaste=
+r;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank">github.com/pocopro=
+ject/poco.git;branch=3Dmaster;protocol=3Dhttps</a> \<br>
+&gt; +=C2=A0=C2=A0=C2=A0 file://0001-fix-unbundled-PCRE2-dependency.patch=
+=C2=A0\<br>
+&gt; +=C2=A0=C2=A0=C2=A0 file://0002-remove-providers-unitialization.patch=
+=C2=A0\<br>
+&gt; =C2=A0=C2=A0=C2=A0=C2=A0 file://run-ptest=C2=A0\<br>
+&gt; =C2=A0=C2=A0=C2=A0 &quot;<br>
+&gt; -SRCREV =3D &quot;191cbdc97e1d9de023b8a65e0dc844911c06f6a8&quot;<br>
+&gt; +SRCREV =3D &quot;4ba8595ed83841d1fa240716b5652adc3772c36b&quot;<br>
+&gt; =C2=A0<br>
+&gt; =C2=A0UPSTREAM_CHECK_GITTAGREGEX =3D &quot;poco-(?P&lt;pver&gt;\d+(\.\=
+d+)+)&quot;<br>
+&gt; =C2=A0<br>
+&gt; @@ -23,7 +25,7 @@ inherit cmake ptest<br>
+&gt; =C2=A0# By default the most commonly used poco components are built<br=
+>
+&gt; =C2=A0# Foundation is built anyway and doesn&#39;t need to be listed<b=
+r>
+&gt; explicitly<br>
+&gt; =C2=A0# these don&#39;t have dependencies outside oe-core<br>
+&gt; -PACKAGECONFIG ??=3D &quot;XML JSON MongoDB PDF Util Net NetSSL Crypto=
+ JWT<br>
+&gt; Data DataSQLite Zip Encodings Redis&quot;<br>
+&gt; +PACKAGECONFIG ??=3D &quot;XML JSON MongoDB PDF Util Net NetSSL Crypto=
+ JWT<br>
+&gt; Data DataSQLite Zip Encodings Redis Prometheus&quot;<br>
+&gt; =C2=A0<br>
+&gt; =C2=A0PACKAGECONFIG[XML] =3D &quot;-DENABLE_XML=3DON,-DENABLE_XML=3DOF=
+F,expat&quot;<br>
+&gt; =C2=A0PACKAGECONFIG[JSON] =3D &quot;-DENABLE_JSON=3DON,-DENABLE_JSON=
+=3DOFF&quot;<br>
+&gt; @@ -39,6 +41,7 @@ PACKAGECONFIG[DataSQLite] =3D &quot;-<br>
+&gt; DENABLE_DATA_SQLITE=3DON -DSQLITE3_LIBRARY:STRING=3Dsq<br>
+&gt; =C2=A0PACKAGECONFIG[Zip] =3D &quot;-DENABLE_ZIP=3DON,-DENABLE_ZIP=3DOF=
+F&quot;<br>
+&gt; =C2=A0PACKAGECONFIG[Encodings] =3D &quot;-DENABLE_ENCODINGS=3DON,-<br>
+&gt; DENABLE_ENCODINGS=3DOFF&quot;<br>
+&gt; =C2=A0PACKAGECONFIG[Redis] =3D &quot;-DENABLE_REDIS=3DON,-DENABLE_REDI=
+S=3DOFF&quot;<br>
+&gt; +PACKAGECONFIG[Prometheus] =3D &quot;-DENABLE_PROMETHEUS=3DON,-<br>
+&gt; DENABLE_PROMETHEUS=3DOFF&quot;<br>
+&gt; =C2=A0<br>
+&gt; =C2=A0# Additional components not build by default,<br>
+&gt; =C2=A0# they might have dependencies not included in oe-core<br>
+&gt; @@ -47,6 +50,8 @@ PACKAGECONFIG[mod_poco] =3D &quot;-<br>
+&gt; DENABLE_APACHECONNECTOR=3DON,-DENABLE_APACHECONNECTOR=3D<br>
+&gt; =C2=A0PACKAGECONFIG[CppParser] =3D &quot;-DENABLE_CPPPARSER=3DON,-<br>
+&gt; DENABLE_CPPPARSER=3DOFF&quot;<br>
+&gt; =C2=A0PACKAGECONFIG[DataMySQL] =3D &quot;-DENABLE_DATA_MYSQL=3DON -<br=
+>
+&gt; DMYSQL_LIB:STRING=3Dmysqlclient_r,-DENABLE_DATA_MYSQL=3DOFF,mariadb&qu=
+ot;<br>
+&gt; =C2=A0PACKAGECONFIG[DataODBC] =3D &quot;-DENABLE_DATA_ODBC=3DON,-<br>
+&gt; DENABLE_DATA_ODBC=3DOFF,libiodbc&quot;<br>
+&gt; +PACKAGECONFIG[ActiveRecord] =3D &quot;-DENABLE_ACTIVERECORD=3DON,-<br=
+>
+&gt; DENABLE_ACTIVERECORD=3DOFF&quot;<br>
+&gt; +PACKAGECONFIG[ActiveRecordCompiler] =3D &quot;-<br>
+&gt; DENABLE_ACTIVERECORD_COMPILER=3DON,-DENABLE_ACTIVERECORD_COMPILER=3DOF=
+F&quot;<br>
+&gt; =C2=A0PACKAGECONFIG[PageCompiler] =3D &quot;-DENABLE_PAGECOMPILER=3DON=
+,-<br>
+&gt; DENABLE_PAGECOMPILER=3DOFF&quot;<br>
+&gt; =C2=A0PACKAGECONFIG[PageCompilerFile2Page] =3D &quot;-<br>
+&gt; DENABLE_PAGECOMPILER_FILE2PAGE=3DON,-<br>
+&gt; DENABLE_PAGECOMPILER_FILE2PAGE=3DOFF&quot;<br>
+&gt; =C2=A0PACKAGECONFIG[SevenZip] =3D &quot;-DENABLE_SEVENZIP=3DON,-<br>
+&gt; DENABLE_SEVENZIP=3DOFF&quot;<br>
+<br>
+</blockquote></div></div>
+
+--0000000000008832cd05e3be7b53--
 
