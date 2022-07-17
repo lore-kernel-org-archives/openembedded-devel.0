@@ -2,99 +2,102 @@ Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A52B7CCA47B
-	for <webhook@archiver.kernel.org>; Sun, 17 Jul 2022 17:31:56 +0000 (UTC)
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com
- [209.85.208.54])
- by mx.groups.io with SMTP id smtpd.web12.18062.1658079112263202809
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 869B2C43334
+	for <webhook@archiver.kernel.org>; Sun, 17 Jul 2022 17:32:06 +0000 (UTC)
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com
+ [209.85.218.46])
+ by mx.groups.io with SMTP id smtpd.web11.18001.1658079117888772783
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Jul 2022 10:31:52 -0700
+ Sun, 17 Jul 2022 10:31:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=RAV2cBaV;
- spf=pass (domain: gmail.com, ip: 209.85.208.54,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=G7v+JpsH;
+ spf=pass (domain: gmail.com, ip: 209.85.218.46,
  mailfrom: jan.vermaete@gmail.com)
-Received: by mail-ed1-f54.google.com with SMTP id g1so12502706edb.12
+Received: by mail-ej1-f46.google.com with SMTP id ss3so17533997ejc.11
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Jul 2022 10:31:52 -0700 (PDT)
+ Sun, 17 Jul 2022 10:31:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=PtW58ThXdP+Ea8sqBQvUAMpaYtoS6KCrH72vVPbCmMg=;
-        b=RAV2cBaVaUv9xDnD2loHz2RX1hUELAedsR0j0vxtmcs139OsfFAsl1Ae9TGh0k3lEQ
-         5ro+swBMGvms70MMNL+bI0f7O/KAiXXROsvnPfQLS46XvnB3jcWXYPqUSJwkiVkJojzg
-         QKVagv5RDl/2biPySN999P33HOAmhStt0Pfo56j/aIwqR/AZbEW3LOsTvXVufoU7bAjQ
-         pZHQO63TfcR3S8ST2XpZHuf2O3kN64n19TGThdqp/mBFKOO+V/EPVcNRiLNcuqW8SLFi
-         mJA5KESepyUCxE9wFu6wnj4yACpMqvEPuuL0JeCMihZ8Hf5nqbgRl7uFQVK0AXpE2uHe
-         6W1w==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=wWrk0jXnzb/TK56ei4fHVOPG4DabSDwKWpwJCDIkLpk=;
+        b=G7v+JpsHPd5Tg6htK+x3GDUV0KkEzr2emU2okkn+zbKfNyjzCjbYQtzx/r3L4Vstxx
+         oskhdIVNjha039E4JaNtU2vxbrgYAMS5Vkgx9TELCpyubwopxgzk51AfCrMPMuIJCRw5
+         r6dPaCQdMtyFpX3ijrUWMEb3QkStbg46Ur8ZsXNBD6tt598mKzuttfljkLOgH24sJbwO
+         7ODFEqAgFCn5/y+1m24EnzUcxXMi2haOV9TrMaEzYQ4q8ye4hV8oMQm3Akq9FdJ3IPLg
+         0PCCNEFMQeCfAaqFjqud7p5EhgtYG7cfy32H7drUIrpey8TUuakpb/WWic/8Z6DD8aI2
+         wStg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=PtW58ThXdP+Ea8sqBQvUAMpaYtoS6KCrH72vVPbCmMg=;
-        b=NnoqCnCQGC99C7EZh1rUjp0UivRwqp7LSIJYY0M688X5W4pLb/boZfrLOD3pAAlvqJ
-         WDMLgusNJ57lPe6rLEpefzRA/F+CUi/7yoWX0CWQkNw2dZXMTMGctIiE5VbLUEeEBF5U
-         2WUywdJfnR5qNFbAHvk1CVP3Hs0GUUQsoT6NBhgfMyssY09U3F5LVrWKyngwtPti9bMD
-         glzZMncsY++GClK8Bt1M9P1NOlsazoHls4dA91jkkjZier/1y81sHsYPhAN2j8IXyCZJ
-         mdxfiO4jQbgbyw2kwJRgg3sXI51E5mlmw3QAXlE5jhoSH2r9BNDfpV1EpVO8CtJz2DZZ
-         rjfg==
-X-Gm-Message-State: AJIora+jSi3/nlL/4dkOh+x3ObSY6DBLQXCE18vUKe5x91zSDWt7vRbS
-	1xj+zCFlM/UzCaRYGXNnrnOFGsQyUt0=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=wWrk0jXnzb/TK56ei4fHVOPG4DabSDwKWpwJCDIkLpk=;
+        b=2KPzXFjzC/efw5EsxHIu1KSXJCc1VLx+6qJHqNeADkOm0RnxhPE3lqC7CiBIdsK6HO
+         7YmNUs/yZz7Nl/CEXiI2Bs2WfQxJ2vIq3ORNsdgVa+ArEdNr4Ge/X9avSmUlMg/Sj/Lf
+         8dvJecm7Ijp/yWAnC21cz7CrkFqZXUl1LBs9f4MoQHWV63uTT8yZwrfT5Hvg0lMuFKEE
+         THHJe5punHrjzMuQF9Ul/rEA8FwX6IT7J1cLKdS+JF4x/M0ck1bf6KwY5v5lANxUReHK
+         /6zI2RrblIXaoyZm+KaWn1ieuTZe0DDDiFVURLC9Sd5M5RbE5EED6egePQ0e90GLd18x
+         cYhA==
+X-Gm-Message-State: AJIora+pXoyUhVGLMcYWmF9d+bktX63uKNBlP7T5hk+LvF8sLnjtVel/
+	bd9KQyAfPRlEDYNEpGZAVYCc3urCFKE=
 X-Google-Smtp-Source: 
- AGRyM1uJI2bxORC0N9ccDhHnXiLywqSayPfENVz8cdvrqvbarwIqiazh6Wb5Wkb+iDmrMzly74YccQ==
-X-Received: by 2002:a05:6402:e08:b0:43a:f435:ff1a with SMTP id
- h8-20020a0564020e0800b0043af435ff1amr32053560edh.123.1658079110499;
-        Sun, 17 Jul 2022 10:31:50 -0700 (PDT)
+ AGRyM1uDLhqwKBBfl81JTIt1RTaZgFAGGhnIxSeDj7m9S8UIoOefCy3G0qAuBSDXjTed4jQAM5d7lQ==
+X-Received: by 2002:a17:906:9b0a:b0:72b:4fc2:4b07 with SMTP id
+ eo10-20020a1709069b0a00b0072b4fc24b07mr23273752ejc.700.1658079116109;
+        Sun, 17 Jul 2022 10:31:56 -0700 (PDT)
 Received: from localhost.localdomain
  (ptr-fij45r07ru9hofylq19.18120a2.ip6.access.telenet.be.
  [2a02:1812:512:2c00:fdf0:ba80:8823:350d])
         by smtp.gmail.com with ESMTPSA id
- h5-20020a1709067cc500b00726e108b566sm4587591ejp.173.2022.07.17.10.31.49
+ h5-20020a1709067cc500b00726e108b566sm4587591ejp.173.2022.07.17.10.31.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 Jul 2022 10:31:50 -0700 (PDT)
+        Sun, 17 Jul 2022 10:31:55 -0700 (PDT)
 From: Jan Vermaete <jan.vermaete@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-python][PATCH 1/3] python3-jsonrpcclient: Added the
- jsonrpcclient Python package
-Date: Sun, 17 Jul 2022 19:31:34 +0200
-Message-Id: <20220717173136.2777245-1-jan.vermaete@gmail.com>
+Subject: [meta-python][PATCH 3/3] python3-jsonrpcserver: added the
+ python3-oslash rdepends
+Date: Sun, 17 Jul 2022 19:31:36 +0200
+Message-Id: <20220717173136.2777245-3-jan.vermaete@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220717173136.2777245-1-jan.vermaete@gmail.com>
+References: <20220717173136.2777245-1-jan.vermaete@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 17 Jul 2022 17:31:56 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 17 Jul 2022 17:32:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97860
+ https://lists.openembedded.org/g/openembedded-devel/message/97862
+
+This one is needed for version 5.0.7.
+And should not be needed anymore for version 6.x.
 
 Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
 ---
- .../python/python3-jsonrpcclient_4.0.2.bb          | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-jsonrpcclient_4.0.2.bb
+ .../recipes-devtools/python/python3-jsonrpcserver_5.0.7.bb     | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-jsonrpcclient_4.0.2.bb b/meta-python/recipes-devtools/python/python3-jsonrpcclient_4.0.2.bb
-new file mode 100644
-index 000000000..26ee3786b
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-jsonrpcclient_4.0.2.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "Generate JSON-RPC requests and parse responses in Python"
-+HOMEPAGE = "https://github.com/explodinglabs/jsonrpcclient"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=10f3d7679914df805c98fb351172e677"
-+
-+SRC_URI[sha256sum] = "c0d475494b3e1b591ecdee7883739accaf5695edb673f16b7383b8c6bbdb1ca3"
-+
-+inherit pypi setuptools3
-+
-+RDEPENDS:${PN} += "\
-+    python3-core \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.7.bb b/meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.7.bb
+index 537fd3313..12e900379 100644
+--- a/meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.7.bb
++++ b/meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.7.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Library to process JSON-RPC requests"
+-HOMEPAGE = "https://github.com/bcb/jsonrpcserver"
++HOMEPAGE = "https://github.com/explodinglabs/jsonrpcserver"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=61b63ea9d36f6fb63ddaaaac8265304f"
+ 
+@@ -16,6 +16,7 @@ RDEPENDS:${PN} += "\
+     python3-logging \
+     python3-netclient \
+     python3-pkgutil \
++    python3-oslash \
+ "
+ 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.25.1
 
