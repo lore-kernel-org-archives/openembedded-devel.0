@@ -1,92 +1,169 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2EEC3C433EF
-	for <webhook@archiver.kernel.org>; Mon, 18 Jul 2022 16:13:53 +0000 (UTC)
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
- [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web08.29340.1658160831369736409
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CAE4EC43334
+	for <webhook@archiver.kernel.org>; Mon, 18 Jul 2022 18:31:53 +0000 (UTC)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com
+ [209.85.218.47])
+ by mx.groups.io with SMTP id smtpd.web12.31156.1658169112118170605
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Jul 2022 09:13:51 -0700
+ Mon, 18 Jul 2022 11:31:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Spvk7jw8;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id
- z12-20020a17090a7b8c00b001ef84000b8bso18690910pjc.1
+ dkim=pass header.i=@bgdev-pl.20210112.gappssmtp.com header.s=20210112
+ header.b=7sgnU2sE;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.218.47,
+ mailfrom: brgl@bgdev.pl)
+Received: by mail-ej1-f47.google.com with SMTP id va17so22956176ejb.0
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Jul 2022 09:13:51 -0700 (PDT)
+ Mon, 18 Jul 2022 11:31:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=zquPWz5VRVbUpK/IKv68HaeiR3MGTAuVuYeFmDDMCKU=;
-        b=Spvk7jw8kTWeL5JohNtGfwf3OOEdNn+y/9B05qi5yfwFRvD5tV+tY+yqK2woB1wq6Y
-         FngzCNA2aBjVCbaxjX+XqzJt2lGd25SC1BBbfy8KGWm5xuGYxl3MPdpFfVWl2P4EV2uj
-         MpKdtDn9jUOevChAvCKik70NggzLJGVJGy6ME2e7Ftn8L/8+k2cwaBXdMVc944Vg2h1O
-         LfhiKT2TNnuvNrSiGkk4Re+bHrxRLdg+jcR1H9RKskRiI+6wNb8egtzMPRhtTbVLEvzL
-         TBm3Xuzxb3SMYZnMU+PTrQRDYOg6I+byLQGXwIOVO2CiZ77IhBi7VO2Vfu4GlsSZen6U
-         KETg==
+        d=bgdev-pl.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:from:date:message-id:subject:to:cc;
+        bh=S9dIquvuWYlAaeD2N62wGTtBvKlG/yIDyCXD815oxwg=;
+        b=7sgnU2sEVCdtdVHg6XYPhmzVrEC2RfTzUkK1Y9qp09XCMSkKIxcL5DuBQmhUR/esxe
+         IUWem7OMeopJxvpb7kJvwGFKdAGXd1ol1jEcT4dPK7AaCKsoYx5wUix/DYANA2SKLXpi
+         cjGM8B1He/SHsleGkBVA2sNwIYwmn63GDrjchDe6CMXSjzLAf1dgxVw7Ows1sl3aM7jN
+         GdNJJiSSg5EnYjQsfbvhwHx+V0QJFt3GYbhI6ea2nCULu8vrIKlVwQENtm7nSqQvjzyn
+         ShUMnro7cpbB2oWw3eRboRqvxQOZO32ES95qZci29oSw2Ebffm3HZWjMz+i6BXdO4wXQ
+         ehLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=zquPWz5VRVbUpK/IKv68HaeiR3MGTAuVuYeFmDDMCKU=;
-        b=4EqSlgwMUeQIwF/NBVXnNW+enlA24To10umuMyWBLn4McLkitVvocQElOeMDRxMzy1
-         XyoTKy/jH0CD735KtxXaJJITM55oai7IDuKJmnQefE7fUfX693YMesql0ZfXeqb/Ou4x
-         lc+4UdMVwz7S4S0Bere9TW5ToM/kr3a9lRTZAAw5zTkDUZcOTiq+xYjPEMOI1vdpuDlN
-         igPp/iBADxRE3dGT9b4Gy9jR0rY5gAMEmcZCL8DjgQWA/nxxxIIPN9CeJXSccTkG8nku
-         1eOaKLvBmMX/9t9OyEM13cyhZhZSy82bGuUitRopd4ji0jhR4Kda6bAZhZxQUDjNxqKa
-         w+4g==
-X-Gm-Message-State: AJIora/ORNYEYLgD5TaIYkgz9IYaw6yo6/fRhvkqNh+rYfaU7Igffc4J
-	m+TxHNkHyjO9QkTCty5ljSI8KvFo22MneQ==
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+        bh=S9dIquvuWYlAaeD2N62wGTtBvKlG/yIDyCXD815oxwg=;
+        b=kpRFLERppauF0SHZHlWm4dbTtFk9CfU385OETytyJHn8DX/1uAWjzu9lykkNPlo5wv
+         JU8fMCUN6cPkqzXgoxcJVvPCaOua+mGXxF0xM9SrDpctAHYJIuz2PldnU53KEs2oD+mG
+         RBZSD16no8adPwAKdI8Vp+794r8A7ua6ZNMBbQFyQoTVVAw0dnwtWkFPpMdCFOA69HwK
+         lbPZ3t2gxHySjaX8MfXjtTdl+9jxtYO87yf38XF7OH14XOqGi5pfYVyxt8RMVw0omnUU
+         xMNg/AQ6BhFXMGHOaZoa6EJfxaF2oCDM6ME/as46KXIu6gg9F6UJlt14FQuW0kVEGnx1
+         Cl2w==
+X-Gm-Message-State: AJIora8bNZvAGhjlmwWu1aVGMVxR23EjlhqWooeHo+r1OxIT4v5mbAvf
+	pa5s1ijXzLECfOmBLEo9Lt8q0ccioljH2dRSTYT82w==
 X-Google-Smtp-Source: 
- AGRyM1sDkx8D07gemhCB2MDlrdOZoFFmr27SfRUP06niKl4z6xr3c0XFCGnKtfF8tEWrGh8Jvrtjbw==
-X-Received: by 2002:a17:902:7c88:b0:16c:5301:8a52 with SMTP id
- y8-20020a1709027c8800b0016c53018a52mr28940346pll.95.1658160830348;
-        Mon, 18 Jul 2022 09:13:50 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::3bff])
-        by smtp.gmail.com with ESMTPSA id
- u1-20020a170902bf4100b0016a058b7547sm9598882pls.294.2022.07.18.09.13.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 Jul 2022 09:13:49 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH] poco: Link with libatomic on mips
-Date: Mon, 18 Jul 2022 09:13:47 -0700
-Message-Id: <20220718161347.1861813-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.37.1
+ AGRyM1t7SZf3sClWPriNk9kUkl9VYq8RnBZW34KVv0jggvGEXKxRGWrSCfHS0MyoJYrqJL4SopJwEgxftdVbTjCOGOM=
+X-Received: by 2002:a17:907:7d8a:b0:72b:86ef:acf6 with SMTP id
+ oz10-20020a1709077d8a00b0072b86efacf6mr27078155ejc.101.1658169110129; Mon, 18
+ Jul 2022 11:31:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Mon, 18 Jul 2022 20:31:39 +0200
+Message-ID: 
+ <CAMRc=McXfAzcUrdTLWsHHEo8DyUwU1gUuFTBALwXpJCuA0CoEA@mail.gmail.com>
+Subject: [meta-zephyr] build broken with current oe-core master
+To: Patches and discussions about the oe-core layer
+ <openembedded-core@lists.openembedded.org>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Cc: Jon Mason <jon.mason@arm.com>,
+	=?UTF-8?B?RWlsw61zIE7DrSBGaGxhbm5hZ8OhaW4=?= <elizabeth.flanagan@huawei.com>,
+	Naveen Saini <naveen.kumar.saini@intel.com>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Jul 2022 16:13:53 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Jul 2022 18:31:53 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97881
+ https://lists.openembedded.org/g/openembedded-devel/message/97882
 
-mips compiler does not provide intrinsics for 64bit atomics, use
-libatomics to get them.
+Hi!
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-support/poco/poco_1.12.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+It seems that the zephyr build is currently broken with master (and
+master-next) for meta-zephyr samples:
 
-diff --git a/meta-oe/recipes-support/poco/poco_1.12.0.bb b/meta-oe/recipes-support/poco/poco_1.12.0.bb
-index 428d374569..c3b52c8885 100644
---- a/meta-oe/recipes-support/poco/poco_1.12.0.bb
-+++ b/meta-oe/recipes-support/poco/poco_1.12.0.bb
-@@ -67,6 +67,7 @@ EXTRA_OECMAKE:append:class-native = " -DPOCO_UNBUNDLED=OFF"
- EXTRA_OECMAKE:append = " -DCMAKE_SKIP_RPATH=ON"
- 
- LDFLAGS:append:riscv32 = "${@bb.utils.contains('PACKAGECONFIG', 'Prometheus', ' -Wl,--no-as-needed -latomic -Wl,--as-needed', '', d)}"
-+LDFLAGS:append:mips = "${@bb.utils.contains('PACKAGECONFIG', 'Prometheus', ' -Wl,--no-as-needed -latomic -Wl,--as-needed', '', d)}"
- 
- python populate_packages:prepend () {
-     poco_libdir = d.expand('${libdir}')
--- 
-2.37.1
+Build Configuration:
+BB_VERSION           = "2.0.1"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "arm-yocto-eabi"
+MACHINE              = "arduino-nano-33-ble"
+DISTRO               = "zephyr"
+DISTRO_VERSION       = "1.0"
+TUNE_FEATURES        = "armv7m cortexm4"
+TARGET_FPU           = "soft"
+meta
+meta-poky            = "HEAD:67b9303d72c14d2aedb3f0313cb7b27dfb1499d3"
+meta-zephyr-core
+meta-zephyr-bsp      = "master:6d184ce6b66349a87dc114c7ab59d0dd3bf92785"
+meta-oe
+meta-python          = "master:cb7d3afba838f159a5df4ef5091dba8e770159a8"
 
+Initialising tasks: 100%
+|#########################################################################################################|
+Time: 0:00:01
+Sstate summary: Wanted 101 Local 66 Mirrors 0 Missed 35 Current 98
+(65% match, 82% complete)
+NOTE: Executing Tasks
+ERROR: gcc-runtime-12.1.0-r0 do_configure:
+ExecutionError('/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/temp/run.do_configure.2702410',
+1, None, None)
+ERROR: Logfile of failure stored in:
+/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/temp/log.do_configure.2702410
+Log data follows:
+| DEBUG: Executing python function extend_recipe_sysroot
+| NOTE: Direct dependencies are
+['/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-core/newlib/newlib_4.2.0.bb:do_populate_sysroot',
+'/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/binutils/binutils-cross_2.38.bb:do_populate_sysroot',
+'/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gcc/gcc-cross_12.1.bb:do_populate_sysroot',
+'/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gcc/libgcc_12.1.bb:do_populate_sysroot',
+'/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/libtool/libtool-native_2.4.7.bb:do_populate_sysroot',
+'/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/quilt/quilt-native_0.67.bb:do_populate_sysroot',
+'/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-extended/texinfo-dummy-native/texinfo-dummy-native.bb:do_populate_sysroot',
+'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-core/zlib/zlib_1.2.12.bb:do_populate_sysroot',
+'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/autoconf/autoconf_2.71.bb:do_populate_sysroot',
+'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/automake/automake_1.16.5.bb:do_populate_sysroot',
+'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/flex/flex_2.6.4.bb:do_populate_sysroot',
+'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gnu-config/gnu-config_git.bb:do_populate_sysroot',
+'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/patch/patch_2.7.6.bb:do_populate_sysroot',
+'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/pseudo/pseudo_git.bb:do_populate_sysroot',
+'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-extended/xz/xz_5.2.5.bb:do_populate_sysroot',
+'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-extended/zstd/zstd_1.5.2.bb:do_populate_sysroot',
+'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-support/gmp/gmp_6.2.1.bb:do_populate_sysroot',
+'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-support/libmpc/libmpc_1.2.1.bb:do_populate_sysroot',
+'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-support/mpfr/mpfr_4.1.0.bb:do_populate_sysroot']
+| NOTE: Installed into sysroot: []
+| NOTE: Skipping as already exists in sysroot: ['newlib',
+'binutils-cross-arm', 'gcc-cross-arm', 'libgcc', 'libtool-native',
+'quilt-native', 'texinfo-dummy-native', 'zlib-native',
+'autoconf-native', 'automake-native', 'flex-native',
+'gnu-config-native', 'patch-native', 'pseudo-native', 'xz-native',
+'zstd-native', 'gmp-native', 'libmpc-native', 'mpfr-native',
+'attr-native', 'gettext-minimal-native', 'm4-native']
+| DEBUG: Python function extend_recipe_sysroot finished
+| DEBUG: Executing shell function autotools_preconfigure
+| DEBUG: Shell function autotools_preconfigure finished
+| DEBUG: Executing python function autotools_aclocals
+| DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common',
+'arm-32', 'arm-eabi', 'common']
+| DEBUG: Python function autotools_aclocals finished
+| DEBUG: Executing python function gcc_multilib_setup
+| DEBUG: Python function gcc_multilib_setup finished
+| DEBUG: Executing python function extract_stashed_builddir
+| DEBUG: sed -e
+'s:^[^/]*/:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/gcc-12.1.0/build.arm-yocto-eabi.arm-yocto-eabi/:g'
+/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/sysroots-components/x86_64/gcc-stashed-builddir-arm-yocto-eabi/fixmepath
+| xargs sed -i -e
+'s:FIXMESTAGINGDIRTARGET:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/recipe-sysroot:g;
+s:FIXMESTAGINGDIRHOST:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/recipe-sysroot-native:g'
+-e 's:FIXME_PSEUDO_SYSROOT:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/sysroots-components/x86_64/pseudo-native:g'
+-e 's:FIXME_HOSTTOOLS_DIR:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/hosttools:g'
+-e 's:FIXME_PKGDATA_DIR:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/pkgdata/arduino-nano-33-ble:g'
+-e 's:FIXME_PSEUDO_LOCALSTATEDIR:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/pseudo/:g'
+-e 's:FIXME_LOGFIFO:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/temp/fifo.2702410:g'
+| DEBUG: Python function extract_stashed_builddir finished
+| DEBUG: Executing shell function do_configure
+| /home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/recipe-sysroot-native/usr/bin/arm-yocto-eabi/../../libexec/arm-yocto-eabi/gcc/arm-yocto-eabi/12.1.0/ld:
+cannot find crt0.o: No such file or directory
+| collect2: error: ld returned 1 exit status
+| WARNING: exit code 1 from a shell command.
+ERROR: Task (/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gcc/gcc-runtime_12.1.bb:do_configure)
+failed with exit code '1'
+NOTE: Tasks Summary: Attempted 765 tasks of which 746 didn't need to
+be rerun and 1 failed.
+
+Summary: 1 task failed:
+  /home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gcc/gcc-runtime_12.1.bb:do_configure
+Summary: There was 1 ERROR message, returning a non-zero exit code.
+
+I don't have any ideas but it looks like something related to the machine tune?
+
+Bart
 
