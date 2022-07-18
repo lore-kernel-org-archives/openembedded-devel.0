@@ -1,285 +1,252 @@
-Return-Path: <andrej.valek@siemens.com>
+Return-Path: <richard.purdie@linuxfoundation.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5FC45C433EF
-	for <webhook@archiver.kernel.org>; Mon, 18 Jul 2022 06:19:40 +0000 (UTC)
-Received: from EUR02-AM5-obe.outbound.protection.outlook.com
- (EUR02-AM5-obe.outbound.protection.outlook.com [40.107.0.64])
- by mx.groups.io with SMTP id smtpd.web12.24158.1658125174189909456
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 81229C433EF
+	for <webhook@archiver.kernel.org>; Mon, 18 Jul 2022 06:52:30 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com
+ [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.web08.24388.1658127149739064025
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Jul 2022 23:19:34 -0700
+ Sun, 17 Jul 2022 23:52:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@siemens.com header.s=selector2 header.b=x3I8NSUh;
- spf=pass (domain: siemens.com, ip: 40.107.0.64,
- mailfrom: andrej.valek@siemens.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Sl4nF2XHNOAGIeKdhL/HNh/LZXPitoASIN5ZN2GA6tfHWN5crHRQo4NFDlTHMk/+xh/cFKCMmlUXqwmcOjmxtUOVN7JjlZ7z9FsbgTKCrpk3aYv31IId5v2LCipANW1ViAf92ue8eOgd8Y8vqM9sWnM1aXlUfma4vHmOg5cd83h/OUvKXMj7ohqF1IHXP+RVnxjkb8KjEFMDu8bDqM73mDHvaAjMKMxxYdrw80pllXkk+QILBPx57Vd3pRL2Ju/9GtotPOFJYiF1kXbptVfOdmwglQggSdls0UJ7REntWKxlJSps/3O2JEBvzjh+JcLrfKCFfk9QRNz1yi15ObOJAg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+yFhAQNwPlJzi2gKpdn5BLzvTQK+PXd1WGDnbmdFZXI=;
- b=gCa7A1/GowNEP9D93/M3mCIBEcuLnGTHDFkunO64fc507nKdEaQLkFNmfUSnI0aQPnqwjNEffBD6svgs6wK2dzp46F9bEsAgGc3QBKX8iqCeTkmChUURJGuCPxOOVB5QIt9bgl0Y6mE+n+GSX5BYIVqEpCcSTMMlzk3qQvSM0DMzAr/6rRN04qOJo0X6aRysktWYVWQcF2xo3H7ei4De2DL2pzK3iEGX6NLtN0Rt5EaD17jDt1uoSdAns+oWBWTZfbSNAh3pD2av04If8YhSGbYsYcPXe9dnrJShRhUqubmbtnixP3ZH58kyM+LZn3AuhIr6hzETN1OPzr+OHccO3g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+yFhAQNwPlJzi2gKpdn5BLzvTQK+PXd1WGDnbmdFZXI=;
- b=x3I8NSUhz+D5nFXVSFt5Scv+k4f9GtMabG2xFRi+TiECfLbGFNm+lUsJru8zw4u6I9hcFeaLYtWGAI//8xxWgyP3RkDxYmdOG8KRAap8+O5OQblyAmHOJm5Fb/Vke9Bh+Th11MyXVjFVtouTUOwwonVCcntuVd7FHFGRrf8OkI4HDCFho+pFvlA0M9KXGoIBqkVtoQK4DyUnbXkWD4+3ELjF29aMvKKl0OSjYmcFUdcnWd/M26vhJEbdnhvElPHzkuN0IJ777T4M8txxtstYWCOZt4WyXz4YtoT8z9S2Zosa8BqgOfqn7zb+puFEBoKutLiMHzMsedkgggioM6pNtw==
-Received: from DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:138::9)
- by AS4PR10MB6111.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:583::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5438.23; Mon, 18 Jul
- 2022 06:19:25 +0000
-Received: from DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::e5c4:b2fc:cecd:ee75]) by DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::e5c4:b2fc:cecd:ee75%5]) with mapi id 15.20.5438.023; Mon, 18 Jul 2022
- 06:19:25 +0000
-From: "Valek, Andrej" <andrej.valek@siemens.com>
-To: "raj.khem@gmail.com" <raj.khem@gmail.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe][PATCH] poco: upgrade 1.11.3 -> 1.12.0
-Thread-Topic: [oe] [meta-oe][PATCH] poco: upgrade 1.11.3 -> 1.12.0
-Thread-Index: AQHYlrRfqrFANvVs7kusnKDMjnG4NK1/qV0AgAQF4AA=
-Date: Mon, 18 Jul 2022 06:19:25 +0000
-Message-ID: <816056a8fb014214e871fe8881ad5065b5f848de.camel@siemens.com>
-References: <20220713123014.1080802-1-andrej.valek@siemens.com>
-	 <CAMKF1sr=jVfb7b7GC8QZuK+J2gUMJoP5e7rQZWr1+wgEBS4REg@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1sr=jVfb7b7GC8QZuK+J2gUMJoP5e7rQZWr1+wgEBS4REg@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.40.4 (3.40.4-5.fc34) 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 35ffa4b6-3a91-4fcc-39fb-08da68857681
-x-ms-traffictypediagnostic: AS4PR10MB6111:EE_
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- nZbsdvJFx5jPZ2N8TTvHszDDmd8JJa5ads4Lj7UfgWOAJgtOIWeqADJsLGvagJLWrtFC9RiRJ+UbGPGzAfjkL3z/jIX9LGhuB+Q+t607fX+LaKMiDV1Mc7W3hE+csyhjEbaUk8SUk+I+frW68RHRu6GwASXanS1XJHnsNLM5FZiTb1t7WysHFo24tK+tsKQJiw9ouXUXhQJH1uOQb5TipE9C3pcsDPPoc5h7CPQtqVM+R6xuT92A7oZROSp9yG2duy6pk3TpKVkRdHvAQt/ghEPzplGeEYHoCRW1DLR6J89+PnV0sEu3zpEuQ6Q87Zs655qOJ6dJ7L+3NE23pLciyrhHHEjPP+PDkMkp+LG3ds8IVRS8LMpbpsPw4d2Hk81ivD2PUhCOI4e+LRWAfVaUz7/Vev0kFpAtE8sxaCBX6Z+CyfJgIgbuNpzqx0SZKW1QUNm1+VM4LTcP16iXo/QAmicErbnHbqhW9jbzN4R5y35C+m0+3G/T0wzrH6TrUf2zESSDmBkafEzSj5RSsueNK+rZ+Px5TDZOijN1EVGTL1W18/8V6iwCcLOET7s/vewx3YqN4UUEFgv+57uOru+JbuENFgcIQAnNNa5scc5OtSov9UtT2LwZNPoxmZm12i3kw/Bbho5Fw14faDzsgv7POxVEjzlLLAUOY/fC2PsF1edxyntd0FgIzgL6PabgCAKRLQ92N5qY1U9mdg3SmvXvK/woH6Op5tUPMJz/qfLN940u0ODVJSVKjaLKxkQxOWpVDXcnSb+MzBPiQkAVPkjTn4/R6qGi4KSPvle46OhrAfoQAMscVQFiXEuIj1aOXdeWX8DxyabCv4OK75NLQwSQ1K5FWXUfa3PbhmEbfvJgYMkqPjWaanoNNV4C8QqH6R1W
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230016)(4636009)(376002)(396003)(346002)(39860400002)(136003)(366004)(186003)(83380400001)(82960400001)(122000001)(38070700005)(38100700002)(41300700001)(6506007)(6512007)(316002)(26005)(6916009)(478600001)(36756003)(71200400001)(86362001)(6486002)(966005)(2906002)(2616005)(4326008)(66476007)(64756008)(66446008)(91956017)(76116006)(66946007)(66556008)(8936002)(8676002)(5660300002)(53546011);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?c2VGUDBENEZiVXNzRXJwdEQ3UnJkVUxoS2NBN05WcTQvdHY0bFkwZjJXVTdx?=
- =?utf-8?B?dHc1SkJuUVRyck8ra2U4dzFkeEh1MW1aeG4xdVZOOHBmV3ZqOEdnL0VFOCtN?=
- =?utf-8?B?MzFwNmxNNVBqTGtsK1l4cmF6TUxlZm9Ya2ZsNXlCK2pES2tXc0ljNTlFclNs?=
- =?utf-8?B?aGc1ekhQa3paOXVZOXYrdm95RXhxZW9jT1o4WVplZlBlNVYzMi90YkduenlR?=
- =?utf-8?B?em9hZFMwWjJMaEhacHJHZ0F4QnBxb0RiUFVxaWFPWkhzaWVmdzNxYmw3M2NF?=
- =?utf-8?B?ajA4SE9Ta0I3cVFjMFpFZUZGR0VidVlzRW94MWJKL1RkY2N0dG5iZ1EvUk9F?=
- =?utf-8?B?VnRPR2NmTHlXRTlmZVZ2cEt3UEJUUHd0QmhhYkhUT0JCU3NaUGxrQ3UzN1Np?=
- =?utf-8?B?OXlEbXI2eXg3KytvaElQSHJ1SW5kSU10ZDJyYkdXTHRMckVsM2hmSjFkVGlr?=
- =?utf-8?B?S1htY0xKWmFQM0VnUHVJdFhhZFlNQ1ZmYkNkUUtMTGtYdStCUjhMSDRmSHYx?=
- =?utf-8?B?MkVoK01zdHZvaVpRdWNzYkc2ODBNamFrY21OZjdSemFkT0QwNEo5K1k2eU9F?=
- =?utf-8?B?SGRzdTJTbmJJaHA2YS84Sm1JeDZxQzI4WWZJT3BhZXp6eko5c1BveWFicm8z?=
- =?utf-8?B?MlFVb0xXTHQvcUtZWGc5VCtiM01jenpOM1lhcDU2ajlsNFkyS0RESm1DNTJD?=
- =?utf-8?B?ZHg4RVVqcmtTTGdFa3JVYnpsNVAyOWgxaUU2Y2hvUWN6UzJGSkFiY2U1THdL?=
- =?utf-8?B?RmRWc3VnZUpwcEwzZDdMR0d2bk9LODRkRElVL3JMR2tCZTBUM1lQa251Vi82?=
- =?utf-8?B?UCtKeVRkTWNCS0Y5Vk5sZkk1TFYwYzVSc2paQ1NGZng3N2ZGWHB3dkRjcEwv?=
- =?utf-8?B?b3pJdlF3ekdXdFBWdXNwMmQ3ZktMMDdtd0FiSXlXdTR4Q2V5cVc0eCtNZzI3?=
- =?utf-8?B?UjFNenhPbjBHM2FPa1RqN2tjZTh4RFFDRzVGNjl1UjNmNnZUdnk1a1FhcFV2?=
- =?utf-8?B?Q1hQUmVadU03V082b2lZYkt0S2Z5MGFzMU15ZWxyV2UyM3MwaGhyNVkxeDdF?=
- =?utf-8?B?bTRZRk5pWlpOcDdaT3pBNTlDcnlFT1NDNXpSNUtwTEV6NVJSNlQ4OTlpblAx?=
- =?utf-8?B?dTBEL1JKcFJ4RFhDZm5JM1U1YkVJaXZiZVUrbXgrRXNhQVpIT1UwYVlySUt2?=
- =?utf-8?B?ZU5CcjJsQmdtbU02UmFETHo4U1VRNnBKbVFTS1diOGJQOWpZVHhkUFlWSUN3?=
- =?utf-8?B?bUdOd2xtWTlnbkd3aUJCTFRTcGdpTE1tY2JyZkp1VlR4eGQ3Q20xUWQ5T1VW?=
- =?utf-8?B?djVJMndJVnVZV0toS1cxd3hUNXkyL24zQTBhYXVUMTZXWkw5V2NrWFdpclQ4?=
- =?utf-8?B?ejliRytYRW0yY0RpYjk3YmdkeWhuK2Q3STlqVGxxaU1nZmRLZzlSZkh1ajFP?=
- =?utf-8?B?bUN2QlRibU1jS0FERHR4ZEtTc29Xd1JvaVBaZ0hIS2ZJbnowbEplZm96UE12?=
- =?utf-8?B?TWw2UHIwVzc3eFNLS0k0WHZNMEdCQk9qa1FCbG41cVJyOXc3aXVIUlFsOHp3?=
- =?utf-8?B?eHZVemRoWnRGWG1UQ3FKRGZyUTI0Q0o2S2RCdHNwNktQYkF6ZmRoVXBITGF1?=
- =?utf-8?B?aUZYcTlUc2RobU1yUi9wVzE4VFhUUk84cmRzTVZLK1lLelJtRUkxV0tDZjkz?=
- =?utf-8?B?aHZ6NHhRa3h2dmRTVzFaWWtSTkUvc0hZOU1vSXZCOHAxRlRQYXdoSWVGc1lt?=
- =?utf-8?B?TkRzVFE5QjFHaGlWNmgvR0tETjFqaldKVnU4ZE1CMmNVUk01VFBSQUpkT1ZX?=
- =?utf-8?B?YWhHMHB1VHhjaFd0akM2bU1KRUMyTXAwTFRIMmM3ZmRiV1YxZm5DNDRTZit3?=
- =?utf-8?B?Q2RkOHNxTFAvY3M4YytFL0d1UHVLOUEwREtsdFozYU1USDNQSGdmSk5hM1Bu?=
- =?utf-8?B?dmsya0dJS3BrNCsvZFlSQ054cE5rYWdoNXJUa0Q4a3ZvSXBRQlorRXRqYzVJ?=
- =?utf-8?B?N20vOU5jNWk5bU94elRNQzZjVm9qTmdrSHNYY3JVS2lsMTNvMHcxMndaR25V?=
- =?utf-8?B?TUVGU2dlU2J0bWwrMm15YXdXOGpiYVdWdngvNkwvbnluTGNuYTA1cjJMNmxT?=
- =?utf-8?B?cm01dGtEcjUzK3FwRllKclJnWU5TaEI4MDFRR01PKzJFZ0poQ21RU3pjY3Z0?=
- =?utf-8?B?aXc9PQ==?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <E1C4ECA03DA3FC4B8D923A5FD6C663CB@EURPRD10.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+ dkim=pass header.i=@linuxfoundation.org header.s=google header.b=c83SjvIZ;
+ spf=pass (domain: linuxfoundation.org, ip: 209.85.221.44,
+ mailfrom: richard.purdie@linuxfoundation.org)
+Received: by mail-wr1-f44.google.com with SMTP id n12so2770713wrc.8
+        for <openembedded-devel@lists.openembedded.org>;
+ Sun, 17 Jul 2022 23:52:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linuxfoundation.org; s=google;
+        h=message-id:subject:from:to:date:content-transfer-encoding
+         :user-agent:mime-version;
+        bh=rC7bu8agi3njbG5Ha5CQP2Z2CBnPdN/nKgHQPr5KnkM=;
+        b=c83SjvIZrKXeyTmLbY4krYnbO+U9037BotQbvO0ydhYJwQMYhR0ZN0QS2pGvzFEI13
+         zq1Zc+lLqkJM+qrGdFv/XQy6XnRKKsPLUl1CY2w71AU+6eBcglbrDfC6gLtmOIB3sV2z
+         0kPhcfZsClywk7DhLHANagLZGmTtol2+gqeNI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:subject:from:to:date
+         :content-transfer-encoding:user-agent:mime-version;
+        bh=rC7bu8agi3njbG5Ha5CQP2Z2CBnPdN/nKgHQPr5KnkM=;
+        b=NZvUcAh354L4lteJRijHH6oO0TKcL6Zsz28sKv9j/+PxTyvheBGdID7tX/MkIyz3Kt
+         VDVCUUKTlFC5Kg3v0B7aNsZQwyB0nxT6PG3pyWmDddGKRlc3yJHKXnpcLPIMSfJLez8T
+         yJODUooyDnw4Q1BPoCH3UqRTT+vbJ/0kyy6OQmOj+6Uei0+OFWT/NiGKGbsikduF6rb1
+         BlIiHTfKMaaQuqw5EUDMMDtD6DWSf05il4IVmsSBPJI1264OzoJu37DrqeGAUDle+XtA
+         iVcZG/hcFTUNHlHuQbVFN0Oz0uthVYKs2/LesvadbsC7RmSxfafM+cxoSho1GsDt5oIc
+         JvjA==
+X-Gm-Message-State: AJIora/qvZFmM1XRt7Uy0r2mcDtCviuQ0SFq8jSje+jplgdrzyDKdC5i
+	IybROgoyXx9itbd243/L/1DzAZFPdZX6rQ==
+X-Google-Smtp-Source: 
+ AGRyM1sRH+3Nr3fda1mp2GBSj9aBsGsPB9t2w8zoITtTwjed31ImbQueoTI/qaBohCWiAvHCrSElcg==
+X-Received: by 2002:a5d:47ab:0:b0:21d:b2b1:59b1 with SMTP id
+ 11-20020a5d47ab000000b0021db2b159b1mr21023991wrb.99.1658127147512;
+        Sun, 17 Jul 2022 23:52:27 -0700 (PDT)
+Received: from ?IPv6:2001:8b0:aba:5f3c:7b9:c151:626:cc65?
+ ([2001:8b0:aba:5f3c:7b9:c151:626:cc65])
+        by smtp.gmail.com with ESMTPSA id
+ y16-20020adfe6d0000000b00213ba3384aesm9865116wrm.35.2022.07.17.23.52.26
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 17 Jul 2022 23:52:26 -0700 (PDT)
+Message-ID: 
+ <44a7b736269f3ea568febae5f0d16033347cfe61.camel@linuxfoundation.org>
+Subject: buildpaths warnings in meta-openembedded
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Mon, 18 Jul 2022 07:52:26 +0100
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.44.1-0ubuntu1 
 MIME-Version: 1.0
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DB8PR10MB3977.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 35ffa4b6-3a91-4fcc-39fb-08da68857681
-X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Jul 2022 06:19:25.4154
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 
- SUztgFu0X5eGTQ1D2aOoy10skXC8fO2JCkXSeVwRsXxMqHHHQYh4xOXuJLtrSUcySzh+M3SHRnbimoPyFdo3GqhAHxTLdJn1WLA6EA+9gaI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR10MB6111
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Jul 2022 06:19:40 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Jul 2022 06:52:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97866
+ https://lists.openembedded.org/g/openembedded-devel/message/97867
 
-VGhhbmtzLA0KDQpUbyBiZSBob25lc3QsIEkgZGlkbid0IHRlc3QgaXQgb24gdGhpcyBhcmNoaXRl
-Y3R1cmUuIEl0J3MgZmluZSwgdGhhdA0KeW91J3ZlIGZpeGVkIGl0IGFscmVhZHkNCmh0dHBzOi8v
-Z2l0aHViLmNvbS9vcGVuZW1iZWRkZWQvbWV0YS1vcGVuZW1iZWRkZWQvY29tbWl0L2M3NDE1MjMz
-MDc0YzQ2N2YxMmQ3MTAwNjM1NDk5YTNlMWM1MGZiN2MNCi4NCg0KQnR3LCBuZXcgUHBvY28gdmVy
-c2lvbiAoMS4xMi4xKSBoYXZlIGJlZW4gcmVsZWFzZWQsIGJ1dCBpdCBoYXMgb25seSAyDQpmaXhl
-cywgd2hpY2ggd2UgaGF2ZSBwYXRjaGVkIGFscmVhZHkuDQoNClJlZ2FyZHMsDQpBbmRyZWoNCg0K
-T24gRnJpLCAyMDIyLTA3LTE1IGF0IDEyOjUzIC0wNDAwLCBLaGVtIFJhaiB3cm90ZToNCj4gaXQg
-bmVlZHMgdG8gbGluayB0byBsaWJhdG9taWMgb24gcnYzMiBzZWUNCj4gDQo+IGh0dHBzOi8vZXJy
-b3JzLnlvY3RvcHJvamVjdC5vcmcvRXJyb3JzL0RldGFpbHMvNjYwMzUxLw0KPiANCj4gT24gV2Vk
-LCBKdWwgMTMsIDIwMjIgYXQgODozMCBBTSBBbmRyZWogVmFsZWsgPGFuZHJlai52YWxla0BzaWVt
-ZW5zLmNvbT4NCj4gd3JvdGU6DQo+ID4gDQo+ID4gwqAtIHN3aXRjaCBmcm9tIFBDUkUgLT4gUENS
-RTINCj4gPiDCoC0gYWRkIFByb21ldGhldXMgbGlicmFyeQ0KPiA+IMKgLSBhZGQgb3B0aW9uIHRv
-IGVuYWJsZS9kaXNhYmxlIEFjdGl2ZVJlY29yZCAoZGlzYWJsZWQgYnkgZGVmYXVsdCkNCj4gPiAN
-Cj4gPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZWogVmFsZWsgPGFuZHJlai52YWxla0BzaWVtZW5zLmNv
-bT4NCj4gPiAtLS0NCj4gPiDCoC4uLi8wMDAxLWZpeC11bmJ1bmRsZWQtUENSRTItZGVwZW5kZW5j
-eS5wYXRjaCB8IDI1ICsrKysrKysrKysrKysNCj4gPiDCoC4uLjAwMDItcmVtb3ZlLXByb3ZpZGVy
-cy11bml0aWFsaXphdGlvbi5wYXRjaCB8IDM1DQo+ID4gKysrKysrKysrKysrKysrKysrKw0KPiA+
-IMKgLi4uL3BvY28ve3BvY29fMS4xMS4zLmJiID0+IHBvY29fMS4xMi4wLmJifcKgwqAgfCAxMSAr
-KysrLS0NCj4gPiDCoDMgZmlsZXMgY2hhbmdlZCwgNjggaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlv
-bnMoLSkNCj4gPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9w
-b2NvL3BvY28vMDAwMS1maXgtDQo+ID4gdW5idW5kbGVkLVBDUkUyLWRlcGVuZGVuY3kucGF0Y2gN
-Cj4gPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wb2NvL3Bv
-Y28vMDAwMi1yZW1vdmUtDQo+ID4gcHJvdmlkZXJzLXVuaXRpYWxpemF0aW9uLnBhdGNoDQo+ID4g
-wqByZW5hbWUgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvcG9jby97cG9jb18xLjExLjMuYmIgPT4N
-Cj4gPiBwb2NvXzEuMTIuMC5iYn0gKDg5JSkNCj4gPiANCj4gPiBkaWZmIC0tZ2l0IGEvbWV0YS1v
-ZS9yZWNpcGVzLXN1cHBvcnQvcG9jby9wb2NvLzAwMDEtZml4LXVuYnVuZGxlZC0NCj4gPiBQQ1JF
-Mi1kZXBlbmRlbmN5LnBhdGNoIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvcG9jby9wb2NvLzAw
-MDEtZml4LQ0KPiA+IHVuYnVuZGxlZC1QQ1JFMi1kZXBlbmRlbmN5LnBhdGNoDQo+ID4gbmV3IGZp
-bGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwMDAuLjFhOWQyM2NlZQ0KPiA+IC0tLSAv
-ZGV2L251bGwNCj4gPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wb2NvL3BvY28vMDAw
-MS1maXgtdW5idW5kbGVkLVBDUkUyLQ0KPiA+IGRlcGVuZGVuY3kucGF0Y2gNCj4gPiBAQCAtMCww
-ICsxLDI1IEBADQo+ID4gK0Zyb20gZjA0OTg5OGM4YmYwNThlZDE4N2RlOGU1ZmFiMjBhYmVhYWIx
-ZjNiNiBNb24gU2VwIDE3IDAwOjAwOjAwDQo+ID4gMjAwMQ0KPiA+ICtGcm9tOiBBbGV4IEZhYmlq
-YW5pYyA8YWxleEBwb2NvcHJvamVjdC5vcmc+DQo+ID4gK0RhdGU6IFNhdCwgOSBKdWwgMjAyMiAx
-OToxMzowNCArMDIwMA0KPiA+ICtTdWJqZWN0OiBbUEFUQ0hdIGZpeChjbWFrZSk6IFBvY29Gb3Vu
-ZGF0aW9uQ29uZmlnLmNtYWtlIHNob3VsZCBub3cNCj4gPiBjaGVjayBmb3INCj4gPiArIFBDUkUy
-ICMzNjc3DQo+ID4gKw0KPiA+ICtVcHN0cmVhbS1TdGF0dXM6IEJhY2twb3J0DQo+ID4gW2h0dHBz
-Oi8vZ2l0aHViLmNvbS9wb2NvcHJvamVjdC9wb2NvL2lzc3Vlcy8zNjc3XQ0KPiA+ICsNCj4gPiAr
-LS0tDQo+ID4gKyBGb3VuZGF0aW9uL2NtYWtlL1BvY29Gb3VuZGF0aW9uQ29uZmlnLmNtYWtlIHwg
-MiArLQ0KPiA+ICsgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0p
-DQo+ID4gKw0KPiA+ICtkaWZmIC0tZ2l0IGEvRm91bmRhdGlvbi9jbWFrZS9Qb2NvRm91bmRhdGlv
-bkNvbmZpZy5jbWFrZQ0KPiA+IGIvRm91bmRhdGlvbi9jbWFrZS9Qb2NvRm91bmRhdGlvbkNvbmZp
-Zy5jbWFrZQ0KPiA+ICtpbmRleCA0NmMyZDNmYzAwLi44MmM1Nzg4OTQwIDEwMDY0NA0KPiA+ICst
-LS0gYS9Gb3VuZGF0aW9uL2NtYWtlL1BvY29Gb3VuZGF0aW9uQ29uZmlnLmNtYWtlDQo+ID4gKysr
-KyBiL0ZvdW5kYXRpb24vY21ha2UvUG9jb0ZvdW5kYXRpb25Db25maWcuY21ha2UNCj4gPiArQEAg
-LTIsNyArMiw3IEBAIGlmKEBQT0NPX1VOQlVORExFREApDQo+ID4gK8KgwqDCoMKgwqDCoCBpbmNs
-dWRlKENNYWtlRmluZERlcGVuZGVuY3lNYWNybykNCj4gPiArwqDCoMKgwqDCoMKgIGxpc3QoQVBQ
-RU5EIENNQUtFX01PRFVMRV9QQVRIICIke0NNQUtFX0NVUlJFTlRfTElTVF9ESVJ9IikNCj4gPiAr
-wqDCoMKgwqDCoMKgIGZpbmRfZGVwZW5kZW5jeShaTElCIFJFUVVJUkVEKQ0KPiA+ICstwqDCoMKg
-wqDCoCBmaW5kX2RlcGVuZGVuY3koUENSRSBSRVFVSVJFRCkNCj4gPiArK8KgwqDCoMKgwqAgZmlu
-ZF9kZXBlbmRlbmN5KFBDUkUyIFJFUVVJUkVEKQ0KPiA+ICsgZW5kaWYoKQ0KPiA+ICsNCj4gPiAr
-IGluY2x1ZGUoIiR7Q01BS0VfQ1VSUkVOVF9MSVNUX0RJUn0vUG9jb0ZvdW5kYXRpb25UYXJnZXRz
-LmNtYWtlIikNCj4gPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvcG9jby9w
-b2NvLzAwMDItcmVtb3ZlLXByb3ZpZGVycy0NCj4gPiB1bml0aWFsaXphdGlvbi5wYXRjaCBiL21l
-dGEtb2UvcmVjaXBlcy1zdXBwb3J0L3BvY28vcG9jby8wMDAyLXJlbW92ZS0NCj4gPiBwcm92aWRl
-cnMtdW5pdGlhbGl6YXRpb24ucGF0Y2gNCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGlu
-ZGV4IDAwMDAwMDAwMC4uN2QyNGI3OWYxDQo+ID4gLS0tIC9kZXYvbnVsbA0KPiA+ICsrKyBiL21l
-dGEtb2UvcmVjaXBlcy1zdXBwb3J0L3BvY28vcG9jby8wMDAyLXJlbW92ZS1wcm92aWRlcnMtDQo+
-ID4gdW5pdGlhbGl6YXRpb24ucGF0Y2gNCj4gPiBAQCAtMCwwICsxLDM1IEBADQo+ID4gK0Zyb20g
-Yzk3NmMzMmU1MjQ5Y2I4YTI0MzNlN2FiZmEwOTVjMWZlOGRjNGY4ZSBNb24gU2VwIDE3IDAwOjAw
-OjAwDQo+ID4gMjAwMQ0KPiA+ICtGcm9tOiBBbGV4IEZhYmlqYW5pYyA8YWxleEBwb2NvcHJvamVj
-dC5vcmc+DQo+ID4gK0RhdGU6IFdlZCwgMTMgSnVsIDIwMjIgMTI6NTM6NTIgKzAyMDANCj4gPiAr
-U3ViamVjdDogW1BBVENIXSBmaXgoT3BlblNTTEluaXRpYWxpemVyKTogcmVtb3ZlIHByb3ZpZGVy
-cw0KPiA+IHVuaXRpYWxpemF0aW9uDQo+ID4gKyAjMzU2MiAjMzU2Nw0KPiA+ICsNCj4gPiArVXBz
-dHJlYW0tU3RhdHVzOiBCYWNrcG9ydA0KPiA+IFtodHRwczovL2dpdGh1Yi5jb20vcG9jb3Byb2pl
-Y3QvcG9jby9pc3N1ZXMvMzU2Ml0NCj4gPiArDQo+ID4gKy0tLQ0KPiA+ICsgQ3J5cHRvL3NyYy9P
-cGVuU1NMSW5pdGlhbGl6ZXIuY3BwIHwgMTIgLS0tLS0tLS0tLS0tDQo+ID4gKyAxIGZpbGUgY2hh
-bmdlZCwgMTIgZGVsZXRpb25zKC0pDQo+ID4gKw0KPiA+ICtkaWZmIC0tZ2l0IGEvQ3J5cHRvL3Ny
-Yy9PcGVuU1NMSW5pdGlhbGl6ZXIuY3BwDQo+ID4gYi9DcnlwdG8vc3JjL09wZW5TU0xJbml0aWFs
-aXplci5jcHANCj4gPiAraW5kZXggNDY3OGQyMjI5OS4uYzUzN2MzZjljMiAxMDA2NDQNCj4gPiAr
-LS0tIGEvQ3J5cHRvL3NyYy9PcGVuU1NMSW5pdGlhbGl6ZXIuY3BwDQo+ID4gKysrKyBiL0NyeXB0
-by9zcmMvT3BlblNTTEluaXRpYWxpemVyLmNwcA0KPiA+ICtAQCAtMTU3LDE4ICsxNTcsNiBAQCB2
-b2lkIE9wZW5TU0xJbml0aWFsaXplcjo6dW5pbml0aWFsaXplKCkNCj4gPiArICNlbmRpZg0KPiA+
-ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGRlbGV0ZSBbXSBfbXV0ZXhlczsNCj4gPiAr
-ICNlbmRpZg0KPiA+ICstDQo+ID4gKy0jaWYgT1BFTlNTTF9WRVJTSU9OX05VTUJFUiA+PSAweDMw
-MDAwMDAwTA0KPiA+ICstwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgT1NTTF9QUk9WSURFUiog
-cHJvdmlkZXIgPSBudWxscHRyOw0KPiA+ICstwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWYg
-KChwcm92aWRlciA9IF9kZWZhdWx0UHJvdmlkZXIuZXhjaGFuZ2UobnVsbHB0cikpKQ0KPiA+ICst
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgew0KPiA+ICstwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgIE9TU0xfUFJPVklERVJfdW5sb2FkKHByb3ZpZGVyKTsNCj4g
-PiArLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH0NCj4gPiArLcKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgIGlmICgocHJvdmlkZXIgPSBfbGVnYWN5UHJvdmlkZXIuZXhjaGFuZ2UobnVsbHB0
-cikpKQ0KPiA+ICstwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgew0KPiA+ICstwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIE9TU0xfUFJPVklERVJfdW5sb2FkKHBy
-b3ZpZGVyKTsNCj4gPiArLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH0NCj4gPiArLSNlbmRp
-Zg0KPiA+ICvCoMKgwqDCoMKgwqAgfQ0KPiA+ICsgfQ0KPiA+ICsNCj4gPiBkaWZmIC0tZ2l0IGEv
-bWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvcG9jby9wb2NvXzEuMTEuMy5iYiBiL21ldGEtDQo+ID4g
-b2UvcmVjaXBlcy1zdXBwb3J0L3BvY28vcG9jb18xLjEyLjAuYmINCj4gPiBzaW1pbGFyaXR5IGlu
-ZGV4IDg5JQ0KPiA+IHJlbmFtZSBmcm9tIG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L3BvY28vcG9j
-b18xLjExLjMuYmINCj4gPiByZW5hbWUgdG8gbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvcG9jby9w
-b2NvXzEuMTIuMC5iYg0KPiA+IGluZGV4IDc1N2ZhODk4My4uNmZmZjA3MDdkIDEwMDY0NA0KPiA+
-IC0tLSBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L3BvY28vcG9jb18xLjExLjMuYmINCj4gPiAr
-KysgYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9wb2NvL3BvY29fMS4xMi4wLmJiDQo+ID4gQEAg
-LTYsMTMgKzYsMTUgQEAgTElDRU5TRSA9ICJCU0wtMS4wIg0KPiA+IMKgTElDX0ZJTEVTX0NIS1NV
-TSA9DQo+ID4gImZpbGU6Ly9MSUNFTlNFO21kNT00MjY3ZjQ4ZmM3MzhmNTAzODBjYmVlYjc2Zjk1
-Y2ViYyINCj4gPiANCj4gPiDCoCMgVGhlc2UgZGVwZW5kZW5jaWVzIGFyZSByZXF1aXJlZCBieSBG
-b3VuZGF0aW9uDQo+ID4gLURFUEVORFMgPSAibGlicGNyZSB6bGliIg0KPiA+ICtERVBFTkRTID0g
-ImxpYnBjcmUyIHpsaWIiDQo+ID4gDQo+ID4gwqBTUkNfVVJJID0gIiBcDQo+ID4gwqDCoMKgwqAN
-Cj4gPiBnaXQ6Ly9naXRodWIuY29tL3BvY29wcm9qZWN0L3BvY28uZ2l0O2JyYW5jaD1tYXN0ZXI7
-cHJvdG9jb2w9aHR0cHMgXA0KPiA+ICvCoMKgwqAgZmlsZTovLzAwMDEtZml4LXVuYnVuZGxlZC1Q
-Q1JFMi1kZXBlbmRlbmN5LnBhdGNowqBcDQo+ID4gK8KgwqDCoCBmaWxlOi8vMDAwMi1yZW1vdmUt
-cHJvdmlkZXJzLXVuaXRpYWxpemF0aW9uLnBhdGNowqBcDQo+ID4gwqDCoMKgwqAgZmlsZTovL3J1
-bi1wdGVzdMKgXA0KPiA+IMKgwqDCoCAiDQo+ID4gLVNSQ1JFViA9ICIxOTFjYmRjOTdlMWQ5ZGUw
-MjNiOGE2NWUwZGM4NDQ5MTFjMDZmNmE4Ig0KPiA+ICtTUkNSRVYgPSAiNGJhODU5NWVkODM4NDFk
-MWZhMjQwNzE2YjU2NTJhZGMzNzcyYzM2YiINCj4gPiANCj4gPiDCoFVQU1RSRUFNX0NIRUNLX0dJ
-VFRBR1JFR0VYID0gInBvY28tKD9QPHB2ZXI+XGQrKFwuXGQrKSspIg0KPiA+IA0KPiA+IEBAIC0y
-Myw3ICsyNSw3IEBAIGluaGVyaXQgY21ha2UgcHRlc3QNCj4gPiDCoCMgQnkgZGVmYXVsdCB0aGUg
-bW9zdCBjb21tb25seSB1c2VkIHBvY28gY29tcG9uZW50cyBhcmUgYnVpbHQNCj4gPiDCoCMgRm91
-bmRhdGlvbiBpcyBidWlsdCBhbnl3YXkgYW5kIGRvZXNuJ3QgbmVlZCB0byBiZSBsaXN0ZWQNCj4g
-PiBleHBsaWNpdGx5DQo+ID4gwqAjIHRoZXNlIGRvbid0IGhhdmUgZGVwZW5kZW5jaWVzIG91dHNp
-ZGUgb2UtY29yZQ0KPiA+IC1QQUNLQUdFQ09ORklHID8/PSAiWE1MIEpTT04gTW9uZ29EQiBQREYg
-VXRpbCBOZXQgTmV0U1NMIENyeXB0byBKV1QNCj4gPiBEYXRhIERhdGFTUUxpdGUgWmlwIEVuY29k
-aW5ncyBSZWRpcyINCj4gPiArUEFDS0FHRUNPTkZJRyA/Pz0gIlhNTCBKU09OIE1vbmdvREIgUERG
-IFV0aWwgTmV0IE5ldFNTTCBDcnlwdG8gSldUDQo+ID4gRGF0YSBEYXRhU1FMaXRlIFppcCBFbmNv
-ZGluZ3MgUmVkaXMgUHJvbWV0aGV1cyINCj4gPiANCj4gPiDCoFBBQ0tBR0VDT05GSUdbWE1MXSA9
-ICItREVOQUJMRV9YTUw9T04sLURFTkFCTEVfWE1MPU9GRixleHBhdCINCj4gPiDCoFBBQ0tBR0VD
-T05GSUdbSlNPTl0gPSAiLURFTkFCTEVfSlNPTj1PTiwtREVOQUJMRV9KU09OPU9GRiINCj4gPiBA
-QCAtMzksNiArNDEsNyBAQCBQQUNLQUdFQ09ORklHW0RhdGFTUUxpdGVdID0gIi0NCj4gPiBERU5B
-QkxFX0RBVEFfU1FMSVRFPU9OIC1EU1FMSVRFM19MSUJSQVJZOlNUUklORz1zcQ0KPiA+IMKgUEFD
-S0FHRUNPTkZJR1taaXBdID0gIi1ERU5BQkxFX1pJUD1PTiwtREVOQUJMRV9aSVA9T0ZGIg0KPiA+
-IMKgUEFDS0FHRUNPTkZJR1tFbmNvZGluZ3NdID0gIi1ERU5BQkxFX0VOQ09ESU5HUz1PTiwtDQo+
-ID4gREVOQUJMRV9FTkNPRElOR1M9T0ZGIg0KPiA+IMKgUEFDS0FHRUNPTkZJR1tSZWRpc10gPSAi
-LURFTkFCTEVfUkVESVM9T04sLURFTkFCTEVfUkVESVM9T0ZGIg0KPiA+ICtQQUNLQUdFQ09ORklH
-W1Byb21ldGhldXNdID0gIi1ERU5BQkxFX1BST01FVEhFVVM9T04sLQ0KPiA+IERFTkFCTEVfUFJP
-TUVUSEVVUz1PRkYiDQo+ID4gDQo+ID4gwqAjIEFkZGl0aW9uYWwgY29tcG9uZW50cyBub3QgYnVp
-bGQgYnkgZGVmYXVsdCwNCj4gPiDCoCMgdGhleSBtaWdodCBoYXZlIGRlcGVuZGVuY2llcyBub3Qg
-aW5jbHVkZWQgaW4gb2UtY29yZQ0KPiA+IEBAIC00Nyw2ICs1MCw4IEBAIFBBQ0tBR0VDT05GSUdb
-bW9kX3BvY29dID0gIi0NCj4gPiBERU5BQkxFX0FQQUNIRUNPTk5FQ1RPUj1PTiwtREVOQUJMRV9B
-UEFDSEVDT05ORUNUT1I9DQo+ID4gwqBQQUNLQUdFQ09ORklHW0NwcFBhcnNlcl0gPSAiLURFTkFC
-TEVfQ1BQUEFSU0VSPU9OLC0NCj4gPiBERU5BQkxFX0NQUFBBUlNFUj1PRkYiDQo+ID4gwqBQQUNL
-QUdFQ09ORklHW0RhdGFNeVNRTF0gPSAiLURFTkFCTEVfREFUQV9NWVNRTD1PTiAtDQo+ID4gRE1Z
-U1FMX0xJQjpTVFJJTkc9bXlzcWxjbGllbnRfciwtREVOQUJMRV9EQVRBX01ZU1FMPU9GRixtYXJp
-YWRiIg0KPiA+IMKgUEFDS0FHRUNPTkZJR1tEYXRhT0RCQ10gPSAiLURFTkFCTEVfREFUQV9PREJD
-PU9OLC0NCj4gPiBERU5BQkxFX0RBVEFfT0RCQz1PRkYsbGliaW9kYmMiDQo+ID4gK1BBQ0tBR0VD
-T05GSUdbQWN0aXZlUmVjb3JkXSA9ICItREVOQUJMRV9BQ1RJVkVSRUNPUkQ9T04sLQ0KPiA+IERF
-TkFCTEVfQUNUSVZFUkVDT1JEPU9GRiINCj4gPiArUEFDS0FHRUNPTkZJR1tBY3RpdmVSZWNvcmRD
-b21waWxlcl0gPSAiLQ0KPiA+IERFTkFCTEVfQUNUSVZFUkVDT1JEX0NPTVBJTEVSPU9OLC1ERU5B
-QkxFX0FDVElWRVJFQ09SRF9DT01QSUxFUj1PRkYiDQo+ID4gwqBQQUNLQUdFQ09ORklHW1BhZ2VD
-b21waWxlcl0gPSAiLURFTkFCTEVfUEFHRUNPTVBJTEVSPU9OLC0NCj4gPiBERU5BQkxFX1BBR0VD
-T01QSUxFUj1PRkYiDQo+ID4gwqBQQUNLQUdFQ09ORklHW1BhZ2VDb21waWxlckZpbGUyUGFnZV0g
-PSAiLQ0KPiA+IERFTkFCTEVfUEFHRUNPTVBJTEVSX0ZJTEUyUEFHRT1PTiwtDQo+ID4gREVOQUJM
-RV9QQUdFQ09NUElMRVJfRklMRTJQQUdFPU9GRiINCj4gPiDCoFBBQ0tBR0VDT05GSUdbU2V2ZW5a
-aXBdID0gIi1ERU5BQkxFX1NFVkVOWklQPU9OLC0NCj4gPiBERU5BQkxFX1NFVkVOWklQPU9GRiIN
-Cj4gPiAtLQ0KPiA+IDIuMzQuMw0KPiA+IA0KPiA+IA0KPiA+IC09LT0tPS09LT0tPS09LT0tPS09
-LT0tDQo+ID4gTGlua3M6IFlvdSByZWNlaXZlIGFsbCBtZXNzYWdlcyBzZW50IHRvIHRoaXMgZ3Jv
-dXAuDQo+ID4gVmlldy9SZXBseSBPbmxpbmUgKCM5NzgyMCk6DQo+ID4gaHR0cHM6Ly9saXN0cy5v
-cGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL21lc3NhZ2UvOTc4MjANCj4gPiBN
-dXRlIFRoaXMgVG9waWM6IGh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tdC85MjM1NjEw
-MC8xOTk3OTE0DQo+ID4gR3JvdXAgT3duZXI6IG9wZW5lbWJlZGRlZC1kZXZlbCtvd25lckBsaXN0
-cy5vcGVuZW1iZWRkZWQub3JnDQo+ID4gVW5zdWJzY3JpYmU6DQo+ID4gaHR0cHM6Ly9saXN0cy5v
-cGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL3Vuc3ViwqBbDQo+ID4gcmFqLmto
-ZW1AZ21haWwuY29tXQ0KPiA+IC09LT0tPS09LT0tPS09LT0tPS09LT0tDQo+ID4gDQoNCg==
+OE-Core recently enabled buildpaths in WARN_QA. This is so any
+reproducibility issues are highlighted by the build much earlier and
+for a wider cross section of the userbase.=C2=A0We're now at a point where
+having issues show up earlier to users is feasible and very valuable.
+
+We've managed to sort out OE-Core but meta-oe still has a number of
+issues. I've listed the ones from the last autobuilder run below. Note
+that where multiple files in a package trigger a warning, this will
+only list the first occurrence. To reproduce locally, after the first
+warning shows, the object will install from sstate and now warning will
+show a second time so you need to use "-C package_qa" to test under
+some cases.
+
+stdio: WARNING: ndisc6-1.0.5-r0 do_package_qa: QA Issue: File /usr/sbin/rdn=
+ssd in package ndisc6-rdnssd contains reference to TMPDIR [buildpaths]
+stdio: WARNING: ndisc6-1.0.5-r0 do_package_qa: QA Issue: File /usr/bin/rltr=
+aceroute6 in package ndisc6-rltraceroute6 contains reference to TMPDIR [bui=
+ldpaths]
+stdio: WARNING: ndisc6-1.0.5-r0 do_package_qa: QA Issue: File /usr/bin/rdis=
+c6 in package ndisc6-rdisc6 contains reference to TMPDIR [buildpaths]
+stdio: WARNING: ndisc6-1.0.5-r0 do_package_qa: QA Issue: File /usr/bin/ndis=
+c6 in package ndisc6-ndisc6 contains reference to TMPDIR [buildpaths]
+stdio: WARNING: ndisc6-1.0.5-r0 do_package_qa: QA Issue: File /usr/bin/name=
+2addr in package ndisc6-misc contains reference to TMPDIR
+stdio: WARNING: unbound-1.16.0-r0 do_package_qa: QA Issue: File /usr/src/de=
+bug/unbound/1.16.0-r0/build/config.h in package unbound-src contains refere=
+nce to TMPDIR [buildpaths]
+stdio: WARNING: unbound-1.16.0-r0 do_package_qa: QA Issue: File /usr/sbin/u=
+nbound in package unbound contains reference to TMPDIR [buildpaths]
+stdio: WARNING: minifi-cpp-0.7.0-r0 do_package_qa: QA Issue: File /usr/bin/=
+minifi in package minifi-cpp contains reference to TMPDIR
+stdio: WARNING: minifi-cpp-0.7.0-r0 do_package_qa: QA Issue: File /usr/bin/=
+.debug/minifi in package minifi-cpp-dbg contains reference to TMPDIR
+stdio: WARNING: boinc-client-7.18.1-r0 do_package_qa: QA Issue: File /usr/i=
+nclude/boinc/svn_version.h in package boinc-client-dev contains reference t=
+o TMPDIR [buildpaths]
+stdio: WARNING: ntpsec-1.2.1-r0 do_package_qa: QA Issue: File /usr/src/debu=
+g/ntpsec/1.2.1-r0/build/host/ntpd/ntp_parser.tab.h in package ntpsec-src co=
+ntains reference to TMPDIR [buildpaths]
+stdio: WARNING: yasm-1.3.0+gitAUTOINC+ba463d3c26-r0 do_package_qa: QA Issue=
+: File /usr/include/libyasm-stdint.h in package yasm-dev contains reference=
+ to TMPDIR [buildpaths]
+stdio: WARNING: php-8.1.7-r0 do_package_qa: QA Issue: File /usr/bin/phpdbg =
+in package php-phpdbg contains reference to TMPDIR [buildpaths]
+stdio: WARNING: php-8.1.7-r0 do_package_qa: QA Issue: File /usr/sbin/php-fp=
+m in package php-fpm contains reference to TMPDIR [buildpaths]
+stdio: WARNING: php-8.1.7-r0 do_package_qa: QA Issue: File /usr/include/php=
+/main/build-defs.h in package php-dev contains reference to TMPDIR
+stdio: WARNING: php-8.1.7-r0 do_package_qa: QA Issue: File /usr/bin/.debug/=
+php-cgi in package php-dbg contains reference to TMPDIR
+stdio: WARNING: php-8.1.7-r0 do_package_qa: QA Issue: File /usr/bin/php in =
+package php-cli contains reference to TMPDIR [buildpaths]
+stdio: WARNING: php-8.1.7-r0 do_package_qa: QA Issue: File /usr/bin/php-cgi=
+ in package php-cgi contains reference to TMPDIR [buildpaths]
+stdio: WARNING: nspr-4.29-r0 do_package_qa: QA Issue: File /usr/bin/nspr-co=
+nfig in package nspr-dev contains reference to TMPDIR [buildpaths]
+stdio: WARNING: lprng-3.8.C-r0 do_package_qa: QA Issue: File /etc/lpd/lpd.c=
+onf in package lprng contains reference to TMPDIR
+stdio: WARNING: log4cpp-1.1.3-r0 do_package_qa: QA Issue: File /usr/bin/log=
+4cpp-config in package log4cpp contains reference to TMPDIR [buildpaths]
+stdio: WARNING: libwmf-0.2.8.4-r3 do_package_qa: QA Issue: File /usr/bin/li=
+bwmf-config in package libwmf contains reference to TMPDIR [buildpaths]
+stdio: WARNING: jsonrpc-1.3.0-r0 do_package_qa: QA Issue: File /usr/lib/lib=
+json-rpc-cpp/cmake/libjson-rpc-cppTargets.cmake in package jsonrpc-dev cont=
+ains reference to TMPDIR [buildpaths]
+stdio: WARNING: gutenprint-git-r0 do_package_qa: QA Issue: File /usr/lib/gu=
+tenprint/5.3/config.summary in package gutenprint contains reference to TMP=
+DIR [buildpaths]
+stdio: WARNING: znc-1.8.2-r0 do_package_qa: QA Issue: File /usr/bin/znc-bui=
+ldmod in package znc contains reference to TMPDIR [buildpaths]
+stdio: WARNING: imagemagick-7.0.10-62-r0 do_package_qa: QA Issue: File /etc=
+/ImageMagick-7/delegates.xml in package imagemagick contains reference to T=
+MPDIR
+stdio: WARNING: ncftp-3.2.6-r0 do_package_qa: QA Issue: File /usr/bin/ncftp=
+get in package ncftp contains reference to TMPDIR
+stdio: WARNING: hdf5-1.8.21-r0 do_package_qa: QA Issue: File /usr/lib/libhd=
+f5.settings in package hdf5 contains reference to TMPDIR [buildpaths]
+stdio: WARNING: dovecot-2.3.14-r0 do_package_qa: QA Issue: File /usr/lib/do=
+vecot/dovecot-config in package dovecot contains reference to TMPDIR [build=
+paths]
+stdio: WARNING: opencv-4.6.0-r0 do_package_qa: QA Issue: File /usr/lib/libo=
+pencv_core.so.4.6.0 in package libopencv-core contains reference to TMPDIR =
+[buildpaths]
+stdio: WARNING: ipmiutil-3.1.5-r0 do_package_qa: QA Issue: File /usr/sbin/.=
+debug/iseltime in package ipmiutil-dbg contains reference to TMPDIR [buildp=
+aths]
+stdio: WARNING: net-snmp-5.9.1-r0 do_package_qa: QA Issue: File /usr/lib/ne=
+t-snmp/ptest/include/net-snmp/net-snmp-config.h in package net-snmp-ptest c=
+ontains reference to TMPDIR [buildpaths]
+stdio: WARNING: net-snmp-5.9.1-r0 do_package_qa: QA Issue: File /usr/includ=
+e/net-snmp/net-snmp-config-64.h in package net-snmp-dev contains reference =
+to TMPDIR
+stdio: WARNING: ldns-1.8.1-r0 do_package_qa: QA Issue: File /usr/bin/ldns-c=
+onfig in package ldns contains reference to TMPDIR [buildpaths]
+stdio: WARNING: vboxguestdrivers-6.1.34-r0 do_package_qa: QA Issue: File /l=
+ib/modules/5.15.54-yocto-standard/kernel/misc/vboxvideo.ko in package kerne=
+l-module-vboxvideo-5.15.54-yocto-standard contains reference to TMPDIR [bui=
+ldpaths]
+stdio: WARNING: vboxguestdrivers-6.1.34-r0 do_package_qa: QA Issue: File /l=
+ib/modules/5.15.54-yocto-standard/kernel/misc/vboxsf.ko in package kernel-m=
+odule-vboxsf-5.15.54-yocto-standard contains reference to TMPDIR [buildpath=
+s]
+stdio: WARNING: vboxguestdrivers-6.1.34-r0 do_package_qa: QA Issue: File /l=
+ib/modules/5.15.54-yocto-standard/kernel/misc/.debug/vboxguest.ko in packag=
+e vboxguestdrivers-dbg contains reference to TMPDIR
+stdio: WARNING: vboxguestdrivers-6.1.34-r0 do_package_qa: QA Issue: File /l=
+ib/modules/5.15.54-yocto-standard/kernel/misc/vboxguest.ko in package kerne=
+l-module-vboxguest-5.15.54-yocto-standard contains reference to TMPDIR [bui=
+ldpaths]
+stdio: WARNING: libwebsockets-4.2.2-r0 do_package_qa: QA Issue: File /usr/l=
+ib/cmake/libwebsockets/LibwebsocketsTargets.cmake in package libwebsockets-=
+dev contains reference to TMPDIR [buildpaths]
+stdio: WARNING: botan-2.19.2-r0 do_package_qa: QA Issue: File /usr/bin/bota=
+n in package botan-bin contains reference to TMPDIR [buildpaths]
+stdio: WARNING: botan-2.19.2-r0 do_package_qa: QA Issue: File /usr/include/=
+botan-2/botan/build.h in package botan-dev contains reference to TMPDIR [bu=
+ildpaths]
+stdio: WARNING: freeradius-3.0.21-r0 do_package_qa: QA Issue: File /usr/bin=
+/radeapclient in package freeradius-utils contains reference to TMPDIR [bui=
+ldpaths]
+stdio: WARNING: freeradius-3.0.21-r0 do_package_qa: QA Issue: File /usr/lib=
+/libfreeradius-server.so.0.0.0 in package freeradius contains reference to =
+TMPDIR [buildpaths]
+stdio: WARNING: lirc-0.10.1-r0 do_package_qa: QA Issue: File /usr/include/l=
+irc/config.h in package lirc-dev contains reference to TMPDIR [buildpaths]
+stdio: WARNING: lirc-0.10.1-r0 do_package_qa: QA Issue: File /usr/bin/irexe=
+c in package lirc-exec contains reference to TMPDIR [buildpaths]
+stdio: WARNING: ruli-0.36-r0 do_package_qa: QA Issue: File /usr/lib/.debug/=
+libruli.so.4 in package ruli-dbg contains reference to TMPDIR [buildpaths]
+stdio: WARNING: freediameter-1.4.0-r0 do_package_qa: QA Issue: File /usr/li=
+b/freeDiameter/ptest/testloadext in package freediameter-ptest contains ref=
+erence to TMPDIR
+stdio: WARNING: freediameter-1.4.0-r0 do_package_qa: QA Issue: File /usr/sr=
+c/debug/freediameter/1.4.0-r0/build/extensions/rt_default/lex.rtd_conf.c in=
+ package freediameter-src contains reference to TMPDIR
+stdio: WARNING: quagga-1.2.4-r0 do_package_qa: QA Issue: File /usr/src/debu=
+g/quagga/1.2.4-r0/build/lib/version.h in package quagga-src contains refere=
+nce to TMPDIR [buildpaths]
+stdio: WARNING: quagga-1.2.4-r0 do_package_qa: QA Issue: File /usr/lib/libz=
+ebra.so.1.0.0 in package quagga contains reference to TMPDIR [buildpaths]
+stdio: WARNING: pcp-5.3.6-r0 do_package_qa: QA Issue: File /etc/pcp.conf in=
+ package pcp contains reference to TMPDIR [buildpaths]
+stdio: WARNING: pcp-5.3.6-r0 do_package_qa: QA Issue: File /usr/include/pcp=
+/builddefs in package pcp-dev contains reference to TMPDIR [buildpaths]
+stdio: WARNING: curlpp-0.8.1-r0 do_package_qa: QA Issue: File /usr/bin/curl=
+pp-config in package curlpp-dev contains reference to TMPDIR [buildpaths]
+stdio: WARNING: postgresql-14.4-r0 do_package_qa: QA Issue: File /usr/inclu=
+de/postgresql/server/pg_config.h in package postgresql-server-dev contains =
+reference to TMPDIR
+stdio: WARNING: postgresql-14.4-r0 do_package_qa: QA Issue: File /usr/lib/l=
+ibpgcommon_shlib.a in package postgresql-staticdev contains reference to TM=
+PDIR
+stdio: WARNING: postgresql-14.4-r0 do_package_qa: QA Issue: File /usr/inclu=
+de/pg_config.h in package libpq-dev contains reference to TMPDIR [buildpath=
+s]
+stdio: WARNING: postgresql-14.4-r0 do_package_qa: QA Issue: File /usr/bin/p=
+ostgres in package postgresql contains reference to TMPDIR
+stdio: WARNING: zfs-2.1.4-r0 do_package_qa: QA Issue: File /lib/modules/5.1=
+5.54-yocto-standard/extra/nvpair/znvpair.ko in package zfs contains referen=
+ce to TMPDIR
+stdio: WARNING: zfs-2.1.4-r0 do_package_qa: QA Issue: File /lib/modules/5.1=
+5.54-yocto-standard/extra/nvpair/.debug/znvpair.ko in package zfs-dbg conta=
+ins reference to TMPDIR
+stdio: WARNING: zfs-2.1.4-r0 do_package_qa: QA Issue: File /usr/lib/pkgconf=
+ig/libzfs_core.pc in package zfs-dev contains reference to TMPDIR
+stdio: WARNING: nodejs-16.14.2-r0 do_package_qa: QA Issue: File /usr/includ=
+e/node/config.gypi in package nodejs-dev contains reference to TMPDIR [buil=
+dpaths]
+stdio: WARNING: nodejs-16.14.2-r0 do_package_qa: QA Issue: File /usr/bin/.d=
+ebug/node in package nodejs-dbg contains reference to TMPDIR [buildpaths]
+stdio: WARNING: nodejs-16.14.2-r0 do_package_qa: QA Issue: File /usr/bin/no=
+de in package nodejs contains reference to TMPDIR [buildpaths]
+
+Full autobuilder logs:
+
+https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1849/step=
+s/14/logs/stdio
+
+Patches to help with these would be very welcome.
+
+Cheers,
+
+Richard
 
