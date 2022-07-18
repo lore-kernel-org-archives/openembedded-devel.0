@@ -2,55 +2,55 @@ Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E3D3CC433EF
-	for <webhook@archiver.kernel.org>; Mon, 18 Jul 2022 01:22:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB91BC433EF
+	for <webhook@archiver.kernel.org>; Mon, 18 Jul 2022 01:22:58 +0000 (UTC)
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com
  [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.22013.1658107361203905439
+ by mx.groups.io with SMTP id smtpd.web09.22237.1658107375762764810
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Jul 2022 18:22:41 -0700
+ Sun, 17 Jul 2022 18:22:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=DH1k0k5V;
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=N/5OfP01;
  spf=permerror,
  err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
  invalid domain name (domain: windriver.com, ip: 205.220.166.238,
  mailfrom: prvs=4198530481=changqing.li@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
 	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
- 26I1IWRW024990
+ 26I1CCp1004494
 	for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Jul 2022 18:22:40 -0700
+ Sun, 17 Jul 2022 18:22:55 -0700
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
  h=subject : from :
  to : references : message-id : date : in-reply-to : content-type :
  mime-version; s=PPS06212021;
- bh=Eu7E+Jej/PkQoLsKaFG3CjsxWIcLO0oVvKHvuL45rLM=;
- b=DH1k0k5V64OjAN5DCPkKesihD8sH6Py3OR/5r1ab/O8J3BG5vpmqS11/RUnAQpALmDgJ
- iOyl/hZFdAhE60hPfCLiIstvj6vuq5gxuEWzid1xE+3zR6v4/TRMUI92RhvhYnZhcAwY
- 5QgkMUkbK+rNt6UbXcA6nLXNQtu2SRHBvkce3GitzIDuZl7wRteoR0axLy4pVEu8goZs
- yFDMbnFRcQE9QT+5kiSsTdsCHL+cdDtrO9yQGPVINypQoNo+HAvTtGoTzWG5EmLZL9l3
- FURA7O1dGQGItWc/lN++so7a8bOwncAgsrRVxML5rzat3N5vgP32CdPrbYJ0B7Rs7Yzq 0A==
+ bh=53lZ7kYa144fwFU/0bElDJUunF2hlyOxnIYPo/+o27E=;
+ b=N/5OfP01F5N9wtyd9YOuGFH1OvzgnrXsJ0uzX/c9V6S/uybZ39AojCa7OiZKl2fVKGeD
+ 184jQP0LQQtjCxRd3Kmw/xehrQsvxnNd1YYliSoeq4+GjggwjWru5MYzrMRMeThrL5DG
+ i/hoXqWeQx6nKBPx13nF8TGqi51e+1RIJqesE+vDYvvwr3nzEwbL0ep+fAB7L+h+UZA1
+ 1FMRDZZkekFFHqOBzvIp0IgWt3iOqUXVQ/yHP4lt+9uJl7ogtgHQ4SN0iJXrIqHc71E2
+ jZkvpruAAKBOc47HOiRHk8/dPcrIb1hw1AQYpPh0t6cqpRIvVtrDw9zDpGf+O7JtdoFZ 9Q==
 Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3hbrm80wvt-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3hbvukrths-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Jul 2022 18:22:40 -0700
-Received: from m0250810.ppops.net (m0250810.ppops.net [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 26I1MeG0000731
+ Sun, 17 Jul 2022 18:22:55 -0700
+Received: from m0250809.ppops.net (m0250809.ppops.net [127.0.0.1])
+	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 26I1MsWb025051
 	for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Jul 2022 18:22:40 -0700
-Received: from nam12-bn8-obe.outbound.protection.outlook.com
- (mail-bn8nam12lp2174.outbound.protection.outlook.com [104.47.55.174])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3hbrm80wvr-1
+ Sun, 17 Jul 2022 18:22:54 -0700
+Received: from nam12-dm6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12lp2176.outbound.protection.outlook.com [104.47.59.176])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3hbvukrthp-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Sun, 17 Jul 2022 18:22:40 -0700
+	Sun, 17 Jul 2022 18:22:54 -0700
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IN/L5BwS99EHRQrUAdwbjacGhoRkpPkaYblHtVgyu8uU37pjiQ932t61aTFoxGZRDWsty+SXJ3DTkqaIo7Dn7LFr8xv+hBStWErrxdALUotXx5gsKLBJC0vkYxOHjowSS/HehJxKdS4+UF6bsfxmmi3+QbA0Ji8VOlCNm2ZrJ2fxHIBdxkeSMvvNnTyik2xFAFUMJbntrMUH60FHGsJdpxLnzoqakCDLli3+qDymtGT0rnxVonxlOixxMhw/GuVbU/j7l38ML9pnHd8NIV55Sc8kpeQKYpQn81C6W99Fd/wJvZEX04wIse5Eb4tRFhqwb6BXINsczkvT51qksFTmfA==
+ b=SR9dz0CpNwrSMadjNXW3ZdcGn2GZAbCkilr7+lGo7ZAOz8s410/9JFvFtPOYBWbm2GgJvWtcUf08NalUFqRkqDiT6e9v6Bnw8nebchVE9cxnOmykpIGcSbq9oU/7LqpOdvH54YYkpsCrdTYZlkN+ktZ71ZxaF0VFWEc9nTfP4brD9DUlctu1wjbIavBR/bLbrCL29sbfKYqGSWn55WI62xWR6SG3YprEay8A/LvWAmCAemKCUy5DiR0WpxpqfjIHoAIW3UI8/Vilr400NfvWW7XPA6OlI0eWQFBbinl+wekY3EjzomAxdsDLhpnBslGl91h0+Pu39u4Ht4pbOZeEhg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Eu7E+Jej/PkQoLsKaFG3CjsxWIcLO0oVvKHvuL45rLM=;
- b=M5dDjKyx2KrtIJO33JGEOBpYjELFHLH0JH+S9qy81dTl1k0EVlt20eL7LYXbjRh8VHViWB+cw4YRIEm8eTIufXspGqrLVcWv0gEkDeif2qTyM0iJaLx1DeU0O02yLjtoEdjMyJkASrlzfIpXguntAkgel4L6vwNEyKKw/tt/72GyWsNMjy+sUAlrmUoug8/RAyg68NrZNITHZE4UEEvhV8B5C/bTQl80sdx5+hZ6nJKiaKs4Z4+d4jUMCL3aBLPLz2JmOn0hfdzx74b5x+2GW1sRkL5Zw74KPwntSGj8pSPYD8lITt3uJyH6ujFxaDpStCRzbcHLNCluVy4GhRwFqA==
+ bh=53lZ7kYa144fwFU/0bElDJUunF2hlyOxnIYPo/+o27E=;
+ b=jQfXkXwLy2RpF6NuyrF2yFqmv428FVYzXGAwFRv2raojuqZjfwnOiZE+3K/aU6vwuNLDA5cY1hrnAoqFuWTFqFLP342E9MxjAZTUldWY3qY++uWM2Kw64Qrvg286EvhumyiPkkoH3J4FWVW9F+h0EeNHb4KpGLUS9NS5pNkfZiCp7N7vaRobiPDXV1ZeBMdjoYLqgf47j8tbj0XJn8mhCCS+O5eOgjeBDDyw0gv5hXG/RYhS5Rk6yisKwIvjXRq8qLMg3L3wnFj/QKkD2XOvPkXIlcNOlmZgACVgJkGYHk5XF4224xjz1x0RK+GEOQSlisCvjAHusLoankAa1zuizw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -58,109 +58,109 @@ Received: from SN6PR11MB2557.namprd11.prod.outlook.com (2603:10b6:805:56::33)
  by PH0PR11MB4967.namprd11.prod.outlook.com (2603:10b6:510:41::14) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5438.14; Mon, 18 Jul
- 2022 01:22:38 +0000
+ 2022 01:22:53 +0000
 Received: from SN6PR11MB2557.namprd11.prod.outlook.com
  ([fe80::b15a:47d5:1944:4a86]) by SN6PR11MB2557.namprd11.prod.outlook.com
  ([fe80::b15a:47d5:1944:4a86%5]) with mapi id 15.20.5438.023; Mon, 18 Jul 2022
- 01:22:38 +0000
-Subject: Re: [oe] [kirkstone][PATCH] apache2: upgrade 2.4.53 -> 2.4.54
+ 01:22:53 +0000
+Subject: Re: [oe] [kirkstone][PATCH] zabbix: upgrade 5.2.6 -> 5.4.12
 From: Changqing Li <changqing.li@windriver.com>
 To: openembedded-devel@lists.openembedded.org,
         akuster808 <akuster808@gmail.com>
-References: <16FCF2B8F548537C.28546@lists.openembedded.org>
-Message-ID: <5cc76c28-e047-5cef-ab35-179c4181aea4@windriver.com>
-Date: Mon, 18 Jul 2022 09:22:30 +0800
+References: <16FCF2B9C368B89A.28546@lists.openembedded.org>
+Message-ID: <a21b36d0-0783-a41a-4cf7-527ca1c93a1c@windriver.com>
+Date: Mon, 18 Jul 2022 09:22:44 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
-In-Reply-To: <16FCF2B8F548537C.28546@lists.openembedded.org>
+In-Reply-To: <16FCF2B9C368B89A.28546@lists.openembedded.org>
 Content-Type: multipart/alternative;
- boundary="------------077F63F7AC7F8868C2B9058E"
+ boundary="------------8AF101A9E00E470C3F97FEED"
 Content-Language: en-US
-X-ClientProxiedBy: SG2PR01CA0133.apcprd01.prod.exchangelabs.com
- (2603:1096:4:8f::13) To SN6PR11MB2557.namprd11.prod.outlook.com
+X-ClientProxiedBy: SG2PR01CA0148.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:8f::28) To SN6PR11MB2557.namprd11.prod.outlook.com
  (2603:10b6:805:56::33)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 34f15771-43b7-424a-8320-08da685c006f
+X-MS-Office365-Filtering-Correlation-Id: 2209dc0c-9353-450e-e029-08da685c0932
 X-MS-TrafficTypeDiagnostic: PH0PR11MB4967:EE_
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	iLKD4Q1nBFPFFmcP66v/9fOW0c7B4o7ouKfm9tGHPxJOgriqzteURoCFfMxy+MGQ6FHIJ1PYEQIOYKR/f/ziq88Ydr5v0DzyUK2JiL6bqvefpa0pxTsm4746pprBwHy6WnZ/aYiaSWUzmge3k+fGmIq4ppJDoNTSKE08UYF1giyN8hnBMTU0OoDvncIdaA3XTI0J2IUMItEt0nCtdrgeoN9DqZJ4EMQIScPa8MKJUApNrq/v9frQ8v9LxEGUsJKdMu+zlwUPaqlsdFOUZj9klHvLjy1uq+yzu1+PHR1Gap5FhA92K/qy2HHK6hTLYCyNuSSkMI6L7ZBsQIW6rg6tdv43lvirItzGeN5o+HfBGd7NhwAV773zPBYxiH8tw1gSxoXr02w0qH5EjTEp2UYO0K+L6QE//OQsWEg3ujLk2N1qOiHp/g5qGA72uGW7bFOCPZPlwOdayysfpIrpt0lU9MUmHd0rBvCtqFGgiRxohXl5KcqbyaaRhT23+rR/b4vLRPCUswdQQqRlurZw7/w5soMuZfbVbB1f69PSq06VLJOcN0RyqDTtzFg7GuL+ZpZshFKH+wfkiRZG8vZdNElg/3HoBcPnSYfF1PQNHFVZx8DUt1Vd/UJN8rZxBKjVWqZtza2fuGqqIpJn1hJ1K6dYVfGqxRNoafY4JkQ3D81vJGkJ1bdffueVApzpwiO2+pEwsFM0dEQEv4Ex4aIQ8vdNSbLi9omPpIV9Lar7Uz8I50Mi7glkd9wgq1WHJtGlETnxVGykNJg3QVpKeAZS0gN41wkcUHpXK1O72j8izl33aiztVPHOwNPpNCrE1dHYtVtsJ10j6eVYABtTztQPqzTYp+th8vGC6hEgCsYZuXyK0Z/W03LHtf45ik1M3p/pQkMIqhu7FiOzS6uxHuV+kBDmELdvvynr2xiCVi9sSm4zFqdWVa+EIr9V+BzJVKbobh3Z
+	64BqjpqgxWwp3pnmoh7v2gmvcWmAA46og86u7qFw7Pt5gADZOKigWH8RPDQidTQCQxiG71bCR3OEdLh3Uo4SE23/6FhcItstbXzl8kWTTxuHct5cqi3R7zXl/Lsj3AfSWwoiolEFp5Z+dP728OuV3cSfmrALEkIslK5Vs1jXQVJ+5YfLngGKkIW1SEHUhdTxR33PfoNlVfIIWIJ13wF147ZqPX3Knk1NtbbSRzXqyR/c9bMzTw0UINarfXuy4qvhEeoB1wr+v5XfzfyEzXXqK+kdvvcN3f+ty58VQsxRs+Lbm/L6I6+51sIj9gegpTjoUOyU8YY5I3olPgrBN69og4JVTbs2fYDmHCPRjIscO9B4iwYpMK6dFJAXch4G+w7VgPZOzuBnyY99SpQfwM3Svb0SFdBAE1fvgX4Zf6FI9uneVZVSsnXNkkX+k3TorauGB19jUsbyAKKKuDoR9PuVKkFNJJfPoBbjrCQdzGjwbi9sIcXUESf22YebKhEx3RKEPByvPrEgLjXvlzKojZugbQ1w323vTCBOCkVLIb3wt2kQAlI/zhjU4tqSCP0xoQrgLLybB4g6PTygT8sEW8TKDHQ1WwJizWMNAjY6b0+/MIvuGZmNenxyw6nWbMXF5NY7hMbHetxxZBbnRonIAaKsWUXgn3t0nBHefIahE7KIn98Iq2HcGgJuR4Ld/tbKCd7WGeIhqLeFr8Ik4HMxF3sPR+XGpMAZylv8QYp+Usa0K324TVUeqp10v9XUodU4y1MKGjojnLMpqUTaisOEPbxyXQTPek5QkhVofDHKgyjE1nMulfP0oa1mf2dH1LxAsjRujE16ywkd/6b6wYynHvCoedynG6JyfnK1arXyxafe2u0GV0Gcu9368pfJNTUzthBkU08L3F0wsEquox1RpePdLNlfyyCTUzd+UMFYjoFKB739cpIDfraGeucGRXqpLnVu
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN6PR11MB2557.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(376002)(396003)(346002)(136003)(39830400003)(366004)(8936002)(44832011)(5660300002)(8676002)(66476007)(66556008)(66946007)(2906002)(36756003)(31696002)(38100700002)(38350700002)(2616005)(166002)(6486002)(966005)(41300700001)(478600001)(6666004)(316002)(6916009)(186003)(83380400001)(53546011)(6506007)(52116002)(26005)(6512007)(33964004)(31686004)(86362001)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?UkhuZ0hlaXJjV3dlZ2ZGeDB2bndKTlR2WDA5VmoraC94dGFMUXZqbWp3MHN1?=
- =?utf-8?B?Q2x6Q1g0QlRGSGNCcE1VTUF1V1NZZWN0THJub0VpYnJiYlVWZ01mK2k0bDJs?=
- =?utf-8?B?UDl4dmlkNVJiYTZHK2tHa2EvTkJ6ZHBrWjBBWHdmVHV1SXVjcEdEYmZPRGhS?=
- =?utf-8?B?eEJ0b3o2Q2NnTXJiSXFhbmNBYStTVFkrNG1Lajk2VUFoNVRyajRzdUVOcGsx?=
- =?utf-8?B?UytNZGlzemlwVEZEZW1Pd0xVUFdGUEVIWEppWDh6UENLM1dsK3ZnK1JMaHEy?=
- =?utf-8?B?SEI0NFYvNzhVV0JMd2VTTlVaSVhqM1g4T3hTRkIwVHlKWDdGQ0tiVmU2QXN2?=
- =?utf-8?B?S0FiQXpKR3VUVmZ5cHl0bVlqbnJFY3c1TTVoVEZ4SVBMMFJoakhCdi93WExr?=
- =?utf-8?B?bDE4bDc3Q3NaamN0Z1crN2xhc3kvaEdXakpIc2JuWlJrSnQxZXhaL1pmb0wz?=
- =?utf-8?B?Mm83R2FDTkZLNFJXV2NzTXBFM1BXMFp4QXJBaGNtV2MxdklLYU44VW43TTZs?=
- =?utf-8?B?c2NCczB1Z1ZOOVBGZHNOVjlxU3c4Qk1hNDVWSUpsTXBrTlEzek4wQ0x2U1Aw?=
- =?utf-8?B?MXVVOGwxWkk1elczS2p3cVdtS3YySFNtNlZZdGdjc1ljZ3pMak9ZYWJrZ1lz?=
- =?utf-8?B?ZDhtMXlRYmdoaHpLK0s4R3pQdldpK3dYMU9Jank5dnRFeDNBVVBlNkhEZys1?=
- =?utf-8?B?dzRzMVhyNUx3UWhlU0xpbTlRYk41MmhaUTJEbEllbGFSbFFLUVQwSkk0WEIy?=
- =?utf-8?B?eVFUWGxtWWM3WkhtR0JpVTQ3NktnM0tQWm5VZEczZ2lHSzdHVkRBekdrdEYw?=
- =?utf-8?B?OFVZbW9QRkdzK3pBQ2RFQzdnOU9lM1Rkcm5CZk5nRVRoeEhJR1E2TFJnUUtG?=
- =?utf-8?B?cWpxZzgrSkNHR0VCaXM0cEJzL0pCRXRLTFhSbUFvNWJiTm1FVDdWR2VZbFBD?=
- =?utf-8?B?MkRmSmlQTkFLNnhycEZ2czlBOW1sRUJoRGFHNlhjcGxrbXBMN21FRkE1RTgx?=
- =?utf-8?B?RlBHM3VsMVY2MFY4TmlmVkx4eG1JRmFsc1M3WVNxWW00TzFRYnJybktKaWVP?=
- =?utf-8?B?TElNbFE4dGxrWFhLaDlCcGhnRDFWbGpZRmtMV2NZUisxR0h6TEdEQVJac000?=
- =?utf-8?B?cTZCbngyQ2dUOENjVTNvdGlxaGQyYStBKzd4Snd4aDhPMm4vOEJheXV5amxn?=
- =?utf-8?B?TC84SDRXMVlkcEV5MVdpNmlkeVJJNWY5bGtSR1dYRDUvOVA3bjREdkRDeUVJ?=
- =?utf-8?B?aStzRmZJdSthKzhyTytGM3BxOFNxcjZMRWtGSnR6cTh4Y0lRUm5iaGkyeUJE?=
- =?utf-8?B?ZDVSVU9ta2RSMjZzSlk5TzZFcUVHR3JZWmkyRDVPWGpLMFFoMngxck9IQUJi?=
- =?utf-8?B?RC83VGNSODhSUW8xcWsweEY3VzlaNks2Z0xRUDJMczdWR1A0WlhzZFM4SE45?=
- =?utf-8?B?OTF6bGFvSkFzQnFTcnRsZ1Z3VjRnZUN3WEVvSWl3d2xHaGJCck4rNFpweTFB?=
- =?utf-8?B?Z3htSS9HWC9RaGhHSHJ4L3ZrRDVXTVkrT0FPdDlDZXNsRmRYN2tXMTFwVFpP?=
- =?utf-8?B?Tld2ajRxM0g4VFdJSnF3K1Z4azFaSEp2emZhS0VUQ3JBcDJFWmlodzYyMk03?=
- =?utf-8?B?Z0p3enR3RDBzdmZYU2p1N2VVMGpEMnV5K242NHhKZXF0YytuQjREVk9kdWo0?=
- =?utf-8?B?UC91L2kyeGtYTHVvQ0hEZC9LbWJYSEQzQmlPQkJKU2VHRjZCVlRaT0VZd0Fs?=
- =?utf-8?B?K3BxdDhpZTBFZk1xbVFDU21neE0vSkZZS2NMVzEvT1hnVUpxUzcxVHltd1Bl?=
- =?utf-8?B?d1pXZ3pQb1V0RzU2UU1IZitUWm1rN240aWF0ODF1b1NtOW5MdjhHUFIwUHJO?=
- =?utf-8?B?dkhVVXg5RDJOak1kandnY2o0YUdSSXdKQlQ5bU1QbFBFMnEvdTZIallWaHFH?=
- =?utf-8?B?M1hhUThCdEdsWThyVnFtOFV6WTBoRTMzTS9tZnFYMDBtUGtiemE5WjUzMWVn?=
- =?utf-8?B?ZlNnR3N5ZU13T2JrQkUwS3ZhMW8xL01ZQU9McG1aT3dEY05MR3UvV1lSZkl0?=
- =?utf-8?B?VHpTdUxZODBmTTJTeWcyV0IzdkZZQitjNnhwWURER1ZaZ0s2QXlPa2FXWVhF?=
- =?utf-8?B?Uit5eFNLNlVwT29VSkRkV3pJbGRoa3laSlhVUGFXNHducVdya3ZpMUg4MkxG?=
- =?utf-8?B?QlE9PQ==?=
+	=?utf-8?B?NmJjbUJBY0IzVHZ2RFhLUHBIVFFxNWtOQ2dtK1dZdS9xK2J4MXZPbm9PaWls?=
+ =?utf-8?B?dGRlcDFnNmVvZE50WlhGMGdXa1JVazJsdXdJajVIMjlhSzB3Y3JRdDVRcTZJ?=
+ =?utf-8?B?RFhYZERLbTNNcUs1UlA5WVlQdnZqUkdNQlRQSlJ3eEtPS283cGR1c2lsWkxo?=
+ =?utf-8?B?cy94YzZTNktwcjE5bXUwV0JzbC9jRlZudjF3LzhJN2hIRUV1b1RoVFdQR3Rz?=
+ =?utf-8?B?Mkt1QWFUOW9wWkZnQnVGTnNCN0FIRDJ2V2ZFVmZhV1oyWnYva0ZGMDRnanNr?=
+ =?utf-8?B?UW0xc1VXS1JDUDVOcGU4aVB3UVgybjZZeXBRT08rZDc0dmUvUGxTTG1xcThL?=
+ =?utf-8?B?YnRqYkVyY2dTelVnVjBvVUZNT3VDcWlISTlHa0FXMXRCL1FHL2NuRlY5blc1?=
+ =?utf-8?B?RnE2RnZVSFl2RjF1eDRBMjBzcVdidWNGQ2hoWHJYS1cyalEwNVNzNWlPeGRt?=
+ =?utf-8?B?emJOSUVHZUc5ZVB2NGY1VEFNN1RlbXp6M0wwc3pRczUzNXo4WldkK0djSjR4?=
+ =?utf-8?B?WTVHTDgxV0dicHhkZjZxUi9mblFuK3NWZUNHTTZCUXhRdmNMUGU2WFBYMlYy?=
+ =?utf-8?B?TEhKK1loV21UZ2pjMllLeC8vTElGdEUzUk0wclJ2Z05jazBiWDdJeVlJUVJP?=
+ =?utf-8?B?UU4reEIvZ3dDMnBySitPZlJXQWdYTkxzZCtMaVdjYVhvd0wzVjlnNTN5YzBq?=
+ =?utf-8?B?NDhFVGlVT0xISDRuVS81NFdiZlNpcHJMd1hnYjUzM2FxV25DSGlHM1FiRlVy?=
+ =?utf-8?B?S01vUnEvS3pjakppSUVaM2pmSmRiMUJvWm9BQThZOVk1dERHMjVYNm5OWUlH?=
+ =?utf-8?B?MVdzL1Rjdi9WbmdIK2JMVjVoY3VoNTYzUDZUOVVrMSt6SXhySUlucEltWm8x?=
+ =?utf-8?B?MTdzRC9vYnc5VHE2Myt0OGY3TEtPQWlKL21JOW5iMDltNWUyY2wyOHNMbXhi?=
+ =?utf-8?B?YmtMYit3WUxSN2lsOE5MVTZaNCtENzQyY1dUZytweVVnN0RTRm1sQjIwZE5X?=
+ =?utf-8?B?ZlhCcVlGdFoxQS9PcG0xeWNPemVhRCs2QTQrNFliRzJNWkJRNnU5aEpaNS83?=
+ =?utf-8?B?SWpyclRNWUxxcGpwNmd5YTBuMXdHaHpoNnlLQm9Sc01wYms5LzZUMmdSbVdN?=
+ =?utf-8?B?QmJOZnhqcGlGOWNVUUtIbXRUY2hzRkdzTVBmSE9IcFI4c0lrOHYrZG9NQldE?=
+ =?utf-8?B?MzZxdmtkdlFTOFk4SS8xcVhUT0xVMGpNZzQ0YmFNYjRQQXVFTTRiVm1iOUdX?=
+ =?utf-8?B?WGl2N2JmRDBIK0hMV1FoL0xQUWxtcS9ydjE3UnE2bGpyZXhCR05EcDdEUjhZ?=
+ =?utf-8?B?SHdzTGphSm1VaFlQczJsOVdxRFRKSWdGb24xV2VoME1SS2xYYW41ZDNLTkJx?=
+ =?utf-8?B?WGhtRE5KeXBkNHRYTEp0U2VhUEg1blhoQ3lDeG1BZmhsZ0cxVERKQ2pFbk1C?=
+ =?utf-8?B?aDVBc0trN0RXd21USmxwcm9xVGRsMXAwRlBxczkrcTZUYWltSWJvbUx4cmpt?=
+ =?utf-8?B?WDRiMUtnb20vWmFiUHR5L3ZJaW10MHlhLytzMzI2Y3VBM1pZaG4yWU1pM2ZI?=
+ =?utf-8?B?b2N2cXoyQ090cWRVMTVjaC9xWE5jaG0xbU5XUXh1OFI1NFRTdFhKQVNpUkEx?=
+ =?utf-8?B?T1JPanpkQnhNYy9Zak16MS9VUlNpamZXdmVvYU1rbEIrQkh1R2RtSlVvaVFQ?=
+ =?utf-8?B?UktiaVlQaytKcTd2Vzg2YjJROHhSNEF6K2dKbHVHOW9NWTRmUFMvMitRdzFV?=
+ =?utf-8?B?RGJMTXNQbG11cEtTeFJCbWZoQU5PWDV0OWltN0tIN1U3S2tjNThOcXpha3Qz?=
+ =?utf-8?B?WjJFbnpGbkZXTmNqYk1SNVk2Y1VON21DaW5vNzJUQllHc2gxUXZ3ZktOa3Bx?=
+ =?utf-8?B?bnhtckFGU2cwRU9wZFpRcUxiaEVLYzBWZlRIL2JzdjRKY0lGKzUza2swTVEr?=
+ =?utf-8?B?cmpFYmE0Qk1FOGZGQnVxMzRObnBlWFo1N2FrREVaQi9yUkRjUDZFeWdDckUv?=
+ =?utf-8?B?V3U1RnRjUklrZlQrUFNhSzRvdkJCWW1QeEZHVTdiUmgrczRZUUl6WVBKR2Rk?=
+ =?utf-8?B?UzZWS1BJOG9uNEFsNjcrSjI3RWtBcytIb0pVaHIyWnMxQnZsdDlpWHJOa0VQ?=
+ =?utf-8?B?QXgrVXRITkhIOVJkNkdpaTZOL3l6dlEzbUVTYnZNOWRtYWxGS0dhRDJsK1NV?=
+ =?utf-8?B?VEE9PQ==?=
 X-OriginatorOrg: windriver.com
 X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 34f15771-43b7-424a-8320-08da685c006f
+ 2209dc0c-9353-450e-e029-08da685c0932
 X-MS-Exchange-CrossTenant-AuthSource: SN6PR11MB2557.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jul 2022 01:22:38.2746
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jul 2022 01:22:52.8986
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
 X-MS-Exchange-CrossTenant-UserPrincipalName: 
- RZuXJZaUYW79w9Hi8ejjvHRX49C3oSG3vD8B1gZ6KblDyN3Ck/HNwyE1BRKJpiFp5X2S6aLDDofWpApmIusfEWexazUo9PZ0fz2IEkm5E+0=
+ 3ZqGJKmeKFDDKh+uWPkqVsqgUWZZ/mBjDY60YS6FsPgv44YTrb/qA3sUjJ+LP3rVunGxGTJ38x+j2UISA+DpS7UITiu2PZJ/oVOyTsbfVjs=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR11MB4967
-X-Proofpoint-GUID: YGBUtwuh3SaY5QID58msWj9ZigOPZmC9
-X-Proofpoint-ORIG-GUID: DeVICM_XsHlRTynv2Z9IDjeuGS2rqH00
+X-Proofpoint-GUID: 6KBxQUxGHadAk-Uh9o2v-nRvl11vDqlx
+X-Proofpoint-ORIG-GUID: LmSMSHEcLZU_oxyN9iKWcZnepVEDYl4Y
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
  definitions=2022-07-18_01,2022-07-15_01,2022-06-22_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxlogscore=999 clxscore=1015
- priorityscore=1501 adultscore=0 malwarescore=0 spamscore=0 suspectscore=0
- phishscore=0 bulkscore=0 impostorscore=0 lowpriorityscore=0 mlxscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2206140000
- definitions=main-2207180004
+ lowpriorityscore=0
+ mlxlogscore=911 suspectscore=0 clxscore=1015 malwarescore=0 mlxscore=0
+ phishscore=0 adultscore=0 impostorscore=0 bulkscore=0 priorityscore=1501
+ spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2206140000 definitions=main-2207180004
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Jul 2022 01:22:48 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Jul 2022 01:22:58 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97864
+ https://lists.openembedded.org/g/openembedded-devel/message/97865
 
---------------077F63F7AC7F8868C2B9058E
+--------------8AF101A9E00E470C3F97FEED
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -169,87 +169,53 @@ ping
 On 6/29/22 9:20 AM, Changqing Li wrote:
 > From: Changqing Li <changqing.li@windriver.com>
 >
-> This upgrade include CVE fixes:
-> CVE-2022-30522
-> CVE-2022-31813
-> CVE-2022-28615
-> CVE-2022-30556
-> CVE-2022-29404
-> CVE-2022-26377
-> CVE-2022-28614
-> CVE-2022-28330
+> This upgrade CVE fix:
+> CVE-2022-24349
+> CVE-2022-24917
+> CVE-2022-24918
+> CVE-2022-24919
 >
 > Signed-off-by: Changqing Li <changqing.li@windriver.com>
 > ---
->   .../0004-apache2-log-the-SELinux-context-at-startup.patch | 8 ++++----
->   .../apache2/{apache2_2.4.53.bb => apache2_2.4.54.bb}      | 2 +-
->   2 files changed, 5 insertions(+), 5 deletions(-)
->   rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.53.bb => apache2_2.4.54.bb} (99%)
+>   .../zabbix/{zabbix_5.2.6.bb => zabbix_5.4.12.bb}            | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>   rename meta-oe/recipes-connectivity/zabbix/{zabbix_5.2.6.bb => zabbix_5.4.12.bb} (92%)
 >
-> diff --git a/meta-webserver/recipes-httpd/apache2/apache2/0004-apache2-log-the-SELinux-context-at-startup.patch b/meta-webserver/recipes-httpd/apache2/apache2/0004-apache2-log-the-SELinux-context-at-startup.patch
-> index 5d8291968..a652b7969 100644
-> --- a/meta-webserver/recipes-httpd/apache2/apache2/0004-apache2-log-the-SELinux-context-at-startup.patch
-> +++ b/meta-webserver/recipes-httpd/apache2/apache2/0004-apache2-log-the-SELinux-context-at-startup.patch
-> @@ -1,4 +1,4 @@
-> -From 37699e9be04d83c5923644e298f400e077f76e85 Mon Sep 17 00:00:00 2001
-> +From abd5b40c9b094e721e91a5d75132639149d7952f Mon Sep 17 00:00:00 2001
->   From: Paul Eggleton <paul.eggleton@linux.intel.com>
->   Date: Tue, 17 Jul 2012 11:27:39 +0100
->   Subject: [PATCH] Log the SELinux context at startup.
-> @@ -14,7 +14,7 @@ Note: unlikely to be any interest in this upstream
->    2 files changed, 31 insertions(+)
+> diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_5.2.6.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_5.4.12.bb
+> similarity index 92%
+> rename from meta-oe/recipes-connectivity/zabbix/zabbix_5.2.6.bb
+> rename to meta-oe/recipes-connectivity/zabbix/zabbix_5.4.12.bb
+> index 66c80758c..f5d89d6c3 100644
+> --- a/meta-oe/recipes-connectivity/zabbix/zabbix_5.2.6.bb
+> +++ b/meta-oe/recipes-connectivity/zabbix/zabbix_5.4.12.bb
+> @@ -23,13 +23,13 @@ DEPENDS  = "libevent libpcre openldap virtual/libiconv zlib"
 >   
->   diff --git a/configure.in b/configure.in
-> -index c799aec..76811e7 100644
-> +index ea6cec3..92b74b7 100644
->   --- a/configure.in
->   +++ b/configure.in
->   @@ -491,6 +491,11 @@ getloadavg
-> @@ -30,7 +30,7 @@ index c799aec..76811e7 100644
->    [AC_TRY_RUN(#define _GNU_SOURCE
->    #include <unistd.h>
->   diff --git a/server/core.c b/server/core.c
-> -index 3020090..8fef5fd 100644
-> +index 4da7209..d3ca25b 100644
->   --- a/server/core.c
->   +++ b/server/core.c
->   @@ -65,6 +65,10 @@
-> @@ -43,7 +43,7 @@ index 3020090..8fef5fd 100644
->   +
->    /* LimitRequestBody handling */
->    #define AP_LIMIT_REQ_BODY_UNSET         ((apr_off_t) -1)
-> - #define AP_DEFAULT_LIMIT_REQ_BODY       ((apr_off_t) 0)
-> + #define AP_DEFAULT_LIMIT_REQ_BODY       ((apr_off_t) 1<<30) /* 1GB */
->   @@ -5126,6 +5130,28 @@ static int core_post_config(apr_pool_t *pconf, apr_pool_t *plog, apr_pool_t *pte
->        }
->    #endif
-> diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.53.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.54.bb
-> similarity index 99%
-> rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.53.bb
-> rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.54.bb
-> index 8413f5379..4b0ed2f62 100644
-> --- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.53.bb
-> +++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.54.bb
-> @@ -26,7 +26,7 @@ SRC_URI:append:class-target = " \
->              "
+>   PACKAGE_ARCH = "${MACHINE_ARCH}"
 >   
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
-> -SRC_URI[sha256sum] = "d0bbd1121a57b5f2a6ff92d7b96f8050c5a45d3f14db118f64979d525858db63"
-> +SRC_URI[sha256sum] = "eb397feeefccaf254f8d45de3768d9d68e8e73851c49afd5b7176d1ecf80c340"
+> -SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/5.2/${BPN}-${PV}.tar.gz \
+> +SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/5.4/${BPN}-${PV}.tar.gz \
+>       file://0001-Fix-configure.ac.patch \
+>       file://zabbix-agent.service \
+>   "
 >   
->   S = "${WORKDIR}/httpd-${PV}"
+> -SRC_URI[md5sum] = "31dab3535a1fa212f5724902727f6d4d"
+> -SRC_URI[sha256sum] = "76cb704f2a04fbc87bb3eff44fa71339c355d467f7bbd8fb53f8927c760e1680"
+> +SRC_URI[md5sum] = "f295fd2df86143d72f6ff26e47d9e39e"
+> +SRC_URI[sha256sum] = "d60d5515807c30c05d0900b83a7e6ef6479929aef7d6f248fba481c4816bacf4"
+>   
+>   inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
 >   
 >
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#97614): https://lists.openembedded.org/g/openembedded-devel/message/97614
-> Mute This Topic: https://lists.openembedded.org/mt/92057317/3616873
+> View/Reply Online (#97615): https://lists.openembedded.org/g/openembedded-devel/message/97615
+> Mute This Topic: https://lists.openembedded.org/mt/92057318/3616873
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [changqing.li@windriver.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
 >
 
---------------077F63F7AC7F8868C2B9058E
+--------------8AF101A9E00E470C3F97FEED
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
@@ -261,78 +227,44 @@ Content-Transfer-Encoding: 7bit
     </p>
     <div class="moz-cite-prefix">On 6/29/22 9:20 AM, Changqing Li wrote:<br>
     </div>
-    <blockquote type="cite" cite="mid:16FCF2B8F548537C.28546@lists.openembedded.org">
+    <blockquote type="cite" cite="mid:16FCF2B9C368B89A.28546@lists.openembedded.org">
       <pre class="moz-quote-pre" wrap="">From: Changqing Li <a class="moz-txt-link-rfc2396E" href="mailto:changqing.li@windriver.com">&lt;changqing.li@windriver.com&gt;</a>
 
-This upgrade include CVE fixes:
-CVE-2022-30522
-CVE-2022-31813
-CVE-2022-28615
-CVE-2022-30556
-CVE-2022-29404
-CVE-2022-26377
-CVE-2022-28614
-CVE-2022-28330
+This upgrade CVE fix:
+CVE-2022-24349
+CVE-2022-24917
+CVE-2022-24918
+CVE-2022-24919
 
 Signed-off-by: Changqing Li <a class="moz-txt-link-rfc2396E" href="mailto:changqing.li@windriver.com">&lt;changqing.li@windriver.com&gt;</a>
 ---
- .../0004-apache2-log-the-SELinux-context-at-startup.patch | 8 ++++----
- .../apache2/{apache2_2.4.53.bb =&gt; apache2_2.4.54.bb}      | 2 +-
- 2 files changed, 5 insertions(+), 5 deletions(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.53.bb =&gt; apache2_2.4.54.bb} (99%)
+ .../zabbix/{zabbix_5.2.6.bb =&gt; zabbix_5.4.12.bb}            | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-connectivity/zabbix/{zabbix_5.2.6.bb =&gt; zabbix_5.4.12.bb} (92%)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2/0004-apache2-log-the-SELinux-context-at-startup.patch b/meta-webserver/recipes-httpd/apache2/apache2/0004-apache2-log-the-SELinux-context-at-startup.patch
-index 5d8291968..a652b7969 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2/0004-apache2-log-the-SELinux-context-at-startup.patch
-+++ b/meta-webserver/recipes-httpd/apache2/apache2/0004-apache2-log-the-SELinux-context-at-startup.patch
-@@ -1,4 +1,4 @@
--From 37699e9be04d83c5923644e298f400e077f76e85 Mon Sep 17 00:00:00 2001
-+From abd5b40c9b094e721e91a5d75132639149d7952f Mon Sep 17 00:00:00 2001
- From: Paul Eggleton <a class="moz-txt-link-rfc2396E" href="mailto:paul.eggleton@linux.intel.com">&lt;paul.eggleton@linux.intel.com&gt;</a>
- Date: Tue, 17 Jul 2012 11:27:39 +0100
- Subject: [PATCH] Log the SELinux context at startup.
-@@ -14,7 +14,7 @@ Note: unlikely to be any interest in this upstream
-  2 files changed, 31 insertions(+)
+diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_5.2.6.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_5.4.12.bb
+similarity index 92%
+rename from meta-oe/recipes-connectivity/zabbix/zabbix_5.2.6.bb
+rename to meta-oe/recipes-connectivity/zabbix/zabbix_5.4.12.bb
+index 66c80758c..f5d89d6c3 100644
+--- a/meta-oe/recipes-connectivity/zabbix/zabbix_5.2.6.bb
++++ b/meta-oe/recipes-connectivity/zabbix/zabbix_5.4.12.bb
+@@ -23,13 +23,13 @@ DEPENDS  = &quot;libevent libpcre openldap virtual/libiconv zlib&quot;
  
- diff --git a/configure.in b/configure.in
--index c799aec..76811e7 100644
-+index ea6cec3..92b74b7 100644
- --- a/configure.in
- +++ b/configure.in
- @@ -491,6 +491,11 @@ getloadavg
-@@ -30,7 +30,7 @@ index c799aec..76811e7 100644
-  [AC_TRY_RUN(#define _GNU_SOURCE
-  #include &lt;unistd.h&gt;
- diff --git a/server/core.c b/server/core.c
--index 3020090..8fef5fd 100644
-+index 4da7209..d3ca25b 100644
- --- a/server/core.c
- +++ b/server/core.c
- @@ -65,6 +65,10 @@
-@@ -43,7 +43,7 @@ index 3020090..8fef5fd 100644
- +
-  /* LimitRequestBody handling */
-  #define AP_LIMIT_REQ_BODY_UNSET         ((apr_off_t) -1)
-- #define AP_DEFAULT_LIMIT_REQ_BODY       ((apr_off_t) 0)
-+ #define AP_DEFAULT_LIMIT_REQ_BODY       ((apr_off_t) 1&lt;&lt;30) /* 1GB */
- @@ -5126,6 +5130,28 @@ static int core_post_config(apr_pool_t *pconf, apr_pool_t *plog, apr_pool_t *pte
-      }
-  #endif
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.53.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.54.bb
-similarity index 99%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.53.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.54.bb
-index 8413f5379..4b0ed2f62 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.53.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.54.bb
-@@ -26,7 +26,7 @@ SRC_URI:append:class-target = &quot; \
-            &quot;
+ PACKAGE_ARCH = &quot;${MACHINE_ARCH}&quot;
  
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3">&quot;file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3&quot;</a>
--SRC_URI[sha256sum] = &quot;d0bbd1121a57b5f2a6ff92d7b96f8050c5a45d3f14db118f64979d525858db63&quot;
-+SRC_URI[sha256sum] = &quot;eb397feeefccaf254f8d45de3768d9d68e8e73851c49afd5b7176d1ecf80c340&quot;
+-SRC_URI = <a class="moz-txt-link-rfc2396E" href="https://cdn.zabbix.com/zabbix/sources/stable/5.2/${BPN}-${PV}.tar.gz\+SRC_URI=">&quot;https://cdn.zabbix.com/zabbix/sources/stable/5.2/${BPN}-${PV}.tar.gz \
++SRC_URI = &quot;</a>https://cdn.zabbix.com/zabbix/sources/stable/5.4/${BPN}-${PV}.tar.gz \
+     file://0001-Fix-configure.ac.patch \
+     file://zabbix-agent.service \
+ &quot;
  
- S = &quot;${WORKDIR}/httpd-${PV}&quot;
+-SRC_URI[md5sum] = &quot;31dab3535a1fa212f5724902727f6d4d&quot;
+-SRC_URI[sha256sum] = &quot;76cb704f2a04fbc87bb3eff44fa71339c355d467f7bbd8fb53f8927c760e1680&quot;
++SRC_URI[md5sum] = &quot;f295fd2df86143d72f6ff26e47d9e39e&quot;
++SRC_URI[sha256sum] = &quot;d60d5515807c30c05d0900b83a7e6ef6479929aef7d6f248fba481c4816bacf4&quot;
+ 
+ inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
  
 </pre>
       <br>
@@ -340,8 +272,8 @@ index 8413f5379..4b0ed2f62 100644
       <pre class="moz-quote-pre" wrap="">
 -=-=-=-=-=-=-=-=-=-=-=-
 Links: You receive all messages sent to this group.
-View/Reply Online (#97614): <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/g/openembedded-devel/message/97614">https://lists.openembedded.org/g/openembedded-devel/message/97614</a>
-Mute This Topic: <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/mt/92057317/3616873">https://lists.openembedded.org/mt/92057317/3616873</a>
+View/Reply Online (#97615): <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/g/openembedded-devel/message/97615">https://lists.openembedded.org/g/openembedded-devel/message/97615</a>
+Mute This Topic: <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/mt/92057318/3616873">https://lists.openembedded.org/mt/92057318/3616873</a>
 Group Owner: <a class="moz-txt-link-abbreviated" href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
 Unsubscribe: <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a class="moz-txt-link-abbreviated" href="mailto:changqing.li@windriver.com">changqing.li@windriver.com</a>]
 -=-=-=-=-=-=-=-=-=-=-=-
@@ -351,5 +283,5 @@ Unsubscribe: <a class="moz-txt-link-freetext" href="https://lists.openembedded.o
   </body>
 </html>
 
---------------077F63F7AC7F8868C2B9058E--
+--------------8AF101A9E00E470C3F97FEED--
 
