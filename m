@@ -1,59 +1,64 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jdmason@kudzu.us>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 52D68C43334
-	for <webhook@archiver.kernel.org>; Mon, 18 Jul 2022 20:06:14 +0000 (UTC)
-Received: from mail-qv1-f54.google.com (mail-qv1-f54.google.com
- [209.85.219.54])
- by mx.groups.io with SMTP id smtpd.web11.32161.1658174770993350910
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E104EC433EF
+	for <webhook@archiver.kernel.org>; Mon, 18 Jul 2022 22:10:14 +0000 (UTC)
+Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com
+ [209.85.167.46])
+ by mx.groups.io with SMTP id smtpd.web10.33854.1658182209122980569
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Jul 2022 13:06:11 -0700
+ Mon, 18 Jul 2022 15:10:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=AMr69juv;
- spf=pass (domain: gmail.com, ip: 209.85.219.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f54.google.com with SMTP id l15so9630347qvo.11;
-        Mon, 18 Jul 2022 13:06:10 -0700 (PDT)
+ dkim=pass header.i=@kudzu-us.20210112.gappssmtp.com header.s=20210112
+ header.b=wclxsuVc;
+ spf=none, err=permanent DNS error (domain: kudzu.us, ip: 209.85.167.46,
+ mailfrom: jdmason@kudzu.us)
+Received: by mail-lf1-f46.google.com with SMTP id z25so21779631lfr.2
+        for <openembedded-devel@lists.openembedded.org>;
+ Mon, 18 Jul 2022 15:10:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
+        d=kudzu-us.20210112.gappssmtp.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=Tab1NksjuSveVk4C/8KcXTHWm3QBPd5kIupZEHLSnbw=;
-        b=AMr69juvxw13R9P48Vc1MpBNFo56fnsXRDAciQEQNJQ/zH34Yq8nabLNMfxm7j2QBl
-         PN8wypKkrqpQz3L1e2WkfU8Oz4sq+vh9zWCpHZhScQG6FeBaMkpEA4Owr9fiFlRI4XN4
-         /VgSj2Xr2ejyb+HjT5/P22LkpTktdRZmlJ4wVy2M6f4fex6cUOnG83rEbqq+xkgDs4J8
-         3L6QgRbdQV9BW1glJBvmcdFonFrtPeCw1mdbdxupFjYimVF1dpxQ235SvEX6U+enrVkJ
-         nK7Ug3u9clp7NL4u9nzg2k9BRXvvI9cWjjvtJQ9sFJIYrqa6MWs1sc+gS9y8Wp7kp+TV
-         f+Xw==
+        bh=mcr6Y1l11R0QuQk6YUyHhLrC2bpewjrS+akIteCichU=;
+        b=wclxsuVcoO1NQasBD5fK6vZkYLcKb/MlWEVByK3hRmSpjC/bEMjad+OQyoBW1iiS8b
+         Q3/NoVE15Hd5Ml0klAJHEQKaU8WbpTiiM+mau79hUDDmZbwVCMZ9OaflFoC5KWsIj0oj
+         VwNIL06dXssKBqYxcPcLNXYItocWtVGz3YiX1o3xeqj2bSG6IAi02KbQ2wO06t0Yl0WD
+         boRrK7MLVaxiNUlcehBFW1aCiDtlcnfJLN7SPMsTm7jTZsD4D1cqCIbDDKgli63sLvQ1
+         hbQIxkjwCL4ixSxzsfTQKiPMxgmucuoDG4JEd/Zt3e83l9yJC01b+Z1W3czeRJQOftft
+         n6tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=Tab1NksjuSveVk4C/8KcXTHWm3QBPd5kIupZEHLSnbw=;
-        b=hK3Y9NfQPnFD5vInBS92MRSbNZrQMK6jpTz8b96g87BVUnjXQgyBnTqcvL5Q3hJlko
-         OfII0j89MpZlm+lRSWvOW4HgqvnLIB+R0+bD9ctHTiY532i9xzaS09fXDj2l2/86csiV
-         gZ358P/d2HQPYmE/7uMNWeOEjJ3jzDsoeAVEY/HTgUkal3HoVUsDQy07nwv6jHE4+SMM
-         iUbQlSg/t+fqEF3NZMxw4PzqyglouvqhsE/xl2w75pZ1ubM2owZlhFC8Qbx+pKdC3Eq/
-         p2vMNjMzEb+QcUA63g7uTfAW9PdZrQ/ryOoYr79GGz6s+Jw8CMK/mLWaSKbSCXaNDr1Q
-         1XdA==
-X-Gm-Message-State: AJIora+2bcLKGWvCaKScl5WcFU8crwwcbtIe9NA1SAe1f1Qa74L025CT
-	1U8FBJFE283o9Mzb9JHjwVpc2oTLmGxSn7vmrhw=
+        bh=mcr6Y1l11R0QuQk6YUyHhLrC2bpewjrS+akIteCichU=;
+        b=QAHhm1NJ++9FSBAtEJnWDbOf6VQdm3hZzl6xru441G1D0Nz1Nm5+j/b249GoLG8Yt2
+         kHGfPuJQx0MPikYzRcDMTLn0ocitG7ed/3A6zSnnNRfmWTBdCY5BJlrrgIuipDPTT93W
+         Lj+K7OQ8ccVCf5zdL+YyX7TdvbaguI0BIfD+bqXvjnx9nxEIV/UUrQ3ImJpKzwIIIXmK
+         i67Ao5Zx2tZ00RAAPjh4SnD5I7ieyb3t1/CJx3KRUumf0wishAa/wf5KVJSh40jX8DOX
+         YIUKUXTCYsbH5bGDf7z1di1bJxUx1EvskueTXjT6qKuzRLBY3geU4ag3iMRiLL6MAk8n
+         aYGQ==
+X-Gm-Message-State: AJIora+Sam5vazacJz7Ghx4KOLWBDsqhuSgxPFBqXcij0Dja0ICCG0h7
+	ocqUeF+XKlHTU06TFriC2BOMVi9lh4jWcyodB6eCOA==
 X-Google-Smtp-Source: 
- AGRyM1u0y4Crg1hXxhgIOEzpXip3RCWUZzcbdGGXj1LhM2MXLKJVENvFPiix3Dw8o+tXcGcFIKfFPu3GcHTjsDJoHsc=
-X-Received: by 2002:a05:6214:27e3:b0:472:ece6:3af5 with SMTP id
- jt3-20020a05621427e300b00472ece63af5mr22669334qvb.63.1658174769874; Mon, 18
- Jul 2022 13:06:09 -0700 (PDT)
+ AGRyM1uL8q0+uCUBN7Qjvq9QSZb9UTOlLN3lqd6CLZXW/IYyj/LasvgxeWHCcxeixYwPfJ+s6RO8qx5gH5wmpAxXvSU=
+X-Received: by 2002:a19:6408:0:b0:48a:139e:67b7 with SMTP id
+ y8-20020a196408000000b0048a139e67b7mr12212595lfb.203.1658182207119; Mon, 18
+ Jul 2022 15:10:07 -0700 (PDT)
 MIME-Version: 1.0
 References: 
  <CAMRc=McXfAzcUrdTLWsHHEo8DyUwU1gUuFTBALwXpJCuA0CoEA@mail.gmail.com>
  <YtWrKcR6y1jWSFtC@kudzu.us>
-In-Reply-To: <YtWrKcR6y1jWSFtC@kudzu.us>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 18 Jul 2022 16:05:43 -0400
-Message-ID: 
  <CAMKF1sqZh=fPoYHqh-uuJL6oftkmGoDHHcZkTgivoKapFFerAQ@mail.gmail.com>
+In-Reply-To: 
+ <CAMKF1sqZh=fPoYHqh-uuJL6oftkmGoDHHcZkTgivoKapFFerAQ@mail.gmail.com>
+From: Jon Mason <jdmason@kudzu.us>
+Date: Mon, 18 Jul 2022 18:09:55 -0400
+Message-ID: 
+ <CAPoiz9zRWPGLSUNaeTQDO=E60cGD4zRVmnZmHFkSdVLrkx_WmA@mail.gmail.com>
 Subject: Re: [oe] [meta-zephyr] build broken with current oe-core master
-To: Jon Mason <jdmason@kudzu.us>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: Bartosz Golaszewski <brgl@bgdev.pl>,
 	Patches and discussions about the oe-core layer
  <openembedded-core@lists.openembedded.org>,
@@ -65,177 +70,182 @@ Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Jul 2022 20:06:14 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Jul 2022 22:10:14 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97884
+ https://lists.openembedded.org/g/openembedded-devel/message/97885
 
-Can you try something like this
+On Mon, Jul 18, 2022 at 4:06 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> Can you try something like this
+>
+> diff --git a/meta/recipes-devtools/gcc/gcc-runtime.inc
+> b/meta/recipes-devtools/gcc/gcc-runtime.inc
+> index 5d74e4494d..61d5bf6058 100644
+> --- a/meta/recipes-devtools/gcc/gcc-runtime.inc
+> +++ b/meta/recipes-devtools/gcc/gcc-runtime.inc
+> @@ -68,8 +68,7 @@ do_configure () {
+>     # libstdc++ isn't built yet so CXX would error not able to find it
+> which breaks stdc++'s configure
+>     # tests. Create a dummy empty lib for the purposes of configure.
+>     mkdir -p ${WORKDIR}/dummylib
+> -   touch ${WORKDIR}/dummylib/dummylib.c
+> -   ${CC} ${WORKDIR}/dummylib/dummylib.c -shared -o
+> ${WORKDIR}/dummylib/libstdc++.so
+> +   ${CC} -nostartfiles -shared -x c /dev/null -o
+> ${WORKDIR}/dummylib/libstdc++.so
+>     for d in libgcc ${RUNTIMETARGET}; do
+>         echo "Configuring $d"
+>         rm -rf ${B}/${TARGET_SYS}/$d/
+>
+>
+> and see if it helps ?
 
-diff --git a/meta/recipes-devtools/gcc/gcc-runtime.inc
-b/meta/recipes-devtools/gcc/gcc-runtime.inc
-index 5d74e4494d..61d5bf6058 100644
---- a/meta/recipes-devtools/gcc/gcc-runtime.inc
-+++ b/meta/recipes-devtools/gcc/gcc-runtime.inc
-@@ -68,8 +68,7 @@ do_configure () {
-    # libstdc++ isn't built yet so CXX would error not able to find it
-which breaks stdc++'s configure
-    # tests. Create a dummy empty lib for the purposes of configure.
-    mkdir -p ${WORKDIR}/dummylib
--   touch ${WORKDIR}/dummylib/dummylib.c
--   ${CC} ${WORKDIR}/dummylib/dummylib.c -shared -o
-${WORKDIR}/dummylib/libstdc++.so
-+   ${CC} -nostartfiles -shared -x c /dev/null -o
-${WORKDIR}/dummylib/libstdc++.so
-    for d in libgcc ${RUNTIMETARGET}; do
-        echo "Configuring $d"
-        rm -rf ${B}/${TARGET_SYS}/$d/
+That appears to work for the 2 zephyr machines in meta-arm
 
-
-and see if it helps ?
-
-On Mon, Jul 18, 2022 at 2:49 PM Jon Mason <jdmason@kudzu.us> wrote:
 >
-> On Mon, Jul 18, 2022 at 08:31:39PM +0200, Bartosz Golaszewski wrote:
-> > Hi!
+> On Mon, Jul 18, 2022 at 2:49 PM Jon Mason <jdmason@kudzu.us> wrote:
 > >
-> > It seems that the zephyr build is currently broken with master (and
-> > master-next) for meta-zephyr samples:
+> > On Mon, Jul 18, 2022 at 08:31:39PM +0200, Bartosz Golaszewski wrote:
+> > > Hi!
+> > >
+> > > It seems that the zephyr build is currently broken with master (and
+> > > master-next) for meta-zephyr samples:
+> > >
+> > > Build Configuration:
+> > > BB_VERSION           = "2.0.1"
+> > > BUILD_SYS            = "x86_64-linux"
+> > > NATIVELSBSTRING      = "universal"
+> > > TARGET_SYS           = "arm-yocto-eabi"
+> > > MACHINE              = "arduino-nano-33-ble"
+> > > DISTRO               = "zephyr"
+> > > DISTRO_VERSION       = "1.0"
+> > > TUNE_FEATURES        = "armv7m cortexm4"
+> > > TARGET_FPU           = "soft"
+> > > meta
+> > > meta-poky            = "HEAD:67b9303d72c14d2aedb3f0313cb7b27dfb1499d3"
+> > > meta-zephyr-core
+> > > meta-zephyr-bsp      = "master:6d184ce6b66349a87dc114c7ab59d0dd3bf92785"
+> > > meta-oe
+> > > meta-python          = "master:cb7d3afba838f159a5df4ef5091dba8e770159a8"
+> > >
+> > > Initialising tasks: 100%
+> > > |#########################################################################################################|
+> > > Time: 0:00:01
+> > > Sstate summary: Wanted 101 Local 66 Mirrors 0 Missed 35 Current 98
+> > > (65% match, 82% complete)
+> > > NOTE: Executing Tasks
+> > > ERROR: gcc-runtime-12.1.0-r0 do_configure:
+> > > ExecutionError('/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/temp/run.do_configure.2702410',
+> > > 1, None, None)
+> > > ERROR: Logfile of failure stored in:
+> > > /home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/temp/log.do_configure.2702410
+> > > Log data follows:
+> > > | DEBUG: Executing python function extend_recipe_sysroot
+> > > | NOTE: Direct dependencies are
+> > > ['/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-core/newlib/newlib_4.2.0.bb:do_populate_sysroot',
+> > > '/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/binutils/binutils-cross_2.38.bb:do_populate_sysroot',
+> > > '/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gcc/gcc-cross_12.1.bb:do_populate_sysroot',
+> > > '/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gcc/libgcc_12.1.bb:do_populate_sysroot',
+> > > '/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/libtool/libtool-native_2.4.7.bb:do_populate_sysroot',
+> > > '/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/quilt/quilt-native_0.67.bb:do_populate_sysroot',
+> > > '/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-extended/texinfo-dummy-native/texinfo-dummy-native.bb:do_populate_sysroot',
+> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-core/zlib/zlib_1.2.12.bb:do_populate_sysroot',
+> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/autoconf/autoconf_2.71.bb:do_populate_sysroot',
+> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/automake/automake_1.16.5.bb:do_populate_sysroot',
+> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/flex/flex_2.6.4.bb:do_populate_sysroot',
+> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gnu-config/gnu-config_git.bb:do_populate_sysroot',
+> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/patch/patch_2.7.6.bb:do_populate_sysroot',
+> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/pseudo/pseudo_git.bb:do_populate_sysroot',
+> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-extended/xz/xz_5.2.5.bb:do_populate_sysroot',
+> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-extended/zstd/zstd_1.5.2.bb:do_populate_sysroot',
+> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-support/gmp/gmp_6.2.1.bb:do_populate_sysroot',
+> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-support/libmpc/libmpc_1.2.1.bb:do_populate_sysroot',
+> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-support/mpfr/mpfr_4.1.0.bb:do_populate_sysroot']
+> > > | NOTE: Installed into sysroot: []
+> > > | NOTE: Skipping as already exists in sysroot: ['newlib',
+> > > 'binutils-cross-arm', 'gcc-cross-arm', 'libgcc', 'libtool-native',
+> > > 'quilt-native', 'texinfo-dummy-native', 'zlib-native',
+> > > 'autoconf-native', 'automake-native', 'flex-native',
+> > > 'gnu-config-native', 'patch-native', 'pseudo-native', 'xz-native',
+> > > 'zstd-native', 'gmp-native', 'libmpc-native', 'mpfr-native',
+> > > 'attr-native', 'gettext-minimal-native', 'm4-native']
+> > > | DEBUG: Python function extend_recipe_sysroot finished
+> > > | DEBUG: Executing shell function autotools_preconfigure
+> > > | DEBUG: Shell function autotools_preconfigure finished
+> > > | DEBUG: Executing python function autotools_aclocals
+> > > | DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common',
+> > > 'arm-32', 'arm-eabi', 'common']
+> > > | DEBUG: Python function autotools_aclocals finished
+> > > | DEBUG: Executing python function gcc_multilib_setup
+> > > | DEBUG: Python function gcc_multilib_setup finished
+> > > | DEBUG: Executing python function extract_stashed_builddir
+> > > | DEBUG: sed -e
+> > > 's:^[^/]*/:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/gcc-12.1.0/build.arm-yocto-eabi.arm-yocto-eabi/:g'
+> > > /home/brgl/workspace/zephyr-yocto/build/tmp-newlib/sysroots-components/x86_64/gcc-stashed-builddir-arm-yocto-eabi/fixmepath
+> > > | xargs sed -i -e
+> > > 's:FIXMESTAGINGDIRTARGET:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/recipe-sysroot:g;
+> > > s:FIXMESTAGINGDIRHOST:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/recipe-sysroot-native:g'
+> > > -e 's:FIXME_PSEUDO_SYSROOT:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/sysroots-components/x86_64/pseudo-native:g'
+> > > -e 's:FIXME_HOSTTOOLS_DIR:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/hosttools:g'
+> > > -e 's:FIXME_PKGDATA_DIR:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/pkgdata/arduino-nano-33-ble:g'
+> > > -e 's:FIXME_PSEUDO_LOCALSTATEDIR:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/pseudo/:g'
+> > > -e 's:FIXME_LOGFIFO:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/temp/fifo.2702410:g'
+> > > | DEBUG: Python function extract_stashed_builddir finished
+> > > | DEBUG: Executing shell function do_configure
+> > > | /home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/recipe-sysroot-native/usr/bin/arm-yocto-eabi/../../libexec/arm-yocto-eabi/gcc/arm-yocto-eabi/12.1.0/ld:
+> > > cannot find crt0.o: No such file or directory
+> > > | collect2: error: ld returned 1 exit status
+> > > | WARNING: exit code 1 from a shell command.
+> > > ERROR: Task (/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gcc/gcc-runtime_12.1.bb:do_configure)
+> > > failed with exit code '1'
+> > > NOTE: Tasks Summary: Attempted 765 tasks of which 746 didn't need to
+> > > be rerun and 1 failed.
+> > >
+> > > Summary: 1 task failed:
+> > >   /home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gcc/gcc-runtime_12.1.bb:do_configure
+> > > Summary: There was 1 ERROR message, returning a non-zero exit code.
+> > >
+> > > I don't have any ideas but it looks like something related to the machine tune?
 > >
-> > Build Configuration:
-> > BB_VERSION           = "2.0.1"
-> > BUILD_SYS            = "x86_64-linux"
-> > NATIVELSBSTRING      = "universal"
-> > TARGET_SYS           = "arm-yocto-eabi"
-> > MACHINE              = "arduino-nano-33-ble"
-> > DISTRO               = "zephyr"
-> > DISTRO_VERSION       = "1.0"
-> > TUNE_FEATURES        = "armv7m cortexm4"
-> > TARGET_FPU           = "soft"
-> > meta
-> > meta-poky            = "HEAD:67b9303d72c14d2aedb3f0313cb7b27dfb1499d3"
-> > meta-zephyr-core
-> > meta-zephyr-bsp      = "master:6d184ce6b66349a87dc114c7ab59d0dd3bf92785"
-> > meta-oe
-> > meta-python          = "master:cb7d3afba838f159a5df4ef5091dba8e770159a8"
+> > I haven't had time to bottom out on the issue, but I was able to
+> > confirm that the patch in OE core that breaks meta-zephyr is
 > >
-> > Initialising tasks: 100%
-> > |#########################################################################################################|
-> > Time: 0:00:01
-> > Sstate summary: Wanted 101 Local 66 Mirrors 0 Missed 35 Current 98
-> > (65% match, 82% complete)
-> > NOTE: Executing Tasks
-> > ERROR: gcc-runtime-12.1.0-r0 do_configure:
-> > ExecutionError('/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/temp/run.do_configure.2702410',
-> > 1, None, None)
-> > ERROR: Logfile of failure stored in:
-> > /home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/temp/log.do_configure.2702410
-> > Log data follows:
-> > | DEBUG: Executing python function extend_recipe_sysroot
-> > | NOTE: Direct dependencies are
-> > ['/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-core/newlib/newlib_4.2.0.bb:do_populate_sysroot',
-> > '/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/binutils/binutils-cross_2.38.bb:do_populate_sysroot',
-> > '/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gcc/gcc-cross_12.1.bb:do_populate_sysroot',
-> > '/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gcc/libgcc_12.1.bb:do_populate_sysroot',
-> > '/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/libtool/libtool-native_2.4.7.bb:do_populate_sysroot',
-> > '/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/quilt/quilt-native_0.67.bb:do_populate_sysroot',
-> > '/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-extended/texinfo-dummy-native/texinfo-dummy-native.bb:do_populate_sysroot',
-> > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-core/zlib/zlib_1.2.12.bb:do_populate_sysroot',
-> > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/autoconf/autoconf_2.71.bb:do_populate_sysroot',
-> > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/automake/automake_1.16.5.bb:do_populate_sysroot',
-> > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/flex/flex_2.6.4.bb:do_populate_sysroot',
-> > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gnu-config/gnu-config_git.bb:do_populate_sysroot',
-> > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/patch/patch_2.7.6.bb:do_populate_sysroot',
-> > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/pseudo/pseudo_git.bb:do_populate_sysroot',
-> > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-extended/xz/xz_5.2.5.bb:do_populate_sysroot',
-> > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-extended/zstd/zstd_1.5.2.bb:do_populate_sysroot',
-> > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-support/gmp/gmp_6.2.1.bb:do_populate_sysroot',
-> > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-support/libmpc/libmpc_1.2.1.bb:do_populate_sysroot',
-> > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-support/mpfr/mpfr_4.1.0.bb:do_populate_sysroot']
-> > | NOTE: Installed into sysroot: []
-> > | NOTE: Skipping as already exists in sysroot: ['newlib',
-> > 'binutils-cross-arm', 'gcc-cross-arm', 'libgcc', 'libtool-native',
-> > 'quilt-native', 'texinfo-dummy-native', 'zlib-native',
-> > 'autoconf-native', 'automake-native', 'flex-native',
-> > 'gnu-config-native', 'patch-native', 'pseudo-native', 'xz-native',
-> > 'zstd-native', 'gmp-native', 'libmpc-native', 'mpfr-native',
-> > 'attr-native', 'gettext-minimal-native', 'm4-native']
-> > | DEBUG: Python function extend_recipe_sysroot finished
-> > | DEBUG: Executing shell function autotools_preconfigure
-> > | DEBUG: Shell function autotools_preconfigure finished
-> > | DEBUG: Executing python function autotools_aclocals
-> > | DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common',
-> > 'arm-32', 'arm-eabi', 'common']
-> > | DEBUG: Python function autotools_aclocals finished
-> > | DEBUG: Executing python function gcc_multilib_setup
-> > | DEBUG: Python function gcc_multilib_setup finished
-> > | DEBUG: Executing python function extract_stashed_builddir
-> > | DEBUG: sed -e
-> > 's:^[^/]*/:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/gcc-12.1.0/build.arm-yocto-eabi.arm-yocto-eabi/:g'
-> > /home/brgl/workspace/zephyr-yocto/build/tmp-newlib/sysroots-components/x86_64/gcc-stashed-builddir-arm-yocto-eabi/fixmepath
-> > | xargs sed -i -e
-> > 's:FIXMESTAGINGDIRTARGET:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/recipe-sysroot:g;
-> > s:FIXMESTAGINGDIRHOST:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/recipe-sysroot-native:g'
-> > -e 's:FIXME_PSEUDO_SYSROOT:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/sysroots-components/x86_64/pseudo-native:g'
-> > -e 's:FIXME_HOSTTOOLS_DIR:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/hosttools:g'
-> > -e 's:FIXME_PKGDATA_DIR:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/pkgdata/arduino-nano-33-ble:g'
-> > -e 's:FIXME_PSEUDO_LOCALSTATEDIR:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/pseudo/:g'
-> > -e 's:FIXME_LOGFIFO:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/temp/fifo.2702410:g'
-> > | DEBUG: Python function extract_stashed_builddir finished
-> > | DEBUG: Executing shell function do_configure
-> > | /home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/recipe-sysroot-native/usr/bin/arm-yocto-eabi/../../libexec/arm-yocto-eabi/gcc/arm-yocto-eabi/12.1.0/ld:
-> > cannot find crt0.o: No such file or directory
-> > | collect2: error: ld returned 1 exit status
-> > | WARNING: exit code 1 from a shell command.
-> > ERROR: Task (/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gcc/gcc-runtime_12.1.bb:do_configure)
-> > failed with exit code '1'
-> > NOTE: Tasks Summary: Attempted 765 tasks of which 746 didn't need to
-> > be rerun and 1 failed.
+> > commit 028ecb0c265fa495071cbcca10587c0ba60cf538
+> > Author: Richard Purdie <richard.purdie@linuxfoundation.org>
+> > Date:   Wed Jul 13 23:12:06 2022 +0100
 > >
-> > Summary: 1 task failed:
-> >   /home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gcc/gcc-runtime_12.1.bb:do_configure
-> > Summary: There was 1 ERROR message, returning a non-zero exit code.
+> >     gcc-runtime: Fix build when using gold
 > >
-> > I don't have any ideas but it looks like something related to the machine tune?
->
-> I haven't had time to bottom out on the issue, but I was able to
-> confirm that the patch in OE core that breaks meta-zephyr is
->
-> commit 028ecb0c265fa495071cbcca10587c0ba60cf538
-> Author: Richard Purdie <richard.purdie@linuxfoundation.org>
-> Date:   Wed Jul 13 23:12:06 2022 +0100
->
->     gcc-runtime: Fix build when using gold
->
->     If gold is enabled as the default linker, it errors trying to link
->     to our dummy library empty file and this turns off things which should
->     be present in libstdc++.
->
->     For example, _GLIBCXX_HAVE_S_ISREG isn't defined and HAVE_S_ISREG in
->     libstdc++-v3/config.h isn't set properly.
->
->     Instead of just creating an empty file, create an empty elf binary
->     instead which addresses the issue.
->
->     (From OE-Core rev: 2070bcd10aa3a05c96c8501c6a8c1e129fb1d440)
->
->     Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
->
-> If you revert that, everything is happy.
->
-> Thanks,
-> Jon
->
->
+> >     If gold is enabled as the default linker, it errors trying to link
+> >     to our dummy library empty file and this turns off things which should
+> >     be present in libstdc++.
 > >
-> > Bart
+> >     For example, _GLIBCXX_HAVE_S_ISREG isn't defined and HAVE_S_ISREG in
+> >     libstdc++-v3/config.h isn't set properly.
 > >
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#97883): https://lists.openembedded.org/g/openembedded-devel/message/97883
-> Mute This Topic: https://lists.openembedded.org/mt/92465636/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+> >     Instead of just creating an empty file, create an empty elf binary
+> >     instead which addresses the issue.
+> >
+> >     (From OE-Core rev: 2070bcd10aa3a05c96c8501c6a8c1e129fb1d440)
+> >
+> >     Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+> >
+> > If you revert that, everything is happy.
+> >
+> > Thanks,
+> > Jon
+> >
+> >
+> > >
+> > > Bart
+> > >
+> >
+> > -=-=-=-=-=-=-=-=-=-=-=-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#97883): https://lists.openembedded.org/g/openembedded-devel/message/97883
+> > Mute This Topic: https://lists.openembedded.org/mt/92465636/1997914
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> > -=-=-=-=-=-=-=-=-=-=-=-
+> >
 
