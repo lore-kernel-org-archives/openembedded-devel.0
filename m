@@ -1,140 +1,104 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <richard.purdie@linuxfoundation.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C58FDC433EF
-	for <webhook@archiver.kernel.org>; Mon, 18 Jul 2022 14:46:12 +0000 (UTC)
-Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com
- [209.85.160.171])
- by mx.groups.io with SMTP id smtpd.web09.28102.1658155571037915591
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DC383C43334
+	for <webhook@archiver.kernel.org>; Mon, 18 Jul 2022 15:14:02 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
+ [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.web10.28370.1658157240294307091
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Jul 2022 07:46:11 -0700
+ Mon, 18 Jul 2022 08:14:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=WzwUo2Ad;
- spf=pass (domain: gmail.com, ip: 209.85.160.171,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f171.google.com with SMTP id y9so5495972qtv.5
+ dkim=pass header.i=@linuxfoundation.org header.s=google header.b=FCmq9Mu/;
+ spf=pass (domain: linuxfoundation.org, ip: 209.85.221.42,
+ mailfrom: richard.purdie@linuxfoundation.org)
+Received: by mail-wr1-f42.google.com with SMTP id v16so17484360wrd.13
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Jul 2022 07:46:10 -0700 (PDT)
+ Mon, 18 Jul 2022 08:14:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=QFCXufl4pJJQf+ZdeAqxM684WlTENe0hKsRQxwIKR0E=;
-        b=WzwUo2AdimigMfZpYdJAG1IyVw9cY0vDl7b6Kxtdd6mJnHzPbUqRnU6ZSNPLZ9zYWl
-         TYGyBJ06BHearenMiQzcJfVHM/56CxCgrosHtnNsN9uWM/1vpZr+27wpAa2YTmoj+dO+
-         YnlHNzJg7nskuTnUklZK62AN+V7TzsvW+YSad8m7wF+AdMDRWGYEXmT9xnsJ3dl8IeXd
-         MSaSuJjSTEDxejRsNKV2Ip0zHhbS+yymfCWx2Cc/o/tHsZGHJjsOceZJTJGafqpy/3KS
-         UrGgt0Da4yG4QeQCwYhrdTxF1cCN/ZF/OpXcjL9kQ3NZhsZSrX18I+EN1BAvNhsoAQMF
-         s9rQ==
+        d=linuxfoundation.org; s=google;
+        h=message-id:subject:from:to:cc:date:in-reply-to:references
+         :content-transfer-encoding:user-agent:mime-version;
+        bh=aOnB5yUYdaqvWkbASp20bIaU3jt3XdaLVFy1x5Eaj4g=;
+        b=FCmq9Mu/XvigE6vZvCAk02kYfLt3gbLPHfi5itJivDU3MvmxmGE0dApU5Fhz6J/IZp
+         AHTfREPJIAbktnKqKBBUvFgugbBkwFhtuOfcz3KU+jh1k1PwqcEMzYLXHseU7MKz7pju
+         Jq7UGaZ0HiVmi7238yJ5J91o3ocfEcmJRJlx4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=QFCXufl4pJJQf+ZdeAqxM684WlTENe0hKsRQxwIKR0E=;
-        b=U79GabgrTjYgrTiXCl9E82ulhfAcZbtMlLCLbEbXVzGIhiMIubF4hTtTYbztCHeDRI
-         nS/voP+s8zE0QUJQoBEfirK2nyg+qHBnyA4TFlJ8ujMMOUee5oA5xEqN/wD+7Ncsb2x+
-         eZPvIlDnubp0HsInXJwFTLYZjnMfvzuNN8n6vgLtwCF/7Cy+bvoN6tQXuUG/c+6auyZu
-         +p1mU4OLSHX/hfS6eS1Ipc6EARqGw4176qyI1NbpSSO1bMF8/QVsiYeBNd8TFp7XV5Oa
-         2lu6d7JeQh3iJ6JrJ/5HQ4xKEQIP75xsEKB2xG2SVeFTJPGXyQAEiMdH8p660hIRT7oK
-         +hKg==
-X-Gm-Message-State: AJIora97r4+n8kq6/ToR9fe5lndAVazrMnHNFCSHf0bHdkTCwTPI5xHI
-	RXOn3pb8eTjg+M8HxY4WV+dAbsYA/raPCowEqm5UQMNm6Lw=
+        h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+         :references:content-transfer-encoding:user-agent:mime-version;
+        bh=aOnB5yUYdaqvWkbASp20bIaU3jt3XdaLVFy1x5Eaj4g=;
+        b=vJhCIrM/e8dNnNytm5VyPUkk7DcT2TOC3aGyMTkyP6UAjdvz72ghzqsZjm2n0sYQfU
+         AO0dzgxJwlcCXCVZ2jKzQ45w45aP7UlRI19NKwYbgO0IZ6r5Ap2Zjcc5QH5a9peNxSqf
+         NLCtpjYb1KePNuVM/uVMyBJNOGNZ9AIdbNSbEH3SVUC9m4N6gpFXsCJ0hq9At5z4zoQa
+         uSntlVj2wpZplg//ZBxr4VhrtEN1WLh+0v0LQYnLYG2qT3w3c/6mbb+LaKDVP1M7bLw6
+         wHzsDKnBpbkYau3DF5p/xu6vpOiTKAcWhOwYoB58mz/ORRbTzf2kM1a1FQTTQG5SKqd9
+         M7/g==
+X-Gm-Message-State: AJIora+LGi1zoeAS2gifMM1r/hG5TFeCUBNi+h1a3tk/ctGoA+loT9OF
+	RfV0ruInIRovNLsaAol21Diw5Q==
 X-Google-Smtp-Source: 
- AGRyM1vWJHxgS+wQa6SaL+Eqnf0zl7N0yoj2xTMmCigfafIcyfG7Z/QLwY8725BCGDj1D3V8MM/nbBepjjxMrUrMs4s=
-X-Received: by 2002:ac8:5e4f:0:b0:31e:d96f:a4e7 with SMTP id
- i15-20020ac85e4f000000b0031ed96fa4e7mr12764608qtx.634.1658155569981; Mon, 18
- Jul 2022 07:46:09 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220716031434.4021879-1-raj.khem@gmail.com>
- <20220716031434.4021879-3-raj.khem@gmail.com>
- <D981D817-D78E-4CEC-A685-7BABEF22530F@arm.com>
- <PA4PR08MB7411E748A14F4EBA9B9E132DE88C9@PA4PR08MB7411.eurprd08.prod.outlook.com>
-In-Reply-To: 
- <PA4PR08MB7411E748A14F4EBA9B9E132DE88C9@PA4PR08MB7411.eurprd08.prod.outlook.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 18 Jul 2022 10:45:59 -0400
+ AGRyM1uhn1kBZMtb8tcszpb0tIYB8pTTunwQjF/8swzNuXQWoBqqCp8ni8YvIpkWDKPtJqzi+6RYUA==
+X-Received: by 2002:a5d:440f:0:b0:21d:888b:a65b with SMTP id
+ z15-20020a5d440f000000b0021d888ba65bmr24146679wrq.655.1658157238660;
+        Mon, 18 Jul 2022 08:13:58 -0700 (PDT)
+Received: from ?IPv6:2001:8b0:aba:5f3c:5ca2:743d:43c8:8a3?
+ ([2001:8b0:aba:5f3c:5ca2:743d:43c8:8a3])
+        by smtp.gmail.com with ESMTPSA id
+ g14-20020adff40e000000b0021bbf6687b1sm13080222wro.81.2022.07.18.08.13.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 18 Jul 2022 08:13:58 -0700 (PDT)
 Message-ID: 
- <CAMKF1sqKO=B14tYy2MW1q+HOVf+Zawk0PBYeadWMP48GNMDFiw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 3/3] python3-pycups: Inherit setuptools3
- instead of python_setuptools_build_meta
-To: Ross Burton <Ross.Burton@arm.com>
-Cc: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000bb2d2b05e4156d75"
+ <316420e66a626dcaa2c57cf2cb4ac17fe079a5c4.camel@linuxfoundation.org>
+Subject: Re: [oe] buildpaths warnings in meta-openembedded
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: akuster808 <akuster808@gmail.com>, openembedded-devel
+	 <openembedded-devel@lists.openembedded.org>
+Cc: Steve Sakoman <steve@sakoman.com>
+Date: Mon, 18 Jul 2022 16:13:57 +0100
+In-Reply-To: <7845f900-1c43-235b-32a8-98ca009fd8fc@gmail.com>
+References: 
+	<44a7b736269f3ea568febae5f0d16033347cfe61.camel@linuxfoundation.org>
+	 <7845f900-1c43-235b-32a8-98ca009fd8fc@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.44.1-0ubuntu1 
+MIME-Version: 1.0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Jul 2022 14:46:12 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Jul 2022 15:14:02 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97877
+ https://lists.openembedded.org/g/openembedded-devel/message/97879
 
---000000000000bb2d2b05e4156d75
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Mon, 2022-07-18 at 08:02 -0700, akuster808 wrote:
+> Richard,
+>=20
+> On 7/17/22 23:52, Richard Purdie wrote:
+> > OE-Core recently enabled buildpaths in WARN_QA. This is so any
+> > reproducibility issues are highlighted by the build much earlier and
+> > for a wider cross section of the userbase.=C2=A0We're now at a point wh=
+ere
+> > having issues show up earlier to users is feasible and very valuable.
+> >=20
+> > We've managed to sort out OE-Core but meta-oe still has a number of
+> > issues. I've listed the ones from the last autobuilder run below. Note
+> > that where multiple files in a package trigger a warning, this will
+> > only list the first occurrence. To reproduce locally, after the first
+> > warning shows, the object will install from sstate and now warning will
+> > show a second time so you need to use "-C package_qa" to test under
+> > some cases.
+> Any indication this new QA check will be backported to the stable branche=
+s?
 
-On Mon, Jul 18, 2022 at 8:09 AM Ross Burton <Ross.Burton@arm.com> wrote:
+I wasn't planning to, it has needed a lot of fixes in different places.
+Where there are good fixes for existing code, we might backport those.
 
-> *> *the picobuild 0.2 upgrade queued for oe-core improves =E2=80=9Clegacy=
-=E2=80=9D
-> setuptools builds too.
->
-> I=E2=80=99ve just looked at the logs and this is the correct fix.  Don=E2=
-=80=99t merge
-> these, just wait for picobuild 0.2 to land.
->
->
-Ah a bit late but we can apply the new fixes once it lands on core
+Also, just for reference, this QA test already exists even in dunfell.
+It just isn't enabled and has bugs. We might backport the bug fixes,
+those would be safe enough (they're in the test itself so isolated).
 
+Cheers,
 
->
-> Ross
->
-
---000000000000bb2d2b05e4156d75
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Mon, Jul 18, 2022 at 8:09 AM Ross Burton &lt;<a href=3D"=
-mailto:Ross.Burton@arm.com">Ross.Burton@arm.com</a>&gt; wrote:<br></div><bl=
-ockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #=
-ccc solid;padding-left:1ex">
-
-
-
-
-
-<div lang=3D"EN-GB" link=3D"#0563C1" vlink=3D"#954F72" style=3D"word-wrap:b=
-reak-word">
-<div class=3D"m_-470380325719561422WordSection1">
-<div>
-<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt">&gt; </span></b>=
-<span style=3D"font-size:11.0pt">the picobuild 0.2 upgrade queued for oe-co=
-re improves =E2=80=9Clegacy=E2=80=9D setuptools builds too.<br>
-<br>
-<u></u><u></u></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">I=E2=80=99ve just l=
-ooked at the logs and this is the correct fix.=C2=A0 Don=E2=80=99t merge th=
-ese, just wait for picobuild 0.2 to land.</span></p></div></div></div><div =
-lang=3D"EN-GB" link=3D"#0563C1" vlink=3D"#954F72" style=3D"word-wrap:break-=
-word"><div class=3D"m_-470380325719561422WordSection1"><div><p class=3D"Mso=
-Normal"><span style=3D"font-size:11.0pt"><u></u><u></u></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt"><u></u></span></p><=
-/div></div></div></blockquote><div dir=3D"auto"><br></div><div dir=3D"auto"=
->Ah a bit late but we can apply the new fixes once it lands on core=C2=A0</=
-div><div dir=3D"auto"><br></div><blockquote class=3D"gmail_quote" style=3D"=
-margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><div lang=3D=
-"EN-GB" link=3D"#0563C1" vlink=3D"#954F72" style=3D"word-wrap:break-word"><=
-div class=3D"m_-470380325719561422WordSection1"><div><p class=3D"MsoNormal"=
- dir=3D"auto"><span style=3D"font-size:11.0pt">=C2=A0<u></u></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:11.0pt">Ross<u></u><u></u><=
-/span></p>
-</div>
-</div>
-</div>
-
-</blockquote></div></div>
-
---000000000000bb2d2b05e4156d75--
+Richard
 
