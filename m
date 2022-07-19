@@ -2,77 +2,74 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 24093CCA483
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1746AC43334
 	for <webhook@archiver.kernel.org>; Tue, 19 Jul 2022 06:15:57 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
- [85.158.142.2])
- by mx.groups.io with SMTP id smtpd.web11.37575.1658211349167506250
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.65])
+ by mx.groups.io with SMTP id smtpd.web11.37572.1658211343518210625
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Jul 2022 23:15:49 -0700
+ Mon, 18 Jul 2022 23:15:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Cf+LD7/h;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.2,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=dVGxYlH/;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.65,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1658211347; i=@fujitsu.com;
-	bh=gi9ob9vhraTKHCzKqMwBsKXMJhQTTfVPpD5PfuZDeYY=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=Cf+LD7/hLnnwWrnrk9KUGllI5Q9d5+zS3Oisj1fohChbmRM2baipYzv/dnjKoAbPr
-	 bn1eLf+q1uIkWBG/Jl0ZEHH9zB0EQBVd5OWaKrutS1h3mA41Cvz4Y41jY5ob3THwBw
-	 C9dAAJAWCyhwzUK+KH6pOhB/htGvqxImqvV+qnFScpwI7VhMOMHepwhWYS/gdmV9D2
-	 srSplv0r28IW9uIoB15htSqR8XknPkKmhzXHTbKIyB9DgWqzxwPTmhA1jnLuL/+Y9i
-	 zqinYwWAa+eRYwpy07ScXlsdS9+23MmUcBz8FkDVS6EAD3Xh8EulfIucP/jLM+hzG8
-	 kxyVHc4XYtgjw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrCIsWRWlGSWpSXmKPExsViZ8ORqCvkcy3
-  JYP1OI4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaO5K6JgFm/FgwkP2BoY13J3MXJxCAk8YZRo
-  /9vFDuFcZ5JYcbCPCcLZwygxq3M3axcjJwebgJrE9Fs3wGwRAX2JpbP3MIPYzAIqEi9+97CD2
-  MIC7hJ3HzxhBLFZBFQlzi0/ywZi8wo4Stzu72IBsSUEFCSmPHwP1ssp4CTxatsfsLgQUM3iA8
-  uZIOoFJU7OfMICMV9C4uCLF8wQvYoSsy83Q82pkJgxYxsbhK0mcfXcJuYJjIKzkLTPQtK+gJF
-  pFaNNUlFmekZJbmJmjq6hgYGuoaEpkDbUNTbQS6zSTdRLLdXNyy8qydA11EssL9ZLLS7WK67M
-  Tc5J0ctLLdnECAzklOJUuR2MB/b90jvEKMnBpCTKO1XzWpIQX1J+SmVGYnFGfFFpTmrxIUYZD
-  g4lCd4LnkA5waLU9NSKtMwcYFTBpCU4eJREeNOcgdK8xQWJucWZ6RCpU4yWHFevXNnLzPH301
-  8gOfNr2wFmIZa8/LxUKXHeQi+gBgGQhozSPLhxsMi/xCgrJczLyMDAIMRTkFqUm1mCKv+KUZy
-  DUUmYtwpkCk9mXgnc1ldABzEBHTTJ6QrIQSWJCCmpBqa6p9nmsi9/9+ubhaiqsrIWLPBlN3/+
-  bPZ2+ZW/q6q8f8ariWxYHqLrY37XKCppn3TIh+0LeqMYsvc4hP882cozdY+EImdBKfNzw32PG
-  ++sLH/KuthBqSO788HyvUs6NXOX/FrZnBtT0N1gfilU+3DeHudsi2zeeQXMp1zmfePa63Lt5a
-  s167dvuJSetORk6GLRO6Vnf7Ay73/f8tHLbfcL5v8zjfMONDYd5F76TNxJ+tnnZP17jN2X3YI
-  Uf+rrHnTr/vi3T/5P4ORltn8nWr2p9jz+t+XP5P0ljZMiJe92zlV6lHhbh+nSbJ+u8HX/TB1/
-  vBY8pP7ukdS13Qy7vP83HJxn6Flo9vZUeo5EsI4SS3FGoqEWc1FxIgCDTFSOdwMAAA==
+	s=170520fj; t=1658211341; i=@fujitsu.com;
+	bh=eOXFSLh5pZ5QwLhCjUCFVFIpJ4m2csaKUr3FK5exXSA=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=dVGxYlH/6l7Dgapx2EcNdmv1e6zGsOrJ5dIemSpiiE6A8hK0ZtMTD9WZYZgpwt10I
+	 8OGMFo6MgRXQmpIqY3wNMwgdJtotSP2cPaCosPg4YzGU4wgC0kIMZbEt0AebQI1udy
+	 WqJr/E7GOg4vZNbZGnNyOFrV0rH7/Gc6CdR9bzd1Z6FZ1b/JCIq16IskVTP1P5v56+
+	 hREvHiVDxKvPZYC+7DMfM0LeFD1cqdlHZ9Ava86FTVIq2jC7ZaI4OgUav2TvvYjDum
+	 JOQPZgeTMYFkzV6ZHkgKkZkncIqQKgD1WbBe+ntCGT5OJVU+ZXjQNh91ybOsFBUR8+
+	 KIEp7r+PdkaWA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrPIsWRWlGSWpSXmKPExsViZ8ORpMvrcy3
+  JYOdzGYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeP/4yesBT0cFd3f7RoY17N3MXJxCAk8ZJRY
+  sHMBE4RzhUmi9+hdKGcPo8SnGy+Zuxg5OdgE1CSm37rBCmKLCOhLLJ29ByzOLKAi8eJ3DzuIL
+  SzgJXG3aQFQnIODRUBV4kWzCEiYV8BRYsvy70wgtoSAgsSUh++ZIeKCEidnPmGBGCMhcfDFC2
+  aIGkWJ2ZebWSDsCokZM7axQdhqElfPbWKewMg/C0n7LCTtCxiZVjFaJRVlpmeU5CZm5ugaGhj
+  oGhqa6prqGhmZ6yVW6SbqpZbqlqcWl+ga6iWWF+ulFhfrFVfmJuek6OWllmxiBIZkSjHr4x2M
+  a/p+6h1ilORgUhLlnap5LUmILyk/pTIjsTgjvqg0J7X4EKMMB4eSBO8FT6CcYFFqempFWmYOM
+  D5g0hIcPEoivGnOQGne4oLE3OLMdIjUKUZ7jqtXruxl5pg6+99+Zo7lYHLm17YDzEIsefl5qV
+  LivIVeQG0CIG0ZpXlwQ2HxfIlRVkqYl5GBgUGIpyC1KDezBFX+FaM4B6OSMG8VyBSezLwSuN2
+  vgM5iAjprktMVkLNKEhFSUg1M+748nOmt8eNaOLdbm5y7z4L6GVn/16T5TfoU9GzDVqvV5/aL
+  3NGqzW3nNnfiMfp9rfh2BfORr7ef/JfS7fwS3h6aJ8cjItthonk1/GjzBZ9L/xwTbh39FeHet
+  ItZQPXm9z+p3Mt4NTi/tNnX1BsUeO+9e/1z6Fqbl6dtHLfm30qef/9D9K0an/2bgp+E+9/PZT
+  5YcSrhx055m9bP7w72f96/TdSEK4a1cVVf3Yzv7JsFD6ucY0y/bLhF0dr6zratO+cyzC+W06m
+  cd+VZ49JPFUt+mPLzmxzzYglmzU0qvB0grH32mHnaFrYJNfpTfa99WnrHVNmflzH8Jl/dhTCJ
+  5Y2f8sSn5LLlKhQriLErsRRnJBpqMRcVJwIAkjLz6WIDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-23.tower-745.messagelabs.com!1658211346!467866!1
-X-Originating-IP: [62.60.8.97]
+X-Msg-Ref: server-9.tower-591.messagelabs.com!1658211341!590594!1
+X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 6264 invoked from network); 19 Jul 2022 06:15:46 -0000
-Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
-  by server-23.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 19 Jul 2022 06:15:46 -0000
-Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 404A4100195
+Received: (qmail 29750 invoked from network); 19 Jul 2022 06:15:41 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-9.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 19 Jul 2022 06:15:41 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 1D3231AE
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Jul 2022 07:15:46 +0100 (BST)
+ Tue, 19 Jul 2022 07:15:41 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
  [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 34490100190
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 1221E1AC
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Jul 2022 07:15:46 +0100 (BST)
+ Tue, 19 Jul 2022 07:15:41 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Tue, 19 Jul 2022 07:15:44 +0100
+ (TLS) id 15.0.1497.32; Tue, 19 Jul 2022 07:15:38 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] modemmanager: upgrade 1.18.8 -> 1.18.10
-Date: Tue, 19 Jul 2022 14:15:26 +0800
-Message-ID: <1658211328-2951-3-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] nbdkit: upgrade 1.31.10 -> 1.31.12
+Date: Tue, 19 Jul 2022 14:15:24 +0800
+Message-ID: <1658211328-2951-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1658211328-2951-1-git-send-email-wangmy@fujitsu.com>
-References: <1658211328-2951-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -84,56 +81,30 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 19 Jul 2022 06:15:57 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97893
-
-Changelog:
-=========
- * Build:
-   ** Require libqmi 1.30.8.
-
- * FCC unlock:
-   ** Updated SDX55 unlock script to handle the new method introduced in
-      the latest firmware releases.
-
- * Modem interface:
-   ** Set signal quality to 0% on shutdown.
-   ** Set signal quality as recent on init.
-
- * MBIM:
-   ** Fix task completion when peeking device fails.
-   ** Fix several GError double-frees.
-
- * mmcli:
-   ** Don't print signal quality until modem is enabled.
-
- * Plugins:
-   ** foxconn: remove carrier mapping table for T99W175.
-
- * Several other minor improvements and fixes.
-
+ https://lists.openembedded.org/g/openembedded-devel/message/97891
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{modemmanager_1.18.8.bb => modemmanager_1.18.10.bb}         | 2 +-
+ .../nbdkit/{nbdkit_1.31.10.bb => nbdkit_1.31.12.bb}             | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.18.8.bb => modemmanager_1.18.10.bb} (97%)
+ rename meta-networking/recipes-support/nbdkit/{nbdkit_1.31.10.bb => nbdkit_1.31.12.bb} (95%)
 
-diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.8.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.10.bb
-similarity index 97%
-rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.8.bb
-rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.10.bb
-index 28f81ba6e5..9316cbbbc1 100644
---- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.8.bb
-+++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.18.10.bb
-@@ -12,7 +12,7 @@ inherit gnomebase gettext systemd gobject-introspection bash-completion
+diff --git a/meta-networking/recipes-support/nbdkit/nbdkit_1.31.10.bb b/meta-networking/recipes-support/nbdkit/nbdkit_1.31.12.bb
+similarity index 95%
+rename from meta-networking/recipes-support/nbdkit/nbdkit_1.31.10.bb
+rename to meta-networking/recipes-support/nbdkit/nbdkit_1.31.12.bb
+index 07870bb2c0..302e7a2109 100644
+--- a/meta-networking/recipes-support/nbdkit/nbdkit_1.31.10.bb
++++ b/meta-networking/recipes-support/nbdkit/nbdkit_1.31.12.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f9dcc2d8acdde215fa4bd6ac12bb14f0"
  
- DEPENDS = "glib-2.0 libgudev libxslt-native dbus"
+ SRC_URI = "git://github.com/libguestfs/nbdkit.git;protocol=https;branch=master \
+ "
+-SRCREV = "1c31e0e5397646ae3709b1fbfd9c3b47b904f254"
++SRCREV = "33cdb16e65c59b5989ad967ec0cccb2ad249cc97"
  
--SRCREV ?= "0d8b5e93fc62eb0f41e18a2d9d845331d7af36ec"
-+SRCREV ?= "1338749739e0c01bdbc6ddf92388a781806ec3ac"
+ S = "${WORKDIR}/git"
  
- # Patch 0001 will be in ModemManager > 1.19
- SRC_URI = " \
 -- 
 2.25.1
 
