@@ -1,118 +1,158 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 68086C43334
-	for <webhook@archiver.kernel.org>; Tue, 19 Jul 2022 13:40:39 +0000 (UTC)
-Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com
- [209.85.160.181])
- by mx.groups.io with SMTP id smtpd.web12.40742.1658238033170075100
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C1D70C43334
+	for <webhook@archiver.kernel.org>; Tue, 19 Jul 2022 14:48:59 +0000 (UTC)
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com
+ [209.85.218.50])
+ by mx.groups.io with SMTP id smtpd.web08.41549.1658242136183713866
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Jul 2022 06:40:33 -0700
+ Tue, 19 Jul 2022 07:48:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=NjtnnBfg;
- spf=pass (domain: gmail.com, ip: 209.85.160.181,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f181.google.com with SMTP id r2so11024072qta.0
+ dkim=pass header.i=@bgdev-pl.20210112.gappssmtp.com header.s=20210112
+ header.b=5MKN0rcC;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.218.50,
+ mailfrom: brgl@bgdev.pl)
+Received: by mail-ej1-f50.google.com with SMTP id j22so27657404ejs.2
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Jul 2022 06:40:33 -0700 (PDT)
+ Tue, 19 Jul 2022 07:48:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :references:from:in-reply-to:content-transfer-encoding;
-        bh=sBnB1DeumkuKi4VD71Pg097oEsVWIaSKXzB78kXdtDc=;
-        b=NjtnnBfg+K5ca1gBuhxCILNAd4qm6c3KmWEep3NDMw08aK7Lzo3Sh0/QnHT9V8RKxN
-         4fdjdhrIUWZXicoDAW7SazE02h5Uwnf2189bwYUUWrfK1LWFzXeqMAiayLPB6gsT2Uka
-         SwfsVz4SjJPwkl4za7adpn5Xw3+ucMlYJ8TaMM9+kVAZmgtm8Um/YZjA0M+nj+6lUXXW
-         CXKKusBWPZOB3poxgTqFHxRMj9LXzsv0Dj9oPtrsT0rR/QAnrWc+TkKUrSNvbO5O9gxL
-         iEbCJD7eaIBvraV7GAJoSR//50J4td5v64HTUywQ4JNNX+T2zHmercOgbVYyVy4eeaVp
-         PCHw==
+        d=bgdev-pl.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=hWFfDiMm50mlMypn99X0EZ0lGs4yigb4pSIvZ7nVALE=;
+        b=5MKN0rcCKeIOz356DTGbdRRCPbT8R7h8jnDZkNMv5wAZqCRp8sNQTfY+0ip2b2N2FD
+         pugK2ZEtOMBc1oOp6r0o6fQKICgQTLh0ipBKmD58+UD9NADfS/u1atdFQfJptGSDYBtl
+         cLMZyb0UfiYCCLGfBngzln2HF1mSvDk0t2B96mhjDZbN7Fn5HEM3+o39DI1snHFxVkYb
+         KJMoO70cCZdvBRz/Rt74d+//wTS/aCyND0mZqEOOaXDltUQcPywS/dre9T4DfluXWcQJ
+         pTMn/dsjrsj69hfI/18+alQB2LT6uVMFDZ3v4wILAz5WE4kN3+laRwb3i+VJKiPWGOPt
+         yT1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=sBnB1DeumkuKi4VD71Pg097oEsVWIaSKXzB78kXdtDc=;
-        b=zQrSe+rDspIGj7CSwQaOQ7u7BHN0Ge0OvuK24E044V1n++NFwnLHGRX2dwLCDor9QB
-         1HlUmokEN3Z8Vgbwcm65lbkV9vV47V/5SVncRMcxMzs/dbWzbuWfPCe4C8ZlCuZwG8ET
-         VSPFPJ4HEBd0b8FMWVjt40dzFIgn+PSl0aTDIRctwemqCtfZea+r+Jesa9mDC0QdJFri
-         Xem+QFNZvCeabKaESBgcBuA81ZGCeouZRBEcnnam1vhlwVeeBronYVVjWpuCOCruonKr
-         BEVEm6+6E44BqA2Om28WsKCKXWbFpLMnj0zIQ6brQR/GS2QrabCSMVMwowncOQmofx5p
-         4JPg==
-X-Gm-Message-State: AJIora+7jmk5jBcKfLAZvyhmBw0cn+1tTe2IbskRQBzOUSfGCw7q+qnj
-	hSCTOk7rkHhjd5ioHQ/yfJuBLiqUvMlM8g==
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=hWFfDiMm50mlMypn99X0EZ0lGs4yigb4pSIvZ7nVALE=;
+        b=ylCRHDlJz7w/zawCYCbKRACu1rZPBkRADFX2UvyXmQ7JU4m8PayjuSx1jFkP/1tXII
+         LlSXWYZX34PDqknVXjyqMp21/eHUagX3gKVlcFAJ6wk3A+gokmZQgxMOyW00d7dYYrnU
+         +GIYr/2MIYeRI7PHKBz+h7qd5VKwYndIDZyLowZrLhy47YWI6GHx5pX1nxTks6vDJgoo
+         k+ynCzBxTrWWWnL0hjOCQr+bGwuSdeF2Mcg5TIqGT+Hpy7pEmLdIA6xmo7qrzLTAsCpE
+         MEAO4hXn8WkIcCB+ra/yS8XddFo94QD1wSRq/n/xuyyr36thlSvdqlbGul4NxhOUqzLL
+         lDxg==
+X-Gm-Message-State: AJIora92Q6S1EMWP1Yv4UpqYLVrYzZeupz1XsQQ1S30da6yq8K8iosSX
+	mDxkf3OKD4KtX18zZxhwhOlCOvgMK5WfRilX9ilaVQ==
 X-Google-Smtp-Source: 
- AGRyM1uOOCirCy7TCRVeyyMVzyyE6Tfgzly9ZR+ejbzzTgZVp9bWZeK4aQbWvJ/WY2eq0NKN5PVzSA==
-X-Received: by 2002:ac8:4e49:0:b0:31e:b3e1:4478 with SMTP id
- e9-20020ac84e49000000b0031eb3e14478mr24897664qtw.97.1658238032186;
-        Tue, 19 Jul 2022 06:40:32 -0700 (PDT)
-Received: from ?IPV6:2607:fea8:95df:9730:a90f:7fcf:f7e0:a30e?
- ([2607:fea8:95df:9730:a90f:7fcf:f7e0:a30e])
-        by smtp.gmail.com with ESMTPSA id
- d66-20020ae9ef45000000b006b5683ee311sm13185556qkg.100.2022.07.19.06.40.31
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 19 Jul 2022 06:40:31 -0700 (PDT)
-Message-ID: <3a331d56-ee77-c023-b0f9-2a96bae3098b@gmail.com>
-Date: Tue, 19 Jul 2022 09:40:30 -0400
+ AGRyM1soXvjurTSb+7BdjC/twnFpnXaRvcxDaw/sIbpuHwQSWK9BORJFfAfXk69+wjz4xc9x6/HYUcV4ulPjqxZRqoM=
+X-Received: by 2002:a17:907:87b0:b0:72b:9f0d:3f89 with SMTP id
+ qv48-20020a17090787b000b0072b9f0d3f89mr29571017ejc.734.1658242134018; Tue, 19
+ Jul 2022 07:48:54 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.0.2
-Subject: Re: [oe] [meta-perl] PATCH] logcheck: upgrade 1.3.23 -> 1.3.24
-Content-Language: en-US
-To: wangmy <wangmy@fujitsu.com>, openembedded-devel@lists.openembedded.org
-References: <1658211328-2951-1-git-send-email-wangmy@fujitsu.com>
- <1658211328-2951-4-git-send-email-wangmy@fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1658211328-2951-4-git-send-email-wangmy@fujitsu.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: 
+ <CAMRc=McXfAzcUrdTLWsHHEo8DyUwU1gUuFTBALwXpJCuA0CoEA@mail.gmail.com>
+ <YtWrKcR6y1jWSFtC@kudzu.us>
+ <CAMKF1sqZh=fPoYHqh-uuJL6oftkmGoDHHcZkTgivoKapFFerAQ@mail.gmail.com>
+ <CAPoiz9zRWPGLSUNaeTQDO=E60cGD4zRVmnZmHFkSdVLrkx_WmA@mail.gmail.com>
+ <CAMRc=MecfyMPB2B5ukhYzMdQDWL4fY=8nbfUe0LR_8hUPhNP9w@mail.gmail.com>
+ <CAMKF1srBz3xL0VTZedyyf4oFgiXxn7ai4afH37yBrT63djTr3Q@mail.gmail.com>
+In-Reply-To: 
+ <CAMKF1srBz3xL0VTZedyyf4oFgiXxn7ai4afH37yBrT63djTr3Q@mail.gmail.com>
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Tue, 19 Jul 2022 16:48:43 +0200
+Message-ID: 
+ <CAMRc=MdFDGv=a04jn23r2v0ZoYYTACW2-KNNi2dVboU2knoDoQ@mail.gmail.com>
+Subject: Re: [oe] [meta-zephyr] build broken with current oe-core master
+To: Khem Raj <raj.khem@gmail.com>
+Cc: =?UTF-8?B?RWlsw61zIE7DrSBGaGxhbm5hZ8OhaW4=?=
+ <elizabeth.flanagan@huawei.com>,
+	Jon Mason <jdmason@kudzu.us>, Jon Mason <jon.mason@arm.com>,
+	Naveen Saini <naveen.kumar.saini@intel.com>,
+	Patches and discussions about the oe-core layer
+ <openembedded-core@lists.openembedded.org>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 19 Jul 2022 13:40:39 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 19 Jul 2022 14:48:59 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97900
+ https://lists.openembedded.org/g/openembedded-devel/message/97901
 
+On Tue, Jul 19, 2022 at 2:54 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+>
+>
+> On Tue, Jul 19, 2022 at 3:40 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+>>
+>> On Tue, Jul 19, 2022 at 12:10 AM Jon Mason <jdmason@kudzu.us> wrote:
+>> >
+>> > On Mon, Jul 18, 2022 at 4:06 PM Khem Raj <raj.khem@gmail.com> wrote:
+>> > >
+>> > > Can you try something like this
+>> > >
+>> > > diff --git a/meta/recipes-devtools/gcc/gcc-runtime.inc
+>> > > b/meta/recipes-devtools/gcc/gcc-runtime.inc
+>> > > index 5d74e4494d..61d5bf6058 100644
+>> > > --- a/meta/recipes-devtools/gcc/gcc-runtime.inc
+>> > > +++ b/meta/recipes-devtools/gcc/gcc-runtime.inc
+>> > > @@ -68,8 +68,7 @@ do_configure () {
+>> > >     # libstdc++ isn't built yet so CXX would error not able to find it
+>> > > which breaks stdc++'s configure
+>> > >     # tests. Create a dummy empty lib for the purposes of configure.
+>> > >     mkdir -p ${WORKDIR}/dummylib
+>> > > -   touch ${WORKDIR}/dummylib/dummylib.c
+>> > > -   ${CC} ${WORKDIR}/dummylib/dummylib.c -shared -o
+>> > > ${WORKDIR}/dummylib/libstdc++.so
+>> > > +   ${CC} -nostartfiles -shared -x c /dev/null -o
+>> > > ${WORKDIR}/dummylib/libstdc++.so
+>> > >     for d in libgcc ${RUNTIMETARGET}; do
+>> > >         echo "Configuring $d"
+>> > >         rm -rf ${B}/${TARGET_SYS}/$d/
+>> > >
+>> > >
+>> > > and see if it helps ?
+>> >
+>> > That appears to work for the 2 zephyr machines in meta-arm
+>> >
+>>
+>> This still fails for arduino nano 33 ble:
+>>
+>> | checking for dirent.h... no
+>> | checking sys/statvfs.h usability... no
+>> | checking sys/statvfs.h presence... no
+>> | checking for sys/statvfs.h... no
+>> | checking utime.h usability... yes
+>> | checking utime.h presence... yes
+>> | checking for utime.h... yes
+>> | checking whether to build Filesystem TS support... no
+>> | checking for struct dirent.d_type... no
+>> | checking for realpath... no
+>> | checking for utimensat... no
+>> | checking for utime... no
+>> | checking for lstat... no
+>> | checking for struct stat.st_mtim.tv_nsec... yes
+>> | checking for fchmod... yes
+>> | checking for fchmodat... yes
+>> | checking for sendfile that can copy files... no
+>> | checking for link... yes
+>> | checking for readlink... yes
+>> | checking for symlink... yes
+>> | checking for truncate... yes
+>> | checking for fdopendir... no
+>> | checking for dirfd... no
+>> | checking for unlinkat... yes
+>> | checking __sync extensions... yes
+>> | checking link.h usability... no
+>> | checking link.h presence... no
+>> | checking for link.h... no
+>> | checking for fcntl... configure: error: Link tests are not allowed
+>> after GCC_NO_EXECUTABLES.
+>
+>
+>
+> Can you post config.log from this component
+>
 
+Here you go: https://pastebin.com/6KMD9PhX
 
-On 7/19/22 2:15 AM, wangmy wrote:
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->   .../logcheck/{logcheck_1.3.23.bb => logcheck_1.3.24.bb}       | 4 +---
->   1 file changed, 1 insertion(+), 3 deletions(-)
->   rename meta-perl/recipes-extended/logcheck/{logcheck_1.3.23.bb => logcheck_1.3.24.bb} (96%)
-> 
-> diff --git a/meta-perl/recipes-extended/logcheck/logcheck_1.3.23.bb b/meta-perl/recipes-extended/logcheck/logcheck_1.3.24.bb
-> similarity index 96%
-> rename from meta-perl/recipes-extended/logcheck/logcheck_1.3.23.bb
-> rename to meta-perl/recipes-extended/logcheck/logcheck_1.3.24.bb
-> index b40d52ab94..ea3dd5a4c9 100644
-> --- a/meta-perl/recipes-extended/logcheck/logcheck_1.3.23.bb
-> +++ b/meta-perl/recipes-extended/logcheck/logcheck_1.3.24.bb
-> @@ -14,9 +14,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c93c0550bd3173f4504b2cbd8991e50b"
->   SRC_URI = "${DEBIAN_MIRROR}/main/l/${BPN}/${BPN}_${PV}.tar.xz \
->              file://99_logcheck \
->   "
-> -SRC_URI[sha256sum] = "a2188ba549fff4412c82074b271884ff66d25f3fdb2a41916e817ce676855b29"
-> -
-> -S = "${WORKDIR}/${BPN}"
-
-S is not needed to be set here anymore ? Is this change documented 
-somewhere
-
-> +SRC_URI[sha256sum] = "5e304adf2880967c3b155bcf98e4f0809417a16bf91adb372fa065f38ab2c0cf"
->   
->   inherit useradd
->   
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#97894): https://lists.openembedded.org/g/openembedded-devel/message/97894
-> Mute This Topic: https://lists.openembedded.org/mt/92477643/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
+Bart
 
