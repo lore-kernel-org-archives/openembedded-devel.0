@@ -1,51 +1,48 @@
-Return-Path: <brgl@bgdev.pl>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C1D70C43334
-	for <webhook@archiver.kernel.org>; Tue, 19 Jul 2022 14:48:59 +0000 (UTC)
-Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com
- [209.85.218.50])
- by mx.groups.io with SMTP id smtpd.web08.41549.1658242136183713866
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BAEABCCA481
+	for <webhook@archiver.kernel.org>; Tue, 19 Jul 2022 14:58:29 +0000 (UTC)
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com
+ [209.85.208.43])
+ by mx.groups.io with SMTP id smtpd.web08.41675.1658242700270447105
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Jul 2022 07:48:56 -0700
+ Tue, 19 Jul 2022 07:58:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20210112.gappssmtp.com header.s=20210112
- header.b=5MKN0rcC;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.218.50,
- mailfrom: brgl@bgdev.pl)
-Received: by mail-ej1-f50.google.com with SMTP id j22so27657404ejs.2
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Jul 2022 07:48:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=VmG/5hFF;
+ spf=pass (domain: gmail.com, ip: 209.85.208.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-ed1-f43.google.com with SMTP id m13so9795014edc.5;
+        Tue, 19 Jul 2022 07:58:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20210112.gappssmtp.com; s=20210112;
+        d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=hWFfDiMm50mlMypn99X0EZ0lGs4yigb4pSIvZ7nVALE=;
-        b=5MKN0rcCKeIOz356DTGbdRRCPbT8R7h8jnDZkNMv5wAZqCRp8sNQTfY+0ip2b2N2FD
-         pugK2ZEtOMBc1oOp6r0o6fQKICgQTLh0ipBKmD58+UD9NADfS/u1atdFQfJptGSDYBtl
-         cLMZyb0UfiYCCLGfBngzln2HF1mSvDk0t2B96mhjDZbN7Fn5HEM3+o39DI1snHFxVkYb
-         KJMoO70cCZdvBRz/Rt74d+//wTS/aCyND0mZqEOOaXDltUQcPywS/dre9T4DfluXWcQJ
-         pTMn/dsjrsj69hfI/18+alQB2LT6uVMFDZ3v4wILAz5WE4kN3+laRwb3i+VJKiPWGOPt
-         yT1g==
+        bh=N48V5aQpadqNzrICaU6fDN1W5p3A7lMFhh8dYt0XRXw=;
+        b=VmG/5hFFKFjn58RSlHnKzF3GAXKhzYM2axC9xyIGuSU82Mf6wnu549qxpmzEUgsZRE
+         a1I3O/INqXdV7Gz53LJ+ExT2w31yyCUsW/f+N99CIpRNC/itry0e6Arpiw1iDGGWVaue
+         Hx6I/iOU/Pt/ltOcgOdA5nFY5nOIYqHJKOX3VAQIYUlt4i2F4/Ro7wO4VxoGSMF46hMn
+         66X28MVhnr00B8RR/MghS+jsso81I6vj3UE34Q8W39xCLtxyEkVT5hPq7Wtj7hu+H0yt
+         qzG5givXKusg5XXoXKSq01CBZeMi8bTUfDdgeNg9yx9w4jc45VPWYuIk8a6YwRmvpEOc
+         agvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=hWFfDiMm50mlMypn99X0EZ0lGs4yigb4pSIvZ7nVALE=;
-        b=ylCRHDlJz7w/zawCYCbKRACu1rZPBkRADFX2UvyXmQ7JU4m8PayjuSx1jFkP/1tXII
-         LlSXWYZX34PDqknVXjyqMp21/eHUagX3gKVlcFAJ6wk3A+gokmZQgxMOyW00d7dYYrnU
-         +GIYr/2MIYeRI7PHKBz+h7qd5VKwYndIDZyLowZrLhy47YWI6GHx5pX1nxTks6vDJgoo
-         k+ynCzBxTrWWWnL0hjOCQr+bGwuSdeF2Mcg5TIqGT+Hpy7pEmLdIA6xmo7qrzLTAsCpE
-         MEAO4hXn8WkIcCB+ra/yS8XddFo94QD1wSRq/n/xuyyr36thlSvdqlbGul4NxhOUqzLL
-         lDxg==
-X-Gm-Message-State: AJIora92Q6S1EMWP1Yv4UpqYLVrYzZeupz1XsQQ1S30da6yq8K8iosSX
-	mDxkf3OKD4KtX18zZxhwhOlCOvgMK5WfRilX9ilaVQ==
+        bh=N48V5aQpadqNzrICaU6fDN1W5p3A7lMFhh8dYt0XRXw=;
+        b=FvH63knU0B5vRYdYk3FA+9YgtFdgVDG7KRUHnqsJ9+hlsdWp3mn6zqtUE6i30Zg8do
+         z7WSPlDghM596popktPI6c/ps3Q2/hIHPfPvgzcdwtjzlfmxHpcnH10EMrXtT+rBeeTc
+         e2ZEcD7UKXpAOgLIPRIcxZMhREVyZlq1I8LdOg7Diz/Bdde/aqu+Jf+CETa3qni7N7DM
+         ZATtR0QFhdSDhPtO8z9tSdHGhtjDV2ArHuN0fgLwkkRAe4kZ5GJcdahDUIYRnYyygVJc
+         nmeiTsiyuFoH7KM+ZlFkccFY4x2dI2f8yXl2oQlrpvJ5A4Qy3jKpTFuqBHxEnYmsat9k
+         Vq5g==
+X-Gm-Message-State: AJIora+pLORHqxssrQ3jkft0uCVGHJhFiZYKaUml9nKwBKshUia13Qyo
+	16KkqxWQwe14gLagDskU5N6jSE2EWcbw3fcN81I=
 X-Google-Smtp-Source: 
- AGRyM1soXvjurTSb+7BdjC/twnFpnXaRvcxDaw/sIbpuHwQSWK9BORJFfAfXk69+wjz4xc9x6/HYUcV4ulPjqxZRqoM=
-X-Received: by 2002:a17:907:87b0:b0:72b:9f0d:3f89 with SMTP id
- qv48-20020a17090787b000b0072b9f0d3f89mr29571017ejc.734.1658242134018; Tue, 19
- Jul 2022 07:48:54 -0700 (PDT)
+ AGRyM1vaxnq4Pkd9/3ELmflaA5xkjQnPDR+SVfWBk1OKHKFkMHdXENuXtEqRgM4v70CtaNXf8lD0k0zh4eyG4k/kl7k=
+X-Received: by 2002:a50:fd08:0:b0:43a:7890:9c54 with SMTP id
+ i8-20020a50fd08000000b0043a78909c54mr44515821eds.52.1658242698555; Tue, 19
+ Jul 2022 07:58:18 -0700 (PDT)
 MIME-Version: 1.0
 References: 
  <CAMRc=McXfAzcUrdTLWsHHEo8DyUwU1gUuFTBALwXpJCuA0CoEA@mail.gmail.com>
@@ -54,14 +51,15 @@ References:
  <CAPoiz9zRWPGLSUNaeTQDO=E60cGD4zRVmnZmHFkSdVLrkx_WmA@mail.gmail.com>
  <CAMRc=MecfyMPB2B5ukhYzMdQDWL4fY=8nbfUe0LR_8hUPhNP9w@mail.gmail.com>
  <CAMKF1srBz3xL0VTZedyyf4oFgiXxn7ai4afH37yBrT63djTr3Q@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1srBz3xL0VTZedyyf4oFgiXxn7ai4afH37yBrT63djTr3Q@mail.gmail.com>
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-Date: Tue, 19 Jul 2022 16:48:43 +0200
-Message-ID: 
  <CAMRc=MdFDGv=a04jn23r2v0ZoYYTACW2-KNNi2dVboU2knoDoQ@mail.gmail.com>
+In-Reply-To: 
+ <CAMRc=MdFDGv=a04jn23r2v0ZoYYTACW2-KNNi2dVboU2knoDoQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 19 Jul 2022 10:57:52 -0400
+Message-ID: 
+ <CAMKF1sr5cQeqoQum3HAdHVrv-3EbrCkMfmMzoppQUCiisLiEYA@mail.gmail.com>
 Subject: Re: [oe] [meta-zephyr] build broken with current oe-core master
-To: Khem Raj <raj.khem@gmail.com>
+To: Bartosz Golaszewski <brgl@bgdev.pl>
 Cc: =?UTF-8?B?RWlsw61zIE7DrSBGaGxhbm5hZ8OhaW4=?=
  <elizabeth.flanagan@huawei.com>,
 	Jon Mason <jdmason@kudzu.us>, Jon Mason <jon.mason@arm.com>,
@@ -73,86 +71,93 @@ Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 19 Jul 2022 14:48:59 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 19 Jul 2022 14:58:29 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97901
+ https://lists.openembedded.org/g/openembedded-devel/message/97902
 
-On Tue, Jul 19, 2022 at 2:54 PM Khem Raj <raj.khem@gmail.com> wrote:
+On Tue, Jul 19, 2022 at 10:48 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
 >
+> On Tue, Jul 19, 2022 at 2:54 PM Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> >
+> >
+> > On Tue, Jul 19, 2022 at 3:40 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+> >>
+> >> On Tue, Jul 19, 2022 at 12:10 AM Jon Mason <jdmason@kudzu.us> wrote:
+> >> >
+> >> > On Mon, Jul 18, 2022 at 4:06 PM Khem Raj <raj.khem@gmail.com> wrote:
+> >> > >
+> >> > > Can you try something like this
+> >> > >
+> >> > > diff --git a/meta/recipes-devtools/gcc/gcc-runtime.inc
+> >> > > b/meta/recipes-devtools/gcc/gcc-runtime.inc
+> >> > > index 5d74e4494d..61d5bf6058 100644
+> >> > > --- a/meta/recipes-devtools/gcc/gcc-runtime.inc
+> >> > > +++ b/meta/recipes-devtools/gcc/gcc-runtime.inc
+> >> > > @@ -68,8 +68,7 @@ do_configure () {
+> >> > >     # libstdc++ isn't built yet so CXX would error not able to find it
+> >> > > which breaks stdc++'s configure
+> >> > >     # tests. Create a dummy empty lib for the purposes of configure.
+> >> > >     mkdir -p ${WORKDIR}/dummylib
+> >> > > -   touch ${WORKDIR}/dummylib/dummylib.c
+> >> > > -   ${CC} ${WORKDIR}/dummylib/dummylib.c -shared -o
+> >> > > ${WORKDIR}/dummylib/libstdc++.so
+> >> > > +   ${CC} -nostartfiles -shared -x c /dev/null -o
+> >> > > ${WORKDIR}/dummylib/libstdc++.so
+> >> > >     for d in libgcc ${RUNTIMETARGET}; do
+> >> > >         echo "Configuring $d"
+> >> > >         rm -rf ${B}/${TARGET_SYS}/$d/
+> >> > >
+> >> > >
+> >> > > and see if it helps ?
+> >> >
+> >> > That appears to work for the 2 zephyr machines in meta-arm
+> >> >
+> >>
+> >> This still fails for arduino nano 33 ble:
+> >>
+> >> | checking for dirent.h... no
+> >> | checking sys/statvfs.h usability... no
+> >> | checking sys/statvfs.h presence... no
+> >> | checking for sys/statvfs.h... no
+> >> | checking utime.h usability... yes
+> >> | checking utime.h presence... yes
+> >> | checking for utime.h... yes
+> >> | checking whether to build Filesystem TS support... no
+> >> | checking for struct dirent.d_type... no
+> >> | checking for realpath... no
+> >> | checking for utimensat... no
+> >> | checking for utime... no
+> >> | checking for lstat... no
+> >> | checking for struct stat.st_mtim.tv_nsec... yes
+> >> | checking for fchmod... yes
+> >> | checking for fchmodat... yes
+> >> | checking for sendfile that can copy files... no
+> >> | checking for link... yes
+> >> | checking for readlink... yes
+> >> | checking for symlink... yes
+> >> | checking for truncate... yes
+> >> | checking for fdopendir... no
+> >> | checking for dirfd... no
+> >> | checking for unlinkat... yes
+> >> | checking __sync extensions... yes
+> >> | checking link.h usability... no
+> >> | checking link.h presence... no
+> >> | checking for link.h... no
+> >> | checking for fcntl... configure: error: Link tests are not allowed
+> >> after GCC_NO_EXECUTABLES.
+> >
+> >
+> >
+> > Can you post config.log from this component
+> >
 >
->
-> On Tue, Jul 19, 2022 at 3:40 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
->>
->> On Tue, Jul 19, 2022 at 12:10 AM Jon Mason <jdmason@kudzu.us> wrote:
->> >
->> > On Mon, Jul 18, 2022 at 4:06 PM Khem Raj <raj.khem@gmail.com> wrote:
->> > >
->> > > Can you try something like this
->> > >
->> > > diff --git a/meta/recipes-devtools/gcc/gcc-runtime.inc
->> > > b/meta/recipes-devtools/gcc/gcc-runtime.inc
->> > > index 5d74e4494d..61d5bf6058 100644
->> > > --- a/meta/recipes-devtools/gcc/gcc-runtime.inc
->> > > +++ b/meta/recipes-devtools/gcc/gcc-runtime.inc
->> > > @@ -68,8 +68,7 @@ do_configure () {
->> > >     # libstdc++ isn't built yet so CXX would error not able to find it
->> > > which breaks stdc++'s configure
->> > >     # tests. Create a dummy empty lib for the purposes of configure.
->> > >     mkdir -p ${WORKDIR}/dummylib
->> > > -   touch ${WORKDIR}/dummylib/dummylib.c
->> > > -   ${CC} ${WORKDIR}/dummylib/dummylib.c -shared -o
->> > > ${WORKDIR}/dummylib/libstdc++.so
->> > > +   ${CC} -nostartfiles -shared -x c /dev/null -o
->> > > ${WORKDIR}/dummylib/libstdc++.so
->> > >     for d in libgcc ${RUNTIMETARGET}; do
->> > >         echo "Configuring $d"
->> > >         rm -rf ${B}/${TARGET_SYS}/$d/
->> > >
->> > >
->> > > and see if it helps ?
->> >
->> > That appears to work for the 2 zephyr machines in meta-arm
->> >
->>
->> This still fails for arduino nano 33 ble:
->>
->> | checking for dirent.h... no
->> | checking sys/statvfs.h usability... no
->> | checking sys/statvfs.h presence... no
->> | checking for sys/statvfs.h... no
->> | checking utime.h usability... yes
->> | checking utime.h presence... yes
->> | checking for utime.h... yes
->> | checking whether to build Filesystem TS support... no
->> | checking for struct dirent.d_type... no
->> | checking for realpath... no
->> | checking for utimensat... no
->> | checking for utime... no
->> | checking for lstat... no
->> | checking for struct stat.st_mtim.tv_nsec... yes
->> | checking for fchmod... yes
->> | checking for fchmodat... yes
->> | checking for sendfile that can copy files... no
->> | checking for link... yes
->> | checking for readlink... yes
->> | checking for symlink... yes
->> | checking for truncate... yes
->> | checking for fdopendir... no
->> | checking for dirfd... no
->> | checking for unlinkat... yes
->> | checking __sync extensions... yes
->> | checking link.h usability... no
->> | checking link.h presence... no
->> | checking for link.h... no
->> | checking for fcntl... configure: error: Link tests are not allowed
->> after GCC_NO_EXECUTABLES.
->
->
->
-> Can you post config.log from this component
->
+> Here you go: https://pastebin.com/6KMD9PhX
 
-Here you go: https://pastebin.com/6KMD9PhX
+this one has succeeded. I guess there are multiple config.log files in
+your build tree. Perhaps the one which shows exit 1 at the end is one
+I am interested in.
 
-Bart
+>
+> Bart
 
