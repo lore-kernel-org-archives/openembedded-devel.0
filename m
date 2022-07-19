@@ -2,266 +2,112 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19BC5C43334
-	for <webhook@archiver.kernel.org>; Tue, 19 Jul 2022 12:54:19 +0000 (UTC)
-Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com
- [209.85.222.176])
- by mx.groups.io with SMTP id smtpd.web09.40064.1658235258050501249
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DA7AC43334
+	for <webhook@archiver.kernel.org>; Tue, 19 Jul 2022 13:39:29 +0000 (UTC)
+Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
+ [209.85.222.179])
+ by mx.groups.io with SMTP id smtpd.web11.40815.1658237960492701590
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Jul 2022 05:54:18 -0700
+ Tue, 19 Jul 2022 06:39:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=cUxwhIC/;
- spf=pass (domain: gmail.com, ip: 209.85.222.176,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=VPzWLsko;
+ spf=pass (domain: gmail.com, ip: 209.85.222.179,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f176.google.com with SMTP id e16so7109586qka.5;
-        Tue, 19 Jul 2022 05:54:17 -0700 (PDT)
+Received: by mail-qk1-f179.google.com with SMTP id v28so9585754qkg.13
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 19 Jul 2022 06:39:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=Y5lBRtVC52KtDlPLt8BoFi93MMhMQVUjNQ45VxmXuts=;
-        b=cUxwhIC/RCmfhB6/c+8cmoViLHXUVxM89GfdI+Ju+SUdkKbtR9uKNepCAjTrWbtiyp
-         0HW5Gt4uqM52s/23B8lVst+w2JRhWgwV9ytSL38+UGaGJY28OESXSb9LmyuVWXxNlaX5
-         2jH2IzemmrK292JM0d2GggLE0jUrFA6dPa/goiRvDSfhUdR/3eL4WW6jtwiNDPR13REH
-         F4WR3v7c0fXTq4M16TpcndU85njxpObdrUQMjF/4IvW1GUd3iRWyRJOYfwacNQIEn7sb
-         uGZ48Z7Wms5A2fYk/RFGPANdUlEfPBSIzFUi/GPDSeWLV8Hy/xJt4wJ03WpSmSqiO2nn
-         a02w==
+        h=message-id:date:mime-version:user-agent:subject:to:references
+         :content-language:from:in-reply-to:content-transfer-encoding;
+        bh=OJhf602aFMbRsYUEs1Xwl8NrMqUNhODYksmjdM4bXEA=;
+        b=VPzWLskoc9G0hMgZM7+enTDAogWFVQExLrvU+NF80RIMEZ3YyY7fwcHNlPOB23uY6G
+         1/b91zPsRFnac4vOEeGFHp8CADR8+XQXpijLoSesM8rvmFDWFe95Z56P6XP89KBW6sYm
+         HJFm0nFkfAHBdX4YgDZVsclI8zwqDQmJ/LMC208FyRueA0wc1fFbhR4scihuFGx6EZut
+         TL0Ac4v3kDQgcslRe5P6NX+gGdH7Z27hOqes8FeZGZ3YibuVAMKdt0kpVRp/JnMclVop
+         XHzQMzDC18TVL2Y4Za71Wd89xnKlPMXQw5vXUG3+g6rhyGdv+oszP4v4zDqO/yyVPImW
+         NFSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=Y5lBRtVC52KtDlPLt8BoFi93MMhMQVUjNQ45VxmXuts=;
-        b=qMBQo+lvZjaItRAv7YT5Wtit4CXgfbYVFU8aCZxJcq6F4wdkskYT3QU80kST06Bxx1
-         +O20AfmH592mu5WdW9N8pADVBKaXWkc7RN2xWBca/hYvtjx71ItMWBLLj1uQ+1XB1PQ9
-         Vs2XBLi3HO0wlCGTHPWsR7uK25IqM5TZH2RMkgef6BRedjgttJgCcP5H5SINxbF59HRL
-         Q3jOwRlAdOEtx9e262jekvPXudF968hl4gVjrTzJ3havlhZwvzXZykx3VT6kLugKGMJo
-         swtxECsqLIfmZGq7KTcA5hpkz04VkJqSFJV6T26pVmNya/X+wVCXptQJ6f0JXoKjg9IS
-         mNQw==
-X-Gm-Message-State: AJIora8So2iI0mqWb43iM0t4jqfgZz8SdPnBTFOPfhUJRN1KWGMl8kUq
-	kDfVAv8Rj1muj54fvkgWqz6LVUjViGLQJS+oyJA=
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :to:references:content-language:from:in-reply-to
+         :content-transfer-encoding;
+        bh=OJhf602aFMbRsYUEs1Xwl8NrMqUNhODYksmjdM4bXEA=;
+        b=42VNU/9fktXZrsrvo6seRAJ8m5/sHCa3g3NMEUoenAMkdRYtb0oUJqHe1SpgYQAbPZ
+         mly1qYV0KKCwu9YNsidGqO24MevYI2T+uY5V8uWf7ypg8d4cuEoHO+lz9ukcRx/LDmHc
+         8JggcyY7b+/qCcNfVYeQfeQcDjYoAxhmtlhliUgKFB+dLsiim8KVVJLInqKEZ+4rfnX/
+         yr36+PEUTfO8Shg4AZ+HOrbr+uJ1fk/dAh10R/HjukQdacUSoBWCdOeQgxq4LgwqgSi/
+         W9a7tnIuXj/hdzxzgH7DJnlaCw8lmewZ606GD/hvxY8nndt1wNxJTUUU6ThsnTuVu+9i
+         4b7Q==
+X-Gm-Message-State: AJIora8/tgBoXzseB39VSwxhUofF4D4qikpiu9yBKPkr+Dot+ZBJ8Fnr
+	rAmwrjd7fcg6nyBuJo9YUn0=
 X-Google-Smtp-Source: 
- AGRyM1ss6+IUFRvjgSMGK/f64X0v6EAZ99UcUwGlMS6yUivgtZ9sf6ge7lop/AXLbl47hLsZ2I/lVAMqw2YWjyFSC2Y=
-X-Received: by 2002:a05:620a:f85:b0:6b5:e2be:1d04 with SMTP id
- b5-20020a05620a0f8500b006b5e2be1d04mr8197446qkn.72.1658235257118; Tue, 19 Jul
- 2022 05:54:17 -0700 (PDT)
+ AGRyM1sZO47kz9x5QosaH1Hu1WzOKrztG9uM9y7TaaQgGNqrHkX6TW3tA941QGRrqx/ed8DumBToMA==
+X-Received: by 2002:a05:620a:f90:b0:6b5:c74f:5d8c with SMTP id
+ b16-20020a05620a0f9000b006b5c74f5d8cmr15580614qkn.38.1658237959411;
+        Tue, 19 Jul 2022 06:39:19 -0700 (PDT)
+Received: from ?IPV6:2607:fea8:95df:9730:a90f:7fcf:f7e0:a30e?
+ ([2607:fea8:95df:9730:a90f:7fcf:f7e0:a30e])
+        by smtp.gmail.com with ESMTPSA id
+ q7-20020a05620a0d8700b006b5905999easm13524874qkl.121.2022.07.19.06.39.18
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 19 Jul 2022 06:39:18 -0700 (PDT)
+Message-ID: <5135b01f-59ca-f9c8-4cc0-873843ec9545@gmail.com>
+Date: Tue, 19 Jul 2022 09:39:17 -0400
 MIME-Version: 1.0
-References: 
- <CAMRc=McXfAzcUrdTLWsHHEo8DyUwU1gUuFTBALwXpJCuA0CoEA@mail.gmail.com>
- <YtWrKcR6y1jWSFtC@kudzu.us>
- <CAMKF1sqZh=fPoYHqh-uuJL6oftkmGoDHHcZkTgivoKapFFerAQ@mail.gmail.com>
- <CAPoiz9zRWPGLSUNaeTQDO=E60cGD4zRVmnZmHFkSdVLrkx_WmA@mail.gmail.com>
- <CAMRc=MecfyMPB2B5ukhYzMdQDWL4fY=8nbfUe0LR_8hUPhNP9w@mail.gmail.com>
-In-Reply-To: 
- <CAMRc=MecfyMPB2B5ukhYzMdQDWL4fY=8nbfUe0LR_8hUPhNP9w@mail.gmail.com>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.0.2
+Subject: Re: [oe] [meta-networking] [PATCH] ndisc6: upgrade 1.0.5 -> 1.0.6
+To: wangmy <wangmy@fujitsu.com>, openembedded-devel@lists.openembedded.org
+References: <1658211328-2951-1-git-send-email-wangmy@fujitsu.com>
+ <1658211328-2951-2-git-send-email-wangmy@fujitsu.com>
+Content-Language: en-US
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 19 Jul 2022 08:54:05 -0400
-Message-ID: 
- <CAMKF1srBz3xL0VTZedyyf4oFgiXxn7ai4afH37yBrT63djTr3Q@mail.gmail.com>
-Subject: Re: [oe] [meta-zephyr] build broken with current oe-core master
-To: Bartosz Golaszewski <brgl@bgdev.pl>
-Cc: =?UTF-8?B?RWlsw61zIE7DrSBGaGxhbm5hZ8OhaW4=?=
- <elizabeth.flanagan@huawei.com>,
-	Jon Mason <jdmason@kudzu.us>, Jon Mason <jon.mason@arm.com>,
-	Naveen Saini <naveen.kumar.saini@intel.com>,
-	Patches and discussions about the oe-core layer
- <openembedded-core@lists.openembedded.org>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="00000000000074638505e427fb90"
+In-Reply-To: <1658211328-2951-2-git-send-email-wangmy@fujitsu.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 19 Jul 2022 12:54:19 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 19 Jul 2022 13:39:29 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97898
-
---00000000000074638505e427fb90
-Content-Type: text/plain; charset="UTF-8"
-
-On Tue, Jul 19, 2022 at 3:40 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
-
-> On Tue, Jul 19, 2022 at 12:10 AM Jon Mason <jdmason@kudzu.us> wrote:
-> >
-> > On Mon, Jul 18, 2022 at 4:06 PM Khem Raj <raj.khem@gmail.com> wrote:
-> > >
-> > > Can you try something like this
-> > >
-> > > diff --git a/meta/recipes-devtools/gcc/gcc-runtime.inc
-> > > b/meta/recipes-devtools/gcc/gcc-runtime.inc
-> > > index 5d74e4494d..61d5bf6058 100644
-> > > --- a/meta/recipes-devtools/gcc/gcc-runtime.inc
-> > > +++ b/meta/recipes-devtools/gcc/gcc-runtime.inc
-> > > @@ -68,8 +68,7 @@ do_configure () {
-> > >     # libstdc++ isn't built yet so CXX would error not able to find it
-> > > which breaks stdc++'s configure
-> > >     # tests. Create a dummy empty lib for the purposes of configure.
-> > >     mkdir -p ${WORKDIR}/dummylib
-> > > -   touch ${WORKDIR}/dummylib/dummylib.c
-> > > -   ${CC} ${WORKDIR}/dummylib/dummylib.c -shared -o
-> > > ${WORKDIR}/dummylib/libstdc++.so
-> > > +   ${CC} -nostartfiles -shared -x c /dev/null -o
-> > > ${WORKDIR}/dummylib/libstdc++.so
-> > >     for d in libgcc ${RUNTIMETARGET}; do
-> > >         echo "Configuring $d"
-> > >         rm -rf ${B}/${TARGET_SYS}/$d/
-> > >
-> > >
-> > > and see if it helps ?
-> >
-> > That appears to work for the 2 zephyr machines in meta-arm
-> >
->
-> This still fails for arduino nano 33 ble:
->
-> | checking for dirent.h... no
-> | checking sys/statvfs.h usability... no
-> | checking sys/statvfs.h presence... no
-> | checking for sys/statvfs.h... no
-> | checking utime.h usability... yes
-> | checking utime.h presence... yes
-> | checking for utime.h... yes
-> | checking whether to build Filesystem TS support... no
-> | checking for struct dirent.d_type... no
-> | checking for realpath... no
-> | checking for utimensat... no
-> | checking for utime... no
-> | checking for lstat... no
-> | checking for struct stat.st_mtim.tv_nsec... yes
-> | checking for fchmod... yes
-> | checking for fchmodat... yes
-> | checking for sendfile that can copy files... no
-> | checking for link... yes
-> | checking for readlink... yes
-> | checking for symlink... yes
-> | checking for truncate... yes
-> | checking for fdopendir... no
-> | checking for dirfd... no
-> | checking for unlinkat... yes
-> | checking __sync extensions... yes
-> | checking link.h usability... no
-> | checking link.h presence... no
-> | checking for link.h... no
-> | checking for fcntl... configure: error: Link tests are not allowed
-> after GCC_NO_EXECUTABLES.
+ https://lists.openembedded.org/g/openembedded-devel/message/97899
 
 
 
-Can you post config.log from this component
+On 7/19/22 2:15 AM, wangmy wrote:
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>   meta-networking/recipes-support/ndisc6/ndisc6_git.bb | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/meta-networking/recipes-support/ndisc6/ndisc6_git.bb b/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
+> index f5467794e6..a65ab758ab 100644
+> --- a/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
+> +++ b/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
+> @@ -5,8 +5,8 @@ HOMEPAGE = "http://www.remlab.net/ndisc6/"
+>   LICENSE = "GPL-2.0-only"
+>   LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+>   
+> -PV = "1.0.5"
+> -SRCREV = "b706f5f01aa82aa0db678fffd15a1527f330c507"
+> +PV = "1.0.6"
 
+perhaps move PV to recipe name. Use it instead of _git.bb
 
-> | WARNING: exit code 1 from a shell command.
-> ERROR: Task
-> (/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gcc/gcc-runtime_12.1.bb:
-> do_configure)
-> failed with exit code '1'
-> NOTE: Tasks Summary: Attempted 795 tasks of which 774 didn't need to
-> be rerun and 1 failed.
->
-> Summary: 1 task failed:
->
-> /home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gcc/gcc-runtime_12.1.bb:
-> do_configure
-> Summary: There was 1 ERROR message, returning a non-zero exit code.
->
-> Bart
->
-
---00000000000074638505e427fb90
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Tue, Jul 19, 2022 at 3:40 AM Bartosz Golaszewski &lt;<a =
-href=3D"mailto:brgl@bgdev.pl">brgl@bgdev.pl</a>&gt; wrote:<br></div><blockq=
-uote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc =
-solid;padding-left:1ex">On Tue, Jul 19, 2022 at 12:10 AM Jon Mason &lt;<a h=
-ref=3D"mailto:jdmason@kudzu.us" target=3D"_blank">jdmason@kudzu.us</a>&gt; =
-wrote:<br>
-&gt;<br>
-&gt; On Mon, Jul 18, 2022 at 4:06 PM Khem Raj &lt;<a href=3D"mailto:raj.khe=
-m@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>&gt; wrote:<br>
-&gt; &gt;<br>
-&gt; &gt; Can you try something like this<br>
-&gt; &gt;<br>
-&gt; &gt; diff --git a/meta/recipes-devtools/gcc/gcc-runtime.inc<br>
-&gt; &gt; b/meta/recipes-devtools/gcc/gcc-runtime.inc<br>
-&gt; &gt; index 5d74e4494d..61d5bf6058 100644<br>
-&gt; &gt; --- a/meta/recipes-devtools/gcc/gcc-runtime.inc<br>
-&gt; &gt; +++ b/meta/recipes-devtools/gcc/gcc-runtime.inc<br>
-&gt; &gt; @@ -68,8 +68,7 @@ do_configure () {<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0# libstdc++ isn&#39;t built yet so CXX would e=
-rror not able to find it<br>
-&gt; &gt; which breaks stdc++&#39;s configure<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0# tests. Create a dummy empty lib for the purp=
-oses of configure.<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0mkdir -p ${WORKDIR}/dummylib<br>
-&gt; &gt; -=C2=A0 =C2=A0touch ${WORKDIR}/dummylib/dummylib.c<br>
-&gt; &gt; -=C2=A0 =C2=A0${CC} ${WORKDIR}/dummylib/dummylib.c -shared -o<br>
-&gt; &gt; ${WORKDIR}/dummylib/libstdc++.so<br>
-&gt; &gt; +=C2=A0 =C2=A0${CC} -nostartfiles -shared -x c /dev/null -o<br>
-&gt; &gt; ${WORKDIR}/dummylib/libstdc++.so<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0for d in libgcc ${RUNTIMETARGET}; do<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0echo &quot;Configuring $d&quot;<=
-br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0rm -rf ${B}/${TARGET_SYS}/$d/<br=
->
-&gt; &gt;<br>
-&gt; &gt;<br>
-&gt; &gt; and see if it helps ?<br>
-&gt;<br>
-&gt; That appears to work for the 2 zephyr machines in meta-arm<br>
-&gt;<br>
-<br>
-This still fails for arduino nano 33 ble:<br>
-<br>
-| checking for dirent.h... no<br>
-| checking sys/statvfs.h usability... no<br>
-| checking sys/statvfs.h presence... no<br>
-| checking for sys/statvfs.h... no<br>
-| checking utime.h usability... yes<br>
-| checking utime.h presence... yes<br>
-| checking for utime.h... yes<br>
-| checking whether to build Filesystem TS support... no<br>
-| checking for struct dirent.d_type... no<br>
-| checking for realpath... no<br>
-| checking for utimensat... no<br>
-| checking for utime... no<br>
-| checking for lstat... no<br>
-| checking for struct stat.st_mtim.tv_nsec... yes<br>
-| checking for fchmod... yes<br>
-| checking for fchmodat... yes<br>
-| checking for sendfile that can copy files... no<br>
-| checking for link... yes<br>
-| checking for readlink... yes<br>
-| checking for symlink... yes<br>
-| checking for truncate... yes<br>
-| checking for fdopendir... no<br>
-| checking for dirfd... no<br>
-| checking for unlinkat... yes<br>
-| checking __sync extensions... yes<br>
-| checking link.h usability... no<br>
-| checking link.h presence... no<br>
-| checking for link.h... no<br>
-| checking for fcntl... configure: error: Link tests are not allowed<br>
-after GCC_NO_EXECUTABLES.</blockquote><div dir=3D"auto"><br></div><div dir=
-=3D"auto"><br></div><div dir=3D"auto">Can you post config.log from this com=
-ponent=C2=A0</div><div dir=3D"auto"><br></div><blockquote class=3D"gmail_qu=
-ote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex=
-" dir=3D"auto"><br>
-| WARNING: exit code 1 from a shell command.<br>
-ERROR: Task (/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-de=
-vtools/gcc/gcc-runtime_12.1.bb:do_configure)<br>
-failed with exit code &#39;1&#39;<br>
-NOTE: Tasks Summary: Attempted 795 tasks of which 774 didn&#39;t need to<br=
->
-be rerun and 1 failed.<br>
-<br>
-Summary: 1 task failed:<br>
-=C2=A0 /home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools=
-/gcc/gcc-runtime_12.1.bb:do_configure<br>
-Summary: There was 1 ERROR message, returning a non-zero exit code.<br>
-<br>
-Bart<br>
-</blockquote></div></div>
-
---00000000000074638505e427fb90--
+> +SRCREV = "7e314b23329f9c24c4c097b8513673fed7e7158a"
+>   SRC_URI = "git://git.remlab.net/git/ndisc6.git;protocol=http;branch=master \
+>              file://0001-autogen-Do-not-symlink-gettext.h-from-build-host.patch \
+>              "
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#97892): https://lists.openembedded.org/g/openembedded-devel/message/97892
+> Mute This Topic: https://lists.openembedded.org/mt/92477641/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
