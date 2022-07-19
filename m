@@ -1,251 +1,114 @@
-Return-Path: <jdmason@kudzu.us>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E104EC433EF
-	for <webhook@archiver.kernel.org>; Mon, 18 Jul 2022 22:10:14 +0000 (UTC)
-Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com
- [209.85.167.46])
- by mx.groups.io with SMTP id smtpd.web10.33854.1658182209122980569
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BABCCCA483
+	for <webhook@archiver.kernel.org>; Tue, 19 Jul 2022 06:13:47 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.3])
+ by mx.groups.io with SMTP id smtpd.web12.37568.1658211224149122882
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Jul 2022 15:10:09 -0700
+ Mon, 18 Jul 2022 23:13:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kudzu-us.20210112.gappssmtp.com header.s=20210112
- header.b=wclxsuVc;
- spf=none, err=permanent DNS error (domain: kudzu.us, ip: 209.85.167.46,
- mailfrom: jdmason@kudzu.us)
-Received: by mail-lf1-f46.google.com with SMTP id z25so21779631lfr.2
-        for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Jul 2022 15:10:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=kudzu-us.20210112.gappssmtp.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=mcr6Y1l11R0QuQk6YUyHhLrC2bpewjrS+akIteCichU=;
-        b=wclxsuVcoO1NQasBD5fK6vZkYLcKb/MlWEVByK3hRmSpjC/bEMjad+OQyoBW1iiS8b
-         Q3/NoVE15Hd5Ml0klAJHEQKaU8WbpTiiM+mau79hUDDmZbwVCMZ9OaflFoC5KWsIj0oj
-         VwNIL06dXssKBqYxcPcLNXYItocWtVGz3YiX1o3xeqj2bSG6IAi02KbQ2wO06t0Yl0WD
-         boRrK7MLVaxiNUlcehBFW1aCiDtlcnfJLN7SPMsTm7jTZsD4D1cqCIbDDKgli63sLvQ1
-         hbQIxkjwCL4ixSxzsfTQKiPMxgmucuoDG4JEd/Zt3e83l9yJC01b+Z1W3czeRJQOftft
-         n6tw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=mcr6Y1l11R0QuQk6YUyHhLrC2bpewjrS+akIteCichU=;
-        b=QAHhm1NJ++9FSBAtEJnWDbOf6VQdm3hZzl6xru441G1D0Nz1Nm5+j/b249GoLG8Yt2
-         kHGfPuJQx0MPikYzRcDMTLn0ocitG7ed/3A6zSnnNRfmWTBdCY5BJlrrgIuipDPTT93W
-         Lj+K7OQ8ccVCf5zdL+YyX7TdvbaguI0BIfD+bqXvjnx9nxEIV/UUrQ3ImJpKzwIIIXmK
-         i67Ao5Zx2tZ00RAAPjh4SnD5I7ieyb3t1/CJx3KRUumf0wishAa/wf5KVJSh40jX8DOX
-         YIUKUXTCYsbH5bGDf7z1di1bJxUx1EvskueTXjT6qKuzRLBY3geU4ag3iMRiLL6MAk8n
-         aYGQ==
-X-Gm-Message-State: AJIora+Sam5vazacJz7Ghx4KOLWBDsqhuSgxPFBqXcij0Dja0ICCG0h7
-	ocqUeF+XKlHTU06TFriC2BOMVi9lh4jWcyodB6eCOA==
-X-Google-Smtp-Source: 
- AGRyM1uL8q0+uCUBN7Qjvq9QSZb9UTOlLN3lqd6CLZXW/IYyj/LasvgxeWHCcxeixYwPfJ+s6RO8qx5gH5wmpAxXvSU=
-X-Received: by 2002:a19:6408:0:b0:48a:139e:67b7 with SMTP id
- y8-20020a196408000000b0048a139e67b7mr12212595lfb.203.1658182207119; Mon, 18
- Jul 2022 15:10:07 -0700 (PDT)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=TmSllbjI;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
+ mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1658211222; i=@fujitsu.com;
+	bh=3G0DtQYnfn2+AMQFI365pW9O8SVRDzMjZULhc5pHBQs=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=TmSllbjIlqrZMcb0kkeJzZ3SHFU6qBiyayjSR+nDPF9cGPGbwHoZL+ZrkMa5C3vTq
+	 hyt0emk5WhF7mXPDHYlPr2FcWhocwyH6fStPHjeblphFaGqBmi1ByfIHnGOkPos1AV
+	 KRxLNodI9EcMntsee5bQDxkAygky5cuR30oZepM8/KbMbWHqTT1aIqPv8AlE/ztIxK
+	 asKdmVSsKsJuISOSUxQ3S98JOHVU0DtN1W3d4n+ThkE80o4GuSG47C+6XoXnDo7mfk
+	 /2J1oiOfuy8bL1SdMj7zqAHRtL4z5h9X8YJt4o3f3947yMt3NJ9Fy1M9zItbG6k6V+
+	 8fbt3X/+LVDYw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrMIsWRWlGSWpSXmKPExsViZ8OxWXea97U
+  kg1O3hSwuHl7K7MDocW7jCsYAxijWzLyk/IoE1owTa/6yFdzhqNjdlNTA+JO9i5GLQ0jgIaNE
+  /559TBDOZSaJUwfbmCGcPYwSC++dAMpwcrAJqElMv3WDFcQWEdCXWDp7DzOIzSygIvHidw87i
+  C0s4CrR1dEBZrMIqEq8O9DICGLzCjhK7O9rBotLCChITHn4HqyXU8BJon3ad7AaIaCaB6/uMU
+  PUC0qcnPmEBWK+hMTBFy+YIXoVJWZfbmaBsCskZszYxgZhq0lcPbeJeQKj4Cwk7bOQtC9gZFr
+  FaJ1UlJmeUZKbmJmja2hgoGtoaKprbKRraGSml1ilm6iXWqpbnlpcomukl1herJdaXKxXXJmb
+  nJOil5dasokRGMYpxQp1Oxivrfypd4hRkoNJSZR3qua1JCG+pPyUyozE4oz4otKc1OJDjDIcH
+  EoSvBc8gXKCRanpqRVpmTnAmIJJS3DwKInwpjkDpXmLCxJzizPTIVKnGC05ps7+t5+ZYzmYnP
+  m17QCzEEtefl6qlDhvoRdQgwBIQ0ZpHtw4WNxfYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCT
+  MywAyhSczrwRu6yugg5iADprkdAXkoJJEhJRUA1OL+8bPPCncEyccUlRdfWc/f8zutUsyBSab
+  vmoreuDitHvuk1Zp8f9dyy95OljaTv+9Y86c5f++nHpylyPR6vqulyFTn4qmTWOeW8ubdP3J9
+  V47kR9e+V5PjzRsscvPf1HM8LnA9NwrsVd7HCYyL9c7Usa0itW95OK10jmHbkTyB5675Pysuq
+  JO38PgeFfMwWUnrOs8uE6lPJD0fCFVIna0UtTnZbtbDcc35V1b5fnn9mZcTryfrPk9xqtg4n3
+  H63sEc/Z2OK7UK7s3eb/N4y1HGWNOfm28saO2KfSzT/q+vrNOcacmeM77kLEz9pwzg5FTm7L+
+  sTu7env9l2wQvVnw8wd7sPs0temVAi9y1v9XYinOSDTUYi4qTgQANfMItHYDAAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-18.tower-548.messagelabs.com!1658211222!26256!1
+X-Originating-IP: [62.60.8.179]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.87.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 10473 invoked from network); 19 Jul 2022 06:13:42 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-18.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 19 Jul 2022 06:13:42 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 082A4142
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 19 Jul 2022 07:13:42 +0100 (BST)
+Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
+ [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id EFB5B7C
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 19 Jul 2022 07:13:41 +0100 (BST)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Tue, 19 Jul 2022 07:13:40 +0100
+From: Wang Mingyu <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] libgsf: upgrade 1.14.49 -> 1.14.50
+Date: Tue, 19 Jul 2022 14:13:19 +0800
+Message-ID: <1658211200-2891-4-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1658211200-2891-1-git-send-email-wangmy@fujitsu.com>
+References: <1658211200-2891-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
-References: 
- <CAMRc=McXfAzcUrdTLWsHHEo8DyUwU1gUuFTBALwXpJCuA0CoEA@mail.gmail.com>
- <YtWrKcR6y1jWSFtC@kudzu.us>
- <CAMKF1sqZh=fPoYHqh-uuJL6oftkmGoDHHcZkTgivoKapFFerAQ@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1sqZh=fPoYHqh-uuJL6oftkmGoDHHcZkTgivoKapFFerAQ@mail.gmail.com>
-From: Jon Mason <jdmason@kudzu.us>
-Date: Mon, 18 Jul 2022 18:09:55 -0400
-Message-ID: 
- <CAPoiz9zRWPGLSUNaeTQDO=E60cGD4zRVmnZmHFkSdVLrkx_WmA@mail.gmail.com>
-Subject: Re: [oe] [meta-zephyr] build broken with current oe-core master
-To: Khem Raj <raj.khem@gmail.com>
-Cc: Bartosz Golaszewski <brgl@bgdev.pl>,
-	Patches and discussions about the oe-core layer
- <openembedded-core@lists.openembedded.org>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>,
- Jon Mason <jon.mason@arm.com>,
-	=?UTF-8?B?RWlsw61zIE7DrSBGaGxhbm5hZ8OhaW4=?= <elizabeth.flanagan@huawei.com>,
-	Naveen Saini <naveen.kumar.saini@intel.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Jul 2022 22:10:14 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 19 Jul 2022 06:13:47 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97885
+ https://lists.openembedded.org/g/openembedded-devel/message/97889
 
-On Mon, Jul 18, 2022 at 4:06 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> Can you try something like this
->
-> diff --git a/meta/recipes-devtools/gcc/gcc-runtime.inc
-> b/meta/recipes-devtools/gcc/gcc-runtime.inc
-> index 5d74e4494d..61d5bf6058 100644
-> --- a/meta/recipes-devtools/gcc/gcc-runtime.inc
-> +++ b/meta/recipes-devtools/gcc/gcc-runtime.inc
-> @@ -68,8 +68,7 @@ do_configure () {
->     # libstdc++ isn't built yet so CXX would error not able to find it
-> which breaks stdc++'s configure
->     # tests. Create a dummy empty lib for the purposes of configure.
->     mkdir -p ${WORKDIR}/dummylib
-> -   touch ${WORKDIR}/dummylib/dummylib.c
-> -   ${CC} ${WORKDIR}/dummylib/dummylib.c -shared -o
-> ${WORKDIR}/dummylib/libstdc++.so
-> +   ${CC} -nostartfiles -shared -x c /dev/null -o
-> ${WORKDIR}/dummylib/libstdc++.so
->     for d in libgcc ${RUNTIMETARGET}; do
->         echo "Configuring $d"
->         rm -rf ${B}/${TARGET_SYS}/$d/
->
->
-> and see if it helps ?
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ .../libgsf/{libgsf_1.14.49.bb => libgsf_1.14.50.bb}             | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/libgsf/{libgsf_1.14.49.bb => libgsf_1.14.50.bb} (86%)
 
-That appears to work for the 2 zephyr machines in meta-arm
+diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.49.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.50.bb
+similarity index 86%
+rename from meta-gnome/recipes-gnome/libgsf/libgsf_1.14.49.bb
+rename to meta-gnome/recipes-gnome/libgsf/libgsf_1.14.50.bb
+index f663141bd5..d2486a0352 100644
+--- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.49.bb
++++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.50.bb
+@@ -9,7 +9,7 @@ DEPENDS= "libxml2 bzip2 glib-2.0 zlib gnome-common-native"
+ 
+ inherit gnomebase gobject-introspection gettext gtk-doc
+ 
+-SRC_URI[archive.sha256sum] = "e9ebe36688f010c9e6e40c8903f3732948deb8aca032578d07d0751bd82cf857"
++SRC_URI[archive.sha256sum] = "6e6c20d0778339069d583c0d63759d297e817ea10d0d897ebbe965f16e2e8e52"
+ SRC_URI += "file://0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch"
+ 
+ PACKAGECONFIG ??= ""
+-- 
+2.25.1
 
->
-> On Mon, Jul 18, 2022 at 2:49 PM Jon Mason <jdmason@kudzu.us> wrote:
-> >
-> > On Mon, Jul 18, 2022 at 08:31:39PM +0200, Bartosz Golaszewski wrote:
-> > > Hi!
-> > >
-> > > It seems that the zephyr build is currently broken with master (and
-> > > master-next) for meta-zephyr samples:
-> > >
-> > > Build Configuration:
-> > > BB_VERSION           = "2.0.1"
-> > > BUILD_SYS            = "x86_64-linux"
-> > > NATIVELSBSTRING      = "universal"
-> > > TARGET_SYS           = "arm-yocto-eabi"
-> > > MACHINE              = "arduino-nano-33-ble"
-> > > DISTRO               = "zephyr"
-> > > DISTRO_VERSION       = "1.0"
-> > > TUNE_FEATURES        = "armv7m cortexm4"
-> > > TARGET_FPU           = "soft"
-> > > meta
-> > > meta-poky            = "HEAD:67b9303d72c14d2aedb3f0313cb7b27dfb1499d3"
-> > > meta-zephyr-core
-> > > meta-zephyr-bsp      = "master:6d184ce6b66349a87dc114c7ab59d0dd3bf92785"
-> > > meta-oe
-> > > meta-python          = "master:cb7d3afba838f159a5df4ef5091dba8e770159a8"
-> > >
-> > > Initialising tasks: 100%
-> > > |#########################################################################################################|
-> > > Time: 0:00:01
-> > > Sstate summary: Wanted 101 Local 66 Mirrors 0 Missed 35 Current 98
-> > > (65% match, 82% complete)
-> > > NOTE: Executing Tasks
-> > > ERROR: gcc-runtime-12.1.0-r0 do_configure:
-> > > ExecutionError('/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/temp/run.do_configure.2702410',
-> > > 1, None, None)
-> > > ERROR: Logfile of failure stored in:
-> > > /home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/temp/log.do_configure.2702410
-> > > Log data follows:
-> > > | DEBUG: Executing python function extend_recipe_sysroot
-> > > | NOTE: Direct dependencies are
-> > > ['/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-core/newlib/newlib_4.2.0.bb:do_populate_sysroot',
-> > > '/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/binutils/binutils-cross_2.38.bb:do_populate_sysroot',
-> > > '/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gcc/gcc-cross_12.1.bb:do_populate_sysroot',
-> > > '/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gcc/libgcc_12.1.bb:do_populate_sysroot',
-> > > '/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/libtool/libtool-native_2.4.7.bb:do_populate_sysroot',
-> > > '/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/quilt/quilt-native_0.67.bb:do_populate_sysroot',
-> > > '/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-extended/texinfo-dummy-native/texinfo-dummy-native.bb:do_populate_sysroot',
-> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-core/zlib/zlib_1.2.12.bb:do_populate_sysroot',
-> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/autoconf/autoconf_2.71.bb:do_populate_sysroot',
-> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/automake/automake_1.16.5.bb:do_populate_sysroot',
-> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/flex/flex_2.6.4.bb:do_populate_sysroot',
-> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gnu-config/gnu-config_git.bb:do_populate_sysroot',
-> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/patch/patch_2.7.6.bb:do_populate_sysroot',
-> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/pseudo/pseudo_git.bb:do_populate_sysroot',
-> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-extended/xz/xz_5.2.5.bb:do_populate_sysroot',
-> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-extended/zstd/zstd_1.5.2.bb:do_populate_sysroot',
-> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-support/gmp/gmp_6.2.1.bb:do_populate_sysroot',
-> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-support/libmpc/libmpc_1.2.1.bb:do_populate_sysroot',
-> > > 'virtual:native:/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-support/mpfr/mpfr_4.1.0.bb:do_populate_sysroot']
-> > > | NOTE: Installed into sysroot: []
-> > > | NOTE: Skipping as already exists in sysroot: ['newlib',
-> > > 'binutils-cross-arm', 'gcc-cross-arm', 'libgcc', 'libtool-native',
-> > > 'quilt-native', 'texinfo-dummy-native', 'zlib-native',
-> > > 'autoconf-native', 'automake-native', 'flex-native',
-> > > 'gnu-config-native', 'patch-native', 'pseudo-native', 'xz-native',
-> > > 'zstd-native', 'gmp-native', 'libmpc-native', 'mpfr-native',
-> > > 'attr-native', 'gettext-minimal-native', 'm4-native']
-> > > | DEBUG: Python function extend_recipe_sysroot finished
-> > > | DEBUG: Executing shell function autotools_preconfigure
-> > > | DEBUG: Shell function autotools_preconfigure finished
-> > > | DEBUG: Executing python function autotools_aclocals
-> > > | DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common',
-> > > 'arm-32', 'arm-eabi', 'common']
-> > > | DEBUG: Python function autotools_aclocals finished
-> > > | DEBUG: Executing python function gcc_multilib_setup
-> > > | DEBUG: Python function gcc_multilib_setup finished
-> > > | DEBUG: Executing python function extract_stashed_builddir
-> > > | DEBUG: sed -e
-> > > 's:^[^/]*/:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/gcc-12.1.0/build.arm-yocto-eabi.arm-yocto-eabi/:g'
-> > > /home/brgl/workspace/zephyr-yocto/build/tmp-newlib/sysroots-components/x86_64/gcc-stashed-builddir-arm-yocto-eabi/fixmepath
-> > > | xargs sed -i -e
-> > > 's:FIXMESTAGINGDIRTARGET:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/recipe-sysroot:g;
-> > > s:FIXMESTAGINGDIRHOST:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/recipe-sysroot-native:g'
-> > > -e 's:FIXME_PSEUDO_SYSROOT:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/sysroots-components/x86_64/pseudo-native:g'
-> > > -e 's:FIXME_HOSTTOOLS_DIR:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/hosttools:g'
-> > > -e 's:FIXME_PKGDATA_DIR:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/pkgdata/arduino-nano-33-ble:g'
-> > > -e 's:FIXME_PSEUDO_LOCALSTATEDIR:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/pseudo/:g'
-> > > -e 's:FIXME_LOGFIFO:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/temp/fifo.2702410:g'
-> > > | DEBUG: Python function extract_stashed_builddir finished
-> > > | DEBUG: Executing shell function do_configure
-> > > | /home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/recipe-sysroot-native/usr/bin/arm-yocto-eabi/../../libexec/arm-yocto-eabi/gcc/arm-yocto-eabi/12.1.0/ld:
-> > > cannot find crt0.o: No such file or directory
-> > > | collect2: error: ld returned 1 exit status
-> > > | WARNING: exit code 1 from a shell command.
-> > > ERROR: Task (/home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gcc/gcc-runtime_12.1.bb:do_configure)
-> > > failed with exit code '1'
-> > > NOTE: Tasks Summary: Attempted 765 tasks of which 746 didn't need to
-> > > be rerun and 1 failed.
-> > >
-> > > Summary: 1 task failed:
-> > >   /home/brgl/workspace/zephyr-yocto/sources/poky/meta/recipes-devtools/gcc/gcc-runtime_12.1.bb:do_configure
-> > > Summary: There was 1 ERROR message, returning a non-zero exit code.
-> > >
-> > > I don't have any ideas but it looks like something related to the machine tune?
-> >
-> > I haven't had time to bottom out on the issue, but I was able to
-> > confirm that the patch in OE core that breaks meta-zephyr is
-> >
-> > commit 028ecb0c265fa495071cbcca10587c0ba60cf538
-> > Author: Richard Purdie <richard.purdie@linuxfoundation.org>
-> > Date:   Wed Jul 13 23:12:06 2022 +0100
-> >
-> >     gcc-runtime: Fix build when using gold
-> >
-> >     If gold is enabled as the default linker, it errors trying to link
-> >     to our dummy library empty file and this turns off things which should
-> >     be present in libstdc++.
-> >
-> >     For example, _GLIBCXX_HAVE_S_ISREG isn't defined and HAVE_S_ISREG in
-> >     libstdc++-v3/config.h isn't set properly.
-> >
-> >     Instead of just creating an empty file, create an empty elf binary
-> >     instead which addresses the issue.
-> >
-> >     (From OE-Core rev: 2070bcd10aa3a05c96c8501c6a8c1e129fb1d440)
-> >
-> >     Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-> >
-> > If you revert that, everything is happy.
-> >
-> > Thanks,
-> > Jon
-> >
-> >
-> > >
-> > > Bart
-> > >
-> >
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#97883): https://lists.openembedded.org/g/openembedded-devel/message/97883
-> > Mute This Topic: https://lists.openembedded.org/mt/92465636/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> >
 
