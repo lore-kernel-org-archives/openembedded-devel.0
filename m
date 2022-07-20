@@ -1,580 +1,188 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 45C34C433EF
-	for <webhook@archiver.kernel.org>; Wed, 20 Jul 2022 14:51:57 +0000 (UTC)
-Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com
- [209.85.167.178])
- by mx.groups.io with SMTP id smtpd.web09.54729.1658328710689139716
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B622CCA483
+	for <webhook@archiver.kernel.org>; Wed, 20 Jul 2022 15:35:57 +0000 (UTC)
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com
+ [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web08.55587.1658331351748836906
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Jul 2022 07:51:50 -0700
+ Wed, 20 Jul 2022 08:35:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=kb5rHKHl;
- spf=pass (domain: gmail.com, ip: 209.85.167.178, mailfrom: schonm@gmail.com)
-Received: by mail-oi1-f178.google.com with SMTP id u9so11104291oiv.12
+ dkim=pass header.i=@bgdev-pl.20210112.gappssmtp.com header.s=20210112
+ header.b=w+88prpl;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.218.48,
+ mailfrom: brgl@bgdev.pl)
+Received: by mail-ej1-f48.google.com with SMTP id va17so33809730ejb.0
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Jul 2022 07:51:50 -0700 (PDT)
+ Wed, 20 Jul 2022 08:35:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=e8Qn1qafMfngSy1exlog6L2mZTc2ktUmA9BgUXxPp/E=;
-        b=kb5rHKHlPLEcLnIoOwcOZ+FAhnkXIrzq3tBD1HwZMkx21B+BjA0cCAPtBeZTF0Dnw3
-         +K8AIns62nyn6BiCh51shy2M+M5zQhNH9XXRUVfWHRnwHbtdRSO4kK8HgF3n6x9o0oGE
-         HuNzR5ffwIQG+fsh8MqjYi5k5IB3R9QlH0uLx3IUu5AAqu82OYKnLV9IzYBFhCLavV/n
-         SwnlW1PsLYruhnwzBkGAklFimMTuX2djsnFU2glrEajCgK+CD35wpTiE130UZ8G6oCof
-         A3FFnztExjAUdagaTG3Vru+tu99RyNAeeC4GBPRV5YaiJCY7CIbynBcgncuyMZTfPX7V
-         qLig==
+        d=bgdev-pl.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=3groLaC79TVUP7e3NsJvm7PCe6PUTMJUc9PBYHNJZ8I=;
+        b=w+88prplbQSABs4BhwKpfinMd6e5IeJd3hNa5jeaj+9R9vwLCnRv80LD8jaHHEr2Y5
+         kz3Dei+vVhmmANrU9QhOvUIE+Vr+uCB8xolTFGM3OXGgd5xmWzZ1U6Hwq9AKCB/NwWAD
+         ue9kEkZDeWMHGC2DShkqEcF0fGL8j3dJzTVSZMK7JuvmEfiVqihLVXnokUQMpXUJAaFG
+         oJWwh3zb+6R/TGHvdJo1MsMtAWgkjzUXT6WniQr+Bq8QIxCyutrtNaqNP1tH0b4ytnao
+         9VRbCTqBSeXsrgcjlNS8RfxVAoQUe16tjcdVnudBtL9axIwr4uxb9D/ZtGYDveDHjorz
+         GmqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=e8Qn1qafMfngSy1exlog6L2mZTc2ktUmA9BgUXxPp/E=;
-        b=CojZWyWy6Daom3MUR+uYwq5pYeelqOXhC8XKf+2x0FVkF4IYIPTU8aRERZmo7RruO6
-         R3rq8WxleV2/dDEi2U1XPl6Z5YcL63Vtkrsc1IPiwgKht36OjhjsCqUd+Z7Rz5Flkawt
-         VIoJ9sRXPrlS9FhffrX1wcTig056URQ4jug2yDzNKx9oH89hiSrQdYSQSHY4MG7xz8ar
-         dIwypSYbBpnvAHSzbMAdDz1FA6duP37koP5BNgWQMiFDpBO9Y7OGYcsO4xup3vnEyr1p
-         /4KyTOkzsZODoEcgTXVr4zhCLXk9T1ztXYzki8TXml+WR4gz3rDwkU8iHo5kxXRXTzwX
-         2u6A==
-X-Gm-Message-State: AJIora8QT/xSH0xs0zRvzxRiNKJiJ6vtI5wrttXqZje7HlnrDAWnKYep
-	yi1XA6/suT5FjVqxFgWWPgAggB4fvPWJKIzItskcXzOy6ESxCQ==
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=3groLaC79TVUP7e3NsJvm7PCe6PUTMJUc9PBYHNJZ8I=;
+        b=cX1uUTCDMTFK51WK71JVL0u9HpU9LkWOGHsyNB46UM8Ti3d4vNV1dhbZTZB75SITLd
+         1NS5RY600/PFdfP22PHIG3Pn2QvY4dWR2NgxJHgTtTuzTAiVoE/GDZuBMi94E8+W8p0F
+         mIRhiHNpAGFQlncabKOVSA/2jiSSQAOs1qN2C69De9E0KQUJss4Oa9z1rfGlYgmgpkE6
+         M8L2NA5Ev33SC9vmbAc4SRdcQFHshWRVTxv2VxZnyl96SXcDt3znBbR2x206EjCoRBJK
+         bC0xTIvm7p0ZC/znwNNnAPffJ4NWKCJKdSe/S20JHOtLk9QKvrTxQ7DWmv336xo+zV4k
+         Td/w==
+X-Gm-Message-State: AJIora9Uc7myeLCqpcDdmO/6g5phytB0PRgy8UO14p2dvUgLCA1FFKbg
+	ej0oRIUcMKG3kDUJQNqXSsGWmxQXM2rq7xZxK9ClZw==
 X-Google-Smtp-Source: 
- AGRyM1uC7XAi8dqA8BovZHSxUNlC+qGELkufObto7T3tl9TGXtW8QJ622Mh5Oku2KUx8YoW65LFZGYBCX1AUVfKxl64=
-X-Received: by 2002:a05:6808:171a:b0:333:52c2:aa2c with SMTP id
- bc26-20020a056808171a00b0033352c2aa2cmr2388743oib.17.1658328709298; Wed, 20
- Jul 2022 07:51:49 -0700 (PDT)
+ AGRyM1sZ5abKTuhaqHi8sGmDMTX98nQodKiTMk+kW/Kf09Gyk4GCkn97HbAOb/+sLsD70JPt0vKXvUp6bI8/Is8+6Vs=
+X-Received: by 2002:a17:906:98c8:b0:72b:408f:f499 with SMTP id
+ zd8-20020a17090698c800b0072b408ff499mr35970369ejb.736.1658331349882; Wed, 20
+ Jul 2022 08:35:49 -0700 (PDT)
 MIME-Version: 1.0
-From: "J. S." <schonm@gmail.com>
-Date: Wed, 20 Jul 2022 10:51:38 -0400
+References: 
+ <CAMRc=McXfAzcUrdTLWsHHEo8DyUwU1gUuFTBALwXpJCuA0CoEA@mail.gmail.com>
+ <YtWrKcR6y1jWSFtC@kudzu.us>
+ <CAMKF1sqZh=fPoYHqh-uuJL6oftkmGoDHHcZkTgivoKapFFerAQ@mail.gmail.com>
+ <CAPoiz9zRWPGLSUNaeTQDO=E60cGD4zRVmnZmHFkSdVLrkx_WmA@mail.gmail.com>
+ <CAMRc=MecfyMPB2B5ukhYzMdQDWL4fY=8nbfUe0LR_8hUPhNP9w@mail.gmail.com>
+ <CAMKF1srBz3xL0VTZedyyf4oFgiXxn7ai4afH37yBrT63djTr3Q@mail.gmail.com>
+ <CAMRc=MdFDGv=a04jn23r2v0ZoYYTACW2-KNNi2dVboU2knoDoQ@mail.gmail.com>
+ <CAMKF1sr5cQeqoQum3HAdHVrv-3EbrCkMfmMzoppQUCiisLiEYA@mail.gmail.com>
+In-Reply-To: 
+ <CAMKF1sr5cQeqoQum3HAdHVrv-3EbrCkMfmMzoppQUCiisLiEYA@mail.gmail.com>
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Wed, 20 Jul 2022 17:35:39 +0200
 Message-ID: 
- <CABTo8gCtGV+rgy-gP1pz56n7mTUs=pVeUmeJ70ii1L+qU_YC0Q@mail.gmail.com>
-Subject: [oe][meta-perl] Update the HOMEPAGE variables that reference
- http://search.cpan.org
-To: openembedded-devel@lists.openembedded.org
+ <CAMRc=Mcaaufj-2+WnUZAgwznbkxroOVDEMmX_o4aZXFxmqwF0Q@mail.gmail.com>
+Subject: Re: [oe] [meta-zephyr] build broken with current oe-core master
+To: Khem Raj <raj.khem@gmail.com>
+Cc: =?UTF-8?B?RWlsw61zIE7DrSBGaGxhbm5hZ8OhaW4=?=
+ <elizabeth.flanagan@huawei.com>,
+	Jon Mason <jdmason@kudzu.us>, Jon Mason <jon.mason@arm.com>,
+	Naveen Saini <naveen.kumar.saini@intel.com>,
+	Patches and discussions about the oe-core layer
+ <openembedded-core@lists.openembedded.org>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Jul 2022 14:51:57 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Jul 2022 15:35:57 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97907
+ https://lists.openembedded.org/g/openembedded-devel/message/97908
 
-http://search.cpan.org redirects traffic to https://metacpan.org
+On Tue, Jul 19, 2022 at 4:58 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Tue, Jul 19, 2022 at 10:48 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+> >
+> > On Tue, Jul 19, 2022 at 2:54 PM Khem Raj <raj.khem@gmail.com> wrote:
+> > >
+> > >
+> > >
+> > > On Tue, Jul 19, 2022 at 3:40 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+> > >>
+> > >> On Tue, Jul 19, 2022 at 12:10 AM Jon Mason <jdmason@kudzu.us> wrote:
+> > >> >
+> > >> > On Mon, Jul 18, 2022 at 4:06 PM Khem Raj <raj.khem@gmail.com> wrote:
+> > >> > >
+> > >> > > Can you try something like this
+> > >> > >
+> > >> > > diff --git a/meta/recipes-devtools/gcc/gcc-runtime.inc
+> > >> > > b/meta/recipes-devtools/gcc/gcc-runtime.inc
+> > >> > > index 5d74e4494d..61d5bf6058 100644
+> > >> > > --- a/meta/recipes-devtools/gcc/gcc-runtime.inc
+> > >> > > +++ b/meta/recipes-devtools/gcc/gcc-runtime.inc
+> > >> > > @@ -68,8 +68,7 @@ do_configure () {
+> > >> > >     # libstdc++ isn't built yet so CXX would error not able to find it
+> > >> > > which breaks stdc++'s configure
+> > >> > >     # tests. Create a dummy empty lib for the purposes of configure.
+> > >> > >     mkdir -p ${WORKDIR}/dummylib
+> > >> > > -   touch ${WORKDIR}/dummylib/dummylib.c
+> > >> > > -   ${CC} ${WORKDIR}/dummylib/dummylib.c -shared -o
+> > >> > > ${WORKDIR}/dummylib/libstdc++.so
+> > >> > > +   ${CC} -nostartfiles -shared -x c /dev/null -o
+> > >> > > ${WORKDIR}/dummylib/libstdc++.so
+> > >> > >     for d in libgcc ${RUNTIMETARGET}; do
+> > >> > >         echo "Configuring $d"
+> > >> > >         rm -rf ${B}/${TARGET_SYS}/$d/
+> > >> > >
+> > >> > >
+> > >> > > and see if it helps ?
+> > >> >
+> > >> > That appears to work for the 2 zephyr machines in meta-arm
+> > >> >
+> > >>
+> > >> This still fails for arduino nano 33 ble:
+> > >>
+> > >> | checking for dirent.h... no
+> > >> | checking sys/statvfs.h usability... no
+> > >> | checking sys/statvfs.h presence... no
+> > >> | checking for sys/statvfs.h... no
+> > >> | checking utime.h usability... yes
+> > >> | checking utime.h presence... yes
+> > >> | checking for utime.h... yes
+> > >> | checking whether to build Filesystem TS support... no
+> > >> | checking for struct dirent.d_type... no
+> > >> | checking for realpath... no
+> > >> | checking for utimensat... no
+> > >> | checking for utime... no
+> > >> | checking for lstat... no
+> > >> | checking for struct stat.st_mtim.tv_nsec... yes
+> > >> | checking for fchmod... yes
+> > >> | checking for fchmodat... yes
+> > >> | checking for sendfile that can copy files... no
+> > >> | checking for link... yes
+> > >> | checking for readlink... yes
+> > >> | checking for symlink... yes
+> > >> | checking for truncate... yes
+> > >> | checking for fdopendir... no
+> > >> | checking for dirfd... no
+> > >> | checking for unlinkat... yes
+> > >> | checking __sync extensions... yes
+> > >> | checking link.h usability... no
+> > >> | checking link.h presence... no
+> > >> | checking for link.h... no
+> > >> | checking for fcntl... configure: error: Link tests are not allowed
+> > >> after GCC_NO_EXECUTABLES.
+> > >
+> > >
+> > >
+> > > Can you post config.log from this component
+> > >
+> >
+> > Here you go: https://pastebin.com/6KMD9PhX
+>
+> this one has succeeded. I guess there are multiple config.log files in
+> your build tree. Perhaps the one which shows exit 1 at the end is one
+> I am interested in.
+>
+> >
+> > Bart
 
-Update the HOMEPAGE variable to the newly resolved address.
+I don't see any config.h that would fail and I just ran a clean build.
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
----
- .../recipes-extended/mime-construct/mime-construct_1.11.bb      | 2 +-
- .../recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb    | 2 +-
- meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb  | 2 +-
- meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb    | 2 +-
- meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.48.bb  | 2 +-
- meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb               | 2 +-
- meta-perl/recipes-perl/libdata/libdata-hexdump-perl_0.02.bb     | 2 +-
- meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb    | 2 +-
- meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb    | 2 +-
- meta-perl/recipes-perl/libenv/libenv-perl_1.04.bb               | 2 +-
- .../recipes-perl/libextutils/libextutils-config-perl_0.008.bb   | 2 +-
- .../recipes-perl/libextutils/libextutils-cppguess-perl_0.26.bb  | 2 +-
- .../recipes-perl/libextutils/libextutils-helpers-perl_0.026.bb  | 2 +-
- .../libextutils/libextutils-installpaths-perl_0.012.bb          | 2 +-
- meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.074.bb     | 2 +-
- meta-perl/recipes-perl/libipc/libipc-signal-perl_1.00.bb        | 2 +-
- meta-perl/recipes-perl/liblocale/liblocale-gettext-perl_1.07.bb | 2 +-
- meta-perl/recipes-perl/libmime/libmime-charset-perl_1.012.2.bb  | 2 +-
- meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb       | 2 +-
- .../recipes-perl/libmodule/libmodule-build-tiny-perl_0.039.bb   | 2 +-
- .../recipes-perl/libmodule/libmodule-runtime-perl_0.016.bb      | 2 +-
- meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb        | 2 +-
- meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb        | 2 +-
- meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.05.bb        | 2 +-
- meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb    | 2 +-
- meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.38.bb     | 2 +-
- meta-perl/recipes-perl/libtext/libtext-charwidth-perl_0.04.bb   | 2 +-
- meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb        | 2 +-
- meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb    | 2 +-
- .../recipes-perl/libxml/libxml-filter-buffertext-perl_1.01.bb   | 2 +-
- meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb      | 2 +-
- meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.57.bb    | 2 +-
- 32 files changed, 32 insertions(+), 32 deletions(-)
+| DEBUG: Executing python function extract_stashed_builddir
+| DEBUG: sed -e
+'s:^[^/]*/:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/gcc-12.1.0/build.arm-yocto-eabi.arm-yocto-eabi/:g'
+/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/sysroots-components/x86_64/gcc-stashed-builddir-arm-yocto-eabi/fixmepath
+| xargs sed -i -e
+'s:FIXMESTAGINGDIRTARGET:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/recipe-sysroot:g;
+s:FIXMESTAGINGDIRHOST:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/recipe-sysroot-native:g'
+-e 's:FIXME_PSEUDO_SYSROOT:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/sysroots-components/x86_64/pseudo-native:g'
+-e 's:FIXME_HOSTTOOLS_DIR:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/hosttools:g'
+-e 's:FIXME_PKGDATA_DIR:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/pkgdata/arduino-nano-33-ble:g'
+-e 's:FIXME_PSEUDO_LOCALSTATEDIR:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/pseudo/:g'
+-e 's:FIXME_LOGFIFO:/home/brgl/workspace/zephyr-yocto/build/tmp-newlib/work/armv7m-yocto-eabi/gcc-runtime/12.1.0-r0/temp/fifo.385595:g'
 
-diff --git a/meta-perl/recipes-extended/mime-construct/mime-construct_1.11.bb
-b/meta-perl/recipes-extended/mime-construct/mime-construct_1.11.bb
-index a5d28265d..b8787da74 100644
---- a/meta-perl/recipes-extended/mime-construct/mime-construct_1.11.bb
-+++ b/meta-perl/recipes-extended/mime-construct/mime-construct_1.11.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "Constructs and (by default) mails MIME
-messages. \
-                It is entirely driven from the command line, it is \
-                designed to be used by other programs, or people who act \
-                like programs."
--HOMEPAGE = "http://search.cpan.org/~rosch/mime-construct/mime-construct"
-+HOMEPAGE = "https://metacpan.org/release/ROSCH/mime-construct-1.11/view/mime-construct"
- SECTION = "mail"
- LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM =
-"file://debian/copyright;md5=5e2e5da619ac8ef8c84767ccc4656e96"
-diff --git a/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb
-b/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb
-index d87df0974..49c8ecf20 100644
---- a/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb
-+++ b/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb
-@@ -7,7 +7,7 @@ program.   It is guaranteed to find the *smallest
-possible* set of \
- differences. \
- "
- SECTION = "libs"
--HOMEPAGE = "http://search.cpan.org/~nedkonz/Algorithm-Diff/"
-+HOMEPAGE = "https://metacpan.org/release/NEDKONZ/Algorithm-Diff-${PV}"
+This makes me think that it fails after configure?
 
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM =
-"file://lib/Algorithm/Diff.pm;beginline=406;endline=409;md5=d393b8ad3b8994b9d0ae9299b8a8a1ee"
-diff --git a/meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb
-b/meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb
-index ee7c4d750..be9c7af1c 100644
---- a/meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb
-+++ b/meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb
-@@ -4,7 +4,7 @@ DESCRIPTION = "The Authen::Radius module provides a
-simple class that \
-     Radius server. \
- "
-
--HOMEPAGE = "http://search.cpan.org/~manowar/RadiusPerl"
-+HOMEPAGE = "https://metacpan.org/release/MANOWAR/RadiusPerl-${PV}"
- SECTION = "libs"
-
- LICENSE = "Artistic-2.0"
-diff --git a/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb
-b/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb
-index 8545eb50f..998fcdc71 100644
---- a/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb
-+++ b/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb
-@@ -2,7 +2,7 @@ SUMMARY = "SASL Authentication framework for Perl"
- DESCRIPTION = "SASL is a generic mechanism for authentication used by
-several network \
- protocols. Authen::SASL provides an implementation framework that all \
- protocols should be able to share."
--HOMEPAGE = "http://search.cpan.org/dist/Authen-SASL/"
-+HOMEPAGE = "https://metacpan.org/dist/Authen-SASL"
- SECTION = "libs"
-
- LICENSE = "Artistic-1.0|GPL-1.0-or-later"
-diff --git a/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.48.bb
-b/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.48.bb
-index a51d327a3..cad459a36 100644
---- a/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.48.bb
-+++ b/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.48.bb
-@@ -8,7 +8,7 @@ a dozen capturing modules to use in any particular
-situation and just use \
- this one."
- SECTION = "libs"
-
--HOMEPAGE = "http://search.cpan.org/~dagolden/Capture-Tiny/"
-+HOMEPAGE = "https://metacpan.org/dist/Capture-Tiny"
-
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=37a4918a30ace24395020e5b8c03b83f"
-diff --git a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb
-b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb
-index 4c9864094..b20430ab6 100644
---- a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb
-+++ b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.54.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "CGI.pm is a stable, complete and mature
-solution for processing a
- HTTP requests and responses. Major features including processing form \
- submissions, file uploads, reading and writing cookies, query string
-generation \
- and manipulation, and processing and preparing HTTP headers."
--HOMEPAGE = "http://search.cpan.org/~leejo/CGI-4.28/lib/CGI.pod"
-+HOMEPAGE = "https://metacpan.org/release/LEEJO/CGI-4.28/view/lib/CGI.pod"
- SECTION = "libs"
- LICENSE = "Artistic-2.0 | GPL-2.0-only"
-
-diff --git a/meta-perl/recipes-perl/libdata/libdata-hexdump-perl_0.02.bb
-b/meta-perl/recipes-perl/libdata/libdata-hexdump-perl_0.02.bb
-index 4493a7e5e..3ef2abe7e 100644
---- a/meta-perl/recipes-perl/libdata/libdata-hexdump-perl_0.02.bb
-+++ b/meta-perl/recipes-perl/libdata/libdata-hexdump-perl_0.02.bb
-@@ -7,7 +7,7 @@ of each line shows the printable characters \
- (all others are shown as single dots).\
- "
-
--HOMEPAGE = "http://search.cpan.org/~ftassin/Data-HexDump-0.02/lib/Data/HexDump.pm"
-+HOMEPAGE = "https://metacpan.org/release/FTASSIN/Data-HexDump-0.02/view/lib/Data/HexDump.pm"
- SECTION = "libs"
-
- LICENSE = "Artistic-1.0"
-diff --git a/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
-b/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
-index 51a2ad349..74b47bfd7 100644
---- a/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
-+++ b/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Keyed-Hashing for Message Authentication"
- DESCRIPTION = "Keyed-Hashing for Message Authentication"
--HOMEPAGE = "http://search.cpan.org/~gaas/Digest-HMAC-1.03/"
-+HOMEPAGE = "https://metacpan.org/release/GAAS/Digest-HMAC-1.03"
- SECTION = "libs"
-
- LICENSE = "Artistic-1.0|GPL-1.0-or-later"
-diff --git a/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
-b/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
-index cd6367512..68c3fb5e1 100644
---- a/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
-+++ b/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Perl interface to the SHA-1 algorithm "
- DESCRIPTION = "Digest::SHA1 - Perl interface to the SHA-1 algorithm"
--HOMEPAGE = "http://search.cpan.org/~gaas/Digest-SHA1-2.13/"
-+HOMEPAGE = "https://metacpan.org/release/GAAS/Digest-SHA1-2.13"
- SECTION = "libs"
-
- LICENSE = "Artistic-1.0|GPL-1.0-or-later"
-diff --git a/meta-perl/recipes-perl/libenv/libenv-perl_1.04.bb
-b/meta-perl/recipes-perl/libenv/libenv-perl_1.04.bb
-index 79fff9d52..af7fec70d 100644
---- a/meta-perl/recipes-perl/libenv/libenv-perl_1.04.bb
-+++ b/meta-perl/recipes-perl/libenv/libenv-perl_1.04.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "Perl maintains environment variables in
-a special hash named %ENV
- For when this access method is inconvenient, the Perl module Env
-allows environment \
- variables to be treated as scalar or array variables."
-
--HOMEPAGE = "http://search.cpan.org/~flora/Env/"
-+HOMEPAGE = "https://metacpan.org/dist/Env"
- SECTION = "libs"
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
-
-diff --git a/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.008.bb
-b/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.008.bb
-index a58d96582..20a07ce15 100644
---- a/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.008.bb
-+++ b/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.008.bb
-@@ -2,7 +2,7 @@ SUMMARY = "ExtUtils::Config - A wrapper for perl's
-configuration"
- DESCRIPTION = "ExtUtils::Config is an abstraction around the %Config hash."
- SECTION = "libs"
-
--HOMEPAGE = "http://search.cpan.org/~leont/ExtUtils-Config/"
-+HOMEPAGE = "https://metacpan.org/dist/ExtUtils-Config"
-
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1932ab4d8b84c25fd7967aa18088e57e"
-diff --git a/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.26.bb
-b/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.26.bb
-index 04a29fdc2..5f7ed29a2 100644
---- a/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.26.bb
-+++ b/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.26.bb
-@@ -6,7 +6,7 @@ It can generate the necessary options to the
-Module::Build constructor or \
- to ExtUtils::MakeMaker's WriteMakefile function."
- SECTION = "libs"
-
--HOMEPAGE = "http://search.cpan.org/~smueller/ExtUtils-CppGuess/"
-+HOMEPAGE = "https://metacpan.org/release/SMUELLER/ExtUtils-CppGuess-0.07"
-
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM =
-"file://README;beginline=81;endline=84;md5=84c0390b90ea8c6702ce659b67bed699"
-diff --git a/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.026.bb
-b/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.026.bb
-index 8534822e6..988bca6ed 100644
---- a/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.026.bb
-+++ b/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.026.bb
-@@ -2,7 +2,7 @@ SUMMARY = "ExtUtils::Helpers - Various portability
-utilities for module builders
- DESCRIPTION = "This module provides various portable helper function
-for module building modules."
- SECTION = "libs"
-
--HOMEPAGE = "http://search.cpan.org/~leont/ExtUtils-Helpers/"
-+HOMEPAGE = "https://metacpan.org/dist/ExtUtils-Helpers"
-
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=223c04045664f72c3a6556462612bddd"
-diff --git a/meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.012.bb
-b/meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.012.bb
-index 07dab4e16..91e96610f 100644
---- a/meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.012.bb
-+++ b/meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.012.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "This module tries to make install path
-resolution as easy \
- as possible."
- SECTION = "libs"
-
--HOMEPAGE = "http://search.cpan.org/~leont/ExtUtils-InstallPaths/"
-+HOMEPAGE = "https://metacpan.org/dist/ExtUtils-InstallPaths"
-
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b6fa54d873ce6bcf4809ea88bdf97769"
-diff --git a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.074.bb
-b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.074.bb
-index 1d04f0054..4234e65f8 100644
---- a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.074.bb
-+++ b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.074.bb
-@@ -6,7 +6,7 @@ needs to write a full-featured SSL client or server
-application: \
- multiple SSL contexts, cipher selection, certificate verification, and \
- SSL version selection. As an extra bonus, it works perfectly with \
- mod_perl."
--HOMEPAGE = "http://search.cpan.org/dist/IO-Socket-SSL/"
-+HOMEPAGE = "https://metacpan.org/dist/IO-Socket-SSL"
- SECTION = "libs"
-
- LICENSE = "Artistic-1.0|GPL-1.0-or-later"
-diff --git a/meta-perl/recipes-perl/libipc/libipc-signal-perl_1.00.bb
-b/meta-perl/recipes-perl/libipc/libipc-signal-perl_1.00.bb
-index 389be2c16..684fb2d9e 100644
---- a/meta-perl/recipes-perl/libipc/libipc-signal-perl_1.00.bb
-+++ b/meta-perl/recipes-perl/libipc/libipc-signal-perl_1.00.bb
-@@ -2,7 +2,7 @@ SUMMARY = "IPC::Signal - Utility functions dealing with signals"
- DESCRIPTION = "IPC::Signal - This module contains utility functions for \
- dealing with signals."
-
--HOMEPAGE = "http://search.cpan.org/~rosch/IPC-Signal-1.00/"
-+HOMEPAGE = "https://metacpan.org/dist/IPC-Signal"
- SECTION = "libs"
-
- LICENSE = "Artistic-1.0|GPL-1.0-or-later"
-diff --git a/meta-perl/recipes-perl/liblocale/liblocale-gettext-perl_1.07.bb
-b/meta-perl/recipes-perl/liblocale/liblocale-gettext-perl_1.07.bb
-index 1e4b56353..98ac834ed 100644
---- a/meta-perl/recipes-perl/liblocale/liblocale-gettext-perl_1.07.bb
-+++ b/meta-perl/recipes-perl/liblocale/liblocale-gettext-perl_1.07.bb
-@@ -4,7 +4,7 @@ functions for retrieving message strings from
-databases constructed to \
- internationalize software."
- SECTION = "libs"
-
--HOMEPAGE = "http://search.cpan.org/~pvandry/Locale-gettext-${PV}/"
-+HOMEPAGE = "https://metacpan.org/release/PVANDRY/Locale-gettext-${PV}"
-
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM = "file://README;md5=d028249c2d08dca6ca6c5bb43b56d926"
-diff --git a/meta-perl/recipes-perl/libmime/libmime-charset-perl_1.012.2.bb
-b/meta-perl/recipes-perl/libmime/libmime-charset-perl_1.012.2.bb
-index 20557a3f3..0c5a1b9fe 100644
---- a/meta-perl/recipes-perl/libmime/libmime-charset-perl_1.012.2.bb
-+++ b/meta-perl/recipes-perl/libmime/libmime-charset-perl_1.012.2.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "MIME::Charset - Charset Information for MIME."
- DESCRIPTION = "MIME::Charset provides information about character
-sets used for MIME \
- messages on Internet."
--HOMEPAGE = "http://search.cpan.org/~nezumi/MIME-Charset-${PV}/"
-+HOMEPAGE = "https://metacpan.org/release/NEZUMI/MIME-Charset-${PV}"
- SECTION = "libs"
-
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
-diff --git a/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
-b/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
-index 2c06728ed..c53ee70c1 100644
---- a/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
-+++ b/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
-@@ -5,7 +5,7 @@ is transmitted. Sometimes real knowledge about a
-mime-type is need.\
- \n\
- This module maintains a set of MIME::Type objects, which each describe \
- one known mime type."
--HOMEPAGE = "http://search.cpan.org/~markov/MIME-Types-${PV}"
-+HOMEPAGE = "https://metacpan.org/release/MARKOV/MIME-Types-${PV}"
- SECTION = "libraries"
-
- LICENSE = "Artistic-1.0|GPL-1.0-or-later"
-diff --git a/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.039.bb
-b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.039.bb
-index ff3f4d694..929399389 100644
---- a/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.039.bb
-+++ b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.039.bb
-@@ -7,7 +7,7 @@ Whereas Module::Build has over 6,700 lines of code;
-this module has less than \
- 120, yet supports the features needed by most distributions."
- SECTION = "libs"
-
--HOMEPAGE = "http://search.cpan.org/~leont/Module-Build-Tiny/"
-+HOMEPAGE = "https://metacpan.org/dist/Module-Build-Tiny"
-
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=57b8100f0b648cd37fbc3725fe3c111a"
-diff --git a/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.016.bb
-b/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.016.bb
-index 205df6802..e15ba3024 100644
---- a/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.016.bb
-+++ b/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.016.bb
-@@ -14,7 +14,7 @@ are applied on any Perl version where the bugs
-exist, except for a case where \
- one of the bugs cannot be adequately worked around in pure Perl."
- SECTION = "libs"
-
--HOMEPAGE = "http://search.cpan.org/~zefram/Module-Runtime/"
-+HOMEPAGE = "https://metacpan.org/dist/Module-Runtime"
-
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM =
-"file://README;beginline=36;endline=44;md5=9416434672a57853d6181f3da9094963"
-diff --git a/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
-b/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
-index 4c4faab4d..93e818d5d 100644
---- a/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
-+++ b/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
-@@ -6,7 +6,7 @@ Turbo Fredriksson's PHP-IDN. \
- "
- SECTION = "libs"
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
--HOMEPAGE = "http://search.cpan.org/dist/Net-LibIDN/"
-+HOMEPAGE = "https://metacpan.org/dist/Net-LibIDN"
- DEPENDS += "libidn"
- # We must need glibc-gconvs to enable charset related functions,
- # such as Net::LibIDN::idn_to_ascii().
-diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
-b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
-index 5d0eccd84..9a06c9e82 100644
---- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
-+++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
-@@ -4,7 +4,7 @@ web pages on SSL servers (for symmetry, same API is
-offered for \
- accessing http servers, too), a sslcat() function for writing your own \
- clients, and finally access to the SSL api of SSLeay/OpenSSL package \
- so you can write servers or clients for more complicated applications."
--HOMEPAGE = "http://search.cpan.org/dist/Net-SSLeay/"
-+HOMEPAGE = "https://metacpan.org/dist/Net-SSLeay"
- SECTION = "libs"
-
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
-diff --git a/meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.05.bb
-b/meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.05.bb
-index d7d420104..be0083b37 100644
---- a/meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.05.bb
-+++ b/meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.05.bb
-@@ -8,7 +8,7 @@ These interactive features include the ability to
-specify a time-out and to \
- wait for patterns to appear in the input stream, such as the prompt from a \
- shell."
-
--HOMEPAGE = "http://search.cpan.org/dist/Net-Telnet/"
-+HOMEPAGE = "https://metacpan.org/dist/Net-Telnet"
- SECTION = "Development/Libraries"
-
- LICENSE = "Artistic-1.0|GPL-1.0-or-later"
-diff --git a/meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb
-b/meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb
-index ffd87ed0b..543bcc54c 100644
---- a/meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb
-+++ b/meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Interpret and act on wait() status values"
- DESCRIPTION = "This module contains functions for interpreting and acting \
- on wait status values."
-
--HOMEPAGE = "http://search.cpan.org/~rosch/Proc-WaitStat/"
-+HOMEPAGE = "https://metacpan.org/dist/Proc-WaitStat"
- SECTION = "libraries"
-
- LICENSE = "Artistic-1.0|GPL-1.0-or-later"
-diff --git a/meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.38.bb
-b/meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.38.bb
-index f4ce3131d..8064226e9 100644
---- a/meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.38.bb
-+++ b/meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.38.bb
-@@ -6,7 +6,7 @@ handy functions for working with terminals. One of the
-main goals is to \
- have the functions as portable as possible, so you can just plug in 'use \
- Term::ReadKey' on any architecture and have a good likelihood of it \
- working."
--HOMEPAGE = "http://search.cpan.org/~jstowe/TermReadKey-${PV}"
-+HOMEPAGE = "https://metacpan.org/release/JSTOWE/TermReadKey-${PV}"
- SECTION = "libraries"
-
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
-diff --git a/meta-perl/recipes-perl/libtext/libtext-charwidth-perl_0.04.bb
-b/meta-perl/recipes-perl/libtext/libtext-charwidth-perl_0.04.bb
-index 29118129a..75a2c9263 100644
---- a/meta-perl/recipes-perl/libtext/libtext-charwidth-perl_0.04.bb
-+++ b/meta-perl/recipes-perl/libtext/libtext-charwidth-perl_0.04.bb
-@@ -10,7 +10,7 @@ width of the first character of the given string and
-mbswidth() gives the \
- width of the whole given string."
- SECTION = "libs"
-
--HOMEPAGE = "http://search.cpan.org/~kubota/Text-CharWidth-${PV}/"
-+HOMEPAGE = "https://metacpan.org/release/KUBOTA/Text-CharWidth-${PV}"
-
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM = "file://README;md5=d8d54c8c500cbdd57a4c15911d9d96db"
-diff --git a/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
-b/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
-index afdf63ede..b4f538ee4 100644
---- a/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
-+++ b/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
-@@ -6,7 +6,7 @@ faster than shelling out to a system's diff executable
-for small files, \
- and generally slower on larger files."
- SECTION = "libs"
-
--HOMEPAGE = "http://search.cpan.org/~ovid/Text-Diff/"
-+HOMEPAGE = "https://metacpan.org/release/OVID/Text-Diff-${PV}"
-
- LICENSE = "Artistic-1.0 | GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=385c55653886acac3821999a3ccd17b3"
-diff --git a/meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb
-b/meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb
-index 017e951d3..114ddb505 100644
---- a/meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb
-+++ b/meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb
-@@ -11,7 +11,7 @@ characters). Also, minimal handling of languages
-which doesn't use \
- whitespaces between words (like Chinese and Japanese) is supported."
- SECTION = "libs"
-
--HOMEPAGE = "http://search.cpan.org/~kubota/Text-WrapI18N-${PV}/"
-+HOMEPAGE = "https://metacpan.org/release/KUBOTA/Text-WrapI18N-${PV}"
-
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM = "file://README;md5=080862e1e40cdcddef4393e137285858"
-diff --git a/meta-perl/recipes-perl/libxml/libxml-filter-buffertext-perl_1.01.bb
-b/meta-perl/recipes-perl/libxml/libxml-filter-buffertext-perl_1.01.bb
-index 7962d22c9..ca20542da 100644
---- a/meta-perl/recipes-perl/libxml/libxml-filter-buffertext-perl_1.01.bb
-+++ b/meta-perl/recipes-perl/libxml/libxml-filter-buffertext-perl_1.01.bb
-@@ -8,7 +8,7 @@ of putting all characters into a single event. \
- "
- SECTION = "libs"
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
--HOMEPAGE = "http://search.cpan.org/dist/XML-Filter-BufferText/"
-+HOMEPAGE = "https://metacpan.org/dist/XML-Filter-BufferText"
- DEPENDS += "libxml-sax-perl-native"
- RDEPENDS:${PN} += "libxml-sax-perl"
-
-diff --git a/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb
-b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb
-index c2898a901..1ab3a7b54 100644
---- a/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb
-+++ b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb
-@@ -6,7 +6,7 @@ The module is split into several packages which are
-not described in this \
- section; unless stated otherwise, you only need to use XML::LibXML; in \
- your programs."
-
--HOMEPAGE = "http://search.cpan.org/dist/XML-LibXML-1.99/"
-+HOMEPAGE = "https://metacpan.org/release/SHLOMIF/XML-LibXML-1.99"
- SECTION = "libs"
- LICENSE = "Artistic-1.0|GPL-1.0-or-later"
- DEPENDS += "libxml2 \
-diff --git a/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.57.bb
-b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.57.bb
-index 487a5c22c..17b65dba5 100644
---- a/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.57.bb
-+++ b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.57.bb
-@@ -8,7 +8,7 @@ the AxKit XML Application Server. \
- "
- SECTION = "libs"
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
--HOMEPAGE = "http://search.cpan.org/dist/XML-SAX-Writer/"
-+HOMEPAGE = "https://metacpan.org/dist/XML-SAX-Writer"
- DEPENDS += "libxml-filter-buffertext-perl-native"
- RDEPENDS:${PN} += "libxml-filter-buffertext-perl"
-
--- 
-2.34.1
+Bart
 
