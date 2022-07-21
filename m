@@ -1,108 +1,148 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 26ACBC43334
-	for <webhook@archiver.kernel.org>; Thu, 21 Jul 2022 14:50:46 +0000 (UTC)
-Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com
- [209.85.216.46])
- by mx.groups.io with SMTP id smtpd.web10.7372.1658415036256960290
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E978C433EF
+	for <webhook@archiver.kernel.org>; Thu, 21 Jul 2022 15:02:06 +0000 (UTC)
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+ by mx.groups.io with SMTP id smtpd.web12.7442.1658415718278638779
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Jul 2022 07:50:36 -0700
+ Thu, 21 Jul 2022 08:01:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=nbA86alP;
- spf=pass (domain: gmail.com, ip: 209.85.216.46,
- mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f46.google.com with SMTP id
- l14-20020a17090a72ce00b001f20ed3c55dso1647475pjk.5
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Jul 2022 07:50:36 -0700 (PDT)
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=Y8ZjFkBd;
+ spf=pass (domain: axis.com, ip: 195.60.68.18,
+ mailfrom: peter.kjellerstedt@axis.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=2aTRsw9NNiEiqNDcVgpKdGEB2XotOkGjgS2SHwjbe1s=;
-        b=nbA86alPBntQhCRG62Lv2MAaNi6U2rIJQyUtd/yt2JZrZf4RRAeGp8L2cFu1sp5ll9
-         BjFoWh/T40GZo7hrqgK9yHGPWZvGWUeK4DLhCeBqdgR9ZgRAAFF/PJZfhELOI5KsAbdI
-         fTDQXBM+1s+uSm0umqgpG6fNIYP+XlvbsntIEG9NXxsggECE46XkLR/liLQBo1aefySr
-         TI7n4NQzwYN+pDY4PnM4WjV5QcIgTdN07LbTgzCWmyip64/3kO3gWpsxUJOb4HcKxMa1
-         TQgF4NRvvMMcaJCCKIP7cWucW6WcGAsqyIz70ag1Hub/1WladcpwcpYT8u59GkwouBom
-         JEWA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=2aTRsw9NNiEiqNDcVgpKdGEB2XotOkGjgS2SHwjbe1s=;
-        b=qbA1GoSTjMEv3nn+9mneYy1Js5R35tIarRgxQJdGi/jPIysKjsgp3o0Rg6EmpaTqNv
-         yxrm67Eu+vQHs/zuc/Qt0r+AxyI0YQWdA9S5KAEfm9i37Ah4Q0rD5ne7dutlPwTBUR9g
-         cvWUyN49LMqReGicCPo0jolUAGpOLuQpmPn6Qr8jBcoXvOmvZqFQEkSrMDiI9EVoyKob
-         K1yNS5I/oatAdVysgmfP4NSSrboJYW2sqda2OQGRbgXwp/0MlHl5z3rjstVoSavxABjM
-         3iKVbD05mCh8uShXC7MWz62uBhzynQKkFWxUqr4kfYGaF+6+N6zXXYua2QAmw7aaKGl4
-         Tflg==
-X-Gm-Message-State: AJIora9k+p3gNaszxN1y+NUQDdZSy30dqrsNBdO5ECYqYye+4KxzgC96
-	Osmp4pZ3xsMWYVQGHMj3OSsMzJJsC7U=
-X-Google-Smtp-Source: 
- AGRyM1sSejJYJxNvJ/SfrP9kYnT/8sIqmd55gwJodptkDE/kKWoD2SPxCpYGGbwgpR/0C1+HbehZHA==
-X-Received: by 2002:a17:902:cece:b0:16c:3683:8830 with SMTP id
- d14-20020a170902cece00b0016c36838830mr43324514plg.107.1658415035190;
-        Thu, 21 Jul 2022 07:50:35 -0700 (PDT)
-Received: from keaua.hsd1.ca.comcast.net
- (c-67-181-203-136.hsd1.ca.comcast.net. [67.181.203.136])
-        by smtp.gmail.com with ESMTPSA id
- l5-20020a170902ec0500b0016c1a1c1405sm1523291pld.222.2022.07.21.07.50.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 Jul 2022 07:50:33 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH] ndisc6: upgrade 1.0.5 -> 1.0.6
-Date: Thu, 21 Jul 2022 07:48:31 -0700
-Message-Id: <20220721144831.3730972-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.25.1
+  d=axis.com; q=dns/txt; s=axis-central1; t=1658415718;
+  x=1689951718;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=CIITYyeg7Sm9Rtdnqc0n1xSWdIrhII3J4tmoxkC5stE=;
+  b=Y8ZjFkBd+4M3ecxlE6nw9WrkUqBXqrGEhNxTwdHK3T6tsvK6/bgbb2kb
+   NkpalKVG1or/Jw0MWVaUjEPu5VoZp0UQNUnO7wnqibNyTmKEK2GJAPhZZ
+   2NuXPW6Trv85o8t+eMar1nbsbe257HenON0s9Fbp+ZMgyhAR5jmRNxmbK
+   XPfM8rEyarOZtPcnxOSneAmudumTxFGDNZOchrl+5fnj0w+oYa7Asym6b
+   Z+KP4WTZ4rcZJn481QjtLXRRn7edneOcgQ3+qvXF4kfvoUg8tMQ8c8yHp
+   DPw/hA1OO6E0xsfpCn6m7+4hXtOxISiYT0+3cl+h//x0/xlbvuq0vDFCY
+   g==;
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Armin Kuster <akuster808@gmail.com>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] [meta-oe][PATCH] cryptsetup: Add support for building
+ without SSH tokens
+Thread-Topic: [oe] [meta-oe][PATCH] cryptsetup: Add support for building
+ without SSH tokens
+Thread-Index: AQHYe2Vaqa//iELw9ke2BLd7SUzIva1wVSHggBjZn6A=
+Date: Thu, 21 Jul 2022 15:01:55 +0000
+Message-ID: <b62fd324120741829738db88f100341a@axis.com>
+References: <16F6B88B2671EBED.5223@lists.openembedded.org>
+ <16FF05E9F9AF02CA.28546@lists.openembedded.org>
+In-Reply-To: <16FF05E9F9AF02CA.28546@lists.openembedded.org>
+Accept-Language: en-US, sv-SE
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.0.5.60]
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 21 Jul 2022 14:50:46 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 21 Jul 2022 15:02:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97917
+ https://lists.openembedded.org/g/openembedded-devel/message/97918
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+*ping*
 
-Changelog:
-==========
-# ndisc6: print NAT64 prefix if present.
-# rdnssd: fix timeout calculation.
+//Peter
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit c77bc200813dec8a1317ea6651d0f398a3fa5d65)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../recipes-support/ndisc6/{ndisc6_git.bb => ndisc6_1.0.6.bb}  | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-networking/recipes-support/ndisc6/{ndisc6_git.bb => ndisc6_1.0.6.bb} (97%)
-
-diff --git a/meta-networking/recipes-support/ndisc6/ndisc6_git.bb b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.6.bb
-similarity index 97%
-rename from meta-networking/recipes-support/ndisc6/ndisc6_git.bb
-rename to meta-networking/recipes-support/ndisc6/ndisc6_1.0.6.bb
-index f5467794e6..6861314a0a 100644
---- a/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
-+++ b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.6.bb
-@@ -5,8 +5,7 @@ HOMEPAGE = "http://www.remlab.net/ndisc6/"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
--PV = "1.0.5"
--SRCREV = "b706f5f01aa82aa0db678fffd15a1527f330c507"
-+SRCREV = "7e314b23329f9c24c4c097b8513673fed7e7158a"
- SRC_URI = "git://git.remlab.net/git/ndisc6.git;protocol=http;branch=master \
-            file://0001-autogen-Do-not-symlink-gettext.h-from-build-host.patch \
-            "
--- 
-2.25.1
-
+> -----Original Message-----
+> From: openembedded-devel@lists.openembedded.org <openembedded-
+> devel@lists.openembedded.org> On Behalf Of Peter Kjellerstedt
+> Sent: den 5 juli 2022 21:35
+> To: Armin Kuster <akuster808@gmail.com>
+> Cc: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH] cryptsetup: Add support for building
+> without SSH tokens
+>=20
+> > -----Original Message-----
+> > From: openembedded-devel@lists.openembedded.org <openembedded-
+> devel@lists.openembedded.org> On Behalf Of Peter Kjellerstedt
+> > Sent: den 8 juni 2022 20:27
+> > To: openembedded-devel@lists.openembedded.org
+> > Subject: [oe] [meta-oe][PATCH] cryptsetup: Add support for building
+> without SSH tokens
+>=20
+> This is now on master. Please backport it to Kirkstone.
+>=20
+> //Peter
+>=20
+> >
+> > Cryptsetup SSH tokens is the only feature that has a dependency on
+> > libssh. Add a packageconfig to control this dependency.
+> >
+> > Change-Id: Iac4f91e099ad2e3a79aab183734108f8bfbff57f
+> > Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+> > ---
+> >  .../recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb    | 12 ++++++++++--
+> >  1 file changed, 10 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
+> b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
+> > index 435b55477..652fd6661 100644
+> > --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
+> > +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
+> > @@ -14,7 +14,6 @@ DEPENDS =3D " \
+> >      libdevmapper \
+> >      popt \
+> >      util-linux-libuuid \
+> > -    libssh \
+> >  "
+> >
+> >  DEPENDS:append:libc-musl =3D " argp-standalone"
+> > @@ -39,6 +38,7 @@ PACKAGECONFIG ??=3D " \
+> >      blkid \
+> >      luks-adjust-xts-keysize \
+> >      openssl \
+> > +    ssh-token \
+> >  "
+> >  PACKAGECONFIG:append:class-target =3D " \
+> >      udev \
+> > @@ -69,7 +69,7 @@ PACKAGECONFIG[nss] =3D "--with-crypto_backend=3Dnss,,=
+nss"
+> >  PACKAGECONFIG[kernel] =3D "--with-crypto_backend=3Dkernel"
+> >  PACKAGECONFIG[nettle] =3D "--with-crypto_backend=3Dnettle,,nettle"
+> >  PACKAGECONFIG[luks2] =3D "--with-default-luks-format=3DLUKS2,--with-
+> default-luks-format=3DLUKS1"
+> > -
+> > +PACKAGECONFIG[ssh-token] =3D "--enable-ssh-token,--disable-ssh-
+> token,libssh"
+> >
+> >  EXTRA_OECONF =3D "--enable-static"
+> >  # Building without largefile is not supported by upstream
+> > @@ -90,6 +90,14 @@ EXTRA_OECONF +=3D "--with-luks2-pbkdf=3D${LUKS2_PBKD=
+F} \
+> >      --with-luks2-parallel-threads=3D${LUKS2_PARALLEL_THREADS} \
+> >      --with-luks2-iter-time=3D${LUKS2_ITERTIME}"
+> >
+> > +do_install:append() {
+> > +    # The /usr/lib/cryptsetup directory is always created, even when
+> ssh-token
+> > +    # is disabled. In that case it is empty and causes a packaging
+> error. Since
+> > +    # there is no reason to distribute the empty directory, the easies=
+t
+> solution
+> > +    # is to remove it if it is empty.
+> > +    rmdir -p --ignore-fail-on-non-empty ${D}${libdir}/${BPN}
+> > +}
+> > +
+> >  FILES:${PN} +=3D
+> "${@bb.utils.contains('DISTRO_FEATURES','systemd','${exec_prefix}/lib/tmp=
+f
+> iles.d/cryptsetup.conf', '', d)}"
+> >
+> >  RDEPENDS:${PN} =3D " \
 
