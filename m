@@ -1,96 +1,102 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E0E91C43334
-	for <webhook@archiver.kernel.org>; Thu, 21 Jul 2022 17:35:06 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
- [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.web10.9391.1658424902998692494
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22D31C43334
+	for <webhook@archiver.kernel.org>; Thu, 21 Jul 2022 22:55:22 +0000 (UTC)
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com
+ [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.web08.1765.1658444119606125635
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Jul 2022 10:35:03 -0700
+ Thu, 21 Jul 2022 15:55:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=WhxO0ATm;
- spf=pass (domain: gmail.com, ip: 209.85.128.47,
- mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id
- f24-20020a1cc918000000b003a30178c022so3760924wmb.3
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=HwiSDmqM;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id ku18so2896987pjb.2
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Jul 2022 10:35:02 -0700 (PDT)
+ Thu, 21 Jul 2022 15:55:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=7TO9PruxJWdxbx5BJ3OShl17z+UP+J/mjOxDyvHMg9M=;
-        b=WhxO0ATmSBZUwowJeBoRVCAMk6dFim8sa5lOWbMnocjU79xPh5TwTmQlowM6S4GAOq
-         Md4oYUJ8BUVJWH+6uY074yuHdq9KLm/uvCzR1tNjYoQO7vosJTvQ7lmg8nctAxZ5P5C4
-         ejWVIIuvUY+NHp9c88A8g6d71XgeMw5k11AuaYz+beVJjPS9D6VQjwq+m/1Bt4XJC1vW
-         P/YJ2XXgG9BaU+BSfg5uvYuGbBtSzrRZ//I6wLz9l5f4qE5cvcfU/Xqh8VRJjviPse+4
-         zG+wIqB0nTXLlDPkDjD5pA925n9JeUghggQfbKjouENJbb9WOprOibiEksixCcL//1IN
-         EKeQ==
+        bh=HtNaw9L+Ma1QuYulEBOECn1BkzE37i84Pf67GKQa09Y=;
+        b=HwiSDmqMvI1XLHkdnn7wTWEjlVMem6MADwABTRWakiD2V6Ld8fRa1Isih+k4qgTJIt
+         IoEDsW4Syr5PsDtMdVDJ/TYSLUbvdr238FNLWxx/Rdt2cYIQ3Y5a9IpFVJpnLvNVv+zh
+         X9Wk7bFZEu0trYPxrSsyrdGR3g9Ql23KdopmepATPkgi7KARVF0BuvwBx8f8cNv9c7SN
+         7B0sQBUEQ/dA0CqjB13lblCSnKykw7qWJ7HVoOYrGVCkt+jWqtWfY5bfqMTl/1zjt63Z
+         NoUQcG3j5VZycDmGmlkPvCpFYr0E+DFfONtTbdd8oA3y6jac3H1hvGhwx6F8RIPzJUhN
+         iN/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=7TO9PruxJWdxbx5BJ3OShl17z+UP+J/mjOxDyvHMg9M=;
-        b=sWEM8+F6dJUVCfUveqnRxzoXeJAhRaOPTfV92MkGpQLi5osLMp65b2XWoyZzzSqH6s
-         XzQChvMol8L9HLX93+v1TlXfG2zAZik2ap9QPgXNgAsk757kx+FyOEmLxOE52cIzUnJr
-         8ISil7cV/9Ut+H21SIJM7qhtO6G1StT/Ottj2ctETzUpmIe7enZe4URfeUlST4KDtjwG
-         7uj1vJszvocB5rfAfOhiDhLapQE9IVm5eNihVXWVhO59TtZwYSEJ/1rc4v3yBuorUOmJ
-         QDu8Csl3Cszm4ZXiYq8rpOjZF8ZQs6tFyJCkR2lXyvDGhqW6rvbXaIrScADXJblR0RQ1
-         hasQ==
-X-Gm-Message-State: AJIora/I0Bv2d9ebBzukX4WkfhQt+H6w8ppqvY668onkhAnFYWVaPSme
-	XVYOcaDFeJW9REP6UQoC/Iv109zxrn8=
+        bh=HtNaw9L+Ma1QuYulEBOECn1BkzE37i84Pf67GKQa09Y=;
+        b=ecJzg87pxEQlpkak55mgapiTsL5zTpy47mdZ8pgmm5UTrxI6bzEsS4YhbulMOCi+QF
+         ti+voJ9KSuFp352QsaNx0hgtBZ5Har8gfhxH83iEDyNBQh3lQBpQ1xPNmti2Khuwz5C9
+         5x/M4Xe/JJUyTqx/E5sQ4l1GaiKykqY1d02HGXQZnzCcxOBW2yoIeJC7xkgvgJvweeBk
+         rdUa2hWv1flUCuuHm+UnIW8El2aJP8WBUakwwUypHfyMAhbXXS/yilUHKHG2a9K6guIu
+         4W4THh4Dp9n8i5CTd//fpNvqkcTVNiVDTTVo5XpXpcpgBCtugjKHpfZYZ4VIzoamn0PB
+         y0pg==
+X-Gm-Message-State: AJIora+ROioeQcw5MBuf3akmmoe+pBclZBbf8lm6gJyiEPLZkprvMJo8
+	+Z3h88hP/otoySEdpDmisXXUsSupoaIXZQ==
 X-Google-Smtp-Source: 
- AGRyM1uru65y4+yZ+EdagGwqkpMSnu2piqwJEQ1zkD973bG5xCzQjwvBmzeFosemMdX1V/TzN0/IVQ==
-X-Received: by 2002:a05:600c:ad2:b0:3a3:181e:e228 with SMTP id
- c18-20020a05600c0ad200b003a3181ee228mr9447701wmr.139.1658424900945;
-        Thu, 21 Jul 2022 10:35:00 -0700 (PDT)
-Received: from Unimatrix08-Jammy.. (mob-109-113-162-128.net.vodafone.it.
- [109.113.162.128])
+ AGRyM1sqFBPup8EXGj7B8NriKokq5tWEmFRDmz7Zhghb2HXBsGrbGzTKDYk0sXPeXXU8TrEQ1CxWkQ==
+X-Received: by 2002:a17:90b:3841:b0:1ef:f0ac:de55 with SMTP id
+ nl1-20020a17090b384100b001eff0acde55mr14134732pjb.35.1658444118726;
+        Thu, 21 Jul 2022 15:55:18 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::3bff])
         by smtp.gmail.com with ESMTPSA id
- o17-20020adfead1000000b0021e4536a948sm2545229wrn.79.2022.07.21.10.35.00
+ p2-20020a17090ab90200b001f0097c2fb2sm1942651pjr.28.2022.07.21.15.55.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 Jul 2022 10:35:00 -0700 (PDT)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+        Thu, 21 Jul 2022 15:55:18 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	Gianfranco Costamagna <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH] vboxguestdrivers: refresh patch for new upstream
- release
-Date: Thu, 21 Jul 2022 19:33:13 +0200
-Message-Id: <20220721173313.874289-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.34.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] libmtp: Upgrade to 1.1.20
+Date: Thu, 21 Jul 2022 15:55:15 -0700
+Message-Id: <20220721225515.1699541-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.37.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 21 Jul 2022 17:35:06 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 21 Jul 2022 22:55:22 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97922
+ https://lists.openembedded.org/g/openembedded-devel/message/97923
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+Use github for downloading the release artifacts.
+This has support for new devices
+
+https://github.com/libmtp/libmtp/releases/tag/v1.1.20
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...0001-utils-fix-build-against-5.15-libc-headers-headers.patch | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../libmtp/{libmtp_1.1.19.bb => libmtp_1.1.20.bb}            | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-connectivity/libmtp/{libmtp_1.1.19.bb => libmtp_1.1.20.bb} (92%)
 
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-utils-fix-build-against-5.15-libc-headers-headers.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-utils-fix-build-against-5.15-libc-headers-headers.patch
-index 6c11f1d4c..203eec6ee 100644
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-utils-fix-build-against-5.15-libc-headers-headers.patch
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-utils-fix-build-against-5.15-libc-headers-headers.patch
-@@ -48,7 +48,7 @@ index c73093c..7bffde5 100644
-  #  endif
-  # elif defined(RT_OS_LINUX) && defined(IN_RING0)
- -#  include "linux/version.h"
---#  if RTLNX_VER_MIN(5,15,0)
-+-#  if RTLNX_VER_MIN(5,15,0) || RTLNX_RHEL_MAJ_PREREQ(9,1)
- -#   include <linux/stdarg.h>
- -#  else
- -#   include <stdarg.h>
+diff --git a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.19.bb b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.20.bb
+similarity index 92%
+rename from meta-oe/recipes-connectivity/libmtp/libmtp_1.1.19.bb
+rename to meta-oe/recipes-connectivity/libmtp/libmtp_1.1.20.bb
+index 3483db3c83..f7a7507b8c 100644
+--- a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.19.bb
++++ b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.20.bb
+@@ -17,10 +17,9 @@ BBCLASSEXTEND = "native"
+ DEPENDS = "libusb1 gettext-native"
+ DEPENDS:append:class-target = " ${BPN}-native"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
++SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.gz"
+ SRC_URI:append:class-target = " file://0001-Use-native-mtp-hotplug.patch"
+-
+-SRC_URI[sha256sum] = "deb4af6f63f5e71215cfa7fb961795262920b4ec6cb4b627f55b30b18aa33228"
++SRC_URI[sha256sum] = "c9191dac2f5744cf402e08641610b271f73ac21a3c802734ec2cedb2c6bc56d0"
+ 
+ inherit autotools pkgconfig lib_package
+ 
 -- 
-2.34.1
+2.37.1
 
 
