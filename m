@@ -2,111 +2,106 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F260CC43334
-	for <webhook@archiver.kernel.org>; Thu, 21 Jul 2022 14:47:35 +0000 (UTC)
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com
- [209.85.216.50])
- by mx.groups.io with SMTP id smtpd.web09.7364.1658414845858903975
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 26ACBC43334
+	for <webhook@archiver.kernel.org>; Thu, 21 Jul 2022 14:50:46 +0000 (UTC)
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com
+ [209.85.216.46])
+ by mx.groups.io with SMTP id smtpd.web10.7372.1658415036256960290
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Jul 2022 07:47:26 -0700
+ Thu, 21 Jul 2022 07:50:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=GpLOmwpD;
- spf=pass (domain: gmail.com, ip: 209.85.216.50,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=nbA86alP;
+ spf=pass (domain: gmail.com, ip: 209.85.216.46,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f50.google.com with SMTP id
- f3-20020a17090ac28300b001f22d62bfbcso1601779pjt.0
+Received: by mail-pj1-f46.google.com with SMTP id
+ l14-20020a17090a72ce00b001f20ed3c55dso1647475pjk.5
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Jul 2022 07:47:25 -0700 (PDT)
+ Thu, 21 Jul 2022 07:50:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=D0FVaIIIjSLpWE5L1jBjiNl0keTNrfaUqSrtXNDE0oc=;
-        b=GpLOmwpDJuOr6rnb0XTgWEhbP6v+31re9JzhWod4kqU1GOaQZYpyx0Z8aS6XX9yR8f
-         IFupDbx9zxwKwZo/R1FIzINLuaS6iIhsdZw4+smLY+I61UZwBmpZZrzN/ZU0cmB5HKP4
-         0NssYUQfB+tBPiNZ18Vy88vuUrUsE/ImMKg5n5LPNfD6PqueGkLG5+nUItk4VNuQsz+p
-         r7heztPnrIjulA44GraxrAif+12laG6yNnltJ3LN+JjM31ShOhY9ffYMyzZV3Rw4Lt54
-         I6AmaxR/+zRjtKPCHgxkKl5QL0oSg3867VGI4O+NhPk0nqnjUP/pmqXTu3KqO3UF538N
-         CX1A==
+        bh=2aTRsw9NNiEiqNDcVgpKdGEB2XotOkGjgS2SHwjbe1s=;
+        b=nbA86alPBntQhCRG62Lv2MAaNi6U2rIJQyUtd/yt2JZrZf4RRAeGp8L2cFu1sp5ll9
+         BjFoWh/T40GZo7hrqgK9yHGPWZvGWUeK4DLhCeBqdgR9ZgRAAFF/PJZfhELOI5KsAbdI
+         fTDQXBM+1s+uSm0umqgpG6fNIYP+XlvbsntIEG9NXxsggECE46XkLR/liLQBo1aefySr
+         TI7n4NQzwYN+pDY4PnM4WjV5QcIgTdN07LbTgzCWmyip64/3kO3gWpsxUJOb4HcKxMa1
+         TQgF4NRvvMMcaJCCKIP7cWucW6WcGAsqyIz70ag1Hub/1WladcpwcpYT8u59GkwouBom
+         JEWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=D0FVaIIIjSLpWE5L1jBjiNl0keTNrfaUqSrtXNDE0oc=;
-        b=yKVXHkyGQ4qh3PZ9RIIUSxDHdjYHgGlYg7EsBY0lq2eoDIM+iGbb9ZFXlpYl2Qc/rH
-         lX3ByT6F51q+PL/N+1JbkFAjEzFv224Z7pKTdo8edSXXIKh8A8no4ghrkiMAZzotKkUx
-         kM4xq3/Za2A7+kSMZeyZm5LXli+H/X2UiOqWTrH27WcOQpiYIh+moNZnhFHGNbS3VPfu
-         FnIgGeqreWyXSXZBlvGStZTdcliZchl770+8Hh4AVIyyaOIXHvpeVuv3Y0hDEsXKDr/O
-         aCWfdCS8sf1iF5eUyS8B2Huq+P34UX3/T4mxRqWrrn0ZEP+EXntWbBChHO6VDtnSJjdV
-         tF9A==
-X-Gm-Message-State: AJIora+yaTgFMPDvyAA9A8FkbVmJ8KqWVD4GOE1hwMCVbcjEJoRFISQJ
-	BYjVlfc8brNrhkksdq+V+DZZvAv2zes=
+        bh=2aTRsw9NNiEiqNDcVgpKdGEB2XotOkGjgS2SHwjbe1s=;
+        b=qbA1GoSTjMEv3nn+9mneYy1Js5R35tIarRgxQJdGi/jPIysKjsgp3o0Rg6EmpaTqNv
+         yxrm67Eu+vQHs/zuc/Qt0r+AxyI0YQWdA9S5KAEfm9i37Ah4Q0rD5ne7dutlPwTBUR9g
+         cvWUyN49LMqReGicCPo0jolUAGpOLuQpmPn6Qr8jBcoXvOmvZqFQEkSrMDiI9EVoyKob
+         K1yNS5I/oatAdVysgmfP4NSSrboJYW2sqda2OQGRbgXwp/0MlHl5z3rjstVoSavxABjM
+         3iKVbD05mCh8uShXC7MWz62uBhzynQKkFWxUqr4kfYGaF+6+N6zXXYua2QAmw7aaKGl4
+         Tflg==
+X-Gm-Message-State: AJIora9k+p3gNaszxN1y+NUQDdZSy30dqrsNBdO5ECYqYye+4KxzgC96
+	Osmp4pZ3xsMWYVQGHMj3OSsMzJJsC7U=
 X-Google-Smtp-Source: 
- AGRyM1vsZoHXEBl4pSnsxJ+PJXWCbFNnWAaWI6I1MnZ+fijDzfuRXhO2bljmVGgmK9v5CvTC+eckkw==
-X-Received: by 2002:a17:90b:3ec3:b0:1f1:ff45:1d3b with SMTP id
- rm3-20020a17090b3ec300b001f1ff451d3bmr11623564pjb.101.1658414844807;
-        Thu, 21 Jul 2022 07:47:24 -0700 (PDT)
+ AGRyM1sSejJYJxNvJ/SfrP9kYnT/8sIqmd55gwJodptkDE/kKWoD2SPxCpYGGbwgpR/0C1+HbehZHA==
+X-Received: by 2002:a17:902:cece:b0:16c:3683:8830 with SMTP id
+ d14-20020a170902cece00b0016c36838830mr43324514plg.107.1658415035190;
+        Thu, 21 Jul 2022 07:50:35 -0700 (PDT)
 Received: from keaua.hsd1.ca.comcast.net
  (c-67-181-203-136.hsd1.ca.comcast.net. [67.181.203.136])
         by smtp.gmail.com with ESMTPSA id
- r9-20020aa79889000000b005284d10d8f6sm1867969pfl.215.2022.07.21.07.47.22
+ l5-20020a170902ec0500b0016c1a1c1405sm1523291pld.222.2022.07.21.07.50.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 Jul 2022 07:47:23 -0700 (PDT)
+        Thu, 21 Jul 2022 07:50:33 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Aryaman Gupta <aryaman.gupta@windriver.com>,
+Cc: Wang Mingyu <wangmy@fujitsu.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH 1/2] rsyslog: update 8.2202->8.2206
-Date: Thu, 21 Jul 2022 07:45:20 -0700
-Message-Id: <20220721144521.3730832-1-akuster808@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH] ndisc6: upgrade 1.0.5 -> 1.0.6
+Date: Thu, 21 Jul 2022 07:48:31 -0700
+Message-Id: <20220721144831.3730972-1-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 21 Jul 2022 14:47:35 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 21 Jul 2022 14:50:46 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97915
+ https://lists.openembedded.org/g/openembedded-devel/message/97917
 
-From: Aryaman Gupta <aryaman.gupta@windriver.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Package changes mainly include performance improvements to
-tcpsrv/imtcp, bug fixes and additional/updated tests:
-	https://github.com/rsyslog/rsyslog/blob/master/ChangeLog
+Changelog:
+==========
+# ndisc6: print NAT64 prefix if present.
+# rdnssd: fix timeout calculation.
 
-ptest results for qemux86-64 with kvm and increasing filesystem space to
-4GB using IMAGE_ROOTFS_EXTRA_SPACE :
-
-Version | Passed | Failed | Skipped
-8.2202 | 456 | 0 | 5
-8.2206 | 465 | 0 | 5
-
-Signed-off-by: Aryaman Gupta <aryaman.gupta@windriver.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 0f048c4c46fd4b377b7aacc236a23249ae05fdaa)
+(cherry picked from commit c77bc200813dec8a1317ea6651d0f398a3fa5d65)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../rsyslog/{rsyslog_8.2202.0.bb => rsyslog_8.2206.0.bb}        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.2202.0.bb => rsyslog_8.2206.0.bb} (98%)
+ .../recipes-support/ndisc6/{ndisc6_git.bb => ndisc6_1.0.6.bb}  | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-networking/recipes-support/ndisc6/{ndisc6_git.bb => ndisc6_1.0.6.bb} (97%)
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2202.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2206.0.bb
-similarity index 98%
-rename from meta-oe/recipes-extended/rsyslog/rsyslog_8.2202.0.bb
-rename to meta-oe/recipes-extended/rsyslog/rsyslog_8.2206.0.bb
-index ebb8ecf9bd..a39de3acb5 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2202.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2206.0.bb
-@@ -31,7 +31,7 @@ SRC_URI:append:libc-musl = " \
-     file://0001-Include-sys-time-h.patch \
- "
+diff --git a/meta-networking/recipes-support/ndisc6/ndisc6_git.bb b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.6.bb
+similarity index 97%
+rename from meta-networking/recipes-support/ndisc6/ndisc6_git.bb
+rename to meta-networking/recipes-support/ndisc6/ndisc6_1.0.6.bb
+index f5467794e6..6861314a0a 100644
+--- a/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
++++ b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.6.bb
+@@ -5,8 +5,7 @@ HOMEPAGE = "http://www.remlab.net/ndisc6/"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
  
--SRC_URI[sha256sum] = "e41308a5a171939b3cbc246e9d4bd30be44e801521e04cd95d051fa3867d6738"
-+SRC_URI[sha256sum] = "a1377218b26c0767a7a3f67d166d5338af7c24b455d35ec99974e18e6845ba27"
- 
- UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
- UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+-PV = "1.0.5"
+-SRCREV = "b706f5f01aa82aa0db678fffd15a1527f330c507"
++SRCREV = "7e314b23329f9c24c4c097b8513673fed7e7158a"
+ SRC_URI = "git://git.remlab.net/git/ndisc6.git;protocol=http;branch=master \
+            file://0001-autogen-Do-not-symlink-gettext.h-from-build-host.patch \
+            "
 -- 
 2.25.1
 
