@@ -2,134 +2,123 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BA3B3C433EF
-	for <webhook@archiver.kernel.org>; Fri, 22 Jul 2022 14:35:16 +0000 (UTC)
-Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com
- [209.85.222.169])
- by mx.groups.io with SMTP id smtpd.web08.8367.1658500513963027776
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D0867C43334
+	for <webhook@archiver.kernel.org>; Fri, 22 Jul 2022 14:39:26 +0000 (UTC)
+Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com
+ [209.85.222.170])
+ by mx.groups.io with SMTP id smtpd.web09.8569.1658500761318862768
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Jul 2022 07:35:14 -0700
+ Fri, 22 Jul 2022 07:39:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Ms/PdL+r;
- spf=pass (domain: gmail.com, ip: 209.85.222.169,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=VeIzg0pb;
+ spf=pass (domain: gmail.com, ip: 209.85.222.170,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f169.google.com with SMTP id l3so3727978qkl.3;
-        Fri, 22 Jul 2022 07:35:13 -0700 (PDT)
+Received: by mail-qk1-f170.google.com with SMTP id l3so3736888qkl.3
+        for <openembedded-devel@lists.openembedded.org>;
+ Fri, 22 Jul 2022 07:39:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=miM9NPj2Gj/IpPGnZqTPuWTh7N3387eyfXjoqpwpbck=;
-        b=Ms/PdL+rINCwRlh51VtxqmhI/q8GCyUb1MZ07KxlmfxMSJcQeLNbJAdIcqN7ftHr/4
-         qWeQv9gHdJ2T5ZC8UbGY5AkgqmkiIM4PFPGlwZWGB3U2DcCdGMjpUZ/xUnxedlCm7RUr
-         KK84R3yA44Xvx8v50C9rZlVdJuiKi/qbZEDp23MPuWbZOmPYWXuAmc9U0o5g34C4+QEx
-         ycO8byXst+O4S23uMfzg1zbiJ5DwF0tax0rmg3IbAXn93ZQBzPHLsPxOTB0D+AFQ3jN+
-         tgoeizhyos2AVRgi0rZeyIsdPlV2cCXNklqygJz2/b9GJ+pn/u7qk7eQacgVO9BqzZTr
-         mFhA==
+        h=message-id:date:mime-version:user-agent:subject:to:references
+         :content-language:from:in-reply-to:content-transfer-encoding;
+        bh=G+wTRFoB3nWYhcKyVRJKFAtD2K1Sjp/+vJDdsrqudNQ=;
+        b=VeIzg0pbrPZ2X21KQCgPR720qzwqxsO9BerVkLo72MkpFQQhzvFCcsjjXEInEPEsMI
+         CgsiZBTaLKDRAdAWQ98EPKWI64S1zGNW+Ixoschr/F0K9CMvRNWp8nN4A38gSA/Vfufj
+         8KzHLd9icY+T8t0NsIrB9LTsy+qHd4iX8fhrnh8ebOMCwtP/QCqVNMEzjxGMLaY6+aFu
+         2Nbv7XTO/CcmkX9emUAsZMyPkJ8ffEX7O135qUomHr8+Z5WMl+geTQ3Y0tHuSpqEuY8J
+         bg0lpOKhZpx4M7y5Dyjj3zbAindtrVT2aX4Jp0L5PfzKtzru3lrDl6VXnT4f1v9NkeM9
+         WRYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=miM9NPj2Gj/IpPGnZqTPuWTh7N3387eyfXjoqpwpbck=;
-        b=0aCSSG81U+VVmTuMvXaELf0d1H8nrDk0lc4cmL0/A4g0LyWdvJIvg4dTBQikC4uj0G
-         tunmZX9Nsz2ipB6Uop77eJ2qXrhqnQMjf8q3mV2smGfOip8mdiI4XNY6GcOX3M6tAS8f
-         mNhOMwxZUwA7SRYm1s+IPX5Sr+F68lOHcasoF3hqY7/Oq3i4gERiML4ta3vvUwa0XsdQ
-         z9tvwEyDRCqWSlNONc6bXcu5o80lhyebxuvPS68KT6PLDz2L2ghsLSg3a20xVHs0dfjq
-         d+9QSmwXJgEEB4Jg+vsgv2IzNtymVVMRfvG9xPfqRcGeVAgknEejuq8T3J5bP6/x2Nmi
-         doJw==
-X-Gm-Message-State: AJIora9YiQDgMWjIGbHjzt12uRY4UzHOpsMj4VzfsOTido6D23uqrt4b
-	ddmQfy5hS0jn7tdLOdhcsu0aoIEbkRiQy6FlCHM=
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :to:references:content-language:from:in-reply-to
+         :content-transfer-encoding;
+        bh=G+wTRFoB3nWYhcKyVRJKFAtD2K1Sjp/+vJDdsrqudNQ=;
+        b=P80IVH15R9+qOAyJMWJNT6gmmlCngFqgAolSk/6h2XXWZifeOPRazqkF/UxoMhETX6
+         urY3kh70bYfQzZWp90LQ08BVBHZYgbudWy+oyL03gwAZvIf7batmdEUD8rf+etWenI0W
+         bA8UCIF3GNMWBfjk/1BrhMWEtmGQJWfTuObFucCgBwV1vKuoLJBKtCIupOGp0uAAfFWN
+         taKZU8gpTUj6NzLsE0WzhHhirBlTLfktpJo3UeGwpXnX0I706OE5mvNjQ2tvD2elWCjZ
+         JnVkXbdd/9w8IdDqu14rXVrAsThR5otLkLKBksbNCcOYADhDlviSR9k0ENcfSCJ8I5bt
+         9FWA==
+X-Gm-Message-State: AJIora+FlHem1551mXkF/oPH4Pch+O2vVW6/IWIJYocCjS+XKAsDBLnd
+	61YxG5aJNIrsOeEnabKNrKsyOg0r4nWDJQ==
 X-Google-Smtp-Source: 
- AGRyM1vtO/mVvmKT6n41fkg3oJRc8m1cHhR45FoIiLa8gKgsfnpuN1KgKVzUz7lz99Q++IZTVLr+4qD44qfqqo+K2Cs=
-X-Received: by 2002:a05:620a:f85:b0:6b5:e2be:1d04 with SMTP id
- b5-20020a05620a0f8500b006b5e2be1d04mr176903qkn.72.1658500512981; Fri, 22 Jul
- 2022 07:35:12 -0700 (PDT)
+ AGRyM1s+b1FxD97R8k22hCkZs0cfyzuHO9+jfi+tkuBarlHHEQuiJ1OIOrTJJNBQrwKv57F6DW6wDQ==
+X-Received: by 2002:ae9:f307:0:b0:6b5:bf6c:bd23 with SMTP id
+ p7-20020ae9f307000000b006b5bf6cbd23mr181321qkg.168.1658500760295;
+        Fri, 22 Jul 2022 07:39:20 -0700 (PDT)
+Received: from ?IPV6:2607:fea8:95df:9730:a90f:7fcf:f7e0:a30e?
+ ([2607:fea8:95df:9730:a90f:7fcf:f7e0:a30e])
+        by smtp.gmail.com with ESMTPSA id
+ x7-20020ac87007000000b0031636caa40bsm3107084qtm.65.2022.07.22.07.39.19
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 22 Jul 2022 07:39:19 -0700 (PDT)
+Message-ID: <2518130a-41e8-529c-13ef-341a58c7f8d3@gmail.com>
+Date: Fri, 22 Jul 2022 10:39:19 -0400
 MIME-Version: 1.0
-References: 
- <CAMRc=McXfAzcUrdTLWsHHEo8DyUwU1gUuFTBALwXpJCuA0CoEA@mail.gmail.com>
- <YtWrKcR6y1jWSFtC@kudzu.us>
- <CAMKF1sqZh=fPoYHqh-uuJL6oftkmGoDHHcZkTgivoKapFFerAQ@mail.gmail.com>
- <CAPoiz9zRWPGLSUNaeTQDO=E60cGD4zRVmnZmHFkSdVLrkx_WmA@mail.gmail.com>
- <CAMRc=MecfyMPB2B5ukhYzMdQDWL4fY=8nbfUe0LR_8hUPhNP9w@mail.gmail.com>
- <CAMKF1srBz3xL0VTZedyyf4oFgiXxn7ai4afH37yBrT63djTr3Q@mail.gmail.com>
- <CAMRc=MdFDGv=a04jn23r2v0ZoYYTACW2-KNNi2dVboU2knoDoQ@mail.gmail.com>
- <CAMKF1sr5cQeqoQum3HAdHVrv-3EbrCkMfmMzoppQUCiisLiEYA@mail.gmail.com>
- <CAMRc=Mcaaufj-2+WnUZAgwznbkxroOVDEMmX_o4aZXFxmqwF0Q@mail.gmail.com>
- <CAMKF1sr3C=MYuX4NXigMT+NdTxdMB65VhMvSK3gqBSbGi+7YXw@mail.gmail.com>
- <CAMRc=Mdz9VMMKamV+TGkABX9v1k4i5051xQvyfTVVd_FEMSEuA@mail.gmail.com>
- <CAMKF1sq4ZT91i881_tVXddV1axi+-NCJBkKizxpBUPLMuEVt8w@mail.gmail.com>
- <CAMRc=McFVfxjG6U7ectAfHaWEBe9wyb4erd+Khjug1YyWXKLyw@mail.gmail.com>
- <CAMKF1srvQZDtjtQnQPTaT2PNYZCaChCY9S9pBNVQV5ybqAjVkw@mail.gmail.com>
- <CB11164A-DF98-44E2-B0BF-265797DB930A@arm.com>
- <CAMKF1sqwUGGROP+BO=b77Peo_c0-DCAQODZ2ixW0rBMt39+Akw@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1sqwUGGROP+BO=b77Peo_c0-DCAQODZ2ixW0rBMt39+Akw@mail.gmail.com>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.0.3
+Subject: Re: [oe] [meta-oe][PATCH] libwebsockets: update to version 4.3.2
+To: Radovan Scasny <radovan.scasny@siemens.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20220722134305.3700-1-radovan.scasny@siemens.com>
+Content-Language: en-US
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 22 Jul 2022 10:34:46 -0400
-Message-ID: 
- <CAMKF1sr1E079Bj8DMJXdNq1BurGtj8_KV_SoZyhX-rhVM8n2SA@mail.gmail.com>
-Subject: Re: [oe] [meta-zephyr] build broken with current oe-core master
-To: Ross Burton <Ross.Burton@arm.com>
-Cc: Bartosz Golaszewski <brgl@bgdev.pl>,
-	=?UTF-8?B?RWlsw61zIE7DrSBGaGxhbm5hZ8OhaW4=?= <elizabeth.flanagan@huawei.com>,
-	Jon Mason <jdmason@kudzu.us>, Jon Mason <Jon.Mason@arm.com>,
-	Naveen Saini <naveen.kumar.saini@intel.com>,
-	Patches and discussions about the oe-core layer
- <openembedded-core@lists.openembedded.org>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20220722134305.3700-1-radovan.scasny@siemens.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 22 Jul 2022 14:35:16 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 22 Jul 2022 14:39:26 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97951
+ https://lists.openembedded.org/g/openembedded-devel/message/97952
 
-On Fri, Jul 22, 2022 at 10:31 AM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Fri, Jul 22, 2022 at 10:30 AM Ross Burton <Ross.Burton@arm.com> wrote:
-> >
-> > On 22 Jul 2022, at 15:28, Khem Raj via lists.openembedded.org <raj.khem=
-=3Dgmail.com@lists.openembedded.org> wrote:
-> > >
-> > > On Fri, Jul 22, 2022 at 6:36 AM Bartosz Golaszewski <brgl@bgdev.pl> w=
-rote:
-> > >>
-> > >> On Thu, Jul 21, 2022 at 3:52 PM Khem Raj <raj.khem@gmail.com> wrote:
-> > >>>
-> > >>> I don=E2=80=99t see config.log for Libstdc++ folder in there
-> > >>> Can you see why that=E2=80=99s missing ?
-> > >>>
-> > >>
-> > >> I was missing because I misunderstood you - you were probably asking
-> > >> for the config.log *with* Jon's patch applied.
-> > >>
-> > >> Here's the log: https://controlc.com/4544edd8
-> > >
-> > > right, so I can see that its checking for fcnt function on system
-> > > where it should not, your toolchain
-> > > is using newlib and I am not sure what Jon's build is using for
-> > > zephyr, I guess it could be pure baremetal
-> > > if so, then perhaps we have a place to look into.
-> > >
-> > > Jon, whats TCLIBC set to in zephyr's case.
-> >
-> > Our CI has the following workaround for a problem that we=E2=80=99ve no=
-t managed to root-cause so far:
-> >
-> >     EXTRA_OECONF:append:pn-gcc-runtime =3D " ac_cv_func_fcntl=3Dno  ac_=
-cv_func_getexecname=3Dno=E2=80=9D
->
-> ah, that speaks for the difference then. Is this workaround introduced
-> after Richard's change ?
 
-perhaps came along with gcc 12 upgrade [1]
 
-[1] https://lists.yoctoproject.org/g/meta-arm/message/3469
+On 7/22/22 9:43 AM, Radovan Scasny wrote:
+> Signed-off-by: Radovan Scasny <radovan.scasny@siemens.com>
+> ---
+>   .../{libwebsockets_4.2.2.bb => libwebsockets_4.3.2.bb}      | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>   rename meta-oe/recipes-connectivity/libwebsockets/{libwebsockets_4.2.2.bb => libwebsockets_4.3.2.bb} (93%)
+> 
+> diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.2.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.2.bb
+> similarity index 93%
+> rename from meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.2.bb
+> rename to meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.2.bb
+> index 2a3a4ebd06..21297f2c4e 100644
+> --- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.2.bb
+> +++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.2.bb
+> @@ -1,13 +1,13 @@
+>   SUMMARY = "Canonical libwebsockets.org websocket library"
+>   HOMEPAGE = "https://libwebsockets.org/"
+>   LICENSE = "MIT & Zlib & BSD-3-Clause & Apache-2.0"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=c8bea43a2eb5d713c338819a0be07797"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=382bfdf329e774859fd401eaf850d29b"
 
->
-> >
-> > Ross
-> >
+what enforced the checksum change ? Can you add this information to 
+commit message as well ?
+
+>   
+>   DEPENDS = "zlib"
+>   
+>   S = "${WORKDIR}/git"
+> -SRCREV = "8d605f0649ed1ab6d27a443c7688598ea21fdb75"
+> -SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.2-stable"
+> +SRCREV = "b0a749c8e7a8294b68581ce4feac0e55045eb00b"
+> +SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.3-stable"
+>   
+>   UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
+>   UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#97947): https://lists.openembedded.org/g/openembedded-devel/message/97947
+> Mute This Topic: https://lists.openembedded.org/mt/92547660/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
