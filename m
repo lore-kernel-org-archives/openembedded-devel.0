@@ -2,121 +2,119 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D0867C43334
-	for <webhook@archiver.kernel.org>; Fri, 22 Jul 2022 14:39:26 +0000 (UTC)
-Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com
- [209.85.222.170])
- by mx.groups.io with SMTP id smtpd.web09.8569.1658500761318862768
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA84CC43334
+	for <webhook@archiver.kernel.org>; Fri, 22 Jul 2022 14:41:16 +0000 (UTC)
+Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
+ [209.85.222.179])
+ by mx.groups.io with SMTP id smtpd.web10.8666.1658500872469817132
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Jul 2022 07:39:21 -0700
+ Fri, 22 Jul 2022 07:41:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=VeIzg0pb;
- spf=pass (domain: gmail.com, ip: 209.85.222.170,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=UHOxby34;
+ spf=pass (domain: gmail.com, ip: 209.85.222.179,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f170.google.com with SMTP id l3so3736888qkl.3
+Received: by mail-qk1-f179.google.com with SMTP id l3so3741199qkl.3
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Jul 2022 07:39:21 -0700 (PDT)
+ Fri, 22 Jul 2022 07:41:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:to:references
-         :content-language:from:in-reply-to:content-transfer-encoding;
-        bh=G+wTRFoB3nWYhcKyVRJKFAtD2K1Sjp/+vJDdsrqudNQ=;
-        b=VeIzg0pbrPZ2X21KQCgPR720qzwqxsO9BerVkLo72MkpFQQhzvFCcsjjXEInEPEsMI
-         CgsiZBTaLKDRAdAWQ98EPKWI64S1zGNW+Ixoschr/F0K9CMvRNWp8nN4A38gSA/Vfufj
-         8KzHLd9icY+T8t0NsIrB9LTsy+qHd4iX8fhrnh8ebOMCwtP/QCqVNMEzjxGMLaY6+aFu
-         2Nbv7XTO/CcmkX9emUAsZMyPkJ8ffEX7O135qUomHr8+Z5WMl+geTQ3Y0tHuSpqEuY8J
-         bg0lpOKhZpx4M7y5Dyjj3zbAindtrVT2aX4Jp0L5PfzKtzru3lrDl6VXnT4f1v9NkeM9
-         WRYQ==
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :cc:references:from:in-reply-to:content-transfer-encoding;
+        bh=zpnAJjPsQ72qgGlmkk/7jsWZ/rYDibe8awDcZ6GZ8QA=;
+        b=UHOxby34oTvj2RfnuEbi5ocj2NR3J+t1OU30um1/x+PJIBnC8nGiDYXVGazU6E9CR6
+         0ZdsVmnjyhz1/DTqV0KZQWp1IfqGQcxyGt/Uu+2IdOBANmk56mmYmrMxCgqt5WxNPvSK
+         UBhdefRHqrhBvzeqseQbKOxxBzxTFfATRII/ArOQcejIYmETKcIF6qpTfI81tN3PpShf
+         EH6pJzWXtbyfkXyGmJueZnr90SPtlPXigAqWKb7twBjKk8g8NuU1J6s9vD5cWt59WL5I
+         2TEpcyDOCjxcOsCDyMwLHZ+X6jo3PPFMpYm+AMbNCGz13+9SoHLcdyYcthfPyrH/hOcI
+         m9Hw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :to:references:content-language:from:in-reply-to
+         :content-language:to:cc:references:from:in-reply-to
          :content-transfer-encoding;
-        bh=G+wTRFoB3nWYhcKyVRJKFAtD2K1Sjp/+vJDdsrqudNQ=;
-        b=P80IVH15R9+qOAyJMWJNT6gmmlCngFqgAolSk/6h2XXWZifeOPRazqkF/UxoMhETX6
-         urY3kh70bYfQzZWp90LQ08BVBHZYgbudWy+oyL03gwAZvIf7batmdEUD8rf+etWenI0W
-         bA8UCIF3GNMWBfjk/1BrhMWEtmGQJWfTuObFucCgBwV1vKuoLJBKtCIupOGp0uAAfFWN
-         taKZU8gpTUj6NzLsE0WzhHhirBlTLfktpJo3UeGwpXnX0I706OE5mvNjQ2tvD2elWCjZ
-         JnVkXbdd/9w8IdDqu14rXVrAsThR5otLkLKBksbNCcOYADhDlviSR9k0ENcfSCJ8I5bt
-         9FWA==
-X-Gm-Message-State: AJIora+FlHem1551mXkF/oPH4Pch+O2vVW6/IWIJYocCjS+XKAsDBLnd
-	61YxG5aJNIrsOeEnabKNrKsyOg0r4nWDJQ==
+        bh=zpnAJjPsQ72qgGlmkk/7jsWZ/rYDibe8awDcZ6GZ8QA=;
+        b=eVz0XqpX114PEOMABv6JpWaPyQIqt+PpEOBrJjlCK2AHoA47t3SFs/KvUo0B9OvSSG
+         cB7jrVqlsKSKQHwMXtF1FwB9ep453VEqBwfUOnpNJsmCbTQ3NGt7R+Ow66A3LdM2+4id
+         8e79OtKEr1taiJgTBRL2JC2fvbybjfd9meoY6iGuwl5AZqWtG7uGCVnNum+C9kkfsx+Q
+         ejnh6UFGT6H/6IEjjSDLPa56eDWkGhMwjiIS0UExvlvGOcuPTG8FH2+r03JAED2tv7kr
+         jGMC8TGgq5LLiN5S+9A4lVTd01s6xfvI3s9NfhFq6P96py755H/t3J5HVZxLimsNnvjx
+         yePw==
+X-Gm-Message-State: AJIora/6A1vYMYvw7TuO/0DLIZlxQnHh1cYjcO2YEs7fWfPuYvrn/fwO
+	QHbVBR/p7qzw66frxEBXtW8=
 X-Google-Smtp-Source: 
- AGRyM1s+b1FxD97R8k22hCkZs0cfyzuHO9+jfi+tkuBarlHHEQuiJ1OIOrTJJNBQrwKv57F6DW6wDQ==
-X-Received: by 2002:ae9:f307:0:b0:6b5:bf6c:bd23 with SMTP id
- p7-20020ae9f307000000b006b5bf6cbd23mr181321qkg.168.1658500760295;
-        Fri, 22 Jul 2022 07:39:20 -0700 (PDT)
+ AGRyM1voGEGVirhv/C49s8yq+gzXRQi3qd8gjA1017E+nsI5ANyNHfFXAzREhHJSCynhzV1YwAZsKg==
+X-Received: by 2002:ae9:e8c9:0:b0:6b5:e58b:7f5a with SMTP id
+ a192-20020ae9e8c9000000b006b5e58b7f5amr111797qkg.741.1658500871424;
+        Fri, 22 Jul 2022 07:41:11 -0700 (PDT)
 Received: from ?IPV6:2607:fea8:95df:9730:a90f:7fcf:f7e0:a30e?
  ([2607:fea8:95df:9730:a90f:7fcf:f7e0:a30e])
         by smtp.gmail.com with ESMTPSA id
- x7-20020ac87007000000b0031636caa40bsm3107084qtm.65.2022.07.22.07.39.19
+ a8-20020ac81088000000b0031f0485aee0sm3030206qtj.88.2022.07.22.07.41.10
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 22 Jul 2022 07:39:19 -0700 (PDT)
-Message-ID: <2518130a-41e8-529c-13ef-341a58c7f8d3@gmail.com>
-Date: Fri, 22 Jul 2022 10:39:19 -0400
+        Fri, 22 Jul 2022 07:41:11 -0700 (PDT)
+Message-ID: <6fa93dd7-9068-52c7-aef1-203311ef670f@gmail.com>
+Date: Fri, 22 Jul 2022 10:41:10 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.0.3
-Subject: Re: [oe] [meta-oe][PATCH] libwebsockets: update to version 4.3.2
-To: Radovan Scasny <radovan.scasny@siemens.com>,
- openembedded-devel@lists.openembedded.org
-References: <20220722134305.3700-1-radovan.scasny@siemens.com>
+Subject: Re: [oe] [meta-oe][PATCH] vboxguestdrivers: fix build failure on 32
+ bit architectures
 Content-Language: en-US
+To: Gianfranco <costamagna.gianfranco@gmail.com>,
+ openembedded-devel@lists.openembedded.org
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+ Gianfranco Costamagna <locutusofborg@debian.org>
+References: <20220722091924.958556-1-costamagnagianfranco@yahoo.it>
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <20220722134305.3700-1-radovan.scasny@siemens.com>
+In-Reply-To: <20220722091924.958556-1-costamagnagianfranco@yahoo.it>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 22 Jul 2022 14:39:26 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 22 Jul 2022 14:41:16 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97952
+ https://lists.openembedded.org/g/openembedded-devel/message/97953
 
+Hi Gianfranco
 
+Can we squash the three patches that you sent for vboxguestdrivers into 
+one ?
 
-On 7/22/22 9:43 AM, Radovan Scasny wrote:
-> Signed-off-by: Radovan Scasny <radovan.scasny@siemens.com>
-> ---
->   .../{libwebsockets_4.2.2.bb => libwebsockets_4.3.2.bb}      | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
->   rename meta-oe/recipes-connectivity/libwebsockets/{libwebsockets_4.2.2.bb => libwebsockets_4.3.2.bb} (93%)
+Thanks
+-Khem
+
+On 7/22/22 5:19 AM, Gianfranco wrote:
+> A variable has been renamed upstream from BUILD_TARGET_ARCH to VBOX_KBUILD_TARGET_ARCH
 > 
-> diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.2.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.2.bb
-> similarity index 93%
-> rename from meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.2.bb
-> rename to meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.2.bb
-> index 2a3a4ebd06..21297f2c4e 100644
-> --- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.2.bb
-> +++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.2.bb
-> @@ -1,13 +1,13 @@
->   SUMMARY = "Canonical libwebsockets.org websocket library"
->   HOMEPAGE = "https://libwebsockets.org/"
->   LICENSE = "MIT & Zlib & BSD-3-Clause & Apache-2.0"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=c8bea43a2eb5d713c338819a0be07797"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=382bfdf329e774859fd401eaf850d29b"
-
-what enforced the checksum change ? Can you add this information to 
-commit message as well ?
-
+> Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+> Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+> ---
+>   .../vboxguestdrivers/vboxguestdrivers_6.1.36.bb               | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.36.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.36.bb
+> index 70ddb436a..37dd0224d 100644
+> --- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.36.bb
+> +++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.36.bb
+> @@ -21,8 +21,8 @@ SRC_URI[sha256sum] = "e47942e42892c13c621869865e2b7b320340154f0fa74ecbdaf18fdaf7
+>   S ?= "${WORKDIR}/vbox_module"
+>   S:task-patch = "${WORKDIR}/${VBOX_NAME}"
 >   
->   DEPENDS = "zlib"
+> -export BUILD_TARGET_ARCH="${ARCH}"
+> -export BUILD_TARGET_ARCH:x86-64="amd64"
+> +export VBOX_KBUILD_TARGET_ARCH="${ARCH}"
+> +export VBOX_KBUILD_TARGET_ARCH:x86-64="amd64"
 >   
->   S = "${WORKDIR}/git"
-> -SRCREV = "8d605f0649ed1ab6d27a443c7688598ea21fdb75"
-> -SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.2-stable"
-> +SRCREV = "b0a749c8e7a8294b68581ce4feac0e55045eb00b"
-> +SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.3-stable"
+>   EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build' KBUILD_VERBOSE=1"
 >   
->   UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
->   UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 > 
 > 
 > 
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#97947): https://lists.openembedded.org/g/openembedded-devel/message/97947
-> Mute This Topic: https://lists.openembedded.org/mt/92547660/1997914
+> View/Reply Online (#97945): https://lists.openembedded.org/g/openembedded-devel/message/97945
+> Mute This Topic: https://lists.openembedded.org/mt/92544071/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
