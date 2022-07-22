@@ -2,75 +2,77 @@ Return-Path: <xuhuan.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CC9E1C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CEA27C43334
 	for <webhook@archiver.kernel.org>; Fri, 22 Jul 2022 01:35:52 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
- [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web10.3207.1658453740101475772
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.2])
+ by mx.groups.io with SMTP id smtpd.web09.3214.1658453741747734149
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Jul 2022 18:35:41 -0700
+ Thu, 21 Jul 2022 18:35:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=EqK3GwhX;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=V/u0wyBH;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.2,
  mailfrom: xuhuan.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1658453738; i=@fujitsu.com;
-	bh=THQhc8Km4dPp2HmX6ddFM5sC9IWbaoohJR2PTJ9dr+U=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=EqK3GwhXMFLqHbcAMGBnFzf6l+6Dna/HLAjMiCcj8QbZ5V53x1zoB7gIwNvgMmaPy
-	 4sHBEbw3GBid/2FkVp8Jk0O9N4koyCH5tO7mhUikxM7dXbcL+ox7gCj9/sVjfu/6CR
-	 MW2Y/bD9fKESitJoHYepPC/8j2wt6xxuWPsX/IsDUsLl1RbzAGCj1N7t9v9zUgU4Nu
-	 5+88+Njl3r/+vd5/oeP2SfvlQcH2vpF5dP5BaLsIjulc9hMqHCmyv4wU1BZ3ngjKTF
-	 ZWnOXvbbJaQC8hfq86S39AdBvaN4DE0HOr1B4c9k1Q+uxbLeMOYNu+ko5H/f2s0cKG
-	 s5h4ZTsLnSkYQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrCIsWRWlGSWpSXmKPExsViZ8MxSfflv5t
-  JBk3XBS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1oxzb9sZC67wVhx/dpylgXE+TxcjF4eQwBNG
-  iQuXupggnOtMEgf/fWWBcE4yShx8t5i9i5GTg01AXeLxzdeMILaIgL7E0tl7mEFsZgFVie6La
-  4BqODiEBUIkVq71BgmzAIWnHboA1sor4C7R8uEnE4gtIaAgMeXhe2aIuKDEyZlPWCDGSEgcfP
-  GCGaJGSeLEio9Q9RUSrw9fgoqrSVw9t4l5AiP/LCTts5C0L2BkWsVok1SUmZ5RkpuYmaNraGC
-  ga2hoqmtpCaQs9RKrdBP1Ukt18/KLSjJ0DfUSy4v1UouL9Yorc5NzUvTyUks2MQIDM6U4uXwH
-  4/Z9v/QOMUpyMCmJ8u6bdDNJiC8pP6UyI7E4I76oNCe1+BCjDAeHkgRvwV+gnGBRanpqRVpmD
-  jBKYNISHDxKIrwWX4DSvMUFibnFmekQqVOMilLivEu+AiUEQBIZpXlwbbDIvMQoKyXMy8jAwC
-  DEU5BalJtZgir/ilGcg1FJmFf+N9AUnsy8Erjpr4AWMwEtNje/AbK4JBEhJdXAJOK4ykOHN/W
-  R3rOTIZcfMmxcIKOfdn37X6W89V9sbqjkvt+xXPji2udZdamJQl0+0+Z8qf0oL8t3puTxnqjH
-  8bOzZ2/Ys/WmzVUtzvvzJrJusX5uxSgsrL2+zXJuRk6MCOealR2HLlQwVwQJf7lsw5ajsvvCn
-  +WXre4WatekzdSymvTcT0UhPy3vpPy3aXvWHAgwVTB9LHW+9GWgdqfm1B+H9byPct/NPVukM/
-  P+VlX22Vkse3ZeVt1n8PDognBZkx6bOxn9gic0fx56Fzmh+nFUs/vq+13ndl2qWMBdt1I+RkN
-  va27knC+NTGYyafL/ed2fTV4Tv10i9ViixY6Nl5qMF14M5Zua0eN7QuvyOyWW4oxEQy3mouJE
-  AGJW/3BHAwAA
+	s=170520fj; t=1658453740; i=@fujitsu.com;
+	bh=JQV18mhZPJOjlerN+8SplZ8BFy6237bgg3lyT2+wCNA=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=V/u0wyBH08k7cn7BLv38LYGk3ny2GlNLOtDIwRLLPocKZorxEXCDNWyNpQGJHpvtW
+	 Vz+CL2LnoyogY7Bz9dnoeCQWuPPdrEblxeWJjtFjXTollnVMFUW+4s8SbwX0r9rmMP
+	 OpJwNYrxcbCiRzx7F0KEd7akcYBNIu9qn3KhmGiMFkD3E9/Qh/Rgt1yE4ia5NExeJs
+	 GB/QNEVoud5n5h/VMOvmIo4FVXfHiLDqqZdIHn49ENGul6NQvJrD625lfMcIfSyKtm
+	 mddeeMYUEDITFOl+gOVRNJGv1FMhNAUdOB7cJbi+98a9bx6WDpnPzTn2uHJB0Npvga
+	 Fv8L3tKkGQ6Sw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrJIsWRWlGSWpSXmKPExsViZ8ORqPv6380
+  kg7uWFhcPL2V2YPQ4t3EFYwBjFGtmXlJ+RQJrxq1vnawFn7krPt7vY2pgfMjVxcjFISTwhFHi
+  6cc2VgjnOpPE+gv3mLoYOYGck4wSD3akgthsAuoSj2++ZgSxRQT0JZbO3sMMYjMLqEp0X1zDD
+  mILC3hKfHzwlAXEZgGKb/jzhA3E5hVwl5jReBVspoSAgsSUh+/BejkFPCQa3+8HqucA2uUusf
+  ODEES5oMTJmU9YIMZLSBx88YIZolVJ4sSKj1BjKiReH74EFVeTuHpuE/MERsFZSNpnIWlfwMi
+  0itE6qSgzPaMkNzEzR9fQwEDX0NBU19hS18jQWC+xSjdRL7VUtzy1uETXSC+xvFgvtbhYr7gy
+  NzknRS8vtWQTIzCEU4rVr+5g3Lzqp94hRkkOJiVR3n2TbiYJ8SXlp1RmJBZnxBeV5qQWH2KU4
+  eBQkuAt+AuUEyxKTU+tSMvMAcYTTFqCg0dJhNfiC1Cat7ggMbc4Mx0idYpRUUqcd8lXoIQASC
+  KjNA+uDRbDlxhlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ88r/BprCk5lXAjf9FdBiJqDF5uY
+  3QBaXJCKkpBqY4k7K/WcUP8f+7H/NSa3dCzZcbBWZs+HlNyXT7SrmfOE+7nndGxz/Xc38ILOm
+  5qas/KXevAcrvbyucKk/ljtcnb4+gEMtLU5R80b1nADZkxt1d857UBIZW9XdpTZlwf48HfOjX
+  KY2bKJ9jQvXVzyyTeiKbAlTst/53O/In33RRW45pjLl1b37PZsethtG8zgET2cr9Np39jaLSu
+  nz6btvZPicOfZke+MG+8fe3tteVs3SZy0TcP+5dOa0kymWlV2Kd8RMrr+b9zz2WN6Teek/gjY
+  UqL8N5t/Fc+Zf8tMt6Xsem2zUcb3okB++PE88skNCUEKpVytCcUtLyg3jjw4eut8Lbs79tFZe
+  c+ZcN3klluKMREMt5qLiRABaMUjNXAMAAA==
 X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-12.tower-732.messagelabs.com!1658453736!48590!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-20.tower-548.messagelabs.com!1658453738!10482!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 22661 invoked from network); 22 Jul 2022 01:35:37 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-12.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 22 Jul 2022 01:35:37 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id AE5061000C2
+Received: (qmail 17122 invoked from network); 22 Jul 2022 01:35:39 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-20.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 22 Jul 2022 01:35:38 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id B265B100193
 	for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Jul 2022 02:35:36 +0100 (BST)
+ Fri, 22 Jul 2022 02:35:38 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
  [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id A1AAB100077
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id A649E100191
 	for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Jul 2022 02:35:36 +0100 (BST)
+ Fri, 22 Jul 2022 02:35:38 +0100 (BST)
 Received: from localhost.localdomain.localdomain (10.167.225.131) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Fri, 22 Jul 2022 02:35:34 +0100
+ (TLS) id 15.0.1497.32; Fri, 22 Jul 2022 02:35:36 +0100
 From: XU Huan <xuhuan.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-fastjsonschema: upgrade 2.15.3 ->
- 2.16.1
-Date: Fri, 22 Jul 2022 09:35:22 +0800
-Message-ID: <1658453726-25988-1-git-send-email-xuhuan.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-flask: upgrade 2.1.2 -> 2.1.3
+Date: Fri, 22 Jul 2022 09:35:23 +0800
+Message-ID: <1658453726-25988-2-git-send-email-xuhuan.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1658453726-25988-1-git-send-email-xuhuan.fnst@fujitsu.com>
+References: <1658453726-25988-1-git-send-email-xuhuan.fnst@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.131]
@@ -82,49 +84,40 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 22 Jul 2022 01:35:52 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97925
+ https://lists.openembedded.org/g/openembedded-devel/message/97926
 
 From: Xu Huan <xuhuan.fnst@fujitsu.com>
 
-Add dependence python3-json
-
-Changelog from 2.15.3 to 2.16.1
-================================
-* Fix uniqueItems when explicitly set to False
-* Fix generating invalid code for some schemas using items
-* Preserving full path in combination with $ref
-* Improved error messages for oneOf and anyOf
+Changelog:
+=========
+-  Inline some optional imports that are only used for certain CLI commands.
+-  Relax type annotation for after_request functions.
+-  instance_path for namespace packages uses the path closest to the imported submodule.
+-  Clearer error message when render_template and render_template_string are
+   used outside an application context.
 
 Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
 ---
- ...stjsonschema_2.15.3.bb => python3-fastjsonschema_2.16.1.bb} | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-fastjsonschema_2.15.3.bb => python3-fastjsonschema_2.16.1.bb} (93%)
+ .../python/{python3-flask_2.1.2.bb => python3-flask_2.1.3.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-flask_2.1.2.bb => python3-flask_2.1.3.bb} (87%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-fastjsonschema_2.15.3.bb b/meta-python/recipes-devtools/python/python3-fastjsonschema_2.16.1.bb
-similarity index 93%
-rename from meta-python/recipes-devtools/python/python3-fastjsonschema_2.15.3.bb
-rename to meta-python/recipes-devtools/python/python3-fastjsonschema_2.16.1.bb
-index a2821c1177..bb6c1ee813 100644
---- a/meta-python/recipes-devtools/python/python3-fastjsonschema_2.15.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-fastjsonschema_2.16.1.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/seznam/python-fastjsonschema"
+diff --git a/meta-python/recipes-devtools/python/python3-flask_2.1.2.bb b/meta-python/recipes-devtools/python/python3-flask_2.1.3.bb
+similarity index 87%
+rename from meta-python/recipes-devtools/python/python3-flask_2.1.2.bb
+rename to meta-python/recipes-devtools/python/python3-flask_2.1.3.bb
+index 7d290a4fe3..95abddfd95 100644
+--- a/meta-python/recipes-devtools/python/python3-flask_2.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-flask_2.1.3.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/mitsuhiko/flask/"
  LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=18950e8362b69c0c617b42b8bd8e7532"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
  
--SRCREV = "d03f3835da4899bdeb597a9d3f30a709e7c3254f"
-+SRCREV = "98399bb4029b2d7020d8abd9770661a5b2c4f9f8"
- PYPI_SRC_URI = "git://github.com/horejsek/python-fastjsonschema;protocol=https;branch=master"
+-SRC_URI[sha256sum] = "315ded2ddf8a6281567edb27393010fe3406188bafbfe65a3339d5787d89e477"
++SRC_URI[sha256sum] = "15972e5017df0575c3d6c090ba168b6db90259e620ac8d7ea813a396bad5b6cb"
  
- SRC_URI += "file://run-ptest"
-@@ -33,6 +33,7 @@ RDEPENDS:${PN} += "\
-     python3-urllib3 \
-     python3-numbers \
-     python3-pickle \
-+    python3-json \
-     "
+ PYPI_PACKAGE = "Flask"
  
- BBCLASSEXTEND = "native nativesdk"
 -- 
 2.25.1
 
