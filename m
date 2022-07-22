@@ -2,72 +2,72 @@ Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D36CEC433EF
-	for <webhook@archiver.kernel.org>; Fri, 22 Jul 2022 01:41:22 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.3])
- by mx.groups.io with SMTP id smtpd.web09.3262.1658454080033322592
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D250CC43334
+	for <webhook@archiver.kernel.org>; Fri, 22 Jul 2022 01:41:52 +0000 (UTC)
+Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com
+ [195.245.230.18])
+ by mx.groups.io with SMTP id smtpd.web08.3159.1658454102094360706
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Jul 2022 18:41:20 -0700
+ Thu, 21 Jul 2022 18:41:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=bJqf7+8U;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=L+oJwlSk;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.18,
  mailfrom: zhengrq.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1658454078; i=@fujitsu.com;
-	bh=3LKtwnc12PauKTievIShEme6YyXhopsS8mJjWoxm1h4=;
+	s=170520fj; t=1658454100; i=@fujitsu.com;
+	bh=Jw4W1l32bdimQ4WiUYslDY+hUoY9JnXk72xJ6nHEMwc=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=bJqf7+8UUp1scCBrmi2Nv9a1M42QzH9tNcYv9UAbOS0J0mXmFtu9U183ctV+qZBIv
-	 i+XF0hDudZKryo1/uSfmmRVoHkzbuv2ev6Lqk4ZrZuG0eZUT7m0irX2fvY04l/ys/R
-	 +qey30Iz60hR8XoiMxbyPTN54mOVmHHAco8HT40ea0LZDg2GMQCIZ+h+URNnJ34vOb
-	 c3fKW/KaBnqKY762V76C/emIV7gi9ZThmAbj2FT4bPBbO8P47YAXTEEPDphoTzkkoB
-	 BpO/4YIOVmkJwP8MskOwt+tIJ5qJyi5TxHOkZ7t2VxnzX1UKhir0QJbmOytyxMWYfD
-	 I2+KnuXf3IeKA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrMIsWRWlGSWpSXmKPExsViZ8ORpGvLcCv
-  JYN15OYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaNts1bBOrmK5/fcGhinS3cxcnEICTxklLh8
-  aCoLhHOFSWLXl11MEM4BRokrDw8wdjFycrAJ6Eq8+LGYBcQWEdCXWDp7DzOILSzgIbFy/hF2E
-  JtFQFVixcRZYHFeoPiSud/YQGwJAQWJKQ/fQ8UFJU7OfAI2h1lAQuLgixdAcQ6gGkWJ2dPlIc
-  orJF4fvsQMYatJXD23iXkCI98sJN2zkHQvYGRaxWidVJSZnlGSm5iZo2toYKBraGiqa2ypa2R
-  goJdYpZuol1qqW55aXKJrpJdYXqyXWlysV1yZm5yTopeXWrKJERh6KcXqJ3YwPl35U+8QoyQH
-  k5Io775JN5OE+JLyUyozEosz4otKc1KLDzHKcHAoSfAW/AXKCRalpqdWpGXmAOMAJi3BwaMkw
-  mvxBSjNW1yQmFucmQ6ROsVozzF19r/9zBzLweTMr20HmDk27es6wCzEkpeflyolzrvkK1CbAE
-  hbRmke3FBY3F5ilJUS5mVkYGAQ4ilILcrNLEGVf8UozsGoJMw75T/QFJ7MvBK43a+AzmICOsv
-  c/AbIWSWJCCmpBqZNZWwvrK8qmvl+z6jSm/5t/1bnSJeDrZzvgy99ZKn+/3dys7DTbTm90jSl
-  Nhb7CW7x++ZaFd+69u+uz9wpltcPVN2czveZlzvyQEOu7PuLT60+Za48dHbbj6726aWzDh/1W
-  PZ9171bL5Zte3pZo+YG19nk/+bHxOL+Vh68832Zpun12YcXJm8Mmv3j1zRFpR18aw6ZGef3/1
-  /lVWrzK/6My+X1U/JOsAjbL268abtowv5n0c9W8bLtFr+Tq6BdGvb+V8q/HdJsHBtZfP72/tf
-  YoJjEu9f1qKa5TdPV3pkXLvKf31o8adk75hgZmbBvVdO8OtZZMl9n/OKk3Xz3e6JOjlBq7eI9
-  S92/FB7td93Gr8RSnJFoqMVcVJwIAKRInkpWAwAA
+	b=L+oJwlSkq1PEQBKCnuj5PFc4YkOKL6UdXhB6JAATgCo+EwZ5Bi9GCGRGSWku0hlQo
+	 Sd1Y+iCl1yoFD25rfbcQBXT3beURMceLnZ0ryF3IYLQd/qqMrVFebKI7tSQUoXbkWG
+	 +xVQDwNseSQzRNqVyasYVdadNpCHJkSILPhi4C1EFXRfglz/M6gGuWUsyVB9KWaZ4x
+	 ITHQXMpumdRqC2x0/zLtXUkAPVSZ6fMk+WeUE4yT2oC0KX83dibw/dd2GcF2No+BXy
+	 FGQg9w4dXL/5S9phfLDaumT1+h6oNRGSVhJolgr3WiMGgngkgQmRLh6bwYXOs/LAPT
+	 zFJ3noMy/vofA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrAIsWRWlGSWpSXmKPExsViZ8MxSTeY4Va
+  SwdxZ3BYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aRjY3sBb84K9Zf8m1g7OLsYuTiEBJ4wigx
+  aflrZgjnOpPEmc//WCCcA4wSB3bPB8pwcrAJ6Eq8+LGYBcQWEdCXWDp7D1Ccg0NYwENiaUsuS
+  JhFQFVifuMENhCbFyi86N4hsHIJAQWJKQ/fM0PEBSVOznwCFmcWkJA4+OIF2BgJAUWJ2dPlIc
+  orJF4fvsQMYatJXD23iXkCI98sJN2zkHQvYGRaxWiVVJSZnlGSm5iZo2toYKBraGiqa6JrZGy
+  pl1ilm6iXWqpbnlpcomuol1herJdaXKxXXJmbnJOil5dasokRGHgpxSzvdzA29f3UO8QoycGk
+  JMq7b9LNJCG+pPyUyozE4oz4otKc1OJDjDIcHEoSvAV/gXKCRanpqRVpmTnAKIBJS3DwKInwW
+  nwBSvMWFyTmFmemQ6ROMepyzPzadoBZiCUvPy9VSpx3yVegIgGQoozSPLgRsIi8xCgrJczLyM
+  DAIMRTkFqUm1mCKv+KUZyDUUmYd8p/oCk8mXklcJteAR3BBHSEufkNkCNKEhFSUg1MpX851m7
+  YO6NdOXF5vt4W1iUZjNGNLnL+DQ1mvxcWiG1PWFNXplZvH+o8uf7Lghkz8hL4WH7U1/JPtMgu
+  5z/7JmumsS3/aR71Gtkzh7IPbIj5/SiVaarF2a1V2x61TnUsFkg4Eya5+bxu+mLvE5GKey/mF
+  QfxLbhyVY5t5f6Wr9KKdfvren0kL927tG/q6o3xt1aJfljqaKck3CK5SsmiafM9qcxFZyuiuP
+  /OCn+//Yxlluw+oZe3LaW213OtX5X6of3LI/srm+RNm5x+LrqeqPep9II8k0rVpIfhT1rWFzN
+  x/vGe11XtaNQq+Fhuzf5A5xPbkqQd5jy589Hvdd6qWQsa5q/dLuRmmKZ0QvKtEktxRqKhFnNR
+  cSIAUuY6WUMDAAA=
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-20.tower-571.messagelabs.com!1658454077!479646!1
-X-Originating-IP: [62.60.8.98]
+X-Msg-Ref: server-9.tower-585.messagelabs.com!1658454098!220142!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 22295 invoked from network); 22 Jul 2022 01:41:17 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-20.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 22 Jul 2022 01:41:17 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 37A341B2
+Received: (qmail 31529 invoked from network); 22 Jul 2022 01:41:39 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-9.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 22 Jul 2022 01:41:39 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id CBB161000CE
 	for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Jul 2022 02:41:17 +0100 (BST)
+ Fri, 22 Jul 2022 02:41:38 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
  [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 2CE231AE
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id BEAE7100077
 	for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Jul 2022 02:41:17 +0100 (BST)
+ Fri, 22 Jul 2022 02:41:38 +0100 (BST)
 Received: from CentOS7.g08.fujitsu.local (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Fri, 22 Jul 2022 02:41:15 +0100
+ (TLS) id 15.0.1497.32; Fri, 22 Jul 2022 02:41:37 +0100
 From: zhengrq.fnst <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-blinker: upgrade 1.4 ->  1.5
-Date: Fri, 22 Jul 2022 09:41:09 +0800
-Message-ID: <1658454069-24240-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-cmd2: upgrade 2.4.1 -> 2.4.2
+Date: Fri, 22 Jul 2022 09:41:30 +0800
+Message-ID: <1658454090-24280-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -78,119 +78,38 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 22 Jul 2022 01:41:22 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 22 Jul 2022 01:41:52 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97934
+ https://lists.openembedded.org/g/openembedded-devel/message/97935
 
-0001-use-pytest-instead-of-deprecated-nose.patch
-removed since it's included in 1.5
-
-License-Update: License check file changed to LICENSE.rst
+Enhancements
+------------
+-Updated argparse decorator to remove annotations when the docstring is used
+ for a command's help text.
+-Updated unit test to be Python 3.11 compliant.
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- ...se-pytest-instead-of-deprecated-nose.patch | 36 -------------------
- .../python/python3-blinker_1.4.bb             | 22 ------------
- .../python/python3-blinker_1.5.bb             | 18 ++++++++++
- 3 files changed, 18 insertions(+), 58 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-blinker/0001-use-pytest-instead-of-deprecated-nose.patch
- delete mode 100644 meta-python/recipes-devtools/python/python3-blinker_1.4.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-blinker_1.5.bb
+ .../python/{python3-cmd2_2.4.1.bb => python3-cmd2_2.4.2.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-cmd2_2.4.1.bb => python3-cmd2_2.4.2.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-blinker/0001-use-pytest-instead-of-deprecated-nose.patch b/meta-python/recipes-devtools/python/python3-blinker/0001-use-pytest-instead-of-deprecated-nose.patch
-deleted file mode 100644
-index a04c79b1e0..0000000000
---- a/meta-python/recipes-devtools/python/python3-blinker/0001-use-pytest-instead-of-deprecated-nose.patch
-+++ /dev/null
-@@ -1,36 +0,0 @@
--From 9750d01118ee59ab174525e30d987065b69c0538 Mon Sep 17 00:00:00 2001
--From: pgajdos <pgajdos@suse.cz>
--Date: Wed, 8 Jul 2020 15:22:19 +0200
--Subject: [PATCH] use pytest instead of deprecated nose
--
--Upstream-Status: Submitted [https://github.com/jek/blinker/pull/60]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- tests/test_signals.py | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/tests/test_signals.py b/tests/test_signals.py
--index 9771e40..ccbc35b 100644
----- a/tests/test_signals.py
--+++ b/tests/test_signals.py
--@@ -4,7 +4,7 @@ import time
-- 
-- import blinker
-- 
---from nose.tools import assert_raises
--+import pytest
-- 
-- 
-- jython = sys.platform.startswith('java')
--@@ -232,7 +232,7 @@ def test_meta_connect_failure():
--         pass
--     sig = blinker.Signal()
-- 
---    assert_raises(TypeError, sig.connect, receiver)
--+    pytest.raises(TypeError, sig.connect, receiver)
--     assert not sig.receivers
--     assert not sig._by_receiver
--     assert sig._by_sender == {blinker.base.ANY_ID: set()}
---- 
--2.35.1
--
-diff --git a/meta-python/recipes-devtools/python/python3-blinker_1.4.bb b/meta-python/recipes-devtools/python/python3-blinker_1.4.bb
-deleted file mode 100644
-index 08a961f938..0000000000
---- a/meta-python/recipes-devtools/python/python3-blinker_1.4.bb
-+++ /dev/null
-@@ -1,22 +0,0 @@
--DESCRIPTION = "Fast, simple object-to-object and broadcast signaling."
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=946d7e89af6f7733aeaebed5635d2682"
--
--SRC_URI[md5sum] = "8b3722381f83c2813c52de3016b68d33"
--SRC_URI[sha256sum] = "471aee25f3992bd325afa3772f1063dbdbbca947a041b8b89466dc00d606f8b6"
--
--inherit pypi setuptools3 ptest
--
--SRC_URI += " \
--	file://0001-use-pytest-instead-of-deprecated-nose.patch \
--	file://run-ptest \
--"
--
--RDEPENDS:${PN}-ptest += " \
--	${PYTHON_PN}-pytest \
--"
--
--do_install_ptest() {
--	install -d ${D}${PTEST_PATH}/tests
--	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
--}
-diff --git a/meta-python/recipes-devtools/python/python3-blinker_1.5.bb b/meta-python/recipes-devtools/python/python3-blinker_1.5.bb
-new file mode 100644
-index 0000000000..dae1e39437
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-blinker_1.5.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "Fast, simple object-to-object and broadcast signaling."
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=42cd19c88fc13d1307a4efd64ee90e4e"
-+
-+SRC_URI[sha256sum] = "923e5e2f69c155f2cc42dafbbd70e16e3fde24d2d4aa2ab72fbe386238892462"
-+
-+inherit pypi setuptools3 ptest
-+
-+SRC_URI += "file://run-ptest"
-+
-+RDEPENDS:${PN}-ptest += " \
-+	${PYTHON_PN}-pytest \
-+"
-+
-+do_install_ptest() {
-+	install -d ${D}${PTEST_PATH}/tests
-+	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
+diff --git a/meta-python/recipes-devtools/python/python3-cmd2_2.4.1.bb b/meta-python/recipes-devtools/python/python3-cmd2_2.4.2.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-cmd2_2.4.1.bb
+rename to meta-python/recipes-devtools/python/python3-cmd2_2.4.2.bb
+index 8e3883b4f9..d2434b626f 100644
+--- a/meta-python/recipes-devtools/python/python3-cmd2_2.4.1.bb
++++ b/meta-python/recipes-devtools/python/python3-cmd2_2.4.2.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=209e288518b0668115f58c3929af9ff1"
+ 
+ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+ 
+-SRC_URI[sha256sum] = "f3b0467daca18fca0dc7838de7726a72ab64127a018a377a86a6ed8ebfdbb25f"
++SRC_URI[sha256sum] = "073e555c05853b0f6965f3d03329babdf9e38a5f2cea028e61a64cd7eeb74ad5"
+ 
+ inherit pypi setuptools3
+ 
 -- 
 2.25.1
 
