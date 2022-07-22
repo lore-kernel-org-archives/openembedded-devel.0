@@ -2,72 +2,72 @@ Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D372BC43334
-	for <webhook@archiver.kernel.org>; Fri, 22 Jul 2022 01:41:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D36CEC433EF
+	for <webhook@archiver.kernel.org>; Fri, 22 Jul 2022 01:41:22 +0000 (UTC)
 Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
  [195.245.231.3])
- by mx.groups.io with SMTP id smtpd.web09.3261.1658454068551341928
+ by mx.groups.io with SMTP id smtpd.web09.3262.1658454080033322592
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Jul 2022 18:41:08 -0700
+ Thu, 21 Jul 2022 18:41:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=cnZhQwqD;
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=bJqf7+8U;
  spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
  mailfrom: zhengrq.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1658454066; i=@fujitsu.com;
-	bh=30K4GXPY1Ho7mJn3mHyyyJhLeOzWQeZdsNYdGwz6HOg=;
+	s=170520fj; t=1658454078; i=@fujitsu.com;
+	bh=3LKtwnc12PauKTievIShEme6YyXhopsS8mJjWoxm1h4=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=cnZhQwqDQtsT3YVrXJg5mKmuzd+WAqiDmV7yK4CtvFk+fL0LNpKQUIqwhbS3B+uIr
-	 p9vyALDONUDzQlL94RDB24cbx+phlvPrkFttSfh+rp+aMYE5uBMunVVmcxhH6NF5ZO
-	 2LAyU4t7uB377p2TYsh/OQcoyuq/+2tqSJyLOprUVg4JdVzQaFEjC85QbW2i0gN2mQ
-	 K80Dp7YUYoiAs5o+2xzfVCEBtvUXXfz7cJTpvbrecaOQL4rFB/CHr4bvM0brlow9sn
-	 xWeY05tyBpo6Kkh3hZq3yfuusZ0FIZ24YNw4Kb9NDyNPf2nxg9sne0NY5SxTWpAJ3z
-	 Zg7ir9aKab1fA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrHIsWRWlGSWpSXmKPExsViZ8OxWdeQ4Va
-  SQfNFTYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPqvKlsBS18FT8+H2VpYLzP08XIxSEk8IBR
-  4vmK/cwQzmUmib1Hz7NBOAcYJfZMWsrUxcjJwSagK/Hix2IWEFtEQF9i6ew9QB0cHMICnhKHd
-  4OVsAioSmya/4cNxOYV8JA4c66THcSWEFCQmPLwPTNEXFDi5MwnYGOYBSQkDr54ATZGQkBRYv
-  Z0eYjyConXhy8xQ9hqElfPbWKewMg3C0n3LCTdCxiZVjFaJxVlpmeU5CZm5ugaGhjoGhqa6hp
-  b6BoZGuklVukm6qWW6panFpfoArnlxXqpxcV6xZW5yTkpenmpJZsYgcGXUqx2ZQfjnlU/9Q4x
-  SnIwKYny7pt0M0mILyk/pTIjsTgjvqg0J7X4EKMMB4eSBG/BX6CcYFFqempFWmYOMBJg0hIcP
-  EoivBZfgNK8xQWJucWZ6RCpU4yWHFNn/9vPzLEcTM782naAWYglLz8vVUqcd8lXoAYBkIaM0j
-  y4cbBovcQoKyXMy8jAwCDEU5BalJtZgir/ilGcg1FJmFf+N9AUnsy8Eritr4AOYgI6yNz8Bsh
-  BJYkIKakGJn+29s3cR5Mtr5k9n5AjF3D/Xcqp3XPY2gznKaufmxdy5mvH3clTDfnyFghEs5R3
-  BS3jfNm0I8t1Q/WtRUpnC2IT248vSHx6LXj+xm0rIyUj925TVjCYcq6nkcFm+gMJnuX5wYeXf
-  IyWP/ONI1iojP3Y66hCE4Vsow7JtPJbz1YdlG2quWEzgTeO6UBGnvpho437273izT/EVhnfOj
-  H7ff5b7r4FwdKSlxfO891/q3XTXuFVa9SmxVn8D3SK7DmqX3Ise+q8SJe5exTEn5ZMjfj6N8b
-  x190X8zM7NeduyfK4sC94npV37We1uzP3zuU5sMNu5oV/X0Vb/r36FRFlaWT2TGWt66LH+l4H
-  T/hbpimxFGckGmoxFxUnAgB35pZVUQMAAA==
+	b=bJqf7+8UUp1scCBrmi2Nv9a1M42QzH9tNcYv9UAbOS0J0mXmFtu9U183ctV+qZBIv
+	 i+XF0hDudZKryo1/uSfmmRVoHkzbuv2ev6Lqk4ZrZuG0eZUT7m0irX2fvY04l/ys/R
+	 +qey30Iz60hR8XoiMxbyPTN54mOVmHHAco8HT40ea0LZDg2GMQCIZ+h+URNnJ34vOb
+	 c3fKW/KaBnqKY762V76C/emIV7gi9ZThmAbj2FT4bPBbO8P47YAXTEEPDphoTzkkoB
+	 BpO/4YIOVmkJwP8MskOwt+tIJ5qJyi5TxHOkZ7t2VxnzX1UKhir0QJbmOytyxMWYfD
+	 I2+KnuXf3IeKA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrMIsWRWlGSWpSXmKPExsViZ8ORpGvLcCv
+  JYN15OYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNaNts1bBOrmK5/fcGhinS3cxcnEICTxklLh8
+  aCoLhHOFSWLXl11MEM4BRokrDw8wdjFycrAJ6Eq8+LGYBcQWEdCXWDp7DzOILSzgIbFy/hF2E
+  JtFQFVixcRZYHFeoPiSud/YQGwJAQWJKQ/fQ8UFJU7OfAI2h1lAQuLgixdAcQ6gGkWJ2dPlIc
+  orJF4fvsQMYatJXD23iXkCI98sJN2zkHQvYGRaxWidVJSZnlGSm5iZo2toYKBraGiqa2ypa2R
+  goJdYpZuol1qqW55aXKJrpJdYXqyXWlysV1yZm5yTopeXWrKJERh6KcXqJ3YwPl35U+8QoyQH
+  k5Io775JN5OE+JLyUyozEosz4otKc1KLDzHKcHAoSfAW/AXKCRalpqdWpGXmAOMAJi3BwaMkw
+  mvxBSjNW1yQmFucmQ6ROsVozzF19r/9zBzLweTMr20HmDk27es6wCzEkpeflyolzrvkK1CbAE
+  hbRmke3FBY3F5ilJUS5mVkYGAQ4ilILcrNLEGVf8UozsGoJMw75T/QFJ7MvBK43a+AzmICOsv
+  c/AbIWSWJCCmpBqZNZWwvrK8qmvl+z6jSm/5t/1bnSJeDrZzvgy99ZKn+/3dys7DTbTm90jSl
+  Nhb7CW7x++ZaFd+69u+uz9wpltcPVN2czveZlzvyQEOu7PuLT60+Za48dHbbj6726aWzDh/1W
+  PZ9171bL5Zte3pZo+YG19nk/+bHxOL+Vh68832Zpun12YcXJm8Mmv3j1zRFpR18aw6ZGef3/1
+  /lVWrzK/6My+X1U/JOsAjbL268abtowv5n0c9W8bLtFr+Tq6BdGvb+V8q/HdJsHBtZfP72/tf
+  YoJjEu9f1qKa5TdPV3pkXLvKf31o8adk75hgZmbBvVdO8OtZZMl9n/OKk3Xz3e6JOjlBq7eI9
+  S92/FB7td93Gr8RSnJFoqMVcVJwIAKRInkpWAwAA
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-4.tower-571.messagelabs.com!1658454065!132781!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-20.tower-571.messagelabs.com!1658454077!479646!1
+X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 14672 invoked from network); 22 Jul 2022 01:41:05 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-4.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 22 Jul 2022 01:41:05 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 63A277C
+Received: (qmail 22295 invoked from network); 22 Jul 2022 01:41:17 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-20.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 22 Jul 2022 01:41:17 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 37A341B2
 	for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Jul 2022 02:41:05 +0100 (BST)
+ Fri, 22 Jul 2022 02:41:17 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
  [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 56FE375
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 2CE231AE
 	for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Jul 2022 02:41:05 +0100 (BST)
+ Fri, 22 Jul 2022 02:41:17 +0100 (BST)
 Received: from CentOS7.g08.fujitsu.local (10.167.225.35) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Fri, 22 Jul 2022 02:41:04 +0100
+ (TLS) id 15.0.1497.32; Fri, 22 Jul 2022 02:41:15 +0100
 From: zhengrq.fnst <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-attr: upgrade 0.3.1 ->  0.3.2
-Date: Fri, 22 Jul 2022 09:40:58 +0800
-Message-ID: <1658454058-24194-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-blinker: upgrade 1.4 ->  1.5
+Date: Fri, 22 Jul 2022 09:41:09 +0800
+Message-ID: <1658454069-24240-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -78,49 +78,119 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 22 Jul 2022 01:41:12 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 22 Jul 2022 01:41:22 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97933
+ https://lists.openembedded.org/g/openembedded-devel/message/97934
 
-License-Update: License check file changed to LICENSE.
+0001-use-pytest-instead-of-deprecated-nose.patch
+removed since it's included in 1.5
+
+License-Update: License check file changed to LICENSE.rst
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../recipes-devtools/python/python3-attr_0.3.1.bb        | 9 ---------
- .../recipes-devtools/python/python3-attr_0.3.2.bb        | 8 ++++++++
- 2 files changed, 8 insertions(+), 9 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-attr_0.3.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-attr_0.3.2.bb
+ ...se-pytest-instead-of-deprecated-nose.patch | 36 -------------------
+ .../python/python3-blinker_1.4.bb             | 22 ------------
+ .../python/python3-blinker_1.5.bb             | 18 ++++++++++
+ 3 files changed, 18 insertions(+), 58 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-blinker/0001-use-pytest-instead-of-deprecated-nose.patch
+ delete mode 100644 meta-python/recipes-devtools/python/python3-blinker_1.4.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-blinker_1.5.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-attr_0.3.1.bb b/meta-python/recipes-devtools/python/python3-attr_0.3.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-blinker/0001-use-pytest-instead-of-deprecated-nose.patch b/meta-python/recipes-devtools/python/python3-blinker/0001-use-pytest-instead-of-deprecated-nose.patch
 deleted file mode 100644
-index 22c5218c70..0000000000
---- a/meta-python/recipes-devtools/python/python3-attr_0.3.1.bb
+index a04c79b1e0..0000000000
+--- a/meta-python/recipes-devtools/python/python3-blinker/0001-use-pytest-instead-of-deprecated-nose.patch
 +++ /dev/null
-@@ -1,9 +0,0 @@
--DESCRIPTION = "Simple decorator to set attributes of target function or class in a DRY way"
--HOMEPAGE = "https://github.com/denis-ryzhkov/attr"
+@@ -1,36 +0,0 @@
+-From 9750d01118ee59ab174525e30d987065b69c0538 Mon Sep 17 00:00:00 2001
+-From: pgajdos <pgajdos@suse.cz>
+-Date: Wed, 8 Jul 2020 15:22:19 +0200
+-Subject: [PATCH] use pytest instead of deprecated nose
+-
+-Upstream-Status: Submitted [https://github.com/jek/blinker/pull/60]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- tests/test_signals.py | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/tests/test_signals.py b/tests/test_signals.py
+-index 9771e40..ccbc35b 100644
+---- a/tests/test_signals.py
+-+++ b/tests/test_signals.py
+-@@ -4,7 +4,7 @@ import time
+- 
+- import blinker
+- 
+--from nose.tools import assert_raises
+-+import pytest
+- 
+- 
+- jython = sys.platform.startswith('java')
+-@@ -232,7 +232,7 @@ def test_meta_connect_failure():
+-         pass
+-     sig = blinker.Signal()
+- 
+--    assert_raises(TypeError, sig.connect, receiver)
+-+    pytest.raises(TypeError, sig.connect, receiver)
+-     assert not sig.receivers
+-     assert not sig._by_receiver
+-     assert sig._by_sender == {blinker.base.ANY_ID: set()}
+--- 
+-2.35.1
+-
+diff --git a/meta-python/recipes-devtools/python/python3-blinker_1.4.bb b/meta-python/recipes-devtools/python/python3-blinker_1.4.bb
+deleted file mode 100644
+index 08a961f938..0000000000
+--- a/meta-python/recipes-devtools/python/python3-blinker_1.4.bb
++++ /dev/null
+@@ -1,22 +0,0 @@
+-DESCRIPTION = "Fast, simple object-to-object and broadcast signaling."
 -LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=59805a0285f4d2b6abdedae73db4f5c1"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=946d7e89af6f7733aeaebed5635d2682"
 -
--SRC_URI[md5sum] = "68b9a503991241fb2df28488686b0e1e"
--SRC_URI[sha256sum] = "9091548058d17f132596e61fa7518e504f76b9a4c61ca7d86e1f96dbf7d4775d"
+-SRC_URI[md5sum] = "8b3722381f83c2813c52de3016b68d33"
+-SRC_URI[sha256sum] = "471aee25f3992bd325afa3772f1063dbdbbca947a041b8b89466dc00d606f8b6"
 -
--inherit pypi setuptools3
-diff --git a/meta-python/recipes-devtools/python/python3-attr_0.3.2.bb b/meta-python/recipes-devtools/python/python3-attr_0.3.2.bb
+-inherit pypi setuptools3 ptest
+-
+-SRC_URI += " \
+-	file://0001-use-pytest-instead-of-deprecated-nose.patch \
+-	file://run-ptest \
+-"
+-
+-RDEPENDS:${PN}-ptest += " \
+-	${PYTHON_PN}-pytest \
+-"
+-
+-do_install_ptest() {
+-	install -d ${D}${PTEST_PATH}/tests
+-	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+-}
+diff --git a/meta-python/recipes-devtools/python/python3-blinker_1.5.bb b/meta-python/recipes-devtools/python/python3-blinker_1.5.bb
 new file mode 100644
-index 0000000000..0a77009e11
+index 0000000000..dae1e39437
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-attr_0.3.2.bb
-@@ -0,0 +1,8 @@
-+DESCRIPTION = "Simple decorator to set attributes of target function or class in a DRY way"
-+HOMEPAGE = "https://github.com/denis-ryzhkov/attr"
++++ b/meta-python/recipes-devtools/python/python3-blinker_1.5.bb
+@@ -0,0 +1,18 @@
++DESCRIPTION = "Fast, simple object-to-object and broadcast signaling."
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=02c113fb406eab0537c0cf4334f57c07"
++LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=42cd19c88fc13d1307a4efd64ee90e4e"
 +
-+SRC_URI[sha256sum] = "1ceebca768181cdcce9827611b1d728e592be5d293911539ea3d0b0bfa1146f4"
++SRC_URI[sha256sum] = "923e5e2f69c155f2cc42dafbbd70e16e3fde24d2d4aa2ab72fbe386238892462"
 +
-+inherit pypi setuptools3
++inherit pypi setuptools3 ptest
++
++SRC_URI += "file://run-ptest"
++
++RDEPENDS:${PN}-ptest += " \
++	${PYTHON_PN}-pytest \
++"
++
++do_install_ptest() {
++	install -d ${D}${PTEST_PATH}/tests
++	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
++}
 -- 
 2.25.1
 
