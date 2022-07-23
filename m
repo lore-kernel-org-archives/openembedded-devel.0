@@ -1,91 +1,93 @@
-Return-Path: <mgrosshauser@gmx.net>
+Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D665C433EF
-	for <webhook@archiver.kernel.org>; Fri, 22 Jul 2022 19:39:58 +0000 (UTC)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- by mx.groups.io with SMTP id smtpd.web09.12120.1658518797200835886
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90C6BC433EF
+	for <webhook@archiver.kernel.org>; Sat, 23 Jul 2022 19:21:05 +0000 (UTC)
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com
+ [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web11.9596.1658604061456251841
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Jul 2022 12:39:57 -0700
+ Sat, 23 Jul 2022 12:21:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmx.net header.s=badeba3b8450 header.b=HFjTo5kB;
- spf=pass (domain: gmx.net, ip: 212.227.17.21, mailfrom: mgrosshauser@gmx.net)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
-	s=badeba3b8450; t=1658518794;
-	bh=h3UBHY9ca+qZuL4LxDeWWg7Yhju5PRaZRqqul9neocM=;
-	h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
-	b=HFjTo5kBBsEZ2eFvIqsJaaecYE9Jt6HkaihRwew2GJxjqOnkHclv85E+cHDXfeXjj
-	 UAPMhC970aEOHx2EJO3Mk+l0C5dNYqFNrb+PjiywNTeUEve5D6nKEuGZRz1OvA4kjX
-	 7tmDTEZfbSDLsjTkH0R48yEqWoWSzfIEQ/yip0AI=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from [192.168.200.100] ([80.109.177.11]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MbzuB-1neFlt2e47-00dah8; Fri, 22
- Jul 2022 21:39:54 +0200
-Message-ID: <9b5881cf-15b1-b401-c6bd-5f9232fd0d4c@gmx.net>
-Date: Fri, 22 Jul 2022 21:39:53 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: en-US
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=UWKQO2af;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48,
+ mailfrom: jan.vermaete@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id z23so13771174eju.8
+        for <openembedded-devel@lists.openembedded.org>;
+ Sat, 23 Jul 2022 12:21:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=TjPsm/Xft3DpuMIKUVanGNoDoBZ+6pPSY4MpkILuxH4=;
+        b=UWKQO2afLZsi/TdmBdtjwiRBRGbyC1HeMOgUUj5LPvYzSs66r4RhcGzIBmOroYdCJ0
+         hLGG5xnBGEFy7Q/tRkbDF6+cBDvLu23VilpIWrk+MsG5S6JFGr208CnpIHqhmuaWKhp4
+         XZLqmyeZVJ/h8k0DgSX/T51Xo8vOGoilIhDVaz/C4/fmr6OkAzB8Oo5hOen3iNDvhB/r
+         UA1wosVAdiDPMR5ZvKgkZT3STQlyCsDxAQi1QbD45YTtLoOrfUCER1isdErX4lI3XatM
+         wN98sWSi7Hn9Jokw/UaZ/b/PYL+cRf25+AcdTJDDxKtcS9YKcExBscLqdgdLe5KSOjxs
+         DVhw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=TjPsm/Xft3DpuMIKUVanGNoDoBZ+6pPSY4MpkILuxH4=;
+        b=653lDHBbLJvxzG2Ppjqzf/sZzpRd9s5xxgEn7xL5YV2/6B2RynttbH+jeYRXwswGlX
+         w1SYuhBgQ2J4CfeJt96QGt06wFvlwRS9+YCP5yktCRZtEH9b5Wg7UCcs129XwiPD3YJN
+         ivZYwe3KJsbEkuLcxV9cBrDr7ZFwVxirTv1iZNQSE4ssOhfzHKRyWhZQ3kvWrubjUhNj
+         xArVC6uqzzmuuFzxp5EgJCiyP1uwhTYgMadUl49jHCi9ejKrQYipVdl3BFInsGQro0DX
+         dlgfYXgvxpe+WmPxiJmMBdlVEfCD5pVsPJiHqZtM6Rgt+McVkicjByuZ/9SYtujf2hC9
+         7Hdg==
+X-Gm-Message-State: AJIora8tBQ8yHjPouk9MEd89IK2R4HHvtmGvR7iY2Jj8GFcSYbmeghYO
+	bcMx7zEE5TSAWQ9DmObPayRL05efi1w2Lw==
+X-Google-Smtp-Source: 
+ AGRyM1sUbymI3Xok70HH0aMTvq2h5hSz1C1ShkDZ2ORfI/xFd7qY3Hc0bTswlFcK4xOrUHp8CtKCyw==
+X-Received: by 2002:a17:907:94c3:b0:72f:3f8b:d628 with SMTP id
+ dn3-20020a17090794c300b0072f3f8bd628mr4301728ejc.313.1658604059624;
+        Sat, 23 Jul 2022 12:20:59 -0700 (PDT)
+Received: from localhost.localdomain
+ (ptr-fij45qzxv98s73x2tm3.18120a2.ip6.access.telenet.be.
+ [2a02:1812:512:2c00:ebd8:f58e:9524:1f6b])
+        by smtp.gmail.com with ESMTPSA id
+ 18-20020a170906211200b00726b8e84c1asm3463842ejt.21.2022.07.23.12.20.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 23 Jul 2022 12:20:59 -0700 (PDT)
+From: Jan Vermaete <jan.vermaete@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?Q?Martin_Gro=c3=9fhauser?= <mgrosshauser@gmx.net>
-From: =?UTF-8?Q?Martin_Gro=c3=9fhauser?= <mgrosshauser@gmx.net>
-Subject: [meta-python][PATCH] Add runtime dependencies for python3-supervisor
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:ywZLaKAPN+tEaZIR94wzSOJsEL6T9KAiZvpGIICnh3CoFi/Pmnq
- /3orX6qDmOYTpAloXYGuVMEcYq1affSncmLQErYch+GJ9lbHkAsEe/WX9KLHGK2eIcgZ+Au
- JO2XsIAtzYAhznHzazu3dQnO3f3X2bTnj3dnIQtnrnlY3qwf0aLIfylOw9ibsaj//W8ffvD
- t69GP09YNE3TuKSNXlfdw==
-X-UI-Out-Filterresults: notjunk:1;V03:K0:bYQgFsuknqU=:pyMWipfpHVBJz5J1A0OsQl
- A25t1ZTKy7YRynIKLjEO8Z0LAov1RMVCl6+LY+c9npP2JLHAbEssPWDIFmlXjCSFWLUHdRPGv
- 02SEC7dyCvPMgwcOvZr8PxJt5hg47MXN0lch6ykoD2aT7r7h+dbEI9mwzhVYgN9MrIsbAqI86
- 13WGDnwdZPpHBOPx+33wRZGk+pxjaXZH5fyVWP7SVJbD/K1tm26pgzxFucEfV6c4x5ijYCNsx
- MevPPRjwJn0N4JXzU6Hj0mCZ0rblET6Yh+rqqaNA2iDWHzbo9T8rTCXFQ/r3KctEM4WszaNY4
- UguRaeu089KBGr9eVAaXMtM7kBftnHAURsz2fpsvyXgcoeeg9xaMkUvh56PGAeXrP6lG6VNto
- NDlsOBGE0l7PayhS84tWYLHk1mfAfci97RatGEzsY97rNlhGMqOTDfPYnQ0EZxgca2N2V2Eh9
- xxgOz49H2n8uqG8nA6M5xPkvE/qgGB4jrrNJtQprMlq+V4+TifZXuexgwrCBT/769/W20xKGc
- HBsYKwwmmlzwMNmXmkg8+KSSlsdF4vKJYkGaHAXGfGJ0zcQ7JYOzHpgthjavNTxiKuFGZH5j6
- nb8q7+op0tqGXuburkdfoQst7Ziy8Fvos/ZzOUFOi/7CH9zhfbEUlCiot9kuXgEZqXach1Vuw
- 1MkV8Tiuz4a3Yk1MJpWudC+ojqFAsrPpIpnluiNypyfCRrLrmzt+kKBkPl7jGonoz59cXlBrh
- AcmGBLGlxSMRTTsQYxz4yKOCBJBPMkLiVuIAhXPC2mk+7SifslrmLs8ltBP/pZX6/kZXGazoE
- GpIymr7McfKq4ETa0aQ/tII/3LopeGZ4fPcceyNlISVPSDo+7MWLXSsu4F5Ki+wN7hO/l8MyH
- PjjW1jnBwCqfSQWgOzIp7lcSBH5V7UwOt7RZOa5FfCLtq39ls3yeI2wJd4KxFMGzLp/dZXwaX
- ehx6XCpCz5/DiPK6msSk+Z3JG8JBPKLLIQ20MTgZ/DxAHjpSx0qOLNpNn+iy9zO5+Zknht3BL
- 8RqVdyo8qA2qk3q8NVEy5kj3jBRYK+/NEybhSOPjeqzhsDjOlH66Y9+F4kJMP2DctpAoHy8S6
- fpP8O5MG8NV91teF9HXvvwGs+HWmZpk/DE7QbBESaM03z++c0gZ9grgGw==
+Cc: Jan Vermaete <jan.vermaete@gmail.com>
+Subject: [meta-python][PATCH] python-ptyprocess: fixed test_pass_fds
+Date: Sat, 23 Jul 2022 21:19:19 +0200
+Message-Id: <20220723191919.97586-1-jan.vermaete@gmail.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 22 Jul 2022 19:39:58 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 23 Jul 2022 19:21:05 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97956
+ https://lists.openembedded.org/g/openembedded-devel/message/97957
 
-Running supervisord without these fails with import errors. smtpd might lo=
-ok strange, but provides required asynchat.py.
-=2D--
-  .../recipes-devtools/python/python3-supervisor_4.2.4.bb      | 5 +++++
-  1 file changed, 5 insertions(+)
+This ptest needed bash.
 
-diff --git a/meta-python/recipes-devtools/python/python3-supervisor_4.2.4.=
-bb b/meta-python/recipes-devtools/python/python3-supervisor_4.2.4.bb
-index fdd8a76cf..7da29e39b 100644
-=2D-- a/meta-python/recipes-devtools/python/python3-supervisor_4.2.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-supervisor_4.2.4.bb
-@@ -13,6 +13,11 @@ PYPI_PACKAGE =3D "supervisor"
-  inherit pypi systemd setuptools3
-  RDEPENDS:${PN} =3D "\
-      ${PYTHON_PN}-meld3 \
-+    ${PYTHON_PN}-io \
-+    ${PYTHON_PN}-xmlrpc \
-+    ${PYTHON_PN}-resource \
-+    ${PYTHON_PN}-setuptools \
-+    ${PYTHON_PN}-smtpd \
-  "
+Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+---
+ meta-python/recipes-devtools/python/python3-ptyprocess_0.7.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-  SRC_URI +=3D "file://supervisord.conf \
-=2D-
+diff --git a/meta-python/recipes-devtools/python/python3-ptyprocess_0.7.0.bb b/meta-python/recipes-devtools/python/python3-ptyprocess_0.7.0.bb
+index bff2d499f..2a8b8730c 100644
+--- a/meta-python/recipes-devtools/python/python3-ptyprocess_0.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-ptyprocess_0.7.0.bb
+@@ -34,6 +34,7 @@ RDEPENDS:${PN}-ptest += " \
+ 	${PYTHON_PN}-fcntl \
+ 	${PYTHON_PN}-terminal \
+ 	${PYTHON_PN}-resource \
++	bash \
+ "
+ 
+ do_install_ptest() {
+-- 
 2.25.1
 
 
