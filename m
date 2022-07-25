@@ -2,96 +2,130 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 810E3C43334
-	for <webhook@archiver.kernel.org>; Mon, 25 Jul 2022 01:58:24 +0000 (UTC)
-Received: from mail-qv1-f46.google.com (mail-qv1-f46.google.com
- [209.85.219.46])
- by mx.groups.io with SMTP id smtpd.web08.23493.1658714301043484509
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8286AC43334
+	for <webhook@archiver.kernel.org>; Mon, 25 Jul 2022 02:01:04 +0000 (UTC)
+Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com
+ [209.85.160.173])
+ by mx.groups.io with SMTP id smtpd.web12.23423.1658714463567335822
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 24 Jul 2022 18:58:21 -0700
+ Sun, 24 Jul 2022 19:01:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=WJhAZ9RP;
- spf=pass (domain: gmail.com, ip: 209.85.219.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f46.google.com with SMTP id q3so6637740qvp.5
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=HVVekMe1;
+ spf=pass (domain: gmail.com, ip: 209.85.160.173,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qt1-f173.google.com with SMTP id r24so7323083qtx.6
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 24 Jul 2022 18:58:20 -0700 (PDT)
+ Sun, 24 Jul 2022 19:01:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=I7eI6gERYw+ahR4ZZ2xPXSwonYPlDtjmWXgN4Vdcqtk=;
-        b=WJhAZ9RP2Z41qfTGZF86A7Nc0JMTytX9QdfAlpOn2A+jSIpFCqfsxOkiL+rncdLmUd
-         /KCR/8TlUEq1CjxhY4I8UZXBK6BPExS1iCwVBPxuSBpvrm5mpxbtz3Jh046YhewRn6wr
-         MZu/KNjj3gCn3ZvShSIdiOnsXKUcS/JdFVAUNgMS/M2PpNEEEMMKLt+qv2BLxJT8B++n
-         NdJ6ZCqZ7hqn03e3UbS3NjpYPxZC/9gqP1LPWGoi+HYKYrmXpkU1m1eVIsS1820I/3Sv
-         F9kLz/C9fZlurJ6Zp/HJPctCPou2njP9LQnCIOxTmTm+g/DLew51rj5xMRFNqtNgHDOl
-         2IjQ==
+         :cc:content-transfer-encoding;
+        bh=6EqMcoYe5Xo4MJ78kycf3Zx1x1RF1cZuFbd0UNYNYvY=;
+        b=HVVekMe1bhq22YLW44oDCQE3/kpd7887aNwi6yV3zrdJ6V5kn9T2MZXBbmgeuzGBPT
+         6YamqRTzH6KuwXa6GZEZBPa0zDiGrnMkmYgDiAUgivItv1aUCDta4sRkTMBac8QaC610
+         /EOS8AdVUKeNBjjUFCSl8zN8JLcITUjWJmCCS5QYHnT5OWeBdoZBQmhf+AnLYrgzI5nC
+         +E+joJNFJ7hCSGj9LpMmJirsFXTmepJefxq7JWIkEfdGqDjSEyaN+DodQ3e7kab6z3/B
+         gU/uU4vKKaXZokNSOA/A2fajPPsoP4xtX8vB7osAdDpcQQuW1nyVMZL0pguviWOP0txC
+         HIqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=I7eI6gERYw+ahR4ZZ2xPXSwonYPlDtjmWXgN4Vdcqtk=;
-        b=u/c42FFEBOzrtVtJ9gTIUVZwaTA3dffsv5Mv5P+7RLxBowuCqO2iD/w2nqLC8r9C3m
-         43WjWN0UyLAP8WUtS55GOU+nCGAGV/BS4P2X/0zKsLcA+v+AdhbnIUdSt/Ant6RdkXX/
-         9Tlm7ZpdGRlUtd9vBv1nPjj+d3yDGRYEt/UWrvooTVvHH5IZ+hlu3KzWaqWXvKhcFJds
-         bzwrInT/UXbll5XfrPXqIUwENTPPQvLy88cFttidRXM1A8RtjPzoDoYQhw7Z67nmLgFm
-         Jt/PRlWlsG4k6nmH1k4qptUb86M1rwQCLhay5JWDFi2VLR+NwiS7Yc6oqmYwTuzvaRPJ
-         VNzA==
-X-Gm-Message-State: AJIora8rSxWRCECTFMm2T/HpcDtKqpy/BkN1vm3aNW8+DGv7QcjQ8k4d
-	yV+c3oyB81BB5peSVNsqN8MFsWz9O0r5y9JPnMw=
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=6EqMcoYe5Xo4MJ78kycf3Zx1x1RF1cZuFbd0UNYNYvY=;
+        b=cYgbwd2sMxmj8HR9VjtQJo6NNhGxcC8v9vYG0HPu5kF4Oy+LUx8uZJuwuac14tFPXG
+         Ge/8MofNh9esDTtUumCutIO/r4Dl6drwjfa78BkLqqIK769oMU1JpnzHW8edNPcGmks+
+         4ycPjZE0Wzo2lfddDt4loNCZJuC5YgMevRo7KB5IDq4bis/PYojcp+u6E7X5E58XICEV
+         c8wJZI6vT1s2YTj65d7holKkVkuh0LeG6nskSInOrD4SVvg/1kJjH9ZqPZVRSZON9KZl
+         Em9xfd4quX8omX2L2ceDnYB+9SjfEdbzeqGmnbKsm2VuMgUA0fWD+BxFlSGvedMaHSt5
+         iS6w==
+X-Gm-Message-State: AJIora8ocmdcsDCdypLblRKwLnSGuZU6p7rieYIp+GVoMz00qzQpcOOJ
+	CpY09ub+qHnuGKlwcOWasL691gB+Z+SnEnu/UqM=
 X-Google-Smtp-Source: 
- AGRyM1u1oolI3Pu2S6S6dAq3zmLc+EnOe0FC01+m0Vavc9Zs4bK89oJhJYNiUb9LyK1tbLFvAPK6Et1exa0tyJb2F1o=
-X-Received: by 2002:a0c:8c4c:0:b0:473:11d7:6d3d with SMTP id
- o12-20020a0c8c4c000000b0047311d76d3dmr8466502qvb.110.1658714299911; Sun, 24
- Jul 2022 18:58:19 -0700 (PDT)
+ AGRyM1si9tpTWuvTH2n4n/6/Po9oo1l0abE53HRn0232Q4wz3zWEPuZzIYJbJLCCCVuKMurjmFga1VfwGZyHKk2ca98=
+X-Received: by 2002:a05:622a:1102:b0:31f:29ed:2e2 with SMTP id
+ e2-20020a05622a110200b0031f29ed02e2mr6451928qty.54.1658714461528; Sun, 24 Jul
+ 2022 19:01:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220724194800.189798-1-tvgamblin@gmail.com>
-In-Reply-To: <20220724194800.189798-1-tvgamblin@gmail.com>
+References: <9b5881cf-15b1-b401-c6bd-5f9232fd0d4c@gmx.net>
+ <CABF_=yh7frbvHSe=+EokH+AuU5p7GRSN4+Kb_-qn__1HqyFu_Q@mail.gmail.com>
+In-Reply-To: 
+ <CABF_=yh7frbvHSe=+EokH+AuU5p7GRSN4+Kb_-qn__1HqyFu_Q@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 24 Jul 2022 21:57:53 -0400
+Date: Sun, 24 Jul 2022 22:00:35 -0400
 Message-ID: 
- <CAMKF1sr-VXXh=315dtjqzi7_DMzQZGjLfeaSwS0rq0onw_e2=g@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] README: Remove maintainer info for
- tvgamblin
-To: Trevor Gamblin <tvgamblin@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+ <CAMKF1soLr20bKVyC4008rtTSRAK+ehjTADwhMdMRpY7NkJxAmg@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] Add runtime dependencies for
+ python3-supervisor
+To: Jan Vermaete <jan.vermaete@gmail.com>
+Cc: =?UTF-8?Q?Martin_Gro=C3=9Fhauser?= <mgrosshauser@gmx.net>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Jul 2022 01:58:24 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Jul 2022 02:01:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97965
+ https://lists.openembedded.org/g/openembedded-devel/message/97966
 
-On Sun, Jul 24, 2022 at 3:48 PM Trevor Gamblin <tvgamblin@gmail.com> wrote:
+On Sun, Jul 24, 2022 at 3:31 PM Jan Vermaete <jan.vermaete@gmail.com> wrote=
+:
 >
-> Signed-off-by: Trevor Gamblin <tvgamblin@gmail.com>
-> ---
->  meta-python/README | 1 -
->  1 file changed, 1 deletion(-)
+> Hi,
 >
-> diff --git a/meta-python/README b/meta-python/README
-> index 8b62ad32b..01c51dc88 100644
-> --- a/meta-python/README
-> +++ b/meta-python/README
-> @@ -44,4 +44,3 @@ Maintenance
->  Layer maintainers:
->          Tim "moto-timo" Orling <TicoTimo@gmail.com>
->          Derek Straka <derek@asterius.io>
-> -        Trevor Gamblin <trevor.gamblin@windriver.com>
+> Could it be it should be '${PYTHON_PN}-setuptools-native' iso  '${PYTHON_=
+PN}-setuptools' ?
 
-Thanks for your work on maintaining meta-python Trevor, really appreciate it
-
+rdep on a native package wont be a good thing.
+>
+> Br
+>
+> On Fri, Jul 22, 2022 at 9:39 PM Martin Gro=C3=9Fhauser <mgrosshauser@gmx.=
+net> wrote:
+>>
+>> Running supervisord without these fails with import errors. smtpd might =
+look strange, but provides required asynchat.py.
+>> ---
+>>   .../recipes-devtools/python/python3-supervisor_4.2.4.bb      | 5 +++++
+>>   1 file changed, 5 insertions(+)
+>>
+>> diff --git a/meta-python/recipes-devtools/python/python3-supervisor_4.2.=
+4.bb b/meta-python/recipes-devtools/python/python3-supervisor_4.2.4.bb
+>> index fdd8a76cf..7da29e39b 100644
+>> --- a/meta-python/recipes-devtools/python/python3-supervisor_4.2.4.bb
+>> +++ b/meta-python/recipes-devtools/python/python3-supervisor_4.2.4.bb
+>> @@ -13,6 +13,11 @@ PYPI_PACKAGE =3D "supervisor"
+>>   inherit pypi systemd setuptools3
+>>   RDEPENDS:${PN} =3D "\
+>>       ${PYTHON_PN}-meld3 \
+>> +    ${PYTHON_PN}-io \
+>> +    ${PYTHON_PN}-xmlrpc \
+>> +    ${PYTHON_PN}-resource \
+>> +    ${PYTHON_PN}-setuptools \
+>> +    ${PYTHON_PN}-smtpd \
+>>   "
+>>
+>>   SRC_URI +=3D "file://supervisord.conf \
+>> --
+>> 2.25.1
+>>
+>>
+>>
+>>
+>
+>
 > --
-> 2.37.1
+> Jan Vermaete
+> =E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Hamel
 >
->
-> -=-=-=-=-=-=-=-=-=-=-=-
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#97964): https://lists.openembedded.org/g/openembedded-devel/message/97964
-> Mute This Topic: https://lists.openembedded.org/mt/92591366/1997914
+> View/Reply Online (#97963): https://lists.openembedded.org/g/openembedded=
+-devel/message/97963
+> Mute This Topic: https://lists.openembedded.org/mt/92555239/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 
