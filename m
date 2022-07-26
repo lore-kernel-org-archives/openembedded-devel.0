@@ -1,379 +1,187 @@
-Return-Path: <jdmason@kudzu.us>
+Return-Path: <brenda.streiff@ni.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E3E8C04A68
-	for <webhook@archiver.kernel.org>; Tue, 26 Jul 2022 14:45:24 +0000 (UTC)
-Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com
- [209.85.160.180])
- by mx.groups.io with SMTP id smtpd.web10.7597.1658846719708448858
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 69506C00144
+	for <webhook@archiver.kernel.org>; Tue, 26 Jul 2022 16:10:54 +0000 (UTC)
+Received: from mx0b-00010702.pphosted.com (mx0b-00010702.pphosted.com
+ [148.163.156.75])
+ by mx.groups.io with SMTP id smtpd.web11.8587.1658851851495107188
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Jul 2022 07:45:20 -0700
+ Tue, 26 Jul 2022 09:10:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kudzu-us.20210112.gappssmtp.com header.s=20210112
- header.b=mWLa28qt;
- spf=none, err=permanent DNS error (domain: kudzu.us, ip: 209.85.160.180,
- mailfrom: jdmason@kudzu.us)
-Received: by mail-qt1-f180.google.com with SMTP id e5so10573614qts.1
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Jul 2022 07:45:19 -0700 (PDT)
+ dkim=pass header.i=@ni.com header.s=pps11062020 header.b=4NzQhO+Z;
+ spf=pass (domain: ni.com, ip: 148.163.156.75,
+ mailfrom: prvs=420681fa7e=brenda.streiff@ni.com)
+Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
+	by mx0a-00010702.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
+ 26QEmL2i023762
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 26 Jul 2022 11:10:51 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ni.com;
+ h=from : to : subject :
+ date : message-id : content-transfer-encoding : content-type :
+ mime-version; s=PPS11062020;
+ bh=dcLjXng2KxiRm6oqAyhPkxa5G+Qo6GOty2LfTd5mbmA=;
+ b=4NzQhO+Z41nGvrqmwm2zixC+x7sPlbjqo8eAFT/hSNuajSyxC1xLXJuCg6haly3/JzJQ
+ +DLe04vG5/NtzUJfogT0KgXGmg6a4D+bc2cRBCaMVwEez4ULgfwq1ZDlEeSsymQI/bNP
+ tj2fvbFaXzlHsRB0kWZtjvMfcGIkrLgQMgpjkhvUqyYe6rd0MU0yvcHCeQUaEdgd4V+L
+ RsBUr240bvHFFoajiipUSc6YrSmBIJcrVDhlBVZPT9+gdN3Aq7stlKVbBylEE7HGW2cN
+ veC+2HE7B/twxZvi99kGYpfw3h8uB5gdwYcF5HUxJc4t/rdqeJuA7PzEfE/9SV79QtyE oA==
+Received: from nam02-sn1-obe.outbound.protection.outlook.com
+ (mail-sn1anam02lp2047.outbound.protection.outlook.com [104.47.57.47])
+	by mx0a-00010702.pphosted.com (PPS) with ESMTPS id 3hgd105gnc-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 26 Jul 2022 11:10:50 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=kdr3v4Zqn4mga9/aButiQdJXpDpfy1lmnp65zQCPaSaQsNvtjqErnRuWgOsKYssLIOsxdKSAXOzUhy95dW9GFXOFIJvt042m1/KK5I126VPelUzPi6HCnhnwuUlyA+Ni83zyqHC5dsbTjatekyGbqQhCGx1bmyUFTx3BnTS9JuVs6X6dmzuG1YtvnP6cicfxfbtpDKfJXwPJLBM9nFDbRcPtxQxd5P92vtkRLOv7+KEyZ1VC5usLDK13ptjp+t0C/KZZoIhHj6EI8/SbYeLLTM1o95gs8n/DKzkqFLnDUSr90noZItEsKyKNL976vjc2UTFhLJh8DghF34f2EfI3qA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=dcLjXng2KxiRm6oqAyhPkxa5G+Qo6GOty2LfTd5mbmA=;
+ b=SBYXjywO7gXDvmBSl8K+Rq+J6IAfx24LTRuBJZJ9l8z8ZqciXiYbozz6jElIBXCfx4q2Vo8GKMoBWVaDHg+FSjGkSZ2aM9LEJDSHkxBC2LjXqJh8+7NW0KGLVDYLuepZ0kG6ItH9mwvKVG+0Mcs3bHI6DR3zZVnvtbxwpEaXmkASaIrHzAA2uOLeBS+lkMDcxua0dY75Ty89B2Wk4SJqGw+GYDJgQKRsXO9Onatf60d/ZDlZvEbiLgP1lfBwmATBF3mP5N4RWFnIEa5XxoYd0xOB23Gd5xJ7Q6qanDMnSsV37H99OgLS27m24f3x2sGw04MIpCMmxaFR71MGazfw6w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=ni.com; dmarc=pass action=none header.from=ni.com; dkim=pass
+ header.d=ni.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=kudzu-us.20210112.gappssmtp.com; s=20210112;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=5GQGAj/KtGsunI6Y6Wox/gujOCMLoKzXie9yDIM8DGI=;
-        b=mWLa28qtXmV5Mpv/CcDn54+mkMN5chKZTweW9Nut75zkQEiZoDIfI+kQCrrrNWcRNY
-         BeS3q1R94aEOZUXV287wC6bjHkiOIHrPu0tVPB5cWQ3k/7jNNtpyVOwf3puGOvuwpGKs
-         PMapCt1DvrOpZiUOEBHDvW4YVR+bE6D6044NU3y3TkgiY1TvR3MPnbW4ASvDcsgxGDot
-         k+OeM7OXU6xNFIURupgliz3pxksTDaMqz63IEvcB/O0evwrIdk7rmlI6bjRRa4t/dAZ4
-         HbZlss8Lv6EbkcOfP4qCdcg09HOWVCjW8ebiFGRjf7GDiWIbsGRRn21sbnOVqqLnfNDF
-         Lzew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=5GQGAj/KtGsunI6Y6Wox/gujOCMLoKzXie9yDIM8DGI=;
-        b=oPMOgl7fjkG/odPjNNLsOFkmZKQ406XKWJutHdtOtzN2mljhVNUIAMt7F6A0y//U2k
-         p3EO8r66HecI5esuZW+qScUSLsoNP3nlfznh96YR+FzFxPf30x1wJwLm0ac51fTyltKm
-         NMlVSlbEsjcKjnK81wRv0rxHBDh1+urY24qhKwh01oEZ6gDiT1NyBp9HVk4IKWyapiaC
-         r2OG1gynvQ8qPFNsw04McMRThkF/GQD5BLI/lf4hsVjbQQ/FjnTEma6akATVsEQXR2wW
-         N44CtqQIl6T7gCHvO42cQKeize9xGCq5wZIijmy7WxmPOy8YjHaXNYRW+0hWbKuR+I5B
-         yUOQ==
-X-Gm-Message-State: AJIora+LhmYlBmhuksvzGi2IVzGnkFyOyBQTjtANYLVTp76jHziVD1iY
-	sPaBrb8Bb4v5GrKXzEBB9SJXIg==
-X-Google-Smtp-Source: 
- AGRyM1so4m4aKf4QqOpZlXrde+XoQeemkxdI0dkFIDu7gweYzYqso58IobRuy7wzJe8dLnPIsll/hg==
-X-Received: by 2002:a05:622a:1909:b0:31e:d1b1:5e1d with SMTP id
- w9-20020a05622a190900b0031ed1b15e1dmr14522188qtc.144.1658846718602;
-        Tue, 26 Jul 2022 07:45:18 -0700 (PDT)
-Received: from kudzu.us ([2605:a601:a608:5600::59])
-        by smtp.gmail.com with ESMTPSA id
- h4-20020a05620a400400b006b5652edb93sm12155862qko.48.2022.07.26.07.45.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 26 Jul 2022 07:45:17 -0700 (PDT)
-Date: Tue, 26 Jul 2022 10:45:16 -0400
-From: Jon Mason <jdmason@kudzu.us>
-To: Bartosz Golaszewski <brgl@bgdev.pl>
-Cc: Naveen Saini <naveen.kumar.saini@intel.com>,
-	=?iso-8859-1?Q?Eil=EDs_N=ED_Fhlannag=E1in?= <elizabeth.flanagan@huawei.com>,
-	yocto@lists.yoctoproject.org,
-	openembedded-devel@lists.openembedded.org,
-	Bartosz Golaszewski <bartosz.golaszewski@huawei.com>
-Subject: Re: [meta-zephyr][PATCH v2] zephyr-kernel-src: bump the v3 version
- to v3.1.0
-Message-ID: <Yt/9/P0knXvXR00S@kudzu.us>
-References: <20220726124510.74315-1-brgl@bgdev.pl>
+ d=nio365.onmicrosoft.com; s=selector2-nio365-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=dcLjXng2KxiRm6oqAyhPkxa5G+Qo6GOty2LfTd5mbmA=;
+ b=Sv2jd1vukOdmXhWdq1no+EjCziHBxpmCJKFEURH20Ov61xtdgPk597a6iFCMWOcOSzL6VXJh4qVbq1WJ9jIW+sWc/IkPhBpl/bxB52ZOEoNeZS655RsMdY29+oLNmu+EqXae3Iwc2mhwI+2XkigQY+Q1OGdOMUQa8JbXIbl56A8=
+Received: from SA0PR04MB7386.namprd04.prod.outlook.com (2603:10b6:806:e4::13)
+ by SN6PR04MB4798.namprd04.prod.outlook.com (2603:10b6:805:b2::28) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5458.18; Tue, 26 Jul
+ 2022 16:10:48 +0000
+Received: from SA0PR04MB7386.namprd04.prod.outlook.com
+ ([fe80::b1f0:fc1f:d740:3993]) by SA0PR04MB7386.namprd04.prod.outlook.com
+ ([fe80::b1f0:fc1f:d740:3993%3]) with mapi id 15.20.5458.025; Tue, 26 Jul 2022
+ 16:10:48 +0000
+From: Brenda Streiff <brenda.streiff@ni.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH 1/2] Add python3-pycares 4.2.1
+Date: Tue, 26 Jul 2022 11:10:31 -0500
+Message-Id: <20220726161032.1630170-1-brenda.streiff@ni.com>
+X-Mailer: git-send-email 2.30.2
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SA1P222CA0022.NAMP222.PROD.OUTLOOK.COM
+ (2603:10b6:806:22c::19) To SA0PR04MB7386.namprd04.prod.outlook.com
+ (2603:10b6:806:e4::13)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220726124510.74315-1-brgl@bgdev.pl>
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: eb2e3c3e-197f-45ce-6937-08da6f216779
+X-MS-TrafficTypeDiagnostic: SN6PR04MB4798:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	umPOJ8IOlkSGPLSJEO9c9uZwArtrou2vlpMLFTkQxKRqdemWiV8tct8ULeb368FBNbMyh6+TqCZBEs7uN9k8PIP+wJ/921nHbnu1J7vmIU/v2U3VNBKXXkzA6J56Ze1CNdits0LHmaq1RmUVRFbliR/quoFvTULr48nHCYPY27c4nONAkee4BaA94ixPtel7Of4YxGWNg3GJve+TRCIPfKUolWNQpFFeAJINBhb3zq88TaiDMg82mpq6wiWiuHr4t2Qu7hO08bu8L2t2Pn4g1G51Wp5GWgef47VhuIr1qe2MdvltwbcKHFRqE4XXG+CRnr6uLWb02zpYd3s5wllsbLH8cnGezajraBLF7GuL8YJ6ccvrgJWS1/loD3k9rVAZsmefdXq3ECtNtN7c3z5UrDiyZCb2w8qm38ZrFQB1+fRFYYzbHKnwo3dFYoXGCCwDXw2Chu0Kr+5aVf2iR+CrEtnn2Ga7ink9boOzZst8WvZk1qKVLy8SR19M3IHeAk4NbnWHghobTCz6K6YD6rBq1Wnnun3QvqfZ7wc1tDk+kzx0/z92tcGzjnXKFajI/rKeBn4l2ho9cgeap1LoVtSzTmDJlyDxHaorerM8eYc/QffPULDlTdMq16rCym52iNxd9d1WhbWIIbVdJPXLWdFGv6belSc7EzdCYV/m+t1SV8ljjxALjrJH41Ebn7ZDGBWbydRNFtTSkTua5noh2x5X0Ker/yAsi+4ynItgRJZ8H/z5tQh1y0Rl9vBpSXenxJN3gZd1Lq2iNQfYpeXwnTwPow==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA0PR04MB7386.namprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(136003)(39860400002)(366004)(346002)(396003)(376002)(36756003)(66556008)(66946007)(66476007)(8936002)(8676002)(5660300002)(44832011)(6486002)(478600001)(316002)(6916009)(6506007)(41300700001)(86362001)(6666004)(2616005)(1076003)(186003)(2906002)(38100700002)(83380400001)(6512007)(26005);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?PBbDPcbFzzWUFxjxQKxjJ/nDgPD8wh/1euZB3DvPhMywM1jjUhERPVt3efWZ?=
+ =?us-ascii?Q?kojD8ZNayXUpUWptS5U3xipYZ9+wySXJbVAl1vznVgQ2gTyDx5eVUKlaV9oI?=
+ =?us-ascii?Q?GDcFGdQ8VacT/kUM3TE0CRV0z5wOurfQDnkBoHTbNjB3xKsZ9Bhcl3i/XN1x?=
+ =?us-ascii?Q?Ri8RGKXj9nrRGUroYwgkguNKuwsNqIHCsIWi7xA01Z5LmWtu28Qw7L980uhp?=
+ =?us-ascii?Q?zZLcO7uK8zuxtJmWNsLo/GX7fguZDoUSAADqDTo4//M1ngugL71iJMQHwjx7?=
+ =?us-ascii?Q?YfQzx2CsJTxT/9G7r67+1qmUm8ixIVKhhBetJEFqFlGtIRUEbpfKjyhrvadI?=
+ =?us-ascii?Q?LuDm1mehSR0j9Ogrp2Y1WYXEzoeXH5pFlwr6UbS0Do3zu5cYM4g8DEocftBm?=
+ =?us-ascii?Q?AGdawW9tutonsO+lETGYWazB8aUuOOdZnFg7k/xaMiura1N3Xqo1EKPfwDe5?=
+ =?us-ascii?Q?Z4s6eS1wzD63VzSL+jBwMhKKw1KuTz2rQgI+Dint3AdnypxXW/afho2V8rI8?=
+ =?us-ascii?Q?bqb09axhFcd3s13AcoiF4cFjv+A296VVfiFrCzy5Jgk45wDSTvFS78DicyDm?=
+ =?us-ascii?Q?NJAt7JQsMa7W6tAQ8qMwljsIcLhMhxx6E1bpSFAyXlM3lCBz5GKhNJrZsCjG?=
+ =?us-ascii?Q?JFQKM2OcsH6bx3+KECkCeKbTTxp2ICrEVlMpFxKv4jYJcQR8l1vw6rT5EYRA?=
+ =?us-ascii?Q?hifr5dDfuVTYqx+tEMNf1FI7tKxRMmWRfXx+qavUDIk+mivpCbj1Wc6+T3g2?=
+ =?us-ascii?Q?pLxl87wmEzOCxjPDSj2rhBEOtNIUhRNgMNVuDENuyiZ/RFESS41KAe0x7LUJ?=
+ =?us-ascii?Q?BXLVkMbdNh3EgnKl0bl8m1m5MrY9j6OBddI9+DadKY0qE4u4nzqjDMiaOCXe?=
+ =?us-ascii?Q?rGUB9L4wSVKXVYjsE+V3t2PJPAL2BOL1wtR/sveaGPFIyn4GtfzxKVWYYVWh?=
+ =?us-ascii?Q?Bl4huccO2Wu8bCTT+CjxHVE1zjzjldXcy4qNv7BpjsMS96tfxBfHs8LIus8J?=
+ =?us-ascii?Q?+/sa7eVxSJqPqAArRLzxwIdA4ODEo3siuA0TX8Sj3SkNDkyCHqZ7HxIyNCkk?=
+ =?us-ascii?Q?beMCHYRLwLkD+IqgV8SymQqbdnEeVdDaDBfTiyvu4rGIpta5CCATjN0O3yG/?=
+ =?us-ascii?Q?S7Fo+yS6RGUt0wb2ZDtTeOIBUhdio++36Xxok8mEdGOMqCO3peVGPWizioU4?=
+ =?us-ascii?Q?Yf6qxkfz+6t4LjLj3tN5P9SQWzPPWvCEdyopDyW8rnrV0PX7yOxCDePpSI8r?=
+ =?us-ascii?Q?uF6gnphqX4b2/07lSGX3SW84kW0VSIIyfdkIBUYoApRIRE9594gjerPy9y2g?=
+ =?us-ascii?Q?TxHQ+wUTXCPawtT+75bZIZxvDhj41XG+UUuoBOJxU/kiY76OcOmjcExhz1s4?=
+ =?us-ascii?Q?bbDoHc8tUTaQ9l8JbcwmYv7tjK+OTDYigul8hF86xqG79RPh9cER6jjUhace?=
+ =?us-ascii?Q?dTqkpI95bnngmVGWsvNDll1mUYP6tWbZfEOtX7P5JHek5+318awF/phFVhje?=
+ =?us-ascii?Q?BnNDrx9ngI83V159ATCyt74AFiKnK90iOosDPq55JkY2/PMZcs6XqkwAdOAc?=
+ =?us-ascii?Q?ufxWG+8gBkWfkwuPz5JyjoUy2p2v6F8Q8qB7Dyo4?=
+X-OriginatorOrg: ni.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ eb2e3c3e-197f-45ce-6937-08da6f216779
+X-MS-Exchange-CrossTenant-AuthSource: SA0PR04MB7386.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jul 2022 16:10:48.7897
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 87ba1f9a-44cd-43a6-b008-6fdb45a5204e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 
+ DFqhPvrZmmZuvKfc8Vff1oIlUnU3N8BMcNTCTfcuPD7+RKH3b8jQZQtrPa0KhWa80nlpRadVi/fhmIpr0x6+Cg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR04MB4798
+X-Proofpoint-GUID: 3DO-fotT7vX1DADHQAS_sbO2iqLrDP_-
+X-Proofpoint-ORIG-GUID: 3DO-fotT7vX1DADHQAS_sbO2iqLrDP_-
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
+ definitions=2022-07-26_04,2022-07-26_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_policy_notspam policy=outbound_policy
+ score=30 mlxscore=0
+ impostorscore=0 priorityscore=1501 spamscore=0 phishscore=0 malwarescore=0
+ lowpriorityscore=0 bulkscore=0 adultscore=0 clxscore=1015 suspectscore=0
+ mlxlogscore=895 classifier=spam adjust=30 reason=mlx scancount=1
+ engine=8.12.0-2206140000 definitions=main-2207260062
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Jul 2022 14:45:24 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Jul 2022 16:10:54 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97992
+ https://lists.openembedded.org/g/openembedded-devel/message/97993
 
-On Tue, Jul 26, 2022 at 02:45:10PM +0200, Bartosz Golaszewski wrote:
-> From: Bartosz Golaszewski <bartosz.golaszewski@huawei.com>
-> 
-> This upgrades the 3.x series to using v3.1.0.
-> 
-> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@huawei.com>
-> ---
-> - add a rebased version of the toolchain patch for v3.1
+From: Sergey Kizunov <sergey.kizunov@ni.com>
 
-intel-x86-64 machine isn't happy
-It looks like it's not able to find stdint.h
+pycares is an interface to the c-ares asynchronous DNS library.
 
-https://gitlab.com/jonmason00/meta-zephyr/-/jobs/2771910955
+Signed-off-by: Sergey Kizunov <sergey.kizunov@ni.com>
 
+Updated and converted to new recipe syntax.
 
->  ... 0001-2.7-cmake-add-yocto-toolchain.patch} |  0
->  .../0001-3.1-cmake-add-yocto-toolchain.patch  | 63 +++++++++++++++
->  .../zephyr-kernel/zephyr-kernel-src-2.7.2.inc |  7 +-
->  .../zephyr-kernel/zephyr-kernel-src-3.0.0.inc | 70 -----------------
->  .../zephyr-kernel/zephyr-kernel-src-3.1.0.inc | 76 +++++++++++++++++++
->  .../zephyr-kernel/zephyr-kernel-src.inc       |  5 +-
->  6 files changed, 146 insertions(+), 75 deletions(-)
->  rename meta-zephyr-core/recipes-kernel/zephyr-kernel/files/{0001-cmake-add-yocto-toolchain.patch => 0001-2.7-cmake-add-yocto-toolchain.patch} (100%)
->  create mode 100644 meta-zephyr-core/recipes-kernel/zephyr-kernel/files/0001-3.1-cmake-add-yocto-toolchain.patch
->  delete mode 100644 meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-3.0.0.inc
->  create mode 100644 meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-3.1.0.inc
-> 
-> diff --git a/meta-zephyr-core/recipes-kernel/zephyr-kernel/files/0001-cmake-add-yocto-toolchain.patch b/meta-zephyr-core/recipes-kernel/zephyr-kernel/files/0001-2.7-cmake-add-yocto-toolchain.patch
-> similarity index 100%
-> rename from meta-zephyr-core/recipes-kernel/zephyr-kernel/files/0001-cmake-add-yocto-toolchain.patch
-> rename to meta-zephyr-core/recipes-kernel/zephyr-kernel/files/0001-2.7-cmake-add-yocto-toolchain.patch
-> diff --git a/meta-zephyr-core/recipes-kernel/zephyr-kernel/files/0001-3.1-cmake-add-yocto-toolchain.patch b/meta-zephyr-core/recipes-kernel/zephyr-kernel/files/0001-3.1-cmake-add-yocto-toolchain.patch
-> new file mode 100644
-> index 0000000..a16eabf
-> --- /dev/null
-> +++ b/meta-zephyr-core/recipes-kernel/zephyr-kernel/files/0001-3.1-cmake-add-yocto-toolchain.patch
-> @@ -0,0 +1,63 @@
-> +From 39f1dd116d00b6c2135c4ccd216341dcd2f2917e Mon Sep 17 00:00:00 2001
-> +From: Naveen Saini <naveen.kumar.saini@intel.com>
-> +Date: Tue, 26 Jul 2022 14:12:18 +0200
-> +Subject: [PATCH] cmake: add yocto toolchain
-> +
-> +Upstream status: inappropriate [OE specific]
-> +
-> +Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
-> +---
-> + cmake/compiler/gcc/target.cmake     |  7 -------
-> + cmake/toolchain/yocto/generic.cmake | 13 +++++++++++++
-> + cmake/toolchain/yocto/target.cmake  |  1 +
-> + 3 files changed, 14 insertions(+), 7 deletions(-)
-> + create mode 100644 cmake/toolchain/yocto/generic.cmake
-> + create mode 100644 cmake/toolchain/yocto/target.cmake
-> +
-> +diff --git a/cmake/compiler/gcc/target.cmake b/cmake/compiler/gcc/target.cmake
-> +index 014447e67e..b510f47d59 100644
-> +--- a/cmake/compiler/gcc/target.cmake
-> ++++ b/cmake/compiler/gcc/target.cmake
-> +@@ -94,13 +94,6 @@ execute_process(
-> +   OUTPUT_STRIP_TRAILING_WHITESPACE
-> +   )
-> + 
-> +-assert_exists(LIBGCC_FILE_NAME)
-> +-
-> +-get_filename_component(LIBGCC_DIR ${LIBGCC_FILE_NAME} DIRECTORY)
-> +-
-> +-assert_exists(LIBGCC_DIR)
-> +-
-> +-LIST(APPEND LIB_INCLUDE_DIR "-L\"${LIBGCC_DIR}\"")
-> + LIST(APPEND TOOLCHAIN_LIBS gcc)
-> + 
-> + # For CMake to be able to test if a compiler flag is supported by the
-> +diff --git a/cmake/toolchain/yocto/generic.cmake b/cmake/toolchain/yocto/generic.cmake
-> +new file mode 100644
-> +index 0000000000..45e5777e2a
-> +--- /dev/null
-> ++++ b/cmake/toolchain/yocto/generic.cmake
-> +@@ -0,0 +1,13 @@
-> ++set(COMPILER gcc)
-> ++set(LINKER ld)
-> ++set(BINTOOLS gnu)
-> ++
-> ++set(ZEPHYR_SYSROOT ${ZEPHYR_SYSROOT})
-> ++set(SYSROOT_DIR ${ZEPHYR_SYSROOT})
-> ++set(LIBC_LIBRARY_DIR "\"${SYSROOT_DIR}\"/")
-> ++set(LIBC_INCLUDE_DIR ${SYSROOT_DIR}/include)
-> ++LIST(APPEND TOOLCHAIN_LIBS gcc)
-> ++
-> ++LIST(APPEND LIB_INCLUDE_DIR "-L\"${STAGING_LIBDIR}\"")
-> ++
-> ++set(TOOLCHAIN_LIBS gcc)
-> +diff --git a/cmake/toolchain/yocto/target.cmake b/cmake/toolchain/yocto/target.cmake
-> +new file mode 100644
-> +index 0000000000..9881313609
-> +--- /dev/null
-> ++++ b/cmake/toolchain/yocto/target.cmake
-> +@@ -0,0 +1 @@
-> ++# SPDX-License-Identifier: Apache-2.0
-> +-- 
-> +2.34.1
-> +
-> diff --git a/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-2.7.2.inc b/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-2.7.2.inc
-> index 7a4da21..537a565 100644
-> --- a/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-2.7.2.inc
-> +++ b/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-2.7.2.inc
-> @@ -62,4 +62,9 @@ SRCREV_tfm = "c74be3890c9d975976fde1b1a3b2f5742bec34c0"
->  ZEPHYR_BRANCH = "v2.7-branch"
->  PV = "2.7.2+git${SRCPV}"
->  
-> -SRC_URI:append = " file://dtc.patch"
-> +SRC_URI:append = " \
-> +    file://dtc.patch \
-> +    file://0001-x86-fix-efi-binary-generation-issue-in-cross-compila.patch \
-> +    file://0001-2.7-cmake-add-yocto-toolchain.patch \
-> +    git://github.com/zephyrproject-rtos/hal_cypress.git;protocol=https;nobranch=1;destsuffix=git/modules/hal/cypress;name=cypress \
-> +"
-> diff --git a/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-3.0.0.inc b/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-3.0.0.inc
-> deleted file mode 100644
-> index 64594a0..0000000
-> --- a/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-3.0.0.inc
-> +++ /dev/null
-> @@ -1,70 +0,0 @@
-> -SRCREV_FORMAT = "default_cmsis"
-> -
-> -#
-> -# Generated with:
-> -#
-> -# #!/usr/bin/python3
-> -#
-> -# import yaml
-> -# import sys
-> -#
-> -# if __name__ == "__main__":
-> -#     with open(sys.argv[1], "r") as fd:
-> -#         data = yaml.safe_load(fd)
-> -#
-> -#         for project in data["manifest"]["projects"]:
-> -#             print("SRCREV_{} = \"{}\"".format(project["name"], project["revision"]))
-> -#
-> -
-> -SRCREV_default = "4f8d78ceeb436e82f528511998515f6fc137c6cd"
-> -SRCREV_canopennode = "1052dae561497bef901f931ef75e117c9224aecd"
-> -SRCREV_civetweb = "094aeb41bb93e9199d24d665ee43e9e05d6d7b1c"
-> -SRCREV_cmsis = "b0612c97c1401feeb4160add6462c3627fe90fc7"
-> -SRCREV_edtt = "1fc2e6f7d2a01a01074456f2ef2ccf1f3df7fac1"
-> -SRCREV_fatfs = "09a9d913c61dccbb8ff92d8943b452c614ac5292"
-> -SRCREV_fff = "6ce5ba26486e93d5b7696a3e23f0585932c14b16"
-> -SRCREV_altera = "23c1c1dd7a0c1cc9a399509d1819375847c95b97"
-> -SRCREV_atmel = "9f78f520f6cbb997e5b44fe8ab17dd5bf2448095"
-> -SRCREV_cypress = "81a059f21435bc7e315bccd720da5a9b615bbb50"
-> -SRCREV_espressif = "bcd7565ffa390d5774dc2fbe71a002faa9a7d082"
-> -SRCREV_gigadevice = "242a7f4be7a3136606c7a65169775f7ef85ad444"
-> -SRCREV_infineon = "f1fa8241f8786198ba41155413243de36ed878a5"
-> -SRCREV_microchip = "870d05e6a64ea9548da6b907058b03c8c9420826"
-> -SRCREV_nordic = "a42b016d7c7610489f5f8c79773fedc05ba352ee"
-> -SRCREV_nuvoton = "b4d31f33238713a568e23618845702fadd67386f"
-> -SRCREV_nxp = "9629f15fd80169cc9669e3fbb1260467c3aeb175"
-> -SRCREV_openisa = "40d049f69c50b58ea20473bee14cf93f518bf262"
-> -SRCREV_quicklogic = "b3a66fe6d04d87fd1533a5c8de51d0599fcd08d0"
-> -SRCREV_rpi_pico = "191f5ba46fda49523cdaaef27583d1c875ba2c36"
-> -SRCREV_silabs = "be39d4eebeddac6e18e9c0c3ba1b31ad1e82eaed"
-> -SRCREV_st = "575de9d461aa6f430cf62c58a053675377e700f3"
-> -SRCREV_stm32 = "300109f80730cb2477bfcc706a6602b9870336b3"
-> -SRCREV_telink = "ffcfd6282aa213f1dc0848dbca6279b098f6b143"
-> -SRCREV_ti = "1992a4c536554c4f409c36896eda6abdc414d277"
-> -SRCREV_xtensa = "0e577021bb66e644afd067cd9f7c71ab11b62b3d"
-> -SRCREV_libmetal = "f237c9d420a51cc43bc37d744e41191ad613f348"
-> -SRCREV_littlefs = "33509ed9c3d369cdb9d909cd40c5eea8f64a902c"
-> -SRCREV_loramac-node = "12019623bbad9eb54fe51066847a7cbd4b4eac57"
-> -SRCREV_lvgl = "783c1f78c8e39751fe89d0883c8bce7336f55e94"
-> -SRCREV_lz4 = "8e303c264fc21c2116dc612658003a22e933124d"
-> -SRCREV_mbedtls = "3e3e58a92de76069730c63e0d524f40fea948a61"
-> -SRCREV_mcuboot = "89936c338e46f43cb177a8b928cd80b90f3ace8f"
-> -SRCREV_mipi-sys-t = "d9da086b11cda494d85f4d8a9829f505c2d5e380"
-> -SRCREV_nanopb = "d148bd26718e4c10414f07a7eb1bd24c62e56c5d"
-> -SRCREV_net-tools = "f49bd1354616fae4093bf36e5eaee43c51a55127"
-> -SRCREV_nrf_hw_models = "b8cea37dbdc8fc58cc14b4e19fa850877a9da520"
-> -SRCREV_open-amp = "cfd050ff38a9d028dc211690b2ec35971128e45e"
-> -SRCREV_openthread = "b7aa7686d3f4e326bd25abc234b209159977c26d"
-> -SRCREV_segger = "3a52ab222133193802d3c3b4d21730b9b1f1d2f6"
-> -SRCREV_sof = "500d77e0ac84ac2c969e0d4b2142cca192e893bc"
-> -SRCREV_tflite-micro = "9156d050927012da87079064db59d07f03b8baf6"
-> -SRCREV_tinycbor = "40daca97b478989884bffb5226e9ab73ca54b8c4"
-> -SRCREV_tinycrypt = "3e9a49d2672ec01435ffbf0d788db6d95ef28de0"
-> -SRCREV_TraceRecorderSource = "e8ca3b6a83d19b2fc4738a0d9607190436e5e452"
-> -SRCREV_trusted-firmware-m = "5d32c3e64b3d589548e881eeeeb37d84944c90af"
-> -SRCREV_tf-m-tests = "52814181f0fde6d1422fac204d42cde30c62e40e"
-> -SRCREV_psa-arch-tests = "0aab24602cbef30f6422e7ef1066a8473073e586"
-> -SRCREV_zscilib = "12bfe3f0a9fcbfe3edab7eabc9678b6c62875d34"
-> -
-> -ZEPHYR_BRANCH = "v3.0-branch"
-> -PV = "3.0.0+git${SRCPV}"
-> diff --git a/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-3.1.0.inc b/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-3.1.0.inc
-> new file mode 100644
-> index 0000000..f38d7f9
-> --- /dev/null
-> +++ b/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-3.1.0.inc
-> @@ -0,0 +1,76 @@
-> +SRCREV_FORMAT = "default_cmsis"
-> +
-> +#
-> +# Generated with:
-> +#
-> +# #!/usr/bin/python3
-> +#
-> +# import yaml
-> +# import sys
-> +#
-> +# if __name__ == "__main__":
-> +#     with open(sys.argv[1], "r") as fd:
-> +#         data = yaml.safe_load(fd)
-> +#
-> +#         for project in data["manifest"]["projects"]:
-> +#             print("SRCREV_{} = \"{}\"".format(project["name"], project["revision"]))
-> +#
-> +
-> +SRCREV_default = "2ddd73feafd3316af2c547c34d6969bea637d5c6"
-> +SRCREV_canopennode = "53d3415c14d60f8f4bfca54bfbc5d5a667d7e724"
-> +SRCREV_chre = "0edfe2c2ec656afb910cfab8ed59a5ffd59b87c8"
-> +SRCREV_civetweb = "094aeb41bb93e9199d24d665ee43e9e05d6d7b1c"
-> +SRCREV_cmsis = "5f86244bad4ad5a590e084f0e72ba7a1416c2edf"
-> +SRCREV_edtt = "1ea61a390d2bfcf3b2ecdba8f8b0b98dfdffbd11"
-> +SRCREV_fatfs = "a30531af3a95a9a3ea7d771ea8a578ebfed45514"
-> +SRCREV_fff = "6ce5ba26486e93d5b7696a3e23f0585932c14b16"
-> +SRCREV_altera = "0d225ddd314379b32355a00fb669eacf911e750d"
-> +SRCREV_atmel = "78c5567c05b6b434dd7d98f49156319df4217bac"
-> +SRCREV_espressif = "df85671c5d0405c0747c2939c8dfe808b7e4cf38"
-> +SRCREV_gigadevice = "63a72ca90b7e0d7257211ddc5c79e8c0b940371b"
-> +SRCREV_infineon = "4af06965f57ba1e7d170e6a97d24c33785543a8c"
-> +SRCREV_microchip = "5d079f1683a00b801373bbbbf5d181d4e33b30d5"
-> +SRCREV_nordic = "a85bb3676d61d1ae202088e0d3fec556056b2c9e"
-> +SRCREV_nuvoton = "b4d31f33238713a568e23618845702fadd67386f"
-> +SRCREV_nxp = "2302a1e94f5bc00ce59db4e249b688ad2e959f58"
-> +SRCREV_openisa = "40d049f69c50b58ea20473bee14cf93f518bf262"
-> +SRCREV_quicklogic = "b3a66fe6d04d87fd1533a5c8de51d0599fcd08d0"
-> +SRCREV_rpi_pico = "191f5ba46fda49523cdaaef27583d1c875ba2c36"
-> +SRCREV_silabs = "be39d4eebeddac6e18e9c0c3ba1b31ad1e82eaed"
-> +SRCREV_st = "52a522ca4a8a9ec1e9bb5bb514e1ab6f102863fe"
-> +SRCREV_stm32 = "51b373cd3455b8c2b9babbf6ff41918116a442ac"
-> +SRCREV_telink = "ffcfd6282aa213f1dc0848dbca6279b098f6b143"
-> +SRCREV_ti = "905a5d4134899630071f9383aadaaf266e8f8cd2"
-> +SRCREV_xtensa = "0e577021bb66e644afd067cd9f7c71ab11b62b3d"
-> +SRCREV_libmetal = "850a3c3fd5bc655987021dc9106d8e8cd0f7e061"
-> +SRCREV_liblc3codec = "3951cf1b71ff3be086c9b9b595e473e12301337c"
-> +SRCREV_littlefs = "652f2c5646e79b881e6f3099686ad3b7af9e216c"
-> +SRCREV_loramac-node = "12019623bbad9eb54fe51066847a7cbd4b4eac57"
-> +SRCREV_lvgl = "df717ac87a9fd80246cc8df24554475e59bda21f"
-> +SRCREV_lz4 = "8e303c264fc21c2116dc612658003a22e933124d"
-> +SRCREV_mbedtls = "7fed49c9b9f983ad6416986661ef637459723bcb"
-> +SRCREV_mcuboot = "e58ea98aec6e5539c5f872a98059e461d0155bbb"
-> +SRCREV_mipi-sys-t = "a5163c1800a5243f8b05d84c942da008df4cb666"
-> +SRCREV_nanopb = "d148bd26718e4c10414f07a7eb1bd24c62e56c5d"
-> +SRCREV_net-tools = "f49bd1354616fae4093bf36e5eaee43c51a55127"
-> +SRCREV_nrf_hw_models = "b8cea37dbdc8fc58cc14b4e19fa850877a9da520"
-> +SRCREV_open-amp = "8d53544871e1f300c478224faca6be8384ab0d04"
-> +SRCREV_openthread = "e2a765599aa0379d0f72f0149a9cbafec070c12d"
-> +SRCREV_segger = "3a52ab222133193802d3c3b4d21730b9b1f1d2f6"
-> +SRCREV_sof = "2efc3ea41c0074c6dab5f376fafaa26f52c25c75"
-> +SRCREV_tflite-micro = "9156d050927012da87079064db59d07f03b8baf6"
-> +SRCREV_tinycbor = "9e1f34bc08123aaad7666d3652aaa839e8178b3b"
-> +SRCREV_tinycrypt = "3e9a49d2672ec01435ffbf0d788db6d95ef28de0"
-> +SRCREV_TraceRecorderSource = "e8ca3b6a83d19b2fc4738a0d9607190436e5e452"
-> +SRCREV_trusted-firmware-m = "7c53a6e76130a85303f83b15d868a92fdcd5f5be"
-> +SRCREV_tf-m-tests = "c99a86b295c4887520da9d8402566d7f225c974e"
-> +SRCREV_psa-arch-tests = "a81f9da287569f169d60026916952641b233faa8"
-> +SRCREV_zcbor = "882c489a7d9fdfff31d27666914a78a9eb6976d7"
-> +SRCREV_zscilib = "fc979a8dcb74169c69b02835927bff8f070d6325"
-> +
-> +ZEPHYR_BRANCH = "v3.1-branch"
-> +PV = "3.1.0+git${SRCPV}"
-> +
-> +SRC_URI += " \
-> +    file://0001-3.1-cmake-add-yocto-toolchain.patch \
-> +"
-> diff --git a/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src.inc b/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src.inc
-> index bf9ceaf..e9b35c9 100644
-> --- a/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src.inc
-> +++ b/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src.inc
-> @@ -19,7 +19,6 @@ SRC_URI = "\
->      git://github.com/zephyrproject-rtos/fatfs.git;protocol=https;nobranch=1;destsuffix=git/modules/fs/fatfs;name=fatfs \
->      git://github.com/zephyrproject-rtos/hal_altera.git;protocol=https;nobranch=1;destsuffix=git/modules/hal/altera;name=altera \
->      git://github.com/zephyrproject-rtos/hal_atmel.git;protocol=https;nobranch=1;destsuffix=git/modules/hal/atmel;name=atmel \
-> -    git://github.com/zephyrproject-rtos/hal_cypress.git;protocol=https;nobranch=1;destsuffix=git/modules/hal/cypress;name=cypress \
->      git://github.com/zephyrproject-rtos/hal_espressif.git;protocol=https;nobranch=1;destsuffix=git/modules/hal/espressif;name=espressif \
->      git://github.com/zephyrproject-rtos/hal_infineon.git;protocol=https;nobranch=1;destsuffix=git/modules/hal/infineon;name=infineon \
->      git://github.com/zephyrproject-rtos/hal_microchip.git;protocol=https;nobranch=1;destsuffix=git/modules/hal/microchip;name=microchip \
-> @@ -52,11 +51,9 @@ SRC_URI = "\
->      git://github.com/zephyrproject-rtos/hal_telink.git;protocol=https;nobranch=1;destsuffix=git/modules/hal/telink;name=telink \
->      git://github.com/zephyrproject-rtos/lz4.git;protocol=https;nobranch=1;destsuffix=git/modules/lib/lz4;name=lz4 \
->      git://github.com/zephyrproject-rtos/tflite-micro.git;protocol=https;nobranch=1;destsuffix=git/modules/lib/tflite-micro;name=tflite-micro \
-> -    file://0001-cmake-add-yocto-toolchain.patch \
-> -    file://0001-x86-fix-efi-binary-generation-issue-in-cross-compila.patch \
->  "
->  S = "${WORKDIR}/git"
->  
->  # Default to a stable version
-> -PREFERRED_VERSION_zephyr-kernel ??= "3.0.0"
-> +PREFERRED_VERSION_zephyr-kernel ??= "3.1.0"
->  include zephyr-kernel-src-${PREFERRED_VERSION_zephyr-kernel}.inc
-> -- 
-> 2.34.1
-> 
-> 
+Signed-off-by: Brenda Streiff <brenda.streiff@ni.com>
+---
+ .../python/python3-pycares_4.2.1.bb           | 21 +++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pycares_4.2.1.bb
+
+diff --git a/meta-python/recipes-devtools/python/python3-pycares_4.2.1.bb b/meta-python/recipes-devtools/python/python3-pycares_4.2.1.bb
+new file mode 100644
+index 000000000..dacaaa787
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pycares_4.2.1.bb
+@@ -0,0 +1,21 @@
++SUMMARY = "Python interface for c-ares"
++DESCRIPTION = "\
++pycares is a Python module which provides an interface to c-ares. c-ares is \
++a C library that performs DNS requests and name resolutions asynchronously."
++HOMEPAGE = "https://github.com/saghul/pycares"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b1538fcaea82ebf2313ed648b96c69b1"
++
++SRC_URI[md5sum] = "92fa9622ba42cb895d598910722e80b5"
++SRC_URI[sha256sum] = "735b4f75fd0f595c4e9184da18cd87737f46bc81a64ea41f4edce2b6b68d46d2"
++
++PYPI_PACKAGE = "pycares"
++
++inherit pypi setuptools3
++
++DEPENDS += "${PYTHON_PN}-cffi-native"
++
++RDEPENDS:${PN} += " \
++    ${PYTHON_PN}-cffi \
++    ${PYTHON_PN}-idna \
++"
+-- 
+2.30.2
+
 
