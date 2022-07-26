@@ -1,161 +1,379 @@
-Return-Path: <mgrosshauser@gmx.net>
+Return-Path: <jdmason@kudzu.us>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD70BC00140
-	for <webhook@archiver.kernel.org>; Tue, 26 Jul 2022 13:51:53 +0000 (UTC)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- by mx.groups.io with SMTP id smtpd.web09.6821.1658843505910211744
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E3E8C04A68
+	for <webhook@archiver.kernel.org>; Tue, 26 Jul 2022 14:45:24 +0000 (UTC)
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com
+ [209.85.160.180])
+ by mx.groups.io with SMTP id smtpd.web10.7597.1658846719708448858
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Jul 2022 06:51:46 -0700
+ Tue, 26 Jul 2022 07:45:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmx.net header.s=badeba3b8450 header.b=fL4C9N0I;
- spf=pass (domain: gmx.net, ip: 212.227.17.21, mailfrom: mgrosshauser@gmx.net)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
-	s=badeba3b8450; t=1658843504;
-	bh=tuJpBAzZyCEMDrY8NO/teO7XEVm3fteRy1a2z3TazKA=;
-	h=X-UI-Sender-Class:Date:Subject:To:References:From:In-Reply-To;
-	b=fL4C9N0IDelRbDGsErRLyyrGFraU5bzuavOviLlVoq5vQuQsGwB3Fh92HBJaU5xHH
-	 vkBMNDONH0+DeDLWgWScTIG7nb2EUoOj1+5NO9wO0Dr7pGtDLmIoTOhV37byE/caKy
-	 WF1MgqVwMnMBJR579F8di7eY8vEzoZ8WGjbrDTnw=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from [192.168.200.100] ([80.109.177.11]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N2Dx8-1nUGTx3q50-013gyU for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Jul 2022 15:51:43 +0200
-Message-ID: <8bfc711f-10f0-e786-5c03-71d8c749c986@gmx.net>
-Date: Tue, 26 Jul 2022 15:51:43 +0200
+ dkim=pass header.i=@kudzu-us.20210112.gappssmtp.com header.s=20210112
+ header.b=mWLa28qt;
+ spf=none, err=permanent DNS error (domain: kudzu.us, ip: 209.85.160.180,
+ mailfrom: jdmason@kudzu.us)
+Received: by mail-qt1-f180.google.com with SMTP id e5so10573614qts.1
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 26 Jul 2022 07:45:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=kudzu-us.20210112.gappssmtp.com; s=20210112;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=5GQGAj/KtGsunI6Y6Wox/gujOCMLoKzXie9yDIM8DGI=;
+        b=mWLa28qtXmV5Mpv/CcDn54+mkMN5chKZTweW9Nut75zkQEiZoDIfI+kQCrrrNWcRNY
+         BeS3q1R94aEOZUXV287wC6bjHkiOIHrPu0tVPB5cWQ3k/7jNNtpyVOwf3puGOvuwpGKs
+         PMapCt1DvrOpZiUOEBHDvW4YVR+bE6D6044NU3y3TkgiY1TvR3MPnbW4ASvDcsgxGDot
+         k+OeM7OXU6xNFIURupgliz3pxksTDaMqz63IEvcB/O0evwrIdk7rmlI6bjRRa4t/dAZ4
+         HbZlss8Lv6EbkcOfP4qCdcg09HOWVCjW8ebiFGRjf7GDiWIbsGRRn21sbnOVqqLnfNDF
+         Lzew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=5GQGAj/KtGsunI6Y6Wox/gujOCMLoKzXie9yDIM8DGI=;
+        b=oPMOgl7fjkG/odPjNNLsOFkmZKQ406XKWJutHdtOtzN2mljhVNUIAMt7F6A0y//U2k
+         p3EO8r66HecI5esuZW+qScUSLsoNP3nlfznh96YR+FzFxPf30x1wJwLm0ac51fTyltKm
+         NMlVSlbEsjcKjnK81wRv0rxHBDh1+urY24qhKwh01oEZ6gDiT1NyBp9HVk4IKWyapiaC
+         r2OG1gynvQ8qPFNsw04McMRThkF/GQD5BLI/lf4hsVjbQQ/FjnTEma6akATVsEQXR2wW
+         N44CtqQIl6T7gCHvO42cQKeize9xGCq5wZIijmy7WxmPOy8YjHaXNYRW+0hWbKuR+I5B
+         yUOQ==
+X-Gm-Message-State: AJIora+LhmYlBmhuksvzGi2IVzGnkFyOyBQTjtANYLVTp76jHziVD1iY
+	sPaBrb8Bb4v5GrKXzEBB9SJXIg==
+X-Google-Smtp-Source: 
+ AGRyM1so4m4aKf4QqOpZlXrde+XoQeemkxdI0dkFIDu7gweYzYqso58IobRuy7wzJe8dLnPIsll/hg==
+X-Received: by 2002:a05:622a:1909:b0:31e:d1b1:5e1d with SMTP id
+ w9-20020a05622a190900b0031ed1b15e1dmr14522188qtc.144.1658846718602;
+        Tue, 26 Jul 2022 07:45:18 -0700 (PDT)
+Received: from kudzu.us ([2605:a601:a608:5600::59])
+        by smtp.gmail.com with ESMTPSA id
+ h4-20020a05620a400400b006b5652edb93sm12155862qko.48.2022.07.26.07.45.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 26 Jul 2022 07:45:17 -0700 (PDT)
+Date: Tue, 26 Jul 2022 10:45:16 -0400
+From: Jon Mason <jdmason@kudzu.us>
+To: Bartosz Golaszewski <brgl@bgdev.pl>
+Cc: Naveen Saini <naveen.kumar.saini@intel.com>,
+	=?iso-8859-1?Q?Eil=EDs_N=ED_Fhlannag=E1in?= <elizabeth.flanagan@huawei.com>,
+	yocto@lists.yoctoproject.org,
+	openembedded-devel@lists.openembedded.org,
+	Bartosz Golaszewski <bartosz.golaszewski@huawei.com>
+Subject: Re: [meta-zephyr][PATCH v2] zephyr-kernel-src: bump the v3 version
+ to v3.1.0
+Message-ID: <Yt/9/P0knXvXR00S@kudzu.us>
+References: <20220726124510.74315-1-brgl@bgdev.pl>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [oe] [meta-python][PATCH] Add runtime dependencies for
- python3-supervisor
-Content-Language: en-US
-To: openembedded-devel@lists.openembedded.org
-References: <9b5881cf-15b1-b401-c6bd-5f9232fd0d4c@gmx.net>
- <CABF_=yh7frbvHSe=+EokH+AuU5p7GRSN4+Kb_-qn__1HqyFu_Q@mail.gmail.com>
- <CAMKF1soLr20bKVyC4008rtTSRAK+ehjTADwhMdMRpY7NkJxAmg@mail.gmail.com>
- <CANx9H-DOmascgaTnU=983dVXdixSjEQmDJNro1Zq+KbQBtK-bg@mail.gmail.com>
-From: =?UTF-8?Q?Martin_Gro=c3=9fhauser?= <mgrosshauser@gmx.net>
-In-Reply-To: 
- <CANx9H-DOmascgaTnU=983dVXdixSjEQmDJNro1Zq+KbQBtK-bg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:cA9ywFapjh2UknGtMwADXrWQtJjtEN3oAcf+zjOWtP9zb17DI9x
- Z7w9AePZWcU63iOQ8AlZ8fy0U+zCXRYHdWYE1+8qoz+uot5cuY5S6wgiBOdM3KOUngtMZUx
- BVVKFteYf7uxUuea7WnsfESYPwr5npvWvii+83+wCjycIXj4NAqfhhRPgsvdlgFwF4nzIH0
- NFKgP3Ed8QcAfaNBPUFXA==
-X-UI-Out-Filterresults: notjunk:1;V03:K0:EnMnDJWWEOc=:fAoaCOE7C9INXHsMnBS/OH
- mcQezIIDHo/gDQiQBB0ZJ8y4aKF0sWQjL0NIEgVHjXk48tAKtElX+69wK5/yWd55WRI8BDdB2
- un57NO7kBOW9aSeCUitQhVFKLhsoiLWGnhNFrUi+UIoGNeBKNozWyk52gk91rDd1CzZa7EsvO
- DnYNgZ6T9KfelYHk1cWbO88fSGu+t66vHGC6fJpMRsRf44BXUQZMpDa2la5touoxSZlaaP33G
- 2MhWVCkQsl397QxvcN6sWiBNJAy0Ect8TwkAD+McSNeJ/F4J5/0PowW5qbpa3CgqKSeMzcOtE
- gQh5TaPMnz9rd0DGR7SVgsVE0qOvnJ1BppKdezD+Ar+QLt0xYfJdnFpVodyAQiwnbaQCZOo3T
- 8Cb73thaohjiXKyxOmU7WHSblj7+7vjhSiwmzl5BZ2h88twy84tvBc9ysPW1zWJe3Q9lT3+pv
- rQqPnl8KZbWivR2FIys+nB7wnaWfpaqaiS6BymnrRkUq13HWXxhXKEO6Tm9WtMq5dwMRGpaqs
- Tfpy2v8s8fXxrECSYOog7XfnZbhsgkyQL5eK1x6TbvUIKtIcGPDvrOY1tKz4NHtz51FuqNG+A
- Fi5VWetD/xyaATdELINAXJ70L/rCOL+0pJ1OWMuPgVCpitzdtuO+cx3sBLBhQySvsFiJI0nS4
- mDMe92YpGJs6Z7gagM/jIJOaMr/Cr/vYSTvDiLrSaciiGhg7/Dl6DfHT/IMPC3AhKr4d3j5Ee
- FSgdmFesv83h/P6EIJUlenTAZZPlkemtuqEx8dmhmzwu9u/1fb2yKCcgwdIHOXS6ylfRea0E0
- AoGsUBcrzu6uT9H303JZXMh0sVckH3D6ZVkcbWPnnGeAPi0ghdsIx4GP3xFu82QJcp6Xicug3
- pO55pCHfcmS5WB28a9yovnULW+W1bjS6bS2GM+IlkSrwIqdx/pqyvqRwLRCRRZyt36JzbcDsM
- BuzOc+qkHYlV9KXRaWGZ4BzwXnQGn5G0TN2U7fC2ADU1VqYdsgNUkQVpTWEn4xIZA2zzHcE1K
- VilaeNVJO2FHeLSSXP3jstkNUzo7dfnj5hF5+7tGkvhVpFvWuIk95vFufRRBEGquBMOLran5g
- 2OXSHOzrsYkXGjXMd1FuBylS/e5QQ3UqZInaJ0/LzdYxydgFzjGiBk98Q==
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220726124510.74315-1-brgl@bgdev.pl>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Jul 2022 13:51:53 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Jul 2022 14:45:24 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97991
+ https://lists.openembedded.org/g/openembedded-devel/message/97992
+
+On Tue, Jul 26, 2022 at 02:45:10PM +0200, Bartosz Golaszewski wrote:
+> From: Bartosz Golaszewski <bartosz.golaszewski@huawei.com>
+> 
+> This upgrades the 3.x series to using v3.1.0.
+> 
+> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@huawei.com>
+> ---
+> - add a rebased version of the toolchain patch for v3.1
+
+intel-x86-64 machine isn't happy
+It looks like it's not able to find stdint.h
+
+https://gitlab.com/jonmason00/meta-zephyr/-/jobs/2771910955
 
 
-
-On 25.07.22 05:21, Tim Orling wrote:
->
->
-> On Sun, Jul 24, 2022 at 7:01 PM Khem Raj <raj.khem@gmail.com <mailto:raj=
-.khem@gmail.com>> wrote:
->
->     On Sun, Jul 24, 2022 at 3:31 PM Jan Vermaete <jan.vermaete@gmail.com=
- <mailto:jan.vermaete@gmail.com>> wrote:
->      >
->      > Hi,
->      >
->      > Could it be it should be '${PYTHON_PN}-setuptools-native' iso=C2=
-=A0 '${PYTHON_PN}-setuptools' ?
->
->     rdep on a native package wont be a good thing.
->      >
->      > Br
->      >
->      > On Fri, Jul 22, 2022 at 9:39 PM Martin Gro=C3=9Fhauser <mgrosshau=
-ser@gmx.net <mailto:mgrosshauser@gmx.net>> wrote:
->      >>
->      >> Running supervisord without these fails with import errors. smtp=
-d might look strange, but provides required asynchat.py.
->      >> ---
->      >>=C2=A0 =C2=A0.../recipes-devtools/python/python3-supervisor_4.2.4=
-.bb <http://python3-supervisor_4.2.4.bb>=C2=A0 =C2=A0 =C2=A0 | 5 +++++
->      >>=C2=A0 =C2=A01 file changed, 5 insertions(+)
->      >>
->      >> diff --git a/meta-python/recipes-devtools/python/python3-supervi=
-sor_4.2.4.bb <http://python3-supervisor_4.2.4.bb> b/meta-python/recipes-de=
-vtools/python/python3-supervisor_4.2.4.bb <http://python3-supervisor_4.2.4=
-.bb>
->      >> index fdd8a76cf..7da29e39b 100644
->      >> --- a/meta-python/recipes-devtools/python/python3-supervisor_4.2=
-.4.bb <http://python3-supervisor_4.2.4.bb>
->      >> +++ b/meta-python/recipes-devtools/python/python3-supervisor_4.2=
-.4.bb <http://python3-supervisor_4.2.4.bb>
->      >> @@ -13,6 +13,11 @@ PYPI_PACKAGE =3D "supervisor"
->      >>=C2=A0 =C2=A0inherit pypi systemd setuptools3
->      >>=C2=A0 =C2=A0RDEPENDS:${PN} =3D "\
->      >>=C2=A0 =C2=A0 =C2=A0 =C2=A0${PYTHON_PN}-meld3 \
->      >> +=C2=A0 =C2=A0 ${PYTHON_PN}-io \
->      >> +=C2=A0 =C2=A0 ${PYTHON_PN}-xmlrpc \
->      >> +=C2=A0 =C2=A0 ${PYTHON_PN}-resource \
->      >> +=C2=A0 =C2=A0 ${PYTHON_PN}-setuptools \
->      >> +=C2=A0 =C2=A0 ${PYTHON_PN}-smtpd \
->      >>=C2=A0 =C2=A0"
->
->
-> FWIW, we don=E2=80=99t need to carry the ${PYTHON_PN} if the version no =
-longer supports python 2.
-
-I submitted a revised patch (v2) fixing that.
-
->
->
->      >>
->      >>=C2=A0 =C2=A0SRC_URI +=3D "file://supervisord.conf \
->      >> --
->      >> 2.25.1
->      >>
->      >>
->      >>
->      >>
->      >
->      >
->      > --
->      > Jan Vermaete
->      > =E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gar=
-y Hamel
->      >
->      >
->      >
->
->
->
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#97967): https://lists.openembedded.org/g/openembedde=
-d-devel/message/97967
-> Mute This Topic: https://lists.openembedded.org/mt/92555239/7053818
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [=
-mgrosshauser@gmx.net]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+>  ... 0001-2.7-cmake-add-yocto-toolchain.patch} |  0
+>  .../0001-3.1-cmake-add-yocto-toolchain.patch  | 63 +++++++++++++++
+>  .../zephyr-kernel/zephyr-kernel-src-2.7.2.inc |  7 +-
+>  .../zephyr-kernel/zephyr-kernel-src-3.0.0.inc | 70 -----------------
+>  .../zephyr-kernel/zephyr-kernel-src-3.1.0.inc | 76 +++++++++++++++++++
+>  .../zephyr-kernel/zephyr-kernel-src.inc       |  5 +-
+>  6 files changed, 146 insertions(+), 75 deletions(-)
+>  rename meta-zephyr-core/recipes-kernel/zephyr-kernel/files/{0001-cmake-add-yocto-toolchain.patch => 0001-2.7-cmake-add-yocto-toolchain.patch} (100%)
+>  create mode 100644 meta-zephyr-core/recipes-kernel/zephyr-kernel/files/0001-3.1-cmake-add-yocto-toolchain.patch
+>  delete mode 100644 meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-3.0.0.inc
+>  create mode 100644 meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-3.1.0.inc
+> 
+> diff --git a/meta-zephyr-core/recipes-kernel/zephyr-kernel/files/0001-cmake-add-yocto-toolchain.patch b/meta-zephyr-core/recipes-kernel/zephyr-kernel/files/0001-2.7-cmake-add-yocto-toolchain.patch
+> similarity index 100%
+> rename from meta-zephyr-core/recipes-kernel/zephyr-kernel/files/0001-cmake-add-yocto-toolchain.patch
+> rename to meta-zephyr-core/recipes-kernel/zephyr-kernel/files/0001-2.7-cmake-add-yocto-toolchain.patch
+> diff --git a/meta-zephyr-core/recipes-kernel/zephyr-kernel/files/0001-3.1-cmake-add-yocto-toolchain.patch b/meta-zephyr-core/recipes-kernel/zephyr-kernel/files/0001-3.1-cmake-add-yocto-toolchain.patch
+> new file mode 100644
+> index 0000000..a16eabf
+> --- /dev/null
+> +++ b/meta-zephyr-core/recipes-kernel/zephyr-kernel/files/0001-3.1-cmake-add-yocto-toolchain.patch
+> @@ -0,0 +1,63 @@
+> +From 39f1dd116d00b6c2135c4ccd216341dcd2f2917e Mon Sep 17 00:00:00 2001
+> +From: Naveen Saini <naveen.kumar.saini@intel.com>
+> +Date: Tue, 26 Jul 2022 14:12:18 +0200
+> +Subject: [PATCH] cmake: add yocto toolchain
+> +
+> +Upstream status: inappropriate [OE specific]
+> +
+> +Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+> +---
+> + cmake/compiler/gcc/target.cmake     |  7 -------
+> + cmake/toolchain/yocto/generic.cmake | 13 +++++++++++++
+> + cmake/toolchain/yocto/target.cmake  |  1 +
+> + 3 files changed, 14 insertions(+), 7 deletions(-)
+> + create mode 100644 cmake/toolchain/yocto/generic.cmake
+> + create mode 100644 cmake/toolchain/yocto/target.cmake
+> +
+> +diff --git a/cmake/compiler/gcc/target.cmake b/cmake/compiler/gcc/target.cmake
+> +index 014447e67e..b510f47d59 100644
+> +--- a/cmake/compiler/gcc/target.cmake
+> ++++ b/cmake/compiler/gcc/target.cmake
+> +@@ -94,13 +94,6 @@ execute_process(
+> +   OUTPUT_STRIP_TRAILING_WHITESPACE
+> +   )
+> + 
+> +-assert_exists(LIBGCC_FILE_NAME)
+> +-
+> +-get_filename_component(LIBGCC_DIR ${LIBGCC_FILE_NAME} DIRECTORY)
+> +-
+> +-assert_exists(LIBGCC_DIR)
+> +-
+> +-LIST(APPEND LIB_INCLUDE_DIR "-L\"${LIBGCC_DIR}\"")
+> + LIST(APPEND TOOLCHAIN_LIBS gcc)
+> + 
+> + # For CMake to be able to test if a compiler flag is supported by the
+> +diff --git a/cmake/toolchain/yocto/generic.cmake b/cmake/toolchain/yocto/generic.cmake
+> +new file mode 100644
+> +index 0000000000..45e5777e2a
+> +--- /dev/null
+> ++++ b/cmake/toolchain/yocto/generic.cmake
+> +@@ -0,0 +1,13 @@
+> ++set(COMPILER gcc)
+> ++set(LINKER ld)
+> ++set(BINTOOLS gnu)
+> ++
+> ++set(ZEPHYR_SYSROOT ${ZEPHYR_SYSROOT})
+> ++set(SYSROOT_DIR ${ZEPHYR_SYSROOT})
+> ++set(LIBC_LIBRARY_DIR "\"${SYSROOT_DIR}\"/")
+> ++set(LIBC_INCLUDE_DIR ${SYSROOT_DIR}/include)
+> ++LIST(APPEND TOOLCHAIN_LIBS gcc)
+> ++
+> ++LIST(APPEND LIB_INCLUDE_DIR "-L\"${STAGING_LIBDIR}\"")
+> ++
+> ++set(TOOLCHAIN_LIBS gcc)
+> +diff --git a/cmake/toolchain/yocto/target.cmake b/cmake/toolchain/yocto/target.cmake
+> +new file mode 100644
+> +index 0000000000..9881313609
+> +--- /dev/null
+> ++++ b/cmake/toolchain/yocto/target.cmake
+> +@@ -0,0 +1 @@
+> ++# SPDX-License-Identifier: Apache-2.0
+> +-- 
+> +2.34.1
+> +
+> diff --git a/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-2.7.2.inc b/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-2.7.2.inc
+> index 7a4da21..537a565 100644
+> --- a/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-2.7.2.inc
+> +++ b/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-2.7.2.inc
+> @@ -62,4 +62,9 @@ SRCREV_tfm = "c74be3890c9d975976fde1b1a3b2f5742bec34c0"
+>  ZEPHYR_BRANCH = "v2.7-branch"
+>  PV = "2.7.2+git${SRCPV}"
+>  
+> -SRC_URI:append = " file://dtc.patch"
+> +SRC_URI:append = " \
+> +    file://dtc.patch \
+> +    file://0001-x86-fix-efi-binary-generation-issue-in-cross-compila.patch \
+> +    file://0001-2.7-cmake-add-yocto-toolchain.patch \
+> +    git://github.com/zephyrproject-rtos/hal_cypress.git;protocol=https;nobranch=1;destsuffix=git/modules/hal/cypress;name=cypress \
+> +"
+> diff --git a/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-3.0.0.inc b/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-3.0.0.inc
+> deleted file mode 100644
+> index 64594a0..0000000
+> --- a/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-3.0.0.inc
+> +++ /dev/null
+> @@ -1,70 +0,0 @@
+> -SRCREV_FORMAT = "default_cmsis"
+> -
+> -#
+> -# Generated with:
+> -#
+> -# #!/usr/bin/python3
+> -#
+> -# import yaml
+> -# import sys
+> -#
+> -# if __name__ == "__main__":
+> -#     with open(sys.argv[1], "r") as fd:
+> -#         data = yaml.safe_load(fd)
+> -#
+> -#         for project in data["manifest"]["projects"]:
+> -#             print("SRCREV_{} = \"{}\"".format(project["name"], project["revision"]))
+> -#
+> -
+> -SRCREV_default = "4f8d78ceeb436e82f528511998515f6fc137c6cd"
+> -SRCREV_canopennode = "1052dae561497bef901f931ef75e117c9224aecd"
+> -SRCREV_civetweb = "094aeb41bb93e9199d24d665ee43e9e05d6d7b1c"
+> -SRCREV_cmsis = "b0612c97c1401feeb4160add6462c3627fe90fc7"
+> -SRCREV_edtt = "1fc2e6f7d2a01a01074456f2ef2ccf1f3df7fac1"
+> -SRCREV_fatfs = "09a9d913c61dccbb8ff92d8943b452c614ac5292"
+> -SRCREV_fff = "6ce5ba26486e93d5b7696a3e23f0585932c14b16"
+> -SRCREV_altera = "23c1c1dd7a0c1cc9a399509d1819375847c95b97"
+> -SRCREV_atmel = "9f78f520f6cbb997e5b44fe8ab17dd5bf2448095"
+> -SRCREV_cypress = "81a059f21435bc7e315bccd720da5a9b615bbb50"
+> -SRCREV_espressif = "bcd7565ffa390d5774dc2fbe71a002faa9a7d082"
+> -SRCREV_gigadevice = "242a7f4be7a3136606c7a65169775f7ef85ad444"
+> -SRCREV_infineon = "f1fa8241f8786198ba41155413243de36ed878a5"
+> -SRCREV_microchip = "870d05e6a64ea9548da6b907058b03c8c9420826"
+> -SRCREV_nordic = "a42b016d7c7610489f5f8c79773fedc05ba352ee"
+> -SRCREV_nuvoton = "b4d31f33238713a568e23618845702fadd67386f"
+> -SRCREV_nxp = "9629f15fd80169cc9669e3fbb1260467c3aeb175"
+> -SRCREV_openisa = "40d049f69c50b58ea20473bee14cf93f518bf262"
+> -SRCREV_quicklogic = "b3a66fe6d04d87fd1533a5c8de51d0599fcd08d0"
+> -SRCREV_rpi_pico = "191f5ba46fda49523cdaaef27583d1c875ba2c36"
+> -SRCREV_silabs = "be39d4eebeddac6e18e9c0c3ba1b31ad1e82eaed"
+> -SRCREV_st = "575de9d461aa6f430cf62c58a053675377e700f3"
+> -SRCREV_stm32 = "300109f80730cb2477bfcc706a6602b9870336b3"
+> -SRCREV_telink = "ffcfd6282aa213f1dc0848dbca6279b098f6b143"
+> -SRCREV_ti = "1992a4c536554c4f409c36896eda6abdc414d277"
+> -SRCREV_xtensa = "0e577021bb66e644afd067cd9f7c71ab11b62b3d"
+> -SRCREV_libmetal = "f237c9d420a51cc43bc37d744e41191ad613f348"
+> -SRCREV_littlefs = "33509ed9c3d369cdb9d909cd40c5eea8f64a902c"
+> -SRCREV_loramac-node = "12019623bbad9eb54fe51066847a7cbd4b4eac57"
+> -SRCREV_lvgl = "783c1f78c8e39751fe89d0883c8bce7336f55e94"
+> -SRCREV_lz4 = "8e303c264fc21c2116dc612658003a22e933124d"
+> -SRCREV_mbedtls = "3e3e58a92de76069730c63e0d524f40fea948a61"
+> -SRCREV_mcuboot = "89936c338e46f43cb177a8b928cd80b90f3ace8f"
+> -SRCREV_mipi-sys-t = "d9da086b11cda494d85f4d8a9829f505c2d5e380"
+> -SRCREV_nanopb = "d148bd26718e4c10414f07a7eb1bd24c62e56c5d"
+> -SRCREV_net-tools = "f49bd1354616fae4093bf36e5eaee43c51a55127"
+> -SRCREV_nrf_hw_models = "b8cea37dbdc8fc58cc14b4e19fa850877a9da520"
+> -SRCREV_open-amp = "cfd050ff38a9d028dc211690b2ec35971128e45e"
+> -SRCREV_openthread = "b7aa7686d3f4e326bd25abc234b209159977c26d"
+> -SRCREV_segger = "3a52ab222133193802d3c3b4d21730b9b1f1d2f6"
+> -SRCREV_sof = "500d77e0ac84ac2c969e0d4b2142cca192e893bc"
+> -SRCREV_tflite-micro = "9156d050927012da87079064db59d07f03b8baf6"
+> -SRCREV_tinycbor = "40daca97b478989884bffb5226e9ab73ca54b8c4"
+> -SRCREV_tinycrypt = "3e9a49d2672ec01435ffbf0d788db6d95ef28de0"
+> -SRCREV_TraceRecorderSource = "e8ca3b6a83d19b2fc4738a0d9607190436e5e452"
+> -SRCREV_trusted-firmware-m = "5d32c3e64b3d589548e881eeeeb37d84944c90af"
+> -SRCREV_tf-m-tests = "52814181f0fde6d1422fac204d42cde30c62e40e"
+> -SRCREV_psa-arch-tests = "0aab24602cbef30f6422e7ef1066a8473073e586"
+> -SRCREV_zscilib = "12bfe3f0a9fcbfe3edab7eabc9678b6c62875d34"
+> -
+> -ZEPHYR_BRANCH = "v3.0-branch"
+> -PV = "3.0.0+git${SRCPV}"
+> diff --git a/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-3.1.0.inc b/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-3.1.0.inc
+> new file mode 100644
+> index 0000000..f38d7f9
+> --- /dev/null
+> +++ b/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src-3.1.0.inc
+> @@ -0,0 +1,76 @@
+> +SRCREV_FORMAT = "default_cmsis"
+> +
+> +#
+> +# Generated with:
+> +#
+> +# #!/usr/bin/python3
+> +#
+> +# import yaml
+> +# import sys
+> +#
+> +# if __name__ == "__main__":
+> +#     with open(sys.argv[1], "r") as fd:
+> +#         data = yaml.safe_load(fd)
+> +#
+> +#         for project in data["manifest"]["projects"]:
+> +#             print("SRCREV_{} = \"{}\"".format(project["name"], project["revision"]))
+> +#
+> +
+> +SRCREV_default = "2ddd73feafd3316af2c547c34d6969bea637d5c6"
+> +SRCREV_canopennode = "53d3415c14d60f8f4bfca54bfbc5d5a667d7e724"
+> +SRCREV_chre = "0edfe2c2ec656afb910cfab8ed59a5ffd59b87c8"
+> +SRCREV_civetweb = "094aeb41bb93e9199d24d665ee43e9e05d6d7b1c"
+> +SRCREV_cmsis = "5f86244bad4ad5a590e084f0e72ba7a1416c2edf"
+> +SRCREV_edtt = "1ea61a390d2bfcf3b2ecdba8f8b0b98dfdffbd11"
+> +SRCREV_fatfs = "a30531af3a95a9a3ea7d771ea8a578ebfed45514"
+> +SRCREV_fff = "6ce5ba26486e93d5b7696a3e23f0585932c14b16"
+> +SRCREV_altera = "0d225ddd314379b32355a00fb669eacf911e750d"
+> +SRCREV_atmel = "78c5567c05b6b434dd7d98f49156319df4217bac"
+> +SRCREV_espressif = "df85671c5d0405c0747c2939c8dfe808b7e4cf38"
+> +SRCREV_gigadevice = "63a72ca90b7e0d7257211ddc5c79e8c0b940371b"
+> +SRCREV_infineon = "4af06965f57ba1e7d170e6a97d24c33785543a8c"
+> +SRCREV_microchip = "5d079f1683a00b801373bbbbf5d181d4e33b30d5"
+> +SRCREV_nordic = "a85bb3676d61d1ae202088e0d3fec556056b2c9e"
+> +SRCREV_nuvoton = "b4d31f33238713a568e23618845702fadd67386f"
+> +SRCREV_nxp = "2302a1e94f5bc00ce59db4e249b688ad2e959f58"
+> +SRCREV_openisa = "40d049f69c50b58ea20473bee14cf93f518bf262"
+> +SRCREV_quicklogic = "b3a66fe6d04d87fd1533a5c8de51d0599fcd08d0"
+> +SRCREV_rpi_pico = "191f5ba46fda49523cdaaef27583d1c875ba2c36"
+> +SRCREV_silabs = "be39d4eebeddac6e18e9c0c3ba1b31ad1e82eaed"
+> +SRCREV_st = "52a522ca4a8a9ec1e9bb5bb514e1ab6f102863fe"
+> +SRCREV_stm32 = "51b373cd3455b8c2b9babbf6ff41918116a442ac"
+> +SRCREV_telink = "ffcfd6282aa213f1dc0848dbca6279b098f6b143"
+> +SRCREV_ti = "905a5d4134899630071f9383aadaaf266e8f8cd2"
+> +SRCREV_xtensa = "0e577021bb66e644afd067cd9f7c71ab11b62b3d"
+> +SRCREV_libmetal = "850a3c3fd5bc655987021dc9106d8e8cd0f7e061"
+> +SRCREV_liblc3codec = "3951cf1b71ff3be086c9b9b595e473e12301337c"
+> +SRCREV_littlefs = "652f2c5646e79b881e6f3099686ad3b7af9e216c"
+> +SRCREV_loramac-node = "12019623bbad9eb54fe51066847a7cbd4b4eac57"
+> +SRCREV_lvgl = "df717ac87a9fd80246cc8df24554475e59bda21f"
+> +SRCREV_lz4 = "8e303c264fc21c2116dc612658003a22e933124d"
+> +SRCREV_mbedtls = "7fed49c9b9f983ad6416986661ef637459723bcb"
+> +SRCREV_mcuboot = "e58ea98aec6e5539c5f872a98059e461d0155bbb"
+> +SRCREV_mipi-sys-t = "a5163c1800a5243f8b05d84c942da008df4cb666"
+> +SRCREV_nanopb = "d148bd26718e4c10414f07a7eb1bd24c62e56c5d"
+> +SRCREV_net-tools = "f49bd1354616fae4093bf36e5eaee43c51a55127"
+> +SRCREV_nrf_hw_models = "b8cea37dbdc8fc58cc14b4e19fa850877a9da520"
+> +SRCREV_open-amp = "8d53544871e1f300c478224faca6be8384ab0d04"
+> +SRCREV_openthread = "e2a765599aa0379d0f72f0149a9cbafec070c12d"
+> +SRCREV_segger = "3a52ab222133193802d3c3b4d21730b9b1f1d2f6"
+> +SRCREV_sof = "2efc3ea41c0074c6dab5f376fafaa26f52c25c75"
+> +SRCREV_tflite-micro = "9156d050927012da87079064db59d07f03b8baf6"
+> +SRCREV_tinycbor = "9e1f34bc08123aaad7666d3652aaa839e8178b3b"
+> +SRCREV_tinycrypt = "3e9a49d2672ec01435ffbf0d788db6d95ef28de0"
+> +SRCREV_TraceRecorderSource = "e8ca3b6a83d19b2fc4738a0d9607190436e5e452"
+> +SRCREV_trusted-firmware-m = "7c53a6e76130a85303f83b15d868a92fdcd5f5be"
+> +SRCREV_tf-m-tests = "c99a86b295c4887520da9d8402566d7f225c974e"
+> +SRCREV_psa-arch-tests = "a81f9da287569f169d60026916952641b233faa8"
+> +SRCREV_zcbor = "882c489a7d9fdfff31d27666914a78a9eb6976d7"
+> +SRCREV_zscilib = "fc979a8dcb74169c69b02835927bff8f070d6325"
+> +
+> +ZEPHYR_BRANCH = "v3.1-branch"
+> +PV = "3.1.0+git${SRCPV}"
+> +
+> +SRC_URI += " \
+> +    file://0001-3.1-cmake-add-yocto-toolchain.patch \
+> +"
+> diff --git a/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src.inc b/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src.inc
+> index bf9ceaf..e9b35c9 100644
+> --- a/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src.inc
+> +++ b/meta-zephyr-core/recipes-kernel/zephyr-kernel/zephyr-kernel-src.inc
+> @@ -19,7 +19,6 @@ SRC_URI = "\
+>      git://github.com/zephyrproject-rtos/fatfs.git;protocol=https;nobranch=1;destsuffix=git/modules/fs/fatfs;name=fatfs \
+>      git://github.com/zephyrproject-rtos/hal_altera.git;protocol=https;nobranch=1;destsuffix=git/modules/hal/altera;name=altera \
+>      git://github.com/zephyrproject-rtos/hal_atmel.git;protocol=https;nobranch=1;destsuffix=git/modules/hal/atmel;name=atmel \
+> -    git://github.com/zephyrproject-rtos/hal_cypress.git;protocol=https;nobranch=1;destsuffix=git/modules/hal/cypress;name=cypress \
+>      git://github.com/zephyrproject-rtos/hal_espressif.git;protocol=https;nobranch=1;destsuffix=git/modules/hal/espressif;name=espressif \
+>      git://github.com/zephyrproject-rtos/hal_infineon.git;protocol=https;nobranch=1;destsuffix=git/modules/hal/infineon;name=infineon \
+>      git://github.com/zephyrproject-rtos/hal_microchip.git;protocol=https;nobranch=1;destsuffix=git/modules/hal/microchip;name=microchip \
+> @@ -52,11 +51,9 @@ SRC_URI = "\
+>      git://github.com/zephyrproject-rtos/hal_telink.git;protocol=https;nobranch=1;destsuffix=git/modules/hal/telink;name=telink \
+>      git://github.com/zephyrproject-rtos/lz4.git;protocol=https;nobranch=1;destsuffix=git/modules/lib/lz4;name=lz4 \
+>      git://github.com/zephyrproject-rtos/tflite-micro.git;protocol=https;nobranch=1;destsuffix=git/modules/lib/tflite-micro;name=tflite-micro \
+> -    file://0001-cmake-add-yocto-toolchain.patch \
+> -    file://0001-x86-fix-efi-binary-generation-issue-in-cross-compila.patch \
+>  "
+>  S = "${WORKDIR}/git"
+>  
+>  # Default to a stable version
+> -PREFERRED_VERSION_zephyr-kernel ??= "3.0.0"
+> +PREFERRED_VERSION_zephyr-kernel ??= "3.1.0"
+>  include zephyr-kernel-src-${PREFERRED_VERSION_zephyr-kernel}.inc
+> -- 
+> 2.34.1
+> 
+> 
 
