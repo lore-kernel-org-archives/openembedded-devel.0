@@ -1,185 +1,124 @@
-Return-Path: <brenda.streiff@ni.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 694D6C00140
-	for <webhook@archiver.kernel.org>; Tue, 26 Jul 2022 16:10:54 +0000 (UTC)
-Received: from mx0b-00010702.pphosted.com (mx0b-00010702.pphosted.com
- [148.163.156.75])
- by mx.groups.io with SMTP id smtpd.web10.8689.1658851852675378348
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8DEBC00140
+	for <webhook@archiver.kernel.org>; Tue, 26 Jul 2022 17:34:34 +0000 (UTC)
+Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com
+ [209.85.222.177])
+ by mx.groups.io with SMTP id smtpd.web08.9834.1658856870279061215
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Jul 2022 09:10:52 -0700
+ Tue, 26 Jul 2022 10:34:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ni.com header.s=pps11062020 header.b=CmLEHKRx;
- spf=pass (domain: ni.com, ip: 148.163.156.75,
- mailfrom: prvs=420681fa7e=brenda.streiff@ni.com)
-Received: from pps.filterd (m0098780.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
- 26Q8jnke022221
-	for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Jul 2022 11:10:52 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ni.com;
- h=from : to : subject :
- date : message-id : in-reply-to : references : content-transfer-encoding :
- content-type : mime-version; s=PPS11062020;
- bh=ramhDIGivqV6a/W097Lacas+Q+/BXxvv5XqrvgEM2UA=;
- b=CmLEHKRxQIUk5sxB0rDaEvyK/IK0qUBcPvHgCzBziGSxNvHT+ET9D+1tMP3otuQhm4Xm
- LsoHw8nQvSZbDnbFEP8+ADQqXHNzgwmgY5/HVxF5RoyTO5SxZfynmTwH2lsjk1u/GDWn
- BkpPWxI0ZvJfwA82FPShQYmFAAXt+J9RbFze/wVFpkjmYOJUj4EEYhJxDvfsFP1llUDQ
- A+dmAkOPh6Iv01MJtKkUsez3gMHch9HToNFfx4hiHct6ndO7K398TDDQXqsk1XO6Q774
- C6p7cgBZum4Cx+Q7qBcyHF3wdSivv3+uX9dm0loWbMwHX5EN6RygSqYA3Hi7TbqSdn3U /w==
-Received: from nam04-dm6-obe.outbound.protection.outlook.com
- (mail-dm6nam04lp2046.outbound.protection.outlook.com [104.47.73.46])
-	by mx0a-00010702.pphosted.com (PPS) with ESMTPS id 3hgegu5cs0-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Jul 2022 11:10:52 -0500
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=oR2qgwj6c5mwB6/0lMtBiaax247iZBbpEJ/txD4fzDypryjg87eQtWIUY/Etc8Hh8Cw2ALOm1jXGew90Ln5o3beR3HMLozSsfRmHDBvUmMz5vpPqQQcZ5/UtVW1+zeUs2Ctw77mzl5IohDEyvBfXdoEpxx1kvcQQ3CTX0HP5HC7Wkp+fv7UYma91DJj/fy1MVJkCRNxOzGVFaaXd4NMoCgfTI4m0u0NgGUN+FswGEAv7mPOpJ0Uk7mg7V46aDthNxvVqLFpQZS1G8vkMP0oVkso0BWzj7pxYaFLhp/kKXA7ikTyc+e4FRvnWKIDR1oVH/p6vdakZYzggRhdNETLJ0g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ramhDIGivqV6a/W097Lacas+Q+/BXxvv5XqrvgEM2UA=;
- b=jC3SqnkEYovTSNJpF3VBb8MgjpuGWzOPi++7Pu0Nyy+fJjLlk2hjinWjQ8/xBP5ECgJ41DOHtb3Z3VxGy8Pnpfw24WYUP1ddjy/xzmkPJUY0WTL/cn0Od03xlvWPcMZxuA8fFzPhlphLXcAKB7WCx5o758Tjlus3R3GSSzu/ghK6lAUrE2MwKSyHUY7P2dIGLEi3P9VytsAIJwTFrcc7sIU1tewEpzmNugRecHMpAFjoBo1Alx/j432cDM1jMaqzWOwZzTaTTuIfnkELV3gv5CNW/Upa5ILKCreDLrnj8YXCVvxMZyTuQjVQjSA2je+BhV4/E/W+P6dmcSXhWIpKAw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=ni.com; dmarc=pass action=none header.from=ni.com; dkim=pass
- header.d=ni.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=XmUUrMmA;
+ spf=pass (domain: gmail.com, ip: 209.85.222.177,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f177.google.com with SMTP id c3so11522920qko.1
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 26 Jul 2022 10:34:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=nio365.onmicrosoft.com; s=selector2-nio365-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ramhDIGivqV6a/W097Lacas+Q+/BXxvv5XqrvgEM2UA=;
- b=IFwzz+qsdTi2krTJTH1HyUlkSr7hsTv7ljZ9uls3hXjJj8A2TwMQxlsJfDzcnuYjxuLNaG2NMV+ZGKiNtRzWmIH6331tpDfYTY1Ga9ZqH8kvnt7iSh3NfN5M0xGkMziIOqb+qqtmA++lOf6ckNyVNpagQJ+KHf7MlXTTadrOn7I=
-Received: from SA0PR04MB7386.namprd04.prod.outlook.com (2603:10b6:806:e4::13)
- by SN6PR04MB4798.namprd04.prod.outlook.com (2603:10b6:805:b2::28) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5458.18; Tue, 26 Jul
- 2022 16:10:50 +0000
-Received: from SA0PR04MB7386.namprd04.prod.outlook.com
- ([fe80::b1f0:fc1f:d740:3993]) by SA0PR04MB7386.namprd04.prod.outlook.com
- ([fe80::b1f0:fc1f:d740:3993%3]) with mapi id 15.20.5458.025; Tue, 26 Jul 2022
- 16:10:50 +0000
-From: Brenda Streiff <brenda.streiff@ni.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 2/2] Add python3-aiodns 3.0.0
-Date: Tue, 26 Jul 2022 11:10:32 -0500
-Message-Id: <20220726161032.1630170-2-brenda.streiff@ni.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220726161032.1630170-1-brenda.streiff@ni.com>
-References: <20220726161032.1630170-1-brenda.streiff@ni.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SN4PR0501CA0108.namprd05.prod.outlook.com
- (2603:10b6:803:42::25) To SA0PR04MB7386.namprd04.prod.outlook.com
- (2603:10b6:806:e4::13)
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Ua2hkHX++OPlH5sir+cLg63R/LJbyI5+gCmnilA1IDg=;
+        b=XmUUrMmAl3Biw2Fy77xMdwPe6fEo0j6ErmxvG24sMzahC2hwfRq4uQAbkYHAcpZK3v
+         cKhOvI//MMaN8xreM5bouArP7oTcftwmUds3ULCaRGPwcquvefTEM5H7wg2xVHCGIZfL
+         Go3V3V71qULJG05xK6rhSiskq/NruUbz+aROQBsztLv9sDVALkGIFFJD6lX2Z6jW8H1v
+         B8hBmVmu+E9Sctm3gPFz4AqucoxY/CMvSXnzCWM/kgUHQJG4EdhsE8ibaXqDDLz4EjfJ
+         kI/WvZUDyhOKp68HCcsz4LFB8xiH8pA8MRa97sJ/Oc5wG8w4YmTREvxH2WAAFte0jv5D
+         nzhA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Ua2hkHX++OPlH5sir+cLg63R/LJbyI5+gCmnilA1IDg=;
+        b=SuChfj8ca+9vFssaMe2bHhpuHEue/j9qZ2LlnUWvqjLm+0k/inWkIMYF+hVwZXK9vN
+         qEBxNsk8S4HpMQ2Fo8To86ogQu+6DVS7DQHdPVc1bUwaXV08XxzVMi88wa4HDomnOyCT
+         0CizuMeiIo86bJa+nAYwm+oZbLy9tgqVzsh3ZE8sPD+k0lZl4+47ONH9H14ikzW1sluy
+         XODEK2XwCtI9IuuabEc4ovFo9cD0ryBO9AohhkDwc4RR6SfonIsJlvVHIl6LLAdmnein
+         ck5toXcvj8g98G3+MdhuabBwk4IYo9TP+nL4hskxWkWXWYIlcANDjfn2WLc5e7dQCTwl
+         TSww==
+X-Gm-Message-State: AJIora+iND5HVpxPoOaYM/5nrPiDwWCvASyvYGu9RklKo2gjhv4qGqC0
+	Ne0QtyMI6lvCGIDB0H6AUWU+/lDyUvg9I2sJiDg=
+X-Google-Smtp-Source: 
+ AGRyM1t9R/mTKQNJ+9LrtzOyNWiHxoZlmun8se5Ah/g4ggpv44tQ3K4/8cckph483HbQEIMl4ESv0NMCFlrznMl06i0=
+X-Received: by 2002:a05:620a:2449:b0:6b5:f01e:d6cb with SMTP id
+ h9-20020a05620a244900b006b5f01ed6cbmr14063511qkn.463.1658856869249; Tue, 26
+ Jul 2022 10:34:29 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 70c86d05-7d7f-4af5-9203-08da6f21684d
-X-MS-TrafficTypeDiagnostic: SN6PR04MB4798:EE_
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	lF8NyC2ldU9RlkB2YanAb9Hjf1wk4pO/EwESwgAGDpqk4Yz4fOYhixI9SgQOFA2ldB/ELVdh+x5gj+aBfZHpEcP2ego5x8eYMThNBZoEHl5UMaOe2pBumHRU4+CX/l/ea/67vJas0QIQe86y4XZ6S8MDs95ohAPKsFWImExb9LpHaFaNG+SgFlj/KZ/sYrogpV1a0S7rvHaYJarHq2lS0a82e+JK1ZodHiS6fy4gWWVmD7OJa/9bI6x9xa0JBTp+6FH2LSqtNVDHgrrnxwGjBsb4JNy+wwCW8MABS1YtbxxOkEntXby1Ouf1HWUn/P91puS/Q0c46izDtS1xbg1N2xOWhNvxWbHnVrCuwXiwQh1vyD1YO9lEivfXOVJhrXYE6KrlExcM+Dk8w2pyqC2sfJsPEvw5rC5dQ9vSy2iADskq4ypy9byaUmsYNUqK0FzgH083LbhVmmFpkqCZQkIZ6THOO2IunyrLkkJH/gQlORARCNaBw/EbTGX25mbgUsjl6I0meZ+ayFLejkw53GNUOTR6zJuR7sPKQS3GYV2qhAAYZYjNfL1hNgtYm8O4NqDU3lKpw3hZI0i0/7h/r0yTY92Ki+lPAaGSAmsTbAAck8v3H1XRSAzDbwl8Tm4lMxp7e2aKtSva1bJWOmZjMk/XlJywt9Sc1Y6/+KLKaHUK9vm8uiL38+g6K40Tc8YxPoDzzaZR7n+nPJov0K1egtX9uIt5LzOMw0+BHxWCDFwottg3QiriaIKlgTe/kvW9zYZXBVRfGlrNYeRRQsOqoSSfPw==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA0PR04MB7386.namprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(136003)(39860400002)(366004)(346002)(396003)(376002)(36756003)(66556008)(66946007)(66476007)(8936002)(8676002)(5660300002)(44832011)(6486002)(478600001)(316002)(6916009)(6506007)(41300700001)(86362001)(6666004)(2616005)(1076003)(186003)(2906002)(38100700002)(83380400001)(6512007)(26005);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?Qki+I4RSI1qBvSbmXBXbJmrYxF3hRVRgrZI5Ar5uJ9mSYfekLzsgw87YW5Jy?=
- =?us-ascii?Q?+xJWOf5hVM6JjptZDMrhtLwWBy3zPF+qtN4aCZUf6H3mv040s6pgeWgA9JW2?=
- =?us-ascii?Q?2KIIUsQ8M8cIFpmIPkHaLmjV3a31tqIO3rzsROkfHuFVckNcoJSVHZLUOALH?=
- =?us-ascii?Q?BJ53YYCugojQPSU0XwJwEzmM8qvSOhgRo9fixzhjtPXkHradCAbQaqunzFWM?=
- =?us-ascii?Q?BbDF/bMkuITPD3HBa61j8REqrqCJfOAggg2Z5U2f3lgGpkyifiJDfesC2X/g?=
- =?us-ascii?Q?VTT43WgHVTHceX5HFZO6F9uAnd7zaxaU/lyxGFjKcTyaE1Brb/fulO51+q6F?=
- =?us-ascii?Q?yUuVjmExANwly12p61mp2yLIk65bKSeK4G8aFilGfoip4PeST/LZDZTJ23Js?=
- =?us-ascii?Q?h1XlxddnIFqE2Xhvyp5D2LSi0khVm8divP+mqFK+pPKjDBxufZqave6jQP3I?=
- =?us-ascii?Q?A9cCtqIeL/bpv7EsbyDR7r6OCKsh5sUgaICIXlbzl4/spDBTDWGkJCKeBfHR?=
- =?us-ascii?Q?uuAG9kl6QOYihvC+UmV4UUke1PAJ5bKekE3xUibLeaDjaq6AfVU/eZuPRUfY?=
- =?us-ascii?Q?bcR+p/gZJk2xl7V21aD9U3SoBQ4uLgttzm+DBwPOdMR82xeRJ6YPrkwqt6NA?=
- =?us-ascii?Q?OQ3g+l2vc0oGd9ApsKGqQjL+ceyYOL4KJp9lAtK5eqr6/fi6SxcaL0qB66X4?=
- =?us-ascii?Q?4fkmtfDEPnvK+gbSJijfyHLfQqvN+ZQHWl5WBM57JfPRQ0yeKg+RY1gnH0je?=
- =?us-ascii?Q?CNcrhGcsqxqMm0qDJ5R0X9RtnvyxBXXfZ6fYRb7Ner1G0oh5BCQ1K+vEieCQ?=
- =?us-ascii?Q?9VB3O4VfU7ELFK6YR+1+Vr4xQGGHTDN3MVnf1p1R0+miSL0tfzNkY+Jho5CC?=
- =?us-ascii?Q?1xJWN1moMCx/fEUSduutEfHUymjD1jgbSX7WU7skkx2moLTXx8KVgljaOlz+?=
- =?us-ascii?Q?kxk9bVvBxOpx3bi0vZNi4TsejmsFDSzS/rpieVvp5tqFqoOhHpxlmB+b+cwz?=
- =?us-ascii?Q?sAHhQjuXLHrkEcHMcFkzYUjELj4Cwa0ndu3zxZfGhh5NEXTktoeDME6FMwGl?=
- =?us-ascii?Q?fhY2nOdJ6U+Ci+HUuaY2nJ7oSgt8nEn9hgk2gU86oOF1x8tlthY+Q9RyNn3S?=
- =?us-ascii?Q?SeoUgXqoQUh2hoXJcMz/9fW9p5NRSIOMA+nEAxkYZcIl3RsARswtlVaT0OWA?=
- =?us-ascii?Q?pS6s6gyjbY87ozjpAOapTyW3Aa7NMI8cBWtcLC5R2qsH5c9PRlvCGMV9bTDr?=
- =?us-ascii?Q?09zJ9N4rCNox76H/gUPKOAvPqvFbLbYzXOtnZoKZTl1T+FlBM6yLqKxiw7OU?=
- =?us-ascii?Q?NMwx/wQK5BPny2Az+BV/LaI4nXOnJOk3ZiRW+fOOnUFDJxVPOglSYWpKyGpj?=
- =?us-ascii?Q?U8ld3Yts4jaFRQsy2KdDoVB+fP0/y0kwompGJ83FmzoonOfMW221a/0KdUfw?=
- =?us-ascii?Q?2P5EbzwRvxcO3YDHXnPscupeZ1X82BMudkRb8D33z7hSFlpfp9nrePszyYmQ?=
- =?us-ascii?Q?0QZmxs9qGnBJFbzPwMQAFO6VM49KgtNCa2rh2U9HAmYF4Sw/MMWYBU6TjFTt?=
- =?us-ascii?Q?b7XHjDBa7BPqEGxWCqg/paUCAQDxqmQWYbPKFOGL?=
-X-OriginatorOrg: ni.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 70c86d05-7d7f-4af5-9203-08da6f21684d
-X-MS-Exchange-CrossTenant-AuthSource: SA0PR04MB7386.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jul 2022 16:10:50.1801
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 87ba1f9a-44cd-43a6-b008-6fdb45a5204e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 
- tfHUAKFvbMoKe9rgBmvsNJF9kg+elB0iYzeCHUS80XzVXlHUni5iQL1mmBUnwvkbIjrv8bnfGHpZDLjL79ZAZA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR04MB4798
-X-Proofpoint-GUID: 8ffzo8QtSt4-Ju10Sl9n6UElI2Dws4Sc
-X-Proofpoint-ORIG-GUID: 8ffzo8QtSt4-Ju10Sl9n6UElI2Dws4Sc
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
- definitions=2022-07-26_04,2022-07-26_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_policy_notspam policy=outbound_policy
- score=30
- impostorscore=0 phishscore=0 bulkscore=0 clxscore=1015 malwarescore=0
- adultscore=0 lowpriorityscore=0 spamscore=0 mlxlogscore=876 mlxscore=0
- priorityscore=1501 suspectscore=0 classifier=spam adjust=30 reason=mlx
- scancount=1 engine=8.12.0-2206140000 definitions=main-2207260062
+References: <1658554568-9257-1-git-send-email-wangmy@fujitsu.com>
+ <1658554568-9257-4-git-send-email-wangmy@fujitsu.com>
+ <cb4a9e15-3339-f708-8f24-c41e68869ace@gmail.com>
+In-Reply-To: <cb4a9e15-3339-f708-8f24-c41e68869ace@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 26 Jul 2022 13:34:03 -0400
+Message-ID: 
+ <CAMKF1spHVoxOTDPvmiqazeit_imoN=dtWxonGaNM8peFry6qDA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] googlebenchmark: upgrade 1.6.1 -> 1.6.2
+To: Armin Kuster <akuster808@gmail.com>
+Cc: wangmy <wangmy@fujitsu.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Jul 2022 16:10:54 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Jul 2022 17:34:34 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/97994
+ https://lists.openembedded.org/g/openembedded-devel/message/97997
 
-From: Sergey Kizunov <sergey.kizunov@ni.com>
+On Tue, Jul 26, 2022 at 9:51 AM Armin Kuster <akuster808@gmail.com> wrote:
+>
+>
+>
+> On 7/22/22 22:36, wangmy wrote:
+> > License-Update:
+> > Update LICENSE file to clearly state which file needs BSD 3
+> > Only benchmark/config/generate_export_header.bzl depends on BSD 3-Clause License:
+> >
+> > Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> > ---
+> >   .../{googlebenchmark_1.6.1.bb => googlebenchmark_1.6.2.bb}    | 4 ++--
+> >   1 file changed, 2 insertions(+), 2 deletions(-)
+> >   rename meta-oe/recipes-support/googlebenchmark/{googlebenchmark_1.6.1.bb => googlebenchmark_1.6.2.bb} (76%)
+> >
+> > diff --git a/meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.6.1.bb b/meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.6.2.bb
+> > similarity index 76%
+> > rename from meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.6.1.bb
+> > rename to meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.6.2.bb
+> > index b44d3bee27..11f09c6fd6 100644
+> > --- a/meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.6.1.bb
+> > +++ b/meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.6.2.bb
+> > @@ -2,10 +2,10 @@ DESCRIPTION = "A microbenchmark support library"
+> >   HOMEPAGE = "https://github.com/google/benchmark"
+> >   SECTION = "libs"
+> >   LICENSE = "Apache-2.0"
+>
+> Shouldn't the LICENSE be updated to include BSD then?
 
-aiodns is a Python module for asynchronous DNS resolution using pycares.
+https://github.com/google/benchmark/commit/7b3ac075177212dd75476253d72db992513e8024#diff-ab12a56312a7be78ce82f6dcbd37978a5ffbc5abc61e9183639d613689766e6f
 
-Signed-off-by: Sergey Kizunov <sergey.kizunov@ni.com>
+seems to have removed need for BSD-3-Clause
 
-Updated and converted to new recipe syntax.
-
-Signed-off-by: Brenda Streiff <brenda.streiff@ni.com>
----
- .../python/python3-aiodns_3.0.0.bb              | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-aiodns_3.0.0.bb
-
-diff --git a/meta-python/recipes-devtools/python/python3-aiodns_3.0.0.bb b/meta-python/recipes-devtools/python/python3-aiodns_3.0.0.bb
-new file mode 100644
-index 000000000..64599d43c
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiodns_3.0.0.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "Simple DNS resolver for asyncio"
-+DESCRIPTION = "aiodns provides a simple way for doing asynchronous DNS resolutions using pycares."
-+HOMEPAGE = "https://github.com/saghul/aiodns"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=a565d8b5d06b9620968a135a2657b093"
-+
-+SRC_URI[md5sum] = "181e11935c78965de2b2b7b0e5efba8d"
-+SRC_URI[sha256sum] = "946bdfabe743fceeeb093c8a010f5d1645f708a241be849e17edfb0e49e08cd6"
-+
-+PYPI_PACKAGE = "aiodns"
-+
-+inherit pypi setuptools3
-+
-+RDEPENDS:${PN} += " \
-+    ${PYTHON_PN}-asyncio \
-+    ${PYTHON_PN}-pycares \
-+"
--- 
-2.30.2
-
+> > -LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=0f6f3bbd074b822ddbb3b4d0e7f8d652"
+> >
+> >   SRC_URI = "git://github.com/google/benchmark.git;protocol=https;branch=main"
+> > -SRCREV = "0d98dba29d66e93259db7daa53a9327df767a415"
+> > +SRCREV = "d845b7b3a27d54ad96280a29d61fa8988d4fddcf"
+> >
+> >   S = "${WORKDIR}/git"
+> >
+> >
+> >
+> >
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#97990): https://lists.openembedded.org/g/openembedded-devel/message/97990
+> Mute This Topic: https://lists.openembedded.org/mt/92620754/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
