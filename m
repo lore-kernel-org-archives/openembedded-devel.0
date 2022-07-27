@@ -1,272 +1,153 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <mingli.yu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 326EAC00144
-	for <webhook@archiver.kernel.org>; Wed, 27 Jul 2022 01:34:47 +0000 (UTC)
-Received: from esa4.fujitsucc.c3s2.iphmx.com (esa4.fujitsucc.c3s2.iphmx.com
- [68.232.151.214])
- by mx.groups.io with SMTP id smtpd.web11.14874.1658885678257733482
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B0C1C04A68
+	for <webhook@archiver.kernel.org>; Wed, 27 Jul 2022 07:51:19 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com
+ [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.17360.1658908271452991792
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Jul 2022 18:34:39 -0700
+ Wed, 27 Jul 2022 00:51:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj1 header.b=ac3njYIy;
- spf=pass (domain: fujitsu.com, ip: 68.232.151.214,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj1;
-  t=1658885678; x=1690421678;
-  h=from:to:subject:date:message-id:references:in-reply-to:
-   content-transfer-encoding:mime-version;
-  bh=U+QIUfn3n9iHSM1LJu24qDlycAGrH7WMKukBlHWKxjw=;
-  b=ac3njYIy2VTWFuHjIYmGGLA97v88oHN9abhX49XciQbT6tAamHN5lub7
-   XoblVrbP744uLWADBeYDfrVByQmef/ZtF0PvGbY5gnyzEeVpG8L2KnkjW
-   jXJuMizTpuF6ZOGxjQMZ/KIMdtxhy6kCo/U2qdhxQvxThPBwA7eW6Z+EI
-   VFoNEMbf6ie7zfq2ryWwA6v5SM+jZBTcBiGoasoBT37YmcknO6fjRitUI
-   q4gQ8HJ+dlUvPnq732DiOxbvXjBpQ9YobMwhPo4Rm5z8BqsMBq/PAl6N4
-   aEV5oCoTwzv9QFWuhGQQd1lUF8pcAU+ROuP0efEs5FUH2PN2R43rTYjIr
-   Q==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10420"; a="69188580"
-X-IronPort-AV: E=Sophos;i="5.93,194,1654527600";
-   d="scan'208";a="69188580"
-Received: from mail-tycjpn01lp2172.outbound.protection.outlook.com (HELO
- JPN01-TYC-obe.outbound.protection.outlook.com) ([104.47.23.172])
-  by ob1.fujitsucc.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 27 Jul 2022 10:34:35 +0900
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gHo2k9/cDpnHP/sLqAYXS3rUBAPjpqlXanDpLaXQFRL6beCLffLt+utUYFyHv2rNUY5YrAXtrsMjQUEjtI9wguVivXYQjJMHmU+zEeqI7YB+esck5SvlI56keiasrZVo1TuORuUXw1znGrYeGMzUzo3L6zZ6pjsiKI9kviGnDDs+8Hp4VfGx96KPyzGY9IlAS4T/qP6aTjj+jcM1VvNlzpZqwj54OIfOOJbxtWBfh0Hz1Eze+I0JkEkzRggB3Xg6RKyvaMJgN99vr/TcVKaJ0nKNaY1yTSd5TWszSBzU2CT7RO5hyk6Upu30tdMH5pP6VK8knJgnSS4O6GpoBW1BZw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=U+QIUfn3n9iHSM1LJu24qDlycAGrH7WMKukBlHWKxjw=;
- b=R/i0PiNTMtupfmFzjINDeFdaWKc68LTOHrcJ4JQVOu1Sbh+jiFs/liyEokUNWgFTXylcunhCa6bsmnxpIDMws0TVHLVXahqbCm5OA3Gv00MSvqmw1JrzufC6HRveMpgK7WvmOj8DbcNrAqRD607gkybjTw0s4AN6tWuQrbR+DSTXfNQ695y/aHvdncZ4HJ2lIy3dOpCnkZc7eUl9ryOpyrIQxWrqDaKNr1VjwkKcCTWdcBU23FEJL07i19myURuZ3F+q4i7goxdNGBUSiuGQ7oN9BlOgEpSlxaz0G7ChNTHNm5ARimHS9UFmS5SY+tMoQO5fIB8X5fwEe9zMCveDsg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=fujitsu.com; dmarc=pass action=none header.from=fujitsu.com;
- dkim=pass header.d=fujitsu.com; arc=none
-Received: from OSBPR01MB1845.jpnprd01.prod.outlook.com (2603:1096:603:5::13)
- by TYCPR01MB5662.jpnprd01.prod.outlook.com (2603:1096:400:43::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5458.19; Wed, 27 Jul
- 2022 01:34:32 +0000
-Received: from OSBPR01MB1845.jpnprd01.prod.outlook.com
- ([fe80::1059:42ba:fac6:8f16]) by OSBPR01MB1845.jpnprd01.prod.outlook.com
- ([fe80::1059:42ba:fac6:8f16%4]) with mapi id 15.20.5458.025; Wed, 27 Jul 2022
- 01:34:32 +0000
-From: "wangmy@fujitsu.com" <wangmy@fujitsu.com>
-To: Khem Raj <raj.khem@gmail.com>, "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] [meta-oe] [PATCH] googlebenchmark: upgrade 1.6.1 -> 1.7.0
-Thread-Topic: [oe] [meta-oe] [PATCH] googlebenchmark: upgrade 1.6.1 -> 1.7.0
-Thread-Index: AQHYoVNwdCvGNwt/RUySH3kyj9O3B62Rbtng
-Date: Wed, 27 Jul 2022 01:34:31 +0000
-Message-ID: 
- <OSBPR01MB1845051C19B7AAE19F982646DC979@OSBPR01MB1845.jpnprd01.prod.outlook.com>
-References: <1658631009-16775-1-git-send-email-wangmy@fujitsu.com>
- <da4d11cd-2bf1-59e8-af0e-a4b6261a21be@gmail.com>
-In-Reply-To: <da4d11cd-2bf1-59e8-af0e-a4b6261a21be@gmail.com>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
- =?utf-8?B?TVNJUF9MYWJlbF9hNzI5NWNjMS1kMjc5LTQyYWMtYWI0ZC0zYjBmNGZlY2Uw?=
- =?utf-8?B?NTBfQWN0aW9uSWQ9N2E2Y2VkY2MtOTk4Ni00YmYwLThjNjUtYmQ4YjE3ZjIz?=
- =?utf-8?B?NTMzO01TSVBfTGFiZWxfYTcyOTVjYzEtZDI3OS00MmFjLWFiNGQtM2IwZjRm?=
- =?utf-8?B?ZWNlMDUwX0NvbnRlbnRCaXRzPTA7TVNJUF9MYWJlbF9hNzI5NWNjMS1kMjc5?=
- =?utf-8?B?LTQyYWMtYWI0ZC0zYjBmNGZlY2UwNTBfRW5hYmxlZD10cnVlO01TSVBfTGFi?=
- =?utf-8?B?ZWxfYTcyOTVjYzEtZDI3OS00MmFjLWFiNGQtM2IwZjRmZWNlMDUwX01ldGhv?=
- =?utf-8?B?ZD1TdGFuZGFyZDtNU0lQX0xhYmVsX2E3Mjk1Y2MxLWQyNzktNDJhYy1hYjRk?=
- =?utf-8?B?LTNiMGY0ZmVjZTA1MF9OYW1lPUZVSklUU1UtUkVTVFJJQ1RFRO+/ou++gA==?=
- =?utf-8?B?776LO01TSVBfTGFiZWxfYTcyOTVjYzEtZDI3OS00MmFjLWFiNGQtM2IwZjRm?=
- =?utf-8?B?ZWNlMDUwX1NldERhdGU9MjAyMi0wNy0yN1QwMTozMjozNlo7TVNJUF9MYWJl?=
- =?utf-8?B?bF9hNzI5NWNjMS1kMjc5LTQyYWMtYWI0ZC0zYjBmNGZlY2UwNTBfU2l0ZUlk?=
- =?utf-8?Q?=3Da19f121d-81e1-4858-a9d8-736e267fd4c7;?=
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=fujitsu.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 6c60d517-3318-4c93-320d-08da6f7027bf
-x-ms-traffictypediagnostic: TYCPR01MB5662:EE_
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- ngAVDkIAih1kwcjWp+k4jI0U5llBJM7yOjjBW6k7507V85p8xMXZpwNW87/F2kyrHKHORZ/qAyIxrz9pPFSQid60vrQrAsf1ToOrj4T+AuZXF8joP3/GimXf/VZiQPw/a0TRhn+jc4sivmS0EtrJYJ9yCp69ZcevXD9ulSTbK4lkLGb0ui1qiNt3TQ25BxApuklr/Jzbwll9yJHAzdprKhKT+HBCOHleiaNutqFZO/cYWzdpbBtSWbB4v6CsX/s51s5lKJjAee2tEW4BwG4KdGaxQ6OMiD0/uRYzSmpuSmwm503w6Pq+KbkGMWRPVLyE8m3euSwpbR3W3gCQur/U7suHCJTGJXAUb2WB1X9X+ZU0pOx9KPXphca/LpEzQOM4COqW3I2/tZhTSW3riD1NaZEylrJXhiOExG5dQSfghfVrVpWvnDUD22+UasvAIWXltb6CVUgFUYZXDXJ3rJGg8/uM71oTrPg8jK7NlTTAPLggLNQ7E0jWWlwhCfvqMI8mNGlzRDMCFzkrzfwEXl4b5sU11LVgnXVtVivRInTcJoOB4ED+2CzRrhs6bRsft0PHd80I8o/yF2V6Fe55dHKxUyuYQZaLcp0FdPNC32RwbyDpg948fpAcIs49w82jMpwyYsfNYnIb9tojNkQEIoFw9ZiAaU9fW4KvCJB2TqcLECouGkTswCtdIQWPJsOlS+i+xBqKA3R5Zk4qDUSsAuFlerXuVcmlm6PLUq1Ui5mfZa7Mc2xN1G6/tJCqHRiqy9qiIts6eo2FXYoNS7+txulyBsIXfWIzCv1f3gPr5edHSO5aMwa0ATSqmsUH/4AhtEUijZCtuv2ec/l7oh/Ld6Ljgrh6t7tdLgui4yxd9u6OtutKP3TT3vqhgoso59CIEvQ/
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OSBPR01MB1845.jpnprd01.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(376002)(346002)(39860400002)(396003)(136003)(366004)(110136005)(66946007)(76116006)(71200400001)(966005)(64756008)(66446008)(478600001)(316002)(122000001)(85182001)(86362001)(5660300002)(66556008)(52536014)(8936002)(66476007)(8676002)(9686003)(186003)(7696005)(6506007)(26005)(2906002)(41300700001)(53546011)(33656002)(38100700002)(83380400001)(55016003)(82960400001)(38070700005);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?ektvWHQ5OTNwUkQ1NXBEcmFQR2dMMVI2WHdxV2l2TTZQbWdCdEtIWWRRN1g4?=
- =?utf-8?B?UVdyMTZhM0crVE5ad3dLa0tmc3M3YVBIVEtPUm1nNzFuWVBqOU9Yck8rQVpp?=
- =?utf-8?B?UGovOUJXV0xPMGE4dzFGcm1tWk50K2QyalNPM0xLYVYwVnFoOEpobHZ4VjIw?=
- =?utf-8?B?ejFEY21CL0djdUNWWXlBR2RtU2lSc1FnM3JnaEh3VjRFSUJabklZMlpBalFI?=
- =?utf-8?B?ejBwZW1aOXBWaDRHQk94Tmxyb1N6WEplSFRPOFNnMXY4dXIrTUZMUWd5cTg5?=
- =?utf-8?B?RDRQaUtrbEFkWDE5UDNHMDc1RlZqcDE4SlFhdFFadkxtaEtTNFA2NUtnV1pW?=
- =?utf-8?B?bjRjVGVTaVpvUm5nVWt1UzM2Z2I1TDlMMTh6ckhocDRDVW5qTjZUZGl5Uy9m?=
- =?utf-8?B?c2pqbFhIZGU2U21YcHlaWkhiRmFDZTRYRTlybjBJbTQyOEwzYkRkd28zcklB?=
- =?utf-8?B?TnN3SEw2Sm53UW9UNHM1aFU3OW1Lam9ra0REQU9ZNTRqOCtBZmpMUGZOcnBB?=
- =?utf-8?B?Y2dsZVhUODIvUWZqZUs2TGs2UU15NTJESjIrYjd5K0c0SXJONWk4Y0gvUTN6?=
- =?utf-8?B?OE9ydjkxQmxOeEt5NWEva0pBa3J3VTE1Q2tPT3RDOXArUExURDd4ZXAvL2FT?=
- =?utf-8?B?RS9xYW5XQkZLL3ViaXd3c21oQTlWRmo5cW1SdkQ5dUJib0Zjcm4yY2E0YTBN?=
- =?utf-8?B?TDNiOFh5WEpIcDNNSDJXRGtmcER5NURkVlpGOEV1K0xjZGZtWnRXYnBXaVBt?=
- =?utf-8?B?WTVTQ1dXWHZsb3dsQnhvemdLbnZ2WCtvT0ZLSVU5LzhKQ0NXMThLSkU5WVdv?=
- =?utf-8?B?YXMvRml3RUlUK3p3VE9nNHpVakRDZkNmaThKYUJSeGtGUGM1NHRzTHdnWmRp?=
- =?utf-8?B?dnlNcFlPT0tmVy9tOE44STZaYnA2cTNTVEpmd0Z3S1dCV0d0V1FmQ1FoVnp5?=
- =?utf-8?B?L0doOHlLK1lscDFHaFBlZXpJT2p3S09FTFNXYlBKZW1ncGpEMEZQRlVPYURo?=
- =?utf-8?B?dDdoVzlaUjdvODYzMjd4cm1iR3FZV0RhcWJPTHFOcm1vZHR5UjhEbTNOa1JZ?=
- =?utf-8?B?cFVsUHdSRWp5TUJPTFMxaGJjWGsrcFlRSG9MZG54cmR6RHl3eFBlOHZvdVhr?=
- =?utf-8?B?REphN1pWRCt0bmlmN2M3SCtFQVlNNWtYTlBQb1Y0QVE0T3RiNkEvTlpCYmxv?=
- =?utf-8?B?OG81R0hpcU5vKytScERYVFFrOENjRk9zWDBqR28vdzVXdHh6bk1DOURhMk1P?=
- =?utf-8?B?RmdLV2t2bXl4dlBxWFczTDRVMlpLNDlYeWpnS1RyTTVxZ0plZTZFL3dFVmF1?=
- =?utf-8?B?R3dHUkJ4MlZGa2tNMDRUa2psVjRQRi8rRnZUcjBYd2c1ODg1YlpBVEFqSFFi?=
- =?utf-8?B?SjhLb0V2Z3hMdlVQbnpqMFloVTFIMzBGVWs4ZjVEK2gvdjIxVldnN2ttZlNZ?=
- =?utf-8?B?dlRGeUtHdXVWM1RtK05wQ3JBMWQ3clAxMGtSUlZEMlVKMTBNSzdMLy8yODMy?=
- =?utf-8?B?ZENmTyt2a3o2L0VOUzBSWk05NE9KcVZwc2R3UVVIRGZOUWdLUzVVbG1XOXky?=
- =?utf-8?B?Umd1WHJHS0VGdFFqNXVkR3p3V2o0SGFEM0FPZHl5eXR2czNpYk1KOGw3U3N3?=
- =?utf-8?B?MVRoZmNPcEFGRm0rUzJXMmJRWFlGMThTa3lGUXZFRmxlb3p3SmdmVWhHTTh2?=
- =?utf-8?B?U01kMWFlQnlLU3VhdE01NStIa3lVTVJiRHY4cTJjTWNKdFZ0dXQ4dEtJODd1?=
- =?utf-8?B?ZnFXVERFQXIwVEVrQ0lkckg3blpjaWFkMzN5ZFZ5cFdUSFJxa1laWThlOHcw?=
- =?utf-8?B?bm80RDhFaTFCcGsyWDIzT0VCV2ZyNWpiS1VLQTZvb1RIWk9xcS9keFpZZTRm?=
- =?utf-8?B?UU1Ca1VUeG0vTUZWcXVsMnVzUWpZT1J5WEpoeXFDK3VNbDNZWnhTdFFRN3pF?=
- =?utf-8?B?R1RpWS90WFhsNU9jYXhhWVFtazdEY3V0ZktnVmhQQ1E0ZGwwclE2Um16SmQ5?=
- =?utf-8?B?OFlQVHdqOCtPWndsaDl6a25rQlMrVDU1Q1RjMm1QR2VBZjNIckJWYitJd2gr?=
- =?utf-8?B?RnJOMUdzMEFUdmZ5RExGelhkV2Q4RHlsc2J5K1NMejQzbHBPTFdkSDdFSE1L?=
- =?utf-8?Q?pl0ntIiGtKTUVgJn7GUWXu+LA?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=URe5r6yz;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
+ invalid domain name (domain: windriver.com, ip: 205.220.178.238,
+ mailfrom: prvs=4207d6b26a=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
+ 26R7p9ZD002784
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 27 Jul 2022 07:51:09 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+ h=from : to :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=PPS06212021;
+ bh=zCegc3aEc4Ji5hByOOiJq8IqdKTnZbhhsg/ffhnu/xk=;
+ b=URe5r6yzuNZ1GeHD+mdSRkY6wyjozLVxq7z1G5AXBFMcIno2rvfW4xHR+p60+vTKA4KF
+ RzQPTseLDoItOG5V/TJH3F697zQ4Ka2fr4bWFLU/Pp/Z/+nYL8a/55GinACX2Li19wXP
+ UUcfZo25OHp2izDwncmZxwPkEfXvRBxE98jWYNTN1rajOoFXWbV5LlEGVglpcN0njPkE
+ RqnVR+S31yWQHV7/DtnLGDuNIbsaM1XDv1794u+TcubnhZPTv98OcZ36fGjeaJQCZW22
+ M3NUIEUjj/7i7uq5gUKjGtujRxGt+qZtKCoJW5AittueqmbO4wh3t9iYT6VQr4IoDmQ7 ig==
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com
+ [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3hg671b4u1-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 27 Jul 2022 07:51:09 +0000
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Wed, 27 Jul 2022 00:51:04 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.27; Wed, 27 Jul 2022 00:51:03 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Wed, 27 Jul 2022 00:51:03 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] s-nail: fix buildpaths issue
+Date: Wed, 27 Jul 2022 15:51:02 +0800
+Message-ID: <20220727075102.3671939-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-OriginatorOrg: fujitsu.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: OSBPR01MB1845.jpnprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 6c60d517-3318-4c93-320d-08da6f7027bf
-X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Jul 2022 01:34:31.9583
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a19f121d-81e1-4858-a9d8-736e267fd4c7
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 
- mcbrbh1ejn9oZ3ngi3QkghvuEP5DcvsnOs/wj3fbUKxnEIWgEmVzF08jjPK6Qu7cjdIwRuwwuXRTW1B7ObRVQg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYCPR01MB5662
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: ZTqJHN_pvtchEeQQ8TTy_M2qr0JF1Kmh
+X-Proofpoint-GUID: ZTqJHN_pvtchEeQQ8TTy_M2qr0JF1Kmh
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
+ definitions=2022-07-26_07,2022-07-26_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 spamscore=0
+ adultscore=0 phishscore=0 suspectscore=0 bulkscore=0 malwarescore=0
+ mlxlogscore=999 mlxscore=0 priorityscore=1501 clxscore=1015
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2206140000 definitions=main-2207270029
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Jul 2022 01:34:47 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 Jul 2022 07:51:19 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98000
+ https://lists.openembedded.org/g/openembedded-devel/message/98001
 
-WWVzLCBiZWNhdXNlIHRoZSBzeXN0ZW0gb2YgaG9zdCBhdXRvbWF0aWNhbGx5IHVwZGF0ZXMgYW5k
-IHJlc3RhcnRzLCB0aGUgdGltZSBlcnJvciBvY2N1cnJlZCB3aGVuIHRoZSB2aXJ0dWFsIG1hY2hp
-bmUgd2FzIG5vdCBzaHV0IGRvd24gbm9ybWFsbHkuDQpUaGUgdGltZSBvZiB0aGUgdmlydHVhbCBt
-YWNoaW5lIGFuZCB0aGUgaG9zdCBoYXMgYmVlbiBzeW5jaHJvbml6ZWQgbm93Lg0KDQrCoCAtLQ0K
-QmVzdCBSZWdhcmRzDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0NCldhbmcgTWluZ3l1DQpEZXZlbG9wbWVudCBEZXB0LkkNCk5hbmppbmcgRnVqaXRz
-dSBOYW5kYSBTb2Z0d2FyZSBUZWNoLiBDby4sIEx0ZC4oRk5TVCkgTm8uIDYgV2Vuemh1IFJvYWQs
-IE5hbmppbmcsIDIxMDAxMiwgQ2hpbmENClRFTDogKzg2KzI1LTg2NjMwNTY2LTg1NjgNCkNPSU5T
-OiA3OTk4ODU0OA0KRkFYOiArODYrMjUtODMzMTc2ODUNCk1BSUw6IHdhbmdteUBmdWppdHN1LmNv
-bQ0KaHR0cDovL3d3dy5mdWppdHN1LmNvbS9jbi9mbnN0Lw0KDQo+IC0tLS0tT3JpZ2luYWwgTWVz
-c2FnZS0tLS0tDQo+IEZyb206IEtoZW0gUmFqIDxyYWoua2hlbUBnbWFpbC5jb20+DQo+IFNlbnQ6
-IFdlZG5lc2RheSwgSnVseSAyNywgMjAyMiA4OjU0IEFNDQo+IFRvOiBXYW5nLCBNaW5neXUv546L
-IOm4o+eRnCA8d2FuZ215QGZ1aml0c3UuY29tPjsNCj4gb3BlbmVtYmVkZGVkLWRldmVsQGxpc3Rz
-Lm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6IFtvZV0gW21ldGEtb2VdIFtQQVRDSF0g
-Z29vZ2xlYmVuY2htYXJrOiB1cGdyYWRlIDEuNi4xIC0+IDEuNy4wDQo+IA0KPiBIaSBXYW5nDQo+
-IA0KPiBJdHMgc3RyYW5nZSB0aGF0IHRoZSBkYXRlIG9uIHlvdXIgZW1haWxzIGlzIG5vdCBjb3Jy
-ZWN0LiBUaGlzIG1ha2VzIGl0IGRpZmZpY3VsdCB0bw0KPiBzb3J0IHBhdGNoIGVtYWlscyBieSBk
-YXRlLiBlLmcuIHRoaXMgbWVzc2FnZSBzYXlzIGl0IHdhcyBzZW50IG9uIEp1bHktMjMgYnV0IGl0
-IGhhcw0KPiBhcHBlYXJlZCB0b2RheSBKdWx5LTI2IGhlcmUsIHRoaXMgaXMgaXNzdWUgd2l0aCBh
-bGwgZW1haWxlZCBwYXRjaGVkIGZyb20geW91cg0KPiBhY2NvdW50LiBDYW4geW91IHRha2UgYSBs
-b29rIGF0IHlvdXIgbWFjaGluZSwgaXQgbWF5IG5vdCBoYXZlIGl0cyB0aW1lIHNldA0KPiBjb3Jy
-ZWN0bHkuDQo+IA0KPiBPbiA3LzIzLzIyIDEwOjUwIFBNLCB3YW5nbXkgd3JvdGU6DQo+ID4gQ2hh
-bmdlbG9nIGZyb20gMS42LjEgdG8gMS43LjA6DQo+ID4gPT09PT09PT09PQ0KPiA+ICAgIFN0b3Ag
-Z2VuZXJhdGluZyB0aGUgZXhwb3J0IGhlYWRlciBhbmQganVzdCBjaGVjayBpdCBpbg0KPiA+ICAg
-IHVzZSB0YXJnZXRfY29tcGlsZV9kZWZpbml0aW9ucw0KPiA+ICAgIHNpbXBsaWZpZWQgY29kZQ0K
-PiA+ICAgIEFkZCBkb2NzIGZvciBUaHJlYWRSYW5nZS4NCj4gPiAgICBBZGQgZG9jcyBvbiBNZW1v
-cnkgcHJvZmlsaW5nICgjMTIxNykuDQo+ID4gICAgU3VwcHJlc3MgR29vZ2xlVGVzdCB3YXJuaW5n
-cyBvbiB3aW5kb3dzIChNU1ZDKSB0b28uDQo+ID4gICAgRXhwYW5kIGRvY3VtZW50YXRpb24gZm9y
-IHVucGFja2luZyBhcmJpdHJhcnkgYXJndW1lbnRzLg0KPiA+ICAgIFJlZmluZSBkb2NzIG9uIGNo
-YW5naW5nIGNwdWZyZXEgZ292ZXJub3INCj4gPiAgICBSZWZpbmUgdGhlIFVzZXIgR3VpZGUgQ1BV
-IEZyZXF1ZW5jeSBTY2FsaW5nIHNlY3Rpb24NCj4gPiAgICBGaXggc29tZSBlcnJvcnMgaW4gQ3Vz
-dG9tIFN0YXRpc3RpY3MgZG9jdW1lbnQgZGVtbyBjb2RlLg0KPiA+ICAgIENhY2hlIFBlcmZDb3Vu
-dGVycyBpbnN0YW5jZSBpbiBQZXJmQ291bnRlcnNNZWFzdXJlbWVudA0KPiA+ICAgIEZpeCBjcm9z
-cyBjb21waWxhdGlvbiBmb3IgbWFjT1MgQVJNIGJ1aWxkcyBpbiBjaWJ1aWxkd2hlZWwNCj4gPiAg
-ICBidW1wIG51bWJ5LCBhcyBwZXIgZGVwZW5kYWJvdA0KPiA+ICAgIFVzZSBXaW4zMiBBUEkgb25s
-eSBmb3IgV2luMzIgYXBwcw0KPiA+ICAgIEFkZCBtdXRleCB3aGVuIHJlYWRpbmcgY291bnRlcnNf
-IChGaXhlcyAjMTMzNSkNCj4gPiAgICBBdm9pZCBwb3RlbnRpYWwgdHJ1bmNhdGlvbiBpc3N1ZXMg
-Zm9yIHRoZSBpbnRlZ3JhbCB0eXBlIHBhcmFtZXRlcml6ZWQNCj4gdGVzdHMuDQo+ID4gICAgRXhw
-b3NlIGRlZmF1bHQgZGlzcGxheSByZXBvcnRlciBjcmVhdGlvbiBpbiBwdWJsaWMgQVBJDQo+ID4g
-ICAgZXhwbGljaXRseSBleHBvcnQgcHVibGljIHN5bWJvbHMNCj4gPiAgICBDaGVjayBmb3IgbWFj
-cm8gZXhpc3RlbmNlIGJlZm9yZSB1c2luZw0KPiA+ICAgIHNpbXBsaWZ5IHJlZmVyZW5jZSB0byBp
-bnRlcm5hbCBwYXRoDQo+ID4gICAgSW50cm9kdWNlIHRoZSBwb3NzaWJpbGl0eSB0byBjdXN0b21p
-emUgdGhlIGhlbHAgcHJpbnRlciBmdW5jdGlvbg0KPiA+ICAgIG1vdmUgYnpsIGZpbGUgb3V0IG9m
-IHRvb2xzDQo+ID4gICAgcmVzb2x2ZSBjYXNlIHNlbnNpdGl2aXR5IGlzc3VlcyB3aXRoIFdPUktT
-UEFDRSBhbmQgd29ya3NwYWNlDQo+ID4gICAgTWFrZSBnZW5lcmF0ZV9leHBvcnRfaGVhZGVyLmJ6
-bCB3b3JrIGZvciBXaW5kb3dzLg0KPiA+ICAgIEBwbGF0Zm9ybXMgaXMgbWFnaWNhbDsgcmVtb3Zl
-IGl0IGZyb20gV09SS1NQQUNFLg0KPiA+ICAgIHJlc3RvcmUgQkVOQ0hNQVJLX01BSU4oKQ0KPiA+
-ICAgIEFsbG93IHNldHRpbmcgdGhlIGRlZmF1bHQgdGltZSB1bml0IGdsb2JhbGx5DQo+ID4gICAg
-QWRkIGxvbmcgZGVzY3JpcHRpb24gYW5kIGNvbnRlbnQgdHlwZSBmb3IgcHJvcGVyIFB5UEkgcHJl
-c2VudGF0aW9uDQo+ID4gICAgQWRkIFNldEJlbmNobWFya0ZpbHRlcigpIHRvIHNldCAtLWJlbmNo
-bWFya19maWx0ZXIgZmxhZyB2YWx1ZSBpbiB1c2VyIGNvZGUNCj4gPiAgICBBZGQgUHlQSSB1cGxv
-YWQgam9iIHRvIHdoZWVsIGJ1aWxkaW5nIHdvcmtmbG93DQo+ID4gICAgRml4IGZsb2F0IGNvbXBh
-cmFpc29uIGFuZCBhZGQgZmxvYXQgY29tcGFyaXNvbiB3YXJuaW5nDQo+ID4gICAgQWRkIEJFTkNI
-TUFSS19TVEFUSUNfREVGSU5FIHRvIHRoZSBQeXRob24gYmluZGluZ3MnIGNjX2JpbmFyeQ0KPiBs
-b2NhbOKApg0KPiA+ICAgIFJlbW92ZSBjb25kaXRpb25hbCB0cmlnZ2VyIGZyb20gUHlQSSB1cGxv
-YWQgam9iDQo+ID4gICAgQ2hhbmdlIGFydGlmYWN0IGRvd25sb2FkIG5hbWUgdG8gZGlzdCB0byBt
-YXRjaCB1cGxvYWQgbmFtZQ0KPiA+ICAgIEJ1aWxkIC8vOmJlbmNobWFyayBhcyBhIHN0YXRpYyBs
-aWJyYXJ5IG9ubHkuDQo+ID4gICAgRml4IEJhemVsIGJ1aWxkIGJyZWFrYWdlIGNhdXNlZCBieSBj
-b21taXQgNmE4OTRiZC4NCj4gPiAgICBbbmZjXSBSZWZvcm1hdCBkb2Mtc3RyaW5nIGluIGdlbmVy
-YXRlX2V4cG9ydF9oZWFkZXINCj4gPiAgICBVcGRhdGVzIGZvciBpbmNsdXNpdmUgbGFuZ3VhZ2UN
-Cj4gPiAgICBnZXR0aW5nIHN5c2luZm8gaW4gbGluZSB3aXRoIEdvb2dsZSBzdHlsZQ0KPiA+ICAg
-IFNtYWxsIG9wdGltaXphdGlvbiB0byBjb3VudGVyIG1hcCBtYW5hZ2VtZW50DQo+ID4gICAgU2h1
-dCBkb3duIEJhemVsIGdyYWNlZnVsbHkgYW5kIHJldmVydCB3aGVlbCBidWlsZCBzdHJhdGVneSB0
-byBqb2IgbWF0cml4DQo+ID4gICAgRml4IHdoZWVsIGpvYiBuYW1lIGZvciBQeVBJIHVwbG9hZHMN
-Cj4gPiAgICBGaWx0ZXIgb3V0IGJlbmNobWFya3MgdGhhdCBzdGFydCB3aXRoICJESVNBQkxFRF8i
-DQo+ID4gICAgQWRkIGJlbmNobWFyayBsYWJlbHMgdG8gdGhlIG91dHB1dCBvZiB0aGUgY29tcGFy
-aXNvbiB0b29sDQo+ID4gICAgRW5hYmxlIC1XY29udmVyc2lvbg0KPiA+ICAgIEFkZCBpbnN0YWxs
-YXRpb24gYW5kIGJ1aWxkIGluc3RydWN0aW9ucyBmb3IgUHl0aG9uIGJpbmRpbmdzDQo+ID4gICAg
-Zml4IHNvbWUgdHlwb3MNCj4gPiAgICBBZGQgb3B0aW9uIHRvIGdldCB0aGUgdmVyYm9zaXR5IHBy
-b3ZpZGVkIGJ5IGNvbW1hbmRsaW5lIGZsYWcgLXYgKCMxMzMwKQ0KPiA+ICAgIEFkZCBzdXBwb3J0
-IHRvIGdldCBjbG9jayBmb3IgbmV3IGFyY2hpdGVjdHVyZSBDU0tZDQo+ID4gICAgSW50cm9kdWNl
-IHdhcm11cCBwaGFzZSB0byBCZW5jaG1hcmtSdW5uZXIgKCMxMTMwKQ0KPiA+ICAgIFJlcG9ydCBs
-YXJnZSBudW1iZXJzIGluIHNjaWVudGlmaWMgbm90YXRpb24gaW4gY29uc29sZSByZXBvcnRlciAo
-IzEzMDMpDQo+ID4gICAgYWRkIG11bHRpcGxlIE9TZXMgdG8gYmF6ZWwgd29ya2Zsb3cNCj4gPiAg
-ICBBZGQgcG9zc2liaWxpdHkgdG8gYXNrIGZvciBsaWJiZW5jaG1hcmsgdmVyc2lvbiBudW1iZXIg
-KCMxMDA0KQ0KPiA+ICAgIEZpeCBEb05vdE9wdGltaXplKCkgR0NDIGNvcHkgb3ZlcmhlYWQgKCMx
-MzQwKQ0KPiA+ICAgIENsYXJpZnkgdGhhdCB0aGUgY3B1IGZyZXF1ZW5jeSBpcyBub3QgdXNlZCBm
-b3IgYmVuY2htYXJrIHRpbWluZ3MuDQo+ID4gICAgUmV2ZXJ0ICJBZGQgcG9zc2liaWxpdHkgdG8g
-YXNrIGZvciBsaWJiZW5jaG1hcmsgdmVyc2lvbiBudW1iZXIgKCMxMDA0KSINCj4gPiAgICBSZW1v
-dmUgcmVkdW5kYW50IGZvcm1hdHRpbmcgdGFncw0KPiA+ICAgIEZpeCBEb05vdE9wdGltaXplKCkg
-R0NDIGNvbXBpbGUgZXJyb3Igd2l0aCBzb21lIHR5cGVzICgjMTM0MCkNCj4gPiAgICBFeHBvc2Ug
-ZGVmYXVsdCBoZWxwIHByaW50ZXIgZnVuY3Rpb24NCj4gPiAgICBmaXggc2FuaXRpemVyIGJ1aWxk
-cyBieSB1c2luZyBjbGFuZyAxMw0KPiA+ICAgIFN1cHByZXNzIG52Y2Mgb2Zmc2V0b2Ygd2Fybmlu
-Zw0KPiA+ICAgIEV4cG9zZSBnb29nbGVfYmVuY2htYXJrLlN0YXRlIGZvciBweXRob24gYmluZGlu
-Z3MuDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBXYW5nIE1pbmd5dSA8d2FuZ215QGZ1aml0c3Uu
-Y29tPg0KPiA+IC0tLQ0KPiA+ICAgLi4uL3tnb29nbGViZW5jaG1hcmtfMS42LjEuYmIgPT4gZ29v
-Z2xlYmVuY2htYXJrXzEuNy4wLmJifSAgICAgIHwgMg0KPiArLQ0KPiA+ICAgMSBmaWxlIGNoYW5n
-ZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pDQo+ID4gICByZW5hbWUNCj4gPiBtZXRh
-LW9lL3JlY2lwZXMtc3VwcG9ydC9nb29nbGViZW5jaG1hcmsve2dvb2dsZWJlbmNobWFya18xLjYu
-MS5iYiA9Pg0KPiA+IGdvb2dsZWJlbmNobWFya18xLjcuMC5iYn0gKDkwJSkNCj4gPg0KPiA+IGRp
-ZmYgLS1naXQNCj4gPiBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2dvb2dsZWJlbmNobWFyay9n
-b29nbGViZW5jaG1hcmtfMS42LjEuYmINCj4gPiBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2dv
-b2dsZWJlbmNobWFyay9nb29nbGViZW5jaG1hcmtfMS43LjAuYmINCj4gPiBzaW1pbGFyaXR5IGlu
-ZGV4IDkwJQ0KPiA+IHJlbmFtZSBmcm9tDQo+ID4gbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvZ29v
-Z2xlYmVuY2htYXJrL2dvb2dsZWJlbmNobWFya18xLjYuMS5iYg0KPiA+IHJlbmFtZSB0bw0KPiA+
-IG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2dvb2dsZWJlbmNobWFyay9nb29nbGViZW5jaG1hcmtf
-MS43LjAuYmINCj4gPiBpbmRleCBiNDRkM2JlZTI3Li43ZmM2ZDY0NzI4IDEwMDY0NA0KPiA+IC0t
-LSBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2dvb2dsZWJlbmNobWFyay9nb29nbGViZW5jaG1h
-cmtfMS42LjEuYmINCj4gPiArKysNCj4gYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9nb29nbGVi
-ZW5jaG1hcmsvZ29vZ2xlYmVuY2htYXJrXzEuNy4wLmJiDQo+ID4gQEAgLTUsNyArNSw3IEBAIExJ
-Q0VOU0UgPSAiQXBhY2hlLTIuMCINCj4gPiAgIExJQ19GSUxFU19DSEtTVU0gPQ0KPiAiZmlsZTov
-L0xJQ0VOU0U7bWQ1PTNiODNlZjk2Mzg3ZjE0NjU1ZmM4NTRkZGMzYzZiZDU3Ig0KPiA+DQo+ID4g
-ICBTUkNfVVJJID0NCj4gImdpdDovL2dpdGh1Yi5jb20vZ29vZ2xlL2JlbmNobWFyay5naXQ7cHJv
-dG9jb2w9aHR0cHM7YnJhbmNoPW1haW4iDQo+ID4gLVNSQ1JFViA9ICIwZDk4ZGJhMjlkNjZlOTMy
-NTlkYjdkYWE1M2E5MzI3ZGY3NjdhNDE1Ig0KPiA+ICtTUkNSRVYgPSAiMzYxZThkMWNmZTBjNmMz
-NmQzMGIzOWYxYjYxMzAyZWNlNTUwNzMyMCINCj4gPg0KPiA+ICAgUyA9ICIke1dPUktESVJ9L2dp
-dCINCj4gPg0KPiA+DQo+ID4NCj4gPg0KPiA+IC09LT0tPS09LT0tPS09LT0tPS09LT0tDQo+ID4g
-TGlua3M6IFlvdSByZWNlaXZlIGFsbCBtZXNzYWdlcyBzZW50IHRvIHRoaXMgZ3JvdXAuDQo+ID4g
-Vmlldy9SZXBseSBPbmxpbmUgKCM5Nzk5OCk6DQo+ID4gaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRk
-ZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL21lc3NhZ2UvOTc5OTgNCj4gPiBNdXRlIFRoaXMg
-VG9waWM6IGh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tdC85MjY0MDcyMC8xOTk3OTE0
-DQo+ID4gR3JvdXAgT3duZXI6IG9wZW5lbWJlZGRlZC1kZXZlbCtvd25lckBsaXN0cy5vcGVuZW1i
-ZWRkZWQub3JnDQo+ID4gVW5zdWJzY3JpYmU6IGh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9y
-Zy9nL29wZW5lbWJlZGRlZC1kZXZlbC91bnN1Yg0KPiA+IFtyYWoua2hlbUBnbWFpbC5jb21dDQo+
-ID4gLT0tPS09LT0tPS09LT0tPS09LT0tPS0NCj4gPg0K
+From: Mingli Yu <mingli.yu@windriver.com>
+
+Fixes:
+  WARNING: s-nail-14.9.24-r0 do_package_qa: QA Issue: File /usr/bin/s-nail in package s-nail contains reference to TMPDIR [buildpaths]
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ ...e-config.sh-not-reveal-the-build-env.patch | 43 +++++++++++++++++++
+ .../recipes-extended/s-nail/s-nail_14.9.24.bb |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/s-nail/files/0001-mk-make-config.sh-not-reveal-the-build-env.patch
+
+diff --git a/meta-oe/recipes-extended/s-nail/files/0001-mk-make-config.sh-not-reveal-the-build-env.patch b/meta-oe/recipes-extended/s-nail/files/0001-mk-make-config.sh-not-reveal-the-build-env.patch
+new file mode 100644
+index 000000000..18ef6cae2
+--- /dev/null
++++ b/meta-oe/recipes-extended/s-nail/files/0001-mk-make-config.sh-not-reveal-the-build-env.patch
+@@ -0,0 +1,43 @@
++From fa93dab6393527673e642f26b6ea2c4413dd3cfe Mon Sep 17 00:00:00 2001
++From: Mingli Yu <mingli.yu@windriver.com>
++Date: Wed, 27 Jul 2022 13:40:12 +0800
++Subject: [PATCH] make-config.sh: hidden the build info
++
++Use the CC as placeholder to replace the real build information which
++will be collected via src/mx/accmacvar.c and then added in the final
++binary s-nail, so hidden the build info to avoid revealing the detailed
++build info.
++
++Upstream-Status: Inappropriate [oe specific]
++
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++---
++ mk/make-config.sh | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/mk/make-config.sh b/mk/make-config.sh
++index 2d7c619..9146004 100644
++--- a/mk/make-config.sh
+++++ b/mk/make-config.sh
++@@ -3637,15 +3637,15 @@ LIBS=`squeeze_ws "${LIBS}"`
++ COMMLINE=`printf '%s\n' "${COMMLINE}" | ${sed} -e 's/.*--\(.*\)/\1/'`
++ COMMLINE=`squeeze_ws "${COMMLINE}"`
++ 
++-i=`printf '%s %s %s\n' "${CC}" "${CFLAGS}" "${i}"`
+++i="CC"
++    printf '#define VAL_BUILD_CC "%s"\n' "$i" >> ${h}
++    i=`string_to_char_array "${i}"`
++    printf '#define VAL_BUILD_CC_ARRAY %s\n' "$i" >> ${h}
++-i=`printf '%s %s %s\n' "${CC}" "${LDFLAGS}" "${LIBS}"`
+++i="CC"
++    printf '#define VAL_BUILD_LD "%s"\n' "$i" >> ${h}
++    i=`string_to_char_array "${i}"`
++    printf '#define VAL_BUILD_LD_ARRAY %s\n' "$i" >> ${h}
++-i=${COMMLINE}
+++i="CC"
++    printf '#define VAL_BUILD_REST "%s"\n' "$i" >> ${h}
++    i=`string_to_char_array "${i}"`
++    printf '#define VAL_BUILD_REST_ARRAY %s\n' "$i" >> ${h}
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-extended/s-nail/s-nail_14.9.24.bb b/meta-oe/recipes-extended/s-nail/s-nail_14.9.24.bb
+index 6e004fc90..bcdb1e478 100644
+--- a/meta-oe/recipes-extended/s-nail/s-nail_14.9.24.bb
++++ b/meta-oe/recipes-extended/s-nail/s-nail_14.9.24.bb
+@@ -10,6 +10,7 @@ SRC_URI = "https://ftp.sdaoden.eu/${BP}.tar.xz \
+            file://0001-make.rc-set-VAL_MTA.patch \
+            file://0001-su_INLINE-gcc-only-GNU-specifics-after-Og.patch \
+            file://0001-su_INLINE-eh-no-give-up-share-detection.patch \
++           file://0001-mk-make-config.sh-not-reveal-the-build-env.patch \
+ "
+ SRC_URI[sha256sum] = "2714d6b8fb2af3b363fc7c79b76d058753716345d1b6ebcd8870ecd0e4f7ef8c"
+ 
+-- 
+2.25.1
+
 
