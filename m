@@ -1,85 +1,90 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CD775C04A68
-	for <webhook@archiver.kernel.org>; Wed, 27 Jul 2022 20:20:02 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com
- [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web11.24703.1658953196264418867
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22155C04A68
+	for <webhook@archiver.kernel.org>; Wed, 27 Jul 2022 21:25:33 +0000 (UTC)
+Received: from mail-il1-f178.google.com (mail-il1-f178.google.com
+ [209.85.166.178])
+ by mx.groups.io with SMTP id smtpd.web11.25460.1658957125657854228
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Jul 2022 13:19:56 -0700
+ Wed, 27 Jul 2022 14:25:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=qGUhvb/b;
- spf=pass (domain: gmail.com, ip: 209.85.214.170,
- mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id d3so9111098pls.4
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=U16IT/jv;
+ spf=pass (domain: gmail.com, ip: 209.85.166.178,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-il1-f178.google.com with SMTP id h16so91236ila.2
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Jul 2022 13:19:56 -0700 (PDT)
+ Wed, 27 Jul 2022 14:25:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=message-id:date:mime-version:user-agent:subject:content-language:to
          :references:from:in-reply-to:content-transfer-encoding;
-        bh=nlWsE/BlTOTg391+9I8dbxi74B3XcN8O0xh2oN95th8=;
-        b=qGUhvb/bjvhGWgQInwA78wHz45R6OXlRNveuzBDbNznRkIRsutbdrWtwVTmJEUTSy1
-         bWpiuVoa22B3mv1Dv74vEWFI6amKaiCBclgYfsbZjJ9bpyLEe10Qz4+HxYobeKz//3bg
-         wMpHv/FQ5jVoGPxOmk0HfQT7/1Qv9LAMR8Smhgt9CYbGS2nCOQGlaORxJ0SaZrun0zaF
-         HrAqgNEUbUukRII8VORg+6Y9XndEHgFrOM1GSg2LJPVcoGsPWg71TSWPx65jDYSsoOfx
-         CAMmVtieSMDGBib2iFku6l7Mz2md19U0AkCJSAPnHyfdApPIqhe4mXom5OSNJBr6EhzZ
-         wFGQ==
+        bh=FKFx/g9R1iwBKPVNfbAkDhP2oo/YDbT7jcUUvj2n4wg=;
+        b=U16IT/jvjrBa7xa8VAFA90SPvbtRHCPt56zi9eSlxbcAm+ZKyLcYS42YStGXkCD7vH
+         e+PlRmusGRreNh0CmI5o21ChFOv3H4WLK6FqwhVzqhbvMngZGJQs/zWlopk1QYNHKE0L
+         ykAW1sHYAimepfX1vu33KGLeAF5w/engBDM9vv3rL8hZy7ILa+11n61Rx8dxiOJyjZgw
+         v0F+f0w03BPNVqy8nBjGwpiL7Vzu1NNEa1PDqm+kVdyMMjnGx/QhAoelY4T23lTMkFlI
+         nQM+66aE5aXG1EqnqMdwP4Aetngk9zzXKRrvq16xuZHTmWaz70x7BBqWqlvQ4mDWU1Za
+         pNgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
          :content-language:to:references:from:in-reply-to
          :content-transfer-encoding;
-        bh=nlWsE/BlTOTg391+9I8dbxi74B3XcN8O0xh2oN95th8=;
-        b=pm/jLgGuf5r6sGtgVnMsRnCopmXfzd+c3oj+FYy17CCIK9B++4XN2Hep3f0+Xw2w7x
-         lkIFnK2edMeVobzzMFJtz14E/4ws6ZyDQ/ik+YHssOMX1IVzXFz2GbKsxsO6vITXJvxq
-         0Uli1Cqc9HJBHYHrUs8PGCRXefGd/q8E3RrqTICnOfTAHCuiEHvjvfXpWc3ZFFXXhOPV
-         JgargRXmALWMO8Vn416I6JL3zrtQEd0BAk+xLW8D8JFA3SFEpZQNTabsIEuoqV2L893y
-         mihmM1WHpYn8yG4YCSynMQTc7KorGeWzi6ke0aOn/3XHgIKg8yxfa+VFqbBNK5x+jXel
-         UhnA==
-X-Gm-Message-State: AJIora9j/LNdoHfj5RQ+BKvyrcbEgPL6qyftgUa851fxaYaFLB5XRtkQ
-	L/JxwojGn+JGHN/ufZHvYmMNK06K2mw=
+        bh=FKFx/g9R1iwBKPVNfbAkDhP2oo/YDbT7jcUUvj2n4wg=;
+        b=PCmWI2xCIzHXDr45ze7AFJDa8ZhekzfMcjmShNqrF+HU3JYqYWgvDfRm3z7sTE+sjT
+         XZZLYotYavRaahxrf/G00ZV4aIPoixq+jljRt8gZs3cSMm0ye6HFlXQhbhOBdaVYZsJZ
+         FISjbKsX5cxZrZMvDye1aPnWSj+dWoLkDFESOP+Z/A+uSXC9ZdZ6PD1BFSnGwXa4zNTU
+         oBYy8UQexVOr987dZsSKHGxYX9LHvnGAY+Bv+V/2sGXvPM7bTjgN53DMbkgCi0ni9sH6
+         U0TtFGZW5h23/APAbEpSfknjJA5IdUSlAl40tk9uVhpPbuGM0qnbUtdyovULp8kr8fzC
+         2YgQ==
+X-Gm-Message-State: AJIora/wBg4Ega1Z8okDOmyC9mdVX+ln008TvW7l+pGoFmaKeL3ndfwy
+	WYZqt/ZW+9bKX0mTaCJ5eSg=
 X-Google-Smtp-Source: 
- AGRyM1tnB49sUjuOAjFPMN/v+jnKpBnwsTqGpg+/WD8awS1pfsw2u4ziAxqrFmtPusvZAEBjzDIbcQ==
-X-Received: by 2002:a17:902:ecc2:b0:16d:6146:3337 with SMTP id
- a2-20020a170902ecc200b0016d61463337mr19776744plh.139.1658953194763;
-        Wed, 27 Jul 2022 13:19:54 -0700 (PDT)
-Received: from ?IPV6:2601:202:4180:a5c0:cb87:47f5:7b76:e22c?
- ([2601:202:4180:a5c0:cb87:47f5:7b76:e22c])
+ AGRyM1szcPTsN7LmrT+k05mgddlfuIK7kF9ipluiPV/sgfBKeiZ3W1TOOx/IoMhJJ+fYRoOb88W1hw==
+X-Received: by 2002:a92:ce81:0:b0:2dc:fbec:d023 with SMTP id
+ r1-20020a92ce81000000b002dcfbecd023mr9318493ilo.155.1658957124865;
+        Wed, 27 Jul 2022 14:25:24 -0700 (PDT)
+Received: from ?IPV6:2607:fea8:95df:9730:e8b7:596a:a352:5d5c?
+ ([2607:fea8:95df:9730:e8b7:596a:a352:5d5c])
         by smtp.gmail.com with ESMTPSA id
- c22-20020a17090ad91600b001f1694dafb1sm2157874pjv.44.2022.07.27.13.19.50
-        for <openembedded-devel@lists.openembedded.org>
+ x24-20020a0566380cb800b00339bae1dab9sm8157114jad.40.2022.07.27.14.25.23
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 27 Jul 2022 13:19:52 -0700 (PDT)
-Message-ID: <3f3ef5cb-e09b-a933-9c11-81773c61fa63@gmail.com>
-Date: Wed, 27 Jul 2022 13:19:49 -0700
+        Wed, 27 Jul 2022 14:25:24 -0700 (PDT)
+Message-ID: <3f85772a-416b-5311-656a-ccf5f1a22932@gmail.com>
+Date: Wed, 27 Jul 2022 17:25:22 -0400
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.0.3
 Subject: Re: [oe] [meta-networking][PATCH] sshpass: add recipe
 Content-Language: en-US
-To: openembedded-devel@lists.openembedded.org
+To: Mike Petersen <mike.petersen@ni.com>,
+ openembedded-devel@lists.openembedded.org
 References: <20220727181928.34114-1-mike.petersen@ni.com>
-From: akuster808 <akuster808@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 In-Reply-To: <20220727181928.34114-1-mike.petersen@ni.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Jul 2022 20:20:02 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 Jul 2022 21:25:33 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98019
+ https://lists.openembedded.org/g/openembedded-devel/message/98020
+
+There are newer version in some layers on layerindex e.g.
+
+https://layers.openembedded.org/layerindex/recipe/106509/
+
+perhaps use that as starting point.
 
 
-
-On 7/27/22 11:19, Mike Petersen wrote:
+On 7/27/22 2:19 PM, Mike Petersen wrote:
 > From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
->
+> 
 > Needed for automating ssh logins, used in auto-tests.
->
+> 
 > Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
 > Signed-off-by: Mike Petersen <mike.petersen@ni.com>
 > ---
@@ -88,7 +93,7 @@ On 7/27/22 11:19, Mike Petersen wrote:
 >   2 files changed, 18 insertions(+)
 >   create mode 100644 meta-networking/recipes-connectivity/sshpass/sshpass.inc
 >   create mode 100644 meta-networking/recipes-connectivity/sshpass/sshpass_1.05.bb
->
+> 
 > diff --git a/meta-networking/recipes-connectivity/sshpass/sshpass.inc b/meta-networking/recipes-connectivity/sshpass/sshpass.inc
 > new file mode 100644
 > index 000000000..b19ae4313
@@ -113,23 +118,21 @@ On 7/27/22 11:19, Mike Petersen wrote:
 > @@ -0,0 +1,8 @@
 > +PR = "${INC_PR}.0"
 > +
-Don't think we need PR.
 > +require sshpass.inc
-
-Can we combine both files?
 > +
 > +LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 > +
 > +SRC_URI[md5sum] = "c52d65fdee0712af6f77eb2b60974ac7"
 > +SRC_URI[sha256sum] = "c3f78752a68a0c3f62efb3332cceea0c8a1f04f7cf6b46e00ec0c3000bc8483e"
->
+> 
+> 
+> 
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
 > View/Reply Online (#98018): https://lists.openembedded.org/g/openembedded-devel/message/98018
-> Mute This Topic: https://lists.openembedded.org/mt/92655179/3616698
+> Mute This Topic: https://lists.openembedded.org/mt/92655179/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
->
-
+> 
 
