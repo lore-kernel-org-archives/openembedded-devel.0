@@ -1,610 +1,408 @@
-Return-Path: <ptsneves@gmail.com>
+Return-Path: <rybczynska@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06D7EC19F2B
-	for <webhook@archiver.kernel.org>; Thu, 28 Jul 2022 14:03:48 +0000 (UTC)
-Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com
- [209.85.208.169])
- by mx.groups.io with SMTP id smtpd.web09.33013.1659017015724007937
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 57DB0C04A68
+	for <webhook@archiver.kernel.org>; Thu, 28 Jul 2022 15:04:48 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
+ [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.web10.33646.1659020675188356486
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Jul 2022 07:03:36 -0700
+ Thu, 28 Jul 2022 08:04:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=cMWt6PT5;
- spf=pass (domain: gmail.com, ip: 209.85.208.169,
- mailfrom: ptsneves@gmail.com)
-Received: by mail-lj1-f169.google.com with SMTP id w18so2089171lje.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Uhuv25hw;
+ spf=pass (domain: gmail.com, ip: 209.85.221.51,
+ mailfrom: rybczynska@gmail.com)
+Received: by mail-wr1-f51.google.com with SMTP id k8so365211wrd.5
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Jul 2022 07:03:35 -0700 (PDT)
+ Thu, 28 Jul 2022 08:04:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=zNP3Tcyq9uf0+jJ+jb3YZrdaHgw+yCxT4T3qK6t3UBs=;
-        b=cMWt6PT5AK5h1XlaSWWqLgPSoqQaN8WZ1yOMcpIfJIgxP14NUZHMaVIos+UWrF0Th7
-         FZ3bxbe9QiMn7LExFn65B5H9KoVss17SpptMZSxzgSbsSa0qxrzvTaoOHESTEC8xT53W
-         WiFYdkPjUSIIwh+nFellH9ZiuEDKFe/tRxl8EldqMWKq9rdbiT1x7k+BfIMpvYp7Qo2+
-         8qCpS1RkWtKpPQVxLua/SzkDEq8ztKAj03gwVUqtaO40Vc5Q+lupwogZr7iBmOrl1xs0
-         4FmgohAHBh40LBe+pU8qooe0YsJkTRJJeaDU47VDPZ8u0iQstDRcTN2qlKZcq5Br2LqG
-         2W4g==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc;
+        bh=PX3LGdvs8oBhIXRx1+WOLyt4svpo9mH3tg7gWUsAOUs=;
+        b=Uhuv25hwtb+xk+Fvvodw0+UXc+/VG92Ka63BnvzkBMcQYCBEapUcnfhnzDRTVk87A0
+         L8TAE7UmNBJgaWvLbyXJZrely5SYudtxSokabILdGv8jQo0ya7pCcbI8RCYmFvIn1j3V
+         /IvDD0rzyn3IdD6nlO7M4aIcn3LKwnJfPwb+NS+Vh6oy7WFI2MIm43/n7Z+4wcNN9dur
+         fWKif0ImTQRNtUV+uKOrydg3EJO8T8IxsEiUZwZ9oPvkjznhly/+nVrmKYD1YiT3XjE1
+         oPHKClIjnHDegDQFOInypF0PjJLVzdHsenSpMU0e6jwWwXBB+sNY6jniS3QHOsZ3E6iq
+         PNcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=zNP3Tcyq9uf0+jJ+jb3YZrdaHgw+yCxT4T3qK6t3UBs=;
-        b=Xst+4T33KZSoRXIVsWQiezO/ERZo/jsRzgPy+/HwqgzpPpNTH6ak2ZIXalsv5ep4Ts
-         4zs+IPLwEVGcEOBFdjq56sCGMm9PvmqNQRTC6EwPboS6VUpDpUmrxH0DEdxMxma+8cV8
-         UfJlg8iYDEVpU+s8VsKmNR2+GhTdOoMlo4K69w7C7zOcRFzk2Pz3fKn8GF8qgeLvwmTF
-         P+WHEznDnnGUONxCus77vbjUGdvfxNOyA/oNXjs4TPgnbsMOax0PdGk0Xr+KQqS3ZJZO
-         kjvJep/jopVChp41gyAdxKDMcxdkTY/dN2Bf82zmpXtyDulwSnr6PHtKEWD5VDD63ZAW
-         cIcQ==
-X-Gm-Message-State: AJIora8gFPWIbfYGqJrxSTpTx+bo9k4VlsR1XZS0ZlUg+/x4yjmqo40N
-	9e1Q6cvK+2qld61zPsQe0puCuv/WiQ==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc;
+        bh=PX3LGdvs8oBhIXRx1+WOLyt4svpo9mH3tg7gWUsAOUs=;
+        b=BRHarVafVM038ZnbApaRS2dUOq5mDDMzthXuhd0Is9Gfv9pDfMX8nYnVN5M5NfCqg2
+         UqJPl1yLvZDAvo5Ju+boy4wf5t1BDy0Dig2zMRisrEqU9FL6uaLV6lSyLbMctixwE/6j
+         3BItYm88xDZSzC54BJUX4F736xDX339XBdd9iSl8ya8ZhiFUkBuFTE0K5rOLzcmS6I4J
+         GqRK7fo4X5ilsP6rA2fqZOoLSfoQ/nmJYlN26nxnlxUmH5ACB3rFjEeRZ9kRQndNN+CH
+         80l+xLRXUBin5fUOLJY2vr8AYojNHUF/TkBP7jyefmqGYQpIFxGkTOQy35kfaRWMt6NI
+         1ZsQ==
+X-Gm-Message-State: AJIora9nKjWcSg6KM0NxopH6aNPwld3tq867EJXftXp4wTceFexQDCJJ
+	Nev9T6aGq5AYOiHAGvMEFMIa/Q5tVBE=
 X-Google-Smtp-Source: 
- AGRyM1vHSvZkLd8xLrmHE/HSbvqtdrZH1Ih3trD70kF+vL0CcoTtObH5MjQAQ0leWeL5RPTZTrvx0A==
-X-Received: by 2002:a05:651c:996:b0:25d:f764:5697 with SMTP id
- b22-20020a05651c099600b0025df7645697mr9089615ljq.328.1659017013452;
-        Thu, 28 Jul 2022 07:03:33 -0700 (PDT)
-Received: from localhost.localdomain (85-128-83-172.static.ip.netia.com.pl.
- [85.128.83.172])
+ AGRyM1vHAaTi1hnlFgf0CofZ3TnshxsAV1umAQMsM3/nN1jABcGHfAmIRYIUTn3jRhkCqdi9qPqB0w==
+X-Received: by 2002:a5d:434a:0:b0:21d:aa7e:b1bb with SMTP id
+ u10-20020a5d434a000000b0021daa7eb1bbmr18784124wrr.619.1659020672869;
+        Thu, 28 Jul 2022 08:04:32 -0700 (PDT)
+Received: from localhost.localdomain ([80.215.178.192])
         by smtp.gmail.com with ESMTPSA id
- t2-20020a19ad02000000b0047255d211adsm211157lfc.220.2022.07.28.07.03.32
+ q5-20020a1ce905000000b003a320e6f011sm1544087wmc.1.2022.07.28.08.04.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 28 Jul 2022 07:03:33 -0700 (PDT)
-From: Paulo Neves <ptsneves@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Paulo Neves <ptsneves@gmail.com>
-Subject: [oe][meta-oe][ 1/1] fluentbit Upgrade to 1.3.5 -> 1.9.6
-Date: Thu, 28 Jul 2022 16:03:30 +0200
-Message-Id: <20220728140330.3449041-1-ptsneves@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        Thu, 28 Jul 2022 08:04:32 -0700 (PDT)
+From: Marta Rybczynska <rybczynska@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	akuster808@gmail.com
+Cc: alex.kanavin@gmail.com,
+	raj.khem@gmail.com,
+	Marta Rybczynska <rybczynska@gmail.com>,
+	Marta Rybczynska <marta.rybczynska@huawei.com>
+Subject: [meta-oe][kirkstone][PATCH] polkit: update patches for musl
+ compilation
+Date: Thu, 28 Jul 2022 17:04:09 +0200
+Message-Id: <20220728150409.3981773-1-rybczynska@gmail.com>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 28 Jul 2022 14:03:48 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Jul 2022 15:04:48 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98034
+ https://lists.openembedded.org/g/openembedded-devel/message/98035
 
-Signed-off-by: Paulo Neves <ptsneves@gmail.com>
+Update the patch to make netgroup support optional to fit the commit
+merged upstream [1], update the other patch depending on one of the
+changes.
+
+Without this update, a compilation with musl fails with:
+| ../../../polkit-0.119/src/polkitbackend/polkitbackendduktapeauthority.c: In function 'js_polkit_user_is_in_netgroup':
+| ../../../polkit-0.119/src/polkitbackend/polkitbackendduktapeauthority.c:1039:7: warning: implicit declaration of function 'innetgr' [-Wimplicit-function-declaration]
+|  1039 |   if (innetgr (netgroup,
+|       |       ^~~~~~~
+
+[1] https://gitlab.freedesktop.org/polkit/polkit/-/commit/b57deee8178190a7ecc75290fa13cf7daabc2c66
+
+Signed-off-by: Marta Rybczynska <marta.rybczynska@huawei.com>
 ---
- ...t-Do-not-use-private-makefile-target.patch | 68 +++++++++++++++
- ...nit-install-location-with-SYSTEM_DIR.patch | 28 -------
- ...caused-by-using-flb_free-instead-of-.patch | 43 ----------
- ...-ppc-Fix-signature-for-co_create-API.patch | 38 ---------
- ...-not-hardcode-compilation-directorie.patch | 26 ++++++
- ...GV-caused-by-using-flb_free-instead-.patch | 82 -------------------
- ...0003-mbedtls-Do-not-overwrite-CFLAGS.patch | 25 ++++++
- .../fluentbit/fluentbit/builtin-nan.patch     | 27 ------
- .../cross-build-init-system-detection.patch   | 38 ---------
- ...{fluentbit_1.3.5.bb => fluentbit_1.9.6.bb} | 44 +++++-----
- 10 files changed, 139 insertions(+), 280 deletions(-)
- create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Do-not-use-private-makefile-target.patch
- delete mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch
- delete mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0001-bin-fix-SIGSEGV-caused-by-using-flb_free-instead-of-.patch
- delete mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0001-ppc-Fix-signature-for-co_create-API.patch
- create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch
- delete mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0002-parser-Fix-SIGSEGV-caused-by-using-flb_free-instead-.patch
- create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0003-mbedtls-Do-not-overwrite-CFLAGS.patch
- delete mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/builtin-nan.patch
- delete mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/cross-build-init-system-detection.patch
- rename meta-oe/recipes-extended/fluentbit/{fluentbit_1.3.5.bb => fluentbit_1.9.6.bb} (53%)
+ ...ded-support-for-duktape-as-JS-engine.patch |   2 +-
+ .../0004-Make-netgroup-support-optional.patch | 276 ++++++++++++++++++
+ .../recipes-extended/polkit/polkit_0.119.bb   |   2 +-
+ 3 files changed, 278 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/polkit/polkit/0004-Make-netgroup-support-optional.patch
 
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Do-not-use-private-makefile-target.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Do-not-use-private-makefile-target.patch
+diff --git a/meta-oe/recipes-extended/polkit/polkit/0003-Added-support-for-duktape-as-JS-engine.patch b/meta-oe/recipes-extended/polkit/polkit/0003-Added-support-for-duktape-as-JS-engine.patch
+index e44e4f6e4..21190a8e5 100644
+--- a/meta-oe/recipes-extended/polkit/polkit/0003-Added-support-for-duktape-as-JS-engine.patch
++++ b/meta-oe/recipes-extended/polkit/polkit/0003-Added-support-for-duktape-as-JS-engine.patch
+@@ -603,7 +603,7 @@ index b625743..bbf4768 100644
+ +CC="$PTHREAD_CC"
+ +AC_CHECK_FUNCS([pthread_condattr_setclock])
+ +
+- AC_CHECK_FUNCS(clearenv fdatasync setnetgrent)
++ AC_CHECK_FUNCS(clearenv fdatasync)
+  
+  if test "x$GCC" = "xyes"; then
+ @@ -581,6 +598,13 @@ echo "
+diff --git a/meta-oe/recipes-extended/polkit/polkit/0004-Make-netgroup-support-optional.patch b/meta-oe/recipes-extended/polkit/polkit/0004-Make-netgroup-support-optional.patch
 new file mode 100644
-index 000000000..0a80a92ed
+index 000000000..3a16b1474
 --- /dev/null
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Do-not-use-private-makefile-target.patch
-@@ -0,0 +1,68 @@
-+From 6a704ab7bf69cd5d6970b3a7d3ae7798b26027c1 Mon Sep 17 00:00:00 2001
-+From: Paulo Neves <ptsneves@gmail.com>
-+Date: Thu, 28 Jul 2022 11:28:41 +0200
-+Subject: [PATCH] CMakeLists.txt Do not use private makefile $< target
++++ b/meta-oe/recipes-extended/polkit/polkit/0004-Make-netgroup-support-optional.patch
+@@ -0,0 +1,276 @@
++From 6d80df97117b0918cb9192c7d58b55aed1779ecb Mon Sep 17 00:00:00 2001
++From: "A. Wilcox" <AWilcox@Wilcox-Tech.com>
++Date: Sun, 15 May 2022 05:04:10 +0000
++Subject: [PATCH] Make netgroup support optional
 +
-+$< is a private detail from the Makefile generated by CMakefile and
-+are not under control or to be used at the CMakeLists level. In 3.20
-+that private generation changed pre-requisite targets[1] and now logs
-+contain the path compiler_depend.ts instead of the actual file.
++On at least Linux/musl and Linux/uclibc, netgroup support is not
++available.  PolKit fails to compile on these systems for that reason.
++
++This change makes netgroup support conditional on the presence of the
++setnetgrent(3) function which is required for the support to work.  If
++that function is not available on the system, an error will be returned
++to the administrator if unix-netgroup: is specified in configuration.
++
++(sam: rebased for Meson and Duktape.)
++
++Closes: https://gitlab.freedesktop.org/polkit/polkit/-/issues/14
++Closes: https://gitlab.freedesktop.org/polkit/polkit/-/issues/163
++Closes: https://gitlab.freedesktop.org/polkit/polkit/-/merge_requests/52
++Signed-off-by: A. Wilcox <AWilcox@Wilcox-Tech.com>
++
++Ported back the change in configure.ac (upstream removed autotools
++support).
++
++Upstream-Status: Backport [https://gitlab.freedesktop.org/polkit/polkit/-/commit/b57deee8178190a7ecc75290fa13cf7daabc2c66]
++Signed-off-by: Marta Rybczynska <marta.rybczynska@huawei.com>
++
 +---
-+ CMakeLists.txt              | 6 +-----
-+ lib/chunkio/CMakeLists.txt  | 7 +------
-+ lib/cmetrics/CMakeLists.txt | 7 +------
-+ 3 files changed, 3 insertions(+), 17 deletions(-)
++ configure.ac                                    |  2 +-
++ meson.build                                     |  1 +
++ src/polkit/polkitidentity.c                     | 17 +++++++++++++++++
++ src/polkit/polkitunixnetgroup.c                 |  3 +++
++ .../polkitbackendduktapeauthority.c             |  4 ++--
++ .../polkitbackendinteractiveauthority.c         | 14 ++++++++------
++ src/polkitbackend/polkitbackendjsauthority.cpp  |  2 ++
++ test/polkit/polkitidentitytest.c                |  8 +++++++-
++ test/polkit/polkitunixnetgrouptest.c            |  2 ++
++ .../test-polkitbackendjsauthority.c             |  2 ++
++ 10 files changed, 45 insertions(+), 10 deletions(-)
 +
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 3dba5a8..d94b988 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -46,11 +46,7 @@ else()
-+   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
-+ endif()
++diff --git a/configure.ac b/configure.ac
++index bbf4768..f636ec5 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -117,7 +117,7 @@ CFLAGS="$CFLAGS $PTHREAD_CFLAGS"
++ CC="$PTHREAD_CC"
++ AC_CHECK_FUNCS([pthread_condattr_setclock])
 + 
-+-if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-+-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__='\"$(subst ${CMAKE_SOURCE_DIR}/,,$(abspath $<))\"'")
-+-else()
-+-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__=__FILE__")
-+-endif()
-++set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__=__FILE__")
++-AC_CHECK_FUNCS(clearenv fdatasync)
+++AC_CHECK_FUNCS(clearenv fdatasync setnetgrent)
 + 
-+ if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "armv7l")
-+   set(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} -latomic")
-+diff --git a/lib/chunkio/CMakeLists.txt b/lib/chunkio/CMakeLists.txt
-+index bbe1f39..809ea93 100644
-+--- a/lib/chunkio/CMakeLists.txt
-++++ b/lib/chunkio/CMakeLists.txt
-+@@ -14,12 +14,7 @@ else()
-+   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall ")
-+ endif()
++ if test "x$GCC" = "xyes"; then
++   LDFLAGS="-Wl,--as-needed $LDFLAGS"
++diff --git a/meson.build b/meson.build
++index 7506231..2d9d67a 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -82,6 +82,7 @@ config_h.set('_GNU_SOURCE', true)
++ check_functions = [
++   'clearenv',
++   'fdatasync',
+++  'setnetgrent',
++ ]
 + 
-+-# Set __FILENAME__
-+-if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-+-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__='\"$(subst ${CMAKE_SOURCE_DIR}/,,$(abspath $<))\"'")
-+-else()
-+-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__=__FILE__")
-+-endif()
-++set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__=__FILE__")
++ foreach func: check_functions
++diff --git a/src/polkit/polkitidentity.c b/src/polkit/polkitidentity.c
++index 3aa1f7f..793f17d 100644
++--- a/src/polkit/polkitidentity.c
+++++ b/src/polkit/polkitidentity.c
++@@ -182,7 +182,15 @@ polkit_identity_from_string  (const gchar   *str,
++     }
++   else if (g_str_has_prefix (str, "unix-netgroup:"))
++     {
+++#ifndef HAVE_SETNETGRENT
+++      g_set_error (error,
+++                   POLKIT_ERROR,
+++                   POLKIT_ERROR_FAILED,
+++                   "Netgroups are not available on this machine ('%s')",
+++                   str);
+++#else
++       identity = polkit_unix_netgroup_new (str + sizeof "unix-netgroup:" - 1);
+++#endif
++     }
 + 
-+ include(cmake/macros.cmake)
++   if (identity == NULL && (error != NULL && *error == NULL))
++@@ -344,6 +352,14 @@ polkit_identity_new_for_gvariant (GVariant  *variant,
++       GVariant *v;
++       const char *name;
 + 
-+diff --git a/lib/cmetrics/CMakeLists.txt b/lib/cmetrics/CMakeLists.txt
-+index 60e8774..e3d6149 100644
-+--- a/lib/cmetrics/CMakeLists.txt
-++++ b/lib/cmetrics/CMakeLists.txt
-+@@ -34,12 +34,7 @@ set(CMT_VERSION_MINOR  3)
-+ set(CMT_VERSION_PATCH  5)
-+ set(CMT_VERSION_STR "${CMT_VERSION_MAJOR}.${CMT_VERSION_MINOR}.${CMT_VERSION_PATCH}")
+++#ifndef HAVE_SETNETGRENT
+++      g_set_error (error,
+++                   POLKIT_ERROR,
+++                   POLKIT_ERROR_FAILED,
+++                   "Netgroups are not available on this machine");
+++      goto out;
+++#else
+++
++       v = lookup_asv (details_gvariant, "name", G_VARIANT_TYPE_STRING, error);
++       if (v == NULL)
++         {
++@@ -353,6 +369,7 @@ polkit_identity_new_for_gvariant (GVariant  *variant,
++       name = g_variant_get_string (v, NULL);
++       ret = polkit_unix_netgroup_new (name);
++       g_variant_unref (v);
+++#endif
++     }
++   else
++     {
++diff --git a/src/polkit/polkitunixnetgroup.c b/src/polkit/polkitunixnetgroup.c
++index 8a2b369..83f8d4a 100644
++--- a/src/polkit/polkitunixnetgroup.c
+++++ b/src/polkit/polkitunixnetgroup.c
++@@ -194,6 +194,9 @@ polkit_unix_netgroup_set_name (PolkitUnixNetgroup *group,
++ PolkitIdentity *
++ polkit_unix_netgroup_new (const gchar *name)
++ {
+++#ifndef HAVE_SETNETGRENT
+++  g_assert_not_reached();
+++#endif
++   g_return_val_if_fail (name != NULL, NULL);
++   return POLKIT_IDENTITY (g_object_new (POLKIT_TYPE_UNIX_NETGROUP,
++                                        "name", name,
++diff --git a/src/polkitbackend/polkitbackendduktapeauthority.c b/src/polkitbackend/polkitbackendduktapeauthority.c
++index c89dbcf..f4b4304 100644
++--- a/src/polkitbackend/polkitbackendduktapeauthority.c
+++++ b/src/polkitbackend/polkitbackendduktapeauthority.c
++@@ -1035,7 +1035,7 @@ js_polkit_user_is_in_netgroup (duk_context *cx)
 + 
-+-# Define __FILENAME__ consistently across Operating Systems
-+-if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-+-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__='\"$(subst ${CMAKE_SOURCE_DIR}/,,$(abspath $<))\"'")
-+-else()
-+-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__=__FILE__")
-+-endif()
-++set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__=__FILE__")
++   user = duk_require_string (cx, 0);
++   netgroup = duk_require_string (cx, 1);
++-
+++#ifdef HAVE_SETNETGRENT
++   if (innetgr (netgroup,
++                NULL,  /* host */
++                user,
++@@ -1043,7 +1043,7 @@ js_polkit_user_is_in_netgroup (duk_context *cx)
++     {
++       is_in_netgroup = TRUE;
++     }
++-
+++#endif
++   duk_push_boolean (cx, is_in_netgroup);
++   return 1;
++ }
++diff --git a/src/polkitbackend/polkitbackendinteractiveauthority.c b/src/polkitbackend/polkitbackendinteractiveauthority.c
++index 056d9a8..36c2f3d 100644
++--- a/src/polkitbackend/polkitbackendinteractiveauthority.c
+++++ b/src/polkitbackend/polkitbackendinteractiveauthority.c
++@@ -2233,25 +2233,26 @@ get_users_in_net_group (PolkitIdentity                    *group,
++   GList *ret;
 + 
-+ # Configuration options
-+ option(CMT_DEV             "Enable development mode"                   No)
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch
-deleted file mode 100644
-index bf4cda08f..000000000
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From 5571f949fa2048b79c197b5b10a11ecb1891cbe9 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 23 Apr 2022 08:24:34 -0700
--Subject: [PATCH] Control sytemd unit install location with SYSTEM_DIR
--
--This helps building when usrmerge is on
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/CMakeLists.txt | 6 +++++-
-- 1 file changed, 5 insertions(+), 1 deletion(-)
--
----- a/src/CMakeLists.txt
--+++ b/src/CMakeLists.txt
--@@ -323,7 +323,11 @@ if(FLB_BINARY)
--       "${PROJECT_SOURCE_DIR}/init/systemd.in"
--       ${FLB_SYSTEMD_SCRIPT}
--       )
---    install(FILES ${FLB_SYSTEMD_SCRIPT} DESTINATION /lib/systemd/system)
--+    if(SYSTEMD_DIR)
--+        install(FILES ${FLB_SYSTEMD_SCRIPT} DESTINATION ${SYSTEMD_DIR})
--+    else()
--+        install(FILES ${FLB_SYSTEMD_SCRIPT} DESTINATION /lib/systemd/system)
--+    endif()
--     install(DIRECTORY DESTINATION ${FLB_INSTALL_CONFDIR})
--   elseif(FLB_UPSTART)
--     set(FLB_UPSTART_SCRIPT "${PROJECT_SOURCE_DIR}/init/${FLB_OUT_NAME}.conf")
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-bin-fix-SIGSEGV-caused-by-using-flb_free-instead-of-.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-bin-fix-SIGSEGV-caused-by-using-flb_free-instead-of-.patch
-deleted file mode 100644
-index a6ff5991c..000000000
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-bin-fix-SIGSEGV-caused-by-using-flb_free-instead-of-.patch
-+++ /dev/null
-@@ -1,43 +0,0 @@
--From 3d7390c89c2205d1eed0384be0bb65adb675e60d Mon Sep 17 00:00:00 2001
--From: Ramon Fried <ramon@neureality.ai>
--Date: Tue, 9 Feb 2021 18:59:59 +0200
--Subject: [PATCH] bin: fix SIGSEGV caused by using flb_free instead of
-- mk_mem_free
--
--Upstream-Status: Accepted
--Signed-off-by: Ramon Fried <ramon@neureality.ai>
-----
-- src/fluent-bit.c | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/src/fluent-bit.c b/src/fluent-bit.c
--index c0c73b4..989cfde 100644
----- a/src/fluent-bit.c
--+++ b/src/fluent-bit.c
--@@ -289,7 +289,7 @@ static int input_set_property(struct flb_input_instance *in, char *kv)
--                 in->p->name, key);
--     }
-- 
---    flb_free(key);
--+    mk_mem_free(key);
--     return ret;
-- }
-- 
--@@ -314,7 +314,7 @@ static int output_set_property(struct flb_output_instance *out, char *kv)
--     }
-- 
--     ret = flb_output_set_property(out, key, value);
---    flb_free(key);
--+    mk_mem_free(key);
--     return ret;
-- }
-- 
--@@ -340,7 +340,7 @@ static int filter_set_property(struct flb_filter_instance *filter, char *kv)
--     }
-- 
--     ret = flb_filter_set_property(filter, key, value);
---    flb_free(key);
--+    mk_mem_free(key);
--     return ret;
-- }
-- 
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-ppc-Fix-signature-for-co_create-API.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-ppc-Fix-signature-for-co_create-API.patch
-deleted file mode 100644
-index 1f36c657e..000000000
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-ppc-Fix-signature-for-co_create-API.patch
-+++ /dev/null
-@@ -1,38 +0,0 @@
--From be4032079c931704f52e29f5da5c01cde24ac842 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 16 Jan 2020 10:44:58 -0800
--Subject: [PATCH] ppc: Fix signature for co_create API
--
--Upstream-Status: Submitted [https://github.com/fluent/fluent-bit/pull/1886]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- lib/flb_libco/ppc.c | 6 ++++--
-- 1 file changed, 4 insertions(+), 2 deletions(-)
--
--diff --git a/lib/flb_libco/ppc.c b/lib/flb_libco/ppc.c
--index e6536d56..533256b3 100644
----- a/lib/flb_libco/ppc.c
--+++ b/lib/flb_libco/ppc.c
--@@ -279,7 +279,9 @@ static uint32_t* co_create_(unsigned size, uintptr_t entry) {
--   return t;
-- }
-- 
---cothread_t co_create(unsigned int size, void (*entry_)(void)) {
--+cothread_t co_create(unsigned int size, void (*entry_)(void),
--+                     size_t *out_size) {
--+
--   uintptr_t entry = (uintptr_t)entry_;
--   uint32_t* t = 0;
-- 
--@@ -325,7 +327,7 @@ cothread_t co_create(unsigned int size, void (*entry_)(void)) {
--     t[10] = (uint32_t)(sp >> shift >> shift);
--     t[11] = (uint32_t)sp;
--   }
---
--+  *out_size = size;
--   return t;
-- }
-- 
---- 
--2.25.0
--
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch
-new file mode 100644
-index 000000000..4358b2a51
---- /dev/null
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch
-@@ -0,0 +1,26 @@
-+From 71dab751a27a2e582b711de22873065dd28f4b65 Mon Sep 17 00:00:00 2001
-+From: Paulo Neves <ptsneves@gmail.com>
-+Date: Thu, 28 Jul 2022 11:42:31 +0200
-+Subject: [PATCH] flb_info.h.in: Do not hardcode compilation directories
-+
-+Including the source dir in the header makes the header not
-+reproducible and contaminates it with host builder paths. Instead
-+make it take CMAKE_DEBUG_SRCDIR that can be set to a known
-+reproducible value
-+---
-+ include/fluent-bit/flb_info.h.in | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/include/fluent-bit/flb_info.h.in b/include/fluent-bit/flb_info.h.in
-+index a89485c..2579afc 100644
-+--- a/include/fluent-bit/flb_info.h.in
-++++ b/include/fluent-bit/flb_info.h.in
-+@@ -23,7 +23,7 @@
-+ #define STR_HELPER(s)      #s
-+ #define STR(s)             STR_HELPER(s)
++   ret = NULL;
+++#ifdef HAVE_SETNETGRENT
++   name = polkit_unix_netgroup_get_name (POLKIT_UNIX_NETGROUP (group));
 + 
-+-#define FLB_SOURCE_DIR "@CMAKE_SOURCE_DIR@"
-++#define FLB_SOURCE_DIR "@CMAKE_DEBUG_SRCDIR@"
++-#ifdef HAVE_SETNETGRENT_RETURN
+++# ifdef HAVE_SETNETGRENT_RETURN
++   if (setnetgrent (name) == 0)
++     {
++       g_warning ("Error looking up net group with name %s: %s", name, g_strerror (errno));
++       goto out;
++     }
++-#else
+++# else
++   setnetgrent (name);
++-#endif
+++# endif /* HAVE_SETNETGRENT_RETURN */
 + 
-+ /* General flags set by CMakeLists.txt */
-+ @FLB_BUILD_FLAGS@
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0002-parser-Fix-SIGSEGV-caused-by-using-flb_free-instead-.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0002-parser-Fix-SIGSEGV-caused-by-using-flb_free-instead-.patch
-deleted file mode 100644
-index 91675dfc6..000000000
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/0002-parser-Fix-SIGSEGV-caused-by-using-flb_free-instead-.patch
-+++ /dev/null
-@@ -1,82 +0,0 @@
--From 7c3b1dfb174312594d3317c24ed71c60398f653f Mon Sep 17 00:00:00 2001
--From: Ramon Fried <ramon@neureality.ai>
--Date: Wed, 10 Feb 2021 04:23:36 +0200
--Subject: [PATCH] parser: Fix SIGSEGV caused by using flb_free instead of
-- mk_mem_free
--
--Upstream-Status: Backport (fix only for 1.3.5)
--Signed-off-by: Ramon Fried <ramon@neureality.ai>
-----
-- src/flb_parser.c | 28 ++++++++++++++--------------
-- 1 file changed, 14 insertions(+), 14 deletions(-)
--
--diff --git a/src/flb_parser.c b/src/flb_parser.c
--index d35c568..7c20e12 100644
----- a/src/flb_parser.c
--+++ b/src/flb_parser.c
--@@ -490,7 +490,7 @@ int flb_parser_conf_file(const char *file, struct flb_config *config)
--                                        MK_RCONF_STR);
--         if (str) {
--             time_keep = flb_utils_bool(str);
---            flb_free(str);
--+            mk_mem_free(str);
--         }
--         else {
--             time_keep = FLB_FALSE;
--@@ -522,23 +522,23 @@ int flb_parser_conf_file(const char *file, struct flb_config *config)
-- 
--         flb_debug("[parser] new parser registered: %s", name);
-- 
---        flb_free(name);
---        flb_free(format);
--+        mk_mem_free(name);
--+        mk_mem_free(format);
-- 
--         if (regex) {
---            flb_free(regex);
--+            mk_mem_free(regex);
--         }
--         if (time_fmt) {
---            flb_free(time_fmt);
--+            mk_mem_free(time_fmt);
--         }
--         if (time_key) {
---            flb_free(time_key);
--+            mk_mem_free(time_key);
--         }
--         if (time_offset) {
---            flb_free(time_offset);
--+            mk_mem_free(time_offset);
--         }
--         if (types_str) {
---            flb_free(types_str);
--+            mk_mem_free(types_str);
--         }
-- 
--         decoders = NULL;
--@@ -548,19 +548,19 @@ int flb_parser_conf_file(const char *file, struct flb_config *config)
--     return 0;
-- 
--  fconf_error:
---    flb_free(name);
---    flb_free(format);
--+    mk_mem_free(name);
--+    mk_mem_free(format);
--     if (regex) {
---        flb_free(regex);
--+        mk_mem_free(regex);
--     }
--     if (time_fmt) {
---        flb_free(time_fmt);
--+        mk_mem_free(time_fmt);
--     }
--     if (time_key) {
---        flb_free(time_key);
--+        mk_mem_free(time_key);
--     }
--     if (types_str) {
---        flb_free(types_str);
--+        mk_mem_free(types_str);
--     }
--     if (decoders) {
--         flb_parser_decoder_list_destroy(decoders);
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0003-mbedtls-Do-not-overwrite-CFLAGS.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0003-mbedtls-Do-not-overwrite-CFLAGS.patch
-new file mode 100644
-index 000000000..0611af9ec
---- /dev/null
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0003-mbedtls-Do-not-overwrite-CFLAGS.patch
-@@ -0,0 +1,25 @@
-+From 8486b912281ae85db0c9fc05bb546f16872e114c Mon Sep 17 00:00:00 2001
-+From: Paulo Neves <ptsneves@gmail.com>
-+Date: Thu, 28 Jul 2022 14:37:18 +0200
-+Subject: [PATCH] mbedtls: Do not overwrite CFLAGS
-+
-+bitbake passes CFLAGS that are often in conflict with the ones set
-+in mbedtls' CMakeLists.txt. Such conflicts are the inability to use
-+FORTIFY_SOURCE=2 except in release mode
-+---
-+ lib/mbedtls-2.28.0/CMakeLists.txt | 2 --
-+ 1 file changed, 2 deletions(-)
-+
-+diff --git a/lib/mbedtls-2.28.0/CMakeLists.txt b/lib/mbedtls-2.28.0/CMakeLists.txt
-+index d76bddc..e717846 100644
-+--- a/lib/mbedtls-2.28.0/CMakeLists.txt
-++++ b/lib/mbedtls-2.28.0/CMakeLists.txt
-+@@ -204,8 +204,6 @@ if(CMAKE_COMPILER_IS_GNU)
-+     if (GCC_VERSION VERSION_GREATER 7.0 OR GCC_VERSION VERSION_EQUAL 7.0)
-+       set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wformat-overflow=2 -Wformat-truncation")
-+     endif()
-+-    set(CMAKE_C_FLAGS_RELEASE     "-O2")
-+-    set(CMAKE_C_FLAGS_DEBUG       "-O0 -g3")
-+     set(CMAKE_C_FLAGS_COVERAGE    "-O0 -g3 --coverage")
-+     set(CMAKE_C_FLAGS_ASAN        "-fsanitize=address -fno-common -fsanitize=undefined -fno-sanitize-recover=all -O3")
-+     set(CMAKE_C_FLAGS_ASANDBG     "-fsanitize=address -fno-common -fsanitize=undefined -fno-sanitize-recover=all -O1 -g3 -fno-omit-frame-pointer -fno-optimize-sibling-calls")
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/builtin-nan.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/builtin-nan.patch
-deleted file mode 100644
-index 8ffc3be3e..000000000
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/builtin-nan.patch
-+++ /dev/null
-@@ -1,27 +0,0 @@
--help complier to use intrinsics, clang in few cases e.g. aarch64 can not
--and then requires linking with libm, its the only function needed from libm then
--its good to avoid needing it.
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
----- a/include/fluent-bit/stream_processor/flb_sp_timeseries.h
--+++ b/include/fluent-bit/stream_processor/flb_sp_timeseries.h
--@@ -207,7 +207,7 @@ void cb_forecast_calc(struct timeseries
--         result = b0 + b1 * (val->f64 + *forecast->latest_x);
--         break;
--     default:
---        result = nan("");
--+        result = __builtin_nan("");
--         break;
--     }
-- 
--@@ -283,7 +283,7 @@ void cb_forecast_r_calc(struct timeserie
--             result = ((val->i64 - b0) / b1) - *forecast->latest_x;
--             break;
--         default:
---            result = nan("");
--+            result = __builtin_nan("");
--             break;
--         }
-- 
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/cross-build-init-system-detection.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/cross-build-init-system-detection.patch
-deleted file mode 100644
-index d3822fc8d..000000000
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/cross-build-init-system-detection.patch
-+++ /dev/null
-@@ -1,38 +0,0 @@
--Define CMake variables to indicate init system for target
--incase of cross compile, detecting systemd support based on
--host directory structure is not right thing to do
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.kheem@gmail.com>
--
----- a/src/CMakeLists.txt
--+++ b/src/CMakeLists.txt
--@@ -317,7 +317,7 @@ if(FLB_BINARY)
--   install(TARGETS fluent-bit-bin RUNTIME DESTINATION ${FLB_INSTALL_BINDIR})
-- 
--   # Detect init system, install upstart, systemd or init.d script
---  if(IS_DIRECTORY /lib/systemd/system)
--+  if(FLB_SYSTEMD)
--     set(FLB_SYSTEMD_SCRIPT "${PROJECT_SOURCE_DIR}/init/${FLB_OUT_NAME}.service")
--     configure_file(
--       "${PROJECT_SOURCE_DIR}/init/systemd.in"
--@@ -325,7 +325,7 @@ if(FLB_BINARY)
--       )
--     install(FILES ${FLB_SYSTEMD_SCRIPT} DESTINATION /lib/systemd/system)
--     install(DIRECTORY DESTINATION ${FLB_INSTALL_CONFDIR})
---  elseif(IS_DIRECTORY /usr/share/upstart)
--+  elseif(FLB_UPSTART)
--     set(FLB_UPSTART_SCRIPT "${PROJECT_SOURCE_DIR}/init/${FLB_OUT_NAME}.conf")
--     configure_file(
--       "${PROJECT_SOURCE_DIR}/init/upstart.in"
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -70,6 +70,8 @@ option(FLB_RECORD_ACCESSOR    "Enable re
-- option(FLB_SYSTEM_STRPTIME    "Use strptime in system libc"  Yes)
-- option(FLB_STATIC_CONF        "Build binary using static configuration")
-- option(FLB_STREAM_PROCESSOR   "Enable Stream Processor"      Yes)
--+option(FLB_SYSTEMD            "Enable systemd init system"   No)
--+option(FLB_UPSTART            "Enable upstart init system"   No)
-- option(FLB_CORO_STACK_SIZE    "Set coroutine stack size")
-- 
-- # Metrics: Experimental Feature, disabled by default on 0.12 series
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_1.9.6.bb
-similarity index 53%
-rename from meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
-rename to meta-oe/recipes-extended/fluentbit/fluentbit_1.9.6.bb
-index b231cc287..1ff62767d 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit_1.9.6.bb
-@@ -11,25 +11,28 @@ LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
- SECTION = "net"
- 
--SRC_URI = "http://fluentbit.io/releases/1.3/fluent-bit-${PV}.tar.gz \
-+PR = "r0"
-+PV = "1.9.6"
-+
-+SRC_URI = "https://releases.fluentbit.io/1.9/source-${PV}.tar.gz;subdir=fluent-bit-${PV} \
-+           file://0001-CMakeLists.txt-Do-not-use-private-makefile-target.patch \
-+           file://0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch \
-+           file://0003-mbedtls-Do-not-overwrite-CFLAGS.patch \
-            file://jemalloc.patch \
--           file://cross-build-init-system-detection.patch \
--           file://builtin-nan.patch \
--           file://0001-ppc-Fix-signature-for-co_create-API.patch \
--           file://0001-bin-fix-SIGSEGV-caused-by-using-flb_free-instead-of-.patch \
--           file://0002-parser-Fix-SIGSEGV-caused-by-using-flb_free-instead-.patch \
--           file://0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch \
++   for (;;)
++     {
++-#if defined(HAVE_NETBSD) || defined(HAVE_OPENBSD)
+++# if defined(HAVE_NETBSD) || defined(HAVE_OPENBSD)
++       const char *hostname, *username, *domainname;
++-#else
+++# else
++       char *hostname, *username, *domainname;
++-#endif
+++# endif /* defined(HAVE_NETBSD) || defined(HAVE_OPENBSD) */
++       PolkitIdentity *user;
++       GError *error = NULL;
++ 
++@@ -2282,6 +2283,7 @@ get_users_in_net_group (PolkitIdentity                    *group,
++ 
++  out:
++   endnetgrent ();
+++#endif /* HAVE_SETNETGRENT */
++   return ret;
++ }
++ 
++diff --git a/src/polkitbackend/polkitbackendjsauthority.cpp b/src/polkitbackend/polkitbackendjsauthority.cpp
++index 11e91c0..9ee0391 100644
++--- a/src/polkitbackend/polkitbackendjsauthority.cpp
+++++ b/src/polkitbackend/polkitbackendjsauthority.cpp
++@@ -1291,6 +1291,7 @@ js_polkit_user_is_in_netgroup (JSContext  *cx,
++ 
++   JS::CallArgs args = JS::CallArgsFromVp (argc, vp);
++ 
+++#ifdef HAVE_SETNETGRENT
++   JS::RootedString usrstr (authority->priv->cx);
++   usrstr = args[0].toString();
++   user = JS_EncodeStringToUTF8 (cx, usrstr);
++@@ -1305,6 +1306,7 @@ js_polkit_user_is_in_netgroup (JSContext  *cx,
++     {
++       is_in_netgroup =  true;
++     }
+++#endif
++ 
++   ret = true;
++ 
++diff --git a/test/polkit/polkitidentitytest.c b/test/polkit/polkitidentitytest.c
++index e91967b..2635c4c 100644
++--- a/test/polkit/polkitidentitytest.c
+++++ b/test/polkit/polkitidentitytest.c
++@@ -145,11 +145,15 @@ struct ComparisonTestData comparison_test_data [] = {
++   {"unix-group:root", "unix-group:jane", FALSE},
++   {"unix-group:jane", "unix-group:jane", TRUE},
++ 
+++#ifdef HAVE_SETNETGRENT
++   {"unix-netgroup:foo", "unix-netgroup:foo", TRUE},
++   {"unix-netgroup:foo", "unix-netgroup:bar", FALSE},
+++#endif
++ 
++   {"unix-user:root", "unix-group:root", FALSE},
+++#ifdef HAVE_SETNETGRENT
++   {"unix-user:jane", "unix-netgroup:foo", FALSE},
+++#endif
++ 
++   {NULL},
++ };
++@@ -181,11 +185,13 @@ main (int argc, char *argv[])
++   g_test_add_data_func ("/PolkitIdentity/group_string_2", "unix-group:jane", test_string);
++   g_test_add_data_func ("/PolkitIdentity/group_string_3", "unix-group:users", test_string);
++ 
+++#ifdef HAVE_SETNETGRENT
++   g_test_add_data_func ("/PolkitIdentity/netgroup_string", "unix-netgroup:foo", test_string);
+++  g_test_add_data_func ("/PolkitIdentity/netgroup_gvariant", "unix-netgroup:foo", test_gvariant);
+++#endif
++ 
++   g_test_add_data_func ("/PolkitIdentity/user_gvariant", "unix-user:root", test_gvariant);
++   g_test_add_data_func ("/PolkitIdentity/group_gvariant", "unix-group:root", test_gvariant);
++-  g_test_add_data_func ("/PolkitIdentity/netgroup_gvariant", "unix-netgroup:foo", test_gvariant);
++ 
++   add_comparison_tests ();
++ 
++diff --git a/test/polkit/polkitunixnetgrouptest.c b/test/polkit/polkitunixnetgrouptest.c
++index 3701ba1..e1d211e 100644
++--- a/test/polkit/polkitunixnetgrouptest.c
+++++ b/test/polkit/polkitunixnetgrouptest.c
++@@ -69,7 +69,9 @@ int
++ main (int argc, char *argv[])
++ {
++   g_test_init (&argc, &argv, NULL);
+++#ifdef HAVE_SETNETGRENT
++   g_test_add_func ("/PolkitUnixNetgroup/new", test_new);
++   g_test_add_func ("/PolkitUnixNetgroup/set_name", test_set_name);
+++#endif
++   return g_test_run ();
++ }
++diff --git a/test/polkitbackend/test-polkitbackendjsauthority.c b/test/polkitbackend/test-polkitbackendjsauthority.c
++index 2103b17..b187a2f 100644
++--- a/test/polkitbackend/test-polkitbackendjsauthority.c
+++++ b/test/polkitbackend/test-polkitbackendjsauthority.c
++@@ -137,12 +137,14 @@ test_get_admin_identities (void)
++         "unix-group:users"
++       }
++     },
+++#ifdef HAVE_SETNETGRENT
++     {
++       "net.company.action3",
++       {
++         "unix-netgroup:foo"
++       }
++     },
+++#endif
++   };
++   guint n;
++ 
+diff --git a/meta-oe/recipes-extended/polkit/polkit_0.119.bb b/meta-oe/recipes-extended/polkit/polkit_0.119.bb
+index 66bbf735f..773148fdd 100644
+--- a/meta-oe/recipes-extended/polkit/polkit_0.119.bb
++++ b/meta-oe/recipes-extended/polkit/polkit_0.119.bb
+@@ -24,10 +24,10 @@ PACKAGECONFIG[consolekit] = ",,,consolekit"
+ PAM_SRC_URI = "file://polkit-1_pam.patch"
+ SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
+            ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
+-           file://0003-make-netgroup-support-optional.patch \
+            file://0001-pkexec-local-privilege-escalation-CVE-2021-4034.patch \
+            file://0002-CVE-2021-4115-GHSL-2021-077-fix.patch \
+            file://0003-Added-support-for-duktape-as-JS-engine.patch \
++           file://0004-Make-netgroup-support-optional.patch \
             "
--SRC_URI[md5sum] = "6eae6dfd0a874e5dd270c36e9c68f747"
--SRC_URI[sha256sum] = "e037c76c89269c8dc4027a08e442fefd2751b0f1e0f9c38f9a4b12d781a9c789"
-+SRC_URI[md5sum] = "ad65bb3ca55d203a467a63426e17bfae"
-+SRC_URI[sha256sum] = "5ef7dd97e10936269fe5f4e5d3ebf16559333066f7d6757ba12464a9d6186570"
+ SRC_URI[sha256sum] = "c8579fdb86e94295404211285fee0722ad04893f0213e571bd75c00972fd1f5c"
  
- S = "${WORKDIR}/fluent-bit-${PV}"
--DEPENDS = "zlib bison-native flex-native"
-+DEPENDS = "zlib bison-native flex-native openssl"
- DEPENDS += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
--
-+PACKAGECONFIG[yaml] = "-DFLB_CONFIG_YAML=On,-DFLB_CONFIG_YAML=Off, yaml,"
-+PACKAGECONFIG[kafka] = "-DFLB_OUT_KAFKA=On,-DFLB_OUT_KAFKA=Off,librdkafka"
-+PACKAGECONFIG[examples] = "-DFLB_EXAMPLES=On,-DFLB_EXAMPLES=Off"
-+PACKAGECONFIG[jemalloc] = "-DFLB_JEMALLOC=On,-DFLB_JEMALLOC=Off,jemalloc"
- DEPENDS:append:libc-musl = " fts "
- 
--INSANE_SKIP:${PN}-dev += "dev-elf"
-+PACKAGECONFIG ?= "yaml"
- 
- LTO = ""
- 
-@@ -40,13 +43,13 @@ OECMAKE_GENERATOR ?= "Unix Makefiles"
- # ========================
- 
- # Host related setup
--EXTRA_OECMAKE += "-DGNU_HOST=${HOST_SYS} -DFLB_ALL=ON -DFLB_TD=1"
-+EXTRA_OECMAKE += "-DGNU_HOST=${HOST_SYS} -DFLB_TD=1"
- 
- # Disable LuaJIT and filter_lua support
- EXTRA_OECMAKE += "-DFLB_LUAJIT=Off -DFLB_FILTER_LUA=Off "
- 
- # Disable Library and examples
--EXTRA_OECMAKE += "-DFLB_SHARED_LIB=Off -DFLB_EXAMPLES=Off "
-+EXTRA_OECMAKE += "-DFLB_SHARED_LIB=Off"
- 
- # Enable systemd iff systemd is in DISTRO_FEATURES
- EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES','systemd','-DFLB_SYSTEMD=On -DSYSTEMD_DIR=${systemd_system_unitdir}','-DFLB_SYSTEMD=Off',d)}"
-@@ -54,16 +57,9 @@ EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES','systemd','-DFLB_SYSTEM
- EXTRA_OECMAKE:append:riscv64 = " -DFLB_DEPS='atomic'"
- EXTRA_OECMAKE:append:riscv32 = " -DFLB_DEPS='atomic'"
- 
--# Kafka Output plugin (disabled by default): note that when
--# enabling Kafka output plugin, the backend library librdkafka
--# requires 'openssl' as a dependency.
--#
--# DEPENDS += "openssl "
--# EXTRA_OECMAKE += "-DFLB_OUT_KAFKA=On "
--
- inherit cmake systemd
- 
--CFLAGS += "-fcommon"
--
- SYSTEMD_SERVICE:${PN} = "td-agent-bit.service"
--TARGET_CC_ARCH:append = " ${SELECTED_OPTIMIZATION}"
-+
-+EXTRA_OECMAKE += "-DCMAKE_DEBUG_SRCDIR=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR}/"
-+TARGET_CC_ARCH += " ${SELECTED_OPTIMIZATION}"
 -- 
-2.25.1
+2.33.0
 
 
