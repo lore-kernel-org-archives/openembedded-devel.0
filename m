@@ -1,138 +1,117 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 22155C04A68
-	for <webhook@archiver.kernel.org>; Wed, 27 Jul 2022 21:25:33 +0000 (UTC)
-Received: from mail-il1-f178.google.com (mail-il1-f178.google.com
- [209.85.166.178])
- by mx.groups.io with SMTP id smtpd.web11.25460.1658957125657854228
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73A7AC3F6B0
+	for <webhook@archiver.kernel.org>; Thu, 28 Jul 2022 02:14:54 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
+ [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web11.28160.1658974486569601868
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Jul 2022 14:25:25 -0700
+ Wed, 27 Jul 2022 19:14:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=U16IT/jv;
- spf=pass (domain: gmail.com, ip: 209.85.166.178,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-il1-f178.google.com with SMTP id h16so91236ila.2
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Jul 2022 14:25:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :references:from:in-reply-to:content-transfer-encoding;
-        bh=FKFx/g9R1iwBKPVNfbAkDhP2oo/YDbT7jcUUvj2n4wg=;
-        b=U16IT/jvjrBa7xa8VAFA90SPvbtRHCPt56zi9eSlxbcAm+ZKyLcYS42YStGXkCD7vH
-         e+PlRmusGRreNh0CmI5o21ChFOv3H4WLK6FqwhVzqhbvMngZGJQs/zWlopk1QYNHKE0L
-         ykAW1sHYAimepfX1vu33KGLeAF5w/engBDM9vv3rL8hZy7ILa+11n61Rx8dxiOJyjZgw
-         v0F+f0w03BPNVqy8nBjGwpiL7Vzu1NNEa1PDqm+kVdyMMjnGx/QhAoelY4T23lTMkFlI
-         nQM+66aE5aXG1EqnqMdwP4Aetngk9zzXKRrvq16xuZHTmWaz70x7BBqWqlvQ4mDWU1Za
-         pNgg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=FKFx/g9R1iwBKPVNfbAkDhP2oo/YDbT7jcUUvj2n4wg=;
-        b=PCmWI2xCIzHXDr45ze7AFJDa8ZhekzfMcjmShNqrF+HU3JYqYWgvDfRm3z7sTE+sjT
-         XZZLYotYavRaahxrf/G00ZV4aIPoixq+jljRt8gZs3cSMm0ye6HFlXQhbhOBdaVYZsJZ
-         FISjbKsX5cxZrZMvDye1aPnWSj+dWoLkDFESOP+Z/A+uSXC9ZdZ6PD1BFSnGwXa4zNTU
-         oBYy8UQexVOr987dZsSKHGxYX9LHvnGAY+Bv+V/2sGXvPM7bTjgN53DMbkgCi0ni9sH6
-         U0TtFGZW5h23/APAbEpSfknjJA5IdUSlAl40tk9uVhpPbuGM0qnbUtdyovULp8kr8fzC
-         2YgQ==
-X-Gm-Message-State: AJIora/wBg4Ega1Z8okDOmyC9mdVX+ln008TvW7l+pGoFmaKeL3ndfwy
-	WYZqt/ZW+9bKX0mTaCJ5eSg=
-X-Google-Smtp-Source: 
- AGRyM1szcPTsN7LmrT+k05mgddlfuIK7kF9ipluiPV/sgfBKeiZ3W1TOOx/IoMhJJ+fYRoOb88W1hw==
-X-Received: by 2002:a92:ce81:0:b0:2dc:fbec:d023 with SMTP id
- r1-20020a92ce81000000b002dcfbecd023mr9318493ilo.155.1658957124865;
-        Wed, 27 Jul 2022 14:25:24 -0700 (PDT)
-Received: from ?IPV6:2607:fea8:95df:9730:e8b7:596a:a352:5d5c?
- ([2607:fea8:95df:9730:e8b7:596a:a352:5d5c])
-        by smtp.gmail.com with ESMTPSA id
- x24-20020a0566380cb800b00339bae1dab9sm8157114jad.40.2022.07.27.14.25.23
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 27 Jul 2022 14:25:24 -0700 (PDT)
-Message-ID: <3f85772a-416b-5311-656a-ccf5f1a22932@gmail.com>
-Date: Wed, 27 Jul 2022 17:25:22 -0400
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=vU9jadks;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113,
+ mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1658974484; i=@fujitsu.com;
+	bh=bb6rbdDpbwmJoN1EyEIDOss7bHwe6VpSVZ8+HOXyWSg=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=vU9jadksGCRfkw3mnJSBA5Qq2eiCZu/QrMHJrTAdnrWN3NPZnnCy7yTH6l9rqyrAj
+	 oGpiaNDRJXkkLdcCarElnJMotMidUmIanIy1OCVOOGljJgsFCt9niT70aza5j89YnA
+	 2TdEKkenfvH11W4k052k/D4YhjgQdb39Y6pZbbxdf3vqP28BeRzGtsF5PX6zvxCvlR
+	 84Jxv/H5dXWK6jPqnsidTvcpyKQJOALRBs5Jq312LVs98d7Ah2oBbXYQlA/weDgf9T
+	 GHEZCqRqdTTHsgr8cYKcp+usglc8M6HW5tZ7rJOVe2VZeLu6jFdukMVXlqzF+wP5eB
+	 XkkzflXuxFGug==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrAIsWRWlGSWpSXmKPExsViZ8ORqCv08WG
+  SwYdnwhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bvz3csBRO5Kv4u3snWwLiMs4uRi0NI4Amj
+  xL4J81ggnOtMEscmH2eCcPYwSrzc+JSxi5GTg01ATWL6rRusILaIgL7E0tl7mEFsZgEViRe/e
+  9hBbGEBf4lJk+6B2SwCqhKvp21kArF5BZwkXn6eABaXEFCQmPLwPTNEXFDi5MwnLBBzJCQOvn
+  jBDFGjKDH7cjMLhF0hMWPGNjYIW03i6rlNzBMY+WchaZ+FpH0BI9MqRuukosz0jJLcxMwcXUM
+  DA11DQ1NdSzNdQzO9xCrdRL3UUt28/KKSDF1DvcTyYr3U4mK94src5JwUvbzUkk2MwMBMKU4Q
+  2MG4d98vvUOMkhxMSqK8Mxc+TBLiS8pPqcxILM6ILyrNSS0+xCjDwaEkwbvpFVBOsCg1PbUiL
+  TMHGCUwaQkOHiUR3gdvgdK8xQWJucWZ6RCpU4y6HDO/th1gFmLJy89LlRLn/f4eqEgApCijNA
+  9uBCxiLzHKSgnzMjIwMAjxFKQW5WaWoMq/YhTnYFQS5n38DmgKT2ZeCdymV0BHMAEdsUXhAcg
+  RJYkIKakGJqH3FilVYt8PLn/6NlJWdTfzbZtpz2NPNpyQOWk2e4bejPgF8jw6x8WDLpwT+nX/
+  nfMnqU1HJ4hbmqy58qVsztOvKn79mgcC3P7yuR4sWqD55oC0wZTHzWt3llZKnQhjtmw3KLnBV
+  7tm3qa9FybNXL/ry0fHjUoJ59Xm5cz/duKpiPjug5Lvep+Hv3+2fM7GxWyCl6udp7+OaOZNSm
+  TaN7X9xZ2PgdVXFIumXrKw5GhwmufOxP5r06Tiv2pzFSL637xbaK+bN+nKnyDmp30PAuW/WMn
+  orGpQspZdw/Ls7pnS/aJm+5v5st4/nKnCeVQp9ORnReGj6T7/0mfs/JrPHGb8oeGCP9OOb2ca
+  rKbuWnBFiaU4I9FQi7moOBEAnrk391MDAAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-17.tower-728.messagelabs.com!1658974481!143335!1
+X-Originating-IP: [62.60.8.97]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.87.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 32421 invoked from network); 28 Jul 2022 02:14:42 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-17.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 28 Jul 2022 02:14:42 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id B880F100193
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 28 Jul 2022 03:14:41 +0100 (BST)
+Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
+ [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id AC641100043
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 28 Jul 2022 03:14:41 +0100 (BST)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Thu, 28 Jul 2022 03:14:39 +0100
+From: Wang Mingyu <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-elementpath: upgrade 2.5.3 ->
+ 3.0.1
+Date: Thu, 28 Jul 2022 10:14:24 +0800
+Message-ID: <1658974468-10622-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.0.3
-Subject: Re: [oe] [meta-networking][PATCH] sshpass: add recipe
-Content-Language: en-US
-To: Mike Petersen <mike.petersen@ni.com>,
- openembedded-devel@lists.openembedded.org
-References: <20220727181928.34114-1-mike.petersen@ni.com>
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <20220727181928.34114-1-mike.petersen@ni.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Jul 2022 21:25:33 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Jul 2022 02:14:54 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98020
+ https://lists.openembedded.org/g/openembedded-devel/message/98021
 
-There are newer version in some layers on layerindex e.g.
+Changelog:
+==========
+    Fix of descendant path operator (issue #51)
+    Add support for Python 3.11
 
-https://layers.openembedded.org/layerindex/recipe/106509/
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ ...ython3-elementpath_2.5.3.bb => python3-elementpath_3.0.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-elementpath_2.5.3.bb => python3-elementpath_3.0.1.bb} (83%)
 
-perhaps use that as starting point.
+diff --git a/meta-python/recipes-devtools/python/python3-elementpath_2.5.3.bb b/meta-python/recipes-devtools/python/python3-elementpath_3.0.1.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-elementpath_2.5.3.bb
+rename to meta-python/recipes-devtools/python/python3-elementpath_3.0.1.bb
+index 22f5aa099b..13468ebfff 100644
+--- a/meta-python/recipes-devtools/python/python3-elementpath_2.5.3.bb
++++ b/meta-python/recipes-devtools/python/python3-elementpath_3.0.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/elementpath"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5dbb7fb7d72da3921202dd7b995d3ecf"
+ 
+-SRC_URI[sha256sum] = "b8aeb6f27dddc10fb9201b62090628a846cbae8577f3544cb1075fa38d0817f6"
++SRC_URI[sha256sum] = "a75eed5aad3dad92ba577b1f3a268d8c3c98ceeda91cb8abae4269e920e7c8f6"
+ 
+ PYPI_PACKAGE = "elementpath"
+ inherit pypi setuptools3
+-- 
+2.25.1
 
-
-On 7/27/22 2:19 PM, Mike Petersen wrote:
-> From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-> 
-> Needed for automating ssh logins, used in auto-tests.
-> 
-> Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-> Signed-off-by: Mike Petersen <mike.petersen@ni.com>
-> ---
->   .../recipes-connectivity/sshpass/sshpass.inc           | 10 ++++++++++
->   .../recipes-connectivity/sshpass/sshpass_1.05.bb       |  8 ++++++++
->   2 files changed, 18 insertions(+)
->   create mode 100644 meta-networking/recipes-connectivity/sshpass/sshpass.inc
->   create mode 100644 meta-networking/recipes-connectivity/sshpass/sshpass_1.05.bb
-> 
-> diff --git a/meta-networking/recipes-connectivity/sshpass/sshpass.inc b/meta-networking/recipes-connectivity/sshpass/sshpass.inc
-> new file mode 100644
-> index 000000000..b19ae4313
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/sshpass/sshpass.inc
-> @@ -0,0 +1,10 @@
-> +DESCRIPTION = "Non-interactive ssh password auth"
-> +HOMEPAGE = "http://sshpass.sourceforge.net/"
-> +SECTION = "console/network"
-> +LICENSE = "GPLv2"
-> +
-> +SRC_URI = "${SOURCEFORGE_MIRROR}/sshpass/sshpass-${PV}.tar.gz"
-> +
-> +INC_PR = "r0"
-> +
-> +inherit autotools
-> diff --git a/meta-networking/recipes-connectivity/sshpass/sshpass_1.05.bb b/meta-networking/recipes-connectivity/sshpass/sshpass_1.05.bb
-> new file mode 100644
-> index 000000000..a345dbd95
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/sshpass/sshpass_1.05.bb
-> @@ -0,0 +1,8 @@
-> +PR = "${INC_PR}.0"
-> +
-> +require sshpass.inc
-> +
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-> +
-> +SRC_URI[md5sum] = "c52d65fdee0712af6f77eb2b60974ac7"
-> +SRC_URI[sha256sum] = "c3f78752a68a0c3f62efb3332cceea0c8a1f04f7cf6b46e00ec0c3000bc8483e"
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#98018): https://lists.openembedded.org/g/openembedded-devel/message/98018
-> Mute This Topic: https://lists.openembedded.org/mt/92655179/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
 
