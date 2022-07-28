@@ -1,121 +1,127 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C479C04A68
-	for <webhook@archiver.kernel.org>; Thu, 28 Jul 2022 02:16:54 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web10.27974.1658974608385171840
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EA552C04A68
+	for <webhook@archiver.kernel.org>; Thu, 28 Jul 2022 03:55:54 +0000 (UTC)
+Received: from mail-qv1-f47.google.com (mail-qv1-f47.google.com
+ [209.85.219.47])
+ by mx.groups.io with SMTP id smtpd.web10.28664.1658980544519353762
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Jul 2022 19:16:48 -0700
+ Wed, 27 Jul 2022 20:55:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=HrsOO01+;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1658974606; i=@fujitsu.com;
-	bh=D+9kwkOwgkeb7+wkWpT/P0sCxgic6KwvUb4CJfYZxUQ=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=HrsOO01+IxnFyX3II11q62aSWdBobZuJLGLXOYjhTEkKeFOiry9PF4tMtC7SqWtw2
-	 AmDihGpwg++t+rnWQlfz6tKqrQqdLzQzlhBGBGNhSzvEa0PJkYFMQPy+0WKg0pwHfT
-	 BRJULrPGrJUIDrP+rJ51jAd0+MU0XEzrKvaYWoZeGULrVClUHe57aOrgRH8EqZzq/d
-	 s940PqIItv4Ub9T/mLMeqx247Gl1dVKDc2kTQlXcLrW7kuIWc1LYVJsPibXqrLr020
-	 xAGXayGBpPKH619Tu2UpqsxVBsDmzZdVr9v7xbf65NeU0ih2tKW3prP+O3g3kNN/l0
-	 /GeZR+GINf8hw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrNIsWRWlGSWpSXmKPExsViZ8MxSbfv48M
-  kg6snOCwuHl7K7MDocW7jCsYAxijWzLyk/IoE1oztj68zFVzirlj+7iBTA+Mlri5GLg4hgSeM
-  Eg3fZ7FDONeZJHYfP8sE4exhlLj1pZ2ti5GTg01ATWL6rRusILaIgL7E0tl7mEFsZgEViRe/e
-  9hBbGEBP4kls3eA2SwCqhIbFvWC2bwCThJHP68CsyUEFCSmPHwP1ssp4CxxfuZ9JhBbCKhm3d
-  KDLBD1ghInZz5hgZgvIXHwxQtmiF5FidmXm1kg7AqJGTO2sUHYahJXz21insAoOAtJ+ywk7Qs
-  YmVYxWiUVZaZnlOQmZuboGhoY6BoamuoaW+qaGuklVukm6qWW6panFpfoArnlxXqpxcV6xZW5
-  yTkpenmpJZsYgWGcUqxusoOxe+VPvUOMkhxMSqK8Mxc+TBLiS8pPqcxILM6ILyrNSS0+xCjDw
-  aEkwbvpFVBOsCg1PbUiLTMHGFMwaQkOHiUR3gdvgdK8xQWJucWZ6RCpU4yKUuK8FR+AEgIgiY
-  zSPLg2WBxfYpSVEuZlZGBgEOIpSC3KzSxBlX/FKM7BqCTMKwgyhSczrwRu+iugxUxAi7coPAB
-  ZXJKIkJJqYFJjaXRrCyleOkNvW22VosGP/b+8SuYH90oxza7R+fY6J2ZthdPVq/4LLYzm3Nu9
-  K0/p1L3COcIa83lSH0hNPTs7spC3x3ZdcqHQ1c3OhbpZor9X/dE8viDN6P2hmNYZce4NJamhD
-  HMLE9rT2wKCJqUGdMYId5ft50nZfuxWz4PC9x/92Lo5nv2Z9/axRtFN+4Sr6TN6NXZOPOl4aF
-  fG2wnLPoRIxNT/Z9y65VsXt8r0U8dnu7CysB2+dCcxP9oh+dntgOf6rnEtegmXCitnf3ZR33F
-  hVUdoK6fILvk3IXxJpvf/K/I/znS0MpncYlGiynLqV+DKf9UHZXR8i448XPmwa2Z2mUWFZOXC
-  BBEfJZbijERDLeai4kQAMcAW/l4DAAA=
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-4.tower-571.messagelabs.com!1658974606!561576!1
-X-Originating-IP: [62.60.8.146]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.87.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 8580 invoked from network); 28 Jul 2022 02:16:46 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-4.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 28 Jul 2022 02:16:46 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id D3E971000C0
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Jul 2022 03:16:45 +0100 (BST)
-Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
- [10.183.43.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id C7316100078
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Jul 2022 03:16:45 +0100 (BST)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Thu, 28 Jul 2022 03:16:44 +0100
-From: Wang Mingyu <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-xmlschema: upgrade 1.11.3 -> 2.0.1
-Date: Thu, 28 Jul 2022 10:16:29 +0800
-Message-ID: <1658974589-10681-3-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1658974589-10681-1-git-send-email-wangmy@fujitsu.com>
-References: <1658974589-10681-1-git-send-email-wangmy@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Y0zm5FWV;
+ spf=pass (domain: gmail.com, ip: 209.85.219.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f47.google.com with SMTP id mh14so637298qvb.1
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 27 Jul 2022 20:55:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=GAjosvBoPF6tBz+7fF4UqPuOCeoBCs8h8LCpHhPEy0Y=;
+        b=Y0zm5FWVv6dHmrd/iw2VF4NNcey6DfnrVM3t95lFW0QnP6aMtATJd15JyjVKbo6RnB
+         NVn7ldyj5BsHxTIEfg/+E8dr0fkxiUjI06Obu4oOAt0zBdwYUYkOQ4BL7y3lwxOzlEca
+         iJlmXiX7hnu2B1knDw/9YlY/w0ob7xCJNRJtlnVFfLL6OkaaJJPWOE/wCwX8mBs9ldvm
+         sew+czcF9FbIvmkYoJr6OFoOanh3NUkBskrt6cw/ZZce6g8KyyuDEKF6bd2fwF2OljEJ
+         eKGIEpfEKaQ0wUxjgMP3xx6Txa191O2nR0tobtnWH7Acr/I7xRJoqFYXG8sjKydxzs6i
+         hHGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=GAjosvBoPF6tBz+7fF4UqPuOCeoBCs8h8LCpHhPEy0Y=;
+        b=vNr5tis5QMvHPs+R1BNL2llAj9PN8PG6XGE8DH0O+K4B1x1OwnEmpkMHbt6iO7L1nU
+         NEfKt4vrJcjM/u1twDTyr8u6iBDmQGvBHq9lzdHNzKe27JfE8exQJrI8/wH358flSXL2
+         QKrU3EZ000/e0OeipEoWFxFkiExMAPGPO5WBacX2uOjpo6MS0xcfyWEVx6gPFLzt63yi
+         J20LZIXa2mRy2M9kU1gbvk/q84DJRZ+fV2ILuiwTy5z3/qaPoUp2NSxFMRMdbmnkWdfm
+         mTH6v/DnTpXzMTdcoZsPmNvoSOxlxhUp5j5X2DPhvW8tNOgu1Go7x5PqsGy0vCn8r+Zy
+         hTrg==
+X-Gm-Message-State: AJIora+m/3FOKjZydja/Ghe6M24c9uX7i17orm6856WbSLuhmLwOMXeU
+	Bqyb8GclQTfiQyFU0K6m9+s+WqNr2zb6SeiozxA=
+X-Google-Smtp-Source: 
+ AGRyM1vCPb2LplKOFWs42/5U69j0r1xvlZ+Tou25UfWH2ZbcwXJ/XZSHKcbNQvNy1nkIWjMBz+JVnDDuXcM3Nytf23Y=
+X-Received: by 2002:a0c:8c4c:0:b0:473:11d7:6d3d with SMTP id
+ o12-20020a0c8c4c000000b0047311d76d3dmr21529937qvb.110.1658980543277; Wed, 27
+ Jul 2022 20:55:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
- R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
-X-Virus-Scanned: ClamAV using ClamSMTP
+References: <1658916605-9446-1-git-send-email-xuhuan.fnst@fujitsu.com>
+ <1658916605-9446-5-git-send-email-xuhuan.fnst@fujitsu.com>
+In-Reply-To: <1658916605-9446-5-git-send-email-xuhuan.fnst@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 27 Jul 2022 23:55:17 -0400
+Message-ID: 
+ <CAMKF1sq+VJT-s8Bqa_Ea1p-UP1U-H5aWa15vVSZL3EeeQ2Z=xA@mail.gmail.com>
+Subject: Re: [oe] [meta-python] [PATCH] python3-pyaudio: upgrade 0.2.11 ->
+ 0.2.12
+To: "xuhuan.fnst@fujitsu.com" <xuhuan.fnst@fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 28 Jul 2022 02:16:54 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Jul 2022 03:55:54 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98028
+ https://lists.openembedded.org/g/openembedded-devel/message/98029
 
-Changelog:
-==========
-  Remove warnings during the build of the package using package_data specs in setup.py
-  Fix decoding with process_namespaces=False and xsi:type in XML instance
-  Refactor DataElement.get(), restore DataElement.set() (issue #314)
-  Add map_attribute_names argument to DataElementConverter
+This fails to build with musl see
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- .../{python3-xmlschema_1.11.3.bb => python3-xmlschema_2.0.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-xmlschema_1.11.3.bb => python3-xmlschema_2.0.1.bb} (84%)
+https://errors.yoctoproject.org/Errors/Details/663060/
 
-diff --git a/meta-python/recipes-devtools/python/python3-xmlschema_1.11.3.bb b/meta-python/recipes-devtools/python/python3-xmlschema_2.0.1.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-xmlschema_1.11.3.bb
-rename to meta-python/recipes-devtools/python/python3-xmlschema_2.0.1.bb
-index 7837bc8a4a..68148b7b5c 100644
---- a/meta-python/recipes-devtools/python/python3-xmlschema_1.11.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-xmlschema_2.0.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/xmlschema"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=47489cb18c469474afeb259ed1d4832f"
- 
--SRC_URI[sha256sum] = "28a135028f7ab1e0c934fc0c6717a66b2dc5f166d123dfe6ce61afc671ad113f"
-+SRC_URI[sha256sum] = "1460ba451b4084d4edd031b564f460f5c11b14b20764ce1f64691f8c69e1194d"
- 
- PYPI_PACKAGE = "xmlschema"
- inherit pypi setuptools3
--- 
-2.25.1
-
+On Wed, Jul 27, 2022 at 6:10 AM xuhuan.fnst@fujitsu.com
+<xuhuan.fnst@fujitsu.com> wrote:
+>
+> From: Xu Huan <xuhuan.fnst@fujitsu.com>
+>
+> License-Update: license check file changed to LICENSE.txt
+>
+> Changelog:
+> ==========
+> modernizing the Microsoft Windows build process
+> the use paFramesPerBufferUnspecified as the default frames per buffer
+> the patch that uses the system's preferred encoding
+> the patches that skip unit tests that require audio hardware
+> fixes and suggestions to the documentation
+> fixes to the website documentation
+>
+> Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
+> ---
+>  .../{python3-pyaudio_0.2.11.bb => python3-pyaudio_0.2.12.bb} | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python3-pyaudio_0.2.11.bb => python3-pyaudio_0.2.12.bb} (54%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bb b/meta-python/recipes-devtools/python/python3-pyaudio_0.2.12.bb
+> similarity index 54%
+> rename from meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bb
+> rename to meta-python/recipes-devtools/python/python3-pyaudio_0.2.12.bb
+> index 802ca35100..ae5fcae4ac 100644
+> --- a/meta-python/recipes-devtools/python/python3-pyaudio_0.2.11.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pyaudio_0.2.12.bb
+> @@ -1,12 +1,11 @@
+>  SUMMARY = "PyAudio provides Python bindings for PortAudio, the cross-platform audio I/O library"
+>  SECTION = "devel/python"
+>  LICENSE = "MIT"
+> -LIC_FILES_CHKSUM = "file://README;md5=288793c2b9b05bd67abbd2a8f5d144f7"
+> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7c3152b432b96d6dc4a1cb35397da9ec"
+>
+>  PYPI_PACKAGE = "PyAudio"
+>
+> -SRC_URI[md5sum] = "7e4c88139284033f67b4336c74eda3b8"
+> -SRC_URI[sha256sum] = "93bfde30e0b64e63a46f2fd77e85c41fd51182a4a3413d9edfaf9ffaa26efb74"
+> +SRC_URI[sha256sum] = "55ddf5db72bc537bba5f5dbca3ab9f0222ee5b842bda83978eab0b7b8f60fb9e"
+>
+>  inherit pypi setuptools3
+>
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#98007): https://lists.openembedded.org/g/openembedded-devel/message/98007
+> Mute This Topic: https://lists.openembedded.org/mt/92646107/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
