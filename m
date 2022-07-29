@@ -1,101 +1,112 @@
-Return-Path: <rybczynska@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C278DC00144
-	for <webhook@archiver.kernel.org>; Fri, 29 Jul 2022 11:56:33 +0000 (UTC)
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com
- [209.85.167.51])
- by mx.groups.io with SMTP id smtpd.web11.7034.1659095792024547112
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE85EC3F6B0
+	for <webhook@archiver.kernel.org>; Fri, 29 Jul 2022 15:03:48 +0000 (UTC)
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
+ [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.web09.229.1659107024107752306
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Jul 2022 04:56:32 -0700
+ Fri, 29 Jul 2022 08:03:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=EMd+teoa;
- spf=pass (domain: gmail.com, ip: 209.85.167.51,
- mailfrom: rybczynska@gmail.com)
-Received: by mail-lf1-f51.google.com with SMTP id b16so6973739lfb.7
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=PZxBeO6+;
+ spf=pass (domain: gmail.com, ip: 209.85.210.169,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-pf1-f169.google.com with SMTP id k79so636065pfd.8
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Jul 2022 04:56:31 -0700 (PDT)
+ Fri, 29 Jul 2022 08:03:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc;
-        bh=wfsSIH2WiJxtpfJLihsSDniCtUl0kt4gblCRIOM16mc=;
-        b=EMd+teoadxxX2su4DPFHYh5+6P3lMZLvD/islfsi4qBVxJy9MvgcDTQFxKhEeiZ/AX
-         sJV/YUwGk66/KxhILzEj3Vysqft7XsV0HqaddQfFTkv6XjXsA95ZQsz6T6ZI3InLetYn
-         MT+zYWWGP4KYhounHYi/iB11+tGeZHgreqN1+IBpyrbvWLp34ExAexjfYVuythELRLYt
-         AheAJIP3yK6RkDdyCBFi8h7b6bAYryKNXyO+gXXqBAvCIzIVvunPEHL4dyBgX28eLLxm
-         PPMwSiJHxmqfKL7heapZjbb6nJ9KPKtTiXp9zPUV6Gln00MT86Hq4pUuDCicPquASuB4
-         2uxA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=TlyD5XWGfa0ZEEBhiBZEXc+kAyy3GEputkt8zKnrb4E=;
+        b=PZxBeO6+49dGEOQ+4hkU3ViNxN8ZlGcxaV5DBGCFMVg0iLaC5F9ftX4+KtdH6AD0gh
+         Cb1I/BaoYxEijagTj0L0Ydbi6l1Gf97vmyrbk9GTe7w5kHePaifeIr8VXiGl8atytSVR
+         KgFb0triA1UACFbOFhtnSpALduNE4+UXbbnjIJgBs/T8zMFPpNwWzUTDXLAb2NdB67wr
+         NVtfTzVh994LeFA0VGEdOPouJS1tqeP/5sncfJ30ybjXBK9QgKRttwvb1qDIvqHoSVJX
+         6EnPp7rrwMu6LmZoK82AtlCxXt4GF7a+J1MxzApcXvXoWGxNq/oR4W+lfhdFGeCwBjZe
+         STGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc;
-        bh=wfsSIH2WiJxtpfJLihsSDniCtUl0kt4gblCRIOM16mc=;
-        b=eGFZVGRPiMxbciWWgHQ1WlovANcYSg/5soLR4bxEkNh5brZ04UhyP8guAMPdiioW+A
-         85iTWph7MmsINhCZ3ycdkvqzjn0LQVIK+Od/CSr+KmyrBAqJtUnhLEwbLMJx2olG0gc3
-         /f+irNtH7aQBU1MHS7zbyl7werfJbAvDw5IaVoaAAunBdZkeKm4ixfAT2wmad09LESkN
-         tEWRrEKlE/QsFGodTT7NPB4ccpr8RLuuOyxAa7CcI4Q5U6MUytYJApG9idImStyQBFAn
-         TC8fJsHOT1Q20rMlEKQ3PkCo+nhnPqYaajpa5eVV2dTCI/BnG7ou/Kt/oNOz8hULyN+j
-         blBQ==
-X-Gm-Message-State: AJIora9slAe6S0KirDnTmr7p3PWgyx4a0XCFerN+IQAZecFjjlpckVwM
-	pMcdvcyolRypv8UE47BCwF9yG2bScbBVaYU4EOInXth+
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=TlyD5XWGfa0ZEEBhiBZEXc+kAyy3GEputkt8zKnrb4E=;
+        b=npiE4kryZiJew5cwblyXgnOckeKn2v+rRdqZvQaz6hMVJzislxrbaqoT3tNfAzjMBE
+         yeHJJekvPsNfTbd1RbbZLXj5UAwR4I7UAJawX3Xo8AoYFyROoksUP3uaBmntkPjqT19j
+         TlkN7uiNjO3rum31gpqEJOj+ORX8oTEYSteNDTuID7YBMR9WepF6nRNhoQGi/3RtV5Sl
+         Pks4OJYqv8JQbrxHDS4j4yWSCb3LJvqYG8P3MvbWr4ioqSnvFNJnDhjchUYa+vyNyGh8
+         mnF3lpwaf/KfCs/Z4RmHI1uDIuEMvP1X+pqqZgczuMHxmt+ey+2Guh0+kdHPB7m46bSY
+         8Ykw==
+X-Gm-Message-State: AJIora/zTFyB3zvdVBzlnuX7eOE5+6VbE0swA+2OXhgbSaCN+yAQZpG7
+	RWhDN+52qFEWSJh13Wcl/uElXoACfxg=
 X-Google-Smtp-Source: 
- AA6agR79Y4WpTmJBAIJH68xurx/VncQIb1RFIq88L5PQGt1n6vexqaLdRfjZJGpngafKncnWFV01T36uwNdpEsgbUpE=
-X-Received: by 2002:a05:6512:b21:b0:47f:752a:c140 with SMTP id
- w33-20020a0565120b2100b0047f752ac140mr1083739lfu.349.1659095789396; Fri, 29
- Jul 2022 04:56:29 -0700 (PDT)
+ AGRyM1vU0C5u94f833DT3AZ3aBjL4zDrBM4Pyk2Qrz9Cqk4tk9FObYSvuN5V5iKu8HxPypPPv3Awug==
+X-Received: by 2002:a63:441f:0:b0:41b:539c:6011 with SMTP id
+ r31-20020a63441f000000b0041b539c6011mr3377042pga.156.1659107022995;
+        Fri, 29 Jul 2022 08:03:42 -0700 (PDT)
+Received: from keaua.hsd1.ca.comcast.net
+ (c-67-181-203-136.hsd1.ca.comcast.net. [67.181.203.136])
+        by smtp.gmail.com with ESMTPSA id
+ x10-20020aa79aca000000b0051be16492basm2957080pfp.195.2022.07.29.08.03.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 29 Jul 2022 08:03:42 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: wangmy <wangmy@fujitsu.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 1/5] stunnel: upgrade 5.63 -> 5.64
+Date: Fri, 29 Jul 2022 08:01:36 -0700
+Message-Id: <20220729150140.104164-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20220729112413.282067-1-rybczynska@gmail.com>
-In-Reply-To: <20220729112413.282067-1-rybczynska@gmail.com>
-From: Marta Rybczynska <rybczynska@gmail.com>
-Date: Fri, 29 Jul 2022 13:56:17 +0200
-Message-ID: 
- <CAApg2=Q2TCiG+0-aZ9io_rFrvjf=niR5v9vBj+=zwY1qm5ytWA@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH] polkit: update patches for musl compilation
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Khem Raj <raj.khem@gmail.com>,
- Marta Rybczynska <marta.rybczynska@huawei.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 29 Jul 2022 11:56:33 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 29 Jul 2022 15:03:48 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98040
+ https://lists.openembedded.org/g/openembedded-devel/message/98041
 
-On Fri, Jul 29, 2022 at 1:24 PM Marta Rybczynska <rybczynska@gmail.com> wrote:
->
-> Update the patch to make netgroup support optional to fit the commit
-> merged upstream [1], update the other patch depending on one of the
-> changes.
->
-> Without this update, a compilation using duktape with musl fails with:
-> | ../../../polkit-0.119/src/polkitbackend/polkitbackendduktapeauthority.c: In function 'js_polkit_user_is_in_netgroup':
-> | ../../../polkit-0.119/src/polkitbackend/polkitbackendduktapeauthority.c:1039:7: warning: implicit declaration of function 'innetgr' [-Wimplicit-function-declaration]
-> |  1039 |   if (innetgr (netgroup,
-> |       |       ^~~~~~~
->
-> The main patch has been split in two, to apply the duktape part only when duktape is
-> applied.
->
-> [1] https://gitlab.freedesktop.org/polkit/polkit/-/commit/b57deee8178190a7ecc75290fa13cf7daabc2c66
->
-> Signed-off-by: Marta Rybczynska <marta.rybczynska@huawei.com>
-> ---
->  ...ded-support-for-duktape-as-JS-engine.patch |  20 ++--
->  ...0004-Make-netgroup-support-optional.patch} | 103 +++++++++---------
->  ...ke-netgroup-support-optional-duktape.patch |  34 ++++++
->  .../recipes-extended/polkit/polkit_0.119.bb   |   4 +-
->  4 files changed, 98 insertions(+), 63 deletions(-)
+From: wangmy <wangmy@fujitsu.com>
 
-Khem,
-The master version is different from the kirkstone one because of the
-changes that were done on duktape
-support. Is there any special reason this recipe isn't updated to a
-newer version so that we could drop many
-of the patches?
+Changelog:
+==========
 
-Regards,
-Marta
+    Security bugfixes
+        OpenSSL DLLs updated to version 3.0.3.
+    New features
+        Updated the pkcs11 engine for Windows.
+    Bugfixes
+        Removed the SERVICE_INTERACTIVE_PROCESS flag in "stunnel -install".
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 6f3b52f4589bfa942e473488f91ecef85d339e78)
+[New feature does not affect linux]
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../stunnel/{stunnel_5.63.bb => stunnel_5.64.bb}                | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/stunnel/{stunnel_5.63.bb => stunnel_5.64.bb} (93%)
+
+diff --git a/meta-networking/recipes-support/stunnel/stunnel_5.63.bb b/meta-networking/recipes-support/stunnel/stunnel_5.64.bb
+similarity index 93%
+rename from meta-networking/recipes-support/stunnel/stunnel_5.63.bb
+rename to meta-networking/recipes-support/stunnel/stunnel_5.64.bb
+index 325737e8c9..13ecd5c5bf 100644
+--- a/meta-networking/recipes-support/stunnel/stunnel_5.63.bb
++++ b/meta-networking/recipes-support/stunnel/stunnel_5.64.bb
+@@ -11,7 +11,7 @@ SRC_URI = "https://stunnel.org/archive/5.x/${BP}.tar.gz \
+            file://fix-openssl-no-des.patch \
+ "
+ 
+-SRC_URI[sha256sum] = "c74c4e15144a3ae34b8b890bb31c909207301490bd1e51bfaaa5ffeb0a994617"
++SRC_URI[sha256sum] = "eebe53ed116ba43b2e786762b0c2b91511e7b74857ad4765824e7199e6faf883"
+ 
+ inherit autotools bash-completion pkgconfig
+ 
+-- 
+2.25.1
+
 
