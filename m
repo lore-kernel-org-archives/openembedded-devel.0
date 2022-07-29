@@ -2,63 +2,62 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AE214C19F2A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B485DC19F2C
 	for <webhook@archiver.kernel.org>; Fri, 29 Jul 2022 15:03:48 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
- [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web11.258.1659107026736590805
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
+ [209.85.215.170])
+ by mx.groups.io with SMTP id smtpd.web08.250.1659107025580217477
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Jul 2022 08:03:46 -0700
+ Fri, 29 Jul 2022 08:03:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=i/1bh0zb;
- spf=pass (domain: gmail.com, ip: 209.85.216.43,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=CQ7pWE6Y;
+ spf=pass (domain: gmail.com, ip: 209.85.215.170,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id
- f11-20020a17090a4a8b00b001f2f7e32d03so7358293pjh.0
+Received: by mail-pg1-f170.google.com with SMTP id s206so4234124pgs.3
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Jul 2022 08:03:46 -0700 (PDT)
+ Fri, 29 Jul 2022 08:03:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=Wvlh02croBEJZT9a9YHyecIC4nlZL9pIfv9LpOwJvks=;
-        b=i/1bh0zb6K/IsSjVnyamRKBmpb+1cqI58ba5yUdSSBQ0IYCZ1LvZXJkoRjjuNP5kzF
-         dmuXnN/Njk5Mjb6aclqX0O4nujBTUExQ26yS1MrDnFCV9g3KmTt7Zvl4Z9YQE4fyDz3c
-         eNnjeUmxH9wwW1Hug5OXDTCBUjR7agNXs0VEYiYZnvDLQ8M1HDzzh0KaokPTGLL179DU
-         i+XOJvNNm1/JdLiBoziqWrBTxGZo+XOXekSYAgXrfwxZdiV5KJKjIshkGcJ+Rt1sVQLm
-         Yy3+rz9ZdF9tJ0AepPBqY97x08sTM3frYJM0RgmcU5Kj2uJnZPhsCPSPQxtykR9+QSZO
-         KBUQ==
+        bh=XCHoJFOctcKZJTRGaztCJU6SLcuIvse6L4KJDprHZu0=;
+        b=CQ7pWE6YFi0WSNuJD/WOv7IoV6MR7Qhk0BpJLi1bbZ+QQGLJhwc6egfrSxdHKbuDjB
+         4eCLRvXaJ1cS+xZ7tn1TPaa2evB0PbYCL3+42/oq0KNwkPPQAeZA29DrMbMBohStC0TZ
+         b1H6ybaQs5IZdFqoErmUZ2g/mFQ/4QKwwDC8/DfYNZ7McoyjGHlmfNWhHYaHWBWw1TL2
+         4naKE0Ect8jsc/zq1RhkAJ7kWJ2K5YsL9Tjpq44ca6XGNMMUmAjmalKIl1sqE0wePkbs
+         Gp7RL4cCQk5rl6RGAX1fdF+8kRkr6pU4iUnwwCqYBCdwEpm5EsvEaOeballHirbPwi3l
+         ReMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=Wvlh02croBEJZT9a9YHyecIC4nlZL9pIfv9LpOwJvks=;
-        b=xl4f/mAI1TXYUqw7aBkoSyu6HBvxBVV45o78o3Ou09EbGlGsa6/43uXoGDdDAKYtDE
-         IKMgGLga1jutr9tN8wKHpGmUJaoXC0XQYgj8hz3nkbjF/9IiMkPvmJzdsDINeS9zpCX9
-         PVTOkaOHa/eBdSFpbOUticIew/yD47hRg1K2T6cnuylfgYwmjxYA3lZBtp7kZm7ZYHLx
-         8T0M5hO9M0MB0Wbuw56cjV5V1vBQpONJjA4C+LmzBUwd6ir/17vLrCN+8giWljPJohvN
-         G5+X9vCupvR38I8P1IqN+1blP95mTjv2P7aaefOUmi152C9zkTA9FIphUWzscxCF5MxB
-         q3KA==
-X-Gm-Message-State: ACgBeo00WsfWYg1vxAVVCVXRpl2g7iGQ6W6iX5B719cFZWILKQ/Rr/tt
-	T/goR85T442aLFuV3RSaqQHq/Mz3tRQ=
+        bh=XCHoJFOctcKZJTRGaztCJU6SLcuIvse6L4KJDprHZu0=;
+        b=bl4MExSCLEm1kQWZbRgPPCGd0CaGua9ALAHbiqFRVqrtunWhFrlrcwaE6y35fC00rF
+         4GUBn1iaKDcrHu/NVU1zxk1lU8qsqef4TmJQa6xYrzSgNbIeBAZNzxsDJdLUb31QGwV7
+         DQPRYi8Py8vmIla4vJrByyZt7xd+GNBTBW/1uBxpRBoo3TsVU949gXE4RylvERVzFDEO
+         FOUd0TR9PD9mieKFcfAVPzFE5ORqNAz5gbjv4wXw8Gd7btaAwlo6hx7D1ihqvu4kjRip
+         2QS1S9Nz0NMJJZrk9bJlPQxju5/jm8sj0ajvi+VGM5MNsmj8dc/rbvmjYxMjN17PjIZf
+         UeLg==
+X-Gm-Message-State: AJIora8JWXdB9DLWX2aVME1JxkC4I3kR1TVq11Bzap9UGHQtUf9nWC4P
+	9KVGGmxjsojGi2Mib9+evIsJy+N2mos=
 X-Google-Smtp-Source: 
- AA6agR6FlQagov0oFH2WPImiN/0xJzN2wahb4EgyOplhx/PnoE7V7ORDAC0Z30MPD1A/PrVMLwSExg==
-X-Received: by 2002:a17:902:b407:b0:16d:3e9e:3c42 with SMTP id
- x7-20020a170902b40700b0016d3e9e3c42mr4156613plr.150.1659107025751;
-        Fri, 29 Jul 2022 08:03:45 -0700 (PDT)
+ AA6agR7kyCPXrKC6XKPr0dSt4ujDbNhCTkASZYcU8C1qTxNI8kvjrXG0CehEn+mk4GhXqO+fj8SqPA==
+X-Received: by 2002:a05:6a00:114f:b0:528:2c7a:634c with SMTP id
+ b15-20020a056a00114f00b005282c7a634cmr4214677pfm.41.1659107024312;
+        Fri, 29 Jul 2022 08:03:44 -0700 (PDT)
 Received: from keaua.hsd1.ca.comcast.net
  (c-67-181-203-136.hsd1.ca.comcast.net. [67.181.203.136])
         by smtp.gmail.com with ESMTPSA id
- x10-20020aa79aca000000b0051be16492basm2957080pfp.195.2022.07.29.08.03.44
+ x10-20020aa79aca000000b0051be16492basm2957080pfp.195.2022.07.29.08.03.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 29 Jul 2022 08:03:44 -0700 (PDT)
+        Fri, 29 Jul 2022 08:03:43 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: wangmy <wangmy@fujitsu.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH 3/5] redis: upgrade 7.0.2 -> 7.0.4
-Date: Fri, 29 Jul 2022 08:01:38 -0700
-Message-Id: <20220729150140.104164-3-akuster808@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 2/5] stunnel: upgrade 5.64 -> 5.65
+Date: Fri, 29 Jul 2022 08:01:37 -0700
+Message-Id: <20220729150140.104164-2-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220729150140.104164-1-akuster808@gmail.com>
 References: <20220729150140.104164-1-akuster808@gmail.com>
@@ -69,44 +68,113 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 29 Jul 2022 15:03:48 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98043
+ https://lists.openembedded.org/g/openembedded-devel/message/98042
 
 From: wangmy <wangmy@fujitsu.com>
 
+fix-openssl-no-des.patch
+refreshed for version 5.65
+
 Changelog:
 ==========
-Upgrade urgency: SECURITY, contains fixes to security issues.
-
-Security Fixes:
-----------------
-    (CVE-2022-31144) A specially crafted XAUTOCLAIM command on a stream
-    key in a specific state may result with heap overflow, and potentially
-    remote code execution. The problem affects Redis versions 7.0.0 or newer.
+    Security bugfixes
+        OpenSSL DLLs updated to version 3.0.5.
+    Bugfixes
+        Fixed handling globally enabled FIPS.
+        Fixed the default openssl.cnf path in stunnel.exe.
+        Fixed a number of MSVC warnings.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit d9f8d015a45188c3cf2d6841ea05319032930dbc)
+(cherry picked from commit 72f84335cb372dbf00d2d07429a595fced0c4f4f)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-extended/redis/{redis_7.0.2.bb => redis_7.0.4.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/redis/{redis_7.0.2.bb => redis_7.0.4.bb} (96%)
+ .../stunnel/stunnel/fix-openssl-no-des.patch  | 24 +++++++++++++------
+ .../{stunnel_5.64.bb => stunnel_5.65.bb}      |  2 +-
+ 2 files changed, 18 insertions(+), 8 deletions(-)
+ rename meta-networking/recipes-support/stunnel/{stunnel_5.64.bb => stunnel_5.65.bb} (93%)
 
-diff --git a/meta-oe/recipes-extended/redis/redis_7.0.2.bb b/meta-oe/recipes-extended/redis/redis_7.0.4.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/redis/redis_7.0.2.bb
-rename to meta-oe/recipes-extended/redis/redis_7.0.4.bb
-index b188278e1c..993ff34b10 100644
---- a/meta-oe/recipes-extended/redis/redis_7.0.2.bb
-+++ b/meta-oe/recipes-extended/redis/redis_7.0.4.bb
-@@ -19,7 +19,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://GNU_SOURCE.patch \
-            file://0006-Define-correct-gregs-for-RISCV32.patch \
-            "
--SRC_URI[sha256sum] = "5e57eafe7d4ac5ecb6a7d64d6b61db775616dbf903293b3fcc660716dbda5eeb"
-+SRC_URI[sha256sum] = "f0e65fda74c44a3dd4fa9d512d4d4d833dd0939c934e946a5c622a630d057f2f"
+diff --git a/meta-networking/recipes-support/stunnel/stunnel/fix-openssl-no-des.patch b/meta-networking/recipes-support/stunnel/stunnel/fix-openssl-no-des.patch
+index aeb0bece97..0840cbbd8b 100644
+--- a/meta-networking/recipes-support/stunnel/stunnel/fix-openssl-no-des.patch
++++ b/meta-networking/recipes-support/stunnel/stunnel/fix-openssl-no-des.patch
+@@ -1,3 +1,8 @@
++From 7ff4eba20b5c4fc7365e5ee0dfb775ed29bdd5ce Mon Sep 17 00:00:00 2001
++From: Kai Kang <kai.kang@windriver.com>
++Date: Wed, 1 Nov 2017 09:23:41 -0400
++Subject: [PATCH] stunnel: fix compile error when openssl disable des support
++
+ Upstream-Status: Pending
  
- inherit autotools-brokensep update-rc.d systemd useradd
+ When openssl disable des support with configure option 'no-des', it doesn't
+@@ -6,12 +11,17 @@ failed. Fix it by checking macro OPENSSL_NO_DES to use openssl des related
+ library conditionaly.
+ 
+ Signed-off-by: Kai Kang <kai.kang@windriver.com>
++
+ ---
++ src/common.h   | 2 ++
++ src/protocol.c | 6 +++---
++ 2 files changed, 5 insertions(+), 3 deletions(-)
++
+ diff --git a/src/common.h b/src/common.h
+-index f7d38b0..bf485af 100644
++index bc37eb5..03ee3e5 100644
+ --- a/src/common.h
+ +++ b/src/common.h
+-@@ -478,7 +478,9 @@ extern char *sys_errlist[];
++@@ -486,7 +486,9 @@ extern char *sys_errlist[];
+  #ifndef OPENSSL_NO_MD4
+  #include <openssl/md4.h>
+  #endif /* !defined(OPENSSL_NO_MD4) */
+@@ -22,19 +32,19 @@ index f7d38b0..bf485af 100644
+  #include <openssl/dh.h>
+  #if OPENSSL_VERSION_NUMBER<0x10100000L
+ diff --git a/src/protocol.c b/src/protocol.c
+-index 587df09..8198eb6 100644
++index 804f115..d9b2b50 100644
+ --- a/src/protocol.c
+ +++ b/src/protocol.c
+-@@ -67,7 +67,7 @@ NOEXPORT char *imap_server(CLI *, SERVICE_OPTIONS *, const PHASE);
++@@ -66,7 +66,7 @@ NOEXPORT char *nntp_client(CLI *, SERVICE_OPTIONS *, const PHASE);
+  NOEXPORT char *ldap_client(CLI *, SERVICE_OPTIONS *, const PHASE);
+  NOEXPORT char *connect_server(CLI *, SERVICE_OPTIONS *, const PHASE);
+  NOEXPORT char *connect_client(CLI *, SERVICE_OPTIONS *, const PHASE);
+ -#ifndef OPENSSL_NO_MD4
+ +#if !defined(OPENSSL_NO_MD4) && !defined(OPENSSL_NO_DES)
+  NOEXPORT void ntlm(CLI *, SERVICE_OPTIONS *);
+- NOEXPORT char *ntlm1();
++ NOEXPORT char *ntlm1(void);
+  NOEXPORT char *ntlm3(char *, char *, char *, char *);
+-@@ -1332,7 +1332,7 @@ NOEXPORT char *connect_client(CLI *c, SERVICE_OPTIONS *opt, const PHASE phase) {
++@@ -1351,7 +1351,7 @@ NOEXPORT char *connect_client(CLI *c, SERVICE_OPTIONS *opt, const PHASE phase) {
+      fd_printf(c, c->remote_fd.fd, "Host: %s", opt->protocol_host);
+      if(opt->protocol_username && opt->protocol_password) {
+          if(!strcasecmp(opt->protocol_authentication, "ntlm")) {
+@@ -43,7 +53,7 @@ index 587df09..8198eb6 100644
+              ntlm(c, opt);
+  #else
+              s_log(LOG_ERR, "NTLM authentication is not available");
+-@@ -1376,7 +1376,7 @@ NOEXPORT char *connect_client(CLI *c, SERVICE_OPTIONS *opt, const PHASE phase) {
++@@ -1395,7 +1395,7 @@ NOEXPORT char *connect_client(CLI *c, SERVICE_OPTIONS *opt, const PHASE phase) {
+      return NULL;
+  }
+  
+diff --git a/meta-networking/recipes-support/stunnel/stunnel_5.64.bb b/meta-networking/recipes-support/stunnel/stunnel_5.65.bb
+similarity index 93%
+rename from meta-networking/recipes-support/stunnel/stunnel_5.64.bb
+rename to meta-networking/recipes-support/stunnel/stunnel_5.65.bb
+index 13ecd5c5bf..ab7ff43223 100644
+--- a/meta-networking/recipes-support/stunnel/stunnel_5.64.bb
++++ b/meta-networking/recipes-support/stunnel/stunnel_5.65.bb
+@@ -11,7 +11,7 @@ SRC_URI = "https://stunnel.org/archive/5.x/${BP}.tar.gz \
+            file://fix-openssl-no-des.patch \
+ "
+ 
+-SRC_URI[sha256sum] = "eebe53ed116ba43b2e786762b0c2b91511e7b74857ad4765824e7199e6faf883"
++SRC_URI[sha256sum] = "60c500063bd1feff2877f5726e38278c086f96c178f03f09d264a2012d6bf7fc"
+ 
+ inherit autotools bash-completion pkgconfig
  
 -- 
 2.25.1
