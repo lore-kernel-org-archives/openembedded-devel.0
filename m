@@ -2,63 +2,66 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AE85EC3F6B0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE214C19F2A
 	for <webhook@archiver.kernel.org>; Fri, 29 Jul 2022 15:03:48 +0000 (UTC)
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
- [209.85.210.169])
- by mx.groups.io with SMTP id smtpd.web09.229.1659107024107752306
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
+ [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web11.258.1659107026736590805
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Jul 2022 08:03:44 -0700
+ Fri, 29 Jul 2022 08:03:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=PZxBeO6+;
- spf=pass (domain: gmail.com, ip: 209.85.210.169,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=i/1bh0zb;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f169.google.com with SMTP id k79so636065pfd.8
+Received: by mail-pj1-f43.google.com with SMTP id
+ f11-20020a17090a4a8b00b001f2f7e32d03so7358293pjh.0
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Jul 2022 08:03:44 -0700 (PDT)
+ Fri, 29 Jul 2022 08:03:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=TlyD5XWGfa0ZEEBhiBZEXc+kAyy3GEputkt8zKnrb4E=;
-        b=PZxBeO6+49dGEOQ+4hkU3ViNxN8ZlGcxaV5DBGCFMVg0iLaC5F9ftX4+KtdH6AD0gh
-         Cb1I/BaoYxEijagTj0L0Ydbi6l1Gf97vmyrbk9GTe7w5kHePaifeIr8VXiGl8atytSVR
-         KgFb0triA1UACFbOFhtnSpALduNE4+UXbbnjIJgBs/T8zMFPpNwWzUTDXLAb2NdB67wr
-         NVtfTzVh994LeFA0VGEdOPouJS1tqeP/5sncfJ30ybjXBK9QgKRttwvb1qDIvqHoSVJX
-         6EnPp7rrwMu6LmZoK82AtlCxXt4GF7a+J1MxzApcXvXoWGxNq/oR4W+lfhdFGeCwBjZe
-         STGA==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=Wvlh02croBEJZT9a9YHyecIC4nlZL9pIfv9LpOwJvks=;
+        b=i/1bh0zb6K/IsSjVnyamRKBmpb+1cqI58ba5yUdSSBQ0IYCZ1LvZXJkoRjjuNP5kzF
+         dmuXnN/Njk5Mjb6aclqX0O4nujBTUExQ26yS1MrDnFCV9g3KmTt7Zvl4Z9YQE4fyDz3c
+         eNnjeUmxH9wwW1Hug5OXDTCBUjR7agNXs0VEYiYZnvDLQ8M1HDzzh0KaokPTGLL179DU
+         i+XOJvNNm1/JdLiBoziqWrBTxGZo+XOXekSYAgXrfwxZdiV5KJKjIshkGcJ+Rt1sVQLm
+         Yy3+rz9ZdF9tJ0AepPBqY97x08sTM3frYJM0RgmcU5Kj2uJnZPhsCPSPQxtykR9+QSZO
+         KBUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=TlyD5XWGfa0ZEEBhiBZEXc+kAyy3GEputkt8zKnrb4E=;
-        b=npiE4kryZiJew5cwblyXgnOckeKn2v+rRdqZvQaz6hMVJzislxrbaqoT3tNfAzjMBE
-         yeHJJekvPsNfTbd1RbbZLXj5UAwR4I7UAJawX3Xo8AoYFyROoksUP3uaBmntkPjqT19j
-         TlkN7uiNjO3rum31gpqEJOj+ORX8oTEYSteNDTuID7YBMR9WepF6nRNhoQGi/3RtV5Sl
-         Pks4OJYqv8JQbrxHDS4j4yWSCb3LJvqYG8P3MvbWr4ioqSnvFNJnDhjchUYa+vyNyGh8
-         mnF3lpwaf/KfCs/Z4RmHI1uDIuEMvP1X+pqqZgczuMHxmt+ey+2Guh0+kdHPB7m46bSY
-         8Ykw==
-X-Gm-Message-State: AJIora/zTFyB3zvdVBzlnuX7eOE5+6VbE0swA+2OXhgbSaCN+yAQZpG7
-	RWhDN+52qFEWSJh13Wcl/uElXoACfxg=
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=Wvlh02croBEJZT9a9YHyecIC4nlZL9pIfv9LpOwJvks=;
+        b=xl4f/mAI1TXYUqw7aBkoSyu6HBvxBVV45o78o3Ou09EbGlGsa6/43uXoGDdDAKYtDE
+         IKMgGLga1jutr9tN8wKHpGmUJaoXC0XQYgj8hz3nkbjF/9IiMkPvmJzdsDINeS9zpCX9
+         PVTOkaOHa/eBdSFpbOUticIew/yD47hRg1K2T6cnuylfgYwmjxYA3lZBtp7kZm7ZYHLx
+         8T0M5hO9M0MB0Wbuw56cjV5V1vBQpONJjA4C+LmzBUwd6ir/17vLrCN+8giWljPJohvN
+         G5+X9vCupvR38I8P1IqN+1blP95mTjv2P7aaefOUmi152C9zkTA9FIphUWzscxCF5MxB
+         q3KA==
+X-Gm-Message-State: ACgBeo00WsfWYg1vxAVVCVXRpl2g7iGQ6W6iX5B719cFZWILKQ/Rr/tt
+	T/goR85T442aLFuV3RSaqQHq/Mz3tRQ=
 X-Google-Smtp-Source: 
- AGRyM1vU0C5u94f833DT3AZ3aBjL4zDrBM4Pyk2Qrz9Cqk4tk9FObYSvuN5V5iKu8HxPypPPv3Awug==
-X-Received: by 2002:a63:441f:0:b0:41b:539c:6011 with SMTP id
- r31-20020a63441f000000b0041b539c6011mr3377042pga.156.1659107022995;
-        Fri, 29 Jul 2022 08:03:42 -0700 (PDT)
+ AA6agR6FlQagov0oFH2WPImiN/0xJzN2wahb4EgyOplhx/PnoE7V7ORDAC0Z30MPD1A/PrVMLwSExg==
+X-Received: by 2002:a17:902:b407:b0:16d:3e9e:3c42 with SMTP id
+ x7-20020a170902b40700b0016d3e9e3c42mr4156613plr.150.1659107025751;
+        Fri, 29 Jul 2022 08:03:45 -0700 (PDT)
 Received: from keaua.hsd1.ca.comcast.net
  (c-67-181-203-136.hsd1.ca.comcast.net. [67.181.203.136])
         by smtp.gmail.com with ESMTPSA id
- x10-20020aa79aca000000b0051be16492basm2957080pfp.195.2022.07.29.08.03.41
+ x10-20020aa79aca000000b0051be16492basm2957080pfp.195.2022.07.29.08.03.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 29 Jul 2022 08:03:42 -0700 (PDT)
+        Fri, 29 Jul 2022 08:03:44 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: wangmy <wangmy@fujitsu.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH 1/5] stunnel: upgrade 5.63 -> 5.64
-Date: Fri, 29 Jul 2022 08:01:36 -0700
-Message-Id: <20220729150140.104164-1-akuster808@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 3/5] redis: upgrade 7.0.2 -> 7.0.4
+Date: Fri, 29 Jul 2022 08:01:38 -0700
+Message-Id: <20220729150140.104164-3-akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220729150140.104164-1-akuster808@gmail.com>
+References: <20220729150140.104164-1-akuster808@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
@@ -66,45 +69,44 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 29 Jul 2022 15:03:48 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98041
+ https://lists.openembedded.org/g/openembedded-devel/message/98043
 
 From: wangmy <wangmy@fujitsu.com>
 
 Changelog:
 ==========
+Upgrade urgency: SECURITY, contains fixes to security issues.
 
-    Security bugfixes
-        OpenSSL DLLs updated to version 3.0.3.
-    New features
-        Updated the pkcs11 engine for Windows.
-    Bugfixes
-        Removed the SERVICE_INTERACTIVE_PROCESS flag in "stunnel -install".
+Security Fixes:
+----------------
+    (CVE-2022-31144) A specially crafted XAUTOCLAIM command on a stream
+    key in a specific state may result with heap overflow, and potentially
+    remote code execution. The problem affects Redis versions 7.0.0 or newer.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 6f3b52f4589bfa942e473488f91ecef85d339e78)
-[New feature does not affect linux]
+(cherry picked from commit d9f8d015a45188c3cf2d6841ea05319032930dbc)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../stunnel/{stunnel_5.63.bb => stunnel_5.64.bb}                | 2 +-
+ .../recipes-extended/redis/{redis_7.0.2.bb => redis_7.0.4.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/stunnel/{stunnel_5.63.bb => stunnel_5.64.bb} (93%)
+ rename meta-oe/recipes-extended/redis/{redis_7.0.2.bb => redis_7.0.4.bb} (96%)
 
-diff --git a/meta-networking/recipes-support/stunnel/stunnel_5.63.bb b/meta-networking/recipes-support/stunnel/stunnel_5.64.bb
-similarity index 93%
-rename from meta-networking/recipes-support/stunnel/stunnel_5.63.bb
-rename to meta-networking/recipes-support/stunnel/stunnel_5.64.bb
-index 325737e8c9..13ecd5c5bf 100644
---- a/meta-networking/recipes-support/stunnel/stunnel_5.63.bb
-+++ b/meta-networking/recipes-support/stunnel/stunnel_5.64.bb
-@@ -11,7 +11,7 @@ SRC_URI = "https://stunnel.org/archive/5.x/${BP}.tar.gz \
-            file://fix-openssl-no-des.patch \
- "
+diff --git a/meta-oe/recipes-extended/redis/redis_7.0.2.bb b/meta-oe/recipes-extended/redis/redis_7.0.4.bb
+similarity index 96%
+rename from meta-oe/recipes-extended/redis/redis_7.0.2.bb
+rename to meta-oe/recipes-extended/redis/redis_7.0.4.bb
+index b188278e1c..993ff34b10 100644
+--- a/meta-oe/recipes-extended/redis/redis_7.0.2.bb
++++ b/meta-oe/recipes-extended/redis/redis_7.0.4.bb
+@@ -19,7 +19,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://GNU_SOURCE.patch \
+            file://0006-Define-correct-gregs-for-RISCV32.patch \
+            "
+-SRC_URI[sha256sum] = "5e57eafe7d4ac5ecb6a7d64d6b61db775616dbf903293b3fcc660716dbda5eeb"
++SRC_URI[sha256sum] = "f0e65fda74c44a3dd4fa9d512d4d4d833dd0939c934e946a5c622a630d057f2f"
  
--SRC_URI[sha256sum] = "c74c4e15144a3ae34b8b890bb31c909207301490bd1e51bfaaa5ffeb0a994617"
-+SRC_URI[sha256sum] = "eebe53ed116ba43b2e786762b0c2b91511e7b74857ad4765824e7199e6faf883"
- 
- inherit autotools bash-completion pkgconfig
+ inherit autotools-brokensep update-rc.d systemd useradd
  
 -- 
 2.25.1
