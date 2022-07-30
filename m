@@ -1,91 +1,68 @@
-Return-Path: <vince@underview.tech>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0FCBDC00144
-	for <webhook@archiver.kernel.org>; Sat, 30 Jul 2022 02:29:19 +0000 (UTC)
-Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
- [209.85.166.66])
- by mx.groups.io with SMTP id smtpd.web10.2228.1659148150664790402
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C7B8C04A68
+	for <webhook@archiver.kernel.org>; Sat, 30 Jul 2022 15:26:15 +0000 (UTC)
+Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
+ by mx.groups.io with SMTP id smtpd.web10.3913.1659194767987983537
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Jul 2022 19:29:10 -0700
+ Sat, 30 Jul 2022 08:26:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@underview.tech header.s=google header.b=T+17NASZ;
- spf=pass (domain: underview.tech, ip: 209.85.166.66,
- mailfrom: vince@underview.tech)
-Received: by mail-io1-f66.google.com with SMTP id e69so4858364iof.5
-        for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Jul 2022 19:29:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=underview.tech; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=reSvyhC31djUi4y/c3RwKUUMj+Pgy2XF50/vWDvrLX0=;
-        b=T+17NASZpaJX3baMmUu/2DBTjP9w3B+b0z3Y/0PJsO1Qt8tQQSlIALwTQil3GvyiY+
-         09phQfAPGp6QbKXu9r3tgP4bgFCET008gI12eqimcB1uHJ1z1lJvQq+GZXcSV9RGg4TT
-         +4AfuxNBB1FHxgHu79xXebdvgRMxXhISwCoKceJxwaSthNdkx8rvHbMBKitbYzx167WV
-         2kf89wxnMtaKaww9II5iWwjPx+83ldLT6gmE+VHNh4dtHBN/TEl3e+IPcWTK0CuwK0Mf
-         DWJV32wUVTAwappAt/e1Ov59fQIge2H6qaJH/1rPzt/Mk7g6WVBTw3ox6XGhV1WMHF5Q
-         mnug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=reSvyhC31djUi4y/c3RwKUUMj+Pgy2XF50/vWDvrLX0=;
-        b=wHADaFW/nniLREUxT7fej21GD4wmZJ8AM8ThwgBLrNiAhSmpqDaaQyRvlWNsR/JeQD
-         sVQOB0tmOWtsRQIGCUv3c6VfpZ4ZDEb4ZjNXXOHVkjf4n5PvOslrsh2cRfGHVmQMGH0i
-         4UTYq5hoYSQAndJKUDddZ19b/VYukB/P8VVniTOqemXbUMrG1AbGd+PD2LU9qbKGfWwk
-         SfcjiYZRUFdLR56J+Jlh7FTNU8OKOqeSYXeFCq7zyNhv3lv2xiKs7G9oaUxBOQPnPfSF
-         ITq2SOkVu8TudGJC3kSduOiCyMnDeeXAj4HCw6EF/ueda8nniyER+4tRSe3RJ5GDQbSx
-         iFew==
-X-Gm-Message-State: AJIora8xFBStE0GdfFTVSN8lENYtMx+ZjdisXwTgUS8nmZPqFFAixk+R
-	yq921STWtROo+/Zo52YXq0Wxq8tO93erZBYtoxw=
-X-Google-Smtp-Source: 
- AGRyM1uqtIqd/d4QKIvkVSJwoDzJkH+bK8UQQwvjBbWOP7Q1ITu4Blkx3/0E1SYZlAJm9MYp0T9yvQ==
-X-Received: by 2002:a05:6602:3cc:b0:678:eb57:5eb with SMTP id
- g12-20020a05660203cc00b00678eb5705ebmr1970129iov.125.1659148149831;
-        Fri, 29 Jul 2022 19:29:09 -0700 (PDT)
-Received: from vince-ubuntu.attlocal.net
- ([2600:1700:1124:8090:34a2:964d:3bb9:5fca])
-        by smtp.gmail.com with ESMTPSA id
- m66-20020a6b3f45000000b006794eecbce3sm2396098ioa.18.2022.07.29.19.29.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 29 Jul 2022 19:29:08 -0700 (PDT)
-From: Vincent Davis Jr <vince@underview.tech>
+ dkim=missing;
+ spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.19,
+ mailfrom: f_l_k@t-online.de)
+Received: from fwd87.dcpf.telekom.de (fwd87.aul.t-online.de [10.223.144.113])
+	by mailout06.t-online.de (Postfix) with SMTP id C054D145B3
+	for <openembedded-devel@lists.openembedded.org>;
+ Sat, 30 Jul 2022 17:26:05 +0200 (CEST)
+Received: from flk-MS-7C91.fritz.box ([84.163.44.237]) by fwd87.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1oHoLl-2NFPiz0; Sat, 30 Jul 2022 17:25:57 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Vincent Davis Jr <vince@underview.tech>
-Subject: [meta-multimedia][PATCH] vlc: add virtual/vlc alias
-Date: Fri, 29 Jul 2022 21:28:55 -0500
-Message-Id: <20220730022855.50524-1-vince@underview.tech>
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH] ibus.inc: fix after branch renaming
+Date: Sat, 30 Jul 2022 17:25:45 +0200
+Message-Id: <20220730152545.294982-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1659194757-0144746C-06932959/0/0 CLEAN NORMAL
+X-TOI-MSGID: 1288ef48-52f4-4def-9ec2-438a0ff761a9
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 30 Jul 2022 02:29:19 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 30 Jul 2022 15:26:15 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98057
+ https://lists.openembedded.org/g/openembedded-devel/message/98058
 
-For layers that want to provide the ability to
-select a version of VLC.
+this fixes:
+ERROR: ibus-native-1.5.26-r0 do_fetch: Fetcher failure: Unable to find re=
+vision 6a70ab0338206bd1c7d01a4e1874ea0ee5b3a9d3
+in branch master even from upstream
 
-Signed-off-by: Vincent Davis Jr <vince@underview.tech>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-multimedia/recipes-multimedia/vlc/vlc_3.0.17-1.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-gnome/recipes-support/ibus/ibus.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.17-1.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.17-1.bb
-index 9b85cb537..eff42496d 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.17-1.bb
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.17-1.bb
-@@ -130,3 +130,5 @@ FILES:${PN}-staticdev += "\
- INSANE_SKIP:${PN} = "dev-so"
- 
- EXCLUDE_FROM_WORLD = "${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "0", "1", d)}"
-+
-+PROVIDES = "virtual/vlc"
--- 
+diff --git a/meta-gnome/recipes-support/ibus/ibus.inc b/meta-gnome/recipe=
+s-support/ibus/ibus.inc
+index 37a490abe..b21a5e528 100644
+--- a/meta-gnome/recipes-support/ibus/ibus.inc
++++ b/meta-gnome/recipes-support/ibus/ibus.inc
+@@ -10,7 +10,7 @@ PV =3D "1.5.26"
+ DEPENDS =3D "unicode-ucd"
+=20
+ SRC_URI =3D " \
+-    git://github.com/ibus/ibus.git;branch=3Dmaster;protocol=3Dhttps \
++    git://github.com/ibus/ibus.git;nobranch=3D1;protocol=3Dhttps \
+     file://0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch=
+ \
+ "
+ SRCREV =3D "6a70ab0338206bd1c7d01a4e1874ea0ee5b3a9d3"
+--=20
 2.34.1
 
 
