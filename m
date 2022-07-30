@@ -1,87 +1,158 @@
-Return-Path: <festevam@gmail.com>
+Return-Path: <vince@underview.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 96CB9C19F2A
-	for <webhook@archiver.kernel.org>; Sat, 30 Jul 2022 20:32:16 +0000 (UTC)
-Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com
- [209.85.215.179])
- by mx.groups.io with SMTP id smtpd.web09.6889.1659213133531860565
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3FA4C19F2A
+	for <webhook@archiver.kernel.org>; Sat, 30 Jul 2022 21:24:46 +0000 (UTC)
+Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com
+ [209.85.167.50])
+ by mx.groups.io with SMTP id smtpd.web09.7336.1659216284801636095
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Jul 2022 13:32:13 -0700
+ Sat, 30 Jul 2022 14:24:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=nTczqVn+;
- spf=pass (domain: gmail.com, ip: 209.85.215.179,
- mailfrom: festevam@gmail.com)
-Received: by mail-pg1-f179.google.com with SMTP id d7so3534497pgc.13
+ dkim=pass header.i=@underview.tech header.s=google header.b=V1gUi6Po;
+ spf=pass (domain: underview.tech, ip: 209.85.167.50,
+ mailfrom: vince@underview.tech)
+Received: by mail-lf1-f50.google.com with SMTP id t22so11964751lfg.1
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Jul 2022 13:32:13 -0700 (PDT)
+ Sat, 30 Jul 2022 14:24:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
+        d=underview.tech; s=google;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=mdeB4maLIdvtbrK3g7QTfsNYr3F0Mu8AXnpDydkDikw=;
-        b=nTczqVn++SLa+exELOrRgr4TsGpkjrhIq/jimzLGic+LyPQ/gGDXo4X+1Ivpxmv+oY
-         jGNxaIC/wCICHKa7Yf1LtWp8rK6R6CNNDcZPI5hKBYE+UFGbeX0rmUUkeVuKlJ/PGlrD
-         0ZGtdnefInuwzoB8Enbvpo4I4l8O4hQPHAq9RdtB4NfOygNnEORo3lkaI881YQwBBYvD
-         Or5oaJ4uymG4Q8RPdbyooyglR4QbHGrJfwVx55GJRs+eyHU4R2Zcu+Ka4cphlEmoaiBQ
-         2GQpRZLM7G1zaTC3UIEwQgNYIEcHZKPbdE+BpW08nyvrZLN5v4u5nMehHeB1vZwLceFQ
-         +OVA==
+        bh=1IYb2LGH2Wt99qyq/2ENjXEuNdqVW0ahsbrAbzCiyik=;
+        b=V1gUi6PoQHFp3f89Y5jtbls0twgnQea/4vq016yDaFvSgDKGTzx4o1CyfR361KkRAw
+         Vfb2dzi7hAqHqO6ff6ZBk5tp1X4d/pK+Mt7cgIqidv6PoMeYr4qkY1beFCzEfvWfZFU4
+         X/5lYFsWztVryrdhMjcEHGT46vmtz/hqgLAEwxaPaRDBDYEIjUeHXTcX0zr/9UtnVwyw
+         jfs5qOtvYsInZqM5/lG7FXCfrRu1ZfwAAuFu3SxN5rcQkS1oO7R0FKzvplgCNhA7a/XJ
+         8PiBdA2tsCuGvP+QhUmBCXTrQnRD+4de/Lh8yOWVcA4fZ/qFJNFiHqmqSeqYaZgAZTp2
+         yZHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=mdeB4maLIdvtbrK3g7QTfsNYr3F0Mu8AXnpDydkDikw=;
-        b=44Yk9dKpamI/kC1CXzYUGrySNCyT33NVEek+uoKsA1+RUvUnipoHQ0xVH0dZWLyRps
-         rtWih91H8rNW6RIV4Kcx/PrfLcOAcE+s38F5w2cPzvWXbwLn/GaMOA37F2DZRHmVsEvq
-         nQEWxtG6XTJrUat2zALBNJoxdYYZ6ZlcnnF6Tc7hElu2ZAqUiwzU10VAN+iPfeAe3aER
-         fR8fTKP/1fqnUmOAmPWrXOT5qBOpoT6thJWx4SWA/dbc/+BbFkbIIqi7HwxgOQm6fJNK
-         Gv1WaphLdvYqfu3UVJUY9lFyq/oyStxx2qB/UPhQXj53LY4gBF7jGP1Tkh6a4DpvKAUN
-         HIQQ==
-X-Gm-Message-State: AJIora9kTA75PCXK/zFJeQicNuqrOx/uciWrHsSEEPPkSk0oTsLlt/D5
-	vrpK4yvCGBWgOFY9SUPWV/KeCdRAvLqWAO5Cfro=
+        bh=1IYb2LGH2Wt99qyq/2ENjXEuNdqVW0ahsbrAbzCiyik=;
+        b=lMQta3702kmvqjtsHBZruCEgckMd0S3Xw3JB2O2Vc7mr32vPZkTeEQyS+psjLDhXLq
+         MhZ/QVXxwDGDHV1MrQXCepcX2GLh0jrFhUZpzh62Y2m5R9VyURvRc/iBzDF5eQWqqvz5
+         1R+RB00fjVtISICMkNF35ItWbFCZHpNrhRZD8Q7bQHy4NGi7oIJlQHRt+mMMof8OnU9p
+         iGRN6riGtiR2z/V0msMvLVzfiqJj5q5AgWAL0ErKSqAdZa5IW17dYYpVBu4koM8Yqy6l
+         m9QM35nDgm4cpxz7dxQXJZ5Ape68lu95f8QNjYH/p6o7rI9IvIo6IKDNxtKTxg71gAx5
+         N4YQ==
+X-Gm-Message-State: ACgBeo2Y4nbPBfBVyf3nlDaB83a8qzxJTucR3gRw042DpG7dsilOhGgl
+	U+tr1KArzgDQGQrRqxk5ZhRBBWsI6LHFFHmpHTOlDQ==
 X-Google-Smtp-Source: 
- AGRyM1sccSkZmebb60TvuwaHGW6epppiIKYnjcbHLnBGhjJD2nyA0+s5UrM8q0hHwkjEAF0EEdojVM9oXQ7NHHTG834=
-X-Received: by 2002:a05:6a00:450d:b0:52b:84ca:9509 with SMTP id
- cw13-20020a056a00450d00b0052b84ca9509mr9229589pfb.74.1659213132707; Sat, 30
- Jul 2022 13:32:12 -0700 (PDT)
+ AGRyM1vbSyO8lL/9Wx14B7mYtv6AQLMbUEmH3zLAdXIWi8rWdLOo+lP7pGfzd7qWwgBSUdMbIVeEFAkRbO1nwsypTMQ=
+X-Received: by 2002:a05:6512:3f11:b0:48a:3043:e7 with SMTP id
+ y17-20020a0565123f1100b0048a304300e7mr3214807lfa.524.1659216282605; Sat, 30
+ Jul 2022 14:24:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220730152545.294982-1-f_l_k@t-online.de>
- <CAMKF1spWqX_q_LNzhA2f5vgVLHBHjLN4p_YkFoXn=5aWVkW8Qw@mail.gmail.com>
- <9FNUFR.YL5HBRQXU9PH1@t-online.de>
-In-Reply-To: <9FNUFR.YL5HBRQXU9PH1@t-online.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 30 Jul 2022 17:31:59 -0300
+References: <20220730022855.50524-1-vince@underview.tech>
+ <8D884F32-A736-495B-B9A0-AB06F11DE265@arm.com>
+In-Reply-To: <8D884F32-A736-495B-B9A0-AB06F11DE265@arm.com>
+From: Vincent Davis <vince@underview.tech>
+Date: Sat, 30 Jul 2022 16:24:30 -0500
 Message-ID: 
- <CAOMZO5AE7AHFO5V6841gqzjw+cNA_YgOJvTAcU7kW6_GE0bd7A@mail.gmail.com>
-Subject: Re: [oe] [meta-gnome][PATCH] ibus.inc: fix after branch renaming
-To: Markus Volk <f_l_k@t-online.de>
-Cc: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+ <CAPQx_gMv2y3L519Q=+a3ckLdsVfD=QDf-X6c+AUGUYb_Ed0zaw@mail.gmail.com>
+Subject: Re: [oe] [meta-multimedia][PATCH] vlc: add virtual/vlc alias
+To: Ross Burton <Ross.Burton@arm.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000002174ba05e50c6585"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 30 Jul 2022 20:32:16 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 30 Jul 2022 21:24:46 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98062
+ https://lists.openembedded.org/g/openembedded-devel/message/98063
 
-On Sat, Jul 30, 2022 at 4:57 PM Markus Volk <f_l_k@t-online.de> wrote:
+--0000000000002174ba05e50c6585
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> I'll test this tomorrow. But on the ibus github page there is no master branch anymore, so i doubt -c cleanall will help
+Hey again Ross sorry I know I already sent this meant to hit reply all.
+
+Meant to say for layers that contain recipes that clone different
+implementations of VLC and want to allow the ability to select an
+implementation. Would be nice to have PROVIDES =3D "virtual/vlc" here versu=
+s
+multiple different layers providing bbappend files that add the PROVIDES
+variable.
+
+Working in PR were we want to allow either upstream implementation of VLC
+or raspberry pi distro implementation.
+
+https://github.com/agherzan/meta-raspberrypi/pull/985
+
+On Sat, Jul 30, 2022, 14:32 Ross Burton <Ross.Burton@arm.com> wrote:
+
+> > On 30 Jul 2022, at 03:28, Vincent Davis Jr via lists.openembedded.org
+> <vince=3Dunderview.tech@lists.openembedded.org> wrote:
+> >
+> > For layers that want to provide the ability to
+> > select a version of VLC.
 >
-> https://github.com/ibus/ibus
+> There=E2=80=99s no need for this.
+>
+> If there=E2=80=99s just different versions, then have vlc_1.2.3.bb alongs=
+ide
+> vlc_1.0.0.bb and use PREFERRED_VERSION.
+>
+> If you=E2=80=99ve got a fork, then just name it vlc-foo_1.2.3.bb and use
+> PREFERRED_PROVIDER.
+>
+> There=E2=80=99s no need to use virtual/ with PREFERRED_PROVIDER.  virtual=
+/* should
+> only be used when you want an abstract thing and there are many
+> implementation, such as virtual/libc, which can be glibc, newlib, musl, e=
+tc.
+>
+> Ross
 
-Does the change below fix it?
+--0000000000002174ba05e50c6585
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
---- a/meta-gnome/recipes-support/ibus/ibus.inc
-+++ b/meta-gnome/recipes-support/ibus/ibus.inc
-@@ -10,7 +10,7 @@ PV = "1.5.26"
- DEPENDS = "unicode-ucd"
+<div dir=3D"auto">Hey again Ross sorry I know I already sent this meant to =
+hit reply all.<div dir=3D"auto"><br></div><div dir=3D"auto">Meant to say fo=
+r layers that contain recipes that clone different implementations of VLC a=
+nd want to allow the ability to select an implementation. Would be nice to =
+have PROVIDES =3D &quot;virtual/vlc&quot; here versus multiple different la=
+yers providing bbappend files that add the PROVIDES variable.</div><div dir=
+=3D"auto"><br></div><div dir=3D"auto">Working in PR were we want to allow e=
+ither upstream implementation of VLC or raspberry pi distro implementation.=
+</div><div dir=3D"auto"><br></div><div dir=3D"auto"><div dir=3D"auto"><div =
+dir=3D"auto" style=3D"font-size:12.8px"><a href=3D"https://github.com/agher=
+zan/meta-raspberrypi/pull/985" style=3D"color:rgb(66,133,244)">https://gith=
+ub.com/agherzan/meta-raspberrypi/pull/985</a></div></div></div></div><br><d=
+iv class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Sat, Jul =
+30, 2022, 14:32 Ross Burton &lt;<a href=3D"mailto:Ross.Burton@arm.com">Ross=
+.Burton@arm.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" s=
+tyle=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">&gt;=
+ On 30 Jul 2022, at 03:28, Vincent Davis Jr via <a href=3D"http://lists.ope=
+nembedded.org" rel=3D"noreferrer noreferrer" target=3D"_blank">lists.openem=
+bedded.org</a> &lt;vince=3D<a href=3D"mailto:underview.tech@lists.openembed=
+ded.org" target=3D"_blank" rel=3D"noreferrer">underview.tech@lists.openembe=
+dded.org</a>&gt; wrote:<br>
+&gt; <br>
+&gt; For layers that want to provide the ability to<br>
+&gt; select a version of VLC.<br>
+<br>
+There=E2=80=99s no need for this.<br>
+<br>
+If there=E2=80=99s just different versions, then have <a href=3D"http://vlc=
+_1.2.3.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">vlc_1.2.3.bb</a>=
+ alongside <a href=3D"http://vlc_1.0.0.bb" rel=3D"noreferrer noreferrer" ta=
+rget=3D"_blank">vlc_1.0.0.bb</a> and use PREFERRED_VERSION.<br>
+<br>
+If you=E2=80=99ve got a fork, then just name it <a href=3D"http://vlc-foo_1=
+.2.3.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">vlc-foo_1.2.3.bb</=
+a> and use PREFERRED_PROVIDER.<br>
+<br>
+There=E2=80=99s no need to use virtual/ with PREFERRED_PROVIDER.=C2=A0 virt=
+ual/* should only be used when you want an abstract thing and there are man=
+y implementation, such as virtual/libc, which can be glibc, newlib, musl, e=
+tc.<br>
+<br>
+Ross</blockquote></div>
 
- SRC_URI = " \
--    git://github.com/ibus/ibus.git;branch=master;protocol=https \
-+    git://github.com/ibus/ibus.git;branch=main;protocol=https \
-     file://0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch \
- "
- SRCREV = "6a70ab0338206bd1c7d01a4e1874ea0ee5b3a9d3"
+--0000000000002174ba05e50c6585--
 
