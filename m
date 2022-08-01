@@ -1,236 +1,657 @@
-Return-Path: <yi.zhao@windriver.com>
+Return-Path: <ptsneves@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BBDAAC00144
-	for <webhook@archiver.kernel.org>; Mon,  1 Aug 2022 09:50:17 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com
- [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web09.22919.1659347408287672383
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0CC53C00144
+	for <webhook@archiver.kernel.org>; Mon,  1 Aug 2022 14:28:09 +0000 (UTC)
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com
+ [209.85.167.47])
+ by mx.groups.io with SMTP id smtpd.web11.25283.1659364087281887207
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Aug 2022 02:50:09 -0700
+ Mon, 01 Aug 2022 07:28:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=lfT7YMV/;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
- invalid domain name (domain: windriver.com, ip: 205.220.178.238,
- mailfrom: prvs=521241569c=yi.zhao@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
- 2719RWmx031007
-	for <openembedded-devel@lists.openembedded.org>; Mon, 1 Aug 2022 09:50:06 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
- h=message-id : date
- : subject : from : to : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=PPS06212021;
- bh=WqIeUinnEfWB4cb5fKVsriu8sjAsGp2X75B2s+6Bdhk=;
- b=lfT7YMV/nsW6s5zK4mHWt+fxnudTeXbdIbIzcUV/hKy8K14Sn2ZCw6Hl//hFE6zIrDaK
- 47i/O0E8b5z7fbzIc9UatgXrh1XLsKDlBI/koZec+io3nE9BO0prlZjApZgMWHnusA/T
- +hVVx5DwKZLHst6QL9p9vSawuJDxu41uYc5Moh6YKu5iEaIRibX9jAy7oDdGCyvpUFAa
- ZPCT+JXQQHD7FUeb1MwHiowAEdVbDr7Gv1iG5WXo6GlC+b8w8kE8M7Gbs6xypT+d4xkg
- 2yxIE2fTOIt0kzMGYYiPSht+Z+kSHEEILEcgnf+EWXVjaqLPjdovDxydKPGh11Eece+t Aw==
-Received: from nam04-mw2-obe.outbound.protection.outlook.com
- (mail-mw2nam04lp2168.outbound.protection.outlook.com [104.47.73.168])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3hmum91ckt-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Aug 2022 09:50:06 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=L8YAO3mOgNTcN87+GO69lmVavN3mYtEQ72V0TOAnlGPjJnNXvAzCPCwho5MgRBS14+kCrjvwLPgb51BcdYNhle1iN107utwl3U227deetPwp2v6shGrXnUUvkt6lVK2nw7pLegtcsKdKxNWBtxmQL0WYovN1HnNDAsr3I3Rb8Ar387i9NlMADf+QIV3xw8eShh8l87A8W5a2Bs2ETaUP9DU0fNkmhFw2IACDKUPFYc0jmmJ9LL56MI9ReZxZfcLD4Uj1kitn2QiPGBIDvHLixwJY+OEkHUSObRivHSAycc0XspmIw/G0idaIOeNCVjiEVMPmAsSZ8OOgsXhNGHjOYw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WqIeUinnEfWB4cb5fKVsriu8sjAsGp2X75B2s+6Bdhk=;
- b=RMxu5RV/EmGK3HEbHb9bNebgRZBaIcPe+OzkbPxmOQ0T2CTr3313QvQHrwM5q6PiHKgV+VRlgrOd3EVN6/yMutp5ObgE8elc4rvbi1raKBm18LPV7EwEG3XKuVwhuKfr0eIpUWNZdm2e8Ml8fzbR2t9h+XoS9W35CFqp0YG6roFxgBgn9b1HphuNckv1qfeO4haLqzAaal7z81Y0KZnkN+KIOMdmL7/j9P+1oIh0yba9wPGsmKQFX1gUW+0xWMI2gy6n2W1lmce9mn3ZrN9LcpOdULe26ormUjLncKkZKtWEr6vUgVUMl4IrT8gNCdwU9nMf0lh3GkcqDA/InOkY/Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
- by DM6PR11MB3946.namprd11.prod.outlook.com (2603:10b6:5:19d::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5482.14; Mon, 1 Aug
- 2022 09:50:03 +0000
-Received: from CO1PR11MB4867.namprd11.prod.outlook.com
- ([fe80::48ea:c4c0:360f:7c16]) by CO1PR11MB4867.namprd11.prod.outlook.com
- ([fe80::48ea:c4c0:360f:7c16%7]) with mapi id 15.20.5482.016; Mon, 1 Aug 2022
- 09:50:03 +0000
-Message-ID: <6e6c75ff-cedf-b3a7-a6a2-2ccbff92239b@windriver.com>
-Date: Mon, 1 Aug 2022 17:49:58 +0800
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=X5kEN5/X;
+ spf=pass (domain: gmail.com, ip: 209.85.167.47, mailfrom: ptsneves@gmail.com)
+Received: by mail-lf1-f47.google.com with SMTP id z25so17604220lfr.2
+        for <openembedded-devel@lists.openembedded.org>;
+ Mon, 01 Aug 2022 07:28:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :cc:references:from:in-reply-to:content-transfer-encoding;
+        bh=EH+MyTeNuV+53vOfaMkeV4zkTzlaUeBncS1CE5djZsA=;
+        b=X5kEN5/XEjtNu4pwZYFwtoyXkHPxwWDtJEE7+mmrKARLZKyg8RiGU2r0kJ9bUOmzWj
+         5GbQ5SUulo1g1KmP9Sk0YNin/ZbTxg9t9XxA+iD0UoYhkWVP5MhhrrNgeObeAkJwGV1y
+         qPK0iU6imjMDGGSxmLv7oUH7OI4DHCzBx+9QmiLnu7Hfr31By9lKsD3nTzl+F08BMRvg
+         n1yZdAbQZ9jodiZ+GfP6cTme6Z6i5X5ebpO3AKym6WGlOcRtC8hLwY1FF8zlDKvh4D9l
+         nSrZOL5keq6WSN1D0PqaHowqkJMPJMDmcZccsOKPU2I3emcVoHi4lFIQEztPJqc0JYvM
+         fmEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:cc:references:from:in-reply-to
+         :content-transfer-encoding;
+        bh=EH+MyTeNuV+53vOfaMkeV4zkTzlaUeBncS1CE5djZsA=;
+        b=ZKKWI84AitFcsplJa6du3eYdTJMOV29jkFQWj9692oQ6UMf9QdnSBDde7MXVS6f0O0
+         Pnui/hTlNUEtCEnZyKalbl3uMuq5AD1mbGXrsxs1fVhe+vDyN7CB1f4VUYT58p3Amtms
+         scnRYQHqRR9dOENtaY6ttjBTB3I7SauXy1k+hqG1fC2A4150nzwz+zAOLBC1+Jn6fCwz
+         mXOl5ww82xFtGj7oG5RiFnNZGr4lcf8IfMpjZhpQD+9GhSs+8K9kzCgYd0C1Y3OOY8SO
+         KPztgCGQtBtTJ+8teIgkVy94INS7pg+xHMhtrKatTPLcIi4vBDg49wbC6QqI6pIOCQY4
+         PPTg==
+X-Gm-Message-State: ACgBeo1UfJCo1WFlnov3gO1bX/FEfCRSoC2wAu+8c01LtEfLtwCCOh1n
+	aiJKbwGRN5EMnMMghd6cow==
+X-Google-Smtp-Source: 
+ AGRyM1tyMG0Yg2BKmFp6uR/KO8WqXXoIwF2BzoUviyLQ5cnRIq4awBmCL+TcnYUiqyIw8cWc1VQq+A==
+X-Received: by 2002:a05:6512:695:b0:487:cc8c:7520 with SMTP id
+ t21-20020a056512069500b00487cc8c7520mr5702071lfe.522.1659364085008;
+        Mon, 01 Aug 2022 07:28:05 -0700 (PDT)
+Received: from [192.168.1.248]
+ (031011128142.dynamic-3-poz-k-0-2-0.vectranet.pl. [31.11.128.142])
+        by smtp.gmail.com with ESMTPSA id
+ o20-20020a056512053400b0048a73d83b7csm912508lfc.133.2022.08.01.07.28.03
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 01 Aug 2022 07:28:04 -0700 (PDT)
+Message-ID: <e545e85b-adb6-6a81-da9b-c3bd64b1d58f@gmail.com>
+Date: Mon, 1 Aug 2022 16:28:02 +0200
+MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: Re: [oe] [meta-networking][PATCH] strongswan: upgrade 5.9.6 -> 5.9.7
+Subject: Re: [oe][meta-oe][ 1/1] fluentbit Upgrade to 1.3.5 -> 1.9.6
 Content-Language: en-US
-From: Yi Zhao <yi.zhao@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-References: <170728B528208754.608@lists.openembedded.org>
-In-Reply-To: <170728B528208754.608@lists.openembedded.org>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <20220728140330.3449041-1-ptsneves@gmail.com>
+ <CAMKF1so1Z9VV0=5QyGWDsr+pdRm6c2EzSfcX+gzbvJ-Kv6hAPA@mail.gmail.com>
+From: Paulo Neves <ptsneves@gmail.com>
+In-Reply-To: 
+ <CAMKF1so1Z9VV0=5QyGWDsr+pdRm6c2EzSfcX+gzbvJ-Kv6hAPA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SL2P216CA0152.KORP216.PROD.OUTLOOK.COM
- (2603:1096:101:35::11) To CO1PR11MB4867.namprd11.prod.outlook.com
- (2603:10b6:303:9a::13)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: c5b0854e-95c9-4da9-ef2f-08da73a334cd
-X-MS-TrafficTypeDiagnostic: DM6PR11MB3946:EE_
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	jsf1Mt+Z+Rh/FUPgpFuuqabouPMrTbxxhSrPo+GO4/8WpnLRz8nvsZof3PS7HwEa+QpSxs8oLtHD1Knr3CPraUSLGUSYzw4H0ruck3FErx5OVk6drafVD/fAs3Y9abKTTRp+1DXqpguEzMs1NMrIn9482NojCokIzHzd4ciRFT8mjK65k76QCdOaDDYiGd7EIXpc6NaZ/Fqyhgc5WdNcwqqUy/IOJmzkk8cM5kPif/fQ6tRczusG1yVoC7kLyUz5kuGMIICv5oiC9lnKHXMRufcDP/USBYjAESCLYf9jd9cj4uhoPzQ2NOki6OqBhCwnfOPS+sQqjlk836vhPkv1dZNB4eUcRzZ85qCG37hmNzkoU6z1f8Gmexfl3PPQvEHLDeCgedMat+qROUOBbpewVdm4u7oVXij8+dka9aHS6e6K3RZHgkXtrNeJIDnyb0PCjRPSf9c2Qz/7nxDXY06P3pgHGL8ffa3A3xSxODvOVw9RLgw1oGt6Uv7ADy8VR7w/2ZUa2rVmGck+dtQJ8cCFHr+kruPIxvQvCK4FzdldJRHI7NifgbJeCOw7hyB+G7kxwpLZW+urW8pMLbW7BSh18BzQfbT9bSk3j2l2vRrR0jqaNinbxLLO27dzQW7vcD8IJNlge2Aa016Cr2xzVNMLMu3/Np7LvtvnbVJpDQz8NVGrV3ivkYvmaK6kQpvPuyVvuSBplIavIwxwTWoDpmbDexwqUPWJ3eQzx/scS1rGPTGQbubo1lTQeC2BicvOuTZNz9TSBgqEk0Wr6S7hPJOSfaPL7hh8TLqGJG/bV2r6nojD3B5B4oAgA6UaGrvw/cN24cfELf9Dxu+IsyD6NwxA9Al/3wTejopKhT+9PtANhhvPF5zCRcZN1J0RZdL9Sx4f3dAcUGBB1foRaGLEaKI7xQ==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(39840400004)(366004)(376002)(346002)(136003)(396003)(36756003)(2906002)(44832011)(5660300002)(66946007)(66556008)(66476007)(8676002)(8936002)(41300700001)(316002)(966005)(6666004)(478600001)(6916009)(6486002)(31686004)(6506007)(53546011)(38100700002)(186003)(26005)(2616005)(86362001)(31696002)(6512007)(83380400001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?Vm5PNXJpYXNUWGF1TVF0TUtaSDRoRFdWYWZwRDd2RHNzNk1YOFNpUS9NOTFZ?=
- =?utf-8?B?aW1MQmVxejBzY0RjWm9lVGVuVUdiYitFNDA5R25Nam5UZ2ZRdlIvNjFsM3Q2?=
- =?utf-8?B?bE13VEhnaFhPTkE5ZmUwYUJxWDlJbTdURGFiSVpDVHFaa24vbnhRd1pOM1Br?=
- =?utf-8?B?QSs3WEd1ZFlUdGhXeGVGTU9zVE8xUFFZdnFlVTlkY1VQYmVTa01YdSt1V212?=
- =?utf-8?B?TEdyL05vUVFPaVlUWVlienpKTTVoNlhNQVk2K2NnK1hrMjN3dTBVTjA4YlJC?=
- =?utf-8?B?RWZKczZ3bEtnUGRDNk5uK2hzTjlHWGhxM1Q1QWhOUkp4RnROVkt3aHV3K25t?=
- =?utf-8?B?SDJuNlo1dVk4aCtYbkt6YzJ6SndYNG9jVzdaY2hTOU5YNjB5S2FZZWR3NXU4?=
- =?utf-8?B?NXh5K0VWZDE3NW51YXByY0orOHBhSXNrNGd1M293VUhJT2NJaXRmb3NHMjl6?=
- =?utf-8?B?ck1LSG1XT2ZZdGFSV3M2NmNmMmdPeGNSdlZMaC82WUk4VW1HQnhjTkYwdnNv?=
- =?utf-8?B?TUpaVVRsTnUrMGxyTlB0RmYzNHNQVVdDQ2VoY2xMMDFNZHg4TVRRM2RkVnNR?=
- =?utf-8?B?aVlJR0xINmtYTUxUUm4vWmZTZXRyS1EvZDZOUGpSbXVQbHBrYmV5TTNGZ21j?=
- =?utf-8?B?ZFFJaEdsUWtMRWhiUHhBQmJQZVIyRG1pWWxuUkwwNldyU1RQZUhraSs0K2Jq?=
- =?utf-8?B?TkJsY0xNRWZzYXM1Tkg1V2pUNlk5b1EyNkswNmorbjNOYWVDNHBIM0RYOUk4?=
- =?utf-8?B?STZ3ZlkvbS9aQXZjT3EvTnVqa0FKWFJlTWxvbDRPRXNscjJTU2VmeGFseHdE?=
- =?utf-8?B?YW1kaGd6b2lFbG5BWTV4SkFDNTJmN1ExSjVtTkNkNTBkejVlQVYwN09yZnhk?=
- =?utf-8?B?SmRSREV1eFVHWHc0dTlrMkhjR3NKL2hDRXZ3NGora08wWWJEVjlwN3Zua3hP?=
- =?utf-8?B?NTlGejBMam9GeFRsOEFXd21BK2NQWGNrT09iL1dacldHZ3JtZU1uNVZ5QmpR?=
- =?utf-8?B?U0VIY3ZRaUg0TGJINThqV1k2VG9PSzkrcENMU0VoVm5qZEZkREVSSG5ZeVMv?=
- =?utf-8?B?M24rNnQ5Q1lvbTF4aG82aG02WldxeHlpbENTSk1yRWJTUFAxT08rRCthNVlT?=
- =?utf-8?B?d1cwVW5TeEhiTXA1Z0djbFlwUituaStsVks2WjBnMGg3NFRqQnJkMkdMSVVo?=
- =?utf-8?B?ajNCNGhockdqWEFtUlZtSTdSL2lyUFdqVXVJM2craVVsY2V0aCtUUmpVb0pY?=
- =?utf-8?B?QUVDRmwrbVF5Z3ZCTHBIOXF5UmUrcGdNSWdYZUZGTDFFUjdBRWJIUDU3d2NF?=
- =?utf-8?B?VE03ZXFNVWR2Tm1KYlo5UWpMaDdOQUJQV2VCbWRxUFIyS2IxN1R5WGR5Nisr?=
- =?utf-8?B?UThzdkNaSWpiZGRKTHRWTko0R29ybTRrRjlCUjNjMjlOd0IvVzNzaDhQU01T?=
- =?utf-8?B?Vjl1T2hhL1pCY3lkdU5KWXJPY013aUI4TlZqRVV4SjhHVkZoeEYwNEJUci9E?=
- =?utf-8?B?UUsvWVhXOWFnaEl0bVRJNWdHVmlhdVpNZ3ZCd3Y3bmNLdWZUU3BlY3FKWUx5?=
- =?utf-8?B?bTZXMmErNFUwYWFNMkRpMHJRZG1wa2JKSzhxUWtDbVl3Nkp2L2dNK2hISThC?=
- =?utf-8?B?Nno0bG1pOGxJSW5nOEFOMGJjNTllQkd2QVdKSGhGOUxYRmd0VzJlT0Q4NE9t?=
- =?utf-8?B?QVN4b3dmVzFCbXhId1J3dG1Ga3lOUjhrNU92WGl6aTBWbnlLWDFYNnNybkdr?=
- =?utf-8?B?MFdOdGhreWtBQWh2M3E2Z01CYlI0NjhUellqRTIrSkpiZ3c2dFUyMXoyWnZy?=
- =?utf-8?B?cGxLaStjREIyTVdtWm9QRTJyalRQUVhBSnF5bDBPOHhlcEdITkwrYytmMnpE?=
- =?utf-8?B?OTQ4U1NYdk8xTlppOFpMRDlYcHdVNFB3MDl0R2UxajB1bHJHYmo2RStHRXJq?=
- =?utf-8?B?SFFPREl5N0x5aFNKdERFelArRzVnblNQWjlBVnpaS2NvcVEwNmJjaVFzaEtK?=
- =?utf-8?B?RWhEbUxoU2hZbnBUeEFKYWhjeXpxMndrb21YZUc4SUhOay94QWs0MU9UMmg2?=
- =?utf-8?B?UHlablZmcUdvc0tFTzhwQXJ5TVpaTTNYWmJsTkIrdFhTSFVoUW5OakE1OUpI?=
- =?utf-8?Q?D0JGPwqYjRtOAKU5cWJyLdATG?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- c5b0854e-95c9-4da9-ef2f-08da73a334cd
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Aug 2022 09:50:03.1151
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 
- yrbbL1mzVFSbcrEnSVHdLqd+1C/zrLFwWHd94noYTT3W/UCWQXWeDuQEM/FmM4DocUUz6Co2YwObljMYUG927Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB3946
-X-Proofpoint-ORIG-GUID: 9o9BCl2hWutZE3lLks-fD86aE3doG-ds
-X-Proofpoint-GUID: 9o9BCl2hWutZE3lLks-fD86aE3doG-ds
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
- definitions=2022-08-01_05,2022-07-28_02,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0
- priorityscore=1501 mlxscore=0 spamscore=0 clxscore=1015 impostorscore=0
- mlxlogscore=999 adultscore=0 phishscore=0 malwarescore=0 suspectscore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2206140000 definitions=main-2208010047
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 01 Aug 2022 09:50:17 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 01 Aug 2022 14:28:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98074
+ https://lists.openembedded.org/g/openembedded-devel/message/98075
 
-Please ignore this patch as there are some startup failures. I will send v2.
+Thanks for the review. Some more stuff was wrong after all and i am 
+reworking the patch.
 
+I looked at the usrmerge patch and indeed i removed it incorrectly.
 
-//Yi
+I tried to rework it so that it uses systemd.pc's systemdunitdir 
+variable but that variable relies on rootprefix. I cannot find a reason 
+why we are not setting systemd ROOTFSPREFIX in systemd and instead are 
+using 
+meta/recipes-core/systemd/systemd/0001-Move-sysusers.d-sysctl.d-binfmt.d-modules-load.d-to-.patch. 
+Is there any mismatch where prefix would not match? Would ROOTFSPREFIX 
+only be valid when usrmerge is active?
 
-On 8/1/22 15:42, Yi Zhao wrote:
-> ChangeLog:
-> https://github.com/strongswan/strongswan/releases/tag/5.9.7
+Paulo Neves
+
+On 7/29/22 04:44, Khem Raj wrote:
+> Hi Paulo
 >
-> Drop backport patch 0001-enum-Fix-compiler-warning.patch.
 >
-> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> ---
->   .../0001-enum-Fix-compiler-warning.patch      | 31 -------------------
->   ...trongswan_5.9.6.bb => strongswan_5.9.7.bb} |  3 +-
->   2 files changed, 1 insertion(+), 33 deletions(-)
->   delete mode 100644 meta-networking/recipes-support/strongswan/files/0001-enum-Fix-compiler-warning.patch
->   rename meta-networking/recipes-support/strongswan/{strongswan_5.9.6.bb => strongswan_5.9.7.bb} (98%)
+> On Thu, Jul 28, 2022 at 10:03 AM Paulo Neves <ptsneves@gmail.com> wrote:
+>> Signed-off-by: Paulo Neves <ptsneves@gmail.com>
+>> ---
+>>   ...t-Do-not-use-private-makefile-target.patch | 68 +++++++++++++++
+>>   ...nit-install-location-with-SYSTEM_DIR.patch | 28 -------
+>>   ...caused-by-using-flb_free-instead-of-.patch | 43 ----------
+>>   ...-ppc-Fix-signature-for-co_create-API.patch | 38 ---------
+>>   ...-not-hardcode-compilation-directorie.patch | 26 ++++++
+>>   ...GV-caused-by-using-flb_free-instead-.patch | 82 -------------------
+>>   ...0003-mbedtls-Do-not-overwrite-CFLAGS.patch | 25 ++++++
+>>   .../fluentbit/fluentbit/builtin-nan.patch     | 27 ------
+>>   .../cross-build-init-system-detection.patch   | 38 ---------
+>>   ...{fluentbit_1.3.5.bb => fluentbit_1.9.6.bb} | 44 +++++-----
+>>   10 files changed, 139 insertions(+), 280 deletions(-)
+>>   create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Do-not-use-private-makefile-target.patch
+>>   delete mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch
+>>   delete mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0001-bin-fix-SIGSEGV-caused-by-using-flb_free-instead-of-.patch
+>>   delete mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0001-ppc-Fix-signature-for-co_create-API.patch
+>>   create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch
+>>   delete mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0002-parser-Fix-SIGSEGV-caused-by-using-flb_free-instead-.patch
+>>   create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0003-mbedtls-Do-not-overwrite-CFLAGS.patch
+>>   delete mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/builtin-nan.patch
+>>   delete mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/cross-build-init-system-detection.patch
+>>   rename meta-oe/recipes-extended/fluentbit/{fluentbit_1.3.5.bb => fluentbit_1.9.6.bb} (53%)
+>>
+>> diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Do-not-use-private-makefile-target.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Do-not-use-private-makefile-target.patch
+>> new file mode 100644
+>> index 000000000..0a80a92ed
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Do-not-use-private-makefile-target.patch
+>> @@ -0,0 +1,68 @@
+>> +From 6a704ab7bf69cd5d6970b3a7d3ae7798b26027c1 Mon Sep 17 00:00:00 2001
+>> +From: Paulo Neves <ptsneves@gmail.com>
+>> +Date: Thu, 28 Jul 2022 11:28:41 +0200
+>> +Subject: [PATCH] CMakeLists.txt Do not use private makefile $< target
+>> +
+>> +$< is a private detail from the Makefile generated by CMakefile and
+>> +are not under control or to be used at the CMakeLists level. In 3.20
+>> +that private generation changed pre-requisite targets[1] and now logs
+>> +contain the path compiler_depend.ts instead of the actual file.
+>> +---
+>> + CMakeLists.txt              | 6 +-----
+>> + lib/chunkio/CMakeLists.txt  | 7 +------
+>> + lib/cmetrics/CMakeLists.txt | 7 +------
+>> + 3 files changed, 3 insertions(+), 17 deletions(-)
+>> +
+>> +diff --git a/CMakeLists.txt b/CMakeLists.txt
+>> +index 3dba5a8..d94b988 100644
+>> +--- a/CMakeLists.txt
+>> ++++ b/CMakeLists.txt
+>> +@@ -46,11 +46,7 @@ else()
+>> +   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
+>> + endif()
+>> +
+>> +-if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+>> +-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__='\"$(subst ${CMAKE_SOURCE_DIR}/,,$(abspath $<))\"'")
+>> +-else()
+>> +-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__=__FILE__")
+>> +-endif()
+>> ++set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__=__FILE__")
+>> +
+>> + if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "armv7l")
+>> +   set(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} -latomic")
+>> +diff --git a/lib/chunkio/CMakeLists.txt b/lib/chunkio/CMakeLists.txt
+>> +index bbe1f39..809ea93 100644
+>> +--- a/lib/chunkio/CMakeLists.txt
+>> ++++ b/lib/chunkio/CMakeLists.txt
+>> +@@ -14,12 +14,7 @@ else()
+>> +   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall ")
+>> + endif()
+>> +
+>> +-# Set __FILENAME__
+>> +-if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+>> +-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__='\"$(subst ${CMAKE_SOURCE_DIR}/,,$(abspath $<))\"'")
+>> +-else()
+>> +-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__=__FILE__")
+>> +-endif()
+>> ++set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__=__FILE__")
+>> +
+>> + include(cmake/macros.cmake)
+>> +
+>> +diff --git a/lib/cmetrics/CMakeLists.txt b/lib/cmetrics/CMakeLists.txt
+>> +index 60e8774..e3d6149 100644
+>> +--- a/lib/cmetrics/CMakeLists.txt
+>> ++++ b/lib/cmetrics/CMakeLists.txt
+>> +@@ -34,12 +34,7 @@ set(CMT_VERSION_MINOR  3)
+>> + set(CMT_VERSION_PATCH  5)
+>> + set(CMT_VERSION_STR "${CMT_VERSION_MAJOR}.${CMT_VERSION_MINOR}.${CMT_VERSION_PATCH}")
+>> +
+>> +-# Define __FILENAME__ consistently across Operating Systems
+>> +-if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+>> +-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__='\"$(subst ${CMAKE_SOURCE_DIR}/,,$(abspath $<))\"'")
+>> +-else()
+>> +-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__=__FILE__")
+>> +-endif()
+>> ++set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__=__FILE__")
+>> +
+>> + # Configuration options
+>> + option(CMT_DEV             "Enable development mode"                   No)
+>> diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch
+>> deleted file mode 100644
+>> index bf4cda08f..000000000
+>> --- a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch
+>> +++ /dev/null
+>> @@ -1,28 +0,0 @@
+>> -From 5571f949fa2048b79c197b5b10a11ecb1891cbe9 Mon Sep 17 00:00:00 2001
+>> -From: Khem Raj <raj.khem@gmail.com>
+>> -Date: Sat, 23 Apr 2022 08:24:34 -0700
+>> -Subject: [PATCH] Control sytemd unit install location with SYSTEM_DIR
+>> -
+>> -This helps building when usrmerge is on
+>> -
+>> -Upstream-Status: Pending
+>> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ----
+>> - src/CMakeLists.txt | 6 +++++-
+>> - 1 file changed, 5 insertions(+), 1 deletion(-)
+>> -
+>> ---- a/src/CMakeLists.txt
+>> -+++ b/src/CMakeLists.txt
+>> -@@ -323,7 +323,11 @@ if(FLB_BINARY)
+>> -       "${PROJECT_SOURCE_DIR}/init/systemd.in"
+>> -       ${FLB_SYSTEMD_SCRIPT}
+>> -       )
+>> --    install(FILES ${FLB_SYSTEMD_SCRIPT} DESTINATION /lib/systemd/system)
+>> -+    if(SYSTEMD_DIR)
+>> -+        install(FILES ${FLB_SYSTEMD_SCRIPT} DESTINATION ${SYSTEMD_DIR})
+>> -+    else()
+>> -+        install(FILES ${FLB_SYSTEMD_SCRIPT} DESTINATION /lib/systemd/system)
+>> -+    endif()
+>> -     install(DIRECTORY DESTINATION ${FLB_INSTALL_CONFDIR})
+>> -   elseif(FLB_UPSTART)
+>> -     set(FLB_UPSTART_SCRIPT "${PROJECT_SOURCE_DIR}/init/${FLB_OUT_NAME}.conf")
+>> diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-bin-fix-SIGSEGV-caused-by-using-flb_free-instead-of-.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-bin-fix-SIGSEGV-caused-by-using-flb_free-instead-of-.patch
+>> deleted file mode 100644
+>> index a6ff5991c..000000000
+>> --- a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-bin-fix-SIGSEGV-caused-by-using-flb_free-instead-of-.patch
+>> +++ /dev/null
+>> @@ -1,43 +0,0 @@
+>> -From 3d7390c89c2205d1eed0384be0bb65adb675e60d Mon Sep 17 00:00:00 2001
+>> -From: Ramon Fried <ramon@neureality.ai>
+>> -Date: Tue, 9 Feb 2021 18:59:59 +0200
+>> -Subject: [PATCH] bin: fix SIGSEGV caused by using flb_free instead of
+>> - mk_mem_free
+>> -
+>> -Upstream-Status: Accepted
+>> -Signed-off-by: Ramon Fried <ramon@neureality.ai>
+>> ----
+>> - src/fluent-bit.c | 6 +++---
+>> - 1 file changed, 3 insertions(+), 3 deletions(-)
+>> -
+>> -diff --git a/src/fluent-bit.c b/src/fluent-bit.c
+>> -index c0c73b4..989cfde 100644
+>> ---- a/src/fluent-bit.c
+>> -+++ b/src/fluent-bit.c
+>> -@@ -289,7 +289,7 @@ static int input_set_property(struct flb_input_instance *in, char *kv)
+>> -                 in->p->name, key);
+>> -     }
+>> -
+>> --    flb_free(key);
+>> -+    mk_mem_free(key);
+>> -     return ret;
+>> - }
+>> -
+>> -@@ -314,7 +314,7 @@ static int output_set_property(struct flb_output_instance *out, char *kv)
+>> -     }
+>> -
+>> -     ret = flb_output_set_property(out, key, value);
+>> --    flb_free(key);
+>> -+    mk_mem_free(key);
+>> -     return ret;
+>> - }
+>> -
+>> -@@ -340,7 +340,7 @@ static int filter_set_property(struct flb_filter_instance *filter, char *kv)
+>> -     }
+>> -
+>> -     ret = flb_filter_set_property(filter, key, value);
+>> --    flb_free(key);
+>> -+    mk_mem_free(key);
+>> -     return ret;
+>> - }
+>> -
+>> diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-ppc-Fix-signature-for-co_create-API.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-ppc-Fix-signature-for-co_create-API.patch
+>> deleted file mode 100644
+>> index 1f36c657e..000000000
+>> --- a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-ppc-Fix-signature-for-co_create-API.patch
+>> +++ /dev/null
+>> @@ -1,38 +0,0 @@
+>> -From be4032079c931704f52e29f5da5c01cde24ac842 Mon Sep 17 00:00:00 2001
+>> -From: Khem Raj <raj.khem@gmail.com>
+>> -Date: Thu, 16 Jan 2020 10:44:58 -0800
+>> -Subject: [PATCH] ppc: Fix signature for co_create API
+>> -
+>> -Upstream-Status: Submitted [https://github.com/fluent/fluent-bit/pull/1886]
+>> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ----
+>> - lib/flb_libco/ppc.c | 6 ++++--
+>> - 1 file changed, 4 insertions(+), 2 deletions(-)
+>> -
+>> -diff --git a/lib/flb_libco/ppc.c b/lib/flb_libco/ppc.c
+>> -index e6536d56..533256b3 100644
+>> ---- a/lib/flb_libco/ppc.c
+>> -+++ b/lib/flb_libco/ppc.c
+>> -@@ -279,7 +279,9 @@ static uint32_t* co_create_(unsigned size, uintptr_t entry) {
+>> -   return t;
+>> - }
+>> -
+>> --cothread_t co_create(unsigned int size, void (*entry_)(void)) {
+>> -+cothread_t co_create(unsigned int size, void (*entry_)(void),
+>> -+                     size_t *out_size) {
+>> -+
+>> -   uintptr_t entry = (uintptr_t)entry_;
+>> -   uint32_t* t = 0;
+>> -
+>> -@@ -325,7 +327,7 @@ cothread_t co_create(unsigned int size, void (*entry_)(void)) {
+>> -     t[10] = (uint32_t)(sp >> shift >> shift);
+>> -     t[11] = (uint32_t)sp;
+>> -   }
+>> --
+>> -+  *out_size = size;
+>> -   return t;
+>> - }
+>> -
+>> ---
+>> -2.25.0
+>> -
+>> diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch
+>> new file mode 100644
+>> index 000000000..4358b2a51
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch
+>> @@ -0,0 +1,26 @@
+>> +From 71dab751a27a2e582b711de22873065dd28f4b65 Mon Sep 17 00:00:00 2001
+>> +From: Paulo Neves <ptsneves@gmail.com>
+>> +Date: Thu, 28 Jul 2022 11:42:31 +0200
+>> +Subject: [PATCH] flb_info.h.in: Do not hardcode compilation directories
+>> +
+>> +Including the source dir in the header makes the header not
+>> +reproducible and contaminates it with host builder paths. Instead
+>> +make it take CMAKE_DEBUG_SRCDIR that can be set to a known
+>> +reproducible value
+>> +---
+>> + include/fluent-bit/flb_info.h.in | 2 +-
+>> + 1 file changed, 1 insertion(+), 1 deletion(-)
+>> +
+>> +diff --git a/include/fluent-bit/flb_info.h.in b/include/fluent-bit/flb_info.h.in
+>> +index a89485c..2579afc 100644
+>> +--- a/include/fluent-bit/flb_info.h.in
+>> ++++ b/include/fluent-bit/flb_info.h.in
+>> +@@ -23,7 +23,7 @@
+>> + #define STR_HELPER(s)      #s
+>> + #define STR(s)             STR_HELPER(s)
+>> +
+>> +-#define FLB_SOURCE_DIR "@CMAKE_SOURCE_DIR@"
+>> ++#define FLB_SOURCE_DIR "@CMAKE_DEBUG_SRCDIR@"
+>> +
+>> + /* General flags set by CMakeLists.txt */
+>> + @FLB_BUILD_FLAGS@
+>> diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0002-parser-Fix-SIGSEGV-caused-by-using-flb_free-instead-.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0002-parser-Fix-SIGSEGV-caused-by-using-flb_free-instead-.patch
+>> deleted file mode 100644
+>> index 91675dfc6..000000000
+>> --- a/meta-oe/recipes-extended/fluentbit/fluentbit/0002-parser-Fix-SIGSEGV-caused-by-using-flb_free-instead-.patch
+>> +++ /dev/null
+>> @@ -1,82 +0,0 @@
+>> -From 7c3b1dfb174312594d3317c24ed71c60398f653f Mon Sep 17 00:00:00 2001
+>> -From: Ramon Fried <ramon@neureality.ai>
+>> -Date: Wed, 10 Feb 2021 04:23:36 +0200
+>> -Subject: [PATCH] parser: Fix SIGSEGV caused by using flb_free instead of
+>> - mk_mem_free
+>> -
+>> -Upstream-Status: Backport (fix only for 1.3.5)
+>> -Signed-off-by: Ramon Fried <ramon@neureality.ai>
+>> ----
+>> - src/flb_parser.c | 28 ++++++++++++++--------------
+>> - 1 file changed, 14 insertions(+), 14 deletions(-)
+>> -
+>> -diff --git a/src/flb_parser.c b/src/flb_parser.c
+>> -index d35c568..7c20e12 100644
+>> ---- a/src/flb_parser.c
+>> -+++ b/src/flb_parser.c
+>> -@@ -490,7 +490,7 @@ int flb_parser_conf_file(const char *file, struct flb_config *config)
+>> -                                        MK_RCONF_STR);
+>> -         if (str) {
+>> -             time_keep = flb_utils_bool(str);
+>> --            flb_free(str);
+>> -+            mk_mem_free(str);
+>> -         }
+>> -         else {
+>> -             time_keep = FLB_FALSE;
+>> -@@ -522,23 +522,23 @@ int flb_parser_conf_file(const char *file, struct flb_config *config)
+>> -
+>> -         flb_debug("[parser] new parser registered: %s", name);
+>> -
+>> --        flb_free(name);
+>> --        flb_free(format);
+>> -+        mk_mem_free(name);
+>> -+        mk_mem_free(format);
+>> -
+>> -         if (regex) {
+>> --            flb_free(regex);
+>> -+            mk_mem_free(regex);
+>> -         }
+>> -         if (time_fmt) {
+>> --            flb_free(time_fmt);
+>> -+            mk_mem_free(time_fmt);
+>> -         }
+>> -         if (time_key) {
+>> --            flb_free(time_key);
+>> -+            mk_mem_free(time_key);
+>> -         }
+>> -         if (time_offset) {
+>> --            flb_free(time_offset);
+>> -+            mk_mem_free(time_offset);
+>> -         }
+>> -         if (types_str) {
+>> --            flb_free(types_str);
+>> -+            mk_mem_free(types_str);
+>> -         }
+>> -
+>> -         decoders = NULL;
+>> -@@ -548,19 +548,19 @@ int flb_parser_conf_file(const char *file, struct flb_config *config)
+>> -     return 0;
+>> -
+>> -  fconf_error:
+>> --    flb_free(name);
+>> --    flb_free(format);
+>> -+    mk_mem_free(name);
+>> -+    mk_mem_free(format);
+>> -     if (regex) {
+>> --        flb_free(regex);
+>> -+        mk_mem_free(regex);
+>> -     }
+>> -     if (time_fmt) {
+>> --        flb_free(time_fmt);
+>> -+        mk_mem_free(time_fmt);
+>> -     }
+>> -     if (time_key) {
+>> --        flb_free(time_key);
+>> -+        mk_mem_free(time_key);
+>> -     }
+>> -     if (types_str) {
+>> --        flb_free(types_str);
+>> -+        mk_mem_free(types_str);
+>> -     }
+>> -     if (decoders) {
+>> -         flb_parser_decoder_list_destroy(decoders);
+>> diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0003-mbedtls-Do-not-overwrite-CFLAGS.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0003-mbedtls-Do-not-overwrite-CFLAGS.patch
+>> new file mode 100644
+>> index 000000000..0611af9ec
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0003-mbedtls-Do-not-overwrite-CFLAGS.patch
+>> @@ -0,0 +1,25 @@
+>> +From 8486b912281ae85db0c9fc05bb546f16872e114c Mon Sep 17 00:00:00 2001
+>> +From: Paulo Neves <ptsneves@gmail.com>
+>> +Date: Thu, 28 Jul 2022 14:37:18 +0200
+>> +Subject: [PATCH] mbedtls: Do not overwrite CFLAGS
+>> +
+>> +bitbake passes CFLAGS that are often in conflict with the ones set
+>> +in mbedtls' CMakeLists.txt. Such conflicts are the inability to use
+>> +FORTIFY_SOURCE=2 except in release mode
+>> +---
+>> + lib/mbedtls-2.28.0/CMakeLists.txt | 2 --
+>> + 1 file changed, 2 deletions(-)
+>> +
+>> +diff --git a/lib/mbedtls-2.28.0/CMakeLists.txt b/lib/mbedtls-2.28.0/CMakeLists.txt
+>> +index d76bddc..e717846 100644
+>> +--- a/lib/mbedtls-2.28.0/CMakeLists.txt
+>> ++++ b/lib/mbedtls-2.28.0/CMakeLists.txt
+>> +@@ -204,8 +204,6 @@ if(CMAKE_COMPILER_IS_GNU)
+>> +     if (GCC_VERSION VERSION_GREATER 7.0 OR GCC_VERSION VERSION_EQUAL 7.0)
+>> +       set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wformat-overflow=2 -Wformat-truncation")
+>> +     endif()
+>> +-    set(CMAKE_C_FLAGS_RELEASE     "-O2")
+>> +-    set(CMAKE_C_FLAGS_DEBUG       "-O0 -g3")
+>> +     set(CMAKE_C_FLAGS_COVERAGE    "-O0 -g3 --coverage")
+>> +     set(CMAKE_C_FLAGS_ASAN        "-fsanitize=address -fno-common -fsanitize=undefined -fno-sanitize-recover=all -O3")
+>> +     set(CMAKE_C_FLAGS_ASANDBG     "-fsanitize=address -fno-common -fsanitize=undefined -fno-sanitize-recover=all -O1 -g3 -fno-omit-frame-pointer -fno-optimize-sibling-calls")
+>> diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/builtin-nan.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/builtin-nan.patch
+>> deleted file mode 100644
+>> index 8ffc3be3e..000000000
+>> --- a/meta-oe/recipes-extended/fluentbit/fluentbit/builtin-nan.patch
+>> +++ /dev/null
+>> @@ -1,27 +0,0 @@
+>> -help complier to use intrinsics, clang in few cases e.g. aarch64 can not
+>> -and then requires linking with libm, its the only function needed from libm then
+>> -its good to avoid needing it.
+>> -
+>> -Upstream-Status: Pending
+>> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> -
+>> ---- a/include/fluent-bit/stream_processor/flb_sp_timeseries.h
+>> -+++ b/include/fluent-bit/stream_processor/flb_sp_timeseries.h
+>> -@@ -207,7 +207,7 @@ void cb_forecast_calc(struct timeseries
+>> -         result = b0 + b1 * (val->f64 + *forecast->latest_x);
+>> -         break;
+>> -     default:
+>> --        result = nan("");
+>> -+        result = __builtin_nan("");
+>> -         break;
+>> -     }
+>> -
+>> -@@ -283,7 +283,7 @@ void cb_forecast_r_calc(struct timeserie
+>> -             result = ((val->i64 - b0) / b1) - *forecast->latest_x;
+>> -             break;
+>> -         default:
+>> --            result = nan("");
+>> -+            result = __builtin_nan("");
+>> -             break;
+>> -         }
+>> -
+>> diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/cross-build-init-system-detection.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/cross-build-init-system-detection.patch
+>> deleted file mode 100644
+>> index d3822fc8d..000000000
+>> --- a/meta-oe/recipes-extended/fluentbit/fluentbit/cross-build-init-system-detection.patch
+>> +++ /dev/null
+>> @@ -1,38 +0,0 @@
+>> -Define CMake variables to indicate init system for target
+>> -incase of cross compile, detecting systemd support based on
+>> -host directory structure is not right thing to do
+>> -
+>> -Upstream-Status: Pending
+>> -Signed-off-by: Khem Raj <raj.kheem@gmail.com>
+>> -
+>> ---- a/src/CMakeLists.txt
+>> -+++ b/src/CMakeLists.txt
+>> -@@ -317,7 +317,7 @@ if(FLB_BINARY)
+>> -   install(TARGETS fluent-bit-bin RUNTIME DESTINATION ${FLB_INSTALL_BINDIR})
+>> -
+>> -   # Detect init system, install upstart, systemd or init.d script
+>> --  if(IS_DIRECTORY /lib/systemd/system)
+>> -+  if(FLB_SYSTEMD)
+>> -     set(FLB_SYSTEMD_SCRIPT "${PROJECT_SOURCE_DIR}/init/${FLB_OUT_NAME}.service")
+>> -     configure_file(
+>> -       "${PROJECT_SOURCE_DIR}/init/systemd.in"
+>> -@@ -325,7 +325,7 @@ if(FLB_BINARY)
+>> -       )
+>> -     install(FILES ${FLB_SYSTEMD_SCRIPT} DESTINATION /lib/systemd/system)
+>> -     install(DIRECTORY DESTINATION ${FLB_INSTALL_CONFDIR})
+>> --  elseif(IS_DIRECTORY /usr/share/upstart)
+>> -+  elseif(FLB_UPSTART)
+>> -     set(FLB_UPSTART_SCRIPT "${PROJECT_SOURCE_DIR}/init/${FLB_OUT_NAME}.conf")
+>> -     configure_file(
+>> -       "${PROJECT_SOURCE_DIR}/init/upstart.in"
+>> ---- a/CMakeLists.txt
+>> -+++ b/CMakeLists.txt
+>> -@@ -70,6 +70,8 @@ option(FLB_RECORD_ACCESSOR    "Enable re
+>> - option(FLB_SYSTEM_STRPTIME    "Use strptime in system libc"  Yes)
+>> - option(FLB_STATIC_CONF        "Build binary using static configuration")
+>> - option(FLB_STREAM_PROCESSOR   "Enable Stream Processor"      Yes)
+>> -+option(FLB_SYSTEMD            "Enable systemd init system"   No)
+>> -+option(FLB_UPSTART            "Enable upstart init system"   No)
+>> - option(FLB_CORO_STACK_SIZE    "Set coroutine stack size")
+>> -
+>> - # Metrics: Experimental Feature, disabled by default on 0.12 series
+>> diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_1.9.6.bb
+>> similarity index 53%
+>> rename from meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
+>> rename to meta-oe/recipes-extended/fluentbit/fluentbit_1.9.6.bb
+>> index b231cc287..1ff62767d 100644
+>> --- a/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
+>> +++ b/meta-oe/recipes-extended/fluentbit/fluentbit_1.9.6.bb
+>> @@ -11,25 +11,28 @@ LICENSE = "Apache-2.0"
+>>   LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
+>>   SECTION = "net"
+>>
+>> -SRC_URI = "http://fluentbit.io/releases/1.3/fluent-bit-${PV}.tar.gz \
+>> +PR = "r0"
+> We don't need to set PR in recipe anymore
 >
-> diff --git a/meta-networking/recipes-support/strongswan/files/0001-enum-Fix-compiler-warning.patch b/meta-networking/recipes-support/strongswan/files/0001-enum-Fix-compiler-warning.patch
-> deleted file mode 100644
-> index e730fe1cd..000000000
-> --- a/meta-networking/recipes-support/strongswan/files/0001-enum-Fix-compiler-warning.patch
-> +++ /dev/null
-> @@ -1,31 +0,0 @@
-> -From d23c0ea81e630af3cfda89aeeb52146c0c84c960 Mon Sep 17 00:00:00 2001
-> -From: Tobias Brunner <tobias@strongswan.org>
-> -Date: Mon, 2 May 2022 09:31:49 +0200
-> -Subject: [PATCH] enum: Fix compiler warning
-> -
-> -Closes strongswan/strongswan#1025
-> -
-> -Upstream-Status: Backport
-> -[https://github.com/strongswan/strongswan/commit/d23c0ea81e630af3cfda89aeeb52146c0c84c960]
-> -
-> -Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> ----
-> - src/libstrongswan/utils/enum.c | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/src/libstrongswan/utils/enum.c b/src/libstrongswan/utils/enum.c
-> -index 79da450f0c..1e77489f6f 100644
-> ---- a/src/libstrongswan/utils/enum.c
-> -+++ b/src/libstrongswan/utils/enum.c
-> -@@ -97,7 +97,7 @@ char *enum_flags_to_string(enum_name_t *e, u_int val, char *buf, size_t len)
-> - 		return buf;
-> - 	}
-> -
-> --	if (snprintf(buf, len, e->names[0]) >= len)
-> -+	if (snprintf(buf, len, "%s", e->names[0]) >= len)
-> - 	{
-> - 		return NULL;
-> - 	}
-> ---
-> -2.25.1
-> -
-> diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.9.6.bb b/meta-networking/recipes-support/strongswan/strongswan_5.9.7.bb
-> similarity index 98%
-> rename from meta-networking/recipes-support/strongswan/strongswan_5.9.6.bb
-> rename to meta-networking/recipes-support/strongswan/strongswan_5.9.7.bb
-> index 1b82dceac..349538620 100644
-> --- a/meta-networking/recipes-support/strongswan/strongswan_5.9.6.bb
-> +++ b/meta-networking/recipes-support/strongswan/strongswan_5.9.7.bb
-> @@ -9,10 +9,9 @@ DEPENDS = "flex-native flex bison-native"
->   DEPENDS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'tpm2', '  tpm2-tss', '', d)}"
->   
->   SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
-> -           file://0001-enum-Fix-compiler-warning.patch \
->              "
->   
-> -SRC_URI[sha256sum] = "91d0978ac448912759b85452d8ff0d578aafd4507aaf4f1c1719f9d0c7318ab7"
-> +SRC_URI[sha256sum] = "9e64a2ba62efeac81abff1d962522404ebc6ed6c0d352a23ab7c0b2c639e3fcf"
->   
->   UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
->   
+>> +PV = "1.9.6"
+> We don't need PV either since it's in the recipe name already.
 >
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#98069): https://lists.openembedded.org/g/openembedded-devel/message/98069
-> Mute This Topic: https://lists.openembedded.org/mt/92742585/3616783
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [yi.zhao@windriver.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
+>> +
+>> +SRC_URI = "https://releases.fluentbit.io/1.9/source-${PV}.tar.gz;subdir=fluent-bit-${PV} \
+>> +           file://0001-CMakeLists.txt-Do-not-use-private-makefile-target.patch \
+>> +           file://0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch \
+>> +           file://0003-mbedtls-Do-not-overwrite-CFLAGS.patch \
+>>              file://jemalloc.patch \
+>> -           file://cross-build-init-system-detection.patch \
+>> -           file://builtin-nan.patch \
+>> -           file://0001-ppc-Fix-signature-for-co_create-API.patch \
+>> -           file://0001-bin-fix-SIGSEGV-caused-by-using-flb_free-instead-of-.patch \
+>> -           file://0002-parser-Fix-SIGSEGV-caused-by-using-flb_free-instead-.patch \
+>> -           file://0001-Control-sytemd-unit-install-location-with-SYSTEM_DIR.patch \
+> does this work without patch with usrmerge distro feature on ?
 >
+>>              "
+>> -SRC_URI[md5sum] = "6eae6dfd0a874e5dd270c36e9c68f747"
+>> -SRC_URI[sha256sum] = "e037c76c89269c8dc4027a08e442fefd2751b0f1e0f9c38f9a4b12d781a9c789"
+>> +SRC_URI[md5sum] = "ad65bb3ca55d203a467a63426e17bfae"
+> we don't need md5sum anymore.
+>
+>> +SRC_URI[sha256sum] = "5ef7dd97e10936269fe5f4e5d3ebf16559333066f7d6757ba12464a9d6186570"
+>>
+>>   S = "${WORKDIR}/fluent-bit-${PV}"
+>> -DEPENDS = "zlib bison-native flex-native"
+>> +DEPENDS = "zlib bison-native flex-native openssl"
+>>   DEPENDS += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+>> -
+>> +PACKAGECONFIG[yaml] = "-DFLB_CONFIG_YAML=On,-DFLB_CONFIG_YAML=Off, yaml,"
+>> +PACKAGECONFIG[kafka] = "-DFLB_OUT_KAFKA=On,-DFLB_OUT_KAFKA=Off,librdkafka"
+>> +PACKAGECONFIG[examples] = "-DFLB_EXAMPLES=On,-DFLB_EXAMPLES=Off"
+>> +PACKAGECONFIG[jemalloc] = "-DFLB_JEMALLOC=On,-DFLB_JEMALLOC=Off,jemalloc"
+>>   DEPENDS:append:libc-musl = " fts "
+>>
+>> -INSANE_SKIP:${PN}-dev += "dev-elf"
+>> +PACKAGECONFIG ?= "yaml"
+> There is no recipe providing yaml in core or meta-oe, perhaps you
+> meant libyaml maybe ?
+>
+>>   LTO = ""
+>>
+>> @@ -40,13 +43,13 @@ OECMAKE_GENERATOR ?= "Unix Makefiles"
+>>   # ========================
+>>
+>>   # Host related setup
+>> -EXTRA_OECMAKE += "-DGNU_HOST=${HOST_SYS} -DFLB_ALL=ON -DFLB_TD=1"
+>> +EXTRA_OECMAKE += "-DGNU_HOST=${HOST_SYS} -DFLB_TD=1"
+>>
+>>   # Disable LuaJIT and filter_lua support
+>>   EXTRA_OECMAKE += "-DFLB_LUAJIT=Off -DFLB_FILTER_LUA=Off "
+>>
+>>   # Disable Library and examples
+>> -EXTRA_OECMAKE += "-DFLB_SHARED_LIB=Off -DFLB_EXAMPLES=Off "
+>> +EXTRA_OECMAKE += "-DFLB_SHARED_LIB=Off"
+>>
+>>   # Enable systemd iff systemd is in DISTRO_FEATURES
+>>   EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES','systemd','-DFLB_SYSTEMD=On -DSYSTEMD_DIR=${systemd_system_unitdir}','-DFLB_SYSTEMD=Off',d)}"
+>> @@ -54,16 +57,9 @@ EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES','systemd','-DFLB_SYSTEM
+>>   EXTRA_OECMAKE:append:riscv64 = " -DFLB_DEPS='atomic'"
+>>   EXTRA_OECMAKE:append:riscv32 = " -DFLB_DEPS='atomic'"
+>>
+>> -# Kafka Output plugin (disabled by default): note that when
+>> -# enabling Kafka output plugin, the backend library librdkafka
+>> -# requires 'openssl' as a dependency.
+>> -#
+>> -# DEPENDS += "openssl "
+>> -# EXTRA_OECMAKE += "-DFLB_OUT_KAFKA=On "
+>> -
+>>   inherit cmake systemd
+>>
+>> -CFLAGS += "-fcommon"
+>> -
+>>   SYSTEMD_SERVICE:${PN} = "td-agent-bit.service"
+>> -TARGET_CC_ARCH:append = " ${SELECTED_OPTIMIZATION}"
+>> +
+>> +EXTRA_OECMAKE += "-DCMAKE_DEBUG_SRCDIR=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR}/"
+>> +TARGET_CC_ARCH += " ${SELECTED_OPTIMIZATION}"
+>> --
+>> 2.25.1
+>>
+>>
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#98034): https://lists.openembedded.org/g/openembedded-devel/message/98034
+>> Mute This Topic: https://lists.openembedded.org/mt/92670787/1997914
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>>
+
 
