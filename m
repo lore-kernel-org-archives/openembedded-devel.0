@@ -2,78 +2,74 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 79207C00140
-	for <webhook@archiver.kernel.org>; Tue,  2 Aug 2022 13:43:42 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.65])
- by mx.groups.io with SMTP id smtpd.web12.6176.1659447813792759652
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 79AA4C00140
+	for <webhook@archiver.kernel.org>; Tue,  2 Aug 2022 13:44:32 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.4])
+ by mx.groups.io with SMTP id smtpd.web08.6275.1659447867827296472
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Aug 2022 06:43:34 -0700
+ Tue, 02 Aug 2022 06:44:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ApAlj5Yn;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.65,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=jFOLThSs;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1659447812; i=@fujitsu.com;
-	bh=2Uku2Xddj3Ui7g0EbpWdqP9bZCcudvSLsXHBFjX2y28=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=ApAlj5YnRvibJ2SYijw+E6/RGwrF9KkPJqGzHUbS3myZBsGh8uNnADB0r0fOhILty
-	 pkr6ioUChcrE3RllrnGTda7xmTWeQcwc7OqumEjI6OrSoDc3UEimS7Fv5kWecCtLs0
-	 11GQhC2zQZHGmiEIvveBIuV73dQM9xWoj5H9ggGhs7jnE5CSXue6JMga3Glkh/Ocxj
-	 ydOWGh9YaWSh1DMDeK+eHKv873/VBespF5AfCBg3RGxZsZN6aXeFXk2lU6ZJZuC0Fh
-	 F7oGnAOM1ASHdBYsMhdKE31ezuir+uL0okb6YUe6+bGM8oPxzEmAZSOW6k+aEmt0CZ
-	 JwbQodxmA1mvQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrCIsWRWlGSWpSXmKPExsViZ8MxSZdZ62W
-  Swf99WhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bmZTeYCvaoVCz5tpO9gfGnQhcjF4eQwBNG
-  ibXHDzJBONeZJNq/n4dydjNKbH56kL2LkZODTUBNYvqtG6wgtoiAvsTS2XuYQWxmARWJF797w
-  GqEBewk+lZMZQSxWYDi544vAqvnFXCSmP36PlhcQkBBYsrD90C9HBycAs4Sn/rtQcJCQCUdD5
-  sZIcoFJU7OfMICMV5C4uCLF8wQrYoSsy83s0DYFRIzZmxjg7DVJK6e28Q8gVFwFpL2WUjaFzA
-  yrWK0SirKTM8oyU3MzNE1NDDQNTQ01TUBsgz1Eqt0E/VSS3XLU4tLdIHc8mK91OJiveLK3OSc
-  FL281JJNjMAgTilmSd3B2Nf3U+8QoyQHk5Ior5ziyyQhvqT8lMqMxOKM+KLSnNTiQ4wyHBxKE
-  ry3VIFygkWp6akVaZk5wIiCSUtw8CiJ8J7VAErzFhck5hZnpkOkTjF6c3w4dGUvM8fVKyBy6u
-  x/+5k5loPJmV/bDjBzbNrXdYBZiCUvPy9VSpx3OcgIAZARGaV5cAtgieESo6yUMC8jAwODEE9
-  BalFuZgmq/CtGcQ5GJWHeAyBTeDLzSuDueAV0IhPQiTpcL0BOLElESEk1MB1Sf3wtUH7jZMXJ
-  wSs1z0k9W8Et9ueS3CyV00wtZU1VojHpMzSmrDZ65rtD74Wd0CUfId9J6y/cPyt8/eSPzX+rj
-  O52KGVsPtMufsnzq8DvNXdd1hu1LFpbHtmi2pu17krXTev3M28El3r1JGydvLt40ospzMkLmr
-  hsilJLPjz9GPnEWT80S1fvV+q6ndfluytcDH+7XlkuFqgeJn37QblUlsKW+x1xQZekzO0DRB8
-  szJ94UsHxdumkRLto/jZOj1fM79VXTpTSVDBZxL7Td+skrvcawYyagvN2OFR8fTunKHZh5LLt
-  vot3BXUezXD7r3LnzGxG7tMH5yqvYHRdbZrB+l91pidPW2il23FTcSWW4oxEQy3mouJEABprG
-  FCHAwAA
+	s=170520fj; t=1659447866; i=@fujitsu.com;
+	bh=VhxrsIA+jNLE8heOk02fdstkrkwMwMCQ1zf5To683W8=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=jFOLThSsMMHAjWp9p6LB6O/rZkA6R2b265WqTEjoAdn/y6tRWLQNuH0Yy2lFMThIn
+	 XBgZgKTU3w0YqyaBLioqfGByq+Q4Sji1q71Vo+nbi7FPPD1BQGWamGW589bSiwd8OZ
+	 o/ZsDUkju0DOrvNlbe1cZWY5X+cKziaXj9+IxYe2FO749xlPT3Yd1VGeJz8y9HZXe0
+	 fTtMA8al0x6xIRVaD9f5iHHQiXQi+Kd6et6PIC+bevHt1LK65YwUU5q7MqBHa8qt5g
+	 8ShanHgxglvLeQTW5IQRIsadPFbFbIFaN3gsnQAc4T9a1ddMcyYIim8xYnQ0A8+1Yj
+	 k8Bw81KNOw6GA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrAIsWRWlGSWpSXmKPExsViZ8MxSddS62W
+  SwYmt2hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bqzia2glPiFY8+SzcwbhTtYuTiEBJ4wiix
+  9GwTO4RznUni8e0uJghnN6PEi10rgBxODjYBNYnpt26wgtgiAvoSS2fvYQaxmQVUJF787gHq5
+  uAQFvCSOHLWCiTMAhT+cGEzWAmvgJPExxcP2EBsCQEFiSkP30PFBSVOznzCAjFGQuLgixfMED
+  WKErMvN7NA2BUSM2Zsg+pVk7h6bhPzBEb+WUjaZyFpX8DItIrROqkoMz2jJDcxM0fX0MBA19D
+  QVNfYAkgZ6iVW6SbqpZbqlqcWl+ga6SWWF+ulFhfrFVfmJuek6OWllmxiBAZlSrFa/g7Gvyt/
+  6h1ilORgUhLllVN8mSTEl5SfUpmRWJwRX1Sak1p8iFGGg0NJgveWKlBOsCg1PbUiLTMHGCEwa
+  QkOHiUR3rMaQGne4oLE3OLMdIjUKUZ7jqmz/+1n5lgOJmd+bTvAzLFpX9cBZiGWvPy8VClx3u
+  UgbQIgbRmleXBDYRF9iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5Iw7wGQKTyZeSVwu18BncU
+  EdJYO1wuQs0oSEVJSDUwhHbmJDVsWzvu8+5OMn7Efb6KKU1vNP+1gG+Wv3JOEtk/2nf6Oq/9E
+  nO6MwJ0Jsku/KUt9z9Di0g9keDdNzmO946YDBm+eaRum3p9kX1sxee7ye/bLngXOcprpl9cd4
+  BCTvOGoLFdLxa/JHywiO4QmaL+4Hffn4xt130tv+pOc98y2jgwzm7Y5ca4500IGM4WktV/bHj
+  MfdJnJ06/7Su3MrQjXbbuSp2Z4fjSvSTCcKsT0tfjhwy29ex4Jh7Zz7NYr47n/zaXNqFU1dhX
+  /Dr9zR8/N7XN3tzYIOHE5XOBq7+dksW0LIzLOP1uocjt9dWXIybJjO4sOzZvZH8O8THHj7WYx
+  HTavjP9zi3lN85RYijMSDbWYi4oTAe6cN75jAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-22.tower-587.messagelabs.com!1659447811!129578!1
+X-Msg-Ref: server-12.tower-548.messagelabs.com!1659447865!4081!1
 X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 30780 invoked from network); 2 Aug 2022 13:43:31 -0000
+Received: (qmail 23972 invoked from network); 2 Aug 2022 13:44:25 -0000
 Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-22.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 2 Aug 2022 13:43:31 -0000
+  by server-12.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 2 Aug 2022 13:44:25 -0000
 Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 4A0531000E9
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 685C71000EE
 	for <openembedded-devel@lists.openembedded.org>;
- Tue,  2 Aug 2022 14:43:31 +0100 (BST)
+ Tue,  2 Aug 2022 14:44:25 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
  [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 3D41F100077
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 5B83A100077
 	for <openembedded-devel@lists.openembedded.org>;
- Tue,  2 Aug 2022 14:43:31 +0100 (BST)
+ Tue,  2 Aug 2022 14:44:25 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Tue, 2 Aug 2022 14:43:29 +0100
+ (TLS) id 15.0.1497.32; Tue, 2 Aug 2022 14:44:23 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] poco: upgrade 1.12.0 -> 1.12.1
-Date: Tue, 2 Aug 2022 21:43:11 +0800
-Message-ID: <1659447791-24448-5-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] strongswan: upgrade 5.9.6 -> 5.9.7
+Date: Tue, 2 Aug 2022 21:44:14 +0800
+Message-ID: <1659447854-24486-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1659447791-24448-1-git-send-email-wangmy@fujitsu.com>
-References: <1659447791-24448-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -83,125 +79,78 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Aug 2022 13:43:42 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 Aug 2022 13:44:32 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98097
+ https://lists.openembedded.org/g/openembedded-devel/message/98098
 
-The following patches removed since they're included in 1.12.1:
-0001-fix-unbundled-PCRE2-dependency.patch
-0002-remove-providers-unitialization.patch
-
-Changelog:
-==========
-- GH #3677 PocoFoundationConfig.cmake should now check for PCRE2
-- GH #3686 SIGSEGV in OSSL_PROVIDER_unload with static OpenSSL3
+0001-enum-Fix-compiler-warning.patch
+removed since it's included in 5.9.7.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../0001-fix-unbundled-PCRE2-dependency.patch | 25 -------------
- ...0002-remove-providers-unitialization.patch | 35 -------------------
- .../poco/{poco_1.12.0.bb => poco_1.12.1.bb}   | 11 +++---
- 3 files changed, 4 insertions(+), 67 deletions(-)
- delete mode 100644 meta-oe/recipes-support/poco/poco/0001-fix-unbundled-PCRE2-dependency.patch
- delete mode 100644 meta-oe/recipes-support/poco/poco/0002-remove-providers-unitialization.patch
- rename meta-oe/recipes-support/poco/{poco_1.12.0.bb => poco_1.12.1.bb} (94%)
+ .../0001-enum-Fix-compiler-warning.patch      | 31 -------------------
+ ...trongswan_5.9.6.bb => strongswan_5.9.7.bb} |  6 ++--
+ 2 files changed, 2 insertions(+), 35 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/strongswan/files/0001-enum-Fix-compiler-warning.patch
+ rename meta-networking/recipes-support/strongswan/{strongswan_5.9.6.bb => strongswan_5.9.7.bb} (98%)
 
-diff --git a/meta-oe/recipes-support/poco/poco/0001-fix-unbundled-PCRE2-dependency.patch b/meta-oe/recipes-support/poco/poco/0001-fix-unbundled-PCRE2-dependency.patch
+diff --git a/meta-networking/recipes-support/strongswan/files/0001-enum-Fix-compiler-warning.patch b/meta-networking/recipes-support/strongswan/files/0001-enum-Fix-compiler-warning.patch
 deleted file mode 100644
-index 1a9d23cee4..0000000000
---- a/meta-oe/recipes-support/poco/poco/0001-fix-unbundled-PCRE2-dependency.patch
+index e730fe1cd0..0000000000
+--- a/meta-networking/recipes-support/strongswan/files/0001-enum-Fix-compiler-warning.patch
 +++ /dev/null
-@@ -1,25 +0,0 @@
--From f049898c8bf058ed187de8e5fab20abeaab1f3b6 Mon Sep 17 00:00:00 2001
--From: Alex Fabijanic <alex@pocoproject.org>
--Date: Sat, 9 Jul 2022 19:13:04 +0200
--Subject: [PATCH] fix(cmake): PocoFoundationConfig.cmake should now check for
-- PCRE2 #3677
+@@ -1,31 +0,0 @@
+-From d23c0ea81e630af3cfda89aeeb52146c0c84c960 Mon Sep 17 00:00:00 2001
+-From: Tobias Brunner <tobias@strongswan.org>
+-Date: Mon, 2 May 2022 09:31:49 +0200
+-Subject: [PATCH] enum: Fix compiler warning
 -
--Upstream-Status: Backport [https://github.com/pocoproject/poco/issues/3677]
+-Closes strongswan/strongswan#1025
 -
+-Upstream-Status: Backport
+-[https://github.com/strongswan/strongswan/commit/d23c0ea81e630af3cfda89aeeb52146c0c84c960]
+-
+-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ----
-- Foundation/cmake/PocoFoundationConfig.cmake | 2 +-
+- src/libstrongswan/utils/enum.c | 2 +-
 - 1 file changed, 1 insertion(+), 1 deletion(-)
 -
--diff --git a/Foundation/cmake/PocoFoundationConfig.cmake b/Foundation/cmake/PocoFoundationConfig.cmake
--index 46c2d3fc00..82c5788940 100644
----- a/Foundation/cmake/PocoFoundationConfig.cmake
--+++ b/Foundation/cmake/PocoFoundationConfig.cmake
--@@ -2,7 +2,7 @@ if(@POCO_UNBUNDLED@)
-- 	include(CMakeFindDependencyMacro)
-- 	list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
-- 	find_dependency(ZLIB REQUIRED)
---	find_dependency(PCRE REQUIRED)
--+	find_dependency(PCRE2 REQUIRED)
-- endif()
-- 
-- include("${CMAKE_CURRENT_LIST_DIR}/PocoFoundationTargets.cmake")
-diff --git a/meta-oe/recipes-support/poco/poco/0002-remove-providers-unitialization.patch b/meta-oe/recipes-support/poco/poco/0002-remove-providers-unitialization.patch
-deleted file mode 100644
-index 7d24b79f14..0000000000
---- a/meta-oe/recipes-support/poco/poco/0002-remove-providers-unitialization.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From c976c32e5249cb8a2433e7abfa095c1fe8dc4f8e Mon Sep 17 00:00:00 2001
--From: Alex Fabijanic <alex@pocoproject.org>
--Date: Wed, 13 Jul 2022 12:53:52 +0200
--Subject: [PATCH] fix(OpenSSLInitializer): remove providers unitialization
-- #3562 #3567
--
--Upstream-Status: Backport [https://github.com/pocoproject/poco/issues/3562]
--
-----
-- Crypto/src/OpenSSLInitializer.cpp | 12 ------------
-- 1 file changed, 12 deletions(-)
--
--diff --git a/Crypto/src/OpenSSLInitializer.cpp b/Crypto/src/OpenSSLInitializer.cpp
--index 4678d22299..c537c3f9c2 100644
----- a/Crypto/src/OpenSSLInitializer.cpp
--+++ b/Crypto/src/OpenSSLInitializer.cpp
--@@ -157,18 +157,6 @@ void OpenSSLInitializer::uninitialize()
-- #endif
-- 		delete [] _mutexes;
-- #endif
---
---#if OPENSSL_VERSION_NUMBER >= 0x30000000L
---		OSSL_PROVIDER* provider = nullptr;
---		if ((provider = _defaultProvider.exchange(nullptr)))
---		{
---			OSSL_PROVIDER_unload(provider);
---		}
---		if ((provider = _legacyProvider.exchange(nullptr)))
---		{
---			OSSL_PROVIDER_unload(provider);
---		}
---#endif
+-diff --git a/src/libstrongswan/utils/enum.c b/src/libstrongswan/utils/enum.c
+-index 79da450f0c..1e77489f6f 100644
+---- a/src/libstrongswan/utils/enum.c
+-+++ b/src/libstrongswan/utils/enum.c
+-@@ -97,7 +97,7 @@ char *enum_flags_to_string(enum_name_t *e, u_int val, char *buf, size_t len)
+- 		return buf;
 - 	}
-- }
 - 
-diff --git a/meta-oe/recipes-support/poco/poco_1.12.0.bb b/meta-oe/recipes-support/poco/poco_1.12.1.bb
-similarity index 94%
-rename from meta-oe/recipes-support/poco/poco_1.12.0.bb
-rename to meta-oe/recipes-support/poco/poco_1.12.1.bb
-index c3b52c8885..daf9ec00b6 100644
---- a/meta-oe/recipes-support/poco/poco_1.12.0.bb
-+++ b/meta-oe/recipes-support/poco/poco_1.12.1.bb
-@@ -8,13 +8,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4267f48fc738f50380cbeeb76f95cebc"
- # These dependencies are required by Foundation
- DEPENDS = "libpcre2 zlib"
+--	if (snprintf(buf, len, e->names[0]) >= len)
+-+	if (snprintf(buf, len, "%s", e->names[0]) >= len)
+- 	{
+- 		return NULL;
+- 	}
+--- 
+-2.25.1
+-
+diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.9.6.bb b/meta-networking/recipes-support/strongswan/strongswan_5.9.7.bb
+similarity index 98%
+rename from meta-networking/recipes-support/strongswan/strongswan_5.9.6.bb
+rename to meta-networking/recipes-support/strongswan/strongswan_5.9.7.bb
+index 1b82dceac2..67ab7c4110 100644
+--- a/meta-networking/recipes-support/strongswan/strongswan_5.9.6.bb
++++ b/meta-networking/recipes-support/strongswan/strongswan_5.9.7.bb
+@@ -8,11 +8,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ DEPENDS = "flex-native flex bison-native"
+ DEPENDS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'tpm2', '  tpm2-tss', '', d)}"
  
--SRC_URI = " \
--    git://github.com/pocoproject/poco.git;branch=master;protocol=https \
--    file://0001-fix-unbundled-PCRE2-dependency.patch \
--    file://0002-remove-providers-unitialization.patch \
--    file://run-ptest \
--   "
--SRCREV = "4ba8595ed83841d1fa240716b5652adc3772c36b"
-+SRC_URI = "git://github.com/pocoproject/poco.git;branch=master;protocol=https \
-+           file://run-ptest \
-+           "
-+SRCREV = "92fac970d4b6161fd58335bfe1492689ba5a80a3"
+-SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+-           file://0001-enum-Fix-compiler-warning.patch \
+-           "
++SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2"
  
- UPSTREAM_CHECK_GITTAGREGEX = "poco-(?P<pver>\d+(\.\d+)+)"
+-SRC_URI[sha256sum] = "91d0978ac448912759b85452d8ff0d578aafd4507aaf4f1c1719f9d0c7318ab7"
++SRC_URI[sha256sum] = "9e64a2ba62efeac81abff1d962522404ebc6ed6c0d352a23ab7c0b2c639e3fcf"
+ 
+ UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
  
 -- 
 2.25.1
