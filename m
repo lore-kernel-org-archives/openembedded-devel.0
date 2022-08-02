@@ -1,165 +1,102 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <edtanous@google.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 979F7C00140
-	for <webhook@archiver.kernel.org>; Tue,  2 Aug 2022 13:49:42 +0000 (UTC)
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
- [209.85.216.42])
- by mx.groups.io with SMTP id smtpd.web10.6363.1659448181301755122
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B0B65C00140
+	for <webhook@archiver.kernel.org>; Tue,  2 Aug 2022 22:52:29 +0000 (UTC)
+Received: from mail-yb1-f201.google.com (mail-yb1-f201.google.com
+ [209.85.219.201])
+ by mx.groups.io with SMTP id smtpd.web09.2116.1659480741936063988
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Aug 2022 06:49:41 -0700
+ Tue, 02 Aug 2022 15:52:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=jyueiToD;
- spf=pass (domain: gmail.com, ip: 209.85.216.42,
- mailfrom: akuster808@gmail.com)
-Received: by mail-pj1-f42.google.com with SMTP id
- f11-20020a17090a4a8b00b001f2f7e32d03so1639943pjh.0
+ dkim=pass header.i=@google.com header.s=20210112 header.b=DixflnFY;
+ spf=pass (domain: flex--edtanous.bounces.google.com, ip: 209.85.219.201,
+ mailfrom: 3parpyggkal4ihxersywksskpi.gsq@flex--edtanous.bounces.google.com)
+Received: by mail-yb1-f201.google.com with SMTP id
+ m5-20020a2598c5000000b0066faab590c5so11900951ybo.7
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Aug 2022 06:49:41 -0700 (PDT)
+ Tue, 02 Aug 2022 15:52:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=+boqYV0pygKthFXwPzA3vrvjGjaC2H7/usIcbCRzjn8=;
-        b=jyueiToD2xxB8fUAVr9fYhthCrLNa6qaUxWjMWjWX46r4lbd7prXjC0r7NXSHwpmIl
-         G7YbHSpvgNahUWcVqaB1E+q6PRj34r7eLCFl8t5BnTbKyaGxZ4uqkHMuT3fIBtPQ5uC9
-         /6DD/U8igtLXIXqBFaQcp+igKIgfAF0pzlmc2JPzpZYGiigOubzbb2dXzUwsZjrYiZDK
-         OkBzCEz/u8ICZYnvQAb//C302TFvkNxeKgi1Jyro+SSJV15hkGoyoXExp33jLC6OQKeH
-         ErAOquL2DDso8b+Gv+RygTeLJc2MF435/u9plTE/UMZCvUmhVmYrupBEuKRBBK0G38Xk
-         EMuA==
+        d=google.com; s=20210112;
+        h=cc:to:from:subject:mime-version:message-id:date:from:to:cc;
+        bh=SV5h/Te75pNIgJkWFT1GeMVL7oy8361NA5W59jpih7Y=;
+        b=DixflnFYAlm9ivFnP8o2PsPtWjtXTCpbi4sIcqaT2+FCTCoxv9iBvX/eCP0uYkEqHA
+         sBlWN4xnifzafGN9C34w0TRh8r6nNhoUME9fgyqqKZhDvNiHXbfwo7SGNIthRv36lUhz
+         GdhqZXa/Uv8fykhFE87PQ6Yk0+icona+ZbkiMVU2S2W43JW3aFhUVvnsFCnEAJPfnYqS
+         0cqHrgw8SjyrTcxe7gv2T1kGLxK8y7R28QvuMruQ/VNd/9yZqDI9mdY7yUcootgYeJSq
+         I5h0zKyHqNnUn3Twghl44cFTyo6fxFo06vwuTd9a9Ij6i3CzvWxjwh3d70OZSdYcx26a
+         ojpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=+boqYV0pygKthFXwPzA3vrvjGjaC2H7/usIcbCRzjn8=;
-        b=xFfRaI6cSYiSLsE9k3Zvq4dK8MsBwyCAL5rmqHVvIdTCDpuGyt20iG1torbhWcvWOt
-         m8gmuBZobWeGP2YqGRItC9NDlvkHDdpmU/+4S5DriVLemtCLA62bDMlBs+QsiYSyXfz+
-         /Xk+XzNfpzNs7eDjEfb6QZpBfZFjpy9COAgezDK7R+6yCVINMwOnQeNmK27wqaxNIWUM
-         iW4x1DIy2k+CBWeqWFjuWd0RjqAmBitAaAxHIOwF1LkQiaAmWCPNCctWZol9B9w7BXHO
-         hMQJuH+MkgYB40L9JFJjaVDaXURPnzd43H4B8ipo7PAZ1kzQhYWylLsdXJZZ73+B8BPV
-         k4/A==
-X-Gm-Message-State: ACgBeo3kvyn4VXvecoP9Ol9X/StsAXkJrjOKE6weohDdcDNhpoXryB8V
-	CZCFTFp/kSklrzrgC59XBp8o318CIp8=
+        h=cc:to:from:subject:mime-version:message-id:date:x-gm-message-state
+         :from:to:cc;
+        bh=SV5h/Te75pNIgJkWFT1GeMVL7oy8361NA5W59jpih7Y=;
+        b=q0pj6yLPDyStnZn1qP5IGc1L0w8ND+4RvxkUUGfAjXF2bO6KeWcSPTgaOmHv8Dzafv
+         +jJ6rcheobdS9Cw+mo95dEOW6OSRG/Gl3HF08XzlWDnnaL5c29jjUaeHWzaHWEMZq23i
+         8DwwRQQg1ePpk0DuJVtFPqMt/KFWTnaIqDVoq0UoD43YnfKJUq4aMAtTwnGurGnys1es
+         ptfB2+P4HpLN9bpxlsI/Ai1b+BTHE6T7D93XMZZ0KDwOxcHWSWEST/KmU6llPdd+QpmW
+         2bre7Zz5uP6XiQGB++SJFYEBoaOvj9DhdieKkNHk7kl18B7fZj6V4MsBMDiSkzhN0UmE
+         Ls2A==
+X-Gm-Message-State: ACgBeo2CE2yuOmNtqwtKvJ3xnWvWPfCsX9uZNO3d6oWpNdFBQNj8Onma
+	YNC0zsPW48Q8dKCm97LMnui3CjDeUZxj7gn7liYrZUbgNZm683i/DGSBZIZ+g9Oi0APQf9I92dz
+	bBYA6SwzdS3T9DLnFBjjAFt4Z+Svw2T8f+T8XdW48FBMqTmYsH16JTFnEEGz67e0pa5nQ3fSK2k
+	BPTi386Fo68r1feWaj
 X-Google-Smtp-Source: 
- AA6agR74qxK2E889q8AmKUiD0TubiSWaj/b51U7CJGI6ZAeGBOxxw7mmRo3QJuxRIzQKplGXNW8mWA==
-X-Received: by 2002:a17:90b:4cc4:b0:1f4:eec1:e168 with SMTP id
- nd4-20020a17090b4cc400b001f4eec1e168mr13984399pjb.116.1659448180239;
-        Tue, 02 Aug 2022 06:49:40 -0700 (PDT)
-Received: from keaua.hsd1.ca.comcast.net
- (c-67-181-203-136.hsd1.ca.comcast.net. [67.181.203.136])
-        by smtp.gmail.com with ESMTPSA id
- u8-20020a170902e80800b001635b86a790sm12042286plg.44.2022.08.02.06.49.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Aug 2022 06:49:39 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
+ AA6agR6ltG7HQoUcq0u0TXx0tMCHKOzk4uu9yzuQfzzJ51pQrqs8JmFwKChc9wPjS6PVbB2eedgcp20fXz2WVQ==
+X-Received: from edtanous.svl.corp.google.com
+ ([2620:15c:2c5:13:98f2:886:f30b:1195])
+ (user=edtanous job=sendgmr) by 2002:a05:6902:10ca:b0:671:3616:9147 with SMTP
+ id w10-20020a05690210ca00b0067136169147mr17085262ybu.105.1659480741032; Tue,
+ 02 Aug 2022 15:52:21 -0700 (PDT)
+Date: Tue,  2 Aug 2022 15:52:17 -0700
+Message-Id: <20220802225217.2804578-1-edtanous@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.37.1.559.g78731f0fdb-goog
+Subject: [meta-oe][PATCH] Add python-requests-unixsocket recipe
+From: edtanous@google.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][dunfell][PATCH] meta-oe: Add leading whitespace for append
- operator
-Date: Tue,  2 Aug 2022 06:47:38 -0700
-Message-Id: <20220802134738.954567-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Ed Tanous <edtanous@google.com>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Aug 2022 13:49:42 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 Aug 2022 22:52:29 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98100
+ https://lists.openembedded.org/g/openembedded-devel/message/98101
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Ed Tanous <edtanous@google.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 92441f9d6a958c245a03f89ec44ef2c17dd6b0ee)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+From the pypi description:
+Use requests to talk HTTP via a UNIX domain socket
+
+Signed-off-by: Ed Tanous <edtanous@google.com>
 ---
- meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb | 2 +-
- meta-oe/recipes-devtools/grpc/grpc_1.24.3.bb                  | 2 +-
- meta-oe/recipes-devtools/lua/lua_5.3.6.bb                     | 2 +-
- meta-oe/recipes-extended/gnuplot/gnuplot_5.2.8.bb             | 2 +-
- meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb      | 2 +-
- meta-oe/recipes-support/anthy/anthy_9100h.bb                  | 4 ++--
- 6 files changed, 7 insertions(+), 7 deletions(-)
+ .../python/python3-requests-unixsocket_0.3.0.bb    | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-requests-unixsocket_0.3.0.bb
 
-diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-index db7a8d7933..d1b7134b83 100644
---- a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-+++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
-@@ -7,7 +7,7 @@ SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git;branch=master;protocol=htt
- SRCREV = "c5416adeb210154dc4ccc4c3e1c5297d83ebd41e"
- PV = "1.1"
- 
--SRC_URI_append_class-target = "file://oe-remote.repo.sample"
-+SRC_URI_append_class-target = " file://oe-remote.repo.sample"
- 
- inherit distutils3-base
- 
-diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.24.3.bb b/meta-oe/recipes-devtools/grpc/grpc_1.24.3.bb
-index fa20941dfc..8a055412f2 100644
---- a/meta-oe/recipes-devtools/grpc/grpc_1.24.3.bb
-+++ b/meta-oe/recipes-devtools/grpc/grpc_1.24.3.bb
-@@ -63,6 +63,6 @@ do_configure_prepend_toolchain-clang_x86() {
- 
- BBCLASSEXTEND = "native nativesdk"
- 
--SYSROOT_DIRS_BLACKLIST_append_class-target = "${baselib}/cmake/grpc"
-+SYSROOT_DIRS_BLACKLIST_append_class-target = " ${baselib}/cmake/grpc"
- 
- FILES_${PN}-dev += "${bindir}"
-diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.6.bb b/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
-index 0137cc3c5b..d46d402aa3 100644
---- a/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
-+++ b/meta-oe/recipes-devtools/lua/lua_5.3.6.bb
-@@ -32,7 +32,7 @@ PACKAGECONFIG ??= "readline"
- PACKAGECONFIG[readline] = ",,readline"
- 
- UCLIBC_PATCHES += "file://uclibc-pthread.patch"
--SRC_URI_append_libc-uclibc = "${UCLIBC_PATCHES}"
-+SRC_URI_append_libc-uclibc = " ${UCLIBC_PATCHES}"
- 
- TARGET_CC_ARCH += " -fPIC ${LDFLAGS}"
- EXTRA_OEMAKE = "'CC=${CC} -fPIC' 'MYCFLAGS=${CFLAGS} -fPIC' MYLDFLAGS='${LDFLAGS}'"
-diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot_5.2.8.bb b/meta-oe/recipes-extended/gnuplot/gnuplot_5.2.8.bb
-index 926d8851d2..b2c41756e5 100644
---- a/meta-oe/recipes-extended/gnuplot/gnuplot_5.2.8.bb
-+++ b/meta-oe/recipes-extended/gnuplot/gnuplot_5.2.8.bb
-@@ -32,7 +32,7 @@ BBCLASSEXTEND = "native"
- DEPENDS_class-native = "readline-native"
- PACKAGECONFIG_class-native = ""
- 
--SRC_URI_append_class-native = "file://0001-reduce-build-to-conversion-tools-for-native-build.patch"
-+SRC_URI_append_class-native = " file://0001-reduce-build-to-conversion-tools-for-native-build.patch"
- 
- do_install_class-native() {
-     install -d ${D}${bindir}
-diff --git a/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb b/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb
-index a081cb17a8..27fe0e2c40 100644
---- a/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb
-+++ b/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb
-@@ -31,4 +31,4 @@ FILES_statgrab-dbg = "${bindir}/.debug/statgrab"
- FILES_saidar = "${bindir}/saidar"
- FILES_saidar-dbg = "${bindir}/.debug/saidar"
- FILES_${PN}-mrtg = "${bindir}/statgrab-make-mrtg-config ${bindir}/statgrab-make-mrtg-index"
--RDEPENDS_${PN}-mrtg_append = "perl statgrab"
-+RDEPENDS_${PN}-mrtg_append = " perl statgrab"
-diff --git a/meta-oe/recipes-support/anthy/anthy_9100h.bb b/meta-oe/recipes-support/anthy/anthy_9100h.bb
-index a65d324eae..b464c00003 100644
---- a/meta-oe/recipes-support/anthy/anthy_9100h.bb
-+++ b/meta-oe/recipes-support/anthy/anthy_9100h.bb
-@@ -10,8 +10,8 @@ SRC_URI = "http://osdn.dl.sourceforge.jp/anthy/37536/anthy-9100h.tar.gz \
-     file://2ch_t.patch \
- "
- 
--SRC_URI_append_class-target = "file://target-helpers.patch"
--SRC_URI_append_class-native = "file://native-helpers.patch"
-+SRC_URI_append_class-target = " file://target-helpers.patch"
-+SRC_URI_append_class-native = " file://native-helpers.patch"
- 
- SRC_URI[md5sum] = "1f558ff7ed296787b55bb1c6cf131108"
- SRC_URI[sha256sum] = "d256f075f018b4a3cb0d165ed6151fda4ba7db1621727e0eb54569b6e2275547"
+diff --git a/meta-python/recipes-devtools/python/python3-requests-unixsocket_0.3.0.bb b/meta-python/recipes-devtools/python/python3-requests-unixsocket_0.3.0.bb
+new file mode 100644
+index 000000000..330ab7c06
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-requests-unixsocket_0.3.0.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "Use requests to talk HTTP via a UNIX domain socket"
++HOMEPAGE = "https://pypi.org/project/requests-unixsocket/"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
++
++SRC_URI[sha256sum] = "28304283ea9357d45fff58ad5b11e47708cfbf5806817aa59b2a363228ee971e"
++
++PYPI_PACKAGE = "requests-unixsocket"
++
++inherit pypi
++inherit setuptools3
++
++DEPENDS += "python3-pbr-native"
++RDEPENDS_${PN} = "python3-requests python3-urllib3"
 -- 
-2.25.1
+2.37.1.559.g78731f0fdb-goog
 
 
