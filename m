@@ -2,74 +2,77 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9FFE8C25B06
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9FCDBC19F2C
 	for <webhook@archiver.kernel.org>; Tue,  2 Aug 2022 13:41:32 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.2])
- by mx.groups.io with SMTP id smtpd.web12.6143.1659447683799756882
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
+ [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web11.6293.1659447686510685602
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Aug 2022 06:41:24 -0700
+ Tue, 02 Aug 2022 06:41:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=XbBpiOzV;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.2,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=iFy0XE2p;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1659447682; i=@fujitsu.com;
-	bh=2p1wnt72w2eKl14eMpi1ntQR9E5JLOAwWzWwdcAVlzk=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=XbBpiOzV4NRdiHllof5tXQ/jCdQWMiGW+xXNgubNdOI2piQrFTvJJARcw+WAP0vng
-	 i7MsV0SlMnaeFfJqWjWB9rNWFsradP0huF+eF0QwO7pwQ/2E7967nfVtihZcLmquiD
-	 qrE5le57FtYVsainTfLad4Py4cIdE8FYh+hK+z1eBdky+YxbLmRORxOENjG1JSG8mE
-	 PTW7rehfHXxm0FGV2igty0zph/zPRTBLU9NfCk2MqAqkR3nYEH8aFY9fEBOFPT1Rh3
-	 NkSYQsaTFsZys97XqjD/klV1q6YIvkm8yiWFM7gIE8L7eZO66O8xhNIH2IAAxYFMpz
-	 0u/F3gHR1QVmA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrNIsWRWlGSWpSXmKPExsViZ8MxSbdR82W
-  Swb075hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8ayh49YC3oEKz60nmNpYJzA38XIxSEk8IRR
-  Yvb5i+wQznUmia1tj5ggnN2MEo1vLgFlODnYBNQkpt+6wQpiiwjoSyydvYcZxGYWUJF48bsHr
-  EZYwFZiZf8+sBoWoPjVdWvBbF4BJ4ndc7YxgdgSAgoSUx6+Z4aIC0qcnPmEBWKOhMTBFy+YIW
-  oUJWZfbmaBsCskZszYxgZhq0lcPbeJeQIj/ywk7bOQtC9gZFrFaJVUlJmeUZKbmJmja2hgoGt
-  oaKprbK5raKmXWKWbqJdaqlueWlyia6SXWF6sl1pcrFdcmZuck6KXl1qyiREYlinFqsI7GDtW
-  /tQ7xCjJwaQkyiun+DJJiC8pP6UyI7E4I76oNCe1+BCjDAeHkgTvLVWgnGBRanpqRVpmDjBGY
-  NISHDxKIrxnNYDSvMUFibnFmekQqVOMlhxTZ//bz8yxHEzO/Np2gFmIJS8/L1VKnHc5SIMASE
-  NGaR7cOFgcX2KUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzMsHMoUnM68EbusroIOYgA7S4Xo
-  BclBJIkJKqoFJLv6Q57SnPFrsDJGlNxvdqqwfsq74MmkLl/1D602sKvaJ+86kBv57Ez6jXPBn
-  2jU7xakbU+ak2GXGKL/oMpt9mPu6yon+7+cnHw3hDipdsEqh3KXhYsQehRfW99rXTJOKFDmtn
-  qeU7me/5lm7/pprTypb/rrqrUw52fN2r+1DFv+m9kteauEi6ZvrJiQlWDnM2qygEK2fd6r6rG
-  Sr2L91Gc94q8LPn/ph+N13wY2TCX1muZJmskocLJ+/73y6UvuMaa/blk0lM9sdZ7YtXWa0wz3
-  RliVnLcsqWa7YK+53I7f75KYckJ6R3r791yHtLpYcxm7fM352gXyPbBivnz5zmj/u87G6Z5Zb
-  S3Z7eCmxFGckGmoxFxUnAgDUOKw7XgMAAA==
+	s=170520fj; t=1659447685; i=@fujitsu.com;
+	bh=inba+O1iXt0nAEhLyf4VZKEwkIPw9yTSGeX8aiD6RBU=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=iFy0XE2pm1hsMilfg6ST9anXifBWzGPlWofY2RsEtUi1kHPvk3wIND6KAPLo67hnE
+	 NTqQNZKbIFiQJK2RRJ9e0eXg22NxnjuLhjBbS6oJcKZR0ffV6NYY0WmvQYGeqg1Kn0
+	 w67r1zk1fAfQkPlvLLxm1+95Y0wVFN6MEwtJxSiAuSeZKWOH5YIa8dXIGOg113fP6x
+	 ahDOm+IbQ9VjvC1s+i8sb27WmKmu9up/Pni/VD/eWgFSXT8gwZUsK5YkeCPD0oDMAp
+	 K4l5TNSAb06nIDXPDiuh6QKFeDWGzFT0bdSpergZYK2YSgaPKrIgup2H+49SMN/PPR
+	 JV86cAQxHK85w==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrNIsWRWlGSWpSXmKPExsViZ8OxWbdV82W
+  Swb0rkhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bUrd+ZC9q4K7qnvmduYLzF2cXIxSEk8JBR
+  4uyJbhYI5zKTxORf59ghnN2MEkv6TgA5nBxsAmoS02/dYAWxRQT0JZbO3sMMYjMLqEi8+N0DV
+  iMs4CxxZd4CFhCbBSi+cNkqJhCbV8BJov/DGzBbQkBBYsrD92C9nED1lyadYeti5ABa5iSxfX
+  0hRLmgxMmZT1ggxktIHHzxghmiVVFi9uVmFgi7QmLGjG1sELaaxNVzm5gnMArOQtI+C0n7Aka
+  mVYy2SUWZ6RkluYmZObqGBga6hoamQNpY19DESC+xSjdRL7VUNy+/qCRD11AvsbxYL7W4WK+4
+  Mjc5J0UvL7VkEyMwlFOK0/t2MG7c90vvEKMkB5OSKK+c4sskIb6k/JTKjMTijPii0pzU4kOMM
+  hwcShK8t1SBcoJFqempFWmZOcC4gklLcPAoifCe1QBK8xYXJOYWZ6ZDpE4x2nNcvXJlLzPH1N
+  n/9jNzLAeTM7+2HWAWYsnLz0uVEuddDtImANKWUZoHNxSWBi4xykoJ8zIyMDAI8RSkFuVmlqD
+  Kv2IU52BUEublA5nCk5lXArf7FdBZTEBn6XC9ADmrJBEhJdXAJBS04FLobsaJC5PMDMzYo9NU
+  +xPWv9TI3Cab8OtgxOf0r6tVvh6Y6mb4j3n52aZuZ+GzjY4Hqh4vbW7Z/CCJb8MRl2rx2UXd4
+  pN12Y4n/i1XDLP9m7Dzk4iTcsJ567/SPt8E/3z74yo6K3zRxTf/rF4HyXcoprbOmhT6Y+5dO0
+  /2GQtOGc5vmmsjviJQ7tIiQ5uJ6TsLWNiFDH2ll7x1meu69B7zj50mzyJSjb71ZvTniejkxtz
+  kO6D9N+rZ37Szh41eusznP/N/4/QpT2/4ndr6nF2Df/06kRPN582PzPbgcm3Wv2ynOLnH9Fh0
+  uvvU9q1N010eGXFYJnudKVy9aOeX/O+zeR5N6zOa8ph7mhJLcUaioRZzUXEiABK/GSp+AwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-14.tower-565.messagelabs.com!1659447681!314073!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-11.tower-732.messagelabs.com!1659447685!65344!1
+X-Originating-IP: [62.60.8.179]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 23515 invoked from network); 2 Aug 2022 13:41:21 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-14.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 2 Aug 2022 13:41:21 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 9BF8D1000EE
+Received: (qmail 25242 invoked from network); 2 Aug 2022 13:41:25 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-11.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 2 Aug 2022 13:41:25 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id CF22D152
 	for <openembedded-devel@lists.openembedded.org>;
- Tue,  2 Aug 2022 14:41:21 +0100 (BST)
+ Tue,  2 Aug 2022 14:41:24 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
  [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 8F0ED100077
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id C2A2475
 	for <openembedded-devel@lists.openembedded.org>;
- Tue,  2 Aug 2022 14:41:21 +0100 (BST)
+ Tue,  2 Aug 2022 14:41:24 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Tue, 2 Aug 2022 14:41:19 +0100
+ (TLS) id 15.0.1497.32; Tue, 2 Aug 2022 14:41:23 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] icewm: upgrade 2.9.7 -> 2.9.8
-Date: Tue, 2 Aug 2022 21:41:05 +0800
-Message-ID: <1659447669-24388-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] libwacom: upgrade 2.3.0 -> 2.4.0
+Date: Tue, 2 Aug 2022 21:41:07 +0800
+Message-ID: <1659447669-24388-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1659447669-24388-1-git-send-email-wangmy@fujitsu.com>
+References: <1659447669-24388-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -81,46 +84,42 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 02 Aug 2022 13:41:32 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98088
+ https://lists.openembedded.org/g/openembedded-devel/message/98090
 
 Changelog:
-=========
- Omit trailing dot in CPU temperature and add centigrade symbol for issue bbidulock/icewm#652.
- If there is no WM active, then a request to restart will start icewm.
- Don't create the ~/.icewm directory, unless required to save a file.
- When showing the desktop, also minimize a focused fullscreen window.
- Add support for COMPOUND_TEXT title names in WM_NAME strings for issue bbidulock/icewm#26.
- Limit window dimensions to 32732 pixels in the icesh command.
- Improve the truncation of titles for TaskBarTaskGrouping in issue bbidulock/icewm#658.
- Let TaskBarShowAllWindows influence TaskBarTaskGrouping for issue bbidulock/icewm#560.
- Update the TaskBarTaskGrouping menu, when tasks are added or removed.
- Restore the 2.5.0 container handling of button presses for issue bbidulock/icewm#649.
- Make the TaskBarGraphHeight preference themable for issue bbidulock/icewm#659.
- Clarify which preferences are themable in icewm-preferences(5).
- Update the translations for Macedonian and Swedish.
+==========
+  Update README.md
+  Add support for the Huion Inspiroy H1060P
+  Add support for Huion MiniDial KD100 (#470)
+  Add Chuwi MiniBook X (#508)
+  CI: upgrade FreeBSD to 13.1 (#507)
+  data: Add XP-Pen Deco L (#509)
+  Add support for XP-Pen Artist 12. (#505)
+  Revert "Add support for Huion MiniDial KD100 (#470)" (#504)
+  Remove leftover autogen.sh (#503)
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-extended/icewm/{icewm_2.9.7.bb => icewm_2.9.8.bb}   | 2 +-
+ .../libwacom/{libwacom_2.3.0.bb => libwacom_2.4.0.bb}           | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/icewm/{icewm_2.9.7.bb => icewm_2.9.8.bb} (94%)
+ rename meta-gnome/recipes-support/libwacom/{libwacom_2.3.0.bb => libwacom_2.4.0.bb} (93%)
 
-diff --git a/meta-oe/recipes-extended/icewm/icewm_2.9.7.bb b/meta-oe/recipes-extended/icewm/icewm_2.9.8.bb
-similarity index 94%
-rename from meta-oe/recipes-extended/icewm/icewm_2.9.7.bb
-rename to meta-oe/recipes-extended/icewm/icewm_2.9.8.bb
-index 00377bc1b8..2c7ede7725 100644
---- a/meta-oe/recipes-extended/icewm/icewm_2.9.7.bb
-+++ b/meta-oe/recipes-extended/icewm/icewm_2.9.8.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4a26952467ef79a7efca4a9cf52d417b"
- SRC_URI = "https://github.com/ice-wm/${BPN}/releases/download/${PV}/${BPN}-${PV}.tar.lz \
-            file://0001-configure.ac-skip-running-test-program-when-cross-co.patch \
-            "
--SRC_URI[sha256sum] = "c25f78e3f3ad49fbebc715691689d0ad1fda46b2e2537ad69e3332a54b81c72a"
-+SRC_URI[sha256sum] = "8d5d0f78a49c952f7f185d0f6713c6fabba597dcb713b1ac92e0e5795db29a25"
+diff --git a/meta-gnome/recipes-support/libwacom/libwacom_2.3.0.bb b/meta-gnome/recipes-support/libwacom/libwacom_2.4.0.bb
+similarity index 93%
+rename from meta-gnome/recipes-support/libwacom/libwacom_2.3.0.bb
+rename to meta-gnome/recipes-support/libwacom/libwacom_2.4.0.bb
+index 41d8c62424..d690df9229 100644
+--- a/meta-gnome/recipes-support/libwacom/libwacom_2.3.0.bb
++++ b/meta-gnome/recipes-support/libwacom/libwacom_2.4.0.bb
+@@ -8,7 +8,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=40a21fffb367c82f39fd91a3b137c36e"
  
- UPSTREAM_CHECK_URI = "https://github.com/ice-wm/${BPN}/releases"
+ SRC_URI = "git://github.com/linuxwacom/libwacom.git;branch=master;protocol=https"
+-SRCREV = "b88053851ef81694b9e3927e0857f0f02ff9a8a8"
++SRCREV = "9fd28747534ef776ffecc245721a4faa43bdd89b"
  
+ DEPENDS = " \
+     libxml2-native \
 -- 
 2.25.1
 
