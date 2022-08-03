@@ -1,95 +1,148 @@
-Return-Path: <brgl@bgdev.pl>
+Return-Path: <mingli.yu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 431EBC19F28
-	for <webhook@archiver.kernel.org>; Wed,  3 Aug 2022 08:34:42 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com
- [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.web08.6233.1659515677063924045
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56088C19F2C
+	for <webhook@archiver.kernel.org>; Wed,  3 Aug 2022 08:56:12 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com
+ [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web12.6371.1659516963767579465
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Aug 2022 01:34:37 -0700
+ Wed, 03 Aug 2022 01:56:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20210112.gappssmtp.com header.s=20210112
- header.b=be9II6Yl;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.46,
- mailfrom: brgl@bgdev.pl)
-Received: by mail-wm1-f46.google.com with SMTP id l19so1586464wms.1
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Aug 2022 01:34:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20210112.gappssmtp.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=FLXw7aJdOuAzKJFUH2EV+cDjh91jDidndZC9TNbedQo=;
-        b=be9II6Yl/OoWJLee67fMkCsBsr0zTrtjkwBtp3M9OTnZkUr0vXVyksejOzlxzwzD+Y
-         dmEz9YJGGMFEmNT2HjvXgHOX0sLVCjesuGv/lK3U7rnI30GacBwVI2P4QxYcmVlrxOHQ
-         9u3CZbrQGcbcu7BOajV76au5FpvBASqS3tVieQh6Wfm9g1UB6MiS7EzJhykmPzzOGn4J
-         ryVlYwwZr+swfSANar+u4VFVyHYur5ajJmYtc8lFU4ARZOyA2JtYBlI+OwMCXbEphf1M
-         AlO4I08nVqEx6I7FO+Gy9lSma7q1bcqt865L/M82UHUJ1P24iaGzESVRp/QKtrAhA88M
-         aiHw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=FLXw7aJdOuAzKJFUH2EV+cDjh91jDidndZC9TNbedQo=;
-        b=fxHGcqcB31Fu7BTJ5DXlJC+ErixFR4smfbfS5C5c77L5jMhiHMXU9ja6bVJddoSZux
-         7JJpAi+dWNg43b17BxnxZv2Egq3Iy2FensCVTK6B02ylJHKxwv4iSJMgeNHaSp/9ieT6
-         +5EsKBogGTsQjyEvIRkMesT9G0Kj4YeUVjy7GS71SKUFr72Pqmoux8yxK6T6UG5AWi53
-         s3UMWb5B8l8a4eNc7lDrRaxD2VSedXMRDpyQrpoeaotbjw7iTRpHngITuhDPdNJsvpUD
-         Z1pRTDmpmTpswCjPIRwbWQxVXqkMMWhAZjUOT0aphpRV5LqBU8117DWU7HRs+vvwicV7
-         z0Hg==
-X-Gm-Message-State: ACgBeo3LwsyOk+2wg/qMfQOSYrp3X5gSBvGuSk3zDeDx+gQ9RqvDrG4p
-	1Y5VqxWbvRU+GCVa/InnRzKEBg==
-X-Google-Smtp-Source: 
- AA6agR59Z22dgMuLn7+M31uPYhnrsrry+sMhZniC1VKPQSSyBbpJIxDA4W5EfLqJNGs7rmzAtglDug==
-X-Received: by 2002:a05:600c:3ac6:b0:3a3:4178:a9a8 with SMTP id
- d6-20020a05600c3ac600b003a34178a9a8mr2077124wms.22.1659515675414;
-        Wed, 03 Aug 2022 01:34:35 -0700 (PDT)
-Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:4a53:da6b:7724:118e])
-        by smtp.gmail.com with ESMTPSA id
- p15-20020a05600c1d8f00b003a046549a85sm1670754wms.37.2022.08.03.01.34.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 Aug 2022 01:34:34 -0700 (PDT)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>,
-	Armin Kuster <akuster808@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Cc: Bartosz Golaszewski <brgl@bgdev.pl>
-Subject: [meta-oe][PATCH] imagemagick: add PACKAGECONFIG for C++ bindings
-Date: Wed,  3 Aug 2022 10:34:32 +0200
-Message-Id: <20220803083432.14285-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=ChYaed+v;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
+ invalid domain name (domain: windriver.com, ip: 205.220.166.238,
+ mailfrom: prvs=52140db50b=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
+ 2737Tjd7021974
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 3 Aug 2022 01:56:03 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+ h=from : to :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=PPS06212021;
+ bh=n6G1C8celaandyqaiEozcpXghS0IUAto/P271FKViSo=;
+ b=ChYaed+vfXge/JpYNX7PFEcV2TUnVRkhmbHrK1gJVkZfvd7AzFRMh9siehLBAEzu3qGL
+ u+cZowKSvI4Aa1mdRkC0ShSymgcvBxWCPWApZN26Lou4OTobp1KsExMh1hpAhKSnC2tU
+ 444FxlmLCFLJG1IdY0wwK26wPhdfUmYQV5bBB0NhSBNp12ydy09PnMvvbg7jCJtaBibs
+ hTebHr+tLKxmhS00/DLuGswzhoBoMehukfJ/usgw+TAbSmAufnQl//yUuWyp+LkxQVX0
+ KX6ejertPaeG8904UbEPd5oM63bAK9b0DWLU4vtM0KeKKPWFkskFaZRIcBCC6lGYDH6y Qg==
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com
+ [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3hn45jtw8q-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 03 Aug 2022 01:56:03 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Wed, 3 Aug 2022 01:56:02 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Wed, 3 Aug 2022 01:56:01 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-networking][PATCH] freeradius: Fix buildpaths issue
+Date: Wed, 3 Aug 2022 16:56:01 +0800
+Message-ID: <20220803085601.4079856-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: TYw_MsQc4QWUi63S4yQfW4DBY9zJlsqO
+X-Proofpoint-ORIG-GUID: TYw_MsQc4QWUi63S4yQfW4DBY9zJlsqO
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
+ definitions=2022-08-03_03,2022-08-02_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 bulkscore=0
+ priorityscore=1501 malwarescore=0 impostorscore=0 mlxscore=0 spamscore=0
+ lowpriorityscore=0 suspectscore=0 clxscore=1015 mlxlogscore=999
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2206140000 definitions=main-2208030040
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 03 Aug 2022 08:34:42 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Aug 2022 08:56:12 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98109
+ https://lists.openembedded.org/g/openembedded-devel/message/98110
 
-Add a new PACKAGECONFIG switch for building C++ bindings for
-imagemagick.
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
+Fixes:
+  WARNING: freeradius-3.0.21-r0 do_package_qa: QA Issue: File /usr/bin/radeapclient in package freeradius-utils contains reference to TMPDIR [buildpaths]
+  WARNING: freeradius-3.0.21-r0 do_package_qa: QA Issue: File /usr/lib/libfreeradius-server.so.0.0.0 in package freeradius contains reference to TMPDIR [buildpaths]
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb | 1 +
- 1 file changed, 1 insertion(+)
+ ...01-version.c-don-t-print-build-flags.patch | 41 +++++++++++++++++++
+ .../freeradius/freeradius_3.0.21.bb           |  1 +
+ 2 files changed, 42 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0001-version.c-don-t-print-build-flags.patch
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-index b8167f5a7..010288b0d 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-@@ -24,6 +24,7 @@ EXTRA_OECONF = "--program-prefix= --program-suffix=.im7 --without-perl --disable
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/0001-version.c-don-t-print-build-flags.patch b/meta-networking/recipes-connectivity/freeradius/files/0001-version.c-don-t-print-build-flags.patch
+new file mode 100644
+index 000000000..697205efe
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/freeradius/files/0001-version.c-don-t-print-build-flags.patch
+@@ -0,0 +1,41 @@
++From cbc64dcf6aa2a1be63f45ea6dd7d2c49b70a0bee Mon Sep 17 00:00:00 2001
++From: Mingli Yu <mingli.yu@windriver.com>
++Date: Wed, 3 Aug 2022 16:44:29 +0800
++Subject: [PATCH] version.c: don't print build flags
++
++Don't print the build flags to avoid collecting the build environment info.
++
++Upstream-Status: Inappropriate [oe specific]
++
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++---
++ src/main/version.c | 13 -------------
++ 1 file changed, 13 deletions(-)
++
++diff --git a/src/main/version.c b/src/main/version.c
++index 62972d9f53..cf81de72c9 100644
++--- a/src/main/version.c
+++++ b/src/main/version.c
++@@ -589,19 +589,6 @@ void version_print(void)
++ 		DEBUG2("  unknown");
++ #endif
++ 
++-		DEBUG2("Compilation flags:");
++-#ifdef BUILT_WITH_CPPFLAGS
++-		DEBUG2("  cppflags : " BUILT_WITH_CPPFLAGS);
++-#endif
++-#ifdef BUILT_WITH_CFLAGS
++-		DEBUG2("  cflags   : " BUILT_WITH_CFLAGS);
++-#endif
++-#ifdef BUILT_WITH_LDFLAGS
++-		DEBUG2("  ldflags  : " BUILT_WITH_LDFLAGS);
++-#endif
++-#ifdef BUILT_WITH_LIBS
++-		DEBUG2("  libs     : " BUILT_WITH_LIBS);
++-#endif
++ 		DEBUG2("  ");
++ 	}
++ 	INFO("FreeRADIUS Version " RADIUSD_VERSION_STRING);
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
+index d6477e340..1407b798b 100644
+--- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
++++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
+@@ -32,6 +32,7 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0
+     file://radiusd.service \
+     file://radiusd-volatiles.conf \
+     file://check-openssl-cmds-in-script-bootstrap.patch \
++    file://0001-version.c-don-t-print-build-flags.patch \
+ "
  
- CACHED_CONFIGUREVARS = "ac_cv_sys_file_offset_bits=yes"
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
-+PACKAGECONFIG[cxx] = "--with-magick-plus-plus,--without-magick-plus-plus"
- PACKAGECONFIG[graphviz] = "--with-gvc,--without-gvc,graphviz"
- PACKAGECONFIG[jp2] = "--with-jp2,,jasper"
- PACKAGECONFIG[lzma] = "--with-lzma,--without-lzma,xz"
+ raddbdir="${sysconfdir}/${MLPREFIX}raddb"
 -- 
-2.34.1
+2.25.1
 
 
