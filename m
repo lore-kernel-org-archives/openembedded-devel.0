@@ -2,63 +2,65 @@ Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5250CC19F2D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 55286C3F6B0
 	for <webhook@archiver.kernel.org>; Wed,  3 Aug 2022 18:29:09 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com
- [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.web11.337.1659551343874829568
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com
+ [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.web08.362.1659551343027602442
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Aug 2022 11:29:04 -0700
+ Wed, 03 Aug 2022 11:29:03 -0700
 Authentication-Results: mx.groups.io;
  dkim=pass header.i=@bgdev-pl.20210112.gappssmtp.com header.s=20210112
- header.b=aRxMxLBP;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.46,
+ header.b=ASk4EmdZ;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.46,
  mailfrom: brgl@bgdev.pl)
-Received: by mail-wr1-f46.google.com with SMTP id bk11so12662070wrb.10
+Received: by mail-wm1-f46.google.com with SMTP id
+ p8-20020a05600c05c800b003a50311d75cso845824wmd.4
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Aug 2022 11:29:03 -0700 (PDT)
+ Wed, 03 Aug 2022 11:29:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=bgdev-pl.20210112.gappssmtp.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=GD/nhbGSSeFwvIHbicWPSgXDAeNAyj4G/Kh+XuEY6ks=;
-        b=aRxMxLBP85VAIiZgoOgS3Vd+Ij+BD5fmTItQ436rcRfoXiBRn8G4rGQODczSooPjki
-         MEmxB07OxyredyRNwWMrU1c4G8wPhGIPiiUF8MmRZxuWxm5DXKLbK81CUDlejOE4asbl
-         9pXmYKF7+xeZKyVVddyw7OVn9IUdy8XXQNyw0M1Wx6G5ZA8d+AzaDWkebmdHJDQhSb73
-         I+IpVuTIXmn3o1cjUpAj664d53pul9IC5L3tTweK3Ngk2l98TyWzyXm8Dvw0YVmjfRKl
-         7hBqEzr1V1yNl3qdZqxNmc7ViA2hUsSEta6blRGEurwK74T035BiBuRsZBTITdr2I8be
-         mMJg==
+        bh=Fr/Z3xgB37l/YddRSHd4u1GUFZlsXIedeX1VKQ9IEd8=;
+        b=ASk4EmdZCp/Qfzb5bX8y+cHeNl6XLqy3tLZDci+5iK9oEXBxejR4YHlNkj25El5cj0
+         uYoz5xGYiBRX4LYr5Qc71t9CobFAIVUvxDg4UpTPSv38yc8KdCI7H4RQvOHQiwMWNtJO
+         03GqM4aYcawHd/L+pXKC/Xeq9gREmTPVukFCZV/qG8sOtWko1jFLSZCK9qFYAY/BE2mJ
+         QKFcdvWpbflNsEP39s2fO+med4yZ3YzJXMccaCA2DVN/67trZIKwzuO/HbcJcZPeFcHL
+         O+1LR17QpB26RPeUyg/9TXoyk6pTFRnY6EW8MNw6QOOrmpY3xohjA3yIJLQobq21m9CC
+         MkRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=GD/nhbGSSeFwvIHbicWPSgXDAeNAyj4G/Kh+XuEY6ks=;
-        b=7VdD97G5VhQiPe5caLvLQUvYpdjsnjN2VwxYpBhb6oa3B7Q3BiwkWn/kg7LvatyM4Z
-         EoUy7C7m5RXKITAjuKOJipC/lLc8MVHlpvI6H1pRz6P08w95pRdsID6MCrmujjOl20OT
-         1zNLUnTpGcBv4jzpAWpvo3qjFkyy4OgJkV8PwFkTELKG3CsiLxcwVXmPiTuMH++Ugr7l
-         H0OXEQe4SdFvmmoILlDzvOs/BA/BwWQCev3QibSWnjknIYMY+B9g9CVajgUCruKQx787
-         lBlho3jfs1KjizIla0cMYVQ/irSGJps3o78UZXnfSbT3NXzsB4oTOfnwnNDZ2nuSdrfS
-         lC9A==
-X-Gm-Message-State: ACgBeo1IVHKCSMhT3H3SatGdpPvwrAjosrzfA0F9r5UBAYXMEj98RiRr
-	815QZgp03EJBYdA12vs/EVZoJw==
+        bh=Fr/Z3xgB37l/YddRSHd4u1GUFZlsXIedeX1VKQ9IEd8=;
+        b=6yis+lMhLGh8vM83ycRB8kgPzvHIbVQRlqQmF9ezJzWGVeZ6/hIrVzn09H6a/Yr+G0
+         FQCcgbNoGEHKDe2YvXh9rXKGYgkgtJG0sgO6ACL/UqlrA56l0PvEfEfPwHFzLS1T6k4N
+         tKmvReLlmEQ405roWJcZLZNePCXyGOBp8eYRhmO/Bk9bsY/BHWyH6utw/8fLmFgLI45O
+         GOjkY3hcFbmUbodGQvqzv21lB0X9hb0VaXAnE/joA1F/mGI+RTPvFZVcrIZu3J7v9ef5
+         ErVRIDnN8D/ud5XlsU3d29DHL6L796xMIRQf9jvDfu5H9HFfkmHE/Xo3ZlJkon4c76Gg
+         LjUw==
+X-Gm-Message-State: ACgBeo0LWxNPux51GwsBVEiEOkvsOQzCZuqc/0yU4+DLjzHo+ZKKEr3H
+	Oe+tzvGfLENUyOuK/H00/P3AwA==
 X-Google-Smtp-Source: 
- AA6agR5id/X3zjCqyfR1jchcABP/f7Ktaei1UAFYjuv1dKANemTqlWbfiPFW9SHPmtqkTHqtQVDeaQ==
-X-Received: by 2002:a5d:5986:0:b0:220:73d5:1f01 with SMTP id
- n6-20020a5d5986000000b0022073d51f01mr5275862wri.417.1659551342249;
-        Wed, 03 Aug 2022 11:29:02 -0700 (PDT)
+ AA6agR5ukgTILf9KOYcwQ8uLOkIAzRYbyw2XGhksPvSFeI5S7tz16PgJXhUIR8P8D7Rz/PFz267HGQ==
+X-Received: by 2002:a05:600c:2216:b0:3a4:a5bd:15a2 with SMTP id
+ z22-20020a05600c221600b003a4a5bd15a2mr3570511wml.126.1659551341394;
+        Wed, 03 Aug 2022 11:29:01 -0700 (PDT)
 Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:4a53:da6b:7724:118e])
         by smtp.gmail.com with ESMTPSA id
- x4-20020a5d4444000000b00220606afdf4sm2730280wrr.43.2022.08.03.11.29.01
+ x4-20020a5d4444000000b00220606afdf4sm2730280wrr.43.2022.08.03.11.29.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 Aug 2022 11:29:01 -0700 (PDT)
+        Wed, 03 Aug 2022 11:29:00 -0700 (PDT)
 From: Bartosz Golaszewski <brgl@bgdev.pl>
 To: Khem Raj <raj.khem@gmail.com>,
 	Bruce Ashfield <bruce.ashfield@gmail.com>,
 	openembedded-devel@lists.openembedded.org
 Cc: Bartosz Golaszewski <brgl@bgdev.pl>
-Subject: [meta-python][PATCH 3/3] python3-matplotlib: bump to 3.5.2
-Date: Wed,  3 Aug 2022 20:28:55 +0200
-Message-Id: <20220803182855.104135-3-brgl@bgdev.pl>
+Subject: [meta-python][PATCH 2/3] python3-matplotlib: add packaging to
+ RDEPENDS
+Date: Wed,  3 Aug 2022 20:28:54 +0200
+Message-Id: <20220803182855.104135-2-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220803182855.104135-1-brgl@bgdev.pl>
 References: <20220803182855.104135-1-brgl@bgdev.pl>
@@ -69,46 +71,28 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 03 Aug 2022 18:29:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98113
+ https://lists.openembedded.org/g/openembedded-devel/message/98112
 
-There's a bug in 3.5.1 that makes importing matplotlib impossible in
-some environments:
-
->>> import matplotlib
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-  File "/usr/lib/python3.10/site-packages/matplotlib/__init__.py", line 895, in <module>
-    defaultParams = rcsetup.defaultParams = {
-  File "/usr/lib/python3.10/site-packages/matplotlib/__init__.py", line 898, in <dictcomp>
-    rcParamsDefault[key]),
-  File "/usr/lib/python3.10/site-packages/matplotlib/__init__.py", line 674, in __getitem__
-    return dict.__getitem__(self, key)
-KeyError: 'webagg.port'
-
-This is fixed in 3.5.2.
+matplotlib needs python3-packaging at runtime. Add it to the package's
+RDEPENDS.
 
 Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
 ---
- ...{python3-matplotlib_3.5.1.bb => python3-matplotlib_3.5.2.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-matplotlib_3.5.1.bb => python3-matplotlib_3.5.2.bb} (96%)
+ meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.5.2.bb
-similarity index 96%
-rename from meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb
-rename to meta-python/recipes-devtools/python/python3-matplotlib_3.5.2.bb
-index e3e5d85eb..eaa144719 100644
+diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb
+index 7dfe46f3c..e3e5d85eb 100644
 --- a/meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.5.2.bb
-@@ -21,7 +21,7 @@ DEPENDS = "\
-     python3-certifi-native \
++++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.5.1.bb
+@@ -51,6 +51,7 @@ RDEPENDS:${PN} = "\
+     python3-kiwisolver \
+     python3-pytz \
+     python3-pillow \
++    python3-packaging \
  "
  
--SRC_URI[sha256sum] = "b2e9810e09c3a47b73ce9cab5a72243a1258f61e7900969097a817232246ce1c"
-+SRC_URI[sha256sum] = "48cf850ce14fa18067f2d9e0d646763681948487a8080ec0af2686468b4607a2"
- 
- inherit pypi setuptools3 pkgconfig
- 
+ ENABLELTO:toolchain-clang:riscv64 = "echo enable_lto = False >> ${S}/mplsetup.cfg"
 -- 
 2.34.1
 
