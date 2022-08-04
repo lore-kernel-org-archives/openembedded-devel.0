@@ -1,239 +1,214 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <bruce.ashfield@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D6443C19F2A
-	for <webhook@archiver.kernel.org>; Thu,  4 Aug 2022 15:35:05 +0000 (UTC)
-Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
- by mx.groups.io with SMTP id smtpd.web10.6276.1659627295674434421
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D64FC25B06
+	for <webhook@archiver.kernel.org>; Thu,  4 Aug 2022 22:50:55 +0000 (UTC)
+Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
+ [209.85.222.179])
+ by mx.groups.io with SMTP id smtpd.web08.625.1659653435974843279
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Aug 2022 08:34:56 -0700
+ Thu, 04 Aug 2022 15:50:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.18,
- mailfrom: f_l_k@t-online.de)
-Received: from fwd75.dcpf.telekom.de (fwd75.aul.t-online.de [10.223.144.101])
-	by mailout04.t-online.de (Postfix) with SMTP id 7E759373F
-	for <openembedded-devel@lists.openembedded.org>;
- Thu,  4 Aug 2022 17:34:53 +0200 (CEST)
-Received: from flk-MS-7C91.. ([84.163.47.58]) by fwd75.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1oJcs7-3opVYX0; Thu, 4 Aug 2022 17:34:51 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=QyJbU8TV;
+ spf=pass (domain: gmail.com, ip: 209.85.222.179,
+ mailfrom: bruce.ashfield@gmail.com)
+Received: by mail-qk1-f179.google.com with SMTP id v1so719261qkg.11
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 04 Aug 2022 15:50:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc;
+        bh=Vv3D6m8UrzLQTBjJEyk5JRjVUMk7/glMIW8hR4x9Zuk=;
+        b=QyJbU8TV4ZxaLhWXYoq6VHZ4wdyZZCBs58hDgtsi+gnmEX7igP4Y60HXvz5yERoPyD
+         g3e934m9D/LfPDxZWGxyTVzBrgfUEor+/A7VSYBnVkhClrZV+HiZHt/mF3GwH/gNHTwL
+         AvyeZSXrC4HTAK2N7SfaMnltPWUGFmPIjRx5SHIRYn/2D9JzRgCkgjY/GF0V4Z71RQZl
+         71FtT6RED7Ij79VFh7j/x6JtlkXXSo+12o2DmmaskGmvwO0ur8B3ZAMSatrbD3ETLFWT
+         1H5HeV6k2Nm4F0RZR5l6Zp5fjWFC6/nINSAexYLmGPWZxkf6q3JTj1MTVLZp5bg0yZ9h
+         x1xg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc;
+        bh=Vv3D6m8UrzLQTBjJEyk5JRjVUMk7/glMIW8hR4x9Zuk=;
+        b=ljN7tuH/Eriqc3SAqsC4HTyea2fN2Zn8EWRS4F0x5EJAJ7qcHb2oZYCLsWyvh7hX2F
+         KJHUkoDJ8P/Aywwf5MVe6C1sUiVFKpSk6R2lYw0njRmoQ2IY04YMkUbViurbE97FWNlX
+         nx28DVC2Dggma2lRH88pcVnIjt9a+fKKlsNYgQ+ycA+UsxX+36iYKakgHTQjYB7oQOJd
+         ++wBkxTKgN4zhd1tX9WlaiFT/OjLqBrVBJQiBKYKWg0BYDAmxNj4DNsk/xhlYJgEQpfa
+         6MZs+QlPguGdLDVXXzv8BdAOmsx2tqlnYuY/q8dlx4u2Rd6XEm3FgdMeZJzDWKV6A6Vz
+         GNWQ==
+X-Gm-Message-State: ACgBeo0OlwqisIN86Nr6hvKnd6eBm5nw7wPgYgIciJRHl4pR7HjsDiWn
+	h6Ly0UcBEmM5JcEGafB3BFRz63ZT2qexgw==
+X-Google-Smtp-Source: 
+ AA6agR7FG0fFOKmh0KFB23rmtrm+Yw6bNJ7FNTz6+jjRG7tiMsXSIiPvmWbmLtm4+8aZaVu0jDp+YQ==
+X-Received: by 2002:ae9:e901:0:b0:6b6:ad9:c9c1 with SMTP id
+ x1-20020ae9e901000000b006b60ad9c9c1mr3146553qkf.313.1659653434255;
+        Thu, 04 Aug 2022 15:50:34 -0700 (PDT)
+Received: from localhost.localdomain ([173.34.88.218])
+        by smtp.gmail.com with ESMTPSA id
+ j11-20020ac84c8b000000b0031ea4c4afa7sm1445710qtv.2.2022.08.04.15.50.33
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 04 Aug 2022 15:50:33 -0700 (PDT)
+From: bruce.ashfield@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-oe][PATCH] spdlog: update to v1.10.0
-Date: Thu,  4 Aug 2022 17:34:38 +0200
-Message-Id: <20220804153438.10517-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.34.1
+Subject: [PATCH][meta-oe] vboxguestdrivers: fix build against 5.19 kernel /
+ libc-headers
+Date: Thu,  4 Aug 2022 18:50:32 -0400
+Message-Id: <20220804225032.2548994-1-bruce.ashfield@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1659627291-01453B16-F9804C7D/0/0 CLEAN NORMAL
-X-TOI-MSGID: da2d26a0-aab3-46c8-ba23-81a3320632a6
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 04 Aug 2022 15:35:05 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 04 Aug 2022 22:50:55 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98132
+ https://lists.openembedded.org/g/openembedded-devel/message/98133
 
-Bump fmt to version 8.1.1.
-Added file event handlers #2165, #2169 Thanks @seker.
-You can get callbacks from spdlog before/after log file has been opened o=
-r closed.
-This is useful for cleanup procedures or for adding something to the star=
-t/end of the log files. Example:
-  void file_events_example()
-  {
-    // pass the spdlog::file_event_handlers to file sinks for open/close =
-log file notifications
-    spdlog::file_event_handlers handlers;
-    handlers.before_open =3D [](spdlog::filename_t filename) { spdlog::in=
-fo("Before opening {}", filename); };
-    handlers.after_open =3D [](spdlog::filename_t filename, std::FILE *fs=
-tream) { fputs("After opening\n", fstream); };
-    handlers.before_close =3D [](spdlog::filename_t filename, std::FILE *=
-fstream) { fputs("Before closing\n", fstream); };
-    handlers.after_close =3D [](spdlog::filename_t filename) { spdlog::in=
-fo("After closing {}", filename); };
-    auto my_logger =3D spdlog::basic_logger_st("some_logger", "logs/event=
-s-sample.txt", true, handlers);
-  }
-Fixed rotating file sink: when disk is full log rotation resulted zero si=
-ze log files. #2261. (thanks @kishorekrd for reporting).
-Added new udp_sink #2090. Thanks @CJLove
-(Experimental) Option to depend on std::format instead of fmtlib (set SPD=
-LOG_USE_STD_FORMAT and use C++20). #2170 Thanks @sylveon .
-Improved file name for hourly file sink #2047. Thanks @seker .
-Added code location information for error handler #2048. Thanks @D-r-P-3-=
-p-p-3-r .
-Fixed qt_sinks ctor #2056. Thanks @mguludag .
-List Debian instructions in the README #2057. Thanks @mr-c ,
-Updated to latest Travis CI Build Status #2094. Thanks @jspraul .
-Fixed unhandled errors in udp sink. #2096. Thanks @mmarkeloff .
-CMake improvement regarding cmake_minimum_required and policy. #2098. Tha=
-nks @reddwarf69 .
-Fixed mongo_sink compile in older gcc versions #2102 . Thanks @yzz-ihep .
-Remove mutable keyword from mutex_ member in of sinks. #2140 . Thanks @su=
-nlong169 .
-Fix typos #2171. Thanks @rex4539 .
-Fixed udp sink build on FreeBSD #2172. Thanks @keith-dev .
-Avoid c-style casting in stdout sinks. #2179. Thanks @ibmibmibm .
-Fixed tweakme.h compile error under msvcs when SPDLOG_FUNCTION is defined=
- #2182. Thanks @Light3039 .
-Fixed compiling errors on AIX #2181. Thanks @lisr .
-Fixed runtime when build with -fsanitize=3Dcfi #1972. Thanks @bansan85 .
-Remove extraneous semicolon #2190. Thanks @sylveon.
-Added example how to replace default logger. #2194. Thanks @rioki .
-Fixed usage of ranges and to_hex in the same compile unit #2195. Thanks @=
-patrickroocks .
-Reduce warnings with pedantic compiler -Wuseless-cast #2216. Thanks @vnep=
-ogodin .
-Support using std::span in to_hex #2228. Thanks @timblechmann .
-Reset current size if rotated files on open #2234. Thanks @SpriteOvO .
-Allow forward-declaration of level_enum #2245. Thanks @daverigby .
-Call localtime() only if pattern_formatter really needs it #2246. Thanks =
-@doug1234 .
-Removed unneeded spaces from code. #2249. Thanks @PixelParas .
-Added a few missing files/directories to the gitignore #2255. Thanks @Leo=
-nBrands .
-Fixed issue #2201 (Pattern width is not applied for missing source inform=
-ation). #2269. Thanks @kyuheon-kr .
-Limit max number of rotating files to 200000. (Fixed #1905). Thanks @surf=
-ycui (#2273)
-pattern_formatter: fix reorder-ctor warning #2278. Thanks @adriweb .
-Fixed spdlogConfig.cmake when built with SPDLOG_FMT_EXTERNAL_HO #2300. Th=
-anks @adamcalhoon .
-Fixed fopen_s(..) error handling when PREVENT_CHILD_FD is defined #2305. =
-Thanks @nUl1.
-Fixed compiler error when building on Windows with #define UNICODE #2317.=
- Thanks @risa2000 .
-Added option to enable formatting of systemd sink #2324, #2320. Thanks @D=
-elgan .
-Added optional "ident" argument to systemd sink constructor #2328. Thanks=
- @Delgan .
-Special thanks to @tt4g for his support in answering community questions =
-and issues.
+From: Bruce Ashfield <bruce.ashfield@gmail.com>
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+We've bounced back and forth with the mixed libc/kernel module structure of
+these drivers. In particular the location and content of stdarg.h has caused
+compile problems, or can't be located.
+
+In particular kernel versions have issues with stdarg.h and compatibility
+with the sysroot and libc-headers/uapi. If we include the file directly from
+the kernel source (STAGING_KERNEL_DIR) we get conflicting types on many
+structures, due to kernel .h files being found before libc .h files.  if we
+grab just this one file from the source, and put it into our file structure,
+everything holds together.
+
+Plus, we get to drop a patch we are carrying to change the include of
+stdarg.h
+
+Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
 ---
- ...1-Enable-use-of-external-fmt-library.patch | 68 -------------------
- .../{spdlog_1.9.2.bb =3D> spdlog_1.10.0.bb}     |  5 +-
- 2 files changed, 2 insertions(+), 71 deletions(-)
- delete mode 100644 meta-oe/recipes-support/spdlog/files/0001-Enable-use-=
-of-external-fmt-library.patch
- rename meta-oe/recipes-support/spdlog/{spdlog_1.9.2.bb =3D> spdlog_1.10.=
-0.bb} (82%)
 
-diff --git a/meta-oe/recipes-support/spdlog/files/0001-Enable-use-of-exte=
-rnal-fmt-library.patch b/meta-oe/recipes-support/spdlog/files/0001-Enable=
--use-of-external-fmt-library.patch
+Hi all,
+
+I ran into this same problem with working through the 5.19 kernel
+integration.
+
+The build of the vbox guest drivers is sufficiently mixed (versus
+say lttng-modules) that I just can't see a really clean way to
+pick up stdarg.h from the kernel source tree .. while picking up
+none of the other headers (chaos and madness ensues with redefined
+types, etc).
+
+I also can't justify picking stdarg.h out of the kernel source and
+putting it in the build artifacts, since that breaks our separation
+of source and outputs, and this is the only package that requires it.
+
+This is a middle ground approach that worked both against 5.19 and
+older kernels for me.
+
+Cheers,
+
+Bruce
+
+ ...ld-against-5.15-libc-headers-headers.patch | 62 -------------------
+ .../vboxguestdrivers_6.1.36.bb                |  9 ++-
+ 2 files changed, 8 insertions(+), 63 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-utils-fix-build-against-5.15-libc-headers-headers.patch
+
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-utils-fix-build-against-5.15-libc-headers-headers.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-utils-fix-build-against-5.15-libc-headers-headers.patch
 deleted file mode 100644
-index 98c342fec..000000000
---- a/meta-oe/recipes-support/spdlog/files/0001-Enable-use-of-external-fm=
-t-library.patch
+index 203eec6ee..000000000
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-utils-fix-build-against-5.15-libc-headers-headers.patch
 +++ /dev/null
-@@ -1,68 +0,0 @@
--Author: Nilesh Patra <npatra974@gmail.com>
--Description: Use external libfmt by default
--Last-Changed: Sun, May, 14 2020
--Forwarded: not-needed
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -87,7 +87,7 @@ option(SPDLOG_BUILD_WARNINGS "Enable com
--=20
-- # install options
-- option(SPDLOG_INSTALL "Generate the install target" ${SPDLOG_MASTER_PRO=
-JECT})
---option(SPDLOG_FMT_EXTERNAL "Use external fmt library instead of bundled=
-" OFF)
--+option(SPDLOG_FMT_EXTERNAL "Use external fmt library instead of bundled=
-" ON)
-- option(SPDLOG_FMT_EXTERNAL_HO "Use external fmt header-only library ins=
-tead of bundled" OFF)
-- option(SPDLOG_NO_EXCEPTIONS "Compile with -fno-exceptions. Call abort()=
- on any spdlog exceptions" OFF)
--=20
----- a/include/spdlog/tweakme.h
--+++ b/include/spdlog/tweakme.h
--@@ -71,7 +71,7 @@
-- // In this case spdlog will try to include <fmt/format.h> so set your -=
-I flag
-- // accordingly.
-- //
---// #define SPDLOG_FMT_EXTERNAL
--+#define SPDLOG_FMT_EXTERNAL 1
-- ///////////////////////////////////////////////////////////////////////=
-////////
--=20
-- ///////////////////////////////////////////////////////////////////////=
-////////
----- a/include/spdlog/fmt/bin_to_hex.h
--+++ b/include/spdlog/fmt/bin_to_hex.h
--@@ -5,6 +5,7 @@
--=20
-- #pragma once
--=20
--+#include <spdlog/tweakme.h>
-- #include <cctype>
-- #include <spdlog/common.h>
--=20
----- a/include/spdlog/fmt/fmt.h
--+++ b/include/spdlog/fmt/fmt.h
--@@ -4,7 +4,7 @@
-- //
--=20
-- #pragma once
---
--+#include <spdlog/tweakme.h>
-- //
-- // Include a bundled header-only copy of fmtlib or an external one.
-- // By default spdlog include its own copy.
----- a/include/spdlog/fmt/ostr.h
--+++ b/include/spdlog/fmt/ostr.h
--@@ -7,7 +7,7 @@
-- //
-- // include bundled or external copy of fmtlib's ostream support
-- //
---
--+#include <spdlog/tweakme.h>
-- #if !defined(SPDLOG_FMT_EXTERNAL)
-- #    ifdef SPDLOG_HEADER_ONLY
-- #        ifndef FMT_HEADER_ONLY
----- a/src/fmt.cpp
--+++ b/src/fmt.cpp
--@@ -6,6 +6,7 @@
-- #    error Please define SPDLOG_COMPILED_LIB to compile this file.
-- #endif
--=20
--+#include <spdlog/tweakme.h>
-- #if !defined(SPDLOG_FMT_EXTERNAL)
-- #    include <spdlog/fmt/bundled/format-inl.h>
--=20
-diff --git a/meta-oe/recipes-support/spdlog/spdlog_1.9.2.bb b/meta-oe/rec=
-ipes-support/spdlog/spdlog_1.10.0.bb
-similarity index 82%
-rename from meta-oe/recipes-support/spdlog/spdlog_1.9.2.bb
-rename to meta-oe/recipes-support/spdlog/spdlog_1.10.0.bb
-index d377241ad..d36cfcb84 100644
---- a/meta-oe/recipes-support/spdlog/spdlog_1.9.2.bb
-+++ b/meta-oe/recipes-support/spdlog/spdlog_1.10.0.bb
-@@ -3,9 +3,8 @@ HOMEPAGE =3D "https://github.com/gabime/spdlog/wiki"
- LICENSE =3D "MIT"
- LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/files/common-licenses/MIT;=
-md5=3D0835ade698e0bcf8506ecda2f7b4f302"
-=20
--SRCREV =3D "eb3220622e73a4889eee355ffa37972b3cac3df5"
--SRC_URI =3D "git://github.com/gabime/spdlog.git;protocol=3Dhttps;branch=3D=
-v1.x; \
--           file://0001-Enable-use-of-external-fmt-library.patch"
-+SRCREV =3D "76fb40d95455f249bd70824ecfcae7a8f0930fa3"
-+SRC_URI =3D "git://github.com/gabime/spdlog.git;protocol=3Dhttps;branch=3D=
-v1.x"
-=20
- DEPENDS +=3D "fmt"
-=20
---=20
-2.34.1
+@@ -1,62 +0,0 @@
+-From 7213a5bfa3bd9f360d6be01e6dbd59d91095a0fd Mon Sep 17 00:00:00 2001
+-From: Bruce Ashfield <bruce.ashfield@gmail.com>
+-Date: Thu, 4 Nov 2021 14:53:46 -0400
+-Subject: [PATCH] utils: fix build against 5.15 libc-headers headers
+-
+-In kernel v5.15+ stdarg.h is part of the kernel source, and the
+-upstream project has a change to prefer that stdarg.h to the
+-c-library variant and hence includes it as <linux/stdarg.h>, which
+-leads to the following build error:
+-
+-   | In file included from ../vboxsf/include/iprt/types.h:34,
+-   |                  from ../vboxsf/include/iprt/string.h:33,
+-   |                  from mount.vboxsf.c:53:
+-   | ../vboxsf/include/iprt/stdarg.h:49:13: fatal error: linux/stdarg.h: No such file or directory
+-   |    49 | #   include <linux/stdarg.h>
+-   |       |             ^~~~~~~~~~~~~~~~
+-
+-If we modify our build of the vboxdrivers to have the kernel source
+-directory on the include path (to find linux/stdarg.h, that leads
+-to the following errors:
+-
+-   In file included from build/tmp/work/qemux86_64-poky-linux/vboxguestdrivers/6.1.28-r0/recipe-sysroot/usr/include/stdlib.h:394,
+-   |                  from mount.vboxsf.c:36:
+-   | build/tmp/work/qemux86_64-poky-linux/vboxguestdrivers/6.1.28-r0/recipe-sysroot/usr/include/sys/types.h:192:20: note: previous declaration of 'blkcnt_t' with type 'blkcnt_t' {aka 'long int'}
+-   |   192 | typedef __blkcnt_t blkcnt_t;     /* Type to count number of disk blocks.  */
+-   |       |                    ^~~~~~~~
+-   | In file included from build/tmp/work-shared/qemux86-64/kernel-source/include/linux/time.h:5,
+-   |                  from poky/build/tmp/work-shared/qemux86-64/kernel-source/include/linux/stat.h:19,
+-   |                  from build/tmp/work/qemux86_64-poky-linux/vboxguestdrivers/6.1.28-r0/recipe-sysroot/usr/include/bits/statx.h:31,
+-
+-Our libc-headers are safe and don't lead to the potential conflicing
+-information that the upstream commit is guarding against. The easiest
+-solution is to revert the upstream change and trust our headers.
+-
+-Upstream-Status: Inappropriate [OE specific]
+-
+-Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
+----
+- vboxsf/include/iprt/stdarg.h | 7 +------
+- 1 file changed, 1 insertion(+), 6 deletions(-)
+-
+-diff --git a/include/iprt/stdarg.h b/include/iprt/stdarg.h
+-index c73093c..7bffde5 100644
+---- a/include/iprt/stdarg.h
+-+++ b/include/iprt/stdarg.h
+-@@ -44,12 +44,7 @@
+- #   define __builtin_stdarg_start __builtin_va_start
+- #  endif
+- # elif defined(RT_OS_LINUX) && defined(IN_RING0)
+--#  include "linux/version.h"
+--#  if RTLNX_VER_MIN(5,15,0) || RTLNX_RHEL_MAJ_PREREQ(9,1)
+--#   include <linux/stdarg.h>
+--#  else
+--#   include <stdarg.h>
+--#  endif
+-+#  include <stdarg.h>
+- # else
+- #  include <stdarg.h>
+- # endif
+--- 
+-2.19.1
+-
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.36.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.36.bb
+index 37dd0224d..06dc8a4c8 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.36.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.36.bb
+@@ -13,7 +13,6 @@ VBOX_NAME = "VirtualBox-${PV}"
+ 
+ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
+     file://Makefile.utils \
+-    file://0001-utils-fix-build-against-5.15-libc-headers-headers.patch \
+ "
+ 
+ SRC_URI[sha256sum] = "e47942e42892c13c621869865e2b7b320340154f0fa74ecbdaf18fdaf70ef047"
+@@ -42,6 +41,14 @@ do_export_sources() {
+     install ${WORKDIR}/${VBOX_NAME}/src/VBox/Additions/linux/sharedfolders/vbsfmount.c ${S}/utils
+     install ${S}/../Makefile.utils ${S}/utils/Makefile
+ 
++    # some kernel versions have issues with stdarg.h and compatibility with
++    # the sysroot and libc-headers/uapi. If we include the file directly from
++    # the kernel source (STAGING_KERNEL_DIR) we get conflicting types on many
++    # structures, due to kernel .h files being found before libc .h files.
++    # if we grab just this one file from the source, and put it into our
++    # file structure, everything holds together
++    mkdir -p ${S}/vboxsf/include/linux
++    install ${STAGING_KERNEL_DIR}/include/linux/stdarg.h  ${S}/vboxsf/include/linux
+ }
+ 
+ do_configure:prepend() {
+-- 
+2.25.1
 
 
