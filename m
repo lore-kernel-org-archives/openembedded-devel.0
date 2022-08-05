@@ -1,213 +1,104 @@
-Return-Path: <bruce.ashfield@gmail.com>
+Return-Path: <mingli.yu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D64FC25B06
-	for <webhook@archiver.kernel.org>; Thu,  4 Aug 2022 22:50:55 +0000 (UTC)
-Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
- [209.85.222.179])
- by mx.groups.io with SMTP id smtpd.web08.625.1659653435974843279
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 501A8C00140
+	for <webhook@archiver.kernel.org>; Fri,  5 Aug 2022 08:33:49 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com
+ [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web08.4633.1659688427299835291
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Aug 2022 15:50:36 -0700
+ Fri, 05 Aug 2022 01:33:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=QyJbU8TV;
- spf=pass (domain: gmail.com, ip: 209.85.222.179,
- mailfrom: bruce.ashfield@gmail.com)
-Received: by mail-qk1-f179.google.com with SMTP id v1so719261qkg.11
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Aug 2022 15:50:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc;
-        bh=Vv3D6m8UrzLQTBjJEyk5JRjVUMk7/glMIW8hR4x9Zuk=;
-        b=QyJbU8TV4ZxaLhWXYoq6VHZ4wdyZZCBs58hDgtsi+gnmEX7igP4Y60HXvz5yERoPyD
-         g3e934m9D/LfPDxZWGxyTVzBrgfUEor+/A7VSYBnVkhClrZV+HiZHt/mF3GwH/gNHTwL
-         AvyeZSXrC4HTAK2N7SfaMnltPWUGFmPIjRx5SHIRYn/2D9JzRgCkgjY/GF0V4Z71RQZl
-         71FtT6RED7Ij79VFh7j/x6JtlkXXSo+12o2DmmaskGmvwO0ur8B3ZAMSatrbD3ETLFWT
-         1H5HeV6k2Nm4F0RZR5l6Zp5fjWFC6/nINSAexYLmGPWZxkf6q3JTj1MTVLZp5bg0yZ9h
-         x1xg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc;
-        bh=Vv3D6m8UrzLQTBjJEyk5JRjVUMk7/glMIW8hR4x9Zuk=;
-        b=ljN7tuH/Eriqc3SAqsC4HTyea2fN2Zn8EWRS4F0x5EJAJ7qcHb2oZYCLsWyvh7hX2F
-         KJHUkoDJ8P/Aywwf5MVe6C1sUiVFKpSk6R2lYw0njRmoQ2IY04YMkUbViurbE97FWNlX
-         nx28DVC2Dggma2lRH88pcVnIjt9a+fKKlsNYgQ+ycA+UsxX+36iYKakgHTQjYB7oQOJd
-         ++wBkxTKgN4zhd1tX9WlaiFT/OjLqBrVBJQiBKYKWg0BYDAmxNj4DNsk/xhlYJgEQpfa
-         6MZs+QlPguGdLDVXXzv8BdAOmsx2tqlnYuY/q8dlx4u2Rd6XEm3FgdMeZJzDWKV6A6Vz
-         GNWQ==
-X-Gm-Message-State: ACgBeo0OlwqisIN86Nr6hvKnd6eBm5nw7wPgYgIciJRHl4pR7HjsDiWn
-	h6Ly0UcBEmM5JcEGafB3BFRz63ZT2qexgw==
-X-Google-Smtp-Source: 
- AA6agR7FG0fFOKmh0KFB23rmtrm+Yw6bNJ7FNTz6+jjRG7tiMsXSIiPvmWbmLtm4+8aZaVu0jDp+YQ==
-X-Received: by 2002:ae9:e901:0:b0:6b6:ad9:c9c1 with SMTP id
- x1-20020ae9e901000000b006b60ad9c9c1mr3146553qkf.313.1659653434255;
-        Thu, 04 Aug 2022 15:50:34 -0700 (PDT)
-Received: from localhost.localdomain ([173.34.88.218])
-        by smtp.gmail.com with ESMTPSA id
- j11-20020ac84c8b000000b0031ea4c4afa7sm1445710qtv.2.2022.08.04.15.50.33
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 04 Aug 2022 15:50:33 -0700 (PDT)
-From: bruce.ashfield@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH][meta-oe] vboxguestdrivers: fix build against 5.19 kernel /
- libc-headers
-Date: Thu,  4 Aug 2022 18:50:32 -0400
-Message-Id: <20220804225032.2548994-1-bruce.ashfield@gmail.com>
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=eXki/YO5;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
+ invalid domain name (domain: windriver.com, ip: 205.220.178.238,
+ mailfrom: prvs=52163d968b=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
+ 2757x2b3031638
+	for <openembedded-devel@lists.openembedded.org>; Fri, 5 Aug 2022 08:33:45 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+ h=from : to :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=PPS06212021;
+ bh=y/jzTD83hOGS1+eqDhddSeesZIubVOvstWVdRke6bsw=;
+ b=eXki/YO5FW1+sna29Swvpr/egRAEeLTZnumFBYPLYD82FyEMMfm/N7pNx/2mtfBLCqWd
+ Njx4gnMJj5JVeOnh/QztbMKBjUu2s2QHCH6jNgxwxwbbQkFDhfyqBMW0OfFVCVbW9ZOf
+ bOVKJ1R0mSS7rZ2W2c/Ufr9wBwTsiJyzZAWH17eYxouJSOpyNMsSGS15CCzSyLaTC+pn
+ RbBC/w8tCVvddnRAgLA+5715FFnmRmFlknmv6HLPpCxwcdja7qM0xCR3egnbiuqEMTwa
+ eOzxrQR002x1LzuwUzvHI1ScwnkqgCtrU+1WCJbXIVENv5OvZ2yiHNofA/kP0MshaFs5 Og==
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com
+ [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3hr400969n-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri, 05 Aug 2022 08:33:45 +0000
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Fri, 5 Aug 2022 01:33:43 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Fri, 5 Aug 2022 01:33:43 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-networking][PATCH] frr: fix buildpaths issue
+Date: Fri, 5 Aug 2022 16:33:42 +0800
+Message-ID: <20220805083342.726297-1-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: 4-wVSiadav4rYVLZaOSg_05R_xr09vTM
+X-Proofpoint-ORIG-GUID: 4-wVSiadav4rYVLZaOSg_05R_xr09vTM
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
+ definitions=2022-08-05_03,2022-08-04_02,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0
+ suspectscore=0 mlxscore=0 bulkscore=0 adultscore=0 mlxlogscore=707
+ clxscore=1015 priorityscore=1501 lowpriorityscore=0 spamscore=0
+ malwarescore=0 phishscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.12.0-2206140000 definitions=main-2208050042
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 04 Aug 2022 22:50:55 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 05 Aug 2022 08:33:49 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98133
+ https://lists.openembedded.org/g/openembedded-devel/message/98134
 
-From: Bruce Ashfield <bruce.ashfield@gmail.com>
+From: Mingli Yu <mingli.yu@windriver.com>
 
-We've bounced back and forth with the mixed libc/kernel module structure of
-these drivers. In particular the location and content of stdarg.h has caused
-compile problems, or can't be located.
+Fixes:
+  WARNING: frr-8.2.2-r0 do_package_qa: QA Issue: File /usr/lib/libfrr.a in package frr-staticdev contains reference to TMPDIR [buildpaths]
+  WARNING: frr-8.2.2-r0 do_package_qa: QA Issue: File /usr/src/debug/frr/8.2.2-r0/git/lib/version.h in package frr-src contains reference to TMPDIR [buildpaths]
+  WARNING: frr-8.2.2-r0 do_package_qa: QA Issue: File /usr/include/frr/version.h in package frr-dev contains reference to TMPDIR [buildpaths]
+  WARNING: frr-8.2.2-r0 do_package_qa: QA Issue: File /usr/bin/vtysh in package frr contains reference to TMPDIR
+  File /usr/lib/libfrr.so.0.0.0 in package frr contains reference to TMPDIR [buildpaths]
 
-In particular kernel versions have issues with stdarg.h and compatibility
-with the sysroot and libc-headers/uapi. If we include the file directly from
-the kernel source (STAGING_KERNEL_DIR) we get conflicting types on many
-structures, due to kernel .h files being found before libc .h files.  if we
-grab just this one file from the source, and put it into our file structure,
-everything holds together.
-
-Plus, we get to drop a patch we are carrying to change the include of
-stdarg.h
-
-Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
+ meta-networking/recipes-protocols/frr/frr_8.2.2.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-Hi all,
-
-I ran into this same problem with working through the 5.19 kernel
-integration.
-
-The build of the vbox guest drivers is sufficiently mixed (versus
-say lttng-modules) that I just can't see a really clean way to
-pick up stdarg.h from the kernel source tree .. while picking up
-none of the other headers (chaos and madness ensues with redefined
-types, etc).
-
-I also can't justify picking stdarg.h out of the kernel source and
-putting it in the build artifacts, since that breaks our separation
-of source and outputs, and this is the only package that requires it.
-
-This is a middle ground approach that worked both against 5.19 and
-older kernels for me.
-
-Cheers,
-
-Bruce
-
- ...ld-against-5.15-libc-headers-headers.patch | 62 -------------------
- .../vboxguestdrivers_6.1.36.bb                |  9 ++-
- 2 files changed, 8 insertions(+), 63 deletions(-)
- delete mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-utils-fix-build-against-5.15-libc-headers-headers.patch
-
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-utils-fix-build-against-5.15-libc-headers-headers.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-utils-fix-build-against-5.15-libc-headers-headers.patch
-deleted file mode 100644
-index 203eec6ee..000000000
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-utils-fix-build-against-5.15-libc-headers-headers.patch
-+++ /dev/null
-@@ -1,62 +0,0 @@
--From 7213a5bfa3bd9f360d6be01e6dbd59d91095a0fd Mon Sep 17 00:00:00 2001
--From: Bruce Ashfield <bruce.ashfield@gmail.com>
--Date: Thu, 4 Nov 2021 14:53:46 -0400
--Subject: [PATCH] utils: fix build against 5.15 libc-headers headers
--
--In kernel v5.15+ stdarg.h is part of the kernel source, and the
--upstream project has a change to prefer that stdarg.h to the
--c-library variant and hence includes it as <linux/stdarg.h>, which
--leads to the following build error:
--
--   | In file included from ../vboxsf/include/iprt/types.h:34,
--   |                  from ../vboxsf/include/iprt/string.h:33,
--   |                  from mount.vboxsf.c:53:
--   | ../vboxsf/include/iprt/stdarg.h:49:13: fatal error: linux/stdarg.h: No such file or directory
--   |    49 | #   include <linux/stdarg.h>
--   |       |             ^~~~~~~~~~~~~~~~
--
--If we modify our build of the vboxdrivers to have the kernel source
--directory on the include path (to find linux/stdarg.h, that leads
--to the following errors:
--
--   In file included from build/tmp/work/qemux86_64-poky-linux/vboxguestdrivers/6.1.28-r0/recipe-sysroot/usr/include/stdlib.h:394,
--   |                  from mount.vboxsf.c:36:
--   | build/tmp/work/qemux86_64-poky-linux/vboxguestdrivers/6.1.28-r0/recipe-sysroot/usr/include/sys/types.h:192:20: note: previous declaration of 'blkcnt_t' with type 'blkcnt_t' {aka 'long int'}
--   |   192 | typedef __blkcnt_t blkcnt_t;     /* Type to count number of disk blocks.  */
--   |       |                    ^~~~~~~~
--   | In file included from build/tmp/work-shared/qemux86-64/kernel-source/include/linux/time.h:5,
--   |                  from poky/build/tmp/work-shared/qemux86-64/kernel-source/include/linux/stat.h:19,
--   |                  from build/tmp/work/qemux86_64-poky-linux/vboxguestdrivers/6.1.28-r0/recipe-sysroot/usr/include/bits/statx.h:31,
--
--Our libc-headers are safe and don't lead to the potential conflicing
--information that the upstream commit is guarding against. The easiest
--solution is to revert the upstream change and trust our headers.
--
--Upstream-Status: Inappropriate [OE specific]
--
--Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
-----
-- vboxsf/include/iprt/stdarg.h | 7 +------
-- 1 file changed, 1 insertion(+), 6 deletions(-)
--
--diff --git a/include/iprt/stdarg.h b/include/iprt/stdarg.h
--index c73093c..7bffde5 100644
----- a/include/iprt/stdarg.h
--+++ b/include/iprt/stdarg.h
--@@ -44,12 +44,7 @@
-- #   define __builtin_stdarg_start __builtin_va_start
-- #  endif
-- # elif defined(RT_OS_LINUX) && defined(IN_RING0)
---#  include "linux/version.h"
---#  if RTLNX_VER_MIN(5,15,0) || RTLNX_RHEL_MAJ_PREREQ(9,1)
---#   include <linux/stdarg.h>
---#  else
---#   include <stdarg.h>
---#  endif
--+#  include <stdarg.h>
-- # else
-- #  include <stdarg.h>
-- # endif
---- 
--2.19.1
--
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.36.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.36.bb
-index 37dd0224d..06dc8a4c8 100644
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.36.bb
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.36.bb
-@@ -13,7 +13,6 @@ VBOX_NAME = "VirtualBox-${PV}"
+diff --git a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
+index 05195a3f6..f0d0dbf7c 100644
+--- a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
++++ b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
+@@ -73,6 +73,11 @@ SYSTEMD_PACKAGES = "${PN}"
+ SYSTEMD_SERVICE:${PN} = "frr.service"
+ SYSTEMD_AUTO_ENABLE = "disable"
  
- SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
-     file://Makefile.utils \
--    file://0001-utils-fix-build-against-5.15-libc-headers-headers.patch \
- "
- 
- SRC_URI[sha256sum] = "e47942e42892c13c621869865e2b7b320340154f0fa74ecbdaf18fdaf70ef047"
-@@ -42,6 +41,14 @@ do_export_sources() {
-     install ${WORKDIR}/${VBOX_NAME}/src/VBox/Additions/linux/sharedfolders/vbsfmount.c ${S}/utils
-     install ${S}/../Makefile.utils ${S}/utils/Makefile
- 
-+    # some kernel versions have issues with stdarg.h and compatibility with
-+    # the sysroot and libc-headers/uapi. If we include the file directly from
-+    # the kernel source (STAGING_KERNEL_DIR) we get conflicting types on many
-+    # structures, due to kernel .h files being found before libc .h files.
-+    # if we grab just this one file from the source, and put it into our
-+    # file structure, everything holds together
-+    mkdir -p ${S}/vboxsf/include/linux
-+    install ${STAGING_KERNEL_DIR}/include/linux/stdarg.h  ${S}/vboxsf/include/linux
++do_compile:prepend () {
++   sed -i -e 's#${RECIPE_SYSROOT_NATIVE}##g' \
++          -e 's#${RECIPE_SYSROOT}##g' ${S}/lib/version.h
++}
++
+ do_compile:class-native () {
+     oe_runmake clippy-only
  }
- 
- do_configure:prepend() {
 -- 
 2.25.1
 
