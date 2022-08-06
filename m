@@ -1,106 +1,139 @@
-Return-Path: <jbroadus@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 295A6C25B06
-	for <webhook@archiver.kernel.org>; Sat,  6 Aug 2022 07:41:23 +0000 (UTC)
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
- [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.web11.1163.1659771682177049171
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 54F31C19F2D
+	for <webhook@archiver.kernel.org>; Sat,  6 Aug 2022 15:40:35 +0000 (UTC)
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com
+ [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web09.4360.1659800426937493918
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Aug 2022 00:41:22 -0700
+ Sat, 06 Aug 2022 08:40:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=aeBegIcl;
- spf=pass (domain: gmail.com, ip: 209.85.210.174,
- mailfrom: jbroadus@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id z187so4005995pfb.12
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=bo1CwuqM;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id u133so4646110pfc.10
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Aug 2022 00:41:22 -0700 (PDT)
+ Sat, 06 Aug 2022 08:40:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc;
-        bh=TmVczL2FjO0QCOPxMsD7EGwp2hEgO3WCN1EizrpGgxk=;
-        b=aeBegIcl9EfVo2LCvEBGy2aG4n/xRtyxF+YuVc/PZnbgkiL8ILHHRg0+/0f6yEbE/H
-         0t0OFKWQn6udWD8U4KYZV3A8K/wRFbkSSRBPpCM5k1ZWxqq//Ir0WwGBrKK6to6nTS5J
-         iREfpWkqgVi1FEUG6pSVtct4hIOZkK/3GYYkKgmygZYwAoTDVV22InCs2LZQhqY+/5v+
-         2xm/hy0lA0S5wCaLnIUoG6ZfCdU02DhQCIputjdTg04Uf+TXwg/M1xXySoViGz8EEk9f
-         HOG/qF54lt4fJSXhtwVEcZFbft7zo6Gn3wlQyQmwdz6klnXlTLCfdp+EfHr5KHIllMKl
-         6dCQ==
+        h=content-transfer-encoding:in-reply-to:organization:from:references
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc;
+        bh=aYRRujlWZkVNfhQ8uhx2nhGxoeFtpM9f8jBHwaNOq94=;
+        b=bo1CwuqMO+HewtXh9ZrzeREncASjslJrKEXoxQtPgZcgp2xZrWLY7e8taGjYDqjS/o
+         6IZymzsW41UvQK/98FY3Vh9H0iyfbIt9vEPTj/2cBcytX+nmOgqdtDd9CzMhIqXPF4th
+         0QmSseNhcJoDMKlR9tZ1vGPK92zB5J8VGDmfHRdHOhIS+p/6aqLyP7XjvGi9chISyeud
+         acz7/RZP/9oSTxunSNWAEfJXFKLPqIOcLQK2UkazIZO2E13mKR/18hUt6M4FJNXSkvrM
+         5BzswA7vbfYLMDtAYuTrF+TtNCAgPNX3PkA4sToD8EGldw11gXMOMRz77MQtxvsmedru
+         kTEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc;
-        bh=TmVczL2FjO0QCOPxMsD7EGwp2hEgO3WCN1EizrpGgxk=;
-        b=ixPwPMkc6f70+HX5v3A4RMpX43ygyH1PhW9/QIsvv21rS860juCUVGojMf50gdh9ZL
-         oD48mD2VgYXvA80X3Ot5FbXIFKZPfp3jHC0qKPW3CKY9jzRHwveDnJD5gPXQ5DCnyuhV
-         Q95mUOLaI91e2vKXqfYH7fABCZPpHXJCPsB2LjolpMMNLRedkzGR74fzrr3zYydB+idJ
-         iR//+6+AsBPYHVa4N5s+jBbVbyWO/+747GZvvMAeJXPy18wGFOPSvHBAiqfkJvB5InOI
-         xfErXnFWgSxN7IDOycrX1eiH05PEA7jtF3pYgmKW/3V33BnQgk5WYKeLd+6RnMuxCUFF
-         1GTA==
-X-Gm-Message-State: ACgBeo2NX1NDANRBgW3Aab586gWaPGuwshxz8/Hy2UHJoMOmJEgy2KIe
-	4DP9XJ+tweix2+YnqBtWsaEfc1wkERTfRg==
+        h=content-transfer-encoding:in-reply-to:organization:from:references
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc;
+        bh=aYRRujlWZkVNfhQ8uhx2nhGxoeFtpM9f8jBHwaNOq94=;
+        b=Ec1YZB+yxgZB8AARKv7RxwDSU70gvMjj5x/9+qHJPDAPjcIMx+t8cQMS40DoFyowlI
+         SWn/KPy70fHPBi4anou4Bgw4oezs8XhvJPlJPqb/MSEUdLXLT37r2sV4VduUtT/zdrbr
+         ckemqVB1o46VlZYhibHxMSwXgzNOKEVNDZ32oGNnHbJv5U/dSPNotc/2546Dt/zga07E
+         QaDvUJ8G9yqA5A0Mw4NbF+CcHMjVEHvbEjzjZqOpaPTSyJAjZRBtWeaFxeDU6P0rAUZa
+         VNL7sHqYgHi2uKRU7cpt1OAjFb0iNNux5AvcbEn0PIx3F5p/cvOaqtGOh14VRMPcNU0U
+         VekQ==
+X-Gm-Message-State: ACgBeo2k3hWEQkufM3C7+vxul3J0O47vncPgg5IcddJsJPATwuQgBJJq
+	hq0JZS58eP53hOfzjazVjyE=
 X-Google-Smtp-Source: 
- AA6agR55g/di+03lLT4GBVavjWrDzAamfM2dWNnWXLzDwnqZqdnD39IQ36Ox4jPAwu9J6pvhFgXIKw==
-X-Received: by 2002:a63:2021:0:b0:41b:c2e5:f4ab with SMTP id
- g33-20020a632021000000b0041bc2e5f4abmr8466189pgg.496.1659771681314;
-        Sat, 06 Aug 2022 00:41:21 -0700 (PDT)
-Received: from hayduke.lan ([2601:602:9400:21ed:fb43:92ff:6c2c:f8e5])
+ AA6agR61WA1UGgSA3rxswL/N0kFxSDPws5MLkjgJgcTpAoee09yUYEETjQDhHb1yJiNgONMEHdXIHg==
+X-Received: by 2002:a63:f144:0:b0:41a:fbe1:7af3 with SMTP id
+ o4-20020a63f144000000b0041afbe17af3mr9876707pgk.591.1659800426118;
+        Sat, 06 Aug 2022 08:40:26 -0700 (PDT)
+Received: from ?IPV6:2601:646:9200:a0f0::4c04? ([2601:646:9200:a0f0::4c04])
         by smtp.gmail.com with ESMTPSA id
- v2-20020a17090a6b0200b001f559e00473sm787684pjj.43.2022.08.06.00.41.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 06 Aug 2022 00:41:20 -0700 (PDT)
-From: Jim Broadus <jbroadus@gmail.com>
-X-Google-Original-From: Jim Broadus <jim@thruwave.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jim Broadus <jim@thruwave.com>
-Subject: [meta-networking][PATCH] networkmanager: fix iptables and nft paths
-Date: Sat,  6 Aug 2022 00:41:15 -0700
-Message-Id: <20220806074115.651070-1-jim@thruwave.com>
-X-Mailer: git-send-email 2.25.1
+ g9-20020a17090a300900b001f21646d1a4sm25617110pjb.1.2022.08.06.08.40.25
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 06 Aug 2022 08:40:25 -0700 (PDT)
+Message-ID: <4c031233-a33a-9841-b11a-4381c6ea6927@gmail.com>
+Date: Sat, 6 Aug 2022 08:40:24 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.12.0
+Subject: Re: [oe] [meta-networking][PATCH v3] sshpass: add recipe
+Content-Language: en-US
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
+ Mike Petersen <mike.petersen@ni.com>,
+ "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>
+References: <20220729173209.69103-1-mike.petersen@ni.com>
+ <20220729173209.69103-2-mike.petersen@ni.com>
+ <d30b35312e5344db9fd83fac41910dc3@axis.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+In-Reply-To: <d30b35312e5344db9fd83fac41910dc3@axis.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 06 Aug 2022 07:41:23 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 06 Aug 2022 15:40:35 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98137
+ https://lists.openembedded.org/g/openembedded-devel/message/98139
 
-The NetworkManager meson.build is searching for iptables and nft by
-passing absolute paths to meson's find_program. The result is that it
-locates tools on the host machine when they exist at those locations. If
-they don't, it uses default locations. This often works out, but in some
-cases, such as when the host uses a merged usr scheme and the build
-target does not, the paths will be incorrect and the tools won't be
-found at runtime.
 
-These could be PACKAGECONFIG options, but since they have fallback
-values, completely disabling the use of either iptables or nft would
-require patching the meson.build or setting a bogus location.
 
-Note that this meson.build file follows the same pattern elsewhere, but
-most cases are already covered by PACKAGECONFIG options.
+On 7/29/22 12:41, Peter Kjellerstedt wrote:
+>> -----Original Message-----
+>> From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.openembedded.org> On Behalf Of Mike Petersen
+>> Sent: den 29 juli 2022 19:32
+>> To: openembedded-devel@lists.openembedded.org
+>> Cc: Mike Petersen <mike.petersen@ni.com>
+>> Subject: [oe] [meta-networking][PATCH v3] sshpass: add recipe
+>>
+>> Needed for automating ssh logins, used in auto-tests.
+>>
+>> Co-authored-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+>> Signed-off-by: Mike Petersen <mike.petersen@ni.com>
+>> ---
+>>   .../recipes-connectivity/sshpass/sshpass_1.09.bb      | 11 +++++++++++
+>>   1 file changed, 11 insertions(+)
+>>   create mode 100644 meta-networking/recipes-connectivity/sshpass/sshpass_1.09.bb
+>>
+>> diff --git a/meta-networking/recipes-connectivity/sshpass/sshpass_1.09.bb b/meta-networking/recipes-connectivity/sshpass/sshpass_1.09.bb
+>> new file mode 100644
+>> index 000000000..0bfed694b
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-connectivity/sshpass/sshpass_1.09.bb
+>> @@ -0,0 +1,11 @@
+>> +DESCRIPTION = "Non-interactive ssh password auth"
+>> +HOMEPAGE = "http://sshpass.sourceforge.net/"
+>> +SECTION = "console/network"
+>> +LICENSE = "GPLv2"
+>> +LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+>> +
+>> +SRC_URI = "${SOURCEFORGE_MIRROR}/sshpass/sshpass-${PV}.tar.gz"
+> 
+> That can be written as:
+> 
+> SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
 
-Signed-off-by: Jim Broadus <jim@thruwave.com>
----
- .../networkmanager/networkmanager_1.38.0.bb                     | 2 ++
- 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.38.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.38.0.bb
-index c8fea5dbb..ebd25a8f8 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.38.0.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.38.0.bb
-@@ -55,6 +55,8 @@ EXTRA_OEMESON = "\
-     -Dconfig_dns_rc_manager_default=${NETWORKMANAGER_DNS_RC_MANAGER_DEFAULT} \
-     -Dconfig_dhcp_default=${NETWORKMANAGER_DHCP_DEFAULT} \
-     -Ddhcpcanon=false \
-+    -Diptables=${sbindir}/iptables \
-+    -Dnft=${sbindir}/nft \
- "
- 
- # stolen from https://github.com/void-linux/void-packages/blob/master/srcpkgs/NetworkManager/template
--- 
-2.25.1
+right I have incorportated this change in version staged in master-next
 
+> 
+>> +
+>> +SRC_URI[sha256sum] = "71746e5e057ffe9b00b44ac40453bf47091930cba96bbea8dc48717dedc49fb7"
+>> +
+>> +inherit autotools
+>> --
+>> 2.37.1
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#98056): https://lists.openembedded.org/g/openembedded-devel/message/98056
+> Mute This Topic: https://lists.openembedded.org/mt/92696075/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
