@@ -2,96 +2,92 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 59194C19F2D
-	for <webhook@archiver.kernel.org>; Sat,  6 Aug 2022 15:49:55 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com
- [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web09.4487.1659800993466779690
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41CB6C48BEA
+	for <webhook@archiver.kernel.org>; Sun,  7 Aug 2022 05:53:09 +0000 (UTC)
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com
+ [209.85.215.179])
+ by mx.groups.io with SMTP id smtpd.web08.11099.1659851583048069451
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Aug 2022 08:49:53 -0700
+ Sat, 06 Aug 2022 22:53:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=dDHTflrL;
- spf=pass (domain: gmail.com, ip: 209.85.214.173,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=ABhybwiU;
+ spf=pass (domain: gmail.com, ip: 209.85.215.179,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id m2so5081842pls.4
+Received: by mail-pg1-f179.google.com with SMTP id q16so5992892pgq.6
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Aug 2022 08:49:53 -0700 (PDT)
+ Sat, 06 Aug 2022 22:53:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc;
-        bh=K1/OK0We4Fn9GBHVKTG44QWQTFr5Rj7l//7P08nh2ko=;
-        b=dDHTflrLx0Fv8ISQCtHo2qEGIOR6GK1SlGz9fMZIC3gSh3E+m9xiggIrDueGQIt1jo
-         i6u6GvpDiKpACUZWOrREmzjF4yHgFPNXuE5XMVZUY5oiZwrnU9D5l1it4qQaEzm5l72P
-         SP1/xg+V3EfKo48xSNEUWDoDvrgaO7JVPCpLLFBDppL/JLi8K56cne0odThyZCQeTGHq
-         TOS2fhQEy/C3otTeEoBgfnY6yfie10pLVTwRWwUcevNdtCx9GSgKCkMJrmiZM+gruCkA
-         1BTrV+vTiJB3ebq94NtRNaXA2na/ajSvnvqhA9c7cjV2hCebcDjtzpHXU7qVcRV3zYWR
-         1Qxw==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc;
+        bh=SgwG+CC25YOjubbyjIhLAJ3npBgZXPb5CtIfZs5jGok=;
+        b=ABhybwiUFR5eE3rYQghYKHLyF6eLIRIEfF9jauLJrqfSyU2KTURb8sIOnrSZHePZa0
+         EYpHEuIxAvQoSbsIakbXYctuGnr1BINA04GVeLDNkPCAH0NwGvOEsdnYU91x1Z9y1Nm/
+         j87NCW1wMAvqrpPhap3qU3EfGNEtTc40WkDEpx+VrEDpNGzd4X/dAb0v3+Sr/vByGp3w
+         T4D6NOnWOYNRhxJy8TeonePCvs3YdyIsltupkswFS69olxAFsA9CneByH25oeiDnTO6i
+         /CncoBLiW5fsbYqiwOdIp6L77gsdzg0veRN/O+M8niJxfHw6tOSzbdDPQtTQ0YQOgYj6
+         QN2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc;
-        bh=K1/OK0We4Fn9GBHVKTG44QWQTFr5Rj7l//7P08nh2ko=;
-        b=tFQeskxPJKirRloN1OrtXQST+Plxw22o38jTWmKlY2ZSoecqM9Au8cpZB1y8lQjV5Y
-         HTtwQCRETCcZBiCGeSRVqK8Y7p6q5v2YLgfn/bJqJMJqqgr4lq5H+5nFU+SQ3Kha2uhk
-         SKdBOezpHR+JrDU9ueDX7iwmEB9rX08+D6BJ7/perYOqgSxihcMZZo6OYA+0kfC0h4Z6
-         ijPCDBg4491/mVHLXXnIYn7DwV6B0VApAv7K+LsCvfEqgHqaESCwhzOrGELIlcSnzYBP
-         LdHpFT/sJ0fzTI9ALqWenHEYquAL3Wve+ZJmAjwnQpAYrprGPSnAYF9yyJp/UE0Ger8l
-         8VUw==
-X-Gm-Message-State: ACgBeo34bVheg4X1irAdTKl+aPR1u3aXVmWHD1k53oealBJIk4AfkA5y
-	9Wk5++cIhOxWRP2sap0/KjjHvZKwexA=
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
+        bh=SgwG+CC25YOjubbyjIhLAJ3npBgZXPb5CtIfZs5jGok=;
+        b=4STI6naAT8j7etU9sptG1KkXTpwdiS7UKP+nVLCGxQ5a9IQ2LED4+BpXPt7OjRP9BB
+         Jln1A7RveU7dPwlEetgI9Xm8kOxUb6KBVc1GiRWwh0Evu7gYszTENuVqIVvi4t1X4nL6
+         jVSLbQu97oen6GV84hwJX0t/zEy0ZiikXbhCUGFFg7ESNVEnQ9Aq9aY1ogZo1sozuosr
+         6OLmSKC5rxKIfIIKpHitbAPIBiP7WuW3E0s5QHkjOXLMKXMAr0G28po/u1wYW/SBC+za
+         JY6MmmNm3hgzqP4b4mQO8v9pOWU1QFoyUQonbxNUlf2VaJUXqXvTxooTNwB7firYxRbK
+         x/vQ==
+X-Gm-Message-State: ACgBeo2hSm+/Qnyn7w8hLN88E3s+uGIKg7VUP6Z9J2cG+QyM4kYe061A
+	OFYVrwgmv4IC5pYRhmXVekpnFZdjRys=
 X-Google-Smtp-Source: 
- AA6agR6+cpdwGvYAZyNQCxZLzOGeJpc/XfsIf8P2RCEaNr3S2D6Vjlf+l5Bc3rEe9bYDWg5wRuT8rA==
-X-Received: by 2002:a17:902:c406:b0:16e:df76:5267 with SMTP id
- k6-20020a170902c40600b0016edf765267mr11650007plk.8.1659800992536;
-        Sat, 06 Aug 2022 08:49:52 -0700 (PDT)
+ AA6agR4ohR1/VHoVfuQn8QlWvyv3V4Ibz+K/euwnRcJIRNFPkws8yEP0FtS3lRtH7SY6P71RwZ7EsQ==
+X-Received: by 2002:a63:d315:0:b0:41a:d15a:b1b7 with SMTP id
+ b21-20020a63d315000000b0041ad15ab1b7mr11662702pgg.275.1659851582052;
+        Sat, 06 Aug 2022 22:53:02 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::9f45])
         by smtp.gmail.com with ESMTPSA id
- 1-20020a17090a0c0100b001efd4dbcf13sm7442597pjs.39.2022.08.06.08.49.51
+ f20-20020a635554000000b0041a716cec9esm3872380pgm.62.2022.08.06.22.53.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 06 Aug 2022 08:49:51 -0700 (PDT)
+        Sat, 06 Aug 2022 22:53:01 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Fabio Estevam <festevam@gmail.com>,
-	Markus Volk <f_l_k@t-online.de>
-Subject: [meta-gnome][PATCH V2] ibus: Swith to use main branch instead of
- master
-Date: Sat,  6 Aug 2022 08:49:49 -0700
-Message-Id: <20220806154949.805798-1-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-filesystems][PATCH 4/5] xfstests: Upgrade to v2022.07.10
+Date: Sat,  6 Aug 2022 22:52:54 -0700
+Message-Id: <20220807055255.2982774-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.1
+In-Reply-To: <20220807055255.2982774-1-raj.khem@gmail.com>
+References: <20220807055255.2982774-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 06 Aug 2022 15:49:55 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 07 Aug 2022 05:53:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98140
-
-Upstream has switched to using main for tip of trunk, therefore follow
-it here in SRC_URI as well.
+ https://lists.openembedded.org/g/openembedded-devel/message/98145
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Suggested-by: Fabio Estevam <festevam@gmail.com>
-Reported-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-gnome/recipes-support/ibus/ibus.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-filesystems/recipes-utils/xfstests/xfstests_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-gnome/recipes-support/ibus/ibus.inc b/meta-gnome/recipes-support/ibus/ibus.inc
-index 37a490abe0..bb662f2ec9 100644
---- a/meta-gnome/recipes-support/ibus/ibus.inc
-+++ b/meta-gnome/recipes-support/ibus/ibus.inc
-@@ -10,7 +10,7 @@ PV = "1.5.26"
- DEPENDS = "unicode-ucd"
- 
- SRC_URI = " \
--    git://github.com/ibus/ibus.git;branch=master;protocol=https \
-+    git://github.com/ibus/ibus.git;branch=main;protocol=https \
-     file://0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch \
+diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests_git.bb b/meta-filesystems/recipes-utils/xfstests/xfstests_git.bb
+index 868fa0330f..a6fc89d606 100644
+--- a/meta-filesystems/recipes-utils/xfstests/xfstests_git.bb
++++ b/meta-filesystems/recipes-utils/xfstests/xfstests_git.bb
+@@ -9,8 +9,8 @@ SRC_URI = "\
+     git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
  "
- SRCREV = "6a70ab0338206bd1c7d01a4e1874ea0ee5b3a9d3"
+ 
+-SRCREV_xfstests = "37881397f1aa62df3c63468049c80b301b0e89eb"
+-SRCREV_unionmount = "cec4c51a3bf8ba80bb99fc74b302749d4e3d2f1d"
++SRCREV_xfstests = "47ed066309716c73a97fff9b7f557f72d90bffb4"
++SRCREV_unionmount = "e3825b16b46f4c4574a1a69909944c059835f914"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.37.1
 
