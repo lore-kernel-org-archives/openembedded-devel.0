@@ -2,60 +2,60 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41CB6C48BEA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 408F1C3F6B0
 	for <webhook@archiver.kernel.org>; Sun,  7 Aug 2022 05:53:09 +0000 (UTC)
-Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com
- [209.85.215.179])
- by mx.groups.io with SMTP id smtpd.web08.11099.1659851583048069451
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com
+ [209.85.216.45])
+ by mx.groups.io with SMTP id smtpd.web08.11100.1659851584251986862
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Aug 2022 22:53:03 -0700
+ Sat, 06 Aug 2022 22:53:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ABhybwiU;
- spf=pass (domain: gmail.com, ip: 209.85.215.179,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f179.google.com with SMTP id q16so5992892pgq.6
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=G1akpdRG;
+ spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f45.google.com with SMTP id
+ e8-20020a17090a280800b001f2fef7886eso6410456pjd.3
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Aug 2022 22:53:03 -0700 (PDT)
+ Sat, 06 Aug 2022 22:53:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc;
-        bh=SgwG+CC25YOjubbyjIhLAJ3npBgZXPb5CtIfZs5jGok=;
-        b=ABhybwiUFR5eE3rYQghYKHLyF6eLIRIEfF9jauLJrqfSyU2KTURb8sIOnrSZHePZa0
-         EYpHEuIxAvQoSbsIakbXYctuGnr1BINA04GVeLDNkPCAH0NwGvOEsdnYU91x1Z9y1Nm/
-         j87NCW1wMAvqrpPhap3qU3EfGNEtTc40WkDEpx+VrEDpNGzd4X/dAb0v3+Sr/vByGp3w
-         T4D6NOnWOYNRhxJy8TeonePCvs3YdyIsltupkswFS69olxAFsA9CneByH25oeiDnTO6i
-         /CncoBLiW5fsbYqiwOdIp6L77gsdzg0veRN/O+M8niJxfHw6tOSzbdDPQtTQ0YQOgYj6
-         QN2w==
+        bh=jz8jH1l6MtdXaR3QaDfxHzjM1JjrLnPRUW92Wl8cLos=;
+        b=G1akpdRGXcC6cpo92+0zLTdNXKJ0H7xRNMFSsCdpEHnlLGNngQkSrrXw0IRdcGa9Wn
+         QLpTjhxNGzFdpGcEEbO7OvATpKPgwfsxFHAbpWat0DSIUOLWx8kr1qcSD2DXwGLhxSbI
+         O11MLjW7rMxukJwQ5t6l97i+4EAcWH6GkheazdLHl309EKeH5TndFvYsASyZc+9Bqvra
+         vE0ypV/qlNzT6vTzR+ZVzYR/9QHRQCsXLG0IuR+X7o/5YIcRjiMSon5uUD/VYbraiDMh
+         Oatf0cd2S4DBx+a9AmkAmgG3/eWtSHbbaDLkEWkFjSERHcyvQ+lu8RSb0kxlS8E0Fb5k
+         aHBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
-        bh=SgwG+CC25YOjubbyjIhLAJ3npBgZXPb5CtIfZs5jGok=;
-        b=4STI6naAT8j7etU9sptG1KkXTpwdiS7UKP+nVLCGxQ5a9IQ2LED4+BpXPt7OjRP9BB
-         Jln1A7RveU7dPwlEetgI9Xm8kOxUb6KBVc1GiRWwh0Evu7gYszTENuVqIVvi4t1X4nL6
-         jVSLbQu97oen6GV84hwJX0t/zEy0ZiikXbhCUGFFg7ESNVEnQ9Aq9aY1ogZo1sozuosr
-         6OLmSKC5rxKIfIIKpHitbAPIBiP7WuW3E0s5QHkjOXLMKXMAr0G28po/u1wYW/SBC+za
-         JY6MmmNm3hgzqP4b4mQO8v9pOWU1QFoyUQonbxNUlf2VaJUXqXvTxooTNwB7firYxRbK
-         x/vQ==
-X-Gm-Message-State: ACgBeo2hSm+/Qnyn7w8hLN88E3s+uGIKg7VUP6Z9J2cG+QyM4kYe061A
-	OFYVrwgmv4IC5pYRhmXVekpnFZdjRys=
+        bh=jz8jH1l6MtdXaR3QaDfxHzjM1JjrLnPRUW92Wl8cLos=;
+        b=tk77MWV8OT1JMIquLhRw6oVcWvyg/BfvwjR5pogwX5dmKwFNHeRpt0UbScwyp630vV
+         Ff2LlbGzGbb35z0K8leUamqDexFbHtTRvpTC5jIyRjGr+v11gEioibgCV6K/Ic/CL+vM
+         1a0wqjdiWTkM/X493Nk3cW9wILRzkiYVoIJTLA/a7qCrIG2UWEefkFsgYqwPhm5NpfKb
+         wY0wS3IBYaXFt2xLQ0j4msgkD96ckp6b3m3F932eLxcWcGm/WvONgShs1E1rP/TtE/7t
+         9OmQTniT1pJRjViFhIbA8vYKvG5Ak2kJlEc8P8B2Ge77BS9UNQ3FkA0x+PPfkgP6cEk9
+         vdaA==
+X-Gm-Message-State: ACgBeo3e1aDaSUb6sZirtreWZxP1Oat3vTm+MpuVNZCsSqJDezCykHf5
+	9tz1jOZWz+BNyQ8ZnGS4lEytlGIQbS4=
 X-Google-Smtp-Source: 
- AA6agR4ohR1/VHoVfuQn8QlWvyv3V4Ibz+K/euwnRcJIRNFPkws8yEP0FtS3lRtH7SY6P71RwZ7EsQ==
-X-Received: by 2002:a63:d315:0:b0:41a:d15a:b1b7 with SMTP id
- b21-20020a63d315000000b0041ad15ab1b7mr11662702pgg.275.1659851582052;
-        Sat, 06 Aug 2022 22:53:02 -0700 (PDT)
+ AA6agR79LvJuwKy6ZL2TJLwx7I8VQkH4/jttX3C1PiclY4s0vqvNhMDVY3XHe8lkSlx5CUVJmOau0g==
+X-Received: by 2002:a17:90b:1e4a:b0:1f7:3769:ac18 with SMTP id
+ pi10-20020a17090b1e4a00b001f73769ac18mr3597742pjb.228.1659851583317;
+        Sat, 06 Aug 2022 22:53:03 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::9f45])
         by smtp.gmail.com with ESMTPSA id
- f20-20020a635554000000b0041a716cec9esm3872380pgm.62.2022.08.06.22.53.00
+ f20-20020a635554000000b0041a716cec9esm3872380pgm.62.2022.08.06.22.53.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 06 Aug 2022 22:53:01 -0700 (PDT)
+        Sat, 06 Aug 2022 22:53:02 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-filesystems][PATCH 4/5] xfstests: Upgrade to v2022.07.10
-Date: Sat,  6 Aug 2022 22:52:54 -0700
-Message-Id: <20220807055255.2982774-4-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 5/5] autofs: Fix build with glibc 2.36
+Date: Sat,  6 Aug 2022 22:52:55 -0700
+Message-Id: <20220807055255.2982774-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20220807055255.2982774-1-raj.khem@gmail.com>
 References: <20220807055255.2982774-1-raj.khem@gmail.com>
@@ -66,27 +66,62 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 07 Aug 2022 05:53:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98145
+ https://lists.openembedded.org/g/openembedded-devel/message/98146
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-filesystems/recipes-utils/xfstests/xfstests_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../autofs/autofs/mount_conflict.patch        | 30 +++++++++++++++++++
+ .../recipes-daemons/autofs/autofs_5.1.8.bb    |  1 +
+ 2 files changed, 31 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/autofs/autofs/mount_conflict.patch
 
-diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests_git.bb b/meta-filesystems/recipes-utils/xfstests/xfstests_git.bb
-index 868fa0330f..a6fc89d606 100644
---- a/meta-filesystems/recipes-utils/xfstests/xfstests_git.bb
-+++ b/meta-filesystems/recipes-utils/xfstests/xfstests_git.bb
-@@ -9,8 +9,8 @@ SRC_URI = "\
-     git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
- "
- 
--SRCREV_xfstests = "37881397f1aa62df3c63468049c80b301b0e89eb"
--SRCREV_unionmount = "cec4c51a3bf8ba80bb99fc74b302749d4e3d2f1d"
-+SRCREV_xfstests = "47ed066309716c73a97fff9b7f557f72d90bffb4"
-+SRCREV_unionmount = "e3825b16b46f4c4574a1a69909944c059835f914"
- 
- S = "${WORKDIR}/git"
+diff --git a/meta-networking/recipes-daemons/autofs/autofs/mount_conflict.patch b/meta-networking/recipes-daemons/autofs/autofs/mount_conflict.patch
+new file mode 100644
+index 0000000000..e2a94bf825
+--- /dev/null
++++ b/meta-networking/recipes-daemons/autofs/autofs/mount_conflict.patch
+@@ -0,0 +1,30 @@
++Avoid conflicts between sys/mount.h and linux/mount.h
++
++linux/fs.h includes linux/mount.h and this include file is unused so
++do not include it and avoid conflict too with glibc 2.36+ see [1]
++
++[1] https://sourceware.org/glibc/wiki/Release/2.36#Usage_of_.3Clinux.2Fmount.h.3E_and_.3Csys.2Fmount.h.3E
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++--- a/modules/parse_amd.c
+++++ b/modules/parse_amd.c
++@@ -27,7 +27,6 @@
++ #include <sys/utsname.h>
++ #include <netinet/in.h>
++ #include <sys/mount.h>
++-#include <linux/fs.h>
++ 
++ #define MODULE_PARSE
++ #include "automount.h"
++--- a/modules/parse_sun.c
+++++ b/modules/parse_sun.c
++@@ -30,7 +30,6 @@
++ #include <sys/utsname.h>
++ #include <netinet/in.h>
++ #include <sys/mount.h>
++-#include <linux/fs.h>
++ 
++ #define MODULE_PARSE
++ #include "automount.h"
+diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.1.8.bb b/meta-networking/recipes-daemons/autofs/autofs_5.1.8.bb
+index 1f87bddbee..cb80844586 100644
+--- a/meta-networking/recipes-daemons/autofs/autofs_5.1.8.bb
++++ b/meta-networking/recipes-daemons/autofs/autofs_5.1.8.bb
+@@ -26,6 +26,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
+            file://0001-Do-not-hardcode-path-for-pkg.m4.patch \
+            file://0001-Bug-fix-for-pid_t-not-found-on-musl.patch \
+            file://0001-Define-__SWORD_TYPE-if-undefined.patch \
++           file://mount_conflict.patch \
+            "
+ SRC_URI[sha256sum] = "0bd401c56f0eb1ca6251344c3a3d70bface3eccf9c67117cd184422c4cace30c"
  
 -- 
 2.37.1
