@@ -2,51 +2,52 @@ Return-Path: <ranjitsinh.rathod@kpit.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CD095C25B0C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CC149C00140
 	for <webhook@archiver.kernel.org>; Mon,  8 Aug 2022 14:10:08 +0000 (UTC)
 Received: from IND01-BMX-obe.outbound.protection.outlook.com
- (IND01-BMX-obe.outbound.protection.outlook.com [40.107.239.54])
- by mx.groups.io with SMTP id smtpd.web11.26080.1659967803706592473
+ (IND01-BMX-obe.outbound.protection.outlook.com [40.107.239.86])
+ by mx.groups.io with SMTP id smtpd.web12.26055.1659967800505477410
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Aug 2022 07:10:04 -0700
+ Mon, 08 Aug 2022 07:10:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kpit.com header.s=selector1 header.b=NGHacvxr;
- spf=pass (domain: kpit.com, ip: 40.107.239.54,
+ dkim=pass header.i=@kpit.com header.s=selector1 header.b=we+L9dLx;
+ spf=pass (domain: kpit.com, ip: 40.107.239.86,
  mailfrom: ranjitsinh.rathod@kpit.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=A/xRvRsmuW1le1Ch+dS+xjy5JTJLaoE51ipSjVuV2Na0hUm6pkqC8teP8bmeSydAwDyNaXC2FOHG7Fa+g/0tpwCUxxfoa3rLWH/04i3Ags/FhODIYnDNqw/5PATOQvjDNU9VRIUr0C8D1sQKk+KTaW6zl4BwWOYMoILFjdJTzn5qJnLVXqE8bEROb+Xk29z4VpIHf8bctdVhG6cZC5WK68sJKTx+P5xWRc4mhRRBlQaVIALPguI5jrbdWc2SvNjMqQgD7HBAfuBSXDHvnv4VyKKJgh0YwA2whk+zr3g1qOKeUE+D79y+GJpGEpHwoIbsSx3AC0742bLhCPktCDlpBg==
+ b=aaWdy+ldA2wYV8muCSYMJhPzO4VYA3q15px5X5hrJD32vjY885BgWcYPhe4vAa2Ye3GUNJg+K5DmkQj9BPHT1q30bjy99NhXqfjeEPCqdoFL9mMOwwmIWw22MUBlXOFH19ZHFuo4cMxG+s2o2dbBNGwzaztfnEkoNydUNYuDurg0bPAEKmtWk6gsqJQyBaHXh9wxINUNH5eDWnH1BAaY3jlqi92lFzUhAFmLq96bQ+Y+qHVLuGHhWG3UvyaqjBLYRJjTdKOMaZ/OHZ5+G6ILMAgSe74fOQusbUiqY1Yx/ECzjlWrdTHH/mCzReis0yr6MNZZi7xqfaETf0zMD3wYCA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ujDoFK0TseRxa99BxnkHKYLnxIuIbSFpHrwNXmyLJs4=;
- b=ZbQEdD5aqoUo9SHE98sUPhE2s4/7ZBOAagTacn0ZCB8GDdSKWIiudYdlwZVv3ObSjg69Klvf7TyfiZk7Xzo0S6fo+/FEJPjWx0kAHKPk+TTek3+XHUnIws70DFRNJ/dyj63R/F/PAb7Q3YZX4UQH/5lZSKededtqlxwHn1K6DRXh0NtKrQIa9cKlk9SUM9XrA8I2zLs7hHF3S72mlqGabGiN/fqaGniX5hohUFzTvkH4FUeEXbcgsEwdqqTG4yddoT7aqKcq3C13Zjsko6pf4NP90YaF4MerQMX8Ix2G6NgUI6ezcU/DEaz6dtyFG+5iZXXr7qJxEGm/1RAU3jMjPg==
+ bh=XqHah/jFJd9DAy6O+ZSwb2SauzC6kIEoZQRuEzjPpbo=;
+ b=g/pEUxp5MahIQFtWu9stuAyddGush7SSZ6SvaXB3ksBO112qxXIrWwjNHRqP1+LIsxLU4F5QgNSybCVs7vF0+L+TDVF5tWGrg/etvQ49MBKzjT5AFQN7gbZ5q05T60kMFg/m+dCp3pzy2KiWHY+SoEVg4ICbx6csw/qvxuKCI3mCPvp0f07WS0aF4/HKtuXbX/lAUbOZLXcSuzLcJ1MQNJAVKNzuzuAdzgIjCRtSjA4cSZvqyw+rdYLnolIdZIfxBpS3T8qGv7dzltqlOW0Z/XRlg8Sg2RiOiSDn8+X8CmnvF0LgC4UL7VuwcawuXkJrXK5AafZVDTO8/V42rlfr7A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=kpit.com; dmarc=pass action=none header.from=kpit.com;
  dkim=pass header.d=kpit.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ujDoFK0TseRxa99BxnkHKYLnxIuIbSFpHrwNXmyLJs4=;
- b=NGHacvxr1gAMUvkDBOld/TI+uK0T5tzMeh+C4LMDT8jFW6YPyCgP4EuDc/XRTtoOQ0roJmhCbnyFKOcu7KETkwpLCyjAGrpR/EtZU8LG6L/db2JeJde4xICvJFoYJs2ZzMmguN40azof9Opn933cmccmHOQajmKWe8aWCdWzbQQ=
+ bh=XqHah/jFJd9DAy6O+ZSwb2SauzC6kIEoZQRuEzjPpbo=;
+ b=we+L9dLxBLjOXq9+8yjyGu4Ze88Za7F33d1UEzpEghmlzPGuK0hH63eBgVm9N73fLdtLl2N6couFAum4HPHnIgCe1xVy1EGO1FZdFEtpecZymN6Op7u+MiBEEchlMUnGkUrvzyXSNvDyq8lV0dwK4ranKGOWmqeJ6zYtuspoz3M=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=kpit.com;
 Received: from PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:8d::14)
- by MA1PR01MB0618.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:2::8) with
+ by MA0PR01MB7867.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a01:2a::10) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5504.16; Mon, 8 Aug
- 2022 14:09:53 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5504.15; Mon, 8 Aug
+ 2022 14:09:55 +0000
 Received: from PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM
  ([fe80::6986:8621:f6e5:e4ed]) by PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM
  ([fe80::6986:8621:f6e5:e4ed%4]) with mapi id 15.20.5504.020; Mon, 8 Aug 2022
- 14:09:53 +0000
+ 14:09:54 +0000
 From: Ranjitsinh Rathod <ranjitsinhr@kpit.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: akuster808@gmail.com,
+	wangmy <wangmy@fujitsu.com>,
 	Khem Raj <raj.khem@gmail.com>,
 	Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>,
 	Ranjitsinh Rathod <ranjitsinhrathod1991@gmail.com>
-Subject: [PATCH 2/5] c-ares: Upgrade to 1.17.1 release
-Date: Mon,  8 Aug 2022 19:39:29 +0530
-Message-Id: <20220808140933.25968-3-ranjitsinhr@kpit.com>
+Subject: [PATCH 3/5] c-ares: upgrade 1.17.1 -> 1.17.2
+Date: Mon,  8 Aug 2022 19:39:30 +0530
+Message-Id: <20220808140933.25968-4-ranjitsinhr@kpit.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220808140933.25968-1-ranjitsinhr@kpit.com>
 References: <20220808140933.25968-1-ranjitsinhr@kpit.com>
@@ -56,430 +57,111 @@ X-ClientProxiedBy: PN0PR01CA0020.INDPRD01.PROD.OUTLOOK.COM
  (2603:1096:c01:8d::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 81eb33cc-254f-4339-a2f5-08da7947aa61
-X-MS-TrafficTypeDiagnostic: MA1PR01MB0618:EE_
+X-MS-Office365-Filtering-Correlation-Id: 388112c3-20fe-438d-9457-08da7947aafc
+X-MS-TrafficTypeDiagnostic: MA0PR01MB7867:EE_
 Content-Transfer-Encoding: quoted-printable
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	oAdO7C4Z/vFGh/oxJZW1Mi7iogtl6qEiv8s/1ICpWxz5e3XRA6mDy0jT4SjbDjE4z8I76czPlze6IglqFYJw1EdZz0t1yliPlv3jRBPeP1KanJRkHTWgfDtDyi9006yK5xCKtDybdJYcHkYEmwm3H9l/gpJRPax+p+iq5Bf2yZgnfRqi90Sridf9uFZLnop2+4ZeQYGwLesT6h6hZYw3F2RFKmzcC2KT+YMp9UbKkq5aK3/drC1nbh59ObocCa/35WOQSW2bV8Z2RcyDu0iOwKDOxnEUZVMBk+t0QK/4fmPdUvapgcWjq+R7Tcy6Z+pTh735QalILGh6zAnxaLMqjp5CuVZbpt+K6P67z7HhEy06KcxPskuC/sZqaAD2RmC1WCNcnhXeodjWcy6SgcAHUTuSTCKVqOSNRO7B8Kq+8dHrICH6Zowyla30eHlnG8Je2DamAfPVKN0uPjgfvt3iiSPjB3cop2l2g6qCFnP6SjjevZYZUsFZliMbq32MAqrqss6DmSx0xj442RABJEqvyiAUzEQJYPWAqIvL6cLiSjXffi1qWKjYPpir8K2TZIqbxgaJJIsPgWMufhOWwqZd7VH1OFsTAhFu4PqHUq5kcUu7azXnN/uCr0OgAvlG0jyj+YnJdENey+LbaWaZYu+uh/xV+4Hig0h2ZxMsy4Yp/0RU38TkKv84nfFkBGh/cUM4QVcKj2SbjqDXK6xuJhhGBMrQUjnaRkvI3Y/uXGeYZRXEb3EjHtdsHGYM8/JFRQS5TegMLPmN5saND9K5B3b877L9tHq7EhLFYP21+Pu8+Mnp9k4LWps0Xf8YVfzXvdvP3lVOOZq+I/7dxCbRsDLJ3IkOc2Tiqud5wKx6xK14FdPLAVgCG9BbTLOavU5g/Lv8
+	FzFuh1EQYJ4Q5zn2wERz0XHIURndgPPNRKyOL/SiMOghjouTto6IQnPhbAzgVXYyL2Cyv0t2kK9P9HGVXetuDuId3GPhLnrjfKeRxBFhsstzLOtTtenz8LU0QNdIZm58TbrIL6gwP8xr+2bQdCUGDfBsfZmiaXqJDYQfG1+flScFVxxIobPT2sg7Z6mmdkJpE2NHZutP7qJqu64kcjam1kKBY+Z9GGMoQ3w6GyqC29W2BaZ403YMSY94ojkJL/isLp9JqC6qn4Wb+sF9N/Iv6gRWrg/S7ypA7uvJRbbHbBcahWAzIRhGiEH2aXSgvYZOnhharcKYEGnvsam5yuU05msanRFopy9KT58asb9WsjvnwfAgqX7afsdo9oNUX2bmFL8Xr5HA8GEMPNa96M/UO6modTqgw+szJAGoaNbKIswtwNZ4RPhpj2xDvNGbp3yjDMpvWKAQE1L0p1d1iLjNI76SLGGS2ue13ZnznRSP7b7QTrKEInsl05jpETczL5LYVCxMNOA2XLWvE8AF8i3VKiEzLANj9mZ+1eNElinD/VKnc6IYKsumu3C6C+mR76nXqwY5PwD2nsFI2FyvZIe7/cS1npdGmcpj1fTIJqW4aUAAZnq7NgG55xk75U7FO58hC5LAhA5p6Z3oHZDYwSsLI1CUZDWvTvQ9eqOh86MsAOvZMnjVsucxiYaITySRDM2b2Y5gWEnoCZdlHy1oAhQ5Th9asr1dXQOJlhAPtZsYEsHD6PoTBEAyTdpQFhPOg8/JqPK3gM2fWGtazPmRgAW9ttX889wtkd9vpnpECvB9tllUwATL+8nsI1mjUn6qK8m0
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230016)(4636009)(39860400002)(396003)(376002)(346002)(136003)(366004)(41300700001)(26005)(6666004)(53546011)(6512007)(38350700002)(52116002)(38100700002)(6506007)(186003)(66574015)(1076003)(2616005)(83380400001)(8676002)(66946007)(66556008)(4326008)(66476007)(30864003)(8936002)(966005)(6916009)(5660300002)(54906003)(478600001)(2906002)(6486002)(316002)(36756003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230016)(4636009)(136003)(396003)(366004)(39860400002)(376002)(346002)(41300700001)(6512007)(6506007)(26005)(6666004)(38350700002)(52116002)(38100700002)(1076003)(83380400001)(66574015)(2616005)(186003)(8936002)(5660300002)(66476007)(66556008)(66946007)(2906002)(8676002)(4326008)(316002)(6916009)(54906003)(6486002)(36756003)(478600001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?cYGxgLgg6SmWopngWRjTSJCVjnUAARQG31FJiANkk6v4YqjVU2UmPWVUv5Ue?=
- =?us-ascii?Q?jnTO0aUTYSJMIFRLD858YgHwpt1pGdju7TvXBGzaejXh0nyA2Q7GOz5lZAv9?=
- =?us-ascii?Q?T62k6uoD82EC5vrCchfFk2rO2SvEXlHredVcLwfAPVAk7G7Lmd3KwmLcFv/o?=
- =?us-ascii?Q?3rcrhx1QCRlnwWxc9X0fwWTX2zjqTTRGcSEtTxrmmY4z8FpTsNzwQtfVdg80?=
- =?us-ascii?Q?TTKBLvJOg9mk69vDHDLBRQJ+gl7W/bolnUNkebxK7+JL48seTEOsuQBrk5G2?=
- =?us-ascii?Q?RZ/tSurEWhFy2P4ttLbjEXTgb20YPKKTqWu2V07o7VOIzgJCPzezilDgRgV3?=
- =?us-ascii?Q?MEf7/Ml1fDmOyci1TuIJLyhRO9ueoX5QA48oJgjCTl22bjJdL6zPFxIdUhKr?=
- =?us-ascii?Q?25trOhyYL0VzEq0KFWdoV7L7nU2F/BxL02FW2dt5Uuh2pstA6r9XjMerdCqw?=
- =?us-ascii?Q?7eObuuB0TXcyRKQa+IR+BDHNnthKz4Ex4fvNZ+6ELyVUlnGl6xOhUsPq54xA?=
- =?us-ascii?Q?EFChLdufg4H2r2oWob7agZ28Mc30fWkXYp+erGeJbGfZhYJi5/1jPQTmOL7a?=
- =?us-ascii?Q?vXA9zI1nGv+/F/Wvih5NIsGBkv98uQTxNqiDLeb0rvhNj0Y+oWHzBYayWk+l?=
- =?us-ascii?Q?o9zNSP3YMguC62JaDg//FTos6L6btl1x2Opv/8BFFckDpueCquctdCJV57pa?=
- =?us-ascii?Q?DA3CbBPT2Hc1GuMg+ObSZkWPaN0xvOAElFKIOMu1I+S6KMl7JOmWeYSDc9am?=
- =?us-ascii?Q?Zv9X84S7ZzA21+EPNHaIe4KbQVJdH5FktlOoIuLyx3DIZFL8sPSM+3gCaXtB?=
- =?us-ascii?Q?uo/fXV6YmToqMmTTkqQrzrBvmdc0s2srb6DEH0HkP33ggQAvSWAwABJmBd9E?=
- =?us-ascii?Q?2mTaMC0O2rf8UbRuM+qRy5p2xIw9rh55E6K6gOGNRV/Sk3rfd4Feenq0eCtf?=
- =?us-ascii?Q?uaUZLCeVU2H55xgWRM6wp+LeetwqAF/ft4PThtWI29K0aNfnhenIYGDeGvCZ?=
- =?us-ascii?Q?qCOUo7lyqqXKO4nzBz0NAJPIQD+y7ZiUTinpEAc3dcThRodKwIREsaW92BCS?=
- =?us-ascii?Q?diS9upHl1v5Hs+zEM+iaMEcUJo7DtL3FIGFCjhxciuZyTKHJEjN8Y+Qs81Xo?=
- =?us-ascii?Q?oSAo6iwE7EVTCfEP65BEeq/Om8SvRCFWCyPd8tJdV4Kd+OfcKRQJjV5+twHy?=
- =?us-ascii?Q?ftdDJ2iNqg3HV8+hmt4UYLgf0eWR1BDFDDxrt6DO28hKo3k9RIB1Q+zLeR7p?=
- =?us-ascii?Q?24tfd9h62NKgN/4/9uL8GDAtDTwLOr+FJUjKXFFwOZyA0SehYxDMPQaWt/aF?=
- =?us-ascii?Q?5Y+2qH7Oz11l0sx+q3xSHvzgIbhNIX/LzGNbQvsPZDqo6rWaYJvOnuzGudzZ?=
- =?us-ascii?Q?0O0ELe59XduCdTl2YgjfgbradSFudWTDxD0VB93HEe59D7FG8UcL+6wos6fo?=
- =?us-ascii?Q?1x6Q2FaB95tVOuEcyRZdZvT/6gzCaQehtGFCraBdrspP+aL51V0SwcVODe2a?=
- =?us-ascii?Q?5GbSOnBP5WbyY4wZ2cpFirjhY7wyBcbENrzBUEcymD2Tow2K5/N8gZSs+I5L?=
- =?us-ascii?Q?IRk0BLQnOTLIFYB3IqFYfOP8iF9/qHO4zXck5bfX9/5EauXlsadW/86LV/SY?=
- =?us-ascii?Q?rg=3D=3D?=
+	=?us-ascii?Q?TCFgnWPzmN44rmlv7o2g7V+uBukCb+5/Zv1Q++ECT6UIDfCT6curzcGi6TTp?=
+ =?us-ascii?Q?IUif9tA1nyvb2yCwnSoZgV7Xv4wD0wGd2dOagoL3Gn9Hdex0xqEw9qOMOi7V?=
+ =?us-ascii?Q?OGyZJJWTAIWQwcyZWOkQVMeRJtq5MmUUjRZaUVbCf5z8cnRJf1RfdWgVzVAu?=
+ =?us-ascii?Q?5jY2qFwyO/GGkM0LeFVZL6MZ6uoQa0zrO4Lxl7MKElfX3qKIqz2RGVsEUIlk?=
+ =?us-ascii?Q?LXO9X93IDBFmydDkcD10/CztwtY6qqO58w7tk/7OMLxVsnM67SDCpoATLgqe?=
+ =?us-ascii?Q?O9fCM8mWJcKSAb5lPXglgJbx7CuG2xGHGqN0RQAuxKeNBiWq5quLTL9UWTVy?=
+ =?us-ascii?Q?urkO6D2TpI3SzMV1o/RWhvQDHgsV8OMQfnsQK+urGAyaaxEAc/ydbPdpCibB?=
+ =?us-ascii?Q?OgypAcPfCT2zLEp9dhimG2pjBOjH6s/o6oRLJ7ClnH0beLPnfR7RTgf+QCxb?=
+ =?us-ascii?Q?eWMXl1GqOIWi9zO+jDb8vfGBPbZsEtRNb9aEGyJxWYpALEJrCL5cVU+YV7bd?=
+ =?us-ascii?Q?VVk3TqPbrbqDJVyfBP0MrQcrJHv7Or+feoT0Js6DGCqMt/n4gGshZn0FVYqM?=
+ =?us-ascii?Q?6cD7/pfIAPB6biz5EbPPtBQj6C7sgydONuMPsUrWip6SGpJpFvDHmQzeiRwe?=
+ =?us-ascii?Q?QuzfrxFn0ptjzo3aHw0DPdyEG0Yh2BOnd7xImum2w+LpCp71owlOjsjzVPbT?=
+ =?us-ascii?Q?CKhsCFrnNhyUWzGQ8DjWhGdXWXtcMmrS6VGKHONb7tRbbdin6SYPud5MXF3l?=
+ =?us-ascii?Q?0mxsi7Jegpk05Rib+Xa0VSLYmuG8QJkFA5vBjAJ+v6H01zdJ6zFkj9xQ4jeC?=
+ =?us-ascii?Q?fMuyDexhr3gWC9pPWKDcXlorLeqv1vqc3nv25aTVUg9KYqyZlxl1H+YJBCOA?=
+ =?us-ascii?Q?TUi4frKXm2VzVGmUeRA3Selqg1XuM1jOsT6QJcYz6GDxKWBLPwl6/ILMXZde?=
+ =?us-ascii?Q?Sz9xDnUw6OFy7y3K/V+41lbgB4WR0EhAvicf8I9+crKGAQoS1KMPTEAQqxwe?=
+ =?us-ascii?Q?lmtbVt2E6lbrFIhY7sHICmjTd9ve780PPQAUWuK6jdlzVJt14OIaiXVvoVb8?=
+ =?us-ascii?Q?Em7K+fb8nIBTEARpACwL5KuBW2lFBUjG6C4OBKkpHsUHBHokD7W9SEkzt4ZR?=
+ =?us-ascii?Q?eIPD3UopiPeafT9yDYHG6cNYOGsQq0cXCNagfyi7P0NbW3tL1ZDhLxBYt6TM?=
+ =?us-ascii?Q?iQ6LeyW64KoPKN/bMq2dqVizJy5iQUU25GAy6knk8IITGRatPnkAfwWr9HBa?=
+ =?us-ascii?Q?anbtCgGQSTROjf0Bj1Dq4IdnKGekqBkIgfD7Ovn86ZyuQMb2KqQ35Vt+vzLF?=
+ =?us-ascii?Q?6cTSO0WwAzmvW4jyilKkha6syUp9ueqnfjuQlEfe1KUxm5DtZGkKQ6Zr/tnw?=
+ =?us-ascii?Q?JWvrCsVaRyIOkNX6294QNgtyr27L/ue0xzz++Y2LhK/Pw1J3BcSyh/SciczS?=
+ =?us-ascii?Q?TQiJ4vAd9NfoszCfbPAHmPUuknSZ2zjuZHS2sY3VS5AlNEc/PuWCKv5lmEbM?=
+ =?us-ascii?Q?Tw2B3CZ4XPYzj7dyToXcLFx5pG5tU4Wyl2qrQTb3zF4ZfsurIdJ+dvsiYVrr?=
+ =?us-ascii?Q?IxfeRVU0b5ydJXWNYU6k5aCR7NmbJQ6eovaXNojDwB5AdAa2kpUdQhLMZSWL?=
+ =?us-ascii?Q?VA=3D=3D?=
 X-OriginatorOrg: kpit.com
 X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 81eb33cc-254f-4339-a2f5-08da7947aa61
+ 388112c3-20fe-438d-9457-08da7947aafc
 X-MS-Exchange-CrossTenant-AuthSource: PN3PR01MB7382.INDPRD01.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Aug 2022 14:09:53.6698
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Aug 2022 14:09:54.6071
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3539451e-b46e-4a26-a242-ff61502855c7
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
 X-MS-Exchange-CrossTenant-UserPrincipalName: 
- tjs0Pz0GwhPfW9p8PIBR7kP1oiC08MeYJJlr9Q5kQOKL/4x2ZEyoS5Yd/6jGz6Gm8Wnnya8ru4KJdz9tATjGpw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MA1PR01MB0618
+ UPkMeX7mZEWlthEln9mke4Gu5Y448dA6m0L3fB2w3gErLQWEWgggm3ZdEj4iIdpluh6+nfIv/VT6yvW+PCWNuA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MA0PR01MB7867
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 08 Aug 2022 14:10:08 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98157
+ https://lists.openembedded.org/g/openembedded-devel/message/98154
 
-From: Khem Raj <raj.khem@gmail.com>
-
-Forward port cmake-install-libcares.pc.patch, drop the need to install
-pkgconfig files as its already being done by main Makefile
-
-Remove below two patches as well
-ares_expand_name-fix-formatting-and-handling-of-root.patch
-ares_expand_name-should-escape-more-characters.patch
+From: wangmy <wangmy@fujitsu.com>
 
 Conflicts:
-meta-oe/recipes-support/c-ares/c-ares_1.17.1.bb
+meta-oe/recipes-support/c-ares/c-ares_1.17.2.bb
 
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit b65f2904191b8d309b3971d4e65c5e1701156b1c)
+(cherry picked from commit c49173b09c998bb3893ae873f68823647f1a7e18)
 Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
 Signed-off-by: Ranjitsinh Rathod <ranjitsinhrathod1991@gmail.com>
 ---
- ...-fix-formatting-and-handling-of-root.patch | 115 ------------------
- ...d_name-should-escape-more-characters.patch |  90 --------------
- .../c-ares/cmake-install-libcares.pc.patch    |  27 ++--
- .../{c-ares_1.16.1.bb =3D> c-ares_1.17.1.bb}    |   6 +-
- 4 files changed, 12 insertions(+), 226 deletions(-)
- delete mode 100644 meta-oe/recipes-support/c-ares/c-ares/ares_expand_name-=
-fix-formatting-and-handling-of-root.patch
- delete mode 100644 meta-oe/recipes-support/c-ares/c-ares/ares_expand_name-=
-should-escape-more-characters.patch
- rename meta-oe/recipes-support/c-ares/{c-ares_1.16.1.bb =3D> c-ares_1.17.1=
-.bb} (76%)
+ .../c-ares/{c-ares_1.17.1.bb =3D> c-ares_1.17.2.bb}   | 13 +++++--------
+ 1 file changed, 5 insertions(+), 8 deletions(-)
+ rename meta-oe/recipes-support/c-ares/{c-ares_1.17.1.bb =3D> c-ares_1.17.2=
+.bb} (63%)
 
-diff --git a/meta-oe/recipes-support/c-ares/c-ares/ares_expand_name-fix-for=
-matting-and-handling-of-root.patch b/meta-oe/recipes-support/c-ares/c-ares/=
-ares_expand_name-fix-formatting-and-handling-of-root.patch
-deleted file mode 100644
-index d1cb54aefb..0000000000
---- a/meta-oe/recipes-support/c-ares/c-ares/ares_expand_name-fix-formatting=
--and-handling-of-root.patch
-+++ /dev/null
-@@ -1,115 +0,0 @@
--From: bradh352 <brad@brad-house.com>
--Date: Fri, 11 Jun 2021 12:39:24 -0400
--Subject: [2/2] ares_expand_name(): fix formatting and handling of root nam=
-e
-- response
--Origin: https://github.com/c-ares/c-ares/commit/44c009b8e62ea1929de68e3f43=
-8181bea469ec14
--Bug-Debian-Security: https://security-tracker.debian.org/tracker/CVE-2021-=
-3672
--
--Fixes issue introduced in prior commit with formatting and handling
--of parsing a root name response which should not be escaped.
--
--Fix By: Brad House
--CVE: CVE-2021-3672
--Upstream-Status: Backport [http://snapshot.debian.org/archive/debian-secur=
-ity/20210810T064453Z/pool/updates/main/c/c-ares/c-ares_1.17.1-1%2Bdeb11u1.d=
-ebian.tar.xz]
--Signed-off-by: Neetika Singh <Neetika.Singh@kpit.com>
-----
-- ares_expand_name.c | 62 ++++++++++++++++++++++++--------------
-- 1 file changed, 40 insertions(+), 22 deletions(-)
--
--diff --git a/ares_expand_name.c b/ares_expand_name.c
--index f1c874a97cfc..eb9268c1ff0a 100644
----- a/ares_expand_name.c
--+++ b/ares_expand_name.c
--@@ -127,27 +127,37 @@ int ares_expand_name(const unsigned char *encoded, c=
-onst unsigned char *abuf,
--         }
--       else
--         {
---          len =3D *p;
--+          int name_len =3D *p;
--+          len =3D name_len;
--           p++;
--+
--           while (len--)
--             {
---              if (!isprint(*p)) {
---                /* Output as \DDD for consistency with RFC1035 5.1 */
---                *q++ =3D '\\';
---                *q++ =3D '0' + *p / 100;
---                *q++ =3D '0' + (*p % 100) / 10;
---                *q++ =3D '0' + (*p % 10);
---              } else if (is_reservedch(*p)) {
---                *q++ =3D '\\';
---                *q++ =3D *p;
---              } else {
---                *q++ =3D *p;
---              }
--+              /* Output as \DDD for consistency with RFC1035 5.1, except
--+               * for the special case of a root name response  */
--+              if (!isprint(*p) && !(name_len =3D=3D 1 && *p =3D=3D 0))
--+                {
--+
--+                  *q++ =3D '\\';
--+                  *q++ =3D '0' + *p / 100;
--+                  *q++ =3D '0' + (*p % 100) / 10;
--+                  *q++ =3D '0' + (*p % 10);
--+                }
--+              else if (is_reservedch(*p))
--+                {
--+                  *q++ =3D '\\';
--+                  *q++ =3D *p;
--+                }
--+              else
--+                {
--+                  *q++ =3D *p;
--+                }
--               p++;
--             }
--           *q++ =3D '.';
--         }
---    }
--+     }
--+
--   if (!indir)
--     *enclen =3D aresx_uztosl(p + 1U - encoded);
--
--@@ -194,21 +204,29 @@ static int name_length(const unsigned char *encoded,=
- const unsigned char *abuf,
--         }
--       else if (top =3D=3D 0x00)
--         {
---          offset =3D *encoded;
--+          int name_len =3D *encoded;
--+          offset =3D name_len;
--           if (encoded + offset + 1 >=3D abuf + alen)
--             return -1;
--           encoded++;
--+
--           while (offset--)
--             {
---              if (!isprint(*encoded)) {
---                n +=3D 4;
---              } else if (is_reservedch(*encoded)) {
---                n +=3D 2;
---              } else {
---                n +=3D 1;
---              }
--+              if (!isprint(*encoded) && !(name_len =3D=3D 1 && *encoded =
-=3D=3D 0))
--+                {
--+                  n +=3D 4;
--+                }
--+              else if (is_reservedch(*encoded))
--+                {
--+                  n +=3D 2;
--+                }
--+              else
--+                {
--+                  n +=3D 1;
--+                }
--               encoded++;
--             }
--+
--           n++;
--         }
--       else
----
--2.32.0
--
-diff --git a/meta-oe/recipes-support/c-ares/c-ares/ares_expand_name-should-=
-escape-more-characters.patch b/meta-oe/recipes-support/c-ares/c-ares/ares_e=
-xpand_name-should-escape-more-characters.patch
-deleted file mode 100644
-index 3603ef1278..0000000000
---- a/meta-oe/recipes-support/c-ares/c-ares/ares_expand_name-should-escape-=
-more-characters.patch
-+++ /dev/null
-@@ -1,90 +0,0 @@
--From: bradh352 <brad@brad-house.com>
--Date: Fri, 11 Jun 2021 11:27:45 -0400
--Subject: [1/2] ares_expand_name() should escape more characters
--Origin: https://github.com/c-ares/c-ares/commit/362f91d807d293791008cdb761=
-6d40f7784ece83
--Bug-Debian-Security: https://security-tracker.debian.org/tracker/CVE-2021-=
-3672
--
--RFC1035 5.1 specifies some reserved characters and escaping sequences
--that are allowed to be specified.  Expand the list of reserved characters
--and also escape non-printable characters using the \DDD format as
--specified in the RFC.
--
--Bug Reported By: philipp.jeitner@sit.fraunhofer.de
--Fix By: Brad House (@bradh352)
--CVE: CVE-2021-3672
--Upstream-Status: Backport [http://snapshot.debian.org/archive/debian-secur=
-ity/20210810T064453Z/pool/updates/main/c/c-ares/c-ares_1.17.1-1%2Bdeb11u1.d=
-ebian.tar.xz]
--Signed-off-by: Neetika Singh <Neetika.Singh@kpit.com>
-----
-- ares_expand_name.c | 41 +++++++++++++++++++++++++++++++++++---
-- 1 file changed, 38 insertions(+), 3 deletions(-)
--
--diff --git a/ares_expand_name.c b/ares_expand_name.c
--index 407200ef5b4b..f1c874a97cfc 100644
----- a/ares_expand_name.c
--+++ b/ares_expand_name.c
--@@ -32,6 +32,26 @@
-- static int name_length(const unsigned char *encoded, const unsigned char =
-*abuf,
--                        int alen);
--
--+/* Reserved characters for names that need to be escaped */
--+static int is_reservedch(int ch)
--+{
--+  switch (ch) {
--+    case '"':
--+    case '.':
--+    case ';':
--+    case '\\':
--+    case '(':
--+    case ')':
--+    case '@':
--+    case '$':
--+      return 1;
--+    default:
--+      break;
--+  }
--+
--+  return 0;
--+}
--+
-- /* Expand an RFC1035-encoded domain name given by encoded.  The
--  * containing message is given by abuf and alen.  The result given by
--  * *s, which is set to a NUL-terminated allocated buffer.  *enclen is
--@@ -111,9 +131,18 @@ int ares_expand_name(const unsigned char *encoded, co=
-nst unsigned char *abuf,
--           p++;
--           while (len--)
--             {
---              if (*p =3D=3D '.' || *p =3D=3D '\\')
--+              if (!isprint(*p)) {
--+                /* Output as \DDD for consistency with RFC1035 5.1 */
--+                *q++ =3D '\\';
--+                *q++ =3D '0' + *p / 100;
--+                *q++ =3D '0' + (*p % 100) / 10;
--+                *q++ =3D '0' + (*p % 10);
--+              } else if (is_reservedch(*p)) {
--                 *q++ =3D '\\';
---              *q++ =3D *p;
--+                *q++ =3D *p;
--+              } else {
--+                *q++ =3D *p;
--+              }
--               p++;
--             }
--           *q++ =3D '.';
--@@ -171,7 +200,13 @@ static int name_length(const unsigned char *encoded, =
-const unsigned char *abuf,
--           encoded++;
--           while (offset--)
--             {
---              n +=3D (*encoded =3D=3D '.' || *encoded =3D=3D '\\') ? 2 : =
-1;
--+              if (!isprint(*encoded)) {
--+                n +=3D 4;
--+              } else if (is_reservedch(*encoded)) {
--+                n +=3D 2;
--+              } else {
--+                n +=3D 1;
--+              }
--               encoded++;
--             }
--           n++;
----
--2.32.0
--
-diff --git a/meta-oe/recipes-support/c-ares/c-ares/cmake-install-libcares.p=
-c.patch b/meta-oe/recipes-support/c-ares/c-ares/cmake-install-libcares.pc.p=
-atch
-index 0eb7e4bbb3..c6f9c6de61 100644
---- a/meta-oe/recipes-support/c-ares/c-ares/cmake-install-libcares.pc.patch
-+++ b/meta-oe/recipes-support/c-ares/c-ares/cmake-install-libcares.pc.patch
-@@ -1,4 +1,4 @@
--From 12414304245cce6ef0e8b9547949be5109845353 Mon Sep 17 00:00:00 2001
-+From 2cc41bee63223cb398ea932aad6ecc94ff5b61dd Mon Sep 17 00:00:00 2001
- From: Changqing Li <changqing.li@windriver.com>
- Date: Tue, 24 Jul 2018 13:33:33 +0800
- Subject: [PATCH] cmake: Install libcares.pc
-@@ -11,12 +11,13 @@ Signed-off-by: Alexey Firago <alexey_firago@mentor.com>
- update to 1.14.0, fix patch warning
-
- Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+
- ---
-- CMakeLists.txt | 28 +++++++++++++++++++++++-----
-- 1 file changed, 23 insertions(+), 5 deletions(-)
-+ CMakeLists.txt | 23 +++++++++++++++++------
-+ 1 file changed, 17 insertions(+), 6 deletions(-)
-
- diff --git a/CMakeLists.txt b/CMakeLists.txt
--index fd123e1..3a5878d 100644
-+index 08c0247..0020d6b 100644
- --- a/CMakeLists.txt
- +++ b/CMakeLists.txt
- @@ -214,22 +214,25 @@ ADD_DEFINITIONS(${SYSFLAGS})
-@@ -50,9 +51,9 @@ index fd123e1..3a5878d 100644
-
-  # When checking for symbols, we need to make sure we set the proper
-  # headers, libraries, and definitions for the detection to work properly
--@@ -554,6 +557,15 @@ CONFIGURE_FILE (ares_build.h.cmake ${PROJECT_BINARY_D=
-IR}/ares_build.h)
-- # Write ares_config.h configuration file.  This is used only for the buil=
-d.
-- CONFIGURE_FILE (ares_config.h.cmake ${PROJECT_BINARY_DIR}/ares_config.h)
-+@@ -551,6 +554,15 @@ ENDIF()
-+ # Record toplevel CMakeLists.txt path
-+ set(CARES_TOPLEVEL_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
-
- +# Pass required CFLAGS to pkg-config in case of static library
- +IF (CARES_STATIC)
-@@ -66,19 +67,11 @@ index fd123e1..3a5878d 100644
-
-  # TRANSFORM_MAKEFILE_INC
-  #
--@@ -728,6 +740,12 @@ IF (CARES_INSTALL)
-+@@ -624,7 +636,6 @@ IF (CARES_INSTALL)
-        INSTALL (FILES "${CMAKE_CURRENT_BINARY_DIR}/libcares.pc" COMPONENT =
-Devel DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
-  ENDIF ()
-
--+# pkg-config file
--+IF (CARES_INSTALL)
--+       SET (PKGCONFIG_INSTALL_DIR "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
--+       INSTALL (FILES "${CMAKE_CURRENT_BINARY_DIR}/libcares.pc" DESTINATI=
-ON ${PKGCONFIG_INSTALL_DIR})
--+ENDIF ()
--+
-+-
-  # Legacy chain-building variables (provided for compatibility with old co=
-de).
-  # Don't use these, external code should be updated to refer to the aliase=
-s directly (e.g., Cares::cares).
-  SET (CARES_FOUND 1 CACHE INTERNAL "CARES LIBRARY FOUND")
----
--2.17.1
--
-diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb b/meta-oe/reci=
-pes-support/c-ares/c-ares_1.17.1.bb
-similarity index 76%
-rename from meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb
-rename to meta-oe/recipes-support/c-ares/c-ares_1.17.1.bb
-index 692a5f0d6e..de27d736ad 100644
---- a/meta-oe/recipes-support/c-ares/c-ares_1.16.1.bb
-+++ b/meta-oe/recipes-support/c-ares/c-ares_1.17.1.bb
-@@ -5,16 +5,14 @@ SECTION =3D "libs"
+diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.17.1.bb b/meta-oe/reci=
+pes-support/c-ares/c-ares_1.17.2.bb
+similarity index 63%
+rename from meta-oe/recipes-support/c-ares/c-ares_1.17.1.bb
+rename to meta-oe/recipes-support/c-ares/c-ares_1.17.2.bb
+index de27d736ad..19e35db2d7 100644
+--- a/meta-oe/recipes-support/c-ares/c-ares_1.17.1.bb
++++ b/meta-oe/recipes-support/c-ares/c-ares_1.17.2.bb
+@@ -5,14 +5,11 @@ SECTION =3D "libs"
  LICENSE =3D "MIT"
  LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3Dfb997454c8d62aa6a47f07a8cd48=
 b006"
 
--PV =3D "1.16.1+gitr${SRCPV}"
-+PV =3D "1.17.1"
-
- SRC_URI =3D "\
-     git://github.com/c-ares/c-ares.git;branch=3Dmain;protocol=3Dhttps \
-     file://cmake-install-libcares.pc.patch \
-     file://0001-fix-configure-error-mv-libcares.pc.cmakein-to-libcar.patch=
+-PV =3D "1.17.1"
+-
+-SRC_URI =3D "\
+-    git://github.com/c-ares/c-ares.git;branch=3Dmain;protocol=3Dhttps \
+-    file://cmake-install-libcares.pc.patch \
+-    file://0001-fix-configure-error-mv-libcares.pc.cmakein-to-libcar.patch=
  \
--    file://ares_expand_name-should-escape-more-characters.patch \
--    file://ares_expand_name-fix-formatting-and-handling-of-root.patch \
- "
--SRCREV =3D "74a1426ba60e2cd7977e53a22ef839c87415066e"
-+SRCREV =3D "39c73b503d9ef70a58ad1f4a4643f15b01407c66"
+-"
+-SRCREV =3D "39c73b503d9ef70a58ad1f4a4643f15b01407c66"
++SRC_URI =3D "git://github.com/c-ares/c-ares.git;branch=3Dmain;protocol=3Dh=
+ttps \
++           file://cmake-install-libcares.pc.patch \
++           file://0001-fix-configure-error-mv-libcares.pc.cmakein-to-libca=
+r.patch \
++           "
++SRCREV =3D "6654436a307a5a686b008c1d4c93b0085da6e6d8"
 
  UPSTREAM_CHECK_GITTAGREGEX =3D "cares-(?P<pver>\d+_(\d_?)+)"
 
