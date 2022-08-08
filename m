@@ -2,62 +2,63 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0841FC48BEA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 136DFC25B0D
 	for <webhook@archiver.kernel.org>; Mon,  8 Aug 2022 14:25:19 +0000 (UTC)
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com
- [209.85.210.172])
- by mx.groups.io with SMTP id smtpd.web09.25876.1659968709873341622
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com
+ [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.web09.25879.1659968713722983131
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Aug 2022 07:25:10 -0700
+ Mon, 08 Aug 2022 07:25:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=aCnKjbaQ;
- spf=pass (domain: gmail.com, ip: 209.85.210.172,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=qOeJKuQ6;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f172.google.com with SMTP id d20so8238631pfq.5
+Received: by mail-pj1-f49.google.com with SMTP id
+ o3-20020a17090a0a0300b001f7649cd317so1616184pjo.0
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Aug 2022 07:25:09 -0700 (PDT)
+ Mon, 08 Aug 2022 07:25:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=t1dD6QJR+z2NswpNIM2DNa+2t1H+eixBapFca/TudEs=;
-        b=aCnKjbaQFXBgBE2dT1aOQtRKeGJs0G+JNdkTwh2Uikx03XxX8Mz29KXvW70lvwU1mr
-         CCuRV9lDv/JKz/G3qUEPGZfWcwxC8D9JJOFkb6FHVvgwQWJIqUXcFJxNu1GL0dfpMS3z
-         rJ4+8aYA2zkjbO6tm9BX5wwwYqtx4HUixeAEOInbfoCuCzndmds5DU53qgFQV6V2OlE+
-         6qC7oGCXoRvDEY91yIjYaa1UoeG3qPk484uJ2jj+J7WJ6CqaqB4sCxjJZ0jrNH9yNbPF
-         sCBYZAfrhteMADu/bbx0kuaOn7qw2ZxLzIa8Zx8cSA+I+2puoHZy8MJxc7j0i42U9/sL
-         nsgQ==
+        bh=/Wg481gMWcu/fBGI3mFJHxhWgh0L1AQyYr/QD3dfevQ=;
+        b=qOeJKuQ6WlS5JpuADkScuZ8LugPnihOgUFyhQfQR5/HGk8DtMFjbbE7Y6gty3ZN2Y8
+         wddAn/aRzlWTac5Kpb5EWSjSondozLJpHVG50b0fFMmb3UPvi/Earb/S++5ibPaTzdXp
+         XStJsDgFOsbDkK7lVZ+HzIjCE8IATLkMyoz+heaqEjskeyvbimGkTnhYWhTqbt6x8gGI
+         Xlu7tdu2wfSaeiQms2acRo3FH8Ze3QBcogzQaNHMBGYxgn/GuO4wKaUw0naNyalE4yEZ
+         1fS2Ob2ic8o27w0kfAgEfc6KCyIXi88oS3JYdkO77j2cyGXoaoGqxo6/dh3IVzZDXPVG
+         5K3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=t1dD6QJR+z2NswpNIM2DNa+2t1H+eixBapFca/TudEs=;
-        b=yapq53VzzQ4c8MdRtKxExYXGNVtNEoS+rit/9xAhJjZsX5UW14DaqNm49/7us9eDwd
-         /XbMHqETDR0WlGMpgoR6Y6B4t/wPoAhwLrqTynv2A6MRG3LEwXu/8+84dnhl4F7G4lHG
-         iDO4Hz/k4pR3KMPYLv9HEwGXSlOORqanvqjFeUfKAdeslTkfCz0j1C2sQrcZx8MmqVf/
-         RSFFw24bOXCy2tYG59tAzhYp7QdGS6BSvfeet77KYFf3FwvkcDLIfNHCsTw3dIuzi/fU
-         6cp27rcilF1ry382jK3qeec0H30IJIj6VOkxXYXGXq8IcchVw5PRzfgcjr9HWWhvj2Oi
-         4WJw==
-X-Gm-Message-State: ACgBeo3PxfU3ax04XGV3qnGsk9uz0BRTKXaGdR/zJEmgqKunJ21PMLea
-	s5n+gD/YNQjRqqGedd0ZNyAeYVIATys=
+        bh=/Wg481gMWcu/fBGI3mFJHxhWgh0L1AQyYr/QD3dfevQ=;
+        b=QzSoBdlox0hpt5AGLdUVF370A36U/n+HVtJ/e/CKTBJUSuXZkkpzXm+kUNh4HyyKZo
+         1UyePFVAscHzZ8YoRROPeos3wUaopE/SVszUvJY3UDSIfzmyBsbnjV+anct9eB25voUm
+         QIeTkAT/GtDildSyb7SqVevFCVnlp77qrqvIQGbwnerFt2D2LT8T44RARCZcFCom3d39
+         GK0L8Spytx5Va20YHXZ5+/1JKapCCvT1rPue3VUiZZUF7t5wLpJLxlVnfZlPIZ8O+t8j
+         /ahg+tLyIPpE+6+waLtxeDN0gZN69jPoHRlShWzpz0Sq/CRn7F+ai2UXefvkZOuxPFm9
+         Jnkg==
+X-Gm-Message-State: ACgBeo3vhulDxB92sj12kcgsKUVqWuuvL1sj3a9W5IKk/QYVPRcwoD87
+	u4c3km159xP34frBzmu8wr4Tblcv/eI=
 X-Google-Smtp-Source: 
- AA6agR7eJdYZaKNXSqXkhD840yNCI2LUdmrETXYCEma4x99QKDFwrRqjdF7wq+pBFNVq8QKCGIDM9Q==
-X-Received: by 2002:a63:170d:0:b0:415:f76d:45e1 with SMTP id
- x13-20020a63170d000000b00415f76d45e1mr15718255pgl.171.1659968708866;
-        Mon, 08 Aug 2022 07:25:08 -0700 (PDT)
+ AA6agR5hit8fe+n+tGWYRV/HxbGbOoWoqmU0PWooMRwyUtwScJ0if5dfmZcohhPPhSXa4QrNKYwgdw==
+X-Received: by 2002:a17:902:70c7:b0:170:9030:8219 with SMTP id
+ l7-20020a17090270c700b0017090308219mr9897132plt.163.1659968712728;
+        Mon, 08 Aug 2022 07:25:12 -0700 (PDT)
 Received: from keaua.caveonetworks.com (c-67-181-203-136.hsd1.ca.comcast.net.
  [67.181.203.136])
         by smtp.gmail.com with ESMTPSA id
- u8-20020a1709026e0800b0016f1204cde8sm8757492plk.301.2022.08.08.07.25.07
+ u8-20020a1709026e0800b0016f1204cde8sm8757492plk.301.2022.08.08.07.25.10
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 08 Aug 2022 07:25:07 -0700 (PDT)
+        Mon, 08 Aug 2022 07:25:11 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [kirkstone 07/13] net-snmp: set ac_cv_path_PSPROG
-Date: Mon,  8 Aug 2022 07:22:46 -0700
+Subject: [kirkstone 09/13] freeradius: Fix buildpaths issue
+Date: Mon,  8 Aug 2022 07:22:48 -0700
 Message-Id: 
- <2594e977785f3ba5116125927de17e51f3b6a07d.1659968069.git.akuster808@gmail.com>
+ <055f26ce9a2607b7412730de728abd6305fd4c80.1659968069.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1659968069.git.akuster808@gmail.com>
 References: <cover.1659968069.git.akuster808@gmail.com>
@@ -68,35 +69,83 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 08 Aug 2022 14:25:19 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98167
+ https://lists.openembedded.org/g/openembedded-devel/message/98169
 
 From: Mingli Yu <mingli.yu@windriver.com>
 
 Fixes:
-  WARNING: net-snmp-5.9.1-r0 do_package_qa: QA Issue: File /usr/include/net-snmp/net-snmp-config-64.h in package net-snmp-dev contains reference to TMPDIR
-  File /usr/bin/net-snmp-create-v3-user in package net-snmp-dev contains reference to TMPDIR [buildpaths]
-  WARNING: net-snmp-5.9.1-r0 do_package_qa: QA Issue: File /usr/lib/net-snmp/ptest/include/net-snmp/net-snmp-config.h in package net-snmp-ptest contains reference to TMPDIR [buildpaths]
+  WARNING: freeradius-3.0.21-r0 do_package_qa: QA Issue: File /usr/bin/radeapclient in package freeradius-utils contains reference to TMPDIR [buildpaths]
+  WARNING: freeradius-3.0.21-r0 do_package_qa: QA Issue: File /usr/lib/libfreeradius-server.so.0.0.0 in package freeradius contains reference to TMPDIR [buildpaths]
 
 Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 1bf83255aee9850bf5ce5138c4bdefbe9eeb120c)
+(cherry picked from commit 1c91de67b4981f62ddc7308bf88c1a6f4a844fdb)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb | 1 +
- 1 file changed, 1 insertion(+)
+ ...01-version.c-don-t-print-build-flags.patch | 41 +++++++++++++++++++
+ .../freeradius/freeradius_3.0.21.bb           |  1 +
+ 2 files changed, 42 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0001-version.c-don-t-print-build-flags.patch
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb
-index 5f887b8868..30c0ce74cb 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb
-@@ -72,6 +72,7 @@ CACHED_CONFIGUREVARS = " \
-     ac_cv_ETC_MNTTAB=/etc/mtab \
-     lt_cv_shlibpath_overrides_runpath=yes \
-     ac_cv_path_UNAMEPROG=${base_bindir}/uname \
-+    ac_cv_path_PSPROG=${base_bindir}/ps \
-     ac_cv_file__etc_printcap=no \
-     NETSNMP_CONFIGURE_OPTIONS= \
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/0001-version.c-don-t-print-build-flags.patch b/meta-networking/recipes-connectivity/freeradius/files/0001-version.c-don-t-print-build-flags.patch
+new file mode 100644
+index 0000000000..697205efe0
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/freeradius/files/0001-version.c-don-t-print-build-flags.patch
+@@ -0,0 +1,41 @@
++From cbc64dcf6aa2a1be63f45ea6dd7d2c49b70a0bee Mon Sep 17 00:00:00 2001
++From: Mingli Yu <mingli.yu@windriver.com>
++Date: Wed, 3 Aug 2022 16:44:29 +0800
++Subject: [PATCH] version.c: don't print build flags
++
++Don't print the build flags to avoid collecting the build environment info.
++
++Upstream-Status: Inappropriate [oe specific]
++
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++---
++ src/main/version.c | 13 -------------
++ 1 file changed, 13 deletions(-)
++
++diff --git a/src/main/version.c b/src/main/version.c
++index 62972d9f53..cf81de72c9 100644
++--- a/src/main/version.c
+++++ b/src/main/version.c
++@@ -589,19 +589,6 @@ void version_print(void)
++ 		DEBUG2("  unknown");
++ #endif
++ 
++-		DEBUG2("Compilation flags:");
++-#ifdef BUILT_WITH_CPPFLAGS
++-		DEBUG2("  cppflags : " BUILT_WITH_CPPFLAGS);
++-#endif
++-#ifdef BUILT_WITH_CFLAGS
++-		DEBUG2("  cflags   : " BUILT_WITH_CFLAGS);
++-#endif
++-#ifdef BUILT_WITH_LDFLAGS
++-		DEBUG2("  ldflags  : " BUILT_WITH_LDFLAGS);
++-#endif
++-#ifdef BUILT_WITH_LIBS
++-		DEBUG2("  libs     : " BUILT_WITH_LIBS);
++-#endif
++ 		DEBUG2("  ");
++ 	}
++ 	INFO("FreeRADIUS Version " RADIUSD_VERSION_STRING);
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
+index d6477e340e..1407b798b5 100644
+--- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
++++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.21.bb
+@@ -32,6 +32,7 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0
+     file://radiusd.service \
+     file://radiusd-volatiles.conf \
+     file://check-openssl-cmds-in-script-bootstrap.patch \
++    file://0001-version.c-don-t-print-build-flags.patch \
  "
+ 
+ raddbdir="${sysconfdir}/${MLPREFIX}raddb"
 -- 
 2.25.1
 
