@@ -1,242 +1,174 @@
-Return-Path: <bruce.ashfield@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 780DDC00140
-	for <webhook@archiver.kernel.org>; Mon,  8 Aug 2022 17:35:22 +0000 (UTC)
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com
- [209.85.222.181])
- by mx.groups.io with SMTP id smtpd.web12.1469.1659980120261647672
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C1BA1C00140
+	for <webhook@archiver.kernel.org>; Mon,  8 Aug 2022 18:38:02 +0000 (UTC)
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com
+ [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.web08.2222.1659983877634708832
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Aug 2022 10:35:20 -0700
+ Mon, 08 Aug 2022 11:37:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=aNQYVNrC;
- spf=pass (domain: gmail.com, ip: 209.85.222.181,
- mailfrom: bruce.ashfield@gmail.com)
-Received: by mail-qk1-f181.google.com with SMTP id w6so6996822qkf.3
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=o0GecRBi;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id
+ h21-20020a17090aa89500b001f31a61b91dso15395938pjq.4
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Aug 2022 10:35:20 -0700 (PDT)
+ Mon, 08 Aug 2022 11:37:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc;
-        bh=lSnObpr0gHE3gEKShcUIBEbfLtYOa3tXciNF+SAtgds=;
-        b=aNQYVNrC8/KGoKUB8WrnOkQmCQtRbi8NJoYdF1O4g2mncDDZkH1EPiBeDOUGY/cpuZ
-         5HzEfnLrZNJzCQyb7IpYcmObcj4XlrVGs10D+pw6Bl5VTGfcaJXVNrUui40t7zUqkEgP
-         2ovxMYuITeMN09LSdEtWLmuq9xsUOjgj/6TDXWsMTVOZc8ZitsUJJDSMKpCxqinkgeD0
-         UsBDWsbXhSU2tf3YIIaMiiUNx44qwVok5LqR+w6DmLaT/n9clc0aerF1Jlg1GYy1OPoK
-         YBtvTrXQhFSbxpcUV9kmEKQ9HUd50ZHC4KgByEnGqy6IAKlZakfLknoy8DbojZVWMSYr
-         rRXg==
+        bh=+KqJAbNsNllfSl2eZLDzm5ytfNwwvmRqCSN4iIKz3Rg=;
+        b=o0GecRBidgOq6nEdbWZk8p0ZPUkNci2mpv1p9USMyCYikY+BBzDdgsOuZu6/Yxkpop
+         nuBx+2VBMWWnRrGTcyaVVy6UAE+wjnhgHYAmgwavXeAltSEf5gU8O0pcwiTqIm+rdNM4
+         QkWZueKAFzHo5FdMyF8QZh8itMfIfhdvGGqxBmpq+0UUkjimY+hGrgp36mlqP71sZ5sy
+         gXR6oilEY/vccnjvXn7U7bOT8YtX7bOklLR85eg9EMTWNL7V51m+Xmw3GQHU/OYhkluz
+         MsqiAQf+INaD0tbwLJ4MWiEKiNvlvmCPG2Vp6sBfwg7b34/V3jx17wUHIwPUEa+B0PfP
+         Wx+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc;
-        bh=lSnObpr0gHE3gEKShcUIBEbfLtYOa3tXciNF+SAtgds=;
-        b=5/2lzWcdfSOTLQ1KZ5SYHChzaMCXxSNKmqkz+Qwmk6mt9a9+5VYzDZPO82wWfjQQm3
-         tdhsup0iXmipejWm0qXte+QwJ/GeThdgODcd9a+2GNmkAZMbCVBKHp7W1wQ5lyYrrgbh
-         CmtvaW5SuWHhqA3f2XgbEirhlQ5br4ggHT5IBDNZqyrKF62dxr7rP2MaoQHfLap0MwHo
-         K8NpZE/MkuFsAqrHEYTXGzwZPsxonvIHmegMqwtnxA/4CtwUIK2BIL51YpfatTLHSyMK
-         uw59NU456WyrUrNm671ehPVx5XP3LbN43phldfvuG6Gf+5MkB8gpTSybB2nyv7gA55ei
-         2MEg==
-X-Gm-Message-State: ACgBeo3CfhdlEtsopm1SVVPK+rY1KVRi4toajHNkID4BBwpzxHe26Df6
-	pzkMw43Md78vZ4VbFAq6mKRhqcIbwaRfqg==
+        bh=+KqJAbNsNllfSl2eZLDzm5ytfNwwvmRqCSN4iIKz3Rg=;
+        b=Aq/7ScEb2XcsxY7q8ip+wJnFIV5TOt311uQN6opjcIVYqaH3zQbxoz0AyRH+AJXukJ
+         i9VR0GyaaRxwcsiUUXEqc1jjUu90r5OQzFX1EcbFU3uTKPGXPBI/YztIdK/m8aw0MMvW
+         gWojLTU1V8detBDtgfWtZO2m9hJMu20xa1x82BJ4YOoPhdUGZMv8F6/gmnTHLQBGM+5o
+         jcijDO+tn3dagroDc8+wXAODvzDcyL00e6qPLDSiAGzACmhtN0UenIgkZDHm1I2BXjYb
+         OfWXw8zdkPWS/UjH7fbFmFrkYlLev+w7EJF5ZqmizEfEujPeVVnMRa1eRUm6wKzP40av
+         8ZWA==
+X-Gm-Message-State: ACgBeo09R0YiRuveClZzGPsodYTLPheI6dwAg4RSbuB5lbSgksA2c35s
+	959CMci4cz7zc3zUy9aGtwh/Uk3wu3s=
 X-Google-Smtp-Source: 
- AA6agR4KuU3RaAVm10pYk4v1QdszxsZYej0ZVZeqf+3VXC3zAzCYkhpOOP6fA0h7G8aX2k46y0BqwQ==
-X-Received: by 2002:a37:ea14:0:b0:6b9:4292:32e8 with SMTP id
- t20-20020a37ea14000000b006b9429232e8mr5918849qkj.196.1659980119121;
-        Mon, 08 Aug 2022 10:35:19 -0700 (PDT)
-Received: from localhost.localdomain ([173.34.88.218])
+ AA6agR6dTYre5yfkVzi4rt2qoxyf6ACcYCiCQgdiWFLgc6pWb5yCBbhDXzVBvjjouhYVmn5bQob7NA==
+X-Received: by 2002:a17:90b:1d0b:b0:1f5:6554:d556 with SMTP id
+ on11-20020a17090b1d0b00b001f56554d556mr22294120pjb.168.1659983876425;
+        Mon, 08 Aug 2022 11:37:56 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::9f45])
         by smtp.gmail.com with ESMTPSA id
- s18-20020a05620a29d200b006b58d8f6181sm10434368qkp.72.2022.08.08.10.35.18
+ a11-20020a634d0b000000b0041b672e93c2sm6623757pgb.17.2022.08.08.11.37.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 08 Aug 2022 10:35:18 -0700 (PDT)
-From: bruce.ashfield@gmail.com
-To: raj.khem@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH][meta-filesystems] zfs: update to v2.1.5
-Date: Mon,  8 Aug 2022 13:35:17 -0400
-Message-Id: <20220808173517.871084-1-bruce.ashfield@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        Mon, 08 Aug 2022 11:37:55 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>
+Subject: [meta-oe][PATCH] audit: Upgrade to 3.0.8 and fix build with linux
+ 5.17+
+Date: Mon,  8 Aug 2022 11:37:53 -0700
+Message-Id: <20220808183753.1462953-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.37.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 08 Aug 2022 17:35:22 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 08 Aug 2022 18:38:02 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98174
+ https://lists.openembedded.org/g/openembedded-devel/message/98175
 
-From: Bruce Ashfield <bruce.ashfield@gmail.com>
+audit errors out due to swig munging it does with kernel headers
 
-Updating to 2.1.5 primarily for kernel 5.19+ support. We refresh
-one patch, and pick up the following changes:
+| audit_wrap.c: In function '_wrap_audit_rule_data_buf_set':
+| audit_wrap.c:4701:17: error: cast specifies array type
+|  4701 |     arg1->buf = (char [])(char *)memcpy(malloc((size)*sizeof(char)), (const char *)(arg2), sizeof(char)*(size));
+|       |                 ^
+| audit_wrap.c:4701:15: error: invalid use of flexible array member
+|  4701 |     arg1->buf = (char [])(char *)memcpy(malloc((size)*sizeof(char)), (const char *)(arg2), sizeof(char)*(size));
+|       |               ^
+| audit_wrap.c:4703:15: error: invalid use of flexible array member
+|  4703 |     arg1->buf = 0;
+|       |               ^
 
-Changes
-  - Remove install of zfs-load-module.service for dracut #13574
-  - FreeBSD: Silence clang unused-but-set-variable
-  - Improve sorted scan memory accounting #13537
-  - Corrected edge case in uncompressed ARC->L2ARC handling #13375
-  - Remove wrong assertion in log spacemap #13486 #13513
-  - libzfs: Fail making a dataset handle gracefully #13077
-  - libzfs: mount: don't leak mnt_param_t if mnt_func fails #12968
-  - Reject zfs send -RI with nonexistent fromsnap #12574 #12575
-  - Linux 5.18 compat: META #13527
-  - autoconf: AC_MSG_CHECKING consistency #13529
-  - Linux 5.19 compat: asm/fpu/internal.h #13529
-  - Linux 5.19 compat: zap_flags_t conflict #13515
-  - Linux 5.19 compat: bdev_start_io_acct() / bdev_end_io_acct() #13515
-  - Linux 5.19 compat: aops->read_folio() #13515
-  - Linux 5.19 compat: blkdev_issue_secure_erase() #13515
-  - Linux 5.19 compat: bdev_max_secure_erase_sectors() #13515
-  - Linux 5.19 compat: bdev_max_discard_sectors() #13515
-  - Linux 5.18 compat: bio_alloc() #13515
-  - Silence unused-but-set-variable warning #13507
-  - zed: support subject as header in zed_notify_email() #13440
-  - rpm: Keep debug symbols if configured with '--enable-debuginfo' #13500
-  - FreeBSD: libspl: Add locking around statfs globals #13484
-  - Standardize RHEL version check in packages #13501
-  - Modified ncompress requirement in RPM to exclude RHEL9 #13480 #13490
-  - zed: Take no action on scrub/resilver checksum errors #13499
-  - zdb: Fix handling of nul termination in symlink targets #13482
-  - automake: don't install /e/d/zfs or /e/z/zfs-functions +x #13496
-  - Multiple dracut module install script cleanups #13010
-  - Remove absolute paths to udev rules and binaries for dracut #13010
-  - Make dracut fail if essential files cannot be installed #13010
-  - Make better use of dracut functions when building initramfs #13010
-  - Fix compiler warnings about zero-length arrays in inline bitops #13463 #13465
-  - Add missing AC_MSG_RESULT(no) to configure #13454
-  - abd_os: remove redundant refcount creation for abd_children #13429
-  - Fix functions without a prototype #13421
-  - FreeBSD: use zero_region instead of allocating a dedicated page #13406
-  - autoconf: Fail when __copy_from_user_inatomic is a non-GPL symbol #13389
-  - PPC get_user workaround #11958 #12590 #13367
-  - Adding ZERO_PAGE detection #13199
-  - autoconf: Pretend CONFIG_MODULES is always on
-  - kbuild: unify modules(_install) for in-tree and external modules #10832 #13361
-  - Strengthen Linux kernel capabilities detection #13351
-  - zvol_wait: Ignore locked zvols #10662
-  - FreeBSD: Implement hole-punching support #12458
-  - module: zstd: check we don't leak symbols; regenerate symbol map #12988 #13209
-  - man: zpool-import.8: -d -or -c #13437
-  - Reduce dbuf_find() lock contention #13405
-  - contrib: dracut: remove getargbool polyfill #13291
-  - Add dracut.zfs.7 #13291
-  - contrib: dracut: zfs-needshutdown: don't list #13291
-  - contrib: dracut: zfs-{rollback,snapshot}-bootfs: order after key loading #13291
-  - contrib: dracut: don't require essentials to be under the same encroot #13291
-  - contrib: dracut: inline single-use import_pool, move single-use ask_for_password #13291
-  - contrib: dracut: zfs-lib: remove find_bootfs #13291
-  - contrib: dracut: zfs-lib: simplify ask_for_password #13291
-  - contrib; dracut: flatten zfs-load-key, simplify zfs-env-bootfs #13291
-  - contrib; dracut: centralise root= parsing, actually support root=s #13291
-  - contrib: dracut: parse-zfs: stop pretending we support FILESYSTEM= #13291
-  - contrib: dracut: parse-zfs: drop initqueue-finished for i/f #13291
-  - contrib/dracut: zfs-lib: export_all: replace with inline zpool export -a #13093
-  - Remove REMAKE_INITRD #12781
-  - Python 3.10 fixes, part 2 #12045 #12673
-  - Silence unused-but-set-variable warnings
-  - module: zfs: freebsd: fix unused, remove argsused #12844
-  - FreeBSD: remove unused variable
-  - zvol: remove unused variable #12917
-  - fm: remove unused variables #12917
-  - zvol: remove unused variable #12917
-  - module/zfs: vdev_removal: spa_vdev_remove_thread: remove unused variable #12187
-  - module/zfs: vdev_indirect: vdev_indirect_repair: remove unused variable #12187
-  - module/zfs: dbuf: dbuf_read_impl: remove unused variable #12187
-  - module/zfs: arc: arc_hdr_realloc_crypt: remove unused variables #12187
-  - libzfs: zfs_send: remove unused variable #12187
-  - libzutil: zpool_find_config: remove unused variable #12187
-  - Skip spacemaps reading in case of pool readonly import #9095 #12687
-  - zfs: holds: dequadratify #13372 #13373
-  - Linux 5.18 compat: replace __set_page_dirty_nobuffers #13325 #13380
-  - Fix O_APPEND for Linux 3.15 and older kernels #13370 #13377
-  - Linux 5.18 compat: kobj_type.default_attrs replaced with default_groups #13357
-  - FreeBSD: Fix translation from ABD to physical pages.
-  - Corrected oversight in ZERO_RANGE behavior #13329 #13338
-  - Document zfs inherit -S's interaction with noninheritable properties #11894 #13335
-  - Linux 5.17 compat: GENHD_FL_EXT_DEVT / GENHD_FL_NO_PART_SCAN #13294 #13297
-  - FreeBSD: Return Mach error codes from VOP_(GET|PUT)PAGES #13311
-  - FreeBSD: Parameterize ZFS_ENTER/ZFS_VERIFY_VP with an error code #13311
-  - libzfs: import: zpool_clear_label: actually fail if clearing l2arc header fails #13304
-  - libzfs: sendrecv: always cancel progress thread in zfs_send_one() #11560 #13284
-  - Linux 5.18 compat: use address_space_operations->readahead #13278
-  - Linux 5.18 compat: blkg_tryget is moved to private headers #13278
-  - Linux 5.18 compat: replace genhd.h with blkdev.h includes #13251
-  - Linux 5.18 compat: 4-argument bio_alloc() #13251
-  - FreeBSD: Use NDFREE_PNBUF if available #13277
-  - Export minimal zfs_refcount interfaces #12613
-  - Default to zfs_dmu_offset_next_sync=1 #12746
-  - etc/systemd/zfs-mount-generator: serialise, handle keylocation=http[s]:// #12138
-  - libzfs: diff: stream_bytes: use fputc, %hho formats chars #12829
-  - zfs, libzfs: diff: accept -h/ZFS_DIFF_NO_MANGLE, disabling path escaping #12829
+These errors are due to VLAIS from kernel headers, so we copy
+linux/audit.h and make the needed change in local audit.h and make
+needed arrangements in build to use it when building audit package
 
-Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Bruce Ashfield <bruce.ashfield@gmail.com>
 ---
- ...01-Define-strndupa-if-it-does-not-exist.patch | 16 +++++++---------
- .../zfs/{zfs_2.1.4.bb => zfs_2.1.5.bb}           |  2 +-
- 2 files changed, 8 insertions(+), 10 deletions(-)
- rename meta-filesystems/recipes-filesystems/zfs/{zfs_2.1.4.bb => zfs_2.1.5.bb} (95%)
+ .../audit/Fixed-swig-host-contamination-issue.patch | 13 +++----------
+ .../audit/{audit_3.0.7.bb => audit_3.0.8.bb}        |  7 ++++++-
+ 2 files changed, 9 insertions(+), 11 deletions(-)
+ rename meta-oe/recipes-security/audit/{audit_3.0.7.bb => audit_3.0.8.bb} (93%)
 
-diff --git a/meta-filesystems/recipes-filesystems/zfs/zfs/0001-Define-strndupa-if-it-does-not-exist.patch b/meta-filesystems/recipes-filesystems/zfs/zfs/0001-Define-strndupa-if-it-does-not-exist.patch
-index 8bb8b9479..80955b3ca 100644
---- a/meta-filesystems/recipes-filesystems/zfs/zfs/0001-Define-strndupa-if-it-does-not-exist.patch
-+++ b/meta-filesystems/recipes-filesystems/zfs/zfs/0001-Define-strndupa-if-it-does-not-exist.patch
-@@ -1,4 +1,4 @@
--From 54883e714b7fd1e7f4ce47eb1fc09adff35d561e Mon Sep 17 00:00:00 2001
-+From cc0cd6f71f6ef96fca2d7b730a3f0f6722fec696 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sat, 7 May 2022 12:15:22 -0700
- Subject: [PATCH] Define strndupa if it does not exist
-@@ -7,17 +7,18 @@ musl e.g. does not supply strndupa, unlike glibc
+diff --git a/meta-oe/recipes-security/audit/audit/Fixed-swig-host-contamination-issue.patch b/meta-oe/recipes-security/audit/audit/Fixed-swig-host-contamination-issue.patch
+index 740bcb5a7f..b023c80ae4 100644
+--- a/meta-oe/recipes-security/audit/audit/Fixed-swig-host-contamination-issue.patch
++++ b/meta-oe/recipes-security/audit/audit/Fixed-swig-host-contamination-issue.patch
+@@ -18,11 +18,9 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+  bindings/swig/src/auditswig.i     | 2 +-
+  2 files changed, 3 insertions(+), 2 deletions(-)
  
- Upstream-Status: Pending
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- ---
-  etc/systemd/system-generators/zfs-mount-generator.c | 9 +++++++++
-  1 file changed, 9 insertions(+)
- 
- diff --git a/etc/systemd/system-generators/zfs-mount-generator.c b/etc/systemd/system-generators/zfs-mount-generator.c
--index b806339..592d2f9 100644
-+index f4c6c26..255bee4 100644
- --- a/etc/systemd/system-generators/zfs-mount-generator.c
- +++ b/etc/systemd/system-generators/zfs-mount-generator.c
--@@ -47,6 +47,15 @@
-- #define	STRCMP ((int(*)(const void *, const void *))&strcmp)
-- #define	PID_T_CMP ((int(*)(const void *, const void *))&pid_t_cmp)
-+@@ -193,6 +193,15 @@ fopenat(int dirfd, const char *pathname, int flags,
-+ 	return (fdopen(fd, stream_mode));
-+ }
+-diff --git a/bindings/swig/python3/Makefile.am b/bindings/swig/python3/Makefile.am
+-index dd9d934..61b486d 100644
+ --- a/bindings/swig/python3/Makefile.am
+ +++ b/bindings/swig/python3/Makefile.am
+-@@ -22,6 +22,7 @@
++@@ -23,6 +23,7 @@
+  CONFIG_CLEAN_FILES = *.loT *.rej *.orig
+  AM_CFLAGS = -fPIC -DPIC -fno-strict-aliasing $(PYTHON3_CFLAGS)
+  AM_CPPFLAGS = -I. -I$(top_builddir) -I${top_srcdir}/lib $(PYTHON3_INCLUDES)
+@@ -30,7 +28,7 @@ index dd9d934..61b486d 100644
+  LIBS = $(top_builddir)/lib/libaudit.la
+  SWIG_FLAGS = -python -py3 -modern
+  SWIG_INCLUDES = -I. -I$(top_builddir) -I${top_srcdir}/lib $(PYTHON3_INCLUDES)
+-@@ -36,7 +37,7 @@ _audit_la_DEPENDENCIES =${top_srcdir}/lib/libaudit.h ${top_builddir}/lib/libaudi
++@@ -37,7 +38,7 @@ _audit_la_DEPENDENCIES =${top_srcdir}/li
+  _audit_la_LIBADD = ${top_builddir}/lib/libaudit.la
+  nodist__audit_la_SOURCES  = audit_wrap.c
+  audit.py audit_wrap.c: ${srcdir}/../src/auditswig.i 
+@@ -39,8 +37,6 @@ index dd9d934..61b486d 100644
   
- +#ifndef strndupa
- +#define strndupa(s, n) \
-@@ -29,8 +30,5 @@ index b806339..592d2f9 100644
- +#endif
- +
-  static int
-- pid_t_cmp(const pid_t *lhs, const pid_t *rhs)
-+ line_worker(char *line, const char *cachefile)
-  {
+  CLEANFILES = audit.py* audit_wrap.c *~
+  
+-diff --git a/bindings/swig/src/auditswig.i b/bindings/swig/src/auditswig.i
+-index 21aafca..dd0f62c 100644
+ --- a/bindings/swig/src/auditswig.i
+ +++ b/bindings/swig/src/auditswig.i
+ @@ -39,7 +39,7 @@ signed
+@@ -48,10 +44,7 @@ index 21aafca..dd0f62c 100644
+  typedef unsigned __u32;
+  typedef unsigned uid_t;
+ -%include "/usr/include/linux/audit.h"
+-+%include "linux/audit.h"
+++%include "../lib/audit.h"
+  #define __extension__ /*nothing*/
+  %include <stdint.i>
+  %include "../lib/libaudit.h"
 --- 
--2.36.0
+-2.17.1
 -
-diff --git a/meta-filesystems/recipes-filesystems/zfs/zfs_2.1.4.bb b/meta-filesystems/recipes-filesystems/zfs/zfs_2.1.5.bb
-similarity index 95%
-rename from meta-filesystems/recipes-filesystems/zfs/zfs_2.1.4.bb
-rename to meta-filesystems/recipes-filesystems/zfs/zfs_2.1.5.bb
-index dd676c945..6aa674c79 100644
---- a/meta-filesystems/recipes-filesystems/zfs/zfs_2.1.4.bb
-+++ b/meta-filesystems/recipes-filesystems/zfs/zfs_2.1.5.bb
-@@ -7,7 +7,7 @@ HOMEPAGE ="https://github.com/openzfs/zfs"
- SRC_URI = "https://github.com/openzfs/zfs/releases/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
-            file://0001-Define-strndupa-if-it-does-not-exist.patch \
+diff --git a/meta-oe/recipes-security/audit/audit_3.0.7.bb b/meta-oe/recipes-security/audit/audit_3.0.8.bb
+similarity index 93%
+rename from meta-oe/recipes-security/audit/audit_3.0.7.bb
+rename to meta-oe/recipes-security/audit/audit_3.0.8.bb
+index d77aec2964..3dbfc9e604 100644
+--- a/meta-oe/recipes-security/audit/audit_3.0.7.bb
++++ b/meta-oe/recipes-security/audit/audit_3.0.8.bb
+@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/linux-audit/${BPN}-userspace.git;branch=master;proto
  "
--SRC_URI[sha256sum] = "3b52c0d493f806f638dca87dde809f53861cd318c1ebb0e60daeaa061cf1acf6"
-+SRC_URI[sha256sum] = "1913041e5c44ff07ca384346ad8145aeedf77e77cd1cea9ec5d533246691e10c"
  
- # Using both 'module' and 'autotools' classes seems a bit odd, they both
- # define a do_compile function.
+ S = "${WORKDIR}/git"
+-SRCREV = "f60b2d8f55c74be798a7f5bcbd6c587987f2578a"
++SRCREV = "54a62e78792fe583267cf80da717ee480b8f42bc"
+ 
+ inherit autotools python3native update-rc.d systemd
+ 
+@@ -71,6 +71,11 @@ FILES:${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}"
+ 
+ CONFFILES:auditd = "${sysconfdir}/audit/audit.rules"
+ 
++do_configure:prepend() {
++	sed -e 's|buf\[];|buf[0];|g'  ${STAGING_INCDIR}/linux/audit.h > ${S}/lib/audit.h
++        sed -i -e 's|#include <linux/audit.h>|#include "audit.h"|g' ${S}/lib/libaudit.h
++}
++
+ do_install:append() {
+ 	rm -f ${D}/${libdir}/python${PYTHON_BASEVERSION}/site-packages/*.a
+ 	rm -f ${D}/${libdir}/python${PYTHON_BASEVERSION}/site-packages/*.la
 -- 
-2.25.1
+2.37.1
 
 
