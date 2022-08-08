@@ -2,62 +2,62 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06800C3F6B0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0841FC48BEA
 	for <webhook@archiver.kernel.org>; Mon,  8 Aug 2022 14:25:19 +0000 (UTC)
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com
- [209.85.210.175])
- by mx.groups.io with SMTP id smtpd.web08.25910.1659968718539934302
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com
+ [209.85.210.172])
+ by mx.groups.io with SMTP id smtpd.web09.25876.1659968709873341622
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Aug 2022 07:25:18 -0700
+ Mon, 08 Aug 2022 07:25:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=YYQKVn/5;
- spf=pass (domain: gmail.com, ip: 209.85.210.175,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=aCnKjbaQ;
+ spf=pass (domain: gmail.com, ip: 209.85.210.172,
  mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f175.google.com with SMTP id p125so4705994pfp.2
+Received: by mail-pf1-f172.google.com with SMTP id d20so8238631pfq.5
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Aug 2022 07:25:18 -0700 (PDT)
+ Mon, 08 Aug 2022 07:25:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=+kQSOMazC6n9XCFmvcsU86RvZVKozFF7JZUdGX2IbK0=;
-        b=YYQKVn/5nfnatWWxMXU/X/lmFVmOCWx/40X5y+87keqs/oQ4CR/TRmmc8CGSzyFI/+
-         CYOmUbNkbg5K1Wof60B3fLO9OMmNdWekTHuC1/4KlNWQ4NK7vzNgwhrivAGh8aIMuj8/
-         MibDRMCgfhCJdOzZyFCaTjE9JC2ob4cFVntkHsh7lkVIaxfKC+H7EgEdgVAi5TqgzKU4
-         y6TiCDsohcMGQ1X8UcZG+MZPdPCNuMv7rAcHdl34vAPoiF1taocvzi2kyzbEiarzPtXp
-         rYF/XlhbscqdqxymmoHty67dquif0oYBh00VJbOYO4uGTFShjz7acrW7Zpe2bhIv58qF
-         Q2hQ==
+        bh=t1dD6QJR+z2NswpNIM2DNa+2t1H+eixBapFca/TudEs=;
+        b=aCnKjbaQFXBgBE2dT1aOQtRKeGJs0G+JNdkTwh2Uikx03XxX8Mz29KXvW70lvwU1mr
+         CCuRV9lDv/JKz/G3qUEPGZfWcwxC8D9JJOFkb6FHVvgwQWJIqUXcFJxNu1GL0dfpMS3z
+         rJ4+8aYA2zkjbO6tm9BX5wwwYqtx4HUixeAEOInbfoCuCzndmds5DU53qgFQV6V2OlE+
+         6qC7oGCXoRvDEY91yIjYaa1UoeG3qPk484uJ2jj+J7WJ6CqaqB4sCxjJZ0jrNH9yNbPF
+         sCBYZAfrhteMADu/bbx0kuaOn7qw2ZxLzIa8Zx8cSA+I+2puoHZy8MJxc7j0i42U9/sL
+         nsgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=+kQSOMazC6n9XCFmvcsU86RvZVKozFF7JZUdGX2IbK0=;
-        b=ObLAV5wXJTbCxq6B1y6OZ3EszurcmKmIs7jyLS3VhvCUv+0MCTYbISVJuvI7rCMt4C
-         qAG9DU0fPWJQBrijSId0n1u5iu5ysHr8tVqwJAu5ZEU2/73W6c4ORNzj02VY9cvLrJm6
-         iVCu2uqT4Pq8C0vbvwmm3KH0bSqMlJy9387nZ7JoEgBcXpyrArNgq9ZjSOb6FdvIphji
-         gh8gFTZgRkoASVpQzu+fBJ5PRmFm8mRuBemKZpq71vfZjd8d0JrXIuPLO9dy7aS65nEB
-         uRD+tkD7Bsf0ImAy2Lo3Byk9lN5nnilyIif1XojzJmBUzobgJ1NW8Yn/iPbhjjFL2Pqq
-         Sy/A==
-X-Gm-Message-State: ACgBeo1jYYKKOjIE+VFacXrBFTcmkpaRpLBNSOFLnEHbHf3AxYRL9uha
-	0cdz0T2jBoqMDaa7w/6acfWl+gnWImg=
+        bh=t1dD6QJR+z2NswpNIM2DNa+2t1H+eixBapFca/TudEs=;
+        b=yapq53VzzQ4c8MdRtKxExYXGNVtNEoS+rit/9xAhJjZsX5UW14DaqNm49/7us9eDwd
+         /XbMHqETDR0WlGMpgoR6Y6B4t/wPoAhwLrqTynv2A6MRG3LEwXu/8+84dnhl4F7G4lHG
+         iDO4Hz/k4pR3KMPYLv9HEwGXSlOORqanvqjFeUfKAdeslTkfCz0j1C2sQrcZx8MmqVf/
+         RSFFw24bOXCy2tYG59tAzhYp7QdGS6BSvfeet77KYFf3FwvkcDLIfNHCsTw3dIuzi/fU
+         6cp27rcilF1ry382jK3qeec0H30IJIj6VOkxXYXGXq8IcchVw5PRzfgcjr9HWWhvj2Oi
+         4WJw==
+X-Gm-Message-State: ACgBeo3PxfU3ax04XGV3qnGsk9uz0BRTKXaGdR/zJEmgqKunJ21PMLea
+	s5n+gD/YNQjRqqGedd0ZNyAeYVIATys=
 X-Google-Smtp-Source: 
- AA6agR6/fp/tGAi95PaTFBZjdUQF9J1B8vBxm+CFp7iwLv04IGs2rxgxZ/T/9zd/O29eRCfg9Xj0mg==
-X-Received: by 2002:a63:8543:0:b0:41b:f0b2:ab0 with SMTP id
- u64-20020a638543000000b0041bf0b20ab0mr15504936pgd.248.1659968717298;
-        Mon, 08 Aug 2022 07:25:17 -0700 (PDT)
+ AA6agR7eJdYZaKNXSqXkhD840yNCI2LUdmrETXYCEma4x99QKDFwrRqjdF7wq+pBFNVq8QKCGIDM9Q==
+X-Received: by 2002:a63:170d:0:b0:415:f76d:45e1 with SMTP id
+ x13-20020a63170d000000b00415f76d45e1mr15718255pgl.171.1659968708866;
+        Mon, 08 Aug 2022 07:25:08 -0700 (PDT)
 Received: from keaua.caveonetworks.com (c-67-181-203-136.hsd1.ca.comcast.net.
  [67.181.203.136])
         by smtp.gmail.com with ESMTPSA id
- u8-20020a1709026e0800b0016f1204cde8sm8757492plk.301.2022.08.08.07.25.14
+ u8-20020a1709026e0800b0016f1204cde8sm8757492plk.301.2022.08.08.07.25.07
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 08 Aug 2022 07:25:14 -0700 (PDT)
+        Mon, 08 Aug 2022 07:25:07 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [kirkstone 11/13] apache2: Fix the buildpaths issue
-Date: Mon,  8 Aug 2022 07:22:50 -0700
+Subject: [kirkstone 07/13] net-snmp: set ac_cv_path_PSPROG
+Date: Mon,  8 Aug 2022 07:22:46 -0700
 Message-Id: 
- <78e65e77992252f0d348f5a7d3a8f86313ed1beb.1659968069.git.akuster808@gmail.com>
+ <2594e977785f3ba5116125927de17e51f3b6a07d.1659968069.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1659968069.git.akuster808@gmail.com>
 References: <cover.1659968069.git.akuster808@gmail.com>
@@ -68,99 +68,35 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 08 Aug 2022 14:25:19 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98171
+ https://lists.openembedded.org/g/openembedded-devel/message/98167
 
 From: Mingli Yu <mingli.yu@windriver.com>
 
 Fixes:
-   WARNING: apache2-2.4.54-r0 do_package_qa: QA Issue: File /usr/src/debug/apache2/2.4.54-r0/build/server/exports.c in package apache2-src contains reference to TMPDIR [buildpaths]
-
-Before the patch:
-  # cat ./build/server/exports.c
-  [snip]
-  #include "mpm_fdqueue.h"
-
-  const void *ap_ugly_hack = NULL;
-
-  /*
-   * /buildarea/build/tmp-glibc/work/core2-32-wrs-linux/apache2/2.4.54-r0/httpd-2.4.54/include/ap_expr.h
-   */
-  const void *ap_hack_ap_expr_exec = (const void *)ap_expr_exec;
-  [snip]
-
-After the patch:
-  # cat ./build/server/exports.c
-  [snip]
-  #include "mpm_fdqueue.h"
-
-  const void *ap_ugly_hack = NULL;
-
-  /*
-   * ap_expr.h
-   */
-  const void *ap_hack_ap_expr_exec = (const void *)ap_expr_exec;
-  [snip]
+  WARNING: net-snmp-5.9.1-r0 do_package_qa: QA Issue: File /usr/include/net-snmp/net-snmp-config-64.h in package net-snmp-dev contains reference to TMPDIR
+  File /usr/bin/net-snmp-create-v3-user in package net-snmp-dev contains reference to TMPDIR [buildpaths]
+  WARNING: net-snmp-5.9.1-r0 do_package_qa: QA Issue: File /usr/lib/net-snmp/ptest/include/net-snmp/net-snmp-config.h in package net-snmp-ptest contains reference to TMPDIR [buildpaths]
 
 Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 4f2025e8d2f1626e97f7e9e675ce3c7d45477807)
+(cherry picked from commit 1bf83255aee9850bf5ce5138c4bdefbe9eeb120c)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...make_exports.awk-not-expose-the-path.patch | 32 +++++++++++++++++++
- .../recipes-httpd/apache2/apache2_2.4.54.bb   |  1 +
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/0001-make_exports.awk-not-expose-the-path.patch
+ meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2/0001-make_exports.awk-not-expose-the-path.patch b/meta-webserver/recipes-httpd/apache2/apache2/0001-make_exports.awk-not-expose-the-path.patch
-new file mode 100644
-index 0000000000..78f23f0f2d
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/apache2/apache2/0001-make_exports.awk-not-expose-the-path.patch
-@@ -0,0 +1,32 @@
-+From 5b5eae9cdf3bae91756c717349f2f33a31888f24 Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Wed, 3 Aug 2022 12:35:16 +0800
-+Subject: [PATCH] make_exports.awk: not expose the path
-+
-+Don't print the full path in the comment line.
-+
-+Upstream-Status: Inappropriate [oe specific]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ build/make_exports.awk | 4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/build/make_exports.awk b/build/make_exports.awk
-+index 1cf0568..44d93c5 100644
-+--- a/build/make_exports.awk
-++++ b/build/make_exports.awk
-+@@ -47,7 +47,9 @@ function push(line) {
-+ 
-+ function do_output() {
-+     printf("/*\n")
-+-    printf(" * %s\n", FILENAME)
-++    file = FILENAME
-++    sub("([^/]*[/])*", "", file)
-++    printf(" * %s\n", file)
-+     printf(" */\n")
-+     
-+     for (i = 0; i < stackptr; i++) {
-+-- 
-+2.25.1
-+
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.54.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.54.bb
-index 4b0ed2f622..37d498f52e 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.54.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.54.bb
-@@ -15,6 +15,7 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
-            file://0007-apache2-allow-to-disable-selinux-support.patch \
-            file://0008-Fix-perl-install-directory-to-usr-bin.patch \
-            file://0009-support-apxs.in-force-destdir-to-be-empty-string.patch \
-+           file://0001-make_exports.awk-not-expose-the-path.patch \
-           "
- 
- SRC_URI:append:class-target = " \
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb
+index 5f887b8868..30c0ce74cb 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb
+@@ -72,6 +72,7 @@ CACHED_CONFIGUREVARS = " \
+     ac_cv_ETC_MNTTAB=/etc/mtab \
+     lt_cv_shlibpath_overrides_runpath=yes \
+     ac_cv_path_UNAMEPROG=${base_bindir}/uname \
++    ac_cv_path_PSPROG=${base_bindir}/ps \
+     ac_cv_file__etc_printcap=no \
+     NETSNMP_CONFIGURE_OPTIONS= \
+ "
 -- 
 2.25.1
 
