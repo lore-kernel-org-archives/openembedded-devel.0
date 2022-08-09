@@ -2,37 +2,39 @@ Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 490C9C3F6B0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4909BC19F2D
 	for <webhook@archiver.kernel.org>; Tue,  9 Aug 2022 14:18:08 +0000 (UTC)
 Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
- by mx.groups.io with SMTP id smtpd.web11.12439.1660054678664909187
+ by mx.groups.io with SMTP id smtpd.web08.12610.1660054680356715460
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Aug 2022 07:17:59 -0700
+ Tue, 09 Aug 2022 07:18:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=axis-central1 header.b=AJk5uBre;
+ dkim=pass header.i=@axis.com header.s=axis-central1 header.b=QyhLrSGK;
  spf=pass (domain: axis.com, ip: 195.60.68.17,
  mailfrom: peter.kjellerstedt@axis.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=axis.com; q=dns/txt; s=axis-central1; t=1660054679;
-  x=1691590679;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=0kvn2S5BsE6a+O/YFt8bx2MkcOEjbnNHJyK7/NoZ+7Y=;
-  b=AJk5uBreu4T/XywyBt9Wm6no4oGuhyn5GSxy9HlfzStUjqjw0Q8ryNfW
-   VKVqOWrImvW2BwScMSI2Kab3ScXKkc9jfSYXfozbs78MZzR8BgfQuP/iy
-   o0/1+66RQPTH3FRneAwVRGaOL+7TyjSHVSFBlDb34allD6I0FEd2mKwCs
-   cuFDu5NInTzx9jUBtMVoU6xxW+uuShzRKVii14q5GmHgem2x8JFIncYvR
-   fS01B5pzYBp6FP6hxG+1ASSfD4APcSoWcov9eSCWgkPFz723G1X9snB5b
-   R0zQmsai2Qz5yog4Psdn1wvYQtAoTy0jZewvzM92MjOrdu6f5vcnMl7BC
+  d=axis.com; q=dns/txt; s=axis-central1; t=1660054680;
+  x=1691590680;
+  h=from:to:subject:date:message-id:in-reply-to:references:
+   mime-version:content-transfer-encoding;
+  bh=ts0KMF+DFqUDA8K2F6BOg22jYe0Snta17KsNKsgX/+o=;
+  b=QyhLrSGKhmXS09u/jsO8inlmls3BKvYNmtUsLUdhPz2pXpcxWUyxZoaK
+   q3Ckj+lBCUjAeDH6jJo4n5tXPHhrY+7oi4+NqPFR4NrRYiU/7vxWm6GWL
+   aS5mvDDF0yjDzm0H+AXG7E1sH5T3o/cbNiRBReNu66Ad7TwJKMKYqPg1X
+   zD+rsyqNr3vrz03IRVi/WxzTuL7i5Je+a3QGiOfaTmK7wnIkAEUM6xRws
+   XFefEo2U1ACJAHPwijHL7GAGc4yh6l6rrnoNo2bSEi109F4FIf/s3NgXB
+   o/BJF2sAfQ97Y2gVRDKjm8KRjJHgDT4vHfrsXWU+/EnO+7GEcVgn/6cEc
    A==;
 From: Peter Kjellerstedt <pkj@axis.com>
 To: Armin Kuster <akuster808@gmail.com>,
 	<openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][kirkstone][PATCH 1/2] libwebsockets: Avoid absolute paths
- in *.cmake files in the sysroot
-Date: Tue, 9 Aug 2022 16:17:28 +0200
-Message-ID: <20220809141729.18587-1-pkj@axis.com>
+Subject: [meta-oe][kirkstone][PATCH 2/2] cryptsetup: Add support for building
+ without SSH tokens
+Date: Tue, 9 Aug 2022 16:17:29 +0200
+Message-ID: <20220809141729.18587-2-pkj@axis.com>
 X-Mailer: git-send-email 2.21.3
+In-Reply-To: <20220809141729.18587-1-pkj@axis.com>
+References: <20220809141729.18587-1-pkj@axis.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -41,22 +43,57 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 09 Aug 2022 14:18:08 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98180
+ https://lists.openembedded.org/g/openembedded-devel/message/98181
+
+Cryptsetup SSH tokens is the only feature that has a dependency on
+libssh. Add a packageconfig to control this dependency.
 
 Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
- .../recipes-connectivity/libwebsockets/libwebsockets_4.2.2.bb  | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.2.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.2.bb
-index a5fcb8d72..2a3a4ebd0 100644
---- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.2.bb
-+++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.2.bb
-@@ -41,3 +41,6 @@ RDEPENDS:${PN} += " ${@bb.utils.contains('PACKAGECONFIG', 'libuv', '${PN}-evlib-
- RDEPENDS:${PN} += " ${@bb.utils.contains('PACKAGECONFIG', 'libev', '${PN}-evlib-ev', '', d)}"
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
+index 8f9f663a3..4f8bbf035 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
+@@ -14,7 +14,6 @@ DEPENDS = " \
+     libdevmapper \
+     popt \
+     util-linux-libuuid \
+-    libssh \
+ "
  
- RDEPENDS:${PN}-dev += " ${@bb.utils.contains('PACKAGECONFIG', 'static', '${PN}-staticdev', '', d)}"
+ DEPENDS:append:libc-musl = " argp-standalone"
+@@ -39,6 +38,7 @@ PACKAGECONFIG ??= " \
+     blkid \
+     luks-adjust-xts-keysize \
+     openssl \
++    ssh-token \
+ "
+ PACKAGECONFIG:append:class-target = " \
+     udev \
+@@ -69,6 +69,7 @@ PACKAGECONFIG[nss] = "--with-crypto_backend=nss,,nss"
+ PACKAGECONFIG[kernel] = "--with-crypto_backend=kernel"
+ PACKAGECONFIG[nettle] = "--with-crypto_backend=nettle,,nettle"
+ PACKAGECONFIG[luks2] = "--with-default-luks-format=LUKS2,--with-default-luks-format=LUKS1"
++PACKAGECONFIG[ssh-token] = "--enable-ssh-token,--disable-ssh-token,libssh"
+ 
+ EXTRA_OECONF = "--enable-static"
+ # Building without largefile is not supported by upstream
+@@ -78,6 +79,14 @@ EXTRA_OECONF += "--disable-static-cryptsetup"
+ # There's no recipe for libargon2 yet
+ EXTRA_OECONF += "--disable-libargon2"
+ 
++do_install:append() {
++    # The /usr/lib/cryptsetup directory is always created, even when ssh-token
++    # is disabled. In that case it is empty and causes a packaging error. Since
++    # there is no reason to distribute the empty directory, the easiest solution
++    # is to remove it if it is empty.
++    rmdir -p --ignore-fail-on-non-empty ${D}${libdir}/${BPN}
++}
 +
-+# Avoid absolute paths to end up in the sysroot.
-+SSTATE_SCAN_FILES += "*.cmake"
+ FILES:${PN} += "${@bb.utils.contains('DISTRO_FEATURES','systemd','${exec_prefix}/lib/tmpfiles.d/cryptsetup.conf', '', d)}"
+ 
+ RDEPENDS:${PN} = " \
 
