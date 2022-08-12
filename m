@@ -1,110 +1,107 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44D56C00140
-	for <webhook@archiver.kernel.org>; Fri, 12 Aug 2022 09:15:05 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com
- [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.8667.1660295701495623241
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 57E17C00140
+	for <webhook@archiver.kernel.org>; Fri, 12 Aug 2022 13:24:16 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg
+ [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web10.10485.1660310654704401772
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Aug 2022 02:15:01 -0700
+ Fri, 12 Aug 2022 06:24:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=mDQtXAfn;
+ dkim=pass header.i=@anavi.org header.s=default header.b=TpknHRpu;
  spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
- invalid domain name (domain: windriver.com, ip: 205.220.166.238,
- mailfrom: prvs=5223643dcc=changqing.li@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
- 27C8teA4018960
-	for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Aug 2022 02:15:00 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
- h=from : to :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=LsMJGlS0UHBS/wUe9Wk5+uNMHs1KaudG0rvLat4Wg7U=;
- b=mDQtXAfni/Dlhg0cYaxpqA0yyM/JW9rVLBxYx7Zte7Qnpc6/CET0LIawS/SUW3eLbycV
- 0uIFwdW99OCpxvBSzqHM+lFYBTdA9lAOfOCIsQR3EFumjHWH8fGTc1BqNRSIUJKC7uTq
- bH3UBD7WwOIJGyyAHXKKADBssPmQyLDsArqSp3xlayCzlnLLX2mU4a7ltIoVLj0Zz31F
- sI6vLJR4o9CE0TKuoDMdqBCB65pCYAj4m524DWGgfDRgbH1n+fL9eUFFqzOnG0y1HA2d
- +XPmUfsFn/FYhdOcD85eRD2yCbnir6hSbv7lUGBl1T3KpkNLCh/dD6U3hGtBRTiN3cn5 Mg==
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com
- [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3hvqf294yn-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Aug 2022 02:15:00 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Fri, 12 Aug 2022 02:14:59 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Fri, 12 Aug 2022 02:14:59 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [kirtstone][master][meta-oe][PATCH] redis: fix do_patch fuzz warning
-Date: Fri, 12 Aug 2022 17:14:58 +0800
-Message-ID: <20220812091458.1395202-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
+ for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
+ (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=bq6NXCmc8AfThff4DgXqcXi/zRUDnVLZGtSVd5euAjY=; b=TpknHRpuIcqXCzLlVpjOFPVwIU
+	D7lArpqo09IZ8Nmgaj1qWenSphDOTUXIG7RhEiEYS4Tmz7ByAj1w0D3g/R06Lw3UmuMuimwvnCsrE
+	07BWP0YzFk13RT+YsqSlFbXHD8B9NbSoYx9GX0x1g1RI77aMUBfuwG8nJBcTGKHfIWax1PLXKV12g
+	2J7sxp0Y8DA7YKevIjVTuGA8mSNKVnM7AIaiqEKigPQwnTYl2tj0bZ1ok3sc5vdQoJU6RhSnwxxTb
+	DbwUpGt3ISg9aARpAQWhWBZmQaTURWRMlCK7pdBRhM+DhrWBneuI/laOj5xl2+L1D3AdOSnjNk53y
+	Et/SqGIg==;
+Received: from lan.nucleusys.com ([92.247.61.126]:37172 helo=tone.k.g)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.95)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1oMUfH-000B58-R2;
+	Fri, 12 Aug 2022 16:24:14 +0300
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/4] python3-networkx: Upgrade 2.8.4 -> 2.8.5
+Date: Fri, 12 Aug 2022 16:23:54 +0300
+Message-Id: <20220812132354.1588599-4-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20220812132354.1588599-1-leon.anavi@konsulko.com>
+References: <20220812132354.1588599-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: I8l9lStY9P695PnJ5OLl2acQQCxaddHZ
-X-Proofpoint-ORIG-GUID: I8l9lStY9P695PnJ5OLl2acQQCxaddHZ
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
- definitions=2022-08-12_06,2022-08-11_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 phishscore=0
- spamscore=0 lowpriorityscore=0 adultscore=0 mlxlogscore=999 mlxscore=0
- priorityscore=1501 suspectscore=0 bulkscore=0 impostorscore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2207270000 definitions=main-2208120025
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
+ leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 12 Aug 2022 09:15:05 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 12 Aug 2022 13:24:16 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98209
+ https://lists.openembedded.org/g/openembedded-devel/message/98216
 
-From: Changqing Li <changqing.li@windriver.com>
+Upgrade to release 2.8.5:
 
-Fix:
-WARNING: lib32-redis-7.0.4-r0 do_patch: Fuzz detected:
-Applying patch GNU_SOURCE.patch
-patching file src/zmalloc.c
-Hunk #1 succeeded at 32 with fuzz 2 (offset 4 lines).
+- Check that nodes have "pos" attribute in geometric_edges
+- Correct louvain formula, solve infinite loops
+- Add more comprehensive tests for pydot
+- Move factory attributes to the class instead of instance
+- make lazy_import private and remove its internal use
 
-There are two version of redis, and need different GNU_SOURCE.patch
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../redis/redis-7/{GNU_SOURCE.patch => GNU_SOURCE-7.patch}      | 0
- meta-oe/recipes-extended/redis/redis_7.0.4.bb                   | 2 +-
- 2 files changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/redis/redis-7/{GNU_SOURCE.patch => GNU_SOURCE-7.patch} (100%)
+ .../{python3-networkx_2.8.4.bb => python3-networkx_2.8.5.bb}  | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-networkx_2.8.4.bb => python3-networkx_2.8.5.bb} (78%)
 
-diff --git a/meta-oe/recipes-extended/redis/redis-7/GNU_SOURCE.patch b/meta-oe/recipes-extended/redis/redis-7/GNU_SOURCE-7.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7/GNU_SOURCE.patch
-rename to meta-oe/recipes-extended/redis/redis-7/GNU_SOURCE-7.patch
-diff --git a/meta-oe/recipes-extended/redis/redis_7.0.4.bb b/meta-oe/recipes-extended/redis/redis_7.0.4.bb
-index 993ff34b10..e292237097 100644
---- a/meta-oe/recipes-extended/redis/redis_7.0.4.bb
-+++ b/meta-oe/recipes-extended/redis/redis_7.0.4.bb
-@@ -16,7 +16,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://lua-update-Makefile-to-use-environment-build-setting.patch \
-            file://oe-use-libc-malloc.patch \
-            file://0001-src-Do-not-reset-FINAL_LIBS.patch \
--           file://GNU_SOURCE.patch \
-+           file://GNU_SOURCE-7.patch \
-            file://0006-Define-correct-gregs-for-RISCV32.patch \
-            "
- SRC_URI[sha256sum] = "f0e65fda74c44a3dd4fa9d512d4d4d833dd0939c934e946a5c622a630d057f2f"
+diff --git a/meta-python/recipes-devtools/python/python3-networkx_2.8.4.bb b/meta-python/recipes-devtools/python/python3-networkx_2.8.5.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-networkx_2.8.4.bb
+rename to meta-python/recipes-devtools/python/python3-networkx_2.8.5.bb
+index 8181d90c0..8d0b8dbb3 100644
+--- a/meta-python/recipes-devtools/python/python3-networkx_2.8.4.bb
++++ b/meta-python/recipes-devtools/python/python3-networkx_2.8.5.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://networkx.github.io/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=44614b6df7cf3c19be69d0a945e29904"
+ 
+-SRC_URI[sha256sum] = "5e53f027c0d567cf1f884dbb283224df525644e43afd1145d64c9d88a3584762"
++SRC_URI[sha256sum] = "15a7b81a360791c458c55a417418ea136c13378cfdc06a2dcdc12bd2f9cf09c1"
+ 
+ inherit pypi setuptools3
+ 
+@@ -16,4 +16,6 @@ RDEPENDS:${PN} += "\
+                    ${PYTHON_PN}-html \
+                    ${PYTHON_PN}-xml \
+                    ${PYTHON_PN}-json \
++                   ${PYTHON_PN}-profile \
++                   ${PYTHON_PN}-threading \
+                    "
 -- 
-2.25.1
+2.30.2
 
 
