@@ -2,138 +2,108 @@ Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B7F25C00140
-	for <webhook@archiver.kernel.org>; Fri, 12 Aug 2022 07:57:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 44D56C00140
+	for <webhook@archiver.kernel.org>; Fri, 12 Aug 2022 09:15:05 +0000 (UTC)
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com
  [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web09.8359.1660291015326280678
+ by mx.groups.io with SMTP id smtpd.web11.8667.1660295701495623241
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Aug 2022 00:56:55 -0700
+ Fri, 12 Aug 2022 02:15:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=MY7xi+q4;
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=mDQtXAfn;
  spf=permerror,
  err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
  invalid domain name (domain: windriver.com, ip: 205.220.166.238,
  mailfrom: prvs=5223643dcc=changqing.li@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
 	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
- 27C7cvh5018044
+ 27C8teA4018960
 	for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Aug 2022 00:56:55 -0700
+ Fri, 12 Aug 2022 02:15:00 -0700
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
  h=from : to :
  subject : date : message-id : mime-version : content-transfer-encoding :
  content-type; s=PPS06212021;
- bh=VvD+aj/xnyrvEybL+/AZ7UY7PMlk5TOlb7VjJCPZh2M=;
- b=MY7xi+q4MLZuq8fqhrqIVTv6XG1h857pZ/YAITFbokvubyFGVf4dAWi89Kvadl5eW4QF
- 7GVdK67pT4weOOOJxewJR0lu8mMscs49VIEeJqi6RZh+HghYLDIr7eNV0sZrQ3x9q4aj
- GZwUAJu3JqPVKvUe0zLCVqGqgxSw4y4q6UbAmtMXKvdAyd2eGAN5Zh5e5umK/II9zP2I
- xvuWaB5boDQ3gngpSnincopWjxC3qjlX6fuTkKaU/07famse+HmOxt3e/vTOdyVXpiG1
- aa3NkfZ9ssqITYzaebaUVGO7KkMiPjYz3X9/6Ssl5Jm8hwwrX5iauOJZZ/oXdpUEjgn7 oQ==
+ bh=LsMJGlS0UHBS/wUe9Wk5+uNMHs1KaudG0rvLat4Wg7U=;
+ b=mDQtXAfni/Dlhg0cYaxpqA0yyM/JW9rVLBxYx7Zte7Qnpc6/CET0LIawS/SUW3eLbycV
+ 0uIFwdW99OCpxvBSzqHM+lFYBTdA9lAOfOCIsQR3EFumjHWH8fGTc1BqNRSIUJKC7uTq
+ bH3UBD7WwOIJGyyAHXKKADBssPmQyLDsArqSp3xlayCzlnLLX2mU4a7ltIoVLj0Zz31F
+ sI6vLJR4o9CE0TKuoDMdqBCB65pCYAj4m524DWGgfDRgbH1n+fL9eUFFqzOnG0y1HA2d
+ +XPmUfsFn/FYhdOcD85eRD2yCbnir6hSbv7lUGBl1T3KpkNLCh/dD6U3hGtBRTiN3cn5 Mg==
 Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com
  [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3hvqhs92wv-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3hvqf294yn-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Aug 2022 00:56:54 -0700
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ Fri, 12 Aug 2022 02:15:00 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Fri, 12 Aug 2022 00:56:54 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27; Fri, 12 Aug 2022 00:56:54 -0700
+ 15.1.2242.12; Fri, 12 Aug 2022 02:14:59 -0700
 Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Fri, 12 Aug 2022 00:56:53 -0700
+ 15.1.2242.12 via Frontend Transport; Fri, 12 Aug 2022 02:14:59 -0700
 From: <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [kirkstone][meta-filesystems][PATCH] fuse3: support ptest
-Date: Fri, 12 Aug 2022 15:56:52 +0800
-Message-ID: <20220812075652.1347872-1-changqing.li@windriver.com>
+Subject: [kirtstone][master][meta-oe][PATCH] redis: fix do_patch fuzz warning
+Date: Fri, 12 Aug 2022 17:14:58 +0800
+Message-ID: <20220812091458.1395202-1-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Proofpoint-GUID: C4S66oCvclVXb1AhW7njvsxvp3QEPcdv
-X-Proofpoint-ORIG-GUID: C4S66oCvclVXb1AhW7njvsxvp3QEPcdv
+X-Proofpoint-GUID: I8l9lStY9P695PnJ5OLl2acQQCxaddHZ
+X-Proofpoint-ORIG-GUID: I8l9lStY9P695PnJ5OLl2acQQCxaddHZ
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
- definitions=2022-08-12_05,2022-08-11_01,2022-06-22_01
+ definitions=2022-08-12_06,2022-08-11_01,2022-06-22_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxlogscore=970
- suspectscore=0 adultscore=0 impostorscore=0 malwarescore=0 bulkscore=0
- priorityscore=1501 mlxscore=0 spamscore=0 lowpriorityscore=0 clxscore=1015
- phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2207270000 definitions=main-2208120021
+ malwarescore=0 phishscore=0
+ spamscore=0 lowpriorityscore=0 adultscore=0 mlxlogscore=999 mlxscore=0
+ priorityscore=1501 suspectscore=0 bulkscore=0 impostorscore=0
+ clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2207270000 definitions=main-2208120025
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 12 Aug 2022 07:57:04 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 12 Aug 2022 09:15:05 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98208
+ https://lists.openembedded.org/g/openembedded-devel/message/98209
 
 From: Changqing Li <changqing.li@windriver.com>
 
-fuse3 test is designed to run under source dir, there are
-many places like "progname = pjoin(basename, 'example', 'ioctl')"
-in the testcases, which will try to find compiled program. As
-our S != B, and the don't run test under source dir. Test will fail
-with following errors:
-No such file or directory: '/usr/lib64/fuse3/ptest/test/../example/printcap'
+Fix:
+WARNING: lib32-redis-7.0.4-r0 do_patch: Fuzz detected:
+Applying patch GNU_SOURCE.patch
+patching file src/zmalloc.c
+Hunk #1 succeeded at 32 with fuzz 2 (offset 4 lines).
 
-Fix by install needed programs for the test
+There are two version of redis, and need different GNU_SOURCE.patch
 
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- .../recipes-support/fuse/fuse3_3.10.5.bb      | 25 ++++++++++++++++---
- 1 file changed, 21 insertions(+), 4 deletions(-)
+ .../redis/redis-7/{GNU_SOURCE.patch => GNU_SOURCE-7.patch}      | 0
+ meta-oe/recipes-extended/redis/redis_7.0.4.bb                   | 2 +-
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/redis/redis-7/{GNU_SOURCE.patch => GNU_SOURCE-7.patch} (100%)
 
-diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.10.5.bb b/meta-filesystems/recipes-support/fuse/fuse3_3.10.5.bb
-index 0b9164fd79..8055fb06d3 100644
---- a/meta-filesystems/recipes-support/fuse/fuse3_3.10.5.bb
-+++ b/meta-filesystems/recipes-support/fuse/fuse3_3.10.5.bb
-@@ -35,7 +35,28 @@ RDEPENDS:${PN}-ptest += " \
- 
- do_install_ptest() {
-         install -d ${D}${PTEST_PATH}/test
-+        install -d ${D}${PTEST_PATH}/example
-+        install -d ${D}${PTEST_PATH}/util
-         cp -rf ${S}/test/* ${D}${PTEST_PATH}/test/
-+
-+        example_excutables=`find ${B}/example -type f -executable`
-+        util_excutables=`find ${B}/util -type f -executable`
-+        test_excutables=`find ${B}/test -type f -executable`
-+
-+        for e in $example_excutables
-+        do
-+            cp -rf $e  ${D}${PTEST_PATH}/example/
-+         done
-+
-+        for e in $util_excutables
-+        do
-+            cp -rf $e  ${D}${PTEST_PATH}/util/
-+        done
-+
-+        for e in $test_excutables
-+        do
-+            cp -rf $e  ${D}${PTEST_PATH}/test
-+        done
- }
- 
- DEPENDS = "udev"
-@@ -49,10 +70,6 @@ RRECOMMENDS:${PN}:class-target = "kernel-module-fuse fuse3-utils"
- FILES:${PN} += "${libdir}/libfuse3.so.*"
- FILES:${PN}-dev += "${libdir}/libfuse3*.la"
- 
--EXTRA_OEMESON += " \
--     -Dexamples=false \
--"
--
- # Forbid auto-renaming to libfuse3-utils
- FILES:fuse3-utils = "${bindir} ${base_sbindir}"
- DEBIAN_NOAUTONAME:fuse3-utils = "1"
+diff --git a/meta-oe/recipes-extended/redis/redis-7/GNU_SOURCE.patch b/meta-oe/recipes-extended/redis/redis-7/GNU_SOURCE-7.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7/GNU_SOURCE.patch
+rename to meta-oe/recipes-extended/redis/redis-7/GNU_SOURCE-7.patch
+diff --git a/meta-oe/recipes-extended/redis/redis_7.0.4.bb b/meta-oe/recipes-extended/redis/redis_7.0.4.bb
+index 993ff34b10..e292237097 100644
+--- a/meta-oe/recipes-extended/redis/redis_7.0.4.bb
++++ b/meta-oe/recipes-extended/redis/redis_7.0.4.bb
+@@ -16,7 +16,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://lua-update-Makefile-to-use-environment-build-setting.patch \
+            file://oe-use-libc-malloc.patch \
+            file://0001-src-Do-not-reset-FINAL_LIBS.patch \
+-           file://GNU_SOURCE.patch \
++           file://GNU_SOURCE-7.patch \
+            file://0006-Define-correct-gregs-for-RISCV32.patch \
+            "
+ SRC_URI[sha256sum] = "f0e65fda74c44a3dd4fa9d512d4d4d833dd0939c934e946a5c622a630d057f2f"
 -- 
 2.25.1
 
