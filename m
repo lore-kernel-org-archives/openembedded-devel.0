@@ -1,94 +1,140 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <mingli.yu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F05E1C25B06
-	for <webhook@archiver.kernel.org>; Fri, 12 Aug 2022 01:06:52 +0000 (UTC)
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com
- [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.web08.5663.1660266408968238957
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A08A3C00140
+	for <webhook@archiver.kernel.org>; Fri, 12 Aug 2022 03:43:43 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com
+ [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web09.6938.1660275818715930062
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Aug 2022 18:06:49 -0700
+ Thu, 11 Aug 2022 20:43:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=pexKdTpa;
- spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id
- d65-20020a17090a6f4700b001f303a97b14so6696785pjk.1
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Aug 2022 18:06:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc;
-        bh=zkZ/ok9AdKxcdl55Bcfg6QsJCBCgt+c8TVNYu6s4leQ=;
-        b=pexKdTpaJ4YWfowQArj18IF+p5whVSaIqgigQvYuNICJn61RkrrEzJxS65Vjzm6+eg
-         dhs9o4XkbS1IHpdGoMUtI8+YSr5TXl2REvPbdXvmKzp46JQkCmeBN9nooc7fsi9dJxmt
-         YV48JX0eXZ7dRyykjya4NLxeR9I7f0VJgeNYc/NIcgMRwVses3GXogqYOdu87/Ev0QK1
-         C8f1e8UH1hoYjQB+Jk6wMvR/j13DlZsPkjqtUNa+1Kf564jjrB8uo5ewuQ13whBRasNX
-         mFbIYR/I5qSs6ZHVy1yGYz26CzmaI1SXyN17kaH4QQ7vL4KFgC7ZwEiUBa6QFcHScXEk
-         h9Dg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc;
-        bh=zkZ/ok9AdKxcdl55Bcfg6QsJCBCgt+c8TVNYu6s4leQ=;
-        b=IAsoGvww2vFw4hDdSFqnwbHAMOWdtqNg4gwtuYk6pAhPDuoUVe6H9LMHURltuXaS1a
-         g9xtALMBgZTMTP2/BvmG6hx6/JqbX/gi3EigwPbQYOEEHBU4nq8DBJa34KnFYQviVJEb
-         b/U3/goV09H5SmQWkY+SzyBcknVsm0ZTkGxo0rN+NjUnyOrVZ9AfoPbmJnEcKPXB2uno
-         T92BmT6SIq99GSZlsN8ZjjZhK5Zp4ZT2Tg/dQA49cxX6wiKhsmmmGC5Bk4Y1H/iSVpzu
-         RYr/kII5UCcR+xnbI2gnWCQ8uxxr22Ui1HMPdaHfErCvhXNdvltvQdq4zCXoS66Csler
-         37eA==
-X-Gm-Message-State: ACgBeo2DN98vXyIbpVOLvf+dPXtvqTU3kob89r8GYMFGE/mhDKv5vhkX
-	iNM9eZoF4xaZ7yG/yrUXlYxmvwgqxD4=
-X-Google-Smtp-Source: 
- AA6agR6VH8nIomf0niLO0sNSMFUvgkfjoKkG7kSlbGreUbwOmBr4tJcO5m087RIFXh0glU3anAFTLw==
-X-Received: by 2002:a17:902:d58b:b0:16d:c9ff:3c26 with SMTP id
- k11-20020a170902d58b00b0016dc9ff3c26mr1712226plh.10.1660266407717;
-        Thu, 11 Aug 2022 18:06:47 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::9f45])
-        by smtp.gmail.com with ESMTPSA id
- z13-20020a170902d54d00b0016d9d6d05f7sm282938plf.273.2022.08.11.18.06.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 Aug 2022 18:06:47 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] openipmi: Enable largefile cflags
-Date: Thu, 11 Aug 2022 18:06:45 -0700
-Message-Id: <20220812010645.2318921-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.37.1
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=oMxOQ/dp;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
+ invalid domain name (domain: windriver.com, ip: 205.220.166.238,
+ mailfrom: prvs=52233f6c88=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
+ 27C3elbb029814
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 11 Aug 2022 20:43:38 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+ h=from : to :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=PPS06212021;
+ bh=6LP3GQTAKbjzi3WtBdDP/Mnj7oGq3IMLBifeKUzChXE=;
+ b=oMxOQ/dp2ZxmoLAJggj+bqfZp+UbR5vPzHxAZcyS1LZMUf3uAoxJDcXwz+p3tMiBCFth
+ n5nCf6pp1AORUxFAvEqNEhBpY4rh6IMn8TuFHrWd/HldG1EiK+6KCB4O44gxpTalRW8u
+ 6uwrlYhdfsOnosxeGoINBHSPhWihVIk81RsWPKc+UkTCoSnU9AUVKUjsgQg3g3NuIGsU
+ MTxg/oL2rL/lkcd3z/Mk906VN3yf90MFHobVbOagpbIn+2niT9+UfH77b26TinOK22pu
+ 2KYan6zGcX6Fcko9hw+mtLD1JrAA2NxSIh+cuPSRWziJHmwXfllE3myTTXz4vZrZjUyu Lw==
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com
+ [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3hvqf28ygr-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 11 Aug 2022 20:43:38 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Thu, 11 Aug 2022 20:43:37 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Thu, 11 Aug 2022 20:43:36 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] liblockfile: fix buildpaths issue
+Date: Fri, 12 Aug 2022 11:43:36 +0800
+Message-ID: <20220812034336.571161-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: 7AfqQIQxjcVNmJSdQ0CzNe5sA1lmPLG8
+X-Proofpoint-ORIG-GUID: 7AfqQIQxjcVNmJSdQ0CzNe5sA1lmPLG8
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
+ definitions=2022-08-12_02,2022-08-11_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 phishscore=0
+ spamscore=0 lowpriorityscore=0 adultscore=0 mlxlogscore=999 mlxscore=0
+ priorityscore=1501 suspectscore=0 bulkscore=0 impostorscore=0
+ clxscore=1011 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2207270000 definitions=main-2208120009
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 12 Aug 2022 01:06:52 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 12 Aug 2022 03:43:43 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98199
+ https://lists.openembedded.org/g/openembedded-devel/message/98200
 
-When largefile distro feature is enabled the relevant flags are needed
-to be passed, otherwise large file support wont work, since we are cross
-compiling and runtime checks will fail.
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Fixes:
+  WARNING: liblockfile-1.14-r0 do_package_qa: QA Issue: File /usr/lib/liblockfile.a in package liblockfile-staticdev contains reference to TMPDIR [buildpaths]
+  WARNING: liblockfile-1.14-r0 do_package_qa: QA Issue: File /usr/lib/liblockfile.so.1.0 in package liblockfile contains reference to TMPDIR [buildpaths]
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- meta-networking/recipes-support/openipmi/openipmi_2.0.32.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../0001-Makefile.in-redefine-LOCKPROG.patch  | 33 +++++++++++++++++++
+ .../liblockfile/liblockfile_1.14.bb           |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-redefine-LOCKPROG.patch
 
-diff --git a/meta-networking/recipes-support/openipmi/openipmi_2.0.32.bb b/meta-networking/recipes-support/openipmi/openipmi_2.0.32.bb
-index 8625afaa74..eca5865f68 100644
---- a/meta-networking/recipes-support/openipmi/openipmi_2.0.32.bb
-+++ b/meta-networking/recipes-support/openipmi/openipmi_2.0.32.bb
-@@ -41,6 +41,8 @@ SRC_URI[sha256sum] = "f6d0fd4c0a74b05f80907229d0b270f54ca23294bcc11979f8b8d12766
- 
- inherit autotools-brokensep pkgconfig python3native perlnative update-rc.d systemd cpan-base python3targetconfig
- 
-+CFLAGS += "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', '-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64', '', d)}"
+diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-redefine-LOCKPROG.patch b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-redefine-LOCKPROG.patch
+new file mode 100644
+index 000000000..35549ff2d
+--- /dev/null
++++ b/meta-oe/recipes-extended/liblockfile/liblockfile/0001-Makefile.in-redefine-LOCKPROG.patch
+@@ -0,0 +1,33 @@
++From 9beb650712d448ad9c0899de9d98e9b623f9c249 Mon Sep 17 00:00:00 2001
++From: Mingli Yu <mingli.yu@windriver.com>
++Date: Fri, 12 Aug 2022 11:18:15 +0800
++Subject: [PATCH] Makefile.in: redefine LOCKPROG
 +
- EXTRA_OECONF = "--disable-static \
-                 --with-perl='${STAGING_BINDIR_NATIVE}/perl-native/perl' \
-                 --with-python='${STAGING_BINDIR_NATIVE}/python3-native/python3' \
++By default the LOCKPROG will be expanded as below:
++LOCKPROG="/build/tmp-glibc/work/core2-32-wrs-linux/liblockfile/1.14-r0/image/usr/bin/dotlockfile"
++
++And it should be "/usr/bin/dotlockfile" on the target.
++
++Upstream-Status: Inappropriate [oe specific]
++
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++---
++ Makefile.in | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Makefile.in b/Makefile.in
++index 6e53179..bfa0acb 100644
++--- a/Makefile.in
+++++ b/Makefile.in
++@@ -42,7 +42,7 @@ dotlockfile:	dotlockfile.o xlockfile.o
++ 		$(CC) $(LDFLAGS) -o dotlockfile dotlockfile.o xlockfile.o
++ 
++ lockfile.o:	lockfile.c
++-		$(CC) $(CFLAGS) -DLIB -DLOCKPROG=\"$(bindir)/dotlockfile\" \
+++		$(CC) $(CFLAGS) -DLIB -DLOCKPROG=\"/usr/bin/dotlockfile\" \
++ 			-c lockfile.c
++ 
++ xlockfile.o:	lockfile.c
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb b/meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb
+index bac3a2c0b..2604e14f0 100644
+--- a/meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb
++++ b/meta-oe/recipes-extended/liblockfile/liblockfile_1.14.bb
+@@ -10,6 +10,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.14.orig.tar.gz \
+     file://0001-Makefile.in-add-DESTDIR.patch \
+     file://0001-Makefile.in-install-nfslock-libs.patch \
+     file://liblockfile-fix-install-so-to-man-dir.patch \
++    file://0001-Makefile.in-redefine-LOCKPROG.patch \
+ "
+ 
+ SRC_URI[md5sum] = "420c056ba0cc4d1477e402f70ba2f5eb"
 -- 
-2.37.1
+2.25.1
 
 
