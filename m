@@ -2,121 +2,92 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E8CA7C00140
-	for <webhook@archiver.kernel.org>; Fri, 12 Aug 2022 19:41:15 +0000 (UTC)
-Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com
- [209.85.219.177])
- by mx.groups.io with SMTP id smtpd.web12.1529.1660333269268746834
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D100BC3F6B0
+	for <webhook@archiver.kernel.org>; Sat, 13 Aug 2022 04:38:11 +0000 (UTC)
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
+ [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.web08.1952.1660365489585737219
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Aug 2022 12:41:09 -0700
+ Fri, 12 Aug 2022 21:38:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ffz8ShJA;
- spf=pass (domain: gmail.com, ip: 209.85.219.177,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=fzIvMjsS;
+ spf=pass (domain: gmail.com, ip: 209.85.210.169,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-yb1-f177.google.com with SMTP id 21so2994268ybf.4
+Received: by mail-pf1-f169.google.com with SMTP id f192so2545920pfa.9
         for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Aug 2022 12:41:09 -0700 (PDT)
+ Fri, 12 Aug 2022 21:38:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc;
-        bh=TTFYOZLLyejclAhj72Bz7Gq/zUpAycCb5wjm3W1GyME=;
-        b=ffz8ShJAjvifqUVTwN/HP+BDJys1zBsuoFLjfcWVpkn3joBEjUjvDsGuZOhwoS/ufJ
-         tBT+bm8U6EeIGL76IJxYdU9hLksr2BxG1vgFO+mk+RZq/70cv4RNunn14hSsMhQwns+2
-         yE0bGmiFct/fOZF2xSFbGiHhVHdXMb7lBkzH5QKSJD0WMZ1rACNFavgnLNQPk/LvnhAD
-         AYwsOm59lj0A+5eJ8bH7UjsFvHqYLT2IA+MN7AFaKl5l68LvjpviIJhqkabpdSsECxfR
-         LAw8ZARTWphm0N9MHkcs+xufpxHS8sDpCfBTjnjnDGvxEDkjJCIoFWMR6wszxHmnOT5P
-         JusA==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc;
+        bh=dkBvk3LWcxt064MURnZogYze5llsQXQsKPRrPdLPO6o=;
+        b=fzIvMjsSqjciN+FjBxuE7wvBDdoo6Rg2uZ+E3NgUOTZ/ShoWd01tF0a1fjNBXu5d7R
+         935S0pp0Fgg/m+9Qpwhp9LPr35Z6LlBcvYtM874RLRoEcsksbBKQVF4XozQtfF8B7/Gm
+         MUorbwFx8iGaVSGUt04yfDoymF2hnznCp+vx/r6JZQ8MQXB1fo05mwj/cfl2Pc4gGPM1
+         SE53pi3hCylV/ETVmA001amFW1U5r3ZASy/E1+DGCNESZIJJJWLCfSWd+TSYrCHEx8Na
+         xpQtPgYl8YKSHZpUbTgOCW3EtIDNlp6w0O5I5Hv3AVCBk/GdbY45/7jRVQBYc+AdZYyf
+         r20A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc;
-        bh=TTFYOZLLyejclAhj72Bz7Gq/zUpAycCb5wjm3W1GyME=;
-        b=uhSA0xJk6EcZWY4yGj0LXpFe7L0FzzXhSKkxX3jJ1a6hGsU2VjWdAgGSgAVCOXU9E/
-         M7hh8+0kJlh39iw+zyYf5vXp11tgFXpVy8bMpl2unnkS7CAKICjasKyzulv3pdJhC661
-         F7vxlfTlA4nwxO3EGaZja+1DWU/SWQwTD3U2RoNoYy1heaRNV8bt6WMBHWKvElcxNBMF
-         n3I5ruskLyNj5SCN5XGoz07BK17ibSu7oQWbQ8DRN0Ok0XF9TfSQnx1BFInShFlPISlI
-         1buCa9URUlLLIg4nwdKjZuTsydMbpCsgoEhhKEPaC119BqYJl9czDyoAytfuEudyoEz0
-         wiww==
-X-Gm-Message-State: ACgBeo3TsywbVGDBYzCIJZiEtW76chqtgeDSnegIQR74KbS0SBujmout
-	pw21WPXMFdIWhi32JcyGcfJEwpr1MIbDGDoiZbo=
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
+        bh=dkBvk3LWcxt064MURnZogYze5llsQXQsKPRrPdLPO6o=;
+        b=SSnoscJRjymaTfzYyLnbOE6T6JbcW0LlMbB437sjft+sFMaf3hdjAFbi+duQCvSVPe
+         kRF5BFOaBOlnKiTtqJIbwf3e2mAJZ0R7yr/UPRAiSNEPpCnUds2wfhiZOaGyfCrp/2pW
+         Hf56XLnIyKrE5Fcdz909JTmSzY/cpAl2VLvaM+JyxIDKbTFSWTp9t948BxoWypROF1E1
+         rU12EuzY5n8XClPWe/FQmcCa/amHc1CJFlDuHiA3ZjLMjxuJceV2GcqrqtYLF9UyVGkN
+         8Z2EzstWc10RPJywLvXlYfukVcFRCoSl6/vIvlGy5gn3IIZJenbavW0KZbMDxPtnCJEQ
+         oYpw==
+X-Gm-Message-State: ACgBeo1GIZji5KS2NfyUa4lmrNvNbADgFx6/IX4p5tJb5drPiJX7LCCx
+	h3+1mM+UU6YB1bVGqd54YOyEoXaSnr4=
 X-Google-Smtp-Source: 
- AA6agR401Uq12NVT9IUgm1yLLHR4sJjEh8TbhBvPlWUV4Y6khQN3T7mPFfK/W6Z8/Xq63nKcdY7pv+fDRgFbtJyvqF4=
-X-Received: by 2002:a25:248:0:b0:683:bc08:fde5 with SMTP id
- 69-20020a250248000000b00683bc08fde5mr2427141ybc.428.1660333268337; Fri, 12
- Aug 2022 12:41:08 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220516165245.2569767-1-sean.anderson@seco.com>
- <15c593a2-a823-9e3a-f9f3-2f4e11ac4854@seco.com>
-In-Reply-To: <15c593a2-a823-9e3a-f9f3-2f4e11ac4854@seco.com>
+ AA6agR5LNYe3OuJyvsw5Ogb1qlAZJ95W+wq1ank0dU40kZDR3bNyYyCDS3cjWFt16A+JFu3jiVCRVA==
+X-Received: by 2002:a05:6a00:1995:b0:52d:5c39:3f61 with SMTP id
+ d21-20020a056a00199500b0052d5c393f61mr6902314pfl.83.1660365488569;
+        Fri, 12 Aug 2022 21:38:08 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::bb7a])
+        by smtp.gmail.com with ESMTPSA id
+ j4-20020a170902758400b0016d62ba5665sm2601694pll.254.2022.08.12.21.38.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 12 Aug 2022 21:38:07 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 12 Aug 2022 12:40:41 -0700
-Message-ID: 
- <CAMKF1sr+mwiDj5gPFX6Z+KPYinkLEaYE-hD17hZjWJmw27QzQw@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH v2 1/2] image_types_sparse: Pad source image to
- block size
-To: Sean Anderson <sean.anderson@seco.com>
-Cc: openembedded-devel@lists.openembedded.org,
-	Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
- Joshua Watt <JPEWhacker@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 3/6] openipmi: Always enable largefile
+ support
+Date: Fri, 12 Aug 2022 21:38:00 -0700
+Message-Id: <20220813043803.3548501-3-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.37.1
+In-Reply-To: <20220813043803.3548501-1-raj.khem@gmail.com>
+References: <20220813043803.3548501-1-raj.khem@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 12 Aug 2022 19:41:15 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 13 Aug 2022 04:38:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98218
+ https://lists.openembedded.org/g/openembedded-devel/message/98221
 
-On Fri, Aug 5, 2022 at 2:50 PM Sean Anderson <sean.anderson@seco.com> wrote:
->
-> On 5/16/22 12:52 PM, Sean Anderson wrote:
-> > If the source image's size is not aligned to the sparse image's block
-> > size, then conversion will fail with
-> >
-> > img2simg: libsparse/sparse.cpp:133: int write_all_blocks(sparse_file*, output_file*): Assertion `pad >= 0' failed.
-> >
-> > This is a bug in img2simg, but an easy way to work around it is to pad
-> > the source image ourselves. The default block size of 4096 matches
-> > img2simg's default block size.
-> >
-> > Signed-off-by: Sean Anderson <sean.anderson@seco.com>
-> > ---
-> >
-> > Changes in v2:
-> > - New
-> >
-> >  meta-oe/classes/image_types_sparse.bbclass | 17 +++++++++++++----
-> >  1 file changed, 13 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/meta-oe/classes/image_types_sparse.bbclass b/meta-oe/classes/image_types_sparse.bbclass
-> > index 4263593a8d..58221888ed 100644
-> > --- a/meta-oe/classes/image_types_sparse.bbclass
-> > +++ b/meta-oe/classes/image_types_sparse.bbclass
-> > @@ -1,8 +1,17 @@
-> >  inherit image_types
-> >
-> > +# This sets the granularity of the sparse image conversion. Chunk sizes will be
-> > +# specified in units of this value. Setting this value smaller than the
-> > +# underlying image's block size will not result in any further space saving.
-> > +# However, there is no loss in correctness if this value is larger or smaller
-> > +# than optimal. This value should be a power of two.
-> > +SPARSE_BLOCK_SIZE ??= "4096"
-> > +
-> > +convert_sparse() {
-> > +    truncate --no-create --size=%${SPARSE_BLOCK_SIZE} "$1"
-> > +    img2simg "$1" "$1.sparse" ${SPARSE_BLOCK_SIZE}
-> > +}
-> > +
-> >  CONVERSIONTYPES += "sparse"
-> > -CONVERSION_CMD:sparse = " \
-> > -    img2simg "${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}" \
-> > -             "${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}.sparse" \
-> > -"
-> > +CONVERSION_CMD:sparse = "convert_sparse '${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}'"
-> >  CONVERSION_DEPENDS_sparse = "android-tools-native"
-> >
->
-> ping?
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-networking/recipes-support/openipmi/openipmi_2.0.32.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks for reminder, Can you rebase it on latest master-next and resend please ?
+diff --git a/meta-networking/recipes-support/openipmi/openipmi_2.0.32.bb b/meta-networking/recipes-support/openipmi/openipmi_2.0.32.bb
+index eca5865f68..18f4deca16 100644
+--- a/meta-networking/recipes-support/openipmi/openipmi_2.0.32.bb
++++ b/meta-networking/recipes-support/openipmi/openipmi_2.0.32.bb
+@@ -41,7 +41,7 @@ SRC_URI[sha256sum] = "f6d0fd4c0a74b05f80907229d0b270f54ca23294bcc11979f8b8d12766
+ 
+ inherit autotools-brokensep pkgconfig python3native perlnative update-rc.d systemd cpan-base python3targetconfig
+ 
+-CFLAGS += "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', '-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64', '', d)}"
++CFLAGS += "-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64"
+ 
+ EXTRA_OECONF = "--disable-static \
+                 --with-perl='${STAGING_BINDIR_NATIVE}/perl-native/perl' \
+-- 
+2.37.1
+
 
