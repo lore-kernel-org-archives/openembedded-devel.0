@@ -2,127 +2,135 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 890AFC19F2D
-	for <webhook@archiver.kernel.org>; Sat, 13 Aug 2022 14:08:44 +0000 (UTC)
-Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com
- [209.85.128.178])
- by mx.groups.io with SMTP id smtpd.web09.5207.1660399717738621708
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0713DC25B06
+	for <webhook@archiver.kernel.org>; Sun, 14 Aug 2022 17:11:36 +0000 (UTC)
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com
+ [209.85.216.50])
+ by mx.groups.io with SMTP id smtpd.web08.7090.1660497090523330297
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Aug 2022 07:08:37 -0700
+ Sun, 14 Aug 2022 10:11:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=EbEvFbx1;
- spf=pass (domain: gmail.com, ip: 209.85.128.178,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f178.google.com with SMTP id
- 00721157ae682-32269d60830so33040767b3.2
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=h/OL1Vmq;
+ spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f50.google.com with SMTP id
+ s5-20020a17090a13c500b001f4da9ffe5fso12585818pjf.5
         for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Aug 2022 07:08:37 -0700 (PDT)
+ Sun, 14 Aug 2022 10:11:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc;
-        bh=6y9q0K1benvr3QGYvpohfjGfTeY7o9GFuwXPqC/AcU0=;
-        b=EbEvFbx1vqSAxA5MamiCFty1HMEo76bu2GVprHOhXCw/q250xvkTDWjpmr8iYOv/mX
-         H49FPAslgj6p442L4J0IBjTkpD5qJcRs5IBxsB/Jt2zA5v14eZ3bRcJjvOcXOpZR8fVq
-         j7Oho1u8BX6Nmsv9AtT6R3dv8o9wegs7zjQkgy2qXFo7H2VBzcF4XOOMt5Ii9Tx+0u/h
-         4ljL8SCWHetu+6CA6lMqx2UwiEpLuS5sMH47Qt+MIh4dfBIa5oavoD3rVHstQUvRz7dQ
-         LjnEaZWezNjmQDFcBG+jdgkrVmG8ltv279kNEs3H6jMCfbJj2tDJaHXgS1oDWkV47bNZ
-         pulw==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc;
+        bh=hh/+pZBod9qTXOFEMS27FA3Dh1qrOeiLz9Dg1tl6iYY=;
+        b=h/OL1Vmq8bYM8PHbVvVqAPVSovDUBf0tS8hUUQvAvtGvOilpbrBPeySNcMiv8K0Auz
+         RK9zkNcqOLFI1f1T/fMDGNnxYttTgo9OnqC1IC+QZ8/LUA/TCyH6zydS7ZAgNvact4O9
+         KUzZve3wZVSCsRFIJaSBqpXd3xg/GQlB3kt6w9hOQw658N8zWjzfAP5o97b6H7KaH/lm
+         Ak6sx+kjE31cnAj8/hjG/PSvi3AVut81AvScPU+EPe91OLwjBwA5VY/YgsOe173XZ8pF
+         7yy+xzGDGCApdasLb56FUeFVpUMEzID5jzXCbznQeVAi7ifEZoof3zJICyuAPujS33WJ
+         5kvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc;
-        bh=6y9q0K1benvr3QGYvpohfjGfTeY7o9GFuwXPqC/AcU0=;
-        b=aloudfewMhJSXXfZIQq/IfAAhQBnzVaVnVQFUDkoYbpJFKj4GYK4tO652lLi9DrMPD
-         oeSef6gENyeC9ftpbVtF1v+jR7JnAx8B+azJWOMfiAWqQc/B2JdGVpiAT3BPOAhK4NK4
-         gEuDXO8rtY0QnLgze2UyYeDUZLOvleNUntkLvTUq0kaNyoA3MyZUcDsegay597j6nX7p
-         +UF2mv4QcdXfcBWkuQJdEPZKL/6DAsDRNk0Q3ctMvWZFaXjUBrhAWvnKTANpuGluWNkw
-         BL/G4W4hknOw2erQKAzcfQh4pXzs8wujcTOHe4Nn58bnqS7tORIWLYOBo2jAEALvPQfl
-         jJhg==
-X-Gm-Message-State: ACgBeo037prY9EQ8+9P0Zsm8BVUWSIHDVf91N2CxVOdxphzUZ9qav0r7
-	MwPlAOf1Evk1HALUJ7oB8TUpYbOfrIK9SiGB/wE=
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc;
+        bh=hh/+pZBod9qTXOFEMS27FA3Dh1qrOeiLz9Dg1tl6iYY=;
+        b=Be+gW2uU4/tStKDwQOggSb1AyD2qTCqyTOGn/dN3O0ZP1fZEYTMZTyfZ5LG6JwAZX9
+         THCLM8H+g9UmiYd30yGrHOK2m+EgrhkRuItYy++QqosNNkETVMrNF7/16H4GFsKv4pQd
+         INXfz2n0dZqmeIWflNWGSfIwp/uf6J6s9YknBV2Uwl+X06vsL09mAM6wp5bw1jFw5kO/
+         8uA0NcZCYYlLtYz940TepL2OdnL2RMXfSkPlnxkD6IRVRu05/gIm8QBvuat4HWZDFLGn
+         IZt1pcVmBpUn2MoebSwSL7Y9R1X1QRGO7P8psiJ0MdjlXxyAIc8awVXUzKSB0SWmdAqJ
+         hiQw==
+X-Gm-Message-State: ACgBeo0d9dXxXk/PIg7RsbPljQe7pjDBn52NnJWvTgeg1o6eHPSNCJ6D
+	9t7wzri+HBgr59w47fTOv6S/FL/A3PudOQ==
 X-Google-Smtp-Source: 
- AA6agR47KKu6KIzhwtK1Apyw23pZT9qN5MOJpHPlvFoJnGdegKZpsoYUBalpGZQJYOJ2zUmzjclgvt6jAslZgJnGFvI=
-X-Received: by 2002:a81:88c5:0:b0:31e:f1e:dc23 with SMTP id
- y188-20020a8188c5000000b0031e0f1edc23mr7819858ywf.139.1660399716644; Sat, 13
- Aug 2022 07:08:36 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220812091458.1395202-1-changqing.li@windriver.com>
- <b0229209-e6c6-0c14-298e-b173532e6409@windriver.com>
-In-Reply-To: <b0229209-e6c6-0c14-298e-b173532e6409@windriver.com>
+ AA6agR45rW+EenC5UkU92B0t9luZIxTkhCMeOQkb/N8fSzsyI6KZ3Th0AXk52OXj7uXRUwuhMmCpNw==
+X-Received: by 2002:a17:90b:1d0b:b0:1f5:72f:652c with SMTP id
+ on11-20020a17090b1d0b00b001f5072f652cmr14327232pjb.38.1660497089328;
+        Sun, 14 Aug 2022 10:11:29 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::bb7a])
+        by smtp.gmail.com with ESMTPSA id
+ 143-20020a621795000000b0052d8b663c37sm5321733pfx.195.2022.08.14.10.11.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 14 Aug 2022 10:11:28 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 13 Aug 2022 07:08:08 -0700
-Message-ID: 
- <CAMKF1sphy2-znVeZBB6tE2x7w=nPXgOeZr7jx4p4AbuO7P2DQw@mail.gmail.com>
-Subject: Re: [oe] [kirtstone][master][meta-oe][PATCH] redis: fix do_patch fuzz
- warning
-To: Robert Yang <liezhi.yang@windriver.com>
-Cc: Changqing Li <changqing.li@windriver.com>,
- openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] toybox: Fix build with glibc 2.36+
+Date: Sun, 14 Aug 2022 10:11:26 -0700
+Message-Id: <20220814171126.2994955-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.37.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 13 Aug 2022 14:08:44 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 14 Aug 2022 17:11:36 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98228
+ https://lists.openembedded.org/g/openembedded-devel/message/98229
 
-On Sat, Aug 13, 2022 at 3:10 AM Robert Yang <liezhi.yang@windriver.com> wrote:
->
-> Please hold on this patch, we need a V2 to fix the multilib do_fetch error.
->
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...oid-glibc-and-linux-mount.h-conflict.patch | 32 +++++++++++++++++++
+ .../{toybox_0.8.7.bb => toybox_0.8.8.bb}      |  3 +-
+ 2 files changed, 34 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-core/toybox/toybox/0001-portability-Avoid-glibc-and-linux-mount.h-conflict.patch
+ rename meta-oe/recipes-core/toybox/{toybox_0.8.7.bb => toybox_0.8.8.bb} (95%)
 
-dropped. thanks
+diff --git a/meta-oe/recipes-core/toybox/toybox/0001-portability-Avoid-glibc-and-linux-mount.h-conflict.patch b/meta-oe/recipes-core/toybox/toybox/0001-portability-Avoid-glibc-and-linux-mount.h-conflict.patch
+new file mode 100644
+index 0000000000..3e63bdd650
+--- /dev/null
++++ b/meta-oe/recipes-core/toybox/toybox/0001-portability-Avoid-glibc-and-linux-mount.h-conflict.patch
+@@ -0,0 +1,32 @@
++From 89000d9cb226cd864fa247f2428c9eaf7f414882 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sun, 14 Aug 2022 10:02:15 -0700
++Subject: [PATCH] portability: Avoid glibc and linux mount.h conflict
++
++With glibc 2.36+ linux/mount.h> and <sys/mount.h> headers are
++no longer directly compatible
++
++Upstream-Status: Submitted [https://github.com/landley/toybox/pull/364]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ lib/portability.h | 6 +++++-
++ 1 file changed, 5 insertions(+), 1 deletion(-)
++
++diff --git a/lib/portability.h b/lib/portability.h
++index 4de547a..24481ab 100644
++--- a/lib/portability.h
+++++ b/lib/portability.h
++@@ -179,8 +179,12 @@ void *memmem(const void *haystack, size_t haystack_length,
++ #define SWAP_LE64(x) (x)
++ #endif
++ 
++-// Linux headers not listed by POSIX or LSB
+++// Glibc 2.36 sys/mount.h conflicts with linux/mount.h
+++// See https://sourceware.org/glibc/wiki/Release/2.36#Usage_of_.3Clinux.2Fmount.h.3E_and_.3Csys.2Fmount.h.3E
+++#ifndef _LINUX_MOUNT_H
++ #include <sys/mount.h>
+++#endif
+++// Linux headers not listed by POSIX or LSB
++ #ifdef __linux__
++ #include <sys/statfs.h>
++ #include <sys/swap.h>
+diff --git a/meta-oe/recipes-core/toybox/toybox_0.8.7.bb b/meta-oe/recipes-core/toybox/toybox_0.8.8.bb
+similarity index 95%
+rename from meta-oe/recipes-core/toybox/toybox_0.8.7.bb
+rename to meta-oe/recipes-core/toybox/toybox_0.8.8.bb
+index 3441568005..e27f9ed95f 100644
+--- a/meta-oe/recipes-core/toybox/toybox_0.8.7.bb
++++ b/meta-oe/recipes-core/toybox/toybox_0.8.8.bb
+@@ -8,8 +8,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=78659a599b9325da368f2f1eb88f19c7"
+ inherit cml1 update-alternatives
+ 
+ SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
++           file://0001-portability-Avoid-glibc-and-linux-mount.h-conflict.patch \
+            "
+-SRC_URI[sha256sum] = "b508bf336f82cb0739b77111f945931d1a143b5a53905cb753cd2607cfdd1494"
++SRC_URI[sha256sum] = "dafd41978d40f02a61cf1be99a2b4a25812bbfb9c3157e679ee7611202d6ac58"
+ 
+ SECTION = "base"
+ 
+-- 
+2.37.2
 
-> // Robert
->
-> On 8/12/22 17:14, Changqing Li wrote:
-> > From: Changqing Li <changqing.li@windriver.com>
-> >
-> > Fix:
-> > WARNING: lib32-redis-7.0.4-r0 do_patch: Fuzz detected:
-> > Applying patch GNU_SOURCE.patch
-> > patching file src/zmalloc.c
-> > Hunk #1 succeeded at 32 with fuzz 2 (offset 4 lines).
-> >
-> > There are two version of redis, and need different GNU_SOURCE.patch
-> >
-> > Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> > ---
-> >   .../redis/redis-7/{GNU_SOURCE.patch => GNU_SOURCE-7.patch}      | 0
-> >   meta-oe/recipes-extended/redis/redis_7.0.4.bb                   | 2 +-
-> >   2 files changed, 1 insertion(+), 1 deletion(-)
-> >   rename meta-oe/recipes-extended/redis/redis-7/{GNU_SOURCE.patch => GNU_SOURCE-7.patch} (100%)
-> >
-> > diff --git a/meta-oe/recipes-extended/redis/redis-7/GNU_SOURCE.patch b/meta-oe/recipes-extended/redis/redis-7/GNU_SOURCE-7.patch
-> > similarity index 100%
-> > rename from meta-oe/recipes-extended/redis/redis-7/GNU_SOURCE.patch
-> > rename to meta-oe/recipes-extended/redis/redis-7/GNU_SOURCE-7.patch
-> > diff --git a/meta-oe/recipes-extended/redis/redis_7.0.4.bb b/meta-oe/recipes-extended/redis/redis_7.0.4.bb
-> > index 993ff34b10..e292237097 100644
-> > --- a/meta-oe/recipes-extended/redis/redis_7.0.4.bb
-> > +++ b/meta-oe/recipes-extended/redis/redis_7.0.4.bb
-> > @@ -16,7 +16,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-> >              file://lua-update-Makefile-to-use-environment-build-setting.patch \
-> >              file://oe-use-libc-malloc.patch \
-> >              file://0001-src-Do-not-reset-FINAL_LIBS.patch \
-> > -           file://GNU_SOURCE.patch \
-> > +           file://GNU_SOURCE-7.patch \
-> >              file://0006-Define-correct-gregs-for-RISCV32.patch \
-> >              "
-> >   SRC_URI[sha256sum] = "f0e65fda74c44a3dd4fa9d512d4d4d833dd0939c934e946a5c622a630d057f2f"
-> >
-> >
-> >
-> >
-> >
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#98227): https://lists.openembedded.org/g/openembedded-devel/message/98227
-> Mute This Topic: https://lists.openembedded.org/mt/92976372/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
 
