@@ -2,84 +2,86 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0713DC25B06
-	for <webhook@archiver.kernel.org>; Sun, 14 Aug 2022 17:11:36 +0000 (UTC)
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com
- [209.85.216.50])
- by mx.groups.io with SMTP id smtpd.web08.7090.1660497090523330297
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B9DFCC25B06
+	for <webhook@archiver.kernel.org>; Sun, 14 Aug 2022 20:02:26 +0000 (UTC)
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com
+ [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.web11.8884.1660507340725888234
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Aug 2022 10:11:30 -0700
+ Sun, 14 Aug 2022 13:02:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=h/OL1Vmq;
- spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f50.google.com with SMTP id
- s5-20020a17090a13c500b001f4da9ffe5fso12585818pjf.5
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=VE8wMUUv;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id d20so5209145pfq.5
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Aug 2022 10:11:30 -0700 (PDT)
+ Sun, 14 Aug 2022 13:02:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc;
-        bh=hh/+pZBod9qTXOFEMS27FA3Dh1qrOeiLz9Dg1tl6iYY=;
-        b=h/OL1Vmq8bYM8PHbVvVqAPVSovDUBf0tS8hUUQvAvtGvOilpbrBPeySNcMiv8K0Auz
-         RK9zkNcqOLFI1f1T/fMDGNnxYttTgo9OnqC1IC+QZ8/LUA/TCyH6zydS7ZAgNvact4O9
-         KUzZve3wZVSCsRFIJaSBqpXd3xg/GQlB3kt6w9hOQw658N8zWjzfAP5o97b6H7KaH/lm
-         Ak6sx+kjE31cnAj8/hjG/PSvi3AVut81AvScPU+EPe91OLwjBwA5VY/YgsOe173XZ8pF
-         7yy+xzGDGCApdasLb56FUeFVpUMEzID5jzXCbznQeVAi7ifEZoof3zJICyuAPujS33WJ
-         5kvQ==
+        bh=dWjfwaRPL+ROzwozLWEXEaQhnLpjamVO3k9/UfyHQ7k=;
+        b=VE8wMUUvjQtLXBwOyiA1V2+S7asRkDsFci5l/Ch4M32EpyWXVFTD640uGfSLx7lAgZ
+         W4elvBXl3UwSHCizNtQ/P5zfVNl8uvtK+acHYn726YRIQY6SfM5U0kkBUiRDxPDUpnxN
+         5+0YIX+FIzL4ar4Bu31wB0Srwc0SLmqqOGI1y/hcu0YFD7X5x7gcTwgo29jYCk/cMmv1
+         3s3jC6N1ygfjtRpzdBoWNqgtDEs4h/od3kI2wUQ8fDciOB9GwqOeswi8SrDVUJuBa6TA
+         D7xP2fhH2GCL7OsT+lwQtodJcmNgL4Rwa+dPUOq3pY3PKNbuZRQCoe/tu73iv8rfeGKl
+         XM4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc;
-        bh=hh/+pZBod9qTXOFEMS27FA3Dh1qrOeiLz9Dg1tl6iYY=;
-        b=Be+gW2uU4/tStKDwQOggSb1AyD2qTCqyTOGn/dN3O0ZP1fZEYTMZTyfZ5LG6JwAZX9
-         THCLM8H+g9UmiYd30yGrHOK2m+EgrhkRuItYy++QqosNNkETVMrNF7/16H4GFsKv4pQd
-         INXfz2n0dZqmeIWflNWGSfIwp/uf6J6s9YknBV2Uwl+X06vsL09mAM6wp5bw1jFw5kO/
-         8uA0NcZCYYlLtYz940TepL2OdnL2RMXfSkPlnxkD6IRVRu05/gIm8QBvuat4HWZDFLGn
-         IZt1pcVmBpUn2MoebSwSL7Y9R1X1QRGO7P8psiJ0MdjlXxyAIc8awVXUzKSB0SWmdAqJ
-         hiQw==
-X-Gm-Message-State: ACgBeo0d9dXxXk/PIg7RsbPljQe7pjDBn52NnJWvTgeg1o6eHPSNCJ6D
-	9t7wzri+HBgr59w47fTOv6S/FL/A3PudOQ==
+        bh=dWjfwaRPL+ROzwozLWEXEaQhnLpjamVO3k9/UfyHQ7k=;
+        b=2cDdfP/Viw3KcZSU2pX0rNjQbPdWPfocdQeb+SejoF6sn/p3v8v4+jeoUZCU/S2Qii
+         rLmA2zlSZvTSSi0M5B55unO3TH0IPd6HdN0B0YVnvsnRFdI9dVXvfxAfNlZ/vxScQf8x
+         aQ5JHvAV4kJicogYzTS+XzhF4y6rGdC1O2PcvjCaurPkE63PLumi0U463b/36PV4eDAu
+         ETmovjIg5hMZhSHVSuN/jvxDwWdzmFzRmO3iATcGtb11zr0PCXTG5lhCEWU/4MUrc0nl
+         2yxXafsBg+UheZFgVly0AfvgjZEcmPhJEgJ3k9U2x8PbY5iKg7RfCcSwkk4WXlfk2jJG
+         V2Bg==
+X-Gm-Message-State: ACgBeo0VHEmjNQ5muz6z8Dps16XM8quRu5aNvGT+fNeDH5CJ7lG6NHma
+	l36DnnrMyqCCcUVA8Pq3wkEETK7CV4MTVQ==
 X-Google-Smtp-Source: 
- AA6agR45rW+EenC5UkU92B0t9luZIxTkhCMeOQkb/N8fSzsyI6KZ3Th0AXk52OXj7uXRUwuhMmCpNw==
-X-Received: by 2002:a17:90b:1d0b:b0:1f5:72f:652c with SMTP id
- on11-20020a17090b1d0b00b001f5072f652cmr14327232pjb.38.1660497089328;
-        Sun, 14 Aug 2022 10:11:29 -0700 (PDT)
+ AA6agR75PjlRT2z6c7GlU32nnO9QU9PsWCy24VlzleLdGWxRjOssYSIUUPKb3PYrL7oOH8V069v+0A==
+X-Received: by 2002:a63:ed4f:0:b0:41a:f0ee:3da8 with SMTP id
+ m15-20020a63ed4f000000b0041af0ee3da8mr11534565pgk.55.1660507339410;
+        Sun, 14 Aug 2022 13:02:19 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::bb7a])
         by smtp.gmail.com with ESMTPSA id
- 143-20020a621795000000b0052d8b663c37sm5321733pfx.195.2022.08.14.10.11.28
+ 125-20020a620683000000b0052d3ea78858sm5422982pfg.127.2022.08.14.13.02.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 14 Aug 2022 10:11:28 -0700 (PDT)
+        Sun, 14 Aug 2022 13:02:18 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] toybox: Fix build with glibc 2.36+
-Date: Sun, 14 Aug 2022 10:11:26 -0700
-Message-Id: <20220814171126.2994955-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH v2] toybox: Fix build with glibc 2.36+
+Date: Sun, 14 Aug 2022 13:02:16 -0700
+Message-Id: <20220814200216.3155392-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 14 Aug 2022 17:11:36 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 14 Aug 2022 20:02:26 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98229
+ https://lists.openembedded.org/g/openembedded-devel/message/98230
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...oid-glibc-and-linux-mount.h-conflict.patch | 32 +++++++++++++++++++
- .../{toybox_0.8.7.bb => toybox_0.8.8.bb}      |  3 +-
- 2 files changed, 34 insertions(+), 1 deletion(-)
+v2: Update to upstream submitted patch
+
+ ...oid-glibc-and-linux-mount.h-conflict.patch | 161 ++++++++++++++++++
+ .../{toybox_0.8.7.bb => toybox_0.8.8.bb}      |   3 +-
+ 2 files changed, 163 insertions(+), 1 deletion(-)
  create mode 100644 meta-oe/recipes-core/toybox/toybox/0001-portability-Avoid-glibc-and-linux-mount.h-conflict.patch
  rename meta-oe/recipes-core/toybox/{toybox_0.8.7.bb => toybox_0.8.8.bb} (95%)
 
 diff --git a/meta-oe/recipes-core/toybox/toybox/0001-portability-Avoid-glibc-and-linux-mount.h-conflict.patch b/meta-oe/recipes-core/toybox/toybox/0001-portability-Avoid-glibc-and-linux-mount.h-conflict.patch
 new file mode 100644
-index 0000000000..3e63bdd650
+index 0000000000..689ee2a5c4
 --- /dev/null
 +++ b/meta-oe/recipes-core/toybox/toybox/0001-portability-Avoid-glibc-and-linux-mount.h-conflict.patch
-@@ -0,0 +1,32 @@
+@@ -0,0 +1,161 @@
 +From 89000d9cb226cd864fa247f2428c9eaf7f414882 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
 +Date: Sun, 14 Aug 2022 10:02:15 -0700
@@ -94,24 +96,153 @@ index 0000000000..3e63bdd650
 + lib/portability.h | 6 +++++-
 + 1 file changed, 5 insertions(+), 1 deletion(-)
 +
-+diff --git a/lib/portability.h b/lib/portability.h
-+index 4de547a..24481ab 100644
 +--- a/lib/portability.h
 ++++ b/lib/portability.h
-+@@ -179,8 +179,12 @@ void *memmem(const void *haystack, size_t haystack_length,
-+ #define SWAP_LE64(x) (x)
++@@ -180,11 +180,29 @@ void *memmem(const void *haystack, size_
 + #endif
 + 
-+-// Linux headers not listed by POSIX or LSB
-++// Glibc 2.36 sys/mount.h conflicts with linux/mount.h
-++// See https://sourceware.org/glibc/wiki/Release/2.36#Usage_of_.3Clinux.2Fmount.h.3E_and_.3Csys.2Fmount.h.3E
-++#ifndef _LINUX_MOUNT_H
-+ #include <sys/mount.h>
-++#endif
-++// Linux headers not listed by POSIX or LSB
++ // Linux headers not listed by POSIX or LSB
++-#include <sys/mount.h>
 + #ifdef __linux__
 + #include <sys/statfs.h>
 + #include <sys/swap.h>
++ #include <sys/sysinfo.h>
+++
+++#ifndef BLKDISCARD
+++#define BLKDISCARD _IO(0x12,119)
+++#endif
+++#ifndef BLKSECDISCARD
+++#define BLKSECDISCARD _IO(0x12,125)
+++#endif
+++#ifndef BLKZEROOUT
+++#define BLKZEROOUT _IO(0x12,127)
+++#endif
+++#ifndef FIFREEZE
+++#define FIFREEZE        _IOWR('X', 119, int)    /* Freeze */
+++#endif
+++#ifndef FITHAW
+++#define FITHAW          _IOWR('X', 120, int)    /* Thaw */
+++#endif
+++
+++#else
+++#include <sys/mount.h>
++ #endif
++ 
++ #ifdef __APPLE__
++--- a/toys/other/switch_root.c
+++++ b/toys/other/switch_root.c
++@@ -19,6 +19,7 @@ config SWITCH_ROOT
++ 
++ #define FOR_switch_root
++ #include "toys.h"
+++#include <sys/mount.h>
++ #include <sys/vfs.h>
++ 
++ GLOBALS(
++--- a/toys/other/blkdiscard.c
+++++ b/toys/other/blkdiscard.c
++@@ -31,8 +31,7 @@ config BLKDISCARD
++ 
++ #define FOR_blkdiscard
++ #include "toys.h"
++-
++-#include <linux/fs.h>
+++#include <sys/mount.h>
++ 
++ GLOBALS(
++   long o, l;
++--- a/toys/other/blockdev.c
+++++ b/toys/other/blockdev.c
++@@ -31,7 +31,7 @@ config BLOCKDEV
++ 
++ #define FOR_blockdev
++ #include "toys.h"
++-#include <linux/fs.h>
+++#include <sys/mount.h>
++ 
++ GLOBALS(
++   long setbsz, setra;
++--- a/toys/other/fsfreeze.c
+++++ b/toys/other/fsfreeze.c
++@@ -18,7 +18,6 @@ config FSFREEZE
++ 
++ #define FOR_fsfreeze
++ #include "toys.h"
++-#include <linux/fs.h>
++ 
++ void fsfreeze_main(void)
++ {
++--- a/lib/portability.c
+++++ b/lib/portability.c
++@@ -5,7 +5,7 @@
++  */
++ 
++ #include "toys.h"
++-
+++#include <sys/mount.h>
++ // We can't fork() on nommu systems, and vfork() requires an exec() or exit()
++ // before resuming the parent (because they share a heap until then). And no,
++ // we can't implement our own clone() call that does the equivalent of fork()
++--- a/toys/lsb/mount.c
+++++ b/toys/lsb/mount.c
++@@ -58,6 +58,7 @@ config MOUNT
++ 
++ #define FOR_mount
++ #include "toys.h"
+++#include <sys/mount.h>
++ 
++ GLOBALS(
++   struct arg_list *o;
++--- a/toys/lsb/umount.c
+++++ b/toys/lsb/umount.c
++@@ -30,6 +30,7 @@ config UMOUNT
++ 
++ #define FOR_umount
++ #include "toys.h"
+++#include <sys/mount.h>
++ 
++ GLOBALS(
++   struct arg_list *t;
++--- a/toys/other/eject.c
+++++ b/toys/other/eject.c
++@@ -22,6 +22,7 @@ config EJECT
++ 
++ #define FOR_eject
++ #include "toys.h"
+++#include <sys/mount.h>
++ #include <scsi/sg.h>
++ #include <scsi/scsi.h>
++ #include <linux/cdrom.h>
++--- a/toys/other/freeramdisk.c
+++++ b/toys/other/freeramdisk.c
++@@ -16,6 +16,7 @@ config FREERAMDISK
++ */
++ 
++ #include "toys.h"
+++#include <sys/mount.h>
++ 
++ void freeramdisk_main(void)
++ {
++--- a/toys/other/nbd_client.c
+++++ b/toys/other/nbd_client.c
++@@ -36,6 +36,7 @@ config NBD_CLIENT
++ #define FOR_nbd_client
++ #include "toys.h"
++ #include <linux/nbd.h>
+++#include <linux/fs.h>
++ 
++ void nbd_client_main(void)
++ {
++--- a/toys/other/partprobe.c
+++++ b/toys/other/partprobe.c
++@@ -18,6 +18,7 @@ config PARTPROBE
++ */
++ 
++ #include "toys.h"
+++#include <sys/mount.h>
++ 
++ static void do_partprobe(int fd, char *name)
++ {
 diff --git a/meta-oe/recipes-core/toybox/toybox_0.8.7.bb b/meta-oe/recipes-core/toybox/toybox_0.8.8.bb
 similarity index 95%
 rename from meta-oe/recipes-core/toybox/toybox_0.8.7.bb
