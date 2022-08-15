@@ -1,123 +1,117 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 65A36C25B06
-	for <webhook@archiver.kernel.org>; Mon, 15 Aug 2022 02:12:18 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com
- [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.12026.1660529528426040715
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FB29C3F6B0
+	for <webhook@archiver.kernel.org>; Mon, 15 Aug 2022 06:12:29 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.4])
+ by mx.groups.io with SMTP id smtpd.web08.13523.1660543946635700827
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Aug 2022 19:12:08 -0700
+ Sun, 14 Aug 2022 23:12:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=k3PZH1KZ;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
- invalid domain name (domain: windriver.com, ip: 205.220.166.238,
- mailfrom: prvs=52262cb0b1=changqing.li@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
- 27F26WDL021370
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=VZpyWCtN;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
+ mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1660543945; i=@fujitsu.com;
+	bh=is4KZAnc5M6i9YroSOej4aZJF8vqOYC8D7BxxOMYSWA=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=VZpyWCtNrD7+Qh+u0y1uWOoq/vBgFQKL24wm7NV5X3loX1zHX2AIIn+qoNdeRE9Q3
+	 nwUIUGeigFlSQ7q7jMe2sDeMVJkKClBZr1UnczsBbRAclPK67Qwsvmabda2Kucr9S2
+	 zhiJ3GJpn5NAuPQvrC9OHCx5mg9xlRpmDFcl1RiHoKLNgQnBjevHbrOlILFW47Dtz2
+	 BDiMklcgJ1f7i8K3lK4Ik01VimbQSw4ATd6uICG7dSQL4l6FZrNibPcDA8pTwM0Jxn
+	 ooOgh5cRmRdPRGRDh/ANRh9+WcCRmW1zQ+CszJFT6ntLAdTRYax4ecFzrg0DBkGKCn
+	 DxPOdde4tD0Hw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrGIsWRWlGSWpSXmKPExsViZ8OxWffE459
+  JBs0n+S0uHl7K7MDocW7jCsYAxijWzLyk/IoE1ow/T7ML1nFWbG17xtbAuIOji5GTQ0jgAaPE
+  9H1lXYxcQPZlJomWDdeZIZw9jBLN/fPYQarYBNQkpt+6wQpiiwjoSyydvYcZxGYWUJF48bsHr
+  EZYwFNi74OnYDUsAqoS/af+sYHYvAKOEreOTGYCsSUEFCSmPHwP1ssp4CRx8d5OVogrHCV+bD
+  vLCFEvKHFy5hMWiPkSEgdfvGCG6FWUmH25mQXCrpCYMWMbG4StJnH13CbmCYyCs5C0z0LSvoC
+  RaRWjdVJRZnpGSW5iZo6uoYGBrqGhqa6xha6hiYFeYpVuol5qqW55anGJrpFeYnmxXmpxsV5x
+  ZW5yTopeXmrJJkZgEKcUq/XsYDyx6qfeIUZJDiYlUd5rF38mCfEl5adUZiQWZ8QXleakFh9il
+  OHgUJLgNQPGhZBgUWp6akVaZg4womDSEhw8SiK8C24DpXmLCxJzizPTIVKnGHU5Zn5tO8AsxJ
+  KXn5cqJQ4xQwCkKKM0D24ELLovMcpKCfMyMjAwCPEUpBblZpagyr9iFOdgVBLmdX8ENIUnM68
+  EbtMroCOYgI7Qu/sd5IiSRISUVAPT/ikeJ96qnjCsD1RU1T1lLaJpFjXR7RHXz33lvt+fl4ZY
+  H1JSndD3dfN6PetnM1tuMwZcuMntpLauZrLTMpXe4/06T9N+JooZaQcV+P0uuMzW7aGZlfCYh
+  eNDcXn3TMvg9ZJLFC9NSTGa2PFZ/KzluikvKyyLVDc6vF5XuKlom43/3H/99c3fw3ZvfXvJ7u
+  6pRXs2TZvmuo+BfX68eOLtxHsz3ZsiZqa+CzRr2JU6Jf1fR9+9hzkau7qP/9IXmf39zaTP057
+  +k9XtjI/ffvzXg9rTj5da9t+/19BYxLSLZd53ts0vnhR/5Pb5zzlJYKmOaobRj+lG06YI/lNz
+  Dz7mtlm24XRPvpOq0KxvEjHdSizFGYmGWsxFxYkAtsb532kDAAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-22.tower-565.messagelabs.com!1660543944!58624!1
+X-Originating-IP: [62.60.8.179]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.87.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 6671 invoked from network); 15 Aug 2022 06:12:24 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-22.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 15 Aug 2022 06:12:24 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id EE25475
 	for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Aug 2022 19:12:08 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
- h=from : to :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=PPS06212021;
- bh=b0/EAjkj7ALaMHhyH7vcPC1gcfOEszK/D21ZK8JpSNE=;
- b=k3PZH1KZSg7pZCvrHhcgHQaSyijQb7CSHS+BQAK2IyYCeF50hTaFj32CUmtVjTYCVKV7
- VNgTKfu1kBV3cClyZJUNbqrEgH0TFZAcypGiGfR046BMs/2Eo2qBswjdEKrewN9v4JmK
- jkk+Qa/P7GX44Wn6enr62dh0QjLRazK7COL44K0XJkR/+Q9X+6ULIDU5rvvIy0F5+cZY
- BweM08YvsLrcdg/zAa/DsEV3x07JjgGjqItdEWI+8n9dGeNje2bgvK9Qlnijyc21bzpI
- UCrLaMzzGlKjlNpQSV4GHWWK766qCdj3NQLSZh7FmsVM3YsKo8IxlxV6kqrMks3+5KcA GQ==
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com
- [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3hx78395ak-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+ Mon, 15 Aug 2022 07:12:23 +0100 (BST)
+Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
+ [10.183.43.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id E19A173
 	for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Aug 2022 19:12:07 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Sun, 14 Aug 2022 19:12:07 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Sun, 14 Aug 2022 19:12:06 -0700
-From: <changqing.li@windriver.com>
+ Mon, 15 Aug 2022 07:12:23 +0100 (BST)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Mon, 15 Aug 2022 07:12:22 +0100
+From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [kirtstone][master][meta-oe][PATCH V2] redis: fix do_patch fuzz
- warning
-Date: Mon, 15 Aug 2022 10:12:05 +0800
-Message-ID: <20220815021205.4118260-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: 
- <CAMKF1sphy2-znVeZBB6tE2x7w=nPXgOeZr7jx4p4AbuO7P2DQw@mail.gmail.com>
-References: 
- <CAMKF1sphy2-znVeZBB6tE2x7w=nPXgOeZr7jx4p4AbuO7P2DQw@mail.gmail.com>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] geocode-glib: upgrade 3.26.3 -> 3.26.4
+Date: Mon, 15 Aug 2022 14:12:02 +0800
+Message-ID: <1660543925-1319-2-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1660543925-1319-1-git-send-email-wangmy@fujitsu.com>
+References: <1660543925-1319-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: YgaVQ4AMC_Ue8pBj3ar61v6TB7JcSmpy
-X-Proofpoint-GUID: YgaVQ4AMC_Ue8pBj3ar61v6TB7JcSmpy
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
- definitions=2022-08-15_01,2022-08-11_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 bulkscore=0
- spamscore=0 impostorscore=0 suspectscore=0 phishscore=0 clxscore=1015
- lowpriorityscore=0 mlxscore=0 adultscore=0 priorityscore=1501
- mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2207270000 definitions=main-2208150007
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD09.g08.fujitsu.local (10.167.33.85) To
+ R01UKEXCASM126.r01.fujitsu.local (10.183.43.178)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 Aug 2022 02:12:18 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Aug 2022 06:12:29 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98233
+ https://lists.openembedded.org/g/openembedded-devel/message/98235
 
-From: Changqing Li <changqing.li@windriver.com>
+Changelog:
+=========
+This release includes a fix to a test data file not being installed, and a
+bug fix for a bug in the libsoup3 port.
 
-Fix:
-WARNING: lib32-redis-7.0.4-r0 do_patch: Fuzz detected:
-Applying patch GNU_SOURCE.patch
-patching file src/zmalloc.c
-Hunk #1 succeeded at 32 with fuzz 2 (offset 4 lines).
-
-There are two version of redis, and need different GNU_SOURCE.patch
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../redis/redis-7/{GNU_SOURCE.patch => GNU_SOURCE-7.patch}    | 0
- meta-oe/recipes-extended/redis/redis_7.0.4.bb                 | 4 ++--
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-extended/redis/redis-7/{GNU_SOURCE.patch => GNU_SOURCE-7.patch} (100%)
+ .../{geocode-glib_3.26.3.bb => geocode-glib_3.26.4.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/geocode-glib/{geocode-glib_3.26.3.bb => geocode-glib_3.26.4.bb} (82%)
 
-diff --git a/meta-oe/recipes-extended/redis/redis-7/GNU_SOURCE.patch b/meta-oe/recipes-extended/redis/redis-7/GNU_SOURCE-7.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7/GNU_SOURCE.patch
-rename to meta-oe/recipes-extended/redis/redis-7/GNU_SOURCE-7.patch
-diff --git a/meta-oe/recipes-extended/redis/redis_7.0.4.bb b/meta-oe/recipes-extended/redis/redis_7.0.4.bb
-index 993ff34b10..cde32e4147 100644
---- a/meta-oe/recipes-extended/redis/redis_7.0.4.bb
-+++ b/meta-oe/recipes-extended/redis/redis_7.0.4.bb
-@@ -6,7 +6,7 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=8ffdd6c926faaece928cf9d9640132d2"
- DEPENDS = "readline lua ncurses"
+diff --git a/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.3.bb b/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.4.bb
+similarity index 82%
+rename from meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.3.bb
+rename to meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.4.bb
+index 9783dade11..2b1ecad97c 100644
+--- a/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.3.bb
++++ b/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.4.bb
+@@ -14,6 +14,6 @@ DEPENDS = " \
+     libsoup-2.4 \
+ "
  
--FILESPATH =. "${FILE_DIRNAME}/${PN}-7:"
-+FILESPATH =. "${FILE_DIRNAME}/${BPN}-7:"
+-SRC_URI[archive.sha256sum] = "1dfeae83b90eccca1b6cf7dcf7c5e3b317828cf0b56205c4471ef0f911999766"
++SRC_URI[archive.sha256sum] = "2d9a6826d158470449a173871221596da0f83ebdcff98b90c7049089056a37aa"
  
- SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://redis.conf \
-@@ -16,7 +16,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://lua-update-Makefile-to-use-environment-build-setting.patch \
-            file://oe-use-libc-malloc.patch \
-            file://0001-src-Do-not-reset-FINAL_LIBS.patch \
--           file://GNU_SOURCE.patch \
-+           file://GNU_SOURCE-7.patch \
-            file://0006-Define-correct-gregs-for-RISCV32.patch \
-            "
- SRC_URI[sha256sum] = "f0e65fda74c44a3dd4fa9d512d4d4d833dd0939c934e946a5c622a630d057f2f"
+ EXTRA_OEMESON = "-Denable-installed-tests=false"
 -- 
 2.25.1
 
