@@ -2,74 +2,74 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 775AFC00140
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 786B2C3F6B0
 	for <webhook@archiver.kernel.org>; Mon, 15 Aug 2022 06:12:39 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web08.13523.1660543946635700827
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
+ [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web10.13492.1660543950289878287
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Aug 2022 23:12:30 -0700
+ Sun, 14 Aug 2022 23:12:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=lf8NnVjP;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=vfuBxEfN;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1660543949; i=@fujitsu.com;
-	bh=WbnG7QgkheOASAWouDIwEu9GRoPLh0049W84/+C4ObU=;
+	s=170520fj; t=1660543948; i=@fujitsu.com;
+	bh=5JUIFxQVMCi76cd0K46hjNQplaiB7gV2/cWRsrlchBw=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=lf8NnVjPQ7YBqHPk88uBycwsV6TrqsmBSgl4/kIw8j5jFmBQ4+Vyt1aDTelyymY0o
-	 JwMetS3j4gSVLNaw+DgHpXoxOoZJxsM0jUwlSOv2Q6sIPtku26TEloHsUIg2eIBgWj
-	 oGWmVbHM8pGL/Et13UoIKIk7zEi6+vLcwOYjbTx2w1EVJyOKtNkFR+LUTusU8ubzqU
-	 VlO5VATa/h1lcfE9WchRd70D0nf6l0yAO1gTASyWBH+GE2FIx9TPlclyyPJTrbFsW7
-	 xjteHmIssGIQqL34hKm2KQbWkcjgFtG1B8tQrkDs6Y/FrmF4icSwL21a9G6moExdum
-	 ysj0s/ym4r8Rw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrOIsWRWlGSWpSXmKPExsViZ8OxWffs459
-  JBjs2sFtcPLyU2YHR49zGFYwBjFGsmXlJ+RUJrBlvz71kLNgmXPFkZRdTA2OnYBcjF4eQwANG
-  iVmnLrJCOJeZJL6cucTcxcgJ5OxhlHixOwzEZhNQk5h+6wYriC0ioC+xdPYesBpmARWJF7972
-  EFsYQFbiavdm9lAbBYBVYkF6/eB1fMKOEqc3NDNAmJLCChITHn4HqyXU8BJ4uK9nawQuxwlfm
-  w7ywhRLyhxcuYTFoj5EhIHX7xghuhVlJh9uRlqToXEjBnb2CBsNYmr5zYxT2AUnIWkfRaS9gW
-  MTKsYrZOKMtMzSnITM3N0DQ0MdA0NTXWNTXUNTSz1Eqt0E/VSS3XLU4tLdI30EsuL9VKLi/WK
-  K3OTc1L08lJLNjECwzilWHnqDsbTq37qHWKU5GBSEuW9dvFnkhBfUn5KZUZicUZ8UWlOavEhR
-  hkODiUJXjNgZAgJFqWmp1akZeYAYwomLcHBoyTCu+A2UJq3uCAxtzgzHSJ1ilGXY+bXtgPMQi
-  x5+XmpUuIQMwRAijJK8+BGwOL7EqOslDAvIwMDgxBPQWpRbmYJqvwrRnEORiVhXvdHQFN4MvN
-  K4Da9AjqCCegIvbvfQY4oSURISTUwqT1OvbVjll/K+8aO5xf3rKst4vlqmL/uYMoFk4aJabEC
-  Uyf/yrfSDfKdcHHRz+tyBautBFdlTjC9zbP25eKmCYcOT/O2PGL+U+/bkSl3HqSrua89Ya1/O
-  F925uZ5TBVc6QdXXAzXnBtZFl5os1Bu0anFyo5lSqWuljP3Ta+MOcZpnBkxTdT3unjThHApiY
-  pJrJGrDpaycphPPxDHHNrffktlFd9yV/sePrsOv/W7RI9L+AdsfH5rg/b5xSfm7YyRWMbDri4
-  jyZjOs0V9zrUg/XqOIMP5c8PXn0+++uCcbNv6HQd3GTVoM2+eJPuMgY9X+QtPmytb2d514g9n
-  Pnbm8nBZtVOg/FBrS4vBp5ndSizFGYmGWsxFxYkAOkv7qWoDAAA=
+	b=vfuBxEfNjz2yqaA+g9ivyHUDmZUJsoidHoiuyozLLaC/MBxd6idy9+EbSJkjIM8s0
+	 +HDpj4P3A6ZnrejhmsxdTqBbjvPi4yyIJOrzwXcf5GDLqCJm5gwFgPWR1qS5VAJaG4
+	 y5FG6dbg0N5kU7NwmAoEYvGSN74dLHolmvih27hWFZ2FGTs61oAt+iH2CmPK6tG6rj
+	 +UPLppdVzHVBYVmL6GqZG1NJlEVyQy7zdqpYLvXyVZIMaC2xHr07ziIOhnWe0PdHyn
+	 SVTBprwxiN1yQjn0BY1lZUMwwKph6lM7lCBi+RCeWI9oIfTmXYk0L7aumQpdPBA6aS
+	 /wkPrSrzGEHnw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrFIsWRWlGSWpSXmKPExsViZ8ORqHv68c8
+  kgzNzjC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1ozd7xYyFpzkrDh39gJ7A+N9ji5GLg4hgSeM
+  Et/m3GSCcK4zSfSuvs8C4exhlDg74Td7FyMnB5uAmsT0WzdYQWwRAX2JpbP3MIPYzAIqEi9+9
+  4DVCAu4S9xcuYsRxGYRUJW4emITWD2vgKNEw+MlYHEJAQWJKQ/fg/VyCjhJXLy3E6xGCKjmx7
+  azjBD1ghInZz5hgZgvIXHwxQtmiF5FidmXm1kg7AqJGTO2sUHYahJXz21insAoOAtJ+ywk7Qs
+  YmVYx2iYVZaZnlOQmZuboGhoY6BoamgJpY11DEyO9xCrdRL3UUt28/KKSDF1DvcTyYr3U4mK9
+  4src5JwUvbzUkk2MwGBOKU7v28G4cd8vvUOMkhxMSqK81y7+TBLiS8pPqcxILM6ILyrNSS0+x
+  CjDwaEkwWsGjA8hwaLU9NSKtMwcYGTBpCU4eJREeBfcBkrzFhck5hZnpkOkTjHqcsz82naAWY
+  glLz8vVUocYoYASFFGaR7cCFiUX2KUlRLmZWRgYBDiKUgtys0sQZV/xSjOwagkzOv+CGgKT2Z
+  eCdymV0BHMAEdoXf3O8gRJYkIKakGJiXDDc+1lE9c+JTbzW2yKL0yL1362wo5mVvr+8S63duO
+  TH4eYcywaFNL8Az3351FHzcGXI2bE+KgnHTd8fOez6WPdxu+vZfBmim4jLXj8f9z17h8d1TO8
+  WRYMiMiTsIq3fjuZf/YP7NCN29bZrEgJeB18Y6fGSfqp/2P6Zv0uJrhyOysR2l/5u8QLNpysm
+  TfJevr7tZ/1/18ErB64uHiUxHRb7dZVJrqHGvs1vu0STnawnGe0naxPe7LLd7aKKtGdd3JmZ5
+  iYh1dnaTJfj+WNWvurQeXsstMtyfdYV3n/d3q5b0TJZ9ELA6+uqy9hLd8YhtrVfAm3YKeFrfg
+  SzoH7mTJ1YmefJ8seup89sRNLkosxRmJhlrMRcWJAAHdpGNtAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-17.tower-571.messagelabs.com!1660543948!481453!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-8.tower-745.messagelabs.com!1660543947!125780!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 20235 invoked from network); 15 Aug 2022 06:12:29 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-17.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 15 Aug 2022 06:12:29 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id CE65875
+Received: (qmail 23855 invoked from network); 15 Aug 2022 06:12:27 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-8.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 15 Aug 2022 06:12:27 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 3B05F100193
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Aug 2022 07:12:28 +0100 (BST)
+ Mon, 15 Aug 2022 07:12:27 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
  [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id C1F0273
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 2F8E910018D
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Aug 2022 07:12:28 +0100 (BST)
+ Mon, 15 Aug 2022 07:12:27 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 15 Aug 2022 07:12:27 +0100
+ (TLS) id 15.0.1497.32; Mon, 15 Aug 2022 07:12:25 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] icewm: upgrade 2.9.8 -> 2.9.9
-Date: Mon, 15 Aug 2022 14:12:05 +0800
-Message-ID: <1660543925-1319-5-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] htpdate: upgrade 1.3.5 -> 1.3.6
+Date: Mon, 15 Aug 2022 14:12:04 +0800
+Message-ID: <1660543925-1319-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1660543925-1319-1-git-send-email-wangmy@fujitsu.com>
 References: <1660543925-1319-1-git-send-email-wangmy@fujitsu.com>
@@ -84,60 +84,31 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 15 Aug 2022 06:12:39 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98237
+ https://lists.openembedded.org/g/openembedded-devel/message/98238
 
-Changelog:
-===========
--Permit percentages to have comma's in icesh.
--Keep accurate track of window changes in workspace buttons for
-  PagerShowPreview.  Only redraw affected workspace buttons, which reduces
-  the total number of workspace button redraws, especially for larges
-  number of workspace buttons.
--Add key bindings for single window tiling operations for issues
-  bbidulock/icewm#335, ice-wm/icewm#74 and ice-wm/icewm#84.
--Complete -e option.
--WindowMaker dock apps are supported.
--Support more HTML entities in icehelp.
--Remove dependency on asciidoc and prefer markdown format for the manual.
--Prevent warnings.
--Also install markdown.
--Try srcdir.
--Cleanup test and prefer markdown manual.
--Cleanup key grabs.
--Drop obsolete wmOccupyAll().
--Accept either markdown or asciidoc to generate manual html with CMake.
--Add markdown and icesh.
--Automatically detect and prevent race conditions in icesh relating to
-  moving and sizing windows for issue #335. Improve the accuracy of the
-  "sizeto" command in icesh for issue #335. Add "extents" command to
-  icesh. Add "workarea" command to icesh.
--Get rid of the frameContext.
--Prefer findClient in two cases: unmap notify and recv ping.
--Merge remote-tracking branch 'upstream/icewm-1-4-BRANCH' into
-  icewm-1-4-BRANCH
--Merge branch 'icewm-1-4-BRANCH'
+Fix when correcting large time offsets (bug introduced in 1.3.5)
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-extended/icewm/{icewm_2.9.8.bb => icewm_2.9.9.bb}   | 2 +-
+ .../htpdate/{htpdate_1.3.5.bb => htpdate_1.3.6.bb}              | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/icewm/{icewm_2.9.8.bb => icewm_2.9.9.bb} (94%)
+ rename meta-networking/recipes-support/htpdate/{htpdate_1.3.5.bb => htpdate_1.3.6.bb} (92%)
 
-diff --git a/meta-oe/recipes-extended/icewm/icewm_2.9.8.bb b/meta-oe/recipes-extended/icewm/icewm_2.9.9.bb
-similarity index 94%
-rename from meta-oe/recipes-extended/icewm/icewm_2.9.8.bb
-rename to meta-oe/recipes-extended/icewm/icewm_2.9.9.bb
-index 2c7ede7725..ecb0dbe73f 100644
---- a/meta-oe/recipes-extended/icewm/icewm_2.9.8.bb
-+++ b/meta-oe/recipes-extended/icewm/icewm_2.9.9.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4a26952467ef79a7efca4a9cf52d417b"
- SRC_URI = "https://github.com/ice-wm/${BPN}/releases/download/${PV}/${BPN}-${PV}.tar.lz \
-            file://0001-configure.ac-skip-running-test-program-when-cross-co.patch \
-            "
--SRC_URI[sha256sum] = "8d5d0f78a49c952f7f185d0f6713c6fabba597dcb713b1ac92e0e5795db29a25"
-+SRC_URI[sha256sum] = "af7bab3472189febf50753eaecfac586901419d282cbcbff92e860d4b74894b3"
+diff --git a/meta-networking/recipes-support/htpdate/htpdate_1.3.5.bb b/meta-networking/recipes-support/htpdate/htpdate_1.3.6.bb
+similarity index 92%
+rename from meta-networking/recipes-support/htpdate/htpdate_1.3.5.bb
+rename to meta-networking/recipes-support/htpdate/htpdate_1.3.6.bb
+index 08255ae846..a4389ce7e8 100644
+--- a/meta-networking/recipes-support/htpdate/htpdate_1.3.5.bb
++++ b/meta-networking/recipes-support/htpdate/htpdate_1.3.6.bb
+@@ -14,7 +14,7 @@ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://htpdate.c;beginline=26;endline=30;md5=2b6cdb94bd5349646d7e33f9f501eef7"
  
- UPSTREAM_CHECK_URI = "https://github.com/ice-wm/${BPN}/releases"
+ SRC_URI = "http://www.vervest.org/htp/archive/c/htpdate-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "a8734d4f1d84d0608d045508608f2d29d8b968da269f83120aaac67709b1bd03"
++SRC_URI[sha256sum] = "3cdc558ec8e53ef374a42490b2f28c0b23981fa8754a6d7182044707828ad1e9"
+ 
+ TARGET_CC_ARCH += "${LDFLAGS}"
  
 -- 
 2.25.1
