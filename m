@@ -2,74 +2,74 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A0C45C3F6B0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ABCFFC25B0D
 	for <webhook@archiver.kernel.org>; Mon, 15 Aug 2022 06:49:39 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.1])
- by mx.groups.io with SMTP id smtpd.web11.13702.1660546172265938767
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.1])
+ by mx.groups.io with SMTP id smtpd.web12.13789.1660546173454782799
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Aug 2022 23:49:32 -0700
+ Sun, 14 Aug 2022 23:49:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=oY3xI4TN;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.1,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=OczUwzOn;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1660546170; i=@fujitsu.com;
-	bh=b/vU/h2Gb7i4XFyeT/3AOMtcU29xNwrJAl7MpezZfu8=;
+	s=170520fj; t=1660546171; i=@fujitsu.com;
+	bh=MeKgkjcQkf9XVbgUQzBeh2HwaARtHlmMu48phHNn+os=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=oY3xI4TNZ+grOo55UeYva0m1S9xX7RlabCbm9pPU6/BoAB8HbSehLRtmCBDXSxPqe
-	 pLpEKcDTxz8iGEQWruxQpG0Rah749Go3z9bgLFaYwSpNxODzsmQgYp4WM7CxrRhG45
-	 xfFmBskjrxIhr/s6rYOz5Q8dlHLg/lB6in1l60oK4UyyUVCt7uK8FWqH8K4JRwrud5
-	 FkRbVWcG03sSfrewZ2eMx/37vIEEAvuzNshWlgJioKftD3DZlrbNaEariLZPDlCc75
-	 z2C/GsomsFvs6Q4xArGA4/c98yWyshJQ65Ub8u0Ws+KZ88GzsYzriSxVW9Qrvundcl
-	 vPwqh8tua1VNw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrMIsWRWlGSWpSXmKPExsViZ8MxSbfyzc8
-  kgxnHTC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1owpD1+xFKzmq9i3cy57A+MDni5GLg4hgSeM
-  Eo3PfjJCONeZJF58WMYE4exhlDh3vYO1i5GTg01ATWL6rRtgtoiAvsTS2XuYQWxmARWJF7972
-  EFsYQEnic8bvrCB2CwCqhJPb58Ei/MKOEpMufCABcSWEFCQmPLwPVgvJ1B91+17YLYQUM2Gxt
-  2MEPWCEidnPmGBmC8hcfDFC2aIXkWJ2ZeboeZUSMyYsY0NwlaTuHpuE/MERsFZSNpnIWlfwMi
-  0itEqqSgzPaMkNzEzR9fQwEDX0NBU11TXyMhUL7FKN1EvtVS3PLW4RNdQL7G8WC+1uFivuDI3
-  OSdFLy+1ZBMjMIxTilkf7mBc3PdT7xCjJAeTkijvtYs/k4T4kvJTKjMSizPii0pzUosPMcpwc
-  ChJ8Jq+AsoJFqWmp1akZeYAYwomLcHBoyTC2/cCKM1bXJCYW5yZDpE6xWjJMXX2v/3MHMvB5M
-  yvbQeYhVjy8vNSpcR5TV8DNQiANGSU5sGNg8X9JUZZKWFeRgYGBiGegtSi3MwSVPlXjOIcjEr
-  CvOUgU3gy80rgtr4COogJ6CC9u99BDipJREhJNTDZTvgsduTXiZUs87UW7nh7YqGdtYvE3Kqc
-  T1584gn77k06JJj4PchF6l/9PdsVchPjJHX7k7N27njY+3/t4a6S014TzvLejXikcdsjUdpCi
-  n2jjtjUF6bq889FcecxqUtaScsK1yuGbQlYOnftP6cZf8+GXl2W8eGf0ZpvT2RFpdm8Re9uM9
-  96oH9Sj3d0KkfsT0VZFbFZ9zgFg57v51sXM1t56yQp25zVBw441C4ull2ndrH0nExP5309iQJ
-  vw6MmDGeOsbw8fpzVvmmqX9k9ninH87aUvzOzl9wVeSww0Dr3l6uOyOOAt9fZ93ouenpk8VvZ
-  LZ5BacaiCzZNuvF5q7o1+wn9e3aPJ/yu3ROjxFKckWioxVxUnAgApbswX3YDAAA=
+	b=OczUwzOnQgpaBsfksTmuEEAflsDPsUIneArex52b0Li2v5gFNn8YBzHdNOk4i+2eN
+	 v6/RBxs+T/x2hOFz3hvhHxQH6l+lylP1uH1EFxKfT1PQRWQK4cak/7ey3uVPaeK9KK
+	 1PPkmeDd8KEGayaouq9MGbHaACKMlN2H4B7I4wJOP2FOVQAFLi5n/ohQv4H9C7rDFp
+	 I9hZnYhwda3tOtVhKgbtoeZN5YH0moxUQqEJNJ4D028lQDtfFQ6fbShtnUFgDTaGWj
+	 NF7wzeFyN3nqJGcDufGVSmQLJeClRHTnEHhvSrhUlTw96m42p1tmEpmZKZ7oCnIVTn
+	 l+3DEHIjxf1BA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrLIsWRWlGSWpSXmKPExsViZ8ORqFv95me
+  SwdOdkhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aLSVcZCyZwVRzevIG9gXEhZxcjF4eQwBNG
+  icXHdrNAONeZJC7d+8IE4exhlHjRcYqxi5GTg01ATWL6rRusILaIgL7E0tl7mEFsZgEViRe/e
+  9i7GDk4hAWcJY4d4wQJswioSiyff5sJxOYVcJRY9eIrC4gtIaAgMeXhe7BWTgEnia7b98BsIa
+  CaDY27GSHqBSVOznzCAjFeQuLgixfMEL2KErMvN0PNqZCYMWMbG4StJnH13CbmCYyCs5C0z0L
+  SvoCRaRWjdVJRZnpGSW5iZo6uoYGBrqGhqa6xsa6huaVeYpVuol5qqW55anGJrpFeYnmxXmpx
+  sV5xZW5yTopeXmrJJkZgGKcUK27ewThx5U+9Q4ySHExKorzXLv5MEuJLyk+pzEgszogvKs1JL
+  T7EKMPBoSTBa/oKKCdYlJqeWpGWmQOMKZi0BAePkghv3wugNG9xQWJucWY6ROoUozHH2oYDe5
+  k5Zn5tO8AsxJKXn5cqJc5r+hqoVACkNKM0D24QLNYvMcpKCfMyMjAwCPEUpBblZpagyr9iFOd
+  gVBLmLQeZwpOZVwK37xXQKUxAp+jd/Q5ySkkiQkqqgUljboul5+INV7xv9bf+q1e+X9jmMvPQ
+  B62Tk/a55E1yqMn3UY4OPnZkb2uxfKnVjN2HNyaXnF7mtvv2O8lK3/8v896e5NWQ/nGAlfl64
+  26JNR+2WRt817b+kro34aLigdYbZry5nZJzGL4onpDPVDtjL5D50aH6pav+F5/XddYCXOdL44
+  V/3zBoFN7m/O6X+cYVkm9Cmvv1WTlaJ/wPLO28+/G6921+5WsPp21JVo183MsyMa7uQvAD6WS
+  /mwbp7A0ms1gSNpxe2B0ssLovTLbNoaZxr3jHrF8HLp3kORnukalh8GGB3SVX17vJq3iX9W91
+  klna9ajzyfZdBz/y2T5O3HRF7PD05qyL8asmeiuxFGckGmoxFxUnAgB19J4KcAMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-6.tower-587.messagelabs.com!1660546169!826713!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-12.tower-565.messagelabs.com!1660546171!60416!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 7469 invoked from network); 15 Aug 2022 06:49:29 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-6.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 15 Aug 2022 06:49:29 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 802FF1000CE
+Received: (qmail 12120 invoked from network); 15 Aug 2022 06:49:31 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-12.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 15 Aug 2022 06:49:31 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 1F44A100192
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Aug 2022 07:49:29 +0100 (BST)
+ Mon, 15 Aug 2022 07:49:31 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
  [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 7393F100077
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 13831100043
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Aug 2022 07:49:29 +0100 (BST)
+ Mon, 15 Aug 2022 07:49:31 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 15 Aug 2022 07:49:27 +0100
+ (TLS) id 15.0.1497.32; Mon, 15 Aug 2022 07:49:29 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] uftp: upgrade 5.0 -> 5.0.1
-Date: Mon, 15 Aug 2022 14:49:07 +0800
-Message-ID: <1660546148-1668-4-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] xdg-user-dirs: upgrade 0.17 -> 0.18
+Date: Mon, 15 Aug 2022 14:49:08 +0800
+Message-ID: <1660546148-1668-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1660546148-1668-1-git-send-email-wangmy@fujitsu.com>
 References: <1660546148-1668-1-git-send-email-wangmy@fujitsu.com>
@@ -84,42 +84,36 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 15 Aug 2022 06:49:39 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98257
+ https://lists.openembedded.org/g/openembedded-devel/message/98258
 
 Changelog:
-==========
--On very low speed transfers (<10Kbps) sessions would time out due to a very
-  large interpacket transmission interval.  Fixed by putting a lower limit
-  on the advertised GRTT of of the interpacket transmission interval.
--Sending of ABORT messages on early shutdown would sometimes fail due to
-  OpenSSL cleanup functions running before application cleanup.  Changed the
-  ordering of atexit() handlers to ensure OpenSSL cleanup happens last.
--Fixed missing timestamp update when clients read CONG_CTRL messages
--Fix to GRTT handling on server to ensure it doesn't fall below minumim.
--Fixed bypassed checking of existing files on client for backup
--Various logging fixes
+=========
+ * Fixed minor leak
+ * Updated translations
+ * Documentation fixes
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-support/uftp/{uftp_5.0.bb => uftp_5.0.1.bb}         | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/uftp/{uftp_5.0.bb => uftp_5.0.1.bb} (84%)
+ .../{xdg-user-dirs_0.17.bb => xdg-user-dirs_0.18.bb}           | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-support/xdg-user-dirs/{xdg-user-dirs_0.17.bb => xdg-user-dirs_0.18.bb} (76%)
 
-diff --git a/meta-networking/recipes-support/uftp/uftp_5.0.bb b/meta-networking/recipes-support/uftp/uftp_5.0.1.bb
-similarity index 84%
-rename from meta-networking/recipes-support/uftp/uftp_5.0.bb
-rename to meta-networking/recipes-support/uftp/uftp_5.0.1.bb
-index 301e0fa607..6d5cf4b628 100644
---- a/meta-networking/recipes-support/uftp/uftp_5.0.bb
-+++ b/meta-networking/recipes-support/uftp/uftp_5.0.1.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d32239bcb673463ab874e80d47fae504"
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/uftp-multicast/files/source-tar/"
+diff --git a/meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.17.bb b/meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.18.bb
+similarity index 76%
+rename from meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.17.bb
+rename to meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.18.bb
+index 75d7f27485..84fc9e2f18 100644
+--- a/meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.17.bb
++++ b/meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.18.bb
+@@ -3,8 +3,7 @@ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/uftp-multicast/source-tar/uftp-${PV}.tar.gz"
--SRC_URI[sha256sum] = "562f71ea5a24b615eb491f5744bad01e9c2e58244c1d6252d5ae98d320d308e0"
-+SRC_URI[sha256sum] = "f0435fbc8e9ffa125e05600cb6c7fc933d7d587f5bae41b257267be4f2ce0e61"
+ SRC_URI = "http://user-dirs.freedesktop.org/releases/${BPN}-${PV}.tar.gz"
+-SRC_URI[md5sum] = "e0564ec6d838e6e41864d872a29b3575"
+-SRC_URI[sha256sum] = "2a07052823788e8614925c5a19ef5b968d8db734fdee656699ea4f97d132418c"
++SRC_URI[sha256sum] = "ec6f06d7495cdba37a732039f9b5e1578bcb296576fde0da40edb2f52220df3c"
  
- DEPENDS = "openssl"
+ inherit autotools gettext
  
 -- 
 2.25.1
