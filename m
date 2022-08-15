@@ -2,74 +2,74 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FB29C3F6B0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E1A3C00140
 	for <webhook@archiver.kernel.org>; Mon, 15 Aug 2022 06:12:29 +0000 (UTC)
 Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web08.13523.1660543946635700827
+ [195.245.231.1])
+ by mx.groups.io with SMTP id smtpd.web11.13510.1660543947797101713
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Aug 2022 23:12:27 -0700
+ Sun, 14 Aug 2022 23:12:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=VZpyWCtN;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Ie+MR2lH;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1660543945; i=@fujitsu.com;
-	bh=is4KZAnc5M6i9YroSOej4aZJF8vqOYC8D7BxxOMYSWA=;
+	s=170520fj; t=1660543946; i=@fujitsu.com;
+	bh=cLa63P8YOI6WQ0hmmjCsI8Dm5/voFuLKyS9DI/73NKw=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=VZpyWCtNrD7+Qh+u0y1uWOoq/vBgFQKL24wm7NV5X3loX1zHX2AIIn+qoNdeRE9Q3
-	 nwUIUGeigFlSQ7q7jMe2sDeMVJkKClBZr1UnczsBbRAclPK67Qwsvmabda2Kucr9S2
-	 zhiJ3GJpn5NAuPQvrC9OHCx5mg9xlRpmDFcl1RiHoKLNgQnBjevHbrOlILFW47Dtz2
-	 BDiMklcgJ1f7i8K3lK4Ik01VimbQSw4ATd6uICG7dSQL4l6FZrNibPcDA8pTwM0Jxn
-	 ooOgh5cRmRdPRGRDh/ANRh9+WcCRmW1zQ+CszJFT6ntLAdTRYax4ecFzrg0DBkGKCn
-	 DxPOdde4tD0Hw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrGIsWRWlGSWpSXmKPExsViZ8OxWffE459
-  JBs0n+S0uHl7K7MDocW7jCsYAxijWzLyk/IoE1ow/T7ML1nFWbG17xtbAuIOji5GTQ0jgAaPE
-  9H1lXYxcQPZlJomWDdeZIZw9jBLN/fPYQarYBNQkpt+6wQpiiwjoSyydvYcZxGYWUJF48bsHr
-  EZYwFNi74OnYDUsAqoS/af+sYHYvAKOEreOTGYCsSUEFCSmPHwP1ssp4CRx8d5OVogrHCV+bD
-  vLCFEvKHFy5hMWiPkSEgdfvGCG6FWUmH25mQXCrpCYMWMbG4StJnH13CbmCYyCs5C0z0LSvoC
-  RaRWjdVJRZnpGSW5iZo6uoYGBrqGhqa6xha6hiYFeYpVuol5qqW55anGJrpFeYnmxXmpxsV5x
-  ZW5yTopeXmrJJkZgEKcUq/XsYDyx6qfeIUZJDiYlUd5rF38mCfEl5adUZiQWZ8QXleakFh9il
-  OHgUJLgNQPGhZBgUWp6akVaZg4womDSEhw8SiK8C24DpXmLCxJzizPTIVKnGHU5Zn5tO8AsxJ
-  KXn5cqJQ4xQwCkKKM0D24ELLovMcpKCfMyMjAwCPEUpBblZpagyr9iFOdgVBLmdX8ENIUnM68
-  EbtMroCOYgI7Qu/sd5IiSRISUVAPT/ikeJ96qnjCsD1RU1T1lLaJpFjXR7RHXz33lvt+fl4ZY
-  H1JSndD3dfN6PetnM1tuMwZcuMntpLauZrLTMpXe4/06T9N+JooZaQcV+P0uuMzW7aGZlfCYh
-  eNDcXn3TMvg9ZJLFC9NSTGa2PFZ/KzluikvKyyLVDc6vF5XuKlom43/3H/99c3fw3ZvfXvJ7u
-  6pRXs2TZvmuo+BfX68eOLtxHsz3ZsiZqa+CzRr2JU6Jf1fR9+9hzkau7qP/9IXmf39zaTP057
-  +k9XtjI/ffvzXg9rTj5da9t+/19BYxLSLZd53ts0vnhR/5Pb5zzlJYKmOaobRj+lG06YI/lNz
-  Dz7mtlm24XRPvpOq0KxvEjHdSizFGYmGWsxFxYkAtsb532kDAAA=
+	b=Ie+MR2lHqOh0OJDNeHBm50KoZaoXHUWv7N4N1hZW9p/uerwjxV1JCJfsMjHji7tXR
+	 buqpj2MmDrKoZAfuupZdk5hS2K6/dEAf9NRQG0g3acNlv0NNNqF4KcibQO9xGzJnuV
+	 zMxHnUr9cfSHksRYmoiPjH9fRu4api1B6sEs0zMOSJZBK97fwYJxvYLBkSdmO7zP0a
+	 DqdoXSWTV1EAzOgiz2+QtGw5g4EN1xw2ksqRvGDEBnu6bZtkFKUcLBQZmad257oP/z
+	 jlg5SdGMsahnICmB4n8dLxEqXKmYlskZbF6HZwUPojdVjo11F77Zb2mGp6yr24gAvw
+	 Jbrvd4iiJMGLg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrCIsWRWlGSWpSXmKPExsViZ8ORpHvy8c8
+  kg1NrLC0uHl7K7MDocW7jCsYAxijWzLyk/IoE1ow50/cyFRziqphz+DFjA+Nuzi5GLg4hgYeM
+  EvO+/GCGcK4wSfzd3sYO4exhlPjzegJjFyMnB5uAmsT0WzdYQWwRAX2JpbP3MIPYzAIqEi9+9
+  7CD2MICDhJ/nlwFq2ERUJXYsns3WJxXwFFi5cW/TCC2hICCxJSH78F6OQWcJC7e2wlWLwRU82
+  PbWUaIekGJkzOfsEDMl5A4+OIFM0SvosTsy80sEHaFxIwZ29ggbDWJq+c2MU9gFJyFpH0WkvY
+  FjEyrGK2TijLTM0pyEzNzdA0NDHQNDU11jS10jQyN9BKrdBP1Ukt1y1OLS3SB3PJivdTiYr3i
+  ytzknBS9vNSSTYzAQE4pVruyg3HPqp96hxglOZiURHmvXfyZJMSXlJ9SmZFYnBFfVJqTWnyIU
+  YaDQ0mC1wwYG0KCRanpqRVpmTnAqIJJS3DwKInwLrgNlOYtLkjMLc5Mh0idYrTkmDr7335mju
+  VgcubXtgPMQix5+XmpUuIQ8wRAGjJK8+DGwSL/EqOslDAvIwMDgxBPQWpRbmYJqvwrRnEORiV
+  hXvdHQFN4MvNK4La+AjqICeggvbvfQQ4qSURISTUwaZ2Lyjk312d/i/bq1Ke/cpy6PA4/9wiZ
+  tcY5TG7Xu/x7Lhnzy1Z8i5IPjL23hmfb4wnzE6df2iN6N03df0lA7irZA5+naG7u3c3hkDBh3
+  S7jX/PEtSZszJ578FHAKn3H12cs5z9Z8/lIxspP0xb8/vXTwcEnI9hfLEvg9B+fU456iyWm5q
+  kduL1s2WYl89mz5E8r9SmICshLbdbRFH0cv15EVzpZ8Wwpj56Bg3Cvy89v3NsqNPhL9G/+a09
+  ZFeyVqrr5d/973Q3OB4S1Zll86hStU9q32+1BlUHnC2ETia0l66e8LmW8/vZ7hd2fPdb3k561
+  /euWT1IzP17Rq3FgXiybaNsHvrnhRgrlXXWeSizFGYmGWsxFxYkABoul2HcDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-22.tower-565.messagelabs.com!1660543944!58624!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-3.tower-571.messagelabs.com!1660543945!46528!1
+X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 6671 invoked from network); 15 Aug 2022 06:12:24 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-22.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 15 Aug 2022 06:12:24 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id EE25475
+Received: (qmail 15554 invoked from network); 15 Aug 2022 06:12:25 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-3.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 15 Aug 2022 06:12:25 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id A45AC1AD
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Aug 2022 07:12:23 +0100 (BST)
+ Mon, 15 Aug 2022 07:12:25 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
  [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id E19A173
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 995651A3
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Aug 2022 07:12:23 +0100 (BST)
+ Mon, 15 Aug 2022 07:12:25 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 15 Aug 2022 07:12:22 +0100
+ (TLS) id 15.0.1497.32; Mon, 15 Aug 2022 07:12:23 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH] geocode-glib: upgrade 3.26.3 -> 3.26.4
-Date: Mon, 15 Aug 2022 14:12:02 +0800
-Message-ID: <1660543925-1319-2-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] gjs: upgrade 1.72.1 -> 1.72.2
+Date: Mon, 15 Aug 2022 14:12:03 +0800
+Message-ID: <1660543925-1319-3-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1660543925-1319-1-git-send-email-wangmy@fujitsu.com>
 References: <1660543925-1319-1-git-send-email-wangmy@fujitsu.com>
@@ -84,34 +84,38 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 15 Aug 2022 06:12:29 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98235
+ https://lists.openembedded.org/g/openembedded-devel/message/98236
 
 Changelog:
-=========
-This release includes a fix to a test data file not being installed, and a
-bug fix for a bug in the libsoup3 port.
+==========
+- Various fixes ported from the development branch.
+
+- Closed bugs and merge requests:
+  * gi/arg-cache.cpp: Fix building on Visual Studio
+  * doc: Reflect support for constructor with GObject
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{geocode-glib_3.26.3.bb => geocode-glib_3.26.4.bb}          | 2 +-
+ meta-gnome/recipes-gnome/gjs/{gjs_1.72.1.bb => gjs_1.72.2.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/geocode-glib/{geocode-glib_3.26.3.bb => geocode-glib_3.26.4.bb} (82%)
+ rename meta-gnome/recipes-gnome/gjs/{gjs_1.72.1.bb => gjs_1.72.2.bb} (92%)
 
-diff --git a/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.3.bb b/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.4.bb
-similarity index 82%
-rename from meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.3.bb
-rename to meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.4.bb
-index 9783dade11..2b1ecad97c 100644
---- a/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.3.bb
-+++ b/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.4.bb
-@@ -14,6 +14,6 @@ DEPENDS = " \
-     libsoup-2.4 \
- "
+diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.72.1.bb b/meta-gnome/recipes-gnome/gjs/gjs_1.72.2.bb
+similarity index 92%
+rename from meta-gnome/recipes-gnome/gjs/gjs_1.72.1.bb
+rename to meta-gnome/recipes-gnome/gjs/gjs_1.72.2.bb
+index 355894073d..3170341560 100644
+--- a/meta-gnome/recipes-gnome/gjs/gjs_1.72.1.bb
++++ b/meta-gnome/recipes-gnome/gjs/gjs_1.72.2.bb
+@@ -8,7 +8,7 @@ DEPENDS = "mozjs-91 cairo"
  
--SRC_URI[archive.sha256sum] = "1dfeae83b90eccca1b6cf7dcf7c5e3b317828cf0b56205c4471ef0f911999766"
-+SRC_URI[archive.sha256sum] = "2d9a6826d158470449a173871221596da0f83ebdcff98b90c7049089056a37aa"
+ inherit gnomebase gsettings gobject-introspection vala gettext features_check upstream-version-is-even pkgconfig
  
- EXTRA_OEMESON = "-Denable-installed-tests=false"
+-SRC_URI[archive.sha256sum] = "17c0b1ec3f096671ff8bfaba6e4bbf14198c7013c604bfd677a9858da079c0ab"
++SRC_URI[archive.sha256sum] = "ddee379bdc5a7d303a5d894be2b281beb8ac54508604e7d3f20781a869da3977"
+ SRC_URI += " \
+     file://0001-Support-cross-builds-a-bit-better.patch \
+     file://0002-meson.build-Do-not-add-dir-installed-tests-when-inst.patch \
 -- 
 2.25.1
 
