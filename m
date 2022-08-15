@@ -2,74 +2,74 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 95C47C3F6B0
-	for <webhook@archiver.kernel.org>; Mon, 15 Aug 2022 06:39:59 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.66])
- by mx.groups.io with SMTP id smtpd.web08.13675.1660545597734974391
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 96DAAC00140
+	for <webhook@archiver.kernel.org>; Mon, 15 Aug 2022 06:40:09 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.3])
+ by mx.groups.io with SMTP id smtpd.web10.13633.1660545595803009640
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Aug 2022 23:39:58 -0700
+ Sun, 14 Aug 2022 23:39:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=whSjlzVD;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.66,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=y9xZ8pmD;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1660545596; i=@fujitsu.com;
-	bh=DStCGoAed/xpZKvmpaMuMRPnIwm87oODJQefH7KH+FQ=;
+	s=170520fj; t=1660545594; i=@fujitsu.com;
+	bh=aGuQhZmQuq3hnvzUK6sU1m8Ifvm4b4zJi2Alkmk+zX8=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=whSjlzVDfP6NIBugVgjiQ1RU0r66gUWAgInRQnBxe+rRl0s/OUGLEK2CLIkuffXGw
-	 c9zDoRX46idkaThYz7KO02V2BhovbTa5MR5597w1GRUwpmd4/uCihza9w/dOE499R8
-	 2nVDBhN1DBcxd5R4NR5v8GCsJTQleeQLcXmLwRS6Z0HtGTWj0O85iPYeaD79A8pzkg
-	 BfjKROhPKapdsqlpHrWGoQ11Q8b99mOBWAN7Z90R5mh1O3dxc6EQj5V1SqoNDFtDlD
-	 sN4IeQVMFa9SAPgrqpbnIpkKkxlmTcrkmOahLTdV6DIL1BNDd93vaQ7qlcJC8axvaP
-	 aIn5vkX5sKT6w==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrGIsWRWlGSWpSXmKPExsViZ8MxSdf61c8
-  kg0vHxSwuHl7K7MDocW7jCsYAxijWzLyk/IoE1oyuTz+YCraIVHw7d5qtgfG0UBcjF4eQwBNG
-  iXmb77JCONeZJF40f2OBcPYwSjR/2AnkcHKwCahJTL91gxXEFhHQl1g6ew8ziM0soCLx4ncPO
-  4gtLOAgcfLhK7YuRg4OFgFVib+ri0HCvAKOEpfunARrlRBQkJjy8D1YK6eAk8ScxkVsILYQUM
-  3cLd/ZIeoFJU7OfMICMV5C4uCLF8wQvYoSsy83s0DYFRIzZmxjg7DVJK6e28Q8gVFwFpL2WUj
-  aFzAyrWK0SCrKTM8oyU3MzNE1NDDQNTQ01TXUNdJLrNJN1Est1S1PLS7RNdRLLC/WSy0u1iuu
-  zE3OSdHLSy3ZxAgM4JRiRqYdjMv6fuodYpTkYFIS5b128WeSEF9SfkplRmJxRnxRaU5q8SFGG
-  Q4OJQne0udAOcGi1PTUirTMHGA0waQlOHiURHj7XgCleYsLEnOLM9MhUqcY7Tmmzv63n5ljOZ
-  ic+bXtADPHpn1dB5iFWPLy81KlxHnrngG1CYC0ZZTmwQ2FRf8lRlkpYV5GBgYGIZ6C1KLczBJ
-  U+VeM4hyMSsK8D0CW82TmlcDtfgV0FhPQWXp3v4OcVZKIkJJqYCr9s6HVNG6nVvTc+LZQzStu
-  VodmbJUtmDAxe+fmr1K3L6ds4bxtYVnIH3j0fdJy5dUBe5gj3trMnb4z+D3PAz/F+ffenf81R
-  19GyUjENuxknvWUlYEuvc2M1xWnbex3PrNYXe6iaXLokhr+Ly7uSouSFQuL4xW2z7YK5fRV45
-  /HoJd15czsDaHbilpE30wo899w/rzrnPTi9/+f3V57asa7MvuA3NoP6lWtZjn2f3tf+3vlGF2
-  Rnn1MJuFCx+6Fj6/3m++Jq2wof/N7q/GO8q6ePvuPAQ6qp3U7XWvt3f2EN1jl1r5o3TyhUmRO
-  yEzzVzXJUybe6QtYIfP4iKVbwwuPG0JValZFZxZOiNA9qMRSnJFoqMVcVJwIAIazuxd5AwAA
+	b=y9xZ8pmD6ZtZN/k8WZNy0CXceAf3+NU+sFJjM9SYiC4eJIbPAIc8LwDZA/+435FfU
+	 YTa3LeVw5oH5ixtBUwb63LwWVqFPgDf+zchR+n2Fv0AG4MeuVIzZ4Okg4EbUP2pF8P
+	 bTP9Pu5gw+Bz6/7USDRAcKA7onuVI+DH6hM+4834a28Pf1dsI8wPW0cgBdqGdp8WGI
+	 2pXlxXHX30kiz0LqayX46iOeuMJpTje4yGDrfhrQWunlSJx036BjxZK3eehRngIy7v
+	 Tun6im/6hXuf4bG1x4wf2JnVUQP6SmJRgFGH5GGvnuttHMHZFB+L4kY0OlsI2NSu3j
+	 z0L6ZgNmtxnDw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrGIsWRWlGSWpSXmKPExsViZ8ORpGv56me
+  Swc0dphYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bFVZ8ZC75wVuxcVdrAeJuji5GLQ0jgIaPE
+  3t2TWLoYOYGcy0wSy1exQyT2MEr8bp7IBJJgE1CTmH7rBiuILSKgL7F09h5mEJtZQEXixe8ed
+  hBbWMBZYvrePWwgNouAqsSEIw/AbF4BR4lD16aBzZEQUJCY8vA9WC+ngJPEnMZFbBCLHSXmbv
+  nODlEvKHFy5hMWiPkSEgdfvGCG6FWUmH25mQXCrpCYMWMbG4StJnH13CbmCYyCs5C0z0LSvoC
+  RaRWjdVJRZnpGSW5iZo6uoYGBrqGhqa6xpa6RgYFeYpVuol5qqW55anGJrpFeYnmxXmpxsV5x
+  ZW5yTopeXmrJJkZgEKcUq5/Ywfh05U+9Q4ySHExKorzXLv5MEuJLyk+pzEgszogvKs1JLT7EK
+  MPBoSTBW/ocKCdYlJqeWpGWmQOMKJi0BAePkghv3wugNG9xQWJucWY6ROoUoy7HzK9tB5iFWP
+  Ly81KlxHmjXgIVCYAUZZTmwY2ARfclRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSsK8l0Cm8GT
+  mlcBtegV0BBPQEXp3v4McUZKIkJJqYFq4NO300UuN562Dd1ldf6arFCuaea0mrfpK4+SKc+2r
+  stPv/NO9fi+EpU0nx01xp6eYpLFBd886t+f6982y9iSLt3fun3vpndHsvUGnlNsf7pnua5X63
+  P/K0ik7Nj4yWdLtkRf34qTxG1mPl+c2nO/UaNw9N961qIZTx43rwakGZrX0HVPkHzDfspj+IY
+  v/hMuBooerWl5mMi6/dkSxuHn55bIbOhenSm6sjFuiW3r6qKZGWnHAjss8c7/vEo9RPnD9Z9J
+  zidZ6QU/rM14VEY+7TKP2Pw5d6bNA8UnszQqrrVe+rGOW13j3ZXclR0NwXkXbYtWmeXvry/ZJ
+  F/yaGhSsUvi+7cis/Tf/CjxLMlJiKc5INNRiLipOBAD0swS4aQMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-10.tower-591.messagelabs.com!1660545595!155565!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-18.tower-571.messagelabs.com!1660545593!482144!1
+X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 26776 invoked from network); 15 Aug 2022 06:39:55 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-10.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 15 Aug 2022 06:39:55 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 05D011000DC
+Received: (qmail 16117 invoked from network); 15 Aug 2022 06:39:53 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-18.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 15 Aug 2022 06:39:53 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 951831A3
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Aug 2022 07:39:55 +0100 (BST)
+ Mon, 15 Aug 2022 07:39:53 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
  [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id ED512100077
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 89BA97C
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Aug 2022 07:39:54 +0100 (BST)
+ Mon, 15 Aug 2022 07:39:53 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 15 Aug 2022 07:39:53 +0100
+ (TLS) id 15.0.1497.32; Mon, 15 Aug 2022 07:39:50 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] postgresql: upgrade 14.4 -> 14.5
-Date: Mon, 15 Aug 2022 14:39:23 +0800
-Message-ID: <1660545563-1580-5-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] poppler: upgrade 22.07.0 -> 22.08.0
+Date: Mon, 15 Aug 2022 14:39:22 +0800
+Message-ID: <1660545563-1580-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1660545563-1580-1-git-send-email-wangmy@fujitsu.com>
 References: <1660545563-1580-1-git-send-email-wangmy@fujitsu.com>
@@ -82,61 +82,38 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 Aug 2022 06:39:59 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Aug 2022 06:40:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98253
+ https://lists.openembedded.org/g/openembedded-devel/message/98252
 
-0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-refreshed for new version.
+Changelog:
+=========
+ * Fix rendering text on some forms
+ * CairoOutputDev: Support Type3 charprocs having Resources
+ * Fix crashes on malformed files
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...01-configure.ac-bypass-autoconf-2.69-version-check.patch | 6 +++---
- .../postgresql/{postgresql_14.4.bb => postgresql_14.5.bb}   | 2 +-
- 2 files changed, 4 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-dbs/postgresql/{postgresql_14.4.bb => postgresql_14.5.bb} (83%)
+ .../poppler/{poppler_22.07.0.bb => poppler_22.08.0.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/poppler/{poppler_22.07.0.bb => poppler_22.08.0.bb} (96%)
 
-diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-index 2256bccece..4a576d7172 100644
---- a/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-+++ b/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-@@ -1,4 +1,4 @@
--From 07e605015fad0621c3e67133ff9330a5c6318daa Mon Sep 17 00:00:00 2001
-+From 258c6bd2ad96f2c42f1cb5f4c84e4ca5865059f0 Mon Sep 17 00:00:00 2001
- From: Yi Fan Yu <yifan.yu@windriver.com>
- Date: Fri, 5 Feb 2021 17:15:42 -0500
- Subject: [PATCH] configure.ac: bypass autoconf 2.69 version check
-@@ -14,12 +14,12 @@ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
-  1 file changed, 4 deletions(-)
+diff --git a/meta-oe/recipes-support/poppler/poppler_22.07.0.bb b/meta-oe/recipes-support/poppler/poppler_22.08.0.bb
+similarity index 96%
+rename from meta-oe/recipes-support/poppler/poppler_22.07.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_22.08.0.bb
+index 33723a560d..c75bf79e47 100644
+--- a/meta-oe/recipes-support/poppler/poppler_22.07.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_22.08.0.bb
+@@ -7,7 +7,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://0001-Do-not-overwrite-all-our-build-flags.patch \
+            file://basename-include.patch \
+            "
+-SRC_URI[sha256sum] = "420230c5c43782e2151259b3e523e632f4861342aad70e7e20b8773d9eaf3428"
++SRC_URI[sha256sum] = "b493328721402f25cb7523f9cdc2f7d7c59f45ad999bde75c63c90604db0f20b"
  
- diff --git a/configure.ac b/configure.ac
--index 04ef7be..0eb595b 100644
-+index ffe878e..c39799b 100644
- --- a/configure.ac
- +++ b/configure.ac
- @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch undefined macros
-  
-- AC_INIT([PostgreSQL], [14.4], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
-+ AC_INIT([PostgreSQL], [14.5], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
-  
- -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
- -Untested combinations of 'autoconf' and PostgreSQL versions are not
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_14.4.bb b/meta-oe/recipes-dbs/postgresql/postgresql_14.5.bb
-similarity index 83%
-rename from meta-oe/recipes-dbs/postgresql/postgresql_14.4.bb
-rename to meta-oe/recipes-dbs/postgresql/postgresql_14.5.bb
-index 1daab22f92..1551d34053 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql_14.4.bb
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql_14.5.bb
-@@ -11,7 +11,7 @@ SRC_URI += "\
-    file://0001-config_info.c-not-expose-build-info.patch \
- "
+ DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
  
--SRC_URI[sha256sum] = "c23b6237c5231c791511bdc79098617d6852e9e3bdf360efd8b5d15a1a3d8f6a"
-+SRC_URI[sha256sum] = "d4f72cb5fb857c9a9f75ec8cf091a1771272802f2178f0b2e65b7b6ff64f4a30"
- 
- CVE_CHECK_IGNORE += "\
-    CVE-2017-8806 \
 -- 
 2.25.1
 
