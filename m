@@ -2,74 +2,74 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8BEE7C3F6B0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8BEB7C00140
 	for <webhook@archiver.kernel.org>; Mon, 15 Aug 2022 06:29:29 +0000 (UTC)
 Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
- [85.158.142.112])
- by mx.groups.io with SMTP id smtpd.web08.13617.1660544966651258531
+ [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web12.13692.1660544964247548663
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Aug 2022 23:29:27 -0700
+ Sun, 14 Aug 2022 23:29:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=iVstYcU+;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.112,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=A4+cNVEt;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1660544964; i=@fujitsu.com;
-	bh=DG4B/QUxOjaElzH1kwXFKg0d86gaJ35QDU18rj9rgKE=;
+	s=170520fj; t=1660544962; i=@fujitsu.com;
+	bh=h2tJHbCNd75mS8lU82pT+O4z+hLOfnXRVykfLnLfKxE=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=iVstYcU+2hsQ1Ol8JslKVI6Yqo06cAPeg9mSU+XUdfyOi6RifSgbkftoqoEcK50j7
-	 pyPWumBF6Far5Wo/csOji9Cmn6Uuyego3zN8SQQ1I3s9rLDG33x2yOmMqRigdJjLGR
-	 VawS614NxKxOP+8NhZTyE2vtv2hfzbZzEnx8ZMCFxlleH2nBeoZu4U6g+w52GmT7RB
-	 JWumeRm9GBtvte70bxh5AOCN18EfYolhYhq2WY6zG6U8wpJ/534FB+fjtoOjwDoHS4
-	 rd0xDJwhtix1zjAHAnkw/EgkcToYfwk+W/ZwfHehDz6XZLjwhk+TTC9IjQ9tXF/fKU
-	 hVae57Zn4/nRA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrKIsWRWlGSWpSXmKPExsViZ8MxSffI859
-  JBlt2CFtcPLyU2YHR49zGFYwBjFGsmXlJ+RUJrBmf/v1hLdjJWTHvVh97A+Mdji5GLg4hgSeM
-  Eoum32GBcK4zScxsfsMG4exhlLiy4AxjFyMnB5uAmsT0WzdYQWwRAX2JpbP3MIPYzAIqEi9+9
-  7B3MXJwCAu4STz/agcSZhFQldixcycjSJhXwFHizyNXkLCEgILElIfvwTo5BZwkXj9oYQEpEQ
-  IqudpQBhLmFRCUODnzCQvEcAmJgy9eMEO0KkrMvtzMAmFXSMyYsY0NwlaTuHpuE/MERsFZSNp
-  nIWlfwMi0itE6qSgzPaMkNzEzR9fQwEDX0NBU19JM19BML7FKN1EvtVQ3L7+oJEPXUC+xvFgv
-  tbhYr7gyNzknRS8vtWQTIzCEU4oTBHYw7t33S+8QoyQHk5Io77WLP5OE+JLyUyozEosz4otKc
-  1KLDzHKcHAoSfCaPQbKCRalpqdWpGXmAOMJJi3BwaMkwrvgNlCat7ggMbc4Mx0idYpRl2Pm17
-  YDzEIsefl5qVLivHXPgIoEQIoySvPgRsBi+xKjrJQwLyMDA4MQT0FqUW5mCar8K0ZxDkYlYV5
-  ekCk8mXklcJteAR3BBHSE3t3vIEeUJCKkpBqYbI27bi8trN/RtXZD8NdHOZJV3FUXl9ud3yrl
-  uu7jCZn2pY5XBLTWGq7uON+rrW9lKj0t7ln+qjo+04fR+594Wuj95vJfv29GwmW2pD9By7+3N
-  /4wVJn+0uscW4rmFF9jgbmzytUsJsSHvT7fkaP4boqt++3pStVPN14rX1d6Vem9wtHmxGRFp4
-  hpLPvv9K3k23dVoHVV24Hj+9X/K/z+H28xN/h0+YcPscrm0qcSwr5bz/Kblz1FrvXOVVfDv7d
-  adpRrN5z+9mXzoxeX/r9aa3zv5lUNKZ3fOWynjgjkyzxzbmzd3VKlpLuqI3vusvl71IO422J7
-  3KQbZedJdRX8fe+jO02u4Xsss8H9HXFTlFiKMxINtZiLihMBozc55mgDAAA=
+	b=A4+cNVEtwO9UF/iluJJ8DsoWWVXSFYPdshW63rtyC13yy/YIr+87YDFfl78l1c8+Z
+	 0l3F9toZrCF5yAEOXJrEqBNQ9NJIfoamL+M/3JhUfvv8YZagOW1jtpTnNWpt3Ub8Ux
+	 q4oju0DhipxBS+cK7mKr/sKaBQinjz/BemgUUoKaPA3yVWt6p2zTEpryeFg86/3qYm
+	 tmR8F9n3sgOLUl01vk+JDa4eET7+G3/S50wd/o+o712uLBiKzZaOvfNVq+ZbKStLrL
+	 kfOn94Iba/c30dH8lypg13cWQx0Hzx3D/KuS9gtZKvrJRjmJGl4t69uJyAcwxdGEa6
+	 XUAeS9ZythswA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrOIsWRWlGSWpSXmKPExsViZ8ORpHvg+c8
+  kg7uz5SwuHl7K7MDocW7jCsYAxijWzLyk/IoE1oz2NZ/ZCzq4K3YuvsrcwPids4uRi0NI4CGj
+  xMWbN9ggnMtMEhdXz2SFcPYwSnw894Oxi5GTg01ATWL6rRusILaIgL7E0tl7mEFsZgEViRe/e
+  9hBbGEBV4k9vzeCxVkEVCUm3OxlArF5BRwluk5vYwGxJQQUJKY8fA9WwyngJPH6QQtQnANoma
+  PE1YYyiHJBiZMzn7BAjJeQOPjiBTNEq6LE7MvNUGMqJGbM2MYGYatJXD23iXkCo+AsJO2zkLQ
+  vYGRaxWidVJSZnlGSm5iZo2toYKBraGiqa2mpa2Gil1ilm6iXWqqbl19UkqFrqJdYXqyXWlys
+  V1yZm5yTopeXWrKJERjGKcXJITsYT+77pXeIUZKDSUmU99rFn0lCfEn5KZUZicUZ8UWlOanFh
+  xhlODiUJHjNHgPlBItS01Mr0jJzgDEFk5bg4FES4V1wGyjNW1yQmFucmQ6ROsWoyzHza9sBZi
+  GWvPy8VClx3rpnQEUCIEUZpXlwI2DxfYlRVkqYl5GBgUGIpyC1KDezBFX+FaM4B6OSMC8vyBS
+  ezLwSuE2vgI5gAjpC7+53kCNKEhFSUg1MCR2RW0Pyv17zEGd+OykiecK3p2qGJ9YnWy1TM2O3
+  jUmdM+cOe/z2chvenDUXbpZ7rI6bU3hcgmXSc4H/vIZK2Ywh2Ye27eYMdfnbYym90GZVg7Qhf
+  9yxt7nlV/6dC2D9Z8Qo8G1rR7rJyX+74qzu9nxeXaW1dvuGvNPMTtU7l02TZv7uuZ61vJ3x79
+  b5a77cLP/C4jJr23emK3+Pp2y9cZzXedcad+b32W+et/ZE5JvsKDFK33/ON2drdv723fdUjLQ
+  +Tqw6GHXH98+lVmbhZzP5RH6d4a7+qH5iXeuME+bvXKSDli9R+sPcoFre9XTBsZliXiv5lqc0
+  PzojIqe25/uiE6XnahZJL028eL31qhJLcUaioRZzUXEiAF5a/ttqAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-11.tower-732.messagelabs.com!1660544963!154456!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-13.tower-728.messagelabs.com!1660544960!136225!1
+X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 3437 invoked from network); 15 Aug 2022 06:29:24 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-11.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 15 Aug 2022 06:29:24 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id BAC551000CE
+Received: (qmail 15946 invoked from network); 15 Aug 2022 06:29:20 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-13.tower-728.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 15 Aug 2022 06:29:20 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id E5D4F1AC
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Aug 2022 07:29:23 +0100 (BST)
+ Mon, 15 Aug 2022 07:29:19 +0100 (BST)
 Received: from R01UKEXCASM126.r01.fujitsu.local (R01UKEXCASM126
  [10.183.43.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id AE1B71000C2
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id DAD337C
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Aug 2022 07:29:23 +0100 (BST)
+ Mon, 15 Aug 2022 07:29:19 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM126.r01.fujitsu.local (10.183.43.178) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 15 Aug 2022 07:29:22 +0100
+ (TLS) id 15.0.1497.32; Mon, 15 Aug 2022 07:29:18 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-perl] [PATCH] libencode-perl: upgrade 3.18 -> 3.19
-Date: Mon, 15 Aug 2022 14:28:57 +0800
-Message-ID: <1660544937-1453-5-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH] libadwaita: upgrade 1.1.3 -> 1.1.4
+Date: Mon, 15 Aug 2022 14:28:56 +0800
+Message-ID: <1660544937-1453-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1660544937-1453-1-git-send-email-wangmy@fujitsu.com>
 References: <1660544937-1453-1-git-send-email-wangmy@fujitsu.com>
@@ -84,30 +84,42 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 15 Aug 2022 06:29:29 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98243
+ https://lists.openembedded.org/g/openembedded-devel/message/98242
+
+Changelog:
+=========
+- AdwAvatar
+  - Fix draw_to_texture() with rectangular avatars
+- AdwTabBar
+  - Fix squished or clipped text with gtk-hint-font-metrics=0
+- AdwShadowHelper
+  - Fix warnings when drawing vertical shadow
+- AdwSwipeTracker
+  - Fix swipe speed on GTK 4.7.x
+  - Fix criticals with GTK 4.7.x
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{libencode-perl_3.18.bb => libencode-perl_3.19.bb}          | 2 +-
+ .../libadwaita/{libadwaita_1.1.3.bb => libadwaita_1.1.4.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libencode/{libencode-perl_3.18.bb => libencode-perl_3.19.bb} (97%)
+ rename meta-gnome/recipes-gnome/libadwaita/{libadwaita_1.1.3.bb => libadwaita_1.1.4.bb} (86%)
 
-diff --git a/meta-perl/recipes-perl/libencode/libencode-perl_3.18.bb b/meta-perl/recipes-perl/libencode/libencode-perl_3.19.bb
-similarity index 97%
-rename from meta-perl/recipes-perl/libencode/libencode-perl_3.18.bb
-rename to meta-perl/recipes-perl/libencode/libencode-perl_3.19.bb
-index 999863b1fe..352517ca67 100644
---- a/meta-perl/recipes-perl/libencode/libencode-perl_3.18.bb
-+++ b/meta-perl/recipes-perl/libencode/libencode-perl_3.19.bb
-@@ -15,7 +15,7 @@ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM = "file://META.json;beginline=8;endline=10;md5=b12e3be1e17a7e99ca4f429ff32c28b5"
+diff --git a/meta-gnome/recipes-gnome/libadwaita/libadwaita_1.1.3.bb b/meta-gnome/recipes-gnome/libadwaita/libadwaita_1.1.4.bb
+similarity index 86%
+rename from meta-gnome/recipes-gnome/libadwaita/libadwaita_1.1.3.bb
+rename to meta-gnome/recipes-gnome/libadwaita/libadwaita_1.1.4.bb
+index eaec983ade..44d18f596b 100644
+--- a/meta-gnome/recipes-gnome/libadwaita/libadwaita_1.1.3.bb
++++ b/meta-gnome/recipes-gnome/libadwaita/libadwaita_1.1.4.bb
+@@ -11,7 +11,7 @@ DEPENDS = " \
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/DANKOGAI/Encode-${PV}.tar.gz"
--SRC_URI[sha256sum] = "74dcbd851171a68cf3ef225568ece47b0959b8e3cda887482fde97c1ae1691e2"
-+SRC_URI[sha256sum] = "9163f848eef69e4d4cc8838397f0861fd9ea7ede001117dbd9694f8d95052ef5"
+ inherit gnomebase gobject-introspection gtk-doc vala features_check
  
- UPSTREAM_CHECK_REGEX = "Encode\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
+-SRC_URI[archive.sha256sum] = "9b92be6007da1bf75131a2d5e697f0ff985bccf82380d298d46f013675aa4197"
++SRC_URI[archive.sha256sum] = "fcc6d56669d33ac3d030098d7571d8045a02e18dc083b49a5a5a6325068e6b58"
  
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+ REQUIRED_DISTRO_FEATURES = "opengl"
 -- 
 2.25.1
 
