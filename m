@@ -1,97 +1,166 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9242CC25B0E
-	for <webhook@archiver.kernel.org>; Tue, 16 Aug 2022 13:08:58 +0000 (UTC)
-Received: from voyager.superhosting.bg (voyager.superhosting.bg
- [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web10.15165.1660655332451717082
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EC154C25B0E
+	for <webhook@archiver.kernel.org>; Tue, 16 Aug 2022 21:40:10 +0000 (UTC)
+Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com
+ [209.85.128.173])
+ by mx.groups.io with SMTP id smtpd.web10.21500.1660686001448232596
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Aug 2022 06:08:54 -0700
+ Tue, 16 Aug 2022 14:40:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=o8XjytW3;
- spf=permerror,
- err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
- for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
- (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
-	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
-	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
-	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=B5paUd6eGKxFTn/uk2qBC2Abhxv0fO4j+Nw8OCI2MtM=; b=o8XjytW3jzuKatyAwG5fw5ULvT
-	FkbGv8aIX7THesbD7aKkVjXiNPZM0pDXyWML42wCqfxl/lT7eCuPj9JHhB8LExbuV8zIrSiUt+6W+
-	qeoyn07cRBHB2eh2TNVP2jiSvaOfbzYDvM9uaPu0PSjZRHPPiaSvwRDQh+f9n8Qzi6R1Oo786ROMt
-	eV3LnRJ8ObgL2rVgjmFsg7sJtCqmJRfWI+olobcyupekdSoY0aMPkMzbDuzh5d9wxuvglNt+MvqyJ
-	39Y7b0SZqULK/ddviQRpBrjFUirdLb1kf7jKqqbEgfzf+WgFDQOgHFXQ8mUl+QzuovQ24ktqSNxB9
-	GkQs9t+w==;
-Received: from lan.nucleusys.com ([92.247.61.126]:59550 helo=tone.k.g)
-	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.95)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1oNwKs-0008MD-QC;
-	Tue, 16 Aug 2022 16:08:50 +0300
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH] python3-aiohue: Upgrade 4.4.2 -> 4.5.0
-Date: Tue, 16 Aug 2022 16:08:42 +0300
-Message-Id: <20220816130842.1011891-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.30.2
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=WWl8aXSx;
+ spf=pass (domain: gmail.com, ip: 209.85.128.173,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f173.google.com with SMTP id
+ 00721157ae682-32a09b909f6so185924557b3.0
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 16 Aug 2022 14:40:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc;
+        bh=+cwF4/NdV1iauXF59abU9UMTT9dB7ZOAzUJIeg9dzLM=;
+        b=WWl8aXSxvsIB0AmZHbyY2rpZbX/AJHXLxTCnqvwCEJeX/sYXS7u5v/gDVhpZrTC4CF
+         XyzTu8T+SL2R0rnlwTecDBYptUXZKPMuqg4poSijFv0RgJ0ulq2Ph3Cl2U7yH83XREV1
+         4i8JY329dLHfMwrrU1Sv+FcyA/BRKXZBrpgzI9DmfzQVtyvWl2HjtBXOWSpco1cEKPin
+         miUgLwxSI68IRxu97FU/2NW4Lxndy4fj0985AU9ABv34w0JxCIvLNPgsDQ1B6g/JtDIu
+         PwduJTfTpGDtcUW6c/FO4/4FzNnDC7y/9D5XBWp1ZXV9cA8HglliiCP0jvK9qHN6JCey
+         2w5Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc;
+        bh=+cwF4/NdV1iauXF59abU9UMTT9dB7ZOAzUJIeg9dzLM=;
+        b=gO8B79SBbFgHPHLKrYEBuE+G4vmptxpgaKyVtKBBSz8Nmafy3XyFs4X0D24TmBi7OV
+         YdYIdoc/UiQ5xsnt5bUjHbYoBQfdWgQARaDV0ezShHEil3JJiglluOR+vI4HNr2Fv67N
+         5CnqDESeL1VXHn8wiiOEKuEPEEBaINpeISDZ0ddLjBkwKzNZhXfncmwELQPZ07dSTZNa
+         mt9sLI3WGPB8mVH7jsEnuGhUbKjK9GjJxb/s98zsCaZ6OmeR2LbeI9zxAS3DV/iz0nCn
+         a1WJYf/rp/rFPlr39sV2V7GI+13T3t81hTuYyLD08YmLAu3zxsyzNNeI0PTpSHToPXWz
+         URdQ==
+X-Gm-Message-State: ACgBeo1twTr8ATcO0JmWv6i1xkkRBb6UaOFHxpHYTsFofGJydPpspGgt
+	vvQvezpjir+jL9BzBaMZ+9W4tNjfM57NVTXNlkM=
+X-Google-Smtp-Source: 
+ AA6agR7d8j0kFcD1CYZiHcxG8x3QRRFQETZHff52UGTLz3ffYxtj0TzgJozluWDFlx95r8RVL52VqVYPH18yNHbRHOo=
+X-Received: by 2002:a81:6c43:0:b0:32f:df6d:f7ef with SMTP id
+ h64-20020a816c43000000b0032fdf6df7efmr12050050ywc.422.1660686000383; Tue, 16
+ Aug 2022 14:40:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
- leon@anavi.org
-X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+References: <f779d83c-98f5-7b24-5ea2-10535f3e450d@gmail.com>
+In-Reply-To: <f779d83c-98f5-7b24-5ea2-10535f3e450d@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 16 Aug 2022 14:39:33 -0700
+Message-ID: 
+ <CAMKF1sqkKYyOOnu9-amVuvNs2Sm0_1541iBk0Rq8o+dZaAy6FA@mail.gmail.com>
+Subject: Re: kirkstone merge request: Aug 16th
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Aug 2022 13:08:58 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Aug 2022 21:40:10 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98262
+ https://lists.openembedded.org/g/openembedded-devel/message/98264
 
-Upgrade to release 4.5.0:
+merged ... thanks Armin
 
-- Add support for new Hue Tap Dial (relative rotary)
-- Fix KeyError on fake Hue bridges
-- Add monitor configuration type
-- Updated rate limit statuscode
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../python/{python3-aiohue_4.4.2.bb => python3-aiohue_4.5.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-aiohue_4.4.2.bb => python3-aiohue_4.5.0.bb} (81%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-aiohue_4.4.2.bb b/meta-python/recipes-devtools/python/python3-aiohue_4.5.0.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-aiohue_4.4.2.bb
-rename to meta-python/recipes-devtools/python/python3-aiohue_4.5.0.bb
-index 63d29a48f..7507b8ffd 100644
---- a/meta-python/recipes-devtools/python/python3-aiohue_4.4.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiohue_4.5.0.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=dab31a1d28183826937f4b152143a33f"
- 
--SRC_URI[sha256sum] = "871c27da3d5a5b7d7c5049e6d23713425a2f251639ff1fb5fac460724ba42f15"
-+SRC_URI[sha256sum] = "9a5aaf2fa97a889746142093e74143d5e3e02209fae428d1e2dbcc34a5c36efd"
- 
- inherit pypi setuptools3
- 
--- 
-2.30.2
-
+On Tue, Aug 16, 2022 at 11:42 AM akuster808 <akuster808@gmail.com> wrote:
+>
+> The following changes since commit 8f2dc1023482863e2630d1b94052c41ce748b38f:
+>
+>    tracker: upgrade 3.3.1 -> 3.3.2 (2022-07-26 07:27:26 -0700)
+>
+> are available in the Git repository at:
+>
+>    https://git.openembedded.org/meta-openembedded kirkstone-next
+>
+> for you to fetch changes up to acbe74879807fc6f82b62525d32c823899e19036:
+>
+>    cryptsetup: Add support for building without SSH tokens (2022-08-09
+> 09:51:57 -0700)
+>
+> ----------------------------------------------------------------
+> Akash Hadke (1):
+>        polkit: Add --shell /bin/nologin to polkitd user
+>
+> Anuj Mittal (1):
+>        yasm: fix buildpaths warning
+>
+> Khem Raj (1):
+>        ibus: Swith to use main branch instead of master
+>
+> Marta Rybczynska (1):
+>        polkit: update patches for musl compilation
+>
+> Martin Jansa (1):
+>        glmark2: fix compatibility with python-3.11
+>
+> Mingli Yu (6):
+>        net-snmp: set ac_cv_path_PSPROG
+>        postgresql: Fix the buildpaths issue
+>        freeradius: Fix buildpaths issue
+>        openipmi: Fix buildpaths issue
+>        apache2: Fix the buildpaths issue
+>        frr: fix buildpaths issue
+>
+> Peter Kjellerstedt (2):
+>        libwebsockets: Avoid absolute paths in *.cmake files in the sysroot
+>        cryptsetup: Add support for building without SSH tokens
+>
+> Vyacheslav Yurkov (1):
+>        polkit: add udisks2 rule
+>
+> Yi Zhao (1):
+>        polkit-group-rule-udisks2: fix override syntax in RDEPENDS
+>
+>   meta-gnome/recipes-support/ibus/ibus.inc                        | 2 +-
+>   .../files/0001-version.c-don-t-print-build-flags.patch          | 41
+> +++++++++++
+>   .../recipes-connectivity/freeradius/freeradius_3.0.21.bb        | 1 +
+>   meta-networking/recipes-protocols/frr/frr_8.2.2.bb              | 5 ++
+>   meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.1.bb    | 1 +
+>   meta-networking/recipes-support/openipmi/openipmi_2.0.32.bb     | 4 +
+>   .../files/0001-waflib-fix-compatibility-with-python-3.11.patch  | 76
+> +++++++++++++++++++
+>   meta-oe/recipes-benchmark/glmark2/glmark2_git.bb                | 3 +-
+>   .../recipes-connectivity/libwebsockets/libwebsockets_4.2.2.bb   | 3 +
+>   meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb           | 11 ++-
+>   .../files/0001-config_info.c-not-expose-build-info.patch        | 110
+> ++++++++++++++++++++++++++++
+>   meta-oe/recipes-dbs/postgresql/postgresql.inc                   | 8 ++
+>   meta-oe/recipes-dbs/postgresql/postgresql_14.4.bb               | 1 +
+>   meta-oe/recipes-devtools/yasm/yasm_git.bb                       | 5 ++
+>   .../polkit/files/50-org.freedesktop.udiskie.rules               | 24
+> ++++++
+>   meta-oe/recipes-extended/polkit/polkit-group-rule-udisks2.bb    | 17 +++++
+>   .../polkit/0003-Added-support-for-duktape-as-JS-engine.patch    | 20 ++---
+>   ...optional.patch => 0004-Make-netgroup-support-optional.patch} | 103
+> +++++++++++++-------------
+>   .../polkit/0005-Make-netgroup-support-optional-duktape.patch    | 34
+> +++++++++
+>   meta-oe/recipes-extended/polkit/polkit_0.119.bb                 | 4 +-
+>   .../apache2/0001-make_exports.awk-not-expose-the-path.patch     | 32
+> ++++++++
+>   meta-webserver/recipes-httpd/apache2/apache2_2.4.54.bb          | 1 +
+>   22 files changed, 439 insertions(+), 67 deletions(-)
+>   create mode 100644
+> meta-networking/recipes-connectivity/freeradius/files/0001-version.c-don-t-print-build-flags.patch
+>   create mode 100644
+> meta-oe/recipes-benchmark/glmark2/files/0001-waflib-fix-compatibility-with-python-3.11.patch
+>   create mode 100644
+> meta-oe/recipes-dbs/postgresql/files/0001-config_info.c-not-expose-build-info.patch
+>   create mode 100644
+> meta-oe/recipes-extended/polkit/files/50-org.freedesktop.udiskie.rules
+>   create mode 100644
+> meta-oe/recipes-extended/polkit/polkit-group-rule-udisks2.bb
+>   rename
+> meta-oe/recipes-extended/polkit/polkit/{0003-make-netgroup-support-optional.patch
+> => 0004-Make-netgroup-support-optional.patch} (74%)
+>   create mode 100644
+> meta-oe/recipes-extended/polkit/polkit/0005-Make-netgroup-support-optional-duktape.patch
+>   create mode 100644
+> meta-webserver/recipes-httpd/apache2/apache2/0001-make_exports.awk-not-expose-the-path.patch
+>
 
