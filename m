@@ -2,73 +2,77 @@ Return-Path: <andrei@gherzan.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B925FC25B08
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BA533C3F6B0
 	for <webhook@archiver.kernel.org>; Wed, 17 Aug 2022 11:43:44 +0000 (UTC)
 Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
  [66.111.4.26])
- by mx.groups.io with SMTP id smtpd.web09.28025.1660736614968663519
+ by mx.groups.io with SMTP id smtpd.web10.27508.1660736621851827569
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Aug 2022 04:43:35 -0700
+ Wed, 17 Aug 2022 04:43:42 -0700
 Authentication-Results: mx.groups.io;
  dkim=fail reason="signature has expired" header.i=@gherzan.com header.s=fm2
- header.b=1dJWKdCP;
+ header.b=AHBb0oDv;
  spf=pass (domain: gherzan.com, ip: 66.111.4.26, mailfrom: andrei@gherzan.com)
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
-	by mailout.nyi.internal (Postfix) with ESMTP id 34C4D5C00B4;
-	Wed, 17 Aug 2022 07:43:34 -0400 (EDT)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+	by mailout.nyi.internal (Postfix) with ESMTP id 339F15C0089;
+	Wed, 17 Aug 2022 07:43:41 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
-  by compute5.internal (MEProxy); Wed, 17 Aug 2022 07:43:34 -0400
+  by compute3.internal (MEProxy); Wed, 17 Aug 2022 07:43:41 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gherzan.com; h=
 	cc:cc:content-transfer-encoding:date:date:from:from:in-reply-to
-	:message-id:mime-version:reply-to:sender:subject:subject:to:to;
-	 s=fm2; t=1660736614; x=1660823014; bh=5WjucY84ALXt3nzTVFBFOeYtL
-	8GtA9fvwexe4V4OkiM=; b=1dJWKdCPlK5/mYgG/avsUgAXCfVhER/mc5T9nXhuo
-	FOaMYUfuvNJlws4bcUHLzfJS9fw3Xjhlg+kYOx34DTJ+myEqIXom6acYjaMw3zG/
-	3kDMXBRCJK273FTTux4zzdXPjQ7UsBrvTDoH5H8bFlxaRPQLoA5jk0ajEodUw6m5
-	R+UAcGOAzkm1SWcuAI0ywaHL1DfDtfMsxlpdiX2U5SbweQhOrY6pl3Orgtmb9942
-	hJTuDWiaanU94PrDHHbHhQM4+MJeGigDX61g5r4x4ktzlB2DbBK8jtNG6vKdawwl
-	wcPBeCzcsojzWwvFWsY24eqEQdqEiVyXzXYtwEnL2wvmA==
+	:in-reply-to:message-id:mime-version:references:reply-to:sender
+	:subject:subject:to:to; s=fm2; t=1660736621; x=1660823021; bh=eJ
+	GDvhHkwNgIrklhqb7e5oBRuFr9Tisb2pvPdRJJZy4=; b=AHBb0oDvhf3Up7xgqD
+	nGcQwDQAWGWipM/Ne4NGytYzxnGtRcZgifeDn+mBrpWMvbU3/6Tufc0GFeRfGM1z
+	jlaQ4ckO6FIqJVroWBOFKM71IFu6t8epJ04S5W7AJGMR5Q+vJjX0uPSnwKMNwOTg
+	uI7XCAHoVnXVYBe2rNZ0lZORZpA9jGs8QJ5w6sKbgUi+ThqCCVc6KyOIrsQh8lPE
+	moEpJX1/BG7TjDkD5JItfC4sPDUbAkC9lH/nMd/0tNXmMsAtFrZmQux8yr1kKINz
+	z2dPRmq1ybAZN3K4Xc1qKdgapdCdNWBBu9HSGUVMH4bTw/9LEi7z2kFfPIuKdaeB
+	01UA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:message-id
-	:mime-version:reply-to:sender:subject:subject:to:to:x-me-proxy
-	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
-	1660736614; x=1660823014; bh=5WjucY84ALXt3nzTVFBFOeYtL8GtA9fvwex
-	e4V4OkiM=; b=JhnpaMQiokT2Wbplin8rOHTc19Hn9+Y+ZaOjZBA02jmKUbcZkD4
-	9mFiEJa63UCi/VQ9o8UUxChUxK3Z3NKa97Ci6ychots0k6/PEyex4x4uQFGvdPjx
-	5eBj+waE2s6DsuouC8wJI2PMNONopdkefHkFVQWEtxgrlpTAB0Oj+CAoLWaeP71F
-	jFGLOy9yeL68/a+5DkPtFeXOwbE/5vB9Ry1tZQM/OIT1kJumMvvIB+vSZSIDARNO
-	wgDJBfkfkgI9pVnKMpo1pv7Ln6lezC/RmPJNpueDH81BmHfoLS6ZDGGQBYNunqZ7
-	ecsXsB/Fmqnp0A2nzDW2bF26L4hDjP7wqqQ==
-X-ME-Sender: <xms:ZdT8YlIOC9olpIzXCH3i4gQqNEikZT_hFynBD1atsU05MkhvqrWGRg>
-    <xme:ZdT8YhLhIF2TeWcb3pIbVGRwrUgC1DWdHioBAsNW0Sv11JezxD-4CF9YtNCzX5p91
-    j6VlkW_8N9ABeo6B00>
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm1; t=1660736621; x=1660823021; bh=eJGDvhHkwNgIr
+	klhqb7e5oBRuFr9Tisb2pvPdRJJZy4=; b=ImSqvGMI2BfTlNC+IJ0skPvuntDxv
+	BYnt+WsTT+YuF1mnNaRrjLtEhyaebeduKOTtr2uIceKUiGMIfeRY3+VkeZKmNnso
+	gIvWbmn9iodRgaZcT0ZiiLQKAY3sNzdxdlLYhiXNy8A9WvJemCpsNk2My3s8RdeG
+	A2jCupXeYssDvafK1UBQ303FjElEYVCZ+KcA0K7roZ5kc96pcGBV+FG6ZTXqR1C/
+	r5umZvu/J5YQ0cXIH0dMQnWaay0r0fjFTSlfpRyyyvL19nnx5ktwti/YdBIO+Hqk
+	M+OXt1dfd54roceBUxZST7j2wr8Y1W8KxtS4H8Gl2hOJKAuHi89YHfeCw==
+X-ME-Sender: <xms:bdT8YtpvGvjigS-rFM-xYrUyBe9IlBd4W0xqNcMs1EihgIX5JygmqQ>
+    <xme:bdT8YvqXrdTW-6PA8OPNPpwNzs61jIqJtzMPjtkk-PxmCIjtOGov6OCfzk4abn1YD
+    BbwHvvllXRZ2u6tvks>
 X-ME-Received: 
- <xmr:ZdT8YttYLkGcZTf6PJsJb-5QzlhXk9PMDWk4yG0kThzd2nLSR9K0ZB_dsP0hbCyKaC2jHZ1xowRMi62J7CNApmVduC596CMmhvzg-HSv1lbaZghJk_LC2P4w>
+ <xmr:bdT8YqOpTGKrXBAY9ynwhDPq8wIbLH3hkryDBJnexfQvUPEpVwhlDA-WXzm3DR8jxAZyCqqicJZVCJWgnu5I3W-PPWOAv0VhaazZrHiSNTcz5kFXk1N5gVCV>
 X-ME-Proxy-Cause: 
- gggruggvucftvghtrhhoucdtuddrgedvfedrvdehiedggeegucetufdoteggodetrfdotf
+ gggruggvucftvghtrhhoucdtuddrgedvfedrvdehiedggeefucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertd
-    ertddtnecuhfhrohhmpeetnhgurhgvihcuifhhvghriigrnhcuoegrnhgurhgvihesghhh
-    vghriigrnhdrtghomheqnecuggftrfgrthhtvghrnhepieejlefhveevleffveegfeetle
-    ejtedvgeejtddthefhhfdtiefhveegffeggeeknecuvehluhhsthgvrhfuihiivgeptden
-    ucfrrghrrghmpehmrghilhhfrhhomheprghnughrvghisehghhgvrhiirghnrdgtohhm
-X-ME-Proxy: <xmx:ZdT8YmYDWH0kKkthLn_mTAoykRzNdcvPr2MnjppLVccKdBz0YG9H_Q>
-    <xmx:ZdT8Ysba0kMHFn2-OWmPCrSW4qL-iXR4XhgY41XwA43DhEUgz0Bjzg>
-    <xmx:ZdT8YqCmwzTxuLYImyZwp2jpzNPZZLHPtYDlwEDwaAgYcTDSEDw7DQ>
-    <xmx:ZtT8YnzVicXXbDXkW68NPBz6_SxXE8ishs3bs13euWN5_d8kznEFhg>
+    uceurghilhhouhhtmecufedttdenucenucfjughrpefhvfevufffkffojghfggfgsedtke
+    ertdertddtnecuhfhrohhmpeetnhgurhgvihcuifhhvghriigrnhcuoegrnhgurhgvihes
+    ghhhvghriigrnhdrtghomheqnecuggftrfgrthhtvghrnhepjefhvefhgefgffejgeelke
+    ejleeiffejgffgkeeggfffgfffieeffeeghefhtdffnecuvehluhhsthgvrhfuihiivgep
+    tdenucfrrghrrghmpehmrghilhhfrhhomheprghnughrvghisehghhgvrhiirghnrdgtoh
+    hm
+X-ME-Proxy: <xmx:bdT8Yo4YNLyIlb0bsblCrPDdb6B8UpWH7ScvQcKQd1IhYTI9wiJNqw>
+    <xmx:bdT8Ys7MafM0WMWQsiMRwecaBbTBoFd5gLj7_tOaRlK2apBAq0MrwA>
+    <xmx:bdT8Ygjk26ShJEoJFS1pI7hA6GEq-VrvSTC-DXp_vsqJaWbEel693w>
+    <xmx:bdT8YqRn1Hepgjy2nq-z3J3scy4h16kNE6sg7d5ybNtb4N1_UxJoPw>
 Feedback-ID: i68994715:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 17 Aug 2022 07:43:33 -0400 (EDT)
+ 17 Aug 2022 07:43:40 -0400 (EDT)
 From: Andrei Gherzan <andrei@gherzan.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: andrei@gherzan.com,
 	Andrei Gherzan <andrei.gherzan@huawei.com>
-Subject: [meta-java][PATCH 1/3] classpath: Use an include file for x11 feature
- check
-Date: Wed, 17 Aug 2022 13:43:06 +0200
-Message-Id: <20220817114308.347965-1-andrei@gherzan.com>
+Subject: [meta-java][PATCH 2/3] libmatthew: Include features check from
+ classpath
+Date: Wed, 17 Aug 2022 13:43:07 +0200
+Message-Id: <20220817114308.347965-2-andrei@gherzan.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220817114308.347965-1-andrei@gherzan.com>
+References: <20220817114308.347965-1-andrei@gherzan.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
@@ -76,46 +80,40 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 17 Aug 2022 11:43:44 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98289
+ https://lists.openembedded.org/g/openembedded-devel/message/98290
 
 From: Andrei Gherzan <andrei.gherzan@huawei.com>
 
-This will make it easier to maintain reflecting the same distro check on
-packages depending on classpath (in the dependency chain).
+classpath is a dependency of this package that also has a required
+distro feature on x11. Without having the same feature check here, a
+world build would fail when x11 is not enabled. Reflecting the same
+feature check in this recipe, makes sure that world will skip it as
+well.
 
 Signed-off-by: Andrei Gherzan <andrei.gherzan@huawei.com>
 ---
- recipes-core/classpath/classpath-features-check.inc | 6 ++++++
- recipes-core/classpath/classpath_0.99.bb            | 4 +---
- 2 files changed, 7 insertions(+), 3 deletions(-)
- create mode 100644 recipes-core/classpath/classpath-features-check.inc
+ recipes-core/libmatthew/libmatthew.inc | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/recipes-core/classpath/classpath-features-check.inc b/recipes-core/classpath/classpath-features-check.inc
-new file mode 100644
-index 0000000..c238fc3
---- /dev/null
-+++ b/recipes-core/classpath/classpath-features-check.inc
-@@ -0,0 +1,6 @@
-+# SPDX-FileCopyrightText: Huawei Inc.
-+#
-+# SPDX-License-Identifier: Apache-2.0
+diff --git a/recipes-core/libmatthew/libmatthew.inc b/recipes-core/libmatthew/libmatthew.inc
+index b000387..4157d51 100644
+--- a/recipes-core/libmatthew/libmatthew.inc
++++ b/recipes-core/libmatthew/libmatthew.inc
+@@ -5,11 +5,14 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ DEPENDS = "virtual/java-native classpath-native classpath"
+ 
 +
-+inherit features_check
-+REQUIRED_DISTRO_FEATURES = "x11"
-diff --git a/recipes-core/classpath/classpath_0.99.bb b/recipes-core/classpath/classpath_0.99.bb
-index 5b9d904..f18ad1d 100644
---- a/recipes-core/classpath/classpath_0.99.bb
-+++ b/recipes-core/classpath/classpath_0.99.bb
-@@ -1,8 +1,6 @@
- require classpath.inc
+ S = "${WORKDIR}/libmatthew-java-${PV}"
  
--inherit features_check
--
--REQUIRED_DISTRO_FEATURES = "x11"
-+include classpath-features-check.inc
+ PACKAGE_ARCH = "${TUNE_PKGARCH}"
+ inherit java-library
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=92acc79f1f429143f4624d07b253702a"
- 
++include recipes-core/classpath/classpath-features-check.inc
++
+ # Some internal version numbers which change from time to time.
+ # Allowing to override them makes this include file more
+ # versatile.
 -- 
 2.25.1
 
