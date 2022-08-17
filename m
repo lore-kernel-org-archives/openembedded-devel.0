@@ -2,50 +2,49 @@ Return-Path: <andrei@gherzan.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A15DCC3F6B0
-	for <webhook@archiver.kernel.org>; Wed, 17 Aug 2022 11:44:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B1363C25B08
+	for <webhook@archiver.kernel.org>; Wed, 17 Aug 2022 11:44:24 +0000 (UTC)
 Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
  [66.111.4.26])
- by mx.groups.io with SMTP id smtpd.web10.27515.1660736653817590948
+ by mx.groups.io with SMTP id smtpd.web12.27657.1660736654661230174
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 17 Aug 2022 04:44:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gherzan.com header.s=fm2
- header.b=T9ptdJHR;
+ dkim=pass header.i=@gherzan.com header.s=fm2 header.b=4KIt7zfT;
  spf=pass (domain: gherzan.com, ip: 66.111.4.26, mailfrom: andrei@gherzan.com)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
-	by mailout.nyi.internal (Postfix) with ESMTP id 293C85C00AC;
-	Wed, 17 Aug 2022 07:44:13 -0400 (EDT)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+	by mailout.nyi.internal (Postfix) with ESMTP id 050F55C004A;
+	Wed, 17 Aug 2022 07:44:14 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
-  by compute4.internal (MEProxy); Wed, 17 Aug 2022 07:44:13 -0400
+  by compute5.internal (MEProxy); Wed, 17 Aug 2022 07:44:14 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gherzan.com; h=
 	cc:cc:content-transfer-encoding:date:date:from:from:in-reply-to
 	:in-reply-to:message-id:mime-version:references:reply-to:sender
-	:subject:subject:to:to; s=fm2; t=1660736653; x=1660823053; bh=eJ
-	GDvhHkwNgIrklhqb7e5oBRuFr9Tisb2pvPdRJJZy4=; b=T9ptdJHRVkflsWT9xF
-	hqiywO3GRnLTYSjxC8Bez0P9Wc9j8H/oyIunji6vdknKKXMBNNX65/0J8PpcDHdr
-	MANqXbpmLYYSrSuDfj0D4/nnZGvVn0326Pxof1JlRwBwQjitlLJBOgD479/TpIZ/
-	f9ORV224Qzo+Kpocjwp4mHXODMovgTqNggtI5DE2n6ds//nkAyf8sggmWyp0H1qo
-	N8GYMHutX0evchyxe2IUL51evZk4WA2pMSFmRsM9jOF3IB+6gw5lxaukuL2Ivlah
-	e6JkR/77oOcAD4kEPF47nFs3bKDHLXyVXFcgsnsXFoIgAyZY3L81xSUjP5/yLfUc
-	D4xw==
+	:subject:subject:to:to; s=fm2; t=1660736654; x=1660823054; bh=qZ
+	Ha7t96W80f+Zf/LT7D+dMm9c6KcHucOnnuMAqAEd4=; b=4KIt7zfTbrWF2IAWD9
+	+H/05pHaLDMnAeCQYA4Yy23uaq52Szn/9eoW4mvpIDpWJE+G3969LAPtqUQDjOmH
+	suEBr9nh287XKHCruilsXmOKSMzj1kOt/flWI5KLSQYN1WUqbYnIBpkBY7+C4+Fv
+	UYE1HY+hIut5DoiygtVdhOrpLdqTN1ApMN63R8rdRiGCHUste8aQUxxnAPbmN0cN
+	XDSBYCb+YICAC2N99NYugLEGhyMxv/FB3tbvSAZO3qIokeiKVD8537nDg435AhmS
+	m4kAPOM3i6LEulzOVudIuKiza20DJxi+dY9kle62wptKaMTg3ofwd1SpPnGUKZrS
+	EuaA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
 	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
 	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm1; t=1660736653; x=1660823053; bh=eJGDvhHkwNgIr
-	klhqb7e5oBRuFr9Tisb2pvPdRJJZy4=; b=zMiZeO62hfYEts9OygC0FSUH/7wYs
-	IYhm8y08+lwda5yj7rmVoUhXG5kqinupGJkNEIivtT/FBQIta5pxsgOrWUOW41iA
-	gk911L7XB1uHD6z6AusLUkhKhYyGl/XcbJV8z4ZaRyUcihqgE4xTiGPTnSi1Ggug
-	cJm1pSi5tRaDUH2rNLCjQRYDU6lehwQvKh4Xv6BF8Lgjry0QfxtOtkb/g4nvjsPu
-	2xFucxla4yvf5+nqePY3VQ0Oa8tU7jHnSzt+06UxdY6WIqAXxN6qNDdDrX8ECu1y
-	4Tu22W+jsvPxNqyZE22UI7KtkpLsSPdXsoBnjrc11JX4PMf5pPaPFt9LA==
-X-ME-Sender: <xms:jNT8YiM4UWJSeyttmNGRmN_hl3XQMLuO6G1Mol3b3OwM7vSfnu92Eg>
-    <xme:jNT8Yg91PjdneVIo7Mp-gHH3hrTdhNar9If2Ffhho3FpawBFa59W4pBTFnjoOABAg
-    TKO-okL6nwd4k28Rio>
+	:x-sasl-enc; s=fm1; t=1660736654; x=1660823054; bh=qZHa7t96W80f+
+	Zf/LT7D+dMm9c6KcHucOnnuMAqAEd4=; b=2/4bhvnYJa5oJ40/t22xdmFSTXc0X
+	zlgtmitsoN6SWmiM4KJye5+LP2utORpjITg3T2fqtA0GGe91afY/YE3ANWfDwoje
+	jCZ+RagL1Ey+woFYByJTEJT68AcAxEnW2DItsBETTT3Mp0m2HBzjEKH8JYmi3UAj
+	PB/d+4eVj3pH/8qaU2vR5jy9+HR5iFYM8kuVv/RyOLW6G6Ucfs5L7zxPlKCkyvD7
+	BeSLKuOtaatn3Y3nEKZKB39RuSWw1XLfK8CIzmQFdt0a6lCD3N/JhceyRz/6nwfj
+	WfcHk489Y6gmmDvwXmYW3f4Goy/k9N73zOUHtCPiRMMROOZyPLkjYuETg==
+X-ME-Sender: <xms:jdT8YhcbtZJqBfpu81BeQcivzOuVFmu5kdFpVoDJ_BiZ_46sLcb2cg>
+    <xme:jdT8YvNOnWDDy2Z4vXHfCK2HfYTQ5NIMBt05x0wjDfkle3QHra1sNf3Y8_EI_9ukB
+    2Po-Ws7KrukLknM9ok>
 X-ME-Received: 
- <xmr:jNT8YpSp94XMF4kdVlb2NTO-s5F5No1YQJZlYikMibY3n2UQkA-QNw7NNdQtreKlCOjUJyHXkFGR4d-u0_rw0lbFyWWKWFJuAGWbEsmmX6YHMfXliCGJOVlS>
+ <xmr:jdT8YqhHTfGAW-J49ivr2kZqEYpKPTS6O-RJZik1yU9IFeIa0u2lrCM_bt3K6ovovYBfVptBf9GuV3jHvXf9uOjQvhHlbmW0mfGWrXUNVml7kJy7tH1wUOQ2>
 X-ME-Proxy-Cause: 
  gggruggvucftvghtrhhoucdtuddrgedvfedrvdehiedggeegucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
@@ -53,23 +52,23 @@ X-ME-Proxy-Cause:
     ertdertddtnecuhfhrohhmpeetnhgurhgvihcuifhhvghriigrnhcuoegrnhgurhgvihes
     ghhhvghriigrnhdrtghomheqnecuggftrfgrthhtvghrnhepjefhvefhgefgffejgeelke
     ejleeiffejgffgkeeggfffgfffieeffeeghefhtdffnecuvehluhhsthgvrhfuihiivgep
-    udenucfrrghrrghmpehmrghilhhfrhhomheprghnughrvghisehghhgvrhiirghnrdgtoh
+    tdenucfrrghrrghmpehmrghilhhfrhhomheprghnughrvghisehghhgvrhiirghnrdgtoh
     hm
-X-ME-Proxy: <xmx:jdT8YiuYIX7ezXyXZg--bpuW4aNGDSkWNrD6QotkDmfiT5GVWERnMw>
-    <xmx:jdT8Yqcw7LBkMmjpO3GgMeywOP5MuXc3IdPpj7G3A-fqDbWC_zPexQ>
-    <xmx:jdT8Ym1dIbWEf8-dy7rhUK5f-JZ3Aqy3KSqmC4_KVqteCLzOJ8_DTg>
-    <xmx:jdT8YuFdZe5XWQhrTOZItH2KM5v6yyQVCmktqjlByJ7BZavkahf76w>
+X-ME-Proxy: <xmx:jdT8Yq_eCzAa6MZnBGhYzvKn7I3FYGoJiMQuHw_xcvKQm8hCzJvcow>
+    <xmx:jdT8YtvOtmYZECULzHS3YaDAjNsBybGr2XkED2RNkhQFlS5hrWgHoQ>
+    <xmx:jdT8YpFxeRaVa1t50NyoaV_tuss1tX7JhVc1yguR3LDJy0pzU8sDXw>
+    <xmx:jtT8YuVweIyTvxC8o5vGQhxe890BuqD2yPO0y6p5yC-OCY3YlHloRw>
 Feedback-ID: i68994715:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 17 Aug 2022 07:44:12 -0400 (EDT)
+ 17 Aug 2022 07:44:13 -0400 (EDT)
 From: Andrei Gherzan <andrei@gherzan.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: andrei@gherzan.com,
 	Andrei Gherzan <andrei.gherzan@huawei.com>
-Subject: [meta-java][kirkstone][PATCH 2/3] libmatthew: Include features check
+Subject: [meta-java][kirkstone][PATCH 3/3] dbus-java: Include features check
  from classpath
-Date: Wed, 17 Aug 2022 13:44:05 +0200
-Message-Id: <20220817114406.348705-2-andrei@gherzan.com>
+Date: Wed, 17 Aug 2022 13:44:06 +0200
+Message-Id: <20220817114406.348705-3-andrei@gherzan.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220817114406.348705-1-andrei@gherzan.com>
 References: <20220817114406.348705-1-andrei@gherzan.com>
@@ -78,42 +77,36 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 Aug 2022 11:44:14 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Aug 2022 11:44:24 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98293
+ https://lists.openembedded.org/g/openembedded-devel/message/98294
 
 From: Andrei Gherzan <andrei.gherzan@huawei.com>
 
-classpath is a dependency of this package that also has a required
-distro feature on x11. Without having the same feature check here, a
-world build would fail when x11 is not enabled. Reflecting the same
-feature check in this recipe, makes sure that world will skip it as
+classpath is an indirect dependency of this package that also has a
+required distro feature on x11. Without having the same feature check
+here, a world build would fail when x11 is not enabled. Reflecting the
+same feature check in this recipe, makes sure that world will skip it as
 well.
 
 Signed-off-by: Andrei Gherzan <andrei.gherzan@huawei.com>
 ---
- recipes-core/libmatthew/libmatthew.inc | 3 +++
- 1 file changed, 3 insertions(+)
+ recipes-extended/dbus/dbus-java_2.7.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/recipes-core/libmatthew/libmatthew.inc b/recipes-core/libmatthew/libmatthew.inc
-index b000387..4157d51 100644
---- a/recipes-core/libmatthew/libmatthew.inc
-+++ b/recipes-core/libmatthew/libmatthew.inc
-@@ -5,11 +5,14 @@ SECTION = "libs"
- LICENSE = "MIT"
- DEPENDS = "virtual/java-native classpath-native classpath"
+diff --git a/recipes-extended/dbus/dbus-java_2.7.bb b/recipes-extended/dbus/dbus-java_2.7.bb
+index ca7652a..0e5ae92 100644
+--- a/recipes-extended/dbus/dbus-java_2.7.bb
++++ b/recipes-extended/dbus/dbus-java_2.7.bb
+@@ -25,6 +25,8 @@ S = "${WORKDIR}/dbus-java-${PV}"
  
-+
- S = "${WORKDIR}/libmatthew-java-${PV}"
- 
- PACKAGE_ARCH = "${TUNE_PKGARCH}"
  inherit java-library
  
 +include recipes-core/classpath/classpath-features-check.inc
 +
- # Some internal version numbers which change from time to time.
- # Allowing to override them makes this include file more
- # versatile.
+ # jamvm-native unfortunately contains non-generificed java/lang/reflect classes
+ # which are accessed in this package. Work around this by setting the bootclasspath
+ # explicitly.
 -- 
 2.25.1
 
