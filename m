@@ -1,124 +1,253 @@
-Return-Path: <alex.kanavin@gmail.com>
+Return-Path: <Muhammad_Hamza@mentor.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4BAF7C25B08
-	for <webhook@archiver.kernel.org>; Wed, 17 Aug 2022 20:40:47 +0000 (UTC)
-Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com
- [209.85.208.174])
- by mx.groups.io with SMTP id smtpd.web12.34167.1660768838772873369
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9377CC00140
+	for <webhook@archiver.kernel.org>; Thu, 18 Aug 2022 05:06:49 +0000 (UTC)
+Received: from esa4.mentor.iphmx.com (esa4.mentor.iphmx.com [68.232.137.252])
+ by mx.groups.io with SMTP id smtpd.web08.38675.1660799200790236300
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Aug 2022 13:40:39 -0700
+ Wed, 17 Aug 2022 22:06:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=XGP/Wjpy;
- spf=pass (domain: gmail.com, ip: 209.85.208.174,
- mailfrom: alex.kanavin@gmail.com)
-Received: by mail-lj1-f174.google.com with SMTP id v4so1368961ljg.0
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Aug 2022 13:40:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc;
-        bh=PSdlQvdCFjbc6hjVYF3mIjHKdv/X9CU+s6TShSQPbEc=;
-        b=XGP/WjpyYfo7QOTVHMfIrpgsAx7vDtah/uXC85EwFcGyOrwdk/L+nZl034BPTElO+i
-         A3A6kKKJm6GzzauLZhcazYDHcjXjFmiHwTPwhKs/b9XMqy9bQOADf+LKQ5Dn0qhUAiD6
-         IyfVK+T8PRbGKB0N/xYkaA0//JC/yTy+pfuZxPWHP0uHPJ64HPTELWIOepdOBqz/PwO+
-         7bH8OEG3hdAGCrVm9zXrzkUwZj2RLBI6mMbW7pZU2F+ALnVXrZW/qlcMkT16PT5qzlPy
-         JDpnmMZP0QVeYH8NeYgO3edvrLn+JaA4nYtjiS8zXsf4AY4gCILjleLG/3nu5GDlQmcN
-         O4PQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc;
-        bh=PSdlQvdCFjbc6hjVYF3mIjHKdv/X9CU+s6TShSQPbEc=;
-        b=oJr4k9qEpl3VK1xPAsotYyB7b6J6XQXcOb6jjVnMj+4L4X0DyM/49sNBu6GmJjNhaW
-         waw4GAtYqEhDKoeRfvy8jKtQLtlrUr3vussmQMp87V3bBhBcmaGSusj59WtdxtgSWhBy
-         bB9n5kP/Fa0RHR8aIuroAzECioaLFuR3lHDAed0NE/nH0yknPoQw4l8nNhXb6zBQA3ny
-         N9PlMH+KwUxDUh0jzTP6CLCKRZamZ64VHEm54HeFEFyzO1qua/QIHt3V1ehcBGEhBnr4
-         Pn1+vtCBKl096xpoYAfGpopAp1Qas7RQDj0ypzFkmd3VKBHfCp4qSydJap8Ryyp/dFVy
-         uwqA==
-X-Gm-Message-State: ACgBeo0hV/Vy3Fqc5+KHD2BGv+zC/ctYTvufboZi93hS4GlQSHHl5KQI
-	pCF9KosCocCbXz7216DieuMmMdanUNOtBlQzlac=
-X-Google-Smtp-Source: 
- AA6agR6Sk0I2kfYtHDxZvMbGhQ/blhvu1Ipm2SysvxglWmrOxLe+XAq1Pzz2fUGzGeLmpQ6ePKBGHCA8RRJF1WnwH8o=
-X-Received: by 2002:a2e:9dc5:0:b0:25e:6fa0:1243 with SMTP id
- x5-20020a2e9dc5000000b0025e6fa01243mr8943424ljj.513.1660768836806; Wed, 17
- Aug 2022 13:40:36 -0700 (PDT)
+ dkim=missing;
+ spf=pass (domain: mentor.com, ip: 68.232.137.252, mailfrom: muhammad_hamza@mentor.com)
+X-IronPort-AV: E=Sophos;i="5.93,245,1654588800";
+   d="scan'208";a="81495816"
+Received: from orw-gwy-01-in.mentorg.com ([192.94.38.165])
+  by esa4.mentor.iphmx.com with ESMTP; 17 Aug 2022 21:06:36 -0800
+IronPort-SDR: 
+ /OcecSAU5oQWp15dLyHaRFs0+QiVeoe5rYwr4QTyY/8nun983WDKEghmXpc4zZV0ZHv3nIQL1c
+ y0DXvVLhOEulEtOuHLmbjhZJL74uNMBGE88/Em1RmYXCAOldXID1KfuojSkvCIkDy6QKLIbCcI
+ /hEIt/yOg5xFA9e4q89n+TF4rcMeSvHCIJQHMFP5v5eqVHsSOWNDkxExyFYXSr/iH0a2xnjVF5
+ WVNkJWAtJiEVMbnOX26w9zhJYyJKxND6qEgUiLu2iIf6b6VuX19YDwA7EEYwuki9zuRdmaXvAT
+ 3lM=
+From: Muhammad Hamza <muhammad_hamza@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Alex Kiernan <alex.kiernan@gmail.com>, Alex Kiernan <alexk@zuma.ai>, Khem
+ Raj <raj.khem@gmail.com>, Muhammad Hamza <muhammad_hamza@mentor.com>
+Subject: [meta-oe][kirkstone][PATCH] libcoap: Add recipe
+Date: Thu, 18 Aug 2022 10:06:25 +0500
+Message-ID: <20220818050625.3864654-1-muhammad_hamza@mentor.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <fb208df3-7ee5-01be-5d2f-5d9657528764@blueridge.com>
-In-Reply-To: <fb208df3-7ee5-01be-5d2f-5d9657528764@blueridge.com>
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Wed, 17 Aug 2022 22:40:25 +0200
-Message-ID: 
- <CANNYZj-m28PeJL+S1+wt0f7kOEoOMxB53EOrwXhKAA9Xc6uAUQ@mail.gmail.com>
-Subject: Re: [oe] Changing u-boot version in the build?
-To: Bruce Johnson <bjohnson@blueridge.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 Aug 2022 20:40:47 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Aug 2022 05:06:49 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98314
+ https://lists.openembedded.org/g/openembedded-devel/message/98315
 
-You need to show the actual recipes for the newer u-boot too (e.g.
-publish your layer on github), otherwise it's really difficult to say
-where the problem is.
+From: Alex Kiernan <alex.kiernan@gmail.com>
 
-Alex
+libcoap implements a lightweight application-protocol for devices that
+are constrained their resources such as computing power, RF range,
+memory, bandwith, or network packet sizes.
 
-On Wed, 17 Aug 2022 at 22:37, Bruce Johnson <bjohnson@blueridge.com> wrote:
->
-> I am stumped by the problem of how to build a newer version of u-boot
-> than the one in my openembedded-core version. The version shipped in our
-> copy of openembedded-core is 1_2020.01, and I'd like to build something
-> more recent. Whatever I put in for my PREFERRED_VERSION other than that
-> version results in a handful of notes saying that the preferred version
-> isn't available:
->
-> > $ bitbake u-boot
-> > Parsing recipes: 100%
-> > |##################################################################################################|
-> > Time: 0:00:10
-> > Parsing of 2298 .bb files complete (0 cached, 2298 parsed). 3409
-> > targets, 348 skipped, 0 masked, 0 errors.
-> > NOTE: preferred version 1:2022.04 of u-boot not available (for item
-> > u-boot)
-> > NOTE: versions of u-boot available: 1:2020.01
-> > NOTE: Resolving any missing task queue dependencies
-> > NOTE: preferred version 1:2022.04 of u-boot not available (for item
-> > u-boot-dev)
-> > NOTE: versions of u-boot available: 1:2020.01
-> > NOTE: preferred version 1:2022.04 of u-boot not available (for item
-> > u-boot-env)
-> > NOTE: versions of u-boot available: 1:2020.01
-> > NOTE: preferred version 1:2022.04 of u-boot not available (for item
-> > u-boot)
-> > NOTE: versions of u-boot available: 1:2020.01
-> I've tried various spellings of the PREFERRED_VERSION string: 1:2022.04,
-> 1_2022.04, v2022.04 (the actual tag in the u-boot repository),  2011.04
->
-> My meta-openembedded-version is from the dunfell branch, hash a62ad779
-> (if I'm looking at the right thing).
->
-> I did a similar thing with ModemManager not long ago and didn't have a
-> real problem, and I don't understand what's so different about u-boot.
-> Thanks in advance for any suggestions.
->
-> --
-> Bruce Johnson
-> Chantilly, Virginia
-> USA
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#98313): https://lists.openembedded.org/g/openembedded-devel/message/98313
-> Mute This Topic: https://lists.openembedded.org/mt/93091149/1686489
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [alex.kanavin@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Upstream-Status: Backport from
+https://github.com/openembedded/meta-openembedded/commit/1556da89029c364bea101e782bdd016b69cddb82
+
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Signed-off-by: Alex Kiernan <alexk@zuma.ai>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Muhammad Hamza <muhammad_hamza@mentor.com>
+---
+ ...alance-SESSIONS_ADD-and-SESSIONS_DEL.patch | 51 ++++++++++++++++
+ ...0001-libcoap-Fix-gnu-configize-error.patch | 44 ++++++++++++++
+ .../libcoap/libcoap/run-ptest                 |  7 +++
+ .../recipes-devtools/libcoap/libcoap_4.3.0.bb | 58 +++++++++++++++++++
+ 4 files changed, 160 insertions(+)
+ create mode 100644 meta-networking/recipes-devtools/libcoap/libcoap/0001-coap_session.c-Balance-SESSIONS_ADD-and-SESSIONS_DEL.patch
+ create mode 100644 meta-networking/recipes-devtools/libcoap/libcoap/0001-libcoap-Fix-gnu-configize-error.patch
+ create mode 100644 meta-networking/recipes-devtools/libcoap/libcoap/run-ptest
+ create mode 100644 meta-networking/recipes-devtools/libcoap/libcoap_4.3.0.bb
+
+diff --git a/meta-networking/recipes-devtools/libcoap/libcoap/0001-coap_session.c-Balance-SESSIONS_ADD-and-SESSIONS_DEL.patch b/meta-networking/recipes-devtools/libcoap/libcoap/0001-coap_session.c-Balance-SESSIONS_ADD-and-SESSIONS_DEL.patch
+new file mode 100644
+index 000000000..c8ac8485a
+--- /dev/null
++++ b/meta-networking/recipes-devtools/libcoap/libcoap/0001-coap_session.c-Balance-SESSIONS_ADD-and-SESSIONS_DEL.patch
+@@ -0,0 +1,51 @@
++From c56a64ff4df7eecb6c88ff929497bcd0d65934f2 Mon Sep 17 00:00:00 2001
++From: Jon Shallow <supjps-libcoap@jpshallow.com>
++Date: Fri, 22 Apr 2022 13:15:39 +0100
++Subject: [PATCH] coap_session.c: Balance SESSIONS_ADD and SESSIONS_DELETE
++ usage
++
++Upstream-Status: Backport [https://github.com/obgm/libcoap/commit/7e20aa9ef17277f39203334404e6c776b1171a7d]
++Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
++Signed-off-by: Alex Kiernan <alexk@zuma.ai>
++---
++ src/coap_session.c | 12 ++++++++++++
++ 1 file changed, 12 insertions(+)
++
++diff --git a/src/coap_session.c b/src/coap_session.c
++index 77cae598f0af..536e57573361 100644
++--- a/src/coap_session.c
+++++ b/src/coap_session.c
++@@ -813,6 +813,12 @@ coap_session_create_client(
++   return session;
++ 
++ error:
+++  /*
+++   * Need to add in the session as coap_session_release()
+++   * will call SESSIONS_DELETE in coap_session_free().
+++   */
+++  if (session)
+++    SESSIONS_ADD(ctx->sessions, session);
++   coap_session_release(session);
++   return NULL;
++ }
++@@ -1133,11 +1139,17 @@ coap_session_t *coap_new_server_session(
++   if (session) {
++     coap_log(LOG_DEBUG, "***%s: new incoming session\n",
++              coap_session_str(session));
+++    /* Returned session may already have been released and is now NULL */
++     session = coap_session_accept(session);
++   }
++   return session;
++ 
++ error:
+++  /*
+++   * Need to add in the session as coap_session_release()
+++   * will call SESSIONS_DELETE in coap_session_free().
+++   */
+++  SESSIONS_ADD(ep->sessions, session);
++   coap_session_free(session);
++   return NULL;
++ }
++-- 
++2.35.1
++
+diff --git a/meta-networking/recipes-devtools/libcoap/libcoap/0001-libcoap-Fix-gnu-configize-error.patch b/meta-networking/recipes-devtools/libcoap/libcoap/0001-libcoap-Fix-gnu-configize-error.patch
+new file mode 100644
+index 000000000..64f8d3acc
+--- /dev/null
++++ b/meta-networking/recipes-devtools/libcoap/libcoap/0001-libcoap-Fix-gnu-configize-error.patch
+@@ -0,0 +1,44 @@
++From 25f1bebf1bc4c8da47f976d24a7a424253744e2e Mon Sep 17 00:00:00 2001
++From: Alex Kiernan <alex.kiernan@gmail.com>
++Date: Wed, 24 Mar 2021 09:10:17 +0000
++Subject: [PATCH] libcoap: Fix gnu-configize error
++
++Fix:
++
++  autoreconf: running: gnu-configize
++  gnu-configize: 'configure.ac' or 'configure.in' is required
++  autoreconf: gnu-configize failed with exit status: 1
++
++We're not pulling in the ext/tinydtls submodule, so this fails.
++
++Upstream-Status: Inappropriate [oe-specific]
++Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
++Signed-off-by: Alex Kiernan <alexk@zuma.ai>
++---
++ configure.ac | 13 -------------
++ 1 file changed, 13 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index 9f51f4c67557..559808e03aa2 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -472,19 +472,6 @@ if test "x$build_dtls" = "xyes"; then
++         have_tinydtls="no" # don't confuse AC_MSG_RESULT at the end of the script
++     fi
++ 
++-    # The user wants to use explicit TinyDTLS if '--with-tinydtls was set'.
++-    if test "x$with_tinydtls" = "xyes" ; then
++-        if test -d "$srcdir/ext/tinydtls"; then
++-           AC_CONFIG_SUBDIRS([ext/tinydtls])
++-           have_tinydtls="yes"
++-         else
++-           have_tinydtls="no" # don't confuse AC_MSG_RESULT at the end of the script
++-         fi
++-         have_gnutls="no" # don't confuse AC_MSG_RESULT at the end of the script
++-         have_openssl="no" # don't confuse AC_MSG_RESULT at the end of the script
++-         have_mbedtls="no" # don't confuse AC_MSG_RESULT at the end of the script
++-    fi
++-
++     if test "$TLSCOUNT" -eq 0; then
++       # The user hasn't requested the use of a specific cryptography library
++       # we try first GnuTLS for usability ...
+diff --git a/meta-networking/recipes-devtools/libcoap/libcoap/run-ptest b/meta-networking/recipes-devtools/libcoap/libcoap/run-ptest
+new file mode 100644
+index 000000000..b56ffe68f
+--- /dev/null
++++ b/meta-networking/recipes-devtools/libcoap/libcoap/run-ptest
+@@ -0,0 +1,7 @@
++#!/bin/sh
++
++if /usr/lib/libcoap/ptest/testdriver; then
++	echo "PASS: libcoap"
++else
++	echo "FAIL: libcoap"
++fi
+diff --git a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.0.bb b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.0.bb
+new file mode 100644
+index 000000000..aba81d126
+--- /dev/null
++++ b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.0.bb
+@@ -0,0 +1,58 @@
++SUMMARY = "A C implementation of the Constrained Application Protocol"
++DESCRIPTION = "libcoap implements a lightweight application-protocol for \
++devices that are constrained their resources such as computing power, \
++RF range, memory, bandwith, or network packet sizes."
++HOMEPAGE ="https://libcoap.net/"
++
++LICENSE = "BSD-2-Clause & BSD-1-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=e44b3af4925ec58e9f49b9ff143b5493"
++
++SRC_URI = "git://github.com/obgm/libcoap.git;branch=main;protocol=https \
++           file://0001-libcoap-Fix-gnu-configize-error.patch \
++           file://0001-coap_session.c-Balance-SESSIONS_ADD-and-SESSIONS_DEL.patch \
++           file://run-ptest \
++           "
++SRCREV = "1da37b9abbe871675d5939395b498324ccc8ecfe"
++
++S = "${WORKDIR}/git"
++
++inherit autotools manpages pkgconfig ptest
++
++PACKAGECONFIG ?= "\
++    async openssl tcp \
++    ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
++"
++PACKAGECONFIG[async] = "--enable-async,--disable-async"
++PACKAGECONFIG[gnutls] = "--with-gnutls,--without-gnutls,gnutls,,openssl mbedtls"
++PACKAGECONFIG[manpages] = "--enable-documentation --enable-doxygen --enable-manpages,--disable-documentation,asciidoc-native doxygen-native graphviz-native"
++PACKAGECONFIG[mbedtls] = "--with-mbedtls,--without-mbedtls,mbedtls,,gnutls openssl"
++PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl,,gnutls mbedtls"
++PACKAGECONFIG[small-stack] = "--enable-small-stack,--disable-small-stack"
++PACKAGECONFIG[tcp] = "--enable-tcp,--disable-tcp"
++PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,cunit"
++
++EXTRA_OECONF = "\
++    --with-epoll --enable-add-default-names \
++    --without-tinydtls \
++    ${@bb.utils.contains_any('PACKAGECONFIG', 'gnutls openssl mbedtls', '--enable-dtls', '--disable-dtls', d)} \
++"
++
++python () {
++    if d.getVar('PTEST_ENABLED') == "1":
++        d.setVar('DISABLE_STATIC', '')
++}
++
++export SGML_CATALOG_FILES="file://${STAGING_ETCDIR_NATIVE}/xml/catalog"
++
++do_install_ptest () {
++	install -d ${D}${PTEST_PATH}
++	install -m 0755 ${WORKDIR}/run-ptest ${D}${PTEST_PATH}/run-ptest
++	install -m 0755 ${B}/tests/testdriver ${D}${PTEST_PATH}/testdriver
++}
++
++PACKAGE_BEFORE_PN += "\
++    ${PN}-bin \
++"
++
++FILES:${PN}-bin = "${bindir}"
++FILES:${PN}-dev += "${datadir}/${BPN}/examples"
+-- 
+2.25.1
+
 
