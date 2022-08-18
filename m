@@ -1,202 +1,294 @@
-Return-Path: <ross.burton@arm.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 210BBC00140
-	for <webhook@archiver.kernel.org>; Thu, 18 Aug 2022 10:32:41 +0000 (UTC)
-Received: from EUR02-HE1-obe.outbound.protection.outlook.com
- (EUR02-HE1-obe.outbound.protection.outlook.com [40.107.1.85])
- by mx.groups.io with SMTP id smtpd.web08.40311.1660818759638858885
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F09AC32773
+	for <webhook@archiver.kernel.org>; Thu, 18 Aug 2022 17:54:23 +0000 (UTC)
+Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com
+ [209.85.128.181])
+ by mx.groups.io with SMTP id smtpd.web08.45428.1660845257433333102
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Aug 2022 03:32:40 -0700
+ Thu, 18 Aug 2022 10:54:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@armh.onmicrosoft.com
- header.s=selector2-armh-onmicrosoft-com header.b=4CFeNt2q;
- spf=pass (domain: arm.com, ip: 40.107.1.85, mailfrom: ross.burton@arm.com)
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
- b=ddt2HQM6zoV9fjsicHDuHwAXOG8Ef4u3S5Fg8vkOfR6HXNm/X9uIb83O1pCQjGzJvocr2QgrT2RRffEZgwZKt2IHqhhR83LgTs5dVi4FOLR8YYZqyykT8O1MPLtQVinIkxwid/t1k3TlwD9jBAQbwjIhgqi8r+Qao1Q3Pi9IbooIG2lJHQNbvk7QYG4yqqdX08ekGUOHNOrvO6ugTpbODFJnE4SpzQuyQ/2NQ4cydgVo9pTJU1qdtKDQc61f9M6sMPYuJVRi7GlOh5gyQLa9oPc0AWr307KrB9ycje1/PvzylKaj/x3ZiYVfO90nlK4U0tJfNn3CELk2TpeBBx6qQQ==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=raVRmM3ZzpCae8tI25gRqHJtKhUBKQtuKIzauRVRVCE=;
- b=HpXLTeUgTJtTUnFmQyzZfPdek8rHGRPz4jFo4XQBoAh3EJDBXHNucAaGdl+pBOpilAtoq81hu1G5ACrHInKhfCEFpmzvnMB4xnnIXOmoMfzlV4mCTwOsENKUM2IHFkM61C0H1+U14LHdkoaRzPrP4e604faM47cSGcQv1lrZVYwNHDLz4yNcL+0hCyu6LEr12QFvcXfbg0lC0X0nUw0qGNxVbM3dPGOd4F3c1QaWt7bGvx1qFRseHQe/ExKTe0+kyg2CPcZ80XnQKucRtUHOnEY5VfhYeaK50+lNZWu9VJVOsEh1nxa1cGL1FaVRlGUG/gXRYSLPADFxLIm7PidO0Q==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 63.35.35.123) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=armh.onmicrosoft.com; arc=pass (0
- oda=1 ltdi=1 spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=raVRmM3ZzpCae8tI25gRqHJtKhUBKQtuKIzauRVRVCE=;
- b=4CFeNt2qKHsUCg0M9jDyqDlO19KhL0bDqHd3n79kBfbV1YmOWP74JwR66CAt8Q/bCC+F4FSVwHl4eOhYQbVvLs3y+ltCme9+UDUBFwyKVmFfx6Rdfv4yq8Ykf8vDiEfVK+++CmST3iVnPBEGABWHxjAhaUGdWQXwscHQErC5bpo=
-Received: from DU2PR04CA0160.eurprd04.prod.outlook.com (2603:10a6:10:2b0::15)
- by GV1PR08MB8644.eurprd08.prod.outlook.com (2603:10a6:150:85::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5504.16; Thu, 18 Aug
- 2022 10:32:34 +0000
-Received: from DBAEUR03FT049.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:10:2b0:cafe::ff) by DU2PR04CA0160.outlook.office365.com
- (2603:10a6:10:2b0::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5546.16 via Frontend
- Transport; Thu, 18 Aug 2022 10:32:34 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
- pr=C
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DBAEUR03FT049.mail.protection.outlook.com (100.127.142.192) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5546.15 via Frontend Transport; Thu, 18 Aug 2022 10:32:34 +0000
-Received: ("Tessian outbound 73dd6a25223d:v123");
- Thu, 18 Aug 2022 10:32:34 +0000
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: ba49ea8a04bec2a5
-X-CR-MTA-TID: 64aa7808
-Received: from b97f8c580463.1
-	by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- A71BABEB-B0A0-4A1B-BACF-54D52CD45CD7.1;
-	Thu, 18 Aug 2022 10:32:27 +0000
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
-    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id
- b97f8c580463.1
-    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
-    Thu, 18 Aug 2022 10:32:27 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gzbZ0pfj6XS6BaUTzd02XJ57A+en/dG1hPJscaHCbFBNpKqYlCM2p9MAb7ss9kU/ZG4cxGoruH2+cq7mm3rEDgyx3v+E+fsS2zYgBeFOjipe+q9GAzdQvG91AMmI+tPLVieejS8V3xD0fOKZgU9K7SS98axEUitLDcyVH9wBLWEKVc181P4R7y1OTBmuJPPAvC44DYRca+ogVQUoDwRYa2IDX0cJKdIyS19WYGxCY0xanHHL0RABa1yoc/UVRpnXB8nhfTJiq4c1zOromHatEw9FB+4RzYnaYkzxFpWffF0sJZzG13bc9JQt0wQ7YcdlMr3d9HWSM+NJC2vNbtO1eA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=raVRmM3ZzpCae8tI25gRqHJtKhUBKQtuKIzauRVRVCE=;
- b=Me9TTFh5rzgajffcqv3pJEpNpJlELQbEvwIRDyIxrgtnbm66SWi2s73WpegMfespNAvg9OHHviX6C0VOZHtTxPo5DI8BEVWOS9TS/4Fin7ShfD+EFhS4wxvP2SNgOETUyU8kUx/hC6RTW+hO+UrTypZsmiVCO+BXTE3/9oCC0uJLOYRMbAvlBBGKMVRvHbXx753g52VEwwjopmlRE6VC64E268Uj33uvsPLFl4HFM/U5/S3TnIB+ImhP7eauSZRWUU1Z9O6w7Aw5rCCLGz0Armce+QjEplwmxcn1GRkG9htrVTffcawYtheNJbdL4YOOwRyaAkMnLq3BAKFx011HcA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=raVRmM3ZzpCae8tI25gRqHJtKhUBKQtuKIzauRVRVCE=;
- b=4CFeNt2qKHsUCg0M9jDyqDlO19KhL0bDqHd3n79kBfbV1YmOWP74JwR66CAt8Q/bCC+F4FSVwHl4eOhYQbVvLs3y+ltCme9+UDUBFwyKVmFfx6Rdfv4yq8Ykf8vDiEfVK+++CmST3iVnPBEGABWHxjAhaUGdWQXwscHQErC5bpo=
-Received: from PA4PR08MB7411.eurprd08.prod.outlook.com (2603:10a6:102:2a3::12)
- by AS4PR08MB7712.eurprd08.prod.outlook.com (2603:10a6:20b:513::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5525.10; Thu, 18 Aug
- 2022 10:32:26 +0000
-Received: from PA4PR08MB7411.eurprd08.prod.outlook.com
- ([fe80::5d1d:a902:c842:14ba]) by PA4PR08MB7411.eurprd08.prod.outlook.com
- ([fe80::5d1d:a902:c842:14ba%6]) with mapi id 15.20.5546.016; Thu, 18 Aug 2022
- 10:32:25 +0000
-From: Ross Burton <Ross.Burton@arm.com>
-To: "bjohnson@blueridge.com" <bjohnson@blueridge.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] Changing u-boot version in the build?
-Thread-Topic: [oe] Changing u-boot version in the build?
-Thread-Index: AQHYsnk+XAnR6Rx9q0O8xUteOXGBqq20aiGA
-Date: Thu, 18 Aug 2022 10:32:25 +0000
-Message-ID: <D9ECDD3E-40BB-4971-9B36-A114A06D0139@arm.com>
-References: <fb208df3-7ee5-01be-5d2f-5d9657528764@blueridge.com>
-In-Reply-To: <fb208df3-7ee5-01be-5d2f-5d9657528764@blueridge.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: Apple Mail (2.3696.120.41.1.1)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-MS-Office365-Filtering-Correlation-Id: 4d2f9364-6483-4381-2f72-08da8104f68d
-x-ms-traffictypediagnostic: 
-	AS4PR08MB7712:EE_|DBAEUR03FT049:EE_|GV1PR08MB8644:EE_
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original: 
- EyI2Og6do0QtHX2kTf+6vGCl0FicWQgbcUtSuFeGSa35cYwGlZpZe9cIdv4OjqJRPDcXGwPFy0m++d9RxGMTppzFCNvsv+14iHl2eUx3v/pU1tKvNYWtgraqgZk8MOB7wfjQB2e4z54Xespcb1v5YRcK3hoK425Ubm+YPH+dfzxeLE5p5+8W09YbxqZrrFJu0CiLJ2HTci9aDHANZ0ulQ9cxUIIolJuf2RC1a1886oreKC/yz97zvM6S3eookvDHKFZrve8Lg7xhHU7jKmerEN5Q7/dTdi56/NigG9SZmIm9T0mgpA4Zc4ehB6tvAlKjY3r2S4aOmIYW5bQ3ICSnq3TpNCJy4KD+ZzWzl+QGAxEf3LUVHSTHM53CRd7RX7pD1MSQ6X05HMwqm+4Nj/teHwBXTKYOUpViS+l8A9ETfycC46FD1EYP+V+s2NNHs6GsHNxT/0o84dvnAOPzVYmXYtRX7ey4JVUmxDBK850+PJBhWnogExcEFHBCLzY8sqXLLFdQfbqsV1ildg6MACucdmD+vvbWqd/fimERB0iGQJNdyeL2qsHKoIYPx/oB27mtVqCUcL7tSriuGv9L2AoPI2O0KDnRkTWf8pJd1wirCWJZK82sGmSbrfOaWu8VGzvOuvwH1wKzhLErF7KI4nw/rjnjxys1IVbYRfwKdlKv1sM815da/0ldd1fOkWlw6879S6+gU22QrG2Pmza8JQXV7M0UNXWenCS5XBu0o71Gh7LOoNMeynu7vpGI2hygYCMOwGaR7CcXKHK7aS15FnUTIsuTAAb8OWkoyz5NNqqtoVY=
-X-Forefront-Antispam-Report-Untrusted: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR08MB7411.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(366004)(39860400002)(396003)(136003)(376002)(346002)(26005)(36756003)(6486002)(5660300002)(86362001)(6916009)(71200400001)(316002)(122000001)(8936002)(38070700005)(38100700002)(8676002)(91956017)(66446008)(64756008)(66476007)(4326008)(76116006)(66556008)(478600001)(186003)(6512007)(66946007)(41300700001)(2906002)(2616005)(33656002)(53546011)(6506007)(45980500001);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <AB8917CFFF79414B8964819BC89B1FFC@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=SqUmCy8n;
+ spf=pass (domain: gmail.com, ip: 209.85.128.181,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f181.google.com with SMTP id
+ 00721157ae682-3378303138bso21454217b3.9
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 18 Aug 2022 10:54:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc;
+        bh=sqqjQRLik9x0NkhT/rjIfgVvDKQd1ZFJB/BeZ+wz2EE=;
+        b=SqUmCy8nRHvYaLOSqeJaCAzleOrdm+WwaysyfRmlUfMi62VUShLwgIPxh/ma0iYhRO
+         bsF/a/64iYVTMeEI7rQd/k/naxSU3GgbG7vhP64jd/y5lc1ehxWSDyvLasCEjJhlKGZT
+         y8LDU39u8dcrCzOteGuc2ZsYMFY1RwH+o82EmR2hMPd/9yZlpGqCUPuHPqETZ8uAtPMJ
+         sJtxgBOYuGDDYngMrpnl4fJYKzeJ6uvsmRCGmoNEAzHsSXKFIxRBjSntphfC/11s1neK
+         DLBK6XuE4Vk6Rd02LiIApUVAgEgXhUaEZDALT6imyETEKcEpquGjX2UUJmD8gMtW/9VL
+         oftA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc;
+        bh=sqqjQRLik9x0NkhT/rjIfgVvDKQd1ZFJB/BeZ+wz2EE=;
+        b=kjs2R4ci2/Fio8nOPZCbHeCtKvzmy7yFWSmZC5Aq9SbUZZfiJ0NXtutPS/YZTnXEk7
+         VxYSQqunL6FhbFSzLMkEvJ5SgM9F7DynueHgmOg7W41ZIHVid3weJu1NytDkGY4zyRfg
+         osA3e/v/0W0aV4+B7WSRKbEI9xS75ilXpre3LhOhYVcpl5ggZD2p2X7QXpkMddI8pUsJ
+         JSCWGupxps6QcRAKI2GUbFcd3FLTP71np7lZKvko1zimcuXPgsgz0U3smONfhGOVC/go
+         eFwCvr0qyXCRItDQRDclpgfyDxpngz7ART6HKqETtvXd7XE4ua6FgRemkoAVigxIYdzW
+         pa/w==
+X-Gm-Message-State: ACgBeo0bgGMf0+5bQDqjl234gOh8b933fh5R0TZrro2ZcN9nbt2k+hd3
+	jWnl0/tZRcvjdp4C0LF13DTcpgLopRYQdjeNBNCnZ8HcLpy7Ow==
+X-Google-Smtp-Source: 
+ AA6agR4nTwL/Im/JfTCx87/QPnx3fE8uHVtpLa8c2PrWR3CUHf+VkXczKI8QjVRQHiIRqa6aHZ7boNj7q4SeGXbWdSs=
+X-Received: by 2002:a81:1b84:0:b0:335:f95d:f4de with SMTP id
+ b126-20020a811b84000000b00335f95df4demr4143618ywb.422.1660845256430; Thu, 18
+ Aug 2022 10:54:16 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR08MB7712
-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
- DBAEUR03FT049.eop-EUR03.prod.protection.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 
-	6a69c277-0b5f-49af-9429-08da8104f18f
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	wNZT01j520FY1r8vAXAoZBQyAAGcMKAP7j0Kh1ZtBgnxzvGlbT2lcL7ZkSi6To5mbfn1UlG7xsgvKP/GW7Ei2VuhXbo9wldxuxccLEfBVTW6T43JOH+K8pGP2CiNmwVLwSN2KCM1Auo5EY+WNNURSO4yxnJVZ4Ig27ojNS/sxmv1Q31fyWgGwtT81oCFEoQQ+mbgBRjPp3C/5+7SkbVBRCQ0xwhfzL8MPPfMesZ1DTb/eCHUb+YBUwTkMMOwj4HR85ghbNKFpXIMgVli55frvv23o/uL0dvyNb4RE3AuKKYY9CIg5T/AxypF1NQ9thHc4jSoRWUWyXqIpyPvSBNdFqZUL3tJad/gK9AivQ9GC095jvxXVHIgMkWtQKFEKkojGXXwknhd84M8R2VasOitzWcePkrm69xs0tHWHvhdVvZSFurZ4VGzCZ8P+hWqjiAEhG9yzrvIzY6K8REwCTEiCkQwDWElyaOMZ4uiWeym9XYqoxfOhjhwAopfXPDh0XPRnC0ucW5PbFyCSwEBXwxefg3+aAH0M6An0/T8CBQCO72Xz97ZXbAuKs5XB7oBg6cY66EscUbstpZLpfXSffuV3710SqNrC3CsldyWRJTAkJRtS+vIQjwnGz6Y3VFQj/jJov2to3Ca3cRswg7/dl6OdeD2b0W4Nh72QeG2zVpYI1Qd1/J2OyD+6IuKsMp1j+sCmbZHMUuGCFZxkJX9sGpbaXvssR5rvOUlyvKb6+BxEpz3Pr4++0TjHRAtsQKXKe4guYt8fzhH3lpdUaz/wIrO5g==
-X-Forefront-Antispam-Report: 
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230016)(4636009)(136003)(376002)(39860400002)(346002)(396003)(36840700001)(40470700004)(46966006)(8936002)(70586007)(70206006)(81166007)(8676002)(4326008)(36860700001)(33656002)(86362001)(356005)(82740400003)(36756003)(316002)(26005)(6506007)(2616005)(5660300002)(478600001)(6512007)(41300700001)(6486002)(53546011)(40480700001)(40460700003)(6862004)(82310400005)(47076005)(2906002)(336012)(186003);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2022 10:32:34.2490
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 4d2f9364-6483-4381-2f72-08da8104f68d
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: 
- TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DBAEUR03FT049.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR08MB8644
+References: <20220817194843.5200-1-f_l_k@t-online.de>
+In-Reply-To: <20220817194843.5200-1-f_l_k@t-online.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 18 Aug 2022 10:53:49 -0700
+Message-ID: 
+ <CAMKF1squzMiys8PALRz6JceDNx_UzxLGyOaMHfoKiOuQPt2=7g@mail.gmail.com>
+Subject: Re: [oe] [meta-multimedia][PATCH] pipewire: update to v0.3.56
+To: Markus Volk <f_l_k@t-online.de>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Aug 2022 10:32:41 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Aug 2022 17:54:23 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98317
+ https://lists.openembedded.org/g/openembedded-devel/message/98318
 
-DQoNCj4gT24gMTcgQXVnIDIwMjIsIGF0IDIxOjM3LCBCcnVjZSBKb2huc29uIHZpYSBsaXN0cy5v
-cGVuZW1iZWRkZWQub3JnIDxiam9obnNvbj1ibHVlcmlkZ2UuY29tQGxpc3RzLm9wZW5lbWJlZGRl
-ZC5vcmc+IHdyb3RlOg0KPiANCj4gSSBhbSBzdHVtcGVkIGJ5IHRoZSBwcm9ibGVtIG9mIGhvdyB0
-byBidWlsZCBhIG5ld2VyIHZlcnNpb24gb2YgdS1ib290IHRoYW4gdGhlIG9uZSBpbiBteSBvcGVu
-ZW1iZWRkZWQtY29yZSB2ZXJzaW9uLiBUaGUgdmVyc2lvbiBzaGlwcGVkIGluIG91ciBjb3B5IG9m
-IG9wZW5lbWJlZGRlZC1jb3JlIGlzIDFfMjAyMC4wMSwgYW5kIEknZCBsaWtlIHRvIGJ1aWxkIHNv
-bWV0aGluZyBtb3JlIHJlY2VudC4gV2hhdGV2ZXIgSSBwdXQgaW4gZm9yIG15IFBSRUZFUlJFRF9W
-RVJTSU9OIG90aGVyIHRoYW4gdGhhdCB2ZXJzaW9uIHJlc3VsdHMgaW4gYSBoYW5kZnVsIG9mIG5v
-dGVzIHNheWluZyB0aGF0IHRoZSBwcmVmZXJyZWQgdmVyc2lvbiBpc24ndCBhdmFpbGFibGU6DQo+
-IA0KPj4gJCBiaXRiYWtlIHUtYm9vdA0KPj4gUGFyc2luZyByZWNpcGVzOiAxMDAlIHwjIyMjIyMj
-IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
-IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjI3wgVGltZTogMDowMDoxMA0KPj4gUGFy
-c2luZyBvZiAyMjk4IC5iYiBmaWxlcyBjb21wbGV0ZSAoMCBjYWNoZWQsIDIyOTggcGFyc2VkKS4g
-MzQwOSB0YXJnZXRzLCAzNDggc2tpcHBlZCwgMCBtYXNrZWQsIDAgZXJyb3JzLg0KPj4gTk9URTog
-cHJlZmVycmVkIHZlcnNpb24gMToyMDIyLjA0IG9mIHUtYm9vdCBub3QgYXZhaWxhYmxlIChmb3Ig
-aXRlbSB1LWJvb3QpDQo+PiBOT1RFOiB2ZXJzaW9ucyBvZiB1LWJvb3QgYXZhaWxhYmxlOiAxOjIw
-MjAuMDENCj4+IE5PVEU6IFJlc29sdmluZyBhbnkgbWlzc2luZyB0YXNrIHF1ZXVlIGRlcGVuZGVu
-Y2llcw0KPj4gTk9URTogcHJlZmVycmVkIHZlcnNpb24gMToyMDIyLjA0IG9mIHUtYm9vdCBub3Qg
-YXZhaWxhYmxlIChmb3IgaXRlbSB1LWJvb3QtZGV2KQ0KPj4gTk9URTogdmVyc2lvbnMgb2YgdS1i
-b290IGF2YWlsYWJsZTogMToyMDIwLjAxDQo+PiBOT1RFOiBwcmVmZXJyZWQgdmVyc2lvbiAxOjIw
-MjIuMDQgb2YgdS1ib290IG5vdCBhdmFpbGFibGUgKGZvciBpdGVtIHUtYm9vdC1lbnYpDQo+PiBO
-T1RFOiB2ZXJzaW9ucyBvZiB1LWJvb3QgYXZhaWxhYmxlOiAxOjIwMjAuMDENCj4+IE5PVEU6IHBy
-ZWZlcnJlZCB2ZXJzaW9uIDE6MjAyMi4wNCBvZiB1LWJvb3Qgbm90IGF2YWlsYWJsZSAoZm9yIGl0
-ZW0gdS1ib290KQ0KPj4gTk9URTogdmVyc2lvbnMgb2YgdS1ib290IGF2YWlsYWJsZTogMToyMDIw
-LjAxDQo+IEkndmUgdHJpZWQgdmFyaW91cyBzcGVsbGluZ3Mgb2YgdGhlIFBSRUZFUlJFRF9WRVJT
-SU9OIHN0cmluZzogMToyMDIyLjA0LCAxXzIwMjIuMDQsIHYyMDIyLjA0ICh0aGUgYWN0dWFsIHRh
-ZyBpbiB0aGUgdS1ib290IHJlcG9zaXRvcnkpLCAgMjAxMS4wNA0KPiANCj4gTXkgbWV0YS1vcGVu
-ZW1iZWRkZWQtdmVyc2lvbiBpcyBmcm9tIHRoZSBkdW5mZWxsIGJyYW5jaCwgaGFzaCBhNjJhZDc3
-OSAoaWYgSSdtIGxvb2tpbmcgYXQgdGhlIHJpZ2h0IHRoaW5nKS4NCj4gDQo+IEkgZGlkIGEgc2lt
-aWxhciB0aGluZyB3aXRoIE1vZGVtTWFuYWdlciBub3QgbG9uZyBhZ28gYW5kIGRpZG4ndCBoYXZl
-IGEgcmVhbCBwcm9ibGVtLCBhbmQgSSBkb24ndCB1bmRlcnN0YW5kIHdoYXQncyBzbyBkaWZmZXJl
-bnQgYWJvdXQgdS1ib290LiBUaGFua3MgaW4gYWR2YW5jZSBmb3IgYW55IHN1Z2dlc3Rpb25zLg0K
-DQpUaGUgc2Vjb25kIE5PVEUgc2F5cyB0aGF0IGl0IGNhbiBvbmx5IGZpbmQgMjAyMC4wMSwgYW5k
-IG5vIG90aGVyIHZlcnNpb25zLCBzbyB5b3VyIGVpdGhlciBtaXNzaW5nIGEgbGF5ZXIgaW4gYmJs
-YXllcnMuY29uZiBvciB0aGUgcmVjaXBlIHlvdSB0aGluayBwcm92aWRlcyB1Ym9vdCAyMDIwLjA0
-IGRvZXNu4oCZdCBhY3R1YWxseS4NCg0KVGhlIGZpcnN0IHRoaW5nIHRvIHRyeSBpcyBiaXRiYWtl
-LWxheWVycyBzaG93LW92ZXJsYXllZC4gIEZvciBtZSBpdCBpbmNsdWRlcyB0aGUgZm9sbG93aW5n
-IG91dHB1dDoNCg0KdS1ib290Og0KICBtZXRhICAgICAgICAgICAgICAgICAxOjIwMjIuMDcNCiAg
-bWV0YS1hcm0tYnNwICAgICAgICAgMToyMDIyLjA0DQoNCg0KSWYgeW91IGRvbuKAmXQgc2VlIHRo
-ZSB2ZXJzaW9uIGFuZCBsYXllciB5b3UgZXhwZWN0LCB0aGVuIHRoZSBwcm9ibGVtIGlzIHdpdGgg
-eW91ciBsYXllciBjb25maWd1cmF0aW9uLCBvciB0aGUgcmVjaXBlIGl0c2VsZi4NCg0KUm9zcw==
+We have some issues with this w.r.t licenses
+
+ERROR: Nothing PROVIDES 'fdk-aac' (but
+/mnt/b/yoe/master/sources/meta-openembedded/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+DEPENDS on or otherwise requires it)
+fdk-aac was skipped: because it has a restricted license 'commercial'.
+Which is not listed in LICENSE_FLAGS_ACCEPTED
+ERROR: Nothing RPROVIDES 'pipewire-media-session-dev' (but
+/mnt/b/yoe/master/sources/meta-openembedded/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb
+RDEPENDS on or otherwise requires it)
+No eligible RPROVIDERs exist for 'pipewire-media-session-dev'
+NOTE: Runtime target 'pipewire-media-session-dev' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['pipewire-media-session-dev']
+ERROR: Nothing RPROVIDES 'pipewire-media-session' (but
+/mnt/b/yoe/master/sources/meta-openembedded/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb,
+/mnt/b/yoe/master/sources/meta-openembedded/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+RDEPENDS on or otherwise requires it)
+No eligible RPROVIDERs exist for 'pipewire-media-session'
+NOTE: Runtime target 'pipewire-media-session' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['pipewire-media-session']
+ERROR: Nothing RPROVIDES 'pipewire' (but
+/mnt/b/yoe/master/sources/meta-openembedded/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb,
+/mnt/b/yoe/master/sources/meta-openembedded/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.9.bb,
+/mnt/b/yoe/master/sources/meta-openembedded/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+RDEPENDS on or otherwise requires it)
+No eligible RPROVIDERs exist for 'pipewire'
+NOTE: Runtime target 'pipewire' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['pipewire']
+ERROR: Nothing RPROVIDES 'wireplumber-scripts' (but
+/mnt/b/yoe/master/sources/meta-openembedded/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.9.bb
+RDEPENDS on or otherwise requires it)
+No eligible RPROVIDERs exist for 'wireplumber-scripts'
+NOTE: Runtime target 'wireplumber-scripts' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['wireplumber-scripts']
+ERROR: Nothing RPROVIDES 'wireplumber-dev' (but
+/mnt/b/yoe/master/sources/meta-openembedded/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.9.bb
+RDEPENDS on or otherwise requires it)
+No eligible RPROVIDERs exist for 'wireplumber-dev'
+NOTE: Runtime target 'wireplumber-dev' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['wireplumber-dev']
+ERROR: Nothing RPROVIDES 'wireplumber-modules-meta' (but
+/mnt/b/yoe/master/sources/meta-openembedded/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.9.bb
+RDEPENDS on or otherwise requires it)
+No eligible RPROVIDERs exist for 'wireplumber-modules-meta'
+NOTE: Runtime target 'wireplumber-modules-meta' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['wireplumber-modules-meta']
+ERROR: Nothing RPROVIDES 'wireplumber' (but
+/mnt/b/yoe/master/sources/meta-openembedded/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.9.bb
+RDEPENDS on or otherwise requires it)
+No eligible RPROVIDERs exist for 'wireplumber'
+NOTE: Runtime target 'wireplumber' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['wireplumber']
+ERROR: Nothing RPROVIDES 'pipewire-modules-protocol-pulse' (but
+/mnt/b/yoe/master/sources/meta-openembedded/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+RDEPENDS on or otherwise requires it)
+No eligible RPROVIDERs exist for 'pipewire-modules-protocol-pulse'
+NOTE: Runtime target 'pipewire-modules-protocol-pulse' is unbuildable,
+removing...
+Missing or unbuildable dependency chain was: ['pipewire-modules-protocol-pulse']
+ERROR: Nothing RPROVIDES 'pipewire-spa-plugins-meta' (but
+/mnt/b/yoe/master/sources/meta-openembedded/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+RDEPENDS on or otherwise requires it)
+No eligible RPROVIDERs exist for 'pipewire-spa-plugins-meta'
+NOTE: Runtime target 'pipewire-spa-plugins-meta' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['pipewire-spa-plugins-meta']
+ERROR: Nothing RPROVIDES 'pipewire-modules-protocol-native' (but
+/mnt/b/yoe/master/sources/meta-openembedded/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+RDEPENDS on or otherwise requires it)
+No eligible RPROVIDERs exist for 'pipewire-modules-protocol-native'
+NOTE: Runtime target 'pipewire-modules-protocol-native' is
+unbuildable, removing...
+Missing or unbuildable dependency chain was:
+['pipewire-modules-protocol-native']
+ERROR: Nothing RPROVIDES 'pipewire-spa-plugins-support' (but
+/mnt/b/yoe/master/sources/meta-openembedded/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+RDEPENDS on or otherwise requires it)
+No eligible RPROVIDERs exist for 'pipewire-spa-plugins-support'
+NOTE: Runtime target 'pipewire-spa-plugins-support' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['pipewire-spa-plugins-support']
+ERROR: Nothing RPROVIDES 'pipewire-modules-meta' (but
+/mnt/b/yoe/master/sources/meta-openembedded/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+RDEPENDS on or otherwise requires it)
+No eligible RPROVIDERs exist for 'pipewire-modules-meta'
+NOTE: Runtime target 'pipewire-modules-meta' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['pipewire-modules-meta']
+ERROR: Nothing RPROVIDES 'pipewire-dev' (but
+/mnt/b/yoe/master/sources/meta-openembedded/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+RDEPENDS on or otherwise requires it)
+No eligible RPROVIDERs exist for 'pipewire-dev'
+NOTE: Runtime target 'pipewire-dev' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['pipewire-dev']
+ERROR: Nothing RPROVIDES 'pipewire-modules-client-node' (but
+/mnt/b/yoe/master/sources/meta-openembedded/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+RDEPENDS on or otherwise requires it)
+No eligible RPROVIDERs exist for 'pipewire-modules-client-node'
+NOTE: Runtime target 'pipewire-modules-client-node' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['pipewire-modules-client-node']
+
+On Wed, Aug 17, 2022 at 12:48 PM Markus Volk <f_l_k@t-online.de> wrote:
+>
+> Add the configuration to make pipewire work as a drop-in replacement for pulseaudio-server.
+>
+> Add pipewire-media-session as a standalone recipe, since pipewire would fetch the code as a
+> subproject at do_configure.
+>
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> ---
+>  .../pipewire/pipewire-media-session_0.4.1.bb  | 22 +++++++++++++++
+>  ...{pipewire_0.3.50.bb => pipewire_0.3.56.bb} | 27 ++++++++++++-------
+>  2 files changed, 40 insertions(+), 9 deletions(-)
+>  create mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb
+>  rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.50.bb => pipewire_0.3.56.bb} (93%)
+>
+> diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb
+> new file mode 100644
+> index 000000000..bec911fc5
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb
+> @@ -0,0 +1,22 @@
+> +SUMMARY = "PipeWire Media Session is an example session manager for PipeWire"
+> +HOMEPAGE = "https://gitlab.freedesktop.org/pipewire/media-session"
+> +LICENSE = "MIT"
+> +
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=97be96ca4fab23e9657ffa590b931c1a"
+> +
+> +DEPENDS = " \
+> +       pipewire \
+> +       alsa-lib \
+> +       dbus \
+> +"
+> +
+> +RDEPENDS:${PN} = "pipewire"
+> +
+> +SRC_URI = "git://gitlab.freedesktop.org/pipewire/media-session.git;protocol=https;branch=master"
+> +
+> +S = "${WORKDIR}/git"
+> +SRCREV = "e5d5cf2404786af8bcc40bdb8a2962bef4ec18b6"
+> +
+> +inherit meson pkgconfig
+> +
+> +FILES:${PN} += "${libdir} ${datadir}"
+> diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+> similarity index 93%
+> rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb
+> rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+> index c176c6eeb..7a913d5f9 100644
+> --- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb
+> +++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+> @@ -13,10 +13,9 @@ LIC_FILES_CHKSUM = " \
+>
+>  DEPENDS = "dbus ncurses"
+>
+> -SRCREV = "64cf5e80e6240284e6b757907b900507fe56f1b5"
+> +SRCREV = "f274e53d25ee8f483ac6fce9e516bb1830abe88b"
+>  SRC_URI = " \
+>         git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https \
+> -       file://0001-spa-fix-c90-header-include.patch \
+>  "
+>
+>  S = "${WORKDIR}/git"
+> @@ -73,11 +72,12 @@ EXTRA_OEMESON += " \
+>  "
+>
+>  PACKAGECONFIG:class-target ??= "\
+> +    ${@bb.utils.contains('DISTRO_FEATURES', 'gstreamer', 'gstreamer', 'ffmpeg', d)} \
+>      ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)} \
+> -    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)} \
+> -    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-system-service', '', d)} \
+> -    ${@bb.utils.filter('DISTRO_FEATURES', 'alsa', d)} \
+> -    gstreamer jack libusb pw-cat raop sndfile v4l2 \
+> +    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez bluez-aac', '', d)} \
+> +    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-system-service systemd-user-service', '', d)} \
+> +    ${@bb.utils.filter('DISTRO_FEATURES', 'alsa dbus vulkan pulseaudio', d)} \
+> +    jack libusb pw-cat raop sndfile v4l2 udev volume \
+>  "
+>
+>  # "jack" and "pipewire-jack" packageconfigs cannot be both enabled,
+> @@ -96,6 +96,7 @@ PACKAGECONFIG[jack] = "-Djack=enabled,-Djack=disabled,jack,,,pipewire-jack"
+>  PACKAGECONFIG[libcamera] = "-Dlibcamera=enabled,-Dlibcamera=disabled,libcamera"
+>  PACKAGECONFIG[libcanberra] = "-Dlibcanberra=enabled,-Dlibcanberra=disabled,libcanberra"
+>  PACKAGECONFIG[libusb] = "-Dlibusb=enabled,-Dlibusb=disabled,libusb"
+> +PACKAGECONFIG[pulseaudio] = "-Dlibpulse=enabled,-Dlibpulse=disabled,pulseaudio"
+>  PACKAGECONFIG[pipewire-alsa] = "-Dpipewire-alsa=enabled,-Dpipewire-alsa=disabled,alsa-lib"
+>  PACKAGECONFIG[pipewire-jack] = "-Dpipewire-jack=enabled -Dlibjack-path=${libdir}/${PW_MODULE_SUBDIR}/jack,-Dpipewire-jack=disabled,jack,,,jack"
+>  PACKAGECONFIG[pw-cat] = "-Dpw-cat=enabled,-Dpw-cat=disabled"
+> @@ -109,7 +110,10 @@ PACKAGECONFIG[systemd-system-service] = "-Dsystemd-system-service=enabled,-Dsyst
+>  # currently lacks the feature of enabling user services.
+>  PACKAGECONFIG[systemd-user-service] = "-Dsystemd-user-service=enabled,-Dsystemd-user-service=disabled,systemd"
+>  # pw-cat needs sndfile packageconfig to be enabled
+> +PACKAGECONFIG[udev] = "-Dudev=enabled,-Dudev=disabled,udev"
+>  PACKAGECONFIG[v4l2] = "-Dv4l2=enabled,-Dv4l2=disabled,udev"
+> +PACKAGECONFIG[volume] = "-Dvolume=enabled,-Dvolume=disabled"
+> +PACKAGECONFIG[vulkan] = "-Dvulkan=enabled,-Dvulkan=disabled,vulkan-headers vulkan-loader"
+>  PACKAGECONFIG[webrtc-echo-cancelling] = "-Decho-cancel-webrtc=enabled,-Decho-cancel-webrtc=disabled,webrtc-audio-processing"
+>
+>  PACKAGESPLITFUNCS:prepend = " split_dynamic_packages "
+> @@ -227,10 +231,15 @@ PACKAGES_DYNAMIC = "^${PN}-spa-plugins.* ^${PN}-modules.*"
+>  SYSTEMD_SERVICE:${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'systemd-system-service', 'pipewire.service', '', d)}"
+>  CONFFILES:${PN} += "${datadir}/pipewire/pipewire.conf"
+>  FILES:${PN} = " \
+> -    ${datadir}/pipewire/pipewire.conf \
+> -    ${systemd_system_unitdir}/pipewire.* \
+> -    ${systemd_user_unitdir}/pipewire.* \
+> +    ${datadir}/pipewire \
+> +    ${systemd_system_unitdir}/pipewire* \
+> +    ${systemd_user_unitdir}/pipewire* \
+>      ${bindir}/pipewire \
+> +    ${bindir}/pipewire-avb \
+> +"
+> +
+> +RRECOMMENDS:${PN} += " \
+> +    ${PN}-media-session \
+>  "
+>
+>  FILES:${PN}-dev += " \
+> --
+> 2.34.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#98312): https://lists.openembedded.org/g/openembedded-devel/message/98312
+> Mute This Topic: https://lists.openembedded.org/mt/93090043/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
