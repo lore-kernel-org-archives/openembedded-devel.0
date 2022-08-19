@@ -2,106 +2,363 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C437CC28B2B
-	for <webhook@archiver.kernel.org>; Fri, 19 Aug 2022 17:06:41 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web08.5636.1660928799160876074
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C32E3C28B2B
+	for <webhook@archiver.kernel.org>; Fri, 19 Aug 2022 17:08:11 +0000 (UTC)
+Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
+ by mx.groups.io with SMTP id smtpd.web12.5689.1660928881673868630
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Aug 2022 10:06:39 -0700
+ Fri, 19 Aug 2022 10:08:02 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
- spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.81,
+ spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.83,
  mailfrom: f_l_k@t-online.de)
-Received: from fwd84.dcpf.telekom.de (fwd84.aul.t-online.de [10.223.144.110])
-	by mailout03.t-online.de (Postfix) with SMTP id D97444B82
+Received: from fwd83.dcpf.telekom.de (fwd83.aul.t-online.de [10.223.144.109])
+	by mailout07.t-online.de (Postfix) with SMTP id 4A2F4D869
 	for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Aug 2022 19:06:36 +0200 (CEST)
-Received: from flk-MS-7C91.. ([84.163.43.141]) by fwd84.t-online.de
+ Fri, 19 Aug 2022 19:07:58 +0200 (CEST)
+Received: from [192.168.178.83] ([84.163.43.141]) by fwd83.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1oP5S8-1eUI9R0; Fri, 19 Aug 2022 19:06:36 +0200
+	esmtp id 1oP5TR-1haVKy0; Fri, 19 Aug 2022 19:07:57 +0200
+Date: Fri, 19 Aug 2022 19:07:51 +0200
 From: Markus Volk <f_l_k@t-online.de>
+Subject: Re: [meta-multimedia][PATCHv4] pipewire: update to v0.3.56
 To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-multimedia][PATCHv4] pipewire: update to v0.3.56
-Date: Fri, 19 Aug 2022 19:06:27 +0200
-Message-Id: <20220819170627.17921-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.34.1
+Message-Id: <3XGVGR.QSETXMW5EZ9P3@t-online.de>
+In-Reply-To: <20220819170627.17921-1-f_l_k@t-online.de>
+References: <20220819170627.17921-1-f_l_k@t-online.de>
+X-Mailer: geary/40.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1660928796-0144CFA9-7FB8779F/0/0 CLEAN NORMAL
-X-TOI-MSGID: f46199fd-26a4-4ddd-b1cb-268886b5fb44
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/alternative; boundary="=-W+98sIIyUI/Cxymhz374"
+X-TOI-EXPURGATEID: 150726::1660928877-0144B102-39983BA0/0/0 CLEAN NORMAL
+X-TOI-MSGID: e9778959-d5b9-4cb4-8a64-4ba0f5eeebe6
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 19 Aug 2022 17:06:41 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 Aug 2022 17:08:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98332
+ https://lists.openembedded.org/g/openembedded-devel/message/98333
 
-Add the configuration to make pipewire work as a drop-in replacement for =
-pulseaudio-server.
+--=-W+98sIIyUI/Cxymhz374
+Content-Type: text/plain; charset=us-ascii; format=flowed
 
-Add pipewire-media-session as a standalone recipe, since pipewire would f=
-etch the code as a
+v4 removes a duplicate line
+
+Am Fr, 19. Aug 2022 um 19:06:27 +0200 schrieb Markus Volk 
+<f_l_k@t-online.de>:
+> Add the configuration to make pipewire work as a drop-in replacement 
+> for pulseaudio-server.
+> 
+> Add pipewire-media-session as a standalone recipe, since pipewire 
+> would fetch the code as a
+> subproject at do_configure.
+> 
+> Signed-off-by: Markus Volk <f_l_k@t-online.de 
+> <mailto:f_l_k@t-online.de>>
+> ---
+>  .../pipewire/pipewire-media-session_0.4.1.bb  | 22 +++++++++
+>  .../0001-spa-fix-c90-header-include.patch     | 47 
+> -------------------
+>  ...{pipewire_0.3.50.bb => pipewire_0.3.56.bb} | 41 +++++++++++-----
+>  3 files changed, 52 insertions(+), 58 deletions(-)
+>  create mode 100644 
+> meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb
+>  delete mode 100644 
+> meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-spa-fix-c90-header-include.patch
+>  rename 
+> meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.50.bb => 
+> pipewire_0.3.56.bb} (87%)
+> 
+> diff --git 
+> a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb 
+> b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb
+> new file mode 100644
+> index 000000000..5dd1eb160
+> --- /dev/null
+> +++ 
+> b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb
+> @@ -0,0 +1,22 @@
+> +SUMMARY = "PipeWire Media Session is an example session manager for 
+> PipeWire"
+> +HOMEPAGE = "<https://gitlab.freedesktop.org/pipewire/media-session>"
+> +LICENSE = "MIT"
+> +
+> +LIC_FILES_CHKSUM = 
+> "file://COPYING;md5=97be96ca4fab23e9657ffa590b931c1a" 
+> <file://copying;md5=97be96ca4fab23e9657ffa590b931c1a/>
+> +
+> +DEPENDS = " \
+> +	pipewire \
+> +	alsa-lib \
+> +	dbus \
+> +"
+> +
+> +RRECOMMENDS:${PN} += "pipewire"
+> +
+> +SRC_URI = 
+> "git://gitlab.freedesktop.org/pipewire/media-session.git;protocol=https;branch=master"
+> +
+> +S = "${WORKDIR}/git"
+> +SRCREV = "e5d5cf2404786af8bcc40bdb8a2962bef4ec18b6"
+> +
+> +inherit meson pkgconfig
+> +
+> +FILES:${PN} += "${libdir} ${datadir}"
+> diff --git 
+> a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-spa-fix-c90-header-include.patch 
+> b/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-spa-fix-c90-header-include.patch
+> deleted file mode 100644
+> index ad6448a10..000000000
+> --- 
+> a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-spa-fix-c90-header-include.patch
+> +++ /dev/null
+> @@ -1,47 +0,0 @@
+> -From d3ea3142e1a4de206e616bc18f63a529e6b4986a Mon Sep 17 00:00:00 
+> 2001
+> -From: psykose <alice@ayaya.dev <mailto:alice@ayaya.dev>>
+> -Date: Wed, 13 Apr 2022 21:57:49 +0000
+> -Subject: [PATCH 001/154] spa: fix c90 header include
+> -
+> -placing declarations after code is invalid under ISO c90
+> -
+> -Fixes !1211
+> -
+> -Patch-Status: Backport
+> ----
+> - spa/include/spa/utils/string.h | 6 ++++--
+> - 1 file changed, 4 insertions(+), 2 deletions(-)
+> -
+> -diff --git a/spa/include/spa/utils/string.h 
+> b/spa/include/spa/utils/string.h
+> -index e80434537..43d19616c 100644
+> ---- a/spa/include/spa/utils/string.h
+> -+++ b/spa/include/spa/utils/string.h
+> -@@ -276,10 +276,11 @@ static inline int spa_scnprintf(char *buffer, 
+> size_t size, const char *format, .
+> - static inline float spa_strtof(const char *str, char **endptr)
+> - {
+> - 	static locale_t locale = NULL;
+> -+	locale_t prev;
+> - 	float v;
+> - 	if (SPA_UNLIKELY(locale == NULL))
+> - 		locale = newlocale(LC_ALL_MASK, "C", NULL);
+> --	locale_t prev = uselocale(locale);
+> -+	prev = uselocale(locale);
+> - 	v = strtof(str, endptr);
+> - 	uselocale(prev);
+> - 	return v;
+> -@@ -319,10 +320,11 @@ static inline bool spa_atof(const char *str, 
+> float *val)
+> - static inline double spa_strtod(const char *str, char **endptr)
+> - {
+> - 	static locale_t locale = NULL;
+> -+	locale_t prev;
+> - 	double v;
+> - 	if (SPA_UNLIKELY(locale == NULL))
+> - 		locale = newlocale(LC_ALL_MASK, "C", NULL);
+> --	locale_t prev = uselocale(locale);
+> -+	prev = uselocale(locale);
+> - 	v = strtod(str, endptr);
+> - 	uselocale(prev);
+> - 	return v;
+> ---
+> -2.25.1
+> -
+> diff --git 
+> a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb 
+> b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+> similarity index 87%
+> rename from 
+> meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb
+> rename to 
+> meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+> index c176c6eeb..b5ceeb12c 100644
+> --- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb
+> +++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+> @@ -13,10 +13,9 @@ LIC_FILES_CHKSUM = " \
+> 
+>  DEPENDS = "dbus ncurses"
+> 
+> -SRCREV = "64cf5e80e6240284e6b757907b900507fe56f1b5"
+> +SRCREV = "f274e53d25ee8f483ac6fce9e516bb1830abe88b"
+>  SRC_URI = " \
+>  
+> 	git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https 
+> \
+> -	file://0001-spa-fix-c90-header-include.patch 
+> <file://0001-spa-fix-c90-header-include.patch/> \
+>  "
+> 
+>  S = "${WORKDIR}/git"
+> @@ -62,7 +61,6 @@ EXTRA_OEMESON += " \
+>      -Dudevrulesdir=${nonarch_base_libdir}/udev/rules.d/ \
+>      -Dsystemd-system-unit-dir=${systemd_system_unitdir} \
+>      -Dsystemd-user-unit-dir=${systemd_user_unitdir} \
+> -    -Dvulkan=disabled \
+>      -Dman=disabled \
+>      -Dsession-managers='[]' \
+>      -Dlv2=disabled \
+> @@ -72,12 +70,26 @@ EXTRA_OEMESON += " \
+>      -Dlegacy-rtkit=false \
+>  "
+> 
+> -PACKAGECONFIG:class-target ??= "\
+> +# spa alsa plugin code uses typedef redefinition, which is 
+> officially a C11 feature.
+> +# Pipewire builds with 'c_std=gnu99' by default. Recent versions of 
+> gcc don't issue this warning in gnu99
+> +# mode but it looks like clang still does
+> +CFLAGS:append = " -Wno-typedef-redefinition"
+> +
+> +# According to wireplumber documentation only one session manager 
+> should be installed at a time
+> +# Possible options are media-session, which has fewer dependencies 
+> but is very simple,
+> +# or wireplumber, which is more powerful.
+> +PIPEWIRE_SESSION_MANAGER ??= "media-session"
+> +
+> +BLUETOOTH_AAC = "${@bb.utils.contains 
+> <mailto:${@bb.utils.contains>('LICENSE_FLAGS_ACCEPTED', 'commercial', 
+> 'bluez-aac', '', d)}"
+> +
+> +PACKAGECONFIG:class-target ??= " \
+> +    ${@bb.utils.contains 
+> <mailto:${@bb.utils.contains>('DISTRO_FEATURES', 'gstreamer', 
+> 'gstreamer', 'ffmpeg', d)} \
+>      ${@bb.utils.contains 
+> <mailto:${@bb.utils.contains>('DISTRO_FEATURES', 'zeroconf', 'avahi', 
+> '', d)} \
+> -    ${@bb.utils.contains 
+> <mailto:${@bb.utils.contains>('DISTRO_FEATURES', 'bluetooth', 
+> 'bluez', '', d)} \
+> -    ${@bb.utils.contains 
+> <mailto:${@bb.utils.contains>('DISTRO_FEATURES', 'systemd', 'systemd 
+> systemd-system-service', '', d)} \
+> -    ${@bb.utils.filter 
+> <mailto:${@bb.utils.filter>('DISTRO_FEATURES', 'alsa', d)} \
+> -    gstreamer jack libusb pw-cat raop sndfile v4l2 \
+> +    ${@bb.utils.contains 
+> <mailto:${@bb.utils.contains>('DISTRO_FEATURES', 'bluetooth', 'bluez 
+> ${BLUETOOTH_AAC}', '', d)} \
+> +    ${@bb.utils.contains 
+> <mailto:${@bb.utils.contains>('DISTRO_FEATURES', 'systemd', 'systemd 
+> systemd-system-service systemd-user-service', '', d)} \
+> +    ${@bb.utils.filter 
+> <mailto:${@bb.utils.filter>('DISTRO_FEATURES', 'alsa dbus vulkan 
+> pulseaudio', d)} \
+> +    ${PIPEWIRE_SESSION_MANAGER} \
+> +    jack libusb pw-cat raop sndfile v4l2 udev volume \
+>  "
+> 
+>  # "jack" and "pipewire-jack" packageconfigs cannot be both enabled,
+> @@ -96,6 +108,8 @@ PACKAGECONFIG[jack] = 
+> "-Djack=enabled,-Djack=disabled,jack,,,pipewire-jack"
+>  PACKAGECONFIG[libcamera] = 
+> "-Dlibcamera=enabled,-Dlibcamera=disabled,libcamera"
+>  PACKAGECONFIG[libcanberra] = 
+> "-Dlibcanberra=enabled,-Dlibcanberra=disabled,libcanberra"
+>  PACKAGECONFIG[libusb] = "-Dlibusb=enabled,-Dlibusb=disabled,libusb"
+> +PACKAGECONFIG[media-session] = ",,,pipewire-media-session"
+> +PACKAGECONFIG[pulseaudio] = 
+> "-Dlibpulse=enabled,-Dlibpulse=disabled,pulseaudio"
+>  PACKAGECONFIG[pipewire-alsa] = 
+> "-Dpipewire-alsa=enabled,-Dpipewire-alsa=disabled,alsa-lib"
+>  PACKAGECONFIG[pipewire-jack] = "-Dpipewire-jack=enabled 
+> -Dlibjack-path=${libdir}/${PW_MODULE_SUBDIR}/jack,-Dpipewire-jack=disabled,jack,,,jack"
+>  PACKAGECONFIG[pw-cat] = "-Dpw-cat=enabled,-Dpw-cat=disabled"
+> @@ -109,8 +123,12 @@ PACKAGECONFIG[systemd-system-service] = 
+> "-Dsystemd-system-service=enabled,-Dsyst
+>  # currently lacks the feature of enabling user services.
+>  PACKAGECONFIG[systemd-user-service] = 
+> "-Dsystemd-user-service=enabled,-Dsystemd-user-service=disabled,systemd"
+>  # pw-cat needs sndfile packageconfig to be enabled
+> +PACKAGECONFIG[udev] = "-Dudev=enabled,-Dudev=disabled,udev"
+>  PACKAGECONFIG[v4l2] = "-Dv4l2=enabled,-Dv4l2=disabled,udev"
+> +PACKAGECONFIG[volume] = "-Dvolume=enabled,-Dvolume=disabled"
+> +PACKAGECONFIG[vulkan] = 
+> "-Dvulkan=enabled,-Dvulkan=disabled,vulkan-headers vulkan-loader"
+>  PACKAGECONFIG[webrtc-echo-cancelling] = 
+> "-Decho-cancel-webrtc=enabled,-Decho-cancel-webrtc=disabled,webrtc-audio-processing"
+> +PACKAGECONFIG[wireplumber] = ",,,wireplumber"
+> 
+>  PACKAGESPLITFUNCS:prepend = " split_dynamic_packages "
+>  PACKAGESPLITFUNCS:append = " set_dynamic_metapkg_rdepends "
+> @@ -227,10 +245,11 @@ PACKAGES_DYNAMIC = "^${PN}-spa-plugins.* 
+> ^${PN}-modules.*"
+>  SYSTEMD_SERVICE:${PN} = "${@bb.utils.contains 
+> <mailto:${@bb.utils.contains>('PACKAGECONFIG', 
+> 'systemd-system-service', 'pipewire.service', '', d)}"
+>  CONFFILES:${PN} += "${datadir}/pipewire/pipewire.conf"
+>  FILES:${PN} = " \
+> -    ${datadir}/pipewire/pipewire.conf \
+> -    ${systemd_system_unitdir}/pipewire.* \
+> -    ${systemd_user_unitdir}/pipewire.* \
+> +    ${datadir}/pipewire \
+> +    ${systemd_system_unitdir}/pipewire* \
+> +    ${systemd_user_unitdir}/pipewire* \
+>      ${bindir}/pipewire \
+> +    ${bindir}/pipewire-avb \
+>  "
+> 
+>  FILES:${PN}-dev += " \
+> --
+> 2.34.1
+> 
+
+
+--=-W+98sIIyUI/Cxymhz374
+Content-Type: text/html; charset=us-ascii
+
+<div id="geary-body" dir="auto"><div>v4 removes a duplicate line</div></div><div id="geary-quote" dir="auto"><br>Am Fr, 19. Aug 2022 um 19:06:27 +0200 schrieb Markus Volk &lt;f_l_k@t-online.de&gt;:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">Add the configuration to make pipewire work as a drop-in replacement for pulseaudio-server.
+
+Add pipewire-media-session as a standalone recipe, since pipewire would fetch the code as a
 subproject at do_configure.
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
 ---
  .../pipewire/pipewire-media-session_0.4.1.bb  | 22 +++++++++
  .../0001-spa-fix-c90-header-include.patch     | 47 -------------------
- ...{pipewire_0.3.50.bb =3D> pipewire_0.3.56.bb} | 41 +++++++++++-----
+ ...{pipewire_0.3.50.bb =&gt; pipewire_0.3.56.bb} | 41 +++++++++++-----
  3 files changed, 52 insertions(+), 58 deletions(-)
- create mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire-=
-media-session_0.4.1.bb
- delete mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire/=
-0001-spa-fix-c90-header-include.patch
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.50.bb =3D=
-> pipewire_0.3.56.bb} (87%)
+ create mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb
+ delete mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-spa-fix-c90-header-include.patch
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.50.bb =&gt; pipewire_0.3.56.bb} (87%)
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-s=
-ession_0.4.1.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire-me=
-dia-session_0.4.1.bb
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb
 new file mode 100644
 index 000000000..5dd1eb160
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_=
-0.4.1.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb
 @@ -0,0 +1,22 @@
-+SUMMARY =3D "PipeWire Media Session is an example session manager for Pi=
-peWire"
-+HOMEPAGE =3D "https://gitlab.freedesktop.org/pipewire/media-session"
-+LICENSE =3D "MIT"
++SUMMARY = "PipeWire Media Session is an example session manager for PipeWire"
++HOMEPAGE = "<a href="https://gitlab.freedesktop.org/pipewire/media-session">https://gitlab.freedesktop.org/pipewire/media-session</a>"
++LICENSE = "MIT"
 +
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D97be96ca4fab23e9657ffa590b931=
-c1a"
++LIC_FILES_CHKSUM = "<a href="file://COPYING;md5=97be96ca4fab23e9657ffa590b931c1a" "="">file://COPYING;md5=97be96ca4fab23e9657ffa590b931c1a"</a>
 +
-+DEPENDS =3D " \
++DEPENDS = " \
 +	pipewire \
 +	alsa-lib \
 +	dbus \
 +"
 +
-+RRECOMMENDS:${PN} +=3D "pipewire"
++RRECOMMENDS:${PN} += "pipewire"
 +
-+SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/media-session.git;pro=
-tocol=3Dhttps;branch=3Dmaster"
++SRC_URI = "git://gitlab.freedesktop.org/pipewire/media-session.git;protocol=https;branch=master"
 +
-+S =3D "${WORKDIR}/git"
-+SRCREV =3D "e5d5cf2404786af8bcc40bdb8a2962bef4ec18b6"
++S = "${WORKDIR}/git"
++SRCREV = "e5d5cf2404786af8bcc40bdb8a2962bef4ec18b6"
 +
 +inherit meson pkgconfig
 +
-+FILES:${PN} +=3D "${libdir} ${datadir}"
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-sp=
-a-fix-c90-header-include.patch b/meta-multimedia/recipes-multimedia/pipew=
-ire/pipewire/0001-spa-fix-c90-header-include.patch
++FILES:${PN} += "${libdir} ${datadir}"
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-spa-fix-c90-header-include.patch b/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-spa-fix-c90-header-include.patch
 deleted file mode 100644
 index ad6448a10..000000000
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-spa-fix-c=
-90-header-include.patch
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-spa-fix-c90-header-include.patch
 +++ /dev/null
 @@ -1,47 +0,0 @@
 -From d3ea3142e1a4de206e616bc18f63a529e6b4986a Mon Sep 17 00:00:00 2001
--From: psykose <alice@ayaya.dev>
+-From: psykose &lt;<a href="mailto:alice@ayaya.dev">alice@ayaya.dev</a>&gt;
 -Date: Wed, 13 Apr 2022 21:57:49 +0000
 -Subject: [PATCH 001/154] spa: fix c90 header include
 -
@@ -114,156 +371,124 @@ index ad6448a10..000000000
 - spa/include/spa/utils/string.h | 6 ++++--
 - 1 file changed, 4 insertions(+), 2 deletions(-)
 -
--diff --git a/spa/include/spa/utils/string.h b/spa/include/spa/utils/stri=
-ng.h
+-diff --git a/spa/include/spa/utils/string.h b/spa/include/spa/utils/string.h
 -index e80434537..43d19616c 100644
 ---- a/spa/include/spa/utils/string.h
 -+++ b/spa/include/spa/utils/string.h
--@@ -276,10 +276,11 @@ static inline int spa_scnprintf(char *buffer, size=
-_t size, const char *format, .
+-@@ -276,10 +276,11 @@ static inline int spa_scnprintf(char *buffer, size_t size, const char *format, .
 - static inline float spa_strtof(const char *str, char **endptr)
 - {
-- 	static locale_t locale =3D NULL;
+- 	static locale_t locale = NULL;
 -+	locale_t prev;
 - 	float v;
-- 	if (SPA_UNLIKELY(locale =3D=3D NULL))
-- 		locale =3D newlocale(LC_ALL_MASK, "C", NULL);
---	locale_t prev =3D uselocale(locale);
--+	prev =3D uselocale(locale);
-- 	v =3D strtof(str, endptr);
+- 	if (SPA_UNLIKELY(locale == NULL))
+- 		locale = newlocale(LC_ALL_MASK, "C", NULL);
+--	locale_t prev = uselocale(locale);
+-+	prev = uselocale(locale);
+- 	v = strtof(str, endptr);
 - 	uselocale(prev);
 - 	return v;
--@@ -319,10 +320,11 @@ static inline bool spa_atof(const char *str, float=
- *val)
+-@@ -319,10 +320,11 @@ static inline bool spa_atof(const char *str, float *val)
 - static inline double spa_strtod(const char *str, char **endptr)
 - {
-- 	static locale_t locale =3D NULL;
+- 	static locale_t locale = NULL;
 -+	locale_t prev;
 - 	double v;
-- 	if (SPA_UNLIKELY(locale =3D=3D NULL))
-- 		locale =3D newlocale(LC_ALL_MASK, "C", NULL);
---	locale_t prev =3D uselocale(locale);
--+	prev =3D uselocale(locale);
-- 	v =3D strtod(str, endptr);
+- 	if (SPA_UNLIKELY(locale == NULL))
+- 		locale = newlocale(LC_ALL_MASK, "C", NULL);
+--	locale_t prev = uselocale(locale);
+-+	prev = uselocale(locale);
+- 	v = strtod(str, endptr);
 - 	uselocale(prev);
 - 	return v;
----=20
+--- 
 -2.25.1
 -
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.=
-bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
 similarity index 87%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.b=
-b
+rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb
 rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
 index c176c6eeb..b5ceeb12c 100644
 --- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb
 +++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
-@@ -13,10 +13,9 @@ LIC_FILES_CHKSUM =3D " \
-=20
- DEPENDS =3D "dbus ncurses"
-=20
--SRCREV =3D "64cf5e80e6240284e6b757907b900507fe56f1b5"
-+SRCREV =3D "f274e53d25ee8f483ac6fce9e516bb1830abe88b"
- SRC_URI =3D " \
- 	git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3Dmaster;prot=
-ocol=3Dhttps \
--	file://0001-spa-fix-c90-header-include.patch \
+@@ -13,10 +13,9 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS = "dbus ncurses"
+ 
+-SRCREV = "64cf5e80e6240284e6b757907b900507fe56f1b5"
++SRCREV = "f274e53d25ee8f483ac6fce9e516bb1830abe88b"
+ SRC_URI = " \
+ 	git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https \
+-	<a href="file://0001-spa-fix-c90-header-include.patch">file://0001-spa-fix-c90-header-include.patch</a> \
  "
-=20
- S =3D "${WORKDIR}/git"
-@@ -62,7 +61,6 @@ EXTRA_OEMESON +=3D " \
-     -Dudevrulesdir=3D${nonarch_base_libdir}/udev/rules.d/ \
-     -Dsystemd-system-unit-dir=3D${systemd_system_unitdir} \
-     -Dsystemd-user-unit-dir=3D${systemd_user_unitdir} \
--    -Dvulkan=3Ddisabled \
-     -Dman=3Ddisabled \
-     -Dsession-managers=3D'[]' \
-     -Dlv2=3Ddisabled \
-@@ -72,12 +70,26 @@ EXTRA_OEMESON +=3D " \
-     -Dlegacy-rtkit=3Dfalse \
+ 
+ S = "${WORKDIR}/git"
+@@ -62,7 +61,6 @@ EXTRA_OEMESON += " \
+     -Dudevrulesdir=${nonarch_base_libdir}/udev/rules.d/ \
+     -Dsystemd-system-unit-dir=${systemd_system_unitdir} \
+     -Dsystemd-user-unit-dir=${systemd_user_unitdir} \
+-    -Dvulkan=disabled \
+     -Dman=disabled \
+     -Dsession-managers='[]' \
+     -Dlv2=disabled \
+@@ -72,12 +70,26 @@ EXTRA_OEMESON += " \
+     -Dlegacy-rtkit=false \
  "
-=20
--PACKAGECONFIG:class-target ??=3D "\
-+# spa alsa plugin code uses typedef redefinition, which is officially a =
-C11 feature.
-+# Pipewire builds with 'c_std=3Dgnu99' by default. Recent versions of gc=
-c don't issue this warning in gnu99
+ 
+-PACKAGECONFIG:class-target ??= "\
++# spa alsa plugin code uses typedef redefinition, which is officially a C11 feature.
++# Pipewire builds with 'c_std=gnu99' by default. Recent versions of gcc don't issue this warning in gnu99
 +# mode but it looks like clang still does
-+CFLAGS:append =3D " -Wno-typedef-redefinition"
++CFLAGS:append = " -Wno-typedef-redefinition"
 +
-+# According to wireplumber documentation only one session manager should=
- be installed at a time
-+# Possible options are media-session, which has fewer dependencies but i=
-s very simple,
++# According to wireplumber documentation only one session manager should be installed at a time
++# Possible options are media-session, which has fewer dependencies but is very simple,
 +# or wireplumber, which is more powerful.
-+PIPEWIRE_SESSION_MANAGER ??=3D "media-session"
++PIPEWIRE_SESSION_MANAGER ??= "media-session"
 +
-+BLUETOOTH_AAC =3D "${@bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'comme=
-rcial', 'bluez-aac', '', d)}"
++BLUETOOTH_AAC = "<a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('LICENSE_FLAGS_ACCEPTED', 'commercial', 'bluez-aac', '', d)}"
 +
-+PACKAGECONFIG:class-target ??=3D " \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'gstreamer', 'gstreamer', 'f=
-fmpeg', d)} \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)}=
- \
--    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)=
-} \
--    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-=
-system-service', '', d)} \
--    ${@bb.utils.filter('DISTRO_FEATURES', 'alsa', d)} \
++PACKAGECONFIG:class-target ??= " \
++    <a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('DISTRO_FEATURES', 'gstreamer', 'gstreamer', 'ffmpeg', d)} \
+     <a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)} \
+-    <a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)} \
+-    <a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('DISTRO_FEATURES', 'systemd', 'systemd systemd-system-service', '', d)} \
+-    <a href="mailto:${@bb.utils.filter">${@bb.utils.filter</a>('DISTRO_FEATURES', 'alsa', d)} \
 -    gstreamer jack libusb pw-cat raop sndfile v4l2 \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez ${BLUETO=
-OTH_AAC}', '', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-=
-system-service systemd-user-service', '', d)} \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'alsa dbus vulkan pulseaudio',=
- d)} \
++    <a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('DISTRO_FEATURES', 'bluetooth', 'bluez ${BLUETOOTH_AAC}', '', d)} \
++    <a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('DISTRO_FEATURES', 'systemd', 'systemd systemd-system-service systemd-user-service', '', d)} \
++    <a href="mailto:${@bb.utils.filter">${@bb.utils.filter</a>('DISTRO_FEATURES', 'alsa dbus vulkan pulseaudio', d)} \
 +    ${PIPEWIRE_SESSION_MANAGER} \
 +    jack libusb pw-cat raop sndfile v4l2 udev volume \
  "
-=20
+ 
  # "jack" and "pipewire-jack" packageconfigs cannot be both enabled,
-@@ -96,6 +108,8 @@ PACKAGECONFIG[jack] =3D "-Djack=3Denabled,-Djack=3Ddis=
-abled,jack,,,pipewire-jack"
- PACKAGECONFIG[libcamera] =3D "-Dlibcamera=3Denabled,-Dlibcamera=3Ddisabl=
-ed,libcamera"
- PACKAGECONFIG[libcanberra] =3D "-Dlibcanberra=3Denabled,-Dlibcanberra=3D=
-disabled,libcanberra"
- PACKAGECONFIG[libusb] =3D "-Dlibusb=3Denabled,-Dlibusb=3Ddisabled,libusb=
-"
-+PACKAGECONFIG[media-session] =3D ",,,pipewire-media-session"
-+PACKAGECONFIG[pulseaudio] =3D "-Dlibpulse=3Denabled,-Dlibpulse=3Ddisable=
-d,pulseaudio"
- PACKAGECONFIG[pipewire-alsa] =3D "-Dpipewire-alsa=3Denabled,-Dpipewire-a=
-lsa=3Ddisabled,alsa-lib"
- PACKAGECONFIG[pipewire-jack] =3D "-Dpipewire-jack=3Denabled -Dlibjack-pa=
-th=3D${libdir}/${PW_MODULE_SUBDIR}/jack,-Dpipewire-jack=3Ddisabled,jack,,=
-,jack"
- PACKAGECONFIG[pw-cat] =3D "-Dpw-cat=3Denabled,-Dpw-cat=3Ddisabled"
-@@ -109,8 +123,12 @@ PACKAGECONFIG[systemd-system-service] =3D "-Dsystemd=
--system-service=3Denabled,-Dsyst
+@@ -96,6 +108,8 @@ PACKAGECONFIG[jack] = "-Djack=enabled,-Djack=disabled,jack,,,pipewire-jack"
+ PACKAGECONFIG[libcamera] = "-Dlibcamera=enabled,-Dlibcamera=disabled,libcamera"
+ PACKAGECONFIG[libcanberra] = "-Dlibcanberra=enabled,-Dlibcanberra=disabled,libcanberra"
+ PACKAGECONFIG[libusb] = "-Dlibusb=enabled,-Dlibusb=disabled,libusb"
++PACKAGECONFIG[media-session] = ",,,pipewire-media-session"
++PACKAGECONFIG[pulseaudio] = "-Dlibpulse=enabled,-Dlibpulse=disabled,pulseaudio"
+ PACKAGECONFIG[pipewire-alsa] = "-Dpipewire-alsa=enabled,-Dpipewire-alsa=disabled,alsa-lib"
+ PACKAGECONFIG[pipewire-jack] = "-Dpipewire-jack=enabled -Dlibjack-path=${libdir}/${PW_MODULE_SUBDIR}/jack,-Dpipewire-jack=disabled,jack,,,jack"
+ PACKAGECONFIG[pw-cat] = "-Dpw-cat=enabled,-Dpw-cat=disabled"
+@@ -109,8 +123,12 @@ PACKAGECONFIG[systemd-system-service] = "-Dsystemd-system-service=enabled,-Dsyst
  # currently lacks the feature of enabling user services.
- PACKAGECONFIG[systemd-user-service] =3D "-Dsystemd-user-service=3Denable=
-d,-Dsystemd-user-service=3Ddisabled,systemd"
+ PACKAGECONFIG[systemd-user-service] = "-Dsystemd-user-service=enabled,-Dsystemd-user-service=disabled,systemd"
  # pw-cat needs sndfile packageconfig to be enabled
-+PACKAGECONFIG[udev] =3D "-Dudev=3Denabled,-Dudev=3Ddisabled,udev"
- PACKAGECONFIG[v4l2] =3D "-Dv4l2=3Denabled,-Dv4l2=3Ddisabled,udev"
-+PACKAGECONFIG[volume] =3D "-Dvolume=3Denabled,-Dvolume=3Ddisabled"
-+PACKAGECONFIG[vulkan] =3D "-Dvulkan=3Denabled,-Dvulkan=3Ddisabled,vulkan=
--headers vulkan-loader"
- PACKAGECONFIG[webrtc-echo-cancelling] =3D "-Decho-cancel-webrtc=3Denable=
-d,-Decho-cancel-webrtc=3Ddisabled,webrtc-audio-processing"
-+PACKAGECONFIG[wireplumber] =3D ",,,wireplumber"
-=20
- PACKAGESPLITFUNCS:prepend =3D " split_dynamic_packages "
- PACKAGESPLITFUNCS:append =3D " set_dynamic_metapkg_rdepends "
-@@ -227,10 +245,11 @@ PACKAGES_DYNAMIC =3D "^${PN}-spa-plugins.* ^${PN}-m=
-odules.*"
- SYSTEMD_SERVICE:${PN} =3D "${@bb.utils.contains('PACKAGECONFIG', 'system=
-d-system-service', 'pipewire.service', '', d)}"
- CONFFILES:${PN} +=3D "${datadir}/pipewire/pipewire.conf"
- FILES:${PN} =3D " \
++PACKAGECONFIG[udev] = "-Dudev=enabled,-Dudev=disabled,udev"
+ PACKAGECONFIG[v4l2] = "-Dv4l2=enabled,-Dv4l2=disabled,udev"
++PACKAGECONFIG[volume] = "-Dvolume=enabled,-Dvolume=disabled"
++PACKAGECONFIG[vulkan] = "-Dvulkan=enabled,-Dvulkan=disabled,vulkan-headers vulkan-loader"
+ PACKAGECONFIG[webrtc-echo-cancelling] = "-Decho-cancel-webrtc=enabled,-Decho-cancel-webrtc=disabled,webrtc-audio-processing"
++PACKAGECONFIG[wireplumber] = ",,,wireplumber"
+ 
+ PACKAGESPLITFUNCS:prepend = " split_dynamic_packages "
+ PACKAGESPLITFUNCS:append = " set_dynamic_metapkg_rdepends "
+@@ -227,10 +245,11 @@ PACKAGES_DYNAMIC = "^${PN}-spa-plugins.* ^${PN}-modules.*"
+ SYSTEMD_SERVICE:${PN} = "<a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('PACKAGECONFIG', 'systemd-system-service', 'pipewire.service', '', d)}"
+ CONFFILES:${PN} += "${datadir}/pipewire/pipewire.conf"
+ FILES:${PN} = " \
 -    ${datadir}/pipewire/pipewire.conf \
 -    ${systemd_system_unitdir}/pipewire.* \
 -    ${systemd_user_unitdir}/pipewire.* \
@@ -273,9 +498,12 @@ d-system-service', 'pipewire.service', '', d)}"
      ${bindir}/pipewire \
 +    ${bindir}/pipewire-avb \
  "
-=20
- FILES:${PN}-dev +=3D " \
---=20
-2.34.1
+ 
+ FILES:${PN}-dev += " \
+<div>-- 
+</div>2.34.1
+
+</div></blockquote></div>
+--=-W+98sIIyUI/Cxymhz374--
 
 
