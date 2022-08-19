@@ -1,153 +1,221 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9FE73C32772
-	for <webhook@archiver.kernel.org>; Fri, 19 Aug 2022 09:58:19 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com
- [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web12.1258.1660903093863521734
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 38415C32771
+	for <webhook@archiver.kernel.org>; Fri, 19 Aug 2022 11:31:00 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web11.1998.1660908656999098016
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Aug 2022 02:58:14 -0700
+ Fri, 19 Aug 2022 04:30:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=mgSn/DVZ;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
- invalid domain name (domain: windriver.com, ip: 205.220.178.238,
- mailfrom: prvs=5230971fa8=changqing.li@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
- 27J9Txdu004950
+ dkim=missing;
+ spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.81,
+ mailfrom: f_l_k@t-online.de)
+Received: from fwd75.dcpf.telekom.de (fwd75.aul.t-online.de [10.223.144.101])
+	by mailout03.t-online.de (Postfix) with SMTP id A7F98362
 	for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Aug 2022 09:58:12 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
- h=from : to :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=z98Rd1bNXb+CeAhiiyBN5uj3OWKJJI/59xYiJYypWrQ=;
- b=mgSn/DVZWrZjEGSgYHjXGfABMB/52t4xOotISiqZJlrJllPlS7wkXd/c0NysD53UDRaq
- OhRnXENps9KkUN59l51CXNJCK15RtS2yVKy2pThXmn5o72tZuaXnn4BLw3lAuP5BdOMd
- 7d8hbdyCVof2Z2SOawa8EAhpBrZRfZwk5FqZpaY+sOfP4p0iVLlgt1Jh2ANis1tcasTZ
- sFBiw0k4UtSo9L4Ej5cNXgSk+VXkBF9vGD6fd1OqrbZK3rSoSrn003g4eR6Z2qBP7R7K
- 1nhnh1ZmRZhhZX2wQwIS6/+O4FydWfkURXT4vfi14fx1NS6IsHlDiHClxVGqS5NYg7Aj Uw==
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com
- [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3hx160w925-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Aug 2022 09:58:12 +0000
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Fri, 19 Aug 2022 02:58:05 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27; Fri, 19 Aug 2022 02:58:05 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Fri, 19 Aug 2022 02:58:04 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [kirtstone][master][meta-oe][PATCH] dlt-daemon: fix
- dlt-system.service failed since buffer overflow
-Date: Fri, 19 Aug 2022 17:58:04 +0800
-Message-ID: <20220819095804.1716036-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ Fri, 19 Aug 2022 13:30:54 +0200 (CEST)
+Received: from flk-MS-7C91.. ([84.163.43.141]) by fwd75.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1oP0DF-28geA50; Fri, 19 Aug 2022 13:30:53 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [meta-multimedia][PATCHv2] pipewire: update to v0.3.56
+Date: Fri, 19 Aug 2022 13:30:43 +0200
+Message-Id: <20220819113043.3779-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: AtWMeISQgxfu_Ol8kN7GS79o4nZPxDms
-X-Proofpoint-GUID: AtWMeISQgxfu_Ol8kN7GS79o4nZPxDms
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.517,FMLib:17.11.122.1
- definitions=2022-08-19_05,2022-08-18_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501
- mlxlogscore=999 lowpriorityscore=0 malwarescore=0 mlxscore=0 phishscore=0
- spamscore=0 adultscore=0 bulkscore=0 suspectscore=0 impostorscore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2207270000 definitions=main-2208190039
+X-TOI-EXPURGATEID: 150726::1660908653-01453B16-586FC330/0/0 CLEAN NORMAL
+X-TOI-MSGID: 2a52bd45-9837-486e-ad71-cc76a5d2f4f7
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 19 Aug 2022 09:58:19 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 Aug 2022 11:31:00 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98325
+ https://lists.openembedded.org/g/openembedded-devel/message/98326
 
-From: Changqing Li <changqing.li@windriver.com>
+Add the configuration to make pipewire work as a drop-in replacement for =
+pulseaudio-server.
 
-dlt-system.service start failed with error:
-dlt-system[367]: *** buffer overflow detected ***: terminated
-dlt-system.service: Failed with result 'watchdog'.
-dlt-system.service: Main process exited, code=dumped, status=6/ABRT                                                                                        dlt-system.service: Watchdog timeout (limit 2s)!
+Add pipewire-media-session as a standalone recipe, since pipewire would f=
+etch the code as a
+subproject at do_configure.
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- ...uffer-overflow-detection-on-32bit-ta.patch | 40 +++++++++++++++++++
- .../dlt-daemon/dlt-daemon_2.18.8.bb           |  1 +
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-dlt-system-Fix-buffer-overflow-detection-on-32bit-ta.patch
+ .../pipewire/pipewire-media-session_0.4.1.bb  | 22 ++++++++++
+ ...{pipewire_0.3.50.bb =3D> pipewire_0.3.56.bb} | 42 ++++++++++++++-----
+ 2 files changed, 53 insertions(+), 11 deletions(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire-=
+media-session_0.4.1.bb
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.50.bb =3D=
+> pipewire_0.3.56.bb} (87%)
 
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-dlt-system-Fix-buffer-overflow-detection-on-32bit-ta.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-dlt-system-Fix-buffer-overflow-detection-on-32bit-ta.patch
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-s=
+ession_0.4.1.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire-me=
+dia-session_0.4.1.bb
 new file mode 100644
-index 0000000000..e7e6cb3b1a
+index 000000000..5dd1eb160
 --- /dev/null
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-dlt-system-Fix-buffer-overflow-detection-on-32bit-ta.patch
-@@ -0,0 +1,40 @@
-+From 94378458d653b1edca86435026909592cbe5e793 Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Fri, 19 Aug 2022 11:12:17 +0800
-+Subject: [PATCH] dlt-system: Fix buffer overflow detection on 32bit targets
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_=
+0.4.1.bb
+@@ -0,0 +1,22 @@
++SUMMARY =3D "PipeWire Media Session is an example session manager for Pi=
+peWire"
++HOMEPAGE =3D "https://gitlab.freedesktop.org/pipewire/media-session"
++LICENSE =3D "MIT"
 +
-+On 32bit target, dlt-system will termiated with error:
-+dlt-system: *** buffer overflow detected ***: terminated
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D97be96ca4fab23e9657ffa590b931=
+c1a"
 +
-+Upstream-Status: Submitted [https://github.com/COVESA/dlt-daemon/pull/398]
++DEPENDS =3D " \
++	pipewire \
++	alsa-lib \
++	dbus \
++"
 +
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ src/system/dlt-system-watchdog.c | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
++RRECOMMENDS:${PN} +=3D "pipewire"
 +
-+diff --git a/src/system/dlt-system-watchdog.c b/src/system/dlt-system-watchdog.c
-+index a2b01de..c0eaa12 100644
-+--- a/src/system/dlt-system-watchdog.c
-++++ b/src/system/dlt-system-watchdog.c
-+@@ -109,8 +109,8 @@ int register_watchdog_fd(struct pollfd *pollfd, int fdcnt)
-+ 
-+ void watchdog_fd_handler(int fd)
-+ {
-+-    long int timersElapsed = 0;
-+-    int r = read(fd, &timersElapsed, 8);    // only needed to reset fd event
-++    uint64_t timersElapsed = 0ULL;
-++    int r = read(fd, &timersElapsed, 8U);    // only needed to reset fd event
-+     if(r < 0)
-+         DLT_LOG(watchdogContext, DLT_LOG_ERROR, DLT_STRING("Could not reset systemd watchdog. Exit with: "), 
-+             DLT_STRING(strerror(r)));
-+@@ -120,4 +120,4 @@ void watchdog_fd_handler(int fd)
-+ 
-+     DLT_LOG(watchdogContext, DLT_LOG_DEBUG, DLT_STRING("systemd watchdog waited periodic\n"));
-+ }
-+-#endif
-+\ No newline at end of file
-++#endif
-+-- 
-+2.25.1
++SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/media-session.git;pro=
+tocol=3Dhttps;branch=3Dmaster"
 +
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.8.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.8.bb
-index 7a613bcc93..aa5ef46a9d 100644
---- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.8.bb
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.8.bb
-@@ -18,6 +18,7 @@ SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=https;branch=master \
-            file://0002-Don-t-execute-processes-as-a-specific-user.patch \
-            file://0004-Modify-systemd-config-directory.patch \
-            file://0001-cmake-Link-with-libatomic-on-rv32-rv64.patch \
-+           file://0001-dlt-system-Fix-buffer-overflow-detection-on-32bit-ta.patch \
-            "
- SRCREV = "6a3bd901d825c7206797e36ea98e10a218f5aad2"
- 
--- 
-2.25.1
++S =3D "${WORKDIR}/git"
++SRCREV =3D "e5d5cf2404786af8bcc40bdb8a2962bef4ec18b6"
++
++inherit meson pkgconfig
++
++FILES:${PN} +=3D "${libdir} ${datadir}"
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.=
+bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+similarity index 87%
+rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.b=
+b
+rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+index c176c6eeb..b4256b0df 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+@@ -13,10 +13,9 @@ LIC_FILES_CHKSUM =3D " \
+=20
+ DEPENDS =3D "dbus ncurses"
+=20
+-SRCREV =3D "64cf5e80e6240284e6b757907b900507fe56f1b5"
++SRCREV =3D "f274e53d25ee8f483ac6fce9e516bb1830abe88b"
+ SRC_URI =3D " \
+ 	git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3Dmaster;prot=
+ocol=3Dhttps \
+-	file://0001-spa-fix-c90-header-include.patch \
+ "
+=20
+ S =3D "${WORKDIR}/git"
+@@ -62,7 +61,6 @@ EXTRA_OEMESON +=3D " \
+     -Dudevrulesdir=3D${nonarch_base_libdir}/udev/rules.d/ \
+     -Dsystemd-system-unit-dir=3D${systemd_system_unitdir} \
+     -Dsystemd-user-unit-dir=3D${systemd_user_unitdir} \
+-    -Dvulkan=3Ddisabled \
+     -Dman=3Ddisabled \
+     -Dsession-managers=3D'[]' \
+     -Dlv2=3Ddisabled \
+@@ -72,12 +70,27 @@ EXTRA_OEMESON +=3D " \
+     -Dlegacy-rtkit=3Dfalse \
+ "
+=20
+-PACKAGECONFIG:class-target ??=3D "\
++# spa alsa plugin code uses typedef redefinition, which is officially a =
+C11 feature.
++# Pipewire builds with 'c_std=3Dgnu99' by default. Recent versions of gc=
+c don't issue this warning in gnu99
++# mode but it looks like clang still does
++CFLAGS:append =3D " -Wno-typedef-redefinition"
++
++# According to wireplumber documentation only one session manager should=
+ be installed at a time
++# Possible options are media-session, which has fewer dependencies but i=
+s very simple,
++# or wireplumber, which is more powerful.
++PIPEWIRE_SESSION_MANAGER ??=3D "media-session"
++
++BLUETOOTH_AAC =3D "${@bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'comme=
+rcial', 'bluez-aac', '', d)}"
++
++PACKAGECONFIG:class-target ??=3D " \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'gstreamer', 'gstreamer', 'f=
+fmpeg', d)} \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)}=
+ \
+-    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)=
+} \
+-    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-=
+system-service', '', d)} \
+-    ${@bb.utils.filter('DISTRO_FEATURES', 'alsa', d)} \
+-    gstreamer jack libusb pw-cat raop sndfile v4l2 \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez ${BLUETO=
+OTH_AAC}', '', d)} \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-=
+system-service systemd-user-service', '', d)} \
++    ${@bb.utils.filter('DISTRO_FEATURES', 'alsa dbus vulkan pulseaudio',=
+ d)} \
++    ${@bb.utils.filter('DISTRO_FEATURES', 'alsa dbus vulkan pulseaudio',=
+ d)} \
++    ${PIPEWIRE_SESSION_MANAGER} \
++    jack libusb pw-cat raop sndfile v4l2 udev volume \
+ "
+=20
+ # "jack" and "pipewire-jack" packageconfigs cannot be both enabled,
+@@ -96,6 +109,8 @@ PACKAGECONFIG[jack] =3D "-Djack=3Denabled,-Djack=3Ddis=
+abled,jack,,,pipewire-jack"
+ PACKAGECONFIG[libcamera] =3D "-Dlibcamera=3Denabled,-Dlibcamera=3Ddisabl=
+ed,libcamera"
+ PACKAGECONFIG[libcanberra] =3D "-Dlibcanberra=3Denabled,-Dlibcanberra=3D=
+disabled,libcanberra"
+ PACKAGECONFIG[libusb] =3D "-Dlibusb=3Denabled,-Dlibusb=3Ddisabled,libusb=
+"
++PACKAGECONFIG[media-session] =3D ",,,pipewire-media-session"
++PACKAGECONFIG[pulseaudio] =3D "-Dlibpulse=3Denabled,-Dlibpulse=3Ddisable=
+d,pulseaudio"
+ PACKAGECONFIG[pipewire-alsa] =3D "-Dpipewire-alsa=3Denabled,-Dpipewire-a=
+lsa=3Ddisabled,alsa-lib"
+ PACKAGECONFIG[pipewire-jack] =3D "-Dpipewire-jack=3Denabled -Dlibjack-pa=
+th=3D${libdir}/${PW_MODULE_SUBDIR}/jack,-Dpipewire-jack=3Ddisabled,jack,,=
+,jack"
+ PACKAGECONFIG[pw-cat] =3D "-Dpw-cat=3Denabled,-Dpw-cat=3Ddisabled"
+@@ -109,8 +124,12 @@ PACKAGECONFIG[systemd-system-service] =3D "-Dsystemd=
+-system-service=3Denabled,-Dsyst
+ # currently lacks the feature of enabling user services.
+ PACKAGECONFIG[systemd-user-service] =3D "-Dsystemd-user-service=3Denable=
+d,-Dsystemd-user-service=3Ddisabled,systemd"
+ # pw-cat needs sndfile packageconfig to be enabled
++PACKAGECONFIG[udev] =3D "-Dudev=3Denabled,-Dudev=3Ddisabled,udev"
+ PACKAGECONFIG[v4l2] =3D "-Dv4l2=3Denabled,-Dv4l2=3Ddisabled,udev"
++PACKAGECONFIG[volume] =3D "-Dvolume=3Denabled,-Dvolume=3Ddisabled"
++PACKAGECONFIG[vulkan] =3D "-Dvulkan=3Denabled,-Dvulkan=3Ddisabled,vulkan=
+-headers vulkan-loader"
+ PACKAGECONFIG[webrtc-echo-cancelling] =3D "-Decho-cancel-webrtc=3Denable=
+d,-Decho-cancel-webrtc=3Ddisabled,webrtc-audio-processing"
++PACKAGECONFIG[wireplumber] =3D ",,,wireplumber"
+=20
+ PACKAGESPLITFUNCS:prepend =3D " split_dynamic_packages "
+ PACKAGESPLITFUNCS:append =3D " set_dynamic_metapkg_rdepends "
+@@ -227,10 +246,11 @@ PACKAGES_DYNAMIC =3D "^${PN}-spa-plugins.* ^${PN}-m=
+odules.*"
+ SYSTEMD_SERVICE:${PN} =3D "${@bb.utils.contains('PACKAGECONFIG', 'system=
+d-system-service', 'pipewire.service', '', d)}"
+ CONFFILES:${PN} +=3D "${datadir}/pipewire/pipewire.conf"
+ FILES:${PN} =3D " \
+-    ${datadir}/pipewire/pipewire.conf \
+-    ${systemd_system_unitdir}/pipewire.* \
+-    ${systemd_user_unitdir}/pipewire.* \
++    ${datadir}/pipewire \
++    ${systemd_system_unitdir}/pipewire* \
++    ${systemd_user_unitdir}/pipewire* \
+     ${bindir}/pipewire \
++    ${bindir}/pipewire-avb \
+ "
+=20
+ FILES:${PN}-dev +=3D " \
+--=20
+2.34.1
 
 
