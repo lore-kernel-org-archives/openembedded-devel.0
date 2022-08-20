@@ -2,40 +2,40 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BBB79C25B08
-	for <webhook@archiver.kernel.org>; Sat, 20 Aug 2022 18:02:38 +0000 (UTC)
-Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
- by mx.groups.io with SMTP id smtpd.web12.9215.1661018551146911934
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90DDCC25B08
+	for <webhook@archiver.kernel.org>; Sat, 20 Aug 2022 19:12:12 +0000 (UTC)
+Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
+ by mx.groups.io with SMTP id smtpd.web12.168.1661022724729562351
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 20 Aug 2022 11:02:31 -0700
+ Sat, 20 Aug 2022 12:12:05 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing;
- spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.22,
+ spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.17,
  mailfrom: f_l_k@t-online.de)
-Received: from fwd86.dcpf.telekom.de (fwd86.aul.t-online.de [10.223.144.112])
-	by mailout12.t-online.de (Postfix) with SMTP id C4BAC106BA
+Received: from fwd87.dcpf.telekom.de (fwd87.aul.t-online.de [10.223.144.113])
+	by mailout02.t-online.de (Postfix) with SMTP id 660945938
 	for <openembedded-devel@lists.openembedded.org>;
- Sat, 20 Aug 2022 20:01:47 +0200 (CEST)
-Received: from flk-MS-7C91.. ([84.163.39.106]) by fwd86.t-online.de
+ Sat, 20 Aug 2022 21:12:01 +0200 (CEST)
+Received: from flk-MS-7C91.. ([84.163.39.106]) by fwd87.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1oPSn4-45vZ5t0; Sat, 20 Aug 2022 20:01:47 +0200
+	esmtp id 1oPTsz-2H2zLt0; Sat, 20 Aug 2022 21:11:57 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-multimedia][PATCHv6] pipewire: update to v0.3.56
-Date: Sat, 20 Aug 2022 20:01:39 +0200
-Message-Id: <20220820180139.4779-1-f_l_k@t-online.de>
+Subject: [meta-multimedia][PATCHv7] pipewire: update to v0.3.56
+Date: Sat, 20 Aug 2022 21:11:50 +0200
+Message-Id: <20220820191150.5699-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1661018507-01446235-4D67B2A2/0/0 CLEAN NORMAL
-X-TOI-MSGID: d43dcd32-c310-43c5-b670-e97bb78d00ec
+X-TOI-EXPURGATEID: 150726::1661022717-0144746C-588752D3/0/0 CLEAN NORMAL
+X-TOI-MSGID: dcf1efd7-a699-4c77-b2af-46520d0fd14f
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 20 Aug 2022 18:02:38 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 20 Aug 2022 19:12:12 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98339
+ https://lists.openembedded.org/g/openembedded-devel/message/98340
 
 Add the configuration to make pipewire work as a drop-in replacement for =
 pulseaudio-server.
@@ -195,7 +195,7 @@ similarity index 87%
 rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.b=
 b
 rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
-index c176c6eeb..fc5027938 100644
+index c176c6eeb..421c18fa0 100644
 --- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb
 +++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
 @@ -6,6 +6,7 @@ AUTHOR      =3D "Wim Taymans <wtaymans@redhat.com>"
@@ -265,8 +265,8 @@ system-service', '', d)} \
 OTH_AAC}', '', d)} \
 +    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-=
 system-service systemd-user-service', '', d)} \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'alsa dbus vulkan pulseaudio',=
- d)} \
++    ${@bb.utils.filter('DISTRO_FEATURES', 'alsa vulkan pulseaudio', d)} =
+\
 +    ${PIPEWIRE_SESSION_MANAGER} \
 +    jack libusb pw-cat raop sndfile v4l2 udev volume \
  "
