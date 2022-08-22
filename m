@@ -1,113 +1,275 @@
-Return-Path: <quaresma.jose@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A261C28D13
-	for <webhook@archiver.kernel.org>; Mon, 22 Aug 2022 10:47:54 +0000 (UTC)
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
- [209.85.221.45])
- by mx.groups.io with SMTP id smtpd.web11.16307.1661165265081286381
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 745F0C28D13
+	for <webhook@archiver.kernel.org>; Mon, 22 Aug 2022 14:14:25 +0000 (UTC)
+Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com
+ [209.85.128.175])
+ by mx.groups.io with SMTP id smtpd.web09.18531.1661177658740979675
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Aug 2022 03:47:45 -0700
+ Mon, 22 Aug 2022 07:14:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=CJViIwTD;
- spf=pass (domain: gmail.com, ip: 209.85.221.45,
- mailfrom: quaresma.jose@gmail.com)
-Received: by mail-wr1-f45.google.com with SMTP id bq11so6096017wrb.12
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=K6qz61HV;
+ spf=pass (domain: gmail.com, ip: 209.85.128.175,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f175.google.com with SMTP id
+ 00721157ae682-3375488624aso267810867b3.3
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Aug 2022 03:47:44 -0700 (PDT)
+ Mon, 22 Aug 2022 07:14:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc;
-        bh=r18y0wBD//2v5XrFgFjQg3VqlMsZXS8+pIhRjjuF3VY=;
-        b=CJViIwTD30HetQaJwxvLqCzX8PUNYAL05e6Q3vp1myY+2x9zDBTr66V61c7ZR/3BfV
-         vl/mbcdCk8tGyAAWkd4PHQZFqH2mhrQ4+aGvNyjFmhkjhTxEfHBkmeHFBsAS4/wvFVAa
-         OtUASoy/kMjVnQI3s7Kc4cZ7WSSKTQrQ5bySKoQ3A9P8h1IzNMJM1yr16CNptYwSV2AU
-         ST8DXFaxzYx1raOobVOs/Tx+aqCpLdX2LCdXFPVk0V0/Nagpk+QQ3wzpNpqZfCgTniLe
-         YVf0sEEb5Ejk5b4WCInTglJ2BvXiKkqo1Q22L65uAFt28et2C0aXFB3gE6SMjcU1ZUqY
-         dkrg==
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc;
+        bh=BAmAN+vvbao/G2Jd3v38g9+n2EHx1DtGcs1jYy5fUVE=;
+        b=K6qz61HVYAXUtLUbafYis+knzNA5xABpAmoSTWh93cI/N58sNkcfkDBAtlmy38164C
+         8ZtvyrLdYC6H88yzoJOIEVXYvI2tYlkOqHEWiu/tHNaRECn6QLTz6DXmMaHXgKuaWxRQ
+         mnaJ73e5rXrjIzipURai07VuhSMR6NretvBIT8zC/j6qkdWF7FkcAuU3ZpyhUWzm9TGN
+         x9eeBnODc73bMmfVHoPJhuJYi20PAvQ/Y7FloW/NZL0XKYxOWb5bwSQ6UCM0rkebD0Wo
+         KXe46h1C10tuTrOjcspt4CnMld3bA2m2/8aOYbX6EhU6NvBv2y5kYpIl/K4QDTVsi0c4
+         lnEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
-        bh=r18y0wBD//2v5XrFgFjQg3VqlMsZXS8+pIhRjjuF3VY=;
-        b=GA3tImEtf3/oAMCBXoKG1syAOFxVU6RJA6n0t+AHY5i6w28d4PVmiOe7HDx6FcgqIn
-         APZs0oIvrDq5sKZiRbI4HdsR6sEpoANo4YGnpPnVSm+oXzdgfIfWu81sWB1v+FtqZC/e
-         94BqrUx/V0o6BioOUJEpRnaNBV/vYBZkjod1+f9iAzXDqCUraWaO8StbOK6k6dpsJHDE
-         jhkCGlhK7n+5k2L3s0MxZFY0ZlF4xrmxAvimxQVBZOJJJTA8B/XbtODHywnP6vfOj1kx
-         90gfjmZngfxx/vhP7pgEUhUsPiTRmBVU74CHjIOpp+PkxeBED+4r8cA4Z0pocZRP0bje
-         BQqg==
-X-Gm-Message-State: ACgBeo1IvCjgczrrYE+nNElRDbXu8ZuQvn8ZJ4kFwqWoafqsvWrCHDOb
-	zb85Ln/0s+Whv2RQm6FxZ644UqxHCD8=
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc;
+        bh=BAmAN+vvbao/G2Jd3v38g9+n2EHx1DtGcs1jYy5fUVE=;
+        b=gL7O88V+fRBTk6lZRBDne13uilHlQa4SGXM5NwQ2bArm8wT7jWfaTA2IFUrXInweYs
+         1TtVz0u5i8zavN6qnoWtB9/iHgWXjpBedg+JxT9vLT9M5lB4qimg75TvnAPI8AJ1YcwX
+         OhoRBPcTaop+b7xl6jUI+GNcqm30LrZYi8VmyAtCMd3exeggDO//Fqdw/ak+eMVmAO0A
+         r4JAHtuubMk9Sb57WzwPXi572ObntYfWU+ipjbBwRuKHNsJn24SfRwd8oy+ByMUki0I/
+         gp8uQYyhOVi2ANW18pEPxYkd4R19EW94TwansLyDvcgxHMpbmy8fYAqpabUm5xXpI5Uh
+         mpAA==
+X-Gm-Message-State: ACgBeo2gon24XQKGkjeo6hDtbO30yP1VsWWUiJKhgUlUzVePyZQEBmYb
+	MvVKsCuIJaZNOSh39nq/exziGKMX6Mw/2q5O6Ns=
 X-Google-Smtp-Source: 
- AA6agR7a7UDjJqqEsw3GyiU7VEAyxhnil68vu/lcJtoxPZkIuuixje6TKpCLqvUSl1HmZ0UHV0e0LQ==
-X-Received: by 2002:adf:ce8d:0:b0:225:1fb3:db17 with SMTP id
- r13-20020adfce8d000000b002251fb3db17mr10491873wrn.645.1661165263160;
-        Mon, 22 Aug 2022 03:47:43 -0700 (PDT)
-Received: from og-worker-dev-01.infra.foundries.io.net
- (51-159-19-113.rev.poneytelecom.eu. [51.159.19.113])
-        by smtp.gmail.com with ESMTPSA id
- g12-20020adfa48c000000b00224f5bfa890sm11795283wrb.97.2022.08.22.03.47.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 Aug 2022 03:47:42 -0700 (PDT)
-From: Jose Quaresma <quaresma.jose@gmail.com>
-X-Google-Original-From: Jose Quaresma <jose.quaresma@foundries.io>
-To: openembedded-devel@lists.openembedded.org
-Cc: ricardo@foundries.io,
-	daiane.angolini@foundries.io,
-	Jose Quaresma <jose.quaresma@foundries.io>
-Subject: [meta-networking][master][kirkstone][PATCH 2/2] wireguard-tools: Add
- a new package for wg-quick
-Date: Mon, 22 Aug 2022 10:47:00 +0000
-Message-Id: <20220822104700.1475721-2-jose.quaresma@foundries.io>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220822104700.1475721-1-jose.quaresma@foundries.io>
-References: <20220822104700.1475721-1-jose.quaresma@foundries.io>
+ AA6agR768riIBue23s62q2NkaYLboJAtzvQndOATLsMe57rLEfFlb6QSI9cZj4XZm37GSaX2pqjAoz2YCWkujYNt9qg=
+X-Received: by 2002:a81:1605:0:b0:336:eddd:97ec with SMTP id
+ 5-20020a811605000000b00336eddd97ecmr19302244yww.162.1661177657575; Mon, 22
+ Aug 2022 07:14:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20220820191150.5699-1-f_l_k@t-online.de>
+ <52f6ee030dbf4e88a86e3702a5303d57@axis.com>
+ <DMXYGR.GU3KE5WIU42D1@t-online.de>
+ <301d7b0dabda40eba9b037c87a8fbd4e@axis.com>
+In-Reply-To: <301d7b0dabda40eba9b037c87a8fbd4e@axis.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 22 Aug 2022 07:14:06 -0700
+Message-ID: 
+ <CAMKF1sr+5CqvUjPiaX0n4h1+Dxs7fRGibeWD=GjTYC49GHRZSQ@mail.gmail.com>
+Subject: Re: [oe] [meta-multimedia][PATCHv7] pipewire: update to v0.3.56
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Cc: Markus Volk <f_l_k@t-online.de>,
+	"openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000304eee05e6d51096"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 22 Aug 2022 10:47:54 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 22 Aug 2022 14:14:25 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98364
+ https://lists.openembedded.org/g/openembedded-devel/message/98365
 
-- This will move the dependencie of bash to wg-quick
+--000000000000304eee05e6d51096
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Jose Quaresma <jose.quaresma@foundries.io>
----
- .../wireguard/wireguard-tools_1.0.20210914.bb      | 14 +++++++++++---
- 1 file changed, 11 insertions(+), 3 deletions(-)
+On Mon, Aug 22, 2022 at 1:35 AM Peter Kjellerstedt <
+peter.kjellerstedt@axis.com> wrote:
 
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20210914.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20210914.bb
-index 0c686aae2..20435338c 100644
---- a/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20210914.bb
-+++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20210914.bb
-@@ -16,11 +16,19 @@ do_install () {
-         install
- }
- 
-+PACKAGES += "${PN}-wg-quick"
-+
- FILES:${PN} = " \
-+    ${bindir}/wg \
-     ${sysconfdir} \
-+"
-+FILES:${PN}-wg-quick = " \
-+    ${bindir}/wg-quick \
-     ${systemd_system_unitdir} \
--    ${bindir} \
- "
- 
--RDEPENDS:${PN} = "bash"
--RRECOMMENDS:${PN} = "kernel-module-wireguard"
-+RDEPENDS:${PN}-wg-quick = "${PN} bash"
-+RRECOMMENDS:${PN} = " \
-+    kernel-module-wireguard \
-+    ${PN}-wg-quick \
-+    "
--- 
-2.34.1
+> I still don=E2=80=99t understand how you intend for a =E2=80=9Cgstreamer=
+=E2=80=9D distro feature
+> to work. You use it in the pipewire recipe to decide whether to use the
+> =E2=80=9Cgstreamer=E2=80=9D or =E2=80=9Cffmpeg=E2=80=9D PACKAGECONFIG by =
+default. However, that seems very
+> specific to pipewire. We use both GStreamer and FFmpeg in our products, s=
+o
+> using a distro feature to distinguish between them is not something
+> universal.
+>
 
+I think we should not introduce distro feature here but propose it in core
+first and after that make the change if agreed upon
+
+>
+>
+> //Peter
+>
+>
+>
+> *From:* Markus Volk <f_l_k@t-online.de>
+> *Sent:* den 21 augusti 2022 16:01
+> *To:* Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+> *Cc:* openembedded-devel@lists.openembedded.org
+> *Subject:* RE: [oe] [meta-multimedia][PATCHv7] pipewire: update to v0.3.5=
+6
+>
+>
+>
+>
+>
+> i tried to follow your suggestions,
+>
+> Thanks
+>
+>
+>
+> Am So, 21. Aug 2022 um 12:49:24 +0000 schrieb Peter Kjellerstedt <
+> peter.kjellerstedt@axis.com>:
+>
+> AFAIK, there are no current examples of "gstreamer" being used a distro
+> feature. What is it supposed to mean? When is it supposed to be used? Why
+> is it needed?
+>
+>
+>
+>
+>
+> I found an example of this, but I must confess that this was in an old
+> third-party layer. What I want this DISTRO_FEATURE for is the ability to
+> use it to enable/disable gstreamer support in recipes. Not just here in
+> pipewire. The same goes for Jack. Is this already used as a DISTRO_FEATUR=
+E?
+> If so, maybe we could use it to make the Jack server depend on it instead
+> of always building it as it currently does?
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#98361):
+> https://lists.openembedded.org/g/openembedded-devel/message/98361
+> Mute This Topic: https://lists.openembedded.org/mt/93149934/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--000000000000304eee05e6d51096
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Mon, Aug 22, 2022 at 1:35 AM Peter Kjellerstedt &lt;<a h=
+ref=3D"mailto:peter.kjellerstedt@axis.com">peter.kjellerstedt@axis.com</a>&=
+gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0=
+ .8ex;border-left:1px #ccc solid;padding-left:1ex">
+
+
+
+
+
+<div lang=3D"SV" link=3D"#0563C1" vlink=3D"#954F72" style=3D"word-wrap:brea=
+k-word">
+<div class=3D"m_-3199117474822256842WordSection1">
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"color:#943634">I still=
+ don=E2=80=99t understand how you intend for a =E2=80=9Cgstreamer=E2=80=9D =
+distro feature to work. You use it in the pipewire recipe to decide whether=
+ to use the =E2=80=9Cgstreamer=E2=80=9D or =E2=80=9Cffmpeg=E2=80=9D
+ PACKAGECONFIG by default. However, that seems very specific to pipewire. W=
+e use both GStreamer and FFmpeg in our products, so using a distro feature =
+to distinguish between them is not something universal.</span></p></div></d=
+iv></blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">I think we sh=
+ould not introduce distro feature here but propose it in core first and aft=
+er that make the change if agreed upon=C2=A0</div><blockquote class=3D"gmai=
+l_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left=
+:1ex"><div lang=3D"SV" link=3D"#0563C1" vlink=3D"#954F72" style=3D"word-wra=
+p:break-word"><div class=3D"m_-3199117474822256842WordSection1"><p class=3D=
+"MsoNormal" dir=3D"auto"><span lang=3D"EN-US" style=3D"color:#943634"><u></=
+u><u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"color:#943634"><u></u>=
+=C2=A0<u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"color:#943634">//Peter=
+<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"color:#943634"><u></u>=
+=C2=A0<u></u></span></p>
+<div style=3D"border:none;border-left:solid blue 1.5pt;padding:0cm 0cm 0cm =
+4.0pt">
+<div>
+<div style=3D"border:none;border-top:solid #e1e1e1 1.0pt;padding:3.0pt 0cm =
+0cm 0cm">
+<p class=3D"MsoNormal"><b><span lang=3D"EN-US">From:</span></b><span lang=
+=3D"EN-US"> Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" target=3D"=
+_blank">f_l_k@t-online.de</a>&gt;
+<br>
+<b>Sent:</b> den 21 augusti 2022 16:01<br>
+<b>To:</b> Peter Kjellerstedt &lt;<a href=3D"mailto:peter.kjellerstedt@axis=
+.com" target=3D"_blank">peter.kjellerstedt@axis.com</a>&gt;<br>
+<b>Cc:</b> <a href=3D"mailto:openembedded-devel@lists.openembedded.org" tar=
+get=3D"_blank">openembedded-devel@lists.openembedded.org</a><br>
+<b>Subject:</b> RE: [oe] [meta-multimedia][PATCHv7] pipewire: update to v0.=
+3.56<u></u><u></u></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div id=3D"m_-3199117474822256842geary-body">
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<div>
+<div>
+<p class=3D"MsoNormal">i tried to follow your suggestions,<u></u><u></u></p=
+>
+</div>
+<div>
+<p class=3D"MsoNormal">Thanks<u></u><u></u></p>
+</div>
+</div>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<p class=3D"MsoNormal">Am So, 21. Aug 2022 um 12:49:24 +0000 schrieb Peter =
+Kjellerstedt &lt;<a href=3D"mailto:peter.kjellerstedt@axis.com" target=3D"_=
+blank">peter.kjellerstedt@axis.com</a>&gt;:<br>
+<br>
+<u></u><u></u></p>
+<blockquote style=3D"margin-top:5.0pt;margin-bottom:5.0pt">
+<div>
+<p class=3D"MsoNormal">AFAIK, there are no current examples of &quot;gstrea=
+mer&quot; being used a distro feature. What is it supposed to mean? When is=
+ it supposed to be used? Why is it needed?<u></u><u></u></p>
+</div>
+</blockquote>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<div>
+<div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+</div>
+<div>
+<p class=3D"MsoNormal">I found an example of this, but I must confess that =
+this was in an old third-party layer. What I want this DISTRO_FEATURE for i=
+s the ability to use it to enable/disable gstreamer support in recipes. Not=
+ just here in pipewire. The same goes
+ for Jack. Is this already used as a DISTRO_FEATURE? If so, maybe we could =
+use it to make the Jack server depend on it instead of always building it a=
+s it currently does?<u></u><u></u></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#98361): <a href=3D"https://lists.openembedded.org/g/ope=
+nembedded-devel/message/98361" rel=3D"noreferrer" target=3D"_blank">https:/=
+/lists.openembedded.org/g/openembedded-devel/message/98361</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/93149934/1997=
+914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/93149934/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--000000000000304eee05e6d51096--
 
