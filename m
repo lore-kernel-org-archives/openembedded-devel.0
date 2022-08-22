@@ -2,395 +2,316 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F232CC28D13
-	for <webhook@archiver.kernel.org>; Mon, 22 Aug 2022 05:08:02 +0000 (UTC)
-Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com
- [209.85.128.169])
- by mx.groups.io with SMTP id smtpd.web10.14806.1661144881444083442
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 019CCC28D13
+	for <webhook@archiver.kernel.org>; Mon, 22 Aug 2022 05:18:23 +0000 (UTC)
+Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com
+ [209.85.128.176])
+ by mx.groups.io with SMTP id smtpd.web10.14852.1661145497278470645
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 21 Aug 2022 22:08:01 -0700
+ Sun, 21 Aug 2022 22:18:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=WxSSwufP;
- spf=pass (domain: gmail.com, ip: 209.85.128.169,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=gVAJIPV0;
+ spf=pass (domain: gmail.com, ip: 209.85.128.176,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f169.google.com with SMTP id
- 00721157ae682-33365a01f29so262756687b3.2
+Received: by mail-yw1-f176.google.com with SMTP id
+ 00721157ae682-333b049f231so263251627b3.1
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 21 Aug 2022 22:08:01 -0700 (PDT)
+ Sun, 21 Aug 2022 22:18:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc;
-        bh=LT2rPCCvV2UjsSDme8fVgRpVyeu7AA3ONWC2NSJiPgA=;
-        b=WxSSwufP0nmtSIWp2U892wcS4vH1kp5tjYA8pkl7Hjb/DeQakbuEcE5IAXYYin2MhI
-         L6vNHhFTsqiuOYAkih8QIki4ifEdRGDH3Q6ir6Zyuj2gLaOqKZNVxjfPJtqWQcSrLxZp
-         7oS0ZEH8snGW3UXBzfFvw1LDhlRZc52sFlAyVD2KogbJUYCTxrRgOWlWppZz5szSvCdZ
-         Y0oaMch62kuZydkKlRTCi5rjn21kcHE4kIc9EtgN2V6tKz/MI6C1ueQ3kWwD4BCfBbr3
-         qdErfgBCDjTJ8E6Xp7uk5nWCmNd/PNxKAer+NitN7r34tQINDNJeCdjsvdvoMyD13W0I
-         uAlA==
+        bh=i6uUzLRSntXdiR77GfDhPZqFmI1lmB/4/6CdX29+4NA=;
+        b=gVAJIPV0aAOG9z5w6i0vrag722FqBkgsbZ9g1jrOJNYtftGV79u7cCkKRFZYSlsYEb
+         mJ89SAeNrHRggqu/2KPDk7n9MhLhKoKuRblQcmjEq3hrDGoFuHhsIc/Q8LZmBdQHeqY9
+         Oa+cgOfWJYJ7bPVnzUVbA7QVCGz3rPLmiAVZqInY0am4bGuKEe6RGVW7kV4QGJyQJpUa
+         JJBx9ZJ+57XjaJ8p1tf1WxZmQNvZZVe8huKKD1PB6mCXCF0hoDhiA6qSHBgy5TO07OcW
+         w18VIUER1rpSx3/Phgpw5do06Z4s3A2+mzJ9bRNCeHLc69SlSpknShzxFnMOmyrOp26O
+         rYKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc;
-        bh=LT2rPCCvV2UjsSDme8fVgRpVyeu7AA3ONWC2NSJiPgA=;
-        b=WmOPKAuZOuUNZtqUC5r6gZlU7PeovtXayRVJwr4pggQ1rewYvkC6SIUI+8OvkCAvJs
-         P3KkClYg44Tf5TwTcaUzRauooxm0uhPomfpyFAU7Mlgb1SH4nRl095drR76PVBtO5NK+
-         Xe7fwb5xcIOjRcf8TrD1k0lhyTCtnhyQgTetMLQcH2rhEL5jdJV3HjK7YC+ASOMLCahq
-         A/TPcEpknIeKQ1hw6T3DAcdyRW/0WuWy1gCxX9wX8lfgMrwzh4tp1nSGlK2sR6VHjfIz
-         EaA0CjcuDYcx9LwP66SZfWjDv2knv0r1ifKPuummgVNUCCWRv1Ub3el7M7PZDYhNgRbD
-         8NIQ==
-X-Gm-Message-State: ACgBeo0zi2QKelMxFr/yJLXBKRWqrjIJ1z25TQ3BgVCS+Bt728jP9jtE
-	t+cRDNP0r446lrAnlif0ybqjbU1gUQ5bwpr4wSk=
+        bh=i6uUzLRSntXdiR77GfDhPZqFmI1lmB/4/6CdX29+4NA=;
+        b=6aNn9gCs8+0V8gBu8L15nnzdjcc4FoPli6pFtrSBkPOjGBWh1Ti9fgeXF097TM9HeN
+         Ql4p9ckN0pCVH2h/BRU+IoT05Cgd73Fgf+2J32bp/UGcCvhTYPrffCfLoylYSQ6Ct1Jm
+         4bqvfRv8XST3T12TmVAh4lq5WqvmnYWLB4t49Hv7HFWW6+dA1OszNNWD/yg3evDaAVk5
+         AzQhY97Way02qvEYKNyJBsAleRlCGBY2ZuE/I6INgDmUC88m45wCXRIl2M8JCMDvKLqR
+         ub6Fah3Ow3ZgEQp3AZ9zKB7yIjEVClWAXF2LR5PR4wvWVbg0/M3UxDLnWMyegGlgn2nD
+         dDBw==
+X-Gm-Message-State: ACgBeo2hvmgfDrfmlDGE1Tm5jso7nqEnpaqZtowKkCq7jOR3+bPPdfHI
+	1+8fah+sWvllaVjpKxMDrupD1RAaxSoMp91aG90=
 X-Google-Smtp-Source: 
- AA6agR6/tSJ4rRp7YztUtkDSmopTgJvNEu5qoKtZ6/nZMFUKldbNmRqkNrlL2Yq4eIaEKhmzPYDUcx+rrFXi2cm7dwc=
-X-Received: by 2002:a81:b61c:0:b0:333:9118:4020 with SMTP id
- u28-20020a81b61c000000b0033391184020mr17898896ywh.282.1661144880441; Sun, 21
- Aug 2022 22:08:00 -0700 (PDT)
+ AA6agR5RZxkT0zSAK1/TcrA4QPHxc2mGq8yYR94IGNKoRdJrkJszjPK25Yms0zPlMa5KXFg/kTYKAcbEmAQpl7C/Az8=
+X-Received: by 2002:a0d:edc2:0:b0:338:957:a719 with SMTP id
+ w185-20020a0dedc2000000b003380957a719mr14255015ywe.132.1661145496208; Sun, 21
+ Aug 2022 22:18:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220608163628.5745-1-potin.lai.pt@gmail.com>
- <CAMKF1sqpcSuHwd5tPz6R=WQ=Yo=yZneTCYSk9LQhq98kBgQPDg@mail.gmail.com>
- <c60f9137-1f91-2393-61e0-8d6834ad5663@gmail.com>
-In-Reply-To: <c60f9137-1f91-2393-61e0-8d6834ad5663@gmail.com>
+References: <20220821140240.123638-1-f_l_k@t-online.de>
+In-Reply-To: <20220821140240.123638-1-f_l_k@t-online.de>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 21 Aug 2022 22:07:49 -0700
+Date: Sun, 21 Aug 2022 22:17:50 -0700
 Message-ID: 
- <CAMKF1srG_1YAOtoL0ch95425eRmxggvwmtci3Z=Ahm3Kac6UdA@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH v3 1/1] mdio-tools: add recipes
-To: Potin Lai <potin.lai.pt@gmail.com>
-Cc: Enguerrand de Ribaucourt <enguerrand.de-ribaucourt@savoirfairelinux.com>,
-	Patrick Williams <patrick@stwcx.xyz>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="00000000000084ed5e05e6cd6e9e"
+ <CAMKF1so_YYOK4KXdfJH=F6G7rOV9a8_9wRr5CkdDVCr6eOJDew@mail.gmail.com>
+Subject: Re: [oe] [meta-multimedia][PATCHv8] pipewire: update to v0.3.56
+To: Markus Volk <f_l_k@t-online.de>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 22 Aug 2022 05:08:02 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 22 Aug 2022 05:18:23 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98349
+ https://lists.openembedded.org/g/openembedded-devel/message/98350
 
---00000000000084ed5e05e6cd6e9e
-Content-Type: text/plain; charset="UTF-8"
+I still see a compile error on mips with latest version of this patch see
 
-On Sun, Aug 21, 2022 at 8:53 PM Potin Lai <potin.lai.pt@gmail.com> wrote:
+https://errors.yoctoproject.org/Errors/Details/669138/
 
+On Sun, Aug 21, 2022 at 7:02 AM Markus Volk <f_l_k@t-online.de> wrote:
 >
-> On 6/30/22 18:59, Khem Raj wrote:
-> > This fails to build on master with latest linux-yocto for kernel.
-> >
-> > https://errors.yoctoproject.org/Errors/Details/659130/
-> Hi Maintainer,
+> Add the configuration to make pipewire work as a drop-in replacement for pulseaudio-server.
 >
-> The kernel config for enable MDIO feature has merged into
-> yocto-kernel-cache.
-> LINK:
-> https://git.yoctoproject.org/yocto-kernel-cache/commit/?h=yocto-5.15&id=0d58e2d6a7824df62129af91bbe9fadfdb5f9dce
+> Add pipewire-media-session as a standalone recipe, since pipewire would fetch the code as a
+> subproject at do_configure.
 >
-> This patch should compiled for qemuarm by now, and I have tested with
-> local build.
-> Just wondering that how to trigger patch merging process for this patch
-> again? should I resend this patch with new version?
-
-
-Yes please send a version tested with latest master of core metadata
-
-
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> ---
+>  .../pipewire/pipewire-media-session_0.4.1.bb  | 25 ++++++++++
+>  ...01-avb-fix-compilation-on-big-endian.patch | 27 +++++++++++
+>  .../0001-spa-fix-c90-header-include.patch     | 47 -------------------
+>  ...{pipewire_0.3.50.bb => pipewire_0.3.56.bb} | 43 ++++++++++++-----
+>  4 files changed, 84 insertions(+), 58 deletions(-)
+>  create mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb
+>  create mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-avb-fix-compilation-on-big-endian.patch
+>  delete mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-spa-fix-c90-header-include.patch
+>  rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.50.bb => pipewire_0.3.56.bb} (86%)
 >
-> Thanks,
-> Potin
-> > On Wed, Jun 8, 2022 at 12:39 PM Potin Lai <potin.lai.pt@gmail.com>
-> wrote:
-> >> From: Enguerrand de Ribaucourt <
-> enguerrand.de-ribaucourt@savoirfairelinux.com>
-> >>
-> >> Self-description from the README: mdio-tools is a low-level debug tool
-> >> for communicating with devices attached to an MDIO bus.
-> >>
-> >> Signed-off-by: Enguerrand de Ribaucourt <
-> enguerrand.de-ribaucourt@savoirfairelinux.com>
-> >> Signed-off-by: Potin Lai <potin.lai.pt@gmail.com>
-> >> ---
-> >>
-> >> LINK: [v2]
-> https://lore.kernel.org/all/20220201142608.186135-1-enguerrand.de-ribaucourt@savoirfairelinux.com/
-> >> LINK: [v1]
-> https://lore.kernel.org/all/20220107150722.2221609-1-enguerrand.de-ribaucourt@savoirfairelinux.com/
-> >>
-> >> change v2 --> v3:
-> >> * update version to 1.1.1
-> >>
-> >> change v1 --> v2:
-> >> * moved in recipes-support
-> >> * removed version in mdio-tools_1.0.1.inc filename
-> >>
-> >> ---
-> >>  .../recipes-support/mdio-tools/mdio-netlink_git.bb  | 13 +++++++++++++
-> >>  .../recipes-support/mdio-tools/mdio-tools.inc       |  9 +++++++++
-> >>  .../recipes-support/mdio-tools/mdio-tools_git.bb    |  9 +++++++++
-> >>  3 files changed, 31 insertions(+)
-> >>  create mode 100644 meta-networking/recipes-support/mdio-tools/
-> mdio-netlink_git.bb
-> >>  create mode 100644
-> meta-networking/recipes-support/mdio-tools/mdio-tools.inc
-> >>  create mode 100644 meta-networking/recipes-support/mdio-tools/
-> mdio-tools_git.bb
-> >>
-> >> diff --git a/meta-networking/recipes-support/mdio-tools/
-> mdio-netlink_git.bb b/meta-networking/recipes-support/mdio-tools/
-> mdio-netlink_git.bb
-> >> new file mode 100644
-> >> index 000000000..b50d33f90
-> >> --- /dev/null
-> >> +++ b/meta-networking/recipes-support/mdio-tools/mdio-netlink_git.bb
-> >> @@ -0,0 +1,13 @@
-> >> +require mdio-tools.inc
-> >> +
-> >> +DEPENDS += "virtual/kernel libmnl"
-> >> +# This module requires Linux 5.6 higher
-> >> +
-> >> +S = "${WORKDIR}/git/kernel"
-> >> +
-> >> +inherit module
-> >> +
-> >> +EXTRA_OEMAKE = "KDIR=${STAGING_KERNEL_DIR}"
-> >> +MODULES_INSTALL_TARGET = "install"
-> >> +
-> >> +RPROVIDES:${PN} += "kernel-module-mdio-netlink"
-> >> diff --git a/meta-networking/recipes-support/mdio-tools/mdio-tools.inc
-> b/meta-networking/recipes-support/mdio-tools/mdio-tools.inc
-> >> new file mode 100644
-> >> index 000000000..a37500d93
-> >> --- /dev/null
-> >> +++ b/meta-networking/recipes-support/mdio-tools/mdio-tools.inc
-> >> @@ -0,0 +1,9 @@
-> >> +DESCRIPTION = "A low-level debug tool for communicating with devices
-> attached to an MDIO bus"
-> >> +SECTION = "networking"
-> >> +HOMEPAGE = "https://github.com/wkz/mdio-tools"
-> >> +LICENSE = "GPLv2"
-> >> +LIC_FILES_CHKSUM =
-> "file://${WORKDIR}/git/COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> >> +
-> >> +SRC_URI = "git://
-> github.com/wkz/mdio-tools.git;protocol=https;branch=master"
-> >> +SRCREV = "07cbff2d5e2de05037e5e7edd5044d678394c8d1"
-> >> +PV = "1.1.1"
-> >> diff --git a/meta-networking/recipes-support/mdio-tools/
-> mdio-tools_git.bb b/meta-networking/recipes-support/mdio-tools/
-> mdio-tools_git.bb
-> >> new file mode 100644
-> >> index 000000000..cd4df3da0
-> >> --- /dev/null
-> >> +++ b/meta-networking/recipes-support/mdio-tools/mdio-tools_git.bb
-> >> @@ -0,0 +1,9 @@
-> >> +require mdio-tools.inc
-> >> +
-> >> +DEPENDS += "libmnl"
-> >> +
-> >> +S = "${WORKDIR}/git"
-> >> +
-> >> +inherit pkgconfig autotools
-> >> +
-> >> +RDEPENDS:${PN} = "kernel-module-mdio-netlink"
-> >> --
-> >> 2.17.1
-> >>
-> >>
-> >> -=-=-=-=-=-=-=-=-=-=-=-
-> >> Links: You receive all messages sent to this group.
-> >> View/Reply Online (#97444):
-> https://lists.openembedded.org/g/openembedded-devel/message/97444
-> >> Mute This Topic: https://lists.openembedded.org/mt/91627189/1997914
-> >> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> >> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub
-> [raj.khem@gmail.com]
-> >> -=-=-=-=-=-=-=-=-=-=-=-
-> >>
+> diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb
+> new file mode 100644
+> index 000000000..9fdb60380
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.1.bb
+> @@ -0,0 +1,25 @@
+> +SUMMARY = "PipeWire Media Session is an example session manager for PipeWire"
+> +HOMEPAGE = "https://gitlab.freedesktop.org/pipewire/media-session"
+> +LICENSE = "MIT"
+> +
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=97be96ca4fab23e9657ffa590b931c1a"
+> +
+> +DEPENDS = " \
+> +       pipewire \
+> +       alsa-lib \
+> +       dbus \
+> +"
+> +
+> +SRC_URI = "git://gitlab.freedesktop.org/pipewire/media-session.git;protocol=https;branch=master"
+> +
+> +S = "${WORKDIR}/git"
+> +SRCREV = "e5d5cf2404786af8bcc40bdb8a2962bef4ec18b6"
+> +
+> +inherit meson pkgconfig
+> +
+> +FILES:${PN} += " \
+> +       ${systemd_user_unitdir}/pipewire-media-session.service \
+> +       ${datadir}/pipewire/media-session.d/* \
+> +"
+> +
+> +RRECOMMENDS:${PN} += "pipewire"
+> diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-avb-fix-compilation-on-big-endian.patch b/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-avb-fix-compilation-on-big-endian.patch
+> new file mode 100644
+> index 000000000..48a1102dc
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-avb-fix-compilation-on-big-endian.patch
+> @@ -0,0 +1,27 @@
+> +From 1a5ec4452fa21592eaeeb823ad95a1db6eb60376 Mon Sep 17 00:00:00 2001
+> +From: Wim Taymans <wtaymans@redhat.com>
+> +Date: Tue, 19 Jul 2022 13:49:42 +0200
+> +Subject: [PATCH 001/113] avb: fix compilation on big endian
+> +
+> +Patch-Status: Backport
+> +
+> +---
+> + src/modules/module-avb/aaf.h | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/src/modules/module-avb/aaf.h b/src/modules/module-avb/aaf.h
+> +index cb4871ca6..b444ce251 100644
+> +--- a/src/modules/module-avb/aaf.h
+> ++++ b/src/modules/module-avb/aaf.h
+> +@@ -35,7 +35,7 @@ struct avb_packet_aaf {
+> +       unsigned gv:1;
+> +       unsigned tv:1;
+> +
+> +-      uint8_t seq_number;
+> ++      uint8_t seq_num;
+> +
+> +       unsigned _r2:7;
+> +       unsigned tu:1;
+> +--
+> +2.34.1
+> +
+> diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-spa-fix-c90-header-include.patch b/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-spa-fix-c90-header-include.patch
+> deleted file mode 100644
+> index ad6448a10..000000000
+> --- a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-spa-fix-c90-header-include.patch
+> +++ /dev/null
+> @@ -1,47 +0,0 @@
+> -From d3ea3142e1a4de206e616bc18f63a529e6b4986a Mon Sep 17 00:00:00 2001
+> -From: psykose <alice@ayaya.dev>
+> -Date: Wed, 13 Apr 2022 21:57:49 +0000
+> -Subject: [PATCH 001/154] spa: fix c90 header include
+> -
+> -placing declarations after code is invalid under ISO c90
+> -
+> -Fixes !1211
+> -
+> -Patch-Status: Backport
+> ----
+> - spa/include/spa/utils/string.h | 6 ++++--
+> - 1 file changed, 4 insertions(+), 2 deletions(-)
+> -
+> -diff --git a/spa/include/spa/utils/string.h b/spa/include/spa/utils/string.h
+> -index e80434537..43d19616c 100644
+> ---- a/spa/include/spa/utils/string.h
+> -+++ b/spa/include/spa/utils/string.h
+> -@@ -276,10 +276,11 @@ static inline int spa_scnprintf(char *buffer, size_t size, const char *format, .
+> - static inline float spa_strtof(const char *str, char **endptr)
+> - {
+> -       static locale_t locale = NULL;
+> -+      locale_t prev;
+> -       float v;
+> -       if (SPA_UNLIKELY(locale == NULL))
+> -               locale = newlocale(LC_ALL_MASK, "C", NULL);
+> --      locale_t prev = uselocale(locale);
+> -+      prev = uselocale(locale);
+> -       v = strtof(str, endptr);
+> -       uselocale(prev);
+> -       return v;
+> -@@ -319,10 +320,11 @@ static inline bool spa_atof(const char *str, float *val)
+> - static inline double spa_strtod(const char *str, char **endptr)
+> - {
+> -       static locale_t locale = NULL;
+> -+      locale_t prev;
+> -       double v;
+> -       if (SPA_UNLIKELY(locale == NULL))
+> -               locale = newlocale(LC_ALL_MASK, "C", NULL);
+> --      locale_t prev = uselocale(locale);
+> -+      prev = uselocale(locale);
+> -       v = strtod(str, endptr);
+> -       uselocale(prev);
+> -       return v;
+> ---
+> -2.25.1
+> -
+> diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+> similarity index 86%
+> rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb
+> rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+> index c176c6eeb..6c6d6a91a 100644
+> --- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb
+> +++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
+> @@ -13,10 +13,10 @@ LIC_FILES_CHKSUM = " \
 >
-
---00000000000084ed5e05e6cd6e9e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Sun, Aug 21, 2022 at 8:53 PM Potin Lai &lt;<a href=3D"ma=
-ilto:potin.lai.pt@gmail.com">potin.lai.pt@gmail.com</a>&gt; wrote:<br></div=
-><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border=
--left-width:1px;border-left-style:solid;padding-left:1ex;border-left-color:=
-rgb(204,204,204)"><br>
-On 6/30/22 18:59, Khem Raj wrote:<br>
-&gt; This fails to build on master with latest linux-yocto for kernel.<br>
-&gt;<br>
-&gt; <a href=3D"https://errors.yoctoproject.org/Errors/Details/659130/" rel=
-=3D"noreferrer" target=3D"_blank">https://errors.yoctoproject.org/Errors/De=
-tails/659130/</a><br>
-Hi Maintainer,<br>
-<br>
-The kernel config for enable MDIO feature has merged into yocto-kernel-cach=
-e.<br>
-LINK: <a href=3D"https://git.yoctoproject.org/yocto-kernel-cache/commit/?h=
-=3Dyocto-5.15&amp;id=3D0d58e2d6a7824df62129af91bbe9fadfdb5f9dce" rel=3D"nor=
-eferrer" target=3D"_blank">https://git.yoctoproject.org/yocto-kernel-cache/=
-commit/?h=3Dyocto-5.15&amp;id=3D0d58e2d6a7824df62129af91bbe9fadfdb5f9dce</a=
-><br>
-<br>
-This patch should compiled for qemuarm by now, and I have tested with local=
- build.<br>
-Just wondering that how to trigger patch merging process for this patch aga=
-in? should I resend this patch with new version?</blockquote><div dir=3D"au=
-to"><br></div><div dir=3D"auto">Yes please send a version tested with lates=
-t master of core metadata=C2=A0</div><div dir=3D"auto"><br></div><blockquot=
-e class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width=
-:1px;border-left-style:solid;padding-left:1ex;border-left-color:rgb(204,204=
-,204)" dir=3D"auto"><br>
-<br>
-Thanks,<br>
-Potin<br>
-&gt; On Wed, Jun 8, 2022 at 12:39 PM Potin Lai &lt;<a href=3D"mailto:potin.=
-lai.pt@gmail.com" target=3D"_blank">potin.lai.pt@gmail.com</a>&gt; wrote:<b=
-r>
-&gt;&gt; From: Enguerrand de Ribaucourt &lt;<a href=3D"mailto:enguerrand.de=
--ribaucourt@savoirfairelinux.com" target=3D"_blank">enguerrand.de-ribaucour=
-t@savoirfairelinux.com</a>&gt;<br>
-&gt;&gt;<br>
-&gt;&gt; Self-description from the README: mdio-tools is a low-level debug =
-tool<br>
-&gt;&gt; for communicating with devices attached to an MDIO bus.<br>
-&gt;&gt;<br>
-&gt;&gt; Signed-off-by: Enguerrand de Ribaucourt &lt;<a href=3D"mailto:engu=
-errand.de-ribaucourt@savoirfairelinux.com" target=3D"_blank">enguerrand.de-=
-ribaucourt@savoirfairelinux.com</a>&gt;<br>
-&gt;&gt; Signed-off-by: Potin Lai &lt;<a href=3D"mailto:potin.lai.pt@gmail.=
-com" target=3D"_blank">potin.lai.pt@gmail.com</a>&gt;<br>
-&gt;&gt; ---<br>
-&gt;&gt;<br>
-&gt;&gt; LINK: [v2] <a href=3D"https://lore.kernel.org/all/20220201142608.1=
-86135-1-enguerrand.de-ribaucourt@savoirfairelinux.com/" rel=3D"noreferrer" =
-target=3D"_blank">https://lore.kernel.org/all/20220201142608.186135-1-engue=
-rrand.de-ribaucourt@savoirfairelinux.com/</a><br>
-&gt;&gt; LINK: [v1] <a href=3D"https://lore.kernel.org/all/20220107150722.2=
-221609-1-enguerrand.de-ribaucourt@savoirfairelinux.com/" rel=3D"noreferrer"=
- target=3D"_blank">https://lore.kernel.org/all/20220107150722.2221609-1-eng=
-uerrand.de-ribaucourt@savoirfairelinux.com/</a><br>
-&gt;&gt;<br>
-&gt;&gt; change v2 --&gt; v3:<br>
-&gt;&gt; * update version to 1.1.1<br>
-&gt;&gt;<br>
-&gt;&gt; change v1 --&gt; v2:<br>
-&gt;&gt; * moved in recipes-support<br>
-&gt;&gt; * removed version in mdio-tools_1.0.1.inc filename<br>
-&gt;&gt;<br>
-&gt;&gt; ---<br>
-&gt;&gt;=C2=A0 .../recipes-support/mdio-tools/<a href=3D"http://mdio-netlin=
-k_git.bb" rel=3D"noreferrer" target=3D"_blank">mdio-netlink_git.bb</a>=C2=
-=A0 | 13 +++++++++++++<br>
-&gt;&gt;=C2=A0 .../recipes-support/mdio-tools/mdio-tools.inc=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0|=C2=A0 9 +++++++++<br>
-&gt;&gt;=C2=A0 .../recipes-support/mdio-tools/<a href=3D"http://mdio-tools_=
-git.bb" rel=3D"noreferrer" target=3D"_blank">mdio-tools_git.bb</a>=C2=A0 =
-=C2=A0 |=C2=A0 9 +++++++++<br>
-&gt;&gt;=C2=A0 3 files changed, 31 insertions(+)<br>
-&gt;&gt;=C2=A0 create mode 100644 meta-networking/recipes-support/mdio-tool=
-s/<a href=3D"http://mdio-netlink_git.bb" rel=3D"noreferrer" target=3D"_blan=
-k">mdio-netlink_git.bb</a><br>
-&gt;&gt;=C2=A0 create mode 100644 meta-networking/recipes-support/mdio-tool=
-s/mdio-tools.inc<br>
-&gt;&gt;=C2=A0 create mode 100644 meta-networking/recipes-support/mdio-tool=
-s/<a href=3D"http://mdio-tools_git.bb" rel=3D"noreferrer" target=3D"_blank"=
->mdio-tools_git.bb</a><br>
-&gt;&gt;<br>
-&gt;&gt; diff --git a/meta-networking/recipes-support/mdio-tools/<a href=3D=
-"http://mdio-netlink_git.bb" rel=3D"noreferrer" target=3D"_blank">mdio-netl=
-ink_git.bb</a> b/meta-networking/recipes-support/mdio-tools/<a href=3D"http=
-://mdio-netlink_git.bb" rel=3D"noreferrer" target=3D"_blank">mdio-netlink_g=
-it.bb</a><br>
-&gt;&gt; new file mode 100644<br>
-&gt;&gt; index 000000000..b50d33f90<br>
-&gt;&gt; --- /dev/null<br>
-&gt;&gt; +++ b/meta-networking/recipes-support/mdio-tools/<a href=3D"http:/=
-/mdio-netlink_git.bb" rel=3D"noreferrer" target=3D"_blank">mdio-netlink_git=
-.bb</a><br>
-&gt;&gt; @@ -0,0 +1,13 @@<br>
-&gt;&gt; +require mdio-tools.inc<br>
-&gt;&gt; +<br>
-&gt;&gt; +DEPENDS +=3D &quot;virtual/kernel libmnl&quot;<br>
-&gt;&gt; +# This module requires Linux 5.6 higher<br>
-&gt;&gt; +<br>
-&gt;&gt; +S =3D &quot;${WORKDIR}/git/kernel&quot;<br>
-&gt;&gt; +<br>
-&gt;&gt; +inherit module<br>
-&gt;&gt; +<br>
-&gt;&gt; +EXTRA_OEMAKE =3D &quot;KDIR=3D${STAGING_KERNEL_DIR}&quot;<br>
-&gt;&gt; +MODULES_INSTALL_TARGET =3D &quot;install&quot;<br>
-&gt;&gt; +<br>
-&gt;&gt; +RPROVIDES:${PN} +=3D &quot;kernel-module-mdio-netlink&quot;<br>
-&gt;&gt; diff --git a/meta-networking/recipes-support/mdio-tools/mdio-tools=
-.inc b/meta-networking/recipes-support/mdio-tools/mdio-tools.inc<br>
-&gt;&gt; new file mode 100644<br>
-&gt;&gt; index 000000000..a37500d93<br>
-&gt;&gt; --- /dev/null<br>
-&gt;&gt; +++ b/meta-networking/recipes-support/mdio-tools/mdio-tools.inc<br=
+>  DEPENDS = "dbus ncurses"
 >
-&gt;&gt; @@ -0,0 +1,9 @@<br>
-&gt;&gt; +DESCRIPTION =3D &quot;A low-level debug tool for communicating wi=
-th devices attached to an MDIO bus&quot;<br>
-&gt;&gt; +SECTION =3D &quot;networking&quot;<br>
-&gt;&gt; +HOMEPAGE =3D &quot;<a href=3D"https://github.com/wkz/mdio-tools" =
-rel=3D"noreferrer" target=3D"_blank">https://github.com/wkz/mdio-tools</a>&=
-quot;<br>
-&gt;&gt; +LICENSE =3D &quot;GPLv2&quot;<br>
-&gt;&gt; +LIC_FILES_CHKSUM =3D &quot;file://${WORKDIR}/git/COPYING;md5=3Db2=
-34ee4d69f5fce4486a80fdaf4a4263&quot;<br>
-&gt;&gt; +<br>
-&gt;&gt; +SRC_URI =3D &quot;git://<a href=3D"http://github.com/wkz/mdio-too=
-ls.git;protocol=3Dhttps;branch=3Dmaster" rel=3D"noreferrer" target=3D"_blan=
-k">github.com/wkz/mdio-tools.git;protocol=3Dhttps;branch=3Dmaster</a>&quot;=
-<br>
-&gt;&gt; +SRCREV =3D &quot;07cbff2d5e2de05037e5e7edd5044d678394c8d1&quot;<b=
-r>
-&gt;&gt; +PV =3D &quot;1.1.1&quot;<br>
-&gt;&gt; diff --git a/meta-networking/recipes-support/mdio-tools/<a href=3D=
-"http://mdio-tools_git.bb" rel=3D"noreferrer" target=3D"_blank">mdio-tools_=
-git.bb</a> b/meta-networking/recipes-support/mdio-tools/<a href=3D"http://m=
-dio-tools_git.bb" rel=3D"noreferrer" target=3D"_blank">mdio-tools_git.bb</a=
-><br>
-&gt;&gt; new file mode 100644<br>
-&gt;&gt; index 000000000..cd4df3da0<br>
-&gt;&gt; --- /dev/null<br>
-&gt;&gt; +++ b/meta-networking/recipes-support/mdio-tools/<a href=3D"http:/=
-/mdio-tools_git.bb" rel=3D"noreferrer" target=3D"_blank">mdio-tools_git.bb<=
-/a><br>
-&gt;&gt; @@ -0,0 +1,9 @@<br>
-&gt;&gt; +require mdio-tools.inc<br>
-&gt;&gt; +<br>
-&gt;&gt; +DEPENDS +=3D &quot;libmnl&quot;<br>
-&gt;&gt; +<br>
-&gt;&gt; +S =3D &quot;${WORKDIR}/git&quot;<br>
-&gt;&gt; +<br>
-&gt;&gt; +inherit pkgconfig autotools<br>
-&gt;&gt; +<br>
-&gt;&gt; +RDEPENDS:${PN} =3D &quot;kernel-module-mdio-netlink&quot;<br>
-&gt;&gt; --<br>
-&gt;&gt; 2.17.1<br>
-&gt;&gt;<br>
-&gt;&gt;<br>
-&gt;&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt;&gt; Links: You receive all messages sent to this group.<br>
-&gt;&gt; View/Reply Online (#97444): <a href=3D"https://lists.openembedded.=
-org/g/openembedded-devel/message/97444" rel=3D"noreferrer" target=3D"_blank=
-">https://lists.openembedded.org/g/openembedded-devel/message/97444</a><br>
-&gt;&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/9162=
-7189/1997914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedd=
-ed.org/mt/91627189/1997914</a><br>
-&gt;&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.op=
-enembedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedd=
-ed.org</a><br>
-&gt;&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembed=
-ded-devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openemb=
-edded.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.=
-com" target=3D"_blank">raj.khem@gmail.com</a>]<br>
-&gt;&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt;&gt;<br>
-</blockquote></div></div>
-
---00000000000084ed5e05e6cd6e9e--
+> -SRCREV = "64cf5e80e6240284e6b757907b900507fe56f1b5"
+> +SRCREV = "f274e53d25ee8f483ac6fce9e516bb1830abe88b"
+>  SRC_URI = " \
+>         git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https \
+> -       file://0001-spa-fix-c90-header-include.patch \
+> +       file://0001-avb-fix-compilation-on-big-endian.patch \
+>  "
+>
+>  S = "${WORKDIR}/git"
+> @@ -62,7 +62,6 @@ EXTRA_OEMESON += " \
+>      -Dudevrulesdir=${nonarch_base_libdir}/udev/rules.d/ \
+>      -Dsystemd-system-unit-dir=${systemd_system_unitdir} \
+>      -Dsystemd-user-unit-dir=${systemd_user_unitdir} \
+> -    -Dvulkan=disabled \
+>      -Dman=disabled \
+>      -Dsession-managers='[]' \
+>      -Dlv2=disabled \
+> @@ -72,12 +71,27 @@ EXTRA_OEMESON += " \
+>      -Dlegacy-rtkit=false \
+>  "
+>
+> -PACKAGECONFIG:class-target ??= "\
+> +# spa alsa plugin code uses typedef redefinition, which is officially a C11 feature.
+> +# Pipewire builds with 'c_std=gnu99' by default. Recent versions of gcc don't issue this warning in gnu99
+> +# mode but it looks like clang still does
+> +CFLAGS:append = " -Wno-typedef-redefinition"
+> +
+> +# According to wireplumber documentation only one session manager should be installed at a time
+> +# Possible options are media-session, which has fewer dependencies but is very simple,
+> +# or wireplumber, which is more powerful.
+> +PIPEWIRE_SESSION_MANAGER ??= "media-session"
+> +
+> +FFMPEG_AVAILABLE = "${@bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'commercial', 'ffmpeg', '', d)}"
+> +BLUETOOTH_AAC = "${@bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'commercial', 'bluez-aac', '', d)}"
+> +
+> +PACKAGECONFIG:class-target ??= " \
+> +    ${@bb.utils.contains('DISTRO_FEATURES', 'gstreamer', 'gstreamer', '${FFMPEG_AVAILABLE}', d)} \
+>      ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)} \
+> -    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)} \
+> -    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-system-service', '', d)} \
+> -    ${@bb.utils.filter('DISTRO_FEATURES', 'alsa', d)} \
+> -    gstreamer jack libusb pw-cat raop sndfile v4l2 \
+> +    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez ${BLUETOOTH_AAC}', '', d)} \
+> +    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-system-service systemd-user-service', '', d)} \
+> +    ${@bb.utils.filter('DISTRO_FEATURES', 'alsa vulkan pulseaudio', d)} \
+> +    ${PIPEWIRE_SESSION_MANAGER} \
+> +    jack libusb pw-cat raop sndfile v4l2 udev volume \
+>  "
+>
+>  # "jack" and "pipewire-jack" packageconfigs cannot be both enabled,
+> @@ -96,6 +110,8 @@ PACKAGECONFIG[jack] = "-Djack=enabled,-Djack=disabled,jack,,,pipewire-jack"
+>  PACKAGECONFIG[libcamera] = "-Dlibcamera=enabled,-Dlibcamera=disabled,libcamera"
+>  PACKAGECONFIG[libcanberra] = "-Dlibcanberra=enabled,-Dlibcanberra=disabled,libcanberra"
+>  PACKAGECONFIG[libusb] = "-Dlibusb=enabled,-Dlibusb=disabled,libusb"
+> +PACKAGECONFIG[media-session] = ",,,pipewire-media-session"
+> +PACKAGECONFIG[pulseaudio] = "-Dlibpulse=enabled,-Dlibpulse=disabled,pulseaudio"
+>  PACKAGECONFIG[pipewire-alsa] = "-Dpipewire-alsa=enabled,-Dpipewire-alsa=disabled,alsa-lib"
+>  PACKAGECONFIG[pipewire-jack] = "-Dpipewire-jack=enabled -Dlibjack-path=${libdir}/${PW_MODULE_SUBDIR}/jack,-Dpipewire-jack=disabled,jack,,,jack"
+>  PACKAGECONFIG[pw-cat] = "-Dpw-cat=enabled,-Dpw-cat=disabled"
+> @@ -109,8 +125,12 @@ PACKAGECONFIG[systemd-system-service] = "-Dsystemd-system-service=enabled,-Dsyst
+>  # currently lacks the feature of enabling user services.
+>  PACKAGECONFIG[systemd-user-service] = "-Dsystemd-user-service=enabled,-Dsystemd-user-service=disabled,systemd"
+>  # pw-cat needs sndfile packageconfig to be enabled
+> +PACKAGECONFIG[udev] = "-Dudev=enabled,-Dudev=disabled,udev"
+>  PACKAGECONFIG[v4l2] = "-Dv4l2=enabled,-Dv4l2=disabled,udev"
+> +PACKAGECONFIG[volume] = "-Dvolume=enabled,-Dvolume=disabled"
+> +PACKAGECONFIG[vulkan] = "-Dvulkan=enabled,-Dvulkan=disabled,vulkan-headers vulkan-loader"
+>  PACKAGECONFIG[webrtc-echo-cancelling] = "-Decho-cancel-webrtc=enabled,-Decho-cancel-webrtc=disabled,webrtc-audio-processing"
+> +PACKAGECONFIG[wireplumber] = ",,,wireplumber"
+>
+>  PACKAGESPLITFUNCS:prepend = " split_dynamic_packages "
+>  PACKAGESPLITFUNCS:append = " set_dynamic_metapkg_rdepends "
+> @@ -227,10 +247,11 @@ PACKAGES_DYNAMIC = "^${PN}-spa-plugins.* ^${PN}-modules.*"
+>  SYSTEMD_SERVICE:${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'systemd-system-service', 'pipewire.service', '', d)}"
+>  CONFFILES:${PN} += "${datadir}/pipewire/pipewire.conf"
+>  FILES:${PN} = " \
+> -    ${datadir}/pipewire/pipewire.conf \
+> -    ${systemd_system_unitdir}/pipewire.* \
+> -    ${systemd_user_unitdir}/pipewire.* \
+> +    ${datadir}/pipewire \
+> +    ${systemd_system_unitdir}/pipewire* \
+> +    ${systemd_user_unitdir}/pipewire* \
+>      ${bindir}/pipewire \
+> +    ${bindir}/pipewire-avb \
+>  "
+>
+>  FILES:${PN}-dev += " \
+> --
+> 2.34.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#98347): https://lists.openembedded.org/g/openembedded-devel/message/98347
+> Mute This Topic: https://lists.openembedded.org/mt/93161862/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
