@@ -1,361 +1,337 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <quaresma.jose@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D689CC28D13
-	for <webhook@archiver.kernel.org>; Mon, 22 Aug 2022 15:50:05 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web09.19773.1661183400068382237
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 235E3C28D13
+	for <webhook@archiver.kernel.org>; Mon, 22 Aug 2022 16:30:06 +0000 (UTC)
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com
+ [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.web11.20056.1661185797107628068
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Aug 2022 08:50:00 -0700
+ Mon, 22 Aug 2022 09:29:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.81,
- mailfrom: f_l_k@t-online.de)
-Received: from fwd82.dcpf.telekom.de (fwd82.aul.t-online.de [10.223.144.108])
-	by mailout03.t-online.de (Postfix) with SMTP id 655A74FEE
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Aug 2022 17:49:57 +0200 (CEST)
-Received: from flk-MS-7C91.. ([84.154.174.226]) by fwd82.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1oQ9gX-1GgBcH0; Mon, 22 Aug 2022 17:49:53 +0200
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-multimedia][PATCHv11 1/2] pipewire: update to v0.3.56
-Date: Mon, 22 Aug 2022 17:49:40 +0200
-Message-Id: <20220822154941.37013-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=koaG3shT;
+ spf=pass (domain: gmail.com, ip: 209.85.210.179,
+ mailfrom: quaresma.jose@gmail.com)
+Received: by mail-pf1-f179.google.com with SMTP id y15so6854834pfr.9
+        for <openembedded-devel@lists.openembedded.org>;
+ Mon, 22 Aug 2022 09:29:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc;
+        bh=QdjA/Gf21+D0juFGKfUA4fZil+Cnu2bAV1MOf/BKVcE=;
+        b=koaG3shTX2RXV+ECnPTtBGzIHUDSGa+GJSFQobJ2BCvRoMNIgLYrU1U4L4sWqUpdC+
+         ZCMkPDhLbE511O+xTMI1VoahoH91Sjt6fN0p6KTilsnmcZLWyV9NnWJhxbEF34XgaE3F
+         eNBnVYnJfv1BaPy9SIyvP+FQIBCUg2Gq0VFz3/lmyAeyFcm8n1Fsre3IO3DdsvZmNGym
+         ugLETiRkQXm3wyA8TJA8yBhSjU57IWaYXy4jquh1+lvB3e6909yDxPH4S9zzQ6tsZCqu
+         KoBflFYv7cW4mdAyp20IiSpWZJR8kkrb3UXCrABTF1ZQ7SKscwVogwMFXWGr7gtJhsij
+         fAOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc;
+        bh=QdjA/Gf21+D0juFGKfUA4fZil+Cnu2bAV1MOf/BKVcE=;
+        b=Arpwd5I/Y6AePmbcQF4AURrlbzbJoVlkGqTLdBaw3BOkdT0blJS0SGIqptALAE/UXb
+         Cjf7WNw4yzxoS67Qr13MAaJF1mc9ue5qgX5DoCDlF1G7oaIJTnXZRQw9jH1SibLeFH6d
+         dNuPbcI4mZjBNIYvcQxsrY0OXe7xOuCNLWzVo/zkowyAGXH6k7DJ5oWELs6FbDKcbCxM
+         ffzpUyd4qft0xbtIlolbpvTC83EvFCMBGjpcMwjrDERO4YENylygzI1/hY5lSA/RN1q1
+         ZnNoaRN21a7VKiKwd8SxDGYK/C7FXuzArgt13zceM3fhTexevTJsG7teKsMM0+IRImw2
+         cMaA==
+X-Gm-Message-State: ACgBeo30O6vfsyzqHRHFFFYQQMIJILduneyWdOrZUMl8OJVyf61ucnqi
+	RWU0iZFUWCKbe/5rtvJZFaFQLhn8sMqRWY3qM9U=
+X-Google-Smtp-Source: 
+ AA6agR5UZ/3jfyrvR97OogJaVBbITTtYJzTgcu5Lfcu2AlBKriVrxAWLrKDItvpzcpYP2OmCU460tBx83WnuEufiR7I=
+X-Received: by 2002:a63:d70c:0:b0:420:f9b6:9c3d with SMTP id
+ d12-20020a63d70c000000b00420f9b69c3dmr17628754pgg.377.1661185796339; Mon, 22
+ Aug 2022 09:29:56 -0700 (PDT)
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1661183393-01452558-F673EA50/0/0 CLEAN NORMAL
-X-TOI-MSGID: 782d6b39-6837-4706-b8d2-29f01fae943e
-Content-Transfer-Encoding: quoted-printable
+References: <170DA50147D7B733.9591@lists.openembedded.org>
+In-Reply-To: <170DA50147D7B733.9591@lists.openembedded.org>
+From: Jose Quaresma <quaresma.jose@gmail.com>
+Date: Mon, 22 Aug 2022 17:29:45 +0100
+Message-ID: 
+ <CANPvuRn8DQhynAHH=ZEe=4t9A5Y_jPxqJ05UrBh+yWwqXfmu=w@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][master][kirkstone][PATCH 1/2]
+ wireguard-module: 1.0.20210219 -> 1.0.20210219
+To: Jose Quaresma <quaresma.jose@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Ricardo Salveti <ricardo@foundries.io>, daiane.angolini@foundries.io,
+	Jose Quaresma <jose.quaresma@foundries.io>
+Content-Type: multipart/alternative; boundary="0000000000004bff6805e6d6f53c"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 22 Aug 2022 15:50:05 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 22 Aug 2022 16:30:06 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98369
+ https://lists.openembedded.org/g/openembedded-devel/message/98371
 
-Add the configuration to make pipewire work as a drop-in replacement for =
-pulseaudio-server.
+--0000000000004bff6805e6d6f53c
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Add pipewire-media-session as a standalone recipe, since pipewire would f=
-etch the code as a
-subproject at do_configure.
+I am sorry but the commit title is wrong
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../pipewire/pipewire-media-session_0.4.1.bb  | 25 +++++++++
- ...01-avb-fix-compilation-on-big-endian.patch | 53 +++++++++++++++++++
- .../0001-spa-fix-c90-header-include.patch     | 47 ----------------
- ...{pipewire_0.3.50.bb =3D> pipewire_0.3.56.bb} | 44 ++++++++++-----
- 4 files changed, 110 insertions(+), 59 deletions(-)
- create mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire-=
-media-session_0.4.1.bb
- create mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire/=
-0001-avb-fix-compilation-on-big-endian.patch
- delete mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire/=
-0001-spa-fix-c90-header-include.patch
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.50.bb =3D=
-> pipewire_0.3.56.bb} (87%)
+-wireguard-module: 1.0.20210219 -> 1.0.20210219
++wireguard-module: 1.0.20210219 -> 1.0.20220627
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-s=
-ession_0.4.1.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire-me=
-dia-session_0.4.1.bb
-new file mode 100644
-index 000000000..9fdb60380
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_=
-0.4.1.bb
-@@ -0,0 +1,25 @@
-+SUMMARY =3D "PipeWire Media Session is an example session manager for Pi=
-peWire"
-+HOMEPAGE =3D "https://gitlab.freedesktop.org/pipewire/media-session"
-+LICENSE =3D "MIT"
-+
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D97be96ca4fab23e9657ffa590b931=
-c1a"
-+
-+DEPENDS =3D " \
-+	pipewire \
-+	alsa-lib \
-+	dbus \
-+"
-+
-+SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/media-session.git;pro=
-tocol=3Dhttps;branch=3Dmaster"
-+
-+S =3D "${WORKDIR}/git"
-+SRCREV =3D "e5d5cf2404786af8bcc40bdb8a2962bef4ec18b6"
-+
-+inherit meson pkgconfig
-+
-+FILES:${PN} +=3D " \
-+	${systemd_user_unitdir}/pipewire-media-session.service \
-+	${datadir}/pipewire/media-session.d/* \
-+"
-+
-+RRECOMMENDS:${PN} +=3D "pipewire"
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-av=
-b-fix-compilation-on-big-endian.patch b/meta-multimedia/recipes-multimedi=
-a/pipewire/pipewire/0001-avb-fix-compilation-on-big-endian.patch
-new file mode 100644
-index 000000000..fc618b4a7
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-avb-fix-c=
-ompilation-on-big-endian.patch
-@@ -0,0 +1,53 @@
-+From 1a5ec4452fa21592eaeeb823ad95a1db6eb60376 Mon Sep 17 00:00:00 2001
-+From: Wim Taymans <wtaymans@redhat.com>
-+Date: Tue, 19 Jul 2022 13:49:42 +0200
-+Subject: [PATCH 001/113] avb: fix compilation on big endian
-+
-+Patch-Status: Backport
-+
-+---
-+ src/modules/module-avb/aaf.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/modules/module-avb/aaf.h b/src/modules/module-avb/aaf.h
-+index cb4871ca6..b444ce251 100644
-+--- a/src/modules/module-avb/aaf.h
-++++ b/src/modules/module-avb/aaf.h
-+@@ -35,7 +35,7 @@ struct avb_packet_aaf {
-+ 	unsigned gv:1;
-+ 	unsigned tv:1;
-+=20
-+-	uint8_t seq_number;
-++	uint8_t seq_num;
-+=20
-+ 	unsigned _r2:7;
-+ 	unsigned tu:1;
-+diff --git a/src/modules/module-avb/iec61883.h b/src/modules/module-avb/=
-iec61883.h
-+index d3b3a7daa..6ca8724ad 100644
-+--- a/src/modules/module-avb/iec61883.h
-++++ b/src/modules/module-avb/iec61883.h
-+@@ -37,7 +37,7 @@ struct avb_packet_iec61883 {
-+ 	unsigned gv:1;
-+ 	unsigned tv:1;
-+=20
-+-	uint8_t seq_number;
-++	uint8_t seq_num;
-+=20
-+ 	unsigned _r2:7;
-+ 	unsigned tu:1;
-+diff --git a/spa/plugins/avb/avbtp/packets.h b/spa/plugins/avb/avbtp/pac=
-kets.h
-+index 7047456bf..3d4a652ee 100644
-+--- a/spa/plugins/avb/avbtp/packets.h
-++++ b/spa/plugins/avb/avbtp/packets.h
-+@@ -116,7 +116,7 @@ struct spa_avbtp_packet_aaf {
-+ 	unsigned gv:1;
-+ 	unsigned tv:1;
-+=20
-+-	uint8_t seq_number;
-++	uint8_t seq_num;
-+=20
-+ 	unsigned _r2:7;
-+ 	unsigned tu:1;
-+--=20
-+2.34.1
-+
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-sp=
-a-fix-c90-header-include.patch b/meta-multimedia/recipes-multimedia/pipew=
-ire/pipewire/0001-spa-fix-c90-header-include.patch
-deleted file mode 100644
-index ad6448a10..000000000
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-spa-fix-c=
-90-header-include.patch
-+++ /dev/null
-@@ -1,47 +0,0 @@
--From d3ea3142e1a4de206e616bc18f63a529e6b4986a Mon Sep 17 00:00:00 2001
--From: psykose <alice@ayaya.dev>
--Date: Wed, 13 Apr 2022 21:57:49 +0000
--Subject: [PATCH 001/154] spa: fix c90 header include
--
--placing declarations after code is invalid under ISO c90
--
--Fixes !1211
--
--Patch-Status: Backport
-----
-- spa/include/spa/utils/string.h | 6 ++++--
-- 1 file changed, 4 insertions(+), 2 deletions(-)
--
--diff --git a/spa/include/spa/utils/string.h b/spa/include/spa/utils/stri=
-ng.h
--index e80434537..43d19616c 100644
----- a/spa/include/spa/utils/string.h
--+++ b/spa/include/spa/utils/string.h
--@@ -276,10 +276,11 @@ static inline int spa_scnprintf(char *buffer, size=
-_t size, const char *format, .
-- static inline float spa_strtof(const char *str, char **endptr)
-- {
-- 	static locale_t locale =3D NULL;
--+	locale_t prev;
-- 	float v;
-- 	if (SPA_UNLIKELY(locale =3D=3D NULL))
-- 		locale =3D newlocale(LC_ALL_MASK, "C", NULL);
---	locale_t prev =3D uselocale(locale);
--+	prev =3D uselocale(locale);
-- 	v =3D strtof(str, endptr);
-- 	uselocale(prev);
-- 	return v;
--@@ -319,10 +320,11 @@ static inline bool spa_atof(const char *str, float=
- *val)
-- static inline double spa_strtod(const char *str, char **endptr)
-- {
-- 	static locale_t locale =3D NULL;
--+	locale_t prev;
-- 	double v;
-- 	if (SPA_UNLIKELY(locale =3D=3D NULL))
-- 		locale =3D newlocale(LC_ALL_MASK, "C", NULL);
---	locale_t prev =3D uselocale(locale);
--+	prev =3D uselocale(locale);
-- 	v =3D strtod(str, endptr);
-- 	uselocale(prev);
-- 	return v;
----=20
--2.25.1
--
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.=
-bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
-similarity index 87%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.b=
-b
-rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
-index c176c6eeb..bf7bae80f 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
-@@ -13,10 +13,10 @@ LIC_FILES_CHKSUM =3D " \
-=20
- DEPENDS =3D "dbus ncurses"
-=20
--SRCREV =3D "64cf5e80e6240284e6b757907b900507fe56f1b5"
-+SRCREV =3D "f274e53d25ee8f483ac6fce9e516bb1830abe88b"
- SRC_URI =3D " \
- 	git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3Dmaster;prot=
-ocol=3Dhttps \
--	file://0001-spa-fix-c90-header-include.patch \
-+	file://0001-avb-fix-compilation-on-big-endian.patch \
- "
-=20
- S =3D "${WORKDIR}/git"
-@@ -62,7 +62,6 @@ EXTRA_OEMESON +=3D " \
-     -Dudevrulesdir=3D${nonarch_base_libdir}/udev/rules.d/ \
-     -Dsystemd-system-unit-dir=3D${systemd_system_unitdir} \
-     -Dsystemd-user-unit-dir=3D${systemd_user_unitdir} \
--    -Dvulkan=3Ddisabled \
-     -Dman=3Ddisabled \
-     -Dsession-managers=3D'[]' \
-     -Dlv2=3Ddisabled \
-@@ -72,12 +71,26 @@ EXTRA_OEMESON +=3D " \
-     -Dlegacy-rtkit=3Dfalse \
- "
-=20
--PACKAGECONFIG:class-target ??=3D "\
-+# spa alsa plugin code uses typedef redefinition, which is officially a =
-C11 feature.
-+# Pipewire builds with 'c_std=3Dgnu99' by default. Recent versions of gc=
-c don't issue this warning in gnu99
-+# mode but it looks like clang still does
-+CFLAGS:append =3D " -Wno-typedef-redefinition"
-+
-+# According to wireplumber documentation only one session manager should=
- be installed at a time
-+# Possible options are media-session, which has fewer dependencies but i=
-s very simple,
-+# or wireplumber, which is more powerful.
-+PIPEWIRE_SESSION_MANAGER ??=3D "media-session"
-+
-+FFMPEG_AVAILABLE =3D "${@bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'co=
-mmercial', 'ffmpeg', '', d)}"
-+BLUETOOTH_AAC =3D "${@bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'comme=
-rcial', 'bluez-aac', '', d)}"
-+
-+PACKAGECONFIG:class-target ??=3D " \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)}=
- \
--    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)=
-} \
--    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-=
-system-service', '', d)} \
--    ${@bb.utils.filter('DISTRO_FEATURES', 'alsa', d)} \
--    gstreamer jack libusb pw-cat raop sndfile v4l2 \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez ${BLUETO=
-OTH_AAC}', '', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-=
-system-service systemd-user-service', '', d)} \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'alsa vulkan pulseaudio', d)} =
-\
-+    ${PIPEWIRE_SESSION_MANAGER} \
-+    ${FFMPEG_AVAILABLE} gstreamer jack libusb pw-cat raop sndfile v4l2 u=
-dev volume \
- "
-=20
- # "jack" and "pipewire-jack" packageconfigs cannot be both enabled,
-@@ -93,9 +106,11 @@ PACKAGECONFIG[docs] =3D "-Ddocs=3Denabled,-Ddocs=3Ddi=
-sabled,doxygen-native graphviz-na
- PACKAGECONFIG[ffmpeg] =3D "-Dffmpeg=3Denabled,-Dffmpeg=3Ddisabled,ffmpeg=
-"
- PACKAGECONFIG[gstreamer] =3D "-Dgstreamer=3Denabled,-Dgstreamer=3Ddisabl=
-ed,glib-2.0 gstreamer1.0 gstreamer1.0-plugins-base"
- PACKAGECONFIG[jack] =3D "-Djack=3Denabled,-Djack=3Ddisabled,jack,,,pipew=
-ire-jack"
--PACKAGECONFIG[libcamera] =3D "-Dlibcamera=3Denabled,-Dlibcamera=3Ddisabl=
-ed,libcamera"
-+PACKAGECONFIG[libcamera] =3D "-Dlibcamera=3Denabled,-Dlibcamera=3Ddisabl=
-ed,libcamera libdrm"
- PACKAGECONFIG[libcanberra] =3D "-Dlibcanberra=3Denabled,-Dlibcanberra=3D=
-disabled,libcanberra"
- PACKAGECONFIG[libusb] =3D "-Dlibusb=3Denabled,-Dlibusb=3Ddisabled,libusb=
-"
-+PACKAGECONFIG[media-session] =3D ",,,pipewire-media-session"
-+PACKAGECONFIG[pulseaudio] =3D "-Dlibpulse=3Denabled,-Dlibpulse=3Ddisable=
-d,pulseaudio"
- PACKAGECONFIG[pipewire-alsa] =3D "-Dpipewire-alsa=3Denabled,-Dpipewire-a=
-lsa=3Ddisabled,alsa-lib"
- PACKAGECONFIG[pipewire-jack] =3D "-Dpipewire-jack=3Denabled -Dlibjack-pa=
-th=3D${libdir}/${PW_MODULE_SUBDIR}/jack,-Dpipewire-jack=3Ddisabled,jack,,=
-,jack"
- PACKAGECONFIG[pw-cat] =3D "-Dpw-cat=3Denabled,-Dpw-cat=3Ddisabled"
-@@ -109,8 +124,12 @@ PACKAGECONFIG[systemd-system-service] =3D "-Dsystemd=
--system-service=3Denabled,-Dsyst
- # currently lacks the feature of enabling user services.
- PACKAGECONFIG[systemd-user-service] =3D "-Dsystemd-user-service=3Denable=
-d,-Dsystemd-user-service=3Ddisabled,systemd"
- # pw-cat needs sndfile packageconfig to be enabled
-+PACKAGECONFIG[udev] =3D "-Dudev=3Denabled,-Dudev=3Ddisabled,udev"
- PACKAGECONFIG[v4l2] =3D "-Dv4l2=3Denabled,-Dv4l2=3Ddisabled,udev"
-+PACKAGECONFIG[volume] =3D "-Dvolume=3Denabled,-Dvolume=3Ddisabled"
-+PACKAGECONFIG[vulkan] =3D "-Dvulkan=3Denabled,-Dvulkan=3Ddisabled,vulkan=
--headers vulkan-loader"
- PACKAGECONFIG[webrtc-echo-cancelling] =3D "-Decho-cancel-webrtc=3Denable=
-d,-Decho-cancel-webrtc=3Ddisabled,webrtc-audio-processing"
-+PACKAGECONFIG[wireplumber] =3D ",,,wireplumber"
-=20
- PACKAGESPLITFUNCS:prepend =3D " split_dynamic_packages "
- PACKAGESPLITFUNCS:append =3D " set_dynamic_metapkg_rdepends "
-@@ -227,10 +246,11 @@ PACKAGES_DYNAMIC =3D "^${PN}-spa-plugins.* ^${PN}-m=
-odules.*"
- SYSTEMD_SERVICE:${PN} =3D "${@bb.utils.contains('PACKAGECONFIG', 'system=
-d-system-service', 'pipewire.service', '', d)}"
- CONFFILES:${PN} +=3D "${datadir}/pipewire/pipewire.conf"
- FILES:${PN} =3D " \
--    ${datadir}/pipewire/pipewire.conf \
--    ${systemd_system_unitdir}/pipewire.* \
--    ${systemd_user_unitdir}/pipewire.* \
-+    ${datadir}/pipewire \
-+    ${systemd_system_unitdir}/pipewire* \
-+    ${systemd_user_unitdir}/pipewire* \
-     ${bindir}/pipewire \
-+    ${bindir}/pipewire-avb \
- "
-=20
- FILES:${PN}-dev +=3D " \
+I will send a v2
+
+Jose
+
+Jose Quaresma via lists.openembedded.org <quaresma.jose=3D
+gmail.com@lists.openembedded.org> escreveu no dia segunda, 22/08/2022 =C3=
+=A0(s)
+11:47:
+
+> Also change the git protocol to https.
+>
+> Relevant changes:
+> - 18fbcd6 version: bump
+> - 3ec3e82 compat: handle backported rng and blake2s
+> - ba45dd6 qemu: give up on RHEL8 in CI
+> - c7560fd qemu: set panic_on_warn=3D1 from cmdline
+> - 33c87a1 qemu: use vports on arm
+> - 894152a netns: limit parallelism to $(nproc) tests at once
+> - f888673 netns: make routing loop test non-fatal
+> - f9d9b4d device: check for metadata_dst with skb_valid_dst()
+> - f909532 qemu: enable ACPI for SMP
+> - ec89ca6 socket: ignore v6 endpoints when ipv6 is disabled
+> - fa32671 socket: free skb in send6 when ipv6 is disabled
+> - ffb8cd6 qemu: simplify RNG seeding
+> - 4eff63d queueing: use CFI-safe ptr_ring cleanup function
+> - 273018b crypto: curve25519-x86_64: use in/out register constraints more
+> precisely
+> - 4f4c019 compat: drop Ubuntu 14.04
+> - 743eef2 version: bump
+> - 3c9f3b6 crypto: curve25519-x86_64: solve register constraints with
+> reserved registers
+> - 8e40dd6 compat: udp_tunnel: don't take reference to non-init namespace
+> - ea6b8e7 compat: siphash: use _unaligned version by default
+> - 5325bc8 ratelimiter: use kvcalloc() instead of kvzalloc()
+> - e44c78c receive: drop handshakes if queue lock is contended
+> - 5707d38 receive: use ring buffer for incoming handshakes
+> - 68abb1b device: reset peer src endpoint when netns exits
+> - ea3f5fb main: rename 'mod_init' & 'mod_exit' functions to be
+> module-specific
+> - cb001d4 netns: actually test for routing loops
+> - 2715e64 compat: update for RHEL 8.5
+> - 2974725 compat: account for grsecurity backports and changes
+> - 50dda8c compat: account for latest c8s backports
+> - d378f93 version: bump
+> - fb4a0da qemu: increase default dmesg log size
+> - 8f4414d qemu: add disgusting hacks for RHEL 8
+> - fd7a462 allowedips: add missing __rcu annotation to satisfy sparse
+> - 383461d allowedips: free empty intermediate nodes when removing single
+> node
+> - 03add82 allowedips: allocate nodes in kmem_cache
+> - b56d48c allowedips: remove nodes in O(1)
+> - 3c14c4b allowedips: initialize list head in selftest
+> - 4d8b7ed peer: allocate in kmem_cache
+> - 6fbc0e6 global: use synchronize_net rather than synchronize_rcu
+> - 405caf0 kbuild: do not use -O3
+> - b50ef4d netns: make sure rp_filter is disabled on vethc
+> - e67b722 version: bump
+> - 1edffe2 Revert "compat: skb_mark_not_on_list will be backported to
+> Ubuntu 18.04"
+> - 2cf9543 compat: update and improve detection of CentOS Stream 8
+> - 122f06b compat: icmp_ndo_send functions were backported extensively
+>
+> Signed-off-by: Jose Quaresma <jose.quaresma@foundries.io>
+> ---
+>  ...odule_1.0.20210219.bb =3D> wireguard-module_1.0.20220627.bb} | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-networking/recipes-kernel/wireguard/{
+> wireguard-module_1.0.20210219.bb =3D> wireguard-module_1.0.20220627.bb}
+> (85%)
+>
+> diff --git a/meta-networking/recipes-kernel/wireguard/
+> wireguard-module_1.0.20210219.bb
+> b/meta-networking/recipes-kernel/wireguard/
+> wireguard-module_1.0.20220627.bb
+> similarity index 85%
+> rename from meta-networking/recipes-kernel/wireguard/
+> wireguard-module_1.0.20210219.bb
+> rename to meta-networking/recipes-kernel/wireguard/
+> wireguard-module_1.0.20220627.bb
+> index ce2ba6552..d80bdd87a 100644
+> --- a/meta-networking/recipes-kernel/wireguard/
+> wireguard-module_1.0.20210219.bb
+> +++ b/meta-networking/recipes-kernel/wireguard/
+> wireguard-module_1.0.20220627.bb
+> @@ -1,8 +1,8 @@
+>  require wireguard.inc
+>
+> -SRCREV =3D "122f06bfd8fc7b06a0899fa9adc4ce8e06900d98"
+> +SRCREV =3D "18fbcd68a35a892527345dc5679d0b2d860ee004"
+>
+> -SRC_URI =3D "git://git.zx2c4.com/wireguard-linux-compat;branch=3Dmaster"
+> +SRC_URI =3D "git://
+> git.zx2c4.com/wireguard-linux-compat;protocol=3Dhttps;branch=3Dmaster"
+>
+>  inherit module kernel-module-split
+>
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#98363):
+> https://lists.openembedded.org/g/openembedded-devel/message/98363
+> Mute This Topic: https://lists.openembedded.org/mt/93178353/5052612
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> quaresma.jose@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
 --=20
-2.34.1
+Best regards,
 
+Jos=C3=A9 Quaresma
+
+--0000000000004bff6805e6d6f53c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>I am sorry but the commit title is wrong</div><div><b=
+r></div><div>-wireguard-module: 1.0.20210219 -&gt; 1.0.20210219<br>+wiregua=
+rd-module: 1.0.20210219 -&gt; 1.0.20220627<br></div><div><br></div><div>I w=
+ill send a v2</div><div><br></div><div>Jose</div><div><br></div><div>Jose Q=
+uaresma via <a href=3D"http://lists.openembedded.org">lists.openembedded.or=
+g</a> &lt;quaresma.jose=3D<a href=3D"mailto:gmail.com@lists.openembedded.or=
+g">gmail.com@lists.openembedded.org</a>&gt; escreveu no dia segunda, 22/08/=
+2022 =C3=A0(s) 11:47:<br></div><div class=3D"gmail_quote"><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex">Also change the git protocol to https.<br>
+<br>
+Relevant changes:<br>
+- 18fbcd6 version: bump<br>
+- 3ec3e82 compat: handle backported rng and blake2s<br>
+- ba45dd6 qemu: give up on RHEL8 in CI<br>
+- c7560fd qemu: set panic_on_warn=3D1 from cmdline<br>
+- 33c87a1 qemu: use vports on arm<br>
+- 894152a netns: limit parallelism to $(nproc) tests at once<br>
+- f888673 netns: make routing loop test non-fatal<br>
+- f9d9b4d device: check for metadata_dst with skb_valid_dst()<br>
+- f909532 qemu: enable ACPI for SMP<br>
+- ec89ca6 socket: ignore v6 endpoints when ipv6 is disabled<br>
+- fa32671 socket: free skb in send6 when ipv6 is disabled<br>
+- ffb8cd6 qemu: simplify RNG seeding<br>
+- 4eff63d queueing: use CFI-safe ptr_ring cleanup function<br>
+- 273018b crypto: curve25519-x86_64: use in/out register constraints more p=
+recisely<br>
+- 4f4c019 compat: drop Ubuntu 14.04<br>
+- 743eef2 version: bump<br>
+- 3c9f3b6 crypto: curve25519-x86_64: solve register constraints with reserv=
+ed registers<br>
+- 8e40dd6 compat: udp_tunnel: don&#39;t take reference to non-init namespac=
+e<br>
+- ea6b8e7 compat: siphash: use _unaligned version by default<br>
+- 5325bc8 ratelimiter: use kvcalloc() instead of kvzalloc()<br>
+- e44c78c receive: drop handshakes if queue lock is contended<br>
+- 5707d38 receive: use ring buffer for incoming handshakes<br>
+- 68abb1b device: reset peer src endpoint when netns exits<br>
+- ea3f5fb main: rename &#39;mod_init&#39; &amp; &#39;mod_exit&#39; function=
+s to be module-specific<br>
+- cb001d4 netns: actually test for routing loops<br>
+- 2715e64 compat: update for RHEL 8.5<br>
+- 2974725 compat: account for grsecurity backports and changes<br>
+- 50dda8c compat: account for latest c8s backports<br>
+- d378f93 version: bump<br>
+- fb4a0da qemu: increase default dmesg log size<br>
+- 8f4414d qemu: add disgusting hacks for RHEL 8<br>
+- fd7a462 allowedips: add missing __rcu annotation to satisfy sparse<br>
+- 383461d allowedips: free empty intermediate nodes when removing single no=
+de<br>
+- 03add82 allowedips: allocate nodes in kmem_cache<br>
+- b56d48c allowedips: remove nodes in O(1)<br>
+- 3c14c4b allowedips: initialize list head in selftest<br>
+- 4d8b7ed peer: allocate in kmem_cache<br>
+- 6fbc0e6 global: use synchronize_net rather than synchronize_rcu<br>
+- 405caf0 kbuild: do not use -O3<br>
+- b50ef4d netns: make sure rp_filter is disabled on vethc<br>
+- e67b722 version: bump<br>
+- 1edffe2 Revert &quot;compat: skb_mark_not_on_list will be backported to U=
+buntu 18.04&quot;<br>
+- 2cf9543 compat: update and improve detection of CentOS Stream 8<br>
+- 122f06b compat: icmp_ndo_send functions were backported extensively<br>
+<br>
+Signed-off-by: Jose Quaresma &lt;<a href=3D"mailto:jose.quaresma@foundries.=
+io" target=3D"_blank">jose.quaresma@foundries.io</a>&gt;<br>
+---<br>
+=C2=A0...<a href=3D"http://odule_1.0.20210219.bb" rel=3D"noreferrer" target=
+=3D"_blank">odule_1.0.20210219.bb</a> =3D&gt; <a href=3D"http://wireguard-m=
+odule_1.0.20220627.bb" rel=3D"noreferrer" target=3D"_blank">wireguard-modul=
+e_1.0.20220627.bb</a>} | 4 ++--<br>
+=C2=A01 file changed, 2 insertions(+), 2 deletions(-)<br>
+=C2=A0rename meta-networking/recipes-kernel/wireguard/{<a href=3D"http://wi=
+reguard-module_1.0.20210219.bb" rel=3D"noreferrer" target=3D"_blank">wiregu=
+ard-module_1.0.20210219.bb</a> =3D&gt; <a href=3D"http://wireguard-module_1=
+.0.20220627.bb" rel=3D"noreferrer" target=3D"_blank">wireguard-module_1.0.2=
+0220627.bb</a>} (85%)<br>
+<br>
+diff --git a/meta-networking/recipes-kernel/wireguard/<a href=3D"http://wir=
+eguard-module_1.0.20210219.bb" rel=3D"noreferrer" target=3D"_blank">wiregua=
+rd-module_1.0.20210219.bb</a> b/meta-networking/recipes-kernel/wireguard/<a=
+ href=3D"http://wireguard-module_1.0.20220627.bb" rel=3D"noreferrer" target=
+=3D"_blank">wireguard-module_1.0.20220627.bb</a><br>
+similarity index 85%<br>
+rename from meta-networking/recipes-kernel/wireguard/<a href=3D"http://wire=
+guard-module_1.0.20210219.bb" rel=3D"noreferrer" target=3D"_blank">wireguar=
+d-module_1.0.20210219.bb</a><br>
+rename to meta-networking/recipes-kernel/wireguard/<a href=3D"http://wiregu=
+ard-module_1.0.20220627.bb" rel=3D"noreferrer" target=3D"_blank">wireguard-=
+module_1.0.20220627.bb</a><br>
+index ce2ba6552..d80bdd87a 100644<br>
+--- a/meta-networking/recipes-kernel/wireguard/<a href=3D"http://wireguard-=
+module_1.0.20210219.bb" rel=3D"noreferrer" target=3D"_blank">wireguard-modu=
+le_1.0.20210219.bb</a><br>
++++ b/meta-networking/recipes-kernel/wireguard/<a href=3D"http://wireguard-=
+module_1.0.20220627.bb" rel=3D"noreferrer" target=3D"_blank">wireguard-modu=
+le_1.0.20220627.bb</a><br>
+@@ -1,8 +1,8 @@<br>
+=C2=A0require wireguard.inc<br>
+<br>
+-SRCREV =3D &quot;122f06bfd8fc7b06a0899fa9adc4ce8e06900d98&quot;<br>
++SRCREV =3D &quot;18fbcd68a35a892527345dc5679d0b2d860ee004&quot;<br>
+<br>
+-SRC_URI =3D &quot;git://<a href=3D"http://git.zx2c4.com/wireguard-linux-co=
+mpat;branch=3Dmaster" rel=3D"noreferrer" target=3D"_blank">git.zx2c4.com/wi=
+reguard-linux-compat;branch=3Dmaster</a>&quot;<br>
++SRC_URI =3D &quot;git://<a href=3D"http://git.zx2c4.com/wireguard-linux-co=
+mpat;protocol=3Dhttps;branch=3Dmaster" rel=3D"noreferrer" target=3D"_blank"=
+>git.zx2c4.com/wireguard-linux-compat;protocol=3Dhttps;branch=3Dmaster</a>&=
+quot;<br>
+<br>
+=C2=A0inherit module kernel-module-split<br>
+<br>
+-- <br>
+2.34.1<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#98363): <a href=3D"https://lists.openembedded.org/g/ope=
+nembedded-devel/message/98363" rel=3D"noreferrer" target=3D"_blank">https:/=
+/lists.openembedded.org/g/openembedded-devel/message/98363</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/93178353/5052=
+612" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/93178353/5052612</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:quaresma.jose@gmail.com"=
+ target=3D"_blank">quaresma.jose@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div><br clear=3D"all"><div><br></div>-- <br><div dir=3D"ltr"=
+ class=3D"gmail_signature"><div dir=3D"ltr">Best regards,<div><br>Jos=C3=A9=
+ Quaresma</div></div></div></div>
+
+--0000000000004bff6805e6d6f53c--
 
