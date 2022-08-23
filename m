@@ -2,61 +2,62 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E6E4DC32772
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E6E80C32774
 	for <webhook@archiver.kernel.org>; Tue, 23 Aug 2022 16:51:26 +0000 (UTC)
 Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
  [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web11.286.1661273485563926323
+ by mx.groups.io with SMTP id smtpd.web12.290.1661273486499390811
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Aug 2022 09:51:25 -0700
+ Tue, 23 Aug 2022 09:51:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=mxhx5z3R;
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=qhi1IKC3;
  spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id bf22so14507308pjb.4
+Received: by mail-pj1-f43.google.com with SMTP id f21so14529775pjt.2
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Aug 2022 09:51:25 -0700 (PDT)
+ Tue, 23 Aug 2022 09:51:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc;
-        bh=0cXOoVyTkVxIbUmCzAecHNYFxaLdwbU6tn9i69r7Qqk=;
-        b=mxhx5z3RbdlmA8xXaCLB1vZ8ZgZk8bKbdoFbRWt1NUSsPOBvEdmTPX5A1R5hF8giAq
-         hOvCtbvQPSnP62yXK51TomtdtkPHtPp0ybcscL3xZq7WOO67070Khnk5z92BsFkWOO/8
-         l1bYGzEnHqORqckkC8nw6q0MEWOOewjPEwBTP8uADGN7CzNJ3SsbhBdJ4UZ32OfjUGgd
-         8rSWZOIbkoIw5J+nqeNEYNXg0RA5LOSNysfzzbozKuSmM5d7dkPzFQ1eo0I5rS7RPW5k
-         WxFJc3FbBfjTCwrZTGJ8E/73CivwpoPFaX/B+yrMqk1z+oawpH1wnxKlJkhqai3HRmVN
-         Q8EA==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc;
+        bh=jf92/Wj+99q9N62qtsjUys+ArdnU4uFjtsvRM76Wkkg=;
+        b=qhi1IKC3/UasGuvamhNB+mBk3CszrdSR+lbN3pUiil+g+crSUzW7AvGudhC5bVnfkh
+         nBhriPXDBJ2bsz0N2tIq5kMLrrW0ORXtqgWNb98TMmANLWRhQkQ6pzO7lqjTTzNIiKL/
+         invQ8EI8Y6Twye9ONynWrgLxBaeCrPBoUyD3ke3OqPbcGgkHNmXRboW7NhzOb2oPRWHu
+         mX1/SKdg803XoOSI4XPGiESOBuYzeyj2MY/l/OICYMJypxDK9vRf8jDuD8976YCUFJh2
+         KSB3ZfAerjhoaDdsHEMUEIcKjwdT4tlH6mYSqbCV27YpH5Aw5BDjsoX9jDobZJfYheFw
+         Hbng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc;
-        bh=0cXOoVyTkVxIbUmCzAecHNYFxaLdwbU6tn9i69r7Qqk=;
-        b=k7+NcX9f843QBtwFiUoZWkdE4SVlDyIMztCW6+nHpgdjRuk+YNVOIBlQuejQQGzhTv
-         ZqWk+sa3hYPg2mtQB02Im0O2VwlzykxLdmpWcMjU/DIAqvgd0L+/OcpIgJ/lARlNZp8q
-         YHQqBtgdS8XwgZHtDqBcAJNU4t0ZoJN//riSvExPjANDfBB/3aNbePbHUWFk19btACci
-         TSPqy3A3oNSttNMX2O2H5uURK2/rY1aAM80PhHHl3UO81ORWA6HVPjO/2vSPR9FLUYHP
-         dOOeVfhajM+I+TwW8QH8720w8s8MqdW/YqPhMxV5K/njT2OE5FQ/rp0Snb703yuZpb77
-         5tjw==
-X-Gm-Message-State: ACgBeo0tAD+MnDAAL6H/2EG/gS1XlQTErWF0+LJSh5Bji6BaRgWWdbDj
-	sbBlJpFTWm2VxK8d8H6n8GjTZP9ZOgy2Kg==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
+        bh=jf92/Wj+99q9N62qtsjUys+ArdnU4uFjtsvRM76Wkkg=;
+        b=0gnefWZ9TgEIueh8XuQ7kLSIvle6Fu/Ah5NO+iJVJFJOnzb10IpQBFt54coDtBpxE5
+         vNIuEoBD4mOYP4nN3zl48nx0TvLWVNHR2cqRBTrUrZCYMOQNzE0n81/ST+A0kWs5Dvnq
+         o+GjB8q1gEgzy2a6a3amoUO01tqIn/7X3gZiqG/eVnttf9ZFLknsSXvlRfnjiFGkKKUi
+         DXTrWPuXIRzKLcn1nF3MIJxRkTDhiEUd+vR27nqWI2nhyE7eraQeTOXruIHNKLU4sVjO
+         BrY0YPQvloi/6V6Mn4IDqMCzkJQGQnT/fwp/efJlJzaoaLvsUj8hzm6FsMbpe9G9iS8p
+         blAA==
+X-Gm-Message-State: ACgBeo1P2Ai5euFy3uGv0xrp76aVMSPh2JO9eEUN41fpHnef4ieUrIFJ
+	fVjk6yz26HW7c5oIcEX6ZxR95BIldexbIg==
 X-Google-Smtp-Source: 
- AA6agR4OTDcZOXkNKJOMPzlSBHE7OuAxHzpGqIJ9xsGWWy3fmIAGEAsWJe8wGsE+Z45L10eWPJTDbw==
-X-Received: by 2002:a17:90a:150f:b0:1fb:aee:cd2a with SMTP id
- l15-20020a17090a150f00b001fb0aeecd2amr4134527pja.47.1661273484706;
-        Tue, 23 Aug 2022 09:51:24 -0700 (PDT)
+ AA6agR66KEFmBlfjbZ/9lOFKZfNcA8jKcQWYFshUkpO9lYqiltS1VFeMuhRBGayc+sbJM5XgiaRRHw==
+X-Received: by 2002:a17:903:41c1:b0:16f:68c:28 with SMTP id
+ u1-20020a17090341c100b0016f068c0028mr24809928ple.74.1661273485638;
+        Tue, 23 Aug 2022 09:51:25 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::6b6a])
         by smtp.gmail.com with ESMTPSA id
- q18-20020a170902f35200b0016be834d54asm10596856ple.306.2022.08.23.09.51.23
+ q18-20020a170902f35200b0016be834d54asm10596856ple.306.2022.08.23.09.51.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Aug 2022 09:51:24 -0700 (PDT)
+        Tue, 23 Aug 2022 09:51:25 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 1/4] ntpsec: Add -D_GNU_SOURCE and fix
- building with devtool
-Date: Tue, 23 Aug 2022 09:51:19 -0700
-Message-Id: <20220823165122.3248107-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/4] gd: Fix build with clang-15
+Date: Tue, 23 Aug 2022 09:51:20 -0700
+Message-Id: <20220823165122.3248107-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.2
+In-Reply-To: <20220823165122.3248107-1-raj.khem@gmail.com>
+References: <20220823165122.3248107-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
@@ -64,80 +65,148 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 23 Aug 2022 16:51:26 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98393
-
-wscript detects .git directory and if its present them invokes git
-describe --dirty which does not work on the devtool created git
-repository, since its synthesized.
-
-Add GNU_SOURCE define to get strptime() definition
+ https://lists.openembedded.org/g/openembedded-devel/message/98394
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...01-wscript-Widen-the-search-for-tags.patch | 29 +++++++++++++++++++
- .../recipes-support/ntpsec/ntpsec_1.2.1.bb    |  6 ++--
- 2 files changed, 33 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-support/ntpsec/ntpsec/0001-wscript-Widen-the-search-for-tags.patch
+ ...1-Fix-deprecared-function-prototypes.patch | 115 ++++++++++++++++++
+ meta-oe/recipes-support/gd/gd_2.3.3.bb        |   1 +
+ 2 files changed, 116 insertions(+)
+ create mode 100644 meta-oe/recipes-support/gd/gd/0001-Fix-deprecared-function-prototypes.patch
 
-diff --git a/meta-networking/recipes-support/ntpsec/ntpsec/0001-wscript-Widen-the-search-for-tags.patch b/meta-networking/recipes-support/ntpsec/ntpsec/0001-wscript-Widen-the-search-for-tags.patch
+diff --git a/meta-oe/recipes-support/gd/gd/0001-Fix-deprecared-function-prototypes.patch b/meta-oe/recipes-support/gd/gd/0001-Fix-deprecared-function-prototypes.patch
 new file mode 100644
-index 0000000000..98c62eed49
+index 0000000000..5ac5170721
 --- /dev/null
-+++ b/meta-networking/recipes-support/ntpsec/ntpsec/0001-wscript-Widen-the-search-for-tags.patch
-@@ -0,0 +1,29 @@
-+From 9a7dead72f41e79979625c9bdef2fb638427d3d6 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/gd/gd/0001-Fix-deprecared-function-prototypes.patch
+@@ -0,0 +1,115 @@
++From 6379331cd0647fc6f149f55e4505a9a92e4f159f Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 22 Aug 2022 20:54:17 -0700
-+Subject: [PATCH] wscript: Widen the search for tags
++Date: Mon, 22 Aug 2022 22:43:26 -0700
++Subject: [PATCH] Fix deprecared function prototypes
 +
-+Default is to look for annotated tags, howveer when using devtool we
-+create our own git tree from release tarballs which will have tags but
-+they are not annotated, therefore broaden the search to include all tags
++Fixes following errors:
++error: a function definition without a prototype is deprecated in all versions of C and is not supported in C2x [-Werror,-Wdeprecated-non-prototype]
 +
-+Upstream-Status: Inappropriate [OE-specific]
-+
++Upstream-Status: Submitted [https://github.com/libgd/libgd/pull/835]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ wscript | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ src/gd_nnquant.c | 32 +++++++-------------------------
++ src/gd_tiff.c    |  4 +---
++ 2 files changed, 8 insertions(+), 28 deletions(-)
 +
-+diff --git a/wscript b/wscript
-+index 879ded1..dff835d 100644
-+--- a/wscript
-++++ b/wscript
-+@@ -177,7 +177,7 @@ def configure(ctx):
-+     if build_desc:
-+         build_desc = ' ' + build_desc
-+     if ctx.env.BIN_GIT:
-+-        cmd = ctx.env.BIN_GIT + shlex.split("describe --dirty")
-++        cmd = ctx.env.BIN_GIT + shlex.split("describe --tags --dirty")
-+         git_short_hash = ctx.cmd_and_log(cmd).strip()
-+         git_short_hash = '-'.join(git_short_hash.split('-')[1:])
++diff --git a/src/gd_nnquant.c b/src/gd_nnquant.c
++index 8b9aa794..013f7160 100644
++--- a/src/gd_nnquant.c
+++++ b/src/gd_nnquant.c
++@@ -112,12 +112,7 @@ typedef struct {
 + 
-diff --git a/meta-networking/recipes-support/ntpsec/ntpsec_1.2.1.bb b/meta-networking/recipes-support/ntpsec/ntpsec_1.2.1.bb
-index cd8b396f19..e975f903f9 100644
---- a/meta-networking/recipes-support/ntpsec/ntpsec_1.2.1.bb
-+++ b/meta-networking/recipes-support/ntpsec/ntpsec_1.2.1.bb
-@@ -16,7 +16,9 @@ SRC_URI = "https://ftp.ntpsec.org/pub/releases/ntpsec-${PV}.tar.gz \
-            file://0001-ntpd-ntp_sandbox.c-allow-clone3-for-glibc-2.34-in-se.patch \
-            file://0001-ntpd-ntp_sandbox.c-allow-newfstatat-on-all-archs-for.patch \
-            file://0002-ntpd-ntp_sandbox.c-match-riscv-to-aarch-in-seccomp-f.patch \
--           file://volatiles.ntpsec"
-+           file://volatiles.ntpsec \
-+           file://0001-wscript-Widen-the-search-for-tags.patch \
-+           "
++ /* Initialise network in range (0,0,0,0) to (255,255,255,255) and set parameters
++    ----------------------------------------------------------------------- */
++-static void initnet(nnq, thepic, len, sample, colours)
++-nn_quant *nnq;
++-unsigned char *thepic;
++-int len;
++-int sample;
++-int colours;
+++static void initnet(nn_quant *nnq, unsigned char *thepic, int len, int sample, int colours)
++ {
++ 	register int i;
++ 	register int *p;
++@@ -163,9 +158,7 @@ static void unbiasnet(nn_quant *nnq)
++ }
++ 
++ /* Output colormap to unsigned char ptr in RGBA format */
++-static void getcolormap(nnq, map)
++-nn_quant *nnq;
++-unsigned char *map;
+++static void getcolormap(nn_quant *nnq, unsigned char *map)
++ {
++ 	int i,j;
++ 	for(j=0; j < nnq->netsize; j++) {
++@@ -232,9 +225,7 @@ static void inxbuild(nn_quant *nnq)
++ 
++ /* Search for ABGR values 0..255 (after net is unbiased) and return colour index
++ 	 ---------------------------------------------------------------------------- */
++-static unsigned int inxsearch(nnq, al,b,g,r)
++-nn_quant *nnq;
++-register int al, b, g, r;
+++static unsigned int inxsearch(nn_quant *nnq, int al, int b, int g, int r)
++ {
++ 	register int i, j, dist, a, bestd;
++ 	register int *p;
++@@ -306,9 +297,7 @@ register int al, b, g, r;
++ 
++ /* Search for biased ABGR values
++    ---------------------------- */
++-static int contest(nnq, al,b,g,r)
++-nn_quant *nnq;
++-register int al,b,g,r;
+++static int contest(nn_quant *nnq, int al, int b, int g, int r)
++ {
++ 	/* finds closest neuron (min dist) and updates freq */
++ 	/* finds best neuron (min dist-bias) and returns position */
++@@ -362,9 +351,7 @@ register int al,b,g,r;
++ /* Move neuron i towards biased (a,b,g,r) by factor alpha
++ 	 ---------------------------------------------------- */
++ 
++-static void altersingle(nnq, alpha,i,al,b,g,r)
++-nn_quant *nnq;
++-register int alpha,i,al,b,g,r;
+++static void altersingle(nn_quant *nnq, int alpha, int i,int al, int b, int g, int r)
++ {
++ 	register int *n;
++ 
++@@ -382,10 +369,7 @@ register int alpha,i,al,b,g,r;
++ /* Move adjacent neurons by precomputed alpha*(1-((i-j)^2/[r]^2)) in radpower[|i-j|]
++ 	 --------------------------------------------------------------------------------- */
++ 
++-static void alterneigh(nnq, rad,i,al,b,g,r)
++-nn_quant *nnq;
++-int rad,i;
++-register int al,b,g,r;
+++static void alterneigh(nn_quant *nnq, int rad, int i, int al,int b,int g, int r)
++ {
++ 	register int j,k,lo,hi,a;
++ 	register int *p, *q;
++@@ -429,9 +413,7 @@ register int al,b,g,r;
++ /* Main Learning Loop
++    ------------------ */
++ 
++-static void learn(nnq, verbose) /* Stu: N.B. added parameter so that main() could control verbosity. */
++-nn_quant *nnq;
++-int verbose;
+++static void learn(nn_quant *nnq, int verbose) /* Stu: N.B. added parameter so that main() could control verbosity. */
++ {
++ 	register int i,j,al,b,g,r;
++ 	int radius,rad,alpha,step,delta,samplepixels;
++diff --git a/src/gd_tiff.c b/src/gd_tiff.c
++index 7f72b610..3d90e61a 100644
++--- a/src/gd_tiff.c
+++++ b/src/gd_tiff.c
++@@ -446,9 +446,7 @@ BGD_DECLARE(void) gdImageTiffCtx(gdImagePtr image, gdIOCtx *out)
++ }
++ 
++ /* Check if we are really in 8bit mode */
++-static int checkColorMap(n, r, g, b)
++-int n;
++-uint16_t *r, *g, *b;
+++static int checkColorMap(int n, uint16_t *r, uint16_t *g, uint16_t *b)
++ {
++ 	while (n-- > 0)
++ 		if (*r++ >= 256 || *g++ >= 256 || *b++ >= 256)
+diff --git a/meta-oe/recipes-support/gd/gd_2.3.3.bb b/meta-oe/recipes-support/gd/gd_2.3.3.bb
+index 9d4ee1fe4b..cc2c1571e6 100644
+--- a/meta-oe/recipes-support/gd/gd_2.3.3.bb
++++ b/meta-oe/recipes-support/gd/gd_2.3.3.bb
+@@ -14,6 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ace63adfdac78400fc30fa22ee9c1bb1"
+ DEPENDS = "freetype libpng jpeg zlib tiff"
  
- SRC_URI[sha256sum] = "f2684835116c80b8f21782a5959a805ba3c44e3a681dd6c17c7cb00cc242c27a"
+ SRC_URI = "git://github.com/libgd/libgd.git;nobranch=1;protocol=https \
++           file://0001-Fix-deprecared-function-prototypes.patch \
+            "
  
-@@ -56,7 +58,7 @@ export PYTAG = "cpython${@ d.getVar('PYTHON_BASEVERSION').replace('.', '')}"
- export pyext_PATTERN = "%s.so"
- export PYTHON_LDFLAGS = "-lpthread -ldl"
- 
--CFLAGS:append = " -I${PYTHON_INCLUDE_DIR}"
-+CFLAGS:append = " -I${PYTHON_INCLUDE_DIR} -D_GNU_SOURCE"
- 
- EXTRA_OECONF = "--cross-compiler='${CC}' \
-                 --cross-cflags='${CFLAGS}' \
+ SRCREV = "b5319a41286107b53daa0e08e402aa1819764bdc"
 -- 
 2.37.2
 
