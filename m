@@ -2,46 +2,47 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0FE70C3F6B0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0EA83C32772
 	for <webhook@archiver.kernel.org>; Tue, 23 Aug 2022 11:02:21 +0000 (UTC)
 Received: from voyager.superhosting.bg (voyager.superhosting.bg
  [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web10.30624.1661252534836102957
+ by mx.groups.io with SMTP id smtpd.web12.29941.1661252535947479539
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Aug 2022 04:02:15 -0700
+ Tue, 23 Aug 2022 04:02:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=vZ7ObF33;
+ dkim=pass header.i=@anavi.org header.s=default header.b=QekDnjY5;
  spf=permerror,
  err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
  for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
  (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
-	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
-	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
-	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=AKIyIEaAPGof6f3BAMZu5SMeipGlUOAPyQWRQv12niI=; b=vZ7ObF33sxywjdxyrp3oSwmeUg
-	BFrWQCa3+5WAN5weQxgGib4Ej6CbVWyslB+qaEIQQ6vA9r/VTzlD+2eP4j2kHX3G01O35R9+G8Vgb
-	1iCTEz1yRVlqNgoDW+ttaUY7W+CgjN4zPh9Er9aqfokF7+99ePneJARi/i4op9nbZ+JLip6QiUdsD
-	AS/lChIQqS5ZM/QPPTsS6sWTOCTN8MSCB6gUNJSgW+rFqVQomZOI9T4NYSft/DLxeUpfKhwSiVNHO
-	z+BJ98/o6fOEy7CtxzKl6aXu7V3KG8UnhLyAVqeZZ0dheq/nGDpeOs901yV9GCFEJBWLr8SSjdPeR
-	xFqO6NTQ==;
+	bh=U8DbVWIiavFKLlMcWoX7Mu9Mdic/uQaafI940JG/KS0=; b=QekDnjY57xdjVdcogTINdeepKD
+	aqXvi2uSb9XxC8jCYs4zsBvgXaCm1bHm5yi+IlqujZzukT40DLb5m8j71zU+sz4pePvkMthGBP/nJ
+	WBK4axjC9Agx3SZbc31rKMqDWrot16oXkHEViQPNRzRBqgKve+g5njFz/1X28fw/MWQGIsMsXgTKF
+	+zsJYHSBEIlzHCPKU3b9Zse9zcfp76jB8chgOuSn1ofwdPt/ooFxLm02L15gkzP8At2F5W5ffTDmC
+	tGHbWA8KM97CgMa1ghQMT29F1UBDiHcwRlEwEEY0mmtNmh/Fxv6bbT6+HJDlKwjZZuZIHYjmNg4pS
+	W40NstWg==;
 Received: from lan.nucleusys.com ([92.247.61.126]:60034 helo=tone.k.g)
 	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.95)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1oQRfi-0000ni-W9;
-	Tue, 23 Aug 2022 14:02:12 +0300
+	id 1oQRfl-0000ni-9r;
+	Tue, 23 Aug 2022 14:02:14 +0300
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/4] python3-awesomeversion: Upgrade 22.6.0 ->
- 22.8.0
-Date: Tue, 23 Aug 2022 14:02:01 +0300
-Message-Id: <20220823110204.2685251-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/4] python3-typed-ast: Upgrade 1.5.2 -> 1.5.4
+Date: Tue, 23 Aug 2022 14:02:02 +0300
+Message-Id: <20220823110204.2685251-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20220823110204.2685251-1-leon.anavi@konsulko.com>
+References: <20220823110204.2685251-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-AntiAbuse: This header was added to track abuse,
@@ -61,39 +62,34 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 23 Aug 2022 11:02:21 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98388
+ https://lists.openembedded.org/g/openembedded-devel/message/98389
 
-Upgrade to release 22.8.0:
+Upgrade to release 1.5.4:
 
-- Change devcontainer
-- Do not allow find_first_match without ensure_strategy
-- Warn instead of raise for missing ensure_strategy
-- Correct spelling mistakes
-- Handle KeyError
-- _compare_versions takes AwesomeVersion not str
+- Do not include now private code.h
+- Fix Python 3.11 support
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...wesomeversion_22.6.0.bb => python3-awesomeversion_22.8.0.bb} | 2 +-
+ .../{python3-typed-ast_1.5.2.bb => python3-typed-ast_1.5.4.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-awesomeversion_22.6.0.bb => python3-awesomeversion_22.8.0.bb} (82%)
+ rename meta-python/recipes-devtools/python/{python3-typed-ast_1.5.2.bb => python3-typed-ast_1.5.4.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-awesomeversion_22.6.0.bb b/meta-python/recipes-devtools/python/python3-awesomeversion_22.8.0.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-awesomeversion_22.6.0.bb
-rename to meta-python/recipes-devtools/python/python3-awesomeversion_22.8.0.bb
-index cadb6f502..550a8c439 100644
---- a/meta-python/recipes-devtools/python/python3-awesomeversion_22.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-awesomeversion_22.8.0.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENCE.md;md5=92622b5a8e216099be741d78328bae5d"
+diff --git a/meta-python/recipes-devtools/python/python3-typed-ast_1.5.2.bb b/meta-python/recipes-devtools/python/python3-typed-ast_1.5.4.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-typed-ast_1.5.2.bb
+rename to meta-python/recipes-devtools/python/python3-typed-ast_1.5.4.bb
+index 55cd78ce8..e6c1746a8 100644
+--- a/meta-python/recipes-devtools/python/python3-typed-ast_1.5.2.bb
++++ b/meta-python/recipes-devtools/python/python3-typed-ast_1.5.4.bb
+@@ -7,6 +7,6 @@ PYPI_PACKAGE = "typed_ast"
  
--SRC_URI[sha256sum] = "38f580bfacf1c06b674bcd0f68e0c445ebb03fcd3700c6a2c588fb9313308e0f"
-+SRC_URI[sha256sum] = "0469a801faafb3a7a13c529edc977ea04c3bce825af9ebb602f58012bc487db5"
+ inherit pypi setuptools3
  
- RDEPENDS:${PN} += "python3-profile python3-logging"
+-SRC_URI[sha256sum] = "525a2d4088e70a9f75b08b3f87a51acc9cde640e19cc523c7e41aa355564ae27"
++SRC_URI[sha256sum] = "39e21ceb7388e4bb37f4c679d72707ed46c2fbf2a5609b8b8ebc4b067d977df2"
  
+ BBCLASSEXTEND = "native"
 -- 
 2.30.2
 
