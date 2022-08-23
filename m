@@ -1,154 +1,116 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 49ECBC32772
-	for <webhook@archiver.kernel.org>; Tue, 23 Aug 2022 18:09:17 +0000 (UTC)
-Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
- by mx.groups.io with SMTP id smtpd.web11.1257.1661278156149237524
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B80FC32789
+	for <webhook@archiver.kernel.org>; Tue, 23 Aug 2022 18:23:47 +0000 (UTC)
+Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com
+ [209.85.128.177])
+ by mx.groups.io with SMTP id smtpd.web08.1481.1661279022211705385
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Aug 2022 11:09:16 -0700
+ Tue, 23 Aug 2022 11:23:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.21,
- mailfrom: f_l_k@t-online.de)
-Received: from fwd74.dcpf.telekom.de (fwd74.aul.t-online.de [10.223.144.100])
-	by mailout10.t-online.de (Postfix) with SMTP id 924928B92;
-	Tue, 23 Aug 2022 20:09:13 +0200 (CEST)
-Received: from [192.168.178.83] ([84.163.34.135]) by fwd74.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1oQYKv-2Fky7U0; Tue, 23 Aug 2022 20:09:13 +0200
-Date: Tue, 23 Aug 2022 20:09:07 +0200
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-oe][PATCH] iwd: update to v1.29
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Message-Id: <7FY2HR.4H45DZM8RBZ62@t-online.de>
-In-Reply-To: 
-	<CAMKF1srCBp7mWz7+b7AKUH-dZo1RjGdgNirykQ7NUkTWwcc9fQ@mail.gmail.com>
-References: <20220823175108.18584-1-f_l_k@t-online.de>
-	<CAMKF1srCBp7mWz7+b7AKUH-dZo1RjGdgNirykQ7NUkTWwcc9fQ@mail.gmail.com>
-X-Mailer: geary/40.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=PuiqGybc;
+ spf=pass (domain: gmail.com, ip: 209.85.128.177,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f177.google.com with SMTP id
+ 00721157ae682-31f445bd486so401311537b3.13
+        for <openembedded-devel@lists.openembedded.org>;
+ Tue, 23 Aug 2022 11:23:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc;
+        bh=umjN2OTig6mYPFx9dleHKdNwAP0lVQ8lMn3L+X8p6eA=;
+        b=PuiqGybcddCkMkXQb4QFzVpiSJ8tO7+WMbC20gCiHAalznAFNR5x5JC0B++8siI9Hv
+         wjGUxRdqQ5G/QfKTKnq6cRf3ZrttfOzJPzc52I42vIbQJ7Xexw2eL7E8WdEdDoBZFQJg
+         4JSPByaibrbeGk0Gy/IUDpeLSnLA5pwJ/59Gmk0bjD20b/TG7mF+gFCDfhabFb0QHqKI
+         TThA8hFXkbl1doC99rDGqsE9/Rlvo7U3aYeaWvrgpykfmbhNugcaVwc6CiydybGNKBXk
+         7/HVl9mvSXqPWiObqzYCFs2dXWDOM8UaBF16Eg6D1WRRj5CMscnDBY400A1EZ31z0LEp
+         hWXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc;
+        bh=umjN2OTig6mYPFx9dleHKdNwAP0lVQ8lMn3L+X8p6eA=;
+        b=BeQqTjTMrfgllyq9evyVM9S2DDHjglTOXnFxhy9BdRuoAzFVTZ1KhVhgOvVOqoGCIa
+         bObe8w/5voc5caW8/LtR3ZaZuyfbt+x380Rcvc8OdT3kmXTsPOEdx1kZoaf575mB88EZ
+         gx3fsv/Q9gH2TCJBaNYPUUd6H03YqCTAhKnd4jU02YCPRvRgj5XGbyl8erq1qQXBooQT
+         0SHfLX9ihHuwDDvKaWWONvH8nKVPaaEjLinstJH/tTgv6Bp/2DlgLEh6C7WPgYC1xRoA
+         HX0DJiqss0jO3EDbrGc7wSy7iCQ1v4lWf367o4WgtkfrWV6RrOFE6W/O/T/fkzCQECde
+         coLQ==
+X-Gm-Message-State: ACgBeo1eK0Ter/+RyDPMKPXfmbeCsNUm0O7nBpHXSKria7pBr/5VYFXj
+	O73cVgo+qJ3auxieCW1xAVoZJXlpcTShEWQZ4Mw=
+X-Google-Smtp-Source: 
+ AA6agR6FNdB47bWKLdJHqEkmgQ+bVEC7U/rVlu7QgNFELYYbTyoROuHqNqmY//nK8XQEWGQ1npwzHfCBeS0Glopxlho=
+X-Received: by 2002:a0d:edc2:0:b0:338:957:a719 with SMTP id
+ w185-20020a0dedc2000000b003380957a719mr22964744ywe.132.1661279021326; Tue, 23
+ Aug 2022 11:23:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-dEl+Qv1ryNRvCnunUuC3"
-X-TOI-EXPURGATEID: 150726::1661278153-0144CE29-A07DDF55/0/0 CLEAN NORMAL
-X-TOI-MSGID: 3867e2c1-5fea-426b-8c2d-62baa295c6af
+References: <20220823172602.212-1-workjagadeesh@gmail.com>
+ <20220823172602.212-2-workjagadeesh@gmail.com>
+In-Reply-To: <20220823172602.212-2-workjagadeesh@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 23 Aug 2022 11:23:15 -0700
+Message-ID: 
+ <CAMKF1soKDpxbLY9DgHRkiAHGey_oL29Fb242byujb3WZt3sAcg@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 2/3] python3-django: make 3.2.x as
+ default version
+To: Jagadeesh Krishnanjanappa <workjagadeesh@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 Aug 2022 18:09:17 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 Aug 2022 18:23:47 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98402
+ https://lists.openembedded.org/g/openembedded-devel/message/98403
 
---=-dEl+Qv1ryNRvCnunUuC3
-Content-Type: text/plain; charset=us-ascii; format=flowed
+On Tue, Aug 23, 2022 at 10:26 AM Jagadeesh Krishnanjanappa
+<workjagadeesh@gmail.com> wrote:
+>
+> According to https://www.djangoproject.com/download/ python3-django
+> 3.2.x has LTS support upto 2024, hence make it as default version
+> to build.
 
-my meta-openembedded clone was too old, sorry
+It seems 2.2 LTS went EOL  on April 11, 2022, can you also send a
+patch to remove those recipes while you are here.
 
-Am Di, 23. Aug 2022 um 11:06:24 -0700 schrieb Khem Raj 
-<raj.khem@gmail.com>:
-> there is a patch already for this in master
-> <https://git.openembedded.org/meta-openembedded/commit/?id=4fa7d9ee9ad54f1f22a3a92410bbc474f0de8a10>
-> 
-> On Tue, Aug 23, 2022 at 10:51 AM Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>> wrote:
->> 
->>  Signed-off-by: Markus Volk <f_l_k@t-online.de 
->> <mailto:f_l_k@t-online.de>>
->>  ---
->>   meta-oe/recipes-connectivity/iwd/{iwd_1.28.bb => iwd_1.29.bb} | 2 
->> +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>   rename meta-oe/recipes-connectivity/iwd/{iwd_1.28.bb => 
->> iwd_1.29.bb} (94%)
->> 
->>  diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.28.bb 
->> b/meta-oe/recipes-connectivity/iwd/iwd_1.29.bb
->>  similarity index 94%
->>  rename from meta-oe/recipes-connectivity/iwd/iwd_1.28.bb
->>  rename to meta-oe/recipes-connectivity/iwd/iwd_1.29.bb
->>  index 40f35b15a..eada93b65 100644
->>  --- a/meta-oe/recipes-connectivity/iwd/iwd_1.28.bb
->>  +++ b/meta-oe/recipes-connectivity/iwd/iwd_1.29.bb
->>  @@ -8,7 +8,7 @@ DEPENDS = "ell"
->>   SRC_URI = 
->> "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar.xz 
->> <https://www.kernel.org/pub/linux/network/wireless/$%7BBP%7D.tar.xz> 
->> \
->>              
->> file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-for-e.patch 
->> <file://0001-build-use-abs_top_srcdir-instead-of-abs_srcdir-for-e.patch/> 
->> \
->>              "
->>  -SRC_URI[sha256sum] = 
->> "ee538c720ad15335ece81a52a4b8a11820236df9ed9a5a72a2e64d74c652f0b0"
->>  +SRC_URI[sha256sum] = 
->> "71533fe3b8f6381f24832198ba11d00f04a361454770c173b3b66bc3cdf272bd"
->> 
->>   inherit autotools manpages pkgconfig python3native systemd
->> 
->>  --
->>  2.34.1
->> 
->> 
->>  -=-=-=-=-=-=-=-=-=-=-=-
->>  Links: You receive all messages sent to this group.
->>  View/Reply Online (#98400): 
->> <https://lists.openembedded.org/g/openembedded-devel/message/98400>
->>  Mute This Topic: 
->> <https://lists.openembedded.org/mt/93210019/1997914>
->>  Group Owner: openembedded-devel+owner@lists.openembedded.org 
->> <mailto:openembedded-devel+owner@lists.openembedded.org>
->>  Unsubscribe: 
->> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
->> [raj.khem@gmail.com <mailto:raj.khem@gmail.com>]
->>  -=-=-=-=-=-=-=-=-=-=-=-
->> 
-
-
---=-dEl+Qv1ryNRvCnunUuC3
-Content-Type: text/html; charset=us-ascii
-
-<div id="geary-body" dir="auto"><div>my meta-openembedded clone was too old, sorry</div></div><div id="geary-quote" dir="auto"><br>Am Di, 23. Aug 2022 um 11:06:24 -0700 schrieb Khem Raj &lt;raj.khem@gmail.com&gt;:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">there is a patch already for this in master
-<a href="https://git.openembedded.org/meta-openembedded/commit/?id=4fa7d9ee9ad54f1f22a3a92410bbc474f0de8a10">https://git.openembedded.org/meta-openembedded/commit/?id=4fa7d9ee9ad54f1f22a3a92410bbc474f0de8a10</a>
-
-On Tue, Aug 23, 2022 at 10:51 AM Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt; wrote:
-<blockquote>
- Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
- ---
-  meta-oe/recipes-connectivity/iwd/{iwd_1.28.bb =&gt; iwd_1.29.bb} | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
-  rename meta-oe/recipes-connectivity/iwd/{iwd_1.28.bb =&gt; iwd_1.29.bb} (94%)
-
- diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.28.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.29.bb
- similarity index 94%
- rename from meta-oe/recipes-connectivity/iwd/iwd_1.28.bb
- rename to meta-oe/recipes-connectivity/iwd/iwd_1.29.bb
- index 40f35b15a..eada93b65 100644
- --- a/meta-oe/recipes-connectivity/iwd/iwd_1.28.bb
- +++ b/meta-oe/recipes-connectivity/iwd/iwd_1.29.bb
- @@ -8,7 +8,7 @@ DEPENDS = "ell"
-  SRC_URI = "<a href="https://www.kernel.org/pub/linux/network/wireless/${BP}.tar.xz">https://www.kernel.org/pub/linux/network/wireless/${BP}.tar.xz</a> \
-             <a href="file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-for-e.patch">file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-for-e.patch</a> \
-             "
- -SRC_URI[sha256sum] = "ee538c720ad15335ece81a52a4b8a11820236df9ed9a5a72a2e64d74c652f0b0"
- +SRC_URI[sha256sum] = "71533fe3b8f6381f24832198ba11d00f04a361454770c173b3b66bc3cdf272bd"
-
-  inherit autotools manpages pkgconfig python3native systemd
-
- --
- 2.34.1
-
-
- -=-=-=-=-=-=-=-=-=-=-=-
- Links: You receive all messages sent to this group.
- View/Reply Online (#98400): <a href="https://lists.openembedded.org/g/openembedded-devel/message/98400">https://lists.openembedded.org/g/openembedded-devel/message/98400</a>
- Mute This Topic: <a href="https://lists.openembedded.org/mt/93210019/1997914">https://lists.openembedded.org/mt/93210019/1997914</a>
- Group Owner: <a href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
- Unsubscribe: <a href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>]
- -=-=-=-=-=-=-=-=-=-=-=-
-
-</blockquote></div></blockquote></div>
---=-dEl+Qv1ryNRvCnunUuC3--
-
+> Also, add runtime dependency on python3-asgiref as the "django-admin"
+> script needs asgiref module.
+>
+> More info: https://bugzilla.yoctoproject.org/show_bug.cgi?id=14888
+>
+> Signed-off-by: Jagadeesh Krishnanjanappa <workjagadeesh@gmail.com>
+> ---
+>  .../recipes-devtools/python/python3-django_3.2.12.bb        | 6 +-----
+>  1 file changed, 1 insertion(+), 5 deletions(-)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-django_3.2.12.bb b/meta-python/recipes-devtools/python/python3-django_3.2.12.bb
+> index adbc498bd..17d402d65 100644
+> --- a/meta-python/recipes-devtools/python/python3-django_3.2.12.bb
+> +++ b/meta-python/recipes-devtools/python/python3-django_3.2.12.bb
+> @@ -5,9 +5,5 @@ SRC_URI[sha256sum] = "9772e6935703e59e993960832d66a614cf0233a1c5123bc6224ecc6ad6
+>
+>  RDEPENDS:${PN} += "\
+>      ${PYTHON_PN}-sqlparse \
+> +    ${PYTHON_PN}-asgiref \
+>  "
+> -
+> -# Set DEFAULT_PREFERENCE so that the LTS version of django is built by
+> -# default. To build the 3.x branch,
+> -# PREFERRED_VERSION_python3-django = "3.2.2" can be added to local.conf
+> -DEFAULT_PREFERENCE = "-1"
+> --
+> 2.17.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#98398): https://lists.openembedded.org/g/openembedded-devel/message/98398
+> Mute This Topic: https://lists.openembedded.org/mt/93209460/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
