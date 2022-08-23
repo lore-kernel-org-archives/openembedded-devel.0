@@ -1,382 +1,143 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <richard.leitner@skidata.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 382D0C28D13
-	for <webhook@archiver.kernel.org>; Mon, 22 Aug 2022 17:19:56 +0000 (UTC)
-Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
- by mx.groups.io with SMTP id smtpd.web08.20954.1661188790956419048
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 50AF3C25B08
+	for <webhook@archiver.kernel.org>; Tue, 23 Aug 2022 04:31:59 +0000 (UTC)
+Received: from CHE01-GV0-obe.outbound.protection.outlook.com
+ (CHE01-GV0-obe.outbound.protection.outlook.com [40.107.23.133])
+ by mx.groups.io with SMTP id smtpd.web09.28069.1661229111131816609
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Aug 2022 10:19:51 -0700
+ Mon, 22 Aug 2022 21:31:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.19,
- mailfrom: f_l_k@t-online.de)
-Received: from fwd72.dcpf.telekom.de (fwd72.aul.t-online.de [10.223.144.98])
-	by mailout06.t-online.de (Postfix) with SMTP id 5966D1799F
-	for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Aug 2022 19:19:49 +0200 (CEST)
-Received: from flk-MS-7C91.. ([84.154.174.226]) by fwd72.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1oQB5X-0UnCYz0; Mon, 22 Aug 2022 19:19:48 +0200
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: Markus Volk <f_l_k@t-online.de>
-Subject: [meta-multimedia][PATCHv12] pipewire: update to v0.3.56
-Date: Mon, 22 Aug 2022 19:19:40 +0200
-Message-Id: <20220822171940.4736-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@skidata.com header.s=selector1 header.b=HYEmx4LB;
+ spf=pass (domain: skidata.com, ip: 40.107.23.133,
+ mailfrom: richard.leitner@skidata.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ZemJVzBGYAKLtGmk3b/zA62OD1Fa8MFiXGgJxFihh022eGnW7ls76DUUG9+sXCmvO5sq132D0W9getysXIcuUYFoYGiXmRrlUe4bo0GlwHOwFAv47nATs+ZA9mHkLHQJ6AH8LE5HkpKQ+6l9LeDPtfUXPgKdSwKAJIOQwnsblytplq/PpzKMKu4TqGglTSoAOSuFShq68mUzbEs6R9pDk9ppGrEOGwtLoybBKfV1UEIdSpb9IJ63eaVypinbpyy3/mXJCGxdwm6hMqZfTY5vzDci+KS7z1CtSQ5EgjSskn2PusQ8kw/YVQbMMK03P+9fh0kz0Q52KQzN2k7ZxyiRmg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IiUHQllvxWUqbGR+XjtmHL8av9unjzPkFUJiIPsRGGE=;
+ b=cDzmIx7GVKBYqVJrFFhDmhWILnajugyqBNfdWsbCGTRLVZAPc/g5gBgi2JMcY6s9lRnhASjUFQnBI4Ce4mnOTVL0s/Ky+/+5xFwRjiXbXVK4+Cj2yqgbxMp3KVSyGVvttWCTU4czdZTHVYVWwEBlKrgA/arEIDQAp0Ji5yDKGuVe2MndkUsF/NRuR388VClCH5wBneIvUSYiHD8NpGMPVk9Cfn8wO/CNwMjac+bty1y3QNK91mJ3gFxL8R2ET9Ne661UOY2WEs0DS1W2ydSiAdW+yqbQfWrJi4rNpqi5/Hhenm0ZXCHzHwqfwVkB/V7M5WDiZ54xf+M36N1kSQup0w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=skidata.com; dmarc=pass action=none header.from=skidata.com;
+ dkim=pass header.d=skidata.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=skidata.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IiUHQllvxWUqbGR+XjtmHL8av9unjzPkFUJiIPsRGGE=;
+ b=HYEmx4LBHzLGHKfR/fJMmywxh9gQ6TD5K7t+k97bispDeFM5Q5ncA9BfaIT/HSnaTzbNXYTMEcOx8o5czYpBaSgCzNLyTfxAomlp6k5HEnlJ5aq0u2TzytcKeK+wP+6JOjZkHXm5/67K3Opt0aDYVVwGii4wr7p4o4Flv/mn1/mJgiqA57AyqrdmOhn7DOl85OTXOi2b3UD0YmvyWOSH8yrpULhKeLTeUx9+542oksxoPFle6zi00LUjwSMB1iVPsIUqHhy/yR9XNv9CRDdegTtxtML73pJGTlaZuPsGBrkPHZeHLqPGsdGVum+pqPcNzdcuODxCC+GEaghNgrgPTQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=skidata.com;
+Received: from ZR0P278MB0798.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:43::8) by
+ GV0P278MB0516.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:2e::11) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5546.16; Tue, 23 Aug 2022 04:31:46 +0000
+Received: from ZR0P278MB0798.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::91f2:a7f5:699b:388f]) by ZR0P278MB0798.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::91f2:a7f5:699b:388f%9]) with mapi id 15.20.5546.024; Tue, 23 Aug 2022
+ 04:31:46 +0000
+Date: Tue, 23 Aug 2022 06:31:43 +0200
+From: Richard Leitner <richard.leitner@skidata.com>
+To: Andrei Gherzan <andrei@gherzan.com>
+Cc: openembedded <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-java][PATCH 1/3] classpath: Use an include file for
+ x11 feature check
+Message-ID: <YwRYL6yEEusxD0gn@skidata.com>
+References: <20220817114308.347965-1-andrei@gherzan.com>
+ <YwMyZdfwL6KGQ3Bv@skidata.com>
+ <e7fb7e92-9040-4137-9e02-d83d57b0d581@www.fastmail.com>
+ <YwM7IAvEulD79BzG@skidata.com>
+ <894c6ed7-e7cb-4434-b132-861ba83a913d@www.fastmail.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <894c6ed7-e7cb-4434-b132-861ba83a913d@www.fastmail.com>
+X-ClientProxiedBy: FR0P281CA0092.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a9::13) To ZR0P278MB0798.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:43::8)
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1661188788-01449CE0-45D7B638/0/0 CLEAN NORMAL
-X-TOI-MSGID: 7eb9e419-b237-4c2d-8ce1-0e8147c74732
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: f02dd05e-81ed-4eb6-1f34-08da84c06371
+X-MS-TrafficTypeDiagnostic: GV0P278MB0516:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	e88A4+TCkwEAPV17N2LRrG9ABUqLsycWmNI24O1MHJqnLshYs5KceYUbMb8/eIYlapSk5M6h0MrvkOX0k9JeYIlPW4SlOMYU/DIgCB5K3n/tQmqQJOT7GECSSk4o5ffHb/TSUarAmoi2RElRLhSwR0YsmjHQ5KZzlurHwjRV7Tswq1ZEZdcTc8YagCq+lWmcL0JOlYBo3NEMLiqNFzkPQSJdlSj+HoXnf7VTEASP8wSeflKFks3NDjsXlpU4Uji3ZTZTfF46dBIxK7uYI604cdq4xSczG5yduUor88tvwAeuQZ4V1q5ebE4CVlK3fj+pijocYSwCjkfCdLdhjXMRqTc+DqEV27uNR+5JOy6cULKEMJeJeAuq7AXj69VkXU3iebrYyLnFYYtLTu5n4XGel27gau6uDhYAtj54rF92JJooFApYiBjVTxSfFZGRzwTCsuRBajkdS4jeC8Ya194moTGSnZdXPNS5OMgBPWdVCgWroqZGc5xTG9EzB5yAK1jfXDVAMO7Im9YEvjAiwke2WuvsmbU/C3X61a6auHwXc5UrRWTjwpgWB5eIkf/SJdHnde51EpECLiXHLlz/lY2fRg9ldLmssq2LTupZa9QVXZMaxQE3BFqWPrdRJ03PMa0xkukoATk4jYEvSEWMAiZqso+dJTxW8gfKi9a2T2o5RbHLTYVqXerPCWxDusfDBujphHnF54g4/A85BIizzq32BA==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:ZR0P278MB0798.CHEP278.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230016)(4636009)(366004)(396003)(136003)(346002)(376002)(39860400002)(186003)(2616005)(6506007)(6666004)(6512007)(5660300002)(4744005)(8936002)(44832011)(478600001)(86362001)(36756003)(41300700001)(6486002)(6916009)(8676002)(4326008)(2906002)(316002)(38100700002)(66946007)(66476007)(66556008);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?8bJvZvbFNIAI95uMgG2WPN85hgrwHBMLutHSPG1CKg44+NhhViRbk4cus++1?=
+ =?us-ascii?Q?4/LTZbWm6w+019G35BMhGzkFvhUJsNEFi45UsF0mACM+A5YMY/jZetHbLYtA?=
+ =?us-ascii?Q?I5xUDjiQ7WOFH0WjaQHAez1nTTGcO6EaLpxFuHHIhVFdD3Y+WClmr1VtUNUz?=
+ =?us-ascii?Q?EXwp5Omrlo+mfH2BVGdduKU57aYA3inzpZagrw/y7AlkzZqZBQ0B8KLrz695?=
+ =?us-ascii?Q?1Jyne7Gb+3/jyXFGBmQ9oSpfgLVF+eM9qXeKjpYHQU8aoXOL913hoqVf/+VT?=
+ =?us-ascii?Q?D+I2ctZJ+X0u+DEpZ+TtPYkezWJ3De+89UjaLy7OCt5O0HpBan7KqeHrcPS4?=
+ =?us-ascii?Q?MRH8Xs1FKUsSp2MAqadmb5MDPV1k6ZjJ8g3lxZ8ypaERI4KUavLAQUBF64Mi?=
+ =?us-ascii?Q?NtzqLWFtA5z+v8UtsPHdBcPrgqsoPYG1721V0t29KARKyaFG5IHdNRRbfxZE?=
+ =?us-ascii?Q?Diwv6ZEWBkAFiLX3SvvQX7P8o1l3E/+07w1sze4RNgfmiEjDof/o0OagLo4c?=
+ =?us-ascii?Q?nCGMPVe+uxfWPTcO0Fb/djmzlSyPsGlzoT8RaZsgjl/CRlnAFW5pTrzX+PJs?=
+ =?us-ascii?Q?WwCiVF+dgtr4t9272HCnHy2SDCWS2P3fXZx+RcIcnogu/JPBdGPDA3t3ZLq2?=
+ =?us-ascii?Q?sL2WNOiJ3BGjWFr7/pxtHqW+nzlI74k3U/TBd/CTLrLPtEVsLrzUPGrqYJ6Z?=
+ =?us-ascii?Q?Cwa8vcCjR7t0/u/DgAGjobyoYkP4Vjz6yet9UWJDBPUQT35KoTvC5mJY2QdO?=
+ =?us-ascii?Q?1Mea6ey1MmedN7+o+U1koL63NAeJUB0Yb0/BpncmIEhQrx2GQO+38ybeLymu?=
+ =?us-ascii?Q?fF8+dx3HxGsPkBtqsBbNje71W7O7ZhdvfSSbcWOjRmlLj2qPijHwk/XATdLH?=
+ =?us-ascii?Q?LxOSh+Wo2zcQb19+/eG909G891ueSCJGU3pcat5Gch6DyZuxRKnbvktDspO/?=
+ =?us-ascii?Q?GEa736vwXDv2Lh1wA+ksvxp2XcqxFxSpnrkvKzb2hA1DL+BKYWGVungwPRJF?=
+ =?us-ascii?Q?ULNAev7xvquu3ybQq4zceqRLDXTDS0Hw+R/+f9deHOpjPZRzAJJ6slJFQZoA?=
+ =?us-ascii?Q?6OxFKI1B28jmS10O/nb7BhnHhRyNthpnkSe3ij/sfzGBnPCSmRjHuZpnb4Zw?=
+ =?us-ascii?Q?/nZmhwrZDEUsWu2Mxjgqa/6tPbK+jtIexUEJqBCE8Zvpa7PVoF9dvBS+ChJm?=
+ =?us-ascii?Q?MdvGoy90N8ODL24uXCGBsEGjTgDem/s03NChCZPhLxXfDeKTqDleBHdloX+M?=
+ =?us-ascii?Q?mps9Ml/DvgSHQCq36Flpujsrx1tqSz5QZr3B2QTDFr/0viSoIlymJECIEmpT?=
+ =?us-ascii?Q?XIu1AQS74xQSGGbVVovDNqhnxW0jk6sqaMPNas84bahCzRVGbSIH9H8BkrBZ?=
+ =?us-ascii?Q?s62dMF9+8Id76N+xxROwuyqa9ijGhzTmPV/RqQ4gUUjPC+zUdwsNHv278uHx?=
+ =?us-ascii?Q?Z9QnnzJEuQrXrgYHRKikuaUCYoFb+NeTLrim7D5pRu4j3o7RxQq/9UQtmUga?=
+ =?us-ascii?Q?fnO46nrK4MYvXBamAqe5SM5EEDL+BAqY9hrNrS0pxqZ050WeNvTCcASH8Qu1?=
+ =?us-ascii?Q?pQapME+r69TAG6vvDBc0W1dVWtW26bkyTmnq3UrgEnW+8gsQCz8lVQalxduf?=
+ =?us-ascii?Q?zLmK4iMQv825IRUnbexiDfL9TxGajOxgZp3lfKx3RD8m3LqjM6M1kqnxmzDe?=
+ =?us-ascii?Q?lp8N7A=3D=3D?=
+X-OriginatorOrg: skidata.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ f02dd05e-81ed-4eb6-1f34-08da84c06371
+X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0798.CHEP278.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Aug 2022 04:31:46.4384
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e5733095-4425-4f08-b6ba-487b9a46a425
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 
+ j7Rb+SKM0N64Echj0+x0bytQmzO8ol0VqnVJk/DgalvplfjasImJ4xRbBSN6Q+rVt2+asAnq6OYCzMZYxHAq5Fi851SmNHgDrDfJ0wkTX9E=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV0P278MB0516
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 22 Aug 2022 17:19:56 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 Aug 2022 04:31:59 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98375
+ https://lists.openembedded.org/g/openembedded-devel/message/98376
 
-Add the configuration to make pipewire work as a drop-in replacement for =
-pulseaudio-server.
+On Mon, Aug 22, 2022 at 10:28:34AM +0100, Andrei Gherzan wrote:
+> On Mon, 22 Aug 2022, at 09:15, Richard Leitner wrote:
+> >
+> > Unfortunately the testing infrastructure is not public available :(
+> 
+> Got it. That's fine. I'll just keep an eye on the repo.
+> 
+> >
+> > But ideas/offers where to host a public test runner are highly
+> > appreciated ;-)
+> 
+> What is the current testing plan for the layer?
 
-Add pipewire-media-session as a standalone recipe, since pipewire would f=
-etch the code as a
-subproject at do_configure.
+It's basically running the image tests for arm, armv7, arm64, x86,
+x86_64 and ppc with the mejate and mejate-musl distribution.
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../pipewire/pipewire-media-session_0.4.1.bb  | 25 +++++++++
- ...01-avb-fix-compilation-on-big-endian.patch | 53 +++++++++++++++++++
- .../0001-spa-fix-c90-header-include.patch     | 47 ----------------
- ...{pipewire_0.3.50.bb =3D> pipewire_0.3.56.bb} | 53 ++++++++++++++-----
- 4 files changed, 117 insertions(+), 61 deletions(-)
- create mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire-=
-media-session_0.4.1.bb
- create mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire/=
-0001-avb-fix-compilation-on-big-endian.patch
- delete mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire/=
-0001-spa-fix-c90-header-include.patch
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.50.bb =3D=
-> pipewire_0.3.56.bb} (85%)
+I can prepare and share a repository containing those kas and gitlab-ci
+configurations if that's interesting to you?
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-s=
-ession_0.4.1.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire-me=
-dia-session_0.4.1.bb
-new file mode 100644
-index 000000000..9fdb60380
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_=
-0.4.1.bb
-@@ -0,0 +1,25 @@
-+SUMMARY =3D "PipeWire Media Session is an example session manager for Pi=
-peWire"
-+HOMEPAGE =3D "https://gitlab.freedesktop.org/pipewire/media-session"
-+LICENSE =3D "MIT"
-+
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D97be96ca4fab23e9657ffa590b931=
-c1a"
-+
-+DEPENDS =3D " \
-+	pipewire \
-+	alsa-lib \
-+	dbus \
-+"
-+
-+SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/media-session.git;pro=
-tocol=3Dhttps;branch=3Dmaster"
-+
-+S =3D "${WORKDIR}/git"
-+SRCREV =3D "e5d5cf2404786af8bcc40bdb8a2962bef4ec18b6"
-+
-+inherit meson pkgconfig
-+
-+FILES:${PN} +=3D " \
-+	${systemd_user_unitdir}/pipewire-media-session.service \
-+	${datadir}/pipewire/media-session.d/* \
-+"
-+
-+RRECOMMENDS:${PN} +=3D "pipewire"
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-av=
-b-fix-compilation-on-big-endian.patch b/meta-multimedia/recipes-multimedi=
-a/pipewire/pipewire/0001-avb-fix-compilation-on-big-endian.patch
-new file mode 100644
-index 000000000..fc618b4a7
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-avb-fix-c=
-ompilation-on-big-endian.patch
-@@ -0,0 +1,53 @@
-+From 1a5ec4452fa21592eaeeb823ad95a1db6eb60376 Mon Sep 17 00:00:00 2001
-+From: Wim Taymans <wtaymans@redhat.com>
-+Date: Tue, 19 Jul 2022 13:49:42 +0200
-+Subject: [PATCH 001/113] avb: fix compilation on big endian
-+
-+Patch-Status: Backport
-+
-+---
-+ src/modules/module-avb/aaf.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/modules/module-avb/aaf.h b/src/modules/module-avb/aaf.h
-+index cb4871ca6..b444ce251 100644
-+--- a/src/modules/module-avb/aaf.h
-++++ b/src/modules/module-avb/aaf.h
-+@@ -35,7 +35,7 @@ struct avb_packet_aaf {
-+ 	unsigned gv:1;
-+ 	unsigned tv:1;
-+=20
-+-	uint8_t seq_number;
-++	uint8_t seq_num;
-+=20
-+ 	unsigned _r2:7;
-+ 	unsigned tu:1;
-+diff --git a/src/modules/module-avb/iec61883.h b/src/modules/module-avb/=
-iec61883.h
-+index d3b3a7daa..6ca8724ad 100644
-+--- a/src/modules/module-avb/iec61883.h
-++++ b/src/modules/module-avb/iec61883.h
-+@@ -37,7 +37,7 @@ struct avb_packet_iec61883 {
-+ 	unsigned gv:1;
-+ 	unsigned tv:1;
-+=20
-+-	uint8_t seq_number;
-++	uint8_t seq_num;
-+=20
-+ 	unsigned _r2:7;
-+ 	unsigned tu:1;
-+diff --git a/spa/plugins/avb/avbtp/packets.h b/spa/plugins/avb/avbtp/pac=
-kets.h
-+index 7047456bf..3d4a652ee 100644
-+--- a/spa/plugins/avb/avbtp/packets.h
-++++ b/spa/plugins/avb/avbtp/packets.h
-+@@ -116,7 +116,7 @@ struct spa_avbtp_packet_aaf {
-+ 	unsigned gv:1;
-+ 	unsigned tv:1;
-+=20
-+-	uint8_t seq_number;
-++	uint8_t seq_num;
-+=20
-+ 	unsigned _r2:7;
-+ 	unsigned tu:1;
-+--=20
-+2.34.1
-+
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-sp=
-a-fix-c90-header-include.patch b/meta-multimedia/recipes-multimedia/pipew=
-ire/pipewire/0001-spa-fix-c90-header-include.patch
-deleted file mode 100644
-index ad6448a10..000000000
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-spa-fix-c=
-90-header-include.patch
-+++ /dev/null
-@@ -1,47 +0,0 @@
--From d3ea3142e1a4de206e616bc18f63a529e6b4986a Mon Sep 17 00:00:00 2001
--From: psykose <alice@ayaya.dev>
--Date: Wed, 13 Apr 2022 21:57:49 +0000
--Subject: [PATCH 001/154] spa: fix c90 header include
--
--placing declarations after code is invalid under ISO c90
--
--Fixes !1211
--
--Patch-Status: Backport
-----
-- spa/include/spa/utils/string.h | 6 ++++--
-- 1 file changed, 4 insertions(+), 2 deletions(-)
--
--diff --git a/spa/include/spa/utils/string.h b/spa/include/spa/utils/stri=
-ng.h
--index e80434537..43d19616c 100644
----- a/spa/include/spa/utils/string.h
--+++ b/spa/include/spa/utils/string.h
--@@ -276,10 +276,11 @@ static inline int spa_scnprintf(char *buffer, size=
-_t size, const char *format, .
-- static inline float spa_strtof(const char *str, char **endptr)
-- {
-- 	static locale_t locale =3D NULL;
--+	locale_t prev;
-- 	float v;
-- 	if (SPA_UNLIKELY(locale =3D=3D NULL))
-- 		locale =3D newlocale(LC_ALL_MASK, "C", NULL);
---	locale_t prev =3D uselocale(locale);
--+	prev =3D uselocale(locale);
-- 	v =3D strtof(str, endptr);
-- 	uselocale(prev);
-- 	return v;
--@@ -319,10 +320,11 @@ static inline bool spa_atof(const char *str, float=
- *val)
-- static inline double spa_strtod(const char *str, char **endptr)
-- {
-- 	static locale_t locale =3D NULL;
--+	locale_t prev;
-- 	double v;
-- 	if (SPA_UNLIKELY(locale =3D=3D NULL))
-- 		locale =3D newlocale(LC_ALL_MASK, "C", NULL);
---	locale_t prev =3D uselocale(locale);
--+	prev =3D uselocale(locale);
-- 	v =3D strtod(str, endptr);
-- 	uselocale(prev);
-- 	return v;
----=20
--2.25.1
--
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.=
-bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
-similarity index 85%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.b=
-b
-rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
-index c176c6eeb..6c88e99f9 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.50.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.56.bb
-@@ -13,10 +13,10 @@ LIC_FILES_CHKSUM =3D " \
-=20
- DEPENDS =3D "dbus ncurses"
-=20
--SRCREV =3D "64cf5e80e6240284e6b757907b900507fe56f1b5"
-+SRCREV =3D "f274e53d25ee8f483ac6fce9e516bb1830abe88b"
- SRC_URI =3D " \
- 	git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3Dmaster;prot=
-ocol=3Dhttps \
--	file://0001-spa-fix-c90-header-include.patch \
-+	file://0001-avb-fix-compilation-on-big-endian.patch \
- "
-=20
- S =3D "${WORKDIR}/git"
-@@ -62,7 +62,6 @@ EXTRA_OEMESON +=3D " \
-     -Dudevrulesdir=3D${nonarch_base_libdir}/udev/rules.d/ \
-     -Dsystemd-system-unit-dir=3D${systemd_system_unitdir} \
-     -Dsystemd-user-unit-dir=3D${systemd_user_unitdir} \
--    -Dvulkan=3Ddisabled \
-     -Dman=3Ddisabled \
-     -Dsession-managers=3D'[]' \
-     -Dlv2=3Ddisabled \
-@@ -72,12 +71,26 @@ EXTRA_OEMESON +=3D " \
-     -Dlegacy-rtkit=3Dfalse \
- "
-=20
--PACKAGECONFIG:class-target ??=3D "\
-+# spa alsa plugin code uses typedef redefinition, which is officially a =
-C11 feature.
-+# Pipewire builds with 'c_std=3Dgnu99' by default. Recent versions of gc=
-c don't issue this warning in gnu99
-+# mode but it looks like clang still does
-+CFLAGS:append =3D " -Wno-typedef-redefinition"
-+
-+# According to wireplumber documentation only one session manager should=
- be installed at a time
-+# Possible options are media-session, which has fewer dependencies but i=
-s very simple,
-+# or wireplumber, which is more powerful.
-+PIPEWIRE_SESSION_MANAGER ??=3D "media-session"
-+
-+FFMPEG_AVAILABLE =3D "${@bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'co=
-mmercial', 'ffmpeg', '', d)}"
-+BLUETOOTH_AAC =3D "${@bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'comme=
-rcial', 'bluez-aac', '', d)}"
-+
-+PACKAGECONFIG:class-target ??=3D " \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)}=
- \
--    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)=
-} \
--    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-=
-system-service', '', d)} \
--    ${@bb.utils.filter('DISTRO_FEATURES', 'alsa', d)} \
--    gstreamer jack libusb pw-cat raop sndfile v4l2 \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez ${BLUETO=
-OTH_AAC}', '', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-=
-system-service systemd-user-service', '', d)} \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'alsa vulkan pulseaudio', d)} =
-\
-+    ${PIPEWIRE_SESSION_MANAGER} \
-+    ${FFMPEG_AVAILABLE} gstreamer jack libusb pw-cat raop sndfile v4l2 u=
-dev volume \
- "
-=20
- # "jack" and "pipewire-jack" packageconfigs cannot be both enabled,
-@@ -85,17 +98,19 @@ PACKAGECONFIG:class-target ??=3D "\
- # libjack.so* files, thus colliding with the libpack package. This
- # is why these two are marked in their respective packageconfigs
- # as being in conflict.
--PACKAGECONFIG[alsa] =3D "-Dalsa=3Denabled,-Dalsa=3Ddisabled,alsa-lib ude=
-v"
-+PACKAGECONFIG[alsa] =3D "-Dalsa=3Denabled,-Dalsa=3Ddisabled,alsa-lib ude=
-v,,pipewire-alsa pipewire-alsa-card-profile"
- PACKAGECONFIG[avahi] =3D "-Davahi=3Denabled,-Davahi=3Ddisabled,avahi"
- PACKAGECONFIG[bluez] =3D "-Dbluez5=3Denabled,-Dbluez5=3Ddisabled,bluez5 =
-sbc"
- PACKAGECONFIG[bluez-aac] =3D "-Dbluez5-codec-aac=3Denabled,-Dbluez5-code=
-c-aac=3Ddisabled,fdk-aac"
- PACKAGECONFIG[docs] =3D "-Ddocs=3Denabled,-Ddocs=3Ddisabled,doxygen-nati=
-ve graphviz-native"
- PACKAGECONFIG[ffmpeg] =3D "-Dffmpeg=3Denabled,-Dffmpeg=3Ddisabled,ffmpeg=
-"
--PACKAGECONFIG[gstreamer] =3D "-Dgstreamer=3Denabled,-Dgstreamer=3Ddisabl=
-ed,glib-2.0 gstreamer1.0 gstreamer1.0-plugins-base"
-+PACKAGECONFIG[gstreamer] =3D "-Dgstreamer=3Denabled,-Dgstreamer=3Ddisabl=
-ed,glib-2.0 gstreamer1.0 gstreamer1.0-plugins-base,,gstreamer1.0-pipewire=
-"
- PACKAGECONFIG[jack] =3D "-Djack=3Denabled,-Djack=3Ddisabled,jack,,,pipew=
-ire-jack"
--PACKAGECONFIG[libcamera] =3D "-Dlibcamera=3Denabled,-Dlibcamera=3Ddisabl=
-ed,libcamera"
-+PACKAGECONFIG[libcamera] =3D "-Dlibcamera=3Denabled,-Dlibcamera=3Ddisabl=
-ed,libcamera libdrm"
- PACKAGECONFIG[libcanberra] =3D "-Dlibcanberra=3Denabled,-Dlibcanberra=3D=
-disabled,libcanberra"
- PACKAGECONFIG[libusb] =3D "-Dlibusb=3Denabled,-Dlibusb=3Ddisabled,libusb=
-"
-+PACKAGECONFIG[media-session] =3D ",,,pipewire-media-session"
-+PACKAGECONFIG[pulseaudio] =3D "-Dlibpulse=3Denabled,-Dlibpulse=3Ddisable=
-d,pulseaudio,,pipewire-pulse"
- PACKAGECONFIG[pipewire-alsa] =3D "-Dpipewire-alsa=3Denabled,-Dpipewire-a=
-lsa=3Ddisabled,alsa-lib"
- PACKAGECONFIG[pipewire-jack] =3D "-Dpipewire-jack=3Denabled -Dlibjack-pa=
-th=3D${libdir}/${PW_MODULE_SUBDIR}/jack,-Dpipewire-jack=3Ddisabled,jack,,=
-,jack"
- PACKAGECONFIG[pw-cat] =3D "-Dpw-cat=3Denabled,-Dpw-cat=3Ddisabled"
-@@ -109,8 +124,12 @@ PACKAGECONFIG[systemd-system-service] =3D "-Dsystemd=
--system-service=3Denabled,-Dsyst
- # currently lacks the feature of enabling user services.
- PACKAGECONFIG[systemd-user-service] =3D "-Dsystemd-user-service=3Denable=
-d,-Dsystemd-user-service=3Ddisabled,systemd"
- # pw-cat needs sndfile packageconfig to be enabled
-+PACKAGECONFIG[udev] =3D "-Dudev=3Denabled,-Dudev=3Ddisabled,udev"
- PACKAGECONFIG[v4l2] =3D "-Dv4l2=3Denabled,-Dv4l2=3Ddisabled,udev"
-+PACKAGECONFIG[volume] =3D "-Dvolume=3Denabled,-Dvolume=3Ddisabled"
-+PACKAGECONFIG[vulkan] =3D "-Dvulkan=3Denabled,-Dvulkan=3Ddisabled,vulkan=
--headers vulkan-loader"
- PACKAGECONFIG[webrtc-echo-cancelling] =3D "-Decho-cancel-webrtc=3Denable=
-d,-Decho-cancel-webrtc=3Ddisabled,webrtc-audio-processing"
-+PACKAGECONFIG[wireplumber] =3D ",,,wireplumber"
-=20
- PACKAGESPLITFUNCS:prepend =3D " split_dynamic_packages "
- PACKAGESPLITFUNCS:append =3D " set_dynamic_metapkg_rdepends "
-@@ -227,10 +246,16 @@ PACKAGES_DYNAMIC =3D "^${PN}-spa-plugins.* ^${PN}-m=
-odules.*"
- SYSTEMD_SERVICE:${PN} =3D "${@bb.utils.contains('PACKAGECONFIG', 'system=
-d-system-service', 'pipewire.service', '', d)}"
- CONFFILES:${PN} +=3D "${datadir}/pipewire/pipewire.conf"
- FILES:${PN} =3D " \
--    ${datadir}/pipewire/pipewire.conf \
--    ${systemd_system_unitdir}/pipewire.* \
--    ${systemd_user_unitdir}/pipewire.* \
-+    ${datadir}/pipewire \
-+    ${systemd_system_unitdir}/pipewire* \
-+    ${systemd_user_unitdir}/pipewire* \
-     ${bindir}/pipewire \
-+    ${bindir}/pipewire-avb \
-+"
-+
-+RRECOMMENDS:${PN}:class-target +=3D " \
-+	pipewire-modules-meta \
-+	pipewire-spa-plugins-meta \
- "
-=20
- FILES:${PN}-dev +=3D " \
---=20
-2.34.1
+regards;rl
 
+> Andrei
 
