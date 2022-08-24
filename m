@@ -1,113 +1,95 @@
-Return-Path: <andrei@gherzan.com>
+Return-Path: <mac@mcrowe.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8473C00140
-	for <webhook@archiver.kernel.org>; Wed, 24 Aug 2022 16:29:53 +0000 (UTC)
-Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
- [66.111.4.29])
- by mx.groups.io with SMTP id smtpd.web11.13116.1661358585942341114
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ECD6AC00140
+	for <webhook@archiver.kernel.org>; Wed, 24 Aug 2022 17:28:33 +0000 (UTC)
+Received: from avasout-ptp-003.plus.net (avasout-ptp-003.plus.net
+ [84.93.230.244])
+ by mx.groups.io with SMTP id smtpd.web09.13879.1661362107084447718
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Aug 2022 09:29:46 -0700
+ Wed, 24 Aug 2022 10:28:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="signature has expired" header.i=@gherzan.com header.s=fm2
- header.b=K8thT9ul;
- spf=pass (domain: gherzan.com, ip: 66.111.4.29, mailfrom: andrei@gherzan.com)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
-	by mailout.nyi.internal (Postfix) with ESMTP id 484E35C009E;
-	Wed, 24 Aug 2022 12:29:45 -0400 (EDT)
-Received: from imap41 ([10.202.2.91])
-  by compute3.internal (MEProxy); Wed, 24 Aug 2022 12:29:45 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gherzan.com; h=
-	cc:cc:content-type:date:date:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to; s=fm2; t=1661358585; x=1661444985; bh=Q1o6UMP0WL
-	F0aAK0ia6g0341dVIdFMUAasdEgsm3WGw=; b=K8thT9ulhSUO1MqmJ1TEI/Ljok
-	ICO2q5eX3c5Gov6xssflLAJ0AnXQzn+69YunqwrHrqCazOwJdWkDnw6+6DRynQbd
-	f5mmbNSakDDoAi0o8zqkXk6iB++3LZDi84x3wAeqYoJxEgEk648mJnXyufW8hsUt
-	Qa4pJjbw4mPdaRJ2Ca/tI6nA2HFFlmXSI+QD25Q+tXIjMBGJzviLrMaRhYuIupbZ
-	SEgjyjnhQSNIJSJACsMFS5zmzMd8HTPKFQnC/piS1PJgZ7HoLMUTKhX0Y0BURuq2
-	AmkCqmNUGG1GYu1XCRYl7qMSxF6pnhEdPCDMQSfJcKHl1EeN6xv3zZTQ5jtw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
-	:feedback-id:from:from:in-reply-to:in-reply-to:message-id
-	:mime-version:references:reply-to:sender:subject:subject:to:to
-	:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm1; t=1661358585; x=1661444985; bh=Q1o6UMP0WLF0aAK0ia6g0341dVId
-	FMUAasdEgsm3WGw=; b=p/GC61xEG9gxl4Lx3goIaFYOpYo/Ttpdo97YkUgF/22a
-	Xyu2y5OhSe01iFJOFPKtD1XiFIx0tkASmJF8airXyG9hNnWspvd0ZBq1stibVvwo
-	IkQcTjH9pF4xueDbujBWK0k6OHcSGPh/c4iVPepF9OdVKXy5gKoRS33za59Yq78Q
-	rXasKCBW+vTa1x6PA+uMzpB8dy2cOC6l0v1yvkXnoDks0ve3K9RbLHD2IEGoUwyA
-	1vn4dZgrEhm62zOEvb8XE3OvlTagfyrtGPZ+7SZmDh1QXB/ftCN2GGXtgYJfF8Nr
-	RmuiLGPJIEL/VHGZLfKhntCN8y1EQvJN68RYTaOgKQ==
-X-ME-Sender: <xms:-FEGY6bx7-ONwcTFr1ONsfDvU-LOHRhhroRg7XXSHLiBOiLrrrlKXw>
-    <xme:-FEGY9YjQ6FPyKfwap4DaELMczHDsQblowpW9dFcjOCGiF43K84EX8Nu-qDwbylF_
-    oBsNdAY6oJ8ByJzVkI>
-X-ME-Proxy-Cause: 
- gggruggvucftvghtrhhoucdtuddrgedvfedrvdejuddguddtfecutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
-    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-    enucfjughrpefofgggkfgjfhffhffvvefutgesthdtredtreertdenucfhrhhomhepfdet
-    nhgurhgvihcuifhhvghriigrnhdfuceorghnughrvghisehghhgvrhiirghnrdgtohhmqe
-    enucggtffrrghtthgvrhhnpeelhfeljeetuedvuefhjeffiefgudeilefgudeuffeutefh
-    geegtedvveffffeuffenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
-    hlfhhrohhmpegrnhgurhgvihesghhhvghriigrnhdrtghomh
-X-ME-Proxy: <xmx:-FEGY0_ecJB0iLSBnx6Kax0qj4BxIquwmCQ8OMgGFrWRZTQ_PKwnnQ>
-    <xmx:-FEGY8oNgZ9P2nAHgfsYtEENafhqeYCcznI85uWQ5-3uXFv1nLY2TA>
-    <xmx:-FEGY1of0vptQZCFT8Y1BTvMf6f-BUL0vsdFXaP9c-LbaKu90iTO5Q>
-    <xmx:-VEGY3G7mwRnWFgN1_vptBc-1BvNERnJve0KkD64ljGsNe3i70x3_Q>
-Feedback-ID: i68994715:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
-	id D5D57234007B; Wed, 24 Aug 2022 12:29:44 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.7.0-alpha0-841-g7899e99a45-fm-20220811.002-g7899e99a
-Mime-Version: 1.0
-Message-Id: <5b7a7520-f4c7-49c8-b71c-2bb0cb7b01b8@www.fastmail.com>
-In-Reply-To: <YwRYL6yEEusxD0gn@skidata.com>
-References: <20220817114308.347965-1-andrei@gherzan.com>
- <YwMyZdfwL6KGQ3Bv@skidata.com>
- <e7fb7e92-9040-4137-9e02-d83d57b0d581@www.fastmail.com>
- <YwM7IAvEulD79BzG@skidata.com>
- <894c6ed7-e7cb-4434-b132-861ba83a913d@www.fastmail.com>
- <YwRYL6yEEusxD0gn@skidata.com>
-Date: Wed, 24 Aug 2022 17:29:24 +0100
-From: "Andrei Gherzan" <andrei@gherzan.com>
-To: "Richard Leitner" <richard.leitner@skidata.com>
-Cc: openembedded <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-java][PATCH 1/3] classpath: Use an include file for
- x11 feature
- check
-Content-Type: text/plain
+ dkim=pass header.i=@mcrowe.com header.s=20191005 header.b=LjH0Cdrn;
+ spf=pass (domain: mcrowe.com, ip: 84.93.230.244, mailfrom: mac@mcrowe.com)
+Received: from deneb.mcrowe.com ([80.229.24.9])
+	by smtp with ESMTP
+	id QuAwo8IPapvx8QuAxoUj0a; Wed, 24 Aug 2022 18:28:24 +0100
+X-Clacks-Overhead: "GNU Terry Pratchett"
+X-CM-Score: 0.00
+X-CNFS-Analysis: v=2.4 cv=ccLBE1PM c=1 sm=1 tr=0 ts=63065fb8
+ a=E/9URZZQ5L3bK/voZ0g0HQ==:117 a=E/9URZZQ5L3bK/voZ0g0HQ==:17
+ a=kj9zAlcOel0A:10 a=biHskzXt2R4A:10 a=Q4-j1AaZAAAA:8 a=xvloEm1rjr4Zfpfc2_0A:9
+ a=CjuIK1q_8ugA:10 a=9H3Qd4_ONW2Ztcrla5EB:22
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mcrowe.com;
+	s=20191005; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+	Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+	Content-Description; bh=Il9Sfpp+BDfmOaSeMm4XHxM2jPEX2aq0Le1Aj56PZDk=; b=LjH0C
+	drnB0p2dYBnlPDPGbjmroQHAZskjE1eFv2JFoBfIZizXm2zrSf7FVcxGSkpuppLOuX0gP9E9C0oMG
+	uMzAH+0xQAWG+7QHxlvaac+qwGuhkfaJJo+YNSaLrIF6FgNbQxY2TZbArhOaivCX5c39d1XL5z2la
+	5FeriFW3nKfTDrjrJEc415yWGcDkBdtS494k/tPGuSogcW6+pexfLonqXnbFVu3R3Vk9XSx/QDsqw
+	lTUx5dHTBOYtQw6ZxmSokTjh9zKWYSIAe9QDhUTU0IBn4FKYGoKvdgJC/QGt7NPIAT8gaI3dg1VWg
+	RI3N4bRzeaHPSMULAG/osEb2wVGmQ==;
+Received: from mac by deneb.mcrowe.com with local (Exim 4.94.2)
+	(envelope-from <mac@mcrowe.com>)
+	id 1oQuAw-00Bmqx-D6; Wed, 24 Aug 2022 18:28:22 +0100
+Date: Wed, 24 Aug 2022 18:28:22 +0100
+From: Mike Crowe <mac@mcrowe.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [meta-oe][PATCH] yasm: Only depend on xmlto when docs are
+ enabled
+Message-ID: <YwZftsa5qzXlqtqk@mcrowe.com>
+References: <20220824153539.423878-1-mac@mcrowe.com>
+ <CAMKF1spmzy7HkzNA36TmsK7BjrkBxXsBvO1ZCo759Ygd-Qrk5w@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: 
+ <CAMKF1spmzy7HkzNA36TmsK7BjrkBxXsBvO1ZCo759Ygd-Qrk5w@mail.gmail.com>
+X-CMAE-Envelope: 
+ MS4xfAHodGZOHaWEiyL8GIDuti3vs/hFc7lPZc0mLqbOgnl5VJ2oyXoz1rBgWNVckKqnE+mzHivGTl9fSm0GLLQP5WqXXtjVOnEQFV1WaYbuzuM+dAYleyXm
+ wLE//ejzsH0glU57+YTzo2Xba2B79z7iDkqQXH78GxDOUV/I5JOxnsbYDF9wMGW7kkleUCukAENa9WTaSbGlbBxQKBNynHDtf3E=
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Aug 2022 16:29:53 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Aug 2022 17:28:33 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98421
+ https://lists.openembedded.org/g/openembedded-devel/message/98422
 
-On Tue, 23 Aug 2022, at 05:31, Richard Leitner wrote:
-> On Mon, Aug 22, 2022 at 10:28:34AM +0100, Andrei Gherzan wrote:
->> On Mon, 22 Aug 2022, at 09:15, Richard Leitner wrote:
->> >
->> > Unfortunately the testing infrastructure is not public available :(
->> 
->> Got it. That's fine. I'll just keep an eye on the repo.
->> 
->> >
->> > But ideas/offers where to host a public test runner are highly
->> > appreciated ;-)
->> 
->> What is the current testing plan for the layer?
->
-> It's basically running the image tests for arm, armv7, arm64, x86,
-> x86_64 and ppc with the mejate and mejate-musl distribution.
->
-> I can prepare and share a repository containing those kas and gitlab-ci
-> configurations if that's interesting to you?
+On Wednesday 24 August 2022 at 09:05:05 -0700, Khem Raj wrote:
+> On Wed, Aug 24, 2022 at 8:35 AM Mike Crowe via lists.openembedded.org <mac=
+> mcrowe.com@lists.openembedded.org> wrote:
+> 
+> > The yasm build system only requires xmlto when building its
+> > documentation. It automatically detects whether it is present at
+> > configure time.
+> 
+> 
+> Does it also detect it from build machine ?
 
-Sure. Send them over when you get a chance.
+No, because of the recipe-specific sysroot it can't see my system version
+of xmlto.
 
-BTW, did the testing finish? Are we able to push the changes?
+I have xmlto installed, yet log.do_configure contains:
 
-Andrei
+checking for xmlto... no
+configure: WARNING: xmlto not found, manpages will not be rebuilt.
+
+> Perhaps better to turn the knob on and off explicitly as well for
+> determinism
+
+I couldn't find a --disable-doc/--without-xmlto knob otherwise I would have
+done. :(
+
+Or did you mean that I should explicitly set ac_cv_prog_XMLTO with
+something like:
+
+ PACKAGECONFIG[docs] = ",ac_cv_prog_XMLTO='',xmlto-native,"
+
+?
+
+Thanks.
+
+Mike.
 
