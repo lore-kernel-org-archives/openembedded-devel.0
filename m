@@ -1,231 +1,109 @@
-Return-Path: <workjagadeesh@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78E15C32793
-	for <webhook@archiver.kernel.org>; Wed, 24 Aug 2022 02:09:19 +0000 (UTC)
-Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com
- [209.85.128.173])
- by mx.groups.io with SMTP id smtpd.web10.6463.1661306952462537979
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 797DAC32793
+	for <webhook@archiver.kernel.org>; Wed, 24 Aug 2022 02:10:29 +0000 (UTC)
+Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com
+ [209.85.128.176])
+ by mx.groups.io with SMTP id smtpd.web11.6476.1661307021586994211
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Aug 2022 19:09:12 -0700
+ Tue, 23 Aug 2022 19:10:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Dd6xiooU;
- spf=pass (domain: gmail.com, ip: 209.85.128.173,
- mailfrom: workjagadeesh@gmail.com)
-Received: by mail-yw1-f173.google.com with SMTP id
- 00721157ae682-333a4a5d495so425185987b3.10
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Gyu/V7Vs;
+ spf=pass (domain: gmail.com, ip: 209.85.128.176,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f176.google.com with SMTP id
+ 00721157ae682-324ec5a9e97so425375027b3.7
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Aug 2022 19:09:12 -0700 (PDT)
+ Tue, 23 Aug 2022 19:10:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc;
-        bh=Z+VdRxul7I6kZHYAZA9zl7xwpDU42nNV12aeh5xlIxE=;
-        b=Dd6xiooUaigD9BHFeQjVdvdljqn0j9bIhXMWIUto3bKxiBIuodR6VibXXIi+BTT7yb
-         wS50FTTuo8HuwNn8+QI4+347r6PGWktrB2+rpacPCGDqtcqNh8rNLJQqJeIf0yI4nuiL
-         WWIe7jMO/QU8iS+GmFLydcGvAG3LrkSEClklam6gfTdhrK6RSjUzFu4+UyssyKlEvOVr
-         2NRHrIyg8Baw44YvhtxUbs6yQpxevip8uteo5IqElqW7rQfBpQ3UUipsUljAUySYtvJ+
-         LAspv19GDCfwdJZ+1FNoogmq1D9FCshLTe2ddFSlO0azxuSqq7jYUXdCn7hCK+7aOieE
-         cvFg==
+        bh=ryonVz+PiXel8p2CNS/P8CfZ2nlYDIR1f727CBZACoo=;
+        b=Gyu/V7VskEjED6bNMdxGgSDyAvRajGHq5Qm8ymzxrShWvNpYlOcF9sxUSNnF+/Ds9H
+         ckAEvvr+zmoApFbOtgiZNchPCHfzqlGbDvYklxuuBOVujg4cJUVyHkHFp+fiIUKc2Em9
+         bv0xrp51EiVALJ7cw06gLQ/zMoBJVXt5Xvda/kvX9qG6EjykmNc7v1SwJNjIkpjzkSlX
+         ylJc6etM44ulFeILV25UCj1gYm7Ft5n922HK0S2NuPhEd5pnSBZJHpoyfcp18IQKLK/N
+         f60MLZpG9TuNnGjjowcIMq0c23R5wpMIjeCI7Unw0DndI+uyRP9E8LimdoXWVFZLKGMb
+         kamQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc;
-        bh=Z+VdRxul7I6kZHYAZA9zl7xwpDU42nNV12aeh5xlIxE=;
-        b=IW4ERl9ATYbleNf2/UCU2axMVs1K9ljvoMMokJUW+ue/sfyvEyfrtT3pXgQEgfxPgl
-         1rK4HFa1MORAsZx5/h8nQTAvYUMMBWT+vL8vEIepfF9n1rBaT/1SzhtrnrUyms6dp5IU
-         VTQa6Tq98UVhYiv/BiUDhU72L6UmAcG6cMIPnsIObQ7tPjLEhmvLAubpP492x4U2RJ6q
-         6+p8a6VCKRQd/ZEsu9oZWf7+jwUqHwFftmeYeUB+WBMSAJ+bMaFW18WDZHMNU51/smTO
-         oRI6p07iYLDAva5BR+6b5y5JiHA9aNu5WZ7L+cZ6ZxYfN4MDZMUwYOd3oKAE7IRAFvxC
-         TU7w==
-X-Gm-Message-State: ACgBeo1xshf0Lmu0H2vp01Br9/usREyc4JxO2xoe2pQKnLcywVRAJiPK
-	6XRLJV8uck0dhDqjIQH5T2fSg3hdB8C442Kqluk=
+        bh=ryonVz+PiXel8p2CNS/P8CfZ2nlYDIR1f727CBZACoo=;
+        b=dfxwCZIwiWG4xlNhCIu2gCjE5+VycnpU5LSq1hi9W/1ZaB0FAPt/7kTRDcXM+i3qkP
+         vX6pEkKwK6nRIkf/gVnYEXS7W3h8WnQ8NLqJAlftgkMCbuOZmocH3dSNp+C9lmJKnoKS
+         /hBksWiKmCjL/3zbQP1mnHnBY+9yTsjwAONR7f3vFvDCt8qlZyjF25/JWCyhWiWOdGz5
+         V6W+2UFD77uL4Fj0kPsT+Iq/I2F1KL8bgNu6Raqzbm+EUUYFp0GzDNuXes2ZJPENNqof
+         mSTY4+q/zzirtklywR6SZdmPwF7oGPJqgQWGKejjmf4ZBJuyKgHv8r8/BbvHWnzSsRnI
+         e9yg==
+X-Gm-Message-State: ACgBeo2MO0Ga8Lr8R+viJUxjAumVswBGoRDOZTGvj5HMIf4G4tZeu6/G
+	iUSt0vxRWdEbnvemBuebEsVS5ptn0uc+vW+Z2vY=
 X-Google-Smtp-Source: 
- AA6agR5BMEZUFNPz4EBSm5sEBkGO1K+gqALO9KedYByvKqAlGviYG5mNSSogRq/OkwQFxkyv6aBaYyQCkHRKkfFVSq8=
-X-Received: by 2002:a05:6902:10c5:b0:671:7158:cf2c with SMTP id
- w5-20020a05690210c500b006717158cf2cmr28572980ybu.314.1661306951646; Tue, 23
- Aug 2022 19:09:11 -0700 (PDT)
+ AA6agR521/J+Rwm1BbEhzH9zOh4y8fsK0WcMRQDODZAcEZmCZRhiSs76oWBCt3lU0yQ399Yt69Y9L1plu4l6Uu/t2gk=
+X-Received: by 2002:a0d:eb42:0:b0:339:4059:fd62 with SMTP id
+ u63-20020a0deb42000000b003394059fd62mr20900722ywe.139.1661307020745; Tue, 23
+ Aug 2022 19:10:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220823172602.212-1-workjagadeesh@gmail.com>
- <20220823172602.212-2-workjagadeesh@gmail.com>
- <CAMKF1soKDpxbLY9DgHRkiAHGey_oL29Fb242byujb3WZt3sAcg@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1soKDpxbLY9DgHRkiAHGey_oL29Fb242byujb3WZt3sAcg@mail.gmail.com>
-From: Jagadeesh Krishnanjanappa <workjagadeesh@gmail.com>
-Date: Wed, 24 Aug 2022 07:39:01 +0530
+References: <1661243978-4657-1-git-send-email-wangmy@fujitsu.com>
+ <1661243978-4657-2-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1661243978-4657-2-git-send-email-wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 23 Aug 2022 19:09:54 -0700
 Message-ID: 
- <CAM682A0EgY6gEWkW9gqEJVP_uFAzYbeOMEHMpB5zsdEc=EMs_A@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 2/3] python3-django: make 3.2.x as
- default version
-To: Khem Raj <raj.khem@gmail.com>
+ <CAMKF1spD_9M0icztJK3KK6wumon+4rH36OZhR_XMzO6AdkvJHQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] libbpf: upgrade 0.8.0 -> 1.0.0
+To: wangmy <wangmy@fujitsu.com>
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000b7418b05e6f32a41"
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Aug 2022 02:09:19 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Aug 2022 02:10:29 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98413
+ https://lists.openembedded.org/g/openembedded-devel/message/98414
 
---000000000000b7418b05e6f32a41
-Content-Type: text/plain; charset="UTF-8"
+This does cause issues on musl
 
-On Tue, Aug 23, 2022 at 11:53 PM Khem Raj <raj.khem@gmail.com> wrote:
+https://errors.yoctoproject.org/Errors/Details/669389/
+https://errors.yoctoproject.org/Errors/Details/669389/
 
-> On Tue, Aug 23, 2022 at 10:26 AM Jagadeesh Krishnanjanappa
-> <workjagadeesh@gmail.com> wrote:
-> >
-> > According to https://www.djangoproject.com/download/ python3-django
-> > 3.2.x has LTS support upto 2024, hence make it as default version
-> > to build.
+On Tue, Aug 23, 2022 at 1:40 AM wangmy <wangmy@fujitsu.com> wrote:
 >
-> It seems 2.2 LTS went EOL  on April 11, 2022, can you also send a
-> patch to remove those recipes while you are here.
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  .../recipes-kernel/libbpf/{libbpf_0.8.0.bb => libbpf_1.0.0.bb}  | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-oe/recipes-kernel/libbpf/{libbpf_0.8.0.bb => libbpf_1.0.0.bb} (92%)
 >
-> Sure. I was planning to send the patch to remove the recipe after these
-patches are merged as it should not break the build. Now the patches
-are merged and the remove patch is also sent.
-
-Thanks,
-Jagadeesh
-
-
-> > Also, add runtime dependency on python3-asgiref as the "django-admin"
-> > script needs asgiref module.
-> >
-> > More info: https://bugzilla.yoctoproject.org/show_bug.cgi?id=14888
-> >
-> > Signed-off-by: Jagadeesh Krishnanjanappa <workjagadeesh@gmail.com>
-> > ---
-> >  .../recipes-devtools/python/python3-django_3.2.12.bb        | 6 +-----
-> >  1 file changed, 1 insertion(+), 5 deletions(-)
-> >
-> > diff --git a/meta-python/recipes-devtools/python/
-> python3-django_3.2.12.bb b/meta-python/recipes-devtools/python/
-> python3-django_3.2.12.bb
-> > index adbc498bd..17d402d65 100644
-> > --- a/meta-python/recipes-devtools/python/python3-django_3.2.12.bb
-> > +++ b/meta-python/recipes-devtools/python/python3-django_3.2.12.bb
-> > @@ -5,9 +5,5 @@ SRC_URI[sha256sum] =
-> "9772e6935703e59e993960832d66a614cf0233a1c5123bc6224ecc6ad6
-> >
-> >  RDEPENDS:${PN} += "\
-> >      ${PYTHON_PN}-sqlparse \
-> > +    ${PYTHON_PN}-asgiref \
-> >  "
-> > -
-> > -# Set DEFAULT_PREFERENCE so that the LTS version of django is built by
-> > -# default. To build the 3.x branch,
-> > -# PREFERRED_VERSION_python3-django = "3.2.2" can be added to local.conf
-> > -DEFAULT_PREFERENCE = "-1"
-> > --
-> > 2.17.1
-> >
-> >
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#98398):
-> https://lists.openembedded.org/g/openembedded-devel/message/98398
-> > Mute This Topic: https://lists.openembedded.org/mt/93209460/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> >
+> diff --git a/meta-oe/recipes-kernel/libbpf/libbpf_0.8.0.bb b/meta-oe/recipes-kernel/libbpf/libbpf_1.0.0.bb
+> similarity index 92%
+> rename from meta-oe/recipes-kernel/libbpf/libbpf_0.8.0.bb
+> rename to meta-oe/recipes-kernel/libbpf/libbpf_1.0.0.bb
+> index 76fd862142..b6ec9f77bc 100644
+> --- a/meta-oe/recipes-kernel/libbpf/libbpf_0.8.0.bb
+> +++ b/meta-oe/recipes-kernel/libbpf/libbpf_1.0.0.bb
+> @@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://../LICENSE.LGPL-2.1;md5=b370887980db5dd40659b50909238
+>  DEPENDS = "zlib elfutils"
 >
-
---000000000000b7418b05e6f32a41
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Tue, Aug 23, 2022 at 11:53 PM Khem=
- Raj &lt;<a href=3D"mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt; w=
-rote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0p=
-x 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On Tue, Au=
-g 23, 2022 at 10:26 AM Jagadeesh Krishnanjanappa<br>
-&lt;<a href=3D"mailto:workjagadeesh@gmail.com" target=3D"_blank">workjagade=
-esh@gmail.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; According to <a href=3D"https://www.djangoproject.com/download/" rel=
-=3D"noreferrer" target=3D"_blank">https://www.djangoproject.com/download/</=
-a> python3-django<br>
-&gt; 3.2.x has LTS support upto 2024, hence make it as default version<br>
-&gt; to build.<br>
-<br>
-It seems 2.2 LTS went EOL=C2=A0 on April 11, 2022, can you also send a<br>
-patch to remove those recipes while you are here.<br>
-<br></blockquote><div>Sure. I was planning to send the patch to remove the =
-recipe after these</div><div>patches are merged as it should not break the =
-build. Now the patches</div><div>are merged and the remove patch is also se=
-nt.</div><div><br></div><div>Thanks,</div><div>Jagadeesh</div><div>=C2=A0</=
-div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bor=
-der-left:1px solid rgb(204,204,204);padding-left:1ex">
-&gt; Also, add runtime dependency on python3-asgiref as the &quot;django-ad=
-min&quot;<br>
-&gt; script needs asgiref module.<br>
-&gt;<br>
-&gt; More info: <a href=3D"https://bugzilla.yoctoproject.org/show_bug.cgi?i=
-d=3D14888" rel=3D"noreferrer" target=3D"_blank">https://bugzilla.yoctoproje=
-ct.org/show_bug.cgi?id=3D14888</a><br>
-&gt;<br>
-&gt; Signed-off-by: Jagadeesh Krishnanjanappa &lt;<a href=3D"mailto:workjag=
-adeesh@gmail.com" target=3D"_blank">workjagadeesh@gmail.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 .../recipes-devtools/python/<a href=3D"http://python3-django_3.2=
-.12.bb" rel=3D"noreferrer" target=3D"_blank">python3-django_3.2.12.bb</a>=
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 6 +-----<br>
-&gt;=C2=A0 1 file changed, 1 insertion(+), 5 deletions(-)<br>
-&gt;<br>
-&gt; diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://pyt=
-hon3-django_3.2.12.bb" rel=3D"noreferrer" target=3D"_blank">python3-django_=
-3.2.12.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://pytho=
-n3-django_3.2.12.bb" rel=3D"noreferrer" target=3D"_blank">python3-django_3.=
-2.12.bb</a><br>
-&gt; index adbc498bd..17d402d65 100644<br>
-&gt; --- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-dj=
-ango_3.2.12.bb" rel=3D"noreferrer" target=3D"_blank">python3-django_3.2.12.=
-bb</a><br>
-&gt; +++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-dj=
-ango_3.2.12.bb" rel=3D"noreferrer" target=3D"_blank">python3-django_3.2.12.=
-bb</a><br>
-&gt; @@ -5,9 +5,5 @@ SRC_URI[sha256sum] =3D &quot;9772e6935703e59e993960832=
-d66a614cf0233a1c5123bc6224ecc6ad6<br>
-&gt;<br>
-&gt;=C2=A0 RDEPENDS:${PN} +=3D &quot;\<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 ${PYTHON_PN}-sqlparse \<br>
-&gt; +=C2=A0 =C2=A0 ${PYTHON_PN}-asgiref \<br>
-&gt;=C2=A0 &quot;<br>
-&gt; -<br>
-&gt; -# Set DEFAULT_PREFERENCE so that the LTS version of django is built b=
-y<br>
-&gt; -# default. To build the 3.x branch,<br>
-&gt; -# PREFERRED_VERSION_python3-django =3D &quot;3.2.2&quot; can be added=
- to local.conf<br>
-&gt; -DEFAULT_PREFERENCE =3D &quot;-1&quot;<br>
-&gt; --<br>
-&gt; 2.17.1<br>
-&gt;<br>
-&gt;<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; Links: You receive all messages sent to this group.<br>
-&gt; View/Reply Online (#98398): <a href=3D"https://lists.openembedded.org/=
-g/openembedded-devel/message/98398" rel=3D"noreferrer" target=3D"_blank">ht=
-tps://lists.openembedded.org/g/openembedded-devel/message/98398</a><br>
-&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/93209460=
-/1997914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.o=
-rg/mt/93209460/1997914</a><br>
-&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
-bedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.o=
-rg</a><br>
-&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
-devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedde=
-d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com"=
- target=3D"_blank">raj.khem@gmail.com</a>]<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt;<br>
-</blockquote></div></div>
-
---000000000000b7418b05e6f32a41--
+>  SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https;branch=master"
+> -SRCREV = "86eb09863c1c0177e99c2c703092042d3cdba910"
+> +SRCREV = "a0325403afa8a3eca0d3a3e43f43784dc6b47511"
+>
+>  PACKAGE_ARCH = "${MACHINE_ARCH}"
+>  COMPATIBLE_HOST = "(x86_64|i.86|aarch64|riscv64|powerpc64).*-linux"
+> --
+> 2.25.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#98382): https://lists.openembedded.org/g/openembedded-devel/message/98382
+> Mute This Topic: https://lists.openembedded.org/mt/93200193/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
