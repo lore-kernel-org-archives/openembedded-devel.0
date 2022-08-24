@@ -1,70 +1,81 @@
-Return-Path: <jlu@pengutronix.de>
+Return-Path: <mac@mcrowe.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F1A5C32793
-	for <webhook@archiver.kernel.org>; Wed, 24 Aug 2022 15:12:13 +0000 (UTC)
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
- [85.220.165.71])
- by mx.groups.io with SMTP id smtpd.web08.12087.1661353925949812630
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 616EEC00140
+	for <webhook@archiver.kernel.org>; Wed, 24 Aug 2022 15:35:53 +0000 (UTC)
+Received: from avasout-peh-004.plus.net (avasout-peh-004.plus.net
+ [212.159.14.20])
+ by mx.groups.io with SMTP id smtpd.web09.12438.1661355347648933873
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Aug 2022 08:12:06 -0700
+ Wed, 24 Aug 2022 08:35:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=pass (domain: pengutronix.de, ip: 85.220.165.71, mailfrom: jlu@pengutronix.de)
-Received: from ptx.hi.pengutronix.de ([2001:67c:670:100:1d::c0])
-	by metis.ext.pengutronix.de with esmtps
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1oQs32-0005V8-45; Wed, 24 Aug 2022 17:12:04 +0200
-Received: from jlu by ptx.hi.pengutronix.de with local (Exim 4.92)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1oQs31-0000xX-Gn; Wed, 24 Aug 2022 17:12:03 +0200
-From: Jan Luebbe <jlu@pengutronix.de>
+ dkim=pass header.i=@mcrowe.com header.s=20191005 header.b=FuqCVhEc;
+ spf=pass (domain: mcrowe.com, ip: 212.159.14.20, mailfrom: mac@mcrowe.com)
+Received: from deneb.mcrowe.com ([80.229.24.9])
+	by smtp with ESMTP
+	id QsPvoe0n8XHiPQsPwomT0S; Wed, 24 Aug 2022 16:35:45 +0100
+X-Clacks-Overhead: "GNU Terry Pratchett"
+X-CM-Score: 0.00
+X-CNFS-Analysis: v=2.4 cv=CbUbWZnl c=1 sm=1 tr=0 ts=63064551
+ a=E/9URZZQ5L3bK/voZ0g0HQ==:117 a=E/9URZZQ5L3bK/voZ0g0HQ==:17
+ a=biHskzXt2R4A:10 a=-An2I_7KAAAA:8 a=sPDzs_vtAAAA:8 a=HcizHbmhIziwnAJZ-1sA:9
+ a=Sq34B_EcNBM9_nrAYB9S:22 a=LSvf8S0AY-pVNIMtYwJW:22
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mcrowe.com;
+	s=20191005; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+	In-Reply-To:References; bh=Dp+oX9z+s+T0FzKqJnTYiVmup7wS0pVIOYGf8w6XHwE=; b=Fu
+	qCVhEcvol5nLyil8oOi6/3J1pfPoIryWFRggMaH2gjfwEkh8SSSkNp4VSIB2PBS1tJONLurzAWtvp
+	uaZfGA0RLfaD8LB6vE2dreDgzFg2f6Dw84FXgoBJzbUi1meCNkhOFpJBAjoJF0jrG8KVwjDN9ncO5
+	zNUbQdjkD4iY3eZYcA+eT9RI+esOQBMldfrYGAur3JVeNU1LxumgFyylw4roM+pPr+rDRaPh/FscX
+	rmMCJiaTxo+xKJxSxV3ysYABu0Agq6fN187fXceo/gL/gmq4wQlyQieC8ozV8lCv6skkfEyz577yV
+	1bAIbwIBsVNuZSNfe8zd5i+jgz7THXtg==;
+Received: from mac by deneb.mcrowe.com with local (Exim 4.94.2)
+	(envelope-from <mac@mcrowe.com>)
+	id 1oQsPt-00Bipx-LU; Wed, 24 Aug 2022 16:35:41 +0100
+From: Mike Crowe <mac@mcrowe.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jan Luebbe <jlu@pengutronix.de>
-Subject: [meta-oe][PATCH] gensio: upgrade 2.3.1 -> 2.5.2
-Date: Wed, 24 Aug 2022 17:11:57 +0200
-Message-Id: <20220824151157.3599-1-jlu@pengutronix.de>
-X-Mailer: git-send-email 2.20.1
+Cc: Mike Crowe <mac@mcrowe.com>
+Subject: [meta-oe][PATCH] yasm: Only depend on xmlto when docs are enabled
+Date: Wed, 24 Aug 2022 16:35:39 +0100
+Message-Id: <20220824153539.423878-1-mac@mcrowe.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::c0
-X-SA-Exim-Mail-From: jlu@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
- SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+X-CMAE-Envelope: 
+ MS4xfCZb7CBnMB/o4e0CQldC2SKt0CtoD5Ba+kDkdUXXcH9JzcPWFycDGoGAGnsI7YLFO5EDrQTwN243Wf/IOrC7SGSguGjATCh6I8bU+hrt10CiOPXcR2o/
+ Omq5zg33X25c2r6ZwN7/vZfAHxnaT2IldAh4caasz0Fmz5rLC7nWUrkE9WbwMhIL7RQFNMpJ2MlIZxKv5jzaHMDi/OpZ/uMNyJ0=
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Aug 2022 15:12:13 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Aug 2022 15:35:53 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98417
+ https://lists.openembedded.org/g/openembedded-devel/message/98418
 
-Signed-off-by: Jan Luebbe <jlu@pengutronix.de>
+The yasm build system only requires xmlto when building its
+documentation. It automatically detects whether it is present at
+configure time.
+
+Signed-off-by: Mike Crowe <mac@mcrowe.com>
 ---
- .../gensio/{gensio_2.3.1.bb => gensio_2.5.2.bb}                 | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/gensio/{gensio_2.3.1.bb => gensio_2.5.2.bb} (93%)
+ meta-oe/recipes-devtools/yasm/yasm_git.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/gensio/gensio_2.3.1.bb b/meta-oe/recipes-connectivity/gensio/gensio_2.5.2.bb
-similarity index 93%
-rename from meta-oe/recipes-connectivity/gensio/gensio_2.3.1.bb
-rename to meta-oe/recipes-connectivity/gensio/gensio_2.5.2.bb
-index a6e0075538c3..9e8af18e258b 100644
---- a/meta-oe/recipes-connectivity/gensio/gensio_2.3.1.bb
-+++ b/meta-oe/recipes-connectivity/gensio/gensio_2.5.2.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=a0fd36908af843bcee10cb6dfc47fa67 \
-                     file://COPYING;md5=bae3019b4c6dc4138c217864bd04331f \
-                     "
+diff --git a/meta-oe/recipes-devtools/yasm/yasm_git.bb b/meta-oe/recipes-devtools/yasm/yasm_git.bb
+index 044fcbea7..3dd382be1 100644
+--- a/meta-oe/recipes-devtools/yasm/yasm_git.bb
++++ b/meta-oe/recipes-devtools/yasm/yasm_git.bb
+@@ -4,7 +4,8 @@ HOMEPAGE = "http://www.tortall.net/projects/yasm/"
  
--SRCREV = "c500d8705c517f96e591c060105a789f053d2b7a"
-+SRCREV = "b6cd354afe6d5f63bc859c94fd3a455a3cdf0449"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=a12d8903508fb6bfd49d8d82c6170dd9"
  
- SRC_URI = "git://github.com/cminyard/gensio;protocol=https;branch=master"
+-DEPENDS += "flex-native bison-native xmlto-native"
++DEPENDS += "flex-native bison-native"
++PACKAGECONFIG[docs] = ",,xmlto-native,"
  
+ PV = "1.3.0+git${SRCPV}"
+ # v1.3.0
 -- 
-2.20.1
+2.30.2
 
 
