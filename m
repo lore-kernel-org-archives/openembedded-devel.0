@@ -1,95 +1,190 @@
-Return-Path: <mac@mcrowe.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ECD6AC00140
-	for <webhook@archiver.kernel.org>; Wed, 24 Aug 2022 17:28:33 +0000 (UTC)
-Received: from avasout-ptp-003.plus.net (avasout-ptp-003.plus.net
- [84.93.230.244])
- by mx.groups.io with SMTP id smtpd.web09.13879.1661362107084447718
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 004F9C00140
+	for <webhook@archiver.kernel.org>; Wed, 24 Aug 2022 17:53:44 +0000 (UTC)
+Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com
+ [209.85.128.174])
+ by mx.groups.io with SMTP id smtpd.web11.14156.1661363618691901745
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Aug 2022 10:28:29 -0700
+ Wed, 24 Aug 2022 10:53:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mcrowe.com header.s=20191005 header.b=LjH0Cdrn;
- spf=pass (domain: mcrowe.com, ip: 84.93.230.244, mailfrom: mac@mcrowe.com)
-Received: from deneb.mcrowe.com ([80.229.24.9])
-	by smtp with ESMTP
-	id QuAwo8IPapvx8QuAxoUj0a; Wed, 24 Aug 2022 18:28:24 +0100
-X-Clacks-Overhead: "GNU Terry Pratchett"
-X-CM-Score: 0.00
-X-CNFS-Analysis: v=2.4 cv=ccLBE1PM c=1 sm=1 tr=0 ts=63065fb8
- a=E/9URZZQ5L3bK/voZ0g0HQ==:117 a=E/9URZZQ5L3bK/voZ0g0HQ==:17
- a=kj9zAlcOel0A:10 a=biHskzXt2R4A:10 a=Q4-j1AaZAAAA:8 a=xvloEm1rjr4Zfpfc2_0A:9
- a=CjuIK1q_8ugA:10 a=9H3Qd4_ONW2Ztcrla5EB:22
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mcrowe.com;
-	s=20191005; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
-	Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
-	Content-Description; bh=Il9Sfpp+BDfmOaSeMm4XHxM2jPEX2aq0Le1Aj56PZDk=; b=LjH0C
-	drnB0p2dYBnlPDPGbjmroQHAZskjE1eFv2JFoBfIZizXm2zrSf7FVcxGSkpuppLOuX0gP9E9C0oMG
-	uMzAH+0xQAWG+7QHxlvaac+qwGuhkfaJJo+YNSaLrIF6FgNbQxY2TZbArhOaivCX5c39d1XL5z2la
-	5FeriFW3nKfTDrjrJEc415yWGcDkBdtS494k/tPGuSogcW6+pexfLonqXnbFVu3R3Vk9XSx/QDsqw
-	lTUx5dHTBOYtQw6ZxmSokTjh9zKWYSIAe9QDhUTU0IBn4FKYGoKvdgJC/QGt7NPIAT8gaI3dg1VWg
-	RI3N4bRzeaHPSMULAG/osEb2wVGmQ==;
-Received: from mac by deneb.mcrowe.com with local (Exim 4.94.2)
-	(envelope-from <mac@mcrowe.com>)
-	id 1oQuAw-00Bmqx-D6; Wed, 24 Aug 2022 18:28:22 +0100
-Date: Wed, 24 Aug 2022 18:28:22 +0100
-From: Mike Crowe <mac@mcrowe.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-oe][PATCH] yasm: Only depend on xmlto when docs are
- enabled
-Message-ID: <YwZftsa5qzXlqtqk@mcrowe.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=AGmklnky;
+ spf=pass (domain: gmail.com, ip: 209.85.128.174,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f174.google.com with SMTP id
+ 00721157ae682-333b049f231so480925137b3.1
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 24 Aug 2022 10:53:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc;
+        bh=qK3XGWMJ36+o9jLw3055DXFdRM7iX393sIDHEsIo2yQ=;
+        b=AGmklnky0jOp/2BY18QMY8pHBraFfMSlYRhgC8sXBAufe80y5X1HBj3CuRMCASJixk
+         3Idfkc9b8QMj5ffOLa6DE1FQQiaAdz3bRygrXraJzYC+l3LYyBCO9VT7C/ksd9u4ehdw
+         IqByhHTCd9H49cLKRKL0OhV4fUlFBQBYCO/5+ge2exAHVnpdmbqelFTpQgcZ7mS8oiBl
+         kSgsCJa4NzcibfpMP6sEeRR+GCL38BKLXGY8vNSNyEEqq3hSuAHp9MPN0OXrd//yEZoZ
+         XmDznH1Cpb5ohsRo/bfuOID1k6AAqsAefSEZot4/cwQO0pAAwBGoC3TDEf7TWJ+JPqJU
+         vqDg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc;
+        bh=qK3XGWMJ36+o9jLw3055DXFdRM7iX393sIDHEsIo2yQ=;
+        b=gRAGbeRTBZgQ8z6iY5X5Qsgyj8Z4HO4+5aRFLC1Q8BH7piN4jvyTQaY8xd7tsMY+YA
+         dr/Whmk7qwhQiSmHA/KEXEjdF+8wzbAxm13x4NXKZJQ7ledcokQ0NxKclUhO2uEVBB2d
+         HOmhjk3+YjvdUZOFH4NNweu7LdepLrhcxNJZKQKxD/xTPIixRe4/u51OIiucgqbl3kSq
+         JpC83zH2PH5kmLLhEs/ExZdeKnFnq377QPWc8eDBBPXA2qP2jOrjT3ksglCzIXwaXPWa
+         IqhQ9bbGuz01aLejnj9Ei0ZVhlwi/WMIhGHdFjJahi349ELnjZimzPnjO1eVMgW7HCFx
+         yUOQ==
+X-Gm-Message-State: ACgBeo3HZWZDySLF7hl1ANV71tKrdkzM6UvkzORi1vfwEAt+Ll9SQStO
+	lp9gsi1yo+YDbzl88ycPEqrEJvm0LLwXqpSOWzU=
+X-Google-Smtp-Source: 
+ AA6agR7TfOl7HLsA+QkRs+1CC0kpqHwydHfwtMkkqoEXRVrVw2EAjyTRzlR/wW9fzahvN7N4k4gmlNfcAPxK1rGofC8=
+X-Received: by 2002:a5b:107:0:b0:67c:4077:17f0 with SMTP id
+ 7-20020a5b0107000000b0067c407717f0mr219541ybx.363.1661363617816; Wed, 24 Aug
+ 2022 10:53:37 -0700 (PDT)
+MIME-Version: 1.0
 References: <20220824153539.423878-1-mac@mcrowe.com>
  <CAMKF1spmzy7HkzNA36TmsK7BjrkBxXsBvO1ZCo759Ygd-Qrk5w@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: 
- <CAMKF1spmzy7HkzNA36TmsK7BjrkBxXsBvO1ZCo759Ygd-Qrk5w@mail.gmail.com>
-X-CMAE-Envelope: 
- MS4xfAHodGZOHaWEiyL8GIDuti3vs/hFc7lPZc0mLqbOgnl5VJ2oyXoz1rBgWNVckKqnE+mzHivGTl9fSm0GLLQP5WqXXtjVOnEQFV1WaYbuzuM+dAYleyXm
- wLE//ejzsH0glU57+YTzo2Xba2B79z7iDkqQXH78GxDOUV/I5JOxnsbYDF9wMGW7kkleUCukAENa9WTaSbGlbBxQKBNynHDtf3E=
+ <YwZftsa5qzXlqtqk@mcrowe.com>
+In-Reply-To: <YwZftsa5qzXlqtqk@mcrowe.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 24 Aug 2022 10:53:25 -0700
+Message-ID: 
+ <CAMKF1sp5+h68O=HauGr_bx4RNWpWdVEGxJt+_oA_+h7rqNj0vg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] yasm: Only depend on xmlto when docs are
+ enabled
+To: Mike Crowe <mac@mcrowe.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000048666d05e7005c0d"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Aug 2022 17:28:33 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Aug 2022 17:53:43 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98422
+ https://lists.openembedded.org/g/openembedded-devel/message/98423
 
-On Wednesday 24 August 2022 at 09:05:05 -0700, Khem Raj wrote:
-> On Wed, Aug 24, 2022 at 8:35 AM Mike Crowe via lists.openembedded.org <mac=
-> mcrowe.com@lists.openembedded.org> wrote:
-> 
-> > The yasm build system only requires xmlto when building its
-> > documentation. It automatically detects whether it is present at
-> > configure time.
-> 
-> 
-> Does it also detect it from build machine ?
+--00000000000048666d05e7005c0d
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-No, because of the recipe-specific sysroot it can't see my system version
-of xmlto.
+On Wed, Aug 24, 2022 at 10:28 AM Mike Crowe <mac@mcrowe.com> wrote:
 
-I have xmlto installed, yet log.do_configure contains:
+> On Wednesday 24 August 2022 at 09:05:05 -0700, Khem Raj wrote:
+> > On Wed, Aug 24, 2022 at 8:35 AM Mike Crowe via lists.openembedded.org
+> <mac=3D
+> > mcrowe.com@lists.openembedded.org> wrote:
+> >
+> > > The yasm build system only requires xmlto when building its
+> > > documentation. It automatically detects whether it is present at
+> > > configure time.
+> >
+> >
+> > Does it also detect it from build machine ?
+>
+> No, because of the recipe-specific sysroot it can't see my system version
+> of xmlto.
+>
+> I have xmlto installed, yet log.do_configure contains:
+>
+> checking for xmlto... no
+> configure: WARNING: xmlto not found, manpages will not be rebuilt.
 
-checking for xmlto... no
-configure: WARNING: xmlto not found, manpages will not be rebuilt.
 
-> Perhaps better to turn the knob on and off explicitly as well for
-> determinism
+That=E2=80=99s partly due to HOSTTOOLS now hiding majority of build system =
+tools
 
-I couldn't find a --disable-doc/--without-xmlto knob otherwise I would have
-done. :(
 
-Or did you mean that I should explicitly set ac_cv_prog_XMLTO with
-something like:
+>
+> > Perhaps better to turn the knob on and off explicitly as well for
+> > determinism
+>
+> I couldn't find a --disable-doc/--without-xmlto knob otherwise I would ha=
+ve
+> done. :(
 
- PACKAGECONFIG[docs] = ",ac_cv_prog_XMLTO='',xmlto-native,"
 
-?
+Ok I think it=E2=80=99s fine as it is since someone would have to explicitl=
+y add
+xmlto to HOSTTOOLS to cause the issue
 
-Thanks.
 
-Mike.
+>
+> Or did you mean that I should explicitly set ac_cv_prog_XMLTO with
+> something like:
+>
+>  PACKAGECONFIG[docs] =3D ",ac_cv_prog_XMLTO=3D'',xmlto-native,"
+>
+> ?
+>
+> Thanks.
+>
+> Mike.
+>
+
+--00000000000048666d05e7005c0d
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Wed, Aug 24, 2022 at 10:28 AM Mike Crowe &lt;<a href=3D"=
+mailto:mac@mcrowe.com">mac@mcrowe.com</a>&gt; wrote:<br></div><blockquote c=
+lass=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;=
+padding-left:1ex">On Wednesday 24 August 2022 at 09:05:05 -0700, Khem Raj w=
+rote:<br>
+&gt; On Wed, Aug 24, 2022 at 8:35 AM Mike Crowe via <a href=3D"http://lists=
+.openembedded.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.=
+org</a> &lt;mac=3D<br>
+&gt; <a href=3D"mailto:mcrowe.com@lists.openembedded.org" target=3D"_blank"=
+>mcrowe.com@lists.openembedded.org</a>&gt; wrote:<br>
+&gt; <br>
+&gt; &gt; The yasm build system only requires xmlto when building its<br>
+&gt; &gt; documentation. It automatically detects whether it is present at<=
+br>
+&gt; &gt; configure time.<br>
+&gt; <br>
+&gt; <br>
+&gt; Does it also detect it from build machine ?<br>
+<br>
+No, because of the recipe-specific sysroot it can&#39;t see my system versi=
+on<br>
+of xmlto.<br>
+<br>
+I have xmlto installed, yet log.do_configure contains:<br>
+<br>
+checking for xmlto... no<br>
+configure: WARNING: xmlto not found, manpages will not be rebuilt.</blockqu=
+ote><div dir=3D"auto"><br></div><div dir=3D"auto">That=E2=80=99s partly due=
+ to HOSTTOOLS now hiding majority of build system tools=C2=A0</div><div dir=
+=3D"auto"><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0=
+ .8ex;border-left:1px #ccc solid;padding-left:1ex" dir=3D"auto"><br>
+<br>
+&gt; Perhaps better to turn the knob on and off explicitly as well for<br>
+&gt; determinism<br>
+<br>
+I couldn&#39;t find a --disable-doc/--without-xmlto knob otherwise I would =
+have<br>
+done. :(</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Ok I thi=
+nk it=E2=80=99s fine as it is since someone would have to explicitly add xm=
+lto to HOSTTOOLS to cause the issue=C2=A0</div><div dir=3D"auto"><br></div>=
+<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
+x #ccc solid;padding-left:1ex" dir=3D"auto"><br>
+<br>
+Or did you mean that I should explicitly set ac_cv_prog_XMLTO with<br>
+something like:<br>
+<br>
+=C2=A0PACKAGECONFIG[docs] =3D &quot;,ac_cv_prog_XMLTO=3D&#39;&#39;,xmlto-na=
+tive,&quot;<br>
+<br>
+?<br>
+<br>
+Thanks.<br>
+<br>
+Mike.<br>
+</blockquote></div></div>
+
+--00000000000048666d05e7005c0d--
 
