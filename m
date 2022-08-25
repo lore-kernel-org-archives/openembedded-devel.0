@@ -1,156 +1,151 @@
-Return-Path: <atanas.bunchev@gmail.com>
+Return-Path: <jsbronder@cold-front.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4286C32774
-	for <webhook@archiver.kernel.org>; Thu, 25 Aug 2022 14:56:19 +0000 (UTC)
-Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com
- [209.85.208.50])
- by mx.groups.io with SMTP id smtpd.web09.25003.1661439374236883338
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CED1CECAAD1
+	for <webhook@archiver.kernel.org>; Thu, 25 Aug 2022 22:03:11 +0000 (UTC)
+Received: from wout2-smtp.messagingengine.com (wout2-smtp.messagingengine.com
+ [64.147.123.25])
+ by mx.groups.io with SMTP id smtpd.web11.30166.1661464986198248420
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Aug 2022 07:56:14 -0700
+ Thu, 25 Aug 2022 15:03:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=JBc80Qkt;
- spf=pass (domain: gmail.com, ip: 209.85.208.50,
- mailfrom: atanas.bunchev@gmail.com)
-Received: by mail-ed1-f50.google.com with SMTP id t5so26433330edc.11
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Aug 2022 07:56:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc;
-        bh=vsANSsCL1F38oFH/dwRYVLhIk8FrOlQZpUaNBpBC7U0=;
-        b=JBc80Qkt8GAifqkPVqyx7Z3AaQiQvjN19uCPcrfQa2EwCo6pDiKQP6iCPWin+Jcsng
-         CuoKG9QWGuNTElJIAxlz3TABNeLUoFsqS1eHYfz46m3ptZoGRctHBIKC1bkL5zDhHq1m
-         7ad2jKkN4qo694NOjYtIZvMpVm5Ff+/zcHQIIbUnNEF25E2SPxyeKWtUlvHUFBIFjBVD
-         DHpWjT97DdMsbQepzx+BsuBgyg/JwzZghYcCTlNP59+3aT4nDb4OC6cxgY+XrYzCXQk9
-         vzslDBuQn3v6nhLFJ+UcS4wGXNM/tWUJkuOK0a9PE/OOxeS6IwEvEC6y01OCSFBrPMuJ
-         27UA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc;
-        bh=vsANSsCL1F38oFH/dwRYVLhIk8FrOlQZpUaNBpBC7U0=;
-        b=SwyyIjtLAvR4UPaMRCokAtiflmnSyAPIzN5u8+43u1LYVJg4pjmkOVJbcL5sN4hQmr
-         F0DNKo9+uUOME88fOo368mzFk+lMlOA8K9FuHW8H8TSCFzLTK+T+qn4YLSPXoQr0NLHu
-         80ZBDdkEAxuDlKQRKgZpGzGOBRdJUyDubZV6i2SKzN163fV6W5/fNPL5OwFzI2NhRiFI
-         zyfrO5mExPu0PjkFEKIK9qFvgPajgGhIinJVkC7hBR/14mHgozItskVmJQftLm06VkML
-         kPVDlfX2LaJ/aXocCQI/6F33dUzRG5Qf85wS/0YiAhiU+qTlluicRDKhNEkQ1vXVu3dD
-         0Jng==
-X-Gm-Message-State: ACgBeo1MrQRGxtn1lyfxCAXqY01CIzyIAdvmUBQN01YqLA6U1Vn0uRU5
-	FVy7J64VCRrU7o/qsLzf+fsSmJUPPOM=
-X-Google-Smtp-Source: 
- AA6agR7nVW8UJib6gjsjy5+w9DVP04mhxfoopDFBr91warPbw23/EooqZ1K70gjcY9+gOqG0C3S8Rw==
-X-Received: by 2002:a05:6402:5489:b0:43b:b935:db37 with SMTP id
- fg9-20020a056402548900b0043bb935db37mr3643981edb.347.1661439372646;
-        Thu, 25 Aug 2022 07:56:12 -0700 (PDT)
-Received: from localhost.localdomain ([195.214.248.134])
-        by smtp.gmail.com with ESMTPSA id
- b25-20020aa7c919000000b0043bbb3535d6sm452927edt.66.2022.08.25.07.56.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Aug 2022 07:56:12 -0700 (PDT)
-From: Atanas Bunchev <atanas.bunchev@gmail.com>
+ dkim=fail reason="signature has expired" header.i=@cold-front.org
+ header.s=mesmtp header.b=SBpUkwzt;
+ spf=pass (domain: cold-front.org, ip: 64.147.123.25,
+ mailfrom: jsbronder@cold-front.org)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+	by mailout.west.internal (Postfix) with ESMTP id 3330932009F8;
+	Thu, 25 Aug 2022 18:03:03 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute4.internal (MEProxy); Thu, 25 Aug 2022 18:03:03 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
+	 h=cc:cc:content-transfer-encoding:date:date:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to; s=mesmtp; t=1661464982; x=1661551382; bh=6pDKpc1
+	RT44EeTm0SiJiEEuBmql/+QrNVsCOL6iJO5g=; b=SBpUkwztUf6EDe5/xn6lljq
+	NKMe3BLyNuvCrMC7VdCe7XN9QC3EpW/9Bd2xb4slhqK2RyTMQ7bDzu9KbmAS84bu
+	U3GyyKISgXl1YjlVxQHNrF7STfjEgpX4D/MgpMekDmHVtr/mA4vdf+nFuzdTMzhg
+	vLzO7Q1F1cdPD2MqULNY=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:message-id
+	:mime-version:reply-to:sender:subject:subject:to:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
+	1661464982; x=1661551382; bh=6pDKpc1RT44EeTm0SiJiEEuBmql/+QrNVsC
+	OL6iJO5g=; b=Nv8tMWd3p7twxopZ5S7YHntt3/RwJ0a7vysWC/nkH9ZG2U/IbnD
+	sXdIUQztCMIO0Z+pRwnIpOuOco8Bb4ngz9d35by2sMds9WiQzlR0hRRUMn28MfW/
+	BF5/g8ZarR0t0I9YdAqn7moUp0bkWxXGE4lrbZodqQFZ41vWJ1xjJnKU9/YOx39n
+	H1LVRP3Zi4rhWUO/PjlrN2w+rjOEfldf71EwByH0N8/g5fOcb/HFuZf+fkdDHvpi
+	iXXUeY/hH+XQCFub8fIqbJNXiLpOqxJjmQSswelur+oPX025WMrlryG3ZxWK3aEA
+	mNkHzPHr317EfJVNkfH0m6l3nAWO9Kft1kg==
+X-ME-Sender: <xms:lvEHY9uXw20LKeByNWIahFXF-8nw2lp_uXjk46hV7dGZ6-Ay70LvZg>
+    <xme:lvEHY2eGkKbyAGYRcKnq7jSTDf5J8J-Ioo9duNlZoQpyUxwTkkhcweJpGqljxEp3a
+    6zEgufXTYRFlgcXqw>
+X-ME-Received: 
+ <xmr:lvEHYwwcnvTnAUXx1sXFjjtBFy0BQq7JbTwzIbQwdu0RZhBbRwEFDJAYIMuXB7frA0aTHQnz9iHnnQgp62nbA83eiREpcfhg0uJXsfKUVg>
+X-ME-Proxy-Cause: 
+ gggruggvucftvghtrhhoucdtuddrgedvfedrvdejgedgtdeiucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertd
+    ertddtnecuhfhrohhmpefluhhsthhinhcuuehrohhnuggvrhcuoehjshgsrhhonhguvghr
+    segtohhlugdqfhhrohhnthdrohhrgheqnecuggftrfgrthhtvghrnhepffdugffffeeuvd
+    dutddtgfefhefgieekffduhffgheeifeetfeegvdeihedvgedvnecuffhomhgrihhnpehg
+    ihhthhhusgdrtghomhenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
+    hlfhhrohhmpehjshgsrhhonhguvghrsegtohhlugdqfhhrohhnthdrohhrgh
+X-ME-Proxy: <xmx:lvEHY0MleLwEAKCm_BKek5i0HmwQ2dptcqBRjenwi6c_NbuNormwcw>
+    <xmx:lvEHY9_TqeCK_vBJV01REP8IHHvIQVYkySq00rImRFicQ4O5fDOYjQ>
+    <xmx:lvEHY0UsJHFOcPcI1uHzdVHtVRm--0LxGuKKd36c_HZdrrUO8EtenQ>
+    <xmx:lvEHY6Eu1mWRR9M7AEk36QEQoYyIk3tURzneIA6Gtw5k9wOb9kZ1QA>
+Feedback-ID: iea0042cb:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 25 Aug 2022 18:03:02 -0400 (EDT)
+From: Justin Bronder <jsbronder@cold-front.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Atanas Bunchev <atanas.bunchev@gmail.com>
-Subject: [meta-python][PATCH v2] python3-twitter: Upgrade 4.8.0 -> 4.10.1
-Date: Thu, 25 Aug 2022 17:57:12 +0300
-Message-Id: <20220825145712.26477-1-atanas.bunchev@gmail.com>
-X-Mailer: git-send-email 2.35.1
+Cc: Justin Bronder <jsbronder@cold-front.org>
+Subject: [meta-oe][PATCH] lmdb: only set SONAME on the shared library
+Date: Thu, 25 Aug 2022 18:02:57 -0400
+Message-Id: <20220825220257.2993-1-jsbronder@cold-front.org>
+X-Mailer: git-send-email 2.37.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 25 Aug 2022 14:56:19 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 25 Aug 2022 22:03:11 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98435
+ https://lists.openembedded.org/g/openembedded-devel/message/98436
 
-Upgrading python3-twitter to 4.10.1 and adding
-missing RDEPEND requests-oauthlib
+Setting soname in LDFLAGS means that the extra mdb tools also
+incorrectly get soname set.  This then triggers package.bbclass to add a
+duplicate shlib_provider in /usr/bin for liblmdb.so.0.9.29.  Then any
+other recipe depending on liblmdb is going to get a 'Multiple shlib
+provider' error.
 
-The license line in PKG-INFO was moved from row 8 to row 9.
+shlibs2/lmdb.list before:
+    liblmdb.so.0.9.29:/usr/bin:0.9.29
+    liblmdb.so.0.9.29:/usr/lib:0.9.29
 
-Changelog:  (https://github.com/tweepy/tweepy/releases)
+shlibs2/lmdb.list after:
+    liblmdb.so.0.9.29:/usr/lib:0.9.29
 
-New Features / Improvements:
- - Add support for Direct Message typing indicator
-   and read receipts
-   - Add API.indicate_direct_message_typing and
-     API.mark_direct_message_read
- - Fallback to "detail" response value for HTTPException message
- - Handle "error" key of response being a string in HTTPException
- - Add asynchronous interfaces for Twitter API v2
-   - Add asynchronous.AsyncClient
-     - Add async_lru as requirement for async extra
-   - Add asynchronous.AsyncStreamingClient
- - Add support for reverse chronological home timeline
-   with Twitter API v2
-   - Add Client.get_home_timeline and AsyncClient.get_home_timeline
- - Update the User-Agent header based on AsyncStream.user_agent
-   even if AsyncStream.session is already initialized/set
-
-Bug Fixes
- - Fix AsyncBaseClient rate limit handling
- - Fix handling of StreamRule when passed in list to
-   StreamingClient.delete_rules or AsyncStreamingClient.delete_rules
- - Add support for media_fields, place_fields, and poll_fields
-   parameters for Client.get_list_tweets and
-   AsyncClient.get_list_tweets
- - Ignore AsyncClient method parameters explicitly passed as None
-
-Twitter API Deprecations:
- - Deprecate Stream.sample and note deprecation of compliance
-   messages for Stream.filter
- - Deprecate AsyncStream.sample and note deprecation of compliance
-   messages for AsyncStream.filter
-
-Misc:
- - Use setup.cfg for coverage.py configuration
-   - Explicitly specify coverage >= 4.4.2 requirement for dev extra
- - Use setup.cfg for tox configuration
-   - Update lower bound for dev extra tox requirement to >= 3.21.0
- - Remove tests_require from setup.py
- - Stop creating universal wheels
- - Update and improve various documentation and tests
- - Log text of HTTP response when handling request error in BaseStream
- - Update Requests documentation URL for Intersphinx linking
- - Correct typo in documentation for StreamingClient and
-   AsyncStreamingClient add_rules and delete_rules methods
-
-Signed-off-by: Atanas Bunchev <atanas.bunchev@gmail.com>
+Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
 ---
- .../{python3-twitter_4.8.0.bb => python3-twitter_4.10.1.bb}  | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-twitter_4.8.0.bb => python3-twitter_4.10.1.bb} (62%)
+ .../0001-make-set-soname-on-liblmdb.patch     | 22 +++++++++++++++++++
+ meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb       |  3 +--
+ 2 files changed, 23 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-dbs/lmdb/files/0001-make-set-soname-on-liblmdb.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-twitter_4.8.0.bb b/meta-python/recipes-devtools/python/python3-twitter_4.10.1.bb
-similarity index 62%
-rename from meta-python/recipes-devtools/python/python3-twitter_4.8.0.bb
-rename to meta-python/recipes-devtools/python/python3-twitter_4.10.1.bb
-index 247b4e584..b283aef56 100644
---- a/meta-python/recipes-devtools/python/python3-twitter_4.8.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-twitter_4.10.1.bb
-@@ -2,9 +2,9 @@ SUMMARY = "Twitter for Python"
- DESCRIPTION = "Python module to support twitter API"
+diff --git a/meta-oe/recipes-dbs/lmdb/files/0001-make-set-soname-on-liblmdb.patch b/meta-oe/recipes-dbs/lmdb/files/0001-make-set-soname-on-liblmdb.patch
+new file mode 100644
+index 0000000000..312809d1d2
+--- /dev/null
++++ b/meta-oe/recipes-dbs/lmdb/files/0001-make-set-soname-on-liblmdb.patch
+@@ -0,0 +1,22 @@
++From b4d418bf3f78748d84e3cfb110833443eef34284 Mon Sep 17 00:00:00 2001
++From: Justin Bronder <jsbronder@cold-front.org>
++Date: Thu, 25 Aug 2022 17:22:20 -0400
++Subject: [PATCH] make: set soname on liblmdb
++
++---
++ libraries/liblmdb/Makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/libraries/liblmdb/Makefile b/libraries/liblmdb/Makefile
++index 1ec74e6..ea08cd6 100644
++--- a/libraries/liblmdb/Makefile
+++++ b/libraries/liblmdb/Makefile
++@@ -66,7 +66,7 @@ liblmdb.a:	mdb.o midl.o
++ 
++ liblmdb$(SOEXT):	mdb.lo midl.lo
++ #	$(CC) $(LDFLAGS) -pthread -shared -Wl,-Bsymbolic -o $@ mdb.o midl.o $(SOLIBS)
++-	$(CC) $(LDFLAGS) -pthread -shared -o $@ mdb.lo midl.lo $(SOLIBS)
+++	$(CC) $(LDFLAGS) -pthread -shared -Wl,-soname,$@ -o $@ mdb.lo midl.lo $(SOLIBS)
++ 
++ mdb_stat: mdb_stat.o liblmdb.a
++ mdb_copy: mdb_copy.o liblmdb.a
+diff --git a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
+index 0590ce008c..a76d388d70 100644
+--- a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
++++ b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
+@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972"
+ SRC_URI = "git://github.com/LMDB/lmdb.git;nobranch=1;protocol=https \
+            file://run-ptest \
+            file://0001-Makefile-use-libprefix-instead-of-libdir.patch \
++           file://0001-make-set-soname-on-liblmdb.patch;patchdir=../.. \
+            "
  
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=9;endline=9;md5=8227180126797a0148f94f483f3e1489"
+ SRCREV = "8ad7be2510414b9506ec9f9e24f24d04d9b04a1a"
+@@ -19,8 +20,6 @@ inherit ptest
  
--SRC_URI[sha256sum] = "8ba5774ac1663b09e5fce1b030daf076f2c9b3ddbf2e7e7ea0bae762e3b1fe3e"
-+SRC_URI[sha256sum] = "310193775d7fc381abd6f37021a9af27f7e9edfcce5ec51bd73ea5f30c21fa61"
+ S = "${WORKDIR}/git/libraries/liblmdb"
  
- PYPI_PACKAGE = "tweepy"
- 
-@@ -14,5 +14,6 @@ RDEPENDS:${PN} += "\
-     ${PYTHON_PN}-pip \
-     ${PYTHON_PN}-pysocks \
-     ${PYTHON_PN}-requests \
-+    ${PYTHON_PN}-requests-oauthlib \
-     ${PYTHON_PN}-six \
- "
+-LDFLAGS += "-Wl,-soname,lib${PN}.so.${PV}"
+-
+ do_compile() {
+     oe_runmake CC="${CC}" SOEXT=".so.${PV}" LDFLAGS="${LDFLAGS}"
+ }
 -- 
-2.35.1
+2.37.1
 
 
