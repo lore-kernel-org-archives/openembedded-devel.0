@@ -1,184 +1,232 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <Muhammad_Hamza@mentor.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D8D14ECAAA3
-	for <webhook@archiver.kernel.org>; Fri, 26 Aug 2022 08:25:34 +0000 (UTC)
-Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com
- [209.85.128.179])
- by mx.groups.io with SMTP id smtpd.web09.34786.1661502327208138234
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FC94ECAAA3
+	for <webhook@archiver.kernel.org>; Fri, 26 Aug 2022 12:56:26 +0000 (UTC)
+Received: from esa3.mentor.iphmx.com (esa3.mentor.iphmx.com [68.232.137.180])
+ by mx.groups.io with SMTP id smtpd.web11.36573.1661518578018618077
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Aug 2022 01:25:27 -0700
+ Fri, 26 Aug 2022 05:56:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=b23oo/KA;
- spf=pass (domain: gmail.com, ip: 209.85.128.179,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f179.google.com with SMTP id
- 00721157ae682-33dba2693d0so17996497b3.12
-        for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Aug 2022 01:25:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc;
-        bh=u9gnRBnRiaeOcl3Xzn2TY9dzCDGZ4s930IZbFaXRpko=;
-        b=b23oo/KAOArLDooRphXO4VEK7yNDSkzM3lWJ+YSkeUjjjx7pl4bC67HBz8P+ZZAyHU
-         UtReLgu1ZI+i4UnQQ9g/2BkOAqKQLCduUnmvw/GClTZ0YhGcsZ1B15CVLaoOprYQbF3E
-         s40W/vpPYdcgo+0hclWtQsUgDz/WlAZEQZzGg6bOoW2l6H3EVtdVFWJ9hCnRnsH6pCXu
-         85f9ko69C6BQT5lp/Clphg6o1o9jJVd3otOlIwfSkT43uQV4VE1xFNDCQ6DQuCZmIH8A
-         LZNd5m7Q4nFZ1rNKGCHss2SXx7Z+tDFQ1ZpELvIDXvWZ+fsT74LUwWDBl7zTD9S6vVDR
-         xKGg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc;
-        bh=u9gnRBnRiaeOcl3Xzn2TY9dzCDGZ4s930IZbFaXRpko=;
-        b=AYLUauXQ285lya5yb50eUP9gkcL1Z58SH+c6B3cICyI1Yo34RSf1NSZpeSPXmCoaDF
-         7m5ML/j5dqo98dKrzZWQG9kuvhwEJ7Z19CYUe4A3lJPPQDQFxqkDVH4YWGBQQKOvBq8v
-         gp+DpelZ+sn225MXzAKZyeGpVI2zGRXKeP2OTwqsKpwyJ0SSgUUGQgQuEVlHHB3kFXi7
-         99ZXXEAdbrtXf6yAiITGASObvwbDUrT7auQV9pJBQrHarJZq/lXnidME0YWyC4zdfy3t
-         MFb7Dq8U2tBOjmSSwwhsXUYgYAuqDQVD9WmMM7YuReyCVmfscUSDF95W2SDnTYlhLgBS
-         mXTQ==
-X-Gm-Message-State: ACgBeo1uh84oNEw3nbasGvRJccBZHXdsTmxRxRvP2vKOnU+AquhaafQM
-	aCy2bd6bvrGxrJ8cnnXwih42erSb5tvRnQX+X+PeXm5KBX5ZdQ==
-X-Google-Smtp-Source: 
- AA6agR5QZdK2VhuQtqkuKNTay6uDI0SEH/5zYrejkjenGBGIZx6HtQJxsArRbM66qMYOjuWXi09wCH197jw11nu3/Fg=
-X-Received: by 2002:a25:db42:0:b0:695:8d22:3a8e with SMTP id
- g63-20020a25db42000000b006958d223a8emr6375163ybf.428.1661502326254; Fri, 26
- Aug 2022 01:25:26 -0700 (PDT)
+ dkim=missing;
+ spf=pass (domain: mentor.com, ip: 68.232.137.180, mailfrom: muhammad_hamza@mentor.com)
+X-IronPort-AV: E=Sophos;i="5.93,265,1654588800";
+   d="png'150?scan'150,208,217,150";a="81867042"
+Received: from orw-gwy-01-in.mentorg.com ([192.94.38.165])
+  by esa3.mentor.iphmx.com with ESMTP; 26 Aug 2022 04:56:16 -0800
+IronPort-SDR: 
+ bUvSHziE4xez1a/VXGlQPTBiyhYTQTDHh/oHqs8Tv6DVZmu7CzAWzD4UZEVhReaBBk44yKl1zF
+ fpq8I0eDYwA74o0NS3akloODs4TjCRJMarQmQG1xOmryyPnrhA6InK5gVdQzzs2EcHA9b/l2XW
+ 5jMTFOEZ/VF0VmODwuiRpF3A35E/IGIJw+huDygnr7LDhGRvX/tKqF/mC8pIZCAXbzfFMAd1z3
+ dTYRq7C2jspHFQTMR4rYciFo6V3WgPYVzy2tlzbqcqY3LAUnjLLb8iPCc5cd1IH85ec0Mal5b/
+ J5Q=
+From: "Hamza, Muhammad" <Muhammad_Hamza@mentor.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe] [kirkstone] recipes-support/pidgin: no rdepends on python3
+Thread-Topic: [meta-oe] [kirkstone] recipes-support/pidgin: no rdepends on
+ python3
+Thread-Index: Adi5SorCCEV5X6xHTZ2xrnsaNL6Ezg==
+Date: Fri, 26 Aug 2022 12:56:12 +0000
+Message-ID: <a65c592f8ded460590707f34da6eb688@mentor.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+x-originating-ip: [137.202.0.90]
+Content-Type: multipart/related;
+	boundary="_004_a65c592f8ded460590707f34da6eb688mentorcom_";
+	type="multipart/alternative"
 MIME-Version: 1.0
-References: <20220826011930.2818670-1-yi.zhao@windriver.com>
- <20220826011930.2818670-3-yi.zhao@windriver.com>
-In-Reply-To: <20220826011930.2818670-3-yi.zhao@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 26 Aug 2022 01:25:00 -0700
-Message-ID: 
- <CAMKF1sooV1+yriJF5OCugP=JdpD9ffm6gC1C6pAfXQDZyecv0w@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH 3/3] samba: fix buildpaths issue
-To: Yi Zhao <yi.zhao@windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 26 Aug 2022 08:25:34 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 26 Aug 2022 12:56:26 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98479
+ https://lists.openembedded.org/g/openembedded-devel/message/98480
 
-On Thu, Aug 25, 2022 at 6:19 PM Yi Zhao <yi.zhao@windriver.com> wrote:
->
-> The test case tfork_cmd_send in smbtorture fails on target as it
-> requries a script located in the source directory:
->
-> $ smbtorture ncalrpc:localhost local.tfork.tfork_cmd_send
-> test: tfork_cmd_send
-> /buildarea/build/tmp/work/core2-64-poky-linux/samba/4.14.14-r0/samba-4.14.14/testprogs/blackbox/tfork.sh:
-> Failed to exec child - No such file or directory
->
-> This also triggers the buildpaths warning:
-> QA Issue: File /usr/bin/smbtorture in package samba-testsuite contains reference to TMPDIR [buildpaths]
->
-> Skip this test case in smbtorture to avoid the warning. And also disable
-> rpath build.
->
-> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> ---
->  ...orture-skip-test-case-tfork_cmd_send.patch | 38 +++++++++++++++++++
->  .../samba/samba_4.14.14.bb                    |  2 +
->  2 files changed, 40 insertions(+)
->  create mode 100644 meta-networking/recipes-connectivity/samba/samba/0001-smbtorture-skip-test-case-tfork_cmd_send.patch
->
-> diff --git a/meta-networking/recipes-connectivity/samba/samba/0001-smbtorture-skip-test-case-tfork_cmd_send.patch b/meta-networking/recipes-connectivity/samba/samba/0001-smbtorture-skip-test-case-tfork_cmd_send.patch
-> new file mode 100644
-> index 000000000..90ee31786
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/samba/samba/0001-smbtorture-skip-test-case-tfork_cmd_send.patch
-> @@ -0,0 +1,38 @@
-> +From 059b517f9ef6cbdc696e0983ce255b1728042827 Mon Sep 17 00:00:00 2001
-> +From: Yi Zhao <yi.zhao@windriver.com>
-> +Date: Thu, 25 Aug 2022 16:46:04 +0800
-> +Subject: [PATCH] smbtorture: skip test case tfork_cmd_send
-> +
-> +The test case tfork_cmd_send fails on target as it requires a script
-> +located in the source directory:
-> +
-> +$ smbtorture ncalrpc:localhost local.tfork.tfork_cmd_send
-> +test: tfork_cmd_send
-> +/buildarea/build/tmp/work/core2-64-poky-linux/samba/4.14.14-r0/samba-4.14.14/testprogs/blackbox/tfork.sh:
-> +Failed to exec child - No such file or directory
-> +
-> +Upstream-Status: Inappropriate [embedded specific]
-> +
-> +Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> +---
-> + lib/util/tests/tfork.c | 4 ----
-> + 1 file changed, 4 deletions(-)
-> +
-> +diff --git a/lib/util/tests/tfork.c b/lib/util/tests/tfork.c
-> +index 70ae975..4826ce6 100644
-> +--- a/lib/util/tests/tfork.c
-> ++++ b/lib/util/tests/tfork.c
-> +@@ -839,10 +839,6 @@ struct torture_suite *torture_local_tfork(TALLOC_CTX *mem_ctx)
-> +                                     "tfork_threads",
-> +                                     test_tfork_threads);
-> +
-> +-      torture_suite_add_simple_test(suite,
-> +-                                    "tfork_cmd_send",
-> +-                                    test_tfork_cmd_send);
-> +-
-> +       torture_suite_add_simple_test(suite,
-> +                                     "tfork_event_file_handle",
-> +                                     test_tfork_event_file_handle);
-> +--
-> +2.25.1
-> +
-> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb b/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
-> index cb3678d7b..8877b8e1a 100644
-> --- a/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
-> +++ b/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
-> @@ -21,6 +21,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
->             file://0004-Add-options-to-configure-the-use-of-libbsd.patch \
->             file://0005-samba-build-dnsserver_common-code.patch \
->             file://0001-Fix-pyext_PATTERN-for-cross-compilation.patch \
-> +           file://0001-smbtorture-skip-test-case-tfork_cmd_send.patch \
->             "
->
->  SRC_URI:append:libc-musl = " \
-> @@ -114,6 +115,7 @@ EXTRA_OECONF += "--enable-fhs \
->                   --with-modulesdir=${libdir}/samba \
->                   --with-lockdir=${localstatedir}/lib/samba \
->                   --with-cachedir=${localstatedir}/lib/samba \
-> +                 --disable-rpath \
+--_004_a65c592f8ded460590707f34da6eb688mentorcom_
+Content-Type: multipart/alternative;
+	boundary="_000_a65c592f8ded460590707f34da6eb688mentorcom_"
 
-this means that private libs installed in /usr/lib/samba are not
-detected by dependent packages anymore
-try to build meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
+--_000_a65c592f8ded460590707f34da6eb688mentorcom_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-It errors like this
-https://errors.yoctoproject.org/Errors/Details/669955/
+Hi,
 
-but the real error is a configure test failure
+I was going through pidgin recipe and found that it depends on python3 but =
+does not rdepend on it.
+Pidgin provides finch which required python3 at runtime and fails to run on=
+ target if python3 is absent.
+I wanted to ask if python3 is to be provided by any other recipe on runtime=
+ or should I send a patch, where
+pidgin recipe rdepends on python3.
+I have built an image with packages including finch but python3 was not ava=
+ilable at runtime till I explicitly added
+it to my packages.
+Regards,
+Muhammad Hamza
+Siemens Industry Software (Private) Limited
+Pakistan Engineering
+6th Floor Ali Tower M. M. Alam Road Gulberg III
+Lahore Pakistan, 54660
+hamza.muhammad.ext@siemens.com<mailto:hamza.muhammad.ext@siemens.com>
+www.sw.siemens.com<http://www.sw.siemens.com/>
 
-/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux-musl/smbnetfs/0.6.3-r0/recipe-sysroot-native/usr/bin/x86_64-yoe-linux-musl/x86_64-yoe-linux-musl-ld:
-warning: liblibsmb-samba4.so, needed by
-/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux-musl/smbnetfs/0.6.3-r0/recipe-sysroot/usr/lib/libsmbclient.so,
-not found (try using -rpath or -rpath-link)
+[cid:image001.png@01D8B975.1EE3FE00]
 
-this library is in usr/lib/samba
 
->                   --disable-rpath-install \
->                   --with-shared-modules=${SAMBA4_MODULES} \
->                   --bundled-libraries=${SAMBA4_LIBS} \
-> --
-> 2.25.1
+--_000_a65c592f8ded460590707f34da6eb688mentorcom_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
 >
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#98439): https://lists.openembedded.org/g/openembedded-devel/message/98439
-> Mute This Topic: https://lists.openembedded.org/mt/93261519/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<!--[if !mso]><style>v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style><![endif]--><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri",sans-serif;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"#0563C1" vlink=3D"#954F72" style=3D"word-wrap:=
+break-word">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal">Hi,<br>
+<br>
+I was going through pidgin recipe and found that it depends on python3 but =
+does not rdepend on it.<br>
+Pidgin provides finch which required python3 at runtime and fails to run on=
+ target if python3 is absent.<br>
+I wanted to ask if python3 is to be provided by any other recipe on runtime=
+ or should I send a patch, where<br>
+pidgin recipe rdepends on python3.<br>
+I have built an image with packages including finch but python3 was not ava=
+ilable at runtime till I explicitly added<br>
+it to my packages. <o:p></o:p></p>
+<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
+lt:auto"><b><span style=3D"font-size:10.0pt;color:black">Regards,<br>
+</span></b><b><span style=3D"font-size:10.0pt;color:#191919">Muhammad Hamza=
+</span></b><span style=3D"font-size:10.0pt"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt">Siemens Industry So=
+ftware (Private) Limited<br>
+Pakistan Engineering<br>
+6th Floor Ali Tower M. M. Alam Road Gulberg III <br>
+Lahore Pakistan, 54660<br>
+<a href=3D"mailto:hamza.muhammad.ext@siemens.com"><span style=3D"color:blue=
+">hamza.muhammad.ext@siemens.com</span></a></span><br>
+<u><span style=3D"font-size:8.0pt;color:#0563C1"><a href=3D"http://www.sw.s=
+iemens.com/"><span style=3D"color:blue">www.sw.siemens.com</span></a></span=
+></u><o:p></o:p></p>
+<p class=3D"MsoNormal"><br>
+<img border=3D"0" width=3D"152" height=3D"51" style=3D"width:1.5833in;heigh=
+t:.5333in" id=3D"Picture_x0020_1" src=3D"cid:image001.png@01D8B975.1EE3FE00=
+"><span style=3D"font-size:12.0pt;font-family:&quot;Arial&quot;,sans-serif"=
+><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+</body>
+</html>
+
+--_000_a65c592f8ded460590707f34da6eb688mentorcom_--
+
+--_004_a65c592f8ded460590707f34da6eb688mentorcom_
+Content-Type: image/png; name="image001.png"
+Content-Description: image001.png
+Content-Disposition: inline; filename="image001.png"; size=2887;
+	creation-date="Fri, 26 Aug 2022 12:56:11 GMT";
+	modification-date="Fri, 26 Aug 2022 12:56:11 GMT"
+Content-ID: <image001.png@01D8B975.1EE3FE00>
+Content-Transfer-Encoding: base64
+
+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
+
+--_004_a65c592f8ded460590707f34da6eb688mentorcom_--
 
