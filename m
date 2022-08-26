@@ -2,72 +2,73 @@ Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1988DECAAA3
-	for <webhook@archiver.kernel.org>; Fri, 26 Aug 2022 02:50:53 +0000 (UTC)
-Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com
- [195.245.230.82])
- by mx.groups.io with SMTP id smtpd.web12.32527.1661482246868815669
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F26B6ECAAA3
+	for <webhook@archiver.kernel.org>; Fri, 26 Aug 2022 02:51:22 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.1])
+ by mx.groups.io with SMTP id smtpd.web12.32533.1661482282426193790
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Aug 2022 19:50:47 -0700
+ Thu, 25 Aug 2022 19:51:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=i7si84Q1;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.82,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=YojR3Fq6;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
  mailfrom: zhengrq.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1661482245; i=@fujitsu.com;
-	bh=rD7QDsErzR58A1000yxCISlbyfxiJuryLupyWJ7OZK0=;
+	s=170520fj; t=1661482280; i=@fujitsu.com;
+	bh=S8Hs0+0rxmhmqOEIDvaYzFnsxFTP90mh6jz3x/b+zQ0=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=i7si84Q1nsPeyFBwzC7hl46+7qx/Yoe8Ql4DOu8jl19PKNvAAVMFWp5MuMTyCPVZR
-	 v6hR79vuSAEFvRorg+VAdgGChnJ/bZnyG/D4DG8fm+Ynf7EzWZWE+4Td0Fd3voDEoT
-	 2yhTlxt0rwMqMFEWhVCSN6jAb4tEV7t3TIL2OKPakLBlmNCbxUtDtZ7jDymZDCefy9
-	 F3bpIY++qYvDAYFm2heWBrCR8dZg57kdfoYp322Hhj2qxxoCq86cj+g9zPLDhVkRFG
-	 sSV2H2jYe21guenrRseVkMc9bkMsqTI4aM+VsmS6chMULJJNFw8oIDQ8Rr6eOxys+u
-	 2yzPaIE6AF32w==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrEIsWRWlGSWpSXmKPExsViZ8OxWZfFlCP
-  ZYNlObouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPZuWvsBX85KlomL2NpYFzM0cXIySEk8JBR
-  YtENqS5GLiD7CpPEt/9tbBDOQUaJJxvfMoNUsQnoSrz4sZgFxBYR0JdYOnsPWFxYwFfi9cd2o
-  DgHB4uAqkT3/GAQk1fAQ2LN6mCQCgkBBYkpD9+DVfMKCEqcnPkEbAqzgITEwRcvmEHKJQQUJW
-  ZPl4cwKyVuPE6F6FSTuHpuE/MERr5ZSJpnIWlewMi0itEqqSgzPaMkNzEzR9fQwEDX0NBU11T
-  XyNRUL7FKN1EvtVS3PLW4RNdQL7G8WC+1uFivuDI3OSdFLy+1ZBMjMOhSiln/72Ds7vupd4hR
-  koNJSZRX/xl7shBfUn5KZUZicUZ8UWlOavEhRhkODiUJXjUTjmQhwaLU9NSKtMwcYATApCU4e
-  JREeKVFgdK8xQWJucWZ6RCpU4yKUuK8/42AEgIgiYzSPLg2WNRdYpSVEuZlZGBgEOIpSC3KzS
-  xBlX/FKM7BqCTMm2oINIUnM68EbvoroMVMQIulNrCDLC5JREhJNTCFTDw970vk94/p6UuzW9R
-  4yvd+3Mk1rXEii7Wop9Hv3Qk3HA6+srzLOuFX1dGv03aJzVrC6DFnzd6aJw//71n3Pi9l9Qfl
-  kO+s1+8GfnJS2/1VY3Wpik1PGUPiVMmnrWs69uxhm7dm7rUf2Wc+bbQ00nfW995qZdMu9LZra
-  c3isy6fb7qqPtDdqcnBb6Sr0v/u6Am1+wEs0bPWqfZPmsk9uVP1rd0T77NXikPNfylOf2obka
-  YvsHpF3ev9Zt65rHYBL11e/oi8mXFpeuXb6W8O3bJdKJ8S3mFQptDpfD0xaJLEYjnz3y4r1x5
-  bes/H0XJqIbti/77bF+caiJfISoitb1hZcesz9/rtKx6E39jHrsRSnJFoqMVcVJwIABYHM4I1
-  AwAA
+	b=YojR3Fq6Qxvz65ty8iJ5H2Qhlrh6qcZ2yt3JfAeGHtceyATft0gLIotbqMgIHRqWG
+	 6ipGUZQPMyGfNKlx6R17KaMp6xWM7sA6831+rtubQxKDQl0nI/IuC7OyZ3/YYFft2i
+	 5bP1/DidxDVKfvDvkdjwwjptoKCUi3w1FM98LprCa9KmM9L/eVPS/Al4wGK1/njWEl
+	 ZpY5t/OqwqdXHpmKuTu+1HhmGhe5/uhJL/RQDAcUGBEMMtpvpvzti/SeGR9eFKRlsF
+	 VbJ/ZgP/lFELcMfa4e/Kgt0COOKlkrgWCErdJYMgX0vlrQoqmbCRog3OzL70TtINGA
+	 4Uh95bOHnHd0w==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrAIsWRWlGSWpSXmKPExsViZ8ORqKthypF
+  ssLqV2eLi4aXMDowe5zauYAxgjGLNzEvKr0hgzVj0+y5bwU/uin0LvzE3MH7h6mLk4hASeMIo
+  sWXVLZYuRk4g5waTxNmpFRCJg4wS+14dYQdJsAnoSrz4sRisSERAX2Lp7D3MILawQJjExef9Q
+  DYHB4uAqkTjiiCQMK+Ah8Sj2y/YQGwJAQWJKQ/fM0PEBSVOznwCNoZZQELi4IsXYK0SAooSs6
+  fLQ5iVEjcep0J0qklcPbeJeQIj3ywkzbOQNC9gZFrFaJ1UlJmeUZKbmJmja2hgoGtoaKprbAG
+  kDPUSq3QT9VJLdctTi0t0jfQSy4v1UouL9Yorc5NzUvTyUks2MQIDL6VYLX8H49+VP/UOMUpy
+  MCmJ8uo/Y08W4kvKT6nMSCzOiC8qzUktPsQow8GhJMGrZsKRLCRYlJqeWpGWmQOMApi0BAePk
+  givtChQmre4IDG3ODMdInWKUZdj5te2A8xCLHn5ealS4rz/jYCKBECKMkrz4EbAIvISo6yUMC
+  8jAwODEE9BalFuZgmq/CtGcQ5GJWHeVEOgKTyZeSVwm14BHcEEdITUBnaQI0oSEVJSDUyTVHe
+  fTq44/Haq0Ocb8zIZD212Pn1UtPb65d/N/DEH7q906uiL7XJp5fU/Uq3cE/5cu3l/5IofRzmD
+  eA49uKl0jlHEwH7is3XFa9vPe/Mk+YW9ZXSynrtNsWRnUvf0tdV3C30jKiyWLXHJ3BGeI8a1o
+  7BHIf6Vm013t6OmoINg2tq+t7Es/016+L4m8VT6f1/+8EX/2+aTTGpSK1tPPm+/kb7ZQze2jL
+  UrzPjE3KZbmx1KPy5J39qSYfb2yoLGIwaL57fMsXl3M+yra6RwjanCaye2I1wxy9VmLXPKyCy
+  Y/9/jjOtOuW1MfBvYpTXMX2ZuKva52SP39sSW/Tby8+IW3BFfPC3odlriD6agDCWW4oxEQy3m
+  ouJEANrH/L1DAwAA
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-15.tower-585.messagelabs.com!1661482243!106680!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-4.tower-565.messagelabs.com!1661482279!169269!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 28118 invoked from network); 26 Aug 2022 02:50:44 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-15.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 26 Aug 2022 02:50:44 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id C8579142
+Received: (qmail 8679 invoked from network); 26 Aug 2022 02:51:20 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-4.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 26 Aug 2022 02:51:20 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id BD2F5100197
 	for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Aug 2022 03:50:43 +0100 (BST)
+ Fri, 26 Aug 2022 03:51:19 +0100 (BST)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223
  [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id AF7417B
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id B1134100192
 	for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Aug 2022 03:50:43 +0100 (BST)
+ Fri, 26 Aug 2022 03:51:19 +0100 (BST)
 Received: from CentOS7.g08.fujitsu.local (10.167.225.35) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Fri, 26 Aug 2022 03:50:42 +0100
+ (TLS) id 15.0.1497.32; Fri, 26 Aug 2022 03:51:18 +0100
 From: zhengrq.fnst <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-asttokens: upgrade 2.0.7 -> 2.0.8
-Date: Fri, 26 Aug 2022 10:50:34 +0800
-Message-ID: <1661482234-13098-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-charset-normalizer: upgrade 2.1.0
+ -> 2.1.1
+Date: Fri, 26 Aug 2022 10:50:50 +0800
+Message-ID: <1661482250-13137-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -78,34 +79,45 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 26 Aug 2022 02:50:53 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 26 Aug 2022 02:51:22 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98450
+ https://lists.openembedded.org/g/openembedded-devel/message/98451
 
 Changelog:
-  Fix mypy explicit re-export issues
+============
+Deprecated
+------------
+    Function normalize scheduled for removal in 3.0
+
+Changed
+----------
+    Removed useless call to decode in fn is_unprintable (#206)
+
+Fixed
+---------
+    Third-party library (i18n xgettext) crashing not recognizing utf_8 (PEP 263) with underscore
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../{python3-asttokens_2.0.7.bb => python3-asttokens_2.0.8.bb}  | 2 +-
+ ...-normalizer_2.1.0.bb => python3-charset-normalizer_2.1.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-asttokens_2.0.7.bb => python3-asttokens_2.0.8.bb} (82%)
+ rename meta-python/recipes-devtools/python/{python3-charset-normalizer_2.1.0.bb => python3-charset-normalizer_2.1.1.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-asttokens_2.0.7.bb b/meta-python/recipes-devtools/python/python3-asttokens_2.0.8.bb
+diff --git a/meta-python/recipes-devtools/python/python3-charset-normalizer_2.1.0.bb b/meta-python/recipes-devtools/python/python3-charset-normalizer_2.1.1.bb
 similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-asttokens_2.0.7.bb
-rename to meta-python/recipes-devtools/python/python3-asttokens_2.0.8.bb
-index 5e3ca9e30f..973c57661b 100644
---- a/meta-python/recipes-devtools/python/python3-asttokens_2.0.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-asttokens_2.0.8.bb
-@@ -7,7 +7,7 @@ PYPI_PACKAGE = "asttokens"
+rename from meta-python/recipes-devtools/python/python3-charset-normalizer_2.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-charset-normalizer_2.1.1.bb
+index 7c3d3ffc14..1ab72e53d1 100644
+--- a/meta-python/recipes-devtools/python/python3-charset-normalizer_2.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-charset-normalizer_2.1.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ousret/charset_normalizer"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0974a390827087287db39928f7c524b5"
  
- inherit pypi python_setuptools_build_meta
+-SRC_URI[sha256sum] = "575e708016ff3a5e3681541cb9d79312c416835686d054a23accb873b254f413"
++SRC_URI[sha256sum] = "5a3d016c7c547f69d6f81fb0db9449ce888b418b5b9952cc5e6e66843e9dd845"
  
--SRC_URI[sha256sum] = "8444353e4e2a99661c8dfb85ec9c02eedded08f0006234bff7db44a06840acc2"
-+SRC_URI[sha256sum] = "c61e16246ecfb2cde2958406b4c8ebc043c9e6d73aaa83c941673b35e5d3a76b"
- 
- DEPENDS += "python3-setuptools-scm-native"
+ inherit pypi setuptools3
  
 -- 
 2.25.1
