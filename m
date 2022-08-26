@@ -1,232 +1,143 @@
-Return-Path: <Muhammad_Hamza@mentor.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FC94ECAAA3
-	for <webhook@archiver.kernel.org>; Fri, 26 Aug 2022 12:56:26 +0000 (UTC)
-Received: from esa3.mentor.iphmx.com (esa3.mentor.iphmx.com [68.232.137.180])
- by mx.groups.io with SMTP id smtpd.web11.36573.1661518578018618077
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 66606ECAAD4
+	for <webhook@archiver.kernel.org>; Fri, 26 Aug 2022 14:09:16 +0000 (UTC)
+Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
+ [209.85.222.179])
+ by mx.groups.io with SMTP id smtpd.web12.37253.1661522955448172761
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Aug 2022 05:56:18 -0700
+ Fri, 26 Aug 2022 07:09:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing;
- spf=pass (domain: mentor.com, ip: 68.232.137.180, mailfrom: muhammad_hamza@mentor.com)
-X-IronPort-AV: E=Sophos;i="5.93,265,1654588800";
-   d="png'150?scan'150,208,217,150";a="81867042"
-Received: from orw-gwy-01-in.mentorg.com ([192.94.38.165])
-  by esa3.mentor.iphmx.com with ESMTP; 26 Aug 2022 04:56:16 -0800
-IronPort-SDR: 
- bUvSHziE4xez1a/VXGlQPTBiyhYTQTDHh/oHqs8Tv6DVZmu7CzAWzD4UZEVhReaBBk44yKl1zF
- fpq8I0eDYwA74o0NS3akloODs4TjCRJMarQmQG1xOmryyPnrhA6InK5gVdQzzs2EcHA9b/l2XW
- 5jMTFOEZ/VF0VmODwuiRpF3A35E/IGIJw+huDygnr7LDhGRvX/tKqF/mC8pIZCAXbzfFMAd1z3
- dTYRq7C2jspHFQTMR4rYciFo6V3WgPYVzy2tlzbqcqY3LAUnjLLb8iPCc5cd1IH85ec0Mal5b/
- J5Q=
-From: "Hamza, Muhammad" <Muhammad_Hamza@mentor.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe] [kirkstone] recipes-support/pidgin: no rdepends on python3
-Thread-Topic: [meta-oe] [kirkstone] recipes-support/pidgin: no rdepends on
- python3
-Thread-Index: Adi5SorCCEV5X6xHTZ2xrnsaNL6Ezg==
-Date: Fri, 26 Aug 2022 12:56:12 +0000
-Message-ID: <a65c592f8ded460590707f34da6eb688@mentor.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-x-originating-ip: [137.202.0.90]
-Content-Type: multipart/related;
-	boundary="_004_a65c592f8ded460590707f34da6eb688mentorcom_";
-	type="multipart/alternative"
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=WTZwC02J;
+ spf=pass (domain: gmail.com, ip: 209.85.222.179,
+ mailfrom: philip.balister@gmail.com)
+Received: by mail-qk1-f179.google.com with SMTP id m5so1181867qkk.1
+        for <openembedded-devel@lists.openembedded.org>;
+ Fri, 26 Aug 2022 07:09:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:sender:from:to:cc;
+        bh=c0LfIYblx8NokbfC0ljf19LszesWPRofO5Rw0JWMbnY=;
+        b=WTZwC02J1g9PaOGVcNwbKpmU7iGH5IeN3MHoyLhMQRvY6zAuCBi1fkAiq0/86jJVrJ
+         iMZnO6Cyj9u5qRNtoeOR5lK8M5Kshe1tGrclRHe8LOrFI5efq4z6n9lulqHxufJS6YpL
+         pIYuHPXiv7YipQ+PUPY+z36Oj3jjQd2nKWzMBvlYD1itUEsdHgwO1ej7SEHr14qJezGM
+         HsMhD345hiAFLusfzW9c3IFqOsU7j4bxPTeORgxUyAoYOgNUI+sPp1jGdId0ssuEOvWL
+         2uE1b87m8lkvvz3LJNZjgKMFGNZwm7Ace2qSnlQ0tmicueIQaAFAg6zNOe8LxK7efDJF
+         JfMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:sender:x-gm-message-state:from:to:cc;
+        bh=c0LfIYblx8NokbfC0ljf19LszesWPRofO5Rw0JWMbnY=;
+        b=Fn3JnFOG7nu6HFBdbAoDhGSORZSVjYLd8ZTx/CdGYVfKtKMw+D10aFseamIlOWWjXo
+         SjL9HrPxn0+o/0cdS9KJn0UWMZAs42g0ELGsO2ycCdVWVclinCwzWfCCi6FMdTsM3eZM
+         /na+ba+lBFxjErzwi8DfR5OJDpXDwVNjfxOkoxu6po7JsD84kMP+PjqX/4ASQW7cLe9y
+         xOfzyjjgSs42keMElY5xaoiHowRuPx6mgpXm2sb89L8Cu80UiXbMRWbuoijzVHZS3Q4X
+         gsNCyLIbasjXtEhwSQDZ7iJGQ5GbJPLRjlimXKVNNkYBuG7EIOq9AuZnCceHHV9SyJHB
+         3hSA==
+X-Gm-Message-State: ACgBeo3ddyh0LHADuItc4pe3KYw9YTocsFlaC5ZYvQUYn7Xtk4JiDFip
+	r/hZZhC+TleDBOBNWFOFYzCalkom4js=
+X-Google-Smtp-Source: 
+ AA6agR5dqmL4BBINSsydvi70bCcpy2R1ZwReWJ3QqOQaSMX83VgOSLnYqFZbeO9q6TQAe8Jw1wRtjg==
+X-Received: by 2002:a05:620a:4482:b0:6bb:c315:9597 with SMTP id
+ x2-20020a05620a448200b006bbc3159597mr6648941qkp.423.1661522953980;
+        Fri, 26 Aug 2022 07:09:13 -0700 (PDT)
+Received: from thuvia.hsd1.va.comcast.net
+ ([2601:5c0:c280:a00:5b97:5b4a:44a6:6d49])
+        by smtp.gmail.com with ESMTPSA id
+ w5-20020a05620a424500b006b8e049cf08sm2147790qko.2.2022.08.26.07.09.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 26 Aug 2022 07:09:13 -0700 (PDT)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
+To: openembedded-devel@lists.openembedded.org
+Cc: Philip Balister <philip@balister.org>
+Subject: [meta-python][PATCH] python3-pybind11: Update to Version 2.10.0.
+Date: Fri, 26 Aug 2022 10:09:10 -0400
+Message-Id: <20220826140910.71664-1-philip@balister.org>
+X-Mailer: git-send-email 2.34.3
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 26 Aug 2022 12:56:26 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 26 Aug 2022 14:09:16 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98480
+ https://lists.openembedded.org/g/openembedded-devel/message/98481
 
---_004_a65c592f8ded460590707f34da6eb688mentorcom_
-Content-Type: multipart/alternative;
-	boundary="_000_a65c592f8ded460590707f34da6eb688mentorcom_"
+ * Dropped patch for cross compile. 918d4481a4f69c7a4cbb4282acbabd28e2433039
+   fixes this upstream.
+ * This also fixing an issue building gnuradio where pybind looked for
+   something in /usr/include/pythonX.Y on the build machine.
 
---_000_a65c592f8ded460590707f34da6eb688mentorcom_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Philip Balister <philip@balister.org>
+---
+ ...ck-pointer-size-when-cross-compiling.patch | 31 -------------------
+ ...11_2.9.2.bb => python3-pybind11_2.10.0.bb} |  4 +--
+ 2 files changed, 2 insertions(+), 33 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-check-pointer-size-when-cross-compiling.patch
+ rename meta-python/recipes-devtools/python/{python3-pybind11_2.9.2.bb => python3-pybind11_2.10.0.bb} (85%)
 
-Hi,
+diff --git a/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-check-pointer-size-when-cross-compiling.patch b/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-check-pointer-size-when-cross-compiling.patch
+deleted file mode 100644
+index 761422e07..000000000
+--- a/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-check-pointer-size-when-cross-compiling.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From 2e9318f7a70699eed239aee6301d1d0bbd2457ee Mon Sep 17 00:00:00 2001
+-From: Philip Balister <philip@balister.org>
+-Date: Fri, 10 Jul 2020 10:14:59 -0400
+-Subject: [PATCH] Do not check pointer size when cross compiling.
+-
+-It is reasonable to build for 32 machine on a 64 bit build machine. Prevents:
+-| CMake Error at tools/FindPythonLibsNew.cmake:127 (message):
+-|   Python config failure: Python is 64-bit, chosen compiler is 32-bit
+-
+-Signed-off-by: Philip Balister <philip@balister.org>
+-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+----
+- tools/FindPythonLibsNew.cmake | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/tools/FindPythonLibsNew.cmake b/tools/FindPythonLibsNew.cmake
+-index 3605aebc..67f4d4a0 100644
+---- a/tools/FindPythonLibsNew.cmake
+-+++ b/tools/FindPythonLibsNew.cmake
+-@@ -156,7 +156,7 @@ list(GET _PYTHON_VALUES 9 PYTHON_MULTIARCH)
+- 
+- # Make sure the Python has the same pointer-size as the chosen compiler
+- # Skip if CMAKE_SIZEOF_VOID_P is not defined
+--if(CMAKE_SIZEOF_VOID_P AND (NOT "${PYTHON_SIZEOF_VOID_P}" STREQUAL "${CMAKE_SIZEOF_VOID_P}"))
+-+if((NOT CMAKE_CROSSCOMPILING) AND CMAKE_SIZEOF_VOID_P AND (NOT "${PYTHON_SIZEOF_VOID_P}" STREQUAL "${CMAKE_SIZEOF_VOID_P}"))
+-   if(PythonLibsNew_FIND_REQUIRED)
+-     math(EXPR _PYTHON_BITS "${PYTHON_SIZEOF_VOID_P} * 8")
+-     math(EXPR _CMAKE_BITS "${CMAKE_SIZEOF_VOID_P} * 8")
+--- 
+-2.17.1
+-
+diff --git a/meta-python/recipes-devtools/python/python3-pybind11_2.9.2.bb b/meta-python/recipes-devtools/python/python3-pybind11_2.10.0.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-pybind11_2.9.2.bb
+rename to meta-python/recipes-devtools/python/python3-pybind11_2.10.0.bb
+index 433bfd60e..66aefac3d 100644
+--- a/meta-python/recipes-devtools/python/python3-pybind11_2.9.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pybind11_2.10.0.bb
+@@ -7,9 +7,9 @@ DEPENDS = "boost"
+ 
+ SRC_URI = "git://github.com/pybind/pybind11.git;branch=stable;protocol=https \
+            file://0001-Do-not-strip-binaries.patch \
+-           file://0001-Do-not-check-pointer-size-when-cross-compiling.patch \
+ "
+-SRCREV = "914c06fb252b6cc3727d0eedab6736e88a3fcb01"
++
++SRCREV = "aa304c9c7d725ffb9d10af08a3b34cb372307020"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.34.3
 
-I was going through pidgin recipe and found that it depends on python3 but =
-does not rdepend on it.
-Pidgin provides finch which required python3 at runtime and fails to run on=
- target if python3 is absent.
-I wanted to ask if python3 is to be provided by any other recipe on runtime=
- or should I send a patch, where
-pidgin recipe rdepends on python3.
-I have built an image with packages including finch but python3 was not ava=
-ilable at runtime till I explicitly added
-it to my packages.
-Regards,
-Muhammad Hamza
-Siemens Industry Software (Private) Limited
-Pakistan Engineering
-6th Floor Ali Tower M. M. Alam Road Gulberg III
-Lahore Pakistan, 54660
-hamza.muhammad.ext@siemens.com<mailto:hamza.muhammad.ext@siemens.com>
-www.sw.siemens.com<http://www.sw.siemens.com/>
-
-[cid:image001.png@01D8B975.1EE3FE00]
-
-
---_000_a65c592f8ded460590707f34da6eb688mentorcom_
-Content-Type: text/html; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
-osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
-xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
-//www.w3.org/TR/REC-html40">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
-<!--[if !mso]><style>v\:* {behavior:url(#default#VML);}
-o\:* {behavior:url(#default#VML);}
-w\:* {behavior:url(#default#VML);}
-.shape {behavior:url(#default#VML);}
-</style><![endif]--><style><!--
-/* Font Definitions */
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0in;
-	font-size:11.0pt;
-	font-family:"Calibri",sans-serif;}
-span.EmailStyle17
-	{mso-style-type:personal-compose;
-	font-family:"Calibri",sans-serif;
-	color:windowtext;}
-.MsoChpDefault
-	{mso-style-type:export-only;
-	font-family:"Calibri",sans-serif;}
-@page WordSection1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.0in 1.0in 1.0in;}
-div.WordSection1
-	{page:WordSection1;}
---></style><!--[if gte mso 9]><xml>
-<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
-</xml><![endif]--><!--[if gte mso 9]><xml>
-<o:shapelayout v:ext=3D"edit">
-<o:idmap v:ext=3D"edit" data=3D"1" />
-</o:shapelayout></xml><![endif]-->
-</head>
-<body lang=3D"EN-US" link=3D"#0563C1" vlink=3D"#954F72" style=3D"word-wrap:=
-break-word">
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal">Hi,<br>
-<br>
-I was going through pidgin recipe and found that it depends on python3 but =
-does not rdepend on it.<br>
-Pidgin provides finch which required python3 at runtime and fails to run on=
- target if python3 is absent.<br>
-I wanted to ask if python3 is to be provided by any other recipe on runtime=
- or should I send a patch, where<br>
-pidgin recipe rdepends on python3.<br>
-I have built an image with packages including finch but python3 was not ava=
-ilable at runtime till I explicitly added<br>
-it to my packages. <o:p></o:p></p>
-<p class=3D"MsoNormal" style=3D"mso-margin-top-alt:auto;mso-margin-bottom-a=
-lt:auto"><b><span style=3D"font-size:10.0pt;color:black">Regards,<br>
-</span></b><b><span style=3D"font-size:10.0pt;color:#191919">Muhammad Hamza=
-</span></b><span style=3D"font-size:10.0pt"><o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt">Siemens Industry So=
-ftware (Private) Limited<br>
-Pakistan Engineering<br>
-6th Floor Ali Tower M. M. Alam Road Gulberg III <br>
-Lahore Pakistan, 54660<br>
-<a href=3D"mailto:hamza.muhammad.ext@siemens.com"><span style=3D"color:blue=
-">hamza.muhammad.ext@siemens.com</span></a></span><br>
-<u><span style=3D"font-size:8.0pt;color:#0563C1"><a href=3D"http://www.sw.s=
-iemens.com/"><span style=3D"color:blue">www.sw.siemens.com</span></a></span=
-></u><o:p></o:p></p>
-<p class=3D"MsoNormal"><br>
-<img border=3D"0" width=3D"152" height=3D"51" style=3D"width:1.5833in;heigh=
-t:.5333in" id=3D"Picture_x0020_1" src=3D"cid:image001.png@01D8B975.1EE3FE00=
-"><span style=3D"font-size:12.0pt;font-family:&quot;Arial&quot;,sans-serif"=
-><o:p></o:p></span></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-</div>
-</body>
-</html>
-
---_000_a65c592f8ded460590707f34da6eb688mentorcom_--
-
---_004_a65c592f8ded460590707f34da6eb688mentorcom_
-Content-Type: image/png; name="image001.png"
-Content-Description: image001.png
-Content-Disposition: inline; filename="image001.png"; size=2887;
-	creation-date="Fri, 26 Aug 2022 12:56:11 GMT";
-	modification-date="Fri, 26 Aug 2022 12:56:11 GMT"
-Content-ID: <image001.png@01D8B975.1EE3FE00>
-Content-Transfer-Encoding: base64
-
-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
-
---_004_a65c592f8ded460590707f34da6eb688mentorcom_--
 
