@@ -1,157 +1,113 @@
-Return-Path: <potin.lai.pt@gmail.com>
+Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E642BECAAA2
-	for <webhook@archiver.kernel.org>; Fri, 26 Aug 2022 02:22:22 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com
- [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.web08.32795.1661480534336805815
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1988DECAAA3
+	for <webhook@archiver.kernel.org>; Fri, 26 Aug 2022 02:50:53 +0000 (UTC)
+Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com
+ [195.245.230.82])
+ by mx.groups.io with SMTP id smtpd.web12.32527.1661482246868815669
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Aug 2022 19:22:14 -0700
+ Thu, 25 Aug 2022 19:50:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=nvL6Xaqw;
- spf=pass (domain: gmail.com, ip: 209.85.216.48,
- mailfrom: potin.lai.pt@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id e19so344855pju.1
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Aug 2022 19:22:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc;
-        bh=rS7DS0v2m7wKajlD83boiexYDL2gtEMfVNA5OMNWFxA=;
-        b=nvL6XaqwRdl2776kCloG678uqBpdjH3J7JVmsVAU8f/brrJAV6n8BonU75ul2OiCdt
-         0vI3cRZ8X7X6MPxwVb2rm6Ct5y2EGqigPge0hjF2TXb9+B1SJM9XC4WuigKBCZzpnKnn
-         WRXqCKuKOu8nQvkiklm7xtZCTZ0Zvva4ABzHbn8K+Sm8rxQthk9tzeNWcdoFLWHRdwAa
-         sI3k+wVQ8S2M1BG29dNfTrBHpchP7rn2jkBu0fUANUJ540nTbub0jNotUYG+12lQmGRB
-         GI7+o+NiP/p7TI3Dx7yKXnUResh27m0cnu+DgWgjydIwXwNSFDKS1MlS/YPaxshpfZfJ
-         QYzA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc;
-        bh=rS7DS0v2m7wKajlD83boiexYDL2gtEMfVNA5OMNWFxA=;
-        b=1UsmWd3eEMMhjQmFL+iaYu4o51o/gEgrntlM4y1lP7sV5xYdG6I0RlFqJ3PpOasC3e
-         vSHEdE/dH/hkKVCgp8jJggTILMojHV0/hjrW1Zj3IGcEOYjskoHZMAQ/GKXndn8dAQDQ
-         gzX+bQih+s2j7NBtNCGDGnIeMTf436Oiu4XEV23natdHRPFmhGBlpbzrmnwuUaO76zz7
-         cVb4ZlO03TSfZEJPB0TsAw3V/ue/eSm0a9vqNA5xLvk5MeAqRSLh/vDB63SoEGxeu7IL
-         sBO9yXlm3pl/c+YjgH6To0piS7M5Vnuj/0tsgEVtK02qz8xNFHAFZVweoCduNu/suP3o
-         /dVQ==
-X-Gm-Message-State: ACgBeo21grCuYeg0Vu8/f/DuZ4IHcnpLqTDPHC8LR2KAe9NReS/nv775
-	LDXq3GiGDMTNUUsdkNrJgqHUpWA1pSfxRQ==
-X-Google-Smtp-Source: 
- AA6agR70UbE3JCdRqynVR26zLuaxvNr0rYiQnhbjvVCWRIoxIaC8AU/KEMhJjeZplsj+fbKssR7mGQ==
-X-Received: by 2002:a17:902:6b07:b0:172:a76d:7cc5 with SMTP id
- o7-20020a1709026b0700b00172a76d7cc5mr1787735plk.128.1661480533096;
-        Thu, 25 Aug 2022 19:22:13 -0700 (PDT)
-Received: from localhost.localdomain (125-228-123-29.hinet-ip.hinet.net.
- [125.228.123.29])
-        by smtp.gmail.com with ESMTPSA id
- h4-20020a170902680400b00172a4170ff5sm260419plk.86.2022.08.25.19.22.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Aug 2022 19:22:12 -0700 (PDT)
-From: Potin Lai <potin.lai.pt@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Patrick Williams <patrick@stwcx.xyz>,
-	Potin Lai <potin.lai@quantatw.com>
-Subject: [meta-networking][RESEND PATCH v4 1/1] mdio-tools: add recipes
-Date: Fri, 26 Aug 2022 01:43:18 +0000
-Message-Id: <20220826014318.182478-1-potin.lai.pt@gmail.com>
-X-Mailer: git-send-email 2.31.1
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=i7si84Q1;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.82,
+ mailfrom: zhengrq.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1661482245; i=@fujitsu.com;
+	bh=rD7QDsErzR58A1000yxCISlbyfxiJuryLupyWJ7OZK0=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=i7si84Q1nsPeyFBwzC7hl46+7qx/Yoe8Ql4DOu8jl19PKNvAAVMFWp5MuMTyCPVZR
+	 v6hR79vuSAEFvRorg+VAdgGChnJ/bZnyG/D4DG8fm+Ynf7EzWZWE+4Td0Fd3voDEoT
+	 2yhTlxt0rwMqMFEWhVCSN6jAb4tEV7t3TIL2OKPakLBlmNCbxUtDtZ7jDymZDCefy9
+	 F3bpIY++qYvDAYFm2heWBrCR8dZg57kdfoYp322Hhj2qxxoCq86cj+g9zPLDhVkRFG
+	 sSV2H2jYe21guenrRseVkMc9bkMsqTI4aM+VsmS6chMULJJNFw8oIDQ8Rr6eOxys+u
+	 2yzPaIE6AF32w==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrEIsWRWlGSWpSXmKPExsViZ8OxWZfFlCP
+  ZYNlObouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPZuWvsBX85KlomL2NpYFzM0cXIySEk8JBR
+  YtENqS5GLiD7CpPEt/9tbBDOQUaJJxvfMoNUsQnoSrz4sZgFxBYR0JdYOnsPWFxYwFfi9cd2o
+  DgHB4uAqkT3/GAQk1fAQ2LN6mCQCgkBBYkpD9+DVfMKCEqcnPkEbAqzgITEwRcvmEHKJQQUJW
+  ZPl4cwKyVuPE6F6FSTuHpuE/MERr5ZSJpnIWlewMi0itEqqSgzPaMkNzEzR9fQwEDX0NBU11T
+  XyNRUL7FKN1EvtVS3PLW4RNdQL7G8WC+1uFivuDI3OSdFLy+1ZBMjMOhSiln/72Ds7vupd4hR
+  koNJSZRX/xl7shBfUn5KZUZicUZ8UWlOavEhRhkODiUJXjUTjmQhwaLU9NSKtMwcYATApCU4e
+  JREeKVFgdK8xQWJucWZ6RCpU4yKUuK8/42AEgIgiYzSPLg2WNRdYpSVEuZlZGBgEOIpSC3KzS
+  xBlX/FKM7BqCTMm2oINIUnM68EbvoroMVMQIulNrCDLC5JREhJNTCFTDw970vk94/p6UuzW9R
+  4yvd+3Mk1rXEii7Wop9Hv3Qk3HA6+srzLOuFX1dGv03aJzVrC6DFnzd6aJw//71n3Pi9l9Qfl
+  kO+s1+8GfnJS2/1VY3Wpik1PGUPiVMmnrWs69uxhm7dm7rUf2Wc+bbQ00nfW995qZdMu9LZra
+  c3isy6fb7qqPtDdqcnBb6Sr0v/u6Am1+wEs0bPWqfZPmsk9uVP1rd0T77NXikPNfylOf2obka
+  YvsHpF3ev9Zt65rHYBL11e/oi8mXFpeuXb6W8O3bJdKJ8S3mFQptDpfD0xaJLEYjnz3y4r1x5
+  bes/H0XJqIbti/77bF+caiJfISoitb1hZcesz9/rtKx6E39jHrsRSnJFoqMVcVJwIABYHM4I1
+  AwAA
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-15.tower-585.messagelabs.com!1661482243!106680!1
+X-Originating-IP: [62.60.8.179]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.87.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 28118 invoked from network); 26 Aug 2022 02:50:44 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-15.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 26 Aug 2022 02:50:44 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id C8579142
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri, 26 Aug 2022 03:50:43 +0100 (BST)
+Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223
+ [10.182.185.121])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id AF7417B
+	for <openembedded-devel@lists.openembedded.org>;
+ Fri, 26 Aug 2022 03:50:43 +0100 (BST)
+Received: from CentOS7.g08.fujitsu.local (10.167.225.35) by
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Fri, 26 Aug 2022 03:50:42 +0100
+From: zhengrq.fnst <zhengrq.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-python] [PATCH] python3-asttokens: upgrade 2.0.7 -> 2.0.8
+Date: Fri, 26 Aug 2022 10:50:34 +0800
+Message-ID: <1661482234-13098-1-git-send-email-zhengrq.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD08.g08.fujitsu.local (10.167.33.83) To
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 26 Aug 2022 02:22:22 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 26 Aug 2022 02:50:53 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98449
+ https://lists.openembedded.org/g/openembedded-devel/message/98450
 
-From: Enguerrand de Ribaucourt <enguerrand.de-ribaucourt@savoirfairelinux.com>
+Changelog:
+  Fix mypy explicit re-export issues
 
-Self-description from the README: mdio-tools is a low-level debug tool
-for communicating with devices attached to an MDIO bus.
-
-Signed-off-by: Enguerrand de Ribaucourt <enguerrand.de-ribaucourt@savoirfairelinux.com>
-Signed-off-by: Potin Lai <potin.lai.pt@gmail.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
-LINK: [v3] https://lore.kernel.org/all/20220608163628.5745-1-potin.lai.pt@gmail.com/
-LINK: [v2] https://lore.kernel.org/all/20220201142608.186135-1-enguerrand.de-ribaucourt@savoirfairelinux.com/
-LINK: [v1] https://lore.kernel.org/all/20220107150722.2221609-1-enguerrand.de-ribaucourt@savoirfairelinux.com/
+ .../{python3-asttokens_2.0.7.bb => python3-asttokens_2.0.8.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-asttokens_2.0.7.bb => python3-asttokens_2.0.8.bb} (82%)
 
-change v3 --> v4:
-* update license to follow SPDX format
-* mdio configs update and merged in yocto-kernel-cache
-  LINK: https://git.yoctoproject.org/yocto-kernel-cache/commit/?h=yocto-5.15&id=0d58e2d6a7824df62129af91bbe9fadfdb5f9dce
-  tested on yocto-kernel-cache commit: f7f709bf874f85baff9f2fb0ac0341c08399b144
-
-change v1 --> v2:
-change v2 --> v3:
-* update version to 1.1.1
-
-change v1 --> v2:
-* moved in recipes-support
-* removed version in mdio-tools_1.0.1.inc filename
----
- .../recipes-support/mdio-tools/mdio-netlink_git.bb  | 13 +++++++++++++
- .../recipes-support/mdio-tools/mdio-tools.inc       |  9 +++++++++
- .../recipes-support/mdio-tools/mdio-tools_git.bb    |  9 +++++++++
- 3 files changed, 31 insertions(+)
- create mode 100644 meta-networking/recipes-support/mdio-tools/mdio-netlink_git.bb
- create mode 100644 meta-networking/recipes-support/mdio-tools/mdio-tools.inc
- create mode 100644 meta-networking/recipes-support/mdio-tools/mdio-tools_git.bb
-
-diff --git a/meta-networking/recipes-support/mdio-tools/mdio-netlink_git.bb b/meta-networking/recipes-support/mdio-tools/mdio-netlink_git.bb
-new file mode 100644
-index 000000000..b50d33f90
---- /dev/null
-+++ b/meta-networking/recipes-support/mdio-tools/mdio-netlink_git.bb
-@@ -0,0 +1,13 @@
-+require mdio-tools.inc
-+
-+DEPENDS += "virtual/kernel libmnl"
-+# This module requires Linux 5.6 higher
-+
-+S = "${WORKDIR}/git/kernel"
-+
-+inherit module
-+
-+EXTRA_OEMAKE = "KDIR=${STAGING_KERNEL_DIR}"
-+MODULES_INSTALL_TARGET = "install"
-+
-+RPROVIDES:${PN} += "kernel-module-mdio-netlink"
-diff --git a/meta-networking/recipes-support/mdio-tools/mdio-tools.inc b/meta-networking/recipes-support/mdio-tools/mdio-tools.inc
-new file mode 100644
-index 000000000..a8a435fad
---- /dev/null
-+++ b/meta-networking/recipes-support/mdio-tools/mdio-tools.inc
-@@ -0,0 +1,9 @@
-+DESCRIPTION = "A low-level debug tool for communicating with devices attached to an MDIO bus"
-+SECTION = "networking"
-+HOMEPAGE = "https://github.com/wkz/mdio-tools"
-+LICENSE = "GPL-2.0-or-later"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/git/COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+SRC_URI = "git://github.com/wkz/mdio-tools.git;protocol=https;branch=master"
-+SRCREV = "07cbff2d5e2de05037e5e7edd5044d678394c8d1"
-+PV = "1.1.1"
-diff --git a/meta-networking/recipes-support/mdio-tools/mdio-tools_git.bb b/meta-networking/recipes-support/mdio-tools/mdio-tools_git.bb
-new file mode 100644
-index 000000000..cd4df3da0
---- /dev/null
-+++ b/meta-networking/recipes-support/mdio-tools/mdio-tools_git.bb
-@@ -0,0 +1,9 @@
-+require mdio-tools.inc
-+
-+DEPENDS += "libmnl"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit pkgconfig autotools
-+
-+RDEPENDS:${PN} = "kernel-module-mdio-netlink"
+diff --git a/meta-python/recipes-devtools/python/python3-asttokens_2.0.7.bb b/meta-python/recipes-devtools/python/python3-asttokens_2.0.8.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-asttokens_2.0.7.bb
+rename to meta-python/recipes-devtools/python/python3-asttokens_2.0.8.bb
+index 5e3ca9e30f..973c57661b 100644
+--- a/meta-python/recipes-devtools/python/python3-asttokens_2.0.7.bb
++++ b/meta-python/recipes-devtools/python/python3-asttokens_2.0.8.bb
+@@ -7,7 +7,7 @@ PYPI_PACKAGE = "asttokens"
+ 
+ inherit pypi python_setuptools_build_meta
+ 
+-SRC_URI[sha256sum] = "8444353e4e2a99661c8dfb85ec9c02eedded08f0006234bff7db44a06840acc2"
++SRC_URI[sha256sum] = "c61e16246ecfb2cde2958406b4c8ebc043c9e6d73aaa83c941673b35e5d3a76b"
+ 
+ DEPENDS += "python3-setuptools-scm-native"
+ 
 -- 
-2.31.1
+2.25.1
 
 
