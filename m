@@ -2,121 +2,134 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 38373ECAAD7
-	for <webhook@archiver.kernel.org>; Fri, 26 Aug 2022 06:17:54 +0000 (UTC)
-Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com
- [209.85.128.172])
- by mx.groups.io with SMTP id smtpd.web12.33818.1661494669908844809
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1DFB4ECAAA3
+	for <webhook@archiver.kernel.org>; Fri, 26 Aug 2022 06:18:54 +0000 (UTC)
+Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com
+ [209.85.128.180])
+ by mx.groups.io with SMTP id smtpd.web08.34234.1661494724751212543
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Aug 2022 23:17:50 -0700
+ Thu, 25 Aug 2022 23:18:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=RAl4sTVY;
- spf=pass (domain: gmail.com, ip: 209.85.128.172,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=kk6OIxfG;
+ spf=pass (domain: gmail.com, ip: 209.85.128.180,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f172.google.com with SMTP id
- 00721157ae682-334dc616f86so12229937b3.8
+Received: by mail-yw1-f180.google.com with SMTP id
+ 00721157ae682-31f445bd486so11929287b3.13
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Aug 2022 23:17:49 -0700 (PDT)
+ Thu, 25 Aug 2022 23:18:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc;
-        bh=al20mffjqnvQTHtRL0euyMiXcD3xYjYXBK95fH6Kugg=;
-        b=RAl4sTVYFfbSrdxsbNvQ42LbaTr+KSreuOLGCs6NDflxtfnF3RyVLKuX/0+xsJmXpO
-         8RNsZodfC0f7WSlXKAzpTYFzORJOyG2fB/mPMb4PMeCzX8Jgbp7cIjQBf6BRKilt7522
-         eGFApSIfzVj1w5tqg9iUCo0xHLcIIUotCeqaOQRovec+2ebHs6+Mh52FSy53I98Kd3mc
-         pqVSkMa4dfRX+9p1Og5hrmgnwiDXM1J1viN+RWkIt8JecSHUAfjyBNJzYSa11Y9KV58a
-         Zmw1NOOht0k4MYeB3sfFy4u81M5ikOTPhQ8yyfdsPyAWJlWVXJEj0HLW9HjFGlh8LH+s
-         1pEg==
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc;
+        bh=CkVAbYHM7Xlnh5YuFVyqm0MIa01RRUEuJvxU7fCC3rE=;
+        b=kk6OIxfGCKnZkQb0GGDXEO6aSQT72/nXvDcBzPIs48o6W6N+5wdEVwqJbqiYQeFdNE
+         DDY+9U2nhAW+v+4dOnDnAfx+y7UqvxVkHA3OSoiTerpIYdKe7PQsqvmUaCin1fBWWH2m
+         YqA5ujNlVEogvafRAoruKEHrs97etKXhxKsdSsM7UM81J+t0Bq4tufm6VBjK4VnDPpRR
+         hwQYLECkPMAfRqirY0TFVPAwJYe/qQwISNfL9YUdAHv+Bnn6IimUWP6jMi70lKCapezH
+         L31NPzMWa4QETOUeX4Hp3sbxzMc6jlJz+hVQiNMy6dJJCgLwFr7voAPlcWvJHur0Yhnt
+         JOxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc;
-        bh=al20mffjqnvQTHtRL0euyMiXcD3xYjYXBK95fH6Kugg=;
-        b=Ti9SLPCU/gx5vzb13GC9FY4Vu8Hol5Ym3gTRda7BJ23KrVT/hEixecEwCtaZFMp2Jx
-         do2N91vYWkMtd2OZAIfGbOTiNWC4LUj6bV+N3f45+Jtejh0TjreUlWk5XgBSLud31cK4
-         fRsFC782GD7VhNET5E3wBpCFE0AgzAEu+55bIxPdOWFz+I3XPZojCMxJvHugl7HxAKMi
-         okUu2q3rIQlBb1c3qcPXLQq/R1VFyi2UBN3buGYocKa7p7tHic8kYP7z+SURsWcunZWy
-         5AfroXBI6M2U6QYM/jWMyaIRnbkeVdGblYlcSB4uFio7DRjwh5+wPhY/nSU/pNAcCd2t
-         zvlg==
-X-Gm-Message-State: ACgBeo1GUuNabYT68hiYBM4IiaHBo/uJxFm5L2yKM2VrX1kIx+goshcV
-	LS9wYk+AM4aUWJKZmgtV4vBgDPZzlfXVi/WhXpM4sMuyfbg=
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc;
+        bh=CkVAbYHM7Xlnh5YuFVyqm0MIa01RRUEuJvxU7fCC3rE=;
+        b=HqwXX0eWRjGLI6BdG8tCNbgbQBB0L8LvvsmYCPoIc+9isHvo5phUcjQd2bP/yrfZNc
+         9dZfwFnmqnf+kOauVUhbPIMmyzMLxq1ciWLNfaxxVBF1IaDh3qBukX7y8Fge2OEjHs4V
+         ByTtCubK/KnPjf7maUPWEYGx8OEZL3yhJVg+yADssHtifEOFA/ApQXXKTJoBxlJO0+hH
+         QvGMxjkUy0pISs7x3uZJakpWh4yWXn6wW81LhkyWQ48dBsD9lL4NJHhX/8wUM1X9xmPw
+         rI5boAk/yDY+ISlspoixiR+DUtDppV2KnKD+1rt+bH13y/N0ThjtbU0hUHtUPVMsmF3i
+         U1uA==
+X-Gm-Message-State: ACgBeo2v0QA6SdCLKqUevTIDPcLWromqDCAhvS8mQRJfQiIg2MUtNmue
+	QrSfD/7yTaCL+O1+wwSXBcnB+hlVYGEdYNzINsd02xqlMHRVsA==
 X-Google-Smtp-Source: 
- AA6agR6PRuiOGsjFUxCEFA0febuIW34fTTai3YOCIA3TtitvgPcee3J+om3CJkSEGuIHkURrnkpV/RMDMrNRjGwF4FA=
-X-Received: by 2002:a81:b61c:0:b0:333:9118:4020 with SMTP id
- u28-20020a81b61c000000b0033391184020mr6932446ywh.282.1661494668988; Thu, 25
- Aug 2022 23:17:48 -0700 (PDT)
+ AA6agR6Z+Fj51hmdNKSZVNDOktvz2ZI5XyL9USGm79/zIWLEGNz2PKmQPl6YxdobL2+ylI1e/tfj0jE6ZuNp6foOhm8=
+X-Received: by 2002:a05:6902:192:b0:695:7e89:ed5b with SMTP id
+ t18-20020a056902019200b006957e89ed5bmr6096591ybh.226.1661494723855; Thu, 25
+ Aug 2022 23:18:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <1661482908-10720-1-git-send-email-wangmy@fujitsu.com>
- <1661482908-10720-2-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1661482908-10720-2-git-send-email-wangmy@fujitsu.com>
+References: <1661482288-13218-1-git-send-email-zhengrq.fnst@fujitsu.com>
+In-Reply-To: <1661482288-13218-1-git-send-email-zhengrq.fnst@fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 25 Aug 2022 23:17:22 -0700
+Date: Thu, 25 Aug 2022 23:18:17 -0700
 Message-ID: 
- <CAMKF1soiW7un3C5o2hTiTGznRyBUn9OBXVy6ZX+aVpACGOxy3w@mail.gmail.com>
-Subject: Re: [PATCH] [oe] [meta-python] [PATCH] python3-jsonrpcserver: upgrade
- 5.0.7 -> 5.0.8
-To: wangmy <wangmy@fujitsu.com>
+ <CAMKF1sotV_t9yN39P0V0-jaBFeJBXH-0P1PRNe-yQrJ5+eDzxg@mail.gmail.com>
+Subject: Re: [oe] [meta-python] [PATCH] python3-awesomeversion: Upgrade 22.6.0
+ -> 22.8.0
+To: zhengruoqin <zhengrq.fnst@fujitsu.com>
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 26 Aug 2022 06:17:54 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 26 Aug 2022 06:18:54 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98473
+ https://lists.openembedded.org/g/openembedded-devel/message/98474
 
-On Thu, Aug 25, 2022 at 8:02 PM wangmy <wangmy@fujitsu.com> wrote:
->
-> Add dependence python3-typing-extensions
+there is an upgrade already send here
+https://patchwork.yoctoproject.org/project/oe/patch/20220823110204.2685251-=
+1-leon.anavi@konsulko.com/
+
+so I will drop this patch, please see whats in master-next and check
+if all is ok.
+
+On Thu, Aug 25, 2022 at 7:51 PM zhengruoqin <zhengrq.fnst@fujitsu.com> wrot=
+e:
 >
 > Changelog:
-> ==========
-> Use importlib.resources instead of pkg_resources.
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D
+>     =E2=9A=A0=EF=B8=8F Deprecate positional arguments
+>     Change devcontainer
+>     Do not allow find_first_match without ensure_strategy
+>     Warn instead of raise for missing ensure_strategy
+>     Correct spelling mistakes
+>     Handle KeyError
+>     _compare_versions takes AwesomeVersion not str
 >
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 > ---
->  ...3-jsonrpcserver_5.0.7.bb => python3-jsonrpcserver_5.0.8.bb} | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->  rename meta-python/recipes-devtools/python/{python3-jsonrpcserver_5.0.7.bb => python3-jsonrpcserver_5.0.8.bb} (80%)
+>  ...wesomeversion_22.6.0.bb =3D> python3-awesomeversion_22.8.0.bb} | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-python/recipes-devtools/python/{python3-awesomeversion_22.6.=
+0.bb =3D> python3-awesomeversion_22.8.0.bb} (82%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.7.bb b/meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.8.bb
-> similarity index 80%
-> rename from meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.7.bb
-> rename to meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.8.bb
-> index 12e9003798..88b1d6856e 100644
-> --- a/meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.7.bb
-> +++ b/meta-python/recipes-devtools/python/python3-jsonrpcserver_5.0.8.bb
-> @@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/explodinglabs/jsonrpcserver"
->  LICENSE = "MIT"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=61b63ea9d36f6fb63ddaaaac8265304f"
+> diff --git a/meta-python/recipes-devtools/python/python3-awesomeversion_2=
+2.6.0.bb b/meta-python/recipes-devtools/python/python3-awesomeversion_22.8.=
+0.bb
+> similarity index 82%
+> rename from meta-python/recipes-devtools/python/python3-awesomeversion_22=
+.6.0.bb
+> rename to meta-python/recipes-devtools/python/python3-awesomeversion_22.8=
+.0.bb
+> index cadb6f502d..550a8c439b 100644
+> --- a/meta-python/recipes-devtools/python/python3-awesomeversion_22.6.0.b=
+b
+> +++ b/meta-python/recipes-devtools/python/python3-awesomeversion_22.8.0.b=
+b
+> @@ -4,7 +4,7 @@ SECTION =3D "devel/python"
+>  LICENSE =3D "MIT"
+>  LIC_FILES_CHKSUM =3D "file://LICENCE.md;md5=3D92622b5a8e216099be741d7832=
+8bae5d"
 >
-> -SRC_URI[sha256sum] = "b15d3fd043ad0c40b2ff17f7df2ddaec2e880bb923b40d133939a107c97fde5c"
-> +SRC_URI[sha256sum] = "5150071e4abc9a93f086aa0fd0004dfe0410de66adfaaf513613baa2c2fc00d7"
+> -SRC_URI[sha256sum] =3D "38f580bfacf1c06b674bcd0f68e0c445ebb03fcd3700c6a2=
+c588fb9313308e0f"
+> +SRC_URI[sha256sum] =3D "0469a801faafb3a7a13c529edc977ea04c3bce825af9ebb6=
+02f58012bc487db5"
 >
->  inherit pypi setuptools3
+>  RDEPENDS:${PN} +=3D "python3-profile python3-logging"
 >
-> @@ -17,6 +17,7 @@ RDEPENDS:${PN} += "\
->      python3-netclient \
->      python3-pkgutil \
->      python3-oslash \
-> +    python3-typing-extensions \
-
-This part I have rebased on top of master-next
-
->  "
->
->  BBCLASSEXTEND = "native nativesdk"
 > --
 > 2.25.1
 >
 >
-> -=-=-=-=-=-=-=-=-=-=-=-
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#98461): https://lists.openembedded.org/g/openembedded-devel/message/98461
-> Mute This Topic: https://lists.openembedded.org/mt/93263104/1997914
+> View/Reply Online (#98452): https://lists.openembedded.org/g/openembedded=
+-devel/message/98452
+> Mute This Topic: https://lists.openembedded.org/mt/93262976/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 
