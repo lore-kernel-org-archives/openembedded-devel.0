@@ -2,64 +2,67 @@ Return-Path: <potin.lai.pt@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DD9FEECAAA3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E6CB6ECAAD4
 	for <webhook@archiver.kernel.org>; Fri, 26 Aug 2022 02:11:32 +0000 (UTC)
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
- [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.web11.32480.1661479883427945506
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com
+ [209.85.216.46])
+ by mx.groups.io with SMTP id smtpd.web12.32219.1661479885189658254
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Aug 2022 19:11:23 -0700
+ Thu, 25 Aug 2022 19:11:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=TFUCZoKN;
- spf=pass (domain: gmail.com, ip: 209.85.215.171,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=epgsy5Lx;
+ spf=pass (domain: gmail.com, ip: 209.85.216.46,
  mailfrom: potin.lai.pt@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id v4so143705pgi.10
+Received: by mail-pj1-f46.google.com with SMTP id
+ m10-20020a17090a730a00b001fa986fd8eeso6763240pjk.0
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Aug 2022 19:11:23 -0700 (PDT)
+ Thu, 25 Aug 2022 19:11:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc;
-        bh=3k8A51rGmrFRDCdEE9TrbSojXMKREF9LahLvrhaUuBk=;
-        b=TFUCZoKNUcPDrcW1IBTyOoPkn4xBWbQecYEQXDnRK5aecbgCVjhJmYifBa4fEwLTjM
-         dnBV1erSGRbe8D780ObYdzZA5CoCwgWxdI29PL0tqOsSic1FTPA4v78wVS7w4Cp1xsW9
-         v7wcKXJI74mlp/LdE9Yp6f/EBlS+hj65/DGjo9h7ADh75BGlQMX0xAyjJJTBtZZOOjT8
-         u8Isuj6taQZT+bFDk478l+thApnFimnYjDHbZ0DHHG2hlRU8i6bdk9gQnDJBdL/SuU51
-         AuVBfbB0fMu5QKQL9JJ7fVLehLp8jnmFesOiANDu2rc7wh8uWbZQaAIDztcCDyMTaFog
-         4CZA==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc;
+        bh=uyed1zXEKGewt8cnrxjS4SJN6UU1O3yRvEMMH8KXD3M=;
+        b=epgsy5Lxd1267tiUW/UQYhHUK9B93bRxkPHXUW+XG8hFbBXZ1+NUm/OeeL81/Nic+b
+         4+mii4yt4FRN7FQumJQ78Jj0bOFdQ4xs1RWRq5A+shXrx5S/F3w1D3a/vx+4+kyEVPZu
+         fhN/PqiOZ3tmtqzrtHWhWzxe8AoVih0jmLSBMZugDvGZ7/273wje80Jlq2Mq0aKbS0H8
+         XR2xz6ejFr5BRHUiADd4yZbj1G67GXg0o4EycgFeAS4vim9p/O5XFRmtYACdn5b6lZ19
+         knQOKrXYr7VuRlT1RtaZW70BX9+E1YbLYsTd6ouk5gCVFctFA2mhJCjwI1XRJz1wQSZu
+         zpZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc;
-        bh=3k8A51rGmrFRDCdEE9TrbSojXMKREF9LahLvrhaUuBk=;
-        b=EJ//aqGZHCOW/vXfjZcDZ6LvzViuD9YMe59FYnOvoRGrlsZ9z1u0RL4NpQf2mTgT/q
-         HsSiqCnBiAXIvjtCy+vYV5LJ1MLeDuKl4M3/gbKz8/A/FdXlw3tvsdad3Ahn+ofCRqva
-         BfRS7p7sgPmpH1BzHTTruHoKndxAvCKHk/JrFHToFZNEjnLVsLtudhaiA+7yYD6jVIT8
-         IfbKzu+s0lHHL+fEIJdUuK5CZkU8R4pLqbyxrq4A7OwToLttlwRygCgrtteEtiz7z+8y
-         uuCTQmwR4BXvDyfRciotCBu8PJa+zuuElpLPZO5tAx5YwxKZjMWiPUxWXUdqava/L6P2
-         GQQA==
-X-Gm-Message-State: ACgBeo2dPfiZvz5a5Xf9dMKzSae6lsEnCdbbyvNROU62gGr4fNsvBJ5B
-	96tdH3npqFwIvz2ZwTCqDG5hbtR9IJXtoA==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
+        bh=uyed1zXEKGewt8cnrxjS4SJN6UU1O3yRvEMMH8KXD3M=;
+        b=ZOczANGkV3xcm97zUHIb63Jw3uTLzxSvDekH3oH4SHTxvN4KdGaaV+ZJ/GmBfkUUBS
+         xGF1mssPESix8VgXW5uqrjekAsKnWdqrFTAb/N+Jpp9qOxduY8QlRdzjztLvKAym4kz7
+         iBJDrNaUb/1OStUm1vjWAX55bq+2BOnVhQootzVglEs5kJ8VUWM3njz6hDOyIO0QTjcB
+         WwYgQOg99JlEcQAzN1J5Sc9sYKr3f+2N5oZw1diT2+KbRtYQFBl1f8lNFU4VPvpNKFW1
+         jO5I7+kXRh58FXjqtWs2kXOe1d66+pIpTIekGd7f9n497+wm1AzF5yekmF75KfBK01ZR
+         zGNg==
+X-Gm-Message-State: ACgBeo3CbWoebypCCA4TiaeIdfpkB3HpqOcODYkjfZrLBPxDYfR+Gl/T
+	YV0yxUdzimbPQl2sff2ewSzp/nuOZGiYwg==
 X-Google-Smtp-Source: 
- AA6agR5uVFEQwVJzKCNuwExwZYDMjHBhXg7pVqVJd5voeCXw/U1CBPrtOLcF5T/sEgLlqyCL1QTi3g==
-X-Received: by 2002:a05:6a00:1894:b0:537:2e86:c7df with SMTP id
- x20-20020a056a00189400b005372e86c7dfmr1840021pfh.18.1661479882301;
-        Thu, 25 Aug 2022 19:11:22 -0700 (PDT)
+ AA6agR4A7ly4J68kCSDpi9XIc3BOMW86A9etdoE+RznwuaRo6Nkjgw3G/JrXxtNiuesEGmMcDKi7TA==
+X-Received: by 2002:a17:90b:1b4c:b0:1fb:5138:7aeb with SMTP id
+ nv12-20020a17090b1b4c00b001fb51387aebmr2003854pjb.68.1661479884168;
+        Thu, 25 Aug 2022 19:11:24 -0700 (PDT)
 Received: from localhost.localdomain (125-228-123-29.hinet-ip.hinet.net.
  [125.228.123.29])
         by smtp.gmail.com with ESMTPSA id
- z75-20020a63334e000000b0041a67913d5bsm250180pgz.71.2022.08.25.19.11.20
+ z75-20020a63334e000000b0041a67913d5bsm250180pgz.71.2022.08.25.19.11.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Aug 2022 19:11:21 -0700 (PDT)
+        Thu, 25 Aug 2022 19:11:23 -0700 (PDT)
 From: Potin Lai <potin.lai.pt@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Patrick Williams <patrick@stwcx.xyz>,
 	Potin Lai <potin.lai@quantatw.com>,
 	Potin Lai <potin.lai.pt@gmail.com>
-Subject: [meta-oe][PATCH 0/7] Update idevicerestore and dependent libraries
-Date: Fri, 26 Aug 2022 01:32:20 +0000
-Message-Id: <20220826013227.181910-1-potin.lai.pt@gmail.com>
+Subject: [meta-oe][PATCH 1/7] libplist: add libplist_git.bb
+Date: Fri, 26 Aug 2022 01:32:21 +0000
+Message-Id: <20220826013227.181910-2-potin.lai.pt@gmail.com>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20220826013227.181910-1-potin.lai.pt@gmail.com>
+References: <20220826013227.181910-1-potin.lai.pt@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
@@ -67,33 +70,59 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 26 Aug 2022 02:11:32 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98441
+ https://lists.openembedded.org/g/openembedded-devel/message/98442
 
-This patch series update idevicerestore and dependent libraries to point
-to latest commit on github to support newer iOS device restore.
+Add libplist_git.bb to point to latest commit on github
 
-Potin Lai (7):
-  libplist: add libplist_git.bb
-  libimobiledevice-glue: SRCREV bump bc6c44b..d2ff796
-  libimobiledevice: add libimobiledevice_git.bb
-  libirecovery: SRCREV bump e190945..ab5b4d8
-  libusbmuxd: add libusbmuxd_git.bb
-  usbmuxd: add usbmuxd_git.bb
-  idevicerestore: SRCREV bump 280575b..7d622d9
-
- .../libimobiledevice-glue_git.bb              |  2 +-
- .../libimobiledevice/libimobiledevice_git.bb  | 19 ++++++++++
- .../libirecovery/libirecovery_git.bb          |  2 +-
- .../usbmuxd/usbmuxd_git.bb                    | 23 ++++++++++++
+Signed-off-by: Potin Lai <potin.lai.pt@gmail.com>
+---
  .../libimobiledevice/libplist_git.bb          | 37 +++++++++++++++++++
- .../libimobiledevice/libusbmuxd_git.bb        | 17 +++++++++
- .../idevicerestore/idevicerestore_git.bb      |  4 +-
- 7 files changed, 100 insertions(+), 4 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_git.bb
- create mode 100644 meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
+ 1 file changed, 37 insertions(+)
  create mode 100644 meta-oe/recipes-extended/libimobiledevice/libplist_git.bb
- create mode 100644 meta-oe/recipes-extended/libimobiledevice/libusbmuxd_git.bb
 
+diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_git.bb b/meta-oe/recipes-extended/libimobiledevice/libplist_git.bb
+new file mode 100644
+index 000000000..82f3e4d0c
+--- /dev/null
++++ b/meta-oe/recipes-extended/libimobiledevice/libplist_git.bb
+@@ -0,0 +1,37 @@
++SUMMARY = "A library to handle Apple Property List format whereas it's binary or XML"
++HOMEPAGE = "https://github.com/libimobiledevice/libplist"
++LICENSE = "GPL-2.0-only & LGPL-2.1-only"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ebb5c50ab7cab4baeffba14977030c07 \
++                    file://COPYING.LESSER;md5=6ab17b41640564434dda85c06b7124f7"
++
++DEPENDS = "libxml2 glib-2.0 swig python3"
++
++inherit autotools pkgconfig python3native python3targetconfig
++
++PV = "2.2.0+git${SRCPV}"
++
++SRCREV = "db93bae96d64140230ad050061632531644c46ad"
++SRC_URI = "git://github.com/libimobiledevice/libplist;protocol=https;branch=master"
++
++S = "${WORKDIR}/git"
++
++CVE_CHECK_IGNORE += "\
++    CVE-2017-5834 \
++    CVE-2017-5835 \
++    CVE-2017-5836 \
++"
++
++do_install:append () {
++    if [ -e ${D}${libdir}/python*/site-packages/plist/_plist.so ]; then
++        chrpath -d ${D}${libdir}/python*/site-packages/plist/_plist.so
++    fi
++}
++
++PACKAGES =+ "${PN}-utils \
++             ${PN}++ \
++             ${PN}-python"
++
++FILES:${PN} = "${libdir}/libplist-2.0${SOLIBS}"
++FILES:${PN}++ = "${libdir}/libplist++-2.0${SOLIBS}"
++FILES:${PN}-utils = "${bindir}/*"
++FILES:${PN}-python = "${libdir}/python*/site-packages/*"
 -- 
 2.31.1
 
