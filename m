@@ -2,61 +2,60 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 33BADECAAD2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 40738C54EE9
 	for <webhook@archiver.kernel.org>; Mon, 29 Aug 2022 06:57:04 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com
- [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web08.67932.1661756213897612762
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com
+ [209.85.210.182])
+ by mx.groups.io with SMTP id smtpd.web12.67755.1661756216819083456
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Aug 2022 23:56:54 -0700
+ Sun, 28 Aug 2022 23:56:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=oxvN0Bvf;
- spf=pass (domain: gmail.com, ip: 209.85.214.173,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=g2g6zijQ;
+ spf=pass (domain: gmail.com, ip: 209.85.210.182,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id l3so7080154plb.10
+Received: by mail-pf1-f182.google.com with SMTP id t129so7305513pfb.6
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Aug 2022 23:56:53 -0700 (PDT)
+ Sun, 28 Aug 2022 23:56:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc;
-        bh=FxgHlczSpNE4DsnSP56QtqQ80o6QymKpdAYVfRI6xaE=;
-        b=oxvN0Bvf0bMezGQI7ckXqnemhKIw6k8x3uO/rL8QqJt7rQ203+cd2w8vaCUj797jbC
-         NkXqEIeDHxAb6sWH647L29mMMyy/wjHseY+/Xj3Vx83vQ8hguYFA/pvS2oyA0jPr/2XB
-         PpgbSlLcuMP+nTYXksabXMTpXLwfLKMrVE9xSPR1WtydN2+GAg9PQ9LhU8pdTQkoL3KV
-         zTomQzNapBfnVhjEB+jAKHmUeeGKojAf0/WpRRcLeVKIa5CAmdigX/eumty9CcakUWYy
-         Z/xjEW0wHFlJjc2+Auba3LdFiz9heCKiVTTmRuV6Jpp9OchOReK3YIxh3ppWECvohNlk
-         8l7w==
+        bh=/o6i4TGPns0n3gKakh5Bt8lKYxACLwcVUSjxWfZ5ucM=;
+        b=g2g6zijQypUCilC5vSxtC/dOJweTtHx+rY+e++A1K7tpSYZDYprX1ltwK2Q8GOftyQ
+         3sCsOf0QeJ3gp57K+OMsuvA+L/y5UqK8VJMEivESIWarfoGcJrlLu6KX1AVZes0EShpW
+         3QtptOA6MusVtB1vSlea70Qo5SwXEYDFXv6FiINpYtGv3NqBelMy2Wptgbd1n5ZQCPYP
+         iIGyHiyWkkHXT3s8hSXKPJZUJam7Af0wuO2ckmm8DRTg7ezERIzqrczuQ9FNrebhiVKu
+         XjbxX/oFd6uZhbsrNHfc5j4IfbqloHnZbl47gSg/DAcCRJDybXWIxO4yguTaahsEqvFN
+         Bp4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
-        bh=FxgHlczSpNE4DsnSP56QtqQ80o6QymKpdAYVfRI6xaE=;
-        b=PqNspw3Kht18dXaF+3166Fy7nmLBBkJEmBCrdvgmjvd41nssjHq/1N7EDuEhlfDv66
-         RrT0lKb0c8kJZ7qYG7XS3beIxWA0t8DiP+N5DxUFinvPhFiCbr+lLncnmJz7clLcqpc0
-         5ilAALbZMpWQwTghybIs5gNOiovEs/BD9DImC2rf5U6Aa2TEjAHW4q1PANWV4y2O/u9m
-         Ze7z5M50u5ESbqCWVTMKIiK29OfhQpJZh1SOlimhOP0XipSMkdiVHSxXoOGk+80WwlQn
-         TjRrSxMgNB3K1cfWs46TnPFwDcPSH6aUTv2ZHfLw0nVqNg4Gfzp/NkGQJOLwulDnvf7A
-         j2bQ==
-X-Gm-Message-State: ACgBeo1Ubqsu+mhJyjfEGj1Va19QaaSW5taBIuP6CsyCjFBH9taWKUDC
-	bvHQpBg7EiOaj2uO5canX/Dz4kgzimgBwQ==
+        bh=/o6i4TGPns0n3gKakh5Bt8lKYxACLwcVUSjxWfZ5ucM=;
+        b=OcelsOmEJix7uMsBkZc0SQQV0VAcSSnMZX1EL+5OKQyPXz4wcY9P8Lv/D3Q54femM+
+         byhKnbBXjE9/ZcnrYbZgNugnp/TqfBveWZPPnrn2BoltbgtmrKvtlwaiWWkzLuDa/qcP
+         6B7h0YZ+z73zDn3fVwklKdOigW/NCPWaxbTBbAz5Se/Cmk81eqG2n0cU151OjBnVLLvS
+         OTzvOH4ePLiHw6WW63hzG10DJq8yRPFmxdy8Z1seDhAzHU6RjCE811ZPcVgwS+qakvdp
+         R0yWcZ14EJFeB8ek+4OJVYnZg1bSLJQ315HcXfCS699/UWD6Y2Vc6gWU8Gck+PlEn78B
+         YWhg==
+X-Gm-Message-State: ACgBeo0TvOqi/fWIdufVYkw5+c2tqRvuVf+WVabSqPsSdLSGqo6G7OE+
+	2YCsrhkcMlXAk+jwXG4pmXAuEiJiVVIfiw==
 X-Google-Smtp-Source: 
- AA6agR4de3ZWIgJ+4T2JgUXCNdPQG33CqddkC9nrgGeHbVfC1/RoZd5gU+6o4wJe7SRhIBiRt0Sbnw==
-X-Received: by 2002:a17:90b:3b8d:b0:1fb:72f5:2d1e with SMTP id
- pc13-20020a17090b3b8d00b001fb72f52d1emr16529859pjb.135.1661756212972;
-        Sun, 28 Aug 2022 23:56:52 -0700 (PDT)
+ AA6agR4NodnYC9N5Rabail78THWFF2yR0amvJOOlRLcSyxZtC4GKVpodADj9urbM516dSLRg3GhZTg==
+X-Received: by 2002:a63:134d:0:b0:42a:9680:29d7 with SMTP id
+ 13-20020a63134d000000b0042a968029d7mr12619544pgt.249.1661756216031;
+        Sun, 28 Aug 2022 23:56:56 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::24e6])
         by smtp.gmail.com with ESMTPSA id
- p10-20020a170902e74a00b0016d5b7fb02esm505489plf.60.2022.08.28.23.56.52
+ p10-20020a170902e74a00b0016d5b7fb02esm505489plf.60.2022.08.28.23.56.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Aug 2022 23:56:52 -0700 (PDT)
+        Sun, 28 Aug 2022 23:56:55 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 2/7] python3-pyephem: Fix build with python3 and
- musl
-Date: Sun, 28 Aug 2022 23:56:44 -0700
-Message-Id: <20220829065649.808556-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 5/7] mongodb: Fix boost build with clang-15
+Date: Sun, 28 Aug 2022 23:56:47 -0700
+Message-Id: <20220829065649.808556-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20220829065649.808556-1-raj.khem@gmail.com>
 References: <20220829065649.808556-1-raj.khem@gmail.com>
@@ -67,77 +66,73 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 29 Aug 2022 06:57:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98513
+ https://lists.openembedded.org/g/openembedded-devel/message/98516
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Don-t-set-tp_print-on-Python-3.patch | 44 +++++++++++++++++++
- .../python-pyephem/python3-pyephem_4.1.3.bb   |  1 +
- 2 files changed, 45 insertions(+)
- create mode 100644 meta-python/recipes-extended/python-pyephem/python3-pyephem/0001-Don-t-set-tp_print-on-Python-3.patch
+ ...y-binary_function-base-classes-are-d.patch | 40 +++++++++++++++++++
+ .../recipes-dbs/mongodb/mongodb_git.bb        |  1 +
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-The-std-lib-unary-binary_function-base-classes-are-d.patch
 
-diff --git a/meta-python/recipes-extended/python-pyephem/python3-pyephem/0001-Don-t-set-tp_print-on-Python-3.patch b/meta-python/recipes-extended/python-pyephem/python3-pyephem/0001-Don-t-set-tp_print-on-Python-3.patch
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-The-std-lib-unary-binary_function-base-classes-are-d.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-The-std-lib-unary-binary_function-base-classes-are-d.patch
 new file mode 100644
-index 0000000000..a84d852fb0
+index 0000000000..4594bec81a
 --- /dev/null
-+++ b/meta-python/recipes-extended/python-pyephem/python3-pyephem/0001-Don-t-set-tp_print-on-Python-3.patch
-@@ -0,0 +1,44 @@
-+From 866f7560034e8b7a604432611b3cb2c92e76def9 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 28 Aug 2022 11:03:39 -0700
-+Subject: [PATCH] Don't set tp_print on Python 3.
++++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/0001-The-std-lib-unary-binary_function-base-classes-are-d.patch
+@@ -0,0 +1,40 @@
++From f9b55f5a1fab85bf73c95e6372779d6f50f75e84 Mon Sep 17 00:00:00 2001
++From: jzmaddock <john@johnmaddock.co.uk>
++Date: Mon, 11 Jul 2022 18:26:07 +0100
++Subject: [PATCH] The std lib unary/binary_function base classes are
++ deprecated/removed from libcpp15. Fixes
++ https://github.com/boostorg/container_hash/issues/24.
 +
-+In 3.8 it produces a compilation warning, in earlier versions it is ignored.
-+
-+Upstream-Status: Submitted [https://github.com/brandon-rhodes/pyephem/pull/245]
++Upstream-Status: Backport [https://github.com/boostorg/config/pull/440/commits/f0af4a9184457939b89110795ae2d293582c5f66]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ extensions/_libastro.c | 8 ++++++++
-+ 1 file changed, 8 insertions(+)
++ src/third_party/boost-1.70.0/boost/config/stdlib/libcpp.hpp | 9 +++++++++
++ 1 file changed, 9 insertions(+)
 +
-+diff --git a/extensions/_libastro.c b/extensions/_libastro.c
-+index ce07d93..c9ef1e6 100644
-+--- a/extensions/_libastro.c
-++++ b/extensions/_libastro.c
-+@@ -372,7 +372,11 @@ static PyTypeObject AngleType = {
-+      sizeof(AngleObject),
-+      0,
-+      0,				/* tp_dealloc */
-++#if PY_MAJOR_VERSION < 3
-+      Angle_print,		/* tp_print */
-++#else
-++     0,				/* reserved in 3.x */
++--- a/src/third_party/boost-1.70.0/boost/config/stdlib/libcpp.hpp
+++++ b/src/third_party/boost-1.70.0/boost/config/stdlib/libcpp.hpp
++@@ -140,4 +140,13 @@
++ #  define BOOST_NO_CXX14_HDR_SHARED_MUTEX
++ #endif
++ 
+++#if _LIBCPP_VERSION >= 15000
+++//
+++// Unary function is now deprecated in C++11 and later:
+++//
+++#if __cplusplus >= 201103L
+++#define BOOST_NO_CXX98_FUNCTION_BASE
 ++#endif
-+      0,				/* tp_getattr */
-+      0,				/* tp_setattr */
-+      0,				/* tp_compare */
-+@@ -669,7 +673,11 @@ static PyTypeObject DateType = {
-+      sizeof(PyFloatObject),
-+      0,
-+      0,				/* tp_dealloc */
-++#if PY_MAJOR_VERSION < 3
-+      Date_print,		/* tp_print */
-++#else
-++     0,				/* tp_print slot is reserved and unused in Python 3 */
 ++#endif
-+      0,				/* tp_getattr */
-+      0,				/* tp_setattr */
-+      0,				/* tp_compare */
-+-- 
-+2.37.2
-+
-diff --git a/meta-python/recipes-extended/python-pyephem/python3-pyephem_4.1.3.bb b/meta-python/recipes-extended/python-pyephem/python3-pyephem_4.1.3.bb
-index 29697bc251..8c4f0eb405 100644
---- a/meta-python/recipes-extended/python-pyephem/python3-pyephem_4.1.3.bb
-+++ b/meta-python/recipes-extended/python-pyephem/python3-pyephem_4.1.3.bb
-@@ -4,6 +4,7 @@ HOMEPAGE = "http://rhodesmill.org/pyephem/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=9c930b395b435b00bb13ec83b0c99f40"
- 
-+SRC_URI += "file://0001-Don-t-set-tp_print-on-Python-3.patch"
- SRC_URI[sha256sum] = "7fa18685981ba528edd504052a9d5212a09aa5bf15c11a734edc6a86e8a8b56a"
- 
- PYPI_PACKAGE = "ephem"
+++
++ //  --- end ---
++--- a/src/third_party/boost-1.70.0/boost/container_hash/hash.hpp
+++++ b/src/third_party/boost-1.70.0/boost/container_hash/hash.hpp
++@@ -118,7 +118,7 @@ namespace boost
++ {
++     namespace hash_detail
++     {
++-#if defined(_HAS_AUTO_PTR_ETC) && !_HAS_AUTO_PTR_ETC
+++#if defined(BOOST_NO_CXX98_FUNCTION_BASE)
++         template <typename T>
++         struct hash_base
++         {
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
+index ff4a16e9f2..d040ab160b 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
+@@ -32,6 +32,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4;protocol=https \
+            file://PTHREAD_STACK_MIN.patch \
+            file://0001-add-explict-static_cast-size_t-to-maxMemoryUsageByte.patch \
+            file://0001-server-Adjust-the-cache-alignment-assumptions.patch \
++           file://0001-The-std-lib-unary-binary_function-base-classes-are-d.patch \
+            "
+ SRC_URI:append:libc-musl ="\
+            file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
 -- 
 2.37.2
 
