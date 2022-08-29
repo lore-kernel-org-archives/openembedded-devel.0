@@ -1,40 +1,107 @@
-Return-Path: <pawan.badganchi@kpit.com>
+Return-Path: <mingli.yu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF579ECAAD5
-	for <webhook@archiver.kernel.org>; Mon, 29 Aug 2022 08:56:24 +0000 (UTC)
-Subject: Re: [meta-java[dunfell][PATCH] jsch: Whitelist CVE-2016-5725
-To: openembedded-devel@lists.openembedded.org
-From: "Pawan" <pawan.badganchi@kpit.com>
-X-Originating-Location: Ahmednagar, Maharashtra, IN (157.33.45.186)
-X-Originating-Platform: Linux Chrome 104
-User-Agent: GROUPS.IO Web Poster
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BE289ECAAD5
+	for <webhook@archiver.kernel.org>; Mon, 29 Aug 2022 08:56:34 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com
+ [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web08.68532.1661763391793955051
+ for <openembedded-devel@lists.openembedded.org>;
+ Mon, 29 Aug 2022 01:56:31 -0700
+Authentication-Results: mx.groups.io;
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=Lb3H0erc;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
+ invalid domain name (domain: windriver.com, ip: 205.220.166.238,
+ mailfrom: prvs=6240b32d85=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
+ 27T8kFAI030503
+	for <openembedded-devel@lists.openembedded.org>;
+ Mon, 29 Aug 2022 01:56:31 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+ h=from : to :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=PPS06212021;
+ bh=rUb4lOuCmXpO8sX+EiTs7isvtXRbhZYv60MqAi3IlaA=;
+ b=Lb3H0ercNjiMOvLpj1qlh7hyJo1TJyKxYKo53Tr6fGxxj5SifXUTSNnAgGkRbaeL3ABB
+ E3fmkJU8r+NSyKgv0M+gqq7htsOhlq99XsDFBaHUduHJ3c96GdGM1VW2Xz3tBelQ9cvt
+ L7KAxJ7KeIi1yXRqF6PLdQqgy2DSJ/sK+yLNWOqppnnRb9uUWxMHbQ5hbsLiXeMwPuqE
+ L7qcf9CsoYJR1eXTUU0y4HKwudG8K2nVai4mzh66GaB+ifOyhBYQIn9wtYHaR9i13gGo
+ Y0HIXzTjaBWTkHoRZyEei23YFfN3Y7jo9zJSTWaCONhURMJggig15PW6N4Sajx1MLbKq kA==
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com
+ [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3j7ej61ccb-2
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+ Mon, 29 Aug 2022 01:56:31 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Mon, 29 Aug 2022 01:56:30 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Mon, 29 Aug 2022 01:56:30 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH] postgresql: make sure pam conf installed when pam enabled
+Date: Mon, 29 Aug 2022 16:56:29 +0800
+Message-ID: <20220829085629.816811-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Date: Mon, 29 Aug 2022 01:56:21 -0700
-References: <20220421134506.7421-1-pawan.badganchi@kpit.com>
-In-Reply-To: <20220421134506.7421-1-pawan.badganchi@kpit.com>
-Message-ID: <18991.1661763381629374914@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="tAXVBAERUT0wLHHz9kef"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: Ff2dMc4rIbNxKmsykxdYXgyVB_z2_g2E
+X-Proofpoint-GUID: Ff2dMc4rIbNxKmsykxdYXgyVB_z2_g2E
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.517,FMLib:17.11.122.1
+ definitions=2022-08-29_04,2022-08-25_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0
+ priorityscore=1501 clxscore=1015 lowpriorityscore=0 mlxscore=0
+ adultscore=0 malwarescore=0 bulkscore=0 impostorscore=0 spamscore=0
+ mlxlogscore=999 phishscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.12.0-2207270000 definitions=main-2208290043
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 29 Aug 2022 08:56:24 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 29 Aug 2022 08:56:34 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98520
+ https://lists.openembedded.org/g/openembedded-devel/message/98521
 
---tAXVBAERUT0wLHHz9kef
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Hello,
-Could you please add this patch in the dunfell branch as well.
+Update the pam check logic to make sure pam conf installed.
 
---tAXVBAERUT0wLHHz9kef
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Before the patch:
+root@intel-x86-64:~# rpm -ql postgresql | grep pam.d | grep postgresql
+root@intel-x86-64:~#
 
-Hello,<br />Could you please add this patch in the dunfell branch as well.
+After the patch:
+root@intel-x86-64:~# rpm -ql postgresql | grep pam.d | grep postgresql
+/etc/pam.d/postgresql
+root@intel-x86-64:~#
 
---tAXVBAERUT0wLHHz9kef--
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ meta-oe/recipes-dbs/postgresql/postgresql.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+index bef33e6bb..60d44ce97 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
++++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+@@ -205,7 +205,7 @@ do_install:append() {
+     # multiple server config directory
+     install -d -m 700 ${D}${sysconfdir}/default/${BPN}
+ 
+-    if [ "${@d.getVar('enable_pam')}" = "pam" ]; then
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
+         install -d ${D}${sysconfdir}/pam.d
+         install -m 644 ${WORKDIR}/postgresql.pam ${D}${sysconfdir}/pam.d/postgresql
+     fi
+-- 
+2.25.1
+
 
