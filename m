@@ -2,74 +2,77 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 346ECECAAD2
-	for <webhook@archiver.kernel.org>; Mon, 29 Aug 2022 06:38:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 15AACECAAD2
+	for <webhook@archiver.kernel.org>; Mon, 29 Aug 2022 06:38:14 +0000 (UTC)
 Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
- [85.158.142.1])
- by mx.groups.io with SMTP id smtpd.web10.67717.1661755075529507261
+ [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web10.67719.1661755085488476803
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Aug 2022 23:37:55 -0700
+ Sun, 28 Aug 2022 23:38:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=wsWsbJGo;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=WyfbwfTR;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1661755073; i=@fujitsu.com;
-	bh=4sG/uJ3GE7sdmDjDBSD/h414M8selDSCVHpjQ/auDs8=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=wsWsbJGogg6rpah0j63zxMw8JIJDXjrroyCJNoIOPP4b+lgeIDY1WBFeRLc5kcY1N
-	 0+MybAKgvpqCXeF23g5Avz6I6GGRWD+fYBy43hVjhwiD1jOzZbKvT3X1tX3H+/bqPi
-	 BNfc8BZUk3kpNUqclaHvem2pVJOscE7m7l/X90TTcVA1TiGKksf9qzgZOXphdvD3tp
-	 KoL/O/uihUBEXaBh6DT+jO7SaTqKCDKU29lrfzkAC5sQfeM7GOjd0o2kaz5tf03U7Q
-	 2GzcMxwC5y/3LUPLl7ct6M70a3CxgmELIaLhSrp9ROd0V1Cybmccek9Ow6hQtCsQOW
-	 HK1/hDN9biFOQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrPIsWRWlGSWpSXmKPExsViZ8ORpHsgjif
-  Z4P5pJYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWNxx1PmgstcFX8vHmFtYLzM2cXIySEk8JBR
-  4sBKUQj7KpPE+h2BXYxcQPZeRonGDT8YQRJsAmoS02/dYAWxRQT0JZbO3sMMYjMLqEi8+N3DD
-  mILCzhKLGjaD2azCKhKrP54hQnE5gWKT/27C8yWEFCQmPLwPTNEXFDi5MwnLBBzJCQOvnjBDF
-  GjKDH7cjMLhF0psWdWP1SvmsTVc5uYJzDyz0LSPgtJ+wJGplWMNklFmekZJbmJmTm6hgYGuoa
-  GprqWZrpGhgZ6iVW6iXqppbp5+UUlGbqGeonlxXqpxcV6xZW5yTkpenmpJZsYgWGZUpxwaQfj
-  un2/9A4xSnIwKYnympjzJAvxJeWnVGYkFmfEF5XmpBYfYpTh4FCS4HWMBcoJFqWmp1akZeYAY
-  wQmLcHBoyTCewEkzVtckJhbnJkOkTrFqMsx82vbAWYhlrz8vFQpcV52YMQJCYAUZZTmwY2Axe
-  slRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSsK8V0BW8WTmlcBtegV0BBPQEQ+XcIMcUZKIkJJ
-  qYCreaN8zme2V7EJBAd57pm23bm4vf7qcc3GGjMPTtbUXFtea5LGJqf30nruTZV+kr7f4g7wt
-  UU45QcubPpm/zj1xMyegIrwpfY3Rlln5hWwdBpE5l9TjpWJa7YwX3FzY28HrzsEtKKUS/D1Fu
-  Ov+i5Bz8QoS/lpc18XkA3zDNz+cs3HHZ5Hfu+WFs4x55bsl/P9v2f4sfWMzX/6j6X9Pmdv61k
-  50PupRcGCCjHK4r1D3MY3fB36cm5Go8uX70Rix7D18gmc1YpLOxtu761cEsrWIPbH3+MJ9sc9
-  ut+u7nEvL0hRK+3VuJB+IfD9RrCNNc8eBb10uhnWstfvSznTGnT18/KVE1B3Ls/umL85QYinO
-  SDTUYi4qTgQAndZIA1IDAAA=
+	s=170520fj; t=1661755083; i=@fujitsu.com;
+	bh=EQR/Nl438g9gV3haqxDQ9UHFx/Nbh5qVcX+07y8fUto=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=WyfbwfTRYqF7irKkOpx/0ZAJolTll4HO+BxH9rpB9pljVXfKPtg30k8TicNbXPBBW
+	 S4CoOAErLnFdo8hChLjnecaj6+MQZY1PuhzR+dHNYzYJfzPVgq0y3kAbZoDk/NtDNB
+	 6cU6F5fNyc8v84VbLyS6ia691H4FuLIWVJbN5fogCZANPhOv7iUt5pJM/D864bDTKI
+	 hJN81YoN2RWGonCUfQEQhPHRdwtmmPRrNXb8xHe37P+O9q43msuisVhgSCH3QvpLwz
+	 Z5zmpjKBhOB1wlg2MpWR1i1wkPiyhQ7YjDBsB25ImAHIc8/z0HTkgjz9CxmxnfZKFv
+	 e0VZDKjaoJNhA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrHIsWRWlGSWpSXmKPExsViZ8ORqHs6jif
+  ZYNo6bouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePem92MBXu4KhrmVDYw7uDsYuTiEBJ4wijR
+  8LWPFcK5wSRxbskdJghnL6NE3+bNQA4nB5uAmsT0WzdYQWwRAX2JpbP3MIPYzAIqEi9+97CD2
+  MICthKHFn0Dq2ERUJVoujQbrIZXwFHi/KJ1YDUSAgoSUx6+B4tzCjhJtO9cyAZiCwHVLL71gR
+  2iXlDi5MwnLBDzJSQOvnjBDNGrKDH7cjMLhF0psWdWPxOErSZx9dwm5gmMgrOQtM9C0r6AkWk
+  Vo01SUWZ6RkluYmaOrqGBga6hoamupZmuoaWxXmKVbqJeaqluXn5RSYauoV5iebFeanGxXnFl
+  bnJOil5easkmRmAgpxQnHNzBuGLfL71DjJIcTEqivCbmPMlCfEn5KZUZicUZ8UWlOanFhxhlO
+  DiUJHgdY4FygkWp6akVaZk5wKiCSUtw8CiJ8F4ASfMWFyTmFmemQ6ROMRpzXL1yZS8zx8yvbQ
+  eYhVjy8vNSpcR52YHxKiQAUppRmgc3CBbtlxhlpYR5GRkYGIR4ClKLcjNLUOVfMYpzMCoJ814
+  BWciTmVcCt+8V0ClMQKc8XMINckpJIkJKqoFJLXFthGFv6J5vEUe8LkdFuf+uvK2S1bC+41PF
+  hC8zn0dU+OZ/W5hkznB9Yig/S4thijebSFvocq6fla4T1Hmnz8hbmB0rmhwUYO2rzSNW/2Xt+
+  nWmJvrx5lPD/HeJPaqc0/mjm0/Bc8P7fX+dHsz2uOSl8YT72h65nbcDYg7fmHPIYHk0W26J80
+  /HIyVh4elPfuS3GkTVh4n/tXY3dtjRUq97z2bBc65Ua9EjC+9m/NA+vMHmxJ8wUel/vAGdVco
+  BRfLBZSXXuXa6/PW7bXcrKtdVnO+hzt/PwXv3xVyMmH2cNemQZfa2rNwp6+MNLXbu+Ovrbi9k
+  Lnh7y6J9FaelN+78I14w/arTdZ4FUUosxRmJhlrMRcWJAL5ap8dxAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-2.tower-732.messagelabs.com!1661755072!191202!1
-X-Originating-IP: [62.60.8.98]
+X-Msg-Ref: server-15.tower-745.messagelabs.com!1661755082!139065!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 31352 invoked from network); 29 Aug 2022 06:37:52 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-2.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 29 Aug 2022 06:37:52 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id E87E81AD
+Received: (qmail 24123 invoked from network); 29 Aug 2022 06:38:03 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-15.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 29 Aug 2022 06:38:03 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 927A610019A
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Aug 2022 07:37:51 +0100 (BST)
+ Mon, 29 Aug 2022 07:38:02 +0100 (BST)
 Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223
  [10.182.185.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id DD0351AB
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 85E4E100191
 	for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Aug 2022 07:37:51 +0100 (BST)
+ Mon, 29 Aug 2022 07:38:02 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 29 Aug 2022 07:37:50 +0100
+ (TLS) id 15.0.1497.32; Mon, 29 Aug 2022 07:38:00 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH] babl: upgrade 0.1.94 -> 0.1.96
-Date: Mon, 29 Aug 2022 14:37:35 +0800
-Message-ID: <1661755059-4785-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] bdwgc: upgrade 8.2.0 -> 8.2.2
+Date: Mon, 29 Aug 2022 14:37:36 +0800
+Message-ID: <1661755059-4785-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1661755059-4785-1-git-send-email-wangmy@fujitsu.com>
+References: <1661755059-4785-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -79,38 +82,41 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 29 Aug 2022 06:38:04 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 29 Aug 2022 06:38:14 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98505
+ https://lists.openembedded.org/g/openembedded-devel/message/98506
 
-0001-meson-Do-not-run-git-rev-parse-during-configure.patch
-removed since it's not available in 0.1.96
+License-Update: Format of license file changed
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-gimp/babl/{babl_0.1.94.bb => babl_0.1.96.bb}    | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
- rename meta-gnome/recipes-gimp/babl/{babl_0.1.94.bb => babl_0.1.96.bb} (76%)
+ .../bdwgc/{bdwgc_8.2.0.bb => bdwgc_8.2.2.bb}                | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/bdwgc/{bdwgc_8.2.0.bb => bdwgc_8.2.2.bb} (86%)
 
-diff --git a/meta-gnome/recipes-gimp/babl/babl_0.1.94.bb b/meta-gnome/recipes-gimp/babl/babl_0.1.96.bb
-similarity index 76%
-rename from meta-gnome/recipes-gimp/babl/babl_0.1.94.bb
-rename to meta-gnome/recipes-gimp/babl/babl_0.1.96.bb
-index 7161356c11..85cc7793cc 100644
---- a/meta-gnome/recipes-gimp/babl/babl_0.1.94.bb
-+++ b/meta-gnome/recipes-gimp/babl/babl_0.1.96.bb
-@@ -14,9 +14,7 @@ DEPENDS += "lcms"
- CFLAGS:append:toolchain-clang:mipsarch = " -ffp-exception-behavior=ignore "
- CFLAGS:append:toolchain-clang:riscv64 = " -ffp-exception-behavior=ignore "
+diff --git a/meta-oe/recipes-support/bdwgc/bdwgc_8.2.0.bb b/meta-oe/recipes-support/bdwgc/bdwgc_8.2.2.bb
+similarity index 86%
+rename from meta-oe/recipes-support/bdwgc/bdwgc_8.2.0.bb
+rename to meta-oe/recipes-support/bdwgc/bdwgc_8.2.2.bb
+index 7ee63b1332..622402a04a 100644
+--- a/meta-oe/recipes-support/bdwgc/bdwgc_8.2.0.bb
++++ b/meta-oe/recipes-support/bdwgc/bdwgc_8.2.2.bb
+@@ -19,12 +19,12 @@ DESCRIPTION = "The Boehm-Demers-Weiser conservative garbage collector can be\
+ HOMEPAGE = "http://www.hboehm.info/gc/"
+ SECTION = "devel"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://README.QUICK;md5=7912d9213b3547f8a81aadd08893fe84"
++LIC_FILES_CHKSUM = "file://README.QUICK;md5=dd27361ad00943bb27bc3e0589037075"
  
--SRC_URI = "https://download.gimp.org/pub/${BPN}/0.1/${BP}.tar.xz \
--           file://0001-meson-Do-not-run-git-rev-parse-during-configure.patch \
--           "
--SRC_URI[sha256sum] = "b6a8b28f55e0c17f5031fb7959e72ffe0fbf8196d1968ad6efc98d1b492c3bbe"
-+SRC_URI = "https://download.gimp.org/pub/${BPN}/0.1/${BP}.tar.xz"
-+SRC_URI[sha256sum] = "33673fe459a983f411245a49f81fd7f1966af1ea8eca9b095a940c542b8545f6"
+ DEPENDS = "libatomic-ops"
  
- BBCLASSEXTEND = "native"
+-SRCREV = "47e9106c17b72e9ee5501308f69ea94531e798b3"
+-SRC_URI = "git://github.com/ivmai/bdwgc.git;branch=master;protocol=https"
++SRCREV = "cd1fbc1dbfd2cc888436944dd2784f39820698d7"
++SRC_URI = "git://github.com/ivmai/bdwgc.git;branch=release-8_2;protocol=https"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.25.1
 
