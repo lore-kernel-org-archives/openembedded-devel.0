@@ -2,61 +2,60 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D10D1C0502F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D0F84C0502E
 	for <webhook@archiver.kernel.org>; Tue, 30 Aug 2022 07:14:32 +0000 (UTC)
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
- [209.85.215.175])
- by mx.groups.io with SMTP id smtpd.web09.8758.1661843667798156048
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com
+ [209.85.214.170])
+ by mx.groups.io with SMTP id smtpd.web08.8718.1661843656593304005
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Aug 2022 00:14:27 -0700
+ Tue, 30 Aug 2022 00:14:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=nwJxOczZ;
- spf=pass (domain: gmail.com, ip: 209.85.215.175,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=TeO/piIK;
+ spf=pass (domain: gmail.com, ip: 209.85.214.170,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f175.google.com with SMTP id x80so6311525pgx.0
+Received: by mail-pl1-f170.google.com with SMTP id x23so10251073pll.7
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Aug 2022 00:14:27 -0700 (PDT)
+ Tue, 30 Aug 2022 00:14:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc;
-        bh=zaJ+FCFd79tbf1VXFOFJGJwWht1TG4tXBigmWx+1JgA=;
-        b=nwJxOczZGt8eiqwO/I21et/iaBfi/F6u0vjBZBzKmvMpCbyrQrtNWyqNrd65pDk50N
-         PY+qfngINio1jDcsvMUuk7lQA2oE7ZhXCGJ42i2itxLuSNhgkFD3f2cbySx75NVr+D6D
-         1R7BEjLPI5WtWHvRee4TWYNc18PkmBPg2NxD/YlKXvjAPM5zp+R5SzjQ9CXMiZz2T/az
-         MmBC1ynY6Nu+SDWCHrAV0qy/yjIonmqbN9dBJfEBkNHB8KqvQKVxAhvfDNgQRiQJhOvn
-         4LFeH/1HziLliVa9nIQo0Mfrl4xbz5RFT+oWcXIlBbEFli2trqez3lTkAkwa8TPnF3ur
-         y28g==
+        bh=SbHNwCetkPlIJnueW0qoMq5bVj0dniFBEX8zrLCtGnQ=;
+        b=TeO/piIKEJOa/U0CY4NbpsoRqm96nfdSji/N77P66fjtK6FRsiQPawY46K5gtmnDA9
+         dtItVAvsdJfvTBOfenWKulQoQjzrzV91R7xWP1MpaKkX9fbDK2jwyDhMnoyEfv2ymVNz
+         nd2Uai4LqJC8UrFTWZvd8tJakT/JA9pdt0hmUL03G0IiGWQco3aRzeBVIisF5SKxE++d
+         koRK4YLoIpIiJ9b6fvkhg2gwIQM+sR+SLO+hRnvobzJBYZGuzlddr01KqloqnspynVf4
+         UohFYTewcgfr5HDD24sQgUbPcHfGnp//MCIZhMyyu91+lX6ZGI57i2qNK8BOquy0heNO
+         TArA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
-        bh=zaJ+FCFd79tbf1VXFOFJGJwWht1TG4tXBigmWx+1JgA=;
-        b=PyWU916WBlaR/1SafBKy3bl/4wwStBsfO6rpdnKZja9Zmh3R6ZLLE9gT/AwMq/B9Ul
-         TCS0ftLobtiyEJuSCLjVStPz+uuMkIqOE9jcKdZxZ2/6QaoijRTkC0uSMHYAwiiYLcsg
-         LEVlwsE0w/h3j03y7pYb7VOGRVUvvFLlsRCF+ZW2xmwqWh6ZilwIpMDOVEyhZce9csIL
-         V9sQl2uJx1WESXW6vkNixF3veVg7Y7Fm1XyqZIJ+p7gEy5ju4ASpQSt3W+e1Au8VZQiu
-         mGbWWeIzjf36N96QDfO8Uu2FPrGm8nLlgsziq1+NVpzB8Q6iOC6DRh+6bFvxkAYogwVR
-         7ckg==
-X-Gm-Message-State: ACgBeo0kmWLiHgTHRqTMlJ9OhHmmYBQXMqQnL7RQUASWSVwwey/wriCg
-	L+hcWwg4Uk0FLo8/HSIc9XUmyZfz68gEBA==
+        bh=SbHNwCetkPlIJnueW0qoMq5bVj0dniFBEX8zrLCtGnQ=;
+        b=XTXodWwiQMpdM2Mnd5Ucg7wySpn6x+JqfgPZEgt+7qWNCbQ1D2K/9DxZS2hiRzyX1v
+         LidejzXo1iMkR/5ctKGgFBsAmEj+cuSVjl/Pt3pSIGY/9NagIcnD+s2UyiLk6SQAjvew
+         25ovqJE+YSAzalW3B8k0IdsJI2TpIhLCgKVvC6gDg2l/Re6fqspi5+/k0kpmx5/zD7SD
+         4IVKNYk54PrQ1A6480w2GLPqLOrjzePLyu+qeVUfY6/7MixwKeqWMS831GqTjrbua5m4
+         0OD0AdZSOCR7COGyyQXnnH5+2zyZuZIaPH4W0ogWg2zUADBvkjz+KHnNDGHtitLCTy7t
+         9jtw==
+X-Gm-Message-State: ACgBeo11jGpTg/RJTDNX4isu+sswC1c6u3AMpoMJ0mYTnnKCMtqlz2lz
+	VB0Vlc5vJqEQergwlWVtsEcSs3xEWywNXA==
 X-Google-Smtp-Source: 
- AA6agR5Xgx0KU+Yv7PWUyhikeiUl2NtHPz6xNmZ0+u8k+BfFjCDSEigEfx0iFoZw2W1IlvRqtwWZ6Q==
-X-Received: by 2002:a05:6a00:174b:b0:52f:c4d1:d130 with SMTP id
- j11-20020a056a00174b00b0052fc4d1d130mr19805796pfc.23.1661843666777;
-        Tue, 30 Aug 2022 00:14:26 -0700 (PDT)
+ AA6agR4jJVXOdnSrmg8GbP+k7mUJPPSluu019yV2cVr6ysc4t87mRdIXZf4HuIZ7PfrxLX1v/vS+gQ==
+X-Received: by 2002:a17:902:cf43:b0:172:86f3:586a with SMTP id
+ e3-20020a170902cf4300b0017286f3586amr19883525plg.71.1661843668000;
+        Tue, 30 Aug 2022 00:14:28 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::24e6])
         by smtp.gmail.com with ESMTPSA id
  z24-20020aa79f98000000b00537f9e32b00sm6041616pfr.37.2022.08.30.00.14.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Aug 2022 00:14:26 -0700 (PDT)
+        Tue, 30 Aug 2022 00:14:27 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 13/21] iscsi-initiator-utils: Upgrade to
- 2.1.7
-Date: Tue, 30 Aug 2022 00:14:05 -0700
-Message-Id: <20220830071413.3887189-13-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 14/21] radvd: Fix build on musl
+Date: Tue, 30 Aug 2022 00:14:06 -0700
+Message-Id: <20220830071413.3887189-14-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20220830071413.3887189-1-raj.khem@gmail.com>
 References: <20220830071413.3887189-1-raj.khem@gmail.com>
@@ -67,114 +66,208 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 30 Aug 2022 07:14:32 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98550
+ https://lists.openembedded.org/g/openembedded-devel/message/98551
 
-Fix build on musl by using proper typecast for pthread_t
+Backport a patch from upstream to fix musl builds
+Merged inc file into bb file, makes it easy to use devtool
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Makefile-Do-not-set-Werror.patch     | 12 ++++-----
- ...uio-Use-pthread_t-for-INVALID_THREAD.patch | 27 +++++++++++++++++++
- ....1.6.bb => iscsi-initiator-utils_2.1.7.bb} |  3 ++-
- 3 files changed, 34 insertions(+), 8 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/0002-iscsiuio-Use-pthread_t-for-INVALID_THREAD.patch
- rename meta-networking/recipes-daemons/iscsi-initiator-utils/{iscsi-initiator-utils_2.1.6.bb => iscsi-initiator-utils_2.1.7.bb} (97%)
+ ...ude.h-change-in-46883f8a1a02fe42040d.patch | 32 +++++++++
+ .../recipes-daemons/radvd/radvd.inc           | 67 ------------------
+ .../recipes-daemons/radvd/radvd_2.19.bb       | 69 ++++++++++++++++++-
+ 3 files changed, 99 insertions(+), 69 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/radvd/files/0001-Reverts-the-include.h-change-in-46883f8a1a02fe42040d.patch
+ delete mode 100644 meta-networking/recipes-daemons/radvd/radvd.inc
 
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-Makefile-Do-not-set-Werror.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-Makefile-Do-not-set-Werror.patch
-index d5e0deb899..ab6ff6e131 100644
---- a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-Makefile-Do-not-set-Werror.patch
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0001-Makefile-Do-not-set-Werror.patch
-@@ -1,4 +1,4 @@
--From 31d88f46bfc67de2659991674253a5d5dfb92afc Mon Sep 17 00:00:00 2001
-+From 6afdfbdf1ecf3e7e9158734a3994a57ea151d680 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Wed, 12 Aug 2020 12:00:29 -0700
- Subject: [PATCH] Makefile: Do not set -Werror
-@@ -9,16 +9,17 @@ warning as errors
- Upstream-Status: Inappropriate [OE-Specific]
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- ---
-  usr/Makefile | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/usr/Makefile b/usr/Makefile
--index 21bb154..0018605 100644
-+index 3fc2248..2b5a234 100644
- --- a/usr/Makefile
- +++ b/usr/Makefile
--@@ -35,7 +35,7 @@ endif
-- PKG_CONFIG = /usr/bin/pkg-config
-+@@ -44,7 +44,7 @@ HOMEDIR ?= $(etcdir)/iscsi
-+ PKG_CONFIG ?= /usr/bin/pkg-config
-  
-  CFLAGS ?= -O2 -g
- -WARNFLAGS ?= -Wall -Wextra -Werror -Wstrict-prototypes -fno-common
-@@ -26,6 +27,3 @@ index 21bb154..0018605 100644
-  CFLAGS += $(WARNFLAGS) -I../include -I. -D_GNU_SOURCE \
-  	  -I$(TOPDIR)/libopeniscsiusr
-  CFLAGS += $(shell $(PKG_CONFIG) --cflags libkmod)
---- 
--2.28.0
--
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0002-iscsiuio-Use-pthread_t-for-INVALID_THREAD.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0002-iscsiuio-Use-pthread_t-for-INVALID_THREAD.patch
+diff --git a/meta-networking/recipes-daemons/radvd/files/0001-Reverts-the-include.h-change-in-46883f8a1a02fe42040d.patch b/meta-networking/recipes-daemons/radvd/files/0001-Reverts-the-include.h-change-in-46883f8a1a02fe42040d.patch
 new file mode 100644
-index 0000000000..02669e9c80
+index 0000000000..57338d4713
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/0002-iscsiuio-Use-pthread_t-for-INVALID_THREAD.patch
-@@ -0,0 +1,27 @@
-+From ef54a6f4a81da8ab653d352bfbd3b2521ce9eb7c Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 29 Aug 2022 15:55:32 -0700
-+Subject: [PATCH] iscsiuio: Use pthread_t for INVALID_THREAD
++++ b/meta-networking/recipes-daemons/radvd/files/0001-Reverts-the-include.h-change-in-46883f8a1a02fe42040d.patch
+@@ -0,0 +1,32 @@
++From 15f439c555289f900eb33111b010bf1266f97edb Mon Sep 17 00:00:00 2001
++From: Jonathan Davies <jpds@protonmail.com>
++Date: Thu, 25 Nov 2021 15:29:18 +0000
++Subject: [PATCH] Reverts the include.h change in
++ 46883f8a1a02fe42040dd8e48aec0ed871545d4d
 +
-+pthread_t is opaque, therefore avoid compiler errors on musl when
-+compiling since pthread_t is not a plain old data type, like glibc
++Closes: #158
 +
-+Upstream-Status: Submitted [https://github.com/open-iscsi/open-iscsi/pull/363]
++Upstream-Status: Backport [https://github.com/radvd-project/radvd/commit/06689f8c06f44c7e87f7ff1d814428f88375b53f]
++Signed-off-by: Jonathan Davies <jpds@protonmail.com>
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ iscsiuio/src/unix/options.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ includes.h | 5 -----
++ 1 file changed, 5 deletions(-)
 +
-+diff --git a/iscsiuio/src/unix/options.h b/iscsiuio/src/unix/options.h
-+index 63b8635..873a98a 100644
-+--- a/iscsiuio/src/unix/options.h
-++++ b/iscsiuio/src/unix/options.h
-+@@ -86,7 +86,7 @@
-+ #define DEBUG_ON	0x2
++diff --git a/includes.h b/includes.h
++index ef30b10..c528c86 100644
++--- a/includes.h
+++++ b/includes.h
++@@ -76,12 +76,7 @@
++ #include <sys/sysctl.h>
++ #endif
 + 
-+ #define INVALID_FD	-1
-+-#define INVALID_THREAD	-1
-++#define INVALID_THREAD	(pthread_t)-1
-+ #define INVALID_HOST_NO	-1
++-#if !defined(__GLIBC__) && defined(linux)
++-#include <linux/if.h>
++-#define IF_NAMESIZE IFNAMSIZ
++-#else
++ #include <net/if.h>
++-#endif
 + 
-+ struct options {
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.6.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.7.bb
-similarity index 97%
-rename from meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.6.bb
-rename to meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.7.bb
-index 921f7d4883..63155b4811 100644
---- a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.6.bb
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.7.bb
-@@ -12,7 +12,7 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)
++ #ifdef HAVE_NET_IF_DL_H
++ #include <net/if_dl.h>
+diff --git a/meta-networking/recipes-daemons/radvd/radvd.inc b/meta-networking/recipes-daemons/radvd/radvd.inc
+deleted file mode 100644
+index 2afaa48411..0000000000
+--- a/meta-networking/recipes-daemons/radvd/radvd.inc
++++ /dev/null
+@@ -1,67 +0,0 @@
+-SUMMARY = "IPv6 router advertisement daemon"
+-DESCRIPTION = "radvd is the router advertisement daemon for IPv6. It \
+-listens to router solicitations and sends router \
+-advertisements as described in RFC 2461, Neighbor \
+-Discovery for IP Version 6 (IPv6). With these \
+-advertisements hosts can automatically configure their \
+-addresses and some other parameters. They also can \
+-choose a default router based on these advertisements."
+-HOMEPAGE = "http://www.litech.org/radvd/"
+-SECTION = "net"
+-DEPENDS = "flex-native bison-native libdaemon "
+-
+-# License is BSD-Style (with advertising clause) but also has an additional 0th clause
+-LICENSE = "radvd"
+-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=73ebbf7182ae996e65e8fadc9a8c45db"
+-
+-SRC_URI = "http://v6web.litech.org/radvd/dist/radvd-${PV}.tar.gz \
+-           file://radvd.init \
+-           file://radvd.service \
+-           file://volatiles.03_radvd \
+-           file://radvd.default \
+-           file://radvd.conf"
+-
+-inherit autotools useradd pkgconfig systemd
+-
+-SYSTEMD_SERVICE:${PN} = "radvd.service"
+-SYSTEMD_AUTO_ENABLE = "disable"
+-
+-do_install:append () {
+-    install -m 0755 -d ${D}${sysconfdir}/init.d \
+-                       ${D}${sysconfdir}/default/volatiles \
+-                       ${D}${docdir}/radvd
+-    # Install init script and volatiles
+-    install -m 0755 ${WORKDIR}/radvd.init ${D}${sysconfdir}/init.d/radvd
+-    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/radvd
+-    sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/radvd
+-    sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/radvd
+-    sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/radvd
+-
+-    install -m 0644 ${WORKDIR}/volatiles.03_radvd ${D}${sysconfdir}/default/volatiles/03_radvd
+-
+-    # Install systemd service files
+-    install -d ${D}${systemd_unitdir}/system
+-    install -m 0644 ${WORKDIR}/radvd.service ${D}${systemd_unitdir}/system
+-    sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' \
+-           -e 's#@SBINDIR@#${sbindir}#g' \
+-           -e 's#@BASE_BINDIR@#${base_bindir}#g' ${D}${systemd_unitdir}/system/radvd.service
+-
+-    # Install default environment file
+-    install -m 0644 ${WORKDIR}/radvd.default ${D}${sysconfdir}/default/radvd
+-
+-    # Documentation
+-    for i in radvd.conf.example README; do \
+-        install -m 0644 ${S}/$i ${D}${docdir}/radvd; \
+-    done
+-
+-    install -m 0644 ${WORKDIR}/radvd.conf ${D}${sysconfdir}/radvd.conf
+-}
+-
+-USERADD_PACKAGES = "${PN}"
+-USERADD_PARAM:${PN} = "--system --home ${localstatedir}/run/radvd/ -M -g nogroup radvd"
+-
+-pkg_postinst:${PN} () {
+-    if [ -z "$D" -a -x /etc/init.d/populate-volatile.sh ]; then
+-        /etc/init.d/populate-volatile.sh update
+-    fi
+-}
+diff --git a/meta-networking/recipes-daemons/radvd/radvd_2.19.bb b/meta-networking/recipes-daemons/radvd/radvd_2.19.bb
+index 553987e3d0..f9f810abdd 100644
+--- a/meta-networking/recipes-daemons/radvd/radvd_2.19.bb
++++ b/meta-networking/recipes-daemons/radvd/radvd_2.19.bb
+@@ -1,5 +1,70 @@
++SUMMARY = "IPv6 router advertisement daemon"
++DESCRIPTION = "radvd is the router advertisement daemon for IPv6. It \
++listens to router solicitations and sends router \
++advertisements as described in RFC 2461, Neighbor \
++Discovery for IP Version 6 (IPv6). With these \
++advertisements hosts can automatically configure their \
++addresses and some other parameters. They also can \
++choose a default router based on these advertisements."
++HOMEPAGE = "http://www.litech.org/radvd/"
++SECTION = "net"
++DEPENDS = "flex-native bison-native libdaemon "
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+-require radvd.inc
++# License is BSD-Style (with advertising clause) but also has an additional 0th clause
++LICENSE = "radvd"
++LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=73ebbf7182ae996e65e8fadc9a8c45db"
  
--SRCREV ?= "ee575fd19429ec6dc24b49f2ce3822b4a01f57de"
-+SRCREV = "7b53fcc502da8617110fd64d675b476772c28a6f"
- 
- SRC_URI = "git://github.com/open-iscsi/open-iscsi;branch=master;protocol=https \
-            file://0001-Makefile-Do-not-set-Werror.patch \
-@@ -22,6 +22,7 @@ SRC_URI = "git://github.com/open-iscsi/open-iscsi;branch=master;protocol=https \
-            file://iscsi-initiator.service \
-            file://iscsi-initiator-targets.service \
-            file://set_initiatorname \
-+           file://0002-iscsiuio-Use-pthread_t-for-INVALID_THREAD.patch \
-            "
- S = "${WORKDIR}/git"
- 
+-SRC_URI[md5sum] = "e9c425ac48ecb96ea5ea2912c78969f9"
++SRC_URI = "http://v6web.litech.org/radvd/dist/radvd-${PV}.tar.gz \
++           file://radvd.init \
++           file://radvd.service \
++           file://volatiles.03_radvd \
++           file://radvd.default \
++           file://radvd.conf \
++           file://0001-Reverts-the-include.h-change-in-46883f8a1a02fe42040d.patch \
++           "
+ SRC_URI[sha256sum] = "c36470706fec3a9e6bed394ffea08acaff5dac647848d26b96bb9b9c65d58da0"
++
++inherit autotools useradd pkgconfig systemd
++
++SYSTEMD_SERVICE:${PN} = "radvd.service"
++SYSTEMD_AUTO_ENABLE = "disable"
++
++do_install:append () {
++    install -m 0755 -d ${D}${sysconfdir}/init.d \
++                       ${D}${sysconfdir}/default/volatiles \
++                       ${D}${docdir}/radvd
++    # Install init script and volatiles
++    install -m 0755 ${WORKDIR}/radvd.init ${D}${sysconfdir}/init.d/radvd
++    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/radvd
++    sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/radvd
++    sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/radvd
++    sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/radvd
++
++    install -m 0644 ${WORKDIR}/volatiles.03_radvd ${D}${sysconfdir}/default/volatiles/03_radvd
++
++    # Install systemd service files
++    install -d ${D}${systemd_unitdir}/system
++    install -m 0644 ${WORKDIR}/radvd.service ${D}${systemd_unitdir}/system
++    sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' \
++           -e 's#@SBINDIR@#${sbindir}#g' \
++           -e 's#@BASE_BINDIR@#${base_bindir}#g' ${D}${systemd_unitdir}/system/radvd.service
++
++    # Install default environment file
++    install -m 0644 ${WORKDIR}/radvd.default ${D}${sysconfdir}/default/radvd
++
++    # Documentation
++    for i in radvd.conf.example README; do \
++        install -m 0644 ${S}/$i ${D}${docdir}/radvd; \
++    done
++
++    install -m 0644 ${WORKDIR}/radvd.conf ${D}${sysconfdir}/radvd.conf
++}
++
++USERADD_PACKAGES = "${PN}"
++USERADD_PARAM:${PN} = "--system --home ${localstatedir}/run/radvd/ -M -g nogroup radvd"
++
++pkg_postinst:${PN} () {
++    if [ -z "$D" -a -x /etc/init.d/populate-volatile.sh ]; then
++        /etc/init.d/populate-volatile.sh update
++    fi
++}
 -- 
 2.37.2
 
