@@ -2,63 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4A0BC0502C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C413EECAAD8
 	for <webhook@archiver.kernel.org>; Tue, 30 Aug 2022 07:14:32 +0000 (UTC)
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
- [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.web09.8759.1661843669936443384
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com
+ [209.85.214.170])
+ by mx.groups.io with SMTP id smtpd.web08.8718.1661843656593304005
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Aug 2022 00:14:30 -0700
+ Tue, 30 Aug 2022 00:14:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=n4IR2Yyf;
- spf=pass (domain: gmail.com, ip: 209.85.210.170,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=pqjuEDHE;
+ spf=pass (domain: gmail.com, ip: 209.85.214.170,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id 76so10498755pfy.3
+Received: by mail-pl1-f170.google.com with SMTP id x23so10250603pll.7
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Aug 2022 00:14:29 -0700 (PDT)
+ Tue, 30 Aug 2022 00:14:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc;
-        bh=vL6Phr2xG7yPq2zVj6Jd+5t1UBzmfz9BViPRvSkbp3w=;
-        b=n4IR2Yyfc33Xcp3AJdsIGv1ryL4vRq1RxEfL7DHxv+5Z4qsCyrxS64ER7fBC7ZXaw4
-         BKhBhov7DJYylB8ljGoRcJI3DYmHEeGBXGu0iV/OYAtRd7TUUpQITHmuWnRsUaQaB0vh
-         X+pWw+Yp25ztqjEw/IX4u0HUKWkosrKh/iKeDEdiJu+udr0klaJ4JB1ffWOMjWHd3PXn
-         IQr7d+pqEgYFSkTTUUeQh+QtTbNulJQp7NNswJVpT3tvPWZLaO6zrhUCKgzNnZ4i/X3u
-         FxRJjzIHzGPonb2tl4jbfTT1mAJ4mC0mjMmuy3VW0XgQCDYXpxX7Pt2apfE/kiY0cmkK
-         vV9Q==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc;
+        bh=5SyVCajcnz/viJe/a55fAXh0IRWv2nMTXJ2i/TLYhg4=;
+        b=pqjuEDHEZ/PT3riNa6d53iP13PsY98fpYoi4LoNG9hmHg2MSWmJeghR8U33TdLYUG5
+         0t9DSqkAl/r7OHmxlgp+ocg5K6aKq3YMke8fdcvQkhoFYiSMmH6PEHERP6cVOJLZZLUT
+         rQM/A66KCjTdtVuUDccY1hO1ruyOvte+4d+6Lb5e84+StL3nDr8w0YpsADsxdeg/QSvm
+         tG5kLCNUh0YQbKI+wp0GlKLEdtKQtezYGwrjwVyp+dr2gYWxBTN9aGJasHKRG6C32oNG
+         81JJmruDBluCkZ+TQPbCIT3VUrEw/9LFWuYsXrTrjY+7WrQTVfiqlp3fiQ4BxaPasaxl
+         D3Tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
-        bh=vL6Phr2xG7yPq2zVj6Jd+5t1UBzmfz9BViPRvSkbp3w=;
-        b=C2x1lF3aCQUfC3V72i8Rf/MuqB9LlwyGKgQPfyZcGz/Y9P/nYw9bIWa5OMbR/budKH
-         Gh++NOlhcu3OsHFyO0X9b4Ktz1s1hBCyCbIXH87JfI0PC8AlRgkpLs0s4Ca0mdFX86+t
-         e5SC5fiU3WJkOMwwYO+E8jGVOSrfbrpzvZtN6Xed3/97MAcqZshaDpFxNryL7pGTt7i5
-         HTZcS+qMvfVwVkV2FgM/+YYpFcMAFsZvl4VPtYEhwTvxnsa6lOLUZrqMzaHak5OvLBeL
-         Fa7VFgxiThLnMEdFy+dQ67O2KfvUpRisGkdFcv92jm3RmA5qfLAtRMF5qod7IhupnTjH
-         vu2w==
-X-Gm-Message-State: ACgBeo077Cxfx5dC0rbINRA/uvhIR2WcVBcEgpkF+Plo2b/On6Q/2mKu
-	h2Yoi3BJAhbTHlQZ5pvCPl369Zw4uRDIPg==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc;
+        bh=5SyVCajcnz/viJe/a55fAXh0IRWv2nMTXJ2i/TLYhg4=;
+        b=nm/wCaTi7f8D+HLQjoyPsN1RYVQq+qMc+Er6T4CDb0W3GxLsBJ9aSi7hQ2zaN498Ce
+         zFEYsMsTJPPcz2m8ktLXwm04ve02BaxNqDu/4dnwMFwQprV+YkrMFtAaJjNAxZRm1jFX
+         MSxAOnzGZSeZTEDr9hbKOxSRH4Q3fpyTYwTCKvm/J7zrsMl5EHwA2NmIn8UE+0PLyCXS
+         DFbsQMld9HWEcGXOWkKcvGPPrcg+CUYT1E7L3gV9jcRnEnI/tzquARuraia4aENwC04p
+         /DG6/TX3n93hFzyS5WyL8/v8//2l12Mqt3fqyHnlrvjbsSlASuHkpH5H+HHhjC35MQ40
+         nC5Q==
+X-Gm-Message-State: ACgBeo2ML93oG6nDY3KHucBMWd3DkluxKB0YYqaqxt/1nDx7a4jZmbQC
+	fwEUFJhki5ifRrGF51uUwZ2zj96+ugrTyA==
 X-Google-Smtp-Source: 
- AA6agR53f/g/KNKF+QpRMfFOQoRGcFH187mMoSfj6wW50JSX/hD6r8eovNJJvRbE/NTA+uT0yYroGA==
-X-Received: by 2002:a63:4a47:0:b0:42b:e4a4:3aec with SMTP id
- j7-20020a634a47000000b0042be4a43aecmr9111737pgl.512.1661843669074;
-        Tue, 30 Aug 2022 00:14:29 -0700 (PDT)
+ AA6agR7PPxt+ONyIBgn9DuPcNVT77+SCI6UEEV7UU4JWY8NRzL0bYzbL7zX5cnR0GgDmt4WGFfde8w==
+X-Received: by 2002:a17:902:ec88:b0:175:d8f:44b with SMTP id
+ x8-20020a170902ec8800b001750d8f044bmr3275235plg.84.1661843655566;
+        Tue, 30 Aug 2022 00:14:15 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::24e6])
         by smtp.gmail.com with ESMTPSA id
- z24-20020aa79f98000000b00537f9e32b00sm6041616pfr.37.2022.08.30.00.14.28
+ z24-20020aa79f98000000b00537f9e32b00sm6041616pfr.37.2022.08.30.00.14.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Aug 2022 00:14:28 -0700 (PDT)
+        Tue, 30 Aug 2022 00:14:15 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 15/21] linux-atm: Include missing string.h
-Date: Tue, 30 Aug 2022 00:14:07 -0700
-Message-Id: <20220830071413.3887189-15-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 01/21] gtk+: Fix function signature of create_menu()
+Date: Tue, 30 Aug 2022 00:13:53 -0700
+Message-Id: <20220830071413.3887189-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.2
-In-Reply-To: <20220830071413.3887189-1-raj.khem@gmail.com>
-References: <20220830071413.3887189-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
@@ -66,122 +64,83 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 30 Aug 2022 07:14:32 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98552
+ https://lists.openembedded.org/g/openembedded-devel/message/98538
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-from-memcpy-and-strcpy-function-pro.patch | 87 +++++++++++++++++++
- .../linux-atm/linux-atm_2.5.2.bb              |  3 +-
- 2 files changed, 89 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/0001-include-string-h-from-memcpy-and-strcpy-function-pro.patch
+ ...ix-signature-of-create_menu-function.patch | 50 +++++++++++++++++++
+ meta-oe/recipes-gnome/gtk+/gtk+_2.24.33.bb    |  1 +
+ 2 files changed, 51 insertions(+)
+ create mode 100644 meta-oe/recipes-gnome/gtk+/gtk+/0001-Fix-signature-of-create_menu-function.patch
 
-diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/0001-include-string-h-from-memcpy-and-strcpy-function-pro.patch b/meta-networking/recipes-support/linux-atm/linux-atm/0001-include-string-h-from-memcpy-and-strcpy-function-pro.patch
+diff --git a/meta-oe/recipes-gnome/gtk+/gtk+/0001-Fix-signature-of-create_menu-function.patch b/meta-oe/recipes-gnome/gtk+/gtk+/0001-Fix-signature-of-create_menu-function.patch
 new file mode 100644
-index 0000000000..81c5efd173
+index 0000000000..6b5f928391
 --- /dev/null
-+++ b/meta-networking/recipes-support/linux-atm/linux-atm/0001-include-string-h-from-memcpy-and-strcpy-function-pro.patch
-@@ -0,0 +1,87 @@
-+From 5217cb7c829cf87771096c4ce41fd4648dca47cb Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-gnome/gtk+/gtk+/0001-Fix-signature-of-create_menu-function.patch
+@@ -0,0 +1,50 @@
++From a703e2406fda3dc150574ae2f90cb5f4810d0601 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 29 Aug 2022 16:36:21 -0700
-+Subject: [PATCH] include string,h from memcpy and strcpy function prototype
++Date: Mon, 29 Aug 2022 00:25:19 -0700
++Subject: [PATCH] Fix signature of create_menu() function
 +
-+Upstream-Status: Pending
++Upstream-Status: Inappropriate [EOL]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/led/address.c  | 1 +
-+ src/led/display.c  | 1 +
-+ src/lib/unix.c     | 1 +
-+ src/maint/hediag.c | 1 +
-+ src/sigd/kernel.c  | 1 +
-+ src/sigd/policy.c  | 1 +
-+ 6 files changed, 6 insertions(+)
++ tests/testmenubars.c | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
 +
-+diff --git a/src/led/address.c b/src/led/address.c
-+index 574e881..b5c5fbb 100644
-+--- a/src/led/address.c
-++++ b/src/led/address.c
-+@@ -31,6 +31,7 @@
-+ #endif
++diff --git a/tests/testmenubars.c b/tests/testmenubars.c
++index 416a939..7f247f8 100644
++--- a/tests/testmenubars.c
+++++ b/tests/testmenubars.c
++@@ -21,7 +21,7 @@
++ #include <gtk/gtk.h>
 + 
-+ #include <sys/ioctl.h>
-++#include <string.h>
-+ #include <unistd.h>
-+ #include <errno.h>
++ static GtkWidget *
++-create_menu (depth)
+++create_menu (int depth)
++ {
++     GtkWidget *menu;
++     GtkWidget *menuitem;
++@@ -70,19 +70,19 @@ create_menubar (GtkPackDirection pack_dir,
++   menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_HOME, NULL);
++   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), menuitem);
++   gtk_label_set_angle (GTK_LABEL (GTK_BIN (menuitem)->child), angle);
++-  menu = create_menu (2, TRUE);
+++  menu = create_menu (2);
++   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), menu);
 + 
-+diff --git a/src/led/display.c b/src/led/display.c
-+index d78a15d..b835e89 100644
-+--- a/src/led/display.c
-++++ b/src/led/display.c
-+@@ -5,6 +5,7 @@
-+ #if HAVE_CONFIG_H
-+ #include <config.h>
-+ #endif
-++#include <string.h>
++   menuitem = gtk_menu_item_new_with_label ("foo");
++   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), menuitem);
++   gtk_label_set_angle (GTK_LABEL (GTK_BIN (menuitem)->child), angle);
++-  menu = create_menu (2, TRUE);
+++  menu = create_menu (2);
++   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), menu);
 + 
-+ #include <atm.h>
-+ #include <atmd.h>
-+diff --git a/src/lib/unix.c b/src/lib/unix.c
-+index 34aa465..d5bef54 100644
-+--- a/src/lib/unix.c
-++++ b/src/lib/unix.c
-+@@ -8,6 +8,7 @@
++   menuitem = gtk_menu_item_new_with_label ("bar");
++   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), menuitem);
++   gtk_label_set_angle (GTK_LABEL (GTK_BIN (menuitem)->child), angle);
++-  menu = create_menu (2, TRUE);
+++  menu = create_menu (2);
++   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), menu);
 + 
-+ #include <stdlib.h>
-+ #include <stdio.h>
-++#include <string.h>
-+ #include <unistd.h>
-+ #include <errno.h>
-+ #include <sys/types.h>
-+diff --git a/src/maint/hediag.c b/src/maint/hediag.c
-+index 8a4312a..a4f792f 100644
-+--- a/src/maint/hediag.c
-++++ b/src/maint/hediag.c
-+@@ -1,5 +1,6 @@
-+ #include <stdio.h>
-+ #include <stdlib.h>
-++#include <string.h>
-+ #include <unistd.h>
-+ #include <sys/ioctl.h>
-+ #include <sys/types.h>
-+diff --git a/src/sigd/kernel.c b/src/sigd/kernel.c
-+index 9ee74b1..2491626 100644
-+--- a/src/sigd/kernel.c
-++++ b/src/sigd/kernel.c
-+@@ -8,6 +8,7 @@
-+ 
-+ #include <stdlib.h>
-+ #include <stdio.h>
-++#include <string.h>
-+ #include <errno.h>
-+ #include <assert.h>
-+ 
-+diff --git a/src/sigd/policy.c b/src/sigd/policy.c
-+index 2cfb42d..87223a7 100644
-+--- a/src/sigd/policy.c
-++++ b/src/sigd/policy.c
-+@@ -6,6 +6,7 @@
-+ #include <config.h>
-+ #endif
-+ 
-++#include <string.h>
-+ #include <atm.h>
-+ #include <atmd.h>
-+ 
-diff --git a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-index bb79b78568..70125102cd 100644
---- a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-+++ b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-@@ -14,7 +14,8 @@ SRC_URI = "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BPN}-${P
-            file://0001-IFNAMSIZ-is-defined-in-net-if.h.patch \
-            file://0001-saaldump-atmdump-Include-linux-sockios.h-for-SIOCGST.patch \
-            file://0001-make-Add-PREFIX-knob.patch \
--"
-+           file://0001-include-string-h-from-memcpy-and-strcpy-function-pro.patch \
-+           "
++   return menubar;
++-- 
++2.37.2
++
+diff --git a/meta-oe/recipes-gnome/gtk+/gtk+_2.24.33.bb b/meta-oe/recipes-gnome/gtk+/gtk+_2.24.33.bb
+index 082967e04c..5eac641cf3 100644
+--- a/meta-oe/recipes-gnome/gtk+/gtk+_2.24.33.bb
++++ b/meta-oe/recipes-gnome/gtk+/gtk+_2.24.33.bb
+@@ -10,6 +10,7 @@ SRC_URI = "http://ftp.gnome.org/pub/gnome/sources/gtk+/2.24/gtk+-${PV}.tar.xz \
+            file://doc-fixes.patch \
+            file://strict-prototypes.patch \
+            file://0001-Do-not-look-into-HOME-when-looking-for-gtk-modules.patch \
++           file://0001-Fix-signature-of-create_menu-function.patch \
+            "
  
- SRC_URI:append:libc-musl = " file://musl-no-on_exit.patch"
- 
+ SRC_URI[sha256sum] = "ac2ac757f5942d318a311a54b0c80b5ef295f299c2a73c632f6bfb1ff49cc6da"
 -- 
 2.37.2
 
