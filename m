@@ -1,217 +1,236 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yi.zhao@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F0449ECAAD8
-	for <webhook@archiver.kernel.org>; Tue, 30 Aug 2022 07:14:42 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
- [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web12.8934.1661843675895366790
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AF42ECAAA1
+	for <webhook@archiver.kernel.org>; Tue, 30 Aug 2022 07:22:43 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com
+ [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web09.8809.1661844159231296555
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Aug 2022 00:14:36 -0700
+ Tue, 30 Aug 2022 00:22:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=UajWPhQg;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id l5so6372929pjy.5
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Aug 2022 00:14:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc;
-        bh=uc2RPKday3VTBSWW3I2ik3xQx9MLqNPZwladhttCwaw=;
-        b=UajWPhQg+7YQODml6k7TMNuqdKUvMgpXS9uXT05o+k62eCb8mKn3hCt0s1S1Si6iyV
-         Y+834XiDNxO/jELmX/ScN+HjpSRo9ExK0ZrKzHSIFiwgrs3DRsAE5hn1uY2iPLRf7yez
-         3bsABiogL/3CW2V5DWy1fzBC6Uqi1pQncUo/3fWVRrNriy6VSn/JsT76/sJFd6wP/v6+
-         fEZOrPC5kR0yASaW0MiFQTJ6nu5dnLliinVjJrQTX79wwUXj/HXlvhti2/2g0mrkhWhQ
-         OD0axLmThDAsnvZDEGt0pCIExSqJ0YBl3uQumYgayTW7z3NLL19xzrenMBeYyy07J91V
-         Ev3w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
-        bh=uc2RPKday3VTBSWW3I2ik3xQx9MLqNPZwladhttCwaw=;
-        b=MnKs+rExV8u/kgHiqbWoVRtli078W6I2iL4ncwpPQpHRY5Pn0QvWarjY8QD1wp6GAB
-         IrFWfGGjMc/jIIdRjTWKu9+DvuhBRVw5+3U0WmFj7nhPxd5mo+DbN9QkgMualSL+rXcj
-         xZwP7JstrG8S+URNEsdvjR8q1yyZ6s9QVJbJb64lGkcR4wdrOw4SypIp69MlI9VnZDFx
-         MnieViAQU21WtCOJhMv6DIkErBXJ1XL0dS0oqmWzIIXOpnKROo/jbJm282qqSArdOzod
-         PWO5Hv/IN+Ek73gb5I2gh4lzPWXSVrp5b0rYwue0QuYGe1fLXeN8AY7/5ToZOjXRwFAX
-         w5CQ==
-X-Gm-Message-State: ACgBeo1DJnV5KUZIdga+TVrdeCuitpUrxbSfj7h42UJxcVQefTtOwJav
-	ZE1ac9Q+IBJt/rYqQdsQNVYqMuzhwYwduw==
-X-Google-Smtp-Source: 
- AA6agR5jYw2XLdvnqNNIBNaGO9sqE4NsNoYblFlOh2lhnD339ZKzbIglIquz2/Ec1aBnH7QFhJDBdw==
-X-Received: by 2002:a17:902:b68d:b0:172:e973:82b9 with SMTP id
- c13-20020a170902b68d00b00172e97382b9mr20133777pls.120.1661843674599;
-        Tue, 30 Aug 2022 00:14:34 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::24e6])
-        by smtp.gmail.com with ESMTPSA id
- z24-20020aa79f98000000b00537f9e32b00sm6041616pfr.37.2022.08.30.00.14.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Aug 2022 00:14:34 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=TRfKBHer;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
+ invalid domain name (domain: windriver.com, ip: 205.220.166.238,
+ mailfrom: prvs=624124cef8=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
+ 27U6blvx002538
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 30 Aug 2022 00:22:39 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+ h=from : to :
+ subject : date : message-id : content-transfer-encoding : content-type :
+ mime-version; s=PPS06212021;
+ bh=Oro0hz3rgsM/3yxHIbqcv9CJppliGSuKHtVButg/Ojs=;
+ b=TRfKBHer7fxIOcCB4TznQWrZx1oLKWzojEgWOcL09+Amg/s85U4w1HZW5vnTi1EbWLJW
+ Litt/J2EwgTc6CqIdOq7/ZeqmH+lLjwIcQoSTzG53gxzcq5BmeL4zO/49O1K6RCDDvxU
+ zVk0y8Lv+4RrDV6TfJjwhKznL8TBT9eA4lb/prIrVm1n3fFoyI92WA1+DYryJJBy0hc+
+ RauWiOXVIe6aI0svz8lEpBepHaIIxGR8Di7pTYKxfioA0W/SnRVHOgU6mJKZdPbQ4XnQ
+ aHHOpYPq229DhS8ya/64RpVncRp7FTaTmWCdmaLsdhfwynprjRvdvlV+sICdhkNw4YV1 kQ==
+Received: from nam11-dm6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11lp2169.outbound.protection.outlook.com [104.47.57.169])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3j7jska3wu-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 30 Aug 2022 00:22:38 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=SS326BK7zghuq+xNaHAcXgb/3dKmb+iuYBwMOmCCTtqJdSTruzHPv4T0ANOBPf5+ZkPlB5Dftzl12YgDK6ufHxNviFppPqD582Kg16UqPVkuWQjaQKi9fgUNSWOVlZbXa1MUWXTbNBnDZpHmMgxpmCsYcOSBwQM8+dENf1b8ZzUpyxYoADeugRiQL+0Rxzyc3gFgpr2+tsjh1V4qOhxot1iCP9a2CIwDahG3OueFtZUbeGeZl9X6GGtCt0wPod4CfULjFIYHWyMfWCdbCIqgaFmf33nho+J8ZOB0Kaqib3K9hSPoG7lyapFiNodklmXC078AA6MWbRCi31Hja5j/3Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Oro0hz3rgsM/3yxHIbqcv9CJppliGSuKHtVButg/Ojs=;
+ b=Yhl1Oby1Iufssk6ovb+90r8fBN2TtMbMSRkwfO2tgyC6Eky9iyM44LVzNke8/3WUT0Ka17B/N2hBGg5tpDTvJ4hMwHxmQBcVai6NtfB7qKw+egBOrlwa55NIwhkHNU8fD5mcLN/epT45zjAXOmt5KrKlMLoJBNLHgHMnziG45sVAXlaBdVAWaHkOhwwLwT3b+t8K/fFFxcJEerUYZzsknbJHlhtwEzvwKqv1pTqiWU7dN3BjjO9rBhjdH5XAr7O6raGIhkIV6MmXUBcbVCU09TwbTsl1D0x0A0acXIL0nZByZGi0ozWhTfCPJuZj2tRgmIgZ4N5EktGiG9eMmjZjuw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from SA2PR11MB4875.namprd11.prod.outlook.com (2603:10b6:806:11a::6)
+ by PH0PR11MB4981.namprd11.prod.outlook.com (2603:10b6:510:39::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5566.15; Tue, 30 Aug
+ 2022 07:22:35 +0000
+Received: from SA2PR11MB4875.namprd11.prod.outlook.com
+ ([fe80::9475:8d56:9c54:cd99]) by SA2PR11MB4875.namprd11.prod.outlook.com
+ ([fe80::9475:8d56:9c54:cd99%3]) with mapi id 15.20.5566.021; Tue, 30 Aug 2022
+ 07:22:35 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 21/21] ot-daemon,ot-br-posix: Fix mbedtls
- module builds
-Date: Tue, 30 Aug 2022 00:14:13 -0700
-Message-Id: <20220830071413.3887189-21-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.37.2
-In-Reply-To: <20220830071413.3887189-1-raj.khem@gmail.com>
-References: <20220830071413.3887189-1-raj.khem@gmail.com>
-MIME-Version: 1.0
+Subject: [meta-networking][PATCH] tcpreplay: fix buildpaths issue
+Date: Tue, 30 Aug 2022 15:22:24 +0800
+Message-Id: <20220830072224.1584601-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.25.1
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SG2PR02CA0091.apcprd02.prod.outlook.com
+ (2603:1096:4:90::31) To SA2PR11MB4875.namprd11.prod.outlook.com
+ (2603:10b6:806:11a::6)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: a49d51a1-c610-4a77-d7d1-08da8a58693d
+X-MS-TrafficTypeDiagnostic: PH0PR11MB4981:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	OvsHQr6wASuDveSjs0J9izKFQCUKA/vAqKPFgq692wCOS1QhvEg47ICz198MSvdg5oBlWuEsmHcbYlzR/nYNtnAvqCvwT/LSH2nrs1eiIyrYY2Er7CumQzIkG+Dj9BxxYwy8WjCwSC1v2QDHMrlT7nXTm/2mGun1z1Kjor0PK4JLbobAVxILdrHQM7FfV28oYrIAw59gBcvRDb/Ci7O7o4+VOH8TjonaQ5XbwFFHH6Vf/GnAIDv3fwWLvf0Rt3ksTKr3SilFFwAAzCq8ZPSdEI4L9R9HPlVuhqYLCkCljp5rKKrahRKguQV9j/3n8G6VM7gqS+KXlGMmglkx2Ngq27xR9k55n21Q+jzDfN0tttUYiM8zp8WxpVdYfB3O99NJZYZxp8NSkZBr2dtn2I7+XvrRuE6vm/JaXqlFf7lKZi2QjJYRthQHy29+rUBEg/kDk9gAKtCC/2hbphBkcixsJkNDLyIXw7YBGNPVebFoYyq8Qc7xbkoUjn9JfxtbNB5vEAWen7chRWx0yZKFkeJMVw2UC1Mxqv6kTZIwtmWPdAUXaOaOt1Rc7kHIqFP3Fm4vvTtnZ9wpN88Xfuh9v+iheMxewVi6E/XbaVt1OzyJE3EhDfTfGkW4ZibfHaY0+nBvSrJPciGmGidch21HovoT9NC/u25kZnSeB8VX4RdF853VcibiRbPYqaD0nxBJnhWmapnCwxng5wEW+/9FCB7NIM7zRZihZN75SUz43xUVhZVrMvxCcb0cYQW4M0sjELEbQqu0C+JsSXkFfsBx1QSUFKDkYkUxwrlmgm8d353125c=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA2PR11MB4875.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(346002)(136003)(366004)(39850400004)(376002)(396003)(38100700002)(26005)(6512007)(38350700002)(316002)(86362001)(41300700001)(8936002)(44832011)(6666004)(5660300002)(478600001)(8676002)(2906002)(66556008)(66946007)(6486002)(6506007)(52116002)(66476007)(2616005)(1076003)(83380400001)(186003)(6916009)(36756003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?6/SPvGmMbcueYHdUgfSxGK+6ViSfi2SQ4yIDNfH3JGT7hdZNmA5L0yJYNmij?=
+ =?us-ascii?Q?a4FcD5PBxv+1XVOWQaNk0ZLOQlhjS1kIThGakOAKC2wMLAqQk+XPLjqZ780I?=
+ =?us-ascii?Q?U+m/UI+ox55AXI/O6d0klGMTix84Ub1KDT5uXRM37X31z9g+XpMyBEwMCTPo?=
+ =?us-ascii?Q?EV3ZDVuz2cA0ZJMMVGPro+Ev7K+dcwwlHVR2RXLkhdQggnNr8tGsDjVTZKuO?=
+ =?us-ascii?Q?R3AX9fZc9N701nB01NCPI4/IPznn4D4mIgPQI/BPE7znDuFPLwtEIxtGiTWK?=
+ =?us-ascii?Q?zoY7tLySYpt0ggTrCE17Fj9uYD3hpcwrtuFa+BRdHaMtN4TFolB5Li3gYcH/?=
+ =?us-ascii?Q?VmvlMOCrmcWLxv8pneL0AVJUuBTBY26nRCRVaZKU78roYbT8LTde0j814auT?=
+ =?us-ascii?Q?Kreup8pYzKk/RIh7SodKMfnHINdKMjsnpQGgUiVxdKZBwAqSeZU5N4xdidTy?=
+ =?us-ascii?Q?0a3iBPKJvJX0BYml0xGWvokhbZhURjEiigseFwGFerYjv40+g++pTv9zII92?=
+ =?us-ascii?Q?YH1w23poN7e8ymnBri8DCpgg2rOI9olPNNzCYns8SJCAiEiorPPmNq79UrqC?=
+ =?us-ascii?Q?ep6hDkyQZqxSkYuwj/5SAOcQHCDfHA6qNGdWYXHaDclzehx9vDkGVWywOchq?=
+ =?us-ascii?Q?4n67DNOybipYUrf0PaGDyLPkwKrquAC8J/KKuC/UqV5w5iAGQovbawi3J2Se?=
+ =?us-ascii?Q?+M0QbG3zIKf6H+l6Z/mo+/u+JiS14HORCfwyjpnZt8y+33TcTk8uGcVt+tuR?=
+ =?us-ascii?Q?Zi8ZVScplllR5EPdX8HAwtw66DjYDF4WIF2WEMTrvVvwOxOmoQEWzX40pFPE?=
+ =?us-ascii?Q?5elLUrfgAnNnXB4Wkklvh9G3HoUs+j6lBZ+ge04e+/8FSs6/8CdqQicHk223?=
+ =?us-ascii?Q?lcqt1/1wV04YKnHtQbZq8U2PEvAQAB3uXzAziQmh3Lt8AfNoMRPt5gV+ACfP?=
+ =?us-ascii?Q?2Oacn7eAi5waeiZ+GZmzhZ9DsCNiUDsNPedW17CdhALYX0CHl3mQgxpybpNi?=
+ =?us-ascii?Q?VZQA34LS7aleGhpRpGFX9nd/HzAEBviD18zBaC/nqg7wQJvuyLWpQTQzsyGu?=
+ =?us-ascii?Q?hxSPvZgXJRPS3nlbwvO4CRynrCKyAtAc58mjajAPq+78NzNQkDdZyHL/K3tV?=
+ =?us-ascii?Q?MP6Tf1pI7WpBjKLCEJ++UhOpC4pSJAx/68qzvbxcycy+Y4KouUr/mNSCUo+E?=
+ =?us-ascii?Q?azOOBKhQA+/MRLlbf2UlWvc/Z7codwBLheV9fEY0dtjHcGUIcJT7VRn1lqjM?=
+ =?us-ascii?Q?z/LaWyscFQozJzVm27Knh5cfkB7Lk/FkC5ZyRJfOikqYnJFuQbhdQ20eJ7JC?=
+ =?us-ascii?Q?4pAMR5gkL4L8+0SrhxyRUtRx+GfQxz7MzfyGWHtG813o54YZFC9Y7c0AHPzW?=
+ =?us-ascii?Q?1QilPT5vY3CgtownaVsSb3I6A8WFU3/Ww5EwmuKvdTIZOPqGWGjI9wH9cd9V?=
+ =?us-ascii?Q?wBmmTjiSQJFKBZag38jFTJWpT9mRWYd7j5NL9ZodDUwYJ4VSqmziyVqzssH7?=
+ =?us-ascii?Q?uWaJOtkHDEGq421HrI+eb36zQFeEyR5/MMJtGONEflVkzo+KQOgcMpJNvOCM?=
+ =?us-ascii?Q?17GHZcfq2FwvOeWNU/kyXd6DE9CTSCi4uH4igt2f?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ a49d51a1-c610-4a77-d7d1-08da8a58693d
+X-MS-Exchange-CrossTenant-AuthSource: SA2PR11MB4875.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Aug 2022 07:22:35.5495
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 
+ +cjALsDmgKdX6Z/0tzWLNrT2QmZpwU8mZuzZAOnpnHE06iCwqZO3m+V0w274a9BaAjpjzgY4SdPK77nN8dBZIQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR11MB4981
+X-Proofpoint-GUID: _AscIDsB5p9xhUydykwqQuUW_aYewZyk
+X-Proofpoint-ORIG-GUID: _AscIDsB5p9xhUydykwqQuUW_aYewZyk
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.517,FMLib:17.11.122.1
+ definitions=2022-08-30_03,2022-08-25_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ mlxscore=0 priorityscore=1501
+ malwarescore=0 adultscore=0 suspectscore=0 impostorscore=0 mlxlogscore=999
+ spamscore=0 phishscore=0 lowpriorityscore=0 bulkscore=0 clxscore=1015
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2207270000
+ definitions=main-2208300034
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 30 Aug 2022 07:14:42 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 30 Aug 2022 07:22:43 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98558
+ https://lists.openembedded.org/g/openembedded-devel/message/98559
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+POSIX_SHELL is specified a host tool path as it searches path on build
+host using `which` when configure. Set it to a fixed path '/bin/sh'.
+
+Fixes:
+QA Issue: File /usr/bin/tcpbridge in package tcpreplay contains reference to TMPDIR
+File /usr/bin/tcpliveplay in package tcpreplay contains reference to TMPDIR
+File /usr/bin/tcprewrite in package tcpreplay contains reference to TMPDIR
+File /usr/bin/tcpcapinfo in package tcpreplay contains reference to TMPDIR
+File /usr/bin/tcpreplay in package tcpreplay contains reference to TMPDIR
+File /usr/bin/tcpprep in package tcpreplay contains reference to TMPDIR
+File /usr/bin/tcpreplay-edit in package tcpreplay contains reference to TMPDIR [buildpaths]
+QA Issue: File /usr/src/debug/tcpreplay/4.4.2-r0/src/defines.h in package tcpreplay-src contains reference to TMPDIR [buildpaths]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../openthread/ot-br-posix/mbedtls.patch      | 43 +++++++++++++++++++
- .../openthread/ot-br-posix_git.bb             |  6 ++-
- .../openthread/ot-daemon/mbedtls.patch        | 43 +++++++++++++++++++
- .../openthread/ot-daemon_git.bb               |  1 +
- 4 files changed, 91 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-connectivity/openthread/ot-br-posix/mbedtls.patch
- create mode 100644 meta-networking/recipes-connectivity/openthread/ot-daemon/mbedtls.patch
+ ...libopts.m4-set-POSIX_SHELL-to-bin-sh.patch | 45 +++++++++++++++++++
+ .../tcpreplay/tcpreplay_4.4.2.bb              |  7 ++-
+ 2 files changed, 51 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/tcpreplay/tcpreplay/0001-libopts.m4-set-POSIX_SHELL-to-bin-sh.patch
 
-diff --git a/meta-networking/recipes-connectivity/openthread/ot-br-posix/mbedtls.patch b/meta-networking/recipes-connectivity/openthread/ot-br-posix/mbedtls.patch
+diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay/0001-libopts.m4-set-POSIX_SHELL-to-bin-sh.patch b/meta-networking/recipes-support/tcpreplay/tcpreplay/0001-libopts.m4-set-POSIX_SHELL-to-bin-sh.patch
 new file mode 100644
-index 0000000000..91b3046484
+index 000000000..448455fff
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/openthread/ot-br-posix/mbedtls.patch
-@@ -0,0 +1,43 @@
-+mbedtls: Disable documentation warning as error with clang
++++ b/meta-networking/recipes-support/tcpreplay/tcpreplay/0001-libopts.m4-set-POSIX_SHELL-to-bin-sh.patch
+@@ -0,0 +1,45 @@
++From 769e96b60f631e8c208fd7f72900d0bb17760f88 Mon Sep 17 00:00:00 2001
++From: Yi Zhao <yi.zhao@windriver.com>
++Date: Tue, 30 Aug 2022 09:54:11 +0800
++Subject: [PATCH] libopts.m4: set POSIX_SHELL to /bin/sh
 +
-+There are shortcomings with doxygen info which clang-15+ flags, dont
-+treat them as errors
++POSIX_SHELL is specified a host tool path as it searches path on build
++host using `which` when configure. Set it to a fixed path '/bin/sh'.
 +
-+Remove unused variable
++Upstream-Status: Inappropriate [embedded specific]
 +
-+Fixes
-+library/bignum.c:1395:29: error: variable 't' set but not used [-Werror,-Wunused-but-set-variable]
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ m4/libopts.m4 | 16 +---------------
++ 1 file changed, 1 insertion(+), 15 deletions(-)
 +
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+--- a/third_party/openthread/repo/third_party/mbedtls/repo/library/bignum.c
-++++ b/third_party/openthread/repo/third_party/mbedtls/repo/library/bignum.c
-+@@ -1544,7 +1544,7 @@ __attribute__ ((noinline))
-+ #endif
-+ void mpi_mul_hlp( size_t i, mbedtls_mpi_uint *s, mbedtls_mpi_uint *d, mbedtls_mpi_uint b )
-+ {
-+-    mbedtls_mpi_uint c = 0, t = 0;
-++    mbedtls_mpi_uint c = 0;
-+ 
-+ #if defined(MULADDC_HUIT)
-+     for( ; i >= 8; i -= 8 )
-+@@ -1595,8 +1595,6 @@ void mpi_mul_hlp( size_t i, mbedtls_mpi_
-+     }
-+ #endif /* MULADDC_HUIT */
-+ 
-+-    t++;
-+-
-+     do {
-+         *d += c; c = ( *d < c ); d++;
-+     }
-+--- a/third_party/openthread/repo/third_party/mbedtls/repo/CMakeLists.txt
-++++ b/third_party/openthread/repo/third_party/mbedtls/repo/CMakeLists.txt
-+@@ -192,7 +192,7 @@ if(CMAKE_COMPILER_IS_GNU)
-+ endif(CMAKE_COMPILER_IS_GNU)
-+ 
-+ if(CMAKE_COMPILER_IS_CLANG)
-+-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wwrite-strings -Wpointer-arith -Wimplicit-fallthrough -Wshadow -Wvla")
-++    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wwrite-strings -Wpointer-arith -Wimplicit-fallthrough -Wshadow -Wvla -Wno-error=documentation")
-+     set(CMAKE_C_FLAGS_RELEASE     "-O2")
-+     set(CMAKE_C_FLAGS_DEBUG       "-O0 -g3")
-+     set(CMAKE_C_FLAGS_COVERAGE    "-O0 -g3 --coverage")
-diff --git a/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb b/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
-index a16b77849e..3d3c9bc0f2 100644
---- a/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
-+++ b/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
-@@ -17,14 +17,16 @@ PV = "0.3.0+git${SRCPV}"
- SRC_URI = "gitsm://github.com/openthread/ot-br-posix.git;protocol=https;branch=main \
-            file://0001-otbr-agent.service.in-remove-pre-exec-hook-for-mdns-.patch \
-            file://0001-cmake-Disable-nonnull-compare-warning-on-gcc.patch \
-+           file://mbedtls.patch \
-            "
++diff --git a/m4/libopts.m4 b/m4/libopts.m4
++index cfbd477..c8047eb 100644
++--- a/m4/libopts.m4
+++++ b/m4/libopts.m4
++@@ -111,21 +111,7 @@ AC_DEFUN([INVOKE_LIBOPTS_MACROS_FIRST],[
++   AC_CHECK_FUNCS([mmap canonicalize_file_name snprintf strdup strchr \
++                  strrchr strsignal fchmod fstat chmod])
++   AC_PROG_SED
++-  [while :
++-  do
++-      POSIX_SHELL=`which bash`
++-      test -x "$POSIX_SHELL" && break
++-      POSIX_SHELL=`which dash`
++-      test -x "$POSIX_SHELL" && break
++-      POSIX_SHELL=/usr/xpg4/bin/sh
++-      test -x "$POSIX_SHELL" && break
++-      POSIX_SHELL=`/bin/sh -c '
++-          exec 2>/dev/null
++-          if ! true ; then exit 1 ; fi
++-          echo /bin/sh'`
++-      test -x "$POSIX_SHELL" && break
++-      ]AC_MSG_ERROR([cannot locate a working POSIX shell])[
++-  done]
+++  POSIX_SHELL='/bin/sh'
++   AC_DEFINE_UNQUOTED([POSIX_SHELL], ["${POSIX_SHELL}"],
++            [define to a working POSIX compliant shell])
++   AC_SUBST([POSIX_SHELL])
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.2.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.2.bb
+index 165a0e735..7d2a6a14d 100644
+--- a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.2.bb
++++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.2.bb
+@@ -7,7 +7,9 @@ SECTION = "net"
+ LICENSE = "GPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=10f0474a2f0e5dccfca20f69d6598ad8"
  
- S = "${WORKDIR}/git"
- SYSTEMD_SERVICE:${PN} = "otbr-agent.service"
+-SRC_URI = "https://github.com/appneta/tcpreplay/releases/download/v${PV}/tcpreplay-${PV}.tar.gz"
++SRC_URI = "https://github.com/appneta/tcpreplay/releases/download/v${PV}/tcpreplay-${PV}.tar.gz \
++           file://0001-libopts.m4-set-POSIX_SHELL-to-bin-sh.patch \
++          "
  
- inherit pkgconfig cmake systemd
--
--CXXFLAGS:append:libc-musl:toolchain-clang = " -Wno-error=sign-compare"
-+# openthread/repo/src/cli/cli.cpp:1786:18: fatal error: variable 'i' set but not used [-Wunused-but-set-variable]
-+#    for (uint8_t i = 0;; i++)
-+CXXFLAGS:append:libc-musl:toolchain-clang = " -Wno-error=sign-compare -Wno-error=unused-but-set-variable"
+ SRC_URI[sha256sum] = "5b272cd83b67d6288a234ea15f89ecd93b4fadda65eddc44e7b5fcb2f395b615"
  
- EXTRA_OECMAKE = "-DBUILD_TESTING=OFF \
-                  -DOTBR_DBUS=ON \
-diff --git a/meta-networking/recipes-connectivity/openthread/ot-daemon/mbedtls.patch b/meta-networking/recipes-connectivity/openthread/ot-daemon/mbedtls.patch
-new file mode 100644
-index 0000000000..be26a20dad
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/openthread/ot-daemon/mbedtls.patch
-@@ -0,0 +1,43 @@
-+mbedtls: Disable documentation warning as error with clang
-+
-+There are shortcomings with doxygen info which clang-15+ flags, dont
-+treat them as errors
-+
-+Remove unused variable
-+
-+Fixes
-+library/bignum.c:1395:29: error: variable 't' set but not used [-Werror,-Wunused-but-set-variable]
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+--- a/third_party/mbedtls/repo/library/bignum.c
-++++ b/third_party/mbedtls/repo/library/bignum.c
-+@@ -1544,7 +1544,7 @@ __attribute__ ((noinline))
-+ #endif
-+ void mpi_mul_hlp( size_t i, mbedtls_mpi_uint *s, mbedtls_mpi_uint *d, mbedtls_mpi_uint b )
-+ {
-+-    mbedtls_mpi_uint c = 0, t = 0;
-++    mbedtls_mpi_uint c = 0;
-+ 
-+ #if defined(MULADDC_HUIT)
-+     for( ; i >= 8; i -= 8 )
-+@@ -1595,8 +1595,6 @@ void mpi_mul_hlp( size_t i, mbedtls_mpi_
-+     }
-+ #endif /* MULADDC_HUIT */
-+ 
-+-    t++;
-+-
-+     do {
-+         *d += c; c = ( *d < c ); d++;
-+     }
-+--- a/third_party/mbedtls/repo/CMakeLists.txt
-++++ b/third_party/mbedtls/repo/CMakeLists.txt
-+@@ -192,7 +192,7 @@ if(CMAKE_COMPILER_IS_GNU)
-+ endif(CMAKE_COMPILER_IS_GNU)
-+ 
-+ if(CMAKE_COMPILER_IS_CLANG)
-+-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wwrite-strings -Wpointer-arith -Wimplicit-fallthrough -Wshadow -Wvla")
-++    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wwrite-strings -Wpointer-arith -Wimplicit-fallthrough -Wshadow -Wvla -Wno-error=documentation")
-+     set(CMAKE_C_FLAGS_RELEASE     "-O2")
-+     set(CMAKE_C_FLAGS_DEBUG       "-O0 -g3")
-+     set(CMAKE_C_FLAGS_COVERAGE    "-O0 -g3 --coverage")
-diff --git a/meta-networking/recipes-connectivity/openthread/ot-daemon_git.bb b/meta-networking/recipes-connectivity/openthread/ot-daemon_git.bb
-index f3f4c70fa2..1063b5bd42 100644
---- a/meta-networking/recipes-connectivity/openthread/ot-daemon_git.bb
-+++ b/meta-networking/recipes-connectivity/openthread/ot-daemon_git.bb
-@@ -12,6 +12,7 @@ SRCREV = "7dfde1f12923f03c9680be4d838b94b7a2320324"
- PV = "0.1+git${SRCPV}"
+@@ -19,3 +21,6 @@ EXTRA_OECONF += "--with-libpcap=${STAGING_DIR_HOST}/usr"
  
- SRC_URI = "git://github.com/openthread/openthread.git;protocol=https;branch=main \
-+           file://mbedtls.patch \
-            "
+ inherit siteinfo autotools-brokensep
  
- S = "${WORKDIR}/git"
++do_install:append() {
++    sed -i -e 's:${RECIPE_SYSROOT}::g' ${S}/src/defines.h
++}
 -- 
-2.37.2
+2.25.1
 
 
