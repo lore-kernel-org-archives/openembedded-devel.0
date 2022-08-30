@@ -2,60 +2,60 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D0F84C0502E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4A0BC0502C
 	for <webhook@archiver.kernel.org>; Tue, 30 Aug 2022 07:14:32 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com
- [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web08.8718.1661843656593304005
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
+ [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.web09.8759.1661843669936443384
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Aug 2022 00:14:28 -0700
+ Tue, 30 Aug 2022 00:14:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=TeO/piIK;
- spf=pass (domain: gmail.com, ip: 209.85.214.170,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=n4IR2Yyf;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id x23so10251073pll.7
+Received: by mail-pf1-f170.google.com with SMTP id 76so10498755pfy.3
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Aug 2022 00:14:28 -0700 (PDT)
+ Tue, 30 Aug 2022 00:14:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc;
-        bh=SbHNwCetkPlIJnueW0qoMq5bVj0dniFBEX8zrLCtGnQ=;
-        b=TeO/piIKEJOa/U0CY4NbpsoRqm96nfdSji/N77P66fjtK6FRsiQPawY46K5gtmnDA9
-         dtItVAvsdJfvTBOfenWKulQoQjzrzV91R7xWP1MpaKkX9fbDK2jwyDhMnoyEfv2ymVNz
-         nd2Uai4LqJC8UrFTWZvd8tJakT/JA9pdt0hmUL03G0IiGWQco3aRzeBVIisF5SKxE++d
-         koRK4YLoIpIiJ9b6fvkhg2gwIQM+sR+SLO+hRnvobzJBYZGuzlddr01KqloqnspynVf4
-         UohFYTewcgfr5HDD24sQgUbPcHfGnp//MCIZhMyyu91+lX6ZGI57i2qNK8BOquy0heNO
-         TArA==
+        bh=vL6Phr2xG7yPq2zVj6Jd+5t1UBzmfz9BViPRvSkbp3w=;
+        b=n4IR2Yyfc33Xcp3AJdsIGv1ryL4vRq1RxEfL7DHxv+5Z4qsCyrxS64ER7fBC7ZXaw4
+         BKhBhov7DJYylB8ljGoRcJI3DYmHEeGBXGu0iV/OYAtRd7TUUpQITHmuWnRsUaQaB0vh
+         X+pWw+Yp25ztqjEw/IX4u0HUKWkosrKh/iKeDEdiJu+udr0klaJ4JB1ffWOMjWHd3PXn
+         IQr7d+pqEgYFSkTTUUeQh+QtTbNulJQp7NNswJVpT3tvPWZLaO6zrhUCKgzNnZ4i/X3u
+         FxRJjzIHzGPonb2tl4jbfTT1mAJ4mC0mjMmuy3VW0XgQCDYXpxX7Pt2apfE/kiY0cmkK
+         vV9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
-        bh=SbHNwCetkPlIJnueW0qoMq5bVj0dniFBEX8zrLCtGnQ=;
-        b=XTXodWwiQMpdM2Mnd5Ucg7wySpn6x+JqfgPZEgt+7qWNCbQ1D2K/9DxZS2hiRzyX1v
-         LidejzXo1iMkR/5ctKGgFBsAmEj+cuSVjl/Pt3pSIGY/9NagIcnD+s2UyiLk6SQAjvew
-         25ovqJE+YSAzalW3B8k0IdsJI2TpIhLCgKVvC6gDg2l/Re6fqspi5+/k0kpmx5/zD7SD
-         4IVKNYk54PrQ1A6480w2GLPqLOrjzePLyu+qeVUfY6/7MixwKeqWMS831GqTjrbua5m4
-         0OD0AdZSOCR7COGyyQXnnH5+2zyZuZIaPH4W0ogWg2zUADBvkjz+KHnNDGHtitLCTy7t
-         9jtw==
-X-Gm-Message-State: ACgBeo11jGpTg/RJTDNX4isu+sswC1c6u3AMpoMJ0mYTnnKCMtqlz2lz
-	VB0Vlc5vJqEQergwlWVtsEcSs3xEWywNXA==
+        bh=vL6Phr2xG7yPq2zVj6Jd+5t1UBzmfz9BViPRvSkbp3w=;
+        b=C2x1lF3aCQUfC3V72i8Rf/MuqB9LlwyGKgQPfyZcGz/Y9P/nYw9bIWa5OMbR/budKH
+         Gh++NOlhcu3OsHFyO0X9b4Ktz1s1hBCyCbIXH87JfI0PC8AlRgkpLs0s4Ca0mdFX86+t
+         e5SC5fiU3WJkOMwwYO+E8jGVOSrfbrpzvZtN6Xed3/97MAcqZshaDpFxNryL7pGTt7i5
+         HTZcS+qMvfVwVkV2FgM/+YYpFcMAFsZvl4VPtYEhwTvxnsa6lOLUZrqMzaHak5OvLBeL
+         Fa7VFgxiThLnMEdFy+dQ67O2KfvUpRisGkdFcv92jm3RmA5qfLAtRMF5qod7IhupnTjH
+         vu2w==
+X-Gm-Message-State: ACgBeo077Cxfx5dC0rbINRA/uvhIR2WcVBcEgpkF+Plo2b/On6Q/2mKu
+	h2Yoi3BJAhbTHlQZ5pvCPl369Zw4uRDIPg==
 X-Google-Smtp-Source: 
- AA6agR4jJVXOdnSrmg8GbP+k7mUJPPSluu019yV2cVr6ysc4t87mRdIXZf4HuIZ7PfrxLX1v/vS+gQ==
-X-Received: by 2002:a17:902:cf43:b0:172:86f3:586a with SMTP id
- e3-20020a170902cf4300b0017286f3586amr19883525plg.71.1661843668000;
-        Tue, 30 Aug 2022 00:14:28 -0700 (PDT)
+ AA6agR53f/g/KNKF+QpRMfFOQoRGcFH187mMoSfj6wW50JSX/hD6r8eovNJJvRbE/NTA+uT0yYroGA==
+X-Received: by 2002:a63:4a47:0:b0:42b:e4a4:3aec with SMTP id
+ j7-20020a634a47000000b0042be4a43aecmr9111737pgl.512.1661843669074;
+        Tue, 30 Aug 2022 00:14:29 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::24e6])
         by smtp.gmail.com with ESMTPSA id
- z24-20020aa79f98000000b00537f9e32b00sm6041616pfr.37.2022.08.30.00.14.26
+ z24-20020aa79f98000000b00537f9e32b00sm6041616pfr.37.2022.08.30.00.14.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Aug 2022 00:14:27 -0700 (PDT)
+        Tue, 30 Aug 2022 00:14:28 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 14/21] radvd: Fix build on musl
-Date: Tue, 30 Aug 2022 00:14:06 -0700
-Message-Id: <20220830071413.3887189-14-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 15/21] linux-atm: Include missing string.h
+Date: Tue, 30 Aug 2022 00:14:07 -0700
+Message-Id: <20220830071413.3887189-15-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20220830071413.3887189-1-raj.khem@gmail.com>
 References: <20220830071413.3887189-1-raj.khem@gmail.com>
@@ -66,208 +66,122 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 30 Aug 2022 07:14:32 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98551
-
-Backport a patch from upstream to fix musl builds
-Merged inc file into bb file, makes it easy to use devtool
+ https://lists.openembedded.org/g/openembedded-devel/message/98552
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ude.h-change-in-46883f8a1a02fe42040d.patch | 32 +++++++++
- .../recipes-daemons/radvd/radvd.inc           | 67 ------------------
- .../recipes-daemons/radvd/radvd_2.19.bb       | 69 ++++++++++++++++++-
- 3 files changed, 99 insertions(+), 69 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/radvd/files/0001-Reverts-the-include.h-change-in-46883f8a1a02fe42040d.patch
- delete mode 100644 meta-networking/recipes-daemons/radvd/radvd.inc
+ ...-from-memcpy-and-strcpy-function-pro.patch | 87 +++++++++++++++++++
+ .../linux-atm/linux-atm_2.5.2.bb              |  3 +-
+ 2 files changed, 89 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/0001-include-string-h-from-memcpy-and-strcpy-function-pro.patch
 
-diff --git a/meta-networking/recipes-daemons/radvd/files/0001-Reverts-the-include.h-change-in-46883f8a1a02fe42040d.patch b/meta-networking/recipes-daemons/radvd/files/0001-Reverts-the-include.h-change-in-46883f8a1a02fe42040d.patch
+diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/0001-include-string-h-from-memcpy-and-strcpy-function-pro.patch b/meta-networking/recipes-support/linux-atm/linux-atm/0001-include-string-h-from-memcpy-and-strcpy-function-pro.patch
 new file mode 100644
-index 0000000000..57338d4713
+index 0000000000..81c5efd173
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/radvd/files/0001-Reverts-the-include.h-change-in-46883f8a1a02fe42040d.patch
-@@ -0,0 +1,32 @@
-+From 15f439c555289f900eb33111b010bf1266f97edb Mon Sep 17 00:00:00 2001
-+From: Jonathan Davies <jpds@protonmail.com>
-+Date: Thu, 25 Nov 2021 15:29:18 +0000
-+Subject: [PATCH] Reverts the include.h change in
-+ 46883f8a1a02fe42040dd8e48aec0ed871545d4d
++++ b/meta-networking/recipes-support/linux-atm/linux-atm/0001-include-string-h-from-memcpy-and-strcpy-function-pro.patch
+@@ -0,0 +1,87 @@
++From 5217cb7c829cf87771096c4ce41fd4648dca47cb Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 29 Aug 2022 16:36:21 -0700
++Subject: [PATCH] include string,h from memcpy and strcpy function prototype
 +
-+Closes: #158
-+
-+Upstream-Status: Backport [https://github.com/radvd-project/radvd/commit/06689f8c06f44c7e87f7ff1d814428f88375b53f]
-+Signed-off-by: Jonathan Davies <jpds@protonmail.com>
++Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ includes.h | 5 -----
-+ 1 file changed, 5 deletions(-)
++ src/led/address.c  | 1 +
++ src/led/display.c  | 1 +
++ src/lib/unix.c     | 1 +
++ src/maint/hediag.c | 1 +
++ src/sigd/kernel.c  | 1 +
++ src/sigd/policy.c  | 1 +
++ 6 files changed, 6 insertions(+)
 +
-+diff --git a/includes.h b/includes.h
-+index ef30b10..c528c86 100644
-+--- a/includes.h
-++++ b/includes.h
-+@@ -76,12 +76,7 @@
-+ #include <sys/sysctl.h>
++diff --git a/src/led/address.c b/src/led/address.c
++index 574e881..b5c5fbb 100644
++--- a/src/led/address.c
+++++ b/src/led/address.c
++@@ -31,6 +31,7 @@
 + #endif
 + 
-+-#if !defined(__GLIBC__) && defined(linux)
-+-#include <linux/if.h>
-+-#define IF_NAMESIZE IFNAMSIZ
-+-#else
-+ #include <net/if.h>
-+-#endif
++ #include <sys/ioctl.h>
+++#include <string.h>
++ #include <unistd.h>
++ #include <errno.h>
 + 
-+ #ifdef HAVE_NET_IF_DL_H
-+ #include <net/if_dl.h>
-diff --git a/meta-networking/recipes-daemons/radvd/radvd.inc b/meta-networking/recipes-daemons/radvd/radvd.inc
-deleted file mode 100644
-index 2afaa48411..0000000000
---- a/meta-networking/recipes-daemons/radvd/radvd.inc
-+++ /dev/null
-@@ -1,67 +0,0 @@
--SUMMARY = "IPv6 router advertisement daemon"
--DESCRIPTION = "radvd is the router advertisement daemon for IPv6. It \
--listens to router solicitations and sends router \
--advertisements as described in RFC 2461, Neighbor \
--Discovery for IP Version 6 (IPv6). With these \
--advertisements hosts can automatically configure their \
--addresses and some other parameters. They also can \
--choose a default router based on these advertisements."
--HOMEPAGE = "http://www.litech.org/radvd/"
--SECTION = "net"
--DEPENDS = "flex-native bison-native libdaemon "
--
--# License is BSD-Style (with advertising clause) but also has an additional 0th clause
--LICENSE = "radvd"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=73ebbf7182ae996e65e8fadc9a8c45db"
--
--SRC_URI = "http://v6web.litech.org/radvd/dist/radvd-${PV}.tar.gz \
--           file://radvd.init \
--           file://radvd.service \
--           file://volatiles.03_radvd \
--           file://radvd.default \
--           file://radvd.conf"
--
--inherit autotools useradd pkgconfig systemd
--
--SYSTEMD_SERVICE:${PN} = "radvd.service"
--SYSTEMD_AUTO_ENABLE = "disable"
--
--do_install:append () {
--    install -m 0755 -d ${D}${sysconfdir}/init.d \
--                       ${D}${sysconfdir}/default/volatiles \
--                       ${D}${docdir}/radvd
--    # Install init script and volatiles
--    install -m 0755 ${WORKDIR}/radvd.init ${D}${sysconfdir}/init.d/radvd
--    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/radvd
--    sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/radvd
--    sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/radvd
--    sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/radvd
--
--    install -m 0644 ${WORKDIR}/volatiles.03_radvd ${D}${sysconfdir}/default/volatiles/03_radvd
--
--    # Install systemd service files
--    install -d ${D}${systemd_unitdir}/system
--    install -m 0644 ${WORKDIR}/radvd.service ${D}${systemd_unitdir}/system
--    sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' \
--           -e 's#@SBINDIR@#${sbindir}#g' \
--           -e 's#@BASE_BINDIR@#${base_bindir}#g' ${D}${systemd_unitdir}/system/radvd.service
--
--    # Install default environment file
--    install -m 0644 ${WORKDIR}/radvd.default ${D}${sysconfdir}/default/radvd
--
--    # Documentation
--    for i in radvd.conf.example README; do \
--        install -m 0644 ${S}/$i ${D}${docdir}/radvd; \
--    done
--
--    install -m 0644 ${WORKDIR}/radvd.conf ${D}${sysconfdir}/radvd.conf
--}
--
--USERADD_PACKAGES = "${PN}"
--USERADD_PARAM:${PN} = "--system --home ${localstatedir}/run/radvd/ -M -g nogroup radvd"
--
--pkg_postinst:${PN} () {
--    if [ -z "$D" -a -x /etc/init.d/populate-volatile.sh ]; then
--        /etc/init.d/populate-volatile.sh update
--    fi
--}
-diff --git a/meta-networking/recipes-daemons/radvd/radvd_2.19.bb b/meta-networking/recipes-daemons/radvd/radvd_2.19.bb
-index 553987e3d0..f9f810abdd 100644
---- a/meta-networking/recipes-daemons/radvd/radvd_2.19.bb
-+++ b/meta-networking/recipes-daemons/radvd/radvd_2.19.bb
-@@ -1,5 +1,70 @@
-+SUMMARY = "IPv6 router advertisement daemon"
-+DESCRIPTION = "radvd is the router advertisement daemon for IPv6. It \
-+listens to router solicitations and sends router \
-+advertisements as described in RFC 2461, Neighbor \
-+Discovery for IP Version 6 (IPv6). With these \
-+advertisements hosts can automatically configure their \
-+addresses and some other parameters. They also can \
-+choose a default router based on these advertisements."
-+HOMEPAGE = "http://www.litech.org/radvd/"
-+SECTION = "net"
-+DEPENDS = "flex-native bison-native libdaemon "
- 
--require radvd.inc
-+# License is BSD-Style (with advertising clause) but also has an additional 0th clause
-+LICENSE = "radvd"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=73ebbf7182ae996e65e8fadc9a8c45db"
- 
--SRC_URI[md5sum] = "e9c425ac48ecb96ea5ea2912c78969f9"
-+SRC_URI = "http://v6web.litech.org/radvd/dist/radvd-${PV}.tar.gz \
-+           file://radvd.init \
-+           file://radvd.service \
-+           file://volatiles.03_radvd \
-+           file://radvd.default \
-+           file://radvd.conf \
-+           file://0001-Reverts-the-include.h-change-in-46883f8a1a02fe42040d.patch \
++diff --git a/src/led/display.c b/src/led/display.c
++index d78a15d..b835e89 100644
++--- a/src/led/display.c
+++++ b/src/led/display.c
++@@ -5,6 +5,7 @@
++ #if HAVE_CONFIG_H
++ #include <config.h>
++ #endif
+++#include <string.h>
++ 
++ #include <atm.h>
++ #include <atmd.h>
++diff --git a/src/lib/unix.c b/src/lib/unix.c
++index 34aa465..d5bef54 100644
++--- a/src/lib/unix.c
+++++ b/src/lib/unix.c
++@@ -8,6 +8,7 @@
++ 
++ #include <stdlib.h>
++ #include <stdio.h>
+++#include <string.h>
++ #include <unistd.h>
++ #include <errno.h>
++ #include <sys/types.h>
++diff --git a/src/maint/hediag.c b/src/maint/hediag.c
++index 8a4312a..a4f792f 100644
++--- a/src/maint/hediag.c
+++++ b/src/maint/hediag.c
++@@ -1,5 +1,6 @@
++ #include <stdio.h>
++ #include <stdlib.h>
+++#include <string.h>
++ #include <unistd.h>
++ #include <sys/ioctl.h>
++ #include <sys/types.h>
++diff --git a/src/sigd/kernel.c b/src/sigd/kernel.c
++index 9ee74b1..2491626 100644
++--- a/src/sigd/kernel.c
+++++ b/src/sigd/kernel.c
++@@ -8,6 +8,7 @@
++ 
++ #include <stdlib.h>
++ #include <stdio.h>
+++#include <string.h>
++ #include <errno.h>
++ #include <assert.h>
++ 
++diff --git a/src/sigd/policy.c b/src/sigd/policy.c
++index 2cfb42d..87223a7 100644
++--- a/src/sigd/policy.c
+++++ b/src/sigd/policy.c
++@@ -6,6 +6,7 @@
++ #include <config.h>
++ #endif
++ 
+++#include <string.h>
++ #include <atm.h>
++ #include <atmd.h>
++ 
+diff --git a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
+index bb79b78568..70125102cd 100644
+--- a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
++++ b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
+@@ -14,7 +14,8 @@ SRC_URI = "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BPN}-${P
+            file://0001-IFNAMSIZ-is-defined-in-net-if.h.patch \
+            file://0001-saaldump-atmdump-Include-linux-sockios.h-for-SIOCGST.patch \
+            file://0001-make-Add-PREFIX-knob.patch \
+-"
++           file://0001-include-string-h-from-memcpy-and-strcpy-function-pro.patch \
 +           "
- SRC_URI[sha256sum] = "c36470706fec3a9e6bed394ffea08acaff5dac647848d26b96bb9b9c65d58da0"
-+
-+inherit autotools useradd pkgconfig systemd
-+
-+SYSTEMD_SERVICE:${PN} = "radvd.service"
-+SYSTEMD_AUTO_ENABLE = "disable"
-+
-+do_install:append () {
-+    install -m 0755 -d ${D}${sysconfdir}/init.d \
-+                       ${D}${sysconfdir}/default/volatiles \
-+                       ${D}${docdir}/radvd
-+    # Install init script and volatiles
-+    install -m 0755 ${WORKDIR}/radvd.init ${D}${sysconfdir}/init.d/radvd
-+    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/radvd
-+    sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/radvd
-+    sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/radvd
-+    sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/radvd
-+
-+    install -m 0644 ${WORKDIR}/volatiles.03_radvd ${D}${sysconfdir}/default/volatiles/03_radvd
-+
-+    # Install systemd service files
-+    install -d ${D}${systemd_unitdir}/system
-+    install -m 0644 ${WORKDIR}/radvd.service ${D}${systemd_unitdir}/system
-+    sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' \
-+           -e 's#@SBINDIR@#${sbindir}#g' \
-+           -e 's#@BASE_BINDIR@#${base_bindir}#g' ${D}${systemd_unitdir}/system/radvd.service
-+
-+    # Install default environment file
-+    install -m 0644 ${WORKDIR}/radvd.default ${D}${sysconfdir}/default/radvd
-+
-+    # Documentation
-+    for i in radvd.conf.example README; do \
-+        install -m 0644 ${S}/$i ${D}${docdir}/radvd; \
-+    done
-+
-+    install -m 0644 ${WORKDIR}/radvd.conf ${D}${sysconfdir}/radvd.conf
-+}
-+
-+USERADD_PACKAGES = "${PN}"
-+USERADD_PARAM:${PN} = "--system --home ${localstatedir}/run/radvd/ -M -g nogroup radvd"
-+
-+pkg_postinst:${PN} () {
-+    if [ -z "$D" -a -x /etc/init.d/populate-volatile.sh ]; then
-+        /etc/init.d/populate-volatile.sh update
-+    fi
-+}
+ 
+ SRC_URI:append:libc-musl = " file://musl-no-on_exit.patch"
+ 
 -- 
 2.37.2
 
