@@ -1,92 +1,103 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <mingli.yu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 244AAECAAD8
-	for <webhook@archiver.kernel.org>; Wed, 31 Aug 2022 05:41:59 +0000 (UTC)
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com
- [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web12.22021.1661924508961034100
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5EDA7ECAAD4
+	for <webhook@archiver.kernel.org>; Wed, 31 Aug 2022 09:45:30 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com
+ [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.23625.1661939121333162529
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Aug 2022 22:41:49 -0700
+ Wed, 31 Aug 2022 02:45:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Gri9kCZE;
- spf=pass (domain: gmail.com, ip: 209.85.210.182,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id z187so13407702pfb.12
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Aug 2022 22:41:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc;
-        bh=mAKC91FV29HIA5Ag8Vigr8KIW1A8cjYWQ6yN31KLXLI=;
-        b=Gri9kCZEvA2NgJa5t3BtP9Zfznc70OIpZEBaP9l8VIqWQIkltveXM41WrDApDGBtUp
-         x0RxKiBM4vpGKHTUhphqdWXz5nv6zvnWIpQWaGHpwERDZK/qxmL9p9kQqM16ktFcI0qI
-         wtWOzrfBIpuNY1CsbSnrJzFMNXC+1Du9EC/HxmcGm7y5rPczWw7p4xu2M+sffwlOfSth
-         FCZnQPcsjByTyzQWm5vl0o7NVHsXurDSi/tEI2ZsfmKhS4DhogfATpgJ8wb5pZuKPw5X
-         YCpPRTz7PHicnA6FS7fvIfq8zrxjl1p6UPSt0M34kJZTieLkZ8FWHIrtTRPdujpXP1La
-         Rb8Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
-        bh=mAKC91FV29HIA5Ag8Vigr8KIW1A8cjYWQ6yN31KLXLI=;
-        b=1w2w3IYb0mHea9X5hVk7Yy/ZP53EhHV8sjFz3CZ+roy3roMHgCxJlOw7zQpCdR1KBo
-         qF4eOPmMEJ9HpLiQ1ZYZ6LpyxTKOL1OSZEnTLo9Rhm7k0USXee8G5pwvcOrgAtDvRpg2
-         rSk6BfDj76dQyCghsup4kP28f4avOust6FJGjCo8Rw6qx4tcdtGxQaeQj2F3S+xtLCiD
-         clomjIA2AHNwLj4+Bpt/59s5/xZz/PAcdDINjc5H2HPwikupNanqlRXf8wBHQcKN3Miv
-         YN9fNPdjJo7hv9sMLrBhotsSdul6/nnQNWOvBIqC3EzKaw9E/hAG52wnNNfNeNQkXnfb
-         uA9Q==
-X-Gm-Message-State: ACgBeo1Ki9iT3f+fuHrvHgCvQR4DI4JchT6PRMkVEVms+VOhhQpTKuS/
-	lEmf2bV1FN4TVESElE2ZgUyYawKyHBG+kg==
-X-Google-Smtp-Source: 
- AA6agR47j3xmkSKQNbtQjXH34jyCyc7RSoKckpx9dtEfKlP9mAQNre/SzyETeraBY0mIpXWiS9Fy1g==
-X-Received: by 2002:a63:6a48:0:b0:42a:3cab:cc36 with SMTP id
- f69-20020a636a48000000b0042a3cabcc36mr21033187pgc.135.1661924508117;
-        Tue, 30 Aug 2022 22:41:48 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::24e6])
-        by smtp.gmail.com with ESMTPSA id
- u4-20020a170902e80400b001733c13cc81sm7275181plg.169.2022.08.30.22.41.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Aug 2022 22:41:47 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 5/5] nlohmann-fifo: Update to tip of trunk
-Date: Tue, 30 Aug 2022 22:41:39 -0700
-Message-Id: <20220831054139.3493726-5-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.37.3
-In-Reply-To: <20220831054139.3493726-1-raj.khem@gmail.com>
-References: <20220831054139.3493726-1-raj.khem@gmail.com>
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=QVCnvjsn;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
+ invalid domain name (domain: windriver.com, ip: 205.220.178.238,
+ mailfrom: prvs=6242fbc68e=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
+ 27V8pZtx011220
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 31 Aug 2022 09:45:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+ h=from : to :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=PPS06212021;
+ bh=3gc+TlVYaotPGdw3c8pDSTqCRVjWTW9aYz0gp/XXF58=;
+ b=QVCnvjsnJzgD/fiNXaGSzUKfRTDnJAazEvKeekBz1qrvh+Bn2zXGZ+md7NHp6+ZqqyGm
+ SF7wUp8A6Ch7xmD3C0M2rLY8FidRDy8jh4mp9VgcRcMG6547gKwGBVOjTw7eqP+E/pxB
+ 1QDZ5pqBGTLGyPMFSHHAntfqiNrhUvkwj4WLK/ZvadS1YGtKfR+6jKo+0va9zZECAgHS
+ gcRMlX65dW8l79CxTamxOrMfd0sZBKGE7nd6zkcIe55YBv7AK8nx2ni3xzH+jOt0ysyV
+ wcGZ8EGRTCurSplx11nTK3ZVe4x/RCsHSv1BZhe9YNvudh9heF91WsF9lR/c646Wawf+ mQ==
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com
+ [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3j7a89kj28-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed, 31 Aug 2022 09:45:20 +0000
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Wed, 31 Aug 2022 02:45:19 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Wed, 31 Aug 2022 02:45:18 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-python][PATCH 1/2] python3-pyzmq: Add RDEPENDS for
+ python3-pyzmq-ptest
+Date: Wed, 31 Aug 2022 17:45:16 +0800
+Message-ID: <20220831094517.2468260-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: h-l3jE6rh_2brT8slzxCeIiGYHBxD5mD
+X-Proofpoint-GUID: h-l3jE6rh_2brT8slzxCeIiGYHBxD5mD
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.517,FMLib:17.11.122.1
+ definitions=2022-08-31_05,2022-08-31_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ mlxlogscore=940
+ lowpriorityscore=0 priorityscore=1501 malwarescore=0 suspectscore=0
+ phishscore=0 adultscore=0 spamscore=0 mlxscore=0 clxscore=1015
+ impostorscore=0 bulkscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.12.0-2207270000 definitions=main-2208310048
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 31 Aug 2022 05:41:59 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 31 Aug 2022 09:45:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98574
+ https://lists.openembedded.org/g/openembedded-devel/message/98576
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+From: Mingli Yu <mingli.yu@windriver.com>
+
+Fixes:
+  # ./run-ptest
+  ./run-ptest: line 3: pytest: command not found
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python3-pyzmq_23.2.1.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb b/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb
-index ace3215396..5a130ebda4 100644
---- a/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb
-+++ b/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb
-@@ -8,7 +8,7 @@ SRC_URI = "git://github.com/nlohmann/fifo_map.git;branch=master;protocol=https"
+diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_23.2.1.bb b/meta-python/recipes-devtools/python/python3-pyzmq_23.2.1.bb
+index 40cb22b5e..78545f5c3 100644
+--- a/meta-python/recipes-devtools/python/python3-pyzmq_23.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pyzmq_23.2.1.bb
+@@ -30,6 +30,10 @@ RDEPENDS:${PN} += "\
+         ${PYTHON_PN}-multiprocessing \
+ "
  
- PV = "1.0.0+git${SRCPV}"
- 
--SRCREV = "0dfbf5dacbb15a32c43f912a7e66a54aae39d0f9"
-+SRCREV = "d732aaf9a315415ae8fd7eb11e3a4c1f80e42a48"
- 
- UPSTREAM_CHECK_COMMITS = "1"
- 
++RDEPENDS:${PN}-ptest += "\
++        ${PYTHON_PN}-pytest \
++"
++
+ RDEPENDS:${PN}-ptest += "\
+         ${PN}-test \
+ "
 -- 
-2.37.3
+2.25.1
 
 
