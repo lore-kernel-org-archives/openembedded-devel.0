@@ -2,61 +2,63 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4992FECAAD3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 48AB3C0502A
 	for <webhook@archiver.kernel.org>; Wed, 31 Aug 2022 05:41:49 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com
- [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web09.22140.1661924504270755763
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
+ [209.85.215.169])
+ by mx.groups.io with SMTP id smtpd.web12.22019.1661924506334041682
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Aug 2022 22:41:44 -0700
+ Tue, 30 Aug 2022 22:41:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=NdsUsEX7;
- spf=pass (domain: gmail.com, ip: 209.85.210.176,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=OiXKPil2;
+ spf=pass (domain: gmail.com, ip: 209.85.215.169,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id 76so13437136pfy.3
+Received: by mail-pg1-f169.google.com with SMTP id q9so12613285pgq.6
         for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Aug 2022 22:41:44 -0700 (PDT)
+ Tue, 30 Aug 2022 22:41:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc;
-        bh=ciWEDn3bGkuVCCLYY0GRPfwOcG/woUCAecr2WYpfI50=;
-        b=NdsUsEX7FJOVfluw0QTLtlX2nnqwRMX73fGLMEjvA8SLEDN0JONP9L8QO/FiGBdT1L
-         c2u5vEZr/qdiAu8cm5gXowTVyJwebPPG9SPtK7dftMeBXCAsCyQJ1ZUQUaKVrq8d8Zwc
-         J2a3V+3b0dVvBFljkGABTCXHnuw10tqIjxHG8d/XMGsHF65DF1XRYQdND9GGQSbsem7S
-         gD8pcyLgzvmoK1BdBmxyufwBQ3A6sFm1y+bSkxX/atfyxuUtdDA/iPZkI7Mq0gvrhTfw
-         VNMBZ0xpwmJIBX+kan2a0VIZb9VSpBD/Fym+TE3moMBnkUv4Gt8hinUbsYkjk7YVoc0C
-         1myw==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc;
+        bh=hNQ8q+ZZ2ybofM9DjVD5wKw9hMK/uRZMRk3kfCL+eok=;
+        b=OiXKPil26PzVB83NyZbdwFbq0oWVBy4n/KBE+Wu5jHTfhL7IYE5Ib/7eDkp+xZB0Tk
+         YaIdfJGoufCrQQl8syFOaWMGSMimOjSvpM41oiNkVQqjIbRgD5sw1N9tKvRtXK3jDMH+
+         ILQa+wMB5j1O/0yeLVQFn7Vhz3j8CrqOX/WuaFD1YLeERKJXBuDrG30JF80E/S0jqjZQ
+         eODb0fk5PA5xZ+zfpYieRmQ8UTpLusohuQURANnVrZyJm2GeQsXG2IjHCslG/JZ46nim
+         eyGc0LqfXZAvZDKge0BfTAN/ZQ3KEy89GmcQbFSMuvTCUZdYdIVt4KbawNsGyQSobuQK
+         BoUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc;
-        bh=ciWEDn3bGkuVCCLYY0GRPfwOcG/woUCAecr2WYpfI50=;
-        b=KE2I440ge+tEkcmNd1J+vvrkzOLCZo5iI/tnKdzerZV6OYOYdhvYziZidTFYkJI5tq
-         2Pm1mojM1Kar2JR0/xUwRvyhYFFHn6CzupfoX5LRi0PnDIGh5ZlBJLEJd3Axd/TEOpDQ
-         a/01X0SeC6j+nbxGAXBrD5EBulaJUIiSe+NkR7KuGAqJ3XE5dq+bUfe7okG3ZfPEmsB9
-         HrRSJBx2Az/tcbEZa9JQ2pNXFCAl+m4BvVukI+ub7PqWlRYvoD0jqn3xlC1+9mGi3d/N
-         Gqu1+Cu/NpTGMsNTdbIJZsUY/VSKiukJc8NPzYcZpRA2bCrL5dBXb4CZrm812KKBBOc5
-         B1iw==
-X-Gm-Message-State: ACgBeo1k0jpCFJzjj/4+M7WWPUZS//GsOOvC4f+VFY4y9fly/4D2nN8C
-	s5dmiyr4ixPQIjBHCHJOVyEHu4QU1NVBNA==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
+        bh=hNQ8q+ZZ2ybofM9DjVD5wKw9hMK/uRZMRk3kfCL+eok=;
+        b=3HaetmHxh+d8mlVCSg/4mYUipzB8dCn0AVSLOhiRFFo7rMRNmXJe8tjgjU/kl5AlOE
+         dTbdy9d2t3PyTSml1XNQmD3eJ71DrjaBh5o8lBL18mDKXmv/E5EbHIJUFumm3ED7/WDj
+         ZUMKy1fYdtCUbgUUK3adB7sgpH2I8SuO2NJJpqBS5vcCbvsMijl0CAXlIY+RH3vmgr7v
+         i9b2g/XSvh2NNW3CQ2VykzvU4h/avzmS6SSARspDspRgxYFc7WLccVQBxHWT0WCzKS0D
+         BWRvSM2+qEEefLkb0yalHzkmoVt0bGWpbr4GugLqF1r1OKjYonmxATQ9XzRZWRD+QgyD
+         AAXw==
+X-Gm-Message-State: ACgBeo17Ei0AjI+XaN5eMTDriIxUmNjnNIRzjEmD1Mg6fhuOkECSHgjl
+	HBgzoLXCZi8NhPW6KHwP2sdv4GK4JQTS1A==
 X-Google-Smtp-Source: 
- AA6agR6ydzFc3KZGQc62IVtzbRxsv2LDchAK/dJXJu8e/2ahXI+Jb/XTMZkZoVMv1GK/NzsNURiEoQ==
-X-Received: by 2002:a65:4941:0:b0:42a:8c1b:6b6c with SMTP id
- q1-20020a654941000000b0042a8c1b6b6cmr21175944pgs.375.1661924503201;
-        Tue, 30 Aug 2022 22:41:43 -0700 (PDT)
+ AA6agR4sZJMczkLKdtJb4WV5dEOQHFRF4ipRRl5NKyCi3TiHNxno2JJqIiXuOQTPb2qoE3TWBdtOCw==
+X-Received: by 2002:a63:4750:0:b0:42b:609d:538a with SMTP id
+ w16-20020a634750000000b0042b609d538amr20944478pgk.217.1661924505491;
+        Tue, 30 Aug 2022 22:41:45 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::24e6])
         by smtp.gmail.com with ESMTPSA id
- u4-20020a170902e80400b001733c13cc81sm7275181plg.169.2022.08.30.22.41.42
+ u4-20020a170902e80400b001733c13cc81sm7275181plg.169.2022.08.30.22.41.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Aug 2022 22:41:42 -0700 (PDT)
+        Tue, 30 Aug 2022 22:41:44 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/5] rasdaemon: Upgrade to 0.6.8
-Date: Tue, 30 Aug 2022 22:41:35 -0700
-Message-Id: <20220831054139.3493726-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/5] soci: Fix build with clang 15
+Date: Tue, 30 Aug 2022 22:41:37 -0700
+Message-Id: <20220831054139.3493726-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.3
+In-Reply-To: <20220831054139.3493726-1-raj.khem@gmail.com>
+References: <20220831054139.3493726-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
@@ -64,144 +66,68 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 31 Aug 2022 05:41:49 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98570
-
-Fix build on musl while here
-Drop unneeded header include patch which is fixed upstream
+ https://lists.openembedded.org/g/openembedded-devel/message/98572
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Fix-system-header-includes.patch     | 44 -------------------
- ...-version-of-strerror_r-on-non-glibc-.patch | 35 +++++++++++++++
- ...{rasdaemon_0.6.7.bb => rasdaemon_0.6.8.bb} |  8 +---
- 3 files changed, 37 insertions(+), 50 deletions(-)
- delete mode 100644 meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/0001-Fix-system-header-includes.patch
- create mode 100644 meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/0001-libtrace-Use-XSI-version-of-strerror_r-on-non-glibc-.patch
- rename meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/{rasdaemon_0.6.7.bb => rasdaemon_0.6.8.bb} (92%)
+ ...Do-not-use-std-shuffle-with-clang-15.patch | 32 +++++++++++++++++++
+ meta-oe/recipes-dbs/soci/soci_4.0.3.bb        |  4 ++-
+ 2 files changed, 35 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-dbs/soci/soci/0001-Do-not-use-std-shuffle-with-clang-15.patch
 
-diff --git a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/0001-Fix-system-header-includes.patch b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/0001-Fix-system-header-includes.patch
-deleted file mode 100644
-index 0164321312..0000000000
---- a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/0001-Fix-system-header-includes.patch
-+++ /dev/null
-@@ -1,44 +0,0 @@
--From 18786db1ad03716267927d983c83275469a1478a Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 8 May 2020 12:27:19 -0700
--Subject: [PATCH] Fix system header includes
--
--Use poll.h instead of sys/poll.h
--Fixes
--warning: #warning redirecting incorrect #include <sys/poll.h> to <poll.h> [-Wcpp]
--
--Include limits.h for PATH_MAX
--
--Fixes
--ras-events.c:359:16: error: 'PATH_MAX' undeclared (first use in this function)
--  359 |  char pipe_raw[PATH_MAX];
--      |                ^~~~~~~~
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- ras-events.c | 3 ++-
-- 1 file changed, 2 insertions(+), 1 deletion(-)
--
--diff --git a/ras-events.c b/ras-events.c
--index 511c93d..400e740 100644
----- a/ras-events.c
--+++ b/ras-events.c
--@@ -18,13 +18,14 @@
-- #include <dirent.h>
-- #include <errno.h>
-- #include <fcntl.h>
--+#include <limits.h>
--+#include <poll.h>
-- #include <stdio.h>
-- #include <stdlib.h>
-- #include <string.h>
-- #include <unistd.h>
-- #include <sys/stat.h>
-- #include <sys/types.h>
---#include <sys/poll.h>
-- #include <signal.h>
-- #include <sys/signalfd.h>
-- #include "libtrace/kbuffer.h"
---- 
--2.26.2
--
-diff --git a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/0001-libtrace-Use-XSI-version-of-strerror_r-on-non-glibc-.patch b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/0001-libtrace-Use-XSI-version-of-strerror_r-on-non-glibc-.patch
+diff --git a/meta-oe/recipes-dbs/soci/soci/0001-Do-not-use-std-shuffle-with-clang-15.patch b/meta-oe/recipes-dbs/soci/soci/0001-Do-not-use-std-shuffle-with-clang-15.patch
 new file mode 100644
-index 0000000000..fef71afde5
+index 0000000000..eb29627c6d
 --- /dev/null
-+++ b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/0001-libtrace-Use-XSI-version-of-strerror_r-on-non-glibc-.patch
-@@ -0,0 +1,35 @@
-+From e415152b51eacab8705b6b3274cc0d1a274772e0 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-dbs/soci/soci/0001-Do-not-use-std-shuffle-with-clang-15.patch
+@@ -0,0 +1,32 @@
++From e5f72c656829402c6f70e7416039bc18f0c26485 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 30 Aug 2022 19:54:35 -0700
-+Subject: [PATCH] libtrace: Use XSI version of strerror_r on non glibc systems
++Date: Tue, 30 Aug 2022 22:17:14 -0700
++Subject: [PATCH] Do not use std::shuffle with clang 15
 +
-+The version used is glibc specific therefore make it so
-+and provide a fallback for non-glibc systems
++This fails to compile although its preferred approach for c++11 and
++newer
 +
-+Upstream-Status: Submitted [https://github.com/mchehab/rasdaemon/pull/70]
++See
++https://github.com/SOCI/soci/issues/984
++
++Upstream-Status: Inappropriate [Workaround]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ libtrace/event-parse.c | 6 ++++++
-+ 1 file changed, 6 insertions(+)
++ cmake/SociConfig.cmake | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+diff --git a/libtrace/event-parse.c b/libtrace/event-parse.c
-+index 6c705c3..6b651d5 100644
-+--- a/libtrace/event-parse.c
-++++ b/libtrace/event-parse.c
-+@@ -5071,7 +5071,13 @@ int pevent_strerror(struct pevent *pevent, enum pevent_errno errnum,
-+ 	const char *msg;
++diff --git a/cmake/SociConfig.cmake b/cmake/SociConfig.cmake
++index 492e1837..f24fd9a6 100644
++--- a/cmake/SociConfig.cmake
+++++ b/cmake/SociConfig.cmake
++@@ -94,6 +94,7 @@ else()
++     set(SOCI_CXX11 ON)
++     set(SOCI_CXX_VERSION_FLAGS "-std=c++11")
++     add_definitions(-DCATCH_CONFIG_CPP11_NO_IS_ENUM)
+++    add_definitions(-DCATCH_CONFIG_CPP11_NO_SHUFFLE)
 + 
-+ 	if (errnum >= 0) {
-++#if defined(__GLIBC__)
-+ 		msg = strerror_r(errnum, buf, buflen);
-++#else
-++		if (strerror_r(errnum, buf, buflen) != 0)
-++			snprintf(buf, buflen, "unknown error %i", errnum);
-++		msg = buf;
-++#endif
-+ 		if (msg != buf) {
-+ 			size_t len = strlen(msg);
-+ 			memcpy(buf, msg, min(buflen - 1, len));
++     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SOCI_GCC_CLANG_COMMON_FLAGS} ${SOCI_CXX_VERSION_FLAGS}")
++ 
 +-- 
 +2.37.3
 +
-diff --git a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.6.7.bb b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.6.8.bb
-similarity index 92%
-rename from meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.6.7.bb
-rename to meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.6.8.bb
-index f30822b06e..3a525e8a15 100644
---- a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.6.7.bb
-+++ b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.6.8.bb
-@@ -4,11 +4,11 @@ LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d3070efe0afa3dc41608bd82c00bb0dc"
+diff --git a/meta-oe/recipes-dbs/soci/soci_4.0.3.bb b/meta-oe/recipes-dbs/soci/soci_4.0.3.bb
+index ff47e5033e..71ab80c48a 100644
+--- a/meta-oe/recipes-dbs/soci/soci_4.0.3.bb
++++ b/meta-oe/recipes-dbs/soci/soci_4.0.3.bb
+@@ -5,7 +5,9 @@ LIC_FILES_CHKSUM = "file://LICENSE_1_0.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
+ SECTION = "libs"
+ DEPENDS = "boost"
  
- SRC_URI = "git://github.com/mchehab/rasdaemon.git;branch=master;protocol=https \
--           file://0001-Fix-system-header-includes.patch \
-+           file://0001-libtrace-Use-XSI-version-of-strerror_r-on-non-glibc-.patch \
-            file://rasdaemon.service \
-            file://init"
+-SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BP}/${BP}.tar.gz"
++SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BP}/${BP}.tar.gz \
++           file://0001-Do-not-use-std-shuffle-with-clang-15.patch \
++           "
+ SRC_URI[sha256sum] = "615e5f7e4b52007f3a3b4050a99aadf6346b56b5098eb08b3a650836083c6a33"
  
--SRCREV = "aa96737648d867a3d73e4151d05b54bbab494605"
-+SRCREV = "c2255178a49f62c53009a456bc37dd5e37332f09"
- 
- S = "${WORKDIR}/git"
- 
-@@ -32,10 +32,6 @@ PACKAGECONFIG[abrt-report] = "--enable-abrt-report,--disable-abrt-report"
- DEPENDS:append:libc-musl = " argp-standalone"
- LDFLAGS:append:libc-musl = " -largp"
- 
--do_configure:prepend () {
--	( cd ${S}; autoreconf -vfi )
--}
--
- do_install:append() {
- 	install -d ${D}${sysconfdir}/init.d
- 	install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rasdaemon
+ TESTCONFIG = '-DSOCI_TEST_EMPTY_CONNSTR="dummy" -DSOCI_TEST_SQLITE3_CONNSTR="test.db" \
 -- 
 2.37.3
 
