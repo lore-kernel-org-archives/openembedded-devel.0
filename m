@@ -1,110 +1,114 @@
-Return-Path: <mingli.yu@windriver.com>
+Return-Path: <jandryuk@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5EDDAECAAD5
-	for <webhook@archiver.kernel.org>; Wed, 31 Aug 2022 09:45:30 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com
- [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web08.23252.1661939121774606002
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 99F7FECAAD1
+	for <webhook@archiver.kernel.org>; Wed, 31 Aug 2022 13:31:31 +0000 (UTC)
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com
+ [209.85.218.45])
+ by mx.groups.io with SMTP id smtpd.web12.25585.1661952687630027944
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 Aug 2022 02:45:22 -0700
+ Wed, 31 Aug 2022 06:31:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=HZhnxoTZ;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
- invalid domain name (domain: windriver.com, ip: 205.220.178.238,
- mailfrom: prvs=6242fbc68e=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
- 27V8pZu0011220
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 Aug 2022 09:45:21 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
- h=from : to :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=PPS06212021;
- bh=VdfdyA0ahzDcS1EkPl41GRsoyAPYU5NEEiRSNDx/yU4=;
- b=HZhnxoTZlQbJN72BnW9qw0yKjZNxkOPJRtYo6iLSEsUUgTeAkNW7Ll7eau+RRC9iOvYu
- K4aSmPTFvH/3Bc1SzCGKDbHY9sNn7EEL+9k3zal9o3lk8oXUCFn9LZTMxsTTmA03TyZ9
- 9Ac/iQ+J0mNa0wvDJbOG01HUpn+pDsOVbaoEDrBbqxD3bhE1iu6IBdQVP5DQxrZWN+5l
- dJU/3Y6KrsF3FT4vOW8Rlw+6bPqz1JEFXc4dxkGDzjPpqVAzQzrqnyduCGPKGdeYB/Wt
- ExOhS3JI6KUyYRqqidbNXfUjlwswmlc9u7C0d8Tc/E64BR/bnDneHpoPslWN+LNWqeHn gw==
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com
- [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3j7a89kj28-2
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 Aug 2022 09:45:20 +0000
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Wed, 31 Aug 2022 02:45:20 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27; Wed, 31 Aug 2022 02:45:20 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Wed, 31 Aug 2022 02:45:19 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH 2/2] python3-pyzmq: Fix buildpaths issue
-Date: Wed, 31 Aug 2022 17:45:17 +0800
-Message-ID: <20220831094517.2468260-2-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220831094517.2468260-1-mingli.yu@windriver.com>
-References: <20220831094517.2468260-1-mingli.yu@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Rk//8HNS;
+ spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: jandryuk@gmail.com)
+Received: by mail-ej1-f45.google.com with SMTP id cu2so28463942ejb.0
+        for <openembedded-devel@lists.openembedded.org>;
+ Wed, 31 Aug 2022 06:31:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc;
+        bh=d/cO5Pk5tDJ4fQif4TuqX2844Ol8EVy+w43kvOlLMB0=;
+        b=Rk//8HNSWAo9rztlidsR/YL6BeSK3C5NZy8GLaTyyb1a30Pt0vim9BvEBlmE+iVGJt
+         6cr6eb81fLeZTfA7P1j7LRP9lo6i+aXKhp0rCo9zkH77WVSCiB1G+h9ylbpkXnLez85l
+         rOGNAeT06TUv14NoeMGRQ0eWDloWH0mjFQxwQ9kyqSZWfe7W71ZwT/I0Jb72APR3EoAB
+         pQytHNhUtJQSWilmEs5y4PgHmYNG3XeqTVc6HZ0Ot8xTTO4SpuIdUGlnFeZvQjBCZLdW
+         BKPW09HyxIE+1e8MqVObMcdXEiel1WoT6IZ/b/Jnx3zU+Wc486o8adfZNC4l/jCtuNOO
+         XC4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc;
+        bh=d/cO5Pk5tDJ4fQif4TuqX2844Ol8EVy+w43kvOlLMB0=;
+        b=UtCpClIpmTG8VoD4xZOEmqp2C0I6BHq3UYMKFgboiki1dKMLEU/dM14MZQv2qW0+aI
+         1OvJ2TyQBR3Mk2jgqf4UfzYmb1M37SrEg68eYvrDTroAJIDWz5KZ8+TkuABITtAVn9D5
+         m0Fn/Hp9+8RgaJJq3VOEdyMWHZ0sRKrmQOcJFPWAReyZBTnkTk41VB1SQWyt1vMDphul
+         Uwm7pZeu2jTSBip1AOjcplGgubHX3yd0SFHZUU2Lbgez0bvuOUT3ZTE3mcjBbZ+YgI0W
+         +Bgq1ascc0xfrJzUMu4TzMSfzcA1YAD/Z1KzvXq+C8z6lPTH0rJze5ZzpFXjmY4E1dbj
+         ACyg==
+X-Gm-Message-State: ACgBeo3MX7KId5mdypWid/Ha7NkkfGzd3yojonoqI5vHglcpooU7Ic87
+	+yKQwMqyXfE0G+oGXMLP0vGU7A/WLJcBiOYalOC5EJY1
+X-Google-Smtp-Source: 
+ AA6agR5zNq0dWNplXuw70Dpi/XvOtWS0aiQVCxEglsct/s0z+7c14kmCt22jrFPm5hCzKGMshmaHbi0l158Mp6uDZIQ=
+X-Received: by 2002:a17:906:3c4a:b0:741:6b91:867e with SMTP id
+ i10-20020a1709063c4a00b007416b91867emr12027158ejg.297.1661952685611; Wed, 31
+ Aug 2022 06:31:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: mLKNfDe8d_mRGChaeJsAxErtAzrD8U5c
-X-Proofpoint-GUID: mLKNfDe8d_mRGChaeJsAxErtAzrD8U5c
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.517,FMLib:17.11.122.1
- definitions=2022-08-31_05,2022-08-31_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxlogscore=999
- lowpriorityscore=0 priorityscore=1501 malwarescore=0 suspectscore=0
- phishscore=0 adultscore=0 spamscore=0 mlxscore=0 clxscore=1015
- impostorscore=0 bulkscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.12.0-2207270000 definitions=main-2208310048
+References: <20220819140057.12010-1-jandryuk@gmail.com>
+In-Reply-To: <20220819140057.12010-1-jandryuk@gmail.com>
+From: Jason Andryuk <jandryuk@gmail.com>
+Date: Wed, 31 Aug 2022 09:31:14 -0400
+Message-ID: 
+ <CAKf6xptpZGoKTfoEtLPnwGjgL0G5jea6J-_jK+2ANo7-pYPt8Q@mail.gmail.com>
+Subject: Re: [meta-oe][dunfell][PATCH] cryptsetup: upgrade 2.3.2 -> 2.3.7
+To: openembedded-devel@lists.openembedded.org
+Cc: Yi Zhao <yi.zhao@windriver.com>, Armin Kuster <akuster808@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 31 Aug 2022 09:45:30 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 31 Aug 2022 13:31:31 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98575
+ https://lists.openembedded.org/g/openembedded-devel/message/98577
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Hi,
 
-Fixes:
+Is the patch acceptable for dunfell, or is a change needed?
 
-  WARNING: python3-pyzmq-23.2.0-r0 do_package_qa: QA Issue: File /usr/lib64/python3.10/site-packages/zmq/utils/config.json in package python3-pyzmq contains reference to TMPDIR
-  File /usr/lib64/python3.10/site-packages/zmq/utils/compiler.json in package python3-pyzmq contains reference to TMPDIR [buildpaths]
+Thanks,
+Jason
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- meta-python/recipes-devtools/python/python3-pyzmq_23.2.1.bb | 5 +++++
- 1 file changed, 5 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_23.2.1.bb b/meta-python/recipes-devtools/python/python3-pyzmq_23.2.1.bb
-index 78545f5c3..f5e2e2c36 100644
---- a/meta-python/recipes-devtools/python/python3-pyzmq_23.2.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyzmq_23.2.1.bb
-@@ -47,6 +47,11 @@ do_compile:prepend() {
-     echo no_libzmq_extension = True >> ${S}/setup.cfg
- }
- 
-+do_install:append() {
-+        sed -i -e 's#${RECIPE_SYSROOT}##g' ${D}${PYTHON_SITEPACKAGES_DIR}/zmq/utils/config.json
-+        sed -i -e 's#${RECIPE_SYSROOT}##g' ${D}${PYTHON_SITEPACKAGES_DIR}/zmq/utils/compiler.json
-+}
-+
- do_install_ptest() {
-         install -d ${D}${PTEST_PATH}/tests
-         cp -rf ${S}/zmq/tests/* ${D}${PTEST_PATH}/tests/
--- 
-2.25.1
-
+On Fri, Aug 19, 2022 at 10:02 AM Jason Andryuk <jandryuk@gmail.com> wrote:
+>
+> From: Yi Zhao <yi.zhao@windriver.com>
+>
+> Stable security bug-fix release that fixes CVE-2021-4122.
+>
+> ReleaseNotes:
+> https://kernel.org/pub/linux/utils/cryptsetup/v2.3/v2.3.7-ReleaseNotes
+>
+> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> (cherry picked from commit 5dca16b451abf80b1bfacfc533daf447ff4dad7c)
+> This is just the rename and SRC_URI hash updates made to apply
+> to dunfell.
+> Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
+> ---
+>  .../cryptsetup/{cryptsetup_2.3.2.bb => cryptsetup_2.3.7.bb}   | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.3.2.bb => cryptsetup_2.3.7.bb} (96%)
+>
+> diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.2.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.7.bb
+> similarity index 96%
+> rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.2.bb
+> rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.7.bb
+> index 3c1c8b0be..d303f27eb 100644
+> --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.2.bb
+> +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.7.bb
+> @@ -21,8 +21,8 @@ RDEPENDS_${PN} = " \
+>  "
+>
+>  SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
+> -SRC_URI[md5sum] = "6e4ffb6d35a73f7539a5d0c1354654cd"
+> -SRC_URI[sha256sum] = "a89e13dff0798fd0280e801d5f0cc8cfdb2aa5b1929bec1b7322e13d3eca95fb"
+> +SRC_URI[md5sum] = "9c5952cebb836ee783b0b76c5380a964"
+> +SRC_URI[sha256sum] = "61835132a5986217af17b8943013aa3fe6d47bdc1a07386343526765e2ce27a9"
+>
+>  inherit autotools gettext pkgconfig
+>
+> --
+> 2.20.1
+>
 
