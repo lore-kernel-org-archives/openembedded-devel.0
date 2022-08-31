@@ -1,114 +1,154 @@
-Return-Path: <jandryuk@gmail.com>
+Return-Path: <jsbronder@cold-front.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99F7FECAAD1
-	for <webhook@archiver.kernel.org>; Wed, 31 Aug 2022 13:31:31 +0000 (UTC)
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com
- [209.85.218.45])
- by mx.groups.io with SMTP id smtpd.web12.25585.1661952687630027944
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A58F2ECAAD4
+	for <webhook@archiver.kernel.org>; Wed, 31 Aug 2022 23:56:09 +0000 (UTC)
+Received: from wout1-smtp.messagingengine.com (wout1-smtp.messagingengine.com
+ [64.147.123.24])
+ by mx.groups.io with SMTP id smtpd.web10.6190.1661990160320914883
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 Aug 2022 06:31:28 -0700
+ Wed, 31 Aug 2022 16:56:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Rk//8HNS;
- spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: jandryuk@gmail.com)
-Received: by mail-ej1-f45.google.com with SMTP id cu2so28463942ejb.0
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 Aug 2022 06:31:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc;
-        bh=d/cO5Pk5tDJ4fQif4TuqX2844Ol8EVy+w43kvOlLMB0=;
-        b=Rk//8HNSWAo9rztlidsR/YL6BeSK3C5NZy8GLaTyyb1a30Pt0vim9BvEBlmE+iVGJt
-         6cr6eb81fLeZTfA7P1j7LRP9lo6i+aXKhp0rCo9zkH77WVSCiB1G+h9ylbpkXnLez85l
-         rOGNAeT06TUv14NoeMGRQ0eWDloWH0mjFQxwQ9kyqSZWfe7W71ZwT/I0Jb72APR3EoAB
-         pQytHNhUtJQSWilmEs5y4PgHmYNG3XeqTVc6HZ0Ot8xTTO4SpuIdUGlnFeZvQjBCZLdW
-         BKPW09HyxIE+1e8MqVObMcdXEiel1WoT6IZ/b/Jnx3zU+Wc486o8adfZNC4l/jCtuNOO
-         XC4g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc;
-        bh=d/cO5Pk5tDJ4fQif4TuqX2844Ol8EVy+w43kvOlLMB0=;
-        b=UtCpClIpmTG8VoD4xZOEmqp2C0I6BHq3UYMKFgboiki1dKMLEU/dM14MZQv2qW0+aI
-         1OvJ2TyQBR3Mk2jgqf4UfzYmb1M37SrEg68eYvrDTroAJIDWz5KZ8+TkuABITtAVn9D5
-         m0Fn/Hp9+8RgaJJq3VOEdyMWHZ0sRKrmQOcJFPWAReyZBTnkTk41VB1SQWyt1vMDphul
-         Uwm7pZeu2jTSBip1AOjcplGgubHX3yd0SFHZUU2Lbgez0bvuOUT3ZTE3mcjBbZ+YgI0W
-         +Bgq1ascc0xfrJzUMu4TzMSfzcA1YAD/Z1KzvXq+C8z6lPTH0rJze5ZzpFXjmY4E1dbj
-         ACyg==
-X-Gm-Message-State: ACgBeo3MX7KId5mdypWid/Ha7NkkfGzd3yojonoqI5vHglcpooU7Ic87
-	+yKQwMqyXfE0G+oGXMLP0vGU7A/WLJcBiOYalOC5EJY1
-X-Google-Smtp-Source: 
- AA6agR5zNq0dWNplXuw70Dpi/XvOtWS0aiQVCxEglsct/s0z+7c14kmCt22jrFPm5hCzKGMshmaHbi0l158Mp6uDZIQ=
-X-Received: by 2002:a17:906:3c4a:b0:741:6b91:867e with SMTP id
- i10-20020a1709063c4a00b007416b91867emr12027158ejg.297.1661952685611; Wed, 31
- Aug 2022 06:31:25 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220819140057.12010-1-jandryuk@gmail.com>
-In-Reply-To: <20220819140057.12010-1-jandryuk@gmail.com>
-From: Jason Andryuk <jandryuk@gmail.com>
-Date: Wed, 31 Aug 2022 09:31:14 -0400
-Message-ID: 
- <CAKf6xptpZGoKTfoEtLPnwGjgL0G5jea6J-_jK+2ANo7-pYPt8Q@mail.gmail.com>
-Subject: Re: [meta-oe][dunfell][PATCH] cryptsetup: upgrade 2.3.2 -> 2.3.7
+ dkim=pass header.i=@cold-front.org header.s=mesmtp header.b=kUfXxpJQ;
+ spf=pass (domain: cold-front.org, ip: 64.147.123.24,
+ mailfrom: jsbronder@cold-front.org)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+	by mailout.west.internal (Postfix) with ESMTP id 4CEB2320077A;
+	Wed, 31 Aug 2022 19:55:57 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute5.internal (MEProxy); Wed, 31 Aug 2022 19:55:57 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
+	 h=cc:cc:content-transfer-encoding:date:date:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to; s=mesmtp; t=1661990156; x=1662076556; bh=+rwZ+OU
+	2PnDA2jpZ1eNpryvIeIOks+PuqlLvuII+FIc=; b=kUfXxpJQHt4hZWlSjOCiD0f
+	3YNjGxuTGimAKCJ5gmYEbVNt2k0S1gcwyibwNETE4Pi+Eobbr1P5sClm+gTRWTQq
+	8fTAFKYy3QK/lCk9EKF2WlgtVtcQ57DkPDAWtiNurL3k8WAnj0c7B28pv4Bp4iT2
+	RJTq7ZsP98RKuAWcDOQk=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:message-id
+	:mime-version:reply-to:sender:subject:subject:to:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
+	1661990156; x=1662076556; bh=+rwZ+OU2PnDA2jpZ1eNpryvIeIOks+PuqlL
+	vuII+FIc=; b=dkCfdRI6l2zVtbBnvptkV8oUYgAkKouQEfep8zQ8+1MqVHkdlct
+	zV6hTxB90nZO6tfl+lwXiM2A1b506hJlEii8BFeZX0S0q5UUmKdYb0AmHgtxiwYi
+	ENPMmpzq62yBavA2NxHqes5uE3JbDqk1ONnC/V2VkBuCfpAeeRR71Da+i8Ws3SUC
+	BwG9yG45L7vi6VPzlASiV4JW7tpgPskCs0wW11kARl3ju25f/1UvznprKsJqJpbt
+	mOumNwZgN2u0uW9IdKqEOB1Vo5/r/ljuRxNU0jxl1oUeWPUlxcSp3j4qMPPwXUZn
+	k1ZQWPQM4WswE4YwI5OzjAVFV+SS85sEq3Q==
+X-ME-Sender: <xms:DPUPY_w4QEM8POd_VYv_c5WxuNh49PR436PU61VKOh-ew6MekfLMFA>
+    <xme:DPUPY3TH0K2J3MjPQDGcwZnYDlFrlz8TgKBQh1iYTS3Y6JZp0CAipSpo1mQGdkKfA
+    t6iQbfgWzGKehio4w>
+X-ME-Received: 
+ <xmr:DPUPY5V8ZwPU9jur1l2XKwA4QFFw8lR9MMVOF2ODWdNrQiJ1SHQp3Gto2eiP5kzndl9LCj5kQkVAzMAzRWbvhmNMKltk5C-H8BactM4RwA>
+X-ME-Proxy-Cause: 
+ gggruggvucftvghtrhhoucdtuddrgedvfedrvdekjedgvdekucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhephffvvefufffkofgggfestdekredtredttdenucfhrhhomheplfhushhtihhn
+    uceurhhonhguvghruceojhhssghrohhnuggvrhestgholhguqdhfrhhonhhtrdhorhhgqe
+    enucggtffrrghtthgvrhhnpeffudfgffefuedvuddttdfgfeehgfeikeffudfhgfehieef
+    teefgedvieehvdegvdenucffohhmrghinhepghhithhhuhgsrdgtohhmnecuvehluhhsth
+    gvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhhssghrohhnuggvrhes
+    tgholhguqdhfrhhonhhtrdhorhhg
+X-ME-Proxy: <xmx:DPUPY5hVPcEJih1ZmR5LK2fCkhIx8u42TjlOgGsDohBeaj1OsUPtyw>
+    <xmx:DPUPYxDGZ1ZZPCs18jYOfOxTexVeexJ2jXupMpuf9bqTOOofbpTVkQ>
+    <xmx:DPUPYyJRyP2GJi3mbBgBN6Xc1jWyhM1oyxnq3AOB4J9kLTrNGCoHhQ>
+    <xmx:DPUPY-57YOPeffblLAaxtMKkbl5QseqXLsbaSOqOCKSKF4vkWItP7g>
+Feedback-ID: iea0042cb:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 31 Aug 2022 19:55:56 -0400 (EDT)
+From: Justin Bronder <jsbronder@cold-front.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yi Zhao <yi.zhao@windriver.com>, Armin Kuster <akuster808@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Cc: Justin Bronder <jsbronder@cold-front.org>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH] lmdb: only set SONAME on the shared
+ library
+Date: Wed, 31 Aug 2022 19:55:32 -0400
+Message-Id: <20220831235532.7257-1-jsbronder@cold-front.org>
+X-Mailer: git-send-email 2.37.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 31 Aug 2022 13:31:31 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 31 Aug 2022 23:56:09 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98577
+ https://lists.openembedded.org/g/openembedded-devel/message/98578
 
-Hi,
+Setting soname in LDFLAGS means that the extra mdb tools also
+incorrectly get soname set.  This then triggers package.bbclass to add a
+duplicate shlib_provider in /usr/bin for liblmdb.so.0.9.29.  Then any
+other recipe depending on liblmdb is going to get a 'Multiple shlib
+provider' error.
 
-Is the patch acceptable for dunfell, or is a change needed?
+shlibs2/lmdb.list before:
+    liblmdb.so.0.9.29:/usr/bin:0.9.29
+    liblmdb.so.0.9.29:/usr/lib:0.9.29
 
-Thanks,
-Jason
+shlibs2/lmdb.list after:
+    liblmdb.so.0.9.29:/usr/lib:0.9.29
 
+Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../0001-make-set-soname-on-liblmdb.patch     | 22 +++++++++++++++++++
+ meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb       |  3 +--
+ 2 files changed, 23 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-dbs/lmdb/files/0001-make-set-soname-on-liblmdb.patch
 
-On Fri, Aug 19, 2022 at 10:02 AM Jason Andryuk <jandryuk@gmail.com> wrote:
->
-> From: Yi Zhao <yi.zhao@windriver.com>
->
-> Stable security bug-fix release that fixes CVE-2021-4122.
->
-> ReleaseNotes:
-> https://kernel.org/pub/linux/utils/cryptsetup/v2.3/v2.3.7-ReleaseNotes
->
-> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> (cherry picked from commit 5dca16b451abf80b1bfacfc533daf447ff4dad7c)
-> This is just the rename and SRC_URI hash updates made to apply
-> to dunfell.
-> Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
-> ---
->  .../cryptsetup/{cryptsetup_2.3.2.bb => cryptsetup_2.3.7.bb}   | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.3.2.bb => cryptsetup_2.3.7.bb} (96%)
->
-> diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.2.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.7.bb
-> similarity index 96%
-> rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.2.bb
-> rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.7.bb
-> index 3c1c8b0be..d303f27eb 100644
-> --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.2.bb
-> +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.7.bb
-> @@ -21,8 +21,8 @@ RDEPENDS_${PN} = " \
->  "
->
->  SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
-> -SRC_URI[md5sum] = "6e4ffb6d35a73f7539a5d0c1354654cd"
-> -SRC_URI[sha256sum] = "a89e13dff0798fd0280e801d5f0cc8cfdb2aa5b1929bec1b7322e13d3eca95fb"
-> +SRC_URI[md5sum] = "9c5952cebb836ee783b0b76c5380a964"
-> +SRC_URI[sha256sum] = "61835132a5986217af17b8943013aa3fe6d47bdc1a07386343526765e2ce27a9"
->
->  inherit autotools gettext pkgconfig
->
-> --
-> 2.20.1
->
+diff --git a/meta-oe/recipes-dbs/lmdb/files/0001-make-set-soname-on-liblmdb.patch b/meta-oe/recipes-dbs/lmdb/files/0001-make-set-soname-on-liblmdb.patch
+new file mode 100644
+index 0000000000..312809d1d2
+--- /dev/null
++++ b/meta-oe/recipes-dbs/lmdb/files/0001-make-set-soname-on-liblmdb.patch
+@@ -0,0 +1,22 @@
++From b4d418bf3f78748d84e3cfb110833443eef34284 Mon Sep 17 00:00:00 2001
++From: Justin Bronder <jsbronder@cold-front.org>
++Date: Thu, 25 Aug 2022 17:22:20 -0400
++Subject: [PATCH] make: set soname on liblmdb
++
++---
++ libraries/liblmdb/Makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/libraries/liblmdb/Makefile b/libraries/liblmdb/Makefile
++index 1ec74e6..ea08cd6 100644
++--- a/libraries/liblmdb/Makefile
+++++ b/libraries/liblmdb/Makefile
++@@ -66,7 +66,7 @@ liblmdb.a:	mdb.o midl.o
++ 
++ liblmdb$(SOEXT):	mdb.lo midl.lo
++ #	$(CC) $(LDFLAGS) -pthread -shared -Wl,-Bsymbolic -o $@ mdb.o midl.o $(SOLIBS)
++-	$(CC) $(LDFLAGS) -pthread -shared -o $@ mdb.lo midl.lo $(SOLIBS)
+++	$(CC) $(LDFLAGS) -pthread -shared -Wl,-soname,$@ -o $@ mdb.lo midl.lo $(SOLIBS)
++ 
++ mdb_stat: mdb_stat.o liblmdb.a
++ mdb_copy: mdb_copy.o liblmdb.a
+diff --git a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
+index b58a36c446..f23960f40a 100644
+--- a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
++++ b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
+@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972"
+ SRC_URI = "git://github.com/LMDB/lmdb.git;nobranch=1;protocol=https \
+            file://run-ptest \
+            file://0001-Makefile-use-libprefix-instead-of-libdir.patch \
++           file://0001-make-set-soname-on-liblmdb.patch;patchdir=../.. \
+            "
+ 
+ SRCREV = "8ad7be2510414b9506ec9f9e24f24d04d9b04a1a"
+@@ -19,8 +20,6 @@ inherit base ptest
+ 
+ S = "${WORKDIR}/git/libraries/liblmdb"
+ 
+-LDFLAGS += "-Wl,-soname,lib${PN}.so.${PV}"
+-
+ do_compile() {
+     oe_runmake CC="${CC}" SOEXT=".so.${PV}" LDFLAGS="${LDFLAGS}"
+ }
+-- 
+2.37.1
+
 
