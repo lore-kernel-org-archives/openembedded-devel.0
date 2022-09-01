@@ -1,104 +1,99 @@
-Return-Path: <mingli.yu@windriver.com>
+Return-Path: <alex.kiernan@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6357CECAAD4
-	for <webhook@archiver.kernel.org>; Thu,  1 Sep 2022 02:39:30 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com
- [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.7737.1661999961656015369
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42AE5ECAAD3
+	for <webhook@archiver.kernel.org>; Thu,  1 Sep 2022 08:30:42 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
+ [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.web11.9777.1662021038107916412
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 Aug 2022 19:39:21 -0700
+ Thu, 01 Sep 2022 01:30:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=PBJCvo8F;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
- invalid domain name (domain: windriver.com, ip: 205.220.166.238,
- mailfrom: prvs=62439cac31=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
- 2812YcaO023047
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 Aug 2022 19:39:21 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
- h=from : to :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=PPS06212021;
- bh=yUo5NjS1wSqq/WY9thgP6opUeZo3thgLq1guM8yURCg=;
- b=PBJCvo8Fhd5p0qTF0ehVMFGMDTwOQpWWhyIjEGSEmsFwqZnjTifSBZ/HUMCixl+LlPtA
- DO7GDVI3txlZERZzd99Mqf6Y2UHasffdGC52ojlZfhdIuTTOPZd+fT92rmyOLM95JDnt
- 8F9MpQqWYvFrNSNU1TSXoBdybe5+BIg5l2ptcXdFt976eeqKPxpY3fwMCIppFcOKo+SP
- kisCMMXZt3ZFjjsOAZlOVWDyTDcUkwPxeJtjAtCCkrpqvwqMK3CSxQfyF0QV+UWGH5OZ
- +JnLFBawH0mzvrh5vZTvBa8N3MpyTy8dsfvQ+l/odDVgAlzPchtkzbCqvj4e5QBtcaEm dg==
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com
- [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3j7ej6475g-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 Aug 2022 19:39:20 -0700
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Wed, 31 Aug 2022 19:39:20 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27; Wed, 31 Aug 2022 19:39:19 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Wed, 31 Aug 2022 19:39:19 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH v2] python3-pyzmq: Add RDEPENDS for
- python3-pyzmq-ptest
-Date: Thu, 1 Sep 2022 10:39:18 +0800
-Message-ID: <20220901023918.3083901-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=bNdaoqk+;
+ spf=pass (domain: gmail.com, ip: 209.85.221.51,
+ mailfrom: alex.kiernan@gmail.com)
+Received: by mail-wr1-f51.google.com with SMTP id e13so20397616wrm.1
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 01 Sep 2022 01:30:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date;
+        bh=xp+pqk4XxFpIwv+4MqOXjFHy7CrtjzyFVgMHDuVjf0M=;
+        b=bNdaoqk+TBY8Ya8fpdfviQQb7d9OLA/OdLEymAtJYoiPw6L8Emi+rLPQ0lK1aT82n3
+         hslJwB13OLqXTy8ZaHbjbV4MUn7nvLCPjIaZ4RoXyb5/nCTIFVrKmuOK/BAe5Zop0cC7
+         77Qt/4U6cWvdmzQV5sAbGs2lk01q9BN6FelXSAWT3G48vVNbPLk9R1e1wn9nN4vrB95W
+         iIKsDQKLR04yqQGL0+XDca2445RhABbW1cAMf3MrerON45k3p2mrYZGqnYDiSsUn45SL
+         W4HS1THr4mgzUay6vQlrw6Ph8f2t2hisM6mjsSWwxVyjKXEg7fpJvn2/dBwiBytB7b+t
+         qLog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date;
+        bh=xp+pqk4XxFpIwv+4MqOXjFHy7CrtjzyFVgMHDuVjf0M=;
+        b=V2uKrWrwID8vnmHuQOEaeren9iBeUvISfGXDV7SzHH7HPdeS3pc+aEVzLgCSPnLGnX
+         0K43+mo5OCLSSvICz+sDIF1LDSBaNJm9d9aX4JJsYMbRROLRLHXWHBrEJlfcONX5nU7D
+         yGtL6ErVQcXoa5IlScatFEREpHfQYRjnO3fwwm+U+v0FsuCx6E9ajozjRwxpBIY9UYXs
+         JFXfzhuvtkUwVuJL79i8NDgjiQad9oaaRuttW4zgphYNt8hGfeZALiZaTZ/aKHmI/xHL
+         sliuXW7mAn9NOXrs548ZHXg/n0Ddyu2sVrG0isEJzarfo90KC4sm9MrT2qDdpPUiOG8G
+         Ri4w==
+X-Gm-Message-State: ACgBeo2hIR8bSHh8H4mWu+12QUdBPrBcgn2I428p2AxWfqmoY3uU6Ptp
+	b70v62RPn7fwVoRbyvYxtl2kTFO58FM=
+X-Google-Smtp-Source: 
+ AA6agR47wYbJTCkRDlsOr78f3OYnGFp3IDOJXZzvAuh0u0WqcmdtQcb8KnJZXD1LHGDdT8XQC1/QfA==
+X-Received: by 2002:a05:6000:1888:b0:222:ca41:dc26 with SMTP id
+ a8-20020a056000188800b00222ca41dc26mr13199967wri.442.1662021036288;
+        Thu, 01 Sep 2022 01:30:36 -0700 (PDT)
+Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
+ [91.135.6.246])
+        by smtp.gmail.com with ESMTPSA id
+ u1-20020a5d6ac1000000b00225250f2d1bsm14279824wrw.94.2022.09.01.01.30.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 01 Sep 2022 01:30:35 -0700 (PDT)
+From: Alex Kiernan <alex.kiernan@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alex Kiernan <alex.kiernan@gmail.com>
+Subject: [meta-networking][PATCH] libcoap: Fix gnutls/openssl/mbedtls
+ PACKAGECONFIG conflicts
+Date: Thu,  1 Sep 2022 09:30:31 +0100
+Message-Id: <20220901083031.6087-1-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: cXKsK3K41I98JuIxXbhNfYdc0rupSOo9
-X-Proofpoint-GUID: cXKsK3K41I98JuIxXbhNfYdc0rupSOo9
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.517,FMLib:17.11.122.1
- definitions=2022-08-31_16,2022-08-31_03,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0
- priorityscore=1501 clxscore=1015 lowpriorityscore=0 mlxscore=0
- adultscore=0 malwarescore=0 bulkscore=0 impostorscore=0 spamscore=0
- mlxlogscore=935 phishscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.12.0-2207270000 definitions=main-2209010012
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 01 Sep 2022 02:39:30 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 01 Sep 2022 08:30:42 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98579
+ https://lists.openembedded.org/g/openembedded-devel/message/98580
 
-From: Mingli Yu <mingli.yu@windriver.com>
+These were missing a comma so were being added as RRECOMMENDS.
 
-Fixes:
-  # ./run-ptest
-  ./run-ptest: line 3: pytest: command not found
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-pyzmq_23.2.1.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-networking/recipes-devtools/libcoap/libcoap_4.3.0.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_23.2.1.bb b/meta-python/recipes-devtools/python/python3-pyzmq_23.2.1.bb
-index 40cb22b5e..faf7915ea 100644
---- a/meta-python/recipes-devtools/python/python3-pyzmq_23.2.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyzmq_23.2.1.bb
-@@ -32,6 +32,7 @@ RDEPENDS:${PN} += "\
- 
- RDEPENDS:${PN}-ptest += "\
-         ${PN}-test \
-+        ${PYTHON_PN}-pytest \
+diff --git a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.0.bb b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.0.bb
+index aba81d126a67..4b467d212f03 100644
+--- a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.0.bb
++++ b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.0.bb
+@@ -23,10 +23,10 @@ PACKAGECONFIG ?= "\
+     ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
  "
- 
- do_compile:prepend() {
+ PACKAGECONFIG[async] = "--enable-async,--disable-async"
+-PACKAGECONFIG[gnutls] = "--with-gnutls,--without-gnutls,gnutls,,openssl mbedtls"
++PACKAGECONFIG[gnutls] = "--with-gnutls,--without-gnutls,gnutls,,,openssl mbedtls"
+ PACKAGECONFIG[manpages] = "--enable-documentation --enable-doxygen --enable-manpages,--disable-documentation,asciidoc-native doxygen-native graphviz-native"
+-PACKAGECONFIG[mbedtls] = "--with-mbedtls,--without-mbedtls,mbedtls,,gnutls openssl"
+-PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl,,gnutls mbedtls"
++PACKAGECONFIG[mbedtls] = "--with-mbedtls,--without-mbedtls,mbedtls,,,gnutls openssl"
++PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl,,,gnutls mbedtls"
+ PACKAGECONFIG[small-stack] = "--enable-small-stack,--disable-small-stack"
+ PACKAGECONFIG[tcp] = "--enable-tcp,--disable-tcp"
+ PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,cunit"
 -- 
-2.25.1
+2.35.1
 
 
