@@ -1,99 +1,110 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 42AE5ECAAD3
-	for <webhook@archiver.kernel.org>; Thu,  1 Sep 2022 08:30:42 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
- [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.web11.9777.1662021038107916412
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BCA37ECAAD5
+	for <webhook@archiver.kernel.org>; Thu,  1 Sep 2022 10:17:52 +0000 (UTC)
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.1])
+ by mx.groups.io with SMTP id smtpd.web10.10327.1662027464570728553
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Sep 2022 01:30:38 -0700
+ Thu, 01 Sep 2022 03:17:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=bNdaoqk+;
- spf=pass (domain: gmail.com, ip: 209.85.221.51,
- mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id e13so20397616wrm.1
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Sep 2022 01:30:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date;
-        bh=xp+pqk4XxFpIwv+4MqOXjFHy7CrtjzyFVgMHDuVjf0M=;
-        b=bNdaoqk+TBY8Ya8fpdfviQQb7d9OLA/OdLEymAtJYoiPw6L8Emi+rLPQ0lK1aT82n3
-         hslJwB13OLqXTy8ZaHbjbV4MUn7nvLCPjIaZ4RoXyb5/nCTIFVrKmuOK/BAe5Zop0cC7
-         77Qt/4U6cWvdmzQV5sAbGs2lk01q9BN6FelXSAWT3G48vVNbPLk9R1e1wn9nN4vrB95W
-         iIKsDQKLR04yqQGL0+XDca2445RhABbW1cAMf3MrerON45k3p2mrYZGqnYDiSsUn45SL
-         W4HS1THr4mgzUay6vQlrw6Ph8f2t2hisM6mjsSWwxVyjKXEg7fpJvn2/dBwiBytB7b+t
-         qLog==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date;
-        bh=xp+pqk4XxFpIwv+4MqOXjFHy7CrtjzyFVgMHDuVjf0M=;
-        b=V2uKrWrwID8vnmHuQOEaeren9iBeUvISfGXDV7SzHH7HPdeS3pc+aEVzLgCSPnLGnX
-         0K43+mo5OCLSSvICz+sDIF1LDSBaNJm9d9aX4JJsYMbRROLRLHXWHBrEJlfcONX5nU7D
-         yGtL6ErVQcXoa5IlScatFEREpHfQYRjnO3fwwm+U+v0FsuCx6E9ajozjRwxpBIY9UYXs
-         JFXfzhuvtkUwVuJL79i8NDgjiQad9oaaRuttW4zgphYNt8hGfeZALiZaTZ/aKHmI/xHL
-         sliuXW7mAn9NOXrs548ZHXg/n0Ddyu2sVrG0isEJzarfo90KC4sm9MrT2qDdpPUiOG8G
-         Ri4w==
-X-Gm-Message-State: ACgBeo2hIR8bSHh8H4mWu+12QUdBPrBcgn2I428p2AxWfqmoY3uU6Ptp
-	b70v62RPn7fwVoRbyvYxtl2kTFO58FM=
-X-Google-Smtp-Source: 
- AA6agR47wYbJTCkRDlsOr78f3OYnGFp3IDOJXZzvAuh0u0WqcmdtQcb8KnJZXD1LHGDdT8XQC1/QfA==
-X-Received: by 2002:a05:6000:1888:b0:222:ca41:dc26 with SMTP id
- a8-20020a056000188800b00222ca41dc26mr13199967wri.442.1662021036288;
-        Thu, 01 Sep 2022 01:30:36 -0700 (PDT)
-Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
- [91.135.6.246])
-        by smtp.gmail.com with ESMTPSA id
- u1-20020a5d6ac1000000b00225250f2d1bsm14279824wrw.94.2022.09.01.01.30.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Sep 2022 01:30:35 -0700 (PDT)
-From: Alex Kiernan <alex.kiernan@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-networking][PATCH] libcoap: Fix gnutls/openssl/mbedtls
- PACKAGECONFIG conflicts
-Date: Thu,  1 Sep 2022 09:30:31 +0100
-Message-Id: <20220901083031.6087-1-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.35.1
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=JQaiZxsx;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.1,
+ mailfrom: zhengrq.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1662027462; i=@fujitsu.com;
+	bh=Phvce7C/uMiPEOkprgTjsPq4tJwx/f9cFUeEXA1kIoo=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=JQaiZxsx17TT87Doh3h0I3lITFe+KwhDE5WmT3nojzhfhYxfgoWxb5mR1pWAWeFSH
+	 N/jlTGIbRBdpKyHZRVTXXx3Gx+n29Gh5lSOexudq17Lrvhyw6BHjVuRKSSvxGLXt2m
+	 38DN720ENde3+aZGBVtR+BMS1ETj+Q6H9ZBTZojuJ4hxwcsBTJsZqTq2piVUjPjFsp
+	 UjvlTNVRjQiuHd3FVKw11bD5QG2614OVlHuBNTiDAV3ExbHgoYHqbTJfVr33zFYuo9
+	 jNtdorsAs5kuUKU22rJsBoMRcNMQtJRDZqkkM9djUeqLXkPhNJaIqNEoMHGfiGbAal
+	 a/0iFxsgn5DcQ==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrCIsWRWlGSWpSXmKPExsViZ8OxWfdYm0C
+  ywfYzMhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8acm6eZCv5xVLxbtISxgXENRxcjF4eQwENG
+  ibMPD7J3MXICOVeYJBYut4OwDzBKzLqQAGKzCehKvPixmAXEFhHQl1g6ew8ziC0s4C8x+ekas
+  F4WARWJZWu3gNm8Ah4Ss7ZeZASxJQQUJKY8fM8MEReUODnzCdgcZgEJiYMvXgDFOYBqFCVmT5
+  eHKK+UaP3wiwXCVpO4em4T8wRGvllIumch6V7AyLSK0SqpKDM9oyQ3MTNH19DAQNfQ0FTX2Fj
+  X3EQvsUo3US+1VLc8tbhE10gvsbxYL7W4WK+4Mjc5J0UvL7VkEyMw8FKKFb12ML5a8VPvEKMk
+  B5OSKG+/jkCyEF9SfkplRmJxRnxRaU5q8SFGGQ4OJQlevSagnGBRanpqRVpmDjAKYNISHDxKI
+  rx7W4DSvMUFibnFmekQqVOMilLivGtBEgIgiYzSPLg2WORdYpSVEuZlZGBgEOIpSC3KzSxBlX
+  /FKM7BqCTMWwEyhSczrwRu+iugxUxAi6fP5AdZXJKIkJJqYHJoKpxz/8etkIOWE27ZJnZss3E
+  rsTG+WSsc7LvToyy4u7rna1PnRhGBbCuff3c9Fr6R0A9wX3Wbc6nKEsbbly+9bqkJvNxnPef8
+  t1J+BntVkXgDZafHIv6fLA2tjItfLE28s4jv0p0Lr961/tJhDZf9a6D//fS7uD79v57b/324u
+  fjsMhndvNsGdrfCQzMfVq0vCxGojcmPOpaWPqWk3fizqOUhwfo8xf0PVgXr35jX7Ru942f3/Y
+  kmD/drm4a3Zc0LnmD3nmf505mRhV+PzKhe3Jo194fz8QtWMQYrHKs1Ch8xFPt59iZ+efuzMLc
+  rRHnvtrkyx6e4pG4Wn1u3OFVkZ0fzu5bALduf77W1VmIpzkg01GIuKk4EAGDo4wg3AwAA
+X-Env-Sender: zhengrq.fnst@fujitsu.com
+X-Msg-Ref: server-19.tower-548.messagelabs.com!1662027462!60220!1
+X-Originating-IP: [62.60.8.179]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.87.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 12191 invoked from network); 1 Sep 2022 10:17:42 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-19.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 1 Sep 2022 10:17:42 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 3074B142
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu,  1 Sep 2022 11:17:42 +0100 (BST)
+Received: from R01UKEXCASM223.r01.fujitsu.local (R01UKEXCASM223
+ [10.182.185.121])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 242387B
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu,  1 Sep 2022 11:17:42 +0100 (BST)
+Received: from CentOS7.g08.fujitsu.local (10.167.225.35) by
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Thu, 1 Sep 2022 11:17:41 +0100
+From: zhengrq.fnst <zhengrq.fnst@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-python] [PATCH] python3-flatbuffers: upgrade 2.0.6 ->
+ 2.0.7
+Date: Thu, 1 Sep 2022 18:17:35 +0800
+Message-ID: <1662027455-13158-1-git-send-email-zhengrq.fnst@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM223.r01.fujitsu.local (10.182.185.121)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 01 Sep 2022 08:30:42 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 01 Sep 2022 10:17:52 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98580
+ https://lists.openembedded.org/g/openembedded-devel/message/98582
 
-These were missing a comma so were being added as RRECOMMENDS.
-
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- meta-networking/recipes-devtools/libcoap/libcoap_4.3.0.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ ...ython3-flatbuffers_2.0.6.bb => python3-flatbuffers_2.0.7.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/flatbuffers/{python3-flatbuffers_2.0.6.bb => python3-flatbuffers_2.0.7.bb} (89%)
 
-diff --git a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.0.bb b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.0.bb
-index aba81d126a67..4b467d212f03 100644
---- a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.0.bb
-+++ b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.0.bb
-@@ -23,10 +23,10 @@ PACKAGECONFIG ?= "\
-     ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
- "
- PACKAGECONFIG[async] = "--enable-async,--disable-async"
--PACKAGECONFIG[gnutls] = "--with-gnutls,--without-gnutls,gnutls,,openssl mbedtls"
-+PACKAGECONFIG[gnutls] = "--with-gnutls,--without-gnutls,gnutls,,,openssl mbedtls"
- PACKAGECONFIG[manpages] = "--enable-documentation --enable-doxygen --enable-manpages,--disable-documentation,asciidoc-native doxygen-native graphviz-native"
--PACKAGECONFIG[mbedtls] = "--with-mbedtls,--without-mbedtls,mbedtls,,gnutls openssl"
--PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl,,gnutls mbedtls"
-+PACKAGECONFIG[mbedtls] = "--with-mbedtls,--without-mbedtls,mbedtls,,,gnutls openssl"
-+PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl,,,gnutls mbedtls"
- PACKAGECONFIG[small-stack] = "--enable-small-stack,--disable-small-stack"
- PACKAGECONFIG[tcp] = "--enable-tcp,--disable-tcp"
- PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,cunit"
+diff --git a/meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers_2.0.6.bb b/meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers_2.0.7.bb
+similarity index 89%
+rename from meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers_2.0.6.bb
+rename to meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers_2.0.7.bb
+index 7c05e76d9a..84c80444b7 100644
+--- a/meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers_2.0.6.bb
++++ b/meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers_2.0.7.bb
+@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
+ 
+ LIC_FILES_CHKSUM = "file://../LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+-SRCREV = "615616cb5549a34bdf288c04bc1b94bd7a65c396"
++SRCREV = "8367664f15c3ea2ee58c67dacf9d630b49466de5"
+ SRC_URI = "git://github.com/google/flatbuffers.git;branch=master;protocol=https"
+ S = "${WORKDIR}/git/python"
+ 
 -- 
-2.35.1
+2.25.1
 
 
