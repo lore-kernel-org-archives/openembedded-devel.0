@@ -1,116 +1,105 @@
-Return-Path: <xuhuan.fnst@fujitsu.com>
+Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D89A4C6FA83
-	for <webhook@archiver.kernel.org>; Fri,  2 Sep 2022 01:35:46 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
- [85.158.142.2])
- by mx.groups.io with SMTP id smtpd.web09.1591.1662082539781742871
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CF6CFECAAD4
+	for <webhook@archiver.kernel.org>; Sat,  3 Sep 2022 18:33:00 +0000 (UTC)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com
+ [209.85.218.47])
+ by mx.groups.io with SMTP id smtpd.web11.5892.1662229970488124529
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Sep 2022 18:35:40 -0700
+ Sat, 03 Sep 2022 11:32:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=mjhT03TP;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.2,
- mailfrom: xuhuan.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1662082538; i=@fujitsu.com;
-	bh=NzvRQyRrrnnH89IbHVxSB11jlFHb2Pt3x6Ry/fnwK+U=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=mjhT03TPxDujHR5CpIZzGoOnJEt7kwFfOicBrpWh6viueVU09cvqV66fD7b3LAXrO
-	 bjlDrqfC/KNhoNIW0nhfOKSY/HmvlFTRdGDlnJb90/rqhNuHQDiJpbdfvfYio+b7Fs
-	 4jq266MHpsDboVONR08As53lcz6t1o1mWEIUWSP9K3prg6Y3N97wrSfJmv7HzOTJwB
-	 +3EbibMnVbq07yGLz5N/56/bq5BrYx+R4eFKM+8YGU42OVlZ16xc9o7q09WHBEYnc8
-	 SqXbd22BxBfaky0ClMZ0WN7aIQJLCXJjhbJkJkT8JF57/d3sbbX8k78t9sIQFBJzPo
-	 MQji0GZJGPX4A==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrGIsWRWlGSWpSXmKPExsViZ8MxSfdlrGC
-  ywa6T/BYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8avOZeZCz5yVvyfuoSlgXEWZxcjF4eQwBNG
-  iTcvJjBCONeZJD5NmgzlnGCUmNN0i7mLkZODTUBd4vHN14wgtoiAvsTS2XvA4swCqhLdF9ewg
-  9jCAiESE59tB4pzcLAIqEi0vc4EMXkF3CWWXgsAqZAQUJCY8vA9WCengIfEpBX32UBKhIBKtr
-  z3BAnzCghKnJz5hAViuITEwRcvmCFalSROrPjIBGFXSDROPwRlq0lcPbeJeQKj4Cwk7bOQtC9
-  gZFrFaJNUlJmeUZKbmJmja2hgoGtoaKpraQmkLPUSq3QT9VJLdfPyi0oydA31EsuL9VKLi/WK
-  K3OTc1L08lJLNjECgzilOLl8B+P2fb/0DjFKcjApifIy/RFIFuJLyk+pzEgszogvKs1JLT7EK
-  MPBoSTBqxUjmCwkWJSanlqRlpkDjCiYtAQHj5II799woDRvcUFibnFmOkTqFKMux8yvbQeYhV
-  jy8vNSpcR5Y6OAigRAijJK8+BGwKL7EqOslDAvIwMDgxBPQWpRbmYJqvwrRnEORiVhXv8IoCk
-  8mXklcJteAR3BBHTE9Jn8IEeUJCKkpBqYDK8vcOCZsOreLLbzYsfX9L62vZd8+bsko2X9jzMJ
-  fy8VeT7jcJR5HeB5w6m7U8/G/eNibUPtKSJzlmZ7lS84E1V+/biOwB2tXE/R60dTJk36u7Hgb
-  kMUxwyWrV6fjq2W5rGu3X3n9u/y2C1PeLhiLr98EHjZ+nClbr9Bid6W1OkRR73c6j40NHH3aL
-  dorz7iJpETM/9iyK0tDn6PuVedmBjWu1oj7dDqp5+V5nq+uSe2cNbLOpuXIlbKb5U+Hbx8ZNG
-  MTfnfGNi/+z6ZpmkvbNrqH9tRNlmBqfwM1yfTeSdvGF03sXh+Ofj5UwbmNoNLnwL+RvHfu70g
-  PvP65R6PqzMZr9XvVJveYPWKc9mjciWW4oxEQy3mouJEACuJP2dpAwAA
-X-Env-Sender: xuhuan.fnst@fujitsu.com
-X-Msg-Ref: server-7.tower-732.messagelabs.com!1662082536!485944!1
-X-Originating-IP: [62.60.8.146]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.87.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 2810 invoked from network); 2 Sep 2022 01:35:37 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-7.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 2 Sep 2022 01:35:37 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id A7AB31000CD
-	for <openembedded-devel@lists.openembedded.org>;
- Fri,  2 Sep 2022 02:35:36 +0100 (BST)
-Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121
- [10.183.43.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 9A6321000CC
-	for <openembedded-devel@lists.openembedded.org>;
- Fri,  2 Sep 2022 02:35:36 +0100 (BST)
-Received: from localhost.localdomain.localdomain (10.167.225.131) by
- R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Fri, 2 Sep 2022 02:35:34 +0100
-From: XU Huan <xuhuan.fnst@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Xu Huan <xuhuan.fnst@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-websocket-client: upgrade 1.3.3 ->
- 1.4.0
-Date: Fri, 2 Sep 2022 09:36:40 +0800
-Message-ID: <1662082601-12677-4-git-send-email-xuhuan.fnst@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1662082601-12677-1-git-send-email-xuhuan.fnst@fujitsu.com>
-References: <1662082601-12677-1-git-send-email-xuhuan.fnst@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=KhgysSHB;
+ spf=pass (domain: gmail.com, ip: 209.85.218.47,
+ mailfrom: jan.vermaete@gmail.com)
+Received: by mail-ej1-f47.google.com with SMTP id cu2so9771422ejb.0
+        for <openembedded-devel@lists.openembedded.org>;
+ Sat, 03 Sep 2022 11:32:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date;
+        bh=gvzhh31OYHazJdHDEq8UvkUZ+IYRlxu1ypYcpOKjUrA=;
+        b=KhgysSHB31X+299MF5rh5Duo20h7ig5UypuW9+BrBo7bPYYmKe8usUnw3iJPQiLCrZ
+         Oxl40ai+6CBCOT6RSt/EEQbgeQl5klKZ3mZhsWskpIEZsNbj6P5CzGLZhwXghJKqXC8G
+         7iu8A86gFXjvyzKufNmkt5K8MJDI5iVMC812VvDjBPwTM+xfUdwFTEgoKifk6Wx2fZXq
+         JqNc2odIO1eVSxfmtIf0ny8/FkgnlEZNjR55xQd0qjW0HGYb0adylzgmc55zhlD+iRON
+         hNHG/E2So23DYMxmSgLjEnkCCWRqZ5skp8+099O0j5rJTEnzxx17Yyy90Yk3SclTjmHc
+         tDNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date;
+        bh=gvzhh31OYHazJdHDEq8UvkUZ+IYRlxu1ypYcpOKjUrA=;
+        b=Uwa+1iyrShZv7vcA2OjES7uxSUIl9GutsOJYGObg124rEh82k+KxFkqC1MKTvcHJov
+         EF2KJBGTk0n1/8k0o0RVEGuUg1WsY1nqX80l0AvW+kKzAMN4dJjMgGDgPKzUngJpoxTS
+         DODZ68EAvsqP3a1YVpJMmuEuYXlI7z1H4iPAwUJm8cOsQKtjbWikzwJYSOSB2HoFYN0P
+         unOhwzwEPbcM6y4rijP2pD2VwQSVbV9r4pSPhnwJziHxDV/JA030IepouThu2xocVShg
+         OIz+mPhSXSGDHNrfMGWYOitFtFGqlUFmFyqrJe4TIj2OV7CkvSakEK5+yyTn4JRwrl4O
+         uF1Q==
+X-Gm-Message-State: ACgBeo3so/+vhF8sx93a5PZH92eet/I9bvfR3MPmZfrp1dSECZsyCFd9
+	5xPgwL9ECwNr+Aw7kUL0Su+ixOyaNhM=
+X-Google-Smtp-Source: 
+ AA6agR42I0KPb7dbEvfIkohkE1zsE5zdrkHXCXdpyC6GdM9NGX+H9WG06FuJ7ZumlORl+RQYuTCvuQ==
+X-Received: by 2002:a17:907:7fa7:b0:731:51b4:5020 with SMTP id
+ qk39-20020a1709077fa700b0073151b45020mr30136179ejc.352.1662229968585;
+        Sat, 03 Sep 2022 11:32:48 -0700 (PDT)
+Received: from localhost.localdomain
+ (ptr-fij45qwle33wfxr3ph3.18120a2.ip6.access.telenet.be.
+ [2a02:1812:512:2c00:fc8:3861:feee:b2b7])
+        by smtp.gmail.com with ESMTPSA id
+ h10-20020a1709060f4a00b0072af4af2f46sm2780998ejj.74.2022.09.03.11.32.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 03 Sep 2022 11:32:48 -0700 (PDT)
+From: Jan Vermaete <jan.vermaete@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jan Vermaete <jan.vermaete@gmail.com>
+Subject: [meta-oe][PATCH] makeself: upate anonymous git access and dropped man
+ page.
+Date: Sat,  3 Sep 2022 20:32:35 +0200
+Message-Id: <20220903183235.2152067-1-jan.vermaete@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.131]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM121.r01.fujitsu.local (10.183.43.173)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 02 Sep 2022 01:35:46 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 03 Sep 2022 18:33:00 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98592
+ https://lists.openembedded.org/g/openembedded-devel/message/98594
 
-From: Xu Huan <xuhuan.fnst@fujitsu.com>
+Review on the mailinglist requested to drop the 'git' user in the SRC_URI.
 
-Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
+The man files seems to be outdated, so I've dropped it.
+https://github.com/megastep/makeself/issues/260
+
+Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
 ---
- ...socket-client_1.3.3.bb => python3-websocket-client_1.4.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-websocket-client_1.3.3.bb => python3-websocket-client_1.4.0.bb} (84%)
+ meta-oe/recipes-devtools/makeself/makeself_2.4.5.bb | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-websocket-client_1.3.3.bb b/meta-python/recipes-devtools/python/python3-websocket-client_1.4.0.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-websocket-client_1.3.3.bb
-rename to meta-python/recipes-devtools/python/python3-websocket-client_1.4.0.bb
-index 9c3ff02e9f..ad43fab24d 100644
---- a/meta-python/recipes-devtools/python/python3-websocket-client_1.3.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-websocket-client_1.4.0.bb
-@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/websocket-client/websocket-client"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b969e9612325987c823fc0737063ebc8"
+diff --git a/meta-oe/recipes-devtools/makeself/makeself_2.4.5.bb b/meta-oe/recipes-devtools/makeself/makeself_2.4.5.bb
+index e0dfc3dae..4cfe2ecca 100644
+--- a/meta-oe/recipes-devtools/makeself/makeself_2.4.5.bb
++++ b/meta-oe/recipes-devtools/makeself/makeself_2.4.5.bb
+@@ -9,7 +9,7 @@ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
--SRC_URI[sha256sum] = "d58c5f284d6a9bf8379dab423259fe8f85b70d5fa5d2916d5791a84594b122b1"
-+SRC_URI[sha256sum] = "79d730c9776f4f112f33b10b78c8d209f23b5806d9a783e296b3813fc5add2f1"
+ SRC_URI = "\
+-    git://git@github.com/megastep/makeself.git;protocol=https;branch=master \
++    git://github.com/megastep/${BPN}.git;protocol=https;branch=master \
+ "
  
- inherit pypi setuptools3
+ SRCREV = "5742be6410bfad2c619fb1e98bf795e8fa0913c7"
+@@ -21,7 +21,6 @@ do_compile[noexec] = "1"
  
+ do_install() {
+     install -d ${D}${bindir}
+-    install -m 0755 ${S}/makeself.1 ${D}${bindir}/
+     install -m 0755 ${S}/makeself.sh ${D}${bindir}/
+     install -m 0755 ${S}/makeself-header.sh ${D}${bindir}/
+ }
 -- 
 2.25.1
 
