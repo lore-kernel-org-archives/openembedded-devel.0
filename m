@@ -2,61 +2,62 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BBC43C6FA86
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6583C6FA8B
 	for <webhook@archiver.kernel.org>; Sun,  4 Sep 2022 07:35:14 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
- [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web10.11322.1662276911253962887
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com
+ [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.web10.11315.1662276892601882509
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:35:11 -0700
+ Sun, 04 Sep 2022 00:35:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=igYaOzZp;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id fa2so5737305pjb.2
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=N1B/q73T;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id d12so5775555plr.6
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:35:11 -0700 (PDT)
+ Sun, 04 Sep 2022 00:35:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=T/CLbFnNYUEmeyvnP4E0oynfSXQDjUEE77AK6ipsnHE=;
-        b=igYaOzZpQ935sSZvCzrO37Z/6DM9Okm9fpoOYrQSuB23tsHWYMgHil/8asPxF4POOK
-         zi20FZBVTaTbPeuhuQN3ShY8by2hzWqF7l343lfpll/miqTWSrTlpbewR1ym/x0rhOtT
-         3I5xbGzZGYK+KeCHqQJ2gLk2rgC4YvXBc9gvT20fxSuoQ/Da3M/SY+Rlx0rRuiQoQk61
-         nGA4cR7DleGSTICfn1rDH4eoV+ylE1bAZqiiIFc/hTYPs6vqh9xYRxYr34VhvwvzWQrl
-         DqyppeFX+FHxNDF3RKlzVjGzD6IOWErEHex7OPM11/mdadoAHtLVgEWiKh8QFAlf0H+P
-         42Mw==
+        bh=OEF7p/VwCaCqZ6DJdnkO7D9gownAN3fYeAIgYQIWQdA=;
+        b=N1B/q73TCLa09BUYg/OrE2Tv9PxMUQXl6GrxvHh8vLdEwylb9ddpOo3MpHSKvmpUQP
+         FHcM0yUH8r6H62z+ON7V9sdBxecE8voHjImSqndsRM8XP5wEFzvqFmOc4B0nrnUuk/cq
+         afIKbNooHsZx6fFHnQNgFeycpXRfByU1OkUnpdgEQGRYdi0CXDEj7w/ySuTKavbcdtzZ
+         jy933FroryHDV+u7+2OV2j5PyfYoIt4FtN1gKQrok2ThDUK5MY0Snh9+M9ucrclLGSJW
+         /Q9QJQqhFOHIkDrPARW4g1wZ812cBVpiENF70TFVhTS9uP/NI0OwoIF8PQGi2cVKcmR/
+         DhHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=T/CLbFnNYUEmeyvnP4E0oynfSXQDjUEE77AK6ipsnHE=;
-        b=kKoOPgLzMCZ8oDclqIYxzdP/k2AhhsniG700MY80YTNp8mCZwUwdX1hGUM9eeCFj3T
-         iw+bBJYtIPOZFpuutoxyP9u/Kk/MHnEudagrrbQc47DwgBFt/n9WyH02ui8Fk17oXZ5/
-         PnjRT7NY7teGp9j4ChGW0nQquvDbQrzJDqtY02QhBXQN541Tas5Sc5uWT4oZQaVcumey
-         JWfi8Tfm7kfvaj9+Ehiz+vP0OSzYc1/3wWbzdlI2CjA61K+azHhek7Wf+ExF/Dp0kmCo
-         UxraD0Uql+gongHBO7jWa1mZNORLeAf1ti5Sy1zm++AW2wq1hHoHRIxG31O/ZqZ+tOQe
-         mjhg==
-X-Gm-Message-State: ACgBeo3JSfv9YZ4STYlnP2iP8HkUA8zp1BNCSaMur2qflItzGMt54tyO
-	vrZtMuRjkYp19Ig6REZZ6+cQbYtK8p28EA==
+        bh=OEF7p/VwCaCqZ6DJdnkO7D9gownAN3fYeAIgYQIWQdA=;
+        b=hV2XwXjgd8TGFabFBybA4Mzpz/4EixFw9+FKAYUwBG+TFzV1YYVmyMHyXOtsERR7qi
+         oQNph5Oe6ve0XoCQ8cRqf9PVD2V041uYHIOahlk7DxJT4TIpsyPFaQihtC0Rl4a8LfCZ
+         NwIGnZC6d7uvgJZdjGBBR0ndONz24dT5Vx6DSXpI4Cs8hvLl69AB3sPcdXmASfBDDAKn
+         J9BrEYTqXlQX8AI+q3tg8OPqRJIOyU4pGq3wb2AVqYyi147pvq6iwG9fmpFEGiICtRgn
+         AB9tAptwE2Sv3sEbkCrfJMKR9cTnNE8MdIxmPu5B96slSH4OyblCcOr2jalEj3zWEHeP
+         ua/A==
+X-Gm-Message-State: ACgBeo3m2F+eh/EVZ95ppIOmVg4nDwd+oAa7aydjvBEk4eocxCiFSQbu
+	4upQUjhaP5RwpRqoGxTMSwmDBXUL0smq9Q==
 X-Google-Smtp-Source: 
- AA6agR7rrIvQVXTY5iqJa6nRjZmxGrB8G3qzewYhujDa6Sk78B+hc1yK8aXjwyVQKbcxcRHrHbjRNg==
-X-Received: by 2002:a17:90b:3e8b:b0:1f5:2a52:9148 with SMTP id
- rj11-20020a17090b3e8b00b001f52a529148mr13187394pjb.175.1662276910450;
-        Sun, 04 Sep 2022 00:35:10 -0700 (PDT)
+ AA6agR5TUJfAlfzUk8fBxVY30UoY4P7V0y/SSWVw7Q5W3E/iuxYsMBzQtGvrq9eu0Rle8RcXFcupqA==
+X-Received: by 2002:a17:902:cf0e:b0:172:60b7:777c with SMTP id
+ i14-20020a170902cf0e00b0017260b7777cmr44152240plg.132.1662276905613;
+        Sun, 04 Sep 2022 00:35:05 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::48c3])
         by smtp.gmail.com with ESMTPSA id
- w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.35.09
+ w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.35.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Sep 2022 00:35:09 -0700 (PDT)
+        Sun, 04 Sep 2022 00:35:05 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 49/63] enscript: Include string.h form str* function
- prototypes
-Date: Sun,  4 Sep 2022 00:34:03 -0700
-Message-Id: <20220904073417.3251865-49-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 44/63] uml-utilities: Add missing headers for exit
+ and str+ functions
+Date: Sun,  4 Sep 2022 00:33:58 -0700
+Message-Id: <20220904073417.3251865-44-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220904073417.3251865-1-raj.khem@gmail.com>
 References: <20220904073417.3251865-1-raj.khem@gmail.com>
@@ -67,60 +68,97 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 04 Sep 2022 07:35:14 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98643
+ https://lists.openembedded.org/g/openembedded-devel/message/98638
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...tring.h-for-strcmp-stcncmp-functions.patch | 27 +++++++++++++++++++
- .../enscript/enscript_1.6.6.bb                |  1 +
- 2 files changed, 28 insertions(+)
- create mode 100644 meta-oe/recipes-extended/enscript/enscript/0001-getopt-Include-string.h-for-strcmp-stcncmp-functions.patch
+ ...andard-headers-for-str-and-exit-APIs.patch | 64 +++++++++++++++++++
+ .../uml-utilities/uml-utilities_20040406.bb   |  1 +
+ 2 files changed, 65 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/uml-utilities/uml-utilities-20040406/0001-Add-missing-standard-headers-for-str-and-exit-APIs.patch
 
-diff --git a/meta-oe/recipes-extended/enscript/enscript/0001-getopt-Include-string.h-for-strcmp-stcncmp-functions.patch b/meta-oe/recipes-extended/enscript/enscript/0001-getopt-Include-string.h-for-strcmp-stcncmp-functions.patch
+diff --git a/meta-oe/recipes-extended/uml-utilities/uml-utilities-20040406/0001-Add-missing-standard-headers-for-str-and-exit-APIs.patch b/meta-oe/recipes-extended/uml-utilities/uml-utilities-20040406/0001-Add-missing-standard-headers-for-str-and-exit-APIs.patch
 new file mode 100644
-index 0000000000..a080b3aef7
+index 0000000000..9fce51a593
 --- /dev/null
-+++ b/meta-oe/recipes-extended/enscript/enscript/0001-getopt-Include-string.h-for-strcmp-stcncmp-functions.patch
-@@ -0,0 +1,27 @@
-+From faec0206611f8ea4ca6f70987866077ac8c3c6c1 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-extended/uml-utilities/uml-utilities-20040406/0001-Add-missing-standard-headers-for-str-and-exit-APIs.patch
+@@ -0,0 +1,64 @@
++From a1c4716ceaed6333f8be01b5d4d971e64babcdd7 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 2 Sep 2022 21:24:27 -0700
-+Subject: [PATCH] getopt: Include string.h for strcmp/stcncmp functions
++Date: Fri, 2 Sep 2022 18:57:42 -0700
++Subject: [PATCH] Add missing standard headers for str* and exit APIs
 +
 +Upstream-Status: Pending
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ compat/getopt.c | 1 +
-+ 1 file changed, 1 insertion(+)
++ jail/jail_uml             | Bin 19120 -> 19120 bytes
++ jail/jail_uml.c           |   1 +
++ port-helper/port-helper.c |   1 +
++ uml_router/port.c         |   1 +
++ uml_router/uml_switch.c   |   1 +
++ watchdog/uml_watchdog.c   |   1 +
++ 6 files changed, 5 insertions(+)
 +
-+diff --git a/compat/getopt.c b/compat/getopt.c
-+index 752f28a..9b984b4 100644
-+--- a/compat/getopt.c
-++++ b/compat/getopt.c
-+@@ -43,6 +43,7 @@
-+ #endif
++--- a/jail/jail_uml.c
+++++ b/jail/jail_uml.c
++@@ -1,5 +1,6 @@
++ #include <stdio.h>
++ #include <unistd.h>
+++#include <stdlib.h> /* for exit */
++ #include <errno.h>
++ 
++ static void Usage(void)
++--- a/port-helper/port-helper.c
+++++ b/port-helper/port-helper.c
++@@ -12,6 +12,7 @@ for read and write, and the console is f
 + 
 + #include <stdio.h>
++ #include <stdlib.h>
+++#include <string.h> /* memset */
++ #include <signal.h>
++ #include <errno.h>
++ #include <unistd.h>
++--- a/uml_router/port.c
+++++ b/uml_router/port.c
++@@ -1,5 +1,6 @@
++ #include <stdio.h>
++ #include <stdlib.h>
+++#include <string.h> /* memcmp */
++ #include <unistd.h>
++ #include <errno.h>
++ #include <sys/socket.h>
++--- a/uml_router/uml_switch.c
+++++ b/uml_router/uml_switch.c
++@@ -5,6 +5,7 @@
++ #include <stdio.h>
++ #include <errno.h>
++ #include <stdlib.h>
 ++#include <string.h> /* strcmp */
-+ 
-+ /* Comment out all this code if we are using the GNU C Library, and are not
-+    actually compiling the library itself.  This code is part of the GNU C
-+-- 
-+2.37.3
-+
-diff --git a/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb b/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
-index 3f00621f71..9490ee09dc 100644
---- a/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
-+++ b/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
-@@ -13,6 +13,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
- SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-            file://enscript-autoconf.patch \
-            file://0001-Fix-builds-with-recent-gettext.patch \
-+           file://0001-getopt-Include-string.h-for-strcmp-stcncmp-functions.patch \
++ #include <signal.h>
++ #include <fcntl.h>
++ #include <stdint.h>
++--- a/watchdog/uml_watchdog.c
+++++ b/watchdog/uml_watchdog.c
++@@ -1,5 +1,6 @@
++ #include <stdio.h>
++ #include <stdlib.h>
+++#include <string.h> /* strcmp */
++ #include <unistd.h>
++ #include <signal.h>
++ #include <errno.h>
+diff --git a/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb b/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
+index 663a145ef7..35ae5f777d 100644
+--- a/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
++++ b/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
+@@ -7,6 +7,7 @@ SRC_URI = "http://downloads.sourceforge.net/project/user-mode-linux/tools/1/uml_
+            file://fix-ldflags.patch \
+            file://unstrip.patch \
+            file://0001-include-required-system-header-files-for-fd_set-and-.patch \
++           file://0001-Add-missing-standard-headers-for-str-and-exit-APIs.patch \
             "
- 
- inherit autotools gettext
+ SRC_URI[md5sum] = "2c1ccd9efacbfb39e42d482b89b2550a"
+ SRC_URI[sha256sum] = "4f179b1db021ef15ac7e9b2eed57c525db127a754c574f591c367460cded9f41"
 -- 
 2.37.3
 
