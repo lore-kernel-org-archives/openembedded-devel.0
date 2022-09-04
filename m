@@ -2,62 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 621ABC6FA8C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C205C6FA8E
 	for <webhook@archiver.kernel.org>; Sun,  4 Sep 2022 07:34:34 +0000 (UTC)
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
- [209.85.210.177])
- by mx.groups.io with SMTP id smtpd.web08.11126.1662276867029158248
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com
+ [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.web12.11490.1662276872161910657
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:34:27 -0700
+ Sun, 04 Sep 2022 00:34:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=MPBP42mc;
- spf=pass (domain: gmail.com, ip: 209.85.210.177,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=O2rQESQ7;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f177.google.com with SMTP id b144so1088212pfb.7
+Received: by mail-pf1-f173.google.com with SMTP id z187so5852144pfb.12
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:34:26 -0700 (PDT)
+ Sun, 04 Sep 2022 00:34:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=+8aTF4m4mXP3eUVbYHfxu4EDtorXDDWJJnndQEEnwB4=;
-        b=MPBP42mcrywwaI55Kl94zLGVpfeDQh6q1qEJZcdvQ3dSlKLYI1ZhfxNP+mk6+/8Q80
-         1OSjM1WHNexTu/jvKVRZugwHMg8z0BeUwzSl3Y0aoHTBEzV02vN8TJnsjQNjY0WxwMzN
-         eRxEJ36OY/NZv0URvbT0aeo+caR8lVNeJtFmSu6xKI9jBGXXM+mwJMPVgJFx/vasFqei
-         2lhFwZ9yeLDULfXj3Rr+q9woA1a+qm1pfont6vSFpQ4P2H1FFmzksI95lMH9FgsMykW3
-         ifPWqapvHojZSb6bTq2Yl1TquucJM37zNcQ0Rm/JtLKvq35MP5sC2UpOlAIfL7f6km2b
-         BeHw==
+        bh=LpbhaQoi14dAldBoa6EDet+2pX82den8Rt5yGZ10n+8=;
+        b=O2rQESQ7MIVFXe/zVSS/9JFDAKhIOX1DU2GtI0rb5mfTvj9HajBhU9PrtglWSUdCOL
+         0epSx4rBEglWf4nLevG1LkE+DSeOoCgV5ncixHWyWId8ROOJvOR4VqgdxQyfzLm14jl8
+         b6KNXH1AzIDQegHabc51vPFDLSXyb8rqNMII/86eI9//ye5/T6T696Ox2SYbSbNX73a7
+         PBRjIq1tDP1crPHhSb5kWi+iuhETMFPsp5ZzsA/GmYgvEoY+P+AZdYeGy5wA+3RfCJda
+         yWD6CpFO1G4LjZ7QwFhu86gUQoT1wl2bg1zKfDga/ZXHvxKRr1lDyd9I34MRQP+6Wg+j
+         NfWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=+8aTF4m4mXP3eUVbYHfxu4EDtorXDDWJJnndQEEnwB4=;
-        b=RabIKq/sXXyNwcqjN7fU4DWF8Xrs0tFCVgwr9ZeYC6PHHUAIJXygOl9hfOxWllAOHn
-         h6Cd8TRH4LmLQekdbJWBsE/GKqAQhiX6bfpO4QVme1V6jf29WbuK2ANs7k5sGAxTgGI7
-         rFbpDrSR5KNH1S8TxOKkpPbd8b/aQxq67850a/Po6bn9mkb6ui6guKjSohaqwJQV2Ap8
-         7LuWyl2DXvDSj35tmdFO2392IZY3v+VUvkqo4eVO+Kq+EJJLpEec0VpaVCcunxPFjpXk
-         pWM+ZsQjZXZEITpJxcKp3zAOpsDgkdj4yCpMPpaxIUTMMWoyuHprPTtYCN4K0aKQQu2j
-         pQRg==
-X-Gm-Message-State: ACgBeo17B/WRU/OxFzljcY2y/rox6GVawFzwwSF2t2rh2HOtnMcx0+co
-	pK2t6im3zytShgIx1YAAP9oTysDlyJ+lZw==
+        bh=LpbhaQoi14dAldBoa6EDet+2pX82den8Rt5yGZ10n+8=;
+        b=AolOz5NmXLfSmeXeIhO2mhnEL2LVtFcg4n6JUayzNDqEQq3GuhDuoCm/jDB5P1zngd
+         ad25rPrX5EVJKLcwqlSL9fCL8j5ldFIfomRYbZCA8WO6y/HJknSvop+6xNaAwmzVpxlO
+         kKndRQqYW2OQJNW1HxTPWBOfgBxRes8dmjk3uUTqcyAwJuSARr7kuH/Wo410/wKsVx0P
+         nFTX/AVSoIa0TYmWLGrAJ+UiBU6S+KGR/CdBulpC9l+Mk0JVZpL6koZrzfoE4SSOA1dJ
+         IrEOzW2l5cVkjFgmRCnxOI3ZrxzsdHWYfBpqJ8+Hv1rRAusuQ5NC8NxhmdL0x7m6hPEx
+         cdqw==
+X-Gm-Message-State: ACgBeo3H2ckwhLXhwXGmHg/OOL525ftTruMQAjZxLQi3kOoOV9MG29vi
+	iVjDn2BDPnI8vuWUnYh1Ae9CkeSyXC9ckQ==
 X-Google-Smtp-Source: 
- AA6agR7n9yDliLuxQZLfzyWWuRsMT2OHoI2/c8/DNHFgC8epfh9rYJJmllm8IbEosEnf2UZ3yFhRLg==
-X-Received: by 2002:a05:6a02:281:b0:42b:748e:5d90 with SMTP id
- bk1-20020a056a02028100b0042b748e5d90mr35631532pgb.422.1662276866192;
-        Sun, 04 Sep 2022 00:34:26 -0700 (PDT)
+ AA6agR4+Ih/sXvoRr8fLTV9AqWG3mcs8k18RTSMO3RY9vbzhFqSL6KRVwt0zYG2xci+XPB6IhbDxTQ==
+X-Received: by 2002:a05:6a00:cc7:b0:52f:2ada:11c5 with SMTP id
+ b7-20020a056a000cc700b0052f2ada11c5mr44060608pfv.19.1662276871278;
+        Sun, 04 Sep 2022 00:34:31 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::48c3])
         by smtp.gmail.com with ESMTPSA id
- w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.34.25
+ w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.34.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Sep 2022 00:34:25 -0700 (PDT)
+        Sun, 04 Sep 2022 00:34:30 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 05/63] fvwm: Disable int-conversion and implicit-int
- warnings as errors
-Date: Sun,  4 Sep 2022 00:33:19 -0700
-Message-Id: <20220904073417.3251865-5-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 10/63] linuxptp: Include string.h for strncpy()
+Date: Sun,  4 Sep 2022 00:33:24 -0700
+Message-Id: <20220904073417.3251865-10-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220904073417.3251865-1-raj.khem@gmail.com>
 References: <20220904073417.3251865-1-raj.khem@gmail.com>
@@ -68,26 +67,60 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 04 Sep 2022 07:34:34 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98599
+ https://lists.openembedded.org/g/openembedded-devel/message/98604
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../0001-include-string.h-for-strncpy.patch   | 27 +++++++++++++++++++
+ .../linuxptp/linuxptp_3.1.1.bb                |  1 +
+ 2 files changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp/0001-include-string.h-for-strncpy.patch
 
-diff --git a/meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb b/meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb
-index 75b24bf88b..123af4d3aa 100644
---- a/meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb
-+++ b/meta-oe/recipes-graphics/fvwm/fvwm_2.6.9.bb
-@@ -75,6 +75,8 @@ EXTRA_OECONF = " \
- EXTRA_OEMAKE = " \
-     V=1 \
- "
-+# clang treats them as errors by default now starting with 15.0+
-+CFLAGS += "-Wno-error=int-conversion -Wno-error=implicit-int"
+diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp/0001-include-string.h-for-strncpy.patch b/meta-oe/recipes-connectivity/linuxptp/linuxptp/0001-include-string.h-for-strncpy.patch
+new file mode 100644
+index 0000000000..60f2079d37
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp/0001-include-string.h-for-strncpy.patch
+@@ -0,0 +1,27 @@
++From d49b4fb8063ecd89617587e5ea566cc9da9393ef Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 31 Aug 2022 19:09:18 -0700
++Subject: [PATCH] include string.h for strncpy()
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ interface.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/interface.c b/interface.c
++index 65bdff0..5228db9 100644
++--- a/interface.c
+++++ b/interface.c
++@@ -5,6 +5,7 @@
++  * @note SPDX-License-Identifier: GPL-2.0+
++  */
++ #include <stdlib.h>
+++#include <string.h>
++ #include "interface.h"
++ 
++ struct interface {
++-- 
++2.37.3
++
+diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_3.1.1.bb b/meta-oe/recipes-connectivity/linuxptp/linuxptp_3.1.1.bb
+index 9c0f56e736..bb4871e14f 100644
+--- a/meta-oe/recipes-connectivity/linuxptp/linuxptp_3.1.1.bb
++++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_3.1.1.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v3.1/linuxptp-${PV}.tgz \
+            file://build-Allow-CC-and-prefix-to-be-overriden.patch \
+            file://Use-cross-cpp-in-incdefs.patch \
++           file://0001-include-string.h-for-strncpy.patch \
+            "
  
- do_install:append() {
-     install -d -m 0755 ${D}/${sysconfdir}/xdg/fvwm
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/linuxptp/files/"
 -- 
 2.37.3
 
