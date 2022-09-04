@@ -2,227 +2,132 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75835C6FA86
-	for <webhook@archiver.kernel.org>; Sun,  4 Sep 2022 07:34:24 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com
- [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web09.11274.1662276862770052425
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 44201C6FA83
+	for <webhook@archiver.kernel.org>; Sun,  4 Sep 2022 07:34:34 +0000 (UTC)
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
+ [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.web08.11127.1662276868051937343
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:34:22 -0700
+ Sun, 04 Sep 2022 00:34:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=X34B5Kxd;
- spf=pass (domain: gmail.com, ip: 209.85.214.180,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id t3so699713ply.2
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=MTf0cbwR;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id
+ ck21-20020a17090afe1500b002003ba5b71cso943411pjb.0
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:34:22 -0700 (PDT)
+ Sun, 04 Sep 2022 00:34:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date;
-        bh=WnpNd1N1iaSyDrGS5+Fg7+2Uo7OJLwiC8mt3UL3HvZE=;
-        b=X34B5Kxd40fi+ge33mfBQoGm3r/qrrE0RgDUsjqmpY+7QG4C+nXpv2akOe4iYwGAfG
-         FCbyC/0esdZ4zsmRQs0/MuBovqHe8EhSgGemAUK1wjcJncI7wtNqKkpSayyARjAu8J2R
-         XYy/9P/b0HvR+SD/1DkOMQLv8iQj4voBgqcXbhUJoYtGgIy2B+mDD4SBVhaU466MC+1b
-         OAYgIImGo9rAhrZPD/peyt/vcfuBfX/E8BOuAFMyfY59D5+JCvTxqwCSA30qGwG1HQYb
-         qGYHRRsEuiL+BXxmfdZqQtk3YKVz2YzA4TinQFCpCp/Hus1FENXsiXCnpMVLId2axt9x
-         EfGQ==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
+        bh=PefLegcPwQlphx1i/Uu8nYOu1CUdB5952H4OtD2Lrr8=;
+        b=MTf0cbwRH5qDSxikRYCFmeHQXodN4XOxgXoJnEIqCVgCmPNOTKSlfAPg0ODVLR7U6d
+         +h01ZV8u5jowt+i4vHAXB7SwTcD3SewH63qYswy9sFsIcOY2f+RK0/kxQVz+r0UgsxoQ
+         xFC6C5MupooF4s5hj33lhVk8BWkzpr3HV4T2XHRPnzowQlVA1vhvMWV2EQRYjrIMWtX7
+         Mh7XiISzyH+O7+eaWvedJNfj79tKb7Y4kD9rJpBp3CX/cCd7LDl8m5gqsW84cEQEqLfB
+         KT4tn1ZT3dxJSvXhpV7N0wbTOVL6D5A4QbudFdzGReMh0G1pzalibVdQsKPtTkbP0Wyh
+         pOvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date;
-        bh=WnpNd1N1iaSyDrGS5+Fg7+2Uo7OJLwiC8mt3UL3HvZE=;
-        b=8KjXNEhWGx17qYsoV6z+Melm1NCFgvSZRyrutU4OFwttGXFmHX6adnfNM6kU2kru5V
-         qC6uXs1Td2gf5cxK9DJmXr9QUZy/C29J9lmPVV3lSMR4rPNw1HiXXRKjZobDuvCH2qy+
-         LyYaDS8GZMgQUWMPa5LSSTVwyRJfk+KtGyoZ6XO7u3+prkaxt+A6AM7OvC7pUJK254X1
-         9h3m4xBI/Xdbds7GvjA8B5LV5lDmSs97oOpksqw/H3YJ5J0e8LeLIWcplgKxBflEIS5r
-         cjYwzNL3kR2ifhS1SMgrKrbCT77uML6AeWeYfD5tq5Xa1A7x9oMD+pF+RUwAef+tQQ1N
-         RC4Q==
-X-Gm-Message-State: ACgBeo39tuCJ3ZXfFi5nmFJZlKBmt1gfiaKD1I/zwv1K2uusuI1NbN9D
-	KVzRW6mL7MXndlgjZj1Sv7WwXACq6QodHA==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date;
+        bh=PefLegcPwQlphx1i/Uu8nYOu1CUdB5952H4OtD2Lrr8=;
+        b=bz6rJ/vyh65ZBzm7GZBQnEFUHJBfCScSErEvp/9YOXOsLJGZGaH5G7civgImBPGWrg
+         //82mc4iv7qRnt4Oo4fExySFkiXpg0eP3qiAV2km0aNDNrbEoRNall6Y2gN+35ziqW/8
+         rW3SdcxsWjZkrwhifFuNuRT3lHR9lPZkph1Pr6FG0P4kjevrkW+KVIbqALrWVDK8Qp8B
+         RnJZJwQb40/o21zrZIx3tf7UplQaPFmEJjCiZyzgdFFl/+bo2v5f8Qyvl9+zoQgNsyMn
+         Ty67bHPT3Mg+gy2sf+2s2e0qLvJoeNe/xy9lZCuVE2rrMjn9CPmdwTIhmnWjFZmTez2m
+         6nWw==
+X-Gm-Message-State: ACgBeo3yaREZ+Wwmrl7yTvcVvka5We+ifhhNsi4LM8t/TUdiz6Q7PB4l
+	W6sAlPsTIXGpT9a2wn4q12/u9uRzGJS6Xg==
 X-Google-Smtp-Source: 
- AA6agR4W1ITzY6wAuhaSUUlkXQFoUtPxCl9rHsTHArFdA7gnj0bbAOkAVPu8UgdjlLpmn+TpJCWqTQ==
-X-Received: by 2002:a17:903:2345:b0:16f:1f3:1ade with SMTP id
- c5-20020a170903234500b0016f01f31ademr44797776plh.106.1662276861828;
-        Sun, 04 Sep 2022 00:34:21 -0700 (PDT)
+ AA6agR7Okt4rhkHtie2DHiH5xxzTu5KTc56teaEUVqCIvZUvK4mX7I3Z7cFYymkdswOFMzRZEwMkvA==
+X-Received: by 2002:a17:90b:4ac3:b0:1fd:ded0:ea80 with SMTP id
+ mh3-20020a17090b4ac300b001fdded0ea80mr13227231pjb.142.1662276867146;
+        Sun, 04 Sep 2022 00:34:27 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::48c3])
         by smtp.gmail.com with ESMTPSA id
- w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.34.21
+ w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.34.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Sep 2022 00:34:21 -0700 (PDT)
+        Sun, 04 Sep 2022 00:34:26 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 01/63] libutempter: Upgrade to 1.2.2-alt1
-Date: Sun,  4 Sep 2022 00:33:15 -0700
-Message-Id: <20220904073417.3251865-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 06/63] hddtemp: Add missing prototype for
+ ata_get_powermode in sata.c
+Date: Sun,  4 Sep 2022 00:33:20 -0700
+Message-Id: <20220904073417.3251865-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.3
+In-Reply-To: <20220904073417.3251865-1-raj.khem@gmail.com>
+References: <20220904073417.3251865-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 04 Sep 2022 07:34:24 -0000
+ <openembedded-devel@lists.openembedded.org>; Sun, 04 Sep 2022 07:34:34 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98595
-
-License-Update: Whitespace removal [1]
-
-Drop glibc assumptions patch its fixed upstream
-
-[1] https://git.altlinux.org/people/ldv/packages/libutempter.git?p=libutempter.git;a=blobdiff;f=libutempter/COPYING;h=5522aa5f33e23eb2be04b0c1fe789b609e7961fe;hp=2d2d780e6014b850ca3b8437452e24eba5f96508;hb=10539e43e615225da8351895668e704726ffcb53;hpb=3e657409d46e0571f44970ebcd2c972b60778ec3
+ https://lists.openembedded.org/g/openembedded-devel/message/98600
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../libutempter/0001-Fix-macro-error.patch    |  7 +-
- .../libutempter-remove-glibc-assumption.patch | 81 -------------------
- ...butempter.bb => libutempter_1.2.2-alt1.bb} |  8 +-
- 3 files changed, 4 insertions(+), 92 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libutempter/libutempter/libutempter-remove-glibc-assumption.patch
- rename meta-oe/recipes-support/libutempter/{libutempter.bb => libutempter_1.2.2-alt1.bb} (83%)
+ ...-Declare-ata_get_powermode-prototype.patch | 33 +++++++++++++++++++
+ .../hddtemp/hddtemp_0.3-beta15.bb             |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-oe/recipes-support/hddtemp/hddtemp/0001-sata.c-Declare-ata_get_powermode-prototype.patch
 
-diff --git a/meta-oe/recipes-support/libutempter/libutempter/0001-Fix-macro-error.patch b/meta-oe/recipes-support/libutempter/libutempter/0001-Fix-macro-error.patch
-index 8140ea3438..00119af11c 100644
---- a/meta-oe/recipes-support/libutempter/libutempter/0001-Fix-macro-error.patch
-+++ b/meta-oe/recipes-support/libutempter/libutempter/0001-Fix-macro-error.patch
-@@ -11,15 +11,13 @@ Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
-  iface.c | 9 ++++++++-
-  1 file changed, 8 insertions(+), 1 deletion(-)
- 
--diff --git a/iface.c b/iface.c
--index 5951d81..27793f0 100644
- --- a/iface.c
- +++ b/iface.c
- @@ -43,7 +43,14 @@
-         __result; }))
-  #endif
-  
---#define	UTEMPTER_DEFAULT_PATHNAME	LIBEXECDIR "/utempter/utempter"
-+-#define UTEMPTER_DEFAULT_PATHNAME	LIBEXECDIR "/utempter/utempter"
- +#ifdef  LIBEXECDIR
- +#  define CAT_PATH(DIR1,DIR2)           DIR1##DIR2
- +#  define RAW_UTEMPTER_PATH             CAT_PATH(LIBEXECDIR,/utempter/utempter)
-@@ -31,6 +29,3 @@ index 5951d81..27793f0 100644
-  
-  static const char *utempter_pathname;
-  static int saved_fd = -1;
---- 
--1.8.3.1
--
-diff --git a/meta-oe/recipes-support/libutempter/libutempter/libutempter-remove-glibc-assumption.patch b/meta-oe/recipes-support/libutempter/libutempter/libutempter-remove-glibc-assumption.patch
-deleted file mode 100644
-index 6ed93355bb..0000000000
---- a/meta-oe/recipes-support/libutempter/libutempter/libutempter-remove-glibc-assumption.patch
-+++ /dev/null
-@@ -1,81 +0,0 @@
--diff -Naur libutempter-1.1.6.orig/utempter.c libutempter-1.1.6/utempter.c
----- libutempter-1.1.6.orig/utempter.c	2010-11-04 13:14:53.000000000 -0400
--+++ libutempter-1.1.6/utempter.c	2014-06-20 16:37:09.762403323 -0400
--@@ -34,13 +34,7 @@
-- #include <sys/stat.h>
-- #include <utmp.h>
-- 
---#ifdef __GLIBC__
-- # include <pty.h>
---#elif defined(__FreeBSD__)
---# include <libutil.h>
---#else
---# error Unsupported platform
---#endif /* __GLIBC__ || __FreeBSD__ */
-- 
-- #define	DEV_PREFIX	"/dev/"
-- #define	DEV_PREFIX_LEN	(sizeof(DEV_PREFIX)-1)
--@@ -106,17 +100,12 @@
-- 
-- static int
-- write_uwtmp_record(const char *user, const char *term, const char *host,
---#ifdef __GLIBC__
-- 		   pid_t pid,
---#endif
-- 		   int add)
-- {
-- 	struct utmp ut;
-- 	struct timeval tv;
---
---#ifdef __GLIBC__
-- 	size_t offset;
---#endif
-- 
-- 	memset(&ut, 0, sizeof(ut));
-- 
--@@ -128,8 +117,6 @@
-- 	if (host)
-- 		strncpy(ut.ut_host, host, sizeof(ut.ut_host));
-- 
---#ifdef __GLIBC__
---
-- 	offset = (strlen(term) <= sizeof(ut.ut_id)) ? 0 :
-- 			strlen(term) - sizeof(ut.ut_id);
-- 	strncpy(ut.ut_id, term + offset, sizeof(ut.ut_id));
--@@ -156,27 +143,6 @@
-- 
-- 	(void) updwtmp(_PATH_WTMP, &ut);
-- 
---#elif defined(__FreeBSD__)
---
---	ut.ut_time = tv.tv_sec;
---
---	if (add)
---	{
---		login(&ut);
---	} else
---	{
---		if (logout(term) != 1)
---		{
---#ifdef	UTEMPTER_DEBUG
---			fprintf(stderr, "utempter: logout: %s\n",
---				strerror(errno));
---#endif
---			exit(EXIT_FAILURE);
---		}
---	}
---
---#endif /* __GLIBC__ || __FreeBSD__ */
---
-- #ifdef	UTEMPTER_DEBUG
-- 	fprintf(stderr,
-- 		"utempter: DEBUG: utmp/wtmp record %s for terminal '%s'\n",
--@@ -255,8 +221,6 @@
-- 	validate_device(device);
-- 
-- 	return write_uwtmp_record(pw->pw_name, device + DEV_PREFIX_LEN, host,
---#ifdef __GLIBC__
-- 				  pid,
---#endif
-- 				  add);
-- }
-diff --git a/meta-oe/recipes-support/libutempter/libutempter.bb b/meta-oe/recipes-support/libutempter/libutempter_1.2.2-alt1.bb
-similarity index 83%
-rename from meta-oe/recipes-support/libutempter/libutempter.bb
-rename to meta-oe/recipes-support/libutempter/libutempter_1.2.2-alt1.bb
-index 5c05271d17..0d2cd135c6 100644
---- a/meta-oe/recipes-support/libutempter/libutempter.bb
-+++ b/meta-oe/recipes-support/libutempter/libutempter_1.2.2-alt1.bb
-@@ -5,16 +5,14 @@ screen and xterm to record user sessions to utmp and wtmp files."
- HOMEPAGE = "ftp://ftp.altlinux.org/pub/people/ldv/utempter"
- SECTION = "System Environment/Libraries"
- LICENSE = "GPL-2.0-only & GPL-2.0-or-later & LGPL-2.0-only & MIT"
--LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
- 
--SRCREV = "3ef74fff310f09e2601e241b9f042cd39d591018"
--PV = "1.1.6-alt2+git${SRCPV}"
-+SRCREV = "63825e2244629d44dae21132b1065d7ecc0491c0"
- 
- SRC_URI = "git://git.altlinux.org/people/ldv/packages/libutempter.git;branch=master \
-            file://0001-Fix-macro-error.patch \
-            file://0002-Proper-macro-path-generation.patch \
--           file://libutempter-remove-glibc-assumption.patch \
--          "
-+           "
- 
- S = "${WORKDIR}/git/${BPN}"
- 
+diff --git a/meta-oe/recipes-support/hddtemp/hddtemp/0001-sata.c-Declare-ata_get_powermode-prototype.patch b/meta-oe/recipes-support/hddtemp/hddtemp/0001-sata.c-Declare-ata_get_powermode-prototype.patch
+new file mode 100644
+index 0000000000..5703d3c241
+--- /dev/null
++++ b/meta-oe/recipes-support/hddtemp/hddtemp/0001-sata.c-Declare-ata_get_powermode-prototype.patch
+@@ -0,0 +1,33 @@
++From c5ca31940d1d1889ef2cc6974c18ff24ab406748 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 31 Aug 2022 16:42:23 -0700
++Subject: [PATCH] sata.c: Declare ata_get_powermode prototype
++
++Fixes build warnings/errors
++
++sata.c:127:10: error: call to undeclared function 'ata_get_powermode'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
++|   switch(ata_get_powermode(dsk->fd))
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/sata.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/src/sata.c b/src/sata.c
++index d67621f..4172245 100644
++--- a/src/sata.c
+++++ b/src/sata.c
++@@ -52,7 +52,8 @@
++                 (((u16)(__x) & (u16)0xff00U) >> 8) )); \
++ })
++ 
++- 
+++extern enum e_powermode ata_get_powermode(int device);
+++
++ static int sata_probe(int device) {
++   int bus_num;
++   unsigned char cmd[4] = { WIN_IDENTIFY, 0, 0, 1 };
++-- 
++2.37.3
++
+diff --git a/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb b/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb
+index b4be39feb5..e9d30977fe 100644
+--- a/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb
++++ b/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb
+@@ -10,6 +10,7 @@ SRC_URI = "${SAVANNAH_NONGNU_MIRROR}/hddtemp/hddtemp-0.3-beta15.tar.bz2 \
+            file://hddtemp-0.3-beta15-autodetect-717479.patch \
+            file://0001-backtrace-Replace-struct-ucontext-with-ucontext_t.patch \
+            file://0001-configure.ac-Rename-to-configure.ac-and-use-external.patch \
++           file://0001-sata.c-Declare-ata_get_powermode-prototype.patch \
+            file://hddtemp.db \
+            file://init \
+ "
 -- 
 2.37.3
 
