@@ -2,60 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F4F9C6FA86
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98EA7C6FA89
 	for <webhook@archiver.kernel.org>; Sun,  4 Sep 2022 07:35:04 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
- [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.web09.11278.1662276874164431717
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com
+ [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web09.11284.1662276902992911181
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:35:01 -0700
+ Sun, 04 Sep 2022 00:35:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=mWWDje/2;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id o4so5718650pjp.4
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=FEmQvbLo;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id b144so1088760pfb.7
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:35:00 -0700 (PDT)
+ Sun, 04 Sep 2022 00:35:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=OOVHE0GKqiPFZDWriNxnAIyqRkGH7cwdJyUS/B8knIE=;
-        b=mWWDje/2gYoUQGF3zKs7crIhD9fxL14jolCUzKW+B/Gl4QfFDayw4S+gBV/yJHgrKi
-         rvu+16dij7uwVeL28thCBayQFnUol/FKIryM9KV0ya6zcG+RlqU9WFM+zB+ETPQksGuY
-         fRg3vjMPE5ujUOJ4uKpNtuXAGOZ8kE0WCkzMuVBNwlrY/w+bH6gwo9oXt9QQNmX1LWAp
-         t12Dtc7yxnIwQeuTbLMvX2lRRGtM48j7Cd8VxbsCjG36Ke/GOG71gmv6GmUj7dtuV7XR
-         r+9qF5kVgpB+yvVu0rlLzslkxNC3nQe0Yhnt8bniI8BjcgXcRpYQy2qVhvI/vmrWXhzn
-         envA==
+        bh=Wj4GFYkIs3etjEyxvZskPYig+khyK7wDnk+D3OEB9Xk=;
+        b=FEmQvbLoGBqytEFeLJrEbN/uqcVrOLxBF9yitqbN0g4Ii4N1g0+F4QXT9XnjMzDmjO
+         RA1afg6j5RCtwijjHWC5RsLrjsYBpCZpsHhoDlGQDcByxUgPWC5DOdnyAuYm7WMtBBDM
+         yYve2zG4pyMd8ozHd29YN9P5aUy8MZLmj0fqHISAcNiSDhi/qWqDmb1bLuzffwlShMqj
+         YQ+DD/51pD1OArOf3v8sPUZU/MOBPD37aslt2G5aiINNIvwE4ptpUFuBwTvQh6IijLXu
+         j+tqtrVObhu1g+Cg2hDEtg+mrkdO5oqX6hhaIP9jXGYGpRejTCCRvlrPSrsQho6mWfpw
+         Qdug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=OOVHE0GKqiPFZDWriNxnAIyqRkGH7cwdJyUS/B8knIE=;
-        b=nvDYnAUD82I5/v0ZGbMoA1P2PETBB+Yv/x6LLUVvCvHI43lKVfdE8+q6nxwk+ILdu0
-         5bdMhSGwLxM2R7S6tVZ1xs7os7pSFNmJqYOUegfIl89pajRZmkFYdEE4oyA6EtLX/GT6
-         Fzr9znfQ2ZUtyDDumr7aCwu/hXJ9/c3EnoOZlqpw+gtp6LA3/sLVxy23DGIWlltbJ4Uy
-         VB4CukppmRGi5xztzwZkBkIo3sue8rNNhlVjJyUGr89bvQEolNt+V4uVsLh6j/fOh159
-         x6IcKqeVrB/Ii/UUcJIeG9jw4TROusk2jIbi/PL2yEVJJ37r58bfLbOrgk5NyCFgdPXH
-         SXkw==
-X-Gm-Message-State: ACgBeo0tRgWC8JcbzL8V3cOviUsPoLF1Tcd0H8Nvq12dNcPZwj+K/RL1
-	grhaY4S/Sb372t+3Z93jq6MRnYbuXdkD3g==
+        bh=Wj4GFYkIs3etjEyxvZskPYig+khyK7wDnk+D3OEB9Xk=;
+        b=cDkeXKMnScovpxM095YHg89SK8Njq7r00kMrW1ljafawf9BIP7yj+PfbYDi8U7Ac42
+         sYRxSLFYz1SwhignNnWe2qmC2jG4asmQ8Oc8MiqDQHMWERUS8sV1PMswSSG8pyoslb7v
+         5VaaF0LXgPpqqyWuBUtZULcuQ2gLs3bKeBdAE2jn93ETEj/qwWmrxOIX0owOHuOTFGpX
+         bMfzmuQZCXGVjc8hfQUv8o6/JcJ6H84UjZQeTiM9/qDQza0wri/TZDfipR3FiBQFwAD2
+         w9PPhxCQoY3L53eRnLZwIuxM8SexQAV8iSEk3v8i0dXqDksgjJo4VVdCsb5HJFjnTOwY
+         CRdw==
+X-Gm-Message-State: ACgBeo3ZjGudRCDrkhvbINJJeHY93dVmSoTLARDy0ixuvIWxzTTBVIOS
+	oap0BhNQtfIWI/cxxXX8pG3xnsj9g0KHfg==
 X-Google-Smtp-Source: 
- AA6agR6aaEkOBlSVZXLo9jyDsqaZGO1Q0yasAauKK86j0TRzuG7rB4d3600XL1jeejlB78ddAsHSaA==
-X-Received: by 2002:a17:902:f550:b0:175:3934:7604 with SMTP id
- h16-20020a170902f55000b0017539347604mr22620585plf.100.1662276899847;
-        Sun, 04 Sep 2022 00:34:59 -0700 (PDT)
+ AA6agR7OJzkHxr99CXQQtN5bMNZ9L6PE1moGBGEblFsjQx8XdrYaJRE5vUfgQyPl4mn08zEfJrMRXA==
+X-Received: by 2002:aa7:888d:0:b0:538:328b:2ffb with SMTP id
+ z13-20020aa7888d000000b00538328b2ffbmr33690012pfe.82.1662276901714;
+        Sun, 04 Sep 2022 00:35:01 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::48c3])
         by smtp.gmail.com with ESMTPSA id
- w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.34.58
+ w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.35.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Sep 2022 00:34:59 -0700 (PDT)
+        Sun, 04 Sep 2022 00:35:01 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 38/63] geis: Add missing prototypes to functions
-Date: Sun,  4 Sep 2022 00:33:52 -0700
-Message-Id: <20220904073417.3251865-38-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 40/63] hplip: Upgrade to 3.22.6
+Date: Sun,  4 Sep 2022 00:33:54 -0700
+Message-Id: <20220904073417.3251865-40-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220904073417.3251865-1-raj.khem@gmail.com>
 References: <20220904073417.3251865-1-raj.khem@gmail.com>
@@ -66,723 +67,548 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 04 Sep 2022 07:35:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98632
+ https://lists.openembedded.org/g/openembedded-devel/message/98634
+
+Add fix to remove python2 need.
+Add fixes to build with clang+musl
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...function-declaration-with-prototypes.patch | 690 ++++++++++++++++++
- .../canonical-multitouch/geis_2.2.17.bb       |   1 +
- 2 files changed, 691 insertions(+)
- create mode 100644 meta-oe/recipes-support/canonical-multitouch/geis/0001-provide-function-declaration-with-prototypes.patch
+ ...tils-Include-string.h-for-strcasestr.patch |  44 ++++++
+ ...or-only-when-DISBALE_IMAGEPROCESSOR_.patch |  32 +++++
+ ....c-Define-column-to-be-int-explcitly.patch |  21 +++
+ ...fine-missing-prototype-for-functions.patch |  53 +++++++
+ ...-Add-printf-format-to-snprintf-calls.patch |  62 +++++++++
+ ...-for-missing-Python3-transition-of-t.patch | 130 ++++++++++++++++++
+ .../hplip/999-remove-lImageProcessor.patch    |  69 ----------
+ .../hplip/hplip/configure.patch               |   7 +-
+ .../{hplip_3.19.12.bb => hplip_3.22.6.bb}     |  12 +-
+ 9 files changed, 354 insertions(+), 76 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/hplip/hplip/0001-common-utils-Include-string.h-for-strcasestr.patch
+ create mode 100644 meta-oe/recipes-extended/hplip/hplip/0002-Add-ImageProcessor-only-when-DISBALE_IMAGEPROCESSOR_.patch
+ create mode 100644 meta-oe/recipes-extended/hplip/hplip/0003-pserror.c-Define-column-to-be-int-explcitly.patch
+ create mode 100644 meta-oe/recipes-extended/hplip/hplip/0004-Define-missing-prototype-for-functions.patch
+ create mode 100644 meta-oe/recipes-extended/hplip/hplip/0005-hp_ipp.c-Add-printf-format-to-snprintf-calls.patch
+ create mode 100644 meta-oe/recipes-extended/hplip/hplip/0006-Workaround-patch-for-missing-Python3-transition-of-t.patch
+ delete mode 100644 meta-oe/recipes-extended/hplip/hplip/999-remove-lImageProcessor.patch
+ rename meta-oe/recipes-extended/hplip/{hplip_3.19.12.bb => hplip_3.22.6.bb} (80%)
 
-diff --git a/meta-oe/recipes-support/canonical-multitouch/geis/0001-provide-function-declaration-with-prototypes.patch b/meta-oe/recipes-support/canonical-multitouch/geis/0001-provide-function-declaration-with-prototypes.patch
+diff --git a/meta-oe/recipes-extended/hplip/hplip/0001-common-utils-Include-string.h-for-strcasestr.patch b/meta-oe/recipes-extended/hplip/hplip/0001-common-utils-Include-string.h-for-strcasestr.patch
 new file mode 100644
-index 0000000000..ddad1404f9
+index 0000000000..659eca41c9
 --- /dev/null
-+++ b/meta-oe/recipes-support/canonical-multitouch/geis/0001-provide-function-declaration-with-prototypes.patch
-@@ -0,0 +1,690 @@
-+From 05fe9751dfb370b0fb726e95bc36674468116db4 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-extended/hplip/hplip/0001-common-utils-Include-string.h-for-strcasestr.patch
+@@ -0,0 +1,44 @@
++From 20984c73bea8c3df00f297176edd4f6d47c31b55 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 2 Sep 2022 16:57:51 -0700
-+Subject: [PATCH] provide function declaration with prototypes
++Date: Fri, 2 Sep 2022 17:49:20 -0700
++Subject: [PATCH 1/4] common/utils: Include string.h for strcasestr
 +
-+Fixes build with clang-15+
++Also define _GNU_SOURCE for the same
 +
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ libgeis/backend/grail/geis_grail_window_grab.c           | 2 +-
-+ libgeis/backend/grail/geis_ugsubscription_store.c        | 2 +-
-+ libgeis/backend/grail/geis_ugsubscription_store.h        | 2 +-
-+ libgeis/backend/test_fixture/geis_backend_test_fixture.c | 4 ++--
-+ libgeis/geis.c                                           | 2 +-
-+ libgeis/geis_backend_multiplexor.c                       | 4 ++--
-+ libgeis/geis_backend_multiplexor.h                       | 2 +-
-+ libgeis/geis_class.c                                     | 2 +-
-+ libgeis/geis_class.h                                     | 2 +-
-+ libgeis/geis_device.c                                    | 2 +-
-+ libgeis/geis_device.h                                    | 2 +-
-+ libgeis/geis_event_queue.c                               | 2 +-
-+ libgeis/geis_event_queue.h                               | 2 +-
-+ libgeis/geis_filter.c                                    | 2 +-
-+ libgeis/geis_filter.h                                    | 2 +-
-+ libgeis/geis_filterable.c                                | 2 +-
-+ libgeis/geis_filterable.h                                | 2 +-
-+ libgeis/geis_frame.c                                     | 2 +-
-+ libgeis/geis_frame.h                                     | 2 +-
-+ libgeis/geis_group.c                                     | 2 +-
-+ libgeis/geis_group.h                                     | 2 +-
-+ libgeis/geis_region.c                                    | 2 +-
-+ libgeis/geis_region.h                                    | 2 +-
-+ libgeis/geis_touch.c                                     | 2 +-
-+ libgeis/geis_touch.h                                     | 2 +-
-+ libgeis/server/geis_dbus_client_proxy.c                  | 2 +-
-+ libgeis/server/geis_dbus_proxy_box.c                     | 2 +-
-+ libgeis/server/geis_dbus_proxy_box.h                     | 2 +-
-+ libs/geis-dbus/geis_dbus_dispatcher.c                    | 2 +-
-+ libs/geis-util/geis_logging.c                            | 2 +-
-+ testsuite/geis1/check_gesture_attrs.c                    | 2 +-
-+ testsuite/geis1/check_gesture_types.c                    | 2 +-
-+ testsuite/geis1/check_instance.c                         | 2 +-
-+ testsuite/geis1/check_subscription.c                     | 2 +-
-+ testsuite/geis2/check_attr.c                             | 2 +-
-+ testsuite/geis2/check_class.c                            | 2 +-
-+ testsuite/geis2/check_config.c                           | 2 +-
-+ testsuite/geis2/check_device.c                           | 2 +-
-+ testsuite/geis2/check_error_codes.c                      | 2 +-
-+ testsuite/geis2/check_event.c                            | 2 +-
-+ testsuite/geis2/check_filter.c                           | 2 +-
-+ testsuite/geis2/check_frame.c                            | 2 +-
-+ testsuite/geis2/check_geis_new.c                         | 2 +-
-+ testsuite/geis2/check_general_types.c                    | 2 +-
-+ testsuite/geis2/check_region.c                           | 2 +-
-+ testsuite/geis2/check_subscription.c                     | 2 +-
-+ tools/geis-server/geis-server.c                          | 2 +-
-+ 47 files changed, 49 insertions(+), 49 deletions(-)
++ common/utils.c | 2 ++
++ 1 file changed, 2 insertions(+)
 +
-+diff --git a/libgeis/backend/grail/geis_grail_window_grab.c b/libgeis/backend/grail/geis_grail_window_grab.c
-+index 003adee..f8480ac 100644
-+--- a/libgeis/backend/grail/geis_grail_window_grab.c
-++++ b/libgeis/backend/grail/geis_grail_window_grab.c
-+@@ -49,7 +49,7 @@ static const GeisFloat _geis_grail_window_grab_store_growth_factor = 1.7;
++--- a/common/utils.c
+++++ b/common/utils.c
++@@ -1,9 +1,11 @@
+++#define _GNU_SOURCE
++ #include "utils.h"
++ #include "string.h"
++ #include <dlfcn.h>
++ #include <sys/stat.h>
++ #include <errno.h>
++ #include <stdlib.h>
+++#include <string.h> /* strcasestr */
 + 
++ extern int errno;
 + 
-+ static GeisGrailWindowGrabStore
-+-_window_grab_allocate()
-++_window_grab_allocate(void)
-+ {
-+   GeisGrailWindowGrabStore wgs = malloc(sizeof(struct GeisGrailWindowGrabStore));
-+   if (!wgs)
-+diff --git a/libgeis/backend/grail/geis_ugsubscription_store.c b/libgeis/backend/grail/geis_ugsubscription_store.c
-+index bb1f0bb..cb7e620 100644
-+--- a/libgeis/backend/grail/geis_ugsubscription_store.c
-++++ b/libgeis/backend/grail/geis_ugsubscription_store.c
-+@@ -42,7 +42,7 @@ static const GeisFloat _geis_grail_ugsubscription_store_growth_factor = 1.7;
-+  * Creates a new, empty grail subscription store.
-+  */
-+ GeisUGSubscriptionStore
-+-geis_ugsubscription_store_new()
-++geis_ugsubscription_store_new(void)
-+ {
-+   GeisUGSubscriptionStore store = geis_bag_new(sizeof(struct GeisUGSubscription),
-+                                   _geis_grail_ugsubscription_store_default_size,
-+diff --git a/libgeis/backend/grail/geis_ugsubscription_store.h b/libgeis/backend/grail/geis_ugsubscription_store.h
-+index a93e1b6..06273ef 100644
-+--- a/libgeis/backend/grail/geis_ugsubscription_store.h
-++++ b/libgeis/backend/grail/geis_ugsubscription_store.h
-+@@ -41,7 +41,7 @@ typedef GeisBag GeisUGSubscriptionStore;
-+  * @returns a pointer to a valid store, or NULL to indicate failure.
-+  */
-+ GeisUGSubscriptionStore
-+-geis_ugsubscription_store_new();
-++geis_ugsubscription_store_new(void);
++--- a/protocol/hp_ipp.c
+++++ b/protocol/hp_ipp.c
++@@ -18,12 +18,13 @@ Boston, MA 02110-1301, USA.
 + 
-+ /**
-+  * Destroys a grail subscription store.
-+diff --git a/libgeis/backend/test_fixture/geis_backend_test_fixture.c b/libgeis/backend/test_fixture/geis_backend_test_fixture.c
-+index 5912acb..099cde4 100644
-+--- a/libgeis/backend/test_fixture/geis_backend_test_fixture.c
-++++ b/libgeis/backend/test_fixture/geis_backend_test_fixture.c
-+@@ -434,7 +434,7 @@ _token_free_subscription_pdata(GeisBackendToken gbtoken GEIS_UNUSED,
-+ }
++ \******************************************************************************/
 + 
-+ __attribute__((constructor))
-+-static void _register_test_fixture()
-++static void _register_test_fixture(void)
-+ {
-+   geis_register_backend(GEIS_INIT_MOCK_BACKEND,
-+                         sizeof(struct GeisBackendTestFixture),
-+@@ -444,6 +444,6 @@ static void _register_test_fixture()
++-
+++#define _GNU_SOURCE
++ #include <cups/cups.h>
++ #include <cups/language.h>
++ #include <cups/ppd.h>
++ #include <syslog.h>
++ #include <stdarg.h>
+++#include <string.h> /* strcasecmp */
++ #include <sys/types.h>
++ #include <pwd.h>
++ #include <sys/stat.h> 
+diff --git a/meta-oe/recipes-extended/hplip/hplip/0002-Add-ImageProcessor-only-when-DISBALE_IMAGEPROCESSOR_.patch b/meta-oe/recipes-extended/hplip/hplip/0002-Add-ImageProcessor-only-when-DISBALE_IMAGEPROCESSOR_.patch
+new file mode 100644
+index 0000000000..2cfe1255e9
+--- /dev/null
++++ b/meta-oe/recipes-extended/hplip/hplip/0002-Add-ImageProcessor-only-when-DISBALE_IMAGEPROCESSOR_.patch
+@@ -0,0 +1,32 @@
++From 3d53d02af7c45763eb33f7bbe5f9e389fbcb7e21 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 2 Sep 2022 17:55:48 -0700
++Subject: [PATCH 2/4] Add ImageProcessor only when DISBALE_IMAGEPROCESSOR_BUILD
++ is not set
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ Makefile.am | 6 +++++-
++ 1 file changed, 5 insertions(+), 1 deletion(-)
++
++diff --git a/Makefile.am b/Makefile.am
++index 5f75759..73421b1 100644
++--- a/Makefile.am
+++++ b/Makefile.am
++@@ -597,7 +597,11 @@ hpcups_SOURCES = prnt/hpcups/HPCupsFilter.cpp prnt/hpcups/HPCupsFilter.h prnt/hp
++ 	prnt/hpcups/ImageProcessor.h
 + 
-+ /* A dummy routine to force linkage of this module without dlopening it */
-+ void
-+-geis_include_backend_test_fixture()
-++geis_include_backend_test_fixture(void)
-+ {
-+ }
-+diff --git a/libgeis/geis.c b/libgeis/geis.c
-+index 4290d19..3f7bd12 100644
-+--- a/libgeis/geis.c
-++++ b/libgeis/geis.c
-+@@ -402,7 +402,7 @@ geis_filterable_attribute_foreach(Geis geis,
-+  * Creates a new empty Geis API instance.
-+  */
-+ static Geis
-+-geis_new_empty()
-++geis_new_empty(void)
-+ {
-+   geis_error_clear(NULL);
-+   Geis geis = calloc(1, sizeof(struct _Geis));
-+diff --git a/libgeis/geis_backend_multiplexor.c b/libgeis/geis_backend_multiplexor.c
-+index 3f80080..0f76198 100644
-+--- a/libgeis/geis_backend_multiplexor.c
-++++ b/libgeis/geis_backend_multiplexor.c
-+@@ -60,7 +60,7 @@ struct _GeisBackendMultiplexor
-+  * Creates a new container for callback info.
-+  */
-+ static CallbackInfoBag
-+-_callback_info_bag_new()
-++_callback_info_bag_new(void)
-+ {
-+   CallbackInfoBag cbib = calloc(1, sizeof(struct CallbackInfoBag));
-+   if (!cbib)
-+@@ -209,7 +209,7 @@ _callback_info_bag_release(CallbackInfoBag cbib, int fd)
-+  * Creates a new backend multiplexor.
-+  */
-+ GeisBackendMultiplexor
-+-geis_backend_multiplexor_new()
-++geis_backend_multiplexor_new(void)
-+ {
-+   GeisBackendMultiplexor mx = calloc(1, sizeof(struct _GeisBackendMultiplexor));
-+   if (!mx)
-+diff --git a/libgeis/geis_backend_multiplexor.h b/libgeis/geis_backend_multiplexor.h
-+index ff4c318..8e7102e 100644
-+--- a/libgeis/geis_backend_multiplexor.h
-++++ b/libgeis/geis_backend_multiplexor.h
-+@@ -74,7 +74,7 @@ typedef void (*GeisBackendFdEventCallback)(int                             fd,
-+ /**
-+  * Constructs a new back end multiplexor.
-+  */
-+-GeisBackendMultiplexor geis_backend_multiplexor_new();
-++GeisBackendMultiplexor geis_backend_multiplexor_new(void);
-+ 
-+ /**
-+  * A reasonable default value for the max_events_per_pump parameter to
-+diff --git a/libgeis/geis_class.c b/libgeis/geis_class.c
-+index e889e4b..5c26a87 100644
-+--- a/libgeis/geis_class.c
-++++ b/libgeis/geis_class.c
-+@@ -46,7 +46,7 @@ static const int gesture_class_bag_growth_constant = 2;
-+  * Creates a new class bag,
-+  */
-+ GeisGestureClassBag
-+-geis_gesture_class_bag_new()
-++geis_gesture_class_bag_new(void)
-+ {
-+   GeisGestureClassBag bag = calloc(1, sizeof(struct _GeisGestureClassBag));
-+   if (!bag)
-+diff --git a/libgeis/geis_class.h b/libgeis/geis_class.h
-+index 1d60998..724c353 100644
-+--- a/libgeis/geis_class.h
-++++ b/libgeis/geis_class.h
-+@@ -35,7 +35,7 @@ typedef struct _GeisGestureClassBag *GeisGestureClassBag;
-+ /**
-+  * Creates a new class bag,
-+  */
-+-GeisGestureClassBag geis_gesture_class_bag_new();
-++GeisGestureClassBag geis_gesture_class_bag_new(void);
-+ 
-+ /**
-+  * Destroys a gesture class bag.
-+diff --git a/libgeis/geis_device.c b/libgeis/geis_device.c
-+index 1f61fc1..ff3216b 100644
-+--- a/libgeis/geis_device.c
-++++ b/libgeis/geis_device.c
-+@@ -44,7 +44,7 @@ static const int device_bag_growth_constant = 2;
-+ 
-+ 
-+ GeisDeviceBag
-+-geis_device_bag_new()
-++geis_device_bag_new(void)
-+ {
-+   GeisDeviceBag bag = calloc(1, sizeof(struct _GeisDeviceBag));
-+   if (!bag)
-+diff --git a/libgeis/geis_device.h b/libgeis/geis_device.h
-+index c411e54..707943b 100644
-+--- a/libgeis/geis_device.h
-++++ b/libgeis/geis_device.h
-+@@ -35,7 +35,7 @@ typedef struct _GeisDeviceBag *GeisDeviceBag;
-+ /**
-+  * Creates a new device bag,
-+  */
-+-GeisDeviceBag geis_device_bag_new();
-++GeisDeviceBag geis_device_bag_new(void);
-+ 
-+ /**
-+  * Destroys a device bag.
-+diff --git a/libgeis/geis_event_queue.c b/libgeis/geis_event_queue.c
-+index 0b7d0fb..f357683 100644
-+--- a/libgeis/geis_event_queue.c
-++++ b/libgeis/geis_event_queue.c
-+@@ -50,7 +50,7 @@ struct _GeisEventQueue
-+  * Creates a new Geis Event queue.
-+  */
-+ GeisEventQueue
-+-geis_event_queue_new()
-++geis_event_queue_new(void)
-+ {
-+   GeisEventQueue queue = calloc(1, sizeof(struct _GeisEventQueue));
-+   if (!queue)
-+diff --git a/libgeis/geis_event_queue.h b/libgeis/geis_event_queue.h
-+index e4c186d..5f3da1d 100644
-+--- a/libgeis/geis_event_queue.h
-++++ b/libgeis/geis_event_queue.h
-+@@ -41,7 +41,7 @@ typedef struct _GeisEventQueue *GeisEventQueue;
-+ /**
-+  * Creates a new Geis Event queue.
-+  */
-+-GeisEventQueue geis_event_queue_new();
-++GeisEventQueue geis_event_queue_new(void);
-+ 
-+ /**
-+  * Destroys a Geis Event queue.
-+diff --git a/libgeis/geis_filter.c b/libgeis/geis_filter.c
-+index 4fe5da6..83d65a8 100644
-+--- a/libgeis/geis_filter.c
-++++ b/libgeis/geis_filter.c
-+@@ -57,7 +57,7 @@ static GeisSize s_filter_oid = 0;
-+  * Creates a new filter bag,
-+  */
-+ GeisFilterBag
-+-geis_filter_bag_new()
-++geis_filter_bag_new(void)
-+ {
-+   GeisFilterBag bag = calloc(1, sizeof(struct _GeisFilterBag));
-+   if (!bag)
-+diff --git a/libgeis/geis_filter.h b/libgeis/geis_filter.h
-+index 7b613bf..f825bb7 100644
-+--- a/libgeis/geis_filter.h
-++++ b/libgeis/geis_filter.h
-+@@ -42,7 +42,7 @@ typedef GeisFilter *GeisFilterIterator;
-+ /**
-+  * Creates a new filter bag,
-+  */
-+-GeisFilterBag geis_filter_bag_new();
-++GeisFilterBag geis_filter_bag_new(void);
-+ 
-+ /**
-+  * Destroys a filter bag.
-+diff --git a/libgeis/geis_filterable.c b/libgeis/geis_filterable.c
-+index 57bd4ac..5fb4b0c 100644
-+--- a/libgeis/geis_filterable.c
-++++ b/libgeis/geis_filterable.c
-+@@ -40,7 +40,7 @@ struct FilterableAttributeBag
-+  * Constructs a new filterable attribute bag.
-+  */
-+ FilterableAttributeBag
-+-geis_filterable_attribute_bag_new()
-++geis_filterable_attribute_bag_new(void)
-+ {
-+   FilterableAttributeBag bag = calloc(1, sizeof(struct FilterableAttributeBag));
-+   if (!bag)
-+diff --git a/libgeis/geis_filterable.h b/libgeis/geis_filterable.h
-+index 6d400fc..63c563d 100644
-+--- a/libgeis/geis_filterable.h
-++++ b/libgeis/geis_filterable.h
-+@@ -86,7 +86,7 @@ geis_filterable_attribute_init(GeisFilterableAttribute fa,
-+  * Constructs a new filterable attribute bag.
-+  */
-+ FilterableAttributeBag
-+-geis_filterable_attribute_bag_new();
-++geis_filterable_attribute_bag_new(void);
-+ 
-+ /**
-+  * Destroys a filterable attribute bag.
-+diff --git a/libgeis/geis_frame.c b/libgeis/geis_frame.c
-+index ebe11a1..068d9aa 100644
-+--- a/libgeis/geis_frame.c
-++++ b/libgeis/geis_frame.c
-+@@ -57,7 +57,7 @@ struct _GeisFrameSet
-+  * Creates a new, empty frame set.
-+  */
-+ GeisFrameSet
-+-geis_frameset_new()
-++geis_frameset_new(void)
-+ {
-+   GeisFrameSet frameset = calloc(1, sizeof(struct _GeisFrameSet));
-+   if (!frameset)
-+diff --git a/libgeis/geis_frame.h b/libgeis/geis_frame.h
-+index e0d1eb6..4a4b0ba 100644
-+--- a/libgeis/geis_frame.h
-++++ b/libgeis/geis_frame.h
-+@@ -32,7 +32,7 @@ typedef struct _GeisFrameSet *GeisFrameSet;
-+ /**
-+  * Creates a new, empty frame set.
-+  */
-+-GeisFrameSet geis_frameset_new();
-++GeisFrameSet geis_frameset_new(void);
-+ 
-+ /**
-+  * Destroys a frame set and all framees contained in it.
-+diff --git a/libgeis/geis_group.c b/libgeis/geis_group.c
-+index 0829bd4..4c51a39 100644
-+--- a/libgeis/geis_group.c
-++++ b/libgeis/geis_group.c
-+@@ -42,7 +42,7 @@ struct _GeisGroupSet
-+  * Creates a new, empty group set.
-+  */
-+ GeisGroupSet
-+-geis_groupset_new()
-++geis_groupset_new(void)
-+ {
-+   GeisGroupSet groupset = calloc(1, sizeof(struct _GeisGroupSet));
-+   if (!groupset)
-+diff --git a/libgeis/geis_group.h b/libgeis/geis_group.h
-+index 76e0efc..c44ce62 100644
-+--- a/libgeis/geis_group.h
-++++ b/libgeis/geis_group.h
-+@@ -31,7 +31,7 @@
-+ /**
-+  * Creates a new, empty group set.
-+  */
-+-GeisGroupSet geis_groupset_new();
-++GeisGroupSet geis_groupset_new(void);
-+ 
-+ /**
-+  * Destroys a group set and all groups contained in it.
-+diff --git a/libgeis/geis_region.c b/libgeis/geis_region.c
-+index fc8cc1e..18181cb 100644
-+--- a/libgeis/geis_region.c
-++++ b/libgeis/geis_region.c
-+@@ -52,7 +52,7 @@ static const int region_bag_growth_constant = 2;
-+  * Constructs a region bag.
-+  */
-+ GeisRegionBag
-+-geis_region_bag_new()
-++geis_region_bag_new(void)
-+ {
-+   GeisRegionBag bag = calloc(1, sizeof(struct _GeisRegionBag));
-+   if (!bag)
-+diff --git a/libgeis/geis_region.h b/libgeis/geis_region.h
-+index 53a52b8..18d908f 100644
-+--- a/libgeis/geis_region.h
-++++ b/libgeis/geis_region.h
-+@@ -49,7 +49,7 @@ typedef struct _GeisRegionBag *GeisRegionBag;
-+ /**
-+  * Creates a new region bag.
-+  */
-+-GeisRegionBag geis_region_bag_new();
-++GeisRegionBag geis_region_bag_new(void);
-+ 
-+ /**
-+  * Destroys a region bag.
-+diff --git a/libgeis/geis_touch.c b/libgeis/geis_touch.c
-+index 74d1b3e..be0f1a7 100644
-+--- a/libgeis/geis_touch.c
-++++ b/libgeis/geis_touch.c
-+@@ -43,7 +43,7 @@ struct _GeisTouchSet
-+  * Creates a new, empty touch set.
-+  */
-+ GeisTouchSet
-+-geis_touchset_new()
-++geis_touchset_new(void)
-+ {
-+   GeisTouchSet touchset = calloc(1, sizeof(struct _GeisTouchSet));
-+   if (!touchset)
-+diff --git a/libgeis/geis_touch.h b/libgeis/geis_touch.h
-+index 62af610..b64c755 100644
-+--- a/libgeis/geis_touch.h
-++++ b/libgeis/geis_touch.h
-+@@ -30,7 +30,7 @@
-+ /**
-+  * Creates a new, empty touch set.
-+  */
-+-GeisTouchSet geis_touchset_new();
-++GeisTouchSet geis_touchset_new(void);
-+ 
-+ /**
-+  * Destroys a touch set and all touches contained in it.
-+diff --git a/libgeis/server/geis_dbus_client_proxy.c b/libgeis/server/geis_dbus_client_proxy.c
-+index 3f1af47..65f229b 100644
-+--- a/libgeis/server/geis_dbus_client_proxy.c
-++++ b/libgeis/server/geis_dbus_client_proxy.c
-+@@ -52,7 +52,7 @@ struct GeisDBusClientProxy
-+  * failure.
-+  */
-+ GeisDBusClientProxy
-+-_client_proxy_allocate()
-++_client_proxy_allocate(void)
-+ {
-+   GeisDBusClientProxy proxy = calloc(1, sizeof(struct GeisDBusClientProxy));
-+   return proxy;
-+diff --git a/libgeis/server/geis_dbus_proxy_box.c b/libgeis/server/geis_dbus_proxy_box.c
-+index 4c7752a..f129bc3 100644
-+--- a/libgeis/server/geis_dbus_proxy_box.c
-++++ b/libgeis/server/geis_dbus_proxy_box.c
-+@@ -49,7 +49,7 @@ struct GeisDBusProxyBox
-+  * Constructs a %GeisDBusProxyBox.
-+  */
-+ GeisDBusProxyBox
-+-geis_dbus_proxy_box_new()
-++geis_dbus_proxy_box_new(void)
-+ {
-+   GeisDBusProxyBox box = calloc(1, sizeof(struct GeisDBusProxyBox));
-+   if (!box)
-+diff --git a/libgeis/server/geis_dbus_proxy_box.h b/libgeis/server/geis_dbus_proxy_box.h
-+index d8a70f5..47e84b7 100644
-+--- a/libgeis/server/geis_dbus_proxy_box.h
-++++ b/libgeis/server/geis_dbus_proxy_box.h
-+@@ -47,7 +47,7 @@ typedef struct GeisDBusProxyBoxNode *GeisDBusProxyBoxIterator;
-+  * @returns a valid %GeisDBusProxyBox or NULL on failure.
-+  */
-+ GeisDBusProxyBox
-+-geis_dbus_proxy_box_new();
-++geis_dbus_proxy_box_new(void);
-+ 
-+ /**
-+  * Destroys a %GeisDBusProxyBox.
-+diff --git a/libs/geis-dbus/geis_dbus_dispatcher.c b/libs/geis-dbus/geis_dbus_dispatcher.c
-+index 10c4134..d8a3f9d 100644
-+--- a/libs/geis-dbus/geis_dbus_dispatcher.c
-++++ b/libs/geis-dbus/geis_dbus_dispatcher.c
-+@@ -82,7 +82,7 @@ struct GeisDBusDispatcher
-+  * assumption that if you're creating a bag you're going to use it.
-+  */
-+ static GeisDBusWatchBag 
-+-_geis_dbus_watch_bag_new()
-++_geis_dbus_watch_bag_new(void)
-+ {
-+   GeisDBusWatchBag bag = calloc(1, sizeof(struct GeisDBusWatchBag));
-+   if (!bag)
-+diff --git a/libs/geis-util/geis_logging.c b/libs/geis-util/geis_logging.c
-+index a02077b..030a591 100644
-+--- a/libs/geis-util/geis_logging.c
-++++ b/libs/geis-util/geis_logging.c
-+@@ -31,7 +31,7 @@ static const char *error_marker   = "error";
-+ 
-+ 
-+ static int
-+-reporting_level()
-++reporting_level(void)
-+ {
-+   char *level = getenv("GEIS_DEBUG");
-+   if (level)
-+diff --git a/testsuite/geis1/check_gesture_attrs.c b/testsuite/geis1/check_gesture_attrs.c
-+index 2228d2f..d990c7c 100644
-+--- a/testsuite/geis1/check_gesture_attrs.c
-++++ b/testsuite/geis1/check_gesture_attrs.c
-+@@ -169,7 +169,7 @@ END_TEST
-+ 
-+ 
-+ Suite *
-+-geis1_gesture_attrs_new()
-++geis1_gesture_attrs_new(void)
-+ {
-+   Suite *s = suite_create("geis1_gesture_attrs");
-+   TCase *test;
-+diff --git a/testsuite/geis1/check_gesture_types.c b/testsuite/geis1/check_gesture_types.c
-+index 3492062..980f8fb 100644
-+--- a/testsuite/geis1/check_gesture_types.c
-++++ b/testsuite/geis1/check_gesture_types.c
-+@@ -62,7 +62,7 @@ START_TEST(gesture_types)
-+ END_TEST
-+ 
-+ Suite *
-+-geis1_gesture_types_new()
-++geis1_gesture_types_new(void)
-+ {
-+   Suite *s = suite_create("geis1_gesture_types");
-+   TCase *test;
-+diff --git a/testsuite/geis1/check_instance.c b/testsuite/geis1/check_instance.c
-+index ac897ab..584abfd 100644
-+--- a/testsuite/geis1/check_instance.c
-++++ b/testsuite/geis1/check_instance.c
-+@@ -44,7 +44,7 @@ END_TEST
-+ 
-+ 
-+ Suite *
-+-geis1_instance_suite_new()
-++geis1_instance_suite_new(void)
-+ {
-+   TCase *create;
-+   Suite *s = suite_create("geis1_instance_suite");
-+diff --git a/testsuite/geis1/check_subscription.c b/testsuite/geis1/check_subscription.c
-+index 0797337..e69c332 100644
-+--- a/testsuite/geis1/check_subscription.c
-++++ b/testsuite/geis1/check_subscription.c
-+@@ -146,7 +146,7 @@ END_TEST
-+ 
-+ 
-+ Suite *
-+-geis1_subscription_new()
-++geis1_subscription_new(void)
-+ {
-+   Suite *s = suite_create("geis1_subscription");
-+   TCase *test;
-+diff --git a/testsuite/geis2/check_attr.c b/testsuite/geis2/check_attr.c
-+index 9e01219..58c8ebc 100644
-+--- a/testsuite/geis2/check_attr.c
-++++ b/testsuite/geis2/check_attr.c
-+@@ -42,7 +42,7 @@ END_TEST
-+ 
-+ /* boilerplate */
-+ Suite *
-+-geis2_attr_suite_new()
-++geis2_attr_suite_new(void)
-+ {
-+   Suite *s = suite_create("geis2_attr");
-+ 
-+diff --git a/testsuite/geis2/check_class.c b/testsuite/geis2/check_class.c
-+index ca7accd..b60d827 100644
-+--- a/testsuite/geis2/check_class.c
-++++ b/testsuite/geis2/check_class.c
-+@@ -92,7 +92,7 @@ END_TEST
-+ 
-+ /* boilerplate */
-+ Suite *
-+-geis2_gesture_class_suite_new()
-++geis2_gesture_class_suite_new(void)
-+ {
-+   TCase *gesture_class;
-+   TCase *usage;
-+diff --git a/testsuite/geis2/check_config.c b/testsuite/geis2/check_config.c
-+index a9fc9c1..03b3137 100644
-+--- a/testsuite/geis2/check_config.c
-++++ b/testsuite/geis2/check_config.c
-+@@ -48,7 +48,7 @@ END_TEST
-+ 
-+ /* boilerplate */
-+ Suite *
-+-geis2_config_suite_new()
-++geis2_config_suite_new(void)
-+ {
-+   Suite *s = suite_create("geis2_configuration");
-+ 
-+diff --git a/testsuite/geis2/check_device.c b/testsuite/geis2/check_device.c
-+index 8b3b7be..9583cb5 100644
-+--- a/testsuite/geis2/check_device.c
-++++ b/testsuite/geis2/check_device.c
-+@@ -99,7 +99,7 @@ END_TEST
-+ 
-+ /* boilerplate */
-+ Suite *
-+-geis2_device_suite_new()
-++geis2_device_suite_new(void)
-+ {
-+   TCase *device;
-+   TCase *usage;
-+diff --git a/testsuite/geis2/check_error_codes.c b/testsuite/geis2/check_error_codes.c
-+index 9c7508d..57e7fc7 100644
-+--- a/testsuite/geis2/check_error_codes.c
-++++ b/testsuite/geis2/check_error_codes.c
-+@@ -20,7 +20,7 @@ END_TEST
-+ 
-+ /* boilerplate */
-+ Suite *
-+-geis2_error_codes_suite_new()
-++geis2_error_codes_suite_new(void)
-+ {
-+   Suite *s = suite_create("geis2_error_codes");
-+ 
-+diff --git a/testsuite/geis2/check_event.c b/testsuite/geis2/check_event.c
-+index 8ecda1d..c752a30 100644
-+--- a/testsuite/geis2/check_event.c
-++++ b/testsuite/geis2/check_event.c
-+@@ -43,7 +43,7 @@ END_TEST
-+ 
-+ /* boilerplate */
-+ Suite *
-+-geis2_event_suite_new()
-++geis2_event_suite_new(void)
-+ {
-+   Suite *s = suite_create("geis2_event");
-+ 
-+diff --git a/testsuite/geis2/check_filter.c b/testsuite/geis2/check_filter.c
-+index 3272a2a..afa23e5 100644
-+--- a/testsuite/geis2/check_filter.c
-++++ b/testsuite/geis2/check_filter.c
-+@@ -67,7 +67,7 @@ END_TEST
-+ 
-+ /* boilerplate */
-+ Suite *
-+-geis2_filter_suite_new()
-++geis2_filter_suite_new(void)
-+ {
-+   TCase *filter;
-+   TCase *usage;
-+diff --git a/testsuite/geis2/check_frame.c b/testsuite/geis2/check_frame.c
-+index dce6faf..3ea3db0 100644
-+--- a/testsuite/geis2/check_frame.c
-++++ b/testsuite/geis2/check_frame.c
-+@@ -172,7 +172,7 @@ END_TEST
-+ 
-+ /* boilerplate */
-+ Suite *
-+-geis2_gesture_frame_suite_new()
-++geis2_gesture_frame_suite_new(void)
-+ {
-+   Suite *s = suite_create("geis2_gesture_frame");
-+   TCase *gesture_frame;
-+diff --git a/testsuite/geis2/check_geis_new.c b/testsuite/geis2/check_geis_new.c
-+index 1fb8de2..36cd3e9 100644
-+--- a/testsuite/geis2/check_geis_new.c
-++++ b/testsuite/geis2/check_geis_new.c
-+@@ -32,7 +32,7 @@ END_TEST
-+ 
-+ /* boilerplate */
-+ Suite *
-+-geis2_geis_new_suite_new()
-++geis2_geis_new_suite_new(void)
-+ {
-+   Suite *s = suite_create("geis2_geis_init");
-+ 
-+diff --git a/testsuite/geis2/check_general_types.c b/testsuite/geis2/check_general_types.c
-+index 79e29bb..0f463d4 100644
-+--- a/testsuite/geis2/check_general_types.c
-++++ b/testsuite/geis2/check_general_types.c
-+@@ -20,7 +20,7 @@ END_TEST
-+ 
-+ /* boilerplate */
-+ Suite *
-+-geis2_general_types_suite_new()
-++geis2_general_types_suite_new(void)
-+ {
-+   Suite *s = suite_create("geis2_general_types");
-+   TCase *create;
-+diff --git a/testsuite/geis2/check_region.c b/testsuite/geis2/check_region.c
-+index 3e64e0c..606350a 100644
-+--- a/testsuite/geis2/check_region.c
-++++ b/testsuite/geis2/check_region.c
-+@@ -48,7 +48,7 @@ END_TEST
-+ 
-+ /* boilerplate */
-+ Suite *
-+-geis2_region_suite_new()
-++geis2_region_suite_new(void)
-+ {
-+   Suite *s = suite_create("geis2_region");
-+   TCase *creation;
-+diff --git a/testsuite/geis2/check_subscription.c b/testsuite/geis2/check_subscription.c
-+index a45c4ad..17a6779 100644
-+--- a/testsuite/geis2/check_subscription.c
-++++ b/testsuite/geis2/check_subscription.c
-+@@ -161,7 +161,7 @@ END_TEST
-+ 
-+ /* boilerplate */
-+ Suite *
-+-geis2_subscription_suite_new()
-++geis2_subscription_suite_new(void)
-+ {
-+   TCase *create;
-+   TCase *usage;
-+diff --git a/tools/geis-server/geis-server.c b/tools/geis-server/geis-server.c
-+index 97c8b99..6600d8f 100644
-+--- a/tools/geis-server/geis-server.c
-++++ b/tools/geis-server/geis-server.c
-+@@ -23,7 +23,7 @@
-+ 
-+ 
-+ int
-+-main()
-++main(void)
-+ {
-+   GeisStatus status;
-+ 
++ hpcups_CXXFLAGS = $(APDK_ENDIAN_FLAG) $(DBUS_CFLAGS)
++-hpcups_LDADD = -L./prnt/hpcups/ -ljpeg -ldl -lImageProcessor -lcups -lcupsimage -lz $(DBUS_LIBS)
+++hpcups_LDADD = -L./prnt/hpcups/ -ljpeg -ldl -lcups -lcupsimage -lz $(DBUS_LIBS)
+++if !DISBALE_IMAGEPROCESSOR_BUILD
+++hpcups_LDADD += "-lImageProcessor"
+++endif #DISABLE_IMAGEPROCESSOR
+++
++ #else
++ #hpcupsdir = $(cupsfilterdir)
++ #hpcups_PROGRAMS = hpcups
 +-- 
 +2.37.3
 +
-diff --git a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-index a1a28a8921..e7f3b5131f 100644
---- a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-+++ b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-@@ -22,6 +22,7 @@ DEPENDS += "grail dbus-glib python3 virtual/libx11 libxext libxi libxcb dbus fra
- SRC_URI = "https://launchpad.net/${BPN}/trunk/${PV}/+download/${BPN}-${PV}.tar.xz \
-            file://fix-indentation-for-gcc6.patch \
-            file://0001-libgeis-Compare-the-first-character-of-string-to-nul.patch \
-+           file://0001-provide-function-declaration-with-prototypes.patch \
-            "
+diff --git a/meta-oe/recipes-extended/hplip/hplip/0003-pserror.c-Define-column-to-be-int-explcitly.patch b/meta-oe/recipes-extended/hplip/hplip/0003-pserror.c-Define-column-to-be-int-explcitly.patch
+new file mode 100644
+index 0000000000..78325ac8d6
+--- /dev/null
++++ b/meta-oe/recipes-extended/hplip/hplip/0003-pserror.c-Define-column-to-be-int-explcitly.patch
+@@ -0,0 +1,21 @@
++From a27d6264671e7201b5d78bcc9200e7d946429979 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 2 Sep 2022 17:57:53 -0700
++Subject: [PATCH 3/4] pserror.c: Define column to be int explcitly
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ prnt/hpps/pserror.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++--- a/prnt/hpps/pserror.c
+++++ b/prnt/hpps/pserror.c
++@@ -24,7 +24,7 @@ extern char *program ;	/* Defined by mai
++ void message(int flags, char *format, ...)
++ {
++   va_list args ;
++-  static column = 0 ;		/* current screen column for message wrap */
+++  static int column = 0 ;	/* current screen column for message wrap */
++   char msgbuf[MAX_MESSAGE] ;	/* buffer in which to put the message */
++   char *bufptr = msgbuf ;	/* message buffer pointer */
++ 
+diff --git a/meta-oe/recipes-extended/hplip/hplip/0004-Define-missing-prototype-for-functions.patch b/meta-oe/recipes-extended/hplip/hplip/0004-Define-missing-prototype-for-functions.patch
+new file mode 100644
+index 0000000000..276d025785
+--- /dev/null
++++ b/meta-oe/recipes-extended/hplip/hplip/0004-Define-missing-prototype-for-functions.patch
+@@ -0,0 +1,53 @@
++From 33454817880fa57b2226dd40b724e5c3d6074aca Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 2 Sep 2022 17:58:33 -0700
++Subject: [PATCH 4/4] Define missing prototype for functions
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ prnt/cupsext/cupsext.c | 1 +
++ protocol/hp_ipp.c      | 4 ++--
++ 2 files changed, 3 insertions(+), 2 deletions(-)
++
++--- a/prnt/cupsext/cupsext.c
+++++ b/prnt/cupsext/cupsext.c
++@@ -101,6 +101,11 @@ typedef int Py_ssize_t;
++ #define _STRINGIZE(x) #x
++ #define STRINGIZE(x) _STRINGIZE(x)
++ 
+++void _releaseCupsInstance(void);
+++int addCupsPrinter(char *name, char *device_uri, char *location, char *ppd_file, char *model, char *info);
+++int setDefaultCupsPrinter(char *pr_name);
+++int delCupsPrinter(char *pr_name);
+++int controlCupsPrinter(char *pr_name, int op);
++ 
++ //static http_t * http = NULL;     /* HTTP object */
++ 
++--- a/protocol/hp_ipp.c
+++++ b/protocol/hp_ipp.c
++@@ -22,6 +22,7 @@ Boston, MA 02110-1301, USA.
++ #include <cups/cups.h>
++ #include <cups/language.h>
++ #include <cups/ppd.h>
+++#include <stdio.h>
++ #include <syslog.h>
++ #include <stdarg.h>
++ #include <string.h> /* strcasecmp */
++@@ -42,7 +43,7 @@ Boston, MA 02110-1301, USA.
++ #define STRINGIZE(x) _STRINGIZE(x)
++ 
++ 
++-http_t* acquireCupsInstance()
+++http_t* acquireCupsInstance(void)
++ {
++     if ( http == NULL)
++     {
++@@ -53,7 +54,7 @@ http_t* acquireCupsInstance()
++ }
++ 
++ 
++-void _releaseCupsInstance()
+++void _releaseCupsInstance(void)
++ {
++     if (http)
++     {
+diff --git a/meta-oe/recipes-extended/hplip/hplip/0005-hp_ipp.c-Add-printf-format-to-snprintf-calls.patch b/meta-oe/recipes-extended/hplip/hplip/0005-hp_ipp.c-Add-printf-format-to-snprintf-calls.patch
+new file mode 100644
+index 0000000000..d844e49ad3
+--- /dev/null
++++ b/meta-oe/recipes-extended/hplip/hplip/0005-hp_ipp.c-Add-printf-format-to-snprintf-calls.patch
+@@ -0,0 +1,62 @@
++From 4b3014df3990d90d6929510f2bde073171503329 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 2 Sep 2022 18:18:44 -0700
++Subject: [PATCH] hp_ipp.c: Add printf format to snprintf calls
++
++Avoid -Wformat warnings
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ protocol/hp_ipp.c | 14 +++++++-------
++ 1 file changed, 7 insertions(+), 7 deletions(-)
++
++diff --git a/protocol/hp_ipp.c b/protocol/hp_ipp.c
++index 597d9b9..a027baf 100644
++--- a/protocol/hp_ipp.c
+++++ b/protocol/hp_ipp.c
++@@ -112,7 +112,7 @@ int addCupsPrinter(char *name, char *device_uri, char *location, char *ppd_file,
++      }
++ 
++      if ( info == NULL )
++-        snprintf( info,sizeof(info), name );
+++        snprintf( info,sizeof(info), "%s", name );
++ 
++      sprintf( printer_uri, "ipp://localhost/printers/%s", name );
++ 
++@@ -513,27 +513,27 @@ int __parsePrinterAttributes(ipp_t *response, printer_t **printer_list)
++ 
++              if ( strcmp(attr_name, "printer-name") == 0 &&
++                                         val_tag == IPP_TAG_NAME ) {
++-                  snprintf(t_printer->name, sizeof(t_printer->name),ippGetString(attr, 0, NULL) );
+++                  snprintf(t_printer->name, sizeof(t_printer->name), "%s", ippGetString(attr, 0, NULL) );
++              }
++              else if ( strcmp(attr_name, "device-uri") == 0 &&
++                                          val_tag == IPP_TAG_URI ) {
++-                  snprintf(t_printer->device_uri,sizeof(t_printer->device_uri), ippGetString(attr, 0, NULL) );
+++                  snprintf(t_printer->device_uri,sizeof(t_printer->device_uri), "%s", ippGetString(attr, 0, NULL) );
++              }
++              else if ( strcmp(attr_name, "printer-uri-supported") == 0 &&
++                                                  val_tag == IPP_TAG_URI ) {
++-                  snprintf(t_printer->printer_uri,sizeof(t_printer->printer_uri), ippGetString(attr, 0, NULL) );
+++                  snprintf(t_printer->printer_uri,sizeof(t_printer->printer_uri), "%s", ippGetString(attr, 0, NULL) );
++              }
++              else if ( strcmp(attr_name, "printer-info") == 0 &&
++                                         val_tag == IPP_TAG_TEXT ) {
++-                  snprintf(t_printer->info,sizeof(t_printer->info), ippGetString(attr, 0, NULL) );
+++                  snprintf(t_printer->info,sizeof(t_printer->info), "%s", ippGetString(attr, 0, NULL) );
++              }
++              else if ( strcmp(attr_name, "printer-location") == 0 &&
++                                            val_tag == IPP_TAG_TEXT ) {
++-                  snprintf(t_printer->location,sizeof(t_printer->location),ippGetString(attr, 0, NULL) );
+++                  snprintf(t_printer->location,sizeof(t_printer->location), "%s", ippGetString(attr, 0, NULL) );
++              }
++              else if ( strcmp(attr_name, "printer-make-and-model") == 0 &&
++                                                   val_tag == IPP_TAG_TEXT ) {
++-                  snprintf(t_printer->make_model,sizeof(t_printer->make_model),ippGetString(attr, 0, NULL) );
+++                  snprintf(t_printer->make_model,sizeof(t_printer->make_model), "%s", ippGetString(attr, 0, NULL) );
++              } 
++              else if ( strcmp(attr_name, "printer-state") == 0 &&
++                                              val_tag == IPP_TAG_ENUM ) {
++-- 
++2.37.3
++
+diff --git a/meta-oe/recipes-extended/hplip/hplip/0006-Workaround-patch-for-missing-Python3-transition-of-t.patch b/meta-oe/recipes-extended/hplip/hplip/0006-Workaround-patch-for-missing-Python3-transition-of-t.patch
+new file mode 100644
+index 0000000000..5d78bb3bbb
+--- /dev/null
++++ b/meta-oe/recipes-extended/hplip/hplip/0006-Workaround-patch-for-missing-Python3-transition-of-t.patch
+@@ -0,0 +1,130 @@
++From: Till Kamppeter <till.kamppeter@gmail.com>
++Date: Fri, 22 Jul 2016 09:33:04 +0200
++Subject: Workaround patch for missing Python3 transition of the old
++ (pre-USB-storage) photo memory card support (pcardext) as this part builds
++ in Python3 environments but with pointer-related warnings which are fatal
++ errors for Ubuntu's build servers. The patch silences the warnings but the
++ memory card support is dropped in Python3 environments. This patch is
++ supplied by the HPLIP upstream developers and will be replaced by a more
++ proper solution in the next upstream release of HPLIP (see LP: #1275353)
++
++---
++ pcard/pcardext/pcardext.c | 59 +++++++++++++++++++++++++++++++++++++----------
++ pcard/photocard.py        |  2 +-
++ unload.py                 |  5 ++++
++ 3 files changed, 53 insertions(+), 13 deletions(-)
++
++--- a/pcard/pcardext/pcardext.c
+++++ b/pcard/pcardext/pcardext.c
++@@ -20,7 +20,7 @@ pcardext - Python extension for HP photo
++ Requires:
++ Python 2.2+
++ 
++-Author: Don Welch
+++Author: Don Welch
++ 
++ \*****************************************************************************/
++ 
++@@ -41,9 +41,37 @@ typedef int Py_ssize_t;
++ 
++ int verbose=0;
++ 
+++#if PY_MAJOR_VERSION >= 3
+++  #define MOD_ERROR_VAL NULL
+++  #define MOD_SUCCESS_VAL(val) val
+++  #define MOD_INIT(name) PyMODINIT_FUNC PyInit_##name(void)
+++  #define PyInt_AS_LONG PyLong_AS_LONG
+++  #define MOD_DEF(ob, name, doc, methods) \
+++          static struct PyModuleDef moduledef = { \
+++            PyModuleDef_HEAD_INIT, name, doc, -1, methods, }; \
+++          ob = PyModule_Create(&moduledef);
+++
+++
+++  #define PY_String_Bytes  PyBytes_FromStringAndSize
+++  #define PY_AsString_Bytes  PyBytes_AsStringAndSize
+++
+++#else
+++  #define MOD_ERROR_VAL
+++  #define MOD_SUCCESS_VAL(val)
+++  #define MOD_INIT(name) void init##name(void)
+++  #define MOD_DEF(ob, name, doc, methods)         \
+++        ob = Py_InitModule3(name, methods, doc);
+++
+++  #define PY_String_Bytes PyString_FromStringAndSize
+++  #define PY_AsString_Bytes PyString_AsStringAndSize
+++
+++#endif
+++
++ PyObject * readsectorFunc = NULL;
++ PyObject * writesectorFunc = NULL;
++ 
+++
+++
++ int ReadSector(int sector, int nsector, void *buf, int size)
++ {
++     PyObject * result;
++@@ -59,9 +87,13 @@ int ReadSector(int sector, int nsector,
++         if( result )
++         {
++             Py_ssize_t len = 0;
++-            PyString_AsStringAndSize( result, &result_str, &len );
+++
+++            //PyString_AsStringAndSize( result, &result_str, &len );
+++            //PyBytes_AsStringAndSize( result, &result_str, &len );
+++            PY_AsString_Bytes( result, &result_str, &len );
++             
++-            if( len < nsector*FAT_HARDSECT )
+++
+++	    if( len < nsector*FAT_HARDSECT )
++             {
++                 goto abort;
++             }
++@@ -208,7 +240,9 @@ PyObject * pcardext_read( PyObject * sel
++     
++     if( FatReadFileExt( name, offset, len, buffer ) == len )
++     {
++-        return PyString_FromStringAndSize( (char *)buffer, len );
+++        // return PyString_FromStringAndSize( (char *)buffer, len );
+++        return PY_String_Bytes( (char *)buffer, len );
+++        // return PyBytes_FromStringAndSize( (char *)buffer, len );
++     }
++     else
++     {
++@@ -236,14 +270,15 @@ static PyMethodDef pcardext_methods[] =
++ 
++ static char pcardext_documentation[] = "Python extension for HP photocard services";
++ 
++-void initpcardext( void )
++-{
++-    PyObject * mod = Py_InitModule4( "pcardext", pcardext_methods, 
++-                                     pcardext_documentation, (PyObject*)NULL, 
++-                                     PYTHON_API_VERSION );
++-                     
++-    if (mod == NULL)
++-      return;
+++MOD_INIT(pcardext)  {
+++
+++  PyObject* mod ;
+++  MOD_DEF(mod, "pcardext", pcardext_documentation, pcardext_methods);
+++  if (mod == NULL)
+++    return MOD_ERROR_VAL;
+++
+++  return MOD_SUCCESS_VAL(mod);
+++
++ }
++ 
++ 
++--- a/unload.py
+++++ b/unload.py
++@@ -44,6 +44,11 @@ except ImportError:
++ 
++ # Local
++ from base.g import *
+++from base.sixext import PY3
+++if PY3:
+++    log.error("This functionality is not spported in python3 environment.")
+++    sys.exit(1)
+++
++ from base import device, utils, tui, module
++ from prnt import cups
++ 
+diff --git a/meta-oe/recipes-extended/hplip/hplip/999-remove-lImageProcessor.patch b/meta-oe/recipes-extended/hplip/hplip/999-remove-lImageProcessor.patch
+deleted file mode 100644
+index aee4ac50cc..0000000000
+--- a/meta-oe/recipes-extended/hplip/hplip/999-remove-lImageProcessor.patch
++++ /dev/null
+@@ -1,69 +0,0 @@
+-# ../bin/ld: cannot find -lImageProcessor
+---- a/Makefile.am
+-+++ b/Makefile.am
+-@@ -590,11 +590,10 @@ hpcups_SOURCES = prnt/hpcups/HPCupsFilte
+- 	prnt/hpcups/flate_colorspace.h prnt/hpcups/RunLenEncoding.h prnt/hpcups/common_defines.h \
+- 	prnt/hpcups/genPCLm.h \
+- 	common/utils.c common/utils.h prnt/hpcups/Hbpl1_Wrapper.cpp prnt/hpcups/genPCLm.cpp \
+--	prnt/hpcups/genJPEGStrips.cpp prnt/hpcups/RunLenEncoding.cpp \
+--	prnt/hpcups/ImageProcessor.h
+-+	prnt/hpcups/genJPEGStrips.cpp prnt/hpcups/RunLenEncoding.cpp
+- 
+- hpcups_CXXFLAGS = $(APDK_ENDIAN_FLAG) $(DBUS_CFLAGS)
+--hpcups_LDADD = -L./prnt/hpcups/ -ljpeg -ldl -lImageProcessor -lcups -lcupsimage -lz $(DBUS_LIBS)
+-+hpcups_LDADD = -L./prnt/hpcups/ -ljpeg -ldl -lcups -lcupsimage -lz $(DBUS_LIBS)
+- #else
+- #hpcupsdir = $(cupsfilterdir)
+- #hpcups_PROGRAMS = hpcups
+---- a/prnt/hpcups/HPCupsFilter.cpp
+-+++ b/prnt/hpcups/HPCupsFilter.cpp
+-@@ -637,16 +637,10 @@ int HPCupsFilter::processRasterData(cups
+- 
+- 
+-     sprintf(hpPreProcessedRasterFile, "%s/hp_%s_cups_SwapedPagesXXXXXX",CUPS_TMP_DIR, m_JA.user_name);
+--    image_processor_t* imageProcessor = imageProcessorCreate();
+- 
+-     while (cupsRasterReadHeader2(cups_raster, &cups_header))
+-     {
+- 
+--        IMAGE_PROCESSOR_ERROR result = imageProcessorStartPage(imageProcessor, &cups_header);
+--        if (result != IPE_SUCCESS){
+--            dbglog("DEBUG: imageProcessorStartPage failed result = %d\n", result);
+--        }
+--
+-         current_page_number++;
+- 
+-         if (current_page_number == 1) {
+-@@ -745,11 +739,6 @@ int HPCupsFilter::processRasterData(cups
+-             color_raster = rgbRaster;
+-             black_raster = kRaster;
+- 
+--            result = imageProcessorProcessLine(imageProcessor, m_pPrinterBuffer, cups_header.cupsBytesPerLine);
+--            if (result != IPE_SUCCESS){
+--                dbglog("DEBUG: imageProcessorProcessLine failed result = %d\n", result);
+--            }
+--
+- 
+-             if ((y == 0) && !is_ljmono) {
+-                 //For ljmono, make sure that first line is not a blankRaster line.Otherwise printer
+-@@ -780,11 +769,6 @@ int HPCupsFilter::processRasterData(cups
+-             }
+-         }  // for() loop end
+- 
+--        result = imageProcessorEndPage(imageProcessor);
+--        if (result != IPE_SUCCESS){
+--                dbglog("DEBUG: imageProcessorEndPage failed result = %d\n", result);
+--        }
+--
+- 
+-         m_Job.NewPage();
+-         if (err != NO_ERROR) {
+-@@ -800,8 +784,6 @@ int HPCupsFilter::processRasterData(cups
+-         rgbRaster = NULL;
+-     }
+- 
+--    imageProcessorDestroy(imageProcessor);
+--
+-     unlink(hpPreProcessedRasterFile);
+-     return ret_status;
+- }
+diff --git a/meta-oe/recipes-extended/hplip/hplip/configure.patch b/meta-oe/recipes-extended/hplip/hplip/configure.patch
+index 8fe77c5edf..571d5fe308 100644
+--- a/meta-oe/recipes-extended/hplip/hplip/configure.patch
++++ b/meta-oe/recipes-extended/hplip/hplip/configure.patch
+@@ -1,10 +1,9 @@
+ --- a/configure.in
+ +++ b/configure.in
+-@@ -27,8 +27,7 @@
++@@ -30,7 +30,7 @@
++ AC_INIT([HP Linux Imaging and Printing], [3.22.6], [3.22.6], [hplip])
+  
+- #AC_PREREQ(2.59)
+- AC_INIT([HP Linux Imaging and Printing], [3.19.12], [3.19.12], [hplip])
+--#AM_INIT_AUTOMAKE([1.9 foreign])
++ #AM_INIT_AUTOMAKE([1.9 foreign])
+ -AM_INIT_AUTOMAKE
+ +AM_INIT_AUTOMAKE([foreign])
+  AC_DISABLE_STATIC
+diff --git a/meta-oe/recipes-extended/hplip/hplip_3.19.12.bb b/meta-oe/recipes-extended/hplip/hplip_3.22.6.bb
+similarity index 80%
+rename from meta-oe/recipes-extended/hplip/hplip_3.19.12.bb
+rename to meta-oe/recipes-extended/hplip/hplip_3.22.6.bb
+index ac845ffcf9..b746006c20 100644
+--- a/meta-oe/recipes-extended/hplip/hplip_3.19.12.bb
++++ b/meta-oe/recipes-extended/hplip/hplip_3.22.6.bb
+@@ -5,14 +5,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=20f2c819499cc2063e9a7b07b408815c"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
+            file://configure.patch \
+            file://fix-libusb-paths.patch \
+-           file://999-remove-lImageProcessor.patch \
+            file://600-fix.patch \
+            file://030-replace_unsafe_memcpy_with_memmove.patch \
+            file://050-fix-glibcisms.patch \
+            file://hplip-3.19.6-fix-return.patch \
++           file://0001-common-utils-Include-string.h-for-strcasestr.patch \
++           file://0002-Add-ImageProcessor-only-when-DISBALE_IMAGEPROCESSOR_.patch \
++           file://0003-pserror.c-Define-column-to-be-int-explcitly.patch \
++           file://0004-Define-missing-prototype-for-functions.patch \
++           file://0005-hp_ipp.c-Add-printf-format-to-snprintf-calls.patch \
++           file://0006-Workaround-patch-for-missing-Python3-transition-of-t.patch \
+ "
+-SRC_URI[md5sum] = "d72bc77d791c150c2c22b84e9553bab3"
+-SRC_URI[sha256sum] = "b7f398502fb659e0de8e54976237e3c6a64fec0b3c36054a515876f7b006b255"
++SRC_URI[sha256sum] = "27ed0d492febb0b47c656234820d3ce573b24ff5b62e3bf4b2c47f82868d6bb4"
  
- UPSTREAM_CHECK_URI = "https://launchpad.net/geis/trunk"
+ DEPENDS += "cups python3 libusb"
+ 
+@@ -25,6 +29,7 @@ CFLAGS += "-I${STAGING_INCDIR}/python${PYTHON_BASEVERSION}${PYTHON_ABI}"
+ 
+ EXTRA_OECONF += "\
+         LIBUSBINCLUDEROOT=${STAGING_INCDIR} \
++        --enable-cups-drv-install \
+         --enable-cups-ppd-install \
+         --disable-network-build \
+         --disable-doc-build \
+@@ -39,6 +44,7 @@ EXTRA_OECONF += "\
+         --enable-foomatic-drv-install \
+         --disable-foomatic-ppd-install \
+         --disable-foomatic-rip-hplip-install \
++        --disable-imageProcessor_build \
+         --with-cupsbackenddir=${libexecdir}/cups/backend \
+         --with-cupsfilterdir=${libexecdir}/cups/filter \
+ "
 -- 
 2.37.3
 
