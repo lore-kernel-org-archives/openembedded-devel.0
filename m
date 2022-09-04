@@ -2,61 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AAA43C6FA8E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B5BCBC6FA8C
 	for <webhook@archiver.kernel.org>; Sun,  4 Sep 2022 07:35:04 +0000 (UTC)
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com
- [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.web11.11378.1662276895520903269
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
+ [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.web08.11127.1662276868051937343
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:34:55 -0700
+ Sun, 04 Sep 2022 00:35:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=hSTRfZab;
- spf=pass (domain: gmail.com, ip: 209.85.210.171,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f171.google.com with SMTP id q15so5860252pfn.11
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=cMSgump+;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id
+ ck21-20020a17090afe1500b002003ba5b71cso943960pjb.0
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:34:55 -0700 (PDT)
+ Sun, 04 Sep 2022 00:35:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=lWA+dIzwBuYx/KtvNPoJgDIn7/EWhv+A9UyhCYq3bmM=;
-        b=hSTRfZabF0sDGwmOu4oe5Aoj10k82e6PpWvj5T9Pka48jLTzZidP5gWnTYC+KHuSzf
-         X8t/5+OUL5XKvWNjB1KSYN+Am3cibHLyQMOryu2RsD/w45NJKNR/Igmj/rSOHIz4mO31
-         J3hR4iWbdggFLot5NkOOM0THns3M0VRzJcqbkeHjDCGeKNmonheiyIsgtbC3B2gc6860
-         ASOuCJOKdCvlU/x67OXot9w8yEzpcs7TbPu3M4UU+7i5ntYd2Tk/IJ4r5ee4RD48Rx+Z
-         47yVEUekTDuHluZBYFgc3hQO3Da3YeariGDJwY9fRfto7BxByzuHE+tcb0otAex40Zec
-         xKJg==
+        bh=4gfnI6wSO6tmx3xVblnuElMDwccxgz+vIfTNMVR3QA0=;
+        b=cMSgump+r0QhjMQrfCmOH5K/565vx3RDCt+ZbnlCS3eEqwDBKazHuhC1FXZADhJooK
+         kh2P/OT2phSdPlVlEcy+MMsis5+QR1SWd45PFgWXszYdUz+aJFBGlNIQc9oai4qkVflB
+         EtqdIxcx25w8bXrenj5YBNlxse24WHbQIbW3HZOWdksASxrezctrgZGgqikT0oBQK4B/
+         DaD5BLPFcwevaTesTtNFgiIExFTBPapreGWmt2hSlbisfwCdF/8fwvluHJiYZhFmyt/p
+         8+NpuqCNUgIqysWkzxTDKQQRTOHULciw38MXC+4ZvT1vr4ROeXTsgUDZmKs/Yde//Bes
+         NUBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=lWA+dIzwBuYx/KtvNPoJgDIn7/EWhv+A9UyhCYq3bmM=;
-        b=l85t3HhgvV/RuB9V0MiuSxXgLpkgFh7QBZmtZFDzQ/jv1CEjMrrCO37HOv7XrXaMX6
-         yMm5GT+iXHfJ2AEjrr6bJqz/E9oDbX04G9Bm40pOprXrMq8Ym4/txtPv6koj1MpTXMB+
-         EdtABPHy2TBS9x3yvAZQhzQkYDPNu87c1oSQE66FmkBTOcWWeh6ed47KLcWyydCjYffv
-         /gvxF7NLcNTqqEavLym0Pp2sOkWv5r4zmLw91wLvgLpD61vJr9OFmwiu7uOG6kHHqUhn
-         l18AcAYnivjZyZ1Uv6JoSdm8tbt27gLuAtZ3H96QjT4gwsZbzBw7Cg7z09I2IVaWSz6z
-         L93w==
-X-Gm-Message-State: ACgBeo0IUfGMfbAk+j2qAlFpvdqSnmUdNlcvet0UwZyPAmsztbXIxeok
-	9UwjsGL4iamqZ3/iAMho5T4iFH+WI4ebIg==
+        bh=4gfnI6wSO6tmx3xVblnuElMDwccxgz+vIfTNMVR3QA0=;
+        b=w/kXUSl25hsSLOx7/twBW2Zd26uWu1ldttCBswfVmRz1aMGmaWeCX4AjLdb96y7WTJ
+         aSUNmKALzgJHFcUN3gJRXG1lNWW5LQC1Z/qJ6ML4dmOuQpaz0ncuFeJj83W1E71HwTmO
+         cBS1HUG6xwDi68YMc3UHZiOJskJRhZLIR5tb0bUSCHtX2sVRzGIlvfTkq5L0IqQzqp5g
+         p96CCD7zR/KCOZLnqDOQFXFjS0oZBjc3ymiQRMbKYLdXFCJ2nljeUQ7i9imoAUsmedMO
+         o63G/+SN2EfK5lc+PjkecC5Ue6R6Nk74ofucVp9MvAu15UxB6pdMSXVKzD+spystjYgo
+         deLQ==
+X-Gm-Message-State: ACgBeo3nvuJAajnXwpZuzESPUeSAP+Fn4qZcNZ95wfP43AHRU5tK6q8t
+	gwF47hlOKVeyTS+8BJ+GS2LOnXGMrzaZMw==
 X-Google-Smtp-Source: 
- AA6agR73RuQbTVOnpwKNSNnUhKwvIxJTI+4p5e1YeIheXNVuD7CGk6UMgB3VfTZR7dAK+5bPxAQRKA==
-X-Received: by 2002:a05:6a02:206:b0:427:93bb:9f99 with SMTP id
- bh6-20020a056a02020600b0042793bb9f99mr36571875pgb.542.1662276894675;
-        Sun, 04 Sep 2022 00:34:54 -0700 (PDT)
+ AA6agR5ySdEp29baTt7VtmYKuiPiIXf8E2AJMNcLB9DSfCikKK1cUFk/KnaAgYh4NuJaGWQxk+CUqA==
+X-Received: by 2002:a17:90b:4f44:b0:1fa:f63c:ea1b with SMTP id
+ pj4-20020a17090b4f4400b001faf63cea1bmr14012811pjb.30.1662276903691;
+        Sun, 04 Sep 2022 00:35:03 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::48c3])
         by smtp.gmail.com with ESMTPSA id
- w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.34.53
+ w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.35.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Sep 2022 00:34:54 -0700 (PDT)
+        Sun, 04 Sep 2022 00:35:03 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 33/63] libx86: Fix pointer typecasting in assignment
-Date: Sun,  4 Sep 2022 00:33:47 -0700
-Message-Id: <20220904073417.3251865-33-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 42/63] con2fbmap: Include string.h for strerror
+Date: Sun,  4 Sep 2022 00:33:56 -0700
+Message-Id: <20220904073417.3251865-42-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220904073417.3251865-1-raj.khem@gmail.com>
 References: <20220904073417.3251865-1-raj.khem@gmail.com>
@@ -67,66 +67,64 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 04 Sep 2022 07:35:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98627
+ https://lists.openembedded.org/g/openembedded-devel/message/98636
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-type-of-the-void-pointer-assignment.patch | 33 +++++++++++++++++++
- .../recipes-extended/libx86-1/libx86-1_1.1.bb |  1 +
- 2 files changed, 34 insertions(+)
- create mode 100644 meta-oe/recipes-extended/libx86-1/libx86-1.1/0001-Fix-type-of-the-void-pointer-assignment.patch
+ ...bmap-Add-missing-include-on-string.h.patch | 28 +++++++++++++++++++
+ .../recipes-bsp/con2fbmap/con2fbmap_git.bb    |  4 ++-
+ 2 files changed, 31 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-bsp/con2fbmap/con2fbmap/0001-con2fbmap-Add-missing-include-on-string.h.patch
 
-diff --git a/meta-oe/recipes-extended/libx86-1/libx86-1.1/0001-Fix-type-of-the-void-pointer-assignment.patch b/meta-oe/recipes-extended/libx86-1/libx86-1.1/0001-Fix-type-of-the-void-pointer-assignment.patch
+diff --git a/meta-oe/recipes-bsp/con2fbmap/con2fbmap/0001-con2fbmap-Add-missing-include-on-string.h.patch b/meta-oe/recipes-bsp/con2fbmap/con2fbmap/0001-con2fbmap-Add-missing-include-on-string.h.patch
 new file mode 100644
-index 0000000000..ea3c306fd7
+index 0000000000..d1b75f1c54
 --- /dev/null
-+++ b/meta-oe/recipes-extended/libx86-1/libx86-1.1/0001-Fix-type-of-the-void-pointer-assignment.patch
-@@ -0,0 +1,33 @@
-+From c782e208021409e9b78acb2200abd4319072e78a Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-bsp/con2fbmap/con2fbmap/0001-con2fbmap-Add-missing-include-on-string.h.patch
+@@ -0,0 +1,28 @@
++From 0a948d8d91b789e9c9b60136fada75b1d464af63 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 2 Sep 2022 00:28:05 -0700
-+Subject: [PATCH] Fix type of the void pointer assignment
++Date: Fri, 2 Sep 2022 18:31:27 -0700
++Subject: [PATCH] con2fbmap: Add missing include on string.h
 +
-+Fixes build with clang
++strerror() is from string.h therefore include it to fix -Wimplicit-function-declaration
++warnings
 +
-+x86-common.c:216:9: error: incompatible integer to pointer conversion assigning to 'void *' from 'long' [-Wint-conversion]
-+        offset = mem_info.offset - REAL_MEM_BASE;
-+               ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+Upstream-Status: Pending
++Upstream-Status: Submitted [https://gitlab.com/pibox/con2fbmap/-/merge_requests/1]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ x86-common.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ src/con2fbmap.c | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+diff --git a/x86-common.c b/x86-common.c
-+index 137bc3c..6f737ed 100644
-+--- a/x86-common.c
-++++ b/x86-common.c
-+@@ -213,7 +213,7 @@ void *LRMI_common_init(int high_page)
-+ 	if (!real_mem_init(high_page))
-+ 		return NULL;
-+ 
-+-	offset = mem_info.offset - REAL_MEM_BASE;
-++	offset = (void*)(mem_info.offset - REAL_MEM_BASE);
-+ 
-+ 	/*
-+ 	 Map the Interrupt Vectors (0x0 - 0x400) + BIOS data (0x400 - 0x502)
++diff --git a/src/con2fbmap.c b/src/con2fbmap.c
++index 7831931..7a2e870 100644
++--- a/src/con2fbmap.c
+++++ b/src/con2fbmap.c
++@@ -1,5 +1,6 @@
++ #include <stdio.h>
++ #include <stdlib.h>
+++#include <string.h> /* for strerror */
++ #include <unistd.h>
++ #include <fcntl.h>
++ #include <sys/ioctl.h>
 +-- 
 +2.37.3
 +
-diff --git a/meta-oe/recipes-extended/libx86-1/libx86-1_1.1.bb b/meta-oe/recipes-extended/libx86-1/libx86-1_1.1.bb
-index d303147259..9dc91f3f6f 100644
---- a/meta-oe/recipes-extended/libx86-1/libx86-1_1.1.bb
-+++ b/meta-oe/recipes-extended/libx86-1/libx86-1_1.1.bb
-@@ -11,6 +11,7 @@ SRC_URI = "http://www.codon.org.uk/~mjg59/libx86/downloads/${BPN}-${PV}.tar.gz \
-            file://libx86-mmap-offset.patch \
-            file://0001-assume-zero-is-valid-address.patch \
-            file://makefile-add-ldflags.patch \
-+           file://0001-Fix-type-of-the-void-pointer-assignment.patch \
- "
+diff --git a/meta-oe/recipes-bsp/con2fbmap/con2fbmap_git.bb b/meta-oe/recipes-bsp/con2fbmap/con2fbmap_git.bb
+index 5d1c5ba7e4..302a61e8a8 100644
+--- a/meta-oe/recipes-bsp/con2fbmap/con2fbmap_git.bb
++++ b/meta-oe/recipes-bsp/con2fbmap/con2fbmap_git.bb
+@@ -9,7 +9,9 @@ SECTION = "console/utils"
+ DEPENDS = ""
  
- SRC_URI[md5sum] = "41bee1f8e22b82d82b5f7d7ba51abc2a"
+ SRCREV = "61ed2f28b294b1ebeb767df8cb5fcd391709c8e2"
+-SRC_URI = "git://gitlab.com/pibox/con2fbmap.git;protocol=https;branch=master"
++SRC_URI = "git://gitlab.com/pibox/con2fbmap.git;protocol=https;branch=master \
++           file://0001-con2fbmap-Add-missing-include-on-string.h.patch \
++           "
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.37.3
 
