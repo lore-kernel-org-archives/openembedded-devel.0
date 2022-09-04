@@ -2,60 +2,62 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE5E8C6FA82
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C9105C6FA8C
 	for <webhook@archiver.kernel.org>; Sun,  4 Sep 2022 07:35:14 +0000 (UTC)
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com
- [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.web09.11280.1662276881332047114
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com
+ [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web10.11320.1662276907483269508
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:35:09 -0700
+ Sun, 04 Sep 2022 00:35:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=fpIYPlcm;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id fs14so929739pjb.5
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=WRSG4uux;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id 202so5580929pgc.8
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:35:09 -0700 (PDT)
+ Sun, 04 Sep 2022 00:35:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=alDAuWTEi3+stuDeW9E1B/SfGDr1fMaigsRoR2jfX6A=;
-        b=fpIYPlcmLM2uv3ZjvbW8DFhjZ3LfC3UIhmLlCFDd7ujkx4QnYyjZGQXrENHZLL6C2W
-         XVcwChcqvr+QZhHW4diQQHeRBs6wRPijppOEN9w+Bl56cG9pdV2R16MKrF7AMx7aZ03w
-         JwHti54yKepHHey1zaom/HvWGIVX229TF//s9PFbi1ZRXwjuwyJRBeiQ0dhswYCVpx7l
-         LY4G063k5NWq2uVIxumErn/VyZTtUzdCSaCOSS3zLsJBlp7a/xDHbDWlm0yY9YD3wnEw
-         K0di9AvXNpap4BLxilNKzW1Lf0MqzOUgTLoIgoAYYOKvUDuqRdnkL8dav8njWWBJjZaH
-         KaAQ==
+        bh=ofK2GQjrwv6H7oRXeHRm6bwKAFH0/WArqtHZPDz4eV4=;
+        b=WRSG4uuxqnkwFhe6TCkQdVg9YNid0Sk0DMob7RJvOc76oZPu88qhPTbY/iwXTvU0cs
+         lepqyEEtxrLmWYzsV2m+3QSakuzaa0GFSOYoswZKPcNxFBVyg5VzfrbsunvlEYwcin8J
+         p7pQ69qRCDGLgxde9jNWF8P9/M4GZRtP7VO6ck8AjerOLOpkVFLDwTt9IEgADN2V3RPn
+         /TRoxZqcfGYlehnGj9olvBzA7jq+3FVgvUDGR78bDcH0lUS3cHb5yNhQjzj7tZ8RX6Mv
+         xUlUws02krgHTp2UUXL+L+oOlVzAD6REsxGOlgYPG2BmuuvnL6D4jkUgdHatDU54KwSt
+         BayQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=alDAuWTEi3+stuDeW9E1B/SfGDr1fMaigsRoR2jfX6A=;
-        b=Q7PEW7NkPOtu43b+hBhBpXz7vQPHLarDVrKlBV1Yqz2JClp7nxh9OVQgFXljZMA5M6
-         AXvMeO3N2/nNDMUHjaG/z5cwsgiUbu/4SP6WhFpf3+O/UFgENbzNrbUF+2DjfgEqKtsq
-         H7Cht36sBLM1YZI7tATSTRLK9IhumprMAfEeOwVWDMhXCT+yg7crb8DME8Wr+XCE0NJj
-         c3hDsl4ogqJOdViFK1zXPohuMNPIwp2GRmdjGL4TiFzPdhlrgo2Yjr70MQANe9O9Wc5a
-         kkSwjmMakHlv4MPptFrnG0MRmkVKUIidIUYXKnqAMOdLvI1xohcyhbMJZZs4zmu4MB8M
-         jNtg==
-X-Gm-Message-State: ACgBeo2/y/Y05nsXpBYrLoVsCVAY1/CbhwDySmzSYOLqHiz5zg2XGsYz
-	+tlJRnltm4dnCFzVpOi15OcUHgAq7eCodw==
+        bh=ofK2GQjrwv6H7oRXeHRm6bwKAFH0/WArqtHZPDz4eV4=;
+        b=TMM46V1aLgM7d0/iEA4GaW5H/MbizorsEe0MTGdsmXvLjQ2BwGHzDNSXCSv0ygoqq3
+         EzFu0L6hONKKN2wshp3F21aq+y8WWkBOj6b9G8gPYqMD/GqDgO/L6z7v72VHBOXoq9jT
+         jVn2JPvtvZvNR5uy7HGdVMKiaMCGdkISl4l6zKDnb7nk+Q7QsSlpIOc/kWA1oA/Us8mM
+         1Zhkh69vkk5psxFrliwF0doP02oLoMzZVmBju/J54KlORXkYY27WVe6YeCZUwKtVU7cJ
+         JMalwPoqdqO3sMFxbRKyD7Kc/kVII0GdBJ+xZCCtBhsDIcGT0Va3+vB0fLj4T50+nhVw
+         dCpg==
+X-Gm-Message-State: ACgBeo0N8s20tZ8tXcyc9Tid18NIWzWuyaLYIrxO0WhFxn0PSvXMNBrc
+	NRO/oSK+78WpNQsGdb7cZn56PFRNYjCOow==
 X-Google-Smtp-Source: 
- AA6agR4l7En7m3iIyHHtApOnWMdyQL4vWXjsuMAznYJDy4IC3TzLh9dooThveRiDNkuGkL91/cttUw==
-X-Received: by 2002:a17:90a:7185:b0:1fd:768f:232d with SMTP id
- i5-20020a17090a718500b001fd768f232dmr13833278pjk.149.1662276908578;
-        Sun, 04 Sep 2022 00:35:08 -0700 (PDT)
+ AA6agR52bSwWOaUrOvt3FXsjaXurDPJzDqP/CevsatZ3IMt7CrVhizsvrMG54CEm7uNujfp+Af5WNA==
+X-Received: by 2002:a05:6a00:3306:b0:538:444d:87d3 with SMTP id
+ cq6-20020a056a00330600b00538444d87d3mr32132406pfb.38.1662276906691;
+        Sun, 04 Sep 2022 00:35:06 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::48c3])
         by smtp.gmail.com with ESMTPSA id
- w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.35.07
+ w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.35.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Sep 2022 00:35:08 -0700 (PDT)
+        Sun, 04 Sep 2022 00:35:06 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 47/63] gtkperf: Define prototype for setup_appdata
-Date: Sun,  4 Sep 2022 00:34:01 -0700
-Message-Id: <20220904073417.3251865-47-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 45/63] oprofile: Fix configure check for perf_events
+ support
+Date: Sun,  4 Sep 2022 00:33:59 -0700
+Message-Id: <20220904073417.3251865-45-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220904073417.3251865-1-raj.khem@gmail.com>
 References: <20220904073417.3251865-1-raj.khem@gmail.com>
@@ -66,60 +68,61 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 04 Sep 2022 07:35:14 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98641
+ https://lists.openembedded.org/g/openembedded-devel/message/98639
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...c-Define-prototype-for-setup_appdata.patch | 27 +++++++++++++++++++
- .../recipes-graphics/gtkperf/gtkperf_0.40.bb  |  1 +
- 2 files changed, 28 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/gtkperf/gtkperf/0001-main.c-Define-prototype-for-setup_appdata.patch
+ ...gure-Include-unistd.h-for-getpid-API.patch | 28 +++++++++++++++++++
+ .../recipes-kernel/oprofile/oprofile_1.4.0.bb |  1 +
+ 2 files changed, 29 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/oprofile/oprofile/0001-configure-Include-unistd.h-for-getpid-API.patch
 
-diff --git a/meta-oe/recipes-graphics/gtkperf/gtkperf/0001-main.c-Define-prototype-for-setup_appdata.patch b/meta-oe/recipes-graphics/gtkperf/gtkperf/0001-main.c-Define-prototype-for-setup_appdata.patch
+diff --git a/meta-oe/recipes-kernel/oprofile/oprofile/0001-configure-Include-unistd.h-for-getpid-API.patch b/meta-oe/recipes-kernel/oprofile/oprofile/0001-configure-Include-unistd.h-for-getpid-API.patch
 new file mode 100644
-index 0000000000..08e899b9a6
+index 0000000000..0ac03bde50
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/gtkperf/gtkperf/0001-main.c-Define-prototype-for-setup_appdata.patch
-@@ -0,0 +1,27 @@
-+From 6b5f695cb206cd8b3cbcbcd7713e52772e89306b Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-kernel/oprofile/oprofile/0001-configure-Include-unistd.h-for-getpid-API.patch
+@@ -0,0 +1,28 @@
++From 46f0aadf80d5e28f587149b6e90c3ba005971f6e Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 2 Sep 2022 20:47:32 -0700
-+Subject: [PATCH] main.c: Define prototype for setup_appdata
++Date: Fri, 2 Sep 2022 19:22:17 -0700
++Subject: [PATCH] configure: Include unistd.h for getpid API
++
++This fixes the check for perf events support in configure
 +
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/main.c | 2 ++
-+ 1 file changed, 2 insertions(+)
++ configure.ac | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+diff --git a/src/main.c b/src/main.c
-+index c226799..b4ce6d1 100644
-+--- a/src/main.c
-++++ b/src/main.c
-+@@ -18,6 +18,8 @@
-+ #include "callbacks.h"
-+ #include "appdata.h"
-+ 
-++void setup_appdata(AppData * appdata_in);
-++
-+ int
-+ main (int argc, char **argv)
-+ {
++diff --git a/configure.ac b/configure.ac
++index e4f4024..3384628 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -119,6 +119,7 @@ if test "$kernel_may_have_perf_events_support" = "yes"; then
++ 				#include <asm/unistd.h>
++ 				#include <sys/types.h>
++ 				#include <string.h>
+++				#include <unistd.h>
++ 			]],
++ 			[[struct perf_event_attr attr;
++ 				pid_t pid;
 +-- 
 +2.37.3
 +
-diff --git a/meta-oe/recipes-graphics/gtkperf/gtkperf_0.40.bb b/meta-oe/recipes-graphics/gtkperf/gtkperf_0.40.bb
-index 0c4f819892..a70d31fed0 100644
---- a/meta-oe/recipes-graphics/gtkperf/gtkperf_0.40.bb
-+++ b/meta-oe/recipes-graphics/gtkperf/gtkperf_0.40.bb
-@@ -8,6 +8,7 @@ SRC_URI = "http://prdownloads.sourceforge.net/${BPN}/${BPN}_${PV}.tar.gz \
-            file://0001-Include-stdlib.h-for-exit-API.patch \
-            file://0002-timing.c-Fix-format-security-errors.patch \
-            file://gettext.patch \
-+           file://0001-main.c-Define-prototype-for-setup_appdata.patch \
-            "
+diff --git a/meta-oe/recipes-kernel/oprofile/oprofile_1.4.0.bb b/meta-oe/recipes-kernel/oprofile/oprofile_1.4.0.bb
+index 23e7d3d5c3..e6eec0ab05 100644
+--- a/meta-oe/recipes-kernel/oprofile/oprofile_1.4.0.bb
++++ b/meta-oe/recipes-kernel/oprofile/oprofile_1.4.0.bb
+@@ -30,6 +30,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz \
+            file://0008-include-linux-limits.h-for-MAX_INPUT.patch \
+            file://0009-Prevent-running-check-tests-on-host-if-cross-compili.patch \
+            file://0010-oprofile-Determine-the-root-home-directory-dynamical.patch \
++           file://0001-configure-Include-unistd.h-for-getpid-API.patch \
+ "
+ SRC_URI[sha256sum] = "7ba06f99d7c188389d20d1d5e53ee690c7733f87aa9af62bd664fa0ca235a412"
  
- SRC_URI[md5sum] = "4331dde4bb83865e15482885fcb0cc53"
 -- 
 2.37.3
 
