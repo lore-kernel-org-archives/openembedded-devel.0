@@ -2,60 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 893D7C6FA8E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 65C11ECAAD3
 	for <webhook@archiver.kernel.org>; Sun,  4 Sep 2022 07:34:44 +0000 (UTC)
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com
- [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.web09.11280.1662276881332047114
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
+ [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.web09.11281.1662276883227394393
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:34:41 -0700
+ Sun, 04 Sep 2022 00:34:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=POFxbb7W;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id fs14so929318pjb.5
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=NQUE2vb1;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f178.google.com with SMTP id jm11so5720427plb.13
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:34:41 -0700 (PDT)
+ Sun, 04 Sep 2022 00:34:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=kB6eT81CR2ne1+Gd7hkvtqC0ffMiiDFguGqR6YvozEQ=;
-        b=POFxbb7W05ASnrT031mbkyE0ukGxCAvZxakDT4dUlgoRH+JQopvzUcMyet/1a0OX8s
-         +JW5A4PI+1kzKeNSR03De0SYV1M0Xh38R+k/PsMh54fIK9xpw9mVcelVV3EkoTz/Va6r
-         PnxiJ1EWLyKwQVvGWIfTZGoAt/RtMbgTNs8WEg2n+B1yaOkHEBrBIMYBH93ISWY29Qjl
-         RsRqrjVWRJWQIJLd0QccFECdrd2zIiPFsDS5SU1uqmJgUsFIrnE1dfCJxg5R3WN+Q6ID
-         SKBQWbdVO2ZETiiOjg/ITGB9yh3x7/njFR3pihM0pOpIFpKvP6xPVGyBQJKHAT26VkHj
-         dxdQ==
+        bh=OgeFfTDKN73KOYjD3pZ3H67lW/gZUZ/Jnfi8xZugJNw=;
+        b=NQUE2vb1Op3on2IFO2vyxoGV7Jc1yNn7jLBaUFrp9QFsx58CmC+6Eu8XBP17CzCpLP
+         CX474mNW0PgvskuFk4THVyfp6g924JVG0v9tWhJtXS2dBOm+W8qg9uTESPTf05dbRkIL
+         KjAeO1z4UhBOgshfdRVQLWG7GPw1Yc6IRY+DNhqyyA1iqWOH/NhLt4U9vkkMIAASZebk
+         u8KjvWVdmZH+wB3tOtJGmeGPW3f7KiOQzFFIwcMAd2gvMYczPa+JWV8vyXwmWoEg4wyG
+         eZasugiCzG0aJWQoML9I/Te3mfKawdGQRdjLr65JZzOZirN3T/NEmpOf+afNjvGKC8K5
+         wJRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=kB6eT81CR2ne1+Gd7hkvtqC0ffMiiDFguGqR6YvozEQ=;
-        b=bEvjNEpuyjQle0vGjhyNhtvW+LYgW9fmJjMRgjwG0XAgFTxOnHSoqRJjaiQpykB4IZ
-         vXmS9mASJGc4sPZuwSOzGzQN9nC73c7PbdPOb2t8L6bnj4EDOEIhVH8A12lGM9IUaxHT
-         MJAxsOJVbNjx8haIbmrxWLepHsWVOHZQlp6HmuPabJQWnsE3KPm3eW0Pd8kg8iicUiQD
-         /iOVi4P458QswIKYnzqtLzz+bJ0t7BVhsKS+YKlsZfqRnK9JnslmKqBYexxlOtYZ7Ual
-         vHB+RtolX6TKJKcuBufNgayVlYNeHHfsnPysgXvZIbUwBbfbnd3xaYyFfOkd1QKDICXD
-         wbYA==
-X-Gm-Message-State: ACgBeo37qaVXa1lzr6Hr5nAvMgD0W6WBRPjlyV+rz+gcwkmtTqn7tMCC
-	HGYPQORr/+eqxsKpMKDYkD/maS5BxIp2vA==
+        bh=OgeFfTDKN73KOYjD3pZ3H67lW/gZUZ/Jnfi8xZugJNw=;
+        b=UUvNlj4pwnWEVlM/j9x/b0Frj+aFZvjQlZ5TmwaKS9N0ng1gD7+Nmv3fZVU99Q4mjf
+         51rXqIvViSjGOobB+h/l8qTnpLdlhevxedE48Ub/XuBsqXMKrrljgAB2B9rFOkhRSeW8
+         H31DmlEqzv5xons1GgxWJ7XdvF06ryGeyH5GdOedzXRXLWYwe1HiabWlhGQx1Imo9ahb
+         ekGicIBl8R0S3EA9sjrC7jbebQ05NoohPQqedCysMgu0qmzpyeDZH6M0GMwLl7B1nwBl
+         9WTy8UpCaZZr5I8nubLkkAvRjOiG0CaDBt1mmH4BJX0p2cRSQcpBm5oYe+8TWQVACplw
+         FEGA==
+X-Gm-Message-State: ACgBeo0WYT+qB3TuB6foKSTcb2qF++eoaMM2oypzs4lV2mCw30LC3t7D
+	mq/knHiYt9sjPhdE3YOgaHJfFM5gKzJ56w==
 X-Google-Smtp-Source: 
- AA6agR7/uKVcILOUXlr6xue11rgmI4OW9wPmcXCVECA8EffVB/3/uF+RJ9BkIO3AHLOVZGqX7p0wfQ==
-X-Received: by 2002:a17:90b:1c8e:b0:1f7:5250:7b44 with SMTP id
- oo14-20020a17090b1c8e00b001f752507b44mr13611016pjb.212.1662276880444;
-        Sun, 04 Sep 2022 00:34:40 -0700 (PDT)
+ AA6agR42F8OZEZHTAJitjFLYN/YxveS9AWmLh8M7YRgL+3nSJpYAZlZGhGD9vqYl08hdyM52MoSP3g==
+X-Received: by 2002:a17:90a:e58a:b0:1e2:fe75:dd5f with SMTP id
+ g10-20020a17090ae58a00b001e2fe75dd5fmr13715299pjz.138.1662276882450;
+        Sun, 04 Sep 2022 00:34:42 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::48c3])
         by smtp.gmail.com with ESMTPSA id
- w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.34.39
+ w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.34.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Sep 2022 00:34:39 -0700 (PDT)
+        Sun, 04 Sep 2022 00:34:41 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 19/63] zabbix: Upgrade to 6.2.2
-Date: Sun,  4 Sep 2022 00:33:33 -0700
-Message-Id: <20220904073417.3251865-19-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 21/63] gensio: Fix AC_CHECK_LIB for libwrap
+Date: Sun,  4 Sep 2022 00:33:35 -0700
+Message-Id: <20220904073417.3251865-21-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220904073417.3251865-1-raj.khem@gmail.com>
 References: <20220904073417.3251865-1-raj.khem@gmail.com>
@@ -66,96 +67,64 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 04 Sep 2022 07:34:44 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98613
-
-Fix build on musl while here
+ https://lists.openembedded.org/g/openembedded-devel/message/98615
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-initialize-msghdr-portably.patch     | 52 +++++++++++++++++++
- .../{zabbix_6.2.1.bb => zabbix_6.2.2.bb}      |  4 +-
- 2 files changed, 54 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/zabbix/zabbix/0001-initialize-msghdr-portably.patch
- rename meta-oe/recipes-connectivity/zabbix/{zabbix_6.2.1.bb => zabbix_6.2.2.bb} (95%)
+ ...for-request_init-API-when-probing-fo.patch | 31 +++++++++++++++++++
+ .../gensio/gensio_2.5.2.bb                    |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/gensio/files/0001-configure-Check-for-request_init-API-when-probing-fo.patch
 
-diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix/0001-initialize-msghdr-portably.patch b/meta-oe/recipes-connectivity/zabbix/zabbix/0001-initialize-msghdr-portably.patch
+diff --git a/meta-oe/recipes-connectivity/gensio/files/0001-configure-Check-for-request_init-API-when-probing-fo.patch b/meta-oe/recipes-connectivity/gensio/files/0001-configure-Check-for-request_init-API-when-probing-fo.patch
 new file mode 100644
-index 0000000000..a7a1dc1986
+index 0000000000..3b4caa2215
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/zabbix/zabbix/0001-initialize-msghdr-portably.patch
-@@ -0,0 +1,52 @@
-+From 37b662cf44e14b33e93759d4b129d23095b41372 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-connectivity/gensio/files/0001-configure-Check-for-request_init-API-when-probing-fo.patch
+@@ -0,0 +1,31 @@
++From f56e59712d8708c74a4cf66d24b5703fc16b22ae Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 31 Aug 2022 23:55:02 -0700
-+Subject: [PATCH] initialize msghdr portably
++Date: Thu, 1 Sep 2022 11:31:48 -0700
++Subject: [PATCH] configure: Check for request_init API when probing for
++ libwrap
 +
-+on linux we have musl as an option for system C library and current
-+initialization assumes the structure to be same as glibc, therefore
-+initialize the elements of structure instead, so it can work on both
-+glibc and musl.
++checking for main() is not right check, since this function is not part
++of libwrap but the app. Newer autocof and toolchain may fail
 +
-+Fixes
-+net.c:115:79: error: incompatible pointer to integer conversion initializing 'int' with an expression of type 'void *' [-Wint-conversion]
-+        struct msghdr           s_msg = { (void *)&s_sa, sizeof(struct sockaddr_nl), s_io, 1, NULL, 0, 0};
-+                                                                                              ^~~~
-+
-+Upstream-Status: Submitted [https://github.com/zabbix/zabbix/pull/77]
++Upstream-Status: Submitted [https://github.com/cminyard/gensio/pull/48]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/libs/zbxsysinfo/linux/net.c | 12 ++++++++++--
-+ 1 file changed, 10 insertions(+), 2 deletions(-)
++ configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/libs/zbxsysinfo/linux/net.c b/src/libs/zbxsysinfo/linux/net.c
-+index 1425a3604d..98f03de0dd 100644
-+--- a/src/libs/zbxsysinfo/linux/net.c
-++++ b/src/libs/zbxsysinfo/linux/net.c
-+@@ -114,13 +114,21 @@ static int	find_tcp_port_by_state_nl(unsigned short port, int state, int *found)
++diff --git a/configure.ac b/configure.ac
++index 90cfcb6b..1c06d918 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -109,7 +109,7 @@ AC_ARG_WITH(tcp-wrappers,
++ if test "$tcp_wrappers" != "no"
++ then
++   AC_CHECK_HEADERS([tcpd.h])
++-  AC_CHECK_LIB(wrap,main)
+++  AC_CHECK_LIB(wrap,request_init)
++ fi
 + 
-+ 	struct sockaddr_nl	s_sa = { AF_NETLINK, 0, 0, 0 };
-+ 	struct iovec		s_io[1] = { { &request, sizeof(request) } };
-+-	struct msghdr		s_msg = { (void *)&s_sa, sizeof(struct sockaddr_nl), s_io, 1, NULL, 0, 0};
-++	struct msghdr		s_msg = { 0 };
-++	s_msg.msg_name 		= (void *)&s_sa;
-++	s_msg.msg_namelen 	= sizeof(struct sockaddr_nl);
-++	s_msg.msg_iov 		= s_io;
-++	s_msg.msg_iovlen 	= 1;
-+ 
-+ 	char			buffer[BUFSIZ] = { 0 };
-+ 
-+ 	struct sockaddr_nl	r_sa = { AF_NETLINK, 0, 0, 0 };
-+ 	struct iovec		r_io[1] = { { buffer, BUFSIZ } };
-+-	struct msghdr		r_msg = { (void *)&r_sa, sizeof(struct sockaddr_nl), r_io, 1, NULL, 0, 0};
-++	struct msghdr		r_msg = { 0 };
-++	r_msg.msg_name 		= (void *)&r_sa;
-++	r_msg.msg_namelen 	= sizeof(struct sockaddr_nl);
-++	r_msg.msg_iov 		= r_io;
-++	r_msg.msg_iovlen 	= 1;
-+ 
-+ 	struct nlmsghdr		*r_hdr;
-+ 
++ AC_ARG_ENABLE([doc],
 +-- 
 +2.37.3
 +
-diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_6.2.1.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_6.2.2.bb
-similarity index 95%
-rename from meta-oe/recipes-connectivity/zabbix/zabbix_6.2.1.bb
-rename to meta-oe/recipes-connectivity/zabbix/zabbix_6.2.2.bb
-index 9949bd81f1..58ec461745 100644
---- a/meta-oe/recipes-connectivity/zabbix/zabbix_6.2.1.bb
-+++ b/meta-oe/recipes-connectivity/zabbix/zabbix_6.2.2.bb
-@@ -25,10 +25,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+diff --git a/meta-oe/recipes-connectivity/gensio/gensio_2.5.2.bb b/meta-oe/recipes-connectivity/gensio/gensio_2.5.2.bb
+index 9de21209ca..d6b5f1987e 100644
+--- a/meta-oe/recipes-connectivity/gensio/gensio_2.5.2.bb
++++ b/meta-oe/recipes-connectivity/gensio/gensio_2.5.2.bb
+@@ -9,6 +9,7 @@ SRCREV = "b6cd354afe6d5f63bc859c94fd3a455a3cdf0449"
  
- SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/6.2/${BPN}-${PV}.tar.gz \
-     file://0001-Fix-configure.ac.patch \
-+    file://0001-initialize-msghdr-portably.patch \
-     file://zabbix-agent.service \
+ SRC_URI = "git://github.com/cminyard/gensio;protocol=https;branch=master \
+            file://0001-tools-gensiot-Fix-build-with-musl.patch \
++           file://0001-configure-Check-for-request_init-API-when-probing-fo.patch \
  "
--
--SRC_URI[sha256sum] = "f3d6b7cf4e67d820ce7d28cd54ac67724f7453f261f668877e6410cd21ab9ea1"
-+SRC_URI[sha256sum] = "f0e7a9abb0f65d700f531253b91c31165077a9c94769cc8d238a423ada852773"
  
- inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
- 
+ S = "${WORKDIR}/git"
 -- 
 2.37.3
 
