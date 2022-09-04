@@ -2,61 +2,62 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8F606C6FA8E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A681C6FA92
 	for <webhook@archiver.kernel.org>; Sun,  4 Sep 2022 07:34:54 +0000 (UTC)
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com
- [209.85.215.181])
- by mx.groups.io with SMTP id smtpd.web08.11129.1662276888502627586
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com
+ [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web12.11494.1662276890485940857
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:34:48 -0700
+ Sun, 04 Sep 2022 00:34:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=QOT36BGN;
- spf=pass (domain: gmail.com, ip: 209.85.215.181,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=Fjdvm4Y2;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f181.google.com with SMTP id r69so5608173pgr.2
+Received: by mail-pl1-f169.google.com with SMTP id v5so5765861plo.9
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:34:48 -0700 (PDT)
+ Sun, 04 Sep 2022 00:34:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=VwgFNljJ21q95+Ui2IlrxyAHx75tI9uwY3KNbssHVzo=;
-        b=QOT36BGN4pDESoEamAuPRrVYcVLWYN6tDldNCsKvW/uBAi/tMM8Eb9z76ZjPqGnWYJ
-         56QcPEZTNh/MceWWWPNBulqALMV6g3eQIM4M7ditulyl99Uh23+9kr5X4RtO9+NXERCa
-         IUlIjvqX3JS/baSxHctU9+tO8+T9Orf7JVYaq2FsBXo/NzllIOLHK8sEyfo0l7SuV8cB
-         Fb1xfbMDMbgk/5bqyHWOLdUO8SzSTVh86mHMpFv847YGwtLIGdnYl4qv7JUKkSX9LzdW
-         2strEZB/oZdLHJs9d54u6AfTF6oVI18PoiueZr0ZFGE/ux56D9/21f02jv4ygVdMpVIH
-         0JIA==
+        bh=sYIpfubg7/K5TysU52HQCDQuZSLPK9TIc8fMLeE8+ZI=;
+        b=Fjdvm4Y2BB5WKCxvcfXDjT3NzFW/8k/p56X+wy8KYTH1SqIBkQaJN1HgEjYLJ7fyj1
+         ANAvaZkVHOur004Iz68Xp1a5kjXXzxBCGqK0VU2W3g+JdS/VEDGLi0wz3y1COmZGgiK9
+         Rw4O6ZIYyNlBPAdX5fg/Tp2E9h7NVimeilA/PR6lktMFb0Sewq+1WV2DgEineJZJS2mV
+         /SD2MCTePxYsQbraDMnadytBmNYXdNbcR4PMuu1imxMrHVO+1cNGVeUgd/pHClN4Q76G
+         Zkz5xbpCqeBe9msyIjiaHUe3tJeHUycNiiUocVjUm1vdqESf8jEXaXltvrGKrcE2p60Z
+         6FAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=VwgFNljJ21q95+Ui2IlrxyAHx75tI9uwY3KNbssHVzo=;
-        b=WYwdXw66k3LetSQm5c/sRNLES7guxf7e8XxXfSBB0JYFk5ebPvAfXvUcvIKeSs4XQU
-         R7+CPFYlWiIJiMC7aVoX+cMSuBuMGVDEZ5I78FLkAbc2eryMyGBxESxo3Ft960qFPD9Q
-         lqwd7+ue6rOz2Vr9J4RU9o9HWTP6u9Y5i+WqpuMsV6nHp5WbMRUQUnw7qfwo1UA7ec0W
-         4yjF5/MBVJa5laUUTTskh1NyWPaGDP+hWNUfntJkdWnzhNzL66ysWtFV3rIyl4qrShFL
-         M/qxm/f2ffgiDohLSJ0t3I1Ui6TejnmtrVYopb6ABRnFWY1w8rBPuFAs2yv8YDqobp2K
-         XnwQ==
-X-Gm-Message-State: ACgBeo3VgFmU+dxR9aAXy61NvsCAQK1NTmKcEPr1uBOYt2yjDYGlhM7P
-	X3pA32XuaABTwinoiIJTiiyeuoyrYygHZg==
+        bh=sYIpfubg7/K5TysU52HQCDQuZSLPK9TIc8fMLeE8+ZI=;
+        b=Bw31gqOFzYlQrhsZGNVpytvSxbJjsjeKVkqlYE2bQq19E/iPfnA0PI/JU/AM0FdhDs
+         /QqgkZH9F2zLdkbRDV2ChxvxmU7gXtMU7gyFrVZOYbnhKShm7ZwuUwz9mMYP4B7UurBZ
+         T90qEBV1YPityPUSqvvfh5tJHo/ZAYgKWLhiZvKPLiilnu+SNFZAZxZVWKxvYrwMMaek
+         LyhTN+ENOfZkvCORcYWGaZepVWhLs9vOu5E6d+RaJIgJ6BbexyPApIQne8fFN1V19O//
+         wgmaTBV1fsezuBWIDUFoz0gAt7UxVcM68IDO5819X0X7CWG5hU2CiE77MiAGjx00Exkv
+         1HIQ==
+X-Gm-Message-State: ACgBeo3jo6kZI3/Ddg1BxXqUOADUxt7J7hNBD05WoZaGTOEpS3PZOicW
+	yswkWT3wzi+0mDcPJyMcMwvXIsrXkxLFsg==
 X-Google-Smtp-Source: 
- AA6agR5+jrvB9rP/8MV2Bouym5/v9vHAORNdtYBwS+S1CuNz606m4eEEdbdNg/6EUQTW7psbtlVqfw==
-X-Received: by 2002:a65:6b95:0:b0:420:2cb1:68e5 with SMTP id
- d21-20020a656b95000000b004202cb168e5mr36896895pgw.220.1662276887596;
-        Sun, 04 Sep 2022 00:34:47 -0700 (PDT)
+ AA6agR5LnjT5EI8FDRrIXz1jSFPUjMoHIeWchyuEz9nfNFgn9uY9pHamvQkco+eds5iXDap/4Zh7sA==
+X-Received: by 2002:a17:90b:1e42:b0:1fe:ec3:924f with SMTP id
+ pi2-20020a17090b1e4200b001fe0ec3924fmr13800954pjb.34.1662276889614;
+        Sun, 04 Sep 2022 00:34:49 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::48c3])
         by smtp.gmail.com with ESMTPSA id
- w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.34.46
+ w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.34.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Sep 2022 00:34:47 -0700 (PDT)
+        Sun, 04 Sep 2022 00:34:49 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 26/63] tokyocabinet: Fix AC_CHECK_LIB test functions
-Date: Sun,  4 Sep 2022 00:33:40 -0700
-Message-Id: <20220904073417.3251865-26-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 28/63] raptor2: Match reutrn type from
+ RAPTOR_ASSERT_OBJECT_POINTER_RETURN_VALUE
+Date: Sun,  4 Sep 2022 00:33:42 -0700
+Message-Id: <20220904073417.3251865-28-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220904073417.3251865-1-raj.khem@gmail.com>
 References: <20220904073417.3251865-1-raj.khem@gmail.com>
@@ -67,91 +68,80 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 04 Sep 2022 07:34:54 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98620
+ https://lists.openembedded.org/g/openembedded-devel/message/98622
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...heck-functions-for-AC_CHECK_LIB-test.patch | 58 +++++++++++++++++++
- .../tokyocabinet/tokyocabinet_1.4.48.bb       |  1 +
- 2 files changed, 59 insertions(+)
- create mode 100644 meta-oe/recipes-support/tokyocabinet/tokyocabinet/0001-configure-Fix-check-functions-for-AC_CHECK_LIB-test.patch
+ ...e-from-RAPTOR_ASSERT_OBJECT_POINTER_.patch | 47 +++++++++++++++++++
+ .../recipes-support/raptor2/raptor2_2.0.15.bb |  1 +
+ 2 files changed, 48 insertions(+)
+ create mode 100644 meta-oe/recipes-support/raptor2/files/0001-Match-reutrn-type-from-RAPTOR_ASSERT_OBJECT_POINTER_.patch
 
-diff --git a/meta-oe/recipes-support/tokyocabinet/tokyocabinet/0001-configure-Fix-check-functions-for-AC_CHECK_LIB-test.patch b/meta-oe/recipes-support/tokyocabinet/tokyocabinet/0001-configure-Fix-check-functions-for-AC_CHECK_LIB-test.patch
+diff --git a/meta-oe/recipes-support/raptor2/files/0001-Match-reutrn-type-from-RAPTOR_ASSERT_OBJECT_POINTER_.patch b/meta-oe/recipes-support/raptor2/files/0001-Match-reutrn-type-from-RAPTOR_ASSERT_OBJECT_POINTER_.patch
 new file mode 100644
-index 0000000000..001fa9dd75
+index 0000000000..4c1afb46eb
 --- /dev/null
-+++ b/meta-oe/recipes-support/tokyocabinet/tokyocabinet/0001-configure-Fix-check-functions-for-AC_CHECK_LIB-test.patch
-@@ -0,0 +1,58 @@
-+From e192da006dd9b0ecbbef540a3e86b65ff88e89e2 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/raptor2/files/0001-Match-reutrn-type-from-RAPTOR_ASSERT_OBJECT_POINTER_.patch
+@@ -0,0 +1,47 @@
++From 97b5dcaa6b221eb403cc92e953225d38aee18f70 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 1 Sep 2022 13:28:29 -0700
-+Subject: [PATCH] configure: Fix check functions for AC_CHECK_LIB test
++Date: Thu, 1 Sep 2022 14:48:39 -0700
++Subject: [PATCH] Match reutrn type from
++ RAPTOR_ASSERT_OBJECT_POINTER_RETURN_VALUE
 +
++This ensures that integer type 0 is returned and not NULL
++Fixes
++raptor_serialize.c:243:66: error: incompatible pointer to integer conversion returning 'void *' from a function with result type 'int' [-Wint-conversion]
++  RAPTOR_ASSERT_OBJECT_POINTER_RETURN_VALUE(world, raptor_world, NULL);
++                                                                 ^~~~
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ configure.in | 18 +++++++++---------
-+ 1 file changed, 9 insertions(+), 9 deletions(-)
++ src/raptor_parse.c     | 2 +-
++ src/raptor_serialize.c | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
 +
-+diff --git a/configure.in b/configure.in
-+index 5b24947..0542490 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -247,30 +247,30 @@ test -n "$LDFLAGS" && MYLDFLAGS="$LDFLAGS $MYLDFLAGS"
-+ AC_C_BIGENDIAN(MYCPPFLAGS="$MYCPPFLAGS -D_MYBIGEND")
++diff --git a/src/raptor_parse.c b/src/raptor_parse.c
++index 26911f4..0091e1e 100644
++--- a/src/raptor_parse.c
+++++ b/src/raptor_parse.c
++@@ -257,7 +257,7 @@ raptor_world_get_parser_factory(raptor_world *world, const char *name)
++ int
++ raptor_world_get_parsers_count(raptor_world* world)
++ {
++-  RAPTOR_ASSERT_OBJECT_POINTER_RETURN_VALUE(world, raptor_world, NULL);
+++  RAPTOR_ASSERT_OBJECT_POINTER_RETURN_VALUE(world, raptor_world, 0);
 + 
-+ # Underlying libraries
-+-AC_CHECK_LIB(c, main)
-+-AC_CHECK_LIB(m, main)
-++AC_CHECK_LIB(c, printf)
-++AC_CHECK_LIB(m, pow)
-+ if test "$enable_pthread" != "no"
-+ then
-+-  AC_CHECK_LIB(pthread, main)
-+-  AC_CHECK_LIB(rt, main)
-++  AC_CHECK_LIB(pthread, pthread_create)
-++  AC_CHECK_LIB(rt, clock_gettime)
-+ fi
-+ if test "$enable_zlib" != "no"
-+ then
-+-  AC_CHECK_LIB(z, main)
-++  AC_CHECK_LIB(z, inflate)
-+ fi
-+ if test "$enable_bzip" != "no"
-+ then
-+-  AC_CHECK_LIB(bz2, main)
-++  AC_CHECK_LIB(bz2, BZ2_bzCompressInit)
-+ fi
-+ if test "$enable_exlzma" = "yes"
-+ then
-+-  AC_CHECK_LIB(lzma, main)
-++  AC_CHECK_LIB(lzma, lzma_easy_buffer_encode)
-+ fi
-+ if test "$enable_exlzo" = "yes"
-+ then
-+-  AC_CHECK_LIB(lzo2, main)
-++  AC_CHECK_LIB(lzo2, lzo1x_1_compress)
-+ fi
-+-AC_CHECK_LIB(tokyocabinet, main, AC_MSG_WARN([old version of Tokyo Cabinet was detected]))
-++AC_CHECK_LIB(tokyocabinet, tcbdbopen, AC_MSG_WARN([old version of Tokyo Cabinet was detected]))
++   raptor_world_open(world);
 + 
-+ # Necessary headers
-+ AC_CHECK_HEADER(stdlib.h, true, AC_MSG_ERROR([stdlib.h is required]))
++diff --git a/src/raptor_serialize.c b/src/raptor_serialize.c
++index a1f29d7..2bf4ab2 100644
++--- a/src/raptor_serialize.c
+++++ b/src/raptor_serialize.c
++@@ -240,7 +240,7 @@ raptor_get_serializer_factory(raptor_world* world, const char *name)
++ int
++ raptor_world_get_serializers_count(raptor_world* world)
++ {
++-  RAPTOR_ASSERT_OBJECT_POINTER_RETURN_VALUE(world, raptor_world, NULL);
+++  RAPTOR_ASSERT_OBJECT_POINTER_RETURN_VALUE(world, raptor_world, 0);
++ 
++   raptor_world_open(world);
++ 
 +-- 
 +2.37.3
 +
-diff --git a/meta-oe/recipes-support/tokyocabinet/tokyocabinet_1.4.48.bb b/meta-oe/recipes-support/tokyocabinet/tokyocabinet_1.4.48.bb
-index 22cbcc0f2f..ae00ff4e55 100644
---- a/meta-oe/recipes-support/tokyocabinet/tokyocabinet_1.4.48.bb
-+++ b/meta-oe/recipes-support/tokyocabinet/tokyocabinet_1.4.48.bb
-@@ -17,6 +17,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
- 
- SRC_URI = "http://fallabs.com/tokyocabinet/${BP}.tar.gz \
-            file://remove-hard-coded-include-and-lib-paths.patch \
-+           file://0001-configure-Fix-check-functions-for-AC_CHECK_LIB-test.patch \
+diff --git a/meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb b/meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb
+index 577c6ee00a..22306a5c1b 100644
+--- a/meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb
++++ b/meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb
+@@ -12,6 +12,7 @@ DEPENDS = "libxml2 libxslt curl yajl"
+ SRC_URI = " \
+     http://download.librdf.org/source/${BPN}-${PV}.tar.gz \
+     file://0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch \
++    file://0001-Match-reutrn-type-from-RAPTOR_ASSERT_OBJECT_POINTER_.patch \
  "
- 
- SRC_URI[md5sum] = "fd03df6965f8f56dd5b8518ca43b4f5e"
+ SRC_URI[md5sum] = "a39f6c07ddb20d7dd2ff1f95fa21e2cd"
+ SRC_URI[sha256sum] = "ada7f0ba54787b33485d090d3d2680533520cd4426d2f7fb4782dd4a6a1480ed"
 -- 
 2.37.3
 
