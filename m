@@ -2,61 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 68788C6FA89
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CA8FC6FA82
 	for <webhook@archiver.kernel.org>; Sun,  4 Sep 2022 07:34:44 +0000 (UTC)
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
- [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web11.11375.1662276880309196795
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
+ [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web09.11278.1662276874164431717
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:34:40 -0700
+ Sun, 04 Sep 2022 00:34:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=kd5v1OaP;
- spf=pass (domain: gmail.com, ip: 209.85.214.179,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id f24so5799677plr.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=KfYLTgWa;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id o4so5718242pjp.4
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:34:40 -0700 (PDT)
+ Sun, 04 Sep 2022 00:34:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=1LFNkXJpXUcbBIR83hV9RaMMd1qNRMPobR22ktiDQxA=;
-        b=kd5v1OaPHjLsLCWmB3gbe1pPfVtXzinp5yfILPMGzyn+iC5wOtj6HyyhvW7ZsnZFDE
-         00acEsDxPIANU4UXplOgysw0qnNGqICEINiTXH1/XPZqnVnn7BCfD4xBWqCdTh6Q4rIQ
-         Tb3tvyzuH8Dgsgd+ZdvJ8C/iE10amMsClh3rKie2/zVCjpOiTGwdag/Cs1YUB0LtKm2L
-         LMHgY6d+S10L8ffjfvisnPX+U4WbrkWlgjwcKfotrH/lTGF4qSzWiGuK032mADY37eB5
-         rZ8hsRyRNuIswzNo46ilP1JpklDSmavJ1W4DKbHd5/uRm6paoR9+defUWbTmy5H0iUIm
-         zLXA==
+        bh=tq6owdDsb8m2Yh/GJAS2twbHdnvRwefRBaWeCAV8QMQ=;
+        b=KfYLTgWaumI7LWJjYcFVtYJf64J53X1jF2ByxO5R0CUAA9zc7QO52HFRxIOB+TD23k
+         8dWgycwYMKzIaHx+5nspVgD0trQN1r9tI+oix7QyWhAU6EVpXx7cZgRHw0/N1voeR6Oo
+         eocdqDNSgRfk28HflL9p3SPW/r/M91xZZ6izwGwuqgDBAyy9LZaj6QgPkH1wviq4AuVs
+         qyK7PjIclEtR7aXGnH2TfkcPXX2mdSfIDzhEjXJwIKUj/GdEVzS/cBa0k6DjF9mbI1/v
+         xaprt+vbt7bhhjIA69qxEI9U98G61KXMz0nQa7YeK+2ch4KD+y4BCHHLeqrzwPXxUriP
+         jJqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=1LFNkXJpXUcbBIR83hV9RaMMd1qNRMPobR22ktiDQxA=;
-        b=Yla9xa18y1WBxgDGOx+HxhNTD7kBS43hI600lBBSGAMedc97uvbb4NXZGTSHwxTz3k
-         q1kEW1AD/FpavbY8pE6I/15l/mtLIRvMmaEABFa7xeOAQHm3Oam5vi+QVQpjNI/49x5N
-         7qSFiwG6SWA46F9Kg7sPVn/H5zOuIkj5ktmaTwfWNes/5RLCdxGRaeusrSe5pE6um2CI
-         UEtvnxAUbUC2//FZSFxbLxfRGcn/7R5UIex8WcSFVUqafpnx1Z0oaimoFfg/ixkTrIl0
-         0r2hyKIojG9ePfevq9sIMamGAm5UFeIHb2xgHtjFC4+ldgQeB+FftOW8Z8Gt/cCyaUHK
-         yFfg==
-X-Gm-Message-State: ACgBeo2EJJ9SDiw4zLl6c6DNngDoVX0fPen5ZHteyGC24R5slni29Lt5
-	NuJ+nwP28u6vAfx51NcNyuMtgwact6ILFg==
+        bh=tq6owdDsb8m2Yh/GJAS2twbHdnvRwefRBaWeCAV8QMQ=;
+        b=iLANOcV5t3qPdChbouO6g3sUj+fREHih/QtJk6NW5/fpiF3RWssR4v7osHXPTxoeLv
+         bARqqSVjGdZTfAHOToUkeqy8kVam+des30CH2uEbXBlxszVAlrEi9ywjc+WEx6uvvCpt
+         6BLDBY1xxHlMD40/t9MyoZQ3lCjpa+tgTCFf5C8IJtRZtCxmVVi9WiITyU+3N72M0DHX
+         ykw+bcMaInHkIber/M3nDa7kWi0EhXtegrktUfkcbLAUUFW5YHq7InoFR9J9W977kKnF
+         sK0lybVxZaO0nMAStot0Dcp91uFd9JdbRwegxnp+uQlek2AL9F6wAfr1VK7t2SxC3wT8
+         irnQ==
+X-Gm-Message-State: ACgBeo3Qqh06rn4nYcE893TuD+fU9cePimFPsyLz9baqVb/czEMLADdb
+	aNjXrn1dPfz/jlBLDRBjNOo0BVf1slDWIw==
 X-Google-Smtp-Source: 
- AA6agR5aDV1HpI77PqZpOredE++S7CUP4NtPsLp5gU4BDsQEVApu2Doe6db8Ta4qBThQV0D2/siSuQ==
-X-Received: by 2002:a17:90b:3ec1:b0:1f5:15a6:aaf5 with SMTP id
- rm1-20020a17090b3ec100b001f515a6aaf5mr13531706pjb.123.1662276879430;
-        Sun, 04 Sep 2022 00:34:39 -0700 (PDT)
+ AA6agR6zaHXjDVjiwVku++BE9J4flSRh72wZXKOducD0y1FidCx0Acrpib/qexBxAUGa25GdIIXVeg==
+X-Received: by 2002:a17:90b:2496:b0:1ef:a94:7048 with SMTP id
+ nt22-20020a17090b249600b001ef0a947048mr13453061pjb.244.1662276873223;
+        Sun, 04 Sep 2022 00:34:33 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::48c3])
         by smtp.gmail.com with ESMTPSA id
- w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.34.38
+ w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.34.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Sep 2022 00:34:38 -0700 (PDT)
+        Sun, 04 Sep 2022 00:34:32 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 18/63] lxdm: Fix msghdr initialization on musl
-Date: Sun,  4 Sep 2022 00:33:32 -0700
-Message-Id: <20220904073417.3251865-18-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 12/63] xf86-video-nouveau: Do not treat
+ implicit-function-declaration as error
+Date: Sun,  4 Sep 2022 00:33:26 -0700
+Message-Id: <20220904073417.3251865-12-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220904073417.3251865-1-raj.khem@gmail.com>
 References: <20220904073417.3251865-1-raj.khem@gmail.com>
@@ -67,73 +67,27 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 04 Sep 2022 07:34:44 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98612
+ https://lists.openembedded.org/g/openembedded-devel/message/98606
+
+clang 15 treats it as error by default.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...lize-msghdr-struct-in-a-portable-way.patch | 40 +++++++++++++++++++
- meta-oe/recipes-graphics/lxdm/lxdm_0.5.3.bb   |  1 +
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/lxdm/lxdm/0001-Initialize-msghdr-struct-in-a-portable-way.patch
+ .../recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.17.bb   | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-graphics/lxdm/lxdm/0001-Initialize-msghdr-struct-in-a-portable-way.patch b/meta-oe/recipes-graphics/lxdm/lxdm/0001-Initialize-msghdr-struct-in-a-portable-way.patch
-new file mode 100644
-index 0000000000..d4779505d8
---- /dev/null
-+++ b/meta-oe/recipes-graphics/lxdm/lxdm/0001-Initialize-msghdr-struct-in-a-portable-way.patch
-@@ -0,0 +1,40 @@
-+From 7c370576b4fb7c7d3b6dbf33125136a4ae70a330 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 31 Aug 2022 21:52:16 -0700
-+Subject: [PATCH] Initialize msghdr struct in a portable way
+diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.17.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.17.bb
+index d471610bab..fbf6406caf 100644
+--- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.17.bb
++++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.17.bb
+@@ -15,5 +15,7 @@ REQUIRED_DISTRO_FEATURES += "opengl"
+ 
+ COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
+ 
++CFLAGS += "-Wno-error=implicit-function-declaration"
 +
-+Initializing the structure assuming glibc layout results in
-+compile errors on musl, therefore do partial intialization and then
-+assigning the members individually.
-+
-+Upstream-Status: Submitted [https://sourceforge.net/p/lxdm/code/merge-requests/4/]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/lxcom.c       | 9 +++++++--
-+ 2 files changed, 10 insertions(+), 5 deletions(-)
-+
-+diff --git a/src/lxcom.c b/src/lxcom.c
-+index 397d1b5..517c775 100644
-+--- a/src/lxcom.c
-++++ b/src/lxcom.c
-+@@ -117,10 +117,15 @@ static gboolean lxcom_dispatch (GSource *source,GSourceFunc callback,gpointer us
-+ 	char ctrl[/*CMSG_SPACE(sizeof(LXDM_CRED))*/1024];
-+ 	struct sockaddr_un peer;
-+ 	struct iovec v={buf,sizeof(buf)};
-+-	struct msghdr h={&peer,sizeof(peer),&v,1,ctrl,sizeof(ctrl),0};
-++	struct msghdr h={0};
-+ 	struct cmsghdr *cmptr;
-+ 	int ret;
-+-
-++	h.msg_name = &peer;
-++	h.msg_namelen = sizeof(peer);
-++	h.msg_iov = &v;
-++	h.msg_iovlen = 1;
-++	h.msg_control = ctrl;
-++	h.msg_controllen = sizeof(ctrl);
-+ 	while(1)
-+ 	{
-+ 		peer.sun_family=0;
-+-- 
-+2.37.3
-+
-diff --git a/meta-oe/recipes-graphics/lxdm/lxdm_0.5.3.bb b/meta-oe/recipes-graphics/lxdm/lxdm_0.5.3.bb
-index 83b15ce8e5..adf9cb597c 100644
---- a/meta-oe/recipes-graphics/lxdm/lxdm_0.5.3.bb
-+++ b/meta-oe/recipes-graphics/lxdm/lxdm_0.5.3.bb
-@@ -19,6 +19,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}%20${PV}/${BPN}-${PV}.tar.
-            file://0008-greeter.c-show-information-on-gtk-label-info.patch \
-            file://0009-greeter.c-disallow-empty-new-password.patch \
-            file://0001-systemd-lxdm.service-remove-plymouth-quit-conflicts.patch \
-+           file://0001-Initialize-msghdr-struct-in-a-portable-way.patch \
-            "
- SRC_URI[md5sum] = "061caae432634e6db38bbdc84bc6ffa0"
- SRC_URI[sha256sum] = "4891efee81c72a400cc6703e40aa76f3f3853833d048b72ec805da0f93567f2f"
+ SRC_URI += "file://0001-nouveau-fixup-driver-for-new-X-server-ABI.patch"
+ SRC_URI[sha256sum] = "499322e27a55c8183166bf2dd1e47d085eb834143e0d7036baba8427b90c156b"
 -- 
 2.37.3
 
