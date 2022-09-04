@@ -2,62 +2,62 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A3418C6FA8B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A41AAC6FA8D
 	for <webhook@archiver.kernel.org>; Sun,  4 Sep 2022 07:35:04 +0000 (UTC)
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
- [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web08.11127.1662276868051937343
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com
+ [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web11.11379.1662276899603879891
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:34:58 -0700
+ Sun, 04 Sep 2022 00:34:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Iwnn6Uc5;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id
- ck21-20020a17090afe1500b002003ba5b71cso943881pjb.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=gN2FXF1M;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id b196so5594050pga.7
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:34:58 -0700 (PDT)
+ Sun, 04 Sep 2022 00:34:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=E4J6JQ6OgxnE2QtqODuDtjIjpwUEQwpw5PzMxtCAvqE=;
-        b=Iwnn6Uc5PZxx1A2guS1GkybKdIlW9Rq7lCvCS4m0fPkVp9Qfv55YWJwsoWE7lzyEQd
-         G6S1c3YeIjlpqQuBVJyRGc+DnbuIXzZqqXZ5J78BpoI/1HTTmQfvZ2Y1Vpp1U5hiIFDe
-         YlPupaIGb1rn3jWEjKzWLCswqdXhbPbIC7qN39gRs/U/IER0wswdEv14hPZjtO5PvyxY
-         uDjKKZXTrAtbgmrvXQjE3nNhY9gE5cTfeO3VCcoMru/OivQPewdtg+dh3O2b32CQ6wrL
-         hxAH5qaP1KHFqw8ke+iLb0MPTBOzU02o1Dm0tI4KCHSuQjKOtrtPdXt7UI2uPL1oTJ3t
-         lBVw==
+        bh=96nREekOZG8aMq4wg2icZq1wyF2QohodHfRrXgtsZNc=;
+        b=gN2FXF1M9tE2ZbPbajvL8wC4dFjnpiiiugq7xzcHw2jKj4FJj0/E+xEsdaQ79s3ShH
+         Du8awrcYPhSF0xC7t0B/mD4uiJPKzMMx1CFq5gCqbCoV7PBj4DF8GInGp5syMys9Ez3q
+         H7dVjg9PJMLbZkuoZ3DnRr6qael4twRnu7q5v3qp3AiYQYseHsRBM1yRK/5pwHx1rt5k
+         JDkLdgyU3ck7gkr9X2IyIEzMGeVGHJjd1o2OovKFOmgfnkuZA46rixKeWjesr5Zodsan
+         370LANlEpOgOSCkA4r9OE6vEqwdCpfDrI8Mc41bK5IZgzhKIGfx2Y09meHJI7L1b3OZJ
+         7Wfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=E4J6JQ6OgxnE2QtqODuDtjIjpwUEQwpw5PzMxtCAvqE=;
-        b=cQYfumSPn25qSy4VJwD+Y8oiV2IMBp3WAbK5b7vjVyRKvC81qMo0RPxgKgWq5BTuLj
-         VPpRCIGPlDZYeawJxhDcfn3ShhUoUVefAfVVnYwwN55Y15kzO3NWImaWDLctLctt2f/X
-         2eYCQnxhbYSW7DHAMBEYXAs9WeA7C+YwJOEKlctOAI63ONVKbff7kCkwnpZ8Kdu1hkZz
-         fny09XYGrCOTTHJJepKPNrq25JiGwbKuCp1laQL73hbIv8gM6sC2/xnN2q23KxyEfMQV
-         nLT9wVZWlKdUixyaUbDQwSv475DJXVmhQ3PDmDrOc9mfbOWAK4+ZsCctUPj5m4HY78Ff
-         GC4A==
-X-Gm-Message-State: ACgBeo1ZH5csre+TD8McgjGQ47q5J1z8PIAYBO7i1pN6nVABYT3uNY5s
-	aqAXj6gmvx+r/eza/rz2UoWr3LzTm07BRw==
+        bh=96nREekOZG8aMq4wg2icZq1wyF2QohodHfRrXgtsZNc=;
+        b=Ar4hay6z1mBD0F2tqgKYQXxSI+9pASNbuq/ycRH2Ia58AdUuFi2ufHdUCYmw6nDMTW
+         brEnLTKzB82u+3GfKjCArBmVSO8nbYTU4MhpjxbJaywFBHRfWtQUxHs1CcNylb3QSn3F
+         W3mqAVO2dYaCbt5DsstW3/aVvLwE05PatI7Z4EYh1GZVl1hcz/fUnaVeM9iNtfmYv3Fi
+         jTcx4xAcE/eWF2L6Vy3hMFV4AABti6TEJOnXwtdNVSbwhqrHx37uITR5vv5tkqa8G8g3
+         g4pyw322Xwc6AKzkOQDfc6Nww4qaSBViXA5087Rh99rRWagrctQryriaFIE3l2TT9ErD
+         t/cg==
+X-Gm-Message-State: ACgBeo1pkoeqCTuwCdQqQTpCsLn3aJwccxbPxRDmVK64M15Og+nPnvAr
+	Ryh7z+dShCItxpCaGkyttjbr4/PxAz6szQ==
 X-Google-Smtp-Source: 
- AA6agR7FrDfoY2wOOrMtBL6Tiihnp2I/iR690nFkwuuuqHIEmfM39VtPlIWBOykDHzaNLEurMVkdug==
-X-Received: by 2002:a17:90b:1e0f:b0:1f5:37f5:159c with SMTP id
- pg15-20020a17090b1e0f00b001f537f5159cmr13455237pjb.189.1662276897803;
-        Sun, 04 Sep 2022 00:34:57 -0700 (PDT)
+ AA6agR7HewzHfA52/PpvUz2xD4zrxIrMlorfa4X/AveJN1Rh2tZU6If1hPz7uJ/Q4u3X3rjhi86HUA==
+X-Received: by 2002:aa7:8054:0:b0:53b:59ba:2b27 with SMTP id
+ y20-20020aa78054000000b0053b59ba2b27mr9503319pfm.0.1662276898750;
+        Sun, 04 Sep 2022 00:34:58 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::48c3])
         by smtp.gmail.com with ESMTPSA id
- w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.34.56
+ w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.34.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Sep 2022 00:34:57 -0700 (PDT)
+        Sun, 04 Sep 2022 00:34:58 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 36/63] sblim-sfcb: Add missing headers file for
- clang/musl
-Date: Sun,  4 Sep 2022 00:33:50 -0700
-Message-Id: <20220904073417.3251865-36-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 37/63] sanlock: Add missing prototype for mem*
+ functions
+Date: Sun,  4 Sep 2022 00:33:51 -0700
+Message-Id: <20220904073417.3251865-37-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220904073417.3251865-1-raj.khem@gmail.com>
 References: <20220904073417.3251865-1-raj.khem@gmail.com>
@@ -68,184 +68,74 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 04 Sep 2022 07:35:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98630
+ https://lists.openembedded.org/g/openembedded-devel/message/98631
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-include-missing-system-headers.patch | 151 ++++++++++++++++++
- .../sblim-sfcb/sblim-sfcb_1.4.9.bb            |   1 +
- 2 files changed, 152 insertions(+)
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-include-missing-system-headers.patch
+ ...1-add-missing-system-header-string.h.patch | 41 +++++++++++++++++++
+ .../recipes-extended/sanlock/sanlock_3.8.4.bb |  1 +
+ 2 files changed, 42 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/sanlock/sanlock/0001-add-missing-system-header-string.h.patch
 
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-include-missing-system-headers.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-include-missing-system-headers.patch
+diff --git a/meta-oe/recipes-extended/sanlock/sanlock/0001-add-missing-system-header-string.h.patch b/meta-oe/recipes-extended/sanlock/sanlock/0001-add-missing-system-header-string.h.patch
 new file mode 100644
-index 0000000000..c16e393f49
+index 0000000000..5878847113
 --- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-include-missing-system-headers.patch
-@@ -0,0 +1,151 @@
-+From c5b15ae9636a3b73407372cce87eb40ea78a68ea Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-extended/sanlock/sanlock/0001-add-missing-system-header-string.h.patch
+@@ -0,0 +1,41 @@
++From 272f9838f3495f5e419f77e000762c420754c96d Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 2 Sep 2022 15:51:31 -0700
-+Subject: [PATCH] include missing system headers
++Date: Fri, 2 Sep 2022 15:57:32 -0700
++Subject: [PATCH] add missing system header string.h
 +
-+Upstream-Status: Pending
++This is needed for mem* function prototypes used in these sources
 +
++Upstream-Status: Submitted [https://pagure.io/sanlock/issue/8]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ brokerEnc.c         | 2 ++
-+ brokerOs.c          | 1 +
-+ mlog.c              | 1 +
-+ mofc/backend_sfcb.c | 2 +-
-+ sfcbdump.c          | 1 +
-+ sfcbdumpP32onI32.c  | 1 +
-+ sfcbsem.c           | 1 +
-+ trace.c             | 3 ++-
-+ trace.h             | 3 ++-
-+ 9 files changed, 12 insertions(+), 3 deletions(-)
++ src/sanlock_sock.c | 1 +
++ wdmd/wdmd_sock.c   | 1 +
++ 2 files changed, 2 insertions(+)
 +
-+diff --git a/brokerEnc.c b/brokerEnc.c
-+index 9115e71..889afcd 100644
-+--- a/brokerEnc.c
-++++ b/brokerEnc.c
-+@@ -25,6 +25,8 @@
-+ #include "constClass.h"
-+ #include <sfcCommon/utilft.h>
-+ 
-++#include <string.h> /* strcasecmp */
-++
-+ extern const char *opGetClassNameChars(const CMPIObjectPath * cop);
-+ extern const char *opGetNameSpaceChars(const CMPIObjectPath * cop);
-+ extern CMPIConstClass *getConstClass(const char *ns, const char *cn);
-+diff --git a/brokerOs.c b/brokerOs.c
-+index 8d73a0b..b1427fd 100644
-+--- a/brokerOs.c
-++++ b/brokerOs.c
-+@@ -22,6 +22,7 @@
-+ #include <pthread.h>
-+ #include "native.h"
-+ #include <stdlib.h>
-++#include <string.h> /* strcmp */
-+ 
-+ static char    *
-+ resolveFileName(const char *filename)
-+diff --git a/mlog.c b/mlog.c
-+index a2d9eb7..6d9cd29 100644
-+--- a/mlog.c
-++++ b/mlog.c
-+@@ -26,6 +26,7 @@ const char     *_mlog_id =
-+ #include <syslog.h>
-+ #include <stdarg.h>
++diff --git a/src/sanlock_sock.c b/src/sanlock_sock.c
++index b83f9ae..e206f88 100644
++--- a/src/sanlock_sock.c
+++++ b/src/sanlock_sock.c
++@@ -12,6 +12,7 @@
 + #include <stdio.h>
-++#include <string.h> /* strcat */
-+ #include <errno.h>
-+ #include <signal.h>
-+ #include "trace.h"              /* for setSignal() */
-+diff --git a/mofc/backend_sfcb.c b/mofc/backend_sfcb.c
-+index 614abcd..99d4061 100644
-+--- a/mofc/backend_sfcb.c
-++++ b/mofc/backend_sfcb.c
-+@@ -29,7 +29,7 @@
-+ #include "backend.h"
-+ #include "objectpath.h"
-+ #include <sys/utsname.h>
-+-
-++#include <string.h>
-+ 
-+ extern CMPIStatus sfcb_simpleArrayAdd(CMPIArray * array, CMPIValue * val, CMPIType type);
-+ extern CMPIObjectPath *getObjectPath(char *path, char **msg);
-+diff --git a/sfcbdump.c b/sfcbdump.c
-+index 8a9c335..aa8559c 100644
-+--- a/sfcbdump.c
-++++ b/sfcbdump.c
-+@@ -23,6 +23,7 @@
-+ #include <errno.h>
-+ #include <stddef.h>
-+ #include <getopt.h>
-++#include <string.h> /* strerror */
-+ #include "objectImpl.h"
-+ 
-+ #define BINARY_NAME argv[0]
-+diff --git a/sfcbdumpP32onI32.c b/sfcbdumpP32onI32.c
-+index ccf87dc..3540751 100644
-+--- a/sfcbdumpP32onI32.c
-++++ b/sfcbdumpP32onI32.c
-+@@ -22,6 +22,7 @@
-+ #include <fcntl.h>
-+ #include <errno.h>
++ #include <stdint.h>
 + #include <stddef.h>
 ++#include <string.h>
-+ #include <getopt.h>
-+ #include "objectImpl.h"
-+ #include <byteswap.h>
-+diff --git a/sfcbsem.c b/sfcbsem.c
-+index 3f8de7f..1e6358b 100644
-+--- a/sfcbsem.c
-++++ b/sfcbsem.c
-+@@ -21,6 +21,7 @@
++ #include <sys/socket.h>
++ #include <sys/un.h>
 + 
-+ /* includes */
++diff --git a/wdmd/wdmd_sock.c b/wdmd/wdmd_sock.c
++index 45d9d9b..110ce9f 100644
++--- a/wdmd/wdmd_sock.c
+++++ b/wdmd/wdmd_sock.c
++@@ -12,6 +12,7 @@
 + #include <stdio.h>
++ #include <stdint.h>
++ #include <stddef.h>
 ++#include <string.h>
-+ #include <getopt.h>
-+ #include <errno.h>
++ #include <sys/socket.h>
++ #include <sys/un.h>
 + 
-+diff --git a/trace.c b/trace.c
-+index 23597e1..c4f8011 100644
-+--- a/trace.c
-++++ b/trace.c
-+@@ -25,6 +25,7 @@
-+ #include "native.h"
-+ #include <string.h>
-+ #include <time.h>
-++#include <pthread.h>
-+ 
-+ #include <sys/stat.h>
-+ #include <sys/wait.h>
-+@@ -50,7 +51,7 @@
-+ 
-+ char           *processName = NULL;
-+ int             providerProcess = 0;
-+-int             idleThreadId = 0;
-++pthread_t       idleThreadId = 0;
-+ int             terminating = 0;
-+ int             colorTrace;
-+ 
-+diff --git a/trace.h b/trace.h
-+index ea39850..52d408d 100644
-+--- a/trace.h
-++++ b/trace.h
-+@@ -25,6 +25,7 @@
-+ 
-+ #include "mlog.h"
-+ 
-++#include <pthread.h>
-+ extern unsigned long _sfcb_trace_mask;
-+ /* use pointer indirect _sfcb_trace_mask to allow shared memory flag */
-+ extern unsigned long *_ptr_sfcb_trace_mask;
-+@@ -162,7 +163,7 @@ extern sigHandler *setSignal(int sn, sigHandler * sh, int flags);
-+ 
-+ extern char    *processName;
-+ extern int      providerProcess;
-+-extern int      idleThreadId;
-++extern pthread_t      idleThreadId;
-+ extern int      terminating;
-+ 
-+ #endif
 +-- 
 +2.37.3
 +
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-index 5f398fb0d2..2a89a549d1 100644
---- a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-@@ -28,6 +28,7 @@ SRC_URI = "http://downloads.sourceforge.net/sblim/${BP}.tar.bz2 \
-            file://sblim-sfcb-1.4.9-fix-sfcbinst2mof.patch \
-            file://0001-Avoid-variable-definition-in-header-files.patch \
-            file://0001-configure-Check-for-function-from-respective-library.patch \
-+           file://0001-include-missing-system-headers.patch \
- "
+diff --git a/meta-oe/recipes-extended/sanlock/sanlock_3.8.4.bb b/meta-oe/recipes-extended/sanlock/sanlock_3.8.4.bb
+index a59a5c41df..3b4ae318c6 100644
+--- a/meta-oe/recipes-extended/sanlock/sanlock_3.8.4.bb
++++ b/meta-oe/recipes-extended/sanlock/sanlock_3.8.4.bb
+@@ -16,6 +16,7 @@ PV .= "+git${SRCPV}"
+ SRC_URI = "git://pagure.io/sanlock.git;protocol=http;branch=master \
+            file://0001-sanlock-Replace-cp-a-with-cp-R-no-dereference-preser.patch \
+            file://setuptools.patch \
++           file://0001-add-missing-system-header-string.h.patch \
+           "
+ SRCREV = "a181e951376d49a82eef17920c8ebedec80b4823"
  
- SRC_URI[md5sum] = "28021cdabc73690a94f4f9d57254ce30"
 -- 
 2.37.3
 
