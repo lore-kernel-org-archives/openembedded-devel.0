@@ -2,61 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B5BCBC6FA8C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B013AC6FA91
 	for <webhook@archiver.kernel.org>; Sun,  4 Sep 2022 07:35:04 +0000 (UTC)
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
- [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web08.11127.1662276868051937343
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
+ [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.web08.11131.1662276901555521950
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:35:04 -0700
+ Sun, 04 Sep 2022 00:35:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=cMSgump+;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id
- ck21-20020a17090afe1500b002003ba5b71cso943960pjb.0
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=UOVqEOnx;
+ spf=pass (domain: gmail.com, ip: 209.85.210.169,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f169.google.com with SMTP id c66so5858995pfc.10
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:35:04 -0700 (PDT)
+ Sun, 04 Sep 2022 00:35:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=4gfnI6wSO6tmx3xVblnuElMDwccxgz+vIfTNMVR3QA0=;
-        b=cMSgump+r0QhjMQrfCmOH5K/565vx3RDCt+ZbnlCS3eEqwDBKazHuhC1FXZADhJooK
-         kh2P/OT2phSdPlVlEcy+MMsis5+QR1SWd45PFgWXszYdUz+aJFBGlNIQc9oai4qkVflB
-         EtqdIxcx25w8bXrenj5YBNlxse24WHbQIbW3HZOWdksASxrezctrgZGgqikT0oBQK4B/
-         DaD5BLPFcwevaTesTtNFgiIExFTBPapreGWmt2hSlbisfwCdF/8fwvluHJiYZhFmyt/p
-         8+NpuqCNUgIqysWkzxTDKQQRTOHULciw38MXC+4ZvT1vr4ROeXTsgUDZmKs/Yde//Bes
-         NUBA==
+        bh=4SpTj1lhf8Otgj4jzZQxQjQFaN0sOjD0Fyfi+d5IB7I=;
+        b=UOVqEOnxJEMk7htbll/KcQzHUuK/Cc+1wrw/OFNphbhCbej+Ys3Z9SKVTi5q7NlRsk
+         YVNaqebt7X/5EhBJtQseXysvsGe5mpRvkaQ3Dv2DziRn6ji5qIbdmy2cWq0PfQlIlRSx
+         FgBwC2AvJC3EhdLVoqnu/2wGsnbK5Kw48luXD5tAfQFy7k4z2ZTzeNtMfygbejo6eQrQ
+         o8xuLHJ7zVszA/ETaoGWxg/QU2ciPmLxGRIjsRoxpmobfUm+lFfsg1DveR8ZFptYtNgC
+         tnB+xENUwRKVGgNEC1SudZTDl/jCcGW/ij5wKii20PhQYKwriHBc8ZuFJa/5PFYHdydY
+         E8Yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=4gfnI6wSO6tmx3xVblnuElMDwccxgz+vIfTNMVR3QA0=;
-        b=w/kXUSl25hsSLOx7/twBW2Zd26uWu1ldttCBswfVmRz1aMGmaWeCX4AjLdb96y7WTJ
-         aSUNmKALzgJHFcUN3gJRXG1lNWW5LQC1Z/qJ6ML4dmOuQpaz0ncuFeJj83W1E71HwTmO
-         cBS1HUG6xwDi68YMc3UHZiOJskJRhZLIR5tb0bUSCHtX2sVRzGIlvfTkq5L0IqQzqp5g
-         p96CCD7zR/KCOZLnqDOQFXFjS0oZBjc3ymiQRMbKYLdXFCJ2nljeUQ7i9imoAUsmedMO
-         o63G/+SN2EfK5lc+PjkecC5Ue6R6Nk74ofucVp9MvAu15UxB6pdMSXVKzD+spystjYgo
-         deLQ==
-X-Gm-Message-State: ACgBeo3nvuJAajnXwpZuzESPUeSAP+Fn4qZcNZ95wfP43AHRU5tK6q8t
-	gwF47hlOKVeyTS+8BJ+GS2LOnXGMrzaZMw==
+        bh=4SpTj1lhf8Otgj4jzZQxQjQFaN0sOjD0Fyfi+d5IB7I=;
+        b=BcJCgaxLRGU2cOT3ZFbYj7FROXN/9ytUXDG6L++gkKfKicJPK2s7zpitTGGL2Kts/z
+         RYG8CmOIYR+y0TTFlCpF+XsOBQDBM7Hja02JNo0TQRquaMq8k0fnxuG19CJM2VP7GLUw
+         jml1VfJyLiT7Dog2Lm37Z4BCnswxrX2qzKVdp+DIOObIKnnn5plB9gzatlY0T4seR8Eu
+         hZj5nL5r20AkQnb8ySgRNh9ROrQvSxBvgFb6ONcnoDMemwPYTz2fVojPsK2S4248a3mB
+         6/emwz9p+OCDDKUJdM5hj2zA9JV4jZRVQrq27NoQOvLPhaU9pbS7AkoUgu4l6lHoQ/TW
+         2JZg==
+X-Gm-Message-State: ACgBeo3RnnreR5Pdb69fo9Q7/F0SGXSMXZKVkxxMFPeZaLYfvYopl8eT
+	2uwqypg916ELqnf2wwE5beE38brTKOKQ7w==
 X-Google-Smtp-Source: 
- AA6agR5ySdEp29baTt7VtmYKuiPiIXf8E2AJMNcLB9DSfCikKK1cUFk/KnaAgYh4NuJaGWQxk+CUqA==
-X-Received: by 2002:a17:90b:4f44:b0:1fa:f63c:ea1b with SMTP id
- pj4-20020a17090b4f4400b001faf63cea1bmr14012811pjb.30.1662276903691;
-        Sun, 04 Sep 2022 00:35:03 -0700 (PDT)
+ AA6agR5cRY/3SuaSh9NJ8jEOJMPJU7zrAm6APRI2zXCSvlZ1ypVf4jkkeQRG6+Sm3/nUnPAT3RohiA==
+X-Received: by 2002:a05:6a00:2404:b0:53b:ea5:ea4e with SMTP id
+ z4-20020a056a00240400b0053b0ea5ea4emr15049636pfh.11.1662276900691;
+        Sun, 04 Sep 2022 00:35:00 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::48c3])
         by smtp.gmail.com with ESMTPSA id
- w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.35.02
+ w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.35.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Sep 2022 00:35:03 -0700 (PDT)
+        Sun, 04 Sep 2022 00:35:00 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 42/63] con2fbmap: Include string.h for strerror
-Date: Sun,  4 Sep 2022 00:33:56 -0700
-Message-Id: <20220904073417.3251865-42-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 39/63] libgxim: Enable debug mode
+Date: Sun,  4 Sep 2022 00:33:53 -0700
+Message-Id: <20220904073417.3251865-39-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220904073417.3251865-1-raj.khem@gmail.com>
 References: <20220904073417.3251865-1-raj.khem@gmail.com>
@@ -67,64 +67,29 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 04 Sep 2022 07:35:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98636
+ https://lists.openembedded.org/g/openembedded-devel/message/98633
+
+This helps compile because it uses gdk_x11_atom_to_xatom_for_display()
+in libgxim/gximcore.c unconditionally but guards use of gdk/gdkx.h via GNOME_ENABLE_DEBUG
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...bmap-Add-missing-include-on-string.h.patch | 28 +++++++++++++++++++
- .../recipes-bsp/con2fbmap/con2fbmap_git.bb    |  4 ++-
- 2 files changed, 31 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-bsp/con2fbmap/con2fbmap/0001-con2fbmap-Add-missing-include-on-string.h.patch
+ meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-bsp/con2fbmap/con2fbmap/0001-con2fbmap-Add-missing-include-on-string.h.patch b/meta-oe/recipes-bsp/con2fbmap/con2fbmap/0001-con2fbmap-Add-missing-include-on-string.h.patch
-new file mode 100644
-index 0000000000..d1b75f1c54
---- /dev/null
-+++ b/meta-oe/recipes-bsp/con2fbmap/con2fbmap/0001-con2fbmap-Add-missing-include-on-string.h.patch
-@@ -0,0 +1,28 @@
-+From 0a948d8d91b789e9c9b60136fada75b1d464af63 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 2 Sep 2022 18:31:27 -0700
-+Subject: [PATCH] con2fbmap: Add missing include on string.h
-+
-+strerror() is from string.h therefore include it to fix -Wimplicit-function-declaration
-+warnings
-+
-+Upstream-Status: Submitted [https://gitlab.com/pibox/con2fbmap/-/merge_requests/1]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/con2fbmap.c | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/src/con2fbmap.c b/src/con2fbmap.c
-+index 7831931..7a2e870 100644
-+--- a/src/con2fbmap.c
-++++ b/src/con2fbmap.c
-+@@ -1,5 +1,6 @@
-+ #include <stdio.h>
-+ #include <stdlib.h>
-++#include <string.h> /* for strerror */
-+ #include <unistd.h>
-+ #include <fcntl.h>
-+ #include <sys/ioctl.h>
-+-- 
-+2.37.3
-+
-diff --git a/meta-oe/recipes-bsp/con2fbmap/con2fbmap_git.bb b/meta-oe/recipes-bsp/con2fbmap/con2fbmap_git.bb
-index 5d1c5ba7e4..302a61e8a8 100644
---- a/meta-oe/recipes-bsp/con2fbmap/con2fbmap_git.bb
-+++ b/meta-oe/recipes-bsp/con2fbmap/con2fbmap_git.bb
-@@ -9,7 +9,9 @@ SECTION = "console/utils"
- DEPENDS = ""
+diff --git a/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb b/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb
+index 80ab730406..2d93936f37 100644
+--- a/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb
++++ b/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb
+@@ -23,7 +23,7 @@ LICENSE = "LGPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "\
+ file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
  
- SRCREV = "61ed2f28b294b1ebeb767df8cb5fcd391709c8e2"
--SRC_URI = "git://gitlab.com/pibox/con2fbmap.git;protocol=https;branch=master"
-+SRC_URI = "git://gitlab.com/pibox/con2fbmap.git;protocol=https;branch=master \
-+           file://0001-con2fbmap-Add-missing-include-on-string.h.patch \
-+           "
+-EXTRA_OECONF = " --disable-static --disable-rebuilds --enable-compile-warnings=minimum"
++EXTRA_OECONF = "--enable-debug --disable-static --disable-rebuilds --enable-compile-warnings=minimum"
+ DEPENDS += "gtk+ glib-2.0 glib-2.0-native ruby-native intltool-native gnome-common-native"
  
- S = "${WORKDIR}/git"
- 
+ inherit features_check autotools pkgconfig gettext
 -- 
 2.37.3
 
