@@ -2,61 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98E56C6FA82
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92441C6FA83
 	for <webhook@archiver.kernel.org>; Sun,  4 Sep 2022 07:35:04 +0000 (UTC)
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com
- [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.web12.11495.1662276897659262362
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com
+ [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.web09.11276.1662276866108656816
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:34:57 -0700
+ Sun, 04 Sep 2022 00:34:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=qEVjrEfb;
- spf=pass (domain: gmail.com, ip: 209.85.210.181,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id 199so5900792pfz.2
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=e7AXzWim;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id
+ s14-20020a17090a6e4e00b0020057c70943so175541pjm.1
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:34:57 -0700 (PDT)
+ Sun, 04 Sep 2022 00:34:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=+1vskST9arACyAf9JpXF8lVwr+P/vpipTIgP+pCpDGI=;
-        b=qEVjrEfbIKT7xI1HX+rg2iIG9KW3ynqaJk0GRDhrEqLkBVrD+vEEfs5PkdhH1gOCdz
-         ALxyP7pU3VbHtYXkEuC66tWUadqtndF53MtE81YquA23qecX4JPEypsHNAUGJvtvsdwf
-         41ANOavyFKyXBJ89uBXFiLRv70hKinYrT7l4QzPeMbfN4vM8wkOUH9lFRfzVQH1Fcj5W
-         ce+32FjAyJLuDcipJpeZtRLYiiMUxHblwzNTiwXHmCi/8LIhkZzcbdN2yAlkQFvPlL2g
-         h9fyvCYYgYlkkt75C+qqbctq/sGnsruiyHOKJWAT+0UmgbD8aguYZ/1bejGJ2sY10oUP
-         TeGQ==
+        bh=Dd4JZVdlt0AdlLYeHTo/mWE23y4AgAG1Mb9QP35yu+M=;
+        b=e7AXzWimM93O+mvwjqB+TaWCOcLfhIg2XApayGNt59cRdZ617UPryQKl4a26xTcI4E
+         RdDU3QaKqE/AdsONCh+pUE7Uv6jZuM2HPtWfPFXRX4PUj3JIYQ1IlM60EHr1IDOatd/b
+         QBsktHA9zttH3E+0rzlPEsORqhDFu5DLo1+LtCekwRXPhlElN3BwwyG5Clz0Nnhcsfrv
+         Yz37BVicjLq8agjKcDP8HtR8zsyofIRH75rkE+Ig1D2dSNfrkcT1zPRdp6SxgU8xqaSG
+         mtveLqtYOryfD6MDZQC0Kw0az8LVco5NtIpRynVp6OehvzyRwVM99ZyEDII0vGqE5M3Z
+         4Jxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=+1vskST9arACyAf9JpXF8lVwr+P/vpipTIgP+pCpDGI=;
-        b=7CkLOyOo8iDBXTne5mB1xoqdNr1csbkqeqpoP7KmTNkMd0GK8BQipjyeEWT8fO5Gkx
-         b29341a4L7nKUUVRLBZpZpcRDJhDTlC6sznGKQEh+FLFGyx6ezhdY4yplPjv0b9mwN2y
-         ImIWZYtitfLj3rcAxFNdeaaTpUBPTwLIEC5U29y/ku8jaPiRXAwTyZV8j4GHaScg6SX7
-         BBKh9YFp59OVzDV0Z+34vsjM7tJA+B04voE1mWG9yh+ucJ9qLkjmsEv5pbeItED1ipvS
-         FrNtDJIu0NmFVyC0DDVT0VnzQLlElk+oHCTeBGCrnNlNldczvJouVBwKaAQ2jBMwfp4x
-         ohIw==
-X-Gm-Message-State: ACgBeo05cCFLGkFCB2V7j9xRFXSD3e5Rj999RIRt9lvynW1s8Cgig6LN
-	1BDOvvdcxWwTKTAARWmkDywKNmfLBrx1Tw==
+        bh=Dd4JZVdlt0AdlLYeHTo/mWE23y4AgAG1Mb9QP35yu+M=;
+        b=yqVIBCy/HlQIymz8QXnJ0IImkzHrljVCG08uIo1qA76TV7lKLr8qDhwxS4tzuSb9sX
+         etF5k1le7CWmZVa1LBfCUP2fLKFacSk9ackAumhugrp6lAzkzrAmxlFB71G9oJfK6Mkg
+         r/OKpn9iEC7Le6W0uspmjitK68iy7YTmg4nhg6IOQGG8fssvt1b+rCbXEVlyKRQVRXU7
+         CijaH10iFeILEiF6KBtjbIZs3cPvpAe+3yQvR2fdWC0BPbfXORxMj2/9LchPp/dTPZpp
+         Xbxr++kPxtkLKic6jRIJE8HeBSm8II08fqk+JpIeao5Mgc76HYRXu+5/BmT4cXOFLKnw
+         nKJg==
+X-Gm-Message-State: ACgBeo3tGW3MmRYpUuVS9vji2pSoS+TxeD+FDXb+i7uk351kqCrRV+Cq
+	dkjXfZ7wbch0uoXP/n9f7ZSBt+ZAAMV4OA==
 X-Google-Smtp-Source: 
- AA6agR4STCYVeIyh9Yc4p/yxhxGjV30efnZMlKtt+AbKmhiJjcVQ53GO/FSRFBWjcqbHWILqfJGCew==
-X-Received: by 2002:a63:4d47:0:b0:42c:2def:6ffc with SMTP id
- n7-20020a634d47000000b0042c2def6ffcmr26167894pgl.142.1662276896585;
-        Sun, 04 Sep 2022 00:34:56 -0700 (PDT)
+ AA6agR4hNxwE71nePLUSL2YTkk4pG0A8cTrJAqeKq/MSjOXapb6wFnkRs88n7YCmjsej+ODZfGhMnw==
+X-Received: by 2002:a17:90a:9401:b0:1fa:af9c:20db with SMTP id
+ r1-20020a17090a940100b001faaf9c20dbmr13641288pjo.190.1662276893702;
+        Sun, 04 Sep 2022 00:34:53 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::48c3])
         by smtp.gmail.com with ESMTPSA id
- w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.34.55
+ w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.34.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Sep 2022 00:34:56 -0700 (PDT)
+        Sun, 04 Sep 2022 00:34:53 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 35/63] sblim-sfcc: Fix build with clang
-Date: Sun,  4 Sep 2022 00:33:49 -0700
-Message-Id: <20220904073417.3251865-35-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 32/63] uw-imap: Fix build with clang/musl
+Date: Sun,  4 Sep 2022 00:33:46 -0700
+Message-Id: <20220904073417.3251865-32-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220904073417.3251865-1-raj.khem@gmail.com>
 References: <20220904073417.3251865-1-raj.khem@gmail.com>
@@ -67,113 +67,147 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 04 Sep 2022 07:35:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98629
+ https://lists.openembedded.org/g/openembedded-devel/message/98626
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Fix-function-declararions.patch      | 80 +++++++++++++++++++
- .../sblim-sfcc/sblim-sfcc_2.2.8.bb            |  1 +
- 2 files changed, 81 insertions(+)
- create mode 100644 meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-function-declararions.patch
+ ...0001-Define-prototype-for-safe_flock.patch | 105 ++++++++++++++++++
+ .../recipes-devtools/uw-imap/uw-imap_2007f.bb |   3 +-
+ 2 files changed, 107 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/uw-imap/uw-imap/0001-Define-prototype-for-safe_flock.patch
 
-diff --git a/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-function-declararions.patch b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-function-declararions.patch
+diff --git a/meta-oe/recipes-devtools/uw-imap/uw-imap/0001-Define-prototype-for-safe_flock.patch b/meta-oe/recipes-devtools/uw-imap/uw-imap/0001-Define-prototype-for-safe_flock.patch
 new file mode 100644
-index 0000000000..c498c55692
+index 0000000000..11f1c18d4d
 --- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc/0001-Fix-function-declararions.patch
-@@ -0,0 +1,80 @@
-+From f97c26f5effd4372f7e03f9e4178d42a9ad8d4b3 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-devtools/uw-imap/uw-imap/0001-Define-prototype-for-safe_flock.patch
+@@ -0,0 +1,105 @@
++From c512c877a7ca933bee980dcc1268a7319f233d59 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 2 Sep 2022 13:33:16 -0700
-+Subject: [PATCH] Fix function declararions
++Date: Fri, 2 Sep 2022 00:07:47 -0700
++Subject: [PATCH] Define prototype for safe_flock
 +
 +Upstream-Status: Pending
-+
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ TEST/v2test_ec.c              | 2 ++
-+ TEST/v2test_ein.c             | 1 +
-+ backend/cimxml/cimXmlParser.c | 6 +++++-
-+ backend/cimxml/grammar.c      | 2 ++
-+ 4 files changed, 10 insertions(+), 1 deletion(-)
++ src/osdep/unix/env_unix.c | 3 +++
++ src/osdep/unix/mbx.c      | 2 ++
++ src/osdep/unix/os_lnx.h   | 2 ++
++ src/osdep/unix/os_slx.h   | 3 +++
++ src/osdep/unix/unix.c     | 4 ++++
++ 5 files changed, 14 insertions(+)
 +
-+diff --git a/TEST/v2test_ec.c b/TEST/v2test_ec.c
-+index ad34dcc..d3e566d 100644
-+--- a/TEST/v2test_ec.c
-++++ b/TEST/v2test_ec.c
-+@@ -6,6 +6,8 @@
-+ #include "cmcimacs.h"
-+ 
-+ extern char *value2Chars(CMPIType type, CMPIValue * value);
-++extern void showClass( CMPIConstClass * in_class );
++diff --git a/src/osdep/unix/env_unix.c b/src/osdep/unix/env_unix.c
++index 6b2c447..cefefca 100644
++--- a/src/osdep/unix/env_unix.c
+++++ b/src/osdep/unix/env_unix.c
++@@ -59,6 +59,9 @@
++ #define S_IXOTH (S_IEXEC >> 6)
++ #endif
++ 
 ++
-+ /*
-+  * comment out this define to use v2 http XML interface
-+  */
-+diff --git a/TEST/v2test_ein.c b/TEST/v2test_ein.c
-+index c1b4692..5d5ef5d 100644
-+--- a/TEST/v2test_ein.c
-++++ b/TEST/v2test_ein.c
-+@@ -6,6 +6,7 @@
-+ #include "cmcimacs.h"
-+ 
-+ extern char *value2Chars(CMPIType type, CMPIValue * value);
-++extern void showObjectPath( CMPIObjectPath * objectpath );
-+ void showProperty( CMPIData , char * );
-+ void showInstance( CMPIInstance * );
-+ static char * CMPIState_str(CMPIValueState);
-+diff --git a/backend/cimxml/cimXmlParser.c b/backend/cimxml/cimXmlParser.c
-+index d1ab86e..9f5d1ca 100644
-+--- a/backend/cimxml/cimXmlParser.c
-++++ b/backend/cimxml/cimXmlParser.c
-+@@ -34,6 +34,8 @@
-+ 
-+ #include <pthread.h>
-+ 
-++void startParsing(ParserControl *parm);
+++extern int safe_flock (int fd,int op);
 ++
-+ static int attrsOk(XmlBuffer * xb, const XmlElement * e, XmlAttr * r,
-+                    const char *tag, int etag);
-+ static char *getValue(XmlBuffer * xb, const char *v);
-+@@ -1350,7 +1352,9 @@ ResponseHdr scanCimXmlResponse(const char *xmlData, CMPIObjectPath *cop)
++ /* c-client environment parameters */
 + 
-+    control.heap = parser_heap_init();
++ static char *myUserName = NIL;	/* user name */
++diff --git a/src/osdep/unix/mbx.c b/src/osdep/unix/mbx.c
++index 1ece5d8..c8a45a5 100644
++--- a/src/osdep/unix/mbx.c
+++++ b/src/osdep/unix/mbx.c
++@@ -41,12 +41,14 @@ extern int errno;		/* just in case */
++ #include "mail.h"
++ #include "osdep.h"
++ #include <pwd.h>
+++#include <utime.h>
++ #include <sys/stat.h>
++ #include <sys/time.h>
++ #include "misc.h"
++ #include "dummy.h"
++ #include "fdstring.h"
 + 
-+-   control.respHdr.rc = startParsing(&control);
-++   control.respHdr.rc = 0;
+++extern int safe_flock (int fd,int op);
++ 
++ /* Build parameters */
++ 
++diff --git a/src/osdep/unix/os_lnx.h b/src/osdep/unix/os_lnx.h
++index b5f39ff..22c216b 100644
++--- a/src/osdep/unix/os_lnx.h
+++++ b/src/osdep/unix/os_lnx.h
++@@ -57,6 +57,8 @@
++ 
++ #define direct dirent
++ 
+++extern int safe_flock (int fd,int op);
 ++
-++   startParsing(&control);
++ #define flock safe_flock
 + 
-+    parser_heap_term(control.heap);
 + 
-+diff --git a/backend/cimxml/grammar.c b/backend/cimxml/grammar.c
-+index 6a0a969..a3dcdea 100644
-+--- a/backend/cimxml/grammar.c
-++++ b/backend/cimxml/grammar.c
-+@@ -23,6 +23,8 @@
-+ #include "sfcUtil/utilft.h"
-+ #include "parserUtil.h"
++diff --git a/src/osdep/unix/os_slx.h b/src/osdep/unix/os_slx.h
++index b5f39ff..c9adbcd 100644
++--- a/src/osdep/unix/os_slx.h
+++++ b/src/osdep/unix/os_slx.h
++@@ -46,11 +46,14 @@
++ #include <sys/types.h>
++ #include <dirent.h>
++ #include <time.h>		/* for struct tm */
+++#include <utime.h>		/* for struct tm */
++ #include <fcntl.h>
++ #include <syslog.h>
++ #include <sys/file.h>
 + 
-++CMPIType guessType(char *val);
-++void setClassMethods(CMPIConstClass *cls, XtokMethods *ms);
 + 
-+ static int ct = 0;
-+ static int dontLex = 0;
+++extern int safe_flock (int fd,int op);
+++
++ /* Linux gets this wrong */
++ 
++ #define setpgrp setpgid
++diff --git a/src/osdep/unix/unix.c b/src/osdep/unix/unix.c
++index be3c437..86be3f9 100644
++--- a/src/osdep/unix/unix.c
+++++ b/src/osdep/unix/unix.c
++@@ -45,6 +45,7 @@ extern int errno;		/* just in case */
++ #include "mail.h"
++ #include "osdep.h"
++ #include <time.h>
+++#include <utime.h>
++ #include <sys/stat.h>
++ #include "unix.h"
++ #include "pseudo.h"
++@@ -52,6 +53,9 @@ extern int errno;		/* just in case */
++ #include "misc.h"
++ #include "dummy.h"
++ 
+++
+++extern int safe_flock (int fd,int op);
+++
++ /* UNIX I/O stream local data */
++ 
++ typedef struct unix_local {
 +-- 
 +2.37.3
 +
-diff --git a/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb
-index df55a67996..20bd2b6fc1 100644
---- a/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb
-+++ b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb
-@@ -4,6 +4,7 @@ HOMEPAGE = "http://www.sblim.org"
- 
- SRC_URI = "http://netcologne.dl.sourceforge.net/project/sblim/${BPN}/${BPN}-${PV}.tar.bz2 \
-            file://0001-cimxml-Include-sys-select.h-for-fd_set.patch \
-+           file://0001-Fix-function-declararions.patch \
+diff --git a/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
+index df90b629a9..3f2c9a2237 100644
+--- a/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
++++ b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
+@@ -11,6 +11,7 @@ SRC_URI = "https://fossies.org/linux/misc/old/imap-${PV}.tar.gz \
+            file://imap-2007e-shared.patch \
+            file://imap-2007f-format-security.patch \
+            file://0001-Support-OpenSSL-1.1.patch \
++           file://0001-Define-prototype-for-safe_flock.patch \
             "
  
- SRC_URI[md5sum] = "0bac0dec19f17ec065b6c332a56d7bae"
+ SRC_URI[md5sum] = "2126fd125ea26b73b20f01fcd5940369"
+@@ -25,7 +26,7 @@ CVE_CHECK_IGNORE += "\
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
+ PACKAGECONFIG[pam] = ",,libpam"
+ 
+-EXTRA_OEMAKE = "CC='${CC}' ARRC='${AR} -rc' RANLIB='${RANLIB}'"
++EXTRA_OEMAKE = "CC='${CC} -std=c99 -D_GNU_SOURCE' ARRC='${AR} -rc' RANLIB='${RANLIB}'"
+ 
+ HEADERS = "src/c-client/*.h src/osdep/unix/*.h c-client/auths.c c-client/linkage.c c-client/linkage.h c-client/osdep.h"
+ 
 -- 
 2.37.3
 
