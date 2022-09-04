@@ -2,62 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88D2DC6FA8C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8F606C6FA8E
 	for <webhook@archiver.kernel.org>; Sun,  4 Sep 2022 07:34:54 +0000 (UTC)
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
- [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web11.11375.1662276880309196795
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com
+ [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web08.11129.1662276888502627586
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:34:49 -0700
+ Sun, 04 Sep 2022 00:34:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=BAMxlnmP;
- spf=pass (domain: gmail.com, ip: 209.85.214.179,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=QOT36BGN;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id f24so5799811plr.1
+Received: by mail-pg1-f181.google.com with SMTP id r69so5608173pgr.2
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 00:34:49 -0700 (PDT)
+ Sun, 04 Sep 2022 00:34:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=j/5RuskJjL6jhcPVoSzYRcLyD8WsShZbxe4NDJTIzsE=;
-        b=BAMxlnmPgSLmrupR9XZGBtKuxejIrFHojE1zHkgiqTVVPb7HefDAGKpiwMxBbukf/C
-         Y4OkEvgxwhfqAddbMb6M0CjW39PNK/J0Xt+NTl5/sxNG4hjwBMYp1mHp/+eHD5rqk0o6
-         s9fPn9gzaN7EgHRfebrV1M9CXfPX5SOjzw8RC7g2RZgvbkT9GjZd/dKgOstr/Ry2cz1C
-         AcYv4iZ27jVQIsha4P80Ke1eQCea3pJpipPx/RpCKXSAax/4eDgAepzorlEF6CwqtSJ3
-         +1leBGRy1lxV8XpOCxUiQDj1vpTTF6jAk/z1qffimkXX+iA3/yTqRQ5FSTrdXOoMf62A
-         KQnw==
+        bh=VwgFNljJ21q95+Ui2IlrxyAHx75tI9uwY3KNbssHVzo=;
+        b=QOT36BGN4pDESoEamAuPRrVYcVLWYN6tDldNCsKvW/uBAi/tMM8Eb9z76ZjPqGnWYJ
+         56QcPEZTNh/MceWWWPNBulqALMV6g3eQIM4M7ditulyl99Uh23+9kr5X4RtO9+NXERCa
+         IUlIjvqX3JS/baSxHctU9+tO8+T9Orf7JVYaq2FsBXo/NzllIOLHK8sEyfo0l7SuV8cB
+         Fb1xfbMDMbgk/5bqyHWOLdUO8SzSTVh86mHMpFv847YGwtLIGdnYl4qv7JUKkSX9LzdW
+         2strEZB/oZdLHJs9d54u6AfTF6oVI18PoiueZr0ZFGE/ux56D9/21f02jv4ygVdMpVIH
+         0JIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=j/5RuskJjL6jhcPVoSzYRcLyD8WsShZbxe4NDJTIzsE=;
-        b=V78UseQBkNRiTZH/CWILcO3SxnuCMvD5OoXwUXtm115P1HKNIH0fZoN3VB/4rn6kYq
-         NSuU6wUEJyl83JEYISpD8yNrXC9yRvjAup6TC900NlXZRQF8rV6KqsB8iXIFcS5zfCsB
-         Qy+xWJB+4GcYvGW8v3tlBWId95DpH3WlwWYHVeyGz3Ww0FAlY4sc/kc6GJ7MxJHKxPZV
-         8bYdZFhvbkSLL5a4ZgdKqc1xq4wC9JkGoLSwY8TY8h43J5iVXweV5GRd5s5SQIdH38Ub
-         TZ5DPwCoNspqtui/yw6LmDtSyq9xySWaqdzYMVI3yJ/eakEsLtraBFqsqtlYohpRhL8K
-         ar/w==
-X-Gm-Message-State: ACgBeo1Y2Eynz4GMoBPOtRzHJgbNnfxPlD2PImlBOhemV1+aUWVDova7
-	Eeyckywb1peTBSOm/EVEcnzsf0LOEztChg==
+        bh=VwgFNljJ21q95+Ui2IlrxyAHx75tI9uwY3KNbssHVzo=;
+        b=WYwdXw66k3LetSQm5c/sRNLES7guxf7e8XxXfSBB0JYFk5ebPvAfXvUcvIKeSs4XQU
+         R7+CPFYlWiIJiMC7aVoX+cMSuBuMGVDEZ5I78FLkAbc2eryMyGBxESxo3Ft960qFPD9Q
+         lqwd7+ue6rOz2Vr9J4RU9o9HWTP6u9Y5i+WqpuMsV6nHp5WbMRUQUnw7qfwo1UA7ec0W
+         4yjF5/MBVJa5laUUTTskh1NyWPaGDP+hWNUfntJkdWnzhNzL66ysWtFV3rIyl4qrShFL
+         M/qxm/f2ffgiDohLSJ0t3I1Ui6TejnmtrVYopb6ABRnFWY1w8rBPuFAs2yv8YDqobp2K
+         XnwQ==
+X-Gm-Message-State: ACgBeo3VgFmU+dxR9aAXy61NvsCAQK1NTmKcEPr1uBOYt2yjDYGlhM7P
+	X3pA32XuaABTwinoiIJTiiyeuoyrYygHZg==
 X-Google-Smtp-Source: 
- AA6agR5/V6Q8xbzzczpQrwrupfGS1H2Fhdk4osLBs4FB27p6Ys07KAGs66zw5tNMbs2KZCb1/BwpdA==
-X-Received: by 2002:a17:902:7d86:b0:170:a752:cbd1 with SMTP id
- a6-20020a1709027d8600b00170a752cbd1mr43375500plm.17.1662276888591;
-        Sun, 04 Sep 2022 00:34:48 -0700 (PDT)
+ AA6agR5+jrvB9rP/8MV2Bouym5/v9vHAORNdtYBwS+S1CuNz606m4eEEdbdNg/6EUQTW7psbtlVqfw==
+X-Received: by 2002:a65:6b95:0:b0:420:2cb1:68e5 with SMTP id
+ d21-20020a656b95000000b004202cb168e5mr36896895pgw.220.1662276887596;
+        Sun, 04 Sep 2022 00:34:47 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::48c3])
         by smtp.gmail.com with ESMTPSA id
- w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.34.47
+ w11-20020a62820b000000b00537a38ec2c6sm5089800pfd.164.2022.09.04.00.34.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Sep 2022 00:34:48 -0700 (PDT)
+        Sun, 04 Sep 2022 00:34:47 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 27/63] libcereal: Do not use
- uniform_int_distribution<char> template
-Date: Sun,  4 Sep 2022 00:33:41 -0700
-Message-Id: <20220904073417.3251865-27-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 26/63] tokyocabinet: Fix AC_CHECK_LIB test functions
+Date: Sun,  4 Sep 2022 00:33:40 -0700
+Message-Id: <20220904073417.3251865-26-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220904073417.3251865-1-raj.khem@gmail.com>
 References: <20220904073417.3251865-1-raj.khem@gmail.com>
@@ -68,87 +67,91 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 04 Sep 2022 07:34:54 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98621
+ https://lists.openembedded.org/g/openembedded-devel/message/98620
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...se-int8_t-in-std-uniform_int_distrib.patch | 54 +++++++++++++++++++
- .../libcereal/libcereal_1.3.2.bb              |  1 +
- 2 files changed, 55 insertions(+)
- create mode 100644 meta-oe/recipes-support/libcereal/files/0001-sandbox-Do-not-use-int8_t-in-std-uniform_int_distrib.patch
+ ...heck-functions-for-AC_CHECK_LIB-test.patch | 58 +++++++++++++++++++
+ .../tokyocabinet/tokyocabinet_1.4.48.bb       |  1 +
+ 2 files changed, 59 insertions(+)
+ create mode 100644 meta-oe/recipes-support/tokyocabinet/tokyocabinet/0001-configure-Fix-check-functions-for-AC_CHECK_LIB-test.patch
 
-diff --git a/meta-oe/recipes-support/libcereal/files/0001-sandbox-Do-not-use-int8_t-in-std-uniform_int_distrib.patch b/meta-oe/recipes-support/libcereal/files/0001-sandbox-Do-not-use-int8_t-in-std-uniform_int_distrib.patch
+diff --git a/meta-oe/recipes-support/tokyocabinet/tokyocabinet/0001-configure-Fix-check-functions-for-AC_CHECK_LIB-test.patch b/meta-oe/recipes-support/tokyocabinet/tokyocabinet/0001-configure-Fix-check-functions-for-AC_CHECK_LIB-test.patch
 new file mode 100644
-index 0000000000..26a8223d19
+index 0000000000..001fa9dd75
 --- /dev/null
-+++ b/meta-oe/recipes-support/libcereal/files/0001-sandbox-Do-not-use-int8_t-in-std-uniform_int_distrib.patch
-@@ -0,0 +1,54 @@
-+From 36054278304945c6aef7d44e58788ca882c67d05 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/tokyocabinet/tokyocabinet/0001-configure-Fix-check-functions-for-AC_CHECK_LIB-test.patch
+@@ -0,0 +1,58 @@
++From e192da006dd9b0ecbbef540a3e86b65ff88e89e2 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 1 Sep 2022 15:54:13 -0700
-+Subject: [PATCH] sandbox: Do not use int8_t in std::uniform_int_distribution
++Date: Thu, 1 Sep 2022 13:28:29 -0700
++Subject: [PATCH] configure: Fix check functions for AC_CHECK_LIB test
 +
-+Newer versions of libc++ has dropped supporting this usecase since its
-+an UB see.
-+
-+https://reviews.llvm.org/D114920?id=400571
-+
-+Fixes
-+
-+uniform_int_distribution.h:162:5: error: static assertion failed due to requirement '__libcpp_random_is_valid_inttype<char>::value': IntType must be a supported integer type
-+    static_assert(__libcpp_random_is_valid_inttype<_IntType>::value, "IntType must be a supported integer type");
-+    ^             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux-musl/libcereal/1.3.2+gitAUTOINC+ebef1e9298-r0/git/sandbox/performance.cpp:261:9: note: in instantiation of template class 'std::uniform_int_distribution<char>' requested here
-+    c = std::uniform_int_distribution<char>(' ', '~')(gen);
-+        ^
-+/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux-musl/libcereal/1.3.2+gitAUTOINC+ebef1e9298-r0/git/sandbox/performance.cpp:261:9: error: type 'std::uniform_int_distribution<char>' does not provide a call operator
-+    c = std::uniform_int_distribution<char>(' ', '~')(gen);
-+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+2 errors generated.
-+
-+Upstream-Status: Submitted [https://github.com/USCiLab/cereal/pull/764]
++Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ sandbox/performance.cpp | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ configure.in | 18 +++++++++---------
++ 1 file changed, 9 insertions(+), 9 deletions(-)
 +
-+diff --git a/sandbox/performance.cpp b/sandbox/performance.cpp
-+index f9307870..aca8c78c 100644
-+--- a/sandbox/performance.cpp
-++++ b/sandbox/performance.cpp
-+@@ -258,7 +258,7 @@ random_value(std::mt19937 & gen)
-+ {
-+   std::string s(std::uniform_int_distribution<int>(3, 30)(gen), ' ');
-+   for(char & c : s)
-+-    c = std::uniform_int_distribution<char>(' ', '~')(gen);
-++    c = static_cast<char>( std::uniform_int_distribution<int>(' ', '~')(gen) );
-+   return s;
-+ }
++diff --git a/configure.in b/configure.in
++index 5b24947..0542490 100644
++--- a/configure.in
+++++ b/configure.in
++@@ -247,30 +247,30 @@ test -n "$LDFLAGS" && MYLDFLAGS="$LDFLAGS $MYLDFLAGS"
++ AC_C_BIGENDIAN(MYCPPFLAGS="$MYCPPFLAGS -D_MYBIGEND")
 + 
-+@@ -277,7 +277,7 @@ std::string random_binary_string(std::mt19937 & gen)
-+ {
-+   std::string s(N, ' ');
-+   for(auto & c : s )
-+-    c = std::uniform_int_distribution<char>('0', '1')(gen);
-++    c = static_cast<char>( std::uniform_int_distribution<int>( '0', '1' )(gen) );
-+   return s;
-+ }
++ # Underlying libraries
++-AC_CHECK_LIB(c, main)
++-AC_CHECK_LIB(m, main)
+++AC_CHECK_LIB(c, printf)
+++AC_CHECK_LIB(m, pow)
++ if test "$enable_pthread" != "no"
++ then
++-  AC_CHECK_LIB(pthread, main)
++-  AC_CHECK_LIB(rt, main)
+++  AC_CHECK_LIB(pthread, pthread_create)
+++  AC_CHECK_LIB(rt, clock_gettime)
++ fi
++ if test "$enable_zlib" != "no"
++ then
++-  AC_CHECK_LIB(z, main)
+++  AC_CHECK_LIB(z, inflate)
++ fi
++ if test "$enable_bzip" != "no"
++ then
++-  AC_CHECK_LIB(bz2, main)
+++  AC_CHECK_LIB(bz2, BZ2_bzCompressInit)
++ fi
++ if test "$enable_exlzma" = "yes"
++ then
++-  AC_CHECK_LIB(lzma, main)
+++  AC_CHECK_LIB(lzma, lzma_easy_buffer_encode)
++ fi
++ if test "$enable_exlzo" = "yes"
++ then
++-  AC_CHECK_LIB(lzo2, main)
+++  AC_CHECK_LIB(lzo2, lzo1x_1_compress)
++ fi
++-AC_CHECK_LIB(tokyocabinet, main, AC_MSG_WARN([old version of Tokyo Cabinet was detected]))
+++AC_CHECK_LIB(tokyocabinet, tcbdbopen, AC_MSG_WARN([old version of Tokyo Cabinet was detected]))
 + 
++ # Necessary headers
++ AC_CHECK_HEADER(stdlib.h, true, AC_MSG_ERROR([stdlib.h is required]))
 +-- 
 +2.37.3
 +
-diff --git a/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb b/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
-index 80c962ead4..5248b1e288 100644
---- a/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
-+++ b/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
-@@ -19,6 +19,7 @@ PROVIDES += "${PN}-dev"
- PV .= "+git${SRCPV}"
- SRCREV = "ebef1e929807629befafbb2918ea1a08c7194554"
- SRC_URI = "git://github.com/USCiLab/cereal.git;branch=master;protocol=https \
-+           file://0001-sandbox-Do-not-use-int8_t-in-std-uniform_int_distrib.patch \
-            file://run-ptest \
+diff --git a/meta-oe/recipes-support/tokyocabinet/tokyocabinet_1.4.48.bb b/meta-oe/recipes-support/tokyocabinet/tokyocabinet_1.4.48.bb
+index 22cbcc0f2f..ae00ff4e55 100644
+--- a/meta-oe/recipes-support/tokyocabinet/tokyocabinet_1.4.48.bb
++++ b/meta-oe/recipes-support/tokyocabinet/tokyocabinet_1.4.48.bb
+@@ -17,6 +17,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
+ 
+ SRC_URI = "http://fallabs.com/tokyocabinet/${BP}.tar.gz \
+            file://remove-hard-coded-include-and-lib-paths.patch \
++           file://0001-configure-Fix-check-functions-for-AC_CHECK_LIB-test.patch \
  "
  
+ SRC_URI[md5sum] = "fd03df6965f8f56dd5b8518ca43b4f5e"
 -- 
 2.37.3
 
