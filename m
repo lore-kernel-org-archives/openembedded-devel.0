@@ -1,137 +1,139 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D003EECAAD5
-	for <webhook@archiver.kernel.org>; Mon,  5 Sep 2022 19:02:24 +0000 (UTC)
-Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com
- [209.85.160.176])
- by mx.groups.io with SMTP id smtpd.web08.28379.1662404543447067734
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4E46ECAAA1
+	for <webhook@archiver.kernel.org>; Mon,  5 Sep 2022 23:02:35 +0000 (UTC)
+Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com
+ [209.85.128.181])
+ by mx.groups.io with SMTP id smtpd.web09.30812.1662418950619321603
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Sep 2022 12:02:23 -0700
+ Mon, 05 Sep 2022 16:02:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ekuXPO5n;
- spf=pass (domain: gmail.com, ip: 209.85.160.176,
- mailfrom: akuster808@gmail.com)
-Received: by mail-qt1-f176.google.com with SMTP id w28so6612529qtc.7
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=qynA9IcV;
+ spf=pass (domain: gmail.com, ip: 209.85.128.181,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f181.google.com with SMTP id
+ 00721157ae682-333a4a5d495so80522167b3.10
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Sep 2022 12:02:23 -0700 (PDT)
+ Mon, 05 Sep 2022 16:02:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date;
-        bh=dcmQcPaCD6ITIoVra+nUwY1ODjopacZ2uKdbJOax5vo=;
-        b=ekuXPO5noPE/BGGNZQTGqTlP0vfCO66gqV/PjAu7Kik1wC4SR4KmUFsYbkQgIayRB1
-         VdDAdzWdwk6EH2XB7nKbaiINBZ9AjJK6W1rfziYaoy5f6JeHFXoG53uyclmOOFqwRW+b
-         MNG4bfskFlHfw/2OK4+TCDU9e9Hm0oblCZOBo/LUKDCR5vlhr1Jvbh+UcrTzyD6dc8iR
-         ilv+QH6sswwABkxOwMuqVn8zUDVNtaHKo3P0F3etA8we8T+p3p1mBpEPOpgv8ERK0MEl
-         PQFwbnjdrJRkOhbAdbD58YVe59dQeMr9RjW/8k6hfenIM2xk+o7s3tOVWCsTn7Nl5VMh
-         +9Bw==
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date;
+        bh=hAVbqBn72/a13M+QuZW4qBvX/KnNAsL9KXihxYKuLtE=;
+        b=qynA9IcVe0OhGrd4nZNsouOS7t8xMgf+5ePuVmk5eTgYmqFTB89vDsn3gCOLpDIany
+         v/F0unyZ0QtahPEJ3Qk3ow1+J5JWtW8hOf7XSN/tzHJgfnC3Je151wRRfU+EbSZpp1i4
+         U5cOztnrqVRTEparECCSLaTWu1hJmTxnbq6xJmPcSBPRG9YeJ/SGFTd+lfWkynrV4TV4
+         7A/If1HlC5Maulwx6Qcq2arD4TKdg8PXHjuGSt1UQjl1H8DfcMnNAxvhksZP72rGZ8tt
+         43GKpT4BCdrxtFr+h3GhJepKEqKC7A7ztTopGVeooXF4aW2EsIibgZb3wTovyy02XgNF
+         ipgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date;
-        bh=dcmQcPaCD6ITIoVra+nUwY1ODjopacZ2uKdbJOax5vo=;
-        b=2VFNfj2/XW4SPNlFvbCNWNhogC0nSuue0mNucQAZLI0a2L2ISGoptL7MnVKTTPOJp1
-         eXgTNNRIJXKKLK9j13BRYQrEj7vD6/FcZuMoyMLuvpXeFfmr5AZvSqiDo2XJu+0G1yTs
-         xGK2rmgnQw9YJBGU9fKSiqs1t4rLk+3ak+SUcGEashzpGT7tEL89oUGYc495cxCpNZmI
-         2JjTjyJdZj/weAsuKz5n+QB7hedQxsDfQAyDmdCoZ17falD31B5qqjecXoj2/O+ueYna
-         nLB5LEaJ4K/R7zSSjHaxomWwfAu3A1Ulb7xnZYBwFws74rE3WkRl5a0eC/VtwF+ApQ1+
-         VQCw==
-X-Gm-Message-State: ACgBeo1G0haq2+eoKEkiCwIKV2h5UKUQvhocc3H7uo3aEOBTuc0nly+N
-	2DcPqAhMnjTQPkN0fmD3pLc=
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date;
+        bh=hAVbqBn72/a13M+QuZW4qBvX/KnNAsL9KXihxYKuLtE=;
+        b=DorClSJKkVTGcL1LZ2Mt2v3kZfxLg/GnNhG1hO4KRIGGCBCDFboxFU409m1kb9OaFI
+         HJTR4v/m0iKOHAGU0EdIVJ41viWOt73w3iqn/hypZ7h4Uk2O1B/wzmvkApjPny8uBlXw
+         WaS58PH3YzdZukBMCoq5UhOK1LAnXLn5oqwoepP/E0/eG01TBzGdRmHdgH/649xYld3p
+         4WVxdSv8dm5JSjly1ugDnsZHvtMtO1lvdLnOdwenJNbtXfreiZ6HsqiNtlEaT6CP08QE
+         wXTfC2nLNeuoMJFJZXss3t527EXQlJVrn0KiyqQ/PiaqvR5TkKWaNzQn1tlZLgYoAHlI
+         bAAQ==
+X-Gm-Message-State: ACgBeo31hnMI1bNaAg+0uQmOcR8C2ZOPbGcPoAy+tP8CG5kQCwhJj+UC
+	mwVUPBjrBW/0cGowzKu0ajsqNQKbE/t0DxUE+IA=
 X-Google-Smtp-Source: 
- AA6agR71rLVfzQC4SW1jKYxLgTAAWNdCp/x0lKbTD1izvT45NjxaLN5976Xq68C1E3PDqtvGwCHY4w==
-X-Received: by 2002:ac8:5dd4:0:b0:342:fbfa:4a9b with SMTP id
- e20-20020ac85dd4000000b00342fbfa4a9bmr40319623qtx.229.1662404542400;
-        Mon, 05 Sep 2022 12:02:22 -0700 (PDT)
-Received: from ?IPV6:2600:1700:9190:ba10:dee3:eaf1:9872:fe7f?
- ([2600:1700:9190:ba10:dee3:eaf1:9872:fe7f])
-        by smtp.gmail.com with ESMTPSA id
- v5-20020a05620a440500b006b9a89d408csm9358181qkp.100.2022.09.05.12.02.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 05 Sep 2022 12:02:21 -0700 (PDT)
-Message-ID: <17ff540b-c471-f14e-980f-3c9ecb3872b3@gmail.com>
-Date: Mon, 5 Sep 2022 15:02:20 -0400
+ AA6agR5eg8qgvMbF50za57vksvZU5/3z67zeny1GZto+1K8mgRFXgrJbKxTezL4L6FSd/gJhIY8qUkJugjYQN0K5xt4=
+X-Received: by 2002:a81:a108:0:b0:345:1ba8:638f with SMTP id
+ y8-20020a81a108000000b003451ba8638fmr9109581ywg.422.1662418949641; Mon, 05
+ Sep 2022 16:02:29 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [meta-oe][dunfell][PATCH] cryptsetup: upgrade 2.3.2 -> 2.3.7
-Content-Language: en-US
-To: Jason Andryuk <jandryuk@gmail.com>,
- openembedded-devel@lists.openembedded.org
-Cc: Yi Zhao <yi.zhao@windriver.com>
-References: <20220819140057.12010-1-jandryuk@gmail.com>
- <CAKf6xptpZGoKTfoEtLPnwGjgL0G5jea6J-_jK+2ANo7-pYPt8Q@mail.gmail.com>
-From: akuster808 <akuster808@gmail.com>
-In-Reply-To: 
- <CAKf6xptpZGoKTfoEtLPnwGjgL0G5jea6J-_jK+2ANo7-pYPt8Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <8a1e59b7-1594-d1af-1944-e42b5649cc33@gmail.com>
+In-Reply-To: <8a1e59b7-1594-d1af-1944-e42b5649cc33@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 5 Sep 2022 16:02:01 -0700
+Message-ID: 
+ <CAMKF1socV+aDJ6TbbZrZGVZv-unMH6yokpn_4=kD88Z5gtrAww@mail.gmail.com>
+Subject: Re: kirkstone merge request: Sept 5th
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 05 Sep 2022 19:02:24 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 05 Sep 2022 23:02:35 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98670
+ https://lists.openembedded.org/g/openembedded-devel/message/98674
 
+merged thanks Armin
 
-
-On 8/31/22 09:31, Jason Andryuk wrote:
-> Hi,
+On Mon, Sep 5, 2022 at 11:50 AM akuster808 <akuster808@gmail.com> wrote:
 >
-> Is the patch acceptable for dunfell, or is a change needed?
-
-Its sitting in my test branch. My build system was relocated over these 
-last three weeks so there was a planned delay in processing changes.
-
--armin
+> The following changes since commit acbe74879807fc6f82b62525d32c823899e19036:
 >
-> Thanks,
-> Jason
+>    cryptsetup: Add support for building without SSH tokens (2022-08-09
+> 09:51:57 -0700)
 >
+> are available in the Git repository at:
 >
-> On Fri, Aug 19, 2022 at 10:02 AM Jason Andryuk <jandryuk@gmail.com> wrote:
->> From: Yi Zhao <yi.zhao@windriver.com>
->>
->> Stable security bug-fix release that fixes CVE-2021-4122.
->>
->> ReleaseNotes:
->> https://kernel.org/pub/linux/utils/cryptsetup/v2.3/v2.3.7-ReleaseNotes
->>
->> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
->> Signed-off-by: Armin Kuster <akuster808@gmail.com>
->> (cherry picked from commit 5dca16b451abf80b1bfacfc533daf447ff4dad7c)
->> This is just the rename and SRC_URI hash updates made to apply
->> to dunfell.
->> Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
->> ---
->>   .../cryptsetup/{cryptsetup_2.3.2.bb => cryptsetup_2.3.7.bb}   | 4 ++--
->>   1 file changed, 2 insertions(+), 2 deletions(-)
->>   rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.3.2.bb => cryptsetup_2.3.7.bb} (96%)
->>
->> diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.2.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.7.bb
->> similarity index 96%
->> rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.2.bb
->> rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.7.bb
->> index 3c1c8b0be..d303f27eb 100644
->> --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.2.bb
->> +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.7.bb
->> @@ -21,8 +21,8 @@ RDEPENDS_${PN} = " \
->>   "
->>
->>   SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
->> -SRC_URI[md5sum] = "6e4ffb6d35a73f7539a5d0c1354654cd"
->> -SRC_URI[sha256sum] = "a89e13dff0798fd0280e801d5f0cc8cfdb2aa5b1929bec1b7322e13d3eca95fb"
->> +SRC_URI[md5sum] = "9c5952cebb836ee783b0b76c5380a964"
->> +SRC_URI[sha256sum] = "61835132a5986217af17b8943013aa3fe6d47bdc1a07386343526765e2ce27a9"
->>
->>   inherit autotools gettext pkgconfig
->>
->> --
->> 2.20.1
->>
-
+>    https://git.openembedded.org/meta-openembedded kirkstone-next
+>
+> for you to fetch changes up to 8f96c05f6d82fde052f2cb1652c13922814accb0:
+>
+>    lmdb: only set SONAME on the shared library (2022-09-04 07:52:16 -0400)
+>
+> ----------------------------------------------------------------
+> Changqing Li (2):
+>        fuse3: support ptest
+>        fuse3: fix ptest test_passthrough_hp failure
+>
+> Justin Bronder (1):
+>        lmdb: only set SONAME on the shared library
+>
+> Khem Raj (1):
+>        audit: Upgrade to 3.0.8 and fix build with linux 5.17+
+>
+> Lei Maohui (1):
+>        xrdp: Fix buildpaths warning.
+>
+> Saul Wold (10):
+>        libipc-signal-perl: Fix LICENSE string
+>        libdigest-hmac-perl: Fix LICENSE string
+>        libio-socket-ssl-perl: Fix LICENSE string
+>        libdigest-sha1-perl: Fix LICENSE string
+>        libmime-types-perl: Fix LICENSE string
+>        libauthen-sasl-perl: Fix LICENSE string
+>        libnet-ldap-perl: Fix LICENSE string
+>        libxml-libxml-perl: Fix LICENSE string
+>        libnet-telnet-perl: Fix LICENSE string
+>        libproc-waitstat-perl: Fix LICENSE string
+>
+>   ...01-test-test_syscalls.c-allow-EBADF-in-fcheck_stat-631.patch | 45
+> +++++++++++++++++++++++++++++
+>   meta-filesystems/recipes-support/fuse/fuse3_3.10.5.bb           | 26
+> ++++++++++++++---
+>   .../lmdb/files/0001-make-set-soname-on-liblmdb.patch            | 22
+> ++++++++++++++
+>   meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb                         | 3 +-
+>   .../audit/audit/Fixed-swig-host-contamination-issue.patch       | 13
+> ++-------
+>   .../recipes-security/audit/{audit_3.0.7.bb => audit_3.0.8.bb} |  7 ++++-
+>   meta-oe/recipes-support/xrdp/xrdp_0.9.18.bb                     | 1 +
+>   meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb    | 2 +-
+>   meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb    | 2 +-
+>   meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb    | 2 +-
+>   meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.074.bb     | 2 +-
+>   meta-perl/recipes-perl/libipc/libipc-signal-perl_1.00.bb        | 2 +-
+>   meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb       | 2 +-
+>   meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.68.bb          | 2 +-
+>   meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.05.bb        | 2 +-
+>   meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb    | 2 +-
+>   meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb      | 2 +-
+>   17 files changed, 110 insertions(+), 27 deletions(-)
+>   create mode 100644
+> meta-filesystems/recipes-support/fuse/fuse3/0001-test-test_syscalls.c-allow-EBADF-in-fcheck_stat-631.patch
+>   create mode 100644
+> meta-oe/recipes-dbs/lmdb/files/0001-make-set-soname-on-liblmdb.patch
+>   rename meta-oe/recipes-security/audit/{audit_3.0.7.bb =>
+> audit_3.0.8.bb} (93%)
+>
 
