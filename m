@@ -1,103 +1,115 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 94D61ECAAD3
-	for <webhook@archiver.kernel.org>; Sun,  4 Sep 2022 16:36:27 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
- [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.web12.15200.1662309385232043252
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AC9FECAAA1
+	for <webhook@archiver.kernel.org>; Mon,  5 Sep 2022 09:02:42 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
+ [85.158.142.2])
+ by mx.groups.io with SMTP id smtpd.web09.22579.1662368556328654071
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 09:36:25 -0700
+ Mon, 05 Sep 2022 02:02:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=ImM0ypgw;
- spf=pass (domain: gmail.com, ip: 209.85.221.48,
- mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id w5so8428580wrn.12
-        for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Sep 2022 09:36:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date;
-        bh=iwQ6y1W7uXmBY+QXFGZffBwMq8LkaZon5MSezIi3bR4=;
-        b=ImM0ypgwVo3adQHBvzdfGers7ZcN5tUzYj3BszHaZP2wxYSJwms8RNAqi7zmOZM28u
-         NsmXOuGbkghnneh2YaOpqonpdr8hVLd5+ggEh5pgAWp5CZ2DFo/pmglSKNmmXXoKIWt4
-         wBgq5hml0M6n+TKtPy8XVzczWpGMIAozr2RaSmE/aRDMm44ZmLYP0Oc1eXqynIg2iIas
-         6EKNSzpZ+Ff9VAicw8ZY1iLjhD8yuCFRPR8VCTIjMl8cwFkC8wtV7p3Ol4cAmS4hf5NV
-         XpyYxXKqQJPC2XK/M+sDlN+cQ448nwsBDoqxCBKJ5ordzkYB2KgLus8hRsOLjlLm6pgk
-         2xVA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date;
-        bh=iwQ6y1W7uXmBY+QXFGZffBwMq8LkaZon5MSezIi3bR4=;
-        b=Vcu/ybpdL5vWEFVas7FlqShtivDTtlm64YnhYIrN2XBbevP0thappBmHQU1ubE1smZ
-         9NTg5odqSPPaukFIXUU7L6UoYyx8OXyzys5zoPD+8LxYsMlbs2RU3SKnAgvSpQTPvltQ
-         X3Qyx8c1ctE+wz/CTanQ6xZE/BJXDprbtjLCGgeHcukiQc45tDsoSVr8VdB4oVpsSt00
-         hRCt1C0xVHMVoek8PFBDlvjaLRGkuiE6Hjjq1iV7pBiu5PyfZaG2sdC4Ug7dsAvLGvKH
-         7qjqgOI7tHKkaxNGQZnTt82BCEPdq6G1P7Cm7qAu0Ml31FDLUNLc57leJziTrG9oQega
-         p8IQ==
-X-Gm-Message-State: ACgBeo2SPPuisr6atFvPCdRdxj6HTlDY1a3jzv8k/1lPNm3IGnjgk8e0
-	hOqHV6vjpkMBmxNFh0GY/jei5Rab8pk=
-X-Google-Smtp-Source: 
- AA6agR5K67FCrzr82eaG4CfQxCVgPqjukXosj91q+Rs8H2ywQPk5g25+npslzO4g/rdG2bmIpT6mJw==
-X-Received: by 2002:a5d:6c6f:0:b0:226:f30d:95ba with SMTP id
- r15-20020a5d6c6f000000b00226f30d95bamr10619997wrz.170.1662309383237;
-        Sun, 04 Sep 2022 09:36:23 -0700 (PDT)
-Received: from Unimatrix08-Jammy.. (mob-109-113-187-149.net.vodafone.it.
- [109.113.187.149])
-        by smtp.gmail.com with ESMTPSA id
- by8-20020a056000098800b0021d6dad334bsm6370659wrb.4.2022.09.04.09.36.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Sep 2022 09:36:22 -0700 (PDT)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>,
-	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	Gianfranco Costamagna <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH] vboxguestdrivers: upgrade 6.1.36 -> 6.1.38
-Date: Sun,  4 Sep 2022 18:36:02 +0200
-Message-Id: <20220904163602.3663384-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=s99xciIM;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.2,
+ mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1662368554; i=@fujitsu.com;
+	bh=1sGe0uyjtjJeR86rJNxeQHdtIfJMhTlzgZm/a/ePUVY=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type;
+	b=s99xciIMnWb5kUVNqCn/52V6fVRr2nF3tIVRkGU6ZhfilEsdkE1xZYAMKW8ABipRp
+	 r7KQgce7vwvhXBzPUf5WZFlsdXA+46VargY1muDWVi0zTOrGdqVp0ScvpQJKfY8+zP
+	 UMh9YLHzGEXeCxU+gqEbeFA/opHPg/yJDo6Xkcn/H0q+CMICBOYpi81FNw3GNMLzBj
+	 0K1qxslmm6YQzEDxeSiTS3DQU2jE/4pIf9Ll1HriTPYa0x7TQ5gfRJFy2JSDYpkRbl
+	 ZB9HeTo3OjgaPWyEfBrdSqy35tB5Wc4ksKEDTm05riKvkghjY8J/AHzyn4VC31HXgM
+	 hLFXhZfMlxWUg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrBIsWRWlGSWpSXmKPExsViZ8OxWVdzt2i
+  ywdLfRhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8by7zOZCzZwVLzte8HSwHiHvYuRi0NI4CGj
+  xMZbCxkhnCtMEm8m9EE5uxklFu1rASrj5GATUJOYfusGK4gtIqAvsXT2HmYQm1lAReLF7x6wG
+  mEBf4n5Py+wgdgsQPGz+z4wgti8Ak4SJ1tOgvVKCChITHn4HqiXg4NTwFniSpMbSFgIqOTxqx
+  dQ5YISJ2c+YYEYLyFx8MULZohWRYnZl5tZIOwKicbph5ggbDWJq+c2MU9gFJyFpH0WkvYFjEy
+  rGG2SijLTM0pyEzNzdA0NDHQNDU11Lc10DY0N9RKrdBP1Ukt18/KLSjJ0gfzyYr3U4mK94src
+  5JwUvbzUkk2MwEBOKU5o3sF4b98vvUOMkhxMSqK87+eIJgvxJeWnVGYkFmfEF5XmpBYfYpTh4
+  FCS4F25AygnWJSanlqRlpkDjCqYtAQHj5IIr/86oDRvcUFibnFmOkTqFKMux8yvbQeYhVjy8v
+  NSpcR5N4HMEAApyijNgxsBi/BLjLJSwryMDAwMQjwFqUW5mSWo8q8YxTkYlYR5uUCm8GTmlcB
+  tegV0BBPQEXZ9wiBHlCQipKQamMQKrA+cMizZnF7qHvbu7PPWSEuphNm793R9XrlVK/SFZScL
+  a5Sw47JUho7DkQa8z6tbOP4XNc1fe2zu1J1KNuGHAmWFT676vTTMMM3QRXNG6IHnE2NOVV090
+  WAuFKZz+MXHU4wTUtfudOUzPHtLceOeVRuMb/LFv/kmatb6p2dR8L6MHL2eBcdXCN1z29SxcO
+  GUqSdcz3Zczly718I2J0xlQXWx7d89Ka3TvtoWHtrH+PiVX+je+G2Pi072JhaVhe4TPyelrJC
+  SdnD6/y011RvaVm9MP+kzcd9bEcl1xvLPa1l80696XOjy/vWoZWL74fL9C104mg9FdwhPZUu8
+  7vGy0vr6uZdv/ugq353aoKrEUpyRaKjFXFScCAA8vQGjawMAAA==
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-9.tower-745.messagelabs.com!1662368553!260965!1
+X-Originating-IP: [62.60.8.179]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.87.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 10744 invoked from network); 5 Sep 2022 09:02:33 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-9.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 5 Sep 2022 09:02:33 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 36A67151
+	for <openembedded-devel@lists.openembedded.org>;
+ Mon,  5 Sep 2022 10:02:33 +0100 (BST)
+Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121
+ [10.183.43.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 29A1A150
+	for <openembedded-devel@lists.openembedded.org>;
+ Mon,  5 Sep 2022 10:02:33 +0100 (BST)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Mon, 5 Sep 2022 10:02:31 +0100
+From: Wang Mingyu <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] ctags: upgrade 5.9.20220821.0 ->
+ 5.9.20220828.0
+Date: Mon, 5 Sep 2022 17:02:07 +0800
+Message-ID: <1662368529-32226-3-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1662368529-32226-1-git-send-email-wangmy@fujitsu.com>
+References: <1662368529-32226-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM121.r01.fujitsu.local (10.183.43.173)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 04 Sep 2022 16:36:27 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 05 Sep 2022 09:02:42 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98658
+ https://lists.openembedded.org/g/openembedded-devel/message/98662
 
-From: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
-
-refresh patch for new upstream release
-
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{vboxguestdrivers_6.1.36.bb => vboxguestdrivers_6.1.38.bb}  | 2 +-
+ .../ctags/{ctags_5.9.20220821.0.bb => ctags_5.9.20220828.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_6.1.36.bb => vboxguestdrivers_6.1.38.bb} (97%)
+ rename meta-oe/recipes-devtools/ctags/{ctags_5.9.20220821.0.bb => ctags_5.9.20220828.0.bb} (95%)
 
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.36.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.38.bb
-similarity index 97%
-rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.36.bb
-rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.38.bb
-index 7eb497ab1..235bc3061 100644
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.36.bb
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.1.38.bb
-@@ -15,7 +15,7 @@ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2
-     file://Makefile.utils \
- "
+diff --git a/meta-oe/recipes-devtools/ctags/ctags_5.9.20220821.0.bb b/meta-oe/recipes-devtools/ctags/ctags_5.9.20220828.0.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/ctags/ctags_5.9.20220821.0.bb
+rename to meta-oe/recipes-devtools/ctags/ctags_5.9.20220828.0.bb
+index 31f493506b..7fd0a839ca 100644
+--- a/meta-oe/recipes-devtools/ctags/ctags_5.9.20220821.0.bb
++++ b/meta-oe/recipes-devtools/ctags/ctags_5.9.20220828.0.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
--SRC_URI[sha256sum] = "e47942e42892c13c621869865e2b7b320340154f0fa74ecbdaf18fdaf70ef047"
-+SRC_URI[sha256sum] = "56d997b58154df3974ce040a64970fa774add41e84b23dfb84b279b24545d7e4"
+ inherit autotools-brokensep pkgconfig manpages
  
- S ?= "${WORKDIR}/vbox_module"
- S:task-patch = "${WORKDIR}/${VBOX_NAME}"
+-SRCREV = "40551e21c507c2426a323373f3ff200799150429"
++SRCREV = "dfffd3d8e18183e0e9131f2c301e18f78866ceb5"
+ SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https"
+ 
+ S = "${WORKDIR}/git"
 -- 
-2.34.1
+2.25.1
 
 
