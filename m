@@ -2,78 +2,74 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D4D1C6FA86
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B8E0C6FA89
 	for <webhook@archiver.kernel.org>; Mon,  5 Sep 2022 09:02:42 +0000 (UTC)
 Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.2])
- by mx.groups.io with SMTP id smtpd.web09.22580.1662368559834825628
+ [195.245.231.3])
+ by mx.groups.io with SMTP id smtpd.web08.22551.1662368552445548420
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Sep 2022 02:02:40 -0700
+ Mon, 05 Sep 2022 02:02:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=CO07xjE1;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.2,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=pNspkFdM;
+ spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1662368558; i=@fujitsu.com;
-	bh=Iy8fgKxw5iQ80UQ8Q/1i15mP1XnMIYp0FwlCW8kR4L4=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=CO07xjE1NHP3RauXTn9t3yqnRwNrLt6LkW/W/NrCUrZFgcTiCKbakPrtuccjFX3VA
-	 ZyqFhkBzTTO/h9n4OCi/0E+PbLsXBdkkhJuo7eGKaouFEUMG4huQOxNtbZGO/w+3WW
-	 0RgTvumtOMUabzV3WJadNkdhzRT7HV63eBMpQsLrLKBx24ikZhzLMmXjArjINdW95V
-	 6zlodmF5XsSy49WN0pNbrVgCpgI6EBm4xp+uinXXjn11E0LFJ9vWRmmQ5jWm5kYA0K
-	 2ER4K8qGX9XZes6TWBXfej9n9n+b/jK+boIamtfAzHEyNP9HwTBQKsoaonEqKKlJ3C
-	 i627zl4fRQxNA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrJIsWRWlGSWpSXmKPExsViZ8MxSVd3t2i
-  ywaZflhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aBtVuZCnZLVlw/85u1gXGmWBcjF4eQwBNG
-  id7931khnOtMEn+2XoBydjNKfNu2mKWLkZODTUBNYvqtG6wgtoiAvsTS2XuYQWxmARWJF7972
-  EFsYQFLidM/H4LFWYDiWx80soHYvAJOEsdfLGMCsSUEFCSmPHwPVMPBwSngLHGlyQ0kLARU8v
-  jVC0aIckGJkzOfsECMl5A4+OIFM0SrosTsy80sEHaFROP0Q1Aj1SSuntvEPIFRcBaS9llI2hc
-  wMq1itE4qykzPKMlNzMzRNTQw0DU0NNU1NtI1tLDUS6zSTdRLLdUtTy0u0TXSSywv1kstLtYr
-  rsxNzknRy0st2cQIDOOUYoW9Oxgvr/ypd4hRkoNJSZT3/RzRZCG+pPyUyozE4oz4otKc1OJDj
-  DIcHEoSvCt3AOUEi1LTUyvSMnOAMQWTluDgURLh9V8HlOYtLkjMLc5Mh0idYrTnmDr7335mju
-  VgcubXtgPMHJv2dR1gFmLJy89LlRLn3QQyVQCkLaM0D24oLAVcYpSVEuZlZGBgEOIpSC3KzSx
-  BlX/FKM7BqCTMywUyhSczrwRu9yugs5iAzrLrEwY5qyQRISXVwBQao5lu8Vb/k9GbzQZSpwyP
-  dy8tNn4tx3Ig6231EunF73ccuzzpyVcBOz87jw5Ov2sFWXUTpO9t+lNa9knpgU7V7qu2x3IXf
-  /jiddFMcYVG4fKq6zO4S9bUyokf/TG5/ZdwOY9ee2X1lF8vi+Pb988RTYrpflmzsGKxhXuyy8
-  Mquzmhk2SfyN5+WrTu95cNjUcVJk859O7Q7V1bLWZdPXCj43PHCXnl7uMu1dcENL96OV9cG6+
-  aOYu393dk89PjvQLxZc/Z7jP3bn7uVG+9dUf2i+dNYo0HGzkCy67O4C6NPWg661/6JIttu63e
-  eIcsSzvklpY3n/9mlG/2rJVFUwxz+3wV3qTlnC7/3DSvrk+JpTgj0VCLuag4EQBzHlE4fAMAA
-  A==
+	s=170520fj; t=1662368550; i=@fujitsu.com;
+	bh=IJ4rVM4oRNVp9d+Fs6Q2W2BCv+pENCnK0FZ0QEO3HeI=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=pNspkFdM0XceU9/UihbHNjJElbuPy5AfpKfPycQ83n6IHPqvkJCSwuD+ArRoAabt3
+	 DdJ9T/yvqj28JDELOGWkZvLlXENyK6zUktWpcCxKdeWgn5uWKRRBktcNxMyDnam/qx
+	 Uqb1QenLhJcQUA8aaOusGdYQhdKbkjr7qsglyCdZPWHfe7qVH6KPx2xP+/NfgklhPQ
+	 ptULKWY/P+x2xqfjkOQm3qixh2GyrOnLQ4eUOhJLu1YYn0dwLtORJVPk9MiHiUcQVG
+	 xIXKgweGk77W7HWRwuI32gdydFv+olpRH5MEMcPWUXnsFUylBJMPEbpw/crB1gp5Z5
+	 bSjc/VJmees5g==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrNIsWRWlGSWpSXmKPExsViZ8MxSVdlt2i
+  ywb0uS4uLh5cyOzB6nNu4gjGAMYo1My8pvyKBNeP8tIusBVPYKzbO7GRuYNzE1sXIySEk8IRR
+  4vsqvy5GLiD7OpPEjaPPmSCc3YwS305dYQGpYhNQk5h+6wYriC0ioC+xdPYeZhCbWUBF4sXvH
+  nYQW1jAR2LW7FNMIDYLUHzGxblgcV4BJ4lNR94wgtgSAgoSUx6+Z4aIC0qcnPmEBWKOhMTBFy
+  +YIWoUJWZfbmaBsCskGqcfYoKw1SSuntvEPIGRfxaS9llI2hcwMq1itE4qykzPKMlNzMzRNTQ
+  w0DU0NNU1NgIyTfQSq3QT9VJLdctTi0t0jfQSy4v1UouL9Yorc5NzUvTyUks2MQLDMqVYIWMH
+  4/eVP/UOMUpyMCmJ8r6fI5osxJeUn1KZkVicEV9UmpNafIhRhoNDSYJ35Q6gnGBRanpqRVpmD
+  jBGYNISHDxKIrz+64DSvMUFibnFmekQqVOMlhxTZ//bz8yxHEzO/Np2gFmIJS8/L1VKnHcTyD
+  wBkIaM0jy4cbA4vsQoKyXMy8jAwCDEU5BalJtZgir/ilGcg1FJmJcLZApPZl4J3NZXQAcxAR1
+  k1ycMclBJIkJKqoFp/YPW0DuPCt4m9FzvDTly5N67lBIBtT1vZ8RdvzST6+F8z+ZP1U+3bf0y
+  c3Fcxv7c2bXf+PmKT22Qttw7yahe10F18Qona/3a9BlnszYmVc3tcZRMiLqf2sJ5uNY912r5g
+  cpN/V/vGrr+8/dnaZVziZtcvNWwZLE3Q/PSwq43VfmPGfYt+XJHonON6rM+wyuL6xdr6zRZbG
+  gR77mu/9L80TbZntfie6dK6yu7itWdut0wadHji/svWnpH1r5ZdmzryozLJX8vfdr4RbBeI9b
+  H/VWpc62OiqCO9RarSvnWKtV+sdBdySsen2GdeGqx8Esl/xzG0owdGyXkDuavFKvpuv181sXE
+  Yu37M1bv2NSjxFKckWioxVxUnAgAtjeNvV4DAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-8.tower-565.messagelabs.com!1662368557!898857!1
+X-Msg-Ref: server-16.tower-565.messagelabs.com!1662368548!361756!1
 X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 8733 invoked from network); 5 Sep 2022 09:02:37 -0000
+Received: (qmail 19366 invoked from network); 5 Sep 2022 09:02:28 -0000
 Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-8.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 5 Sep 2022 09:02:37 -0000
+  by server-16.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 5 Sep 2022 09:02:28 -0000
 Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 9E9E8100078
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 8BD821000CC
 	for <openembedded-devel@lists.openembedded.org>;
- Mon,  5 Sep 2022 10:02:37 +0100 (BST)
+ Mon,  5 Sep 2022 10:02:28 +0100 (BST)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121
  [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 920DD1000E7
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 890E61000C1
 	for <openembedded-devel@lists.openembedded.org>;
- Mon,  5 Sep 2022 10:02:37 +0100 (BST)
+ Mon,  5 Sep 2022 10:02:28 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Mon, 5 Sep 2022 10:02:35 +0100
+ (TLS) id 15.0.1497.32; Mon, 5 Sep 2022 10:02:26 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] fio: upgrade 3.31 -> 3.32
-Date: Mon, 5 Sep 2022 17:02:09 +0800
-Message-ID: <1662368529-32226-5-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] abseil-cpp: upgrade 20220623.0 -> 20220623.1
+Date: Mon, 5 Sep 2022 17:02:05 +0800
+Message-ID: <1662368529-32226-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1662368529-32226-1-git-send-email-wangmy@fujitsu.com>
-References: <1662368529-32226-1-git-send-email-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Originating-IP: [10.167.225.33]
@@ -85,90 +81,28 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 05 Sep 2022 09:02:42 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98663
-
-0001-io_uring-Replace-pthread_self-with-s-tid.patch
-removed since it's included in 3.32
+ https://lists.openembedded.org/g/openembedded-devel/message/98659
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ring-Replace-pthread_self-with-s-tid.patch | 45 -------------------
- .../fio/{fio_3.31.bb => fio_3.32.bb}          |  6 +--
- 2 files changed, 2 insertions(+), 49 deletions(-)
- delete mode 100644 meta-oe/recipes-benchmark/fio/fio/0001-io_uring-Replace-pthread_self-with-s-tid.patch
- rename meta-oe/recipes-benchmark/fio/{fio_3.31.bb => fio_3.32.bb} (89%)
+ meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-benchmark/fio/fio/0001-io_uring-Replace-pthread_self-with-s-tid.patch b/meta-oe/recipes-benchmark/fio/fio/0001-io_uring-Replace-pthread_self-with-s-tid.patch
-deleted file mode 100644
-index 766b1fe274..0000000000
---- a/meta-oe/recipes-benchmark/fio/fio/0001-io_uring-Replace-pthread_self-with-s-tid.patch
-+++ /dev/null
-@@ -1,45 +0,0 @@
--From 269164337e0168b93661bb95c6a4e462ae6d8b61 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 24 Aug 2022 18:08:53 -0700
--Subject: [PATCH] io_uring: Replace pthread_self with s->tid
--
--__init_rand64 takes 64bit value and srand48 takes unsigned 32bit value,
--pthread_t is opaque type and some libcs ( e.g. musl ) do not define them
--in plain old data types and ends up with errors
--
--| t/io_uring.c:809:32: error: incompatible pointer to integer conversion passing 'pthread_t' (aka 'struct __pthread *') to parameter of type 'uint64_t' (aka 'unsigned long') [-Wint-conver
--sion]
--|         __init_rand64(&s->rand_state, pthread_self());
--|                                       ^~~~~~~~~~~~~~
--
--Upstream-Status: Submitted [https://github.com/axboe/fio/pull/1455]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- t/io_uring.c | 5 ++---
-- 1 file changed, 2 insertions(+), 3 deletions(-)
--
--diff --git a/t/io_uring.c b/t/io_uring.c
--index 35bf1956..f34a3554 100644
----- a/t/io_uring.c
--+++ b/t/io_uring.c
--@@ -799,15 +799,14 @@ static int submitter_init(struct submitter *s)
-- 	int i, nr_batch, err;
-- 	static int init_printed;
-- 	char buf[80];
---
-- 	s->tid = gettid();
-- 	printf("submitter=%d, tid=%d, file=%s, node=%d\n", s->index, s->tid,
-- 							s->filename, s->numa_node);
-- 
-- 	set_affinity(s);
-- 
---	__init_rand64(&s->rand_state, pthread_self());
---	srand48(pthread_self());
--+	__init_rand64(&s->rand_state, s->tid);
--+	srand48(s->tid);
-- 
-- 	for (i = 0; i < MAX_FDS; i++)
-- 		s->files[i].fileno = i;
---- 
--2.37.2
--
-diff --git a/meta-oe/recipes-benchmark/fio/fio_3.31.bb b/meta-oe/recipes-benchmark/fio/fio_3.32.bb
-similarity index 89%
-rename from meta-oe/recipes-benchmark/fio/fio_3.31.bb
-rename to meta-oe/recipes-benchmark/fio/fio_3.32.bb
-index f8d63014ae..90e28340c6 100644
---- a/meta-oe/recipes-benchmark/fio/fio_3.31.bb
-+++ b/meta-oe/recipes-benchmark/fio/fio_3.32.bb
-@@ -22,10 +22,8 @@ PACKAGECONFIG_NUMA:armeb = ""
- PACKAGECONFIG ??= "${PACKAGECONFIG_NUMA}"
- PACKAGECONFIG[numa] = ",--disable-numa,numactl"
+diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+index b3dc06ca14..af28da5935 100644
+--- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
++++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+@@ -7,8 +7,8 @@ SECTION = "libs"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=df52c6edb7adc22e533b2bacc3bd3915"
  
--SRCREV = "6cafe8445fd1e04e5f7d67bbc73029a538d1b253"
--SRC_URI = "git://git.kernel.dk/fio.git;branch=master \
--           file://0001-io_uring-Replace-pthread_self-with-s-tid.patch \
--           "
-+SRCREV = "db7fc8d864dc4fb607a0379333a0db60431bd649"
-+SRC_URI = "git://git.kernel.dk/fio.git;branch=master"
- 
- S = "${WORKDIR}/git"
- 
+-PV = "20220623.0"
+-SRCREV = "273292d1cfc0a94a65082ee350509af1d113344d"
++PV = "20220623.1"
++SRCREV = "8c0b94e793a66495e0b1f34a5eb26bd7dc672db0"
+ BRANCH = "lts_2022_06_23"
+ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH};protocol=https \
+            file://0001-absl-always-use-asm-sgidefs.h.patch             \
 -- 
 2.25.1
 
