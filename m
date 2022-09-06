@@ -1,122 +1,102 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <steffen.olsen@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 89DEBECAAA1
-	for <webhook@archiver.kernel.org>; Tue,  6 Sep 2022 05:49:33 +0000 (UTC)
-Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com
- [209.85.128.172])
- by mx.groups.io with SMTP id smtpd.web12.736.1662443367194680934
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 55DE0ECAAD5
+	for <webhook@archiver.kernel.org>; Tue,  6 Sep 2022 15:09:58 +0000 (UTC)
+Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com
+ [209.85.208.171])
+ by mx.groups.io with SMTP id smtpd.web10.283.1662476989471521792
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Sep 2022 22:49:27 -0700
+ Tue, 06 Sep 2022 08:09:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=S/1oVGqs;
- spf=pass (domain: gmail.com, ip: 209.85.128.172,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f172.google.com with SMTP id
- 00721157ae682-333a4a5d495so85766797b3.10
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=C68lDURe;
+ spf=pass (domain: gmail.com, ip: 209.85.208.171,
+ mailfrom: steffen.olsen@gmail.com)
+Received: by mail-lj1-f171.google.com with SMTP id z23so12680959ljk.1
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Sep 2022 22:49:27 -0700 (PDT)
+ Tue, 06 Sep 2022 08:09:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date;
-        bh=YlyakKEy74S5M5wyk+fUcmwa7TX58XCcuvrsA5bWBSQ=;
-        b=S/1oVGqsB9GQQc9bJSntG93J/dz9i6WCXyGV5fPu8YMfYROA4Qx9mh0wpm7uSYD4Xg
-         xoG+5gMs8OXFDMI4pbxdw9xt3P9vm97YsyWO2OrVNGeCAyfAWlZeIrKh3Oao9ZXwtv2P
-         Rqb5jl1hmRCPWUVZ7PquB2w8eoYnMk8bnFQxVwN5wFVr+doEKaXdzwQ66YHKcC8oXKZn
-         HqZsPqTwsOzJfk7P1KiiVfy9RDQmKT66uEDRRCPTDEkmHIEqHJKEioaZDIm7K5fnFtdh
-         E9zN4uEEVhyZ/X3sZJdjjX/jTM+G84c62SC6FJ+450DS1jszOy7+gLuYo0M+k1D7c0Ua
-         39cQ==
+        h=message-id:date:subject:cc:to:from:from:to:cc:subject:date;
+        bh=koccWTuqMH5y27cQ0+TZV1nX4pf17KngLYifEWPmWiE=;
+        b=C68lDURefxob2PxeA61zDzingF+530RFKzAze7Jj+nba+sE/v60lNLllToQIdoUNWM
+         k6MkSNIoiF4pKhRShpg3eLovLyHqyetfvVmp5OsX75+oMpxoasF+68+a96YHA7MkNMie
+         M1BMAnLAWlKDbFyfA8PAdy5QkffE+cAJNZHXJs0bplNWwEhcVGumlv9M6fuf3KtZEwSM
+         dBZ1CODfI6hZTjgOFTjj6PZ6wQJFwHaqiJe8c46vr7lFaQvA7Kt+BvFVw8XfQB8Y9kh6
+         N0dPzcx2sd8YkeYW9jHcmGrCRPWQ/ts5W/cqWQoSuRQOE8WkYEw4nZRXBuuhuHg8rCqM
+         0Njw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date;
-        bh=YlyakKEy74S5M5wyk+fUcmwa7TX58XCcuvrsA5bWBSQ=;
-        b=sOVjo1Try4aE8CA9OdcRbQsi2hj1r1oaHdE32xOS2BiorkWchLqbti9SMGZxQiDxwJ
-         9QF0pj3xEgfSikrLGPGeaWNXEX95SUaVq/zloZ7k7q6LrGqLU2Mg2sQaiZeglG0NyuYe
-         2ILi/CGQtAEUrhVVNJG6Kupk+iJmSQesZQbDhvRQLelUfpt8yn6ziAQWMpuywuE1xiqC
-         mPlpRNf4YecBmWvDKKZuoDvDyvr2CuW9vs7dM7QHMntaqoKboRglLuItjQBO/7CXwvBS
-         QWBVq43rQESYb9RMfz3hy19cSJsKTPCFDwiFxJGJwpN6C1gsi+g6JSSJiaU4xPXaUXwG
-         jWlg==
-X-Gm-Message-State: ACgBeo2MyvDPN2pxJo255b47PGxKfp69COcwyjth9A9eGC8blI+SOZHo
-	22mxTn2PwmrjX4FVi88LJ6/CiUguzzJJtCxZwmo=
+        h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date;
+        bh=koccWTuqMH5y27cQ0+TZV1nX4pf17KngLYifEWPmWiE=;
+        b=YfWHPRwkQmTzyZs9AQ66phQJnOkqZp8N5QKGvsKaRiWWHaA8iGk8AdNE5k2XHCq2Jf
+         0I+GcM8Zd5bLkD5Pug4FoGuIkX/ircNNh90WszmH7YVBvWAtV2wDf3I1ihQS2FfL8HIp
+         fpQcQK8n5JCX+/vlENNViNFuZK2sVKrExqA10gM2usT0vyrPU5lbb8YByvunkz4UeoMV
+         MTxMlZo7qx7DP0LrWxRP18TU0bPiJ16Juk0keKiTOBXbKB2YF2QX0pZCSFpfQnDVnjS3
+         82BJ7gn8lBKQKDRmGtK2CzIYFI53lTX0Z0dSddlBFZ42uIbry2FqXmJgPYP3fR8ZJwEi
+         Crxg==
+X-Gm-Message-State: ACgBeo2gEUT91MBtabkk0kbXHFaBaUH6Dp6dnoJl+cAwXl0su/Eoo7fo
+	UE/H8NuKe6L7FrF9sgNcVKMKz28Ry1RNDg==
 X-Google-Smtp-Source: 
- AA6agR59hcpHmotJO/fynVt0DRzDeoEZL6Tvk5gvSDS5mt4Tc4eixG+MdQZKNBANWnheY2HrkIHqzAX3qtp1/dam1I0=
-X-Received: by 2002:a0d:f204:0:b0:333:c23f:d793 with SMTP id
- b4-20020a0df204000000b00333c23fd793mr42615157ywf.71.1662443366143; Mon, 05
- Sep 2022 22:49:26 -0700 (PDT)
-MIME-Version: 1.0
-References: <1662368529-32226-1-git-send-email-wangmy@fujitsu.com>
- <1662368529-32226-4-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1662368529-32226-4-git-send-email-wangmy@fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 5 Sep 2022 22:49:00 -0700
-Message-ID: 
- <CAMKF1soXFjc3j_89fjkKHvSMKnyDEGFWH7EAx-N_1m=GEmTMQw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH] cli11: upgrade 1.9.1 -> 2.2.0
-To: wangmy <wangmy@fujitsu.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+ AA6agR5hqUQ+8J6JsyMbtGALOhUbFYDGD/5IbtsFA8HZVntSW8OiqZ2a12TEuH5nrMbRGiNm111jkQ==
+X-Received: by 2002:a05:651c:154b:b0:268:95fa:7f7a with SMTP id
+ y11-20020a05651c154b00b0026895fa7f7amr9254148ljp.237.1662476987219;
+        Tue, 06 Sep 2022 08:09:47 -0700 (PDT)
+Received: from steffen-desktop.appeartv.lan
+ (195-159-183-44.customer.powertech.no. [195.159.183.44])
+        by smtp.gmail.com with ESMTPSA id
+ d17-20020a2e3311000000b0025e6de76589sm1774473ljc.106.2022.09.06.08.09.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 06 Sep 2022 08:09:46 -0700 (PDT)
+From: Steffen Olsen <steffen.olsen@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Steffen Olsen <steffen.olsen@gmail.com>
+Subject: [meta-oe][PATCH] postgreql: Fix pg_config not working after
+ buildpaths patch
+Date: Tue,  6 Sep 2022 17:09:39 +0200
+Message-Id: <20220906150939.21426-1-steffen.olsen@gmail.com>
+X-Mailer: git-send-email 2.17.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 Sep 2022 05:49:33 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 06 Sep 2022 15:09:58 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98677
+ https://lists.openembedded.org/g/openembedded-devel/message/98678
 
-it seems this version is trying to download the catch framework during
-configure. This not ideal. Perhaps look into downloading everything
-build needs during do_fetch via multiple SRC_URI entries. Then
-substitute the cmake such that it does not download these files
-anymore.
+The patch for removing 'QA issues' with pg_config was incomplete, it did not
+change the number of items supposed to be in the configdata stucture. This leads to
+get_configdata function asserting, and pg_config command does not work
 
-See
+Signed-off-by: Steffen Olsen <steffen.olsen@gmail.com>
+---
+ .../0001-config_info.c-not-expose-build-info.patch    | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/1989/steps/14/logs/stdio
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-config_info.c-not-expose-build-info.patch b/meta-oe/recipes-dbs/postgresql/files/0001-config_info.c-not-expose-build-info.patch
+index 101a74877..52ca276da 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0001-config_info.c-not-expose-build-info.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0001-config_info.c-not-expose-build-info.patch
+@@ -30,7 +30,16 @@ diff --git a/src/common/config_info.c b/src/common/config_info.c
+ index e72e729..b482c20 100644
+ --- a/src/common/config_info.c
+ +++ b/src/common/config_info.c
+-@@ -123,74 +123,6 @@ get_configdata(const char *my_exec_path, size_t *configdata_len)
++@@ -38,7 +38,7 @@
++ 	int			i = 0;
++ 
++ 	/* Adjust this to match the number of items filled below */
++-	*configdata_len = 23;
+++	*configdata_len = 14;
++ 	configdata = (ConfigData *) palloc(*configdata_len * sizeof(ConfigData));
++ 
++ 	configdata[i].name = pstrdup("BINDIR");
++@@ -123,74 +123,6 @@
+  	configdata[i].setting = pstrdup(path);
+  	i++;
+  
+-- 
+2.17.1
 
-On Mon, Sep 5, 2022 at 2:02 AM wangmy <wangmy@fujitsu.com> wrote:
->
-> License-Update: Copyright year updated to 2022.
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  .../cli11/{cli11_1.9.1.bb => cli11_2.2.0.bb}                | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->  rename meta-oe/recipes-support/cli11/{cli11_1.9.1.bb => cli11_2.2.0.bb} (67%)
->
-> diff --git a/meta-oe/recipes-support/cli11/cli11_1.9.1.bb b/meta-oe/recipes-support/cli11/cli11_2.2.0.bb
-> similarity index 67%
-> rename from meta-oe/recipes-support/cli11/cli11_1.9.1.bb
-> rename to meta-oe/recipes-support/cli11/cli11_2.2.0.bb
-> index 7de3335abd..a035c27a3d 100644
-> --- a/meta-oe/recipes-support/cli11/cli11_1.9.1.bb
-> +++ b/meta-oe/recipes-support/cli11/cli11_2.2.0.bb
-> @@ -2,11 +2,11 @@ SUMMARY = "C++11 command line parser"
->  DESCRIPTION = "A command line parser for C++11 and beyond that provides a rich feature set with a simple and intuitive interface."
->  HOMEPAGE = "https://github.com/CLIUtils/CLI11"
->  LICENSE = "BSD-3-Clause"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=b73927b18d5c6cd8d2ed28a6ad539733"
-> -SRCREV = "5cb3efabce007c3a0230e4cc2e27da491c646b6c"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=9ad746b5f49c0fd53c08ca1faff1922c"
-> +SRCREV = "b9be5b9444772324459989177108a6a65b8b2769"
->  PV .= "+git${SRCPV}"
->
-> -SRC_URI += "gitsm://github.com/CLIUtils/CLI11;branch=v1;protocol=https"
-> +SRC_URI += "gitsm://github.com/CLIUtils/CLI11;branch=main;protocol=https"
->
->  S = "${WORKDIR}/git"
->
-> --
-> 2.25.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#98661): https://lists.openembedded.org/g/openembedded-devel/message/98661
-> Mute This Topic: https://lists.openembedded.org/mt/93474748/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
 
