@@ -2,61 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0890ECAAD3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE5CBC54EE9
 	for <webhook@archiver.kernel.org>; Wed,  7 Sep 2022 23:41:15 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com
- [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web11.2758.1662594071811253627
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com
+ [209.85.210.181])
+ by mx.groups.io with SMTP id smtpd.web12.2741.1662594073296777695
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Sep 2022 16:41:15 -0700
+ Wed, 07 Sep 2022 16:41:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=aHB6R/jF;
- spf=pass (domain: gmail.com, ip: 209.85.210.176,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=OjbNyj6o;
+ spf=pass (domain: gmail.com, ip: 209.85.210.181,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id y136so11211309pfb.3
+Received: by mail-pf1-f181.google.com with SMTP id d82so2529713pfd.10
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Sep 2022 16:41:14 -0700 (PDT)
+ Wed, 07 Sep 2022 16:41:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=7Vhm9kNo6Mmud5mrZ14pVSdEa3WkpA+OJh8lmIr91us=;
-        b=aHB6R/jFbdTzjLROqvY093JDjAtGSijj9UL65b0lpYcy1kWhkS5IJTcTAo1/dUBTO3
-         eVqbPO1/YnltPov9GuYkRgepSw2pb15yvzySeudVBmg0FG6ZpakZ34ARRFjJYcEqdQQv
-         +VlbIMvwTfeTXGhv8kTREc0Tp9T7XRMqrcvn9gqMVH1LOuy+UdjcEKygnGmJsSWKyMgF
-         YkVP+nnESvmhFVBSJ0JMXWzBA7SwpCUbbaZ0ZBtHy42mzShjDrrWxsUjqTtjpKtVI+sv
-         J0bhRBA+LzJeFBibEqtF9ZkN0s+qFRKDAMo0zTjrCIa4ZJ+Szacr6EszUBtRt59Ag8ld
-         MuWg==
+        bh=fffQkmT+JIz88MToxEwpthEI1vrjSDbcsMdSwxUNQA0=;
+        b=OjbNyj6o+lkvDzqAGLV4xESSazQ85+S8+4OxBhjMoXLU7bax0fD2ugn4cINdRxx2Fs
+         GlQRODoRMolethJdPoz0q40wtz7wwVFOG3CKOUBAcupghzMuiWALD4iMv82Bv318ds84
+         jZHtx7y5Ixh88bWHDXwSo5VbSEEMJM0NEutrAA+Zadp0JwWiVFh06XaVLGO4umXn/+9E
+         JQHXQWOm7FSWfxOo+qwdJ3IAHy1DD7gjWJr0NWczTo7AThc8CBT1zhV/txLU4oD/2jjB
+         YesayrYTgXqCozKulu3YkNd3J/SyrJ6B/f6E3VOxRUPqZPxdje4b1eGEZqaXpgtC8yDk
+         /upw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=7Vhm9kNo6Mmud5mrZ14pVSdEa3WkpA+OJh8lmIr91us=;
-        b=Oy5MeCYlkmDAsG3aJXYE5spDFGk2mvtVwFRFcsAs48J9iU+Z1MtaM47cz4HX0DY0oU
-         k7wm/wkzn8EAXQ+FhXK4svSgXTf2l737aVDdv71vZh3wr/irNEUwVN2RezURa6ER7BrW
-         d7i4/hLlhNPtIjZb8zeoncvxncQ0q9Cfzrs0enKU6+O+AKr8t6ZMh9DsPSsmJ0eyweWk
-         PQIau6WkjJtKK6rUKwLmZF+6R72lhTxz2JuZAPYwRFPKZZdxIj8KDxgGXNASj19kPvvJ
-         CXvmHNJKm+6glFLOCKQcOcOJPT6ZUydUqOKleduX3uwBS5d3SQziaSx2XHiYswjuWOsa
-         Zg1g==
-X-Gm-Message-State: ACgBeo1DS2JZ+svHB+64HIsbEAI51c5A3hZ31CzJsOsezqaiRGsJBqKg
-	yfy0MRU7mGNR1liIdR3jvHBCpS3TqeV3Tw==
+        bh=fffQkmT+JIz88MToxEwpthEI1vrjSDbcsMdSwxUNQA0=;
+        b=HYdIjIeUtGwM3RPhmCbobENBemlpB5caJtYfc982FYOpcztkYC6eQomPmJo6T6zeCY
+         oSzRphhnZga0bm69Ap6EwM0L3f9HKp96oQ9GrjDcoEM+lRInTBesEmhFA/rwDMGimd6M
+         pwk9gQeJhTywMhsC7kBSTb9YUUtUDjJQlQdD++MJyYxBervjxO1NJ+PHFtwQpHwEkbGh
+         PBlhq1zQbI4RYJP7bxe/CcRv8zpBLzAbqsPELTO8IZcaFCfOQQwYqY2yKaL68AHy8XE0
+         C9r1uJ/ANtN6cqirzvCuZSX8blF1/XKgHKpibCIyoYfqD0RXPwzTJqlPoAYnQTqiJGrZ
+         ZPKA==
+X-Gm-Message-State: ACgBeo1VNAQs5fE4MlNLgoqCaATDI3wAzHXolU9e+MaE2Q13RG4fCa60
+	b+/FzkBChSqo4itP03tWXVZsIkQSxOF4gQ==
 X-Google-Smtp-Source: 
- AA6agR4la3f952caF/LG7Tk29AqQeJo4qtID3fFB593hUBWLGVN3hmr8XkB+5X7yNKkonuFDYmIKmA==
-X-Received: by 2002:a62:3347:0:b0:53d:f935:9f01 with SMTP id
- z68-20020a623347000000b0053df9359f01mr6421453pfz.8.1662594074211;
-        Wed, 07 Sep 2022 16:41:14 -0700 (PDT)
+ AA6agR5ZmIuERAmgfUcfi51bq7tpJK/LTS8ZP8xeH+z+K+MGjgYKkM7kntIgROc8V/Xr/UoOeg7f0A==
+X-Received: by 2002:a62:30c7:0:b0:52f:9a31:5935 with SMTP id
+ w190-20020a6230c7000000b0052f9a315935mr6236362pfw.14.1662594072550;
+        Wed, 07 Sep 2022 16:41:12 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::1761])
         by smtp.gmail.com with ESMTPSA id
- ij5-20020a170902ab4500b0016c5306917fsm10276495plb.53.2022.09.07.16.41.13
+ ij5-20020a170902ab4500b0016c5306917fsm10276495plb.53.2022.09.07.16.41.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Sep 2022 16:41:13 -0700 (PDT)
+        Wed, 07 Sep 2022 16:41:12 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 12/22] passwdqc: Upgrade to 2.0.2
-Date: Wed,  7 Sep 2022 16:40:52 -0700
-Message-Id: <20220907234102.3312797-12-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 10/22] ntp: Fix check for pthread_detach
+Date: Wed,  7 Sep 2022 16:40:50 -0700
+Message-Id: <20220907234102.3312797-10-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220907234102.3312797-1-raj.khem@gmail.com>
 References: <20220907234102.3312797-1-raj.khem@gmail.com>
@@ -67,72 +67,66 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 07 Sep 2022 23:41:15 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98702
-
-License-Update: install-dependencies.sh and run-build-and-tests.sh are
-mentioned under GPL-2.0 but they are not included in release tarball
+ https://lists.openembedded.org/g/openembedded-devel/message/98700
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../passwdqc/passwdqc/makefile-add-ldflags.patch | 16 +++++++---------
- .../{passwdqc_1.3.1.bb => passwdqc_2.0.2.bb}     |  5 ++---
- 2 files changed, 9 insertions(+), 12 deletions(-)
- rename meta-oe/recipes-security/passwdqc/{passwdqc_1.3.1.bb => passwdqc_2.0.2.bb} (91%)
+ ...ix-types-in-check-for-pthread_detach.patch | 33 +++++++++++++++++++
+ .../recipes-support/ntp/ntp_4.2.8p15.bb       |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ntp/ntp/0001-sntp-Fix-types-in-check-for-pthread_detach.patch
 
-diff --git a/meta-oe/recipes-security/passwdqc/passwdqc/makefile-add-ldflags.patch b/meta-oe/recipes-security/passwdqc/passwdqc/makefile-add-ldflags.patch
-index e9023492e0..6e4803f4f3 100644
---- a/meta-oe/recipes-security/passwdqc/passwdqc/makefile-add-ldflags.patch
-+++ b/meta-oe/recipes-security/passwdqc/passwdqc/makefile-add-ldflags.patch
-@@ -4,19 +4,17 @@ Upstream-Status: Pending
- 
- Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
- 
--diff --git a/Makefile b/Makefile
--index 49d622d..cd17334 100644
- --- a/Makefile
- +++ b/Makefile
--@@ -48,18 +48,17 @@ CFLAGS = -Wall -W -O2
-- CFLAGS_lib = $(CFLAGS) -fPIC
-- CFLAGS_bin = $(CFLAGS) -fomit-frame-pointer
-+@@ -68,18 +68,17 @@ XGETTEXT = xgettext
-+ XGETTEXT_OPTS = --keyword=_ --keyword=P2_:1,1 --keyword=P3_:1,2 --language=C --add-comments
-+ MSGMERGE = msgmerge
-  
- -LDFLAGS =
-- LDFLAGS_shared = --shared
-- LDFLAGS_shared_LINUX = --shared
-- LDFLAGS_shared_SUN = -G
-- LDFLAGS_shared_HP = -b
-+ LDFLAGS_shared = $(LDFLAGS) --shared
-+ LDFLAGS_shared_LINUX = $(LDFLAGS) --shared
-+ LDFLAGS_shared_SUN = $(LDFLAGS) -G
-+ LDFLAGS_shared_HP = $(LDFLAGS) -b
-  LDFLAGS_lib = $(LDFLAGS_shared)
- -LDFLAGS_lib_LINUX = $(LDFLAGS_shared_LINUX) \
- +LDFLAGS_lib_LINUX = $(LDFLAGS) $(LDFLAGS_shared_LINUX) \
-diff --git a/meta-oe/recipes-security/passwdqc/passwdqc_1.3.1.bb b/meta-oe/recipes-security/passwdqc/passwdqc_2.0.2.bb
-similarity index 91%
-rename from meta-oe/recipes-security/passwdqc/passwdqc_1.3.1.bb
-rename to meta-oe/recipes-security/passwdqc/passwdqc_2.0.2.bb
-index b148fdcb59..de4bff8c79 100644
---- a/meta-oe/recipes-security/passwdqc/passwdqc_1.3.1.bb
-+++ b/meta-oe/recipes-security/passwdqc/passwdqc_2.0.2.bb
-@@ -25,13 +25,12 @@ inherit features_check
- REQUIRED_DISTRO_FEATURES = "pam"
- 
- LICENSE = "BSD-1-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=1b4af6f3d4ee079a38107366e93b334d"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=ac99c8678577a1c2f9f04cccee411d5d"
- 
- SRC_URI = "http://www.openwall.com/${BPN}/${BP}.tar.gz \
-            file://makefile-add-ldflags.patch \
-           "
--SRC_URI[md5sum] = "3878b57bcd3fdbcf3d4b362dbc6228b9"
--SRC_URI[sha256sum] = "d1fedeaf759e8a0f32d28b5811ef11b5a5365154849190f4b7fab670a70ffb14"
-+SRC_URI[sha256sum] = "ff1f505764c020f6a4484b1e0cc4fdbf2e3f71b522926d90b4709104ca0604ab"
- 
- # explicitly define LINUX_PAM in case DISTRO_FEATURES no pam
- # this package's pam_passwdqc.so needs pam
+diff --git a/meta-networking/recipes-support/ntp/ntp/0001-sntp-Fix-types-in-check-for-pthread_detach.patch b/meta-networking/recipes-support/ntp/ntp/0001-sntp-Fix-types-in-check-for-pthread_detach.patch
+new file mode 100644
+index 0000000000..ca15470ace
+--- /dev/null
++++ b/meta-networking/recipes-support/ntp/ntp/0001-sntp-Fix-types-in-check-for-pthread_detach.patch
+@@ -0,0 +1,33 @@
++From 864f43ae09d18b1114d5c894e836698743e4e44c Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 6 Sep 2022 21:36:35 -0700
++Subject: [PATCH] sntp: Fix types in check for pthread_detach
++
++New compilers are stricter and flag assigning NULL to pthread_t as error
++therefore using a pthread_t variable constructed from -1
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ sntp/m4/openldap-thread-check.m4 | 5 +----
++ 1 file changed, 1 insertion(+), 4 deletions(-)
++
++diff --git a/sntp/m4/openldap-thread-check.m4 b/sntp/m4/openldap-thread-check.m4
++index 7768a5c..b9e54ad 100644
++--- a/sntp/m4/openldap-thread-check.m4
+++++ b/sntp/m4/openldap-thread-check.m4
++@@ -262,10 +262,7 @@ pthread_rwlock_t rwlock;
++ 				dnl save the flags
++ 				AC_LINK_IFELSE([AC_LANG_PROGRAM([[
++ #include <pthread.h>
++-#ifndef NULL
++-#define NULL (void*)0
++-#endif
++-]], [[pthread_detach(NULL);]])],[ol_cv_func_pthread_detach=yes],[ol_cv_func_pthread_detach=no])
+++]], [[pthread_detach((pthread_t)-1);]])],[ol_cv_func_pthread_detach=yes],[ol_cv_func_pthread_detach=no])
++ 			])
++ 
++ 			if test $ol_cv_func_pthread_detach = no ; then
++-- 
++2.37.3
++
+diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb
+index a30f720bb5..50f5477f27 100644
+--- a/meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb
++++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p15.bb
+@@ -15,6 +15,7 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
+            file://reproducibility-fixed-path-to-posix-shell.patch \
+            file://0001-libntp-Do-not-use-PTHREAD_STACK_MIN-on-glibc.patch \
+            file://0001-test-Fix-build-with-new-compiler-defaults-to-fno-com.patch \
++           file://0001-sntp-Fix-types-in-check-for-pthread_detach.patch \
+            file://ntpd \
+            file://ntp.conf \
+            file://ntpdate \
 -- 
 2.37.3
 
