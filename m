@@ -2,75 +2,75 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E365C6FA83
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E32AC54EE9
 	for <webhook@archiver.kernel.org>; Wed,  7 Sep 2022 11:24:04 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.3])
- by mx.groups.io with SMTP id smtpd.web09.6512.1662549838571954515
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.66])
+ by mx.groups.io with SMTP id smtpd.web09.6514.1662549843580194819
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Sep 2022 04:23:59 -0700
+ Wed, 07 Sep 2022 04:24:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=QgnZQzku;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=F3L8+aKs;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.66,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1662549836; i=@fujitsu.com;
-	bh=gcXYTQVEi3sSn83tODjok+FfC97DXXSPE+iF55bhYBo=;
+	s=170520fj; t=1662549841; i=@fujitsu.com;
+	bh=QPql+ChTpydULRW4w+jarVML4zw2vEo1yns6IHHUGYQ=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=QgnZQzku/76JDJlrT5L7A+Dv1NX1AGxkLIsWXcs4qPjWuiV7HMHNxKGres8dGnCfK
-	 aAyoujxNl9Y7JNOcEwAwOx4kPs35UiqWEZwcfotXpCWw5JaVa1T3vGnApWG3WRdIMA
-	 YCN/TCtNqUzfaHz5KQ37gtqPKLGiDS+F4/0W+1pRprL9CifrOYcxSJARdp2bmFD7Yd
-	 RsXrWTw2x3LV6MnsD5icwI9WnJdNr4aYubNmii1eHpWyRYrl1ww2PQfLf6eZuNBowj
-	 anZDBa6TUTB1xZBejAiLwCcHYPZxL9pIkHrx6d4wGnf/tfhXqFLjvzKjhKC00LcbdW
-	 gd2ZxnlQJ23/g==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrBIsWRWlGSWpSXmKPExsViZ8ORpOtTL5F
-  s8GmDosXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvG95Q5LwV3uih07X7E0MJ7j6mLk4hASeMgo
-  ceDJHXYI5wqTROei2cwQzm5GieYJ+xm7GDk52ATUJKbfusEKYosI6Essnb2HGcRmFlCRePG7h
-  x3EFhYIkZhwbhETiM0CFD9w5yeYzSvgJHFl5RSwGgkBBYkpD9+D9XIKOEtsnfufDcQWAqo5Pm
-  E9VL2gxMmZT1gg5ktIHHzxghmiV1Fi9uVmFgi7QqJx+iEmCFtN4uq5TcwTGAVnIWmfhaR9ASP
-  TKkbrpKLM9IyS3MTMHF1DAwNdQ0NTXWNjXUNzS73EKt1EvdRS3fLU4hJdI73E8mK91OJiveLK
-  3OScFL281JJNjMBATilW3LyDceLKn3qHGCU5mJREeeO8JJKF+JLyUyozEosz4otKc1KLDzHKc
-  HAoSfBK1QDlBItS01Mr0jJzgFEFk5bg4FES4X1WC5TmLS5IzC3OTIdInWLU5Zj5te0AsxBLXn
-  5eqpQ471mQIgGQoozSPLgRsAi/xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmYl6EOaApPZl4
-  J3KZXQEcwAR2xNVAc5IiSRISUVAOTaPU+PqV7u4R38s3jWPT62q27Sb8nu88+1FzF4dv6IMqX
-  /+GWm9wS9oYppo/zpItjczyNFl2/YmB3vN//ntVb0xvfxNLP/ihb+O5X/EWXoFPB7ZGml25FK
-  pw7LnB/OdOlZ//+xYTZ76ntuLq0hrdku8JJlW+Mew+I576bO6Hy7xGGp0tXRvzWWDCdz+DDj4
-  S5F3oCPYXEnmo3KWqGqm+eFX1Nm/+1j8aaEMEZd9qNdnWGbVETflyrxuN+7OTnV8Hf9OzyeSd
-  kr3rz+8iJ8CYZmSK3PZM9L7yYn9mnsc1phfIk34UsCqF71leLLTj+syvn+IuWO9+O77mXv7n4
-  x44rVsY5kidt2yqvbdx9cy53nRJLcUaioRZzUXEiAG0C0ixrAwAA
+	b=F3L8+aKsO45Ul3HBISqPgjGLGY2s6QydfyI2re8R0Q3Zq4kk5JY3HTyneLG1dz1pV
+	 OnmdzSH3vUiH9Y4WDNCtptZ83nJVdLfhrmwPJOHJyWWc714xLigU+32BT8bGkYrnOj
+	 uUS7b5envwF6MEYImDB5OdFwvhBfXBzTwKhprDTRoaSPELmJ6OrtqzZ/uzI7ufK0cn
+	 2w4umqgomeW3jrIO9FdpQgv3ME5EtzyDaN+PfPQIxuEBOl+VTk66ws+KAsqZQw2icJ
+	 V4XFZGDSIG0Cq2hO1UFuEYWyKKjsGJdBP9UwYQYQYovt3hvgQIhOI6vuxNT3xJTVSH
+	 M3qANakrw00fA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrJIsWRWlGSWpSXmKPExsViZ8MxSTewXiL
+  ZYOJyJYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNePrvBvMBRO5Kl51+TYw7ufsYuTkEBJ4wijR
+  tUmqi5ELyL7OJPHsfwMLhLObUeLh+vtMIFVsAmoS02/dYAWxRQT0JZbO3sMMYjMLqEi8+N3DD
+  mILC8RJNH46DVbPAhRvaXgPVs8r4CTR37+NEcSWEFCQmPLwPVgvp4CzxNa5/9kgrnCSOD5hPR
+  NEvaDEyZlPWCDmS0gcfPGCGaJXUWL25WYWCLtConH6ISYIW03i6rlNzBMYBWchaZ+FpH0BI9M
+  qRqukosz0jJLcxMwcXUMDA11DQ1NdA10jE2O9xCrdRL3UUt3y1OISXUO9xPJivdTiYr3iytzk
+  nBS9vNSSTYzAEE4pZvi8g3FB30+9Q4ySHExKorxxXhLJQnxJ+SmVGYnFGfFFpTmpxYcYZTg4l
+  CR4pWqAcoJFqempFWmZOcB4gklLcPAoifA+qwVK8xYXJOYWZ6ZDpE4xKkqJ854FSQiAJDJK8+
+  DaYDF8iVFWSpiXkYGBQYinILUoN7MEVf4VozgHo5IwL0Md0BSezLwSuOmvgBYzAS3eGigOsrg
+  kESEl1cBU9nrXVmO3iemTi7vvix6U2eTr/UrgvUfb1suhfwJEYp9kHrmS0DE5SbtKlkVxwqSe
+  q1cYFJY0CMaXml77wVT5m2n7lg0/BJWbBBf2XQmI+rt4e+vb33n31mgXHPF3ypLz92Dn0Z154
+  YRJ0copf9Y4HCgWSXHS9puw7Hm+tHtS/PWUTBOed+tn2v5pzpKTYeDrXlm9Kv1k/alvUka8xW
+  c/nci95ruG4dXHGXmbfUz/xq9OCxaZEBw4dfaPgmP91lN+7znkESnWp2c8L/kx6+mJslx/U3X
+  Z3rmf+Ltk+Rze6Z9Pb1l0aPcmC3X2KD/LM2vktBbsT33ceZxvxSYTibB1ftH6x7h/BzyP+NeT
+  JBqlxFKckWioxVxUnAgAPuv5KlwDAAA=
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-15.tower-565.messagelabs.com!1662549836!143082!1
-X-Originating-IP: [62.60.8.98]
+X-Msg-Ref: server-15.tower-587.messagelabs.com!1662549841!482697!1
+X-Originating-IP: [62.60.8.146]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 14465 invoked from network); 7 Sep 2022 11:23:56 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-15.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 7 Sep 2022 11:23:56 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 450CA1AD
+Received: (qmail 23506 invoked from network); 7 Sep 2022 11:24:01 -0000
+Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
+  by server-15.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 7 Sep 2022 11:24:01 -0000
+Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 2F5761000C2
 	for <openembedded-devel@lists.openembedded.org>;
- Wed,  7 Sep 2022 12:23:56 +0100 (BST)
+ Wed,  7 Sep 2022 12:24:01 +0100 (BST)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121
  [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 3A48D1AC
+	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 23017100078
 	for <openembedded-devel@lists.openembedded.org>;
- Wed,  7 Sep 2022 12:23:56 +0100 (BST)
+ Wed,  7 Sep 2022 12:24:01 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Wed, 7 Sep 2022 12:23:54 +0100
+ (TLS) id 15.0.1497.32; Wed, 7 Sep 2022 12:23:59 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-google-api-core: upgrade 2.8.2 ->
- 2.10.0
-Date: Wed, 7 Sep 2022 19:23:18 +0800
-Message-ID: <1662549799-17908-4-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-google-api-python-client: upgrade
+ 2.57.0 -> 2.58.0
+Date: Wed, 7 Sep 2022 19:23:19 +0800
+Message-ID: <1662549799-17908-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1662549799-17908-1-git-send-email-wangmy@fujitsu.com>
 References: <1662549799-17908-1-git-send-email-wangmy@fujitsu.com>
@@ -85,42 +85,30 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 07 Sep 2022 11:24:04 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98684
-
-Changelog:
-============
-Features
---------
-    Add 'strict' to flatten_query_params to lower-case bools (#433) (83678e9)
-    Make grpc transcode logic work in terms of protobuf python objects (#428) (c3ad8ea)
-
-Bug Fixes
----------
-    Require python 3.7+ (#410) (7ddb8c0)
-    Restore support for grpcio-gcp (#418) (8c19609)
+ https://lists.openembedded.org/g/openembedded-devel/message/98685
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ogle-api-core_2.8.2.bb => python3-google-api-core_2.10.0.bb} | 2 +-
+ ...ent_2.57.0.bb => python3-google-api-python-client_2.58.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-google-api-core_2.8.2.bb => python3-google-api-core_2.10.0.bb} (87%)
+ rename meta-python/recipes-devtools/python/{python3-google-api-python-client_2.57.0.bb => python3-google-api-python-client_2.58.0.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-google-api-core_2.8.2.bb b/meta-python/recipes-devtools/python/python3-google-api-core_2.10.0.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-google-api-core_2.8.2.bb
-rename to meta-python/recipes-devtools/python/python3-google-api-core_2.10.0.bb
-index a2df7fb48a..470bc7fc50 100644
---- a/meta-python/recipes-devtools/python/python3-google-api-core_2.8.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-google-api-core_2.10.0.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-python/recipes-devtools/python/python3-google-api-python-client_2.57.0.bb b/meta-python/recipes-devtools/python/python3-google-api-python-client_2.58.0.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-google-api-python-client_2.57.0.bb
+rename to meta-python/recipes-devtools/python/python3-google-api-python-client_2.58.0.bb
+index fdbad826bd..e473c7b82f 100644
+--- a/meta-python/recipes-devtools/python/python3-google-api-python-client_2.57.0.bb
++++ b/meta-python/recipes-devtools/python/python3-google-api-python-client_2.58.0.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/googleapis/google-api-python-client"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+ 
+-SRC_URI[sha256sum] = "ec4412545b0c5978a833bb03993a46121ad2c700f32af0cba23f8439b3f5fb02"
++SRC_URI[sha256sum] = "3af6a181763a8cb18f2b9d973760ba32e4fe2af09e4ce06626ff6a53777c33fa"
  
  inherit pypi setuptools3
  
--SRC_URI[sha256sum] = "06f7244c640322b508b125903bb5701bebabce8832f85aba9335ec00b3d02edc"
-+SRC_URI[sha256sum] = "1d053734f14591939e7764e99c31253fed46bf2578da0dcd82821f17a6dd991c"
- 
- RDEPENDS:${PN} += "\
-     ${PYTHON_PN}-asyncio \
 -- 
 2.25.1
 
