@@ -1,102 +1,205 @@
-Return-Path: <steffen.olsen@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55DE0ECAAD5
-	for <webhook@archiver.kernel.org>; Tue,  6 Sep 2022 15:09:58 +0000 (UTC)
-Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com
- [209.85.208.171])
- by mx.groups.io with SMTP id smtpd.web10.283.1662476989471521792
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BABDAECAAA1
+	for <webhook@archiver.kernel.org>; Wed,  7 Sep 2022 01:37:31 +0000 (UTC)
+Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
+ [195.245.230.65])
+ by mx.groups.io with SMTP id smtpd.web12.2791.1662514642151597383
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Sep 2022 08:09:49 -0700
+ Tue, 06 Sep 2022 18:37:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=C68lDURe;
- spf=pass (domain: gmail.com, ip: 209.85.208.171,
- mailfrom: steffen.olsen@gmail.com)
-Received: by mail-lj1-f171.google.com with SMTP id z23so12680959ljk.1
-        for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Sep 2022 08:09:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=koccWTuqMH5y27cQ0+TZV1nX4pf17KngLYifEWPmWiE=;
-        b=C68lDURefxob2PxeA61zDzingF+530RFKzAze7Jj+nba+sE/v60lNLllToQIdoUNWM
-         k6MkSNIoiF4pKhRShpg3eLovLyHqyetfvVmp5OsX75+oMpxoasF+68+a96YHA7MkNMie
-         M1BMAnLAWlKDbFyfA8PAdy5QkffE+cAJNZHXJs0bplNWwEhcVGumlv9M6fuf3KtZEwSM
-         dBZ1CODfI6hZTjgOFTjj6PZ6wQJFwHaqiJe8c46vr7lFaQvA7Kt+BvFVw8XfQB8Y9kh6
-         N0dPzcx2sd8YkeYW9jHcmGrCRPWQ/ts5W/cqWQoSuRQOE8WkYEw4nZRXBuuhuHg8rCqM
-         0Njw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date;
-        bh=koccWTuqMH5y27cQ0+TZV1nX4pf17KngLYifEWPmWiE=;
-        b=YfWHPRwkQmTzyZs9AQ66phQJnOkqZp8N5QKGvsKaRiWWHaA8iGk8AdNE5k2XHCq2Jf
-         0I+GcM8Zd5bLkD5Pug4FoGuIkX/ircNNh90WszmH7YVBvWAtV2wDf3I1ihQS2FfL8HIp
-         fpQcQK8n5JCX+/vlENNViNFuZK2sVKrExqA10gM2usT0vyrPU5lbb8YByvunkz4UeoMV
-         MTxMlZo7qx7DP0LrWxRP18TU0bPiJ16Juk0keKiTOBXbKB2YF2QX0pZCSFpfQnDVnjS3
-         82BJ7gn8lBKQKDRmGtK2CzIYFI53lTX0Z0dSddlBFZ42uIbry2FqXmJgPYP3fR8ZJwEi
-         Crxg==
-X-Gm-Message-State: ACgBeo2gEUT91MBtabkk0kbXHFaBaUH6Dp6dnoJl+cAwXl0su/Eoo7fo
-	UE/H8NuKe6L7FrF9sgNcVKMKz28Ry1RNDg==
-X-Google-Smtp-Source: 
- AA6agR5hqUQ+8J6JsyMbtGALOhUbFYDGD/5IbtsFA8HZVntSW8OiqZ2a12TEuH5nrMbRGiNm111jkQ==
-X-Received: by 2002:a05:651c:154b:b0:268:95fa:7f7a with SMTP id
- y11-20020a05651c154b00b0026895fa7f7amr9254148ljp.237.1662476987219;
-        Tue, 06 Sep 2022 08:09:47 -0700 (PDT)
-Received: from steffen-desktop.appeartv.lan
- (195-159-183-44.customer.powertech.no. [195.159.183.44])
-        by smtp.gmail.com with ESMTPSA id
- d17-20020a2e3311000000b0025e6de76589sm1774473ljc.106.2022.09.06.08.09.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Sep 2022 08:09:46 -0700 (PDT)
-From: Steffen Olsen <steffen.olsen@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Steffen Olsen <steffen.olsen@gmail.com>
-Subject: [meta-oe][PATCH] postgreql: Fix pg_config not working after
- buildpaths patch
-Date: Tue,  6 Sep 2022 17:09:39 +0200
-Message-Id: <20220906150939.21426-1-steffen.olsen@gmail.com>
-X-Mailer: git-send-email 2.17.1
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=i1ScEO7x;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.65,
+ mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1662514640; i=@fujitsu.com;
+	bh=kSYatWAP6Xtmk+yBTMbGFRgx+p2fYq8q0b/uWGG5FZU=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=i1ScEO7x59HvQT2ERbdPJ19i6kTh5X1kROU0DeSpjF4OVwpORpT1TJsASFjTpGCbT
+	 B/2RsuAss/gfGVwWMggav6SINNq2aqzRazZpez/Z4a7ZbCB+VJFQF1QP0N+ByjL09r
+	 87+7l8ZgTPDfs3+C1wfmP34097QFXd0mJBVP6eMUY3eiW9YHjClqEv4l5V2zRTiXUm
+	 TvGDDkjzYp4M3/m4JPWgJ5wteBsIsqxfGLIy89E/RBfVHHSzoDi7pC+JjR3eds5Saj
+	 k0U7XuOEg2HuKjaJTYYwElN+tSRZXl3D9+Kr3DG6A41L4zM9AovQfpFk6KgS7DdtmV
+	 bOyBbBywCLpMA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrAIsWRWlGSWpSXmKPExsViZ8OxWff8V/F
+  kg0fN1hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bKBzdYCi6qVPRO/cncwHhfoYuRk0NI4CGj
+  xLx10V2MXED2ZSaJ3huTmSGc3YwSL99NZAWpYhNQk5h+6waYLSKgL7F09h5mEJtZQEXixe8ed
+  hBbWMBB4nfjSzCbBSj+9dRhMJtXwEniwrztYL0SAgoSUx6+Z4aIC0qcnPmEBWKOhMTBFy+YIW
+  oUJWZfbmaBsCskGqcfYoKw1SSuntvEPIGRfxaS9llI2hcwMq1itEoqykzPKMlNzMzRNTQw0DU
+  0NNU11DUyNNdLrNJN1Est1S1PLS7RNdRLLC/WSy0u1iuuzE3OSdHLSy3ZxAgMypRixps7GFv7
+  fuodYpTkYFIS5VW9IZ4sxJeUn1KZkVicEV9UmpNafIhRhoNDSYI35AlQTrAoNT21Ii0zBxghM
+  GkJDh4lEd6br4HSvMUFibnFmekQqVOM9hxXr1zZy8wxdfa//cwcy8HkzK9tB5iFWPLy81KlxH
+  k5vgC1CYC0ZZTmwQ2FRfQlRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSsK8hz8CTeHJzCuB2/0
+  K6CwmoLO2BoKdVZKIkJJqYNrTtFkpZ3Vnjq6x7PNJS9pkJXQa/v5X06zJW79V6+udr49OHS6f
+  PeN6l8Wz54sfNr09wiEsXndZ6dUS3lWf/z/fYFvIqVeal7sj437krKTSmYoVLnKLZvBnZXa6n
+  sj8YLngjOeqNxxrV/I+2rRw7jOGPYfE2028Gxd+vWeae7gz6/5vUa3lBes0/wiuO3Huec3h9p
+  Nb50aGbT6x/I554OJUjrUncv761yY8bJy2PMwpL256zp4a9uW7/38LPK1+NOylak/MnKj/8za
+  Hn/U9uzgxUuR1MldD05Fz/y5XhEwOWvWoNX1Oe+AC9cnrp7JNrU6vbJ/H7OGedqkwbH/d/QL2
+  S+zH8w7uj1TfIsIW3sqtxFKckWioxVxUnAgA8/HtFmMDAAA=
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-17.tower-587.messagelabs.com!1662514639!293876!1
+X-Originating-IP: [62.60.8.179]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.87.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 32606 invoked from network); 7 Sep 2022 01:37:19 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-17.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 7 Sep 2022 01:37:19 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 95485150
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed,  7 Sep 2022 02:37:19 +0100 (BST)
+Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121
+ [10.183.43.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 8897C73
+	for <openembedded-devel@lists.openembedded.org>;
+ Wed,  7 Sep 2022 02:37:19 +0100 (BST)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Wed, 7 Sep 2022 02:37:17 +0100
+From: Wang Mingyu <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH v2] cli11: upgrade 1.9.1 -> 2.2.0
+Date: Wed, 7 Sep 2022 09:37:01 +0800
+Message-ID: <1662514621-14399-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM121.r01.fujitsu.local (10.183.43.173)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 Sep 2022 15:09:58 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 Sep 2022 01:37:31 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98678
+ https://lists.openembedded.org/g/openembedded-devel/message/98679
 
-The patch for removing 'QA issues' with pg_config was incomplete, it did not
-change the number of items supposed to be in the configdata stucture. This leads to
-get_configdata function asserting, and pg_config command does not work
+License-Update: Copyright year updated to 2022.
 
-Signed-off-by: Steffen Olsen <steffen.olsen@gmail.com>
+0001-Do-not-download-the-catch-framework-during-configure.patch
+added to download the catch framework before configure.
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../0001-config_info.c-not-expose-build-info.patch    | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+ ...the-catch-framework-during-configure.patch | 41 +++++++++++++++++++
+ meta-oe/recipes-support/cli11/cli11_1.9.1.bb  | 17 --------
+ meta-oe/recipes-support/cli11/cli11_2.2.0.bb  | 25 +++++++++++
+ 3 files changed, 66 insertions(+), 17 deletions(-)
+ create mode 100644 meta-oe/recipes-support/cli11/cli11/0001-Do-not-download-the-catch-framework-during-configure.patch
+ delete mode 100644 meta-oe/recipes-support/cli11/cli11_1.9.1.bb
+ create mode 100644 meta-oe/recipes-support/cli11/cli11_2.2.0.bb
 
-diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-config_info.c-not-expose-build-info.patch b/meta-oe/recipes-dbs/postgresql/files/0001-config_info.c-not-expose-build-info.patch
-index 101a74877..52ca276da 100644
---- a/meta-oe/recipes-dbs/postgresql/files/0001-config_info.c-not-expose-build-info.patch
-+++ b/meta-oe/recipes-dbs/postgresql/files/0001-config_info.c-not-expose-build-info.patch
-@@ -30,7 +30,16 @@ diff --git a/src/common/config_info.c b/src/common/config_info.c
- index e72e729..b482c20 100644
- --- a/src/common/config_info.c
- +++ b/src/common/config_info.c
--@@ -123,74 +123,6 @@ get_configdata(const char *my_exec_path, size_t *configdata_len)
-+@@ -38,7 +38,7 @@
-+ 	int			i = 0;
+diff --git a/meta-oe/recipes-support/cli11/cli11/0001-Do-not-download-the-catch-framework-during-configure.patch b/meta-oe/recipes-support/cli11/cli11/0001-Do-not-download-the-catch-framework-during-configure.patch
+new file mode 100644
+index 0000000000..7e6611b6a8
+--- /dev/null
++++ b/meta-oe/recipes-support/cli11/cli11/0001-Do-not-download-the-catch-framework-during-configure.patch
+@@ -0,0 +1,41 @@
++From 93557d5c5acf9ebb2c0fa708658e1d36621dd23a Mon Sep 17 00:00:00 2001
++From: Wang Mingyu <wangmy@fujitsu.com>
++Date: Wed, 7 Sep 2022 10:05:15 +0900
++Subject: [PATCH] Do not download the catch framework during configure.
++
++Upstream-Status: Inappropriate [configuration]
++
++Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
++---
++ tests/CMakeLists.txt | 15 ---------------
++ 1 file changed, 15 deletions(-)
++
++diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
++index 80c4f6a..ae210db 100644
++--- a/tests/CMakeLists.txt
+++++ b/tests/CMakeLists.txt
++@@ -74,21 +74,6 @@ if(Catch2_FOUND)
++   endif()
++   message(STATUS "Found Catch2")
++   target_link_libraries(catch_main PUBLIC Catch2::Catch2)
++-else()
++-  message(STATUS "Downloading Catch2")
++-
++-  # FetchContent would be better, but requires newer CMake.
++-  file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/catch2")
++-  set(url https://github.com/philsquared/Catch/releases/download/v2.13.7/catch.hpp)
++-  file(
++-    DOWNLOAD ${url} "${CMAKE_CURRENT_BINARY_DIR}/catch2/catch.hpp"
++-    STATUS status
++-    EXPECTED_HASH SHA256=ea379c4a3cb5799027b1eb451163dff065a3d641aaba23bf4e24ee6b536bd9bc)
++-  list(GET status 0 error)
++-  if(error)
++-    message(FATAL_ERROR "Could not download ${url}, and Catch2 not found on your system.")
++-  endif()
++-  target_include_directories(catch_main PUBLIC "${CMAKE_CURRENT_BINARY_DIR}")
++ endif()
 + 
-+ 	/* Adjust this to match the number of items filled below */
-+-	*configdata_len = 23;
-++	*configdata_len = 14;
-+ 	configdata = (ConfigData *) palloc(*configdata_len * sizeof(ConfigData));
-+ 
-+ 	configdata[i].name = pstrdup("BINDIR");
-+@@ -123,74 +123,6 @@
-  	configdata[i].setting = pstrdup(path);
-  	i++;
-  
++ # Target must already exist
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-support/cli11/cli11_1.9.1.bb b/meta-oe/recipes-support/cli11/cli11_1.9.1.bb
+deleted file mode 100644
+index 7de3335abd..0000000000
+--- a/meta-oe/recipes-support/cli11/cli11_1.9.1.bb
++++ /dev/null
+@@ -1,17 +0,0 @@
+-SUMMARY = "C++11 command line parser"
+-DESCRIPTION = "A command line parser for C++11 and beyond that provides a rich feature set with a simple and intuitive interface."
+-HOMEPAGE = "https://github.com/CLIUtils/CLI11"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=b73927b18d5c6cd8d2ed28a6ad539733"
+-SRCREV = "5cb3efabce007c3a0230e4cc2e27da491c646b6c"
+-PV .= "+git${SRCPV}"
+-
+-SRC_URI += "gitsm://github.com/CLIUtils/CLI11;branch=v1;protocol=https"
+-
+-S = "${WORKDIR}/git"
+-
+-inherit cmake
+-inherit ptest
+-
+-# cli11 is a header only C++ library, so the main package will be empty.
+-RDEPENDS:${PN}-dev = ""
+diff --git a/meta-oe/recipes-support/cli11/cli11_2.2.0.bb b/meta-oe/recipes-support/cli11/cli11_2.2.0.bb
+new file mode 100644
+index 0000000000..53a57489fe
+--- /dev/null
++++ b/meta-oe/recipes-support/cli11/cli11_2.2.0.bb
+@@ -0,0 +1,25 @@
++SUMMARY = "C++11 command line parser"
++DESCRIPTION = "A command line parser for C++11 and beyond that provides a rich feature set with a simple and intuitive interface."
++HOMEPAGE = "https://github.com/CLIUtils/CLI11"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=9ad746b5f49c0fd53c08ca1faff1922c"
++SRCREV = "b9be5b9444772324459989177108a6a65b8b2769"
++PV .= "+git${SRCPV}"
++
++SRC_URI += "gitsm://github.com/CLIUtils/CLI11;branch=main;protocol=https \
++            https://github.com/philsquared/Catch/releases/download/v2.13.7/catch.hpp \
++            file://0001-Do-not-download-the-catch-framework-during-configure.patch"
++
++SRC_URI[sha256sum] = "ea379c4a3cb5799027b1eb451163dff065a3d641aaba23bf4e24ee6b536bd9bc"
++S = "${WORKDIR}/git"
++
++do_configure:prepend() {
++    mkdir -p ${S}/tests/catch2
++    cp ${DL_DIR}/catch.hpp ${S}/tests/catch2/catch.hpp 
++}
++
++inherit cmake
++inherit ptest
++
++# cli11 is a header only C++ library, so the main package will be empty.
++RDEPENDS:${PN}-dev = ""
 -- 
-2.17.1
+2.25.1
 
 
