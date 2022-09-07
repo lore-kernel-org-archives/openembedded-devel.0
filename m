@@ -2,62 +2,62 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DA5F4C6FA8D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DC50EC6FA89
 	for <webhook@archiver.kernel.org>; Wed,  7 Sep 2022 23:41:15 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com
- [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web11.2758.1662594071811253627
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
+ [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.web09.2844.1662594070794028296
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Sep 2022 16:41:11 -0700
+ Wed, 07 Sep 2022 16:41:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=PBdqQqHo;
- spf=pass (domain: gmail.com, ip: 209.85.210.176,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=fU3gIK8F;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178,
  mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id y136so11211176pfb.3
+Received: by mail-pl1-f178.google.com with SMTP id d12so16113141plr.6
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Sep 2022 16:41:11 -0700 (PDT)
+ Wed, 07 Sep 2022 16:41:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=bdZwj+Gr+YOUjlKjTfgFEt1yEzjoozqKYpN3jU7stL4=;
-        b=PBdqQqHo/19oH92+ai+v3GRWZEcTEksMj5T7SV8qP4HYeTezmgm8NLy3zHYGHM5seU
-         2VtkQpV5vFo7T+lpik/tB/tvLVIC9i/B5F79pTB7LSnpLj3UFT3COb3k8zSuNDcOqMk7
-         KoBIXqexNXzcIRJhgQ1YmXBM9eOiottDdMvBhPQU5uQgApbwQxHWrWWyesegt73iE0Q1
-         X2I8t+EBbxt35h5KDxKqIyamJ47ZgCQbQbf4jDIcRMSM9sboMyQgK4G/zaSTTqQM47na
-         9e32+zzn4fea+DBUqqEJ5vy3jByT+loCjwixJ7pJ7FKWzOsU2O2D3RQxmXLwO5xc3V5j
-         N+9g==
+        bh=Bz5Ud1fLt1polYXaOgWS9jnm57hQyNVxhUKYAlkxxJI=;
+        b=fU3gIK8FYkZyaAypxtCnCWydRVHM5MoS4GdgvPG1o4/9v3WehD3DeRQYrSn29cEuvn
+         4j9Dvs6bKJiGU+fkd4ba07KcUkAJHPgc8cs3w4OKWX0NObfFhQ//TaK0w/xBauKCWyjA
+         3W/HbyYJhy7Z1E/Mi0SUENcwhh3TTkwSwEGeme8NBwC0SoJ/JFsBH9/HpFYWdWMI5OBP
+         4GB06iWE5E3cy9VpZfBjZouBXhcwpPGXp7PCt9CZ4lXcYhVV3mih2YrgPJImAbWXEEYV
+         BynndOXhZppst+KdHncjCwSnhswc8bfXmhvOv2g/M9P3e+jzydEZjCHPc1u4Q8+jVxxj
+         GOmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=bdZwj+Gr+YOUjlKjTfgFEt1yEzjoozqKYpN3jU7stL4=;
-        b=SozXDsLaVkByIeOLuoguSAF/cuzvHo0RYnhypmBfgPr9bOrllIyaq8Q/wYci0FUd4i
-         lGl0aV+CiZqYxv9lK4VtmAii8Pe2UNa0mIIXGno3vGWKC8ks0pJt5jMI7np9rL5PvTV1
-         52VbM+E0vSwqG9mnIPduFMW7OydX+ZxHYeWJJjQqyOIAJ/YTkRLB0wM7o/dIfC8UR9fq
-         DLnoZQCITMORPuHRUkTW33nwDTo3L89ZB39n0TIVvbpb9ISU23BRcmYUEeOheEAJ5L1o
-         0y2DbUwjLsp+2knwAJA2guj4SdAMlYDkHwZWF5ahdkPwevXaNO8kmgW521aBeXDqn65Z
-         5qNA==
-X-Gm-Message-State: ACgBeo3iTUHCtTc046DGjEL4k33amXQK806hqE2nDEixwmE1hT/Rk5Fv
-	VtkHX4RXPPhHcnDiCEJ1SI4OfXpMMYwj6Q==
+        bh=Bz5Ud1fLt1polYXaOgWS9jnm57hQyNVxhUKYAlkxxJI=;
+        b=rRRsHfFaqIwlK2sk0jQhYlCazXzr5kqX+Yb6HAUJtTar9At4cKSOQptSxsfm39CWyp
+         rbPu4HGmMw1p25ydLVFBWIGUdqdJEeXktpf6nAeXceCNG4nSX8oTyIbLfwVyCbs734Ey
+         nMHDCnSwxwSXbEK09Tn+JfOBBNq1xVdp87hheBsV0xJ2g7QmR/M1OUfb1TB3qHoygFRO
+         tUGySPPx7gvoRRxTOOFhYB13q+1EiabDSI3V18H9e6yHxcJgLB2Sk5A3fZDWmD3Jrlwk
+         vLZHh27yCdHL1hyBFW+uKhT0BCG0h/WHhNYPMSEg0mzIfupP8j+Boodej8xO8TLGjo6K
+         sBog==
+X-Gm-Message-State: ACgBeo158DThj9zd3GIbS+S3idBPHkr+k8uKAT093CB6qH+ZnhbLpOAA
+	ARsrkaXGQzRC46nC8MPAmxGxQEr3ZXOGeQ==
 X-Google-Smtp-Source: 
- AA6agR4WthN3g9MKsVRJT537mdieIFxGSDjacO7iz59kvxPSzUuhXzRfmWauzyD17lGusqqQ/kgv4w==
-X-Received: by 2002:a05:6a00:1a14:b0:52d:3e35:5b38 with SMTP id
- g20-20020a056a001a1400b0052d3e355b38mr6169828pfv.11.1662594070895;
+ AA6agR7FT7xwSa3oEZ5uY8aZPudtXtGnWrg/w9UpyLd0x4hRDbJWIe62FceQdX3739+vAtOXDhYZIw==
+X-Received: by 2002:a17:903:41c3:b0:176:b990:6c28 with SMTP id
+ u3-20020a17090341c300b00176b9906c28mr6137043ple.94.1662594070041;
         Wed, 07 Sep 2022 16:41:10 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::1761])
         by smtp.gmail.com with ESMTPSA id
- ij5-20020a170902ab4500b0016c5306917fsm10276495plb.53.2022.09.07.16.41.10
+ ij5-20020a170902ab4500b0016c5306917fsm10276495plb.53.2022.09.07.16.41.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Sep 2022 16:41:10 -0700 (PDT)
+        Wed, 07 Sep 2022 16:41:09 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 08/22] cli11: upgrade 1.9.1 -> 2.2.0
-Date: Wed,  7 Sep 2022 16:40:48 -0700
-Message-Id: <20220907234102.3312797-8-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 07/22] sblim-sfcb: Include config.h before using
+ CONFIG_ERROR_H
+Date: Wed,  7 Sep 2022 16:40:47 -0700
+Message-Id: <20220907234102.3312797-7-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220907234102.3312797-1-raj.khem@gmail.com>
 References: <20220907234102.3312797-1-raj.khem@gmail.com>
@@ -68,127 +68,94 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 07 Sep 2022 23:41:15 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98698
+ https://lists.openembedded.org/g/openembedded-devel/message/98697
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+Fix use before definition case.
 
-License-Update: Copyright year updated to 2022.
-
-0001-Do-not-download-the-catch-framework-during-configure.patch
-added to download the catch framework before configure.
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...the-catch-framework-during-configure.patch | 41 +++++++++++++++++++
- meta-oe/recipes-support/cli11/cli11_1.9.1.bb  | 17 --------
- meta-oe/recipes-support/cli11/cli11_2.2.0.bb  | 25 +++++++++++
- 3 files changed, 66 insertions(+), 17 deletions(-)
- create mode 100644 meta-oe/recipes-support/cli11/cli11/0001-Do-not-download-the-catch-framework-during-configure.patch
- delete mode 100644 meta-oe/recipes-support/cli11/cli11_1.9.1.bb
- create mode 100644 meta-oe/recipes-support/cli11/cli11_2.2.0.bb
+ ...d-for-error.h-when-it-does-not-exist.patch | 27 +++++++++----------
+ 1 file changed, 12 insertions(+), 15 deletions(-)
 
-diff --git a/meta-oe/recipes-support/cli11/cli11/0001-Do-not-download-the-catch-framework-during-configure.patch b/meta-oe/recipes-support/cli11/cli11/0001-Do-not-download-the-catch-framework-during-configure.patch
-new file mode 100644
-index 0000000000..7e6611b6a8
---- /dev/null
-+++ b/meta-oe/recipes-support/cli11/cli11/0001-Do-not-download-the-catch-framework-during-configure.patch
-@@ -0,0 +1,41 @@
-+From 93557d5c5acf9ebb2c0fa708658e1d36621dd23a Mon Sep 17 00:00:00 2001
-+From: Wang Mingyu <wangmy@fujitsu.com>
-+Date: Wed, 7 Sep 2022 10:05:15 +0900
-+Subject: [PATCH] Do not download the catch framework during configure.
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-+---
-+ tests/CMakeLists.txt | 15 ---------------
-+ 1 file changed, 15 deletions(-)
-+
-+diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
-+index 80c4f6a..ae210db 100644
-+--- a/tests/CMakeLists.txt
-++++ b/tests/CMakeLists.txt
-+@@ -74,21 +74,6 @@ if(Catch2_FOUND)
-+   endif()
-+   message(STATUS "Found Catch2")
-+   target_link_libraries(catch_main PUBLIC Catch2::Catch2)
-+-else()
-+-  message(STATUS "Downloading Catch2")
-+-
-+-  # FetchContent would be better, but requires newer CMake.
-+-  file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/catch2")
-+-  set(url https://github.com/philsquared/Catch/releases/download/v2.13.7/catch.hpp)
-+-  file(
-+-    DOWNLOAD ${url} "${CMAKE_CURRENT_BINARY_DIR}/catch2/catch.hpp"
-+-    STATUS status
-+-    EXPECTED_HASH SHA256=ea379c4a3cb5799027b1eb451163dff065a3d641aaba23bf4e24ee6b536bd9bc)
-+-  list(GET status 0 error)
-+-  if(error)
-+-    message(FATAL_ERROR "Could not download ${url}, and Catch2 not found on your system.")
-+-  endif()
-+-  target_include_directories(catch_main PUBLIC "${CMAKE_CURRENT_BINARY_DIR}")
-+ endif()
+diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-Replace-need-for-error.h-when-it-does-not-exist.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-Replace-need-for-error.h-when-it-does-not-exist.patch
+index e723050237..9bb9f44344 100644
+--- a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-Replace-need-for-error.h-when-it-does-not-exist.patch
++++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb/0001-Replace-need-for-error.h-when-it-does-not-exist.patch
+@@ -16,8 +16,6 @@ Upstream-Status: Pending
+  trace.c       |  4 +++-
+  5 files changed, 24 insertions(+), 5 deletions(-)
+ 
+-diff --git a/brokerUpc.c b/brokerUpc.c
+-index 17cbd9b..fe2b347 100644
+ --- a/brokerUpc.c
+ +++ b/brokerUpc.c
+ @@ -20,8 +20,11 @@
+@@ -33,8 +31,6 @@ index 17cbd9b..fe2b347 100644
+  #include "support.h"
+  #include "native.h"
+  #include <sfcCommon/utilft.h>
+-diff --git a/configure.ac b/configure.ac
+-index ab2964e..d4915a1 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+ @@ -517,7 +517,7 @@ fi
+@@ -46,8 +42,6 @@ index ab2964e..d4915a1 100644
+  AC_CHECK_HEADERS([cmpi/cmpimacs.h cmpi/cmpift.h cmpi/cmpidt.h],[],[AC_MSG_ERROR([Could not find required CPMI header.])])
+  
+  # Checks for typedefs, structures, and compiler characteristics.
+-diff --git a/httpAdapter.c b/httpAdapter.c
+-index 2719e6c..e768972 100644
+ --- a/httpAdapter.c
+ +++ b/httpAdapter.c
+ @@ -71,7 +71,9 @@
+@@ -61,11 +55,15 @@ index 2719e6c..e768972 100644
+  /* should probably go into cimRequest.h */
+  #define CIM_PROTOCOL_ANY     0
+  #define CIM_PROTOCOL_CIM_XML 1
+-diff --git a/support.c b/support.c
+-index c7bba8b..5b3eef1 100644
+ --- a/support.c
+ +++ b/support.c
+-@@ -32,7 +32,11 @@
++@@ -27,16 +27,20 @@
++  *  @sa native.h
++  */
 + 
-+ # Target must already exist
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-support/cli11/cli11_1.9.1.bb b/meta-oe/recipes-support/cli11/cli11_1.9.1.bb
-deleted file mode 100644
-index 7de3335abd..0000000000
---- a/meta-oe/recipes-support/cli11/cli11_1.9.1.bb
-+++ /dev/null
-@@ -1,17 +0,0 @@
--SUMMARY = "C++11 command line parser"
--DESCRIPTION = "A command line parser for C++11 and beyond that provides a rich feature set with a simple and intuitive interface."
--HOMEPAGE = "https://github.com/CLIUtils/CLI11"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=b73927b18d5c6cd8d2ed28a6ad539733"
--SRCREV = "5cb3efabce007c3a0230e4cc2e27da491c646b6c"
--PV .= "+git${SRCPV}"
+++#include "config.h"
++ #include <stdio.h>
++ #include <dlfcn.h>
+  #include "support.h"
+  #include <stdio.h>
+  #include <stdlib.h>
+@@ -77,7 +75,11 @@ index c7bba8b..5b3eef1 100644
+  #include <errno.h>
+  #include "native.h"
+  #include "trace.h"
+-@@ -331,17 +335,25 @@ loadQualifierDeclMI(const char *provider,
++-#include "config.h"
++ #include "control.h"
++ #include <pthread.h>
++ 
++@@ -331,17 +335,25 @@ loadQualifierDeclMI(const char *provider
+    _SFCB_RETURN(NULL);
+  };
+  
+@@ -104,8 +106,6 @@ index c7bba8b..5b3eef1 100644
+  /**
+   * flag to ensure MM is initialized only once
+   */
+-diff --git a/trace.c b/trace.c
+-index d7f30db..438af46 100644
+ --- a/trace.c
+ +++ b/trace.c
+ @@ -279,7 +279,9 @@ _sfcb_trap(int tn)
+@@ -119,6 +119,3 @@ index d7f30db..438af46 100644
+  sigHandler     *
+  setSignal(int sn, sigHandler * sh, int flags)
+  {
+--- 
+-2.14.1
 -
--SRC_URI += "gitsm://github.com/CLIUtils/CLI11;branch=v1;protocol=https"
--
--S = "${WORKDIR}/git"
--
--inherit cmake
--inherit ptest
--
--# cli11 is a header only C++ library, so the main package will be empty.
--RDEPENDS:${PN}-dev = ""
-diff --git a/meta-oe/recipes-support/cli11/cli11_2.2.0.bb b/meta-oe/recipes-support/cli11/cli11_2.2.0.bb
-new file mode 100644
-index 0000000000..53a57489fe
---- /dev/null
-+++ b/meta-oe/recipes-support/cli11/cli11_2.2.0.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "C++11 command line parser"
-+DESCRIPTION = "A command line parser for C++11 and beyond that provides a rich feature set with a simple and intuitive interface."
-+HOMEPAGE = "https://github.com/CLIUtils/CLI11"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=9ad746b5f49c0fd53c08ca1faff1922c"
-+SRCREV = "b9be5b9444772324459989177108a6a65b8b2769"
-+PV .= "+git${SRCPV}"
-+
-+SRC_URI += "gitsm://github.com/CLIUtils/CLI11;branch=main;protocol=https \
-+            https://github.com/philsquared/Catch/releases/download/v2.13.7/catch.hpp \
-+            file://0001-Do-not-download-the-catch-framework-during-configure.patch"
-+
-+SRC_URI[sha256sum] = "ea379c4a3cb5799027b1eb451163dff065a3d641aaba23bf4e24ee6b536bd9bc"
-+S = "${WORKDIR}/git"
-+
-+do_configure:prepend() {
-+    mkdir -p ${S}/tests/catch2
-+    cp ${DL_DIR}/catch.hpp ${S}/tests/catch2/catch.hpp 
-+}
-+
-+inherit cmake
-+inherit ptest
-+
-+# cli11 is a header only C++ library, so the main package will be empty.
-+RDEPENDS:${PN}-dev = ""
 -- 
 2.37.3
 
