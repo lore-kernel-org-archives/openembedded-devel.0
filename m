@@ -2,60 +2,62 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0CB36C6FA89
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1DE33C6FA90
 	for <webhook@archiver.kernel.org>; Wed,  7 Sep 2022 23:41:26 +0000 (UTC)
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com
- [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.web09.2850.1662594081597338627
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com
+ [209.85.214.174])
+ by mx.groups.io with SMTP id smtpd.web12.2744.1662594078498214432
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Sep 2022 16:41:21 -0700
+ Wed, 07 Sep 2022 16:41:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=G9M2GG7w;
- spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f49.google.com with SMTP id o4so16038153pjp.4
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=MJR8Grjg;
+ spf=pass (domain: gmail.com, ip: 209.85.214.174,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f174.google.com with SMTP id p18so16105304plr.8
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Sep 2022 16:41:21 -0700 (PDT)
+ Wed, 07 Sep 2022 16:41:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=PTRcDS7eXYl5px7byg6q8lcYHfTsQ20vgSLsDDRlyEQ=;
-        b=G9M2GG7wN8DHNrAo/6KnURHRNLO0+0mqBEPjec2CDiBTGx09mwIPMG+b03xI2m1C9a
-         xddwOiA3nRwDj6Dvc5Qli+vJKAk4g5YqERgKlT5E+P32qn0lNjSGxMeAcpITgWWqDqUi
-         Cm36xkrfvSHx+6iijLqmXHvmAdiZzA9N2cc3e7jJyN4mSqc2USWQ9WP0iVs706ulsMF5
-         LQ+4b6GcTnqO5wAL8/1RYGHkMxc8sEostlAPcFCKydqvL9XiDNzk7aGFYVhuyB4DXrnS
-         T3273CyYNwJeBDQG1L44A2l2iflhpTW3QCgraVQL/YIZg36V5MxP0c2vIIYmvwpaYxjZ
-         CGpg==
+        bh=ywNrDPDSO4wSjSUFTIhYVl4FmKicM6OG76Te0FYqsqs=;
+        b=MJR8GrjgwYmsq2KkQy86kz+F7OTi0ouMHBvAlgONcGwUTjDgxUvaCbEN4rVzGWHShS
+         mG5UqbyGaSpLrRAkqSMCyiCOUT0qfc++7xngr0ZNQywmNN9tU+1/fmoQAvm5HMUYL8OY
+         Rx/XXWv6XIN6louJwJltGxA9iqzs6yPdBUPrlQ46nhRHY6C7xVfytIsU+5fThwiQPvzJ
+         xDlvAmUkzt9FXnNDADBIulPrtE54gSkAH65gmGz2G7ZNTinFOGItR7GbaahTI8VoVn2V
+         uBDgK39KNxeOeyJ3dy8kYizxPm268OIl9Gy7SbMJaB2rOVoyQUqDMz/Vakm0l2zUwun0
+         uf2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=PTRcDS7eXYl5px7byg6q8lcYHfTsQ20vgSLsDDRlyEQ=;
-        b=ew6qj7JP5nE0cG9u2vFB6rDTZuYIs7RU2CTpR9QGThhNKV0MaH+wkXle6fd9Rf6sDj
-         89H9p97tlgDbyEEAicMklYItJry69WNmw9gR5RFMLvDeP7deim4R15TbQ5aCfY7uDYz/
-         M6SkifpyX+EUJX1IsVPomzbwhlbGBaPfwixYGFqMuI4wtXdA2lfKtgGHhK8mGegdRo3q
-         +ormuv5z46sgLmjXMrVeEbfGMwoZvMENpBenz7esJvlkuur0h8P2xwSA0IzMv17HNFta
-         SaJXHlroZ0/pxaVBJm2bIJ5ON5B/kM9SRWRAq+0ToXmroX5b6NqKvrSQLjlYKHLUMeNW
-         /K+Q==
-X-Gm-Message-State: ACgBeo17miD5boP4un66AADRg/k/4JQY5ZPWnkS/dMnWi3FuXjzRhFee
-	Yc5MXMuWCFX8Ww4YaUK4gG69bjbcywMIEg==
+        bh=ywNrDPDSO4wSjSUFTIhYVl4FmKicM6OG76Te0FYqsqs=;
+        b=EnMvG03JRqB5wtqM+gf+DvpxC/hi8XjyCrV00rWHVn3YcA559eZlwEG1op8Jqx68qJ
+         cy1v0wMLPSn3NZxOcA/2vLzguVsKkilCGBvMBFUN39b2slFAogJKL+dEGrx2x+Y/aOR1
+         Xtxxsevgl+nX95y5wy/OGalnilQ1YjPhs9iliKKoCC93N3tLfgNQM8OpRcZS17DjZYpl
+         0iFKbJpmhVmOGK/ANO70G8OFVhu/ra49BblzccPLrICKMMLzDANshABzmn0l7b7++7+v
+         XW6RfFXkSFIDVcaF/lhgvYrHcTWYRSQCY+OkRGhOSvoqE8VLNAYIwSMIl9y3CyYn/HnR
+         XxPQ==
+X-Gm-Message-State: ACgBeo3cNra6PvQBJMiYgAuJzvisAZVh55AUYByaqT+1FEm/r0CjDF0D
+	wUB3ns0HlzT8auTHt4iulSLYWEMb3sQXig==
 X-Google-Smtp-Source: 
- AA6agR6EF1TNrODAermVhOOy+64A5++psykTOu/Kv1aZ2o6Ra4pgMzA/P9Ozkvi51U4Ge46Jij2CoA==
-X-Received: by 2002:a17:903:24c:b0:172:7090:64a4 with SMTP id
- j12-20020a170903024c00b00172709064a4mr6054853plh.124.1662594080870;
-        Wed, 07 Sep 2022 16:41:20 -0700 (PDT)
+ AA6agR5HssPuEse2VAA5uvNH3lTdCzu8pAeIiBeX857PNp5ttU7B/ad4EiqUNHEowMgU8n2CdoonXg==
+X-Received: by 2002:a17:90b:3e86:b0:1f5:2b4f:7460 with SMTP id
+ rj6-20020a17090b3e8600b001f52b4f7460mr997271pjb.97.1662594077740;
+        Wed, 07 Sep 2022 16:41:17 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::1761])
         by smtp.gmail.com with ESMTPSA id
- ij5-20020a170902ab4500b0016c5306917fsm10276495plb.53.2022.09.07.16.41.20
+ ij5-20020a170902ab4500b0016c5306917fsm10276495plb.53.2022.09.07.16.41.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Sep 2022 16:41:20 -0700 (PDT)
+        Wed, 07 Sep 2022 16:41:17 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 20/22] matplotlib: Upgrade to 3.5.3
-Date: Wed,  7 Sep 2022 16:41:00 -0700
-Message-Id: <20220907234102.3312797-20-raj.khem@gmail.com>
+Subject: [meta-webserver][PATCH 16/22] sthttpd: Define _GNU_SOURCE if
+ HAVE_SIGSET is set
+Date: Wed,  7 Sep 2022 16:40:56 -0700
+Message-Id: <20220907234102.3312797-16-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220907234102.3312797-1-raj.khem@gmail.com>
 References: <20220907234102.3312797-1-raj.khem@gmail.com>
@@ -66,68 +68,84 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 07 Sep 2022 23:41:26 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98710
+ https://lists.openembedded.org/g/openembedded-devel/message/98706
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../python3-matplotlib/matplotlib-disable-download.patch    | 5 +++--
- ...hon3-matplotlib_3.5.2.bb => python3-matplotlib_3.5.3.bb} | 6 +++---
- 2 files changed, 6 insertions(+), 5 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-matplotlib_3.5.2.bb => python3-matplotlib_3.5.3.bb} (94%)
+ ...ne-_GNU_SOURCE-if-HAVE_SIGSET-is-set.patch | 51 +++++++++++++++++++
+ .../recipes-httpd/sthttpd/sthttpd_2.27.1.bb   |  1 +
+ 2 files changed, 52 insertions(+)
+ create mode 100644 meta-webserver/recipes-httpd/sthttpd/sthttpd/0001-Define-_GNU_SOURCE-if-HAVE_SIGSET-is-set.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-matplotlib/matplotlib-disable-download.patch b/meta-python/recipes-devtools/python/python3-matplotlib/matplotlib-disable-download.patch
-index 42ffeb8970..25c49afb97 100644
---- a/meta-python/recipes-devtools/python/python3-matplotlib/matplotlib-disable-download.patch
-+++ b/meta-python/recipes-devtools/python/python3-matplotlib/matplotlib-disable-download.patch
-@@ -6,10 +6,11 @@ Signed-off-by: Mark Hatle <mark.hatle@xilinx.com>
- 
- --- a/setup.py
- +++ b/setup.py
--@@ -317,7 +317,6 @@ setup(  # Finally, pass this all along t
-+@@ -316,8 +316,6 @@ setup(  # Finally, pass this all along t
-+     setup_requires=[
-          "certifi>=2020.06.20",
-          "numpy>=1.17",
--         "setuptools_scm>=4",
-+-        "setuptools_scm>=4,<7",
- -        "setuptools_scm_git_archive",
-      ],
-      install_requires=[
-diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.5.2.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.5.3.bb
-similarity index 94%
-rename from meta-python/recipes-devtools/python/python3-matplotlib_3.5.2.bb
-rename to meta-python/recipes-devtools/python/python3-matplotlib_3.5.3.bb
-index eaa144719b..1a0b93b030 100644
---- a/meta-python/recipes-devtools/python/python3-matplotlib_3.5.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.5.3.bb
-@@ -19,9 +19,9 @@ DEPENDS = "\
-     python3-dateutil-native \
-     python3-pytz-native \
-     python3-certifi-native \
-+    python3-setuptools-scm-native \
- "
--
--SRC_URI[sha256sum] = "48cf850ce14fa18067f2d9e0d646763681948487a8080ec0af2686468b4607a2"
-+SRC_URI[sha256sum] = "339cac48b80ddbc8bfd05daae0a3a73414651a8596904c2a881cfd1edb65f26c"
- 
- inherit pypi setuptools3 pkgconfig
- 
-@@ -40,7 +40,6 @@ SRC_URI[qhull.sha256sum] = "b5c2d7eb833278881b952c8a52d20179eab87766b00b86500046
- # LTO with clang needs lld
- LDFLAGS:append:toolchain-clang = " -fuse-ld=lld"
- LDFLAGS:remove:toolchain-clang:mips = "-fuse-ld=lld"
--
- RDEPENDS:${PN} = "\
-     freetype \
-     libpng \
-@@ -57,6 +56,7 @@ RDEPENDS:${PN} = "\
- ENABLELTO:toolchain-clang:riscv64 = "echo enable_lto = False >> ${S}/mplsetup.cfg"
- ENABLELTO:toolchain-clang:riscv32 = "echo enable_lto = False >> ${S}/mplsetup.cfg"
- ENABLELTO:toolchain-clang:mips = "echo enable_lto = False >> ${S}/mplsetup.cfg"
+diff --git a/meta-webserver/recipes-httpd/sthttpd/sthttpd/0001-Define-_GNU_SOURCE-if-HAVE_SIGSET-is-set.patch b/meta-webserver/recipes-httpd/sthttpd/sthttpd/0001-Define-_GNU_SOURCE-if-HAVE_SIGSET-is-set.patch
+new file mode 100644
+index 0000000000..a1783a7adb
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/sthttpd/sthttpd/0001-Define-_GNU_SOURCE-if-HAVE_SIGSET-is-set.patch
+@@ -0,0 +1,51 @@
++From f3889e5870e9761ee6113fac7f38aa44cc43e46c Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 7 Sep 2022 00:30:52 -0700
++Subject: [PATCH] Define _GNU_SOURCE if HAVE_SIGSET is set
 +
- do_compile:prepend() {
-     echo [libs] > ${S}/mplsetup.cfg
-     echo system_freetype = True >> ${S}/mplsetup.cfg
++This enforces using sigset() API which needs _GNU_SOURCE macro to be
++defined
++
++Upstream-Status: Submitted [https://github.com/blueness/sthttpd/pull/16]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/libhttpd.c | 5 ++++-
++ src/thttpd.c   | 4 ++++
++ 2 files changed, 8 insertions(+), 1 deletion(-)
++
++diff --git a/src/libhttpd.c b/src/libhttpd.c
++index fa42c10..669be11 100644
++--- a/src/libhttpd.c
+++++ b/src/libhttpd.c
++@@ -25,9 +25,12 @@
++ ** SUCH DAMAGE.
++ */
++ 
++-
++ #include <config.h>
++ 
+++#ifdef HAVE_SIGSET
+++#define _GNU_SOURCE
+++#endif
+++
++ //system headers
++ #include <sys/types.h>
++ #include <sys/param.h>
++diff --git a/src/thttpd.c b/src/thttpd.c
++index ad97188..3c7a449 100644
++--- a/src/thttpd.c
+++++ b/src/thttpd.c
++@@ -28,6 +28,10 @@
++ 
++ #include <config.h>
++ 
+++#ifdef HAVE_SIGSET
+++#define _GNU_SOURCE
+++#endif
+++
++ //system headers
++ #include <sys/param.h>
++ #include <sys/types.h>
++-- 
++2.37.3
++
+diff --git a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb
+index 4134a0e524..b40b148512 100644
+--- a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb
++++ b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb
+@@ -8,6 +8,7 @@ DEPENDS += "base-passwd virtual/crypt"
+ 
+ SRCREV = "2845bf5bff2b820d2336c8c8061cbfc5f271e720"
+ SRC_URI = "git://github.com/blueness/${BPN};branch=master;protocol=https \
++           file://0001-Define-_GNU_SOURCE-if-HAVE_SIGSET-is-set.patch \
+            file://thttpd.service \
+            file://thttpd.conf \
+            file://init"
 -- 
 2.37.3
 
