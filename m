@@ -2,73 +2,73 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BABDAECAAA1
-	for <webhook@archiver.kernel.org>; Wed,  7 Sep 2022 01:37:31 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.65])
- by mx.groups.io with SMTP id smtpd.web12.2791.1662514642151597383
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C0ACC38145
+	for <webhook@archiver.kernel.org>; Wed,  7 Sep 2022 08:43:03 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
+ [85.158.142.1])
+ by mx.groups.io with SMTP id smtpd.web08.5471.1662540174430548763
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Sep 2022 18:37:23 -0700
+ Wed, 07 Sep 2022 01:42:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=i1ScEO7x;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.65,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=v3BnBMaC;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.1,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1662514640; i=@fujitsu.com;
-	bh=kSYatWAP6Xtmk+yBTMbGFRgx+p2fYq8q0b/uWGG5FZU=;
+	s=170520fj; t=1662540172; i=@fujitsu.com;
+	bh=70qI1XuVk0lhHSt567/Pbq9IWHypf41D3EuNhKyGfp4=;
 	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=i1ScEO7x59HvQT2ERbdPJ19i6kTh5X1kROU0DeSpjF4OVwpORpT1TJsASFjTpGCbT
-	 B/2RsuAss/gfGVwWMggav6SINNq2aqzRazZpez/Z4a7ZbCB+VJFQF1QP0N+ByjL09r
-	 87+7l8ZgTPDfs3+C1wfmP34097QFXd0mJBVP6eMUY3eiW9YHjClqEv4l5V2zRTiXUm
-	 TvGDDkjzYp4M3/m4JPWgJ5wteBsIsqxfGLIy89E/RBfVHHSzoDi7pC+JjR3eds5Saj
-	 k0U7XuOEg2HuKjaJTYYwElN+tSRZXl3D9+Kr3DG6A41L4zM9AovQfpFk6KgS7DdtmV
-	 bOyBbBywCLpMA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrAIsWRWlGSWpSXmKPExsViZ8OxWff8V/F
-  kg0fN1hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bKBzdYCi6qVPRO/cncwHhfoYuRk0NI4CGj
-  xLx10V2MXED2ZSaJ3huTmSGc3YwSL99NZAWpYhNQk5h+6waYLSKgL7F09h5mEJtZQEXixe8ed
-  hBbWMBB4nfjSzCbBSj+9dRhMJtXwEniwrztYL0SAgoSUx6+Z4aIC0qcnPmEBWKOhMTBFy+YIW
-  oUJWZfbmaBsCskGqcfYoKw1SSuntvEPIGRfxaS9llI2hcwMq1itEoqykzPKMlNzMzRNTQw0DU
-  0NNU11DUyNNdLrNJN1Est1S1PLS7RNdRLLC/WSy0u1iuuzE3OSdHLSy3ZxAgMypRixps7GFv7
-  fuodYpTkYFIS5VW9IZ4sxJeUn1KZkVicEV9UmpNafIhRhoNDSYI35AlQTrAoNT21Ii0zBxghM
-  GkJDh4lEd6br4HSvMUFibnFmekQqVOM9hxXr1zZy8wxdfa//cwcy8HkzK9tB5iFWPLy81KlxH
-  k5vgC1CYC0ZZTmwQ2FRfQlRlkpYV5GBgYGIZ6C1KLczBJU+VeM4hyMSsK8hz8CTeHJzCuB2/0
-  K6CwmoLO2BoKdVZKIkJJqYNrTtFkpZ3Vnjq6x7PNJS9pkJXQa/v5X06zJW79V6+udr49OHS6f
-  PeN6l8Wz54sfNr09wiEsXndZ6dUS3lWf/z/fYFvIqVeal7sj437krKTSmYoVLnKLZvBnZXa6n
-  sj8YLngjOeqNxxrV/I+2rRw7jOGPYfE2028Gxd+vWeae7gz6/5vUa3lBes0/wiuO3Huec3h9p
-  Nb50aGbT6x/I554OJUjrUncv761yY8bJy2PMwpL256zp4a9uW7/38LPK1+NOylak/MnKj/8za
-  Hn/U9uzgxUuR1MldD05Fz/y5XhEwOWvWoNX1Oe+AC9cnrp7JNrU6vbJ/H7OGedqkwbH/d/QL2
-  S+zH8w7uj1TfIsIW3sqtxFKckWioxVxUnAgA8/HtFmMDAAA=
+	b=v3BnBMaCz5k8OICnEDU5oVwshAi6BDUJx82Ra+uUCCFRisxrh+7vm1MAil9/5lEFJ
+	 khNYTtLSGoOAFIMtItUF5hyp+FhlKSwfbT3htqrHXI8Cog+HxWWjBx2k7rv+rQBXQC
+	 SOQHFLPLseL+Ko2InwgfHAD2LZfY5+lKq/DorV2By2eroedvKWJ5SBsLodyqNev16R
+	 Zrj9tOHaUGzkmqdlZYAYHtgpqeUslPifhIIrb8cX/8o78P62i3Yl+wc3Fk070Iyb3B
+	 s82SrQojY8BltV33Zu288FR7nY/fUzld4oZLgVFE3NzI9BxtDSefsxW31Bxmskpcxu
+	 G9YxAgqMxMxNg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrEIsWRWlGSWpSXmKPExsViZ8ORpNsdKZF
+  sMHWpvsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmjHtxQWWgolKFW8mv2ZtYFwn18XIxSEk8JBR
+  4vHr5ewQzhUmiYcP/jNDOLsZJbp+NrJ2MXJysAmoSUy/dQPMFhHQl1g6ew8ziM0soCLx4ncPU
+  DcHh7CAg8SjgyIgYRag8M3NC5lAbF4BJ4nn/U0sILaEgILElIfvmSHighInZz5hgRgjIXHwxQ
+  tmiBpFidmXm6HqKyQapx9igrDVJK6e28Q8gZF/FpL2WUjaFzAyrWK0SSrKTM8oyU3MzNE1NDD
+  QNTQ01bW0BFKWeolVuol6qaW6eflFJRm6hnqJ5cV6qcXFesWVuck5KXp5qSWbGIGBmVKcXL6D
+  cfu+X3qHGCU5mJREeeO8JJKF+JLyUyozEosz4otKc1KLDzHKcHAoSfDGhQLlBItS01Mr0jJzg
+  FECk5bg4FES4VUOBkrzFhck5hZnpkOkTjHac6xtOLCXmWPq7H/7mTmWg8mZX9sOMAux5OXnpU
+  qJ8z73AWoTAGnLKM2DGwqL6kuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHkXRABN4cnMK4H
+  b/QroLCags7YGioOcVZKIkJJqYGoR1XJ57LjWV6kq/9aMPGGNz/uj7zzoKz8U9zR2QsGaKtPJ
+  llOq5X1YS8KFfu+vzuds+f+rc22fTFf4wQ7dD9PalvTev2WRHBuz7p6VrtkEZlueWS8sPr9fx
+  pn0+aPOwQJ3xpPxn4oiO0/Zryxx6l04YfGSw4fsHiXNcYmpXv89lXW332YBP91EW9+1U96kRC
+  dm+BvUJh9uXR9x+P++vvOR7s7/Vnz7WD/3VmNRRAuDhNwNiRu7br2V656w/mDaqfCnmxRebZs
+  SHXsjR0lvZecuRQWunQwK38+7ctZNeGWs3blit63hY8P3XvaP2DfynWbYLT1N5JRv5txzx5qc
+  +1mXKDH6zwtzyWkPVtZ5rMRSnJFoqMVcVJwIAEalAeplAwAA
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-17.tower-587.messagelabs.com!1662514639!293876!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-12.tower-732.messagelabs.com!1662540171!67600!1
+X-Originating-IP: [62.60.8.98]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 32606 invoked from network); 7 Sep 2022 01:37:19 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-17.tower-587.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 7 Sep 2022 01:37:19 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 95485150
+Received: (qmail 12148 invoked from network); 7 Sep 2022 08:42:51 -0000
+Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
+  by server-12.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 7 Sep 2022 08:42:51 -0000
+Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 2AD631AD
 	for <openembedded-devel@lists.openembedded.org>;
- Wed,  7 Sep 2022 02:37:19 +0100 (BST)
+ Wed,  7 Sep 2022 09:42:51 +0100 (BST)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121
  [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 8897C73
+	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id 1F9771AB
 	for <openembedded-devel@lists.openembedded.org>;
- Wed,  7 Sep 2022 02:37:19 +0100 (BST)
+ Wed,  7 Sep 2022 09:42:51 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Wed, 7 Sep 2022 02:37:17 +0100
+ (TLS) id 15.0.1497.32; Wed, 7 Sep 2022 09:42:49 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH v2] cli11: upgrade 1.9.1 -> 2.2.0
-Date: Wed, 7 Sep 2022 09:37:01 +0800
-Message-ID: <1662514621-14399-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] libforms: upgrade 1.2.3 -> 1.2.4
+Date: Wed, 7 Sep 2022 16:42:33 +0800
+Message-ID: <1662540153-16917-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -79,126 +79,126 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 07 Sep 2022 01:37:31 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 Sep 2022 08:43:03 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98679
+ https://lists.openembedded.org/g/openembedded-devel/message/98680
 
-License-Update: Copyright year updated to 2022.
+0001-Make-extern-declarations-in-header-file.patch
+refreshed for new version.
 
-0001-Do-not-download-the-catch-framework-during-configure.patch
-added to download the catch framework before configure.
+0001-Modify-include-dir.patch
+added to modify the dir of nonexist file.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...the-catch-framework-during-configure.patch | 41 +++++++++++++++++++
- meta-oe/recipes-support/cli11/cli11_1.9.1.bb  | 17 --------
- meta-oe/recipes-support/cli11/cli11_2.2.0.bb  | 25 +++++++++++
- 3 files changed, 66 insertions(+), 17 deletions(-)
- create mode 100644 meta-oe/recipes-support/cli11/cli11/0001-Do-not-download-the-catch-framework-during-configure.patch
- delete mode 100644 meta-oe/recipes-support/cli11/cli11_1.9.1.bb
- create mode 100644 meta-oe/recipes-support/cli11/cli11_2.2.0.bb
+ ...e-extern-declarations-in-header-file.patch | 17 +---------
+ .../files/0001-Modify-include-dir.patch       | 33 +++++++++++++++++++
+ .../{libforms_1.2.3.bb => libforms_1.2.4.bb}  |  5 ++-
+ 3 files changed, 36 insertions(+), 19 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/libforms/files/0001-Modify-include-dir.patch
+ rename meta-oe/recipes-graphics/libforms/{libforms_1.2.3.bb => libforms_1.2.4.bb} (83%)
 
-diff --git a/meta-oe/recipes-support/cli11/cli11/0001-Do-not-download-the-catch-framework-during-configure.patch b/meta-oe/recipes-support/cli11/cli11/0001-Do-not-download-the-catch-framework-during-configure.patch
+diff --git a/meta-oe/recipes-graphics/libforms/files/0001-Make-extern-declarations-in-header-file.patch b/meta-oe/recipes-graphics/libforms/files/0001-Make-extern-declarations-in-header-file.patch
+index 619bad6d02..16689f64b9 100644
+--- a/meta-oe/recipes-graphics/libforms/files/0001-Make-extern-declarations-in-header-file.patch
++++ b/meta-oe/recipes-graphics/libforms/files/0001-Make-extern-declarations-in-header-file.patch
+@@ -10,8 +10,7 @@ Upstream-Status: Pending
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+  fdesign/sp_spinner.c | 2 +-
+- lib/flinternal.h     | 4 ++--
+- 2 files changed, 3 insertions(+), 3 deletions(-)
++ 1 files changed, 1 insertions(+), 1 deletions(-)
+ 
+ diff --git a/fdesign/sp_spinner.c b/fdesign/sp_spinner.c
+ index 04f2c19..6206daa 100644
+@@ -26,20 +25,6 @@ index 04f2c19..6206daa 100644
+  
+  
+  /***************************************
+-diff --git a/lib/flinternal.h b/lib/flinternal.h
+-index 06d847e..577bd10 100644
+---- a/lib/flinternal.h
+-+++ b/lib/flinternal.h
+-@@ -138,8 +138,8 @@ enum {
+- 
+- /* events.c or event related */
+- 
+--FL_OBJECT * fli_handled_obj;
+--FL_OBJECT * fli_handled_parent;
+-+extern FL_OBJECT * fli_handled_obj;
+-+extern FL_OBJECT * fli_handled_parent;
+- 
+- void fli_obj_queue_delete( void );
+  
+ -- 
+ 2.28.0
+diff --git a/meta-oe/recipes-graphics/libforms/files/0001-Modify-include-dir.patch b/meta-oe/recipes-graphics/libforms/files/0001-Modify-include-dir.patch
 new file mode 100644
-index 0000000000..7e6611b6a8
+index 0000000000..0b7c063804
 --- /dev/null
-+++ b/meta-oe/recipes-support/cli11/cli11/0001-Do-not-download-the-catch-framework-during-configure.patch
-@@ -0,0 +1,41 @@
-+From 93557d5c5acf9ebb2c0fa708658e1d36621dd23a Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-graphics/libforms/files/0001-Modify-include-dir.patch
+@@ -0,0 +1,33 @@
++From d2d05928342f7f9f687ffea5e0b77f97f0ae5aad Mon Sep 17 00:00:00 2001
 +From: Wang Mingyu <wangmy@fujitsu.com>
-+Date: Wed, 7 Sep 2022 10:05:15 +0900
-+Subject: [PATCH] Do not download the catch framework during configure.
++Date: Wed, 7 Sep 2022 14:29:13 +0900
++Subject: [PATCH] Modify include dir
 +
-+Upstream-Status: Inappropriate [configuration]
++error messagge:
++../../xforms-1.2.4/lib/fd/cmdbr.h:28:10: fatal error: ../include/forms.h: No such file or directory
++
++../include/forms.h specified in the header file cmdbr.h is not exist.
++
++Upstream-Status: Pending
 +
 +Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 +---
-+ tests/CMakeLists.txt | 15 ---------------
-+ 1 file changed, 15 deletions(-)
++ lib/fd/cmdbr.h | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
-+index 80c4f6a..ae210db 100644
-+--- a/tests/CMakeLists.txt
-++++ b/tests/CMakeLists.txt
-+@@ -74,21 +74,6 @@ if(Catch2_FOUND)
-+   endif()
-+   message(STATUS "Found Catch2")
-+   target_link_libraries(catch_main PUBLIC Catch2::Catch2)
-+-else()
-+-  message(STATUS "Downloading Catch2")
-+-
-+-  # FetchContent would be better, but requires newer CMake.
-+-  file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/catch2")
-+-  set(url https://github.com/philsquared/Catch/releases/download/v2.13.7/catch.hpp)
-+-  file(
-+-    DOWNLOAD ${url} "${CMAKE_CURRENT_BINARY_DIR}/catch2/catch.hpp"
-+-    STATUS status
-+-    EXPECTED_HASH SHA256=ea379c4a3cb5799027b1eb451163dff065a3d641aaba23bf4e24ee6b536bd9bc)
-+-  list(GET status 0 error)
-+-  if(error)
-+-    message(FATAL_ERROR "Could not download ${url}, and Catch2 not found on your system.")
-+-  endif()
-+-  target_include_directories(catch_main PUBLIC "${CMAKE_CURRENT_BINARY_DIR}")
-+ endif()
++diff --git a/lib/fd/cmdbr.h b/lib/fd/cmdbr.h
++index 8495e05..2ddeced 100644
++--- a/lib/fd/cmdbr.h
+++++ b/lib/fd/cmdbr.h
++@@ -25,7 +25,7 @@
++ #ifndef FD_cmd_h_
++ #define FD_cmd_h_
 + 
-+ # Target must already exist
++-#include "../include/forms.h"
+++#include "include/forms.h"
++ 
++ /* Callbacks, globals and object handlers */
++ 
 +-- 
 +2.25.1
 +
-diff --git a/meta-oe/recipes-support/cli11/cli11_1.9.1.bb b/meta-oe/recipes-support/cli11/cli11_1.9.1.bb
-deleted file mode 100644
-index 7de3335abd..0000000000
---- a/meta-oe/recipes-support/cli11/cli11_1.9.1.bb
-+++ /dev/null
-@@ -1,17 +0,0 @@
--SUMMARY = "C++11 command line parser"
--DESCRIPTION = "A command line parser for C++11 and beyond that provides a rich feature set with a simple and intuitive interface."
--HOMEPAGE = "https://github.com/CLIUtils/CLI11"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=b73927b18d5c6cd8d2ed28a6ad539733"
--SRCREV = "5cb3efabce007c3a0230e4cc2e27da491c646b6c"
--PV .= "+git${SRCPV}"
--
--SRC_URI += "gitsm://github.com/CLIUtils/CLI11;branch=v1;protocol=https"
--
--S = "${WORKDIR}/git"
--
--inherit cmake
--inherit ptest
--
--# cli11 is a header only C++ library, so the main package will be empty.
--RDEPENDS:${PN}-dev = ""
-diff --git a/meta-oe/recipes-support/cli11/cli11_2.2.0.bb b/meta-oe/recipes-support/cli11/cli11_2.2.0.bb
-new file mode 100644
-index 0000000000..53a57489fe
---- /dev/null
-+++ b/meta-oe/recipes-support/cli11/cli11_2.2.0.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "C++11 command line parser"
-+DESCRIPTION = "A command line parser for C++11 and beyond that provides a rich feature set with a simple and intuitive interface."
-+HOMEPAGE = "https://github.com/CLIUtils/CLI11"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=9ad746b5f49c0fd53c08ca1faff1922c"
-+SRCREV = "b9be5b9444772324459989177108a6a65b8b2769"
-+PV .= "+git${SRCPV}"
-+
-+SRC_URI += "gitsm://github.com/CLIUtils/CLI11;branch=main;protocol=https \
-+            https://github.com/philsquared/Catch/releases/download/v2.13.7/catch.hpp \
-+            file://0001-Do-not-download-the-catch-framework-during-configure.patch"
-+
-+SRC_URI[sha256sum] = "ea379c4a3cb5799027b1eb451163dff065a3d641aaba23bf4e24ee6b536bd9bc"
-+S = "${WORKDIR}/git"
-+
-+do_configure:prepend() {
-+    mkdir -p ${S}/tests/catch2
-+    cp ${DL_DIR}/catch.hpp ${S}/tests/catch2/catch.hpp 
-+}
-+
-+inherit cmake
-+inherit ptest
-+
-+# cli11 is a header only C++ library, so the main package will be empty.
-+RDEPENDS:${PN}-dev = ""
+diff --git a/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb b/meta-oe/recipes-graphics/libforms/libforms_1.2.4.bb
+similarity index 83%
+rename from meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
+rename to meta-oe/recipes-graphics/libforms/libforms_1.2.4.bb
+index 838c1d5173..01db3c4d3d 100644
+--- a/meta-oe/recipes-graphics/libforms/libforms_1.2.3.bb
++++ b/meta-oe/recipes-graphics/libforms/libforms_1.2.4.bb
+@@ -1,6 +1,5 @@
+ DESCRIPTION = "The XForms graphical interface widget library	"
+ HOMEPAGE = "http://savannah.nongnu.org/projects/xforms/"
+-PR = "r0"
+ 
+ LICENSE = "LGPL-2.1-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=ade9a053df81f5b9408d2f4f5546df86"
+@@ -10,10 +9,10 @@ SRC_URI = "http://download.savannah.nongnu.org/releases/xforms/xforms-${PV}.tar.
+            file://add-absolute-path-for-include-dir.patch \
+            file://fix-path-fdesign_LDADD.patch \
+            file://0001-Make-extern-declarations-in-header-file.patch \
++           file://0001-Modify-include-dir.patch \
+           "
+ 
+-SRC_URI[md5sum] = "235720a758a8b8d9e6e452dc67190e9b"
+-SRC_URI[sha256sum] = "7989b39598c769820ad451ad91e5cb0de29946940c8240aac94ca8238c2def61"
++SRC_URI[sha256sum] = "78cc6b07071bbeaa1f906e0a22d5e9980e48f8913577bc082d661afe5cb75696"
+ 
+ inherit autotools features_check
+ 
 -- 
 2.25.1
 
