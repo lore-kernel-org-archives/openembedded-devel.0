@@ -1,106 +1,94 @@
-Return-Path: <rak3033@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 82DD8ECAAD5
-	for <webhook@archiver.kernel.org>; Thu,  8 Sep 2022 07:40:29 +0000 (UTC)
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
- [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.web08.2622.1662622828819025485
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4DE83ECAAD5
+	for <webhook@archiver.kernel.org>; Thu,  8 Sep 2022 09:50:10 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg
+ [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web11.3387.1662630607743266996
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Sep 2022 00:40:28 -0700
+ Thu, 08 Sep 2022 02:50:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=f7hPf27d;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: rak3033@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id
- n65-20020a17090a5ac700b001fbb4fad865so1524657pji.1
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Sep 2022 00:40:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
-         :cc:subject:date;
-        bh=BC0B0W8fq3ieF3o69jUQx/O/48WC2ZrZ+2zskk6qxIA=;
-        b=f7hPf27drcO87CEcCWjQwFMy89qpfTUiZ4VKT3nrvbRdKgxbtNMuHBNAvUdFl1UgEf
-         DTOk8A0GAPG4tRknRg33xHjN3cxv2JtspK059Hh44h9b8J1AT0kfFhxvLDrEOJeVnWQc
-         EeaY/Ksk6VPxH0Q6j73dzaP4l4LR40FoL5w6WUZnddu48NLFS+gzLPN5nkit3MujK4PY
-         NEpmYZu0R+wpMxWcz4Jb/VBELi3RustPICorRC+CfGHtOwlN0kN3VAyE198AMfxMAiGS
-         Ut6uBweW5x/sB8jhhJOETmxrUqc/IztJBwhlk2buB/LiAoI3oo+xjJ9XAlLgUA0WYWZp
-         8NoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=references:in-reply-to:message-id:date:subject:cc:to:from
-         :x-gm-message-state:from:to:cc:subject:date;
-        bh=BC0B0W8fq3ieF3o69jUQx/O/48WC2ZrZ+2zskk6qxIA=;
-        b=Ksx34mlbscdfBXIkRox4Xd9p6n2myS00s2sdFSSERG979FHv+Xp+zyNPh4W8ZYeQVM
-         VxeISAqBEzP1JbVSmErgxvCzRcK6B+wJ9al47ZB5CNEDATtc8Wtw0aOhVOSD9IfLuWHX
-         EHo1CRWiTjV+i5xmFYUI6630aeIy75R0T3JCFIspYfzQVwmFAGItBHLArAGGyb7mylv8
-         U4pXTS3edkfUfRUntH/XRNkTRsJ1uDyFYpnWdjihJj9EoW6CsO+JftfLDAEIFSfD6gCm
-         LcRFo/Mqgml0HKkWKtf/oX6QDaUSGQUADF2TBOcOvA8GF35IB/1N5OIXOQXD3T3XlX6G
-         w3eA==
-X-Gm-Message-State: ACgBeo3+U8XlhTBsr+TgWiy1jVKku35dhlnMufYRAYzkniDXD8EozvTD
-	X+oNhMewGUyRYyaHzoOMW/j2DCSIfKCJQvhi
-X-Google-Smtp-Source: 
- AA6agR4SULOv0tCKBnL/e1Rj36YSSJ/cB0mgrZe55yFjqPrCJo96CV7EqC3ycxUiheftLkBeBHcN8g==
-X-Received: by 2002:a17:90b:4d07:b0:1ef:521c:f051 with SMTP id
- mw7-20020a17090b4d0700b001ef521cf051mr2839687pjb.164.1662622827971;
-        Thu, 08 Sep 2022 00:40:27 -0700 (PDT)
-Received: from localhost.localdomain
- ([2401:4900:33c3:2e02:685a:a9a:ac71:934b])
-        by smtp.gmail.com with ESMTPSA id
- r4-20020a170902c7c400b00172709064besm9101954pla.46.2022.09.08.00.40.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Sep 2022 00:40:27 -0700 (PDT)
-From: Riyaz Khan <rak3033@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	rak3033@gmail.com
-Cc: ranjitsinh.rathod@kpit.com,
-	riyaz.khan@kpit.com,
-	Riyaz Khan <Riyaz.Khan@kpit.com>
-Subject: [meta-oe][master][PATCH v2 2/2] sdbus-c++-tools: Upgrade
- sdbus-c++-tools 1.1.0 to 1.2.0
-Date: Thu,  8 Sep 2022 13:10:00 +0530
-Message-Id: <20220908074000.32204-2-rak3033@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220908074000.32204-1-rak3033@gmail.com>
-References: <20220908074000.32204-1-rak3033@gmail.com>
+ dkim=pass header.i=@anavi.org header.s=default header.b=LEiVFa3e;
+ spf=permerror,
+ err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
+ for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
+ (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=0mKqt7oS3lCXKPt5Jzi5Abo6HPw8GVG1QgLpNCHUlyE=; b=LEiVFa3eVBDZW/POtqKF72Ltze
+	EBbPIGP/kW1TDazRw7fNeKzhxZDfpGjDrE0jvwGL9b5mrvRwouUzjp5i59NPLeeCYX/OY0RbtpQs5
+	qiphbulnFu4grV/azdOv1XUHAb45+EAQaarsKkRrXTwJ8A98EiAqs/aTZStti+14Vr+G8umAOaUI2
+	nlDljtGl2Dv74nF3twuZb8P4DvVp5pdRLBHnPnrr1wGFn5xFJiba4NhqJgWPRV837lyFGbi+xACOq
+	ybmiZkHeRDDgBPXJD90e/V2hSXRkkDV3n/Kr3uFd1NaNY7yPYTEGKIZF+FraNbzdmLEuDinV2wc6H
+	GfnkGa/w==;
+Received: from lan.nucleusys.com ([92.247.61.126]:39282 helo=tone.k.g)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.95)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1oWEB1-000B0Z-KP;
+	Thu, 08 Sep 2022 12:50:05 +0300
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-haversine: Upgrade 2.6.0 -> 2.7.0
+Date: Thu,  8 Sep 2022 12:49:49 +0300
+Message-Id: <20220908094951.594032-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
+ leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 08 Sep 2022 07:40:29 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 08 Sep 2022 09:50:10 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98714
+ https://lists.openembedded.org/g/openembedded-devel/message/98717
 
-From: Riyaz Khan <Riyaz.Khan@kpit.com>
+Upgrade to release 2.7.0:
 
-Update SHA value in SRCREV.
+- Official support of python 3.10, 3.11 and 3.12
 
-Reference link:
-https://github.com/Kistler-Group/sdbus-cpp/releases/tag/v1.2.0
-
-Signed-off-by: Riyaz Khan <rak3033@gmail.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{sdbus-c++-tools_1.1.0.bb => sdbus-c++-tools_1.2.0.bb}      | 2 +-
+ .../{python3-haversine_2.6.0.bb => python3-haversine_2.7.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-core/sdbus-c++/{sdbus-c++-tools_1.1.0.bb => sdbus-c++-tools_1.2.0.bb} (88%)
+ rename meta-python/recipes-devtools/python/{python3-haversine_2.6.0.bb => python3-haversine_2.7.0.bb} (75%)
 
-diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_1.1.0.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_1.2.0.bb
-similarity index 88%
-rename from meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_1.1.0.bb
-rename to meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_1.2.0.bb
-index 01f66c3f2..27b965ac1 100644
---- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_1.1.0.bb
-+++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_1.2.0.bb
-@@ -8,7 +8,7 @@ inherit cmake
+diff --git a/meta-python/recipes-devtools/python/python3-haversine_2.6.0.bb b/meta-python/recipes-devtools/python/python3-haversine_2.7.0.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python3-haversine_2.6.0.bb
+rename to meta-python/recipes-devtools/python/python3-haversine_2.7.0.bb
+index 65779187a..bfe36b0b8 100644
+--- a/meta-python/recipes-devtools/python/python3-haversine_2.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-haversine_2.7.0.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Calculate the distance between 2 points on Earth"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
  
- DEPENDS += "expat"
+-SRC_URI[sha256sum] = "eb7c308ba721e86662c1d50427cb9b06f9e7eb9984803d9ec200582425cc4fb7"
++SRC_URI[sha256sum] = "9dd62c95bff9c43eb898604625e80db68b8b9e91a5111338f55ebcf470dd5a3d"
  
--SRCREV = "bca8e81037766a0454740c40307eea32831c101f"
-+SRCREV = "751c1addc4fd2f949a466f488c1b7de2ca3b76dc"
- SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master;subpath=tools"
+ inherit pypi setuptools3
  
- S = "${WORKDIR}/tools"
 -- 
-2.17.1
+2.30.2
 
 
