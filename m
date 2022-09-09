@@ -2,72 +2,73 @@ Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 700EBECAAD5
-	for <webhook@archiver.kernel.org>; Fri,  9 Sep 2022 01:25:39 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.65])
- by mx.groups.io with SMTP id smtpd.web10.1329.1662686729057943910
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 69AC4ECAAD5
+	for <webhook@archiver.kernel.org>; Fri,  9 Sep 2022 01:25:59 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
+ [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web09.1442.1662686757128954978
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Sep 2022 18:25:30 -0700
+ Thu, 08 Sep 2022 18:25:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=bLAHj/8E;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.65,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=zAO+a/pG;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113,
  mailfrom: zhengrq.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1662686727; i=@fujitsu.com;
-	bh=bkmF68EAFW+0CaiV0iNQptnl5CWaMkd0NMtUEH7PsAM=;
+	s=170520fj; t=1662686755; i=@fujitsu.com;
+	bh=BElsau6DLgwDiA3n+H6L5d6pj8jjAsrNPwxHP/4qO1o=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=bLAHj/8Ez74+duUT9QXr58IwA7V0mSk5S7Af01+xkkqjJFYpoXfAjHGraJi1bNmQd
-	 rearmUrHay+Qj+fG5x6ADeBcKQyJDYof6AbQfv/hYsgWcFWWBIOdybDJ9+kOyzi3Ms
-	 3p8cSTDGi1A294OWFMM3Qk8P3tJ8hbD/+iJUGSjdmuabsRlMNqAVfRvjWxumm5ieDO
-	 WcGOXdAleNpTkVZ4DLEGxBFrcOvSWdfXyUT1TKcYlL7dtvWAUp/+pUm5/D6yo8W7Pe
-	 4jSFjtxP/BZOFAhnGhXx1omEr+UKT2qqa+kelLZPEtzRO2TjsMbw2PKz4tCKNnFk2y
-	 hBSmNqjc+b+Uw==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrEIsWRWlGSWpSXmKPExsViZ8MxSZdtmlS
-  ywbZp8hYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aalmbGgqccFb8efGZtYJzM0cXIxSEk8IRR
-  4ube7ewQznUmiS/LpjJDOPsZJe60nwfKcHKwCehKvPixmAXEFhHQl1g6ew8ziC0s4CXR1PaWD
-  cRmEVCR+PCohxXE5hVwl/h7/w1YXEJAQWLKw/fMEHFBiZMzn4DNYRaQkDj44gVQnAOoRlFi9n
-  R5iPIKicbph5ggbDWJq+c2MU9g5JuFpHsWku4FjEyrGK2SijLTM0pyEzNzdA0NDHQNDU11TYA
-  sQ73EKt1EvdRS3fLU4hJdILe8WC+1uFivuDI3OSdFLy+1ZBMjMPhSillSdzD29f3UO8QoycGk
-  JMr7tF8qWYgvKT+lMiOxOCO+qDQntfgQowwHh5IE7+VJQDnBotT01Iq0zBxgJMCkJTh4lER4b
-  ScDpXmLCxJzizPTIVKnGHU5Zn5tO8AsxJKXn5cqJc57dgpQkQBIUUZpHtwIWFReYpSVEuZlZG
-  BgEOIpSC3KzSxBlX/FKM7BqCTMmz8VaApPZl4J3KZXQEcwAR2xNVAc5IiSRISUVAPTog2rCla
-  XX5iqMeeO4yvT/V2qP16r817nnsM5q4tb8eTbj/1W629nHMz767NlRVC5lh7Hr94ze6Lk6hJ/
-  5jZrvlv6fGdMVF7i3I+tTsn6T2K8XrwXc53srmT58Oxh76TXpS0L9fX/HdtY95DPJVZzwYk5g
-  WfD/LLWHZZcWyHwUXWbi8Zqo2eNFopFs2a9PrFTOCCh+Et3gmyF2s8VHSI8k5nr61ZKPZRwPz
-  lrf+P+/xrOAaLzo800SvmX9RXtmnOgfudBAZ5fK/Zf12jLeyN5oO7krZhT/tfaWaJ2LVdbo/X
-  x3vSMsm0zb8e8XXzgavv/+Q++Tdl0dt/jtwUCzeqB5t8nPmx7HJebvNFVQYOTSYmlOCPRUIu5
-  qDgRABmPEdZFAwAA
+	b=zAO+a/pGJWEL7/NAZ+cZj5QXX9oUK3UYNMbJdLRzPaBaJ7PJSACL4Djm9JZePipOT
+	 0QzGRuou/kmUOAlN47UrgtXtSzoATqUvwj+JuyDd6qAYvDF86PmvqEl+QU8bLtyxfS
+	 2JCMcao1rrh2MppwuTHIDse+NhaOnZcHGvbiQTGUOfW+e80lRhVpSH/zXsmRyArl/B
+	 tCJps+JFRaVpbp4Hsa6zUBAEOAqqhP6p7WS7fCXErBF2jggNpsgR2WrpAo4k0QL5ka
+	 hEdqj7Xxq34Ev63yaGJSdffXWs/2rVpYGSFa+2K5G/lyX0iAzDNfyA6fvfdHaxu5sH
+	 eAd8UNxRgXg5w==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8OxWVdxmlS
+  ywbsFGhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bbnf2MBZe5K7bebmNpYLzP1cXIxSEk8JBR
+  4vXp/4wQzmUmiQOHutm6GDmBnP2MEtu+V4LYbAK6Ei9+LGYBsUUE9CWWzt7DDGILCwRILO24w
+  AhiswioSGy4dwcszivgLnHw1mKwORICChJTHr6HigtKnJz5BGwOs4CExMEXL4DiHEA1ihKzp8
+  tDlFdINE4/xARhq0lcPbeJeQIj3ywk3bOQdC9gZFrFaJNUlJmeUZKbmJmja2hgoGtoaKpraaZ
+  rZGigl1ilm6iXWqqbl19UkqFrqJdYXqyXWlysV1yZm5yTopeXWrKJERh+KcUJl3Ywrtv3S+8Q
+  oyQHk5Io79N+qWQhvqT8lMqMxOKM+KLSnNTiQ4wyHBxKEryXJwHlBItS01Mr0jJzgLEAk5bg4
+  FES4bWdDJTmLS5IzC3OTIdInWLU5Zj5te0AsxBLXn5eqpQ479kpQEUCIEUZpXlwI2BxeYlRVk
+  qYl5GBgUGIpyC1KDezBFX+FaM4B6OSMG/+VKApPJl5JXCbXgEdwQR0xNZAcZAjShIRUlINTBn
+  7GWo+FemcWtFwOojvhzRflvyfi4mGqmIJ3X+Dji06qLXZYIdPk/CawJlJ0s/ajNcYxT6ykL98
+  bfWz+Gv3X1v2tjxm1PW6z7qxRNQobpbW7pAohrDcuRovAo/zdKg49O3ZsfZ425y03Xkct+6we
+  jHHalyfPqlu1aVvrZHfd8t94fXzOJ8qtXBBer7+Xvnvv/OTmjQzRLSVT1Yd1hG/vfxG41+/U4
+  Z98WHL+g99ehIZy37SxfReQEzo3LKAVPnVMw3uBc78Vvrg1CcfgbB3p/Pf7j2g5njF26Xgv98
+  Sj9D468JVp26EL50mqXuXN+yc94U1iaZszr6q1gElOx7s51rm1bMz3+RNvsEzgTW9SizFGYmG
+  WsxFxYkAsBcoK0YDAAA=
 X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-18.tower-591.messagelabs.com!1662686726!480784!1
-X-Originating-IP: [62.60.8.146]
+X-Msg-Ref: server-6.tower-745.messagelabs.com!1662686753!168044!1
+X-Originating-IP: [62.60.8.179]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 8580 invoked from network); 9 Sep 2022 01:25:26 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-18.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 9 Sep 2022 01:25:26 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id 23F281000C2
+Received: (qmail 5205 invoked from network); 9 Sep 2022 01:25:53 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-6.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 9 Sep 2022 01:25:53 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 169E5150
 	for <openembedded-devel@lists.openembedded.org>;
- Fri,  9 Sep 2022 02:25:26 +0100 (BST)
+ Fri,  9 Sep 2022 02:25:53 +0100 (BST)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121
  [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id 1642C100078
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 0A0F27B
 	for <openembedded-devel@lists.openembedded.org>;
- Fri,  9 Sep 2022 02:25:26 +0100 (BST)
+ Fri,  9 Sep 2022 02:25:53 +0100 (BST)
 Received: from CentOS7.g08.fujitsu.local (10.167.225.35) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Fri, 9 Sep 2022 02:25:24 +0100
+ (TLS) id 15.0.1497.32; Fri, 9 Sep 2022 02:25:51 +0100
 From: zhengrq.fnst <zhengrq.fnst@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-pandas: upgrade 1.4.3 -> 1.4.4
-Date: Fri, 9 Sep 2022 09:25:17 +0800
-Message-ID: <1662686717-2496-1-git-send-email-zhengrq.fnst@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-transitions: upgrade 0.8.11 ->
+ 0.9.0
+Date: Fri, 9 Sep 2022 09:25:42 +0800
+Message-ID: <1662686742-2535-1-git-send-email-zhengrq.fnst@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -78,32 +79,42 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 09 Sep 2022 01:25:39 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 09 Sep 2022 01:25:59 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98727
+ https://lists.openembedded.org/g/openembedded-devel/message/98728
+
+License-Update:
+=========================================
+format of LICENSE changed from
+ASCII text, with CRLF line terminators
+to
+ASCII text
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../python/{python3-pandas_1.4.3.bb => python3-pandas_1.4.4.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pandas_1.4.3.bb => python3-pandas_1.4.4.bb} (89%)
+ ...on3-transitions_0.8.11.bb => python3-transitions_0.9.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-transitions_0.8.11.bb => python3-transitions_0.9.0.bb} (54%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pandas_1.4.3.bb b/meta-python/recipes-devtools/python/python3-pandas_1.4.4.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-pandas_1.4.3.bb
-rename to meta-python/recipes-devtools/python/python3-pandas_1.4.4.bb
-index 2d3333c3ea..60e908bf49 100644
---- a/meta-python/recipes-devtools/python/python3-pandas_1.4.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pandas_1.4.4.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "http://pandas.pydata.org/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3f23c5c092b74d245d48eeef72bc3fd2"
- 
--SRC_URI[sha256sum] = "2ff7788468e75917574f080cd4681b27e1a7bf36461fe968b49a87b5a54d007c"
-+SRC_URI[sha256sum] = "ab6c0d738617b675183e5f28db32b5148b694ad9bba0a40c3ea26d96b431db67"
+diff --git a/meta-python/recipes-devtools/python/python3-transitions_0.8.11.bb b/meta-python/recipes-devtools/python/python3-transitions_0.9.0.bb
+similarity index 54%
+rename from meta-python/recipes-devtools/python/python3-transitions_0.8.11.bb
+rename to meta-python/recipes-devtools/python/python3-transitions_0.9.0.bb
+index 14189424a2..980351bf14 100644
+--- a/meta-python/recipes-devtools/python/python3-transitions_0.8.11.bb
++++ b/meta-python/recipes-devtools/python/python3-transitions_0.9.0.bb
+@@ -1,9 +1,9 @@
+ SUMMARY = "A lightweight, object-oriented Python state machine implementation with many extensions."
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=baac7be1f4c17620df74188e23da6d47"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=de0a0876a688a4483bfafa764773ab39"
  
  inherit pypi setuptools3
  
+-SRC_URI[sha256sum] = "7b20d32906ea4d60ee6f6c1f5dc9c9f178802425c5b155213eb0f25c277f04e4"
++SRC_URI[sha256sum] = "2f54d11bdb225779d7e729011e93a9fb717668ce3dc65f8d4f5a5d7ba2f48e10"
+ 
+ RDEPENDS:${PN} += "python3-six python3-logging"
 -- 
 2.25.1
 
