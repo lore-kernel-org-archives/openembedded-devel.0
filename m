@@ -2,155 +2,140 @@ Return-Path: <venkattalluri5559@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C518BECAAA1
-	for <webhook@archiver.kernel.org>; Mon, 12 Sep 2022 06:49:27 +0000 (UTC)
-Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
- [209.85.222.179])
- by mx.groups.io with SMTP id smtpd.web08.4663.1662965362779305595
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AA87DC6FA8B
+	for <webhook@archiver.kernel.org>; Mon, 12 Sep 2022 06:50:57 +0000 (UTC)
+Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com
+ [209.85.160.181])
+ by mx.groups.io with SMTP id smtpd.web08.4671.1662965455359336409
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 11 Sep 2022 23:49:23 -0700
+ Sun, 11 Sep 2022 23:50:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Q1TFR6Bv;
- spf=pass (domain: gmail.com, ip: 209.85.222.179,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=bjzjEUJQ;
+ spf=pass (domain: gmail.com, ip: 209.85.160.181,
  mailfrom: venkattalluri5559@gmail.com)
-Received: by mail-qk1-f179.google.com with SMTP id o7so1677988qkj.10
+Received: by mail-qt1-f181.google.com with SMTP id z18so5492808qts.7
         for <openembedded-devel@lists.openembedded.org>;
- Sun, 11 Sep 2022 23:49:22 -0700 (PDT)
+ Sun, 11 Sep 2022 23:50:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date;
-        bh=ZKog0fm8bweVcYtHGTVXKvz+7NWIQKUbZlTEjeEq9HQ=;
-        b=Q1TFR6BvNNnrngDFfptCqoIx2vVM+/vXk92upoKrBjNorUP41Ko0QO+oZzs/V9L5iS
-         oeucuHpRpne1ihtm3TLxUHIUc/m9/eQkUdrL3iv1IxFg3PAyqk4bXkBG3cAa1k7MO8yQ
-         aUrCuvjS015ocbmttFpvAu2SgslyhuZBOI0OR6aGa5TidnzLB+jS9sAb+Crr1z0yi1nt
-         mgIabRRo5jBRTJ1ZMDwSBo9HFsIM6aqQKvPihS75g8xcniuo8Dk36o4dPy9WX+IG22DN
-         nb+3T+6qoRKnQJEHxgqFa0AzTdt7hSrqcbkLzb3RhXn8ftjzX3mF2c3DIHzdxP7jxDys
-         DXsw==
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date;
+        bh=tM8BuIfMzRSW4/364uUcJfp6cHp/1WPTc9Xyx4Z3hGY=;
+        b=bjzjEUJQfo+5PysCt/1PE/3WTv9hL8yaE2AtN7cCZAOGRX8PhQW8ECHmgp0aZFZh9V
+         G3hf8mADkeELD5pHt95Y/IlVWccIgPpVfzx9aJJHyeQfEWbsE2XRhbxcujptxeAbIElY
+         w+f5Pmlai+42lPHM6cmeLiXjkW1Zdhfb7R+wnhsMNGlpYt8+ekwRDDa/qj8Mn4GWyBHO
+         y3RIT3bVpFahmj3O+QZFQnaCyLipLx3TeaffZZCPo6//YTQ7Vl3BPO7YOsfah85GsZXG
+         /QjuzSoS6Z4EJo0muXE2XvLZ5O7XZfuymi1tTOwKKQTd+faTKWbSZcVvMxIHa6dS8VHC
+         Qzkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date;
-        bh=ZKog0fm8bweVcYtHGTVXKvz+7NWIQKUbZlTEjeEq9HQ=;
-        b=SKTaPs5XLvyeRifKpS0tmRH20t4W5/tQEIIIbgzTwQpwtwmjaBMxE0evNjK7wbbE8F
-         80Hu7JzlmcAggfOWQ603P2TfR+bX5u7hZO/RDTEJDsC7zxKqH1554MEMYEqNdQO4VMVg
-         PRX9/CZWeeJ1hwXpgr7lf7yXFHa+9oE4zMP9cLNTYBEli/3zjbL0S+Ou7kSF/F593K/7
-         pliDQgJPiCZ1a5rfk/rTdGGVkA+IGuuo6mzalb5XxDai6u+ABiBM1uuU3IVSxhUgl26k
-         qHKhCu2c013VDx7QjNsdBWErn+wc2cQtysde7cmVFC7B1X7cnERmFfg8LLltuG8RKZTR
-         ZNXg==
-X-Gm-Message-State: ACgBeo1xZjSOi9WkeEhn/vq/nsR8Hc2qLhR385A9GTQiNmBHi+YysmhZ
-	FcT8C+RAzhhymF/Og8Xp2xhNTVteIpNOcq3vcjspfDvsb5E=
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date;
+        bh=tM8BuIfMzRSW4/364uUcJfp6cHp/1WPTc9Xyx4Z3hGY=;
+        b=MUA3jEkAsoNxomsC6bFnGJFVQGrM9vMzhsSiJR7CXbCX3f8tZ5R2D0PKuQD0Kv3hoO
+         ScEQZcRNDUoXYHgE+c3gV5SF4Cy2nJAB161/3uTLZHQ+DlSvR2ihnTUz52ZhuRw4IbK8
+         eSO+uLvpVhnWegtVzmPy7eZswmnqHJyTmOkiHcGTKoUHQjZI1P44eD0dV1TmI7hmCp8I
+         2TLwwakBkSnEKwGoZ7S79EXOCGduwzdAiprTXKkNremvHx+cXRRLjKA5NihWn5oUiqa8
+         QR7VBVAa4/pcsbAAelpvhyT8KoBHq3EKyDjVTFj/ccQmTWAsi3MgrG4Xa0PYX9V0mBud
+         Fy1Q==
+X-Gm-Message-State: ACgBeo2YaJ667RNsw94DRloAIvda/cMt/7neXYRP19EIxPw+3ALYQAo/
+	7apMx89mboQEIobjvfPc8CnX0PoEn0+8I5+Mosb+lFJSzU8=
 X-Google-Smtp-Source: 
- AA6agR4uTuvkm/tsMpgwibWOkblNlz5F6r715+i954m7bBEsvVWYr7tTP3XCOs7gWWHG9WDrUXukLlPiMdaVU+upG38=
-X-Received: by 2002:a05:620a:4149:b0:6bc:4c8d:c4d5 with SMTP id
- k9-20020a05620a414900b006bc4c8dc4d5mr18243111qko.417.1662965361657; Sun, 11
- Sep 2022 23:49:21 -0700 (PDT)
+ AA6agR43aTbIIXQlIOLQlGJwfveHOkpWVMSCPFdPZFI/ZSvIp4k1SYAg5y0pHKvSuwmzvdUGMlHRynm6Ql4zvnIqoug=
+X-Received: by 2002:ac8:5fc7:0:b0:35b:ad1a:a091 with SMTP id
+ k7-20020ac85fc7000000b0035bad1aa091mr6705907qta.616.1662965454228; Sun, 11
+ Sep 2022 23:50:54 -0700 (PDT)
 MIME-Version: 1.0
-From: venkatakoteswararao talluri <venkattalluri5559@gmail.com>
-Date: Mon, 12 Sep 2022 12:19:10 +0530
-Message-ID: 
+References: 
  <CABbzySb9LgeM9Coy3UpFekmGBnj6JCZbyf7-L2p-0vBhJ36R4Q@mail.gmail.com>
+In-Reply-To: 
+ <CABbzySb9LgeM9Coy3UpFekmGBnj6JCZbyf7-L2p-0vBhJ36R4Q@mail.gmail.com>
+From: venkatakoteswararao talluri <venkattalluri5559@gmail.com>
+Date: Mon, 12 Sep 2022 12:20:43 +0530
+Message-ID: 
+ <CABbzySbMx6rRQksdds+4wHkwOu3Y-Uyr0iJm0HxdacoQTc-RaA@mail.gmail.com>
 Subject: Re: [oe] [meta-oe][PATCH] sysbench: upgrade to 1.0.20
 To: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
-Content-Type: multipart/mixed; boundary="000000000000a8139005e8754beb"
+Content-Type: multipart/alternative; boundary="0000000000002c515005e87551e9"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 12 Sep 2022 06:49:27 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 12 Sep 2022 06:50:57 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98749
+ https://lists.openembedded.org/g/openembedded-devel/message/98750
 
---000000000000a8139005e8754beb
-Content-Type: multipart/alternative; boundary="000000000000a8138e05e8754be9"
-
---000000000000a8138e05e8754be9
+--0000000000002c515005e87551e9
 Content-Type: text/plain; charset="UTF-8"
 
-Hi All,
+I've followed below link and updated sysbench_1.0.20.bb file on QCS610
+https://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg77365.html
 
-I'm trying to build sysbench_1.0.20.bb on QCS610 codebase but I'm getting
-following error so can you please help me to solve this issue.
-Image:qti-multimedia-image
-Target:qcs610-odk-64
+On Mon, Sep 12, 2022 at 12:19 PM venkatakoteswararao talluri <
+venkattalluri5559@gmail.com> wrote:
 
-Error log:
+> Hi All,
+>
+> I'm trying to build sysbench_1.0.20.bb on QCS610 codebase but I'm getting
+> following error so can you please help me to solve this issue.
+> Image:qti-multimedia-image
+> Target:qcs610-odk-64
+>
+> Error log:
+>
+> NOTE: Resolving any missing task queue dependencies
+> ERROR: Nothing RPROVIDES 'luajit' (but
+> /var/lib/jenkins/workspace/QCS610_OpenQ_Linux_1.x_Internal_/qcs610-le-1-0_ap_standard_oem/apps_proc/poky/meta-qti-bsp/recipes-products/images/
+> qti-multimedia-image.bb RDEPENDS on or otherwise requires it)
+> luajit was skipped: incompatible with host aarch64-oe-linux (not in
+> COMPATIBLE_HOST)
+> NOTE: Runtime target 'luajit' is unbuildable, removing...
+> Missing or unbuildable dependency chain was: ['luajit']
+> ERROR: Required build target 'qti-multimedia-image' has no buildable
+> providers.
+> Missing or unbuildable dependency chain was: ['qti-multimedia-image',
+> 'luajit']
+>
+>
+> Please find the attached sysbench_1.0.20.bb file.
+>
+>
+> Thanks,
+>
+> Venkata Talluri
+>
 
-NOTE: Resolving any missing task queue dependencies
-ERROR: Nothing RPROVIDES 'luajit' (but
-/var/lib/jenkins/workspace/QCS610_OpenQ_Linux_1.x_Internal_/qcs610-le-1-0_ap_standard_oem/apps_proc/poky/meta-qti-bsp/recipes-products/images/
-qti-multimedia-image.bb RDEPENDS on or otherwise requires it)
-luajit was skipped: incompatible with host aarch64-oe-linux (not in
-COMPATIBLE_HOST)
-NOTE: Runtime target 'luajit' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['luajit']
-ERROR: Required build target 'qti-multimedia-image' has no buildable
-providers.
-Missing or unbuildable dependency chain was: ['qti-multimedia-image',
-'luajit']
-
-
-Please find the attached sysbench_1.0.20.bb file.
-
-
-Thanks,
-
-Venkata Talluri
-
---000000000000a8138e05e8754be9
+--0000000000002c515005e87551e9
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">Hi All,<br><br>I&#39;m trying to build <a href=3D"http://s=
-ysbench_1.0.20.bb">sysbench_1.0.20.bb</a> on QCS610 codebase but I&#39;m ge=
-tting following error so can you please help me to solve this issue.<br>Ima=
-ge:qti-multimedia-image<br>Target:qcs610-odk-64<br><br>Error log:<br><br>NO=
-TE: Resolving any missing task queue dependencies<br>ERROR: Nothing RPROVID=
-ES &#39;luajit&#39; (but /var/lib/jenkins/workspace/QCS610_OpenQ_Linux_1.x_=
-Internal_/qcs610-le-1-0_ap_standard_oem/apps_proc/poky/meta-qti-bsp/recipes=
--products/images/<a href=3D"http://qti-multimedia-image.bb">qti-multimedia-=
-image.bb</a> RDEPENDS on or otherwise requires it)<br>luajit was skipped: i=
-ncompatible with host aarch64-oe-linux (not in COMPATIBLE_HOST)<br>NOTE: Ru=
-ntime target &#39;luajit&#39; is unbuildable, removing...<br>Missing or unb=
-uildable dependency chain was: [&#39;luajit&#39;]<br>ERROR: Required build =
-target &#39;qti-multimedia-image&#39; has no buildable providers.<br>Missin=
-g or unbuildable dependency chain was: [&#39;qti-multimedia-image&#39;, &#3=
-9;luajit&#39;]<br><br><br>Please find the attached <a href=3D"http://sysben=
-ch_1.0.20.bb">sysbench_1.0.20.bb</a> file.<br><br><br>Thanks,<br><br>Venkat=
-a Talluri<br></div>
+<div dir=3D"ltr"><div>I&#39;ve followed below link and updated <a href=3D"h=
+ttp://sysbench_1.0.20.bb">sysbench_1.0.20.bb</a> file on QCS610</div><div><=
+a href=3D"https://www.mail-archive.com/openembedded-devel@lists.openembedde=
+d.org/msg77365.html">https://www.mail-archive.com/openembedded-devel@lists.=
+openembedded.org/msg77365.html</a></div></div><br><div class=3D"gmail_quote=
+"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Sep 12, 2022 at 12:19 PM ve=
+nkatakoteswararao talluri &lt;<a href=3D"mailto:venkattalluri5559@gmail.com=
+">venkattalluri5559@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"=
+gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(20=
+4,204,204);padding-left:1ex"><div dir=3D"ltr">Hi All,<br><br>I&#39;m trying=
+ to build <a href=3D"http://sysbench_1.0.20.bb" target=3D"_blank">sysbench_=
+1.0.20.bb</a> on QCS610 codebase but I&#39;m getting following error so can=
+ you please help me to solve this issue.<br>Image:qti-multimedia-image<br>T=
+arget:qcs610-odk-64<br><br>Error log:<br><br>NOTE: Resolving any missing ta=
+sk queue dependencies<br>ERROR: Nothing RPROVIDES &#39;luajit&#39; (but /va=
+r/lib/jenkins/workspace/QCS610_OpenQ_Linux_1.x_Internal_/qcs610-le-1-0_ap_s=
+tandard_oem/apps_proc/poky/meta-qti-bsp/recipes-products/images/<a href=3D"=
+http://qti-multimedia-image.bb" target=3D"_blank">qti-multimedia-image.bb</=
+a> RDEPENDS on or otherwise requires it)<br>luajit was skipped: incompatibl=
+e with host aarch64-oe-linux (not in COMPATIBLE_HOST)<br>NOTE: Runtime targ=
+et &#39;luajit&#39; is unbuildable, removing...<br>Missing or unbuildable d=
+ependency chain was: [&#39;luajit&#39;]<br>ERROR: Required build target &#3=
+9;qti-multimedia-image&#39; has no buildable providers.<br>Missing or unbui=
+ldable dependency chain was: [&#39;qti-multimedia-image&#39;, &#39;luajit&#=
+39;]<br><br><br>Please find the attached <a href=3D"http://sysbench_1.0.20.=
+bb" target=3D"_blank">sysbench_1.0.20.bb</a> file.<br><br><br>Thanks,<br><b=
+r>Venkata Talluri<br></div>
+</blockquote></div>
 
---000000000000a8138e05e8754be9--
-
---000000000000a8139005e8754beb
-Content-Type: application/octet-stream; name="sysbench_1.0.20.bb"
-Content-Disposition: attachment; filename="sysbench_1.0.20.bb"
-Content-Transfer-Encoding: base64
-Content-ID: <f_l7yem9ih0>
-X-Attachment-Id: f_l7yem9ih0
-
-U1VNTUFSWSA9ICJTeXN0ZW0gcGVyZm9ybWFuY2UgYmVuY2htYXJrIgpIT01FUEFHRSA9ICJodHRw
-Oi8vZ2l0aHViLmNvbS9ha29weXRvdi9zeXNiZW5jaCIKU0VDVElPTiA9ICJjb25zb2xlL3Rlc3Rz
-IgpMSUNFTlNFID0gIkdQTHYyIgpMSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9DT1BZSU5HO21k
-NT1iMjM0ZWU0ZDY5ZjVmY2U0NDg2YTgwZmRhZjRhNDI2MyIKCkRFUEVORFMgPSAibHVhaml0IgoK
-IyBUaGUgcHJvamVjdCBoYXMgbW92ZWQgZnJvbSBTb3VyY2Vmb3JnZSB0byBMYXVuY2hwYWQsIHRv
-IEdpdGh1Yi4gVXNlIHRoZSBzb3VyY2UgdGFyYmFsbCBmcm9tCiMgTGF1bmNocGFkIHVudGlsIHRo
-ZSBuZXh0IHJlbGVhc2UgaXMgYXZhaWxhYmxlIGZyb20gR2l0aHViLgojU1JDX1VSSSA9ICJodHRw
-czovL2xhdW5jaHBhZC5uZXQvdWJ1bnR1LythcmNoaXZlL3ByaW1hcnkvK2ZpbGVzLyR7QlBOfV8k
-e1BWfS5vcmlnLnRhci5neiI7CmluaGVyaXQgYXV0b3Rvb2xzIHBrZ2NvbmZpZwoKI1NSQ19VUkkg
-PSAiaHR0cHM6Ly9naXRodWIuY29tL2Frb3B5dG92L3N5c2JlbmNoL2FyY2hpdmUvcmVmcy90YWdz
-LyR7UFZ9LnRhci5neiIKU1JDX1VSSSA9ICJnaXQ6Ly9naXRodWIuY29tL2Frb3B5dG92LyR7QlBO
-fS5naXQiCgpTUkNSRVYgPSAiZWJmMWM5MGRhMDVkZWE5NDY0ODE2NWU0ZjE0OWFiYzIwYzk3OTU1
-NyIKClMgPSAiJHtXT1JLRElSfS9naXQiCgojU1JDX1VSSVttZDVzdW1dID0gIjc1NjM4MWM2ZmM0
-ZTE2YWYxZTA4MzFiNWU2YTNkY2IzIgojU1JDX1VSSVtzaGEyNTZzdW1dID0gImU4ZWU3OWIxZjM5
-OWIyZDE2N2U2YTkwZGU1MmNjYzkwZTUyNDA4ZjdhZGUxYjliNzEzNTcyN2VmZTE4MTM0N2YiCgpQ
-QUNLQUdFQ09ORklHID8/PSAiJHtAYmIudXRpbHMuZmlsdGVyKCdESVNUUk9fRkVBVFVSRVMnLCAn
-bGFyZ2VmaWxlJywgZCl9IgpQQUNLQUdFQ09ORklHW2xhcmdlZmlsZV0gPSAiLS1lbmFibGUtbGFy
-Z2VmaWxlLC0tZGlzYWJsZS1sYXJnZWZpbGUsLCIKI1BBQ0tBR0VDT05GSUdbYWlvXSA9ICItLWVu
-YWJsZS1haW8sLS1kaXNhYmxlLWFpbyxsaWJhaW8sIgpQQUNLQUdFQ09ORklHW215c3FsXSA9ICIt
-LXdpdGgtbXlzcWwgXAogICAgICAgICAgICAgICAgICAgICAgICAtLXdpdGgtbXlzcWwtbGlicz0k
-e1NUQUdJTkdfTElCRElSfSwgXAogICAgICAgICAgICAgICAgICAgICAgICAtLXdpdGhvdXQtbXlz
-cWwsbXlzcWw1IgoKIyB0aGUgaW50ZXJuYWwgbHVhaml0IHdvbid0IGNyb3NzIGNvbXBpbGUKRVhU
-UkFfT0VDT05GICs9ICItLXdpdGgtc3lzdGVtLWx1YWppdCIKCiMgbHVhLmggZ2VuZXJhdGVkIGZp
-bGVzIGFyZSBib2d1cyB3aGVuIHVzaW5nIEIgIT0gUwpCID0gIiR7U30iCgpkb19jb25maWd1cmVf
-cHJlcGVuZCgpIHsKICAgIHRvdWNoICR7U30vTkVXUyAke1N9L0FVVEhPUlMKfQo=
---000000000000a8139005e8754beb--
+--0000000000002c515005e87551e9--
 
