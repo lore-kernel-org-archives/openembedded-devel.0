@@ -1,116 +1,128 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F02A6C6FA82
-	for <webhook@archiver.kernel.org>; Tue, 13 Sep 2022 10:23:18 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.4])
- by mx.groups.io with SMTP id smtpd.web09.3207.1663064594071755455
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A8A6C54EE9
+	for <webhook@archiver.kernel.org>; Tue, 13 Sep 2022 14:28:40 +0000 (UTC)
+Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
+ by mx.groups.io with SMTP id smtpd.web08.5383.1663079311875169297
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Sep 2022 03:23:14 -0700
+ Tue, 13 Sep 2022 07:28:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=laju7gat;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.4,
- mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1663064592; i=@fujitsu.com;
-	bh=LsPvtEHqT9d5aDghKPBJp68orf1iuOboysu+uS8Z0Bo=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=laju7gat73nlcwOVvD91VyFd4nfm84hBJGdSnfbU4ArNY9GpAWqlIXVuXbLSTU27/
-	 3kRWNDMzBLBpfBfnk0rRrfpabDFJkSua+Qfty+Ipt1UAPzTrVNrD3aUgbth9TBJ2gH
-	 cfxAOj1tZC8LF+LoFeilT2O9MTCsRVbO8signT/9jUSo3++cPaXGS9K7wW/J3nSrap
-	 dmvLdYHabKhVuR+zLbaZfR9zpnMn7Y0XgsoXk70DYfoxMTLyYNGPfQgvq0wCpx8U5t
-	 sEeUeT5IOM20oE5F9w/MEG+LKu+n36LOGYKaQ1e/tXDmnjThJq6VNE8q/v2Ryx1+/B
-	 FCQQHqwARIScQ==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrHIsWRWlGSWpSXmKPExsViZ8MxSVcgSiH
-  ZYNFxHouLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWP9suXMBQ+5Ko5M2MTWwPiWs4uRi0NI4Amj
-  RO/0XhYI5zqTxLrlN9ghnD2MEh1b7wM5nBxsAmoS02/dYAWxRQT0JZbO3sMMYjMLqEi8+N0DV
-  MPBISzgK3F3YylImEVAVWLjpBtMIDavgKPE8gk9YOUSAgoSUx6+Z4aIC0qcnPmEBWKMhMTBFy
-  +gahQlZl9uZoGwKyQapx9igrDVJK6e28Q8gZF/FpL2WUjaFzAyrWK0SirKTM8oyU3MzNE1NDD
-  QNTQ01TU20jU00Uus0k3USy3VLU8tLtE10kssL9ZLLS7WK67MTc5J0ctLLdnECAzKlGIFvh2M
-  zat+6h1ilORgUhLljfRSSBbiS8pPqcxILM6ILyrNSS0+xCjDwaEkwZsdAZQTLEpNT61Iy8wBR
-  ghMWoKDR0mEdzNImre4IDG3ODMdInWKUZdj5te2A8xCLHn5ealS4rwzvYGKBECKMkrz4EbAov
-  USo6yUMC8jAwODEE9BalFuZgmq/CtGcQ5GJWFeiTCgKTyZeSVwm14BHcEEdISRtTzIESWJCCm
-  pBqYMPrnypB/VFVLub84v73R4KGQkGvs0JE3izJPoSdLrHKrYH+5sPv3sZmRzRAbv0Ymr2haq
-  pZ7cIe449wPbEX9LwdlPxT76/ReS+XV+p5Ufe2rNeQnVOcs97/9cuCD/nKtxhGjljN91sWtyT
-  3q7ZNVNYnsWb2ffrys/vat2+YIX98332k2d3V93Qf/uBc8DB9yn1VzqkX52PKhpspjUZ2PHHR
-  ++Xptb+n99xo0JhwSn3fGVkYueHnO2XHHJ+Ya24omqATUHajadmxxZl8Z87PuDXTf38F6RKdZ
-  2/zqHvav06MyTO2wjZ4d76ohITml6dMt0drejdcD+iurW76tlI47u/hw4QyCS3UPLjPc2m7sS
-  S3FGoqEWc1FxIgALst68UQMAAA==
-X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-3.tower-571.messagelabs.com!1663064592!146152!1
-X-Originating-IP: [62.60.8.146]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.87.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 3159 invoked from network); 13 Sep 2022 10:23:12 -0000
-Received: from unknown (HELO n03ukasimr02.n03.fujitsu.local) (62.60.8.146)
-  by server-3.tower-571.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 13 Sep 2022 10:23:12 -0000
-Received: from n03ukasimr02.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTP id E3C831000E7
+ dkim=missing;
+ spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.22,
+ mailfrom: f_l_k@t-online.de)
+Received: from fwd74.dcpf.telekom.de (fwd74.aul.t-online.de [10.223.144.100])
+	by mailout12.t-online.de (Postfix) with SMTP id A846916280
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Sep 2022 11:23:11 +0100 (BST)
-Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121
- [10.183.43.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr02.n03.fujitsu.local (Postfix) with ESMTPS id D7124100078
-	for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Sep 2022 11:23:11 +0100 (BST)
-Received: from localhost.localdomain (10.167.225.33) by
- R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Tue, 13 Sep 2022 11:23:10 +0100
-From: Wang Mingyu <wangmy@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-xmlschema: upgrade 2.0.3 -> 2.0.4
-Date: Tue, 13 Sep 2022 18:23:01 +0800
-Message-ID: <1663064581-3376-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ Tue, 13 Sep 2022 16:28:01 +0200 (CEST)
+Received: from flk-MS-7C91.. ([84.163.46.102]) by fwd74.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1oY6tN-2BJzDF0; Tue, 13 Sep 2022 16:28:01 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Markus Volk <f_l_k@t-online.de>
+Subject: [oe-core][PATCH] flatbuffers: upgrade 2.0.6 -> 2.0.8
+Date: Tue, 13 Sep 2022 16:27:53 +0200
+Message-Id: <20220913142753.188814-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.33]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM121.r01.fujitsu.local (10.183.43.173)
-X-Virus-Scanned: ClamAV using ClamSMTP
+X-TOI-EXPURGATEID: 150726::1663079281-C8C8BB6F-D24C28FB/0/0 CLEAN NORMAL
+X-TOI-MSGID: 14c0887a-d8bd-4b0e-a8fe-cc5e99f2095f
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 13 Sep 2022 10:23:18 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 13 Sep 2022 14:28:40 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98785
+ https://lists.openembedded.org/g/openembedded-devel/message/98786
 
-Changelog:
-==========
- Add use_location_hints argument to document API for giving the option of ignoring XSI schema locations hints
- Fix import from locations hints with namespace mismatch (issue #324)
+* upgrade python3-flatbuffers as well
+* make sure that flatbuffers and python3-flatbuffers are using the same c=
+odebase
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../{python3-xmlschema_2.0.3.bb => python3-xmlschema_2.0.4.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-xmlschema_2.0.3.bb => python3-xmlschema_2.0.4.bb} (84%)
+ .../flatbuffers/{flatbuffers_2.0.6.bb =3D> flatbuffers.bb}   | 7 +++----
+ meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc       | 3 +++
+ ...python3-flatbuffers_2.0.7.bb =3D> python3-flatbuffers.bb} | 5 ++---
+ 3 files changed, 8 insertions(+), 7 deletions(-)
+ rename meta-oe/recipes-devtools/flatbuffers/{flatbuffers_2.0.6.bb =3D> f=
+latbuffers.bb} (84%)
+ create mode 100644 meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc
+ rename meta-oe/recipes-devtools/flatbuffers/{python3-flatbuffers_2.0.7.b=
+b =3D> python3-flatbuffers.bb} (72%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-xmlschema_2.0.3.bb b/meta-python/recipes-devtools/python/python3-xmlschema_2.0.4.bb
+diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.6.bb b/=
+meta-oe/recipes-devtools/flatbuffers/flatbuffers.bb
 similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-xmlschema_2.0.3.bb
-rename to meta-python/recipes-devtools/python/python3-xmlschema_2.0.4.bb
-index 5c1c60f601..abc7c8a5d7 100644
---- a/meta-python/recipes-devtools/python/python3-xmlschema_2.0.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-xmlschema_2.0.4.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/xmlschema"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=47489cb18c469474afeb259ed1d4832f"
- 
--SRC_URI[sha256sum] = "adef8cb1e6572fe095b56ae4243b3618f842b32adba98e1b1bab0bd014f2234e"
-+SRC_URI[sha256sum] = "00d34f97c761c191c20e822899c490930d2c4c9ea6cc7e98f25360fde498f1ab"
- 
- PYPI_PACKAGE = "xmlschema"
- inherit pypi setuptools3
--- 
-2.25.1
+rename from meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.6.bb
+rename to meta-oe/recipes-devtools/flatbuffers/flatbuffers.bb
+index 3ca477210..f4a8b020a 100644
+--- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_2.0.6.bb
++++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers.bb
+@@ -2,6 +2,9 @@ SUMMARY =3D "Memory Efficient Serialization Library"
+ HOMEPAGE =3D "https://github.com/google/flatbuffers"
+ SECTION =3D "console/tools"
+ LICENSE =3D "Apache-2.0"
++LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc=
+3c6bd57"
++
++require flatbuffers.inc
+=20
+ PACKAGE_BEFORE_PN =3D "${PN}-compiler"
+=20
+@@ -10,10 +13,6 @@ DEPENDS =3D "flatbuffers-native"
+ RDEPENDS:${PN}-compiler =3D "${PN}"
+ RDEPENDS:${PN}-dev +=3D "${PN}-compiler"
+=20
+-LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D3b83ef96387f14655fc854ddc=
+3c6bd57"
+-
+-SRCREV =3D "615616cb5549a34bdf288c04bc1b94bd7a65c396"
+-SRC_URI =3D "git://github.com/google/flatbuffers.git;branch=3Dmaster;pro=
+tocol=3Dhttps"
+ S =3D "${WORKDIR}/git"
+=20
+ CVE_CHECK_IGNORE +=3D "CVE-2020-35864"
+diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc b/meta-=
+oe/recipes-devtools/flatbuffers/flatbuffers.inc
+new file mode 100644
+index 000000000..ebdd94498
+--- /dev/null
++++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers.inc
+@@ -0,0 +1,3 @@
++PV =3D "2.0.8"
++SRCREV =3D "06c5c7ed0bd987a918cf88caafb094f22cdd1721"
++SRC_URI =3D "git://github.com/google/flatbuffers.git;branch=3Dmaster;pro=
+tocol=3Dhttps"
+diff --git a/meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers_2.0=
+.7.bb b/meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers.bb
+similarity index 72%
+rename from meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers_2.0.=
+7.bb
+rename to meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers.bb
+index 84c80444b..fb5b86dde 100644
+--- a/meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers_2.0.7.bb
++++ b/meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers.bb
+@@ -2,11 +2,10 @@ SUMMARY =3D "Memory Efficient Serialization Library - P=
+ython3 Modules"
+ HOMEPAGE =3D "https://github.com/google/flatbuffers"
+ SECTION =3D "console/tools"
+ LICENSE =3D "Apache-2.0"
+-
+ LIC_FILES_CHKSUM =3D "file://../LICENSE.txt;md5=3D3b83ef96387f14655fc854=
+ddc3c6bd57"
+=20
+-SRCREV =3D "8367664f15c3ea2ee58c67dacf9d630b49466de5"
+-SRC_URI =3D "git://github.com/google/flatbuffers.git;branch=3Dmaster;pro=
+tocol=3Dhttps"
++require flatbuffers.inc
++
+ S =3D "${WORKDIR}/git/python"
+=20
+ RDEPENDS:${PN} =3D "flatbuffers"
+--=20
+2.34.1
 
 
