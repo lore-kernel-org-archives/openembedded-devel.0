@@ -2,74 +2,75 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D13B7C6FA89
-	for <webhook@archiver.kernel.org>; Tue, 13 Sep 2022 10:16:08 +0000 (UTC)
-Received: from mail1.bemta32.messagelabs.com (mail1.bemta32.messagelabs.com
- [195.245.230.1])
- by mx.groups.io with SMTP id smtpd.web09.3115.1663064165658096648
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D17F8C6FA82
+	for <webhook@archiver.kernel.org>; Tue, 13 Sep 2022 10:16:18 +0000 (UTC)
+Received: from mail3.bemta32.messagelabs.com (mail3.bemta32.messagelabs.com
+ [195.245.230.18])
+ by mx.groups.io with SMTP id smtpd.web09.3119.1663064170631619366
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Sep 2022 03:16:06 -0700
+ Tue, 13 Sep 2022 03:16:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=tCIghUrS;
- spf=pass (domain: fujitsu.com, ip: 195.245.230.1,
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=Ldplgcpo;
+ spf=pass (domain: fujitsu.com, ip: 195.245.230.18,
  mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1663064164; i=@fujitsu.com;
-	bh=xJZcRni4D/VZE5K3m/3htg0UxMgOSyNOXMPct61UOsM=;
+	s=170520fj; t=1663064169; i=@fujitsu.com;
+	bh=LeBE51epQLjuYGNepTMj5nvQK503m55mmlX8BiQLWAM=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
 	 MIME-Version:Content-Type;
-	b=tCIghUrSCDP1G7yrNPcNLJ9cbepPZLf5VMDzVeVovJYjSjWcEKJtcOUnIWmtGldyw
-	 +a9UrOxfqlRJSr1O0zmdCWNGGlRUFLAC3S0214DdXvJ1QHkDdCf0SQLB/W2Dhi+oFF
-	 KaJtgp/DHN1dMH5MT8anGa3pirC/QxkJBLdJj62A9BIMZSI2CVtJYmuI2CiCxgxKDI
-	 AP1JvWzlLtSuhOFEV+SVmLQsUpfUugJHHt0KSCahOgAw2t80+wmKZwIkCZQTwZzcqn
-	 ystghs4nBGbUS3lP1bNdmcdwzrDV6T7y9EWZ8hr7E+QBHovGhQPQW1NAx5v203ORBj
-	 lckBnjAFYyWmg==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrFIsWRWlGSWpSXmKPExsViZ8OxWTc5QiH
-  ZoGeVmsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmjHhxAfWgsm8Ffc+xTQwfufuYuTiEBJ4yChx
-  8VwDE4RzmUliy6MGNghnD6NEf/9jli5GTg42ATWJ6bdusILYIgL6Ektn72EGsZkFVCRe/O5hB
-  7GFBZwlfsx4BlbDIqAqManjI1gNr4CjxI+nr8HiEgIKElMevgeLcwo4SWzuuwMWFwKqeX33EV
-  S9oMTJmU9YIOZLSBx88YIZoldRYvblZhYIu0KicfohJghbTeLquU3MExgFZyFpn4WkfQEj0yp
-  Gq6SizPSMktzEzBxdQwMDXUNDU10zXSNDA73EKt1EvdRS3fLU4hJdQ73E8mK91OJiveLK3OSc
-  FL281JJNjMAgTilmu7SDcW7fT71DjJIcTEqivJFeCslCfEn5KZUZicUZ8UWlOanFhxhlODiUJ
-  HjjQ4BygkWp6akVaZk5wIiCSUtw8CiJ8PIEA6V5iwsSc4sz0yFSpxgVpcR5Z3oDJQRAEhmleX
-  BtsCi+xCgrJczLyMDAIMRTkFqUm1mCKv+KUZyDUUmYVyIMaApPZl4J3PRXQIuZgBYbWcuDLC5
-  JREhJNTBFW+5y07h1XHTz2i8lOc/krb+lfnIL/fY113NegHF4nZO6QK/94Z9b+/tn/v8/uyeL
-  l9vxt91hw/n/7zrW72A52J/ZPL082UL0d++64oVrImdtWBjeaeZw/P6+tzGe0x+Ivl90qjyi1
-  zzop3DvzYqGnowi2WsMp8xZ1rtmrdOIrBJ3jH869cyTWVz7Wk+vmyJ56Y7L/z0PlzAE7BUsvd
-  a27XDnQb4CpWhPV73/Z1xXHjvR9zVYROjvKsaFv47FPYm5vefl3Z1bVkRtd++6oyAw69ZULZO
-  Tp44eTZXbvuXw1mqP458uvYl/xmvJcc5v/RzfbO6e/8en33/M9NrT9ZGEazXH480iDe4tEaJH
-  +JT7lFiKMxINtZiLihMBJnvze10DAAA=
+	b=LdplgcpoJy3xT9wl2c3XyyTwJag/5geSFrqoklr+co/aQumrB+bTa71QaOHEVzVTG
+	 DdmZYPi2A/MLZjTLudNZaoaWj9XkBKSe8YcOLfAlI2HL0TNyCe0bNsoccFLJQ/jmMS
+	 1iAqeSnAhHj132EGk4hBOxj3RUTUnod5P8MN8nUFrSSqBR/Bk4YXnT93r+tSgMBfbc
+	 ymzrLaGcnq7afk69AoEk9LXzrYE+hZbyFYEGkjotw/dhePCjyFSS+SI19qNMfpabar
+	 l/4G5kmz1hbAk7izte7ojh6BjM3vDRwfmTB5M05XH8Ryt2NdYAwEArOpW8RVtA6b2p
+	 q6udew5ewev9Q==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrGIsWRWlGSWpSXmKPExsViZ8ORqJsRoZB
+  s8OmFssXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmvGms4u94DZPxcQNN9kbGM9wdzFycQgJPGGU
+  uNu1mR3Cuc4kcerVYaYuRk4gZw+jxLkpiSA2m4CaxPRbN1hBbBEBfYmls/cwg9jMAioSL373s
+  IPYwgJBEm+WzWYBsVkEVCXOz30EVsMr4Chx+PZisLiEgILElIfvweKcAk4Sm/vusELscpR4fR
+  emXlDi5MwnLBDzJSQOvnjBDNGrKDH7cjPUnAqJxumHmCBsNYmr5zYxT2AUnIWkfRaS9gWMTKs
+  YrZKKMtMzSnITM3N0DQ0MdA0NTXXNdA3NLPUSq3QT9VJLdctTi0t0DfUSy4v1UouL9Yorc5Nz
+  UvTyUks2MQKDOKWYbeUOxpV9P/UOMUpyMCmJ8kZ6KSQL8SXlp1RmJBZnxBeV5qQWH2KU4eBQk
+  uCNDwHKCRalpqdWpGXmACMKJi3BwaMkwssTDJTmLS5IzC3OTIdInWLU5Zj5te0AsxBLXn5eqp
+  Q470xvoCIBkKKM0jy4EbDovsQoKyXMy8jAwCDEU5BalJtZgir/ilGcg1FJmFciDGgKT2ZeCdy
+  mV0BHMAEdYWQtD3JESSJCSqqBqe8XV8vKsN62xw45E3znr1DqbmgJq/Xg5FD5Fn64np/psE24
+  QWWRmd7CM+mbdk5fdjJpaV3IZDHjR6aF2k9vXObmvxz5r+h4qVTAlgftpxonKXvYbXh6c/tE7
+  ZDy81U/BFmu/Tq//3O3SpTk39Wczzu7J1ZklZil8gaUBqtZVPn9y3JucKp363WsV7F9z3OccZ
+  XDBM/3Xbfc39TWzWxIXqvEqjTjQ8DLen+/c6ttMn+niB4vPX83g2X9T9vr4ZnitkcSQ56LJh6
+  ZyFLGv3Su+h0Hu72CzosmZz/iOn5zS+xywYNJLhG+y42iz8TZLJrSmTI1ekXOlkvWpj8nlt3m
+  z5Qs/bb0cABLwh+u0NlKLMUZiYZazEXFiQAV70AoaQMAAA==
 X-Env-Sender: wangmy@fujitsu.com
-X-Msg-Ref: server-10.tower-591.messagelabs.com!1663064163!150958!1
-X-Originating-IP: [62.60.8.179]
+X-Msg-Ref: server-3.tower-585.messagelabs.com!1663064168!144190!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 21164 invoked from network); 13 Sep 2022 10:16:03 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-10.tower-591.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 13 Sep 2022 10:16:03 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 42113142
+Received: (qmail 25790 invoked from network); 13 Sep 2022 10:16:08 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-3.tower-585.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 13 Sep 2022 10:16:08 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 35B77100191
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Sep 2022 11:16:03 +0100 (BST)
+ Tue, 13 Sep 2022 11:16:08 +0100 (BST)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121
  [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 358117C
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 29843100043
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Sep 2022 11:16:03 +0100 (BST)
+ Tue, 13 Sep 2022 11:16:08 +0100 (BST)
 Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Tue, 13 Sep 2022 11:16:01 +0100
+ (TLS) id 15.0.1497.32; Tue, 13 Sep 2022 11:16:06 +0100
 From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] syslog-ng: upgrade 3.37.1 -> 3.38.1
-Date: Tue, 13 Sep 2022 18:15:42 +0800
-Message-ID: <1663064143-3176-4-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-antlr4-runtime: upgrade 4.10 ->
+ 4.11.1
+Date: Tue, 13 Sep 2022 18:15:43 +0800
+Message-ID: <1663064143-3176-5-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1663064143-3176-1-git-send-email-wangmy@fujitsu.com>
 References: <1663064143-3176-1-git-send-email-wangmy@fujitsu.com>
@@ -82,43 +83,45 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 13 Sep 2022 10:16:08 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 13 Sep 2022 10:16:18 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98765
+ https://lists.openembedded.org/g/openembedded-devel/message/98766
 
 License-Update:
-Add description to intention with the choice of licenses and the location of a license file.
+-Metadata-Version updated to 2.1
+-Python updated from 2.7.12 to 3
+-Version updated to 4.11.1
+-Description and Platform removed
+
+Changelog:
+===========
+ a major rebuild of the Go target
+ huge internal refractoring of testing and various target speed improvements
+ Getting all targets to run on all operating systems using github actions
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../syslog-ng/{syslog-ng_3.37.1.bb => syslog-ng_3.38.1.bb}    | 4 ++--
+ ...ntlr4-runtime_4.10.bb => python3-antlr4-runtime_4.11.1.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/syslog-ng/{syslog-ng_3.37.1.bb => syslog-ng_3.38.1.bb} (97%)
+ rename meta-python/recipes-devtools/python/{python3-antlr4-runtime_4.10.bb => python3-antlr4-runtime_4.11.1.bb} (53%)
 
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.37.1.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.38.1.bb
-similarity index 97%
-rename from meta-oe/recipes-support/syslog-ng/syslog-ng_3.37.1.bb
-rename to meta-oe/recipes-support/syslog-ng/syslog-ng_3.38.1.bb
-index 10d63ccc68..76945095ac 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.37.1.bb
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.38.1.bb
-@@ -10,7 +10,7 @@ ideal for firewalled environments. \
- HOMEPAGE = "http://www.balabit.com/network-security/syslog-ng/opensource-logging-system"
+diff --git a/meta-python/recipes-devtools/python/python3-antlr4-runtime_4.10.bb b/meta-python/recipes-devtools/python/python3-antlr4-runtime_4.11.1.bb
+similarity index 53%
+rename from meta-python/recipes-devtools/python/python3-antlr4-runtime_4.10.bb
+rename to meta-python/recipes-devtools/python/python3-antlr4-runtime_4.11.1.bb
+index 01f17207c6..535dc022da 100644
+--- a/meta-python/recipes-devtools/python/python3-antlr4-runtime_4.10.bb
++++ b/meta-python/recipes-devtools/python/python3-antlr4-runtime_4.11.1.bb
+@@ -1,8 +1,8 @@
+ SUMMARY = "ANTLR runtime for Python"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=6e514123aedb5d9fb133d1bc6c598d46"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=9a0a1d20e667cf7ab7c59357cf8b4812"
  
- LICENSE = "GPL-2.0-only & LGPL-2.1-only"
--LIC_FILES_CHKSUM = "file://COPYING;md5=189c3826d32deaf83ad8d0d538a10023"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=71d15c2fb22f43e1a380f3f799ebde30"
+-SRC_URI[sha256sum] = "061a49bc72ae05a35d9b61c0ba0ac36c0397708819f02fbfb20a80e47d287a1b"
++SRC_URI[sha256sum] = "a53de701312f9bdacc5258a6872cd6c62b90d3a90ae25e494026f76267333b60"
  
- # util-linux added to get libuuid
- DEPENDS = "libpcre flex glib-2.0 openssl util-linux bison-native"
-@@ -24,7 +24,7 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
-            file://syslog-ng.service-the-syslog-ng-service.patch \
- "
- 
--SRC_URI[sha256sum] = "d67a320cb896cd5d62f24d9e1bec138847fa4618ae13a3946cae2b75c528ee14"
-+SRC_URI[sha256sum] = "5491f686d0b829b69b2e0fc0d66a62f51991aafaee005475bfa38fab399441f7"
- 
- UPSTREAM_CHECK_URI = "https://github.com/balabit/syslog-ng/releases"
+ PYPI_PACKAGE = "antlr4-python3-runtime"
  
 -- 
 2.25.1
