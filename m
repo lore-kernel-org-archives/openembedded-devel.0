@@ -1,77 +1,78 @@
-Return-Path: <zhengrq.fnst@fujitsu.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE176C54EE9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EFB4BC6FA89
 	for <webhook@archiver.kernel.org>; Tue, 13 Sep 2022 10:17:28 +0000 (UTC)
-Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
- [195.245.231.3])
- by mx.groups.io with SMTP id smtpd.web11.2924.1663064247993265790
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
+ [85.158.142.2])
+ by mx.groups.io with SMTP id smtpd.web10.3052.1663064247059747511
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Sep 2022 03:17:28 -0700
+ Tue, 13 Sep 2022 03:17:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=S4s2Y7JK;
- spf=pass (domain: fujitsu.com, ip: 195.245.231.3,
- mailfrom: zhengrq.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=ctogxlrc;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.2,
+ mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1663064246; i=@fujitsu.com;
-	bh=C6FAeWoqDwvpgj+ITCy02EjfOEcvi63zu/4PoWI/eXM=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=S4s2Y7JKlxlKBVhHOTegQStbo4Z6zgP1uL+R3h5+DMNsS187u8zm9i6FfkAPHzQk7
-	 WkMxjqkZh9fKKCuttldmZejc9m5Aehoa+EEfVVKmlCzhM7Zti06nABUPVuUtQv482o
-	 YglHYzc6G5Ogjdf0cJCgYH4wU7v5vYGFwFCBjO6NVXu7adiFeraI5Vhab96E7ImCMK
-	 LgwkcF1wNNxOz9c+O2mg5fzGEeL/9lUBrUMsKCVOHYL3q9xiLs4FeoHnfJKBEos4xX
-	 xcjukZcJ2g6LGIEbrtXNiNaqSUXiDYXHHATmRuUX7shhp21yqvB95vnG1F4YQGFO6s
-	 sh8WUgWW2kS1g==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8OxWXdrhEK
-  ywa8jNhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bm38tZCt5yVvTsvsDWwNjP2cXIxSEk8IBR
-  YuKkW4wQzmUmie/TX0A5BxglHi3fzdzFyMnBJqAr8eLHYhYQW0RAX2Lp7D1gcWEBP4nuo/PYQ
-  WwWAVWJbWt+gdm8Au4SV1feZwSxJQQUJKY8fM8MEReUODnzCdgcZgEJiYMvXgDFOYBqFCVmT5
-  eHKK+QaJx+iAnCVpO4em4T8wRGvllIumch6V7AyLSK0TqpKDM9oyQ3MTNH19DAQNfQ0FTX2AL
-  ItNRLrNJN1Est1S1PLS7RNdJLLC/WSy0u1iuuzE3OSdHLSy3ZxAgMv5RitdwdjFNW/tQ7xCjJ
-  waQkyhvppZAsxJeUn1KZkVicEV9UmpNafIhRhoNDSYI3PgQoJ1iUmp5akZaZA4wFmLQEB4+SC
-  C9PMFCat7ggMbc4Mx0idYpRl2Pm17YDzEIsefl5qVLivDO9gYoEQIoySvPgRsDi8hKjrJQwLy
-  MDA4MQT0FqUW5mCar8K0ZxDkYlYV6JMKApPJl5JXCbXgEdwQR0hJG1PMgRJYkIKakGJuPgpmd
-  zhKbP5U7/ELz28GSfTDk9b96LcyMMFEtLfR4eed8Z9HzTKrVDe3cpbFGayi3fLd1psfvlFvu8
-  nYwM/PdPNMROYdFa2ym67f2qFeVLt3gyWRg4LF+9fPGxj9umTYyVW7Qx7dtz4wuCxbmfIw8ci
-  2xY3BTJ+JbrU1CC84QpN3fr8IaJzHVyPVbAWXjT9MX+f9vvcV8S7Q5pf8606oCaVun0DWnCb0
-  VYpCIqXY8/D0nIbtLe1rlk+4e+s3u0hDsuN5VxmuX90LzkKK+/e/O2Xz8e7ovSqjly5nGp3Bu
-  +bb7r77oJbZvr8ZHfWLW2M9SL0fNU1SMbo0vhAiwrlXUSLFtFHGvcP5r9mHN2lxJLcUaioRZz
-  UXEiAPYGgiZGAwAA
-X-Env-Sender: zhengrq.fnst@fujitsu.com
-X-Msg-Ref: server-23.tower-565.messagelabs.com!1663064245!256234!1
-X-Originating-IP: [62.60.8.179]
+	s=170520fj; t=1663064245; i=@fujitsu.com;
+	bh=l7tlLKgtl3N20cV+7xiWwa9sJSbtFqztA967Zs2Cszc=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=ctogxlrcpnNt0kovkEjZufDnCuC6JRddJUG+4ZJ7LmJ9fwWdKoEQuCWhET2IpeSCO
+	 Aa85RyYRjBZNjdVly10GsM/KZDWMrJhWipHGYM32fU3UuP6nYK5g+kZ6VKBVGsMQsO
+	 asbHmniBQXI15Wgj4/J8w/k1hOcyGD4WIdps7IvAnnt5wDR3rWYxfINXFZMXpjhLk0
+	 quG87AecSLLV9J9UCZSoA2c2LP3xS8TpI+oLlun0LspfZos+mL8s6ccBWqP/sSm5yD
+	 WL7pukeYS+ysZgOHo3wD6nyh+tqZahxq9KJIBf5vSnI6BG7d838iwRk/sx3NEsLZue
+	 XUaSZjJ5Sv3gw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrHIsWRWlGSWpSXmKPExsViZ8ORqLslQiH
+  Z4MMUXYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWPTrefMBR+5KnZ1t7M3MJ7n7GLk5BASeMIo
+  0fvTpouRC8i+ziTx8eZ9dghnD6PE7fZZbCBVbAJqEtNv3WAFsUUE9CWWzt7DDGIzC6hIvPjdA
+  9TAwSEs4Cmx+Z8MSJhFQFWiY+JtFhCbV8BR4sGRHYwgtoSAgsSUh++ZIeKCEidnPmGBGCMhcf
+  DFC2aIGkWJ2ZebWSDsConG6YeYIGw1iavnNjFPYOSfhaR9FpL2BYxMqxitk4oy0zNKchMzc3Q
+  NDQx0DQ1NdS3NdS1N9BKrdBP1Ukt18/KLSjJ0DfUSy4v1UouL9Yorc5NzUvTyUks2MQKDMqU4
+  MW4H48N9v/QOMUpyMCmJ8kZ6KSQL8SXlp1RmJBZnxBeV5qQWH2KU4eBQkuCNDwHKCRalpqdWp
+  GXmACMEJi3BwaMkwssTDJTmLS5IzC3OTIdInWLU5bh65cpeZiGWvPy8VClx3pneQEUCIEUZpX
+  lwI2DReolRVkqYl5GBgUGIpyC1KDezBFX+FaM4B6OSMK9EGNAUnsy8ErhNr4COYAI6wshaHuS
+  IkkSElFQDk89yAcl1DZvrt71xsVQNu7Ez1sJ3rU7aFMYu5rOSt24uzGoN2etlELN1qUVwWF9r
+  YkXn689hyz7812jJXitRfyog9WnN1COBTxqu3f80n7P15ImAeTqMbBd3bZCsrTF6phlks/zgx
+  eNS2f9vVeQtYvmrLu8iWXVerP3gv2a21UJRyy2Wm2eol++N3MAXsvx26fWTf6JLJq2eHrDCQV
+  g7S2DVRiHprGvV3a2tBYUMi6VieNjt0sROPGd9paAS9MFWmK3rmoyr+fLJQsESb3d17rKLmud
+  S4fVe7+rbvTclEl2yl83qlrEy2brAL+DB2rATkvL9PeeqZrktkO/ulHCTZo089E7h9M3IK93M
+  or+UWIozEg21mIuKEwHy/faqUQMAAA==
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-3.tower-732.messagelabs.com!1663064244!463529!1
+X-Originating-IP: [62.60.8.97]
 X-SYMC-ESS-Client-Auth: outbound-route-from=pass
 X-StarScan-Received: 
 X-StarScan-Version: 9.87.3; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 31545 invoked from network); 13 Sep 2022 10:17:25 -0000
-Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
-  by server-23.tower-565.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 13 Sep 2022 10:17:25 -0000
-Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id B09607C
+Received: (qmail 12617 invoked from network); 13 Sep 2022 10:17:24 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-3.tower-732.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 13 Sep 2022 10:17:24 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 28FE1100192
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Sep 2022 11:17:25 +0100 (BST)
+ Tue, 13 Sep 2022 11:17:24 +0100 (BST)
 Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121
  [10.183.43.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id A41287B
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 1D0EE100043
 	for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Sep 2022 11:17:25 +0100 (BST)
-Received: from CentOS7.g08.fujitsu.local (10.167.225.35) by
+ Tue, 13 Sep 2022 11:17:24 +0100 (BST)
+Received: from localhost.localdomain (10.167.225.33) by
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Tue, 13 Sep 2022 11:17:24 +0100
-From: zhengrq.fnst <zhengrq.fnst@fujitsu.com>
+ (TLS) id 15.0.1497.32; Tue, 13 Sep 2022 11:17:22 +0100
+From: Wang Mingyu <wangmy@fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-zeroconf: upgrade 0.39.0 -> 0.39.1
-Date: Tue, 13 Sep 2022 18:17:16 +0800
-Message-ID: <1663064236-5144-1-git-send-email-zhengrq.fnst@fujitsu.com>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] open-isns: upgrade 0.101 -> 0.102
+Date: Tue, 13 Sep 2022 18:17:09 +0800
+Message-ID: <1663064233-3236-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Originating-IP: [10.167.225.35]
+X-Originating-IP: [10.167.225.33]
 X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
  R01UKEXCASM121.r01.fujitsu.local (10.183.43.173)
 X-Virus-Scanned: ClamAV using ClamSMTP
@@ -80,33 +81,37 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 13 Sep 2022 10:17:28 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98768
+ https://lists.openembedded.org/g/openembedded-devel/message/98767
 
 Changelog:
 =========
-Performance improvements for constructing outgoing packet data (#1090)
+ Enable meson for building open-isns, deprecating autoconf/make (though the current build system still works)
+ Add a package config file for libisns, so other software can find it
+ Fix some compiler warnings and spelling errors
+ Make IPv6 default socket type
+ Fix isnsadm parsing of some arguments
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-zeroconf_0.39.0.bb => python3-zeroconf_0.39.1.bb}  | 2 +-
+ .../open-isns/{open-isns_0.101.bb => open-isns_0.102.bb}        | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-zeroconf_0.39.0.bb => python3-zeroconf_0.39.1.bb} (81%)
+ rename meta-networking/recipes-support/open-isns/{open-isns_0.101.bb => open-isns_0.102.bb} (96%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-zeroconf_0.39.0.bb b/meta-python/recipes-devtools/python/python3-zeroconf_0.39.1.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-zeroconf_0.39.0.bb
-rename to meta-python/recipes-devtools/python/python3-zeroconf_0.39.1.bb
-index 9b1576372c..6f442481f0 100644
---- a/meta-python/recipes-devtools/python/python3-zeroconf_0.39.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-zeroconf_0.39.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/jstasiak/python-zeroconf"
- LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3bb705b228ea4a14ea2728215b780d80"
+diff --git a/meta-networking/recipes-support/open-isns/open-isns_0.101.bb b/meta-networking/recipes-support/open-isns/open-isns_0.102.bb
+similarity index 96%
+rename from meta-networking/recipes-support/open-isns/open-isns_0.101.bb
+rename to meta-networking/recipes-support/open-isns/open-isns_0.102.bb
+index f2a084d635..24c520901d 100644
+--- a/meta-networking/recipes-support/open-isns/open-isns_0.101.bb
++++ b/meta-networking/recipes-support/open-isns/open-isns_0.102.bb
+@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/open-iscsi/open-isns;branch=master;protocol=https \
+            file://0001-isnsd.socket-use-run-instead-of-var-run.patch \
+            "
  
--SRC_URI[sha256sum] = "7c0d8257b940ee43e637fb560c2f9bd79da0638f37af162eb4f506f7274ef8e4"
-+SRC_URI[sha256sum] = "b83cff68a0c8dcd2705b5e792796239accba2bfddb09bc8d05badc642f64e7f6"
+-SRCREV = "0d86dc31fae2e2d77a082ccea5aba95426b40c3c"
++SRCREV = "c0e6d9fedc5a7041260de477fe1a8455fa074113"
  
- inherit pypi setuptools3
+ S = "${WORKDIR}/git"
  
 -- 
 2.25.1
