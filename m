@@ -1,75 +1,102 @@
-Return-Path: <naveen.kumar.saini@intel.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 22F44ECAAD3
-	for <webhook@archiver.kernel.org>; Wed, 14 Sep 2022 04:20:51 +0000 (UTC)
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
- by mx.groups.io with SMTP id smtpd.web10.2545.1663129244887274897
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB06CECAAD3
+	for <webhook@archiver.kernel.org>; Wed, 14 Sep 2022 11:58:53 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg
+ [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web08.5406.1663156730826783764
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Sep 2022 21:20:45 -0700
+ Wed, 14 Sep 2022 04:58:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="unable to parse pub key" header.i=@intel.com header.s=intel
- header.b=J1DiS2DY;
- spf=pass (domain: intel.com, ip: 134.134.136.20,
- mailfrom: naveen.kumar.saini@intel.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1663129244; x=1694665244;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=VQwH+rfjNsTpz1zFVY/gW0RF/xhJlcnQWraFdBRA7VU=;
-  b=J1DiS2DYZB+uCINO+x5r9hXdd1nW4gk3rM3EO98bl7cpJemmYvR+ogeF
-   M87eCdHrmytQYEzEuLy8ovBbzIstr41OGw4+6I5++D5T3Y3E6j4av8FS0
-   niKZZH6vhXW467P4TB/791TSRMmgjRP+Hhg3sQ1Nu6FHzpxyhVVWTMVYS
-   f0CGM6vqZAbC7hdasR246n+vCSrFvVZAxT5+GPjzvTPytfpacT8rt55jI
-   LiFrUyDcUDzFlEQBBUWeLNLqQgPJza/lTqwGFckrRTilwh1NrB1lNE8Xi
-   6eElEYvzeBwIo4qdxF6HKcLhddBHt0EJB7XNJr0mi85WQhkA7/zAHxHJ4
-   Q==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10469"; a="285370154"
-X-IronPort-AV: E=Sophos;i="5.93,313,1654585200";
-   d="scan'208";a="285370154"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 13 Sep 2022 21:20:36 -0700
-X-IronPort-AV: E=Sophos;i="5.93,313,1654585200";
-   d="scan'208";a="647225726"
-Received: from saininav-desk1.png.intel.com ([10.158.87.77])
-  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 13 Sep 2022 21:20:35 -0700
-From: Naveen Saini <naveen.kumar.saini@intel.com>
+ dkim=pass header.i=@anavi.org header.s=default header.b=j1fp535t;
+ spf=permerror,
+ err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
+ for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
+ (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=0lG0qFhJr+I+qHLp2Iawy0AJbIw68p2KGUVZMZLa2Bg=; b=j1fp535tlEyvYalpJ3KfL2ADTd
+	jGNMLsMcB6Ye/cFDHuIKldKVshCgjr9mZdcbIZuDEuvOy7Pal5e/WuicIVjUEJWy0+DlKKK8iwQwc
+	pFeAL6oY8JJbQnnj8EUz5spg9OmYrQm/ld1n+AwhFBqSp9Mbt99C4eK7q90HurfvQ4NQkPKn4jEzM
+	7e1YvvP4ZSuVIawO0DGcltv21VzKs8bnsp3FjDLUOf0fpaN6T9D8DH2cLAyrS3SFtEHKIKMFTW9wr
+	fVRSBnQFtFnh/K8UOtMR+5uSP4BrrnOvoduXMWv4dT4LyRDKqKVo8X0liA9R7a7HZRtQ+DBHt47Yi
+	lCnxsoAg==;
+Received: from lan.nucleusys.com ([92.247.61.126]:58898 helo=tone.k.g)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.95)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1oYR2U-0002R1-Jm;
+	Wed, 14 Sep 2022 14:58:48 +0300
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] ocl-icd: add nativesdk support
-Date: Wed, 14 Sep 2022 12:40:42 +0800
-Message-Id: <20220914044042.402812-1-naveen.kumar.saini@intel.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/5] python3-networkx: Upgrade 2.8.5 -> 2.8.6
+Date: Wed, 14 Sep 2022 14:58:32 +0300
+Message-Id: <20220914115833.177477-4-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20220914115833.177477-1-leon.anavi@konsulko.com>
+References: <20220914115833.177477-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
+ leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Sep 2022 04:20:51 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Sep 2022 11:58:53 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98789
+ https://lists.openembedded.org/g/openembedded-devel/message/98793
 
-It fixes missing unbuildable dependency 'nativesdk-ocl-icd' failure.
+Upgrade to release 2.8.6:
 
-Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+- Add random_spanning_tree to documentation
+- Add warning to nx_agraph about layout nondeterminism
+- Add cache reset for when G._node is changed
+- Allow unsortable nodes in approximation.treewidth functions
+- Add examples for the condensation function
+- Improve LCA input validation
+- Replace LCA with naive implementations
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-core/opencl/ocl-icd_2.3.1.bb | 2 +-
+ .../{python3-networkx_2.8.5.bb => python3-networkx_2.8.6.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-networkx_2.8.5.bb => python3-networkx_2.8.6.bb} (89%)
 
-diff --git a/meta-oe/recipes-core/opencl/ocl-icd_2.3.1.bb b/meta-oe/recipes-core/opencl/ocl-icd_2.3.1.bb
-index ae9c5bc81..250cb6883 100644
---- a/meta-oe/recipes-core/opencl/ocl-icd_2.3.1.bb
-+++ b/meta-oe/recipes-core/opencl/ocl-icd_2.3.1.bb
-@@ -15,4 +15,4 @@ inherit autotools
+diff --git a/meta-python/recipes-devtools/python/python3-networkx_2.8.5.bb b/meta-python/recipes-devtools/python/python3-networkx_2.8.6.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-networkx_2.8.5.bb
+rename to meta-python/recipes-devtools/python/python3-networkx_2.8.6.bb
+index 8d0b8dbb3..3eebfcf98 100644
+--- a/meta-python/recipes-devtools/python/python3-networkx_2.8.5.bb
++++ b/meta-python/recipes-devtools/python/python3-networkx_2.8.6.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://networkx.github.io/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=44614b6df7cf3c19be69d0a945e29904"
  
- DEPENDS = "ruby-native"
+-SRC_URI[sha256sum] = "15a7b81a360791c458c55a417418ea136c13378cfdc06a2dcdc12bd2f9cf09c1"
++SRC_URI[sha256sum] = "bd2b7730300860cbd2dafe8e5af89ff5c9a65c3975b352799d87a6238b4301a6"
  
--BBCLASSEXTEND = "native"
-+BBCLASSEXTEND = "native nativesdk"
+ inherit pypi setuptools3
+ 
 -- 
-2.25.1
+2.30.2
 
 
