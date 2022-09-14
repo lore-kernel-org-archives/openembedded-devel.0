@@ -1,166 +1,226 @@
-Return-Path: <alex.kanavin@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55A49ECAAD3
-	for <webhook@archiver.kernel.org>; Wed, 14 Sep 2022 17:01:20 +0000 (UTC)
-Received: from mail-lj1-f175.google.com (mail-lj1-f175.google.com
- [209.85.208.175])
- by mx.groups.io with SMTP id smtpd.web08.2018.1663174870931627885
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 119EFC6FA82
+	for <webhook@archiver.kernel.org>; Wed, 14 Sep 2022 20:19:47 +0000 (UTC)
+Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com
+ [209.85.160.53])
+ by mx.groups.io with SMTP id smtpd.web09.2099.1663186771945891229
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Sep 2022 10:01:11 -0700
+ Wed, 14 Sep 2022 13:19:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=N5H7nOl0;
- spf=pass (domain: gmail.com, ip: 209.85.208.175,
- mailfrom: alex.kanavin@gmail.com)
-Received: by mail-lj1-f175.google.com with SMTP id p5so19042049ljc.13
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=inFCab/v;
+ spf=pass (domain: gmail.com, ip: 209.85.160.53,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-oa1-f53.google.com with SMTP id
+ 586e51a60fabf-1225219ee46so44163962fac.2
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Sep 2022 10:01:10 -0700 (PDT)
+ Wed, 14 Sep 2022 13:19:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date;
-        bh=ujp+Tvmqz+kUL9RRXgO0VDnkCgHlATCm8uWis48Arbo=;
-        b=N5H7nOl0AScD0hTDbNm1mMiaxsuQ5s2trIsEKKnC+Im503hOBcyoSA/o57cANiGgP8
-         65M5XAhESb7oGueQdWzidCgcnmN+9mseKXhpVVPBk7onjI10StaAlZtTBV4IhJCG3SM4
-         7ZLysaJbu9EfQcwCkbQk699/N9fg2x6xvLFvgDF60mNCYWx8AVJ5MRQ2bLRImh9mFMoy
-         UYda1O+vhhlY1oFMjvrfkOfM4XfZzzj6cNAF7kjWQq3/lquvQckiqag4hnEong88wVpl
-         E8bJgkC+Rb/wB/Ut1mKapYQ6VEAPmnMGj9LKLShzlHmvqFVRa4nVFC1RniLyLoWn4VUG
-         41nw==
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date;
+        bh=e5ncuaWOW0WWU5l87YXTDdkm3CFu+WgysDqvBSFipEY=;
+        b=inFCab/vV8jKAuiJ1HfohHKutamDmJpqgJ47rRyfPoflBTQ1vDr4BQs7Vu/HfFRCgg
+         Gijxz1GpMOjWfsYAWOTZxl4fuZOLZK8K1Nyu4UQVKFmTq2Yfln6r7e/CjGVeodB8pGJ2
+         kYSNu8Gs6taa8sXsUaOYpVosRORKnU/ZIfTkEdMGwMab4FTpxmmvC8bNPVpsw1jwCUzq
+         ZSgVQNlIUjc2wKeNdxd9yiSAM4C+awF60x6APVOZBrbhqzqsbxySbkt3wo90xmUTGzeo
+         bGtljTNdVfr7iA43hw020mwnpbFPfpvHj+Pq1HqxfF0BW1rv/EfgX3BZSD5EU20F6yDQ
+         wIPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date;
-        bh=ujp+Tvmqz+kUL9RRXgO0VDnkCgHlATCm8uWis48Arbo=;
-        b=UtAeVRIZh8q5CmNyUtexIE70CfAZiHNW46RtO++FcdVE8j25ThjECsKpmUiYW623ZN
-         z4Us9LZ02PaAfa8RpnaskBgt7NWqbMKw8NBB6huv6bbZgMLGFBIYNhQOj9hP7yCZcuRg
-         6ZnFddv5Rmd5CbmTWf/LbtPT0Ab75tgcB+OByN8I3QCMUnagvWn7kCmHRNdDV9IG2G9H
-         3SndNyBz9DrXmcWap4QSoFiTZK7SoG1DEXzIWymNJch/f8kVU4YzG3GQr0q395sfxHYn
-         m2ILHWSON11eeJwe68IGBOnNL5nJfNy7P+MdAplGVsLy6OrBeB/sNvQIQ5gRcNTMH/mG
-         QNgg==
-X-Gm-Message-State: ACgBeo2PjlijpWy08rhcEObg7gjKN9NVBtN6LNA9qpRM9hOP0rXsLcTP
-	dMSKuwa/aC4qaFsl17/5oH9oQFFZ3R8UqezQfus=
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date;
+        bh=e5ncuaWOW0WWU5l87YXTDdkm3CFu+WgysDqvBSFipEY=;
+        b=YYze1kIuHA/IbGKW5pVgsQS2iIZkQUZRiy/zudUUAO1lCb9Bk2NaRd1wzyjNKZox3n
+         qKVk2pY9CniufO5sIVnwGO3n9jflYU5ier1QlkY3aFSxnAuYSp+Prmhrw3++pwPxW10S
+         AoY3WM5N5aDFuQO7r02t3NZZIbOTAaRThN4IPrTtupFtpdVSppC1utOZtOYYCK55RxNq
+         Ev45dMYkxHYAeSEzXixkL5uybCGMUoGM5Fc+x904p7wVM3ixVXKAlmFDzma+kNZ3Beqd
+         6oF8TDU0EkONDKIFDwBhdKEdJKocas/VQgtyjLp/pdqMbFH7vQ/XgwRop7uTh2lNIJV3
+         W2Fw==
+X-Gm-Message-State: ACgBeo3ozwxYlrjNdRM1KUxt5Hn2XIDEVlG2qKI368wlCcHwavuksGfC
+	nf0IWwlZxdF13UbzImNxp6k=
 X-Google-Smtp-Source: 
- AA6agR6KaU4L7wD89JBh3VrE478m5tHMNpE9WCn/YNrZ5IpgEmcAykGbkiSkJxEGkpH6rrLnX8DngHeZhaRU7+CAHJg=
-X-Received: by 2002:a05:651c:104e:b0:26b:fceb:a526 with SMTP id
- x14-20020a05651c104e00b0026bfceba526mr5318916ljm.109.1663174868875; Wed, 14
- Sep 2022 10:01:08 -0700 (PDT)
+ AA6agR6YivTsu0LHcaNJegTfJRMABfyZYrtk5pIMwGok283pfEFY97vQ+f7gEihU4hRLbRmqKRyUrA==
+X-Received: by 2002:a05:6808:16a0:b0:345:e7a9:7d68 with SMTP id
+ bb32-20020a05680816a000b00345e7a97d68mr2795097oib.187.1663186771214;
+        Wed, 14 Sep 2022 13:19:31 -0700 (PDT)
+Received: from ?IPV6:2600:1700:9190:ba10:4e7c:424d:5360:e5d8?
+ ([2600:1700:9190:ba10:4e7c:424d:5360:e5d8])
+        by smtp.gmail.com with ESMTPSA id
+ y4-20020a056870428400b0010d5d5c3fc3sm141790oah.8.2022.09.14.13.19.30
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 14 Sep 2022 13:19:30 -0700 (PDT)
+Message-ID: <4f3c5ba3-9de9-2da7-04d5-f7873bcf9b30@gmail.com>
+Date: Wed, 14 Sep 2022 16:19:29 -0400
 MIME-Version: 1.0
-References: <20220914120316.551377-1-alex@linutronix.de>
- <20220914120316.551377-8-alex@linutronix.de>
- <CAMKF1srODCYhLrzYWBTrCwB9Y3UuOo0OMWYrShorg7J=2yJGYw@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1srODCYhLrzYWBTrCwB9Y3UuOo0OMWYrShorg7J=2yJGYw@mail.gmail.com>
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Wed, 14 Sep 2022 19:00:45 +0200
-Message-ID: 
- <CANNYZj8XFcuLi9dFuH-Zexk6v-ppC7LL4rNaLCU-UrB8-cAajA@mail.gmail.com>
-Subject: Re: [oe] [PATCH 8/8] sip3: remove the recipe
-To: Khem Raj <raj.khem@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Alexander Kanavin <alex@linutronix.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [oe] [meta-oe][kirkstone] nodejs-oe-cache-native: initial checkin
+Content-Language: en-US
+To: Martin Jansa <Martin.Jansa@gmail.com>,
+ openembedded-devel@lists.openembedded.org
+Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>,
+ Khem Raj <raj.khem@gmail.com>
+References: <20220913153428.1610984-1-Martin.Jansa@gmail.com>
+From: akuster808 <akuster808@gmail.com>
+In-Reply-To: <20220913153428.1610984-1-Martin.Jansa@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Sep 2022 17:01:20 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Sep 2022 20:19:47 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98808
+ https://lists.openembedded.org/g/openembedded-devel/message/98809
 
-Right, perhaps the existing v4 recipe could be transitioned out via
-SKIP_RECIPE, but it shouldn't stay in meta-oe. There's no evidence of
-active usage either, just 'fixes from Khem' in the history.
 
-Alex
 
-On Wed, 14 Sept 2022 at 17:39, Khem Raj <raj.khem@gmail.com> wrote:
+On 9/13/22 11:34, Martin Jansa wrote:
+> From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 >
-> Thanks for the series.  I do see this package is still actively developed see
-> https://www.riverbankcomputing.com/news/SIP_v6.6.2_Released and pypi
-> https://pypi.org/project/sip/
+> This implements an 'npm cache add' like functionality but allows to
+> specify the key of the data and sets metadata which are required to
+> find the data.
 >
-> On Wed, Sep 14, 2022 at 5:03 AM Alexander Kanavin
-> <alex.kanavin@gmail.com> wrote:
-> >
-> > It is not compatible with python 3.11, and all
-> > development has ceased:
-> > https://riverbankcomputing.com/software/sip/download
-> >
-> > Signed-off-by: Alexander Kanavin <alex@linutronix.de>
-> > ---
-> >  .../packagegroups/packagegroup-meta-oe.bb     |  1 -
-> >  meta-oe/recipes-devtools/sip/sip3_4.19.23.bb  | 40 -------------------
-> >  2 files changed, 41 deletions(-)
-> >  delete mode 100644 meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
-> >
-> > diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > index 756ba46e3..cc1c87712 100644
-> > --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > @@ -301,7 +301,6 @@ RDEPENDS:packagegroup-meta-oe-devtools ="\
-> >      python3-distutils-extra \
-> >      python3-pycups \
-> >      rapidjson \
-> > -    sip3 \
-> >      squashfs-tools-ng \
-> >      uftrace \
-> >      unifex \
-> > diff --git a/meta-oe/recipes-devtools/sip/sip3_4.19.23.bb b/meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
-> > deleted file mode 100644
-> > index d6335585e..000000000
-> > --- a/meta-oe/recipes-devtools/sip/sip3_4.19.23.bb
-> > +++ /dev/null
-> > @@ -1,40 +0,0 @@
-> > -SUMMARY = "SIP is a C++/Python Wrapper Generator"
-> > -HOMEPAGE = "https://riverbankcomputing.com/software/sip/"
-> > -SECTION = "devel"
-> > -LICENSE = "GPL-2.0-or-later"
-> > -LIC_FILES_CHKSUM = "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
-> > -
-> > -SRC_URI = "https://www.riverbankcomputing.com/static/Downloads/sip/${PV}/sip-${PV}.tar.gz \
-> > -"
-> > -SRC_URI[md5sum] = "70adc0c9734e2d9dcd241d3f931dfc74"
-> > -SRC_URI[sha256sum] = "22ca9bcec5388114e40d4aafd7ccd0c4fe072297b628d0c5cdfa2f010c0bc7e7"
-> > -
-> > -inherit python3-dir python3native
-> > -
-> > -S = "${WORKDIR}/sip-${PV}"
-> > -
-> > -DEPENDS = "python3"
-> > -
-> > -PACKAGES += "python3-sip3"
-> > -
-> > -BBCLASSEXTEND = "native"
-> > -
-> > -CONFIGURE_SYSROOT = "${STAGING_DIR_HOST}"
-> > -CONFIGURE_SYSROOT:class-native = "${STAGING_DIR_NATIVE}"
-> > -
-> > -do_configure:prepend() {
-> > -    echo "py_platform = linux" > sip.cfg
-> > -    echo "py_inc_dir = ${STAGING_INCDIR}/python%(py_major).%(py_minor)${PYTHON_ABI}" >> sip.cfg
-> > -    echo "sip_bin_dir = ${D}/${bindir}" >> sip.cfg
-> > -    echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
-> > -    echo "sip_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> sip.cfg
-> > -    echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
-> > -    ${PYTHON} configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot ${CONFIGURE_SYSROOT} CC="${CC}" CXX="${CXX}" LINK="${CXX}" STRIP="" LINK_SHLIB="${CXX}" CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" LFLAGS="${LDFLAGS}"
-> > -}
-> > -
-> > -do_install() {
-> > -    oe_runmake install
-> > -}
-> > -
-> > -FILES:python3-sip3 = "${libdir}/${PYTHON_DIR}/site-packages/"
-> > -FILES:${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/.debug"
-> > --
-> > 2.30.2
-> >
-> >
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#98802): https://lists.openembedded.org/g/openembedded-devel/message/98802
-> > Mute This Topic: https://lists.openembedded.org/mt/93675939/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> >
+> It is used to cache information as done during 'npm install'.
+>
+> Keyformat and metadata are nodejs version specific.
+
+Isn't this adding a new recipe to a Stable branch?
+
+- armin
+>
+> Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>   .../nodejs/nodejs-oe-cache-16.14/oe-npm-cache | 77 +++++++++++++++++++
+>   .../nodejs/nodejs-oe-cache-native_16.14.bb    | 21 +++++
+>   2 files changed, 98 insertions(+)
+>   create mode 100755 meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
+>   create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.14.bb
+>
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
+> new file mode 100755
+> index 0000000000..f596207648
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
+> @@ -0,0 +1,77 @@
+> +#!/usr/bin/env node
+> +
+> +/// Usage: oe-npm-cache <cache-dir> <type> <key> <file-name>
+> +///    <type> ... meta - metainformation about package
+> +///               tgz  - tarball
+> +
+> +const process = require("node:process");
+> +
+> +module.paths.unshift("@@libdir@@/node_modules/npm/node_modules");
+> +
+> +const cacache = require('cacache')
+> +const fs = require('fs')
+> +
+> +// argv[0] is 'node', argv[1] is this script
+> +const cache_dir = process.argv[2]
+> +const type      = process.argv[3]
+> +const key       = process.argv[4]
+> +const file      = process.argv[5]
+> +
+> +const data = fs.readFileSync(file)
+> +
+> +// metadata content is highly nodejs dependent; when cache entries are not
+> +// found, place debug statements in 'make-fetch-happen/lib/cache/policy.js'
+> +// (CachePolicy::satisfies())
+> +const xlate = {
+> +    'meta': {
+> +	'key_prefix': 'make-fetch-happen:request-cache:',
+> +	'metadata': function() {
+> +	    return {
+> +		time: Date.now(),
+> +		url:  key,
+> +		reqHeaders: {
+> +		    'accept': 'application/vnd.npm.install-v1+json; q=1.0, application/json; q=0.8, */*',
+> +		},
+> +		resHeaders: {
+> +		    "content-type": "application/json",
+> +		    "status": 200,
+> +		},
+> +		options: {
+> +		    compress: true,
+> +		}
+> +	    };
+> +	},
+> +    },
+> +
+> +    'tgz': {
+> +	'key_prefix': 'make-fetch-happen:request-cache:',
+> +	'metadata': function() {
+> +	    return {
+> +		time: Date.now(),
+> +		url:  key,
+> +		reqHeaders: {
+> +		    'accept': '*/*',
+> +		},
+> +		resHeaders: {
+> +		    "content-type": "application/octet-stream",
+> +		    "status": 200,
+> +		},
+> +		options: {
+> +		    compress: true,
+> +		},
+> +	    };
+> +	},
+> +    },
+> +};
+> +
+> +const info = xlate[type];
+> +let opts = {}
+> +
+> +if (info.metadata) {
+> +    opts['metadata'] = info.metadata();
+> +}
+> +
+> +cacache.put(cache_dir, info.key_prefix + key, data, opts)
+> +    .then(integrity => {
+> +	console.log(`Saved content of ${key} (${file}).`);
+> +})
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.14.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.14.bb
+> new file mode 100644
+> index 0000000000..a61dd5018f
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.14.bb
+> @@ -0,0 +1,21 @@
+> +DESCRIPTION = "OE helper for manipulating npm cache"
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
+> +
+> +SRC_URI = "\
+> +    file://oe-npm-cache \
+> +"
+> +
+> +inherit native
+> +
+> +B = "${WORKDIR}/build"
+> +
+> +do_configure() {
+> +    sed -e 's!@@libdir@@!${libdir}!g' < '${WORKDIR}/oe-npm-cache' > '${B}/oe-npm-cache'
+> +}
+> +
+> +do_install() {
+> +    install -D -p -m 0755 ${B}/oe-npm-cache ${D}${bindir}/oe-npm-cache
+> +}
+> +
+> +RDEPENDS:${PN} = "nodejs-native"
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#98787): https://lists.openembedded.org/g/openembedded-devel/message/98787
+> Mute This Topic: https://lists.openembedded.org/mt/93657958/3616698
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
+
 
