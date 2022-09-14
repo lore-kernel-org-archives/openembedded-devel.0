@@ -1,255 +1,267 @@
-Return-Path: <Martin.Jansa@gmail.com>
+Return-Path: <paulo@eero.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A506C6FA82
-	for <webhook@archiver.kernel.org>; Wed, 14 Sep 2022 14:27:09 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
- [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.web11.10.1663165627076258856
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AF203C6FA82
+	for <webhook@archiver.kernel.org>; Wed, 14 Sep 2022 14:44:39 +0000 (UTC)
+Received: from mail-vs1-f49.google.com (mail-vs1-f49.google.com
+ [209.85.217.49])
+ by mx.groups.io with SMTP id smtpd.web10.234.1663166671934423006
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Sep 2022 07:27:07 -0700
+ Wed, 14 Sep 2022 07:44:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=UasAojoI;
- spf=pass (domain: gmail.com, ip: 209.85.221.53,
- mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f53.google.com with SMTP id k9so26047181wri.0
+ dkim=pass header.i=@eero.com header.s=google header.b=HCoDZ0U6;
+ spf=pass (domain: eero.com, ip: 209.85.217.49, mailfrom: paulo@eero.com)
+Received: by mail-vs1-f49.google.com with SMTP id c3so16136002vsc.6
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Sep 2022 07:27:06 -0700 (PDT)
+ Wed, 14 Sep 2022 07:44:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
+        d=eero.com; s=google;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date;
-        bh=/cmlNcMWDBknnmIGQLlZ5c4BtQ/jQzkaFMG1oM3abnU=;
-        b=UasAojoIpHjliNnmO+4M4vwxcr8uwRkC74i4loeyarkMBC4F97qms/KZuH1mgudx8l
-         Tc5NUD09zZB+kqCQ9uGkcQBW75d65nkKYCkD4A2l6pqgYd5B3WAV3a4MxP6RztZBsS0M
-         aOYUIdVb1umNOncOYn59d3HNgsbqtY1xoTgIofKgwhBAlTsJ9bQoKQ7xFdMAM/WjWwdy
-         m+Hr7b03r+cqsvwZkro1cNUEZpp6MaMjlkd/uxt9UuXSqzvD76dWArP24k2ZeW/TIarL
-         pWKX/Xv96uMcI2psgLV9v0zgzSLfcWNO0rCIu10XqsyiwlAp/JgDAaz9QbKOQyTr0OO7
-         lBGw==
+        bh=Z2BE3vSMtzZXrcIqM7OEwxj5w9Of5YLsNVctJYfiHFg=;
+        b=HCoDZ0U6+cq3f/nMJ3WEpSFTJ1AhU6eLOwyeqAmlKy44RVNMGGDaJNuv5pPlcU7wrf
+         g0yBV6QdpAoZUHyMqYVZtQdWB8gHs9T6FNeHetJVBENYgl7wAzyPajNftjdcL6KIFQk2
+         guwjct1Zxw2MbuKYNGLYzbIZvNY5v+lMLB6cQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date;
-        bh=/cmlNcMWDBknnmIGQLlZ5c4BtQ/jQzkaFMG1oM3abnU=;
-        b=rrp60WqFLYrBRdOHOmjjhCt7DaV6DikRty6ADSfV3g4mTALWERTgQFWGxlQudZ4ONN
-         DGVIegSSRnIgvSNlRcAYW7YV5SeenqpaEgJixjwmKgx6xrPUKKxgEuvIUNm9XceZDuI1
-         1LDbRDqAUMBLQnwKEMPK7KWWur2vUixj7iqZH144h2xaJwxDWY+DItOyiK0Co3tN74if
-         73kGvU/b75Th1ucnURsaI6O6vyGaCfwam6ZwMpyOnAQqA6b0ww21/T6cEa6LFARrzYpE
-         Hlm0TG+UnoDGMXN09iqmLYKgWlhO8ZGxFhFhxQhV8beMwqsS3Tn2uH5N5M77IZhhG4kQ
-         NQwg==
-X-Gm-Message-State: ACgBeo0aDYATjI4nVAgFSz7O3XXLk5cV0ge9vb8RusCuIW3bZw+F2Wyb
-	/hM0dzCD2Ct5PLnI4RM8crna1AJgs3T3MXUq17Y=
+        bh=Z2BE3vSMtzZXrcIqM7OEwxj5w9Of5YLsNVctJYfiHFg=;
+        b=D3HozckzZtUns2Yils3aDMTU3RhSooQyJwdyGAQiH8CUOm+H9lZ9GAQY0L7Y/c1SGW
+         /VlS6ejxKlZnv/G0SUc5mQu5LCiVxYs8JrAOkpoPvP+gnD3BGd/u95tv5Fb92jbd0RkY
+         8E8kBxYUrKJZtAjgPaQDGC99WwAeudxC3PZoKm/qp6QI6AYXosde6Wz0hWaGn5QZ++g7
+         ejQh1JrEoQltsU+kDuPmS6NcMSkxjU+QaSCoeyy8mCDYGVl4A9QCLSKx444nT1SIPCi9
+         LDreyw7hQcE861WnuLPKnln/IxS7c874HvwJkZ1sDJ8+C1D+NpTZHHHQ0PyT3uRrAwV3
+         +68Q==
+X-Gm-Message-State: ACgBeo3siNQeNv5qKRY9cPNLL99An9QgAHGXjzgKgXJzQnxFk2hP1VdC
+	Gs9rrzaEmkM9PpYGI8NyfOF0vdZf/pmDRXlh381Alw==
 X-Google-Smtp-Source: 
- AA6agR7Pxz5Up/AgqW7YWOkn7Uxep555XLd+4k+Rb9v4BeiJ1JK1pFpAW3Wm/jqjZBK9CziZD24puYezxwJkxSTKn3Q=
-X-Received: by 2002:a05:6000:86:b0:228:db07:24bc with SMTP id
- m6-20020a056000008600b00228db0724bcmr21328337wrx.204.1663165625282; Wed, 14
- Sep 2022 07:27:05 -0700 (PDT)
+ AA6agR4ElPy7UCE8PLGWV/oegYAWKU8BcsSLgO1QnSpBfIagKGfBUKK6ChOTe/tpWAbgOt3EJ8ivSijPddIJpa+Wq+c=
+X-Received: by 2002:a67:c988:0:b0:390:1f73:b3ad with SMTP id
+ y8-20020a67c988000000b003901f73b3admr12739564vsk.16.1663166670267; Wed, 14
+ Sep 2022 07:44:30 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220914142120.53537-1-paulo@eero.com>
  <Groupsio.1.20220914142120.53537-1-paulo@eero.com>
-In-Reply-To: <Groupsio.1.20220914142120.53537-1-paulo@eero.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 14 Sep 2022 16:26:51 +0200
-Message-ID: 
  <CA+chaQfMcGzwC6K=aht8MS-H-ZYwT5M8hyv-F1bVSNmWU5SRgg@mail.gmail.com>
+In-Reply-To: 
+ <CA+chaQfMcGzwC6K=aht8MS-H-ZYwT5M8hyv-F1bVSNmWU5SRgg@mail.gmail.com>
+From: Paulo Vitor Becker Ayrosa Monteiro de Andrade <paulo@eero.com>
+Date: Wed, 14 Sep 2022 10:44:17 -0400
+Message-ID: 
+ <CADgnPrRhnMMJ70cQ56Tic_PgkpE2Pq9atR5Z7UOQNuR_h9PS4w@mail.gmail.com>
 Subject: Re: [oe] [meta-oe][kirkstone][add-npm-commit-from-main-to-kirkstone]
  nodejs-oe-cache-native: initial checkin
-To: Paulo Vitor Becker Ayrosa Monteiro de Andrade <paulo@eero.com>
+To: Martin Jansa <martin.jansa@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org,
 	Enrico Scholz <enrico.scholz@sigma-chemnitz.de>,
  Khem Raj <raj.khem@gmail.com>
-Content-Type: multipart/alternative; boundary="0000000000004c365c05e8a3ec27"
+Content-Type: multipart/alternative; boundary="000000000000957d6105e8a42af4"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Sep 2022 14:27:09 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Sep 2022 14:44:39 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98805
+ https://lists.openembedded.org/g/openembedded-devel/message/98806
 
---0000000000004c365c05e8a3ec27
+--000000000000957d6105e8a42af4
 Content-Type: text/plain; charset="UTF-8"
 
-I've already sent this backport request yesterday.
+Awesome!
 
-On Wed, Sep 14, 2022 at 4:26 PM Paulo Vitor Becker Ayrosa Monteiro de
-Andrade <paulo@eero.com> wrote:
+I tried sending it earlier, but had some problems. Thanks a bunch, then!
 
-> [Edited Message Follows]
->
-> This is a commit from the master branch which is already merged.
-> In order to get yocto's build working on kirkstone branch, this commit is
-> necessary on meta-openembedded as well.
-> I ran into npm issues when doing some work here and stumbled upon Enrico's
-> solution to this, and it worked perfectly. If this was already merged to
-> kirkstone branch, I believe more people would benefit.
->
-> From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
->
-> This implements an 'npm cache add' like functionality but allows to
-> specify the key of the data and sets metadata which are required to
-> find the data.
->
-> It is used to cache information as done during 'npm install'.
->
-> Keyformat and metadata are nodejs version specific.
->
-> Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../nodejs/nodejs-oe-cache-16.14/oe-npm-cache | 77 +++++++++++++++++++
->  .../nodejs/nodejs-oe-cache-native_16.14.bb    | 21 +++++
->  2 files changed, 98 insertions(+)
->  create mode 100755
-> meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
->  create mode 100644 meta-oe/recipes-devtools/nodejs/
-> nodejs-oe-cache-native_16.14.bb
->
-> diff --git
-> a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
-> b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
-> new file mode 100755
-> index 000000000..f59620764
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
-> @@ -0,0 +1,77 @@
-> +#!/usr/bin/env node
-> +
-> +/// Usage: oe-npm-cache <cache-dir> <type> <key> <file-name>
-> +///    <type> ... meta - metainformation about package
-> +///               tgz  - tarball
-> +
-> +const process = require("node:process");
-> +
-> +module.paths.unshift("@@libdir@@/node_modules/npm/node_modules");
-> +
-> +const cacache = require('cacache')
-> +const fs = require('fs')
-> +
-> +// argv[0] is 'node', argv[1] is this script
-> +const cache_dir = process.argv[2]
-> +const type      = process.argv[3]
-> +const key       = process.argv[4]
-> +const file      = process.argv[5]
-> +
-> +const data = fs.readFileSync(file)
-> +
-> +// metadata content is highly nodejs dependent; when cache entries are not
-> +// found, place debug statements in
-> 'make-fetch-happen/lib/cache/policy.js'
-> +// (CachePolicy::satisfies())
-> +const xlate = {
-> +    'meta': {
-> +       'key_prefix': 'make-fetch-happen:request-cache:',
-> +       'metadata': function() {
-> +           return {
-> +               time: Date.now(),
-> +               url:  key,
-> +               reqHeaders: {
-> +                   'accept': 'application/vnd.npm.install-v1+json; q=1.0,
-> application/json; q=0.8, */*',
-> +               },
-> +               resHeaders: {
-> +                   "content-type": "application/json",
-> +                   "status": 200,
-> +               },
-> +               options: {
-> +                   compress: true,
-> +               }
-> +           };
-> +       },
-> +    },
-> +
-> +    'tgz': {
-> +       'key_prefix': 'make-fetch-happen:request-cache:',
-> +       'metadata': function() {
-> +           return {
-> +               time: Date.now(),
-> +               url:  key,
-> +               reqHeaders: {
-> +                   'accept': '*/*',
-> +               },
-> +               resHeaders: {
-> +                   "content-type": "application/octet-stream",
-> +                   "status": 200,
-> +               },
-> +               options: {
-> +                   compress: true,
-> +               },
-> +           };
-> +       },
-> +    },
-> +};
-> +
-> +const info = xlate[type];
-> +let opts = {}
-> +
-> +if (info.metadata) {
-> +    opts['metadata'] = info.metadata();
-> +}
-> +
-> +cacache.put(cache_dir, info.key_prefix + key, data, opts)
-> +    .then(integrity => {
-> +       console.log(`Saved content of ${key} (${file}).`);
-> +})
-> diff --git a/meta-oe/recipes-devtools/nodejs/
-> nodejs-oe-cache-native_16.14.bb b/meta-oe/recipes-devtools/nodejs/
-> nodejs-oe-cache-native_16.14.bb
-> new file mode 100644
-> index 000000000..a61dd5018
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.14.bb
-> @@ -0,0 +1,21 @@
-> +DESCRIPTION = "OE helper for manipulating npm cache"
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM =
-> "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
-> +
-> +SRC_URI = "\
-> +    file://oe-npm-cache \
-> +"
-> +
-> +inherit native
-> +
-> +B = "${WORKDIR}/build"
-> +
-> +do_configure() {
-> +    sed -e 's!@@libdir@@!${libdir}!g' < '${WORKDIR}/oe-npm-cache' >
-> '${B}/oe-npm-cache'
-> +}
-> +
-> +do_install() {
-> +    install -D -p -m 0755 ${B}/oe-npm-cache ${D}${bindir}/oe-npm-cache
-> +}
-> +
-> +RDEPENDS:${PN} = "nodejs-native"
-> --
-> 2.17.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#98804):
-> https://lists.openembedded.org/g/openembedded-devel/message/98804
-> Mute This Topic: https://lists.openembedded.org/mt/93678585/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> Martin.Jansa@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
->
+On Wed, Sep 14, 2022 at 10:27 AM Martin Jansa <martin.jansa@gmail.com>
+wrote:
 
---0000000000004c365c05e8a3ec27
+> I've already sent this backport request yesterday.
+>
+> On Wed, Sep 14, 2022 at 4:26 PM Paulo Vitor Becker Ayrosa Monteiro de
+> Andrade <paulo@eero.com> wrote:
+>
+>> [Edited Message Follows]
+>>
+>> This is a commit from the master branch which is already merged.
+>> In order to get yocto's build working on kirkstone branch, this commit is
+>> necessary on meta-openembedded as well.
+>> I ran into npm issues when doing some work here and stumbled upon
+>> Enrico's solution to this, and it worked perfectly. If this was already
+>> merged to kirkstone branch, I believe more people would benefit.
+>>
+>> From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+>>
+>> This implements an 'npm cache add' like functionality but allows to
+>> specify the key of the data and sets metadata which are required to
+>> find the data.
+>>
+>> It is used to cache information as done during 'npm install'.
+>>
+>> Keyformat and metadata are nodejs version specific.
+>>
+>> Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ---
+>>  .../nodejs/nodejs-oe-cache-16.14/oe-npm-cache | 77 +++++++++++++++++++
+>>  .../nodejs/nodejs-oe-cache-native_16.14.bb    | 21 +++++
+>>  2 files changed, 98 insertions(+)
+>>  create mode 100755
+>> meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
+>>  create mode 100644 meta-oe/recipes-devtools/nodejs/
+>> nodejs-oe-cache-native_16.14.bb
+>>
+>> diff --git
+>> a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
+>> b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
+>> new file mode 100755
+>> index 000000000..f59620764
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
+>> @@ -0,0 +1,77 @@
+>> +#!/usr/bin/env node
+>> +
+>> +/// Usage: oe-npm-cache <cache-dir> <type> <key> <file-name>
+>> +///    <type> ... meta - metainformation about package
+>> +///               tgz  - tarball
+>> +
+>> +const process = require("node:process");
+>> +
+>> +module.paths.unshift("@@libdir@@/node_modules/npm/node_modules");
+>> +
+>> +const cacache = require('cacache')
+>> +const fs = require('fs')
+>> +
+>> +// argv[0] is 'node', argv[1] is this script
+>> +const cache_dir = process.argv[2]
+>> +const type      = process.argv[3]
+>> +const key       = process.argv[4]
+>> +const file      = process.argv[5]
+>> +
+>> +const data = fs.readFileSync(file)
+>> +
+>> +// metadata content is highly nodejs dependent; when cache entries are
+>> not
+>> +// found, place debug statements in
+>> 'make-fetch-happen/lib/cache/policy.js'
+>> +// (CachePolicy::satisfies())
+>> +const xlate = {
+>> +    'meta': {
+>> +       'key_prefix': 'make-fetch-happen:request-cache:',
+>> +       'metadata': function() {
+>> +           return {
+>> +               time: Date.now(),
+>> +               url:  key,
+>> +               reqHeaders: {
+>> +                   'accept': 'application/vnd.npm.install-v1+json;
+>> q=1.0, application/json; q=0.8, */*',
+>> +               },
+>> +               resHeaders: {
+>> +                   "content-type": "application/json",
+>> +                   "status": 200,
+>> +               },
+>> +               options: {
+>> +                   compress: true,
+>> +               }
+>> +           };
+>> +       },
+>> +    },
+>> +
+>> +    'tgz': {
+>> +       'key_prefix': 'make-fetch-happen:request-cache:',
+>> +       'metadata': function() {
+>> +           return {
+>> +               time: Date.now(),
+>> +               url:  key,
+>> +               reqHeaders: {
+>> +                   'accept': '*/*',
+>> +               },
+>> +               resHeaders: {
+>> +                   "content-type": "application/octet-stream",
+>> +                   "status": 200,
+>> +               },
+>> +               options: {
+>> +                   compress: true,
+>> +               },
+>> +           };
+>> +       },
+>> +    },
+>> +};
+>> +
+>> +const info = xlate[type];
+>> +let opts = {}
+>> +
+>> +if (info.metadata) {
+>> +    opts['metadata'] = info.metadata();
+>> +}
+>> +
+>> +cacache.put(cache_dir, info.key_prefix + key, data, opts)
+>> +    .then(integrity => {
+>> +       console.log(`Saved content of ${key} (${file}).`);
+>> +})
+>> diff --git a/meta-oe/recipes-devtools/nodejs/
+>> nodejs-oe-cache-native_16.14.bb b/meta-oe/recipes-devtools/nodejs/
+>> nodejs-oe-cache-native_16.14.bb
+>> new file mode 100644
+>> index 000000000..a61dd5018
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.14.bb
+>> @@ -0,0 +1,21 @@
+>> +DESCRIPTION = "OE helper for manipulating npm cache"
+>> +LICENSE = "Apache-2.0"
+>> +LIC_FILES_CHKSUM =
+>> "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
+>> +
+>> +SRC_URI = "\
+>> +    file://oe-npm-cache \
+>> +"
+>> +
+>> +inherit native
+>> +
+>> +B = "${WORKDIR}/build"
+>> +
+>> +do_configure() {
+>> +    sed -e 's!@@libdir@@!${libdir}!g' < '${WORKDIR}/oe-npm-cache' >
+>> '${B}/oe-npm-cache'
+>> +}
+>> +
+>> +do_install() {
+>> +    install -D -p -m 0755 ${B}/oe-npm-cache ${D}${bindir}/oe-npm-cache
+>> +}
+>> +
+>> +RDEPENDS:${PN} = "nodejs-native"
+>> --
+>> 2.17.1
+>>
+>>
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#98804):
+>> https://lists.openembedded.org/g/openembedded-devel/message/98804
+>> Mute This Topic: https://lists.openembedded.org/mt/93678585/3617156
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+>> Martin.Jansa@gmail.com]
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>>
+>>
+
+--000000000000957d6105e8a42af4
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">I&#39;ve already sent this backport request yesterday.</di=
-v><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On W=
-ed, Sep 14, 2022 at 4:26 PM Paulo Vitor Becker Ayrosa Monteiro de Andrade &=
-lt;<a href=3D"mailto:paulo@eero.com">paulo@eero.com</a>&gt; wrote:<br></div=
-><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border=
--left:1px solid rgb(204,204,204);padding-left:1ex">[Edited Message Follows]=
-<br>
+<div dir=3D"ltr"><div>Awesome!</div><div><br></div><div>I tried sending it =
+earlier, but had some problems. Thanks a bunch, then!<br></div></div><br><d=
+iv class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Sep =
+14, 2022 at 10:27 AM Martin Jansa &lt;<a href=3D"mailto:martin.jansa@gmail.=
+com">martin.jansa@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gm=
+ail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,=
+204,204);padding-left:1ex"><div dir=3D"ltr">I&#39;ve already sent this back=
+port request yesterday.</div><br><div class=3D"gmail_quote"><div dir=3D"ltr=
+" class=3D"gmail_attr">On Wed, Sep 14, 2022 at 4:26 PM Paulo Vitor Becker A=
+yrosa Monteiro de Andrade &lt;<a href=3D"mailto:paulo@eero.com" target=3D"_=
+blank">paulo@eero.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_qu=
+ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
+4);padding-left:1ex">[Edited Message Follows]<br>
 <br>
 This is a commit from the master branch which is already merged.<br>
 In order to get yocto&#39;s build working on kirkstone branch, this commit =
@@ -450,6 +462,7 @@ target=3D"_blank">Martin.Jansa@gmail.com</a>]<br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 <br>
 </blockquote></div>
+</blockquote></div>
 
---0000000000004c365c05e8a3ec27--
+--000000000000957d6105e8a42af4--
 
