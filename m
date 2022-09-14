@@ -2,47 +2,45 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB06CECAAD3
-	for <webhook@archiver.kernel.org>; Wed, 14 Sep 2022 11:58:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 07B39C6FA8D
+	for <webhook@archiver.kernel.org>; Wed, 14 Sep 2022 11:58:54 +0000 (UTC)
 Received: from voyager.superhosting.bg (voyager.superhosting.bg
  [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web08.5406.1663156730826783764
+ by mx.groups.io with SMTP id smtpd.web11.5275.1663156723618768980
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Sep 2022 04:58:52 -0700
+ Wed, 14 Sep 2022 04:58:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=j1fp535t;
+ dkim=pass header.i=@anavi.org header.s=default header.b=kwhbWLyd;
  spf=permerror,
  err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
  for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
  (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
-	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
-	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=0lG0qFhJr+I+qHLp2Iawy0AJbIw68p2KGUVZMZLa2Bg=; b=j1fp535tlEyvYalpJ3KfL2ADTd
-	jGNMLsMcB6Ye/cFDHuIKldKVshCgjr9mZdcbIZuDEuvOy7Pal5e/WuicIVjUEJWy0+DlKKK8iwQwc
-	pFeAL6oY8JJbQnnj8EUz5spg9OmYrQm/ld1n+AwhFBqSp9Mbt99C4eK7q90HurfvQ4NQkPKn4jEzM
-	7e1YvvP4ZSuVIawO0DGcltv21VzKs8bnsp3FjDLUOf0fpaN6T9D8DH2cLAyrS3SFtEHKIKMFTW9wr
-	fVRSBnQFtFnh/K8UOtMR+5uSP4BrrnOvoduXMWv4dT4LyRDKqKVo8X0liA9R7a7HZRtQ+DBHt47Yi
-	lCnxsoAg==;
+	bh=igK6sIzlexhtVRzC9xLpjZv/f40N3klYKvV2dGkGUok=; b=kwhbWLydLZfiGuyHXqYyb+byJB
+	3fSDgIQbdVBHP4E6aqd6vmPpZeV97FC3lMylJpJTO17h88htS1uUY65MIOUX9KhtgCUF9Mugzgy19
+	xZh/fA8WGGE3bu1LpQPd59BLcEeSTj++R4FEObs/UNrhZ5BImbD8PfWmw8MyuJNp+RAQl3QiKxOk9
+	Ru4/1ZYyTC6HjKxYZ19LRH39ACo538Zv3X0FWclZm1POB+E8k4iDZu3CFTAqgUm0sYUvSeii6USQM
+	Q1R3yK47Fk6o/WYlnOJEBqBcyQHDQFGLitkbCU1q1scfQzrMTEkoHYzvXrhFYhcsMuauGt2ptV09s
+	MPQget7A==;
 Received: from lan.nucleusys.com ([92.247.61.126]:58898 helo=tone.k.g)
 	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.95)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1oYR2U-0002R1-Jm;
-	Wed, 14 Sep 2022 14:58:48 +0300
+	id 1oYR2N-0002R1-LL;
+	Wed, 14 Sep 2022 14:58:41 +0300
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-networkx: Upgrade 2.8.5 -> 2.8.6
-Date: Wed, 14 Sep 2022 14:58:32 +0300
-Message-Id: <20220914115833.177477-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-imageio: Upgrade 2.21.2 -> 2.21.3
+Date: Wed, 14 Sep 2022 14:58:29 +0300
+Message-Id: <20220914115833.177477-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220914115833.177477-1-leon.anavi@konsulko.com>
-References: <20220914115833.177477-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-AntiAbuse: This header was added to track abuse,
@@ -60,39 +58,35 @@ X-Source-Dir:
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Sep 2022 11:58:53 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Sep 2022 11:58:54 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98793
+ https://lists.openembedded.org/g/openembedded-devel/message/98790
 
-Upgrade to release 2.8.6:
+Upgrade to release 2.21.3:
 
-- Add random_spanning_tree to documentation
-- Add warning to nx_agraph about layout nondeterminism
-- Add cache reset for when G._node is changed
-- Allow unsortable nodes in approximation.treewidth functions
-- Add examples for the condensation function
-- Improve LCA input validation
-- Replace LCA with naive implementations
+- Raise error if fps is specified
+- Fix small typo
+- Examples for Pyav
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-networkx_2.8.5.bb => python3-networkx_2.8.6.bb}    | 2 +-
+ .../{python3-imageio_2.21.2.bb => python3-imageio_2.21.3.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-networkx_2.8.5.bb => python3-networkx_2.8.6.bb} (89%)
+ rename meta-python/recipes-devtools/python/{python3-imageio_2.21.2.bb => python3-imageio_2.21.3.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-networkx_2.8.5.bb b/meta-python/recipes-devtools/python/python3-networkx_2.8.6.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-networkx_2.8.5.bb
-rename to meta-python/recipes-devtools/python/python3-networkx_2.8.6.bb
-index 8d0b8dbb3..3eebfcf98 100644
---- a/meta-python/recipes-devtools/python/python3-networkx_2.8.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-networkx_2.8.6.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://networkx.github.io/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=44614b6df7cf3c19be69d0a945e29904"
+diff --git a/meta-python/recipes-devtools/python/python3-imageio_2.21.2.bb b/meta-python/recipes-devtools/python/python3-imageio_2.21.3.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-imageio_2.21.2.bb
+rename to meta-python/recipes-devtools/python/python3-imageio_2.21.3.bb
+index 06af2a15f..74591f3c4 100644
+--- a/meta-python/recipes-devtools/python/python3-imageio_2.21.2.bb
++++ b/meta-python/recipes-devtools/python/python3-imageio_2.21.3.bb
+@@ -5,7 +5,7 @@ SECTION = "devel/python"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=24cb9a367a9e641b459a01c4d15256ba"
  
--SRC_URI[sha256sum] = "15a7b81a360791c458c55a417418ea136c13378cfdc06a2dcdc12bd2f9cf09c1"
-+SRC_URI[sha256sum] = "bd2b7730300860cbd2dafe8e5af89ff5c9a65c3975b352799d87a6238b4301a6"
+-SRC_URI[sha256sum] = "5702e7b4874bdb2f428b08c7491699b44842129d412cdaa7177ba7ff059deb2c"
++SRC_URI[sha256sum] = "b10a583c831c932f4afbea9e8403082d2a76b1d30d7555b777ceb70441890b3c"
  
  inherit pypi setuptools3
  
