@@ -2,15 +2,15 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06F9EC6FA82
-	for <webhook@archiver.kernel.org>; Wed, 14 Sep 2022 11:58:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB0A6C6FA8A
+	for <webhook@archiver.kernel.org>; Wed, 14 Sep 2022 11:58:53 +0000 (UTC)
 Received: from voyager.superhosting.bg (voyager.superhosting.bg
  [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web11.5276.1663156724725044917
+ by mx.groups.io with SMTP id smtpd.web10.5361.1663156732186384528
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Sep 2022 04:58:45 -0700
+ Wed, 14 Sep 2022 04:58:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=m1ce2xbU;
+ dkim=pass header.i=@anavi.org header.s=default header.b=GkiQbLA+;
  spf=permerror,
  err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
  for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
@@ -21,25 +21,25 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=mbf1aJ+zc7uYBVbsNX+CrUR6UuJKzV1Bj2OJ9ktasVg=; b=m1ce2xbUXlW+m2aOcGb3vwP72V
-	JLlUXuWwjimiKPPBgtP0HFK3AiiAcVQ4bgBMbEjzij+t5X42NNn73D8u6qPH7rmbU1TBJ6vuikEnH
-	1AaDyRZPJIb+XlhFclNl+lablBQhQ9BMjv0xObcpXmFUvsIIWBWl6bcO4V24LAN++8du4TAsB/Njh
-	nrxA/v3DWH53EZVKB9SXoVX0DjDRKC0nF93FjckEj9YCSkfIJB9P4x1AlIXj/mWShz8ZYl3CJHDht
-	CXN+YfAqNY6KtDHQGbc4mKAF6g+AkZVQDoKmIHjZZQpWjK1ynNCw/XzNEZLK4JdfGiur8rwMMmrPj
-	60+3i9qA==;
+	bh=eVqq+K4xO3HOg5StAhClV26yLcyF92EUGBO6ZNHrzVw=; b=GkiQbLA+h/owmXZh0oL15kJe7x
+	OaQQDvT4fTsGVHKVQLKFddR8deYzhdnvzKgSctJT14jSbWDK70UHEc2eYrSSW+M7W0faO+Yqgbq1N
+	BMhMWXvvXrEX4kH0GPWvJL1EnupzWbIdizA3fDkCsRlfwhl9R/C0kuriU2IhmiF1RzioD4U/im/kV
+	BFYGViTYatD+XL8B70+xgEhvgWSfLGuObOgjOBAxcyFNHabQNASdPzyq7Nj2aORV5jPwu+nq1goKM
+	cpyKUXYo1YYDfrOjjZwUSO6qXmosTx9ssyF4Z+hQ7biOBf9f/h/Q6fMgoSxpYjsI+EnGNq5TE3QnV
+	/hbswduQ==;
 Received: from lan.nucleusys.com ([92.247.61.126]:58898 helo=tone.k.g)
 	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.95)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1oYR2P-0002R1-Oi;
-	Wed, 14 Sep 2022 14:58:43 +0300
+	id 1oYR2X-0002R1-0q;
+	Wed, 14 Sep 2022 14:58:51 +0300
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-portion: Upgrade 2.2.0 -> 2.3.0
-Date: Wed, 14 Sep 2022 14:58:30 +0300
-Message-Id: <20220914115833.177477-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-prettytable: Upgrade 3.3.0 -> 3.4.1
+Date: Wed, 14 Sep 2022 14:58:33 +0300
+Message-Id: <20220914115833.177477-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220914115833.177477-1-leon.anavi@konsulko.com>
 References: <20220914115833.177477-1-leon.anavi@konsulko.com>
@@ -60,48 +60,38 @@ X-Source-Dir:
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Sep 2022 11:58:54 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Sep 2022 11:58:53 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98791
+ https://lists.openembedded.org/g/openembedded-devel/message/98794
 
-Upgrade to release 2.3.0:
+Upgrade to release 3.4.1:
 
-- Support Python 3.10.
-- IntervalDict.as_dict has an optional atomic=False parameter that,
-  if set to True, returns intervals that are atomic.
-- Experimental support for structural pattern matching (on left,
-  lower, upper and right).
-- (breaking) For consistency, the empty interval is never <, >, <=,
-  nor >= when compared to another interval.
-- Comparing an interval and a value is deprecated since it is
-  ill-defined when the value is on the left of <= or >=. Convert
-  values to singletons first.
+- Add option to specify line break character used in pagination
+- Add header alignment attribute
+- Revert "Add header alignment attribute"
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-portion_2.2.0.bb => python3-portion_2.3.0.bb}  | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-portion_2.2.0.bb => python3-portion_2.3.0.bb} (67%)
+ ...ython3-prettytable_3.3.0.bb => python3-prettytable_3.4.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-prettytable_3.3.0.bb => python3-prettytable_3.4.1.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-portion_2.2.0.bb b/meta-python/recipes-devtools/python/python3-portion_2.3.0.bb
-similarity index 67%
-rename from meta-python/recipes-devtools/python/python3-portion_2.2.0.bb
-rename to meta-python/recipes-devtools/python/python3-portion_2.3.0.bb
-index 0dad8b0ce..1638d64c3 100644
---- a/meta-python/recipes-devtools/python/python3-portion_2.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-portion_2.3.0.bb
-@@ -7,6 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=05f1e16a8e59ce3e9a979e881816c2ab"
+diff --git a/meta-python/recipes-devtools/python/python3-prettytable_3.3.0.bb b/meta-python/recipes-devtools/python/python3-prettytable_3.4.1.bb
+similarity index 92%
+rename from meta-python/recipes-devtools/python/python3-prettytable_3.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-prettytable_3.4.1.bb
+index b98ee4942..c8b50f0b2 100644
+--- a/meta-python/recipes-devtools/python/python3-prettytable_3.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-prettytable_3.4.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://code.google.com/p/prettytable"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=c9a6829fcd174d9535b46211917c7671"
  
- inherit pypi setuptools3
+-SRC_URI[sha256sum] = "118eb54fd2794049b810893653b20952349df6d3bc1764e7facd8a18064fa9b0"
++SRC_URI[sha256sum] = "7d7dd84d0b206f2daac4471a72f299d6907f34516064feb2838e333a4e2567bd"
  
--SRC_URI[sha256sum] = "b6bfb08a7834787aca076da1200b735d97beef61b60a462b05213e7354a099cf"
-+SRC_URI[sha256sum] = "0e9d42838099263201b25517e4c1bd57042b5fe44432d6df38cef72d84d1eb1f"
-+
-+RDEPENDS:${PN} = "\
-+    ${PYTHON_PN}-sortedcontainers \
-+"
- 
- BBCLASSEXTEND = "native"
+ do_install:append() {
+     perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "*.txt" -o -name "PKG-INFO"`
 -- 
 2.30.2
 
