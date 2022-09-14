@@ -2,15 +2,15 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB0A6C6FA8A
-	for <webhook@archiver.kernel.org>; Wed, 14 Sep 2022 11:58:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 07C79C6FA8E
+	for <webhook@archiver.kernel.org>; Wed, 14 Sep 2022 11:58:54 +0000 (UTC)
 Received: from voyager.superhosting.bg (voyager.superhosting.bg
  [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web10.5361.1663156732186384528
+ by mx.groups.io with SMTP id smtpd.web10.5359.1663156727226624611
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Sep 2022 04:58:52 -0700
+ Wed, 14 Sep 2022 04:58:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=GkiQbLA+;
+ dkim=pass header.i=@anavi.org header.s=default header.b=m9z4jwpJ;
  spf=permerror,
  err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
  for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
@@ -21,25 +21,25 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=eVqq+K4xO3HOg5StAhClV26yLcyF92EUGBO6ZNHrzVw=; b=GkiQbLA+h/owmXZh0oL15kJe7x
-	OaQQDvT4fTsGVHKVQLKFddR8deYzhdnvzKgSctJT14jSbWDK70UHEc2eYrSSW+M7W0faO+Yqgbq1N
-	BMhMWXvvXrEX4kH0GPWvJL1EnupzWbIdizA3fDkCsRlfwhl9R/C0kuriU2IhmiF1RzioD4U/im/kV
-	BFYGViTYatD+XL8B70+xgEhvgWSfLGuObOgjOBAxcyFNHabQNASdPzyq7Nj2aORV5jPwu+nq1goKM
-	cpyKUXYo1YYDfrOjjZwUSO6qXmosTx9ssyF4Z+hQ7biOBf9f/h/Q6fMgoSxpYjsI+EnGNq5TE3QnV
-	/hbswduQ==;
+	bh=V0yABUIKOmmXG8/HR8HE7dM3MT735iRiEFGJFe03mJo=; b=m9z4jwpJuNaRBA86OiWb0KzlkE
+	KcwIPxhr36b6XRSS8RDFx48MFM82sSTVVXr8Zdy3yZ5Ip/iGg+Ox3vBg/bkFgXjny+yW7IdnQJ5iL
+	rAGRbkxN2QKEDfdMpVD/cq2mxPNzqKMQZtMMUuBLXK386reIVyeiHMlRweulPXvQrIUvadkwgJhGG
+	txGxGHO8F4jm5/9U1rfjVbxkSlFkNJv2Tn5HXsZbesyQGO7EsKJ54ehnyta364yu/ULotD/0QPvbh
+	7JGlrGXDXhcdrt7f5wr1UGwlR2nYTeO6MhnP5A1nf3cupz8DQYVdgus7NHimlnY8SjZjiVhaJu+95
+	84Xzf5Cg==;
 Received: from lan.nucleusys.com ([92.247.61.126]:58898 helo=tone.k.g)
 	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.95)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1oYR2X-0002R1-0q;
-	Wed, 14 Sep 2022 14:58:51 +0300
+	id 1oYR2S-0002R1-0q;
+	Wed, 14 Sep 2022 14:58:46 +0300
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-prettytable: Upgrade 3.3.0 -> 3.4.1
-Date: Wed, 14 Sep 2022 14:58:33 +0300
-Message-Id: <20220914115833.177477-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-pydantic: Upgrade 1.9.1 -> 1.10.2
+Date: Wed, 14 Sep 2022 14:58:31 +0300
+Message-Id: <20220914115833.177477-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220914115833.177477-1-leon.anavi@konsulko.com>
 References: <20220914115833.177477-1-leon.anavi@konsulko.com>
@@ -60,38 +60,73 @@ X-Source-Dir:
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Sep 2022 11:58:53 -0000
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Sep 2022 11:58:54 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98794
+ https://lists.openembedded.org/g/openembedded-devel/message/98792
 
-Upgrade to release 3.4.1:
+Upgrade to release 1.10.2:
 
-- Add option to specify line break character used in pagination
-- Add header alignment attribute
-- Revert "Add header alignment attribute"
+- Revert Change: Revert percent encoding of URL parts
+- Prevent long (length > 4_300) strings/bytes as input to int
+  fields, see python/cpython#95778 and CVE-2020-10735
+- fix: dataclass wrapper was not always called
+- Use tomllib on Python 3.11 when parsing mypy configuration
+- Basic fix of GenericModel cache to detect order of arguments in
+  Union models
+- Fix mypy plugin when using bare types like list and dict as
+  default_factory
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ython3-prettytable_3.3.0.bb => python3-prettytable_3.4.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-prettytable_3.3.0.bb => python3-prettytable_3.4.1.bb} (92%)
+ .../python/python3-pydantic_1.10.2.bb         | 20 +++++++++++++++++++
+ .../python/python3-pydantic_1.9.1.bb          | 11 ----------
+ 2 files changed, 20 insertions(+), 11 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pydantic_1.10.2.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pydantic_1.9.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-prettytable_3.3.0.bb b/meta-python/recipes-devtools/python/python3-prettytable_3.4.1.bb
-similarity index 92%
-rename from meta-python/recipes-devtools/python/python3-prettytable_3.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-prettytable_3.4.1.bb
-index b98ee4942..c8b50f0b2 100644
---- a/meta-python/recipes-devtools/python/python3-prettytable_3.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-prettytable_3.4.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://code.google.com/p/prettytable"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c9a6829fcd174d9535b46211917c7671"
- 
--SRC_URI[sha256sum] = "118eb54fd2794049b810893653b20952349df6d3bc1764e7facd8a18064fa9b0"
-+SRC_URI[sha256sum] = "7d7dd84d0b206f2daac4471a72f299d6907f34516064feb2838e333a4e2567bd"
- 
- do_install:append() {
-     perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "*.txt" -o -name "PKG-INFO"`
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic_1.10.2.bb b/meta-python/recipes-devtools/python/python3-pydantic_1.10.2.bb
+new file mode 100644
+index 000000000..16bb1f6ae
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pydantic_1.10.2.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "Data validation and settings management using Python type hinting"
++HOMEPAGE = "https://github.com/samuelcolvin/pydantic"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=2c02ea30650b91528657db64baea1757"
++
++inherit pypi setuptools3
++
++SRC_URI[sha256sum] = "91b8e218852ef6007c2b98cd861601c6a09f1aa32bbbb74fab5b1c33d4a1e410"
++
++RDEPENDS:${PN} += "\
++    ${PYTHON_PN}-typing-extensions \
++    ${PYTHON_PN}-core \
++    ${PYTHON_PN}-numbers \
++    ${PYTHON_PN}-json \
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-io \
++    ${PYTHON_PN}-netclient \
++    ${PYTHON_PN}-image \
++    ${PYTHON_PN}-logging \
++"
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic_1.9.1.bb b/meta-python/recipes-devtools/python/python3-pydantic_1.9.1.bb
+deleted file mode 100644
+index 1d113c9c5..000000000
+--- a/meta-python/recipes-devtools/python/python3-pydantic_1.9.1.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-SUMMARY = "Data validation and settings management using Python type hinting"
+-HOMEPAGE = "https://github.com/samuelcolvin/pydantic"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=2c02ea30650b91528657db64baea1757"
+-RDEPENDS:${PN} += "\
+-    python3-typing-extensions \
+-"
+-
+-inherit pypi setuptools3
+-
+-SRC_URI[sha256sum] = "1ed987c3ff29fff7fd8c3ea3a3ea877ad310aae2ef9889a119e22d3f2db0691a"
 -- 
 2.30.2
 
