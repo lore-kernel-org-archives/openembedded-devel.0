@@ -1,226 +1,166 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <leimaohui@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 953CAECAAD3
-	for <webhook@archiver.kernel.org>; Thu, 15 Sep 2022 06:51:00 +0000 (UTC)
-Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com
- [209.85.167.176])
- by mx.groups.io with SMTP id smtpd.web08.7174.1663224653671679491
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 084DEECAAD3
+	for <webhook@archiver.kernel.org>; Thu, 15 Sep 2022 08:15:01 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
+ [85.158.142.113])
+ by mx.groups.io with SMTP id smtpd.web11.7560.1663229696471334021
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Sep 2022 23:50:53 -0700
+ Thu, 15 Sep 2022 01:14:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=Rbkwo/E1;
- spf=pass (domain: gmail.com, ip: 209.85.167.176,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f176.google.com with SMTP id n83so1116047oif.11
-        for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Sep 2022 23:50:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date;
-        bh=5m8yXyxM4UwUIDD+Y9yeHHFEX1naZlLQGhU54u4NzBI=;
-        b=Rbkwo/E1nGu1HpCylW0gQrv8/tRvt7Xwa03AFu3vyT4YSaTBrtfiPeFHcFHwmf9W5B
-         wClVXPqxkaIOnPEVyksUan6hsRUM+5sIxljL7BTn49/ySqZNrJYX0RbnF4dn45iAkWyG
-         AU4WOii9+rMery2ygL+lP8Bxjm9np775rgDc5fF1+GXGDARmTSz9Hl5x3cmR0yICCClI
-         81qcZE508sJ/MC/CE2lZfnq8Wmm4MLohOpOTpuAwVzGFmVZ/yzrr9BtHj3AXZXWjQhtJ
-         7a39Ofxk3eysk7WJG4yi+svVqXVotkPIfQUIyPuUB7+HRlGAHV77W4hLbrzeHE6314zB
-         I50Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date;
-        bh=5m8yXyxM4UwUIDD+Y9yeHHFEX1naZlLQGhU54u4NzBI=;
-        b=Qk+3wvdjRlfCsX9kl3O9ZyySL9URpbv7xrZgAoWn9eIk7A+L3TcSLmIlB5H89hgZED
-         XjffJ9tNcCHAyI+ouwDaLcxDLFJNeLrw9pxDPUiwhdUQJvqiUUyF8hy1bY+IA0QBaXMT
-         nQ6i2lUTqIVSyTrpzt1tjlyU/q/syJ4VfCURzCg1Ww8MgZXfkG0QGdzjIfEgKxjdCJYZ
-         tu9idNnzltKAkVswSx7K3+pkmiw+IGK52ooyNE51g3A6L0L2oWbV/cCBBaVI4nj+v1fQ
-         WtLYPBjf8BHuNsh8nzy8IzkWFlg+7t51gYHF7cFuLY0UFHl/xlPaR4MpCXllC9XBrsV5
-         fuyQ==
-X-Gm-Message-State: ACgBeo1FJG2/qGnjZzyvTheeyMGh4qsds37CjqFUDsWd3aMeMg9YpJjd
-	nMoTDcWzUwh8VTWagjD8X2ybivvOegcjtwQiv3g=
-X-Google-Smtp-Source: 
- AA6agR6y6si+JqLn4QOVUGttRY0jp0XRorIQUKGkake2PE4f/tKyxkpc2jDSq/WLFdSgugAVlgj70NNxhPMvScRZRaw=
-X-Received: by 2002:a05:6808:17a6:b0:344:eaa9:24e8 with SMTP id
- bg38-20020a05680817a600b00344eaa924e8mr3399509oib.55.1663224652918; Wed, 14
- Sep 2022 23:50:52 -0700 (PDT)
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=QI85BC3Z;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.113,
+ mailfrom: leimaohui@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1663229694; i=@fujitsu.com;
+	bh=z10K070x/JsO7dWTFrbvIyM05CcU974RlmqV93qqVr8=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=QI85BC3Z6tbcX3bR2ZkFzddjpQZ40kiMpG9VgrOgun7sIxZOv/2+ACSlcq7LLtbKT
+	 zyRBdsfLWSUerADMWegT6BanKSu8OC66x72T/JntO8Xf9LjsI3NuTeNt8zdcK8dPVq
+	 EcBOOKJzVyM8x8d7vcgRyR/Ts6D4eyoXZABufOF7xcSQMDUl011B25Qje/jNu0OnCQ
+	 WheR2hELjlKub16+HOpta12JUbtcuQ64Rt2yJ/TEDnMyqwEAguV2DgcFOBvE19mHg0
+	 tGA7/2N8g4iT3Irkc64F13VEQdItG1Yv9EFrxE2uWE7h5mSOWCGkd5HaPXmDWdqWyj
+	 lBp1iMtTpc2KA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrCIsWRWlGSWpSXmKPExsViZ8ORqPv3nlK
+  ywbWbOhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bN74cZC1bKVPz8ZNzAeE+yi5GLQ0jgCaPE
+  8ltrWCGc60wS+4//YoFw9jJKNK48yN7FyMnBJqAhsXvqZWYQW0RAX2Lp7D1gNrOAmsTRlz/Bb
+  GEBT4ljHz6wgtgsAqoSZ8/PZgKxeQVcJC5ebgGbIyGgIDHl4XtmiLigxMmZT1gg5khIHHzxgh
+  miRkni7aU9jBB2hUTj9ENMELaaxNVzm5gnMPLPQtI+C0n7AkamVYw2SUWZ6RkluYmZObqGBga
+  6hoamupZmuoaWxnqJVbqJeqmlunn5RSUZuoZ6ieXFeqnFxXrFlbnJOSl6eaklmxiBgZlSnHBw
+  B+OKfb/0DjFKcjApifJePaqULMSXlJ9SmZFYnBFfVJqTWnyIUYaDQ0mCd+pdoJxgUWp6akVaZ
+  g4wSmDSEhw8SiK8a0HSvMUFibnFmekQqVOMilLivOcvAiUEQBIZpXlwbbDIvMQoKyXMy8jAwC
+  DEU5BalJtZgir/ilGcg1FJmHc7yHiezLwSuOmvgBYzAS02spYHWVySiJCSamCquvPi7z0nzzb
+  2e+XzxK40z9g2846nmkvlnk/lmbPnTjwRMjusTHa7Ceu+cz3bJZWFDr/mMP37Yo+R5b7VLjEv
+  lSY7lYheyt6XuzrtMGPCXd9IFqm6s13HjaQzZwdYH4xcnS2z7W7iL/u39cc+nHB79FH54tpq/
+  ct2go8myC0xfB+5XYw7W99q0yvNw5bemhcMcny+Vu48Inv6v6L2hI7fNmmH2o87pcqXnV9tEP
+  ct89ON634/ag8s0givDO24wRKyrLa030VieZfalDl8VypvMX1uvO1WwH9gq3B7eo7P+6PCEzh
+  +vzt+RXWzn13thscVc9c1au9Szv3+Qjl+stZKrfI3S1bsacl8v4V58fZwJZbijERDLeai4kQA
+  DBlKSEcDAAA=
+X-Env-Sender: leimaohui@fujitsu.com
+X-Msg-Ref: server-10.tower-745.messagelabs.com!1663229693!271764!1
+X-Originating-IP: [62.60.8.97]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.87.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 10004 invoked from network); 15 Sep 2022 08:14:53 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+  by server-10.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 15 Sep 2022 08:14:53 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 1AD1A10018D
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 15 Sep 2022 09:14:53 +0100 (BST)
+Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121
+ [10.183.43.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTPS id 0E9CC100043
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 15 Sep 2022 09:14:53 +0100 (BST)
+Received: from localhost.localdomain (10.167.225.227) by
+ R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Thu, 15 Sep 2022 09:14:51 +0100
+From: Lei Maohui <leimaohui@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Lei Maohui <leimaohui@fujitsu.com>
+Subject: [oe] [meta-gnome][PATCH] tracker-miners: Fix buildpaths warning.
+Date: Thu, 15 Sep 2022 16:14:42 +0800
+Message-ID: <1663229682-9290-1-git-send-email-leimaohui@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <20220913153428.1610984-1-Martin.Jansa@gmail.com>
- <4f3c5ba3-9de9-2da7-04d5-f7873bcf9b30@gmail.com>
- <CA+chaQc6j59V1RShNOkmnqE-qd=cKhkGwWrX5siwiR+4u_rhtQ@mail.gmail.com>
-In-Reply-To: 
- <CA+chaQc6j59V1RShNOkmnqE-qd=cKhkGwWrX5siwiR+4u_rhtQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 14 Sep 2022 23:50:26 -0700
-Message-ID: 
- <CAMKF1so6QKLE+A5fCVcoxnqkAbcb-zgbx0hFAaSMhv27cCH4AA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][kirkstone] nodejs-oe-cache-native: initial checkin
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: akuster808 <akuster808@gmail.com>,
- openembedded-devel@lists.openembedded.org,
-	Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.227]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM121.r01.fujitsu.local (10.183.43.173)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 15 Sep 2022 06:51:00 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 15 Sep 2022 08:15:01 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98815
+ https://lists.openembedded.org/g/openembedded-devel/message/98816
 
-On Wed, Sep 14, 2022 at 11:18 PM Martin Jansa <martin.jansa@gmail.com> wrote:
->
-> oe-core kirkstone already added the dependency on it, so I guess it justifies the exception
->
+Fix the following warning:
+WARNING: tracker-miners-3.2.1-r0 do_package_qa: QA Issue: File
+/usr/src/debug/tracker-miners/3.2.1-r0/src/libtracker-miners-common/tracker-miners-enum-types.c
+in package tracker-miners-src contains reference to TMPDIR
+File /usr/src/debug/tracker-miners/3.2.1-r0/src/libtracker-miner/tracker-miner-enum-types.c
+in package tracker-miners-src contains reference to TMPDIR [buildpaths]
 
-agreed
+Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
+---
+ ...file-to-a-fixed-path-instead-of-a-host-pa.patch | 41 ++++++++++++++++++++++
+ .../recipes-gnome/tracker/tracker-miners_3.2.1.bb  |  5 ++-
+ 2 files changed, 45 insertions(+), 1 deletion(-)
+ create mode 100644 meta-gnome/recipes-gnome/tracker/tracker-miners/0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch
 
-> On Wed, Sep 14, 2022 at 10:19 PM akuster808 <akuster808@gmail.com> wrote:
->>
->>
->>
->> On 9/13/22 11:34, Martin Jansa wrote:
->> > From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
->> >
->> > This implements an 'npm cache add' like functionality but allows to
->> > specify the key of the data and sets metadata which are required to
->> > find the data.
->> >
->> > It is used to cache information as done during 'npm install'.
->> >
->> > Keyformat and metadata are nodejs version specific.
->>
->> Isn't this adding a new recipe to a Stable branch?
->>
->> - armin
->> >
->> > Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
->> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> > ---
->> >   .../nodejs/nodejs-oe-cache-16.14/oe-npm-cache | 77 +++++++++++++++++++
->> >   .../nodejs/nodejs-oe-cache-native_16.14.bb    | 21 +++++
->> >   2 files changed, 98 insertions(+)
->> >   create mode 100755 meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
->> >   create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.14.bb
->> >
->> > diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
->> > new file mode 100755
->> > index 0000000000..f596207648
->> > --- /dev/null
->> > +++ b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-16.14/oe-npm-cache
->> > @@ -0,0 +1,77 @@
->> > +#!/usr/bin/env node
->> > +
->> > +/// Usage: oe-npm-cache <cache-dir> <type> <key> <file-name>
->> > +///    <type> ... meta - metainformation about package
->> > +///               tgz  - tarball
->> > +
->> > +const process = require("node:process");
->> > +
->> > +module.paths.unshift("@@libdir@@/node_modules/npm/node_modules");
->> > +
->> > +const cacache = require('cacache')
->> > +const fs = require('fs')
->> > +
->> > +// argv[0] is 'node', argv[1] is this script
->> > +const cache_dir = process.argv[2]
->> > +const type      = process.argv[3]
->> > +const key       = process.argv[4]
->> > +const file      = process.argv[5]
->> > +
->> > +const data = fs.readFileSync(file)
->> > +
->> > +// metadata content is highly nodejs dependent; when cache entries are not
->> > +// found, place debug statements in 'make-fetch-happen/lib/cache/policy.js'
->> > +// (CachePolicy::satisfies())
->> > +const xlate = {
->> > +    'meta': {
->> > +     'key_prefix': 'make-fetch-happen:request-cache:',
->> > +     'metadata': function() {
->> > +         return {
->> > +             time: Date.now(),
->> > +             url:  key,
->> > +             reqHeaders: {
->> > +                 'accept': 'application/vnd.npm.install-v1+json; q=1.0, application/json; q=0.8, */*',
->> > +             },
->> > +             resHeaders: {
->> > +                 "content-type": "application/json",
->> > +                 "status": 200,
->> > +             },
->> > +             options: {
->> > +                 compress: true,
->> > +             }
->> > +         };
->> > +     },
->> > +    },
->> > +
->> > +    'tgz': {
->> > +     'key_prefix': 'make-fetch-happen:request-cache:',
->> > +     'metadata': function() {
->> > +         return {
->> > +             time: Date.now(),
->> > +             url:  key,
->> > +             reqHeaders: {
->> > +                 'accept': '*/*',
->> > +             },
->> > +             resHeaders: {
->> > +                 "content-type": "application/octet-stream",
->> > +                 "status": 200,
->> > +             },
->> > +             options: {
->> > +                 compress: true,
->> > +             },
->> > +         };
->> > +     },
->> > +    },
->> > +};
->> > +
->> > +const info = xlate[type];
->> > +let opts = {}
->> > +
->> > +if (info.metadata) {
->> > +    opts['metadata'] = info.metadata();
->> > +}
->> > +
->> > +cacache.put(cache_dir, info.key_prefix + key, data, opts)
->> > +    .then(integrity => {
->> > +     console.log(`Saved content of ${key} (${file}).`);
->> > +})
->> > diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.14.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.14.bb
->> > new file mode 100644
->> > index 0000000000..a61dd5018f
->> > --- /dev/null
->> > +++ b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_16.14.bb
->> > @@ -0,0 +1,21 @@
->> > +DESCRIPTION = "OE helper for manipulating npm cache"
->> > +LICENSE = "Apache-2.0"
->> > +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
->> > +
->> > +SRC_URI = "\
->> > +    file://oe-npm-cache \
->> > +"
->> > +
->> > +inherit native
->> > +
->> > +B = "${WORKDIR}/build"
->> > +
->> > +do_configure() {
->> > +    sed -e 's!@@libdir@@!${libdir}!g' < '${WORKDIR}/oe-npm-cache' > '${B}/oe-npm-cache'
->> > +}
->> > +
->> > +do_install() {
->> > +    install -D -p -m 0755 ${B}/oe-npm-cache ${D}${bindir}/oe-npm-cache
->> > +}
->> > +
->> > +RDEPENDS:${PN} = "nodejs-native"
->> >
->> > -=-=-=-=-=-=-=-=-=-=-=-
->> > Links: You receive all messages sent to this group.
->> > View/Reply Online (#98787): https://lists.openembedded.org/g/openembedded-devel/message/98787
->> > Mute This Topic: https://lists.openembedded.org/mt/93657958/3616698
->> > Group Owner: openembedded-devel+owner@lists.openembedded.org
->> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
->> > -=-=-=-=-=-=-=-=-=-=-=-
->> >
->>
+diff --git a/meta-gnome/recipes-gnome/tracker/tracker-miners/0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch b/meta-gnome/recipes-gnome/tracker/tracker-miners/0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch
+new file mode 100644
+index 0000000..1332a95
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/tracker/tracker-miners/0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch
+@@ -0,0 +1,41 @@
++From 6f6d7e3995c370b8121206a7f9cc0d234553bbfe Mon Sep 17 00:00:00 2001
++From: Lei Maohui <leimaohui@fujitsu.com>
++Date: Thu, 15 Sep 2022 16:35:39 +0900
++Subject: [PATCH] Set header file to a fixed path instead of a host path.
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
++---
++ src/libtracker-miner/tracker-miner-enum-types.c.template        | 2 +-
++ .../tracker-miners-enum-types.c.template                        | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/src/libtracker-miner/tracker-miner-enum-types.c.template b/src/libtracker-miner/tracker-miner-enum-types.c.template
++index 7be7a01..46a4dc9 100644
++--- a/src/libtracker-miner/tracker-miner-enum-types.c.template
+++++ b/src/libtracker-miner/tracker-miner-enum-types.c.template
++@@ -7,7 +7,7 @@
++
++ /*** BEGIN file-production ***/
++ /* enumerations from "@basename@" */
++-#include "@filename@"
+++#include "tracker-miner-enums.h"
++ /*** END file-production ***/
++
++
++diff --git a/src/libtracker-miners-common/tracker-miners-enum-types.c.template b/src/libtracker-miners-common/tracker-miners-enum-types.c.template
++index c712dda..cb449e2 100644
++--- a/src/libtracker-miners-common/tracker-miners-enum-types.c.template
+++++ b/src/libtracker-miners-common/tracker-miners-enum-types.c.template
++@@ -7,7 +7,7 @@
++
++ /*** BEGIN file-production ***/
++ /* enumerations from "@basename@" */
++-#include "@filename@"
+++#include "tracker-enums.h"
++ /*** END file-production ***/
++
++
++--
++2.25.1
+diff --git a/meta-gnome/recipes-gnome/tracker/tracker-miners_3.2.1.bb b/meta-gnome/recipes-gnome/tracker/tracker-miners_3.2.1.bb
+index 2847635..92039a2 100644
+--- a/meta-gnome/recipes-gnome/tracker/tracker-miners_3.2.1.bb
++++ b/meta-gnome/recipes-gnome/tracker/tracker-miners_3.2.1.bb
+@@ -15,7 +15,10 @@ GNOMEBASEBUILDCLASS = "meson"
+ 
+ inherit gnomebase gsettings gobject-introspection vala bash-completion features_check
+ 
+-SRC_URI += "file://0001-meson.build-Just-warn-if-we-build-without-libseccomp.patch"
++SRC_URI += "file://0001-meson.build-Just-warn-if-we-build-without-libseccomp.patch \
++            file://0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch \
++           "
++
+ SRC_URI[archive.sha256sum] = "44369f53e2edef41437406dbeecd477a97f8a9afdd9134832ea45d1ba2aa2c47"
+ 
+ # gobject-introspection is mandatory and cannot be configured
+-- 
+1.8.3.1
+
 
