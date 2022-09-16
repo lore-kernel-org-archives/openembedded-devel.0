@@ -1,111 +1,90 @@
-Return-Path: <leimaohui@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 69E77C32771
-	for <webhook@archiver.kernel.org>; Fri, 16 Sep 2022 01:32:36 +0000 (UTC)
-Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
- [85.158.142.2])
- by mx.groups.io with SMTP id smtpd.web08.1265.1663291945475973517
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73357C54EE9
+	for <webhook@archiver.kernel.org>; Fri, 16 Sep 2022 05:25:47 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com
+ [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web12.2679.1663305937311132291
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Sep 2022 18:32:26 -0700
+ Thu, 15 Sep 2022 22:25:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=GxwD6nTW;
- spf=pass (domain: fujitsu.com, ip: 85.158.142.2,
- mailfrom: leimaohui@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
-	s=170520fj; t=1663291943; i=@fujitsu.com;
-	bh=sOHjsZUKltKPB+rSpcZNa/9B4KIVl6jIiJtcKahKsp8=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=GxwD6nTWnnj/PAUBs52qszeGG0SbWM+wck+5ofoL26s8vg1hITwQK0TQrzgQX88QH
-	 VhRcegZz2/NSwZ9dC+GBRtKnFabsU1FhVc06ghJZrVYXQ9SshEXk4XCQ+plSuVx0Zq
-	 kMdcc7wv3pdbc4ph4+jjCjhZG77kL+lppeizZ1gIVqj6G+2lOV6amrRWoWoHoHV5yN
-	 9o+ZC0X0fLWLUwFyQUxkEB9OqDpqIQp1z9f6ffgau+3guJmsDTQOVCyKoCEyY5rgPe
-	 pb5D19U1aKoDG4Sy9uwTnfj2p5z48Gkv4vLORXMQluXsCx/jQWgOcC/lNY4YtuHTOp
-	 ZhIlq8DP/WB9Q==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrCIsWRWlGSWpSXmKPExsViZ8ORpKt2STn
-  ZYPImZYuLh5cyOzB6nNu4gjGAMYo1My8pvyKBNWNVcw97QStHxflDEQ2M3exdjFwcQgIPGSWu
-  rvnICuFcYZK40baBDcLZyyjR8f8YUIaTg01AQ2L31MvMILaIgL7E0tl7wGxmATWJoy9/gtnCA
-  o4Sk+++ArNZBFQlvl16CWbzCrhKnJnQywRiSwgoSEx5+B4qLihxcuYTFog5EhIHX7xghqhRkn
-  h7aQ8jhF0h0Tj9EFSvmsTVc5uYJzDyz0LSPgtJ+wJGplWMNklFmekZJbmJmTm6hgYGuoaGprq
-  WlkDKUi+xSjdRL7VUNy+/qCRD11AvsbxYL7W4WK+4Mjc5J0UvL7VkEyMwMFOKk8t3MG7f90vv
-  EKMkB5OSKO9jc+VkIb6k/JTKjMTijPii0pzU4kOMMhwcShK8F08D5QSLUtNTK9Iyc4BRApOW4
-  OBREuE1PQKU5i0uSMwtzkyHSJ1iVJQS51W6AJQQAElklObBtcEi8xKjrJQwLyMDA4MQT0FqUW
-  5mCar8K0ZxDkYlYV6zc0BTeDLzSuCmvwJazAS0mNcAbHFJIkJKqoFp/pOA/L0laVOLNjrpTuB
-  y2VPsO+t73txXohmH5vcwl//YKvScRZznkJHjbDVX/68OSwRubXsg3LHviWFNd2bszRuy1/ab
-  sDI5sJS8yWBt3Vqh+j9yghbf9zmXj03SzhJzf5RhPXlr7iqZhHL31ps+X3j0/O/er2U8EJ639
-  zIzy4ZX78x1ql9+6/+7+92F2/qrn56T07PTjuae8vTEYt81hyon3JKQeL5ILuOM/sabT9aZHz
-  l0+vzjN9M/rPt36o281e2mkJPHp/+omKOhvTA1aOc+q5M2e359vv1mp4L+uoh1LRWSCg+PMGk
-  XZy5TVRL1j6r3PzjT5e7Ke4VRL8/seBXeqlzeey6Jh031YnZWmBJLcUaioRZzUXEiACC3lc9H
-  AwAA
-X-Env-Sender: leimaohui@fujitsu.com
-X-Msg-Ref: server-12.tower-745.messagelabs.com!1663291942!52305!1
-X-Originating-IP: [62.60.8.98]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.87.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 7768 invoked from network); 16 Sep 2022 01:32:22 -0000
-Received: from unknown (HELO n03ukasimr03.n03.fujitsu.local) (62.60.8.98)
-  by server-12.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP; 16 Sep 2022 01:32:22 -0000
-Received: from n03ukasimr03.n03.fujitsu.local (localhost [127.0.0.1])
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTP id 074011B1
-	for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Sep 2022 02:32:22 +0100 (BST)
-Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121
- [10.183.43.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by n03ukasimr03.n03.fujitsu.local (Postfix) with ESMTPS id F05C01AF
-	for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Sep 2022 02:32:21 +0100 (BST)
-Received: from localhost.localdomain (10.167.225.227) by
- R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
- (TLS) id 15.0.1497.32; Fri, 16 Sep 2022 02:32:20 +0100
-From: Lei Maohui <leimaohui@fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Lei Maohui <leimaohui@fujitsu.com>
-Subject: [oe] [meta-gnome][PATCH] gexiv2: Fix buildpaths warning.
-Date: Fri, 16 Sep 2022 09:32:11 +0800
-Message-ID: <1663291931-26311-1-git-send-email-leimaohui@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=YtaUDqWq;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id s18so14461395plr.4
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 15 Sep 2022 22:25:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date;
+        bh=7S+EoXPaWoRK5M3eq8RMsRfuHfYoXVNmPKi8AgnoDx0=;
+        b=YtaUDqWqP9W0RfLW6FmSoo/FjJECHQP0QDmJJvSkPhagBgr1yWOcc/JwkMwvotE0ER
+         It94g9j7gsqEbw953iVhJaN5akVUs92SZWKbBt1ach9sSE+7Q2qjNej3LlbamPviS2sL
+         cqh8KX4XhFVaihxrpWxBwDL5tZZBU/YZWSzW+fXi9t+IBJKcpLkNk+uY3XTrRcL5TxFv
+         kM6nivTV96dQl+DMTnkIOGdTYEnvJXIyNU+BVp8Jdb1dElQDoE0zOIMzOrG3zeg3S6uW
+         m1isk5jCq1nqwoSVIitYY/M18UlTiOpHTZQ5qEgOQLZwLhI0Jeh4kpTeCJrFNzANwQWN
+         94Ug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date;
+        bh=7S+EoXPaWoRK5M3eq8RMsRfuHfYoXVNmPKi8AgnoDx0=;
+        b=NG5aKhJbj12xqt3BBik8TDHj68ofPC+uXEOE9+CyKTe8TTsnauBaV09Abo0Nuu3w83
+         3nhhHMpAb136NHol4p0jOgWz15g8RqCFAFxN19oQZPOOIcIwKNeaxrES6GgRxAUs+8Js
+         vsJRQkWIIG4Dv26ngz7Daxgdi8f0FEiC4Zp+oeuGVMUMo7ArbhrsFWWY5lxD84VIrAWW
+         NPDiHCdrxPFVr0BCWUeELbV6AKmMJeMQHqcOw6wd7vGDodw1R3LlEFxVllRYJFFeyeZ6
+         a+v/s2R3ZcMmFlIe44iZsDjqMMDG9DBprh533zpNBj9XZmjX0kJBkOfpI72p235O8May
+         12Nw==
+X-Gm-Message-State: ACrzQf21ucvOxleBdlOwZ20SwOLlI4Lk6zvrEcNvldi1RZiGOXsCTSn4
+	5wKQsID4eoW+9B0s3l8CUYQTkN/Hg1S5qg==
+X-Google-Smtp-Source: 
+ AMsMyM4T1yDnaqJVtXSwM4Ot+Fnate4GgRUohomFRWrbY7m2gpR/4mcWoKjDq3NPiSGgpwTVZ71C3g==
+X-Received: by 2002:a17:902:7c01:b0:16f:9649:be73 with SMTP id
+ x1-20020a1709027c0100b0016f9649be73mr3090385pll.70.1663305936423;
+        Thu, 15 Sep 2022 22:25:36 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9181:1cf0::fe04])
+        by smtp.gmail.com with ESMTPSA id
+ f14-20020a17090aa78e00b00200aff02e90sm561039pjq.18.2022.09.15.22.25.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 15 Sep 2022 22:25:35 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] wvstreams: Add missing dependency on boost
+Date: Thu, 15 Sep 2022 22:25:33 -0700
+Message-Id: <20220916052533.269620-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.167.225.227]
-X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
- R01UKEXCASM121.r01.fujitsu.local (10.183.43.173)
-X-Virus-Scanned: ClamAV using ClamSMTP
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 16 Sep 2022 01:32:36 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 16 Sep 2022 05:25:47 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98827
+ https://lists.openembedded.org/g/openembedded-devel/message/98828
 
-WARNING: gexiv2-0.14.0-r0 do_package_qa: QA Issue: File /usr/src/debug/gexiv2/0.14.0-r0/gexiv2/gexiv2-enums.cpp in package lib32-gexiv2-src contains reference to TMPDIR [buildpaths]
-
-Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-gnome/recipes-gnome/gexiv2/gexiv2_0.14.0.bb | 7 +++++++
- 1 file changed, 7 insertions(+)
+ meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/gexiv2/gexiv2_0.14.0.bb b/meta-gnome/recipes-gnome/gexiv2/gexiv2_0.14.0.bb
-index afec302..fed29da 100644
---- a/meta-gnome/recipes-gnome/gexiv2/gexiv2_0.14.0.bb
-+++ b/meta-gnome/recipes-gnome/gexiv2/gexiv2_0.14.0.bb
-@@ -19,3 +19,10 @@ EXTRA_OEMESON = " \
- PACKAGES =+ "${PN}-python3"
- FILES:${PN}-python3 = "${PYTHON_SITEPACKAGES_DIR}"
- RDEPENDS:${PN}-python3 = "${PN}"
-+
-+PACKAGE_PREPROCESS_FUNCS += "src_package_preprocess"
-+src_package_preprocess () {
-+        # Trim build paths from comments in generated sources to ensure reproducibility
-+        sed -i -e "s,${B}/../${BPN}-${PV}/${BPN}/,,g" \
-+            ${B}/gexiv2/gexiv2-enums.cpp
-+}
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+index d73c64661f..3453f3e964 100644
+--- a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
++++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+@@ -4,7 +4,7 @@ SUMMARY = "WvStreams is a network programming library in C++"
+ LICENSE = "LGPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=55ca817ccb7d5b5b66355690e9abc605"
+ 
+-DEPENDS = "zlib openssl (>= 0.9.8) dbus readline"
++DEPENDS = "zlib openssl (>= 0.9.8) dbus readline boost"
+ DEPENDS:append:libc-musl = " argp-standalone libexecinfo"
+ 
+ SRC_URI = "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/${BPN}/${BP}.tar.gz \
 -- 
-1.8.3.1
+2.37.3
 
 
