@@ -1,119 +1,96 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C81FAECAAD8
-	for <webhook@archiver.kernel.org>; Fri, 16 Sep 2022 06:55:47 +0000 (UTC)
-Received: from mail-oi1-f169.google.com (mail-oi1-f169.google.com
- [209.85.167.169])
- by mx.groups.io with SMTP id smtpd.web11.3257.1663311341287551574
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4F5AECAAD8
+	for <webhook@archiver.kernel.org>; Fri, 16 Sep 2022 10:38:18 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg
+ [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web08.4516.1663324696350009795
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Sep 2022 23:55:41 -0700
+ Fri, 16 Sep 2022 03:38:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=cooFmGXS;
- spf=pass (domain: gmail.com, ip: 209.85.167.169,
- mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f169.google.com with SMTP id r125so5094954oia.8
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Sep 2022 23:55:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date;
-        bh=VZxFFVBI5+pgUeQ0881MSRMUgfiirHm7gzrMwXc8fL4=;
-        b=cooFmGXSbVTnZJ69UkjriejJfdBP+GTmOa3Gz8P1BGFyxb0Z2ryFBweSX8914mu2Zp
-         VSIDD5PZLlvbJG06+2FYI5en/BvzztaxYVaJXKW05GxzJyDW5cdBCAI9VMuzZRANBhf+
-         vrhLS840qg4B64b5YK1K1iGbUI8gYjdl7KnGIO2ukAVYUQFagQKaXJDGdB9kuKJBebfe
-         aid3GvFpU1l5d+GUL249d2U0wtBsoHPqt25sUvwWpTyw5YVGCcXb2qSGgKWe4OwZyE42
-         EQfII0U02gF3zQ1bEl8Tukfe30kKCffJ1+JA/e1VJgxkPoxDjUbLGagN/hLQ1aCkvSoT
-         tncg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date;
-        bh=VZxFFVBI5+pgUeQ0881MSRMUgfiirHm7gzrMwXc8fL4=;
-        b=KIIU5QGaUJhJPT0sKfy0fBrjlZrV9Pxe4mF8kjQzArG7ysKJy+OPMfrlug2S9bF0Mv
-         BmUG9kNcAsXHPJNJURjOF7hXQ+1Ub3g18xiRElUNAhYnMZ9ILLAibTQYMOEsEmV4U+CS
-         iDXHHHYei9iGvp9sCBC65Pl7j/zFr826C9829VvpaRRzRW7tuxEXgqZCwYaO6zjh1PHe
-         R6EiD8FgoETEaZQxDcPVwz+wyE6Ms8DhGUBacNgpTUYwfDvgUywbB1xDgvAoshB+TUre
-         unOhuPTuNjJ6dh1GUsLDTrGp8+OWy3G3ZI+6rlI6NW7aC7ZJ8+4ICcLpBhJbYJF/08P0
-         abCg==
-X-Gm-Message-State: ACgBeo1lsJPV6tZ1xzaDxU+jTzNN/wA6Wupf00He1ZXKMH0f2Teg0ILf
-	uBvuqf9U7cl+PBjNdvyO2NVXQbyYWLtq+EmrSIo=
-X-Google-Smtp-Source: 
- AA6agR4tzqQcOtJGxlzsFtno+9oS0fUk8AmDVAWk5EBtW4Na/0F8fXwqTwjuZSDQ3/0vR0f3Bw1M4VCoMWuoWikE+S8=
-X-Received: by 2002:a05:6808:1988:b0:34f:de19:411c with SMTP id
- bj8-20020a056808198800b0034fde19411cmr5832270oib.262.1663311340408; Thu, 15
- Sep 2022 23:55:40 -0700 (PDT)
+ dkim=pass header.i=@anavi.org header.s=default header.b=ksnvIm+P;
+ spf=permerror,
+ err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
+ for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
+ (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=zc/JLuUZ80C7kUktQOXgqf2hHuH82dgonc3tGNfp818=; b=ksnvIm+Pjc6f+SY+u9rGRa/bUE
+	IhXamU/+8brMHFl6gbf86YY1V+j1+d9/MksLB6cJuuxRSxdIQp0bFh5MBA9P/7Rx5D5n8kBbsi17C
+	rMPC5qP41JynTvmBPGVyU7LqVzQtD8j1YkZmFdPt4mpjF7oQCpcMc3ymTGiQ06cVlt1Jis15eSFun
+	xorerbC9JvJrS3J7G1E3asplOKs265YG8TIeGqfAa6IoaKzCnL5r3ONBbYLQukpvXXqXzgMPy7omI
+	Bk8VAMmYW2Jp4Q0zzJMcxHcEK9Og/aHhq7D/iuiWI3ML98wANfTGuyqCkihC6kiy/+GAgBjswfDBP
+	L24USm6A==;
+Received: from lan.nucleusys.com ([92.247.61.126]:49096 helo=tone.k.g)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.95)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1oZ8jl-0005VH-DA;
+	Fri, 16 Sep 2022 13:38:14 +0300
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/4] python3-ujson: Upgrade 5.4.0 -> 5.5.0
+Date: Fri, 16 Sep 2022 13:37:57 +0300
+Message-Id: <20220916103800.573091-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-References: <1663310379-31652-1-git-send-email-leimaohui@fujitsu.com>
-In-Reply-To: <1663310379-31652-1-git-send-email-leimaohui@fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 15 Sep 2022 23:55:14 -0700
-Message-ID: 
- <CAMKF1srbKWWa893zyBVON+ig9LT+vPC7gmwcWrHnQdsqB2D90Q@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] mariadb: Fix buildpaths warning.
-To: leimaohui <leimaohui@fujitsu.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
+ leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 16 Sep 2022 06:55:47 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 16 Sep 2022 10:38:18 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98830
+ https://lists.openembedded.org/g/openembedded-devel/message/98831
 
-On Thu, Sep 15, 2022 at 11:39 PM leimaohui <leimaohui@fujitsu.com> wrote:
->
-> WARNING: mariadb-10.8.3-r0 do_package_qa: QA Issue: File /usr/src/debug/mariadb/10.8.3-r0/sql/yy_oracle.hh in package mariadb-src contains reference to TMPDIR
-> File /usr/src/debug/mariadb/10.8.3-r0/sql/yy_mariadb.cc in package mariadb-src contains reference to TMPDIR
-> File /usr/src/debug/mariadb/10.8.3-r0/sql/yy_mariadb.hh in package mariadb-src contains reference to TMPDIR
-> File /usr/src/debug/mariadb/10.8.3-r0/sql/yy_oracle.cc in package mariadb-src contains reference to TMPDIR [buildpaths]
->
-> Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
-> ---
->  meta-oe/recipes-dbs/mysql/mariadb.inc | 11 +++++++++++
->  1 file changed, 11 insertions(+)
->
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-> index c63d511..7bd4ac0 100644
-> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-> @@ -224,6 +224,17 @@ RDEPENDS:${PN}-setupdb = "coreutils"
->  # Allow old code to link to the backward compatible library
->  RDEPENDS:libmysqlclient-dev = "libmysqlclient-r-dev"
->
-> +PACKAGE_PREPROCESS_FUNCS += "src_package_preprocess"
-> +src_package_preprocess () {
-> +        # Trim build paths from comments in generated sources to ensure reproducibility
+Upgrade to release 5.5.0:
 
-how are these sources generated ?
-some generation tools like lex/yacc we can control the paths by
-running those tools in specific source directories and provided
-relative
-paths to sources as inputs during generation.
+- Add support for Python 3.11 and PyPy3.9
+- Add separators encoding parameter
+- Fix encoding of infinity
 
-> +        sed -i -e "s,${S}/sql/,,g" \
-> +               -e "s,${B}/sql/,,g" \
-> +            ${B}/sql/yy_oracle.hh \
-> +            ${B}/sql/yy_mariadb.cc \
-> +            ${B}/sql/yy_mariadb.hh \
-> +            ${B}/sql/yy_oracle.cc
-> +}
-> +
->  FILES:libmysqlclient = "\
->      ${libdir}/libmysqlclient.so.* \
->      ${libdir}/libmariadb.so.* \
-> --
-> 1.8.3.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#98829): https://lists.openembedded.org/g/openembedded-devel/message/98829
-> Mute This Topic: https://lists.openembedded.org/mt/93717522/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../python/{python3-ujson_5.4.0.bb => python3-ujson_5.5.0.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-ujson_5.4.0.bb => python3-ujson_5.5.0.bb} (90%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-ujson_5.4.0.bb b/meta-python/recipes-devtools/python/python3-ujson_5.5.0.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-ujson_5.4.0.bb
+rename to meta-python/recipes-devtools/python/python3-ujson_5.5.0.bb
+index 15cf80e36..9f080eb27 100644
+--- a/meta-python/recipes-devtools/python/python3-ujson_5.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-ujson_5.5.0.bb
+@@ -4,7 +4,7 @@ DESCRIPTION = "UltraJSON is an ultra fast JSON encoder and decoder written in pu
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e0039a83d8a99726b5418f0b03302d0a"
+ 
+-SRC_URI[sha256sum] = "6b953e09441e307504130755e5bd6b15850178d591f66292bba4608c4f7f9b00"
++SRC_URI[sha256sum] = "b25077a971c7da47bd6846a912a747f6963776d90720c88603b1b55d81790780"
+ 
+ inherit pypi ptest setuptools3
+ 
+-- 
+2.30.2
+
 
