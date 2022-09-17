@@ -1,273 +1,295 @@
-Return-Path: <wolfgang.meyer@gossenmetrawatt.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8FE3C6FA86
-	for <webhook@archiver.kernel.org>; Sat, 17 Sep 2022 08:48:28 +0000 (UTC)
-Received: from EUR01-VE1-obe.outbound.protection.outlook.com
- (EUR01-VE1-obe.outbound.protection.outlook.com [104.47.1.55])
- by mx.groups.io with SMTP id smtpd.web11.3935.1663404505403368126
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D52EECAAD3
+	for <webhook@archiver.kernel.org>; Sat, 17 Sep 2022 14:56:30 +0000 (UTC)
+Received: from mail-oi1-f181.google.com (mail-oi1-f181.google.com
+ [209.85.167.181])
+ by mx.groups.io with SMTP id smtpd.web08.6705.1663426582330686251
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 17 Sep 2022 01:48:26 -0700
+ Sat, 17 Sep 2022 07:56:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gossenmetrawatt.onmicrosoft.com
- header.s=selector1-gossenmetrawatt-onmicrosoft-com header.b=BUlgxfZ+;
- spf=pass (domain: gossenmetrawatt.com, ip: 104.47.1.55,
- mailfrom: wolfgang.meyer@gossenmetrawatt.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=j/pYQ9KoHFmvFB97EgT77EgahSOvuNBKeEROC5XSNXuSQU0PDe/GSN+GXcVhTNbc0su4sGA2GbzrgFnozxaOX8t8hi6K30Qoqs2Ghag9b9vJA9wapUApd4coUV6tNAGjdbm+fvhR7qZGWjynPcApaDwU4bYwkwXDcgGgH9Ft49xiqU/VfevXH3DQgZdBGfy0VFb1siDh/BIpVeOvlHiAFr0Y4pV+lz7Gfna/h+CZOwRm5zw8lNiC414Yj4vZLzzNGshncgRQItA6DF25H0xL1IPGFE59OSfmcCvCHu5mID6He8Zp2rzdY45+WwsWOibg9v+Wer8Ww7AWgQFGWgS5Eg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GAqR7O3AFdYYiEQw8qUMZjRhPg97AGPw32rmrVjePTQ=;
- b=MkpoQh5BGYLs2MrcDf4J+cw23JyHtWpzTYi13MnTyeYHzPG8MXCU3AnONsw0qiFtj1zuLoncn6B9GmeRTWnzMDWs0X0Q5T0x5lVpGKIPttgcPlFAQXpPIhbjqis6U/0SU1zZF1rSLp4Mr6VZDVdhINO8WiowVnkzzVYabloTkqBGU2j0LYVa5+PWUpVrfIfOcN1lvtOsCJ83ZDMc9QyalBDqjaV1DGqJz7E84bOrllOgZiY9/c3xYMkYdpTJEigTtFHuSdYG/p7Wl5yjjk/S/3VdQCQKms8GNFkNzXZjaDC25xl4HZcmBTYsFSdIYKpJxRKOr+mFHXXGsHROIJf7MA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=gossenmetrawatt.com; dmarc=pass action=none
- header.from=gossenmetrawatt.com; dkim=pass header.d=gossenmetrawatt.com;
- arc=none
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=LkjTVCFf;
+ spf=pass (domain: gmail.com, ip: 209.85.167.181,
+ mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f181.google.com with SMTP id n83so9525471oif.11
+        for <openembedded-devel@lists.openembedded.org>;
+ Sat, 17 Sep 2022 07:56:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gossenmetrawatt.onmicrosoft.com;
- s=selector1-gossenmetrawatt-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GAqR7O3AFdYYiEQw8qUMZjRhPg97AGPw32rmrVjePTQ=;
- b=BUlgxfZ+l8Rc8dBgVR5p57YIB8pqGbYYythpBrwYppCF29g17rMgCbTvl6yCT8bQPh/LIe2TXK9WwpRFX+AOkXgrDLlz2qkrrfvEIb5VgmRoqJ4Vbo+w+B2ldAL81Se/NqA2Znz2AUE5LPdtyprMS7g64OQzosOJK3XigDkLdXk=
-Received: from VE1PR08MB5583.eurprd08.prod.outlook.com (2603:10a6:800:1ac::24)
- by AS8PR08MB9340.eurprd08.prod.outlook.com (2603:10a6:20b:5a8::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5632.15; Sat, 17 Sep
- 2022 08:48:20 +0000
-Received: from VE1PR08MB5583.eurprd08.prod.outlook.com
- ([fe80::742f:f82e:f58:2a5a]) by VE1PR08MB5583.eurprd08.prod.outlook.com
- ([fe80::742f:f82e:f58:2a5a%8]) with mapi id 15.20.5632.018; Sat, 17 Sep 2022
- 08:48:20 +0000
-From: "Meyer, Wolfgang" <Wolfgang.Meyer@gossenmetrawatt.com>
-To: "raj.khem@gmail.com" <raj.khem@gmail.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe][PATCH 1/4] fbida: Switch to git fetcher
-Thread-Topic: [oe] [meta-oe][PATCH 1/4] fbida: Switch to git fetcher
-Thread-Index: AQHYyfETN2LGko3l70+MWF2xUvuwva3ibB2AgADkeIA=
-Date: Sat, 17 Sep 2022 08:48:20 +0000
-Message-ID: 
- <aa519a830f7c4dabf6683bece84a2be4afb46166.camel@gossenmetrawatt.com>
-References: <20220916172332.3096-1-Wolfgang.Meyer@gossenmetrawatt.com>
-	 <CAMKF1sqy-zHmxrA-rRNpq+r8tpFXX=UVT3n=8z2WgO75=jM5jw@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1sqy-zHmxrA-rRNpq+r8tpFXX=UVT3n=8z2WgO75=jM5jw@mail.gmail.com>
-Accept-Language: en-US, de-DE
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=gossenmetrawatt.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: VE1PR08MB5583:EE_|AS8PR08MB9340:EE_
-x-ms-office365-filtering-correlation-id: 6597dea1-f73c-4d63-e729-08da98895f28
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- /Fi9SNkserPfr0YIX2OSh+wWT4m6iTAO10mg9jlUTnYE8JoERxLbGEHFAQ8mB74ManWvNS5/PQSMe4MFtKiywjC0XIjb9qFOEmetZUD9kWIzlNNWQGdCn1tpdnuqkfNf2YQK7yVFZpJ2+USlKSsXhC3SeENf74oimt2gF/ntglLtZws41j80u6hVkxheiFfPUF/5WF+JRaJ7yf+3bmYNfwzHqiPkWBtC/5vU524P9rC/66SXnJiTklHtNXEj465HABn17WRG7mmHh94/Cag3/kmZ+RIZNZVj7fqfR5SNR5VxE52dYiKQG7ms9p2Fg6pLLVWo0PP5q1nYS46J48QOLRoLjyWg4fEhNiHQVaRXib8674AhAO96GUYYHnb8y/d4ojbuc2yICmg3QjL2Dxu9+V1/wkhiAVCo1fOlEj+E4X8gwTkiL0JlgrtMOLmZxJmxmHh2mRIG8dXHs+07oaphEBjnh5WmWakLOPyKYZM+atrnEf0LoVjFDiQ+tuSTXpra0vdOnDo3zjskibsebtz5hEOZ9ew2UvpLboKZSgHmGUZv7V2xkckaeLarv67RQcPtAwlcPygXqNCxPe6EV7vuHohSm8ydixSMRkMX4sJUf8RFH756HVGZHko+3T1gbQqXA9bx6xKrfqIPDgdJSdC/QIdEyI7T/mCUUMwPrShK7zCNs8KgxZIsk6Ddt1Gw5Ng9pPu+LIAEWnL6SK4lOp2S6roDVczXjfNegzlCSN8Ns5jYaGstBiia8WhyGGFR6v9h9eEUrhZ86Azf4QB06t7GR6o0PTJxse7CAIHtqU2Dc31tqwg37PpXOY0r4pjIwb1q
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR08MB5583.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(376002)(366004)(396003)(39840400004)(346002)(136003)(451199015)(2616005)(83380400001)(38100700002)(186003)(66574015)(122000001)(71200400001)(38070700005)(66446008)(966005)(66946007)(8936002)(5660300002)(4326008)(6512007)(6486002)(2906002)(8676002)(64756008)(478600001)(66556008)(316002)(53546011)(41300700001)(26005)(6506007)(66476007)(6916009)(91956017)(36756003)(86362001)(76116006);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?U0VjcmYvUFZmak1BZnB3b1pVVzdTZkYrTlZRUkVJYXQwenVxekdyUVdYSUpt?=
- =?utf-8?B?M2xYdE45TC9tVjJNWHovMitqYWJyMXdTcFkvK1l2dkEzc2t6cmJJalF4YU1N?=
- =?utf-8?B?QjlBcjA5cEtzTUlZUFFTT1VRcDk5ZzFpemxXaGsyOUpSeVEzU2tuZUFDOWhD?=
- =?utf-8?B?UFNnN2wvdVlIcWFLSWFsaThidUdUZTN5UldKU1VFV3ZyTUxKZFE0MnZTSHBV?=
- =?utf-8?B?S1JaKytKY3VqZDdKVkJCaGxjYjMvNU1oNjRNbnNIUEd5ZjRQS0VxR2lXWlBq?=
- =?utf-8?B?RHgwNVhWODJuY0toUUs0cXBSOGNjZytWZy8wK05FUzVwZWo5M1dUQkxwejMw?=
- =?utf-8?B?Nm9TUlJxYzBrRk54Yi8vYTJFb0xHVWN5ZDBmVFZzd0l0ak53QzEraitXSlZ1?=
- =?utf-8?B?N3ZNSmsxTDl0K1o2dG5MWXNuV0tieGRyL0xCTEJHOFhyVnFEVkxGWlFXQUQ5?=
- =?utf-8?B?TllMMHF2eVlKV0x6ZWtPZDVYVjlnL3pZN0VoTEJGQVIzZmRUVkJESVN6dENY?=
- =?utf-8?B?MFFtV2s1T0pQT20wODJ6TENpcFNTeHBSdG1pNnlxMDZ6NDZyR01rZk44ZDBn?=
- =?utf-8?B?bi9na1pzWDltc3diSUV0clpQVmJRL1AvcWRsUzVCMy9TeGJpa2RNNWFZMVZ2?=
- =?utf-8?B?V1pmS3JwbGNOTW0yd1ZUTkVQWGtkN0dsYlMxZnBBTGE4QWM2SjBiaGJEOXdy?=
- =?utf-8?B?MzNTYW5nNGUwdUI3VEpvNVlIazdOS0luM1UwMTh0dUdvTnh5a0FFQUJ6QVBB?=
- =?utf-8?B?MW4yOS8xVkxTYUlnN1F4V3BxYXZOaXVxd3QzRWkxTXlDT1c1WVc0TU9MMWRJ?=
- =?utf-8?B?SHlpNUpRRStRZ3lVOG9XRkYrRWFvT0g5VG94TUN1c3plZ1NqVnl6RHJ1blRy?=
- =?utf-8?B?OWtEMFNnOW40TG1ONElUTGpMQ1Ric3ppbjdGWkoxbGxuZFRMR2ttTXNiZlhK?=
- =?utf-8?B?dS9JR0pWZFRTaWhPWFZTVWVsbDQ1OHNkSUdFcGJoaG5pem1QQ2liYVZCb2NI?=
- =?utf-8?B?VmRBUnhZN3ZXWUNaYklUMnNEUkkxOXpaTTJWZXpQQUNjUGk0NHBTYXUzdmVq?=
- =?utf-8?B?YXhsMTZwNmNlMUEyUWZXMExJZEk5LzdQU3o1T1pNblBuMmxpMm0zYnVkMnJD?=
- =?utf-8?B?MFAyUUJCcWZiUmZ2UnVIKzFBaXpvQnlkdDdPTmVtOEcxS0ZFRU1uMy9ob1dv?=
- =?utf-8?B?cTAvVDlDbXRuRDc4cFR6NWdnSk8wU1FGdlJwejNTR0gvVklBaWhRbFM4UVNC?=
- =?utf-8?B?MWFaclFhaXJXcEZkNHhKbjhVcmtkVFUxcFJ0SjZVT3ZTMEV6UnNsOG41RDZk?=
- =?utf-8?B?SFQ4UWZoSGp0Sjd4SlNsMzdyeWNkOUZsOHJmM1ljRjB5YmR2RVFKOWtQbWx1?=
- =?utf-8?B?U2xFSkpZTFVqL2hLRTBEU0ZYS2ZuQUJKazY2V1JLQWJGTFFOaGJKRGxYTDNp?=
- =?utf-8?B?UWpabDJnc3BVQjRSQkloOUNRekFpVndNaDJ4YkgwU2RHWldGRE5LenZGUnN5?=
- =?utf-8?B?d1FEYWNyL3ZOQ1ppd1JYMlBsbk1HSDF1ai96U2JpQTNHQUQxTFo0b0NtOTNv?=
- =?utf-8?B?eUxVS3d6VW5kSW1oUEd3VEpiVzllb1NwSXJoMTBJeXl2ejAxY25uZ3NxVWRm?=
- =?utf-8?B?RHZJSXZhKzRCSDlaQmE2VGphTytrL2VudjB2YlpNdzFtTEpPZDFJWmNuZW5v?=
- =?utf-8?B?ZGJqbHdpMStDMEtNTkV4eGhTK1Z3MU5QZE4vaUYvTlltN1V3LzVUVTFYdFJz?=
- =?utf-8?B?OC9zR3E5Q1hCaW44aUlDOGdQTzkvdkYxZHUvNHZ0dERGMXM3NVRjWElrQU1j?=
- =?utf-8?B?VTV5NDF1akR0NVQ3dDM1cGpaU1dyYWJQM3M0dkl6aUo3d0NkM1gvSFNPNzIr?=
- =?utf-8?B?N0gwdnF2QmdpcFlFemRxcUxVQjJMRGRFZi8ySWtsUnQ3VGVIVGFBdGRNalRN?=
- =?utf-8?B?ZGlEMzRQNFNVeFFrOGpzMHFTbTl2ZU9PZDFVbndOOXN3WEZPVGs3TzJNTjRp?=
- =?utf-8?B?RTQyek5UbDhIRWRnc1BMVkE3L2k5TGhiblZrWUhYRGcrKzhFTThXNjhya1VG?=
- =?utf-8?B?WVJqMWVTN0Z3emVFUkFWMWRvdHBCd0VPdHBTck1LZFppd3JHM1NpYWpBZ1lO?=
- =?utf-8?B?K2xCL2taY0Y1eUxrUFNBUDkzazRWU2Q5Wk1rKzZtMFBsTm1jSVhKaWNvMVll?=
- =?utf-8?Q?ajkhgY4ZxzGhucmCcDaB3qo=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <8902C77F85966C4A812DF06B8BF4D850@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: base64
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date;
+        bh=YjP+79IK7HvfHuCxdJSvPaNDYEG+jUGLBbStbUcCyA0=;
+        b=LkjTVCFfIU0394zSNowBbncBNy2sSNtpT/wEogFNe4zKxO73mD0BpXhbJkHDMFuogM
+         9WM0lv1j0X0y/Cq0B9m5lH5+ZaoxKhrEF3/pDWZn9Wyi7fwdmmz4EDGZGTeKgDs9ePLL
+         bMlM0D7oldC4VXG+yeQ3O/cC7ZTAGFR5lluomb5YNh6yuZddFdlHFo+oYMDUyzf3+Ms6
+         +fRyiSgF7Agouh4Q9Fe34KTP+SJC+s5iU0Zw/6IRn4KgHbD9pvO8GlHPCcK7q7/kQdKM
+         ODrKeF1rvHHDvsCkRzJqq698y2pmdaIA2nAKYwtzXW8F34gpp0RniOuQozJNg7cCWw9T
+         07tg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date;
+        bh=YjP+79IK7HvfHuCxdJSvPaNDYEG+jUGLBbStbUcCyA0=;
+        b=0QD+/ENifuvYTvnX+R/smy6SIGa8M+VPgWhrUWNxMHNzZZiBEJf4xToNGWUme/FdMq
+         KFQBJQApbbfnB2xYGIi9tqqTeI+TkLw/vA7Yc7g/h5v9vbWao2DWiMUNp+oxwCz4t5go
+         j5rMwB36avCqmnd+R1MhK2szqiEz9fqudy6hBQ8VgBYohg6t/8uI1TpzA5ZId7ugZ8OV
+         s8kZIvnbbA2GBiBM+0ropHXfivqxbtEqqqsbv5cdD7ANdTEt3JMNv1r03sAvzJWKXu9K
+         eZaBevgvShHBG+AJuIYQITScMBJ16rC38seX54yCEKmFSuXPxzUFPfPgxjqNWOdnPrWd
+         wDGg==
+X-Gm-Message-State: ACgBeo1LfQJTm57qNeG+D+ZhRn9BnIQN6p4rUEWN/w5aMUGBZD6zbmjy
+	aOn8Nd/NoIFuVVd6gA9KoSM21m6pUrqzBGjSID6M5pO3YpE=
+X-Google-Smtp-Source: 
+ AA6agR7Fo4ysYZJ/7D3txnSCaW/4newoev44K2+Tg5uai+HHz+hjxs8q7EVYXcVrjjLeXWn1L8iX/hhPog4gVbzSiJg=
+X-Received: by 2002:a05:6808:1988:b0:34f:de19:411c with SMTP id
+ bj8-20020a056808198800b0034fde19411cmr8581045oib.262.1663426581477; Sat, 17
+ Sep 2022 07:56:21 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: gossenmetrawatt.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: VE1PR08MB5583.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 6597dea1-f73c-4d63-e729-08da98895f28
-X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Sep 2022 08:48:20.0648
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 927cd455-6160-4d75-86b6-a6892a3b5317
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 
- fI/9HboWsPJ5AhX46ONyiMe83jrE8hj+nOlSXlqz2qXzbbJ2PfoV0R2E16Oh34yhn2VErBwsa8VgPciIHzXRPoq8gTe6FNl1h/uaCj7W0Qi3IXMCbVzb9fOEi20BHPDE
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB9340
+References: <20220916172332.3096-1-Wolfgang.Meyer@gossenmetrawatt.com>
+ <CAMKF1sqy-zHmxrA-rRNpq+r8tpFXX=UVT3n=8z2WgO75=jM5jw@mail.gmail.com>
+ <aa519a830f7c4dabf6683bece84a2be4afb46166.camel@gossenmetrawatt.com>
+In-Reply-To: 
+ <aa519a830f7c4dabf6683bece84a2be4afb46166.camel@gossenmetrawatt.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 17 Sep 2022 07:55:55 -0700
+Message-ID: 
+ <CAMKF1spZO2CQ7V3_mVZ6p0r0rNgOK360ajVs1-Hx+GK5gkiLtQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/4] fbida: Switch to git fetcher
+To: "Meyer, Wolfgang" <Wolfgang.Meyer@gossenmetrawatt.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 17 Sep 2022 08:48:28 -0000
+ <openembedded-devel@lists.openembedded.org>; Sat, 17 Sep 2022 14:56:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98848
+ https://lists.openembedded.org/g/openembedded-devel/message/98849
 
-QW0gRnJlaXRhZywgZGVtIDE2LjA5LjIwMjIgdW0gMTI6MTAgLTA3MDAgc2NocmllYiBLaGVtIFJh
-ajoNCj4gQ2FuIHlvdSByZWJhc2UgdGhpcyBzZXJpZXMgb24gdG9wIG9mIG1hc3Rlci1uZXh0IGFu
-ZCByZXNlbmQgcGxlYXNlLg0KPg0KDQpJbiBvcmRlciB0byBnZXQgdGhpcyByaWdodCBmb3IgdGhl
-IGZ1dHVyZTogaXMgdGhpcyB0aGUgZGVmYXVsdA0KcHJvY2VkdXJlIHdoZW4gc2VuZGluZyBwYXRj
-aGVzPw0KDQo+IE9uIEZyaSwgU2VwIDE2LCAyMDIyIGF0IDEwOjIzIEFNIFdvbGZnYW5nIE1leWVy
-DQo+IDx3b2xmZ2FuZy5tZXllckBnb3NzZW5tZXRyYXdhdHQuY29tPiB3cm90ZToNCj4gPiBmYmlk
-YSBoYXMgbm90IHNlZW4gYW55IHZlcnNpb25lZCByZWxlYXNlcyBmb3IgZml2ZSB5ZWFycyBldmVu
-DQo+ID4gdGhvdWdoDQo+ID4gaGFzIG5vdCBzdGFsbGVkLiBVcGRhdGUgdG8gbGF0ZXN0IGNvbW1p
-dCB0aGF0IGJ1aWxkcyB3aXRoIHRoZQ0KPiA+IGxlZ2FjeSBnbnVtYWtlDQo+ID4gc3R5bGUgYnVp
-bGQgc3lzdGVtIChbMjAxOS0wMS0yNF0gYWM5MDA1YmYwKS4NCj4gPg0KPiA+IFN1cHBvcnQgZm9y
-IGxpcmMsIGN1cmwsIHNhbmUsIGFuZCBjYWlyby1nbCBoYXMgYmVlbiBkcm9wcGVkLCB0aGUNCj4g
-PiBjb3JyZXNwb25kaW5nDQo+ID4gcGFja2FnZWNvbmZpZ3MgYW5kIGRlcGVuZGVuY2llcyB3ZXJl
-IHJlbW92ZWQgZnJvbSB0aGUgcmVjaXBlLg0KPiA+IERlcGVuZGVuY2llcyB0bw0KPiA+IGxpYmlu
-cHV0IGFuZCB1ZGV2IGhhdmUgYmVlbiBhZGRlZC4NCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6IFdv
-bGZnYW5nIE1leWVyIDxXb2xmZ2FuZy5NZXllckBnb3NzZW5tZXRyYXdhdHQuY29tPg0KPiA+IC0t
-LQ0KPiA+ICAuLi4vZmJpZGEve2ZiaWRhXzIuMTQuYmIgPT4gZmJpZGFfZ2l0LmJifSAgICAgfCAz
-OCArKysrKysrLS0tLS0tDQo+ID4gLS0tLS0tDQo+ID4gIC4uLi9mYmlkYS9maWxlcy9jYWlyby13
-ZWFrLWRldGVjdC5wYXRjaCAgICAgICB8IDE3IC0tLS0tLS0tLQ0KPiA+ICAyIGZpbGVzIGNoYW5n
-ZWQsIDE0IGluc2VydGlvbnMoKyksIDQxIGRlbGV0aW9ucygtKQ0KPiA+ICByZW5hbWUgbWV0YS1v
-ZS9yZWNpcGVzLWdyYXBoaWNzL2ZiaWRhL3tmYmlkYV8yLjE0LmJiID0+DQo+ID4gZmJpZGFfZ2l0
-LmJifSAoNjMlKQ0KPiA+ICBkZWxldGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNpcGVzLWdyYXBo
-aWNzL2ZiaWRhL2ZpbGVzL2NhaXJvLQ0KPiA+IHdlYWstZGV0ZWN0LnBhdGNoDQo+ID4NCj4gPiBk
-aWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWdyYXBoaWNzL2ZiaWRhL2ZiaWRhXzIuMTQuYmIg
-Yi9tZXRhLQ0KPiA+IG9lL3JlY2lwZXMtZ3JhcGhpY3MvZmJpZGEvZmJpZGFfZ2l0LmJiDQo+ID4g
-c2ltaWxhcml0eSBpbmRleCA2MyUNCj4gPiByZW5hbWUgZnJvbSBtZXRhLW9lL3JlY2lwZXMtZ3Jh
-cGhpY3MvZmJpZGEvZmJpZGFfMi4xNC5iYg0KPiA+IHJlbmFtZSB0byBtZXRhLW9lL3JlY2lwZXMt
-Z3JhcGhpY3MvZmJpZGEvZmJpZGFfZ2l0LmJiDQo+ID4gaW5kZXggM2Q2NTM5OWNkLi5hYWRhYWY1
-N2UgMTAwNjQ0DQo+ID4gLS0tIGEvbWV0YS1vZS9yZWNpcGVzLWdyYXBoaWNzL2ZiaWRhL2ZiaWRh
-XzIuMTQuYmINCj4gPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtZ3JhcGhpY3MvZmJpZGEvZmJpZGFf
-Z2l0LmJiDQo+ID4gQEAgLTEsMjMgKzEsMjUgQEANCj4gPiAgU1VNTUFSWSA9ICJGcmFtZWJ1ZmZl
-ciBpbWFnZSBhbmQgZG9jIHZpZXdlciB0b29scyINCj4gPiAgREVTQ1JJUFRJT04gPSAiVGhlIGZi
-aWRhIHByb2plY3QgY29udGFpbnMgYSBmZXcgYXBwbGljYXRpb25zIGZvcg0KPiA+IHZpZXdpbmcg
-YW5kIGVkaXRpbmcgaW1hZ2VzLCBcDQo+ID4gLSAgICAgICAgICAgICAgIHdpdGggdGhlIG1haW4g
-Zm9jdXMgYmVpbmcgcGhvdG9zLiINCj4gPiAtSE9NRVBBR0UgPSAiaHR0cDovL2xpbnV4LmJ5dGVz
-ZXgub3JnL2ZiaWRhLyINCj4gPiArd2l0aCB0aGUgbWFpbiBmb2N1cyBiZWluZyBwaG90b3MuIg0K
-PiA+ICtIT01FUEFHRSA9ICJodHRwczovL3d3dy5rcmF4ZWwub3JnL2Jsb2cvbGludXgvZmJpZGEv
-Ig0KPiA+ICBBVVRIT1IgPSAiR2VyZCBIb2ZmbWFubiINCj4gPiAgU0VDVElPTiA9ICJ1dGlscyIN
-Cj4gPg0KPiA+ICBMSUNFTlNFID0gIkdQTC0yLjAtb25seSINCj4gPiAgTElDX0ZJTEVTX0NIS1NV
-TSA9DQo+ID4gImZpbGU6Ly9DT1BZSU5HO21kNT1lOGZlYjc4YTMyOTUwYTkwOTYyMWJiYjUxZjYz
-NGIzOSINCj4gPg0KPiA+IC1ERVBFTkRTID0gInZpcnR1YWwvbGliaWNvbnYganBlZyBmb250Y29u
-ZmlnIGZyZWV0eXBlIGxpYmV4aWYNCj4gPiBsaWJkcm0gcGl4bWFuIHBvcHBsZXIgbGliZXBveHkg
-Y2Fpcm8iDQo+ID4gK0RFUEVORFMgPSAidmlydHVhbC9saWJpY29udiBqcGVnIGZvbnRjb25maWcg
-ZnJlZXR5cGUgbGliZXhpZg0KPiA+IGxpYmRybSBwaXhtYW4gdWRldiBsaWJpbnB1dCBwb3BwbGVy
-IGxpYmVwb3h5IGNhaXJvIg0KPiA+DQo+ID4gLVNSQ19VUkkgPSAiDQo+ID4gaHR0cHM6Ly93d3cu
-a3JheGVsLm9yZy9yZWxlYXNlcy9mYmlkYS9mYmlkYS0ke1BWfS50YXIuZ3ogXA0KPiA+IC0gICAg
-ICAgICAgZmlsZTovLzAwMDEtQXZvaWQtdXNpbmctaG9zdC1wYXRoLnBhdGNoIFwNCj4gPiAtICAg
-ICAgICAgIGZpbGU6Ly9maXgtcHJlcHJvY2Vzc29yLnBhdGNoIFwNCj4gPiAtICAgICAgICAgICBm
-aWxlOi8vc3VwcG9ydC1qcGVnLXR1cmJvLnBhdGNoIFwNCj4gPiAtICAgICAgICAgICBmaWxlOi8v
-Y2Fpcm8td2Vhay1kZXRlY3QucGF0Y2ggXA0KPiA+IC0gICAgICAgICAgIGZpbGU6Ly9mYmlkYS1n
-Y2MxMC5wYXRjaCBcDQo+ID4gLSAgICAgICAgICAiDQo+ID4gLVNSQ19VUklbc2hhMjU2c3VtXSA9
-DQo+ID4gIjk1YjdjMDE1NTZjYjZlZjk4MTlmMzU4YjMxNGRkZmViOGE0Y2JlODYyYjUyMWEzZWQ2
-MmYwM2QxNjMxNTQ0MzgiDQo+ID4gK1BWID0gIjIuMTQrZ2l0JHtTUkNQVn0iDQo+ID4gK1NSQ19V
-UkkgPSAiXA0KPiA+ICsgICAgICAgIGdpdDovL2dpdGh1Yi5jb20va3JheGVsL2ZiaWRhO3Byb3Rv
-Y29sPWh0dHBzO2JyYW5jaD1tYXN0ZXINCj4gPiAgICAgICBcDQo+ID4gKyAgICAgICAgZmlsZTov
-LzAwMDEtQXZvaWQtdXNpbmctaG9zdC0NCj4gPiBwYXRoLnBhdGNoICAgICAgICAgICAgICAgICAg
-ICAgICAgIFwNCj4gPiArICAgICAgICBmaWxlOi8vZml4LQ0KPiA+IHByZXByb2Nlc3Nvci5wYXRj
-aCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXA0KPiA+ICsgICAgICAgIGZpbGU6
-Ly9zdXBwb3J0LWpwZWctDQo+ID4gdHVyYm8ucGF0Y2ggICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBcDQo+ID4gKyAgICAgICAgZmlsZTovL2ZiaWRhLQ0KPiA+IGdjYzEwLnBhdGNoICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwNCj4gPiArIg0KPiA+ICtTUkNS
-RVYgPSAiYWM5MDA1YmYwYmJmNTBmMTRkYzFiMzY4YmU1MDg0YzhlMDUxMGE1ZCINCj4gPiArUyA9
-ICIke1dPUktESVJ9L2dpdCINCj4gPg0KPiA+ICBpbmhlcml0IHBrZ2NvbmZpZyBmZWF0dXJlc19j
-aGVjaw0KPiA+DQo+ID4gQEAgLTI2LDE4ICsyOCwxMiBAQCBSRVFVSVJFRF9ESVNUUk9fRkVBVFVS
-RVMgPSAib3BlbmdsIg0KPiA+DQo+ID4gIEVYVFJBX09FTUFLRSA9ICJTVFJJUD0gJ3NyY2Rpcj0k
-e1N9JyAtZiAke1N9L0dOVW1ha2VmaWxlIg0KPiA+DQo+ID4gLVBBQ0tBR0VDT05GSUcgPz89ICJn
-aWYgcG5nIGN1cmwiDQo+ID4gLVBBQ0tBR0VDT05GSUdbY3VybF0gPSAiLCxjdXJsIg0KPiA+ICtQ
-QUNLQUdFQ09ORklHID8/PSAiZ2lmIHBuZyINCj4gPiAgUEFDS0FHRUNPTkZJR1tnaWZdID0gIiws
-Z2lmbGliIg0KPiA+ICBQQUNLQUdFQ09ORklHW3BuZ10gPSAiLCxsaWJwbmciDQo+ID4gIFBBQ0tB
-R0VDT05GSUdbdGlmZl0gPSAiLCx0aWZmIg0KPiA+ICBQQUNLQUdFQ09ORklHW21vdGlmXSA9ICIs
-LGxpYngxMSBsaWJ4ZXh0IGxpYnhwbSBsaWJ4dCBvcGVubW90aWYiDQo+ID4gIFBBQ0tBR0VDT05G
-SUdbd2VicF0gPSAiLCxsaWJ3ZWJwIg0KPiA+IC1QQUNLQUdFQ09ORklHW2xpcmNdID0gIiwsbGly
-YyINCj4gPiAtIyBUaGlzIGNhbiBvbmx5IGJlIGVuYWJsZWQgd2hlbiBjYWlybyBoYXMgZWdsIGVu
-YWJsZWQgaW4gaXRzDQo+ID4gcGFja2FnZWNvbmZpZyBzdXBwb3J0IHRvbw0KPiA+IC1QQUNLQUdF
-Q09ORklHW2VnbF0gPSAiLCwiDQo+ID4gLQ0KPiA+IC1FWFRSQV9PRU1BS0UgKz0gIiIke0BiYi51
-dGlscy5jb250YWlucygnUEFDS0FHRUNPTkZJRycsICdlZ2wnLA0KPiA+ICdIQVZFX0NBSVJPX0dM
-PXllcycsICdIQVZFX0NBSVJPX0dMPW5vJywgZCl9IiINCj4gPg0KPiA+ICBDRkxBR1MgKz0gIiR7
-QGJiLnV0aWxzLmNvbnRhaW5zKCdESVNUUk9fRkVBVFVSRVMnLCAneDExJywgJycsICctDQo+ID4g
-REVHTF9OT19YMTE9MScsIGQpfSINCj4gPg0KPiA+IEBAIC00OCw5ICs0NCw2IEBAIGRvX2NvbXBp
-bGUoKSB7DQo+ID4NCj4gPiAgICAgICMgQmUgc3VyZSB0byByZXNwZWN0IHByZWZlcmVuY2VzIChm
-b3JjZSB0byAibm8iKQ0KPiA+ICAgICAgIyBBbHNvIGF2b2lkIGlzc3VlcyB3aGVuICR7QlVJTERf
-QVJDSH0gPT0gJHtIT1NUX0FSQ0h9DQo+ID4gLSAgICBpZiBbIC16ICIke0BiYi51dGlscy5maWx0
-ZXIoJ1BBQ0tBR0VDT05GSUcnLCAnY3VybCcsIGQpfSIgXTsNCj4gPiB0aGVuDQo+ID4gLSAgICAg
-ICAgc2VkIC1pIC1lICcvXkhBVkVfTElCQ1VSTC9zLzo9LiokLzo9IG5vLycgJHtTfS9HTlVtYWtl
-ZmlsZQ0KPiA+IC0gICAgZmkNCj4gPiAgICAgIGlmIFsgLXogIiR7QGJiLnV0aWxzLmZpbHRlcign
-UEFDS0FHRUNPTkZJRycsICdnaWYnLCBkKX0iIF07DQo+ID4gdGhlbg0KPiA+ICAgICAgICAgIHNl
-ZCAtaSAtZSAnL15IQVZFX0xJQkdJRi9zLzo9LiokLzo9IG5vLycgJHtTfS9HTlVtYWtlZmlsZQ0K
-PiA+ICAgICAgZmkNCj4gPiBAQCAtNjYsOSArNTksNiBAQCBkb19jb21waWxlKCkgew0KPiA+ICAg
-ICAgaWYgWyAteiAiJHtAYmIudXRpbHMuZmlsdGVyKCdQQUNLQUdFQ09ORklHJywgJ3dlYnAnLCBk
-KX0iIF07DQo+ID4gdGhlbg0KPiA+ICAgICAgICAgIHNlZCAtaSAtZSAnL15IQVZFX0xJQldFQlAv
-cy86PS4qJC86PSBuby8nICR7U30vR05VbWFrZWZpbGUNCj4gPiAgICAgIGZpDQo+ID4gLSAgICBp
-ZiBbIC16ICIke0BiYi51dGlscy5maWx0ZXIoJ1BBQ0tBR0VDT05GSUcnLCAnbGlyYycsIGQpfSIg
-XTsNCj4gPiB0aGVuDQo+ID4gLSAgICAgICAgc2VkIC1pIC1lICcvXkhBVkVfTElCTElSQy9zLzo9
-LiokLzo9IG5vLycgJHtTfS9HTlVtYWtlZmlsZQ0KPiA+IC0gICAgZmkNCj4gPg0KPiA+ICAgICAg
-b2VfcnVubWFrZQ0KPiA+ICB9DQo+ID4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1ncmFw
-aGljcy9mYmlkYS9maWxlcy9jYWlyby13ZWFrLQ0KPiA+IGRldGVjdC5wYXRjaCBiL21ldGEtb2Uv
-cmVjaXBlcy1ncmFwaGljcy9mYmlkYS9maWxlcy9jYWlyby13ZWFrLQ0KPiA+IGRldGVjdC5wYXRj
-aA0KPiA+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4IGM3YzU3OWNjNC4uMDAw
-MDAwMDAwDQo+ID4gLS0tIGEvbWV0YS1vZS9yZWNpcGVzLWdyYXBoaWNzL2ZiaWRhL2ZpbGVzL2Nh
-aXJvLXdlYWstZGV0ZWN0LnBhdGNoDQo+ID4gKysrIC9kZXYvbnVsbA0KPiA+IEBAIC0xLDE3ICsw
-LDAgQEANCj4gPiAtT0UgY29uZmlndXJlcyBjYWlybyB0byBkaXNhYmxlIEVHTCBzdXBwb3J0LCBo
-b3dldmVyIGZiaWRhIGV4cGVjdHMNCj4gPiBjYWlybyB3aXRoIGVnbCBzdXBwb3J0DQo+ID4gLXRo
-aXMgcGF0Y2ggdGhlcmVmb3JlIG1ha2VzIGl0IHBvc3NpYmxlIHRvIHNldCBIQVZFX0NBSVJPX0dM
-IHZpYQ0KPiA+IHJlY2lwZQ0KPiA+IC0NCj4gPiAtVXBzdHJlYW0tU3RhdHVzOiBJbmFwcHJvcHJp
-YXRlIFtPRS1TcGVjaWZpY10NCj4gPiAtU2lnbmVkLW9mZi1ieTogS2hlbSBSYWogPHJhai5raGVt
-QGdtYWlsLmNvbT4NCj4gPiAtDQo+ID4gLS0tLSBhL0dOVW1ha2VmaWxlDQo+ID4gLSsrKyBiL0dO
-VW1ha2VmaWxlDQo+ID4gLUBAIC02Nyw3ICs2Nyw3IEBAIGRlZmluZSBtYWtlLWNvbmZpZw0KPiA+
-IC0gTElCICAgICAgICAgICA6PSAkKExJQikNCj4gPiAtIFJFU0RJUiAgICAgICAgICAgICAgICA6
-PSAkKGNhbGwgYWNfcmVzZGlyKQ0KPiA+IC0gSEFWRV9MSU5VWF9GQl9IICAgICAgIDo9ICQoY2Fs
-bCBhY19oZWFkZXIsbGludXgvZmIuaCkNCj4gPiAtLUhBVkVfQ0FJUk9fR0wgOj0gJChjYWxsIGFj
-X3BrZ19jb25maWcsY2Fpcm8tZ2wpDQo+ID4gLStIQVZFX0NBSVJPX0dMID89ICQoY2FsbCBhY19w
-a2dfY29uZmlnLGNhaXJvLWdsKQ0KPiA+IC0gSEFWRV9MSUJQQ0QgICA6PSAkKGNhbGwgYWNfbGli
-LHBjZF9vcGVuLHBjZCkNCj4gPiAtIEhBVkVfTElCR0lGICAgOj0gJChjYWxsIGFjX2xpYixER2lm
-T3BlbkZpbGVOYW1lLGdpZikNCj4gPiAtIEhBVkVfTElCV0VCUCAgOj0gJChjYWxsIGFjX3BrZ19j
-b25maWcsbGlid2VicCkNCj4gPiAtLQ0KPiA+IDIuMzcuMw0KPiA+DQo+ID4NCj4gPiBHb3NzZW4g
-TWV0cmF3YXR0IEdtYkgNCj4gPg0KPiA+IFPDvGR3ZXN0cGFyayAxNQ0KPiA+IDkwNDQ5IE7DvHJu
-YmVyZw0KPiA+IEdlcm1hbnkNCj4gPg0KPiA+IGh0dHA6Ly93d3cuZ29zc2VubWV0cmF3YXR0LmNv
-bQ0KPiA+IEFtdHNnZXJpY2h0IE7DvHJuYmVyZyBIUkIgMjQgNjAyL1VTdC1JZE5yLiBERTgxNTAw
-Mjc2OQ0KPiA+IEdlc2Now6RmdHNmw7xocmVyOiBNYXJjZWwgSHV0a2EsIE1hdHRoaWFzIFdpc3QN
-Cj4gPg0KPiA+IEdvc3NlbiBNZXRyYXdhdHQgR21iSCBpcyBhIG1lbWJlciBvZiBHTUMgSU5TVFJV
-TUVOVFMtR3JvdXANCj4gPg0KPiA+IFsNCj4gPiBodHRwczovL3d3dy5nbWMtaW5zdHJ1bWVudHMu
-ZGUvbWVkaWEvbWFpbGZvb3Rlci9tYWlsZm9vdGVyLmpwZ108aHR0cDovL3d3dy5nb3NzZW5tZXRy
-YXdhdHQuY29tDQo+ID4gPg0KPiA+DQo+ID4gLT0tPS09LT0tPS09LT0tPS09LT0tPS0NCj4gPiBM
-aW5rczogWW91IHJlY2VpdmUgYWxsIG1lc3NhZ2VzIHNlbnQgdG8gdGhpcyBncm91cC4NCj4gPiBW
-aWV3L1JlcGx5IE9ubGluZSAoIzk4ODM4KToNCj4gPiBodHRwczovL2xpc3RzLm9wZW5lbWJlZGRl
-ZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvbWVzc2FnZS85ODgzOA0KPiA+IE11dGUgVGhpcyBU
-b3BpYzogaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL210LzkzNzI3Njk3LzE5OTc5MTQN
-Cj4gPiBHcm91cCBPd25lcjogb3BlbmVtYmVkZGVkLWRldmVsK293bmVyQGxpc3RzLm9wZW5lbWJl
-ZGRlZC5vcmcNCj4gPiBVbnN1YnNjcmliZToNCj4gPiBodHRwczovL2xpc3RzLm9wZW5lbWJlZGRl
-ZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvdW5zdWINCj4gPiBbcmFqLmtoZW1AZ21haWwuY29t
-XQ0KPiA+IC09LT0tPS09LT0tPS09LT0tPS09LT0tDQo+ID4NCg0KR29zc2VuIE1ldHJhd2F0dCBH
-bWJIDQoNClPDvGR3ZXN0cGFyayAxNQ0KOTA0NDkgTsO8cm5iZXJnDQpHZXJtYW55DQoNCmh0dHA6
-Ly93d3cuZ29zc2VubWV0cmF3YXR0LmNvbQ0KQW10c2dlcmljaHQgTsO8cm5iZXJnIEhSQiAyNCA2
-MDIvVVN0LUlkTnIuIERFODE1MDAyNzY5DQpHZXNjaMOkZnRzZsO8aHJlcjogTWFyY2VsIEh1dGth
-LCBNYXR0aGlhcyBXaXN0DQoNCkdvc3NlbiBNZXRyYXdhdHQgR21iSCBpcyBhIG1lbWJlciBvZiBH
-TUMgSU5TVFJVTUVOVFMtR3JvdXANCg0KW2h0dHBzOi8vd3d3LmdtYy1pbnN0cnVtZW50cy5kZS9t
-ZWRpYS9tYWlsZm9vdGVyL21haWxmb290ZXIuanBnXTxodHRwOi8vd3d3Lmdvc3Nlbm1ldHJhd2F0
-dC5jb20+DQo=
+On Sat, Sep 17, 2022 at 1:48 AM Meyer, Wolfgang
+<Wolfgang.Meyer@gossenmetrawatt.com> wrote:
+>
+> Am Freitag, dem 16.09.2022 um 12:10 -0700 schrieb Khem Raj:
+> > Can you rebase this series on top of master-next and resend please.
+> >
+>
+> In order to get this right for the future: is this the default
+> procedure when sending patches?
+
+usually patches against master are fine, occasionally there are conflict
+where it make my life easier if I ask submitter to rebase on master-next
+master-next is the integration branch that I use for testing and staging
+submitted patches.
+
+>
+> > On Fri, Sep 16, 2022 at 10:23 AM Wolfgang Meyer
+> > <wolfgang.meyer@gossenmetrawatt.com> wrote:
+> > > fbida has not seen any versioned releases for five years even
+> > > though
+> > > has not stalled. Update to latest commit that builds with the
+> > > legacy gnumake
+> > > style build system ([2019-01-24] ac9005bf0).
+> > >
+> > > Support for lirc, curl, sane, and cairo-gl has been dropped, the
+> > > corresponding
+> > > packageconfigs and dependencies were removed from the recipe.
+> > > Dependencies to
+> > > libinput and udev have been added.
+> > >
+> > > Signed-off-by: Wolfgang Meyer <Wolfgang.Meyer@gossenmetrawatt.com>
+> > > ---
+> > >  .../fbida/{fbida_2.14.bb =3D> fbida_git.bb}     | 38 +++++++------
+> > > ------
+> > >  .../fbida/files/cairo-weak-detect.patch       | 17 ---------
+> > >  2 files changed, 14 insertions(+), 41 deletions(-)
+> > >  rename meta-oe/recipes-graphics/fbida/{fbida_2.14.bb =3D>
+> > > fbida_git.bb} (63%)
+> > >  delete mode 100644 meta-oe/recipes-graphics/fbida/files/cairo-
+> > > weak-detect.patch
+> > >
+> > > diff --git a/meta-oe/recipes-graphics/fbida/fbida_2.14.bb b/meta-
+> > > oe/recipes-graphics/fbida/fbida_git.bb
+> > > similarity index 63%
+> > > rename from meta-oe/recipes-graphics/fbida/fbida_2.14.bb
+> > > rename to meta-oe/recipes-graphics/fbida/fbida_git.bb
+> > > index 3d65399cd..aadaaf57e 100644
+> > > --- a/meta-oe/recipes-graphics/fbida/fbida_2.14.bb
+> > > +++ b/meta-oe/recipes-graphics/fbida/fbida_git.bb
+> > > @@ -1,23 +1,25 @@
+> > >  SUMMARY =3D "Framebuffer image and doc viewer tools"
+> > >  DESCRIPTION =3D "The fbida project contains a few applications for
+> > > viewing and editing images, \
+> > > -               with the main focus being photos."
+> > > -HOMEPAGE =3D "http://linux.bytesex.org/fbida/"
+> > > +with the main focus being photos."
+> > > +HOMEPAGE =3D "https://www.kraxel.org/blog/linux/fbida/"
+> > >  AUTHOR =3D "Gerd Hoffmann"
+> > >  SECTION =3D "utils"
+> > >
+> > >  LICENSE =3D "GPL-2.0-only"
+> > >  LIC_FILES_CHKSUM =3D
+> > > "file://COPYING;md5=3De8feb78a32950a909621bbb51f634b39"
+> > >
+> > > -DEPENDS =3D "virtual/libiconv jpeg fontconfig freetype libexif
+> > > libdrm pixman poppler libepoxy cairo"
+> > > +DEPENDS =3D "virtual/libiconv jpeg fontconfig freetype libexif
+> > > libdrm pixman udev libinput poppler libepoxy cairo"
+> > >
+> > > -SRC_URI =3D "
+> > > https://www.kraxel.org/releases/fbida/fbida-${PV}.tar.gz \
+> > > -          file://0001-Avoid-using-host-path.patch \
+> > > -          file://fix-preprocessor.patch \
+> > > -           file://support-jpeg-turbo.patch \
+> > > -           file://cairo-weak-detect.patch \
+> > > -           file://fbida-gcc10.patch \
+> > > -          "
+> > > -SRC_URI[sha256sum] =3D
+> > > "95b7c01556cb6ef9819f358b314ddfeb8a4cbe862b521a3ed62f03d163154438"
+> > > +PV =3D "2.14+git${SRCPV}"
+> > > +SRC_URI =3D "\
+> > > +        git://github.com/kraxel/fbida;protocol=3Dhttps;branch=3Dmast=
+er
+> > >       \
+> > > +        file://0001-Avoid-using-host-
+> > > path.patch                         \
+> > > +        file://fix-
+> > > preprocessor.patch                                   \
+> > > +        file://support-jpeg-
+> > > turbo.patch                                 \
+> > > +        file://fbida-
+> > > gcc10.patch                                        \
+> > > +"
+> > > +SRCREV =3D "ac9005bf0bbf50f14dc1b368be5084c8e0510a5d"
+> > > +S =3D "${WORKDIR}/git"
+> > >
+> > >  inherit pkgconfig features_check
+> > >
+> > > @@ -26,18 +28,12 @@ REQUIRED_DISTRO_FEATURES =3D "opengl"
+> > >
+> > >  EXTRA_OEMAKE =3D "STRIP=3D 'srcdir=3D${S}' -f ${S}/GNUmakefile"
+> > >
+> > > -PACKAGECONFIG ??=3D "gif png curl"
+> > > -PACKAGECONFIG[curl] =3D ",,curl"
+> > > +PACKAGECONFIG ??=3D "gif png"
+> > >  PACKAGECONFIG[gif] =3D ",,giflib"
+> > >  PACKAGECONFIG[png] =3D ",,libpng"
+> > >  PACKAGECONFIG[tiff] =3D ",,tiff"
+> > >  PACKAGECONFIG[motif] =3D ",,libx11 libxext libxpm libxt openmotif"
+> > >  PACKAGECONFIG[webp] =3D ",,libwebp"
+> > > -PACKAGECONFIG[lirc] =3D ",,lirc"
+> > > -# This can only be enabled when cairo has egl enabled in its
+> > > packageconfig support too
+> > > -PACKAGECONFIG[egl] =3D ",,"
+> > > -
+> > > -EXTRA_OEMAKE +=3D ""${@bb.utils.contains('PACKAGECONFIG', 'egl',
+> > > 'HAVE_CAIRO_GL=3Dyes', 'HAVE_CAIRO_GL=3Dno', d)}""
+> > >
+> > >  CFLAGS +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', '-
+> > > DEGL_NO_X11=3D1', d)}"
+> > >
+> > > @@ -48,9 +44,6 @@ do_compile() {
+> > >
+> > >      # Be sure to respect preferences (force to "no")
+> > >      # Also avoid issues when ${BUILD_ARCH} =3D=3D ${HOST_ARCH}
+> > > -    if [ -z "${@bb.utils.filter('PACKAGECONFIG', 'curl', d)}" ];
+> > > then
+> > > -        sed -i -e '/^HAVE_LIBCURL/s/:=3D.*$/:=3D no/' ${S}/GNUmakefi=
+le
+> > > -    fi
+> > >      if [ -z "${@bb.utils.filter('PACKAGECONFIG', 'gif', d)}" ];
+> > > then
+> > >          sed -i -e '/^HAVE_LIBGIF/s/:=3D.*$/:=3D no/' ${S}/GNUmakefil=
+e
+> > >      fi
+> > > @@ -66,9 +59,6 @@ do_compile() {
+> > >      if [ -z "${@bb.utils.filter('PACKAGECONFIG', 'webp', d)}" ];
+> > > then
+> > >          sed -i -e '/^HAVE_LIBWEBP/s/:=3D.*$/:=3D no/' ${S}/GNUmakefi=
+le
+> > >      fi
+> > > -    if [ -z "${@bb.utils.filter('PACKAGECONFIG', 'lirc', d)}" ];
+> > > then
+> > > -        sed -i -e '/^HAVE_LIBLIRC/s/:=3D.*$/:=3D no/' ${S}/GNUmakefi=
+le
+> > > -    fi
+> > >
+> > >      oe_runmake
+> > >  }
+> > > diff --git a/meta-oe/recipes-graphics/fbida/files/cairo-weak-
+> > > detect.patch b/meta-oe/recipes-graphics/fbida/files/cairo-weak-
+> > > detect.patch
+> > > deleted file mode 100644
+> > > index c7c579cc4..000000000
+> > > --- a/meta-oe/recipes-graphics/fbida/files/cairo-weak-detect.patch
+> > > +++ /dev/null
+> > > @@ -1,17 +0,0 @@
+> > > -OE configures cairo to disable EGL support, however fbida expects
+> > > cairo with egl support
+> > > -this patch therefore makes it possible to set HAVE_CAIRO_GL via
+> > > recipe
+> > > -
+> > > -Upstream-Status: Inappropriate [OE-Specific]
+> > > -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > > -
+> > > ---- a/GNUmakefile
+> > > -+++ b/GNUmakefile
+> > > -@@ -67,7 +67,7 @@ define make-config
+> > > - LIB           :=3D $(LIB)
+> > > - RESDIR                :=3D $(call ac_resdir)
+> > > - HAVE_LINUX_FB_H       :=3D $(call ac_header,linux/fb.h)
+> > > --HAVE_CAIRO_GL :=3D $(call ac_pkg_config,cairo-gl)
+> > > -+HAVE_CAIRO_GL ?=3D $(call ac_pkg_config,cairo-gl)
+> > > - HAVE_LIBPCD   :=3D $(call ac_lib,pcd_open,pcd)
+> > > - HAVE_LIBGIF   :=3D $(call ac_lib,DGifOpenFileName,gif)
+> > > - HAVE_LIBWEBP  :=3D $(call ac_pkg_config,libwebp)
+> > > --
+> > > 2.37.3
+> > >
+> > >
+> > > Gossen Metrawatt GmbH
+> > >
+> > > S=C3=BCdwestpark 15
+> > > 90449 N=C3=BCrnberg
+> > > Germany
+> > >
+> > > http://www.gossenmetrawatt.com
+> > > Amtsgericht N=C3=BCrnberg HRB 24 602/USt-IdNr. DE815002769
+> > > Gesch=C3=A4ftsf=C3=BChrer: Marcel Hutka, Matthias Wist
+> > >
+> > > Gossen Metrawatt GmbH is a member of GMC INSTRUMENTS-Group
+> > >
+> > > [
+> > > https://www.gmc-instruments.de/media/mailfooter/mailfooter.jpg]<http:=
+//www.gossenmetrawatt.com
+> > > >
+> > >
+> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > > Links: You receive all messages sent to this group.
+> > > View/Reply Online (#98838):
+> > > https://lists.openembedded.org/g/openembedded-devel/message/98838
+> > > Mute This Topic: https://lists.openembedded.org/mt/93727697/1997914
+> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > > Unsubscribe:
+> > > https://lists.openembedded.org/g/openembedded-devel/unsub
+> > > [raj.khem@gmail.com]
+> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > >
+>
+> Gossen Metrawatt GmbH
+>
+> S=C3=BCdwestpark 15
+> 90449 N=C3=BCrnberg
+> Germany
+>
+> http://www.gossenmetrawatt.com
+> Amtsgericht N=C3=BCrnberg HRB 24 602/USt-IdNr. DE815002769
+> Gesch=C3=A4ftsf=C3=BChrer: Marcel Hutka, Matthias Wist
+>
+> Gossen Metrawatt GmbH is a member of GMC INSTRUMENTS-Group
+>
+> [https://www.gmc-instruments.de/media/mailfooter/mailfooter.jpg]<http://w=
+ww.gossenmetrawatt.com>
 
