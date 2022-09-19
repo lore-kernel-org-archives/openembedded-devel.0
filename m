@@ -2,63 +2,62 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2F78C6FA8B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E8E40C6FA92
 	for <webhook@archiver.kernel.org>; Mon, 19 Sep 2022 12:33:57 +0000 (UTC)
-Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com
- [209.85.219.41])
- by mx.groups.io with SMTP id smtpd.web12.19192.1663590826487048450
+Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com
+ [209.85.219.44])
+ by mx.groups.io with SMTP id smtpd.web08.19284.1663590829949256404
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Sep 2022 05:33:54 -0700
+ Mon, 19 Sep 2022 05:33:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=eOPISkaY;
- spf=pass (domain: gmail.com, ip: 209.85.219.41,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=KRJk/8i3;
+ spf=pass (domain: gmail.com, ip: 209.85.219.44,
  mailfrom: akuster808@gmail.com)
-Received: by mail-qv1-f41.google.com with SMTP id d1so21732364qvs.0
+Received: by mail-qv1-f44.google.com with SMTP id y9so21684340qvo.4
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Sep 2022 05:33:53 -0700 (PDT)
+ Mon, 19 Sep 2022 05:33:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date;
-        bh=NzBEqyvg7m6CVXXzvZ7hRSLqmqsN+RgSrZ4Kg7PMdlM=;
-        b=eOPISkaYRo+3tQMheSQhrlylz+70tsCy6bEcRxmh9FdMuegZ33DQmFPmkAYhm4aFMa
-         5T56vFUCVbdpfw0Syd4IWCSdY0ad3SjY7WeiGbsZu949g+BTrNt7Vi4OPeLkjAtqKjCi
-         zSHbf2TQsF8M+GjFaDPuBzijo5xllgbU07Gkx8uHAv87X3osz5SKh4l4QXBQh4gkH997
-         EGBn0nQJ3A+hp2/Ke9DiHBo+6Un7E6kaWUJil49z/9At3SO3w3bUjyVn5d9Pmnt6tPuH
-         vbkxSVow/FeDnxEe9Z8gQVvIV/V9iLeVhHor7ZAbOAnfpISfHRjUEd8q/8gjGz5mDu+n
-         3udg==
+        bh=EbrrHhFPyCg+3SYKwJmnPnxF0ZrI+pZ/GMqutTtcAgs=;
+        b=KRJk/8i3ETWt8RabVdlrzL+k2ZsSjSGn1yZI975SJYd6VYuI27AueM2j09tDqYZXlF
+         yMcvBQCvVFTVzL2ZFaPEQdeDUHxplEmLcSGhN6Y93ocmFCeW7fTowNg16jIGxpREnbgi
+         c6TM+cmiajhXIrTXfuvx88SHHZQGZIEvLDrSbfQViw69K0+CLzT+JkoafRLzFoIU4CwR
+         yeqxckspoi1g3GoiPFnwYLGAzswcBhphLpf3YcHoidjQUet3FGn/XnYhi4+v8cLZK3ON
+         jfTQhgnmPaunVKdNsU4OZY911zCQ8hFcFiJJ0vrUzFoDH6+/HNQTlQOhbaw17iF7g7Mv
+         LkyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=NzBEqyvg7m6CVXXzvZ7hRSLqmqsN+RgSrZ4Kg7PMdlM=;
-        b=h+lpTSjKtrwqyKstzp8J+qkISi3Y4Z3Vr17tLA3QT6FYwz6FXO/HUggf1ycFtbUus8
-         lmJXNfHgC24x8OvIkl/B1kMh80ZVem0xbqMcTwi7EWcqhODaOTqvFecj7V4NIZTRCEgG
-         I8wkejCMZ6bzIogaiwCraRFS8atvWb2+D5SX2j7nmp85O681njtIGftV/kPrYdB4NiGT
-         j4ESzjTM7fKmSijiZHzwJmLKCb3HRQnBMcCVZ+vPA6xFFnjYcOMTk4jeqhxuTt/XZ94n
-         Nhcd/NxtUuVf1qhbavFgdKJKZTwdJTjdbJdwUymnNDtosaBdbLo5oVBcEQ4TzgFM3/Ms
-         bNzQ==
-X-Gm-Message-State: ACrzQf2TTbmy5PbRIoEkB++UNtPd7EkRL/MOElFFxXdPfaRoI1T5viSG
-	FqPTb26onM6vvDxsGdA2vBvyfarN/mk=
+        bh=EbrrHhFPyCg+3SYKwJmnPnxF0ZrI+pZ/GMqutTtcAgs=;
+        b=6l+D3KmWRnklENaQI5SVqUMVT+fY+KN4L3RwyO7stDyiPHvYAlJh5DFXkhHFeV4GOQ
+         IIeOe3GNEXFkXHocir00Q/Rn58fwlH8cwcd+1TsmaqD5Epuol4KWT/VgJlPY7tOKb7tj
+         yx9up2lF/Yjz/OPW7nS7XrvfzsijcWv0ACj/ujRWCIUUg2fe2hZsOakyt/il0wVm+Tqo
+         GB0Dp9jY28+nWnnYRTOGxwQ4sY8F7cebz3cRR1kt09Qd9eYCSVlLnqHKqcytv1pfcFOj
+         4/jSzCsZUo5GqWTU6lYoIFprUaVTS9CN9RLbkpPNpilLU7B8OZi5LYOGfdq4WUw9H7ru
+         mIIg==
+X-Gm-Message-State: ACrzQf105HKwdaoWjzTzssF7m1GztQfXI0ZYRnDUDxiY9UUZ8xI8IPIh
+	Y9WjKg+SCzhL/Dn7F5YuYEArB+FoRcQ=
 X-Google-Smtp-Source: 
- AMsMyM7KYmgzU7nqTErotebUgebLWlY39wqCFm/+E4z5Fn4aBzpTnD3bsr8GcZuuXVVuvoKQGN0/yg==
-X-Received: by 2002:a0c:c547:0:b0:4ac:9897:543f with SMTP id
- y7-20020a0cc547000000b004ac9897543fmr14629789qvi.17.1663590833057;
-        Mon, 19 Sep 2022 05:33:53 -0700 (PDT)
+ AMsMyM5MXE4b5QX3LD8dWXnhdniQVk8dYdr5tWmpgoeUuuO3wbNc8qLYidCF9NYfz7fTITj5YYEJkQ==
+X-Received: by 2002:ad4:5ba3:0:b0:4ad:3465:787b with SMTP id
+ 3-20020ad45ba3000000b004ad3465787bmr5238374qvq.114.1663590828620;
+        Mon, 19 Sep 2022 05:33:48 -0700 (PDT)
 Received: from keaua.attlocal.net ([2600:1700:9190:ba10:b6ed:2737:547c:2270])
         by smtp.gmail.com with ESMTPSA id
- br41-20020a05620a462900b006ce16588056sm12541040qkb.89.2022.09.19.05.33.52
+ br41-20020a05620a462900b006ce16588056sm12541040qkb.89.2022.09.19.05.33.47
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Sep 2022 05:33:52 -0700 (PDT)
+        Mon, 19 Sep 2022 05:33:48 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [kirkstone 11/11] postgresql: make sure pam conf installed when pam
- enabled
-Date: Mon, 19 Sep 2022 08:33:38 -0400
+Subject: [kirkstone 06/11] safec: Remove unused variable 'len'
+Date: Mon, 19 Sep 2022 08:33:33 -0400
 Message-Id: 
- <05dcac98473402d87e0af73bbc2c5a6a840abe93.1663590728.git.akuster808@gmail.com>
+ <8e8f36ef97b3c0b4d9f7b41a9d6bf02ec0156c3b.1663590728.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1663590728.git.akuster808@gmail.com>
 References: <cover.1663590728.git.akuster808@gmail.com>
@@ -69,42 +68,81 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 19 Sep 2022 12:33:57 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98862
+ https://lists.openembedded.org/g/openembedded-devel/message/98857
 
-From: Mingli Yu <mingli.yu@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-Update the pam check logic to make sure pam conf installed.
-
-Before the patch:
-root@intel-x86-64:~# rpm -ql postgresql | grep pam.d | grep postgresql
-root@intel-x86-64:~#
-
-After the patch:
-root@intel-x86-64:~# rpm -ql postgresql | grep pam.d | grep postgresql
-/etc/pam.d/postgresql
-root@intel-x86-64:~#
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit a755af4fb5ca2e158b00214bb18e27ba69c200fd)
+(cherry picked from commit 8cb8931757214d63c9140cdba83ee5dfc968bc28)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-dbs/postgresql/postgresql.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...strpbrk_s-Remove-unused-variable-len.patch | 42 +++++++++++++++++++
+ meta-oe/recipes-core/safec/safec_3.7.1.bb     |  3 +-
+ 2 files changed, 44 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-core/safec/safec/0001-strpbrk_s-Remove-unused-variable-len.patch
 
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
-index bef33e6bb4..60d44ce979 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
-@@ -205,7 +205,7 @@ do_install:append() {
-     # multiple server config directory
-     install -d -m 700 ${D}${sysconfdir}/default/${BPN}
+diff --git a/meta-oe/recipes-core/safec/safec/0001-strpbrk_s-Remove-unused-variable-len.patch b/meta-oe/recipes-core/safec/safec/0001-strpbrk_s-Remove-unused-variable-len.patch
+new file mode 100644
+index 0000000000..4fd36ab8ab
+--- /dev/null
++++ b/meta-oe/recipes-core/safec/safec/0001-strpbrk_s-Remove-unused-variable-len.patch
+@@ -0,0 +1,42 @@
++From b1d7cc6495c541cdd99399b4d1a835997376dcbf Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 22 Aug 2022 23:42:33 -0700
++Subject: [PATCH] strpbrk_s: Remove unused variable len
++
++Fixes
++error: variable 'len' set but not used [-Werror,-Wunused-but-set-variable]
++
++Upstream-Status: Submitted [https://github.com/rurban/safeclib/pull/123]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/extstr/strpbrk_s.c | 3 ---
++ 1 file changed, 3 deletions(-)
++
++diff --git a/src/extstr/strpbrk_s.c b/src/extstr/strpbrk_s.c
++index 5bb7a0f8..2cf8a8be 100644
++--- a/src/extstr/strpbrk_s.c
+++++ b/src/extstr/strpbrk_s.c
++@@ -79,7 +79,6 @@ EXPORT errno_t _strpbrk_s_chk(char *dest, rsize_t dmax, char *src, rsize_t slen,
++ #endif
++ {
++     char *ps;
++-    rsize_t len;
++ 
++     CHK_SRC_NULL("strpbrk_s", firstp)
++     *firstp = NULL;
++@@ -121,7 +120,6 @@ EXPORT errno_t _strpbrk_s_chk(char *dest, rsize_t dmax, char *src, rsize_t slen,
++     while (*dest && dmax) {
++ 
++         ps = src;
++-        len = slen;
++         while (*ps) {
++ 
++             /* check for a match with the substring */
++@@ -130,7 +128,6 @@ EXPORT errno_t _strpbrk_s_chk(char *dest, rsize_t dmax, char *src, rsize_t slen,
++                 return RCNEGATE(EOK);
++             }
++             ps++;
++-            len--;
++         }
++         dest++;
++         dmax--;
+diff --git a/meta-oe/recipes-core/safec/safec_3.7.1.bb b/meta-oe/recipes-core/safec/safec_3.7.1.bb
+index 5ffe7d7528..9dd6f1c7cc 100644
+--- a/meta-oe/recipes-core/safec/safec_3.7.1.bb
++++ b/meta-oe/recipes-core/safec/safec_3.7.1.bb
+@@ -9,7 +9,8 @@ inherit autotools pkgconfig
+ S = "${WORKDIR}/git"
+ SRCREV = "f9add9245b97c7bda6e28cceb0ee37fb7e254fd8"
+ SRC_URI = "git://github.com/rurban/safeclib.git;branch=master;protocol=https \
+-"
++           file://0001-strpbrk_s-Remove-unused-variable-len.patch \
++           "
  
--    if [ "${@d.getVar('enable_pam')}" = "pam" ]; then
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
-         install -d ${D}${sysconfdir}/pam.d
-         install -m 644 ${WORKDIR}/postgresql.pam ${D}${sysconfdir}/pam.d/postgresql
-     fi
+ COMPATIBLE_HOST = '(x86_64|i.86|powerpc|powerpc64|arm|aarch64|mips).*-linux'
+ 
 -- 
 2.25.1
 
