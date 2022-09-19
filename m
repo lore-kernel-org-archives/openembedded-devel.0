@@ -2,15 +2,15 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 14269C6FA90
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 14181C6FA8B
 	for <webhook@archiver.kernel.org>; Mon, 19 Sep 2022 12:41:58 +0000 (UTC)
 Received: from voyager.superhosting.bg (voyager.superhosting.bg
  [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web12.19256.1663591316779212351
+ by mx.groups.io with SMTP id smtpd.web10.19122.1663591314737109763
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Sep 2022 05:41:57 -0700
+ Mon, 19 Sep 2022 05:41:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=GXZziYhE;
+ dkim=pass header.i=@anavi.org header.s=default header.b=fGmWZkr9;
  spf=permerror,
  err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
  for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
@@ -21,25 +21,25 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=vODPeHI3aKtCeCihvqg1SmT37C0FlsgqJG1db0y6NK0=; b=GXZziYhEQnK3UkK2leZ2L3C3kF
-	EuH4iWh4Z0BTl1TMLntr9b8uJik6iGdJ5jezwhnZPkegee3M4MhTl3H8gqM2EvkugFW0/h0KV8M56
-	sHIIaPUiQyd8mvg84RBM8hJ0DZHQQ25kfjV+TsOZIgzLd7YqfPfT6F2KIwAkPJURnFiWOADhwY/eK
-	Ubfo1mxpne6gAo8wGerIxdVBf9oiWa1+NYK1z57PgfF6hRLWJWbT9fyl2t6uNAjPp4TW3rzVNZkL+
-	AoJzBGC1aZaZef2/509XnojwRuyUx/fGxJTo2oYeLUFzwE6E5T74NdZDUos/AmPPHEp8d/qf3xqys
-	dtvyUZMw==;
+	bh=mCRdNPNXe3obH+Mvlt9Xffrod5LedMdgPY2xKFkspVc=; b=fGmWZkr9cRRf0APk4EVkMyQBKP
+	7XVyW0NzTJPBJbZPM/Cg6stwqy6Pkpvs7YBSQX4lcihXnSlRGXVREHA5JXHIaxebveUzBtvzZCbTT
+	Wij7ncHwfzqri00+ncmO/9UyLyZbSfYOzoaDS9LxKMRsOAsu8LdOIvKjPxHrDzBVY40A7sxsXzFic
+	fLdbwhyDq4LsEvGQQxP+BNUzAvJ2ebdg7SCprelQAfUv2AWhdeWy32V/uO5T4wqIfirGRpGXPySz5
+	MdH2MB/VEMZK/9oLhsw9GunLKgMhJ2NYTbFTLPzJfuhGmIhK0md9errgMbPFZ3JixnqdyN6krf+N8
+	L1dT5WLg==;
 Received: from lan.nucleusys.com ([92.247.61.126]:41394 helo=tone.k.g)
 	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 	(Exim 4.95)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1oaG6K-0000x1-LS;
-	Mon, 19 Sep 2022 15:41:56 +0300
+	id 1oaG6I-0000x1-9s;
+	Mon, 19 Sep 2022 15:41:54 +0300
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/4] python3-imageio: Upgrade 2.21.3 -> 2.22.0
-Date: Mon, 19 Sep 2022 15:41:41 +0300
-Message-Id: <20220919124142.4025940-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/4] python3-astroid: Upgrade 2.12.9 -> 2.12.10
+Date: Mon, 19 Sep 2022 15:41:40 +0300
+Message-Id: <20220919124142.4025940-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220919124142.4025940-1-leon.anavi@konsulko.com>
 References: <20220919124142.4025940-1-leon.anavi@konsulko.com>
@@ -62,31 +62,33 @@ X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 19 Sep 2022 12:41:58 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98865
+ https://lists.openembedded.org/g/openembedded-devel/message/98864
 
-Upgrade to release 2.22.0:
+Upgrade to release 2.12.10:
 
-- Pyav API for procedural video writing
+- Fixed a crash when introspecting modules compiled by `cffi`
+- ``decorators.cached`` now gets its cache cleared by calling
+  ``AstroidManager.clear_cache``
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-imageio_2.21.3.bb => python3-imageio_2.22.0.bb}    | 2 +-
+ .../{python3-astroid_2.12.9.bb => python3-astroid_2.12.10.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-imageio_2.21.3.bb => python3-imageio_2.22.0.bb} (81%)
+ rename meta-python/recipes-devtools/python/{python3-astroid_2.12.9.bb => python3-astroid_2.12.10.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-imageio_2.21.3.bb b/meta-python/recipes-devtools/python/python3-imageio_2.22.0.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-imageio_2.21.3.bb
-rename to meta-python/recipes-devtools/python/python3-imageio_2.22.0.bb
-index 74591f3c4..6bc7b60f9 100644
---- a/meta-python/recipes-devtools/python/python3-imageio_2.21.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-imageio_2.22.0.bb
-@@ -5,7 +5,7 @@ SECTION = "devel/python"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=24cb9a367a9e641b459a01c4d15256ba"
+diff --git a/meta-python/recipes-devtools/python/python3-astroid_2.12.9.bb b/meta-python/recipes-devtools/python/python3-astroid_2.12.10.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-astroid_2.12.9.bb
+rename to meta-python/recipes-devtools/python/python3-astroid_2.12.10.bb
+index 4fb29709a..c1d746b89 100644
+--- a/meta-python/recipes-devtools/python/python3-astroid_2.12.9.bb
++++ b/meta-python/recipes-devtools/python/python3-astroid_2.12.10.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
  
--SRC_URI[sha256sum] = "b10a583c831c932f4afbea9e8403082d2a76b1d30d7555b777ceb70441890b3c"
-+SRC_URI[sha256sum] = "a332d127ec387b2d3dca967fd065a90f1c1a4ba2343570b03fe2cebb6ed064ea"
+-SRC_URI[sha256sum] = "0dafbfcf4ebdecd3c8f6d742c9d9c88508229ca823d5c98ab872d964f3321e56"
++SRC_URI[sha256sum] = "81f870105d892e73bf535da77a8261aa5bde838fa4ed12bb2f435291a098c581"
  
  inherit pypi setuptools3
  
