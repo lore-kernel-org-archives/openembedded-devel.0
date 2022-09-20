@@ -1,170 +1,167 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <hongxu.jia@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53232ECAAD8
-	for <webhook@archiver.kernel.org>; Tue, 20 Sep 2022 10:02:27 +0000 (UTC)
-Received: from voyager.superhosting.bg (voyager.superhosting.bg
- [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web09.9830.1663668137530809714
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 797C8C54EE9
+	for <webhook@archiver.kernel.org>; Tue, 20 Sep 2022 10:35:57 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com
+ [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web09.10111.1663670151238112365
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Sep 2022 03:02:18 -0700
+ Tue, 20 Sep 2022 03:35:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=FeC1qSPi;
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=kpawePyn;
  spf=permerror,
- err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
- for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
- (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
-	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
-	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
-	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=9oy4z4ZPVUra5pbregC8ebwCzFNp1AGSWFkC8snHIDk=; b=FeC1qSPihXD3jd/a0VdCox1wPL
-	x3bbGc30WeiejzKaXFgnaWEKnpGKawZW+TtjGOE7ykDuRgrIS5HsIxPr7CYzmHCj1AE/XcWdEg8tg
-	uocYuPIuRQ/uW7yb+o/09MSVdX2Mpqz3D8BQhDqrhRrInYExLhRsBrvwyYTBHhoZo1go0HB6SB+mn
-	K34UVKwvY43dQLGEJiKe9DrwEidRzQjpEjMW0MMqD6fIg08ooPD9Z0UZdQ+GuqoKpH71kxTBwYKoC
-	SEV+fgOm1kZwfWGyqqBgHqw8XqijE/NAs8ZBvvMZ8lv0acRsouBwKzc7MBl3oUKuaeshYymn3iM6B
-	Cdu8d+iw==;
-Received: from lan.nucleusys.com ([92.247.61.126]:45604 helo=tone.k.g)
-	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.95)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1oaa5Q-00052a-OT;
-	Tue, 20 Sep 2022 13:02:15 +0300
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH] python3-termcolor: Upgrade 1.1.0 -> 2.0.1
-Date: Tue, 20 Sep 2022 13:02:08 +0300
-Message-Id: <20220920100208.408905-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.30.2
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
+ invalid domain name (domain: windriver.com, ip: 205.220.178.238,
+ mailfrom: prvs=6262b0a03a=hongxu.jia@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
+ 28K9sRoP024751
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 20 Sep 2022 10:35:50 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+ h=from : to :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=PPS06212021;
+ bh=2umRl2uzryuig1r29TCF6vAQMwFj0lXDHrLgnGbn+mA=;
+ b=kpawePyn6/wT2wzWp3X+l4CQMf0xH8eNwTDt7llupo2gyCrBYJkVeZXpKsNQ2X0Mrdd+
+ jyhtf5fGsUCYIWDx3f5kmacGHsTqNLdqeEjdcdvsoADnxcAK/ZoDtWmLaGIr7KD2+SfZ
+ 7QNRZbkrtjMLZ4KLMMHOoPuRSjAJaS36njYeU+l/pryMnYVbLZP+GqPBQYZWNQN4s6qr
+ WM964UAaoIG//iFrrUjJ00kYwzs+90bvYsP/4M8m/P6m10zWiloVgg6Z2qUiy5jkHPM9
+ mPvBRQDehHfn/KVBvHH4mnCAqqxI4CJhnZNC0ldK+CAhhfQZNRCuSO1qhdJtfYlHLgla cg==
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com
+ [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3jn57a2e1b-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 20 Sep 2022 10:35:50 +0000
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Tue, 20 Sep 2022 03:35:49 -0700
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Tue, 20 Sep 2022 03:35:48 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-python][PATCH] python3-h5py: fix wrong file driver version
+Date: Tue, 20 Sep 2022 18:35:47 +0800
+Message-ID: <20220920103547.3511528-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
- leon@anavi.org
-X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: eX_1tgomp6O19UnS95Ej3biZlSUNF8sS
+X-Proofpoint-GUID: eX_1tgomp6O19UnS95Ej3biZlSUNF8sS
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
+ definitions=2022-09-20_02,2022-09-16_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 malwarescore=0
+ spamscore=0 mlxscore=0 mlxlogscore=999 priorityscore=1501 phishscore=0
+ adultscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0 clxscore=1011
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2209130000
+ definitions=main-2209200064
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 20 Sep 2022 10:02:27 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 20 Sep 2022 10:35:57 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98901
+ https://lists.openembedded.org/g/openembedded-devel/message/98902
 
-Upgrade to release 2.0.1:
+Due to commit [1] applied in hdf5 (1.13.2), import hdf5 failed
 
-- Add support for Python 3.11 and PyPy
-- Add support for Python 3.10
-- Add type annotations to the project and run mypy on CI
-- Add tests
-- Refer to GitHub Releases for release notes for 2.0.0+
-- Autodeploy to TestPyPI and to PyPI for GH releases
-- Migrate from setuptools + setuptools_scm to hatchling + hatch-vcs
-- Replace deprecated license_file with license_files in setup.cfg
-- Use declarative metadata in setup.cfg
-- Replace 3.9-dev with 3.9 in CI to use Python 3.9 final
-- Drop support for EOL Python <= 3.6
-- Remove hardcoded VERSION constant
-- Update source URL
+|>>> import h5py
+|Traceback (most recent call last):
+|  File "<stdin>", line 1, in <module>
+|  File "/usr/lib/python3.10/site-packages/h5py/__init__.py", line 56, in <module>
+|    from . import h5a, h5d, h5ds, h5f, h5fd, h5g, h5r, h5s, h5t, h5p, h5z, h5pl
+|  File "h5py/h5fd.pyx", line 220, in init h5py.h5fd
+|RuntimeError: Wrong file driver version # (wrong file driver version #)
 
-License-Update: Removed new line from the end of license file.
+Initial driver version to fix the error
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+[1] https://github.com/HDFGroup/hdf5/commit/42b767fc67ad1e13735e3cee2077f2e108f9463e
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- ...-Use-setuptools-instead-of-distutils.patch | 27 -------------------
- .../python/python3-termcolor_1.1.0.bb         | 13 ---------
- .../python/python3-termcolor_2.0.1.bb         | 16 +++++++++++
- 3 files changed, 16 insertions(+), 40 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-termcolor/0001-setup.py-Use-setuptools-instead-of-distutils.patch
- delete mode 100644 meta-python/recipes-devtools/python/python3-termcolor_1.1.0.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-termcolor_2.0.1.bb
+ .../0001-fix-wrong-file-driver-version.patch  | 52 +++++++++++++++++++
+ .../python/python3-h5py_3.7.0.bb              |  1 +
+ 2 files changed, 53 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-h5py/0001-fix-wrong-file-driver-version.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-termcolor/0001-setup.py-Use-setuptools-instead-of-distutils.patch b/meta-python/recipes-devtools/python/python3-termcolor/0001-setup.py-Use-setuptools-instead-of-distutils.patch
-deleted file mode 100644
-index a55a6a914..000000000
---- a/meta-python/recipes-devtools/python/python3-termcolor/0001-setup.py-Use-setuptools-instead-of-distutils.patch
-+++ /dev/null
-@@ -1,27 +0,0 @@
--From e30308284c721210e2ba50d8b3d159cedf5eada8 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Mon, 28 Feb 2022 14:44:42 -0800
--Subject: [PATCH] setup.py: Use setuptools instead of distutils
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- setup.py | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/setup.py b/setup.py
--index c4fe4ed..dad1d29 100755
----- a/setup.py
--+++ b/setup.py
--@@ -23,7 +23,7 @@
-- # Author: Konstantin Lepa <konstantin.lepa@gmail.com>
-- 
-- import os
---from distutils.core import setup
--+from setuptools import setup
-- 
-- prjdir = os.path.dirname(__file__)
-- 
---- 
--2.35.1
--
-diff --git a/meta-python/recipes-devtools/python/python3-termcolor_1.1.0.bb b/meta-python/recipes-devtools/python/python3-termcolor_1.1.0.bb
-deleted file mode 100644
-index 15bab622a..000000000
---- a/meta-python/recipes-devtools/python/python3-termcolor_1.1.0.bb
-+++ /dev/null
-@@ -1,13 +0,0 @@
--SUMMARY = "ANSII Color formatting for output in terminal"
--HOMEPAGE = "https://pypi.python.org/pypi/termcolor"
--SECTION = "devel/python"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=809e8749b63567978acfbd81d9f6a27d"
--
--inherit pypi setuptools3
--
--SRC_URI += "file://0001-setup.py-Use-setuptools-instead-of-distutils.patch"
--
--SRC_URI[sha256sum] = "1d6d69ce66211143803fbc56652b41d73b4a400a2891d7bf7a1cdf4c02de613b"
--
--BBCLASSEXTEND = "native"
-diff --git a/meta-python/recipes-devtools/python/python3-termcolor_2.0.1.bb b/meta-python/recipes-devtools/python/python3-termcolor_2.0.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-h5py/0001-fix-wrong-file-driver-version.patch b/meta-python/recipes-devtools/python/python3-h5py/0001-fix-wrong-file-driver-version.patch
 new file mode 100644
-index 000000000..47f7938f1
+index 000000000..deb976755
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-termcolor_2.0.1.bb
-@@ -0,0 +1,16 @@
-+SUMMARY = "ANSII Color formatting for output in terminal"
-+HOMEPAGE = "https://pypi.python.org/pypi/termcolor"
-+SECTION = "devel/python"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=e5f5f7c9b280511f124dba5dda3d180e"
++++ b/meta-python/recipes-devtools/python/python3-h5py/0001-fix-wrong-file-driver-version.patch
+@@ -0,0 +1,52 @@
++From 5b0b1d0b941ba338d449f9261bdf4cb2b679d048 Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Tue, 20 Sep 2022 02:53:11 -0700
++Subject: [PATCH] fix wrong file driver version
 +
-+inherit pypi python_setuptools_build_meta
++Due to commit [1] applied in hdf5 (1.13.2), import hdf5 failed
 +
-+SRC_URI[sha256sum] = "6b2cf769e93364a2676e1de56a7c0cff2cf5bd07f37e9cc80b0dd6320ebfe388"
++|>>> import h5py
++|Traceback (most recent call last):
++|  File "<stdin>", line 1, in <module>
++|  File "/usr/lib/python3.10/site-packages/h5py/__init__.py", line 56, in <module>
++|    from . import h5a, h5d, h5ds, h5f, h5fd, h5g, h5r, h5s, h5t, h5p, h5z, h5pl
++|  File "h5py/h5fd.pyx", line 220, in init h5py.h5fd
++|RuntimeError: Wrong file driver version # (wrong file driver version #)
 +
-+DEPENDS += " \
-+	${PYTHON_PN}-toml-native \
-+	${PYTHON_PN}-hatch-vcs-native \
-+"
++Initial driver version to fix the error
 +
-+BBCLASSEXTEND = "native"
++[1] https://github.com/HDFGroup/hdf5/commit/42b767fc67ad1e13735e3cee2077f2e108f9463e
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ h5py/api_types_hdf5.pxd | 1 +
++ h5py/h5fd.pyx           | 1 +
++ 2 files changed, 2 insertions(+)
++
++diff --git a/h5py/api_types_hdf5.pxd b/h5py/api_types_hdf5.pxd
++index 6977f1a7..312fdaa0 100644
++--- a/h5py/api_types_hdf5.pxd
+++++ b/h5py/api_types_hdf5.pxd
++@@ -237,6 +237,7 @@ cdef extern from "hdf5.h":
++ 
++   # Class information for each file driver
++   ctypedef struct H5FD_class_t:
+++    unsigned version;
++     const char *name
++     haddr_t maxaddr
++     H5F_close_degree_t fc_degree
++diff --git a/h5py/h5fd.pyx b/h5py/h5fd.pyx
++index 04aff077..d41953d0 100644
++--- a/h5py/h5fd.pyx
+++++ b/h5py/h5fd.pyx
++@@ -191,6 +191,7 @@ cdef herr_t H5FD_fileobj_flush(H5FD_fileobj_t *f, hid_t dxpl, hbool_t closing) e
++ cdef H5FD_class_t info
++ memset(&info, 0, sizeof(info))
++ 
+++info.version = 0x01
++ info.name = 'fileobj'
++ info.maxaddr = libc.stdint.SIZE_MAX - 1
++ info.fc_degree = H5F_CLOSE_WEAK
++-- 
++2.37.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-h5py_3.7.0.bb b/meta-python/recipes-devtools/python/python3-h5py_3.7.0.bb
+index 07128bb03..ce4f05dbe 100644
+--- a/meta-python/recipes-devtools/python/python3-h5py_3.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-h5py_3.7.0.bb
+@@ -8,6 +8,7 @@ SRC_URI[sha256sum] = "3fcf37884383c5da64846ab510190720027dca0768def34dd8dcb659db
+ 
+ SRC_URI:append = " \
+            file://0001-setup_build.py-avoid-absolute-path.patch \
++           file://0001-fix-wrong-file-driver-version.patch \
+           "
+ 
+ inherit pkgconfig pypi setuptools3
 -- 
-2.30.2
+2.27.0
 
 
