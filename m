@@ -1,109 +1,111 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0199EC54EE9
-	for <webhook@archiver.kernel.org>; Mon, 19 Sep 2022 12:42:08 +0000 (UTC)
-Received: from voyager.superhosting.bg (voyager.superhosting.bg
- [79.124.30.14])
- by mx.groups.io with SMTP id smtpd.web11.19276.1663591318605249040
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E8B26C6FA82
+	for <webhook@archiver.kernel.org>; Tue, 20 Sep 2022 02:09:34 +0000 (UTC)
+Received: from mail1.bemta37.messagelabs.com (mail1.bemta37.messagelabs.com
+ [85.158.142.112])
+ by mx.groups.io with SMTP id smtpd.web11.7276.1663639771048003283
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Sep 2022 05:41:59 -0700
+ Mon, 19 Sep 2022 19:09:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@anavi.org header.s=default header.b=LlSGN3Xp;
- spf=permerror,
- err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
- for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
- (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
-	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
-	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=DPGHvp1gK9rp/rYt2XjuTvoeDfmFKa9saICxgo2UC9E=; b=LlSGN3XpsKckfMlxMrgWK9d94R
-	eZ/C6X1kcR0+oQUtwINC9SuQQa/og77fXw3k2On4XJXzHRrkDXPJ8B69ZIHXumOKDwR6kFLEsHrn3
-	AIpvaVa0TqO1YROVng7GzkICg2N1PW5MJwmrAj5FN1bnitRlChnSJzaG/YGkRLXDvA3j8KuDiZPXq
-	M5hmU3f7IhLcyQ5i5eoz9U7tdk7uIvlFXmkygIuiw1YJ/S1IignO8Jv8nvjCHnhu+T8kShSMV3A5O
-	pWgAeHVILORuG9LeUcDtajrNc3jZNi+dtPo34k08yW7bmYpeQxlTRobvUINFus4jGGEFpCj6PIwCV
-	orjbj2kw==;
-Received: from lan.nucleusys.com ([92.247.61.126]:41394 helo=tone.k.g)
-	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.95)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1oaG6M-0000x1-Lt;
-	Mon, 19 Sep 2022 15:41:58 +0300
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/4] python3-email-validator: Upgrade 1.2.1 ->
- 1.3.0
-Date: Mon, 19 Sep 2022 15:41:42 +0300
-Message-Id: <20220919124142.4025940-4-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220919124142.4025940-1-leon.anavi@konsulko.com>
-References: <20220919124142.4025940-1-leon.anavi@konsulko.com>
+ dkim=pass header.i=@fujitsu.com header.s=170520fj header.b=x9mBiX5Q;
+ spf=pass (domain: fujitsu.com, ip: 85.158.142.112,
+ mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+	s=170520fj; t=1663639769; i=@fujitsu.com;
+	bh=PCtOAa61mnlU59ci19CMKFwJAjW3aCo75wuMj7AHhS0=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=x9mBiX5QvHsVQbShWRZNmFEPsTFV619ViZUAcnUiykYSY6KqiIyQNVrZgzXuCL51h
+	 K1rbliEyTBNcmLvHxsbehlemiYm131ZvX+0X9QR+7yXMDYOBgL6Gh2DijO5wK8ambO
+	 2CcMhsCucPp648NS7A0uwTiMMBtQVgK02ETDm5K9S2RdWVV30X30lP1RhCq8TrSI4Y
+	 vFOQeUz/PTZHPKDKNLvSW6k2uXvHaPIJPxR2fR7ZsAGtbv6o0xv1Rh1Q0BWQ46vfa0
+	 3aQd6B8N8uBXPSQB9ef09WIllgJhrFNSyIB4CkYG5QIgvIQmxfCMaibVzTE79mLYAU
+	 kLGof36U5fKNw==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrMIsWRWlGSWpSXmKPExsViZ8OxWfe6gma
+  ywee3xhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8a5G7+YC7rYKua+dmtg3MnaxcjFISTwkFHi
+  6c5d7BDOFSaJdQe3MkM4exgl2u69Zepi5ORgE1CTmH7rBiuILSKgL7F09h5mEJtZQEXixe8ed
+  hBbWMBG4ta95WxdjBwcLAKqEsseqYGEeQWcJP686wEbIyGgIDHl4XtmiLigxMmZT1ggxkhIHH
+  zxghmiRlFi9uVmFgi7QqJx+iGoXjWJq+c2MU9g5J+FpH0WkvYFjEyrGG2SijLTM0pyEzNzdA0
+  NDHQNDU11Lc10jQwN9BKrdBP1Ukt18/KLSjJ0DfUSy4v1UouL9Yorc5NzUvTyUks2MQLDMqU4
+  4dIOxnX7fukdYpTkYFIS5eWq00gW4kvKT6nMSCzOiC8qzUktPsQow8GhJMFrL6iZLCRYlJqeW
+  pGWmQOMEZi0BAePkggvmxRQmre4IDG3ODMdInWKUVFKnPeSHFBCACSRUZoH1waLy0uMslLCvI
+  wMDAxCPAWpRbmZJajyrxjFORiVhHnDQabwZOaVwE1/BbSYCWjxDRV1kMUliQgpqQammdNZLt+
+  8fnibz0P33b4Je8zyQvjLxf/NnFajmnt+rptKQoCxUDNn9jFpjm+end6yqw3fbG5UE37oovUy
+  ZfKilVOeH3lyZabJG/v8JD/HL73BJRF+3O0NgWsvKAaE3K7fof4j6lndtoWN2onzf/p/5d7Kv
+  MO/a/X5lgkqqQr1zz345JJ0VrmFL9NS2bGm7FbtTaUl3cl/jwnMWGox91FSZMN3VnUnx486pf
+  15v5qnO18zuFgtsSY/QnNZ3k2GyhUFJhefCdo+fxh659hqxovCb5zLknj3G5ZPSFthtjDn5/r
+  y39P3foiax5c68900+WbjXd5xHQnb/V+WaO2M8I29l1xbXl27+lb9ohjOaE0lluKMREMt5qLi
+  RADAoftfRgMAAA==
+X-Env-Sender: wangmy@fujitsu.com
+X-Msg-Ref: server-6.tower-745.messagelabs.com!1663639767!246623!1
+X-Originating-IP: [62.60.8.179]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.87.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 22554 invoked from network); 20 Sep 2022 02:09:27 -0000
+Received: from unknown (HELO n03ukasimr04.n03.fujitsu.local) (62.60.8.179)
+  by server-6.tower-745.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 20 Sep 2022 02:09:27 -0000
+Received: from n03ukasimr04.n03.fujitsu.local (localhost [127.0.0.1])
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTP id 45E17159
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 20 Sep 2022 03:09:27 +0100 (BST)
+Received: from R01UKEXCASM121.r01.fujitsu.local (R01UKEXCASM121
+ [10.183.43.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by n03ukasimr04.n03.fujitsu.local (Postfix) with ESMTPS id 38A5A157
+	for <openembedded-devel@lists.openembedded.org>;
+ Tue, 20 Sep 2022 03:09:27 +0100 (BST)
+Received: from localhost.localdomain (10.167.225.33) by
+ R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.32; Tue, 20 Sep 2022 03:09:25 +0100
+From: Wang Mingyu <wangmy@fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] bats: upgrade 1.7.0 -> 1.8.0
+Date: Tue, 20 Sep 2022 10:09:11 +0800
+Message-ID: <1663639751-26776-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
- leon@anavi.org
-X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Content-Type: text/plain
+X-Originating-IP: [10.167.225.33]
+X-ClientProxiedBy: G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) To
+ R01UKEXCASM121.r01.fujitsu.local (10.183.43.173)
+X-Virus-Scanned: ClamAV using ClamSMTP
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Sep 2022 12:42:08 -0000
+ <openembedded-devel@lists.openembedded.org>; Tue, 20 Sep 2022 02:09:34 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98866
+ https://lists.openembedded.org/g/openembedded-devel/message/98867
 
-Upgrade to release 1.3.0:
-
-- Deliverability checks now check for 'v=spf1 -all' SPF records as
-  a way to reject more bad domains.
-- Special use domain names now raise EmailSyntaxError instead of
-  EmailUndeliverableError since they are performed even if
-  check_deliverability is off.
-- New module-level attributes are added to override the default
-  values of the keyword arguments and the special-use domains list.
-- The keyword arguments of the public methods are now marked as
-  keyword-only.
-- pyIsEmail's test cases are added to the tests.
-- Recommend that check_deliverability be set to False for
-  validation on login pages.
-- Added an undocumented globally_deliverable option.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...mail-validator_1.2.1.bb => python3-email-validator_1.3.0.bb} | 2 +-
+ meta-oe/recipes-test/bats/{bats_1.7.0.bb => bats_1.8.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-email-validator_1.2.1.bb => python3-email-validator_1.3.0.bb} (78%)
+ rename meta-oe/recipes-test/bats/{bats_1.7.0.bb => bats_1.8.0.bb} (95%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-email-validator_1.2.1.bb b/meta-python/recipes-devtools/python/python3-email-validator_1.3.0.bb
-similarity index 78%
-rename from meta-python/recipes-devtools/python/python3-email-validator_1.2.1.bb
-rename to meta-python/recipes-devtools/python/python3-email-validator_1.3.0.bb
-index a5cb09fd9..76dfdd601 100644
---- a/meta-python/recipes-devtools/python/python3-email-validator_1.2.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-email-validator_1.3.0.bb
-@@ -3,7 +3,7 @@ SECTION = "devel/python"
- LICENSE = "CC0-1.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=65d3616852dbf7b1a6d4b53b00626032"
+diff --git a/meta-oe/recipes-test/bats/bats_1.7.0.bb b/meta-oe/recipes-test/bats/bats_1.8.0.bb
+similarity index 95%
+rename from meta-oe/recipes-test/bats/bats_1.7.0.bb
+rename to meta-oe/recipes-test/bats/bats_1.8.0.bb
+index 81235e29b0..4b90dcc579 100644
+--- a/meta-oe/recipes-test/bats/bats_1.7.0.bb
++++ b/meta-oe/recipes-test/bats/bats_1.8.0.bb
+@@ -11,7 +11,7 @@ SRC_URI = "\
+   "
  
--SRC_URI[sha256sum] = "6757aea012d40516357c0ac2b1a4c31219ab2f899d26831334c5d069e8b6c3d8"
-+SRC_URI[sha256sum] = "553a66f8be2ec2dea641ae1d3f29017ab89e9d603d4a25cdaac39eefa283d769"
+ # v1.7.0
+-SRCREV = "410dd229a5ed005c68167cc90ed0712ad2a1c909"
++SRCREV = "e9b286bb39ad7b0cb7b7d2e819d44d1aff387522"
  
- PYPI_PACKAGE = "email_validator"
+ S = "${WORKDIR}/git"
  
 -- 
-2.30.2
+2.25.1
 
 
