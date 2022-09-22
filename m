@@ -1,333 +1,1089 @@
-Return-Path: <wolfgang.meyer@gossenmetrawatt.com>
+Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7CDF7C32771
-	for <webhook@archiver.kernel.org>; Wed, 21 Sep 2022 13:51:12 +0000 (UTC)
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (EUR04-DB3-obe.outbound.protection.outlook.com [104.47.12.52])
- by mx.groups.io with SMTP id smtpd.web11.6651.1663768252265274883
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 188EFC32771
+	for <webhook@archiver.kernel.org>; Thu, 22 Sep 2022 01:35:23 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com
+ [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.2478.1663810514839729529
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Sep 2022 06:50:54 -0700
+ Wed, 21 Sep 2022 18:35:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gossenmetrawatt.onmicrosoft.com
- header.s=selector1-gossenmetrawatt-onmicrosoft-com header.b=2p9U2bL/;
- spf=pass (domain: gossenmetrawatt.com, ip: 104.47.12.52,
- mailfrom: wolfgang.meyer@gossenmetrawatt.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=O2GFuDHAysPJ6ups5jb6mgeX7ZawCXiSWeTEoltkuh7PL3pBJ1kt4+JOqHTgpDuxDrtXeBZqh4hnkmQx2C4/h02z/0zP6rpcylCgZ9uYTlOSEY8vmKSQSMJbZem6eQOOtcLbyWUPVgG0hVlGxPsIqzprPgTU6Hfzblt70Y0FASGRgmskWoBDEIRmTXE+WvomnNwxFXgaHdNF258mUEBfWgkqag7I2IUej63x9tFz4Dn6nZhNayMhkti0XrK62HBUQn2X+pFh4KJpdcjsPX/6ZinvOUG+Mfo4GPwYK4NbwKtg9+5PgwKmlo586J67AuKaG9dOi8k1kH8E+HIexl1Dsw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oi5adIiUjgtBhBjAiDxFbOdnRG4+ic+IhK6Jzx594aU=;
- b=OF7H4WuuixizdialW+opvnZP5O5k3U4pnkUiC2s7rf9lnkNpUwFZaGbSDVhMiZXDzkm5zB6VbzKXRGYpRUK13E2z4LyFbDlQz/d5bU9sdc//i+CWTvYoCtgz7NVGVhMqZVyreAQcEm4EoJfJ+S1PpDepksTPbtxYMlKvo+agVP5Pt4wL+OBENmwlCkFdNGQ7dJSsGm9P822W3iYLDUCaBBofj0CGAyyZx/vgF2URyoNrB8mpy7vGOrOAaiHXlNwnQQTnMOvJIi8W4gu7L4d0UFM42bZjqz28cSPXwkTZ2ebpUPx4zCbx6H3sBhg8amoQSPFMuYTRAvJQe/meJP4a6Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=gossenmetrawatt.com; dmarc=pass action=none
- header.from=gossenmetrawatt.com; dkim=pass header.d=gossenmetrawatt.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gossenmetrawatt.onmicrosoft.com;
- s=selector1-gossenmetrawatt-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oi5adIiUjgtBhBjAiDxFbOdnRG4+ic+IhK6Jzx594aU=;
- b=2p9U2bL/dWFkQIB4VP0ZvPUmF5tFHLDBIt0F9mdwcvVFC88VvtcgxSZDnxM4ffJdIWse4ouxVaxtaBB8ThBnmU+askNp62ZxBeHDfFTdtYURmuyLwphf6EPhhFFZpfkFmDgT782UZTJ30N4nVT/BJ45KdhSiSSWph8p1sOKEHhE=
-Received: from VE1PR08MB5583.eurprd08.prod.outlook.com (2603:10a6:800:1ac::24)
- by DB9PR08MB6491.eurprd08.prod.outlook.com (2603:10a6:10:23f::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.14; Wed, 21 Sep
- 2022 13:50:47 +0000
-Received: from VE1PR08MB5583.eurprd08.prod.outlook.com
- ([fe80::742f:f82e:f58:2a5a]) by VE1PR08MB5583.eurprd08.prod.outlook.com
- ([fe80::742f:f82e:f58:2a5a%7]) with mapi id 15.20.5632.021; Wed, 21 Sep 2022
- 13:50:46 +0000
-From: "Meyer, Wolfgang" <Wolfgang.Meyer@gossenmetrawatt.com>
-To: "raj.khem@gmail.com" <raj.khem@gmail.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe][PATCH 1/4] fbida: Switch to git fetcher
-Thread-Topic: [oe] [meta-oe][PATCH 1/4] fbida: Switch to git fetcher
-Thread-Index: AQHYyfETN2LGko3l70+MWF2xUvuwva3ibB2AgADkeICAAGa1gIAABAMAgAYzG4A=
-Date: Wed, 21 Sep 2022 13:50:46 +0000
-Message-ID: 
- <ecb5e3d73a6a94943df543597bdb6aa467fdfee0.camel@gossenmetrawatt.com>
-References: <20220916172332.3096-1-Wolfgang.Meyer@gossenmetrawatt.com>
-	 <CAMKF1sqy-zHmxrA-rRNpq+r8tpFXX=UVT3n=8z2WgO75=jM5jw@mail.gmail.com>
-	 <aa519a830f7c4dabf6683bece84a2be4afb46166.camel@gossenmetrawatt.com>
-	 <CAMKF1spZO2CQ7V3_mVZ6p0r0rNgOK360ajVs1-Hx+GK5gkiLtQ@mail.gmail.com>
-	 <CAMKF1sqKkZD7y2+6fDLsXj0i+dtmGwUYAGmqwOsjcG6_5OjQhg@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1sqKkZD7y2+6fDLsXj0i+dtmGwUYAGmqwOsjcG6_5OjQhg@mail.gmail.com>
-Accept-Language: en-US, de-DE
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=gossenmetrawatt.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: VE1PR08MB5583:EE_|DB9PR08MB6491:EE_
-x-ms-office365-filtering-correlation-id: a138b7b6-0935-4e72-72a3-08da9bd848e3
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- VB05rPyj9HWyYX9kmfwYWq1NhC/ug1xsNUI3UspaLevVM+9P4tZN/Uxi3If2oV0d0bfo6BF+eCOjcHj2HU8Y0gYPN4oeHpiV3eETFk5D5OEKagFt5PLuRZOPCcZ4rzG0vPSNDnqf5PwjnvhGZzhak7oG87cgX8urimnSpxzZfpuy49+VsUMg6KbbQA29SwxEJIcraar7611KiariMLyDaKJZzf3G9lrg6hY5nmN47naSbT6rLhQTddvmwvDPArYFu/wbFUyeLuClVmEkGtMMZ12yk1HnIJoIU7yRXEbZXMtfmQSYIEr384MopJrYvSxoG5Mxcre81wKIVCOlmo57tieVFzy0TbwlaqeSKJWO6eozqx0xpMMN0YzvLyzg0HYgjSEVQeYQf26hJFCvgVFfI3/bunM1gRMG16pbEXyLzYtjp179OBX3Yl61iPxH5/SuGpfVnprq6MU3XW+z67v+BFffIPjgpzoocEoIQMye+0wyiYPbjjikpVYYR5jybXx6jcz+M2xvO+wZ1tTLy6r+1xw6Aj+9MF3FrA2o3cJfvD4Jn3uI+9+10Z5TAQ+DE9WKnwTSfir5XIBWRZv/fZtFEmutn5y791Y//Ago7zCrmIXLrvq+kLomsUaWxUeIQwFGTWPD+S4iFufQkJaKOicaT2Y9fqzn0MNElVj3U9gPKGEBb8PUJ0Q52jGQyK0WeiF66yDKjTdk3xEQfwnabE31QkSErA+pqPrbpBVNhC6tLFa7w9EA4cvW6vyOGMqTGPcqKD6kd/wCpNT0hYJvV2jW/mi9ZwodfLp5Oq680vY4n9b79ZiQTAeY+eK6uDP6P95M
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR08MB5583.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(396003)(346002)(39840400004)(136003)(366004)(376002)(451199015)(5660300002)(966005)(2906002)(38100700002)(8936002)(6486002)(478600001)(86362001)(6916009)(122000001)(316002)(8676002)(64756008)(66446008)(66476007)(66556008)(4326008)(66946007)(71200400001)(41300700001)(6506007)(38070700005)(36756003)(76116006)(91956017)(83380400001)(186003)(66574015)(6512007)(53546011)(30864003)(26005)(2616005);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?NytsRXhKdDN3dXZoTXc5aUVKVytua3RxRzNhbjdrRUxkc093QS9ZSHZqQUZK?=
- =?utf-8?B?aGJ1ZzUreEZpZ3JBNktPNlVnMy9SekNVYkJTVmtVOGVodzQ4ZVAvRzlIZ2dm?=
- =?utf-8?B?SHh5QVJqL2toT2xGL3JWT2p4R3piNWxLUDZ3Qm0rYjNkSnBqMDRJc3BPNndk?=
- =?utf-8?B?Sm9OTmhySDJMYzI1RkdqTVlTSXJ5TGtYT1NHdXFyTm93OExCZ0Uwdi9OTTM1?=
- =?utf-8?B?SmtET0w3MG0zUHkzU015N1MyR0dFRkhmRlN2L29DamdGdjRUd3FZcEhTMGxj?=
- =?utf-8?B?bTV1a3BWSGtESmo1MjJocFIwaXl4M0NRWEFwaHN5dFZ0eUZmT2tndS93Ukd0?=
- =?utf-8?B?RXkvVTNWRkVRMmdtcWw3b2dMNVNSQlNnSnJmUFFnTXFSVVFzREhTUWRIYm4z?=
- =?utf-8?B?RTRNVTg0SjMvYXVjNDVXaG11OURFRGQzcUlaU1NPcXhObjJEMzZ1bnBjSUgw?=
- =?utf-8?B?SVc1SnROZWRjNS94eUhxYWFPbllOUDNDbWdrNlpWcHQ5MjZiU2p2TnBlN2xB?=
- =?utf-8?B?TFV2V0FwSnRQTlJmSE9BVlhJZVFiajAzT1Zpc0Z0aVFKZHhDckdBVkxZN2ly?=
- =?utf-8?B?c2tETmtESlZhNmVxVmc3ZVNKYlpycTZqbU1sZVdPWmhaTHRvdUpCVUlOdEJ1?=
- =?utf-8?B?aWFkSjJGbUFVcHh1ME1VZ1B4WGVFalhxTnVjQ0dlYTg1TVpscS8yK1B2bHJq?=
- =?utf-8?B?NVA5N2Q0ZU1VS2I4VHVtaFJYOW15bS9XSWpZdC93UFhrTmlKcERyUHhLZHVU?=
- =?utf-8?B?RGwwT0l2M0hsaVZTSUJiYkRiY3dpSFFoMVBic1g1WmJ1bk1abkFiWjZZajZm?=
- =?utf-8?B?dUpJNW9aNmRBd01qYjRCMFVQTDNiOTVrMHUvQlBhOUpUR0NUUUN3aEJqMWtH?=
- =?utf-8?B?ZXVPTnFtc1lla1hlZUFBaENYaTVqQW5zRnhhejdvUEhiYkZ1bFdFRXNuNVR4?=
- =?utf-8?B?WE43Vis3S3BVUjIxMnNLaE9QSm96d1M2MjU3LzkwZ2pDM2gwRnJZc2U1SFE4?=
- =?utf-8?B?TElyL1JtNEZaTnpNNk5HSU5iRXphTzNVMTZPVWZGTVdrWjlGelpvQkJvbU1h?=
- =?utf-8?B?RTEzSGh4b1JkYTNQMzBpcUllY3dWR2JXcEE4RUMxdzZyN3ZpSTlJUDdQeGcy?=
- =?utf-8?B?MG5yWENwbmxldmovdWtwSlRlQjRWT0w4M3RoVmluZUpZSEdpODllRFpxWk52?=
- =?utf-8?B?ZGRzL3paSWxLZXo2MEpTNW13aHhMVlhBVzI3cXk0MndHa1BxZnQrcldkVFA2?=
- =?utf-8?B?d3JSN0F1WlpWL21MdlFld2FBZ2x6QTNpOGNhZjBaeFVMWHUzQnJjclJOc1h1?=
- =?utf-8?B?eWJ2NTFycHNKT1VTM2cwdmQzNGljUUdvd2ZHaDNDSWdLSjJXa01mREVlYjJB?=
- =?utf-8?B?Umd2NGo3WmhSaUZ0SG91TTAycXpnbktrWHZYQ21TSXJoN01IRmlGTWFIOGtx?=
- =?utf-8?B?cGpyeENYb1lwT0FSUmVtWEQzSGZ4MDVkUm1ybHBTcDVuNDdOV0hpYThvb0wx?=
- =?utf-8?B?UFhKbUh3R3p6cHc3Y3ZyUHlPSnVvNXcwS2VMczdoVENEUzl3aVVXOTVTVGZQ?=
- =?utf-8?B?V3Z6aHowaG9YUitWUVJiSU9DNEkvOExrR2ZsWGpTUjd1bHFia0Zkajl0YjFs?=
- =?utf-8?B?UHZWZkxqSnJ0RDljcW5ERFdDS0hEYW9FNUc5eTVNWFBiWlNoZGMzQU94SGFQ?=
- =?utf-8?B?T09zV0xNaVBVY2FzejRZT0FiSUYwak5JTEhTMXp0aXlzOWRtb1d0RDIxdXVQ?=
- =?utf-8?B?UXJZWDBmRzlmZEt5QVZ0aTJXczFzVEUyRlpReGxyT2pYNTh1b0R6ckhPdys5?=
- =?utf-8?B?TTR6YjI1OW02RXNRc1YzT0huS1VFOVNXeDg1bkYvNnV5NlBUQU56QVNHOW5v?=
- =?utf-8?B?YjNRZDUrQ3Iranpmd1FKeUFDS2ZvanYxSGR2Vk5QZ0lTTWtGTkFzVGNhZGxx?=
- =?utf-8?B?NFBBNm1uRWdwanpFN3NQWHdPT0N3NEYwK1JvQXhHNlNhMDl4Ty8yYk9JT3o4?=
- =?utf-8?B?TkZISEVxWUp6ZmF4RFR0OVQ0OHVPZWE2Y0NYRElJUm5nYm1wRVdGN1BHYlF5?=
- =?utf-8?B?Rzl1bExUenhycTRNYWlIQVpKdTVBc3Z1TkZXRkYvbDkrQnhWVVkwZUQ2R2xI?=
- =?utf-8?B?YWF1Tzc4SU15U0x4aUUvZlVyS2p5Q1docHBUc0VuTmVkaVVCYjNqMm1hOS9E?=
- =?utf-8?Q?jG6GN0ygTXs+amzz4YKxkKA=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <960FD4AF22505F4FB6E6695F654E4566@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=eq83lzKJ;
+ spf=permerror,
+ err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
+ invalid domain name (domain: windriver.com, ip: 205.220.178.238,
+ mailfrom: prvs=6264493283=changqing.li@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
+ 28M1BA09008008
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 22 Sep 2022 01:35:14 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+ h=from : to :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=PPS06212021;
+ bh=RDjvwPaN8fr420bHN6KpSDB8194gO470wohvf7IwXgY=;
+ b=eq83lzKJ3Z1BAoWKuvVEsnaDdOC2eEL50eIqnbKeCaO7ziPxUfYk5xo5k0iScPmqWCAb
+ gka9wib9FvCujewcZIP8ZH6JX7lfFuX2IQFnX/DbgjZsT8Hu/T3iB4Y3QTEYhWvx9ubL
+ zKRdjU6L9OwAFBbuf6UYkRemvR91POcz/CXTvWfk998FTudaKlab312vyw7Ri/aMqBoy
+ rExY9rzMR1jqaaDYbAMBTdSLAtsZwg7u8Rzmm1ay4lh8uyj/blT4m8dcdGJvoAAZeZF1
+ 9YeorYPsvCZ5Zez6kBSKkl8/zLHFqQelxx1+T285Zc1wwCpfnpSs/iJ1jzL3LvNgWWYG lg==
+Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com
+ [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3jn3f1c2nc-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+ Thu, 22 Sep 2022 01:35:13 +0000
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Wed, 21 Sep 2022 18:35:12 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.27; Wed, 21 Sep 2022 18:35:11 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2242.12 via Frontend Transport; Wed, 21 Sep 2022 18:35:11 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [kirkstone][PATCH] postgresql: fix CVE-2022-2625
+Date: Thu, 22 Sep 2022 09:35:10 +0800
+Message-ID: <20220922013510.3176274-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-OriginatorOrg: gossenmetrawatt.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: VE1PR08MB5583.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- a138b7b6-0935-4e72-72a3-08da9bd848e3
-X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Sep 2022 13:50:46.4297
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 927cd455-6160-4d75-86b6-a6892a3b5317
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 
- 6cATIxuZ8x04q3CovaIx8PFy+KtP2AC5/o6y738jiEM+gf3RVCMRBI6Dh72rP6pwGGYlE071isrKYK92WyUQqSOi1Ks+bdBsCmNOlAx6kNeuJL2KwVOPIPt44AAM/ZXo
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB6491
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: nOLZzHsRnkW_EkS3wduU5XaAqLRHSnkM
+X-Proofpoint-GUID: nOLZzHsRnkW_EkS3wduU5XaAqLRHSnkM
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
+ definitions=2022-09-21_13,2022-09-20_02,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 phishscore=0
+ clxscore=1011 priorityscore=1501 adultscore=0 lowpriorityscore=0
+ mlxlogscore=999 suspectscore=0 spamscore=0 impostorscore=0 malwarescore=0
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2209130000 definitions=main-2209220007
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 21 Sep 2022 13:51:12 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 Sep 2022 01:35:23 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98916
+ https://lists.openembedded.org/g/openembedded-devel/message/98917
 
-QW0gU2Ftc3RhZywgZGVtIDE3LjA5LjIwMjIgdW0gMDg6MTAgLTA3MDAgc2NocmllYiBLaGVtIFJh
-ajoNCj4gT24gU2F0LCBTZXAgMTcsIDIwMjIgYXQgNzo1NSBBTSBLaGVtIFJhaiA8cmFqLmtoZW1A
-Z21haWwuY29tPiB3cm90ZToNCj4gPiBPbiBTYXQsIFNlcCAxNywgMjAyMiBhdCAxOjQ4IEFNIE1l
-eWVyLCBXb2xmZ2FuZw0KPiA+IDxXb2xmZ2FuZy5NZXllckBnb3NzZW5tZXRyYXdhdHQuY29tPiB3
-cm90ZToNCj4gPiA+IEFtIEZyZWl0YWcsIGRlbSAxNi4wOS4yMDIyIHVtIDEyOjEwIC0wNzAwIHNj
-aHJpZWIgS2hlbSBSYWo6DQo+ID4gPiA+IENhbiB5b3UgcmViYXNlIHRoaXMgc2VyaWVzIG9uIHRv
-cCBvZiBtYXN0ZXItbmV4dCBhbmQgcmVzZW5kDQo+ID4gPiA+IHBsZWFzZS4NCj4gPiA+ID4NCj4g
-PiA+DQo+ID4gPiBJbiBvcmRlciB0byBnZXQgdGhpcyByaWdodCBmb3IgdGhlIGZ1dHVyZTogaXMg
-dGhpcyB0aGUgZGVmYXVsdA0KPiA+ID4gcHJvY2VkdXJlIHdoZW4gc2VuZGluZyBwYXRjaGVzPw0K
-PiA+DQo+ID4gdXN1YWxseSBwYXRjaGVzIGFnYWluc3QgbWFzdGVyIGFyZSBmaW5lLCBvY2Nhc2lv
-bmFsbHkgdGhlcmUgYXJlDQo+ID4gY29uZmxpY3QNCj4gPiB3aGVyZSBpdCBtYWtlIG15IGxpZmUg
-ZWFzaWVyIGlmIEkgYXNrIHN1Ym1pdHRlciB0byByZWJhc2Ugb24NCj4gPiBtYXN0ZXItbmV4dA0K
-PiA+IG1hc3Rlci1uZXh0IGlzIHRoZSBpbnRlZ3JhdGlvbiBicmFuY2ggdGhhdCBJIHVzZSBmb3Ig
-dGVzdGluZyBhbmQNCj4gPiBzdGFnaW5nDQo+ID4gc3VibWl0dGVkIHBhdGNoZXMuDQo+DQo+IHdl
-bGwgdGhlIHByb2JsZW0gbWlnaHQgYmUgdGhhdCB0aGVzZSBwYXRjaGVzIGFyZSBzb21laG93IGdl
-dHRpbmcNCj4gY29ycnVwdGVkDQo+IEkgdHJpZWQgdG8gYXBwbHkgdGhlIHYyIHNlcmllcyBhbmQg
-SSBnZXQNCj4NCj4gcGF0Y2hpbmcgZmlsZSBtZXRhLW9lL3JlY2lwZXMtZ3JhcGhpY3MvZmJpZGEv
-ZmJpZGFfZ2l0LmJiIChyZW5hbWVkDQo+IGZyb20gbWV0YS1vZS9yZWNpcGVzLWdyYXBoaWNzL2Zi
-aWRhL2ZiaWRhXzIuMTQuYmIpDQo+IHBhdGNoOiAqKioqIG1hbGZvcm1lZCBwYXRjaCBhdCBsaW5l
-IDE2NjogOSINCj4NCj4gQ291bGQgeW91IHRyeSBhcHBseWluZyB0aGVzZSBwYXRjaGVzIGluIGEg
-dGVzdCBzYW5kYm94IGFmdGVyDQo+IGRvd25sb2FkaW5nIGZyb20gbWwgb3IgcGF0Y2hld29yayBh
-bmQgc2VlIGlmIGl0IHdvcmtpbmcgZm9yIHlvdSA/DQo+IGh0dHBzOi8vcGF0Y2h3b3JrLnlvY3Rv
-cHJvamVjdC5vcmcvcHJvamVjdC9vZS9wYXRjaC8yMDIyMDkxNzA4NDQ1OS4xNzkzMy0xLVdvbGZn
-YW5nLk1leWVyQGdvc3Nlbm1ldHJhd2F0dC5jb20vDQoNCg0KSSBjYW4gcmVwcm9kdWNlIHRoZSBw
-cm9ibGVtIHdpdGggdGhlIHBhdGNoZXMgZnJvbSBwYXRjaHdvcmsuIEl0IHNlZW1zDQp0aGF0IG91
-ciBtYWlsc2VydmVyIGlzIGNoYW5naW5nIHRoZSBjb250ZW50IG9mIHRoZSBzZW50IG1haWxzIHdp
-dGgNCnJlc3BlY3QgdG8gdGhlIHdoaXRlc3BhY2UsIHJlbmRlcmluZyB0aGUgcGF0Y2hlcyB1bnVz
-YWJsZS4gSSBhc2tlZCB0aGUNCmNvbXBhbnkgdGhhdCBzdXBwb3J0cyBvdXIgWW9jdG8vb3BlbmVt
-YmVkZGVkIHJlbGF0ZWQgcHJvamVjdCB0byBzdWJtaXQNCnRoZXNlIHBhdGNoZXMgdmlhIHRoZWly
-IGluZnJhc3RydWN0dXJlLiBUaGVuIHRoZXkgY2FuIGhvcGVmdWxseSBiZWVuDQppbnRlZ3JhdGVk
-IHN1Y2Nlc3NmdWxseS4NCg0KDQo+DQo+ID4gPiA+IE9uIEZyaSwgU2VwIDE2LCAyMDIyIGF0IDEw
-OjIzIEFNIFdvbGZnYW5nIE1leWVyDQo+ID4gPiA+IDx3b2xmZ2FuZy5tZXllckBnb3NzZW5tZXRy
-YXdhdHQuY29tPiB3cm90ZToNCj4gPiA+ID4gPiBmYmlkYSBoYXMgbm90IHNlZW4gYW55IHZlcnNp
-b25lZCByZWxlYXNlcyBmb3IgZml2ZSB5ZWFycyBldmVuDQo+ID4gPiA+ID4gdGhvdWdoDQo+ID4g
-PiA+ID4gaGFzIG5vdCBzdGFsbGVkLiBVcGRhdGUgdG8gbGF0ZXN0IGNvbW1pdCB0aGF0IGJ1aWxk
-cyB3aXRoIHRoZQ0KPiA+ID4gPiA+IGxlZ2FjeSBnbnVtYWtlDQo+ID4gPiA+ID4gc3R5bGUgYnVp
-bGQgc3lzdGVtIChbMjAxOS0wMS0yNF0gYWM5MDA1YmYwKS4NCj4gPiA+ID4gPg0KPiA+ID4gPiA+
-IFN1cHBvcnQgZm9yIGxpcmMsIGN1cmwsIHNhbmUsIGFuZCBjYWlyby1nbCBoYXMgYmVlbiBkcm9w
-cGVkLA0KPiA+ID4gPiA+IHRoZQ0KPiA+ID4gPiA+IGNvcnJlc3BvbmRpbmcNCj4gPiA+ID4gPiBw
-YWNrYWdlY29uZmlncyBhbmQgZGVwZW5kZW5jaWVzIHdlcmUgcmVtb3ZlZCBmcm9tIHRoZSByZWNp
-cGUuDQo+ID4gPiA+ID4gRGVwZW5kZW5jaWVzIHRvDQo+ID4gPiA+ID4gbGliaW5wdXQgYW5kIHVk
-ZXYgaGF2ZSBiZWVuIGFkZGVkLg0KPiA+ID4gPiA+DQo+ID4gPiA+ID4gU2lnbmVkLW9mZi1ieTog
-V29sZmdhbmcgTWV5ZXIgPA0KPiA+ID4gPiA+IFdvbGZnYW5nLk1leWVyQGdvc3Nlbm1ldHJhd2F0
-dC5jb20+DQo+ID4gPiA+ID4gLS0tDQo+ID4gPiA+ID4gIC4uLi9mYmlkYS97ZmJpZGFfMi4xNC5i
-YiA9PiBmYmlkYV9naXQuYmJ9ICAgICB8IDM4ICsrKysrKysNCj4gPiA+ID4gPiAtLS0tLS0NCj4g
-PiA+ID4gPiAtLS0tLS0NCj4gPiA+ID4gPiAgLi4uL2ZiaWRhL2ZpbGVzL2NhaXJvLXdlYWstZGV0
-ZWN0LnBhdGNoICAgICAgIHwgMTcgLS0tLS0tLS0tDQo+ID4gPiA+ID4gIDIgZmlsZXMgY2hhbmdl
-ZCwgMTQgaW5zZXJ0aW9ucygrKSwgNDEgZGVsZXRpb25zKC0pDQo+ID4gPiA+ID4gIHJlbmFtZSBt
-ZXRhLW9lL3JlY2lwZXMtZ3JhcGhpY3MvZmJpZGEve2ZiaWRhXzIuMTQuYmIgPT4NCj4gPiA+ID4g
-PiBmYmlkYV9naXQuYmJ9ICg2MyUpDQo+ID4gPiA+ID4gIGRlbGV0ZSBtb2RlIDEwMDY0NCBtZXRh
-LW9lL3JlY2lwZXMtDQo+ID4gPiA+ID4gZ3JhcGhpY3MvZmJpZGEvZmlsZXMvY2Fpcm8tDQo+ID4g
-PiA+ID4gd2Vhay1kZXRlY3QucGF0Y2gNCj4gPiA+ID4gPg0KPiA+ID4gPiA+IGRpZmYgLS1naXQg
-YS9tZXRhLW9lL3JlY2lwZXMtZ3JhcGhpY3MvZmJpZGEvZmJpZGFfMi4xNC5iYg0KPiA+ID4gPiA+
-IGIvbWV0YS0NCj4gPiA+ID4gPiBvZS9yZWNpcGVzLWdyYXBoaWNzL2ZiaWRhL2ZiaWRhX2dpdC5i
-Yg0KPiA+ID4gPiA+IHNpbWlsYXJpdHkgaW5kZXggNjMlDQo+ID4gPiA+ID4gcmVuYW1lIGZyb20g
-bWV0YS1vZS9yZWNpcGVzLWdyYXBoaWNzL2ZiaWRhL2ZiaWRhXzIuMTQuYmINCj4gPiA+ID4gPiBy
-ZW5hbWUgdG8gbWV0YS1vZS9yZWNpcGVzLWdyYXBoaWNzL2ZiaWRhL2ZiaWRhX2dpdC5iYg0KPiA+
-ID4gPiA+IGluZGV4IDNkNjUzOTljZC4uYWFkYWFmNTdlIDEwMDY0NA0KPiA+ID4gPiA+IC0tLSBh
-L21ldGEtb2UvcmVjaXBlcy1ncmFwaGljcy9mYmlkYS9mYmlkYV8yLjE0LmJiDQo+ID4gPiA+ID4g
-KysrIGIvbWV0YS1vZS9yZWNpcGVzLWdyYXBoaWNzL2ZiaWRhL2ZiaWRhX2dpdC5iYg0KPiA+ID4g
-PiA+IEBAIC0xLDIzICsxLDI1IEBADQo+ID4gPiA+ID4gIFNVTU1BUlkgPSAiRnJhbWVidWZmZXIg
-aW1hZ2UgYW5kIGRvYyB2aWV3ZXIgdG9vbHMiDQo+ID4gPiA+ID4gIERFU0NSSVBUSU9OID0gIlRo
-ZSBmYmlkYSBwcm9qZWN0IGNvbnRhaW5zIGEgZmV3IGFwcGxpY2F0aW9ucw0KPiA+ID4gPiA+IGZv
-cg0KPiA+ID4gPiA+IHZpZXdpbmcgYW5kIGVkaXRpbmcgaW1hZ2VzLCBcDQo+ID4gPiA+ID4gLSAg
-ICAgICAgICAgICAgIHdpdGggdGhlIG1haW4gZm9jdXMgYmVpbmcgcGhvdG9zLiINCj4gPiA+ID4g
-PiAtSE9NRVBBR0UgPSAiaHR0cDovL2xpbnV4LmJ5dGVzZXgub3JnL2ZiaWRhLyINCj4gPiA+ID4g
-PiArd2l0aCB0aGUgbWFpbiBmb2N1cyBiZWluZyBwaG90b3MuIg0KPiA+ID4gPiA+ICtIT01FUEFH
-RSA9ICJodHRwczovL3d3dy5rcmF4ZWwub3JnL2Jsb2cvbGludXgvZmJpZGEvIg0KPiA+ID4gPiA+
-ICBBVVRIT1IgPSAiR2VyZCBIb2ZmbWFubiINCj4gPiA+ID4gPiAgU0VDVElPTiA9ICJ1dGlscyIN
-Cj4gPiA+ID4gPg0KPiA+ID4gPiA+ICBMSUNFTlNFID0gIkdQTC0yLjAtb25seSINCj4gPiA+ID4g
-PiAgTElDX0ZJTEVTX0NIS1NVTSA9DQo+ID4gPiA+ID4gImZpbGU6Ly9DT1BZSU5HO21kNT1lOGZl
-Yjc4YTMyOTUwYTkwOTYyMWJiYjUxZjYzNGIzOSINCj4gPiA+ID4gPg0KPiA+ID4gPiA+IC1ERVBF
-TkRTID0gInZpcnR1YWwvbGliaWNvbnYganBlZyBmb250Y29uZmlnIGZyZWV0eXBlIGxpYmV4aWYN
-Cj4gPiA+ID4gPiBsaWJkcm0gcGl4bWFuIHBvcHBsZXIgbGliZXBveHkgY2Fpcm8iDQo+ID4gPiA+
-ID4gK0RFUEVORFMgPSAidmlydHVhbC9saWJpY29udiBqcGVnIGZvbnRjb25maWcgZnJlZXR5cGUg
-bGliZXhpZg0KPiA+ID4gPiA+IGxpYmRybSBwaXhtYW4gdWRldiBsaWJpbnB1dCBwb3BwbGVyIGxp
-YmVwb3h5IGNhaXJvIg0KPiA+ID4gPiA+DQo+ID4gPiA+ID4gLVNSQ19VUkkgPSAiDQo+ID4gPiA+
-ID4gaHR0cHM6Ly93d3cua3JheGVsLm9yZy9yZWxlYXNlcy9mYmlkYS9mYmlkYS0ke1BWfS50YXIu
-Z3ogXA0KPiA+ID4gPiA+IC0gICAgICAgICAgZmlsZTovLzAwMDEtQXZvaWQtdXNpbmctaG9zdC1w
-YXRoLnBhdGNoIFwNCj4gPiA+ID4gPiAtICAgICAgICAgIGZpbGU6Ly9maXgtcHJlcHJvY2Vzc29y
-LnBhdGNoIFwNCj4gPiA+ID4gPiAtICAgICAgICAgICBmaWxlOi8vc3VwcG9ydC1qcGVnLXR1cmJv
-LnBhdGNoIFwNCj4gPiA+ID4gPiAtICAgICAgICAgICBmaWxlOi8vY2Fpcm8td2Vhay1kZXRlY3Qu
-cGF0Y2ggXA0KPiA+ID4gPiA+IC0gICAgICAgICAgIGZpbGU6Ly9mYmlkYS1nY2MxMC5wYXRjaCBc
-DQo+ID4gPiA+ID4gLSAgICAgICAgICAiDQo+ID4gPiA+ID4gLVNSQ19VUklbc2hhMjU2c3VtXSA9
-DQo+ID4gPiA+ID4gIjk1YjdjMDE1NTZjYjZlZjk4MTlmMzU4YjMxNGRkZmViOGE0Y2JlODYyYjUy
-MWEzZWQ2MmYwM2QxNjMxNQ0KPiA+ID4gPiA+IDQ0MzgiDQo+ID4gPiA+ID4gK1BWID0gIjIuMTQr
-Z2l0JHtTUkNQVn0iDQo+ID4gPiA+ID4gK1NSQ19VUkkgPSAiXA0KPiA+ID4gPiA+ICsgICAgICAg
-IGdpdDovL2dpdGh1Yi5jb20va3JheGVsL2ZiaWRhO3Byb3RvY29sPWh0dHBzO2JyYW5jaD0NCj4g
-PiA+ID4gPiBtYXN0ZXINCj4gPiA+ID4gPiAgICAgICBcDQo+ID4gPiA+ID4gKyAgICAgICAgZmls
-ZTovLzAwMDEtQXZvaWQtdXNpbmctaG9zdC0NCj4gPiA+ID4gPiBwYXRoLnBhdGNoICAgICAgICAg
-ICAgICAgICAgICAgICAgIFwNCj4gPiA+ID4gPiArICAgICAgICBmaWxlOi8vZml4LQ0KPiA+ID4g
-PiA+IHByZXByb2Nlc3Nvci5wYXRjaCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-XA0KPiA+ID4gPiA+ICsgICAgICAgIGZpbGU6Ly9zdXBwb3J0LWpwZWctDQo+ID4gPiA+ID4gdHVy
-Ym8ucGF0Y2ggICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcDQo+ID4gPiA+ID4gKyAg
-ICAgICAgZmlsZTovL2ZiaWRhLQ0KPiA+ID4gPiA+IGdjYzEwLnBhdGNoICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIFwNCj4gPiA+ID4gPiArIg0KPiA+ID4gPiA+ICtTUkNS
-RVYgPSAiYWM5MDA1YmYwYmJmNTBmMTRkYzFiMzY4YmU1MDg0YzhlMDUxMGE1ZCINCj4gPiA+ID4g
-PiArUyA9ICIke1dPUktESVJ9L2dpdCINCj4gPiA+ID4gPg0KPiA+ID4gPiA+ICBpbmhlcml0IHBr
-Z2NvbmZpZyBmZWF0dXJlc19jaGVjaw0KPiA+ID4gPiA+DQo+ID4gPiA+ID4gQEAgLTI2LDE4ICsy
-OCwxMiBAQCBSRVFVSVJFRF9ESVNUUk9fRkVBVFVSRVMgPSAib3BlbmdsIg0KPiA+ID4gPiA+DQo+
-ID4gPiA+ID4gIEVYVFJBX09FTUFLRSA9ICJTVFJJUD0gJ3NyY2Rpcj0ke1N9JyAtZiAke1N9L0dO
-VW1ha2VmaWxlIg0KPiA+ID4gPiA+DQo+ID4gPiA+ID4gLVBBQ0tBR0VDT05GSUcgPz89ICJnaWYg
-cG5nIGN1cmwiDQo+ID4gPiA+ID4gLVBBQ0tBR0VDT05GSUdbY3VybF0gPSAiLCxjdXJsIg0KPiA+
-ID4gPiA+ICtQQUNLQUdFQ09ORklHID8/PSAiZ2lmIHBuZyINCj4gPiA+ID4gPiAgUEFDS0FHRUNP
-TkZJR1tnaWZdID0gIiwsZ2lmbGliIg0KPiA+ID4gPiA+ICBQQUNLQUdFQ09ORklHW3BuZ10gPSAi
-LCxsaWJwbmciDQo+ID4gPiA+ID4gIFBBQ0tBR0VDT05GSUdbdGlmZl0gPSAiLCx0aWZmIg0KPiA+
-ID4gPiA+ICBQQUNLQUdFQ09ORklHW21vdGlmXSA9ICIsLGxpYngxMSBsaWJ4ZXh0IGxpYnhwbSBs
-aWJ4dA0KPiA+ID4gPiA+IG9wZW5tb3RpZiINCj4gPiA+ID4gPiAgUEFDS0FHRUNPTkZJR1t3ZWJw
-XSA9ICIsLGxpYndlYnAiDQo+ID4gPiA+ID4gLVBBQ0tBR0VDT05GSUdbbGlyY10gPSAiLCxsaXJj
-Ig0KPiA+ID4gPiA+IC0jIFRoaXMgY2FuIG9ubHkgYmUgZW5hYmxlZCB3aGVuIGNhaXJvIGhhcyBl
-Z2wgZW5hYmxlZCBpbiBpdHMNCj4gPiA+ID4gPiBwYWNrYWdlY29uZmlnIHN1cHBvcnQgdG9vDQo+
-ID4gPiA+ID4gLVBBQ0tBR0VDT05GSUdbZWdsXSA9ICIsLCINCj4gPiA+ID4gPiAtDQo+ID4gPiA+
-ID4gLUVYVFJBX09FTUFLRSArPSAiIiR7QGJiLnV0aWxzLmNvbnRhaW5zKCdQQUNLQUdFQ09ORklH
-JywNCj4gPiA+ID4gPiAnZWdsJywNCj4gPiA+ID4gPiAnSEFWRV9DQUlST19HTD15ZXMnLCAnSEFW
-RV9DQUlST19HTD1ubycsIGQpfSIiDQo+ID4gPiA+ID4NCj4gPiA+ID4gPiAgQ0ZMQUdTICs9ICIk
-e0BiYi51dGlscy5jb250YWlucygnRElTVFJPX0ZFQVRVUkVTJywgJ3gxMScsDQo+ID4gPiA+ID4g
-JycsICctDQo+ID4gPiA+ID4gREVHTF9OT19YMTE9MScsIGQpfSINCj4gPiA+ID4gPg0KPiA+ID4g
-PiA+IEBAIC00OCw5ICs0NCw2IEBAIGRvX2NvbXBpbGUoKSB7DQo+ID4gPiA+ID4NCj4gPiA+ID4g
-PiAgICAgICMgQmUgc3VyZSB0byByZXNwZWN0IHByZWZlcmVuY2VzIChmb3JjZSB0byAibm8iKQ0K
-PiA+ID4gPiA+ICAgICAgIyBBbHNvIGF2b2lkIGlzc3VlcyB3aGVuICR7QlVJTERfQVJDSH0gPT0g
-JHtIT1NUX0FSQ0h9DQo+ID4gPiA+ID4gLSAgICBpZiBbIC16ICIke0BiYi51dGlscy5maWx0ZXIo
-J1BBQ0tBR0VDT05GSUcnLCAnY3VybCcsDQo+ID4gPiA+ID4gZCl9IiBdOw0KPiA+ID4gPiA+IHRo
-ZW4NCj4gPiA+ID4gPiAtICAgICAgICBzZWQgLWkgLWUgJy9eSEFWRV9MSUJDVVJML3MvOj0uKiQv
-Oj0gbm8vJw0KPiA+ID4gPiA+ICR7U30vR05VbWFrZWZpbGUNCj4gPiA+ID4gPiAtICAgIGZpDQo+
-ID4gPiA+ID4gICAgICBpZiBbIC16ICIke0BiYi51dGlscy5maWx0ZXIoJ1BBQ0tBR0VDT05GSUcn
-LCAnZ2lmJywgZCl9Ig0KPiA+ID4gPiA+IF07DQo+ID4gPiA+ID4gdGhlbg0KPiA+ID4gPiA+ICAg
-ICAgICAgIHNlZCAtaSAtZSAnL15IQVZFX0xJQkdJRi9zLzo9LiokLzo9IG5vLycNCj4gPiA+ID4g
-PiAke1N9L0dOVW1ha2VmaWxlDQo+ID4gPiA+ID4gICAgICBmaQ0KPiA+ID4gPiA+IEBAIC02Niw5
-ICs1OSw2IEBAIGRvX2NvbXBpbGUoKSB7DQo+ID4gPiA+ID4gICAgICBpZiBbIC16ICIke0BiYi51
-dGlscy5maWx0ZXIoJ1BBQ0tBR0VDT05GSUcnLCAnd2VicCcsDQo+ID4gPiA+ID4gZCl9IiBdOw0K
-PiA+ID4gPiA+IHRoZW4NCj4gPiA+ID4gPiAgICAgICAgICBzZWQgLWkgLWUgJy9eSEFWRV9MSUJX
-RUJQL3MvOj0uKiQvOj0gbm8vJw0KPiA+ID4gPiA+ICR7U30vR05VbWFrZWZpbGUNCj4gPiA+ID4g
-PiAgICAgIGZpDQo+ID4gPiA+ID4gLSAgICBpZiBbIC16ICIke0BiYi51dGlscy5maWx0ZXIoJ1BB
-Q0tBR0VDT05GSUcnLCAnbGlyYycsDQo+ID4gPiA+ID4gZCl9IiBdOw0KPiA+ID4gPiA+IHRoZW4N
-Cj4gPiA+ID4gPiAtICAgICAgICBzZWQgLWkgLWUgJy9eSEFWRV9MSUJMSVJDL3MvOj0uKiQvOj0g
-bm8vJw0KPiA+ID4gPiA+ICR7U30vR05VbWFrZWZpbGUNCj4gPiA+ID4gPiAtICAgIGZpDQo+ID4g
-PiA+ID4NCj4gPiA+ID4gPiAgICAgIG9lX3J1bm1ha2UNCj4gPiA+ID4gPiAgfQ0KPiA+ID4gPiA+
-IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtZ3JhcGhpY3MvZmJpZGEvZmlsZXMvY2Fpcm8t
-d2Vhay0NCj4gPiA+ID4gPiBkZXRlY3QucGF0Y2ggYi9tZXRhLW9lL3JlY2lwZXMtZ3JhcGhpY3Mv
-ZmJpZGEvZmlsZXMvY2Fpcm8tDQo+ID4gPiA+ID4gd2Vhay0NCj4gPiA+ID4gPiBkZXRlY3QucGF0
-Y2gNCj4gPiA+ID4gPiBkZWxldGVkIGZpbGUgbW9kZSAxMDA2NDQNCj4gPiA+ID4gPiBpbmRleCBj
-N2M1NzljYzQuLjAwMDAwMDAwMA0KPiA+ID4gPiA+IC0tLSBhL21ldGEtb2UvcmVjaXBlcy1ncmFw
-aGljcy9mYmlkYS9maWxlcy9jYWlyby13ZWFrLQ0KPiA+ID4gPiA+IGRldGVjdC5wYXRjaA0KPiA+
-ID4gPiA+ICsrKyAvZGV2L251bGwNCj4gPiA+ID4gPiBAQCAtMSwxNyArMCwwIEBADQo+ID4gPiA+
-ID4gLU9FIGNvbmZpZ3VyZXMgY2Fpcm8gdG8gZGlzYWJsZSBFR0wgc3VwcG9ydCwgaG93ZXZlciBm
-YmlkYQ0KPiA+ID4gPiA+IGV4cGVjdHMNCj4gPiA+ID4gPiBjYWlybyB3aXRoIGVnbCBzdXBwb3J0
-DQo+ID4gPiA+ID4gLXRoaXMgcGF0Y2ggdGhlcmVmb3JlIG1ha2VzIGl0IHBvc3NpYmxlIHRvIHNl
-dCBIQVZFX0NBSVJPX0dMDQo+ID4gPiA+ID4gdmlhDQo+ID4gPiA+ID4gcmVjaXBlDQo+ID4gPiA+
-ID4gLQ0KPiA+ID4gPiA+IC1VcHN0cmVhbS1TdGF0dXM6IEluYXBwcm9wcmlhdGUgW09FLVNwZWNp
-ZmljXQ0KPiA+ID4gPiA+IC1TaWduZWQtb2ZmLWJ5OiBLaGVtIFJhaiA8cmFqLmtoZW1AZ21haWwu
-Y29tPg0KPiA+ID4gPiA+IC0NCj4gPiA+ID4gPiAtLS0tIGEvR05VbWFrZWZpbGUNCj4gPiA+ID4g
-PiAtKysrIGIvR05VbWFrZWZpbGUNCj4gPiA+ID4gPiAtQEAgLTY3LDcgKzY3LDcgQEAgZGVmaW5l
-IG1ha2UtY29uZmlnDQo+ID4gPiA+ID4gLSBMSUIgICAgICAgICAgIDo9ICQoTElCKQ0KPiA+ID4g
-PiA+IC0gUkVTRElSICAgICAgICAgICAgICAgIDo9ICQoY2FsbCBhY19yZXNkaXIpDQo+ID4gPiA+
-ID4gLSBIQVZFX0xJTlVYX0ZCX0ggICAgICAgOj0gJChjYWxsIGFjX2hlYWRlcixsaW51eC9mYi5o
-KQ0KPiA+ID4gPiA+IC0tSEFWRV9DQUlST19HTCA6PSAkKGNhbGwgYWNfcGtnX2NvbmZpZyxjYWly
-by1nbCkNCj4gPiA+ID4gPiAtK0hBVkVfQ0FJUk9fR0wgPz0gJChjYWxsIGFjX3BrZ19jb25maWcs
-Y2Fpcm8tZ2wpDQo+ID4gPiA+ID4gLSBIQVZFX0xJQlBDRCAgIDo9ICQoY2FsbCBhY19saWIscGNk
-X29wZW4scGNkKQ0KPiA+ID4gPiA+IC0gSEFWRV9MSUJHSUYgICA6PSAkKGNhbGwgYWNfbGliLERH
-aWZPcGVuRmlsZU5hbWUsZ2lmKQ0KPiA+ID4gPiA+IC0gSEFWRV9MSUJXRUJQICA6PSAkKGNhbGwg
-YWNfcGtnX2NvbmZpZyxsaWJ3ZWJwKQ0KPiA+ID4gPiA+IC0tDQo+ID4gPiA+ID4gMi4zNy4zDQo+
-ID4gPiA+ID4NCj4gPiA+ID4gPg0KPiA+ID4gPiA+IEdvc3NlbiBNZXRyYXdhdHQgR21iSA0KPiA+
-ID4gPiA+DQo+ID4gPiA+ID4gU8O8ZHdlc3RwYXJrIDE1DQo+ID4gPiA+ID4gOTA0NDkgTsO8cm5i
-ZXJnDQo+ID4gPiA+ID4gR2VybWFueQ0KPiA+ID4gPiA+DQo+ID4gPiA+ID4gaHR0cDovL3d3dy5n
-b3NzZW5tZXRyYXdhdHQuY29tDQo+ID4gPiA+ID4gQW10c2dlcmljaHQgTsO8cm5iZXJnIEhSQiAy
-NCA2MDIvVVN0LUlkTnIuIERFODE1MDAyNzY5DQo+ID4gPiA+ID4gR2VzY2jDpGZ0c2bDvGhyZXI6
-IE1hcmNlbCBIdXRrYSwgTWF0dGhpYXMgV2lzdA0KPiA+ID4gPiA+DQo+ID4gPiA+ID4gR29zc2Vu
-IE1ldHJhd2F0dCBHbWJIIGlzIGEgbWVtYmVyIG9mIEdNQyBJTlNUUlVNRU5UUy1Hcm91cA0KPiA+
-ID4gPiA+DQo+ID4gPiA+ID4gWw0KPiA+ID4gPiA+IGh0dHBzOi8vd3d3LmdtYy1pbnN0cnVtZW50
-cy5kZS9tZWRpYS9tYWlsZm9vdGVyL21haWxmb290ZXIuanBnXTxodHRwOi8vd3d3Lmdvc3Nlbm1l
-dHJhd2F0dC5jb20NCj4gPiA+ID4gPg0KPiA+ID4gPiA+DQo+ID4gPg0KPiA+ID4gR29zc2VuIE1l
-dHJhd2F0dCBHbWJIDQo+ID4gPg0KPiA+ID4gU8O8ZHdlc3RwYXJrIDE1DQo+ID4gPiA5MDQ0OSBO
-w7xybmJlcmcNCj4gPiA+IEdlcm1hbnkNCj4gPiA+DQo+ID4gPiBodHRwOi8vd3d3Lmdvc3Nlbm1l
-dHJhd2F0dC5jb20NCj4gPiA+IEFtdHNnZXJpY2h0IE7DvHJuYmVyZyBIUkIgMjQgNjAyL1VTdC1J
-ZE5yLiBERTgxNTAwMjc2OQ0KPiA+ID4gR2VzY2jDpGZ0c2bDvGhyZXI6IE1hcmNlbCBIdXRrYSwg
-TWF0dGhpYXMgV2lzdA0KPiA+ID4NCj4gPiA+IEdvc3NlbiBNZXRyYXdhdHQgR21iSCBpcyBhIG1l
-bWJlciBvZiBHTUMgSU5TVFJVTUVOVFMtR3JvdXANCj4gPiA+DQo+ID4gPiBbDQo+ID4gPiBodHRw
-czovL3d3dy5nbWMtaW5zdHJ1bWVudHMuZGUvbWVkaWEvbWFpbGZvb3Rlci9tYWlsZm9vdGVyLmpw
-Z108aHR0cDovL3d3dy5nb3NzZW5tZXRyYXdhdHQuY29tDQo+ID4gPiA+DQo+DQo+IC09LT0tPS09
-LT0tPS09LT0tPS09LT0tDQo+IExpbmtzOiBZb3UgcmVjZWl2ZSBhbGwgbWVzc2FnZXMgc2VudCB0
-byB0aGlzIGdyb3VwLg0KPiBWaWV3L1JlcGx5IE9ubGluZSAoIzk4ODUwKToNCj4gaHR0cHM6Ly9s
-aXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL21lc3NhZ2UvOTg4NTAN
-Cj4gTXV0ZSBUaGlzIFRvcGljOiBodHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvbXQvOTM3
-Mjc2OTcvNjk1MTU2Ng0KPiBHcm91cCBPd25lcjogb3BlbmVtYmVkZGVkLWRldmVsK293bmVyQGxp
-c3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gVW5zdWJzY3JpYmU6DQo+IGh0dHBzOi8vbGlzdHMub3Bl
-bmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC91bnN1Yg0KPiBbd29sZmdhbmcubWV5
-ZXJAZ29zc2VubWV0cmF3YXR0LmNvbV0NCj4gLT0tPS09LT0tPS09LT0tPS09LT0tPS0NCj4NCg0K
-R29zc2VuIE1ldHJhd2F0dCBHbWJIDQoNClPDvGR3ZXN0cGFyayAxNQ0KOTA0NDkgTsO8cm5iZXJn
-DQpHZXJtYW55DQoNCmh0dHA6Ly93d3cuZ29zc2VubWV0cmF3YXR0LmNvbQ0KQW10c2dlcmljaHQg
-TsO8cm5iZXJnIEhSQiAyNCA2MDIvVVN0LUlkTnIuIERFODE1MDAyNzY5DQpHZXNjaMOkZnRzZsO8
-aHJlcjogTWFyY2VsIEh1dGthLCBNYXR0aGlhcyBXaXN0DQoNCkdvc3NlbiBNZXRyYXdhdHQgR21i
-SCBpcyBhIG1lbWJlciBvZiBHTUMgSU5TVFJVTUVOVFMtR3JvdXANCg0KW2h0dHBzOi8vd3d3Lmdt
-Yy1pbnN0cnVtZW50cy5kZS9tZWRpYS9tYWlsZm9vdGVyL21haWxmb290ZXIuanBnXTxodHRwOi8v
-d3d3Lmdvc3Nlbm1ldHJhd2F0dC5jb20+DQo=
+From: Changqing Li <changqing.li@windriver.com>
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ .../postgresql/files/CVE-2022-2625-01.patch   | 935 ++++++++++++++++++
+ .../postgresql/files/CVE-2022-2625-02.patch   |  38 +
+ .../recipes-dbs/postgresql/postgresql_14.4.bb |   2 +
+ 3 files changed, 975 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625-01.patch
+ create mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625-02.patch
+
+diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625-01.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625-01.patch
+new file mode 100644
+index 0000000000..e8f2ffbc86
+--- /dev/null
++++ b/meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625-01.patch
+@@ -0,0 +1,935 @@
++From 2d3f438af1b7895d6a15a8238e2d7542229031d3 Mon Sep 17 00:00:00 2001
++From: Tom Lane <tgl@sss.pgh.pa.us>
++Date: Mon, 8 Aug 2022 11:12:31 -0400
++Subject: [PATCH 1/2] In extensions, don't replace objects not belonging to the
++ extension.
++
++Previously, if an extension script did CREATE OR REPLACE and there was
++an existing object not belonging to the extension, it would overwrite
++the object and adopt it into the extension.  This is problematic, first
++because the overwrite is probably unintentional, and second because we
++didn't change the object's ownership.  Thus a hostile user could create
++an object in advance of an expected CREATE EXTENSION command, and would
++then have ownership rights on an extension object, which could be
++modified for trojan-horse-type attacks.
++
++Hence, forbid CREATE OR REPLACE of an existing object unless it already
++belongs to the extension.  (Note that we've always forbidden replacing
++an object that belongs to some other extension; only the behavior for
++previously-free-standing objects changes here.)
++
++For the same reason, also fail CREATE IF NOT EXISTS when there is
++an existing object that doesn't belong to the extension.
++
++Our thanks to Sven Klemm for reporting this problem.
++
++Security: CVE-2022-2625
++
++CVE: CVE-2022-2625
++Upstream-Status: Backport [https://github.com/postgres/postgres/commit/b9b21acc766db54d8c337d508d0fe2f5bf2daab0]
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ doc/src/sgml/extend.sgml                      |  11 --
++ src/backend/catalog/pg_collation.c            |  49 ++++--
++ src/backend/catalog/pg_depend.c               |  77 +++++++--
++ src/backend/catalog/pg_operator.c             |   2 +-
++ src/backend/catalog/pg_type.c                 |   7 +-
++ src/backend/commands/createas.c               |  16 +-
++ src/backend/commands/foreigncmds.c            |  19 ++-
++ src/backend/commands/schemacmds.c             |  25 ++-
++ src/backend/commands/sequence.c               |   8 +
++ src/backend/commands/statscmds.c              |   4 +
++ src/backend/commands/view.c                   |  16 +-
++ src/backend/parser/parse_utilcmd.c            |  10 ++
++ src/include/catalog/dependency.h              |   2 +
++ src/test/modules/test_extensions/Makefile     |   5 +-
++ .../expected/test_extensions.out              | 153 ++++++++++++++++++
++ .../test_extensions/sql/test_extensions.sql   | 110 +++++++++++++
++ .../test_ext_cine--1.0--1.1.sql               |  26 +++
++ .../test_extensions/test_ext_cine--1.0.sql    |  25 +++
++ .../test_extensions/test_ext_cine.control     |   3 +
++ .../test_extensions/test_ext_cor--1.0.sql     |  20 +++
++ .../test_extensions/test_ext_cor.control      |   3 +
++ 21 files changed, 539 insertions(+), 52 deletions(-)
++ create mode 100644 src/test/modules/test_extensions/test_ext_cine--1.0--1.1.sql
++ create mode 100644 src/test/modules/test_extensions/test_ext_cine--1.0.sql
++ create mode 100644 src/test/modules/test_extensions/test_ext_cine.control
++ create mode 100644 src/test/modules/test_extensions/test_ext_cor--1.0.sql
++ create mode 100644 src/test/modules/test_extensions/test_ext_cor.control
++
++diff --git a/doc/src/sgml/extend.sgml b/doc/src/sgml/extend.sgml
++index e928894..bb0b267 100644
++--- a/doc/src/sgml/extend.sgml
+++++ b/doc/src/sgml/extend.sgml
++@@ -1319,17 +1319,6 @@ SELECT * FROM pg_extension_update_paths('<replaceable>extension_name</replaceabl
++       trusted if it depends on another one, unless that other one is always
++       installed in <literal>pg_catalog</literal>.
++      </para>
++-
++-     <para>
++-      Do <emphasis>not</emphasis> use <command>CREATE OR REPLACE
++-      FUNCTION</command>, except in an update script that must change the
++-      definition of a function that is known to be an extension member
++-      already.  (Likewise for other <literal>OR REPLACE</literal> options.)
++-      Using <literal>OR REPLACE</literal> unnecessarily not only has a risk
++-      of accidentally overwriting someone else's function, but it creates a
++-      security hazard since the overwritten function would still be owned by
++-      its original owner, who could modify it.
++-     </para>
++     </sect3>
++    </sect2>
++ 
++diff --git a/src/backend/catalog/pg_collation.c b/src/backend/catalog/pg_collation.c
++index 19068b6..b1137ca 100644
++--- a/src/backend/catalog/pg_collation.c
+++++ b/src/backend/catalog/pg_collation.c
++@@ -78,15 +78,25 @@ CollationCreate(const char *collname, Oid collnamespace,
++ 	 * friendlier error message.  The unique index provides a backstop against
++ 	 * race conditions.
++ 	 */
++-	if (SearchSysCacheExists3(COLLNAMEENCNSP,
++-							  PointerGetDatum(collname),
++-							  Int32GetDatum(collencoding),
++-							  ObjectIdGetDatum(collnamespace)))
+++	oid = GetSysCacheOid3(COLLNAMEENCNSP,
+++						  Anum_pg_collation_oid,
+++						  PointerGetDatum(collname),
+++						  Int32GetDatum(collencoding),
+++						  ObjectIdGetDatum(collnamespace));
+++	if (OidIsValid(oid))
++ 	{
++ 		if (quiet)
++ 			return InvalidOid;
++ 		else if (if_not_exists)
++ 		{
+++			/*
+++			 * If we are in an extension script, insist that the pre-existing
+++			 * object be a member of the extension, to avoid security risks.
+++			 */
+++			ObjectAddressSet(myself, CollationRelationId, oid);
+++			checkMembershipInCurrentExtension(&myself);
+++
+++			/* OK to skip */
++ 			ereport(NOTICE,
++ 					(errcode(ERRCODE_DUPLICATE_OBJECT),
++ 					 collencoding == -1
++@@ -116,16 +126,19 @@ CollationCreate(const char *collname, Oid collnamespace,
++ 	 * so we take a ShareRowExclusiveLock earlier, to protect against
++ 	 * concurrent changes fooling this check.
++ 	 */
++-	if ((collencoding == -1 &&
++-		 SearchSysCacheExists3(COLLNAMEENCNSP,
++-							   PointerGetDatum(collname),
++-							   Int32GetDatum(GetDatabaseEncoding()),
++-							   ObjectIdGetDatum(collnamespace))) ||
++-		(collencoding != -1 &&
++-		 SearchSysCacheExists3(COLLNAMEENCNSP,
++-							   PointerGetDatum(collname),
++-							   Int32GetDatum(-1),
++-							   ObjectIdGetDatum(collnamespace))))
+++	if (collencoding == -1)
+++		oid = GetSysCacheOid3(COLLNAMEENCNSP,
+++							  Anum_pg_collation_oid,
+++							  PointerGetDatum(collname),
+++							  Int32GetDatum(GetDatabaseEncoding()),
+++							  ObjectIdGetDatum(collnamespace));
+++	else
+++		oid = GetSysCacheOid3(COLLNAMEENCNSP,
+++							  Anum_pg_collation_oid,
+++							  PointerGetDatum(collname),
+++							  Int32GetDatum(-1),
+++							  ObjectIdGetDatum(collnamespace));
+++	if (OidIsValid(oid))
++ 	{
++ 		if (quiet)
++ 		{
++@@ -134,6 +147,14 @@ CollationCreate(const char *collname, Oid collnamespace,
++ 		}
++ 		else if (if_not_exists)
++ 		{
+++			/*
+++			 * If we are in an extension script, insist that the pre-existing
+++			 * object be a member of the extension, to avoid security risks.
+++			 */
+++			ObjectAddressSet(myself, CollationRelationId, oid);
+++			checkMembershipInCurrentExtension(&myself);
+++
+++			/* OK to skip */
++ 			table_close(rel, NoLock);
++ 			ereport(NOTICE,
++ 					(errcode(ERRCODE_DUPLICATE_OBJECT),
++diff --git a/src/backend/catalog/pg_depend.c b/src/backend/catalog/pg_depend.c
++index ae16d2f..07791b4 100644
++--- a/src/backend/catalog/pg_depend.c
+++++ b/src/backend/catalog/pg_depend.c
++@@ -166,22 +166,23 @@ recordMultipleDependencies(const ObjectAddress *depender,
++ 
++ /*
++  * If we are executing a CREATE EXTENSION operation, mark the given object
++- * as being a member of the extension.  Otherwise, do nothing.
+++ * as being a member of the extension, or check that it already is one.
+++ * Otherwise, do nothing.
++  *
++  * This must be called during creation of any user-definable object type
++  * that could be a member of an extension.
++  *
++- * If isReplace is true, the object already existed (or might have already
++- * existed), so we must check for a pre-existing extension membership entry.
++- * Passing false is a guarantee that the object is newly created, and so
++- * could not already be a member of any extension.
+++ * isReplace must be true if the object already existed, and false if it is
+++ * newly created.  In the former case we insist that it already be a member
+++ * of the current extension.  In the latter case we can skip checking whether
+++ * it is already a member of any extension.
++  *
++  * Note: isReplace = true is typically used when updating an object in
++- * CREATE OR REPLACE and similar commands.  The net effect is that if an
++- * extension script uses such a command on a pre-existing free-standing
++- * object, the object will be absorbed into the extension.  If the object
++- * is already a member of some other extension, the command will fail.
++- * This behavior is desirable for cases such as replacing a shell type.
+++ * CREATE OR REPLACE and similar commands.  We used to allow the target
+++ * object to not already be an extension member, instead silently absorbing
+++ * it into the current extension.  However, this was both error-prone
+++ * (extensions might accidentally overwrite free-standing objects) and
+++ * a security hazard (since the object would retain its previous ownership).
++  */
++ void
++ recordDependencyOnCurrentExtension(const ObjectAddress *object,
++@@ -199,6 +200,12 @@ recordDependencyOnCurrentExtension(const ObjectAddress *object,
++ 		{
++ 			Oid			oldext;
++ 
+++			/*
+++			 * Side note: these catalog lookups are safe only because the
+++			 * object is a pre-existing one.  In the not-isReplace case, the
+++			 * caller has most likely not yet done a CommandCounterIncrement
+++			 * that would make the new object visible.
+++			 */
++ 			oldext = getExtensionOfObject(object->classId, object->objectId);
++ 			if (OidIsValid(oldext))
++ 			{
++@@ -212,6 +219,13 @@ recordDependencyOnCurrentExtension(const ObjectAddress *object,
++ 								getObjectDescription(object, false),
++ 								get_extension_name(oldext))));
++ 			}
+++			/* It's a free-standing object, so reject */
+++			ereport(ERROR,
+++					(errcode(ERRCODE_OBJECT_NOT_IN_PREREQUISITE_STATE),
+++					 errmsg("%s is not a member of extension \"%s\"",
+++							getObjectDescription(object, false),
+++							get_extension_name(CurrentExtensionObject)),
+++					 errdetail("An extension is not allowed to replace an object that it does not own.")));
++ 		}
++ 
++ 		/* OK, record it as a member of CurrentExtensionObject */
++@@ -223,6 +237,49 @@ recordDependencyOnCurrentExtension(const ObjectAddress *object,
++ 	}
++ }
++ 
+++/*
+++ * If we are executing a CREATE EXTENSION operation, check that the given
+++ * object is a member of the extension, and throw an error if it isn't.
+++ * Otherwise, do nothing.
+++ *
+++ * This must be called whenever a CREATE IF NOT EXISTS operation (for an
+++ * object type that can be an extension member) has found that an object of
+++ * the desired name already exists.  It is insecure for an extension to use
+++ * IF NOT EXISTS except when the conflicting object is already an extension
+++ * member; otherwise a hostile user could substitute an object with arbitrary
+++ * properties.
+++ */
+++void
+++checkMembershipInCurrentExtension(const ObjectAddress *object)
+++{
+++	/*
+++	 * This is actually the same condition tested in
+++	 * recordDependencyOnCurrentExtension; but we want to issue a
+++	 * differently-worded error, and anyway it would be pretty confusing to
+++	 * call recordDependencyOnCurrentExtension in these circumstances.
+++	 */
+++
+++	/* Only whole objects can be extension members */
+++	Assert(object->objectSubId == 0);
+++
+++	if (creating_extension)
+++	{
+++		Oid			oldext;
+++
+++		oldext = getExtensionOfObject(object->classId, object->objectId);
+++		/* If already a member of this extension, OK */
+++		if (oldext == CurrentExtensionObject)
+++			return;
+++		/* Else complain */
+++		ereport(ERROR,
+++				(errcode(ERRCODE_OBJECT_NOT_IN_PREREQUISITE_STATE),
+++				 errmsg("%s is not a member of extension \"%s\"",
+++						getObjectDescription(object, false),
+++						get_extension_name(CurrentExtensionObject)),
+++				 errdetail("An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.")));
+++	}
+++}
+++
++ /*
++  * deleteDependencyRecordsFor -- delete all records with given depender
++  * classId/objectId.  Returns the number of records deleted.
++diff --git a/src/backend/catalog/pg_operator.c b/src/backend/catalog/pg_operator.c
++index 4c5a56c..5ec3221 100644
++--- a/src/backend/catalog/pg_operator.c
+++++ b/src/backend/catalog/pg_operator.c
++@@ -864,7 +864,7 @@ makeOperatorDependencies(HeapTuple tuple,
++ 
++ 	/* Dependency on extension */
++ 	if (makeExtensionDep)
++-		recordDependencyOnCurrentExtension(&myself, true);
+++		recordDependencyOnCurrentExtension(&myself, isUpdate);
++ 
++ 	return myself;
++ }
++diff --git a/src/backend/catalog/pg_type.c b/src/backend/catalog/pg_type.c
++index cdce22f..b37a8f0 100644
++--- a/src/backend/catalog/pg_type.c
+++++ b/src/backend/catalog/pg_type.c
++@@ -548,8 +548,11 @@ TypeCreate(Oid newTypeOid,
++  * rebuild should be true if this is a pre-existing type.  We will remove
++  * existing dependencies and rebuild them from scratch.  This is needed for
++  * ALTER TYPE, and also when replacing a shell type.  We don't remove any
++- * existing extension dependency, though (hence, if makeExtensionDep is also
++- * true and the type belongs to some other extension, an error will occur).
+++ * existing extension dependency, though; hence, if makeExtensionDep is also
+++ * true and we're in an extension script, an error will occur unless the
+++ * type already belongs to the current extension.  That's the behavior we
+++ * want when replacing a shell type, which is the only case where both flags
+++ * are true.
++  */
++ void
++ GenerateTypeDependencies(HeapTuple typeTuple,
++diff --git a/src/backend/commands/createas.c b/src/backend/commands/createas.c
++index 0982851..addf478 100644
++--- a/src/backend/commands/createas.c
+++++ b/src/backend/commands/createas.c
++@@ -393,11 +393,14 @@ bool
++ CreateTableAsRelExists(CreateTableAsStmt *ctas)
++ {
++ 	Oid			nspid;
+++	Oid			oldrelid;
+++	ObjectAddress address;
++ 	IntoClause *into = ctas->into;
++ 
++ 	nspid = RangeVarGetCreationNamespace(into->rel);
++ 
++-	if (get_relname_relid(into->rel->relname, nspid))
+++	oldrelid = get_relname_relid(into->rel->relname, nspid);
+++	if (OidIsValid(oldrelid))
++ 	{
++ 		if (!ctas->if_not_exists)
++ 			ereport(ERROR,
++@@ -405,7 +408,16 @@ CreateTableAsRelExists(CreateTableAsStmt *ctas)
++ 					 errmsg("relation \"%s\" already exists",
++ 							into->rel->relname)));
++ 
++-		/* The relation exists and IF NOT EXISTS has been specified */
+++		/*
+++		 * The relation exists and IF NOT EXISTS has been specified.
+++		 *
+++		 * If we are in an extension script, insist that the pre-existing
+++		 * object be a member of the extension, to avoid security risks.
+++		 */
+++		ObjectAddressSet(address, RelationRelationId, oldrelid);
+++		checkMembershipInCurrentExtension(&address);
+++
+++		/* OK to skip */
++ 		ereport(NOTICE,
++ 				(errcode(ERRCODE_DUPLICATE_TABLE),
++ 				 errmsg("relation \"%s\" already exists, skipping",
++diff --git a/src/backend/commands/foreigncmds.c b/src/backend/commands/foreigncmds.c
++index bc36311..901b8bc 100644
++--- a/src/backend/commands/foreigncmds.c
+++++ b/src/backend/commands/foreigncmds.c
++@@ -859,13 +859,22 @@ CreateForeignServer(CreateForeignServerStmt *stmt)
++ 	ownerId = GetUserId();
++ 
++ 	/*
++-	 * Check that there is no other foreign server by this name. Do nothing if
++-	 * IF NOT EXISTS was enforced.
+++	 * Check that there is no other foreign server by this name.  If there is
+++	 * one, do nothing if IF NOT EXISTS was specified.
++ 	 */
++-	if (GetForeignServerByName(stmt->servername, true) != NULL)
+++	srvId = get_foreign_server_oid(stmt->servername, true);
+++	if (OidIsValid(srvId))
++ 	{
++ 		if (stmt->if_not_exists)
++ 		{
+++			/*
+++			 * If we are in an extension script, insist that the pre-existing
+++			 * object be a member of the extension, to avoid security risks.
+++			 */
+++			ObjectAddressSet(myself, ForeignServerRelationId, srvId);
+++			checkMembershipInCurrentExtension(&myself);
+++
+++			/* OK to skip */
++ 			ereport(NOTICE,
++ 					(errcode(ERRCODE_DUPLICATE_OBJECT),
++ 					 errmsg("server \"%s\" already exists, skipping",
++@@ -1130,6 +1139,10 @@ CreateUserMapping(CreateUserMappingStmt *stmt)
++ 	{
++ 		if (stmt->if_not_exists)
++ 		{
+++			/*
+++			 * Since user mappings aren't members of extensions (see comments
+++			 * below), no need for checkMembershipInCurrentExtension here.
+++			 */
++ 			ereport(NOTICE,
++ 					(errcode(ERRCODE_DUPLICATE_OBJECT),
++ 					 errmsg("user mapping for \"%s\" already exists for server \"%s\", skipping",
++diff --git a/src/backend/commands/schemacmds.c b/src/backend/commands/schemacmds.c
++index 6c6ab9e..66306d1 100644
++--- a/src/backend/commands/schemacmds.c
+++++ b/src/backend/commands/schemacmds.c
++@@ -112,14 +112,25 @@ CreateSchemaCommand(CreateSchemaStmt *stmt, const char *queryString,
++ 	 * the permissions checks, but since CREATE TABLE IF NOT EXISTS makes its
++ 	 * creation-permission check first, we do likewise.
++ 	 */
++-	if (stmt->if_not_exists &&
++-		SearchSysCacheExists1(NAMESPACENAME, PointerGetDatum(schemaName)))
+++	if (stmt->if_not_exists)
++ 	{
++-		ereport(NOTICE,
++-				(errcode(ERRCODE_DUPLICATE_SCHEMA),
++-				 errmsg("schema \"%s\" already exists, skipping",
++-						schemaName)));
++-		return InvalidOid;
+++		namespaceId = get_namespace_oid(schemaName, true);
+++		if (OidIsValid(namespaceId))
+++		{
+++			/*
+++			 * If we are in an extension script, insist that the pre-existing
+++			 * object be a member of the extension, to avoid security risks.
+++			 */
+++			ObjectAddressSet(address, NamespaceRelationId, namespaceId);
+++			checkMembershipInCurrentExtension(&address);
+++
+++			/* OK to skip */
+++			ereport(NOTICE,
+++					(errcode(ERRCODE_DUPLICATE_SCHEMA),
+++					 errmsg("schema \"%s\" already exists, skipping",
+++							schemaName)));
+++			return InvalidOid;
+++		}
++ 	}
++ 
++ 	/*
++diff --git a/src/backend/commands/sequence.c b/src/backend/commands/sequence.c
++index 0415df9..9864998 100644
++--- a/src/backend/commands/sequence.c
+++++ b/src/backend/commands/sequence.c
++@@ -149,6 +149,14 @@ DefineSequence(ParseState *pstate, CreateSeqStmt *seq)
++ 		RangeVarGetAndCheckCreationNamespace(seq->sequence, NoLock, &seqoid);
++ 		if (OidIsValid(seqoid))
++ 		{
+++			/*
+++			 * If we are in an extension script, insist that the pre-existing
+++			 * object be a member of the extension, to avoid security risks.
+++			 */
+++			ObjectAddressSet(address, RelationRelationId, seqoid);
+++			checkMembershipInCurrentExtension(&address);
+++
+++			/* OK to skip */
++ 			ereport(NOTICE,
++ 					(errcode(ERRCODE_DUPLICATE_TABLE),
++ 					 errmsg("relation \"%s\" already exists, skipping",
++diff --git a/src/backend/commands/statscmds.c b/src/backend/commands/statscmds.c
++index 59e531b..6d8f482 100644
++--- a/src/backend/commands/statscmds.c
+++++ b/src/backend/commands/statscmds.c
++@@ -184,6 +184,10 @@ CreateStatistics(CreateStatsStmt *stmt)
++ 	{
++ 		if (stmt->if_not_exists)
++ 		{
+++			/*
+++			 * Since stats objects aren't members of extensions (see comments
+++			 * below), no need for checkMembershipInCurrentExtension here.
+++			 */
++ 			ereport(NOTICE,
++ 					(errcode(ERRCODE_DUPLICATE_OBJECT),
++ 					 errmsg("statistics object \"%s\" already exists, skipping",
++diff --git a/src/backend/commands/view.c b/src/backend/commands/view.c
++index 4df05a0..f24464d 100644
++--- a/src/backend/commands/view.c
+++++ b/src/backend/commands/view.c
++@@ -190,7 +190,7 @@ DefineVirtualRelation(RangeVar *relation, List *tlist, bool replace,
++ 		CommandCounterIncrement();
++ 
++ 		/*
++-		 * Finally update the view options.
+++		 * Update the view's options.
++ 		 *
++ 		 * The new options list replaces the existing options list, even if
++ 		 * it's empty.
++@@ -203,8 +203,22 @@ DefineVirtualRelation(RangeVar *relation, List *tlist, bool replace,
++ 		/* EventTriggerAlterTableStart called by ProcessUtilitySlow */
++ 		AlterTableInternal(viewOid, atcmds, true);
++ 
+++		/*
+++		 * There is very little to do here to update the view's dependencies.
+++		 * Most view-level dependency relationships, such as those on the
+++		 * owner, schema, and associated composite type, aren't changing.
+++		 * Because we don't allow changing type or collation of an existing
+++		 * view column, those dependencies of the existing columns don't
+++		 * change either, while the AT_AddColumnToView machinery took care of
+++		 * adding such dependencies for new view columns.  The dependencies of
+++		 * the view's query could have changed arbitrarily, but that was dealt
+++		 * with inside StoreViewQuery.  What remains is only to check that
+++		 * view replacement is allowed when we're creating an extension.
+++		 */
++ 		ObjectAddressSet(address, RelationRelationId, viewOid);
++ 
+++		recordDependencyOnCurrentExtension(&address, true);
+++
++ 		/*
++ 		 * Seems okay, so return the OID of the pre-existing view.
++ 		 */
++diff --git a/src/backend/parser/parse_utilcmd.c b/src/backend/parser/parse_utilcmd.c
++index 05e4fa8..ecd5871 100644
++--- a/src/backend/parser/parse_utilcmd.c
+++++ b/src/backend/parser/parse_utilcmd.c
++@@ -196,6 +196,16 @@ transformCreateStmt(CreateStmt *stmt, const char *queryString)
++ 	 */
++ 	if (stmt->if_not_exists && OidIsValid(existing_relid))
++ 	{
+++		/*
+++		 * If we are in an extension script, insist that the pre-existing
+++		 * object be a member of the extension, to avoid security risks.
+++		 */
+++		ObjectAddress address;
+++
+++		ObjectAddressSet(address, RelationRelationId, existing_relid);
+++		checkMembershipInCurrentExtension(&address);
+++
+++		/* OK to skip */
++ 		ereport(NOTICE,
++ 				(errcode(ERRCODE_DUPLICATE_TABLE),
++ 				 errmsg("relation \"%s\" already exists, skipping",
++diff --git a/src/include/catalog/dependency.h b/src/include/catalog/dependency.h
++index fd44081..242026b 100644
++--- a/src/include/catalog/dependency.h
+++++ b/src/include/catalog/dependency.h
++@@ -201,6 +201,8 @@ extern void recordMultipleDependencies(const ObjectAddress *depender,
++ extern void recordDependencyOnCurrentExtension(const ObjectAddress *object,
++ 											   bool isReplace);
++ 
+++extern void checkMembershipInCurrentExtension(const ObjectAddress *object);
+++
++ extern long deleteDependencyRecordsFor(Oid classId, Oid objectId,
++ 									   bool skipExtensionDeps);
++ 
++diff --git a/src/test/modules/test_extensions/Makefile b/src/test/modules/test_extensions/Makefile
++index 77ee4d5..452cae3 100644
++--- a/src/test/modules/test_extensions/Makefile
+++++ b/src/test/modules/test_extensions/Makefile
++@@ -4,11 +4,14 @@ MODULE = test_extensions
++ PGFILEDESC = "test_extensions - regression testing for EXTENSION support"
++ 
++ EXTENSION = test_ext1 test_ext2 test_ext3 test_ext4 test_ext5 test_ext6 \
++-            test_ext7 test_ext8 test_ext_cyclic1 test_ext_cyclic2 \
+++            test_ext7 test_ext8 test_ext_cine test_ext_cor \
+++            test_ext_cyclic1 test_ext_cyclic2 \
++             test_ext_evttrig
++ DATA = test_ext1--1.0.sql test_ext2--1.0.sql test_ext3--1.0.sql \
++        test_ext4--1.0.sql test_ext5--1.0.sql test_ext6--1.0.sql \
++        test_ext7--1.0.sql test_ext7--1.0--2.0.sql test_ext8--1.0.sql \
+++       test_ext_cine--1.0.sql test_ext_cine--1.0--1.1.sql \
+++       test_ext_cor--1.0.sql \
++        test_ext_cyclic1--1.0.sql test_ext_cyclic2--1.0.sql \
++        test_ext_evttrig--1.0.sql test_ext_evttrig--1.0--2.0.sql
++ 
++diff --git a/src/test/modules/test_extensions/expected/test_extensions.out b/src/test/modules/test_extensions/expected/test_extensions.out
++index 30ae621..821fed3 100644
++--- a/src/test/modules/test_extensions/expected/test_extensions.out
+++++ b/src/test/modules/test_extensions/expected/test_extensions.out
++@@ -159,3 +159,156 @@ RESET client_min_messages;
++ CREATE EXTENSION test_ext_evttrig;
++ ALTER EXTENSION test_ext_evttrig UPDATE TO '2.0';
++ DROP EXTENSION test_ext_evttrig;
+++-- It's generally bad style to use CREATE OR REPLACE unnecessarily.
+++-- Test what happens if an extension does it anyway.
+++-- Replacing a shell type or operator is sort of like CREATE OR REPLACE;
+++-- check that too.
+++CREATE FUNCTION ext_cor_func() RETURNS text
+++  AS $$ SELECT 'ext_cor_func: original'::text $$ LANGUAGE sql;
+++CREATE EXTENSION test_ext_cor;  -- fail
+++ERROR:  function ext_cor_func() is not a member of extension "test_ext_cor"
+++DETAIL:  An extension is not allowed to replace an object that it does not own.
+++SELECT ext_cor_func();
+++      ext_cor_func      
+++------------------------
+++ ext_cor_func: original
+++(1 row)
+++
+++DROP FUNCTION ext_cor_func();
+++CREATE VIEW ext_cor_view AS
+++  SELECT 'ext_cor_view: original'::text AS col;
+++CREATE EXTENSION test_ext_cor;  -- fail
+++ERROR:  view ext_cor_view is not a member of extension "test_ext_cor"
+++DETAIL:  An extension is not allowed to replace an object that it does not own.
+++SELECT ext_cor_func();
+++ERROR:  function ext_cor_func() does not exist
+++LINE 1: SELECT ext_cor_func();
+++               ^
+++HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+++SELECT * FROM ext_cor_view;
+++          col           
+++------------------------
+++ ext_cor_view: original
+++(1 row)
+++
+++DROP VIEW ext_cor_view;
+++CREATE TYPE test_ext_type;
+++CREATE EXTENSION test_ext_cor;  -- fail
+++ERROR:  type test_ext_type is not a member of extension "test_ext_cor"
+++DETAIL:  An extension is not allowed to replace an object that it does not own.
+++DROP TYPE test_ext_type;
+++-- this makes a shell "point <<@@ polygon" operator too
+++CREATE OPERATOR @@>> ( PROCEDURE = poly_contain_pt,
+++  LEFTARG = polygon, RIGHTARG = point,
+++  COMMUTATOR = <<@@ );
+++CREATE EXTENSION test_ext_cor;  -- fail
+++ERROR:  operator <<@@(point,polygon) is not a member of extension "test_ext_cor"
+++DETAIL:  An extension is not allowed to replace an object that it does not own.
+++DROP OPERATOR <<@@ (point, polygon);
+++CREATE EXTENSION test_ext_cor;  -- now it should work
+++SELECT ext_cor_func();
+++         ext_cor_func         
+++------------------------------
+++ ext_cor_func: from extension
+++(1 row)
+++
+++SELECT * FROM ext_cor_view;
+++             col              
+++------------------------------
+++ ext_cor_view: from extension
+++(1 row)
+++
+++SELECT 'x'::test_ext_type;
+++ test_ext_type 
+++---------------
+++ x
+++(1 row)
+++
+++SELECT point(0,0) <<@@ polygon(circle(point(0,0),1));
+++ ?column? 
+++----------
+++ t
+++(1 row)
+++
+++\dx+ test_ext_cor
+++Objects in extension "test_ext_cor"
+++      Object description      
+++------------------------------
+++ function ext_cor_func()
+++ operator <<@@(point,polygon)
+++ type test_ext_type
+++ view ext_cor_view
+++(4 rows)
+++
+++--
+++-- CREATE IF NOT EXISTS is an entirely unsound thing for an extension
+++-- to be doing, but let's at least plug the major security hole in it.
+++--
+++CREATE COLLATION ext_cine_coll
+++  ( LC_COLLATE = "C", LC_CTYPE = "C" );
+++CREATE EXTENSION test_ext_cine;  -- fail
+++ERROR:  collation ext_cine_coll is not a member of extension "test_ext_cine"
+++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
+++DROP COLLATION ext_cine_coll;
+++CREATE MATERIALIZED VIEW ext_cine_mv AS SELECT 11 AS f1;
+++CREATE EXTENSION test_ext_cine;  -- fail
+++ERROR:  materialized view ext_cine_mv is not a member of extension "test_ext_cine"
+++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
+++DROP MATERIALIZED VIEW ext_cine_mv;
+++CREATE FOREIGN DATA WRAPPER dummy;
+++CREATE SERVER ext_cine_srv FOREIGN DATA WRAPPER dummy;
+++CREATE EXTENSION test_ext_cine;  -- fail
+++ERROR:  server ext_cine_srv is not a member of extension "test_ext_cine"
+++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
+++DROP SERVER ext_cine_srv;
+++CREATE SCHEMA ext_cine_schema;
+++CREATE EXTENSION test_ext_cine;  -- fail
+++ERROR:  schema ext_cine_schema is not a member of extension "test_ext_cine"
+++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
+++DROP SCHEMA ext_cine_schema;
+++CREATE SEQUENCE ext_cine_seq;
+++CREATE EXTENSION test_ext_cine;  -- fail
+++ERROR:  sequence ext_cine_seq is not a member of extension "test_ext_cine"
+++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
+++DROP SEQUENCE ext_cine_seq;
+++CREATE TABLE ext_cine_tab1 (x int);
+++CREATE EXTENSION test_ext_cine;  -- fail
+++ERROR:  table ext_cine_tab1 is not a member of extension "test_ext_cine"
+++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
+++DROP TABLE ext_cine_tab1;
+++CREATE TABLE ext_cine_tab2 AS SELECT 42 AS y;
+++CREATE EXTENSION test_ext_cine;  -- fail
+++ERROR:  table ext_cine_tab2 is not a member of extension "test_ext_cine"
+++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
+++DROP TABLE ext_cine_tab2;
+++CREATE EXTENSION test_ext_cine;
+++\dx+ test_ext_cine
+++Objects in extension "test_ext_cine"
+++        Object description         
+++-----------------------------------
+++ collation ext_cine_coll
+++ foreign-data wrapper ext_cine_fdw
+++ materialized view ext_cine_mv
+++ schema ext_cine_schema
+++ sequence ext_cine_seq
+++ server ext_cine_srv
+++ table ext_cine_tab1
+++ table ext_cine_tab2
+++(8 rows)
+++
+++ALTER EXTENSION test_ext_cine UPDATE TO '1.1';
+++\dx+ test_ext_cine
+++Objects in extension "test_ext_cine"
+++        Object description         
+++-----------------------------------
+++ collation ext_cine_coll
+++ foreign-data wrapper ext_cine_fdw
+++ materialized view ext_cine_mv
+++ schema ext_cine_schema
+++ sequence ext_cine_seq
+++ server ext_cine_srv
+++ table ext_cine_tab1
+++ table ext_cine_tab2
+++ table ext_cine_tab3
+++(9 rows)
+++
++diff --git a/src/test/modules/test_extensions/sql/test_extensions.sql b/src/test/modules/test_extensions/sql/test_extensions.sql
++index c16fd36..41b6cdd 100644
++--- a/src/test/modules/test_extensions/sql/test_extensions.sql
+++++ b/src/test/modules/test_extensions/sql/test_extensions.sql
++@@ -99,3 +99,113 @@ RESET client_min_messages;
++ CREATE EXTENSION test_ext_evttrig;
++ ALTER EXTENSION test_ext_evttrig UPDATE TO '2.0';
++ DROP EXTENSION test_ext_evttrig;
+++
+++-- It's generally bad style to use CREATE OR REPLACE unnecessarily.
+++-- Test what happens if an extension does it anyway.
+++-- Replacing a shell type or operator is sort of like CREATE OR REPLACE;
+++-- check that too.
+++
+++CREATE FUNCTION ext_cor_func() RETURNS text
+++  AS $$ SELECT 'ext_cor_func: original'::text $$ LANGUAGE sql;
+++
+++CREATE EXTENSION test_ext_cor;  -- fail
+++
+++SELECT ext_cor_func();
+++
+++DROP FUNCTION ext_cor_func();
+++
+++CREATE VIEW ext_cor_view AS
+++  SELECT 'ext_cor_view: original'::text AS col;
+++
+++CREATE EXTENSION test_ext_cor;  -- fail
+++
+++SELECT ext_cor_func();
+++
+++SELECT * FROM ext_cor_view;
+++
+++DROP VIEW ext_cor_view;
+++
+++CREATE TYPE test_ext_type;
+++
+++CREATE EXTENSION test_ext_cor;  -- fail
+++
+++DROP TYPE test_ext_type;
+++
+++-- this makes a shell "point <<@@ polygon" operator too
+++CREATE OPERATOR @@>> ( PROCEDURE = poly_contain_pt,
+++  LEFTARG = polygon, RIGHTARG = point,
+++  COMMUTATOR = <<@@ );
+++
+++CREATE EXTENSION test_ext_cor;  -- fail
+++
+++DROP OPERATOR <<@@ (point, polygon);
+++
+++CREATE EXTENSION test_ext_cor;  -- now it should work
+++
+++SELECT ext_cor_func();
+++
+++SELECT * FROM ext_cor_view;
+++
+++SELECT 'x'::test_ext_type;
+++
+++SELECT point(0,0) <<@@ polygon(circle(point(0,0),1));
+++
+++\dx+ test_ext_cor
+++
+++--
+++-- CREATE IF NOT EXISTS is an entirely unsound thing for an extension
+++-- to be doing, but let's at least plug the major security hole in it.
+++--
+++
+++CREATE COLLATION ext_cine_coll
+++  ( LC_COLLATE = "C", LC_CTYPE = "C" );
+++
+++CREATE EXTENSION test_ext_cine;  -- fail
+++
+++DROP COLLATION ext_cine_coll;
+++
+++CREATE MATERIALIZED VIEW ext_cine_mv AS SELECT 11 AS f1;
+++
+++CREATE EXTENSION test_ext_cine;  -- fail
+++
+++DROP MATERIALIZED VIEW ext_cine_mv;
+++
+++CREATE FOREIGN DATA WRAPPER dummy;
+++
+++CREATE SERVER ext_cine_srv FOREIGN DATA WRAPPER dummy;
+++
+++CREATE EXTENSION test_ext_cine;  -- fail
+++
+++DROP SERVER ext_cine_srv;
+++
+++CREATE SCHEMA ext_cine_schema;
+++
+++CREATE EXTENSION test_ext_cine;  -- fail
+++
+++DROP SCHEMA ext_cine_schema;
+++
+++CREATE SEQUENCE ext_cine_seq;
+++
+++CREATE EXTENSION test_ext_cine;  -- fail
+++
+++DROP SEQUENCE ext_cine_seq;
+++
+++CREATE TABLE ext_cine_tab1 (x int);
+++
+++CREATE EXTENSION test_ext_cine;  -- fail
+++
+++DROP TABLE ext_cine_tab1;
+++
+++CREATE TABLE ext_cine_tab2 AS SELECT 42 AS y;
+++
+++CREATE EXTENSION test_ext_cine;  -- fail
+++
+++DROP TABLE ext_cine_tab2;
+++
+++CREATE EXTENSION test_ext_cine;
+++
+++\dx+ test_ext_cine
+++
+++ALTER EXTENSION test_ext_cine UPDATE TO '1.1';
+++
+++\dx+ test_ext_cine
++diff --git a/src/test/modules/test_extensions/test_ext_cine--1.0--1.1.sql b/src/test/modules/test_extensions/test_ext_cine--1.0--1.1.sql
++new file mode 100644
++index 0000000..6dadfd2
++--- /dev/null
+++++ b/src/test/modules/test_extensions/test_ext_cine--1.0--1.1.sql
++@@ -0,0 +1,26 @@
+++/* src/test/modules/test_extensions/test_ext_cine--1.0--1.1.sql */
+++-- complain if script is sourced in psql, rather than via ALTER EXTENSION
+++\echo Use "ALTER EXTENSION test_ext_cine UPDATE TO '1.1'" to load this file. \quit
+++
+++--
+++-- These are the same commands as in the 1.0 script; we expect them
+++-- to do nothing.
+++--
+++
+++CREATE COLLATION IF NOT EXISTS ext_cine_coll
+++  ( LC_COLLATE = "POSIX", LC_CTYPE = "POSIX" );
+++
+++CREATE MATERIALIZED VIEW IF NOT EXISTS ext_cine_mv AS SELECT 42 AS f1;
+++
+++CREATE SERVER IF NOT EXISTS ext_cine_srv FOREIGN DATA WRAPPER ext_cine_fdw;
+++
+++CREATE SCHEMA IF NOT EXISTS ext_cine_schema;
+++
+++CREATE SEQUENCE IF NOT EXISTS ext_cine_seq;
+++
+++CREATE TABLE IF NOT EXISTS ext_cine_tab1 (x int);
+++
+++CREATE TABLE IF NOT EXISTS ext_cine_tab2 AS SELECT 42 AS y;
+++
+++-- just to verify the script ran
+++CREATE TABLE ext_cine_tab3 (z int);
++diff --git a/src/test/modules/test_extensions/test_ext_cine--1.0.sql b/src/test/modules/test_extensions/test_ext_cine--1.0.sql
++new file mode 100644
++index 0000000..01408ff
++--- /dev/null
+++++ b/src/test/modules/test_extensions/test_ext_cine--1.0.sql
++@@ -0,0 +1,25 @@
+++/* src/test/modules/test_extensions/test_ext_cine--1.0.sql */
+++-- complain if script is sourced in psql, rather than via CREATE EXTENSION
+++\echo Use "CREATE EXTENSION test_ext_cine" to load this file. \quit
+++
+++--
+++-- CREATE IF NOT EXISTS is an entirely unsound thing for an extension
+++-- to be doing, but let's at least plug the major security hole in it.
+++--
+++
+++CREATE COLLATION IF NOT EXISTS ext_cine_coll
+++  ( LC_COLLATE = "POSIX", LC_CTYPE = "POSIX" );
+++
+++CREATE MATERIALIZED VIEW IF NOT EXISTS ext_cine_mv AS SELECT 42 AS f1;
+++
+++CREATE FOREIGN DATA WRAPPER ext_cine_fdw;
+++
+++CREATE SERVER IF NOT EXISTS ext_cine_srv FOREIGN DATA WRAPPER ext_cine_fdw;
+++
+++CREATE SCHEMA IF NOT EXISTS ext_cine_schema;
+++
+++CREATE SEQUENCE IF NOT EXISTS ext_cine_seq;
+++
+++CREATE TABLE IF NOT EXISTS ext_cine_tab1 (x int);
+++
+++CREATE TABLE IF NOT EXISTS ext_cine_tab2 AS SELECT 42 AS y;
++diff --git a/src/test/modules/test_extensions/test_ext_cine.control b/src/test/modules/test_extensions/test_ext_cine.control
++new file mode 100644
++index 0000000..ced713b
++--- /dev/null
+++++ b/src/test/modules/test_extensions/test_ext_cine.control
++@@ -0,0 +1,3 @@
+++comment = 'Test extension using CREATE IF NOT EXISTS'
+++default_version = '1.0'
+++relocatable = true
++diff --git a/src/test/modules/test_extensions/test_ext_cor--1.0.sql b/src/test/modules/test_extensions/test_ext_cor--1.0.sql
++new file mode 100644
++index 0000000..2e8d89c
++--- /dev/null
+++++ b/src/test/modules/test_extensions/test_ext_cor--1.0.sql
++@@ -0,0 +1,20 @@
+++/* src/test/modules/test_extensions/test_ext_cor--1.0.sql */
+++-- complain if script is sourced in psql, rather than via CREATE EXTENSION
+++\echo Use "CREATE EXTENSION test_ext_cor" to load this file. \quit
+++
+++-- It's generally bad style to use CREATE OR REPLACE unnecessarily.
+++-- Test what happens if an extension does it anyway.
+++
+++CREATE OR REPLACE FUNCTION ext_cor_func() RETURNS text
+++  AS $$ SELECT 'ext_cor_func: from extension'::text $$ LANGUAGE sql;
+++
+++CREATE OR REPLACE VIEW ext_cor_view AS
+++  SELECT 'ext_cor_view: from extension'::text AS col;
+++
+++-- These are for testing replacement of a shell type/operator, which works
+++-- enough like an implicit OR REPLACE to be important to check.
+++
+++CREATE TYPE test_ext_type AS ENUM('x', 'y');
+++
+++CREATE OPERATOR <<@@ ( PROCEDURE = pt_contained_poly,
+++  LEFTARG = point, RIGHTARG = polygon );
++diff --git a/src/test/modules/test_extensions/test_ext_cor.control b/src/test/modules/test_extensions/test_ext_cor.control
++new file mode 100644
++index 0000000..0e972e5
++--- /dev/null
+++++ b/src/test/modules/test_extensions/test_ext_cor.control
++@@ -0,0 +1,3 @@
+++comment = 'Test extension using CREATE OR REPLACE'
+++default_version = '1.0'
+++relocatable = true
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625-02.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625-02.patch
+new file mode 100644
+index 0000000000..8a3310e78f
+--- /dev/null
++++ b/meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625-02.patch
+@@ -0,0 +1,38 @@
++From c0d5d52a780fb575d8f93d0b1a8ef8cb43851a84 Mon Sep 17 00:00:00 2001
++From: Tom Lane <tgl@sss.pgh.pa.us>
++Date: Mon, 8 Aug 2022 12:16:01 -0400
++Subject: [PATCH] Stabilize output of new regression test.
++
++Per buildfarm, the output order of \dx+ isn't consistent across
++locales.  Apply NO_LOCALE to force C locale.  There might be a
++more localized way, but I'm not seeing it offhand, and anyway
++there is nothing in this test module that particularly cares
++about locales.
++
++Security: CVE-2022-2625
++
++CVE: CVE-2022-2625
++Upstream-Status: Backport [https://git.postgresql.org/gitweb/?p=postgresql.git;a=commitdiff;h=22b205cbbd978e69f08bd2b980adae29a6ca1979]
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++
++---
++ src/test/modules/test_extensions/Makefile | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/src/test/modules/test_extensions/Makefile b/src/test/modules/test_extensions/Makefile
++index 452cae3b2e..c3139ab0fc 100644
++--- a/src/test/modules/test_extensions/Makefile
+++++ b/src/test/modules/test_extensions/Makefile
++@@ -17,6 +17,9 @@ DATA = test_ext1--1.0.sql test_ext2--1.0.sql test_ext3--1.0.sql \
++ 
++ REGRESS = test_extensions test_extdepend
++ 
+++# force C locale for output stability
+++NO_LOCALE = 1
+++
++ ifdef USE_PGXS
++ PG_CONFIG = pg_config
++ PGXS := $(shell $(PG_CONFIG) --pgxs)
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_14.4.bb b/meta-oe/recipes-dbs/postgresql/postgresql_14.4.bb
+index 1daab22f92..bf0e7c2f32 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_14.4.bb
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_14.4.bb
+@@ -9,6 +9,8 @@ SRC_URI += "\
+    file://0001-configure.ac-bypass-autoconf-2.69-version-check.patch \
+    file://remove_duplicate.patch \
+    file://0001-config_info.c-not-expose-build-info.patch \
++   file://CVE-2022-2625-01.patch \
++   file://CVE-2022-2625-02.patch \
+ "
+ 
+ SRC_URI[sha256sum] = "c23b6237c5231c791511bdc79098617d6852e9e3bdf360efd8b5d15a1a3d8f6a"
+-- 
+2.25.1
+
 
