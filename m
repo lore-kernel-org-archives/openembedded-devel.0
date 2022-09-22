@@ -1,1109 +1,481 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <andrej.kozemcak@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9DF66C6FA82
-	for <webhook@archiver.kernel.org>; Thu, 22 Sep 2022 13:39:56 +0000 (UTC)
-Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com
- [209.85.222.171])
- by mx.groups.io with SMTP id smtpd.web08.7214.1663853994536755605
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AA55FC6FA92
+	for <webhook@archiver.kernel.org>; Thu, 22 Sep 2022 13:58:46 +0000 (UTC)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.74])
+ by mx.groups.io with SMTP id smtpd.web08.7411.1663855123495123350
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Sep 2022 06:39:54 -0700
+ Thu, 22 Sep 2022 06:58:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=cUQJWx++;
- spf=pass (domain: gmail.com, ip: 209.85.222.171,
- mailfrom: akuster808@gmail.com)
-Received: by mail-qk1-f171.google.com with SMTP id s9so6158500qkg.4
-        for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Sep 2022 06:39:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date;
-        bh=Pni4TfrMYyVil1RAMSgI4N5XaMF4vMeeEfM9m5ce7yM=;
-        b=cUQJWx++macsDhByeU08pM+uoSgSFO+4wsy5gIJEBm2AJdC4hR4459PkCRvpYZD/Kw
-         M6hT49vBxmiCV+7yzK9OMNg8UKWdgYYNjlLKcj4wELc0yUJCH3trnGXJos+0CzoZcOrQ
-         TwNBCbZptrKxYyOm8TWEFE/fmGYd31piIFC4ViKRrUBqc3tgGtupSlL3gLWbkFJXJetA
-         zWPgg9QH4msienNHdM+OVGWagV8mbJ4TWVxIFGGTtmltP7cBP+nRw36T48sOKbUdiz+D
-         0DiJWt5kN7V0a2anBhYqbNCAHxPWdXtvgYbWCxC/fyaXDxBdMd6OzcwPmC5DxtpFTI/P
-         FVAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date;
-        bh=Pni4TfrMYyVil1RAMSgI4N5XaMF4vMeeEfM9m5ce7yM=;
-        b=75louo5IJJLcKFdNpPxoTZWS2kmLiPLYfowE1wnj034MPHMJvCiH0TGBgE8RFq2dm7
-         8HP6WlybrQMg0p5YmMjcvKIyCPJXLxN4oPUfdrhbhZ8SSH1B7zfTyTMKgABx01QiNGkG
-         QfZeqbiUei6lFgc3x2eWgBf60wmdbNI/MAFB/CaSdJwAy781NV+floBHPH7gMewF1vAR
-         D1wI+1DrlbCe81EUrl3F19+E4gfqlSpLyE0yq/uxxyEePMLMvYHqOz8y9FbDdEOfdjtN
-         XZlbIbLDKOrIaRzeXpYnvthGPUbBCweGardNSXolKG5m8M2JO2ap1KlwwC9csCB/xF2o
-         PxgQ==
-X-Gm-Message-State: ACrzQf2Ggx1plMv1AOxVgk143u4Z31Kycp2wg1XypVgnlyBk0lVKv1Yz
-	YT0Nj40WUC5awoHcQ6VAbSbAmGHAP6Q=
-X-Google-Smtp-Source: 
- AMsMyM4BwLmyLF0d1epRmMCerVOr9gr7iSkee1EuXMC5xhRhpw7S8wUiftg4HtpFCL6by9Bo3xabjg==
-X-Received: by 2002:a37:68ce:0:b0:6cb:cac1:c9b3 with SMTP id
- d197-20020a3768ce000000b006cbcac1c9b3mr2126809qkc.528.1663853992651;
-        Thu, 22 Sep 2022 06:39:52 -0700 (PDT)
-Received: from ?IPV6:2600:1700:9190:ba10:cfb3:3140:749b:db15?
- ([2600:1700:9190:ba10:cfb3:3140:749b:db15])
-        by smtp.gmail.com with ESMTPSA id
- bw17-20020a05622a099100b0033a5048464fsm3462003qtb.11.2022.09.22.06.39.51
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 22 Sep 2022 06:39:52 -0700 (PDT)
-Message-ID: <8d89eb09-b14d-1a08-559e-fd13c35039f6@gmail.com>
-Date: Thu, 22 Sep 2022 09:39:51 -0400
+ dkim=fail reason="body hash did not verify" header.i=@siemens.com
+ header.s=selector2 header.b=ZGF9ZZ2p;
+ spf=pass (domain: siemens.com, ip: 40.107.21.74,
+ mailfrom: andrej.kozemcak@siemens.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=le9BvXQ/RprvSEX36glt+XrhKTVWUFPXI6390xasGp+YjlpMCtGVTTk1Z3SBehTYwIW6ZC42q17Ic6ddrrW7wdxbQRa/vefMuw5Tsj6oe9isybgNzrbCieWCFieKJhHkf7oab+uAwURlfLW9sJ5fpkWkyJOhhwvs+Krt+46fxdUGdgkYWNOlcUiU+L18TlA8/L71q5tsL977VA19S15sQZ6B35w4J8Nl0t5nIbsQhexu08iFAYycIsJpnCuvliPgNDoAJov5ybXUoZQrt3CN5opEqUeK0t6YpEUVzaIOBTz9brDKMik8me2uEIZ5xHOThAyNj4ZzbRhgrb3zyoO9rA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=stbskUUA8qj/tIloK08qrTxb2Hw3DKXlob/e3+L5GYA=;
+ b=O7p2Qpy/q3Dm9ygGACF9J3EiN6P04Fq1sRF2Yb3qoUTy3tdtXOz76yoPQWiE2Offhzy89+H+HyWkmc9q6L6NwOZmbBPL7nio6GAoCazO7YHoAU97H8ODzdICnoaVn2MT354gcJVwVJ/gVZXCLwjtBRO1pBQ8kkriYVSVTLz6FqboX/21abkqbP+650+QZKvVjcMHE0AA0vJfDoQb1ZukBzt8jpVVLDraBb3jypfzCW5bo4iUF41Cl1OuLqQGGFmwTgaHyV+HX9WDxhIxhPyzgxez9B6cP2B+9eCjgRIuTuEDBWKhKdi0BBn9LMcFHnvEa+/xmzOwgzhiXd+F19HMjA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 194.138.21.75) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=siemens.com; dmarc=pass (p=none sp=none pct=100) action=none
+ header.from=siemens.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=stbskUUA8qj/tIloK08qrTxb2Hw3DKXlob/e3+L5GYA=;
+ b=ZGF9ZZ2p5lA3WaNGvRHM95wGB0g942ZPViO4NLhS47LVw1x28KDSyLGQLBgXMLd3oDzKvBELV/mb87rMVTkFPEJW80E45dSBKSR2IhQ2eRxfL638fr/zVNOpq1fN+Hfs9+DuwdUZzRyuXR+QORz1Cwfx4sJuuXq+JlTE9+e9YGWUJ67JlMva9ca5VOtmKypqsG4/pB9tg0n6j7AFk+FbjGCCQPhz4HEVj4wTSApLmSstsDXXPNdhApc5SgDjT/H/oIQpcU+PiijyF1kOWS1d/jJSv2+9NeDK12VmeCA2DHqB4j72FtZRqZUl1/1kBcimImuRuQBzrQao5V0KIVDwBQ==
+Received: from GV3P280CA0093.SWEP280.PROD.OUTLOOK.COM (2603:10a6:150:8::22) by
+ VI1PR10MB3982.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:141::24) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.16; Thu, 22 Sep
+ 2022 13:58:39 +0000
+Received: from HE1EUR01FT047.eop-EUR01.prod.protection.outlook.com
+ (2603:10a6:150:8:cafe::b0) by GV3P280CA0093.outlook.office365.com
+ (2603:10a6:150:8::22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.16 via Frontend
+ Transport; Thu, 22 Sep 2022 13:58:39 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 194.138.21.75)
+ smtp.mailfrom=siemens.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=siemens.com;
+Received-SPF: Pass (protection.outlook.com: domain of siemens.com designates
+ 194.138.21.75 as permitted sender) receiver=protection.outlook.com;
+ client-ip=194.138.21.75; helo=hybrid.siemens.com; pr=C
+Received: from hybrid.siemens.com (194.138.21.75) by
+ HE1EUR01FT047.mail.protection.outlook.com (10.152.1.5) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5654.14 via Frontend Transport; Thu, 22 Sep 2022 13:58:39 +0000
+Received: from DEMCHDC8A0A.ad011.siemens.net (139.25.226.106) by
+ DEMCHDC8VRA.ad011.siemens.net (194.138.21.75) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.12; Thu, 22 Sep 2022 15:57:55 +0200
+Received: from dev.vm8.ccp.siemens.com (163.242.51.115) by
+ DEMCHDC8A0A.ad011.siemens.net (139.25.226.106) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.12; Thu, 22 Sep 2022 15:57:55 +0200
+Received: from dev.localdomain (localhost [127.0.0.1])
+	by dev.vm8.ccp.siemens.com (Postfix) with ESMTP id 682F73478E1A;
+	Thu, 22 Sep 2022 15:57:51 +0200 (CEST)
+From: Andrej Kozemcak <andrej.kozemcak@siemens.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Andrej Kozemcak <andrej.kozemcak@siemens.com>
+Subject: [PATCH] squid: upgrade 4.15 -> 5.7
+Date: Thu, 22 Sep 2022 15:57:44 +0200
+Message-ID: <20220922135745.611494-1-andrej.kozemcak@siemens.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [oe] [kirkstone][PATCH] postgresql: fix CVE-2022-2625
-Content-Language: en-US
-To: openembedded-devel@lists.openembedded.org,
- Changqing Li <changqing.li@windriver.com>
-References: <20220922013510.3176274-1-changqing.li@windriver.com>
-From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <20220922013510.3176274-1-changqing.li@windriver.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-Originating-IP: [163.242.51.115]
+X-ClientProxiedBy: DEMCHDC89XA.ad011.siemens.net (139.25.226.103) To
+ DEMCHDC8A0A.ad011.siemens.net (139.25.226.106)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: HE1EUR01FT047:EE_|VI1PR10MB3982:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0f8d8618-554a-4702-4e8c-08da9ca28d30
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	u5oiDxxGJ7PWnETedzNfFa78FBTvlnpD9fsGAJTAuIlD9GPldJfXJYz4OT9/gP99ScjK36FRCKQcDSG28kADqyxYbZ6kSJXnYCi6cSakC2UzPBcIg9vVLZKd6vs7Pljlvba4BEpf9Y8mNj3Nl6ATdaX/f/YeS9cEpwNO35XiHrnzhwzQT4KGbYZcQBhP9WUOFO+AOeOm3bleWZ8BHmH1oVkM/27UrtRljFYKbV8TY5utNm6y0RkZZT3/0klG0O0WrQdTY9n1QYdNuntv3lBaLzS2pOuBPsyfG08jEUtLgMK8T3XQwSBLe3MrmhBkVtomJ249Bpgevh/fQgYzGoIb1nEY1lzuR0IVs0INs4jeTnzKjYOAw7jQwDpYUK9IH9oNxvFsiKQzvFvTkE3wWBuoHphq/80crsaScx9Y1BwVHahVh3z9qxDswbqZwjaM7M8ZJ8Ng1S+8knnnSKM1dV6TseY8vNXk/z78kZ15/eShoz67D94qrMBPJ/WD5F807oQLuGhtOBN351XHp08DTXDe3ArLf+WouNZibLdz28sRkgc9vFz/OrY1L3LJ5W/Qib38VihFK7yXvrH3LSGT3k1Oi7UtYgp3t3AsR5m60jlA99cs4ccupSnc5ARRFaQYNb1LwuWU3hCRmTrbYkYE3Hgja23/Rats2lnPWM2iURGRpjundK2c6GA2W1+1rvQGZ69dgdcZCE1NBLGHL+eREAnfDy041B8ClddMvt+c6TkxIcl96pfDk9/D7lfm1tG1VJ/acPUmJZWxgy3L3laYKJIicp4hjp6FN2PxW7MC8KF/fIu51cfEgYWbS+jSVQ4EGN0EipI0SCd2rqm7pcBrIi+Hrg==
+X-Forefront-Antispam-Report: 
+	CIP:194.138.21.75;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:hybrid.siemens.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(396003)(39860400002)(136003)(376002)(346002)(451199015)(40470700004)(36840700001)(46966006)(426003)(82310400005)(36756003)(82740400003)(356005)(8936002)(26005)(19627235002)(40480700001)(6916009)(41300700001)(2616005)(1076003)(107886003)(70206006)(4326008)(82960400001)(81166007)(70586007)(6266002)(8676002)(186003)(86362001)(6666004)(36860700001)(83380400001)(336012)(44832011)(2906002)(7126003)(47076005)(30864003)(40460700003)(316002)(5660300002)(478600001)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2022 13:58:39.2641
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+ 0f8d8618-554a-4702-4e8c-08da9ca28d30
+X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: 
+ TenantId=38ae3bcd-9579-4fd4-adda-b42e1495d55a;Ip=[194.138.21.75];Helo=[hybrid.siemens.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	HE1EUR01FT047.eop-EUR01.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB3982
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 Sep 2022 13:39:56 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 Sep 2022 13:58:46 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98926
+ https://lists.openembedded.org/g/openembedded-devel/message/98927
 
-Changqing li,
+- drop included patches
+- refresh remaining patches
+- update to new ptest
 
-Thanks for the patch.
+Licence change: update year
 
-I missed that master was updated to version 14.5 which includes this fix.
+Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
+---
+ ...0001-Fix-build-on-Fedora-Rawhide-772.patch | 82 -------------------
+ ...y.cc-fix-bind-is-not-a-member-of-std.patch | 31 -------
+ ...tools.cc-fixed-unused-result-warning.patch | 34 --------
+ ...d-dynamic-ldb-link-test-in-configure.patch |  2 +-
+ .../files/Skip-AC_RUN_IFELSE-tests.patch      | 15 ++--
+ ...-t-do-squid-conf-tests-at-build-time.patch |  8 +-
+ .../squid/{squid_4.15.bb =3D> squid_5.7.bb}     | 21 +++--
+ 7 files changed, 27 insertions(+), 166 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/squid/files/0001-Fix-bu=
+ild-on-Fedora-Rawhide-772.patch
+ delete mode 100644 meta-networking/recipes-daemons/squid/files/0001-splay.=
+cc-fix-bind-is-not-a-member-of-std.patch
+ delete mode 100644 meta-networking/recipes-daemons/squid/files/0001-tools.=
+cc-fixed-unused-result-warning.patch
+ rename meta-networking/recipes-daemons/squid/{squid_4.15.bb =3D> squid_5.7=
+.bb} (86%)
 
-I prefer to go with updates.
-
-BR,
-Armin
-
-
-On 9/21/22 21:35, Changqing Li wrote:
-> From: Changqing Li <changqing.li@windriver.com>
+diff --git a/meta-networking/recipes-daemons/squid/files/0001-Fix-build-on-=
+Fedora-Rawhide-772.patch b/meta-networking/recipes-daemons/squid/files/0001=
+-Fix-build-on-Fedora-Rawhide-772.patch
+deleted file mode 100644
+index ff51f5344..000000000
+--- a/meta-networking/recipes-daemons/squid/files/0001-Fix-build-on-Fedora-=
+Rawhide-772.patch
++++ /dev/null
+@@ -1,82 +0,0 @@
+-From 1f8b5f0e1cc27634a7310be4c9674112f919d974 Mon Sep 17 00:00:00 2001
+-From: uhliarik <luhliari@redhat.com>
+-Date: Thu, 18 Feb 2021 01:08:40 +0000
+-Subject: [PATCH] Fix build on Fedora Rawhide (#772)
+-
+-* add SYSTEMD_LIBS to all binaries using client_side.cc, fixing linking
+-* add `<limits>` to all sources using std::numeric_limits, fixing gcc-11
+-  builds
+----
+-Upstream-Status: Backport [https://github.com/kraj/squid/commit/1f8b5f0e1c=
+c27634a7310be4c9674112f919d974]
+- src/Makefile.am               | 4 ++++
+- src/ip/QosConfig.cc           | 1 +
+- src/ipc/mem/PageStack.cc      | 1 +
+- src/ssl/helper.cc             | 2 ++
+- 4 files changed, 8 insertions(+)
+-
+---- a/src/Makefile.am
+-+++ b/src/Makefile.am
+-@@ -2320,6 +2320,7 @@ tests_test_http_range_LDADD =3D \
+- 	$(SSLLIB) \
+- 	$(KRB5LIBS) \
+- 	$(LIBCPPUNIT_LIBS) \
+-+	$(SYSTEMD_LIBS) \
+- 	$(COMPAT_LIB) \
+- 	$(XTRA_LIBS)
+- tests_test_http_range_LDFLAGS =3D $(LIBADD_DL)
+-@@ -2624,6 +2625,7 @@ tests_testHttpRequest_LDADD =3D \
+- 	$(SSLLIB) \
+- 	$(KRB5LIBS) \
+- 	$(LIBCPPUNIT_LIBS) \
+-+	$(SYSTEMD_LIBS) \
+- 	$(COMPAT_LIB) \
+- 	$(XTRA_LIBS)
+- tests_testHttpRequest_LDFLAGS =3D $(LIBADD_DL)
+-@@ -3487,6 +3489,7 @@ tests_testURL_LDADD =3D \
+- 	$(SSLLIB) \
+- 	$(KRB5LIBS) \
+- 	$(LIBCPPUNIT_LIBS) \
+-+	$(SYSTEMD_LIBS) \
+- 	$(COMPAT_LIB) \
+- 	$(XTRA_LIBS)
+- tests_testURL_LDFLAGS =3D $(LIBADD_DL)
+-@@ -3646,6 +3649,7 @@ nodist_tests_testYesNoNone_SOURCES =3D \
+- tests_testYesNoNone_LDADD=3D \
+- 	base/libbase.la \
+- 	$(LIBCPPUNIT_LIBS) \
+-+	$(SYSTEMD_LIBS) \
+- 	$(COMPAT_LIB) \
+- 	$(XTRA_LIBS)
+- tests_testYesNoNone_LDFLAGS =3D $(LIBADD_DL)
+---- a/src/ip/QosConfig.cc
+-+++ b/src/ip/QosConfig.cc
+-@@ -21,6 +21,7 @@
+- #include "Parsing.h"
+-=20
+- #include <cerrno>
+-+#include <limits>
+-=20
+- CBDATA_CLASS_INIT(acl_tos);
+-=20
+---- a/src/ipc/mem/PageStack.cc
+-+++ b/src/ipc/mem/PageStack.cc
+-@@ -14,6 +14,7 @@
+- #include "Debug.h"
+- #include "ipc/mem/Page.h"
+- #include "ipc/mem/PageStack.h"
+-+#include <limits>
+-=20
+- /// used to mark a stack slot available for storing free page offsets
+- const Ipc::Mem::PageStack::Value Writable =3D 0;
+---- a/src/ssl/helper.cc
+-+++ b/src/ssl/helper.cc
+-@@ -19,6 +19,8 @@
+- #include "ssl/helper.h"
+- #include "wordlist.h"
+-=20
+-+#include <limits>
+-+
+- Ssl::CertValidationHelper::LruCache *Ssl::CertValidationHelper::HelperCac=
+he =3D nullptr;
+-=20
+- #if USE_SSL_CRTD
+-=20
+diff --git a/meta-networking/recipes-daemons/squid/files/0001-splay.cc-fix-=
+bind-is-not-a-member-of-std.patch b/meta-networking/recipes-daemons/squid/f=
+iles/0001-splay.cc-fix-bind-is-not-a-member-of-std.patch
+deleted file mode 100644
+index fbbad1597..000000000
+--- a/meta-networking/recipes-daemons/squid/files/0001-splay.cc-fix-bind-is=
+-not-a-member-of-std.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From 1def5b4278d97f197520d23c1dce52f93a1b2f46 Mon Sep 17 00:00:00 2001
+-From: Andrej Valek <andrej.valek@siemens.com>
+-Date: Tue, 9 Apr 2019 09:40:30 +0200
+-Subject: [PATCH] splay.cc: fix bind is not a member of std
+-
+-fix
+-| ../../squid-4.6/test-suite/splay.cc:134:28: error: 'bind' is not a membe=
+r of 'std'
+-|      auto nextRandom =3D std::bind (distribution, generator);
+-|                             ^~~~
+-| ../../squid-4.6/test-suite/splay.cc:134:28: note: 'std::bind' is defined=
+ in header '<functional>'; did you forget to '#include <functional>'?
+-
+-Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+----
+- test-suite/splay.cc | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/test-suite/splay.cc b/test-suite/splay.cc
+-index f71b337..4e21adc 100644
+---- a/test-suite/splay.cc
+-+++ b/test-suite/splay.cc
+-@@ -20,6 +20,7 @@
+- #include <unistd.h>
+- #endif
+- #include <random>
+-+#include <functional>
+-=20
+- class intnode
+- {
+---=20
+-2.11.0
+-
+diff --git a/meta-networking/recipes-daemons/squid/files/0001-tools.cc-fixe=
+d-unused-result-warning.patch b/meta-networking/recipes-daemons/squid/files=
+/0001-tools.cc-fixed-unused-result-warning.patch
+deleted file mode 100644
+index f267875ed..000000000
+--- a/meta-networking/recipes-daemons/squid/files/0001-tools.cc-fixed-unuse=
+d-result-warning.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From 86dae8010310d13bd2a2beb006b4085d06ae1556 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sun, 25 Jun 2017 00:59:24 -0700
+-Subject: [PATCH] tools.cc: fixed unused-result warning
+-
+-fix
+-| ../../squid-3.5.26/src/tools.cc: In function 'void enter_suid()':
+-| ../../squid-3.5.26/src/tools.cc:616:11: error: ignoring return value of =
+'int setuid(__uid_t)', declared with attribute warn_unused_result [-Werror=
+=3Dunused-result]
+-|      setuid(0);
+-|      ~~~~~~^~~
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-
+----
+- src/tools.cc | 5 +++--
+- 1 file changed, 3 insertions(+), 2 deletions(-)
+-
+-diff --git a/src/tools.cc b/src/tools.cc
+-index 5829574..19f0836 100644
+---- a/src/tools.cc
+-+++ b/src/tools.cc
+-@@ -581,8 +581,10 @@ enter_suid(void)
+-         debugs (21, 3, "enter_suid: setresuid failed: " << xstrerr(xerrno=
+));
+-     }
+- #else
+--
+--    setuid(0);
+-+    if (setuid(0) < 0) {
+-+        const auto xerrno =3D errno;
+-+        debugs(50, DBG_IMPORTANT, "WARNING: no_suid: setuid(0): " << xstr=
+err(xerrno));
+-+    }
+- #endif
+- #if HAVE_PRCTL && defined(PR_SET_DUMPABLE)
+-     /* Set Linux DUMPABLE flag */
+diff --git a/meta-networking/recipes-daemons/squid/files/Fix-flawed-dynamic=
+-ldb-link-test-in-configure.patch b/meta-networking/recipes-daemons/squid/f=
+iles/Fix-flawed-dynamic-ldb-link-test-in-configure.patch
+index 1516bb014..a429b7b2d 100644
+--- a/meta-networking/recipes-daemons/squid/files/Fix-flawed-dynamic-ldb-li=
+nk-test-in-configure.patch
++++ b/meta-networking/recipes-daemons/squid/files/Fix-flawed-dynamic-ldb-li=
+nk-test-in-configure.patch
+@@ -19,7 +19,7 @@ diff --git a/configure.ac b/configure.ac
+ index d2f7feb..c7ae568 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -3235,6 +3235,16 @@ case "$host" in
++@@ -3268,6 +3268,16 @@ case "$host" in
+  		;;
+  esac
+ =20
+diff --git a/meta-networking/recipes-daemons/squid/files/Skip-AC_RUN_IFELSE=
+-tests.patch b/meta-networking/recipes-daemons/squid/files/Skip-AC_RUN_IFEL=
+SE-tests.patch
+index dd83b62e6..10853333e 100644
+--- a/meta-networking/recipes-daemons/squid/files/Skip-AC_RUN_IFELSE-tests.=
+patch
++++ b/meta-networking/recipes-daemons/squid/files/Skip-AC_RUN_IFELSE-tests.=
+patch
+@@ -38,10 +38,10 @@ index ad0ba60..4477446 100644
+    ])
+  ]) dnl SQUID_CHECK_KRB5_HEIMDAL_BROKEN_KRB5_H
+ diff --git a/acinclude/lib-checks.m4 b/acinclude/lib-checks.m4
+-index 7624b56..b449c5a 100644
++index 1e9333527c..2d42787029 100644
+ --- a/acinclude/lib-checks.m4
+ +++ b/acinclude/lib-checks.m4
+-@@ -217,7 +217,9 @@ AC_DEFUN([SQUID_CHECK_OPENSSL_CONST_SSL_METHOD],[
++@@ -227,7 +227,9 @@ AC_DEFUN([SQUID_CHECK_OPENSSL_CONST_SSL_METHOD],[
+    [
+     AC_MSG_RESULT([no])
+    ],
+@@ -52,14 +52,15 @@ index 7624b56..b449c5a 100644
+ =20
+  SQUID_STATE_ROLLBACK(check_const_SSL_METHOD)
+  ])
+-@@ -377,7 +379,9 @@ AC_DEFUN([SQUID_CHECK_OPENSSL_TXTDB],[
++@@ -386,8 +386,9 @@ AC_DEFUN([SQUID_CHECK_OPENSSL_TXTDB],[
++   [
+     AC_MSG_RESULT([yes])
+     AC_DEFINE(SQUID_USE_SSLLHASH_HACK, 1)
+-   ],
++-  ],
+ -[])
+-+[
+-+   AC_MSG_RESULT([skipped - can't test in cross-compiled env])
+-+])
+++  ],[
+++    AC_MSG_RESULT([skipped - can't test in cross-compiled env])
+++  ])
+ =20
+  SQUID_STATE_ROLLBACK(check_TXTDB)
+  ])
+diff --git a/meta-networking/recipes-daemons/squid/files/squid-don-t-do-squ=
+id-conf-tests-at-build-time.patch b/meta-networking/recipes-daemons/squid/f=
+iles/squid-don-t-do-squid-conf-tests-at-build-time.patch
+index e5267ea2b..ea27285e0 100644
+--- a/meta-networking/recipes-daemons/squid/files/squid-don-t-do-squid-conf=
+-tests-at-build-time.patch
++++ b/meta-networking/recipes-daemons/squid/files/squid-don-t-do-squid-conf=
+-tests-at-build-time.patch
+@@ -20,11 +20,11 @@ Signed-off-by: Jackie Huang <jackie.huang@windriver.com=
 >
-> Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> ---
->   .../postgresql/files/CVE-2022-2625-01.patch   | 935 ++++++++++++++++++
->   .../postgresql/files/CVE-2022-2625-02.patch   |  38 +
->   .../recipes-dbs/postgresql/postgresql_14.4.bb |   2 +
->   3 files changed, 975 insertions(+)
->   create mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625-01.patch
->   create mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625-02.patch
->
-> diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625-01.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625-01.patch
-> new file mode 100644
-> index 0000000000..e8f2ffbc86
-> --- /dev/null
-> +++ b/meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625-01.patch
-> @@ -0,0 +1,935 @@
-> +From 2d3f438af1b7895d6a15a8238e2d7542229031d3 Mon Sep 17 00:00:00 2001
-> +From: Tom Lane <tgl@sss.pgh.pa.us>
-> +Date: Mon, 8 Aug 2022 11:12:31 -0400
-> +Subject: [PATCH 1/2] In extensions, don't replace objects not belonging to the
-> + extension.
-> +
-> +Previously, if an extension script did CREATE OR REPLACE and there was
-> +an existing object not belonging to the extension, it would overwrite
-> +the object and adopt it into the extension.  This is problematic, first
-> +because the overwrite is probably unintentional, and second because we
-> +didn't change the object's ownership.  Thus a hostile user could create
-> +an object in advance of an expected CREATE EXTENSION command, and would
-> +then have ownership rights on an extension object, which could be
-> +modified for trojan-horse-type attacks.
-> +
-> +Hence, forbid CREATE OR REPLACE of an existing object unless it already
-> +belongs to the extension.  (Note that we've always forbidden replacing
-> +an object that belongs to some other extension; only the behavior for
-> +previously-free-standing objects changes here.)
-> +
-> +For the same reason, also fail CREATE IF NOT EXISTS when there is
-> +an existing object that doesn't belong to the extension.
-> +
-> +Our thanks to Sven Klemm for reporting this problem.
-> +
-> +Security: CVE-2022-2625
-> +
-> +CVE: CVE-2022-2625
-> +Upstream-Status: Backport [https://github.com/postgres/postgres/commit/b9b21acc766db54d8c337d508d0fe2f5bf2daab0]
-> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> +---
-> + doc/src/sgml/extend.sgml                      |  11 --
-> + src/backend/catalog/pg_collation.c            |  49 ++++--
-> + src/backend/catalog/pg_depend.c               |  77 +++++++--
-> + src/backend/catalog/pg_operator.c             |   2 +-
-> + src/backend/catalog/pg_type.c                 |   7 +-
-> + src/backend/commands/createas.c               |  16 +-
-> + src/backend/commands/foreigncmds.c            |  19 ++-
-> + src/backend/commands/schemacmds.c             |  25 ++-
-> + src/backend/commands/sequence.c               |   8 +
-> + src/backend/commands/statscmds.c              |   4 +
-> + src/backend/commands/view.c                   |  16 +-
-> + src/backend/parser/parse_utilcmd.c            |  10 ++
-> + src/include/catalog/dependency.h              |   2 +
-> + src/test/modules/test_extensions/Makefile     |   5 +-
-> + .../expected/test_extensions.out              | 153 ++++++++++++++++++
-> + .../test_extensions/sql/test_extensions.sql   | 110 +++++++++++++
-> + .../test_ext_cine--1.0--1.1.sql               |  26 +++
-> + .../test_extensions/test_ext_cine--1.0.sql    |  25 +++
-> + .../test_extensions/test_ext_cine.control     |   3 +
-> + .../test_extensions/test_ext_cor--1.0.sql     |  20 +++
-> + .../test_extensions/test_ext_cor.control      |   3 +
-> + 21 files changed, 539 insertions(+), 52 deletions(-)
-> + create mode 100644 src/test/modules/test_extensions/test_ext_cine--1.0--1.1.sql
-> + create mode 100644 src/test/modules/test_extensions/test_ext_cine--1.0.sql
-> + create mode 100644 src/test/modules/test_extensions/test_ext_cine.control
-> + create mode 100644 src/test/modules/test_extensions/test_ext_cor--1.0.sql
-> + create mode 100644 src/test/modules/test_extensions/test_ext_cor.control
-> +
-> +diff --git a/doc/src/sgml/extend.sgml b/doc/src/sgml/extend.sgml
-> +index e928894..bb0b267 100644
-> +--- a/doc/src/sgml/extend.sgml
-> ++++ b/doc/src/sgml/extend.sgml
-> +@@ -1319,17 +1319,6 @@ SELECT * FROM pg_extension_update_paths('<replaceable>extension_name</replaceabl
-> +       trusted if it depends on another one, unless that other one is always
-> +       installed in <literal>pg_catalog</literal>.
-> +      </para>
-> +-
-> +-     <para>
-> +-      Do <emphasis>not</emphasis> use <command>CREATE OR REPLACE
-> +-      FUNCTION</command>, except in an update script that must change the
-> +-      definition of a function that is known to be an extension member
-> +-      already.  (Likewise for other <literal>OR REPLACE</literal> options.)
-> +-      Using <literal>OR REPLACE</literal> unnecessarily not only has a risk
-> +-      of accidentally overwriting someone else's function, but it creates a
-> +-      security hazard since the overwritten function would still be owned by
-> +-      its original owner, who could modify it.
-> +-     </para>
-> +     </sect3>
-> +    </sect2>
-> +
-> +diff --git a/src/backend/catalog/pg_collation.c b/src/backend/catalog/pg_collation.c
-> +index 19068b6..b1137ca 100644
-> +--- a/src/backend/catalog/pg_collation.c
-> ++++ b/src/backend/catalog/pg_collation.c
-> +@@ -78,15 +78,25 @@ CollationCreate(const char *collname, Oid collnamespace,
-> + 	 * friendlier error message.  The unique index provides a backstop against
-> + 	 * race conditions.
-> + 	 */
-> +-	if (SearchSysCacheExists3(COLLNAMEENCNSP,
-> +-							  PointerGetDatum(collname),
-> +-							  Int32GetDatum(collencoding),
-> +-							  ObjectIdGetDatum(collnamespace)))
-> ++	oid = GetSysCacheOid3(COLLNAMEENCNSP,
-> ++						  Anum_pg_collation_oid,
-> ++						  PointerGetDatum(collname),
-> ++						  Int32GetDatum(collencoding),
-> ++						  ObjectIdGetDatum(collnamespace));
-> ++	if (OidIsValid(oid))
-> + 	{
-> + 		if (quiet)
-> + 			return InvalidOid;
-> + 		else if (if_not_exists)
-> + 		{
-> ++			/*
-> ++			 * If we are in an extension script, insist that the pre-existing
-> ++			 * object be a member of the extension, to avoid security risks.
-> ++			 */
-> ++			ObjectAddressSet(myself, CollationRelationId, oid);
-> ++			checkMembershipInCurrentExtension(&myself);
-> ++
-> ++			/* OK to skip */
-> + 			ereport(NOTICE,
-> + 					(errcode(ERRCODE_DUPLICATE_OBJECT),
-> + 					 collencoding == -1
-> +@@ -116,16 +126,19 @@ CollationCreate(const char *collname, Oid collnamespace,
-> + 	 * so we take a ShareRowExclusiveLock earlier, to protect against
-> + 	 * concurrent changes fooling this check.
-> + 	 */
-> +-	if ((collencoding == -1 &&
-> +-		 SearchSysCacheExists3(COLLNAMEENCNSP,
-> +-							   PointerGetDatum(collname),
-> +-							   Int32GetDatum(GetDatabaseEncoding()),
-> +-							   ObjectIdGetDatum(collnamespace))) ||
-> +-		(collencoding != -1 &&
-> +-		 SearchSysCacheExists3(COLLNAMEENCNSP,
-> +-							   PointerGetDatum(collname),
-> +-							   Int32GetDatum(-1),
-> +-							   ObjectIdGetDatum(collnamespace))))
-> ++	if (collencoding == -1)
-> ++		oid = GetSysCacheOid3(COLLNAMEENCNSP,
-> ++							  Anum_pg_collation_oid,
-> ++							  PointerGetDatum(collname),
-> ++							  Int32GetDatum(GetDatabaseEncoding()),
-> ++							  ObjectIdGetDatum(collnamespace));
-> ++	else
-> ++		oid = GetSysCacheOid3(COLLNAMEENCNSP,
-> ++							  Anum_pg_collation_oid,
-> ++							  PointerGetDatum(collname),
-> ++							  Int32GetDatum(-1),
-> ++							  ObjectIdGetDatum(collnamespace));
-> ++	if (OidIsValid(oid))
-> + 	{
-> + 		if (quiet)
-> + 		{
-> +@@ -134,6 +147,14 @@ CollationCreate(const char *collname, Oid collnamespace,
-> + 		}
-> + 		else if (if_not_exists)
-> + 		{
-> ++			/*
-> ++			 * If we are in an extension script, insist that the pre-existing
-> ++			 * object be a member of the extension, to avoid security risks.
-> ++			 */
-> ++			ObjectAddressSet(myself, CollationRelationId, oid);
-> ++			checkMembershipInCurrentExtension(&myself);
-> ++
-> ++			/* OK to skip */
-> + 			table_close(rel, NoLock);
-> + 			ereport(NOTICE,
-> + 					(errcode(ERRCODE_DUPLICATE_OBJECT),
-> +diff --git a/src/backend/catalog/pg_depend.c b/src/backend/catalog/pg_depend.c
-> +index ae16d2f..07791b4 100644
-> +--- a/src/backend/catalog/pg_depend.c
-> ++++ b/src/backend/catalog/pg_depend.c
-> +@@ -166,22 +166,23 @@ recordMultipleDependencies(const ObjectAddress *depender,
-> +
-> + /*
-> +  * If we are executing a CREATE EXTENSION operation, mark the given object
-> +- * as being a member of the extension.  Otherwise, do nothing.
-> ++ * as being a member of the extension, or check that it already is one.
-> ++ * Otherwise, do nothing.
-> +  *
-> +  * This must be called during creation of any user-definable object type
-> +  * that could be a member of an extension.
-> +  *
-> +- * If isReplace is true, the object already existed (or might have already
-> +- * existed), so we must check for a pre-existing extension membership entry.
-> +- * Passing false is a guarantee that the object is newly created, and so
-> +- * could not already be a member of any extension.
-> ++ * isReplace must be true if the object already existed, and false if it is
-> ++ * newly created.  In the former case we insist that it already be a member
-> ++ * of the current extension.  In the latter case we can skip checking whether
-> ++ * it is already a member of any extension.
-> +  *
-> +  * Note: isReplace = true is typically used when updating an object in
-> +- * CREATE OR REPLACE and similar commands.  The net effect is that if an
-> +- * extension script uses such a command on a pre-existing free-standing
-> +- * object, the object will be absorbed into the extension.  If the object
-> +- * is already a member of some other extension, the command will fail.
-> +- * This behavior is desirable for cases such as replacing a shell type.
-> ++ * CREATE OR REPLACE and similar commands.  We used to allow the target
-> ++ * object to not already be an extension member, instead silently absorbing
-> ++ * it into the current extension.  However, this was both error-prone
-> ++ * (extensions might accidentally overwrite free-standing objects) and
-> ++ * a security hazard (since the object would retain its previous ownership).
-> +  */
-> + void
-> + recordDependencyOnCurrentExtension(const ObjectAddress *object,
-> +@@ -199,6 +200,12 @@ recordDependencyOnCurrentExtension(const ObjectAddress *object,
-> + 		{
-> + 			Oid			oldext;
-> +
-> ++			/*
-> ++			 * Side note: these catalog lookups are safe only because the
-> ++			 * object is a pre-existing one.  In the not-isReplace case, the
-> ++			 * caller has most likely not yet done a CommandCounterIncrement
-> ++			 * that would make the new object visible.
-> ++			 */
-> + 			oldext = getExtensionOfObject(object->classId, object->objectId);
-> + 			if (OidIsValid(oldext))
-> + 			{
-> +@@ -212,6 +219,13 @@ recordDependencyOnCurrentExtension(const ObjectAddress *object,
-> + 								getObjectDescription(object, false),
-> + 								get_extension_name(oldext))));
-> + 			}
-> ++			/* It's a free-standing object, so reject */
-> ++			ereport(ERROR,
-> ++					(errcode(ERRCODE_OBJECT_NOT_IN_PREREQUISITE_STATE),
-> ++					 errmsg("%s is not a member of extension \"%s\"",
-> ++							getObjectDescription(object, false),
-> ++							get_extension_name(CurrentExtensionObject)),
-> ++					 errdetail("An extension is not allowed to replace an object that it does not own.")));
-> + 		}
-> +
-> + 		/* OK, record it as a member of CurrentExtensionObject */
-> +@@ -223,6 +237,49 @@ recordDependencyOnCurrentExtension(const ObjectAddress *object,
-> + 	}
-> + }
-> +
-> ++/*
-> ++ * If we are executing a CREATE EXTENSION operation, check that the given
-> ++ * object is a member of the extension, and throw an error if it isn't.
-> ++ * Otherwise, do nothing.
-> ++ *
-> ++ * This must be called whenever a CREATE IF NOT EXISTS operation (for an
-> ++ * object type that can be an extension member) has found that an object of
-> ++ * the desired name already exists.  It is insecure for an extension to use
-> ++ * IF NOT EXISTS except when the conflicting object is already an extension
-> ++ * member; otherwise a hostile user could substitute an object with arbitrary
-> ++ * properties.
-> ++ */
-> ++void
-> ++checkMembershipInCurrentExtension(const ObjectAddress *object)
-> ++{
-> ++	/*
-> ++	 * This is actually the same condition tested in
-> ++	 * recordDependencyOnCurrentExtension; but we want to issue a
-> ++	 * differently-worded error, and anyway it would be pretty confusing to
-> ++	 * call recordDependencyOnCurrentExtension in these circumstances.
-> ++	 */
-> ++
-> ++	/* Only whole objects can be extension members */
-> ++	Assert(object->objectSubId == 0);
-> ++
-> ++	if (creating_extension)
-> ++	{
-> ++		Oid			oldext;
-> ++
-> ++		oldext = getExtensionOfObject(object->classId, object->objectId);
-> ++		/* If already a member of this extension, OK */
-> ++		if (oldext == CurrentExtensionObject)
-> ++			return;
-> ++		/* Else complain */
-> ++		ereport(ERROR,
-> ++				(errcode(ERRCODE_OBJECT_NOT_IN_PREREQUISITE_STATE),
-> ++				 errmsg("%s is not a member of extension \"%s\"",
-> ++						getObjectDescription(object, false),
-> ++						get_extension_name(CurrentExtensionObject)),
-> ++				 errdetail("An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.")));
-> ++	}
-> ++}
-> ++
-> + /*
-> +  * deleteDependencyRecordsFor -- delete all records with given depender
-> +  * classId/objectId.  Returns the number of records deleted.
-> +diff --git a/src/backend/catalog/pg_operator.c b/src/backend/catalog/pg_operator.c
-> +index 4c5a56c..5ec3221 100644
-> +--- a/src/backend/catalog/pg_operator.c
-> ++++ b/src/backend/catalog/pg_operator.c
-> +@@ -864,7 +864,7 @@ makeOperatorDependencies(HeapTuple tuple,
-> +
-> + 	/* Dependency on extension */
-> + 	if (makeExtensionDep)
-> +-		recordDependencyOnCurrentExtension(&myself, true);
-> ++		recordDependencyOnCurrentExtension(&myself, isUpdate);
-> +
-> + 	return myself;
-> + }
-> +diff --git a/src/backend/catalog/pg_type.c b/src/backend/catalog/pg_type.c
-> +index cdce22f..b37a8f0 100644
-> +--- a/src/backend/catalog/pg_type.c
-> ++++ b/src/backend/catalog/pg_type.c
-> +@@ -548,8 +548,11 @@ TypeCreate(Oid newTypeOid,
-> +  * rebuild should be true if this is a pre-existing type.  We will remove
-> +  * existing dependencies and rebuild them from scratch.  This is needed for
-> +  * ALTER TYPE, and also when replacing a shell type.  We don't remove any
-> +- * existing extension dependency, though (hence, if makeExtensionDep is also
-> +- * true and the type belongs to some other extension, an error will occur).
-> ++ * existing extension dependency, though; hence, if makeExtensionDep is also
-> ++ * true and we're in an extension script, an error will occur unless the
-> ++ * type already belongs to the current extension.  That's the behavior we
-> ++ * want when replacing a shell type, which is the only case where both flags
-> ++ * are true.
-> +  */
-> + void
-> + GenerateTypeDependencies(HeapTuple typeTuple,
-> +diff --git a/src/backend/commands/createas.c b/src/backend/commands/createas.c
-> +index 0982851..addf478 100644
-> +--- a/src/backend/commands/createas.c
-> ++++ b/src/backend/commands/createas.c
-> +@@ -393,11 +393,14 @@ bool
-> + CreateTableAsRelExists(CreateTableAsStmt *ctas)
-> + {
-> + 	Oid			nspid;
-> ++	Oid			oldrelid;
-> ++	ObjectAddress address;
-> + 	IntoClause *into = ctas->into;
-> +
-> + 	nspid = RangeVarGetCreationNamespace(into->rel);
-> +
-> +-	if (get_relname_relid(into->rel->relname, nspid))
-> ++	oldrelid = get_relname_relid(into->rel->relname, nspid);
-> ++	if (OidIsValid(oldrelid))
-> + 	{
-> + 		if (!ctas->if_not_exists)
-> + 			ereport(ERROR,
-> +@@ -405,7 +408,16 @@ CreateTableAsRelExists(CreateTableAsStmt *ctas)
-> + 					 errmsg("relation \"%s\" already exists",
-> + 							into->rel->relname)));
-> +
-> +-		/* The relation exists and IF NOT EXISTS has been specified */
-> ++		/*
-> ++		 * The relation exists and IF NOT EXISTS has been specified.
-> ++		 *
-> ++		 * If we are in an extension script, insist that the pre-existing
-> ++		 * object be a member of the extension, to avoid security risks.
-> ++		 */
-> ++		ObjectAddressSet(address, RelationRelationId, oldrelid);
-> ++		checkMembershipInCurrentExtension(&address);
-> ++
-> ++		/* OK to skip */
-> + 		ereport(NOTICE,
-> + 				(errcode(ERRCODE_DUPLICATE_TABLE),
-> + 				 errmsg("relation \"%s\" already exists, skipping",
-> +diff --git a/src/backend/commands/foreigncmds.c b/src/backend/commands/foreigncmds.c
-> +index bc36311..901b8bc 100644
-> +--- a/src/backend/commands/foreigncmds.c
-> ++++ b/src/backend/commands/foreigncmds.c
-> +@@ -859,13 +859,22 @@ CreateForeignServer(CreateForeignServerStmt *stmt)
-> + 	ownerId = GetUserId();
-> +
-> + 	/*
-> +-	 * Check that there is no other foreign server by this name. Do nothing if
-> +-	 * IF NOT EXISTS was enforced.
-> ++	 * Check that there is no other foreign server by this name.  If there is
-> ++	 * one, do nothing if IF NOT EXISTS was specified.
-> + 	 */
-> +-	if (GetForeignServerByName(stmt->servername, true) != NULL)
-> ++	srvId = get_foreign_server_oid(stmt->servername, true);
-> ++	if (OidIsValid(srvId))
-> + 	{
-> + 		if (stmt->if_not_exists)
-> + 		{
-> ++			/*
-> ++			 * If we are in an extension script, insist that the pre-existing
-> ++			 * object be a member of the extension, to avoid security risks.
-> ++			 */
-> ++			ObjectAddressSet(myself, ForeignServerRelationId, srvId);
-> ++			checkMembershipInCurrentExtension(&myself);
-> ++
-> ++			/* OK to skip */
-> + 			ereport(NOTICE,
-> + 					(errcode(ERRCODE_DUPLICATE_OBJECT),
-> + 					 errmsg("server \"%s\" already exists, skipping",
-> +@@ -1130,6 +1139,10 @@ CreateUserMapping(CreateUserMappingStmt *stmt)
-> + 	{
-> + 		if (stmt->if_not_exists)
-> + 		{
-> ++			/*
-> ++			 * Since user mappings aren't members of extensions (see comments
-> ++			 * below), no need for checkMembershipInCurrentExtension here.
-> ++			 */
-> + 			ereport(NOTICE,
-> + 					(errcode(ERRCODE_DUPLICATE_OBJECT),
-> + 					 errmsg("user mapping for \"%s\" already exists for server \"%s\", skipping",
-> +diff --git a/src/backend/commands/schemacmds.c b/src/backend/commands/schemacmds.c
-> +index 6c6ab9e..66306d1 100644
-> +--- a/src/backend/commands/schemacmds.c
-> ++++ b/src/backend/commands/schemacmds.c
-> +@@ -112,14 +112,25 @@ CreateSchemaCommand(CreateSchemaStmt *stmt, const char *queryString,
-> + 	 * the permissions checks, but since CREATE TABLE IF NOT EXISTS makes its
-> + 	 * creation-permission check first, we do likewise.
-> + 	 */
-> +-	if (stmt->if_not_exists &&
-> +-		SearchSysCacheExists1(NAMESPACENAME, PointerGetDatum(schemaName)))
-> ++	if (stmt->if_not_exists)
-> + 	{
-> +-		ereport(NOTICE,
-> +-				(errcode(ERRCODE_DUPLICATE_SCHEMA),
-> +-				 errmsg("schema \"%s\" already exists, skipping",
-> +-						schemaName)));
-> +-		return InvalidOid;
-> ++		namespaceId = get_namespace_oid(schemaName, true);
-> ++		if (OidIsValid(namespaceId))
-> ++		{
-> ++			/*
-> ++			 * If we are in an extension script, insist that the pre-existing
-> ++			 * object be a member of the extension, to avoid security risks.
-> ++			 */
-> ++			ObjectAddressSet(address, NamespaceRelationId, namespaceId);
-> ++			checkMembershipInCurrentExtension(&address);
-> ++
-> ++			/* OK to skip */
-> ++			ereport(NOTICE,
-> ++					(errcode(ERRCODE_DUPLICATE_SCHEMA),
-> ++					 errmsg("schema \"%s\" already exists, skipping",
-> ++							schemaName)));
-> ++			return InvalidOid;
-> ++		}
-> + 	}
-> +
-> + 	/*
-> +diff --git a/src/backend/commands/sequence.c b/src/backend/commands/sequence.c
-> +index 0415df9..9864998 100644
-> +--- a/src/backend/commands/sequence.c
-> ++++ b/src/backend/commands/sequence.c
-> +@@ -149,6 +149,14 @@ DefineSequence(ParseState *pstate, CreateSeqStmt *seq)
-> + 		RangeVarGetAndCheckCreationNamespace(seq->sequence, NoLock, &seqoid);
-> + 		if (OidIsValid(seqoid))
-> + 		{
-> ++			/*
-> ++			 * If we are in an extension script, insist that the pre-existing
-> ++			 * object be a member of the extension, to avoid security risks.
-> ++			 */
-> ++			ObjectAddressSet(address, RelationRelationId, seqoid);
-> ++			checkMembershipInCurrentExtension(&address);
-> ++
-> ++			/* OK to skip */
-> + 			ereport(NOTICE,
-> + 					(errcode(ERRCODE_DUPLICATE_TABLE),
-> + 					 errmsg("relation \"%s\" already exists, skipping",
-> +diff --git a/src/backend/commands/statscmds.c b/src/backend/commands/statscmds.c
-> +index 59e531b..6d8f482 100644
-> +--- a/src/backend/commands/statscmds.c
-> ++++ b/src/backend/commands/statscmds.c
-> +@@ -184,6 +184,10 @@ CreateStatistics(CreateStatsStmt *stmt)
-> + 	{
-> + 		if (stmt->if_not_exists)
-> + 		{
-> ++			/*
-> ++			 * Since stats objects aren't members of extensions (see comments
-> ++			 * below), no need for checkMembershipInCurrentExtension here.
-> ++			 */
-> + 			ereport(NOTICE,
-> + 					(errcode(ERRCODE_DUPLICATE_OBJECT),
-> + 					 errmsg("statistics object \"%s\" already exists, skipping",
-> +diff --git a/src/backend/commands/view.c b/src/backend/commands/view.c
-> +index 4df05a0..f24464d 100644
-> +--- a/src/backend/commands/view.c
-> ++++ b/src/backend/commands/view.c
-> +@@ -190,7 +190,7 @@ DefineVirtualRelation(RangeVar *relation, List *tlist, bool replace,
-> + 		CommandCounterIncrement();
-> +
-> + 		/*
-> +-		 * Finally update the view options.
-> ++		 * Update the view's options.
-> + 		 *
-> + 		 * The new options list replaces the existing options list, even if
-> + 		 * it's empty.
-> +@@ -203,8 +203,22 @@ DefineVirtualRelation(RangeVar *relation, List *tlist, bool replace,
-> + 		/* EventTriggerAlterTableStart called by ProcessUtilitySlow */
-> + 		AlterTableInternal(viewOid, atcmds, true);
-> +
-> ++		/*
-> ++		 * There is very little to do here to update the view's dependencies.
-> ++		 * Most view-level dependency relationships, such as those on the
-> ++		 * owner, schema, and associated composite type, aren't changing.
-> ++		 * Because we don't allow changing type or collation of an existing
-> ++		 * view column, those dependencies of the existing columns don't
-> ++		 * change either, while the AT_AddColumnToView machinery took care of
-> ++		 * adding such dependencies for new view columns.  The dependencies of
-> ++		 * the view's query could have changed arbitrarily, but that was dealt
-> ++		 * with inside StoreViewQuery.  What remains is only to check that
-> ++		 * view replacement is allowed when we're creating an extension.
-> ++		 */
-> + 		ObjectAddressSet(address, RelationRelationId, viewOid);
-> +
-> ++		recordDependencyOnCurrentExtension(&address, true);
-> ++
-> + 		/*
-> + 		 * Seems okay, so return the OID of the pre-existing view.
-> + 		 */
-> +diff --git a/src/backend/parser/parse_utilcmd.c b/src/backend/parser/parse_utilcmd.c
-> +index 05e4fa8..ecd5871 100644
-> +--- a/src/backend/parser/parse_utilcmd.c
-> ++++ b/src/backend/parser/parse_utilcmd.c
-> +@@ -196,6 +196,16 @@ transformCreateStmt(CreateStmt *stmt, const char *queryString)
-> + 	 */
-> + 	if (stmt->if_not_exists && OidIsValid(existing_relid))
-> + 	{
-> ++		/*
-> ++		 * If we are in an extension script, insist that the pre-existing
-> ++		 * object be a member of the extension, to avoid security risks.
-> ++		 */
-> ++		ObjectAddress address;
-> ++
-> ++		ObjectAddressSet(address, RelationRelationId, existing_relid);
-> ++		checkMembershipInCurrentExtension(&address);
-> ++
-> ++		/* OK to skip */
-> + 		ereport(NOTICE,
-> + 				(errcode(ERRCODE_DUPLICATE_TABLE),
-> + 				 errmsg("relation \"%s\" already exists, skipping",
-> +diff --git a/src/include/catalog/dependency.h b/src/include/catalog/dependency.h
-> +index fd44081..242026b 100644
-> +--- a/src/include/catalog/dependency.h
-> ++++ b/src/include/catalog/dependency.h
-> +@@ -201,6 +201,8 @@ extern void recordMultipleDependencies(const ObjectAddress *depender,
-> + extern void recordDependencyOnCurrentExtension(const ObjectAddress *object,
-> + 											   bool isReplace);
-> +
-> ++extern void checkMembershipInCurrentExtension(const ObjectAddress *object);
-> ++
-> + extern long deleteDependencyRecordsFor(Oid classId, Oid objectId,
-> + 									   bool skipExtensionDeps);
-> +
-> +diff --git a/src/test/modules/test_extensions/Makefile b/src/test/modules/test_extensions/Makefile
-> +index 77ee4d5..452cae3 100644
-> +--- a/src/test/modules/test_extensions/Makefile
-> ++++ b/src/test/modules/test_extensions/Makefile
-> +@@ -4,11 +4,14 @@ MODULE = test_extensions
-> + PGFILEDESC = "test_extensions - regression testing for EXTENSION support"
-> +
-> + EXTENSION = test_ext1 test_ext2 test_ext3 test_ext4 test_ext5 test_ext6 \
-> +-            test_ext7 test_ext8 test_ext_cyclic1 test_ext_cyclic2 \
-> ++            test_ext7 test_ext8 test_ext_cine test_ext_cor \
-> ++            test_ext_cyclic1 test_ext_cyclic2 \
-> +             test_ext_evttrig
-> + DATA = test_ext1--1.0.sql test_ext2--1.0.sql test_ext3--1.0.sql \
-> +        test_ext4--1.0.sql test_ext5--1.0.sql test_ext6--1.0.sql \
-> +        test_ext7--1.0.sql test_ext7--1.0--2.0.sql test_ext8--1.0.sql \
-> ++       test_ext_cine--1.0.sql test_ext_cine--1.0--1.1.sql \
-> ++       test_ext_cor--1.0.sql \
-> +        test_ext_cyclic1--1.0.sql test_ext_cyclic2--1.0.sql \
-> +        test_ext_evttrig--1.0.sql test_ext_evttrig--1.0--2.0.sql
-> +
-> +diff --git a/src/test/modules/test_extensions/expected/test_extensions.out b/src/test/modules/test_extensions/expected/test_extensions.out
-> +index 30ae621..821fed3 100644
-> +--- a/src/test/modules/test_extensions/expected/test_extensions.out
-> ++++ b/src/test/modules/test_extensions/expected/test_extensions.out
-> +@@ -159,3 +159,156 @@ RESET client_min_messages;
-> + CREATE EXTENSION test_ext_evttrig;
-> + ALTER EXTENSION test_ext_evttrig UPDATE TO '2.0';
-> + DROP EXTENSION test_ext_evttrig;
-> ++-- It's generally bad style to use CREATE OR REPLACE unnecessarily.
-> ++-- Test what happens if an extension does it anyway.
-> ++-- Replacing a shell type or operator is sort of like CREATE OR REPLACE;
-> ++-- check that too.
-> ++CREATE FUNCTION ext_cor_func() RETURNS text
-> ++  AS $$ SELECT 'ext_cor_func: original'::text $$ LANGUAGE sql;
-> ++CREATE EXTENSION test_ext_cor;  -- fail
-> ++ERROR:  function ext_cor_func() is not a member of extension "test_ext_cor"
-> ++DETAIL:  An extension is not allowed to replace an object that it does not own.
-> ++SELECT ext_cor_func();
-> ++      ext_cor_func
-> ++------------------------
-> ++ ext_cor_func: original
-> ++(1 row)
-> ++
-> ++DROP FUNCTION ext_cor_func();
-> ++CREATE VIEW ext_cor_view AS
-> ++  SELECT 'ext_cor_view: original'::text AS col;
-> ++CREATE EXTENSION test_ext_cor;  -- fail
-> ++ERROR:  view ext_cor_view is not a member of extension "test_ext_cor"
-> ++DETAIL:  An extension is not allowed to replace an object that it does not own.
-> ++SELECT ext_cor_func();
-> ++ERROR:  function ext_cor_func() does not exist
-> ++LINE 1: SELECT ext_cor_func();
-> ++               ^
-> ++HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
-> ++SELECT * FROM ext_cor_view;
-> ++          col
-> ++------------------------
-> ++ ext_cor_view: original
-> ++(1 row)
-> ++
-> ++DROP VIEW ext_cor_view;
-> ++CREATE TYPE test_ext_type;
-> ++CREATE EXTENSION test_ext_cor;  -- fail
-> ++ERROR:  type test_ext_type is not a member of extension "test_ext_cor"
-> ++DETAIL:  An extension is not allowed to replace an object that it does not own.
-> ++DROP TYPE test_ext_type;
-> ++-- this makes a shell "point <<@@ polygon" operator too
-> ++CREATE OPERATOR @@>> ( PROCEDURE = poly_contain_pt,
-> ++  LEFTARG = polygon, RIGHTARG = point,
-> ++  COMMUTATOR = <<@@ );
-> ++CREATE EXTENSION test_ext_cor;  -- fail
-> ++ERROR:  operator <<@@(point,polygon) is not a member of extension "test_ext_cor"
-> ++DETAIL:  An extension is not allowed to replace an object that it does not own.
-> ++DROP OPERATOR <<@@ (point, polygon);
-> ++CREATE EXTENSION test_ext_cor;  -- now it should work
-> ++SELECT ext_cor_func();
-> ++         ext_cor_func
-> ++------------------------------
-> ++ ext_cor_func: from extension
-> ++(1 row)
-> ++
-> ++SELECT * FROM ext_cor_view;
-> ++             col
-> ++------------------------------
-> ++ ext_cor_view: from extension
-> ++(1 row)
-> ++
-> ++SELECT 'x'::test_ext_type;
-> ++ test_ext_type
-> ++---------------
-> ++ x
-> ++(1 row)
-> ++
-> ++SELECT point(0,0) <<@@ polygon(circle(point(0,0),1));
-> ++ ?column?
-> ++----------
-> ++ t
-> ++(1 row)
-> ++
-> ++\dx+ test_ext_cor
-> ++Objects in extension "test_ext_cor"
-> ++      Object description
-> ++------------------------------
-> ++ function ext_cor_func()
-> ++ operator <<@@(point,polygon)
-> ++ type test_ext_type
-> ++ view ext_cor_view
-> ++(4 rows)
-> ++
-> ++--
-> ++-- CREATE IF NOT EXISTS is an entirely unsound thing for an extension
-> ++-- to be doing, but let's at least plug the major security hole in it.
-> ++--
-> ++CREATE COLLATION ext_cine_coll
-> ++  ( LC_COLLATE = "C", LC_CTYPE = "C" );
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++ERROR:  collation ext_cine_coll is not a member of extension "test_ext_cine"
-> ++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
-> ++DROP COLLATION ext_cine_coll;
-> ++CREATE MATERIALIZED VIEW ext_cine_mv AS SELECT 11 AS f1;
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++ERROR:  materialized view ext_cine_mv is not a member of extension "test_ext_cine"
-> ++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
-> ++DROP MATERIALIZED VIEW ext_cine_mv;
-> ++CREATE FOREIGN DATA WRAPPER dummy;
-> ++CREATE SERVER ext_cine_srv FOREIGN DATA WRAPPER dummy;
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++ERROR:  server ext_cine_srv is not a member of extension "test_ext_cine"
-> ++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
-> ++DROP SERVER ext_cine_srv;
-> ++CREATE SCHEMA ext_cine_schema;
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++ERROR:  schema ext_cine_schema is not a member of extension "test_ext_cine"
-> ++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
-> ++DROP SCHEMA ext_cine_schema;
-> ++CREATE SEQUENCE ext_cine_seq;
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++ERROR:  sequence ext_cine_seq is not a member of extension "test_ext_cine"
-> ++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
-> ++DROP SEQUENCE ext_cine_seq;
-> ++CREATE TABLE ext_cine_tab1 (x int);
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++ERROR:  table ext_cine_tab1 is not a member of extension "test_ext_cine"
-> ++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
-> ++DROP TABLE ext_cine_tab1;
-> ++CREATE TABLE ext_cine_tab2 AS SELECT 42 AS y;
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++ERROR:  table ext_cine_tab2 is not a member of extension "test_ext_cine"
-> ++DETAIL:  An extension may only use CREATE ... IF NOT EXISTS to skip object creation if the conflicting object is one that it already owns.
-> ++DROP TABLE ext_cine_tab2;
-> ++CREATE EXTENSION test_ext_cine;
-> ++\dx+ test_ext_cine
-> ++Objects in extension "test_ext_cine"
-> ++        Object description
-> ++-----------------------------------
-> ++ collation ext_cine_coll
-> ++ foreign-data wrapper ext_cine_fdw
-> ++ materialized view ext_cine_mv
-> ++ schema ext_cine_schema
-> ++ sequence ext_cine_seq
-> ++ server ext_cine_srv
-> ++ table ext_cine_tab1
-> ++ table ext_cine_tab2
-> ++(8 rows)
-> ++
-> ++ALTER EXTENSION test_ext_cine UPDATE TO '1.1';
-> ++\dx+ test_ext_cine
-> ++Objects in extension "test_ext_cine"
-> ++        Object description
-> ++-----------------------------------
-> ++ collation ext_cine_coll
-> ++ foreign-data wrapper ext_cine_fdw
-> ++ materialized view ext_cine_mv
-> ++ schema ext_cine_schema
-> ++ sequence ext_cine_seq
-> ++ server ext_cine_srv
-> ++ table ext_cine_tab1
-> ++ table ext_cine_tab2
-> ++ table ext_cine_tab3
-> ++(9 rows)
-> ++
-> +diff --git a/src/test/modules/test_extensions/sql/test_extensions.sql b/src/test/modules/test_extensions/sql/test_extensions.sql
-> +index c16fd36..41b6cdd 100644
-> +--- a/src/test/modules/test_extensions/sql/test_extensions.sql
-> ++++ b/src/test/modules/test_extensions/sql/test_extensions.sql
-> +@@ -99,3 +99,113 @@ RESET client_min_messages;
-> + CREATE EXTENSION test_ext_evttrig;
-> + ALTER EXTENSION test_ext_evttrig UPDATE TO '2.0';
-> + DROP EXTENSION test_ext_evttrig;
-> ++
-> ++-- It's generally bad style to use CREATE OR REPLACE unnecessarily.
-> ++-- Test what happens if an extension does it anyway.
-> ++-- Replacing a shell type or operator is sort of like CREATE OR REPLACE;
-> ++-- check that too.
-> ++
-> ++CREATE FUNCTION ext_cor_func() RETURNS text
-> ++  AS $$ SELECT 'ext_cor_func: original'::text $$ LANGUAGE sql;
-> ++
-> ++CREATE EXTENSION test_ext_cor;  -- fail
-> ++
-> ++SELECT ext_cor_func();
-> ++
-> ++DROP FUNCTION ext_cor_func();
-> ++
-> ++CREATE VIEW ext_cor_view AS
-> ++  SELECT 'ext_cor_view: original'::text AS col;
-> ++
-> ++CREATE EXTENSION test_ext_cor;  -- fail
-> ++
-> ++SELECT ext_cor_func();
-> ++
-> ++SELECT * FROM ext_cor_view;
-> ++
-> ++DROP VIEW ext_cor_view;
-> ++
-> ++CREATE TYPE test_ext_type;
-> ++
-> ++CREATE EXTENSION test_ext_cor;  -- fail
-> ++
-> ++DROP TYPE test_ext_type;
-> ++
-> ++-- this makes a shell "point <<@@ polygon" operator too
-> ++CREATE OPERATOR @@>> ( PROCEDURE = poly_contain_pt,
-> ++  LEFTARG = polygon, RIGHTARG = point,
-> ++  COMMUTATOR = <<@@ );
-> ++
-> ++CREATE EXTENSION test_ext_cor;  -- fail
-> ++
-> ++DROP OPERATOR <<@@ (point, polygon);
-> ++
-> ++CREATE EXTENSION test_ext_cor;  -- now it should work
-> ++
-> ++SELECT ext_cor_func();
-> ++
-> ++SELECT * FROM ext_cor_view;
-> ++
-> ++SELECT 'x'::test_ext_type;
-> ++
-> ++SELECT point(0,0) <<@@ polygon(circle(point(0,0),1));
-> ++
-> ++\dx+ test_ext_cor
-> ++
-> ++--
-> ++-- CREATE IF NOT EXISTS is an entirely unsound thing for an extension
-> ++-- to be doing, but let's at least plug the major security hole in it.
-> ++--
-> ++
-> ++CREATE COLLATION ext_cine_coll
-> ++  ( LC_COLLATE = "C", LC_CTYPE = "C" );
-> ++
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++
-> ++DROP COLLATION ext_cine_coll;
-> ++
-> ++CREATE MATERIALIZED VIEW ext_cine_mv AS SELECT 11 AS f1;
-> ++
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++
-> ++DROP MATERIALIZED VIEW ext_cine_mv;
-> ++
-> ++CREATE FOREIGN DATA WRAPPER dummy;
-> ++
-> ++CREATE SERVER ext_cine_srv FOREIGN DATA WRAPPER dummy;
-> ++
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++
-> ++DROP SERVER ext_cine_srv;
-> ++
-> ++CREATE SCHEMA ext_cine_schema;
-> ++
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++
-> ++DROP SCHEMA ext_cine_schema;
-> ++
-> ++CREATE SEQUENCE ext_cine_seq;
-> ++
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++
-> ++DROP SEQUENCE ext_cine_seq;
-> ++
-> ++CREATE TABLE ext_cine_tab1 (x int);
-> ++
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++
-> ++DROP TABLE ext_cine_tab1;
-> ++
-> ++CREATE TABLE ext_cine_tab2 AS SELECT 42 AS y;
-> ++
-> ++CREATE EXTENSION test_ext_cine;  -- fail
-> ++
-> ++DROP TABLE ext_cine_tab2;
-> ++
-> ++CREATE EXTENSION test_ext_cine;
-> ++
-> ++\dx+ test_ext_cine
-> ++
-> ++ALTER EXTENSION test_ext_cine UPDATE TO '1.1';
-> ++
-> ++\dx+ test_ext_cine
-> +diff --git a/src/test/modules/test_extensions/test_ext_cine--1.0--1.1.sql b/src/test/modules/test_extensions/test_ext_cine--1.0--1.1.sql
-> +new file mode 100644
-> +index 0000000..6dadfd2
-> +--- /dev/null
-> ++++ b/src/test/modules/test_extensions/test_ext_cine--1.0--1.1.sql
-> +@@ -0,0 +1,26 @@
-> ++/* src/test/modules/test_extensions/test_ext_cine--1.0--1.1.sql */
-> ++-- complain if script is sourced in psql, rather than via ALTER EXTENSION
-> ++\echo Use "ALTER EXTENSION test_ext_cine UPDATE TO '1.1'" to load this file. \quit
-> ++
-> ++--
-> ++-- These are the same commands as in the 1.0 script; we expect them
-> ++-- to do nothing.
-> ++--
-> ++
-> ++CREATE COLLATION IF NOT EXISTS ext_cine_coll
-> ++  ( LC_COLLATE = "POSIX", LC_CTYPE = "POSIX" );
-> ++
-> ++CREATE MATERIALIZED VIEW IF NOT EXISTS ext_cine_mv AS SELECT 42 AS f1;
-> ++
-> ++CREATE SERVER IF NOT EXISTS ext_cine_srv FOREIGN DATA WRAPPER ext_cine_fdw;
-> ++
-> ++CREATE SCHEMA IF NOT EXISTS ext_cine_schema;
-> ++
-> ++CREATE SEQUENCE IF NOT EXISTS ext_cine_seq;
-> ++
-> ++CREATE TABLE IF NOT EXISTS ext_cine_tab1 (x int);
-> ++
-> ++CREATE TABLE IF NOT EXISTS ext_cine_tab2 AS SELECT 42 AS y;
-> ++
-> ++-- just to verify the script ran
-> ++CREATE TABLE ext_cine_tab3 (z int);
-> +diff --git a/src/test/modules/test_extensions/test_ext_cine--1.0.sql b/src/test/modules/test_extensions/test_ext_cine--1.0.sql
-> +new file mode 100644
-> +index 0000000..01408ff
-> +--- /dev/null
-> ++++ b/src/test/modules/test_extensions/test_ext_cine--1.0.sql
-> +@@ -0,0 +1,25 @@
-> ++/* src/test/modules/test_extensions/test_ext_cine--1.0.sql */
-> ++-- complain if script is sourced in psql, rather than via CREATE EXTENSION
-> ++\echo Use "CREATE EXTENSION test_ext_cine" to load this file. \quit
-> ++
-> ++--
-> ++-- CREATE IF NOT EXISTS is an entirely unsound thing for an extension
-> ++-- to be doing, but let's at least plug the major security hole in it.
-> ++--
-> ++
-> ++CREATE COLLATION IF NOT EXISTS ext_cine_coll
-> ++  ( LC_COLLATE = "POSIX", LC_CTYPE = "POSIX" );
-> ++
-> ++CREATE MATERIALIZED VIEW IF NOT EXISTS ext_cine_mv AS SELECT 42 AS f1;
-> ++
-> ++CREATE FOREIGN DATA WRAPPER ext_cine_fdw;
-> ++
-> ++CREATE SERVER IF NOT EXISTS ext_cine_srv FOREIGN DATA WRAPPER ext_cine_fdw;
-> ++
-> ++CREATE SCHEMA IF NOT EXISTS ext_cine_schema;
-> ++
-> ++CREATE SEQUENCE IF NOT EXISTS ext_cine_seq;
-> ++
-> ++CREATE TABLE IF NOT EXISTS ext_cine_tab1 (x int);
-> ++
-> ++CREATE TABLE IF NOT EXISTS ext_cine_tab2 AS SELECT 42 AS y;
-> +diff --git a/src/test/modules/test_extensions/test_ext_cine.control b/src/test/modules/test_extensions/test_ext_cine.control
-> +new file mode 100644
-> +index 0000000..ced713b
-> +--- /dev/null
-> ++++ b/src/test/modules/test_extensions/test_ext_cine.control
-> +@@ -0,0 +1,3 @@
-> ++comment = 'Test extension using CREATE IF NOT EXISTS'
-> ++default_version = '1.0'
-> ++relocatable = true
-> +diff --git a/src/test/modules/test_extensions/test_ext_cor--1.0.sql b/src/test/modules/test_extensions/test_ext_cor--1.0.sql
-> +new file mode 100644
-> +index 0000000..2e8d89c
-> +--- /dev/null
-> ++++ b/src/test/modules/test_extensions/test_ext_cor--1.0.sql
-> +@@ -0,0 +1,20 @@
-> ++/* src/test/modules/test_extensions/test_ext_cor--1.0.sql */
-> ++-- complain if script is sourced in psql, rather than via CREATE EXTENSION
-> ++\echo Use "CREATE EXTENSION test_ext_cor" to load this file. \quit
-> ++
-> ++-- It's generally bad style to use CREATE OR REPLACE unnecessarily.
-> ++-- Test what happens if an extension does it anyway.
-> ++
-> ++CREATE OR REPLACE FUNCTION ext_cor_func() RETURNS text
-> ++  AS $$ SELECT 'ext_cor_func: from extension'::text $$ LANGUAGE sql;
-> ++
-> ++CREATE OR REPLACE VIEW ext_cor_view AS
-> ++  SELECT 'ext_cor_view: from extension'::text AS col;
-> ++
-> ++-- These are for testing replacement of a shell type/operator, which works
-> ++-- enough like an implicit OR REPLACE to be important to check.
-> ++
-> ++CREATE TYPE test_ext_type AS ENUM('x', 'y');
-> ++
-> ++CREATE OPERATOR <<@@ ( PROCEDURE = pt_contained_poly,
-> ++  LEFTARG = point, RIGHTARG = polygon );
-> +diff --git a/src/test/modules/test_extensions/test_ext_cor.control b/src/test/modules/test_extensions/test_ext_cor.control
-> +new file mode 100644
-> +index 0000000..0e972e5
-> +--- /dev/null
-> ++++ b/src/test/modules/test_extensions/test_ext_cor.control
-> +@@ -0,0 +1,3 @@
-> ++comment = 'Test extension using CREATE OR REPLACE'
-> ++default_version = '1.0'
-> ++relocatable = true
-> +--
-> +2.25.1
-> +
-> diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625-02.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625-02.patch
-> new file mode 100644
-> index 0000000000..8a3310e78f
-> --- /dev/null
-> +++ b/meta-oe/recipes-dbs/postgresql/files/CVE-2022-2625-02.patch
-> @@ -0,0 +1,38 @@
-> +From c0d5d52a780fb575d8f93d0b1a8ef8cb43851a84 Mon Sep 17 00:00:00 2001
-> +From: Tom Lane <tgl@sss.pgh.pa.us>
-> +Date: Mon, 8 Aug 2022 12:16:01 -0400
-> +Subject: [PATCH] Stabilize output of new regression test.
-> +
-> +Per buildfarm, the output order of \dx+ isn't consistent across
-> +locales.  Apply NO_LOCALE to force C locale.  There might be a
-> +more localized way, but I'm not seeing it offhand, and anyway
-> +there is nothing in this test module that particularly cares
-> +about locales.
-> +
-> +Security: CVE-2022-2625
-> +
-> +CVE: CVE-2022-2625
-> +Upstream-Status: Backport [https://git.postgresql.org/gitweb/?p=postgresql.git;a=commitdiff;h=22b205cbbd978e69f08bd2b980adae29a6ca1979]
-> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> +
-> +---
-> + src/test/modules/test_extensions/Makefile | 3 +++
-> + 1 file changed, 3 insertions(+)
-> +
-> +diff --git a/src/test/modules/test_extensions/Makefile b/src/test/modules/test_extensions/Makefile
-> +index 452cae3b2e..c3139ab0fc 100644
-> +--- a/src/test/modules/test_extensions/Makefile
-> ++++ b/src/test/modules/test_extensions/Makefile
-> +@@ -17,6 +17,9 @@ DATA = test_ext1--1.0.sql test_ext2--1.0.sql test_ext3--1.0.sql \
-> +
-> + REGRESS = test_extensions test_extdepend
-> +
-> ++# force C locale for output stability
-> ++NO_LOCALE = 1
-> ++
-> + ifdef USE_PGXS
-> + PG_CONFIG = pg_config
-> + PGXS := $(shell $(PG_CONFIG) --pgxs)
-> +--
-> +2.25.1
-> +
-> diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_14.4.bb b/meta-oe/recipes-dbs/postgresql/postgresql_14.4.bb
-> index 1daab22f92..bf0e7c2f32 100644
-> --- a/meta-oe/recipes-dbs/postgresql/postgresql_14.4.bb
-> +++ b/meta-oe/recipes-dbs/postgresql/postgresql_14.4.bb
-> @@ -9,6 +9,8 @@ SRC_URI += "\
->      file://0001-configure.ac-bypass-autoconf-2.69-version-check.patch \
->      file://remove_duplicate.patch \
->      file://0001-config_info.c-not-expose-build-info.patch \
-> +   file://CVE-2022-2625-01.patch \
-> +   file://CVE-2022-2625-02.patch \
->   "
->   
->   SRC_URI[sha256sum] = "c23b6237c5231c791511bdc79098617d6852e9e3bdf360efd8b5d15a1a3d8f6a"
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#98917): https://lists.openembedded.org/g/openembedded-devel/message/98917
-> Mute This Topic: https://lists.openembedded.org/mt/93840660/3616698
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+  1 file changed, 7 insertions(+), 8 deletions(-)
+=20
+ diff --git a/test-suite/Makefile.am b/test-suite/Makefile.am
+-index 061a463..350dfb2 100644
++index 0233c0e..e0021b6 100644
+ --- a/test-suite/Makefile.am
+ +++ b/test-suite/Makefile.am
+-@@ -41,8 +41,7 @@ TESTS +=3D debug \
+- 	MemPoolTest\
++@@ -40,8 +40,7 @@ TESTS +=3D debug \
++ 	splay\
+  	mem_node_test\
+  	mem_hdr_test\
+ -	$(ESI_TESTS) \
+@@ -33,7 +33,7 @@ index 061a463..350dfb2 100644
+ =20
+  ## Sort by alpha - any build failures are significant.
+  check_PROGRAMS +=3D debug \
+-@@ -125,19 +124,19 @@ VirtualDeleteOperator_SOURCES =3D VirtualDeleteOpera=
+tor.cc $(DEBUG_SOURCE)
++@@ -159,19 +158,19 @@ VirtualDeleteOperator_SOURCES =3D \
+  ##$(TARGLIB): $(LIBOBJS)
+  ##	$(AR_R) $(TARGLIB) $(LIBOBJS)
+ =20
+diff --git a/meta-networking/recipes-daemons/squid/squid_4.15.bb b/meta-net=
+working/recipes-daemons/squid/squid_5.7.bb
+similarity index 86%
+rename from meta-networking/recipes-daemons/squid/squid_4.15.bb
+rename to meta-networking/recipes-daemons/squid/squid_5.7.bb
+index a1122a3cd..a208a2a88 100644
+--- a/meta-networking/recipes-daemons/squid/squid_4.15.bb
++++ b/meta-networking/recipes-daemons/squid/squid_5.7.bb
+@@ -22,17 +22,14 @@ SRC_URI =3D "http://www.squid-cache.org/Versions/v${MAJ=
+_VER}/${BPN}-${PV}.tar.bz2
+            file://set_sysroot_patch.patch \
+            file://squid-don-t-do-squid-conf-tests-at-build-time.patch \
+            file://0001-configure-Check-for-Wno-error-format-truncation-com=
+p.patch \
+-           file://0001-tools.cc-fixed-unused-result-warning.patch \
+-           file://0001-splay.cc-fix-bind-is-not-a-member-of-std.patch \
+-           file://0001-Fix-build-on-Fedora-Rawhide-772.patch \
+            "
+=20
+ SRC_URI:remove:toolchain-clang =3D "file://0001-configure-Check-for-Wno-er=
+ror-format-truncation-comp.patch"
+=20
+-SRC_URI[sha256sum] =3D "71635811e766ce8b155225a9e3c7757cfc7ff93df26b28d82e=
+5e6fc021b9a605"
++SRC_URI[sha256sum] =3D "4c17e1eb324c4b7aa3c6889eba66eeca7ed98625d44076f7db=
+7b027b2b093bd5"
+=20
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a426=
+3 \
+-                    file://errors/COPYRIGHT;md5=3D0e03cd976052c45697ad5d96=
+e7dff8dc \
++                    file://errors/COPYRIGHT;md5=3D0a7deb73d8fb7a9849af7145=
+987829a4 \
+                     "
+ DEPENDS =3D "libtool krb5 openldap db cyrus-sasl"
+=20
+@@ -80,12 +77,21 @@ do_install_ptest() {
+     cp -rf ${B}/${TESTDIR} ${D}${PTEST_PATH}
+     cp -rf ${S}/${TESTDIR} ${D}${PTEST_PATH}
+=20
++    # Needed to generate file squid.conf.default
++    oe_runmake DESTDIR=3D${D}${PTEST_PATH} -C src install-data-local
++    install -d ${D}${sysconfdir}/squid
++    install -m 0644 ${D}${PTEST_PATH}/${sysconfdir}/squid/squid.conf.defau=
+lt ${D}${sysconfdir}/squid
++
++    # Don't need these directories
++    rm -rf ${D}${PTEST_PATH}/${sysconfdir}
++    rm -rf ${D}${PTEST_PATH}/usr
++    rm -rf ${D}${PTEST_PATH}/var
++
+     # do NOT need to rebuild Makefile itself
+     sed -i 's/^Makefile:.*$/Makefile:/' ${D}${PTEST_PATH}/${TESTDIR}/Makef=
+ile
+=20
+     # Add squid-conf-tests for runtime tests
+     sed -e 's/^\(runtest-TESTS:\)/\1 squid-conf-tests/' \
+-        -e "s/\(list=3D' \$(TESTS)\)/\1 squid-conf-tests/" \
+         -i ${D}${PTEST_PATH}/${TESTDIR}/Makefile
+=20
+     # Ensure the path for command true is correct
+@@ -112,6 +118,7 @@ do_install:append() {
+ FILES:${PN} +=3D "${libdir} ${datadir}/errors ${datadir}/icons"
+ FILES:${PN}-dbg +=3D "/usr/src/debug"
+ FILES:${PN}-doc +=3D "${datadir}/*.txt"
++FILES:${PN}-ptest +=3D "${sysconfdir}/squid/squid.conf.default"
+=20
+ RDEPENDS:${PN} +=3D "perl"
+-RDEPENDS:${PN}-ptest +=3D "make"
++RDEPENDS:${PN}-ptest +=3D "perl make"
+--=20
+2.30.2
 
 
