@@ -1,304 +1,379 @@
-Return-Path: <sakib.sajal@windriver.com>
+Return-Path: <alex.kiernan@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 978F9ECAAD8
-	for <webhook@archiver.kernel.org>; Thu, 22 Sep 2022 20:45:38 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com
- [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web09.354.1663879533829600926
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E741BC54EE9
+	for <webhook@archiver.kernel.org>; Thu, 22 Sep 2022 21:34:38 +0000 (UTC)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com
+ [209.85.218.47])
+ by mx.groups.io with SMTP id smtpd.web12.863.1663882472713118452
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Sep 2022 13:45:33 -0700
+ Thu, 22 Sep 2022 14:34:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=rWjoXDZC;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
- invalid domain name (domain: windriver.com, ip: 205.220.166.238,
- mailfrom: prvs=62648c4f6f=sakib.sajal@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
- 28MKjLOZ006064
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Sep 2022 13:45:33 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
- h=from : to :
- subject : date : message-id : content-transfer-encoding : content-type :
- mime-version; s=PPS06212021;
- bh=+zMAXdH9qlg09TGciHXGzkABtW0kip01hyV70Q6gL78=;
- b=rWjoXDZC2oLb4ocivVTT4rATUdJx2ezOAgT6L45DhPkfQoWyh8lEhcds9Qf86JxnMklU
- ad6E5LX2WnQ8DpaqA1bGn3L7b72ROhxj9Eexq05alb5+usg36RWQ6aG9rmZl34J3hnBo
- J1iY15w8/C4tGViZ2BbQSXvSiUbFAsU0NNyT4kkHDnioL4Q0/IAU89cM4y7m9GNqVi0x
- jcTEvHB6gqXaJMSkeYvbnSMrB4KkNnWph0vCamcHMbN6RINr3UrRWjNo2pV70OiVgqJP
- jz0jgf9HluLTNb6sUG/uOZAjJTCOpTncP82gih0Rbk4Ikb7j+PfOjGaH2Htx5P+7O4gN EQ==
-Received: from nam10-mw2-obe.outbound.protection.outlook.com
- (mail-mw2nam10lp2107.outbound.protection.outlook.com [104.47.55.107])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3jndrkmffa-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Sep 2022 13:45:33 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=DtuGSIrrni7NVZGt2HlnxU/7hc1pU9/vyGjzJuJaMfj6e2Pymii/hsnEGIgm00+sMyFMUIbhsOQIlxK5q2efoAF44h6XYF5TxiMdMQwWb8TmJEJbmNMGQCIaOWMP1NccsP/IxWu4o0FJAAe/aitfymV41SZGXA79pSv4hUa3vs94/l5+FC6ORRiLbShjBSTWiY5LAqrEiAoFWRLCCQyv3RTJcsu43AJW/pNVIJ4Yp5lCQ1kr56CoV3A/PSFuNItn1WlFsftJA8L1yf/aF8sC1fjDByy6Fnb/W42HXndY6ueWyI6n8YSFeqO1jk5AoFYzptrnSzyiqaynBNVPe0tYkA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+zMAXdH9qlg09TGciHXGzkABtW0kip01hyV70Q6gL78=;
- b=Fruz0poTIIZu/YXp9WL1pBUn+kJfsC4NJwkwAeviaWJK8kZWWk8Ii78p1PeRhRCGuURNx4id+qBhEgLDUe+407n6Zpdu+QD9weNLhaFq6vlO4lFYHsu52/2DAfAo5RBIBheuj1bv/wvo+tUOsBnpT/+sv7Vskj7VJvQbzttK2tog/UX5ZaGJ0npitt9zwzQZn8my2ANKsUAuuQPNMFQ40ahegWBlJoym9fqIaEZ5K4kby6TrfLY0jSyhgeWWyRwkVyLOYop6jMqx/Skkdi2PAXqETR71RlcnxMxWRhA13ccE6thRjUMuJqCqMO7xX+gD1vAN9lZ028OQEVZO+caDmw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DM6PR11MB2538.namprd11.prod.outlook.com (2603:10b6:5:be::20) by
- PH7PR11MB6030.namprd11.prod.outlook.com (2603:10b6:510:1d1::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.17; Thu, 22 Sep
- 2022 20:45:29 +0000
-Received: from DM6PR11MB2538.namprd11.prod.outlook.com
- ([fe80::857e:8b45:98bb:2336]) by DM6PR11MB2538.namprd11.prod.outlook.com
- ([fe80::857e:8b45:98bb:2336%2]) with mapi id 15.20.5654.017; Thu, 22 Sep 2022
- 20:45:29 +0000
-From: Sakib Sajal <sakib.sajal@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=oMWMgtu5;
+ spf=pass (domain: gmail.com, ip: 209.85.218.47,
+ mailfrom: alex.kiernan@gmail.com)
+Received: by mail-ej1-f47.google.com with SMTP id bj12so23853637ejb.13
+        for <openembedded-devel@lists.openembedded.org>;
+ Thu, 22 Sep 2022 14:34:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date;
+        bh=OojaIsv00MfeLsJhuXCtpnepMTUjkxkq1yTt/2D/VSc=;
+        b=oMWMgtu5jmXILdlsanOPg0KZjeQvmE89A9nK1w7uOzhpj11ZkODx5Zs19liLbXvb+f
+         voUhf1CiqjKwlxaTWKGXFvtzyIGn980QEiUP1W4CUoQB6NR3XDYzdCfZYTY/j1q3EXb4
+         Mjx7KPS96iIBJ3qlIEOdz8cjrE/q+r1fGU5pB9ZUl9TZjXD73EkiF7iP2uHnsMYK4ivj
+         LDaam5F86MDR6CpZI3lYWsGSunDPzdP+vX1yOAZ3ljziCDC2yz9MRf4SAXuIIWnlsheu
+         eOEOyDDzFHdszsmfM75u5ACss/+EHQoSQk1dHV+OLvdjKrnAk4PV5SnDURENjnqMwnAv
+         Rw0g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date;
+        bh=OojaIsv00MfeLsJhuXCtpnepMTUjkxkq1yTt/2D/VSc=;
+        b=05kgCZgK92X/vi2CL3olCouEjp6z1DX6qGTztNM3nkbki6oG0OCb/h95kSmYNXdLge
+         7hz55XjpYMRdnzVx55a93zXrsQXnImxpIRx8sy1JATFBZdW8ihMUyECj28PiuR5T1/0+
+         GKUcS77g0t8gQB9KNcLSK4CNUw0M4VASJd+2FwXTvOHcwQP3ihlnVb/0t7V3yeWcBZjf
+         gDwHvAJsUbP4iGAUYUNk6vljPH2N/mpHjvaGdoelrgpj/Mefcf9kT69TB2ZF4h0cva1I
+         mIqkr1ETZs4YT2xj8UxKq1R1bz88vU5GrDb8KFp3wylSkBriZYOtf2LpW7DDXgMEE8OX
+         xfjA==
+X-Gm-Message-State: ACrzQf2b4/y8QxDeHFw5FBf0U05E0wx/VS0oGwmyZcCljPV+KsOigtHR
+	AIjeD+G/vh7de9yblCIR4fAG11EmP1A=
+X-Google-Smtp-Source: 
+ AMsMyM7xuQVQMXqNq/evCKly+Mah/eeWUH62ODy6j5MUHTZ2j70tIJkZLMv1U+T6LVlc26hkXOJLRA==
+X-Received: by 2002:a17:906:cc4b:b0:772:3844:6ab2 with SMTP id
+ mm11-20020a170906cc4b00b0077238446ab2mr4326885ejb.211.1663882470502;
+        Thu, 22 Sep 2022 14:34:30 -0700 (PDT)
+Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
+ [91.135.6.246])
+        by smtp.gmail.com with ESMTPSA id
+ s18-20020a1709060c1200b00780f24b797dsm3214411ejf.108.2022.09.22.14.34.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 22 Sep 2022 14:34:29 -0700 (PDT)
+From: Alex Kiernan <alex.kiernan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][hardknott][PATCH] minicoredumper: retry elf parsing as long
- as needed
-Date: Thu, 22 Sep 2022 16:43:29 -0400
-Message-Id: <20220922204329.9048-1-sakib.sajal@windriver.com>
-X-Mailer: git-send-email 2.33.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: YQBPR0101CA0196.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:c01:67::8) To DM6PR11MB2538.namprd11.prod.outlook.com
- (2603:10b6:5:be::20)
+Cc: Alex Kiernan <alex.kiernan@gmail.com>
+Subject: [meta-networking][PATCH] libcoap: Upgrade 4.3.0 -> 4.3.1
+Date: Thu, 22 Sep 2022 22:34:22 +0100
+Message-Id: <20220922213422.19210-1-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6PR11MB2538:EE_|PH7PR11MB6030:EE_
-X-MS-Office365-Filtering-Correlation-Id: 213f9592-286f-476f-9681-08da9cdb6285
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	KNbikaWFXhuQiPczWYTUme5KRrKt+wHzsXyJA1uBwXMG0euN4kboX2RVK97xlWn9LWZC/nomOVWxp8TZaGeGA0y3X+RMjaQXfjekD5sckGCKR7S8WPaA7XrXC75z5YdLA5mTSGvmLIziwZ3Zy25xBn2DPWdgO7gcP/5OgJbgmCrpazM1/O64mu6HeQm1QivZ4CHZXbWE8sXxYRmckETQFlLSI832COSbAUwXJEysq3DioP9osJWhSEvx6Fvp/NG7yzXemlnb212hfKZs+2SxYfroMHRD9AtCjWNjckqQZz+gC/bGko01s6UNGP3cScDKlZOLcL0UEwyjGAbC3CSAkHfa5xKACGK3XuUHP5E5Aaq5LZe5ELJo0dEWZjWPtxmR1jHi4huf9XXBaDHTsqJmw9zaleJFAIm5sMEbbDGKn+Ml29QIdkaftdm4YIxXQu8O7H1O+GF3PXeGFocsQ9NkNlseTFUMN1HvtzZ6NgueKlB8gJkO0mA8h+cLA87BoG5KXySpTej/+VqKW9NyYYXblVtGgxlxgvjCHctsaW4MiP0s2E06WKr50a4u8BrZ3D9NeH7UGcK+abLG/5Ez+dbQLiV/U2jP7zUkLMSnvQIYEjuKYugDj0Ap8ArBtAMVVQjcW3UU+eiwyeMIDehLm1eZ+TaeghMi534/7dDn/OxVjwvn/3ILl9mr+if8xeHd8ApB419d97mL7uZ7bns/7YKNvRXlv7qifq7hntyoRUe9l4jYb4XJhQoZSOwG6qTui8TBoD20zAJvdLuBQZ0vI9anzuA03hmv1pVuLwiNJjvLcec=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB2538.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(366004)(39850400004)(346002)(376002)(396003)(136003)(451199015)(86362001)(6486002)(38350700002)(38100700002)(84970400001)(478600001)(2906002)(6916009)(316002)(52116002)(66556008)(66946007)(36756003)(8676002)(41300700001)(66476007)(6506007)(5660300002)(8936002)(26005)(6512007)(44832011)(83380400001)(186003)(1076003)(2616005);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?ZaJh/K7o/VTQF5G29yS7BqOdeWbmA2GsHZTfPVyOqa/JqjODpt8duTxGY5Kx?=
- =?us-ascii?Q?jiRPU2G3UiHt3/4eQK077pS2T+/4n4Pqwk90EDj+52Ml1T7Y5RCystPakWXW?=
- =?us-ascii?Q?iBRwuVw6+1JRDLsIz6xW32hBaSQpwS16jVBwtZZVhtoUVCzgfIYX8MNZhZ6h?=
- =?us-ascii?Q?93Y7KKlXjhi5pqD0lip5GP3T+2XvWjbx0i9ysLkrZreo2e8QagP7anMTMlxm?=
- =?us-ascii?Q?8LDC/I1c7cJ6u4h1HL2IqcOq5JfFrUfDxYj0RAWL0mT1UDvqeAxUFonOkYHe?=
- =?us-ascii?Q?WeLK6z5JJqSaKK39dlV2F56g7UNuT1vrQ1oYnIV8jJuEgKGpuGV/ZI3fwZOS?=
- =?us-ascii?Q?QLTyYTGxM1yH1Txf/qtvDgAGBFkRSptl01vDBtzIVoIDRTdyipDNDV9+2ndh?=
- =?us-ascii?Q?ryDa8GXrptp4mK79Gu5kZw1jG/T2RTMRvPFFC2ZUlya8wjenIJegScs3Coja?=
- =?us-ascii?Q?T0kGgtf7iEYo/g1tpK0SbYwNiSJGTSdjasHYHy1J+Zk/TP/H6ifFH8ma2W6k?=
- =?us-ascii?Q?C4HnBWsjlRMC7ABI9br9p9dX9QtbEOJXT4nB+b8ZGkjXR6MUbuuU+eiSdZ8I?=
- =?us-ascii?Q?Y1nveWKHjt8bkQew9UgayCRhL+eiBGNnWdwqo8xOZI4phi+XB6VIxfWtsZWM?=
- =?us-ascii?Q?qiOenMMh//9azOQztbOhS9HU0CBjMPGdDGoy5V6f4nhxn7QJ2RPP3ZCdIMGq?=
- =?us-ascii?Q?nfzEfo47T2YagJlxLOqb7JrqNrTnbRz7dcoH7Zd6FxhZ0JWQTRaVM8Lugsg4?=
- =?us-ascii?Q?WoMjRoqJb7tWje7YraMXypCOH3pb7ACcK76svHMfHjZzupaXITYX1PzviSkg?=
- =?us-ascii?Q?rqgMV0aDbPQwp6Y5BWMopRhu5xUbgGiQVmepntNlTVGdBFyLq/igZqJRIXGe?=
- =?us-ascii?Q?BS88+1Ej3hOJ55ZIL1qB8R0CJBbJkBg1pgFr3Nn2GcEpkLq1UYNNVSoiHZir?=
- =?us-ascii?Q?UG4JKkjJhh50jr5M1Z2HaTYR1+K/9eP/BSL0XlRmw+hAt0sK8Udteg4JrqwW?=
- =?us-ascii?Q?6i/VL7V/a8JS5k1MMNwDLYLfPTAwPC1maCjUy83NkOQLjJilMsVCV9cPIH3p?=
- =?us-ascii?Q?fJJcwsiA5UhXvYqQeH0xex6wpjcpvkk+EI5W7X6xYi7VkaZebYY/HS27w+KP?=
- =?us-ascii?Q?5O2KMGcHmCuf9jVQ2Cakm200a3qIdwmr6VcEG59oGhALZXt+IKNCxkWXLNLr?=
- =?us-ascii?Q?fFkert1zs9d9jcxYO1ASSlmJXrHqTcxmMTXXs2A3OuO1/uYylM7mYIGiqBR1?=
- =?us-ascii?Q?aMafiSlMMi7a6Py0en90Sv/b/jI8c6j5jomoJMPoq7UAhqXTOBxirm+Hb21U?=
- =?us-ascii?Q?gR0VEI4O/m9KmL56SEttuTKtl7NQ5e9he2uW1T2LxhF8otrzCd3v/WCemldD?=
- =?us-ascii?Q?pXlH1TICt8YvKX87GCyN/Yl3CpekzPHpO9NVspeR8H0+O/nQiqleObRxUeS2?=
- =?us-ascii?Q?tYEHTXuJkUeYxaBF/qJI/IezDIJlHslHKjRlqYxiuaygbMW+cevz/F8bRYqt?=
- =?us-ascii?Q?9aNBLIgiDXC5SyW5GNeV9ay7KOXE553DAXDG2LkH1SEHHqIqisq+XiUhmGCj?=
- =?us-ascii?Q?LPJDQFBYqBJSnuBeAWPrJ4dR8cKcNV5NjHnmSLeZ0T9c8QLfSFXE+qyKyvl4?=
- =?us-ascii?Q?Rg=3D=3D?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 213f9592-286f-476f-9681-08da9cdb6285
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR11MB2538.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2022 20:45:29.2757
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 
- UsIAZJfGzFyFHUDRf9FBGUtcq0hML14yzUCm7bvlU9f4MB1VS0ReEGP47IAXeX+GIIn6l6D0GZGLv2wS9k6AXtbuFjcM8WYVvEYIL7dxLOo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB6030
-X-Proofpoint-GUID: TuCBYYXpBLbJq3hwXLlHDE7O9U3sW8av
-X-Proofpoint-ORIG-GUID: TuCBYYXpBLbJq3hwXLlHDE7O9U3sW8av
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
- definitions=2022-09-22_14,2022-09-22_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0
- malwarescore=0 suspectscore=0 phishscore=0 impostorscore=0 bulkscore=0
- mlxlogscore=999 priorityscore=1501 adultscore=0 spamscore=0 mlxscore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2209130000 definitions=main-2209220133
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 Sep 2022 20:45:38 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 Sep 2022 21:34:38 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98931
+ https://lists.openembedded.org/g/openembedded-devel/message/98932
 
-Maximum number of tries, in rare cases, is insufficient for
-elf parse. Backport patch that fixes the issue.
+Drop merged backport of 7e20aa9ef172 ("coap_session.c: Balance
+SESSIONS_ADD and SESSIONS_DELETE usage").
 
-Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e231c86e282eefff0e8164551f75f8e01682abe6)
-Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
+  c694baead2f9 Update version to release 4.3.1
+  ab9488559f5e Doxygen: Fix missing links for later versions of asciidoc
+  144f9c4381c1 Manual pages: Update NAME section to contain all of the alternative names
+  707aed35d39b Doxygen: Hyperlink man page functions
+  46feac2455ab Misc: Tidy up documentation and space usage
+  d09204e24aba Doxygen: Add in individual man pages for the ease of finding the functions
+  09aab40d14f9 Tag release candidate 2 for version 4.3.1
+  2755af4d1a16 block.c: Clarify ignored result from coap_get_data()
+  5f0eea8dbbc4 coap_session.c: Fix adding NULL pointer on error in coap_new_server_session()
+  ea89cb842cf6 coap_cache.txt.in: Fix typo in function name
+  922e81a0d21f Doc: Include statement about upgrading to 4.3.1
+  5c498249e7e7 ChangeLog: Add summary for version update to 4.3.1
+  4f12b9be1b7b coap_event.h: Clean up Doxygen documentation for coap_event_t
+  43bfbea924e0 Copyright: Update dates to 2022 where appropriate
+  37731524a0ad RFC8516: Document support
+  a7b2f2b4901b block.c: Timeout coap_lg_crcv_t structures correctly
+  f4507e6e9adb Block: Report event on large xmit failures
+  3d387a5be485 block.c: Correct size of allocated PDU buffer
+  6a9a787503ec Observe: Clean up server timing out after observe failures
+  725e464421e0 mcast: Tidy up logging
+  381ff3d94da2 PDU Data: Clean up internal usage of PDU data
+  0f0cac71f5e5 Observe: Support disabling observe cancellation on session close
+  bc4c75060b86 coap_mbedtls.c: Fix output type of a log message
+  b8f01cef06f0 net.c: Move variable into correct block
+  58a8b338045b net.c: Send appropriate delayqueue entries in coap_cancel_all_messages()
+  b4306bb79162 observe: Make sure the correct token in used for cancellation
+  c68d1e9fe785 mutex: Do not output mutex warnings for LwIP and Contiki
+  7f551fcea56b coap_mbedtls.c: Upgrade to mbedTLS v3.2.1 - Updated the deprecated APIs with the respective alternatives   - `mbedtls_ssl_conf_min_version` => `mbedtls_ssl_conf_min_tls_version` - Updated fields for `mbedtls_ssl_ciphersuite_t`   - `max_major_version`/`max_minor_version` => `max_tls_version` - Added macros for backward compatibility
+  8c15b896ef30 esp-idf: Stop -Wformat errors for uint32_t variables
+  0ca2fd4a90b5 Tag release candidate 1 for version 4.3.1
+  9962bab56f6b Updated tinydtls to current develop HEAD
+  8fbe440f8aaa coap_io.c: Updates for esp-idf port
+  d2306569d16a proxy: Make proxy requests separate responses
+  98ecf5a2a166 tinydtls: Update submodule to latest version
+  8c973a454e73 mid_duplicates: Drop general responses duplicates
+  dc92fe5e1ea6 coap.h.windows.in: Fix missing file renames
+  347270b9abc4 file naming: Rename files to have coap_ prefix
+  8b9377ef2ad4 coap_mbedtls.c: Fix memory leak
+  e8052b3988ec resource.c: Further fix making subscribers iteration safe
+  f93b9a3e37cf coap_mbedtls.c: Catch connection reset in coap_tls_write
+  d5bcb8159b73 resource.c: Make subscribers iteration safe in coap_notify_observers
+  0d9f2531e5dd coap_session.c: Free off session's last_token on session deletion
+  415fbdb7cddf RFC9175: Add in support for the Echo and Request-Tag options
+  88ae9563e665 mcast support: Support multicast granular to the resource level
+  73565196a8f3 block.c: Fix error handling with Block transfers
+  132c72619032 net.c: Handle multiple same token request/responses
+  d68f5d6f5713 net.c: Handle well_known requests when there is no libcoap block support
+  fe51d3335e81 lwip: Fix minor issues
+  6046dcbd5589 net.c: Fix broken client only build
+  20f15a17d698 Large Observes: Prevent server sending new response if active response
+  5a10ce4890ff Congestion Control: add in RFC7252 configuration flexibility
+  41afb92141c5 net.c: Update .well-known/core handling to use common logic
+  6b32ed3de2fb coap_io.c: Track ICMP Host Administravely Prohibited error
+  279755b1df9e coap_send: Make error checks for coap_send() more rigorous
+  925d39fd8cfb coap-server.c: Cleanup misplaced comment
+  c77176714770 coap_gnutls.c: Handle another error in do_gnutls_handshake()
+  801e5492f2e6 CSM: Move coap_client_delay_first() to later in code processing
+  346a831cd604 block.c: Correctly preset updated_block variable
+  56db248daba6 async.c: Remove white space
+  256a758e0273 TLS SIGPIPE: Stop programs exiting with code 141 (128 + 13:SIGPIPE)
+  6649bdef39db net.c: fix null pointer exception
+  03a9059439d0 BERT: Support block BERT szx of 7 for reliable protocols
+  445a9481deca RFC7390: Update support for RFC7390
+  428f759659a4 coap_mbedtls.c: Fix coap_rng() return for 3.x code
+  1b2668f562e9 CMakeLists.txt: Correctly determine cmsghdr support for determining addresses
+  21fd838dc781 coap_io_prepare_io: Re-order function code for correctly updating sockets[]
+  cfbf3ab617f8 doc/main.md: Update copyright year
+  f28044303abe net.c: Make sure separate response is CON for CON requests
+  069a0786ce85 CSM: Support different XMT and RCV Max-Message-Size
+  9cbe5757cb69 recursive mutex: Stop recursive Mutex when doing handler callbacks
+  d9c19c378f3f event.h: Add events for server session state management
+  7e20aa9ef172 coap_session.c: Balance SESSIONS_ADD and SESSIONS_DELETE usage
+  806861359b81 configure.ac: Allow using non-vendored TinyDTLS with autotools build
+  6c8b76d534a0 tinydtls: Update to latest version
+  aa391b5b7601 async: Handle changes to delay when using epoll
+  65cba25cc7e5 coap-client.c: Delay sending each request using -G by 1 second
+  d57d44aa142a block.c: Fix data leak in coap_add_data_large_internal
+  eb7656850f1c pdu.h: Add Content-Format for application/ace+cbor
+  c8458f262ab8 coap_mbedtls.c: Fix return brace location
+  583c29fd47d9 coap_mbedtls.c: Make TLS error recovery more rigorous
+  02deef8da6ac coap_prng.c: Added alternate RNG implementation - For targets having their own hardware entropy/RNG implementation   using mbedtls_hardware_poll() - This change was made as since mbedtls-3.x, passing a RNG function   to all functions that accept a f_rng parameter is mandatory
+  916a534e170b coap_mbedtls.c: Upgrade to mbedTLS v3.x - Added MBEDTLS_ALLOW_PRIVATE_ACCESS to access private struct   members wherever required - Updated deprecated functions from hashing module   (E.g. mbedtls_sha256_starts_ret() -> mbedtls_sha256_starts()) - Added mandatory RNG parameter for some functions   (mbedtls_pk_parse_keyfile(), mbedtls_pk_parse_key()) - Remove support for parsing SSLv2 ClientHello
+  b42c184f74a6 block.c: Fix possible null-pointer dereference
+  df72a53f2d66 coap_openssl.c: Support Microsoft VS builds
+  0f76881802af autogen.sh: Fix missing file ar-lib
+  19928e81bd42 builds: Set CFLAGS += -Werror in all linux subdirectory compilations
+  b2ad43319a0f doc/Makefile.am: Include module_api_wrap.h in a distribution
+  dfc678c33bd1 Proxy: Support unknown Critical but Safe-To-Forward options
+  93f2738c451d coap_pdu_setup.txt.in: Clarify / more make readable the pdu setup information
+  5b32d716fa03 github workflow: Support windows-2022
+  bd9ced550e07 pdu.c: Fix coap_insert_option with delta = 269
+  ba585f848ff5 [OSS-Fuzz] pdu_parse_target.c: Check result of coap_pdu_parse()
+  a2e0046c802f [OSS-Fuzz] pdu_parse_target.c: Fix compiler warning
+  b3d503cbff07 sessions: Prevent multiple client session confusion
+  726b9630e51f coap_block.txt.in: Clarify / more make readable the block handling information
+  756bb042395d pdu building: Enforce the application order of building a PDU
+  c02ca5f097d6 coap_pdu_access.txt.in: Add in documentation for coap_get_uri_path()
+  aaf611559482 proxy_uri: Fix handling the resource for uri path in Proxy-Uri
+  a8c00f2af9c6 coap_pdu_setup.txt.in: Better document coap_encode_var_safe8()
+  64e56410177b versioning: Make current git describe available
+  0a16d790ce53 cmake_coap_config.h.in: Fix definitions for when building with tinydtls
+  17aaa81b5ad3 Caching: Highlight requirements ignoring certain CoAP Options
+  74582eddde28 resource.c: Support deleting resources that have not yet been added
+  32d2d0e1c62b request_handler: Report only when app's request handler is actually called
+  5dc2dfca86ec block.c: Do not match large response if no Block2 option in request
+  18888cd0dde3 cmake: Install example programs if examples enabled
+  c0e032ffad0b block: Check block size space correctly
+  693a4e231386 net.c: correct return value in coap_send_internal()
+  38bffb7f99d9 configure.ac: Fix have mbedtls lib, but no mbedtls-dev issue
+  694a205f28dc coap-server.c: Fix proxy response type and code
+  e8e33f0424ad coap-server: Add in POST support for unknown request handler
+  3f5ec5467a1d coap_cache.c: Correctly build cache key
+  e43cf9369ac5 RFC7959: Handle both client and server initiating requests
+  bdf7686613ec coap_write_session: Account correctly for partial TCP writes
+  76194be8cd3f coap-client.c: Allow time for all server responses to mcast
+  d395df1a812f coap_session.c: Do not check for duplicate mids if reliable protocol
+  73389b8192e8 handlers: Clarify which handlers are client only, server only or both
+  df9071c93eff coap_session.[hc]: Added function to retrieve PSK identity from session
+  7791897e8f4c api-version-bump.sh: Added missing changes for win32
+  4834b86067ae pkg-config: Don't use hard coded binary
+  d139beab67ff pkg-config: Don't use hard coded binary
+  166ef51ed155 Windows: Update libcoap-2 objects to libcoap-3
+  31722c208ac9 PSK: Make PSK hint / key / identity retrieval simpler
+  d746fc24e5a7 coap_pdu_parse: Add to public API
+  0aeb0d624797 doxygen: Tidy up Modules and Files tab information
+  f026f5701ece client+server: Reduce code size by building libcoap for client or server only
+  a7f53b4d6b0a coap_debug.h: Allow <syslog.h> to be included before and after <coap3/coap.h>
+  77f8cf59702e DTLS/TLS: Support TLS when DTLS is not enabled
+  587de900c2cc coap_mbedtls.c: Add in TLS support
+  94b297aae7a5 coap_mbedtls.c: Fix build fail for client only mbedtls
+  cc2648aef685 net.c: Protect against session release in coap_io_do_io()
+  ca44071b8afe net.h: do not include sys/select.h in Windows builds
+  e984f38b8fd6 [DTLS] make buffer sizes for psk and psk_identity configurable
+  54dbc3eeb815 [RIOT] coap_time.h: fix COAP_TICKS_PER_SECOND for undefined XTIMER_HZ
+  05e7f12d7ca8 net.h: Include sys/select.h for fd_set
+  25a59905792f doxygen: Fix summary output for manual pages
+  a5c0d12354ed doc: Document the coap_can_exit() function
+  a1d78d505d98 tiny.c: Fix message id generation
+  67f189f134a2 CMakeLists.txt: Fix macOS builds by checking for if_nametoindex support
+  8ce139d349bc coap_event.h: Make coap_event_t an enum
+  b0ca3ae643d1 resource.c: Delete previous subscription correctly
+  98b9179d5666 async: Correct MID usage in response
+  c61748f4dd33 RFC7959: session->lg_xmit not being released for a server
+  482be755fe29 gnutls:  GNUTLS_CRT_RAW not defined
+  e0d6477b5ec9 man: Update man page documentation
+  d52986f00459 coap_resource_init: Leading '/' is not required for uri_path
+  60c69557f3d5 pdu.h: Remove unassigned response code COAP_RESPONSE_CODE_OK
+  87fab6d573cf coap_mbedtls.c: Allow ESP-IDF systems to be compiled without PSK support
+  77d1aae06b17 Fix condition for MBEDTLS_INCLUDE_DIRS
+  4bbf25ba338a coap-client: Add in support for generating multiple requests
+  50530704df9a tinydtls: update to latest version
+
+License-Update: Update year
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
- ...-retry-elf-parsing-as-long-as-needed.patch | 128 ++++++++++++++++++
- .../minicoredumper/minicoredumper_2.0.1.bb    |   1 +
- 2 files changed, 129 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-retry-elf-parsing-as-long-as-needed.patch
+ ...alance-SESSIONS_ADD-and-SESSIONS_DEL.patch | 51 -------------------
+ ...0001-libcoap-Fix-gnu-configize-error.patch | 44 ----------------
+ .../{libcoap_4.3.0.bb => libcoap_4.3.1.bb}    |  8 ++-
+ 3 files changed, 3 insertions(+), 100 deletions(-)
+ delete mode 100644 meta-networking/recipes-devtools/libcoap/libcoap/0001-coap_session.c-Balance-SESSIONS_ADD-and-SESSIONS_DEL.patch
+ delete mode 100644 meta-networking/recipes-devtools/libcoap/libcoap/0001-libcoap-Fix-gnu-configize-error.patch
+ rename meta-networking/recipes-devtools/libcoap/{libcoap_4.3.0.bb => libcoap_4.3.1.bb} (86%)
 
-diff --git a/meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-retry-elf-parsing-as-long-as-needed.patch b/meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-retry-elf-parsing-as-long-as-needed.patch
-new file mode 100644
-index 000000000..8d5b8b6cb
---- /dev/null
-+++ b/meta-oe/recipes-kernel/minicoredumper/files/0001-minicoredumper-retry-elf-parsing-as-long-as-needed.patch
-@@ -0,0 +1,128 @@
-+From 7a8c6a06c86e133e4346b1dc66483bd8d0d3c716 Mon Sep 17 00:00:00 2001
-+From: John Ogness <john.ogness@linutronix.de>
-+Date: Tue, 24 Aug 2021 21:10:43 +0200
-+Subject: [PATCH] minicoredumper: retry elf parsing as long as needed
-+
-+As was reported in github issue #2 ("maximum number of tries
-+insufficient, in rare cases, for elf parse"), the number of retries
-+for parsing a process may be insufficient. Rather than setting an
-+upper limit on the maximum number of retries, track the number of
-+headers seen. As long as the number of seen headers is greater than
-+the previous try, try again.
-+
-+In order to avoid introducing any new issues, preserve the behavior
-+of retrying at least 10 times, even if no new headers are seen.
-+
-+Reported-by: github.com/ssajal-wr
-+Signed-off-by: John Ogness <john.ogness@linutronix.de>
-+
-+Upstream-Status: Backport [7a8c6a06c86e133e4346b1dc66483bd8d0d3c716]
-+
-+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
-+---
-+ src/minicoredumper/corestripper.c | 30 +++++++++++++++++++++++-------
-+ 1 file changed, 23 insertions(+), 7 deletions(-)
-+
-+diff --git a/src/minicoredumper/corestripper.c b/src/minicoredumper/corestripper.c
-+index d96d1df..c96b350 100644
-+--- a/src/minicoredumper/corestripper.c
-++++ b/src/minicoredumper/corestripper.c
-+@@ -761,7 +761,7 @@ static int init_log(struct dump_info *di)
-+ typedef int elf_parse_cb(struct dump_info *di, Elf *elf, GElf_Phdr *phdr);
-+ 
-+ static int do_elf_ph_parse(struct dump_info *di, GElf_Phdr *type,
-+-			   elf_parse_cb *callback)
-++			   elf_parse_cb *callback, size_t *phnum_found)
-+ {
-+ 	GElf_Ehdr ehdr_mem;
-+ 	GElf_Ehdr *ehdr;
-+@@ -770,6 +770,9 @@ static int do_elf_ph_parse(struct dump_info *di, GElf_Phdr *type,
-+ 	size_t phnum;
-+ 	size_t cnt;
-+ 
-++	if (phnum_found)
-++		*phnum_found = 0;
-++
-+ 	/* start from beginning of core */
-+ 	if (lseek64(di->elf_fd, 0, SEEK_SET) == -1) {
-+ 		info("lseek failed: %s", strerror(errno));
-+@@ -809,6 +812,9 @@ static int do_elf_ph_parse(struct dump_info *di, GElf_Phdr *type,
-+ 		goto out;
-+ 	}
-+ 
-++	if (phnum_found)
-++		*phnum_found = phnum;
-++
-+ 	for (cnt = 0; cnt < phnum; cnt++) {
-+ 		GElf_Phdr phdr_mem;
-+ 		GElf_Phdr *phdr;
-+@@ -891,7 +897,7 @@ static int vma_cb(struct dump_info *di, Elf *elf, GElf_Phdr *phdr)
-+ /*
-+  * Tries to parse the found ELF headers and reads all vmas from it.
-+  */
-+-static int parse_vma_info(struct dump_info *di)
-++static int parse_vma_info(struct dump_info *di, size_t *phnum_found)
-+ {
-+ 	unsigned long min_off = ULONG_MAX;
-+ 	unsigned long max_len = 0;
-+@@ -911,7 +917,7 @@ static int parse_vma_info(struct dump_info *di)
-+ 	memset(&type, 0, sizeof(type));
-+ 	type.p_type = PT_LOAD;
-+ 	type.p_flags = PF_R;
-+-	if (do_elf_ph_parse(di, &type, vma_cb) != 0)
-++	if (do_elf_ph_parse(di, &type, vma_cb, phnum_found) != 0)
-+ 		return -1;
-+ 
-+ 	for (v = di->vma; v; v = v->next) {
-+@@ -1614,8 +1620,10 @@ int add_core_data(struct dump_info *di, off64_t dest_offset, size_t len,
-+  */
-+ static int init_src_core(struct dump_info *di, int src)
-+ {
-++	size_t last_phnum = 0;
-+ 	int tries = 0;
-+ 	int ret = -1;
-++	size_t phnum;
-+ 	size_t len;
-+ 	char *buf;
-+ 	long pos;
-+@@ -1642,7 +1650,7 @@ again:
-+ 		goto out;
-+ 
-+ 	/* try to elf-parse the core to read vma info */
-+-	ret = parse_vma_info(di);
-++	ret = parse_vma_info(di, &phnum);
-+ 
-+ 	/* restore our position */
-+ 	if (lseek64(di->elf_fd, pos, SEEK_SET) == -1)
-+@@ -1653,9 +1661,17 @@ again:
-+ 
-+ 		tries++;
-+ 
-+-		/* maybe try again */
-+-		if (tries < 10)
-++		if (phnum > last_phnum) {
-++			/* new headers found, keep trying */
-++			last_phnum = phnum;
-+ 			goto again;
-++		} else if (tries < 10) {
-++			/*
-++			 * even if no new headers are found,
-++			 * retry at least 10 times
-++			 */
-++			goto again;
-++		}
-+ 
-+ 		goto out;
-+ 	}
-+@@ -2106,7 +2122,7 @@ static int dump_stacks(struct dump_info *di)
-+ 		/* find and set the first task */
-+ 		memset(&type, 0, sizeof(type));
-+ 		type.p_type = PT_NOTE;
-+-		do_elf_ph_parse(di, &type, note_cb);
-++		do_elf_ph_parse(di, &type, note_cb, NULL);
-+ 	}
-+ 
-+ 	if (di->first_pid)
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-index 8188ae599..5c5e0b241 100644
---- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-+++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-@@ -16,6 +16,7 @@ PR .= "+git${SRCPV}"
- SRC_URI = "git://github.com/diamon/minicoredumper;protocol=https;branch=master \
-            file://minicoredumper.service \
-            file://minicoredumper.init \
-+           file://0001-minicoredumper-retry-elf-parsing-as-long-as-needed.patch \
+diff --git a/meta-networking/recipes-devtools/libcoap/libcoap/0001-coap_session.c-Balance-SESSIONS_ADD-and-SESSIONS_DEL.patch b/meta-networking/recipes-devtools/libcoap/libcoap/0001-coap_session.c-Balance-SESSIONS_ADD-and-SESSIONS_DEL.patch
+deleted file mode 100644
+index c8ac8485a0a1..000000000000
+--- a/meta-networking/recipes-devtools/libcoap/libcoap/0001-coap_session.c-Balance-SESSIONS_ADD-and-SESSIONS_DEL.patch
++++ /dev/null
+@@ -1,51 +0,0 @@
+-From c56a64ff4df7eecb6c88ff929497bcd0d65934f2 Mon Sep 17 00:00:00 2001
+-From: Jon Shallow <supjps-libcoap@jpshallow.com>
+-Date: Fri, 22 Apr 2022 13:15:39 +0100
+-Subject: [PATCH] coap_session.c: Balance SESSIONS_ADD and SESSIONS_DELETE
+- usage
+-
+-Upstream-Status: Backport [https://github.com/obgm/libcoap/commit/7e20aa9ef17277f39203334404e6c776b1171a7d]
+-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+-Signed-off-by: Alex Kiernan <alexk@zuma.ai>
+----
+- src/coap_session.c | 12 ++++++++++++
+- 1 file changed, 12 insertions(+)
+-
+-diff --git a/src/coap_session.c b/src/coap_session.c
+-index 77cae598f0af..536e57573361 100644
+---- a/src/coap_session.c
+-+++ b/src/coap_session.c
+-@@ -813,6 +813,12 @@ coap_session_create_client(
+-   return session;
+- 
+- error:
+-+  /*
+-+   * Need to add in the session as coap_session_release()
+-+   * will call SESSIONS_DELETE in coap_session_free().
+-+   */
+-+  if (session)
+-+    SESSIONS_ADD(ctx->sessions, session);
+-   coap_session_release(session);
+-   return NULL;
+- }
+-@@ -1133,11 +1139,17 @@ coap_session_t *coap_new_server_session(
+-   if (session) {
+-     coap_log(LOG_DEBUG, "***%s: new incoming session\n",
+-              coap_session_str(session));
+-+    /* Returned session may already have been released and is now NULL */
+-     session = coap_session_accept(session);
+-   }
+-   return session;
+- 
+- error:
+-+  /*
+-+   * Need to add in the session as coap_session_release()
+-+   * will call SESSIONS_DELETE in coap_session_free().
+-+   */
+-+  SESSIONS_ADD(ep->sessions, session);
+-   coap_session_free(session);
+-   return NULL;
+- }
+--- 
+-2.35.1
+-
+diff --git a/meta-networking/recipes-devtools/libcoap/libcoap/0001-libcoap-Fix-gnu-configize-error.patch b/meta-networking/recipes-devtools/libcoap/libcoap/0001-libcoap-Fix-gnu-configize-error.patch
+deleted file mode 100644
+index 64f8d3acc812..000000000000
+--- a/meta-networking/recipes-devtools/libcoap/libcoap/0001-libcoap-Fix-gnu-configize-error.patch
++++ /dev/null
+@@ -1,44 +0,0 @@
+-From 25f1bebf1bc4c8da47f976d24a7a424253744e2e Mon Sep 17 00:00:00 2001
+-From: Alex Kiernan <alex.kiernan@gmail.com>
+-Date: Wed, 24 Mar 2021 09:10:17 +0000
+-Subject: [PATCH] libcoap: Fix gnu-configize error
+-
+-Fix:
+-
+-  autoreconf: running: gnu-configize
+-  gnu-configize: 'configure.ac' or 'configure.in' is required
+-  autoreconf: gnu-configize failed with exit status: 1
+-
+-We're not pulling in the ext/tinydtls submodule, so this fails.
+-
+-Upstream-Status: Inappropriate [oe-specific]
+-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+-Signed-off-by: Alex Kiernan <alexk@zuma.ai>
+----
+- configure.ac | 13 -------------
+- 1 file changed, 13 deletions(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 9f51f4c67557..559808e03aa2 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -472,19 +472,6 @@ if test "x$build_dtls" = "xyes"; then
+-         have_tinydtls="no" # don't confuse AC_MSG_RESULT at the end of the script
+-     fi
+- 
+--    # The user wants to use explicit TinyDTLS if '--with-tinydtls was set'.
+--    if test "x$with_tinydtls" = "xyes" ; then
+--        if test -d "$srcdir/ext/tinydtls"; then
+--           AC_CONFIG_SUBDIRS([ext/tinydtls])
+--           have_tinydtls="yes"
+--         else
+--           have_tinydtls="no" # don't confuse AC_MSG_RESULT at the end of the script
+--         fi
+--         have_gnutls="no" # don't confuse AC_MSG_RESULT at the end of the script
+--         have_openssl="no" # don't confuse AC_MSG_RESULT at the end of the script
+--         have_mbedtls="no" # don't confuse AC_MSG_RESULT at the end of the script
+--    fi
+--
+-     if test "$TLSCOUNT" -eq 0; then
+-       # The user hasn't requested the use of a specific cryptography library
+-       # we try first GnuTLS for usability ...
+diff --git a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.0.bb b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.1.bb
+similarity index 86%
+rename from meta-networking/recipes-devtools/libcoap/libcoap_4.3.0.bb
+rename to meta-networking/recipes-devtools/libcoap/libcoap_4.3.1.bb
+index 4b467d212f03..0fc342560aa7 100644
+--- a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.0.bb
++++ b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.1.bb
+@@ -5,14 +5,12 @@ RF range, memory, bandwith, or network packet sizes."
+ HOMEPAGE ="https://libcoap.net/"
+ 
+ LICENSE = "BSD-2-Clause & BSD-1-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=e44b3af4925ec58e9f49b9ff143b5493"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=0fbe4435d52b2d27a16f980ffc8ffc80"
+ 
+ SRC_URI = "git://github.com/obgm/libcoap.git;branch=main;protocol=https \
+-           file://0001-libcoap-Fix-gnu-configize-error.patch \
+-           file://0001-coap_session.c-Balance-SESSIONS_ADD-and-SESSIONS_DEL.patch \
+            file://run-ptest \
             "
+-SRCREV = "1da37b9abbe871675d5939395b498324ccc8ecfe"
++SRCREV = "02b76470ab9168947152c78ad50835bf043d7c84"
  
  S = "${WORKDIR}/git"
+ 
+@@ -33,7 +31,7 @@ PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,cunit"
+ 
+ EXTRA_OECONF = "\
+     --with-epoll --enable-add-default-names \
+-    --without-tinydtls \
++    --without-tinydtls --without-submodule-tinydtls \
+     ${@bb.utils.contains_any('PACKAGECONFIG', 'gnutls openssl mbedtls', '--enable-dtls', '--disable-dtls', d)} \
+ "
+ 
 -- 
-2.33.0
+2.35.1
 
 
