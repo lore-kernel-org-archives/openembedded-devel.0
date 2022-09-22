@@ -1,152 +1,110 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <vince@underview.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AA3EC32771
-	for <webhook@archiver.kernel.org>; Thu, 22 Sep 2022 01:54:23 +0000 (UTC)
-Received: from mail-ot1-f44.google.com (mail-ot1-f44.google.com
- [209.85.210.44])
- by mx.groups.io with SMTP id smtpd.web08.2531.1663811655034348081
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD31BC54EE9
+	for <webhook@archiver.kernel.org>; Thu, 22 Sep 2022 03:33:13 +0000 (UTC)
+Received: from mail-oi1-f195.google.com (mail-oi1-f195.google.com
+ [209.85.167.195])
+ by mx.groups.io with SMTP id smtpd.web08.3237.1663817592113504767
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Sep 2022 18:54:15 -0700
+ Wed, 21 Sep 2022 20:33:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=R4WoFMKD;
- spf=pass (domain: gmail.com, ip: 209.85.210.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f44.google.com with SMTP id
- 102-20020a9d0bef000000b0065a08449ab3so5262488oth.2
+ dkim=pass header.i=@underview.tech header.s=google header.b=c5jNlc1G;
+ spf=pass (domain: underview.tech, ip: 209.85.167.195,
+ mailfrom: vince@underview.tech)
+Received: by mail-oi1-f195.google.com with SMTP id m130so10757213oif.6
         for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Sep 2022 18:54:14 -0700 (PDT)
+ Wed, 21 Sep 2022 20:33:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date;
-        bh=BhMSY35ZQIYiBfusATQAFHGsDlx55nyIP6r5q9QAkEU=;
-        b=R4WoFMKDFpMLg4XptuacyInKGardwALEFdnjmef8E6K5RrxWL7JJ5M2lZAqZTq1bjD
-         CvRgUybB+1lJs+ifgTO+1Bqsn2flBwoddxXsbrQwuOsoogPVNbrTdz3mj4/Md8gp54Ue
-         XFJNgdvix0U3eO3Z7+qPmxVcAth9oX0EJEqxXQb23But+ir2K7SmPoOjKOAXEGX10vPz
-         ByUfavp4Tuw3aCr0FK7EWRCke/yiTD3l5fT3FPA1gcdGfMVctVF48e0YzREziVuEoBol
-         QzMYA6rlcPMqTF1TwMNBbQmv2hBl0eatOyiiBc+D1HdSb1uiX1NAc13Qh00VZWLNaKq7
-         /0ag==
+        d=underview.tech; s=google;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date;
+        bh=49bvjJCZZUF+ew1o5rPo1TgY4yPnQkiv9ne9tmy31fE=;
+        b=c5jNlc1Ggkmy1XSolrd3w/J/n+KnzdBpj2sMbFefB3OoCan2Q1JUhEhOu1wwI8FEg6
+         kyX3TwFGVQ818bWdKHHsPhj8VUdipQtV2IZqQVXAkFRSq8WI9sTn/2GrebN40yvWEUlc
+         oIM/KCnIMeuuAPY4XxtDEZVN7Gi7DID94wrDQYS/n71U6AFR+knyGDxn1tRQqFJW9+Tu
+         WkCu2DXo+oVr59z5ovLcfy+ELewJdXi36VsXFqiuBEAb3GHwN596NfkWB5dc3cuEq7b+
+         ridZhDE85uZwclX6WN3ZYRWq+pIqCIdWdCRRrwSj27ylmuhRz0KTwgdXnnmK13cGVB9x
+         bZBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date;
-        bh=BhMSY35ZQIYiBfusATQAFHGsDlx55nyIP6r5q9QAkEU=;
-        b=KL+biwp9gM4Wnndc/QESdSuQGyPdPwKfhhn9Vk6MbBPbviUOCRlCX8y3zWBXBFBG9h
-         zQkErLQdLOmPkQvpu8F+/MNkSoGM7fO6LAWg/Vz2t0PdbkCyW6NYhJgzus7iBjbolmRG
-         q+ynoI1/EmPz8Uz3Gc33k1uADI1Fy2x/dk1RresXtghv/KhhiCGKUs8xAf/ssy7koqf5
-         xWDaKiyyw3dIq1JsJnXN8c9T6obqBb5fHo/+rjxOQiaH27sRzgNu87i+AxuTQCOqOLLr
-         ylgekK+IDm1XPnt5fTwq77VKUkiIa1qjKF9IR4waP//lkBFWK4sPkyRnieaWGPYhfpLa
-         Wa4Q==
-X-Gm-Message-State: ACrzQf1iB7kd/97AyJluKUYeDy5G7b8t+ppAVO2k1flFxORuWQGHhFgL
-	qp15DdO3pFGn9AZ2kQrIRaMb/SuMBHIYE+pzxOs=
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date;
+        bh=49bvjJCZZUF+ew1o5rPo1TgY4yPnQkiv9ne9tmy31fE=;
+        b=IEZVE48yFQjO9y5nL0uWMl8KWipUS8OmHysUtoJVg6N3r7NbfZr/oe5PT3dETzgDdD
+         EU8SDeknCkUPgxKCV8b2AsO2LRCSxxxpOdjX7rBvF3yoSJulU/HC+6kf+GyHYXdtOy/4
+         wVRZqSRuY3CVPTx+to9ukfqaj+FM8hX516QmjQF6COkQ1IZL5kkD3segemofmctg/dgw
+         zSz0udSlwkPIjYFh1bP3xGehaXPOyFhbJI5ERodxfyhFJcKOVpzoh7NCMn4BDVAt4CeX
+         0/ii76gPMqMWYS0THC9PgcHKmbNZzqDFSkaP4jZZaUy/fDRjK09W15GFs8k8bs9VYuUz
+         MQEw==
+X-Gm-Message-State: ACrzQf3tUSGh16Ww8EC7oohAYtAqGoe044PkJc6RvwvV3bg//um7HrNw
+	vqs/FImLBPPb7lyj4xWPGhTw/WUvQHJYfMSiBiE=
 X-Google-Smtp-Source: 
- AMsMyM7AuC+hCMK4UQ3r2s/9XAHtSXWdV8YaSeAisLYd837GAklGTq37NNzWieTEjyX+FcGI+ePN+Z5gC8DzBtg6S98=
-X-Received: by 2002:a05:6830:3901:b0:658:fff4:51b8 with SMTP id
- br1-20020a056830390100b00658fff451b8mr519893otb.55.1663811654223; Wed, 21 Sep
- 2022 18:54:14 -0700 (PDT)
+ AMsMyM6LeWz2yFzHIiDqg/R7FwgJ9AeKH5xD/TlkQ/rsv9yf+gz2COc7VqTAhhfaDJt0aaxeK95FVw==
+X-Received: by 2002:a05:6808:14c7:b0:350:2df7:fa7c with SMTP id
+ f7-20020a05680814c700b003502df7fa7cmr658750oiw.180.1663817590968;
+        Wed, 21 Sep 2022 20:33:10 -0700 (PDT)
+Received: from vince-ubuntu.attlocal.net
+ (99-113-4-128.lightspeed.hstntx.sbcglobal.net. [99.113.4.128])
+        by smtp.gmail.com with ESMTPSA id
+ m9-20020a056870a40900b0011f390fdb0asm2556475oal.12.2022.09.21.20.33.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 21 Sep 2022 20:33:10 -0700 (PDT)
+From: Vincent Davis Jr <vince@underview.tech>
+To: openembedded-devel@lists.openembedded.org
+Cc: Vincent Davis Jr <vince@underview.tech>
+Subject: [meta-oe][PATCH] cglm: New recipe for cglm-0.8.5
+Date: Wed, 21 Sep 2022 22:32:41 -0500
+Message-Id: <20220922033241.3216287-1-vince@underview.tech>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <1663640525-27494-1-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1663640525-27494-1-git-send-email-wangmy@fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 21 Sep 2022 21:53:48 -0400
-Message-ID: 
- <CAMKF1srJcPNzvmVe1Mq4-e_mCt_671h8PCgcLzpE6W3zjN=2dg@mail.gmail.com>
-Subject: Re: [oe] [meta-python] [PATCH] python3-grpcio-tools: upgrade 1.48.1
- -> 1.49.0
-To: wangmy <wangmy@fujitsu.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 Sep 2022 01:54:23 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 Sep 2022 03:33:13 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98918
+ https://lists.openembedded.org/g/openembedded-devel/message/98919
 
-On Mon, Sep 19, 2022 at 10:22 PM wangmy <wangmy@fujitsu.com> wrote:
->
-> 0001-protobuf-Disable-musttail-attribute-on-mips.patch
-> refreshed for new version.
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  ...f-Disable-musttail-attribute-on-mips.patch | 19 ++++++++++---------
->  ...48.1.bb => python3-grpcio-tools_1.49.0.bb} |  2 +-
->  2 files changed, 11 insertions(+), 10 deletions(-)
->  rename meta-python/recipes-devtools/python/{python3-grpcio-tools_1.48.1.bb => python3-grpcio-tools_1.49.0.bb} (85%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-protobuf-Disable-musttail-attribute-on-mips.patch b/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-protobuf-Disable-musttail-attribute-on-mips.patch
-> index d19d1eee4c..5e8184b636 100644
-> --- a/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-protobuf-Disable-musttail-attribute-on-mips.patch
-> +++ b/meta-python/recipes-devtools/python/python3-grpcio-tools/0001-protobuf-Disable-musttail-attribute-on-mips.patch
-> @@ -7,24 +7,25 @@ See https://github.com/llvm/llvm-project/issues/57795
->
->  Upstream-Status: Pending
->  Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
->  ---
->   third_party/protobuf/src/google/protobuf/port_def.inc | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
->
->  diff --git a/third_party/protobuf/src/google/protobuf/port_def.inc b/third_party/protobuf/src/google/protobuf/port_def.inc
-> -index 37632cf..3c3c1e4 100644
-> +index e4b0753..4f603e6 100644
->  --- a/third_party/protobuf/src/google/protobuf/port_def.inc
->  +++ b/third_party/protobuf/src/google/protobuf/port_def.inc
-> -@@ -230,7 +230,8 @@
-> - #error PROTOBUF_TAILCALL was previously defined
-> - #endif
-> - #if __has_cpp_attribute(clang::musttail) && \
-> --  !defined(__arm__) && !defined(_ARCH_PPC) && !defined(__wasm__)
-> -+  !defined(__arm__) && !defined(_ARCH_PPC) && !defined(__wasm__) && \
-> -+  !defined(__mips__)
-> +@@ -257,7 +257,8 @@
-> + #if __has_cpp_attribute(clang::musttail) && !defined(__arm__) && \
-> +     !defined(_ARCH_PPC) && !defined(__wasm__) &&                 \
-> +     !(defined(_MSC_VER) && defined(_M_IX86)) &&                  \
-> +-    !(defined(__NDK_MAJOR__) && __NDK_MAJOR <= 24)
-> ++    !(defined(__NDK_MAJOR__) && !defined(__mips__) && \
+Signed-off-by: Vincent Davis Jr <vince@underview.tech>
+---
+ meta-oe/recipes-graphics/cglm/cglm_0.8.5.bb | 25 +++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/cglm/cglm_0.8.5.bb
 
-this rebase has gone wrong here. I have fixed it this time, but it
-would be nice if you could
-test relevant builds e.g. mips build here with clang compiler to
-ensure that rebase has been done right.
+diff --git a/meta-oe/recipes-graphics/cglm/cglm_0.8.5.bb b/meta-oe/recipes-graphics/cglm/cglm_0.8.5.bb
+new file mode 100644
+index 000000000..5a437c102
+--- /dev/null
++++ b/meta-oe/recipes-graphics/cglm/cglm_0.8.5.bb
+@@ -0,0 +1,25 @@
++SUMMARY = "OpenGL Mathematics Library for C"
++DESCRIPTION = "Highly optimized 2D|3D math library, also known as OpenGL Mathematics (glm) for `C`. \
++cglm provides lot of utils to help math operations to be fast and quick to write. It is community \
++friendly, feel free to bring any issues, bugs you faced."
++HOMEPAGE = "https://github.com/recp/cglm"
++BUGTRACKER = "https://github.com/recp/cglm/issues"
++SECTION = "libs"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=8dc95c4110ba741c43832734b51b7de7"
++
++SRC_URI = "git://github.com/recp/cglm;branch=master;protocol=https"
++# Tag v0.8.5
++SRCREV = "7e5d1f435f628b873347eb052b7d6605b0b997f2"
++
++S = "${WORKDIR}/git"
++
++PACKAGECONFIG[build_tests] = "-Dbuild_tests=true,-Dbuild_tests=false,"
++
++PACKAGECONFIG ?= ""
++
++inherit meson pkgconfig
++
++EXTRA_OEMESON += "--buildtype release"
++
++BBCLASSEXTEND = "native"
+-- 
+2.34.1
 
-> ++     __NDK_MAJOR <= 24)
->   #  ifndef PROTO2_OPENSOURCE
->   // Compilation fails on ARM32: b/195943306
->   // Compilation fails on powerpc64le: b/187985113
->  --
-> -2.37.3
-> +2.25.1
->
-> diff --git a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.48.1.bb b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.49.0.bb
-> similarity index 85%
-> rename from meta-python/recipes-devtools/python/python3-grpcio-tools_1.48.1.bb
-> rename to meta-python/recipes-devtools/python/python3-grpcio-tools_1.49.0.bb
-> index 002211a8c1..d2b599ae7a 100644
-> --- a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.48.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.49.0.bb
-> @@ -12,7 +12,7 @@ DEPENDS += "${PYTHON_PN}-grpcio"
->  SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch \
->              file://0001-protobuf-Disable-musttail-attribute-on-mips.patch \
->              "
-> -SRC_URI[sha256sum] = "1178f2ea531f80cc2027ec64728df6ffc8e98cf1df61652a496eafd612127183"
-> +SRC_URI[sha256sum] = "16ac93ac515194f63febcf6f8a96a7f17390268972acc15e765d257f5008f2af"
->
->  RDEPENDS:${PN} = "${PYTHON_PN}-grpcio"
->
-> --
-> 2.25.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#98883): https://lists.openembedded.org/g/openembedded-devel/message/98883
-> Mute This Topic: https://lists.openembedded.org/mt/93796046/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
 
