@@ -2,108 +2,110 @@ Return-Path: <andrej.kozemcak@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AA55FC6FA92
-	for <webhook@archiver.kernel.org>; Thu, 22 Sep 2022 13:58:46 +0000 (UTC)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.74])
- by mx.groups.io with SMTP id smtpd.web08.7411.1663855123495123350
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B62FDC6FA82
+	for <webhook@archiver.kernel.org>; Thu, 22 Sep 2022 14:01:36 +0000 (UTC)
+Received: from EUR01-DB5-obe.outbound.protection.outlook.com
+ (EUR01-DB5-obe.outbound.protection.outlook.com [40.107.15.59])
+ by mx.groups.io with SMTP id smtpd.web12.7498.1663855287233088996
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Sep 2022 06:58:44 -0700
+ Thu, 22 Sep 2022 07:01:28 -0700
 Authentication-Results: mx.groups.io;
  dkim=fail reason="body hash did not verify" header.i=@siemens.com
- header.s=selector2 header.b=ZGF9ZZ2p;
- spf=pass (domain: siemens.com, ip: 40.107.21.74,
+ header.s=selector2 header.b=fhKpMtbN;
+ spf=pass (domain: siemens.com, ip: 40.107.15.59,
  mailfrom: andrej.kozemcak@siemens.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=le9BvXQ/RprvSEX36glt+XrhKTVWUFPXI6390xasGp+YjlpMCtGVTTk1Z3SBehTYwIW6ZC42q17Ic6ddrrW7wdxbQRa/vefMuw5Tsj6oe9isybgNzrbCieWCFieKJhHkf7oab+uAwURlfLW9sJ5fpkWkyJOhhwvs+Krt+46fxdUGdgkYWNOlcUiU+L18TlA8/L71q5tsL977VA19S15sQZ6B35w4J8Nl0t5nIbsQhexu08iFAYycIsJpnCuvliPgNDoAJov5ybXUoZQrt3CN5opEqUeK0t6YpEUVzaIOBTz9brDKMik8me2uEIZ5xHOThAyNj4ZzbRhgrb3zyoO9rA==
+ b=jrQa575j3BQ25YUZEicSsaMuGMPWnxKVx/OHxuFQ0M7ts9QxUCAagGs2SxAN8/qHz/Qazfse7vCDYYxM+86L7K4ZLVJM7jX+4sMm+Zx0AE7SL8AqFm6xNRPW5Mx5cjBTMxj7Sh/H6m1N4SxAXQEZIjRic7R5bZL+oR0sTX2A9pL5qwuAIAiyEIhdnOvDTgBR9iC+N5mDr8BEAQEfnLtYm1BV73VDHYj/iDuNdzhNyKd2MpOuNjxmvT6/5i9PbZzs8IrPWn7sTxJ9f29//q6ikU9MPzimII5NyXxpirbWCtTNA1y47mEjzgSdsUdXd0wbdZV88JJDgt88Vk1xCI/8fg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
  bh=stbskUUA8qj/tIloK08qrTxb2Hw3DKXlob/e3+L5GYA=;
- b=O7p2Qpy/q3Dm9ygGACF9J3EiN6P04Fq1sRF2Yb3qoUTy3tdtXOz76yoPQWiE2Offhzy89+H+HyWkmc9q6L6NwOZmbBPL7nio6GAoCazO7YHoAU97H8ODzdICnoaVn2MT354gcJVwVJ/gVZXCLwjtBRO1pBQ8kkriYVSVTLz6FqboX/21abkqbP+650+QZKvVjcMHE0AA0vJfDoQb1ZukBzt8jpVVLDraBb3jypfzCW5bo4iUF41Cl1OuLqQGGFmwTgaHyV+HX9WDxhIxhPyzgxez9B6cP2B+9eCjgRIuTuEDBWKhKdi0BBn9LMcFHnvEa+/xmzOwgzhiXd+F19HMjA==
+ b=eKz7zJDoOhhnXon/FP9vmqwzia/6cJXcap64wdH0Bbwhskmwfh5Xp1z+M1oneL9hQN545DakRKLGGuVq2EtabgFIakT0H5Z7TN8k1MjQaEK7J4XpKxHS0RYZEK9MeVOpSOHW3wFI6HLawVWUhzYei4tVqhR+R+riFGGMprhHmemYPI6NtKomAhw72GOo5XOkwNZJr50PRwPyir2wYM0CfJSZy5w7dRZoT/XccA/gISl/IsZT5J4VMgZjxBWvnrhGoK2EZJglQlvA5mK7ZmgfnG3KIozBPnMaDWmo477U/FJAhkqZSne0vpYHmlN8BXY7e1JX0B2uodZp3PBDBde9Ow==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 194.138.21.75) smtp.rcpttodomain=lists.openembedded.org
+ 194.138.21.74) smtp.rcpttodomain=lists.openembedded.org
  smtp.mailfrom=siemens.com; dmarc=pass (p=none sp=none pct=100) action=none
  header.from=siemens.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
  bh=stbskUUA8qj/tIloK08qrTxb2Hw3DKXlob/e3+L5GYA=;
- b=ZGF9ZZ2p5lA3WaNGvRHM95wGB0g942ZPViO4NLhS47LVw1x28KDSyLGQLBgXMLd3oDzKvBELV/mb87rMVTkFPEJW80E45dSBKSR2IhQ2eRxfL638fr/zVNOpq1fN+Hfs9+DuwdUZzRyuXR+QORz1Cwfx4sJuuXq+JlTE9+e9YGWUJ67JlMva9ca5VOtmKypqsG4/pB9tg0n6j7AFk+FbjGCCQPhz4HEVj4wTSApLmSstsDXXPNdhApc5SgDjT/H/oIQpcU+PiijyF1kOWS1d/jJSv2+9NeDK12VmeCA2DHqB4j72FtZRqZUl1/1kBcimImuRuQBzrQao5V0KIVDwBQ==
-Received: from GV3P280CA0093.SWEP280.PROD.OUTLOOK.COM (2603:10a6:150:8::22) by
- VI1PR10MB3982.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:141::24) with
+ b=fhKpMtbNV+0Vw4xLEhs2YAydYDf6uZhWOCCz9tiRoabmEAcsteN0WAOl2BDZX1BoRgvXsARo7hYvO8iXDHl8r0xJp7ozebqe5Jd9kw0iFpCe+xPE0EaBubobx9Gz9ILo60IQWtT7YR7E1fgl1WFixLHhVm2SXsxT9ZphPZlUFwncQyfLyLLaSJhn4IkSyrtPe+c97899XsD28ftM+akCzfIBvW0MWqheKDhHhk1ArSJkDnZh5R2EyR6x7sVEX2Nsz8NacgNzi6nmlMKKLB6sW1wqhovjX/Mvp8XfX3uSkfnv8QlmMYqbpezAxMTao63Cxf7eNqei8HNt2ieaBT+sWg==
+Received: from FR0P281CA0077.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10:1e::16)
+ by AS2PR10MB7501.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:593::19) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.16; Thu, 22 Sep
- 2022 13:58:39 +0000
-Received: from HE1EUR01FT047.eop-EUR01.prod.protection.outlook.com
- (2603:10a6:150:8:cafe::b0) by GV3P280CA0093.outlook.office365.com
- (2603:10a6:150:8::22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.16 via Frontend
- Transport; Thu, 22 Sep 2022 13:58:39 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 194.138.21.75)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.15; Thu, 22 Sep
+ 2022 14:01:24 +0000
+Received: from VE1EUR01FT077.eop-EUR01.prod.protection.outlook.com
+ (2603:10a6:d10:1e:cafe::42) by FR0P281CA0077.outlook.office365.com
+ (2603:10a6:d10:1e::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5676.7 via Frontend
+ Transport; Thu, 22 Sep 2022 14:01:24 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 194.138.21.74)
  smtp.mailfrom=siemens.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=siemens.com;
 Received-SPF: Pass (protection.outlook.com: domain of siemens.com designates
- 194.138.21.75 as permitted sender) receiver=protection.outlook.com;
- client-ip=194.138.21.75; helo=hybrid.siemens.com; pr=C
-Received: from hybrid.siemens.com (194.138.21.75) by
- HE1EUR01FT047.mail.protection.outlook.com (10.152.1.5) with Microsoft SMTP
+ 194.138.21.74 as permitted sender) receiver=protection.outlook.com;
+ client-ip=194.138.21.74; helo=hybrid.siemens.com; pr=C
+Received: from hybrid.siemens.com (194.138.21.74) by
+ VE1EUR01FT077.mail.protection.outlook.com (10.152.3.154) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5654.14 via Frontend Transport; Thu, 22 Sep 2022 13:58:39 +0000
+ 15.20.5654.14 via Frontend Transport; Thu, 22 Sep 2022 14:01:23 +0000
 Received: from DEMCHDC8A0A.ad011.siemens.net (139.25.226.106) by
- DEMCHDC8VRA.ad011.siemens.net (194.138.21.75) with Microsoft SMTP Server
+ DEMCHDC8VQA.ad011.siemens.net (194.138.21.74) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.12; Thu, 22 Sep 2022 15:57:55 +0200
+ 15.2.1118.12; Thu, 22 Sep 2022 15:58:05 +0200
 Received: from dev.vm8.ccp.siemens.com (163.242.51.115) by
  DEMCHDC8A0A.ad011.siemens.net (139.25.226.106) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.12; Thu, 22 Sep 2022 15:57:55 +0200
+ 15.1.2507.12; Thu, 22 Sep 2022 15:58:04 +0200
 Received: from dev.localdomain (localhost [127.0.0.1])
-	by dev.vm8.ccp.siemens.com (Postfix) with ESMTP id 682F73478E1A;
-	Thu, 22 Sep 2022 15:57:51 +0200 (CEST)
+	by dev.vm8.ccp.siemens.com (Postfix) with ESMTP id 6C4673478E1A;
+	Thu, 22 Sep 2022 15:58:01 +0200 (CEST)
 From: Andrej Kozemcak <andrej.kozemcak@siemens.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Andrej Kozemcak <andrej.kozemcak@siemens.com>
-Subject: [PATCH] squid: upgrade 4.15 -> 5.7
-Date: Thu, 22 Sep 2022 15:57:44 +0200
-Message-ID: <20220922135745.611494-1-andrej.kozemcak@siemens.com>
+Subject: [meta-networking][PATCH] squid: upgrade 4.15 -> 5.7
+Date: Thu, 22 Sep 2022 15:57:45 +0200
+Message-ID: <20220922135745.611494-2-andrej.kozemcak@siemens.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20220922135745.611494-1-andrej.kozemcak@siemens.com>
+References: <20220922135745.611494-1-andrej.kozemcak@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 X-Originating-IP: [163.242.51.115]
-X-ClientProxiedBy: DEMCHDC89XA.ad011.siemens.net (139.25.226.103) To
+X-ClientProxiedBy: DEMCHDC8A0A.ad011.siemens.net (139.25.226.106) To
  DEMCHDC8A0A.ad011.siemens.net (139.25.226.106)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: HE1EUR01FT047:EE_|VI1PR10MB3982:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0f8d8618-554a-4702-4e8c-08da9ca28d30
+X-MS-TrafficTypeDiagnostic: VE1EUR01FT077:EE_|AS2PR10MB7501:EE_
+X-MS-Office365-Filtering-Correlation-Id: 18311532-e584-470a-47b1-08da9ca2ef28
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	u5oiDxxGJ7PWnETedzNfFa78FBTvlnpD9fsGAJTAuIlD9GPldJfXJYz4OT9/gP99ScjK36FRCKQcDSG28kADqyxYbZ6kSJXnYCi6cSakC2UzPBcIg9vVLZKd6vs7Pljlvba4BEpf9Y8mNj3Nl6ATdaX/f/YeS9cEpwNO35XiHrnzhwzQT4KGbYZcQBhP9WUOFO+AOeOm3bleWZ8BHmH1oVkM/27UrtRljFYKbV8TY5utNm6y0RkZZT3/0klG0O0WrQdTY9n1QYdNuntv3lBaLzS2pOuBPsyfG08jEUtLgMK8T3XQwSBLe3MrmhBkVtomJ249Bpgevh/fQgYzGoIb1nEY1lzuR0IVs0INs4jeTnzKjYOAw7jQwDpYUK9IH9oNxvFsiKQzvFvTkE3wWBuoHphq/80crsaScx9Y1BwVHahVh3z9qxDswbqZwjaM7M8ZJ8Ng1S+8knnnSKM1dV6TseY8vNXk/z78kZ15/eShoz67D94qrMBPJ/WD5F807oQLuGhtOBN351XHp08DTXDe3ArLf+WouNZibLdz28sRkgc9vFz/OrY1L3LJ5W/Qib38VihFK7yXvrH3LSGT3k1Oi7UtYgp3t3AsR5m60jlA99cs4ccupSnc5ARRFaQYNb1LwuWU3hCRmTrbYkYE3Hgja23/Rats2lnPWM2iURGRpjundK2c6GA2W1+1rvQGZ69dgdcZCE1NBLGHL+eREAnfDy041B8ClddMvt+c6TkxIcl96pfDk9/D7lfm1tG1VJ/acPUmJZWxgy3L3laYKJIicp4hjp6FN2PxW7MC8KF/fIu51cfEgYWbS+jSVQ4EGN0EipI0SCd2rqm7pcBrIi+Hrg==
+	h2EmRA+nFGSBHak/eEw+jar2jKF5zv6jgPNjh+H0rHheYLQ+4F+sNZjet/ENuf3X43zO8TmB4+UdsOjeFWHo1UCkwV25uf3RusB+ccamlTrBdUg0wBCmqArTEGot2RAGlkBJ629rXMKDLbQ5fOH5VEaU1Q+sACeww1jfHRhcT5SeE2qZEXjtU/84fgPpkNxQOS9rZ7YwubgHZPOSCj+6qoWiTzIaZYJzjZ316ryzOp9RwRLORcxbHPB/n2tA+WPCFLSQdowXBaHnYT1NufFxAkBkxegtriPFM5+4Dl9NexQEJ210LwNy3lheeeoWU3lLPJnV43HeuMTuUrG8saOCImRsH1b7H/wwIXCaMckojB7vHVZbm/zgGWEBZ223yXEjGfHc9b/bQTBQRznM8XuLrV02iCxQ4f05tl7llUDLc1uJ+HNBw30nk/XTIw+fw5j6dh9Jw/IAmIfWa0ZL0nxIxlqO++iAEd//HBrhBczdh1xe8wYIFfiiMWDGDb7lyJy/g5ZviA8C23ZNAJjUkDgz1114Fe1BxmmmEB6r1CZ7pOi+4rBvdRmVdkJgo7Khca1rRvdgzNc4yF+y2Z5pY+T9oMGw92NhKvcU0jz2GhhWQwBdG9JUT2x71JrfCIkPsTwFCIrvVEpfNz9eBXTXYNBpDwaxa3CIPSyY4+wBi+goVPas8HeHZW8NeaQT/jpSIfJUEif9JTm7VUjWwIr/1KWqy3qcOaR6KqwFOfui8qj/kmaZI853A19ADomnpwdtZExNT+8W9uZ3eaBjAwt6IBC/fpdvLxaDhsd4FObednyQImE=
 X-Forefront-Antispam-Report: 
-	CIP:194.138.21.75;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:hybrid.siemens.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(396003)(39860400002)(136003)(376002)(346002)(451199015)(40470700004)(36840700001)(46966006)(426003)(82310400005)(36756003)(82740400003)(356005)(8936002)(26005)(19627235002)(40480700001)(6916009)(41300700001)(2616005)(1076003)(107886003)(70206006)(4326008)(82960400001)(81166007)(70586007)(6266002)(8676002)(186003)(86362001)(6666004)(36860700001)(83380400001)(336012)(44832011)(2906002)(7126003)(47076005)(30864003)(40460700003)(316002)(5660300002)(478600001)(36900700001);DIR:OUT;SFP:1101;
+	CIP:194.138.21.74;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:hybrid.siemens.com;PTR:hybrid.siemens.com;CAT:NONE;SFS:(13230022)(4636009)(376002)(346002)(39860400002)(136003)(396003)(451199015)(46966006)(36840700001)(40470700004)(8936002)(336012)(86362001)(426003)(83380400001)(1076003)(186003)(6916009)(5660300002)(47076005)(36860700001)(8676002)(30864003)(4326008)(44832011)(82310400005)(41300700001)(70586007)(70206006)(2906002)(6266002)(2616005)(26005)(7126003)(40480700001)(107886003)(316002)(19627235002)(6666004)(478600001)(40460700003)(36756003)(82740400003)(7636003)(356005)(7596003)(82960400001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2022 13:58:39.2641
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2022 14:01:23.4719
  (UTC)
 X-MS-Exchange-CrossTenant-Network-Message-Id: 
- 0f8d8618-554a-4702-4e8c-08da9ca28d30
+ 18311532-e584-470a-47b1-08da9ca2ef28
 X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: 
- TenantId=38ae3bcd-9579-4fd4-adda-b42e1495d55a;Ip=[194.138.21.75];Helo=[hybrid.siemens.com]
+ TenantId=38ae3bcd-9579-4fd4-adda-b42e1495d55a;Ip=[194.138.21.74];Helo=[hybrid.siemens.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	HE1EUR01FT047.eop-EUR01.prod.protection.outlook.com
+	VE1EUR01FT077.eop-EUR01.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB3982
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB7501
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 Sep 2022 13:58:46 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 Sep 2022 14:01:36 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98927
+ https://lists.openembedded.org/g/openembedded-devel/message/98928
 
 - drop included patches
 - refresh remaining patches
