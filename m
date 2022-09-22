@@ -2,81 +2,101 @@ Return-Path: <liu.ming50@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7741C6FA82
-	for <webhook@archiver.kernel.org>; Thu, 22 Sep 2022 08:13:04 +0000 (UTC)
-Received: from mail-lj1-f170.google.com (mail-lj1-f170.google.com
- [209.85.208.170])
- by mx.groups.io with SMTP id smtpd.web11.4834.1663834379867518070
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 04D2FC6FA8B
+	for <webhook@archiver.kernel.org>; Thu, 22 Sep 2022 08:13:15 +0000 (UTC)
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com
+ [209.85.167.47])
+ by mx.groups.io with SMTP id smtpd.web10.4719.1663834386201245160
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Sep 2022 01:13:00 -0700
+ Thu, 22 Sep 2022 01:13:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=GpBQeyCw;
- spf=pass (domain: gmail.com, ip: 209.85.208.170,
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=fNbCzeiu;
+ spf=pass (domain: gmail.com, ip: 209.85.167.47,
  mailfrom: liu.ming50@gmail.com)
-Received: by mail-lj1-f170.google.com with SMTP id q17so9986164lji.11
+Received: by mail-lf1-f47.google.com with SMTP id x27so13480198lfu.0
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Sep 2022 01:12:59 -0700 (PDT)
+ Thu, 22 Sep 2022 01:13:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date;
-        bh=oSHI0IcX8L6v1KhRF046X/XSoJVNwoVM8VZFyGB05pU=;
-        b=GpBQeyCwDCGIoy0ZfaPNONCbrH7w/4yKb8ausJN4j1lwrYVRr6I+/CaYBCDDwj3QaJ
-         Xw3RY4qr7iMTxBZZa6N2LKxJs/9kcvxIzIQAH40YU0HeZZkI9Tc/p2X6S5zArG4YnYTi
-         5dY/4yj3LpzU6ZRYxrwSKR1h6lBYudIHfutLefEiXdrXDWz9quBBl9X3noDt1hOxoCUf
-         SHQ0ox1C8WnAWTE69z1ejP+SvMv4z4prGO29C5nY8OHxedtA6gjZ9NRcXIjeFiD+6aN3
-         II+WwEeztQdZXXCU5Su59KtDbNSe1+Qn1DTEByg3IFD7asCSQ8MiEm+P9lzEqRNjZ/iH
-         tv4g==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
+        bh=otnBxYiHyCSflOvg4yhb9o+AnufGQms9Dr+v00jQeZM=;
+        b=fNbCzeiuGnHSBvyj3FlDiiH1lVJ7+DtfgNezfvgJ6MqLHg2Ej/o3wA8XP6hyRwbzT9
+         wDErYx1obiiXJGWn7AVwvLoanXv1xvMhNmBS5yuvfmD0OF33TExCfjhai0sFk5YPiySW
+         RrDf1u4SYuqnXa0aiW+rVxJCAdcTBadYMCWxmOXGEUHbJ1IDLO4h8mn9A7ZCls2IQN0G
+         rYy1WOcKYm/9o9BnXMFB5n5NEKhw2jaaHJJz9TbVEFnWXEw0FHRyzzbJ+ainsJUKjRss
+         Z1f3kikRPisA2RnXi41FrdeB+klARSfEPHX1h4YzcP8zX3TDeIeZRTEWoiRCr1hvPuYn
+         DUUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date;
-        bh=oSHI0IcX8L6v1KhRF046X/XSoJVNwoVM8VZFyGB05pU=;
-        b=z7rTDYF2L92B18RFKdWaJldB98gPF22GYuAPB41GO+BvfWNeDaTXwY3xyyOUFNwBNu
-         UEwvWmCF5bhmYxa5i7yQbSveABxsFYa5iWlMKVeECahfkaPnGfd0k8kbkDoY/wQjxK9M
-         FE1Hg7QMsII8qSZ1gYK6B1FrEt1Va8BvURJ/c9QRWEVsJCsnMl1rhuGuC8/LTonzuF5e
-         7kefJBsnXURPuTzDuHVHmYy/3Zsc5x6i8MI2/i1Vj1s8r8uBG1Of2cRK7Lj0M/T6b65c
-         riGR1rrDM00NeSAocStzAZBZ2XrTO4ALnjthUi1cJy7dhqpipn52W2DI19KfBTMi5IMQ
-         +sBw==
-X-Gm-Message-State: ACrzQf0C1a2A/K0ybYbxxZ95SW2Kk56/aUCH1CUjR62lQhpvX+HbUcSl
-	dPIZHdbG4rC6xRcBi1vlGyLwjmaDbEs=
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date;
+        bh=otnBxYiHyCSflOvg4yhb9o+AnufGQms9Dr+v00jQeZM=;
+        b=eWSqbSVDWBZhZ2U29Vlb5MfZMktFaP5LkH1lOH0uMhUCv79nS80QwAQGVOXZPL2jBn
+         XnIWoCNk6hpje0470zKTMzksk9gLcYquj3I1DTUwhGvUle5QS5Dp/RTp2g+WSlu3dfE8
+         OQo3PLVVkuI20R4qCYon9BMO8KtK9iC+eOeayvUrf4fS75PkZkqhoqRlx/vw9WCQ7Loe
+         dxe+i12aFrEk80h4ShkrtmzLcC/V3TvA4TbUAL/NI8+w+6jAx6oP2dXGhkhl0WvUHf0Y
+         OBlRyaaXg0UHGnwuqbX1MK7xqVgQWdPemPtKKtNtsGtpwNslBlqYTesyli8BHp03aW/n
+         C/2A==
+X-Gm-Message-State: ACrzQf34FHWKl0GmF/59AO27JRIyTU9MXmeNHuK6J+hTf76yUBNWaUJN
+	hvetqxJtIIZnNGC74/zdJtsQBzxbUCQ=
 X-Google-Smtp-Source: 
- AMsMyM4vsVzcmLiWTVmYJYv1q21iZxSUNrJlcpe+1ZsGtuTprthe7TE2eU5kxnHXTiT4dIWCUw375w==
-X-Received: by 2002:a05:651c:12c6:b0:26c:3e1a:c857 with SMTP id
- 6-20020a05651c12c600b0026c3e1ac857mr622839lje.304.1663834377775;
-        Thu, 22 Sep 2022 01:12:57 -0700 (PDT)
+ AMsMyM4jYN1h9IESVMNIaO1NzX97F+L8IopKtm5Q3kkIAd6JpXDHDhbdu6jmNjYU2EOKLIJzSIwSGw==
+X-Received: by 2002:a05:6512:2207:b0:496:db23:c2a3 with SMTP id
+ h7-20020a056512220700b00496db23c2a3mr726176lfu.447.1663834384149;
+        Thu, 22 Sep 2022 01:13:04 -0700 (PDT)
 Received: from peterliu-Precision-7530.emea.group.atlascopco.com
  ([2a00:801:230:1a0d:35fd:99c8:8f16:a655])
         by smtp.gmail.com with ESMTPSA id
- d3-20020ac24c83000000b0049aa20af00fsm822371lfl.21.2022.09.22.01.12.56
+ d3-20020ac24c83000000b0049aa20af00fsm822371lfl.21.2022.09.22.01.13.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Sep 2022 01:12:57 -0700 (PDT)
+        Thu, 22 Sep 2022 01:13:03 -0700 (PDT)
 From: liu.ming50@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Ming Liu <liu.ming50@gmail.com>
-Subject: [meta-oe] [kirkstone] [PATCH 0/1] lmdb break kirkstone build
-Date: Thu, 22 Sep 2022 10:12:54 +0200
-Message-Id: <20220922081255.14964-1-liu.ming50@gmail.com>
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>,
+	Khem Raj <raj.khem@gmail.com>,
+	Ming Liu <liu.ming50@gmail.com>
+Subject: [meta-oe] [kirkstone] [PATCH 1/1] lmdb: Don't inherit base
+Date: Thu, 22 Sep 2022 10:12:55 +0200
+Message-Id: <20220922081255.14964-2-liu.ming50@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220922081255.14964-1-liu.ming50@gmail.com>
+References: <20220922081255.14964-1-liu.ming50@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 Sep 2022 08:13:04 -0000
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 Sep 2022 08:13:15 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98921
+ https://lists.openembedded.org/g/openembedded-devel/message/98922
 
-From: Ming Liu <liu.ming50@gmail.com>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
 
-lmdb is currently breaking kirkstone build, cherry pick the fix from master.
+base is always inherited so remove this code which will soon cause an error.
 
-Richard Purdie (1):
-  lmdb: Don't inherit base
-
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit a755af4fb5ca2e158b00214bb18e27ba69c200fd)
+Signed-off-by: Ming Liu <liu.ming50@gmail.com>
+---
  meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
+index f23960f40..a76d388d7 100644
+--- a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
++++ b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.29.bb
+@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/LMDB/lmdb.git;nobranch=1;protocol=https \
+ 
+ SRCREV = "8ad7be2510414b9506ec9f9e24f24d04d9b04a1a"
+ 
+-inherit base ptest
++inherit ptest
+ 
+ S = "${WORKDIR}/git/libraries/liblmdb"
+ 
 -- 
 2.25.1
 
