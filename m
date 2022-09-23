@@ -2,1050 +2,289 @@ Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D00EEECAAD8
-	for <webhook@archiver.kernel.org>; Fri, 23 Sep 2022 04:26:30 +0000 (UTC)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com
- [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web11.4168.1663907181003365492
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E6B55ECAAD8
+	for <webhook@archiver.kernel.org>; Fri, 23 Sep 2022 04:35:30 +0000 (UTC)
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
+ [209.85.215.171])
+ by mx.groups.io with SMTP id smtpd.web12.4179.1663907718707156910
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Sep 2022 21:26:21 -0700
+ Thu, 22 Sep 2022 21:35:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=TabLLoRn;
- spf=pass (domain: mvista.com, ip: 209.85.214.169,
+ dkim=pass header.i=@mvista.com header.s=google header.b=RSpK3bg1;
+ spf=pass (domain: mvista.com, ip: 209.85.215.171,
  mailfrom: hprajapati@mvista.com)
-Received: by mail-pl1-f169.google.com with SMTP id w13so10718151plp.1
+Received: by mail-pg1-f171.google.com with SMTP id c7so11148755pgt.11
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Sep 2022 21:26:20 -0700 (PDT)
+ Thu, 22 Sep 2022 21:35:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=mvista.com; s=google;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date;
-        bh=vtjtlI9tNdO17gks30Wdz/mNp83SLhcoUesQGtG+tUw=;
-        b=TabLLoRniiUABrC4ORkF4dURJSZAQwD1P34weC32nWRvAJv9bLvh52YG5rpha+oWtD
-         WyGezsfgMEFgS+7yMqbYSPI11XS4ibww8IbbN0zRSwcqHsKAOKSXije7x1xX+clF3lEK
-         zvO6ZVdNHhCKlFMPSQCaKcGeYCu3I3JnF3Bi8=
+        bh=SLwbBokpDfeALSTjx49Q7ltwnHqN+ueayj7F+vCiqM4=;
+        b=RSpK3bg1E+kwZ5WB22rs+1E/pYaqLQojkIJq64kTRrJJMTBvZi3eYaVWFozhitkStj
+         +J0/yoCNv7rOzf1/Dzs9jpsXPOVy8yebprsLgVyb70baC7Qhma+8rNBVhfbIt4IBJAjy
+         yhOjUawkLqzmHfNOm45uSqebgjBVku78l6D04=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date;
-        bh=vtjtlI9tNdO17gks30Wdz/mNp83SLhcoUesQGtG+tUw=;
-        b=wAhX5PPib00DlhG7LdeD5FFU/sBB/SYDsdIHB5XGa/3wJe7Apq4c3Rgv4rRTj6oahb
-         +npB7Erzl+pRWSooHS8tpatqNXerfqxd6HbAHVMiqsyNVLlQmkGEquG5fDG9sZEIyqkf
-         Oji15TR3ADpi7yL0DZQ4/jNAeXlOBevu+a86br3Qu0QqC4ygqVUlw9OgDD3C/fIFPVEO
-         UbfnFvR7huaKSP5g+e85Yn2uCeMqfa7oHlRnt9uKvEcARlTJsoTDtK/tfj7+btjYcLdf
-         U3O/yqoY25r4EjFS7z2thU7kB1FI5Wr41Eipk3v745Hv0OELPqHqiC2hAGRHzADL0JNO
-         r/GA==
-X-Gm-Message-State: ACrzQf1z3zY9fVwIaa7OAgTtXQpGBomtZ71E2Xu88XzK2Lh9WoT04hNf
-	KlaJ5QOpuuh2QmS94kPSYa86Ov+hdTre5A==
+        bh=SLwbBokpDfeALSTjx49Q7ltwnHqN+ueayj7F+vCiqM4=;
+        b=Ss4haaJD/5LAlUu8hXJWcbIXDyRrzbFVyXa5dqLTkCZ67+NufGOKarG0ZIsPnitQhG
+         n9yhkM8nmzOqHfr1fATEcgj/WQqkja3PbIcutNO+iu36Y5Pa61Q0deonIuqR2WSk1BT3
+         XznXGoF2Hy3WfY3g/jXRsCFykM5/eB8InTa0U7Nhcx9bLDZdBFHqj7V+7r/LIuiA863K
+         mmvKC1cTA/Ebw6MIenYXgoAFrv80P7pZGc0awPEgzHSGomsLw+Gmxfhf0HMwNFFWGRu0
+         Pc8Ij58u8xP6Ty3orvVOeqWcUnNroANiNLSYXtyxwSqorPWO+RhSyv4GTohlWd9bE8ta
+         nBsw==
+X-Gm-Message-State: ACrzQf15axA3yvNUJn4HlsDiDrJOBTMHHNYRRPokT4aX8ExQXTTZiFun
+	dD3GEwiYTLo6NyYhYam6fjOWnRLZoApIoQ==
 X-Google-Smtp-Source: 
- AMsMyM7xJbmWETd1M1Mj4UO2CDgo2y16rUklJ6/Yz57IcS8ic7s2IBlSKKSzyD0hokNvFC0FH+K4Vg==
-X-Received: by 2002:a17:902:ab15:b0:178:cdb:b98c with SMTP id
- ik21-20020a170902ab1500b001780cdbb98cmr6676991plb.57.1663907179856;
-        Thu, 22 Sep 2022 21:26:19 -0700 (PDT)
+ AMsMyM6VPazU3K9NJNOdWUe2IX8/kqstriX4UplIzsHp25Mj+YmtCIxv4JWMp+axsxpYiQ8FAXt2CA==
+X-Received: by 2002:a05:6a00:88f:b0:530:dec:81fd with SMTP id
+ q15-20020a056a00088f00b005300dec81fdmr7106185pfj.64.1663907717523;
+        Thu, 22 Sep 2022 21:35:17 -0700 (PDT)
 Received: from MVIN00024 ([27.121.101.100])
         by smtp.gmail.com with ESMTPSA id
- m3-20020a1709026bc300b001789ee5c821sm4932042plt.61.2022.09.22.21.26.17
+ b6-20020a62a106000000b00542e190f6bcsm5303180pff.102.2022.09.22.21.35.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Sep 2022 21:26:19 -0700 (PDT)
+        Thu, 22 Sep 2022 21:35:17 -0700 (PDT)
 Received: by MVIN00024 (sSMTP sendmail emulation);
- Fri, 23 Sep 2022 09:56:14 +0530
+ Fri, 23 Sep 2022 10:05:11 +0530
 From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-oe][dunfell][PATCH] postgresql: CVE-2022-1552 Autovacuum,
- REINDEX, and others omit "security restricted operation" sandbox
-Date: Fri, 23 Sep 2022 09:56:12 +0530
-Message-Id: <20220923042612.4851-1-hprajapati@mvista.com>
+Subject: [meta-networking][dunfell][PATCH] dnsmasq: CVE-2022-0934 Heap use
+ after free in dhcp6_no_relay
+Date: Fri, 23 Sep 2022 10:05:10 +0530
+Message-Id: <20220923043510.5244-1-hprajapati@mvista.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 23 Sep 2022 04:26:30 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 23 Sep 2022 04:35:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98938
+ https://lists.openembedded.org/g/openembedded-devel/message/98939
 
-Source: https://git.postgresql.org/gitweb/?p=postgresql.git;
-MR: 121822
+Source: https://thekelleys.org.uk/gitweb/?p=dnsmasq.git
+MR: 121726
 Type: Security Fix
-Disposition: Backport from https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=ab49ce7c3414ac19e4afb386d7843ce2d2fb8bda && https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=677a494789062ca88e0142a17bedd5415f6ab0aa
-ChangeID: 5011e2e09f30f76fc27dc4cb5fa98a504d1aaec9
+Disposition: Backport from https://thekelleys.org.uk/gitweb/?p=dnsmasq.git;a=commit;h=03345ecefeb0d82e3c3a4c28f27c3554f0611b39
+ChangeID: be554ef6ebedd7148404ea3cc280f2e42e17dc8c
 Description:
-	 CVE-2022-1552 postgresql: Autovacuum, REINDEX, and others omit "security restricted operation" sandbox.
+	 CVE-2022-0934 dnsmasq: Heap use after free in dhcp6_no_relay.
 
 Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
- .../postgresql/files/CVE-2022-1552.patch      | 947 ++++++++++++++++++
- .../recipes-dbs/postgresql/postgresql_12.9.bb |   1 +
- 2 files changed, 948 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2022-1552.patch
+ .../dnsmasq/dnsmasq/CVE-2022-0934.patch       | 188 ++++++++++++++++++
+ .../recipes-support/dnsmasq/dnsmasq_2.81.bb   |   1 +
+ 2 files changed, 189 insertions(+)
+ create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/CVE-2022-0934.patch
 
-diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2022-1552.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2022-1552.patch
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/CVE-2022-0934.patch b/meta-networking/recipes-support/dnsmasq/dnsmasq/CVE-2022-0934.patch
 new file mode 100644
-index 0000000000..6f0d5ac06f
+index 0000000000..b2ef22c06f
 --- /dev/null
-+++ b/meta-oe/recipes-dbs/postgresql/files/CVE-2022-1552.patch
-@@ -0,0 +1,947 @@
-+From 31eefa1efc8eecb6ab91c8835d2952d44a3b1ae1 Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq/CVE-2022-0934.patch
+@@ -0,0 +1,188 @@
++From 70df9f9104c8f0661966298b58caf794b99e26e1 Mon Sep 17 00:00:00 2001
 +From: Hitendra Prajapati <hprajapati@mvista.com>
-+Date: Thu, 22 Sep 2022 11:20:41 +0530
-+Subject: [PATCH] CVE-2022-1552
++Date: Thu, 22 Sep 2022 17:39:21 +0530
++Subject: [PATCH] CVE-2022-0934
 +
-+Upstream-Status: Backport [https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=ab49ce7c3414ac19e4afb386d7843ce2d2fb8bda && https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=677a494789062ca88e0142a17bedd5415f6ab0aa]
-+
-+CVE: CVE-2022-1552
++Upstream-Status: Backport [https://thekelleys.org.uk/gitweb/?p=dnsmasq.git;a=commit;h=03345ecefeb0d82e3c3a4c28f27c3554f0611b39]
++CVE: CVE-2022-0934
 +Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 +---
-+ contrib/amcheck/expected/check_btree.out | 23 ++++++
-+ contrib/amcheck/sql/check_btree.sql      | 21 +++++
-+ contrib/amcheck/verify_nbtree.c          | 27 +++++++
-+ src/backend/access/brin/brin.c           | 29 ++++++-
-+ src/backend/catalog/index.c              | 65 ++++++++++++----
-+ src/backend/commands/cluster.c           | 37 ++++++---
-+ src/backend/commands/indexcmds.c         | 98 ++++++++++++++++++++----
-+ src/backend/commands/matview.c           | 30 +++-----
-+ src/backend/utils/init/miscinit.c        | 24 +++---
-+ src/test/regress/expected/privileges.out | 71 +++++++++++++++++
-+ src/test/regress/sql/privileges.sql      | 64 ++++++++++++++++
-+ 11 files changed, 422 insertions(+), 67 deletions(-)
++ CHANGELOG     |  2 ++
++ src/rfc3315.c | 48 +++++++++++++++++++++++++++---------------------
++ 2 files changed, 29 insertions(+), 21 deletions(-)
 +
-+diff --git a/contrib/amcheck/expected/check_btree.out b/contrib/amcheck/expected/check_btree.out
-+index 59a805d..0fd6ea0 100644
-+--- a/contrib/amcheck/expected/check_btree.out
-++++ b/contrib/amcheck/expected/check_btree.out
-+@@ -168,11 +168,34 @@ SELECT bt_index_check('toasty', true);
-+  
-+ (1 row)
++diff --git a/CHANGELOG b/CHANGELOG
++index 60b08d0..d1d7e41 100644
++--- a/CHANGELOG
+++++ b/CHANGELOG
++@@ -88,6 +88,8 @@ version 2.81
 + 
-++--
-++-- Check that index expressions and predicates are run as the table's owner
-++--
-++TRUNCATE bttest_a;
-++INSERT INTO bttest_a SELECT * FROM generate_series(1, 1000);
-++ALTER TABLE bttest_a OWNER TO regress_bttest_role;
-++-- A dummy index function checking current_user
-++CREATE FUNCTION ifun(int8) RETURNS int8 AS $$
-++BEGIN
-++	ASSERT current_user = 'regress_bttest_role',
-++		format('ifun(%s) called by %s', $1, current_user);
-++	RETURN $1;
-++END;
-++$$ LANGUAGE plpgsql IMMUTABLE;
-++CREATE INDEX bttest_a_expr_idx ON bttest_a ((ifun(id) + ifun(0)))
-++	WHERE ifun(id + 10) > ifun(10);
-++SELECT bt_index_check('bttest_a_expr_idx', true);
-++ bt_index_check 
-++----------------
-++ 
-++(1 row)
-++
-+ -- cleanup
-+ DROP TABLE bttest_a;
-+ DROP TABLE bttest_b;
-+ DROP TABLE bttest_multi;
-+ DROP TABLE delete_test_table;
-+ DROP TABLE toast_bug;
-++DROP FUNCTION ifun(int8);
-+ DROP OWNED BY regress_bttest_role; -- permissions
-+ DROP ROLE regress_bttest_role;
-+diff --git a/contrib/amcheck/sql/check_btree.sql b/contrib/amcheck/sql/check_btree.sql
-+index 99acbc8..3248187 100644
-+--- a/contrib/amcheck/sql/check_btree.sql
-++++ b/contrib/amcheck/sql/check_btree.sql
-+@@ -110,11 +110,32 @@ INSERT INTO toast_bug SELECT repeat('a', 2200);
-+ -- Should not get false positive report of corruption:
-+ SELECT bt_index_check('toasty', true);
++ 	Add --script-on-renewal option.
 + 
-++--
-++-- Check that index expressions and predicates are run as the table's owner
-++--
-++TRUNCATE bttest_a;
-++INSERT INTO bttest_a SELECT * FROM generate_series(1, 1000);
-++ALTER TABLE bttest_a OWNER TO regress_bttest_role;
-++-- A dummy index function checking current_user
-++CREATE FUNCTION ifun(int8) RETURNS int8 AS $$
-++BEGIN
-++	ASSERT current_user = 'regress_bttest_role',
-++		format('ifun(%s) called by %s', $1, current_user);
-++	RETURN $1;
-++END;
-++$$ LANGUAGE plpgsql IMMUTABLE;
-++
-++CREATE INDEX bttest_a_expr_idx ON bttest_a ((ifun(id) + ifun(0)))
-++	WHERE ifun(id + 10) > ifun(10);
-++
-++SELECT bt_index_check('bttest_a_expr_idx', true);
-++
-+ -- cleanup
-+ DROP TABLE bttest_a;
-+ DROP TABLE bttest_b;
-+ DROP TABLE bttest_multi;
-+ DROP TABLE delete_test_table;
-+ DROP TABLE toast_bug;
-++DROP FUNCTION ifun(int8);
-+ DROP OWNED BY regress_bttest_role; -- permissions
-+ DROP ROLE regress_bttest_role;
-+diff --git a/contrib/amcheck/verify_nbtree.c b/contrib/amcheck/verify_nbtree.c
-+index 700a02f..cb6475d 100644
-+--- a/contrib/amcheck/verify_nbtree.c
-++++ b/contrib/amcheck/verify_nbtree.c
-+@@ -228,6 +228,9 @@ bt_index_check_internal(Oid indrelid, bool parentcheck, bool heapallindexed,
-+ 	Relation	indrel;
-+ 	Relation	heaprel;
-+ 	LOCKMODE	lockmode;
-++	Oid			save_userid;
-++	int			save_sec_context;
-++	int			save_nestlevel;
+++	Fix write-after-free error in DHCPv6 server code.
+++	CVE-2022-0934 refers.
++ 	
++ version 2.80
++ 	Add support for RFC 4039 DHCP rapid commit. Thanks to Ashram Method
++diff --git a/src/rfc3315.c b/src/rfc3315.c
++index b3f0a0a..eef1360 100644
++--- a/src/rfc3315.c
+++++ b/src/rfc3315.c
++@@ -33,9 +33,9 @@ struct state {
++   unsigned int mac_len, mac_type;
++ };
 + 
-+ 	if (parentcheck)
-+ 		lockmode = ShareLock;
-+@@ -244,9 +247,27 @@ bt_index_check_internal(Oid indrelid, bool parentcheck, bool heapallindexed,
-+ 	 */
-+ 	heapid = IndexGetRelation(indrelid, true);
-+ 	if (OidIsValid(heapid))
-++	{
-+ 		heaprel = table_open(heapid, lockmode);
-++
-++		/*
-++		 * Switch to the table owner's userid, so that any index functions are
-++		 * run as that user.  Also lock down security-restricted operations
-++		 * and arrange to make GUC variable changes local to this command.
-++		 */
-++		GetUserIdAndSecContext(&save_userid, &save_sec_context);
-++		SetUserIdAndSecContext(heaprel->rd_rel->relowner,
-++							   save_sec_context | SECURITY_RESTRICTED_OPERATION);
-++		save_nestlevel = NewGUCNestLevel();
-++	}
-+ 	else
-++	{
-+ 		heaprel = NULL;
-++		/* for "gcc -Og" https://gcc.gnu.org/bugzilla/show_bug.cgi?id=78394 */
-++		save_userid = InvalidOid;
-++		save_sec_context = -1;
-++		save_nestlevel = -1;
-++	}
-+ 
-+ 	/*
-+ 	 * Open the target index relations separately (like relation_openrv(), but
-+@@ -293,6 +314,12 @@ bt_index_check_internal(Oid indrelid, bool parentcheck, bool heapallindexed,
-+ 							 heapallindexed, rootdescend);
-+ 	}
-+ 
-++	/* Roll back any GUC changes executed by index functions */
-++	AtEOXact_GUC(false, save_nestlevel);
-++
-++	/* Restore userid and security context */
-++	SetUserIdAndSecContext(save_userid, save_sec_context);
-++
-+ 	/*
-+ 	 * Release locks early. That's ok here because nothing in the called
-+ 	 * routines will trigger shared cache invalidations to be sent, so we can
-+diff --git a/src/backend/access/brin/brin.c b/src/backend/access/brin/brin.c
-+index c7b403b..781cac2 100644
-+--- a/src/backend/access/brin/brin.c
-++++ b/src/backend/access/brin/brin.c
-+@@ -873,6 +873,9 @@ brin_summarize_range(PG_FUNCTION_ARGS)
-+ 	Oid			heapoid;
-+ 	Relation	indexRel;
-+ 	Relation	heapRel;
-++	Oid			save_userid;
-++	int			save_sec_context;
-++	int			save_nestlevel;
-+ 	double		numSummarized = 0;
-+ 
-+ 	if (RecoveryInProgress())
-+@@ -899,7 +902,22 @@ brin_summarize_range(PG_FUNCTION_ARGS)
-+ 	 */
-+ 	heapoid = IndexGetRelation(indexoid, true);
-+ 	if (OidIsValid(heapoid))
-++	{
-+ 		heapRel = table_open(heapoid, ShareUpdateExclusiveLock);
-++
-++		/*
-++		 * Autovacuum calls us.  For its benefit, switch to the table owner's
-++		 * userid, so that any index functions are run as that user.  Also
-++		 * lock down security-restricted operations and arrange to make GUC
-++		 * variable changes local to this command.  This is harmless, albeit
-++		 * unnecessary, when called from SQL, because we fail shortly if the
-++		 * user does not own the index.
-++		 */
-++		GetUserIdAndSecContext(&save_userid, &save_sec_context);
-++		SetUserIdAndSecContext(heapRel->rd_rel->relowner,
-++							   save_sec_context | SECURITY_RESTRICTED_OPERATION);
-++		save_nestlevel = NewGUCNestLevel();
-++	}
-+ 	else
-+ 		heapRel = NULL;
-+ 
-+@@ -914,7 +932,7 @@ brin_summarize_range(PG_FUNCTION_ARGS)
-+ 						RelationGetRelationName(indexRel))));
-+ 
-+ 	/* User must own the index (comparable to privileges needed for VACUUM) */
-+-	if (!pg_class_ownercheck(indexoid, GetUserId()))
-++	if (heapRel != NULL && !pg_class_ownercheck(indexoid, save_userid))
-+ 		aclcheck_error(ACLCHECK_NOT_OWNER, OBJECT_INDEX,
-+ 					   RelationGetRelationName(indexRel));
-+ 
-+@@ -932,6 +950,12 @@ brin_summarize_range(PG_FUNCTION_ARGS)
-+ 	/* OK, do it */
-+ 	brinsummarize(indexRel, heapRel, heapBlk, true, &numSummarized, NULL);
-+ 
-++	/* Roll back any GUC changes executed by index functions */
-++	AtEOXact_GUC(false, save_nestlevel);
-++
-++	/* Restore userid and security context */
-++	SetUserIdAndSecContext(save_userid, save_sec_context);
-++
-+ 	relation_close(indexRel, ShareUpdateExclusiveLock);
-+ 	relation_close(heapRel, ShareUpdateExclusiveLock);
-+ 
-+@@ -973,6 +997,9 @@ brin_desummarize_range(PG_FUNCTION_ARGS)
-+ 	 * passed indexoid isn't an index then IndexGetRelation() will fail.
-+ 	 * Rather than emitting a not-very-helpful error message, postpone
-+ 	 * complaining, expecting that the is-it-an-index test below will fail.
-++	 *
-++	 * Unlike brin_summarize_range(), autovacuum never calls this.  Hence, we
-++	 * don't switch userid.
-+ 	 */
-+ 	heapoid = IndexGetRelation(indexoid, true);
-+ 	if (OidIsValid(heapoid))
-+diff --git a/src/backend/catalog/index.c b/src/backend/catalog/index.c
-+index 3ece136..0333bfd 100644
-+--- a/src/backend/catalog/index.c
-++++ b/src/backend/catalog/index.c
-+@@ -1400,6 +1400,9 @@ index_concurrently_build(Oid heapRelationId,
-+ 						 Oid indexRelationId)
-+ {
-+ 	Relation	heapRel;
-++	Oid			save_userid;
-++	int			save_sec_context;
-++	int			save_nestlevel;
-+ 	Relation	indexRelation;
-+ 	IndexInfo  *indexInfo;
-+ 
-+@@ -1409,7 +1412,16 @@ index_concurrently_build(Oid heapRelationId,
-+ 	/* Open and lock the parent heap relation */
-+ 	heapRel = table_open(heapRelationId, ShareUpdateExclusiveLock);
-+ 
-+-	/* And the target index relation */
-++	/*
-++	 * Switch to the table owner's userid, so that any index functions are run
-++	 * as that user.  Also lock down security-restricted operations and
-++	 * arrange to make GUC variable changes local to this command.
-++	 */
-++	GetUserIdAndSecContext(&save_userid, &save_sec_context);
-++	SetUserIdAndSecContext(heapRel->rd_rel->relowner,
-++						   save_sec_context | SECURITY_RESTRICTED_OPERATION);
-++	save_nestlevel = NewGUCNestLevel();
-++
-+ 	indexRelation = index_open(indexRelationId, RowExclusiveLock);
-+ 
-+ 	/*
-+@@ -1425,6 +1437,12 @@ index_concurrently_build(Oid heapRelationId,
-+ 	/* Now build the index */
-+ 	index_build(heapRel, indexRelation, indexInfo, false, true);
-+ 
-++	/* Roll back any GUC changes executed by index functions */
-++	AtEOXact_GUC(false, save_nestlevel);
-++
-++	/* Restore userid and security context */
-++	SetUserIdAndSecContext(save_userid, save_sec_context);
-++
-+ 	/* Close both the relations, but keep the locks */
-+ 	table_close(heapRel, NoLock);
-+ 	index_close(indexRelation, NoLock);
-+@@ -3271,7 +3289,17 @@ validate_index(Oid heapId, Oid indexId, Snapshot snapshot)
-+ 
-+ 	/* Open and lock the parent heap relation */
-+ 	heapRelation = table_open(heapId, ShareUpdateExclusiveLock);
-+-	/* And the target index relation */
-++
-++	/*
-++	 * Switch to the table owner's userid, so that any index functions are run
-++	 * as that user.  Also lock down security-restricted operations and
-++	 * arrange to make GUC variable changes local to this command.
-++	 */
-++	GetUserIdAndSecContext(&save_userid, &save_sec_context);
-++	SetUserIdAndSecContext(heapRelation->rd_rel->relowner,
-++						   save_sec_context | SECURITY_RESTRICTED_OPERATION);
-++	save_nestlevel = NewGUCNestLevel();
-++
-+ 	indexRelation = index_open(indexId, RowExclusiveLock);
-+ 
-+ 	/*
-+@@ -3284,16 +3312,6 @@ validate_index(Oid heapId, Oid indexId, Snapshot snapshot)
-+ 	/* mark build is concurrent just for consistency */
-+ 	indexInfo->ii_Concurrent = true;
-+ 
-+-	/*
-+-	 * Switch to the table owner's userid, so that any index functions are run
-+-	 * as that user.  Also lock down security-restricted operations and
-+-	 * arrange to make GUC variable changes local to this command.
-+-	 */
-+-	GetUserIdAndSecContext(&save_userid, &save_sec_context);
-+-	SetUserIdAndSecContext(heapRelation->rd_rel->relowner,
-+-						   save_sec_context | SECURITY_RESTRICTED_OPERATION);
-+-	save_nestlevel = NewGUCNestLevel();
-+-
-+ 	/*
-+ 	 * Scan the index and gather up all the TIDs into a tuplesort object.
-+ 	 */
-+@@ -3497,6 +3515,9 @@ reindex_index(Oid indexId, bool skip_constraint_checks, char persistence,
-+ 	Relation	iRel,
-+ 				heapRelation;
-+ 	Oid			heapId;
-++	Oid			save_userid;
-++	int			save_sec_context;
-++	int			save_nestlevel;
-+ 	IndexInfo  *indexInfo;
-+ 	volatile bool skipped_constraint = false;
-+ 	PGRUsage	ru0;
-+@@ -3527,6 +3548,16 @@ reindex_index(Oid indexId, bool skip_constraint_checks, char persistence,
-+ 	 */
-+ 	iRel = index_open(indexId, AccessExclusiveLock);
-+ 
-++	/*
-++	 * Switch to the table owner's userid, so that any index functions are run
-++	 * as that user.  Also lock down security-restricted operations and
-++	 * arrange to make GUC variable changes local to this command.
-++	 */
-++	GetUserIdAndSecContext(&save_userid, &save_sec_context);
-++	SetUserIdAndSecContext(heapRelation->rd_rel->relowner,
-++						   save_sec_context | SECURITY_RESTRICTED_OPERATION);
-++	save_nestlevel = NewGUCNestLevel();
-++
-+ 	if (progress)
-+ 		pgstat_progress_update_param(PROGRESS_CREATEIDX_ACCESS_METHOD_OID,
-+ 									 iRel->rd_rel->relam);
-+@@ -3684,12 +3715,18 @@ reindex_index(Oid indexId, bool skip_constraint_checks, char persistence,
-+ 				 errdetail_internal("%s",
-+ 									pg_rusage_show(&ru0))));
-+ 
-+-	if (progress)
-+-		pgstat_progress_end_command();
-++	/* Roll back any GUC changes executed by index functions */
-++	AtEOXact_GUC(false, save_nestlevel);
-++
-++	/* Restore userid and security context */
-++	SetUserIdAndSecContext(save_userid, save_sec_context);
-+ 
-+ 	/* Close rels, but keep locks */
-+ 	index_close(iRel, NoLock);
-+ 	table_close(heapRelation, NoLock);
-++
-++	if (progress)
-++		pgstat_progress_end_command();
++-static int dhcp6_maybe_relay(struct state *state, void *inbuff, size_t sz, 
+++static int dhcp6_maybe_relay(struct state *state, unsigned char *inbuff, size_t sz,
++ 			     struct in6_addr *client_addr, int is_unicast, time_t now);
++-static int dhcp6_no_relay(struct state *state, int msg_type, void *inbuff, size_t sz, int is_unicast, time_t now);
+++static int dhcp6_no_relay(struct state *state, int msg_type, unsigned char *inbuff, size_t sz, int is_unicast, time_t now);
++ static void log6_opts(int nest, unsigned int xid, void *start_opts, void *end_opts);
++ static void log6_packet(struct state *state, char *type, struct in6_addr *addr, char *string);
++ static void log6_quiet(struct state *state, char *type, struct in6_addr *addr, char *string);
++@@ -104,12 +104,12 @@ unsigned short dhcp6_reply(struct dhcp_context *context, int interface, char *if
 + }
 + 
-+ /*
-+diff --git a/src/backend/commands/cluster.c b/src/backend/commands/cluster.c
-+index bd6f408..74db03e 100644
-+--- a/src/backend/commands/cluster.c
-++++ b/src/backend/commands/cluster.c
-+@@ -266,6 +266,9 @@ void
-+ cluster_rel(Oid tableOid, Oid indexOid, int options)
++ /* This cost me blood to write, it will probably cost you blood to understand - srk. */
++-static int dhcp6_maybe_relay(struct state *state, void *inbuff, size_t sz, 
+++static int dhcp6_maybe_relay(struct state *state, unsigned char *inbuff, size_t sz,
++ 			     struct in6_addr *client_addr, int is_unicast, time_t now)
 + {
-+ 	Relation	OldHeap;
-++	Oid         save_userid;
-++	int         save_sec_context;
-++	int         save_nestlevel;
-+ 	bool		verbose = ((options & CLUOPT_VERBOSE) != 0);
-+ 	bool		recheck = ((options & CLUOPT_RECHECK) != 0);
-+ 
-+@@ -295,6 +298,16 @@ cluster_rel(Oid tableOid, Oid indexOid, int options)
-+ 		return;
-+ 	}
-+ 
-++	/*
-++	 * Switch to the table owner's userid, so that any index functions are run
-++	 * as that user.  Also lock down security-restricted operations and
-++	 * arrange to make GUC variable changes local to this command.
-++	 */
-++	GetUserIdAndSecContext(&save_userid, &save_sec_context);
-++	SetUserIdAndSecContext(OldHeap->rd_rel->relowner,
-++						   save_sec_context | SECURITY_RESTRICTED_OPERATION);
-++	save_nestlevel = NewGUCNestLevel();
-++
-+ 	/*
-+ 	 * Since we may open a new transaction for each relation, we have to check
-+ 	 * that the relation still is what we think it is.
-+@@ -309,11 +322,10 @@ cluster_rel(Oid tableOid, Oid indexOid, int options)
-+ 		Form_pg_index indexForm;
-+ 
-+ 		/* Check that the user still owns the relation */
-+-		if (!pg_class_ownercheck(tableOid, GetUserId()))
-++		if (!pg_class_ownercheck(tableOid, save_userid))
-+ 		{
-+ 			relation_close(OldHeap, AccessExclusiveLock);
-+-			pgstat_progress_end_command();
-+-			return;
-++			goto out;
-+ 		}
-+ 
-+ 		/*
-+@@ -327,8 +339,7 @@ cluster_rel(Oid tableOid, Oid indexOid, int options)
-+ 		if (RELATION_IS_OTHER_TEMP(OldHeap))
-+ 		{
-+ 			relation_close(OldHeap, AccessExclusiveLock);
-+-			pgstat_progress_end_command();
-+-			return;
-++			goto out;
-+ 		}
-+ 
-+ 		if (OidIsValid(indexOid))
-+@@ -339,8 +350,7 @@ cluster_rel(Oid tableOid, Oid indexOid, int options)
-+ 			if (!SearchSysCacheExists1(RELOID, ObjectIdGetDatum(indexOid)))
-+ 			{
-+ 				relation_close(OldHeap, AccessExclusiveLock);
-+-				pgstat_progress_end_command();
-+-				return;
-++				goto out;
-+ 			}
-+ 
-+ 			/*
-+@@ -350,8 +360,7 @@ cluster_rel(Oid tableOid, Oid indexOid, int options)
-+ 			if (!HeapTupleIsValid(tuple))	/* probably can't happen */
-+ 			{
-+ 				relation_close(OldHeap, AccessExclusiveLock);
-+-				pgstat_progress_end_command();
-+-				return;
-++				goto out;
-+ 			}
-+ 			indexForm = (Form_pg_index) GETSTRUCT(tuple);
-+ 			if (!indexForm->indisclustered)
-+@@ -413,8 +422,7 @@ cluster_rel(Oid tableOid, Oid indexOid, int options)
-+ 		!RelationIsPopulated(OldHeap))
-+ 	{
-+ 		relation_close(OldHeap, AccessExclusiveLock);
-+-		pgstat_progress_end_command();
-+-		return;
-++		goto out;
-+ 	}
-+ 
-+ 	/*
-+@@ -430,6 +438,13 @@ cluster_rel(Oid tableOid, Oid indexOid, int options)
-+ 
-+ 	/* NB: rebuild_relation does table_close() on OldHeap */
-+ 
-++out:
-++	/* Roll back any GUC changes executed by index functions */
-++	AtEOXact_GUC(false, save_nestlevel);
-++
-++	/* Restore userid and security context */
-++	SetUserIdAndSecContext(save_userid, save_sec_context);
-++
-+ 	pgstat_progress_end_command();
++   void *end = inbuff + sz;
++   void *opts = inbuff + 34;
++-  int msg_type = *((unsigned char *)inbuff);
+++  int msg_type = *inbuff;
++   unsigned char *outmsgtypep;
++   void *opt;
++   struct dhcp_vendor *vendor;
++@@ -259,15 +259,15 @@ static int dhcp6_maybe_relay(struct state *state, void *inbuff, size_t sz,
++   return 1;
 + }
 + 
-+diff --git a/src/backend/commands/indexcmds.c b/src/backend/commands/indexcmds.c
-+index be1cf8c..167b377 100644
-+--- a/src/backend/commands/indexcmds.c
-++++ b/src/backend/commands/indexcmds.c
-+@@ -470,21 +470,22 @@ DefineIndex(Oid relationId,
-+ 	LOCKTAG		heaplocktag;
-+ 	LOCKMODE	lockmode;
-+ 	Snapshot	snapshot;
-+-	int			save_nestlevel = -1;
-++	Oid			root_save_userid;
-++	int			root_save_sec_context;
-++	int			root_save_nestlevel;
-+ 	int			i;
++-static int dhcp6_no_relay(struct state *state, int msg_type, void *inbuff, size_t sz, int is_unicast, time_t now)
+++static int dhcp6_no_relay(struct state *state, int msg_type, unsigned char *inbuff, size_t sz, int is_unicast, time_t now)
++ {
++   void *opt;
++-  int i, o, o1, start_opts;
+++  int i, o, o1, start_opts, start_msg;
++   struct dhcp_opt *opt_cfg;
++   struct dhcp_netid *tagif;
++   struct dhcp_config *config = NULL;
++   struct dhcp_netid known_id, iface_id, v6_id;
++-  unsigned char *outmsgtypep;
+++  unsigned char outmsgtype;
++   struct dhcp_vendor *vendor;
++   struct dhcp_context *context_tmp;
++   struct dhcp_mac *mac_opt;
++@@ -296,12 +296,13 @@ static int dhcp6_no_relay(struct state *state, int msg_type, void *inbuff, size_
++   v6_id.next = state->tags;
++   state->tags = &v6_id;
 + 
-++	root_save_nestlevel = NewGUCNestLevel();
++-  /* copy over transaction-id, and save pointer to message type */
++-  if (!(outmsgtypep = put_opt6(inbuff, 4)))
+++  start_msg = save_counter(-1);
+++  /* copy over transaction-id */
+++  if (!put_opt6(inbuff, 4))
++     return 0;
++   start_opts = save_counter(-1);
++-  state->xid = outmsgtypep[3] | outmsgtypep[2] << 8 | outmsgtypep[1] << 16;
++-   
+++  state->xid = inbuff[3] | inbuff[2] << 8 | inbuff[1] << 16;
 ++
-+ 	/*
-+ 	 * Some callers need us to run with an empty default_tablespace; this is a
-+ 	 * necessary hack to be able to reproduce catalog state accurately when
-+ 	 * recreating indexes after table-rewriting ALTER TABLE.
-+ 	 */
-+ 	if (stmt->reset_default_tblspc)
-+-	{
-+-		save_nestlevel = NewGUCNestLevel();
-+ 		(void) set_config_option("default_tablespace", "",
-+ 								 PGC_USERSET, PGC_S_SESSION,
-+ 								 GUC_ACTION_SAVE, true, 0, false);
-+-	}
++   /* We're going to be linking tags from all context we use. 
++      mark them as unused so we don't link one twice and break the list */
++   for (context_tmp = state->context; context_tmp; context_tmp = context_tmp->current)
++@@ -347,7 +348,7 @@ static int dhcp6_no_relay(struct state *state, int msg_type, void *inbuff, size_
++       (msg_type == DHCP6REQUEST || msg_type == DHCP6RENEW || msg_type == DHCP6RELEASE || msg_type == DHCP6DECLINE))
++     
++     {  
++-      *outmsgtypep = DHCP6REPLY;
+++      outmsgtype = DHCP6REPLY;
++       o1 = new_opt6(OPTION6_STATUS_CODE);
++       put_opt6_short(DHCP6USEMULTI);
++       put_opt6_string("Use multicast");
++@@ -619,11 +620,11 @@ static int dhcp6_no_relay(struct state *state, int msg_type, void *inbuff, size_
++ 	struct dhcp_netid *solicit_tags;
++ 	struct dhcp_context *c;
++ 	
++-	*outmsgtypep = DHCP6ADVERTISE;
+++	outmsgtype = DHCP6ADVERTISE;
++ 	
++ 	if (opt6_find(state->packet_options, state->end, OPTION6_RAPID_COMMIT, 0))
++ 	  {
++-	    *outmsgtypep = DHCP6REPLY;
+++	    outmsgtype = DHCP6REPLY;
++ 	    state->lease_allocate = 1;
++ 	    o = new_opt6(OPTION6_RAPID_COMMIT);
++ 	    end_opt6(o);
++@@ -809,7 +810,7 @@ static int dhcp6_no_relay(struct state *state, int msg_type, void *inbuff, size_
++ 	int start = save_counter(-1);
 + 
-+ 	/*
-+ 	 * Force non-concurrent build on temporary relations, even if CONCURRENTLY
-+@@ -563,6 +564,15 @@ DefineIndex(Oid relationId,
-+ 	lockmode = concurrent ? ShareUpdateExclusiveLock : ShareLock;
-+ 	rel = table_open(relationId, lockmode);
++ 	/* set reply message type */
++-	*outmsgtypep = DHCP6REPLY;
+++	outmsgtype = DHCP6REPLY;
++ 	state->lease_allocate = 1;
 + 
-++	/*
-++	 * Switch to the table owner's userid, so that any index functions are run
-++	 * as that user.  Also lock down security-restricted operations.  We
-++	 * already arranged to make GUC variable changes local to this command.
-++	 */
-++	GetUserIdAndSecContext(&root_save_userid, &root_save_sec_context);
-++	SetUserIdAndSecContext(rel->rd_rel->relowner,
-++						   root_save_sec_context | SECURITY_RESTRICTED_OPERATION);
++ 	log6_quiet(state, "DHCPREQUEST", NULL, ignore ? _("ignored") : NULL);
++@@ -921,7 +922,7 @@ static int dhcp6_no_relay(struct state *state, int msg_type, void *inbuff, size_
++     case DHCP6RENEW:
++       {
++ 	/* set reply message type */
++-	*outmsgtypep = DHCP6REPLY;
+++	outmsgtype = DHCP6REPLY;
++ 	
++ 	log6_quiet(state, "DHCPRENEW", NULL, NULL);
++ 
++@@ -1033,7 +1034,7 @@ static int dhcp6_no_relay(struct state *state, int msg_type, void *inbuff, size_
++ 	int good_addr = 0;
++ 
++ 	/* set reply message type */
++-	*outmsgtypep = DHCP6REPLY;
+++	outmsgtype = DHCP6REPLY;
++ 	
++ 	log6_quiet(state, "DHCPCONFIRM", NULL, NULL);
++ 	
++@@ -1097,7 +1098,7 @@ static int dhcp6_no_relay(struct state *state, int msg_type, void *inbuff, size_
++ 	log6_quiet(state, "DHCPINFORMATION-REQUEST", NULL, ignore ? _("ignored") : state->hostname);
++ 	if (ignore)
++ 	  return 0;
++-	*outmsgtypep = DHCP6REPLY;
+++	outmsgtype = DHCP6REPLY;
++ 	tagif = add_options(state, 1);
++ 	break;
++       }
++@@ -1106,7 +1107,7 @@ static int dhcp6_no_relay(struct state *state, int msg_type, void *inbuff, size_
++     case DHCP6RELEASE:
++       {
++ 	/* set reply message type */
++-	*outmsgtypep = DHCP6REPLY;
+++	outmsgtype = DHCP6REPLY;
++ 
++ 	log6_quiet(state, "DHCPRELEASE", NULL, NULL);
++ 
++@@ -1171,7 +1172,7 @@ static int dhcp6_no_relay(struct state *state, int msg_type, void *inbuff, size_
++     case DHCP6DECLINE:
++       {
++ 	/* set reply message type */
++-	*outmsgtypep = DHCP6REPLY;
+++	outmsgtype = DHCP6REPLY;
++ 	
++ 	log6_quiet(state, "DHCPDECLINE", NULL, NULL);
++ 
++@@ -1251,7 +1252,12 @@ static int dhcp6_no_relay(struct state *state, int msg_type, void *inbuff, size_
++       }
++ 
++     }
++-  
 ++
-+ 	namespaceId = RelationGetNamespace(rel);
-+ 
-+ 	/* Ensure that it makes sense to index this kind of relation */
-+@@ -648,7 +658,7 @@ DefineIndex(Oid relationId,
-+ 	{
-+ 		AclResult	aclresult;
-+ 
-+-		aclresult = pg_namespace_aclcheck(namespaceId, GetUserId(),
-++		aclresult = pg_namespace_aclcheck(namespaceId, root_save_userid,
-+ 										  ACL_CREATE);
-+ 		if (aclresult != ACLCHECK_OK)
-+ 			aclcheck_error(aclresult, OBJECT_SCHEMA,
-+@@ -680,7 +690,7 @@ DefineIndex(Oid relationId,
-+ 	{
-+ 		AclResult	aclresult;
-+ 
-+-		aclresult = pg_tablespace_aclcheck(tablespaceId, GetUserId(),
-++		aclresult = pg_tablespace_aclcheck(tablespaceId, root_save_userid,
-+ 										   ACL_CREATE);
-+ 		if (aclresult != ACLCHECK_OK)
-+ 			aclcheck_error(aclresult, OBJECT_TABLESPACE,
-+@@ -1066,15 +1076,17 @@ DefineIndex(Oid relationId,
-+ 
-+ 	ObjectAddressSet(address, RelationRelationId, indexRelationId);
-+ 
-+-	/*
-+-	 * Revert to original default_tablespace.  Must do this before any return
-+-	 * from this function, but after index_create, so this is a good time.
-+-	 */
-+-	if (save_nestlevel >= 0)
-+-		AtEOXact_GUC(true, save_nestlevel);
-+-
-+ 	if (!OidIsValid(indexRelationId))
-+ 	{
-++		/*
-++		 * Roll back any GUC changes executed by index functions.  Also revert
-++		 * to original default_tablespace if we changed it above.
-++		 */
-++		AtEOXact_GUC(false, root_save_nestlevel);
+++  /* Fill in the message type. Note that we store the offset,
+++     not a direct pointer, since the packet memory may have been
+++     reallocated. */
+++  ((unsigned char *)(daemon->outpacket.iov_base))[start_msg] = outmsgtype;
 ++
-++		/* Restore userid and security context */
-++		SetUserIdAndSecContext(root_save_userid, root_save_sec_context);
-++
-+ 		table_close(rel, NoLock);
-+ 
-+ 		/* If this is the top-level index, we're done */
-+@@ -1084,6 +1096,17 @@ DefineIndex(Oid relationId,
-+ 		return address;
-+ 	}
-+ 
-++	/*
-++	 * Roll back any GUC changes executed by index functions, and keep
-++	 * subsequent changes local to this command.  It's barely possible that
-++	 * some index function changed a behavior-affecting GUC, e.g. xmloption,
-++	 * that affects subsequent steps.  This improves bug-compatibility with
-++	 * older PostgreSQL versions.  They did the AtEOXact_GUC() here for the
-++	 * purpose of clearing the above default_tablespace change.
-++	 */
-++	AtEOXact_GUC(false, root_save_nestlevel);
-++	root_save_nestlevel = NewGUCNestLevel();
-++
-+ 	/* Add any requested comment */
-+ 	if (stmt->idxcomment != NULL)
-+ 		CreateComments(indexRelationId, RelationRelationId, 0,
-+@@ -1130,6 +1153,9 @@ DefineIndex(Oid relationId,
-+ 			{
-+ 				Oid			childRelid = part_oids[i];
-+ 				Relation	childrel;
-++				Oid			child_save_userid;
-++				int			child_save_sec_context;
-++				int			child_save_nestlevel;
-+ 				List	   *childidxs;
-+ 				ListCell   *cell;
-+ 				AttrNumber *attmap;
-+@@ -1138,6 +1164,12 @@ DefineIndex(Oid relationId,
-+ 
-+ 				childrel = table_open(childRelid, lockmode);
-+ 
-++				GetUserIdAndSecContext(&child_save_userid,
-++									   &child_save_sec_context);
-++				SetUserIdAndSecContext(childrel->rd_rel->relowner,
-++									   child_save_sec_context | SECURITY_RESTRICTED_OPERATION);
-++				child_save_nestlevel = NewGUCNestLevel();
-++
-+ 				/*
-+ 				 * Don't try to create indexes on foreign tables, though. Skip
-+ 				 * those if a regular index, or fail if trying to create a
-+@@ -1153,6 +1185,9 @@ DefineIndex(Oid relationId,
-+ 								 errdetail("Table \"%s\" contains partitions that are foreign tables.",
-+ 										   RelationGetRelationName(rel))));
-+ 
-++					AtEOXact_GUC(false, child_save_nestlevel);
-++					SetUserIdAndSecContext(child_save_userid,
-++										   child_save_sec_context);
-+ 					table_close(childrel, lockmode);
-+ 					continue;
-+ 				}
-+@@ -1226,6 +1261,9 @@ DefineIndex(Oid relationId,
-+ 				}
-+ 
-+ 				list_free(childidxs);
-++				AtEOXact_GUC(false, child_save_nestlevel);
-++				SetUserIdAndSecContext(child_save_userid,
-++									   child_save_sec_context);
-+ 				table_close(childrel, NoLock);
-+ 
-+ 				/*
-+@@ -1280,12 +1318,21 @@ DefineIndex(Oid relationId,
-+ 					if (found_whole_row)
-+ 						elog(ERROR, "cannot convert whole-row table reference");
-+ 
-++					/*
-++					 * Recurse as the starting user ID.  Callee will use that
-++					 * for permission checks, then switch again.
-++					 */
-++					Assert(GetUserId() == child_save_userid);
-++					SetUserIdAndSecContext(root_save_userid,
-++										   root_save_sec_context);
-+ 					DefineIndex(childRelid, childStmt,
-+ 								InvalidOid, /* no predefined OID */
-+ 								indexRelationId,	/* this is our child */
-+ 								createdConstraintId,
-+ 								is_alter_table, check_rights, check_not_in_use,
-+ 								skip_build, quiet);
-++					SetUserIdAndSecContext(child_save_userid,
-++										   child_save_sec_context);
-+ 				}
-+ 
-+ 				pgstat_progress_update_param(PROGRESS_CREATEIDX_PARTITIONS_DONE,
-+@@ -1322,12 +1369,17 @@ DefineIndex(Oid relationId,
-+ 		 * Indexes on partitioned tables are not themselves built, so we're
-+ 		 * done here.
-+ 		 */
-++		AtEOXact_GUC(false, root_save_nestlevel);
-++		SetUserIdAndSecContext(root_save_userid, root_save_sec_context);
-+ 		table_close(rel, NoLock);
-+ 		if (!OidIsValid(parentIndexId))
-+ 			pgstat_progress_end_command();
-+ 		return address;
-+ 	}
-+ 
-++	AtEOXact_GUC(false, root_save_nestlevel);
-++	SetUserIdAndSecContext(root_save_userid, root_save_sec_context);
-++
-+ 	if (!concurrent)
-+ 	{
-+ 		/* Close the heap and we're done, in the non-concurrent case */
-+@@ -3040,6 +3092,9 @@ ReindexRelationConcurrently(Oid relationOid, int options)
-+ 		Oid			newIndexId;
-+ 		Relation	indexRel;
-+ 		Relation	heapRel;
-++		Oid			save_userid;
-++		int			save_sec_context;
-++		int			save_nestlevel;
-+ 		Relation	newIndexRel;
-+ 		LockRelId  *lockrelid;
-+ 
-+@@ -3047,6 +3102,16 @@ ReindexRelationConcurrently(Oid relationOid, int options)
-+ 		heapRel = table_open(indexRel->rd_index->indrelid,
-+ 							 ShareUpdateExclusiveLock);
-+ 
-++		/*
-++		 * Switch to the table owner's userid, so that any index functions are
-++		 * run as that user.  Also lock down security-restricted operations
-++		 * and arrange to make GUC variable changes local to this command.
-++		 */
-++		GetUserIdAndSecContext(&save_userid, &save_sec_context);
-++		SetUserIdAndSecContext(heapRel->rd_rel->relowner,
-++					save_sec_context | SECURITY_RESTRICTED_OPERATION);
-++		save_nestlevel = NewGUCNestLevel();
-++
-+ 		/* This function shouldn't be called for temporary relations. */
-+ 		if (indexRel->rd_rel->relpersistence == RELPERSISTENCE_TEMP)
-+ 			elog(ERROR, "cannot reindex a temporary table concurrently");
-+@@ -3101,6 +3166,13 @@ ReindexRelationConcurrently(Oid relationOid, int options)
-+ 
-+ 		index_close(indexRel, NoLock);
-+ 		index_close(newIndexRel, NoLock);
-++
-++		/* Roll back any GUC changes executed by index functions */
-++		AtEOXact_GUC(false, save_nestlevel);
-++
-++		/* Restore userid and security context */
-++		SetUserIdAndSecContext(save_userid, save_sec_context);
-++
-+ 		table_close(heapRel, NoLock);
-+ 	}
-+ 
-+diff --git a/src/backend/commands/matview.c b/src/backend/commands/matview.c
-+index 80e9ec0..e485661 100644
-+--- a/src/backend/commands/matview.c
-++++ b/src/backend/commands/matview.c
-+@@ -167,6 +167,17 @@ ExecRefreshMatView(RefreshMatViewStmt *stmt, const char *queryString,
-+ 										  lockmode, 0,
-+ 										  RangeVarCallbackOwnsTable, NULL);
-+ 	matviewRel = table_open(matviewOid, NoLock);
-++	relowner = matviewRel->rd_rel->relowner;
-++
-++	/*
-++	 * Switch to the owner's userid, so that any functions are run as that
-++	 * user.  Also lock down security-restricted operations and arrange to
-++	 * make GUC variable changes local to this command.
-++	 */
-++	GetUserIdAndSecContext(&save_userid, &save_sec_context);
-++	SetUserIdAndSecContext(relowner,
-++						   save_sec_context | SECURITY_RESTRICTED_OPERATION);
-++	save_nestlevel = NewGUCNestLevel();
-+ 
-+ 	/* Make sure it is a materialized view. */
-+ 	if (matviewRel->rd_rel->relkind != RELKIND_MATVIEW)
-+@@ -268,19 +279,6 @@ ExecRefreshMatView(RefreshMatViewStmt *stmt, const char *queryString,
-+ 	 */
-+ 	SetMatViewPopulatedState(matviewRel, !stmt->skipData);
-+ 
-+-	relowner = matviewRel->rd_rel->relowner;
-+-
-+-	/*
-+-	 * Switch to the owner's userid, so that any functions are run as that
-+-	 * user.  Also arrange to make GUC variable changes local to this command.
-+-	 * Don't lock it down too tight to create a temporary table just yet.  We
-+-	 * will switch modes when we are about to execute user code.
-+-	 */
-+-	GetUserIdAndSecContext(&save_userid, &save_sec_context);
-+-	SetUserIdAndSecContext(relowner,
-+-						   save_sec_context | SECURITY_LOCAL_USERID_CHANGE);
-+-	save_nestlevel = NewGUCNestLevel();
-+-
-+ 	/* Concurrent refresh builds new data in temp tablespace, and does diff. */
-+ 	if (concurrent)
-+ 	{
-+@@ -303,12 +301,6 @@ ExecRefreshMatView(RefreshMatViewStmt *stmt, const char *queryString,
-+ 	LockRelationOid(OIDNewHeap, AccessExclusiveLock);
-+ 	dest = CreateTransientRelDestReceiver(OIDNewHeap);
-+ 
-+-	/*
-+-	 * Now lock down security-restricted operations.
-+-	 */
-+-	SetUserIdAndSecContext(relowner,
-+-						   save_sec_context | SECURITY_RESTRICTED_OPERATION);
-+-
-+ 	/* Generate the data, if wanted. */
-+ 	if (!stmt->skipData)
-+ 		processed = refresh_matview_datafill(dest, dataQuery, queryString);
-+diff --git a/src/backend/utils/init/miscinit.c b/src/backend/utils/init/miscinit.c
-+index de554e2..c9f858e 100644
-+--- a/src/backend/utils/init/miscinit.c
-++++ b/src/backend/utils/init/miscinit.c
-+@@ -455,15 +455,21 @@ GetAuthenticatedUserId(void)
-+  * with guc.c's internal state, so SET ROLE has to be disallowed.
-+  *
-+  * SECURITY_RESTRICTED_OPERATION indicates that we are inside an operation
-+- * that does not wish to trust called user-defined functions at all.  This
-+- * bit prevents not only SET ROLE, but various other changes of session state
-+- * that normally is unprotected but might possibly be used to subvert the
-+- * calling session later.  An example is replacing an existing prepared
-+- * statement with new code, which will then be executed with the outer
-+- * session's permissions when the prepared statement is next used.  Since
-+- * these restrictions are fairly draconian, we apply them only in contexts
-+- * where the called functions are really supposed to be side-effect-free
-+- * anyway, such as VACUUM/ANALYZE/REINDEX.
-++ * that does not wish to trust called user-defined functions at all.  The
-++ * policy is to use this before operations, e.g. autovacuum and REINDEX, that
-++ * enumerate relations of a database or schema and run functions associated
-++ * with each found relation.  The relation owner is the new user ID.  Set this
-++ * as soon as possible after locking the relation.  Restore the old user ID as
-++ * late as possible before closing the relation; restoring it shortly after
-++ * close is also tolerable.  If a command has both relation-enumerating and
-++ * non-enumerating modes, e.g. ANALYZE, both modes set this bit.  This bit
-++ * prevents not only SET ROLE, but various other changes of session state that
-++ * normally is unprotected but might possibly be used to subvert the calling
-++ * session later.  An example is replacing an existing prepared statement with
-++ * new code, which will then be executed with the outer session's permissions
-++ * when the prepared statement is next used.  These restrictions are fairly
-++ * draconian, but the functions called in relation-enumerating operations are
-++ * really supposed to be side-effect-free anyway.
-+  *
-+  * SECURITY_NOFORCE_RLS indicates that we are inside an operation which should
-+  * ignore the FORCE ROW LEVEL SECURITY per-table indication.  This is used to
-+diff --git a/src/test/regress/expected/privileges.out b/src/test/regress/expected/privileges.out
-+index 186d2fb..0f0c1b3 100644
-+--- a/src/test/regress/expected/privileges.out
-++++ b/src/test/regress/expected/privileges.out
-+@@ -1336,6 +1336,61 @@ SELECT has_table_privilege('regress_priv_user1', 'atest4', 'SELECT WITH GRANT OP
-+ -- security-restricted operations
-+ \c -
-+ CREATE ROLE regress_sro_user;
-++-- Check that index expressions and predicates are run as the table's owner
-++-- A dummy index function checking current_user
-++CREATE FUNCTION sro_ifun(int) RETURNS int AS $$
-++BEGIN
-++	-- Below we set the table's owner to regress_sro_user
-++	ASSERT current_user = 'regress_sro_user',
-++		format('sro_ifun(%s) called by %s', $1, current_user);
-++	RETURN $1;
-++END;
-++$$ LANGUAGE plpgsql IMMUTABLE;
-++-- Create a table owned by regress_sro_user
-++CREATE TABLE sro_tab (a int);
-++ALTER TABLE sro_tab OWNER TO regress_sro_user;
-++INSERT INTO sro_tab VALUES (1), (2), (3);
-++-- Create an expression index with a predicate
-++CREATE INDEX sro_idx ON sro_tab ((sro_ifun(a) + sro_ifun(0)))
-++	WHERE sro_ifun(a + 10) > sro_ifun(10);
-++DROP INDEX sro_idx;
-++-- Do the same concurrently
-++CREATE INDEX CONCURRENTLY sro_idx ON sro_tab ((sro_ifun(a) + sro_ifun(0)))
-++	WHERE sro_ifun(a + 10) > sro_ifun(10);
-++-- REINDEX
-++REINDEX TABLE sro_tab;
-++REINDEX INDEX sro_idx;
-++REINDEX TABLE CONCURRENTLY sro_tab;
-++DROP INDEX sro_idx;
-++-- CLUSTER
-++CREATE INDEX sro_cluster_idx ON sro_tab ((sro_ifun(a) + sro_ifun(0)));
-++CLUSTER sro_tab USING sro_cluster_idx;
-++DROP INDEX sro_cluster_idx;
-++-- BRIN index
-++CREATE INDEX sro_brin ON sro_tab USING brin ((sro_ifun(a) + sro_ifun(0)));
-++SELECT brin_desummarize_range('sro_brin', 0);
-++ brin_desummarize_range 
-++------------------------
-++ 
-++(1 row)
-++
-++SELECT brin_summarize_range('sro_brin', 0);
-++ brin_summarize_range 
-++----------------------
-++                    1
-++(1 row)
-++
-++DROP TABLE sro_tab;
-++-- Check with a partitioned table
-++CREATE TABLE sro_ptab (a int) PARTITION BY RANGE (a);
-++ALTER TABLE sro_ptab OWNER TO regress_sro_user;
-++CREATE TABLE sro_part PARTITION OF sro_ptab FOR VALUES FROM (1) TO (10);
-++ALTER TABLE sro_part OWNER TO regress_sro_user;
-++INSERT INTO sro_ptab VALUES (1), (2), (3);
-++CREATE INDEX sro_pidx ON sro_ptab ((sro_ifun(a) + sro_ifun(0)))
-++	WHERE sro_ifun(a + 10) > sro_ifun(10);
-++REINDEX TABLE sro_ptab;
-++REINDEX INDEX CONCURRENTLY sro_pidx;
-+ SET SESSION AUTHORIZATION regress_sro_user;
-+ CREATE FUNCTION unwanted_grant() RETURNS void LANGUAGE sql AS
-+ 	'GRANT regress_priv_group2 TO regress_sro_user';
-+@@ -1373,6 +1428,22 @@ CONTEXT:  SQL function "unwanted_grant" statement 1
-+ SQL statement "SELECT unwanted_grant()"
-+ PL/pgSQL function sro_trojan() line 1 at PERFORM
-+ SQL function "mv_action" statement 1
-++-- REFRESH MATERIALIZED VIEW CONCURRENTLY use of eval_const_expressions()
-++SET SESSION AUTHORIZATION regress_sro_user;
-++CREATE FUNCTION unwanted_grant_nofail(int) RETURNS int
-++	IMMUTABLE LANGUAGE plpgsql AS $$
-++BEGIN
-++	PERFORM unwanted_grant();
-++	RAISE WARNING 'owned';
-++	RETURN 1;
-++EXCEPTION WHEN OTHERS THEN
-++	RETURN 2;
-++END$$;
-++CREATE MATERIALIZED VIEW sro_index_mv AS SELECT 1 AS c;
-++CREATE UNIQUE INDEX ON sro_index_mv (c) WHERE unwanted_grant_nofail(1) > 0;
-++\c -
-++REFRESH MATERIALIZED VIEW CONCURRENTLY sro_index_mv;
-++REFRESH MATERIALIZED VIEW sro_index_mv;
-+ DROP OWNED BY regress_sro_user;
-+ DROP ROLE regress_sro_user;
-+ -- Admin options
-+diff --git a/src/test/regress/sql/privileges.sql b/src/test/regress/sql/privileges.sql
-+index 34fbf0e..c0b88a6 100644
-+--- a/src/test/regress/sql/privileges.sql
-++++ b/src/test/regress/sql/privileges.sql
-+@@ -826,6 +826,53 @@ SELECT has_table_privilege('regress_priv_user1', 'atest4', 'SELECT WITH GRANT OP
-+ \c -
-+ CREATE ROLE regress_sro_user;
-+ 
-++-- Check that index expressions and predicates are run as the table's owner
-++
-++-- A dummy index function checking current_user
-++CREATE FUNCTION sro_ifun(int) RETURNS int AS $$
-++BEGIN
-++	-- Below we set the table's owner to regress_sro_user
-++	ASSERT current_user = 'regress_sro_user',
-++		format('sro_ifun(%s) called by %s', $1, current_user);
-++	RETURN $1;
-++END;
-++$$ LANGUAGE plpgsql IMMUTABLE;
-++-- Create a table owned by regress_sro_user
-++CREATE TABLE sro_tab (a int);
-++ALTER TABLE sro_tab OWNER TO regress_sro_user;
-++INSERT INTO sro_tab VALUES (1), (2), (3);
-++-- Create an expression index with a predicate
-++CREATE INDEX sro_idx ON sro_tab ((sro_ifun(a) + sro_ifun(0)))
-++	WHERE sro_ifun(a + 10) > sro_ifun(10);
-++DROP INDEX sro_idx;
-++-- Do the same concurrently
-++CREATE INDEX CONCURRENTLY sro_idx ON sro_tab ((sro_ifun(a) + sro_ifun(0)))
-++	WHERE sro_ifun(a + 10) > sro_ifun(10);
-++-- REINDEX
-++REINDEX TABLE sro_tab;
-++REINDEX INDEX sro_idx;
-++REINDEX TABLE CONCURRENTLY sro_tab;
-++DROP INDEX sro_idx;
-++-- CLUSTER
-++CREATE INDEX sro_cluster_idx ON sro_tab ((sro_ifun(a) + sro_ifun(0)));
-++CLUSTER sro_tab USING sro_cluster_idx;
-++DROP INDEX sro_cluster_idx;
-++-- BRIN index
-++CREATE INDEX sro_brin ON sro_tab USING brin ((sro_ifun(a) + sro_ifun(0)));
-++SELECT brin_desummarize_range('sro_brin', 0);
-++SELECT brin_summarize_range('sro_brin', 0);
-++DROP TABLE sro_tab;
-++-- Check with a partitioned table
-++CREATE TABLE sro_ptab (a int) PARTITION BY RANGE (a);
-++ALTER TABLE sro_ptab OWNER TO regress_sro_user;
-++CREATE TABLE sro_part PARTITION OF sro_ptab FOR VALUES FROM (1) TO (10);
-++ALTER TABLE sro_part OWNER TO regress_sro_user;
-++INSERT INTO sro_ptab VALUES (1), (2), (3);
-++CREATE INDEX sro_pidx ON sro_ptab ((sro_ifun(a) + sro_ifun(0)))
-++	WHERE sro_ifun(a + 10) > sro_ifun(10);
-++REINDEX TABLE sro_ptab;
-++REINDEX INDEX CONCURRENTLY sro_pidx;
-++
-+ SET SESSION AUTHORIZATION regress_sro_user;
-+ CREATE FUNCTION unwanted_grant() RETURNS void LANGUAGE sql AS
-+ 	'GRANT regress_priv_group2 TO regress_sro_user';
-+@@ -852,6 +899,23 @@ REFRESH MATERIALIZED VIEW sro_mv;
-+ REFRESH MATERIALIZED VIEW sro_mv;
-+ BEGIN; SET CONSTRAINTS ALL IMMEDIATE; REFRESH MATERIALIZED VIEW sro_mv; COMMIT;
-+ 
-++-- REFRESH MATERIALIZED VIEW CONCURRENTLY use of eval_const_expressions()
-++SET SESSION AUTHORIZATION regress_sro_user;
-++CREATE FUNCTION unwanted_grant_nofail(int) RETURNS int
-++	IMMUTABLE LANGUAGE plpgsql AS $$
-++BEGIN
-++	PERFORM unwanted_grant();
-++	RAISE WARNING 'owned';
-++	RETURN 1;
-++EXCEPTION WHEN OTHERS THEN
-++	RETURN 2;
-++END$$;
-++CREATE MATERIALIZED VIEW sro_index_mv AS SELECT 1 AS c;
-++CREATE UNIQUE INDEX ON sro_index_mv (c) WHERE unwanted_grant_nofail(1) > 0;
-++\c -
-++REFRESH MATERIALIZED VIEW CONCURRENTLY sro_index_mv;
-++REFRESH MATERIALIZED VIEW sro_index_mv;
-++
-+ DROP OWNED BY regress_sro_user;
-+ DROP ROLE regress_sro_user;
-+ 
++   log_tags(tagif, state->xid);
++   log6_opts(0, state->xid, daemon->outpacket.iov_base + start_opts, daemon->outpacket.iov_base + save_counter(-1));
++   
 +-- 
 +2.25.1
 +
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_12.9.bb b/meta-oe/recipes-dbs/postgresql/postgresql_12.9.bb
-index 67bf2b9604..1344d4eb00 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql_12.9.bb
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql_12.9.bb
-@@ -7,6 +7,7 @@ SRC_URI += "\
-    file://0001-Add-support-for-RISC-V.patch \
-    file://0001-Improve-reproducibility.patch \
-    file://remove_duplicate.patch \
-+   file://CVE-2022-1552.patch \
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb
+index 2fb389915b..8db57edb79 100644
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.81.bb
+@@ -11,4 +11,5 @@ SRC_URI += "\
+     file://CVE-2020-25686-1.patch \
+     file://CVE-2020-25686-2.patch \
+     file://CVE-2021-3448.patch \
++    file://CVE-2022-0934.patch \
  "
- 
- SRC_URI[sha256sum] = "89fda2de33ed04a98548e43f3ee5f15b882be17505d631fe0dd1a540a2b56dce"
 -- 
 2.25.1
 
