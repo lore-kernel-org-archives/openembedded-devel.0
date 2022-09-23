@@ -2,69 +2,69 @@ Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C85CAC6FA8B
-	for <webhook@archiver.kernel.org>; Fri, 23 Sep 2022 04:25:00 +0000 (UTC)
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com
- [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.web09.4106.1663907093817105525
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D00EEECAAD8
+	for <webhook@archiver.kernel.org>; Fri, 23 Sep 2022 04:26:30 +0000 (UTC)
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com
+ [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web11.4168.1663907181003365492
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Sep 2022 21:24:54 -0700
+ Thu, 22 Sep 2022 21:26:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=IHX/4j7K;
- spf=pass (domain: mvista.com, ip: 209.85.214.181,
+ dkim=pass header.i=@mvista.com header.s=google header.b=TabLLoRn;
+ spf=pass (domain: mvista.com, ip: 209.85.214.169,
  mailfrom: hprajapati@mvista.com)
-Received: by mail-pl1-f181.google.com with SMTP id w13so10716043plp.1
+Received: by mail-pl1-f169.google.com with SMTP id w13so10718151plp.1
         for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Sep 2022 21:24:53 -0700 (PDT)
+ Thu, 22 Sep 2022 21:26:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=mvista.com; s=google;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date;
         bh=vtjtlI9tNdO17gks30Wdz/mNp83SLhcoUesQGtG+tUw=;
-        b=IHX/4j7K5NgQxGnHW3VuXT42TWbPa/uV4xHfHjCzA/2kSDxD10L1nwEus+53beWbUA
-         x9JzEH1/z3MfjyXooHo8EmYZN8CNmAWKi+LSbbhSieJJkOE6kkqn/vQjoXOwufVbCRz0
-         hcsRaUQr+DHjcrp67Rw5hbb1pUvvX8Af9nX6s=
+        b=TabLLoRniiUABrC4ORkF4dURJSZAQwD1P34weC32nWRvAJv9bLvh52YG5rpha+oWtD
+         WyGezsfgMEFgS+7yMqbYSPI11XS4ibww8IbbN0zRSwcqHsKAOKSXije7x1xX+clF3lEK
+         zvO6ZVdNHhCKlFMPSQCaKcGeYCu3I3JnF3Bi8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date;
         bh=vtjtlI9tNdO17gks30Wdz/mNp83SLhcoUesQGtG+tUw=;
-        b=WTRnr0cIqSi/LtOUVyeHbuzA5/NnEoT8zQQmW5isyOMq4I0p012OgofCOYe4xjA+5+
-         2yZUnqO0GU0z45ui2C+VxPkRUURVl9LhNzJlaHU6lQDi5w02LqjMCCUjx7y6uFu201D+
-         MmXgnTmTpkFz9bjaDSzR94HD30bDRqfMNDtVJMQV/XIkqR7zgEgAE7gon3wLfSfS3/yk
-         ray58f/43SSKwBw9mLcHh8Mt12GK0ltyHbW1VesPbJrukcLiFkK8YIcw64CDBLACMEZH
-         ISmrcXGYEfAnpMPychEOlFKhNjtf5iecg5DEvKzT/PPfqKRnq+H6tEATpjksFPgVfKyy
-         IRrQ==
-X-Gm-Message-State: ACrzQf14QAGRQY3ZxquTIhIRQqPCmEWtW4EyMtem8QXkfm7t3+z1vkjU
-	z5qXI/IcqnXstMpMFYc19j5ULAJdVM03hw==
+        b=wAhX5PPib00DlhG7LdeD5FFU/sBB/SYDsdIHB5XGa/3wJe7Apq4c3Rgv4rRTj6oahb
+         +npB7Erzl+pRWSooHS8tpatqNXerfqxd6HbAHVMiqsyNVLlQmkGEquG5fDG9sZEIyqkf
+         Oji15TR3ADpi7yL0DZQ4/jNAeXlOBevu+a86br3Qu0QqC4ygqVUlw9OgDD3C/fIFPVEO
+         UbfnFvR7huaKSP5g+e85Yn2uCeMqfa7oHlRnt9uKvEcARlTJsoTDtK/tfj7+btjYcLdf
+         U3O/yqoY25r4EjFS7z2thU7kB1FI5Wr41Eipk3v745Hv0OELPqHqiC2hAGRHzADL0JNO
+         r/GA==
+X-Gm-Message-State: ACrzQf1z3zY9fVwIaa7OAgTtXQpGBomtZ71E2Xu88XzK2Lh9WoT04hNf
+	KlaJ5QOpuuh2QmS94kPSYa86Ov+hdTre5A==
 X-Google-Smtp-Source: 
- AMsMyM49HanaK5j1tJJIzlqIH25q7YL1JxrkfjeMy9tphmkNlIHbgi6Xs7aViEaIsuzZJizltlvokw==
-X-Received: by 2002:a17:902:eb82:b0:176:c0e0:55c1 with SMTP id
- q2-20020a170902eb8200b00176c0e055c1mr6604283plg.168.1663907092338;
-        Thu, 22 Sep 2022 21:24:52 -0700 (PDT)
+ AMsMyM7xJbmWETd1M1Mj4UO2CDgo2y16rUklJ6/Yz57IcS8ic7s2IBlSKKSzyD0hokNvFC0FH+K4Vg==
+X-Received: by 2002:a17:902:ab15:b0:178:cdb:b98c with SMTP id
+ ik21-20020a170902ab1500b001780cdbb98cmr6676991plb.57.1663907179856;
+        Thu, 22 Sep 2022 21:26:19 -0700 (PDT)
 Received: from MVIN00024 ([27.121.101.100])
         by smtp.gmail.com with ESMTPSA id
- e22-20020a17090a4a1600b002004760a66csm613081pjh.13.2022.09.22.21.24.20
+ m3-20020a1709026bc300b001789ee5c821sm4932042plt.61.2022.09.22.21.26.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Sep 2022 21:24:40 -0700 (PDT)
+        Thu, 22 Sep 2022 21:26:19 -0700 (PDT)
 Received: by MVIN00024 (sSMTP sendmail emulation);
- Fri, 23 Sep 2022 09:54:16 +0530
+ Fri, 23 Sep 2022 09:56:14 +0530
 From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [dunfell][PATCH] postgresql: CVE-2022-1552 Autovacuum, REINDEX,
- and others omit "security restricted operation" sandbox
-Date: Fri, 23 Sep 2022 09:54:15 +0530
-Message-Id: <20220923042415.4786-1-hprajapati@mvista.com>
+Subject: [meta-oe][dunfell][PATCH] postgresql: CVE-2022-1552 Autovacuum,
+ REINDEX, and others omit "security restricted operation" sandbox
+Date: Fri, 23 Sep 2022 09:56:12 +0530
+Message-Id: <20220923042612.4851-1-hprajapati@mvista.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 23 Sep 2022 04:25:00 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 23 Sep 2022 04:26:30 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98937
+ https://lists.openembedded.org/g/openembedded-devel/message/98938
 
 Source: https://git.postgresql.org/gitweb/?p=postgresql.git;
 MR: 121822
