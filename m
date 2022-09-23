@@ -1,198 +1,1077 @@
-Return-Path: <ovidiu.panait@windriver.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A07C3ECAAD8
-	for <webhook@archiver.kernel.org>; Fri, 23 Sep 2022 10:06:32 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com
- [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.5895.1663927584185513129
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A8CC3C07E9D
+	for <webhook@archiver.kernel.org>; Fri, 23 Sep 2022 18:12:48 +0000 (UTC)
+Received: from mail-oi1-f181.google.com (mail-oi1-f181.google.com
+ [209.85.167.181])
+ by mx.groups.io with SMTP id smtpd.web11.26.1663956762638351419
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Sep 2022 03:06:26 -0700
+ Fri, 23 Sep 2022 11:12:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=c61t7aBZ;
- spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
- invalid domain name (domain: windriver.com, ip: 205.220.166.238,
- mailfrom: prvs=62657a0bd3=ovidiu.panait@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
- 28N9uG3D032719
-	for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Sep 2022 03:06:23 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
- h=from : to :
- subject : date : message-id : content-transfer-encoding : content-type :
- mime-version; s=PPS06212021;
- bh=IIEzrFVjTjeiuddLe0/IL2fAnlpWDLYEibl16LqM/b4=;
- b=c61t7aBZw1ktAm1m9SElZ/z1LkjXrpKHrZf8ZxI5apCCH3bAeX2loj0iOZpmYjxLB5e/
- nIFzNiVcF+YeAFoziVrczspbGog37t2JD1amn31ThKPYtoZHSHmQDWTu4nKRRfIZzMyr
- /Mxfao5cAC/QM9PLXUYgOwmujYVOfBFqzG3WEvjzNzmS4hbEVqt9mZjjY7BQwftsbZ/i
- 42FwlGXHev0M79r8X1YNCIAUHABRopp9FB3O3bnUCrzUdDAiKAI3AYqWK/bpsbGUatwr
- 2km2PCi7GnQ7zS+FP1SxX95c9s/3oV6fFIL4MiD5gUSk4mwbIM5sTPht9ACYkEKsBcUX 5w==
-Received: from nam10-bn7-obe.outbound.protection.outlook.com
- (mail-bn7nam10lp2108.outbound.protection.outlook.com [104.47.70.108])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3jndrkmw33-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Sep 2022 03:06:23 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=e1eKJPEGyv0Srd4fD3ZYb1mYN6Q8+m52xo62UE6bMvCwlbpAsoAy938m6yrwGdjwMpWV1GYJ+9pESNYgZ0xElbETPsqDb49Sqcb6WHgNxaQ9QIjJb18o/A/ep9p3uaSQLBoPEWzJNNuQeRlRqI+mfvWk2BDwoItvGIXalw6OwYxwADv8z8Vqrsej3u7tUvQwDPXJjrLJHUUI98J3Es22EQ+z4mEfXC8iKMKBMcxXxluM1D1LMFZJvxS/SVcXWYoye50G3SkEsA7bBwCs0lZvJO7LZJavyHchfUbHPZuqWZAAzeN8i0Alr869dLB671r+x8KurMnXhYdFHHPua2JxfQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IIEzrFVjTjeiuddLe0/IL2fAnlpWDLYEibl16LqM/b4=;
- b=bSkxovmUq8zzHAA1EQW+3ImQMFARMy2BNBTQL18PJQiB8HGMqfcIhn8EBcyGpSy/zaCePBKlg+U8y1bgS2uqNQqtIPmn7Ub6ooTqGx0iJEx75Uj3smGs0JTvnK0hBvnCgMqW68hzVr0eJPDTGajci4n5U06PwoLQMJdK+Q0ObBtFhOlKvOoNVLxj/CAOHt1WeYflU4DgAJZz/re5qoDbwVeRcSz9W3VtjgKPSMh7aipUf/7Q0nKabpZeeH1cyS8u6PuVZvJwy3lXx35ufZTlFfLNAoKed3WIDXnd/fnRefaSLzAWBNQvVExFXn9K6a6037h+Ljbmnr921GqMxxpBgA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DM4PR11MB5327.namprd11.prod.outlook.com (2603:10b6:5:392::22)
- by PH7PR11MB7004.namprd11.prod.outlook.com (2603:10b6:510:20b::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.20; Fri, 23 Sep
- 2022 10:06:19 +0000
-Received: from DM4PR11MB5327.namprd11.prod.outlook.com
- ([fe80::44b4:98f4:1cb3:8941]) by DM4PR11MB5327.namprd11.prod.outlook.com
- ([fe80::44b4:98f4:1cb3:8941%6]) with mapi id 15.20.5654.020; Fri, 23 Sep 2022
- 10:06:19 +0000
-From: Ovidiu Panait <ovidiu.panait@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] redis: build with USE_SYSTEMD=yes when systemd is
- enabled
-Date: Fri, 23 Sep 2022 13:06:03 +0300
-Message-Id: <20220923100603.584411-1-ovidiu.panait@windriver.com>
-X-Mailer: git-send-email 2.37.3
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: VE1PR08CA0007.eurprd08.prod.outlook.com
- (2603:10a6:803:104::20) To DM4PR11MB5327.namprd11.prod.outlook.com
- (2603:10b6:5:392::22)
+ dkim=pass header.i=@gmail.com header.s=20210112 header.b=N2FMhvGZ;
+ spf=pass (domain: gmail.com, ip: 209.85.167.181,
+ mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f181.google.com with SMTP id u131so806423oie.5
+        for <openembedded-devel@lists.openembedded.org>;
+ Fri, 23 Sep 2022 11:12:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:references:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date;
+        bh=0snVHz4p1jBFlK7VdzOLdtg9ptwQ4vKUfYS4ccMU7SQ=;
+        b=N2FMhvGZ/XtXM6muLL4sIUGt5XH1ZYFHsfCfxeKf4qA2yilVWgENhFSVtw3DPfEvME
+         wnoOq/hfrm1rl2e1oZ4H5EZw0ckY6C/74EGSCXH+MmFJMQKzStRuHfGiA5U3p6zcHTSv
+         gMDy6WPXneytv1Y1zoAXDNHPs+4IfuZTiEEiINm+hXpLrv98pbQ/naoEQZHIJ9i+h0pi
+         Ek+oQ+UooYhSU1Hf2PUTmoSFjW3Q0E7xzTGCLtOj86mF3N7CIN0lNinhZwzgj8BJPSG0
+         OVVHN0AXJr11l+CaHaY5xZCcweEIbGsqxgk7Lalb3pTdvOcZHVKNHYzTOWUtKjWdr5Lj
+         YWXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:references:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date;
+        bh=0snVHz4p1jBFlK7VdzOLdtg9ptwQ4vKUfYS4ccMU7SQ=;
+        b=7Mv0KnmLOxGMZWyvQO4pk8jetrDx5f3dfhDnzQ7jKxtXBGrsEsW9P8PmixZJ2U4bDK
+         Z11++9Cg7YCQYc3uRelSgY9tHhouWWwBgCaOKgIe9vUGJSsWQPvwLUIvV1U2h9qBIptL
+         XQbDJEmgbLAn9VKy/02itAEfAXQwhmaXkou2CMvEO0FcZTrGYhMmecgW9SMpiiXrUQ2K
+         Rt8VREQ0ELZ3/Kq9IyDlUK4RCN51/bO0fIMNrD47P17budkteJBqZw7Rc7xKKi6dQq04
+         KR0uFVIRkXxtGtjnCa04rkIbiuOAU9lNxSHOSXLJGM5ELcKHBVcMuyOt7H9rdV+Oiyb2
+         DQbg==
+X-Gm-Message-State: ACrzQf1tYIFh7G3WbjphllyX72RdUgQlsJDpTh+QJULptwrtDqejVXlV
+	IMA3FHtWUAKrNV42WHp9Vtw=
+X-Google-Smtp-Source: 
+ AMsMyM7BPVJmlesbFw+xZe4H6MZ2uk7QQ6oojXBVM1Q0DeFzK8mvMTQza2m4kpXI8S871srlbbOEGw==
+X-Received: by 2002:aca:240b:0:b0:350:284c:1c92 with SMTP id
+ n11-20020aca240b000000b00350284c1c92mr4749539oic.104.1663956761480;
+        Fri, 23 Sep 2022 11:12:41 -0700 (PDT)
+Received: from ?IPV6:2600:1700:9190:ba10:a07:b486:a8a3:5b26?
+ ([2600:1700:9190:ba10:a07:b486:a8a3:5b26])
+        by smtp.gmail.com with ESMTPSA id
+ r21-20020a05687032d500b0010e20d0b2e3sm5137513oac.44.2022.09.23.11.12.40
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 23 Sep 2022 11:12:41 -0700 (PDT)
+Message-ID: <3b95f5f3-807f-773b-5403-8f43c2afb68e@gmail.com>
+Date: Fri, 23 Sep 2022 14:12:39 -0400
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR11MB5327:EE_|PH7PR11MB7004:EE_
-X-MS-Office365-Filtering-Correlation-Id: bb3b991e-55a3-4eec-32bd-08da9d4b42aa
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	v95i0cu31RZ2hG1h7AQ3ydeqnkd7MZSTtFDbPuNZkyMumkQ0kBrpobvFhXdbtr/KDbLUosNUQRfymWBukn1rbiGkSMAKmrWpxVz4rigxF65PGYJQ+3oTPQ5fbUscBdORlgPaYacWjWegFiF7ph3xKMS7CyAlE3bj3aJ1ejOS7obUljcllnJkx1ZJZg8aPzASgIzq34yJLXboBf0sqOheFXb3OJOG9D6W2z0qVJWp2ymgWtxWSuwe7mWueqK9oKayoRmxu2SUfj6GTuC6poLk7gnW8647kE6C1NxPqNQW9jD702FGrP3/c3Ip2r85XX/ToGJsW8kHaU+ivnBYZK0lTDF/8ZbORPgP8BrJRMR8WwXHxt6HMLI+YFzTZSuuLjkkm9DTiLhgq74figZrW5kN+ebQ+MCc3gCCGFr1ogQG2i7gqk3WiKYEy0BK8rKCP5gvsRCUCBFDJ+xqDQNY7DxwOPeO+1Azx6bmM+ytigKPvjgmvI3GnFCT0fe6HLrToJ2gUmyPtouViwMnhlpDWYOfJ3HP0Ji0531dBs1NghtWtJz8wXEe8SKkRXKMGFOPFBccZZsQqvRyZ/0MoJqmVSCNls7os4IHigfB5r0/W6eCOmZz355zgm1bWXOwC/0Uz3Ec2flX5qkTtdCEhFfAuZx5Ki0cCmSxPNi0vj9Zqr+SMW2C2+Ib6eFZ2uTs20aOfdHROl1zWHh/pgvcrZoRlnkj8fgy+WDujHQT0TYbtZxzPdicGN6piTwJ+a2Y4pliKgtNJ+HhDH8eM7jkhL+UWR0TKg==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR11MB5327.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(39850400004)(346002)(376002)(396003)(136003)(366004)(451199015)(83380400001)(6506007)(6666004)(26005)(478600001)(52116002)(1076003)(186003)(6512007)(2616005)(38100700002)(86362001)(38350700002)(36756003)(66946007)(41300700001)(66556008)(66476007)(6486002)(8676002)(6916009)(316002)(2906002)(8936002)(5660300002)(44832011);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?+OYGGSwRdmoNzZqRgIsl2mg5CkuLos6YCrJ2nJ+jCJvWK6eCo7wgiunwkLA4?=
- =?us-ascii?Q?HooALoUQ6X7DhdhCMmi3EglSWPJApMsb0IMrbCipEyh5oH1cXuqYFtfCylyB?=
- =?us-ascii?Q?QYwzOO3LbL5yr6SGd/6gsO+xScbz7a8SDfeCF3Obp4h8YvIDqWfM38oC65Oi?=
- =?us-ascii?Q?9DRjiyXnrQmyeIpZRneY3q+6QOEr70zBlkgPrJlaknC5mWscQpP+VFGeim9H?=
- =?us-ascii?Q?Y9GGgdo4kpLFzAm4+3HroDIf4G5WmjCsXgIMh56Odazz5rMVfXQoqHWmo+jw?=
- =?us-ascii?Q?ourHoKr58t1VjaSxjf2CQF+eS5dKlraYXEnCiIQT2qGyw3UDHKTaZzY3GL4b?=
- =?us-ascii?Q?/25ZfYqZHZ4rbMS9cfNsAfbzVvceUpwe/KaBoa6NCSMNAy5KjFyNhoAOQhXw?=
- =?us-ascii?Q?zcPiDn/TshcMq12c30pGWqROMp1AlDUfu0tfgSx7v874xJMB54jAGN7D0dO1?=
- =?us-ascii?Q?pINqUdDeEEil/nhhWAzkz5/Ji04SS3iZF7NlH2SO6eeN1zMgyuPyETIoLZ/O?=
- =?us-ascii?Q?/aeNZpi9uv/xQ2XzF77XsgaGb9P14EDO2U4uKdeFGFY8GWV7AQWQ1BZMhuP4?=
- =?us-ascii?Q?nkg0C1JlszEumQzca2AcWtCdl6mW+d39GnoWlMXE/oue1pAtfaL8Tu1k9jAP?=
- =?us-ascii?Q?ysz/WXeOmUU77Vu5ThyH9V9mAYfb5JCysHzLr8clao+b0hqqK4kgK7aYzzhh?=
- =?us-ascii?Q?SBD6h3/xYzkquXzH128vL2zrkvehzHM15kUlpOnBE5YiryIDt4qmp/Xb/Xpr?=
- =?us-ascii?Q?DBaROYiFAkdSrqWIe9rJyfU0/gDG8YRS+wZyjSEY+I2T9xJ6/V34vTfcR5Bl?=
- =?us-ascii?Q?N2pOF2K3MaVVTh98omTeLrH5sc+N7+whVyyTVjbCY4hNrIaaykeeE4aR+x6c?=
- =?us-ascii?Q?uC9PYFdbBusbpRH8OkdVFnlT0xmTAT/qsBzuuJ0GGaB7bBNxFNkSK3p92LTI?=
- =?us-ascii?Q?O0DYiDEQ05PjiE0j0VkGNeQyCZXCvXJpo7/cMZ1Q8TqwOFWVLcq8b2dPRBO/?=
- =?us-ascii?Q?/usdGMW2LpRUpadgllMUEPFyYRE6VST1mFG76o6utxp4QTzyNEprAn9x8bLt?=
- =?us-ascii?Q?oE3sgD7gSpCfr23OfYTeSYNzO516vC5YNbJlIOFgzcl2ZgokyA8w5z5DnNL+?=
- =?us-ascii?Q?NuNw68p84P+xqweutUpRGlA1mYjfhj3vCyPU6bR3zm/ONJw5r5W8QnucqJHP?=
- =?us-ascii?Q?OljLbqGDHlITZlr6thR3nGl4HzMOBNzD30AMg9VusY6brnslkbUjGJwFY01X?=
- =?us-ascii?Q?fx/EyA10mR/e88Zk5nDlv2xsCcM0WllBqao5GPS6gO6RhE0a4BzjhZLZ6E4q?=
- =?us-ascii?Q?Xdyc9eidh6TQINGSY6dTEoDD63JyeASiwN9cpDnwgKliPzus+4zvZr0Sn8wO?=
- =?us-ascii?Q?6ZDM4I0+6EdBql7bVs1OIwsIx2o3q7ypmehn89S01wgk1vDWW4ozK2dOiU/w?=
- =?us-ascii?Q?ZHzg7LuDRMMmtYIM5Je4wFSLvzhNcAZsDw3CjpZ+eOnDTNK94t4z3AInuqsx?=
- =?us-ascii?Q?UVvn4UT/SnFBijAPnsFylHP3H+hUfogBjsaTVj1maj8WQ3TiNUvqqAlANnmR?=
- =?us-ascii?Q?Y8cOhsIVj4pg67teKGr/derMLqa+xLRmqrv2d8KDDeUFXST5slTYtqfKMU5a?=
- =?us-ascii?Q?Sw=3D=3D?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 
- bb3b991e-55a3-4eec-32bd-08da9d4b42aa
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR11MB5327.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2022 10:06:19.5108
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 
- 004clmqsYVQRmF1kLWkZtzqaq+Ef66hhY20ja5xfv9JsbBNqqOt6ajZw2jNfng6N4XJGh+iXmq8NehsNaLB2x88UtgLGYo1JICbgQ8HKhvo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB7004
-X-Proofpoint-GUID: 0qzbNfsoKVjlxj_UpA77jniOeI8PbG0a
-X-Proofpoint-ORIG-GUID: 0qzbNfsoKVjlxj_UpA77jniOeI8PbG0a
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
- definitions=2022-09-23_02,2022-09-22_02,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0
- malwarescore=0 suspectscore=0 phishscore=0 impostorscore=0 bulkscore=0
- mlxlogscore=913 priorityscore=1501 adultscore=0 spamscore=0 mlxscore=0
- clxscore=1011 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2209130000 definitions=main-2209230066
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [oe] [meta-oe][dunfell][PATCH] postgresql: CVE-2022-1552
+ Autovacuum, REINDEX, and others omit "security restricted operation" sandbox
+Content-Language: en-US
+To: Hitendra Prajapati <hprajapati@mvista.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20220923042612.4851-1-hprajapati@mvista.com>
+From: akuster808 <akuster808@gmail.com>
+In-Reply-To: <20220923042612.4851-1-hprajapati@mvista.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 23 Sep 2022 10:06:32 -0000
+ <openembedded-devel@lists.openembedded.org>; Fri, 23 Sep 2022 18:12:48 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98942
+ https://lists.openembedded.org/g/openembedded-devel/message/98943
 
-Compile redis with full systemd support when the chosen init system is
-systemd.
+Hitendra,
 
-Enabling systemd supervision allows redis to communicate the actual server
-status (i.e. "Loading dataset", "Waiting for master<->replica sync") to
-systemd, instead of declaring readiness right after initializing the server
-process.
 
-Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
----
- meta-oe/recipes-extended/redis/redis-7/redis.service | 1 +
- meta-oe/recipes-extended/redis/redis_7.0.4.bb        | 8 ++++++--
- 2 files changed, 7 insertions(+), 2 deletions(-)
+On 9/23/22 00:26, Hitendra Prajapati wrote:
+> Source: https://git.postgresql.org/gitweb/?p=postgresql.git;
+> MR: 121822
+> Type: Security Fix
+> Disposition: Backport from https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=ab49ce7c3414ac19e4afb386d7843ce2d2fb8bda && https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=677a494789062ca88e0142a17bedd5415f6ab0aa
+> ChangeID: 5011e2e09f30f76fc27dc4cb5fa98a504d1aaec9
+> Description:
+> 	 CVE-2022-1552 postgresql: Autovacuum, REINDEX, and others omit "security restricted operation" sandbox.
 
-diff --git a/meta-oe/recipes-extended/redis/redis-7/redis.service b/meta-oe/recipes-extended/redis/redis-7/redis.service
-index 36d29852d..a52204cc7 100644
---- a/meta-oe/recipes-extended/redis/redis-7/redis.service
-+++ b/meta-oe/recipes-extended/redis/redis-7/redis.service
-@@ -9,6 +9,7 @@ ExecStart=/usr/bin/redis-server /etc/redis/redis.conf
- ExecStop=/usr/bin/redis-cli shutdown
- Restart=always
- LimitNOFILE=10032
-+Type=notify
- 
- [Install]
- WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-extended/redis/redis_7.0.4.bb b/meta-oe/recipes-extended/redis/redis_7.0.4.bb
-index cde32e414..35165923c 100644
---- a/meta-oe/recipes-extended/redis/redis_7.0.4.bb
-+++ b/meta-oe/recipes-extended/redis/redis_7.0.4.bb
-@@ -35,7 +35,10 @@ USERADD_PACKAGES = "${PN}"
- USERADD_PARAM:${PN}  = "--system --home-dir /var/lib/redis -g redis --shell /bin/false redis"
- GROUPADD_PARAM:${PN} = "--system redis"
- 
--REDIS_ON_SYSTEMD = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}"
-+PACKAGECONFIG = "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-+PACKAGECONFIG[systemd] = "USE_SYSTEMD=yes,USE_SYSTEMD=no,systemd"
-+
-+EXTRA_OEMAKE += "${PACKAGECONFIG_CONFARGS}"
- 
- do_compile:prepend() {
-     (cd deps && oe_runmake hiredis lua linenoise)
-@@ -55,8 +58,9 @@ do_install() {
-     install -m 0644 ${WORKDIR}/redis.service ${D}${systemd_system_unitdir}
-     sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${systemd_system_unitdir}/redis.service
- 
--    if [ "${REDIS_ON_SYSTEMD}" = true ]; then
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-         sed -i 's!daemonize yes!# daemonize yes!' ${D}/${sysconfdir}/redis/redis.conf
-+        sed -i 's!supervised no!supervised systemd!' ${D}/${sysconfdir}/redis/redis.conf
-     fi
- }
- 
--- 
-2.37.3
+Thanks for the patch. Any reason why an upgrade to 12.12 is out of the 
+question? The 12.xx series appears to be bug fix only.
+
+-armin
+>
+> Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+> ---
+>   .../postgresql/files/CVE-2022-1552.patch      | 947 ++++++++++++++++++
+>   .../recipes-dbs/postgresql/postgresql_12.9.bb |   1 +
+>   2 files changed, 948 insertions(+)
+>   create mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2022-1552.patch
+>
+> diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2022-1552.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2022-1552.patch
+> new file mode 100644
+> index 0000000000..6f0d5ac06f
+> --- /dev/null
+> +++ b/meta-oe/recipes-dbs/postgresql/files/CVE-2022-1552.patch
+> @@ -0,0 +1,947 @@
+> +From 31eefa1efc8eecb6ab91c8835d2952d44a3b1ae1 Mon Sep 17 00:00:00 2001
+> +From: Hitendra Prajapati <hprajapati@mvista.com>
+> +Date: Thu, 22 Sep 2022 11:20:41 +0530
+> +Subject: [PATCH] CVE-2022-1552
+> +
+> +Upstream-Status: Backport [https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=ab49ce7c3414ac19e4afb386d7843ce2d2fb8bda && https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=677a494789062ca88e0142a17bedd5415f6ab0aa]
+> +
+> +CVE: CVE-2022-1552
+> +Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+> +---
+> + contrib/amcheck/expected/check_btree.out | 23 ++++++
+> + contrib/amcheck/sql/check_btree.sql      | 21 +++++
+> + contrib/amcheck/verify_nbtree.c          | 27 +++++++
+> + src/backend/access/brin/brin.c           | 29 ++++++-
+> + src/backend/catalog/index.c              | 65 ++++++++++++----
+> + src/backend/commands/cluster.c           | 37 ++++++---
+> + src/backend/commands/indexcmds.c         | 98 ++++++++++++++++++++----
+> + src/backend/commands/matview.c           | 30 +++-----
+> + src/backend/utils/init/miscinit.c        | 24 +++---
+> + src/test/regress/expected/privileges.out | 71 +++++++++++++++++
+> + src/test/regress/sql/privileges.sql      | 64 ++++++++++++++++
+> + 11 files changed, 422 insertions(+), 67 deletions(-)
+> +
+> +diff --git a/contrib/amcheck/expected/check_btree.out b/contrib/amcheck/expected/check_btree.out
+> +index 59a805d..0fd6ea0 100644
+> +--- a/contrib/amcheck/expected/check_btree.out
+> ++++ b/contrib/amcheck/expected/check_btree.out
+> +@@ -168,11 +168,34 @@ SELECT bt_index_check('toasty', true);
+> +
+> + (1 row)
+> +
+> ++--
+> ++-- Check that index expressions and predicates are run as the table's owner
+> ++--
+> ++TRUNCATE bttest_a;
+> ++INSERT INTO bttest_a SELECT * FROM generate_series(1, 1000);
+> ++ALTER TABLE bttest_a OWNER TO regress_bttest_role;
+> ++-- A dummy index function checking current_user
+> ++CREATE FUNCTION ifun(int8) RETURNS int8 AS $$
+> ++BEGIN
+> ++	ASSERT current_user = 'regress_bttest_role',
+> ++		format('ifun(%s) called by %s', $1, current_user);
+> ++	RETURN $1;
+> ++END;
+> ++$$ LANGUAGE plpgsql IMMUTABLE;
+> ++CREATE INDEX bttest_a_expr_idx ON bttest_a ((ifun(id) + ifun(0)))
+> ++	WHERE ifun(id + 10) > ifun(10);
+> ++SELECT bt_index_check('bttest_a_expr_idx', true);
+> ++ bt_index_check
+> ++----------------
+> ++
+> ++(1 row)
+> ++
+> + -- cleanup
+> + DROP TABLE bttest_a;
+> + DROP TABLE bttest_b;
+> + DROP TABLE bttest_multi;
+> + DROP TABLE delete_test_table;
+> + DROP TABLE toast_bug;
+> ++DROP FUNCTION ifun(int8);
+> + DROP OWNED BY regress_bttest_role; -- permissions
+> + DROP ROLE regress_bttest_role;
+> +diff --git a/contrib/amcheck/sql/check_btree.sql b/contrib/amcheck/sql/check_btree.sql
+> +index 99acbc8..3248187 100644
+> +--- a/contrib/amcheck/sql/check_btree.sql
+> ++++ b/contrib/amcheck/sql/check_btree.sql
+> +@@ -110,11 +110,32 @@ INSERT INTO toast_bug SELECT repeat('a', 2200);
+> + -- Should not get false positive report of corruption:
+> + SELECT bt_index_check('toasty', true);
+> +
+> ++--
+> ++-- Check that index expressions and predicates are run as the table's owner
+> ++--
+> ++TRUNCATE bttest_a;
+> ++INSERT INTO bttest_a SELECT * FROM generate_series(1, 1000);
+> ++ALTER TABLE bttest_a OWNER TO regress_bttest_role;
+> ++-- A dummy index function checking current_user
+> ++CREATE FUNCTION ifun(int8) RETURNS int8 AS $$
+> ++BEGIN
+> ++	ASSERT current_user = 'regress_bttest_role',
+> ++		format('ifun(%s) called by %s', $1, current_user);
+> ++	RETURN $1;
+> ++END;
+> ++$$ LANGUAGE plpgsql IMMUTABLE;
+> ++
+> ++CREATE INDEX bttest_a_expr_idx ON bttest_a ((ifun(id) + ifun(0)))
+> ++	WHERE ifun(id + 10) > ifun(10);
+> ++
+> ++SELECT bt_index_check('bttest_a_expr_idx', true);
+> ++
+> + -- cleanup
+> + DROP TABLE bttest_a;
+> + DROP TABLE bttest_b;
+> + DROP TABLE bttest_multi;
+> + DROP TABLE delete_test_table;
+> + DROP TABLE toast_bug;
+> ++DROP FUNCTION ifun(int8);
+> + DROP OWNED BY regress_bttest_role; -- permissions
+> + DROP ROLE regress_bttest_role;
+> +diff --git a/contrib/amcheck/verify_nbtree.c b/contrib/amcheck/verify_nbtree.c
+> +index 700a02f..cb6475d 100644
+> +--- a/contrib/amcheck/verify_nbtree.c
+> ++++ b/contrib/amcheck/verify_nbtree.c
+> +@@ -228,6 +228,9 @@ bt_index_check_internal(Oid indrelid, bool parentcheck, bool heapallindexed,
+> + 	Relation	indrel;
+> + 	Relation	heaprel;
+> + 	LOCKMODE	lockmode;
+> ++	Oid			save_userid;
+> ++	int			save_sec_context;
+> ++	int			save_nestlevel;
+> +
+> + 	if (parentcheck)
+> + 		lockmode = ShareLock;
+> +@@ -244,9 +247,27 @@ bt_index_check_internal(Oid indrelid, bool parentcheck, bool heapallindexed,
+> + 	 */
+> + 	heapid = IndexGetRelation(indrelid, true);
+> + 	if (OidIsValid(heapid))
+> ++	{
+> + 		heaprel = table_open(heapid, lockmode);
+> ++
+> ++		/*
+> ++		 * Switch to the table owner's userid, so that any index functions are
+> ++		 * run as that user.  Also lock down security-restricted operations
+> ++		 * and arrange to make GUC variable changes local to this command.
+> ++		 */
+> ++		GetUserIdAndSecContext(&save_userid, &save_sec_context);
+> ++		SetUserIdAndSecContext(heaprel->rd_rel->relowner,
+> ++							   save_sec_context | SECURITY_RESTRICTED_OPERATION);
+> ++		save_nestlevel = NewGUCNestLevel();
+> ++	}
+> + 	else
+> ++	{
+> + 		heaprel = NULL;
+> ++		/* for "gcc -Og" https://gcc.gnu.org/bugzilla/show_bug.cgi?id=78394 */
+> ++		save_userid = InvalidOid;
+> ++		save_sec_context = -1;
+> ++		save_nestlevel = -1;
+> ++	}
+> +
+> + 	/*
+> + 	 * Open the target index relations separately (like relation_openrv(), but
+> +@@ -293,6 +314,12 @@ bt_index_check_internal(Oid indrelid, bool parentcheck, bool heapallindexed,
+> + 							 heapallindexed, rootdescend);
+> + 	}
+> +
+> ++	/* Roll back any GUC changes executed by index functions */
+> ++	AtEOXact_GUC(false, save_nestlevel);
+> ++
+> ++	/* Restore userid and security context */
+> ++	SetUserIdAndSecContext(save_userid, save_sec_context);
+> ++
+> + 	/*
+> + 	 * Release locks early. That's ok here because nothing in the called
+> + 	 * routines will trigger shared cache invalidations to be sent, so we can
+> +diff --git a/src/backend/access/brin/brin.c b/src/backend/access/brin/brin.c
+> +index c7b403b..781cac2 100644
+> +--- a/src/backend/access/brin/brin.c
+> ++++ b/src/backend/access/brin/brin.c
+> +@@ -873,6 +873,9 @@ brin_summarize_range(PG_FUNCTION_ARGS)
+> + 	Oid			heapoid;
+> + 	Relation	indexRel;
+> + 	Relation	heapRel;
+> ++	Oid			save_userid;
+> ++	int			save_sec_context;
+> ++	int			save_nestlevel;
+> + 	double		numSummarized = 0;
+> +
+> + 	if (RecoveryInProgress())
+> +@@ -899,7 +902,22 @@ brin_summarize_range(PG_FUNCTION_ARGS)
+> + 	 */
+> + 	heapoid = IndexGetRelation(indexoid, true);
+> + 	if (OidIsValid(heapoid))
+> ++	{
+> + 		heapRel = table_open(heapoid, ShareUpdateExclusiveLock);
+> ++
+> ++		/*
+> ++		 * Autovacuum calls us.  For its benefit, switch to the table owner's
+> ++		 * userid, so that any index functions are run as that user.  Also
+> ++		 * lock down security-restricted operations and arrange to make GUC
+> ++		 * variable changes local to this command.  This is harmless, albeit
+> ++		 * unnecessary, when called from SQL, because we fail shortly if the
+> ++		 * user does not own the index.
+> ++		 */
+> ++		GetUserIdAndSecContext(&save_userid, &save_sec_context);
+> ++		SetUserIdAndSecContext(heapRel->rd_rel->relowner,
+> ++							   save_sec_context | SECURITY_RESTRICTED_OPERATION);
+> ++		save_nestlevel = NewGUCNestLevel();
+> ++	}
+> + 	else
+> + 		heapRel = NULL;
+> +
+> +@@ -914,7 +932,7 @@ brin_summarize_range(PG_FUNCTION_ARGS)
+> + 						RelationGetRelationName(indexRel))));
+> +
+> + 	/* User must own the index (comparable to privileges needed for VACUUM) */
+> +-	if (!pg_class_ownercheck(indexoid, GetUserId()))
+> ++	if (heapRel != NULL && !pg_class_ownercheck(indexoid, save_userid))
+> + 		aclcheck_error(ACLCHECK_NOT_OWNER, OBJECT_INDEX,
+> + 					   RelationGetRelationName(indexRel));
+> +
+> +@@ -932,6 +950,12 @@ brin_summarize_range(PG_FUNCTION_ARGS)
+> + 	/* OK, do it */
+> + 	brinsummarize(indexRel, heapRel, heapBlk, true, &numSummarized, NULL);
+> +
+> ++	/* Roll back any GUC changes executed by index functions */
+> ++	AtEOXact_GUC(false, save_nestlevel);
+> ++
+> ++	/* Restore userid and security context */
+> ++	SetUserIdAndSecContext(save_userid, save_sec_context);
+> ++
+> + 	relation_close(indexRel, ShareUpdateExclusiveLock);
+> + 	relation_close(heapRel, ShareUpdateExclusiveLock);
+> +
+> +@@ -973,6 +997,9 @@ brin_desummarize_range(PG_FUNCTION_ARGS)
+> + 	 * passed indexoid isn't an index then IndexGetRelation() will fail.
+> + 	 * Rather than emitting a not-very-helpful error message, postpone
+> + 	 * complaining, expecting that the is-it-an-index test below will fail.
+> ++	 *
+> ++	 * Unlike brin_summarize_range(), autovacuum never calls this.  Hence, we
+> ++	 * don't switch userid.
+> + 	 */
+> + 	heapoid = IndexGetRelation(indexoid, true);
+> + 	if (OidIsValid(heapoid))
+> +diff --git a/src/backend/catalog/index.c b/src/backend/catalog/index.c
+> +index 3ece136..0333bfd 100644
+> +--- a/src/backend/catalog/index.c
+> ++++ b/src/backend/catalog/index.c
+> +@@ -1400,6 +1400,9 @@ index_concurrently_build(Oid heapRelationId,
+> + 						 Oid indexRelationId)
+> + {
+> + 	Relation	heapRel;
+> ++	Oid			save_userid;
+> ++	int			save_sec_context;
+> ++	int			save_nestlevel;
+> + 	Relation	indexRelation;
+> + 	IndexInfo  *indexInfo;
+> +
+> +@@ -1409,7 +1412,16 @@ index_concurrently_build(Oid heapRelationId,
+> + 	/* Open and lock the parent heap relation */
+> + 	heapRel = table_open(heapRelationId, ShareUpdateExclusiveLock);
+> +
+> +-	/* And the target index relation */
+> ++	/*
+> ++	 * Switch to the table owner's userid, so that any index functions are run
+> ++	 * as that user.  Also lock down security-restricted operations and
+> ++	 * arrange to make GUC variable changes local to this command.
+> ++	 */
+> ++	GetUserIdAndSecContext(&save_userid, &save_sec_context);
+> ++	SetUserIdAndSecContext(heapRel->rd_rel->relowner,
+> ++						   save_sec_context | SECURITY_RESTRICTED_OPERATION);
+> ++	save_nestlevel = NewGUCNestLevel();
+> ++
+> + 	indexRelation = index_open(indexRelationId, RowExclusiveLock);
+> +
+> + 	/*
+> +@@ -1425,6 +1437,12 @@ index_concurrently_build(Oid heapRelationId,
+> + 	/* Now build the index */
+> + 	index_build(heapRel, indexRelation, indexInfo, false, true);
+> +
+> ++	/* Roll back any GUC changes executed by index functions */
+> ++	AtEOXact_GUC(false, save_nestlevel);
+> ++
+> ++	/* Restore userid and security context */
+> ++	SetUserIdAndSecContext(save_userid, save_sec_context);
+> ++
+> + 	/* Close both the relations, but keep the locks */
+> + 	table_close(heapRel, NoLock);
+> + 	index_close(indexRelation, NoLock);
+> +@@ -3271,7 +3289,17 @@ validate_index(Oid heapId, Oid indexId, Snapshot snapshot)
+> +
+> + 	/* Open and lock the parent heap relation */
+> + 	heapRelation = table_open(heapId, ShareUpdateExclusiveLock);
+> +-	/* And the target index relation */
+> ++
+> ++	/*
+> ++	 * Switch to the table owner's userid, so that any index functions are run
+> ++	 * as that user.  Also lock down security-restricted operations and
+> ++	 * arrange to make GUC variable changes local to this command.
+> ++	 */
+> ++	GetUserIdAndSecContext(&save_userid, &save_sec_context);
+> ++	SetUserIdAndSecContext(heapRelation->rd_rel->relowner,
+> ++						   save_sec_context | SECURITY_RESTRICTED_OPERATION);
+> ++	save_nestlevel = NewGUCNestLevel();
+> ++
+> + 	indexRelation = index_open(indexId, RowExclusiveLock);
+> +
+> + 	/*
+> +@@ -3284,16 +3312,6 @@ validate_index(Oid heapId, Oid indexId, Snapshot snapshot)
+> + 	/* mark build is concurrent just for consistency */
+> + 	indexInfo->ii_Concurrent = true;
+> +
+> +-	/*
+> +-	 * Switch to the table owner's userid, so that any index functions are run
+> +-	 * as that user.  Also lock down security-restricted operations and
+> +-	 * arrange to make GUC variable changes local to this command.
+> +-	 */
+> +-	GetUserIdAndSecContext(&save_userid, &save_sec_context);
+> +-	SetUserIdAndSecContext(heapRelation->rd_rel->relowner,
+> +-						   save_sec_context | SECURITY_RESTRICTED_OPERATION);
+> +-	save_nestlevel = NewGUCNestLevel();
+> +-
+> + 	/*
+> + 	 * Scan the index and gather up all the TIDs into a tuplesort object.
+> + 	 */
+> +@@ -3497,6 +3515,9 @@ reindex_index(Oid indexId, bool skip_constraint_checks, char persistence,
+> + 	Relation	iRel,
+> + 				heapRelation;
+> + 	Oid			heapId;
+> ++	Oid			save_userid;
+> ++	int			save_sec_context;
+> ++	int			save_nestlevel;
+> + 	IndexInfo  *indexInfo;
+> + 	volatile bool skipped_constraint = false;
+> + 	PGRUsage	ru0;
+> +@@ -3527,6 +3548,16 @@ reindex_index(Oid indexId, bool skip_constraint_checks, char persistence,
+> + 	 */
+> + 	iRel = index_open(indexId, AccessExclusiveLock);
+> +
+> ++	/*
+> ++	 * Switch to the table owner's userid, so that any index functions are run
+> ++	 * as that user.  Also lock down security-restricted operations and
+> ++	 * arrange to make GUC variable changes local to this command.
+> ++	 */
+> ++	GetUserIdAndSecContext(&save_userid, &save_sec_context);
+> ++	SetUserIdAndSecContext(heapRelation->rd_rel->relowner,
+> ++						   save_sec_context | SECURITY_RESTRICTED_OPERATION);
+> ++	save_nestlevel = NewGUCNestLevel();
+> ++
+> + 	if (progress)
+> + 		pgstat_progress_update_param(PROGRESS_CREATEIDX_ACCESS_METHOD_OID,
+> + 									 iRel->rd_rel->relam);
+> +@@ -3684,12 +3715,18 @@ reindex_index(Oid indexId, bool skip_constraint_checks, char persistence,
+> + 				 errdetail_internal("%s",
+> + 									pg_rusage_show(&ru0))));
+> +
+> +-	if (progress)
+> +-		pgstat_progress_end_command();
+> ++	/* Roll back any GUC changes executed by index functions */
+> ++	AtEOXact_GUC(false, save_nestlevel);
+> ++
+> ++	/* Restore userid and security context */
+> ++	SetUserIdAndSecContext(save_userid, save_sec_context);
+> +
+> + 	/* Close rels, but keep locks */
+> + 	index_close(iRel, NoLock);
+> + 	table_close(heapRelation, NoLock);
+> ++
+> ++	if (progress)
+> ++		pgstat_progress_end_command();
+> + }
+> +
+> + /*
+> +diff --git a/src/backend/commands/cluster.c b/src/backend/commands/cluster.c
+> +index bd6f408..74db03e 100644
+> +--- a/src/backend/commands/cluster.c
+> ++++ b/src/backend/commands/cluster.c
+> +@@ -266,6 +266,9 @@ void
+> + cluster_rel(Oid tableOid, Oid indexOid, int options)
+> + {
+> + 	Relation	OldHeap;
+> ++	Oid         save_userid;
+> ++	int         save_sec_context;
+> ++	int         save_nestlevel;
+> + 	bool		verbose = ((options & CLUOPT_VERBOSE) != 0);
+> + 	bool		recheck = ((options & CLUOPT_RECHECK) != 0);
+> +
+> +@@ -295,6 +298,16 @@ cluster_rel(Oid tableOid, Oid indexOid, int options)
+> + 		return;
+> + 	}
+> +
+> ++	/*
+> ++	 * Switch to the table owner's userid, so that any index functions are run
+> ++	 * as that user.  Also lock down security-restricted operations and
+> ++	 * arrange to make GUC variable changes local to this command.
+> ++	 */
+> ++	GetUserIdAndSecContext(&save_userid, &save_sec_context);
+> ++	SetUserIdAndSecContext(OldHeap->rd_rel->relowner,
+> ++						   save_sec_context | SECURITY_RESTRICTED_OPERATION);
+> ++	save_nestlevel = NewGUCNestLevel();
+> ++
+> + 	/*
+> + 	 * Since we may open a new transaction for each relation, we have to check
+> + 	 * that the relation still is what we think it is.
+> +@@ -309,11 +322,10 @@ cluster_rel(Oid tableOid, Oid indexOid, int options)
+> + 		Form_pg_index indexForm;
+> +
+> + 		/* Check that the user still owns the relation */
+> +-		if (!pg_class_ownercheck(tableOid, GetUserId()))
+> ++		if (!pg_class_ownercheck(tableOid, save_userid))
+> + 		{
+> + 			relation_close(OldHeap, AccessExclusiveLock);
+> +-			pgstat_progress_end_command();
+> +-			return;
+> ++			goto out;
+> + 		}
+> +
+> + 		/*
+> +@@ -327,8 +339,7 @@ cluster_rel(Oid tableOid, Oid indexOid, int options)
+> + 		if (RELATION_IS_OTHER_TEMP(OldHeap))
+> + 		{
+> + 			relation_close(OldHeap, AccessExclusiveLock);
+> +-			pgstat_progress_end_command();
+> +-			return;
+> ++			goto out;
+> + 		}
+> +
+> + 		if (OidIsValid(indexOid))
+> +@@ -339,8 +350,7 @@ cluster_rel(Oid tableOid, Oid indexOid, int options)
+> + 			if (!SearchSysCacheExists1(RELOID, ObjectIdGetDatum(indexOid)))
+> + 			{
+> + 				relation_close(OldHeap, AccessExclusiveLock);
+> +-				pgstat_progress_end_command();
+> +-				return;
+> ++				goto out;
+> + 			}
+> +
+> + 			/*
+> +@@ -350,8 +360,7 @@ cluster_rel(Oid tableOid, Oid indexOid, int options)
+> + 			if (!HeapTupleIsValid(tuple))	/* probably can't happen */
+> + 			{
+> + 				relation_close(OldHeap, AccessExclusiveLock);
+> +-				pgstat_progress_end_command();
+> +-				return;
+> ++				goto out;
+> + 			}
+> + 			indexForm = (Form_pg_index) GETSTRUCT(tuple);
+> + 			if (!indexForm->indisclustered)
+> +@@ -413,8 +422,7 @@ cluster_rel(Oid tableOid, Oid indexOid, int options)
+> + 		!RelationIsPopulated(OldHeap))
+> + 	{
+> + 		relation_close(OldHeap, AccessExclusiveLock);
+> +-		pgstat_progress_end_command();
+> +-		return;
+> ++		goto out;
+> + 	}
+> +
+> + 	/*
+> +@@ -430,6 +438,13 @@ cluster_rel(Oid tableOid, Oid indexOid, int options)
+> +
+> + 	/* NB: rebuild_relation does table_close() on OldHeap */
+> +
+> ++out:
+> ++	/* Roll back any GUC changes executed by index functions */
+> ++	AtEOXact_GUC(false, save_nestlevel);
+> ++
+> ++	/* Restore userid and security context */
+> ++	SetUserIdAndSecContext(save_userid, save_sec_context);
+> ++
+> + 	pgstat_progress_end_command();
+> + }
+> +
+> +diff --git a/src/backend/commands/indexcmds.c b/src/backend/commands/indexcmds.c
+> +index be1cf8c..167b377 100644
+> +--- a/src/backend/commands/indexcmds.c
+> ++++ b/src/backend/commands/indexcmds.c
+> +@@ -470,21 +470,22 @@ DefineIndex(Oid relationId,
+> + 	LOCKTAG		heaplocktag;
+> + 	LOCKMODE	lockmode;
+> + 	Snapshot	snapshot;
+> +-	int			save_nestlevel = -1;
+> ++	Oid			root_save_userid;
+> ++	int			root_save_sec_context;
+> ++	int			root_save_nestlevel;
+> + 	int			i;
+> +
+> ++	root_save_nestlevel = NewGUCNestLevel();
+> ++
+> + 	/*
+> + 	 * Some callers need us to run with an empty default_tablespace; this is a
+> + 	 * necessary hack to be able to reproduce catalog state accurately when
+> + 	 * recreating indexes after table-rewriting ALTER TABLE.
+> + 	 */
+> + 	if (stmt->reset_default_tblspc)
+> +-	{
+> +-		save_nestlevel = NewGUCNestLevel();
+> + 		(void) set_config_option("default_tablespace", "",
+> + 								 PGC_USERSET, PGC_S_SESSION,
+> + 								 GUC_ACTION_SAVE, true, 0, false);
+> +-	}
+> +
+> + 	/*
+> + 	 * Force non-concurrent build on temporary relations, even if CONCURRENTLY
+> +@@ -563,6 +564,15 @@ DefineIndex(Oid relationId,
+> + 	lockmode = concurrent ? ShareUpdateExclusiveLock : ShareLock;
+> + 	rel = table_open(relationId, lockmode);
+> +
+> ++	/*
+> ++	 * Switch to the table owner's userid, so that any index functions are run
+> ++	 * as that user.  Also lock down security-restricted operations.  We
+> ++	 * already arranged to make GUC variable changes local to this command.
+> ++	 */
+> ++	GetUserIdAndSecContext(&root_save_userid, &root_save_sec_context);
+> ++	SetUserIdAndSecContext(rel->rd_rel->relowner,
+> ++						   root_save_sec_context | SECURITY_RESTRICTED_OPERATION);
+> ++
+> + 	namespaceId = RelationGetNamespace(rel);
+> +
+> + 	/* Ensure that it makes sense to index this kind of relation */
+> +@@ -648,7 +658,7 @@ DefineIndex(Oid relationId,
+> + 	{
+> + 		AclResult	aclresult;
+> +
+> +-		aclresult = pg_namespace_aclcheck(namespaceId, GetUserId(),
+> ++		aclresult = pg_namespace_aclcheck(namespaceId, root_save_userid,
+> + 										  ACL_CREATE);
+> + 		if (aclresult != ACLCHECK_OK)
+> + 			aclcheck_error(aclresult, OBJECT_SCHEMA,
+> +@@ -680,7 +690,7 @@ DefineIndex(Oid relationId,
+> + 	{
+> + 		AclResult	aclresult;
+> +
+> +-		aclresult = pg_tablespace_aclcheck(tablespaceId, GetUserId(),
+> ++		aclresult = pg_tablespace_aclcheck(tablespaceId, root_save_userid,
+> + 										   ACL_CREATE);
+> + 		if (aclresult != ACLCHECK_OK)
+> + 			aclcheck_error(aclresult, OBJECT_TABLESPACE,
+> +@@ -1066,15 +1076,17 @@ DefineIndex(Oid relationId,
+> +
+> + 	ObjectAddressSet(address, RelationRelationId, indexRelationId);
+> +
+> +-	/*
+> +-	 * Revert to original default_tablespace.  Must do this before any return
+> +-	 * from this function, but after index_create, so this is a good time.
+> +-	 */
+> +-	if (save_nestlevel >= 0)
+> +-		AtEOXact_GUC(true, save_nestlevel);
+> +-
+> + 	if (!OidIsValid(indexRelationId))
+> + 	{
+> ++		/*
+> ++		 * Roll back any GUC changes executed by index functions.  Also revert
+> ++		 * to original default_tablespace if we changed it above.
+> ++		 */
+> ++		AtEOXact_GUC(false, root_save_nestlevel);
+> ++
+> ++		/* Restore userid and security context */
+> ++		SetUserIdAndSecContext(root_save_userid, root_save_sec_context);
+> ++
+> + 		table_close(rel, NoLock);
+> +
+> + 		/* If this is the top-level index, we're done */
+> +@@ -1084,6 +1096,17 @@ DefineIndex(Oid relationId,
+> + 		return address;
+> + 	}
+> +
+> ++	/*
+> ++	 * Roll back any GUC changes executed by index functions, and keep
+> ++	 * subsequent changes local to this command.  It's barely possible that
+> ++	 * some index function changed a behavior-affecting GUC, e.g. xmloption,
+> ++	 * that affects subsequent steps.  This improves bug-compatibility with
+> ++	 * older PostgreSQL versions.  They did the AtEOXact_GUC() here for the
+> ++	 * purpose of clearing the above default_tablespace change.
+> ++	 */
+> ++	AtEOXact_GUC(false, root_save_nestlevel);
+> ++	root_save_nestlevel = NewGUCNestLevel();
+> ++
+> + 	/* Add any requested comment */
+> + 	if (stmt->idxcomment != NULL)
+> + 		CreateComments(indexRelationId, RelationRelationId, 0,
+> +@@ -1130,6 +1153,9 @@ DefineIndex(Oid relationId,
+> + 			{
+> + 				Oid			childRelid = part_oids[i];
+> + 				Relation	childrel;
+> ++				Oid			child_save_userid;
+> ++				int			child_save_sec_context;
+> ++				int			child_save_nestlevel;
+> + 				List	   *childidxs;
+> + 				ListCell   *cell;
+> + 				AttrNumber *attmap;
+> +@@ -1138,6 +1164,12 @@ DefineIndex(Oid relationId,
+> +
+> + 				childrel = table_open(childRelid, lockmode);
+> +
+> ++				GetUserIdAndSecContext(&child_save_userid,
+> ++									   &child_save_sec_context);
+> ++				SetUserIdAndSecContext(childrel->rd_rel->relowner,
+> ++									   child_save_sec_context | SECURITY_RESTRICTED_OPERATION);
+> ++				child_save_nestlevel = NewGUCNestLevel();
+> ++
+> + 				/*
+> + 				 * Don't try to create indexes on foreign tables, though. Skip
+> + 				 * those if a regular index, or fail if trying to create a
+> +@@ -1153,6 +1185,9 @@ DefineIndex(Oid relationId,
+> + 								 errdetail("Table \"%s\" contains partitions that are foreign tables.",
+> + 										   RelationGetRelationName(rel))));
+> +
+> ++					AtEOXact_GUC(false, child_save_nestlevel);
+> ++					SetUserIdAndSecContext(child_save_userid,
+> ++										   child_save_sec_context);
+> + 					table_close(childrel, lockmode);
+> + 					continue;
+> + 				}
+> +@@ -1226,6 +1261,9 @@ DefineIndex(Oid relationId,
+> + 				}
+> +
+> + 				list_free(childidxs);
+> ++				AtEOXact_GUC(false, child_save_nestlevel);
+> ++				SetUserIdAndSecContext(child_save_userid,
+> ++									   child_save_sec_context);
+> + 				table_close(childrel, NoLock);
+> +
+> + 				/*
+> +@@ -1280,12 +1318,21 @@ DefineIndex(Oid relationId,
+> + 					if (found_whole_row)
+> + 						elog(ERROR, "cannot convert whole-row table reference");
+> +
+> ++					/*
+> ++					 * Recurse as the starting user ID.  Callee will use that
+> ++					 * for permission checks, then switch again.
+> ++					 */
+> ++					Assert(GetUserId() == child_save_userid);
+> ++					SetUserIdAndSecContext(root_save_userid,
+> ++										   root_save_sec_context);
+> + 					DefineIndex(childRelid, childStmt,
+> + 								InvalidOid, /* no predefined OID */
+> + 								indexRelationId,	/* this is our child */
+> + 								createdConstraintId,
+> + 								is_alter_table, check_rights, check_not_in_use,
+> + 								skip_build, quiet);
+> ++					SetUserIdAndSecContext(child_save_userid,
+> ++										   child_save_sec_context);
+> + 				}
+> +
+> + 				pgstat_progress_update_param(PROGRESS_CREATEIDX_PARTITIONS_DONE,
+> +@@ -1322,12 +1369,17 @@ DefineIndex(Oid relationId,
+> + 		 * Indexes on partitioned tables are not themselves built, so we're
+> + 		 * done here.
+> + 		 */
+> ++		AtEOXact_GUC(false, root_save_nestlevel);
+> ++		SetUserIdAndSecContext(root_save_userid, root_save_sec_context);
+> + 		table_close(rel, NoLock);
+> + 		if (!OidIsValid(parentIndexId))
+> + 			pgstat_progress_end_command();
+> + 		return address;
+> + 	}
+> +
+> ++	AtEOXact_GUC(false, root_save_nestlevel);
+> ++	SetUserIdAndSecContext(root_save_userid, root_save_sec_context);
+> ++
+> + 	if (!concurrent)
+> + 	{
+> + 		/* Close the heap and we're done, in the non-concurrent case */
+> +@@ -3040,6 +3092,9 @@ ReindexRelationConcurrently(Oid relationOid, int options)
+> + 		Oid			newIndexId;
+> + 		Relation	indexRel;
+> + 		Relation	heapRel;
+> ++		Oid			save_userid;
+> ++		int			save_sec_context;
+> ++		int			save_nestlevel;
+> + 		Relation	newIndexRel;
+> + 		LockRelId  *lockrelid;
+> +
+> +@@ -3047,6 +3102,16 @@ ReindexRelationConcurrently(Oid relationOid, int options)
+> + 		heapRel = table_open(indexRel->rd_index->indrelid,
+> + 							 ShareUpdateExclusiveLock);
+> +
+> ++		/*
+> ++		 * Switch to the table owner's userid, so that any index functions are
+> ++		 * run as that user.  Also lock down security-restricted operations
+> ++		 * and arrange to make GUC variable changes local to this command.
+> ++		 */
+> ++		GetUserIdAndSecContext(&save_userid, &save_sec_context);
+> ++		SetUserIdAndSecContext(heapRel->rd_rel->relowner,
+> ++					save_sec_context | SECURITY_RESTRICTED_OPERATION);
+> ++		save_nestlevel = NewGUCNestLevel();
+> ++
+> + 		/* This function shouldn't be called for temporary relations. */
+> + 		if (indexRel->rd_rel->relpersistence == RELPERSISTENCE_TEMP)
+> + 			elog(ERROR, "cannot reindex a temporary table concurrently");
+> +@@ -3101,6 +3166,13 @@ ReindexRelationConcurrently(Oid relationOid, int options)
+> +
+> + 		index_close(indexRel, NoLock);
+> + 		index_close(newIndexRel, NoLock);
+> ++
+> ++		/* Roll back any GUC changes executed by index functions */
+> ++		AtEOXact_GUC(false, save_nestlevel);
+> ++
+> ++		/* Restore userid and security context */
+> ++		SetUserIdAndSecContext(save_userid, save_sec_context);
+> ++
+> + 		table_close(heapRel, NoLock);
+> + 	}
+> +
+> +diff --git a/src/backend/commands/matview.c b/src/backend/commands/matview.c
+> +index 80e9ec0..e485661 100644
+> +--- a/src/backend/commands/matview.c
+> ++++ b/src/backend/commands/matview.c
+> +@@ -167,6 +167,17 @@ ExecRefreshMatView(RefreshMatViewStmt *stmt, const char *queryString,
+> + 										  lockmode, 0,
+> + 										  RangeVarCallbackOwnsTable, NULL);
+> + 	matviewRel = table_open(matviewOid, NoLock);
+> ++	relowner = matviewRel->rd_rel->relowner;
+> ++
+> ++	/*
+> ++	 * Switch to the owner's userid, so that any functions are run as that
+> ++	 * user.  Also lock down security-restricted operations and arrange to
+> ++	 * make GUC variable changes local to this command.
+> ++	 */
+> ++	GetUserIdAndSecContext(&save_userid, &save_sec_context);
+> ++	SetUserIdAndSecContext(relowner,
+> ++						   save_sec_context | SECURITY_RESTRICTED_OPERATION);
+> ++	save_nestlevel = NewGUCNestLevel();
+> +
+> + 	/* Make sure it is a materialized view. */
+> + 	if (matviewRel->rd_rel->relkind != RELKIND_MATVIEW)
+> +@@ -268,19 +279,6 @@ ExecRefreshMatView(RefreshMatViewStmt *stmt, const char *queryString,
+> + 	 */
+> + 	SetMatViewPopulatedState(matviewRel, !stmt->skipData);
+> +
+> +-	relowner = matviewRel->rd_rel->relowner;
+> +-
+> +-	/*
+> +-	 * Switch to the owner's userid, so that any functions are run as that
+> +-	 * user.  Also arrange to make GUC variable changes local to this command.
+> +-	 * Don't lock it down too tight to create a temporary table just yet.  We
+> +-	 * will switch modes when we are about to execute user code.
+> +-	 */
+> +-	GetUserIdAndSecContext(&save_userid, &save_sec_context);
+> +-	SetUserIdAndSecContext(relowner,
+> +-						   save_sec_context | SECURITY_LOCAL_USERID_CHANGE);
+> +-	save_nestlevel = NewGUCNestLevel();
+> +-
+> + 	/* Concurrent refresh builds new data in temp tablespace, and does diff. */
+> + 	if (concurrent)
+> + 	{
+> +@@ -303,12 +301,6 @@ ExecRefreshMatView(RefreshMatViewStmt *stmt, const char *queryString,
+> + 	LockRelationOid(OIDNewHeap, AccessExclusiveLock);
+> + 	dest = CreateTransientRelDestReceiver(OIDNewHeap);
+> +
+> +-	/*
+> +-	 * Now lock down security-restricted operations.
+> +-	 */
+> +-	SetUserIdAndSecContext(relowner,
+> +-						   save_sec_context | SECURITY_RESTRICTED_OPERATION);
+> +-
+> + 	/* Generate the data, if wanted. */
+> + 	if (!stmt->skipData)
+> + 		processed = refresh_matview_datafill(dest, dataQuery, queryString);
+> +diff --git a/src/backend/utils/init/miscinit.c b/src/backend/utils/init/miscinit.c
+> +index de554e2..c9f858e 100644
+> +--- a/src/backend/utils/init/miscinit.c
+> ++++ b/src/backend/utils/init/miscinit.c
+> +@@ -455,15 +455,21 @@ GetAuthenticatedUserId(void)
+> +  * with guc.c's internal state, so SET ROLE has to be disallowed.
+> +  *
+> +  * SECURITY_RESTRICTED_OPERATION indicates that we are inside an operation
+> +- * that does not wish to trust called user-defined functions at all.  This
+> +- * bit prevents not only SET ROLE, but various other changes of session state
+> +- * that normally is unprotected but might possibly be used to subvert the
+> +- * calling session later.  An example is replacing an existing prepared
+> +- * statement with new code, which will then be executed with the outer
+> +- * session's permissions when the prepared statement is next used.  Since
+> +- * these restrictions are fairly draconian, we apply them only in contexts
+> +- * where the called functions are really supposed to be side-effect-free
+> +- * anyway, such as VACUUM/ANALYZE/REINDEX.
+> ++ * that does not wish to trust called user-defined functions at all.  The
+> ++ * policy is to use this before operations, e.g. autovacuum and REINDEX, that
+> ++ * enumerate relations of a database or schema and run functions associated
+> ++ * with each found relation.  The relation owner is the new user ID.  Set this
+> ++ * as soon as possible after locking the relation.  Restore the old user ID as
+> ++ * late as possible before closing the relation; restoring it shortly after
+> ++ * close is also tolerable.  If a command has both relation-enumerating and
+> ++ * non-enumerating modes, e.g. ANALYZE, both modes set this bit.  This bit
+> ++ * prevents not only SET ROLE, but various other changes of session state that
+> ++ * normally is unprotected but might possibly be used to subvert the calling
+> ++ * session later.  An example is replacing an existing prepared statement with
+> ++ * new code, which will then be executed with the outer session's permissions
+> ++ * when the prepared statement is next used.  These restrictions are fairly
+> ++ * draconian, but the functions called in relation-enumerating operations are
+> ++ * really supposed to be side-effect-free anyway.
+> +  *
+> +  * SECURITY_NOFORCE_RLS indicates that we are inside an operation which should
+> +  * ignore the FORCE ROW LEVEL SECURITY per-table indication.  This is used to
+> +diff --git a/src/test/regress/expected/privileges.out b/src/test/regress/expected/privileges.out
+> +index 186d2fb..0f0c1b3 100644
+> +--- a/src/test/regress/expected/privileges.out
+> ++++ b/src/test/regress/expected/privileges.out
+> +@@ -1336,6 +1336,61 @@ SELECT has_table_privilege('regress_priv_user1', 'atest4', 'SELECT WITH GRANT OP
+> + -- security-restricted operations
+> + \c -
+> + CREATE ROLE regress_sro_user;
+> ++-- Check that index expressions and predicates are run as the table's owner
+> ++-- A dummy index function checking current_user
+> ++CREATE FUNCTION sro_ifun(int) RETURNS int AS $$
+> ++BEGIN
+> ++	-- Below we set the table's owner to regress_sro_user
+> ++	ASSERT current_user = 'regress_sro_user',
+> ++		format('sro_ifun(%s) called by %s', $1, current_user);
+> ++	RETURN $1;
+> ++END;
+> ++$$ LANGUAGE plpgsql IMMUTABLE;
+> ++-- Create a table owned by regress_sro_user
+> ++CREATE TABLE sro_tab (a int);
+> ++ALTER TABLE sro_tab OWNER TO regress_sro_user;
+> ++INSERT INTO sro_tab VALUES (1), (2), (3);
+> ++-- Create an expression index with a predicate
+> ++CREATE INDEX sro_idx ON sro_tab ((sro_ifun(a) + sro_ifun(0)))
+> ++	WHERE sro_ifun(a + 10) > sro_ifun(10);
+> ++DROP INDEX sro_idx;
+> ++-- Do the same concurrently
+> ++CREATE INDEX CONCURRENTLY sro_idx ON sro_tab ((sro_ifun(a) + sro_ifun(0)))
+> ++	WHERE sro_ifun(a + 10) > sro_ifun(10);
+> ++-- REINDEX
+> ++REINDEX TABLE sro_tab;
+> ++REINDEX INDEX sro_idx;
+> ++REINDEX TABLE CONCURRENTLY sro_tab;
+> ++DROP INDEX sro_idx;
+> ++-- CLUSTER
+> ++CREATE INDEX sro_cluster_idx ON sro_tab ((sro_ifun(a) + sro_ifun(0)));
+> ++CLUSTER sro_tab USING sro_cluster_idx;
+> ++DROP INDEX sro_cluster_idx;
+> ++-- BRIN index
+> ++CREATE INDEX sro_brin ON sro_tab USING brin ((sro_ifun(a) + sro_ifun(0)));
+> ++SELECT brin_desummarize_range('sro_brin', 0);
+> ++ brin_desummarize_range
+> ++------------------------
+> ++
+> ++(1 row)
+> ++
+> ++SELECT brin_summarize_range('sro_brin', 0);
+> ++ brin_summarize_range
+> ++----------------------
+> ++                    1
+> ++(1 row)
+> ++
+> ++DROP TABLE sro_tab;
+> ++-- Check with a partitioned table
+> ++CREATE TABLE sro_ptab (a int) PARTITION BY RANGE (a);
+> ++ALTER TABLE sro_ptab OWNER TO regress_sro_user;
+> ++CREATE TABLE sro_part PARTITION OF sro_ptab FOR VALUES FROM (1) TO (10);
+> ++ALTER TABLE sro_part OWNER TO regress_sro_user;
+> ++INSERT INTO sro_ptab VALUES (1), (2), (3);
+> ++CREATE INDEX sro_pidx ON sro_ptab ((sro_ifun(a) + sro_ifun(0)))
+> ++	WHERE sro_ifun(a + 10) > sro_ifun(10);
+> ++REINDEX TABLE sro_ptab;
+> ++REINDEX INDEX CONCURRENTLY sro_pidx;
+> + SET SESSION AUTHORIZATION regress_sro_user;
+> + CREATE FUNCTION unwanted_grant() RETURNS void LANGUAGE sql AS
+> + 	'GRANT regress_priv_group2 TO regress_sro_user';
+> +@@ -1373,6 +1428,22 @@ CONTEXT:  SQL function "unwanted_grant" statement 1
+> + SQL statement "SELECT unwanted_grant()"
+> + PL/pgSQL function sro_trojan() line 1 at PERFORM
+> + SQL function "mv_action" statement 1
+> ++-- REFRESH MATERIALIZED VIEW CONCURRENTLY use of eval_const_expressions()
+> ++SET SESSION AUTHORIZATION regress_sro_user;
+> ++CREATE FUNCTION unwanted_grant_nofail(int) RETURNS int
+> ++	IMMUTABLE LANGUAGE plpgsql AS $$
+> ++BEGIN
+> ++	PERFORM unwanted_grant();
+> ++	RAISE WARNING 'owned';
+> ++	RETURN 1;
+> ++EXCEPTION WHEN OTHERS THEN
+> ++	RETURN 2;
+> ++END$$;
+> ++CREATE MATERIALIZED VIEW sro_index_mv AS SELECT 1 AS c;
+> ++CREATE UNIQUE INDEX ON sro_index_mv (c) WHERE unwanted_grant_nofail(1) > 0;
+> ++\c -
+> ++REFRESH MATERIALIZED VIEW CONCURRENTLY sro_index_mv;
+> ++REFRESH MATERIALIZED VIEW sro_index_mv;
+> + DROP OWNED BY regress_sro_user;
+> + DROP ROLE regress_sro_user;
+> + -- Admin options
+> +diff --git a/src/test/regress/sql/privileges.sql b/src/test/regress/sql/privileges.sql
+> +index 34fbf0e..c0b88a6 100644
+> +--- a/src/test/regress/sql/privileges.sql
+> ++++ b/src/test/regress/sql/privileges.sql
+> +@@ -826,6 +826,53 @@ SELECT has_table_privilege('regress_priv_user1', 'atest4', 'SELECT WITH GRANT OP
+> + \c -
+> + CREATE ROLE regress_sro_user;
+> +
+> ++-- Check that index expressions and predicates are run as the table's owner
+> ++
+> ++-- A dummy index function checking current_user
+> ++CREATE FUNCTION sro_ifun(int) RETURNS int AS $$
+> ++BEGIN
+> ++	-- Below we set the table's owner to regress_sro_user
+> ++	ASSERT current_user = 'regress_sro_user',
+> ++		format('sro_ifun(%s) called by %s', $1, current_user);
+> ++	RETURN $1;
+> ++END;
+> ++$$ LANGUAGE plpgsql IMMUTABLE;
+> ++-- Create a table owned by regress_sro_user
+> ++CREATE TABLE sro_tab (a int);
+> ++ALTER TABLE sro_tab OWNER TO regress_sro_user;
+> ++INSERT INTO sro_tab VALUES (1), (2), (3);
+> ++-- Create an expression index with a predicate
+> ++CREATE INDEX sro_idx ON sro_tab ((sro_ifun(a) + sro_ifun(0)))
+> ++	WHERE sro_ifun(a + 10) > sro_ifun(10);
+> ++DROP INDEX sro_idx;
+> ++-- Do the same concurrently
+> ++CREATE INDEX CONCURRENTLY sro_idx ON sro_tab ((sro_ifun(a) + sro_ifun(0)))
+> ++	WHERE sro_ifun(a + 10) > sro_ifun(10);
+> ++-- REINDEX
+> ++REINDEX TABLE sro_tab;
+> ++REINDEX INDEX sro_idx;
+> ++REINDEX TABLE CONCURRENTLY sro_tab;
+> ++DROP INDEX sro_idx;
+> ++-- CLUSTER
+> ++CREATE INDEX sro_cluster_idx ON sro_tab ((sro_ifun(a) + sro_ifun(0)));
+> ++CLUSTER sro_tab USING sro_cluster_idx;
+> ++DROP INDEX sro_cluster_idx;
+> ++-- BRIN index
+> ++CREATE INDEX sro_brin ON sro_tab USING brin ((sro_ifun(a) + sro_ifun(0)));
+> ++SELECT brin_desummarize_range('sro_brin', 0);
+> ++SELECT brin_summarize_range('sro_brin', 0);
+> ++DROP TABLE sro_tab;
+> ++-- Check with a partitioned table
+> ++CREATE TABLE sro_ptab (a int) PARTITION BY RANGE (a);
+> ++ALTER TABLE sro_ptab OWNER TO regress_sro_user;
+> ++CREATE TABLE sro_part PARTITION OF sro_ptab FOR VALUES FROM (1) TO (10);
+> ++ALTER TABLE sro_part OWNER TO regress_sro_user;
+> ++INSERT INTO sro_ptab VALUES (1), (2), (3);
+> ++CREATE INDEX sro_pidx ON sro_ptab ((sro_ifun(a) + sro_ifun(0)))
+> ++	WHERE sro_ifun(a + 10) > sro_ifun(10);
+> ++REINDEX TABLE sro_ptab;
+> ++REINDEX INDEX CONCURRENTLY sro_pidx;
+> ++
+> + SET SESSION AUTHORIZATION regress_sro_user;
+> + CREATE FUNCTION unwanted_grant() RETURNS void LANGUAGE sql AS
+> + 	'GRANT regress_priv_group2 TO regress_sro_user';
+> +@@ -852,6 +899,23 @@ REFRESH MATERIALIZED VIEW sro_mv;
+> + REFRESH MATERIALIZED VIEW sro_mv;
+> + BEGIN; SET CONSTRAINTS ALL IMMEDIATE; REFRESH MATERIALIZED VIEW sro_mv; COMMIT;
+> +
+> ++-- REFRESH MATERIALIZED VIEW CONCURRENTLY use of eval_const_expressions()
+> ++SET SESSION AUTHORIZATION regress_sro_user;
+> ++CREATE FUNCTION unwanted_grant_nofail(int) RETURNS int
+> ++	IMMUTABLE LANGUAGE plpgsql AS $$
+> ++BEGIN
+> ++	PERFORM unwanted_grant();
+> ++	RAISE WARNING 'owned';
+> ++	RETURN 1;
+> ++EXCEPTION WHEN OTHERS THEN
+> ++	RETURN 2;
+> ++END$$;
+> ++CREATE MATERIALIZED VIEW sro_index_mv AS SELECT 1 AS c;
+> ++CREATE UNIQUE INDEX ON sro_index_mv (c) WHERE unwanted_grant_nofail(1) > 0;
+> ++\c -
+> ++REFRESH MATERIALIZED VIEW CONCURRENTLY sro_index_mv;
+> ++REFRESH MATERIALIZED VIEW sro_index_mv;
+> ++
+> + DROP OWNED BY regress_sro_user;
+> + DROP ROLE regress_sro_user;
+> +
+> +--
+> +2.25.1
+> +
+> diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_12.9.bb b/meta-oe/recipes-dbs/postgresql/postgresql_12.9.bb
+> index 67bf2b9604..1344d4eb00 100644
+> --- a/meta-oe/recipes-dbs/postgresql/postgresql_12.9.bb
+> +++ b/meta-oe/recipes-dbs/postgresql/postgresql_12.9.bb
+> @@ -7,6 +7,7 @@ SRC_URI += "\
+>      file://0001-Add-support-for-RISC-V.patch \
+>      file://0001-Improve-reproducibility.patch \
+>      file://remove_duplicate.patch \
+> +   file://CVE-2022-1552.patch \
+>   "
+>   
+>   SRC_URI[sha256sum] = "89fda2de33ed04a98548e43f3ee5f15b882be17505d631fe0dd1a540a2b56dce"
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#98938): https://lists.openembedded.org/g/openembedded-devel/message/98938
+> Mute This Topic: https://lists.openembedded.org/mt/93864313/3616698
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
