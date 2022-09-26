@@ -1,271 +1,94 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <wak@google.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CD26C07E9D
-	for <webhook@archiver.kernel.org>; Mon, 26 Sep 2022 17:47:28 +0000 (UTC)
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
- [209.85.160.175])
- by mx.groups.io with SMTP id smtpd.web10.1096.1664214445521815876
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E1527C07E9D
+	for <webhook@archiver.kernel.org>; Mon, 26 Sep 2022 19:34:38 +0000 (UTC)
+Received: from mail-yw1-f201.google.com (mail-yw1-f201.google.com
+ [209.85.128.201])
+ by mx.groups.io with SMTP id smtpd.web08.2324.1664220869845010621
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Sep 2022 10:47:25 -0700
+ Mon, 26 Sep 2022 12:34:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20210112 header.b=M7PDbGsY;
- spf=pass (domain: gmail.com, ip: 209.85.160.175,
- mailfrom: akuster808@gmail.com)
-Received: by mail-qt1-f175.google.com with SMTP id cj27so4568504qtb.7
+ dkim=pass header.i=@google.com header.s=20210112 header.b=NIu0Isbg;
+ spf=pass (domain: flex--wak.bounces.google.com, ip: 209.85.128.201,
+ mailfrom: 3xp4xywmkakkfjtpxxpun.lxv@flex--wak.bounces.google.com)
+Received: by mail-yw1-f201.google.com with SMTP id
+ 00721157ae682-35153b4b756so9471007b3.9
         for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Sep 2022 10:47:25 -0700 (PDT)
+ Mon, 26 Sep 2022 12:34:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date;
-        bh=lUUULrFkJBRlsfNngjiTvQd8KlnL1yITthkIhWgKbNI=;
-        b=M7PDbGsYUrjQ3NTm2gFRlLOKNv1HfHR15kng1daC8xjRxQGd90I8y8Syu6KEz9oS4s
-         0aP8ntaIk8q8XKOYWWUvu6G0CPYKv15LeN/oUArPEWiw8eQEGzBCBsnaw7jlnWW8Jxc9
-         i1tISg7I+A8NrPUM5NRVb+q4ksBwW+cgEpxHMiqPdGLjgILqhIXCIH3bnHpjfmm5/znC
-         4e3ZpPE/4EsyxyAadCHGUvRZ1mm6dDBCrvDgyJnt++/jZj4jyKSwPO0O1wjZpPXn9UAu
-         x4myZmT59wK6jav8WVejrPPhlPewjd2U585lgWUCb4fI0NX2YgTiXzGryL+D1kHtM7z4
-         kadQ==
+        d=google.com; s=20210112;
+        h=cc:to:from:subject:mime-version:message-id:date:from:to:cc:subject
+         :date;
+        bh=GUyZOfz7FOmXOibSqlBJ8H5xB9NE5CW+UDKIwhQWECg=;
+        b=NIu0Isbg8l+r5CCWxJmflmwzjbpfjDUVPFsu0g+rfTAjn771zxlA2ID2KCfR48kn2v
+         aNO7gsiFJFF8Dod0nXqoRD8RLEQ3NDPQ8A0J0EmuP+do8t5zF21aWmkXWhUlhhfIrkAd
+         OgWkpQpIZZuWTuXDBkAWjC68+kw+LtJe0hFOdrI0OTOtqoRTRdfT25WdY6B2mRrFdlUc
+         82QbNP8AYUVqM8GWTr2t4XBf2X/6lunYFW0LqCvzcR5TPAYxBVJIebZheyEMFJERON1B
+         IOPPQeNrUWWbzfIqjLPHNNox2djT3kRUN9OvBO+KVuW1G7eieAKeFR/H73JVTQEZlby6
+         T7aQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date;
-        bh=lUUULrFkJBRlsfNngjiTvQd8KlnL1yITthkIhWgKbNI=;
-        b=MlZpcvsVS3S3gZ5d+fiwVuIm5XCH8eTl5sZQyc5e/0L2BQdepdonfPTwl85WR1LZTO
-         5zTGZPaKt29DvR6md9eUJ5Sf2G69J3Y9T44QVsiv9kqm5Fi7a+op/01TWiEG6BA98ZmL
-         BZQolhXtWzT2F0flvOsJXKLquCwiuhbOLPj9+A/cmlQW4jPJ4+McKJiLaMHJapgBOYeb
-         WxQ8ZmEbm0Rl0C06xrKwc035eUSLi7AfVPZIVv1PHapQmP5GJUjWm1AqGsjM2c0JQxw5
-         0qrKRpFDakQirKt186qpvcrdAMiL8ojLdzuxfu+6lf6DBoSkFtimF4xVV/H5IrWQGO8P
-         PPDA==
-X-Gm-Message-State: ACrzQf0MiYvY1OlvRTrWTLwPPRgstFuFoVNVGrfuzytJSZO66KVlxpFG
-	Poj6TzJW1apvrxiwndf/+og=
+        h=cc:to:from:subject:mime-version:message-id:date:x-gm-message-state
+         :from:to:cc:subject:date;
+        bh=GUyZOfz7FOmXOibSqlBJ8H5xB9NE5CW+UDKIwhQWECg=;
+        b=sZiDaVxXp54Kc0RU/fIkP4NASx76Y6haChmRVNSai0X9EEkaZ424FbfnOucGUKhs0/
+         XhuAAA2/2gtPgloSnS033zIZmYXqDYHYD5tcoY/5NInCOJ75bkdyqqn9XtrsVYYrhO1l
+         2+F9X4YrOmwlxfbfodR3hDb/l+9EOfHtSK8t/aoDL8OIcPgj8GTeVWzW+oj+zHxw+om+
+         bpwkA7DGimLmTebSu1LAWcGKrFYFPM97fiI+wiYR70glW6K3q1E+MDwCIa9HU8yqLR2b
+         1O03LkIbZhfuwJ4dMt70+4KRndwTe8/fv6kmSLFR1yfuERtZPV/tOHgjM5esy16jIC6g
+         fUew==
+X-Gm-Message-State: ACrzQf1NfCQCbrjs47uAKwvfHIBBpSwrs//vhZH8DV2mldFD0pCahOhU
+	oZlyQgUeXUweIQS2YVU5lbiH2KjjztZdbsFU2JGxtV4Ega0rHSO/fPi7zEsv3Pnr55SaUjcjgR2
+	dzJPslOPATGpTUC3M6Z4lTFgxi+7mTe/73Rv68BcCjGTsQ0LNuXyBwpPN5S/D7QUVbs9A1Oc2zS
+	fTHuU=
 X-Google-Smtp-Source: 
- AMsMyM6iTqbijEqNLVN2pt9JolqstwEVUow0aGBJZaJHYmC3Aca35ju11OkfsnsVl3R67qZdiFJ7+Q==
-X-Received: by 2002:ac8:5b05:0:b0:35c:e1ed:a816 with SMTP id
- m5-20020ac85b05000000b0035ce1eda816mr18743040qtw.208.1664214444447;
-        Mon, 26 Sep 2022 10:47:24 -0700 (PDT)
-Received: from ?IPV6:2600:1700:9190:ba10:82f1:3179:8101:3ea3?
- ([2600:1700:9190:ba10:82f1:3179:8101:3ea3])
-        by smtp.gmail.com with ESMTPSA id
- x27-20020a05620a0b5b00b006a6ebde4799sm11631084qkg.90.2022.09.26.10.47.22
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 26 Sep 2022 10:47:22 -0700 (PDT)
-Message-ID: <b48e14a4-0c22-79bf-b6ec-d33b69e2fcce@gmail.com>
-Date: Mon, 26 Sep 2022 13:47:21 -0400
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [oe] [meta-networking][kirkstone][PATCH] wireshark: CVE-2022-3190
- Infinite loop in legacy style dissector
-Content-Language: en-US
-To: Hitendra Prajapati <hprajapati@mvista.com>,
- openembedded-devel@lists.openembedded.org
-References: <20220926114055.4607-1-hprajapati@mvista.com>
-From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <20220926114055.4607-1-hprajapati@mvista.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ AMsMyM4ZTc9M69Z0TnjS0mfLm2iRT2seEQHMpWXFCMTCN9w/PL0vYQx4KlscpctK1G8QX8Etvkc+Nb0=
+X-Received: from wak-linux.svl.corp.google.com
+ ([2620:15c:2c5:13:cade:9738:3308:776c])
+ (user=wak job=sendgmr) by 2002:a0d:e247:0:b0:345:711b:c5ef with SMTP id
+ l68-20020a0de247000000b00345711bc5efmr21363582ywe.230.1664220868920; Mon, 26
+ Sep 2022 12:34:28 -0700 (PDT)
+Date: Mon, 26 Sep 2022 12:34:24 -0700
+Message-Id: <20220926193424.427667-1-wak@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.37.3.998.g577e59143f-goog
+Subject: [meta-oe][PATCH] fmt: upgrade 8.1.1 -> 9.1.0
+From: "William A. Kennington III" <wak@google.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: "William A. Kennington III" <wak@google.com>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 26 Sep 2022 17:47:28 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 26 Sep 2022 19:34:38 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98954
+ https://lists.openembedded.org/g/openembedded-devel/message/98955
 
-Any reason why updating to the latest stable 3.14.16 version is not 
-appropriate?
-- armin
+Signed-off-by: William A. Kennington III <wak@google.com>
+---
+ meta-oe/recipes-support/fmt/{fmt_8.1.1.bb => fmt_9.1.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/fmt/{fmt_8.1.1.bb => fmt_9.1.0.bb} (90%)
 
-On 9/26/22 07:40, Hitendra Prajapati wrote:
-> Source: https://gitlab.com/wireshark/wireshark/-/commit/67326401a595fffbc67eeed48eb6c55d66a55f67
-> MR: 122044
-> Type: Security Fix
-> Disposition: Backport from https://gitlab.com/wireshark/wireshark/-/commit/67326401a595fffbc67eeed48eb6c55d66a55f67
-> ChangeID: 13f833dfbd8f76db1ea01984441b212f08e6e4f5
-> Description:
->            CVE-2022-3190 wireshark: Infinite loop in legacy style dissector.
->
-> Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-> ---
->   .../wireshark/files/CVE-2022-3190.patch       | 145 ++++++++++++++++++
->   .../wireshark/wireshark_3.4.12.bb             |   1 +
->   2 files changed, 146 insertions(+)
->   create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2022-3190.patch
->
-> diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2022-3190.patch b/meta-networking/recipes-support/wireshark/files/CVE-2022-3190.patch
-> new file mode 100644
-> index 0000000000..0b987700f5
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/wireshark/files/CVE-2022-3190.patch
-> @@ -0,0 +1,145 @@
-> +From 4585d515b962f3b3a5e81caa64e13e8d9ed2e431 Mon Sep 17 00:00:00 2001
-> +From: Hitendra Prajapati <hprajapati@mvista.com>
-> +Date: Mon, 26 Sep 2022 12:47:00 +0530
-> +Subject: [PATCH] CVE-2022-3190
-> +
-> +Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/67326401a595fffbc67eeed48eb6c55d66a55f67]
-> +CVE : CVE-2022-3190
-> +Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-> +---
-> + epan/dissectors/packet-f5ethtrailer.c | 108 +++++++++++++-------------
-> + 1 file changed, 56 insertions(+), 52 deletions(-)
-> +
-> +diff --git a/epan/dissectors/packet-f5ethtrailer.c b/epan/dissectors/packet-f5ethtrailer.c
-> +index ed77dfd..b15b0d4 100644
-> +--- a/epan/dissectors/packet-f5ethtrailer.c
-> ++++ b/epan/dissectors/packet-f5ethtrailer.c
-> +@@ -2741,69 +2741,73 @@ dissect_dpt_trailer(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, void *d
-> + static gint
-> + dissect_old_trailer(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, void *data)
-> + {
-> +-    proto_tree *type_tree   = NULL;
-> +-    proto_item *ti          = NULL;
-> +     guint offset            = 0;
-> +-    guint processed         = 0;
-> +-    f5eth_tap_data_t *tdata = (f5eth_tap_data_t *)data;
-> +-    guint8 type;
-> +-    guint8 len;
-> +-    guint8 ver;
-> +
-> +     /* While we still have data in the trailer.  For old format trailers, this needs
-> +      * type, length, version (3 bytes) and for new format trailers, the magic header (4 bytes).
-> +      * All old format trailers are at least 4 bytes long, so just check for length of magic.
-> +      */
-> +-    while (tvb_reported_length_remaining(tvb, offset)) {
-> +-        type = tvb_get_guint8(tvb, offset);
-> +-        len = tvb_get_guint8(tvb, offset + F5_OFF_LENGTH) + F5_OFF_VERSION;
-> +-        ver = tvb_get_guint8(tvb, offset + F5_OFF_VERSION);
-> +-
-> +-        if (len <= tvb_reported_length_remaining(tvb, offset) && type >= F5TYPE_LOW
-> +-            && type <= F5TYPE_HIGH && len >= F5_MIN_SANE && len <= F5_MAX_SANE
-> +-            && ver <= F5TRAILER_VER_MAX) {
-> +-            /* Parse out the specified trailer. */
-> +-            switch (type) {
-> +-            case F5TYPE_LOW:
-> +-                ti        = proto_tree_add_item(tree, hf_low_id, tvb, offset, len, ENC_NA);
-> +-                type_tree = proto_item_add_subtree(ti, ett_f5ethtrailer_low);
-> +-
-> +-                processed = dissect_low_trailer(tvb, pinfo, type_tree, offset, len, ver, tdata);
-> +-                if (processed > 0) {
-> +-                    tdata->trailer_len += processed;
-> +-                    tdata->noise_low = 1;
-> +-                }
-> +-                break;
-> +-            case F5TYPE_MED:
-> +-                ti        = proto_tree_add_item(tree, hf_med_id, tvb, offset, len, ENC_NA);
-> +-                type_tree = proto_item_add_subtree(ti, ett_f5ethtrailer_med);
-> +-
-> +-                processed = dissect_med_trailer(tvb, pinfo, type_tree, offset, len, ver, tdata);
-> +-                if (processed > 0) {
-> +-                    tdata->trailer_len += processed;
-> +-                    tdata->noise_med = 1;
-> +-                }
-> +-                break;
-> +-            case F5TYPE_HIGH:
-> +-                ti        = proto_tree_add_item(tree, hf_high_id, tvb, offset, len, ENC_NA);
-> +-                type_tree = proto_item_add_subtree(ti, ett_f5ethtrailer_high);
-> +-
-> +-                processed =
-> +-                    dissect_high_trailer(tvb, pinfo, type_tree, offset, len, ver, tdata);
-> +-                if (processed > 0) {
-> +-                    tdata->trailer_len += processed;
-> +-                    tdata->noise_high = 1;
-> +-                }
-> +-                break;
-> ++    while (tvb_reported_length_remaining(tvb, offset) >= F5_MIN_SANE) {
-> ++        /* length field does not include the type and length bytes.  Add them back in */
-> ++        guint8 len = tvb_get_guint8(tvb, offset + F5_OFF_LENGTH) + F5_OFF_VERSION;
-> ++        if (len > tvb_reported_length_remaining(tvb, offset)
-> ++            || len < F5_MIN_SANE || len > F5_MAX_SANE) {
-> ++            /* Invalid length - either a malformed trailer, corrupt packet, or not f5ethtrailer */
-> ++            return offset;
-> ++        }
-> ++        guint8 type = tvb_get_guint8(tvb, offset);
-> ++        guint8 ver = tvb_get_guint8(tvb, offset + F5_OFF_VERSION);
-> ++
-> ++        /* Parse out the specified trailer. */
-> ++        proto_tree *type_tree   = NULL;
-> ++        proto_item *ti          = NULL;
-> ++        f5eth_tap_data_t *tdata = (f5eth_tap_data_t *)data;
-> ++        guint processed = 0;
-> ++
-> ++        switch (type) {
-> ++        case F5TYPE_LOW:
-> ++            ti        = proto_tree_add_item(tree, hf_low_id, tvb, offset, len, ENC_NA);
-> ++            type_tree = proto_item_add_subtree(ti, ett_f5ethtrailer_low);
-> ++
-> ++            processed = dissect_low_trailer(tvb, pinfo, type_tree, offset, len, ver, tdata);
-> ++            if (processed > 0) {
-> ++                tdata->trailer_len += processed;
-> ++                tdata->noise_low = 1;
-> +             }
-> +-            if (processed == 0) {
-> +-                proto_item_set_len(ti, 1);
-> +-                return offset;
-> ++            break;
-> ++        case F5TYPE_MED:
-> ++            ti        = proto_tree_add_item(tree, hf_med_id, tvb, offset, len, ENC_NA);
-> ++            type_tree = proto_item_add_subtree(ti, ett_f5ethtrailer_med);
-> ++
-> ++            processed = dissect_med_trailer(tvb, pinfo, type_tree, offset, len, ver, tdata);
-> ++            if (processed > 0) {
-> ++                tdata->trailer_len += processed;
-> ++                tdata->noise_med = 1;
-> ++            }
-> ++            break;
-> ++        case F5TYPE_HIGH:
-> ++            ti        = proto_tree_add_item(tree, hf_high_id, tvb, offset, len, ENC_NA);
-> ++            type_tree = proto_item_add_subtree(ti, ett_f5ethtrailer_high);
-> ++
-> ++            processed =
-> ++                dissect_high_trailer(tvb, pinfo, type_tree, offset, len, ver, tdata);
-> ++            if (processed > 0) {
-> ++                tdata->trailer_len += processed;
-> ++                tdata->noise_high = 1;
-> +             }
-> ++            break;
-> ++        default:
-> ++            /* Unknown type - malformed trailer, corrupt packet, or not f5ethtrailer - bali out*/
-> ++            return offset;
-> ++        }
-> ++        if (processed == 0) {
-> ++            /* couldn't process trailer - bali out */
-> ++            proto_item_set_len(ti, 1);
-> ++            return offset;
-> +         }
-> +         offset += processed;
-> +     }
-> +-return offset;
-> ++    return offset;
-> + } /* dissect_old_trailer() */
-> +
-> + /*---------------------------------------------------------------------------*/
-> +--
-> +2.25.1
-> +
-> diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-> index 38fdbce892..1a4aedc139 100644
-> --- a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-> +++ b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-> @@ -15,6 +15,7 @@ SRC_URI += " \
->       file://0002-flex-Remove-line-directives.patch \
->       file://0003-bison-Remove-line-directives.patch \
->       file://0004-lemon-Remove-line-directives.patch \
-> +    file://CVE-2022-3190.patch \
->   "
->   
->   UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#98953): https://lists.openembedded.org/g/openembedded-devel/message/98953
-> Mute This Topic: https://lists.openembedded.org/mt/93924739/3616698
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-oe/recipes-support/fmt/fmt_8.1.1.bb b/meta-oe/recipes-support/fmt/fmt_9.1.0.bb
+similarity index 90%
+rename from meta-oe/recipes-support/fmt/fmt_8.1.1.bb
+rename to meta-oe/recipes-support/fmt/fmt_9.1.0.bb
+index c53dd3890..34896153c 100644
+--- a/meta-oe/recipes-support/fmt/fmt_8.1.1.bb
++++ b/meta-oe/recipes-support/fmt/fmt_9.1.0.bb
+@@ -5,7 +5,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=af88d758f75f3c5c48a967501f24384b"
+ 
+ SRC_URI = "git://github.com/fmtlib/fmt;branch=master;protocol=https"
+-SRCREV = "b6f4ceaed0a0a24ccf575fab6c56dd50ccf6f1a9"
++SRCREV = "a33701196adfad74917046096bf5a2aa0ab0bb50"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.37.3.998.g577e59143f-goog
 
 
