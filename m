@@ -1,314 +1,100 @@
-Return-Path: <mingli.yu@windriver.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ECC87C07E9D
-	for <webhook@archiver.kernel.org>; Mon, 26 Sep 2022 04:37:44 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com
- [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.24886.1664167054778676171
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD9F5C32771
+	for <webhook@archiver.kernel.org>; Mon, 26 Sep 2022 08:00:35 +0000 (UTC)
+Received: from voyager.superhosting.bg (voyager.superhosting.bg
+ [79.124.30.14])
+ by mx.groups.io with SMTP id smtpd.web12.26183.1664179233546608229
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 25 Sep 2022 21:37:35 -0700
+ Mon, 26 Sep 2022 01:00:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=pps06212021 header.b=YDaWeVgI;
+ dkim=pass header.i=@anavi.org header.s=default header.b=HGvqpO/N;
  spf=permerror,
- err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}:
- invalid domain name (domain: windriver.com, ip: 205.220.178.238,
- mailfrom: prvs=6268737055=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id
- 28Q4bV3S024473;
-	Mon, 26 Sep 2022 04:37:31 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
- h=from : to :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=PPS06212021;
- bh=bdLsj4hhpSJtJ5Rgp/HR84XCsI/8GHbA9rHw4daRhOo=;
- b=YDaWeVgI5jLgURF3O8bp/z1oMwk+ueV1gsAIKv+oH8297nzzEuDXX7rL3hMx4ceLcyJ6
- HXkFOtH7W9fj7iYZ0i3nFzuSHXi1X0tNCQH912e3M773rRFB9eYDUoCYzhhTMRv/tV5J
- 6zEKdp4O8t/21Q6SbSb+YcZTS83YPsXcq/gNs8pbaunDCqTxjoKGf7q4ltKDnFMjWApG
- rq/9ia6lY5x7Tfm4ZjWltKiJDHEHX7GIu0khtEe4w1CS1OIuQJ+8b62Gtvx/jU0PMh3+
- jJRDFJdxrKISBtrzfYxA5IN8Phh8vyxmNTefs6dYzF95VsUL1+cd71wwMmzAhskhHcuu bg==
-Received: from ala-exchng01.corp.ad.wrs.com (unknown-82-252.windriver.com
- [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3jsrv9h97u-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
-	Mon, 26 Sep 2022 04:37:30 +0000
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2242.12; Sun, 25 Sep 2022 21:37:29 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27; Sun, 25 Sep 2022 21:37:29 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2242.12 via Frontend Transport; Sun, 25 Sep 2022 21:37:28 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <Ross.Burton@arm.com>
-Subject: [meta-oe][kirkstone][PATCH] mariadb: not use qemu to run
- cross-compiled binaries
-Date: Mon, 26 Sep 2022 12:37:27 +0800
-Message-ID: <20220926043727.55844-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <647C21FD-1AD1-4955-AB61-C3C5195CC7CF@arm.com>
-References: <647C21FD-1AD1-4955-AB61-C3C5195CC7CF@arm.com>
+ err=parse error for token &{10 18 spf.securedserverspace.com}: parse error
+ for token &{10 18 _netblocks4.securedserverspace.com}: limit exceeded
+ (domain: konsulko.com, ip: 79.124.30.14, mailfrom: leon.anavi@konsulko.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+	Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=XI6IBAL4W68N89AFkWty68s2tGebQEjR/6WXzLAIW6s=; b=HGvqpO/NhDaLcsnDXJ5otK1XVz
+	LIFWV3S166qlBS4VjJOjvfBsPz5Srf318Mi/+21JqaZ6PrU6OOK9OXgGzPCKNYgx6dvi8IgIQw8B9
+	34qqNbETvoXH08KqmRzarC1j1PvB5F74fj2NO0OjViEE11guSsJOPUXfvU3E2IObk/Ysy7m/R72a0
+	i3+z5W6GQPtEblX5v0C9rBZKAiv1/e3/EMXm3Rg6tIZYgyOGnSfDdecTcRNDOkcixPzWO075/BfCi
+	ZjJ3WYj8UwFZ30TKh6C+Nz4ZMK6rDYXfYQzcy05+NX/L9WRC2XV5/UYQ3igIZBtJMSyTPJEvscfRL
+	wh2JqedA==;
+Received: from lan.nucleusys.com ([92.247.61.126]:60258 helo=tone.k.g)
+	by voyager.superhosting.bg with esmtpsa  (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.95)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1ocj3L-000BCB-BK;
+	Mon, 26 Sep 2022 11:00:31 +0300
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH] python3-aiohttp: Upgrade 3.8.1 -> 3.8.3
+Date: Mon, 26 Sep 2022 11:00:24 +0300
+Message-Id: <20220926080024.1903521-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: P21pKcHHe14C7KKpflRHZTDHVzzkoEUT
-X-Proofpoint-ORIG-GUID: P21pKcHHe14C7KKpflRHZTDHVzzkoEUT
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
- definitions=2022-09-26_02,2022-09-22_02,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 bulkscore=0
- clxscore=1011 adultscore=0 phishscore=0 malwarescore=0 mlxscore=0
- spamscore=0 priorityscore=1501 impostorscore=0 mlxlogscore=999
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2209130000 definitions=main-2209260029
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.superhosting.bg
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.superhosting.bg: authenticated_id:
+ leon@anavi.org
+X-Authenticated-Sender: voyager.superhosting.bg: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 26 Sep 2022 04:37:44 -0000
+ <openembedded-devel@lists.openembedded.org>; Mon, 26 Sep 2022 08:00:35 -0000
 X-Groupsio-URL: 
- https://lists.openembedded.org/g/openembedded-devel/message/98949
+ https://lists.openembedded.org/g/openembedded-devel/message/98950
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Upgrade to release 3.8.3:
 
-The build fails when use qemu to run build for amd64 as below:
+- Increased the upper boundary of the multidict dependency to
+  allow for the version 6
 
-| make  -f libmariadb/libmariadb/CMakeFiles/mariadbclient.dir/build.make libmariadb/libmariadb/CMakeFiles/mariadbclient.dir/depend
-| make  -f libmariadb/libmariadb/CMakeFiles/libmariadb.dir/build.make libmariadb/libmariadb/CMakeFiles/libmariadb.dir/depend
-| make[2]: Entering directory '/build/tmp-glibc/work/dbfp5-wrs-linux/mariadb/10.7.4-r0/build'
-| cd /build/tmp-glibc/work/dbfp5-wrs-linux/mariadb/10.7.4-r0/build && /build/tmp-glibc/work/dbfp5-wrs-linux/mariadb/10.7.4-r0/recipe-sysroot-native/usr/bin/cmake -E cmake_depends "Unix Makefiles" /build/tmp-glibc/work/dbfp5-wrs-linux/mariadb/10.7.4-r0/mariadb-10.7.4 /build/tmp-glibc/work/dbfp5-wrs-linux/mariadb/10.7.4-r0/mariadb-10.7.4/libmariadb/libmariadb /build/tmp-glibc/work/dbfp5-wrs-linux/mariadb/10.7.4-r0/build /build/tmp-glibc/work/dbfp5-wrs-linux/mariadb/10.7.4-r0/build/libmariadb/libmariadb /build/tmp-glibc/work/dbfp5-wrs-linux/mariadb/10.7.4-r0/build/libmariadb/libmariadb/CMakeFiles/mariadbclient.dir/DependInfo.cmake --color=
-| make[2]: Leaving directory '/build/tmp-glibc/work/dbfp5-wrs-linux/mariadb/10.7.4-r0/build'
-| make  -f libmariadb/libmariadb/CMakeFiles/mariadbclient.dir/build.make libmariadb/libmariadb/CMakeFiles/mariadbclient.dir/build
-| Illegal instruction (core dumped)
-| make[2]: *** [sql/CMakeFiles/GenServerSource.dir/build.make:76: sql/lex_hash.h] Error 132
-| make[2]: *** Deleting file 'sql/lex_hash.h'
-| make[2]: Entering directory '/build/tmp-glibc/work/dbfp5-wrs-linux/mariadb/10.7.4-r0/build'
-| [  8%] Linking C static library libmariadbclient.a
-| cd /build/tmp-glibc/work/dbfp5-wrs-linux/mariadb/10.7.4-r0/build/libmariadb/libmariadb && /build/tmp-glibc/work/dbfp5-wrs-linux/mariadb/10.7.4-r0/recipe-sysroot-native/usr/bin/cmake -P CMakeFiles/mariadbclient.dir/cmake_clean_target.cmake
-| Illegal instruction (core dumped)
-| Illegal instruction (core dumped)
-| make[2]: *** [scripts/CMakeFiles/GenFixPrivs.dir/build.make:78: scripts/mysql_fix_privilege_tables_sql.c] Error 132
+License-Update: Update copyright year from 2020 to 2022
 
-So don't use qemu to run cross-compiled binaries.
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../mysql/mariadb-native_10.7.4.bb            |  4 +-
- meta-oe/recipes-dbs/mysql/mariadb.inc         | 20 +++---
- ...Lists.txt-fix-gen_lex_hash-not-found.patch | 69 +++++++++++++++++++
- .../mysql/mariadb/cross-compiling.patch       | 34 +++++++++
- meta-oe/recipes-dbs/mysql/mariadb_10.7.4.bb   |  4 +-
- 5 files changed, 116 insertions(+), 15 deletions(-)
- create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
- create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/cross-compiling.patch
+ .../{python3-aiohttp_3.8.1.bb => python3-aiohttp_3.8.3.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-aiohttp_3.8.1.bb => python3-aiohttp_3.8.3.bb} (80%)
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.7.4.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.7.4.bb
-index e38726d3f..17a06349b 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb-native_10.7.4.bb
-+++ b/meta-oe/recipes-dbs/mysql/mariadb-native_10.7.4.bb
-@@ -2,7 +2,9 @@ require mariadb.inc
- inherit native
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.8.1.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.8.3.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-aiohttp_3.8.1.bb
+rename to meta-python/recipes-devtools/python/python3-aiohttp_3.8.3.bb
+index f2b8d52a7..b233b3ac9 100644
+--- a/meta-python/recipes-devtools/python/python3-aiohttp_3.8.1.bb
++++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.8.3.bb
+@@ -2,9 +2,9 @@ SUMMARY = "Async http client/server framework"
+ DESCRIPTION = "Asynchronous HTTP client/server framework for asyncio and Python"
+ HOMEPAGE = "https://github.com/aio-libs/aiohttp"
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=8074d6c6e217873b2a018a4522243ea3"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=748073912af33aa59430d3702aa32d41"
  
- PROVIDES += "mysql5-native"
--DEPENDS = "ncurses-native zlib-native bison-native libpcre2-native"
-+DEPENDS = "ncurses-native zlib-native bison-native libpcre2-native \
-+gnutls-native fmt-native \
-+"
+-SRC_URI[sha256sum] = "fc5471e1a54de15ef71c1bc6ebe80d4dc681ea600e68bfd1cbce40427f0b7578"
++SRC_URI[sha256sum] = "3828fb41b7203176b82fe5d699e0d845435f2374750a44b480ea6b930f6be269"
  
- RDEPENDS:${PN} = ""
- PACKAGES = ""
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 922373b63..23322cf74 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -20,6 +20,8 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
-            file://mm_malloc.patch \
-            file://sys_futex.patch \
-            file://mariadb-openssl3.patch \
-+           file://cross-compiling.patch \
-+           file://0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
-           "
- SRC_URI:append:libc-musl = " file://ppc-remove-glibc-dep.patch"
- 
-@@ -61,6 +63,8 @@ FILES:${PN}-setupdb = "${sysconfdir}/init.d/install_db \
-                        ${bindir}/mysql-systemd-start \
-                        "
- 
-+EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
-+
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)} openssl"
- PACKAGECONFIG:class-native = ""
- PACKAGECONFIG[pam] = ",-DWITHOUT_AUTH_PAM=TRUE,libpam"
-@@ -95,9 +99,9 @@ EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
-                  -DINSTALL_SYSCONFDIR:PATH=${sysconfdir} \
-                  -DMYSQL_DATADIR:PATH=/var/mysql \
-                  -DCAT_EXECUTABLE=`which cat` \
-+                 -DSTACK_DIRECTION=1 \
-                  -DCMAKE_AR:FILEPATH=${AR}"
- 
--EXTRA_OECMAKE:prepend:class-target = "-DCMAKE_CROSSCOMPILING_EMULATOR=${WORKDIR}/qemuwrapper "
- 
- # With Ninja it fails with:
- # make: *** No rule to make target `install'.  Stop.
-@@ -121,18 +125,12 @@ do_generate_toolchain_file:append:class-native () {
-     sed -i "/set( CMAKE_SYSTEM_PROCESSOR/d" ${WORKDIR}/toolchain.cmake
- }
- 
--do_configure:prepend:class-target () {
--	# Write out a qemu wrapper that will be used by cmake
--	# so that it can run target helper binaries through that.
--	qemu_binary="${@qemu_wrapper_cmdline(d, d.getVar('STAGING_DIR_HOST'), [d.expand('${STAGING_DIR_HOST}${libdir}'),d.expand('${STAGING_DIR_HOST}${base_libdir}')])}"
--	cat > ${WORKDIR}/qemuwrapper << EOF
--#!/bin/sh
--$qemu_binary "\$@"
--EOF
--	chmod +x ${WORKDIR}/qemuwrapper
--}
- 
- do_compile:prepend:class-target () {
-+    # These need to be in-tree or make will think they need to be built,
-+    # and since we're cross-compiling that is disabled
-+    cp ${STAGING_BINDIR_NATIVE}/comp_err ${S}/extra
-+    cp ${STAGING_BINDIR_NATIVE}/comp_sql ${S}/scripts
-     if [ "${@bb.utils.contains('PACKAGECONFIG', 'krb5', 'yes', 'no', d)}" = "no" ]; then
-         if ! [ -e ${B}/include/openssl/kssl.h ] ; then
-             mkdir -p ${B}/include/openssl
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
-new file mode 100644
-index 000000000..456a2bad6
---- /dev/null
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
-@@ -0,0 +1,69 @@
-+From f92f657973997df30afdb0032c88ad3a14ead46b Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Fri, 23 Sep 2022 15:48:21 +0800
-+Subject: [PATCH] sql/CMakeLists.txt: fix gen_lex_hash not found
-+
-+Fix the below do_compile issue in cross-compiling env.
-+| make[2]: *** No rule to make target '/build/tmp/work/aarch64-poky-linux/mariadb/10.3.13-r0/mariadb-10.3.13/sql/gen_lex_hash', needed by 'sql/lex_hash.h'.  Stop.
-+| make[2]: *** No rule to make target '/build/tmp/work/aarch64-poky-linux/mariadb/10.3.13-r0/mariadb-10.3.13/sql/gen_lex_token', needed by 'sql/lex_token.h'.  Stop.
-+
-+Upstream-Status: Inappropriate [oe build specific]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ sql/CMakeLists.txt | 30 ++++++++++++++++++++++--------
-+ 1 file changed, 22 insertions(+), 8 deletions(-)
-+
-+diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
-+index 241b482..27a3991 100644
-+--- a/sql/CMakeLists.txt
-++++ b/sql/CMakeLists.txt
-+@@ -60,11 +60,18 @@ ${CMAKE_BINARY_DIR}/sql
-+ ${CMAKE_SOURCE_DIR}/tpool
-+ )
-+ 
-+-ADD_CUSTOM_COMMAND(
-+-  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/lex_token.h
-+-  COMMAND gen_lex_token > lex_token.h
-+-  DEPENDS gen_lex_token
-++IF(NOT CMAKE_CROSSCOMPILING)
-++  ADD_CUSTOM_COMMAND(
-++    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/lex_token.h
-++    COMMAND gen_lex_token > lex_token.h
-++    DEPENDS gen_lex_token
-++)
-++ELSE()
-++  ADD_CUSTOM_COMMAND(
-++    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/lex_token.h
-++    COMMAND gen_lex_token > lex_token.h
-+ )
-++ENDIF()
-+ 
-+ FIND_PACKAGE(BISON 2.4)
-+ 
-+@@ -372,11 +379,18 @@ IF(NOT CMAKE_CROSSCOMPILING OR DEFINED CMAKE_CROSSCOMPILING_EMULATOR)
-+   ADD_EXECUTABLE(gen_lex_hash gen_lex_hash.cc)
-+ ENDIF()
-+ 
-+-ADD_CUSTOM_COMMAND(
-+-  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/lex_hash.h
-+-  COMMAND gen_lex_hash > lex_hash.h
-+-  DEPENDS gen_lex_hash
-++IF(NOT CMAKE_CROSSCOMPILING)
-++  ADD_CUSTOM_COMMAND(
-++    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/lex_hash.h
-++    COMMAND gen_lex_hash > lex_hash.h
-++    DEPENDS gen_lex_hash
-++)
-++ELSE()
-++  ADD_CUSTOM_COMMAND(
-++    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/lex_hash.h
-++    COMMAND gen_lex_hash > lex_hash.h
-+ )
-++ENDIF()
-+ 
-+ MYSQL_ADD_EXECUTABLE(mariadb-tzinfo-to-sql tztime.cc)
-+ SET_TARGET_PROPERTIES(mariadb-tzinfo-to-sql PROPERTIES COMPILE_FLAGS "-DTZINFO2SQL")
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/cross-compiling.patch b/meta-oe/recipes-dbs/mysql/mariadb/cross-compiling.patch
-new file mode 100644
-index 000000000..d0d6e3c73
---- /dev/null
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/cross-compiling.patch
-@@ -0,0 +1,34 @@
-+From 80be37351d995654f86b838f6b5ed47e8a90261b Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Fri, 23 Sep 2022 12:05:17 +0800
-+Subject: [PATCH] CMakeLists.txt: not include import_executables.cmake
-+
-+building failed since native does not generate import_executables.cmake
-+In fact, our building system will export the needed commands.
-+
-+Upstream-Status: Inappropriate [oe specific]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ CMakeLists.txt | 5 -----
-+ 1 file changed, 5 deletions(-)
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index f9e2b1b..34924ba 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -394,11 +394,6 @@ CHECK_LIBFMT()
-+ ADD_SUBDIRECTORY(tpool)
-+ CHECK_SYSTEMD()
-+ 
-+-IF(CMAKE_CROSSCOMPILING AND NOT DEFINED CMAKE_CROSSCOMPILING_EMULATOR)
-+-  SET(IMPORT_EXECUTABLES "IMPORTFILE-NOTFOUND" CACHE FILEPATH "Path to import_executables.cmake from a native build")
-+-  INCLUDE(${IMPORT_EXECUTABLES})
-+-ENDIF()
-+-
-+ #
-+ # Setup maintainer mode options. Platform checks are
-+ # not run with the warning options as to not perturb fragile checks
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.7.4.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.7.4.bb
-index c800c4c56..8dba5c858 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb_10.7.4.bb
-+++ b/meta-oe/recipes-dbs/mysql/mariadb_10.7.4.bb
-@@ -1,8 +1,6 @@
- require mariadb.inc
- 
--inherit qemu
--
--DEPENDS += "qemu-native bison-native boost libpcre2 curl ncurses \
-+DEPENDS += "mariadb-native bison-native boost libpcre2 curl ncurses \
-             zlib libaio libedit libevent libxml2 gnutls fmt lzo"
- 
- PROVIDES += "mysql5 libmysqlclient"
+ PYPI_PACKAGE = "aiohttp"
+ inherit python_setuptools_build_meta pypi
 -- 
-2.25.1
+2.30.2
 
 
